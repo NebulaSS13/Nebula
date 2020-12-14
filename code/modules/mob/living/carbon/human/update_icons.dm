@@ -569,7 +569,7 @@ var/global/list/damage_icon_parts = list()
 		var/list/blood_color
 		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/stomper = get_organ(bp)
-			if(stomper.coating)
+			if(istype(stomper) && !stomper.is_stump() && stomper.coating)
 				blood_color = stomper.coating.get_color()
 		if(blood_color && species.blood_mask)
 			var/image/bloodsies = overlay_image(species.blood_mask, "shoeblood", blood_color, RESET_COLOR)

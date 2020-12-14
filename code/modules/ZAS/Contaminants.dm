@@ -94,19 +94,13 @@ obj/var/contaminated = 0
 
 	//Burn eyes if exposed.
 	if(vsc.contaminant_control.EYE_BURNS)
-		if(!head)
-			if(!wear_mask)
-				burn_eyes()
-			else
-				if(!(wear_mask.body_parts_covered & SLOT_EYES))
-					burn_eyes()
-		else
-			if(!(head.body_parts_covered & SLOT_EYES))
-				if(!wear_mask)
-					burn_eyes()
-				else
-					if(!(wear_mask.body_parts_covered & SLOT_EYES))
-						burn_eyes()
+		var/found_eyeguard = FALSE
+		for(var/obj/item/clothing/thing in list(head, wear_mask, glasses))
+			if(istype(thing) && (thing.body_parts_covered & SLOT_EYES))
+				found_eyeguard = TRUE
+				break
+		if(!found_eyeguard)
+			burn_eyes()
 
 	//Genetic Corruption
 	if(vsc.contaminant_control.GENETIC_CORRUPTION)

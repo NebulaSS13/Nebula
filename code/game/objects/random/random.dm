@@ -299,7 +299,7 @@
 				/obj/item/gun/projectile/revolver = 2,
 				/obj/item/gun/projectile/shotgun/doublebarrel = 4,
 				/obj/item/gun/projectile/shotgun/doublebarrel/sawn = 3,
-				/obj/item/gun/projectile/heavysniper = 1
+				/obj/item/gun/projectile/bolt_action/sniper = 1
 				)
 
 /obj/random/handgun

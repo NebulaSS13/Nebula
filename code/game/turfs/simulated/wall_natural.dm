@@ -24,15 +24,15 @@ var/list/natural_walls = list()
 		return
 	
 	if(!strata)
-		if(!global.default_strata_type_by_z["z"])
+		if(!global.default_strata_type_by_z["[z]"])
 			if(!length(global.default_strata_types))
 				var/list/strata_types = decls_repository.get_decls_of_subtype(/decl/strata)
 				for(var/stype in strata_types)
 					var/decl/strata/check_strata = strata_types[stype]
 					if(check_strata.default_strata_candidate)
 						global.default_strata_types += stype
-			global.default_strata_type_by_z["z"] = pick(global.default_strata_types)
-		strata = global.default_strata_type_by_z["z"]
+			global.default_strata_type_by_z["[z]"] = pick(global.default_strata_types)
+		strata = global.default_strata_type_by_z["[z]"]
 	
 	var/skey = "[strata]-[z]"
 	if(!global.default_material_by_strata_and_z[skey])
