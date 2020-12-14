@@ -9,6 +9,9 @@
 		if(C.name == "carpspawn")
 			possible_spawns.Add(C)
 
+	if(!length(possible_spawns))
+		return
+
 	//25% chance for this to be a false alarm
 	var/num
 	if(prob(25))
