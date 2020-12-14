@@ -166,6 +166,11 @@ abbr {
     font-weight: bold;
 }
 
+.mild {
+	color: #cda500;
+	font-weight: bold;
+}
+
 .average {
     color: #00ff00;
     font-weight: bold;
@@ -576,7 +581,7 @@ div.notice {
     text-align: center;
 }
 
-table.fixed { 
+table.fixed {
 	table-layout:fixed;
 }
 
