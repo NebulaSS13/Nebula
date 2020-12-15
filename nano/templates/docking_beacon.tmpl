@@ -1,0 +1,45 @@
+{{:helper.link('Network Settings', '', {'settings' : 1})}}
+<h3>Docking Beacon</h3>
+<div class="item">
+    <div class="itemLabel">
+        Dock Name:
+    </div>
+    <div class="itemContent">
+        {{:helper.link(data.display_name, '', {'edit_display_name' : 1})}}
+    </div>
+    <div class="itemLabel">
+		Docking Size:
+	</div>
+	<div class="itemContent">
+        {{:helper.link(data.size, '', {'edit_size' : 1})}}
+	</div>
+    <div class="itemLabel">
+        Locked:
+    </div>
+    <div class="itemContent">
+        {{:helper.link(data.locked ? 'Locked' : 'Unlocked', '', {'toggle_lock' : 1})}}
+    </div>
+    {{if data.locked}}
+        <div class="itemLabel">
+            Permitted Shuttles
+        </div>
+        <div class="itemContent style="width: 100%;">
+            <div class="statusDisplay" style="min-height: 120px;"> 
+				{{for data.permitted}} 
+					{{:value}}<br> 
+				{{/for}} 
+			</div>
+            {{:helper.link('Add/Remove Permission', '', {'edit_permitted_shuttles' : 1})}}
+        </div>
+        <div class="itemLabel">
+            Access by Codes
+        </div>
+        <div class="itemContent">
+            {{:helper.link(data.allow_codes ? 'Codes:' : 'No access', '', {'toggle_codes' : 1})}}
+            {{if data.allow_codes}}
+                {{:helper.link(data.codes, '', {'edit_codes' : 1})}}
+            {{/if}}
+        </div>
+    {{/if}}
+</div>
+{{:helper.link('Project landing area', '', {'project' : 1})}}

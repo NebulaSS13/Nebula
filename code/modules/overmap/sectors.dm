@@ -20,7 +20,9 @@
 	var/hide_from_reports = FALSE
 
 	var/has_distress_beacon
-	var/free_landing = FALSE				//whether or not shuttles can land in arbitrary places within the sector's z-levels.
+	var/free_landing = TRUE				// Whether or not shuttles can land in arbitrary places within the sector's z-levels.
+	var/restricted_area = 0				// Regardless of if free_landing is set to TRUE, this square area (centered on the z level) will be restricted from free shuttle landing unless permitted by a docking becaon.
+
 	var/list/map_z = list()
 	var/list/consoles
 
@@ -134,6 +136,9 @@
 
 	testing("Overmap build complete.")
 	return 1
+
+/obj/effect/overmap/visitable/proc/allow_free_landing(var/datum/shuttle/landing_shuttle)
+	return free_landing
 
 /obj/effect/overmap/visitable/handle_overmap_pixel_movement()
 	..()

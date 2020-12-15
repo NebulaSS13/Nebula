@@ -136,8 +136,10 @@
 	landmark_tag = "landing"
 	flags = SLANDMARK_FLAG_AUTOSET
 
-/obj/effect/shuttle_landmark/temporary/Initialize()
+/obj/effect/shuttle_landmark/temporary/Initialize(var/mapload, var/secure = TRUE)
 	landmark_tag += "-[random_id("landmarks",1,9999)]"
+	if(!secure)
+		flags |= (SLANDMARK_FLAG_DISCONNECTED | SLANDMARK_FLAG_ZERO_G)
 	. = ..()
 
 /obj/effect/shuttle_landmark/temporary/Destroy()

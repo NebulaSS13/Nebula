@@ -8,7 +8,7 @@
 		<tr class="candystripe">
 		<td>{{:value.location}}
 		<td>{{:value.status}}
-		<td>{{:helper.link(value.codes, '', {'edit_code' : value.tag})}}
+		<td>{{:helper.link(value.codes, '', {'edit_docking_codes' : value.tag})}}
 		{{if value.docking_attempt}}
 			<td>{{:helper.link('GRANT DOCK', '', {'dock' : value.tag})}}
 		{{else value.docked}}
@@ -16,6 +16,17 @@
 		{{else}}
 			<td>
 		{{/if}}
+	{{/for}}
+	</table>
+	<h2>Docking beacons:</h2>
+	<table style="width:100%">
+	<tr><td style="width:40%">Beacon Name<th>Size<th>Docking Lock<th>Docking by code
+	{{for data.docking_beacons}}
+		<tr class="candystripe">
+		<td>{{:helper.link(value.name, '', {'beacon' : value.network_tag})}}
+		<td>{{:value.size}}
+		<td>{{:value.locked ? 'LOCKED' : 'UNLOCKED'}}
+		<td>{{:value.code_docking ? 'ENABLED' : 'DISABLED'}}
 	{{/for}}
 	</table>
 {{/if}}
