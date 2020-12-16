@@ -1,3 +1,9 @@
+#include "heist_antag.dm"
+
+// This is here so the compiler stops bitching about override preceding definition.
+/datum/antagonist/raider/proc/check_special_species(var/mob/living/carbon/human/player)
+	return FALSE
+
 /datum/map_template/ruin/antag_spawn/heist
 	name = "Heist Base"
 	id = MODE_RAIDER + "_spawn"
@@ -56,3 +62,8 @@
 	requires_power = 0
 	dynamic_lighting = 0
 	req_access = list(access_syndicate)
+
+/obj/machinery/computer/shuttle_control/multi/raider
+	name = "skipjack control console"
+	initial_access = list(access_syndicate)
+	shuttle_tag = "Skipjack"

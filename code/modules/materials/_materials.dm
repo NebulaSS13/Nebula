@@ -138,7 +138,6 @@
 	var/removed_by_welder
 
 	// Mining behavior.
-	var/alloy_product
 	var/ore_name
 	var/ore_desc
 	var/ore_smelts_to

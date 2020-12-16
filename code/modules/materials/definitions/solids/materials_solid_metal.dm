@@ -190,7 +190,6 @@
 	hardness = MAT_VALUE_VERY_HARD
 	stack_origin_tech = "{'materials':2}"
 	hitsound = 'sound/weapons/smash.ogg'
-	alloy_product = TRUE
 	value = 1.4
 	reflectiveness = MAT_VALUE_MATTE
 
@@ -202,7 +201,7 @@
 	. += new/datum/stack_recipe/furniture/crate(src)
 	. += new/datum/stack_recipe/grip(src)
 
-/decl/material/solid/metal/plasteel/titanium
+/decl/material/solid/metal/titanium
 	name = "titanium"
 	lore_text = "A light, strong, corrosion-resistant metal. Perfect for cladding high-velocity ballistic supply pods."
 	brute_armor = 10
@@ -217,6 +216,19 @@
 	icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	value = 1.5
+	explosion_resistance = 25
+	hardness = MAT_VALUE_VERY_HARD
+	stack_origin_tech = "{'materials':2}"
+	hitsound = 'sound/weapons/smash.ogg'
+	reflectiveness = MAT_VALUE_MATTE
+
+/decl/material/solid/metal/titanium/generate_recipes(var/reinforce_material)
+	. = ..()
+	if(reinforce_material)	//recipes below don't support composite materials
+		return
+	. += new/datum/stack_recipe/ai_core(src)
+	. += new/datum/stack_recipe/furniture/crate(src)
+	. += new/datum/stack_recipe/grip(src)
 
 /decl/material/solid/metal/plasteel/ocp
 	name = "osmium-carbide plasteel"
@@ -275,7 +287,7 @@
 	M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
 
 // Adminspawn only, do not let anyone get this.
-/decl/material/solid/metal/voxalloy
+/decl/material/solid/metal/alienalloy
 	name = "dense alloy"
 	stack_type = null
 	color = "#6c7364"
@@ -289,7 +301,7 @@
 	value = 3
 
 // Likewise.
-/decl/material/solid/metal/voxalloy/elevatorium
+/decl/material/solid/metal/alienalloy/elevatorium
 	name = "elevator panelling"
 	color = "#666666"
 	hidden_from_codex = TRUE

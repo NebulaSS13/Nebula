@@ -193,7 +193,7 @@
 
 	// Pass reagents from the gas into our body.
 	// Presumably if you breathe it you have a specialized metabolism for it, so we drop/ignore breath_type. Also avoids
-	// humans processing thousands of units of oxygen over the course of a round for the sole purpose of poisoning vox.
+	// humans processing thousands of units of oxygen over the course of a round.
 	var/ratio = BP_IS_PROSTHETIC(src)? 0.66 : 1
 	for(var/gasname in breath.gas - breath_type)
 		var/decl/material/gas = decls_repository.get_decl(gasname)

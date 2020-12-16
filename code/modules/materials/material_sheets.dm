@@ -319,7 +319,7 @@
 	name = "titanium"
 	icon_state = "sheet"
 	plural_icon_state = "sheet-mult"
-	material = /decl/material/solid/metal/plasteel/titanium
+	material = /decl/material/solid/metal/titanium
 
 /obj/item/stack/material/titanium/ten
 	amount = 10

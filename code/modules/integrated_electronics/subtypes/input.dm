@@ -1079,7 +1079,7 @@
 		/decl/material/solid/gemstone/diamond, 
 		/decl/material/solid/metal/uranium,
 		/decl/material/solid/metal/plasteel,
-		/decl/material/solid/metal/plasteel/titanium,
+		/decl/material/solid/metal/titanium,
 		/decl/material/solid/glass,
 		/decl/material/solid/plastic
 	)

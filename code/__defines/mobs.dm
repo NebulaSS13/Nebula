@@ -181,9 +181,6 @@
 #define BP_ANCHOR   "anchoring ligament"
 #define BP_ACETONE  "acetone reactor"
 
-// Vox bits.
-#define BP_HINDTONGUE "hindtongue"
-
 // Robo Organs.
 #define BP_POSIBRAIN         "posibrain"
 #define BP_VOICE             "vocal synthesiser"

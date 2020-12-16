@@ -108,7 +108,7 @@
 	material = /decl/material/solid/glass
 
 /obj/item/knife/combat/titanium
-	material = /decl/material/solid/metal/plasteel/titanium
+	material = /decl/material/solid/metal/titanium
 
 //random stuff
 /obj/item/knife/hook
@@ -141,5 +141,5 @@
 /obj/item/knife/utility/lightweight
 	name = "lightweight utility knife"
 	desc = "A lightweight utility knife made out of a titanium alloy."
-	material = /decl/material/solid/metal/plasteel/titanium
+	material = /decl/material/solid/metal/titanium
 	draw_handle = FALSE

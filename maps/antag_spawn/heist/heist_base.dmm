@@ -253,7 +253,7 @@
 /area/map_template/syndicate_mothership/raider_base)
 "aL" = (
 /obj/effect/landmark{
-	name = "voxstart"
+	name = "raiderstart"
 	},
 /obj/effect/floor_decal/carpet{
 	dir = 1
@@ -363,7 +363,7 @@
 /area/map_template/syndicate_mothership/raider_base)
 "aX" = (
 /obj/effect/landmark{
-	name = "voxstart"
+	name = "raiderstart"
 	},
 /turf/unsimulated/floor{
 	icon_state = "carpet";
@@ -653,7 +653,6 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bA" = (
 /obj/structure/table/rack,
-/obj/item/gun/launcher/alien/spikethrower,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -1029,12 +1028,12 @@
 /area/space)
 "cw" = (
 /obj/effect/paint/black,
-/turf/simulated/wall/voxshuttle,
+/turf/simulated/wall/raidershuttle,
 /area/map_template/skipjack_station/start)
 "cx" = (
 /obj/machinery/door/airlock/external{
 	icon_state = "door_closed";
-	id_tag = "vox_northwest_lock";
+	id_tag = "raider_northwest_lock";
 	locked = 0
 	},
 /obj/machinery/shield_diffuser,
@@ -1042,11 +1041,11 @@
 /area/map_template/skipjack_station/start)
 "cy" = (
 /obj/machinery/button/access/shuttle/exterior{
-	id_tag = "vox_west_control";
+	id_tag = "raider_west_control";
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/effect/paint/black,
-/turf/simulated/wall/voxshuttle,
+/turf/simulated/wall/raidershuttle,
 /area/map_template/skipjack_station/start)
 "cz" = (
 /obj/machinery/door/blast/regular{
@@ -1072,14 +1071,14 @@
 /area/map_template/skipjack_station/start)
 "cB" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
-	id_tag = "vox_west_vent"
+	id_tag = "raider_west_vent"
 	},
 /obj/random/junk,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "cC" = (
 /obj/machinery/airlock_sensor/shuttle{
-	id_tag = "vox_west_sensor";
+	id_tag = "raider_west_sensor";
 	pixel_x = 25
 	},
 /turf/simulated/floor/plating,
@@ -1089,7 +1088,7 @@
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "cE" = (
-/obj/machinery/computer/shuttle_control/multi/vox,
+/obj/machinery/computer/shuttle_control/multi/raider,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "cF" = (
@@ -1122,17 +1121,17 @@
 /area/map_template/skipjack_station/start)
 "cJ" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	tag_airpump = "vox_west_vent";
-	tag_exterior_door = "vox_northwest_lock";
+	tag_airpump = "raider_west_vent";
+	tag_exterior_door = "raider_northwest_lock";
 	frequency = 1331;
-	id_tag = "vox_west_control";
-	tag_interior_door = "vox_southwest_lock";
+	id_tag = "raider_west_control";
+	tag_interior_door = "raider_southwest_lock";
 	pixel_x = 24;
-	tag_chamber_sensor = "vox_west_sensor"
+	tag_chamber_sensor = "raider_west_sensor"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	id_tag = "vox_west_vent"
+	id_tag = "raider_west_vent"
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/plating,
@@ -1210,12 +1209,12 @@
 /area/map_template/skipjack_station/start)
 "cR" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall/voxshuttle,
+/turf/simulated/wall/raidershuttle,
 /area/map_template/skipjack_station/start)
 "cS" = (
 /obj/machinery/door/airlock/external{
 	icon_state = "door_closed";
-	id_tag = "vox_southwest_lock";
+	id_tag = "raider_southwest_lock";
 	locked = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
@@ -1256,7 +1255,7 @@
 "cZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/button/access/shuttle/interior{
-	id_tag = "vox_west_control";
+	id_tag = "raider_west_control";
 	pixel_x = -22;
 	req_access = list("ACCESS_SYNDICATE")
 	},
@@ -1695,7 +1694,7 @@
 	dir = 1
 	},
 /obj/effect/paint/black,
-/turf/simulated/wall/voxshuttle,
+/turf/simulated/wall/raidershuttle,
 /area/map_template/skipjack_station/start)
 "eh" = (
 /obj/random/trash,
@@ -1722,7 +1721,7 @@
 "el" = (
 /obj/structure/shuttle/engine/propulsion,
 /obj/effect/paint/black,
-/turf/simulated/wall/voxshuttle,
+/turf/simulated/wall/raidershuttle,
 /area/map_template/skipjack_station/start)
 "em" = (
 /obj/structure/table/standard,

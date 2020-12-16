@@ -1,5 +1,7 @@
 #if !defined(USING_MAP_DATUM)
 
+	#include "../antag_spawn/heist/heist.dm"
+
 	#include "../../mods/utility_frames/_utility_frames.dme"
 	#include "../../mods/corporate/_corporate.dme"
 	#include "../../mods/ascent/_ascent.dme"
