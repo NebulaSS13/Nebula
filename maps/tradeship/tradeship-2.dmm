@@ -5900,6 +5900,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/landmark/paperwork_finish_tradeship,
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
 "As" = (
@@ -6075,6 +6076,7 @@
 	},
 /obj/item/radio,
 /obj/random/drinkbottle,
+/obj/effect/landmark/paperwork_spawn_tradeship,
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
 "CP" = (
@@ -6322,6 +6324,7 @@
 /obj/machinery/light_switch{
 	pixel_x = 28
 	},
+/obj/effect/landmark/paperwork_spawn_tradeship,
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
 "FT" = (

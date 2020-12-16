@@ -115,7 +115,7 @@
 		associated_goal = null
 	. = ..()
 
-/obj/item/paperwork/update_icon()
+/obj/item/paperwork/on_update_icon()
 	icon_state = "[icon_state][length(has_signed) || ""]"
 	
 /obj/item/paperwork/examine(mob/user, distance)
@@ -138,5 +138,6 @@
 		LAZYREMOVE(needs_signed, user.real_name)
 		user.visible_message(SPAN_NOTICE("\The [user] signs \the [src] with \the [W]."))
 		associated_goal?.update_strings()
+		update_icon()
 		return TRUE
 	. = ..()
