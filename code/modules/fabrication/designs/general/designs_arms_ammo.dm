@@ -11,7 +11,7 @@
 
 /datum/fabricator_recipe/arms_ammo/flaregun
 	name = "flare gun"
-	path = /obj/item/weapon/gun/projectile/flare
+	path = /obj/item/gun/projectile/flare
 
 /datum/fabricator_recipe/arms_ammo/hidden
 	path = /obj/item/hatchet/machete/steel
@@ -73,4 +73,4 @@
 
 /datum/fabricator_recipe/arms_ammo/hidden/speedloader_laser
 	name = "ammunition (speedloader, laserbulb)"
-	path = /obj/item/ammo_magazine/laser_revolver
+	path = /obj/item/ammo_magazine/speedloader/laser_revolver
