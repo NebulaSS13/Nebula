@@ -3,6 +3,10 @@
 
 GLOBAL_LIST_EMPTY(radial_menus)
 
+/obj/screen/radial/Destroy()
+	parent = null
+	return ..()
+
 /obj/screen/radial
 	icon = 'icons/screen/radial.dmi'
 	layer = HUD_ABOVE_ITEM_LAYER
@@ -290,6 +294,8 @@ GLOBAL_LIST_EMPTY(radial_menus)
 /datum/radial_menu/Destroy()
 	Reset()
 	hide()
+	QDEL_NULL_LIST(elements)
+	QDEL_NULL(close_button)
 	QDEL_NULL(custom_check_callback)
 	return ..()
 
