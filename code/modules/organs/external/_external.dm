@@ -39,7 +39,6 @@
 	var/skin_colour                    // skin colour
 	var/skin_blend = ICON_ADD          // How the skin colour is applied.
 	var/hair_colour                    // hair colour
-	var/body_hair                      // Icon blend for body hair if any.
 	var/list/markings = list()         // Markings (body_markings) to apply to the icon
 
 	// Wound and structural data.
