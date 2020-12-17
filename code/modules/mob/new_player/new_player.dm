@@ -173,7 +173,7 @@
 		if(!SSjobs.check_general_join_blockers(src, job))
 			return FALSE
 
-		var/datum/species/S = get_species_by_key(client.prefs.species)
+		var/decl/species/S = get_species_by_key(client.prefs.species)
 		if(!check_species_allowed(S))
 			return 0
 
@@ -442,7 +442,7 @@
 
 	var/mob/living/carbon/human/new_character
 
-	var/datum/species/chosen_species
+	var/decl/species/chosen_species
 	if(client.prefs.species)
 		chosen_species = get_species_by_key(client.prefs.species)
 
@@ -521,7 +521,7 @@
 	close_browser(src, "window=preferences_window") //closes preferences window
 	panel.close()
 
-/mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)
+/mob/new_player/proc/check_species_allowed(var/decl/species/S, var/show_alert=1)
 	if(!S.is_available_for_join() && !has_admin_rights())
 		if(show_alert)
 			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play."))
@@ -533,7 +533,7 @@
 	return 1
 
 /mob/new_player/get_species()
-	var/datum/species/chosen_species
+	var/decl/species/chosen_species
 	if(client.prefs.species)
 		chosen_species = get_species_by_key(client.prefs.species)
 

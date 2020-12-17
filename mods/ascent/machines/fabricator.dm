@@ -7,7 +7,7 @@
 	req_access = list(access_ascent)
 	base_type = /obj/machinery/fabricator
 	construct_state = /decl/machine_construction/default/no_deconstruct
-	species_variation = /datum/species/mantid
+	species_variation = /decl/species/mantid
 
 /obj/item/stock_parts/circuitboard/ascent_fabricator
 	name = T_BOARD("ascent nanofabricator")
@@ -26,5 +26,5 @@
 /datum/fabricator_recipe/imprinter/circuit/ascent_fabricator
 	path = /obj/item/stock_parts/circuitboard/ascent_fabricator
 	species_locked = list(
-		/datum/species/mantid
+		/decl/species/mantid
 	)

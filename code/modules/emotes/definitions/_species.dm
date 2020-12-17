@@ -1,4 +1,4 @@
-/datum/species
+/decl/species
 	var/list/default_emotes = list()
 
 /mob/living/carbon/update_emotes()

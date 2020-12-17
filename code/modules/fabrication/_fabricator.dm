@@ -56,7 +56,7 @@
 	var/initial_network_id
 	var/initial_network_key
 
-	var/species_variation = /datum/species/human // If this fabricator is a variant for a specific species, this will be checked to unlock species-specific designs.
+	var/species_variation = /decl/species/human // If this fabricator is a variant for a specific species, this will be checked to unlock species-specific designs.
 
 /obj/machinery/fabricator/Destroy()
 	QDEL_NULL(currently_building)

@@ -76,5 +76,5 @@
 /datum/fabricator_recipe/imprinter/circuit/ascent_magnetotron
 	path = /obj/item/stock_parts/circuitboard/ascent_magnetotron
 	species_locked = list(
-		/datum/species/mantid
+		/decl/species/mantid
 	)

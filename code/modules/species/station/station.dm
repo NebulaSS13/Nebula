@@ -1,4 +1,4 @@
-/datum/species/human
+/decl/species/human
 	name = SPECIES_HUMAN
 	name_plural = "Humans"
 	primitive_form = SPECIES_MONKEY
@@ -25,10 +25,10 @@
 		)
 	)
 
-/datum/species/human/get_root_species_name(var/mob/living/carbon/human/H)
+/decl/species/human/get_root_species_name(var/mob/living/carbon/human/H)
 	return SPECIES_HUMAN
 
-/datum/species/human/get_ssd(var/mob/living/carbon/human/H)
+/decl/species/human/get_ssd(var/mob/living/carbon/human/H)
 	if(H.stat == CONSCIOUS)
 		return "staring blankly, not reacting to your presence"
 	return ..()

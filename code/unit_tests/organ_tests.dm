@@ -22,7 +22,7 @@
 /datum/unit_test/species_organ_creation
 	name = "ORGAN: Species Organs are Created Correctly"
 
-/datum/unit_test/species_organ_creation/proc/check_internal_organs(var/mob/living/carbon/human/H, var/datum/species/species)
+/datum/unit_test/species_organ_creation/proc/check_internal_organs(var/mob/living/carbon/human/H, var/decl/species/species)
 	. = 1
 	for(var/organ_tag in species.has_organ)
 		var/obj/item/organ/internal/I = H.internal_organs_by_name[organ_tag]
@@ -43,7 +43,7 @@
 			fail("[species.name] internal organ tag mismatch. Registered as \"[organ_tag]\", actual tag was \"[I.organ_tag]\".")
 			. = 0
 
-/datum/unit_test/species_organ_creation/proc/check_external_organs(var/mob/living/carbon/human/H, var/datum/species/species)
+/datum/unit_test/species_organ_creation/proc/check_external_organs(var/mob/living/carbon/human/H, var/decl/species/species)
 	. = 1
 	for(var/organ_tag in species.has_limbs)
 		var/obj/item/organ/external/E = H.organs_by_name[organ_tag]
@@ -65,7 +65,7 @@
 			fail("[species.name] internal organ tag mismatch. Registered as \"[organ_tag]\", actual tag was \"[E.organ_tag]\".")
 			. = 0
 
-/datum/unit_test/species_organ_creation/proc/check_organ_parents(var/mob/living/carbon/human/H, var/datum/species/species)
+/datum/unit_test/species_organ_creation/proc/check_organ_parents(var/mob/living/carbon/human/H, var/decl/species/species)
 	. = 1
 	for(var/obj/item/organ/external/E in H.organs)
 		if(!E.parent_organ)
@@ -109,7 +109,7 @@
 
 /datum/unit_test/species_organ_creation/start_test()
 	var/failcount = 0
-	for(var/datum/species/species in get_all_species())
+	for(var/decl/species/species in get_all_species())
 		var/mob/living/carbon/human/test_subject = new(null, species.name)
 
 		var/fail = 0
@@ -234,7 +234,7 @@
 
 /datum/unit_test/species_organ_lists_update/start_test()
 	var/failcount = 0
-	for(var/datum/species/species in get_all_species())
+	for(var/decl/species/species in get_all_species())
 		var/mob/living/carbon/human/test_subject = new(null, species.name)
 
 		for(var/O in test_subject.internal_organs)

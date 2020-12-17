@@ -1,4 +1,4 @@
-/datum/species/utility_frame
+/decl/species/utility_frame
 	name =                  SPECIES_FRAME
 	name_plural =           "Utility Frames"
 	description =           "Simple AI-driven robots are used for many menial or repetitive tasks in human space."
@@ -51,7 +51,7 @@
 		BP_EYES = /obj/item/organ/internal/eyes/robot
 	)
 
-/datum/species/utility_frame/post_organ_rejuvenate(obj/item/organ/org, mob/living/carbon/human/H)
+/decl/species/utility_frame/post_organ_rejuvenate(obj/item/organ/org, mob/living/carbon/human/H)
 	var/obj/item/organ/external/E = org
 	if(istype(E) && !BP_IS_PROSTHETIC(E))
 		E.robotize(SPECIES_FRAME)
@@ -63,7 +63,7 @@
 		eyes.eye_icon = 'mods/utility_frames/icons/eyes.dmi'
 	H.regenerate_icons()
 
-/datum/species/utility_frame/handle_post_species_pref_set(var/datum/preferences/pref)
+/decl/species/utility_frame/handle_post_species_pref_set(var/datum/preferences/pref)
 	if(pref)
 		LAZYINITLIST(pref.body_markings)
 		for(var/marking in list("Frame Body Plating", "Frame Leg Plating", "Frame Head Plating"))
@@ -72,8 +72,8 @@
 		pref.skin_colour = "#333355"
 		pref.eye_colour = "#00ccff"
 
-/datum/species/utility_frame/get_blood_name()
+/decl/species/utility_frame/get_blood_name()
 	. = "coolant"
 
-/datum/species/utility_frame/disfigure_msg(var/mob/living/carbon/human/H)
+/decl/species/utility_frame/disfigure_msg(var/mob/living/carbon/human/H)
 	. = SPAN_DANGER("The faceplate is dented and cracked!\n")

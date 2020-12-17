@@ -1,4 +1,4 @@
-/datum/species/starlight
+/decl/species/starlight
 	name = "Starlight Base"
 
 	meat_type = null
@@ -27,15 +27,15 @@
 		TAG_CULTURE = CULTURE_STARLIGHT
 	)
 
-/datum/species/starlight/handle_death_check(var/mob/living/carbon/human/H)
+/decl/species/starlight/handle_death_check(var/mob/living/carbon/human/H)
 	if(H.health == 0)
 		return TRUE
 	return FALSE
 
-/datum/species/starlight/handle_death(var/mob/living/carbon/human/H)
+/decl/species/starlight/handle_death(var/mob/living/carbon/human/H)
 	addtimer(CALLBACK(H,/mob/proc/dust),0)
 
-/datum/species/starlight/starborn
+/decl/species/starlight/starborn
 	name = "Starborn"
 	name_plural = "Starborn"
 	icobase = 'icons/mob/human_races/species/starborn/body.dmi'
@@ -80,7 +80,7 @@
 		/obj/aura/starborn
 		)
 
-/datum/species/starlight/starborn/handle_death(var/mob/living/carbon/human/H)
+/decl/species/starlight/starborn/handle_death(var/mob/living/carbon/human/H)
 	..()
 	var/turf/T = get_turf(H)
 	var/obj/effect/fluid/F = locate() in T
@@ -88,7 +88,7 @@
 	F.reagents.add_reagent(/decl/material/liquid/fuel, 20)
 	T.hotspot_expose(FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
 
-/datum/species/starlight/blueforged
+/decl/species/starlight/blueforged
 	name = "Blueforged"
 	name_plural = "Blueforged"
 	icobase = 'icons/mob/human_races/species/blueforged/body.dmi'
@@ -112,6 +112,6 @@
 
 	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/blueforged)
 
-/datum/species/starlight/blueforged/handle_death(var/mob/living/carbon/human/H)
+/decl/species/starlight/blueforged/handle_death(var/mob/living/carbon/human/H)
 	..()
 	new /obj/effect/temporary(get_turf(H),11, 'icons/mob/mob.dmi', "liquify")

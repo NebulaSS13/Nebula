@@ -33,7 +33,7 @@
 	return 0
 
 /mob/living/carbon/human/isMonkey()
-	return istype(species, /datum/species/monkey)
+	return istype(species, /decl/species/monkey)
 
 proc/isdeaf(A)
 	if(isliving(A))

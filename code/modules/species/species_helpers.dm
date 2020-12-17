@@ -5,12 +5,12 @@ var/list/stored_shock_by_ref = list()
 		target.electrocute_act(stored_shock_by_ref["\ref[src]"]*0.9, src)
 		stored_shock_by_ref["\ref[src]"] = 0
 
-/datum/species/proc/toggle_stance(var/mob/living/carbon/human/H)
+/decl/species/proc/toggle_stance(var/mob/living/carbon/human/H)
 	if(!H.incapacitated())
 		H.pulling_punches = !H.pulling_punches
 		to_chat(H, "<span class='notice'>You are now [H.pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>")
 
-/datum/species/proc/get_offset_overlay_image(var/spritesheet, var/mob_icon, var/mob_state, var/color, var/slot)
+/decl/species/proc/get_offset_overlay_image(var/spritesheet, var/mob_icon, var/mob_state, var/color, var/slot)
 
 	// If we don't actually need to offset this, don't bother with any of the generation/caching.
 	if(!spritesheet && equip_adjust.len && equip_adjust[slot] && LAZYLEN(equip_adjust[slot]))
@@ -36,14 +36,14 @@ var/list/stored_shock_by_ref = list()
 		return I
 	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
-/datum/species/proc/fluid_act(var/mob/living/carbon/human/H, var/datum/reagents/fluids)
+/decl/species/proc/fluid_act(var/mob/living/carbon/human/H, var/datum/reagents/fluids)
 	var/water = REAGENT_VOLUME(fluids, /decl/material/liquid/water)
 	if(water >= 40 && H.getHalLoss())
 		H.adjustHalLoss(-(water_soothe_amount))
 		if(prob(5))
 			to_chat(H, SPAN_NOTICE("The water ripples gently over your skin in a soothing balm."))
 
-/datum/species/proc/is_available_for_join()
+/decl/species/proc/is_available_for_join()
 	if(!(spawn_flags & SPECIES_CAN_JOIN))
 		return FALSE
 	else if(!isnull(max_players))
@@ -55,19 +55,19 @@ var/list/stored_shock_by_ref = list()
 					return FALSE
 	return TRUE
 
-/datum/species/proc/check_background(var/datum/job/job, var/datum/preferences/prefs)
+/decl/species/proc/check_background(var/datum/job/job, var/datum/preferences/prefs)
 	. = TRUE
 
-/datum/species/proc/get_digestion_product()
+/decl/species/proc/get_digestion_product()
 	return /decl/material/liquid/nutriment
 
-/datum/species/proc/handle_post_species_pref_set(var/datum/preferences/pref)
+/decl/species/proc/handle_post_species_pref_set(var/datum/preferences/pref)
 	return
 
-/datum/species/proc/get_resized_organ_w_class(var/organ_w_class)
+/decl/species/proc/get_resized_organ_w_class(var/organ_w_class)
 	. = Clamp(organ_w_class + mob_size_difference(mob_size, MOB_SIZE_MEDIUM), ITEM_SIZE_TINY, ITEM_SIZE_GARGANTUAN)
 
-/datum/species/proc/resize_organ(var/obj/item/organ/organ)
+/decl/species/proc/resize_organ(var/obj/item/organ/organ)
 	if(!istype(organ))
 		return
 	organ.w_class = get_resized_organ_w_class(initial(organ.w_class))
