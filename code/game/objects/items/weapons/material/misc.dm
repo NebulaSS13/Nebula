@@ -85,6 +85,7 @@
 	name = "fabricated machete"
 	desc = "A long, machine-stamped blade with a somewhat ungainly handle. Found in military surplus stores, malls, and horror movies since before interstellar travel."
 	base_parry_chance = 40
+	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/hatchet/machete/Initialize()
