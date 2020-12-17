@@ -2416,7 +2416,7 @@
 "hH" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	id_tag = "vox_west_vent"
+	id_tag = "raider_west_vent"
 	},
 /turf/simulated/floor/reinforced,
 /area/icarus/vessel)

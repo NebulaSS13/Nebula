@@ -40,7 +40,7 @@
 
 /obj/item/paper/smug_2
 	name = "suspicious note"
-	info = "That vox fuckface will be curious about what we got from that mine storage last week."
+	info = "That scaly fuckface will be curious about what we got from that mine storage last week."
 
 /obj/item/paper/smug_3
 	name = "suspicious note"

@@ -38,12 +38,12 @@
 
 /turf/simulated/wall/titanium
 	color = COLOR_SILVER
-	material = /decl/material/solid/metal/plasteel/titanium
+	material = /decl/material/solid/metal/titanium
 
 /turf/simulated/wall/r_titanium
 	icon_state = "reinforced_solid"
-	material = /decl/material/solid/metal/plasteel/titanium
-	reinf_material = /decl/material/solid/metal/plasteel/titanium
+	material = /decl/material/solid/metal/titanium
+	reinf_material = /decl/material/solid/metal/titanium
 
 /turf/simulated/wall/ocp_wall
 	color = COLOR_GUNMETAL
@@ -69,12 +69,12 @@
 	icon_state = "wood"
 	material = /decl/material/solid/wood/walnut
 
-/turf/simulated/wall/voxshuttle
+/turf/simulated/wall/raidershuttle
 	color = COLOR_GREEN_GRAY
 	icon_state = "metal"
-	material = /decl/material/solid/metal/voxalloy
+	material = /decl/material/solid/metal/alienalloy
 
-/turf/simulated/wall/voxshuttle/attackby()
+/turf/simulated/wall/raidershuttle/attackby()
 	return
 
 //Alien metal walls

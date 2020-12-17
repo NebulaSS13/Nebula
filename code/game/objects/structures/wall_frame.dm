@@ -166,7 +166,7 @@
 	paint_color = COLOR_WALL_GUNMETAL
 
 /obj/structure/wall_frame/titanium
-	material = /decl/material/solid/metal/plasteel/titanium
+	material = /decl/material/solid/metal/titanium
 
 /obj/structure/wall_frame/hull
 	paint_color = COLOR_HULL

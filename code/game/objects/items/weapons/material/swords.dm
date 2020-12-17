@@ -75,7 +75,7 @@
 /obj/item/sword/katana/vibro
 	name = "vibrokatana"
 	desc = "A high-tech take on a woefully underpowered weapon. Can't mistake its sound for anything."
-	material = /decl/material/solid/metal/plasteel/titanium
+	material = /decl/material/solid/metal/titanium
 	hitsound = 'sound/weapons/anime_sword.wav'
 
 /obj/item/sword/katana/vibro/equipped(mob/living/user, slot)

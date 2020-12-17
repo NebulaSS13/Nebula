@@ -3,7 +3,7 @@
 /turf/space,
 /area/space)
 "ab" = (
-/turf/simulated/wall/voxshuttle,
+/turf/simulated/wall/raidershuttle,
 /area/derelict/ship)
 "ac" = (
 /obj/structure/window/reinforced{
@@ -741,7 +741,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/maintenance)
 "cn" = (
-/turf/simulated/wall/voxshuttle,
+/turf/simulated/wall/raidershuttle,
 /area/space)
 "co" = (
 /obj/machinery/door/airlock/glass{

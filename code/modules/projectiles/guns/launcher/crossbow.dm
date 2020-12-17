@@ -26,13 +26,6 @@
 	icon_state = "metal-rod"
 	item_state = "bolt"
 
-/obj/item/arrow/quill
-	name = "vox quill"
-	desc = "A wickedly barbed quill from some bizarre animal."
-	icon_state = "quill"
-	item_state = "quill"
-	throwforce = 5
-
 /obj/item/arrow/rod
 	name = "metal rod"
 	desc = "Don't cry for me, Orithena."

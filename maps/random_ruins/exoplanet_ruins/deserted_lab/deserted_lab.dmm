@@ -89,7 +89,7 @@
 /area/template_noop)
 "at" = (
 /obj/random/loot,
-/mob/living/simple_animal/hostile/voxslug,
+/mob/living/simple_animal/hostile/slug,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "au" = (

@@ -1,2 +1,2 @@
 /turf/simulated/wall/elevator/Initialize(var/ml)
-	. = ..(ml, /decl/material/solid/metal/voxalloy/elevatorium)
+	. = ..(ml, /decl/material/solid/metal/alienalloy/elevatorium)
