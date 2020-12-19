@@ -60,10 +60,11 @@
 				if(!network)
 					return TOPIC_REFRESH
 				// Helper for some user-friendliness. Try to select the first available mainframe.
-				var/list/file_servers = network.get_file_server_tags()
-				if(!file_servers.len)
-					return TOPIC_REFRESH
+				var/list/file_servers = network.get_file_server_tags(MF_ROLE_FILESERVER, user)
 				var/datum/file_storage/network/N = current_filesource
+				if(!file_servers.len)
+					N.server = null // Don't allow players to see files on mainframes they cannot access.
+					return TOPIC_REFRESH
 				N.server = file_servers[1]
 			return TOPIC_REFRESH
 
@@ -163,11 +164,11 @@
 		ui_header = null
 		return TOPIC_REFRESH
 
-	if(href_list["PRG_copyto"])
+	if(href_list["PRG_transferto"])
 		. = TOPIC_REFRESH
-		var/datum/computer_file/F = current_filesource.get_file(href_list["PRG_copyto"])
-		if(!F || !istype(F))
-			error = "I/O ERROR: Unable to open file."
+		var/datum/computer_file/F = current_filesource.get_file(href_list["PRG_transferto"])
+		if(!F || !istype(F) || F.unsendable)
+			error = "I/O ERROR: Unable to transfer file."
 			return
 		var/list/choices = list()
 		for(var/T in file_sources)
@@ -175,14 +176,14 @@
 			if(FS == current_filesource)
 				continue
 			choices[FS.name] = FS
-		var/file_source = input(usr, "Choose a destination storage medium:", "Copy To Another Medium") as null|anything in choices
+		var/file_source = input(usr, "Choose a destination storage medium:", "Transfer To Another Medium") as null|anything in choices
 		if(file_source)
 			var/datum/file_storage/dst = choices[file_source]
 			var/nope = dst.check_errors()
 			if(nope)
-				to_chat(user, SPAN_WARNING("Cannot copy file to [dst] for following reason: [nope]"))
+				to_chat(user, SPAN_WARNING("Cannot transfer file to [dst] for following reason: [nope]"))
 				return
-			current_transfer = new(current_filesource, dst, F)
+			current_transfer = new(current_filesource, dst, F, FALSE)
 			ui_header = "downloader_running.gif"
 
 /datum/computer_file/program/filemanager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
@@ -215,7 +216,8 @@
 				"name" = F.filename,
 				"type" = F.filetype,
 				"size" = F.size,
-				"undeletable" = F.undeletable
+				"undeletable" = F.undeletable,
+				"unsendable" = F.unsendable
 			)))
 		data["files"] = files
 
@@ -239,12 +241,12 @@
 		if(QDELETED(current_transfer)) //either completely
 			error = "I/O ERROR: Unknown error during the file transfer."
 		else  //or during the saving at the destination
-			error = "I/O ERROR: Unable to store '[current_transfer.copying.filename]' at [current_transfer.copying_to]"
+			error = "I/O ERROR: Unable to store '[current_transfer.transferring.filename]' at [current_transfer.transfer_to]"
 			qdel(current_transfer)
 		current_transfer = null
 		ui_header = null
 		return
-	else if(!current_transfer.left_to_copy)  //done
+	else if(!current_transfer.left_to_transfer)  //done
 		QDEL_NULL(current_transfer)
 		ui_header = null
 

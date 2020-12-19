@@ -42,7 +42,7 @@
 	source.server = net.find_file_location(filename, MF_ROLE_SOFTWARE)
 	if(source.check_errors() || destination.check_errors())
 		return 0
-	current_transfer = new(source, destination, PRG)
+	current_transfer = new(source, destination, PRG, TRUE)
 
 	ui_header = "downloader_running.gif"
 	generate_network_log("Downloading file [filename] from [source.server].")
@@ -77,11 +77,11 @@
 		if(QDELETED(current_transfer)) //either completely
 			downloaderror = "I/O ERROR: Unknown error during the file transfer."
 		else  //or during the saving at the destination
-			downloaderror = "I/O ERROR: Unable to store '[current_transfer.copying.filename]' at [current_transfer.copying_to]"
+			downloaderror = "I/O ERROR: Unable to store '[current_transfer.transferring.filename]' at [current_transfer.transfer_to]"
 			qdel(current_transfer)
 		current_transfer = null
 		ui_header = "downloader_finished.gif"
-	else if(!current_transfer.left_to_copy)  //done
+	else if(!current_transfer.left_to_transfer)  //done
 		QDEL_NULL(current_transfer)
 		ui_header = "downloader_finished.gif"
 	if(!current_transfer && downloads_queue.len > 0)
@@ -94,7 +94,7 @@
 	if(href_list["PRG_downloadfile"])
 		if(!current_transfer)
 			begin_file_download(href_list["PRG_downloadfile"])
-		else if(check_file_download(href_list["PRG_downloadfile"]) && !downloads_queue.Find(href_list["PRG_downloadfile"]) && current_transfer.copying.filename != href_list["PRG_downloadfile"])
+		else if(check_file_download(href_list["PRG_downloadfile"]) && !downloads_queue.Find(href_list["PRG_downloadfile"]) && current_transfer.transferring.filename != href_list["PRG_downloadfile"])
 			downloads_queue |= href_list["PRG_downloadfile"]
 		return 1
 	if(href_list["PRG_removequeued"])
@@ -123,7 +123,7 @@
 	if(prog.current_transfer) // Download running. Wait please..
 		data |= prog.current_transfer.get_ui_data()
 		data["downloadspeed"] = prog.current_transfer.get_transfer_speed()
-		var/datum/computer_file/program/P = prog.current_transfer.copying
+		var/datum/computer_file/program/P = prog.current_transfer.transferring
 		if(istype(P))
 			data["transfer_desc"] = P.extended_desc
 

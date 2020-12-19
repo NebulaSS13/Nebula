@@ -1,6 +1,15 @@
 /datum/extension/network_device/acl
 	connection_type = NETWORK_CONNECTION_WIRED
 	var/list/administrators = list()	// A list of numerical user IDs of users that are administrators on a network.
+	var/list/program_access = list()	// List of lists containing perimitted accesses for programs.
+
+/datum/extension/network_device/acl/New()
+	. = ..()
+	for(var/prog_type in subtypesof(/datum/computer_file/program))
+		var/datum/computer_file/program/prog = prog_type
+		if(!initial(prog.available_on_network))
+			continue
+		program_access[prog_type] = list()
 
 /datum/extension/network_device/acl/proc/add_admin(var/user_id)
 	administrators |= user_id
@@ -23,3 +32,12 @@
 	for(var/datum/computer_file/data/grant_record/GR in grant_files)
 		grants |= GR
 	return grants
+
+/datum/extension/network_device/acl/proc/get_program_access(var/program_type)
+	if(!program_access[program_type])
+		return list()
+	if(!length(program_access[program_type]))
+		return list("NONE")
+	. = list()
+	for(var/access in program_access[program_type])
+		. += uppertext("[network_id].[access]")

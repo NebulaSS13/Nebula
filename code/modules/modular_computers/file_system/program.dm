@@ -83,32 +83,43 @@
 // Check if the user can run program. Only humans can operate computer. Automatically called in run_program()
 // User has to wear their ID or have it inhand for ID Scan to work.
 // Can also be called manually, with optional parameter being access_to_check to scan the user's ID
-/datum/computer_file/program/proc/can_run(var/mob/living/user, var/loud = 0, var/access_to_check)
+/datum/computer_file/program/proc/can_run(var/mob/living/user, var/loud = 0, var/list/accesses_to_check, var/datum/computer_network/network)
 	if(!requires_access_to_run)
-		return 1
-	// Defaults to required_access
-	if(!access_to_check)
-		access_to_check = required_access
-	if(!access_to_check) // No required_access, allow it.
-		return 1
+		return TRUE
+	// Defaults to network accecss, and then required_access
+	if(!length(accesses_to_check))
+		if(network)
+			var/datum/extension/network_device/acl/access_controller = network.access_controller
+			if(access_controller)
+				accesses_to_check = access_controller.get_program_access(src.type)
+				if(!length(accesses_to_check))
+					accesses_to_check = list(required_access)
+				else if(accesses_to_check[1] == "NONE")
+					return TRUE
+		else
+			accesses_to_check = list(required_access)
+	if(!accesses_to_check[1]) // No required_access, allow it.
+		return TRUE
 
 	// Admin override - allows operation of any computer as aghosted admin, as if you had any required access.
 	if(isghost(user) && check_rights(R_ADMIN, 0, user))
-		return 1
+		return TRUE
 
 	if(!istype(user))
-		return 0
+		return FALSE
 
 	var/obj/item/card/id/I = user.GetIdCard()
 	if(!I)
 		if(loud)
 			to_chat(user, "<span class='notice'>\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning.</span>")
-		return 0
+		return FALSE
 
-	if(access_to_check in I.access)
-		return 1
-	else if(loud)
+	for(var/access in I.access)
+		if(access in accesses_to_check)
+			return TRUE
+	if(loud)
 		to_chat(user, "<span class='notice'>\The [computer] flashes an \"Access Denied\" warning.</span>")
+		return FALSE
 
 // This attempts to retrieve header data for NanoUIs. If implementing completely new device of different type than existing ones
 // always include the device here in this proc. This proc basically relays the request to whatever is running the program.
