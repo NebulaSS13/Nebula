@@ -9,7 +9,7 @@
 		var/datum/computer_file/program/prog = prog_type
 		if(!initial(prog.available_on_network))
 			continue
-		program_access[prog_type] = list()
+		program_access[initial(prog.filename)] = list()
 
 /datum/extension/network_device/acl/proc/add_admin(var/user_id)
 	administrators |= user_id
@@ -33,11 +33,11 @@
 		grants |= GR
 	return grants
 
-/datum/extension/network_device/acl/proc/get_program_access(var/program_type)
-	if(!program_access[program_type])
+/datum/extension/network_device/acl/proc/get_program_access(var/program_name)
+	if(!program_access[program_name])
 		return list()
-	if(!length(program_access[program_type]))
+	if(!length(program_access[program_name]))
 		return list("NONE")
 	. = list()
-	for(var/access in program_access[program_type])
+	for(var/access in program_access[program_name])
 		. += uppertext("[network_id].[access]")

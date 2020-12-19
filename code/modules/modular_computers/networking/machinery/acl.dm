@@ -13,7 +13,7 @@
 	// Datum file source for where grants/records are.
 	var/datum/file_storage/network/file_source = /datum/file_storage/network/machine
 	var/editing_user	// Numerical user ID of the user being editing on this device.
-	var/datum/computer_file/program/editing_program // Current type of program being edited.
+	var/editing_program // Name of current program being edited.
 	var/list/initial_grants  //defaults to all possible station accesses if left null
 
 /obj/machinery/network/acl/merchant
@@ -146,7 +146,7 @@
 		return TOPIC_REFRESH
 
 	if(href_list["view_program"])
-		var/prog = text2path(href_list["view_program"])
+		var/prog = href_list["view_program"]
 		var/list/programs = computer.program_access
 		if(!(prog in programs))
 			error = "ERROR: Program not found."
@@ -229,7 +229,7 @@
 			)))
 		.["grants"] = grants
 	else if(editing_program) // Editing program access.
-		.["program_name"] = initial(editing_program.filedesc)
+		.["program_name"] = editing_program
 		var/list/program_access = computer.program_access[editing_program]
 		var/list/grants[0]
 		.["cleared_control"] = length(program_access) ? (program_access[1] == "NONE") : 0
@@ -252,11 +252,10 @@
 			)))
 		.["users"] = users
 		var/list/programs[0]
-		for(var/prog_type in computer.program_access)
-			var/datum/computer_file/program/prog = prog_type
+		for(var/prog_name in computer.program_access)
 			programs.Add(list(list(
-				"name" = initial(prog.filedesc),
-				"type" = prog_type
+				"name" = prog_name,
+				"grants" = length(computer.program_access[prog_name])
 			)))
 		.["programs"] = programs
 

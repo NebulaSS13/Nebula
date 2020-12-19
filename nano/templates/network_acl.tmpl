@@ -100,11 +100,13 @@
 			<h2>Available Programs:</h2>
 			<table>
 				<tr><th>Program
+				<th>Grants
 				<th>Access
 			{{for data.programs}}
 				<tr><td>{{:value.name}}
+				<td>{{:value.grants}}
 				<td>
-					{{:helper.link('EDIT', null, { "view_program" : value.type})}}
+					{{:helper.link('EDIT', null, { "view_program" : value.name})}}
 			{{/for}}
 			</table>
 		{{/if}}

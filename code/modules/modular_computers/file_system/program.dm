@@ -91,7 +91,7 @@
 		if(network)
 			var/datum/extension/network_device/acl/access_controller = network.access_controller
 			if(access_controller)
-				accesses_to_check = access_controller.get_program_access(src.type)
+				accesses_to_check = access_controller.get_program_access(filename)
 				if(!length(accesses_to_check))
 					accesses_to_check = list(required_access)
 				else if(accesses_to_check[1] == "NONE")
