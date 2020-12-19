@@ -1,6 +1,8 @@
 /datum/extension/network_device/acl
 	connection_type = NETWORK_CONNECTION_WIRED
 	var/list/administrators = list()	// A list of numerical user IDs of users that are administrators on a network.
+
+	var/program_control = FALSE			// Whether the ACL controls program access or not.
 	var/list/program_access = list()	// List of lists containing perimitted accesses for programs.
 
 /datum/extension/network_device/acl/New()
@@ -34,10 +36,8 @@
 	return grants
 
 /datum/extension/network_device/acl/proc/get_program_access(var/program_name)
-	if(!program_access[program_name])
-		return list()
 	if(!length(program_access[program_name]))
-		return list("NONE")
+		return list()
 	. = list()
 	for(var/access in program_access[program_name])
 		. += uppertext("[network_id].[access]")

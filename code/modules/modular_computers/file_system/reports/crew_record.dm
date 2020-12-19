@@ -32,10 +32,10 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	for(var/weakref/grant in grants)
 		var/datum/computer_file/data/grant_record/GR = grant.resolve()
 		if(!GR)
-			grants -= GR
+			grants -= grant
 			continue
 		if(GR.stored_data == grant_name)
-			grants -= GR
+			grants -= grant
 			return
 
 /datum/computer_file/report/crew_record/proc/calculate_size()

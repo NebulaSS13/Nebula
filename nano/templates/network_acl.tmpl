@@ -67,7 +67,6 @@
 			<hr>
 			<table>
 				{{:helper.link('REMOVE ACCESS REQUIREMENT', null, { "clear_program_access" : 1}, data.cleared_control ? 'selected' : null)}}
-				{{:helper.link('DISABLE ACCESS CONTROL', null, { "remove_program_control" : 1}, data.disabled_control ? 'selected' : null)}}
 				<tr><th>Grant
 				<th>Operations
 				{{for data.grants}}
@@ -98,17 +97,22 @@
 			</table>
 			<hr>
 			<h2>Available Programs:</h2>
-			<table>
-				<tr><th>Program
-				<th>Grants
-				<th>Access
-			{{for data.programs}}
-				<tr><td>{{:value.name}}
-				<td>{{:value.grants}}
-				<td>
-					{{:helper.link('EDIT', null, { "view_program" : value.name})}}
-			{{/for}}
-			</table>
+			{{if data.program_control}}
+				{{:helper.link('DISABLE PROGRAM ACCESS CONTROL', null, { "toggle_program_control" : 1})}}
+				<table>
+					<tr><th>Program
+					<th>Grants
+					<th>Access
+				{{for data.programs}}
+					<tr><td>{{:value.name}}
+					<td>{{:value.grants}}
+					<td>
+						{{:helper.link('EDIT', null, { "view_program" : value.name})}}
+				{{/for}}
+				</table>
+			{{else}}
+				{{:helper.link('ENABLE PROGRAM ACCESS CONTROL', null, { "toggle_program_control" : 1})}}
+			{{/if}}
 		{{/if}}
 	{{/if}}
 {{/if}}

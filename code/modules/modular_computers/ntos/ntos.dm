@@ -116,7 +116,8 @@
 	else if(P.can_run(user, 1, null, get_network()))
 		P.on_startup(user, src)
 		active_program = P
-
+	else
+		return
 	running_programs |= P
 	update_host_icon()
 	return 1

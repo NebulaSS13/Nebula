@@ -113,16 +113,13 @@
 
 	if(href_list["clear_program_access"])
 		if(editing_program)
-			computer.program_access[editing_program] = list("NONE")
+			computer.program_access[editing_program] = list()
 		else
 			error = "ERROR: Program not found."
 		return TOPIC_REFRESH
 
-	if(href_list["remove_program_control"])
-		if(editing_program)
-			computer.program_access[editing_program] = list()
-		else
-			error = "ERROR: Program not found."
+	if(href_list["toggle_program_control"])
+		computer.program_control = !computer.program_control
 		return TOPIC_REFRESH
 
 	if(href_list["create_grant"])
@@ -232,8 +229,7 @@
 		.["program_name"] = editing_program
 		var/list/program_access = computer.program_access[editing_program]
 		var/list/grants[0]
-		.["cleared_control"] = length(program_access) ? (program_access[1] == "NONE") : 0
-		.["disabled_control"] = !length(program_access)
+		.["cleared_control"] = !length(program_access)
 		for(var/datum/computer_file/data/grant_record/GR in computer.get_all_grants())
 			grants.Add(list(list(
 				"grant_name" = GR.stored_data,
@@ -252,6 +248,7 @@
 			)))
 		.["users"] = users
 		var/list/programs[0]
+		.["program_control"] = computer.program_control
 		for(var/prog_name in computer.program_access)
 			programs.Add(list(list(
 				"name" = prog_name,

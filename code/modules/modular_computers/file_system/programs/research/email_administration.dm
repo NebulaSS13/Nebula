@@ -9,7 +9,7 @@
 	requires_network = 1
 	available_on_network = 1
 	nanomodule_path = /datum/nano_module/program/email_administration
-	required_access = access_network
+	required_access = list(access_network)
 	category = PROG_ADMIN
 
 /datum/nano_module/program/email_administration

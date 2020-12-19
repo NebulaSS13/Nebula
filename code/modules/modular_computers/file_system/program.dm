@@ -2,7 +2,7 @@
 /datum/computer_file/program
 	filetype = "PRG"
 	filename = "UnknownProgram"						// File name. FILE NAME MUST BE UNIQUE IF YOU WANT THE PROGRAM TO BE DOWNLOADABLE FROM NETWORK!
-	var/required_access = null						// List of required accesses to run/download the program.
+	var/list/required_access = list()					// List of required accesses to run/download the program.
 	var/requires_access_to_run = 1					// Whether the program checks for required_access when run.
 	var/requires_access_to_download = 1				// Whether the program checks for required_access when downloading.
 	var/datum/nano_module/NM = null					// If the program uses NanoModule, put it here and it will be automagically opened. Otherwise implement ui_interact.
@@ -86,19 +86,17 @@
 /datum/computer_file/program/proc/can_run(var/mob/living/user, var/loud = 0, var/list/accesses_to_check, var/datum/computer_network/network)
 	if(!requires_access_to_run)
 		return TRUE
-	// Defaults to network accecss, and then required_access
-	if(!length(accesses_to_check))
+	// Checks to see if network access is enabled, and then defaults to required_access if not.
+	if(!accesses_to_check)
 		if(network)
 			var/datum/extension/network_device/acl/access_controller = network.access_controller
-			if(access_controller)
+			if(access_controller && access_controller.program_control)
 				accesses_to_check = access_controller.get_program_access(filename)
-				if(!length(accesses_to_check))
-					accesses_to_check = list(required_access)
-				else if(accesses_to_check[1] == "NONE")
-					return TRUE
-		else
-			accesses_to_check = list(required_access)
-	if(!accesses_to_check[1]) // No required_access, allow it.
+	
+	if(!length(accesses_to_check))
+		accesses_to_check = required_access
+
+	if(!length(accesses_to_check)) // No required_access, allow it.
 		return TRUE
 
 	// Admin override - allows operation of any computer as aghosted admin, as if you had any required access.
@@ -111,14 +109,14 @@
 	var/obj/item/card/id/I = user.GetIdCard()
 	if(!I)
 		if(loud)
-			to_chat(user, "<span class='notice'>\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning.</span>")
+			to_chat(user, SPAN_WARNING("The OS flashes an \"RFID Error - Unable to scan ID\" warning."))
 		return FALSE
 
 	for(var/access in I.access)
 		if(access in accesses_to_check)
 			return TRUE
 	if(loud)
-		to_chat(user, "<span class='notice'>\The [computer] flashes an \"Access Denied\" warning.</span>")
+		to_chat(user, SPAN_WARNING("The OS flashes an \"Access Denied\" warning."))
 		return FALSE
 
 // This attempts to retrieve header data for NanoUIs. If implementing completely new device of different type than existing ones
