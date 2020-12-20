@@ -9,6 +9,7 @@
 	health = 150
 	visible = 0.0
 	use_power = POWER_USE_OFF
+	stat_immune = NOSCREEN | NOINPUT | NOPOWER
 	uncreated_component_parts = null
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	opacity = 0
@@ -57,19 +58,19 @@
 		if(istype(bot))
 			if(density && src.check_access(bot.botcard))
 				open()
-				sleep(50)
-				close()
+				addtimer(CALLBACK(src, .proc/close), 50, TIMER_UNIQUE | TIMER_OVERRIDE)
 		return
 	var/mob/M = AM // we've returned by here if M is not a mob
 	if (src.operating)
 		return
 	if (src.density && (!issmall(M) || ishuman(M) || issilicon(M)) && src.allowed(AM))
 		open()
+		var/open_timer
 		if(src.check_access(null))
-			sleep(50)
+			open_timer = 50
 		else //secure doors close faster
-			sleep(20)
-		close()
+			open_timer = 20
+		addtimer(CALLBACK(src, .proc/close), open_timer, TIMER_UNIQUE | TIMER_OVERRIDE)
 	return
 
 /obj/machinery/door/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -98,16 +99,18 @@
 	icon_state = "[src.base_state]open"
 	flick("[src.base_state]opening", src)
 	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
-	sleep(10)
+	addtimer(CALLBACK(src, .proc/open_final), 10, TIMER_UNIQUE | TIMER_OVERRIDE)
 
+	return 1
+
+/obj/machinery/door/window/proc/open_final()
 	explosion_resistance = 0
-	set_density(0)
+	set_density(FALSE)
 	update_icon()
 	update_nearby_tiles()
 
 	if(operating == 1) //emag again
-		src.operating = 0
-	return 1
+		operating = 0
 
 /obj/machinery/door/window/close()
 	if (src.operating)
@@ -120,9 +123,11 @@
 	explosion_resistance = initial(explosion_resistance)
 	update_nearby_tiles()
 
-	sleep(10)
-	src.operating = 0
+	addtimer(CALLBACK(src, .proc/close_final), 10, TIMER_UNIQUE | TIMER_OVERRIDE)
 	return 1
+
+/obj/machinery/door/window/proc/close_final()
+	operating = 0
 
 /obj/machinery/door/window/take_damage(var/damage)
 	src.health = max(0, src.health - damage)
@@ -141,12 +146,20 @@
 	return ..()
 
 /obj/machinery/door/window/emag_act(var/remaining_charges, var/mob/user)
-	if (density && operable())
-		operating = -1
-		flick("[src.base_state]spark", src)
-		sleep(6)
-		open()
-		return 1
+	if (emagged)
+		to_chat(user, SPAN_WARNING("\The [src] has already been locked open."))
+		return FALSE
+	if (!operable())
+		to_chat(user, SPAN_WARNING("\The [src] is not functioning and doesn't respond to your attempts to short the circuitry."))
+		return FALSE
+
+	operating = -1
+	emagged = TRUE
+	to_chat(user, SPAN_NOTICE("You short out \the [src]'s internal circuitry, locking it open!"))
+	if (density)
+		flick("[base_state]spark", src)
+		addtimer(CALLBACK(src, .proc/open), 6, TIMER_UNIQUE | TIMER_OVERRIDE)
+	return TRUE
 
 /obj/machinery/door/emp_act(severity)
 	if(prob(20/severity))
@@ -170,6 +183,9 @@
 		if (src.density)
 			open()
 		else
+			if (emagged)
+				to_chat(user, SPAN_WARNING("\The [src] seems to be stuck and refuses to close!"))
+				return
 			close()
 
 	else if (src.density)
