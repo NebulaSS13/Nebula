@@ -111,14 +111,6 @@ var/list/limb_icon_cache = list()
 			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
 			icon_cache_key += "[M][markings[M]["color"]]"
 
-	if(body_hair && hair_colour)
-		var/cache_key = "[body_hair]-[icon_name]-[hair_colour]"
-		if(!limb_icon_cache[cache_key])
-			var/icon/I = icon(species.get_icobase(owner), "[icon_name]_[body_hair]")
-			I.Blend(hair_colour, ICON_ADD)
-			limb_icon_cache[cache_key] = I
-		mob_icon.Blend(limb_icon_cache[cache_key], ICON_OVERLAY)
-
 	set_dir(EAST, TRUE)
 	icon = mob_icon
 

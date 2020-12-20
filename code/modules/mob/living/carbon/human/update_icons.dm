@@ -309,10 +309,6 @@ var/global/list/damage_icon_parts = list()
 			if(part.skin_colour)
 				icon_key += "[part.skin_colour]"
 				icon_key += "[part.skin_blend]"
-			if(part.body_hair && part.hair_colour)
-				icon_key += "[part.hair_colour]"
-			else
-				icon_key += COLOR_BLACK
 			for(var/M in part.markings)
 				icon_key += "[M][part.markings[M]["color"]]"
 		if(BP_IS_PROSTHETIC(part))
