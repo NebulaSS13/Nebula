@@ -149,19 +149,11 @@
 	var/down_description
 
 	var/datum/alarm_appearance/alarm_appearance
-<<<<<<< HEAD
 
 /decl/security_level/New()
 	. = ..()
 	if(ispath(alarm_appearance, /datum/alarm_appearance))
 		alarm_appearance = new alarm_appearance
-=======
-	var/alarm_appearance_type
-
-/decl/security_level/New()
-	. = ..()
-	alarm_appearance = new alarm_appearance_type
->>>>>>> 8bfa574b35... converts fire alarms and status displays to a grayscaled system instead of static icons
 
 // Called when we're switching from a lower security level to this one.
 /decl/security_level/proc/switching_up_to()
@@ -220,11 +212,7 @@
 	overlay_alarm = "alarm_green"
 	overlay_status_display = "status_display_green"
 
-<<<<<<< HEAD
 	alarm_appearance = /datum/alarm_appearance/green
-=======
-	alarm_appearance_type = /datum/alarm_appearance/green
->>>>>>> 8bfa574b35... converts fire alarms and status displays to a grayscaled system instead of static icons
 
 	down_description = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
 
@@ -240,11 +228,7 @@
 	overlay_alarm = "alarm_blue"
 	overlay_status_display = "status_display_blue"
 
-<<<<<<< HEAD
 	alarm_appearance = /datum/alarm_appearance/blue
-=======
-	alarm_appearance_type = /datum/alarm_appearance/blue
->>>>>>> 8bfa574b35... converts fire alarms and status displays to a grayscaled system instead of static icons
 
 	up_description = "The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted."
 	down_description = "The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed."
@@ -261,11 +245,7 @@
 	overlay_alarm = "alarm_red"
 	overlay_status_display = "status_display_red"
 
-<<<<<<< HEAD
 	alarm_appearance = /datum/alarm_appearance/red
-=======
-	alarm_appearance_type = /datum/alarm_appearance/red
->>>>>>> 8bfa574b35... converts fire alarms and status displays to a grayscaled system instead of static icons
 
 	up_description = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
 	down_description = "The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
@@ -279,11 +259,7 @@
 	light_color_alarm = COLOR_RED
 	light_color_status_display = COLOR_NAVY_BLUE
 
-<<<<<<< HEAD
 	alarm_appearance = /datum/alarm_appearance/delta
-=======
-	alarm_appearance_type = /datum/alarm_appearance/delta
->>>>>>> 8bfa574b35... converts fire alarms and status displays to a grayscaled system instead of static icons
 
 	overlay_alarm = "alarm_delta"
 	overlay_status_display = "status_display_delta"
