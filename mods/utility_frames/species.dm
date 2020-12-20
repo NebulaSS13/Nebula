@@ -51,6 +51,13 @@
 		BP_EYES = /obj/item/organ/internal/eyes/robot
 	)
 
+	exertion_effect_chance = 10
+	exertion_charge_scale = 1
+	exertion_emotes_synthetic = list(
+		/decl/emote/exertion/synthetic,
+		/decl/emote/exertion/synthetic/creak
+	)
+
 /decl/species/utility_frame/post_organ_rejuvenate(obj/item/organ/org, mob/living/carbon/human/H)
 	var/obj/item/organ/external/E = org
 	if(istype(E) && !BP_IS_PROSTHETIC(E))
