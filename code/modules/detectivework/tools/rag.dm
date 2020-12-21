@@ -101,21 +101,40 @@
 	if(isliving(target))
 		var/mob/living/M = target
 		if(on_fire)
-			user.visible_message("<span class='danger'>\The [user] hits [target] with [src]!</span>",)
+			user.visible_message(
+				SPAN_DANGER("\The [user] hits \the [target] with \the [src]!"),
+				SPAN_DANGER("You hit \the [target] with \the [src]!")
+			)
 			user.do_attack_animation(target)
+			admin_attack_log(user, M, "used \the [src] (ignited) to attack", "was attacked using \the [src] (ignited)", "attacked with \the [src] (ignited)")
 			M.IgniteMob()
 		else if(reagents.total_volume)
 			if(user.zone_sel.selecting == BP_MOUTH)
-				user.do_attack_animation(target)
-				user.visible_message(
-					"<span class='danger'>\The [user] smothers [target] with [src]!</span>",
-					"<span class='warning'>You smother [target] with [src]!</span>",
-					"You hear some struggling and muffled cries of surprise"
-					)
+				if (!M.has_danger_grab(user))
+					to_chat(user, SPAN_WARNING("You need to have a firm grip on \the [target] before you can use \the [src] on them!"))
+					return
 
-				//it's inhaled, so... maybe CHEM_INJECT doesn't make a whole lot of sense but it's the best we can do for now
-				reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INJECT)
-				update_name()
+				user.do_attack_animation(src)
+				user.visible_message(
+					SPAN_DANGER("\The [user] brings \the [src] up to \the [target]'s mouth!"),
+					SPAN_DANGER("You bring \the [src] up to \the [target]'s mouth!"),
+					SPAN_WARNING("You hear some struggling and muffled cries of surprise")
+				)
+
+				var/grab_time = 6 SECONDS
+				if (user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+					grab_time = 3 SECONDS
+
+				if (do_after(user, grab_time, target))
+					user.visible_message(
+						SPAN_DANGER("\The [user] smothers \the [target] with \the [src]!"),
+						SPAN_DANGER("You smother \the [target] with \the [src]!")
+					)
+					//it's inhaled, so... maybe CHEM_INJECT doesn't make a whole lot of sense but it's the best we can do for now
+					var/trans_amt = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INJECT)
+					var/contained_reagents = reagents.get_reagents()
+					admin_inject_log(user, M, src, contained_reagents, trans_amt)
+					update_name()
 			else
 				wipe_down(target, user)
 		return
