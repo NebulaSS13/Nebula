@@ -41,3 +41,5 @@
 	. = list()
 	for(var/access in program_access[program_name])
 		. += uppertext("[network_id].[access]")
+	
+	return list(.)

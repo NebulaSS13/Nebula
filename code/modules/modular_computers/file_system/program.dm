@@ -2,7 +2,7 @@
 /datum/computer_file/program
 	filetype = "PRG"
 	filename = "UnknownProgram"						// File name. FILE NAME MUST BE UNIQUE IF YOU WANT THE PROGRAM TO BE DOWNLOADABLE FROM NETWORK!
-	var/list/required_access = list()					// List of required accesses to run/download the program.
+	var/list/required_access = list()				// List of required accesses to run/download the program.
 	var/requires_access_to_run = 1					// Whether the program checks for required_access when run.
 	var/requires_access_to_download = 1				// Whether the program checks for required_access when downloading.
 	var/datum/nano_module/NM = null					// If the program uses NanoModule, put it here and it will be automagically opened. Otherwise implement ui_interact.
@@ -112,9 +112,8 @@
 			to_chat(user, SPAN_WARNING("The OS flashes an \"RFID Error - Unable to scan ID\" warning."))
 		return FALSE
 
-	for(var/access in I.access)
-		if(access in accesses_to_check)
-			return TRUE
+	if(has_access(accesses_to_check, I.access))
+		return TRUE
 	if(loud)
 		to_chat(user, SPAN_WARNING("The OS flashes an \"Access Denied\" warning."))
 		return FALSE
