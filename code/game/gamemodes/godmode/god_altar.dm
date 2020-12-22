@@ -41,7 +41,8 @@
 	cycles_before_converted--
 	if(!cycles_before_converted)
 		src.visible_message("For one thundering moment, \the [target] cries out in pain before going limp and broken.")
-		GLOB.godcult.add_antagonist_mind(target.mind,1, "Servant of [linked_god]","Your loyalty may be faulty, but you know that it now has control over you...", specific_god=linked_god)
+		var/decl/special_role/godcultist/godcult = decls_repository.get_decl(/decl/special_role/godcultist)
+		godcult.add_antagonist_mind(target.mind,1, "Servant of [linked_god]","Your loyalty may be faulty, but you know that it now has control over you...", specific_god=linked_god)
 		remove_target()
 		return
 

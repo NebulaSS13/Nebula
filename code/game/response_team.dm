@@ -49,13 +49,14 @@ client/verb/JoinResponseTeam()
 		if(!send_emergency_team)
 			to_chat(usr, "No emergency response team is currently being sent.")
 			return
-		if(jobban_isbanned(usr, MODE_ERT) || jobban_isbanned(usr, "Security Officer"))
+		if(jobban_isbanned(usr, /decl/special_role/ert) || jobban_isbanned(usr, "Security Officer"))
 			to_chat(usr, "<span class='danger'>You are jobbanned from the emergency reponse team!</span>")
 			return
-		if(GLOB.ert.current_antagonists.len >= GLOB.ert.hard_cap)
+		var/decl/special_role/ert/ert = decls_repository.get_decl(/decl/special_role/ert)
+		if(ert.current_antagonists.len >= ert.hard_cap)
 			to_chat(usr, "The emergency response team is already full!")
 			return
-		GLOB.ert.create_default(usr)
+		ert.create_default(usr)
 	else
 		to_chat(usr, "You need to be an observer or new player to use this.")
 

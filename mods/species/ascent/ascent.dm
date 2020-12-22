@@ -16,7 +16,6 @@
 #define FACTION_ASCENT_SERPENTID "Ascent Serpentid"
 #define RELIGION_KHARMAANI       "Nest-Lineage Veneration"
 
-#define MODE_HUNTER  "hunter"
 #define IS_MANTID    "mantid"
 #define IS_SERPENTID "serpentid"
 

@@ -1,8 +1,6 @@
-GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
-
-/datum/antagonist/renegade
-	role_text = "Renegade"
-	role_text_plural = "Renegades"
+/decl/special_role/renegade
+	name = "Renegade"
+	name_plural = "Renegades"
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/submap)
 	restricted_jobs = list()
 	welcome_text = "Something's going to go wrong today, you can just feel it. You're paranoid, you've got a gun, and you're going to survive."
@@ -15,7 +13,6 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
 		rules aside from those without explicit exceptions apply to antagonists.</b>"
 
-	id = MODE_RENEGADE
 	flags = ANTAG_SUSPICIOUS | ANTAG_IMPLANT_IMMUNE | ANTAG_RANDSPAWN | ANTAG_VOTABLE
 	hard_cap = 3
 	hard_cap_round = 5
@@ -36,7 +33,7 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 		/obj/item/gun/projectile/shotgun/doublebarrel/sawn
 		)
 
-/datum/antagonist/renegade/create_objectives(var/datum/mind/player)
+/decl/special_role/renegade/create_objectives(var/datum/mind/player)
 
 	if(!..())
 		return
@@ -45,7 +42,7 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 	survive.owner = player
 	player.objectives |= survive
 
-/datum/antagonist/renegade/equip(var/mob/living/carbon/human/player)
+/decl/special_role/renegade/equip(var/mob/living/carbon/human/player)
 
 	if(!..())
 		return
@@ -65,12 +62,3 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 
 	// If that failed, then finally attempt to at least let the player carry the weapon
 	player.put_in_hands(gun)
-
-
-/proc/rightandwrong()
-	to_chat(usr, "<B>You summoned guns!</B>")
-	message_admins("[key_name_admin(usr, 1)] summoned guns!")
-	for(var/mob/living/carbon/human/H in GLOB.player_list)
-		if(H.stat == 2 || !(H.client)) continue
-		if(is_special_character(H)) continue
-		GLOB.renegades.add_antagonist(H.mind)

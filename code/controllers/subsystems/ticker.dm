@@ -307,13 +307,13 @@ Helpers
 				to_chat(M, "Captainship not forced on anyone.")
 
 /datum/controller/subsystem/ticker/proc/attempt_late_antag_spawn(var/list/antag_choices)
-	var/datum/antagonist/antag = antag_choices[1]
+	var/decl/special_role/antag = antag_choices[1]
 	while(antag_choices.len && antag)
 		var/needs_ghost = antag.flags & (ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB)
 		if (needs_ghost)
 			looking_for_antags = 1
 			antag_pool.Cut()
-			to_world("<b>A ghost is needed to spawn \a [antag.role_text].</b>\nGhosts may enter the antag pool by making sure their [antag.role_text] preference is set to high, then using the toggle-add-antag-candidacy verb. You have 3 minutes to enter the pool.")
+			to_world("<b>A ghost is needed to spawn \a [antag.name].</b>\nGhosts may enter the antag pool by making sure their [antag.name] preference is set to high, then using the toggle-add-antag-candidacy verb. You have 3 minutes to enter the pool.")
 
 			sleep(3 MINUTES)
 			looking_for_antags = 0
@@ -333,20 +333,20 @@ Helpers
 		if(length(antag.candidates) >= antag.initial_spawn_req)
 			antag.attempt_spawn()
 			antag.finalize_spawn()
-			additional_antag_types.Add(antag.id)
+			global.additional_antag_types += antag.type
 			return 1
 		else
 			if(antag.initial_spawn_req > 1)
-				log_and_message_admins("Failed to find enough [antag.role_text_plural].")
+				log_and_message_admins("Failed to find enough [antag.name_plural].")
 
 			else
-				log_and_message_admins("Failed to find a [antag.role_text].")
+				log_and_message_admins("Failed to find a [antag.name].")
 
 			antag_choices -= antag
 			if(length(antag_choices))
 				antag = antag_choices[1]
 				if(antag)
-					log_and_message_admins("Attempting to spawn [antag.role_text_plural].")
+					log_and_message_admins("Attempting to spawn [antag.name_plural].")
 	return 0
 
 /datum/controller/subsystem/ticker/proc/game_finished()
@@ -470,13 +470,13 @@ Helpers
 	var/list/total_antagonists = list()
 	//Look into all mobs in world, dead or alive
 	for(var/datum/mind/Mind in minds)
-		var/temprole = Mind.special_role
-		if(temprole)							//if they are an antagonist of some sort.
-			if(temprole in total_antagonists)	//If the role exists already, add the name to it
-				total_antagonists[temprole] += ", [Mind.name]([Mind.key])"
+		var/special_role = Mind.get_special_role_name()
+		if(special_role)							//if they are an antagonist of some sort.
+			if(special_role in total_antagonists)	//If the role exists already, add the name to it
+				total_antagonists[special_role] += ", [Mind.name]([Mind.key])"
 			else
-				total_antagonists.Add(temprole) //If the role doesnt exist in the list, create it and add the mob
-				total_antagonists[temprole] += ": [Mind.name]([Mind.key])"
+				total_antagonists.Add(special_role) //If the role doesnt exist in the list, create it and add the mob
+				total_antagonists[special_role] += ": [Mind.name]([Mind.key])"
 
 	//Now print them all into the log!
 	log_game("Antagonists at round end were...")

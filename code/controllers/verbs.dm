@@ -1,18 +1,17 @@
 //TODO: rewrite and standardise all controller datums to the datum/controller type
 //TODO: allow all controllers to be deleted for clean restarts (see WIP master controller stuff) - MC done - lighting done
 
-/client/proc/debug_antagonist_template(antag_type as null|anything in GLOB.all_antag_types_)
+/client/proc/debug_antagonist_template()
 	set category = "Debug"
 	set name = "Debug Antagonist"
 	set desc = "Debug an antagonist template."
 
-	if (!antag_type)
-		return
-
-	var/datum/antagonist/antag = GLOB.all_antag_types_[antag_type]
+	var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
+	var/antag_type = input("Select an antagonist type.", "Antag Debug") as null|anything in all_antag_types
+	var/decl/special_role/antag = all_antag_types[antag_type]
 	if(antag)
 		usr.client.debug_variables(antag)
-		message_admins("Admin [key_name_admin(usr)] is debugging the [antag.role_text] template.")
+		message_admins("Admin [key_name_admin(usr)] is debugging the [antag.name] template.")
 
 /client/proc/debug_controller(controller as null|anything in list("Jobs","Sun","Radio","Configuration","pAI", "Cameras", "Transfer Controller", "Gas Data","Plants","Wireless","Observation","Alt Appearance Manager","Datacore","Military Branches"))
 	set category = "Debug"

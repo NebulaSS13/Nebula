@@ -52,7 +52,8 @@ var/global/universe_has_ended = 0
 	OverlayAndAmbientSet()
 
 	// Disable Nar-Sie.
-	GLOB.cult.allow_narsie = 0
+	var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	cult.allow_narsie = 0
 
 	PlayerSet()
 	SSskybox.change_skybox("cascade", new_use_stars = FALSE, new_use_overmap_details = FALSE)

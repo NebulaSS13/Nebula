@@ -526,7 +526,8 @@ datum/projectile_data
 	return seconds * 10
 
 /proc/round_is_spooky(var/spookiness_threshold = config.cult_ghostwriter_req_cultists)
-	return (GLOB.cult.current_antagonists.len > spookiness_threshold)
+	var/decl/special_role/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	return (cult.current_antagonists.len > spookiness_threshold)
 
 /proc/window_flash(var/client_or_usr)
 	if (!client_or_usr)

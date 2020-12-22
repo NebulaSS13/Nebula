@@ -6,7 +6,9 @@
 	applies_material_name = FALSE
 
 /obj/item/sword/cultblade/attack(mob/living/M, mob/living/user, var/target_zone)
-	if(iscultist(user) || (user.mind in GLOB.godcult.current_antagonists))
+
+	var/decl/special_role/godcult = decls_repository.get_decl(/decl/special_role/godcultist)
+	if(iscultist(user) || (user.mind in godcult.current_antagonists))
 		return ..()
 
 	var/zone = user.get_active_held_item_slot()

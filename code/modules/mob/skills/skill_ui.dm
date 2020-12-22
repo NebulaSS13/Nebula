@@ -284,7 +284,7 @@ Admin version, with debugging options.
 		log_and_message_admins("SKILLS: The job skills for [key_name_admin(skillset.owner)] have been imported.")
 		return 1
 	if(href_list["antag"])
-		var/datum/antagonist/antag = skillset.owner.mind && player_is_antag(skillset.owner.mind)
+		var/decl/special_role/antag = skillset.owner.mind && player_is_antag(skillset.owner.mind)
 		if(!antag)
 			to_chat(usr, "Mob lacks valid antag status.")
 			return 1

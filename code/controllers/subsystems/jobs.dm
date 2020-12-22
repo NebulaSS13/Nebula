@@ -129,7 +129,7 @@ SUBSYSTEM_DEF(jobs)
 		if((player) && (player.mind))
 			player.mind.assigned_job = null
 			player.mind.assigned_role = null
-			player.mind.special_role = null
+			player.mind.assigned_special_role = null
 	for(var/datum/job/job in primary_job_datums)
 		job.current_positions = 0
 	unassigned_roundstart = list()

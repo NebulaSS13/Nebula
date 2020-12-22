@@ -5,9 +5,9 @@
 	if(!M.mind || !M.client)
 		return
 
-	convert_to_faction(M.mind, GLOB.revs)
+	convert_to_faction(M.mind, decls_repository.get_decl(/decl/special_role/revolutionary))
 
-/mob/living/proc/convert_to_faction(var/datum/mind/player, var/datum/antagonist/faction)
+/mob/living/proc/convert_to_faction(var/datum/mind/player, var/decl/special_role/faction)
 
 	if(!player || !faction || !player.current)
 		return
@@ -24,7 +24,7 @@
 		return
 
 	if(!faction.can_become_antag(player, 1))
-		to_chat(src, "<span class='warning'>\The [player.current] cannot be \a [faction.faction_role_text]!</span>")
+		to_chat(src, "<span class='warning'>\The [player.current] cannot be \a [faction.faction_name]!</span>")
 		return
 
 	if(world.time < player.rev_cooldown)
@@ -32,15 +32,15 @@
 		return
 
 	to_chat(src, "<span class='danger'>You are attempting to convert \the [player.current]...</span>")
-	log_admin("[src]([src.ckey]) attempted to convert [player.current] to the [faction.faction_role_text] faction.")
-	message_admins("<span class='danger'>[src]([src.ckey]) attempted to convert [player.current] to the [faction.faction_role_text] faction.</span>")
+	log_admin("[src]([src.ckey]) attempted to convert [player.current] to the [faction.faction_name] faction.")
+	message_admins("<span class='danger'>[src]([src.ckey]) attempted to convert [player.current] to the [faction.faction_name] faction.</span>")
 
 	player.rev_cooldown = world.time + 5 SECONDS
 	if (!faction.is_antagonist(player))
 		var/choice = alert(player.current,"Asked by [src]: Do you want to join the [faction.faction_descriptor]?","Join the [faction.faction_descriptor]?","No!","Yes!")
 		if(!(player.current in able_mobs_in_oview(src)))
 			return
-		if(choice == "Yes!" && faction.add_antagonist_mind(player, 0, faction.faction_role_text, faction.faction_welcome))
+		if(choice == "Yes!" && faction.add_antagonist_mind(player, 0, faction.faction_name, faction.faction_welcome))
 			to_chat(src, "<span class='notice'>\The [player.current] joins the [faction.faction_descriptor]!</span>")
 			return
 		else
@@ -54,4 +54,4 @@
 	if(!M.mind || !M.client)
 		return
 
-	convert_to_faction(M.mind, GLOB.loyalists)
+	convert_to_faction(M.mind, decls_repository.get_decl(/decl/special_role/loyalist))

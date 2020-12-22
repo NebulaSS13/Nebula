@@ -342,10 +342,10 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	for(var/j in SSjobs.titles_by_department(DEPT_MISC))
 		output += "<option value='[j]'>[j]</option>"
 	var/list/bantypes = list("traitor","changeling","operative","revolutionary","cultist","wizard") //For legacy bans.
-	var/list/all_antag_types = GLOB.all_antag_types_
+	var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
 	for(var/antag_type in all_antag_types) // Grab other bans.
-		var/datum/antagonist/antag = all_antag_types[antag_type]
-		bantypes |= antag.id
+		var/decl/special_role/antag = all_antag_types[antag_type]
+		bantypes |= antag.name
 	for(var/j in bantypes)
 		output += "<option value='[j]'>[j]</option>"
 	output += "</select></td></tr></table>"

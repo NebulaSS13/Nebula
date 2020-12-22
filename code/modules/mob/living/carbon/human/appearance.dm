@@ -14,7 +14,7 @@
 		return
 
 	set_species(new_species)
-	var/datum/antagonist/antag = mind && player_is_antag(mind)
+	var/decl/special_role/antag = mind && player_is_antag(mind)
 	if (antag && antag.required_language)
 		add_language(antag.required_language)
 		set_default_language(antag.required_language)

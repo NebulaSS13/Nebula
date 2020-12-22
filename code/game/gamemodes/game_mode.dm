@@ -1,5 +1,5 @@
 var/global/antag_add_finished // Used in antag type voting.
-var/global/list/additional_antag_types = list()
+var/list/additional_antag_types = list()
 
 /datum/game_mode
 	var/name = "invalid"
@@ -20,9 +20,9 @@ var/global/list/additional_antag_types = list()
 	var/shuttle_delay = 1                    // Shuttle transit time is multiplied by this.
 	var/auto_recall_shuttle = FALSE          // Will the shuttle automatically be recalled?
 
-	var/list/antag_tags = list()             // Core antag templates to spawn.
+	var/list/associated_antags = list()      // Core antag templates to spawn.
 	var/list/antag_templates                 // Extra antagonist types to include.
-	var/list/latejoin_antag_tags = list()    // Antags that may auto-spawn, latejoin or otherwise come in midround.
+	var/list/latejoin_antags = list()        // Antags that may auto-spawn, latejoin or otherwise come in midround.
 	var/round_autoantag = FALSE              // Will this round attempt to periodically spawn more antagonists?
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.
 	var/require_all_templates = FALSE        // Will only start if all templates are checked and can spawn.
@@ -51,9 +51,9 @@ var/global/list/additional_antag_types = list()
 	name = capitalize(lowertext(name))
 	config_tag = lowertext(config_tag)
 
-	if(round_autoantag && !latejoin_antag_tags.len)
-		latejoin_antag_tags = antag_tags.Copy()
-	else if(!round_autoantag && latejoin_antag_tags.len)
+	if(round_autoantag && !length(latejoin_antags))
+		latejoin_antags = associated_antags.Copy()
+	else if(!round_autoantag && length(latejoin_antags))
 		round_autoantag = TRUE
 
 /datum/game_mode/Topic(href, href_list[])
@@ -101,29 +101,33 @@ var/global/list/additional_antag_types = list()
 		if(href_list["debug_antag"] == "self")
 			usr.client.debug_variables(src)
 			return
-		var/datum/antagonist/antag = GLOB.all_antag_types_[href_list["debug_antag"]]
+		var/decl/special_role/antag = locate(href_list["debug_antag"])
 		if(antag)
 			usr.client.debug_variables(antag)
-			message_admins("Admin [key_name_admin(usr)] is debugging the [antag.role_text] template.")
+			message_admins("Admin [key_name_admin(usr)] is debugging the [antag.name] template.")
 	else if(href_list["remove_antag_type"])
-		if(antag_tags && (href_list["remove_antag_type"] in antag_tags))
+		var/decl/special_role/antag = locate(href_list["remove_antag_type"])
+		if(!antag)
+			return
+		if(antag.type in associated_antags)
 			to_chat(usr, "Cannot remove core mode antag type.")
 			return
-		var/datum/antagonist/antag = GLOB.all_antag_types_[href_list["remove_antag_type"]]
-		if(antag_templates && antag_templates.len && antag && (antag in antag_templates) && (antag.id in additional_antag_types))
+		if((antag in antag_templates) && (antag.type in global.additional_antag_types))
 			antag_templates -= antag
-			additional_antag_types -= antag.id
-			message_admins("Admin [key_name_admin(usr)] removed [antag.role_text] template from game mode.")
+			global.additional_antag_types -= antag.type
+			message_admins("Admin [key_name_admin(usr)] removed [antag.name] template from game mode.")
+
 	else if(href_list["add_antag_type"])
-		var/choice = input("Which type do you wish to add?") as null|anything in GLOB.all_antag_types_
+		var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
+		var/choice = input("Which type do you wish to add?") as null|anything in all_antag_types
 		if(!choice)
 			return
-		var/datum/antagonist/antag = GLOB.all_antag_types_[choice]
+		var/decl/special_role/antag = all_antag_types[choice]
 		if(antag)
 			if(!islist(SSticker.mode.antag_templates))
 				SSticker.mode.antag_templates = list()
 			SSticker.mode.antag_templates |= antag
-			message_admins("Admin [key_name_admin(usr)] added [antag.role_text] template to game mode.")
+			message_admins("Admin [key_name_admin(usr)] added [antag.name] template to game mode.")
 
 	if (usr.client && usr.client.holder)
 		usr.client.holder.show_game_mode(usr)
@@ -135,13 +139,13 @@ var/global/list/additional_antag_types = list()
 	if(antag_templates && antag_templates.len)
 		var/antag_summary = "<b>Possible antagonist types:</b> "
 		var/i = 1
-		for(var/datum/antagonist/antag in antag_templates)
+		for(var/decl/special_role/antag in antag_templates)
 			if(i > 1)
 				if(i == antag_templates.len)
 					antag_summary += " and "
 				else
 					antag_summary += ", "
-			antag_summary += "[antag.role_text_plural]"
+			antag_summary += "[antag.name_plural]"
 			i++
 		antag_summary += "."
 		if(antag_templates.len > 1 && SSticker.master_mode != "secret")
@@ -162,10 +166,9 @@ var/global/list/additional_antag_types = list()
 		return "Not enough players, [src.required_players] players needed."
 
 	var/enemy_count = 0
-	var/list/all_antag_types = GLOB.all_antag_types_
-	if(antag_tags && antag_tags.len)
-		for(var/antag_tag in antag_tags)
-			var/datum/antagonist/antag = all_antag_types[antag_tag]
+	if(length(associated_antags))
+		for(var/antag_type in associated_antags)
+			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
 			if(!antag)
 				continue
 			var/list/potential = list()
@@ -178,7 +181,7 @@ var/global/list/additional_antag_types = list()
 				potential = antag.get_potential_candidates(src)
 			if(islist(potential))
 				if(require_all_templates && potential.len < antag.initial_spawn_req)
-					return "Not enough antagonists ([antag.role_text]), [antag.initial_spawn_req] required and [potential.len] available."
+					return "Not enough antagonists ([antag.name]), [antag.initial_spawn_req] required and [potential.len] available."
 				enemy_count += potential.len
 				if(enemy_count >= required_enemies)
 					return 0
@@ -197,17 +200,15 @@ var/global/list/additional_antag_types = list()
 			EMajor.delay_modifier = event_delay_mod_major
 
 /datum/game_mode/proc/pre_setup()
-	for(var/datum/antagonist/antag in antag_templates)
+	for(var/decl/special_role/antag in antag_templates)
 		antag.update_current_antag_max(src)
 		antag.build_candidate_list(src) //compile a list of all eligible candidates
 
 	if(length(antag_templates) > 1) // If we have multiple templates to satisfy, we must pick candidates who satisfy fewer templates first, and fill the template with fewest candidates first
-		var/list/template_candidates = list()
 		var/list/all_candidates = list() // All candidates for every template, may contain duplicates
 		var/list/antag_templates_by_initial_spawn_req = list()
 
-		for(var/datum/antagonist/antag in antag_templates)
-			template_candidates[antag.id] = length(antag.candidates)
+		for(var/decl/special_role/antag in antag_templates)
 			all_candidates += antag.candidates
 			antag_templates_by_initial_spawn_req[antag] = antag.initial_spawn_req
 
@@ -226,13 +227,13 @@ var/global/list/additional_antag_types = list()
 		for(var/sorted_candidate in valid_templates_per_candidate)
 			sorted_candidates += sorted_candidate
 
-		for(var/datum/antagonist/antag in antag_templates)
+		for(var/decl/special_role/antag in antag_templates)
 			antag.candidates = sorted_candidates & antag.candidates // orders antag.candidates by sorted_candidates
 
-		var/datum/antagonist/last_template = antag_templates[antag_templates.len]
+		var/decl/special_role/last_template = antag_templates[antag_templates.len]
 		last_template.candidates = shuffle(last_template.candidates) // last template to be considered can have its candidates in any order
 
-	for(var/datum/antagonist/antag in antag_templates)
+	for(var/decl/special_role/antag in antag_templates)
 		//antag roles that replace jobs need to be assigned before the job controller hands out jobs.
 		if(antag.flags & ANTAG_OVERRIDE_JOB)
 			antag.attempt_spawn() //select antags to be spawned
@@ -254,13 +255,13 @@ var/global/list/additional_antag_types = list()
 		announce_ert_disabled()
 
 	//Assign all antag types for this game mode. Any players spawned as antags earlier should have been removed from the pending list, so no need to worry about those.
-	for(var/datum/antagonist/antag in antag_templates)
+	for(var/decl/special_role/antag in antag_templates)
 		if(!(antag.flags & ANTAG_OVERRIDE_JOB))
 			antag.attempt_spawn() //select antags to be spawned
 		antag.finalize_spawn() //actually spawn antags
 
 	//Finally do post spawn antagonist stuff.
-	for(var/datum/antagonist/antag in antag_templates)
+	for(var/decl/special_role/antag in antag_templates)
 		antag.post_spawn()
 
 	// Update goals, now that antag status and jobs are both resolved.
@@ -279,7 +280,7 @@ var/global/list/additional_antag_types = list()
 	return 1
 
 /datum/game_mode/proc/fail_setup()
-	for(var/datum/antagonist/antag in antag_templates)
+	for(var/decl/special_role/antag in antag_templates)
 		antag.reset_antag_selection()
 
 /datum/game_mode/proc/announce_ert_disabled()
@@ -325,7 +326,7 @@ var/global/list/additional_antag_types = list()
 		return 1
 	if(end_on_antag_death && antag_templates && antag_templates.len)
 		var/has_antags = 0
-		for(var/datum/antagonist/antag in antag_templates)
+		for(var/decl/special_role/antag in antag_templates)
 			if(!antag.antags_are_dead())
 				has_antags = 1
 				break
@@ -342,12 +343,12 @@ var/global/list/additional_antag_types = list()
 
 	sleep(2)
 
-	var/list/all_antag_types = GLOB.all_antag_types_
-	for(var/datum/antagonist/antag in antag_templates)
+	for(var/decl/special_role/antag in antag_templates)
 		antag.print_player_summary()
 		sleep(2)
+	var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
 	for(var/antag_type in all_antag_types)
-		var/datum/antagonist/antag = all_antag_types[antag_type]
+		var/decl/special_role/antag = all_antag_types[antag_type]
 		if(!antag.current_antagonists.len || (antag in antag_templates))
 			continue
 		sleep(2)
@@ -416,15 +417,15 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/check_win() //universal trigger to be called at mob death, nuke explosion, etc. To be called from everywhere.
 	return 0
 
-/datum/game_mode/proc/get_players_for_role(var/antag_id)
+/datum/game_mode/proc/get_players_for_role(var/antag_type)
 	var/list/players = list()
 	var/list/candidates = list()
 
-	var/list/all_antag_types = GLOB.all_antag_types_
-	var/datum/antagonist/antag_template = all_antag_types[antag_id]
+	var/decl/special_role/antag_template = decls_repository.get_decl(antag_type)
 	if(!antag_template)
 		return candidates
 
+	var/antag_id = lowertext(antag_template.name)
 	// If this is being called post-roundstart then it doesn't care about ready status.
 	if(GAME_STATE == RUNLEVEL_GAME)
 		for(var/mob/player in GLOB.player_list)
@@ -476,19 +477,17 @@ var/global/list/additional_antag_types = list()
 	if(!config.traitor_scaling)
 		antag_scaling_coeff = 0
 
-	var/list/all_antag_types = GLOB.all_antag_types_
-	if(antag_tags && antag_tags.len)
+	if(length(associated_antags))
 		antag_templates = list()
-		for(var/antag_tag in antag_tags)
-			var/datum/antagonist/antag = all_antag_types[antag_tag]
-			if(antag)
-				antag_templates |= antag
+		for(var/antag_type in associated_antags)
+			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
+			antag_templates |= antag
 
-	if(additional_antag_types && additional_antag_types.len)
+	if(length(global.additional_antag_types))
 		if(!antag_templates)
 			antag_templates = list()
-		for(var/antag_type in additional_antag_types)
-			var/datum/antagonist/antag = all_antag_types[antag_type]
+		for(var/antag_type in global.additional_antag_types)
+			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
 			if(antag)
 				antag_templates |= antag
 

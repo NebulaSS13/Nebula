@@ -34,18 +34,18 @@
 	. = list()
 	. += "<b>Special Role Availability:</b><br>"
 	. += "<table>"
-	var/list/all_antag_types = GLOB.all_antag_types_
+	var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
 	for(var/antag_type in all_antag_types)
-		var/datum/antagonist/antag = all_antag_types[antag_type]
-		. += "<tr><td>[antag.role_text]: </td><td>"
-		if(jobban_isbanned(preference_mob(), antag.id))
+		var/decl/special_role/antag = all_antag_types[antag_type]
+		. += "<tr><td>[antag.name]: </td><td>"
+		if(jobban_isbanned(preference_mob(), antag.type))
 			. += "<span class='danger'>\[BANNED\]</span><br>"
-		else if(antag.id in pref.be_special_role)
-			. += "<span class='linkOn'>High</span> <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> <a href='?src=\ref[src];del_special=[antag.id]'>Never</a></br>"
-		else if(antag.id in pref.may_be_special_role)
-			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> <span class='linkOn'>Low</span> <a href='?src=\ref[src];del_special=[antag.id]'>Never</a></br>"
+		else if(antag.type in pref.be_special_role)
+			. += "<span class='linkOn'>High</span> <a href='?src=\ref[src];add_maybe=\ref[antag]'>Low</a> <a href='?src=\ref[src];del_special=\ref[antag]'>Never</a></br>"
+		else if(antag.type in pref.may_be_special_role)
+			. += "<a href='?src=\ref[src];add_special=\ref[antag]'>High</a> <span class='linkOn'>Low</span> <a href='?src=\ref[src];del_special=\ref[antag]'>Never</a></br>"
 		else
-			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> <span class='linkOn'>Never</span></br>"
+			. += "<a href='?src=\ref[src];add_special=\ref[antag]'>High</a> <a href='?src=\ref[src];add_maybe=\ref[antag]'>Low</a> <span class='linkOn'>Never</span></br>"
 
 		. += "</td></tr>"
 	. += "</table>"
@@ -119,7 +119,8 @@
 /datum/category_item/player_setup_item/antagonism/candidacy/proc/valid_special_roles(var/include_bans = TRUE)
 	var/list/private_valid_special_roles = list()
 
-	for(var/antag_type in GLOB.all_antag_types_)
+	var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
+	for(var/antag_type in all_antag_types)
 		if(!include_bans)
 			if(jobban_isbanned(preference_mob(), antag_type))
 				continue

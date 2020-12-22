@@ -173,7 +173,7 @@
 	name = "wizard familiar"
 	pref_check = "ghost_wizard"
 	ghost_trap_message = "They are occupying a familiar now."
-	ban_checks = list(MODE_WIZARD)
+	ban_checks = list(/decl/special_role/wizard)
 
 /decl/ghosttrap/wizard_familiar/welcome_candidate(var/mob/target)
 	return 0
@@ -181,7 +181,7 @@
 /decl/ghosttrap/cult_shade
 	name = "shade"
 	ghost_trap_message = "They are occupying a soul stone now."
-	ban_checks = list(MODE_CULTIST, MODE_GODCULTIST)
+	ban_checks = list(/decl/special_role/cultist, /decl/special_role/godcultist)
 	pref_check = "ghost_shade"
 	can_set_own_name = FALSE
 
@@ -189,7 +189,8 @@
 	var/obj/item/soulstone/S = target.loc
 	if(istype(S))
 		if(S.is_evil)
-			GLOB.cult.add_antagonist(target.mind)
+			var/decl/special_role/cult = decls_repository.get_decl(/decl/special_role/cultist)
+			cult.add_antagonist(target.mind)
 			to_chat(target, "<b>Remember, you serve the one who summoned you first, and the cult second.</b>")
 		else
 			to_chat(target, "<b>This soultone has been purified. You do not belong to the cult.</b>")

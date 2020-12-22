@@ -1,28 +1,28 @@
-/datum/antagonist/proc/get_panel_entry(var/datum/mind/player)
+/decl/special_role/proc/get_panel_entry(var/datum/mind/player)
 
-	var/dat = "<tr><td><b>[role_text]:</b>"
+	var/dat = "<tr><td><b>[name]:</b>"
 	var/extra = get_extra_panel_options(player)
 	if(is_antagonist(player))
-		dat += "<a href='?src=\ref[player];remove_antagonist=[id]'>\[-\]</a>"
-		dat += "<a href='?src=\ref[player];equip_antagonist=[id]'>\[equip\]</a>"
+		dat += "<a href='?src=\ref[player];remove_antagonist=\ref[src]'>\[-\]</a>"
+		dat += "<a href='?src=\ref[player];equip_antagonist=\ref[src]'>\[equip\]</a>"
 		if(starting_locations && starting_locations.len)
-			dat += "<a href='?src=\ref[player];move_antag_to_spawn=[id]'>\[move to spawn\]</a>"
+			dat += "<a href='?src=\ref[player];move_antag_to_spawn=\ref[src]'>\[move to spawn\]</a>"
 		if(extra) dat += "[extra]"
 	else
-		dat += "<a href='?src=\ref[player];add_antagonist=[id]'>\[+\]</a>"
+		dat += "<a href='?src=\ref[player];add_antagonist=\ref[src]'>\[+\]</a>"
 	dat += "</td></tr>"
 
 	return dat
 
-/datum/antagonist/proc/get_extra_panel_options()
+/decl/special_role/proc/get_extra_panel_options()
 	return
 
-/datum/antagonist/proc/get_check_antag_output(var/datum/admins/caller)
+/decl/special_role/proc/get_check_antag_output(var/datum/admins/caller)
 
 	if(!current_antagonists || !current_antagonists.len)
 		return ""
 
-	var/dat = "<br><table cellspacing=5><tr><td><B>[role_text_plural]</B></td><td></td></tr>"
+	var/dat = "<br><table cellspacing=5><tr><td><B>[name_plural]</B></td><td></td></tr>"
 	for(var/datum/mind/player in current_antagonists)
 		var/mob/M = player.current
 		dat += "<tr>"
@@ -57,5 +57,5 @@
 	return dat
 
 //Overridden elsewhere.
-/datum/antagonist/proc/get_additional_check_antag_output(var/datum/admins/caller)
+/decl/special_role/proc/get_additional_check_antag_output(var/datum/admins/caller)
 	return ""

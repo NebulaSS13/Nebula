@@ -1,9 +1,6 @@
-GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
-
-/datum/antagonist/loyalists
-	id = MODE_LOYALIST
-	role_text = "Head Loyalist"
-	role_text_plural = "Loyalists"
+/decl/special_role/loyalist
+	name = "Head Loyalist"
+	name_plural = "Loyalists"
 	feedback_tag = "loyalist_objective"
 	antag_indicator = "hud_loyal_head"
 	victory_text = "The heads of staff remained at their posts! The loyalists win!"
@@ -19,7 +16,7 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 	initial_spawn_target = 4
 
 	// Inround loyalists.
-	faction_role_text = "Loyalist"
+	faction_name = "Loyalist"
 	faction_descriptor = "COMPANY"
 	faction_verb = /mob/living/proc/convert_to_loyalist
 	faction_indicator = "hud_loyal"
@@ -29,13 +26,13 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 
 	faction = "loyalist"
 
-/datum/antagonist/loyalists/Initialize()
-	..()
+/decl/special_role/loyalist/Initialize()
+	. = ..()
 	welcome_text = "You belong to the [GLOB.using_map.company_name], body and soul. Preserve its interests against the conspirators amongst the crew."
 	faction_welcome = "Preserve [GLOB.using_map.company_short]'s interests against the traitorous recidivists amongst the crew. Protect the heads of staff with your life."
 	faction_descriptor = "[GLOB.using_map.company_name]"
 
-/datum/antagonist/loyalists/create_global_objectives()
+/decl/special_role/loyalist/create_global_objectives()
 	if(!..())
 		return
 	global_objectives = list()

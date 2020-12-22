@@ -389,7 +389,7 @@
 
 		if(occupant.mind.objectives.len)
 			occupant.mind.objectives = null
-			occupant.mind.special_role = null
+			occupant.mind.assigned_special_role = null
 
 	// Delete them from datacore.
 	var/sanitized_name = occupant.real_name

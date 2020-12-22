@@ -121,7 +121,7 @@
 	self_recharge = 0
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/flash
-	required_antag_type = MODE_GODCULTIST
+	required_antag_type = /decl/special_role/godcultist
 
 /obj/item/sword/blazing
 	name = "blazing blade"

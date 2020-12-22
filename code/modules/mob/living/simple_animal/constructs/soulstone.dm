@@ -136,7 +136,8 @@
 		C.key = S.shade.key
 		//C.cancel_camera()
 		if(S.is_evil)
-			GLOB.cult.add_antagonist(C.mind)
+			var/decl/special_role/cult = decls_repository.get_decl(/decl/special_role/cultist)
+			cult.add_antagonist(C.mind)
 		qdel(S)
 		qdel(src)
 

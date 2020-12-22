@@ -4,11 +4,11 @@
 
 /datum/event/random_antag/start()
 	var/list/valid_types = list()
-
-	for(var/antag_type in GLOB.all_antag_types_)
-		var/datum/antagonist/antag = GLOB.all_antag_types_[antag_type]
+	var/all_antagonist_types = decls_repository.get_decls_of_subtype(/decl/special_role)
+	for(var/antag_type in all_antagonist_types)
+		var/decl/special_role/antag = all_antagonist_types[antag_type]
 		if(antag.flags & ANTAG_RANDSPAWN)
 			valid_types |= antag
 	if(valid_types.len)
-		var/datum/antagonist/antag = pick(valid_types)
+		var/decl/special_role/antag = pick(valid_types)
 		antag.attempt_random_spawn()

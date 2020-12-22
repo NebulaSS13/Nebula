@@ -125,7 +125,7 @@
 
 /datum/uplink_item/item/tools/teleporter/New()
 	..()
-	antag_roles = list(MODE_MERCENARY)
+	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/tools/ai_module
 	name = "Hacked AI Upload Module"
@@ -146,7 +146,7 @@
 	name = "Camera MIU"
 	desc = "Wearing this mask allows you to remotely view any cameras you currently have access to. Take the mask off to stop viewing."
 	item_cost = 60
-	antag_costs = list(MODE_MERCENARY = 30)
+	antag_costs = list(/decl/special_role/mercenary = 30)
 	path = /obj/item/clothing/mask/ai
 
 /datum/uplink_item/item/tools/interceptor

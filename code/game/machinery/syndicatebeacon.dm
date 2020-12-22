@@ -50,7 +50,7 @@
 			src.updateUsrDialog()
 			return
 		var/mob/M = locate(href_list["traitormob"])
-		if(M.mind.special_role || jobban_isbanned(M, MODE_TRAITOR))
+		if(M.mind.assigned_special_role || jobban_isbanned(M, /decl/special_role/traitor))
 			temptext = "<i>We have no need for you at this time. Have a pleasant day.</i><br>"
 			src.updateUsrDialog()
 			return
@@ -64,8 +64,9 @@
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/N = M
 			to_chat(M, "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>")
-			GLOB.traitors.add_antagonist(N.mind)
-			GLOB.traitors.equip(N)
+			var/decl/special_role/traitors = decls_repository.get_decl(/decl/special_role/traitor)
+			traitors.add_antagonist(N.mind)
+			traitors.equip(N)
 			log_and_message_admins("has accepted a traitor objective from a syndicate beacon.", M)
 
 

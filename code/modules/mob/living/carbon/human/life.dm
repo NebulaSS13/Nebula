@@ -1031,9 +1031,10 @@
 	if (BITTEST(hud_updateflag, SPECIALROLE_HUD))
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
-		if(mind && mind.special_role)
-			if(GLOB.hud_icon_reference[mind.special_role])
-				holder.icon_state = GLOB.hud_icon_reference[mind.special_role]
+		if(mind && mind.assigned_special_role)
+			var/special_role = mind.get_special_role_name()
+			if(special_role && GLOB.hud_icon_reference[special_role])
+				holder.icon_state = GLOB.hud_icon_reference[special_role]
 			else
 				holder.icon_state = "hudsyndicate"
 			hud_list[SPECIALROLE_HUD] = holder

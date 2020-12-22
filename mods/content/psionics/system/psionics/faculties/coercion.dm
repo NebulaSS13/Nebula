@@ -155,7 +155,8 @@
 		if(!target.mind || !target.key)
 			to_chat(user, "<span class='warning'>\The [target] is mindless!</span>")
 			return TRUE
-		if(GLOB.thralls.is_antagonist(target.mind))
+		var/decl/special_role/thrall/thralls = decls_repository.get_decl(/decl/special_role/thrall)
+		if(thralls.is_antagonist(target.mind))
 			to_chat(user, "<span class='warning'>\The [target] is already in thrall to someone!</span>")
 			return TRUE
 		user.visible_message("<span class='danger'><i>\The [user] seizes the head of \the [target] in both hands...</i></span>")
@@ -166,7 +167,7 @@
 			return TRUE
 		to_chat(user, "<span class='danger'>You sear through \the [target]'s neurons, reshaping as you see fit and leaving them subservient to your will!</span>")
 		to_chat(target, "<span class='danger'>Your defenses have eroded away and \the [user] has made you their mindslave.</span>")
-		GLOB.thralls.add_antagonist(target.mind, new_controller = user)
+		thralls.add_antagonist(target.mind, new_controller = user)
 		return TRUE
 
 /decl/psionic_power/coercion/assay

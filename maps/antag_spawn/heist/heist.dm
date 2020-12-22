@@ -1,12 +1,12 @@
 #include "heist_antag.dm"
 
 // This is here so the compiler stops bitching about override preceding definition.
-/datum/antagonist/raider/proc/check_special_species(var/mob/living/carbon/human/player)
+/decl/special_role/raider/proc/check_special_species(var/mob/living/carbon/human/player)
 	return FALSE
 
 /datum/map_template/ruin/antag_spawn/heist
 	name = "Heist Base"
-	id = MODE_RAIDER + "_spawn"
+	id = "heist_spawn"
 	suffixes = list("heist/heist_base.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/skipjack)
 	apc_test_exempt_areas = list(

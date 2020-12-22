@@ -6,5 +6,8 @@
 	required_players = 15
 	required_enemies = 5
 	end_on_antag_death = FALSE
-	antag_tags = list(MODE_CHANGELING, MODE_TRAITOR)
+	associated_antags = list(
+		/decl/special_role/changeling,
+		/decl/special_role/traitor
+	)
 	require_all_templates = TRUE

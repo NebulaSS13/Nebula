@@ -20,6 +20,9 @@ var/jobban_keylist[0]		//to store the keys & ranks
 //returns a reason if M is banned from rank, returns 0 otherwise
 /proc/jobban_isbanned(mob/M, rank)
 	if(M && rank)
+		if(ispath(rank, /decl/special_role))
+			var/decl/special_role/antag = decls_repository.get_decl(rank)
+			rank = antag.name
 		if (SSjobs.guest_jobbans(rank))
 			if(config.guest_jobban && IsGuestKey(M.key))
 				return "Guest Job-ban"

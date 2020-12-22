@@ -129,7 +129,8 @@
 		for(var/s in possible_forms[looking_for]["spells"])
 			var/spell/S = new s
 			H.add_spell(S)
-		GLOB.godcult.add_antagonist_mind(H.mind, 1, "[looking_for] of [linked_god]", "You are a powerful entity in the service to \the [linked_god]. [possible_forms[looking_for]["species"]]", specific_god = linked_god)
+		var/decl/special_role/godcultist/godcult = decls_repository.get_decl(/decl/special_role/godcultist)
+		godcult.add_antagonist_mind(H.mind, 1, "[looking_for] of [linked_god]", "You are a powerful entity in the service to \the [linked_god]. [possible_forms[looking_for]["species"]]", specific_god = linked_god)
 		stop_looking_for(TRUE)
 
 		return TOPIC_HANDLED

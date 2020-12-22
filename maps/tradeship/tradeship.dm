@@ -1,15 +1,13 @@
 #if !defined(USING_MAP_DATUM)
 
-	#include "../antag_spawn/heist/heist.dm"
-
-	#include "../../mods/content/corporate/_corporate.dme"
-	#include "../../mods/species/utility_frames/_utility_frames.dme"
 
 	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"
 
 	#include "../../mods/content/government/away_sites/icarus/icarus.dm"
 	#include "../../mods/content/government/ruins/ec_old_crash/ec_old_crash.dm"
+	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/content/corporate/away_sites/lar_maria/lar_maria.dm"
+	#include "../../mods/species/utility_frames/_utility_frames.dme"
 	#include "../../mods/species/ascent/away_sites/ascent/ascent.dm"
 
 	#include "../away/bearcat/bearcat.dm"

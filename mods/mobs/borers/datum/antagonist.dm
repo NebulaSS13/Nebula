@@ -1,9 +1,6 @@
-GLOBAL_DATUM_INIT(borers, /datum/antagonist/borer, new)
-
-/datum/antagonist/borer
-	id = MODE_BORER
-	role_text = "Cortical Borer"
-	role_text_plural = "Cortical Borers"
+/decl/special_role/borer
+	name = "Cortical Borer"
+	name_plural = "Cortical Borers"
 	flags = ANTAG_OVERRIDE_MOB | ANTAG_RANDSPAWN | ANTAG_OVERRIDE_JOB
 
 	mob_path = /mob/living/simple_animal/borer
@@ -11,7 +8,7 @@ GLOBAL_DATUM_INIT(borers, /datum/antagonist/borer, new)
 	antag_indicator = "hudborer"
 	antaghud_indicator = "hudborer"
 
-	faction_role_text = "Borer Thrall"
+	faction_name = "Borer Thrall"
 	faction_descriptor = "Unity"
 	faction_welcome = "You are now a thrall to a cortical borer. Please listen to what they have to say; they're in your head."
 	faction = "borer"
@@ -25,17 +22,17 @@ GLOBAL_DATUM_INIT(borers, /datum/antagonist/borer, new)
 	spawn_announcement_title = "Lifesign Alert"
 	spawn_announcement_delay = 5000
 
-/datum/antagonist/borer/get_extra_panel_options(var/datum/mind/player)
+/decl/special_role/borer/get_extra_panel_options(var/datum/mind/player)
 	return "<a href='?src=\ref[src];move_to_spawn=\ref[player.current]'>\[put in host\]</a>"
 
-/datum/antagonist/borer/create_objectives(var/datum/mind/player)
+/decl/special_role/borer/create_objectives(var/datum/mind/player)
 	if(!..())
 		return
 	player.objectives += new /datum/objective/borer_survive()
 	player.objectives += new /datum/objective/borer_reproduce()
 	player.objectives += new /datum/objective/escape()
 
-/datum/antagonist/borer/place_mob(var/mob/living/mob)
+/decl/special_role/borer/place_mob(var/mob/living/mob)
 	var/mob/living/simple_animal/borer/borer = mob
 	if(istype(borer))
 		var/mob/living/carbon/human/host
@@ -58,10 +55,10 @@ GLOBAL_DATUM_INIT(borers, /datum/antagonist/borer, new)
 				return
 	..() // Place them at a vent if they can't get a host.
 
-/datum/antagonist/borer/Initialize()
+/decl/special_role/borer/Initialize()
+	. = ..()
 	spawn_announcement = replacetext(GLOB.using_map.unidentified_lifesigns_message, "%STATION_NAME%", station_name())
 	spawn_announcement_sound = GLOB.using_map.lifesign_spawn_sound
-	..()
 
-/datum/antagonist/borer/attempt_random_spawn()
+/decl/special_role/borer/attempt_random_spawn()
 	if(config.aliens_allowed) ..()
