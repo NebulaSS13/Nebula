@@ -6,8 +6,8 @@ Now poorly imported for Nebula!
 
 #if !defined(USING_MAP_DATUM)
 
-	#include "../../mods/corporate/_corporate.dme"
-	#include "../../mods/ascent/_ascent.dme"
+	#include "../../mods/content/corporate/_corporate.dme"
+	#include "../../mods/species/ascent/_ascent.dme"
 
 	#define USING_MAP_DATUM /datum/map/ministation
 
