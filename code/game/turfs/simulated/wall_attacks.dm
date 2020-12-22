@@ -350,20 +350,20 @@
 	
 	user.do_attack_animation(src)
 	if(W.force < 5)
-		visible_message(SPAN_DANGER("\The [user] attacks \the [src] with \the [W], but it has no effect!"))
+		visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W], but it had no effect!"))
 		playsound(src, hitsound, 25, 1)
 		return
 	// Check for a glancing blow.
 	var/dam_prob = max(0, 100 - material.hardness + W.force)
 	if(!prob(dam_prob))
-		visible_message(SPAN_DANGER("\The [user] attacks \the [src] with \the [W], but it bounces off!"))
+		visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W], but it bounced off!"))
 		playsound(src, hitsound, 25, 1)
-		if(user.skill_fail_prob(SKILL_HAULING, 40))
+		if(user.skill_fail_prob(SKILL_HAULING, 40, SKILL_ADEPT))
 			user.Weaken(2)
 			visible_message(SPAN_DANGER("\The [user] is knocked back by the force of the blow!"))
 		return
 
 	playsound(src, 'sound/effects/metalhit.ogg', 50, 1)
-	visible_message(SPAN_DANGER("\The [user] attacks \the [src] with \the [W]!"))
+	visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W]!"))
 	take_damage(10)
 	return TRUE
