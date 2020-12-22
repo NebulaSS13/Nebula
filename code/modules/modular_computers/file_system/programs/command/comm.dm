@@ -11,7 +11,7 @@
 	program_menu_icon = "flag"
 	nanomodule_path = /datum/nano_module/program/comm
 	extended_desc = "Used to command and control. Can relay long-range communications. This program can not be run on tablet computers."
-	required_access = access_bridge
+	required_access = list(access_bridge)
 	requires_network = 1
 	size = 12
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
@@ -109,7 +109,7 @@
 
 /datum/nano_module/program/comm/proc/is_autenthicated(var/mob/user)
 	if(program)
-		return program.can_run(user)
+		return program.can_run(user, program.computer.get_network())
 	return 1
 
 /datum/nano_module/program/comm/proc/obtain_message_listener()

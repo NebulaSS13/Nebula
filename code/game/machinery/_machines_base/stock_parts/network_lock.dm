@@ -83,15 +83,15 @@
 		return
 	data["connected"] = TRUE
 	data["default_state"] = auto_deny_all
-	var/list/grants = list()
+	var/list/grants_data = list()
 	if(!network.access_controller)
 		return
 	for(var/datum/computer_file/data/grant_record/GR in network.access_controller.get_all_grants())
-		grants.Add(list(list(
+		grants_data.Add(list(list(
 			"grant_name" = GR.stored_data,
 			"assigned" = (GR.stored_data in grants)
 		)))
-	data["grants"] = grants
+	data["grants"] = grants_data
 
 /obj/item/stock_parts/network_lock/OnTopic(mob/user, href_list, datum/topic_state/state)
 	. = ..()

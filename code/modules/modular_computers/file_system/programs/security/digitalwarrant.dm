@@ -10,7 +10,7 @@ GLOBAL_LIST(all_warrants)
 	program_menu_icon = "star"
 	requires_network = 1
 	available_on_network = 1
-	required_access = access_security
+	required_access = list(access_security)
 	nanomodule_path = /datum/nano_module/program/digitalwarrant/
 	category = PROG_SEC
 

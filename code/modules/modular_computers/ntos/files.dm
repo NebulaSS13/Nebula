@@ -112,7 +112,7 @@
 
 /datum/file_storage/proc/get_file(filename)
 
-/datum/file_storage/proc/store_file(datum/computer_file/F)
+/datum/file_storage/proc/store_file(datum/computer_file/F, copied)
 
 /datum/file_storage/proc/save_file(filename, new_data)
 
@@ -167,9 +167,10 @@
 	var/datum/extension/network_device/mainframe/M = get_mainframe()
 	return M && M.get_file(filename)
 
-/datum/file_storage/network/store_file(datum/computer_file/F)
+/datum/file_storage/network/store_file(datum/computer_file/F, copied)
+	var/datum/computer_file/stored = copied ? F.clone() : F
 	var/datum/extension/network_device/mainframe/M = get_mainframe()
-	return M && M.store_file(F)
+	return M && M.store_file(stored)
 
 /datum/file_storage/network/delete_file(filename)
 	var/datum/extension/network_device/mainframe/M = get_mainframe()
@@ -246,10 +247,11 @@
 		return FALSE
 	return os.get_file(filename, get_disk())
 
-/datum/file_storage/disk/store_file(datum/computer_file/F)
+/datum/file_storage/disk/store_file(datum/computer_file/F, copied)
+	var/datum/computer_file/stored = copied ? F.clone() : F
 	if(check_errors())
 		return FALSE
-	return os.store_file(F, get_disk())
+	return os.store_file(stored, get_disk())
 
 /datum/file_storage/disk/save_file(filename, new_data)
 	if(check_errors())
@@ -272,7 +274,7 @@
 
 /datum/file_storage/disk/removable/get_disk()
 	var/obj/item/stock_parts/computer/drive_slot/drive_slot = os.get_component(PART_D_SLOT)
-	return drive_slot.stored_drive
+	return drive_slot?.stored_drive
 
 /datum/file_storage/disk/removable/check_errors()
 	. = ..()
@@ -287,25 +289,27 @@
 
 // Datum tracking progress between of file transfer between two file streams
 /datum/file_transfer
-	var/datum/file_storage/copying_from
-	var/datum/file_storage/copying_to
-	var/datum/computer_file/copying
-	var/left_to_copy
+	var/datum/file_storage/transfer_from
+	var/datum/file_storage/transfer_to
+	var/datum/computer_file/transferring
+	var/left_to_transfer
+	var/copying = FALSE // Whether or not this file transfer is copying, rather than transferring.
 
-/datum/file_transfer/New(datum/file_storage/source, datum/file_storage/destination, datum/computer_file/file)
-	copying_from = source
-	copying_to = destination
-	copying = file
-	left_to_copy = file.size
+/datum/file_transfer/New(datum/file_storage/source, datum/file_storage/destination, datum/computer_file/file, copy)
+	transfer_from = source
+	transfer_to = destination
+	transferring = file
+	left_to_transfer = file.size
+	copying = copy
 
 /datum/file_transfer/Destroy()
-	copying_from = null
-	copying_to = null
-	copying = null
+	transfer_from = null
+	transfer_to = null
+	transferring = null
 	. = ..()
 
 /datum/file_transfer/proc/check_self()
-	if(QDELETED(copying_from) || QDELETED(copying_from) || QDELETED(copying))
+	if(QDELETED(transfer_from) || QDELETED(transfer_from) || QDELETED(transferring))
 		qdel(src)
 		return FALSE
 	return TRUE
@@ -315,27 +319,35 @@
 	. = check_self()
 	if(!.)
 		return
-	left_to_copy = max(0, left_to_copy - get_transfer_speed())
-	if(!left_to_copy)
-		return copying_to.store_file(copying)
+	left_to_transfer = max(0, left_to_transfer - get_transfer_speed())
+	if(!left_to_transfer)
+		if(copying)
+			return transfer_to.store_file(transferring, TRUE)
+		else
+			. = transfer_from.delete_file(transferring.filename) // Check if we can delete the file.
+			if(.)
+				. = transfer_to.store_file(transferring, FALSE)
+				// If we failed to store the file, restore it to its former location.
+				if(!.)
+					transfer_from.store_file(transferring, FALSE)
 
 /datum/file_transfer/proc/get_transfer_speed()
 	if(!check_self())
 		return 0
-	return min(copying_from.get_transfer_speed(), copying_to.get_transfer_speed())
+	return min(transfer_from.get_transfer_speed(), transfer_to.get_transfer_speed())
 
 /datum/file_transfer/proc/get_eta()
 	if(!check_self() || !get_transfer_speed())
 		return INFINITY
-	return round(left_to_copy / get_transfer_speed())
+	return round(left_to_transfer / get_transfer_speed())
 
 /datum/file_transfer/proc/get_ui_data()
 	if(!check_self())
 		return
 	var/list/data = list()
-	data["transfer_from"] = copying_from.name
-	data["transfer_to"] = copying_to.name
-	data["transfer_file"] = copying.filename
-	data["transfer_progress"] = copying.size - left_to_copy
-	data["transfer_total"] = copying.size
+	data["transfer_from"] = transfer_from.name
+	data["transfer_to"] = transfer_to.name
+	data["transfer_file"] = transferring.filename
+	data["transfer_progress"] = transferring.size - left_to_transfer
+	data["transfer_total"] = transferring.size
 	return data

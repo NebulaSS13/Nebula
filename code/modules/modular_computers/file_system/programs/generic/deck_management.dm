@@ -7,6 +7,7 @@
 	filename = "deckmngr"
 	filedesc = "Deck Management"
 	nanomodule_path = /datum/nano_module/deck_management
+	required_access = list(list(access_cargo, access_bridge))
 	program_icon_state = "request"
 	program_key_state = "rd_key"
 	program_menu_icon = "clock"
@@ -25,8 +26,6 @@
 	var/datum/computer_file/report/selected_report   //A report being viewed/edited.
 	var/list/report_prototypes = list()              //Stores report prototypes to use for UI purposes.
 	var/datum/shuttle/prototype_shuttle              //The shuttle for which the prototypes were built (to avoid excessive prototype rebuilding)
-	//The default access needed to properly use. Should be set in map files.
-	var/default_access = list(access_cargo, access_bridge)  //The format is (needs one of list(these access constants or lists of access constants))
 
 /datum/nano_module/deck_management/New()
 	..()
@@ -45,7 +44,6 @@
 	var/logs = SSshuttle.shuttle_logs
 
 	data["prog_state"] = prog_state
-	data["default_access"] = get_default_access(user)
 
 	switch(prog_state)
 		if(DECK_HOME)
@@ -171,11 +169,6 @@
 			mission_data["queued"] = 1
 	return mission_data
 
-/datum/nano_module/deck_management/proc/get_default_access(mob/user)
-	for(var/access_pattern in default_access)
-		if(check_access(user, access_pattern))
-			return 1
-
 /datum/nano_module/deck_management/proc/get_shuttle_access(mob/user, datum/shuttle/shuttle)
 	return shuttle.logging_access ? (check_access(user, shuttle.logging_access) || check_access(user, access_bridge)) : 0
 
@@ -211,8 +204,6 @@
 	if(..())
 		return 1
 
-	if(!get_default_access(user))
-		return 1 //No program access if you don't have the right access.
 	if(text2num(href_list["warning"])) //Gives the user a chance to avoid losing unsaved reports.
 		if(alert(user, "Are you sure you want to do this? Data may be lost.",, "Yes.", "No.") == "No.")
 			return 1 //If yes, proceed to the actual action instead.

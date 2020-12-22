@@ -1,11 +1,3 @@
-<div class='notice'>
-	You 
-	{{if !data.default_access}}
-		do not 
-	{{/if}}
-	have program access.
-</div>
-{{if data.default_access}}<!--Suppressed indentation.-->
 {{if data.prog_state == 1}}<!--DECK_HOME-->
 	<h2>Shuttles:</h2>
 	{{for data.shuttles}}
@@ -278,5 +270,4 @@
 			</div>
 		</div>
 	{{/if}}
-{{/if}}
 {{/if}}

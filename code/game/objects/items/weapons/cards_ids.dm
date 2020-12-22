@@ -462,6 +462,11 @@ var/const/NO_EMAG_ACT = -50
 		to_chat(usr, SPAN_WARNING("Pressing the synchronization button on the card causes a red LED to flash three times."))
 
 /obj/item/card/id/network/proc/refresh_access_record(var/datum/computer_network/network)
+	if(!network)
+		var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+		network = D.get_network()
+	if(!network)
+		return
 	for(var/datum/extension/network_device/mainframe/mainframe in network.get_mainframes_by_role(MF_ROLE_CREW_RECORDS))
 		for(var/datum/computer_file/report/crew_record/ar in mainframe.get_all_files())
 			if(ar.user_id != user_id)

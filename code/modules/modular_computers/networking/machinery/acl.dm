@@ -13,6 +13,7 @@
 	// Datum file source for where grants/records are.
 	var/datum/file_storage/network/file_source = /datum/file_storage/network/machine
 	var/editing_user	// Numerical user ID of the user being editing on this device.
+	var/editing_program // Name of current program being edited.
 	var/list/initial_grants  //defaults to all possible station accesses if left null
 
 /obj/machinery/network/acl/merchant
@@ -67,6 +68,7 @@
 
 	if(href_list["back"])
 		editing_user = null
+		editing_program = null
 		return TOPIC_REFRESH
 
 	if(href_list["change_file_server"])
@@ -82,18 +84,43 @@
 		if(!grant)
 			error = "ERROR: Grant record not found."
 			return TOPIC_REFRESH
-		var/datum/computer_file/report/crew_record/AR = get_access_record()
-		if(!AR)
-			error = "ERROR: Access record not found."
+		if(editing_user)
+			var/datum/computer_file/report/crew_record/AR = get_access_record()
+			if(!AR)
+				error = "ERROR: Access record not found."
+				return TOPIC_REFRESH
+			AR.add_grant(grant)
+		else if(editing_program)
+			var/list/program_access = computer.program_access[editing_program]
+			program_access |= grant.stored_data
 			return TOPIC_REFRESH
-		AR.add_grant(grant)
 
 	if(href_list["remove_grant"])
-		var/datum/computer_file/report/crew_record/AR = get_access_record()
-		if(!AR)
-			error = "ERROR: Access record not found."
+		if(editing_user)
+			var/datum/computer_file/report/crew_record/AR = get_access_record()
+			if(!AR)
+				error = "ERROR: Access record not found."
+				return TOPIC_REFRESH
+			AR.remove_grant(href_list["remove_grant"]) // Add the grant to the record.
+		if(editing_program)
+			var/datum/computer_file/data/grant_record/grant = computer.get_grant(href_list["remove_grant"])
+			if(!grant)
+				error = "ERROR: Grant record not found."
+				return TOPIC_REFRESH
+			var/list/program_access = computer.program_access[editing_program]
+			program_access -= grant.stored_data
 			return TOPIC_REFRESH
-		AR.remove_grant(href_list["remove_grant"]) // Add the grant to the record.
+
+	if(href_list["clear_program_access"])
+		if(editing_program)
+			computer.program_access[editing_program] = list()
+		else
+			error = "ERROR: Program not found."
+		return TOPIC_REFRESH
+
+	if(href_list["toggle_program_control"])
+		computer.program_control = !computer.program_control
+		return TOPIC_REFRESH
 
 	if(href_list["create_grant"])
 		var/new_grant_name = uppertext(sanitize(input(usr, "Enter the name of the new grant:", "Create Grant")))
@@ -112,6 +139,18 @@
 
 	if(href_list["view_user"])
 		editing_user = href_list["view_user"]
+		editing_program = null
+		return TOPIC_REFRESH
+
+	if(href_list["view_program"])
+		var/prog = href_list["view_program"]
+		var/list/programs = computer.program_access
+		if(!(prog in programs))
+			error = "ERROR: Program not found."
+			return TOPIC_REFRESH
+		editing_program = prog
+		editing_user = null
+		return TOPIC_REFRESH
 
 	if(href_list["write_id"])
 		var/obj/item/stock_parts/computer/card_slot/card_slot = get_component_of_type(/obj/item/stock_parts/computer/card_slot)
@@ -162,6 +201,7 @@
 	.["connected"] = TRUE
 	.["file_server"] = file_source.server
 	.["editing_user"] = editing_user
+	.["editing_program"] = editing_program
 
 	// Let's build some data.
 	if(editing_user)
@@ -185,6 +225,17 @@
 				"assigned" = (GR in assigned_grants)
 			)))
 		.["grants"] = grants
+	else if(editing_program) // Editing program access.
+		.["program_name"] = editing_program
+		var/list/program_access = computer.program_access[editing_program]
+		var/list/grants[0]
+		.["cleared_control"] = !length(program_access)
+		for(var/datum/computer_file/data/grant_record/GR in computer.get_all_grants())
+			grants.Add(list(list(
+				"grant_name" = GR.stored_data,
+				"assigned" = (GR.stored_data in program_access)
+			)))
+		.["grants"] = grants
 	else
 		// We're looking at all records. Or lack thereof.
 		var/list/users[0]
@@ -196,6 +247,14 @@
 				"size" = AR.size
 			)))
 		.["users"] = users
+		var/list/programs[0]
+		.["program_control"] = computer.program_control
+		for(var/prog_name in computer.program_access)
+			programs.Add(list(list(
+				"name" = prog_name,
+				"grants" = length(computer.program_access[prog_name])
+			)))
+		.["programs"] = programs
 
 /obj/machinery/network/acl/proc/get_all_users()
 	var/list/users = list()

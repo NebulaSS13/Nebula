@@ -47,9 +47,3 @@
 		var/datum/extension/network_device/mainframe/M = get_extension(src, /datum/extension/network_device)
 		M.toggle_role(href_list["toggle_role"])
 		return TOPIC_REFRESH
-	
-/obj/machinery/network/mainframe/on_update_icon()
-	if(operable())
-		icon_state = "blackbox"
-	else
-		icon_state = "blackbox_off"

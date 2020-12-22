@@ -8,7 +8,7 @@
 	program_menu_icon = "locked"
 	requires_network = 1
 	available_on_network = 1
-	required_access = access_armory
+	required_access = list(access_armory)
 	nanomodule_path = /datum/nano_module/program/forceauthorization/
 	category = PROG_SEC
 

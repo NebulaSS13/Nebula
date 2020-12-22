@@ -51,7 +51,7 @@
 					{{:helper.link('DELETE', null, { "PRG_deletefile" : value.name }, value.undeletable ? 'disabled' : null)}}
 					{{:helper.link('RENAME', null, { "PRG_rename" : value.name }, value.undeletable ? 'disabled' : null)}}
 					{{:helper.link('CLONE', null, { "PRG_clone" : value.name }, value.undeletable ? 'disabled' : null)}}
-					{{:helper.link('COPY TO', null, { "PRG_copyto" : value.name }, value.undeletable ? 'disabled' : null)}}
+					{{:helper.link('TRANSFER TO', null, { "PRG_transferto" : value.name }, value.unsendable ? 'disabled' : null)}}
 			{{/for}}
 		</table>
 		{{if data.usbconnected}}
