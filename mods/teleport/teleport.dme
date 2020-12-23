@@ -1,0 +1,6 @@
+#ifndef MODPACK_TELEPORT
+#define MODPACK_TELEPORT
+#include "_teleport.dm"
+#include "realm.dm"
+#include "items.dm"
+#endif

@@ -12,6 +12,7 @@
 	#include "..\..\mods\modern_earth\_modern_earth.dme"
 	#include "..\..\mods\dionaea\_dionaea.dme"
 	#include "..\..\mods\utility_frames\_utility_frames.dme"
+	#include "..\..\mods\teleport\_teleport.dme"
 
 	#define USING_MAP_DATUM /datum/map/modpack_testing
 
