@@ -339,7 +339,7 @@
 		return TRUE
 
 	// Attack the wall with items
-	if(istype(W,/obj/item/rcd) || !istype(W, /obj/item/chems))
+	if(istype(W,/obj/item/rcd) || istype(W, /obj/item/chems))
 		return
 	if(!W.force)
 		return
@@ -347,18 +347,23 @@
 		var/mob/living/L = user
 		if(L.a_intent == I_HELP)
 			return
-	var/dam_threshhold = material.integrity
-	if(reinf_material)
-		dam_threshhold = ceil(max(dam_threshhold,reinf_material.integrity)/2)
-	var/dam_prob = min(100,material.hardness*1.5)
-	if(dam_prob < 100 && W.force > (dam_threshhold/10))
-		playsound(src, 'sound/effects/metalhit.ogg', 50, 1)
-		if(!prob(dam_prob))
-			visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W] and it [material.destruction_desc]!</span>")
-			dismantle_wall(1)
-		else
-			visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W]!</span>")
-	else
-		visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W], but it bounces off!</span>")
+	
+	user.do_attack_animation(src)
+	if(W.force < 5)
+		visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W], but it had no effect!"))
 		playsound(src, hitsound, 25, 1)
+		return
+	// Check for a glancing blow.
+	var/dam_prob = max(0, 100 - material.hardness + W.force)
+	if(!prob(dam_prob))
+		visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W], but it bounced off!"))
+		playsound(src, hitsound, 25, 1)
+		if(user.skill_fail_prob(SKILL_HAULING, 40, SKILL_ADEPT))
+			user.Weaken(2)
+			visible_message(SPAN_DANGER("\The [user] is knocked back by the force of the blow!"))
+		return
+
+	playsound(src, 'sound/effects/metalhit.ogg', 50, 1)
+	visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W]!"))
+	take_damage(10)
 	return TRUE

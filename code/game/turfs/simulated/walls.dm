@@ -198,7 +198,7 @@ var/list/wall_noblend_objects = list(
 		cap = cap / 10
 
 	if(damage >= cap)
-		dismantle_wall()
+		dismantle_wall(1)
 	else
 		update_icon()
 
