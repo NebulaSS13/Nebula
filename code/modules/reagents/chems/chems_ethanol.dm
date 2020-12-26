@@ -42,13 +42,18 @@
 	M.add_chemical_effect(CE_ALCOHOL_TOXIC, alcohol_toxicity)
 
 /decl/material/liquid/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-
 	..()
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	M.adjust_nutrition(nutriment_factor * removed)
 	M.adjust_hydration(hydration_factor * removed)
-	M.add_chemical_effect(CE_ALCOHOL, 1)
 
-	var/effective_dose = M.chem_doses[type] * (1 + REAGENT_VOLUME(holder, type)/60) //drinking a LOT will make you go down faster
+	M.add_chemical_effect(CE_ALCOHOL, 1)
+	var/strength_mod = (M.GetTraitLevel(/decl/trait/malus/ethanol) * 2.5) || 1
+
+	var/effective_dose = M.chem_doses[type] * strength_mod * (1 + REAGENT_VOLUME(holder, type)/60) //drinking a LOT will make you go down faster
 	if(effective_dose >= strength) // Early warning
 		M.make_dizzy(6) // It is decreased at the speed of 3 per tick
 	if(effective_dose >= strength * 2) // Slurring
@@ -117,6 +122,9 @@
 
 /decl/material/liquid/ethanol/beer/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	M.jitteriness = max(M.jitteriness - 3, 0)
 
 /decl/material/liquid/ethanol/bluecuracao
@@ -157,6 +165,10 @@
 
 /decl/material/liquid/ethanol/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	M.dizziness = max(0, M.dizziness - 5)
 	M.drowsyness = max(0, M.drowsyness - 3)
 	M.sleeping = max(0, M.sleeping - 2)
@@ -231,8 +243,12 @@
 
 /decl/material/liquid/ethanol/thirteenloko/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	M.drowsyness = max(0, M.drowsyness - 7)
-	if (M.bodytemperature > 310)
+	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 	M.make_jittery(5)
 	M.add_chemical_effect(CE_PULSE, 2)
@@ -359,6 +375,10 @@
 
 /decl/material/liquid/ethanol/pwine/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	if(M.chem_doses[type] > 30)
 		M.adjustToxLoss(2 * removed)
 	if(M.chem_doses[type] > 60 && ishuman(M) && prob(5))

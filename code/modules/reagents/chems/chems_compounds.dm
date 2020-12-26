@@ -93,6 +93,11 @@
 	M.adjustToxLoss(0.5 * removed)
 
 /decl/material/liquid/capsaicin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!H.can_feel_pain())
@@ -105,9 +110,9 @@
 		if(prob(5))
 			M.custom_emote(2, "[pick("dry heaves!","coughs!","splutters!")]")
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
+
 	if(istype(M, /mob/living/carbon/slime))
 		M.bodytemperature += rand(0, 15) + slime_temp_adj
-	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
 
 /decl/material/liquid/capsaicin/condensed
 	name = "condensed capsaicin"
@@ -182,6 +187,11 @@
 			M.Stun(3)
 
 /decl/material/liquid/capsaicin/condensed/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!H.can_feel_pain())
@@ -194,9 +204,9 @@
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 			M.custom_emote(2, "[pick("coughs.","gags.","retches.")]")
 			M.Stun(2)
+
 	if(istype(M, /mob/living/carbon/slime))
 		M.bodytemperature += rand(15, 30)
-	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
 
 /decl/material/liquid/mutagenics
 	name = "mutagenics"
