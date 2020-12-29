@@ -120,3 +120,11 @@
 		D.connect()
 	else
 		D.disconnect()
+
+/obj/machinery/network/proc/get_message_server()
+	var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
+	var/datum/computer_network/network = network_device?.get_network()
+	for(var/datum/extension/network_device/message_server in network?.devices)
+		var/obj/machinery/network/message_server/MS = message_server.holder
+		if(istype(MS) && !(MS.stat & (BROKEN|NOPOWER)))
+			return MS

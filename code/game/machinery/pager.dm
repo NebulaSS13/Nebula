@@ -1,4 +1,4 @@
-/obj/machinery/pager
+/obj/machinery/network/pager
 	name = "departmental pager button"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "doorbell"
@@ -10,16 +10,16 @@
 	var/department = DEPT_COMMAND
 	var/location
 
-/obj/machinery/pager/Initialize()
+/obj/machinery/network/pager/Initialize()
 	. = ..()
 	if(!location)
 		var/area/A = get_area(src)
 		location = A.name
 
-/obj/machinery/pager/attackby(obj/item/W, mob/user)
+/obj/machinery/network/pager/attackby(obj/item/W, mob/user)
 	return attack_hand(user)
 
-/obj/machinery/pager/interface_interact(mob/living/user)
+/obj/machinery/network/pager/interface_interact(mob/living/user)
 	if(!CanInteract(user, GLOB.default_state))
 		return FALSE
 	playsound(src, "button", 60)
@@ -27,10 +27,10 @@
 	activate(user)
 	return TRUE
 
-/obj/machinery/pager/proc/activate(mob/living/user)
+/obj/machinery/network/pager/proc/activate(mob/living/user)
 	if(!powered())
 		return
-	var/obj/machinery/message_server/MS = get_message_server(z)
+	var/obj/machinery/network/message_server/MS = get_message_server(z)
 	if(!MS)
 		return
 	if(world.time < last_paged + 5 SECONDS)
@@ -44,7 +44,7 @@
 	else
 		to_chat(user,"<span class='warning'>No valid destinations were found for the page.</span>")
 
-/obj/machinery/pager/Topic(href, href_list)
+/obj/machinery/network/pager/Topic(href, href_list)
 	if(..())
 		return 1
 	if(!powered())
@@ -53,22 +53,22 @@
 		playsound(src, 'sound/machines/ping.ogg', 60)
 		visible_message("<span class='notice'>Page acknowledged.</span>")
 		acknowledged = 1
-		var/obj/machinery/message_server/MS = get_message_server(z)
+		var/obj/machinery/network/message_server/MS = get_message_server(z)
 		if(!MS)
 			return
 		MS.send_to_department(department,"Page to <b>[location]</b> was acknowledged.", "*ack*")
 
-/obj/machinery/pager/medical
+/obj/machinery/network/pager/medical
 	department = DEPT_MEDICAL
 
-/obj/machinery/pager/cargo 
+/obj/machinery/network/pager/cargo 
 	department = DEPT_SUPPLY
 
-/obj/machinery/pager/security 
+/obj/machinery/network/pager/security 
 	department = DEPT_SECURITY
 
-/obj/machinery/pager/science
+/obj/machinery/network/pager/science
 	department = DEPT_SCIENCE
 
-/obj/machinery/pager/engineering
+/obj/machinery/network/pager/engineering
 	department = DEPT_ENGINEERING

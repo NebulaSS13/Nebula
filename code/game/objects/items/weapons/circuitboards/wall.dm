@@ -53,7 +53,7 @@
 
 /obj/item/stock_parts/circuitboard/requests_console
 	name = T_BOARD("requests console")
-	build_path = /obj/machinery/requests_console
+	build_path = /obj/machinery/network/requests_console
 	board_type = "wall"
 	origin_tech = "{'programming':1,'engineering':1}"
 	req_components = list()

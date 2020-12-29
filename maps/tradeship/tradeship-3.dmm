@@ -921,7 +921,7 @@
 /turf/simulated/open,
 /area/ship/trade/maintenance/solars)
 "Jo" = (
-/obj/machinery/message_server,
+/obj/machinery/network/message_server,
 /turf/simulated/floor/bluegrid,
 /area/ship/trade/comms)
 "Ko" = (

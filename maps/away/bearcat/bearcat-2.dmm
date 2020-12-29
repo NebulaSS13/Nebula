@@ -145,7 +145,7 @@
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "aw" = (
-/obj/machinery/requests_console{
+/obj/machinery/network/requests_console{
 	announcementConsole = 1;
 	department = "Captain";
 	pixel_x = 32
@@ -336,7 +336,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/comms)
 "aO" = (
-/obj/machinery/message_server,
+/obj/machinery/network/message_server,
 /turf/simulated/floor/bluegrid/airless,
 /area/ship/scrap/comms)
 "aP" = (

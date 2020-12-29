@@ -15,7 +15,11 @@
 		kill()
 
 /datum/event/money_hacker/announce()
-	var/obj/machinery/message_server/MS = get_message_server()
+	var/obj/machinery/network/message_server/MS
+	for(var/z in affecting_z)
+		MS = get_message_server_for_z(z)
+		if(MS)
+			break
 	if(MS)
 		// Hide the account number for now since it's all you need to access a standard-security account. Change when that's no longer the case.
 		var/message = "A brute force hack has been detected (in progress since [stationtime2text()]). The target of the attack is: Financial account #[affected_account.account_number], \
@@ -53,7 +57,11 @@
 		
 		T.perform()
 
-	var/obj/machinery/message_server/MS = get_message_server()
-	if(MS)
-		var/my_department = "[location_name()] Firewall Subroutines"
-		MS.send_rc_message("XO's Desk", my_department, message, "", "", 2)
+	var/obj/machinery/network/message_server/MS
+	for(var/z in affecting_z)
+		MS = get_message_server_for_z(z)
+		if(MS)
+			var/my_department = "[location_name()] Firewall Subroutines"
+			MS.send_rc_message("XO's Desk", my_department, message, "", "", 2)
+			break
+	

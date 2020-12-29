@@ -75,7 +75,7 @@
 
 /obj/item/stock_parts/circuitboard/telecomms/message_server
 	name = T_BOARD("message server")
-	build_path = /obj/machinery/message_server
+	build_path = /obj/machinery/network/message_server
 	origin_tech = "{'programming':4,'engineering':4}"
 	req_components = list(
 							/obj/item/stock_parts/subspace/ansible = 1,

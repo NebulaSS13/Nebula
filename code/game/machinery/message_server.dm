@@ -1,8 +1,6 @@
 #define MESSAGE_SERVER_SPAM_REJECT 1
 #define MESSAGE_SERVER_DEFAULT_SPAM_LIMIT 10
 
-var/global/list/obj/machinery/message_server/message_servers = list()
-
 /datum/data_rc_msg
 	var/rec_dpt = "Unspecified" //name of the person
 	var/send_dpt = "Unspecified" //name of the sender
@@ -33,7 +31,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 			else
 				priority = "Undetermined"
 
-/obj/machinery/message_server
+/obj/machinery/network/message_server
 	name = "messaging server"
 	icon = 'icons/obj/machines/tcomms/message_server.dmi'
 	icon_state = "message_server"
@@ -57,16 +55,11 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/default/panel_closed
 
-/obj/machinery/message_server/Initialize()
+/obj/machinery/network/message_server/Initialize()
 	. = ..()
-	message_servers += src
 	decryptkey = GenerateKey()
 
-/obj/machinery/message_server/Destroy()
-	message_servers -= src
-	return ..()
-
-/obj/machinery/message_server/Process()
+/obj/machinery/network/message_server/Process()
 	..()
 	if(active && (stat & (BROKEN|NOPOWER)))
 		active = 0
@@ -80,7 +73,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 			active = 1
 			update_icon()
 
-/obj/machinery/message_server/proc/send_rc_message(var/recipient = "",var/sender = "",var/message = "",var/stamp = "", var/id_auth = "", var/priority = 1)
+/obj/machinery/network/message_server/proc/send_rc_message(var/recipient = "",var/sender = "",var/message = "",var/stamp = "", var/id_auth = "", var/priority = 1)
 	rc_msgs += new/datum/data_rc_msg(recipient,sender,message,stamp,id_auth)
 	var/authmsg = "[message]<br>"
 	if (id_auth)
@@ -88,9 +81,12 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	if (stamp)
 		authmsg += "[stamp]<br>"
 	. = FALSE
-	var/list/good_z = GetConnectedZlevels(z)
-	for (var/obj/machinery/requests_console/Console in allConsoles)
-		if(!(Console.z in good_z))
+
+	var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
+	var/datum/computer_network/network = network_device?.get_network()
+	for(var/datum/extension/network_device/console in network?.devices)
+		var/obj/machinery/network/requests_console/Console = console.holder
+		if(!istype(Console))
 			continue
 		if (ckey(Console.department) == ckey(recipient))
 			if(Console.inoperable())
@@ -112,7 +108,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 			Console.set_light(0.3, 0.1, 2)
 
 
-/obj/machinery/message_server/interface_interact(mob/user)
+/obj/machinery/network/message_server/interface_interact(mob/user)
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	to_chat(user, "You toggle PDA message passing from [active ? "On" : "Off"] to [active ? "Off" : "On"]")
@@ -121,7 +117,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	update_icon()
 	return TRUE
 
-/obj/machinery/message_server/attackby(obj/item/O, mob/living/user)
+/obj/machinery/network/message_server/attackby(obj/item/O, mob/living/user)
 	if (active && !(stat & (BROKEN|NOPOWER)) && (spamfilter_limit < MESSAGE_SERVER_DEFAULT_SPAM_LIMIT*2) && \
 		istype(O,/obj/item/stock_parts/circuitboard/message_monitor))
 		spamfilter_limit += round(MESSAGE_SERVER_DEFAULT_SPAM_LIMIT / 2)
@@ -130,14 +126,14 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	else
 		return ..()
 
-/obj/machinery/message_server/on_update_icon()
+/obj/machinery/network/message_server/on_update_icon()
 	icon_state = initial(icon_state)
 	if(panel_open)
 		icon_state = "[icon_state]_o"
 	if((stat & (BROKEN|NOPOWER)) || !active)
 		icon_state = "[icon_state]_off"
 
-/obj/machinery/message_server/proc/send_to_department(var/department, var/message, var/tone)
+/obj/machinery/network/message_server/proc/send_to_department(var/department, var/message, var/tone)
 	var/reached = 0
 
 	for(var/mob/living/carbon/human/H in GLOB.human_mob_list)
