@@ -12,6 +12,8 @@
 	#include "..\..\mods\content\psionics\_psionics.dme"
 	#include "..\..\mods\species\ascent\_ascent.dme"
 	#include "..\..\mods\species\utility_frames\_utility_frames.dme"
+	#include "..\..\mods\species\tajaran\_tajaran.dme"
+	#include "..\..\mods\species\tritonian\_tritonian.dme"
 
 	#define USING_MAP_DATUM /datum/map/modpack_testing
 

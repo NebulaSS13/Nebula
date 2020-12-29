@@ -1,0 +1,8 @@
+#ifndef MODPACK_TAJARAN
+#define MODPACK_TAJARAN
+#include "_tajaran.dm"
+#include "accessory.dm"
+#include "culture.dm"
+#include "emotes.dm"
+#include "species.dm"
+#endif
