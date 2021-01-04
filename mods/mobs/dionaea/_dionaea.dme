@@ -1,6 +1,7 @@
 #ifndef MODPACK_DIONAEA
 #define MODPACK_DIONAEA
 // BEGIN_INCLUDE
+#include "datums\ai.dm"
 #include "datums\ghosttrap.dm"
 #include "datums\language.dm"
 #include "datums\loadout.dm"

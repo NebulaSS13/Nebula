@@ -23,7 +23,11 @@
 	set_nutrition(Clamp(nutrition + Floor(radiation/100) + light_amount, 0, 500))
 
 	if(radiation >= 50 || light_amount > 2) //if there's enough light, heal
-		adjustBruteLoss(-1)
-		adjustFireLoss(-1)
-		adjustToxLoss(-1)
-		adjustOxyLoss(-1)
+		if(getBruteLoss())
+			adjustBruteLoss(-1)
+		if(getFireLoss())
+			adjustFireLoss(-1)
+		if(getToxLoss())
+			adjustToxLoss(-1)
+		if(getOxyLoss())
+			adjustOxyLoss(-1)
