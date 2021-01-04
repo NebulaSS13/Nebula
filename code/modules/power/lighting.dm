@@ -479,6 +479,18 @@
 	var/b_colour = "#fffee0"
 	var/list/lighting_modes = list()
 	var/sound_on
+	var/random_tone = TRUE
+	var/static/list/random_tone_options = list(
+		"#fffee0",
+		"#e0fefe",
+		"#fefefe",
+	)
+
+/obj/item/light/Initialize()
+	. = ..()
+	if (random_tone)
+		b_colour = pick(random_tone_options)
+		update_icon()
 
 /obj/item/light/tube
 	name = "light tube"
@@ -533,6 +545,7 @@
 /obj/item/light/bulb/red
 	color = "#da0205"
 	b_colour = "#da0205"
+	random_tone = FALSE
 
 /obj/item/light/bulb/red/readylight
 	lighting_modes = list(
