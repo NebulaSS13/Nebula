@@ -16,6 +16,8 @@
 	body_parts_covered = SLOT_UPPER_BODY
 	allowed = list (/obj/item/gun/energy/lasertag/blue)
 	siemens_coefficient = 3.0
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/redtag
 	name = "red laser tag armour"
@@ -25,6 +27,8 @@
 	body_parts_covered = SLOT_UPPER_BODY
 	allowed = list (/obj/item/gun/energy/lasertag/red)
 	siemens_coefficient = 3.0
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /*
  * Costume
@@ -34,6 +38,8 @@
 	desc = "Yarr."
 	icon = 'icons/clothing/suit/pirate.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/hgpirate
 	name = "pirate captain coat"
@@ -41,6 +47,8 @@
 	icon = 'icons/clothing/suit/pirate_captain.dmi'
 	flags_inv = HIDEJUMPSUIT
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/judgerobe
 	name = "judge's robe"
@@ -49,12 +57,17 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	allowed = list(/obj/item/storage/fancy/cigarettes,/obj/item/cash)
 	flags_inv = HIDEJUMPSUIT
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/apron/overalls
 	name = "coveralls"
 	desc = "A set of denim overalls."
 	icon = 'icons/clothing/suit/overalls.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
+
 
 /obj/item/clothing/suit/syndicatefake
 	name = "red space suit replica"
@@ -64,6 +77,8 @@
 	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency,/obj/item/toy)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_HANDS|SLOT_LEGS|SLOT_FEET
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/hastur
 	name = "Hastur's Robes"
@@ -71,6 +86,8 @@
 	icon = 'icons/clothing/suit/hastur.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/imperium_monk
 	name = "Imperium monk"
@@ -78,6 +95,8 @@
 	icon = 'icons/clothing/suit/w40k.dmi'
 	body_parts_covered = SLOT_HEAD|SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS
 	flags_inv = HIDESHOES|HIDEJUMPSUIT
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/chickensuit
 	name = "Chicken Suit"
@@ -86,6 +105,8 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET
 	flags_inv = HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 2.0
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/monkeysuit
 	name = "Monkey Suit"
@@ -94,6 +115,8 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 2.0
+	material = /decl/material/solid/leather
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/holidaypriest
 	name = "Holiday Priest"
@@ -101,6 +124,8 @@
 	icon = 'icons/clothing/suit/holidaypriest.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	flags_inv = HIDEJUMPSUIT
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/cardborg
 	name = "cardborg suit"
@@ -108,6 +133,8 @@
 	icon = 'icons/clothing/suit/cardborg.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	flags_inv = HIDEJUMPSUIT
+	material = /decl/material/solid/cardboard
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/cardborg/Initialize()
 	. = ..()
@@ -123,6 +150,9 @@
 	icon = 'icons/clothing/suit/straightjacket.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
+	material = /decl/material/solid/cloth
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/straight_jacket/equipped(var/mob/user, var/slot)
 	if(slot == slot_wear_suit_str)
@@ -136,6 +166,8 @@
 	desc = "A worn out, curiously comfortable t-shirt with a picture of Ian. You wouldn't go so far as to say it feels like being hugged when you wear it, but it's pretty close. Good for sleeping in."
 	icon = 'icons/clothing/suit/ianshirt.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 //pyjamas
 //originally intended to be pinstripes >.>
@@ -163,6 +195,8 @@
 	material_armor_multiplier = 0.8
 	var/shine 
 	var/artificial_shine
+	material = /decl/material/solid/leather
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/leathercoat/set_material(var/new_material)
 	..()
@@ -207,12 +241,16 @@
 	cold_protection = SLOT_UPPER_BODY|SLOT_ARMS
 	min_cold_protection_temperature = T0C - 20
 	siemens_coefficient = 0.7
+	material = /decl/material/solid/leather
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/storage/leather_jacket
 	name = "black leather jacket"
 	desc = "A black leather coat."
 	icon = 'icons/clothing/suit/leather_jacket/black.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 //This one has buttons for some reason
 /obj/item/clothing/suit/storage/toggle/brown_jacket
@@ -220,6 +258,8 @@
 	desc = "A brown leather coat."
 	icon = 'icons/clothing/suit/leather_jacket/brown.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/storage/toggle/agent_jacket
 	name = "agent jacket"
@@ -227,6 +267,8 @@
 	icon = 'icons/clothing/suit/leather_jacket/agent.dmi'
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/storage/toggle/hoodie
 	name = "hoodie"
@@ -234,11 +276,15 @@
 	icon = 'icons/clothing/suit/hoodie.dmi'
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/storage/toggle/hoodie/black
 	name = "black hoodie"
 	desc = "A warm, black sweatshirt."
 	color = COLOR_DARK_GRAY
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /*
  * Track Jackets
@@ -248,26 +294,36 @@
 	desc = "A track jacket, for the athletic."
 	icon = 'icons/clothing/suit/tracksuit/black.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/storage/toggle/track/blue
 	name = "blue track jacket"
 	desc = "A blue track jacket, for the athletic."
 	icon = 'icons/clothing/suit/tracksuit/blue.dmi'
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/storage/toggle/track/red
 	name = "red track jacket"
 	desc = "A red track jacket, for the athletic."
 	icon = 'icons/clothing/suit/tracksuit/red.dmi'
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/storage/toggle/track/navy
 	name = "navy track jacket"
 	desc = "A navy track jacket, for the athletic."
 	icon = 'icons/clothing/suit/tracksuit/navy.dmi'
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/rubber
 	name = "human suit"
 	desc = "A Human suit made out of rubber."
 	icon = 'icons/clothing/suit/human_suit.dmi'
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/hospital
 	name = "hospital gown"
@@ -275,6 +331,8 @@
 	icon = 'icons/clothing/suit/gown.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	allowed = null
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/hospital/blue
 	color = "#99ccff"
@@ -292,26 +350,36 @@
 	icon = 'icons/clothing/suit/letterman.dmi'
 	markings_icon = "_sleeves"
 	markings_color = "#ffffff"
+	material = /decl/material/solid/leather
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/letterman/red
 	name = "red letterman jacket"
 	desc = "A red letter jacket often given to members of a varsity team."
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/letterman/blue
 	name = "blue letterman jacket"
 	desc = "A blue letter jacket often given to members of a varsity team."
 	color = "#3a64ba"
+	material = /decl/material/solid/leather
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/letterman/brown
 	name = "brown letterman jacket"
 	desc = "A brown letter jacket often given to members of a varsity team."
 	color = "#553c2f"
 	markings_color = "#dfd5cd"
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/suit/letterman/green
 	name = "green letterman jacket"
 	desc = "A green letter jacket often given to members of a varsity team."
 	color = "#82e011"
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 //Space santa outfit suit
 /obj/item/clothing/head/santahat
@@ -322,6 +390,8 @@
 	body_parts_covered = SLOT_HEAD
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	min_pressure_protection = 0
+	material = /decl/material/solid/cloth
+	matter = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE)
 
 /obj/item/clothing/suit/santa
 	name = "Santa's suit"
@@ -330,3 +400,6 @@
 	allowed = list(/obj/item) //for stuffing exta special presents
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	min_pressure_protection = 0
+	material = /decl/material/solid/cloth
+	matter = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE)
+	origin_tech = "{'materials':1,'engineering':1}"

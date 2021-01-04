@@ -419,6 +419,9 @@
 	icon_state = "sheet-cloth"
 	material = /decl/material/solid/cloth
 
+/obj/item/stack/material/cloth/ten
+	amount = 10 
+
 /obj/item/stack/material/cardboard
 	name = "cardboard"
 	icon_state = "sheet-card"
@@ -439,6 +442,9 @@
 	icon_state = "sheet-leather"
 	material = /decl/material/solid/leather
 	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
+
+/obj/item/stack/material/leather/ten
+	amount = 10
 
 /obj/item/stack/material/glass
 	name = "glass"

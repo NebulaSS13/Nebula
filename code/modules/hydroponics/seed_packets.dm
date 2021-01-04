@@ -293,3 +293,6 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/mollusc
 	seed_type = "mollusc"
+
+/obj/item/seeds/cotton
+	seed_type = "cotton"

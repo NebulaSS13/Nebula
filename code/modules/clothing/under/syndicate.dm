@@ -12,6 +12,8 @@
 		laser = ARMOR_LASER_MINOR
 		)
 	siemens_coefficient = 0.9
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/under/syndicate/combat
 	name = "combat turtleneck"
@@ -21,6 +23,8 @@
 	worn_state = "combat"
 	gender_icons = 1
 	has_sensor = SUIT_HAS_SENSORS
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/under/syndicate/tacticool
 	name = "\improper Tacticool turtleneck"
@@ -31,5 +35,6 @@
 	armor = null
 	siemens_coefficient = 1
 	has_sensor = SUIT_HAS_SENSORS
-
+	material = /decl/material/solid/cloth
+	origin_tech = "{'materials':1,'engineering':1}"
 
