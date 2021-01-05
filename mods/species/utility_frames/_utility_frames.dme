@@ -2,6 +2,7 @@
 #define MODPACK_UTILITY_FRAMES
 #include "_utility_frames.dm"
 #include "species.dm"
+#include "powers.dm"
 #include "markings.dm"
 #include "limbs.dm"
 #endif
