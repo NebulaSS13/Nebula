@@ -1,7 +1,7 @@
 /datum/ai/nymph
 	name = "nymph"
-	var/emote_prob = 1
-	var/wander_prob = 33
+	var/emote_prob = 3
+	var/wander_prob = 44
 
 /datum/ai/nymph/do_process(var/time_elapsed)
 	if(body.stat != CONSCIOUS)
