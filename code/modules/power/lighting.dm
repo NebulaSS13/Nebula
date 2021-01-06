@@ -110,7 +110,7 @@
 			pixel_x = -10
 
 	// Update icon state
-	overlays.Cut()
+	cut_overlays()
 	if(istype(construct_state))
 		switch(construct_state.type) //Never use the initial state. That'll just reset it to the mapping icon.
 			if(/decl/machine_construction/wall_frame/no_wires/simple)
@@ -139,7 +139,10 @@
 	if(istype(lightbulb, /obj/item/light))
 		var/image/I = image(icon, _state)
 		I.color = lightbulb.b_colour
-		overlays += I
+		if(on)
+			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+			I.layer = ABOVE_LIGHTING_LAYER
+		add_overlay(I)
 
 	if(on)
 
