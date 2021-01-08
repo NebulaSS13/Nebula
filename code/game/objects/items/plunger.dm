@@ -2,8 +2,7 @@
 	name = "plunger"
 	desc = "This is possibly the least sanitary object around."
 	icon = 'icons/obj/items/plunger.dmi'
-	icon_state = "plunger_black"
-	item_state = "plunger_black"
+	icon_state = ICON_STATE_WORLD
 	attack_verb = list("plunged")
 	force = 1
 	w_class = ITEM_SIZE_NORMAL

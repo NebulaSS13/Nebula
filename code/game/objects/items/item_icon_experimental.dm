@@ -90,11 +90,7 @@ var/list/bodypart_to_slot_lookup_table = list(
 	. = species && species.get_bodytype(src)
 
 /obj/item/proc/get_icon_for_bodytype(var/bodytype)
-	. = icon
-	if(on_mob_use_spritesheets)
-		for(var/btype in sprite_sheets)
-			if(lowertext(btype) == bodytype)
-				return sprite_sheets[btype]
+	. = (on_mob_use_spritesheets && sprite_sheets[lowertext(bodytype)]) || icon
 
 /obj/item/proc/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
 	. = overlay

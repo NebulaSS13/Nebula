@@ -1,7 +1,7 @@
 /obj/item/towel
 	name = "towel"
 	icon = 'icons/obj/items/towel.dmi'
-	icon_state = "towel"
+	icon_state = ICON_STATE_WORLD
 	item_flags = ITEM_FLAG_IS_BELT
 	slot_flags = SLOT_HEAD | SLOT_LOWER_BODY | SLOT_OVER_BODY
 	force = 0.5
@@ -14,7 +14,6 @@
 	if(user.a_intent == I_GRAB)
 		lay_out()
 		return
-
 	user.visible_message(SPAN_NOTICE("[user] uses [src] to towel themselves off."))
 	playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
 
@@ -48,16 +47,15 @@
 		usr.visible_message(
 			SPAN_NOTICE("[usr] lay out \the [src] on the ground."),
 			SPAN_NOTICE("You lay out \the [src] on the ground."))
-		desc = "A soft cotton towel."
-		icon_state = "towel_mask"
+		icon = 'icons/obj/items/towel_flat.dmi'
 		pixel_x = 0
 		pixel_y = 0
 		pixel_z = 0
 
 /obj/item/towel/pickup(mob/user)
-	if((icon_state != initial(icon_state)))
-		desc = initial(desc)
-		icon_state = initial(icon_state)
+	..()
+	if(icon != initial(icon))
+		icon = initial(icon)
 		user.visible_message(
 			SPAN_NOTICE("[user] rolled up \the [src]."),
 			SPAN_NOTICE("You pick up and fold \the [src]."))

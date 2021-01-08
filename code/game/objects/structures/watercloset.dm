@@ -539,11 +539,10 @@
 
 /obj/item/taperoll/bog
 	name = "toilet paper roll"
-	icon = 'icons/obj/watercloset.dmi'
+	icon = 'icons/obj/toiletpaper.dmi'
+	icon_state = ICON_STATE_WORLD
 	desc = "A unbranded roll of standard issue two ply toilet paper. Refined from carefully rendered down sea shells due to the government's 'Abuse Of The Trees Act'."
 	tape_type = /obj/item/tape/bog
-	icon_state = "bogroll"
-	item_state = "mummy_poor"
 	slot_flags = SLOT_HEAD | SLOT_OVER_BODY
 	var/sheets = 30
 
@@ -574,5 +573,5 @@
 /obj/item/paper/crumpled/bog
 	name = "sheet of toilet paper"
 	desc = "A single sheet of toilet paper. Two ply."
-	icon = 'icons/obj/watercloset.dmi'
+	icon = 'icons/obj/toiletpaper.dmi'
 	icon_state = "bogroll_sheet"
