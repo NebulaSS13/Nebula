@@ -188,7 +188,6 @@ var/list/default_onmob_icons = list(
 	BP_L_HAND = 'icons/mob/onmob/items/lefthand.dmi',
 	BP_R_HAND = 'icons/mob/onmob/items/righthand.dmi',
 	slot_belt_str = 'icons/mob/onmob/onmob_belt.dmi',
-	slot_back_str = 'icons/mob/onmob/onmob_back.dmi',
 	slot_l_ear_str = 'icons/mob/onmob/onmob_ears.dmi',
 	slot_r_ear_str = 'icons/mob/onmob/onmob_ears.dmi',
 	slot_glasses_str = 'icons/mob/onmob/onmob_eyes.dmi',
