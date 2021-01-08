@@ -11,8 +11,7 @@
 	name = "police baton"
 	desc = "A wooden truncheon for beating criminal scum."
 	icon = 'icons/obj/items/weapon/old_baton.dmi'
-	icon_state = "baton"
-	item_state = "classic_baton"
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
 	force = 10
 
@@ -33,13 +32,11 @@
 	name = "telescopic baton"
 	desc = "A compact yet rebalanced personal defense weapon. Can be concealed when folded."
 	icon = 'icons/obj/items/weapon/telebaton.dmi'
-	icon_state = "telebaton_0"
-	item_state = "telebaton_0"
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
 	force = 3
 	var/on = 0
-
 
 /obj/item/telebaton/attack_self(mob/user)
 	on = !on
@@ -65,11 +62,9 @@
 
 /obj/item/telebaton/on_update_icon()
 	if(on)
-		icon_state = "telebaton_1"
-		item_state = "telebaton_1"
+		icon = 'icons/obj/items/weapon/telebaton_extended.dmi'
 	else
-		icon_state = "telebaton_0"
-		item_state = "telebaton_0"
+		icon = 'icons/obj/items/weapon/telebaton.dmi'
 	if(length(blood_DNA))
 		generate_blood_overlay(TRUE) // Force recheck.
 		overlays.Cut()
