@@ -459,8 +459,8 @@
 /obj/item/storage/belt/waistpack
 	name = "waist pack"
 	desc = "A small bag designed to be worn on the waist. May make your butt look big."
-	icon_state = "fannypack_white"
-	item_state = "fannypack_white"
+	icon = 'icons/clothing/belt/fannypack.dmi'
+	icon_state = ICON_STATE_WORLD
 	storage_slots = null
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = ITEM_SIZE_SMALL * 4
@@ -469,8 +469,7 @@
 /obj/item/storage/belt/waistpack/big
 	name = "large waist pack"
 	desc = "A bag designed to be worn on the waist. Definitely makes your butt look big."
-	icon_state = "fannypack_big_white"
-	item_state = "fannypack_big_white"
+	icon = 'icons/clothing/belt/fannypack_big.dmi'
 	w_class = ITEM_SIZE_LARGE
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = ITEM_SIZE_NORMAL * 4
