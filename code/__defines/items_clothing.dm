@@ -185,17 +185,15 @@ var/list/all_limb_tags = list(BP_CHEST, BP_GROIN, BP_HEAD, BP_L_ARM, BP_R_ARM, B
 var/list/all_limb_tags_by_depth = list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
 
 var/list/default_onmob_icons = list(
-	BP_L_HAND = 'icons/mob/onmob/items/lefthand.dmi',
-	BP_R_HAND = 'icons/mob/onmob/items/righthand.dmi',
-	slot_belt_str = 'icons/mob/onmob/onmob_belt.dmi',
-	slot_l_ear_str = 'icons/mob/onmob/onmob_ears.dmi',
-	slot_r_ear_str = 'icons/mob/onmob/onmob_ears.dmi',
-	slot_glasses_str = 'icons/mob/onmob/onmob_eyes.dmi',
+	BP_L_HAND =          'icons/mob/onmob/items/lefthand.dmi',
+	BP_R_HAND =          'icons/mob/onmob/items/righthand.dmi',
+	slot_belt_str =      'icons/mob/onmob/onmob_belt.dmi',
+	slot_glasses_str =   'icons/mob/onmob/onmob_eyes.dmi',
 	slot_w_uniform_str = 'icons/mob/onmob/onmob_under.dmi',
-	slot_head_str = 'icons/mob/onmob/onmob_head.dmi',
+	slot_head_str =      'icons/mob/onmob/onmob_head.dmi',
 	slot_wear_mask_str = 'icons/mob/onmob/onmob_mask.dmi',
-	slot_s_store_str = 'icons/mob/onmob/onmob_belt_mirror.dmi',
-	slot_tie_str = 'icons/mob/onmob/onmob_accessories.dmi'
+	slot_s_store_str =   'icons/mob/onmob/onmob_belt_mirror.dmi',
+	slot_tie_str =       'icons/mob/onmob/onmob_accessories.dmi'
 )
 
 var/list/all_inventory_slots = list(
