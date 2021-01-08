@@ -23,17 +23,6 @@
 	icon_state = "oxygen_f"
 
 /*
- * Anesthetic
- */
-/obj/item/tank/anesthetic
-	name = "anesthetic tank"
-	desc = "A tank with an N2O/O2 gas mix."
-	icon_state = "anesthetic"
-	item_state = "an_tank"
-	starting_pressure = list(/decl/material/gas/oxygen = 6*ONE_ATMOSPHERE*O2STANDARD, /decl/material/gas/nitrous_oxide = 6*ONE_ATMOSPHERE*N2STANDARD)
-	volume = 270
-
-/*
  * Air
  */
 /obj/item/tank/air

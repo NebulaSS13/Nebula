@@ -3325,7 +3325,6 @@
 /obj/item/chems/glass/bottle/sedatives,
 /obj/item/chems/glass/bottle/sedatives,
 /obj/item/chems/syringe,
-/obj/item/tank/anesthetic,
 /obj/item/clothing/mask/breath/medical,
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
