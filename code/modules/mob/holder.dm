@@ -96,23 +96,23 @@ var/list/holder_mob_icon_cache = list()
 	..()
 
 var/list/holder_mob_icons = list(
-	"repairbot" =         'icons/obj/clothing/holders/holder_repairbot.dmi',
-	"constructiondrone" = 'icons/obj/clothing/holders/holder_constructiondrone.dmi',
-	"mouse_brown" =       'icons/obj/clothing/holders/holder_mouse_brown.dmi',
-	"mouse_gray" =        'icons/obj/clothing/holders/holder_mouse_gray.dmi',
-	"mouse_white" =       'icons/obj/clothing/holders/holder_mouse_white.dmi',
-	"pai-repairbot" =     'icons/obj/clothing/holders/holder_pai_repairbot.dmi',
-	"pai-monkey" =        'icons/obj/clothing/holders/holder_pai_monkey.dmi',
-	"pai-rabbit" =        'icons/obj/clothing/holders/holder_pai_rabbit.dmi',
-	"pai-mouse" =         'icons/obj/clothing/holders/holder_pai_mouse.dmi',
-	"pai-crow" =          'icons/obj/clothing/holders/holder_pai_crow.dmi',
-	"monkey" =            'icons/obj/clothing/holders/holder_monkey.dmi',
-	"kitten" =            'icons/obj/clothing/holders/holder_kitten.dmi',
-	"cat" =               'icons/obj/clothing/holders/holder_cat.dmi',
-	"cat2" =              'icons/obj/clothing/holders/holder_cat2.dmi',
-	"cat3" =              'icons/obj/clothing/holders/holder_cat3.dmi',
-	"corgi" =             'icons/obj/clothing/holders/holder_corgi.dmi',
-	"slug" =              'icons/obj/clothing/holders/holder_slug.dmi'
+	"repairbot" =         'icons/clothing/holders/holder_repairbot.dmi',
+	"constructiondrone" = 'icons/clothing/holders/holder_constructiondrone.dmi',
+	"mouse_brown" =       'icons/clothing/holders/holder_mouse_brown.dmi',
+	"mouse_gray" =        'icons/clothing/holders/holder_mouse_gray.dmi',
+	"mouse_white" =       'icons/clothing/holders/holder_mouse_white.dmi',
+	"pai-repairbot" =     'icons/clothing/holders/holder_pai_repairbot.dmi',
+	"pai-monkey" =        'icons/clothing/holders/holder_pai_monkey.dmi',
+	"pai-rabbit" =        'icons/clothing/holders/holder_pai_rabbit.dmi',
+	"pai-mouse" =         'icons/clothing/holders/holder_pai_mouse.dmi',
+	"pai-crow" =          'icons/clothing/holders/holder_pai_crow.dmi',
+	"monkey" =            'icons/clothing/holders/holder_monkey.dmi',
+	"kitten" =            'icons/clothing/holders/holder_kitten.dmi',
+	"cat" =               'icons/clothing/holders/holder_cat.dmi',
+	"cat2" =              'icons/clothing/holders/holder_cat2.dmi',
+	"cat3" =              'icons/clothing/holders/holder_cat3.dmi',
+	"corgi" =             'icons/clothing/holders/holder_corgi.dmi',
+	"slug" =              'icons/clothing/holders/holder_slug.dmi'
 )
 
 /obj/item/holder/proc/sync(var/mob/living/M)

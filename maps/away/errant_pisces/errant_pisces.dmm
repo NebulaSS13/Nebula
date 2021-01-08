@@ -3368,7 +3368,6 @@
 /obj/item/clothing/head/surgery,
 /obj/item/storage/firstaid/surgery,
 /obj/item/storage/firstaid/adv,
-/obj/item/clothing/mask/breath/anesthetic,
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/infirmary)
 "hM" = (

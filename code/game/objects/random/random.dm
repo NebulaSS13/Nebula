@@ -654,8 +654,8 @@ obj/random/obstruction/spawn_choices()
 /obj/random/masks
 	name = "random mask"
 	desc = "This is a random face mask."
-	icon = 'icons/obj/clothing/obj_mask.dmi'
-	icon_state = "gas_mask"
+	icon = 'icons/clothing/mask/gas_mask.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/masks/spawn_choices()
 	return list(/obj/item/clothing/mask/gas = 4,
