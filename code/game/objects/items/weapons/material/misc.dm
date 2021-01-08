@@ -69,7 +69,7 @@
 /obj/item/hatchet/machete
 	name = "machete"
 	desc = "A long, sturdy blade with a rugged handle. Leading the way to cursed treasures since before space travel."
-	icon = 'icons/obj/items/weapon/machete.dmi'
+	icon = 'icons/obj/items/weapon/machetes/machete.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_LOWER_BODY
@@ -90,11 +90,11 @@
 
 /obj/item/hatchet/machete/Initialize()
 	var/list/machete_icons = list(
-		'icons/obj/items/weapon/machete.dmi',
-		'icons/obj/items/weapon/machete_red.dmi',
-		'icons/obj/items/weapon/machete_blue.dmi',
-		'icons/obj/items/weapon/machete_black.dmi',
-		'icons/obj/items/weapon/machete_olive.dmi'
+		'icons/obj/items/weapon/machetes/machete.dmi',
+		'icons/obj/items/weapon/machetes/machete_red.dmi',
+		'icons/obj/items/weapon/machetes/machete_blue.dmi',
+		'icons/obj/items/weapon/machetes/machete_black.dmi',
+		'icons/obj/items/weapon/machetes/machete_olive.dmi'
 	)
 	icon = pick(machete_icons)
 	. = ..()
@@ -102,7 +102,7 @@
 /obj/item/hatchet/machete/deluxe
 	name = "deluxe machete"
 	desc = "A fine example of a machete, with a polished blade, wooden handle and a leather cord loop."
-	icon = 'icons/obj/items/weapon/machete_dx.dmi'
+	icon = 'icons/obj/items/weapon/machetes/machete_dx.dmi'
 
 /obj/item/minihoe // -- Numbers
 	name = "mini hoe"

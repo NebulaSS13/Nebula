@@ -56,11 +56,11 @@
 /obj/item/baton/on_update_icon()
 	cut_overlays()
 	if(status)
-		add_overlays("[icon_state]-active")
+		add_overlay("[icon_state]-active")
 		set_light(0.4, 0.1, 1, 2, "#ff6a00")
 	else
 		if(!bcell)
-			add_overlays("[icon_state]-nocell")
+			add_overlay("[icon_state]-nocell")
 		set_light(0)
 
 /obj/item/baton/examine(mob/user, distance)
