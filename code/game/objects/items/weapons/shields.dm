@@ -52,7 +52,7 @@
 	name = "riot shield"
 	desc = "A shield adept at blocking blunt objects from connecting with the torso of the shield wielder."
 	icon = 'icons/obj/items/shield/riot.dmi'
-	icon_state = "riot"
+	icon_state = ICON_STATE_WORLD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	force = 5.0
@@ -94,7 +94,7 @@
 /obj/item/shield/riot/metal
 	name = "plasteel combat shield"
 	icon = 'icons/obj/items/shield/metal.dmi'
-	icon_state = "metal"
+	icon_state = ICON_STATE_WORLD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	force = 6.0
