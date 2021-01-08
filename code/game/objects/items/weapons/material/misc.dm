@@ -121,7 +121,7 @@
 	name = "scythe"
 	desc = "A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow."
 	icon = 'icons/obj/items/tool/scythe.dmi'
-	icon_state = "scythe0"
+	icon_state = ICON_STATE_WORLD
 	material_force_multiplier = 0.275 // 16 with hardness 60 (steel)
 	thrown_material_force_multiplier = 0.2
 	sharp = 1
