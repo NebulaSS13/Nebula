@@ -102,7 +102,10 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/Process()
 					h_g = 64 + (h_g - 64)*scale
 					h_b = 64 + (h_b - 64)*scale
 
-				animate(src, color = rgb(h_r, h_g, h_b), time = 20, easing = SINE_EASING)
+				var/list/animate_targets = get_above_oo() + src
+				for (var/thing in animate_targets)
+					var/atom/movable/AM = thing
+					animate(AM, color = rgb(h_r, h_g, h_b), time = 20, easing = SINE_EASING)
 
 
 
