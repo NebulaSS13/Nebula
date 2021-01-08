@@ -33,7 +33,6 @@
 #include "datum\antagonists\deathsquad.dm"
 #include "datum\antagonists\uplink.dm"
 #include "effects\landmarks.dm"
-#include "items\backpacks.dm"
 #include "items\badges.dm"
 #include "items\clutter.dm"
 #include "items\cups.dm"
