@@ -18,13 +18,13 @@
 	var/obj/item/cell/bcell = null
 
 /obj/item/defibrillator/Initialize() //starts without a cell for rnd
-	. = ..()
 	if(ispath(paddles))
 		paddles = new paddles(src, src)
 	else
 		paddles = new(src, src)
 	if(ispath(bcell))
 		bcell = new bcell(src)
+	. = ..()
 	update_icon()
 
 /obj/item/defibrillator/Destroy()

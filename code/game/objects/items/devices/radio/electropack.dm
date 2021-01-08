@@ -13,7 +13,7 @@
 
 	var/code = 2
 
-/obj/item/radio/electropack/update_icon()
+/obj/item/radio/electropack/on_update_icon()
 	cut_overlays()
 	if(on)
 		add_overlay("active")

@@ -1,6 +1,6 @@
 /obj/item/holder/diona
-	icon_state = ICON_STATE_WORLD
 	icon = 'mods/mobs/dionaea/icons/nymph_holder.dmi'
+	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'magnets':3,'biotech':5}"
 	slot_flags = SLOT_HEAD | SLOT_OVER_BODY | SLOT_HOLSTER
 	armor = list(
