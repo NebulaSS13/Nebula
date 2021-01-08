@@ -2,7 +2,6 @@
 	name = "smokable item"
 	desc = "You're not sure what this is. You should probably ahelp it."
 	body_parts_covered = 0
-
 	var/lit = 0
 	var/waterproof = FALSE
 	var/icon_on

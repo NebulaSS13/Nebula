@@ -191,7 +191,6 @@ var/list/default_onmob_icons = list(
 	slot_glasses_str =   'icons/mob/onmob/onmob_eyes.dmi',
 	slot_w_uniform_str = 'icons/mob/onmob/onmob_under.dmi',
 	slot_wear_mask_str = 'icons/mob/onmob/onmob_mask.dmi',
-	slot_s_store_str =   'icons/mob/onmob/onmob_belt_mirror.dmi',
 	slot_tie_str =       'icons/mob/onmob/onmob_accessories.dmi'
 )
 
