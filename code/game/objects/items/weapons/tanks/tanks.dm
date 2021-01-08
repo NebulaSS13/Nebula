@@ -21,7 +21,8 @@ var/list/global/tank_gauge_cache = list()
 
 /obj/item/tank
 	name = "tank"
-	icon = 'icons/obj/tank.dmi'
+	icon = 'icons/obj/items/tanks/tank_blue.dmi'
+	icon_state = ICON_STATE_WORLD
 
 	var/gauge_icon = "indicator_tank"
 	var/gauge_cap = 6
@@ -371,7 +372,7 @@ var/list/global/tank_gauge_cache = list()
 
 	var/list/overlays_to_add
 	if(override && (proxyassembly.assembly || wired))
-		LAZYADD(overlays_to_add, image(icon,"bomb_assembly"))
+		LAZYADD(overlays_to_add, image('icons/obj/items/tanks/tank_components.dmi',"bomb_assembly"))
 		if(proxyassembly.assembly)
 			var/image/bombthing = image(proxyassembly.assembly.icon, proxyassembly.assembly.icon_state)
 			bombthing.overlays |= proxyassembly.assembly.overlays
@@ -390,7 +391,7 @@ var/list/global/tank_gauge_cache = list()
 		if(override || (previous_gauge_pressure != gauge_pressure))
 			var/indicator = "[gauge_icon][(gauge_pressure == -1) ? "overload" : gauge_pressure]"
 			if(!tank_gauge_cache[indicator])
-				tank_gauge_cache[indicator] = image(icon, indicator)
+				tank_gauge_cache[indicator] = image('icons/obj/items/tanks/tank_indicators.dmi', indicator)
 			LAZYADD(overlays_to_add, tank_gauge_cache[indicator])
 		previous_gauge_pressure = gauge_pressure
 
