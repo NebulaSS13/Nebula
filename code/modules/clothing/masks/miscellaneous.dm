@@ -177,72 +177,60 @@
 // Bandanas below
 /obj/item/clothing/mask/bandana
 	name = "black bandana"
-	desc = "A fine bandana with nanotech lining. Can be worn on the head or face."
+	desc = "A fine bandana. Can be worn on the head or face."
+	icon = 'icons/clothing/head/bandana.dmi'
+	icon_state = ICON_STATE_WORLD
+	color = COLOR_BLACK
 	flags_inv = HIDEFACE
 	slot_flags = SLOT_FACE|SLOT_HEAD
 	body_parts_covered = SLOT_FACE
-	icon_state = "bandblack"
-	item_state = "bandblack"
 	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/clothing/mask/bandana/equipped(var/mob/user, var/slot)
-	switch(slot)
-		if(slot_wear_mask_str) //Mask is the default for all the settings
-			flags_inv = initial(flags_inv)
-			body_parts_covered = initial(body_parts_covered)
-			icon_state = initial(icon_state)
-		if(slot_head_str)
-			flags_inv = 0
-			body_parts_covered = SLOT_HEAD
-			icon_state = "[initial(icon_state)]_up"
-			sprite_sheets = list()
-
-	return ..()
+	if(slot == slot_head_str)
+		flags_inv = 0
+		body_parts_covered = SLOT_HEAD
+	else
+		flags_inv = initial(flags_inv)
+		body_parts_covered = initial(body_parts_covered)
 
 /obj/item/clothing/mask/bandana/red
 	name = "red bandana"
-	icon_state = "bandred"
-	item_state = "bandred"
+	color = COLOR_RED
 
 /obj/item/clothing/mask/bandana/blue
 	name = "blue bandana"
-	icon_state = "bandblue"
-	item_state = "bandblue"
+	color = COLOR_BLUE
 
 /obj/item/clothing/mask/bandana/green
 	name = "green bandana"
-	icon_state = "bandgreen"
-	item_state = "bandgreen"
+	color = COLOR_GREEN
 
 /obj/item/clothing/mask/bandana/gold
 	name = "gold bandana"
-	icon_state = "bandgold"
-	item_state = "bandgold"
+	color = COLOR_GOLD
 
 /obj/item/clothing/mask/bandana/orange
 	name = "orange bandana"
-	icon_state = "bandorange"
-	item_state = "bandorange"
+	color = COLOR_ORANGE
 
 /obj/item/clothing/mask/bandana/purple
 	name = "purple bandana"
-	icon_state = "bandpurple"
-	item_state = "bandpurple"
+	color = COLOR_PURPLE
 
 /obj/item/clothing/mask/bandana/botany
 	name = "botany bandana"
-	icon_state = "bandbotany"
-	item_state = "bandbotany"
+	color = null
+	icon = 'icons/clothing/head/bandana_botany.dmi'
 
 /obj/item/clothing/mask/bandana/camo
 	name = "camo bandana"
-	icon_state = "bandcamo"
-	item_state = "bandcamo"
+	color = null
+	icon = 'icons/clothing/head/bandana_camo.dmi'
 
 /obj/item/clothing/mask/bandana/skull
 	name = "skull bandana"
-	desc = "A fine black bandana with nanotech lining and a skull emblem. Can be worn on the head or face."
-	icon_state = "bandskull"
-	item_state = "bandskull"
-
+	color = null
+	desc = "A fine black bandana with a skull emblem. Can be worn on the head or face."
+	icon = 'icons/clothing/head/bandana_skull.dmi'
