@@ -3,8 +3,7 @@
 	desc = "A large portable heat sink with liquid cooled radiator packaged into a modified backpack."
 	w_class = ITEM_SIZE_LARGE
 	icon = 'icons/obj/items/suitcooler.dmi'
-	icon_state = "suitcooler0"
-	item_state = "coolingpack"			// beautiful codersprites until someone makes a prettier one.
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BACK
 
 	//copied from tank.dm
@@ -136,33 +135,29 @@
 	return ..()
 
 /obj/item/suit_cooling_unit/on_update_icon()
-	overlays.Cut()
-	if (cover_open)
-		if (cell)
-			icon_state = "suitcooler1"
-		else
-			icon_state = "suitcooler2"
+	cut_overlays()
+	if(cover_open)
+		add_overlay("[icon_state]-open")
+		if(cell)
+			add_overlay("[icon_state]-cell")
 		return
-
-	icon_state = "suitcooler0"
 
 	if(!cell || !on)
 		return
 
 	switch(round(cell.percent()))
 		if(86 to INFINITY)
-			overlays.Add("battery-0")
+			add_overlay("[icon_state]-battery-0")
 		if(69 to 85)
-			overlays.Add("battery-1")
+			add_overlay("[icon_state]-battery-1")
 		if(52 to 68)
-			overlays.Add("battery-2")
+			add_overlay("[icon_state]-battery-2")
 		if(35 to 51)
-			overlays.Add("battery-3")
+			add_overlay("[icon_state]-battery-3")
 		if(18 to 34)
-			overlays.Add("battery-4")
+			add_overlay("[icon_state]-battery-4")
 		if(-INFINITY to 17)
-			overlays.Add("battery-5")
-
+			add_overlay("[icon_state]-battery-5")
 
 /obj/item/suit_cooling_unit/examine(mob/user, distance)
 	. = ..()
