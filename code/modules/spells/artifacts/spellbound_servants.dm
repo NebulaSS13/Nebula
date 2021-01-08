@@ -57,13 +57,15 @@
 	spells = list(/spell/noclothes)
 
 /datum/spellbound_type/apprentice/set_antag(var/datum/mind/M, var/mob/master)
-	GLOB.wizards.add_antagonist_mind(M,1,ANTAG_APPRENTICE,"<b>You are an apprentice-type Servant! You're just an ordinary Wizard-To-Be, with no special abilities, but do not need robes to cast spells. Follow your teacher's orders!</b>")
+	var/decl/special_role/wizard/wizards = decls_repository.get_decl(/decl/special_role/wizard)
+	wizards.add_antagonist_mind(M, 1, "Wizard's Apprentice", "<b>You are an apprentice-type Servant! You're just an ordinary Wizard-To-Be, with no special abilities, but do not need robes to cast spells. Follow your teacher's orders!</b>")
 
 /datum/spellbound_type/servant
 	var/spiel = "You don't do anything in particular."
 
 /datum/spellbound_type/servant/set_antag(var/datum/mind/M, var/mob/master)
-	GLOB.wizards.add_antagonist_mind(M,1,ANTAG_SERVANT, "<b>You are a [name]-type Servant!</b> [spiel]")
+	var/decl/special_role/wizard/wizards = decls_repository.get_decl(/decl/special_role/wizard)
+	wizards.add_antagonist_mind(M, 1, "Spellbound Servant", "<b>You are a [name]-type Servant!</b> [spiel]")
 
 /datum/spellbound_type/servant/caretaker
 	name = "Caretaker"
@@ -247,7 +249,8 @@
 
 /obj/item/summoning_stone/interact(var/mob/user)
 	var/list/types = subtypesof(/datum/spellbound_type) - /datum/spellbound_type/servant
-	if(user.mind && !GLOB.wizards.is_antagonist(user.mind))
+	var/decl/special_role/wizard/wizards = decls_repository.get_decl(/decl/special_role/wizard)
+	if(user.mind && !wizards.is_antagonist(user.mind))
 		use_type(pick(types),user)
 		return
 	var/dat = "<center><b><h3>Summoning Stone</h3></b><i>Choose a companion to help you.</i><br><br></center>"

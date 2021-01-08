@@ -65,7 +65,8 @@
 		client.screen |= hud_elements
 		client.screen |= hud_intent_selector
 	if(mind && !neutered)
-		GLOB.borers.add_antagonist(mind)
+		var/decl/special_role/borer/borers = decls_repository.get_decl(/decl/special_role/borer)
+		borers.add_antagonist(mind)
 
 /mob/living/simple_animal/borer/Logout()
 	. = ..()
@@ -251,7 +252,8 @@
 	if(!host) return
 
 	if(host.mind)
-		GLOB.borers.remove_antagonist(host.mind)
+		var/decl/special_role/borer/borers = decls_repository.get_decl(/decl/special_role/borer)
+		borers.remove_antagonist(host.mind)
 
 	dropInto(host.loc)
 

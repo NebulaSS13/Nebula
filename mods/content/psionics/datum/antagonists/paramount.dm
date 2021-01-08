@@ -1,9 +1,6 @@
-GLOBAL_DATUM_INIT(paramounts, /datum/antagonist/paramount, new)
-
-/datum/antagonist/paramount
-	id = MODE_PARAMOUNT
-	role_text = "Paramount"
-	role_text_plural = "Paramounts"
+/decl/special_role/paramount
+	name = "Paramount"
+	name_plural = "Paramounts"
 	landmark_id = "ninjastart"
 	welcome_text = "<span class='info'>You were once one of the finest minds of your culture, now driven to madness by the whispers of the howling dark and blessed with psychic faculties that defy understanding. Using your C-E rig and your twisted knowledge of psionics, advance your agenda in human space.</span>"
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_RANDSPAWN | ANTAG_SET_APPEARANCE
@@ -16,7 +13,7 @@ GLOBAL_DATUM_INIT(paramounts, /datum/antagonist/paramount, new)
 	id_type = /obj/item/card/id/syndicate
 	faction = "paramount"
 
-/datum/antagonist/paramount/equip(var/mob/living/carbon/human/player)
+/decl/special_role/paramount/equip(var/mob/living/carbon/human/player)
 
 	if(!..())
 		return 0
@@ -38,7 +35,7 @@ GLOBAL_DATUM_INIT(paramounts, /datum/antagonist/paramount, new)
 	//player.internal_organs_by_name["frontal lobe"] = new /obj/item/organ/internal/corona_pollentia(player) //TODO
 	return 1
 
-/datum/antagonist/paramount/create_objectives(var/datum/mind/player)
+/decl/special_role/paramount/create_objectives(var/datum/mind/player)
 
 	if(!..())
 		return

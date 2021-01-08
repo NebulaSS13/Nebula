@@ -1,6 +1,3 @@
-#define MODE_PARAMOUNT     "paramount"
-#define MODE_FOUNDATION    "foundation agent"
-
 #define PSI_IMPLANT_AUTOMATIC  "Security Level Derived"
 #define PSI_IMPLANT_SHOCK      "Issue Neural Shock"
 #define PSI_IMPLANT_WARN       "Issue Reprimand"

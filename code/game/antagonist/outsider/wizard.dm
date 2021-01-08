@@ -1,9 +1,6 @@
-GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
-
-/datum/antagonist/wizard
-	id = MODE_WIZARD
-	role_text = ANTAG_WIZARD
-	role_text_plural = ANTAG_WIZARD + "s"
+/decl/special_role/wizard
+	name = "Wizard"
+	name_plural = "Wizards"
 	landmark_id = "wizard"
 	welcome_text = "You will find a list of available spells in your spell book. Choose your magic arsenal carefully.<br>In your pockets you will find a teleport scroll. Use it as needed."
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
@@ -18,7 +15,7 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 	faction = "wizard"
 	base_to_load = /datum/map_template/ruin/antag_spawn/wizard
 
-/datum/antagonist/wizard/create_objectives(var/datum/mind/wizard)
+/decl/special_role/wizard/create_objectives(var/datum/mind/wizard)
 
 	if(!..())
 		return
@@ -61,13 +58,13 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 		wizard.objectives |= hijack_objective
 	return
 
-/datum/antagonist/wizard/update_antag_mob(var/datum/mind/wizard)
+/decl/special_role/wizard/update_antag_mob(var/datum/mind/wizard)
 	..()
 	wizard.StoreMemory("<B>Remember:</B> do not forget to prepare your spells.", /decl/memory_options/system)
 	wizard.current.real_name = "[pick(GLOB.wizard_first)] [pick(GLOB.wizard_second)]"
 	wizard.current.SetName(wizard.current.real_name)
 
-/datum/antagonist/wizard/equip(var/mob/living/carbon/human/wizard_mob)
+/decl/special_role/wizard/equip(var/mob/living/carbon/human/wizard_mob)
 
 	if(!..())
 		return 0
@@ -78,7 +75,7 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 
 	return 1
 
-/datum/antagonist/wizard/print_player_summary()
+/decl/special_role/wizard/print_player_summary()
 	..()
 	for(var/p in current_antagonists)
 		var/datum/mind/player = p

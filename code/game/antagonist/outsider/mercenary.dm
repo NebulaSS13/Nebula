@@ -1,10 +1,7 @@
-GLOBAL_DATUM_INIT(mercs, /datum/antagonist/mercenary, new)
-
-/datum/antagonist/mercenary
-	id = MODE_MERCENARY
-	role_text = "Mercenary"
+/decl/special_role/mercenary
+	name = "Mercenary"
 	antag_indicator = "hudsyndicate"
-	role_text_plural = "Mercenaries"
+	name_plural = "Mercenaries"
 	landmark_id = "Syndicate-Spawn"
 	leader_welcome_text = "You are the leader of the mercenary strikeforce; hail to the chief. Use :t to speak to your underlings."
 	welcome_text = "To speak on the strike team's private channel use :t."
@@ -21,14 +18,14 @@ GLOBAL_DATUM_INIT(mercs, /datum/antagonist/mercenary, new)
 
 	base_to_load = /datum/map_template/ruin/antag_spawn/mercenary
 
-/datum/antagonist/mercenary/create_global_objectives()
+/decl/special_role/mercenary/create_global_objectives()
 	if(!..())
 		return 0
 	global_objectives = list()
 	global_objectives |= new /datum/objective/nuclear
 	return 1
 
-/datum/antagonist/mercenary/equip(var/mob/living/carbon/human/player)
+/decl/special_role/mercenary/equip(var/mob/living/carbon/human/player)
 	if(!..())
 		return 0
 

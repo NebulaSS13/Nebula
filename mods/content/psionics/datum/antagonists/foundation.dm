@@ -1,10 +1,7 @@
-GLOBAL_DATUM_INIT(foundation_agents, /datum/antagonist/foundation, new)
-
-/datum/antagonist/foundation
-	id = MODE_FOUNDATION
-	role_text = "Foundation Agent"
+/decl/special_role/foundation
+	name = "Foundation Agent"
 	antag_indicator = "hudfoundation"
-	role_text_plural = "Foundation Agents"
+	name_plural = "Foundation Agents"
 	welcome_text = "<span class='info'>You are a field agent of the Cuchulain Foundation, \
 	a body that specializes in taking down psychic threats. You have a free pass to anywhere \
 	you like, a pistol loaded with anti-psi nullglass rounds, and a clear duty. Naturally, \
@@ -27,7 +24,7 @@ GLOBAL_DATUM_INIT(foundation_agents, /datum/antagonist/foundation, new)
 	faction = "foundation"
 	id_type = /obj/item/card/id/foundation
 
-/datum/antagonist/foundation/equip(var/mob/living/carbon/human/player)
+/decl/special_role/foundation/equip(var/mob/living/carbon/human/player)
 
 	if(!..())
 		return 0

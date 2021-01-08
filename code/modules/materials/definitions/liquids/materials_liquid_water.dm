@@ -31,16 +31,19 @@
 		if(data && data["holy"])
 			if(iscultist(M))
 				if(prob(10))
-					GLOB.cult.offer_uncult(M)
+					var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+					cult.offer_uncult(M)
 				if(prob(2))
 					var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
 					M.visible_message("<span class='warning'>\The [M] coughs up \the [S]!</span>")
-			else if(M.mind && GLOB.godcult.is_antagonist(M.mind))
-				if(REAGENT_VOLUME(holder, type) > 5)
-					M.adjustHalLoss(5)
-					M.adjustBruteLoss(1)
-					if(prob(10)) //Only annoy them a /bit/
-						to_chat(M,"<span class='danger'>You feel your insides curdle and burn!</span> \[<a href='?src=\ref[holder];deconvert=\ref[M]'>Give Into Purity</a>\]")
+			else
+				var/decl/special_role/godcult = decls_repository.get_decl(/decl/special_role/godcultist)
+				if(M.mind && godcult.is_antagonist(M.mind))
+					if(REAGENT_VOLUME(holder, type) > 5)
+						M.adjustHalLoss(5)
+						M.adjustBruteLoss(1)
+						if(prob(10)) //Only annoy them a /bit/
+							to_chat(M,"<span class='danger'>You feel your insides curdle and burn!</span> \[<a href='?src=\ref[holder];deconvert=\ref[M]'>Give Into Purity</a>\]")
 
 /decl/material/liquid/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()

@@ -21,7 +21,7 @@
 				photosync()
 				to_chat(src, "<b>Laws synced with AI, be sure to note any changes.</b>")
 				// TODO: Update to new antagonist system.
-				if(mind && mind.special_role == "traitor" && mind.original == src)
+				if(mind && mind.assigned_special_role == /decl/special_role/traitor && mind.original == src)
 					to_chat(src, "<b>Remember, your AI does NOT share or know about your law 0.</b>")
 		else
 			to_chat(src, "<b>No AI selected to sync laws with, disabling lawsync protocol.</b>")
@@ -31,7 +31,7 @@
 	to_chat(who, SPAN_ITALIC("All laws have equal priority. Laws may override other laws if written specifically to do so. If laws conflict, break the least."))
 	laws.show_laws(who)
 	// TODO: Update to new antagonist system.
-	if (mind && (mind.special_role == "traitor" && mind.original == src) && connected_ai)
+	if (mind && (mind.assigned_special_role == /decl/special_role/traitor && mind.original == src) && connected_ai)
 		to_chat(who, "<b>Remember, [connected_ai.name] is technically your master, but your objective comes first.</b>")
 	else if (connected_ai)
 		to_chat(who, "<b>Remember, [connected_ai.name] is your master, other AIs can be ignored.</b>")

@@ -65,8 +65,8 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		name = capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 	real_name = name
 
-	if(GLOB.cult)
-		GLOB.cult.add_ghost_magic(src)
+	var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	cult.add_ghost_magic(src)
 
 	ghost_multitool = new(src)
 
@@ -113,13 +113,12 @@ Works together with spawning an observer, noted above.
 	if(antagHUD)
 		var/list/target_list = list()
 		for(var/mob/living/target in oview(src, 14))
-			if(target.mind && target.mind.special_role)
+			if(target.mind && target.mind.assigned_special_role)
 				target_list += target
 		if(target_list.len)
 			assess_targets(target_list, src)
 	if(medHUD)
 		process_medHUD(src)
-
 
 /mob/observer/ghost/proc/process_medHUD(var/mob/M)
 	var/client/C = M.client

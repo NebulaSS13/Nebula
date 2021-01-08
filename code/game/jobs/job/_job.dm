@@ -354,7 +354,7 @@
 	var/list/reasons = list()
 	if(jobban_isbanned(caller, title))
 		reasons["You are jobbanned."] = TRUE
-	if(is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
+	if(is_semi_antagonist && jobban_isbanned(caller, /decl/special_role/provocateur))
 		reasons["You are semi-antagonist banned."] = TRUE
 	if(!player_old_enough(caller))
 		reasons["Your player age is too low."] = TRUE
@@ -386,7 +386,7 @@
 		return FALSE
 	if(jobban_isbanned(caller, title))
 		return FALSE
-	if(is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
+	if(is_semi_antagonist && jobban_isbanned(caller, /decl/special_role/provocateur))
 		return FALSE
 	if(!player_old_enough(caller))
 		return FALSE
@@ -458,7 +458,8 @@
 
 /datum/job/proc/post_equip_rank(var/mob/person, var/alt_title)
 	if(is_semi_antagonist && person.mind)
-		GLOB.provocateurs.add_antagonist(person.mind)
+		var/decl/special_role/provocateur/provocateurs = decls_repository.get_decl(/decl/special_role/provocateur)
+		provocateurs.add_antagonist(person.mind)
 
 /datum/job/proc/get_alt_title_for(var/client/C)
 	return C.prefs.GetPlayerAltTitle(src)

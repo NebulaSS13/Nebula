@@ -17,9 +17,10 @@
 	<b>Integrity:</b> Implant will last so long as the nanobots are inside the bloodstream."}
 
 /obj/item/implant/loyalty/implanted(mob/M)
-	if(!istype(M, /mob/living/carbon/human))	return FALSE
+	if(!istype(M, /mob/living/carbon/human))
+		return FALSE
 	var/mob/living/carbon/human/H = M
-	var/datum/antagonist/antag_data = get_antag_data(H.mind.special_role)
+	var/decl/special_role/antag_data = ispath(H.mind.assigned_special_role, /decl/special_role) && decls_repository.get_decl(H.mind.assigned_special_role)
 	if(antag_data && (antag_data.flags & ANTAG_IMPLANT_IMMUNE))
 		H.visible_message("[H] seems to resist the implant!", "You feel the corporate tendrils of [GLOB.using_map.company_name] try to invade your mind!")
 		return FALSE

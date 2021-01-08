@@ -25,7 +25,8 @@
 		eye.suffix = "Soul"
 		eyeobj = eye
 	eye.visualnet = deity.eyenet
-	GLOB.godcult.add_antagonist_mind(src.mind,1,"lost soul of [deity]", "You have been captured by \the [deity]! You now can only see into your own reality through the same rips and tears it uses. Your only chance at another body will be one in your captor's image...",specific_god=deity)
+	var/decl/special_role/godcultist/godcult = decls_repository.get_decl(/decl/special_role/godcultist)
+	godcult.add_antagonist_mind(src.mind,1,"lost soul of [deity]", "You have been captured by \the [deity]! You now can only see into your own reality through the same rips and tears it uses. Your only chance at another body will be one in your captor's image...",specific_god=deity)
 	eyeobj.possess(src)
 
 /mob/living/starlight_soul/Destroy()

@@ -13,7 +13,7 @@
 /spell/targeted/exhude_pleasantness/cast(var/list/targets, var/mob/user)
 	for(var/m in targets)
 		var/mob/living/L = m
-		if(L.mind && L.mind.special_role == ANTAG_SERVANT)
+		if(L.mind && L.mind.assigned_special_role == "Spellbound Servant")
 			to_chat(m, "<span class='notice'>\The [user] seems relatively harmless.</span>")
 		else
 			to_chat(m, "<font size='3'><span class='notice'>\The [user] [pick(possible_messages)]</span></font>")

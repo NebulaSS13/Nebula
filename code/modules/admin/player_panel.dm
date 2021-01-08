@@ -407,9 +407,9 @@
 
 		dat += "<a href='?src=\ref[src];delay_round_end=1'>[SSticker.delay_end ? "End Round Normally" : "Delay Round End"]</a><br>"
 		dat += "<hr>"
-		var/list/all_antag_types = GLOB.all_antag_types_
+		var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
 		for(var/antag_type in all_antag_types)
-			var/datum/antagonist/A = all_antag_types[antag_type]
+			var/decl/special_role/A = all_antag_types[antag_type]
 			dat += A.get_check_antag_output(src)
 		dat += "</body></html>"
 		show_browser(usr, jointext(dat,null), "window=roundstatus;size=400x500")

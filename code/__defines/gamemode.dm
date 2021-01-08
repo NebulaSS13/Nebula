@@ -30,27 +30,6 @@
 #define ANTAG_SET_APPEARANCE  BITFLAG(10) // Causes antagonists to use an appearance modifier on spawn.
 #define ANTAG_RANDOM_EXCEPTED BITFLAG(11) // If a game mode randomly selects antag types, antag types with this flag should be excluded.
 
-// Mode/antag template macros.
-#define MODE_LOYALIST      "loyalist"
-#define MODE_COMMANDO      "commando"
-#define MODE_DEATHSQUAD    "deathsquad"
-#define MODE_ERT           "ert"
-#define MODE_ACTOR         "actor"
-#define MODE_MERCENARY     "mercenary"
-#define MODE_NINJA         "ninja"
-#define MODE_RAIDER        "raider"
-#define MODE_WIZARD        "wizard"
-#define MODE_CHANGELING    "changeling"
-#define MODE_CULTIST       "cultist"
-#define MODE_MONKEY        "monkey"
-#define MODE_RENEGADE      "renegade"
-#define MODE_REVOLUTIONARY "revolutionary"
-#define MODE_TRAITOR       "traitor"
-#define MODE_DEITY         "deity"
-#define MODE_GODCULTIST    "god cultist"
-#define MODE_THRALL        "mind thrall"
-#define MODE_MISC_AGITATOR "provocateur"
-
 #define DEFAULT_TELECRYSTAL_AMOUNT 130
 #define IMPLANT_TELECRYSTAL_AMOUNT(x) (round(x * 0.49)) // If this cost is ever greater than half of DEFAULT_TELECRYSTAL_AMOUNT then it is possible to buy more TC than you spend
 

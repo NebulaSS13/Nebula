@@ -1,9 +1,6 @@
-GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
-
-/datum/antagonist/raider
-	id = MODE_RAIDER
-	role_text = "Raider"
-	role_text_plural = "Raiders"
+/decl/special_role/raider
+	name = "Raider"
+	name_plural = "Raiders"
 	antag_indicator = "hudraider"
 	landmark_id = "raiderstart"
 	welcome_text = "Use :H to talk on your encrypted channel."
@@ -90,14 +87,14 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/clothing/accessory/storage/holster/hip
 		)
 
-/datum/antagonist/raider/update_access(var/mob/living/player)
+/decl/special_role/raider/update_access(var/mob/living/player)
 	for(var/obj/item/storage/wallet/W in player.contents)
 		for(var/obj/item/card/id/id in W.contents)
 			id.SetName("[player.real_name]'s Passport")
 			id.registered_name = player.real_name
 			W.SetName("[initial(W.name)] ([id.name])")
 
-/datum/antagonist/raider/create_global_objectives()
+/decl/special_role/raider/create_global_objectives()
 
 	if(!..())
 		return 0
@@ -125,7 +122,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	global_objectives |= new /datum/objective/heist/preserve_crew
 	return 1
 
-/datum/antagonist/raider/proc/is_raider_crew_safe()
+/decl/special_role/raider/proc/is_raider_crew_safe()
 
 	if(!current_antagonists || current_antagonists.len == 0)
 		return 0
@@ -135,7 +132,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 			return 0
 	return 1
 
-/datum/antagonist/raider/equip(var/mob/living/carbon/human/player)
+/decl/special_role/raider/equip(var/mob/living/carbon/human/player)
 
 	if(!..())
 		return 0
@@ -171,7 +168,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 
 	return 1
 
-/datum/antagonist/raider/proc/equip_weapons(var/mob/living/carbon/human/player)
+/decl/special_role/raider/proc/equip_weapons(var/mob/living/carbon/human/player)
 	var/new_gun = pick(raider_guns)
 	var/new_holster = pick(raider_holster) //raiders don't start with any backpacks, so let's be nice and give them a holster if they can use it.
 	var/turf/T = get_turf(player)
@@ -212,7 +209,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		else
 			player.put_in_hands(holster)
 
-/datum/antagonist/raider/proc/equip_ammo(var/mob/living/carbon/human/player, var/obj/item/gun/gun)
+/decl/special_role/raider/proc/equip_ammo(var/mob/living/carbon/human/player, var/obj/item/gun/gun)
 	if(istype(gun, /obj/item/gun/projectile))
 		var/obj/item/gun/projectile/bullet_thrower = gun
 		if(bullet_thrower.magazine_type)

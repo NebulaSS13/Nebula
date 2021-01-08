@@ -137,8 +137,9 @@ var/list/uplink_random_selections_
 
 #ifdef DEBUG
 /proc/debug_uplink_purchage_log()
-	for(var/antag_type in GLOB.all_antag_types_)
-		var/datum/antagonist/A = GLOB.all_antag_types_[antag_type]
+	var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
+	for(var/antag_type in all_antag_types)
+		var/decl/special_role/A = all_antag_types[antag_type]
 		A.print_player_summary()
 
 /proc/debug_uplink_item_assoc_list()

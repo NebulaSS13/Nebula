@@ -69,7 +69,7 @@ var/global/datum/matchmaker/matchmaker = new()
 	if(!M.current)	//no extremely platonic relationships
 		return FALSE
 
-	var/datum/antagonist/special_role_data = get_antag_data(M.special_role)
+	var/decl/special_role/special_role_data = ispath(M.assigned_special_role, /decl/special_role) && decls_repository.get_decl(M.assigned_special_role)
 	if(special_role_data && (special_role_data.flags & ANTAG_OVERRIDE_JOB))
 		return FALSE
 

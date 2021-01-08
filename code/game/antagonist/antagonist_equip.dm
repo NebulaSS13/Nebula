@@ -1,4 +1,4 @@
-/datum/antagonist/proc/equip(var/mob/living/carbon/human/player)
+/decl/special_role/proc/equip(var/mob/living/carbon/human/player)
 
 	if(!istype(player))
 		return 0
@@ -16,12 +16,12 @@
 		player.species.equip_survival_gear(player)
 	return 1
 
-/datum/antagonist/proc/unequip(var/mob/living/carbon/human/player)
+/decl/special_role/proc/unequip(var/mob/living/carbon/human/player)
 	if(!istype(player))
 		return 0
 	return 1
 
-/datum/antagonist/proc/equip_rig(var/rig_type, var/mob/living/carbon/human/player)
+/decl/special_role/proc/equip_rig(var/rig_type, var/mob/living/carbon/human/player)
 	set waitfor = 0
 	if(istype(player) && ispath(rig_type))
 		var/obj/item/rig/rig = new rig_type(player)

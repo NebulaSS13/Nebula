@@ -8,5 +8,8 @@
 	auto_recall_shuttle = FALSE
 	end_on_antag_death = FALSE
 	shuttle_delay = 2
-	antag_tags = list(MODE_REVOLUTIONARY, MODE_LOYALIST)
+	associated_antags = list(
+		/decl/special_role/revolutionary,
+		/decl/special_role/loyalist
+	)
 	require_all_templates = TRUE

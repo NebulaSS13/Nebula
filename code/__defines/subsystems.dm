@@ -20,11 +20,10 @@
 // Subsystems shutdown in the reverse of the order they initialize in
 // The numbers just define the ordering, they are meaningless otherwise.
 
-#define SS_INIT_EARLY            19
-#define SS_INIT_GARBAGE          18
-#define SS_INIT_MATERIALS        17
-#define SS_INIT_PLANTS           16
-#define SS_INIT_ANTAGS           15
+#define SS_INIT_EARLY            18
+#define SS_INIT_GARBAGE          17
+#define SS_INIT_MATERIALS        16
+#define SS_INIT_PLANTS           15
 #define SS_INIT_LORE             14
 #define SS_INIT_MISC             13
 #define SS_INIT_SKYBOX           12

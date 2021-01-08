@@ -48,7 +48,7 @@
 	if(H.mind)
 		H.mind.reset()
 		H.mind.assigned_role = "Golem"
-		H.mind.special_role = "Golem"
+		H.mind.assigned_special_role = "Golem"
 	H.real_name = "golem ([rand(1, 1000)])"
 	H.SetName(H.real_name)
 	H.status_flags |= NO_ANTAG

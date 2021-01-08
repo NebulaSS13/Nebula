@@ -191,9 +191,10 @@
 
 		// Equip them, if they are human and it is desirable.
 		if(istype(spawned_mob, /mob/living/carbon/human))
-			var/antag_type = input("Select an equipment template to use or cancel for nude.", null) as null|anything in GLOB.all_antag_types_
+			var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
+			var/antag_type = input("Select an equipment template to use or cancel for nude.", null) as null|anything in all_antag_types
 			if(antag_type)
-				var/datum/antagonist/A = GLOB.all_antag_types_[antag_type]
+				var/decl/special_role/A = all_antag_types[antag_type]
 				A.equip(spawned_mob)
 
 	if(alert("Are you SURE you wish to deploy this drop pod? It will cause a sizable explosion and gib anyone underneath it.",,"No","Yes") == "No")

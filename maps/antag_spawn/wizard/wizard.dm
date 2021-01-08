@@ -1,6 +1,6 @@
 /datum/map_template/ruin/antag_spawn/wizard
 	name = "Wizard Base"
-	id = MODE_WIZARD + "_spawn"
+	id = "wizard_spawn"
 	suffixes = list("wizard/wizard_base.dmm")
 
 /area/map_template/wizard_station

@@ -29,7 +29,7 @@
 		to_chat(joining, SPAN_WARNING("You are banned from playing offstation roles."))
 		return FALSE
 
-	if(job.is_semi_antagonist && jobban_isbanned(joining, MODE_MISC_AGITATOR))
+	if(job.is_semi_antagonist && jobban_isbanned(joining, /decl/special_role/provocateur))
 		to_chat(joining, SPAN_WARNING("You are banned from playing semi-antagonist roles."))
 		return FALSE
 

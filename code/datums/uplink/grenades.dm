@@ -52,45 +52,45 @@
 /datum/uplink_item/item/grenades/frag_high_yield
 	name = "Fragmentation Bomb"
 	item_cost = 24
-	antag_roles = list(MODE_MERCENARY) // yeah maybe regular traitors shouldn't be able to get these
+	antag_roles = list(/decl/special_role/mercenary) // yeah maybe regular traitors shouldn't be able to get these
 	path = /obj/item/grenade/frag/high_yield
 
 /datum/uplink_item/item/grenades/fragshell
 	name = "1x Fragmentation Shell"
 	desc = "Weaker than standard fragmentation grenades, these devices can be fired from a grenade launcher."
 	item_cost = 10
-	antag_roles = list(MODE_MERCENARY)
+	antag_roles = list(/decl/special_role/mercenary)
 	path = /obj/item/grenade/frag/shell
 
 /datum/uplink_item/item/grenades/fragshells
 	name = "5x Fragmentation Shells"
 	desc = "Weaker than standard fragmentation grenades, these devices can be fired from a grenade launcher."
 	item_cost = 40
-	antag_roles = list(MODE_MERCENARY)
+	antag_roles = list(/decl/special_role/mercenary)
 	path = /obj/item/storage/box/fragshells
 
 /datum/uplink_item/item/grenades/frag
 	name = "1x Fragmentation Grenade"
 	item_cost = 10
-	antag_roles = list(MODE_MERCENARY)
+	antag_roles = list(/decl/special_role/mercenary)
 	path = /obj/item/grenade/frag
 
 /datum/uplink_item/item/grenades/frags
 	name = "5x Fragmentation Grenades"
 	item_cost = 40
-	antag_roles = list(MODE_MERCENARY)
+	antag_roles = list(/decl/special_role/mercenary)
 	path = /obj/item/storage/box/frags
 
 /datum/uplink_item/item/grenades/supermatter
 	name = "1x Supermatter Grenade"
 	desc = "This grenade contains a small supermatter shard which will delaminate upon activation and pull in nearby objects, irradiate lifeforms, and eventually explode."
 	item_cost = 15
-	antag_roles = list(MODE_MERCENARY)
+	antag_roles = list(/decl/special_role/mercenary)
 	path = /obj/item/grenade/supermatter
 
 /datum/uplink_item/item/grenades/supermatters
 	name = "5x Supermatter Grenades"
 	desc = "These grenades contains a small supermatter shard which will delaminate upon activation and pull in nearby objects, irradiate lifeforms, and eventually explode."
 	item_cost = 60
-	antag_roles = list(MODE_MERCENARY)
+	antag_roles = list(/decl/special_role/mercenary)
 	path = /obj/item/storage/box/supermatters

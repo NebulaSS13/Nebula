@@ -13,7 +13,8 @@
 	hitsound = 'sound/magic/forcewall.ogg'
 
 /obj/item/scrying/attack_self(mob/user)
-	if((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
+	var/decl/special_role/wizard/wizards = decls_repository.get_decl(/decl/special_role/wizard)
+	if((user.mind && !wizards.is_antagonist(user.mind)))
 		to_chat(user, "<span class='warning'>You stare into the orb and see nothing but your own reflection.</span>")
 		return
 

@@ -55,7 +55,7 @@
 		H.ghostize(0)
 
 	if(src.mind)
-		src.mind.special_role = "Borer Husk"
+		src.mind.assigned_special_role = "Borer Husk"
 		src.mind.transfer_to(host)
 
 	H.ChangeToHusk()

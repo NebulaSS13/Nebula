@@ -9,7 +9,7 @@
 	var/list/priority_targets = list()
 
 	for(var/datum/mind/possible_target in SSticker.minds)
-		if(possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != DEAD) && (!possible_target.special_role))
+		if(possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != DEAD) && !possible_target.assigned_special_role)
 			possible_targets += possible_target
 			if(length(roles))
 				for(var/datum/job/role in SSjobs.get_by_paths(roles))

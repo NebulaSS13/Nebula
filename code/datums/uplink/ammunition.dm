@@ -45,14 +45,14 @@
 	desc = "A container of rounds for the anti-materiel rifle. Contains 7 rounds."
 	item_cost = 8
 	path = /obj/item/storage/box/ammo/sniperammo
-	antag_roles = list(MODE_MERCENARY)
+	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/ammo/sniperammo/apds
 	name = "Ammobox of APDS Sniper Rounds"
 	desc = "A container of armor piercing rounds for the anti-materiel rifle. Contains 3 rounds."
 	item_cost = 12
 	path = /obj/item/storage/box/ammo/sniperammo/apds
-	antag_roles = list(MODE_MERCENARY)
+	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/ammo/shotgun_shells
 	name = "Ammobox of Shotgun Shells"
@@ -71,7 +71,7 @@
 	desc = "A magazine for standard SMGs. Contains 20 rounds."
 	item_cost = 8
 	path = /obj/item/ammo_magazine/smg
-	antag_roles = list(MODE_MERCENARY)
+	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/ammo/speedloader_magnum
 	name = "Magnum Speedloader"
@@ -84,7 +84,7 @@
 	desc = "A  rifle magazine loaded with flechette rounds. Contains 9 rounds."
 	item_cost = 8
 	path = /obj/item/magnetic_ammo
-	antag_roles = list(MODE_MERCENARY)
+	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/ammo/pistol_emp
 	name = "Standard EMP Ammo Box"

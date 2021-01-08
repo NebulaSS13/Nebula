@@ -42,17 +42,17 @@
 	color = "#993300"
 
 /obj/item/contract/apprentice/contract_effect(mob/user)
-	if(user.mind.special_role == ANTAG_APPRENTICE)
+	if(user.mind.assigned_special_role == "Wizard's Apprentice")
 		to_chat(user, "<span class='warning'>You are already a wizarding apprentice!</span>")
 		return 0
-	if(user.mind.special_role == ANTAG_SERVANT)
+	if(user.mind.assigned_special_role == "Spellbound Servant")
 		to_chat(user, "<span class='notice'>You are a servant. You have no need of apprenticeship.</span>")
 		return 0
-	if(GLOB.wizards.add_antagonist_mind(user.mind,1,ANTAG_APPRENTICE,"<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
+	var/decl/special_role/wizard/wizards = decls_repository.get_decl(/decl/special_role/wizard)
+	if(wizards.add_antagonist_mind(user.mind, 1, "Wizard's Apprentice", "<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
 		to_chat(user, "<span class='notice'>With the signing of this paper you agree to become \the [contract_master]'s apprentice in the art of wizardry.</span>")
 		return 1
 	return 0
-
 
 /obj/item/contract/wizard //contracts that involve making a deal with the Wizard Acadamy (or NON PLAYERS)
 	contract_master = "\improper Wizard Academy"
@@ -110,7 +110,7 @@
 
 /obj/item/contract/boon/contract_effect(mob/user)
 	..()
-	if(user.mind.special_role == ANTAG_SERVANT)
+	if(user.mind.assigned_special_role == "Spellbound Servant")
 		to_chat(user, "<span class='warning'>As a servant you find yourself unable to use this contract.</span>")
 		return 0
 	if(ispath(path,/spell))

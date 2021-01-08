@@ -1,4 +1,4 @@
-/datum/antagonist/proc/load_required_map()
+/decl/special_role/proc/load_required_map()
 	if(!base_to_load)
 		return TRUE
 	. = FALSE
@@ -9,12 +9,12 @@
 			base = SSmapping.map_templates[initial(base.name)]
 		else
 			base = new base()
-		report_progress("Loading map template '[base]' for [role_text]...")
+		report_progress("Loading map template '[base]' for [name]...")
 		. = base.load_new_z()
 		if(.)
 			get_starting_locations()
 
-/datum/antagonist/proc/add_antagonist(var/datum/mind/player, var/ignore_role, var/do_not_equip, var/move_to_spawn, var/do_not_announce, var/preserve_appearance)
+/decl/special_role/proc/add_antagonist(var/datum/mind/player, var/ignore_role, var/do_not_equip, var/move_to_spawn, var/do_not_announce, var/preserve_appearance)
 
 	if(!add_antagonist_mind(player, ignore_role))
 		return
@@ -24,9 +24,9 @@
 	//do this again, just in case
 	if(flags & ANTAG_OVERRIDE_JOB)
 		player.assigned_job = null
-		player.assigned_role = role_text
+		player.assigned_role = name
 		player.role_alt_title = null
-	player.special_role = role_text
+	player.assigned_special_role = type
 
 	if(isghostmind(player))
 		create_default(player.current)
@@ -41,7 +41,7 @@
 		player.current.faction = faction
 	return 1
 
-/datum/antagonist/proc/add_antagonist_mind(var/datum/mind/player, var/ignore_role, var/nonstandard_role_type, var/nonstandard_role_msg)
+/decl/special_role/proc/add_antagonist_mind(var/datum/mind/player, var/ignore_role, var/nonstandard_role_type, var/nonstandard_role_msg)
 	if(!istype(player))
 		return 0
 	if(!player.current)
@@ -71,13 +71,13 @@
 	if(nonstandard_role_type)
 		faction_members |= player
 		to_chat(player.current, "<span class='danger'><font size=3>You are \a [nonstandard_role_type]!</font></span>")
-		player.special_role = nonstandard_role_type
+		player.assigned_special_role = nonstandard_role_type
 		if(nonstandard_role_msg)
 			to_chat(player.current, "<span class='notice'>[nonstandard_role_msg]</span>")
 		update_icons_added(player)
 	return 1
 
-/datum/antagonist/proc/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
+/decl/special_role/proc/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!istype(player))
 		return 0
 	if(player.current && faction_verb)
@@ -85,10 +85,10 @@
 	if(faction && player.current.faction == faction)
 		player.current.faction = MOB_FACTION_NEUTRAL
 	if(player in current_antagonists)
-		to_chat(player.current, "<span class='danger'><font size = 3>You are no longer a [role_text]!</font></span>")
+		to_chat(player.current, "<span class='danger'><font size = 3>You are no longer a [name]!</font></span>")
 		current_antagonists -= player
 		faction_members -= player
-		player.special_role = null
+		player.assigned_special_role = null
 		update_icons_removed(player)
 
 		if(player.current)

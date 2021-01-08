@@ -48,8 +48,8 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 /obj/item/spellbook/attack_self(mob/user)
 	if(!user.mind)
 		return
-	if (user.mind.special_role != ANTAG_WIZARD)
-		if (user.mind.special_role != ANTAG_APPRENTICE)
+	if (user.mind.assigned_special_role != /decl/special_role/wizard)
+		if (user.mind.assigned_special_role != "Wizard's Apprentice")
 			to_chat(user, "You can't make heads or tails of this book.")
 			return
 		if (spellbook.book_flags & LOCKED)
@@ -155,7 +155,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	if(!istype(H))
 		return STATUS_CLOSE
 
-	if(H.mind && (spellbook.book_flags & LOCKED) && H.mind.special_role == ANTAG_APPRENTICE) //make sure no scrubs get behind the lock
+	if(H.mind && (spellbook.book_flags & LOCKED) && H.mind.assigned_special_role == "Wizard's Apprentice") //make sure no scrubs get behind the lock
 		return STATUS_CLOSE
 
 	return ..()

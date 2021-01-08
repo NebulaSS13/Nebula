@@ -346,7 +346,8 @@
 
 
 /mob/living/silicon/proc/is_traitor()
-	return mind && (mind in GLOB.traitors.current_antagonists)
+	var/decl/special_role/traitors = decls_repository.get_decl(/decl/special_role/traitor)
+	return mind && (mind in traitors.current_antagonists)
 
 /mob/living/silicon/adjustEarDamage()
 	return
@@ -366,7 +367,7 @@
 			mind.assigned_job.clear_slot()
 		if(mind.objectives.len)
 			qdel(mind.objectives)
-			mind.special_role = null
+			mind.assigned_special_role = null
 		clear_antag_roles(mind)
 	ghostize(0)
 	qdel(src)

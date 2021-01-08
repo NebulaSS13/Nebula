@@ -79,7 +79,11 @@
 			stat("Game Mode:", "[SSticker.mode ? SSticker.mode.name : SSticker.master_mode] ([SSticker.master_mode])")
 		else
 			stat("Game Mode:", PUBLIC_GAME_MODE)
-		var/extra_antags = list2params(additional_antag_types)
+		var/list/additional_antag_ids = list()
+		for(var/antag_type in global.additional_antag_types)
+			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
+			additional_antag_ids |= lowertext(antag.name)
+		var/extra_antags = list2params(additional_antag_ids)
 		stat("Added Antagonists:", extra_antags ? extra_antags : "None")
 
 		if(GAME_STATE <= RUNLEVEL_LOBBY)

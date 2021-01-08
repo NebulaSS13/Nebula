@@ -57,6 +57,6 @@
 			user.mutations.Add(MUTATION_HEAL)
 
 		user.update_mutations()
-		user.mind.special_role = "Avatar of the Wish Granter"
+		user.mind.assigned_special_role = "Avatar of the Wish Granter"
 		to_chat(user, "You have a very bad feeling about this.")
 	return

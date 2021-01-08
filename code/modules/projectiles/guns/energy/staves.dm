@@ -12,11 +12,11 @@
 	origin_tech = null
 	self_recharge = 1
 	charge_meter = 0
-	var/required_antag_type = MODE_WIZARD
+	var/required_antag_type = /decl/special_role/wizard
 
 /obj/item/gun/energy/staff/special_check(var/mob/user)
 	if(required_antag_type)
-		var/datum/antagonist/antag = get_antag_data(required_antag_type)
+		var/decl/special_role/antag = decls_repository.get_decl(required_antag_type)
 		if(user.mind && !antag.is_antagonist(user.mind))
 			to_chat(usr, "<span class='warning'>You focus your mind on \the [src], but nothing happens!</span>")
 			return 0

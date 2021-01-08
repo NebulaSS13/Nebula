@@ -513,7 +513,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	var/player_key = G_found.key
 
 	//Now for special roles and equipment.
-	var/datum/antagonist/antag_data = get_antag_data(new_character.mind.special_role)
+	var/decl/special_role/antag_data = ispath(new_character.mind.assigned_special_role, /decl/special_role) && decls_repository.get_decl(new_character.mind.assigned_special_role)
 	if(antag_data)
 		antag_data.add_antagonist(new_character.mind)
 		antag_data.place_mob(new_character)

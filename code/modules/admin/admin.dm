@@ -1005,10 +1005,10 @@ var/global/floorIsLava = 0
 
 	if(M)
 		if(SSticker.mode.antag_templates && SSticker.mode.antag_templates.len)
-			for(var/datum/antagonist/antag in SSticker.mode.antag_templates)
+			for(var/decl/special_role/antag in SSticker.mode.antag_templates)
 				if(antag.is_antagonist(M))
 					return 2
-		if(M.special_role)
+		if(M.assigned_special_role)
 			return 1
 
 	if(isrobot(character))
@@ -1216,10 +1216,12 @@ var/global/floorIsLava = 0
 
 	out += "<hr>"
 
-	if(SSticker.mode.antag_tags && SSticker.mode.antag_tags.len)
+	if(length(SSticker.mode.associated_antags))
 		out += "<b>Core antag templates:</b></br>"
-		for(var/antag_tag in SSticker.mode.antag_tags)
-			out += "<a href='?src=\ref[SSticker.mode];debug_antag=[antag_tag]'>[antag_tag]</a>.</br>"
+		for(var/antag_type in SSticker.mode.associated_antags)
+			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
+			if(antag)
+				out += "<a href='?src=\ref[SSticker.mode];debug_antag=\ref[antag]'>[antag.name]</a>.</br>"
 
 	if(SSticker.mode.round_autoantag)
 		out += "<b>Autotraitor <a href='?src=\ref[SSticker.mode];toggle=autotraitor'>enabled</a></b>."
@@ -1233,11 +1235,11 @@ var/global/floorIsLava = 0
 
 	out += "<b>All antag ids:</b>"
 	if(SSticker.mode.antag_templates && SSticker.mode.antag_templates.len)
-		for(var/datum/antagonist/antag in SSticker.mode.antag_templates)
+		for(var/decl/special_role/antag in SSticker.mode.antag_templates)
 			antag.update_current_antag_max(SSticker.mode)
-			out += " <a href='?src=\ref[SSticker.mode];debug_antag=[antag.id]'>[antag.id]</a>"
+			out += " <a href='?src=\ref[SSticker.mode];debug_antag=\ref[antag]'>[antag.name]</a>"
 			out += " ([antag.get_antag_count()]/[antag.cur_max]) "
-			out += " <a href='?src=\ref[SSticker.mode];remove_antag_type=[antag.id]'>\[-\]</a><br/>"
+			out += " <a href='?src=\ref[SSticker.mode];remove_antag_type=\ref[antag]'>\[-\]</a><br/>"
 	else
 		out += " None."
 	out += " <a href='?src=\ref[SSticker.mode];add_antag_type=1'>\[+\]</a><br/>"
@@ -1409,14 +1411,14 @@ var/global/floorIsLava = 0
 		to_chat(usr, "Mode has not started.")
 		return
 
-	var/list/all_antag_types = GLOB.all_antag_types_
+	var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
 	var/antag_type = input("Choose a template.","Force Latespawn") as null|anything in all_antag_types
-	if(!antag_type || !all_antag_types[antag_type])
+	if(!antag_type)
 		to_chat(usr, "Aborting.")
 		return
 
-	var/datum/antagonist/antag = all_antag_types[antag_type]
-	message_admins("[key_name(usr)] attempting to force latespawn with template [antag.id].")
+	var/decl/special_role/antag = all_antag_types[antag_type]
+	message_admins("[key_name(usr)] attempting to force latespawn of [antag.name].")
 	antag.attempt_auto_spawn()
 
 /datum/admins/proc/force_mode_latespawn()

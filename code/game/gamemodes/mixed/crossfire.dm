@@ -6,5 +6,8 @@
 	required_players = 25
 	required_enemies = 6
 	end_on_antag_death = FALSE
-	antag_tags = list(MODE_RAIDER, MODE_MERCENARY)
+	associated_antags = list(
+		/decl/special_role/raider,
+		/decl/special_role/mercenary
+	)
 	require_all_templates = TRUE

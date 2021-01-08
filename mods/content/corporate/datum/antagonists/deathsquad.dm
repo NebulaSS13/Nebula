@@ -1,9 +1,6 @@
-GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
-
-/datum/antagonist/deathsquad
-	id = MODE_DEATHSQUAD
-	role_text = "Death Commando"
-	role_text_plural = "Death Commandos"
+/decl/special_role/deathsquad
+	name = "Death Commando"
+	name_plural = "Death Commandos"
 	welcome_text = "You work in the service of corporate Asset Protection, answering directly to the Board of Directors."
 	landmark_id = "Commando"
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_HAS_NUKE | ANTAG_HAS_LEADER | ANTAG_RANDOM_EXCEPTED
@@ -19,11 +16,11 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 
 	var/deployed = 0
 
-/datum/antagonist/deathsquad/attempt_spawn()
+/decl/special_role/deathsquad/attempt_spawn()
 	if(..())
 		deployed = 1
 
-/datum/antagonist/deathsquad/equip(var/mob/living/carbon/human/player)
+/decl/special_role/deathsquad/equip(var/mob/living/carbon/human/player)
 	if(!..())
 		return
 
@@ -51,7 +48,7 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 		id.icon_state = "centcom"
 	create_radio(DTH_FREQ, player)
 
-/datum/antagonist/deathsquad/update_antag_mob(var/datum/mind/player)
+/decl/special_role/deathsquad/update_antag_mob(var/datum/mind/player)
 
 	..()
 
@@ -78,6 +75,6 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 
 	return
 
-/datum/antagonist/deathsquad/create_antagonist()
+/decl/special_role/deathsquad/create_antagonist()
 	if(..() && !deployed)
 		deployed = 1

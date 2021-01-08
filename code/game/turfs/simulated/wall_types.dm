@@ -99,7 +99,8 @@
 	reinf_material = /decl/material/solid/stone/cult/reinforced
 
 /turf/simulated/wall/cult/dismantle_wall()
-	GLOB.cult.remove_cultiness(CULTINESS_PER_TURF)
+	var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	cult.remove_cultiness(CULTINESS_PER_TURF)
 	. = ..()
 
 /turf/simulated/wall/cult/can_join_with(var/turf/simulated/wall/W)
