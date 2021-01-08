@@ -110,7 +110,7 @@
 	if(close_door_at && world.time >= close_door_at)
 		if(autoclose)
 			close_door_at = next_close_time()
-			close()
+			INVOKE_ASYNC(src, /obj/machinery/door/proc/close)
 		else
 			close_door_at = 0
 
