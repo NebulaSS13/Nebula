@@ -47,7 +47,6 @@
 #define slot_shoes_str       "slot_shoes"
 #define slot_wear_mask_str   "slot_wear_mask"
 #define slot_handcuffed_str  "slot_handcuffed"
-#define slot_legcuffed_str   "slot_legcuffed"
 #define slot_wear_id_str     "slot_wear_id"
 #define slot_gloves_str      "slot_gloves"
 #define slot_glasses_str     "slot_glasses"
@@ -213,7 +212,6 @@ var/list/all_inventory_slots = list(
 	slot_shoes_str,
 	slot_wear_mask_str,
 	slot_handcuffed_str,
-	slot_legcuffed_str,
 	slot_wear_id_str,
 	slot_gloves_str,
 	slot_glasses_str,
