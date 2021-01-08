@@ -498,7 +498,7 @@ var/list/slot_flags_enumeration = list(
 				if(!disable_warning)
 					to_chat(H, SPAN_WARNING("You need a suit before you can attach this [name]."))
 				return FALSE
-			if(!H.wear_suit.allowed)
+			if(H.wear_suit && !H.wear_suit.allowed)
 				if(!disable_warning)
 					to_chat(usr, SPAN_WARNING("You somehow have a suit with no defined allowed items for suit storage, stop that."))
 				return FALSE
