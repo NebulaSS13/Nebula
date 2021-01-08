@@ -64,7 +64,8 @@
 	var/image/I = ..()
 	if(I && wielded && (slot in list(BP_L_HAND, BP_R_HAND)))
 		I.icon_state = "[I.icon_state]-wielded"
-	
+	return I
+
 /*
  * Fireaxe
  */
