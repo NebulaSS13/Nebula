@@ -1,21 +1,21 @@
-/obj/structure/adherent_pylon
+/obj/structure/charge_pylon
 	name = "electron reservoir"
 	desc = "A tall, crystalline pylon that pulses with electricity."
-	icon = 'icons/obj/machines/adherent.dmi'
+	icon = 'icons/obj/structures/charge_pylon.dmi'
 	icon_state = "pedestal"
 	anchored = TRUE
 	density = TRUE
 	opacity = FALSE
 	var/next_use
 
-/obj/structure/adherent_pylon/attack_ai(var/mob/living/user)
+/obj/structure/charge_pylon/attack_ai(var/mob/living/user)
 	if(Adjacent(user))
 		attack_hand(user)
 
-/obj/structure/adherent_pylon/attack_hand(var/mob/living/user)
+/obj/structure/charge_pylon/attack_hand(var/mob/living/user)
 	charge_user(user)
 
-/obj/structure/adherent_pylon/proc/charge_user(var/mob/living/user)
+/obj/structure/charge_pylon/proc/charge_user(var/mob/living/user)
 	if(next_use > world.time) return
 	next_use = world.time + 10
 	var/mob/living/carbon/human/H = user
@@ -43,18 +43,18 @@
 		visible_message("<span class='danger'>\The [user] has been shocked by \the [src]!</span>")
 	user.throw_at(get_step(user,get_dir(src,user)), 5, 10)
 
-/obj/structure/adherent_pylon/attackby(var/obj/item/grab/G, mob/user)
+/obj/structure/charge_pylon/attackby(var/obj/item/grab/G, mob/user)
 	if(!istype(G))
 		return
 	var/mob/M = G.get_affecting_mob()
 	if(M)
 		charge_user(M)
 
-/obj/structure/adherent_pylon/Bumped(atom/AM)
+/obj/structure/charge_pylon/Bumped(atom/AM)
 	if(ishuman(AM))
 		charge_user(AM)
 
-/obj/structure/adherent_pylon/hitby(atom/AM)
+/obj/structure/charge_pylon/hitby(atom/AM)
 	..()
 	if(ishuman(AM))
 		charge_user(AM)
