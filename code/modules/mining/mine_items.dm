@@ -28,43 +28,49 @@
 /obj/item/pickaxe
 	name = "mining drill"
 	desc = "The most basic of mining drills, for short excavations and small mineral extractions."
-	icon = 'icons/obj/items/tool/mining_drill.dmi'
+	icon = 'icons/obj/items/tool/drills/drill.dmi'
+	icon_state = ICON_STATE_WORLD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	force = 15.0
 	throwforce = 4.0
-	icon_state = "drill"
-	item_state = "jackhammer"
 	w_class = ITEM_SIZE_HUGE
 	material = /decl/material/solid/metal/steel
-	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
 	origin_tech = "{'materials':1,'engineering':1}"
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
-	var/drill_sound = 'sound/weapons/Genhit.ogg'
-	var/drill_verb = "drilling"
 	sharp = 0
 
+	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
+	var/drill_sound = 'sound/weapons/Genhit.ogg'
+	var/drill_verb = "drilling"
 	var/excavation_amount = 200
 	var/build_from_parts = FALSE
 	var/hardware_color
 
-/obj/item/pickaxe/Initialize()
+/obj/item/pickaxe/on_update_icon()
+	cut_overlays()
 	if(build_from_parts)
-		icon_state = "pick_hardware"
 		color = hardware_color
-		overlays += overlay_image(icon, "pick_handle", flags=RESET_COLOR)
-	. = ..()
+		var/image/I = image(icon, "[icon_state]-handle")
+		I.appearance_flags |= RESET_COLOR
+		add_overlay(I)
+
+/obj/item/pickaxe/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/I = ..()
+	if(build_from_parts && check_state_in_icon("[I.icon_state]-handle", I.icon))
+		var/image/handle = image(I.icon, "[I.icon_state]-handle")
+		handle.appearance_flags |= RESET_COLOR
+		I.add_overlay(handle)
+	return I
 
 /obj/item/pickaxe/hammer
 	name = "sledgehammer"
 	desc = "A mining hammer made of reinforced metal. You feel like smashing your boss in the face with this."
-	icon = 'icons/obj/items/tool/sledgehammer.dmi'
-	icon_state = "sledgehammer"
+	icon = 'icons/obj/items/tool/drills/sledgehammer.dmi'
 
 /obj/item/pickaxe/drill
 	name = "advanced mining drill" // Can dig sand as well!
-	icon_state = "handdrill"
-	item_state = "jackhammer"
+	icon = 'icons/obj/items/tool/drills/drill_hand.dmi'
 	digspeed = 30
 	origin_tech = "{'materials':2,'powerstorage':3,'engineering':2}"
 	desc = "Yours is the drill that will pierce through the rock walls."
@@ -74,8 +80,7 @@
 
 /obj/item/pickaxe/jackhammer
 	name = "sonic jackhammer"
-	icon_state = "jackhammer"
-	item_state = "jackhammer"
+	icon = 'icons/obj/items/tool/drills/jackhammer.dmi'
 	digspeed = 20 //faster than drill, but cannot dig
 	origin_tech = "{'materials':3,'powerstorage':2,'engineering':2}"
 	desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
@@ -83,8 +88,7 @@
 
 /obj/item/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
 	name = "diamond mining drill"
-	icon_state = "diamonddrill"
-	item_state = "jackhammer"
+	icon = 'icons/obj/items/tool/drills/drill_diamond.dmi'
 	digspeed = 5 //Digs through walls, girders, and can dig up sand
 	origin_tech = "{'materials':6,'powerstorage':4,'engineering':5}"
 	desc = "Yours is the drill that will pierce the heavens!"
@@ -97,8 +101,7 @@
 
 /obj/item/pickaxe/borgdrill
 	name = "cyborg mining drill"
-	icon_state = "diamonddrill"
-	item_state = "jackhammer"
+	icon = 'icons/obj/items/tool/drills/drill_diamond.dmi'
 	digspeed = 15
 	desc = ""
 	drill_verb = "drilling"
@@ -107,9 +110,8 @@
 /obj/item/pickaxe/silver
 	name = "silver pickaxe"
 	desc = "This makes no metallurgic sense."
-	icon = 'icons/obj/items/tool/pickaxe.dmi'
-	icon_state = "pick_preview"
-	item_state = "pickaxe"
+	icon_state = "preview"
+	icon = 'icons/obj/items/tool/drills/pickaxe.dmi'
 	digspeed = 30
 	origin_tech = "{'materials':3}"
 	drill_verb = "picking"
@@ -120,9 +122,8 @@
 /obj/item/pickaxe/gold
 	name = "golden pickaxe"
 	desc = "This makes no metallurgic sense."
-	icon = 'icons/obj/items/tool/pickaxe.dmi'
-	icon_state = "pick_preview"
-	item_state = "pickaxe"
+	icon_state = "preview"
+	icon = 'icons/obj/items/tool/drills/pickaxe.dmi'
 	digspeed = 20
 	origin_tech = "{'materials':4}"
 	drill_verb = "picking"
@@ -133,9 +134,8 @@
 /obj/item/pickaxe/diamond
 	name = "diamond pickaxe"
 	desc = "A pickaxe with a diamond pick head."
-	icon = 'icons/obj/items/tool/pickaxe.dmi'
-	icon_state = "pick_preview"
-	item_state = "pickaxe"
+	icon_state = "preview"
+	icon = 'icons/obj/items/tool/drills/pickaxe.dmi'
 	digspeed = 10
 	origin_tech = "{'materials':6,'engineering':4}"
 	drill_verb = "picking"
@@ -149,13 +149,12 @@
 /obj/item/shovel
 	name = "shovel"
 	desc = "A large tool for digging and moving dirt."
-	icon = 'icons/obj/items/tool/shovel.dmi'
-	icon_state = "shovel"
+	icon = 'icons/obj/items/tool/shovels/shovel.dmi'
+	icon_state = ICON_STATE_WORLD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	force = 8.0
 	throwforce = 4.0
-	item_state = "shovel"
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = "{'materials':1,'engineering':1}"
 	material = /decl/material/solid/metal/steel
@@ -166,7 +165,7 @@
 /obj/item/shovel/spade
 	name = "spade"
 	desc = "A small tool for digging and moving dirt."
-	icon = 'icons/obj/items/tool/spade.dmi'
+	icon = 'icons/obj/items/tool/shovels/spade.dmi'
 	icon_state = "spade"
 	item_state = "spade"
 	force = 5.0

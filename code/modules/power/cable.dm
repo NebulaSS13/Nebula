@@ -527,7 +527,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	if (!color)
 		color = GLOB.possible_cable_colours[pick(GLOB.possible_cable_colours)]
 	if(amount == 1)
-		icon_sate = "coil1"
+		icon_state = "coil1"
 		SetName("cable piece")
 	else if(amount == 2)
 		icon_state = "coil2"
