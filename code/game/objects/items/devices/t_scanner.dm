@@ -27,9 +27,9 @@
 /obj/item/t_scanner/on_update_icon()
 	cut_overlays()
 	if(on)
-		add_oerlay("[icon_state]-on")
+		add_overlay("[icon_state]-on")
 	else
-		add_oerlay("[icon_state]-off")
+		add_overlay("[icon_state]-off")
 
 /obj/item/t_scanner/emp_act()
 	audible_message(src, "<span class = 'notice'> \The [src] buzzes oddly.</span>")

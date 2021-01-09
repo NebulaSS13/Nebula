@@ -11,14 +11,13 @@
 	name = "locator"
 	desc = "Used to track those with locater implants."
 	icon = 'icons/obj/items/device/locator.dmi'
-	icon_state = "locator"
+	icon_state = ICON_STATE_WORLD
 	var/temp = null
 	var/frequency = 1451
 	var/broadcasting = null
 	var/listening = 1.0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
-	item_state = "electronic"
 	throw_speed = 4
 	throw_range = 20
 	origin_tech = "{'magnets':1}"

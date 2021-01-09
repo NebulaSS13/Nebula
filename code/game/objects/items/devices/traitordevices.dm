@@ -57,4 +57,4 @@ effective or pretty fucking useless.
 /obj/item/batterer/on_update_icon()
 	cut_overlays()
 	if(times_used < max_uses)
-		add_overlay("[icon_state]-on"
+		add_overlay("[icon_state]-on")
