@@ -12,6 +12,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
 	siemens_coefficient = 0.9
+	on_mob_use_spritesheets = TRUE
 
 /obj/item/clothing/accessory/cloak/on_update_icon()
 	. = ..()
@@ -34,13 +35,12 @@
 		var/image/underlay
 		var/image/cloverlay
 
-		if(ishuman(user_mob) && bodytype != user_mob.get_bodytype())
+		var/bodyicon = get_icon_for_bodytype(bodytype)
+		if(bodytype != lowertext(user_mob.get_bodytype()))
 			var/mob/living/carbon/human/H = user_mob
-			var/bodyicon = get_icon_for_bodytype(BODYTYPE_HUMANOID)
 			underlay =  H.species.get_offset_overlay_image(FALSE, bodyicon, "[bodytype]-underlay", color, slot)
 			cloverlay = H.species.get_offset_overlay_image(FALSE, bodyicon, "[bodytype]-overlay", color, slot)
 		else
-			var/bodyicon = get_icon_for_bodytype(bodytype)
 			underlay = image(bodyicon, "[bodytype]-underlay")
 			cloverlay = image(bodyicon, "[bodytype]-overlay")
 
