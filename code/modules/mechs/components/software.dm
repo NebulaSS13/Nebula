@@ -2,9 +2,8 @@
 
 /obj/item/circuitboard/exosystem
 	name = "exosuit software template"
-	icon = 'icons/obj/module.dmi'
-	icon_state = "std_mod"
-	item_state = "electronic"
+	icon = 'icons/obj/modules/module_standard.dmi'
+	icon_state = ICON_STATE_WORLD
 	var/list/contains_software = list()
 
 /obj/item/circuitboard/exosystem/engineering
@@ -15,19 +14,22 @@
 /obj/item/circuitboard/exosystem/utility
 	name = T_BOARD_MECH("utility systems")
 	contains_software = list(MECH_SOFTWARE_UTILITY)
-	icon_state = "mcontroller"
+	icon = 'icons/obj/modules/module_controller.dmi'
+	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'programming':1}"
 
 /obj/item/circuitboard/exosystem/medical
 	name = T_BOARD_MECH("medical systems")
 	contains_software = list(MECH_SOFTWARE_MEDICAL)
-	icon_state = "mcontroller"
+	icon = 'icons/obj/modules/module_controller.dmi'
+	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'programming':3,'biotech':2}"
 
 /obj/item/circuitboard/exosystem/weapons
 	name = T_BOARD_MECH("basic weapon systems")
 	contains_software = list(MECH_SOFTWARE_WEAPONS)
-	icon_state = "mainboard"
+	icon = 'icons/obj/modules/module_mainboard.dmi'
+	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'programming':4,'combat':3}"
 
 #undef T_BOARD_MECH

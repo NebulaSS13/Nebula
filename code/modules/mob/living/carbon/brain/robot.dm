@@ -1,8 +1,8 @@
 /obj/item/mmi/digital/robot
 	name = "robotic intelligence circuit"
 	desc = "The pinnacle of artifical intelligence which can be achieved using classical computer science."
-	icon = 'icons/obj/module.dmi'
-	icon_state = "mainboard"
+	icon = 'icons/obj/modules/module_mainboard.dmi'
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'engineering':4,'materials':3,'programming':4}"
 

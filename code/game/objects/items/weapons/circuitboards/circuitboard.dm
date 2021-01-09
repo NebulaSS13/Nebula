@@ -1,8 +1,7 @@
 /obj/item/stock_parts/circuitboard
 	name = "circuit board"
-	icon = 'icons/obj/module.dmi'
-	icon_state = "id_mod"
-	item_state = "electronic"
+	icon = 'icons/obj/modules/module_id.dmi'
+	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'programming':2}"
 	density = 0
 	anchored = 0

@@ -1,10 +1,9 @@
 /obj/item/chameleon
 	name = "chameleon projector"
 	icon = 'icons/obj/items/device/chameleon_proj.dmi'
-	icon_state = "shield0"
+	icon_state = ICON_STATE_WORLD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
-	item_state = "electronic"
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 5

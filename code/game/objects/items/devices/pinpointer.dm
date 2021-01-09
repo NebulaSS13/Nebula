@@ -1,11 +1,10 @@
 /obj/item/pinpointer
 	name = "pinpointer"
 	icon = 'icons/obj/items/device/pinpointer.dmi'
-	icon_state = "pinoff"
+	icon_state = ICON_STATE_WORLD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
-	item_state = "electronic"
 	material = /decl/material/solid/metal/steel
 	var/weakref/target
 	var/active = 0
@@ -74,35 +73,35 @@
 		beeping--
 
 /obj/item/pinpointer/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(!active)
 		return
 	if(!target || !target.resolve())
-		overlays += image(icon,"pin_invalid")
+		add_overlay("[icon_state]-invalid")
 		return
 
 	var/turf/here = get_turf(src)
 	var/turf/there = get_turf(target.resolve())
 	if(!istype(there))
-		overlays += image(icon,"pin_invalid")
+		add_overlay("[icon_state]-invalid")
 		return
 
 	if(here == there)
-		overlays += image(icon,"pin_here")
+		add_overlay("[icon_state]-here")
 		return
 
 	if(!(there.z in GetConnectedZlevels(here.z)))
-		overlays += image(icon,"pin_invalid")
+		add_overlay("[icon_state]-invalid")
 		return
 	if(here.z > there.z)
-		overlays += image(icon,"pin_down")
+		add_overlay("[icon_state]-down")
 		return
 	if(here.z < there.z)
-		overlays += image(icon,"pin_up")
+		add_overlay("[icon_state]-up")
 		return
 
 	set_dir(get_dir(here, there))
-	var/image/pointer = image(icon,"pin_point")
+	var/image/pointer = image(icon,"[icon_state]-point")
 	var/distance = get_dist(here,there)
 	if(distance < world.view)
 		pointer.color = COLOR_LIME
@@ -110,7 +109,7 @@
 		pointer.color = COLOR_RED
 	else
 		pointer.color = COLOR_YELLOW
-	overlays += pointer
+	add_overlay(pointer)
 
 //Radio beacon locator
 /obj/item/pinpointer/radio
