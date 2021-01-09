@@ -1,9 +1,7 @@
 /obj/item/grenade/decompiler
 	desc = "It is set to detonate in 5 seconds. It will create an unstable singularity that will break nearby objects down into purified matter cubes."
 	name = "decompiler grenade"
-	icon = 'icons/obj/grenade.dmi'
-	icon_state = "delivery"
-	item_state = "flashbang"
+	icon = 'icons/obj/items/grenades/delivery.dmi'
 	origin_tech = "{'materials':3,'magnets':2,'exoticmatter':3}"
 	matter = list(
 		/decl/material/solid/exotic_matter = MATTER_AMOUNT_TRACE

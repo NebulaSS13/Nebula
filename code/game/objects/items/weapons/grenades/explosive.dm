@@ -16,8 +16,7 @@
 /obj/item/grenade/frag
 	name = "fragmentation grenade"
 	desc = "A military fragmentation grenade, designed to explode in a deadly shower of fragments, while avoiding massive structural damage."
-	icon_state = "frggrenade"
-
+	icon = 'icons/obj/items/grenades/frag.dmi'
 	var/list/fragment_types = list(/obj/item/projectile/bullet/pellet/fragment = 1)
 	var/num_fragments = 72  //total number of fragments produced by the grenade
 	var/explosion_size = 2   //size of the center explosion
@@ -73,14 +72,14 @@
 /obj/item/grenade/frag/shell
 	name = "fragmentation grenade"
 	desc = "A light fragmentation grenade, designed to be fired from a launcher. It can still be activated and thrown by hand if necessary."
-	icon_state = "fragshell"
+	icon = 'icons/obj/items/grenades/frag_shell.dmi'
 
 	num_fragments = 50 //less powerful than a regular frag grenade
 
 /obj/item/grenade/frag/high_yield
 	name = "fragmentation bomb"
 	desc = "Larger and heavier than a standard fragmentation grenade, this device is extremely dangerous. It cannot be thrown as far because of its weight."
-	icon_state = "frag"
+	icon = 'icons/obj/items/grenades/frag_old.dmi'
 
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 3

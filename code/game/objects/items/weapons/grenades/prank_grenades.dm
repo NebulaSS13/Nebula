@@ -1,5 +1,5 @@
 /obj/item/grenade/fake
-	icon_state = "frggrenade"
+	icon = 'icons/obj/items/grenades/frag.dmi'
 
 /obj/item/grenade/fake/detonate()
 	active = 0

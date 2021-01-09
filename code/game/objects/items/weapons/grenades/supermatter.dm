@@ -1,7 +1,6 @@
 /obj/item/grenade/supermatter
 	name = "supermatter grenade"
-	icon_state = "banana"
-	item_state = "emergency_engi"
+	icon = 'icons/obj/items/grenades/banana.dmi'
 	origin_tech = "{'wormholes':5,'magnets':4,'engineering':5}"
 	arm_sound = 'sound/effects/3.wav'
 	var/implode_at
@@ -19,9 +18,9 @@
 	playsound(src, 'sound/weapons/wave.ogg', 100)
 
 /obj/item/grenade/supermatter/on_update_icon()
-	overlays.Cut()
+	..()
 	if(implode_at)
-		overlays += image(icon = 'icons/obj/machines/power/fusion.dmi', icon_state = "emfield_s1")
+		add_overlay(image(icon = 'icons/obj/machines/power/fusion.dmi', icon_state = "emfield_s1"))
 
 /obj/item/grenade/supermatter/Process()
 	if(!isturf(loc))

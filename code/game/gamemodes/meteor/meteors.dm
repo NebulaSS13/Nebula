@@ -357,8 +357,8 @@
 /obj/effect/meteor/medium/missile
 	name = "missile"
 	desc = "Some kind of missile."
-	icon = 'icons/obj/missile.dmi'
-	icon_state = "missile"
+	icon = 'icons/obj/items/grenades/missile.dmi'
+	icon_state = ICON_STATE_WORLD
 	meteordrop = null
 	ismissile = TRUE
 	dropamt = 0
@@ -366,8 +366,8 @@
 /obj/effect/meteor/big/missile
 	name = "high-yield missile"
 	desc = "Some kind of missile."
-	icon = 'icons/obj/missile.dmi'
-	icon_state = "missile"
+	icon = 'icons/obj/items/grenades/missile.dmi'
+	icon_state = ICON_STATE_WORLD
 	meteordrop = null
 	ismissile = TRUE
 	dropamt = 0
@@ -375,8 +375,8 @@
 /obj/effect/meteor/flaming/missile
 	name = "incendiary missile"
 	desc = "Some kind of missile."
-	icon = 'icons/obj/missile.dmi'
-	icon_state = "missile"
+	icon = 'icons/obj/items/grenades/missile.dmi'
+	icon_state = ICON_STATE_WORLD
 	meteordrop = null
 	ismissile = TRUE
 	dropamt = 0
