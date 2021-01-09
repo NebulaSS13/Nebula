@@ -38,16 +38,10 @@
 	if(slot == slot_belt_str && contents.len)
 		var/list/ret_overlays = list()
 		for(var/obj/item/I in contents)
-			if(I.use_single_icon)
-				ret_overlays += I.get_mob_overlay(user_mob, slot, bodypart)
-			else
-				var/use_state = (I.item_state ? I.item_state : I.icon_state)
-				if(ishuman(user_mob))
-					var/mob/living/carbon/human/H = user_mob
-					ret_overlays += H.species.get_offset_overlay_image(FALSE, 'icons/mob/onmob/onmob_belt.dmi', use_state, I.color, slot)
-				else
-					ret_overlays += overlay_image('icons/mob/onmob/onmob_belt.dmi', use_state, I.color, RESET_COLOR)
-			ret.overlays += ret_overlays
+			var/image/overlay = I.get_mob_overlay(user_mob, slot, bodypart)
+			if(overlay)
+				ret_overlays += overlay
+		ret.overlays += ret_overlays
 	return ret
 
 /obj/item/storage/belt/holster
