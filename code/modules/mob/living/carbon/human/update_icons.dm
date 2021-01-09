@@ -623,10 +623,10 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/update_inv_wear_mask(var/update_icons=1)
-	if( wear_mask && ( istype(wear_mask, /obj/item/clothing/mask) || istype(wear_mask, /obj/item/clothing/accessory) ) && !(head && head.flags_inv & HIDEMASK))
-		overlays_standing[HO_FACEMASK_LAYER]	= wear_mask.get_mob_overlay(src,slot_wear_mask_str)
+	if(wear_mask && !(head && head.flags_inv & HIDEMASK))
+		overlays_standing[HO_FACEMASK_LAYER] = wear_mask.get_mob_overlay(src,slot_wear_mask_str)
 	else
-		overlays_standing[HO_FACEMASK_LAYER]	= null
+		overlays_standing[HO_FACEMASK_LAYER] = null
 	if(update_icons)
 		queue_icon_update()
 

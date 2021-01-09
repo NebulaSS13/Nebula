@@ -32,7 +32,7 @@
 
 /obj/item/clothing/mask/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/I = ..()
-	if(I && hanging && slot == slot_wear_mask_str && check_state_in_icon(I.icon, "[I.icon_state]-down"))
+	if(I && hanging && slot == slot_wear_mask_str && check_state_in_icon("[I.icon_state]-down", I.icon))
 		I.icon_state = "[I.icon_state]-down"
 	return I
  

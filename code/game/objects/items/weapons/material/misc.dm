@@ -77,6 +77,17 @@
 	base_parry_chance = 50
 	max_force = 20
 	material_force_multiplier = 0.20 //20 with hardness 80 (titanium) or 15 with hardness 60 (steel)
+	var/global/list/standard_machete_icons = list(
+		'icons/obj/items/weapon/machetes/machete.dmi',
+		'icons/obj/items/weapon/machetes/machete_red.dmi',
+		'icons/obj/items/weapon/machetes/machete_blue.dmi',
+		'icons/obj/items/weapon/machetes/machete_black.dmi',
+		'icons/obj/items/weapon/machetes/machete_olive.dmi'
+	)
+
+/obj/item/hatchet/machete/Initialize()
+	icon = pick(standard_machete_icons)
+	. = ..()
 
 /obj/item/hatchet/machete/unbreakable
 	unbreakable = TRUE
@@ -87,17 +98,6 @@
 	base_parry_chance = 40
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
-
-/obj/item/hatchet/machete/Initialize()
-	var/list/machete_icons = list(
-		'icons/obj/items/weapon/machetes/machete.dmi',
-		'icons/obj/items/weapon/machetes/machete_red.dmi',
-		'icons/obj/items/weapon/machetes/machete_blue.dmi',
-		'icons/obj/items/weapon/machetes/machete_black.dmi',
-		'icons/obj/items/weapon/machetes/machete_olive.dmi'
-	)
-	icon = pick(machete_icons)
-	. = ..()
 
 /obj/item/hatchet/machete/deluxe
 	name = "deluxe machete"
