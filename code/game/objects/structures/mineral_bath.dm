@@ -1,23 +1,23 @@
-/obj/structure/adherent_bath
+/obj/structure/mineral_bath
 	name = "mineral bath"
 	desc = "A deep, narrow basin filled with a swirling, semi-opaque liquid."
-	icon = 'icons/obj/machines/adherent.dmi'
+	icon = 'icons/obj/structures/mineral_bath.dmi'
 	icon_state = "bath"
 	anchored = TRUE
 	density = TRUE
 	opacity = FALSE
 	var/mob/living/occupant
 
-/obj/structure/adherent_bath/Destroy()
+/obj/structure/mineral_bath/Destroy()
 	eject_occupant()
 	. = ..()
 
-/obj/structure/adherent_bath/return_air()
+/obj/structure/mineral_bath/return_air()
 	var/datum/gas_mixture/venus = new(CELL_VOLUME, SYNTH_HEAT_LEVEL_1 - 10)
 	venus.adjust_multi(/decl/material/gas/chlorine, MOLES_N2STANDARD, /decl/material/gas/hydrogen, MOLES_O2STANDARD)
 	return venus
 
-/obj/structure/adherent_bath/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/mineral_bath/attackby(var/obj/item/thing, var/mob/user)
 	if(istype(thing, /obj/item/grab))
 		var/obj/item/grab/G = thing
 		if(enter_bath(G.affecting))
@@ -25,7 +25,7 @@
 		return
 	. = ..()
 
-/obj/structure/adherent_bath/proc/enter_bath(var/mob/living/patient, var/mob/user)
+/obj/structure/mineral_bath/proc/enter_bath(var/mob/living/patient, var/mob/user)
 
 	if(!istype(patient))
 		return FALSE
@@ -65,10 +65,10 @@
 	START_PROCESSING(SSobj, src)
 	return TRUE
 
-/obj/structure/adherent_bath/attack_hand(var/mob/user)
+/obj/structure/mineral_bath/attack_hand(var/mob/user)
 	eject_occupant()
 
-/obj/structure/adherent_bath/proc/eject_occupant()
+/obj/structure/mineral_bath/proc/eject_occupant()
 	if(occupant)
 		occupant.dropInto(loc)
 		playsound(loc, 'sound/effects/slosh.ogg', 50, 1)
@@ -80,14 +80,14 @@
 			occupant = null
 			STOP_PROCESSING(SSobj, src)
 
-/obj/structure/adherent_bath/MouseDrop_T(var/atom/movable/O, var/mob/user)
+/obj/structure/mineral_bath/MouseDrop_T(var/atom/movable/O, var/mob/user)
 	enter_bath(O, user)
 
-/obj/structure/adherent_bath/relaymove(var/mob/user)
+/obj/structure/mineral_bath/relaymove(var/mob/user)
 	if(user == occupant)
 		eject_occupant()
 
-/obj/structure/adherent_bath/Process()
+/obj/structure/mineral_bath/Process()
 
 	if(!occupant)
 		STOP_PROCESSING(SSobj, src)

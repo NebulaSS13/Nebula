@@ -1,4 +1,3 @@
-
 /obj/machinery/vending/tool
 	name = "YouTool"
 	desc = "Tools for tools."
@@ -17,8 +16,8 @@
 		/obj/item/scanner/gas = 5,
 		/obj/item/t_scanner = 5,
 		/obj/item/screwdriver = 5,
-		/obj/item/flashlight/flare/glowstick = 3, 
-		/obj/item/flashlight/flare/glowstick/red = 3, 
+		/obj/item/flashlight/flare/glowstick = 3,
+		/obj/item/flashlight/flare/glowstick/red = 3,
 		/obj/item/tape_roll = 8,
 		/obj/item/clothing/gloves/insulated/cheap = 2
 	)
@@ -26,12 +25,6 @@
 		/obj/item/weldingtool/hugetank = 2,
 		/obj/item/clothing/gloves/insulated = 1
 	)
-
-/obj/machinery/vending/tool/adherent/vend(var/datum/stored_items/vending_products/R, var/mob/living/carbon/user)
-	if(emagged)
-		. = ..()
-	else
-		to_chat(user, "<span class='notice'>The vending machine emits a discordant note, and a small hole blinks several times. It looks like it wants something inserted.</span>")
 
 /obj/machinery/vending/engivend
 	name = "Engi-Vend"
@@ -68,14 +61,14 @@
 	products = list(
 		/obj/item/storage/belt/utility = 4,
 		/obj/item/clothing/glasses/meson = 4,
-		/obj/item/clothing/gloves/insulated = 4, 
+		/obj/item/clothing/gloves/insulated = 4,
 		/obj/item/screwdriver = 12,
 		/obj/item/crowbar = 12,
 		/obj/item/wirecutters = 12,
 		/obj/item/multitool = 12,
 		/obj/item/wrench = 12,
 		/obj/item/t_scanner = 12,
-		/obj/item/cell = 8, 
+		/obj/item/cell = 8,
 		/obj/item/weldingtool = 8,
 		/obj/item/clothing/head/welding = 8,
 		/obj/item/light/tube = 10,
@@ -84,8 +77,8 @@
 		/obj/item/stock_parts/matter_bin = 5,
 		/obj/item/stock_parts/manipulator = 5,
 		/obj/item/stock_parts/console_screen = 5,
-		/obj/item/stock_parts/capacitor = 5, 
-		/obj/item/stock_parts/keyboard = 5, 
+		/obj/item/stock_parts/capacitor = 5,
+		/obj/item/stock_parts/keyboard = 5,
 		/obj/item/stock_parts/power/apc/buildable = 5
 	)
 	contraband = list(/obj/item/rcd = 1, /obj/item/rcd_ammo = 5)

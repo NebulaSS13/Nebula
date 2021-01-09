@@ -3,9 +3,10 @@
 /obj/item/organ/internal/brain/adherent
 	name = "mentality matrix"
 	desc = "The self-contained, self-supporting internal 'brain' of an Adherent unit."
-	icon = 'icons/mob/human_races/species/adherent/organs.dmi'
+	icon = 'mods/species/adherent/icons/organs.dmi'
 	icon_state = "brain"
 	action_button_name = "Reset Ident"
+	action_button_desc = "Updates your public name to reflect your current job"
 	var/next_rename
 	var/rename_delay = 15 MINUTES
 
@@ -43,7 +44,7 @@
 				to_chat(user, "<span class='notice'>You are now designated <b>[owner.real_name]</b>.</span>")
 
 /obj/item/organ/internal/powered
-	icon = 'icons/mob/human_races/species/adherent/organs.dmi'
+	icon = 'mods/species/adherent/icons/organs.dmi'
 	var/maintenance_cost = 1
 	var/base_action_state
 	var/active = FALSE
@@ -67,7 +68,7 @@
 /obj/item/organ/internal/powered/attack_self(var/mob/user)
 	. = ..()
 	if(.)
-		sound_to(user, sound('sound/effects/ding2.ogg'))
+		sound_to(user, sound('mods/species/adherent/sound/ding.ogg'))
 		if(is_broken())
 			to_chat(owner, "<span class='warning'>\The [src] [gender == PLURAL ? "are" : "is"] too damaged to function.</span>")
 			active = FALSE
@@ -80,6 +81,7 @@
 	name = "maneuvering jets"
 	desc = "Gas jets from a Adherent chassis."
 	action_button_name = "Toggle Maneuvering Pack"
+	action_button_desc = "Enables or disables your internal jetpack which allow you to maneuver in open space"
 	use_descriptor = "adjust your vector"
 	organ_tag = BP_JETS
 	parent_organ = BP_CHEST
@@ -92,6 +94,7 @@
 	name = "levitation plate"
 	desc = "A broad, flat disc of exotic matter. Slick to the touch."
 	action_button_name = "Toggle Antigravity"
+	action_button_desc = "Enables or disables your levitation disc which allow you to levitate and fly above tables/racks"
 	organ_tag = BP_FLOAT
 	parent_organ = BP_GROIN
 	icon_state = "float"
@@ -110,8 +113,8 @@
 
 /obj/item/organ/internal/eyes/adherent
 	name = "receptor prism"
-	icon = 'icons/mob/human_races/species/adherent/organs.dmi'
-	eye_icon = 'icons/mob/human_races/species/adherent/eyes.dmi'
+	icon = 'mods/species/adherent/icons/organs.dmi'
+	eye_icon = 'mods/species/adherent/icons/eyes.dmi'
 	icon_state = "eyes"
 	status = ORGAN_PROSTHETIC
 	contaminant_guard = TRUE
@@ -123,7 +126,7 @@
 
 /obj/item/organ/internal/cell/adherent
 	name = "piezoelectric core"
-	icon = 'icons/mob/human_races/species/adherent/organs.dmi'
+	icon = 'mods/species/adherent/icons/organs.dmi'
 	icon_state = "cell"
 
 /obj/item/organ/internal/powered/cooling_fins
@@ -131,6 +134,7 @@
 	gender = PLURAL
 	desc = "A lacy filligree of heat-radiating fins."
 	action_button_name = "Toggle Cooling"
+	action_button_desc = "Enables or disables your battery-powered internal cooling system"
 	organ_tag = BP_COOLING_FINS
 	parent_organ = BP_GROIN
 	icon_state = "fins"

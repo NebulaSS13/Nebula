@@ -20,6 +20,7 @@
 	#include "../../mods/species/neocorvids/_neocorvids.dme"
 	#include "../../mods/species/lizard/_lizard.dme"
 	#include "../../mods/species/vox/_vox.dme"
+	#include "../../mods/species/adherent/_adherent.dme"
 
 	#define USING_MAP_DATUM /datum/map/modpack_testing
 
