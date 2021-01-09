@@ -1,6 +1,6 @@
 /obj/item/clothing/mask
 	name = "mask"
-	icon = 'icons/obj/clothing/obj_mask.dmi'
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_FACE
 	body_parts_covered = SLOT_FACE|SLOT_EYES
 	blood_overlay_type = "maskblood"
@@ -32,7 +32,7 @@
 
 /obj/item/clothing/mask/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/I = ..()
-	if(I && pull_mask && hanging && slot == slot_wear_mask_str)
+	if(I && hanging && slot == slot_wear_mask_str && check_state_in_icon(I.icon, "[I.icon_state]-down"))
 		I.icon_state = "[I.icon_state]-down"
 	return I
  
