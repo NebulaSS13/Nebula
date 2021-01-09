@@ -1,8 +1,7 @@
 /obj/item/weldingtool
 	name = "welding tool"
-	icon = 'icons/obj/items/tool/welder.dmi'
-	icon_state = "welder"
-	item_state = "welder"
+	icon = 'icons/obj/items/tool/welders/welder.dmi'
+	icon_state = ICON_STATE_WORLD
 	desc = "A portable welding gun with a port for attaching fuel tanks."
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
@@ -43,6 +42,15 @@
 	QDEL_NULL(tank)
 
 	return ..()
+
+/obj/item/weldingtool/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/I = ..()
+	if(welding && check_state_in_icon(I.icon, "[I.icon_state]-lit"))
+		var/image/lit = image(I.icon, "[I.icon_state]-lit")
+		lit.layer = ABOVE_LIGHTING_LAYER
+		lit.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		I.add_overlay(lit)
+	return I
 
 /obj/item/weldingtool/get_heat()
 	. = max(..(), isOn() ? 3800 : 0)
@@ -226,16 +234,17 @@
 	return ..()
 
 /obj/item/weldingtool/on_update_icon()
-	..()
-	overlays.Cut()
+	cut_overlays()
 	if(tank)
-		overlays += image(icon, "welder_[tank.icon_state]")
+		add_overlay("[icon_state]-[tank.icon_state]")
 	if(welding)
-		overlays += image(icon, "welder_on")
+		var/image/I = image(icon, "[icon_state]-lit")
+		I.layer = ABOVE_LIGHTING_LAYER
+		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		add_overlay(I)
 		set_light(0.6, 0.5, 2.5, l_color =COLOR_PALE_ORANGE)
 	else
 		set_light(0)
-	item_state = welding ? "welder1" : "welder"
 	var/mob/M = loc
 	if(istype(M))
 		M.update_inv_hands()
@@ -336,7 +345,7 @@
 /obj/item/welder_tank
 	name = "\improper welding fuel tank"
 	desc = "An interchangeable fuel tank meant for a welding tool."
-	icon = 'icons/obj/items/tool/welder_tank.dmi'
+	icon = 'icons/obj/items/tool/welders/welder_tanks.dmi'
 	icon_state = "tank_normal"
 	w_class = ITEM_SIZE_SMALL
 	force = 5
