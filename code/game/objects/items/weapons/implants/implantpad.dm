@@ -4,14 +4,11 @@
 	icon = 'icons/obj/items/implant/implantpad.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
-	pixel_w = -7
 	var/obj/item/implant/imp
 
 /obj/item/implantpad/on_update_icon()
 	cut_overlays()
-	pixel_w = -7
 	if(imp)
-		pixel_w = 0
 		add_overlay("[icon_state]-imp")
 
 /obj/item/implantpad/attack_hand(mob/user)

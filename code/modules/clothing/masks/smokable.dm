@@ -18,6 +18,16 @@
 	var/smoke_effect = 0
 	var/smoke_amount = 1
 
+/obj/item/clothing/mask/smokable/dropped(mob/user)
+	. = ..()
+	if(lit)
+		update_icon()
+
+/obj/item/clothing/mask/smokable/equipped(mob/user)
+	. = ..()
+	if(lit)
+		update_icon()
+
 /obj/item/clothing/mask/smokable/Initialize()
 	. = ..()
 	atom_flags |= ATOM_FLAG_NO_REACT // so it doesn't react until you light it
@@ -85,8 +95,9 @@
 	if(lit && check_state_in_icon("[icon_state]-on", icon))
 		var/image/I = image(icon, "[icon_state]-on")
 		I.appearance_flags |= RESET_COLOR
-		I.layer = ABOVE_LIGHTING_LAYER
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		if(plane != HUD_PLANE)
+			I.layer = ABOVE_LIGHTING_LAYER
+			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		add_overlay(I)
 	if(ismob(loc))
 		var/mob/living/M = loc

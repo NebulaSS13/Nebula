@@ -61,7 +61,7 @@
 			if(prob(times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
 				broken = 1
 				to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
-				icon_state = "[initial(icon_state)]_burnt"
+				icon_state = "[initial(icon_state)]-burnt"
 				return 0
 			times_used++
 		else	//can only use it 5 times a minute
@@ -156,7 +156,7 @@
 			if(prob(2*times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
 				broken = 1
 				to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
-				icon_state = "[initial(icon_state)]_burnt"
+				icon_state = "[initial(icon_state)]-burnt"
 				return 0
 			times_used++
 		else	//can only use it  5 times a minute

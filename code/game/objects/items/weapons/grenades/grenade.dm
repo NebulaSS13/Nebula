@@ -13,13 +13,24 @@
 	var/fail_det_time = 5 // If you are clumsy and fail, you get this time.
 	var/arm_sound = 'sound/weapons/armbomb.ogg'
 
+/obj/item/grenade/dropped(mob/user)
+	. = ..()
+	if(active)
+		update_icon()
+
+/obj/item/grenade/equipped(mob/user)
+	. = ..()
+	if(active)
+		update_icon()
+
 /obj/item/grenade/on_update_icon()
 	cut_overlays()
 	if(active)
 		if(check_state_in_icon("[icon_state]-active", icon))
 			var/image/I = image(icon, "[icon_state]-active")
-			I.layer = ABOVE_LIGHTING_LAYER
-			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+			if(plane != HUD_PLANE)
+				I.layer = ABOVE_LIGHTING_LAYER
+				I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 			add_overlay(I)
 	else if(check_state_in_icon("[icon_state]-pin", icon))
 		add_overlay("[icon_state]-pin")

@@ -8,6 +8,7 @@
 	waterproof = TRUE
 	force = 7
 	throwforce = 7
+	lit_colour = COLOR_CYAN_BLUE
 	var/obj/item/cell/cell = /obj/item/cell/high
 	var/fuel_cost_multiplier = 10
 

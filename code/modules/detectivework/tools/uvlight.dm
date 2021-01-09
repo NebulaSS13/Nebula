@@ -26,12 +26,23 @@
 		STOP_PROCESSING(SSobj, src)
 	update_icon()
 
+/obj/item/uv_light/dropped(mob/user)
+	. = ..()
+	if(on)
+		update_icon()
+
+/obj/item/uv_light/equipped(mob/user, slot)
+	. = ..()
+	if(on)
+		update_icon()
+	
 /obj/item/uv_light/on_update_icon()
 	cut_overlays()
 	if(on)
 		var/image/I = image(icon, "[icon_state]-on")
-		I.layer = ABOVE_LIGHTING_LAYER
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		if(plane != HUD_PLANE)
+			I.layer = ABOVE_LIGHTING_LAYER
+			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		add_overlay(I)
 	
 /obj/item/uv_light/proc/clear_last_scan()

@@ -1,8 +1,7 @@
 /obj/item/clothing/mask/smokable/cigarette/rolled
 	name = "rolled cigarette"
 	desc = "A hand rolled cigarette using dried plant matter."
-	icon_state = "cigroll"
-	item_state = "cigoff"
+	icon = 'icons/clothing/mask/smokables/cigarette_rollup.dmi'
 	type_butt = /obj/item/trash/cigbutt
 	chem_volume = 50
 	brand = "handrolled"
@@ -14,10 +13,6 @@
 	if(filter)
 		to_chat(user, "Capped off one end with a filter.")
 
-/obj/item/clothing/mask/smokable/cigarette/rolled/on_update_icon()
-	. = ..()
-	if(!lit)
-		icon_state = filter ? "cigoff" : "cigroll"
 /////////// //Ported Straight from TG. I am not sorry. - BloodyMan  //YOU SHOULD BE
 //ROLLING//
 ///////////

@@ -33,8 +33,9 @@
 	cut_overlays()
 	if(mode == OPERATING)
 		var/image/I = image(icon, "[icon_state]-on")
-		I.layer = ABOVE_LIGHTING_LAYER
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		if(plane != HUD_PLANE)
+			I.layer = ABOVE_LIGHTING_LAYER
+			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		add_overlay(I)
 
 /obj/item/powersink/proc/set_mode(value)

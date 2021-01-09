@@ -79,8 +79,6 @@
 			add_overlay("[icon_state]-404")
 		else
 			add_overlay("[icon_state]-full")
-	else
-		icon_state = "aicard"
 
 /obj/item/aicard/proc/grab_ai(var/mob/living/silicon/ai/ai, var/mob/living/user)
 	if(!ai.client)

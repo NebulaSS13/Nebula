@@ -1,23 +1,19 @@
 /obj/item/pen/retractable
 	desc = "It's a retractable pen."
-	icon_state = "pen" //for map visibility
 	active = FALSE
 	icon = 'icons/obj/items/pens/pen_retractable.dmi'
 
 /obj/item/pen/retractable/blue
-	icon_state = "pen_blue"
 	colour = "blue"
 	color_description = "blue ink"
 	icon = 'icons/obj/items/pens/pen_retractable_blue.dmi'
 
 /obj/item/pen/retractable/red
-	icon_state = "pen_red"
 	colour = "red"
 	color_description = "red ink"
 	icon = 'icons/obj/items/pens/pen_retractable_red.dmi'
 
 /obj/item/pen/retractable/green
-	icon_state = "pen_green"
 	colour = "green"
 	color_description = "green ink"
 	icon = 'icons/obj/items/pens/pen_retractable_green.dmi'

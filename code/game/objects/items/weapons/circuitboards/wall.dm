@@ -33,7 +33,6 @@
 	name = T_BOARD("area power controller")
 	desc = "Heavy-duty switching circuits for power control."
 	icon = 'icons/obj/modules/module_power.dmi'
-	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	w_class = ITEM_SIZE_SMALL

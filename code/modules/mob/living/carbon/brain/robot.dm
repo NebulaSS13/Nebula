@@ -10,6 +10,9 @@
 	src.brainmob.SetName("[pick(list("ADA","DOS","GNU","MAC","WIN"))]-[random_id(type,1000,9999)]")
 	src.brainmob.real_name = src.brainmob.name
 
+/obj/item/mmi/digital/robot/on_update_icon()
+	icon_state = initial(icon_state)
+	
 /obj/item/mmi/digital/robot/transfer_identity(var/mob/living/carbon/H)
 	..()
 	if(brainmob.mind)

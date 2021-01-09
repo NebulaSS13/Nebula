@@ -12,6 +12,7 @@
 	slot_flags = SLOT_LOWER_BODY | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
 	high_visibility = 1
+	accessory_icons = null
 	var/badge_string = "Detective"
 	var/stored_name
 
@@ -65,7 +66,6 @@
 	desc = "This glowing blue badge marks the holder as a member of security."
 	color = COLOR_PALE_BLUE_GRAY
 	icon = 'icons/clothing/mask/holobadge.dmi'
-	icon_state = ICON_STATE_WORLD
 	badge_string = "Security"
 	var/badge_access = access_security
 	var/badge_number
@@ -126,26 +126,22 @@
 /obj/item/clothing/accessory/badge/old
 	name = "faded badge"
 	desc = "A faded badge, backed with leather. Looks crummy."
-	icon_state = "badge_round"
 	badge_string = "Unknown"
 
 /obj/item/clothing/accessory/badge/defenseintel
 	name = "\improper DIA investigator's badge"
 	desc = "A leather-backed silver badge bearing the crest of the Defense Intelligence Agency."
 	icon = 'icons/clothing/mask/diabadge.dmi'
-	icon_state = ICON_STATE_WORLD
 	badge_string = "Defense Intelligence Agency"
 
 /obj/item/clothing/accessory/badge/interstellarintel
 	name = "\improper OII agent's badge"
 	desc = "A synthleather holographic badge bearing the crest of the Office of Interstellar Intelligence."
 	icon = 'icons/clothing/mask/intelbadge.dmi'
-	icon_state = ICON_STATE_WORLD
 	badge_string = "Office of Interstellar Intelligence"
 
 /obj/item/clothing/accessory/badge/press
 	name = "press badge"
 	desc = "A leather-backed plastic badge displaying that the owner is certified press personnel."
 	icon = 'icons/clothing/mask/pressbadge.dmi'
-	icon_state = ICON_STATE_WORLD
 	badge_string = "Journalist"

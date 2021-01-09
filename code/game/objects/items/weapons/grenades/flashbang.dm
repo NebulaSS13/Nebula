@@ -108,18 +108,14 @@
 		if(prob(35))
 			again++
 			numspawned --
-
 	for(,numspawned > 0, numspawned--)
-		spawn(0)
-			new /obj/item/grenade/flashbang/cluster(src.loc)//Launches flashbangs
-			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
+		new /obj/item/grenade/flashbang/cluster(src.loc)//Launches flashbangs
+		playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 
 	for(,again > 0, again--)
-		spawn(0)
-			new /obj/item/grenade/flashbang/clusterbang/segment(src.loc)//Creates a 'segment' that launches a few more flashbangs
-			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
+		new /obj/item/grenade/flashbang/clusterbang/segment(src.loc)//Creates a 'segment' that launches a few more flashbangs
+		playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 	qdel(src)
-	return
 
 /obj/item/grenade/flashbang/clusterbang/segment
 	desc = "A smaller segment of a clusterbang. Better run."
@@ -133,22 +129,17 @@
 	var/stepdist = rand(1,4)//How far to step
 	var/temploc = src.loc//Saves the current location to know where to step away from
 	walk_away(src,temploc,stepdist)//I must go, my people need me
-	var/dettime = rand(15,60)
-	spawn(dettime)
-		detonate()
+	addtimer(CALLBACK(src, /obj/item/grenade/flashbang/clusterbang/segment/detonate), rand(15,60))
 
 /obj/item/grenade/flashbang/clusterbang/segment/detonate()
 	var/numspawned = rand(4,8)
 	for(var/more = numspawned,more > 0,more--)
 		if(prob(35))
 			numspawned --
-
 	for(,numspawned > 0, numspawned--)
-		spawn(0)
-			new /obj/item/grenade/flashbang/cluster(src.loc)
-			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
+		new /obj/item/grenade/flashbang/cluster(src.loc)
+		playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 	qdel(src)
-	return
 
 /obj/item/grenade/flashbang/cluster/Initialize()
 	. = ..() //Same concept as the segments, so that all of the parts don't become reliant on the clusterbang
@@ -157,6 +148,4 @@
 	var/stepdist = rand(1,3)
 	var/temploc = src.loc
 	walk_away(src,temploc,stepdist)
-	var/dettime = rand(15,60)
-	spawn(dettime)
-		detonate()
+	addtimer(CALLBACK(src, /obj/item/grenade/flashbang/detonate), rand(15,60))

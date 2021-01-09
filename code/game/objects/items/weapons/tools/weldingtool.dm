@@ -15,6 +15,7 @@
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'engineering':1}"
 
+	var/lit_colour = COLOR_PALE_ORANGE
 	var/waterproof = FALSE
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
 	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
@@ -35,17 +36,25 @@
 
 	. = ..()
 
+/obj/item/weldingtool/dropped(mob/user)
+	. = ..()
+	if(welding)
+		update_icon()
+
+/obj/item/weldingtool/equipped(mob/user, slot)
+	. = ..()
+	if(welding)
+		update_icon()
+
 /obj/item/weldingtool/Destroy()
 	if(welding)
 		STOP_PROCESSING(SSobj, src)
-
 	QDEL_NULL(tank)
-
 	return ..()
 
 /obj/item/weldingtool/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/I = ..()
-	if(welding && check_state_in_icon(I.icon, "[I.icon_state]-lit"))
+	if(welding && I && check_state_in_icon("[I.icon_state]-lit", I.icon))
 		var/image/lit = image(I.icon, "[I.icon_state]-lit")
 		lit.layer = ABOVE_LIGHTING_LAYER
 		lit.plane = EFFECTS_ABOVE_LIGHTING_PLANE
@@ -237,12 +246,13 @@
 	cut_overlays()
 	if(tank)
 		add_overlay("[icon_state]-[tank.icon_state]")
-	if(welding)
+	if(welding && check_state_in_icon("[icon_state]-lit", icon))
 		var/image/I = image(icon, "[icon_state]-lit")
-		I.layer = ABOVE_LIGHTING_LAYER
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		if(plane != HUD_PLANE)
+			I.layer = ABOVE_LIGHTING_LAYER
+			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		add_overlay(I)
-		set_light(0.6, 0.5, 2.5, l_color =COLOR_PALE_ORANGE)
+		set_light(0.6, 0.5, 2.5, l_color = lit_colour)
 	else
 		set_light(0)
 	var/mob/M = loc

@@ -18,12 +18,7 @@
 /obj/item/weldingtool/finger
 	name = "digital welder"
 	desc = "A precise, high quality welding tool."
-	icon_state = "welder_finger"
-	icon = 'icons/obj/augment_tools.dmi'
-
-
-/obj/item/weldingtool/finger/on_update_icon()
-	icon_state = welding ? "welder_finger_on" : "welder_finger"
+	icon = 'icons/obj/items/tool/welders/welder_finger.dmi'
 
 /obj/item/wirecutters/finger
 	name = "digital splicer"

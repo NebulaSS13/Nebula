@@ -9,7 +9,6 @@
 	chem_volume = 0 //ecig has no storage on its own but has reagent container created by parent obj
 
 	var/brightness_on = 1
-	var/active = 0
 	var/obj/item/cell/cigcell
 	var/cartridge_type = /obj/item/chems/ecig_cartridge/med_nicotine
 	var/obj/item/chems/ecig_cartridge/ec_cartridge
@@ -22,10 +21,10 @@
 	var/idle_treshold = 30
 
 /obj/item/clothing/mask/smokable/ecig/Initialize()
-	. = ..()
 	if(ispath(cell_type))
 		cigcell = new cell_type
 	ec_cartridge = new cartridge_type(src)
+	. = ..()
 
 /obj/item/clothing/mask/smokable/ecig/get_cell()
 	return cigcell
@@ -124,7 +123,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 		set_light(0.6, 0.5, brightness_on)
 	else
 		set_light(0)
-	if(ec_cartridge && check_state_in_icon("[icon_state]-loaded"))
+	if(ec_cartridge && check_state_in_icon("[icon_state]-loaded", icon))
 		add_overlay("[icon_state]-loaded")
 	if(ismob(loc))
 		var/mob/living/M = loc
@@ -160,7 +159,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 
 
 /obj/item/clothing/mask/smokable/ecig/attack_self(mob/user)
-	if (active)
+	if(lit)
 		Deactivate()
 		to_chat(user, "<span class='notice'>You turn off \the [src].</span> ")
 	else
@@ -174,7 +173,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 			else if(!cigcell.check_charge(power_usage * CELLRATE))
 				to_chat(user, "<span class='notice'>\The [src]'s power meter flashes a low battery warning and refuses to operate.</span> ")
 				return
-			active=1
+			lit = TRUE
 			START_PROCESSING(SSobj, src)
 			to_chat(user, "<span class='notice'>You turn on \the [src].</span> ")
 			update_icon()
@@ -184,7 +183,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 
 /obj/item/clothing/mask/smokable/ecig/attack_hand(mob/user)//eject cartridge
 	if(user.is_holding_offhand(src) && ec_cartridge)
-		active=FALSE
+		lit = FALSE
 		user.put_in_hands(ec_cartridge)
 		to_chat(user, SPAN_NOTICE("You remove \the [ec_cartridge] from \the [src]."))
 		ec_cartridge = null

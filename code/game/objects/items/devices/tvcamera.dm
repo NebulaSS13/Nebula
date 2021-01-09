@@ -3,6 +3,7 @@
 	desc = "An EyeBuddy livestreaming press camera drone. Weapon of choice for war correspondents and reality show cameramen. It does not appear to have any internal memory storage."
 	icon = 'icons/clothing/belt/camcorder.dmi'
 	icon_state = ICON_STATE_WORLD
+	item_state = null
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_LOWER_BODY
 	var/channel = "General News Feed"
@@ -77,8 +78,9 @@
 
 /obj/item/camera/tvcamera/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/I = ..()
-	if(I && slot == slot_belt_str && camera.status)
+	if(I && camera.status && check_state_in_icon("[I.icon_state]-on", I.icon))
 		I.icon_state = "[I.icon_state]-on"
+	return I
 
 /obj/item/camera/tvcamera/on_update_icon()
 	cut_overlays()

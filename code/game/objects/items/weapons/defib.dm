@@ -187,13 +187,11 @@
 	safety = 0
 	chargetime = (1 SECONDS)
 
-
 //paddles
-
 /obj/item/shockpaddles
 	name = "defibrillator paddles"
 	desc = "A pair of plastic-gripped paddles with flat metal surfaces that are used to deliver powerful electric shocks."
-	icon = 'icons/obj/defibrillator_compact.dmi'
+	icon = 'icons/obj/defibrillator_paddles.dmi'
 	icon_state = ICON_STATE_WORLD
 	gender = PLURAL
 	force = 2
