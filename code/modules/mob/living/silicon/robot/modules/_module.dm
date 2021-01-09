@@ -153,7 +153,7 @@
 		if(F.broken)
 			F.broken = 0
 			F.times_used = 0
-			F.icon_state = "flash"
+			F.update_icon()
 		else if(F.times_used)
 			F.times_used--
 	if(!synths || !synths.len)

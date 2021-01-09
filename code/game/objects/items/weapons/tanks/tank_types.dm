@@ -38,7 +38,7 @@
 /obj/item/tank/hydrogen
 	name = "hydrogen tank"
 	desc = "Contains hydrogen. Warning: flammable."
-	icon = 'icons/obj/items/tanks/tank_hydrogen.dmi'
+	icon = 'icons/obj/items/tanks/tank_orange.dmi'
 	gauge_icon = null
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = null

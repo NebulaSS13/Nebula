@@ -58,8 +58,8 @@
 	name = "tiny device"
 	desc = "Press button to activate. Can be done once and only once."
 	w_class = ITEM_SIZE_TINY
-	icon = 'icons/obj/items/device/flash.dmi'
-	icon_state = "sflash"
+	icon = 'icons/obj/items/device/flash_synthetic.dmi'
+	icon_state = ICON_STATE_WORLD
 	var/state = AWAITING_ACTIVATION
 	var/service_label = "Unnamed Service"
 	var/service_duration = 0 SECONDS
@@ -110,13 +110,12 @@
 	visible_message("<span class='warning'>\The [src] shuts down with a spark.</span>")
 
 /obj/item/uplink_service/on_update_icon()
+	icon_state = initial(icon_state)
 	switch(state)
-		if(AWAITING_ACTIVATION)
-			icon_state = initial(icon_state)
 		if(CURRENTLY_ACTIVE)
-			icon_state = "flash_on"
+			icon_state = "[icon_state]-on"
 		if(HAS_BEEN_ACTIVATED)
-			icon_state = "flash_burnt"
+			icon_state = "[icon_state]-burnt"
 
 /obj/item/uplink_service/proc/enable(var/mob/user = usr)
 	return TRUE
