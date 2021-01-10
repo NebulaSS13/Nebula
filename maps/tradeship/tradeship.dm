@@ -38,6 +38,7 @@
 	#include "tradeship-2.dmm"
 	#include "tradeship-3.dmm"
 
+	#include "jobs/_goals.dm"
 	#include "jobs/_jobs.dm"
 	#include "jobs/command.dm"
 	#include "jobs/engineering.dm"
