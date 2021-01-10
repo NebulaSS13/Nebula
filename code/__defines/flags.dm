@@ -22,6 +22,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define ATOM_FLAG_SHOW_REAGENT_NAME       BITFLAG(8) // Reagent presentation name is attached to the atom name
 #define ATOM_FLAG_CAN_BE_PAINTED          BITFLAG(9) // Can be painted using a paint sprayer or similar.
 #define ATOM_FLAG_SHIELD_CONTENTS         BITFLAG(10)// Protects contents from some global effects (Solar storms)
+#define ALLOW_VERY_UNSAFE_OVERLAY_COUNTS_THAT_WILL_BREAK_THINGS_YES_I_KNOW_WHAT_I_AM_DOING BITFLAG(11) // Disables the SSoverlays overlay cap check for this atom
 
 #define ATOM_IS_CONTAINER(A)              (A.atom_flags & ATOM_FLAG_CONTAINER)
 #define ATOM_IS_OPEN_CONTAINER(A)         (A.atom_flags & ATOM_FLAG_OPEN_CONTAINER)

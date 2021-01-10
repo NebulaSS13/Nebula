@@ -10,6 +10,7 @@ SUBSYSTEM_DEF(overlays)
 	var/idex = 1
 	var/list/overlay_icon_state_caches = list()
 	var/list/overlay_icon_cache = list()
+	var/overlay_cap = 100
 
 /datum/controller/subsystem/overlays/stat_entry()
 	..("Ov:[processing.len - (idex - 1)]")
@@ -57,6 +58,9 @@ SUBSYSTEM_DEF(overlays)
 		overlays = po
 	else
 		overlays.Cut()
+
+	if(!(atom_flags & ALLOW_VERY_UNSAFE_OVERLAY_COUNTS_THAT_WILL_BREAK_THINGS_YES_I_KNOW_WHAT_I_AM_DOING) && length(overlays) > SSoverlays.overlay_cap)
+		overlays.Cut(1, SSoverlays.overlay_cap)
 
 	overlay_queued = FALSE
 
