@@ -135,9 +135,11 @@ var/list/holder_mob_icons = list(
 	color = M.color
 	SetName(M.name)
 	desc = M.desc
+
 	var/mob/living/carbon/human/H = loc
-	last_holder = H
-	register_all_movement(H, M)
+	if(istype(H))
+		last_holder = H
+		register_all_movement(H, M)
 
 	update_held_icon()
 
