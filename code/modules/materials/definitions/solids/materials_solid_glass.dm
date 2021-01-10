@@ -8,7 +8,8 @@
 	integrity = 50
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = MAT_VALUE_RIGID + 10	
+	hardness = MAT_VALUE_RIGID + 10
+	door_icon_base = "metal"
 	reflectiveness = MAT_VALUE_SHINY
 	melting_point = T100C
 	weight = MAT_VALUE_VERY_LIGHT
