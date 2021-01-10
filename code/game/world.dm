@@ -1,6 +1,5 @@
-/var/server_name = "Nebula13"
-
 /var/game_id = null
+
 /hook/global_init/proc/generate_gameid()
 	if(game_id != null)
 		return
@@ -72,7 +71,7 @@
 
 	enable_debugger()
 	//set window title
-	name = "[server_name] - [GLOB.using_map.full_name]"
+	name = "[config.server_name] - [GLOB.using_map.full_name]"
 
 	//logs
 	SetupLogs()
