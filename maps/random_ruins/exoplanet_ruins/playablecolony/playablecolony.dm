@@ -22,8 +22,8 @@
 	total_positions = 6
 	outfit_type = /decl/hierarchy/outfit/job/colonist
 	min_skill = list(
+		SKILL_LITERACY = SKILL_BASIC,
 		SKILL_CONSTRUCTION = SKILL_BASIC,
-		SKILL_ANATOMY = SKILL_BASIC,
 		SKILL_MEDICAL = SKILL_BASIC,
 		SKILL_BOTANY = SKILL_BASIC,
 		SKILL_EVA = SKILL_BASIC,
