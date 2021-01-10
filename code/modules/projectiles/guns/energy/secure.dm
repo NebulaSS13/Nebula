@@ -38,4 +38,4 @@
 
 /obj/item/gun/energy/laser/secure/on_update_icon()
 	. = ..()
-	overlays += get_mutable_overlay(icon, "[icon_state]_stripe", COLOR_BLUE_GRAY)
+	overlays += mutable_appearance(icon, "[icon_state]_stripe", COLOR_BLUE_GRAY)

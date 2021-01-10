@@ -34,9 +34,9 @@
 	. = ..()
 	if(applies_material_colour)
 		if(draw_handle)
-			add_overlay(get_mutable_overlay(icon, "[icon_state]_handle"))
+			add_overlay(mutable_appearance(icon, "[icon_state]_handle"))
 		if(material.reflectiveness >= MAT_VALUE_SHINY)
-			add_overlay(get_mutable_overlay(icon, "[icon_state]_shine"), adjust_brightness(color, 20 + material.reflectiveness))
+			add_overlay(mutable_appearance(icon, "[icon_state]_shine"), adjust_brightness(color, 20 + material.reflectiveness))
 
 /obj/item/sword/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/res = ..()

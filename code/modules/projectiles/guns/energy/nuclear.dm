@@ -57,12 +57,12 @@
 	var/list/new_overlays = list()
 
 	var/reactor_icon = fail_counter ? "danger" : "clean"
-	new_overlays += get_mutable_overlay(icon, "[get_world_inventory_state()]_[reactor_icon]")
+	new_overlays += mutable_appearance(icon, "[get_world_inventory_state()]_[reactor_icon]")
 	var/datum/firemode/current_mode = firemodes[sel_mode]
-	new_overlays += get_mutable_overlay(icon, "[get_world_inventory_state()]_[current_mode.name]")
+	new_overlays += mutable_appearance(icon, "[get_world_inventory_state()]_[current_mode.name]")
 
 	overlays += new_overlays
 
 /obj/item/gun/energy/gun/nuclear/add_onmob_charge_meter(image/I)
-	I.overlays += get_mutable_overlay(icon, "[I.icon_state]_charge", get_charge_color())
+	I.overlays += mutable_appearance(icon, "[I.icon_state]_charge", get_charge_color())
 	return I

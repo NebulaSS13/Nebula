@@ -31,7 +31,7 @@
 	..()
 
 	if(reagents?.total_volume && check_state_in_icon("[icon_state]100", icon))
-		var/mutable_appearance/filling = get_mutable_overlay(icon, "[icon_state]10", reagents.get_color())
+		var/mutable_appearance/filling = mutable_appearance(icon, "[icon_state]10", reagents.get_color())
 
 		var/percent = round((reagents.total_volume / volume) * 100)
 		switch(percent)
@@ -46,7 +46,7 @@
 		overlays += filling
 
 	if(!ATOM_IS_OPEN_CONTAINER(src))
-		overlays += get_mutable_overlay(icon, "[icon_state]_lid")
+		overlays += mutable_appearance(icon, "[icon_state]_lid")
 
 /obj/item/chems/glass/beaker/large
 	name = "large beaker"

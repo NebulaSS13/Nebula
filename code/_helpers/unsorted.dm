@@ -825,13 +825,3 @@ var/list/WALLITEMS = list(
 // call to generate a stack trace and print to runtime logs
 /proc/crash_at(msg, file, line)
 	CRASH("%% [file],[line] %% [msg]")
-
-/proc/get_mutable_overlay(icon, icon_state, color, flags = RESET_COLOR | RESET_ALPHA, plane = FLOAT_PLANE)
-	var/mutable_appearance/res = new()
-	res.icon = icon
-	res.icon_state = icon_state
-	res.color = color
-	res.appearance_flags = flags
-	res.plane = plane
-	res.layer = FLOAT_LAYER
-	return res

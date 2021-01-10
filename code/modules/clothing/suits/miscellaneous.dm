@@ -174,7 +174,7 @@
 /obj/item/clothing/suit/leathercoat/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
 	var/image/I = ..()
 	if(shine > 0 && slot == slot_wear_suit_str)
-		var/mutable_appearance/S = get_mutable_overlay(I.icon, "shine")
+		var/mutable_appearance/S = mutable_appearance(I.icon, "shine")
 		S.alpha = max(shine, artificial_shine)/100 * 255
 		I.overlays += S
 	return I

@@ -134,19 +134,19 @@
 		color = material.color
 		alpha = 100 + material.opacity * 255
 	overlays += get_shaft_overlay("shaft")
-	overlays += get_mutable_overlay(icon, "cable", cable_color)
+	overlays += mutable_appearance(icon, "cable", cable_color)
 
 /obj/item/twohanded/spear/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(wielded && check_state_in_icon("[ret.icon_state]_wielded", icon))
 		ret.icon_state = "[ret.icon_state]_wielded"
 	ret.overlays += get_shaft_overlay("[ret.icon_state]_shaft")
-	ret.overlays += get_mutable_overlay(icon, "[ret.icon_state]_cable", cable_color)
+	ret.overlays += mutable_appearance(icon, "[ret.icon_state]_cable", cable_color)
 	return ret
 
 /obj/item/twohanded/spear/proc/get_shaft_overlay(var/base_state)
 	var/decl/material/M = decls_repository.get_decl(shaft_material)
-	var/mutable_appearance/shaft = get_mutable_overlay(icon, base_state, M.color)
+	var/mutable_appearance/shaft = mutable_appearance(icon, base_state, M.color)
 	shaft.alpha = 155 + 100 * M.opacity
 	return shaft
 
