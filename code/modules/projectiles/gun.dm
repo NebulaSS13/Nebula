@@ -118,7 +118,7 @@
 /obj/item/gun/proc/update_base_icon()
 
 /obj/item/gun/proc/get_safety_indicator()
-	return get_mutable_overlay(icon, "[get_world_inventory_state()][safety_icon][safety()]")
+	return mutable_appearance(icon, "[get_world_inventory_state()][safety_icon][safety()]")
 
 /obj/item/gun/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/I = ..()

@@ -59,7 +59,7 @@
 /obj/item/gun/projectile/pistol/holdout/update_base_icon()
 	..()
 	if(silenced)
-		overlays += get_mutable_overlay(icon, "[get_world_inventory_state()]-silencer")
+		overlays += mutable_appearance(icon, "[get_world_inventory_state()]-silencer")
 
 /obj/item/gun/projectile/pistol/holdout/get_on_belt_overlay()
 	if(silenced && check_state_in_icon("on_belt_silenced", icon))

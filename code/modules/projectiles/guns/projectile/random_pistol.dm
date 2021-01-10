@@ -41,7 +41,7 @@
 
 /obj/item/gun/projectile/pistol/random/get_safety_indicator()
 	var/base_state = get_world_inventory_state()
-	var/mutable_appearance/safety = get_mutable_overlay(icon, "safety[safety()]")
+	var/mutable_appearance/safety = mutable_appearance(icon, "safety[safety()]")
 	safety.pixel_x = gun_look.safety_offset[base_state][1]
 	safety.pixel_y = gun_look.safety_offset[base_state][2]
 	return safety

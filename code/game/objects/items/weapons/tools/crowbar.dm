@@ -36,7 +36,7 @@
 	icon_state = "[get_world_inventory_state()][shape_type]"
 	if(!handle_color)
 		handle_color = pick(valid_colours)
-	overlays += get_mutable_overlay(icon, "[get_world_inventory_state()]_handle[shape_type]", handle_color)
+	overlays += mutable_appearance(icon, "[get_world_inventory_state()]_handle[shape_type]", handle_color)
 
 /obj/item/crowbar/afterattack(atom/target, mob/user)
 	. = ..()
