@@ -21,6 +21,22 @@
 	info = "You are a Colonist, living on the rim of explored, let alone inhabited, space in a reconstructed shelter made from the very ship that took you here."
 	total_positions = 6
 	outfit_type = /decl/hierarchy/outfit/job/colonist
+	min_skill = list(
+		SKILL_LITERACY = SKILL_BASIC,
+		SKILL_CONSTRUCTION = SKILL_BASIC,
+		SKILL_MEDICAL = SKILL_BASIC,
+		SKILL_BOTANY = SKILL_BASIC,
+		SKILL_EVA = SKILL_BASIC,
+		SKILL_ELECTRICAL = SKILL_BASIC
+	)
+	skill_points = 20
+	alt_titles = list(
+		"Colony Engineer",
+		"Colony Doctor",
+		"Colony Botanist",
+		"Colony Officer",
+		"Colony Miner"
+	)
 
 /decl/hierarchy/outfit/job/colonist
 	name = OUTFIT_JOB_NAME("Colonist")
