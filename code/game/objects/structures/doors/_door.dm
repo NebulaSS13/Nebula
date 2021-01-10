@@ -25,6 +25,12 @@
 	changing_state = FALSE
 	update_nearby_tiles(need_rebuild=TRUE)
 
+	if(material.luminescence)
+		set_light(0.5, 1, material.luminescence, l_color = material.color)
+
+	if(material.opacity < 0.5)
+		alpha = 180
+
 /obj/structure/door/Destroy()
 	update_nearby_tiles()
 	QDEL_NULL(lock)
@@ -68,7 +74,7 @@
 		return FALSE
 	flick("[icon_base]opening", src)
 	playsound(src.loc, material.dooropen_noise, 100, 1)
-	
+
 	changing_state = TRUE
 	sleep(1 SECOND)
 	set_density(FALSE)
@@ -191,9 +197,17 @@
 	material = /decl/material/solid/stone/cult
 
 /obj/structure/door/wood/saloon
-	icon_base = "saloon"
 	material = /decl/material/solid/wood
 	opacity = FALSE
+
+/obj/structure/door/glass
+	material = /decl/material/solid/glass
+
+/obj/structure/door/plastic
+	material = /decl/material/solid/plastic
+
+/obj/structure/door/exotic_matter
+	material = /decl/material/solid/exotic_matter
 
 /obj/structure/door/shuttle
 	material = /decl/material/solid/metal/steel

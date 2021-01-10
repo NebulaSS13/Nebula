@@ -36,6 +36,7 @@
 		. += new/datum/stack_recipe/urn(src)
 		. += new/datum/stack_recipe/spoon(src)
 		. += new/datum/stack_recipe/coin(src)
+		. += new/datum/stack_recipe/furniture/door(src)
 
 	if(wall_support_value >= 10)
 		. += new/datum/stack_recipe/furniture/girder(src)

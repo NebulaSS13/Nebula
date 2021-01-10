@@ -6,7 +6,8 @@
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	color = COLOR_EGGSHELL
-	hardness = MAT_VALUE_SOFT
+	door_icon_base = "plastic"
+	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_LIGHT
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = "{'materials':3}"
@@ -17,6 +18,7 @@
 	taste_description = "plastic"
 	fuel_value = 0.6
 	burn_product = /decl/material/gas/carbon_monoxide // placeholder for more appropriate toxins
+	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 
 /decl/material/solid/plastic/generate_recipes(var/reinforce_material)
 	. = ..()
