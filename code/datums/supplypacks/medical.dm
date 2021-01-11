@@ -1,5 +1,5 @@
 /decl/hierarchy/supply_pack/medical
-	name = "Medical"
+	name = "Medical fart"
 	containertype = /obj/structure/closet/crate/medical
 
 /decl/hierarchy/supply_pack/medical/medical
