@@ -337,14 +337,13 @@
 	name = "destination tagger"
 	desc = "Used to set the destination of properly wrapped packages."
 	icon = 'icons/obj/items/device/destination_tagger.dmi'
-	icon_state = "dest_tagger"
-	var/currTag = 0
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
-	item_state = "electronic"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	var/currTag = 0
 
 /obj/item/destTagger/proc/openwindow(mob/user)
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"

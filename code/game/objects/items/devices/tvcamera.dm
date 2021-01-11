@@ -1,8 +1,9 @@
 /obj/item/camera/tvcamera
 	name = "press camera drone"
 	desc = "An EyeBuddy livestreaming press camera drone. Weapon of choice for war correspondents and reality show cameramen. It does not appear to have any internal memory storage."
-	icon_state = "camcorder"
-	item_state = "camcorder"
+	icon = 'icons/clothing/belt/camcorder.dmi'
+	icon_state = ICON_STATE_WORLD
+	item_state = null
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_LOWER_BODY
 	var/channel = "General News Feed"
@@ -75,14 +76,16 @@
 	if(!href_list["close"])
 		attack_self(usr)
 
+/obj/item/camera/tvcamera/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/I = ..()
+	if(I && camera.status && check_state_in_icon("[I.icon_state]-on", I.icon))
+		I.icon_state = "[I.icon_state]-on"
+	return I
+
 /obj/item/camera/tvcamera/on_update_icon()
-	..()
+	cut_overlays()
 	if(camera.status)
-		icon_state = "camcorder_on"
-		item_state = "camcorder_on"
-	else
-		icon_state = "camcorder"
-		item_state = "camcorder"
+		add_overlay("[icon_state]-on")
 	var/mob/living/carbon/human/H = loc
 	if(istype(H))
 		H.update_inv_hands()

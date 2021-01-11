@@ -18,13 +18,12 @@ effective or pretty fucking useless.
 	name = "mind batterer"
 	desc = "A strange device with twin antennas."
 	icon = 'icons/obj/items/weapon/batterer.dmi'
-	icon_state = "batterer"
+	icon_state = ICON_STATE_WORLD
 	throwforce = 5
 	w_class = ITEM_SIZE_TINY
 	throw_speed = 4
 	throw_range = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	item_state = "electronic"
 	origin_tech = "{'magnets':3,'combat':3,'esoteric':3}"
 
 	var/times_used = 0 //Number of times it's been used.
@@ -53,5 +52,9 @@ effective or pretty fucking useless.
 	playsound(src.loc, 'sound/misc/interference.ogg', 50, 1)
 	to_chat(user, "<span class='notice'>You trigger [src].</span>")
 	times_used += 1
-	if(times_used >= max_uses)
-		icon_state = "battererburnt"
+	update_icon()
+
+/obj/item/batterer/on_update_icon()
+	cut_overlays()
+	if(times_used < max_uses)
+		add_overlay("[icon_state]-on")

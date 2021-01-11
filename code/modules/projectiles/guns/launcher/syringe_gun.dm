@@ -140,13 +140,16 @@
 /obj/item/gun/launcher/syringe/disguised
 	name = "deluxe electronic cigarette"
 	desc = "A premium model eGavana MK3 electronic cigarette, shaped like a cigar."
-	icon = 'icons/obj/items/ecig.dmi'
-	icon_state = "pcigoff1"
-	item_state = "pcigoff1"
+	icon = 'icons/clothing/mask/smokables/cigarette_electronic_deluxe.dmi'
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 	force = 3
 	throw_distance = 7
 	release_force = 10
+
+/obj/item/gun/launcher/syringe/disguised/on_update_icon()
+	cut_overlays()
+	add_overlay("[icon_state]-loaded")
 
 /obj/item/gun/launcher/syringe/disguised/examine(mob/user, distance)
 	. = ..()

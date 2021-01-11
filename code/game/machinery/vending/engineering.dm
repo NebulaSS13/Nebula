@@ -107,7 +107,6 @@
 		/obj/item/scanner/health = 2,
 		/obj/item/scalpel = 1,
 		/obj/item/circular_saw = 1,
-		/obj/item/tank/anesthetic = 2,
 		/obj/item/clothing/mask/breath/medical = 5,
 		/obj/item/screwdriver = 2,
 		/obj/item/crowbar = 2

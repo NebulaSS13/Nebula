@@ -49,8 +49,6 @@
 	if(slot_w_uniform_str in equip_slots)
 		equip_slots |= slot_tie_str
 
-	equip_slots |= slot_legcuffed_str
-
 /datum/hud_data/monkey
 	gear = list(
 		"i_clothing" =   list("loc" = ui_iclothing, "name" = "Uniform",      "slot" = slot_w_uniform_str, "state" = "center", "toggle" = 1),

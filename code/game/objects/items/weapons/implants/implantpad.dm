@@ -1,26 +1,21 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
-
 /obj/item/implantpad
 	name = "implant pad"
 	desc = "Used to reprogramm implants."
 	icon = 'icons/obj/items/implant/implantpad.dmi'
-	icon_state = "implantpad-0"
-	item_state = "electronic"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 	var/obj/item/implant/imp
 
 /obj/item/implantpad/on_update_icon()
-	if (imp)
-		icon_state = "implantpad-1"
-	else
-		icon_state = "implantpad-0"
+	cut_overlays()
+	if(imp)
+		add_overlay("[icon_state]-imp")
 
 /obj/item/implantpad/attack_hand(mob/user)
 	if(imp && !(src in user.get_held_items()))
 		user.put_in_active_hand(imp)
 		imp.add_fingerprint(user)
 		add_fingerprint(user)
-
 		imp = null
 		update_icon()
 	else

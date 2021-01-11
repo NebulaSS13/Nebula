@@ -23,6 +23,7 @@
 	filter_water = TRUE
 	icon_state = "ascent_mask"
 	item_state = "ascent_mask"
+	icon = 'mods/species/ascent/icons/mask.dmi'
 	sprite_sheets = list(
 		BODYTYPE_SNAKE =        'mods/species/ascent/icons/species/serpentid/onmob_mask_serpentid.dmi',
 		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/species/mantid/onmob_mask_gyne.dmi',

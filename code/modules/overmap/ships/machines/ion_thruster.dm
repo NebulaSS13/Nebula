@@ -64,7 +64,7 @@
 /obj/item/stock_parts/circuitboard/engine/ion
 	name = T_BOARD("ion thruster")
 	board_type = "machine"
-	icon_state = "mcontroller"
+	icon = 'icons/obj/modules/module_controller.dmi'
 	build_path = /obj/machinery/ion_thruster
 	origin_tech = "{'powerstorage':1,'engineering':2}"
 	req_components = list(

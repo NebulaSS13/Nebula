@@ -20,11 +20,6 @@
 /obj/structure/closet/secure_closet/warden/WillContain()
 	. = ..() + /obj/item/clothing/head/beret/corp/sec/corporate/warden
 
-/obj/structure/closet/secure_closet/xenoarchaeologist/Initialize()
-	. = ..()
-	if(!(locate(/obj/item/storage/backpack/toxins) in contents))
-		new /obj/item/storage/backpack/satchel/tox(src)
-
 /obj/structure/closet/secure_closet/security/WillContain()
 	. = ..()
 	. += /obj/item/clothing/suit/armor/vest/nt
@@ -36,12 +31,6 @@
 	new /obj/item/clothing/head/beret/corp/sec(src)
 	new /obj/item/clothing/head/beret/corp/sec(src)
 	new /obj/item/clothing/head/beret/corp/sec(src)
-
-/obj/structure/closet/secure_closet/scientist/WillContain()
-	. = ..() + new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/messenger/tox, /obj/item/storage/backpack/satchel/tox))
-
-/obj/structure/closet/secure_closet/xenobio/WillContain()
-	. = ..() + new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/messenger/tox, /obj/item/storage/backpack/satchel/tox))
 
 /obj/structure/closet/secure_closet/captains/WillContain()
 	. = ..()

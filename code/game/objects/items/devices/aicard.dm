@@ -1,8 +1,7 @@
 /obj/item/aicard
 	name = "inteliCard"
 	icon = 'icons/obj/items/device/ai_card.dmi'
-	icon_state = "aicard" // aicard-full
-	item_state = "electronic"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
 	origin_tech = "{'programming':4,'materials':4}"
@@ -72,16 +71,14 @@
 	return 1
 
 /obj/item/aicard/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(carded_ai)
 		if (!carded_ai.control_disabled)
-			overlays += image(icon, "aicard-on")
+			add_overlay("[icon_state]-on")
 		if(carded_ai.stat)
-			icon_state = "aicard-404"
+			add_overlay("[icon_state]-404")
 		else
-			icon_state = "aicard-full"
-	else
-		icon_state = "aicard"
+			add_overlay("[icon_state]-full")
 
 /obj/item/aicard/proc/grab_ai(var/mob/living/silicon/ai/ai, var/mob/living/user)
 	if(!ai.client)

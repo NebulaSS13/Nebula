@@ -601,7 +601,6 @@
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "ce" = (
-/obj/structure/closet/secure_closet/medical2,
 /obj/effect/floor_decal/corner/paleblue/three_quarters{
 	icon_state = "corner_white_three_quarters";
 	dir = 1

@@ -3,8 +3,7 @@
 	name = "stunbaton"
 	desc = "A stun baton for incapacitating people with."
 	icon = 'icons/obj/items/weapon/stunbaton.dmi'
-	icon_state = "stunbaton"
-	item_state = "baton"
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
 	force = 15
 	sharp = 0
@@ -55,16 +54,13 @@
 	return null
 
 /obj/item/baton/on_update_icon()
+	cut_overlays()
 	if(status)
-		icon_state = "[initial(name)]_active"
-	else if(!bcell)
-		icon_state = "[initial(name)]_nocell"
-	else
-		icon_state = "[initial(name)]"
-
-	if(icon_state == "[initial(name)]_active")
+		add_overlay("[icon_state]-active")
 		set_light(0.4, 0.1, 1, 2, "#ff6a00")
 	else
+		if(!bcell)
+			add_overlay("[icon_state]-nocell")
 		set_light(0)
 
 /obj/item/baton/examine(mob/user, distance)

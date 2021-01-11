@@ -3,7 +3,7 @@
 	desc = "An unwieldy, heavy backpack with two massive fuel tanks. Includes a connector for most models of portable welding tools."
 	slot_flags = SLOT_BACK
 	icon = 'icons/obj/items/welderpack.dmi'
-	icon_state = "welderpack"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_HUGE
 	var/max_fuel = 350
 	var/obj/item/weldingtool/welder
@@ -70,13 +70,11 @@
 		..()
 
 /obj/item/weldpack/on_update_icon()
-	..()
-
-	overlays.Cut()
+	cut_overlays()
 	if(welder)
 		var/image/welder_image = image(welder.icon, icon_state = welder.icon_state)
 		welder_image.pixel_x = 16
-		overlays += welder_image
+		add_overlay(welder_image)
 
 /obj/item/weldpack/examine(mob/user)
 	. = ..()

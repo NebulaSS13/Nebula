@@ -124,8 +124,7 @@
 	name = "pepperspray"
 	desc = "Manufactured by Uhang Inc., it fires a mist of condensed capsaicin to blind and down an opponent quickly."
 	icon = 'icons/obj/items/weapon/pepperspray.dmi'
-	icon_state = "pepperspray"
-	item_state = "pepperspray"
+	icon_state = ICON_STATE_WORLD
 	possible_transfer_amounts = null
 	volume = 60
 	var/safety = 1

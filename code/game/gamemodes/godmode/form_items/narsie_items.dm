@@ -39,8 +39,6 @@
 	name = "terrible axe"
 	desc = "Its head is sharp and stained red with heavy use."
 	icon = 'icons/obj/items/weapon/bone_axe.dmi'
-	icon_state = "bone_axe0"
-	base_icon = "bone_axe"
 	var/stored_power = 0
 
 /obj/item/twohanded/fireaxe/cult/examine(mob/user)

@@ -6,8 +6,7 @@
 	name = "auto-resuscitator"
 	desc = "A device that delivers powerful shocks via detachable paddles to resuscitate incapacitated patients."
 	icon = 'icons/obj/defibrillator.dmi'
-	icon_state = "defibunit"
-	item_state = "defibunit"
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BACK
 	force = 5
 	throwforce = 6
@@ -19,14 +18,13 @@
 	var/obj/item/cell/bcell = null
 
 /obj/item/defibrillator/Initialize() //starts without a cell for rnd
-	. = ..()
 	if(ispath(paddles))
 		paddles = new paddles(src, src)
 	else
 		paddles = new(src, src)
-
 	if(ispath(bcell))
 		bcell = new bcell(src)
+	. = ..()
 	update_icon()
 
 /obj/item/defibrillator/Destroy()
@@ -38,24 +36,20 @@
 	bcell = /obj/item/cell/apc
 
 /obj/item/defibrillator/on_update_icon()
-	var/list/new_overlays = list()
-
+	cut_overlays()
 	if(paddles) //in case paddles got destroyed somehow.
 		if(paddles.loc == src)
-			new_overlays += "[initial(icon_state)]-paddles"
+			add_overlay("[icon_state]-paddles")
 		if(bcell && bcell.check_charge(paddles.chargecost))
 			if(!paddles.safety)
-				new_overlays += "[initial(icon_state)]-emagged"
+				add_overlay("[icon_state]-emagged")
 			else
-				new_overlays += "[initial(icon_state)]-powered"
-
+				add_overlay("[icon_state]-powered")
 	if(bcell)
 		var/ratio = Ceiling(bcell.percent()/25) * 25
-		new_overlays += "[initial(icon_state)]-charge[ratio]"
+		add_overlay("[icon_state]-charge[ratio]")
 	else
-		new_overlays += "[initial(icon_state)]-nocell"
-
-	overlays = new_overlays
+		add_overlay("[icon_state]-nocell")
 
 /obj/item/defibrillator/examine(mob/user)
 	. = ..()
@@ -171,8 +165,7 @@
 /obj/item/defibrillator/compact
 	name = "compact defibrillator"
 	desc = "A belt-equipped defibrillator that can be rapidly deployed."
-	icon_state = "defibcompact"
-	item_state = "defibcompact"
+	icon = 'icons/obj/defibrillator_compact.dmi'
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_LOWER_BODY
 	origin_tech = "{'biotech':5,'powerstorage':3}"
@@ -194,15 +187,12 @@
 	safety = 0
 	chargetime = (1 SECONDS)
 
-
 //paddles
-
 /obj/item/shockpaddles
 	name = "defibrillator paddles"
 	desc = "A pair of plastic-gripped paddles with flat metal surfaces that are used to deliver powerful electric shocks."
-	icon = 'icons/obj/defibrillator.dmi'
-	icon_state = "defibpaddles"
-	item_state = "defibpaddles"
+	icon = 'icons/obj/defibrillator_paddles.dmi'
+	icon_state = ICON_STATE_WORLD
 	gender = PLURAL
 	force = 2
 	throwforce = 6
@@ -227,7 +217,6 @@
 		if(cooldown)
 			cooldown = 0
 			update_icon()
-
 			make_announcement("beeps, \"Unit is re-energized.\"", "notice")
 			playsound(src, 'sound/machines/defib_ready.ogg', 50, 0)
 
@@ -243,10 +232,9 @@
 	..()
 
 /obj/item/shockpaddles/on_update_icon()
-	icon_state = "defibpaddles[wielded]"
-	item_state = "defibpaddles[wielded]"
+	cut_overlay()
 	if(cooldown)
-		icon_state = "defibpaddles[wielded]_cooldown"
+		add_overlay("[icon_state]-cooldown")
 
 /obj/item/shockpaddles/proc/can_use(mob/user, mob/M)
 	if(busy)
@@ -505,8 +493,6 @@
 	desc = "A pair of advanced shockpaddles powered by a robot's internal power cell, able to penetrate thick clothing."
 	chargecost = 50
 	combat = 1
-	icon_state = "defibpaddles0"
-	item_state = "defibpaddles0"
 	cooldowntime = (3 SECONDS)
 
 /obj/item/shockpaddles/robot/check_charge(var/charge_amt)
@@ -622,9 +608,6 @@
 /obj/item/shockpaddles/standalone/traitor
 	name = "defibrillator paddles"
 	desc = "A pair of unusual looking paddles powered by an experimental miniaturized reactor. It possesses both the ability to penetrate armor and to deliver powerful shocks."
-	icon = 'icons/obj/defibrillator.dmi'
-	icon_state = "defibpaddles0"
-	item_state = "defibpaddles0"
 	combat = 1
 	safety = 0
 	chargetime = (1 SECONDS)

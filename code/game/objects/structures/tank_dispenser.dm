@@ -49,7 +49,7 @@
 /obj/structure/dispenser/attackby(obj/item/I, mob/user)
 	. = ..()
 	if(!.)
-		if(istype(I, /obj/item/tank/oxygen) || istype(I, /obj/item/tank/air) || istype(I, /obj/item/tank/anesthetic))
+		if(istype(I, /obj/item/tank/oxygen) || istype(I, /obj/item/tank/air))
 			if(oxygentanks < 10)
 				if(!user.unEquip(I, src))
 					return

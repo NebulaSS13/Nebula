@@ -262,9 +262,8 @@
 /obj/item/roller
 	name = "roller bed"
 	desc = "A collapsed roller bed that can be carried around."
-	icon = 'icons/obj/structures/rollerbed.dmi'
-	icon_state = "folded"
-	item_state = "rbed"
+	icon = 'icons/obj/items/rollerbed.dmi'
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
 	var/structure_form_type = /obj/structure/bed/roller	//The deployed form path.
@@ -277,8 +276,8 @@
 /obj/item/robot_rack/roller
 	name = "roller bed rack"
 	desc = "A rack for carrying collapsed roller beds. Can also be used for carrying ironing boards."
-	icon = 'icons/obj/structures/rollerbed.dmi'
-	icon_state = "folded"
+	icon = 'icons/obj/items/rollerbed.dmi'
+	icon_state = ICON_STATE_WORLD
 	object_type = /obj/item/roller
 	interact_type = /obj/structure/bed/roller
 /*

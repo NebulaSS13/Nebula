@@ -7,8 +7,8 @@ LINEN BINS
 /obj/item/bedsheet
 	name = "bedsheet"
 	desc = "A surprisingly soft linen bedsheet."
-	icon = 'icons/obj/bedsheet.dmi'
-	icon_state = "sheet"
+	icon = 'icons/obj/bedsheets/bedsheet.dmi'
+	icon_state = ICON_STATE_WORLD
 	item_state = "bedsheet"
 	randpixel = 0
 	slot_flags = SLOT_BACK
@@ -30,69 +30,52 @@ LINEN BINS
 	..()
 
 /obj/item/bedsheet/blue
-	icon_state = "sheetblue"
-	item_state = "sheetblue"
+	icon = 'icons/obj/bedsheets/bedsheet_blue.dmi'
 
 /obj/item/bedsheet/green
-	icon_state = "sheetgreen"
-	item_state = "sheetgreen"
+	icon = 'icons/obj/bedsheets/bedsheet_green.dmi'
 
 /obj/item/bedsheet/orange
-	icon_state = "sheetorange"
-	item_state = "sheetorange"
+	icon = 'icons/obj/bedsheets/bedsheet_orange.dmi'
 
 /obj/item/bedsheet/purple
-	icon_state = "sheetpurple"
-	item_state = "sheetpurple"
+	icon = 'icons/obj/bedsheets/bedsheet_purple.dmi'
 
 /obj/item/bedsheet/rainbow
-	icon_state = "sheetrainbow"
-	item_state = "sheetrainbow"
+	icon = 'icons/obj/bedsheets/bedsheet_rainbow.dmi'
 
 /obj/item/bedsheet/red
-	icon_state = "sheetred"
-	item_state = "sheetred"
+	icon = 'icons/obj/bedsheets/bedsheet_red.dmi'
 
 /obj/item/bedsheet/yellow
-	icon_state = "sheetyellow"
-	item_state = "sheetyellow"
+	icon = 'icons/obj/bedsheets/bedsheet_yellow.dmi'
 
 /obj/item/bedsheet/mime
-	icon_state = "sheetmime"
-	item_state = "sheetmime"
+	icon = 'icons/obj/bedsheets/bedsheet_mime.dmi'
 
 /obj/item/bedsheet/clown
-	icon_state = "sheetclown"
-	item_state = "sheetclown"
+	icon = 'icons/obj/bedsheets/bedsheet_clown.dmi'
 
 /obj/item/bedsheet/captain
-	icon_state = "sheetcaptain"
-	item_state = "sheetcaptain"
+	icon = 'icons/obj/bedsheets/bedsheet_captain.dmi'
 
 /obj/item/bedsheet/rd
-	icon_state = "sheetrd"
-	item_state = "sheetrd"
+	icon = 'icons/obj/bedsheets/bedsheet_rd.dmi'
 
 /obj/item/bedsheet/medical
-	icon_state = "sheetmedical"
-	item_state = "sheetmedical"
+	icon = 'icons/obj/bedsheets/bedsheet_medical.dmi'
 
 /obj/item/bedsheet/hos
-	icon_state = "sheethos"
-	item_state = "sheethos"
+	icon = 'icons/obj/bedsheets/bedsheet_hos.dmi'
 
 /obj/item/bedsheet/hop
-	icon_state = "sheethop"
-	item_state = "sheethop"
+	icon = 'icons/obj/bedsheets/bedsheet_hop.dmi'
 
 /obj/item/bedsheet/ce
-	icon_state = "sheetce"
-	item_state = "sheetce"
+	icon = 'icons/obj/bedsheets/bedsheet_ce.dmi'
 
 /obj/item/bedsheet/brown
-	icon_state = "sheetbrown"
-	item_state = "sheetbrown"
-
+	icon = 'icons/obj/bedsheets/bedsheet_brown.dmi'
 
 /obj/structure/bedsheetbin
 	name = "linen bin"

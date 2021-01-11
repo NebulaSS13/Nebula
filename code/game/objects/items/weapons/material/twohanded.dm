@@ -19,12 +19,13 @@
 /obj/item/twohanded
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
+	icon_state = ICON_STATE_WORLD
+
 	var/wielded = 0
 	var/force_wielded = 0
 	var/force_unwielded
 	var/wieldsound = null
 	var/unwieldsound = null
-	var/base_icon
 	var/base_name
 	var/unwielded_material_force_multiplier = 0.25
 	var/wielded_parry_bonus = 15
@@ -50,7 +51,6 @@
 	force_wielded = force
 	force = force_unwielded
 
-
 /obj/item/twohanded/Initialize()
 	. = ..()
 	update_icon()
@@ -60,12 +60,11 @@
 	if(wielded)
 		. += wielded_parry_bonus
 
-/obj/item/twohanded/on_update_icon()
-	..()
-	icon_state = "[base_icon][wielded]"
-	LAZYSET(item_state_slots, BP_L_HAND, icon_state)
-	LAZYSET(item_state_slots, BP_R_HAND, icon_state)
-	LAZYSET(item_state_slots, slot_back_str, base_icon)
+/obj/item/twohanded/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/I = ..()
+	if(I && wielded && (slot in list(BP_L_HAND, BP_R_HAND)))
+		I.icon_state = "[I.icon_state]-wielded"
+	return I
 
 /*
  * Fireaxe
@@ -74,8 +73,6 @@
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
 	icon = 'icons/obj/items/tool/fireaxe.dmi'
-	icon_state = "fireaxe0"
-	base_icon = "fireaxe"
 	max_force = 60	//for wielded
 	material_force_multiplier = 0.6
 	unwielded_material_force_multiplier = 0.3
@@ -106,7 +103,6 @@
 /obj/item/twohanded/spear
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
-	icon_state = "preview"
 	icon = 'icons/obj/items/weapon/spear.dmi'
 	material_force_multiplier = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
 	unwielded_material_force_multiplier = 0.20
@@ -169,9 +165,6 @@
 	name = "bat"
 	desc = "HOME RUN!"
 	icon = 'icons/obj/items/weapon/bat.dmi'
-	icon_state = "metalbat0"
-	base_icon = "metalbat"
-	item_state = "metalbat"
 	w_class = ITEM_SIZE_LARGE
 	throwforce = 7
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")

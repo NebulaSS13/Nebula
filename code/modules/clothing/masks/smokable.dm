@@ -2,10 +2,8 @@
 	name = "smokable item"
 	desc = "You're not sure what this is. You should probably ahelp it."
 	body_parts_covered = 0
-
 	var/lit = 0
 	var/waterproof = FALSE
-	var/icon_on
 	var/type_butt = null
 	var/chem_volume = 0
 	var/smoketime = 0
@@ -19,6 +17,16 @@
 	var/gas_consumption = 0.04
 	var/smoke_effect = 0
 	var/smoke_amount = 1
+
+/obj/item/clothing/mask/smokable/dropped(mob/user)
+	. = ..()
+	if(lit)
+		update_icon()
+
+/obj/item/clothing/mask/smokable/equipped(mob/user)
+	. = ..()
+	if(lit)
+		update_icon()
 
 /obj/item/clothing/mask/smokable/Initialize()
 	. = ..()
@@ -82,16 +90,29 @@
 		location.hotspot_expose(700, 5)
 
 /obj/item/clothing/mask/smokable/on_update_icon()
-	if(lit && icon_on)
-		icon_state = icon_on
-		item_state = icon_on
-	else
-		icon_state = initial(icon_state)
-		item_state = initial(item_state)
+	..()
+	cut_overlays()
+	if(lit && check_state_in_icon("[icon_state]-on", icon))
+		var/image/I = image(icon, "[icon_state]-on")
+		I.appearance_flags |= RESET_COLOR
+		if(plane != HUD_PLANE)
+			I.layer = ABOVE_LIGHTING_LAYER
+			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		add_overlay(I)
 	if(ismob(loc))
 		var/mob/living/M = loc
 		M.update_inv_wear_mask(0)
 		M.update_inv_hands()
+
+/obj/item/clothing/mask/smokable/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/I = ..()
+	if(I && lit && check_state_in_icon("[I.icon_state]-on", I.icon))
+		var/image/on_overlay = image(I.icon, "[I.icon_state]-on")
+		on_overlay.appearance_flags |= RESET_COLOR
+		on_overlay.layer = ABOVE_LIGHTING_LAYER
+		on_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		I.add_overlay(on_overlay)
+	return I
 
 /obj/item/clothing/mask/smokable/fluid_act(var/datum/reagents/fluids)
 	..()
@@ -161,9 +182,8 @@
 /obj/item/clothing/mask/smokable/cigarette
 	name = "cigarette"
 	desc = "A small paper cylinder filled with processed tobacco and various fillers."
-	icon_state = "cigoff"
+	icon = 'icons/clothing/mask/smokables/cigarette.dmi'
 	throw_speed = 0.5
-	item_state = "cigoff"
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS | SLOT_FACE
 	attack_verb = list("burnt", "singed")
@@ -188,18 +208,6 @@
 	if(is_processing)
 		set_scent_by_reagents(src)
 
-/obj/item/clothing/mask/smokable/cigarette/on_update_icon()
-	..()
-	overlays.Cut()
-	if(lit)
-		overlays += overlay_image(icon, "cigon", flags=RESET_COLOR)
-
-/obj/item/clothing/mask/smokable/cigarette/trident/on_update_icon()
-	..()
-	overlays.Cut()
-	if(lit)
-		overlays += overlay_image(icon, "cigarello-on", flags=RESET_COLOR)
-
 /obj/item/clothing/mask/smokable/extinguish(var/mob/user, var/no_message)
 	..()
 	remove_extension(src, /datum/extension/scent)
@@ -218,14 +226,14 @@
 /obj/item/clothing/mask/smokable/cigarette/menthol
 	name = "menthol cigarette"
 	desc = "A cigarette with a little minty kick. Well, minty in theory."
-	icon_state = "cigmentol"
+	icon = 'icons/clothing/mask/smokables/cigarette_menthol.dmi'
 	brand = "\improper Temperamento Menthol"
 	color = "#ddffe8"
 	type_butt = /obj/item/trash/cigbutt/menthol
 	filling = list(/decl/material/solid/tobacco = 1, /decl/material/liquid/menthol = 1)
 
 /obj/item/trash/cigbutt/menthol
-	icon_state = "cigbuttmentol"
+	icon = 'icons/clothing/mask/smokables/cigarette_menthol.dmi'
 
 /obj/item/clothing/mask/smokable/cigarette/luckystars
 	brand = "\improper Lucky Star"
@@ -233,13 +241,13 @@
 /obj/item/clothing/mask/smokable/cigarette/jerichos
 	name = "rugged cigarette"
 	brand = "\improper Jericho"
-	icon_state = "cigjer"
+	icon = 'icons/clothing/mask/smokables/cigarette_jericho.dmi'
 	color = "#dcdcdc"
 	type_butt = /obj/item/trash/cigbutt/jerichos
 	filling = list(/decl/material/solid/tobacco/bad = 1.5)
 
 /obj/item/trash/cigbutt/jerichos
-	icon_state = "cigbuttjer"
+	icon = 'icons/clothing/mask/smokables/cigarette_jericho.dmi'
 
 /obj/item/clothing/mask/smokable/cigarette/carcinomas
 	name = "dark cigarette"
@@ -249,12 +257,12 @@
 /obj/item/clothing/mask/smokable/cigarette/professionals
 	name = "thin cigarette"
 	brand = "\improper Professional"
-	icon_state = "cigpro"
+	icon = 'icons/clothing/mask/smokables/cigarette_professional.dmi'
 	type_butt = /obj/item/trash/cigbutt/professionals
 	filling = list(/decl/material/solid/tobacco/bad = 1)
 
 /obj/item/trash/cigbutt/professionals
-	icon_state = "cigbuttpro"
+	icon = 'icons/clothing/mask/smokables/cigarette_professional.dmi'
 
 /obj/item/clothing/mask/smokable/cigarette/killthroat
 	brand = "\improper Acme Co. cigarette"
@@ -266,41 +274,49 @@
 	name = "wood tip cigar"
 	brand = "\improper Trident cigar"
 	desc = "A narrow cigar with a wooden tip."
-	icon_state = "cigarello"
-	item_state = "cigaroff"
+	icon = 'icons/clothing/mask/smokables/cigarello.dmi'
 	smoketime = 600
 	chem_volume = 10
 	type_butt = /obj/item/trash/cigbutt/woodbutt
 	filling = list(/decl/material/solid/tobacco/fine = 2)
+	var/band_color
+
+/obj/item/clothing/mask/smokable/cigarette/trident/on_update_icon()
+	. = ..()
+	if(band_color)
+		var/image/I = image(icon, "[icon_state]-band")
+		I.color = band_color
+		I.appearance_flags |= RESET_COLOR
+		add_overlay(I)
 
 /obj/item/clothing/mask/smokable/cigarette/trident/mint
-	icon_state = "cigarelloMi"
+	band_color = COLOR_CYAN
 	filling = list(/decl/material/solid/tobacco/fine = 2, /decl/material/liquid/menthol = 2)
 
 /obj/item/clothing/mask/smokable/cigarette/trident/berry
-	icon_state = "cigarelloBe"
+	band_color = COLOR_VIOLET
 	filling = list(/decl/material/solid/tobacco/fine = 2, /decl/material/liquid/drink/juice/berry = 2)
 
 /obj/item/clothing/mask/smokable/cigarette/trident/cherry
-	icon_state = "cigarelloCh"
+	band_color = COLOR_RED
 	filling = list(/decl/material/solid/tobacco/fine = 2, /decl/material/liquid/nutriment/cherryjelly = 2)
 
 /obj/item/clothing/mask/smokable/cigarette/trident/grape
-	icon_state = "cigarelloGr"
+	band_color = COLOR_PURPLE
 	filling = list(/decl/material/solid/tobacco/fine = 2, /decl/material/liquid/drink/juice/grape = 2)
 
 /obj/item/clothing/mask/smokable/cigarette/trident/watermelon
-	icon_state = "cigarelloWm"
+	band_color = COLOR_GREEN
 	filling = list(/decl/material/solid/tobacco/fine = 2, /decl/material/liquid/drink/juice/watermelon = 2)
 
 /obj/item/clothing/mask/smokable/cigarette/trident/orange
-	icon_state = "cigarelloOr"
+	band_color = COLOR_ORANGE
 	filling = list(/decl/material/solid/tobacco/fine = 2, /decl/material/liquid/drink/juice/orange = 2)
 
 /obj/item/trash/cigbutt/woodbutt
 	name = "wooden tip"
+	icon = 'icons/clothing/mask/smokables/cigar.dmi'
 	desc = "A wooden mouthpiece from a cigar. Smells rather bad."
-	icon_state = "woodbutt"
 	material = /decl/material/solid/wood
 
 /obj/item/clothing/mask/smokable/cigarette/attackby(var/obj/item/W, var/mob/user)
@@ -357,29 +373,15 @@
 		extinguish(no_message = 1)
 	return ..()
 
-/obj/item/clothing/mask/smokable/cigarette/get_icon_state(mob/user_mob, slot)
-	return item_state
-
-/obj/item/clothing/mask/smokable/cigarette/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/res = ..()
-	if(lit == 1)
-		var/image/ember = overlay_image(res.icon, "cigember", flags=RESET_COLOR)
-		ember.layer = ABOVE_LIGHTING_LAYER
-		ember.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		res.overlays += ember
-	return res
-
 ////////////
 // CIGARS //
 ////////////
 /obj/item/clothing/mask/smokable/cigarette/cigar
 	name = "premium cigar"
 	desc = "A brown roll of tobacco and... well, you're not quite sure. This thing's huge!"
-	icon_state = "cigar2off"
-	icon_on = "cigar2on"
+	icon = 'icons/clothing/mask/smokables/cigar_alt.dmi'
 	type_butt = /obj/item/trash/cigbutt/cigarbutt
 	throw_speed = 0.5
-	item_state = "cigaroff"
 	smoketime = 1500
 	chem_volume = 15
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
@@ -393,15 +395,13 @@
 /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	name = "\improper Cohiba Robusto cigar"
 	desc = "There's little more you could want from a cigar."
-	icon_state = "cigar2off"
-	icon_on = "cigar2on"
+	icon = 'icons/clothing/mask/smokables/cigar_alt.dmi'
 	brand = "Cohiba Robusto"
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana
 	name = "premium Havanian cigar"
 	desc = "A cigar fit for only the best of the best."
-	icon_state = "cigar2off"
-	icon_on = "cigar2on"
+	icon = 'icons/clothing/mask/smokables/cigar_alt.dmi'
 	smoketime = 3000
 	chem_volume = 20
 	brand = "Havana"
@@ -410,8 +410,8 @@
 /obj/item/trash/cigbutt
 	name = "cigarette butt"
 	desc = "A manky old cigarette butt."
-	icon = 'icons/obj/clothing/obj_mask.dmi'
-	icon_state = "cigbutt"
+	icon = 'icons/clothing/mask/smokables/cigarette.dmi'
+	icon_state = "butt"
 	randpixel = 10
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
@@ -424,7 +424,7 @@
 /obj/item/trash/cigbutt/cigarbutt
 	name = "cigar butt"
 	desc = "A manky old cigar butt."
-	icon_state = "cigarbutt"
+	icon = 'icons/clothing/mask/smokables/cigar.dmi'
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/attackby(var/obj/item/W, var/mob/user)
 	..()
@@ -435,10 +435,7 @@
 /obj/item/clothing/mask/smokable/cigarette/rolled/sausage
 	name = "sausage"
 	desc = "A piece of mixed, long meat, with a smoky scent."
-	icon_state = "cigar3off"
-
-	item_state = "cigaroff"
-	icon_on = "cigar3on"
+	icon = 'icons/clothing/mask/smokables/sausage.dmi'
 	type_butt = /obj/item/trash/cigbutt/sausagebutt
 	chem_volume = 6
 	smoketime = 5000
@@ -448,7 +445,7 @@
 /obj/item/trash/cigbutt/sausagebutt
 	name = "sausage butt"
 	desc = "A piece of burnt meat."
-	icon_state = "sausagebutt"
+	icon = 'icons/clothing/mask/smokables/sausage.dmi'
 
 /////////////////
 //SMOKING PIPES//
@@ -456,10 +453,8 @@
 /obj/item/clothing/mask/smokable/pipe
 	name = "smoking pipe"
 	desc = "A pipe, for smoking. Probably made of meershaum or something."
-	icon_state = "pipeoff"
-	item_state = "pipeoff"
+	icon = 'icons/clothing/mask/smokables/pipe.dmi'
 	w_class = ITEM_SIZE_TINY
-	icon_on = "pipeon"  //Note - these are in masks.dmi
 	smoketime = 0
 	chem_volume = 50
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
@@ -482,8 +477,6 @@
 			return
 		lit = 1
 		damtype = "fire"
-		icon_state = icon_on
-		item_state = icon_on
 		var/turf/T = get_turf(src)
 		T.visible_message(flavor_text)
 		START_PROCESSING(SSobj, src)
@@ -492,6 +485,7 @@
 			M.update_inv_wear_mask(0)
 			M.update_inv_hands()
 		set_scent_by_reagents(src)
+		update_icon()
 
 /obj/item/clothing/mask/smokable/pipe/extinguish(var/mob/user, var/no_message)
 	..()
@@ -556,7 +550,5 @@
 /obj/item/clothing/mask/smokable/pipe/cobpipe
 	name = "corn cob pipe"
 	desc = "A nicotine delivery system popularized by folksy backwoodsmen, kept popular in the modern age and beyond by space hipsters."
-	icon_state = "cobpipeoff"
-	item_state = "cobpipeoff"
-	icon_on = "cobpipeon"  //Note - these are in masks.dmi
+	icon = 'icons/clothing/mask/smokables/pipe_cob.dmi'
 	chem_volume = 35

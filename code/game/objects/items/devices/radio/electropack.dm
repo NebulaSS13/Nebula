@@ -2,8 +2,7 @@
 	name = "electropack"
 	desc = "Dance, my monkeys! DANCE!"
 	icon = 'icons/obj/items/device/radio/electropack.dmi'
-	icon_state = "electropack0"
-	item_state = "electropack"
+	icon_state = ICON_STATE_WORLD
 	frequency = 1449
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
@@ -13,6 +12,17 @@
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/code = 2
+
+/obj/item/radio/electropack/on_update_icon()
+	cut_overlays()
+	if(on)
+		add_overlay("active")
+
+/obj/item/radio/electropack/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/I = ..()
+	if(on && I && slot == slot_back_str)
+		I.icon_state = "[I.icon_state]-active"
+	return I
 
 /obj/item/radio/electropack/attack_hand(mob/user)
 	if(src == user.back)
@@ -59,7 +69,10 @@
 			else
 				if(href_list["power"])
 					on = !( on )
-					icon_state = "electropack[on]"
+					update_icon()
+					var/mob/M = loc
+					if(istype(M) && M.back == src)
+						M.update_inv_back()
 		if(!( master ))
 			if(istype(loc, /mob))
 				attack_self(loc)

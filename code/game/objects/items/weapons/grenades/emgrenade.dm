@@ -1,7 +1,6 @@
 /obj/item/grenade/empgrenade
 	name = "classic emp grenade"
-	icon_state = "emp"
-	item_state = "empgrenade"
+	icon = 'icons/obj/items/grenades/emp.dmi'
 	origin_tech = "{'materials':2,'magnets':3}"
 
 	detonate()
@@ -13,8 +12,7 @@
 /obj/item/grenade/empgrenade/low_yield
 	name = "low yield emp grenade"
 	desc = "A weaker variant of the classic emp grenade."
-	icon_state = "lyemp"
-	item_state = "lyempgrenade"
+	icon = 'icons/obj/items/grenades/emp_old.dmi'
 	origin_tech = "{'materials':2,'magnets':3}"
 
 	detonate()

@@ -587,8 +587,6 @@
 "bR" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/firstaid/surgery,
-/obj/item/tank/anesthetic,
-/obj/item/clothing/mask/breath/anesthetic,
 /obj/structure/window/reinforced{
 	dir = 4
 	},

@@ -64,7 +64,6 @@
 /obj/structure/closet/medical_wall{
 	pixel_y = 32
 	},
-/obj/item/tank/anesthetic,
 /obj/item/clothing/mask/breath/medical,
 /obj/item/clothing/gloves/latex,
 /obj/item/clothing/mask/surgical,

@@ -1,10 +1,9 @@
 /obj/item/chameleon
 	name = "chameleon projector"
 	icon = 'icons/obj/items/device/chameleon_proj.dmi'
-	icon_state = "shield0"
+	icon_state = ICON_STATE_WORLD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
-	item_state = "electronic"
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 5
@@ -13,8 +12,8 @@
 	var/can_use = 1
 	var/obj/effect/dummy/chameleon/active_dummy = null
 	var/saved_item = /obj/item/trash/cigbutt
-	var/saved_icon = 'icons/obj/clothing/obj_mask.dmi'
-	var/saved_icon_state = "cigbutt"
+	var/saved_icon = 'icons/clothing/mask/smokables/cigarette.dmi'
+	var/saved_icon_state = "butt"
 	var/saved_overlays
 
 /obj/item/chameleon/dropped()

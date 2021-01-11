@@ -30,17 +30,6 @@
 		/obj/item/storage/box/gloves
 	)
 
-/obj/structure/closet/secure_closet/medical2
-	name = "anesthetics closet"
-	desc = "Used to knock people out."
-	req_access = list(access_surgery)
-
-/obj/structure/closet/secure_closet/medical2/WillContain()
-	return list(
-		/obj/item/tank/anesthetic = 3,
-		/obj/item/clothing/mask/breath/medical = 3
-	)
-
 /obj/structure/closet/secure_closet/medical3
 	name = "medical doctor's locker"
 	req_access = list(access_medical_equip)

@@ -47,8 +47,8 @@
 /obj/random/tool
 	name = "random tool"
 	desc = "This is a random tool."
-	icon = 'icons/obj/items/tool/welder.dmi'
-	icon_state = "welder"
+	icon = 'icons/obj/items/tool/welders/welder.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/tool/spawn_choices()
 	return list(/obj/item/screwdriver,
@@ -524,8 +524,8 @@
 /obj/random/tank
 	name = "random tank"
 	desc = "This is a tank."
-	icon = 'icons/obj/tank.dmi'
-	icon_state = "canister"
+	icon = 'icons/obj/items/tanks/tank_blue.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/tank/spawn_choices()
 	return list(/obj/item/tank/oxygen = 5,
@@ -535,8 +535,6 @@
 				/obj/item/tank/emergency/oxygen = 4,
 				/obj/item/tank/emergency/oxygen/engi = 3,
 				/obj/item/tank/emergency/oxygen/double = 2,
-				/obj/item/tank/emergency/nitrogen = 2,
-				/obj/item/tank/emergency/nitrogen/double = 1,
 				/obj/item/tank/nitrogen = 1,
 				/obj/item/suit_cooling_unit = 1)
 
@@ -656,8 +654,8 @@ obj/random/obstruction/spawn_choices()
 /obj/random/masks
 	name = "random mask"
 	desc = "This is a random face mask."
-	icon = 'icons/obj/clothing/obj_mask.dmi'
-	icon_state = "gas_mask"
+	icon = 'icons/clothing/mask/gas_mask.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/masks/spawn_choices()
 	return list(/obj/item/clothing/mask/gas = 4,

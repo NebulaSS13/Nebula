@@ -4,10 +4,9 @@
 	name = "\improper T-ray scanner"
 	desc = "A terahertz-ray emitter and scanner, capable of penetrating conventional hull materials."
 	icon = 'icons/obj/items/device/t_ray_scanner.dmi'
-	icon_state = "t-ray0"
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
-	item_state = "electronic"
 	material = /decl/material/solid/metal/aluminium
 	origin_tech = "{'magnets':1,'engineering':1}"
 	action_button_name = "Toggle T-Ray scanner"
@@ -26,7 +25,11 @@
 		set_active(FALSE)
 
 /obj/item/t_scanner/on_update_icon()
-	icon_state = "t-ray[on]"
+	cut_overlays()
+	if(on)
+		add_overlay("[icon_state]-on")
+	else
+		add_overlay("[icon_state]-off")
 
 /obj/item/t_scanner/emp_act()
 	audible_message(src, "<span class = 'notice'> \The [src] buzzes oddly.</span>")

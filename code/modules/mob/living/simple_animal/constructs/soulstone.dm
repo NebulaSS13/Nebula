@@ -1,8 +1,7 @@
 /obj/item/soulstone
 	name = "soul stone shard"
-	icon = 'icons/obj/wizard.dmi'
-	icon_state = "soulstone"
-	item_state = "electronic"
+	icon = 'icons/obj/items/soulstone.dmi'
+	icon_state = ICON_STATE_WORLD
 	desc = "A strange, ridged chunk of some glassy red material. Achingly cold to the touch."
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
@@ -18,13 +17,19 @@
 	shade = new /mob/living/simple_animal/shade(src)
 	. = ..(mapload)
 
+/obj/item/soulstone/on_update_icon()
+	cut_overlays()
+	if(full == SOULSTONE_ESSENCE)
+		add_overlay("[icon_state]-glow")
+	else if(full == SOULSTONE_CRACKED)
+		SetName("cracked soulstone")
+
 /obj/item/soulstone/shatter()
 	playsound(loc, "shatter", 70, 1)
 	qdel(src)
 
 /obj/item/soulstone/full
 	full = SOULSTONE_ESSENCE
-	icon_state = "soulstone2"
 
 /obj/item/soulstone/Destroy()
 	QDEL_NULL(shade)
@@ -38,15 +43,6 @@
 		to_chat(user,"The shard has gone transparent, a seeming window into a dimension of unspeakable horror.")
 	if(full == SOULSTONE_CRACKED)
 		to_chat(user, "This one is cracked and useless.")
-
-/obj/item/soulstone/on_update_icon()
-	if(full == SOULSTONE_EMPTY)
-		icon_state = "soulstone"
-	if(full == SOULSTONE_ESSENCE)
-		icon_state = "soulstone2" //TODO: A spookier sprite. Also unique sprites.
-	if(full == SOULSTONE_CRACKED)
-		icon_state = "soulstone"//TODO: cracked sprite
-		SetName("cracked soulstone")
 
 /obj/item/soulstone/attackby(var/obj/item/I, var/mob/user)
 	..()

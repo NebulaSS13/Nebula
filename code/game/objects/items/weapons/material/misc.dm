@@ -69,14 +69,25 @@
 /obj/item/hatchet/machete
 	name = "machete"
 	desc = "A long, sturdy blade with a rugged handle. Leading the way to cursed treasures since before space travel."
-	icon = 'icons/obj/items/weapon/machete.dmi'
-	item_state = "machete"
+	icon = 'icons/obj/items/weapon/machetes/machete.dmi'
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/metal/titanium
 	base_parry_chance = 50
 	max_force = 20
 	material_force_multiplier = 0.20 //20 with hardness 80 (titanium) or 15 with hardness 60 (steel)
+	var/global/list/standard_machete_icons = list(
+		'icons/obj/items/weapon/machetes/machete.dmi',
+		'icons/obj/items/weapon/machetes/machete_red.dmi',
+		'icons/obj/items/weapon/machetes/machete_blue.dmi',
+		'icons/obj/items/weapon/machetes/machete_black.dmi',
+		'icons/obj/items/weapon/machetes/machete_olive.dmi'
+	)
+
+/obj/item/hatchet/machete/Initialize()
+	icon = pick(standard_machete_icons)
+	. = ..()
 
 /obj/item/hatchet/machete/unbreakable
 	unbreakable = TRUE
@@ -88,17 +99,10 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 
-/obj/item/hatchet/machete/Initialize()
-	icon_state = "machete[pick("","_red","_blue", "_black", "_olive")]"
-	. = ..()
-
 /obj/item/hatchet/machete/deluxe
 	name = "deluxe machete"
 	desc = "A fine example of a machete, with a polished blade, wooden handle and a leather cord loop."
-
-/obj/item/hatchet/machete/deluxe/Initialize()
-	. = ..()
-	icon_state = "machetedx"
+	icon = 'icons/obj/items/weapon/machetes/machete_dx.dmi'
 
 /obj/item/minihoe // -- Numbers
 	name = "mini hoe"
@@ -121,7 +125,7 @@
 	name = "scythe"
 	desc = "A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow."
 	icon = 'icons/obj/items/tool/scythe.dmi'
-	icon_state = "scythe0"
+	icon_state = ICON_STATE_WORLD
 	material_force_multiplier = 0.275 // 16 with hardness 60 (steel)
 	thrown_material_force_multiplier = 0.2
 	sharp = 1

@@ -2,7 +2,7 @@
 	name = "auto-compressor"
 	desc = "A device that gives regular compression to the victim's ribcage, used in case of urgent heart issues."
 	icon = 'icons/obj/items/device/auto_cpr.dmi'
-	icon_state = "pumper"
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'magnets':2,'biotech':2}"
 	slot_flags = SLOT_OVER_BODY

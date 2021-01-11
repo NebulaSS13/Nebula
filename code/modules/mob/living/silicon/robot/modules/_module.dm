@@ -1,8 +1,7 @@
 /obj/item/robot_module
 	name = "robot module"
-	icon = 'icons/obj/module.dmi'
-	icon_state = "std_mod"
-	item_state = "electronic"
+	icon = 'icons/obj/modules/module_standard.dmi'
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NO_CONTAINER
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
@@ -153,7 +152,7 @@
 		if(F.broken)
 			F.broken = 0
 			F.times_used = 0
-			F.icon_state = "flash"
+			F.update_icon()
 		else if(F.times_used)
 			F.times_used--
 	if(!synths || !synths.len)

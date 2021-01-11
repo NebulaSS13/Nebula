@@ -1,13 +1,14 @@
 /obj/item/weldingtool/electric
 	name = "arc welder"
 	desc = "A man-portable arc welding tool."
-	icon = 'icons/obj/items/tool/arc_welder.dmi'
+	icon = 'icons/obj/items/tool/welders/welder_arc.dmi'
 	icon_state = "welder_arc"
 	welding_resource = "stored charge"
 	tank = null
 	waterproof = TRUE
 	force = 7
 	throwforce = 7
+	lit_colour = COLOR_CYAN_BLUE
 	var/obj/item/cell/cell = /obj/item/cell/high
 	var/fuel_cost_multiplier = 10
 
@@ -77,10 +78,9 @@
 		T.hotspot_expose(700, 5)
 
 /obj/item/weldingtool/electric/on_update_icon()
-	underlays.Cut()
-	item_state = welding ? "welder1" : "welder"
+	..()
 	if(cell)
-		underlays += image(icon = icon, icon_state = "[initial(icon_state)]_cell")
+		add_overlay("[icon_state]-cell")
 
 /obj/item/weldingtool/electric/proc/spend_charge(var/amount)
 	var/obj/item/cell/cell = get_cell()

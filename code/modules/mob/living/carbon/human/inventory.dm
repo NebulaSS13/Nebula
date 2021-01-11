@@ -42,8 +42,6 @@ This saves us from having to call add_fingerprint() any time something is put in
 			return has_organ(BP_HEAD)
 		if(slot_handcuffed_str)
 			return has_organ(BP_L_HAND) && has_organ(BP_R_HAND)
-		if(slot_legcuffed_str)
-			return has_organ(BP_L_FOOT) && has_organ(BP_R_FOOT)
 		if(slot_belt_str)
 			return has_organ(BP_CHEST)
 		if(slot_wear_id_str)

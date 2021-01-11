@@ -8,9 +8,8 @@ AI MODULES
 
 /obj/item/aiModule
 	name = "\improper AI module"
-	icon = 'icons/obj/module.dmi'
-	icon_state = "std_mod"
-	item_state = "electronic"
+	icon = 'icons/obj/modules/module_standard.dmi'
+	icon_state = ICON_STATE_WORLD
 	desc = "An AI Module for transmitting encrypted instructions to the AI."
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 5.0

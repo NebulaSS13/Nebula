@@ -2,8 +2,7 @@
 	name = "flash"
 	desc = "A device that produces a bright flash of light, designed to stun and disorient an attacker."
 	icon = 'icons/obj/items/device/flash.dmi'
-	icon_state = "flash"
-	item_state = "flashtool"
+	icon_state = ICON_STATE_WORLD
 	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4
@@ -18,6 +17,12 @@
 	var/last_used = 0 //last world.time it was used.
 	var/str_min = 2 //how weak the effect CAN be
 	var/str_max = 7 //how powerful the effect COULD be
+
+/obj/item/flash/on_update_icon()
+	. = ..()
+	icon_state = initial(icon_state)
+	if(broken)
+		icon_state = "[icon_state]-burnt"
 
 /obj/item/flash/proc/clown_check(var/mob/user)
 	if(user && (MUTATION_CLUMSY in user.mutations) && prob(50))
@@ -56,7 +61,7 @@
 			if(prob(times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
 				broken = 1
 				to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
-				icon_state = "[initial(icon_state)]_burnt"
+				icon_state = "[initial(icon_state)]-burnt"
 				return 0
 			times_used++
 		else	//can only use it 5 times a minute
@@ -123,7 +128,7 @@
 			qdel(animation)
 
 	if(!flashfail)
-		flick("[initial(icon_state)]_on", src)
+		flick("[initial(icon_state)]-on", src)
 		if(!issilicon(M))
 			user.visible_message("<span class='disarm'>[user] blinds [M] with \the [src]!</span>")
 		else
@@ -151,7 +156,7 @@
 			if(prob(2*times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
 				broken = 1
 				to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
-				icon_state = "[initial(icon_state)]_burnt"
+				icon_state = "[initial(icon_state)]-burnt"
 				return 0
 			times_used++
 		else	//can only use it  5 times a minute
@@ -159,7 +164,7 @@
 			return 0
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
-	flick("[initial(icon_state)]_on", src)
+	flick("[initial(icon_state)]-on", src)
 	if(user && isrobot(user))
 		spawn(0)
 			var/atom/movable/overlay/animation = new(user.loc)
@@ -188,7 +193,7 @@
 		if(0 to 5)
 			if(prob(2*times_used))
 				broken = 1
-				icon_state = "[initial(icon_state)]_burnt"
+				update_icon()
 				return
 			times_used++
 			if(istype(loc, /mob/living/carbon))
@@ -204,14 +209,14 @@
 /obj/item/flash/synthetic //not for regular use, weaker effects
 	name = "modified flash"
 	desc = "A device that produces a bright flash of light. This is a specialized version designed specifically for use in camera systems."
-	icon_state = "sflash"
+	icon = 'icons/obj/items/device/flash_synthetic.dmi'
 	str_min = 1
 	str_max = 4
 
 /obj/item/flash/advanced
 	name = "advanced flash"
 	desc = "A device that produces a very bright flash of light. This is an advanced and expensive version often issued to VIPs."
-	icon_state = "advflash"
+	icon = 'icons/obj/items/device/flash_advanced.dmi'
 	origin_tech = "{'combat':2,'magnets':2}"
 	str_min = 3
 	str_max = 8

@@ -1,9 +1,8 @@
 /obj/item/radio/headset
 	name = "radio headset"
 	desc = "An updated, modular intercom that fits over the head. Takes encryption keys."
-	icon = 'icons/obj/items/device/radio/headset.dmi'
-	icon_state = "headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset.dmi'
+	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/metal/aluminium
 	subspace_transmission = 1
 	canhear_range = 0 // can't hear headsets from very far away
@@ -72,8 +71,7 @@
 	ks1type = /obj/item/encryptionkey/syndicate
 
 /obj/item/radio/headset/syndicate/alt
-	icon_state = "syndie_headset"
-	item_state = "syndie_headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_syndicate.dmi'
 
 /obj/item/radio/headset/syndicate/Initialize()
 	. = ..()
@@ -95,94 +93,78 @@
 /obj/item/radio/headset/headset_sec
 	name = "security radio headset"
 	desc = "This is used by your elite security force."
-	icon_state = "sec_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_security.dmi'
 	ks1type = /obj/item/encryptionkey/headset_sec
 
 /obj/item/radio/headset/headset_sec/alt
 	name = "security bowman headset"
-	icon_state = "sec_headset_alt"
-	item_state = "sec_headset_alt"
+	icon = 'icons/obj/items/device/radio/headsets/headset_security_alt.dmi'
 
 /obj/item/radio/headset/headset_eng
 	name = "engineering radio headset"
 	desc = "When the engineers wish to chat like girls."
-	icon_state = "eng_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_engineering.dmi'
 	ks1type = /obj/item/encryptionkey/headset_eng
 
 /obj/item/radio/headset/headset_eng/alt
 	name = "engineering bowman headset"
-	icon_state = "eng_headset_alt"
-	item_state = "eng_headset_alt"
+	icon = 'icons/obj/items/device/radio/headsets/headset_engineering_alt.dmi'
 
 /obj/item/radio/headset/headset_rob
 	name = "robotics radio headset"
 	desc = "Made specifically for the roboticists who cannot decide between departments."
-	icon_state = "rob_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_robotics.dmi'
 	ks1type = /obj/item/encryptionkey/headset_rob
 
 /obj/item/radio/headset/headset_med
 	name = "medical radio headset"
 	desc = "A headset for the trained staff of the medbay."
-	icon_state = "med_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_medical.dmi'
 	ks1type = /obj/item/encryptionkey/headset_med
 
 /obj/item/radio/headset/headset_med/alt
 	name = "medical bowman headset"
-	icon_state = "med_headset_alt"
-	item_state = "med_headset_alt"
+	icon = 'icons/obj/items/device/radio/headsets/headset_medical_alt.dmi'
 
 /obj/item/radio/headset/headset_sci
 	name = "science radio headset"
 	desc = "A sciency headset. Like usual."
-	icon_state = "com_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_science.dmi'
 	ks1type = /obj/item/encryptionkey/headset_sci
 
 /obj/item/radio/headset/headset_medsci
 	name = "medical research radio headset"
 	desc = "A headset that is a result of the mating between medical and science."
-	icon_state = "med_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_medical.dmi'
 	ks1type = /obj/item/encryptionkey/headset_medsci
 
 /obj/item/radio/headset/headset_com
 	name = "command radio headset"
 	desc = "A headset with a commanding channel."
-	icon_state = "com_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command.dmi'
 	ks1type = /obj/item/encryptionkey/headset_com
 
 /obj/item/radio/headset/headset_com/alt
 	name = "command bowman headset"
 	desc = "A headset with a commanding channel."
-	icon_state = "com_headset_alt"
-	item_state = "com_headset_alt"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command_alt.dmi'
 	ks1type = /obj/item/encryptionkey/headset_com
 	max_keys = 3
 
 /obj/item/radio/headset/heads/captain
 	name = "captain's headset"
 	desc = "The headset of the boss."
-	icon_state = "com_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command.dmi'
 	ks1type = /obj/item/encryptionkey/heads/captain
 
 /obj/item/radio/headset/heads/captain/alt
 	name = "captain's bowman headset"
-	icon_state = "com_headset_alt"
-	item_state = "com_headset_alt"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command_alt.dmi'
 	max_keys = 3
 
-/obj/item/radio/headset/heads/ai_integrated //No need to care about icons, it should be hidden inside the AI anyway.
+/obj/item/radio/headset/heads/ai_integrated
 	name = "\improper AI subspace transceiver"
 	desc = "Integrated AI radio transceiver."
-	icon = 'icons/obj/robot_component.dmi'
-	icon_state = "radio"
-	item_state = "headset"
 	ks1type = /obj/item/encryptionkey/heads/ai_integrated
 	var/myAi = null    // Atlantis: Reference back to the AI which has this radio.
 	var/disabledAi = 0 // Atlantis: Used to manually disable AI's integrated radio via inteliCard menu.
@@ -199,114 +181,97 @@
 /obj/item/radio/headset/heads/rd
 	name = "chief science officer's headset"
 	desc = "Headset of the researching God."
-	icon_state = "com_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command.dmi'
 	ks1type = /obj/item/encryptionkey/heads/rd
 
 /obj/item/radio/headset/heads/hos
 	name = "head of security's headset"
 	desc = "The headset of the man who protects your worthless lives."
-	icon_state = "com_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command.dmi'
 	ks1type = /obj/item/encryptionkey/heads/hos
 
 /obj/item/radio/headset/heads/ce
 	name = "chief engineer's headset"
 	desc = "The headset of the guy who is in charge of morons."
-	icon_state = "com_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command.dmi'
 	ks1type = /obj/item/encryptionkey/heads/ce
 
 /obj/item/radio/headset/heads/ce/alt
 	name = "chief engineer's bowman headset"
-	icon_state = "com_headset_alt"
-	item_state = "com_headset_alt"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command_alt.dmi'
 
 /obj/item/radio/headset/heads/cmo
 	name = "chief medical officer's headset"
 	desc = "The headset of the highly trained medical chief."
-	icon_state = "com_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command_alt.dmi'
 	ks1type = /obj/item/encryptionkey/heads/cmo
 
 /obj/item/radio/headset/heads/cmo/alt
 	name = "chief medical officer's bowman headset"
-	icon_state = "com_headset_alt"
-	item_state = "com_headset_alt"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command_alt.dmi'
 
 /obj/item/radio/headset/heads/hop
 	name = "head of personnel's headset"
 	desc = "The headset of the guy who will one day be captain."
-	icon_state = "com_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command.dmi'
 	ks1type = /obj/item/encryptionkey/heads/hop
 
 /obj/item/radio/headset/headset_service
 	name = "service radio headset"
 	desc = "Headset used by the service staff, tasked with keeping everyone full, happy and clean."
-	icon_state = "srv_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_service.dmi'
 	ks1type = /obj/item/encryptionkey/headset_service
 
 /obj/item/radio/headset/ert
 	name = "emergency response team radio headset"
 	desc = "The headset of the boss's boss."
-	icon_state = "com_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command.dmi'
 	ks1type = /obj/item/encryptionkey/ert
 
 /obj/item/radio/headset/foundation
 	name = "\improper Foundation radio headset"
 	desc = "The headeset of the occult cavalry."
-	icon_state = "com_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command.dmi'
 	ks1type = /obj/item/encryptionkey/ert
 
 /obj/item/radio/headset/ia
 	name = "internal affair's headset"
 	desc = "The headset of your worst enemy."
-	icon_state = "com_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command.dmi'
 	ks1type = /obj/item/encryptionkey/heads/hos
 
 /obj/item/radio/headset/headset_mining
 	name = "mining radio headset"
 	desc = "Headset used by dwarves. It has an inbuilt subspace antenna for better reception."
-	icon_state = "mine_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_mining.dmi'
 	ks1type = /obj/item/encryptionkey/headset_mining
 
 /obj/item/radio/headset/headset_mining/alt
 	name = "mining bowman radio headset"
-	icon_state = "mine_headset_alt"
-	item_state = "mine_headset_alt"
+	icon = 'icons/obj/items/device/radio/headsets/headset_mining_alt.dmi'
 	max_keys = 3
 
 /obj/item/radio/headset/headset_cargo
 	name = "supply radio headset"
 	desc = "A headset used by the box-pushers."
-	icon_state = "cargo_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_cargo.dmi'
 	ks1type = /obj/item/encryptionkey/headset_cargo
 
 /obj/item/radio/headset/headset_cargo/alt
 	name = "supply bowman headset"
-	icon_state = "cargo_headset_alt"
-	item_state = "cargo_headset_alt"
+	icon = 'icons/obj/items/device/radio/headsets/headset_cargo_alt.dmi'
 	max_keys = 3
 
 /obj/item/radio/headset/entertainment
 	name = "actor's radio headset"
 	desc = "specially made to make you sound less cheesy."
-	icon_state = "com_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_command.dmi'
 	ks1type = /obj/item/encryptionkey/entertainment
 
 /obj/item/radio/headset/specops
 	name = "special operations radio headset"
 	desc = "The headset of the spooks."
-	icon_state = "cent_headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset_centcomm.dmi'
 	ks1type = /obj/item/encryptionkey/specops
 
 /obj/item/radio/headset/attackby(obj/item/W, mob/user)

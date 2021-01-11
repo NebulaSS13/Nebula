@@ -96,10 +96,10 @@
 /obj/item/bot_controller
 	name = "remote control"
 	desc = "Used to control something remotely. Even has a tiny screen!"
-	icon_state = "forensic1"
+	icon = 'icons/obj/items/remote_control.dmi'
+	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
-	item_state = "electronic"
 	var/mob/living/bot/remotebot/bot
 
 /obj/item/bot_controller/attack_self(var/mob/user)

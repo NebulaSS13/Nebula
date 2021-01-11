@@ -1,9 +1,7 @@
 /obj/item/grenade/anti_photon
 	desc = "An experimental device for temporarily removing light in a limited area."
 	name = "photon disruption grenade"
-	icon = 'icons/obj/grenade.dmi'
-	icon_state = "emp"
-	item_state = "emp"
+	icon = 'icons/obj/items/grenades/grenade_light.dmi'
 	det_time = 20
 	origin_tech = "{'wormholes':4,'materials':4}"
 	material = /decl/material/solid/metal/steel

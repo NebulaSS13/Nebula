@@ -3,7 +3,7 @@
 	desc = "Use this to keep prisoners in line."
 	gender = PLURAL
 	icon = 'icons/obj/items/handcuffs.dmi'
-	icon_state = "handcuff"
+	icon_state = ICON_STATE_WORLD
 	health = 0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
@@ -26,13 +26,6 @@
 		if (display > 66)
 			return
 		to_chat(user, SPAN_WARNING("They look [display < 33 ? "badly ": ""]damaged."))
-
-/obj/item/handcuffs/get_icon_state(mob/user_mob, slot)
-	if(slot == slot_handcuffed_str)
-		return "handcuff1"
-	if(slot == slot_legcuffed_str)
-		return "legcuff1"
-	return ..()
 
 /obj/item/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
 
@@ -99,7 +92,7 @@
 	user.visible_message("<span class='danger'>\The [user] has put [cuff_type] on \the [H]!</span>")
 
 	// Apply cuffs.
-	target.equip_to_slot(cuffs,slot_handcuffed_str)
+	target.equip_to_slot(cuffs, slot_handcuffed_str)
 	return 1
 
 var/last_chew = 0
@@ -127,7 +120,7 @@ var/last_chew = 0
 /obj/item/handcuffs/cable
 	name = "cable restraints"
 	desc = "Looks like some cables tied together. Could be used to tie something up."
-	icon_state = "cuff_white"
+	icon = 'icons/obj/items/handcuffs_cable.dmi'
 	breakouttime = 300 //Deciseconds = 30s
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"

@@ -6,12 +6,7 @@ var/list/holder_mob_icon_cache = list()
 	desc = "You shouldn't ever see this."
 	icon = 'icons/obj/objects.dmi'
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
-
 	origin_tech = null
-	item_icons = list(
-		BP_L_HAND = 'icons/mob/onmob/items/lefthand_holder.dmi',
-		BP_R_HAND = 'icons/mob/onmob/items/righthand_holder.dmi'
-	)
 	pixel_y = 8
 
 	var/last_holder
@@ -100,16 +95,46 @@ var/list/holder_mob_icon_cache = list()
 
 	..()
 
+var/list/holder_mob_icons = list(
+	"repairbot" =         'icons/clothing/holders/holder_repairbot.dmi',
+	"constructiondrone" = 'icons/clothing/holders/holder_constructiondrone.dmi',
+	"mouse_brown" =       'icons/clothing/holders/holder_mouse_brown.dmi',
+	"mouse_gray" =        'icons/clothing/holders/holder_mouse_gray.dmi',
+	"mouse_white" =       'icons/clothing/holders/holder_mouse_white.dmi',
+	"pai-repairbot" =     'icons/clothing/holders/holder_pai_repairbot.dmi',
+	"pai-monkey" =        'icons/clothing/holders/holder_pai_monkey.dmi',
+	"pai-rabbit" =        'icons/clothing/holders/holder_pai_rabbit.dmi',
+	"pai-mouse" =         'icons/clothing/holders/holder_pai_mouse.dmi',
+	"pai-crow" =          'icons/clothing/holders/holder_pai_crow.dmi',
+	"monkey" =            'icons/clothing/holders/holder_monkey.dmi',
+	"kitten" =            'icons/clothing/holders/holder_kitten.dmi',
+	"cat" =               'icons/clothing/holders/holder_cat.dmi',
+	"cat2" =              'icons/clothing/holders/holder_cat2.dmi',
+	"cat3" =              'icons/clothing/holders/holder_cat3.dmi',
+	"corgi" =             'icons/clothing/holders/holder_corgi.dmi',
+	"slug" =              'icons/clothing/holders/holder_slug.dmi'
+)
+
 /obj/item/holder/proc/sync(var/mob/living/M)
+
 	set_dir(SOUTH)
 	overlays.Cut()
-	icon = M.icon
-	icon_state = M.icon_state
-	item_state = M.item_state
+
+	if(global.holder_mob_icons[initial(M.icon_state)])
+		icon = global.holder_mob_icons[initial(M.icon_state)]
+		icon_state = ICON_STATE_WORLD
+		item_state = null
+		use_single_icon = TRUE
+	else
+		icon = M.icon
+		icon_state = M.icon_state
+		item_state = M.item_state
+		overlays |= M.overlays
+		use_single_icon = FALSE
+
 	color = M.color
 	SetName(M.name)
 	desc = M.desc
-	overlays |= M.overlays
 	var/mob/living/carbon/human/H = loc
 	last_holder = H
 	register_all_movement(H, M)

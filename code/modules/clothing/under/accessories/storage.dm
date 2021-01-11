@@ -120,7 +120,8 @@
 /obj/item/clothing/accessory/storage/bandolier
 	name = "bandolier"
 	desc = "A lightweight synthethic bandolier with straps for holding ammunition or other small objects."
-	icon_state = "bandolier"
+	icon = 'icons/obj/items/bandolier.dmi'
+	icon_state = ICON_STATE_WORLD
 	slots = 10
 	max_w_class = ITEM_SIZE_NORMAL
 

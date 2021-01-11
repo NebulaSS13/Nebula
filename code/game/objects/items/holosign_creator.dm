@@ -1,9 +1,8 @@
 /obj/item/holosign_creator
 	name = "holographic sign projector"
 	desc = "A handy-dandy holographic projector that displays a janitorial sign."
-	icon = 'icons/obj/janitor.dmi'
-	icon_state = "signmaker"
-	item_state = "electronic"
+	icon = 'icons/obj/items/holosign_projector.dmi'
+	icon_state = ICON_STATE_WORLD
 	force = 0
 	w_class = ITEM_SIZE_SMALL
 	throwforce = 0

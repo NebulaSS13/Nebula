@@ -2,13 +2,13 @@
 /obj/item/clothing/ears/earring
 	name = "earring"
 	desc = "An earring of some kind."
-	icon = 'icons/obj/clothing/obj_ears.dmi'
+	icon = 'icons/clothing/ears/earring_stud.dmi'
+	icon_state = ICON_STATE_WORLD
 	gender = PLURAL
 
 /obj/item/clothing/ears/earring/stud
 	name = "pearl stud earrings"
 	desc = "A pair of small stud earrings."
-	icon_state = "ear_stud"
 	color = "#eae0c8"
 
 /obj/item/clothing/ears/earring/stud/glass
@@ -44,7 +44,7 @@
 	color = "#00ffe1"
 
 /obj/item/clothing/ears/earring/dangle
-	icon_state = "ear_dangle"
+	icon = 'icons/clothing/ears/earring_dangle.dmi'
 
 /obj/item/clothing/ears/earring/dangle/glass
 	name = "glass dangle earrings"

@@ -171,8 +171,8 @@
 		L.reagents.add_reagent(/decl/material/liquid/venom, 5)
 
 /obj/item/missile
-	icon = 'icons/obj/grenade.dmi'
-	icon_state = "missile"
+	icon = 'icons/obj/items/grenades/missile.dmi'
+	icon_state = ICON_STATE_WORLD
 	var/primed = null
 	throwforce = 15
 
