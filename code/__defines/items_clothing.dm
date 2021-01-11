@@ -56,6 +56,11 @@
 #define slot_s_store_str     "slot_s_store"
 #define slot_in_backpack_str "slot_s_store"
 
+// Defined here for consistency, not actually used for slots, just for species clothing offsets.
+#define slot_undershirt_str  "slot_undershirt"
+#define slot_underpants_str  "slot_underpants"
+#define slot_socks_str       "slot_socks"
+
 // Bodypart coverage bitflags.
 #define SLOT_UPPER_BODY  BITFLAG(0)
 #define SLOT_LOWER_BODY  BITFLAG(1)
