@@ -9,6 +9,7 @@
 	#include "../../mods/content/corporate/away_sites/lar_maria/lar_maria.dm"
 	#include "../../mods/species/utility_frames/_utility_frames.dme"
 	#include "../../mods/species/ascent/away_sites/ascent/ascent.dm"
+	#include "../../mods/species/tajaran/_tajaran.dme"
 
 	#include "../away/bearcat/bearcat.dm"
 	#include "../away/casino/casino.dm"

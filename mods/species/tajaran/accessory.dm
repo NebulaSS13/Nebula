@@ -4,342 +4,275 @@
 	..()
 	species_allowed |= SPECIES_TAJARA
 
+/datum/sprite_accessory/hair/shaved/New()
+	..()
+	species_allowed |= SPECIES_TAJARA
+
 /datum/sprite_accessory/hair/taj
-	name = "Tajaran Ears"
-	icon_state = "ears_plain"
+	name = "Tajaran Rattail"
+	icon_state = "hair_rattail"
 	species_allowed = list(SPECIES_TAJARA)
 	icon = 'mods/species/tajaran/icons/hair.dmi'
+	blend = ICON_MULTIPLY
 
-/datum/sprite_accessory/hair/taj/ears_clean
-	name = "Tajara Clean"
+/datum/sprite_accessory/hair/taj/straight
+	name = "Tajaran Straight Hair"
+	icon_state = "hair_straight"
+
+/datum/sprite_accessory/hair/taj/clean
+	name = "Tajaran Clean"
 	icon_state = "hair_clean"
 
-/datum/sprite_accessory/hair/taj/ears_bangs
-	name = "Tajara Bangs"
-	icon_state = "hair_bangs"
-
-/datum/sprite_accessory/hair/taj/ears_braid
-	name = "Tajara Braid"
-	icon_state = "hair_tbraid"
-
-/datum/sprite_accessory/hair/taj/ears_shaggy
-	name = "Tajara Shaggy"
+/datum/sprite_accessory/hair/taj/shaggy
+	name = "Tajaran Shaggy"
 	icon_state = "hair_shaggy"
 
-/datum/sprite_accessory/hair/taj/ears_mohawk
+/datum/sprite_accessory/hair/taj/mohawk
 	name = "Tajaran Mohawk"
 	icon_state = "hair_mohawk"
 
-/datum/sprite_accessory/hair/taj/ears_plait
-	name = "Tajara Plait"
+/datum/sprite_accessory/hair/taj/plait
+	name = "Tajaran Plait"
 	icon_state = "hair_plait"
 
-/datum/sprite_accessory/hair/taj/ears_straight
-	name = "Tajara Straight"
-	icon_state = "hair_straight"
-
-/datum/sprite_accessory/hair/taj/ears_long
-	name = "Tajara Long"
+/datum/sprite_accessory/hair/taj/long
+	name = "Tajaran Long Hair"
 	icon_state = "hair_long"
 
-/datum/sprite_accessory/hair/taj/ears_rattail
-	name = "Tajara Rat Tail"
-	icon_state = "hair_rattail"
-
-/datum/sprite_accessory/hair/taj/ears_spiky
-	name = "Tajara Spiky"
+/datum/sprite_accessory/hair/taj/spiky
+	name = "Tajaran Spiky"
 	icon_state = "hair_tajspiky"
 
-/datum/sprite_accessory/hair/taj/ears_messy
-	name = "Tajara Messy"
+/datum/sprite_accessory/hair/taj/bangs
+	name = "Tajaran Bangs"
+	icon_state = "hair_bangs"
+
+/datum/sprite_accessory/hair/taj/messy
+	name = "Tajaran Messy"
 	icon_state = "hair_messy"
 
-/datum/sprite_accessory/hair/taj/ears_bob
-	name = "Tajara Bob"
+/datum/sprite_accessory/hair/taj/braid
+	name = "Tajaran Braid"
+	icon_state = "hair_tbraid"
+
+/datum/sprite_accessory/hair/taj/bob
+	name = "Tajaran Bob"
 	icon_state = "hair_tbob"
 
-/datum/sprite_accessory/hair/taj/ears_sidebraid
-	name = "Tajara Sidebraid"
+/datum/sprite_accessory/hair/taj/weave
+	name = "Tajaran Fingerweave"
+	icon_state = "hair_fingerwave"
+
+/datum/sprite_accessory/hair/taj/sidebraid
+	name = "Tajaran Sidebraid"
 	icon_state = "hair_sidebraid"
 
-/datum/sprite_accessory/hair/taj/ears_ribbons
-	name = "Tajara Ribbons"
+/datum/sprite_accessory/hair/taj/ribbons
+	name = "Tajaran Ribbons"
 	icon_state = "hair_ribbons"
 
-/datum/sprite_accessory/hair/taj/ears_combedback
-	name = "Tajara Combedback"
+/datum/sprite_accessory/hair/taj/combed
+	name = "Tajaran Combed"
 	icon_state = "hair_combedback"
 
-/datum/sprite_accessory/hair/taj/ears_tailedbangs
-	name = "Tajara Tailedbangs"
+/datum/sprite_accessory/hair/taj/tailedbangs
+	name = "Tajaran Tailed Bangs"
 	icon_state = "hair_tailedbangs"
 
-/datum/sprite_accessory/hair/taj/ears_longtail
-	name = "Tajara Longtail"
+/datum/sprite_accessory/hair/taj/lynx
+	name = "Tajaran Lynx"
+	icon_state = "hair_lynx"
+
+/datum/sprite_accessory/hair/taj/longtail
+	name = "Tajaran Long Tail"
 	icon_state = "hair_longtail"
 
-/datum/sprite_accessory/hair/taj/ears_shy
-	name = "Tajara Shy"
+/datum/sprite_accessory/hair/taj/shy
+	name = "Tajaran Shy"
 	icon_state = "hair_shy"
 
-/datum/sprite_accessory/hair/taj/ears_ponytail
-	name = "Tajara Ponytail"
+/datum/sprite_accessory/hair/taj/ponytail
+	name = "Tajaran Ponytail"
 	icon_state = "hair_ponytail"
 
-/datum/sprite_accessory/hair/taj/ears_overeye
-	name = "Tajara Overeye"
+/datum/sprite_accessory/hair/taj/overeye
+	name = "Tajaran Overeye"
 	icon_state = "hair_overeye"
 
-/datum/sprite_accessory/hair/taj/ears_tough
-	name = "Tajara Tough"
+/datum/sprite_accessory/hair/taj/tough
+	name = "Tajaran Tough"
 	icon_state = "hair_tough"
 
-/datum/sprite_accessory/hair/taj/ears_cuttail
-	name = "Tajara Cuttail"
+/datum/sprite_accessory/hair/taj/cuttail
+	name = "Tajaran Cut Tail"
 	icon_state = "hair_cuttail"
 
-/datum/sprite_accessory/hair/taj/ears_dreadlocks
-	name = "Tajara Dreadlocks"
+/datum/sprite_accessory/hair/taj/dreadlocks
+	name = "Tajaran Dreadlocks"
 	icon_state = "hair_dreadlocks"
 
-/datum/sprite_accessory/hair/taj/ears_clean_noear
-	name = "Tajara Clean (No ears)"
-	icon_state = "hair_clean_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_bangs_noear
-	name = "Tajara Bangs (No ears)"
-	icon_state = "hair_bangs_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_braid_noear
-	name = "Tajara Braid (No ears)"
-	icon_state = "hair_tbraid_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_shaggy_noear
-	name = "Tajara Shaggy (No ears)"
-	icon_state = "hair_shaggy_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_mohawk_noear
-	name = "Tajaran Mohawk (No ears)"
-	icon_state = "hair_mohawk_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_plait_noear
-	name = "Tajara Plait (No ears)"
-	icon_state = "hair_plait_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_straight_noear
-	name = "Tajara Straight (No ears)"
-	icon_state = "hair_straight_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_long_noear
-	name = "Tajara Long (No ears)"
-	icon_state = "hair_long_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_rattail_noear
-	name = "Tajara Rat Tail (No ears)"
-	icon_state = "hair_rattail_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_spiky_noear
-	name = "Tajara Spiky (No ears)"
-	icon_state = "hair_tajspiky_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_messy_noear
-	name = "Tajara Messy (No ears)"
-	icon_state = "hair_messy_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_bob_noear
-	name = "Tajara Bob (No ears)"
-	icon_state = "hair_tbob_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_sidebraid_noear
-	name = "Tajara Sidebraid (No ears)"
-	icon_state = "hair_sidebraid_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_ribbons_noear
-	name = "Tajara Ribbons (No ears)"
-	icon_state = "hair_ribbons_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_combedback_noear
-	name = "Tajara Combedback (No ears)"
-	icon_state = "hair_combedback_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_tailedbangs_noear
-	name = "Tajara Tailedbangs (No ears)"
-	icon_state = "hair_tailedbangs_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_longtail_noear
-	name = "Tajara Longtail (No ears)"
-	icon_state = "hair_longtail_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_shy_noear
-	name = "Tajara Shy (No ears)"
-	icon_state = "hair_shy_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_ponytail_noear
-	name = "Tajara Ponytail (No ears)"
-	icon_state = "hair_ponytail_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_overeye_noear
-	name = "Tajara Overeye (No ears)"
-	icon_state = "hair_overeye_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_tough_noear
-	name = "Tajara Tough (No ears)"
-	icon_state = "hair_tough_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_cuttail_noear
-	name = "Tajara Cuttail (No ears)"
-	icon_state = "hair_cuttail_s_noear"
-
-/datum/sprite_accessory/hair/taj/ears_dreadlocks_noear
-	name = "Tajara Dreadlocks (No ears)"
-	icon_state = "hair_dreadlocks_s_noear"
-
-//Facial hs
-
 /datum/sprite_accessory/facial_hair/taj
-	name = "Tajara Sideburns"
+	name = "Tajaran Sideburns"
 	icon_state = "facial_sideburns"
 	species_allowed = list(SPECIES_TAJARA)
 	icon = 'mods/species/tajaran/icons/facial.dmi'
+	gender = null
+	blend = ICON_MULTIPLY
 
 /datum/sprite_accessory/facial_hair/taj/mutton
-	name = "Tajara Mutton"
+	name = "Tajaran Mutton Chops"
 	icon_state = "facial_mutton"
 
 /datum/sprite_accessory/facial_hair/taj/pencilstache
-	name = "Tajara Pencilstache"
+	name = "Tajaran Pencil Moustache"
 	icon_state = "facial_pencilstache"
 
 /datum/sprite_accessory/facial_hair/taj/moustache
-	name = "Tajara Moustache"
+	name = "Tajaran Moustache"
 	icon_state = "facial_moustache"
 
 /datum/sprite_accessory/facial_hair/taj/goatee
-	name = "Tajara Goatee"
+	name = "Tajaran Goatee"
 	icon_state = "facial_goatee"
 
 /datum/sprite_accessory/facial_hair/taj/smallstache
-	name = "Tajara Smallsatche"
+	name = "Tajaran Small Moustache"
 	icon_state = "facial_smallstache"
 
-//Markings
-
-/datum/sprite_accessory/marking/taj
-	name = "Socks Coloration (Taj)"
-	icon = 'mods/species/tajaran/icons/markings.dmi'
-	icon_state = "taj_pawsocks"
-	species_allowed = list(SPECIES_TAJARA)
-	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND)
-
-/datum/sprite_accessory/marking/taj/paw_socks
-	name = "Socks Coloration (Generic)"
-	icon_state = "pawsocks"
-	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND)
-
-/datum/sprite_accessory/marking/taj/belly_hands_feet
-	name = "Hands/Feet/Belly Color (Minor)"
-	icon_state = "bellyhandsfeetsmall"
-	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_GROIN,BP_CHEST)
-
-/datum/sprite_accessory/marking/taj/hands_feet_belly_full
-	name = "Hands/Feet/Belly Color (Major)"
-	icon_state = "bellyhandsfeet"
-	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_GROIN,BP_CHEST)
-
-/datum/sprite_accessory/marking/taj/hands_feet_belly_full_female
-	name = "Hands,Feet,Belly Color (Major, Female)"
-	icon_state = "bellyhandsfeet_female"
-	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_GROIN,BP_CHEST)
-
-/datum/sprite_accessory/marking/taj/patches
-	name = "Color Patches"
-	icon_state = "patches"
-	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_CHEST,BP_GROIN)
-
-/datum/sprite_accessory/marking/taj/patchesface
-	name = "Color Patches (Face)"
-	icon_state = "patchesface"
-	body_parts = list(BP_HEAD)
-
-/datum/sprite_accessory/marking/taj/tiger_stripes
-	name = "Tiger Stripes"
-	icon_state = "tiger"
-	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_CHEST,BP_GROIN)
-
-/datum/sprite_accessory/marking/taj/tigerhead
-	name = "Tiger Stripes (Head, Minor)"
-	icon_state = "tigerhead"
-	body_parts = list(BP_HEAD)
-
-/datum/sprite_accessory/marking/taj/tigerface
-	name = "Tiger Stripes (Head, Major)"
-	icon_state = "tigerface"
-	body_parts = list(BP_HEAD)
-
-/datum/sprite_accessory/marking/taj/belly
-	name = "Belly Fur (Taj)"
-	icon_state = "taj_belly"
-	body_parts = list(BP_CHEST)
-
-/datum/sprite_accessory/marking/taj/bellyfull
-	name = "Belly Fur Wide (Taj)"
-	icon_state = "taj_bellyfull"
-	body_parts = list(BP_CHEST)
-
-/datum/sprite_accessory/marking/taj/earsout
-	name = "Outer Ear (Taj)"
-	icon_state = "taj_earsout"
-	body_parts = list(BP_HEAD)
-
-/datum/sprite_accessory/marking/taj/earsin
-	name = "Inner Ear (Taj)"
-	icon_state = "taj_earsin"
-	body_parts = list(BP_HEAD)
-
-/datum/sprite_accessory/marking/taj/nose
-	name = "Nose Color (Taj)"
-	icon_state = "taj_nose"
-	body_parts = list(BP_HEAD)
-
-/datum/sprite_accessory/marking/taj/crest
-	name = "Chest Fur Crest (Taj)"
-	icon_state = "taj_crest"
-	body_parts = list(BP_CHEST)
-
-/datum/sprite_accessory/marking/taj/muzzle
-	name = "Muzzle Color (Taj)"
-	icon_state = "taj_muzzle"
-	body_parts = list(BP_HEAD)
-
-/datum/sprite_accessory/marking/taj/face
-	name = "Cheeks Color (Taj)"
-	icon_state = "taj_face"
-	body_parts = list(BP_HEAD)
-
-/datum/sprite_accessory/marking/taj/all
-	name = "All Taj Head (Taj)"
-	icon_state = "taj_all"
-	body_parts = list(BP_HEAD)
-
-/datum/sprite_accessory/marking/taj/earslynx
-	name = "Lynx Ear (Taj)"
-	icon_state = "taj_earsout_lynx"
-	body_parts = list(BP_HEAD)
-
-/datum/sprite_accessory/marking/taj/earsearrings
-	name = "Earrings (Taj)"
-	icon_state = "taj_earrings"
-	body_parts = list(BP_HEAD)
-
-/datum/sprite_accessory/marking/taj/facelynx
-	name = "Lynx cheeks (Taj)"
-	icon_state = "taj_lynxcheeks"
-	body_parts = list(BP_HEAD)
-
-//Skin
-
 /datum/sprite_accessory/skin/tajaran
-	name = "Default tajaran skin"
+	name = "Default Tajaran skin"
 	icon_state = "default"
 	icon = 'mods/species/tajaran/icons/body.dmi'
 	species_allowed = list(SPECIES_TAJARA)
+
+/datum/sprite_accessory/marking/tajaran
+	name = "Tajaran Wide Ears"
+	icon = 'mods/species/tajaran/icons/markings.dmi'
+	species_allowed = list(SPECIES_TAJARA)
+	body_parts = list(BP_HEAD)
+	icon_state = "ears_plain"
+	blend = ICON_MULTIPLY
+
+/datum/sprite_accessory/marking/tajaran/nose
+	name = "Tajaran Nose"
+	icon_state = "nose"
+
+/datum/sprite_accessory/marking/tajaran/wide_ears_inner
+	name = "Tajaran Wide Ears Interior"
+	icon_state = "ears_plain_inner"
+
+/datum/sprite_accessory/marking/tajaran/wide_ears_tuft
+	name = "Tajaran Wide Ears Tuft"
+	icon_state = "ears_plain_tuft"
+
+/datum/sprite_accessory/marking/tajaran/narrow_ears
+	name = "Tajaran Narrow Ears"
+	icon_state = "ears_narrow"
+
+/datum/sprite_accessory/marking/tajaran/narrow_ears_inner
+	name = "Tajaran Narrow Ears Interior"
+	icon_state = "ears_narrow_inner"
+
+/datum/sprite_accessory/marking/tajaran/narrow_ears_tuft
+	name = "Tajaran Narrow Ears Tuft"
+	icon_state = "ears_narrow_tuft"
+
+/datum/sprite_accessory/marking/tajaran/earrings
+	name = "Tajaran Earrings"
+	icon_state = "taj_earrings"
+
+/datum/sprite_accessory/marking/tajaran/patches
+	name = "Patches (Body)"
+	icon_state = "patches"
+	body_parts = list(BP_CHEST, BP_GROIN)
+	flags = HAIR_LOSS_VULNERABLE
+
+/datum/sprite_accessory/marking/tajaran/patches/left_arm
+	name = "Patches (Left Arm)"
+	body_parts = list(BP_L_ARM, BP_L_HAND)
+
+/datum/sprite_accessory/marking/tajaran/patches/right_arm
+	name = "Patches (Right Arm"
+	body_parts = list(BP_R_ARM, BP_R_HAND)
+
+/datum/sprite_accessory/marking/tajaran/patches/left_leg
+	name = "Patches (Left Leg)"
+	body_parts = list(BP_L_LEG, BP_L_FOOT)
+
+/datum/sprite_accessory/marking/tajaran/patches/right_leg
+	name = "Patches (Right Leg)"
+	body_parts = list(BP_R_LEG, BP_R_FOOT)
+
+/datum/sprite_accessory/marking/tajaran/tiger
+	name = "Tiger Stripes (Head)"
+	icon_state = "tiger"
+	flags = HAIR_LOSS_VULNERABLE
+
+/datum/sprite_accessory/marking/tajaran/tiger/body
+	name = "Tiger Stripes (Body)"
+	body_parts = list(BP_CHEST, BP_GROIN)
+
+/datum/sprite_accessory/marking/tajaran/tiger/left_arm
+	name = "Tiger Stripes (Left Arm)"
+	body_parts = list(BP_L_ARM, BP_L_HAND)
+
+/datum/sprite_accessory/marking/tajaran/tiger/right_arm
+	name = "Tiger Stripes (Right Arm)"
+	body_parts = list(BP_R_ARM, BP_R_HAND)
+
+/datum/sprite_accessory/marking/tajaran/tiger/left_leg
+	name = "Tiger Stripes (Left Leg)"
+	body_parts = list(BP_L_LEG, BP_L_FOOT)
+
+/datum/sprite_accessory/marking/tajaran/tiger/right_leg
+	name = "Tiger Stripes (Right Leg)"
+	body_parts = list(BP_R_LEG, BP_R_FOOT)
+
+/datum/sprite_accessory/marking/tajaran/spots
+	name = "Spots (Head)"
+	icon_state = "spots"
+	flags = HAIR_LOSS_VULNERABLE
+
+/datum/sprite_accessory/marking/tajaran/spots/body
+	name = "Spots (Body)"
+	body_parts = list(BP_CHEST, BP_GROIN)
+
+/datum/sprite_accessory/marking/tajaran/spots/left_arm
+	name = "Spots (Left Arm)"
+	body_parts = list(BP_L_ARM, BP_L_HAND)
+
+/datum/sprite_accessory/marking/tajaran/spots/right_arm
+	name = "Spots (Right Arm)"
+	body_parts = list(BP_R_ARM, BP_R_HAND)
+
+/datum/sprite_accessory/marking/tajaran/spots/left_leg
+	name = "Spots (Left Leg)"
+	body_parts = list(BP_L_LEG, BP_L_FOOT)
+
+/datum/sprite_accessory/marking/tajaran/spots/right_leg
+	name = "Spots (Right Leg)"
+	body_parts = list(BP_R_LEG, BP_R_FOOT)
+
+/datum/sprite_accessory/marking/tajaran/pawsocks
+	name = "Pawsocks (Left Arm)"
+	icon_state = "pawsocks"
+	body_parts = list(BP_L_ARM, BP_L_HAND)
+	flags = HAIR_LOSS_VULNERABLE
+
+/datum/sprite_accessory/marking/tajaran/pawsocks/right_arm
+	name = "Pawsocks (Right Arm)"
+	body_parts = list(BP_R_ARM, BP_R_HAND)
+
+/datum/sprite_accessory/marking/tajaran/pawsocks/left_leg
+	name = "Pawsocks (Left Leg)"
+	body_parts = list(BP_L_LEG, BP_L_FOOT)
+
+/datum/sprite_accessory/marking/tajaran/pawsocks/right_leg
+	name = "Pawsocks (Right Leg)"
+	body_parts = list(BP_R_LEG, BP_R_FOOT)
+
+/datum/sprite_accessory/marking/tajaran/belly
+	name = "Belly"
+	icon_state = "belly"
+	body_parts = list(BP_CHEST, BP_GROIN)
+	flags = HAIR_LOSS_VULNERABLE
