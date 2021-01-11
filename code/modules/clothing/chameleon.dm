@@ -52,9 +52,7 @@
 //starts off as a jumpsuit
 /obj/item/clothing/under/chameleon
 	name = "jumpsuit"
-	icon_state = "jumpsuit"
-	item_state = "jumpsuit"
-	worn_state = "jumpsuit"
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
 	desc = "It's a plain jumpsuit. It seems to have a small dial on the wrist."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON

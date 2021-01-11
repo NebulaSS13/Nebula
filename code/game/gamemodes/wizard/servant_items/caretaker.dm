@@ -27,7 +27,7 @@
 /obj/item/clothing/under/caretaker
 	name = "caretaker's jumpsuit"
 	desc = "A holy jumpsuit. Treat it well."
-	icon_state = "caretaker"
+	icon = 'icons/clothing/under/caretaker.dmi'
 	bodytype_restricted = list(BODYTYPE_HUMANOID)
 
 /obj/item/clothing/shoes/dress/caretakershoes

@@ -176,7 +176,7 @@
 					/obj/item/clothing/accessory/armband/medgreen,
 					/obj/item/clothing/glasses/hud/health,
 					/obj/item/clothing/suit/storage/toggle/labcoat,
-					/obj/item/clothing/under/rank/medical/paramedic,
+					/obj/item/clothing/under/rank/medical,
 					/obj/item/clothing/suit/storage/toggle/fr_jacket,
 					/obj/item/clothing/mask/gas,
 					/obj/item/clothing/under/rank/medical/paramedic,
