@@ -2,7 +2,7 @@
 	name = "dog tags"
 	desc = "Plain identification tags made from a durable metal. They are stamped with a variety of informational details."
 	gender = PLURAL
-	icon_state = "dog_tags"
+	icon = 'icons/clothing/accessories/dogtags.dmi'
 	slot_flags = SLOT_FACE | SLOT_TIE
 	badge_string = null
 
