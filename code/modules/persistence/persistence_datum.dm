@@ -29,6 +29,7 @@
 
 /datum/persistent/proc/CheckTokenSanity(var/list/tokens)
 	return ( \
+		islist(tokens) && \
 		!isnull(tokens["x"]) && \
 		!isnull(tokens["y"]) && \
 		!isnull(tokens["z"]) && \
@@ -94,18 +95,46 @@
 	. = tokens
 
 /datum/persistent/proc/Initialize()
-	if(fexists(filename))
-		var/list/token_sets = cached_json_decode(file2text(filename))
-		for(var/tokens in token_sets)
-			tokens = FinalizeTokens(tokens)
-			if(CheckTokenSanity(tokens))
-				ProcessAndApplyTokens(tokens)
+	if(!fexists(filename))
+		return
+
+	var/list/entries = cached_json_decode(file2text(filename))
+	if(!length(entries))
+		return
+
+	var/list/encoding_flag = entries[1]
+	if(encoding_flag && ("url_encoded" in encoding_flag))
+		entries -= encoding_flag
+		for(var/list/entry in entries)
+			for(var/i in 1 to entry.len)
+				var/item = entry[i]
+				var/decoded_value = (istext(entry[item]) ? url_decode(entry[item]) : entry[item])
+				var/decoded_key = url_decode(item)
+				entry[i] = decoded_key
+				entry[decoded_key] = decoded_value
+
+	for(var/list/entry in entries)
+		entry = FinalizeTokens(entry)
+		if(CheckTokenSanity(entry))
+			ProcessAndApplyTokens(entry)
 
 /datum/persistent/proc/Shutdown()
 	var/list/entries = list()
 	for(var/thing in SSpersistence.tracking_values[type])
 		if(IsValidEntry(thing))
 			entries += list(CompileEntry(thing))
+
+#if DM_VERSION < 513 || (DM_VERSION == 513 && DM_BUILD < 1540)
+	for(var/list/entry in entries)
+		for(var/i in 1 to entry.len)
+			var/item = entry[i]
+			var/encoded_value = (istext(entry[item]) ? url_encode(entry[item]) : entry[item])
+			var/encoded_key = url_encode(item)
+			entry[i] = encoded_key
+			entry[encoded_key] = encoded_value
+	entries.Insert(1, list(list("url_encoded" = TRUE)))
+#endif
+
 	if(fexists(filename))
 		fdel(filename)
 	to_file(file(filename), json_encode(entries))
