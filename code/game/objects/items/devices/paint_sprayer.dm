@@ -1,5 +1,6 @@
 #define AIRLOCK_REGION_PAINT    "Paint"
 #define AIRLOCK_REGION_STRIPE   "Stripe"
+#define AIRLOCK_REGION_WINDOW   "Window"
 
 /obj/item/paint_sprayer
 	name = "paint sprayer"
@@ -124,7 +125,7 @@
 		. = FALSE
 
 	else
-		to_chat(user, SPAN_WARNING("\The [src] can only be used on floors, walls, exosuits or certain airlocks."))
+		to_chat(user, SPAN_WARNING("\The [src] can only be used on floors, windows, walls, exosuits or certain airlocks."))
 		. = FALSE
 
 	if (.)
@@ -215,6 +216,8 @@
 			D.paint_airlock(paint_color)
 		if (AIRLOCK_REGION_STRIPE)
 			D.stripe_airlock(paint_color)
+		if (AIRLOCK_REGION_WINDOW)
+			D.paint_window(paint_color)
 		else
 			return FALSE
 	return TRUE
@@ -229,18 +232,22 @@
 			return D.door_color
 		if (AIRLOCK_REGION_STRIPE)
 			return D.stripe_color
+		if (AIRLOCK_REGION_WINDOW)
+			return D.window_color
 		else
 			return FALSE
 
 
 /obj/item/paint_sprayer/proc/select_airlock_region(var/obj/machinery/door/airlock/D, var/mob/user, var/input_text)
 	var/choice
-	if (D.paintable == AIRLOCK_PAINTABLE)
-		choice = "Paint"
-	else if (D.paintable == AIRLOCK_STRIPABLE)
-		choice = "Stripe"
-	else if (D.paintable == AIRLOCK_PAINTABLE | AIRLOCK_STRIPABLE)
-		choice = input(user, input_text) as null|anything in list("Paint","Stripe")
+	var/list/choices = list()
+	if (D.paintable & AIRLOCK_PAINTABLE)
+		choices |= AIRLOCK_REGION_PAINT
+	if (D.paintable & AIRLOCK_STRIPABLE)
+		choices |= AIRLOCK_REGION_STRIPE
+	if (D.paintable & AIRLOCK_WINDOW_PAINTABLE)
+		choices |= AIRLOCK_REGION_WINDOW
+	choice = input(user, input_text) as null|anything in sortList(choices)
 	if (user.incapacitated() || !D || !user.Adjacent(D))
 		return FALSE
 	return choice
@@ -361,3 +368,4 @@
 
 #undef AIRLOCK_REGION_PAINT
 #undef AIRLOCK_REGION_STRIPE
+#undef AIRLOCK_REGION_WINDOW

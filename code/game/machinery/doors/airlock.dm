@@ -12,6 +12,7 @@
 #define AIRLOCK_PAINTABLE 1
 #define AIRLOCK_STRIPABLE 2
 #define AIRLOCK_DETAILABLE 4
+#define AIRLOCK_WINDOW_PAINTABLE 8
 
 var/list/airlock_overlays = list()
 
@@ -69,10 +70,12 @@ var/list/airlock_overlays = list()
 	//The variables below determine what color the airlock and decorative stripes will be -Cakey
 	var/airlock_type = "Standard"
 	var/global/list/airlock_icon_cache = list()
-	var/paintable = AIRLOCK_PAINTABLE|AIRLOCK_STRIPABLE //0 = Not paintable, 1 = Paintable, 3 = Paintable and Stripable, 7 for Paintable, Stripable and Detailable.
+	var/paintable = AIRLOCK_PAINTABLE|AIRLOCK_STRIPABLE|AIRLOCK_WINDOW_PAINTABLE
 	var/door_color = null
 	var/stripe_color = null
 	var/symbol_color = null
+	var/window_color = null
+	var/window_material = /decl/material/solid/glass
 
 	var/fill_file = 'icons/obj/doors/station/fill_steel.dmi'
 	var/color_file = 'icons/obj/doors/station/color.dmi'
@@ -91,6 +94,9 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/get_material()
 	return decls_repository.get_decl(mineral ? mineral : /decl/material/solid/metal/steel)
+
+/obj/machinery/door/airlock/proc/get_window_material()
+	return decls_repository.get_decl(window_material)
 
 /obj/machinery/door/airlock/get_codex_value()
 	return "airlock"
@@ -341,7 +347,15 @@ About the new airlock wires panel:
 			color_overlay.Blend(door_color, ICON_MULTIPLY)
 			airlock_icon_cache["[ikey]"] = color_overlay
 	if(glass)
-		filling_overlay = glass_file
+		if (window_color && window_color != "none")
+			var/ikey = "[airlock_type]-[window_color]-windowcolor"
+			filling_overlay = airlock_icon_cache["[ikey]"]
+			if (!filling_overlay)
+				filling_overlay = new(glass_file)
+				filling_overlay.Blend(window_color, ICON_MULTIPLY)
+				airlock_icon_cache["[ikey]"] = filling_overlay
+		else
+			filling_overlay = glass_file
 	else
 		if(door_color && !(door_color == "none"))
 			var/ikey = "[airlock_type]-[door_color]-fillcolor"
@@ -997,6 +1011,13 @@ About the new airlock wires panel:
 			brace.electronics.set_access(src)
 			brace.update_access()
 		queue_icon_update()
+
+	if (glass)
+		paintable |= AIRLOCK_WINDOW_PAINTABLE
+		if (!window_color)
+			var/decl/material/window = get_window_material()
+			window_color = window.color
+
 	. = ..()
 
 /obj/machinery/door/airlock/proc/inherit_from_assembly(obj/structure/door_assembly/assembly)
@@ -1093,3 +1114,13 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/proc/stripe_airlock(var/paint_color)
 	stripe_color = paint_color
 	update_icon()
+
+/obj/machinery/door/airlock/proc/paint_window(paint_color)
+	if (paint_color)
+		window_color = paint_color
+	else if (window_material)
+		var/decl/material/window = get_window_material()
+		window_color = window.color
+	else
+		window_color = GLASS_COLOR
+	queue_icon_update()
