@@ -158,6 +158,55 @@
 	else
 		to_chat(user, "Harvesting \a [target] is not the purpose of this tool. \The [src] is for plants being grown.")
 
+// A special medical instrument for medical droid. Allow droid to do all operations by selecting "surgery tool" mode, e.g. IMS
+/obj/item/surgical_selector
+	name = "surgery tool selector"
+	desc = "An integrated system with selection of surgial tools."
+	icon = 'icons/obj/surgery.dmi'
+	icon_state = "scalpel_manager_on"
+	var/list/obj/item/surgery_items = list()
+	var/list/surgery_item_paths = list(
+		/obj/item/scalpel/manager,
+		/obj/item/hemostat,
+		/obj/item/retractor,
+		/obj/item/cautery,
+		/obj/item/bonegel,
+		/obj/item/sutures,
+		/obj/item/bonesetter,
+		/obj/item/circular_saw,
+		/obj/item/surgicaldrill,
+	)
+
+	var/obj/item/selected_tool
+
+/obj/item/surgical_selector/Initialize()
+	. = ..()
+	for(var/path in surgery_item_paths)
+		surgery_items.Add(new path(src))
+
+/obj/item/surgical_selector/examine(mob/user)
+	. = ..()
+	. += "\nThe selected tool is [selected_tool ? selected_tool : "nothing"]!"
+
+/obj/item/surgical_selector/attack_self(mob/user)
+	var/list/options = list()
+	for(var/atom/movable/AM in surgery_items)
+		var/image/radial_button = image(icon = AM.icon, icon_state = AM.icon_state)
+		radial_button.name = AM.name
+		radial_button.desc = AM.desc
+		options[AM] = radial_button
+
+	selected_tool = show_radial_menu(user, src, options, radius = 42, require_near = TRUE, tooltips = TRUE)
+	to_chat(user, SPAN_NOTICE("You select to use [selected_tool ? selected_tool : "nothing"]."))
+
+/obj/item/surgical_selector/resolve_attackby(atom/target, mob/living/user, proximity)
+	if(!target || !proximity || !isturf(get_turf(target)) || !selected_tool)
+		return
+
+	if(iscarbon(target))
+		var/mob/living/carbon/C = target
+		C.attackby(selected_tool, user)
+
 // A special tray for the service droid. Allow droid to pick up and drop items as if they were using the tray normally
 // Click on table to unload, click on item to load. Otherwise works identically to a tray.
 // Unlike the base item "tray", robotrays ONLY pick up food, drinks and condiments.
