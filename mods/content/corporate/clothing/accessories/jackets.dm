@@ -1,7 +1,6 @@
 /obj/item/clothing/accessory/toggleable/corpjacket
 	name = "corporate suit jacket"
 	desc = "A jacket that the EXO has their executives wear."
-	icon_state = ICON_STATE_WORLD
 	icon = 'mods/content/corporate/icons/clothing/accessories/jackets/jacket_tl.dmi'
 
 /obj/item/clothing/accessory/toggleable/corpjacket/nanotrasen
