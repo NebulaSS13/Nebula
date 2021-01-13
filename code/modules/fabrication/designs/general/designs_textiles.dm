@@ -360,7 +360,7 @@
 	path = /obj/item/clothing/accessory/armorplate/merc
 
 /datum/fabricator_recipe/textiles/bulletcarrier
-	path = /obj/item/clothing/suit/armor/bulletproof/noacc
+	path = /obj/item/clothing/suit/armor/bulletproof
 
 /datum/fabricator_recipe/textiles/bulletarmguards
 	path = /obj/item/clothing/accessory/armguards/ballistic
@@ -378,19 +378,19 @@
 	path = /obj/item/clothing/suit/armor/pcarrier/tan
 
 /datum/fabricator_recipe/textiles/carrierlight
-	path = /obj/item/clothing/suit/armor/pcarrier/light/noacc
+	path = /obj/item/clothing/suit/armor/pcarrier
 
 /datum/fabricator_recipe/textiles/carrierpress
-	path = /obj/item/clothing/suit/armor/pcarrier/light/press/noacc
+	path = /obj/item/clothing/suit/armor/pcarrier/press
 
 /datum/fabricator_recipe/textiles/carriermedium
-	path = /obj/item/clothing/suit/armor/pcarrier/medium/noacc
+	path = /obj/item/clothing/suit/armor/pcarrier/medium
 
 /datum/fabricator_recipe/textiles/carrierwarden
 	path = /obj/item/clothing/suit/armor/warden
 
 /datum/fabricator_recipe/textiles/carrierdetective
-	path = /obj/item/clothing/suit/armor/pcarrier/detective/noacc
+	path = /obj/item/clothing/suit/armor/pcarrier/detective
 
 /datum/fabricator_recipe/textiles/riotlegguards
 	path = /obj/item/clothing/accessory/legguards/riot
@@ -398,8 +398,8 @@
 /datum/fabricator_recipe/textiles/riotarmguards
 	path = /obj/item/clothing/accessory/armguards/riot
 
-/datum/fabricator_recipe/textiles/riotvest/
-	path = /obj/item/clothing/suit/armor/riot/noacc
+/datum/fabricator_recipe/textiles/riotvest
+	path = /obj/item/clothing/suit/armor/riot
 
 /datum/fabricator_recipe/textiles/syndicategeneral
 	path = /obj/item/clothing/under/syndicate

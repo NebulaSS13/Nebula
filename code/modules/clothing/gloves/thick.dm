@@ -23,26 +23,22 @@
 
 /obj/item/clothing/gloves/thick/swat
 	desc = "These tactical gloves are somewhat fire and impact-resistant."
-	name = "improper SWAT Gloves"
-	material = /decl/material/solid/cloth
+	name = "\improper SWAT Gloves"
 
 /obj/item/clothing/gloves/thick/combat //Combined effect of SWAT gloves and insulated gloves
 	desc = "These tactical gloves are somewhat fire and impact resistant."
 	name = "combat gloves"
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
-	material = /decl/material/solid/cloth
 	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY,
 	)
-	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/gloves/thick/botany
 	desc = "These work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	material = /decl/material/solid/leather
-	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/gloves/thick/botany/on_update_icon()
 	. = ..()
@@ -61,7 +57,6 @@
 	desc = "These brown duty gloves are made from a durable synthetic."
 	color = COLOR_BEASTY_BROWN
 	material = /decl/material/solid/leather
-	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/gloves/thick/craftable
 	name = "gauntlets"
