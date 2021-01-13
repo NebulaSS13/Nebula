@@ -243,7 +243,6 @@
 	S.reinf_material = reinf_mat
 	S.update_strings()
 	S.update_icon()
-	if(user)
 	if(!QDELETED(target_stack))
 		S.dropInto(get_turf(target_stack))
 	else if(user)
