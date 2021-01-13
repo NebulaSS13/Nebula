@@ -85,9 +85,10 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_A
+	material = /decl/material/solid/metal/steel
+	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
 
 /obj/item/clothing/accessory/armguards/craftable
-	material = /decl/material/solid/metal/steel
 	material_armor_multiplier = 1
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
@@ -111,9 +112,10 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_L
+	material = /decl/material/solid/metal/steel
+	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
 
 /obj/item/clothing/accessory/legguards/craftable
-	material = /decl/material/solid/metal/steel
 	material_armor_multiplier = 1
 	applies_material_colour = TRUE
 	applies_material_name =  TRUE

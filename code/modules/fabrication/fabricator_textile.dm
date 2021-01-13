@@ -17,9 +17,9 @@
 		/decl/material/solid/metal/silver =     SHEET_MATERIAL_AMOUNT * 100,
 		/decl/material/solid/metal/uranium =    SHEET_MATERIAL_AMOUNT * 100,
 		/decl/material/solid/gemstone/diamond = SHEET_MATERIAL_AMOUNT * 100,
-		/decl/material/solid/cloth = SHEET_MATERIAL_AMOUNT * 100,
-		/decl/material/solid/leather = SHEET_MATERIAL_AMOUNT * 100,
-		/decl/material/solid/cardboard = SHEET_MATERIAL_AMOUNT * 100,
-		/decl/material/solid/metal/titanium =      SHEET_MATERIAL_AMOUNT * 100,
-		/decl/material/solid/metal/plasteel =      SHEET_MATERIAL_AMOUNT * 100
+		/decl/material/solid/cloth =            SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/leather =          SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/cardboard =        SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/metal/titanium =   SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/metal/plasteel =   SHEET_MATERIAL_AMOUNT * 100
 	)

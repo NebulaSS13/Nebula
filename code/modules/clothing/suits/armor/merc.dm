@@ -16,7 +16,7 @@
 	slowdown = 0.5
 	material = /decl/material/solid/metal/titanium
 	matter = list(/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE)
-	origin_tech = "{'materials':1,'engineering':1, 'combat':2}"
+	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
 	
 /obj/item/clothing/accessory/armguards/merc
 	name = "heavy arm guards"
@@ -31,8 +31,7 @@
 		)
 	color = null
 	material = /decl/material/solid/metal/titanium
-	origin_tech = "{'materials':1,'engineering':1, 'combat':1}"
-	
+
 /obj/item/clothing/accessory/legguards/merc
 	name = "heavy leg guards"
 	desc = "A pair of heavily armored leg pads in red-trimmed black. Attaches to a plate carrier."
@@ -46,4 +45,3 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	material = /decl/material/solid/metal/titanium
-	origin_tech = "{'materials':1,'engineering':1, 'combat':1}"

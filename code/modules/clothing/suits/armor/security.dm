@@ -27,12 +27,13 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	cold_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
-	material = /decl/material/solid/metal/titanium
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/leather
+	matter = list(
+		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 // no acc variant again
 
 /obj/item/clothing/suit/armor/pcarrier/detective/noacc
-	color = COLOR_DARK_GREEN_GRAY
 	starting_accessories = list(/obj/item/clothing/accessory/badge)
-	material = /decl/material/solid/leather
