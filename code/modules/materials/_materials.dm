@@ -128,7 +128,7 @@
 	var/dooropen_noise = 'sound/effects/stonedoor_openclose.ogg'
 	// Noise made when you hit structure made of this material.
 	var/hitsound = 'sound/weapons/genhit.ogg'
-	// Path to resulting stacktype. Todo remove need for this.
+	// Path to resulting stack types. Todo remove need for this.
 	var/stack_type = /obj/item/stack/material/generic
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
@@ -243,8 +243,12 @@
 	S.reinf_material = reinf_mat
 	S.update_strings()
 	S.update_icon()
-	S.dropInto(target_stack.loc)
-
+	if(!QDELETED(target_stack))
+		S.dropInto(get_turf(target_stack))
+	else if(user)
+		S.dropInto(get_turf(user))
+	else
+		S.dropInto(get_turf(used_stack))
 
 // Make sure we have a use name and shard icon even if they aren't explicitly set.
 /decl/material/Initialize()

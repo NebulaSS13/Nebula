@@ -24,11 +24,8 @@
 		if(!istype(reinf_material))
 			reinf_material = null
 	base_state = icon_state
-	
 	if(!stacktype)
 		stacktype = material.stack_type
-	origin_tech = origin_tech || material.stack_origin_tech
-
 	if(material.conductive)
 		obj_flags |= OBJ_FLAG_CONDUCTIBLE
 	else
@@ -91,6 +88,15 @@
 	if((reinf_material && reinf_material.type) != (M.reinf_material && M.reinf_material.type))
 		return FALSE
 	return TRUE
+
+/obj/item/stack/material/update_strings()
+	. = ..()
+	if(material.stack_origin_tech)
+		origin_tech = material.stack_origin_tech
+	else if(reinf_material && reinf_material.stack_origin_tech)
+		origin_tech = reinf_material.stack_origin_tech
+	else
+		origin_tech = initial(origin_tech)
 
 /obj/item/stack/material/transfer_to(obj/item/stack/material/M, var/tamount=null, var/type_verified)
 	if(!is_same(M))
@@ -509,7 +515,8 @@
 
 /obj/item/stack/material/generic/Initialize()
 	. = ..()
-	if(material) color = material.color
+	if(material)
+		color = material.color
 
 /obj/item/stack/material/generic/skin
 	icon_state = "skin"
