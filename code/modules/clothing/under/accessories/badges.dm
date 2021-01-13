@@ -7,7 +7,7 @@
 /obj/item/clothing/accessory/badge
 	name = "badge"
 	desc = "A leather-backed badge, with gold trimmings."
-	icon = 'icons/clothing/mask/detectivebadge.dmi'
+	icon = 'icons/clothing/accessories/detectivebadge.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_LOWER_BODY | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
@@ -65,14 +65,14 @@
 	name = "holobadge"
 	desc = "This glowing blue badge marks the holder as a member of security."
 	color = COLOR_PALE_BLUE_GRAY
-	icon = 'icons/clothing/mask/holobadge.dmi'
+	icon = 'icons/clothing/accessories/holobadge.dmi'
 	badge_string = "Security"
 	var/badge_access = access_security
 	var/badge_number
 	var/emagged //emag_act removes access requirements
 
 /obj/item/clothing/accessory/badge/holo/cord
-	icon = 'icons/clothing/mask/holobadge_cord.dmi'
+	icon = 'icons/clothing/accessories/holobadge_cord.dmi'
 	slot_flags = SLOT_FACE | SLOT_TIE
 
 /obj/item/clothing/accessory/badge/holo/set_name(var/new_name)
@@ -131,17 +131,17 @@
 /obj/item/clothing/accessory/badge/defenseintel
 	name = "\improper DIA investigator's badge"
 	desc = "A leather-backed silver badge bearing the crest of the Defense Intelligence Agency."
-	icon = 'icons/clothing/mask/diabadge.dmi'
+	icon = 'icons/clothing/accessories/diabadge.dmi'
 	badge_string = "Defense Intelligence Agency"
 
 /obj/item/clothing/accessory/badge/interstellarintel
 	name = "\improper OII agent's badge"
 	desc = "A synthleather holographic badge bearing the crest of the Office of Interstellar Intelligence."
-	icon = 'icons/clothing/mask/intelbadge.dmi'
+	icon = 'icons/clothing/accessories/intelbadge.dmi'
 	badge_string = "Office of Interstellar Intelligence"
 
 /obj/item/clothing/accessory/badge/press
 	name = "press badge"
 	desc = "A leather-backed plastic badge displaying that the owner is certified press personnel."
-	icon = 'icons/clothing/mask/pressbadge.dmi'
+	icon = 'icons/clothing/accessories/pressbadge.dmi'
 	badge_string = "Journalist"
