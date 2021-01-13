@@ -134,7 +134,7 @@
 								/obj/item/clothing/head/hasturhood     = TRADER_THIS_TYPE,
 								/obj/item/clothing/head/helmet/gladiator=TRADER_THIS_TYPE,
 								/obj/item/clothing/head/plaguedoctorhat= TRADER_THIS_TYPE,
-								/obj/item/clothing/glasses/monocle     = TRADER_THIS_TYPE,
+								/obj/item/clothing/glasses/eyepatch/monocle     = TRADER_THIS_TYPE,
 								/obj/item/clothing/mask/smokable/pipe  = TRADER_THIS_TYPE,
 								/obj/item/clothing/mask/gas/plaguedoctor=TRADER_THIS_TYPE,
 								/obj/item/clothing/suit/hastur         = TRADER_THIS_TYPE,

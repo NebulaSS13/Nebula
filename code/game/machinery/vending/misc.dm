@@ -58,7 +58,7 @@
 	products = list(
 		/obj/item/mirror = 8,
 		/obj/item/haircomb = 8,
-		/obj/item/clothing/glasses/monocle = 5,
+		/obj/item/clothing/glasses/eyepatch/monocle = 5,
 		/obj/item/clothing/glasses/sunglasses = 5,
 		/obj/item/lipstick = 3,
 		/obj/random/lipstick = 3,

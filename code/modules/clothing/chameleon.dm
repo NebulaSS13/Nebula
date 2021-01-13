@@ -263,8 +263,7 @@
 
 /obj/item/clothing/glasses/chameleon
 	name = "Optical Meson Scanner"
-	icon_state = "meson"
-	item_state = "glasses"
+	icon = 'icons/clothing/eyes/scanner_meson.dmi'
 	desc = "It looks like a plain set of mesons, but on closer inspection, it seems to have a small dial inside."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON

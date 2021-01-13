@@ -781,8 +781,8 @@ obj/random/obstruction/spawn_choices()
 /obj/random/glasses
 	name = "random eyewear"
 	desc = "This is a random pair of glasses."
-	icon = 'icons/obj/clothing/obj_eyes.dmi'
-	icon_state = "leforge"
+	icon = 'icons/clothing/eyes/glasses_prescription.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/glasses/spawn_choices()
 	return list(/obj/item/clothing/glasses/sunglasses = 3,

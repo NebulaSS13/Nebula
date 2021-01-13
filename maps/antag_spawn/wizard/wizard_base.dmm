@@ -40,7 +40,7 @@
 "ah" = (
 /obj/structure/table/woodentable,
 /obj/item/storage/backpack/satchel/grey/withwallet,
-/obj/item/clothing/glasses/monocle,
+/obj/item/clothing/glasses/eyepatch/monocle,
 /turf/simulated/floor/carpet,
 /area/map_template/wizard_station)
 "ai" = (
