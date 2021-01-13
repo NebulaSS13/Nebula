@@ -1,11 +1,11 @@
 
 /obj/item/clothing/suit/armor/pcarrier/merc
-	starting_accessories = list(/obj/item/clothing/accessory/armorplate/merc, /obj/item/clothing/accessory/armguards/merc, /obj/item/clothing/accessory/legguards/merc, /obj/item/clothing/accessory/storage/pouches/large)
+	starting_accessories = list(/obj/item/clothing/accessory/armor/plate/merc, /obj/item/clothing/accessory/armguards/merc, /obj/item/clothing/accessory/legguards/merc, /obj/item/clothing/accessory/storage/pouches/large)
 
-/obj/item/clothing/accessory/armorplate/merc
+/obj/item/clothing/accessory/armor/plate/merc
 	name = "heavy armor plate"
 	desc = "A ceramics-reinforced synthetic armor plate, providing state of of the art protection. Attaches to a plate carrier."
-	icon_state = "armor_merc"
+	icon = 'icons/clothing/accessories/armor/armor_merc.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_RIFLE,
@@ -21,7 +21,7 @@
 /obj/item/clothing/accessory/armguards/merc
 	name = "heavy arm guards"
 	desc = "A pair of red-trimmed black arm pads reinforced with heavy armor plating. Attaches to a plate carrier."
-	icon_state = "armguards_merc"
+	icon = 'icons/clothing/accessories/armor/armguards_merc.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_PISTOL,
@@ -35,7 +35,7 @@
 /obj/item/clothing/accessory/legguards/merc
 	name = "heavy leg guards"
 	desc = "A pair of heavily armored leg pads in red-trimmed black. Attaches to a plate carrier."
-	icon_state = "legguards_merc"
+	icon = 'icons/clothing/accessories/armor/legguards_merc.dmi'
 	color = null
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,

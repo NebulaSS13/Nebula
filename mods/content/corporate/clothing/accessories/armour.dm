@@ -17,7 +17,6 @@
 /obj/item/clothing/accessory/armor/tag/corp
 	name = "corporate security tag"
 	desc = "An armor tag with the words CORPORATE SECURITY printed in bottle green lettering on it."
-	icon_state = ICON_STATE_WORLD
 	icon = 'mods/content/corporate/icons/clothing/accessories/nanotag.dmi'
 
 /obj/item/clothing/accessory/armor/tag/corp/pcrc

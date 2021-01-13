@@ -21,7 +21,7 @@
 /obj/item/clothing/accessory/legguards/riot
 	name = "riot leg guards"
 	desc = "A pair of armored leg pads with heavy padding to protect against melee attacks. Looks like they might impair movement."
-	icon_state = "legguards_riot"
+	icon = 'icons/clothing/accessories/armor/legguards_riot.dmi'
 	color = null
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
@@ -38,7 +38,7 @@
 /obj/item/clothing/accessory/armguards/riot
 	name = "riot arm guards"
 	desc = "A pair of armored arm pads with heavy padding to protect against melee attacks."
-	icon_state = "armguards_riot"
+	icon = 'icons/clothing/accessories/armor/armguards_riot.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_SMALL,

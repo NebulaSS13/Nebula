@@ -515,11 +515,19 @@
 		/obj/item/clothing/shoes/magboots/rig,
 		/obj/item/clothing/gloves/rig
 	)
-	// modpack items to ignore
-	// /obj/item/clothing/mask/gas/ascent
-	// /obj/item/clothing/mask/rubber/trasen
+	var/unignore_types = list(
+		/obj/item/clothing/accessory/toggleable,
+		/obj/item/clothing/accessory/armor/plate,
+		/obj/item/clothing/accessory/storage/pouches,
+		/obj/item/clothing/accessory/armguards,
+		/obj/item/clothing/accessory/legguards,
+		/obj/item/clothing/accessory/armor
+	)
+
 	for(var/checktype in ignore_types)
 		ignore_types |= typesof(checktype)
+	for(var/checktype in unignore_types)
+		ignore_types -= typesof(checktype)
 
 	var/list/results = list()
 	var/list/ignored = list()

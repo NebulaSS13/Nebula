@@ -1,4 +1,7 @@
 /obj/item/clothing/accessory/toggleable
+	name = "vest"
+	desc = "A slick suit vest."
+	icon = 'icons/clothing/accessories/vest.dmi'
 	icon_state = ICON_STATE_WORLD
 	var/open = FALSE
 
@@ -42,12 +45,7 @@
 	update_icon()
 	update_clothing_icon()
 
-/obj/item/clothing/accessory/toggleable/vest
-	name = "vest"
-	desc = "A slick suit vest."
-	icon = 'icons/clothing/accessories/vest.dmi'
-
-/obj/item/clothing/accessory/toggleable/vest/black
+/obj/item/clothing/accessory/toggleable/black_vest
 	name = "black vest"
 	color = COLOR_GRAY15
 

@@ -355,7 +355,6 @@
 	inv_overlay = copy.inv_overlay
 	mob_overlay = copy.mob_overlay
 	overlay_state = copy.overlay_state
-	accessory_icons = copy.accessory_icons
 	on_rolled = copy.on_rolled
 	high_visibility = copy.high_visibility
 	return copy

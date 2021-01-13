@@ -37,7 +37,7 @@
 /obj/item/clothing/accessory/armguards/ablative
 	name = "ablative arm guards"
 	desc = "A pair of armored arm pads with advanced shielding to protect against energy weapons."
-	icon_state = "armguards_ablative"
+	icon = 'icons/clothing/accessories/armor/armguards_ablative.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_SMALL,
@@ -51,7 +51,7 @@
 /obj/item/clothing/accessory/legguards/ablative
 	name = "ablative leg guards"
 	desc = "A pair of armored leg pads with advanced shielding to protect against energy weapons. Looks like they might impair movement."
-	icon_state = "legguards_ablative"
+	icon = 'icons/clothing/accessories/armor/legguards_ablative.dmi'
 	color = null
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,

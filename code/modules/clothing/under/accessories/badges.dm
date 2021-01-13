@@ -12,7 +12,6 @@
 	slot_flags = SLOT_LOWER_BODY | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
 	high_visibility = 1
-	accessory_icons = null
 	var/badge_string = "Detective"
 	var/stored_name
 

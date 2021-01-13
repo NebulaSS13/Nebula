@@ -1,8 +1,8 @@
 /obj/item/clothing/suit/armor/pcarrier/nt_light
-	starting_accessories = list(/obj/item/clothing/accessory/armorplate, /obj/item/clothing/accessory/armor/tag/corp)
+	starting_accessories = list(/obj/item/clothing/accessory/armor/plate, /obj/item/clothing/accessory/armor/tag/corp)
 
 /obj/item/clothing/suit/armor/pcarrier/nt_medium
-	starting_accessories = list(/obj/item/clothing/accessory/armorplate/medium, /obj/item/clothing/accessory/storage/pouches, /obj/item/clothing/accessory/armor/tag/corp)
+	starting_accessories = list(/obj/item/clothing/accessory/armor/plate/medium, /obj/item/clothing/accessory/storage/pouches, /obj/item/clothing/accessory/armor/tag/corp)
 
 /obj/item/clothing/suit/armor/vest/nt
 	name = "corporate armored vest"

@@ -30,7 +30,7 @@
 
 /datum/gear/clothing/vest
 	display_name = "suit vest, colour select"
-	path = /obj/item/clothing/accessory/toggleable/vest/
+	path = /obj/item/clothing/accessory/toggleable
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/clothing/suspenders
