@@ -15,11 +15,8 @@
 		lightlevel = rand(1,7)/10	//give a chance of twilight jungle
 	..()
 
-/obj/effect/overmap/visitable/sector/exoplanet/grass/generate_atmosphere()
-	..()
-	if(atmosphere)
-		atmosphere.temperature = T20C + rand(10, 30)
-		atmosphere.update_values()
+/obj/effect/overmap/visitable/sector/exoplanet/grass/get_target_temperature()
+	return T20C + rand(10, 30)
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/get_surface_color()
 	return grass_color

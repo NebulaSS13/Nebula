@@ -15,22 +15,15 @@
 	fauna_types = list(/mob/living/simple_animal/hostile/retaliate/beast/samak, /mob/living/simple_animal/hostile/retaliate/beast/diyaab, /mob/living/simple_animal/hostile/retaliate/beast/shantak)
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/giant_crab)
 
+/obj/effect/overmap/visitable/sector/exoplanet/snow/get_target_temperature()
+	return T0C - rand(10, 100)
+
 /datum/random_map/automata/cave_system/mountains/snow
 	iterations = 2
 	descriptor = "ice mountains"
 	wall_type =  /turf/simulated/wall/natural/ice
 	mineral_turf = /turf/simulated/wall/natural/random/ice
 	rock_color = COLOR_CYAN_BLUE
-
-/obj/effect/overmap/visitable/sector/exoplanet/snow/generate_atmosphere()
-	..()
-	if(atmosphere)
-		var/limit = 0
-		if(habitability_class <= HABITABILITY_OKAY)
-			var/decl/species/human/H = /decl/species/human
-			limit = initial(H.cold_level_1) + rand(1,10)
-		atmosphere.temperature = max(T0C - rand(10, 100), limit)
-		atmosphere.update_values()
 
 /datum/random_map/noise/exoplanet/snow
 	descriptor = "snow exoplanet"
