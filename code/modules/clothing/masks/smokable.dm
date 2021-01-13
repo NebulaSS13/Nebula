@@ -1,6 +1,7 @@
 /obj/item/clothing/mask/smokable
 	name = "smokable item"
 	desc = "You're not sure what this is. You should probably ahelp it."
+	icon = 'icons/clothing/mask/smokables/cigarette.dmi'
 	body_parts_covered = 0
 	var/lit = 0
 	var/waterproof = FALSE
@@ -182,7 +183,6 @@
 /obj/item/clothing/mask/smokable/cigarette
 	name = "cigarette"
 	desc = "A small paper cylinder filled with processed tobacco and various fillers."
-	icon = 'icons/clothing/mask/smokables/cigarette.dmi'
 	throw_speed = 0.5
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS | SLOT_FACE

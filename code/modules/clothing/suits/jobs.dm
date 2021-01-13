@@ -107,7 +107,6 @@
 	name = "blue jacket"
 	desc = "A blue forensics technician jacket."
 	icon = 'icons/clothing/suit/forensic_blue.dmi'
-	icon_state = "forensics_blue"
 
 //Engineering
 /obj/item/clothing/suit/storage/hazardvest

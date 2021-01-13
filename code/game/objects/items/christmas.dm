@@ -34,7 +34,7 @@
 
 /obj/item/clothing/head/festive
 	name = "festive paper hat"
-	icon_state = "xmashat"
+	icon = 'icons/clothing/head/festive.dmi'
 	desc = "A crappy paper crown that you are REQUIRED to wear."
 	flags_inv = 0
 	body_parts_covered = 0

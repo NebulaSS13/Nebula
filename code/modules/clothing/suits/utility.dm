@@ -75,7 +75,6 @@
 	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 2)
 
 /obj/item/clothing/head/bomb_hood/security
-	icon_state = "bombsuitsec"
 	body_parts_covered = SLOT_HEAD
 	icon = 'icons/clothing/head/bombsuit_olive.dmi'
 

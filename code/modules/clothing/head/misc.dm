@@ -121,7 +121,6 @@
 
 /obj/item/clothing/head/beaverhat
 	name = "beaver hat"
-	icon_state = "beaver_hat"
 	desc = "Soft felt makes this hat both comfortable and elegant."
 	icon = 'icons/clothing/head/beaver.dmi'
 
@@ -171,7 +170,6 @@
 
 /obj/item/clothing/head/xenos
 	name = "xenos helmet"
-	icon_state = "xenos"
 	desc = "A helmet made out of chitinous alien hide."
 	icon = 'icons/clothing/head/xeno.dmi'
 	w_class = ITEM_SIZE_NORMAL

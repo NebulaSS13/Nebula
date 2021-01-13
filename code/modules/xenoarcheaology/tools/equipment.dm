@@ -13,7 +13,7 @@
 /obj/item/clothing/suit/space/void/excavation
 	name = "excavation voidsuit"
 	desc = "A specially shielded voidsuit that insulates against some exotic alien energies, as well as the more mundane dangers of excavation."
-	icon_state = "rig-excavation"
+	icon = 'icons/clothing/spacesuit/void/excavation/suit.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT, 
 		energy = ARMOR_ENERGY_RESISTANT, 
@@ -27,8 +27,7 @@
 /obj/item/clothing/head/helmet/space/void/excavation
 	name = "excavation voidsuit helmet"
 	desc = "A sophisticated voidsuit helmet, capable of protecting the wearer from many exotic alien energies."
-	icon_state = "rig0-excavation"
-	item_state = "excavation-helm"
+	icon = 'icons/clothing/spacesuit/void/excavation/helmet.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT, 
 		energy = ARMOR_ENERGY_RESISTANT, 
