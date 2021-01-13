@@ -387,11 +387,13 @@ var/global/list/damage_icon_parts = list()
 		var/obj/item/underwear/UW = entry
 		if (!UW || !UW.icon) // Avoid runtimes for nude underwear types
 			continue
-
-		var/image/I = image(icon = UW.icon, icon_state = UW.icon_state)
-		I.appearance_flags = RESET_COLOR
-		I.color = UW.color
-
+		var/image/I
+		if(UW.slot_offset_str && LAZYACCESS(species.equip_adjust, UW.slot_offset_str))
+			I = species.get_offset_overlay_image(FALSE, UW.icon, UW.icon_state, UW.color, UW.slot_offset_str)
+		else
+			I = image(icon = UW.icon, icon_state = UW.icon_state)
+			I.color = UW.color
+		I.appearance_flags |= RESET_COLOR
 		overlays_standing[HO_UNDERWEAR_LAYER] += I
 
 	if(update_icons)
