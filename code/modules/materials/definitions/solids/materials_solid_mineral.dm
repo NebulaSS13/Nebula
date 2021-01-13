@@ -1,3 +1,6 @@
+/decl/material/solid/mineral
+	stack_type = /obj/item/stack/material/generic/brick
+
 /decl/material/solid/mineral/pitchblende
 	name = "pitchblende"
 	color = "#917d1a"

@@ -128,7 +128,7 @@
 	var/dooropen_noise = 'sound/effects/stonedoor_openclose.ogg'
 	// Noise made when you hit structure made of this material.
 	var/hitsound = 'sound/weapons/genhit.ogg'
-	// Path to resulting stacktype. Todo remove need for this.
+	// Path to resulting stack types. Todo remove need for this.
 	var/stack_type = /obj/item/stack/material/generic
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"

@@ -509,7 +509,8 @@
 
 /obj/item/stack/material/generic/Initialize()
 	. = ..()
-	if(material) color = material.color
+	if(material)
+		color = material.color
 
 /obj/item/stack/material/generic/skin
 	icon_state = "skin"
