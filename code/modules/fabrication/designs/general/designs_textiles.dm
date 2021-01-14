@@ -491,7 +491,7 @@
 /datum/fabricator_recipe/textiles/gasgas
 	path = /obj/item/clothing/mask/gas
 
-/datum/fabricator_recipe/textiles/gas-half
+/datum/fabricator_recipe/textiles/gashalf
 	path = /obj/item/clothing/mask/gas/half
 
 /datum/fabricator_recipe/textiles/radicaldude
