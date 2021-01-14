@@ -108,7 +108,7 @@
 			new/obj/item/storage/firstaid/combat(src) // Probably the least OP
 		if(94) // Why the hell not
 			new/obj/item/storage/backpack/clown(src)
-			new/obj/item/clothing/under/rank/clown(src)
+			new/obj/item/clothing/under/clown(src)
 			new/obj/item/clothing/shoes/clown_shoes(src)
 			new/obj/item/clothing/mask/gas/clown_hat(src)
 			new/obj/item/bikehorn(src)

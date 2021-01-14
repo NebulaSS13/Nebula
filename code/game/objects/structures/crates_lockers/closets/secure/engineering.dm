@@ -9,7 +9,7 @@
 		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng)),
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/eng, 50),
 		/obj/item/blueprints,
-		/obj/item/clothing/under/rank/chief_engineer,
+		/obj/item/clothing/under/chief_engineer,
 		/obj/item/clothing/head/welding,
 		/obj/item/clothing/gloves/insulated,
 		/obj/item/clothing/shoes/color/brown,

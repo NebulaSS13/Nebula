@@ -8,7 +8,7 @@
 /*
  * Security
  */
-/obj/item/clothing/under/rank/warden
+/obj/item/clothing/under/warden
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for more robust protection. It has the word \"Warden\" written on the shoulders."
 	name = "warden's jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_warden.dmi'
@@ -23,7 +23,7 @@
 	icon = 'icons/clothing/head/warden.dmi'
 	body_parts_covered = 0
 
-/obj/item/clothing/under/rank/security
+/obj/item/clothing/under/security
 	name = "security officer's jumpsuit"
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_sec.dmi'
@@ -32,7 +32,7 @@
 		)
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/under/rank/dispatch
+/obj/item/clothing/under/dispatch
 	name = "dispatcher's uniform"
 	desc = "A dress shirt and khakis with a security patch sewn on."
 	icon = 'icons/clothing/under/uniform_dispatch.dmi'
@@ -42,7 +42,7 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/under/rank/security2
+/obj/item/clothing/under/security2
 	name = "security officer's uniform"
 	desc = "It's made of a slightly sturdier material, to allow for robust protection."
 	icon = 'icons/clothing/under/uniform_redshirt.dmi'
@@ -116,7 +116,7 @@
 /*
  * Head of Security
  */
-/obj/item/clothing/under/rank/head_of_security
+/obj/item/clothing/under/head_of_security
 	desc = "It's a jumpsuit worn by those few with the dedication to achieve the position of \"Head of Security\". It has additional armor to protect the wearer."
 	name = "head of security's jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hos.dmi'
@@ -148,7 +148,7 @@
 	siemens_coefficient = 0.6
 
 //Jensen cosplay gear
-/obj/item/clothing/under/rank/head_of_security/jensen
+/obj/item/clothing/under/head_of_security/jensen
 	desc = "You never asked for anything that stylish."
 	name = "head of security's jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hos_alt.dmi'

@@ -1,13 +1,13 @@
 #define RANDOM_SCRUBS new/datum/atom_creator/weighted(list( \
-				list(/obj/item/clothing/under/rank/medical/scrubs, /obj/item/clothing/head/surgery), \
-				list(/obj/item/clothing/under/rank/medical/scrubs/blue, /obj/item/clothing/head/surgery/blue), \
-				list(/obj/item/clothing/under/rank/medical/scrubs/green, /obj/item/clothing/head/surgery/green), \
-				list(/obj/item/clothing/under/rank/medical/scrubs/purple, /obj/item/clothing/head/surgery/purple), \
-				list(/obj/item/clothing/under/rank/medical/scrubs/black, /obj/item/clothing/head/surgery/black), \
-				list(/obj/item/clothing/under/rank/medical/scrubs/lilac, /obj/item/clothing/head/surgery/lilac), \
-				list(/obj/item/clothing/under/rank/medical/scrubs/teal, /obj/item/clothing/head/surgery/teal), \
-				list(/obj/item/clothing/under/rank/medical/scrubs/heliodor, /obj/item/clothing/head/surgery/heliodor), \
-				list(/obj/item/clothing/under/rank/medical/scrubs/navyblue, /obj/item/clothing/head/surgery/navyblue)\
+				list(/obj/item/clothing/under/medical/scrubs, /obj/item/clothing/head/surgery), \
+				list(/obj/item/clothing/under/medical/scrubs/blue, /obj/item/clothing/head/surgery/blue), \
+				list(/obj/item/clothing/under/medical/scrubs/green, /obj/item/clothing/head/surgery/green), \
+				list(/obj/item/clothing/under/medical/scrubs/purple, /obj/item/clothing/head/surgery/purple), \
+				list(/obj/item/clothing/under/medical/scrubs/black, /obj/item/clothing/head/surgery/black), \
+				list(/obj/item/clothing/under/medical/scrubs/lilac, /obj/item/clothing/head/surgery/lilac), \
+				list(/obj/item/clothing/under/medical/scrubs/teal, /obj/item/clothing/head/surgery/teal), \
+				list(/obj/item/clothing/under/medical/scrubs/heliodor, /obj/item/clothing/head/surgery/heliodor), \
+				list(/obj/item/clothing/under/medical/scrubs/navyblue, /obj/item/clothing/head/surgery/navyblue)\
 			) \
 		)
 
@@ -39,11 +39,11 @@
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/medic, /obj/item/storage/backpack/satchel/med)),
 		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/med, 50),
-		/obj/item/clothing/under/rank/nursesuit,
+		/obj/item/clothing/under/nursesuit,
 		/obj/item/clothing/head/nursehat,
-		/obj/item/clothing/under/rank/medical,
-		/obj/item/clothing/under/rank/nurse,
-		/obj/item/clothing/under/rank/orderly,
+		/obj/item/clothing/under/medical,
+		/obj/item/clothing/under/nurse,
+		/obj/item/clothing/under/orderly,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/fr_jacket,
 		/obj/item/clothing/shoes/color/white,
@@ -95,7 +95,7 @@
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
 		/obj/item/clothing/shoes/color/white,
-		/obj/item/clothing/under/rank/chief_medical_officer,
+		/obj/item/clothing/under/chief_medical_officer,
 		/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
 		/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
 		/obj/item/clothing/gloves/latex,
@@ -135,8 +135,8 @@
 
 /obj/structure/closet/secure_closet/counselor/WillContain()
 	return list(
-		/obj/item/clothing/under/rank/psych,
-		/obj/item/clothing/under/rank/psych/turtleneck,
+		/obj/item/clothing/under/psych,
+		/obj/item/clothing/under/psych/turtleneck,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/chems/glass/bottle/sedatives,
@@ -170,7 +170,7 @@
 		/obj/item/chems/glass/bottle/antitoxin,
 		/obj/item/storage/box/masks,
 		/obj/item/storage/box/gloves,
-		/obj/item/clothing/under/rank/virologist,
+		/obj/item/clothing/under/virologist,
 		/obj/item/clothing/shoes/color/white,
 		/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
 		/obj/item/clothing/mask/surgical,
@@ -191,6 +191,6 @@
 		/obj/item/chems/syringe,
 		/obj/item/storage/pill_bottle/antidepressants,
 		/obj/item/storage/pill_bottle/stimulants,
-		/obj/item/clothing/under/rank/psych/turtleneck,
-		/obj/item/clothing/under/rank/psych
+		/obj/item/clothing/under/psych/turtleneck,
+		/obj/item/clothing/under/psych
 	)

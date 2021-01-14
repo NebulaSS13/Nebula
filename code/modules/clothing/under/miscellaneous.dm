@@ -28,7 +28,7 @@
 	desc = "It's a very smart uniform with a special pocket for tips."
 	icon = 'icons/clothing/under/uniform_waiter.dmi'
 
-/obj/item/clothing/under/rank/mailman
+/obj/item/clothing/under/mailman
 	name = "mailman's jumpsuit"
 	desc = "<i>'Special delivery!'</i>"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_mailman.dmi'
@@ -39,25 +39,25 @@
 	icon = 'icons/clothing/under/sexyclown.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
-/obj/item/clothing/under/rank/vice
+/obj/item/clothing/under/vice
 	name = "vice officer's jumpsuit"
 	desc = "It's the standard issue pretty-boy outfit, as seen on Holo-Vision."
 	icon = 'icons/clothing/under/uniform_vice.dmi'
 
 //This set of uniforms looks fairly fancy and is generally used for high-ranking personnel from what I've seen, so lets give them appropriate ranks.
-/obj/item/clothing/under/rank/centcom
+/obj/item/clothing/under/centcom
 	name = "\improper Officer's Dress Uniform"
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Captain.\"."
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
 	displays_id = 0
 
-/obj/item/clothing/under/rank/centcom_officer
+/obj/item/clothing/under/centcom_officer
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral.\"."
 	name = "\improper Officer's Dress Uniform"
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
 	displays_id = 0
 
-/obj/item/clothing/under/rank/centcom_captain
+/obj/item/clothing/under/centcom_captain
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral-Executive.\"."
 	name = "\improper Officer's Dress Uniform"
 	icon = 'icons/clothing/under/uniform_officer_dress.dmi'
@@ -394,7 +394,7 @@
 	desc = "A rugged flannel shirt and denim overalls. A popular style among frontier colonists."
 	icon = 'icons/clothing/under/frontier.dmi'
 
-/obj/item/clothing/under/rank/psych/turtleneck/sweater
+/obj/item/clothing/under/psych/turtleneck/sweater
 	name = "sweater"
 	desc = "A warm looking sweater and a pair of dark blue slacks."
 	icon = 'icons/clothing/under/uniform_turtleneck.dmi'

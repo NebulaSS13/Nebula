@@ -1,6 +1,6 @@
 /decl/hierarchy/outfit/nanotrasen
 	hierarchy_type = /decl/hierarchy/outfit/nanotrasen
-	uniform = /obj/item/clothing/under/rank/centcom
+	uniform = /obj/item/clothing/under/centcom
 	shoes = /obj/item/clothing/shoes/dress
 	gloves = /obj/item/clothing/gloves/color/white
 	l_ear = /obj/item/radio/headset/heads/hop
@@ -25,7 +25,7 @@
 
 /decl/hierarchy/outfit/nanotrasen/captain
 	name = "Corporate Captain"
-	uniform = /obj/item/clothing/under/rank/centcom_captain
+	uniform = /obj/item/clothing/under/centcom_captain
 	l_ear = /obj/item/radio/headset/heads/captain
 	head = /obj/item/clothing/head/beret/corp/centcom/captain
 	belt = /obj/item/gun/energy
@@ -36,7 +36,7 @@
 	head = /obj/item/clothing/head/centhat
 	mask = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	shoes = /obj/item/clothing/shoes/jackboots/swat
-	uniform = /obj/item/clothing/under/rank/centcom_captain
+	uniform = /obj/item/clothing/under/centcom_captain
 	suit = /obj/item/clothing/suit/armor/bulletproof
 	gloves = /obj/item/clothing/gloves/thick/swat
 	l_ear =  /obj/item/radio/headset/heads/captain
