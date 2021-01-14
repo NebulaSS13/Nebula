@@ -651,7 +651,7 @@
 	path = /obj/item/clothing/shoes/rainbow
 	
 /datum/fabricator_recipe/textiles/heelsred
-	path = obj/item/clothing/shoes/heels/red
+	path = /obj/item/clothing/shoes/heels/red
 
 /datum/fabricator_recipe/textiles/flatshoes
 	path = /obj/item/clothing/shoes/flats
@@ -669,7 +669,7 @@
 	path = /obj/item/clothing/head/helmet/merc
 
 /datum/fabricator_recipe/textiles/riothelmet
-	path = obj/item/clothing/head/helmet/riot
+	path = /obj/item/clothing/head/helmet/riot
 
 /datum/fabricator_recipe/textiles/thunderdome
 	path = /obj/item/clothing/head/helmet/thunderdome
