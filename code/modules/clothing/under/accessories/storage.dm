@@ -1,14 +1,14 @@
 /obj/item/clothing/accessory/storage
-	name = "load bearing equipment"
-	desc = "Used to hold things when you don't have enough hands."
-	icon_state = "webbing"
+	name = "webbing"
+	desc = "Sturdy mess of synthcotton belts and buckles, ready to share your burden."
+	icon = 'icons/clothing/accessories/storage/webbing.dmi'
 	slot = ACCESSORY_SLOT_UTILITY
-	var/slots = 3
-	var/max_w_class = ITEM_SIZE_SMALL //pocket sized
-	var/obj/item/storage/internal/pockets/hold
 	w_class = ITEM_SIZE_NORMAL
 	high_visibility = 1
 	on_rolled = list("down" = "none")
+	var/slots = 3
+	var/max_w_class = ITEM_SIZE_SMALL //pocket sized
+	var/obj/item/storage/internal/pockets/hold
 
 /obj/item/clothing/accessory/storage/Initialize()
 	. = ..()
@@ -50,34 +50,27 @@
 	hold.finish_bulk_removal()
 	src.add_fingerprint(user)
 
-/obj/item/clothing/accessory/storage/webbing
-	name = "webbing"
-	desc = "Sturdy mess of synthcotton belts and buckles, ready to share your burden."
-	icon_state = "webbing"
-
 /obj/item/clothing/accessory/storage/webbing_large
 	name = "large webbing"
 	desc = "A large collection of synthcotton pockets and pouches."
-	icon_state = "webbing_large"
+	icon = 'icons/clothing/accessories/storage/webbing_large.dmi'
 	slots = 4
 
-/obj/item/clothing/accessory/storage/black_vest
+/obj/item/clothing/accessory/storage/vest
+	name = "webbing vest"
+	desc = "Durable synthcotton vest with lots of pockets to carry essentials."
+	icon = 'icons/clothing/accessories/storage/vest.dmi'
+	slots = 5
+
+/obj/item/clothing/accessory/storage/vest/black
 	name = "black webbing vest"
 	desc = "Robust black synthcotton vest with lots of pockets to hold whatever you need, but cannot hold in hands."
-	icon_state = "vest_black"
-	slots = 5
+	icon = 'icons/clothing/accessories/storage/vest_black.dmi'
 
-/obj/item/clothing/accessory/storage/brown_vest
+/obj/item/clothing/accessory/storage/vest/brown
 	name = "brown webbing vest"
 	desc = "Worn brownish synthcotton vest with lots of pockets to unload your hands."
-	icon_state = "vest_brown"
-	slots = 5
-
-/obj/item/clothing/accessory/storage/white_vest
-	name = "white webbing vest"
-	desc = "Durable white synthcotton vest with lots of pockets to carry essentials."
-	icon_state = "vest_white"
-	slots = 5
+	icon = 'icons/clothing/accessories/storage/vest_brown.dmi'
 
 /obj/item/clothing/accessory/storage/drop_pouches
 	slots = 4 //to accomodate it being slotless
@@ -88,17 +81,17 @@
 /obj/item/clothing/accessory/storage/drop_pouches/black
 	name = "black drop pouches"
 	desc = "Robust black synthcotton bags to hold whatever you need, but cannot hold in hands."
-	icon_state = "thigh_black"
+	icon = 'icons/clothing/accessories/pouches/thigh_black.dmi'
 
 /obj/item/clothing/accessory/storage/drop_pouches/brown
 	name = "brown drop pouches"
 	desc = "Worn brownish synthcotton bags to hold whatever you need, but cannot hold in hands."
-	icon_state = "thigh_brown"
+	icon = 'icons/clothing/accessories/pouches/thigh_brown.dmi'
 
 /obj/item/clothing/accessory/storage/drop_pouches/white
 	name = "white drop pouches"
 	desc = "Durable white synthcotton bags to hold whatever you need, but cannot hold in hands."
-	icon_state = "thigh_white"
+	icon = 'icons/clothing/accessories/pouches/thigh_white.dmi'
 
 /obj/item/clothing/accessory/storage/knifeharness
 	name = "decorated harness"
@@ -118,14 +111,13 @@
 	update_icon()
 
 /obj/item/clothing/accessory/storage/knifeharness/on_update_icon()
-	icon_state = initial(icon_state)
+	icon_state = get_world_inventory_state()
 	var/contents_count = min(length(contents), 2)
 	if(contents_count > 0 && check_state_in_icon("[icon_state]-[contents_count]", icon))
 		icon_state = "[icon_state]-[contents_count]"
 	
 /obj/item/clothing/accessory/storage/knifeharness/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
-	icon_state = initial(icon_state)
 	var/contents_count = min(length(contents), 2)
 	if(contents_count > 0 && check_state_in_icon("[ret.icon_state]-[contents_count]", ret.icon))
 		ret.icon_state = "[ret.icon_state]-[contents_count]"

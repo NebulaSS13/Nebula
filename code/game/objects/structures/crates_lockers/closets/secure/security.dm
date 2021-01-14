@@ -130,7 +130,7 @@
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
 		/obj/item/hailer,
-		/obj/item/clothing/accessory/storage/black_vest,
+		/obj/item/clothing/accessory/storage/vest/black,
 		/obj/item/gun/energy/taser,
 		/obj/item/holowarrant,
 	)

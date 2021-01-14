@@ -187,7 +187,7 @@
 					/obj/item/scanner/health,
 					/obj/item/flashlight/pen,
 					/obj/item/chems/syringe,
-					/obj/item/clothing/accessory/storage/white_vest)
+					/obj/item/clothing/accessory/storage/vest)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "paramedic equipment crate"

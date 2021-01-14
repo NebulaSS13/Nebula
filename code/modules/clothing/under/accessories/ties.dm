@@ -79,7 +79,7 @@
 	return ret
 
 /obj/item/clothing/accessory/bowtie/on_update_icon()
-	icon_state = initial(icon_state)
+	icon_state = get_world_inventory_state()
 	if(!tied && check_state_in_icon("[icon_state]-untied", icon))
 		icon_state = "[icon_state]-untied"
 

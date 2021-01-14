@@ -10,7 +10,7 @@
 	var/id = 1
 
 /obj/item/clothing/accessory/buddytag/on_update_icon()
-	icon_state = initial(icon_state)
+	icon_state = get_world_inventory_state()
 	if(on && check_state_in_icon("[icon_state]-on", icon))
 		icon_state = "[icon_state]-on"
 

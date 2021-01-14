@@ -23,7 +23,7 @@
 	desc = "It's a retractable [color_description] pen."
 
 /obj/item/pen/retractable/on_update_icon()
-	icon_state = initial(icon_state)
+	icon_state = get_world_inventory_state()
 	if(active)
 		icon_state = "[icon_state]-on"
 

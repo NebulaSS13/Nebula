@@ -35,7 +35,7 @@
 			H.do_toggle(usr)
 
 /obj/item/clothing/accessory/toggleable/on_update_icon()
-	icon_state = initial(icon_state)
+	icon_state = get_world_inventory_state()
 	if(open && check_state_in_icon("[icon_state]-open", icon))
 		icon_state = "[icon_state]-open"
 

@@ -80,7 +80,7 @@
 	    /obj/item/crowbar,
 	    /obj/item/extinguisher/mini,
 	    /obj/item/storage/box/freezer,
-	    /obj/item/clothing/accessory/storage/white_vest,
+	    /obj/item/clothing/accessory/storage/vest,
 	)
 
 /obj/structure/closet/secure_closet/CMO

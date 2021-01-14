@@ -869,11 +869,11 @@ obj/random/obstruction/spawn_choices()
 	icon_state = ICON_STATE_WORLD
 
 /obj/random/accessory/spawn_choices()
-	return list(/obj/item/clothing/accessory/storage/webbing = 3,
+	return list(/obj/item/clothing/accessory/storage = 3,
 				/obj/item/clothing/accessory/storage/webbing_large = 3,
-				/obj/item/clothing/accessory/storage/black_vest = 2,
-				/obj/item/clothing/accessory/storage/brown_vest = 2,
-				/obj/item/clothing/accessory/storage/white_vest = 2,
+				/obj/item/clothing/accessory/storage/vest/black = 2,
+				/obj/item/clothing/accessory/storage/vest/brown = 2,
+				/obj/item/clothing/accessory/storage/vest = 2,
 				/obj/item/clothing/accessory/storage/bandolier = 1,
 				/obj/item/clothing/accessory/storage/holster/thigh = 1,
 				/obj/item/clothing/accessory/storage/holster/hip = 1,

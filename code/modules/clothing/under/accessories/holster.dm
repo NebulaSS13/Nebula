@@ -1,7 +1,7 @@
 /obj/item/clothing/accessory/storage/holster
 	name = "shoulder holster"
 	desc = "A handgun holster."
-	icon_state = "holster"
+	icon = 'icons/clothing/accessories/holsters/holster.dmi'
 	slot = ACCESSORY_SLOT_HOLSTER
 	slots = 1
 	max_w_class = ITEM_SIZE_NORMAL
@@ -55,30 +55,28 @@
 /obj/item/clothing/accessory/storage/holster/armpit
 	name = "armpit holster"
 	desc = "A worn-out handgun holster. Perfect for concealed carry."
-	icon_state = "holster"
 
 /obj/item/clothing/accessory/storage/holster/waist
 	name = "waist holster"
 	desc = "A handgun holster. Made of expensive leather."
-	icon_state = "holster"
-	overlay_state = "holster_low"
+	icon = 'icons/clothing/accessories/holsters/holster_low.dmi'
 
 /obj/item/clothing/accessory/storage/holster/hip
 	name = "hip holster"
 	desc = "A handgun holster slung low on the hip, draw pardner!"
-	icon_state = "holster_hip"
+	icon = 'icons/clothing/accessories/holsters/holster_hip.dmi'
 
 /obj/item/clothing/accessory/storage/holster/thigh
 	name = "thigh holster"
 	desc = "A drop leg holster made of a durable synthetic fiber."
-	icon_state = "holster_thigh"
+	icon = 'icons/clothing/accessories/holsters/holster_thigh.dmi'
 	sound_in = 'sound/effects/holster/tactiholsterin.ogg'
 	sound_out = 'sound/effects/holster/tactiholsterout.ogg'
 
 /obj/item/clothing/accessory/storage/holster/machete
 	name = "blade sheath"
 	desc = "A handsome synthetic leather sheath with matching belt."
-	icon_state = "holster_machete"
+	icon = 'icons/clothing/accessories/holsters/holster_machete.dmi'
 	can_holster = list(
 		/obj/item/hatchet/machete,
 		/obj/item/knife/kitchen/cleaver,
@@ -90,7 +88,7 @@
 /obj/item/clothing/accessory/storage/holster/knife
 	name = "leather knife sheath"
 	desc = "A synthetic leather knife sheath which you can strap on your leg."
-	icon_state = "sheath_leather"
+	icon = 'icons/clothing/accessories/holsters/sheath_leather.dmi'
 	can_holster = list(/obj/item/knife)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
@@ -98,4 +96,4 @@
 /obj/item/clothing/accessory/storage/holster/knife/polymer
 	name = "polymer knife sheath"
 	desc = "A rigid polymer sheath which you can strap on your leg."
-	icon_state = "sheath_polymer"
+	icon = 'icons/clothing/accessories/holsters/sheath_polymer.dmi'

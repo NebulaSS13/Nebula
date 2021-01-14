@@ -321,8 +321,7 @@
 
 /obj/item/clothing/accessory/chameleon
 	name = "tie"
-	icon_state = "tie"
-	item_state = ""
+	icon = 'icons/clothing/accessories/ties/tie.dmi'
 	desc = "A neosilk clip-on tie. It seems to have a small dial on its back."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON

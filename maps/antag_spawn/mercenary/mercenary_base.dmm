@@ -2106,12 +2106,12 @@
 /area/map_template/merc_spawn)
 "js" = (
 /obj/structure/table/rack,
-/obj/item/clothing/accessory/storage/brown_vest,
-/obj/item/clothing/accessory/storage/brown_vest,
-/obj/item/clothing/accessory/storage/white_vest,
-/obj/item/clothing/accessory/storage/white_vest,
-/obj/item/clothing/accessory/storage/black_vest,
-/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/vest/brown,
+/obj/item/clothing/accessory/storage/vest/brown,
+/obj/item/clothing/accessory/storage/vest,
+/obj/item/clothing/accessory/storage/vest,
+/obj/item/clothing/accessory/storage/vest/black,
+/obj/item/clothing/accessory/storage/vest/black,
 /obj/structure/railing/mapped/no_density{
 	icon_state = "railing0-1";
 	dir = 4

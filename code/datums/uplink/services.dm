@@ -110,7 +110,7 @@
 	visible_message("<span class='warning'>\The [src] shuts down with a spark.</span>")
 
 /obj/item/uplink_service/on_update_icon()
-	icon_state = initial(icon_state)
+	icon_state = get_world_inventory_state()
 	switch(state)
 		if(CURRENTLY_ACTIVE)
 			icon_state = "[icon_state]-on"
