@@ -1008,3 +1008,22 @@ I said no!
 		/obj/item/chems/food/snacks/spider
 	)
 	result = /obj/item/chems/food/snacks/spider/cooked
+
+/datum/recipe/pelmen
+	items = list(
+		/obj/item/chems/food/snacks/doughslice,
+		/obj/item/chems/food/snacks/doughslice,
+		/obj/item/chems/food/snacks/rawmeatball
+	)
+	result = /obj/item/chems/food/snacks/pelmen
+
+/datum/recipe/pelmeni_boiled
+	reagents = list(/decl/material/liquid/water = 10)
+	items = list(
+		/obj/item/chems/food/snacks/pelmen,
+		/obj/item/chems/food/snacks/pelmen,
+		/obj/item/chems/food/snacks/pelmen,
+		/obj/item/chems/food/snacks/pelmen,
+		/obj/item/chems/food/snacks/pelmen
+	)
+	result = /obj/item/chems/food/snacks/pelmeni_boiled

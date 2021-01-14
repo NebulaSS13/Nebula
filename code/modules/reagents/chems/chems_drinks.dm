@@ -680,3 +680,12 @@
 	color = "#ece4e3"
 	glass_name = "Kefir"
 	glass_desc = "Fermented milk, looks a lot like yougurt."
+
+/decl/material/liquid/drink/compote
+	name = "compote"
+	lore_text = "Traditional dessert drink made from fruits or berries. Grandma would be proud."
+	taste_description = "sweet-sour berries"
+	color = "#9e4b00"
+
+	glass_name = "Compote"
+	glass_desc = "Traditional dessert drink made from fruits or berries. Grandma would be proud."

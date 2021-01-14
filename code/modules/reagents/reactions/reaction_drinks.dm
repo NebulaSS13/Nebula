@@ -49,4 +49,13 @@
 	required_reagents = list(/decl/material/liquid/drink/milk = 2, /decl/material/liquid/drink/milk/cream = 1)
 	result_amount = 3
 	catalysts = list(/decl/material/liquid/nutriment = 1)
-	mix_message = "The milk ferments into kefir"
+	mix_message = "The milk ferments into kefir."
+
+/datum/chemical_reaction/recipe/compote
+	name = "Compote"
+	result = /decl/material/liquid/drink/compote
+	required_reagents = list(/decl/material/liquid/water = 2, /decl/material/liquid/drink/juice/berry = 1, /decl/material/liquid/drink/juice/apple = 1, /decl/material/liquid/drink/juice/pear = 1)
+	result_amount = 5
+	mix_message = "The mixture turns a soft orange, bubbling faintly."
+	minimum_temperature = 40 CELSIUS
+	maximum_temperature = (40 CELSIUS)
