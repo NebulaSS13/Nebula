@@ -865,8 +865,8 @@ obj/random/obstruction/spawn_choices()
 /obj/random/accessory
 	name = "random accessory"
 	desc = "This is a random utility accessory."
-	icon = 'icons/obj/clothing/obj_accessories.dmi'
-	icon_state = "horribletie"
+	icon = 'icons/clothing/accessories/ties/tie_horrible.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/accessory/spawn_choices()
 	return list(/obj/item/clothing/accessory/storage/webbing = 3,

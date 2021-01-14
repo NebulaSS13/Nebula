@@ -177,7 +177,7 @@
 /obj/item/clothing/accessory/armor/helmcover
 	name = "helmet cover"
 	desc = "A fabric cover for armored helmets."
-	icon = 'icons/clothing/accessories/helmcover.dmi'
+	icon = 'icons/clothing/accessories/armor/helmcover.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot = ACCESSORY_SLOT_HELM_C
 
