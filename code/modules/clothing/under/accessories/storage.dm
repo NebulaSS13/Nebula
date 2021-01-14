@@ -103,7 +103,7 @@
 /obj/item/clothing/accessory/storage/knifeharness
 	name = "decorated harness"
 	desc = "A heavily decorated harness of sinew and leather with two knife loops."
-	icon_state = "unathiharness2"
+	icon = 'icons/clothing/accessories/clothing/harness_unathi.dmi'
 	slots = 2
 	max_w_class = ITEM_SIZE_NORMAL //for knives
 
@@ -113,15 +113,28 @@
 		/obj/item/hatchet,
 		/obj/item/knife,
 	)
+	new /obj/item/knife/table/primitive(hold)
+	new /obj/item/knife/table/primitive(hold)
+	update_icon()
 
-	new /obj/item/knife/table/primitive(hold)
-	new /obj/item/knife/table/primitive(hold)
+/obj/item/clothing/accessory/storage/knifeharness/on_update_icon()
+	icon_state = initial(icon_state)
+	var/contents_count = min(length(contents), 2)
+	if(contents_count > 0 && check_state_in_icon("[icon_state]-[contents_count]", icon))
+		icon_state = "[icon_state]-[contents_count]"
+	
+/obj/item/clothing/accessory/storage/knifeharness/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/ret = ..()
+	icon_state = initial(icon_state)
+	var/contents_count = min(length(contents), 2)
+	if(contents_count > 0 && check_state_in_icon("[ret.icon_state]-[contents_count]", ret.icon))
+		ret.icon_state = "[ret.icon_state]-[contents_count]"
+	return ret
 
 /obj/item/clothing/accessory/storage/bandolier
 	name = "bandolier"
 	desc = "A lightweight synthethic bandolier with straps for holding ammunition or other small objects."
 	icon = 'icons/obj/items/bandolier.dmi'
-	icon_state = ICON_STATE_WORLD
 	slots = 10
 	max_w_class = ITEM_SIZE_NORMAL
 
