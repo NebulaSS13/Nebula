@@ -64,6 +64,9 @@ var/list/bodypart_to_slot_lookup_table = list(
 	BP_R_HAND = "slot_r_hand"
 )
 
+/obj/item/proc/get_fallback_slot(var/slot)
+	return
+
 /obj/item/proc/experimental_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 
 	var/bodytype = lowertext(user_mob?.get_bodytype())
@@ -76,6 +79,12 @@ var/list/bodypart_to_slot_lookup_table = list(
 	var/use_state = "[bodytype]-[slot]"
 	if(!check_state_in_icon(use_state, useicon) && global.bodypart_to_slot_lookup_table[slot])
 		use_state = "[bodytype]-[global.bodypart_to_slot_lookup_table[slot]]"
+
+	if(!check_state_in_icon(use_state, useicon))
+		var/fallback = get_fallback_slot(slot)
+		if(!fallback)
+			return new /image
+		use_state = "[bodytype]-[fallback]"
 
 	if(!check_state_in_icon(use_state, useicon))
 		return new /image

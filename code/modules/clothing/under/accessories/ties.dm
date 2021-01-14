@@ -86,7 +86,7 @@
 /obj/item/clothing/accessory/bowtie/color
 	name = "bowtie"
 	desc = "A neosilk hand-tied bowtie."
-	icon = 'icons/clothing/accessories/ties/tie_long.dmi'
+	icon = 'icons/clothing/accessories/ties/bowtie.dmi'
 
 /obj/item/clothing/accessory/bowtie/ugly
 	name = "horrible bowtie"

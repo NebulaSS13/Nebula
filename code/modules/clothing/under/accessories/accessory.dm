@@ -37,6 +37,10 @@
 	inv_overlay.appearance_flags = RESET_COLOR
 	return inv_overlay
 
+/obj/item/clothing/accessory/get_fallback_slot(var/slot)
+	if(slot != BP_L_HAND && slot != BP_R_HAND)
+		return slot_tie_str
+
 /obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot, bodypart)
 	if(!istype(loc,/obj/item/clothing) || use_single_icon)	//don't need special handling if it's worn as normal item.
 		return ..()
@@ -59,6 +63,7 @@
 		var/use_sprite_sheet = FALSE
 		if(sprite_sheets[bodytype])
 			use_sprite_sheet = sprite_sheets[bodytype]
+
 
 		if(icon_override && ("[tmp_icon_state]_mob" in icon_states(icon_override)))
 			return overlay_image(icon_override, "[tmp_icon_state]_mob", color, RESET_COLOR)

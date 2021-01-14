@@ -517,6 +517,21 @@
 	for(var/checktype in ignore_types)
 		ignore_types |= typesof(checktype)
 
+	var/list/onmob_exception_list = list(
+		/obj/item/clothing/accessory/buddytag,
+		/obj/item/clothing/accessory/armor/plate,
+		/obj/item/clothing/accessory/armor/tag/oneg,
+		/obj/item/clothing/accessory/armor/tag/opos,
+		/obj/item/clothing/accessory/armor/tag/apos,
+		/obj/item/clothing/accessory/armor/tag/aneg,
+		/obj/item/clothing/accessory/armor/tag/bpos,
+		/obj/item/clothing/accessory/armor/tag/bneg,
+		/obj/item/clothing/accessory/armor/tag/abpos,
+		/obj/item/clothing/accessory/armor/tag/abneg
+	)
+	for(var/checktype in onmob_exception_list)
+		onmob_exception_list |= typesof(checktype)
+
 	var/list/results = list()
 	var/list/ignored = list()
 	for(var/clothing_type in subtypesof(/obj/item/clothing))
@@ -527,6 +542,8 @@
 		var/res
 		if(!initial_icon)
 			res = "[res] - missing icon"
+		else if(ispath(clothing_type, /obj/item/clothing/accessory) && !check_state_in_icon("humanoid body-slot_tie", initial_icon) && !(clothing_type in onmob_exception_list))
+			res = "[res] - accessory with no tie state ([initial_icon])"
 		if(!initial_state)
 			res = "[res] - no initial state"
 		else if(initial_state != ICON_STATE_WORLD && initial_state != ICON_STATE_INV)

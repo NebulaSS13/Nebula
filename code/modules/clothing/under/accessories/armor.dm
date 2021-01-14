@@ -113,7 +113,7 @@
 
 /obj/item/clothing/accessory/armor
 	name = "master armor"
-	icon = 'icons/clothing/accessories/armor/armor_light.dmi'
+	icon = 'icons/clothing/accessories/tags/tag_small.dmi'
 	icon_state = ICON_STATE_WORLD
 
 //Decorative attachments
@@ -126,7 +126,6 @@
 /obj/item/clothing/accessory/armor/tag/press
 	name = "\improper PRESS tag"
 	desc = "A tag with the word PRESS printed in white lettering on it."
-	icon = 'icons/clothing/accessories/tags/tag_small.dmi'
 	slot_flags = SLOT_LOWER_BODY
 
 /obj/item/clothing/accessory/armor/tag/hos
