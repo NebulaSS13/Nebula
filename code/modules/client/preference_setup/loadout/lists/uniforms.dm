@@ -75,7 +75,7 @@
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
 		/obj/item/clothing/under/sundress_white,
-		/obj/item/clothing/under/dress/dress_fire,
+		/obj/item/clothing/under/dress,
 		/obj/item/clothing/under/dress/dress_green,
 		/obj/item/clothing/under/dress/dress_orange,
 		/obj/item/clothing/under/dress/dress_pink,
@@ -110,32 +110,27 @@
 
 /datum/gear/uniform/casual_pants
 	display_name = "casual pants selection"
-	path = /obj/item/clothing/under/casual_pants
+	path = /obj/item/clothing/pants/casual
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/formal_pants
 	display_name = "formal pants selection"
-	path = /obj/item/clothing/under/formal_pants
+	path = /obj/item/clothing/pants/formal
 	flags = GEAR_HAS_TYPE_SELECTION
-
-/datum/gear/uniform/formal_pants/custom
-	display_name = "suit pants, colour select"
-	path = /obj/item/clothing/under/formal_pants
-	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/formal_pants/baggycustom
 	display_name = "baggy suit pants, colour select"
-	path = /obj/item/clothing/under/formal_pants/baggy
+	path = /obj/item/clothing/pants/baggy
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/shorts
 	display_name = "shorts selection"
-	path = /obj/item/clothing/under/shorts/jeans
+	path = /obj/item/clothing/pants/shorts
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/shorts/custom
 	display_name = "athletic shorts, colour select"
-	path = /obj/item/clothing/under/shorts/
+	path = /obj/item/clothing/pants/shorts/athletic
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/turtleneck
@@ -158,4 +153,4 @@
 
 /datum/gear/uniform/frontier
 	display_name = "frontier clothes"
-	path = /obj/item/clothing/under/frontier
+	path = /obj/item/clothing/under/frontier 

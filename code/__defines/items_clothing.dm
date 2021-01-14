@@ -193,7 +193,6 @@ var/list/default_onmob_icons = list(
 	BP_L_HAND =          'icons/mob/onmob/items/lefthand.dmi',
 	BP_R_HAND =          'icons/mob/onmob/items/righthand.dmi',
 	slot_glasses_str =   'icons/mob/onmob/onmob_eyes.dmi',
-	slot_w_uniform_str = 'icons/mob/onmob/onmob_under.dmi',
 	slot_tie_str =       'icons/mob/onmob/onmob_accessories.dmi'
 )
 

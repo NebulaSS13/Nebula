@@ -11,9 +11,7 @@
 /obj/item/clothing/under/rank/warden
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for more robust protection. It has the word \"Warden\" written on the shoulders."
 	name = "warden's jumpsuit"
-	icon_state = "warden"
-	item_state = "r_suit"
-	worn_state = "warden"
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_warden.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_SMALL
 		)
@@ -28,9 +26,7 @@
 /obj/item/clothing/under/rank/security
 	name = "security officer's jumpsuit"
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
-	icon_state = "security"
-	item_state = "r_suit"
-	worn_state = "secred"
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_sec.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_SMALL
 		)
@@ -39,8 +35,7 @@
 /obj/item/clothing/under/rank/dispatch
 	name = "dispatcher's uniform"
 	desc = "A dress shirt and khakis with a security patch sewn on."
-	icon_state = "dispatch"
-	worn_state = "dispatch"
+	icon = 'icons/clothing/under/uniform_dispatch.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_SMALL
 		)
@@ -50,9 +45,7 @@
 /obj/item/clothing/under/rank/security2
 	name = "security officer's uniform"
 	desc = "It's made of a slightly sturdier material, to allow for robust protection."
-	icon_state = "redshirt2"
-	item_state = "r_suit"
-	worn_state = "redshirt2"
+	icon = 'icons/clothing/under/uniform_redshirt.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_SMALL
 		)
@@ -61,9 +54,7 @@
 /obj/item/clothing/under/tactical
 	name = "tactical jumpsuit"
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
-	icon_state = "swatunder"
-	worn_state = "swatunder"
-	gender_icons = 1
+	icon = 'icons/clothing/under/uniform_swat.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_SMALL
 		)
@@ -75,10 +66,7 @@
 /obj/item/clothing/under/det
 	name = "detective's suit"
 	desc = "A rumpled white dress shirt paired with well-worn grey slacks."
-	icon_state = "detective"
-	item_state = "det"
-	worn_state = "detective"
-	gender_icons = 1
+	icon = 'icons/clothing/under/uniform_detective_1.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_SMALL
 		)
@@ -86,18 +74,13 @@
 	starting_accessories = list(/obj/item/clothing/accessory/blue_clip)
 
 /obj/item/clothing/under/det/grey
-	icon_state = "detective2"
-	worn_state = "detective2"
-	gender_icons = 1
 	desc = "A serious-looking tan dress shirt paired with freshly-pressed black slacks."
+	icon = 'icons/clothing/under/uniform_detective_2.dmi'
 	starting_accessories = list(/obj/item/clothing/accessory/red_long)
 
 /obj/item/clothing/under/det/black
-	icon_state = "detective3"
-	worn_state = "detective3"
-	item_state = "sl_suit"
-	gender_icons = 1
 	desc = "An immaculate white dress shirt, paired with a pair of dark grey dress pants, a red tie, and a charcoal vest."
+	icon = 'icons/clothing/under/uniform_detective_3.dmi'
 	starting_accessories = list(/obj/item/clothing/accessory/red_long, /obj/item/clothing/accessory/toggleable/vest)
 
 /obj/item/clothing/head/det
@@ -136,9 +119,7 @@
 /obj/item/clothing/under/rank/head_of_security
 	desc = "It's a jumpsuit worn by those few with the dedication to achieve the position of \"Head of Security\". It has additional armor to protect the wearer."
 	name = "head of security's jumpsuit"
-	icon_state = "hos"
-	item_state = "r_suit"
-	worn_state = "hosred"
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hos.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_SMALL
 		)
@@ -170,9 +151,7 @@
 /obj/item/clothing/under/rank/head_of_security/jensen
 	desc = "You never asked for anything that stylish."
 	name = "head of security's jumpsuit"
-	icon_state = "jensen"
-	item_state = "jensen"
-	worn_state = "jensen"
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hos_alt.dmi'
 	siemens_coefficient = 0.6
 
 /obj/item/clothing/suit/armor/hos/jensen

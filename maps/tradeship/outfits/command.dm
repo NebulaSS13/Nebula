@@ -1,6 +1,6 @@
 /decl/hierarchy/outfit/job/tradeship/captain
 	name = TRADESHIP_OUTFIT_JOB_NAME("Tradehouse Captain")
-	uniform = /obj/item/clothing/under/casual_pants/classicjeans
+	uniform = /obj/item/clothing/pants/baggy/casual/classicjeans
 	shoes = /obj/item/clothing/shoes/color/black
 	pda_type = /obj/item/modular_computer/pda/heads/captain
 	r_pocket = /obj/item/radio

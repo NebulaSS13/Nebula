@@ -845,15 +845,15 @@ obj/random/obstruction/spawn_choices()
 /obj/random/clothing
 	name = "random clothes"
 	desc = "This is a random piece of clothing."
-	icon = 'icons/obj/clothing/obj_under.dmi'
-	icon_state = "jumpsuit"
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
+	icon_state = ICON_STATE_WORLD
 
 /obj/random/clothing/spawn_choices()
 	return list(/obj/item/clothing/under/syndicate/tacticool = 2,
 				/obj/item/clothing/under/syndicate/combat = 1,
 				/obj/item/clothing/under/hazard = 4,
 				/obj/item/clothing/under/sterile = 4,
-				/obj/item/clothing/under/casual_pants/camo = 2,
+				/obj/item/clothing/pants/casual/camo = 2,
 				/obj/item/clothing/under/frontier = 2,
 				/obj/item/clothing/under/harness = 2,
 				/obj/item/clothing/under/rank/medical/paramedic = 2,
