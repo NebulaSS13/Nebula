@@ -4466,7 +4466,7 @@
 /obj/structure/closet,
 /obj/item/clothing/mask/gas/clown_hat,
 /obj/item/clothing/shoes/clown_shoes,
-/obj/item/clothing/under/rank/clown,
+/obj/item/clothing/under/clown,
 /obj/item/stamp/clown,
 /obj/item/storage/backpack/clown,
 /obj/item/bikehorn,

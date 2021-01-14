@@ -120,7 +120,7 @@
 								/obj/item/clothing/under/gimmick          = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/under/lawyer           = TRADER_BLACKLIST,
 								/obj/item/clothing/under/pj               = TRADER_BLACKLIST,
-								/obj/item/clothing/under/rank             = TRADER_BLACKLIST,
+								/obj/item/clothing/under             = TRADER_BLACKLIST,
 								/obj/item/clothing/pants/shorts           = TRADER_BLACKLIST,
 								/obj/item/clothing/under/stripper         = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/under/syndicate        = TRADER_BLACKLIST_ALL,

@@ -168,7 +168,7 @@
 	set src in usr
 	set_sensors(usr)
 
-/obj/item/clothing/under/rank/Initialize()
+/obj/item/clothing/under/Initialize()
 	sensor_mode = pick(0,1,2,3)
 	. = ..()
 

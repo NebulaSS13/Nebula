@@ -1,6 +1,6 @@
 /decl/hierarchy/outfit/tunnel_clown
 	name = "Tunnel clown"
-	uniform = /obj/item/clothing/under/rank/clown
+	uniform = /obj/item/clothing/under/clown
 	shoes = /obj/item/clothing/shoes/clown_shoes
 	gloves = /obj/item/clothing/gloves/thick
 	mask = /obj/item/clothing/mask/gas/clown_hat

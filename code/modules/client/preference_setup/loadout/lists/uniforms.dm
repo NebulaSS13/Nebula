@@ -19,7 +19,7 @@
 
 /datum/gear/uniform/roboticist_skirt
 	display_name = "skirt, roboticist"
-	path = /obj/item/clothing/under/rank/roboticist/skirt
+	path = /obj/item/clothing/under/roboticist/skirt
 
 /datum/gear/uniform/suit
 	display_name = "clothes selection"
@@ -47,7 +47,7 @@
 		/obj/item/clothing/under/suit_jacket/tan,
 		/obj/item/clothing/under/scratch,
 		/obj/item/clothing/under/lawyer/bluesuit,
-		/obj/item/clothing/under/rank/internalaffairs/plain,
+		/obj/item/clothing/under/internalaffairs/plain,
 		/obj/item/clothing/under/blazer,
 		/obj/item/clothing/under/blackjumpskirt,
 		/obj/item/clothing/under/kilt,
@@ -59,7 +59,7 @@
 
 /datum/gear/uniform/scrubs
 	display_name = "standard medical scrubs"
-	path = /obj/item/clothing/under/rank/medical/scrubs
+	path = /obj/item/clothing/under/medical/scrubs
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/scrubs/custom
@@ -135,7 +135,7 @@
 
 /datum/gear/uniform/turtleneck
 	display_name = "sweater, colour select"
-	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
+	path = /obj/item/clothing/under/psych/turtleneck/sweater
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/kimono

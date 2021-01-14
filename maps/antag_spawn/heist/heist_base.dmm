@@ -697,9 +697,9 @@
 /obj/effect/floor_decal/carpet,
 /obj/item/clothing/under/lawyer/black,
 /obj/item/clothing/under/lawyer/bluesuit,
-/obj/item/clothing/under/rank/mailman,
+/obj/item/clothing/under/mailman,
 /obj/item/clothing/accessory/storage,
-/obj/item/clothing/under/rank/dispatch,
+/obj/item/clothing/under/dispatch,
 /turf/unsimulated/floor{
 	icon_state = "carpet";
 	name = "carpet"
@@ -1815,7 +1815,7 @@
 "eA" = (
 /obj/structure/closet/crate,
 /obj/item/clothing/suit/armor/pirate,
-/obj/item/clothing/under/rank/medical/scrubs/black,
+/obj/item/clothing/under/medical/scrubs/black,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "eB" = (

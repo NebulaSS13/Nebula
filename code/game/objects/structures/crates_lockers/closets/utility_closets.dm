@@ -142,7 +142,7 @@
 /obj/structure/closet/bombclosetsecurity/WillContain()
 	return list(
 		/obj/item/clothing/suit/bomb_suit/security,
-		/obj/item/clothing/under/rank/security,
+		/obj/item/clothing/under/security,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/head/bomb_hood/security)
 
