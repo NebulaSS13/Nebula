@@ -4,7 +4,7 @@
 	color = "#9c2020"
 	planetary_area = /area/exoplanet/volcanic
 	rock_colors = list(COLOR_DARK_GRAY)
-	plant_colors = list("#a23c05","#3f1f0d","#662929","#ba6222","#7a5b3a","#120309")
+	plant_colors = list("#a23c05","#3f1f0d","#662929","#ba6222","#7a5b3a","#471429")
 	max_themes = 1
 	possible_themes = list(
 		/datum/exoplanet_theme = 100,
