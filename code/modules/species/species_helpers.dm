@@ -78,3 +78,7 @@ var/list/stored_shock_by_ref = list()
 		var/obj/item/organ/internal/I = has_organ[bp_tag]
 		if(initial(I.parent_organ) == organ.organ_tag)
 			limb.cavity_max_w_class = max(limb.cavity_max_w_class, get_resized_organ_w_class(initial(I.w_class)))
+
+/decl/species/proc/equip_default_fallback_uniform(var/mob/living/carbon/human/H)
+	if(istype(H))
+		H.equip_to_slot_or_del(new /obj/item/clothing/under/harness, slot_w_uniform_str)
