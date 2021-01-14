@@ -93,12 +93,12 @@
 /obj/item/clothing/under/det/grey
 	desc = "A serious-looking tan dress shirt paired with freshly-pressed black slacks."
 	icon = 'icons/clothing/under/uniform_detective_2.dmi'
-	starting_accessories = list(/obj/item/clothing/accessory/red_long)
+	starting_accessories = list(/obj/item/clothing/accessory/long/red)
 
 /obj/item/clothing/under/det/black
 	desc = "An immaculate white dress shirt, paired with a pair of dark grey dress pants, a red tie, and a charcoal vest."
 	icon = 'icons/clothing/under/uniform_detective_3.dmi'
-	starting_accessories = list(/obj/item/clothing/accessory/red_long, /obj/item/clothing/accessory/toggleable/black_vest)
+	starting_accessories = list(/obj/item/clothing/accessory/long/red, /obj/item/clothing/accessory/toggleable/black_vest)
 
 /obj/item/clothing/head/det
 	name = "fedora"

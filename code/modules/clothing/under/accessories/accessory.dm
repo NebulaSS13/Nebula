@@ -1,9 +1,8 @@
 /obj/item/clothing/accessory
 	name = "tie"
 	desc = "A neosilk clip-on tie."
-	icon = 'icons/obj/clothing/obj_accessories.dmi'
-	icon_state = "tie"
-	item_state = ""	//no inhands
+	icon = 'icons/clothing/accessories/ties/tie.dmi'
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_TIE
 	w_class = ITEM_SIZE_SMALL
 
@@ -110,24 +109,29 @@
 /obj/item/clothing/accessory/necklace
 	name = "necklace"
 	desc = "A simple necklace."
-	icon = 'icons/clothing/accessories/necklace.dmi'
-	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/accessories/jewelry/necklace.dmi'
 	slot_flags = SLOT_FACE | SLOT_TIE
 
 //Misc
 /obj/item/clothing/accessory/kneepads
 	name = "kneepads"
 	desc = "A pair of synthetic kneepads. Doesn't provide protection from more than arthritis."
-	icon_state = "kneepads"
+	icon = 'icons/clothing/accessories/armor/kneepads.dmi'
 
 //Scarves
 /obj/item/clothing/accessory/scarf
 	name = "scarf"
 	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
-	icon_state = "whitescarf"
+	icon = 'icons/clothing/accessories/clothing/scarf.dmi'
 
 //Bracelets
 /obj/item/clothing/accessory/bracelet
 	name = "bracelet"
 	desc = "A simple bracelet with a clasp."
-	icon_state = "bracelet"
+	icon = 'icons/clothing/accessories/jewelry/bracelet.dmi'
+
+/obj/item/clothing/accessory/ftupin
+	name = "\improper Free Trade Union pin"
+	desc = "A pin denoting employment in the Free Trade Union, a trading company."
+	icon = 'icons/clothing/accessories/jewelry/ftupin.dmi'
+	high_visibility = 1
