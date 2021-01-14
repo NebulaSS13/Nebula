@@ -152,7 +152,6 @@
 	desc = "A pair of kitty ears. Meow!"
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/cat.dmi'
-	icon_state = "kitty"
 	body_parts_covered = 0
 	siemens_coefficient = 1.5
 

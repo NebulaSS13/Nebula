@@ -88,7 +88,7 @@
 	name = "Dead ZHP guard"
 	uniform = /obj/item/clothing/under/rank/virologist
 	suit = /obj/item/clothing/suit/armor/pcarrier
-	head = /obj/item/clothing/head/soft/lar_maria/zhp_cap
+	head = /obj/item/clothing/head/soft/zhp_cap
 	shoes = /obj/item/clothing/shoes/jackboots/duty
 	l_ear = /obj/item/radio/headset
 
@@ -118,12 +118,10 @@
 	. = ..()
 	icon_state = "[icon_state]_ranged"
 
-/obj/item/clothing/head/soft/lar_maria/zhp_cap
+/obj/item/clothing/head/soft/zhp_cap
 	name = "Zeng-Hu Pharmaceuticals cap"
-	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_sprites.dmi'
+	icon = 'mods/content/corporate/icons/clothing/head/zhp_cap.dmi'
 	desc = "A green cap with Zeng-Hu Pharmaceuticals symbol on it."
-	icon_state = "zhp_cap"
-	item_icons = list(slot_head_str = 'mods/content/corporate/away_sites/lar_maria/lar_maria_clothing_sprites.dmi')
 
 /mob/living/simple_animal/hostile/lar_maria/virologist
 	name = "\improper virologist"

@@ -7,15 +7,15 @@
 	bodytype_restricted = null
 	force = 3
 	overshoes = 1
-	var/magpulse = 0
 	action_button_name = "Toggle Magboots"
-	var/obj/item/clothing/shoes/shoes = null	//Undershoes
-	var/mob/living/carbon/human/wearer = null	//For shoe procs
 	center_of_mass = null
 	randpixel = 0
-	var/online_slowdown = 3
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'materials':2,'engineering':2,'magnets':3}"
+	var/magpulse = 0
+	var/obj/item/clothing/shoes/shoes = null	//Undershoes
+	var/mob/living/carbon/human/wearer = null	//For shoe procs
+	var/online_slowdown = 3
 
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()
 	LAZYSET(slowdown_per_slot, slot_shoes_str, (shoes? max(0, LAZYACCESS(shoes.slowdown_per_slot, slot_shoes_str)) : 0))	//So you can't put on magboots to make you walk faster.
@@ -45,14 +45,18 @@
 
 /obj/item/clothing/shoes/magboots/on_update_icon()
 	. = ..()
-	var/new_state = "[get_world_inventory_state()][!!magpulse]"
+	var/new_state = get_world_inventory_state()
+	if(magpulse)
+		new_state = "[new_state]-on"
 	if(check_state_in_icon(new_state, icon))
 		icon_state = new_state
 	update_clothing_icon()
 	
 /obj/item/clothing/shoes/magboots/experimental_mob_overlay(var/mob/user_mob, var/slot)
 	var/image/ret = ..()
-	var/new_state = "[ret.icon_state][!!magpulse]"
+	var/new_state = ret.icon_state
+	if(magpulse)
+		new_state = "[new_state]-on"
 	if(check_state_in_icon(new_state, ret.icon))
 		ret.icon_state = new_state
 	return ret

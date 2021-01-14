@@ -99,12 +99,11 @@
 /obj/item/clothing/shoes/clown_shoes
 	desc = "The prankster's standard-issue clowning shoes. Damn they're huge!"
 	name = "clown shoes"
-	icon_state = "clown"
-	item_state = "clown"
+	icon = 'icons/clothing/feet/clown.dmi'
 	force = 0
-	var/footstep = 1	//used for squeeks whilst walking
 	bodytype_restricted = null
 	can_add_hidden_item = FALSE
+	var/footstep = 1	//used for squeeks whilst walking
 
 /obj/item/clothing/shoes/clown_shoes/Initialize()
 	. = ..()
@@ -159,7 +158,7 @@
 /obj/item/clothing/shoes/athletic
 	name = "athletic shoes"
 	desc = "A pair of sleek atheletic shoes. Made by and for the sporty types."
-	icon_state = "sportshoe"
+	icon = 'icons/clothing/feet/sports.dmi'
 
 /obj/item/clothing/shoes/dress/sneakies
 	desc = "The height of fashion, and they're pre-polished. Upon further inspection, the soles appear to be on backwards. They look uncomfortable."

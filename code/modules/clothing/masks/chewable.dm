@@ -53,7 +53,7 @@ obj/item/clothing/mask/chewable/Destroy()
 	name = "wad"
 	desc = "A chewy wad of tobacco. Cut in long strands and treated with syrups so it doesn't taste like a ash-tray when you stuff it into your face."
 	throw_speed = 0.5
-	icon_state = "chew"
+	icon = 'icons/clothing/mask/chewables/chew.dmi'
 	type_butt = /obj/item/trash/cigbutt/spitwad
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS | SLOT_FACE
@@ -64,7 +64,8 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/trash/cigbutt/spitwad
 	name = "spit wad"
 	desc = "A disgusting spitwad."
-	icon_state = "spit-chew"
+	icon = 'icons/clothing/mask/chewables/chew.dmi'
+	icon_state = "spit"
 
 /obj/item/clothing/mask/chewable/proc/extinguish(var/mob/user, var/no_message)
 	STOP_PROCESSING(SSobj, src)
@@ -93,7 +94,7 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/clothing/mask/chewable/tobacco/nico
 	name = "nicotine gum"
 	desc = "A chewy wad of synthetic rubber, laced with nicotine. Possibly the least disgusting method of nicotine delivery."
-	icon_state = "nic_gum"
+	icon = 'icons/clothing/mask/chewables/gum_nicotine.dmi'
 	type_butt = /obj/item/trash/cigbutt/spitgum
 
 /obj/item/clothing/mask/chewable/tobacco/nico/Initialize()
@@ -104,8 +105,8 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/clothing/mask/chewable/candy
 	name = "wad"
 	desc = "A chewy wad of wadding material."
+	icon = 'icons/clothing/mask/chewables/wad.dmi'
 	throw_speed = 0.5
-	icon_state = "chew"
 	type_butt = /obj/item/trash/cigbutt/spitgum
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS | SLOT_FACE
@@ -128,8 +129,8 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/trash/cigbutt/spitgum
 	name = "old gum"
 	desc = "A disgusting chewed up wad of gum."
-	icon_state = "spit-gum"
-	icon = 'icons/clothing/mask/chewables/chewables.dmi'
+	icon_state = "spit"
+	icon = 'icons/clothing/mask/chewables/gum.dmi'
 
 /obj/item/trash/cigbutt/lollibutt
 	name = "popsicle stick"
@@ -139,7 +140,7 @@ obj/item/clothing/mask/chewable/Destroy()
 /obj/item/clothing/mask/chewable/candy/gum
 	name = "chewing gum"
 	desc = "A chewy wad of fine synthetic rubber and artificial flavoring."
-	icon_state = "gum"
+	icon = 'icons/clothing/mask/chewables/gum.dmi'
 
 /obj/item/clothing/mask/chewable/candy/gum/get_possible_initial_reagents()
 	return list(

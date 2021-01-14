@@ -499,3 +499,65 @@
 		return
 	trap = decls_repository.get_decl(trap)
 	trap.forced(mob)
+
+// Writes out a list of problems found with /obj/item/clothing related to the transition to the single icon system.
+/client/proc/debug_unconverted_clothing_states()
+
+	set name = "Debug Unconverted Clothing States"
+	set category = "Debug"
+	set src = usr
+
+	// Ignore unconverted/partially converted types:
+	var/list/ignore_types = list(
+		/obj/item/clothing/under,    
+		/obj/item/clothing/glasses,  
+		/obj/item/clothing/accessory,
+		/obj/item/clothing/ring,
+		/obj/item/clothing/suit/space/rig,
+		/obj/item/clothing/head/helmet/space/rig,
+		/obj/item/clothing/shoes/magboots/rig,
+		/obj/item/clothing/gloves/rig
+	)
+	// modpack items to ignore
+	// /obj/item/clothing/mask/gas/ascent
+	// /obj/item/clothing/mask/rubber/trasen
+	for(var/checktype in ignore_types)
+		ignore_types |= typesof(checktype)
+
+	var/list/results = list()
+	var/list/ignored = list()
+	for(var/clothing_type in subtypesof(/obj/item/clothing))
+		var/obj/item/clothing/clothes = clothing_type
+		var/initial_state = initial(clothes.icon_state)
+		var/initial_item_state = initial(clothes.item_state)
+		var/initial_icon = initial(clothes.icon)
+		var/res
+		if(!initial_icon)
+			res = "[res] - missing icon"
+		if(!initial_state)
+			res = "[res] - no initial state"
+		else if(initial_state != ICON_STATE_WORLD && initial_state != ICON_STATE_INV)
+			res = "[res] - unconverted initial state ([initial_state])"
+		else if(initial_icon && !check_state_in_icon(initial_state, initial_icon))
+			res = "[res] - missing initial state ([initial_state], [initial_icon])"
+		if(initial_item_state)
+			res = "[res] - initial item state ([initial_item_state])"
+		if(res)
+			var/checkstring = "[clothing_type][res]"
+			if(clothing_type in ignore_types)
+				ignored += checkstring
+			else
+				results += checkstring
+
+	if(length(results))
+		text2file(jointext(results, "\n"), "initial_states_dump.txt")
+		to_chat(src.mob, "Dumped [length(results)] problem path\s to initial_states_dump.txt.")
+	else
+		to_chat(src.mob, "No problem paths.")
+
+	if(length(ignored))
+		text2file(jointext(ignored, "\n"), "ignored_initial_states_dump.txt")
+		to_chat(src.mob, "Dumped [length(ignored)] ignored problem path\s to ignored_initial_states_dump.txt.")
+	else
+		to_chat(src.mob, "No ignored paths.")
+
