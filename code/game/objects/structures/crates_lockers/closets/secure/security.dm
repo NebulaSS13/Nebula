@@ -47,7 +47,7 @@
 		/obj/item/clothing/under/dress/dress_hop,
 		/obj/item/clothing/under/dress/dress_hr,
 		/obj/item/clothing/under/lawyer/female,
-		/obj/item/clothing/under/lawyer/black,
+		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/lawyer/red,
 		/obj/item/clothing/under/lawyer/oldman,
 		/obj/item/clothing/shoes/color/brown,

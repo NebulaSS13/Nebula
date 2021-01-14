@@ -21,7 +21,7 @@
 /mob/living/simple_animal/hostile/carp/shark // generally stronger version of a carp that doesn't die from a mean look. Fance new sprites included, credits to F-Tang Steve
 	name = "cosmoshark"
 	desc = "Enormous creature that resembles a shark with magenta glowing lines along its body and set of long deep-purple teeth."
-	icon = 'maps/away/errant_pisces/errant_pisces_sprites.dmi'
+	icon = 'maps/away/errant_pisces/icons/cosmoshark.dmi'
 	icon_state = "shark"
 	icon_living = "shark"
 	icon_dead = "shark_dead"
@@ -85,7 +85,7 @@
 /obj/structure/net//if you want to have fun, make them to be draggable as a whole unless at least one piece is attached to a non-space turf or anchored object
 	name = "industrial net"
 	desc = "A sturdy industrial net of synthetic belts reinforced with plasteel threads."
-	icon = 'maps/away/errant_pisces/errant_pisces_sprites.dmi'
+	icon = 'maps/away/errant_pisces/icons/net.dmi'
 	icon_state = "net_f"
 	anchored = 1
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
@@ -178,8 +178,7 @@
 /obj/item/stack/net
 	name = "industrial net roll"
 	desc = "Sturdy industrial net reinforced with plasteel threads."
-	singular_name = "industrial net"
-	icon = 'maps/away/errant_pisces/errant_pisces_sprites.dmi'
+	icon = 'maps/away/errant_pisces/icons/net_roll.dmi'
 	icon_state = "net_roll"
 	w_class = ITEM_SIZE_LARGE
 	force = 3.0
@@ -233,12 +232,10 @@
 	if (amount < 1)
 		qdel(src)
 
-/obj/item/clothing/under/carp//as far as I know sprites are taken from /tg/
+/obj/item/clothing/under/carp //as far as I know sprites are taken from /tg/
 	name = "space carp suit"
 	desc = "A suit in a shape of a space carp. Usually worn by corporate interns who are sent to entertain children during HQ excursions."
-	icon_state = "carp_suit"
-	icon = 'maps/away/errant_pisces/errant_pisces_sprites.dmi'
-	item_icons = list(slot_w_uniform_str = 'maps/away/errant_pisces/errant_pisces_sprites.dmi')
+	icon = 'maps/away/errant_pisces/icons/carpsuit.dmi'
 
 /obj/effect/landmark/corpse/carp_fisher
 	name = "carp fisher"

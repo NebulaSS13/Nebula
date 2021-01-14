@@ -137,22 +137,6 @@
 	icon = 'icons/clothing/suit/ianshirt.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 
-//pyjamas
-//originally intended to be pinstripes >.>
-
-/obj/item/clothing/under/bluepyjamas
-	name = "blue pyjamas"
-	desc = "Slightly old-fashioned sleepwear."
-	icon_state = "blue_pyjamas"
-	item_state = "blue_pyjamas"
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
-
-/obj/item/clothing/under/redpyjamas
-	name = "red pyjamas"
-	desc = "Slightly old-fashioned sleepwear."
-	icon_state = "red_pyjamas"
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS|SLOT_LEGS
-
 //coats
 /obj/item/clothing/suit/leathercoat
 	name = "longcoat"
@@ -184,10 +168,10 @@
 	artificial_shine = 80
 
 //stripper
-/obj/item/clothing/under/stripper/mankini
+/obj/item/clothing/under/mankini
 	name = "mankini"
 	desc = "No honest man would wear this abomination."
-	icon_state = "mankini"
+	icon = 'icons/clothing/under/mankini.dmi'
 	siemens_coefficient = 1
 	body_parts_covered = 0
 

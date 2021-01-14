@@ -28,7 +28,7 @@
 /obj/item/clothing/under/lawyer/fiendsuit
 	name = "black suit"
 	desc = "A snappy black suit with red trim. The undershirt's stained with something, though..."
-	icon_state = "fiendsuit"
+	icon = 'icons/clothing/under/suits/suit_fiend.dmi'
 	bodytype_restricted = list(BODYTYPE_HUMANOID)
 
 /obj/item/clothing/shoes/dress/devilshoes
@@ -51,4 +51,4 @@
 /obj/item/clothing/under/devildress
 	name = "old dress"
 	desc = "An elegant - if tattered - black and red dress. There's nothing visible through the holes in the fabric; nothing but darkness."
-	icon_state = "fienddress"
+	icon = 'icons/clothing/under/dresses/dress_fiend.dmi'

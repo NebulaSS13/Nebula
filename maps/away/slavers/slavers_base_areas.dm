@@ -1,5 +1,5 @@
 /area/slavers_base
-	icon = 'maps/away/slavers/slavers_base_sprites.dmi'
+	icon = 'maps/away/slavers/icons/areas.dmi'
 
 /area/slavers_base/maint
 	name = "\improper Slavers Base Maintenance"
