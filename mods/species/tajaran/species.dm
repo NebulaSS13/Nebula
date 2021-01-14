@@ -2,10 +2,11 @@
 	name = SPECIES_TAJARA
 	name_plural = "Tajaran"
 
-	description = "A small mammalian carnivore. If you are reading this, you are probably a tajaran."
+	description = "A small mammalian carnivore. If you are reading this, you are probably a Tajaran."
 	hidden_from_codex = FALSE
-	bodytype = BODYTYPE_HUMANOID
+	bodytype = BODYTYPE_FELINE
 	sexybits_location = BP_GROIN
+	limb_blend = ICON_MULTIPLY
 
 	min_age = 17
 	max_age = 140
@@ -17,8 +18,10 @@
 	deform =  'mods/species/tajaran/icons/deformed_body.dmi'
 	bandages_icon = 'icons/mob/bandage.dmi'
 	preview_icon = 'mods/species/tajaran/icons/preview.dmi'
+	lip_icon = 'mods/species/tajaran/icons/lips.dmi'
 	tail_animation = 'mods/species/tajaran/icons/tail.dmi'
 	tail = "tajtail"
+	tail_blend = ICON_MULTIPLY
 
 	flesh_color = "#afa59e"
 	base_color = "#333333"
@@ -82,3 +85,45 @@
 	)
 
 	autohiss_exempt = list(LANGUAGE_TAJARA)
+
+	has_organ = list(
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_APPENDIX = /obj/item/organ/internal/appendix,
+		BP_EYES =     /obj/item/organ/internal/eyes/taj
+	)
+
+/decl/species/tajaran/New()
+	equip_adjust = list(
+		BP_L_HAND =           list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
+		BP_R_HAND =           list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
+		slot_wear_id_str =    list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
+		slot_wear_suit_str =  list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
+		slot_w_uniform_str =  list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
+		slot_back_str =       list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
+		slot_belt_str =       list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
+		slot_underpants_str = list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
+		slot_undershirt_str = list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2))
+	)
+	. = ..()
+	
+
+/obj/item/organ/internal/eyes/taj
+	eye_blend = ICON_MULTIPLY
+	eye_icon = 'mods/species/tajaran/icons/eyes.dmi'
+
+/decl/species/tajaran/handle_additional_hair_loss(var/mob/living/carbon/human/H, var/defer_body_update = TRUE)
+	. = H && H.change_skin_color(189, 171, 143)
+
+/decl/species/tajaran/handle_post_species_pref_set(var/datum/preferences/pref)
+	pref.body_markings = pref.body_markings || list()
+	if(!pref.body_markings["Tajaran Wide Ears"])
+		pref.body_markings["Tajaran Wide Ears"] = "#888888"
+	pref.skin_colour = "#787878"
+	pref.hair_colour = "#515151"
+	pref.facial_hair_colour = "#515151"
+	pref.eye_colour = "#00aa00"

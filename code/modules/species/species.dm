@@ -39,6 +39,7 @@
 	var/tail_blend = ICON_ADD
 	var/tail_hair
 	var/tail_icon = 'icons/effects/species.dmi'
+	var/tail_states = 1
 
 	var/list/hair_styles
 	var/list/facial_hair_styles
