@@ -8,8 +8,8 @@
 
 /obj/item/rig
 	name = "hardsuit control module"
+	icon = 'icons/clothing/rigs/rig.dmi'
 	icon_state = ICON_STATE_WORLD
-	icon = 'icons/clothing/spacesuit/rig/eva.dmi'
 	desc = "A back-mounted hardsuit deployment and control mechanism."
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_HUGE
@@ -34,7 +34,6 @@
 	siemens_coefficient = 0.2
 	permeability_coefficient = 0.1
 	unacidable = 1
-	on_mob_use_spritesheets = TRUE
 
 	var/equipment_overlay_icon = 'icons/mob/onmob/onmob_rig_modules.dmi'
 	var/hides_uniform = 1 	//used to determinate if uniform should be visible whenever the suit is sealed or not
@@ -48,31 +47,26 @@
 	// Keeps track of what this rig should spawn with.
 	var/suit_type = "hardsuit"
 	var/list/initial_modules
-	var/chest_type = /obj/item/clothing/suit/space/rig
-	var/helm_type =  /obj/item/clothing/head/helmet/space/rig
-	var/boot_type =  /obj/item/clothing/shoes/magboots/rig
-	var/glove_type = /obj/item/clothing/gloves/rig
-	var/cell_type =  /obj/item/cell/high
-	var/air_type =   /obj/item/tank/oxygen
 
 	//Component/device holders.
-	var/obj/item/tank/air_supply                       // Air tank, if any.
-	var/obj/item/clothing/shoes/boots = null                  // Deployable boots, if any.
-	var/obj/item/clothing/suit/space/rig/chest                // Deployable chestpiece, if any.
-	var/obj/item/clothing/head/helmet/space/rig/helmet = null // Deployable helmet, if any.
-	var/obj/item/clothing/gloves/rig/gloves = null            // Deployable gauntlets, if any.
-	var/obj/item/cell/cell                             // Power supply, if any.
-	var/obj/item/rig_module/selected_module = null            // Primary system (used with middle-click)
-	var/obj/item/rig_module/vision/visor                      // Kinda shitty to have a var for a module, but saves time.
-	var/obj/item/rig_module/voice/speech                      // As above.
-	var/mob/living/carbon/human/wearer                        // The person currently wearing the rig.
-	var/image/mob_icon                                        // Holder for on-mob icon.
-	var/list/installed_modules = list()                       // Power consumption/use bookkeeping.
+	var/obj/item/clothing/boots  // Deployable boots, if any.
+	var/obj/item/clothing/chest  // Deployable chestpiece, if any.
+	var/obj/item/clothing/helmet // Deployable helmet, if any.
+	var/obj/item/clothing/gloves // Deployable gauntlets, if any.
+	var/obj/item/tank/air_supply = /obj/item/tank/oxygen // Starting air supply, if any.
+	var/obj/item/cell/cell =       /obj/item/cell/high   // Starting cell type, if any.
+
+	var/obj/item/rig_module/selected_module // Primary system (used with middle-click)
+	var/obj/item/rig_module/vision/visor    // Kinda shitty to have a var for a module, but saves time.
+	var/obj/item/rig_module/voice/speech    // As above.
+	var/mob/living/carbon/human/wearer      // The person currently wearing the rig.
+	var/image/mob_icon                      // Holder for on-mob icon.
+	var/list/installed_modules = list()     // Power consumption/use bookkeeping.
 
 	// Rig status vars.
-	var/open = 0                                              // Access panel status.
-	var/p_open = 0											  // Wire panel status
-	var/locked = 1                                            // Lock status.
+	var/open = 0                            // Access panel status.
+	var/p_open = 0							// Wire panel status
+	var/locked = 1                          // Lock status.
 	var/subverted = 0
 	var/interface_locked = 0
 	var/control_overridden = 0
@@ -143,21 +137,21 @@
 			module.installed(src)
 
 	// Create and initialize our various segments.
-	if(cell_type)
-		cell = new cell_type(src)
-	if(air_type)
-		air_supply = new air_type(src)
-	if(glove_type)
-		gloves = new glove_type(src)
+	if(ispath(cell))
+		cell = new cell(src)
+	if(ispath(air_supply))
+		air_supply = new air_supply(src)
+	if(ispath(gloves))
+		gloves = new gloves(src)
 		verbs |= /obj/item/rig/proc/toggle_gauntlets
-	if(helm_type)
-		helmet = new helm_type(src)
+	if(ispath(helmet))
+		helmet = new helmet(src)
 		verbs |= /obj/item/rig/proc/toggle_helmet
-	if(boot_type)
-		boots = new boot_type(src)
+	if(ispath(boots))
+		boots = new boots(src)
 		verbs |= /obj/item/rig/proc/toggle_boots
-	if(chest_type)
-		chest = new chest_type(src)
+	if(ispath(chest))
+		chest = new chest(src)
 		if(allowed)
 			chest.allowed = allowed
 		verbs |= /obj/item/rig/proc/toggle_chest
@@ -168,9 +162,6 @@
 		piece.canremove = 0
 		piece.SetName("[suit_type] [initial(piece.name)]")
 		piece.desc = "It seems to be part of a [src.name]."
-		piece.icon = icon
-		piece.use_single_icon = use_single_icon
-		piece.sprite_sheets = sprite_sheets
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
 		if(piece.siemens_coefficient > siemens_coefficient) //So that insulated gloves keep their insulation.
@@ -205,13 +196,13 @@
 /obj/item/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.back != src)
 		return 0
-	if(helm_type && !(helmet && wearer.head == helmet))
+	if(helmet && wearer.head != helmet)
 		return 0
-	if(glove_type && !(gloves && wearer.gloves == gloves))
+	if(gloves && wearer.gloves != gloves)
 		return 0
-	if(boot_type && !(boots && wearer.shoes == boots))
+	if(boots && wearer.shoes != boots)
 		return 0
-	if(chest_type && !(chest && wearer.wear_suit == chest))
+	if(chest && wearer.wear_suit != chest)
 		return 0
 	return 1
 
@@ -219,7 +210,7 @@
 	canremove = 1
 	if(istype(chest))
 		chest.check_limb_support(wearer)
-	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
+	for(var/obj/item/piece in list(helmet, boots, gloves, chest))
 		if(!piece) continue
 		piece.icon_state = "[initial(icon_state)]"
 		if(airtight)
@@ -263,14 +254,35 @@
 		if(!wearer)
 			failed_to_seal = 1
 		else
-			for(var/list/piece_data in list(list(wearer.shoes,boots,"boots",boot_type),list(wearer.gloves,gloves,"gloves",glove_type),list(wearer.head,helmet,"helmet",helm_type),list(wearer.wear_suit,chest,"chest",chest_type)))
-
+			var/list/data_to_iterate = list(
+				list(
+					wearer.shoes,
+					boots,
+					"boots"
+				),
+				list(
+					wearer.gloves,
+					gloves,
+					"gloves"
+				),
+				list(
+					wearer.head,
+					helmet,
+					"helmet"
+				),
+				list(
+					wearer.wear_suit,
+					chest,
+					"chest"
+				)
+			)
+			for(var/list/piece_data in data_to_iterate)
+			
 				var/obj/item/piece = piece_data[1]
 				var/obj/item/compare_piece = piece_data[2]
 				var/msg_type = piece_data[3]
-				var/piece_type = piece_data[4]
 
-				if(!piece || !piece_type)
+				if(!piece)
 					continue
 
 				if(!istype(wearer) || !istype(piece) || !istype(compare_piece) || !msg_type)
@@ -283,7 +295,6 @@
 					if(seal_delay && !instant && !do_after(wearer,seal_delay,src,needhand=0))
 						failed_to_seal = 1
 
-					piece.icon_state = "[msg_type][!seal_target ? "_sealed" : ""]"
 					switch(msg_type)
 						if("boots")
 							to_chat(wearer, "<font color='blue'>\The [piece] [!seal_target ? "seal around your feet" : "relax their grip on your legs"].</font>")
@@ -315,9 +326,6 @@
 	sealing = null
 
 	if(failed_to_seal)
-		for(var/obj/item/piece in list(helmet,boots,gloves,chest))
-			if(!piece) continue
-			piece.icon_state = "[initial(icon_state)][!seal_target ? "" : "_sealed"]"
 		canremove = !seal_target
 		if(airtight)
 			update_component_sealed()
@@ -547,7 +555,6 @@
 
 /obj/item/rig/on_update_icon()
 
-	//TODO: Maybe consider a cache for this (use mob_icon as blank canvas, use suit icon overlay).
 	overlays.Cut()
 	if(equipment_overlay_icon && LAZYLEN(installed_modules))
 		for(var/obj/item/rig_module/module in installed_modules)
@@ -817,7 +824,8 @@
 	if(!is_emp)
 		var/damage_resistance = 0
 		if(istype(chest, /obj/item/clothing/suit/space))
-			damage_resistance = chest.breach_threshold
+			var/obj/item/clothing/suit/space/suit = chest
+			damage_resistance = suit.breach_threshold
 		chance = 2*max(0, damage - damage_resistance)
 	else
 		//Want this to be roughly independant of the number of modules, meaning that X emp hits will disable Y% of the suit's modules on average.

@@ -500,6 +500,31 @@
 	trap = decls_repository.get_decl(trap)
 	trap.forced(mob)
 
+/client/verb/validate_rig_composition()
+
+	set name = "Validate Rig Composition"
+	set category = "Debug"
+	set src = usr
+
+	var/list/results = list()
+	for(var/rigtype in subtypesof(/obj/item/rig))
+		var/res = ""
+		var/obj/item/rig/rig = new rigtype
+		if(initial(rig.gloves) == null)
+			res = "[res] - null initial gloves"
+		if(initial(rig.chest) == null)
+			res = "[res] - null initial chest"
+		if(initial(rig.helmet) == null)
+			res = "[res] - null initial helmet"
+		if(initial(rig.boots) == null)
+			res = "[res] - null initial boots"
+		if(res)
+			results += "[rigtype] - [res]"
+	if(length(results))
+		to_chat(usr, jointext(results, "\n"))
+	else
+		to_chat(usr, "No invalid rigs.")
+
 // Writes out a list of problems found with /obj/item/clothing related to the transition to the single icon system.
 /client/proc/debug_unconverted_clothing_states()
 
@@ -507,12 +532,14 @@
 	set category = "Debug"
 	set src = usr
 
+	var/list/check_types = list(
+		/obj/item/clothing
+	)
+	for(var/checktype in check_types)
+		check_types |= typesof(checktype)
+
 	// Ignore unconverted/partially converted types:
 	var/list/ignore_types = list(
-		/obj/item/clothing/suit/space/rig,
-		/obj/item/clothing/head/helmet/space/rig,
-		/obj/item/clothing/shoes/magboots/rig,
-		/obj/item/clothing/gloves/rig
 	)
 	for(var/checktype in ignore_types)
 		ignore_types |= typesof(checktype)
@@ -534,7 +561,7 @@
 
 	var/list/results = list()
 	var/list/ignored = list()
-	for(var/clothing_type in subtypesof(/obj/item/clothing))
+	for(var/clothing_type in check_types)
 		var/obj/item/clothing/clothes = clothing_type
 		var/initial_state = initial(clothes.icon_state)
 		var/initial_item_state = initial(clothes.item_state)
