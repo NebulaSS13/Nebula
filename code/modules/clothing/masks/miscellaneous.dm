@@ -42,6 +42,7 @@
 	down_gas_transfer_coefficient = 1
 	down_body_parts_covered = null
 	pull_mask = 1
+	material = /decl/material/solid/cloth
 
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
@@ -59,6 +60,7 @@
 	icon_state = ICON_STATE_WORLD
 	flags_inv = HIDEFACE
 	body_parts_covered = 0
+	material = /decl/material/solid/plastic
 
 /obj/item/clothing/mask/pig
 	name = "pig mask"
@@ -125,6 +127,7 @@
 	flags_inv = HIDEFACE|BLOCKHAIR
 	siemens_coefficient = 0.9
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
+	material = /decl/material/solid/cloth
 
 /obj/item/clothing/mask/rubber/barros
 	name = "Amaya Barros mask"
@@ -170,6 +173,7 @@
 	icon = 'icons/clothing/mask/spirit.dmi'
 	flags_inv = HIDEFACE
 	body_parts_covered = SLOT_FACE|SLOT_EYES
+	material = /decl/material/solid/cloth
 
 // Bandanas below
 /obj/item/clothing/mask/bandana
@@ -183,6 +187,7 @@
 	body_parts_covered = SLOT_FACE
 	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/cloth
 
 /obj/item/clothing/mask/bandana/equipped(var/mob/user, var/slot)
 	if(slot == slot_head_str)

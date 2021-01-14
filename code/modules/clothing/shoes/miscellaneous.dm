@@ -10,6 +10,7 @@
 	var/list/clothing_choices = list()
 	siemens_coefficient = 0.8
 	bodytype_restricted = null
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/clothing/shoes/jackboots/swat
 	name = "\improper SWAT boots"

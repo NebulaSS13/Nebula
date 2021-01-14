@@ -461,3 +461,227 @@
 
 /datum/fabricator_recipe/textiles/securityjensencoat
 	path = /obj/item/clothing/suit/armor/hos/jensen
+
+/datum/fabricator_recipe/textiles/luchalibrehonor
+	path = /obj/item/clothing/mask/luchador/rudos
+
+/datum/fabricator_recipe/textiles/maskbalatact
+	path = /obj/item/clothing/mask/balaclava/tactical
+
+/datum/fabricator_recipe/textiles/balabalagetdolla
+	path = /obj/item/clothing/mask/balaclava
+
+/datum/fabricator_recipe/textiles/luchalibre
+	path = /obj/item/clothing/mask/luchador/tecnicos
+
+/datum/fabricator_recipe/textiles/genericluchadorian
+	path = /obj/item/clothing/mask/luchador
+
+/datum/fabricator_recipe/textiles/breath_medical
+	path = /obj/item/clothing/mask/breath/medical
+
+/datum/fabricator_recipe/textiles/emergencymask
+	path = /obj/item/clothing/mask/breath/emergency
+
+/datum/fabricator_recipe/textiles/industryworker
+	path = /obj/item/clothing/mask/breath/scba
+
+//
+
+/datum/fabricator_recipe/textiles/gasgas
+	path = /obj/item/clothing/mask/gas
+
+/datum/fabricator_recipe/textiles/gas-half
+	path = /obj/item/clothing/mask/gas/half
+
+/datum/fabricator_recipe/textiles/radicaldude
+	path = /obj/item/clothing/mask/gas/radical
+
+/datum/fabricator_recipe/textiles/cheapgass
+	path = /obj/item/clothing/mask/gas/budget
+
+/datum/fabricator_recipe/textiles/swatswat
+	path = /obj/item/clothing/mask/gas/swat
+
+/datum/fabricator_recipe/textiles/radicaldude
+	path = /obj/item/clothing/mask/gas/radical
+
+/datum/fabricator_recipe/textiles/cheapgass
+	path = /obj/item/clothing/mask/gas/syndicate
+
+/datum/fabricator_recipe/textiles/swatteammask
+	path = /obj/item/clothing/mask/gas/swat
+
+/datum/fabricator_recipe/textiles/syndicategasmask
+	path = /obj/item/clothing/mask/gas/syndicate
+
+/datum/fabricator_recipe/textiles/death_commando
+	path = /obj/item/clothing/mask/gas/death_commando
+
+/datum/fabricator_recipe/textiles/plaguedoctorsmask
+	path = /obj/item/clothing/mask/gas/plaguedoctor
+
+/datum/fabricator_recipe/textiles/clownhat
+	path = /obj/item/clothing/mask/gas/clown_hat
+
+/datum/fabricator_recipe/textiles/whyclown
+	path = /obj/item/clothing/mask/gas/sexyclown
+
+/datum/fabricator_recipe/textiles/mimehat
+	path = /obj/item/clothing/mask/gas/mime
+
+/datum/fabricator_recipe/textiles/monke
+	path = /obj/item/clothing/mask/gas/monkeymask
+
+/datum/fabricator_recipe/textiles/jesusmimeno
+	path = /obj/item/clothing/mask/gas/sexymime
+
+/datum/fabricator_recipe/textiles/owlmask
+	path = /obj/item/clothing/mask/gas/owl_mask
+
+/datum/fabricator_recipe/textiles/aquabreather
+	path = /obj/item/clothing/mask/gas/aquabreather
+
+/datum/fabricator_recipe/textiles/rubbermanmask
+	path = /obj/item/clothing/mask/rubber
+
+/datum/fabricator_recipe/textiles/humanskinfeelsnice
+	path = /obj/item/clothing/mask/rubber/species
+
+/datum/fabricator_recipe/textiles/catnyaa
+	path = /obj/item/clothing/mask/rubber/species/cat
+
+/datum/fabricator_recipe/textiles/spiritmask
+	path = /obj/item/clothing/mask/spirit
+
+// What a thrill Bandanas
+
+/datum/fabricator_recipe/textiles/bandanablack
+	path = /obj/item/clothing/mask/bandana
+
+/datum/fabricator_recipe/textiles/bandanabloods
+	path = /obj/item/clothing/mask/bandana/red
+
+/datum/fabricator_recipe/textiles/grovestreetbandana
+	path = /obj/item/clothing/mask/bandana/green
+
+/datum/fabricator_recipe/textiles/goldsbanadas
+	path = /obj/item/clothing/mask/bandana/gold
+
+/datum/fabricator_recipe/textiles/orangebandana
+	path = /obj/item/clothing/mask/bandana/orange
+
+/datum/fabricator_recipe/textiles/purplebanada
+	path = /obj/item/clothing/mask/bandana/purple
+
+/datum/fabricator_recipe/textiles/botanybanada
+	path = /obj/item/clothing/mask/bandana/botany
+
+/datum/fabricator_recipe/textiles/camobandana
+	path = /obj/item/clothing/mask/bandana/camo
+
+/datum/fabricator_recipe/textiles/skullsbandana
+	path = /obj/item/clothing/mask/bandana/skull
+
+/datum/fabricator_recipe/textiles/surgicalmask
+	path = /obj/item/clothing/mask/surgical
+
+/datum/fabricator_recipe/textiles/snorkel
+	path = /obj/item/clothing/mask/snorkel
+
+/datum/fabricator_recipe/textiles/swatboots
+	path = /obj/item/clothing/shoes/jackboots/swat
+
+/datum/fabricator_recipe/textiles/syndigaloshes
+	path = /obj/item/clothing/shoes/syndigaloshes
+
+/datum/fabricator_recipe/textiles/jungleboots
+	path = /obj/item/clothing/shoes/jackboots/jungleboots
+
+/datum/fabricator_recipe/textiles/jackboots
+	path = /obj/item/clothing/shoes/jackboots
+
+/datum/fabricator_recipe/textiles/workboots
+	path = /obj/item/clothing/shoes/workboots
+	
+/datum/fabricator_recipe/textiles/desertboots
+	path = /obj/item/clothing/shoes/jackboots/desertboots
+
+/datum/fabricator_recipe/textiles/dutyboots
+	path = /obj/item/clothing/shoes/jackboots/duty
+	
+/datum/fabricator_recipe/textiles/desertboots
+	path = /obj/item/clothing/shoes/jackboots/desertboots
+
+/datum/fabricator_recipe/textiles/tacticalboots
+	path = /obj/item/clothing/shoes/jackboots/tactical
+	
+/datum/fabricator_recipe/textiles/dressshoes
+	path = /obj/item/clothing/shoes/dress
+
+//
+/datum/fabricator_recipe/textiles/sandal
+	path = /obj/item/clothing/shoes/sandal
+
+/datum/fabricator_recipe/textiles/marisashoes
+	path = /obj/item/clothing/shoes/sandal/marisa
+	
+/datum/fabricator_recipe/textiles/clownshoes
+	path = /obj/item/clothing/shoes/clown_shoes
+
+/datum/fabricator_recipe/textiles/slippers
+	path = /obj/item/clothing/shoes/slippers
+	
+/datum/fabricator_recipe/textiles/swimmingfins
+	path = /obj/item/clothing/shoes/swimmingfins
+
+/datum/fabricator_recipe/textiles/athleticshoes
+	path = /obj/item/clothing/shoes/athletic
+
+/datum/fabricator_recipe/textiles/sneakies
+	path = /obj/item/clothing/shoes/dress/sneakies
+	
+/datum/fabricator_recipe/textiles/heels
+	path = /obj/item/clothing/shoes/heels
+
+/datum/fabricator_recipe/textiles/heelsblack
+	path = /obj/item/clothing/shoes/heels/black
+
+/datum/fabricator_recipe/textiles/rainbowheels
+	path = /obj/item/clothing/shoes/rainbow
+	
+/datum/fabricator_recipe/textiles/heelsred
+	path = obj/item/clothing/shoes/heels/red
+
+/datum/fabricator_recipe/textiles/flatshoes
+	path = /obj/item/clothing/shoes/flats
+
+/datum/fabricator_recipe/textiles/flatshoesblack
+	path = /obj/item/clothing/shoes/flats/black
+//
+/datum/fabricator_recipe/textiles/helmet
+	path = /obj/item/clothing/head/helmet
+	
+/datum/fabricator_recipe/textiles/tacthelm
+	path = /obj/item/clothing/head/helmet/tactical
+
+/datum/fabricator_recipe/textiles/merchelmet
+	path = /obj/item/clothing/head/helmet/merc
+
+/datum/fabricator_recipe/textiles/riothelmet
+	path = obj/item/clothing/head/helmet/riot
+
+/datum/fabricator_recipe/textiles/thunderdome
+	path = /obj/item/clothing/head/helmet/thunderdome
+	
+/datum/fabricator_recipe/textiles/ablativehelmet
+	path = /obj/item/clothing/head/helmet/ablative
+
+/datum/fabricator_recipe/textiles/ballistichelmet
+	path = /obj/item/clothing/head/helmet/ballistic
+
+/datum/fabricator_recipe/textiles/swathelm
+	path = /obj/item/clothing/head/helmet/swat
+
+/datum/fabricator_recipe/textiles/gladiator
+	path = /obj/item/clothing/head/helmet/gladiator

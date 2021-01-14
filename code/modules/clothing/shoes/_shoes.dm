@@ -19,6 +19,8 @@
 	var/hidden_item_max_w_class = ITEM_SIZE_SMALL
 	var/obj/item/hidden_item = null
 	var/shine = -1 // if material should apply shine overlay. Set to -1 for it to not do that
+	material = /decl/material/solid/leather
+	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/shoes/Destroy()
 	. = ..()
