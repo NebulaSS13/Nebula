@@ -19,6 +19,7 @@
 	#include "../../mods/species/tritonian/_tritonian.dme"
 	#include "../../mods/species/neocorvids/_neocorvids.dme"
 	#include "../../mods/species/lizard/_lizard.dme"
+	#include "../../mods/species/vox/_vox.dme"
 
 	#define USING_MAP_DATUM /datum/map/modpack_testing
 
