@@ -2,7 +2,7 @@
 	iterations = 5
 	descriptor = "moon caves"
 	wall_type =  /turf/simulated/wall/natural
-	floor_type = /turf/simulated/floor/asteroid
+	floor_type = /turf/exterior/barren
 	target_turf_type = /turf/unsimulated/mask
 
 	var/mineral_turf = /turf/simulated/wall/natural/random
