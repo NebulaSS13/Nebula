@@ -49,5 +49,5 @@
 /obj/item/clothing/under/lawyer/infil/fem
 	name = "white dress"
 	desc = "It's a simple, sleeveless white dress with black trim."
-	icon_state = "inffem"
+	icon = 'icons/clothing/under/dresses/dress_white.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET

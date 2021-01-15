@@ -695,7 +695,7 @@
 	name = "Clothing Storage"
 	},
 /obj/effect/floor_decal/carpet,
-/obj/item/clothing/under/lawyer/black,
+/obj/item/clothing/under/lawyer,
 /obj/item/clothing/under/lawyer/bluesuit,
 /obj/item/clothing/under/mailman,
 /obj/item/clothing/accessory/storage,

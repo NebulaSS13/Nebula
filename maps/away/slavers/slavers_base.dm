@@ -135,7 +135,7 @@
 /mob/living/simple_animal/hostile/abolition_extremist
 	name = "abolition extremist"
 	desc = "Vigiliant fighter against slavery."
-	icon = 'maps/away/slavers/slavers_base_sprites.dmi'
+	icon = 'maps/away/slavers/icons/abolitionist.dmi'
 	icon_state = "extremist"
 	icon_living = "extremist"
 	icon_dead = "extremist_dead"
@@ -179,9 +179,7 @@
 /obj/item/clothing/under/abol_uniform
 	name = "abolitionist combat suit"
 	desc = "Lightly armored suit worn by abolition extremists during raids. It has green patches on the right sleeve and the chest. There is big green \"A\" on the back."
-	icon = 'maps/away/slavers/slavers_base_sprites.dmi'
-	icon_state = "abol_suit"
-	item_icons = list(slot_w_uniform_str = 'maps/away/slavers/slavers_base_sprites.dmi')
+	icon = 'maps/away/slavers/icons/uniform.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES, 

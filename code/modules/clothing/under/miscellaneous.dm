@@ -1,4 +1,4 @@
-/obj/item/clothing/under/pj/red
+/obj/item/clothing/under/pj
 	name = "red pj's"
 	desc = "Sleepwear."
 	icon = 'icons/clothing/under/pjs_red.dmi'

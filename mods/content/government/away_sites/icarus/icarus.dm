@@ -167,12 +167,10 @@
 	icon = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi'
 	icon_state = "solgovseal"
 
-/obj/item/clothing/under/icarus/ec_uniform
+/obj/item/clothing/under/ec_uniform
 	name = "expeditionary uniform"
 	desc = "An older model of the utility uniform of the SCG Expeditionary Corps. It has a patch on the left sleeve signifying the wearer served on the SEV Icarus."
-	icon_state = "blackutility_crew"
-	icon = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi'
-	item_icons = list(slot_w_uniform_str = 'mods/content/government/away_sites/icarus/icarus_sprites.dmi')
+	icon = 'icons/clothing/under/uniform_ec.dmi'
 
 /obj/structure/sign/double/icarus/solgovflag
 	name = "Sol Central Government Flag"

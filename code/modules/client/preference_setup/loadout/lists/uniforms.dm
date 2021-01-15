@@ -43,7 +43,7 @@
 		/obj/item/clothing/under/lawyer/purpsuit,
 		/obj/item/clothing/under/suit_jacket/red,
 		/obj/item/clothing/under/lawyer/red,
-		/obj/item/clothing/under/lawyer/black,
+		/obj/item/clothing/under/lawyer,
 		/obj/item/clothing/under/suit_jacket/tan,
 		/obj/item/clothing/under/scratch,
 		/obj/item/clothing/under/lawyer/bluesuit,

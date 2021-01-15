@@ -34,7 +34,7 @@
 /obj/item/clothing/under/grimhoodie
 	name = "black hoodie"
 	desc = "A generic black hoodie. There's a pattern akin to splattered blood along the bottom."
-	icon_state = "grimhoodie"
+	icon = 'icons/clothing/under/grim_hoodie.dmi'
 	bodytype_restricted = list(BODYTYPE_HUMANOID)
 
 //These are the ones that it gets when they toggle it off

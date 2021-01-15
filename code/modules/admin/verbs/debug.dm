@@ -509,10 +509,7 @@
 
 	// Ignore unconverted/partially converted types:
 	var/list/ignore_types = list(
-		/obj/item/clothing/under,    
-		/obj/item/clothing/glasses,  
 		/obj/item/clothing/accessory,
-		/obj/item/clothing/ring,
 		/obj/item/clothing/suit/space/rig,
 		/obj/item/clothing/head/helmet/space/rig,
 		/obj/item/clothing/shoes/magboots/rig,

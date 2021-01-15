@@ -1,5 +1,6 @@
 /obj/item/clothing/glasses
 	name = "glasses"
+	icon = 'icons/clothing/eyes/glasses_prescription.dmi'
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)

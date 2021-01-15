@@ -79,16 +79,13 @@
 	)
 
 /obj/item/clothing/under/lawyer
+	name = "black lawyer suit"
 	desc = "Slick threads."
-	name = "Lawyer suit"
+	icon = 'icons/clothing/under/uniform_lawyer_black.dmi'
 
 /obj/item/clothing/under/lawyer/female
 	name = "black lawyer suit"
 	icon = 'icons/clothing/under/uniform_lawyer_black_female.dmi'
-
-/obj/item/clothing/under/lawyer/black
-	name = "black Lawyer suit"
-	icon = 'icons/clothing/under/uniform_lawyer_black.dmi'
 
 /obj/item/clothing/under/lawyer/red
 	name = "red Lawyer suit"
@@ -99,13 +96,13 @@
 	icon = 'icons/clothing/under/uniform_lawyer_blue.dmi'
 
 /obj/item/clothing/under/lawyer/bluesuit
-	name = "Blue Suit"
+	name = "blue suit"
 	desc = "A classy suit."
 	icon = 'icons/clothing/under/uniform_lawyer_black.dmi'
 	starting_accessories = list(/obj/item/clothing/accessory/red)
 
 /obj/item/clothing/under/lawyer/purpsuit
-	name = "Purple Suit"
+	name = "purple suit"
 	icon = 'icons/clothing/under/uniform_lawyer_purple.dmi'
 
 /obj/item/clothing/under/lawyer/oldman

@@ -122,7 +122,7 @@
 								/obj/item/clothing/under/pj               = TRADER_BLACKLIST,
 								/obj/item/clothing/under             = TRADER_BLACKLIST,
 								/obj/item/clothing/pants/shorts           = TRADER_BLACKLIST,
-								/obj/item/clothing/under/stripper         = TRADER_BLACKLIST_ALL,
+								/obj/item/clothing/under/mankini          = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/under/syndicate        = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/under/tactical         = TRADER_BLACKLIST,
 								/obj/item/clothing/under/waiter/monke     = TRADER_BLACKLIST,
