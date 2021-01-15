@@ -45,4 +45,4 @@ var/exterior_broken_states = icon_states('icons/turf/exterior/broken.dmi')
 
 /turf/exterior/concrete/reinforced/road
 	name = "asphalt"
-	color = COLOR_GRAY20
+	color = COLOR_GRAY40
