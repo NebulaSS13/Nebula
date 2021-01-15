@@ -14,6 +14,7 @@
 	var/large_flora_prob = 30
 	var/flora_prob = 10
 	var/fauna_prob = 2
+	var/grass_prob
 	var/megafauna_spawn_prob = 0.5 //chance that a given fauna mob will instead be a megafauna
 
 	var/list/plantcolors = list("RANDOM")
@@ -23,6 +24,7 @@
 	target_turf_type = world.turf
 	water_level = rand(water_level_min,water_level_max)
 	//automagically adjust probs for bigger maps to help with lag
+	if(isnull(grass_prob)) grass_prob = flora_prob * 2
 	var/size_mod = intended_x / tlx * intended_y / tly
 	flora_prob *= size_mod
 	large_flora_prob *= size_mod
@@ -53,12 +55,12 @@
 			if(prob(fauna_prob))
 				spawn_fauna(T)
 		if(5 to 6)
-			if(flora_prob > 5 && prob(flora_prob * 5))
+			if(grass_prob > 10 && prob(grass_prob))
 				spawn_grass(T)
 			if(prob(flora_prob/3))
 				spawn_flora(T)
 		if(7 to 9)
-			if(flora_prob > 1 && prob(flora_prob * 10))
+			if(grass_prob > 1 && prob(grass_prob * 3))
 				spawn_grass(T)
 			if(prob(flora_prob))
 				spawn_flora(T)

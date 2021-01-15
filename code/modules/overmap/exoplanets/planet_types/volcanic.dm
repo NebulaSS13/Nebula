@@ -54,6 +54,7 @@
 
 	fauna_prob = 1
 	flora_prob = 3
+	grass_prob = 0
 	large_flora_prob = 0
 
 //Squashing most of 1 tile lava puddles

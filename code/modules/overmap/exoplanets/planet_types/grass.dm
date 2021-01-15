@@ -65,4 +65,5 @@
 	water_type = /turf/exterior/water
 
 	flora_prob = 10
+	grass_prob = 50
 	large_flora_prob = 30
