@@ -5,7 +5,7 @@
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
 	var/tint = TINT_NONE							  // Sets the item's level of visual impairment tint.
-	var/list/bodytype_restricted = list(BODYTYPE_HUMANOID)
+	var/list/bodytype_restricted
 	var/list/accessories = list()
 	var/list/valid_accessory_slots
 	var/list/restricted_accessory_slots
