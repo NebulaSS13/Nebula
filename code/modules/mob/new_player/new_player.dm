@@ -304,6 +304,10 @@
 		return
 
 	var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(client)
+	if(!spawnpoint)
+		to_chat(src, alert("That spawnpoint is unavailable. Please try another."))
+		return 0
+
 	var/turf/spawn_turf = pick(spawnpoint.turfs)
 	if(job.latejoin_at_spawnpoints)
 		var/obj/S = job.get_roundstart_spawnpoint()
