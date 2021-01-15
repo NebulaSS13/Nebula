@@ -114,20 +114,20 @@
 				)
 
 	possible_trading_items = list(/obj/item/clothing/under                = TRADER_SUBTYPES_ONLY,
-								/obj/item/clothing/under/acj              = TRADER_BLACKLIST,
 								/obj/item/clothing/under/chameleon        = TRADER_BLACKLIST,
 								/obj/item/clothing/under/color            = TRADER_BLACKLIST,
 								/obj/item/clothing/under/dress            = TRADER_BLACKLIST,
 								/obj/item/clothing/under/gimmick          = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/under/lawyer           = TRADER_BLACKLIST,
 								/obj/item/clothing/under/pj               = TRADER_BLACKLIST,
-								/obj/item/clothing/under/rank             = TRADER_BLACKLIST,
-								/obj/item/clothing/under/shorts           = TRADER_BLACKLIST,
+								/obj/item/clothing/under             = TRADER_BLACKLIST,
+								/obj/item/clothing/pants/shorts           = TRADER_BLACKLIST,
 								/obj/item/clothing/under/stripper         = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/under/syndicate        = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/under/tactical         = TRADER_BLACKLIST,
+								/obj/item/clothing/under/waiter/monke     = TRADER_BLACKLIST,
 								/obj/item/clothing/under/wedding          = TRADER_BLACKLIST,
-								/obj/item/clothing/under/punpun           = TRADER_BLACKLIST)
+								/obj/item/clothing/pants/casual/mustangjeans/monke = TRADER_BLACKLIST)
 
 /datum/trader/ship/clothingshop/shoes
 	possible_origins = list("Foot Safe", "Paysmall", "Popular Footwear", "Grimbly's Shoes", "Right Steps")

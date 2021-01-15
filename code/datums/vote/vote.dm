@@ -27,6 +27,10 @@
 	var/percent_votes = TRUE       // Total votes in current choose. If FALSE - shows total num of voted people for this choose.
 	var/show_votes_count = TRUE    // Show total votes for something. Staff with R_INVESTIGATE can bypass this.
 
+	var/list/vote_start_sounds = list(
+		'sound/ambience/alarm4.ogg'
+	)
+
 //Expected to be run immediately after creation; a false return means that the vote could not be run and the datum will be deleted.
 /datum/vote/proc/setup(mob/creator, automatic)
 	if(!can_run(creator, automatic))
@@ -59,7 +63,7 @@
 
 	log_vote(text)
 	to_world("<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=\ref[SSvote];vote_panel=1'>here</a> to place your votes.\nYou have [time_set/10] seconds to vote.</font>")
-	to_world(sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = GLOB.vote_sound_channel))
+	to_world(sound(pick(vote_start_sounds), repeat = 0, wait = 0, volume = 50, channel = GLOB.vote_sound_channel))
 
 /datum/vote/proc/get_start_text()
 	return "[capitalize(name)] vote started by [initiator]."

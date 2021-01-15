@@ -21,7 +21,7 @@
 	.[/datum/gear_tweak/path] |= list(
 		"green glasses" =    /obj/item/clothing/glasses/prescription/gglasses,
 		"hipster glasses" =  /obj/item/clothing/glasses/prescription/hipster,
-		"monocle" =          /obj/item/clothing/glasses/monocle,
+		"monocle" =          /obj/item/clothing/glasses/eyepatch/monocle,
 		"scanning goggles" = /obj/item/clothing/glasses/prescription/scanners
 	)
 

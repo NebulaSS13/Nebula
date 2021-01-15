@@ -111,7 +111,7 @@
 	name = "Gear - Chief medical officer equipment"
 	contains = list(/obj/item/storage/belt/medical,
 					/obj/item/radio/headset/heads/cmo,
-					/obj/item/clothing/under/rank/chief_medical_officer,
+					/obj/item/clothing/under/chief_medical_officer,
 					/obj/item/chems/hypospray/vial,
 					/obj/item/clothing/accessory/stethoscope,
 					/obj/item/clothing/glasses/hud/health,
@@ -132,7 +132,7 @@
 	name = "Gear - Medical Doctor equipment"
 	contains = list(/obj/item/storage/belt/medical,
 					/obj/item/radio/headset/headset_med,
-					/obj/item/clothing/under/rank/medical,
+					/obj/item/clothing/under/medical,
 					/obj/item/clothing/accessory/stethoscope,
 					/obj/item/clothing/glasses/hud/health,
 					/obj/item/clothing/suit/storage/toggle/labcoat,
@@ -153,7 +153,7 @@
 	contains = list(/obj/item/storage/box/beakers,
 					/obj/item/radio/headset/headset_med,
 					/obj/item/storage/box/autoinjectors,
-					/obj/item/clothing/under/rank/chemist,
+					/obj/item/clothing/under/chemist,
 					/obj/item/clothing/glasses/science,
 					/obj/item/clothing/suit/storage/toggle/labcoat/chemist,
 					/obj/item/clothing/mask/surgical,
@@ -172,14 +172,14 @@
 	name = "Gear - Paramedic equipment"
 	contains = list(/obj/item/storage/belt/medical/emt,
 					/obj/item/radio/headset/headset_med,
-					/obj/item/clothing/under/rank/medical/scrubs/black,
+					/obj/item/clothing/under/medical/scrubs/black,
 					/obj/item/clothing/accessory/armband/medgreen,
 					/obj/item/clothing/glasses/hud/health,
 					/obj/item/clothing/suit/storage/toggle/labcoat,
-					/obj/item/clothing/under/rank/medical/paramedic,
+					/obj/item/clothing/under/medical,
 					/obj/item/clothing/suit/storage/toggle/fr_jacket,
 					/obj/item/clothing/mask/gas,
-					/obj/item/clothing/under/rank/medical/paramedic,
+					/obj/item/clothing/under/medical/paramedic,
 					/obj/item/clothing/accessory/stethoscope,
 					/obj/item/storage/firstaid/adv,
 					/obj/item/clothing/shoes/jackboots,
@@ -195,9 +195,9 @@
 
 /decl/hierarchy/supply_pack/medical/psychiatristgear
 	name = "Gear - Psychiatrist equipment"
-	contains = list(/obj/item/clothing/under/rank/psych,
+	contains = list(/obj/item/clothing/under/psych,
 					/obj/item/radio/headset/headset_med,
-					/obj/item/clothing/under/rank/psych/turtleneck,
+					/obj/item/clothing/under/psych/turtleneck,
 					/obj/item/clothing/shoes/dress,
 					/obj/item/clothing/suit/storage/toggle/labcoat,
 					/obj/item/clothing/shoes/color/white,
@@ -212,10 +212,10 @@
 /decl/hierarchy/supply_pack/medical/medicalscrubs
 	name = "Gear - Medical scrubs"
 	contains = list(/obj/item/clothing/shoes/color/white = 4,
-					/obj/item/clothing/under/rank/medical/scrubs/blue,
-					/obj/item/clothing/under/rank/medical/scrubs/green,
-					/obj/item/clothing/under/rank/medical/scrubs/purple,
-					/obj/item/clothing/under/rank/medical/scrubs/black,
+					/obj/item/clothing/under/medical/scrubs/blue,
+					/obj/item/clothing/under/medical/scrubs/green,
+					/obj/item/clothing/under/medical/scrubs/purple,
+					/obj/item/clothing/under/medical/scrubs/black,
 					/obj/item/clothing/head/surgery/black,
 					/obj/item/clothing/head/surgery/purple,
 					/obj/item/clothing/head/surgery/blue,
@@ -245,14 +245,14 @@
 /decl/hierarchy/supply_pack/medical/medicaluniforms
 	name = "Gear - Medical uniforms"
 	contains = list(/obj/item/clothing/shoes/color/white = 3,
-					/obj/item/clothing/under/rank/chief_medical_officer,
-					/obj/item/clothing/under/rank/geneticist,
-					/obj/item/clothing/under/rank/virologist,
-					/obj/item/clothing/under/rank/nursesuit,
-					/obj/item/clothing/under/rank/nurse,
-					/obj/item/clothing/under/rank/orderly,
-					/obj/item/clothing/under/rank/medical = 3,
-					/obj/item/clothing/under/rank/medical/paramedic = 3,
+					/obj/item/clothing/under/chief_medical_officer,
+					/obj/item/clothing/under/geneticist,
+					/obj/item/clothing/under/virologist,
+					/obj/item/clothing/under/nursesuit,
+					/obj/item/clothing/under/nurse,
+					/obj/item/clothing/under/orderly,
+					/obj/item/clothing/under/medical = 3,
+					/obj/item/clothing/under/medical/paramedic = 3,
 					/obj/item/clothing/suit/storage/toggle/labcoat = 3,
 					/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
 					/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
@@ -308,7 +308,7 @@
 
 /decl/hierarchy/supply_pack/medical/sterile
 	name = "Gear - Sterile clothes"
-	contains = list(/obj/item/clothing/under/rank/medical/scrubs/green = 2,
+	contains = list(/obj/item/clothing/under/medical/scrubs/green = 2,
 					/obj/item/clothing/head/surgery/green = 2,
 					/obj/item/storage/box/masks,
 					/obj/item/storage/box/gloves,

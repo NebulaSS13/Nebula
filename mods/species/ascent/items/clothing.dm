@@ -21,15 +21,11 @@
 	name = "mantid facemask"
 	desc = "An alien facemask with chunky gas filters and a breathing valve."
 	filter_water = TRUE
-	icon_state = "ascent_mask"
-	item_state = "ascent_mask"
-	icon = 'mods/species/ascent/icons/mask.dmi'
+	icon = 'mods/species/ascent/icons/clothing/mask.dmi'
 	sprite_sheets = list(
-		BODYTYPE_SNAKE =        'mods/species/ascent/icons/species/serpentid/onmob_mask_serpentid.dmi',
-		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/species/mantid/onmob_mask_gyne.dmi',
-		BODYTYPE_MANTID_SMALL = 'mods/species/ascent/icons/species/mantid/onmob_mask_alate.dmi'
+		BODYTYPE_SNAKE =        'mods/species/ascent/icons/clothing/mask_serpentid.dmi',
+		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/mask_gyne.dmi'
 	)
-
 	bodytype_restricted = list(BODYTYPE_MANTID_SMALL, BODYTYPE_MANTID_LARGE)
 	filtered_gases = list(
 		/decl/material/gas/nitrous_oxide,
@@ -65,22 +61,22 @@
 /obj/item/clothing/under/ascent
 	name = "mantid undersuit"
 	desc = "A ribbed, spongy undersuit of some sort. It has a big sleeve for a tail, so it probably isn't for humans."
-	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL, BODYTYPE_SNAKE)
-	icon_state = "ascent"
-	worn_state = "ascent"
+	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL)
+	icon = 'mods/species/ascent/icons/clothing/under.dmi'
 	color = COLOR_DARK_GUNMETAL
+	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/under_gyne.dmi')
 
 /obj/item/clothing/suit/storage/ascent
 	name = "mantid gear harness"
 	desc = "A complex tangle of articulated cables and straps."
 	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL, BODYTYPE_SNAKE)
 	icon_state = ICON_STATE_WORLD
-	icon = 'mods/species/ascent/icons/harness/alate.dmi'
+	icon = 'mods/species/ascent/icons/clothing/under_harness.dmi'
 	on_mob_use_spritesheets = TRUE
 	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/harness/gyne.dmi',
-		BODYTYPE_SNAKE =        'mods/species/ascent/icons/harness/serpentid.dmi'
-		)
+		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/under_harness_gyne.dmi',
+		BODYTYPE_SNAKE =        'mods/species/ascent/icons/clothing/under_harness_serpentid.dmi'
+	)
 	body_parts_covered = 0
 	slot_flags = SLOT_OVER_BODY | SLOT_LOWER_BODY
 	allowed = list(

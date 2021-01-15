@@ -67,11 +67,6 @@
 		cut.launch(get_edge_target_turf(get_turf(user.loc), user.dir), user.zone_sel.selecting)
 		user.last_special = world.time + 10 SECONDS
 
-/obj/item/clothing/suit/fated
-	name = "mantle"
-	desc = "A heavy, gold-chained mantle."
-	icon_state = "fated"
-
 /obj/item/projectile/sanctionedaction
 	name = "rending slash"
 	desc = "O shining blade, divider of infinities."

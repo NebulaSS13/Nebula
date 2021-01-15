@@ -387,11 +387,13 @@ var/global/list/damage_icon_parts = list()
 		var/obj/item/underwear/UW = entry
 		if (!UW || !UW.icon) // Avoid runtimes for nude underwear types
 			continue
-
-		var/image/I = image(icon = UW.icon, icon_state = UW.icon_state)
-		I.appearance_flags = RESET_COLOR
-		I.color = UW.color
-
+		var/image/I
+		if(UW.slot_offset_str && LAZYACCESS(species.equip_adjust, UW.slot_offset_str))
+			I = species.get_offset_overlay_image(FALSE, UW.icon, UW.icon_state, UW.color, UW.slot_offset_str)
+		else
+			I = image(icon = UW.icon, icon_state = UW.icon_state)
+			I.color = UW.color
+		I.appearance_flags |= RESET_COLOR
 		overlays_standing[HO_UNDERWEAR_LAYER] += I
 
 	if(update_icons)
@@ -732,20 +734,20 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/animate_tail_start(var/update_icons=1)
-	set_tail_state("[species.get_tail(src)]_slow[rand(0,9)]")
-
-	if(update_icons)
-		queue_icon_update()
+	if(species.tail_states)
+		set_tail_state("[species.get_tail(src)]_slow[rand(1, species.tail_states)]")
+		if(update_icons)
+			queue_icon_update()
 
 /mob/living/carbon/human/proc/animate_tail_fast(var/update_icons=1)
-	set_tail_state("[species.get_tail(src)]_loop[rand(0,9)]")
-
-	if(update_icons)
-		queue_icon_update()
+	if(species.tail_states)
+		set_tail_state("[species.get_tail(src)]_loop[rand(1, species.tail_states)]")
+		if(update_icons)
+			queue_icon_update()
 
 /mob/living/carbon/human/proc/animate_tail_reset(var/update_icons=1)
-	if(stat != DEAD)
-		set_tail_state("[species.get_tail(src)]_idle[rand(0,9)]")
+	if(stat != DEAD && species.tail_states > 0)
+		set_tail_state("[species.get_tail(src)]_idle[rand(1,species.tail_states)]")
 	else
 		set_tail_state("[species.get_tail(src)]_static")
 

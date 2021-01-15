@@ -156,12 +156,7 @@
 /obj/item/tank/jetpack/ascent
 	name = "catalytic maneuvering pack"
 	desc = "An integrated Ascent gas processing plant and maneuvering pack that continuously synthesises 'breathable' atmosphere and propellant."
-	icon = 'mods/species/ascent/icons/jetpack.dmi'
-	sprite_sheets = list(
-		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/species/mantid/onmob_back_gyne.dmi',
-		BODYTYPE_MANTID_SMALL = 'mods/species/ascent/icons/species/mantid/onmob_back_alate.dmi',
-		BODYTYPE_SNAKE =        'mods/species/ascent/icons/species/serpentid/onmob_back_serpentid.dmi'
-	)
+	icon = 'mods/species/ascent/icons/clothing/jetpack.dmi'
 	var/refill_gas_type = /decl/material/gas/methyl_bromide
 	var/gas_regen_amount = 0.03
 	var/gas_regen_cap = 30

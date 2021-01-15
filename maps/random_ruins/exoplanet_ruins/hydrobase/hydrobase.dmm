@@ -2856,7 +2856,7 @@
 /area/map_template/hydrobase/station/shower)
 "gy" = (
 /obj/item/clothing/accessory/toggleable/hawaii/random,
-/obj/item/clothing/under/casual_pants/greyjeans,
+/obj/item/clothing/pants/casual/greyjeans,
 /obj/item/clothing/head/bowler,
 /obj/item/clothing/shoes/craftable,
 /obj/structure/closet,

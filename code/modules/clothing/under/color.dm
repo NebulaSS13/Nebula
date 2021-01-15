@@ -3,38 +3,24 @@
 /obj/item/clothing/under/psyche
 	name = "psychedelic jumpsuit"
 	desc = "Groovy!"
-	icon_state = "psyche"
-	item_state = "psyche"
-	worn_state = "psyche"
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_psychadelic.dmi'
 
 /obj/item/clothing/under/color/orange
 	name = "orange jumpsuit"
 	desc = "It's standardised prisoner-wear. Its suit sensor controls are permanently set to the \"Fully On\" position."
-	icon_state = "orange"
-	item_state = "o_suit"
-	worn_state = "orange"
-	gender_icons = 1
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_prisoner.dmi'
 	has_sensor = 2
 	sensor_mode = 3
 
 /obj/item/clothing/under/color/blackjumpshorts
 	name = "black jumpsuit shorts"
 	desc = "The latest in space fashion, in a ladies' cut with shorts."
-	icon_state = "black"
-	item_state = "bl_suit"
-	worn_state = "blackshortsf"
-
-// coloured jumpsuits, male pattern
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_shorts.dmi'
 
 /obj/item/clothing/under/color
 	name = "jumpsuit"
 	desc = "The latest in space fashion."
-	icon_state = "jumpsuit"
-	item_state = "jumpsuit"
-	worn_state = "jumpsuit"
-	gender_icons = 1
-
-// legacy colours - these are used somewhere in the game, but aren't available in the loadout
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit.dmi'
 
 /obj/item/clothing/under/color/white
 	name = "white jumpsuit"

@@ -262,7 +262,7 @@
 
 	var/orig_amount = src.amount
 	if (transfer && src.use(transfer))
-		var/obj/item/stack/newstack = new src.type(loc, transfer)
+		var/obj/item/stack/newstack = new src.type(loc, transfer, material?.type)
 		newstack.copy_from(src)
 		if (prob(transfer/orig_amount * 100))
 			transfer_fingerprints_to(newstack)

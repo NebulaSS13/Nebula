@@ -2012,7 +2012,7 @@
 /area/lar_maria/sec_wing)
 "fm" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/clothing/head/soft/lar_maria/zhp_cap,
+/obj/item/clothing/head/soft/zhp_cap,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "fn" = (
@@ -2974,7 +2974,7 @@
 /area/lar_maria/vir_access)
 "hh" = (
 /obj/structure/closet,
-/obj/item/clothing/head/soft/lar_maria/zhp_cap,
+/obj/item/clothing/head/soft/zhp_cap,
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
 "hi" = (

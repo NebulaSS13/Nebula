@@ -30,36 +30,36 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/under/rank/corp/polo/nanotrasen,
-		/obj/item/clothing/under/rank/corp/polo/heph,
-		/obj/item/clothing/under/rank/corp/polo/zeng,
-		/obj/item/clothing/under/rank/corp/mbill,
-		/obj/item/clothing/under/rank/corp/saare,
-		/obj/item/clothing/under/rank/corp/aether,
-		/obj/item/clothing/under/rank/corp/hephaestus,
-		/obj/item/clothing/under/rank/guard/pcrc,
-		/obj/item/clothing/under/rank/guard/pcrcsuit,
-		/obj/item/clothing/under/rank/corp/wardt,
-		/obj/item/clothing/under/rank/corp/grayson,
-		/obj/item/clothing/under/rank/corp/focal,
-		/obj/item/clothing/under/rank/corp/morpheus,
-		/obj/item/clothing/under/rank/corp/skinner,
-		/obj/item/clothing/under/rank/corp/dais
+		/obj/item/clothing/under/polo/nanotrasen,
+		/obj/item/clothing/under/polo/heph,
+		/obj/item/clothing/under/polo/zeng,
+		/obj/item/clothing/under/mbill,
+		/obj/item/clothing/under/saare,
+		/obj/item/clothing/under/aether,
+		/obj/item/clothing/under/hephaestus,
+		/obj/item/clothing/under/guard/pcrc,
+		/obj/item/clothing/under/guard/pcrcsuit,
+		/obj/item/clothing/under/wardt,
+		/obj/item/clothing/under/grayson,
+		/obj/item/clothing/under/focal,
+		/obj/item/clothing/under/morpheus,
+		/obj/item/clothing/under/skinner,
+		/obj/item/clothing/under/dais
 	)
 
 /datum/gear/uniform/corp_exec
 	display_name = "corporate colours, senior researcher"
-	path = /obj/item/clothing/under/rank/corp/executive
+	path = /obj/item/clothing/under/executive
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/corp_overalls
 	display_name = "corporate colours, coveralls"
-	path = /obj/item/clothing/under/rank/corp/work
+	path = /obj/item/clothing/under/work
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/corp_flight
 	display_name = "corporate colours, flight suit"
-	path = /obj/item/clothing/under/rank/corp/pilot
+	path = /obj/item/clothing/under/pilot
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/corp_exec_jacket

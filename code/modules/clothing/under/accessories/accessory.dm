@@ -108,7 +108,7 @@
 /obj/item/clothing/accessory/necklace
 	name = "necklace"
 	desc = "A simple necklace."
-	icon = 'icons/clothing/mask/necklace.dmi'
+	icon = 'icons/clothing/accessories/necklace.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_FACE | SLOT_TIE
 

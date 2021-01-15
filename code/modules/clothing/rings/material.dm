@@ -1,9 +1,5 @@
 /////////////////////////////////////////
 //Material Rings
-/obj/item/clothing/ring/material
-	icon = 'icons/obj/clothing/obj_hands_ring.dmi'
-	icon_state = "material"
-
 /obj/item/clothing/ring/material/set_material(var/new_material)
 	. = ..()
 	if(istype(material))
