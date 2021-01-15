@@ -277,7 +277,7 @@ var/list/mob/living/forced_ambiance_list = new
 		forced_ambiance_list += L
 		L.playsound_local(T,sound(pick(forced_ambience), repeat = 1, wait = 0, volume = 25, channel = GLOB.lobby_sound_channel))
 	if(ambience.len && prob(5) && (world.time >= L.client.played + 3 MINUTES))
-		L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 15, channel = GLOB.lobby_sound_channel))
+		L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 15, channel = GLOB.ambience_sound_channel))
 		L.client.played = world.time
 
 /area/proc/clear_ambience(var/mob/living/L)
