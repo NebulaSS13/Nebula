@@ -336,6 +336,34 @@
 		remove_from_storage(I, T, 1)
 	finish_bulk_removal()
 
+/obj/item/storage/MouseDrop_T(atom/dropping, mob/living/user)
+	if(!scoop_inside(dropping, user))
+		return ..()
+
+/obj/item/storage/proc/scoop_inside(mob/living/scooped, mob/living/user)
+	if(!istype(scooped))
+		return FALSE
+
+	if(!scooped.holder_type || scooped.buckled || scooped.pinned.len || scooped.mob_size > MOB_SIZE_SMALL || scooped != user || src.loc == scooped)
+		return FALSE
+
+	if(!do_after(user, 1 SECOND, src))
+		return FALSE
+
+	if(!Adjacent(scooped) || scooped.incapacitated())
+		return
+
+	var/obj/item/holder/H = new scooped.holder_type(get_turf(scooped))
+	if(H)
+		if(can_be_inserted(H))
+			scooped.forceMove(H)
+			H.sync(scooped)
+			handle_item_insertion(H)
+			return TRUE
+		qdel(H)
+
+	return FALSE
+
 /obj/item/storage/Initialize()
 	. = ..()
 	if(allow_quick_empty)
