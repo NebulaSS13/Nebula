@@ -47,7 +47,7 @@ var/list/connected_z_cache = list()
 		return FALSE
 	if (zA == zB)
 		return TRUE
-	if (global.connected_z_cache.len >= zA && global.connected_z_cache[zA])
+	if (length(global.connected_z_cache) >= zA && length(global.connected_z_cache[zA]) >= zB)
 		return global.connected_z_cache[zA][zB]
 	var/list/levels = GetConnectedZlevels(zA)
 	var/list/new_entry = new(world.maxz)

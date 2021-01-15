@@ -113,7 +113,7 @@
 	else
 		for(var/bp in list(BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/stomper = get_organ(bp)
-			if(stomper && !stomper.is_stump() && stomper.coating && stomper.coating.total_volume > 1)
+			if(istype(stomper) && !stomper.is_stump() && stomper.coating && stomper.coating.total_volume > 1)
 				source = stomper
 	if(!source)
 		return

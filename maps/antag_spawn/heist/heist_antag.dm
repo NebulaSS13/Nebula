@@ -87,6 +87,8 @@
 		/obj/item/clothing/accessory/storage/holster/hip
 		)
 
+	var/list/outfits_per_species
+
 /decl/special_role/raider/update_access(var/mob/living/player)
 	for(var/obj/item/storage/wallet/W in player.contents)
 		for(var/obj/item/card/id/id in W.contents)
@@ -137,23 +139,28 @@
 	if(!..())
 		return 0
 
-	var/new_shoes =   pick(raider_shoes)
-	var/new_uniform = pick(raider_uniforms)
-	var/new_glasses = pick(raider_glasses)
-	var/new_helmet =  pick(raider_helmets)
-	var/new_suit =    pick(raider_suits)
+	var/override_outfit = LAZYACCESS(outfits_per_species, player.species.name)
+	if(override_outfit)
+		var/decl/hierarchy/outfit/outfit = decls_repository.get_decl(override_outfit)
+		outfit.equip(player)
+	else
+		var/new_shoes =   pick(raider_shoes)
+		var/new_uniform = pick(raider_uniforms)
+		var/new_glasses = pick(raider_glasses)
+		var/new_helmet =  pick(raider_helmets)
+		var/new_suit =    pick(raider_suits)
 
-	player.equip_to_slot_or_del(new new_shoes(player),slot_shoes_str)
-	if(!player.shoes)
-		//If equipping shoes failed, fall back to equipping sandals
-		var/fallback_type = pick(/obj/item/clothing/shoes/sandal)
-		player.equip_to_slot_or_del(new fallback_type(player), slot_shoes_str)
+		player.equip_to_slot_or_del(new new_shoes(player),slot_shoes_str)
+		if(!player.shoes)
+			//If equipping shoes failed, fall back to equipping sandals
+			var/fallback_type = pick(/obj/item/clothing/shoes/sandal)
+			player.equip_to_slot_or_del(new fallback_type(player), slot_shoes_str)
 
-	player.equip_to_slot_or_del(new new_uniform(player),slot_w_uniform_str)
-	player.equip_to_slot_or_del(new new_glasses(player),slot_glasses_str)
-	player.equip_to_slot_or_del(new new_helmet(player),slot_head_str)
-	player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit_str)
-	equip_weapons(player)
+		player.equip_to_slot_or_del(new new_uniform(player),slot_w_uniform_str)
+		player.equip_to_slot_or_del(new new_glasses(player),slot_glasses_str)
+		player.equip_to_slot_or_del(new new_helmet(player),slot_head_str)
+		player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit_str)
+		equip_weapons(player)
 
 	var/obj/item/card/id/id = create_id("Visitor", player, equip = 0)
 	id.SetName("[player.real_name]'s Passport")

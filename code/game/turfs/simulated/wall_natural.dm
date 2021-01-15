@@ -9,7 +9,7 @@ var/list/natural_walls = list()
 	reinf_material = null
 	girder_material = null
 	construction_stage = -1
-	floor_type = /turf/simulated/floor/asteroid
+	floor_type = /turf/exterior/barren
 	icon_state = "natural"
 	handle_structure_blending = FALSE
 	var/strata
