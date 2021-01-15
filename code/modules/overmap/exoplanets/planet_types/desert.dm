@@ -47,6 +47,7 @@
 	land_type = /turf/exterior/sand
 
 	flora_prob = 5
+	grass_prob = 2
 	large_flora_prob = 0
 
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(var/value, var/turf/T)
