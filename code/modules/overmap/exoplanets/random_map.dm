@@ -1,3 +1,4 @@
+#define  COAST_VALUE  cell_range + 1
 /datum/random_map/noise/exoplanet
 	descriptor = "exoplanet"
 	smoothing_iterations = 1
@@ -7,6 +8,7 @@
 	var/water_level_max = 5
 	var/land_type = /turf/simulated/floor
 	var/water_type
+	var/coast_type
 
 	//intended x*y size, used to adjust spawn probs
 	var/intended_x = 150
@@ -44,6 +46,8 @@
 	if(water_type && noise2value(value) < water_level)
 		return water_type
 	else
+		if(coast_type && value == COAST_VALUE)
+			return coast_type
 		return land_type
 
 /datum/random_map/noise/exoplanet/get_additional_spawns(var/value, var/turf/T)
@@ -99,3 +103,46 @@
 	if(locate(/obj/effect/floor_decal) in T)
 		return
 	new /obj/effect/floor_decal(T, null, null, get_grass_overlay())
+
+/datum/random_map/noise/exoplanet/cleanup()
+	..()
+	if(!water_type && !water_level)
+		return
+	for(var/x in 1 to limit_x - 1)
+		for(var/y in 1 to limit_y - 1)
+			if(noise2value(map[get_map_cell(x,y)]) < water_level)
+				smooth_water(x, y)
+			else
+				smooth_islands(x, y)
+
+//Remove one-tile puddles and place coastal turfs if set
+/datum/random_map/noise/exoplanet/proc/smooth_water(x, y)
+	var/list/coast = list()
+	var/list/water = list()
+	var/mapcell = get_map_cell(x,y)
+	for(var/dx in list(-1,0,1))
+		for(var/dy in list(-1,0,1))
+			var/tmp_cell = get_map_cell(x+dx,y+dy)
+			if(tmp_cell && tmp_cell != mapcell)
+				if(noise2value(map[tmp_cell]) < water_level)
+					water |= tmp_cell
+				else
+					coast |= tmp_cell
+	if(!length(water))
+		map[mapcell] = cell_range
+	else if (coast_type)
+		for(var/cell in coast)
+			map[cell] = COAST_VALUE
+
+//Remove one-tile 'islands' in water bodies
+/datum/random_map/noise/exoplanet/proc/smooth_islands(x, y)
+	var/list/buddies = list()
+	var/mapcell = get_map_cell(x,y)
+	for(var/dx in list(-1,0,1))
+		for(var/dy in list(-1,0,1))
+			var/tmp_cell = get_map_cell(x+dx,y+dy)
+			if(tmp_cell && tmp_cell != mapcell)
+				if(noise2value(map[tmp_cell]) >= water_level)
+					buddies |= tmp_cell
+	if(!length(buddies))
+		map[mapcell] = 0
