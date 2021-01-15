@@ -3,8 +3,7 @@
 	desc = "A machine for breaking bonds in carbon dioxide and releasing pure oxygen."
 	icon = 'icons/atmos/oxyregenerator.dmi'
 	icon_state = "off"
-	level = 1
-	density = 1
+	density = TRUE
 	use_power = POWER_USE_OFF
 	idle_power_usage = 200		//internal circuitry, friction losses and stuff
 	power_rating = 10000

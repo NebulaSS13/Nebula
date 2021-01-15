@@ -288,43 +288,43 @@
 // I hate pants
 
 /datum/fabricator_recipe/textiles/jeancasual
-	path = /obj/item/clothing/under/casual_pants
+	path = /obj/item/clothing/pants/casual
 
 /datum/fabricator_recipe/textiles/jeanclassic
-	path = /obj/item/clothing/under/casual_pants/classicjeans
+	path = /obj/item/clothing/pants/casual/classicjeans
 
 /datum/fabricator_recipe/textiles/jeanmustangjeans
-	path = /obj/item/clothing/under/casual_pants/mustangjeans
+	path = /obj/item/clothing/pants/casual/mustangjeans
 
 /datum/fabricator_recipe/textiles/jeanwhite
 	path = /obj/item/clothing/gloves/color/white
 
 /datum/fabricator_recipe/textiles/jeanblack
-	path = /obj/item/clothing/under/casual_pants/blackjeans
+	path = /obj/item/clothing/pants/casual/blackjeans
 
 /datum/fabricator_recipe/textiles/jeangrey
-	path = /obj/item/clothing/under/casual_pants/greyjeans
+	path = /obj/item/clothing/pants/casual/greyjeans
 
 /datum/fabricator_recipe/textiles/jeanyoung
-	path = /obj/item/clothing/under/casual_pants/youngfolksjeans
+	path = /obj/item/clothing/pants/casual/youngfolksjeans
 
 /datum/fabricator_recipe/textiles/tracknumber1
-	path = /obj/item/clothing/under/casual_pants/track
+	path = /obj/item/clothing/pants/casual/track
 
 /datum/fabricator_recipe/textiles/trackblue
-	path = /obj/item/clothing/under/casual_pants/track/blue
+	path = /obj/item/clothing/pants/casual/track/blue
 
 /datum/fabricator_recipe/textiles/tracknavy
-	path = /obj/item/clothing/under/casual_pants/track/navy
+	path = /obj/item/clothing/pants/casual/track/navy
 
 /datum/fabricator_recipe/textiles/trackblue
-	path = /obj/item/clothing/under/casual_pants/track/blue
+	path = /obj/item/clothing/pants/casual/track/blue
 
 /datum/fabricator_recipe/textiles/trackred
-	path = /obj/item/clothing/under/casual_pants/track/red
+	path = /obj/item/clothing/pants/casual/track/red
 
 /datum/fabricator_recipe/textiles/jeancamo
-	path = /obj/item/clothing/under/casual_pants/camo
+	path = /obj/item/clothing/pants/casual/camo
 
 /datum/fabricator_recipe/textiles/mantle
 	path = /obj/item/clothing/suit/fated
@@ -413,16 +413,16 @@
 // sec gear spliting it so its easier to find for myself
 
 /datum/fabricator_recipe/textiles/securitywarden
-	path = /obj/item/clothing/under/rank/warden
+	path = /obj/item/clothing/under/warden
 
 /datum/fabricator_recipe/textiles/securitysecurityofficer
-	path = /obj/item/clothing/under/rank/security
+	path = /obj/item/clothing/under/security
 
 /datum/fabricator_recipe/textiles/securitydispatch
-	path = /obj/item/clothing/under/rank/dispatch
+	path = /obj/item/clothing/under/dispatch
 
 /datum/fabricator_recipe/textiles/securityalt
-	path = /obj/item/clothing/under/rank/security2
+	path = /obj/item/clothing/under/security2
 
 /datum/fabricator_recipe/textiles/tacticalofficer
 	path = /obj/item/clothing/under/tactical
@@ -454,10 +454,10 @@
 	path = /obj/item/clothing/head/HoS
 
 /datum/fabricator_recipe/textiles/securityhos
-	path = /obj/item/clothing/under/rank/head_of_security
+	path = /obj/item/clothing/under/head_of_security
 
 /datum/fabricator_recipe/textiles/securityjensen
-	path = /obj/item/clothing/under/rank/head_of_security/jensen
+	path = /obj/item/clothing/under/head_of_security/jensen
 
 /datum/fabricator_recipe/textiles/securityjensencoat
 	path = /obj/item/clothing/suit/armor/hos/jensen

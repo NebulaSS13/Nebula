@@ -48,8 +48,8 @@
 		if(36 to 40)
 			new/obj/item/baton(src)
 		if(41 to 45)
-			new/obj/item/clothing/under/shorts/red(src)
-			new/obj/item/clothing/under/shorts/blue(src)
+			new/obj/item/clothing/pants/shorts/athletic/red(src)
+			new/obj/item/clothing/pants/shorts/athletic/blue(src)
 		if(46 to 50)
 			new/obj/item/clothing/under/chameleon(src)
 			for(var/i = 0, i < 7, i++)
@@ -108,7 +108,7 @@
 			new/obj/item/storage/firstaid/combat(src) // Probably the least OP
 		if(94) // Why the hell not
 			new/obj/item/storage/backpack/clown(src)
-			new/obj/item/clothing/under/rank/clown(src)
+			new/obj/item/clothing/under/clown(src)
 			new/obj/item/clothing/shoes/clown_shoes(src)
 			new/obj/item/clothing/mask/gas/clown_hat(src)
 			new/obj/item/bikehorn(src)

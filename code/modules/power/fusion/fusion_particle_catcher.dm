@@ -4,6 +4,7 @@
 	anchored = 1
 	invisibility = 101
 	light_color = COLOR_BLUE
+
 	var/obj/effect/fusion_em_field/parent
 	var/mysize = 0
 
@@ -37,4 +38,7 @@
 	return 0
 
 /obj/effect/fusion_particle_catcher/CanPass(var/atom/movable/mover, var/turf/target, var/height=0, var/air_group=0)
-	return ismob(mover)
+	return !density || (!istype(mover, /obj/item/projectile) && !istype(mover, /obj/effect/accelerated_particle))
+
+/obj/effect/fusion_particle_catcher/CanFluidPass(var/coming_from)
+	return TRUE

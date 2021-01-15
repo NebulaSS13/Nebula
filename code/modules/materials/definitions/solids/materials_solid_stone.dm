@@ -7,6 +7,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	brute_armor = 3
 	conductive = 0
+	stack_type = /obj/item/stack/material/generic/brick
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	dissolves_into = list(
 		/decl/material/solid/silicon = 1

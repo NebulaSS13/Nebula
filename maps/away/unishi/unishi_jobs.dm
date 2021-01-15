@@ -34,7 +34,7 @@
 
 /decl/hierarchy/outfit/job/unishi/researcher
 	name = UNISHI_OUTFIT_JOB_NAME("Researcher")
-	uniform = /obj/item/clothing/under/rank/engineer
+	uniform = /obj/item/clothing/under/engineer
 	suit = /obj/item/clothing/suit/storage/toggle/hoodie
 	shoes = /obj/item/clothing/shoes/color/black
 	r_pocket = /obj/item/radio

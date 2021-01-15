@@ -24,7 +24,7 @@
 	. = ..()
 	. += /obj/item/clothing/suit/armor/vest/nt
 	. += /obj/item/clothing/head/soft/sec/corp
-	. += /obj/item/clothing/under/rank/security/corp
+	. += /obj/item/clothing/under/security/corp
 
 /obj/structure/closet/wardrobe/red/Initialize()
 	. = ..()
@@ -41,13 +41,13 @@
 	. = ..()
 	. += /obj/item/clothing/head/helmet/corp
 	. += /obj/item/clothing/suit/armor/vest/nt
-	. += /obj/item/clothing/under/rank/warden/corp
+	. += /obj/item/clothing/under/warden/corp
 
 /obj/structure/closet/secure_closet/hos/WillContain()
 	. = ..()
 	. += /obj/item/clothing/head/helmet/corp
 	. += /obj/item/clothing/suit/armor/vest/nt
-	. += /obj/item/clothing/under/rank/head_of_security/corp
+	. += /obj/item/clothing/under/head_of_security/corp
 
 /obj/structure/closet/secure_closet/hop/WillContain()
 	. = ..() + /obj/item/clothing/suit/armor/vest/nt

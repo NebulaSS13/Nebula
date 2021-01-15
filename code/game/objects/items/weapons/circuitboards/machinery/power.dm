@@ -30,6 +30,9 @@
 	req_components = list(
 		/obj/item/stock_parts/capacitor = 1
 	)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)
 
 /obj/item/stock_parts/circuitboard/recharger/wall
 	name = T_BOARD("wall recharger")
@@ -78,7 +81,9 @@
 		/obj/item/stock_parts/manipulator = 3,
 		/obj/item/stock_parts/matter_bin = 3
 	)
-	additional_spawn_components = list()
+	additional_spawn_components = list(
+		/obj/item/stock_parts/power/apc/buildable = 1	
+	)
 
 /obj/item/stock_parts/circuitboard/big_turbine/center
 	name = T_BOARD("large turbine motor")
@@ -104,7 +109,9 @@
 		/obj/item/stock_parts/manipulator = 3,
 		/obj/item/stock_parts/matter_bin = 3
 	)
-	additional_spawn_components = list()
+	additional_spawn_components = list(
+		/obj/item/stock_parts/power/apc/buildable = 1		
+	)
 
 /obj/item/stock_parts/circuitboard/teg_turbine/motor
 	name = T_BOARD("thermoelectric generator motor")

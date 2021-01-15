@@ -16,7 +16,7 @@
 
 /decl/hierarchy/outfit/job/tradeship/chief_engineer
 	name = TRADESHIP_OUTFIT_JOB_NAME("Head Engineer")
-	uniform = /obj/item/clothing/under/rank/chief_engineer
+	uniform = /obj/item/clothing/under/chief_engineer
 	glasses = /obj/item/clothing/glasses/welding/superior
 	suit = /obj/item/clothing/suit/storage/hazardvest
 	gloves = /obj/item/clothing/gloves/thick

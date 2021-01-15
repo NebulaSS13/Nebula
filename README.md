@@ -1,6 +1,44 @@
-# Nebula 13
+<h1 align="center">
+  <br>
+  <a href="https://github.com/NebulaSS13/Nebula"><img src="https://avatars1.githubusercontent.com/u/61128341" alt="Nebula 13" width="200"></a>
+  <br>
+  Nebula 13
+  <br>
+</h1>
 
-[Discord](https://discord.gg/Ddw58yF) - [Code](http://github.com/NebulaSS13/Nebula/)
+<p align="center">
+  <a href="https://github.com/NebulaSS13/Nebula/actions">
+    <img src="https://github.com/NebulaSS13/Nebula/workflows/Run%20Tests/badge.svg"
+         alt="Build Status">
+  </a>
+  <a href="https://www.codefactor.io/repository/github/NebulaSS13/Nebula">
+    <img src="https://www.codefactor.io/repository/github/NebulaSS13/Nebula/badge"
+         alt="CodeFactor">
+  </a>
+  <a href="https://github.com/NebulaSS13/Nebula/commits/dev">
+    <img src="https://img.shields.io/github/last-commit/NebulaSS13/Nebula"
+         alt="Last Commit">
+  </a>
+  <a href="https://github.com/NebulaSS13/Nebula/issues">
+    <img src="https://img.shields.io/github/issues/NebulaSS13/Nebula"
+         alt="Issues">
+  </a>
+  <a href="https://discord.gg/Ddw58yF">
+    <img src="https://img.shields.io/discord/678820025355862045?style=plastic"
+         alt="Discord">
+  </a>
+  <a href="https://github.com/NebulaSS13/Nebula/blob/dev/LICENSE">
+    <img src="https://img.shields.io/github/license/NebulaSS13/Nebula"
+         alt="License">
+  </a>
+</p>
+
+<p align="center">
+  <a href="#contributing-guidelines">Contributing Guidelines</a> •
+  <a href="#security">Security</a> •
+  <a href="#license">License</a> •
+  <a href="#getting-the-code-and-installing">Getting the Code and Installing</a>
+</p>
 
 ---
 

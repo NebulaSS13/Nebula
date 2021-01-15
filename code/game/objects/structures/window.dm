@@ -213,11 +213,6 @@
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			visible_message(SPAN_NOTICE("[user] dismantles \the [src]."))
-			var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 1)
-			if(S && reinf_material)
-				S.reinf_material = reinf_material
-				S.update_strings()
-				S.update_icon()
 			dismantle()
 	else if(isCoil(W) && !polarized && is_fulltile())
 		var/obj/item/stack/cable_coil/C = W
@@ -257,6 +252,13 @@
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		..()
 	return
+
+/obj/structure/window/create_dismantled_products(turf/T)
+	var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 2)
+	if(S && reinf_material)
+		S.reinf_material = reinf_material
+		S.update_strings()
+		S.update_icon()
 
 /obj/structure/window/grab_attack(var/obj/item/grab/G)
 	if (G.assailant.a_intent != I_HURT)

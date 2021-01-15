@@ -132,7 +132,7 @@
 
 /obj/effect/landmark/costume/prig/make_costumes()
 	new /obj/item/clothing/accessory/wcoat/black(src.loc)
-	new /obj/item/clothing/glasses/monocle(src.loc)
+	new /obj/item/clothing/glasses/eyepatch/monocle(src.loc)
 	var/CHOICE= pick( /obj/item/clothing/head/bowler, /obj/item/clothing/head/that)
 	new CHOICE(src.loc)
 	new /obj/item/clothing/shoes/color/black(src.loc)

@@ -1,5 +1,6 @@
 /obj/item/clothing/mask
 	name = "mask"
+	icon = 'icons/clothing/mask/breath.dmi'
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_FACE
 	body_parts_covered = SLOT_FACE|SLOT_EYES

@@ -43,7 +43,7 @@
 	contains = list(/obj/item/storage/backpack/industrial,
 					/obj/item/storage/backpack/satchel/eng,
 					/obj/item/radio/headset/headset_cargo,
-					/obj/item/clothing/under/rank/miner,
+					/obj/item/clothing/under/miner,
 					/obj/item/clothing/gloves/thick,
 					/obj/item/clothing/shoes/color/black,
 					/obj/item/scanner/gas,

@@ -87,7 +87,7 @@
 /obj/item/clothing/head/winterhood
 	name = "winter hood"
 	desc = "A hood attached to a heavy winter jacket."
-	icon_state = "generic_hood"
+	icon = 'icons/clothing/head/hood_winter.dmi'
 	body_parts_covered = SLOT_HEAD
 	cold_protection = SLOT_HEAD
 	flags_inv = HIDEEARS | BLOCKHAIR
@@ -167,8 +167,7 @@
 /obj/item/clothing/head/hoodiehood
 	name = "hoodie hood"
 	desc = "A hood attached to a warm sweatshirt."
-	icon_state = "hood"
-	icon = 'icons/clothing/suit/hoodie.dmi'
+	icon = 'icons/clothing/head/hood.dmi'
 	body_parts_covered = SLOT_HEAD
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = SLOT_HEAD

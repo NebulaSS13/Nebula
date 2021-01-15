@@ -2,37 +2,29 @@
 	name = "blindfold"
 	desc = "Covers the eyes, preventing sight."
 	action_button_name = "Adjust Blindfold"
-	icon_state = "blindfold"
-	item_state = "blindfold"
-	off_state = "blindfoldup"
+	icon = 'icons/clothing/eyes/blindfold.dmi'
 	tint = TINT_BLIND
 	flash_protection = FLASH_PROTECTION_MAJOR
 	darkness_view = -1
 	toggleable = TRUE
 	activation_sound = null
+	toggle_off_message = "You flip $ITEM$ up."
+	toggle_on_message = "You slide $ITEM$ down, blinding yourself."
 
-/obj/item/clothing/glasses/blindfold/Initialize()
-	. = ..()
-	toggle_off_message = "You flip \the [src] up."
-	toggle_on_message = "You slide \the [src] down, blinding yourself."
+/obj/item/clothing/glasses/blindfold/set_active_values()
+	..()
+	flags_inv &= ~HIDEEYES
+	body_parts_covered &= ~SLOT_EYES
 
-/obj/item/clothing/glasses/blindfold/attack_self()
-	. =..()
-	if(!.)
-		return
-	if(active)
-		flags_inv &= ~HIDEEYES
-		body_parts_covered &= ~SLOT_EYES
-	else 
-		flags_inv |= HIDEEYES
-		body_parts_covered |= SLOT_EYES
+/obj/item/clothing/glasses/blindfold/set_inactive_values()
+	..()
+	flags_inv |= HIDEEYES
+	body_parts_covered |= SLOT_EYES
 
 /obj/item/clothing/glasses/blindfold/tape
 	name = "length of tape"
 	desc = "It's a robust DIY blindfold!"
-	icon = 'icons/obj/bureaucracy.dmi'
+	icon = 'icons/clothing/eyes/blindfold_tape.dmi'
 	action_button_name = null
-	icon_state = "tape_cross"
-	item_state = null
 	w_class = ITEM_SIZE_TINY
 	toggleable = FALSE

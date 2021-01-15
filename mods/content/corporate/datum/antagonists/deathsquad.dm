@@ -25,7 +25,7 @@
 		return
 
 	if (player.mind == leader)
-		player.equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(player), slot_w_uniform_str)
+		player.equip_to_slot_or_del(new /obj/item/clothing/under/centcom_officer(player), slot_w_uniform_str)
 	else
 		player.equip_to_slot_or_del(new /obj/item/clothing/under/color/green(player), slot_w_uniform_str)
 

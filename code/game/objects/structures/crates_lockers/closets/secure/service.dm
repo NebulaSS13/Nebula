@@ -5,7 +5,7 @@
 
 /obj/structure/closet/secure_closet/chaplain/WillContain()
 	return list(
-		/obj/item/clothing/under/rank/chaplain,
+		/obj/item/clothing/under/chaplain,
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/suit/chaplain_hoodie,
 		/obj/item/storage/candle_box = 2,
