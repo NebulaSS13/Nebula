@@ -161,7 +161,7 @@
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	material_armor_multiplier = 0.8
-	material = /decl/material/solid/leather/
+	material = /decl/material/solid/leather
 	var/shine 
 	var/artificial_shine
 
