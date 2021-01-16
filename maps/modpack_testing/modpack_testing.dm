@@ -14,6 +14,7 @@
 	#include "..\..\mods\species\utility_frames\_utility_frames.dme"
 	#include "..\..\mods\species\tajaran\_tajaran.dme"
 	#include "..\..\mods\species\tritonian\_tritonian.dme"
+	#include "..\..\mods\species\neocorvids\_neocorvids.dme"
 
 	#define USING_MAP_DATUM /datum/map/modpack_testing
 

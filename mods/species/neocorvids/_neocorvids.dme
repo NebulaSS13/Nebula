@@ -1,0 +1,7 @@
+#ifndef CONTENT_PACK_NEOCORVIDS
+#define CONTENT_PACK_NEOCORVIDS
+#include "_neocorvids.dm"
+#include "clothing.dm"
+#include "datum/language.dm"
+#include "datum/species.dm"
+#endif
