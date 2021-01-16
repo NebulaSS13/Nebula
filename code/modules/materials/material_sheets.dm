@@ -452,8 +452,8 @@
 /obj/item/stack/material/leather/ten
 	amount = 10
 
-/obj/item/stack/material/leather
-	name = "leather"
+/obj/item/stack/material/leather/synth
+	name = "synth leather"
 	desc = "The by-product of mob grinding."
 	icon_state = "sheet-leather"
 	material = /decl/material/solid/leather/synth
