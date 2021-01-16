@@ -111,6 +111,7 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 /obj/machinery/light/ascent
 	name = "mantid light"
 	light_type = /obj/item/light/tube/ascent
+	accepts_light_type = /obj/item/light/tube/ascent
 	desc = "Some kind of strange alien lighting technology."
 
 /obj/machinery/computer/ship/helm/ascent

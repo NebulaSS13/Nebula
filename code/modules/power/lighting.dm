@@ -33,7 +33,7 @@
 	var/on = 0					// 1 if on, 0 if off
 	var/flickering = 0
 	var/light_type = /obj/item/light/tube		// the type of light item
-
+	var/accepts_light_type = /obj/item/light/tube
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 
 	var/obj/item/light/lightbulb
@@ -55,6 +55,7 @@
 	base_state = "bulb"
 	desc = "A small lighting fixture."
 	light_type = /obj/item/light/bulb
+	accepts_light_type = /obj/item/light/bulb
 	base_type = /obj/machinery/light/small/buildable
 	frame_type = /obj/item/frame/light/small
 
@@ -71,6 +72,7 @@
 	name = "spotlight"
 	desc = "A more robust socket for light tubes that demand more power."
 	light_type = /obj/item/light/tube/large
+	accepts_light_type = /obj/item/light/tube/large
 	base_type = /obj/machinery/light/spot/buildable
 	frame_type = /obj/item/frame/light/spot
 
@@ -245,7 +247,7 @@
 		if(lightbulb)
 			to_chat(user, "There is a [get_fitting_name()] already inserted.")
 			return
-		if(!istype(W, light_type))
+		if(!istype(W, accepts_light_type))
 			to_chat(user, "This type of light requires a [get_fitting_name()].")
 			return
 		if(!user.unEquip(W, src))
@@ -423,6 +425,7 @@
 	icon_state = "nav10"
 	base_state = "nav1"
 	light_type = /obj/item/light/tube/large
+	accepts_light_type = /obj/item/light/tube/large
 	on = TRUE
 	var/delay = 1
 	base_type = /obj/machinery/light/navigation/buildable
