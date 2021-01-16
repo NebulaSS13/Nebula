@@ -126,13 +126,11 @@
 	color = COLOR_GRAY40
 	markings_color = COLOR_SILVER
 	desc = "A grey fedora - either the cornerstone of a detective's style or a poor attempt at looking cool, depending on the person wearing it."
-	material = /decl/material/solid/leather
 
 /obj/item/clothing/head/det/wack
 	color = COLOR_VIOLET
 	markings_color = COLOR_YELLOW
 	desc = "A colorful fedora - either the cornerstone of a detective's style or a poor attempt at looking disco, depending on the person wearing it."
-	material = /decl/material/solid/leather
 
 /*
  * Head of Security
