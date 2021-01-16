@@ -40,7 +40,9 @@
 	. = ..()
 
 /mob/living/carbon/get_cuff_breakout_mod()
-	. = Clamp(..() - (psi.get_rank(PSI_PSYCHOKINESIS)*0.2), 0, 1)
+	. = ..()
+	if(psi)
+		. = Clamp(. - (psi.get_rank(PSI_PSYCHOKINESIS)*0.2), 0, 1)
 
 /mob/living/can_break_cuffs()
 	. = (psi && psi.can_use() && psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_PARAMOUNT)
