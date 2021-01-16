@@ -9,10 +9,12 @@
 	down_flags_inv = BLOCKHEADHAIR
 	pull_mask = 1
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/cloth
 
 /obj/item/clothing/mask/balaclava/tactical
 	name = "green balaclava"
 	icon = 'icons/clothing/mask/swat_mask.dmi'
+	material = /decl/material/solid/cloth
 
 /obj/item/clothing/mask/luchador
 	name = "Luchador Mask"
@@ -23,6 +25,7 @@
 	body_parts_covered = SLOT_HEAD|SLOT_FACE
 	w_class = ITEM_SIZE_SMALL
 	siemens_coefficient = 3.0
+	material = /decl/material/solid/cloth
 
 /obj/item/clothing/mask/luchador/tecnicos
 	name = "Tecnicos Mask"

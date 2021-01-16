@@ -12,7 +12,7 @@
 
 /decl/hierarchy/supply_pack/security/lightarmor
 	name = "Armor - Light"
-	contains = list(/obj/item/clothing/suit/armor/pcarrier/light = 4,
+	contains = list(/obj/item/clothing/suit/armor/pcarrier/prepared = 4,
 					/obj/item/clothing/head/helmet =4)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure
@@ -21,7 +21,7 @@
 
 /decl/hierarchy/supply_pack/security/armor
 	name = "Armor - Unmarked"
-	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium = 2,
+	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium/prepared = 2,
 					/obj/item/clothing/head/helmet =2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure

@@ -28,6 +28,10 @@
 
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
+	)
+	origin_tech = "{'materials':2,'engineering':2}"
 
 /obj/item/clothing/suit/fire/Initialize()
 	. = ..()
@@ -87,7 +91,7 @@
  * Radiation protection
  */
 /obj/item/clothing/head/radiation
-	name = "Radiation Hood"
+	name = "radiation hood"
 	desc = "A hood with radiation protective properties. Label: Made with lead, do not eat insulation."
 	icon = 'icons/clothing/head/radsuit.dmi'
 	flags_inv = BLOCKHAIR
@@ -96,9 +100,15 @@
 		bio = ARMOR_BIO_RESISTANT, 
 		rad = ARMOR_RAD_SHIELDED
 		)
+	matter = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
+	)
+
+	origin_tech = "{'materials':2,'engineering':2}"
 
 /obj/item/clothing/suit/radiation
-	name = "Radiation suit"
+	name = "radiation suit"
 	desc = "A suit that protects against radiation. Label: Made with lead, do not eat insulation."
 	icon = 'icons/clothing/suit/rad_suit.dmi'
 	w_class = ITEM_SIZE_HUGE//bulky item
@@ -111,6 +121,11 @@
 		rad = ARMOR_RAD_SHIELDED
 		)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL|HIDEGLOVES|HIDESHOES
+	matter = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
+	)
+	origin_tech = "{'materials':2,'engineering':2}"
 
 /obj/item/clothing/suit/radiation/Initialize()
 	. = ..()
@@ -133,6 +148,11 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	body_parts_covered = SLOT_HEAD
 	siemens_coefficient = 0.9
+	matter = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
+	)
+	origin_tech = "{'materials':2,'engineering':2}"
 
 /obj/item/clothing/suit/chem_suit
 	name = "chemical suit"
@@ -150,3 +170,8 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	siemens_coefficient = 0.9
+	matter = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
+	)
+	origin_tech = "{'materials':2,'engineering':2}"

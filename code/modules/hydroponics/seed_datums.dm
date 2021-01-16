@@ -1,3 +1,23 @@
+// Cotton Im going to achieve singularity
+
+/datum/seed/cotton
+	name = "cotton"
+	seed_name = "cotton"
+	display_name = "cotton"
+
+/datum/seed/cotton/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,6)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"wheat")
+	set_trait(TRAIT_PRODUCT_COLOUR, "#ffffff")
+	set_trait(TRAIT_PLANT_ICON,"bush2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+
+
 // Chili plants/variants.
 /datum/seed/chili
 	name = "chili"

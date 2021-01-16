@@ -87,7 +87,7 @@
 /decl/hierarchy/outfit/corpse/zhp_guard
 	name = "Dead ZHP guard"
 	uniform = /obj/item/clothing/under/virologist
-	suit = /obj/item/clothing/suit/armor/pcarrier
+	suit = /obj/item/clothing/suit/armor/pcarrier/prepared
 	head = /obj/item/clothing/head/soft/zhp_cap
 	shoes = /obj/item/clothing/shoes/jackboots/duty
 	l_ear = /obj/item/radio/headset

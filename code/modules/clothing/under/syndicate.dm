@@ -23,5 +23,3 @@
 	armor = null
 	siemens_coefficient = 1
 	has_sensor = SUIT_HAS_SENSORS
-
-

@@ -14,6 +14,9 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slowdown = 0.5
+	material = /decl/material/solid/metal/titanium
+	matter = list(/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE)
+	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
 	
 /obj/item/clothing/accessory/armguards/merc
 	name = "heavy arm guards"
@@ -27,7 +30,8 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	color = null
-	
+	material = /decl/material/solid/metal/titanium
+
 /obj/item/clothing/accessory/legguards/merc
 	name = "heavy leg guards"
 	desc = "A pair of heavily armored leg pads in red-trimmed black. Attaches to a plate carrier."
@@ -40,3 +44,4 @@
 		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
+	material = /decl/material/solid/metal/titanium

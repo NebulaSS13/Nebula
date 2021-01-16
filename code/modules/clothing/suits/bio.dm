@@ -12,6 +12,11 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	siemens_coefficient = 0.9
+	origin_tech = "{'materials':3, 'engineering':3}"
+	matter = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 /obj/item/clothing/suit/bio_suit
 	name = "bio suit"
@@ -29,6 +34,11 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	siemens_coefficient = 0.9
+	origin_tech = "{'materials':3, 'engineering':3}"
+	matter = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
+	)
 
 /obj/item/clothing/suit/bio_suit/Initialize()
 	. = ..()
@@ -75,7 +85,12 @@
 
 //Plague Dr mask can be found in clothing/masks/gasmask.dm
 /obj/item/clothing/suit/bio_suit/plaguedoctorsuit
-	name = "Plague doctor suit"
+	name = "plague doctor suit"
 	desc = "It protected doctors from the Black Death, back then. You bet your arse it's gonna help you against space plague."
 	icon = 'icons/clothing/suit/biosuit/plague.dmi'
 	flags_inv = HIDEGLOVES|HIDEJUMPSUIT|HIDETAIL
+	origin_tech = "{'materials':1,'engineering':1,'biotech':1}"
+	matter = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
+	)

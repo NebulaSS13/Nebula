@@ -12,7 +12,14 @@
 		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_PADDED
 		)
+	starting_accessories = null
 	siemens_coefficient = 0.7
+	material = /decl/material/solid/metal/plasteel
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
+	origin_tech = "{'materials':3,'engineering':1,'combat':2}"
+
+// no accessory
+/obj/item/clothing/suit/armor/bulletproof/prepared
 	starting_accessories = list(/obj/item/clothing/accessory/armguards/ballistic, /obj/item/clothing/accessory/legguards/ballistic)
 
 /obj/item/clothing/accessory/armguards/ballistic
@@ -28,6 +35,8 @@
 		)
 	color = null
 	siemens_coefficient = 0.7
+	matter = list(/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT)
+	origin_tech = "{'materials':2,'engineering':1,'combat':2}"
 	
 /obj/item/clothing/accessory/legguards/ballistic
 	name = "ballistic leg guards"
@@ -43,3 +52,5 @@
 		)
 	siemens_coefficient = 0.7
 	slowdown = 1
+	matter = list(/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT)
+	origin_tech = "{'materials':2,'engineering':1,'combat':2}"

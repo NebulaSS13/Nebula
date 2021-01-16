@@ -16,6 +16,9 @@
 		melee = ARMOR_MELEE_SMALL
 		)
 	siemens_coefficient = 0.9
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/clothing/head/warden
 	name = "warden's hat"
@@ -29,8 +32,11 @@
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_sec.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_SMALL
-		)
+	)
 	siemens_coefficient = 0.9
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/clothing/under/dispatch
 	name = "dispatcher's uniform"
@@ -41,6 +47,9 @@
 		)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
 	siemens_coefficient = 0.9
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/clothing/under/security2
 	name = "security officer's uniform"
@@ -50,6 +59,9 @@
 		melee = ARMOR_MELEE_SMALL
 		)
 	siemens_coefficient = 0.9
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
+	)
 
 /obj/item/clothing/under/tactical
 	name = "tactical jumpsuit"
@@ -59,6 +71,9 @@
 		melee = ARMOR_MELEE_SMALL
 		)
 	siemens_coefficient = 0.9
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
+	)
 
 /*
  * Detective
@@ -72,6 +87,8 @@
 		)
 	siemens_coefficient = 0.9
 	starting_accessories = list(/obj/item/clothing/accessory/blue_clip)
+	material = /decl/material/solid/cloth
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
 
 /obj/item/clothing/under/det/grey
 	desc = "A serious-looking tan dress shirt paired with freshly-pressed black slacks."
@@ -97,6 +114,8 @@
 	flags_inv = BLOCKHEADHAIR
 	markings_icon = "band"
 	markings_color = "#b2977c"
+	material = /decl/material/solid/leather
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/clothing/head/det/attack_self(mob/user)
 	flags_inv ^= BLOCKHEADHAIR
@@ -124,6 +143,9 @@
 		melee = ARMOR_MELEE_SMALL
 		)
 	siemens_coefficient = 0.8
+	material = /decl/material/solid/leather
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
+	origin_tech = "{'materials':1,'engineering':1, 'combat':1}"
 
 /obj/item/clothing/head/HoS
 	name = "Head of Security Hat"
@@ -131,6 +153,7 @@
 	icon = 'icons/clothing/head/hos.dmi'
 	body_parts_covered = 0
 	siemens_coefficient = 0.8
+	material = /decl/material/solid/leather
 
 /obj/item/clothing/suit/armor/hos
 	name = "armored coat"
@@ -146,6 +169,12 @@
 		)
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.6
+	material = /decl/material/solid/leather
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT
+	)
+	origin_tech = "{'materials':3,'engineering':1, 'combat':2}"
 
 //Jensen cosplay gear
 /obj/item/clothing/under/head_of_security/jensen
@@ -153,6 +182,8 @@
 	name = "head of security's jumpsuit"
 	icon = 'icons/clothing/under/jumpsuits/jumpsuit_hos_alt.dmi'
 	siemens_coefficient = 0.6
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
+	origin_tech = "{'materials':3,'engineering':1, 'combat':2}"
 
 /obj/item/clothing/suit/armor/hos/jensen
 	name = "armored trenchcoat"
@@ -160,3 +191,9 @@
 	icon = 'icons/clothing/suit/jensen.dmi'
 	flags_inv = 0
 	siemens_coefficient = 0.6
+	material = /decl/material/solid/leather
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT
+	)
+	origin_tech = "{'materials':3,'engineering':1, 'combat':2}"

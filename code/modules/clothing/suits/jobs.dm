@@ -76,6 +76,8 @@
 		laser = ARMOR_LASER_SMALL,
 		energy = ARMOR_ENERGY_MINOR
 		)
+	origin_tech = "{'materials':2, 'engineering':2}"
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/clothing/suit/storage/det_trench/ft/
 	desc = "A rugged canvas trenchcoat, designed and created by TX Fabrication Corp. This one wouldn't block much of anything."
@@ -98,6 +100,8 @@
 		laser = ARMOR_LASER_MINOR,
 		energy = ARMOR_ENERGY_MINOR
 		)
+	origin_tech = "{'materials':2, 'engineering':2}"
+	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/clothing/suit/storage/forensics/red
 	name = "red jacket"
@@ -115,9 +119,21 @@
 	icon = 'icons/clothing/suit/hazard_vest/orange.dmi'
 	blood_overlay_type = "armor"
 	bodytype_restricted = null
-	allowed = list (/obj/item/scanner/gas, /obj/item/flashlight, /obj/item/multitool, /obj/item/radio, /obj/item/t_scanner, \
-	/obj/item/crowbar, /obj/item/screwdriver, /obj/item/weldingtool, /obj/item/wirecutters, /obj/item/wrench, /obj/item/tank/emergency, \
-	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering)
+	allowed = list (
+		/obj/item/scanner/gas,
+		/obj/item/flashlight,
+		/obj/item/multitool,
+		/obj/item/radio,
+		/obj/item/t_scanner,
+		/obj/item/crowbar,
+		/obj/item/screwdriver,
+		/obj/item/weldingtool,
+		/obj/item/wirecutters,
+		/obj/item/wrench,
+		/obj/item/tank/emergency,
+		/obj/item/clothing/mask/gas,
+		/obj/item/taperoll/engineering
+	)
 	body_parts_covered = SLOT_UPPER_BODY
 
 /obj/item/clothing/suit/storage/hazardvest/green
@@ -151,8 +167,17 @@
 	desc = "A high-visibility jacket worn by medical first responders."
 	icon = 'icons/clothing/suit/responder_jacket.dmi'
 	blood_overlay_type = "armor"
-	allowed = list(/obj/item/stack/medical, /obj/item/chems/dropper, /obj/item/chems/hypospray, /obj/item/chems/syringe, \
-	/obj/item/scanner/health, /obj/item/flashlight, /obj/item/radio, /obj/item/tank/emergency, /obj/item/chems/ivbag)
+	allowed = list(
+		/obj/item/stack/medical,
+		/obj/item/chems/dropper,
+		/obj/item/chems/hypospray,
+		/obj/item/chems/syringe,
+		/obj/item/scanner/health,
+		/obj/item/flashlight,
+		/obj/item/radio,
+		/obj/item/tank/emergency,
+		/obj/item/chems/ivbag
+	)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
 
 /obj/item/clothing/suit/storage/toggle/fr_jacket/ems
@@ -165,8 +190,18 @@
 	desc = "A black chest-rig with blue pouches worn by medical first responders, meant to carry their equipment. It has a blue 'Medic' tag on its chest."
 	icon = 'icons/clothing/suit/med_chest.dmi'
 	blood_overlay_type = "armor"
-	allowed = list(/obj/item/stack/medical, /obj/item/chems/dropper, /obj/item/chems/hypospray, /obj/item/chems/syringe, \
-	/obj/item/scanner/health, /obj/item/flashlight, /obj/item/radio, /obj/item/tank/emergency, /obj/item/chems/ivbag,/obj/item/clothing/head/hardhat/EMS)
+	allowed = list(
+		/obj/item/stack/medical,
+		/obj/item/chems/dropper,
+		/obj/item/chems/hypospray,
+		/obj/item/chems/syringe,
+		/obj/item/scanner/health, 
+		/obj/item/flashlight,
+		/obj/item/radio,
+		/obj/item/tank/emergency,
+		/obj/item/chems/ivbag,
+		/obj/item/clothing/head/hardhat/EMS
+	)
 	body_parts_covered = SLOT_UPPER_BODY
 
 /obj/item/clothing/suit/surgicalapron
@@ -175,6 +210,19 @@
 	icon = 'icons/clothing/suit/apron_surgery.dmi'
 	blood_overlay_type = "armor"
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
-	allowed = list(/obj/item/stack/medical, /obj/item/chems/dropper, /obj/item/chems/hypospray, /obj/item/chems/syringe, \
-	/obj/item/scanner/health, /obj/item/flashlight, /obj/item/radio, /obj/item/tank/emergency,/obj/item/scalpel,/obj/item/retractor,/obj/item/hemostat, \
-	/obj/item/cautery,/obj/item/bonegel,/obj/item/sutures)
+	allowed = list(
+		/obj/item/stack/medical,
+		/obj/item/chems/dropper,
+		/obj/item/chems/hypospray,
+		/obj/item/chems/syringe,
+		/obj/item/scanner/health,
+		/obj/item/flashlight,
+		/obj/item/radio,
+		/obj/item/tank/emergency,
+		/obj/item/scalpel,
+		/obj/item/retractor,
+		/obj/item/hemostat,
+		/obj/item/cautery,
+		/obj/item/bonegel,
+		/obj/item/sutures
+	)

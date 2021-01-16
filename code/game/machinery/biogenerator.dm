@@ -47,7 +47,12 @@
 			/obj/item/clothing/suit/leathercoat = 500,
 			/obj/item/clothing/suit/storage/toggle/brown_jacket = 500,
 			/obj/item/clothing/suit/storage/toggle/bomber = 500,
-			/obj/item/clothing/suit/storage/hooded/wintercoat = 500))
+			/obj/item/clothing/suit/storage/hooded/wintercoat = 500,
+			/obj/item/stack/material/cloth/ten = 300,
+			/obj/item/stack/material/cloth = 30,
+			/obj/item/stack/material/leather/ten = 300,
+			/obj/item/stack/material/leather = 30,
+			/obj/item/stack/material/leather/synth =30))
 
 /obj/machinery/biogenerator/Initialize()
 	create_reagents(1000)
