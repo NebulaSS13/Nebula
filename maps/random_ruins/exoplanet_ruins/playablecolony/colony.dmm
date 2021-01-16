@@ -5106,10 +5106,6 @@
 /obj/item/scanner/gas,
 /obj/item/scanner/gas,
 /obj/item/scanner/gas,
-/obj/item/clamp,
-/obj/item/clamp,
-/obj/item/clamp,
-/obj/item/clamp,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/atmospherics)
 "iZ" = (

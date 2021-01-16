@@ -11,9 +11,6 @@
 /datum/fabricator_recipe/protolathe/tool/brace_jack
 	path = /obj/item/crowbar/brace_jack
 
-/datum/fabricator_recipe/protolathe/tool/clamp
-	path = /obj/item/clamp
-
 /datum/fabricator_recipe/protolathe/tool/inducer
 	path = /obj/item/inducer
 

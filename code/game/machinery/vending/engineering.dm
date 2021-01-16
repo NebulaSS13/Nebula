@@ -51,7 +51,6 @@
 		/obj/item/stock_parts/circuitboard/apc = 10,
 		/obj/item/stock_parts/circuitboard/air_alarm = 10,
 		/obj/item/cell = 10,
-		/obj/item/clamp = 10,
 		/obj/item/storage/belt/utility
 	)
 	contraband = list(/obj/item/cell/high = 3)

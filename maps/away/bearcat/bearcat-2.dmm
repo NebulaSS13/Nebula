@@ -5489,7 +5489,6 @@
 	pixel_x = 5
 	},
 /obj/item/paint_sprayer,
-/obj/item/clamp,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/atmos)
 "jD" = (

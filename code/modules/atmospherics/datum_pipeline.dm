@@ -73,8 +73,6 @@
 
 			if(result.len>0)
 				for(var/obj/machinery/atmospherics/pipe/item in result)
-					if(item.in_stasis)
-						continue
 					if(!members.Find(item))
 						members += item
 						possible_expansions += item
