@@ -9,7 +9,7 @@
 	shoes = /obj/item/clothing/shoes/jackboots
 	backpack_contents = list(/obj/item/handcuffs = 1)
 	name = MINISTATION_OUTFIT_JOB_NAME("Security Officer")
-	uniform = /obj/item/clothing/under/rank/security
+	uniform = /obj/item/clothing/under/security
 	l_pocket = /obj/item/flash
 	r_pocket = /obj/item/handcuffs
 	id_type = /obj/item/card/id/ministation/security

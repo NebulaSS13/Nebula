@@ -6,7 +6,6 @@
 
 /obj/item/clothing/suit/space/emergency
 	name = "Emergency Softsuit"
-	icon_state = "space_emergency"
 	icon = 'icons/clothing/spacesuit/emergency/suit.dmi'
 	desc = "A thin, ungainly softsuit colored in blaze orange for rescuers to easily locate, looks pretty fragile."
 

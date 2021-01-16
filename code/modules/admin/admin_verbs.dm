@@ -208,7 +208,8 @@ var/list/admin_verbs_debug = list(
 	/datum/admins/proc/check_unconverted_single_icon_items,
 	/client/proc/spawn_material,
 	/client/proc/verb_adjust_tank_bomb_severity,
-	/client/proc/force_ghost_trap_trigger
+	/client/proc/force_ghost_trap_trigger,
+	/client/proc/debug_unconverted_clothing_states
 	)
 
 var/list/admin_verbs_paranoid_debug = list(

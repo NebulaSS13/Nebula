@@ -13,7 +13,7 @@
 
 /decl/hierarchy/outfit/job/tradeship/hand/pre_equip(mob/living/carbon/human/H)
 	..()
-	uniform = pick(list(/obj/item/clothing/under/overalls, /obj/item/clothing/under/hazard, /obj/item/clothing/under/rank/cargotech, /obj/item/clothing/under/color/black, /obj/item/clothing/under/color/grey, /obj/item/clothing/under/casual_pants/track))
+	uniform = pick(list(/obj/item/clothing/under/overalls, /obj/item/clothing/under/hazard, /obj/item/clothing/under/cargotech, /obj/item/clothing/under/color/black, /obj/item/clothing/under/color/grey, /obj/item/clothing/pants/casual/track))
 
 /decl/hierarchy/outfit/job/tradeship/hand/cook
 	name = TRADESHIP_OUTFIT_JOB_NAME("Cook")

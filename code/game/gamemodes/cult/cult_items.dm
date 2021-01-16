@@ -71,10 +71,11 @@
 
 /obj/item/clothing/head/culthood/alt
 	icon = 'icons/clothing/head/cult_alt.dmi'
+
 /obj/item/clothing/suit/cultrobes
 	name = "cult robes"
+	icon = 'icons/clothing/suit/cult.dmi'
 	desc = "A set of durable robes worn by the followers of Nar-Sie."
-	icon_state = "cultrobes"
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_ARMS
 	allowed = list(/obj/item/book/tome,/obj/item/sword/cultblade)
 	armor = list(
@@ -88,12 +89,12 @@
 	siemens_coefficient = 0.6
 
 /obj/item/clothing/suit/cultrobes/alt
-	icon_state = "cultrobesalt"
+	icon = 'icons/clothing/suit/cult_alt.dmi'
 
 /obj/item/clothing/suit/cultrobes/magusred
 	name = "magus robes"
 	desc = "A set of plated robes worn by the followers of Nar-Sie."
-	icon_state = "magusred"
+	icon = 'icons/clothing/suit/wizard/magusred.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	armor = list(

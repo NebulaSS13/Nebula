@@ -2405,7 +2405,7 @@
 /area/unishi/smresearch)
 "gg" = (
 /obj/effect/decal/remains,
-/obj/item/clothing/under/rank/chief_engineer,
+/obj/item/clothing/under/chief_engineer,
 /obj/random/shoes,
 /obj/item/clothing/suit/storage/toggle/labcoat/science{
 	name = "\improper labcoat"

@@ -25,7 +25,7 @@
 /area/proc/power_change()
 	for(var/obj/machinery/M in src)	// for each machine in the area
 		M.power_change()			// reverify power status (to update icons etc.)
-	if (fire || eject || party)
+	if (atmosalm || fire || eject || party)
 		update_icon()
 
 /area/proc/usage(var/chan)

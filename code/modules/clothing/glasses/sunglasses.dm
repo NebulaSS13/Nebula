@@ -1,8 +1,7 @@
 /obj/item/clothing/glasses/sunglasses
 	name = "sunglasses"
 	desc = "Glasses with treated lenses to prevent glare. They provide some rudamentary protection from dazzling attacks."
-	icon_state = "sun"
-	item_state = "sunglasses"
+	icon = 'icons/clothing/eyes/sunglasses.dmi'
 	darkness_view = -1
 	flash_protection = FLASH_PROTECTION_MINOR
 
@@ -13,14 +12,13 @@
 /obj/item/clothing/glasses/sunglasses/big
 	name = "thick sunglasses"
 	desc = "Glasses with treated lenses to prevent glare. The thick, wide lenses protect against a variety of flash attacks."
-	icon_state = "bigsunglasses"
-	item_state = "bigsunglasses"
+	icon = 'icons/clothing/eyes/sunglasses_big.dmi'
 	flash_protection = FLASH_PROTECTION_MODERATE
 
 /obj/item/clothing/glasses/sunglasses/sechud
 	name = "HUD sunglasses"
 	desc = "Sunglasses with a HUD."
-	icon_state = "sunhud"
+	icon = 'icons/clothing/eyes/sunglasses_hud.dmi'
 	hud = /obj/item/clothing/glasses/hud/security
 	electric = TRUE
 	flash_protection = FLASH_PROTECTION_MODERATE
@@ -28,18 +26,17 @@
 /obj/item/clothing/glasses/sunglasses/sechud/goggles
 	name = "HUD goggles"
 	desc = "A pair of goggles with an inbuilt heads up display. The lenses provide some flash protection."
-	icon_state = "goggles"
+	icon = 'icons/clothing/eyes/goggles_hud.dmi'
 
 /obj/item/clothing/glasses/sunglasses/sechud/toggle
 	name = "HUD aviators"
 	desc = "Modified aviator glasses that can be switched between HUD and darkened modes."
-	icon_state = "sec_hud"
-	off_state = "sec_flash"
+	icon = 'icons/clothing/eyes/hud_sec_aviators.dmi'
 	action_button_name = "Toggle Mode"
 	toggleable = TRUE
 	activation_sound = 'sound/effects/pop.ogg'
-
-	var/on = TRUE
+	toggle_on_message = "You switch $ITEM$ to HUD mode."
+	toggle_off_message = "You toggle $ITEM$'s darkened mode on."
 	var/hud_holder
 
 /obj/item/clothing/glasses/sunglasses/sechud/toggle/Initialize()
@@ -52,24 +49,12 @@
 	hud = null
 	. = ..()
 
-/obj/item/clothing/glasses/sunglasses/sechud/toggle/attack_self(mob/user)
-	if(toggleable && !user.incapacitated())
-		on = !on
-		if(on)
-			flash_protection = FLASH_PROTECTION_NONE
-			src.hud = hud_holder
-			to_chat(user, "You switch \the [src] to HUD mode.")
-		else
-			flash_protection = initial(flash_protection)
-			src.hud = null
-			to_chat(user, "You toggle \the [src]'s darkened mode on.")
-		update_icon()
-		sound_to(user, activation_sound)
-		user.update_inv_glasses()
-		user.update_action_buttons()
+/obj/item/clothing/glasses/sunglasses/sechud/toggle/set_active_values()
+	..()
+	flash_protection = FLASH_PROTECTION_NONE
+	hud = hud_holder
 
-/obj/item/clothing/glasses/sunglasses/sechud/toggle/on_update_icon()
-	if(on)
-		icon_state = initial(icon_state)
-	else
-		icon_state = off_state
+/obj/item/clothing/glasses/sunglasses/sechud/toggle/set_inactive_values()
+	..()
+	flash_protection = initial(flash_protection)
+	hud = null

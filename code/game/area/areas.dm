@@ -28,6 +28,10 @@
 		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
 
+	icon = 'icons/turf/areas.dmi'
+	icon_state = "white"
+	blend_mode = BLEND_MULTIPLY
+
 /area/Destroy()
 	..()
 	return QDEL_HINT_HARDDEL
@@ -89,8 +93,10 @@
 		for (var/obj/machinery/alarm/AA in src)
 			AA.update_icon()
 
-		return 1
-	return 0
+		update_icon()
+
+		return TRUE
+	return FALSE
 
 /area/proc/air_doors_close()
 	if(!air_doors_activated)
@@ -183,21 +189,45 @@
 					D.open()
 	return
 
+#define DO_PARTY(COLOR) animate(color = COLOR, time = 0.5 SECONDS, easing = QUAD_EASING)
+
 /area/on_update_icon()
-	if ((fire || eject || party) && (!requires_power||power_environ))//If it doesn't require power, can still activate this proc.
-		if(fire && !eject && !party)
-			icon_state = "blue"
-		/*else if(atmosalm && !fire && !eject && !party)
-			icon_state = "bluenew"*/
-		else if(!fire && eject && !party)
-			icon_state = "red"
-		else if(party && !fire && !eject)
-			icon_state = "party"
+	if((atmosalm || fire || eject || party) && (!requires_power||power_environ) && !istype(src, /area/space))//If it doesn't require power, can still activate this proc.
+		if(fire && !atmosalm && !eject && !party) // FIRE
+			color = "#ff9292"
+			animate(src)	// stop any current animations.
+			animate(src, color = "#ffa5b2", time = 1 SECOND, loop = -1, easing = SINE_EASING)
+			animate(color = "#ff9292", time = 1 SECOND, easing = SINE_EASING)
+		else if(atmosalm && !fire && !eject && !party) // ATMOS
+			color = "#b3dfff"
+			animate(src)
+			animate(src, color = "#78dfff", time = 3 SECOND, loop = -1, easing = SINE_EASING)
+			animate(color = "#b3dfff", time = 3 SECOND, easing = SINE_EASING)
+		else if(eject && !atmosalm && !fire && !party) // EJECT
+			color = "#ff9292"
+			animate(src)
+			animate(src, color = "#bc8a81", time = 1 SECOND, loop = -1, easing = EASE_IN|CUBIC_EASING)
+			animate(color = "#ff9292", time = 0.5 SECOND, easing = EASE_OUT|CUBIC_EASING)
+		else if(party && !atmosalm && !fire && !eject) // PARTY
+			color = "#ff728e"
+			animate(src)
+			animate(src, color = "#7272ff", time = 0.5 SECONDS, loop = -1, easing = QUAD_EASING)
+			DO_PARTY("#72aaff")
+			DO_PARTY("#ffc68e")
+			DO_PARTY("#72c6ff")
+			DO_PARTY("#ff72e2")
+			DO_PARTY("#72ff8e")
+			DO_PARTY("#ffff8e")
+			DO_PARTY("#ff728e")
 		else
-			icon_state = "blue-red"
+			color = "#ffb2b2"
+			animate(src)
+			animate(src, color = "#b3dfff", time = 0.5 SECOND, loop = -1, easing = SINE_EASING)
+			animate(color = "#ffb2b2", time = 0.5 SECOND, loop = -1, easing = SINE_EASING)
 	else
-	//	new lighting behaviour with obj lights
-		icon_state = null
+		animate(src, color = "#ffffff", time = 0.5 SECONDS, easing = QUAD_EASING)	// Stop the animation.
+
+#undef DO_PARTY
 
 /area/proc/set_lightswitch(var/new_switch)
 	if(lightswitch != new_switch)

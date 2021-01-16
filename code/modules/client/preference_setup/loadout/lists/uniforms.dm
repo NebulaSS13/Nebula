@@ -19,7 +19,7 @@
 
 /datum/gear/uniform/roboticist_skirt
 	display_name = "skirt, roboticist"
-	path = /obj/item/clothing/under/rank/roboticist/skirt
+	path = /obj/item/clothing/under/roboticist/skirt
 
 /datum/gear/uniform/suit
 	display_name = "clothes selection"
@@ -47,7 +47,7 @@
 		/obj/item/clothing/under/suit_jacket/tan,
 		/obj/item/clothing/under/scratch,
 		/obj/item/clothing/under/lawyer/bluesuit,
-		/obj/item/clothing/under/rank/internalaffairs/plain,
+		/obj/item/clothing/under/internalaffairs/plain,
 		/obj/item/clothing/under/blazer,
 		/obj/item/clothing/under/blackjumpskirt,
 		/obj/item/clothing/under/kilt,
@@ -59,7 +59,7 @@
 
 /datum/gear/uniform/scrubs
 	display_name = "standard medical scrubs"
-	path = /obj/item/clothing/under/rank/medical/scrubs
+	path = /obj/item/clothing/under/medical/scrubs
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/scrubs/custom
@@ -75,7 +75,7 @@
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
 		/obj/item/clothing/under/sundress_white,
-		/obj/item/clothing/under/dress/dress_fire,
+		/obj/item/clothing/under/dress,
 		/obj/item/clothing/under/dress/dress_green,
 		/obj/item/clothing/under/dress/dress_orange,
 		/obj/item/clothing/under/dress/dress_pink,
@@ -110,37 +110,32 @@
 
 /datum/gear/uniform/casual_pants
 	display_name = "casual pants selection"
-	path = /obj/item/clothing/under/casual_pants
+	path = /obj/item/clothing/pants/casual
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/formal_pants
 	display_name = "formal pants selection"
-	path = /obj/item/clothing/under/formal_pants
+	path = /obj/item/clothing/pants/formal
 	flags = GEAR_HAS_TYPE_SELECTION
-
-/datum/gear/uniform/formal_pants/custom
-	display_name = "suit pants, colour select"
-	path = /obj/item/clothing/under/formal_pants
-	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/formal_pants/baggycustom
 	display_name = "baggy suit pants, colour select"
-	path = /obj/item/clothing/under/formal_pants/baggy
+	path = /obj/item/clothing/pants/baggy
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/shorts
 	display_name = "shorts selection"
-	path = /obj/item/clothing/under/shorts/jeans
+	path = /obj/item/clothing/pants/shorts
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/shorts/custom
 	display_name = "athletic shorts, colour select"
-	path = /obj/item/clothing/under/shorts/
+	path = /obj/item/clothing/pants/shorts/athletic
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/turtleneck
 	display_name = "sweater, colour select"
-	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
+	path = /obj/item/clothing/under/psych/turtleneck/sweater
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/kimono
@@ -158,4 +153,4 @@
 
 /datum/gear/uniform/frontier
 	display_name = "frontier clothes"
-	path = /obj/item/clothing/under/frontier
+	path = /obj/item/clothing/under/frontier 

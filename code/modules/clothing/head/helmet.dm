@@ -21,7 +21,7 @@
 	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
 	w_class = ITEM_SIZE_NORMAL
-	matter = /decl/material/solid/metal/steel
+	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/plasteel = MATTER_AMOUNT_TRACE)
 	origin_tech = "{'materials':2,'engineering':2,'combat':2}"
 

@@ -1,44 +1,36 @@
 /*
  * Science
  */
-/obj/item/clothing/under/rank/research_director
+
+/obj/item/clothing/under/research_director
 	desc = "It's a jumpsuit worn by those with the know-how to achieve the position of \"Chief Science Officer\". Its fabric provides minor protection from biological contaminants."
 	name = "chief science officer's jumpsuit"
-	icon_state = "director"
-	item_state = "lb_suit"
-	worn_state = "director"
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_rd.dmi'
 	armor = list(
 		bio = ARMOR_BIO_MINOR
-		)
-
-/obj/item/clothing/under/rank/research_director/rdalt
+	)
+		
+/obj/item/clothing/under/research_director/rdalt
 	desc = "A dress suit and slacks stained with hard work and dedication to science. Perhaps other things as well, but mostly hard work and dedication."
 	name = "head researcher uniform"
-	icon_state = "rdalt"
-	item_state = "lb_suit"
-	worn_state = "rdalt"
+	icon = 'icons/clothing/under/uniform_rd_alt.dmi'
 	armor = list(
 		bio = ARMOR_BIO_MINOR
-		)
+	)
 
-/obj/item/clothing/under/rank/research_director/dress_rd
+/obj/item/clothing/under/research_director/dress_rd
 	name = "chief science officer dress uniform"
 	desc = "Feminine fashion for the style concious CSO. Its fabric provides minor protection from biological contaminants."
-	icon_state = "dress_rd"
-	item_state = "lb_suit"
-	worn_state = "dress_rd"
+	icon = 'icons/clothing/under/dresses/dress_rd.dmi'
 	armor = list(
 		bio = ARMOR_BIO_MINOR
-		)
+	)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_ARMS
 
-/obj/item/clothing/under/rank/chemist
+/obj/item/clothing/under/chemist
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a chemist rank stripe on it."
 	name = "pharmacist's jumpsuit"
-	icon_state = "chemistry"
-	item_state = "w_suit"
-	worn_state = "chemistrywhite"
-	gender_icons = 1
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_chemist.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		bio = ARMOR_BIO_MINOR
@@ -46,194 +38,119 @@
 /*
  * Medical
  */
-/obj/item/clothing/under/rank/chief_medical_officer
+/obj/item/clothing/under/chief_medical_officer
 	desc = "It's a jumpsuit worn by those with the experience to be \"Chief Medical Officer\". It provides minor biological protection."
 	name = "chief medical officer's jumpsuit"
-	icon_state = "cmo"
-	item_state = "w_suit"
-	worn_state = "cmo"
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_cmo.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		bio = ARMOR_BIO_MINOR
 		)
 
-/obj/item/clothing/under/rank/geneticist
+/obj/item/clothing/under/geneticist
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a genetics rank stripe on it."
 	name = "geneticist's jumpsuit"
-	icon_state = "genetics"
-	item_state = "w_suit"
-	worn_state = "geneticswhite"
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_genetics.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		bio = ARMOR_BIO_MINOR
 		)
 
-/obj/item/clothing/under/rank/virologist
+/obj/item/clothing/under/virologist
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a virologist rank stripe on it."
 	name = "virologist's jumpsuit"
-	icon_state = "virology"
-	item_state = "w_suit"
-	worn_state = "virologywhite"
-	gender_icons = 1
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_virology.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		bio = ARMOR_BIO_MINOR
 		)
 
-/obj/item/clothing/under/rank/nursesuit
+/obj/item/clothing/under/nursesuit
 	desc = "It's a jumpsuit commonly worn by nursing staff in the medical department."
 	name = "nurse's suit"
-	icon_state = "nursesuit"
-	item_state = "nursesuit"
-	worn_state = "nursesuit"
+	icon = 'icons/clothing/under/nurse.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		bio = ARMOR_BIO_MINOR
 		)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
-/obj/item/clothing/under/rank/nurse
+/obj/item/clothing/under/nurse
 	desc = "A dress commonly worn by the nursing staff in the medical department."
 	name = "nurse's dress"
-	icon_state = "nurse"
-	item_state = "nursesuit"
-	worn_state = "nurse"
+	icon = 'icons/clothing/under/nurse.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		bio = ARMOR_BIO_MINOR
 		)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 
-/obj/item/clothing/under/rank/orderly
+/obj/item/clothing/under/orderly
 	desc = "A white suit to be worn by medical attendants."
 	name = "orderly's uniform"
-	icon_state = "orderly"
-	item_state = "nursesuit"
-	worn_state = "orderly"
-	gender_icons = 1
+	icon = 'icons/clothing/under/uniform_orderly.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		bio = ARMOR_BIO_MINOR
 		)
 
-/obj/item/clothing/under/rank/medical
+/obj/item/clothing/under/medical
 	desc = "It's made of a special fiber that provides minor protection against biohazards. It has a cross on the chest denoting that the wearer is trained medical personnel."
 	name = "medical doctor's jumpsuit"
-	icon_state = "medical"
-	item_state = "w_suit"
-	worn_state = "medical"
-	gender_icons = 1
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_medical.dmi'
 	permeability_coefficient = 0.50
 	armor = list(
 		bio = ARMOR_BIO_MINOR
-		)
+	)
 
-/obj/item/clothing/under/rank/medical/paramedic
+/obj/item/clothing/under/medical/paramedic
 	name = "short sleeve medical jumpsuit"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one has a cross on the chest denoting that the wearer is trained medical personnel."
-	icon_state = "medical"
-	item_state = "medical_short"
-	worn_state = "medical_short"
-	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS
+	rolled_sleeves = TRUE
 
-/obj/item/clothing/under/rank/medical/scrubs
+/obj/item/clothing/under/medical/scrubs
 	name = "scrubs"
 	desc = "A loose-fitting garment designed to provide minor protection against biohazards."
-	icon_state = "scrubs"
-	worn_state = "scrubs"
-	gender_icons = 1
+	icon = 'icons/clothing/under/uniform_scrubs.dmi'
 
-/obj/item/clothing/under/rank/medical/scrubs/blue
+/obj/item/clothing/under/medical/scrubs/blue
 	name = "blue scrubs"
 	color = "#4891e1"
 
-/obj/item/clothing/under/rank/medical/scrubs/green
+/obj/item/clothing/under/medical/scrubs/green
 	name = "green scrubs"
 	color = "#255a3e"
 
-/obj/item/clothing/under/rank/medical/scrubs/purple
+/obj/item/clothing/under/medical/scrubs/purple
 	name = "purple scrubs"
 	color = "#7a1b3f"
 
-/obj/item/clothing/under/rank/medical/scrubs/black
+/obj/item/clothing/under/medical/scrubs/black
 	name = "black scrubs"
 	color = "#242424"
 
-/obj/item/clothing/under/rank/medical/scrubs/navyblue
+/obj/item/clothing/under/medical/scrubs/navyblue
 	name = "navy blue scrubs"
 	color = "#1f3a69"
 
-/obj/item/clothing/under/rank/medical/scrubs/lilac
+/obj/item/clothing/under/medical/scrubs/lilac
 	name = "lilac scrubs"
 	color = "#c8a2c8"
 
-/obj/item/clothing/under/rank/medical/scrubs/teal
+/obj/item/clothing/under/medical/scrubs/teal
 	name = "teal scrubs"
 	color = "#008080"
 
-/obj/item/clothing/under/rank/medical/scrubs/heliodor
+/obj/item/clothing/under/medical/scrubs/heliodor
 	name = "heliodor scrubs"
 	color = "#aad539"
 
-/obj/item/clothing/under/rank/psych
+/obj/item/clothing/under/psych
 	desc = "A basic white jumpsuit. It has turqouise markings that denote the wearer as a psychiatrist."
 	name = "psychiatrist's jumpsuit"
-	icon_state = "psych"
-	item_state = "w_suit"
-	worn_state = "psych"
-	gender_icons = 1
+	icon = 'icons/clothing/under/jumpsuits/jumpsuit_psych.dmi'
 
-/obj/item/clothing/under/rank/psych/turtleneck
+/obj/item/clothing/under/psych/turtleneck
 	desc = "A turqouise sweater and a pair of dark blue slacks."
 	name = "turqouise turtleneck"
-	icon_state = "psychturtle"
-	item_state = "b_suit"
-	worn_state = "psychturtle"
-
-
-/*
- * Medsci, unused (i think) stuff
- */
-/obj/item/clothing/under/rank/geneticist_new
-	desc = "It's made of a special fiber which provides minor protection against biohazards."
-	name = "geneticist's jumpsuit"
-	icon_state = "genetics_new"
-	item_state = "w_suit"
-	worn_state = "genetics_new"
-	permeability_coefficient = 0.50
-	armor = list(
-		bio = ARMOR_BIO_MINOR
-		)
-
-/obj/item/clothing/under/rank/chemist_new
-	desc = "It's made of a special fiber which provides minor protection against biohazards."
-	name = "chemist's jumpsuit"
-	icon_state = "chemist_new"
-	item_state = "w_suit"
-	worn_state = "chemist_new"
-	permeability_coefficient = 0.50
-	armor = list(
-		bio = ARMOR_BIO_MINOR
-		)
-
-/obj/item/clothing/under/rank/scientist_new
-	desc = "Made of a special fiber that gives special protection against biohazards and small explosions."
-	name = "scientist's jumpsuit"
-	icon_state = "scientist_new"
-	item_state = "w_suit"
-	worn_state = "scientist_new"
-	permeability_coefficient = 0.50
-	armor = list(
-		bio = ARMOR_BIO_MINOR
-		)
-
-/obj/item/clothing/under/rank/virologist_new
-	desc = "Made of a special fiber that gives increased protection against biohazards."
-	name = "virologist's jumpsuit"
-	icon_state = "virologist_new"
-	item_state = "w_suit"
-	worn_state = "virologist_new"
-	permeability_coefficient = 0.50
-	armor = list(
-		bio = ARMOR_BIO_MINOR
-		)
+	icon = 'icons/clothing/under/uniform_turtleneck_blue.dmi'
