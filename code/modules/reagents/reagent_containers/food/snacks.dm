@@ -3821,3 +3821,27 @@ obj/item/chems/food/snacks/dango
 	name = "taco"
 	desc = "Interestingly, the shell has gone soft and the contents have gone stale."
 	icon_state = "ancient_taco"
+
+/obj/item/chems/food/snacks/pelmen
+	name = "meat pelmen"
+	desc = "Raw meat appetizer."
+	icon_state = "pelmen"
+	filling_color = "#ffffff"
+	center_of_mass = @"{'x':16,'y':16}"
+	bitesize = 2
+
+/obj/item/chems/food/snacks/pelmen/Initialize()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
+
+/obj/item/chems/food/snacks/pelmeni_boiled
+	name = "boiled pelmeni"
+	desc = "A dish consisting of boiled pieces of meat wrapped in dough. Delicious!"
+	icon_state = "pelmeni_boiled"
+	filling_color = "#ffffff"
+	center_of_mass = @"{'x':16,'y':16}"
+	bitesize = 2
+
+/obj/item/chems/food/snacks/pelmeni_boiled/Initialize()
+	. = ..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 30)
