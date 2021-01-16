@@ -377,14 +377,11 @@
 /datum/fabricator_recipe/textiles/carriertan
 	path = /obj/item/clothing/suit/armor/pcarrier/tan
 
-/datum/fabricator_recipe/textiles/carrierlight
+/datum/fabricator_recipe/textiles/carrier
 	path = /obj/item/clothing/suit/armor/pcarrier
 
 /datum/fabricator_recipe/textiles/carrierpress
 	path = /obj/item/clothing/suit/armor/pcarrier/press
-
-/datum/fabricator_recipe/textiles/carriermedium
-	path = /obj/item/clothing/suit/armor/pcarrier/medium
 
 /datum/fabricator_recipe/textiles/carrierwarden
 	path = /obj/item/clothing/suit/armor/warden

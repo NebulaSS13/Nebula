@@ -1007,8 +1007,8 @@
 	pixel_x = 4;
 	pixel_y = 32
 	},
-/obj/item/clothing/suit/armor/pcarrier/medium/prepared,
-/obj/item/clothing/suit/armor/pcarrier/medium/prepared,
+/obj/item/clothing/suit/armor/pcarrier/medium,
+/obj/item/clothing/suit/armor/pcarrier/medium,
 /obj/item/clothing/head/helmet,
 /obj/item/clothing/head/helmet,
 /turf/unsimulated/floor{
@@ -1018,8 +1018,8 @@
 /area/map_template/rescue_base/base)
 "ch" = (
 /obj/structure/table/rack,
-/obj/item/clothing/suit/armor/pcarrier/medium/prepared,
-/obj/item/clothing/suit/armor/pcarrier/medium/prepared,
+/obj/item/clothing/suit/armor/pcarrier/medium,
+/obj/item/clothing/suit/armor/pcarrier/medium,
 /obj/item/clothing/head/helmet,
 /obj/item/clothing/head/helmet,
 /turf/unsimulated/floor{
