@@ -2,7 +2,7 @@ SUBSYSTEM_DEF(trade)
 	name = "Trade"
 	wait = 1 MINUTE
 	priority = SS_PRIORITY_TRADE
-	//Initializes at default time
+	init_order = SS_INIT_MISC_LATE
 
 	var/list/traders = list()
 	var/tmp/list/current_traders
@@ -10,8 +10,13 @@ SUBSYSTEM_DEF(trade)
 
 /datum/controller/subsystem/trade/Initialize()
 	. = ..()
-	for(var/i in 1 to rand(1,3))
-		generate_trader(1)
+
+	for(var/trader_type in GLOB.using_map.get_initial_traders())
+		traders += new trader_type
+	var/total_traders = rand(1,3) - length(traders)
+	if(total_traders > 0)
+		for(var/i in 1 to total_traders)
+			generate_trader(1)
 
 /datum/controller/subsystem/trade/fire(resumed = FALSE)
 	if (!resumed)
@@ -29,6 +34,7 @@ SUBSYSTEM_DEF(trade)
 
 	if((traders.len <= max_traders) && prob(100 - 50 * traders.len / max_traders))
 		generate_trader()
+	
 
 /datum/controller/subsystem/trade/stat_entry()
 	..("Traders: [traders.len]")
