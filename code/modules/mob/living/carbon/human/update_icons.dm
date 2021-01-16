@@ -492,11 +492,10 @@ var/global/list/damage_icon_parts = list()
 //vvvvvv UPDATE_INV PROCS vvvvvv
 
 /mob/living/carbon/human/update_inv_w_uniform(var/update_icons=1)
-	if(istype(w_uniform, /obj/item/clothing/under) && !(wear_suit && wear_suit.flags_inv & HIDEJUMPSUIT))
+	if(w_uniform && (!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT)))
 		overlays_standing[HO_UNIFORM_LAYER]	= w_uniform.get_mob_overlay(src,slot_w_uniform_str)
 	else
 		overlays_standing[HO_UNIFORM_LAYER]	= null
-
 	if(update_icons)
 		queue_icon_update()
 
