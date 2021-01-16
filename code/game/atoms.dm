@@ -45,6 +45,7 @@
 //Must return an Initialize hint. Defined in __DEFINES/subsystems.dm
 
 /atom/proc/Initialize(mapload, ...)
+	RETURN_TYPE(/datum/init_hint)
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	if(atom_flags & ATOM_FLAG_INITIALIZED)

@@ -80,17 +80,16 @@ SUBSYSTEM_DEF(atoms)
 	var/qdeleted = FALSE
 
 	if(result != INITIALIZE_HINT_NORMAL)
-		switch(result)
-			if(INITIALIZE_HINT_LATELOAD)
-				if(arguments[1])	//mapload
-					late_loaders[A] = arguments
-				else
-					A.LateInitialize(arglist(arguments))
-			if(INITIALIZE_HINT_QDEL)
-				qdel(A)
-				qdeleted = TRUE
+		if(result == INITIALIZE_HINT_LATELOAD)
+			if(arguments[1])	//mapload
+				late_loaders[A] = arguments
 			else
-				BadInitializeCalls[the_type] |= BAD_INIT_NO_HINT
+				A.LateInitialize(arglist(arguments))
+		else if(result == INITIALIZE_HINT_QDEL)
+			qdel(A)
+			qdeleted = TRUE
+		else
+			BadInitializeCalls[the_type] |= BAD_INIT_NO_HINT
 
 	if(!A)	//possible harddel
 		qdeleted = TRUE
@@ -150,7 +149,25 @@ SUBSYSTEM_DEF(atoms)
 	if(initlog)
 		text2file(initlog, "[GLOB.log_directory]/initialize.log")
 
+/datum/init_hint
+	var/static/list/initialized_types = list()
+
+/datum/init_hint/New()
+	if(type == /datum/init_hint)
+		CRASH("Attempted to instantiate base type")
+	if(type in initialized_types)
+		CRASH("Attempted to instantiate already instantiated type")
+	initialized_types += type
+	..()
+
+/datum/init_hint/normal
+/datum/init_hint/lateload
+/datum/init_hint/qdel
+
 #undef BAD_INIT_QDEL_BEFORE
 #undef BAD_INIT_DIDNT_INIT
 #undef BAD_INIT_SLEPT
 #undef BAD_INIT_NO_HINT
+
+/obj/bad_actor/Initialize() // Left for testing
+	..()
