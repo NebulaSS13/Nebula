@@ -27,12 +27,11 @@
 		lightlevel = 0.1
 	..()
 
-/obj/effect/overmap/visitable/sector/exoplanet/chlorine/generate_atmosphere()
-	..()
-	if(atmosphere)
-		atmosphere.adjust_gas(/decl/material/gas/chlorine, MOLES_O2STANDARD)
-		atmosphere.temperature = T100C - rand(0, 100)
-		atmosphere.update_values()
+/obj/effect/overmap/visitable/sector/exoplanet/chlorine/get_target_temperature()
+	return T0C - rand(0, 100)
+
+/obj/effect/overmap/visitable/sector/exoplanet/chlorine/get_mandatory_gasses()
+	return list(/decl/material/gas/chlorine = MOLES_O2STANDARD)
 
 /datum/random_map/noise/exoplanet/chlorine
 	descriptor = "chlorine exoplanet"

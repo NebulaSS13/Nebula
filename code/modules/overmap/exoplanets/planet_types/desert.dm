@@ -18,15 +18,8 @@
 		lightlevel = rand(5,10)/10	//deserts are usually :lit:
 	..()
 
-/obj/effect/overmap/visitable/sector/exoplanet/desert/generate_atmosphere()
-	..()
-	if(atmosphere)
-		var/limit = 1000
-		if(habitability_class <= HABITABILITY_OKAY)
-			var/decl/species/human/H = /decl/species/human
-			limit = initial(H.heat_level_1) - rand(1,10)
-		atmosphere.temperature = min(T20C + rand(20, 100), limit)
-		atmosphere.update_values()
+/obj/effect/overmap/visitable/sector/exoplanet/desert/get_target_temperature()
+	return T20C + rand(20, 100)
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/adapt_seed(var/datum/seed/S)
 	..()

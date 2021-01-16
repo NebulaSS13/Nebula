@@ -16,13 +16,12 @@
 	if(prob(10))
 		flora_diversity = 1
 	..()
-	
+
+/obj/effect/overmap/visitable/sector/exoplanet/barren/get_target_pressure()
+	return ONE_ATMOSPHERE * 0.05
+
 /obj/effect/overmap/visitable/sector/exoplanet/barren/generate_habitability()
 	habitability_class =  HABITABILITY_BAD
-
-/obj/effect/overmap/visitable/sector/exoplanet/barren/generate_atmosphere()
-	..()
-	atmosphere.remove_ratio(0.9)
 
 /datum/random_map/noise/exoplanet/barren
 	descriptor = "barren exoplanet"

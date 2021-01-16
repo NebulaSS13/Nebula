@@ -29,11 +29,8 @@
 /obj/effect/overmap/visitable/sector/exoplanet/volcanic/generate_habitability()
 	habitability_class =  HABITABILITY_BAD
 
-/obj/effect/overmap/visitable/sector/exoplanet/volcanic/generate_atmosphere()
-	..()
-	if(atmosphere)
-		atmosphere.temperature = T20C + rand(220, 800)
-		atmosphere.update_values()
+/obj/effect/overmap/visitable/sector/exoplanet/volcanic/get_target_temperature()
+	return T20C + rand(220, 800)
 
 /obj/effect/overmap/visitable/sector/exoplanet/volcanic/adapt_seed(var/datum/seed/S)
 	..()
