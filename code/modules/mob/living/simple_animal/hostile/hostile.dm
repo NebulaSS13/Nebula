@@ -263,14 +263,14 @@
 
 		var/obj/effect/shield/S = locate(/obj/effect/shield) in targ
 		if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
-			S.attackby(natural_weapon, src)
+			S.attackby(get_natural_weapon(), src)
 			return
 
 		for(var/type in valid_obstacles_by_priority)
 			var/obj/obstacle = locate(type) in targ
 			if(obstacle)
 				face_atom(obstacle)
-				obstacle.attackby(natural_weapon, src)
+				obstacle.attackby(get_natural_weapon(), src)
 				return
 
 		if(can_pry)
