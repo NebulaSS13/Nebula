@@ -170,11 +170,15 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 
 /obj/machinery/atmospherics/cannot_transition_to(state_path, mob/user)
 	if(state_path == /decl/machine_construction/default/deconstructed)
+		var/unwrench_time = 4 SECONDS
 		if(!deconstruction_pressure_check())
-			return SPAN_WARNING("You cannot unwrench \the [src], the internal pressure is too extreme compared to the environment.")
+			unwrench_time *= 2
+			var/obj/item/twohanded/pipewrench/wrench = user.get_active_hand()
+			if(!istype(wrench))
+				return SPAN_WARNING("You cannot unwrench \the [src], the internal pressure is too extreme compared to the environment.")
 
 		to_chat(user, SPAN_NOTICE("You begin to unfasten \the [src]..."))
-		if(!do_after(user, 4 SECONDS, src))
+		if(!do_after(user, unwrench_time, src))
 			return MCS_BLOCK
 	return ..()
 
