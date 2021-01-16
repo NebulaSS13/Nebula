@@ -446,6 +446,16 @@
 /obj/item/stack/material/leather/ten
 	amount = 10
 
+/obj/item/stack/material/leather
+	name = "leather"
+	desc = "The by-product of mob grinding."
+	icon_state = "sheet-leather"
+	material = /decl/material/solid/leather/synth
+	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
+
+/obj/item/stack/material/leather/synth/ten
+	amount = 10
+
 /obj/item/stack/material/glass
 	name = "glass"
 	icon_state = "sheet-clear"
