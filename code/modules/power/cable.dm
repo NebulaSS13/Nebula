@@ -463,6 +463,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	max_amount = MAXCOIL
 	color = COLOR_MAROON
 	desc = "A coil of wiring, suitable for both delicate electronics and heavy duty power supply."
+	singular_name = "length"
 	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
