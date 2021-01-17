@@ -38,14 +38,14 @@
 	for(var/antag_type in all_antag_types)
 		var/decl/special_role/antag = all_antag_types[antag_type]
 		. += "<tr><td>[antag.name]: </td><td>"
-		if(jobban_isbanned(preference_mob(), antag.type))
+		if(jobban_isbanned(preference_mob(), antag.name))
 			. += "<span class='danger'>\[BANNED\]</span><br>"
-		else if(antag.type in pref.be_special_role)
-			. += "<span class='linkOn'>High</span> <a href='?src=\ref[src];add_maybe=\ref[antag]'>Low</a> <a href='?src=\ref[src];del_special=\ref[antag]'>Never</a></br>"
-		else if(antag.type in pref.may_be_special_role)
-			. += "<a href='?src=\ref[src];add_special=\ref[antag]'>High</a> <span class='linkOn'>Low</span> <a href='?src=\ref[src];del_special=\ref[antag]'>Never</a></br>"
+		else if(antag.name in pref.be_special_role)
+			. += "<span class='linkOn'>High</span> <a href='?src=\ref[src];add_maybe=[antag.name]'>Low</a> <a href='?src=\ref[src];del_special=[antag.name]'>Never</a></br>"
+		else if(antag.name in pref.may_be_special_role)
+			. += "<a href='?src=\ref[src];add_special=[antag.name]'>High</a> <span class='linkOn'>Low</span> <a href='?src=\ref[src];del_special=[antag.name]'>Never</a></br>"
 		else
-			. += "<a href='?src=\ref[src];add_special=\ref[antag]'>High</a> <a href='?src=\ref[src];add_maybe=\ref[antag]'>Low</a> <span class='linkOn'>Never</span></br>"
+			. += "<a href='?src=\ref[src];add_special=[antag.name]'>High</a> <a href='?src=\ref[src];add_maybe=[antag.name]'>Low</a> <span class='linkOn'>Never</span></br>"
 
 		. += "</td></tr>"
 	. += "</table>"
@@ -121,10 +121,11 @@
 
 	var/list/all_antag_types = decls_repository.get_decls_of_subtype(/decl/special_role)
 	for(var/antag_type in all_antag_types)
+		var/decl/special_role/role = all_antag_types[antag_type]
 		if(!include_bans)
-			if(jobban_isbanned(preference_mob(), antag_type))
+			if(jobban_isbanned(preference_mob(), role.name))
 				continue
-		private_valid_special_roles += antag_type
+		private_valid_special_roles |= role.name
 
 	for(var/ghost_trap_key in subtypesof(/decl/ghosttrap))
 		var/decl/ghosttrap/ghost_trap = decls_repository.get_decl(ghost_trap_key)
@@ -133,7 +134,7 @@
 		if(!include_bans)
 			if(banned_from_ghost_role(preference_mob(), ghost_trap))		
 				continue
-		private_valid_special_roles += ghost_trap.pref_check
+		private_valid_special_roles |= ghost_trap.pref_check
 	return private_valid_special_roles
 
 /client/proc/wishes_to_be_role(var/role)
