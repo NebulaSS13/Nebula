@@ -17,6 +17,7 @@
 	faction = "mercenary"
 
 	base_to_load = /datum/map_template/ruin/antag_spawn/mercenary
+	default_outfit = /decl/hierarchy/outfit/mercenary
 
 /decl/special_role/mercenary/create_global_objectives()
 	if(!..())
@@ -26,13 +27,7 @@
 	return 1
 
 /decl/special_role/mercenary/equip(var/mob/living/carbon/human/player)
-	if(!..())
-		return 0
-
-	var/decl/hierarchy/outfit/mercenary = outfit_by_type(/decl/hierarchy/outfit/mercenary)
-	mercenary.equip(player)
-
-	var/obj/item/radio/uplink/U = new(get_turf(player), player.mind, DEFAULT_TELECRYSTAL_AMOUNT)
-	player.put_in_hands(U)
-
-	return 1
+	. = ..()
+	if(.)
+		var/obj/item/radio/uplink/U = new(get_turf(player), player.mind, DEFAULT_TELECRYSTAL_AMOUNT)
+		player.put_in_hands(U)

@@ -10,19 +10,23 @@
 	hard_cap_round = 8
 	initial_spawn_req = 4
 	initial_spawn_target = 6
+	default_outfit = /decl/hierarchy/outfit/mercenary_commando
+	rig_type = /obj/item/rig/merc
+	id_title = "Commando"
 
 /decl/special_role/deathsquad/mercenary/equip(var/mob/living/carbon/human/player)
+	. = ..()
+	if(.)
+		create_radio(SYND_FREQ, player)
 
-	player.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(player), slot_w_uniform_str)
-	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots/swat(player), slot_shoes_str)
-	player.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal(player), slot_glasses_str)
-	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/syndicate(player), slot_wear_mask_str)
-	player.equip_to_slot_or_del(new /obj/item/storage/box(player), slot_in_backpack_str)
-	player.equip_to_slot_or_del(new /obj/item/ammo_magazine/box/pistol(player), slot_in_backpack_str)
-	player.equip_to_slot_or_del(new /obj/item/rig/merc(player), slot_back_str)
-	player.put_in_hands_or_del(new /obj/item/gun/energy/laser(player))
-	player.put_in_hands_or_del(new /obj/item/energy_blade/sword(player))
-
-	create_id("Commando", player)
-	create_radio(SYND_FREQ, player)
-	return 1
+/decl/hierarchy/outfit/mercenary_commando
+	name =    "Special Role - Mercenary Commando"
+	uniform = /obj/item/clothing/under/syndicate
+	shoes =   /obj/item/clothing/shoes/jackboots/swat
+	glasses = /obj/item/clothing/glasses/thermal
+	mask =    /obj/item/clothing/mask/gas/syndicate
+	backpack_contents = list(/obj/item/ammo_magazine/box/pistol = 1)
+	hands = list(
+		/obj/item/gun/energy/laser,
+		/obj/item/energy_blade/sword
+	)

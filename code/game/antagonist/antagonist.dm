@@ -14,8 +14,8 @@
 	var/loss_feedback_tag                   // Used by the database for end of round loss.
 
 	// Role data.
-	var/name = "Traitor"               // special_role text.
-	var/name_plural = "Traitors"       // As above but plural.
+	var/name                                // special_role text (ex. "Traitor").
+	var/name_plural                         // As above but plural.
 
 	// Visual references.
 	var/antaghud_indicator = "hudsyndicate" // Used by the ghost antagHUD.
@@ -70,7 +70,11 @@
 
 	// ID card stuff.
 	var/default_access = list()
+	var/id_title
 	var/id_type = /obj/item/card/id
+	var/rig_type
+
+	var/default_outfit
 
 	var/antag_text = "You are an antagonist! Within the rules, \
 		try to act as an opposing force to the crew. Further RP and try to make sure \
@@ -83,6 +87,8 @@
 	var/datum/map_template/base_to_load
 
 /decl/special_role/New()
+	if(!name)
+		crash_with("Special role [type] created without name set.")
 	if(ispath(skill_setter))
 		skill_setter = new skill_setter
 	..()

@@ -43,22 +43,14 @@
 	player.objectives |= survive
 
 /decl/special_role/renegade/equip(var/mob/living/carbon/human/player)
-
-	if(!..())
-		return
-
-	var/gun_type = pick(spawn_guns)
-	if(islist(gun_type))
-		gun_type = pick(gun_type)
-	var/obj/item/gun = new gun_type(get_turf(player))
-
-	// Attempt to put into a container.
-	if(player.equip_to_storage(gun))
-		return
-
-	// If that failed, attempt to put into any valid non-handslot
-	if(player.equip_to_appropriate_slot(gun))
-		return
-
-	// If that failed, then finally attempt to at least let the player carry the weapon
-	player.put_in_hands(gun)
+	. = ..()
+	if(.)
+		var/gun_type = pick(spawn_guns)
+		if(islist(gun_type))
+			gun_type = pick(gun_type)
+		var/obj/item/gun = new gun_type(get_turf(player))
+		if(player.equip_to_storage(gun))
+			return
+		if(player.equip_to_appropriate_slot(gun))
+			return
+		player.put_in_hands(gun)

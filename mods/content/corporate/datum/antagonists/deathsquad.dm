@@ -13,40 +13,48 @@
 	initial_spawn_target = 6
 
 	faction = "deathsquad"
-
+	default_outfit = /decl/hierarchy/outfit/commando
+	id_title = "Asset Protection"
 	var/deployed = 0
 
 /decl/special_role/deathsquad/attempt_spawn()
 	if(..())
 		deployed = 1
 
+/decl/hierarchy/outfit/commando
+	name =     "Special Role - Deathsquad Commando"
+	uniform =  /obj/item/clothing/under/color/green
+	l_pocket = /obj/item/plastique
+	shoes =    /obj/item/clothing/shoes/jackboots/swat
+	glasses =  /obj/item/clothing/glasses/thermal
+	mask =     /obj/item/clothing/mask/gas/swat
+	belt =     /obj/item/gun/projectile/revolver
+	hands = list(
+		/obj/item/gun/energy/laser,
+		/obj/item/energy_blade/sword
+	)
+
+/decl/hierarchy/outfit/commando/leader
+	name =    "Special Role - Deathsquad Leader"
+	uniform =  /obj/item/clothing/under/centcom_officer
+	l_pocket = /obj/item/pinpointer
+	r_pocket = /obj/item/disk/nuclear
+
 /decl/special_role/deathsquad/equip(var/mob/living/carbon/human/player)
-	if(!..())
-		return
-
 	if (player.mind == leader)
-		player.equip_to_slot_or_del(new /obj/item/clothing/under/centcom_officer(player), slot_w_uniform_str)
+		default_outfit = /decl/hierarchy/outfit/commando/leader
 	else
-		player.equip_to_slot_or_del(new /obj/item/clothing/under/color/green(player), slot_w_uniform_str)
+		default_outfit = initial(default_outfit)
+	. = ..()
+	if(.)
+		player.implant_loyalty(player)
+		create_radio(DTH_FREQ, player)
 
-	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots/swat(player), slot_shoes_str)
-	player.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal(player), slot_glasses_str)
-	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat(player), slot_wear_mask_str)
-	if (player.mind == leader)
-		player.equip_to_slot_or_del(new /obj/item/pinpointer(player), slot_l_store_str)
-		player.equip_to_slot_or_del(new /obj/item/disk/nuclear(player), slot_r_store_str)
-	else
-		player.equip_to_slot_or_del(new /obj/item/plastique(player), slot_l_store_str)
-	player.equip_to_slot_or_del(new /obj/item/gun/projectile/revolver(player), slot_belt_str)
-	player.put_in_hands_or_del(new /obj/item/gun/energy/laser(player))
-	player.put_in_hands_or_del(new /obj/item/energy_blade/sword(player))
-	player.implant_loyalty(player)
-
-	var/obj/item/card/id/id = create_id("Asset Protection", player)
-	if(id)
+/decl/special_role/deathsquad/create_id(mob/living/carbon/human/player, equip)
+	var/obj/item/card/id/id = ..()
+	if(player && id)
 		id.access |= get_all_station_access()
 		id.icon_state = "centcom"
-	create_radio(DTH_FREQ, player)
 
 /decl/special_role/deathsquad/update_antag_mob(var/datum/mind/player)
 

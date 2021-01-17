@@ -1,7 +1,9 @@
 /decl/special_role/proc/equip(var/mob/living/carbon/human/player)
 
+	SHOULD_CALL_PARENT(TRUE)
+
 	if(!istype(player))
-		return 0
+		return FALSE
 	
 	if (required_language)
 		player.add_language(required_language)
@@ -14,7 +16,16 @@
 				qdel(thing)
 		//mainly for nonhuman antag compatibility. Should not effect item spawning.
 		player.species.equip_survival_gear(player)
-	return 1
+
+	if(default_outfit)
+		var/decl/hierarchy/outfit/outfit = decls_repository.get_decl(default_outfit)
+		outfit.equip(player)
+
+	create_id(player)
+	if(rig_type)
+		equip_rig(rig_type, player)
+
+	return TRUE
 
 /decl/special_role/proc/unequip(var/mob/living/carbon/human/player)
 	if(!istype(player))
