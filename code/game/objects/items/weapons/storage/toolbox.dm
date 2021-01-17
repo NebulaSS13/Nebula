@@ -65,3 +65,21 @@
 	origin_tech = "{'combat':1,'esoteric':1}"
 	attack_cooldown = 10
 	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/screwdriver, /obj/item/wrench, /obj/item/weldingtool, /obj/item/crowbar, /obj/item/wirecutters, /obj/item/multitool)
+
+/obj/item/storage/toolbox/repairs
+	name = "electrician toolbox"
+	desc = "A box full of boxes, with electrical machinery parts and tools needed to get them where they're needed."
+	icon_state = "yellow_striped"
+	item_state = "yellow"
+	startswith = list(
+		/obj/item/stack/cable_coil,
+		/obj/item/screwdriver, 
+		/obj/item/wrench,
+		/obj/item/crowbar, 
+		/obj/item/wirecutters,
+		/obj/item/storage/box/parts_pack/manipulator,
+		/obj/item/storage/box/parts_pack/laser,
+		/obj/item/storage/box/parts_pack/capacitor,
+		/obj/item/storage/box/parts_pack/keyboard,
+		/obj/item/storage/box/parts
+	)

@@ -25,6 +25,7 @@
 	material = /decl/material/solid/plastic
 	base_type = /obj/item/stock_parts/keyboard
 	part_flags = PART_FLAG_HAND_REMOVE
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/stock_parts/keyboard/on_refresh(obj/machinery/machine)
 	..()

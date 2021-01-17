@@ -33,7 +33,8 @@
 
 /decl/hierarchy/supply_pack/engineering/electrical
 	name = "Gear - Electrical maintenance"
-	contains = list(/obj/item/storage/toolbox/electrical = 2,
+	contains = list(/obj/item/storage/toolbox/electrical = 1,
+					/obj/item/storage/toolbox/repairs = 1,
 					/obj/item/clothing/gloves/insulated = 2,
 					/obj/item/cell = 2,
 					/obj/item/cell/high = 2)
