@@ -43,9 +43,12 @@
 	affect_ingest(M, alien, removed, holder)
 
 /decl/material/liquid/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.heal_organ_damage(0.5 * removed, 0) //what
-
 	adjust_nutrition(M, alien, removed)
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
+	M.heal_organ_damage(0.5 * removed, 0) //what	
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 
 /decl/material/liquid/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
@@ -81,8 +84,12 @@
 	taste_description = "some sort of protein"
 	color = "#440000"
 
-/decl/material/liquid/nutriment/protein/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjust_nutrition(nutriment_factor * removed)
+/decl/material/liquid/nutriment/protein/adjust_nutrition(mob/living/carbon/M, alien, removed)
+	var/malus_level = M.GetTraitLevel(/decl/trait/malus/animal_protein)
+	var/malus_factor = malus_level ? malus_level * 0.25 : 0
+
+	M.adjustToxLoss(removed * malus_factor)
+	M.adjust_nutrition(nutriment_factor * removed * (1 - malus_factor))
 
 /decl/material/liquid/nutriment/protein/egg
 	name = "egg yolk"

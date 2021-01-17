@@ -16,6 +16,9 @@
 	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
 
 /decl/material/liquid/drink/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	if(nutrition)
 		M.adjust_nutrition(nutrition * removed)
 	if(hydration)
@@ -23,6 +26,7 @@
 	M.dizziness = max(0, M.dizziness + adj_dizzy)
 	M.drowsyness = max(0, M.drowsyness + adj_drowsy)
 	M.sleeping = max(0, M.sleeping + adj_sleepy)
+
 	if(adj_temp > 0 && M.bodytemperature < 310) // 310 is the normal bodytemp. 310.055
 		M.bodytemperature = min(310, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 	if(adj_temp < 0 && M.bodytemperature > 310)
@@ -34,6 +38,10 @@
 
 /decl/material/liquid/drink/juice/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	M.immunity = min(M.immunity + 0.25, M.immunity_norm*1.5)
 
 /decl/material/liquid/drink/juice/banana
@@ -100,6 +108,10 @@
 
 /decl/material/liquid/drink/juice/lime/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	M.adjustToxLoss(-0.5 * removed)
 
 /decl/material/liquid/drink/juice/orange
@@ -114,6 +126,10 @@
 
 /decl/material/liquid/drink/juice/orange/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	M.adjustOxyLoss(-2 * removed)
 
 /decl/material/liquid/poisonberryjuice // It has more in common with toxins than drinks... but it's a juice
@@ -167,6 +183,10 @@
 
 /decl/material/liquid/drink/juice/tomato/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	M.heal_organ_damage(0, 0.5 * removed)
 
 /decl/material/liquid/drink/juice/watermelon
@@ -227,8 +247,13 @@
 
 /decl/material/liquid/drink/milk/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
-	M.heal_organ_damage(0.5 * removed, 0)
+
 	holder.remove_reagent(/decl/material/liquid/capsaicin, 10 * removed)
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
+	M.heal_organ_damage(0.5 * removed, 0)
 
 /decl/material/liquid/drink/milk/cream
 	name = "cream"
@@ -282,6 +307,10 @@
 	..()
 	if(adj_temp > 0)
 		holder.remove_reagent(/decl/material/liquid/frostoil, 10 * removed)
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	var/volume = REAGENT_VOLUME(holder, type)
 	if(volume > 15)
 		M.add_chemical_effect(CE_PULSE, 1)
@@ -423,6 +452,10 @@
 
 /decl/material/liquid/drink/mutagencola/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 	M.make_jittery(20)
 	M.adjust_drugged(30, 30)
@@ -520,6 +553,10 @@
 
 /decl/material/liquid/drink/hell_ramen/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
+
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
 
 /decl/material/liquid/drink/tea/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
@@ -532,6 +569,10 @@
 
 /decl/material/liquid/drink/tea/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
+	
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	M.adjustToxLoss(-0.5 * removed)
 
 /decl/material/liquid/drink/tea/black
@@ -669,6 +710,10 @@
 
 /decl/material/liquid/drink/beastenergy/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
+	
+	if(M.HasTrait(/decl/trait/metabolically_inert))
+		return
+
 	M.drowsyness = max(0, M.drowsyness - 7)
 	M.make_jittery(2)
 	M.add_chemical_effect(CE_PULSE, 1)
