@@ -51,6 +51,11 @@
 		if(prob(10))
 			new/obj/structure/quicksand(T)
 
+/datum/random_map/noise/exoplanet/desert/get_appropriate_path(var/value)
+	. = ..()
+	if(noise2value(value) > 6)
+		return /turf/exterior/dry
+
 /area/exoplanet/desert
 	ambience = list('sound/effects/wind/desert0.ogg','sound/effects/wind/desert1.ogg','sound/effects/wind/desert2.ogg','sound/effects/wind/desert3.ogg','sound/effects/wind/desert4.ogg','sound/effects/wind/desert5.ogg')
 	base_turf = /turf/exterior/sand
