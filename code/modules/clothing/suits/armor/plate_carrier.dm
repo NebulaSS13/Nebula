@@ -9,7 +9,7 @@
 	material = /decl/material/solid/leather
 	starting_accessories = null
 
-/obj/item/clothing/suit/armor/pcarrier/prepared
+/obj/item/clothing/suit/armor/pcarrier/light
 	starting_accessories = list(/obj/item/clothing/accessory/armorplate)
 
 /obj/item/clothing/suit/armor/pcarrier/press
@@ -20,9 +20,6 @@
 	starting_accessories = list(/obj/item/clothing/accessory/armorplate, /obj/item/clothing/accessory/armor/tag/press)
 
 /obj/item/clothing/suit/armor/pcarrier/medium
-	starting_accessories = list(/obj/item/clothing/accessory/storage/pouches)
-
-/obj/item/clothing/suit/armor/pcarrier/medium/prepared
 	starting_accessories = list(/obj/item/clothing/accessory/armorplate/medium, /obj/item/clothing/accessory/storage/pouches)
 
 /obj/item/clothing/suit/armor/pcarrier/blue
