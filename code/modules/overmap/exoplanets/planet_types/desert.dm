@@ -46,10 +46,8 @@
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(var/value, var/turf/T)
 	..()
 	var/v = noise2value(value)
-	if(v > 6)
-		T.icon_state = "0"
-		if(prob(10))
-			new/obj/structure/quicksand(T)
+	if(v > 6 && prob(10))
+		new/obj/effect/quicksand(T)
 
 /datum/random_map/noise/exoplanet/desert/get_appropriate_path(var/value)
 	. = ..()
@@ -59,97 +57,3 @@
 /area/exoplanet/desert
 	ambience = list('sound/effects/wind/desert0.ogg','sound/effects/wind/desert1.ogg','sound/effects/wind/desert2.ogg','sound/effects/wind/desert3.ogg','sound/effects/wind/desert4.ogg','sound/effects/wind/desert5.ogg')
 	base_turf = /turf/exterior/sand
-
-/obj/structure/quicksand
-	name = "sand"
-	icon = 'icons/obj/quicksand.dmi'
-	icon_state = "intact0"
-	density = 0
-	anchored = 1
-	can_buckle = 1
-	buckle_dir = SOUTH
-	var/exposed = 0
-	var/busy
-
-/obj/structure/quicksand/Initialize()
-	. = ..()
-	icon_state = "intact[rand(0,2)]"
-
-/obj/structure/quicksand/user_unbuckle_mob(mob/user)
-	if(buckled_mob && !user.stat && !user.restrained())
-		if(busy)
-			to_chat(user, "<span class='wanoticerning'>[buckled_mob] is already getting out, be patient.</span>")
-			return
-		var/delay = 60
-		if(user == buckled_mob)
-			delay *=2
-			user.visible_message(
-				"<span class='notice'>\The [user] tries to climb out of \the [src].</span>",
-				"<span class='notice'>You begin to pull yourself out of \the [src].</span>",
-				"<span class='notice'>You hear water sloushing.</span>"
-				)
-		else
-			user.visible_message(
-				"<span class='notice'>\The [user] begins pulling \the [buckled_mob] out of \the [src].</span>",
-				"<span class='notice'>You begin to pull \the [buckled_mob] out of \the [src].</span>",
-				"<span class='notice'>You hear water sloushing.</span>"
-				)
-		busy = 1
-		if(do_after(user, delay, src))
-			busy = 0
-			if(user == buckled_mob)
-				if(prob(80))
-					to_chat(user, "<span class='warning'>You slip and fail to get out!</span>")
-					return
-				user.visible_message("<span class='notice'>\The [buckled_mob] pulls himself out of \the [src].</span>")
-			else
-				user.visible_message("<span class='notice'>\The [buckled_mob] has been freed from \the [src] by \the [user].</span>")
-			unbuckle_mob()
-		else
-			busy = 0
-			to_chat(user, "<span class='warning'>You slip and fail to get out!</span>")
-			return
-
-/obj/structure/quicksand/unbuckle_mob()
-	..()
-	update_icon()
-
-/obj/structure/quicksand/buckle_mob(var/mob/L)
-	..()
-	update_icon()
-
-/obj/structure/quicksand/on_update_icon()
-	if(!exposed)
-		return
-	icon_state = "open"
-	overlays.Cut()
-	if(buckled_mob)
-		overlays += buckled_mob
-		var/image/I = image(icon,icon_state="overlay")
-		I.layer = ABOVE_HUMAN_LAYER
-		overlays += I
-
-/obj/structure/quicksand/proc/expose()
-	if(exposed)
-		return
-	visible_message("<span class='warning'>The upper crust breaks, exposing treacherous quicksands underneath!</span>")
-	name = "quicksand"
-	desc = "There is no candy at the bottom."
-	exposed = 1
-	update_icon()
-
-/obj/structure/quicksand/attackby(obj/item/W, mob/user)
-	if(!exposed && W.force)
-		expose()
-	else
-		..()
-
-/obj/structure/quicksand/Crossed(var/atom/movable/AM)
-	if(isliving(AM))
-		var/mob/living/L = AM
-		if(L.throwing || L.can_overcome_gravity())
-			return
-		buckle_mob(L)
-		if(!exposed)
-			expose()
-		to_chat(L, SPAN_DANGER("You fall into \the [src]!"))
