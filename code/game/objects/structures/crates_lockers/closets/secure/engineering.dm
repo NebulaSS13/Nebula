@@ -32,6 +32,7 @@
 	return list(
 		/obj/item/clothing/gloves/insulated = 3,
 		/obj/item/storage/toolbox/electrical = 3,
+		/obj/item/storage/toolbox/repairs = 3,
 		/obj/item/stock_parts/circuitboard/apc = 3,
 		/obj/item/multitool = 3
 	)

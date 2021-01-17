@@ -108,6 +108,7 @@
 	return list(/obj/item/storage/toolbox/mechanical = 30,
 				/obj/item/storage/toolbox/electrical = 20,
 				/obj/item/storage/toolbox/emergency = 20,
+				/obj/item/storage/toolbox/repairs = 20,
 				/obj/item/storage/toolbox/syndicate = 1)
 
 /obj/random/tech_supply
