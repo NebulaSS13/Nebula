@@ -1,6 +1,5 @@
 #if !defined(USING_MAP_DATUM)
 
-
 	#include "../random_ruins/exoplanet_ruins/playablecolony/playablecolony.dm"
 
 	#include "../../mods/content/government/away_sites/icarus/icarus.dm"
@@ -8,7 +7,6 @@
 	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/content/corporate/away_sites/lar_maria/lar_maria.dm"
 	#include "../../mods/species/utility_frames/_utility_frames.dme"
-	#include "../../mods/species/ascent/away_sites/ascent/ascent.dm"
 	#include "../../mods/species/tajaran/_tajaran.dme"
 	#include "../../mods/species/neocorvids/_neocorvids.dme"
 
