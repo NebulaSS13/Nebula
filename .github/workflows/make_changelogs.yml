@@ -25,6 +25,6 @@ jobs:
       - name: Make CL
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          GIT_EMAIL: "action@github.com"
-          GIT_NAME: "Changelogs" 
+          GIT_EMAIL: "NebulaSS13Bot@gmail.com"
+          GIT_NAME: "NebulaSS13Bot" 
         run: python tools/changelog/generate_cl.py
