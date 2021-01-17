@@ -355,7 +355,7 @@
 /obj/screen/exosuit/heat/proc/Update()
 	//Relative value of heat
 	if(owner && owner.body && owner.body.diagnostics?.is_functional() && gauge_needle)
-		var/value = clamp( owner.bodytemperature / (owner.material.melting_point * 1.55), 0, 1)
+		var/value = Clamp(owner.bodytemperature / (owner.material.melting_point * 1.55), 0, 1)
 		var/matrix/rot_matrix = matrix()
 		rot_matrix.Turn(Interpolate(-90, 90, value))
 		rot_matrix.Translate(0, -2)
