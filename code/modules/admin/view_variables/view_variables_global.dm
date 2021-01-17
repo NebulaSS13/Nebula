@@ -35,23 +35,21 @@
 	return vars
 
 /decl/global_vars/VV_hidden()
-	return list("forumsqladdress",
-				"forumsqldb",
-				"forumsqllogin",
-				"forumsqlpass",
-				"forumsqlport",
-				"sqladdress",
-				"sqldb",
-				"sqlfdbkdb",
-				"sqlfdbklogin",
-				"sqlfdbkpass",
-				"sqllogin",
-				"sqlpass",
-				"sqlport",
-				"comms_password",
-				"ban_comms_password",
-				"login_export_addr"
-			)
+	return list(
+		"forumsqladdress",
+		"forumsqldb",
+		"forumsqllogin",
+		"forumsqlpass",
+		"forumsqlport",
+		"sqladdress",
+		"sqldb",
+		"sqllogin",
+		"sqlpass",
+		"sqlport",
+		"comms_password",
+		"ban_comms_password",
+		"login_export_addr"
+	)
 
 /client/proc/debug_global_variables()
 	set category = "Debug"

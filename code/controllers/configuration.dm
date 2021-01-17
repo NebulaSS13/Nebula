@@ -890,12 +890,6 @@ var/list/gamemode_cache = list()
 				sqllogin = value
 			if ("password")
 				sqlpass = value
-			if ("feedback_database")
-				sqlfdbkdb = value
-			if ("feedback_login")
-				sqlfdbklogin = value
-			if ("feedback_password")
-				sqlfdbkpass = value
 			else
 				log_misc("Unknown setting in configuration: '[name]'")
 

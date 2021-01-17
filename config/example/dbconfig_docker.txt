@@ -17,11 +17,6 @@ LOGIN gamelord
 # Password used to access the database
 PASSWORD gamelord
 
-# The following information is for feedback tracking via the blackbox server
-FEEDBACK_DATABASE gamelord
-FEEDBACK_LOGIN gamelord
-FEEDBACK_PASSWORD gamelord
-
 # Track population and death statistics
 # Comment this out to disable
 ENABLE_STAT_TRACKING
