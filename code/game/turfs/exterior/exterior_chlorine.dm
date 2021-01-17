@@ -1,6 +1,7 @@
 /turf/exterior/water/chlorine
 	name = "chlorine marsh"
 	desc = "A pool of noxious liquid chlorine. It's full of silt and plant matter."
+	icon = 'icons/turf/exterior/water_still.dmi'
 	color = "#d2e0b7"
 	dirt_color = "#d2e0b7"
 	reagent_type = /decl/material/gas/chlorine

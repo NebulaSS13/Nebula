@@ -9,6 +9,7 @@
 	name = "wild grass"
 	icon = 'icons/turf/exterior/wildgrass.dmi'
 	icon_edge_layer = EXT_EDGE_GRASS_WILD
+	icon_has_corners = TRUE
 	color = "#799c4b"
 	footstep_type = /decl/footsteps/grass
 
