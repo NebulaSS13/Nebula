@@ -46,6 +46,7 @@
 	base_state = "bulb"
 	color = COLOR_PURPLE
 	light_type = /obj/item/light/alien
+	accepts_light_type = /obj/item/light/alien
 
 /obj/machinery/light/alien/Initialize()
 	color = null  //It's just for mapping
