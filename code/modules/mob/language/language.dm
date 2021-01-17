@@ -26,6 +26,7 @@
 	var/category = /decl/language    // Used to point at root language types that shouldn't be visible
 	var/list/scramble_cache = list()
 	var/list/speech_sounds
+	var/allow_repeated_syllables = TRUE
 
 /decl/language/proc/get_spoken_sound()
 	if(speech_sounds)
@@ -41,22 +42,21 @@
 	return message
 
 /decl/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
-	if(!syllables || !syllables.len)
+	if(!length(syllables))
 		if(gender==FEMALE)
 			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
 		else
 			return capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 
-	var/full_name = ""
-	var/new_name = ""
-
+	var/possible_syllables = allow_repeated_syllables ? syllables : syllables.Copy()
 	for(var/i = 0;i<name_count;i++)
-		new_name = ""
+		var/new_name = ""
 		for(var/x = rand(Floor(syllable_count/syllable_divisor),syllable_count);x>0;x--)
-			new_name += pick(syllables)
-		full_name += " [capitalize(lowertext(new_name))]"
-
-	return "[trim(full_name)]"
+			if(!length(possible_syllables))
+				break
+			new_name += allow_repeated_syllables ? pick(possible_syllables) : pick_n_take(possible_syllables)
+		LAZYADD(., capitalize(lowertext(new_name)))
+	. = "[trim(jointext(., " "))]"
 
 /decl/language/proc/scramble(var/input, var/list/known_languages)
 
