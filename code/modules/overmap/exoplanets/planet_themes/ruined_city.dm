@@ -98,8 +98,16 @@
 	return 1
 
 /datum/random_map/city/get_appropriate_path(var/value)
-	if(value == ROAD_VALUE)
+	if(value == ROAD_VALUE && prob(99))
 		return /turf/exterior/concrete/reinforced/road
+
+/datum/random_map/city/get_additional_spawns(var/value, var/turf/simulated/floor/T)
+	if(istype(T, /turf/exterior/concrete/reinforced/road))
+		if(prob(1))
+			new/obj/structure/rubble/house(T)
+		if(prob(5))
+			var/turf/exterior/concrete/C = T
+			C.set_broken(TRUE)
 
 /datum/random_map/city/apply_to_map()
 	..()
