@@ -1,8 +1,5 @@
 #include "heist_antag.dm"
-
-// This is here so the compiler stops bitching about override preceding definition.
-/decl/special_role/raider/proc/check_special_species(var/mob/living/carbon/human/player)
-	return FALSE
+#include "heist_outfit.dm"
 
 /datum/map_template/ruin/antag_spawn/heist
 	name = "Heist Base"

@@ -20,3 +20,6 @@
 	icon = 'icons/clothing/hands/gloves_evening.dmi'
 	color = COLOR_WHITE
 	body_parts_covered = SLOT_ARMS|SLOT_HANDS 
+
+/obj/item/clothing/gloves/color/grey
+	color = COLOR_GRAY80

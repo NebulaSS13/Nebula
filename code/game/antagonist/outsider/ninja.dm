@@ -17,6 +17,10 @@
 	faction = "ninja"
 	base_to_load = /datum/map_template/ruin/antag_spawn/ninja
 
+	default_outfit = /decl/hierarchy/outfit/ninja
+	id_title = "Infiltrator"
+	rig_type = /obj/item/rig/light/ninja
+
 /decl/special_role/ninja/attempt_random_spawn()
 	if(config.ninjas_allowed) ..()
 
@@ -89,17 +93,16 @@
 		H.SetName(H.real_name)
 	player.name = H.name
 
+/decl/hierarchy/outfit/ninja
+	name =    "Special Role - Ninja"
+	l_ear =   /obj/item/radio/headset
+	uniform = /obj/item/clothing/under/color/black
+	belt =    /obj/item/flashlight
+	hands =   list(/obj/item/modular_computer/pda/syndicate)
+
 /decl/special_role/ninja/equip(var/mob/living/carbon/human/player)
 	. = ..()
 	if(.)
-		var/obj/item/radio/R = new /obj/item/radio/headset(player)
-		player.equip_to_slot_or_del(R, slot_l_ear_str)
-		player.equip_to_slot_or_del(new /obj/item/clothing/under/color/black(player), slot_w_uniform_str)
-		player.equip_to_slot_or_del(new /obj/item/flashlight(player), slot_belt_str)
-		create_id("Infiltrator", player)
-		equip_rig(/obj/item/rig/light/ninja, player)
-		var/obj/item/modular_computer/pda/syndicate/U = new
-		player.put_in_hands(U)
 		var/decl/uplink_source/pda/uplink_source = new
 		uplink_source.setup_uplink_source(player, 0)
 

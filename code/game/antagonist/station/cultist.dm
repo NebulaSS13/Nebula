@@ -37,6 +37,7 @@
 	initial_spawn_target = 6
 	antaghud_indicator = "hudcultist"
 	skill_setter = /datum/antag_skill_setter/station
+	faction = "cult"
 
 	var/allow_narsie = 1
 	var/powerless = 0
@@ -48,8 +49,13 @@
 	var/list/cult_rating_bounds = list(CULT_RUNES_1, CULT_RUNES_2, CULT_RUNES_3, CULT_GHOSTS_1, CULT_GHOSTS_2, CULT_GHOSTS_3)
 	var/max_cult_rating = 0
 	var/conversion_blurb = "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
-
-	faction = "cult"
+	var/list/paper_spawn_slots = list (
+		"backpack" =     slot_in_backpack_str,
+		"left pocket" =  slot_l_store_str,
+		"right pocket" = slot_r_store_str,
+		"left hand" =    BP_L_HAND,
+		"right hand" =   BP_R_HAND,
+	)
 
 /decl/special_role/cultist/create_global_objectives()
 
@@ -68,25 +74,16 @@
 	global_objectives |= sacrifice
 
 /decl/special_role/cultist/equip(var/mob/living/carbon/human/player)
-
-	if(!..())
-		return 0
-
-	var/obj/item/book/tome/T = new(get_turf(player))
-	var/list/slots = list (
-		"backpack" = slot_in_backpack_str,
-		"left pocket" = slot_l_store_str,
-		"right pocket" = slot_r_store_str,
-		"left hand" =    BP_L_HAND,
-		"right hand" =   BP_R_HAND,
-	)
-	for(var/slot in slots)
-		player.equip_to_slot(T, slot)
-		if(T.loc == player)
-			break
-	var/obj/item/storage/S = locate() in player.contents
-	if(istype(S))
-		T.forceMove(S)
+	. = ..()
+	if(.)
+		var/obj/item/book/tome/T = new(get_turf(player))
+		for(var/slot in paper_spawn_slots)
+			player.equip_to_slot(T, slot)
+			if(T.loc == player)
+				return
+		var/obj/item/storage/S = locate() in player.contents
+		if(istype(S))
+			T.forceMove(S)
 
 /decl/special_role/cultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!..())
