@@ -1,0 +1,8 @@
+author: comma
+delete-after: true
+changes:
+  - rscadd: Added new type of toolbox - electrician's. It holds all needed tools for
+      machinery components interactions and several boxes of most common components.
+      Can be found in supply (electrical maintenance pack) and electrical locker
+  - balance: Engineering vendomats now vend APC/air alarm kits instead of just circuitboards.
+  - balance: Most machinery components are now tiny rather than small
