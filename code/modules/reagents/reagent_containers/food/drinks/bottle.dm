@@ -32,9 +32,6 @@
 	..()
 	if(isGlass && TT.thrower && TT.thrower.a_intent != I_HELP)
 		if(TT.speed > throw_speed || smash_check(TT.dist_travelled)) //not as reliable as smashing directly
-			if(reagents)
-				hit_atom.visible_message(SPAN_NOTICE("The contents of \the [src] splash all over \the [hit_atom]!"))
-				reagents.splash(hit_atom, reagents.total_volume)
 			smash(loc, hit_atom)
 
 /obj/item/chems/food/drinks/bottle/proc/smash_check(var/distance)
@@ -51,8 +48,39 @@
 	return prob(chance_table[idx])
 
 /obj/item/chems/food/drinks/bottle/proc/smash(var/newloc, atom/against = null)
+
+	// Dump reagents onto the turf.
+	var/turf/T = against ? get_turf(against) : get_turf(newloc)
+	if(reagents?.total_volume)
+		if(against)
+			against.visible_message(SPAN_DANGER("The contents of \the [src] splash all over \the [against]!"))
+			reagents.splash(against, reagents.total_volume * 0.33)
+		if(reagents.total_volume)
+			reagents.trans_to_turf(T, reagents.total_volume)
+
+	if(!T)
+		qdel(src)
+		return
+
+	// Propagate our fire source down to the lowest level we can.
+	// Ignite any fuel or mobs we have spilled. TODO: generalize to
+	// flame sources when traversing open space.
+	if(rag)
+		rag.dropInto(T)
+		while(T)
+			rag.forceMove(T)
+			if(rag.on_fire)
+				T.hotspot_expose(700, 5)
+				for(var/mob/living/M in T.contents)
+					M.IgniteMob()
+			if(!rag || QDELETED(src) || !HasBelow(T.z) || !T.is_open())
+				break
+			T = GetBelow(T)
+		rag = null
+
 	//Creates a shattering noise and replaces the bottle with a broken_bottle
-	var/obj/item/broken_bottle/B = new(newloc)
+	playsound(T, "shatter", 70, 1)
+	var/obj/item/broken_bottle/B = new(T)
 	if(prob(33))
 		new/obj/item/shard(newloc) // Create a glass shard at the target's location!
 	B.icon_state = src.icon_state
@@ -60,32 +88,8 @@
 	I.Blend(B.broken_outline, ICON_OVERLAY, rand(5), 1)
 	I.SwapColor(rgb(255, 0, 220, 255), rgb(0, 0, 0, 0))
 	B.icon = I
-	B.dropInto(newloc)
-
-	// Propagate our fire source down to the lowest level we can.
-	// Ignite any fuel or mobs we have spilled. TODO: generalize to
-	// flame sources when traversing open space.
-	if(rag)
-		var/turf/T = get_turf(newloc)
-		if(istype(T))
-			while(T)
-				rag.forceMove(T)
-				if(rag.on_fire)
-					T.hotspot_expose(700, 5)
-					for(var/mob/living/M in T.contents)
-						M.IgniteMob()
-				if(HasBelow(T.z) && T.is_open())
-					T = GetBelow(T)
-				else
-					T = null
-			rag.dropInto(rag.loc)
-		else
-			rag.dropInto(newloc)
-		rag = null
-
-	playsound(src, "shatter", 70, 1)
-	src.transfer_fingerprints_to(B)
-
+	B.dropInto(B.loc)
+	transfer_fingerprints_to(B)
 	qdel(src)
 	return B
 

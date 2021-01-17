@@ -157,7 +157,7 @@ SUBSYSTEM_DEF(fluids)
 		var/sufficient_delta = FALSE
 		for(var/thing in F.neighbors)
 			var/obj/effect/fluid/other = thing
-			if(abs(F.reagents.total_volume - other.reagents.total_volume) > FLUID_EVAPORATION_POINT)
+			if(abs(F.reagents.total_volume - other.reagents.total_volume) > FLUID_PUDDLE)
 				sufficient_delta = TRUE
 				break
 

@@ -85,8 +85,9 @@
 /obj/effect/fluid/Process()
 
 	// Evaporation! TODO: add fumes to the air from this, if appropriate.
-	if(reagents.total_volume > FLUID_EVAPORATION_POINT && reagents.total_volume <= FLUID_PUDDLE)
-		reagents.remove_any(min(reagents.total_volume, rand(1,3)))
+	if(reagents.total_volume > FLUID_EVAPORATION_POINT && reagents.total_volume <= FLUID_PUDDLE && prob(35))
+		reagents.remove_any(min(reagents.total_volume, 1))
+
 	if(reagents.total_volume <= FLUID_EVAPORATION_POINT)
 		qdel(src)
 		return
@@ -117,8 +118,7 @@
 
 /obj/effect/fluid/on_update_icon()
 
-	overlays.Cut()
-
+	cut_overlays()
 	if(reagents.total_volume > FLUID_OVER_MOB_HEAD)
 		layer = DEEP_FLUID_LAYER
 	else
@@ -126,10 +126,12 @@
 
 	color = reagents.get_color()
 
-	if(reagents.total_volume > FLUID_DEEP)
-		alpha = FLUID_MAX_ALPHA
-	else
-		alpha = min(FLUID_MAX_ALPHA,max(FLUID_MIN_ALPHA,ceil(255*(reagents.total_volume/FLUID_DEEP))))
+	if(!reagents?.total_volume)
+		return
+		
+	var/decl/material/main_reagent = reagents.get_primary_reagent_decl()
+	if(main_reagent) // TODO: weighted alpha from all reagents, not just primary
+		alpha = Clamp(ceil(255*(reagents.total_volume/FLUID_DEEP)) * main_reagent.opacity, main_reagent.min_fluid_opacity, main_reagent.max_fluid_opacity)
 
 	if(reagents.total_volume <= FLUID_PUDDLE)
 		APPLY_FLUID_OVERLAY("puddle")
