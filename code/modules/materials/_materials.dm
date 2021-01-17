@@ -115,6 +115,8 @@
 	var/wall_support_value = 30
 	var/sparse_material_weight
 	var/rich_material_weight
+	var/min_fluid_opacity = FLUID_MIN_ALPHA
+	var/max_fluid_opacity = FLUID_MAX_ALPHA
 
 	// Damage values.
 	var/hardness = MAT_VALUE_HARD            // Prob of wall destruction by hulk, used for edge damage in weapons.

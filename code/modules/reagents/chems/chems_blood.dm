@@ -9,6 +9,8 @@
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
 	value = 2.5
+	opacity = 1
+	min_fluid_opacity = FLUID_MAX_ALPHA
 
 	chilling_products = list(
 		/decl/material/liquid/coagulated_blood = 1

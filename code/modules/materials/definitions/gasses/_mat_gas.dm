@@ -13,3 +13,4 @@
 	reflectiveness = 0
 	hardness = 0
 	weight = 1
+	opacity = 0.3
