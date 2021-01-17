@@ -42,6 +42,31 @@
 
 	var/mob_transfer_message = "You are transported to ORIGIN." //What message gets sent to mobs that get sold.
 
+	var/global/list/blacklisted_types = list(
+		/obj,
+		/obj/structure,
+		/obj/machinery,
+		/obj/screen,
+		/obj/effect,
+		/obj/item,
+		/obj/item/twohanded,
+		/obj/item/organ,
+		/obj/item/organ/internal,
+		/obj/item/organ/external,
+		/obj/item/storage,
+		/obj/item/storage/internal,
+		/obj/item/chems,
+		/obj/item/chems/glass,
+		/obj/item/chems/food,
+		/obj/item/chems/food/snacks,
+		/obj/item/chems/food/snacks/old,
+		/obj/item/chems/food/snacks/grown,
+		/obj/item/chems/food/snacks/variable,
+		/obj/item/chems/food/condiment,
+		/obj/item/chems/food/drinks,
+		/obj/item/chems/food/drinks/bottle
+	)
+
 /datum/trader/New()
 	..()
 	if(!ispath(trader_currency, /decl/currency))
@@ -97,12 +122,12 @@
 		if(status & TRADER_BLACKLIST_SUB)
 			possible -= subtypesof(type)
 
-	if(possible.len)
-		var/picked = pick(possible)
-		var/atom/A = picked
-		if(initial(A.name) in list("object", "item","weapon", "structure", "machinery", "exosuit", "organ", "snack")) //weed out a few of the common bad types. Reason we don't check types specifically is that (hopefully) further bad subtypes don't set their name up and are similar.
-			return
-		return picked
+	if(length(possible))
+		var/picked = pick_n_take(possible)
+		while(length(possible) && (picked in blacklisted_types))
+			picked = pick_n_take(possible)
+		if(!(picked in blacklisted_types))
+			return picked
 
 /datum/trader/proc/get_response(var/key, var/default)
 	if(speech && speech[key])
@@ -119,8 +144,7 @@
 /datum/trader/proc/print_trading_items(var/num)
 	num = Clamp(num,1,trading_items.len)
 	if(trading_items[num])
-		var/atom/movable/M = trading_items[num]
-		return "<b>[initial(M.name)]</b>"
+		return "<b>[atom_info_repository.get_name_for(trading_items[num])]</b>"
 
 /datum/trader/proc/skill_curve(skill)
 	switch(skill)
@@ -247,10 +271,9 @@
 	return M
 
 /datum/trader/proc/how_much_do_you_want(var/num, skill = SKILL_MAX)
-	var/atom/movable/M = trading_items[num]
 	. = get_response("how_much", "Hmm.... how about VALUE CURRENCY?")
 	. = replacetext(.,"VALUE",get_item_value(num, skill))
-	. = replacetext(.,"ITEM", initial(M.name))
+	. = replacetext(.,"ITEM", atom_info_repository.get_name_for(trading_items[num]))
 
 /datum/trader/proc/what_do_you_want()
 	if(!(trade_flags & TRADER_GOODS))
@@ -258,9 +281,8 @@
 
 	. = get_response("what_want", "Hm, I want")
 	var/list/want_english = list()
-	for(var/type in wanted_items)
-		var/atom/a = type
-		want_english += initial(a.name)
+	for(var/wtype in wanted_items)
+		want_english += atom_info_repository.get_name_for(wtype)
 	. += " [english_list(want_english)]"
 
 /datum/trader/proc/sell_items(var/list/offers, skill = SKILL_MAX)
