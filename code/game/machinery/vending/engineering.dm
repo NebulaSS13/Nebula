@@ -51,7 +51,6 @@
 		/obj/item/frame/apc/kit = 10,
 		/obj/item/frame/air_alarm/kit = 10,
 		/obj/item/cell = 10,
-		/obj/item/clamp = 10,
 		/obj/item/storage/belt/utility
 	)
 	contraband = list(/obj/item/cell/high = 3)

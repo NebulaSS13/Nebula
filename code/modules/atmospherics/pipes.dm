@@ -8,11 +8,10 @@
 	var/leaking = 0		// Do not set directly, use set_leaking(TRUE/FALSE)
 	use_power = POWER_USE_OFF
 
+	//minimum pressure before check_pressure(...) should be called
 	var/maximum_pressure = 210 * ONE_ATMOSPHERE
 	var/fatigue_pressure = 170 * ONE_ATMOSPHERE
 	var/alert_pressure = 170 * ONE_ATMOSPHERE
-	var/in_stasis = 0
-		//minimum pressure before check_pressure(...) should be called
 
 	can_buckle = 1
 	buckle_require_restraints = 1
@@ -103,12 +102,6 @@
 	QDEL_NULL(sound_token)
 	if(air_temporary)
 		loc.assume_air(air_temporary)
-
-	if(in_stasis)
-		var/obj/machinery/clamp/C = locate() in get_turf(src)
-		if(C.target == src)
-			C.open()
-			C.removal()
 	. = ..()
 
 /obj/machinery/atmospherics/pipe/deconstruction_pressure_check()
@@ -188,7 +181,7 @@
 /obj/machinery/atmospherics/pipe/simple/Process()
 	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
 		..()
-	else if(parent.air.compare(loc.return_air()) || in_stasis)
+	else if(parent.air.compare(loc.return_air()))
 		update_sound(0)
 		. = PROCESS_KILL
 	else if(leaking)
@@ -251,7 +244,7 @@
 		node2.update_underlays()
 
 /obj/machinery/atmospherics/pipe/proc/try_leak()
-	set_leaking(!in_stasis && !(node1 && node2))
+	set_leaking(!(node1 && node2))
 
 /obj/machinery/atmospherics/pipe/simple/on_update_icon(var/safety = 0)
 	if(!atmos_initalized)
@@ -497,7 +490,7 @@
 		node3.update_underlays()
 
 /obj/machinery/atmospherics/pipe/manifold/try_leak()
-	set_leaking(!in_stasis && !(node1 && node2 && node3))
+	set_leaking(!(node1 && node2 && node3))
 
 /obj/machinery/atmospherics/pipe/manifold/on_update_icon(var/safety = 0)
 	if(!atmos_initalized)
@@ -762,7 +755,7 @@
 		node4.update_underlays()
 
 /obj/machinery/atmospherics/pipe/manifold4w/try_leak()
-	set_leaking(!in_stasis && !(node1 && node2 && node3 && node4))
+	set_leaking(!(node1 && node2 && node3 && node4))
 
 /obj/machinery/atmospherics/pipe/manifold4w/on_update_icon(var/safety = 0)
 	if(!atmos_initalized)
