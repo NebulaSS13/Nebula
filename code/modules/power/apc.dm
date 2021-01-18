@@ -708,7 +708,7 @@
 	if(autoset(equipment, 2) >= POWERCHAN_ON)
 		. += area.usage(EQUIP)
 	if(autoset(environ, 1) >= POWERCHAN_ON)
-		. += area.usage(EQUIP)
+		. += area.usage(ENVIRON)
 
 /obj/machinery/power/apc/Process()
 	if(!area.requires_power)
@@ -752,8 +752,6 @@
 	if(!cell || shorted) // We aren't going to be doing any power processing in this case.
 		charging = 0
 	else
-		..() // Actual processing happens in here.
-
 		//update state
 		var/obj/item/stock_parts/power/battery/power = get_component_of_type(/obj/item/stock_parts/power/battery)
 		lastused_charging = max(power && power.cell && (power.cell.charge - power.last_cell_charge) * CELLRATE, 0)
