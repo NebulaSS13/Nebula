@@ -28,9 +28,9 @@
 	if(message)
 		if(use_mentions)
 			if(message["content"])
-				message["content"] = "[mentions]: [message["content"]]"
+				message["content"] = "[use_mentions]: [message["content"]]"
 			else
-				message["content"] = "[mentions]"
+				message["content"] = "[use_mentions]"
 		message = json_encode(message)
 		. = TRUE
 		for(var/target_url in urls)
