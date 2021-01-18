@@ -12,7 +12,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
         with: 
-          fetch-depth: 25
+          persist-credentials: false # Otherwise, the GITHUB_TOKEN is used instead of our own in the Push-step
+          fetch-depth: 0 # Otherwise, we will fail to push refs
       - name: Python setup
         uses: actions/setup-python@v1
         with:
@@ -28,8 +29,9 @@ jobs:
           git config --local user.email "NebulaSS13Bot@gmail.com"
           git config --local user.name "NebulaSS13Bot"
           git pull origin dev
-          git commit -m "Automatic changelog compile [ci skip]" -a || true
+          git commit -m "Automatic changelog compile [ci skip]" -a
       - name: Push
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@v0.6.0
         with:
-          password: ${{ secrets.BOT_TOKEN }}
+          github_token: ${{ secrets.BOT_TOKEN }}
+          branch: dev
