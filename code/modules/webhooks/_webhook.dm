@@ -22,10 +22,10 @@
 		"body" = result["body"]
 	)
 
-/decl/webhook/proc/send(var/list/data)
+/decl/webhook/proc/send(var/list/data, var/send_mention = FALSE)
 	var/message = get_message(data)
 	if(message)
-		if(mentions)
+		if(mentions && send_mention)
 			if(message["content"])
 				message["content"] = "[mentions]: [message["content"]]"
 			else

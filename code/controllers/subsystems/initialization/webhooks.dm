@@ -39,10 +39,10 @@ SUBSYSTEM_DEF(webhooks)
 			else
 				to_world_log("Failed to set up webhook [wid].")
 
-/datum/controller/subsystem/webhooks/proc/send(var/wid, var/wdata)
+/datum/controller/subsystem/webhooks/proc/send(var/wid, var/wdata, var/send_mention)
 	var/decl/webhook/webhook = webhook_decls[wid]
 	if(webhook)
-		if(webhook.send(wdata))
+		if(webhook.send(wdata, send_mention))
 			to_world_log("Sent webhook [webhook.id].")
 			log_debug("Webhook sent: [webhook.id].")
 		else
@@ -83,5 +83,5 @@ SUBSYSTEM_DEF(webhooks)
 		webhook.send()
 
 /hook/roundstart/proc/run_webhook()
-	SSwebhooks.send(WEBHOOK_ROUNDSTART, list("url" = get_world_url()))
+	SSwebhooks.send(WEBHOOK_ROUNDSTART, list("url" = get_world_url()), FALSE)
 	return 1
