@@ -23,7 +23,13 @@
 	starting_accessories = list(/obj/item/clothing/accessory/armor/plate/medium, /obj/item/clothing/accessory/storage/pouches)
 
 /obj/item/clothing/suit/armor/pcarrier/blue
+	name = "blue plate carrier"
 	color = COLOR_BABY_BLUE
 
 /obj/item/clothing/suit/armor/pcarrier/tan
+	name = "tan plate carrier"
 	color = COLOR_TAN
+
+/obj/item/clothing/suit/armor/pcarrier/green
+	name = "green plate carrier"
+	color = COLOR_DARK_GREEN_GRAY

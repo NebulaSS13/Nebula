@@ -82,13 +82,9 @@
 	name = "detective's suit"
 	desc = "A rumpled white dress shirt paired with well-worn grey slacks."
 	icon = 'icons/clothing/under/uniform_detective_1.dmi'
-	armor = list(
-		melee = ARMOR_MELEE_SMALL
-		)
 	siemens_coefficient = 0.9
 	starting_accessories = list(/obj/item/clothing/accessory/blue_clip)
 	material = /decl/material/solid/cloth
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
 
 /obj/item/clothing/under/det/grey
 	desc = "A serious-looking tan dress shirt paired with freshly-pressed black slacks."
@@ -96,7 +92,7 @@
 	starting_accessories = list(/obj/item/clothing/accessory/long/red)
 
 /obj/item/clothing/under/det/black
-	desc = "An immaculate white dress shirt, paired with a pair of dark grey dress pants, a red tie, and a charcoal vest."
+	desc = "An immaculate white dress shirt, paired with a pair of dark grey dress pants."
 	icon = 'icons/clothing/under/uniform_detective_3.dmi'
 	starting_accessories = list(/obj/item/clothing/accessory/long/red, /obj/item/clothing/accessory/toggleable/black_vest)
 
