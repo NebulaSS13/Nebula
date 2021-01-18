@@ -1,0 +1,5 @@
+author: comma
+delete-after: true
+changes:
+  - experiment: Machines can actually be destroyed fully by strong explosions again
+      (not just component damage)
