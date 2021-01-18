@@ -12,10 +12,3 @@
 
 /obj/item/mmi/digital/robot/on_update_icon()
 	icon_state = initial(icon_state)
-	
-/obj/item/mmi/digital/robot/transfer_identity(var/mob/living/carbon/H)
-	..()
-	if(brainmob.mind)
-		brainmob.mind.assigned_role = "Robotic Intelligence"
-	to_chat(brainmob, "<span class='notify'>You feel slightly disoriented. That's normal when you're little more than a complex circuit.</span>")
-	return
