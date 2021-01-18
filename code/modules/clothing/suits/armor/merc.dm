@@ -4,7 +4,7 @@
 
 /obj/item/clothing/accessory/armor/plate/merc
 	name = "heavy armor plate"
-	desc = "A ceramics-reinforced synthetic armor plate, providing state of of the art protection. Attaches to a plate carrier."
+	desc = "A diamond-reinforced titanium armor plate, providing state of of the art protection. Attaches to a plate carrier."
 	icon = 'icons/clothing/accessories/armor/armor_merc.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
@@ -13,10 +13,9 @@
 		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
-	slowdown = 0.5
 	material = /decl/material/solid/metal/titanium
-	matter = list(/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE)
-	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
+	matter = list(/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT)
+	origin_tech = "{'materials':5,'engineering':2,'combat':3}"
 	
 /obj/item/clothing/accessory/armguards/merc
 	name = "heavy arm guards"
@@ -30,7 +29,8 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	color = null
-	material = /decl/material/solid/metal/titanium
+	material = /decl/material/solid/metal/steel
+	origin_tech = "{'materials':2,'engineering':1,'combat':2}"
 
 /obj/item/clothing/accessory/legguards/merc
 	name = "heavy leg guards"
@@ -44,4 +44,5 @@
 		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
-	material = /decl/material/solid/metal/titanium
+	material = /decl/material/solid/metal/steel
+	origin_tech = "{'materials':2,'engineering':1,'combat':2}"
