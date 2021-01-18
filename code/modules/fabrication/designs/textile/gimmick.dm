@@ -130,7 +130,7 @@
 	path = /obj/item/clothing/accessory/shouldercape
 
 /datum/fabricator_recipe/textiles/gimmick/capegrunt
-	path = /obj/item/clothing/accessory/shouldercape/grunt
+	path = /obj/item/clothing/accessory/shouldercape
 
 /datum/fabricator_recipe/textiles/gimmick/capeofficer
 	path = /obj/item/clothing/accessory/shouldercape/officer

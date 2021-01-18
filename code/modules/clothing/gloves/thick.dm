@@ -20,6 +20,7 @@
 		energy = ARMOR_ENERGY_SMALL, 
 		bomb = ARMOR_BOMB_RESISTANT, 
 		bio = ARMOR_BIO_MINOR)
+	material = /decl/material/solid/leather
 
 /obj/item/clothing/gloves/thick/swat
 	desc = "These tactical gloves are somewhat fire and impact-resistant."
@@ -38,7 +39,6 @@
 	desc = "These work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
-	material = /decl/material/solid/leather
 
 /obj/item/clothing/gloves/thick/botany/on_update_icon()
 	. = ..()

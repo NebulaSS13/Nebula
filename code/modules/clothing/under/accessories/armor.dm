@@ -101,6 +101,7 @@
 
 /obj/item/clothing/accessory/armguards/craftable
 	material_armor_multiplier = 1
+	matter = null
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 
@@ -129,6 +130,7 @@
 
 /obj/item/clothing/accessory/legguards/craftable
 	material_armor_multiplier = 1
+	matter = null
 	applies_material_colour = TRUE
 	applies_material_name =  TRUE
 
