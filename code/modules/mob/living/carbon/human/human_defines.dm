@@ -26,6 +26,8 @@
 
 	var/list/cultural_info = list()
 
+	var/obj/screen/default_attack_selector/attack_selector
+
 	//Equipment slots
 	var/obj/item/wear_suit = null
 	var/obj/item/w_uniform = null

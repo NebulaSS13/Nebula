@@ -2,6 +2,7 @@ var/global/list/sparring_attack_cache = list()
 
 //Species unarmed attacks
 /decl/natural_attack
+	var/name
 	var/attack_verb = list("attacks")	// Empty hand hurt intent verb.
 	var/attack_noun = list("fist")
 	var/damage = 0						// Extra empty hand attack damage.
@@ -15,9 +16,24 @@ var/global/list/sparring_attack_cache = list()
 	var/sparring_variant_type = /decl/natural_attack/light_strike
 	var/eye_attack_text
 	var/eye_attack_text_victim
-	var/attack_name = "fist"
 	var/list/usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
 	var/is_starting_default = FALSE
+
+/decl/natural_attack/proc/summarize()
+	var/list/usable_limbs = list()
+	for(var/limb in usable_with_limbs)
+		var/start = copytext(limb, 1, 3)
+		if(start == "l_")
+			usable_limbs |= "left [copytext(limb, 3)]"
+		else if(start == "r_")
+			usable_limbs |= "right [copytext(limb, 3)]"
+		else
+			usable_limbs |= limb
+	. = "You can use this attack with your: [english_list(usable_limbs)]."
+	if(sharp || edge)
+		. += "<br>This attack is sharp and will cause <font color='#ff0000'><b>bleeding</b></font>."
+	if(shredding)
+		. += "<br>This powerful attack will shred electronics and destroy some structures."
 
 /decl/natural_attack/proc/get_damage_type()
 	if(deal_halloss)
@@ -130,6 +146,7 @@ var/global/list/sparring_attack_cache = list()
 	return (src.sharp? DAM_SHARP : 0)|(src.edge? DAM_EDGE : 0)
 
 /decl/natural_attack/bite
+	name = "bite"
 	attack_verb = list("bit")
 	attack_noun = list("mouth")
 	attack_sound = 'sound/weapons/bite.ogg'
@@ -137,7 +154,6 @@ var/global/list/sparring_attack_cache = list()
 	damage = 0
 	sharp = 0
 	edge = 0
-	attack_name = "bite"
 	usable_with_limbs = list(BP_HEAD)
 
 /decl/natural_attack/bite/sharp
@@ -157,12 +173,12 @@ var/global/list/sparring_attack_cache = list()
 	return 1
 
 /decl/natural_attack/punch
+	name = "punch"
 	attack_verb = list("punched")
 	attack_noun = list("fist")
 	eye_attack_text = "fingers"
 	eye_attack_text_victim = "digits"
 	damage = 0
-	attack_name = "punch"
 	sparring_variant_type = /decl/natural_attack/light_strike/punch
 	is_starting_default = TRUE
 
@@ -211,11 +227,11 @@ var/global/list/sparring_attack_cache = list()
 		user.visible_message("<span class='danger'>[user] [pick("punched", "threw a punch at", "struck", "slammed their [pick(attack_noun)] into")] [target]'s [organ]!</span>") //why do we have a separate set of verbs for lying targets?
 
 /decl/natural_attack/kick
+	name = "kick"
 	attack_verb = list("struck")
 	attack_noun = list("foot", "knee")
 	attack_sound = "swing_hit"
 	damage = 0
-	attack_name = "kick"
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
 	sparring_variant_type = /decl/natural_attack/light_strike/kick
 
@@ -244,11 +260,11 @@ var/global/list/sparring_attack_cache = list()
 		if(5)		user.visible_message("<span class='danger'>[user] landed a strong [pick(attack_noun)] against [target]'s [organ]!</span>")
 
 /decl/natural_attack/stomp
+	name = "stomp"
 	attack_verb = list("stomped on")
 	attack_noun = list("foot")
 	attack_sound = "swing_hit"
 	damage = 0
-	attack_name = "stomp"
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
 
 /decl/natural_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
@@ -294,6 +310,7 @@ var/global/list/sparring_attack_cache = list()
 				"<span class='danger'>[user] slammed \his [shoe_text] down onto [target]'s [organ]!</span>"))
 
 /decl/natural_attack/light_strike
+	name = "light strike"
 	deal_halloss = 3
 	attack_noun = list("limb")
 	attack_verb = list("tapped", "lightly struck")
@@ -301,16 +318,15 @@ var/global/list/sparring_attack_cache = list()
 	damage = 0
 	sharp = 0
 	edge = 0
-	attack_name = "light strike"
 	attack_sound = "light_strike"
 
 /decl/natural_attack/light_strike/punch
-	attack_name = "light punch"
+	name = "light punch"
 	attack_noun = list("fist")
 	usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
 
 /decl/natural_attack/light_strike/kick
-	attack_name = "light kick"
+	name = "light kick"
 	attack_noun = list("foot")
 	usable_with_limbs = list(BP_L_FOOT, BP_R_FOOT)
 

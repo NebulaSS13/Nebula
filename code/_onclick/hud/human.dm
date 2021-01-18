@@ -228,6 +228,14 @@
 	mymob.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]")
 	hud_elements |= mymob.zone_sel
 
+	target.attack_selector = new
+	target.attack_selector.set_owner(target)
+	target.attack_selector.icon = ui_style
+	target.attack_selector.color = ui_color
+	target.attack_selector.alpha = ui_alpha
+	target.attack_selector.update_icon()
+	hud_elements |= target.attack_selector
+
 	//Handle the gun settings buttons
 	mymob.gun_setting_icon = new /obj/screen/gun/mode(null)
 	mymob.gun_setting_icon.icon = ui_style
@@ -257,6 +265,8 @@
 		mymob.client.screen += hud_elements
 	mymob.client.screen += src.adding + src.hotkeybuttons
 	inventory_shown = 0
+
+/obj/screen/target_selector
 
 /mob/living/carbon/human/verb/toggle_hotkey_verbs()
 	set category = "OOC"

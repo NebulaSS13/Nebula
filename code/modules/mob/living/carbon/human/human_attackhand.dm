@@ -281,17 +281,20 @@
 	set name = "Set Default Unarmed Attack"
 	set category = "IC"
 	set src = usr
-
-	var/list/choices = list()
+	var/list/choices
 	for(var/thing in get_natural_attacks())
 		var/decl/natural_attack/u_attack = decls_repository.get_decl(thing)
 		if(istype(u_attack))
-			choices[u_attack.attack_name] = u_attack
-
-	var/selection = input("Select a default attack (currently selected: [default_attack ? default_attack.attack_name : "none"]).", "Default Unarmed Attack") as null|anything in choices
-	var/decl/natural_attack/new_attack = choices[selection]
-	if(selection && !(new_attack.type in get_natural_attacks()))
+			var/image/radial_button = new
+			radial_button.name = capitalize(u_attack.name)
+			LAZYSET(choices, u_attack, radial_button)
+	var/decl/natural_attack/new_attack = show_radial_menu(src, src, choices, radius = 42, use_labels = TRUE)
+	if(QDELETED(src) || !istype(new_attack) || !(new_attack.type in get_natural_attacks()))
 		return
-
-	default_attack = selection ? choices[selection] : null
-	to_chat(src, SPAN_NOTICE("Your default unarmed attack is now <b>[default_attack ? default_attack.attack_name : "cleared"]</b>."))
+	default_attack = new_attack
+	to_chat(src, SPAN_NOTICE("Your default unarmed attack is now <b>[default_attack?.name || "cleared"]</b>."))
+	if(default_attack)
+		var/summary = default_attack.summarize()
+		if(summary)
+			to_chat(src, SPAN_NOTICE(summary))
+	attack_selector?.update_icon()
