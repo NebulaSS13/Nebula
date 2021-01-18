@@ -10,7 +10,5 @@
 	))
 
 /decl/webhook/ahelp_sent/get_mentions()
-	if(LAZYLEN(GLOB.admins))
-		return
-	else
+	if(!length(GLOB.admins))
 		return mentions
