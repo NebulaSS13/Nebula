@@ -7,7 +7,7 @@
 	removed_by_welder = TRUE
 	wall_name = "bulkhead"
 	weight = MAT_VALUE_HEAVY
-	hardness = MAT_VALUE_FLEXIBLE
+	hardness = MAT_VALUE_RIGID
 	wall_support_value = MAT_VALUE_HEAVY
 
 /decl/material/solid/metal/uranium
