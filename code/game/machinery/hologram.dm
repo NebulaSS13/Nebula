@@ -379,11 +379,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	active_power_usage = 100
 
 //Destruction procs.
-/obj/machinery/hologram/explosion_act(severity)
-	. = ..()
-	if(. && !QDELETED(src) && (severity == 1 || (severity == 2 && prob(50)) || (severity == 3 && prob(5))))
-		physically_destroyed(src)
-
 /obj/machinery/hologram/holopad/Destroy()
 	for (var/mob/living/master in masters)
 		clear_holo(master)

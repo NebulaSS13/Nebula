@@ -34,11 +34,6 @@
 /obj/machinery/chem_master/proc/get_remaining_volume()
 	return Clamp(reagent_limit - reagents.total_volume, 0, reagent_limit)
 
-/obj/machinery/chem_master/explosion_act(severity)
-	. = ..()
-	if(. && (severity == 1) || (severity == 2 && prob(50)))
-		physically_destroyed()
-
 /obj/machinery/chem_master/attackby(var/obj/item/B, var/mob/user)
 
 	if(istype(B, /obj/item/chems/glass))

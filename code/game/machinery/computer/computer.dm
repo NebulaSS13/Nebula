@@ -33,15 +33,6 @@
 	if(prob(20/severity)) set_broken(TRUE)
 	..()
 
-/obj/machinery/computer/explosion_act(severity)
-	..()
-	if(!QDELETED(src))
-		if(severity == 1 || (severity == 2 && prob(25)))
-			qdel(src)
-		else if(prob(100 - (severity * 25)))
-			verbs.Cut()
-			set_broken(TRUE)
-
 /obj/machinery/computer/on_update_icon()
 
 	cut_overlays()

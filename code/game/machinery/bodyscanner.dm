@@ -115,11 +115,6 @@
 	if(!user_can_move_target_inside(target, user))
 		return
 
-/obj/machinery/bodyscanner/explosion_act(severity)
-	. = ..()
-	if(. && !QDELETED(src) && prob(severity == 1 ? 100 : (100 - (25 * severity))))
-		physically_destroyed(src)
-
 /obj/machinery/bodyscanner/Destroy()
 	if(occupant)
 		occupant.dropInto(loc)

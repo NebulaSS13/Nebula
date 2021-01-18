@@ -65,7 +65,11 @@
 /obj/machinery/explosion_act(severity)
 	..()
 	if(!QDELETED(src))
-		take_damage(100/severity, BRUTE, TRUE)
+		if((severity == 1 || (severity == 2 && prob(25))))
+			physically_destroyed()
+			qdel(src)
+		else
+			take_damage(100/severity, BRUTE, TRUE)
 
 /obj/machinery/bullet_act(obj/item/projectile/P, def_zone)
 	. = ..()
