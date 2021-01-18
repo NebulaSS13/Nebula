@@ -29,11 +29,6 @@
 	. = ..()
 	to_chat(user, SPAN_NOTICE("The neural suppressors are switched [suppressing ? "on" : "off"]."))
 
-/obj/machinery/optable/explosion_act(severity)
-	. = ..()
-	if(. && !QDELETED(src) && (severity == 1 || prob(100 - (25 * severity))))
-		physically_destroyed(src)
-
 /obj/machinery/optable/attackby(var/obj/item/O, var/mob/user)
 	if (istype(O, /obj/item/grab))
 		var/obj/item/grab/G = O

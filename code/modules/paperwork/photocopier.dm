@@ -129,13 +129,10 @@
 	else ..()
 
 /obj/machinery/photocopier/explosion_act(severity)
-	. = ..()
-	if(.)
-		if(severity == 1 || (severity == 2 && prob(50)))
-			physically_destroyed()
-		else if((severity == 2 || prob(50)) && toner)
-			new /obj/effect/decal/cleanable/blood/oil(get_turf(src))
-			toner = 0
+	..()
+	if(!QDELETED(src) && (severity == 2 || prob(50)) && toner)
+		new /obj/effect/decal/cleanable/blood/oil(get_turf(src))
+		toner = 0
 
 /obj/machinery/photocopier/proc/copy(var/obj/item/paper/copy, var/need_toner=1)
 	var/obj/item/paper/c = new copy.type(loc, copy.text, copy.name, copy.metadata )
