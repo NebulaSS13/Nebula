@@ -4,7 +4,7 @@
 	icon_state = "book"
 	throw_speed = 1
 	throw_range = 5
-	w_class = ITEM_SIZE_NORMAL		 //upped to three because books are, y'know, pretty big. (and you could hide them inside eachother recursively forever)
+	w_class = ITEM_SIZE_NORMAL //upped to three because books are, y'know, pretty big. (and you could hide them inside eachother recursively forever)
 	attack_verb = list("bashed", "whacked", "educated")
 	material = /decl/material/solid/plastic
 	matter = list(/decl/material/solid/wood = MATTER_AMOUNT_REINFORCEMENT)
@@ -27,24 +27,23 @@
 /obj/item/book/Initialize(var/ml)
 	if(!ml && !unique)
 		SSpersistence.track_value(src, /datum/persistent/book)
+		GLOB.moved_event.register(src, src, .proc/OnMove)
 	. = ..()
 
-/obj/item/book/Destroy()
-	if(dat && last_modified_ckey && SSpersistence.is_tracking(src, /datum/persistent/book))
-		// Create a new book in nullspace that is tracked by persistence.
-		// This is so destroying a book does not get rid of someone's 
-		// content, as books with null coords will get spawned in a random
-		// library bookcase.
-		var/obj/item/book/backup_book = new(src)
-		backup_book.dat =                dat
-		backup_book.author =             author
-		backup_book.title =              title
-		backup_book.last_modified_ckey = last_modified_ckey
-		backup_book.unique =             TRUE
-		backup_book.forceMove(null)
-		backup_book.SetName(backup_book.title)
+/obj/item/book/proc/OnMove()
+	set waitfor = 0
+	if(isspaceturf(loc))
+		visible_message(SPAN_WARNING("\The [src] vanishes into the starry darkness."))
+		qdel(src)
 
-	SSpersistence.forget_value(src, /datum/persistent/book)
+/obj/item/book/Destroy()
+	if(SSpersistence.is_tracking(src, /datum/persistent/book) && length(GLOB.station_bookcases))
+		for(var/thing in contents)
+			qdel(thing)
+		var/obj/structure/bookcase/case = pick(GLOB.station_bookcases)
+		forceMove(case)
+		case.update_icon()
+		return QDEL_HINT_LETMELIVE
 	. = ..()
 
 /obj/item/book/attack_self(var/mob/user)
