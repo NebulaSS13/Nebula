@@ -42,9 +42,8 @@ var/list/holder_mob_icon_cache = list()
 /obj/item/holder/proc/update_state(var/delay)
 	set waitfor = 0
 
-	if(last_holder != loc)
-		for(var/mob/M in contents)
-			unregister_all_movement(last_holder, M)
+	for(var/mob/M in contents)
+		unregister_all_movement(last_holder, M)
 
 	if(delay)
 		sleep(delay)
