@@ -136,10 +136,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 
 	SSstatistics.add_field_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-	if(LAZYLEN(GLOB.admins))
-		SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Ticket ([ticket.id]) (Game ID: [game_id]) Ticket Opened", "body" = "[ticket.owner.key_name(0)] has opened a ticket. Subject: [original_msg]"), FALSE)
-	else
-		SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Ticket ([ticket.id]) (Game ID: [game_id]) Ticket Opened, No Admins Online", "body" = "[ticket.owner.key_name(0)] has opened a ticket. Subject: [original_msg]"), TRUE)
+	SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Ticket ([ticket.id]) (Game ID: [game_id]) Ticket Opened", "body" = "[ticket.owner.key_name(0)] has opened a ticket. Subject: [original_msg]"))
 
 	return
 

@@ -65,7 +65,7 @@
 		return
 
 	if(archetype && archetype.call_webhook)
-		SSwebhooks.send(archetype.call_webhook, list("name" = name), FALSE)
+		SSwebhooks.send(archetype.call_webhook, list("name" = name))
 
 /datum/submap/proc/sync_cell(var/obj/effect/overmap/visitable/cell)
 	name = cell.name

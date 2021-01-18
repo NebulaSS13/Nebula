@@ -8,3 +8,9 @@
 		"description" = data["body"],
 		"color" = COLOR_WEBHOOK_DEFAULT
 	))
+
+/decl/webhook/ahelp_sent/get_mentions()
+	if(LAZYLEN(GLOB.admins))
+		return
+	else
+		return mentions
