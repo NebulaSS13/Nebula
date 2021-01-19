@@ -48,6 +48,7 @@
 		holstered = I
 		storage.handle_item_insertion(holstered, 1)
 		holstered.add_fingerprint(user)
+		holstered.add_fibers(atom_holder)
 		storage.w_class = max(storage.w_class, holstered.w_class)
 		user.visible_message("<span class='notice'>\The [user] holsters \the [holstered].</span>", "<span class='notice'>You holster \the [holstered].</span>")
 		atom_holder.SetName("occupied [initial(atom_holder.name)]")

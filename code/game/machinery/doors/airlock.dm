@@ -766,6 +766,9 @@ About the new airlock wires panel:
 		return wires.Interact(user)
 
 	else if(isCrowbar(C) && !welded && !repairing)
+		// Add some minor damage as evidence of forcing.
+		if(health >= maxhealth)
+			take_damage(1)
 		if(arePowerSystemsOn())
 			to_chat(user, SPAN_WARNING("The airlock's motors resist your efforts to force it."))
 		else if(locked)
