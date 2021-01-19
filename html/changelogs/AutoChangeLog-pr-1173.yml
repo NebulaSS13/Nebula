@@ -1,0 +1,4 @@
+author: comma
+delete-after: true
+changes:
+  - bugfix: APCs can be fixed again after explosions
