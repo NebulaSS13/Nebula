@@ -20,14 +20,6 @@
 /obj/item/mmi/digital/attack_self()
 	return
 
-/obj/item/mmi/digital/transfer_identity(var/mob/living/carbon/H)
-	brainmob.dna = H.dna
-	brainmob.timeofhostdeath = H.timeofdeath
-	brainmob.set_stat(CONSCIOUS)
-	if(H.mind)
-		H.mind.transfer_to(brainmob)
-	return
-
 /obj/item/mmi
 	name = "\improper Man-Machine Interface"
 	desc = "A complex life support shell that interfaces between a brain and electronic devices."
@@ -119,11 +111,12 @@
 	brainmob.real_name = H.real_name
 	brainmob.dna = H.dna
 	brainmob.container = src
+	brainmob.timeofhostdeath = H.timeofdeath
+	brainmob.set_stat(CONSCIOUS)
 
 	SetName("[initial(name)]: [brainmob.real_name]")
 	update_icon()
 	locked = 1
-	return
 
 /obj/item/mmi/relaymove(var/mob/user, var/direction)
 	if(user.stat || user.stunned)

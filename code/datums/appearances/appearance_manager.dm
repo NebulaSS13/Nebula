@@ -39,7 +39,8 @@ var/decl/appearance_manager/appearance_manager = new()
 	for(var/entry in pq.L)
 		var/datum/appearance_data/ad = entry
 		ad.RemoveViewer(viewer, FALSE)
-	appearances_[viewer] -= viewer
+	if(viewer in appearances_)
+		appearances_[viewer] -= viewer
 
 /decl/appearance_manager/proc/reset_appearance_images(var/mob/viewer)
 	clear_appearance_images(viewer)
