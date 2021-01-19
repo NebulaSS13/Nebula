@@ -201,7 +201,32 @@
 		return 100
 	return BASE_STORAGE_COST(w_class)
 
+/mob/living/carbon/human/handle_fall(var/turf/landing)
+	if(config.silly_mode)
+		if(locate(/obj/structure/stairs) in landing)
+			return 1
+		else
+			anchored = TRUE
+			visible_message(SPAN_WARNING("[src] appears to hover in the air for a moment, screaming comically before plunging downwards!"))
+			playsound(loc, pick(scream_sounds), 60)
+			addtimer(CALLBACK(src, /mob/living/carbon/human/proc/handle_fall_silly, landing), 0.5 SECOND)
+	else
+		forceMove(landing)
+		if(locate(/obj/structure/stairs) in landing)
+			return 1
+		else
+			handle_fall_effect(landing)
+
+/mob/living/carbon/human/proc/handle_fall_silly(var/turf/landing)
+	animate(src, pixel_y = -64, alpha = 0, time = 0.5 SECOND)
+	addtimer(CALLBACK(src, /atom/movable/proc/forceMove, landing), 0.6 SECOND)
+	addtimer(CALLBACK(src, /mob/living/carbon/human/handle_fall_effect, landing), 0.6 SECOND)
+	anchored = FALSE
+
 /mob/living/carbon/human/handle_fall_effect(var/turf/landing)
+	if(config.silly_mode)
+		alpha = 255
+		pixel_y = 0
 	if(species && species.handle_fall_special(src, landing))
 		return
 

@@ -98,3 +98,5 @@
 	var/list/smell_cooldown
 
 	ai = /datum/ai/human
+
+	var/list/scream_sounds = list('sound/voice/scream/scream1.ogg', 'sound/voice/scream/scream2.ogg', 'sound/voice/scream/scream3.ogg')

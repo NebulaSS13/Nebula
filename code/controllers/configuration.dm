@@ -241,6 +241,8 @@ var/list/gamemode_cache = list()
 	var/max_client_view_x
 	var/max_client_view_y
 
+	var/silly_mode = TRUE
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -845,6 +847,9 @@ var/list/gamemode_cache = list()
 
 				if("use_loyalty_implants")
 					config.use_loyalty_implants = 1
+
+				if("use_silly_mode")
+					config.silly_mode = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
