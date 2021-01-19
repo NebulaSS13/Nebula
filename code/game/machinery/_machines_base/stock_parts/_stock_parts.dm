@@ -95,3 +95,11 @@
 		to_chat(user, SPAN_NOTICE("It is showing signs of damage."))
 	else if(health < max_health)
 		to_chat(user, SPAN_NOTICE("It is showing some wear and tear."))
+
+//Machines handle damaging for us, so don't do it twice
+/obj/item/stock_parts/explosion_act(severity)
+	var/obj/machinery/M = loc
+	if(istype(M) && (src in M.component_parts))
+		return
+	..()
+	
