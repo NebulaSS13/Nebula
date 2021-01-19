@@ -53,7 +53,9 @@
 
 /obj/machinery/proc/on_component_failure(var/obj/item/stock_parts/component)
 	RefreshParts()
-	power_change()
+	update_icon()
+	if(istype(component, /obj/item/stock_parts/power))
+		power_change()
 
 /obj/machinery/emp_act(severity)
 	if(use_power && stat == 0)

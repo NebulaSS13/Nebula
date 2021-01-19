@@ -222,9 +222,10 @@
 	term.make_terminal(src) // intentional crash if there is no terminal
 	queue_icon_update()
 
-/obj/machinery/power/apc/proc/terminal()
+/obj/machinery/power/apc/proc/terminal(var/functional_only)
 	var/obj/item/stock_parts/power/terminal/term = get_component_of_type(/obj/item/stock_parts/power/terminal)
-	return term && term.terminal
+	if(term && (!functional_only || term.is_functional()))
+		return term.terminal
 
 /obj/machinery/power/apc/examine(mob/user, distance)
 	. = ..()
@@ -237,7 +238,7 @@
 		if(!panel_open)
 			to_chat(user, "The cover is closed.")
 		else
-			to_chat(user, "The cover is [cover_removed ? "removed" : "open"] and the power cell is [ get_cell() ? "installed" : "missing"].")
+			to_chat(user, "The cover is [cover_removed ? "removed" : "open"] and the power cell is [ get_cell(FALSE) ? "installed" : "missing"].")
 //  Broken/missing board should be shown by parent.
 
 // update the APC icon to show the three base states
@@ -299,7 +300,7 @@
 		if(update_state & UPDATE_ALLGOOD)
 			icon_state = "apc0"
 		else if(update_state & (UPDATE_OPENED1|UPDATE_OPENED2))
-			var/basestate = "apc[ get_cell() ? "2" : "1" ]"
+			var/basestate = "apc[ get_cell(FALSE) ? "2" : "1" ]"
 			if(update_state & UPDATE_OPENED1)
 				if(update_state & (UPDATE_MAINT|UPDATE_BROKE))
 					icon_state = "apcmaint" //disabled APC cannot hold cell
@@ -324,14 +325,15 @@
 			overlays.Cut()
 		if(!(stat & (BROKEN|MAINT)) && update_state & UPDATE_ALLGOOD)
 			overlays += status_overlays_lock[locked+1]
-			overlays += status_overlays_charging[charging+1]
+			if(!(stat & NOSCREEN))
+				overlays += status_overlays_charging[charging+1]
 			if(operating)
 				overlays += status_overlays_equipment[equipment+1]
 				overlays += status_overlays_lighting[lighting+1]
 				overlays += status_overlays_environ[environ+1]
 
 	if(update & 3)
-		if(update_state & (UPDATE_OPENED1|UPDATE_OPENED2|UPDATE_BROKE))
+		if((update_state & (UPDATE_OPENED1|UPDATE_OPENED2|UPDATE_BROKE)) || (stat & NOSCREEN))
 			set_light(0)
 		else if(update_state & UPDATE_BLUESCREEN)
 			set_light(0.8, 0.1, 1, 2, "#00ecff")
@@ -356,7 +358,7 @@
 	var/list/last_update_overlay_chan = update_overlay_chan.Copy()
 	update_state = 0
 	update_overlay = 0
-	if(get_cell())
+	if(get_cell(FALSE))
 		update_state |= UPDATE_CELL_IN
 	if(stat & BROKEN)
 		update_state |= UPDATE_BROKE
@@ -737,7 +739,7 @@
 	var/last_en = environ
 	var/last_ch = charging
 
-	var/obj/machinery/power/terminal/terminal = terminal()
+	var/obj/machinery/power/terminal/terminal = terminal(TRUE)
 	var/avail = (terminal && terminal.avail()) || 0
 	var/excess = (terminal && terminal.surplus()) || 0
 

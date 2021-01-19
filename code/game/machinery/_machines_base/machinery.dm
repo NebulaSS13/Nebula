@@ -429,9 +429,9 @@ Class Procs:
 	if(. && !CanFluidPass())
 		fluid_update()
 
-/obj/machinery/get_cell()
+/obj/machinery/get_cell(var/functional_only = TRUE)
 	var/obj/item/stock_parts/power/battery/battery = get_component_of_type(/obj/item/stock_parts/power/battery)
-	if(battery)
+	if(battery && (!functional_only || battery.is_functional()))
 		return battery.get_cell()
 
 /obj/machinery/building_cost()
