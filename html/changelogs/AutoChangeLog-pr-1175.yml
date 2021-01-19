@@ -1,0 +1,7 @@
+author: comma
+delete-after: true
+changes:
+  - tweak: APCs now don't draw screen overlay / glow if screen component is destroyed
+  - tweak: APCs now don't report cell power in UI etc if battery backup is destroyed
+  - tweak: APCs now show that external power is not coming in if terminal component
+      is destroyed
