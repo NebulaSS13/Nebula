@@ -1,9 +1,8 @@
 /obj/item/clothing/accessory
 	name = "tie"
 	desc = "A neosilk clip-on tie."
-	icon = 'icons/obj/clothing/obj_accessories.dmi'
-	icon_state = "tie"
-	item_state = ""	//no inhands
+	icon = 'icons/clothing/accessories/ties/tie.dmi'
+	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_TIE
 	w_class = ITEM_SIZE_SMALL
 
@@ -12,7 +11,6 @@
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
 	var/list/mob_overlay = list()
 	var/overlay_state = null
-	var/list/accessory_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_accessories.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_accessories.dmi')
 	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
 	var/high_visibility	//if it should appear on examine without detailed view
 	var/slowdown //used when an accessory is meant to slow the wearer down when attached to clothing
@@ -39,6 +37,10 @@
 	inv_overlay.appearance_flags = RESET_COLOR
 	return inv_overlay
 
+/obj/item/clothing/accessory/get_fallback_slot(var/slot)
+	if(slot != BP_L_HAND && slot != BP_R_HAND)
+		return slot_tie_str
+
 /obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot, bodypart)
 	if(!istype(loc,/obj/item/clothing) || use_single_icon)	//don't need special handling if it's worn as normal item.
 		return ..()
@@ -58,9 +60,10 @@
 				tmp_icon_state = on_rolled["rolled"]
 
 		var/do_species_offset = (lowertext(bodytype) != lowertext(user_human.species.get_bodytype(user_human)))
-		var/use_sprite_sheet = accessory_icons[slot]
+		var/use_sprite_sheet = FALSE
 		if(sprite_sheets[bodytype])
 			use_sprite_sheet = sprite_sheets[bodytype]
+
 
 		if(icon_override && ("[tmp_icon_state]_mob" in icon_states(icon_override)))
 			return overlay_image(icon_override, "[tmp_icon_state]_mob", color, RESET_COLOR)
@@ -111,24 +114,29 @@
 /obj/item/clothing/accessory/necklace
 	name = "necklace"
 	desc = "A simple necklace."
-	icon = 'icons/clothing/accessories/necklace.dmi'
-	icon_state = ICON_STATE_WORLD
+	icon = 'icons/clothing/accessories/jewelry/necklace.dmi'
 	slot_flags = SLOT_FACE | SLOT_TIE
 
 //Misc
 /obj/item/clothing/accessory/kneepads
 	name = "kneepads"
 	desc = "A pair of synthetic kneepads. Doesn't provide protection from more than arthritis."
-	icon_state = "kneepads"
+	icon = 'icons/clothing/accessories/armor/kneepads.dmi'
 
 //Scarves
 /obj/item/clothing/accessory/scarf
 	name = "scarf"
 	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
-	icon_state = "whitescarf"
+	icon = 'icons/clothing/accessories/clothing/scarf.dmi'
 
 //Bracelets
 /obj/item/clothing/accessory/bracelet
 	name = "bracelet"
 	desc = "A simple bracelet with a clasp."
-	icon_state = "bracelet"
+	icon = 'icons/clothing/accessories/jewelry/bracelet.dmi'
+
+/obj/item/clothing/accessory/ftupin
+	name = "\improper Free Trade Union pin"
+	desc = "A pin denoting employment in the Free Trade Union, a trading company."
+	icon = 'icons/clothing/accessories/jewelry/ftupin.dmi'
+	high_visibility = 1

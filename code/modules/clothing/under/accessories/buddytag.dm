@@ -2,7 +2,7 @@
 /obj/item/clothing/accessory/buddytag
 	name = "buddy tag"
 	desc = "A tiny device, paired up with a counterpart set to same code. When devices are taken apart too far, they start beeping."
-	icon_state = "buddytag0"
+	icon = 'icons/clothing/accessories/buddytag.dmi'
 	slot_flags = SLOT_TIE
 	high_visibility = 1
 	var/next_search = 0
@@ -10,7 +10,9 @@
 	var/id = 1
 
 /obj/item/clothing/accessory/buddytag/on_update_icon()
-	icon_state = "buddytag[on]"
+	icon_state = get_world_inventory_state()
+	if(on && check_state_in_icon("[icon_state]-on", icon))
+		icon_state = "[icon_state]-on"
 
 /obj/item/clothing/accessory/buddytag/attack_self(mob/user)
 	if(!CanPhysicallyInteract(user))

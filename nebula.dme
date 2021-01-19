@@ -1637,6 +1637,7 @@
 #include "code\modules\clothing\under\skirts.dm"
 #include "code\modules\clothing\under\syndicate.dm"
 #include "code\modules\clothing\under\accessories\accessory.dm"
+#include "code\modules\clothing\under\accessories\accessory_toggleable.dm"
 #include "code\modules\clothing\under\accessories\armband.dm"
 #include "code\modules\clothing\under\accessories\armor.dm"
 #include "code\modules\clothing\under\accessories\badges.dm"

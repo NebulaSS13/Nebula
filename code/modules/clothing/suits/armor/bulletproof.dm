@@ -25,7 +25,7 @@
 /obj/item/clothing/accessory/armguards/ballistic
 	name = "ballistic arm guards"
 	desc = "A pair of armored arm pads with heavy plates to protect against ballistic projectiles."
-	icon_state = "armguards_ballistic"
+	icon = 'icons/clothing/accessories/armor/armguards_ballistic.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_RIFLE,
@@ -41,7 +41,7 @@
 /obj/item/clothing/accessory/legguards/ballistic
 	name = "ballistic leg guards"
 	desc = "A pair of armored leg pads with heavy plates to protect against ballistic projectiles. Looks like they might impair movement."
-	icon_state = "legguards_ballistic"
+	icon = 'icons/clothing/accessories/armor/legguards_ballistic.dmi'
 	color = null
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,

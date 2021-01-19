@@ -5,7 +5,7 @@
 
 /datum/gear/storage/webbing
 	display_name = "webbing, small"
-	path = /obj/item/clothing/accessory/storage/webbing
+	path = /obj/item/clothing/accessory/storage
 	cost = 2
 
 /datum/gear/storage/webbing_large

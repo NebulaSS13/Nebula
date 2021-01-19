@@ -338,9 +338,6 @@
 /datum/fabricator_recipe/textiles/cape
 	path = /obj/item/clothing/accessory/shouldercape
 
-/datum/fabricator_recipe/textiles/capegrunt
-	path = /obj/item/clothing/accessory/shouldercape/grunt
-
 /datum/fabricator_recipe/textiles/capeofficer
 	path = /obj/item/clothing/accessory/shouldercape/officer
 
@@ -357,7 +354,7 @@
 	path = /obj/item/clothing/accessory/legguards/merc
 
 /datum/fabricator_recipe/textiles/mercplates
-	path = /obj/item/clothing/accessory/armorplate/merc
+	path = /obj/item/clothing/accessory/armor/plate/merc
 
 /datum/fabricator_recipe/textiles/bulletcarrier
 	path = /obj/item/clothing/suit/armor/bulletproof
@@ -367,9 +364,6 @@
 
 /datum/fabricator_recipe/textiles/bulletlegguards
 	path = /obj/item/clothing/accessory/legguards/ballistic
-
-/datum/fabricator_recipe/textiles/mercplates
-	path = /obj/item/clothing/accessory/armorplate/merc
 
 /datum/fabricator_recipe/textiles/carrierblue
 	path = /obj/item/clothing/suit/armor/pcarrier/blue

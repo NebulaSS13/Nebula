@@ -10,17 +10,17 @@
 	starting_accessories = null
 
 /obj/item/clothing/suit/armor/pcarrier/light
-	starting_accessories = list(/obj/item/clothing/accessory/armorplate)
+	starting_accessories = list(/obj/item/clothing/accessory/armor/plate)
 
 /obj/item/clothing/suit/armor/pcarrier/press
 	color = COLOR_BABY_BLUE
 	starting_accessories = list(/obj/item/clothing/accessory/armor/tag/press)
 
 /obj/item/clothing/suit/armor/pcarrier/press/prepared
-	starting_accessories = list(/obj/item/clothing/accessory/armorplate, /obj/item/clothing/accessory/armor/tag/press)
+	starting_accessories = list(/obj/item/clothing/accessory/armor/plate, /obj/item/clothing/accessory/armor/tag/press)
 
 /obj/item/clothing/suit/armor/pcarrier/medium
-	starting_accessories = list(/obj/item/clothing/accessory/armorplate/medium, /obj/item/clothing/accessory/storage/pouches)
+	starting_accessories = list(/obj/item/clothing/accessory/armor/plate/medium, /obj/item/clothing/accessory/storage/pouches)
 
 /obj/item/clothing/suit/armor/pcarrier/blue
 	color = COLOR_BABY_BLUE

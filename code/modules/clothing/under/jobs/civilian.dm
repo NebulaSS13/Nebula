@@ -68,7 +68,7 @@
 /obj/item/clothing/under/internalaffairs/plain/nt
 	desc = "A plain shirt and pair of pressed black pants."
 	name = "formal outfit"
-	starting_accessories = list(/obj/item/clothing/accessory/red_long)
+	starting_accessories = list(/obj/item/clothing/accessory/long/red)
 
 /obj/item/clothing/under/janitor
 	desc = "It's the official uniform of the janitor. It has minor protection from biohazards."

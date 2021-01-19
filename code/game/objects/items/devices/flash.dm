@@ -19,8 +19,7 @@
 	var/str_max = 7 //how powerful the effect COULD be
 
 /obj/item/flash/on_update_icon()
-	. = ..()
-	icon_state = initial(icon_state)
+	icon_state = get_world_inventory_state()
 	if(broken)
 		icon_state = "[icon_state]-burnt"
 

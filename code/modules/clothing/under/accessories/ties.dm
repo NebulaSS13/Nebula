@@ -1,30 +1,28 @@
 /obj/item/clothing/accessory/long
-	icon_state = "longtie"
+	icon = 'icons/clothing/accessories/ties/tie_long.dmi'
 
-/obj/item/clothing/accessory/blue
-	name = "blue tie"
-	color = "#123c5a"
-
-/obj/item/clothing/accessory/red
-	name = "red tie"
-	color = "#800000"
-
-/obj/item/clothing/accessory/blue_clip
-	name = "blue tie with a clip"
-	icon_state = "bluecliptie"
-
-/obj/item/clothing/accessory/red_long
-	name = "red long tie"
-	icon_state = "longtie"
+/obj/item/clothing/accessory/long/red
+	name = "long red tie"
 	color = "#a02929"
 
 /obj/item/clothing/accessory/black
 	name = "black tie"
 	color = "#1e1e1e"
 
-/obj/item/clothing/accessory/yellow
-	name = "yellow tie"
-	icon_state = "longtie"
+/obj/item/clothing/accessory/red
+	name = "red tie"
+	color = "#800000"
+
+/obj/item/clothing/accessory/blue
+	name = "blue tie"
+	color = "#123c5a"
+
+/obj/item/clothing/accessory/blue_clip
+	name = "blue tie with a clip"
+	icon = 'icons/clothing/accessories/ties/tie_clip.dmi'
+
+/obj/item/clothing/accessory/long/yellow
+	name = "long yellow tie"
 	color = "#c4c83d"
 
 /obj/item/clothing/accessory/navy
@@ -34,11 +32,11 @@
 /obj/item/clothing/accessory/horrible
 	name = "horrible tie"
 	desc = "A neosilk clip-on tie. This one is disgusting."
-	icon_state = "horribletie"
+	icon = 'icons/clothing/accessories/ties/tie_horrible.dmi'
 
 /obj/item/clothing/accessory/brown
 	name = "brown tie"
-	icon_state = "longtie"
+	icon = 'icons/clothing/accessories/ties/tie_long.dmi'
 	color = "#b18345"
 
 //Bowties
@@ -74,24 +72,23 @@
 	tied = !tied
 	update_icon()
 
+/obj/item/clothing/accessory/bowtie/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/ret = ..()
+	if(ret && !tied && check_state_in_icon("[ret.icon_state]-untied", ret.icon))
+		ret.icon_state = "[ret.icon_state]-untied"
+	return ret
+
 /obj/item/clothing/accessory/bowtie/on_update_icon()
-	if(tied)
-		icon_state = initial(icon_state)
-	else
-		icon_state = "[initial(icon_state)]_untied"
+	icon_state = get_world_inventory_state()
+	if(!tied && check_state_in_icon("[icon_state]-untied", icon))
+		icon_state = "[icon_state]-untied"
 
 /obj/item/clothing/accessory/bowtie/color
 	name = "bowtie"
 	desc = "A neosilk hand-tied bowtie."
-	icon_state = "bowtie"
+	icon = 'icons/clothing/accessories/ties/bowtie.dmi'
 
 /obj/item/clothing/accessory/bowtie/ugly
 	name = "horrible bowtie"
 	desc = "A neosilk hand-tied bowtie. This one is disgusting."
-	icon_state = "bowtie_ugly"
-
-/obj/item/clothing/accessory/ftupin
-	name = "\improper Free Trade Union pin"
-	desc = "A pin denoting employment in the Free Trade Union, a trading company."
-	icon_state = "ftupin"
-	high_visibility = 1
+	icon = 'icons/clothing/accessories/ties/bowtie_ugly.dmi'

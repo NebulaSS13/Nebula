@@ -191,8 +191,7 @@ var/list/all_limb_tags_by_depth = list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, 
 
 var/list/default_onmob_icons = list(
 	BP_L_HAND =          'icons/mob/onmob/items/lefthand.dmi',
-	BP_R_HAND =          'icons/mob/onmob/items/righthand.dmi',
-	slot_tie_str =       'icons/mob/onmob/onmob_accessories.dmi'
+	BP_R_HAND =          'icons/mob/onmob/items/righthand.dmi'
 )
 
 var/list/all_inventory_slots = list(

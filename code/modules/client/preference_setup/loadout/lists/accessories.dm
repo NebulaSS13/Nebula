@@ -11,15 +11,15 @@
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
-		"blue tie" =       /obj/item/clothing/accessory/blue,
-		"red tie" =        /obj/item/clothing/accessory/red,
-		"blue tie, clip" = /obj/item/clothing/accessory/blue_clip,
-		"red long tie" =   /obj/item/clothing/accessory/red_long,
-		"black tie" =      /obj/item/clothing/accessory/black,
-		"yellow tie" =     /obj/item/clothing/accessory/yellow,
-		"navy tie" =       /obj/item/clothing/accessory/navy,
-		"horrible tie" =   /obj/item/clothing/accessory/horrible,
-		"brown tie" =      /obj/item/clothing/accessory/brown
+		"blue tie" =        /obj/item/clothing/accessory/blue,
+		"red tie" =         /obj/item/clothing/accessory/red,
+		"blue tie, clip" =  /obj/item/clothing/accessory/blue_clip,
+		"black tie" =       /obj/item/clothing/accessory/black,
+		"long red tie" =    /obj/item/clothing/accessory/long/red,
+		"long yellow tie" = /obj/item/clothing/accessory/long/yellow,
+		"navy tie" =        /obj/item/clothing/accessory/navy,
+		"horrible tie" =    /obj/item/clothing/accessory/horrible,
+		"brown tie" =       /obj/item/clothing/accessory/brown
 	)
 
 /datum/gear/accessory/tie_color

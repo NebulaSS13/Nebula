@@ -355,7 +355,7 @@
 	desc = "A tan suit. Smart, but casual."
 	icon = 'icons/clothing/under/suits/suit_pants_tan.dmi'
 	starting_accessories = list(
-		/obj/item/clothing/accessory/yellow, 
+		/obj/item/clothing/accessory/long/yellow, 
 		/obj/item/clothing/accessory/toggleable/tan_jacket
 	)
 
