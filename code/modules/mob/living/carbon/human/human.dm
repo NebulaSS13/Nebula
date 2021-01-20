@@ -928,7 +928,7 @@
 	return 1 //we applied blood to the item
 
 /mob/living/carbon/human/clean_blood(var/clean_feet)
-	.=..()
+	. = ..()
 	if(gloves)
 		gloves.clean()
 		gloves.germ_level = 0
@@ -941,7 +941,7 @@
 			organ.clean()
 	update_inv_gloves(1)
 	update_inv_shoes(1)
-	return 1
+	return TRUE
 
 /mob/living/carbon/human/get_visible_implants(var/class = 0)
 

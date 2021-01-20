@@ -366,6 +366,7 @@ its easier to just keep the beam vertical.
 	vomit.reagents.add_reagent(/decl/material/liquid/acid/stomach, 5)
 
 /atom/proc/clean_blood()
+	SHOULD_CALL_PARENT(TRUE)
 	if(!simulated)
 		return
 	fluorescent = 0
@@ -377,7 +378,7 @@ its easier to just keep the beam vertical.
 		if(forensics)
 			forensics.remove_data(/datum/forensics/blood_dna)
 			forensics.remove_data(/datum/forensics/gunshot_residue)
-		return 1
+		return TRUE
 
 /atom/proc/get_global_map_pos()
 	if(!islist(GLOB.global_map) || isemptylist(GLOB.global_map)) return

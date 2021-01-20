@@ -1015,3 +1015,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			forensics.remove_data(/datum/forensics/blood_dna)
 			forensics.remove_data(/datum/forensics/gunshot_residue)
 	update_icon()
+	update_clothing_icon()
+
+// Updates the icons of the mob wearing the clothing item, if any.
+/obj/item/proc/update_clothing_icon()
+	return
