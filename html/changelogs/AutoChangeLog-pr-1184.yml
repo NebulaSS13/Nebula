@@ -1,0 +1,6 @@
+author: comma
+delete-after: true
+changes:
+  - tweak: Holsters now leave their fibers on things put inside.
+  - tweak: Crowbarring doors now leaves scuffing on them, visible when examined up
+      close. Can be repaired as any other damage.
