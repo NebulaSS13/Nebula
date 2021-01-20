@@ -34,6 +34,12 @@
 	add_hiddenprint(M)
 	return 1
 
+/atom/proc/add_fibers(obj/item/clothing/source)
+	if(!istype(source) || (source.item_flags & ITEM_FLAG_NO_PRINT))
+		return
+	var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
+	forensics.add_from_atom(/datum/forensics/fibers, source)
+
 /atom/proc/transfer_fingerprints_to(var/atom/A)
 	var/datum/extension/forensic_evidence/forensics = get_extension(src, /datum/extension/forensic_evidence)
 	if(!forensics)

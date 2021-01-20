@@ -317,9 +317,11 @@
 		to_chat(user, "\The [src] looks seriously damaged!")
 	else if(src.health < src.maxhealth * 3/4)
 		to_chat(user, "\The [src] shows signs of damage!")
+	else if(src.health < src.maxhealth && get_dist(src, user) <= 1)
+		to_chat(user, "\The [src] has some minor scuffing.")
 
 	var/mob/living/carbon/human/H = user
-	if (emagged && istype(H) && H.skill_check(SKILL_COMPUTER, SKILL_ADEPT))
+	if (emagged && istype(H) && (H.skill_check(SKILL_COMPUTER, SKILL_ADEPT) || H.skill_check(SKILL_ELECTRICAL, SKILL_ADEPT)))
 		to_chat(user, SPAN_WARNING("\The [src]'s control panel looks fried."))
 
 /obj/machinery/door/set_broken(new_state, cause)
