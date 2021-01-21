@@ -8,6 +8,8 @@
 	mouse_opacity = 0
 	var/decl/material/material
 
+INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
+
 /obj/effect/gas_overlay/proc/update_alpha_animation(var/new_alpha)
 	animate(src, alpha = new_alpha)
 	alpha = new_alpha

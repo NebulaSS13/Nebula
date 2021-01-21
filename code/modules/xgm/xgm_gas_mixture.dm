@@ -307,12 +307,10 @@
 //Copies gas and temperature from another gas_mixture.
 /datum/gas_mixture/proc/copy_from(const/datum/gas_mixture/sample)
 	gas = sample.gas.Copy()
+	graphic = sample.graphic.Copy()
 	temperature = sample.temperature
-
 	update_values()
-
 	return 1
-
 
 //Checks if we are within acceptable range of another gas_mixture to suspend processing or merge.
 /datum/gas_mixture/proc/compare(const/datum/gas_mixture/sample, var/vacuum_exception = 0)
@@ -362,7 +360,7 @@
 		var/decl/material/mat = decls_repository.get_decl(g)
 		if(!isnull(mat.gas_overlay_limit) && gas[g] > mat.gas_overlay_limit)
 			if(!LAZYACCESS(tile_overlay_cache, g))
-				LAZYSET(tile_overlay_cache, g, new/obj/effect/gas_overlay(null, g))
+				LAZYSET(tile_overlay_cache, g, new /obj/effect/gas_overlay(null, g))
 			var/tile_overlay = tile_overlay_cache[g]
 			if(!(tile_overlay in graphic))
 				LAZYADD(graphic_add, tile_overlay)

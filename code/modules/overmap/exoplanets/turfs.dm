@@ -62,3 +62,6 @@
 			var/mob/living/L = A
 			for(var/obj/item/grab/G in L.get_active_grabs())
 				G.affecting.forceMove(T)
+
+/turf/exterior/planet_edge/on_update_icon(update_neighbors)
+	return

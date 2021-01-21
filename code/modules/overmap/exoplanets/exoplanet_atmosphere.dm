@@ -11,8 +11,9 @@
 
 	//Skip fun gas gen for perfect terran worlds
 	if(habitability_class == HABITABILITY_IDEAL)
-		atmosphere.adjust_gas(/decl/material/gas/oxygen, MOLES_O2STANDARD)
+		atmosphere.adjust_gas(/decl/material/gas/oxygen, MOLES_O2STANDARD, FALSE)
 		atmosphere.adjust_gas(/decl/material/gas/nitrogen, MOLES_N2STANDARD)
+		atmosphere.check_tile_graphic()
 		return
 	
 	var/total_moles = MOLES_CELLSTANDARD
@@ -56,6 +57,7 @@
 					newgases -= g
 		var/ng = pick_n_take(newgases)	//pick a gas
 
+
 		// Make sure atmosphere is not flammable
 		var/decl/material/mat = decls_repository.get_decl(ng)
 		if(mat.gas_flags & XGM_GAS_OXIDIZER)
@@ -75,8 +77,9 @@
 	var/target_moles = target_pressure * CELL_VOLUME / (atmosphere.temperature * R_IDEAL_GAS_EQUATION)
 	for(var/g in gas_list)
 		var/adjusted_moles = gas_list[g] * target_moles / MOLES_CELLSTANDARD
-		atmosphere.adjust_gas(g, adjusted_moles, 0)
+		atmosphere.adjust_gas(g, adjusted_moles, FALSE)
 	atmosphere.update_values()
+	atmosphere.check_tile_graphic()
 
 //List of gases that will be always present. Amounts are given assuming total of MOLES_CELLSTANDARD in atmosphere
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_mandatory_gasses()
