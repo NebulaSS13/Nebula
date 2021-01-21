@@ -32,7 +32,16 @@ var/list/trading_hub_names = list()
 	var/obj/effect/overmap/owner
 
 /datum/trade_hub/overmap/proc/get_new_name()
-	. = "Trading Post #[sequential_id(type)]"
+	if(prob(30))
+		. = pick(GLOB.station_prefixes)
+	. = trim("[.] [pick(GLOB.station_names)]")
+	. = trim("[.] [pick(GLOB.station_suffixes)]")
+	if(prob(30))
+		. = trim("[.] [pick(GLOB.greek_letters)]")
+	else if(prob(30))
+		. = trim("[.] [pick(GLOB.phonetic_alphabet)]")
+	if(prob(25))
+		. = trim("[.] [pick(GLOB.numbers_as_words)]")
 
 /datum/trade_hub/overmap/proc/generate_name()
 	var/newname

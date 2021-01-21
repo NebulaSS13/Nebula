@@ -3,8 +3,6 @@
 	var/max_traders = 3
 	var/list/traders = list()
 	var/list/possible_trader_types
-	var/tmp/t_ind = 1
-	var/tmp/list/processing_traders = list()
 
 /datum/trade_hub/proc/get_initial_traders()
 	return
@@ -55,13 +53,8 @@
 	traders += new trader_type(src)
 
 /datum/trade_hub/Process(var/resumed)
-	if(!resumed)
-		processing_traders = traders.Copy()
-		t_ind = 1
-	while(t_ind <= processing_traders.len)
-		var/datum/trader/trader = processing_traders[t_ind++]
+	for(var/datum/trader/trader in traders)
 		trader.tick()
-		// tick check
 
 // Stub for legacy/non-overmap purposes.
 /datum/trade_hub/singleton
