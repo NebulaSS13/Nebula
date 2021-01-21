@@ -341,5 +341,5 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		// Hide title screen, allowing player to see the map
 		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")
 
-/datum/map/proc/get_initial_traders()
-	return
+/datum/map/proc/create_trade_hubs()
+	new /datum/trade_hub/singleton
