@@ -26,12 +26,17 @@
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_SMALL,
+		bullet = ARMOR_BALLISTIC_PISTOL,
 		laser = ARMOR_LASER_MINOR,
 		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_MINOR
 		)
 	slot = ACCESSORY_SLOT_ARMOR_C
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
+	)
+	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
 
 /obj/item/clothing/accessory/armor/plate/get_fibers()
 	return null	//plates do not shed
@@ -42,24 +47,34 @@
 	icon = 'icons/clothing/accessories/armor/armor_medium.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_PISTOL,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
 		laser = ARMOR_LASER_SMALL,
 		energy = ARMOR_ENERGY_SMALL,
 		bomb = ARMOR_BOMB_PADDED
+		)
+	matter = list(
+		/decl/material/solid/metal/plasteel = MATTER_AMOUNT_SECONDARY
 	)
+	origin_tech = "{'materials':2,'engineering':1,'combat':2}"
 
 /obj/item/clothing/accessory/armor/plate/tactical
 	name = "tactical armor plate"
-	desc = "A heavier armor plate with additional ablative coating. Attaches to a plate carrier."
+	desc = "A heavier armor plate with additional diamond micromesh. Attaches to a plate carrier."
 	icon = 'icons/clothing/accessories/armor/armor_tactical.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_RESISTANT,
+		bullet = ARMOR_BALLISTIC_RIFLE,
 		laser = ARMOR_LASER_MAJOR,
 		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slowdown = 0.5
+	material = /decl/material/solid/metal/plasteel
+	matter = list(
+		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
+	)
+	origin_tech = "{'materials':3,'engineering':2,'combat':2}"
 
 //Arm guards
 /obj/item/clothing/accessory/armguards
@@ -78,11 +93,15 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_A
-	material = /decl/material/solid/metal/steel
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
+	)
 	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
 
 /obj/item/clothing/accessory/armguards/craftable
 	material_armor_multiplier = 1
+	matter = null
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 
@@ -103,11 +122,15 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_L
-	material = /decl/material/solid/metal/steel
+	material = /decl/material/solid/plastic
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
+	)
 	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
 
 /obj/item/clothing/accessory/legguards/craftable
 	material_armor_multiplier = 1
+	matter = null
 	applies_material_colour = TRUE
 	applies_material_name =  TRUE
 

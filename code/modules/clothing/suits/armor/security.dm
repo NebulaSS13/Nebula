@@ -32,8 +32,3 @@
 		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
 	)
-
-// no acc variant again
-
-/obj/item/clothing/suit/armor/pcarrier/detective/noacc
-	starting_accessories = list(/obj/item/clothing/accessory/badge)

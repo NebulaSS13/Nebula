@@ -305,16 +305,8 @@
 	desc = "Ho ho ho. Merrry X-mas!"
 	icon = 'icons/clothing/head/santa.dmi'
 	flags_inv = BLOCKHAIR
-	body_parts_covered = SLOT_HEAD
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
-	min_pressure_protection = 0
-	matter = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE)
 
 /obj/item/clothing/suit/santa
 	name = "Santa's suit"
 	desc = "Festive!"
 	icon = 'icons/clothing/suit/santa.dmi'
-	allowed = list(/obj/item) //for stuffing exta special presents
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
-	min_pressure_protection = 0
-	matter = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE)

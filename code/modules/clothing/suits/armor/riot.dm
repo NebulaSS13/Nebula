@@ -14,6 +14,13 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.5
+	material = /decl/material/solid/metal/steel
+	matter = list(
+		/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY
+		)
+	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
+
+/obj/item/clothing/suit/armor/riot/prepared
 	starting_accessories = list(/obj/item/clothing/accessory/armguards/riot, /obj/item/clothing/accessory/legguards/riot)
 
 // Parts
@@ -32,8 +39,9 @@
 		)
 	siemens_coefficient = 0.5
 	slowdown = 1
-	matter = list(/decl/material/solid/metal/titanium = MATTER_AMOUNT_PRIMARY)
-	origin_tech = "{'materials':2,'engineering':1,'combat':2}"
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY)
+	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
 	
 /obj/item/clothing/accessory/armguards/riot
 	name = "riot arm guards"
@@ -48,9 +56,7 @@
 		)
 	color = null
 	siemens_coefficient = 0.5
-	matter = list(/decl/material/solid/metal/titanium = MATTER_AMOUNT_PRIMARY)
-	origin_tech = "{'materials':2,'engineering':1,'combat':2}"
+	material = /decl/material/solid/metal/steel
+	matter = list(/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY)
+	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
 
-// no accessory
-/obj/item/clothing/suit/armor/riot/noacc
-	starting_accessories = null
