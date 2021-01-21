@@ -183,6 +183,8 @@
 
 #define SPAN_INFO(X) "<span class='info'>[X]</span>"
 
+#define STYLE_SMALLFONTS_OUTLINE(X, S, C1, C2) "<span style=\"font-family: 'Small Fonts'; color: [C1]; -dm-text-outline: 1 [C2]; font-size: [S]px\">[X]</span>"
+
 #define FONT_COLORED(color, text) "<font color='[color]'>[text]</font>"
 
 #define FONT_SMALL(X) "<font size='1'>[X]</font>"

@@ -9,5 +9,5 @@
 	delay = 20
 	eye_attack_text = "a forelimb"
 	eye_attack_text_victim = "a forelimb"
-	attack_name = "forelimb slash"
+	name = "forelimb slash"
 	usable_with_limbs = list(BP_L_HAND, BP_R_HAND)

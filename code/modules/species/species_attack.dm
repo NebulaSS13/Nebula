@@ -4,7 +4,7 @@
 	shredding = 0
 	sharp = 1
 	edge = 1
-	attack_name = "sharp bite"
+	name = "sharp bite"
 
 /decl/natural_attack/claws
 	attack_verb = list("scratched", "clawed", "slashed")
@@ -15,7 +15,7 @@
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	sharp = 1
 	edge = 1
-	attack_name = "claws"
+	name = "claws"
 	usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
 	var/blocked_by_gloves = TRUE
 
@@ -63,7 +63,7 @@
 	attack_verb = list("slashed")
 	damage = 5
 	shredding = 1
-	attack_name = "strong claws"
+	name = "strong claws"
 
 /decl/natural_attack/claws/strong/gloves
 	blocked_by_gloves = FALSE
@@ -72,13 +72,13 @@
 	attack_verb = list("mauled")
 	damage = 8
 	shredding = 1
-	attack_name = "strong bite"
+	name = "strong bite"
 
 /decl/natural_attack/slime_glomp
 	attack_verb = list("glomped")
 	attack_noun = list("body")
 	damage = 2
-	attack_name = "glomp"
+	name = "glomp"
 	usable_with_limbs = list(BP_CHEST, BP_GROIN)
 
 /decl/natural_attack/slime_glomp/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
@@ -87,7 +87,7 @@
 
 /decl/natural_attack/stomp/weak
 	attack_verb = list("jumped on")
-	attack_name = "weak stomp"
+	name = "weak stomp"
 
 /decl/natural_attack/stomp/weak/get_unarmed_damage()
 	return damage
@@ -103,7 +103,7 @@
 /decl/natural_attack/tail
 	attack_verb = list ("bludgeoned", "lashed", "smacked", "whapped")
 	attack_noun = list ("tail")
-	attack_name = "tail swipe"
+	name = "tail swipe"
 	usable_with_limbs = list(BP_GROIN)
 
 /decl/natural_attack/tail/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone) //ensures that you can't tail someone in the skull
@@ -146,12 +146,12 @@
 
 /decl/natural_attack/punch/weak
 	attack_verb = list("swiped", "smacked", "smecked")
-	attack_name = "smek"
+	name = "smek"
 
 /decl/natural_attack/punch/starborn
 	attack_verb = list("scorched", "burned", "fried")
 	shredding = 1
-	attack_name = "starborn strike"
+	name = "starborn strike"
 
 /decl/natural_attack/punch/starborn/get_damage_type()
 	return BURN
@@ -161,7 +161,7 @@
 	attack_sound = 'sound/weapons/bite.ogg'
 	damage = 5
 	delay = 120
-	attack_name = "venomous bite"
+	name = "venomous bite"
 
 /decl/natural_attack/bite/venom/get_damage_type()
 	return TOX
