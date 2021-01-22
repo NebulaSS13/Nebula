@@ -96,11 +96,14 @@
  *  items on spawn
  */
 /obj/item/clothing/proc/attach_accessory(mob/user, obj/item/clothing/accessory/A)
+	if(A in accessories)
+		return
 	accessories += A
 	A.on_attached(src, user)
 	if(A.removable)
 		src.verbs |= /obj/item/clothing/proc/removetie_verb
 	update_accessory_slowdown()
+	update_icon()
 	update_clothing_icon()
 
 /obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)
@@ -110,6 +113,7 @@
 	A.on_removed(user)
 	accessories -= A
 	update_accessory_slowdown()
+	update_icon()
 	update_clothing_icon()
 
 /obj/item/clothing/proc/removetie_verb()

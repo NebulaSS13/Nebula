@@ -2,7 +2,7 @@
 	name = "chaplain insignia (christianity)"
 	desc = "An insignia worn by chaplains. The cross represents Christianity."
 	icon = 'icons/clothing/accessories/religious/icon_christianity.dmi'
-	on_rolled = list("down" = "none")
+	hide_on_uniform_rolldown = TRUE
 	slot = ACCESSORY_SLOT_INSIGNIA
 
 /obj/item/clothing/accessory/chaplaininsignia/judaism

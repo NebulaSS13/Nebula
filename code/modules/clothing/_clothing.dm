@@ -67,21 +67,17 @@
 		if(blood_DNA && user_human.species.blood_mask)
 			var/image/bloodsies = overlay_image(user_human.species.blood_mask, blood_overlay_type, blood_color, RESET_COLOR)
 			bloodsies.appearance_flags |= NO_CLIENT_COLOR
-			ret.overlays	+= bloodsies
-
-	if(length(accessories))
-		for(var/obj/item/clothing/accessory/A in accessories)
-			ret.overlays += A.get_mob_overlay(user_mob, slot)
-
+			ret.overlays += bloodsies
 	if(markings_icon && markings_color)
 		ret.overlays += mutable_appearance(ret.icon, markings_icon, markings_color)
 	return ret
 
 /obj/item/clothing/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
 	var/image/ret = ..()
-	if(length(accessories))
+	if(ret && length(accessories))
 		for(var/obj/item/clothing/accessory/A in accessories)
-			ret.overlays += A.get_mob_overlay(user_mob, slot)
+			if(A.should_overlay())
+				ret.overlays += A.get_mob_overlay(user_mob, slot)
 
 	if(markings_icon && markings_color && check_state_in_icon("[ret.icon_state][markings_icon]", ret.icon))
 		ret.overlays += mutable_appearance(ret.icon, "[ret.icon_state][markings_icon]", markings_color)
@@ -89,10 +85,14 @@
 	return ret
 
 /obj/item/clothing/on_update_icon()
-	..()
+	cut_overlays()
 	if(markings_icon && markings_color)
-		overlays += mutable_appearance(icon, "[get_world_inventory_state()][markings_icon]", markings_color)
-		
+		add_overlay(mutable_appearance(icon, "[get_world_inventory_state()][markings_icon]", markings_color))
+	for(var/obj/item/clothing/accessory/accessory in accessories)
+		var/image/ret = accessory.get_inv_overlay()
+		if(ret)
+			add_overlay(ret)
+
 /obj/item/clothing/proc/change_smell(smell = SMELL_DEFAULT)
 	smell_state = smell
 

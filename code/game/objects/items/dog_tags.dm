@@ -5,6 +5,7 @@
 	icon = 'icons/clothing/accessories/jewelry/dogtags.dmi'
 	slot_flags = SLOT_FACE | SLOT_TIE
 	badge_string = null
+	hide_on_uniform_rolldown = FALSE
 
 	var/owner_rank
 	var/owner_name
