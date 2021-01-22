@@ -91,10 +91,10 @@
 	return TRUE
 
 /obj/structure/proc/can_dismantle(var/mob/user)
-	if(!anchored)
+	if(!anchored && (tool_interaction_flags & TOOL_INTERACTION_ANCHOR))
 		to_chat(user, SPAN_WARNING("\The [src] needs to be anchored before you can dismantle it."))
 		return FALSE
-	if(wired)
+	if(wired && (tool_interaction_flags & TOOL_INTERACTION_WIRING))
 		to_chat(user, SPAN_WARNING("\The [src] needs to have its wiring stripped out before you can dismantle it."))
 		return FALSE
 	return TRUE
