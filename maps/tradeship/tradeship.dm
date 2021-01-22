@@ -6,6 +6,7 @@
 	#include "../../mods/content/government/ruins/ec_old_crash/ec_old_crash.dm"
 	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/content/corporate/away_sites/lar_maria/lar_maria.dm"
+	#include "../../mods/content/military/_military.dme"
 	#include "../../mods/species/utility_frames/_utility_frames.dme"
 	#include "../../mods/species/tajaran/_tajaran.dme"
 	#include "../../mods/species/neocorvids/_neocorvids.dme"
@@ -26,7 +27,7 @@
 	#include "tradeship_antagonists.dm"
 	#include "tradeship_areas.dm"
 	#include "tradeship_documents.dm"
-	#include "tradeship_jobs.dm"
+	//#include "tradeship_jobs.dm" //Overwritten by the Military modpack
 	#include "tradeship_loadouts.dm"
 	#include "tradeship_overmap.dm"
 	#include "tradeship_overrides.dm"
@@ -37,7 +38,7 @@
 	#include "tradeship-1.dmm"
 	#include "tradeship-2.dmm"
 	#include "tradeship-3.dmm"
-
+/* //Overwritten by the Military modpack START
 	#include "jobs/_goals.dm"
 	#include "jobs/_jobs.dm"
 	#include "jobs/command.dm"
@@ -49,7 +50,7 @@
 	#include "outfits/engineering.dm"
 	#include "outfits/medical.dm"
 	#include "outfits/science.dm"
-
+*/ //Overwritten by the Military modpack END
 	#define USING_MAP_DATUM /datum/map/tradeship
 
 #elif !defined(MAP_OVERRIDE)
