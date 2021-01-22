@@ -1,0 +1,6 @@
+author: lamasmaster
+
+delete-after: True
+
+changes: 
+  - bugfix: "Fixed paths and icons to be inline with nebula for ranks."
