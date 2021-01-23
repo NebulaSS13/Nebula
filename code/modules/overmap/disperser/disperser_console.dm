@@ -14,7 +14,7 @@
 	var/obj/machinery/disperser/front/front
 	var/obj/machinery/disperser/middle/middle
 	var/obj/machinery/disperser/back/back
-	var/const/link_range = 10 //How far can the above stuff be maximum before we start complaining
+	var/link_range = 10 //How far can the above stuff be maximum before we start complaining
 
 	var/overmapdir = 0
 
@@ -25,7 +25,7 @@
 	var/range = 1 //range of the explosion
 	var/strength = 1 //strength of the explosion
 	var/next_shot = 0 //round time where the next shot can start from
-	var/const/coolinterval = 2 MINUTES //time to wait between safe shots in deciseconds
+	var/coolinterval = 2 MINUTES //time to wait between safe shots in deciseconds
 
 /obj/machinery/computer/ship/disperser/Initialize()
 	. = ..()
