@@ -368,9 +368,6 @@ Class Procs:
 	qdel(src)
 	return frame
 
-/obj/machinery/InsertedContents()
-	return (contents - component_parts)
-
 /datum/proc/apply_visual(mob/M)
 	return
 
@@ -455,3 +452,6 @@ Class Procs:
 	. = ..() || list()
 	for(var/obj/item/stock_parts/network_lock/lock in get_all_components_of_type(/obj/item/stock_parts/network_lock))
 		.+= lock.get_req_access()
+
+/obj/machinery/get_contained_external_atoms()
+	. = (contents - component_parts)

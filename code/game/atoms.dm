@@ -455,11 +455,7 @@ its easier to just keep the beam vertical.
 /atom/movable/onDropInto(var/atom/movable/AM)
 	return loc // If onDropInto returns something, then dropInto will attempt to drop AM there.
 
-/atom/proc/InsertedContents()
-	return contents
-
 //all things climbable
-
 /atom/attack_hand(mob/user)
 	..()
 	if(LAZYLEN(climbers) && !(user in climbers))
