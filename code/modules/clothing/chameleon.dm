@@ -18,7 +18,6 @@
 	gender = copy.gender
 	if(copy.sprite_sheets)
 		sprite_sheets = copy.sprite_sheets.Copy()
-	//copying sprite_sheets_obj should be unnecessary as chameleon items are not refittable.
 
 	OnDisguise(copy, user)
 	qdel(copy)

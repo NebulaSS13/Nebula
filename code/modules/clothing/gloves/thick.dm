@@ -12,7 +12,6 @@
 	icon = 'icons/clothing/hands/gloves_thick.dmi'
 	icon_state = ICON_STATE_WORLD
 	force = 5
-	sprite_sheets = null
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT, 
 		bullet = ARMOR_BALLISTIC_PISTOL, 

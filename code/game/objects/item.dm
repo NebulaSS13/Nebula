@@ -64,16 +64,7 @@
 
 	var/use_alt_layer = FALSE // Use the slot's alternative layer when rendering on a mob
 
-	//** These specify item/icon overrides for _slots_
-	//** These specify item/icon overrides for _species_
-	/* Species-specific sprites, concept stolen from Paradise//vg/.
-	ex:
-	sprite_sheets = list(
-		SPECIES_FOO = 'icons/foo/onmob_foo.dmi'
-		)
-	If index term exists and icon_override is not set, this sprite sheet will be used.
-	*/
-	var/list/sprite_sheets = list()
+	var/list/sprite_sheets = list() // Assoc list of bodytype to icon override for on-mob icons when this item is held or worn.
 
 	// Material handling for material weapons (not used by default, unless material is supplied or set)
 	var/decl/material/material                      // Reference to material decl. If set to a string corresponding to a material ID, will init the item with that material.
@@ -824,7 +815,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(use_single_icon)
 		return experimental_mob_overlay(user_mob, slot, bodypart)
 
-	var/bodytype = "Default"
+	var/bodytype = BODYTYPE_HUMANOID
 	var/mob/living/carbon/human/user_human
 	if(ishuman(user_mob))
 		user_human = user_mob

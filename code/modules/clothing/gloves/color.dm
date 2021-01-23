@@ -1,7 +1,6 @@
 /obj/item/clothing/gloves/color
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = ICON_STATE_WORLD
-	sprite_sheets = null
 
 /obj/item/clothing/gloves/color/white
 	color = COLOR_WHITE

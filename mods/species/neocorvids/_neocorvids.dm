@@ -1,5 +1,5 @@
 #define SPECIES_CORVID           "Neo-Corvid"
-#define BODYTYPE_CORVID          "Corvid Body"
+#define BODYTYPE_CORVID          "corvid body"
 #define IS_CORVID                "corvid"
 
 /decl/modpack/neocorvids
