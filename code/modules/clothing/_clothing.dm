@@ -133,14 +133,8 @@
 	return ..()
 
 /obj/item/clothing/proc/refit_for_bodytype(var/target_bodytype)
-	if(!bodytype_restricted)
-		return
-	bodytype_restricted = list(target_bodytype)
-	if(!use_single_icon)
-		if (sprite_sheets_obj && (target_bodytype in sprite_sheets_obj))
-			icon = sprite_sheets_obj[target_bodytype]
-		else
-			icon = initial(icon)
+	if(bodytype_restricted)
+		bodytype_restricted = list(target_bodytype)
 
 /obj/item/clothing/get_examine_line()
 	. = ..()

@@ -65,15 +65,7 @@
 	var/use_alt_layer = FALSE // Use the slot's alternative layer when rendering on a mob
 
 	//** These specify item/icon overrides for _slots_
-
-	var/list/item_state_slots //overrides the default item_state for particular slots.
-
-	// Used to specify the icon file to be used when the item is worn. If not set the default icon for that slot will be used.
-	// If icon_override or sprite_sheets are set they will take precendence over this, assuming they apply to the slot in question.
-	var/list/item_icons
-
 	//** These specify item/icon overrides for _species_
-
 	/* Species-specific sprites, concept stolen from Paradise//vg/.
 	ex:
 	sprite_sheets = list(
@@ -82,10 +74,6 @@
 	If index term exists and icon_override is not set, this sprite sheet will be used.
 	*/
 	var/list/sprite_sheets = list()
-
-	// Species-specific sprite sheets for inventory sprites
-	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_bodytype() proc is called.
-	var/list/sprite_sheets_obj = list()
 
 	// Material handling for material weapons (not used by default, unless material is supplied or set)
 	var/decl/material/material                      // Reference to material decl. If set to a string corresponding to a material ID, will init the item with that material.
@@ -829,14 +817,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return (slot != slot_wear_suit_str && slot != slot_head_str)
 
 /obj/item/proc/get_icon_state(mob/user_mob, slot)
-	var/mob_state
-	if(slot in item_state_slots)
-		mob_state = item_state_slots[slot]
-	else if (item_state)
-		mob_state = item_state
-	else
-		mob_state = icon_state
-	return mob_state
+	. = (item_state || icon_state)
 
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot, bodypart)
 
@@ -866,8 +847,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			mob_state = "[mob_state]_r"
 		spritesheet = TRUE
 		mob_icon = sprite_sheets[bodytype]
-	else if(item_icons && item_icons[slot])
-		mob_icon = item_icons[slot]
 	else
 		mob_icon = global.default_onmob_icons[slot]
 
@@ -923,13 +902,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(citem.item_desc)
 		desc = citem.item_desc
 	if(citem.item_icon_state)
-		item_state_slots = null
-		item_icons = null
 		icon = CUSTOM_ITEM_OBJ
 		set_icon_state(citem.item_icon_state)
 		item_state = null
 		icon_override = CUSTOM_ITEM_MOB
-
+	
 /obj/item/proc/is_special_cutting_tool(var/high_power)
 	return FALSE
 
