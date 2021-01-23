@@ -110,6 +110,10 @@ ARMCHAIR(yellow)
 	result_type = /obj/structure/door
 	time = 50
 
+/datum/stack_recipe/furniture/coatrack
+	title = "coat rack"
+	result_type = /obj/structure/coatrack
+
 /datum/stack_recipe/furniture/barricade
 	title = "barricade"
 	result_type = /obj/structure/barricade
