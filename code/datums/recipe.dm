@@ -79,7 +79,7 @@
 	if (items && items.len)
 		var/list/checklist = list()
 		checklist = items.Copy() // You should really trust Copy
-		for(var/obj/O in container.InsertedContents())
+		for(var/obj/O in container.get_contained_external_atoms())
 			if(istype(O,/obj/item/chems/food/snacks/grown))
 				continue // Fruit is handled in check_fruit().
 			var/found = 0
@@ -98,7 +98,7 @@
 //general version
 /datum/recipe/proc/make(var/obj/container)
 	var/obj/result_obj = new result(container)
-	for (var/obj/O in (container.InsertedContents()-result_obj))
+	for (var/obj/O in (container.get_contained_external_atoms()-result_obj))
 		O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
 		qdel(O)
 	container.reagents.clear_reagents()
@@ -112,7 +112,7 @@
 	var/obj/result_obj = new result(container)
 	container.reagents.clear_reagents()
 	//Checked here in case LAZYCLEARLIST nulls and no more physical ingredients are added
-	var/list/container_contents = container.InsertedContents()
+	var/list/container_contents = container.get_contained_external_atoms()
 	if(!container_contents)
 		return result_obj
 	for (var/obj/O in (container_contents-result_obj))
