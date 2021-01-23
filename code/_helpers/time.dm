@@ -3,8 +3,10 @@
 		minutes = text2num(minutes)
 
 	if (minutes < 0)
+		crash_with("Negative minutes value supplied to minutes_to_readable().")
 		return "INFINITE"
 	else if (isnull(minutes))
+		crash_with("Null minutes value supplied to minutes_to_readable().")
 		return "BAD INPUT"
 	
 	var/hours = 0
