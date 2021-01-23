@@ -2894,15 +2894,6 @@
 /obj/random/junk,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
-"hi" = (
-/obj/structure/table/steel,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/airless/ceiling,
-/area/slavers_base/powatm)
 "hj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -3275,10 +3266,6 @@
 /obj/structure/ore_box,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
-"im" = (
-/obj/structure/ore_box,
-/turf/simulated/floor/airless/ceiling,
-/area/slavers_base/powatm)
 "in" = (
 /obj/structure/closet/crate,
 /turf/simulated/floor/airless/ceiling,
@@ -3286,10 +3273,6 @@
 "io" = (
 /obj/structure/closet/crate,
 /obj/machinery/light/small,
-/turf/simulated/floor/airless/ceiling,
-/area/slavers_base/powatm)
-"ip" = (
-/obj/structure/closet/crate,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "iq" = (
@@ -4243,10 +4226,6 @@
 	id_tag = "solar_port_pump"
 	},
 /turf/simulated/floor/airless/ceiling,
-/area/slavers_base/maint)
-"kV" = (
-/obj/machinery/door/airlock/external,
-/turf/space,
 /area/slavers_base/maint)
 "kW" = (
 /obj/effect/overmap/visitable/sector/slavers_base,
@@ -14906,7 +14885,7 @@ da
 da
 da
 da
-im
+il
 cR
 ad
 ad
@@ -15512,7 +15491,7 @@ da
 da
 hA
 da
-ip
+in
 cR
 ad
 ad
@@ -16519,7 +16498,7 @@ gh
 gr
 gM
 gX
-hi
+gX
 hC
 hR
 it
@@ -19569,7 +19548,7 @@ gI
 kO
 kH
 gI
-kV
+kO
 ag
 ag
 ag
@@ -19771,7 +19750,7 @@ kL
 kP
 kS
 kU
-kV
+kO
 ag
 ag
 ag

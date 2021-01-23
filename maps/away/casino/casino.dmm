@@ -208,8 +208,7 @@
 /area/casino/casino_bridge)
 "aF" = (
 /obj/structure/bed/chair{
-	dir = 4;
-	
+	dir = 4
 	},
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled,
@@ -1080,8 +1079,7 @@
 /area/casino/casino_security)
 "cS" = (
 /obj/structure/bed/chair{
-	dir = 4;
-	
+	dir = 4
 	},
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
@@ -2116,7 +2114,7 @@
 	id_tag = "casino_main"
 	},
 /obj/machinery/door/firedoor,
-/turf/space,
+/turf/simulated/floor/plating,
 /area/casino/casino_mainfloor)
 "fB" = (
 /obj/machinery/light/small{
@@ -4111,9 +4109,6 @@
 	},
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
-"kP" = (
-/turf/simulated/floor/plating,
-/area/casino/casino_crew_atmos)
 "kQ" = (
 /obj/machinery/door/firedoor,
 /obj/structure/door/wood{
@@ -4208,10 +4203,6 @@
 /turf/simulated/floor/reinforced,
 /area/casino/casino_bow)
 "ld" = (
-/obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/plating,
-/area/casino/casino_crew_atmos)
-"le" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
@@ -4598,9 +4589,6 @@
 /obj/structure/bed/chair/comfy/black,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
-"lW" = (
-/turf/simulated/floor/reinforced,
-/area/casino/casino_bow)
 "lX" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock{
@@ -4965,7 +4953,7 @@
 	icon_state = "pdoor0";
 	id_tag = "Starboard wide window BD"
 	},
-/turf/space,
+/turf/simulated/floor/plating,
 /area/casino/casino_bow)
 "na" = (
 /obj/machinery/door/airlock/external{
@@ -5476,8 +5464,7 @@
 /area/casino/casino_mainfloor)
 "Fb" = (
 /obj/structure/bed/chair{
-	dir = 4;
-	
+	dir = 4
 	},
 /obj/effect/decal/cleanable/blood,
 /obj/structure/cable{
@@ -9650,7 +9637,7 @@ kC
 kC
 lc
 lx
-lW
+lb
 kC
 kC
 aa
@@ -9851,7 +9838,7 @@ jY
 jY
 ku
 kD
-kP
+jN
 ld
 lA
 kC
@@ -9954,7 +9941,7 @@ jN
 kv
 kv
 jN
-le
+ld
 lA
 kC
 ml
@@ -10056,7 +10043,7 @@ jN
 jN
 jN
 jN
-le
+ld
 lB
 kC
 Qc
@@ -10158,7 +10145,7 @@ ka
 jN
 jN
 jN
-le
+ld
 lA
 kC
 mm
