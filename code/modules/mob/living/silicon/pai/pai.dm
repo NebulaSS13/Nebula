@@ -90,6 +90,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	var/light_on = FALSE
 
 /mob/living/silicon/pai/Initialize()
+	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	status_flags |= NO_ANTAG
 	card = loc
 
@@ -240,7 +241,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	if (src && client)
 		client.perspective = EYE_PERSPECTIVE
 		client.eye = card
-	icon_state = "[chassis]"
+	set_icon_state("[chassis]")
 	is_in_card = TRUE
 	var/turf/T = get_turf(src)
 	if(istype(T))
@@ -289,15 +290,6 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()
 	return 0
-
-// Handle being picked up.
-/mob/living/silicon/pai/get_scooped(var/mob/living/carbon/grabber, var/self_drop)
-	. = ..()
-	if(.)
-		var/obj/item/holder/H = .
-		if(istype(H))
-			H.icon_state = "pai-[icon_state]"
-			grabber.update_inv_hands()
 
 /mob/living/silicon/pai/verb/wipe_software()
 	set name = "Wipe Software"
