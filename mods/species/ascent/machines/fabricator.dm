@@ -10,7 +10,7 @@
 	species_variation = /decl/species/mantid
 
 /obj/item/stock_parts/circuitboard/ascent_fabricator
-	name = T_BOARD("ascent nanofabricator")
+	name = "circuitboard (ascent nanofabricator)"
 	build_path = /obj/machinery/fabricator/ascent
 	board_type = "machine"
 	origin_tech = "{'engineering':2,'programming':2}"

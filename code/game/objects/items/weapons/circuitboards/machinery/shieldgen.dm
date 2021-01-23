@@ -1,6 +1,6 @@
 // New shields
 /obj/item/stock_parts/circuitboard/shield_generator
-	name = T_BOARD("advanced shield generator")
+	name = "circuitboard (advanced shield generator)"
 	board_type = "machine"
 	build_path = /obj/machinery/power/shield_generator
 	origin_tech = "{'magnets':3,'powerstorage':4}"
@@ -15,7 +15,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/shield_diffuser
-	name = T_BOARD("shield diffuser")
+	name = "circuitboard (shield diffuser)"
 	board_type = "machine"
 	build_path = /obj/machinery/shield_diffuser
 	origin_tech = "{'magnets':4,'powerstorage':2}"
@@ -29,7 +29,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/pointdefense
-	name = T_BOARD("point defense battery")
+	name = "circuitboard (point defense battery)"
 	board_type = "machine"
 	desc = "Control systems for a Kuiper pattern point defense battery. Aim away from vessel."
 	build_path = /obj/machinery/pointdefense
@@ -47,7 +47,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/pointdefense_control
-	name = T_BOARD("fire assist mainframe")
+	name = "circuitboard (fire assist mainframe)"
 	board_type = "machine"
 	desc = "A control computer to synchronize point defense batteries."
 	build_path = /obj/machinery/pointdefense_control

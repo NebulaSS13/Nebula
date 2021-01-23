@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/optable
-	name = T_BOARD("operating table")
+	name = "circuitboard (operating table)"
 	build_path = /obj/machinery/optable
 	board_type = "machine"
 	origin_tech = "{'engineering':1,'biotech':3,'programming':3}"
@@ -12,7 +12,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/bodyscanner
-	name = T_BOARD("body scanner")
+	name = "circuitboard (body scanner)"
 	build_path = /obj/machinery/bodyscanner
 	board_type = "machine"
 	origin_tech = "{'engineering':2,'biotech':4,'programming':4}"
@@ -25,7 +25,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/body_scanconsole
-	name = T_BOARD("body scanner console")
+	name = "circuitboard (body scanner console)"
 	build_path = /obj/machinery/body_scanconsole
 	board_type = "machine"
 	origin_tech = "{'engineering':2,'biotech':4,'programming':4}"
@@ -37,12 +37,12 @@
 	)
 
 /obj/item/stock_parts/circuitboard/body_scanconsole/display
-	name = T_BOARD("body scanner display")
+	name = "circuitboard (body scanner display)"
 	build_path = /obj/machinery/body_scan_display
 	origin_tech = "{'biotech':2,'programming':2}"
 
 /obj/item/stock_parts/circuitboard/sleeper
-	name = T_BOARD("sleeper")
+	name = "circuitboard (sleeper)"
 	build_path = /obj/machinery/sleeper
 	board_type = "machine"
 	origin_tech = "{'engineering':3,'biotech':5,'programming':3}"

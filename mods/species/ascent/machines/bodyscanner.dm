@@ -14,11 +14,11 @@
 	base_type = /obj/machinery/bodyscanner
 
 /obj/item/stock_parts/circuitboard/bodyscanner/ascent
-	name = T_BOARD("ascent body scanner")
+	name = "circuitboard (ascent body scanner)"
 	build_path = /obj/machinery/bodyscanner/ascent
 
 /obj/item/stock_parts/circuitboard/body_scanconsole/ascent
-	name = T_BOARD("ascent body scanner console")
+	name = "circuitboard (ascent body scanner console)"
 	build_path = /obj/machinery/body_scanconsole/ascent
 
 /datum/fabricator_recipe/imprinter/circuit/bodyscanner/ascent

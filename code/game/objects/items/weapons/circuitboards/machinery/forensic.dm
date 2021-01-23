@@ -1,6 +1,6 @@
 
 /obj/item/stock_parts/circuitboard/forensic
-	name = T_BOARD("forensic omnianalyzer")
+	name = "circuitboard (forensic omnianalyzer)"
 	build_path = /obj/machinery/forensic
 	board_type = "machine"
 	origin_tech = "{'programming':6,'engineering':6,'biotech':6}"
@@ -13,7 +13,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/forensic_microscope
-	name = T_BOARD("forensic microscope")
+	name = "circuitboard (forensic microscope)"
 	board_type = "machine"
 	origin_tech = "{'programming':3,'engineering':3,'biotech':3}"
 	build_path = /obj/machinery/forensic/microscope
@@ -25,7 +25,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/forensic_dna_analyzer
-	name = T_BOARD("forensic DNA analyzer")
+	name = "circuitboard (forensic DNA analyzer)"
 	board_type = "machine"
 	origin_tech = "{'programming':3,'engineering':3,'biotech':3}"
 	req_components = list(

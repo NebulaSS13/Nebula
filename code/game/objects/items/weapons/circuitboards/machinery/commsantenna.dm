@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/commsrelay
-	name = T_BOARD("communication relay")
+	name = "circuitboard (communication relay)"
 	build_path = /obj/machinery/commsrelay
 	board_type = "machine"
 	origin_tech = "{'wormholes':2,'programming':2}"
