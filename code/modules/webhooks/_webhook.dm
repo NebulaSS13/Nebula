@@ -24,12 +24,13 @@
 
 /decl/webhook/proc/send(var/list/data)
 	var/message = get_message(data)
+	var/use_mentions = get_mentions()
 	if(message)
-		if(mentions)
+		if(use_mentions)
 			if(message["content"])
-				message["content"] = "[mentions]: [message["content"]]"
+				message["content"] = "[use_mentions]: [message["content"]]"
 			else
-				message["content"] = "[mentions]"
+				message["content"] = "[use_mentions]"
 		message = json_encode(message)
 		. = TRUE
 		for(var/target_url in urls)
@@ -45,3 +46,6 @@
 				else
 					log_debug("Webhooks: unknown HTTP code while sending to '[target_url]': [httpresponse["status_code"]]. Data: [httpresponse["body"]].")
 			. = FALSE
+
+/decl/webhook/proc/get_mentions()
+	return mentions

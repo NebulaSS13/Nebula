@@ -3111,6 +3111,7 @@
 #include "code\modules\ventcrawl\ventcrawl_multiz.dm"
 #include "code\modules\ventcrawl\ventcrawl_verb.dm"
 #include "code\modules\webhooks\_webhook.dm"
+#include "code\modules\webhooks\webhook_ahelp2discord.dm"
 #include "code\modules\webhooks\webhook_custom_event.dm"
 #include "code\modules\webhooks\webhook_elevator_fall.dm"
 #include "code\modules\webhooks\webhook_roundend.dm"
