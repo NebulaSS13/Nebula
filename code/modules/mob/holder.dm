@@ -252,7 +252,6 @@ var/list/holder_mob_icons = list(
 
 				// Add to the cache.
 				holder_mob_icon_cache[cache_key] = mob_icon
-			item_icons[cache_entry] = holder_mob_icon_cache[cache_key]
 
 	// Handle the rest of sync().
 	..(M)

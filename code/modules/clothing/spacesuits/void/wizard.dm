@@ -14,7 +14,6 @@
 		rad = ARMOR_RAD_SMALL
 		)
 	siemens_coefficient = 0.7
-	sprite_sheets_obj = null
 	wizard_garb = 1
 
 /obj/item/clothing/suit/space/void/wizard
@@ -33,7 +32,6 @@
 		rad = ARMOR_RAD_SMALL
 		)
 	siemens_coefficient = 0.7
-	sprite_sheets_obj = null
 	wizard_garb = 1
 	flags_inv = HIDESHOES|HIDEJUMPSUIT|HIDETAIL //For gloves.
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS
