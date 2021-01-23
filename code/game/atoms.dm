@@ -300,9 +300,11 @@ its easier to just keep the beam vertical.
 				M.client.eye = M.client.mob
 				M.client.perspective = MOB_PERSPECTIVE
 
-/atom/proc/physically_destroyed()
+/atom/proc/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(TRUE)
 	dump_contents()
+	if(!skip_qdel && !QDELETED(src))
+		qdel(src)
 	. = TRUE
 
 /atom/proc/try_detonate_reagents(var/severity = 3)

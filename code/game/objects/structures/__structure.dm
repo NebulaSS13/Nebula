@@ -132,8 +132,9 @@
 		visible_message(SPAN_WARNING("\The [src] is showing some damage!"))
 		last_damage_message = 0.75
 
-/obj/structure/physically_destroyed()
-	. = ..() && dismantle()
+/obj/structure/physically_destroyed(var/skip_qdel)
+	. = ..(TRUE)
+	dismantle()
 
 /obj/structure/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()

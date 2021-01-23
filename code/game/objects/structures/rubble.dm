@@ -79,7 +79,7 @@
 	qdel(src)
 	. = TRUE
 	
-/obj/structure/rubble/physically_destroyed()
+/obj/structure/rubble/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)
 	visible_message(SPAN_NOTICE("\The [src] is cleared away."))
 	qdel(src)
