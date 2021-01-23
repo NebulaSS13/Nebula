@@ -34,7 +34,7 @@
 /turf/simulated/clean_blood()
 	for(var/obj/effect/decal/cleanable/blood/B in contents)
 		B.clean_blood()
-	..()
+	. = ..()
 
 /turf/simulated/Initialize()
 	. = ..()
