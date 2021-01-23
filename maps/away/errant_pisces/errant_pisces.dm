@@ -131,7 +131,7 @@
 		return TRUE
 	. = ..()
 
-/obj/structure/net/physically_destroyed()
+/obj/structure/net/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)
 	visible_message("<span class='warning'>\The [src] is torn apart!</span>")
 	qdel(src)

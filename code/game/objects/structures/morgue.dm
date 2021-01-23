@@ -39,7 +39,7 @@
 /obj/structure/morgue/explosion_act(severity)
 	..()
 	if(!QDELETED(src) && (severity == 1 || (severity == 2 && prob(50)) || (severity == 3 && prob(5))))
-		physically_destroyed(src)
+		physically_destroyed()
 
 /obj/structure/morgue/attack_hand(mob/user)
 	if (src.connected)
@@ -190,7 +190,7 @@
 /obj/structure/crematorium/explosion_act(severity)
 	..()
 	if(!QDELETED(src) && (severity == 1 || (severity == 2 && prob(50)) || (severity == 3 && prob(5))))
-		physically_destroyed(src)
+		physically_destroyed()
 
 /obj/structure/crematorium/attack_hand(mob/user)
 	if(cremating)

@@ -56,7 +56,7 @@
 	qdel(src)
 	. = TRUE
 
-/obj/structure/deity/physically_destroyed()
+/obj/structure/deity/physically_destroyed(var/skip_qdel)
 	visible_message(SPAN_DANGER("\The [src] crumbles!"))
 	. = ..()
 

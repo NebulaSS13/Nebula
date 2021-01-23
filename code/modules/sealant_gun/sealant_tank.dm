@@ -23,7 +23,7 @@
 	. = ..()
 	foam_charges = max_foam_charges
 
-/obj/item/sealant_tank/physically_destroyed()
+/obj/item/sealant_tank/physically_destroyed(var/skip_qdel)
 	if(foam_charges)
 		var/turf/T = get_turf(src)
 		if(T)
@@ -33,5 +33,3 @@
 			s.start()
 			foam_charges = 0
 	. = ..()
-	if(!QDELETED(src))
-		qdel(src)

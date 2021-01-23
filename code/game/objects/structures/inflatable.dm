@@ -143,7 +143,7 @@
 
 	return FALSE
 
-/obj/structure/inflatable/physically_destroyed()
+/obj/structure/inflatable/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)
 	. = deflate(1)
 

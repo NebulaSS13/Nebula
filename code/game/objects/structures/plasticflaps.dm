@@ -55,7 +55,7 @@
 /obj/structure/plasticflaps/explosion_act(severity)
 	..()
 	if(!QDELETED(src) && (severity == 1 || (severity == 2 && prob(50)) || (severity == 3 && prob(5))))
-		physically_destroyed(src)
+		physically_destroyed()
 
 /obj/structure/plasticflaps/Initialize()
 	. = ..()

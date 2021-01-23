@@ -16,7 +16,7 @@
 	if (above)
 		above.update_mimic()
 
-/turf/physically_destroyed()
+/turf/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)
 	. = TRUE
 
