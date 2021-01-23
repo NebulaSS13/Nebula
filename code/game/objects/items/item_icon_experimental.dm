@@ -17,7 +17,6 @@ var/list/icon_state_cache = list()
 	. = check[checkstate]
 
 /obj/item
-	var/on_mob_use_spritesheets  // use spritesheets list for on-mob icon
 	var/tmp/has_inventory_icon	// do not set manually
 	var/tmp/use_single_icon
 
@@ -99,7 +98,8 @@ var/list/bodypart_to_slot_lookup_table = list(
 	. = species && species.get_bodytype(src)
 
 /obj/item/proc/get_icon_for_bodytype(var/bodytype)
-	. = (on_mob_use_spritesheets && sprite_sheets[lowertext(bodytype)]) || icon
+	bodytype = lowertext(bodytype)
+	. = LAZYACCESS(sprite_sheets, bodytype) || icon
 
 /obj/item/proc/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
 	. = overlay
