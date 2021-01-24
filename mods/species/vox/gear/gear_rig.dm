@@ -15,11 +15,11 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 
-	chest_type = /obj/item/clothing/suit/space/rig/vox_rig
-	helm_type =  /obj/item/clothing/head/helmet/space/rig/vox_rig
-	boot_type =  /obj/item/clothing/shoes/magboots/rig/vox_rig
-	glove_type = /obj/item/clothing/gloves/rig/vox_rig
-	air_type =   /obj/item/tank/nitrogen
+	chest =      /obj/item/clothing/suit/space/rig/vox_rig
+	helmet =     /obj/item/clothing/head/helmet/space/rig/vox_rig
+	boots =      /obj/item/clothing/shoes/magboots/rig/vox_rig
+	gloves =     /obj/item/clothing/gloves/rig/vox_rig
+	air_supply = /obj/item/tank/nitrogen
 	
 	allowed = list(
 		/obj/item/flashlight, 
