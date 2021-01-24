@@ -445,7 +445,7 @@ Helpers
 				robo.laws.show_laws(world)
 
 	if(dronecount)
-		to_world("<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance [dronecount>1 ? "drones" : "drone"] at the end of this round.</b>")
+		to_world("<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance drone\s at the end of this round.</b>")
 
 	if(all_money_accounts.len)
 		var/datum/money_account/max_profit = all_money_accounts[1]

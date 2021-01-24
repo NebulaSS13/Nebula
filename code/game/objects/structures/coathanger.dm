@@ -26,7 +26,7 @@
 	..()
 	cut_overlays()
 	var/offset = -3
-	for(var/obj/item/thing in contents)	
+	for(var/obj/item/thing in contents)
 		for(var/slot in slots_allowed)
 			if(thing.slot_flags & slots_allowed[slot])
 				var/image/I = thing.get_mob_overlay(null, slot)
