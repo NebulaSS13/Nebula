@@ -258,9 +258,9 @@
 #define SPECIES_ALIEN            "Humanoid"
 #define SPECIES_GOLEM            "Golem"
 
-#define BODYTYPE_HUMANOID        "Humanoid Body"
-#define BODYTYPE_OTHER           "Alien Body"
-#define BODYTYPE_MONKEY          "Small Humanoid Body"
+#define BODYTYPE_HUMANOID        "humanoid body"
+#define BODYTYPE_OTHER           "alien body"
+#define BODYTYPE_MONKEY          "small humanoid body"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1

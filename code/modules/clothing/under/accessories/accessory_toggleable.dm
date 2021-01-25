@@ -13,12 +13,14 @@
 
 /obj/item/clothing/accessory/toggleable/on_attached(obj/item/clothing/under/S, mob/user)
 	..()
-	if(has_suit)
-		has_suit.verbs |= /obj/item/clothing/accessory/toggleable/verb/toggle
+	var/obj/item/clothing/suit = loc
+	if(istype(suit))
+		suit.verbs |= /obj/item/clothing/accessory/toggleable/verb/toggle
 
 /obj/item/clothing/accessory/toggleable/on_removed(mob/user)
-	if(has_suit)
-		has_suit.verbs -= /obj/item/clothing/accessory/toggleable/verb/toggle
+	var/obj/item/clothing/suit = loc
+	if(istype(suit))
+		suit.verbs -= /obj/item/clothing/accessory/toggleable/verb/toggle
 	..()
 
 /obj/item/clothing/accessory/toggleable/attack_self(mob/user)
@@ -105,14 +107,16 @@
 
 /obj/item/clothing/accessory/toggleable/flannel/on_attached(obj/item/clothing/under/S, mob/user)
 	..()
-	if(has_suit)
-		has_suit.verbs |= /obj/item/clothing/accessory/toggleable/flannel/verb/tuck
-		has_suit.verbs |= /obj/item/clothing/accessory/toggleable/flannel/verb/roll_up_sleeves
+	var/obj/item/clothing/suit = loc
+	if(istype(suit))
+		suit.verbs |= /obj/item/clothing/accessory/toggleable/flannel/verb/tuck
+		suit.verbs |= /obj/item/clothing/accessory/toggleable/flannel/verb/roll_up_sleeves
 
 /obj/item/clothing/accessory/toggleable/flannel/on_removed(mob/user)
-	if(has_suit)
-		has_suit.verbs -= /obj/item/clothing/accessory/toggleable/flannel/verb/tuck
-		has_suit.verbs -= /obj/item/clothing/accessory/toggleable/flannel/verb/roll_up_sleeves
+	var/obj/item/clothing/suit = loc
+	if(istype(suit))
+		suit.verbs -= /obj/item/clothing/accessory/toggleable/flannel/verb/tuck
+		suit.verbs -= /obj/item/clothing/accessory/toggleable/flannel/verb/roll_up_sleeves
 	..()
 
 /obj/item/clothing/accessory/toggleable/flannel/verb/roll_up_sleeves()

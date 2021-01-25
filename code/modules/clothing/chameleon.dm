@@ -18,7 +18,6 @@
 	gender = copy.gender
 	if(copy.sprite_sheets)
 		sprite_sheets = copy.sprite_sheets.Copy()
-	//copying sprite_sheets_obj should be unnecessary as chameleon items are not refittable.
 
 	OnDisguise(copy, user)
 	qdel(copy)
@@ -344,11 +343,6 @@
 		return
 
 	slot = copy.slot
-	has_suit = copy.has_suit
-	inv_overlay = copy.inv_overlay
-	mob_overlay = copy.mob_overlay
-	overlay_state = copy.overlay_state
-	on_rolled = copy.on_rolled
 	high_visibility = copy.high_visibility
 	return copy
 

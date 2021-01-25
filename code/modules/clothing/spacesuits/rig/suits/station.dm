@@ -147,8 +147,8 @@
 	offline_vision_restriction = TINT_HEAVY
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE // this is passed to the rig suit components when deployed, including the helmet.
 
-	chest = FALSE
 	boots = FALSE
+	chest = /obj/item/clothing/suit/space/rig/ce
 	helmet = /obj/item/clothing/head/helmet/space/rig/ce
 	gloves = /obj/item/clothing/gloves/rig/ce
 
@@ -169,6 +169,9 @@
 		/obj/item/rig_module/grenade_launcher/mfoam,
 		/obj/item/rig_module/cooling_unit
 		)
+
+/obj/item/clothing/suit/space/rig/ce
+	icon = 'icons/clothing/rigs/chests/chest_engineering.dmi'
 
 /obj/item/clothing/head/helmet/space/rig/ce
 	icon = 'icons/clothing/rigs/helmets/helmet_engineering.dmi'

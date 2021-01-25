@@ -310,12 +310,12 @@
 							wearer.update_inv_head()
 							if(helmet)
 								helmet.update_light(wearer)
-
 					//sealed pieces become airtight, protecting against diseases
 					var/datum/extension/armor/rig/armor_datum = get_extension(piece, /datum/extension/armor)
 					if(istype(armor_datum))
 						armor_datum.sealed = !seal_target
 					playsound(src, 'sound/machines/suitstorage_lockdoor.ogg', 10, 0)
+					piece.update_icon()
 
 				else
 					failed_to_seal = 1
@@ -560,6 +560,9 @@
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)
 				chest.overlays += image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]", "dir" = SOUTH)
+
+	for(var/obj/item/thing in list(chest, boots, gloves, helmet))
+		thing.update_icon()
 
 	if(wearer)
 		wearer.update_inv_shoes()

@@ -11,6 +11,7 @@
 	slot_flags = SLOT_LOWER_BODY | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
 	high_visibility = 1
+	hide_on_uniform_rolldown = TRUE
 	var/badge_string = "Detective"
 	var/stored_name
 
