@@ -21,6 +21,7 @@
 	heat_protection = SLOT_HEAD
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	material = /decl/material/solid/metal/steel
 
 /obj/item/clothing/head/hardhat/orange
 	icon = 'icons/clothing/head/hardhat/orange.dmi'
