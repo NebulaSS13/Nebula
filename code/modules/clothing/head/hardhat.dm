@@ -23,6 +23,7 @@
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/plasteel = MATTER_AMOUNT_TRACE)
+	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
 
 /obj/item/clothing/head/hardhat/orange
 	icon = 'icons/clothing/head/hardhat/orange.dmi'
