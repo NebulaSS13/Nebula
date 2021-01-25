@@ -55,7 +55,7 @@
 	if(buildtype_select && machine)
 		build_path = machine.base_type || machine.type
 		var/obj/machinery/thing = build_path
-		SetName(T_BOARD(initial(thing.name)))
+		SetName("circuitboard ([initial(thing.name)])")
 
 /obj/item/stock_parts/circuitboard/proc/update_desc()
 	if(!build_path)

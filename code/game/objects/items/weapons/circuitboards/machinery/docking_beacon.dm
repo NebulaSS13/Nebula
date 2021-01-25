@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/docking_beacon
-	name = T_BOARD("magnetic docking beacon")
+	name = "circuitboard (magnetic docking beacon)"
 	board_type = "machine"
 	build_path = /obj/machinery/docking_beacon
 	origin_tech = "{'magnets':3}"

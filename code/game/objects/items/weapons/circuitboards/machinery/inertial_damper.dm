@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/inertial_damper
-	name = T_BOARD("inertial damper")
+	name = "circuitboard (inertial damper)"
 	board_type = "machine"
 	build_path = /obj/machinery/inertial_damper
 	origin_tech = "{'engineering':5,'magnets':3}"

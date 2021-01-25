@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/mining_processor
-	name = T_BOARD("material processor")
+	name = "circuitboard (material processor)"
 	build_path = /obj/machinery/material_processing/smeltery
 	board_type = "machine"
 	origin_tech = "{'programming':2,'engineering':2}"
@@ -14,7 +14,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/mining_compressor
-	name = T_BOARD("material compressor")
+	name = "circuitboard (material compressor)"
 	build_path = /obj/machinery/material_processing/compressor
 	board_type = "machine"
 	origin_tech = "{'programming':2,'engineering':2}"
@@ -29,7 +29,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/mining_unloader
-	name = T_BOARD("ore unloading machine")
+	name = "circuitboard (ore unloading machine)"
 	build_path = /obj/machinery/material_processing/unloader
 	board_type = "machine"
 	origin_tech = "{'programming':2,'engineering':2}"
@@ -43,7 +43,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/mining_stacker
-	name = T_BOARD("material stacking machine")
+	name = "circuitboard (material stacking machine)"
 	build_path = /obj/machinery/material_processing/stacker
 	board_type = "machine"
 	origin_tech = "{'programming':2,'engineering':2}"

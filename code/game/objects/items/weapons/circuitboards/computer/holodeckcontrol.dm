@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/holodeckcontrol
-	name = T_BOARD("holodeck control console")
+	name = "circuitboard (holodeck control console)"
 	build_path = /obj/machinery/computer/HolodeckControl
 	origin_tech = "{'programming':2,'wormholes':2}"
 	var/last_to_emag
