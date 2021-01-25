@@ -16,11 +16,10 @@
 		for(var/obj/item/O in input_turf)
 			if(!O.simulated || O.anchored)
 				continue
+			for(var/mat in O.reagents?.reagent_volumes)
+				stored[mat] = stored[mat] + Floor((O.reagents.reagent_volumes[mat] / REAGENT_UNITS_PER_MATERIAL_UNIT) * 0.75) // liquid reagents, lossy
 			for(var/mat in O.matter)
-				if(stored[mat])
-					stored[mat] += O.matter[mat]
-				else
-					stored[mat] = O.matter[mat]
+				stored[mat] = stored[mat] + O.matter[mat]
 			qdel(O)
 			compressed++
 			if(compressed >= MAX_COMPRESS_ORE_PER_TICK)

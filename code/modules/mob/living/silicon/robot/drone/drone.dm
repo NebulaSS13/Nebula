@@ -46,6 +46,7 @@
 /mob/living/silicon/robot/drone/Initialize()
 	. = ..()
 
+	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	verbs += /mob/living/proc/hide
 	remove_language(/decl/language/binary)
 	add_language(/decl/language/binary, 0)

@@ -52,6 +52,7 @@
 /mob/living/carbon/alien/ascent_nymph/Initialize(var/mapload)
 	update_icons()
 	. = ..(mapload)
+	set_extension(src, /datum/extension/base_icon_state, icon_state)
 
 /mob/living/carbon/alien/ascent_nymph/examine(mob/user)
 	. = ..()
