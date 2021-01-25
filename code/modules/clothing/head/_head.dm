@@ -13,7 +13,7 @@
 	var/brightness_on
 	var/on = 0
 	origin_tech = "{'materials':1,'engineering':1}"
-	matter = /decl/material/solid/cloth
+	material = /decl/material/solid/cloth 
 	
 /obj/item/clothing/head/equipped(var/mob/user, var/slot)
 	light_overlay_image = null
