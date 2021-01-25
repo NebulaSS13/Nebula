@@ -55,3 +55,32 @@
 
 /datum/fabricator_recipe/textiles/protective/industryworker
 	path = /obj/item/clothing/mask/breath/scba
+
+// hard hats
+
+/datum/fabricator_recipe/textiles/protective/hardhatstandard
+	path = /obj/item/clothing/head/hardhat
+
+/datum/fabricator_recipe/textiles/protective/orangehardhat
+	path = /obj/item/clothing/head/hardhat/orange
+
+/datum/fabricator_recipe/textiles/protective/hardhatred
+	path = /obj/item/clothing/head/hardhat/red
+
+/datum/fabricator_recipe/textiles/protective/whitehardhat
+	path = /obj/item/clothing/head/hardhat/white
+
+/datum/fabricator_recipe/textiles/protective/dbluehardhat
+	path = /obj/item/clothing/head/hardhat/dblue
+
+/datum/fabricator_recipe/textiles/protective/EMSHARDHAT
+	path = /obj/item/clothing/head/hardhat/EMS
+
+/datum/fabricator_recipe/textiles/protective/firefighterhardhat
+	path = /obj/item/clothing/head/hardhat/firefighter
+
+/datum/fabricator_recipe/textiles/protective/damage_controlhardhat
+	path = /obj/item/clothing/head/hardhat/damage_control
+
+/datum/fabricator_recipe/textiles/protective/EMSDC
+	path = /obj/item/clothing/head/hardhat/EMS/DC_light
