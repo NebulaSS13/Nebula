@@ -85,6 +85,7 @@
 	return ret
 
 /obj/item/clothing/on_update_icon()
+	..()
 	cut_overlays()
 	if(markings_icon && markings_color)
 		add_overlay(mutable_appearance(icon, "[get_world_inventory_state()][markings_icon]", markings_color))
