@@ -1,0 +1,4 @@
+author: comma
+delete-after: true
+changes:
+  - tweak: Gas tanks will now dump their content into air when destroyed
