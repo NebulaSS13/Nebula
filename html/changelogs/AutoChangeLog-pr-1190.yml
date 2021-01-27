@@ -1,6 +1,0 @@
-author: MistakeNot4892
-delete-after: true
-changes:
-  - tweak: Coat racks are now material-based and craftable.
-  - tweak: Coat rack backend has been rewritten to support hanging any hat or suit
-      item.
