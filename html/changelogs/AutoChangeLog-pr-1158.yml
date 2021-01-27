@@ -1,5 +1,0 @@
-author: comma
-delete-after: true
-changes:
-  - tweak: Desert planets now have 'dry mud' turfs in the areas where quicksands can
-      spawn.

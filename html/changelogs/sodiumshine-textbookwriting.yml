@@ -1,8 +1,0 @@
-author: Winter
-delete-after: True
-changes:
-  - rscadd: "Those with Master Literacy can now make their own textbooks. Blank textbooks are acquired via an autobinder and then written using a pen."
-  - rscadd: "Includes codex information on this process."
-  - tweak: "Made textbooks in general to be one size smaller to allow being put in bags."
-  - tweak: "Very basic support for fabricators to get colours from something else other than pipe_colors"
-  - experiment: "Unsure how this impacts skill balance, please report on that if there are issues."

@@ -1,7 +1,0 @@
-author: MistakeNot4892
-delete-after: True
-changes: 
-  - experiment: "A bunch of structures have been rewritten to use some shared code. As a result, you can examine most structures to see some tips on how to interact with them, and you will find several construction/deconstruction steps have changed."
-  - tweak: "Metal structures must be dismantled with a welding tool, while other materials use a crowbar."
-  - tweak: "Girders are now 'supports', and are reinforced by using a material stack on them before anchoring. Using a screwdriver will remove the reinforcement, or toggle whether or not the support will produce a fake wall."
-  - experiment: "This is going to be buggy, please report issues and problems."
