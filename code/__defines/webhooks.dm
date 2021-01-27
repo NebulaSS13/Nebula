@@ -6,3 +6,4 @@
 #define WEBHOOK_SUBMAP_LOADED     "webhook_submap_loaded"
 #define WEBHOOK_CUSTOM_EVENT      "webhook_custom_event"
 #define WEBHOOK_ELEVATOR_FALL     "webhook_elevator_fall"
+#define WEBHOOK_AHELP_SENT        "webhook_ahelp_sent"

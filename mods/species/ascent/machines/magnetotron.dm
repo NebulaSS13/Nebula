@@ -59,7 +59,7 @@
 			.+= 1
 
 /obj/item/stock_parts/circuitboard/ascent_magnetotron
-	name = T_BOARD("Ascent magnetotron")
+	name = "circuitboard (Ascent magnetotron)"
 	build_path = /obj/machinery/ascent_magnetotron
 	board_type = "machine"
 	origin_tech = "{'engineering':2,'magnets':4}"

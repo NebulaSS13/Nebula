@@ -160,7 +160,7 @@
 *   Microwave Menu
 ********************/
 
-/obj/machinery/microwave/InsertedContents()
+/obj/machinery/microwave/get_contained_external_atoms()
 	return ingredients
 
 /obj/machinery/microwave/interact(mob/user) // The microwave Menu
@@ -176,7 +176,7 @@
 		var/list/items_counts = new
 		var/list/items_measures = new
 		var/list/items_measures_p = new
-		for (var/obj/O in InsertedContents())
+		for (var/obj/O in get_contained_external_atoms())
 			var/display_name = O.name
 			if (istype(O,/obj/item/chems/food/snacks/egg))
 				items_measures[display_name] = "egg"

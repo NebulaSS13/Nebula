@@ -2728,20 +2728,8 @@
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/turf/space,
-/area/space)
-"gl" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
-	id_tag = "scraplock";
-	name = "External Blast Doors";
-	opacity = 0
-	},
-/obj/structure/lattice,
-/turf/space,
-/area/space)
+/turf/simulated/floor/airless,
+/area/ship/trade/maintenance/engine/port)
 "gm" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -5446,6 +5434,17 @@
 	},
 /turf/simulated/floor/airless,
 /area/ship/trade/maintenance/engine/starboard)
+"sz" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
+	},
+/turf/simulated/floor/airless,
+/area/ship/trade/maintenance/engine/starboard)
 "sB" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/structure/sign/warning/fall{
@@ -7211,8 +7210,8 @@
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/turf/space,
-/area/space)
+/turf/simulated/floor/airless,
+/area/ship/trade/maintenance/engine/starboard)
 "Qu" = (
 /obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor/tiled/techmaint,
@@ -10078,7 +10077,7 @@ ex
 mc
 ex
 fQ
-gl
+gk
 cy
 aa
 aa
@@ -12456,7 +12455,7 @@ eN
 eN
 eN
 gj
-gk
+sz
 aa
 aa
 aa

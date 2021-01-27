@@ -71,7 +71,7 @@
 	if(QDELETED(src))
 		if(severity == 1)
 			parts_type = null
-			physically_destroyed(src)
+			physically_destroyed()
 		else if(severity == 2)
 			take_damage(25)
 

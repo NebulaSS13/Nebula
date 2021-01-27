@@ -640,9 +640,7 @@ default behaviour is:
 	return 1
 
 /mob/living/carbon/get_contained_external_atoms()
-	. = contents.Copy()
-	. -= internal_organs
-	. -= organs
+	. = contents - (internal_organs|organs)
 
 //damage/heal the mob ears and adjust the deaf amount
 /mob/living/adjustEarDamage(var/damage, var/deaf)

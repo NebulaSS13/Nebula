@@ -1,4 +1,4 @@
-// This really shouldn't be used inround except as a joke, it's primarily just to abuse 
+// This really shouldn't be used inround except as a joke, it's primarily just to abuse
 // the random string generator to produce medication names without lots of boilerplate.
 /decl/language/bigpharma
 	name = "Big Pharma"
@@ -7,7 +7,7 @@
 	exclaim_verb = "invokes"
 	ask_verb = "wails"
 	space_chance = 0
-	key = "p"
+	key = "💊"
 	allow_repeated_syllables = FALSE
 	syllables = list(
 		"o", "a","flu","o","me","phyto","doce","tha","facto","bena","zeco","ni",

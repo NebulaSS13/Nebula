@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/reagent_heater
-	name = T_BOARD("chemical heater")
+	name = "circuitboard (chemical heater)"
 	build_path = /obj/machinery/reagent_temperature
 	board_type = "machine"
 	origin_tech = "{'powerstorage':2,'engineering':1}"
@@ -14,5 +14,5 @@
 	)
 
 /obj/item/stock_parts/circuitboard/reagent_heater/cooler
-	name = T_BOARD("chemical cooler")
+	name = "circuitboard (chemical cooler)"
 	build_path = /obj/machinery/reagent_temperature/cooler

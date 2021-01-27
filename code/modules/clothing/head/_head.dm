@@ -25,9 +25,7 @@
 		if(!light_overlay_image)
 			if(ishuman(user_mob))
 				var/mob/living/carbon/human/user_human = user_mob
-				var/use_icon
-				if(sprite_sheets)
-					use_icon = sprite_sheets[user_human.species.get_bodytype(user_human)]
+				var/use_icon = LAZYACCESS(sprite_sheets, user_human.species.get_bodytype(user_human))
 				if(use_icon)
 					light_overlay_image = user_human.species.get_offset_overlay_image(TRUE, use_icon, "[light_overlay]", color, slot)
 				else

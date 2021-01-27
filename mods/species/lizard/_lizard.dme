@@ -1,0 +1,10 @@
+#ifndef MODPACK_LIZARD
+#define MODPACK_LIZARD
+#include "_lizard.dm"
+#include "datum\autohiss.dm"
+#include "datum\culture.dm"
+#include "datum\language.dm"
+#include "datum\species.dm"
+#include "datum\sprite_accessory.dm"
+#include "organs\organs_internal.dm"
+#endif

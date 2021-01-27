@@ -181,6 +181,16 @@ Checks if a list has the same entries and values as an element of big.
 			return L[i+1]
 	return L[1]
 
+//Returns the previous element in parameter list after first appearance of parameter element. If it is the first element of the list or not present in list, returns first element.
+/proc/previous_in_list(element, list/L)
+	for(var/i=1, i<L.len, i++)
+		if(L[i] == element)
+			if(i <= 1)
+				return L[L.len]
+			else
+				return L[i-1]
+	return L[L.len]
+
 /*
  * Sorting
  */

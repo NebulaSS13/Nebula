@@ -1,0 +1,5 @@
+author: eckff
+delete-after: true
+changes:
+  - rscadd: Backported Lizards species (previously Unathi).
+  - imageadd: Lizard people get new dark sprite.

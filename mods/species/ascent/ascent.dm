@@ -3,10 +3,10 @@
 #define SPECIES_MANTID_GYNE    "Kharmaan Gyne"
 #define SPECIES_MANTID_NYMPH   "Kharmaan Nymph"
 
-#define BODYTYPE_SNAKE "Snakelike Body"
-#define BODYTYPE_NYMPH	"Small Nymph Body"
-#define BODYTYPE_MANTID_SMALL "Small Mantid Body"
-#define BODYTYPE_MANTID_LARGE "Large Mantid Body"
+#define BODYTYPE_SNAKE "snakelike body"
+#define BODYTYPE_NYMPH	"small nymph body"
+#define BODYTYPE_MANTID_SMALL "small mantid body"
+#define BODYTYPE_MANTID_LARGE "large mantid body"
 
 #define CULTURE_ASCENT           "The Ascent"
 #define HOME_SYSTEM_KHARMAANI    "Core"

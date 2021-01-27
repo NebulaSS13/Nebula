@@ -714,11 +714,6 @@
 "bK" = (
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
-"bL" = (
-/obj/effect/landmark/test/safe_turf,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled,
-/area/ship/trade/cargo/lower)
 "bM" = (
 /obj/structure/cable{
 	icon_state = "4-9"
@@ -2531,6 +2526,11 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
+"pq" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/test/safe_turf,
+/turf/simulated/floor/tiled,
+/area/ship/trade/cargo/lower)
 "pr" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
@@ -6894,10 +6894,10 @@ du
 du
 aU
 du
-du
+pq
 Dh
 bv
-bL
+du
 bV
 lZ
 lZ

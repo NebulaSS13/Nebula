@@ -62,7 +62,7 @@
 	set_extension(src, /datum/extension/ship_engine/ion_thruster, "ion thruster")
 
 /obj/item/stock_parts/circuitboard/engine/ion
-	name = T_BOARD("ion thruster")
+	name = "circuitboard (ion thruster)"
 	board_type = "machine"
 	icon = 'icons/obj/modules/module_controller.dmi'
 	build_path = /obj/machinery/ion_thruster

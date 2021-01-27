@@ -4,7 +4,8 @@
 	icon = 'icons/clothing/accessories/armbands/armband_security.dmi'
 	slot = ACCESSORY_SLOT_ARMBAND
 	bodytype_restricted = null
-	on_rolled = list("down" = "none")
+	hide_on_uniform_rolldown = TRUE
+	hide_on_uniform_rollsleeves = TRUE
 
 /obj/item/clothing/accessory/armband/cargo
 	name = "cargo armband"

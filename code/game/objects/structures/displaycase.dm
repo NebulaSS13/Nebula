@@ -68,10 +68,10 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = TRUE
 
-/obj/structure/displaycase/physically_destroyed()
+/obj/structure/displaycase/physically_destroyed(var/skip_qdel)
 	if(destroyed)
 		return
-	. = ..()
+	. = ..(TRUE)
 	if(.)
 		set_density(0)
 		destroyed = TRUE

@@ -761,10 +761,6 @@
 	icon_state = "marshallingwand"
 	item_state = "marshallingwand"
 	icon = 'icons/obj/toy.dmi'
-	item_icons = list(
-		icon_l_hand = 'icons/mob/onmob/items/lefthand.dmi',
-		icon_r_hand = 'icons/mob/onmob/items/righthand.dmi',
-		)
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
 	force = 1

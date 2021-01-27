@@ -72,7 +72,6 @@
 	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL, BODYTYPE_SNAKE)
 	icon_state = ICON_STATE_WORLD
 	icon = 'mods/species/ascent/icons/clothing/under_harness.dmi'
-	on_mob_use_spritesheets = TRUE
 	sprite_sheets = list(
 		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/under_harness_gyne.dmi',
 		BODYTYPE_SNAKE =        'mods/species/ascent/icons/clothing/under_harness_serpentid.dmi'

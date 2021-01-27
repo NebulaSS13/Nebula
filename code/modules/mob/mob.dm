@@ -1063,7 +1063,7 @@
 /mob/get_mass()
 	return mob_size
 
-/mob/physically_destroyed()
+/mob/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)
 	gib()
 

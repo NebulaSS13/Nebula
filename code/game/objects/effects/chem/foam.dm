@@ -149,7 +149,7 @@
 /obj/structure/foamedmetal/explosion_act(severity)
 	..()
 	if(!QDELETED(src))
-		physically_destroyed(src)
+		physically_destroyed()
 
 /obj/structure/foamedmetal/bullet_act()
 	if(metal == 1 || prob(50))

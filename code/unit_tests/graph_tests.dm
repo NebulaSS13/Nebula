@@ -2,7 +2,7 @@
 * Tests *
 ********/
 /datum/unit_test/graph_test/simple_merge
-	name = "GRAPH: Shall be able to merge simple graphs"
+	name = "Shall be able to merge simple graphs"
 
 /datum/unit_test/graph_test/simple_merge/start_test()
 	var/datum/node/test/nodeA = new("Node A")
@@ -18,6 +18,7 @@
 	expected_edges[nodeA] = list(nodeB)
 	expected_edges[nodeB] = list(nodeA)
 
+	graphA.expecting_merge = TRUE
 	graphA.on_check_expectations = new/datum/graph_expectation(expected_nodes, expected_edges)
 	graphB.on_check_expectations = new/datum/graph_expectation/deleted()
 
@@ -26,7 +27,7 @@
 
 
 /datum/unit_test/graph_test/simple_split
-	name = "GRAPH: Shall be able to split a simple graph"
+	name = "Shall be able to split a simple graph"
 
 /datum/unit_test/graph_test/simple_split/start_test()
 	var/datum/node/test/nodeA = new("Node A")
@@ -45,7 +46,7 @@
 
 
 /datum/unit_test/graph_test/deletion_split
-	name = "GRAPH: Shall be able to handle node deletion"
+	name = "Shall be able to handle node deletion"
 
 /datum/unit_test/graph_test/deletion_split/start_test()
 	var/datum/node/test/nodeA = new("Node A")
@@ -65,7 +66,7 @@
 
 
 /datum/unit_test/graph_test/self_connect
-	name = "GRAPH: Shall be able to connect to self"
+	name = "Shall be able to connect to self"
 
 /datum/unit_test/graph_test/self_connect/start_test()
 	var/datum/node/test/nodeA = new("Node A")
@@ -91,7 +92,7 @@
 
 
 /datum/unit_test/graph_test/partial_disconnect
-	name = "GRAPH: Shall be able to handle a partial disconnect"
+	name = "Shall be able to handle a partial disconnect"
 
 /datum/unit_test/graph_test/partial_disconnect/start_test()
 	var/datum/node/test/nodeA = new("Node A")
@@ -116,7 +117,7 @@
 
 
 /datum/unit_test/graph_test/full_disconnect
-	name = "GRAPH: Shall be able to handle a full disconnect"
+	name = "Shall be able to handle a full disconnect"
 
 /datum/unit_test/graph_test/full_disconnect/start_test()
 	var/datum/node/test/nodeA = new("Node A")
@@ -136,8 +137,28 @@
 	return TRUE
 
 
+/datum/unit_test/graph_test/mutual_disconnect
+	name = "Shall be able to handle a mutual disconnect"
+
+/datum/unit_test/graph_test/mutual_disconnect/start_test()
+	var/datum/node/test/nodeA = new("Node A")
+	var/datum/node/test/nodeB = new("Node B")
+
+	var/edges = list()
+	edges[nodeA] = list(nodeB)
+	edges[nodeB] = list(nodeA)
+	var/datum/graph/testing/graph = new(list(nodeA, nodeB), edges)
+
+	graph.split_expectations = list(new/datum/graph_expectation(list(nodeA)), new/datum/graph_expectation(list(nodeB)))
+	graphs += graph
+
+	graph.Disconnect(nodeA)
+	graph.Disconnect(nodeB)
+	return TRUE
+
+
 /datum/unit_test/graph_test/connected_graph_full_disconnect
-	name = "GRAPH: Shall be able to handle a full disconnect in a connected graph"
+	name = "Shall be able to handle a full disconnect in a connected graph"
 
 /datum/unit_test/graph_test/connected_graph_full_disconnect/start_test()
 	var/datum/node/test/nodeA = new("Node A")
@@ -161,7 +182,7 @@
 
 
 /datum/unit_test/graph_test/connected_graph_partial_disconnect
-	name = "GRAPH: Shall be able to handle a partial disconnect in a connected graph"
+	name = "Shall be able to handle a partial disconnect in a connected graph"
 
 /datum/unit_test/graph_test/connected_graph_partial_disconnect/start_test()
 	var/datum/node/test/nodeA = new("Node A")
@@ -185,7 +206,7 @@
 	return TRUE
 
 /datum/unit_test/graph_test/adjacent_disconnects
-	name = "GRAPH: Shall be able to handle adjacent disconnects"
+	name = "Shall be able to handle adjacent disconnects"
 
 /datum/unit_test/graph_test/adjacent_disconnects/start_test()
 	var/datum/node/test/nodeA = new("Node A")
@@ -209,7 +230,7 @@
 	return TRUE
 
 /datum/unit_test/graph_test/multiple_disconnects
-	name = "GRAPH: Shall be able to handle multiple disconnects"
+	name = "Shall be able to handle multiple disconnects"
 
 /datum/unit_test/graph_test/multiple_disconnects/start_test()
 	var/datum/node/test/nodeA = new("Node A")
@@ -262,6 +283,145 @@
 	qdel(nodeG)
 	return TRUE
 
+
+/datum/unit_test/graph_test/connect_and_disconnect
+	name = "Shall be able to handle a connect and disconnect"
+
+/datum/unit_test/graph_test/connect_and_disconnect/start_test()
+	var/datum/node/test/nodeA = new("Node A")
+	var/datum/node/test/nodeB = new("Node B")
+
+	var/datum/graph/testing/graphA = new(list(nodeA), list())
+	var/datum/graph/testing/graphB = new(list(nodeB), list())
+
+	graphs += graphA
+	graphs += graphB
+
+	graphB.Connect(nodeA, nodeB)
+	graphB.Disconnect(nodeA, nodeB)
+	return TRUE
+
+
+/datum/unit_test/graph_test/disconnect_and_connect
+	name = "Shall be able to handle a disconnect and connect"
+
+/datum/unit_test/graph_test/disconnect_and_connect/start_test()
+	var/datum/node/test/nodeA = new("Node A")
+	var/datum/node/test/nodeB = new("Node B")
+
+	var/edges = list()
+	edges[nodeA] = list(nodeB)
+	edges[nodeB] = list(nodeA)
+
+	var/datum/graph/testing/graph = new(list(nodeA, nodeB), edges)
+	graphs += graph
+
+	graph.Disconnect(nodeA, nodeB)
+	graph.Connect(nodeA, nodeB)
+	return TRUE
+
+
+/datum/unit_test/graph_test/move
+	name = "Shall be able to handle movements"
+	var/atom/movable/graph_test/hostA
+	var/atom/movable/graph_test/hostB
+	var/atom/movable/graph_test/hostC
+	var/atom/movable/graph_test/hostD
+	var/firstCheck = FALSE
+
+/datum/unit_test/graph_test/move/start_test()
+	var/turf/T = get_safe_turf()
+
+	hostA = get_named_instance(/atom/movable/graph_test, T, "Host A");
+	T = get_step(T, SOUTH)
+	hostB = get_named_instance(/atom/movable/graph_test, T, "Host B");
+	T = get_step(T, SOUTH)
+	hostC = get_named_instance(/atom/movable/graph_test, T, "Host C");
+	T = get_step(T, SOUTH)
+	hostD = get_named_instance(/atom/movable/graph_test, T, "Host D");
+
+	hostA.Connect(hostB)
+	hostB.Connect(hostC)
+	hostC.Connect(hostD)
+	
+	return TRUE
+
+/datum/unit_test/graph_test/move/check_result()
+	if(!ReadyToCheckExpectations())
+		return FALSE
+
+	if(!firstCheck)
+		firstCheck = TRUE
+
+		var/datum/graph/G = hostA.node.graph
+		if(G != hostB.node.graph || G != hostC.node.graph || G != hostD.node.graph)
+			fail("Nodes not connected as expected")
+			log_bad(log_info_line(hostA.node.graph))
+			log_bad(log_info_line(hostB.node.graph))
+			log_bad(log_info_line(hostC.node.graph))
+			log_bad(log_info_line(hostD.node.graph))
+			return TRUE
+
+		var/edge_issues = 0
+
+		var/edgesA = UNLINT(G.edges[hostA.node])
+		var/edgesB = UNLINT(G.edges[hostB.node])
+		var/edgesC = UNLINT(G.edges[hostC.node])
+		var/edgesD = UNLINT(G.edges[hostD.node])
+		if(length(edgesA) != 1 || !(hostB.node in edgesA))
+			edge_issues++
+			log_bad("Invalid edges - Host A: [log_info_line(edgesA)]")
+		if(length(edgesB) != 2 || !(hostA.node in edgesB) || !(hostC.node in edgesB))
+			edge_issues++
+			log_bad("Invalid edges - Host B: [log_info_line(edgesB)]")
+		if(length(edgesC) != 2 || !(hostB.node in edgesC) || !(hostD.node in edgesC))
+			edge_issues++
+			log_bad("Invalid edges - Host C: [log_info_line(edgesC)]")
+		if(length(edgesD) != 1 || !(hostC.node in edgesD))
+			edge_issues++
+			log_bad("Invalid edges - Host D: [log_info_line(edgesD)]")
+
+		if(edge_issues)
+			fail("Invalid edges")
+			return TRUE
+
+		hostB.forceMove(get_step(hostB, EAST))
+		hostC.forceMove(get_step(hostC, EAST))
+		return FALSE
+	
+	var/total_issues = 0
+
+	var/list/hostANeighours = hostA.node.ConnectedNodes()
+	if(length(hostANeighours))
+		log_bad("Node A had unexpected neighours: [english_list(hostANeighours)]")
+		total_issues++
+
+	var/list/hostBNeighours = hostB.node.ConnectedNodes()
+	if(length(hostBNeighours) != 1 || !(hostC.node in hostBNeighours))
+		log_bad("Node B had unexpected neighours: [english_list(hostBNeighours)]")
+		total_issues++
+	
+	var/list/hostCNeighours = hostC.node.ConnectedNodes()
+	if(length(hostCNeighours) != 1 || !(hostB.node in hostCNeighours))
+		log_bad("NodeC had unexpected neighours: [english_list(hostCNeighours)]")
+		total_issues++
+
+	var/list/hostDNeighours = hostD.node.ConnectedNodes()
+	if(length(hostDNeighours))
+		log_bad("Node D had unexpected neighours: [english_list(hostDNeighours)]")
+		total_issues++
+
+	if(total_issues)
+		fail("Encountered [total_issues] issue\s")
+	else
+		pass("Encountered no issues")
+
+	QDEL_NULL(hostA)
+	QDEL_NULL(hostB)
+	QDEL_NULL(hostC)
+	QDEL_NULL(hostD)
+	return TRUE
+
 /******************
 * Base Test Setup *
 ******************/
@@ -273,6 +433,7 @@
 /datum/unit_test/graph_test/New()
 	..()
 	graphs = list()
+	name = "GRAPH: " + name
 
 /datum/unit_test/graph_test/proc/ReadyToCheckExpectations()
 	return length(SSgraphs_update.pending_graphs) == 0 && length(SSgraphs_update.current_run) == 0
@@ -305,11 +466,55 @@
 	..()
 	src.name = name
 
+/datum/node/physical/test
+	var/name
+
+/datum/node/physical/test/New(var/name, var/atom/holder)
+	..(holder)
+	src.name = name
+
+/atom/movable/graph_test
+	var/datum/node/physical/node
+	var/list/neighoursByDirection = list()
+
+/atom/movable/graph_test/Initialize()
+	..()
+	node = new/datum/node/physical/test/("Node", src)
+	new/datum/graph(list(node), list())
+
+/atom/movable/graph_test/Destroy()
+	QDEL_NULL(node)
+	return ..()
+
+/atom/movable/graph_test/forceMove()
+	. = ..()
+	node?.Moved()
+
+/atom/movable/graph_test/proc/Connect(atom/movable/graph_test/neighbour)
+	var/direction = get_dir(src, neighbour)
+	neighoursByDirection[num2text(direction)] = neighbour
+	neighbour.neighoursByDirection[num2text(GLOB.flip_dir[direction])] = src
+	node.Connect(neighbour.node)
+
+/atom/movable/graph_test/CheckNodeNeighbours()
+	// This is a lazy setup for ease of debugging
+	// In a practical setup you'd preferably gather a list of neighbours to be disconnected and pass them in a single Disconnect-call
+	// You'd possibly also verify the dir of this and neighbour nodes, to ensure that they're still facing each other properly
+	for(var/direction in neighoursByDirection)
+		var/atom/movable/graph_test/neighbour = neighoursByDirection[direction]
+		var/turf/expected_loc = get_step(src, text2num(direction))
+		if(neighbour.loc != expected_loc)
+			node.Disconnect(neighbour.node)
+			neighoursByDirection -= direction
+	return TRUE
+
 /datum/graph/testing
 	var/name
 	var/list/split_expectations
+	var/expecting_merge
 	var/datum/graph_expectation/on_check_expectations
 
+	var/on_merge_was_called
 	var/on_split_was_called
 	var/issues
 
@@ -342,6 +547,9 @@
 
 	on_split_was_called = TRUE
 
+/datum/graph/testing/OnMerge(datum/graph/other)
+	on_merge_was_called = TRUE
+
 /datum/graph/testing/proc/CheckExpectations()
 	if(on_check_expectations)
 		issues += on_check_expectations.CheckExpectations(src)
@@ -349,6 +557,8 @@
 		issues += "Had split expectations but OnSplit was not called"
 	if(!length(split_expectations) && on_split_was_called)
 		issues += "Had no split expectations but OnSplit was called"
+	if(expecting_merge != on_merge_was_called)
+		issues += "Expected Merge: [expecting_merge ? "TRUE" : "FALSE"], but OnMerge was called: [on_merge_was_called ? "TRUE" : "FALSE"]"
 
 	return issues
 
@@ -363,18 +573,18 @@
 
 /datum/graph_expectation/proc/CheckExpectations(var/datum/graph/graph)
 	. = list()
-	if(length(expected_nodes ^ (graph.nodes || list())))
-		. += "Expected the following nodes [log_info_line(expected_nodes)], was [log_info_line(graph.nodes)]"
-	if(length(expected_edges ^ (graph.edges || list())))
-		. += "Expected the following edges [log_info_line(expected_edges)], was [log_info_line(graph.edges)]"
+	if(length(expected_nodes ^ (UNLINT(graph.nodes) || list())))
+		. += "Expected the following nodes [log_info_line(expected_nodes)], was [log_info_line(UNLINT(graph.nodes))]"
+	if(length(expected_edges ^ (UNLINT(graph.edges) || list())))
+		. += "Expected the following edges [log_info_line(expected_edges)], was [log_info_line(UNLINT(graph.edges))]"
 
-	for(var/datum/node/N in graph.nodes)
+	for(var/datum/node/N in UNLINT(graph.nodes))
 		if(N.graph != graph)
 			. += "[log_info_line(N)]: Expected the following graph [log_info_line(graph)], was [N.graph]"
 
 	for(var/node in expected_edges)
 		var/expected_connections = expected_edges[node]
-		var/actual_connections = graph.edges[node]
+		var/actual_connections = UNLINT(graph.edges[node])
 		if(length(expected_connections ^ actual_connections))
 			. += "[log_info_line(node)]: Expected the following connections [log_info_line(expected_connections)], was [log_info_line(actual_connections)]"
 

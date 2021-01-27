@@ -48,17 +48,19 @@
 		<center>
 		<h2>Main Menu</h2>
 		<table style="text-align:center">
-		<tr><td>{{:helper.link('Open Communications', null, {'PRG_merchant_list' : 1})}}</td>
-		<tr><td>{{:helper.link('Test Fire Transporter', null, {'PRG_test_fire': 1 })}}</td>
-		<tr><td>{{:helper.link('Connect Pad', null, {'PRG_connect_pad' : 1})}}
+		{{for data.hubs}}
+			<tr><td>{{:helper.link('Open communications with ' + value.name, null, {'PRG_merchant_list' : value.ref})}}</td></tr>
+		{{/for}}
+		<tr><td>{{:helper.link('Test fire transporter', null, {'PRG_test_fire': 1 })}}</td></tr>
+		<tr><td>{{:helper.link('Connect pad', null, {'PRG_connect_pad' : 1})}}
 		{{if data.pad}}
 			<font color="green">Connected</font>
 		{{else}}
 			<font color="red">DISCONNECTED</font>
 		{{/if}}
-		</td>
-		<tr><td>{{:helper.link('Deposit Money', null, {'PRG_transfer_to_bank' : 1})}}</td>
-		<tr><td>{{:helper.link('Retrieve Money', null, {'PRG_get_money' : 1})}}</td>
+		</td></tr>
+		<tr><td>{{:helper.link('Deposit money', null, {'PRG_transfer_to_bank' : 1})}}</td></tr>
+		<tr><td>{{:helper.link('Retrieve money', null, {'PRG_get_money' : 1})}}</td></tr>
 		</table>
 		</center>
 	{{/if}}

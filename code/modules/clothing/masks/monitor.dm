@@ -1,12 +1,14 @@
 //IPC-face object for FPB.
 /obj/item/clothing/mask/monitor
-
 	name = "display monitor"
 	desc = "A rather clunky old CRT-style display screen, fit for mounting on an optical output."
 	flags_inv = HIDEEYES
 	body_parts_covered = SLOT_EYES
 	dir = SOUTH
 	icon = 'icons/clothing/mask/monitor.dmi'
+
+	action_button_name = "Set Monitor State"
+	action_button_desc = "Allows you to choose state for your monitor"
 
 	var/monitor_state_index = "blank"
 	var/global/list/monitor_states = list(
@@ -40,6 +42,10 @@
 		"doom" =     "ipc_doom"
 		)
 
+/obj/item/clothing/mask/monitor/Initialize()
+	. = ..()
+	update_icon()
+
 /obj/item/clothing/mask/monitor/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret)
@@ -69,29 +75,40 @@
 	return ..()
 
 /obj/item/clothing/mask/monitor/mob_can_equip(var/mob/living/carbon/human/user, var/slot)
-	if (!..())
-		return 0
-	if(istype(user))
+	. = ..()
+	if(. && istype(user))
 		var/obj/item/organ/external/E = user.organs_by_name[BP_HEAD]
 		if(istype(E) && BP_IS_PROSTHETIC(E))
-			return 1
+			return TRUE
 		to_chat(user, SPAN_WARNING("You must have a synthetic head to install this upgrade."))
-	return 0
+	return FALSE
+
+/obj/item/clothing/mask/monitor/attack_self(mob/user)
+	set_monitor_state()
+	return TRUE
 
 /obj/item/clothing/mask/monitor/verb/set_monitor_state()
 	set name = "Set Monitor State"
 	set desc = "Choose an icon for your monitor."
 	set category = "IC"
-
 	set src in usr
+
 	var/mob/living/carbon/human/H = loc
 	if(!istype(H) || H != usr)
 		return
+
 	if(H.wear_mask != src)
 		to_chat(usr, "<span class='warning'>You have not installed \the [src] yet.</span>")
 		return
-	var/choice = input("Select a screen icon.") as null|anything in monitor_states
-	if(choice)
+
+	var/list/options = list()
+	for(var/i in monitor_states)
+		var/image/radial_button = image(icon, icon_state = "[initial(icon_state)]-[monitor_states[i]]")
+		radial_button.name = i
+		options[i] = radial_button
+
+	var/choice = show_radial_menu(usr, usr, options, radius = 42, require_near = TRUE, tooltips = TRUE)
+	if(choice && (H.wear_mask == src) && !QDELETED(src) && !H.incapacitated(INCAPACITATION_DISABLED))
 		monitor_state_index = choice
 		update_icon()
 

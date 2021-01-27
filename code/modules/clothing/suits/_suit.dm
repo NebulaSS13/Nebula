@@ -18,9 +18,7 @@
 
 /obj/item/clothing/suit/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
-	if(slot in item_state_slots)
-		ret.icon_state = item_state_slots[slot]
-	else if(item_state)
+	if(ret && item_state)
 		ret.icon_state = item_state
 	return ret
 

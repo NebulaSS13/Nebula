@@ -89,4 +89,4 @@
 /obj/structure/ore_box/explosion_act(severity)
 	. = ..()
 	if(. && !QDELETED(src) && (severity == 1 || prob(50)))
-		physically_destroyed(src)
+		physically_destroyed()

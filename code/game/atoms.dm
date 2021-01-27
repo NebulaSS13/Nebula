@@ -300,9 +300,11 @@ its easier to just keep the beam vertical.
 				M.client.eye = M.client.mob
 				M.client.perspective = MOB_PERSPECTIVE
 
-/atom/proc/physically_destroyed()
+/atom/proc/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(TRUE)
 	dump_contents()
+	if(!skip_qdel && !QDELETED(src))
+		qdel(src)
 	. = TRUE
 
 /atom/proc/try_detonate_reagents(var/severity = 3)
@@ -366,6 +368,7 @@ its easier to just keep the beam vertical.
 	vomit.reagents.add_reagent(/decl/material/liquid/acid/stomach, 5)
 
 /atom/proc/clean_blood()
+	SHOULD_CALL_PARENT(TRUE)
 	if(!simulated)
 		return
 	fluorescent = 0
@@ -377,7 +380,7 @@ its easier to just keep the beam vertical.
 		if(forensics)
 			forensics.remove_data(/datum/forensics/blood_dna)
 			forensics.remove_data(/datum/forensics/gunshot_residue)
-		return 1
+		return TRUE
 
 /atom/proc/get_global_map_pos()
 	if(!islist(GLOB.global_map) || isemptylist(GLOB.global_map)) return
@@ -452,11 +455,7 @@ its easier to just keep the beam vertical.
 /atom/movable/onDropInto(var/atom/movable/AM)
 	return loc // If onDropInto returns something, then dropInto will attempt to drop AM there.
 
-/atom/proc/InsertedContents()
-	return contents
-
 //all things climbable
-
 /atom/attack_hand(mob/user)
 	..()
 	if(LAZYLEN(climbers) && !(user in climbers))
