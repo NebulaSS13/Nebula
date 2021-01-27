@@ -7,6 +7,7 @@
 	var/name_language                                                //If this is set to a language name this will generate a name from the language
 	var/icon/portrait                                           //The icon that shows up in the menu @TODO
 	var/trader_currency
+	var/datum/trade_hub/hub
 
 	var/list/wanted_items = list()                              //What items they enjoy trading for. Structure is (type = known/unknown)
 	var/list/possible_wanted_items                              //List of all possible wanted items. Structure is (type = mode)
@@ -308,3 +309,8 @@
 
 /datum/trader/proc/bribe_to_stay_longer(var/amt)
 	return get_response("bribe_refusal", "How about... no?")
+
+/datum/trader/Destroy(force)
+	if(hub)
+		hub.traders -= src
+	. = ..()

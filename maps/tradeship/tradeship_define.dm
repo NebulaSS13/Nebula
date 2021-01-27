@@ -36,7 +36,13 @@
 	return "You're aboard the <b>[station_name],</b> a survey and mercantile vessel affiliated with the Free Trade Union. \
 	No meaningful authorities can claim the planets and resources in this uncharted sector, so their exploitation is entirely up to you - mine, poach and deforest all you want."
 
-/datum/map/tradeship/get_initial_traders()
+/datum/map/tradeship/create_trade_hubs()
+	new /datum/trade_hub/singleton/tradeship
+
+/datum/trade_hub/singleton/tradeship
+	name = "Tradehouse Freight Network"
+
+/datum/trade_hub/singleton/tradeship/get_initial_traders()
 	return list(
 		/datum/trader/xeno_shop,
 		/datum/trader/medical,

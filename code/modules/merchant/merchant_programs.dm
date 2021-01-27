@@ -1,29 +1,50 @@
 /datum/computer_file/program/merchant
 	filename = "mlist"
 	filedesc = "Merchant's List"
-	extended_desc = "Allows communication and trade between passing vessels, even while jumping."
+	extended_desc = "Allows communication and trade between vessels and trade hubs."
 	program_icon_state = "comm"
 	program_menu_icon = "cart"
 	nanomodule_path = /datum/nano_module/program/merchant
 	size = 12
 	usage_flags = PROGRAM_CONSOLE
 	required_access = list(access_merchant)
+	var/datum/trade_hub/current_hub
+	var/datum/trader/current_trader
 	var/obj/machinery/merchant_pad/pad = null
-	var/current_merchant = 0
 	var/show_trades = 0
 	var/hailed_merchant = 0
 	var/last_comms = null
 	var/temp = null
 	var/bank = 0 //A straight up money till
 
+/datum/computer_file/program/merchant/proc/get_current_hub(var/datum/trade_hub/supplied_hub)
+	if(supplied_hub)
+		current_hub = supplied_hub
+	if(!istype(current_hub) || QDELETED(current_hub) || !current_hub.is_accessible_from(get_turf(holder)))
+		current_hub = null
+		current_trader = null
+	return current_hub
+
+/datum/computer_file/program/merchant/proc/get_current_trader()
+	var/datum/trade_hub/hub = get_current_hub()
+	if(QDELETED(hub) || QDELETED(current_trader) || (current_trader && !(current_trader in hub.traders)))
+		current_trader = null
+	return current_trader
+
+/datum/computer_file/program/merchant/Destroy()
+	current_hub = null
+	current_trader = null
+	. = ..()
+
+/datum/computer_file/program/merchant/proc/get_available_hubs()
+	. = list()
+	var/turf/T = get_turf(holder)
+	for(var/datum/trade_hub/hub in SStrade.trade_hubs)
+		if(hub.is_accessible_from(T))
+			. |= hub
+
 /datum/nano_module/program/merchant
 	name = "Merchant's List"
-
-/datum/computer_file/program/merchant/proc/get_merchant(var/num)
-	if(num > SStrade.traders.len)
-		num = SStrade.traders.len
-	if(num)
-		return SStrade.traders[num]
 
 /datum/nano_module/program/merchant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
@@ -32,14 +53,18 @@
 	var/datum/trader/T
 	if(program)
 		var/datum/computer_file/program/merchant/P = program
+		T = P.get_current_trader()
 		data["temp"] = P.temp
-		data["mode"] = !!P.current_merchant
+		data["mode"] = !isnull(T)
 		data["last_comms"] = P.last_comms
 		data["pad"] = !!P.pad
 		data["bank"] = P.bank
 		show_trade = P.show_trades
 		hailed = P.hailed_merchant
-		T = P.get_merchant(P.current_merchant)
+		var/list/hub_data = list()
+		for(var/datum/trade_hub/hub in P.get_available_hubs())
+			hub_data += list(list("name" = hub.name, "ref" = "\ref[hub]"))
+		data["hubs"] = hub_data
 	data["mode"] = !!T
 	if(T)
 		data["traderName"] = T.name
@@ -51,6 +76,7 @@
 				for(var/i in 1 to T.trading_items.len)
 					trades += T.print_trading_items(i)
 			data["trades"] = trades
+
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "merchant.tmpl", "Merchant List", 575, 700, state = state)
@@ -155,37 +181,37 @@
 		get_money()
 	if(href_list["PRG_main_menu"])
 		. = 1
-		current_merchant = 0
+		current_trader = null
+		current_hub = null
+
 	if(href_list["PRG_merchant_list"])
-		if(SStrade.traders.len == 0)
-			. = 0
-			temp = "Cannot find any traders within broadcasting range."
-		else
-			. = 1
-			current_merchant = 1
-			hailed_merchant = 0
+		. = 1
+		current_trader = null
+		current_hub = get_current_hub(locate(href_list["PRG_merchant_list"]))
+		if(current_hub && length(current_hub.traders))
+			current_trader = current_hub.traders[1]
 			last_comms = null
+			hailed_merchant = FALSE
+		else
+			temp = "There are no available traders at the target hub, or the target hub has moved out of range."
+
 	if(href_list["PRG_test_fire"])
 		. = 1
 		if(test_fire())
-			temp = "Test Fire Successful"
+			temp = "Test fire successful."
 		else
-			temp = "Test Fire Unsuccessful"
+			temp = "Test fire unsuccessful."
 	if(href_list["PRG_scroll"])
 		. = 1
-		var/scrolled = 0
-		switch(href_list["PRG_scroll"])
-			if("right")
-				scrolled = 1
-			if("left")
-				scrolled = -1
-		var/new_merchant  = Clamp(current_merchant + scrolled, 1, SStrade.traders.len)
-		if(new_merchant != current_merchant)
-			hailed_merchant = 0
-			last_comms = null
-		current_merchant = new_merchant
-	if(current_merchant)
-		var/datum/trader/T = get_merchant(current_merchant)
+		var/datum/trader/T = get_current_trader()
+		if(T)
+			var/new_merchant = (href_list["PRG_scroll"] == "right") ? next_in_list(T, current_hub.traders) : previous_in_list(T, current_hub.traders)
+			if(new_merchant != T)
+				hailed_merchant = 0
+				last_comms = null
+				current_trader = new_merchant
+	var/datum/trader/T = get_current_trader()
+	if(T)
 		if(!T.can_hail())
 			last_comms = T.get_response("hail_deny", "No, I'm not speaking with you.")
 			. = 1

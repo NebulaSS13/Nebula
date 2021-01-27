@@ -4,59 +4,28 @@ SUBSYSTEM_DEF(trade)
 	priority = SS_PRIORITY_TRADE
 	init_order = SS_INIT_MISC_LATE
 
-	var/list/traders = list()
-	var/tmp/list/current_traders
-	var/max_traders = 10
+	var/list/trade_hubs = list()
+	var/tmp/t_ind = 1
+	var/tmp/list/processing_trade_hubs
 
 /datum/controller/subsystem/trade/Initialize()
 	. = ..()
-
-	for(var/trader_type in GLOB.using_map.get_initial_traders())
-		traders += new trader_type
-	var/total_traders = rand(1,3) - length(traders)
-	if(total_traders > 0)
-		for(var/i in 1 to total_traders)
-			generate_trader(1)
+	GLOB.using_map.create_trade_hubs()
 
 /datum/controller/subsystem/trade/fire(resumed = FALSE)
-	if (!resumed)
-		current_traders = traders.Copy()
 
-	while(current_traders.len)
-		var/datum/trader/T = current_traders[current_traders.len]
-		current_traders.len--
+	if(!resumed)
+		processing_trade_hubs = trade_hubs.Copy()
+		t_ind = 1
 
-		if(!T.tick())
-			traders -= T
-			qdel(T)
-		if (MC_TICK_CHECK)
+	while(t_ind <= processing_trade_hubs.len)
+		var/datum/trade_hub/hub = processing_trade_hubs[t_ind++]
+		hub.Process(resumed)
+		if(MC_TICK_CHECK)
 			return
 
-	if((traders.len <= max_traders) && prob(100 - 50 * traders.len / max_traders))
-		generate_trader()
-	
-
 /datum/controller/subsystem/trade/stat_entry()
-	..("Traders: [traders.len]")
-
-/datum/controller/subsystem/trade/proc/generate_trader(var/stations = 0)
-	var/list/possible = list()
-	if(stations)
-		possible += subtypesof(/datum/trader) - typesof(/datum/trader/ship)
-	else
-		if(prob(5))
-			possible += subtypesof(/datum/trader/ship/unique)
-		else
-			possible += subtypesof(/datum/trader/ship) - typesof(/datum/trader/ship/unique)
-
-	for(var/i in 1 to 10)
-		var/type = pick(possible)
-		var/bad = 0
-		for(var/trader in traders)
-			if(istype(trader,type))
-				bad = 1
-				break
-		if(bad)
-			continue
-		traders += new type
-		return
+	var/traders = 0
+	for(var/datum/trade_hub/hub in trade_hubs)
+		traders += length(hub.traders)
+	..("Hubs: [length(trade_hubs)], traders: [traders]")
