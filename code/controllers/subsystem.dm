@@ -172,7 +172,7 @@
 	Initialize(timeofday)
 	init_finish = REALTIMEOFDAY
 	. = (REALTIMEOFDAY - timeofday)/10
-	var/msg = "Initialized [name] subsystem within [.] second[. == 1 ? "" : "s"]!"
+	var/msg = "Initialized [name] subsystem within [.] second\s!"
 	to_chat(world, "<span class='boldannounce'>[msg]</span>")
 	log_world(msg)
 

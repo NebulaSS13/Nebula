@@ -377,7 +377,7 @@
 
 /obj/item/robot_rack/examine(mob/user)
 	. = ..()
-	to_chat(user, "It can hold up to [capacity] item[capacity == 1 ? "" : "s"].")
+	to_chat(user, "It can hold up to [capacity] item\s.")
 
 /obj/item/robot_rack/Initialize(mapload, starting_objects = 0)
 	. = ..()
@@ -468,7 +468,7 @@
 		if(istype(A, /obj/item/chems/food/snacks/grown))
 			generating_power = base_power_generation
 			using_item = A
-		else 
+		else
 			for(var/fuel_type in fuel_types)
 				if(istype(A, fuel_type))
 					generating_power = fuel_types[fuel_type] * base_power_generation
