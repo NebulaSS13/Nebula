@@ -147,7 +147,7 @@
 	offline_vision_restriction = TINT_HEAVY
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE // this is passed to the rig suit components when deployed, including the helmet.
 
-	boots = FALSE
+	boots = /obj/item/clothing/shoes/magboots/rig/ce
 	chest = /obj/item/clothing/suit/space/rig/ce
 	helmet = /obj/item/clothing/head/helmet/space/rig/ce
 	gloves = /obj/item/clothing/gloves/rig/ce
@@ -180,6 +180,9 @@
 /obj/item/clothing/gloves/rig/ce
 	icon = 'icons/clothing/rigs/gloves/gloves_engineering.dmi'
 	siemens_coefficient = 0
+
+/obj/item/clothing/shoes/magboots/rig/ce
+	icon = 'icons/clothing/rigs/boots/boots_engineering.dmi'
 
 /obj/item/rig/hazmat
 	name = "\improper AMI control module"
