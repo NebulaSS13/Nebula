@@ -1,0 +1,5 @@
+author: comma
+delete-after: true
+changes:
+  - tweak: Ha ha ha I am abusing my GitHub maint powers to make chinsky commit a changelog
+      via the bot workflow. Science!
