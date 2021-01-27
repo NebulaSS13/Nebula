@@ -201,6 +201,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		autopilot = !autopilot
 
 	if (href_list["manual"])
+		if(!isliving(user))
+			to_chat(user, SPAN_WARNING("You can't use this."))
+			return
 		viewing_overmap(user) ? unlook(user) : look(user)
 
 	add_fingerprint(user)
