@@ -23,7 +23,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyyaml bs4
       - name: Compile CL
-        run: python tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs
+        run: |
+          git checkout -f dev
+          git reset --hard origin/dev
+          python tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs
       - name: Commit And Push
         run: |
           git config --local user.email "NebulaSS13Bot@gmail.com"
