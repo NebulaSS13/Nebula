@@ -321,22 +321,50 @@
 	else
 		return ..()
 
+/decl/surgery_step/generic/amputate/proc/is_clean(var/mob/user, var/obj/item/tool, var/mob/target)
+	. = (user.a_intent != I_HELP) ? FALSE : (can_operate(target) >= OPERATE_OKAY && istype(tool, /obj/item/circular_saw))
+
+/decl/surgery_step/generic/amputate/get_speed_modifier(var/mob/user, var/mob/target, var/obj/item/tool)
+	. = ..()
+	if(!is_clean(user, tool, target))
+		. *= 0.5
+
 /decl/surgery_step/generic/amputate/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] is beginning to amputate [target]'s [affected.name] with \the [tool]." , \
-	"<FONT size=3>You are beginning to cut through [target]'s [affected.amputation_point] with \the [tool].</FONT>")
+	if(is_clean(user, tool, target))
+		user.visible_message( \
+			SPAN_NOTICE("\The [user] is beginning to amputate \the [target]'s [affected.name] with \the [tool]."), \
+			SPAN_NOTICE("<FONT size=3>You are beginning to cut through \the [target]'s [affected.amputation_point] with \the [tool].</FONT>"))
+	else
+		user.visible_message( \
+			SPAN_DANGER("\The [user] starts hacking at \the [target]'s [affected.name] with \the [tool]!") , \
+			SPAN_DANGER("<FONT size=3>You start hacking at \the [target]'s [affected.amputation_point] with \the [tool]!</FONT>"))
 	target.custom_pain("Your [affected.amputation_point] is being ripped apart!",100,affecting = affected)
 	..()
 
 /decl/surgery_step/generic/amputate/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='notice'>[user] amputates [target]'s [affected.name] at the [affected.amputation_point] with \the [tool].</span>", \
-	"<span class='notice'>You amputate [target]'s [affected.name] with \the [tool].</span>")
-	affected.droplimb(1,DROPLIMB_EDGE)
+	var/clean_cut = is_clean(user, tool, target)
+	if(clean_cut)
+		user.visible_message( \
+			SPAN_NOTICE("\The [user] cleanly amputates \the [target]'s [affected.name] at the [affected.amputation_point] with \the [tool]."), \
+			SPAN_NOTICE("You cleanly amputate \the [target]'s [affected.name] with \the [tool]."))
+	else
+		user.visible_message( \
+			SPAN_DANGER("\The [user] hacks off \the [target]'s [affected.name] at the [affected.amputation_point] with \the [tool]!"), \
+			SPAN_DANGER("You hack off \the [target]'s [affected.name] with \the [tool]!"))
+	affected.droplimb(clean_cut, DROPLIMB_EDGE)
 
 /decl/surgery_step/generic/amputate/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='warning'>[user]'s hand slips, sawing through the bone in [target]'s [affected.name] with \the [tool]!</span>", \
-	"<span class='warning'>Your hand slips, sawwing through the bone in [target]'s [affected.name] with \the [tool]!</span>")
-	affected.take_external_damage(30, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	if(user.unEquip(tool, affected))
+		user.visible_message(
+			SPAN_DANGER("\The [user] manages to get \the [tool] stuck in \the [target]'s [affected.name]!"), \
+			SPAN_DANGER("You manage to get \the [tool] stuck in \the [target]'s [affected.name]!"))
+		affected.embed(tool, affected.take_external_damage(30, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool))
+	else
+		user.visible_message(
+			SPAN_WARNING("\The [user] slips, mangling \the [target]'s [affected.name] with \the [tool]."), \
+			SPAN_WARNING("You slip, mangling \the [target]'s [affected.name] with \the [tool]."))
+		affected.take_external_damage(30, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 	affected.fracture()

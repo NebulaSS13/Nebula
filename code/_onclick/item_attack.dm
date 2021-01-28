@@ -47,7 +47,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /mob/living/attackby(obj/item/I, mob/user)
 	if(!ismob(user))
 		return 0
-	if(can_operate(src,user) && I.do_surgery(src,user)) //Surgery
+	if(can_operate(src,user) != OPERATE_DENY && I.do_surgery(src,user)) //Surgery
 		return 1
 
 	if(user.a_intent == I_HELP && istype(I, /obj/item/clothing/head))
