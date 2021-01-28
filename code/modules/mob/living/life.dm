@@ -129,21 +129,26 @@
 
 	return 1
 
+/mob/living/proc/calculate_visibility_radius()
+	if(stat == UNCONSCIOUS)
+		return 0
+	if(stat == DEAD)
+		return INFINITY
+	. = is_blind() ? 1 : INFINITY
+
+/mob/living/proc/calculate_visibility_quality()
+	. = (stat == CONSCIOUS && !is_blind()) ? INFINITY : 0
+	
 /mob/living/proc/handle_vision()
 	update_sight()
 
 	if(stat == DEAD)
 		return
 
-	if(GET_STATUS(src, STAT_BLIND))
-		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
-	else
-		clear_fullscreen("blind")
+	if(!GET_STATUS(src, STAT_BLIND))
 		set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
 		set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
 		set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
-
-	set_fullscreen(stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
 
 	if(machine)
 		var/viewflags = machine.check_eye(src)
@@ -160,6 +165,7 @@
 		reset_view(null)
 
 /mob/living/proc/update_sight()
+	set_visibility_radius(calculate_visibility_radius(), calculate_visibility_quality())
 	set_sight(0)
 	set_see_in_dark(0)
 	if(stat == DEAD || (eyeobj && !eyeobj.living_eye))

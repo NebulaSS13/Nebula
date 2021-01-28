@@ -29,24 +29,23 @@
 		action.button_icon_state = "serpentid-shield-[eyes_shielded ? 1 : 0]"
 		if(action.button) action.button.UpdateIcon()
 
+/decl/species/serpentid/calculate_species_vision(var/mob/living/carbon/human/H)
+	. = ..()
+	var/obj/item/organ/internal/eyes/insectoid/serpentid/eyes = H.get_organ(BP_EYES)
+	if(istype(eyes))
+		. = min(., eyes.eyes_shielded ? 2 : INFINITY)
+
 /obj/item/organ/internal/eyes/insectoid/serpentid/attack_self(var/mob/user)
 	. = ..()
 	if(.)
 		eyes_shielded = !eyes_shielded
 		if(eyes_shielded)
-			to_chat(owner, "<span class='notice'>Nearly opaque lenses slide down to shield your eyes.</span>")
-			innate_flash_protection = FLASH_PROTECTION_MAJOR
-			owner.overlay_fullscreen("eyeshield", /obj/screen/fullscreen/blind)
-			owner.update_icons()
+			to_chat(owner, SPAN_NOTICE("Nearly opaque lenses slide down to shield your eyes."))
 		else
-			to_chat(owner, "<span class='notice'>Your protective lenses retract out of the way.</span>")
-			innate_flash_protection = FLASH_PROTECTION_VULNERABLE
-			addtimer(CALLBACK(src, .proc/remove_shield), 1 SECONDS)
-			owner.update_icons()
+			to_chat(owner, SPAN_NOTICE("Your protective lenses retract out of the way."))
+		innate_flash_protection = eyes_shielded ? FLASH_PROTECTION_MAJOR : FLASH_PROTECTION_VULNERABLE
+		owner.update_icons()
 		refresh_action_button()
-
-/obj/item/organ/internal/eyes/insectoid/serpentid/proc/remove_shield()
-	owner.clear_fullscreen("eyeshield")
 
 /obj/item/organ/internal/eyes/serpentid/Initialize()
 	. = ..()

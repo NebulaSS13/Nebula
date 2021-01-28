@@ -46,13 +46,15 @@
 	if(controlling_drone && stat != CONSCIOUS)
 		controlling_drone.release_ai_control("<b>WARNING: Primary control loop failure.</b> Session terminated.")
 
+/mob/living/silicon/ai/update_sight()
+	. = ..()
+	if(!has_power() || self_shutdown)
+		. = 0
+
 /mob/living/silicon/ai/update_living_sight()
 	if(!has_power() || self_shutdown)
 		update_icon()
-		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 		set_sight(sight&(~SEE_TURFS)&(~SEE_MOBS)&(~SEE_OBJS))
 		set_see_in_dark(0)
 		set_see_invisible(SEE_INVISIBLE_LIVING)
-	else
-		clear_fullscreen("blind")
 		..()

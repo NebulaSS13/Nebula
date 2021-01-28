@@ -240,10 +240,7 @@
 			src.oxygen.icon_state = "oxy1"
 
 	if(stat != DEAD)
-		if(blinded)
-			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
-		else
-			clear_fullscreen("blind")
+		if(!blinded)
 			set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
 			set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
 			set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)

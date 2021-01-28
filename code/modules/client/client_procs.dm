@@ -505,7 +505,8 @@ var/global/list/localhost_addresses = list(
 	if(eye != last_eye)
 		eye = last_eye
 
-	// Recenter skybox and lighting.
+	// Recenter skybox, visibility and lighting.
+	vis_backdrop.set_backdrop_scale(last_view_x_dim, last_view_y_dim)
 	set_skybox_offsets(last_view_x_dim, last_view_y_dim)
 	if(mob)
 		mob.reload_fullscreen()
