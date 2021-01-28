@@ -161,7 +161,7 @@
 					)
 				M.unEquip(src)
 		else
-			handle_click_empty(user)
+			handle_click_empty()
 		return 0
 	return 1
 
@@ -212,7 +212,7 @@
 		if(user.a_intent == I_HURT && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //reflex un-safeying
 			toggle_safety(user)
 		else
-			handle_click_empty(user)
+			handle_click_empty()
 			return
 
 	if(world.time < next_fire_time)
@@ -232,7 +232,7 @@
 	for(var/i in 1 to burst)
 		var/obj/projectile = consume_next_projectile(user)
 		if(!projectile)
-			handle_click_empty(user)
+			handle_click_empty()
 			break
 
 		process_accuracy(projectile, user, target, i, held_twohanded)
@@ -270,12 +270,8 @@
 	return check_trajectory(target, user)
 
 //called if there was no projectile to shoot
-/obj/item/gun/proc/handle_click_empty(mob/user)
-	if (user)
-		user.visible_message("*click click*", "<span class='danger'>*click*</span>")
-	else
-		src.visible_message("*click click*")
-	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
+/obj/item/gun/proc/handle_click_empty()
+	playsound(src, 'sound/weapons/empty.ogg', 100, 1)
 
 //called after successfully firing
 /obj/item/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0, var/obj/projectile)
@@ -457,7 +453,7 @@
 		return
 
 	if(safety())
-		user.visible_message("*click click*", SPAN_DANGER("*click*"))
+		handle_click_empty()
 		mouthshoot = 0
 		return
 
@@ -486,7 +482,7 @@
 		mouthshoot = 0
 		return
 	else
-		handle_click_empty(user)
+		handle_click_empty()
 		mouthshoot = 0
 		return
 
