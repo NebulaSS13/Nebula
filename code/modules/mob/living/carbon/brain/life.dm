@@ -159,11 +159,7 @@
 			healths.icon_state = "health7"
 
 	if(stat != DEAD)
-		if(blinded)
-			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
-		else
-			clear_fullscreen("blind")
-			set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
+		if(!blinded)
 			set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
 			set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
 		if (machine)

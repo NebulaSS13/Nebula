@@ -182,7 +182,7 @@
 	name = "[uppertext(pick(global.gyne_geoforms))]-[++ascent_drone_count]"
 
 // Sorry, you're going to have to actually deal with these guys.
-/mob/living/silicon/robot/flying/ascent/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+/mob/living/silicon/robot/flying/ascent/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE)
 	emp_act(2)
 
 /mob/living/silicon/robot/flying/ascent/emp_act(severity)

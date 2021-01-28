@@ -628,6 +628,11 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 			return 1
 	return 0
 
+/decl/species/proc/calculate_species_vision(var/mob/living/carbon/human/H)
+	if(H && GET_STATUS(H, STAT_BLIND) && !H.equipment_prescription)
+		return 1
+	return INFINITY
+
 /decl/species/proc/handle_vision(var/mob/living/carbon/human/H)
 	var/list/vision = H.get_accumulated_vision_handlers()
 	H.update_sight()
@@ -641,19 +646,9 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		if(H.equipment_see_invis)
 			H.set_see_invisible(max(min(H.see_invisible, H.equipment_see_invis), vision[2]))
 
-	if(H.equipment_tint_total >= TINT_BLIND)
-		SET_STATUS_MAX(H, STAT_BLIND, 1)
-
 	if(!H.client)//no client, no screen to update
 		return 1
 
-	H.set_fullscreen(GET_STATUS(H, STAT_BLIND) && !H.equipment_prescription, "blind", /obj/screen/fullscreen/blind)
-	H.set_fullscreen(H.stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
-
-	if(config.welder_vision)
-		H.set_fullscreen(H.equipment_tint_total, "welder", /obj/screen/fullscreen/impaired, H.equipment_tint_total)
-	var/how_nearsighted = get_how_nearsighted(H)
-	H.set_fullscreen(how_nearsighted, "nearsighted", /obj/screen/fullscreen/oxy, how_nearsighted)
 	H.set_fullscreen(GET_STATUS(H, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
 	H.set_fullscreen(GET_STATUS(H, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
 	if(HAS_STATUS(H, STAT_DRUGGY))

@@ -176,16 +176,17 @@ What is the naming convention for planes or layers?
   #define SUPERMATTER_WALL_LAYER   3
   #define OBFUSCATION_LAYER        4
 
-#define FULLSCREEN_PLANE         5 // for fullscreen overlays that do not cover the hud.
-  #define FULLSCREEN_LAYER         0
-  #define DAMAGE_LAYER             1
-  #define IMPAIRED_LAYER           2
-  #define BLIND_LAYER              3
+#define FULLSCREEN_PLANE         5
+  #define FULLSCREEN_LAYER         1
+  #define DAMAGE_LAYER             2
+  #define IMPAIRED_LAYER           3
   #define CRIT_LAYER               4
 
 #define HUD_PLANE                6
   #define UNDER_HUD_LAYER          0
+  #define HUD_BACKDROP_LAYER       1
   #define HUD_BASE_LAYER           2
   #define HUD_ITEM_LAYER           3
   #define HUD_ABOVE_ITEM_LAYER     4
   #define HUD_ABOVE_HUD_LAYER      5
+

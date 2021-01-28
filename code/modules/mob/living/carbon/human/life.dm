@@ -176,6 +176,11 @@
 	else
 		return ONE_ATMOSPHERE + pressure_difference
 
+/mob/living/carbon/human/calculate_visibility_quality()
+	. = ..()
+	if(equipment_tint_total > TINT_NONE)
+		. = min(., Clamp(equipment_tint_total / TINT_MAX, 0, 1))
+
 /mob/living/carbon/human/handle_impaired_vision()
 	..()
 	//Vision
@@ -1069,6 +1074,9 @@
 		machine_visual.remove_visual(src)
 	if(eyeobj)
 		eyeobj.remove_visual(src)
+
+/mob/living/carbon/human/calculate_visibility_radius()
+	. = min(..(), species.calculate_species_vision(src))
 
 /mob/living/carbon/human/handle_vision()
 	if(client)

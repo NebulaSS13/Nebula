@@ -525,7 +525,8 @@ var/global/const/MAX_VIEW = 41
 	if(eye != last_eye)
 		eye = last_eye
 
-	// Recenter skybox and lighting.
+	// Recenter skybox.
+	vis_backdrop.set_underlay_scale(last_view_x_dim, last_view_y_dim)
 	set_skybox_offsets(last_view_x_dim, last_view_y_dim)
 	if(mob)
 		mob.reload_fullscreen()

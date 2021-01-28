@@ -185,8 +185,27 @@
 
 	handle_hud_icons()
 	handle_vision()
+	set_visibility_radius(calculate_visibility_radius(), calculate_visibility_quality())
 
 	return 1
+
+/mob/living/proc/calculate_visibility_radius()
+	if(stat == DEAD)
+		return INFINITY
+	if(is_blind())
+		return 0
+	if(disabilities & NEARSIGHTED)
+		return 4
+	return INFINITY
+
+/mob/living/carbon/human/calculate_visibility_quality()
+	if(equipment_tint_total >= TINT_BLIND)
+		return 0
+	. = ..()
+	world << "[src] [equipment_tint_total], [.]"
+
+/mob/living/proc/calculate_visibility_quality()
+	. = (stat == CONSCIOUS && !is_blind()) ? INFINITY : 0
 
 /mob/living/proc/handle_vision()
 	update_sight()
@@ -194,15 +213,9 @@
 	if(stat == DEAD)
 		return
 
-	if(GET_STATUS(src, STAT_BLIND))
-		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
-	else
-		clear_fullscreen("blind")
-		set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
+	if(!GET_STATUS(src, STAT_BLIND))
 		set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
 		set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
-
-	set_fullscreen(stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
 
 	if(machine)
 		var/viewflags = machine.check_eye(src)
