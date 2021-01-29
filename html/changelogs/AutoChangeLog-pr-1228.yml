@@ -1,0 +1,4 @@
+author: eckff
+delete-after: true
+changes:
+  - rscdel: Removed the privacy poll.
