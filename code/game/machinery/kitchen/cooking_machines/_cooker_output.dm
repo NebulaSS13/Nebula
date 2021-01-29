@@ -6,6 +6,9 @@
 	nutriment_amt = 5
 	bitesize = 2
 
+/obj/item/chems/food/snacks/variable/update_food_appearance_from(var/obj/item/donor, var/food_color, var/copy_donor_appearance = TRUE)
+	..(donor, food_color, FALSE)
+
 /obj/item/chems/food/snacks/variable/pizza
 	name = "personal pizza"
 	desc = "A personalized pan pizza meant for only one person."
