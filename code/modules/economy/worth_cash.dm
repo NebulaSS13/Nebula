@@ -169,6 +169,7 @@
 	icon = 'icons/obj/items/credstick.dmi'
 	icon_state = ICON_STATE_WORLD
 	desc = "A digital stick that holds an amount of money."
+	w_class = ITEM_SIZE_TINY
 
 	var/max_worth = 5000
 	var/loaded_worth = 0
