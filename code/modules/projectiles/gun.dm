@@ -87,6 +87,10 @@
 	var/has_safety = TRUE
 	var/safety_icon 	   //overlay to apply to gun based on safety state, if any
 
+	// Spam prevention
+	var/last_fire_message_type
+	var/last_fire_message_time
+
 /obj/item/gun/Initialize()
 	. = ..()
 	for(var/i in 1 to firemodes.len)
@@ -269,12 +273,21 @@
 	//on the other side of a window if it makes a difference. Or if they run behind a window, too bad.
 	return check_trajectory(target, user)
 
+#define FIREARM_MESSAGE_SPAM_TIME (1 SECOND)
+/obj/item/gun/proc/check_fire_message_spam(var/check_type = "click", var/update_spam_checks = TRUE)
+	. = (last_fire_message_type != check_type) || world.time >= last_fire_message_time + FIREARM_MESSAGE_SPAM_TIME
+	if(. && update_spam_checks)
+		last_fire_message_type = check_type
+		last_fire_message_time = world.time
+#undef FIREARM_MESSAGE_SPAM_TIME
+
 //called if there was no projectile to shoot
 /obj/item/gun/proc/handle_click_empty(mob/user)
-	if (user)
-		user.visible_message("*click click*", "<span class='danger'>*click*</span>")
-	else
-		src.visible_message("*click click*")
+	if(check_fire_message_spam())
+		if(user)
+			user.visible_message("*click click*", "<span class='danger'>*click*</span>")
+		else
+			src.visible_message("*click click*")
 	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
 
 //called after successfully firing
@@ -458,6 +471,7 @@
 
 	if(safety())
 		user.visible_message("*click click*", SPAN_DANGER("*click*"))
+		playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
 		mouthshoot = 0
 		return
 
