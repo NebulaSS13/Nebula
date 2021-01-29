@@ -31,6 +31,8 @@
 		/decl/emote/visible/jump,
 		/decl/emote/visible/shiver,
 		/decl/emote/visible/collapse,
+		/decl/emote/visible/spin,
+		/decl/emote/visible/sidestep,
 		/decl/emote/audible/hiss,
 		/decl/emote/audible,
 		/decl/emote/audible/deathgasp_alien,
@@ -100,6 +102,7 @@
 		/decl/emote/visible/drool,
 		/decl/emote/visible/eyebrow,
 		/decl/emote/visible/twitch,
+		/decl/emote/visible/dance,
 		/decl/emote/visible/twitch_v,
 		/decl/emote/visible/faint,
 		/decl/emote/visible/frown,
@@ -138,7 +141,9 @@
 		/decl/emote/visible/rshoulder,
 		/decl/emote/visible/squint,
 		/decl/emote/visible/tfist,
-		/decl/emote/visible/tilt
+		/decl/emote/visible/tilt,
+		/decl/emote/visible/spin,
+		/decl/emote/visible/sidestep
 	)
 
 /mob/living/silicon/robot
@@ -150,12 +155,15 @@
 		/decl/emote/visible/aflap,
 		/decl/emote/visible/twitch,
 		/decl/emote/visible/twitch_v,
+		/decl/emote/visible/dance,
 		/decl/emote/visible/nod,
 		/decl/emote/visible/shake,
 		/decl/emote/visible/glare,
 		/decl/emote/visible/look,
 		/decl/emote/visible/stare,
 		/decl/emote/visible/deathgasp_robot,
+		/decl/emote/visible/spin,
+		/decl/emote/visible/sidestep,
 		/decl/emote/audible/synth,
 		/decl/emote/audible/synth/ping,
 		/decl/emote/audible/synth/buzz,
