@@ -168,6 +168,8 @@
 /obj/machinery/computer/teleporter/proc/set_target(var/obj/O)
 	src.locked = O
 	GLOB.destroyed_event.register(locked, src, .proc/target_lost)
+	if(hub && station && station.engaged)
+		hub.portal_visuals.setup_visuals(locked)
 
 /obj/machinery/computer/teleporter/Destroy()
 	clear_target()
@@ -198,11 +200,20 @@
 	dir = EAST
 	idle_power_usage = 10
 	active_power_usage = 2000
+
+	var/engaged = FALSE
 	var/obj/machinery/computer/teleporter/com
+	/// Visual object for handling the viscontents
+	var/obj/effect/portal_visuals/portal_visuals
+
+/obj/machinery/teleport/hub/Initialize()
+	. = ..()
+	portal_visuals = new
+	vis_contents += portal_visuals
 
 /obj/machinery/teleport/hub/Bumped(var/atom/movable/M)
 	spawn()
-		if (src.icon_state == "tele1")
+		if(engaged)
 			teleport(M)
 			use_power_oneoff(5000)
 
@@ -213,8 +224,16 @@
 		com.locked = null
 	return
 
+/obj/machinery/teleport/hub/update_use_power(new_use_power)
+	. = ..()
+	if(new_use_power == POWER_USE_IDLE || isnull(com))
+		portal_visuals.reset_visuals()
+	else
+		portal_visuals.setup_visuals(com.locked)
+
 /obj/machinery/teleport/hub/Destroy()
 	com = null
+	QDEL_NULL(portal_visuals)
 	return ..()
 
 /obj/machinery/teleport/station
@@ -222,9 +241,10 @@
 	desc = "This machine is capable of projecting a miniature wormhole leading directly to its provided target."
 	icon_state = "controller"
 	dir = EAST
-	var/engaged = 0
 	idle_power_usage = 10
 	active_power_usage = 2000
+	
+	var/engaged = FALSE
 	var/obj/machinery/computer/teleporter/com
 	var/obj/machinery/teleport/hub/hub
 
@@ -255,12 +275,13 @@
 			return
 
 	if (hub)
-		hub.icon_state = "tele1"
+		flick("tele1", hub)
 		use_power_oneoff(5000)
 		update_use_power(POWER_USE_ACTIVE)
+		hub.engaged = TRUE
 		hub.update_use_power(POWER_USE_ACTIVE)
 		audible_message("<span class='notice'>Teleporter engaged!</span>")
-	src.engaged = 1
+	engaged = TRUE
 	return
 
 /obj/machinery/teleport/station/proc/disengage()
@@ -268,11 +289,11 @@
 		return
 
 	if (hub)
-		hub.icon_state = "tele0"
 		hub.update_use_power(POWER_USE_IDLE)
+		hub.engaged = FALSE
 		update_use_power(POWER_USE_IDLE)
 		audible_message("<span class='notice'>Teleporter disengaged!</span>")
-	src.engaged = 0
+	engaged = FALSE
 	return
 
 /obj/machinery/teleport/station/Destroy()

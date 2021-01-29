@@ -11,7 +11,7 @@
 	color = LIGHTING_BASE_MATRIX
 	icon_state = "light1"
 	blend_mode = BLEND_OVERLAY
-
+	vis_flags = VIS_HIDE
 	appearance_flags = 0
 
 	var/lum_r = 0
