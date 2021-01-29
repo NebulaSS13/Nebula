@@ -300,13 +300,10 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 //Splashing reagents is messier than trans_to, the target's loc gets some of the reagents as well.
 /datum/reagents/proc/splash(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/min_spill=0, var/max_spill=60)
-	var/spill = 0
-	if(!isturf(target) && target.loc)
-		spill = amount*(rand(min_spill, max_spill)/100)
+	if(!isturf(target) && target.loc && min_spill && max_spill)
+		var/spill = amount*(rand(min_spill, max_spill)/100)
 		amount -= spill
-	if(spill)
 		splash(target.loc, spill, multiplier, copy, min_spill, max_spill)
-
 	trans_to(target, amount, multiplier, copy)
 
 /datum/reagents/proc/trans_type_to(var/atom/target, var/type, var/amount = 1, var/multiplier = 1)
@@ -396,6 +393,9 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		return
 	var/datum/reagents/R = new /datum/reagents(amount * multiplier, GLOB.temp_reagents_holder)
 	. = trans_to_holder(R, amount, multiplier, copy, 1)
+	R.touch_turf(target)
+	if(R?.total_volume <= FLUID_EVAPORATION_POINT || QDELETED(target))
+		return
 	var/obj/effect/fluid/F = locate() in target
 	if(!F) F = new(target)
 	trans_to_holder(F.reagents, amount, multiplier, copy)

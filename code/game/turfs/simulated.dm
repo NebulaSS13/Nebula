@@ -11,7 +11,10 @@
 // This is not great.
 /turf/simulated/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
 
-	if((locate(/obj/effect/fluid) in src) || (locate(/obj/effect/flood) in src))
+	if(locate(/obj/effect/flood) in src)
+		return
+
+	if(get_fluid_depth() > FLUID_EVAPORATION_POINT)
 		return
 
 	if(wet_val < wet && !overwrite)

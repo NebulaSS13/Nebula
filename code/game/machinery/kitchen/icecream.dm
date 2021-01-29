@@ -204,7 +204,6 @@
 /obj/item/chems/food/snacks/icecream/on_update_icon()
 	cut_overlays()
 	if(ice_creamed)
-		world.log << "honk icecream_[ice_creamed]"
 		add_overlay("icecream_[ice_creamed]")
 
 /obj/item/chems/food/snacks/icecream/proc/add_ice_cream(var/flavour_name)

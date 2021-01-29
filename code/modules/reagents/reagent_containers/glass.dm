@@ -127,11 +127,13 @@
 /obj/item/chems/glass/bucket/attackby(var/obj/D, mob/user)
 	if(istype(D, /obj/item/mop))
 		if(reagents.total_volume < 1)
-			to_chat(user, "<span class='warning'>\The [src] is empty!</span>")
-		else
+			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
+		else if(REAGENTS_FREE_SPACE(D.reagents) >= 5)
 			reagents.trans_to_obj(D, 5)
-			to_chat(user, "<span class='notice'>You wet \the [D] in \the [src].</span>")
+			to_chat(user, SPAN_NOTICE("You wet \the [D] in \the [src]."))
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
+		else
+			to_chat(user, SPAN_WARNING("\The [D] is saturated."))
 		return
 	else
 		return ..()

@@ -52,10 +52,6 @@
 
 /obj/effect/fluid/Destroy()
 	var/turf/simulated/T = get_turf(src)
-	if(istype(T))
-		if(length(T.zone?.fuel_objs))
-			T.zone.fuel_objs -= src
-		T.wet_floor()
 	STOP_PROCESSING(SSobj, src)
 	for(var/thing in neighbors)
 		var/obj/effect/fluid/F = thing
@@ -64,6 +60,10 @@
 	neighbors = null
 	REMOVE_ACTIVE_FLUID(src)
 	. = ..()
+	if(istype(T))
+		if(length(T.zone?.fuel_objs))
+			T.zone.fuel_objs -= src
+		T.wet_floor()
 
 /obj/effect/fluid/proc/remove_fuel(var/amt)
 	for(var/rtype in reagents.reagent_volumes)

@@ -12,7 +12,7 @@
 	update_icon()
 
 /obj/item/chems/food/snacks/variable/update_food_appearance_from(var/obj/item/donor, var/food_color, var/copy_donor_appearance = TRUE)
-	..(donor, food_color, FALSE)
+	..(donor, food_color, (type == /obj/item/chems/food/snacks/variable)) // variable is used for generic foods (deep fried X), subtypes are used for specific foods
 
 /obj/item/chems/food/snacks/variable/pizza
 	name = "personal pizza"

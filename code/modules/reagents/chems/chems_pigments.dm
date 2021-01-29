@@ -58,14 +58,20 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 	color_weight = 0
 
+/decl/material/liquid/paint/proc/apply_paint(var/atom/painting, var/datum/reagents/holder)
+	if(istype(painting) && istype(holder))
+		var/keep_alpha = painting.alpha
+		painting.color = holder.get_color()
+		painting.alpha = keep_alpha
+
 /decl/material/liquid/paint/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	if(istype(T) && !isspaceturf(T))
-		T.color = holder.get_color()
+		apply_paint(T, holder)
 
 /decl/material/liquid/paint/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	if(istype(O))
-		O.color = holder.get_color()
+		apply_paint(O, holder)
 
 /decl/material/liquid/paint/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
-	if(istype(M) && !isobserver(M))
-		M.color = holder.get_color()
+	if(istype(M))
+		apply_paint(M, holder)
