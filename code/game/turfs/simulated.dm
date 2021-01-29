@@ -10,6 +10,10 @@
 
 // This is not great.
 /turf/simulated/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
+
+	if((locate(/obj/effect/fluid) in src) || (locate(/obj/effect/flood) in src))
+		return
+
 	if(wet_val < wet && !overwrite)
 		return
 
@@ -25,7 +29,6 @@
 		wet--
 		timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor), 8 SECONDS, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE)
 		return
-
 	wet = 0
 	if(wet_overlay)
 		overlays -= wet_overlay

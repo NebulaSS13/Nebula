@@ -85,7 +85,7 @@
 /obj/effect/fluid/Process()
 
 	// Evaporation! TODO: add fumes to the air from this, if appropriate.
-	if(reagents.total_volume > FLUID_EVAPORATION_POINT && reagents.total_volume <= FLUID_PUDDLE && prob(35))
+	if(reagents.total_volume > FLUID_EVAPORATION_POINT && reagents.total_volume <= FLUID_PUDDLE && prob(15))
 		reagents.remove_any(min(reagents.total_volume, 1))
 
 	if(reagents.total_volume <= FLUID_EVAPORATION_POINT)

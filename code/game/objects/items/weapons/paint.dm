@@ -18,19 +18,14 @@ var/global/list/cached_icons = list()
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	var/pigment
 
-/obj/item/chems/glass/paint/afterattack(turf/simulated/target, mob/user, proximity)
-	if(!proximity) return
-	if(istype(target) && reagents.total_volume > 5)
-		user.visible_message("<span class='warning'>\The [target] has been splashed with something by [user]!</span>")
-		reagents.trans_to_turf(target, 5)
-	else
-		return ..()
-
 /obj/item/chems/glass/paint/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/paint, reagents.maximum_volume-10)
 	if(pigment)
-		reagents.add_reagent(pigment, reagents.maximum_volume-10)
+		var/amt = round(reagents.maximum_volume/2)
+		reagents.add_reagent(pigment, amt)
+		reagents.add_reagent(/decl/material/liquid/paint, amt)
+	else
+		reagents.add_reagent(/decl/material/liquid/paint, reagents.maximum_volume)
 
 /obj/item/chems/glass/paint/on_update_icon()
 	overlays.Cut()
