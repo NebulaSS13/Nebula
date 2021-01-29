@@ -1,4 +1,4 @@
-/decl/material/pigment
+/decl/material/liquid/pigment
 	name = "pigment"
 	lore_text = "Intensely coloured powder."
 	taste_description = "the back of class"
@@ -6,47 +6,47 @@
 	overdose = 5
 	hidden_from_codex = TRUE
 
-/decl/material/pigment/red
+/decl/material/liquid/pigment/red
 	name = "red pigment"
 	color = "#fe191a"
 
-/decl/material/pigment/orange
+/decl/material/liquid/pigment/orange
 	name = "orange pigment"
 	color = "#ffbe4f"
 
-/decl/material/pigment/yellow
+/decl/material/liquid/pigment/yellow
 	name = "yellow pigment"
 	color = "#fdfe7d"
 
-/decl/material/pigment/green
+/decl/material/liquid/pigment/green
 	name = "green pigment"
 	color = "#18a31a"
 
-/decl/material/pigment/blue
+/decl/material/liquid/pigment/blue
 	name = "blue pigment"
 	color = "#247cff"
 
-/decl/material/pigment/purple
+/decl/material/liquid/pigment/purple
 	name = "purple pigment"
 	color = "#cc0099"
 
-/decl/material/pigment/grey //Mime
+/decl/material/liquid/pigment/grey //Mime
 	name = "grey pigment"
 	color = "#808080"
 
-/decl/material/pigment/brown //Rainbow
+/decl/material/liquid/pigment/brown //Rainbow
 	name = "brown pigment"
 	color = "#846f35"
 
-/decl/material/pigment/grey //Mime
+/decl/material/liquid/pigment/grey //Mime
 	name = "grey pigment"
 	color = "#808080"
 
-/decl/material/pigment/black
+/decl/material/liquid/pigment/black
 	name = "black pigment"
 	color = "#222222"
 
-/decl/material/pigment/white
+/decl/material/liquid/pigment/white
 	name = "white pigment"
 	color = "#aaaaaa"
 

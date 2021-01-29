@@ -5,6 +5,7 @@
 	desc = "If you can see this description then something is wrong. Please report the bug on the tracker."
 	nutriment_amt = 5
 	bitesize = 2
+	filling_color = COLOR_BROWN
 
 /obj/item/chems/food/snacks/variable/Initialize()
 	. = ..()
@@ -37,11 +38,13 @@
 	name = "hot pocket"
 	desc = "You wanna put a bangin- oh, nevermind."
 	icon_state = "donk"
+	filling_color = COLOR_BROWN
 
 /obj/item/chems/food/snacks/variable/kebab
 	name = "kebab"
 	desc = "Food is just tastier on a stick!"
 	icon_state = "kabob"
+	filling_color = COLOR_DARK_RED
 
 /obj/item/chems/food/snacks/variable/waffles
 	name = "waffles"
@@ -69,18 +72,22 @@
 	name = "flavored jawbreaker"
 	desc = "It's like cracking a molar on a rainbow."
 	icon_state = "jawbreaker"
+	filling_color = COLOR_RED
 
 /obj/item/chems/food/snacks/variable/candybar
 	name = "flavored chocolate bar"
 	desc = "Made in a factory downtown."
 	icon_state = "bar"
+	filling_color = COLOR_DARK_BROWN
 
 /obj/item/chems/food/snacks/variable/sucker
 	name = "flavored sucker"
 	desc = "Suck, suck, suck."
 	icon_state = "sucker"
+	filling_color = COLOR_RED
 
 /obj/item/chems/food/snacks/variable/jelly
 	name = "jelly"
 	desc = "All your friends will be jelly."
 	icon_state = "jellycustom"
+	filling_color = COLOR_RED

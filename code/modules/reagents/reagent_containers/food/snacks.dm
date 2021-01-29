@@ -288,7 +288,7 @@
 			transform = M
 	update_icon()
 
-/obj/item/chems/food/snacks/update_icon()
+/obj/item/chems/food/snacks/on_update_icon()
 	cut_overlays()
 	if(check_state_in_icon("[icon_state]_filling", icon))
 		var/image/I = image(icon, "[icon_state]_filling")
