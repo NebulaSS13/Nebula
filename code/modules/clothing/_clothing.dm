@@ -17,7 +17,6 @@
 	var/ironed_state = WRINKLES_DEFAULT
 	var/smell_state = SMELL_DEFAULT
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
-	var/made_of_cloth = FALSE
 	var/volume_multiplier = 1
 	var/markings_icon	// simple colored overlay that would be applied to the icon
 	var/markings_color	// for things like colored parts of labcoats or shoes
@@ -28,21 +27,29 @@
 		update_icon()
 
 // Sort of a placeholder for proper tailoring.
+#define RAG_COUNT(X) ceil((LAZYACCESS(X.matter, /decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
+
 /obj/item/clothing/attackby(obj/item/I, mob/user)
-	if(made_of_cloth && (I.edge || I.sharp) && user.a_intent == I_HURT)
+	var/rags = RAG_COUNT(src)
+	if(rags && (I.edge || I.sharp) && user.a_intent == I_HURT)
+		if(length(accessories))
+			to_chat(user, SPAN_WARNING("You should remove the accessories attached to \the [src] first."))
+			return TRUE
 		if(!isturf(loc) && !(src in user.get_held_items()))
 			var/it = gender == PLURAL ? "them" : "it"
 			to_chat(user, SPAN_WARNING("You must either be holding \the [src], or [it] must be on the ground, before you can shred [it]."))
-			return
-		user.visible_message(SPAN_DANGER("\The [user] begins tearing up \the [src] with \the [I]."))
+			return TRUE
+		playsound(loc, 'sound/weapons/cablecuff.ogg', 30, 1)
+		user.visible_message(SPAN_DANGER("\The [user] begins ripping apart \the [src] with \the [I]."))
 		if(do_after(user, 5 SECONDS, src))
 			user.visible_message(SPAN_DANGER("\The [user] tears \the [src] into rags with \the [I]."))
-			for(var/i = 1 to rand(2,3))
+			for(var/i = 1 to rags)
 				new /obj/item/chems/glass/rag(get_turf(src))
 			if(loc == user)
 				user.drop_from_inventory(src)
-			qdel(src)
-		return
+			LAZYREMOVE(matter, /decl/material/solid/cloth)
+			physically_destroyed()
+		return TRUE
 	. = ..()
 // End placeholder.
 
@@ -153,6 +160,25 @@
 	var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)
 	if(istype(armor_datum) && LAZYLEN(armor_datum.get_visible_damage()))
 		to_chat(user, SPAN_WARNING("It has some <a href='?src=\ref[src];list_armor_damage=1'>damage</a>."))
+
+	for(var/obj/item/clothing/accessory/A in accessories)
+		to_chat(user, "[html_icon(A)] \A [A] is attached to it.")
+	switch(ironed_state)
+		if(WRINKLES_WRINKLY)
+			to_chat(user, "<span class='bad'>It's wrinkly.</span>")
+		if(WRINKLES_NONE)
+			to_chat(user, "<span class='notice'>It's completely wrinkle-free!</span>")
+	switch(smell_state)
+		if(SMELL_CLEAN)
+			to_chat(user, "<span class='notice'>It smells clean!</span>")
+		if(SMELL_STINKY)
+			to_chat(user, "<span class='bad'>It's quite stinky!</span>")
+
+	var/rags = RAG_COUNT(src)
+	if(rags)
+		to_chat(user, SPAN_SUBTLE("With a sharp object, you could cut \the [src] up into [rags] rag\s."))
+
+#undef RAG_COUNT
 
 /obj/item/clothing/Topic(href, href_list, datum/topic_state/state)
 	var/mob/user = usr
