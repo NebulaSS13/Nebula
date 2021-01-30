@@ -1180,19 +1180,6 @@
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 	reagents.add_reagent(/decl/material/liquid/water, 5)
 
-/obj/item/chems/food/snacks/slimesoup
-	name = "slime soup"
-	desc = "If no water is available, you may substitute tears."
-	icon_state = "slimesoup"//nonexistant?
-	filling_color = "#c4dba0"
-	bitesize = 5
-	eat_sound = 'sound/items/drink.ogg'
-
-/obj/item/chems/food/snacks/slimesoup/Initialize()
-	.=..()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
-	reagents.add_reagent(/decl/material/liquid/water, 10)
-
 /obj/item/chems/food/snacks/bloodsoup
 	name = "tomato soup"
 	desc = "Smells like copper."
@@ -1269,43 +1256,55 @@
 	bitesize = 5
 	eat_sound = 'sound/items/drink.ogg'
 
+/obj/item/chems/food/snacks/mysterysoup/proc/get_random_fillings()
+	return list(
+		list(
+			/decl/material/liquid/nutriment =           6,
+			/decl/material/liquid/capsaicin =           3,
+			/decl/material/liquid/drink/juice/tomato =  2
+		),
+		list(
+			/decl/material/liquid/nutriment =           6,
+			/decl/material/liquid/frostoil =            3,
+			/decl/material/liquid/drink/juice/tomato =  2
+		),
+		list(
+			/decl/material/liquid/nutriment =           5,
+			/decl/material/liquid/water =               5,
+			/decl/material/liquid/regenerator =         5
+		),
+		list(
+			/decl/material/liquid/nutriment =           5,
+			/decl/material/liquid/water =              10
+		),
+		list(
+			/decl/material/liquid/nutriment =           2,
+			/decl/material/liquid/drink/juice/banana = 10
+		),
+		list(
+			/decl/material/liquid/nutriment =           6,
+			/decl/material/liquid/blood =              10
+		),
+		list(
+			/decl/material/solid/carbon =              10,
+			/decl/material/liquid/bromide =            10
+		),
+		list(
+			/decl/material/liquid/nutriment =           5,
+			/decl/material/liquid/drink/juice/tomato = 10
+		),
+		list(
+			/decl/material/liquid/nutriment =           6,
+			/decl/material/liquid/drink/juice/tomato =  5,
+			/decl/material/liquid/eyedrops =            5
+		)
+	)
+
 /obj/item/chems/food/snacks/mysterysoup/Initialize()
-	.=..()
-	switch(rand(1,10))
-		if(1)
-			reagents.add_reagent(/decl/material/liquid/nutriment, 6)
-			reagents.add_reagent(/decl/material/liquid/capsaicin, 3)
-			reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 2)
-		if(2)
-			reagents.add_reagent(/decl/material/liquid/nutriment, 6)
-			reagents.add_reagent(/decl/material/liquid/frostoil, 3)
-			reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 2)
-		if(3)
-			reagents.add_reagent(/decl/material/liquid/nutriment, 5)
-			reagents.add_reagent(/decl/material/liquid/water, 5)
-			reagents.add_reagent(/decl/material/liquid/regenerator, 5)
-		if(4)
-			reagents.add_reagent(/decl/material/liquid/nutriment, 5)
-			reagents.add_reagent(/decl/material/liquid/water, 10)
-		if(5)
-			reagents.add_reagent(/decl/material/liquid/nutriment, 2)
-			reagents.add_reagent(/decl/material/liquid/drink/juice/banana, 10)
-		if(6)
-			reagents.add_reagent(/decl/material/liquid/nutriment, 6)
-			reagents.add_reagent(/decl/material/liquid/blood, 10)
-		if(7)
-			reagents.add_reagent(/decl/material/liquid/slimejelly, 10)
-			reagents.add_reagent(/decl/material/liquid/water, 10)
-		if(8)
-			reagents.add_reagent(/decl/material/solid/carbon, 10)
-			reagents.add_reagent(/decl/material/liquid/bromide, 10)
-		if(9)
-			reagents.add_reagent(/decl/material/liquid/nutriment, 5)
-			reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 10)
-		if(10)
-			reagents.add_reagent(/decl/material/liquid/nutriment, 6)
-			reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 5)
-			reagents.add_reagent(/decl/material/liquid/eyedrops, 5)
+	. = ..()
+	var/list/fillings = pick(get_random_fillings())
+	for(var/filling in fillings)
+		reagents.add_reagent(filling, fillings[filling])
 
 /obj/item/chems/food/snacks/wishsoup
 	name = "\improper Wish Soup"
@@ -1611,15 +1610,25 @@
 	bitesize = 3
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/snacks/jelliedtoast/cherry
 /obj/item/chems/food/snacks/jelliedtoast/cherry/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 
-/obj/item/chems/food/snacks/jelliedtoast/slime
-/obj/item/chems/food/snacks/jelliedtoast/slime/Initialize()
+/obj/item/chems/food/snacks/jellysandwich
+	name = "jelly sandwich"
+	desc = "You wish you had some peanut butter to go with this..."
+	icon_state = "jellysandwich"
+	trash = /obj/item/trash/plate
+	filling_color = "#9e3a78"
+	center_of_mass = @"{'x':16,'y':8}"
+	nutriment_desc = list("bread" = 2)
+	nutriment_amt = 2
+	bitesize = 3
+	nutriment_type = /decl/material/liquid/nutriment/bread
+
+/obj/item/chems/food/snacks/jellysandwich/cherry/Initialize()
 	.=..()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
+	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 
 /obj/item/chems/food/snacks/jellyburger
 	name = "jelly burger"
@@ -1631,12 +1640,6 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/chems/food/snacks/jellyburger/slime
-/obj/item/chems/food/snacks/jellyburger/slime/Initialize()
-	.=..()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
-
-/obj/item/chems/food/snacks/jellyburger/cherry
 /obj/item/chems/food/snacks/jellyburger/cherry/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
@@ -1851,28 +1854,6 @@
 	nutriment_amt = 3
 	bitesize = 4
 	nutriment_type = /decl/material/liquid/nutriment/bread
-
-/obj/item/chems/food/snacks/jellysandwich
-	name = "jelly sandwich"
-	desc = "You wish you had some peanut butter to go with this..."
-	icon_state = "jellysandwich"
-	trash = /obj/item/trash/plate
-	filling_color = "#9e3a78"
-	center_of_mass = @"{'x':16,'y':8}"
-	nutriment_desc = list("bread" = 2)
-	nutriment_amt = 2
-	bitesize = 3
-	nutriment_type = /decl/material/liquid/nutriment/bread
-
-/obj/item/chems/food/snacks/jellysandwich/slime
-/obj/item/chems/food/snacks/jellysandwich/slime/Initialize()
-	.=..()
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
-
-/obj/item/chems/food/snacks/jellysandwich/cherry
-/obj/item/chems/food/snacks/jellysandwich/cherry/Initialize()
-	.=..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 
 /obj/item/chems/food/snacks/mint
 	name = "mint"
@@ -3547,21 +3528,24 @@
 	bitesize = 10
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/snacks/donut/chaos/Initialize()
-	.=..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
-	reagents.add_reagent(pick(list(
+/obj/item/chems/food/snacks/donut/chaos/proc/get_random_fillings()
+	. = list(
 		/decl/material/liquid/nutriment,
 		/decl/material/liquid/capsaicin,
 		/decl/material/liquid/frostoil,
 		/decl/material/liquid/nutriment/sprinkles,
 		/decl/material/gas/chlorine,
 		/decl/material/liquid/nutriment/coco,
-		/decl/material/liquid/slimejelly,
 		/decl/material/liquid/nutriment/banana_cream,
 		/decl/material/liquid/nutriment/cherryjelly,
 		/decl/material/liquid/fuel,
-		/decl/material/liquid/regenerator)), 3)
+		/decl/material/liquid/regenerator
+	)
+
+/obj/item/chems/food/snacks/donut/chaos/Initialize()
+	.=..()
+	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
+	reagents.add_reagent(pick(get_random_fillings()), 3)
 	if(prob(30))
 		src.icon_state = "donut2"
 		src.overlay_state = "box-donut2"
@@ -3582,24 +3566,6 @@
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
-	if(prob(30))
-		src.icon_state = "jdonut2"
-		src.overlay_state = "box-donut2"
-		src.SetName("frosted jelly donut")
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 2)
-
-/obj/item/chems/food/snacks/donut/slimejelly
-	name = "jelly donut"
-	desc = "You jelly?"
-	icon_state = "jdonut1"
-	filling_color = "#ed1169"
-	center_of_mass = @"{'x':16,'y':11}"
-	nutriment_amt = 3
-	bitesize = 5
-/obj/item/chems/food/snacks/donut/slimejelly/Initialize()
-	.=..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
-	reagents.add_reagent(/decl/material/liquid/slimejelly, 5)
 	if(prob(30))
 		src.icon_state = "jdonut2"
 		src.overlay_state = "box-donut2"

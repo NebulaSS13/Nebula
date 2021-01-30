@@ -21,6 +21,7 @@
 			set_species(new_species,1)
 		else
 			set_species()
+		name = species.get_default_name()
 
 	if(!real_name || real_name == "unknown")
 		var/newname = species.get_default_name()
@@ -1808,3 +1809,11 @@
 
 /mob/living/carbon/human/get_admin_job_string()
 	return job || uppertext(species.name)
+
+/mob/living/carbon/human/can_change_intent()
+	return TRUE
+
+/mob/living/carbon/human/get_telecomms_race_info()
+	if(isMonkey())
+		return list("Monkey", FALSE)
+	return list("Sapient Race", TRUE)

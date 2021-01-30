@@ -65,8 +65,6 @@
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 	if(prob(1))
 		M.emote("shiver")
-	if(isslime(M))
-		M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
 	holder.remove_reagent(/decl/material/liquid/capsaicin, 5)
 
 /decl/material/liquid/capsaicin
@@ -112,9 +110,6 @@
 		if(prob(5))
 			M.custom_emote(2, "[pick("dry heaves!","coughs!","splutters!")]")
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
-
-	if(isslime(M))
-		M.bodytemperature += rand(0, 15) + slime_temp_adj
 
 /decl/material/liquid/capsaicin/condensed
 	name = "condensed capsaicin"
@@ -206,9 +201,6 @@
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 			M.custom_emote(2, "[pick("coughs.","gags.","retches.")]")
 			M.Stun(2)
-
-	if(isslime(M))
-		M.bodytemperature += rand(15, 30)
 
 /decl/material/liquid/mutagenics
 	name = "mutagenics"

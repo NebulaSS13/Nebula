@@ -84,7 +84,6 @@
 		/obj/item/organ/internal/posibrain,
 		/obj/item/stack/cable_coil,
 		/obj/item/stock_parts/circuitboard,
-		/obj/item/slime_extract,
 		/obj/item/chems/glass,
 		/obj/item/chems/food/snacks/monkeycube,
 		/obj/item/stock_parts/computer,
@@ -104,7 +103,6 @@
 		/obj/item/chems/glass,
 		/obj/item/seeds,
 		/obj/item/grown,
-		/obj/item/slime_extract,
 		/obj/item/disk/botany
 	)
 

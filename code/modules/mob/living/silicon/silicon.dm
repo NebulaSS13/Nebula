@@ -433,3 +433,6 @@
 
 /mob/living/silicon/get_admin_job_string()
 	return "Silicon-based"
+
+/mob/living/silicon/get_telecomms_race_info()
+	return list("Artificial Life", TRUE)

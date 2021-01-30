@@ -1120,3 +1120,6 @@
 
 /mob/living/silicon/robot/get_admin_job_string()
 	return "Robot"
+
+/mob/living/silicon/robot/handle_pre_transformation()
+	QDEL_NULL(mmi)

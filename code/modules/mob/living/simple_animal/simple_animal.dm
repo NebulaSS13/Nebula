@@ -544,3 +544,5 @@
 /mob/living/simple_animal/get_admin_job_string()
 	return "Animal"
 
+/mob/living/simple_animal/get_telecomms_race_info()
+	return list("Domestic Animal", FALSE)

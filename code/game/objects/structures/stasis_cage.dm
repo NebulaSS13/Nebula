@@ -15,6 +15,11 @@
 	if(A)
 		contain(A)
 
+/obj/structure/stasis_cage/attackby(obj/item/O, mob/user)
+	if(contained && istype(O, /obj/item/scanner/xenobio))
+		return contained.attackby(O, user)
+	. = ..()
+
 /obj/structure/stasis_cage/attack_hand(var/mob/user)
 	try_release(user)
 

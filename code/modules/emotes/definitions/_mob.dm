@@ -172,21 +172,3 @@
 		/decl/emote/audible/synth/security,
 		/decl/emote/audible/synth/security/halt
 		)
-
-/mob/living/carbon/slime
-	default_emotes = list(
-		/decl/emote/audible/moan,
-		/decl/emote/visible/twitch,
-		/decl/emote/visible/sway,
-		/decl/emote/visible/shiver,
-		/decl/emote/visible/bounce,
-		/decl/emote/visible/jiggle,
-		/decl/emote/visible/lightup,
-		/decl/emote/visible/vibrate,
-		/decl/emote/slime,
-		/decl/emote/slime/pout,
-		/decl/emote/slime/sad,
-		/decl/emote/slime/angry,
-		/decl/emote/slime/frown,
-		/decl/emote/slime/smile
-		)

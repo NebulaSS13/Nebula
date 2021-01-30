@@ -1,0 +1,16 @@
+/mob/living/slime/examine(mob/user)
+	. = ..()
+	var/list/msg = list()
+	if(stat == DEAD)
+		msg += "<span class='deadsay'>It is limp and unresponsive.</span>"
+	else
+		if(src.getBruteLoss() >= 40)
+			msg += SPAN_DANGER("It has severe punctures and tears in its flesh!")
+		else if(src.getBruteLoss())
+			msg += SPAN_WARNING("It has some punctures in its flesh!")
+		switch(powerlevel)
+			if(2 to 3) msg += SPAN_WARNING("It is flickering gently with a little electrical activity.")
+			if(4 to 5) msg += SPAN_WARNING("It is glowing gently with moderate levels of electrical activity.")
+			if(6 to 9) msg += SPAN_DANGER("It is glowing brightly with high levels of electrical activity.")
+			if(10)     msg += SPAN_DANGER("It is radiating with massive levels of electrical activity!")
+	to_chat(user, jointext(msg, "<br>"))

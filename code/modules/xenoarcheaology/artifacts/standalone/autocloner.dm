@@ -13,30 +13,31 @@
 	active_power_usage = 2000
 	idle_power_usage = 1000
 
-/obj/machinery/auto_cloner/Initialize()
-	. = ..()
-
-	time_per_spawn = rand(1200,3600)
-
-	//33% chance to spawn nasties
-	if(prob(33))
-		spawn_type = pick(
+/obj/machinery/auto_cloner/proc/get_hostile_mob_types()
+	. = list(
 		/mob/living/simple_animal/hostile/giant_spider/nurse,
 		/mob/living/simple_animal/hostile/bear,
-		/mob/living/simple_animal/hostile/creature)
-	else
-		spawn_type = pick(\
+		/mob/living/simple_animal/hostile/creature
+	)
+
+/obj/machinery/auto_cloner/proc/get_passive_mob_types()
+	. = list(
 		/mob/living/simple_animal/cat,
 		/mob/living/simple_animal/corgi,
 		/mob/living/simple_animal/corgi/puppy,
 		/mob/living/simple_animal/chicken,
 		/mob/living/simple_animal/cow,
 		/mob/living/simple_animal/hostile/retaliate/parrot,
-		/mob/living/simple_animal/slime,
 		/mob/living/simple_animal/crab,
 		/mob/living/simple_animal/mouse,
 		/mob/living/simple_animal/hostile/retaliate/goat,
-		/mob/living/simple_animal/hostile/retaliate/goose)
+		/mob/living/simple_animal/hostile/retaliate/goose
+	)
+
+/obj/machinery/auto_cloner/Initialize()
+	. = ..()
+	time_per_spawn = rand(1200,3600)
+	spawn_type = pick(prob(33) ? get_hostile_mob_types() : get_passive_mob_types())
 
 //todo: how the hell is the asteroid permanently powered?
 /obj/machinery/auto_cloner/Process()

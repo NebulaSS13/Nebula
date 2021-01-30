@@ -426,8 +426,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 					if(W.wet > 1 && slipperiness <= 0)
 						W.unwet_floor(FALSE)
 					W.clean_blood()
-					for(var/mob/living/carbon/slime/M in W)
-						M.adjustToxLoss(rand(5, 10))
 
 	if(length(vapor_products))
 		var/volume = REAGENT_VOLUME(holder, type)

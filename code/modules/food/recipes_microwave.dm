@@ -54,13 +54,6 @@ I said no!
 	)
 	result = /obj/item/chems/food/snacks/donut/jelly
 
-/datum/recipe/jellydonut/slime
-	reagents = list(/decl/material/liquid/slimejelly = 5, /decl/material/liquid/nutriment/sugar = 5)
-	items = list(
-		/obj/item/chems/food/snacks/dough
-	)
-	result = /obj/item/chems/food/snacks/donut/slimejelly
-
 /datum/recipe/jellydonut/cherry
 	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5, /decl/material/liquid/nutriment/sugar = 5)
 	items = list(
@@ -616,13 +609,6 @@ I said no!
 	items = list(/obj/item/chems/food/snacks/meat)
 	result = /obj/item/chems/food/snacks/stew
 
-/datum/recipe/slimetoast
-	reagents = list(/decl/material/liquid/slimejelly = 5)
-	items = list(
-		/obj/item/chems/food/snacks/slice/bread,
-	)
-	result = /obj/item/chems/food/snacks/jelliedtoast/slime
-
 /datum/recipe/jelliedtoast
 	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
 	items = list(
@@ -734,13 +720,6 @@ I said no!
 	items = list(/obj/item/chems/food/snacks/sliceable/flatdough)
 	result = /obj/item/chems/food/snacks/applepie
 
-/datum/recipe/slimeburger
-	reagents = list(/decl/material/liquid/slimejelly = 5)
-	items = list(
-		/obj/item/chems/food/snacks/bun
-	)
-	result = /obj/item/chems/food/snacks/jellyburger/slime
-
 /datum/recipe/jellyburger
 	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
 	items = list(
@@ -763,14 +742,6 @@ I said no!
 	)
 	result = /obj/item/chems/food/snacks/threebread
 
-/datum/recipe/slimesandwich
-	reagents = list(/decl/material/liquid/slimejelly = 5)
-	items = list(
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/slice/bread,
-	)
-	result = /obj/item/chems/food/snacks/jellysandwich/slime
-
 /datum/recipe/cherrysandwich
 	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
 	items = list(
@@ -782,11 +753,6 @@ I said no!
 /datum/recipe/bloodsoup
 	reagents = list(/decl/material/liquid/blood = 30)
 	result = /obj/item/chems/food/snacks/bloodsoup
-
-/datum/recipe/slimesoup
-	reagents = list(/decl/material/liquid/water = 10, /decl/material/liquid/slimejelly = 5)
-	items = list()
-	result = /obj/item/chems/food/snacks/slimesoup
 
 /datum/recipe/chocolateegg
 	items = list(

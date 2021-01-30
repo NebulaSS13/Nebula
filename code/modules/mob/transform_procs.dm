@@ -143,39 +143,6 @@
 	qdel(src) // Queues us for a hard delete
 	return O
 
-/mob/living/carbon/human/proc/slimeize(adult as num, reproduce as num)
-	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
-		return
-	for(var/obj/item/W in src)
-		drop_from_inventory(W)
-	regenerate_icons()
-	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
-	icon = null
-	set_invisibility(101)
-	for(var/t in organs)
-		qdel(t)
-
-	var/mob/living/carbon/slime/new_slime
-	if(reproduce)
-		var/number = pick(14;2,3,4)	//reproduce (has a small chance of producing 3 or 4 offspring)
-		var/list/babies = list()
-		for(var/i=1,i<=number,i++)
-			var/mob/living/carbon/slime/M = new/mob/living/carbon/slime(loc)
-			M.set_nutrition(round(nutrition/number))
-			step_away(M,src)
-			babies += M
-		new_slime = pick(babies)
-	else
-		new_slime = new /mob/living/carbon/slime(loc)
-		if(adult)
-			new_slime.is_adult = 1
-		else
-	new_slime.key = key
-
-	to_chat(new_slime, "<B>You are now a slime. Skreee!</B>")
-	qdel(src)
-	return
-
 /mob/living/carbon/human/proc/corgize()
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
