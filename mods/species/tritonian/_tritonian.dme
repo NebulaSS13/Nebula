@@ -1,5 +1,5 @@
 #ifndef MODPACK_TRITONIAN
 #define MODPACK_TRITONIAN
 #include "_tritonian.dm"
-#include "species.dm"
+#include "datum/species.dm"
 #endif

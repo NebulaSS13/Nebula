@@ -328,3 +328,7 @@
 	. += "[english_list(breathtype)] breathing"
 
 	return english_list(.)
+
+/obj/item/organ/internal/lungs/gills
+	name = "lungs and gills"
+	has_gills = TRUE
