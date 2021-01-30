@@ -112,9 +112,9 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	if(ishuman(user) && prob(60))
 		var/mob/living/carbon/human/H = user
 		if (blood_level)
-			H.bloody_hands(target,0)
+			H.bloody_hands(target,2)
 		if (blood_level > 1)
-			H.bloody_body(target,0)
+			H.bloody_body(target,2)
 	if(shock_level)
 		target.shock_stage = max(target.shock_stage, shock_level)
 
