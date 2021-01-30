@@ -418,8 +418,8 @@
 					drill_head = null
 					return
 
-				if(istype(target, /turf/simulated/wall/natural))
-					for(var/turf/simulated/wall/natural/M in range(target,1))
+				if(istype(target, /turf/exterior/wall))
+					for(var/turf/exterior/wall/M in range(target,1))
 						if(get_dir(owner,M)&owner.dir)
 							M.dismantle_wall()
 							drill_head.durability -= 1

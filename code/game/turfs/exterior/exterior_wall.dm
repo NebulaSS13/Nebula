@@ -3,26 +3,29 @@ var/list/default_material_by_strata_and_z = list()
 var/list/default_strata_types = list()
 var/list/natural_walls = list()
 
-/turf/simulated/wall/natural
+/turf/exterior/wall
 	name = "wall"
-	material = null
-	reinf_material = null
-	girder_material = null
-	construction_stage = -1
-	floor_type = /turf/exterior/barren
+	icon = 'icons/turf/walls/_previews.dmi'
 	icon_state = "natural"
-	handle_structure_blending = FALSE
+	density =    TRUE
+	opacity =    TRUE
+	density =    TRUE
+	blocks_air = TRUE
 	var/strata
+	var/paint_color
 	var/image/ore_overlay
+	var/decl/material/material
+	var/decl/material/reinf_material
+	var/floor_type = /turf/exterior/barren
 
-/turf/simulated/wall/natural/get_paint_examine_message()
-	. = SPAN_NOTICE("It has been <font color = '[paint_color]'>noticeably discoloured</font> by the elements.")
+/turf/exterior/wall/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if(paint_color)
+		to_chat(user, SPAN_NOTICE("It has been <font color = '[paint_color]'>noticeably discoloured</font> by the elements."))
 
-/turf/simulated/wall/natural/proc/set_strata_material()
-
+/turf/exterior/wall/proc/set_strata_material()
 	if(material)
 		return
-	
 	if(!strata)
 		if(!global.default_strata_type_by_z["[z]"])
 			if(!length(global.default_strata_types))
@@ -33,7 +36,6 @@ var/list/natural_walls = list()
 						global.default_strata_types += stype
 			global.default_strata_type_by_z["[z]"] = pick(global.default_strata_types)
 		strata = global.default_strata_type_by_z["[z]"]
-	
 	var/skey = "[strata]-[z]"
 	if(!global.default_material_by_strata_and_z[skey])
 		var/decl/strata/strata_info = decls_repository.get_decl(strata)
@@ -41,33 +43,69 @@ var/list/natural_walls = list()
 			global.default_material_by_strata_and_z[skey] = pick(strata_info.base_materials)
 	material = global.default_material_by_strata_and_z[skey]
 
-/turf/simulated/wall/natural/Initialize()
+/turf/exterior/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
+
+	..(ml)
+
+	// Clear mapping icons.
+	icon = 'icons/turf/walls/solid.dmi'
+	icon_state = "blank"
+	color = null
+
+	// Init materials.
 	set_strata_material()
-	. = ..()
 	global.natural_walls += src
 	set_extension(src, /datum/extension/geological_data)
+	if(!ispath(material, /decl/material))
+		material = materialtype || get_default_material()
+	if(ispath(material, /decl/material))
+		material = decls_repository.get_decl(material)
+	if(!ispath(reinf_material, /decl/material))
+		reinf_material = rmaterialtype
+	if(ispath(reinf_material, /decl/material))
+		reinf_material = decls_repository.get_decl(reinf_material)
+	. = INITIALIZE_HINT_LATELOAD
 
-/turf/simulated/wall/natural/LateInitialize()
+/turf/exterior/wall/LateInitialize()
 	..()
+	update_material()
 	spread_deposit()
 
-/turf/simulated/wall/natural/Destroy()
+/turf/exterior/wall/explosion_act(severity)
+	if(severity == 1 || (severity == 2 && prob(40)))
+		dismantle_wall()
+
+/turf/exterior/wall/Destroy()
 	global.natural_walls -= src
 	. = ..()
 
-/turf/simulated/wall/natural/proc/spread_deposit()
+/turf/exterior/wall/proc/set_material(var/decl/material/newmaterial, var/decl/material/newrmaterial)
+	material = newmaterial
+	if(ispath(material, /decl/material))
+		material = decls_repository.get_decl(material)
+	else if(!istype(material))
+		crash_with("Wall has been supplied non-material '[newmaterial]'.")
+		material = decls_repository.get_decl(get_default_material())
+	reinf_material = newrmaterial
+	if(ispath(reinf_material, /decl/material))
+		reinf_material = decls_repository.get_decl(reinf_material)
+	else if(!istype(reinf_material))
+		reinf_material = null
+	update_material()
+
+/turf/exterior/wall/proc/spread_deposit()
 	if(!istype(reinf_material) || reinf_material.ore_spread_chance <= 0)
 		return
 	for(var/trydir in GLOB.cardinal)
 		if(!prob(reinf_material.ore_spread_chance))
 			continue
-		var/turf/simulated/wall/natural/target_turf = get_step(src, trydir)
+		var/turf/exterior/wall/target_turf = get_step(src, trydir)
 		if(!istype(target_turf) || !isnull(target_turf.reinf_material))
 			continue
 		target_turf.set_material(target_turf.material, reinf_material)
 		target_turf.spread_deposit()
 
-/turf/simulated/wall/natural/attackby(obj/item/W, mob/user, click_params)
+/turf/exterior/wall/attackby(obj/item/W, mob/user, click_params)
 
 	if(!user.check_dexterity(DEXTERITY_COMPLEX_TOOLS))
 		return
@@ -97,11 +135,9 @@ var/list/natural_walls = list()
 			dismantle_wall()
 		return TRUE
 
-	// Do not allow repairing of natural walls.
-	if(!damage || !istype(W, /obj/item/weldingtool))
-		. = ..()
-	
-/turf/simulated/wall/natural/update_strings()
+	. = ..()
+
+/turf/exterior/wall/proc/update_strings()
 	if(reinf_material)
 		SetName("[reinf_material.solid_name] deposit")
 		desc = "A natural cliff face composed of bare [material.solid_name] and a deposit of [reinf_material.solid_name]."
@@ -109,29 +145,68 @@ var/list/natural_walls = list()
 		SetName("natural [material.solid_name] wall")
 		desc = "A natural cliff face composed of bare [material.solid_name]."
 
-/turf/simulated/wall/natural/update_material()
-	. = ..()
-	girder_material = null
+/turf/exterior/wall/proc/update_material()
+	if(!material)
+		material = decls_repository.get_decl(get_default_material())
+	if(material)
+		explosion_resistance = material.explosion_resistance
+	if(reinf_material && reinf_material.explosion_resistance > explosion_resistance)
+		explosion_resistance = reinf_material.explosion_resistance
+	update_strings()
+	set_opacity(material.opacity >= 0.5)
+	for(var/turf/exterior/T in RANGE_TURFS(src, 1))
+		T.queue_icon_update()
 	if(reinf_material?.ore_icon_overlay)
 		ore_overlay = image('icons/turf/mining_decals.dmi', "[reinf_material.ore_icon_overlay]")
 		ore_overlay.appearance_flags = RESET_COLOR
+		var/matrix/M
 		if(prob(50))
-			var/matrix/M = matrix()
+			M = M || matrix()
 			M.Scale(-1,1)
-			ore_overlay.transform = M
+		if(prob(75))
+			M = M || matrix()
+			M.Turn(pick(90, 180, 270))
 		ore_overlay.color = reinf_material.color
 		ore_overlay.layer = DECAL_LAYER
+		if(M)
+			ore_overlay.transform = M
 
-/turf/simulated/wall/natural/on_update_icon()
-	. = ..()
-	if(wall_connections && material?.reflectiveness > 0)
-		var/max_shine = 0.6 * ReadHSV(RGBtoHSV(material.color))[3] // patened formula based on color's Value (in HSV)
-		var/shine = Clamp((material.reflectiveness * 0.01) * 255, 10, max_shine)
-		for(var/i = 1 to 4)
-			var/image/I = image(get_wall_icon(), "shine[wall_connections[i]]", dir = 1<<(i-1))
+/turf/exterior/wall/on_update_icon()
+
+	cut_overlays()
+
+	if(!istype(material))
+		return
+
+	var/list/wall_connections = list()
+	for(var/stepdir in GLOB.alldirs)
+		var/turf/exterior/wall/T = get_step(src, stepdir)
+		if(istype(T))
+			wall_connections += get_dir(src, T)
+	wall_connections = dirs_to_corner_states(wall_connections)
+
+	var/material_icon_base = material.icon_base_natural || 'icons/turf/walls/natural.dmi'
+	var/base_color = paint_color ? paint_color : material.color
+
+	var/max_shine
+	var/shine
+	if(material?.reflectiveness > 0)
+		max_shine = 0.6 * ReadHSV(RGBtoHSV(material.color))[3] // patened formula based on color's Value (in HSV)
+		shine = Clamp((material.reflectiveness * 0.01) * 255, 10, max_shine)
+
+	var/image/I
+	for(var/i = 1 to 4)
+		var/apply_state = "[wall_connections[i]]"
+		if(check_state_in_icon(apply_state, material_icon_base))
+			I = image(material_icon_base, apply_state, dir = 1<<(i-1))
+			I.color = base_color
+			add_overlay(I)
+		if(shine)
+			I = image(material_icon_base, "shine[wall_connections[i]]", dir = 1<<(i-1))
 			I.appearance_flags |= RESET_ALPHA
 			I.alpha = shine
 			add_overlay(I)
+
 	if(ore_overlay)
 		add_overlay(ore_overlay)
 	if(excav_overlay)
@@ -139,30 +214,22 @@ var/list/natural_walls = list()
 	if(archaeo_overlay)
 		add_overlay(archaeo_overlay)
 
-/turf/simulated/wall/natural/dismantle_wall(var/devastated, var/explode, var/no_product)
+/turf/exterior/wall/proc/dismantle_wall()
 	if(reinf_material?.ore_result_amount)
 		for(var/i = 1 to reinf_material.ore_result_amount)
 			pass_geodata_to(new /obj/item/ore(src, reinf_material.type))
 	destroy_artifacts(null, INFINITY)
-	. = ..(no_product = TRUE)
+	playsound(src, 'sound/items/Welder.ogg', 100, 1)
+	. = ChangeTurf(floor_type || get_base_turf_by_area(src))
 	if(istype(., /turf/simulated/floor/asteroid))
 		var/turf/simulated/floor/asteroid/debris = .
 		debris.overlay_detail = "asteroid[rand(0,9)]"
 		debris.updateMineralOverlays(1)
 
-/turf/simulated/wall/natural/get_wall_icon()
-	. = material.icon_base_natural || 'icons/turf/walls/natural.dmi'
-
-/turf/simulated/wall/natural/get_default_material()
+/turf/exterior/wall/proc/get_default_material()
 	. = /decl/material/solid/stone/sandstone
 
-/turf/simulated/wall/natural/apply_reinf_overlay()
-	. = FALSE
-
-/turf/simulated/wall/natural/can_join_with(var/turf/simulated/wall/W)
-	. = (istype(W, /turf/simulated/wall/natural) && W.material?.type != /decl/material/placeholder && material?.type != /decl/material/placeholder)
-
-/turf/simulated/wall/natural/Bumped(AM)
+/turf/exterior/wall/Bumped(AM)
 	. = ..()
 	if(ismob(AM))
 		var/mob/M = AM
@@ -170,7 +237,7 @@ var/list/natural_walls = list()
 		if(istype(held))
 			attackby(held, M)
 
-/turf/simulated/wall/natural/proc/pass_geodata_to(obj/O)
+/turf/exterior/wall/proc/pass_geodata_to(obj/O)
 	var/datum/extension/geological_data/ours = get_extension(src, /datum/extension/geological_data)
 	ours.geodata.UpdateNearbyArtifactInfo(src)
 	set_extension(O, /datum/extension/geological_data)

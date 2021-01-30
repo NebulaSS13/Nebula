@@ -15,7 +15,7 @@
 /turf/simulated/floor/grass,
 /area/mobius_rift)
 "f" = (
-/turf/simulated/wall/natural/random/high_chance,
+/turf/exterior/wall/random/high_chance,
 /area/mobius_rift)
 "g" = (
 /turf/space,
