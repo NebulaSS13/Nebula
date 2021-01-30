@@ -206,7 +206,7 @@
 				take_damage(W.force * 0.1)
 	..()
 
-/obj/structure/grille/physically_destroyed()
+/obj/structure/grille/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)
 	if(!destroyed)
 		visible_message(SPAN_DANGER("\The [src] falls to pieces!"))

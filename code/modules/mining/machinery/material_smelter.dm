@@ -6,7 +6,7 @@
 	icon_state = "furnace"
 	use_ui_template = "material_processing_smeltery.tmpl"
 	var/list/casting
-	var/list/always_show_materials = list(
+	var/list/show_materials = list(
 		/decl/material/solid/metal/iron,
 		/decl/material/solid/metal/gold,
 		/decl/material/solid/metal/uranium,
@@ -58,6 +58,8 @@
 					eating.dropInto(output_turf)
 				continue
 			eaten++
+			if(eating.reagents?.total_volume)
+				eating.reagents.trans_to_obj(src, Floor(eating.reagents.total_volume * 0.75)) // liquid reagents, lossy
 			for(var/mtype in eating.matter)
 				reagents.add_reagent(mtype, Floor(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
 			qdel(eating)
@@ -106,16 +108,18 @@
 	var/list/data = ..()
 	data["is_alloying"] = !(atom_flags & ATOM_FLAG_NO_REACT)
 	var/list/materials = list()
-	var/list/show_mats = always_show_materials.Copy()
-	for(var/rtype in reagents.reagent_volumes)
-		show_mats |= rtype
-	for(var/mtype in show_mats)
+	for(var/mtype in show_materials)
 		var/decl/material/mat = decls_repository.get_decl(mtype)
 		var/ramt = REAGENT_VOLUME(reagents, mtype) || 0
 		var/samt = Floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
 		materials += list(list("label" = "[ramt]u [mat.solid_name] ([samt] ingot\s)", "casting" = (mtype in casting), "key" = "\ref[mat]"))
 		data["materials"] = materials
 	return data
+
+/obj/machinery/material_processing/smeltery/on_reagent_change()
+	. = ..()
+	for(var/mtype in reagents?.reagent_volumes)
+		show_materials |= mtype
 
 #undef MAX_INTAKE_ORE_PER_TICK
 #undef MAX_ORE_REAGENT_CONTENTS

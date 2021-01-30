@@ -43,7 +43,7 @@ var/global/list/image/splatter_cache=list()
 		amount = 0
 		STOP_PROCESSING(SSobj, src)
 		remove_extension(src, /datum/extension/scent)
-	..(ignore=1)
+	 . = ..(ignore = TRUE)
 
 /obj/effect/decal/cleanable/blood/hide()
 	return

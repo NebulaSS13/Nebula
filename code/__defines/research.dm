@@ -22,5 +22,3 @@
 #define TECH_MAGNET        "magnets"
 #define TECH_DATA          "programming"
 #define TECH_ESOTERIC      "esoteric"
-
-#define T_BOARD(name)	"circuit board (" + (name) + ")"

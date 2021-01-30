@@ -38,8 +38,8 @@
 /obj/effect/decal/cleanable/clean_blood(var/ignore = 0)
 	if(!ignore)
 		qdel(src)
-		return
-	..()
+		return TRUE
+	. = ..()
 
 /obj/effect/decal/cleanable/proc/set_cleanable_scent()
 	if(cleanable_scent)

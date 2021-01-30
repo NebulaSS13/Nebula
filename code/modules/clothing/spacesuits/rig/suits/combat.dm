@@ -2,6 +2,7 @@
 	name = "combat hardsuit control module"
 	desc = "A sleek and dangerous hardsuit for active combat."
 	suit_type = "combat hardsuit"
+	icon = 'icons/clothing/rigs/rig_security.dmi'
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_RIFLE,
@@ -39,20 +40,21 @@
 		/obj/item/suit_cooling_unit
 	)
 
-	chest_type = /obj/item/clothing/suit/space/rig/combat
-	helm_type = /obj/item/clothing/head/helmet/space/rig/combat
-	boot_type = /obj/item/clothing/shoes/magboots/rig/combat
-	glove_type = /obj/item/clothing/gloves/rig/combat
+	chest =  /obj/item/clothing/suit/space/rig/combat
+	helmet = /obj/item/clothing/head/helmet/space/rig/combat
+	boots =  /obj/item/clothing/shoes/magboots/rig/combat
+	gloves = /obj/item/clothing/gloves/rig/combat
 
 /obj/item/clothing/head/helmet/space/rig/combat
 	light_overlay = "helmet_light_dual_green"
-
+	icon = 'icons/clothing/rigs/helmets/helmet_security.dmi'
 /obj/item/clothing/suit/space/rig/combat
-
+	icon = 'icons/clothing/rigs/chests/chest_security.dmi'
 /obj/item/clothing/shoes/magboots/rig/combat
-
+	icon = 'icons/clothing/rigs/boots/boots_security.dmi'
 /obj/item/clothing/gloves/rig/combat
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
+	icon = 'icons/clothing/rigs/gloves/gloves_security.dmi'
 
 /obj/item/rig/combat/equipped
 	initial_modules = list(
@@ -71,7 +73,7 @@
 /obj/item/rig/military
 	name = "military hardsuit control module"
 	desc = "An austere hardsuit used by paramilitary groups and real soldiers alike."
-	icon = 'icons/clothing/spacesuit/rig/military.dmi'
+	icon = 'icons/clothing/rigs/rig_military.dmi'
 	suit_type = "military hardsuit"
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
@@ -110,20 +112,21 @@
 		/obj/item/suit_cooling_unit
 	)
 
-	chest_type = /obj/item/clothing/suit/space/rig/military
-	helm_type = /obj/item/clothing/head/helmet/space/rig/military
-	boot_type = /obj/item/clothing/shoes/magboots/rig/military
-	glove_type = /obj/item/clothing/gloves/rig/military
+	chest =  /obj/item/clothing/suit/space/rig/military
+	helmet = /obj/item/clothing/head/helmet/space/rig/military
+	boots =  /obj/item/clothing/shoes/magboots/rig/military
+	gloves = /obj/item/clothing/gloves/rig/military
 
 /obj/item/clothing/head/helmet/space/rig/military
 	light_overlay = "helmet_light_dual_green"
-
+	icon = 'icons/clothing/rigs/helmets/helmet_military.dmi'
 /obj/item/clothing/suit/space/rig/military
-
+	icon = 'icons/clothing/rigs/chests/chest_military.dmi'
 /obj/item/clothing/shoes/magboots/rig/military
-
+	icon = 'icons/clothing/rigs/boots/boots_military.dmi'
 /obj/item/clothing/gloves/rig/military
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
+	icon = 'icons/clothing/rigs/gloves/gloves_military.dmi'
 
 /obj/item/rig/military/equipped
 	initial_modules = list(

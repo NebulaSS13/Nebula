@@ -47,6 +47,7 @@
 		. += new/datum/stack_recipe/furniture/barricade(src)
 		. += new/datum/stack_recipe/furniture/stool(src)
 		. += new/datum/stack_recipe/furniture/bar_stool(src)
+		. += new/datum/stack_recipe/furniture/coatrack(src)
 		. += new/datum/stack_recipe/furniture/bed(src)
 		. += new/datum/stack_recipe/furniture/pew(src)
 		. += new/datum/stack_recipe/furniture/pew_left(src)

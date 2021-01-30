@@ -186,21 +186,18 @@
 #define BP_VOICE             "vocal synthesiser"
 #define BP_STACK             "stack"
 #define BP_OPTICS            "optics"
-#define BP_FLOAT             "floatation disc"
-#define BP_JETS              "maneuvering jets"
-#define BP_COOLING_FINS      "cooling fins"
 #define BP_SYSTEM_CONTROLLER "system controller"
 
 //Augmetations
-#define BP_AUGMENT_R_ARM         "right arm augment"
-#define BP_AUGMENT_L_ARM         "left arm augment"
-#define BP_AUGMENT_R_HAND        "right hand augment"
-#define BP_AUGMENT_L_HAND        "left hand augment"
-#define BP_AUGMENT_R_LEG         "right leg augment"
-#define BP_AUGMENT_L_LEG         "left leg augment"
-#define BP_AUGMENT_CHEST_ARMOUR   "chest armor augment"
-#define BP_AUGMENT_CHEST_ACTIVE  "active chest augment"
-#define BP_AUGMENT_HEAD           "head augment"
+#define BP_AUGMENT_R_ARM        "right arm augment"
+#define BP_AUGMENT_L_ARM        "left arm augment"
+#define BP_AUGMENT_R_HAND       "right hand augment"
+#define BP_AUGMENT_L_HAND       "left hand augment"
+#define BP_AUGMENT_R_LEG        "right leg augment"
+#define BP_AUGMENT_L_LEG        "left leg augment"
+#define BP_AUGMENT_CHEST_ARMOUR "chest armor augment"
+#define BP_AUGMENT_CHEST_ACTIVE "active chest augment"
+#define BP_AUGMENT_HEAD         "head augment"
 
 //Augment flags
 #define AUGMENTATION_MECHANIC 1
@@ -258,9 +255,9 @@
 #define SPECIES_ALIEN            "Humanoid"
 #define SPECIES_GOLEM            "Golem"
 
-#define BODYTYPE_HUMANOID        "Humanoid Body"
-#define BODYTYPE_OTHER           "Alien Body"
-#define BODYTYPE_MONKEY          "Small Humanoid Body"
+#define BODYTYPE_HUMANOID        "humanoid body"
+#define BODYTYPE_OTHER           "alien body"
+#define BODYTYPE_MONKEY          "small humanoid body"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1

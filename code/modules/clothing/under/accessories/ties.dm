@@ -45,11 +45,14 @@
 
 /obj/item/clothing/accessory/bowtie/on_attached(obj/item/clothing/under/S, mob/user)
 	..()
-	has_suit.verbs += /obj/item/clothing/accessory/bowtie/verb/toggle
+	var/obj/item/clothing/suit = loc
+	if(istype(suit))
+		suit.verbs += /obj/item/clothing/accessory/bowtie/verb/toggle
 
 /obj/item/clothing/accessory/bowtie/on_removed(mob/user)
-	if(has_suit)
-		has_suit.verbs -= /obj/item/clothing/accessory/bowtie/verb/toggle
+	var/obj/item/clothing/suit = loc
+	if(istype(suit))
+		suit.verbs -= /obj/item/clothing/accessory/bowtie/verb/toggle
 	..()
 
 /obj/item/clothing/accessory/bowtie/verb/toggle()

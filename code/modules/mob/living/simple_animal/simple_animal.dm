@@ -91,6 +91,8 @@
 	. = ..()
 	if(LAZYLEN(natural_armor))
 		set_extension(src, armor_type, natural_armor)
+	if(holder_type)
+		set_extension(src, /datum/extension/base_icon_state, icon_living || icon_state)
 
 /mob/living/simple_animal/Destroy()
 	if(istype(natural_weapon))

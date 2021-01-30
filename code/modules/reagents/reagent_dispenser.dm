@@ -85,7 +85,7 @@
 	if (N)
 		amount_per_transfer_from_this = N
 
-/obj/structure/reagent_dispensers/physically_destroyed()
+/obj/structure/reagent_dispensers/physically_destroyed(var/skip_qdel)
 	if(reagents?.total_volume)
 		var/turf/T = get_turf(src)
 		if(T)

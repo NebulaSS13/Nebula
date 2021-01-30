@@ -2278,10 +2278,6 @@
 /obj/item/storage/pill_bottle/burn_meds,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
-"eh" = (
-/obj/effect/paint/brown,
-/turf/simulated/wall/r_wall,
-/area/ship/scrap/maintenance/engine/starboard)
 "ei" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
@@ -2834,19 +2830,6 @@
 	},
 /turf/simulated/floor/usedup,
 /area/space)
-"eS" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
-	dir = 4
-	},
-/obj/machinery/door/airlock/autoname/engineering/bearcat,
-/turf/simulated/floor/usedup,
-/area/ship/scrap/maintenance/engine/starboard)
 "eT" = (
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -3262,19 +3245,6 @@
 /obj/effect/paint/red,
 /turf/simulated/wall,
 /area/ship/scrap/maintenance/engine/starboard)
-"fC" = (
-/obj/machinery/atmospherics/unary/engine{
-	icon_state = "nozzle";
-	dir = 1
-	},
-/turf/simulated/floor/usedup,
-/area/ship/scrap/maintenance/engine/starboard)
-"fD" = (
-/obj/effect/floor_decal/industrial/warning,
-/obj/structure/sign/warning/hot_exhaust,
-/obj/effect/paint/red,
-/turf/simulated/wall/r_wall,
-/area/ship/scrap/maintenance/engine/starboard)
 "fE" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -3283,19 +3253,8 @@
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/turf/space,
-/area/space)
-"fF" = (
-/obj/structure/lattice,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id_tag = "scraplock";
-	name = "External Blast Doors";
-	opacity = 0
-	},
-/turf/space,
-/area/space)
+/turf/simulated/floor/airless,
+/area/ship/scrap/maintenance/engine/port)
 "fG" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -5011,10 +4970,6 @@
 /obj/machinery/atmospherics/portables_connector,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
-"iz" = (
-/obj/machinery/atmospherics/portables_connector,
-/turf/simulated/floor/airless,
-/area/ship/scrap/maintenance/engine/aft)
 "iA" = (
 /obj/structure/closet/radiation,
 /obj/machinery/button/blast_door{
@@ -5719,6 +5674,23 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/hallway/port)
+"oR" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
+	},
+/turf/simulated/floor/airless,
+/area/ship/scrap/maintenance/engine/starboard)
+"rH" = (
+/obj/machinery/atmospherics/unary/engine{
+	icon_state = "nozzle";
+	dir = 1
+	},
+/turf/simulated/floor/usedup,
+/area/ship/scrap/maintenance/engine/starboard)
 "so" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -5757,6 +5729,11 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/maintenance/atmos)
+"xs" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/paint/red,
+/turf/simulated/wall/r_wall,
+/area/ship/scrap/maintenance/engine/starboard)
 "xU" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -5772,7 +5749,20 @@
 /obj/effect/floor_decal/industrial/warning,
 /obj/effect/paint/red,
 /turf/simulated/wall/r_wall,
-/area/space)
+/area/ship/scrap/maintenance/engine/port)
+"Cy" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 4
+	},
+/obj/machinery/door/airlock/autoname/engineering/bearcat,
+/turf/simulated/floor/usedup,
+/area/ship/scrap/maintenance/engine/starboard)
 "Dr" = (
 /obj/structure/closet/secure_closet/engineering_electrical/bearcat,
 /obj/item/cell/device/standard,
@@ -5860,6 +5850,12 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/dock)
+"LS" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/structure/sign/warning/hot_exhaust,
+/obj/effect/paint/red,
+/turf/simulated/wall/r_wall,
+/area/ship/scrap/maintenance/engine/starboard)
 "LW" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -5937,6 +5933,10 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/wash)
+"UD" = (
+/obj/effect/paint/brown,
+/turf/simulated/wall/r_wall,
+/area/ship/scrap/maintenance/engine/starboard)
 "Va" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -11273,8 +11273,8 @@ aa
 aa
 aa
 aa
-xU
-xU
+dR
+dR
 Cs
 aa
 aa
@@ -11764,7 +11764,7 @@ dR
 eC
 dR
 fk
-fF
+fE
 bY
 aa
 aa
@@ -13483,7 +13483,7 @@ JC
 hH
 hY
 ij
-iz
+iy
 iL
 ja
 jl
@@ -14444,11 +14444,11 @@ aa
 aa
 aa
 bY
-eh
-eS
+UD
+Cy
 fh
 fB
-fF
+oR
 aa
 aa
 aa
@@ -14565,11 +14565,11 @@ aa
 aa
 aa
 aa
-eh
-eh
+UD
+UD
 eT
 fi
-fC
+rH
 aa
 aa
 aa
@@ -14687,11 +14687,11 @@ aa
 aa
 aa
 aa
-eh
-eh
+UD
+UD
 eU
 fj
-fC
+rH
 aa
 aa
 aa
@@ -14810,11 +14810,11 @@ aa
 aa
 aa
 aa
-eh
-eh
-eh
-fD
-fE
+UD
+UD
+UD
+LS
+oR
 aa
 aa
 aa
@@ -14933,9 +14933,9 @@ aa
 aa
 aa
 aa
-xU
-xU
-Cs
+UD
+UD
+xs
 aa
 aa
 aa

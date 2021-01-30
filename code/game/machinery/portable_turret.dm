@@ -401,7 +401,7 @@ var/list/turret_icons
 	. = ..()
 	if(. && !QDELETED(src))
 		if(severity == 1 || (severity == 2 && prob(25)))
-			physically_destroyed(src)
+			physically_destroyed()
 		else if(severity == 2)
 			take_damage(initial(health) * 8)
 		else

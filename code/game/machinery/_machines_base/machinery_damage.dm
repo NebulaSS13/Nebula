@@ -69,7 +69,6 @@
 	if(!QDELETED(src))
 		if((severity == 1 || (severity == 2 && prob(25))))
 			physically_destroyed()
-			qdel(src)
 		else
 			take_damage(100/severity, BRUTE, TRUE)
 

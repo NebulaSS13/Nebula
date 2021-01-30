@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/shipsensors
-	name = T_BOARD("ship sensors")
+	name = "circuitboard (ship sensors)"
 	build_path = /obj/machinery/shipsensors
 	board_type = "machine"
 	origin_tech = "{'wormholes':2,'programming':2}"

@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/shuttle_console
-	name = T_BOARD("basic shuttle console")
+	name = "circuitboard (basic shuttle console)"
 	build_path = /obj/machinery/computer/shuttle_control
 	origin_tech = "{'programming':3}"
 	var/shuttle_tag
@@ -18,7 +18,7 @@
 	return TRUE
 
 /obj/item/stock_parts/circuitboard/shuttle_console/explore
-	name = T_BOARD("long range shuttle console")
+	name = "circuitboard (long range shuttle console)"
 	build_path = /obj/machinery/computer/shuttle_control/explore
 
 /obj/item/stock_parts/circuitboard/shuttle_console/explore/is_valid_shuttle(datum/shuttle/shuttle)

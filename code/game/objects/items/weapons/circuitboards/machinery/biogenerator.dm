@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/biogenerator
-	name = T_BOARD("biogenerator")
+	name = "circuitboard (biogenerator)"
 	build_path = /obj/machinery/biogenerator
 	board_type = "machine"
 	origin_tech = "{'programming':2}"

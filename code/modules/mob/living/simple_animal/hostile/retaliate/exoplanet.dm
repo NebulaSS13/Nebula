@@ -26,18 +26,22 @@
 	hunger++
 	if(hunger < 100) //stop hunting when satiated
 		prey.Cut()
-	else
+	else if(stat == CONSCIOUS)
 		for(var/mob/living/simple_animal/S in range(src,1))
-			if(S.stat == DEAD)
-				visible_message("[src] consumes \the body of [S]!")
-				var/turf/T = get_turf(S)
-				var/obj/item/remains/xeno/X = new(T)
-				X.desc += "These look like they belong to \a [S.name]."
-				hunger = max(0, hunger - 5*S.maxHealth)
-				if(prob(5))
-					S.gib()
-				else
-					qdel(S)
+			if(S == src)
+				continue
+			if(S.stat != DEAD)
+				continue
+			visible_message(SPAN_DANGER("\The [src] consumes the body of \the [S]!"))
+			var/turf/T = get_turf(S)
+			var/obj/item/remains/xeno/X = new(T)
+			X.desc += "These look like they belong to \a [S.name]."
+			hunger = max(0, hunger - 5*S.maxHealth)
+			if(prob(5))
+				S.gib()
+			else
+				qdel(S)
+			return
 
 /mob/living/simple_animal/proc/name_species()
 	set name = "Name Alien Species"

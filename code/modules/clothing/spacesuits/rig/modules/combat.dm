@@ -48,7 +48,7 @@
 
 /obj/item/rig_module/device/flash/installed()
 	. = ..()
-	if(!holder.glove_type)//gives select option for gloveless suits, why even use rig at this point
+	if(!holder.gloves)//gives select option for gloveless suits, why even use rig at this point
 		selectable = 1
 		activates_on_touch = 0
 		toggleable = 0

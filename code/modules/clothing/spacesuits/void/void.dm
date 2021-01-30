@@ -22,7 +22,6 @@
 /obj/item/clothing/suit/space/void
 	name = "voidsuit"
 	icon = 'icons/clothing/spacesuit/void/nasa/suit.dmi'
-	item_state_slots = null
 	bodytype_restricted = list(BODYTYPE_HUMANOID)
 	w_class = ITEM_SIZE_HUGE//bulky item
 	desc = "A high-tech dark red space suit. Used for AI satellite maintenance."

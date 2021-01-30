@@ -5,11 +5,6 @@
 	action_button_name = "Install Boosters"
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/cerebro.dmi'
-	item_state_slots = list(
-		BP_L_HAND = "helmet",
-		BP_R_HAND = "helmet"
-		)
-
 	var/operating = FALSE
 	var/list/boosted_faculties
 	var/boosted_rank = PSI_RANK_PARAMOUNT

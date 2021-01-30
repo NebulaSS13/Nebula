@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/floodlight
-	name = T_BOARD("emergency floodlight")
+	name = "circuitboard (emergency floodlight)"
 	build_path = /obj/machinery/floodlight
 	board_type = "machine"
 	origin_tech = "{'engineering':1}"
@@ -11,7 +11,7 @@
 		/obj/item/cell/crap = 1)
 
 /obj/item/stock_parts/circuitboard/pipedispensor
-	name = T_BOARD("pipe dispenser")
+	name = "circuitboard (pipe dispenser)"
 	build_path = /obj/machinery/fabricator/pipe
 	board_type = "machine"
 	origin_tech = "{'engineering':6,'materials':5}"
@@ -24,11 +24,11 @@
 		/obj/item/stock_parts/power/apc/buildable = 1)
 
 /obj/item/stock_parts/circuitboard/pipedispensor/disposal
-	name = T_BOARD("disposal pipe dispenser")
+	name = "circuitboard (disposal pipe dispenser)"
 	build_path = /obj/machinery/fabricator/pipe/disposal
 
 /obj/item/stock_parts/circuitboard/suit_cycler
-	name = T_BOARD("suit cycler")
+	name = "circuitboard (suit cycler)"
 	build_path = /obj/machinery/suit_cycler
 	board_type = "machine"
 	origin_tech = "{'engineering':4,'materials':4}"

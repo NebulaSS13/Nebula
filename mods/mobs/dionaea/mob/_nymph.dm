@@ -69,6 +69,7 @@
 
 /mob/living/carbon/alien/diona/Initialize(var/mapload, var/flower_chance = 15)
 
+	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	add_language(/decl/language/diona)
 	add_language(/decl/language/human/common, 0)
 

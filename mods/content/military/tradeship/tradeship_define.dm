@@ -41,7 +41,3 @@
 
 /datum/map/tradeship/setup_map()
 	..()
-	SStrade.traders += new /datum/trader/xeno_shop
-	SStrade.traders += new /datum/trader/medical
-	SStrade.traders += new /datum/trader/mining
-	SStrade.traders += new /datum/trader/books

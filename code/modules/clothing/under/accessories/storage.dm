@@ -5,7 +5,7 @@
 	slot = ACCESSORY_SLOT_UTILITY
 	w_class = ITEM_SIZE_NORMAL
 	high_visibility = 1
-	on_rolled = list("down" = "none")
+	hide_on_uniform_rolldown = TRUE
 	var/slots = 3
 	var/max_w_class = ITEM_SIZE_SMALL //pocket sized
 	var/obj/item/storage/internal/pockets/hold
@@ -18,7 +18,8 @@
 	hold = new/obj/item/storage/internal/pockets(src, slots, max_w_class)
 
 /obj/item/clothing/accessory/storage/attack_hand(mob/user)
-	if(has_suit && hold)	//if we are part of a suit
+	var/obj/item/clothing/suit = loc
+	if(istype(suit) && hold)	//if we are part of a suit
 		hold.open(user)
 		return
 
@@ -26,7 +27,8 @@
 		..(user)
 
 /obj/item/clothing/accessory/storage/MouseDrop(obj/over_object)
-	if(has_suit)
+	var/obj/item/clothing/suit = loc
+	if(istype(suit))
 		return
 
 	if(hold && hold.handle_mousedrop(usr, over_object))

@@ -30,7 +30,7 @@
 	else
 		to_chat(user, SPAN_DANGER("It is on the verge of breaking apart!"))
 
-/obj/structure/defensive_barrier/physically_destroyed()
+/obj/structure/defensive_barrier/physically_destroyed(var/skip_qdel)
 	visible_message(SPAN_DANGER("\The [src] was destroyed!"))
 	playsound(src, 'sound/effects/clang.ogg', 100, 1)
 	. = ..()

@@ -37,6 +37,16 @@
 
 	. = ..()
 
+/obj/machinery/atmospherics/unary/physically_destroyed()
+	if(loc && air_contents)
+		loc.assume_air(air_contents)
+	. = ..()	
+
+/obj/machinery/atmospherics/unary/dismantle()
+	if(loc && air_contents)
+		loc.assume_air(air_contents)
+	. = ..()	
+
 /obj/machinery/atmospherics/unary/atmos_init()
 	..()
 	if(node) return

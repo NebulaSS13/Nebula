@@ -40,7 +40,7 @@ MANTIDIFY(/obj/machinery/alarm, "mantid thermostat", "atmospherics")
 	)
 
 /obj/item/stock_parts/circuitboard/air_alarm/ascent
-	name = T_BOARD("ascent air alarm")
+	name = "circuitboard (ascent air alarm)"
 	build_path = /obj/machinery/alarm/ascent
 
 /datum/fabricator_recipe/engineering/airalarm/ascent

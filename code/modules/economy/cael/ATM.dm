@@ -79,7 +79,7 @@
 		return 1
 
 /obj/machinery/atm/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/card))
+	if(istype(I, /obj/item/card/id))
 		if(emagged > 0)
 			//prevent inserting id into an emagged ATM
 			to_chat(user, "[html_icon(src)] <span class='warning'>CARD READER ERROR. This system has been compromised!</span>")
@@ -292,7 +292,7 @@
 						if(D)
 							account_security_level = D.security_level
 
-					authenticated_account = attempt_account_access(tried_account_num, tried_pin, held_card && login_card.associated_account_number == tried_account_num ? 2 : 1)
+					authenticated_account = attempt_account_access(tried_account_num, tried_pin, login_card && login_card.associated_account_number == tried_account_num ? 2 : 1)
 
 					if(!authenticated_account)
 						number_incorrect_tries++

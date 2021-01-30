@@ -10,7 +10,6 @@ ranks - general
 	name = "ranks"
 	desc = "Insignia denoting rank of some kind. These appear blank."
 	icon = 'mods/content/military/icons/accessories/ranks_ntsfod.dmi'
-	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_RANK
 	gender = PLURAL
 	high_visibility = 1
@@ -42,7 +41,6 @@ ranks - general
 	name = "armsman ranks"
 	desc = "Insignia denoting rank of some kind. These appear blank."
 	icon = 'mods/content/military/icons/accessories/ranks_armsmen_e1.dmi'
-	on_rolled = list("down" = "none")
 
 //Enlisted ranks//
 /obj/item/clothing/accessory/solgov/rank/arm/enlisted
