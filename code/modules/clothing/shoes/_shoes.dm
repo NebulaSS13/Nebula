@@ -12,15 +12,16 @@
 	permeability_coefficient = 0.50
 	force = 2
 	blood_overlay_type = "shoeblood"
-	var/overshoes = 0
+	material = /decl/material/solid/leather
+	origin_tech = "{'materials':1,'engineering':1}"
+
+	var/can_fit_under_magboots = TRUE
 	var/can_add_cuffs = TRUE
 	var/obj/item/handcuffs/attached_cuffs = null
 	var/can_add_hidden_item = TRUE
 	var/hidden_item_max_w_class = ITEM_SIZE_SMALL
 	var/obj/item/hidden_item = null
 	var/shine = -1 // if material should apply shine overlay. Set to -1 for it to not do that
-	material = /decl/material/solid/leather
-	origin_tech = "{'materials':1,'engineering':1}"
 
 /obj/item/clothing/shoes/Destroy()
 	. = ..()
