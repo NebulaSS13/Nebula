@@ -33,7 +33,6 @@
 
 /obj/item/projectile/beam/variable/update_effect(var/obj/effect/projectile/effect)
 	effect.color = color
-	effect.light_color = color
 	effect.set_light(l_color = effect.light_color)
 
 /obj/item/projectile/beam/variable/split
