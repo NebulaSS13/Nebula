@@ -21,7 +21,7 @@ var/list/floor_light_cache = list()
 	var/default_light_max_bright = 0.75
 	var/default_light_inner_range = 1
 	var/default_light_outer_range = 3
-	var/default_light_colour = "#ffffff"
+	var/default_light_color = "#ffffff"
 
 /obj/machinery/floor_light/prebuilt
 	anchored = 1
@@ -93,8 +93,8 @@ var/list/floor_light_cache = list()
 
 /obj/machinery/floor_light/proc/update_brightness()
 	if((use_power == POWER_USE_ACTIVE) && !(stat & (NOPOWER | BROKEN)))
-		if(light_outer_range != default_light_outer_range || light_max_bright != default_light_max_bright || light_color != default_light_colour)
-			set_light(default_light_max_bright, default_light_inner_range, default_light_outer_range, l_color = default_light_colour)
+		if(light_outer_range != default_light_outer_range || light_max_bright != default_light_max_bright || light_color != default_light_color)
+			set_light(default_light_max_bright, default_light_inner_range, default_light_outer_range, l_color = default_light_color)
 			change_power_consumption((light_outer_range + light_max_bright) * 20, POWER_USE_ACTIVE)
 	else
 		if(light_outer_range || light_max_bright)
@@ -104,10 +104,10 @@ var/list/floor_light_cache = list()
 	overlays.Cut()
 	if((use_power == POWER_USE_ACTIVE) && !(stat & (NOPOWER | BROKEN)))
 		if(isnull(damaged))
-			var/cache_key = "floorlight-[default_light_colour]"
+			var/cache_key = "floorlight-[default_light_color]"
 			if(!floor_light_cache[cache_key])
 				var/image/I = image("on")
-				I.color = default_light_colour
+				I.color = default_light_color
 				I.plane = plane
 				I.layer = layer+0.001
 				floor_light_cache[cache_key] = I
@@ -115,10 +115,10 @@ var/list/floor_light_cache = list()
 		else
 			if(damaged == 0) //Needs init.
 				damaged = rand(1,4)
-			var/cache_key = "floorlight-broken[damaged]-[default_light_colour]"
+			var/cache_key = "floorlight-broken[damaged]-[default_light_color]"
 			if(!floor_light_cache[cache_key])
 				var/image/I = image("flicker[damaged]")
-				I.color = default_light_colour
+				I.color = default_light_color
 				I.plane = plane
 				I.layer = layer+0.001
 				floor_light_cache[cache_key] = I

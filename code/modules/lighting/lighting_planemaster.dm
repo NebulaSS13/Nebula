@@ -43,7 +43,6 @@
 	var/obj/lighting_plane/l_plane
 	var/obj/lighting_general/l_general
 
-
-/mob/proc/change_light_colour(var/new_colour)
+/mob/proc/change_light_color(var/new_color)
 	if(l_general)
-		l_general.sync(new_colour)
+		l_general.sync(new_color)
