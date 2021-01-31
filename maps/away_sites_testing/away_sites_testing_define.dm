@@ -3,6 +3,7 @@
 	name = "Away Sites Testing"
 	full_name = "Away Sites Testing Land"
 	path = "away_sites_testing"
+	use_overmap = TRUE
 
 	station_levels = list()
 	contact_levels = list()
