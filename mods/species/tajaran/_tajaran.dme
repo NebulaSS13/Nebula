@@ -1,8 +1,9 @@
 #ifndef MODPACK_TAJARAN
 #define MODPACK_TAJARAN
 #include "_tajaran.dm"
-#include "accessory.dm"
-#include "culture.dm"
-#include "emotes.dm"
-#include "species.dm"
+#include "datum/accessory.dm"
+#include "datum/culture.dm"
+#include "datum/emotes.dm"
+#include "datum/language.dm"
+#include "datum/species.dm"
 #endif
