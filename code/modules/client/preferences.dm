@@ -1,5 +1,21 @@
 #define SAVE_RESET -1
 
+/* PLACEHOLDER VERB UNTIL SAVE INIT (or whatever the issue is) IS FIXED */
+var/list/time_prefs_fixed = list()
+/client/verb/fix_preferences()
+	set name = "Reload Preferences"
+	set category = "OOC"
+	if(world.time < global.time_prefs_fixed[ckey])
+		to_chat(usr, SPAN_WARNING("Your character preferences should have already been loaded. If they are still not loaded, please wait a minute and try again, or inform the developers."))
+		return
+	global.time_prefs_fixed[ckey] = world.time + (1 MINUTE)
+	SScharacter_setup.preferences_datums -= ckey
+	QDEL_NULL(prefs)
+	to_chat(src, SPAN_DANGER("<font size = '3'>Your cached preferences have been cleared, please reconnect to the server to reload your characters.</font>"))
+	sleep(1 SECOND)
+	del(src)
+/* END PLACEHOLDER VERB */
+
 /datum/preferences
 	//doohickeys for savefiles
 	var/path
