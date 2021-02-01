@@ -546,7 +546,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	var/list/vision = H.get_accumulated_vision_handlers()
 	H.update_sight()
 	H.set_sight(H.sight|get_vision_flags(H)|H.equipment_vision_flags|vision[1])
-	H.change_light_colour(H.getDarkvisionTint())
+	H.change_light_color(H.getDarkvisionTint())
 
 	if(H.stat == DEAD)
 		return 1
