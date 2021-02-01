@@ -90,12 +90,11 @@
 			var/list/pointdefense_controllers = lan.get_devices(/obj/machinery/pointdefense_control)
 			if(pointdefense_controllers && pointdefense_controllers.len > 1)
 				lan.remove_device(src)
-		return
-	else
-		return ..()
+		return TRUE
+	return ..()
 
 /obj/machinery/pointdefense
-	name = "\improper point defense battery"
+	name = "point defense battery"
 	icon = 'icons/obj/artillery.dmi'
 	icon_state = "pointdefense"
 	desc = "A Kuiper pattern anti-meteor battery. Capable of destroying most threats in a single salvo."
@@ -104,7 +103,6 @@
 	atom_flags =  ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	idle_power_usage = 0.1 KILOWATTS
 	construct_state = /decl/machine_construction/default/panel_closed
-	maximum_component_parts = list(/obj/item/stock_parts = 10)         //null - no max. list(type part = number max).
 	base_type = /obj/machinery/pointdefense
 	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
 	uncreated_component_parts = null
@@ -119,15 +117,23 @@
 
 /obj/machinery/pointdefense/Initialize()
 	. = ..()
+	set_dir(dir) // Ensure it's valid.
 	set_extension(src, /datum/extension/local_network_member/multilevel)
 	if(initial_id_tag)
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.set_tag(null, initial_id_tag)
 
+/obj/machinery/pointdefense/set_dir(new_dir)
+	if(new_dir != NORTH && new_dir != SOUTH) // Other dirs are invalid
+		new_dir = SOUTH
+	. = ..()
+
 /obj/machinery/pointdefense/attackby(var/obj/item/thing, var/mob/user)
 	if(isMultitool(thing))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
+		return TRUE
+	return ..()
 
 //Guns cannot shoot through hull or generally dense turfs.
 /obj/machinery/pointdefense/proc/space_los(meteor)
