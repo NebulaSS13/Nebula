@@ -14,11 +14,11 @@
 		return
 	return ..()
 
-/decl/machine_construction/default/panel_closed/mechanics_info()
+/decl/machine_construction/default/panel_closed/item_chassis/mechanics_info()
 	. = ..()
 	. += "Use a wrench to deconstruct the machine"
 
-/decl/machine_construction/default/panel_closed/post_construct()
+/decl/machine_construction/default/panel_closed/item_chassis/post_construct()
 
 /decl/machine_construction/default/panel_open/item_chassis
 	needs_board = null
