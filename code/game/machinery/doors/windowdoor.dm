@@ -20,6 +20,10 @@
 	frame_type = /obj/structure/windoor_assembly
 	var/base_state = "left"
 
+/obj/machinery/door/window/inherit_access_from_area()
+	var/area/A = get_area(src)
+	req_access = A?.req_access?.Copy()
+
 /obj/machinery/door/window/Initialize(mapload, d, populate_parts = TRUE, obj/structure/windoor_assembly/assembly)
 	if(assembly)
 		set_density(0)
