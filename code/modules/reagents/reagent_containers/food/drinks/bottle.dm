@@ -52,12 +52,8 @@
 	// Dump reagents onto the turf.
 	var/turf/T = against ? get_turf(against) : get_turf(newloc)
 	if(reagents?.total_volume)
-		if(against)
-			against.visible_message(SPAN_DANGER("The contents of \the [src] splash all over \the [against]!"))
-			reagents.splash(against, reagents.total_volume * 0.33)
-		if(reagents.total_volume)
-			reagents.trans_to_turf(T, reagents.total_volume)
-
+		visible_message(SPAN_DANGER("The contents of \the [src] splash all over \the [against || T]!"))
+		reagents.splash(against || T, reagents.total_volume)
 	if(!T)
 		qdel(src)
 		return

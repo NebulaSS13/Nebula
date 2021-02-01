@@ -388,18 +388,25 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
 
+	if(REAGENT_VOLUME(holder, type) < FLUID_EVAPORATION_POINT)
+		return
+
+	if(istype(T) && dirtiness <= DIRTINESS_CLEAN)
+		T.clean_blood()
+		T.remove_cleanables()
+
 	if(istype(T, /turf/simulated))
 		var/turf/simulated/wall/W = T
 		if(defoliant)
 			for(var/obj/effect/overlay/wallrot/E in W)
 				W.visible_message(SPAN_NOTICE("\The [E] is completely dissolved by the solution!"))
 				qdel(E)
-		if(slipperiness != 0 && REAGENT_VOLUME(holder, type) >= 5)
+		if(slipperiness != 0)
 			if(slipperiness < 0)
 				W.unwet_floor(TRUE)
 			else
 				W.wet_floor(slipperiness)
-		if(dirtiness != DIRTINESS_NEUTRAL && REAGENT_VOLUME(holder, type) >= 1)
+		if(dirtiness != DIRTINESS_NEUTRAL)
 			if(dirtiness > DIRTINESS_NEUTRAL)
 				var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate() in W
 				if (!dirtoverlay)
@@ -416,7 +423,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 						qdel(B)
 				if(dirtiness <= DIRTINESS_CLEAN)
 					W.dirt = 0
-					if(W.wet > 1)
+					if(W.wet > 1 && slipperiness <= 0)
 						W.unwet_floor(FALSE)
 					W.clean_blood()
 					for(var/mob/living/carbon/slime/M in W)

@@ -17,6 +17,7 @@
 	glass_name = "water"
 	glass_desc = "The father of all refreshments."
 	slipperiness = 8
+	dirtiness = DIRTINESS_CLEAN
 	chilling_point = T0C
 	chilling_products = list(
 		/decl/material/solid/ice = 1

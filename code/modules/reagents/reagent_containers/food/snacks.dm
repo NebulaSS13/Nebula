@@ -276,6 +276,25 @@
 	else
 		..()
 
+/obj/item/chems/food/snacks/proc/update_food_appearance_from(var/obj/item/donor, var/food_color, var/copy_donor_appearance = TRUE)
+	filling_color = food_color
+	if(copy_donor_appearance)
+		appearance = donor
+		color = food_color
+		if(istype(donor, /obj/item/holder))
+			var/matrix/M = matrix()
+			M.Turn(90)
+			M.Translate(1,-6)
+			transform = M
+	update_icon()
+
+/obj/item/chems/food/snacks/on_update_icon()
+	cut_overlays()
+	if(check_state_in_icon("[icon_state]_filling", icon))
+		var/image/I = image(icon, "[icon_state]_filling")
+		I.color = filling_color
+		add_overlay(I)
+
 /obj/item/chems/food/snacks/egg/blue
 	icon_state = "egg-blue"
 

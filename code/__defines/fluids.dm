@@ -1,4 +1,4 @@
-#define FLUID_EVAPORATION_POINT 5          // Depth a fluid begins self-deleting
+#define FLUID_EVAPORATION_POINT 1          // Depth a fluid begins self-deleting
 #define FLUID_PUDDLE 25
 #define FLUID_SHALLOW 200                  // Depth shallow icon is used
 #define FLUID_OVER_MOB_HEAD 300
