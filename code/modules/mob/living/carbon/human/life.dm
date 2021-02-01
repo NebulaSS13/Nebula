@@ -106,7 +106,7 @@
 /mob/living/carbon/human/proc/handle_stamina()
 	if((world.time - last_quick_move_time) > 5 SECONDS)
 		var/mod = (lying + (nutrition / initial(nutrition))) / 2
-		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1+chem_effects[CE_ENERGETIC]))
+		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1+LAZYACCESS(chem_effects,CE_ENERGETIC)))
 
 /mob/living/carbon/human/set_stat(var/new_stat)
 	var/old_stat = stat
@@ -389,7 +389,7 @@
 		else
 			burn_dam = COLD_DAMAGE_LEVEL_3
 		SetStasis(getCryogenicFactor(bodytemperature), STASIS_COLD)
-		if(!chem_effects[CE_CRYO])
+		if(!has_chemical_effect(CE_CRYO, 1))
 			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
 			fire_alert = max(fire_alert, 1)
 
@@ -520,9 +520,7 @@
 	return min(1,.)
 
 /mob/living/carbon/human/handle_chemicals_in_body()
-
-	chem_effects.Cut()
-
+	..()
 	if(status_flags & GODMODE)
 		return 0
 
@@ -541,12 +539,13 @@
 		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
 			continue
 		var/decl/material/R = T
-		chem_doses[T] -= initial(R.metabolism)*2
-		if(chem_doses[T] <= 0)
-			chem_doses -= T
+		var/dose = LAZYACCESS(chem_doses, T) - initial(R.metabolism)*2
+		LAZYSET(chem_doses, T, dose)
+		if(LAZYACCESS(chem_doses, T) <= 0)
+			LAZYREMOVE(chem_doses, T)
 
 	// Not an ideal place to handle this, but there doesn't seem to be a more appropriate centralized area.
-	if(chem_effects[CE_GLOWINGEYES])
+	if(has_chemical_effect(CE_GLOWINGEYES, 1))
 		update_eyes()
 
 	updatehealth()
@@ -723,7 +722,7 @@
 			healths_ma.icon_state = "blank"
 			healths_ma.overlays = null
 
-			if (chem_effects[CE_PAINKILLER] > 100)
+			if(has_chemical_effect(CE_PAINKILLER, 100))
 				healths_ma.icon_state = "health_numb"
 			else
 				// Generate a by-limb health display.
@@ -846,11 +845,11 @@
 			vomit_score += I.damage
 		else if (should_have_organ(tag))
 			vomit_score += 45
-	if(chem_effects[CE_TOXIN] || radiation)
+	if(has_chemical_effect(CE_TOXIN, 1) || radiation)
 		vomit_score += 0.5 * getToxLoss()
-	if(chem_effects[CE_ALCOHOL_TOXIC])
-		vomit_score += 10 * chem_effects[CE_ALCOHOL_TOXIC]
-	if(chem_effects[CE_ALCOHOL])
+	if(has_chemical_effect(CE_ALCOHOL_TOXIC, 1))
+		vomit_score += 10 * LAZYACCESS(chem_effects, CE_ALCOHOL_TOXIC)
+	if(has_chemical_effect(CE_ALCOHOL, 1))
 		vomit_score += 10
 	if(stat != DEAD && vomit_score > 25 && prob(10))
 		vomit(vomit_score, vomit_score/25)

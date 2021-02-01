@@ -127,7 +127,7 @@
 		/decl/material/liquid/ethanol/vodka,
 		/decl/material/liquid/ethanol/gin,
 		/decl/material/liquid/ethanol/rum,
-		/decl/material/liquid/ethanol/tequilla,
+		/decl/material/liquid/ethanol/tequila,
 		/decl/material/liquid/ethanol/vermouth,
 		/decl/material/liquid/ethanol/cognac,
 		/decl/material/liquid/ethanol/ale,

@@ -354,7 +354,7 @@ default behaviour is:
 
 
 // heal ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = 0)
+/mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE)
 	adjustBruteLoss(-brute)
 	adjustFireLoss(-burn)
 	src.updatehealth()
@@ -799,11 +799,17 @@ default behaviour is:
 /mob/living/proc/adjust_hydration(var/amt)
 	return
 
+/mob/living/proc/has_chemical_effect(var/chem, var/threshold_over, var/threshold_under)
+	var/val = LAZYACCESS(chem_effects, chem)
+	. = (isnull(threshold_over) || val >= threshold_over) && (isnull(threshold_under) || val <= threshold_under)
+
 /mob/living/proc/add_chemical_effect(var/effect, var/magnitude = 1)
-	return
+	magnitude += LAZYACCESS(chem_effects, effect)
+	LAZYSET(chem_effects, effect, magnitude)
 
 /mob/living/proc/add_up_to_chemical_effect(var/effect, var/magnitude = 1)
-	return
+	magnitude = max(magnitude, LAZYACCESS(chem_effects, effect))
+	LAZYSET(chem_effects, effect, magnitude)
 
 /mob/living/proc/adjust_immunity(var/amt)
 	return

@@ -74,7 +74,7 @@
 				SSstatistics.set_field(STAT_XENOFAUNA_SCANNED, discovered)
 				. += "New xenofauna species discovered!"
 				break
-	else if(istype(target, /mob/living/carbon/slime/))
+	else if(isslime(target))
 		var/mob/living/carbon/slime/T = target
 		. += "Slime scan result for \the [T]:"
 		. += "[T.colour] [T.is_adult ? "adult" : "baby"] slime"

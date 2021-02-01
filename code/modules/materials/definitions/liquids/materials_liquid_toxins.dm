@@ -78,7 +78,7 @@
 	taste_mult = 1.2
 	metabolism = REM * 0.25
 
-/decl/material/liquid/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/venom/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(prob(REAGENT_VOLUME(holder, type)*2))
 		M.confused = max(M.confused, 3)
 	..()
@@ -92,7 +92,7 @@
 	metabolism = REM * 2
 	toxicity_targets_organ = BP_HEART
 
-/decl/material/liquid/cyanide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/cyanide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.sleeping += 1
 
@@ -107,17 +107,17 @@
 	toxicity_targets_organ = BP_HEART
 	taste_mult = 1.2
 
-/decl/material/liquid/heartstopper/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/heartstopper/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.confused += 1.5
 
-/decl/material/liquid/heartstopper/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/heartstopper/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.stat != UNCONSCIOUS)
 			if(H.losebreath >= 10)
-				H.losebreath = max(10, M.losebreath-10)
+				H.losebreath = max(10, H.losebreath-10)
 			H.adjustOxyLoss(2)
 			H.Weaken(10)
 		M.add_chemical_effect(CE_NOPULSE, 1)
@@ -138,13 +138,13 @@
 	)
 	taste_mult = 1.2
 
-/decl/material/liquid/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/zombiepowder/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.status_flags |= FAKEDEATH
 	M.adjustOxyLoss(3 * removed)
 	M.Weaken(10)
 	M.silent = max(M.silent, 10)
-	if(M.chem_doses[type] <= removed) //half-assed attempt to make timeofdeath update only at the onset
+	if(LAZYACCESS(M.chem_doses, type) <= removed) //half-assed attempt to make timeofdeath update only at the onset
 		M.timeofdeath = world.time
 	M.add_chemical_effect(CE_NOPULSE, 1)
 
@@ -220,14 +220,14 @@
 	hidden_from_codex = TRUE
 	var/amount_to_zombify = 5
 
-/decl/material/liquid/zombie/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/zombie/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed * 0.5, holder)
 
-/decl/material/liquid/zombie/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/zombie/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/true_dose = H.chem_doses[type] + REAGENT_VOLUME(holder, type)
+		var/true_dose = LAZYACCESS(H.chem_doses, type) + REAGENT_VOLUME(holder, type)
 		if (true_dose >= amount_to_zombify)
 			H.zombify()
 		else if (true_dose > 1 && prob(20))

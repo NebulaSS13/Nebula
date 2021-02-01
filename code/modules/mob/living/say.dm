@@ -112,7 +112,7 @@ proc/get_radio_key_from_channel(var/channel)
 		message = NewStutter(message)
 		verb = pick("stammers","stutters")
 		. = 1
-	else if(has_chem_effect(CE_SQUEAKY, 1))
+	else if(has_chemical_effect(CE_SQUEAKY, 1))
 		message = "<font face = 'Comic Sans MS'>[message]</font>"
 		verb = "squeaks"
 		. = 1

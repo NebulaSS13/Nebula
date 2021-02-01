@@ -353,18 +353,6 @@
 	Weaken(Floor(stun_duration/2))
 	return TRUE
 
-/mob/living/carbon/add_chemical_effect(var/effect, var/magnitude = 1)
-	if(effect in chem_effects)
-		chem_effects[effect] += magnitude
-	else
-		chem_effects[effect] = magnitude
-
-/mob/living/carbon/add_up_to_chemical_effect(var/effect, var/magnitude = 1)
-	if(effect in chem_effects)
-		chem_effects[effect] = max(magnitude, chem_effects[effect])
-	else
-		chem_effects[effect] = magnitude
-
 /mob/living/carbon/get_default_language()
 	. = ..()
 	if(. && !can_speak(.))
@@ -451,9 +439,6 @@
 	for(var/source in stasis_sources)
 		stasis_value += stasis_sources[source]
 	stasis_sources.Cut()
-
-/mob/living/carbon/has_chem_effect(chem, threshold)
-	return (chem_effects[chem] >= threshold)
 
 /mob/living/carbon/get_sex()
 	return species.get_sex(src)

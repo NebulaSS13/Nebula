@@ -313,3 +313,6 @@
 
 /mob/living/carbon/slime/adjust_nutrition(var/amt)
 	nutrition = Clamp(nutrition + amt, 0, get_max_nutrition())
+/mob/living/carbon/slime/can_be_buckled(var/mob/user)
+	to_chat(user, SPAN_WARNING("\The [src] is too squishy to buckle in."))
+	return FALSE

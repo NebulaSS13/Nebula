@@ -274,7 +274,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		return
 	var/last_pain = pain
 	if(owner)
-		amount -= (owner.chem_effects[CE_PAINKILLER]/3)
+		amount -= (LAZYACCESS(owner.chem_effects, CE_PAINKILLER)/3)
 		if(amount <= 0)
 			return
 	pain = max(0,min(max_damage,pain+amount))
@@ -284,7 +284,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 
 /obj/item/organ/external/proc/stun_act(var/stun_amount, var/agony_amount)
 	if(agony_amount && owner && can_feel_pain())
-		agony_amount -= (owner.chem_effects[CE_PAINKILLER]/2)//painkillers does wonders!
+		agony_amount -= (LAZYACCESS(owner.chem_effects, CE_PAINKILLER)/2)//painkillers does wonders!
 		agony_amount += get_pain()
 		if(agony_amount < 5) 
 			return

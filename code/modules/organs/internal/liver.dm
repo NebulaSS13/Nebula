@@ -28,9 +28,11 @@
 			spawn owner.vomit()
 
 	//Detox can heal small amounts of damage
-	if (damage < max_damage && !owner.chem_effects[CE_TOXIN])
-		heal_damage(0.2 * owner.chem_effects[CE_ANTITOX])
+	if (damage < max_damage && !LAZYACCESS(owner.chem_effects, CE_TOXIN))
+		heal_damage(0.2 * LAZYACCESS(owner.chem_effects, CE_ANTITOX))
 
+	var/alco = LAZYACCESS(owner.chem_effects, CE_ALCOHOL)
+	var/alcotox = LAZYACCESS(owner.chem_effects, CE_ALCOHOL_TOXIC)
 	// Get the effectiveness of the liver.
 	var/filter_effect = 3
 	if(is_bruised())
@@ -40,25 +42,25 @@
 	// Robotic organs filter better but don't get benefits from antitoxins for filtering.
 	if(BP_IS_PROSTHETIC(src))
 		filter_effect += 1
-	else if(owner.chem_effects[CE_ANTITOX])
+	else if(owner.has_chemical_effect(CE_ANTITOX, 1))
 		filter_effect += 1
 	// If you're not filtering well, you're in trouble. Ammonia buildup to toxic levels and damage from alcohol
 	if(filter_effect < 2)
-		if(owner.chem_effects[CE_ALCOHOL])
-			owner.adjustToxLoss(0.5 * max(2 - filter_effect, 0) * (owner.chem_effects[CE_ALCOHOL_TOXIC] + 0.5 * owner.chem_effects[CE_ALCOHOL]))
+		if(alco)
+			owner.adjustToxLoss(0.5 * max(2 - filter_effect, 0) * (alcotox + 0.5 * alco))
 
-	if(owner.chem_effects[CE_ALCOHOL_TOXIC])
-		take_internal_damage(owner.chem_effects[CE_ALCOHOL_TOXIC], prob(90)) // Chance to warn them
+	if(alcotox)
+		take_internal_damage(alcotox, prob(90)) // Chance to warn them
 
 	// Heal a bit if needed and we're not busy. This allows recovery from low amounts of toxloss.
-	if(!owner.chem_effects[CE_ALCOHOL] && !owner.chem_effects[CE_TOXIN] && !owner.radiation && damage > 0)
+	if(!alco && !LAZYACCESS(owner.chem_effects, CE_TOXIN) && !owner.radiation && damage > 0)
 		if(damage < min_broken_damage)
 			heal_damage(0.2)
 		if(damage < min_bruised_damage)
 			heal_damage(0.3)
 
 	//Blood regeneration if there is some space
-	owner.regenerate_blood(0.1 + owner.chem_effects[CE_BLOODRESTORE])
+	owner.regenerate_blood(0.1 + LAZYACCESS(owner.chem_effects, CE_BLOODRESTORE))
 
 	// Blood loss or liver damage make you lose nutriments
 	var/blood_volume = owner.get_blood_volume()

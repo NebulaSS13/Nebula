@@ -56,8 +56,8 @@
 		return C
 	return 0
 
-/mob/living/silicon/robot/heal_organ_damage(var/brute, var/burn)
-	var/list/datum/robot_component/parts = get_damaged_components(brute,burn)
+/mob/living/silicon/robot/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE)
+	var/list/datum/robot_component/parts = get_damaged_components(brute, burn)
 	if(!parts.len)	return
 	var/datum/robot_component/picked = pick(parts)
 	picked.heal_damage(brute,burn)

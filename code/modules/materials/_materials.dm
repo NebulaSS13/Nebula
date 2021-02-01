@@ -461,7 +461,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(!(flags & IGNORE_MOB_SIZE) && location != CHEM_TOUCH)
 		effective *= (MOB_SIZE_MEDIUM/M.mob_size)
 
-	M.chem_doses[type] = M.chem_doses[type] + effective
+	var/dose = LAZYACCESS(M.chem_doses, type) + effective
+	LAZYSET(M.chem_doses, type, dose)
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(location)
 			if(CHEM_INJECT)
@@ -472,7 +473,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				affect_touch(M, alien, effective, holder)
 	holder.remove_reagent(type, removed)
 
-/decl/material/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(radioactivity)
 		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
 
@@ -506,11 +507,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(euphoriant)
 		M.adjust_drugged(euphoriant, euphoriant_max)
 
-/decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(affect_blood_on_ingest)
 		affect_blood(M, alien, removed * 0.5, holder)
 
-/decl/material/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 
 	if(!istype(M))
 		return
@@ -571,7 +572,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(!M.unacidable)
 			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage))
 
-/decl/material/proc/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
+/decl/material/proc/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.adjustToxLoss(REM)
 

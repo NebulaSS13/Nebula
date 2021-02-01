@@ -152,8 +152,9 @@
 	// Lung damage increases the minimum safe pressure.
 	safe_pressure_min *= 1 + rand(1,4) * damage/max_damage
 
-	if(!forced && owner.chem_effects[CE_BREATHLOSS] && !owner.chem_effects[CE_STABLE]) //opiates are bad mmkay
-		safe_pressure_min *= 1 + owner.chem_effects[CE_BREATHLOSS]
+	var/breatheffect = LAZYACCESS(owner.chem_effects, CE_BREATHLOSS)
+	if(!forced && breatheffect && !LAZYACCESS(owner.chem_effects, CE_STABLE)) //opiates are bad mmkay
+		safe_pressure_min *= 1 + breatheffect
 	
 	if(owner.lying)
 		safe_pressure_min *= 0.8
@@ -239,7 +240,7 @@
 		else
 			owner.emote(pick("shiver","twitch"))
 
-	if(damage || owner.chem_effects[CE_BREATHLOSS] || world.time > last_successful_breath + 2 MINUTES)
+	if(damage || LAZYACCESS(owner.chem_effects, CE_BREATHLOSS) || world.time > last_successful_breath + 2 MINUTES)
 		owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS*breath_fail_ratio)
 
 	owner.oxygen_alert = max(owner.oxygen_alert, 2)

@@ -266,7 +266,7 @@
 	if (!broadcasting)
 		// Sedation chemical effect should prevent radio use.
 		var/mob/living/carbon/C = M
-		if ((istype(C)) && (C.chem_effects[CE_SEDATE] || C.incapacitated(INCAPACITATION_DISRUPTED)))
+		if(istype(C) && (C.has_chemical_effect(CE_SEDATE, 1) || C.incapacitated(INCAPACITATION_DISRUPTED)))
 			to_chat(M, SPAN_WARNING("You're unable to reach \the [src]."))
 			return 0
 

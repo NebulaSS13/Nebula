@@ -25,7 +25,7 @@
 	var/graffiti_style
 
 /obj/item/organ/external/head/proc/get_eye_overlay()
-	if(glowing_eyes || (owner && owner.chem_effects[CE_GLOWINGEYES]))
+	if(glowing_eyes || owner?.has_chemical_effect(CE_GLOWINGEYES, 1))
 		var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
 		if(eyes)
 			return eyes.get_special_overlay()

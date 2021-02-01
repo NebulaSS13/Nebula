@@ -191,7 +191,7 @@
 	if (!heal)
 		amount = amount * species.get_toxins_mod(src)
 		if (CE_ANTITOX in chem_effects)
-			amount *= 1 - (chem_effects[CE_ANTITOX] * 0.25)
+			amount *= 1 - (LAZYACCESS(chem_effects, CE_ANTITOX) * 0.25)
 
 	var/list/pick_organs = shuffle(internal_organs.Copy())
 
@@ -262,7 +262,7 @@
 //Heals ONE external organ, organ gets randomly selected from damaged ones.
 //It automatically updates damage overlays if necesary
 //It automatically updates health status
-/mob/living/carbon/human/heal_organ_damage(var/brute, var/burn, var/affect_robo = 0)
+/mob/living/carbon/human/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE)
 	var/list/obj/item/organ/external/parts = get_damaged_organs(brute,burn)
 	if(!parts.len)	return
 	var/obj/item/organ/external/picked = pick(parts)
@@ -432,7 +432,7 @@ This function restores all organs.
 		return 0
 
 	var/traumatic_shock = getHalLoss()                 // Pain.
-	traumatic_shock -= chem_effects[CE_PAINKILLER] // TODO: check what is actually stored here.
+	traumatic_shock -= LAZYACCESS(chem_effects, CE_PAINKILLER) // TODO: check what is actually stored here.
 
 	if(stat == UNCONSCIOUS)
 		traumatic_shock *= 0.6

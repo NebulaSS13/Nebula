@@ -149,15 +149,16 @@
 			// No heart? You are going to have a very bad time. Not 100% lethal because heart transplants should be a thing.
 			var/blood_volume = owner.get_blood_oxygenation()
 			if(blood_volume < BLOOD_VOLUME_SURVIVE)
-				if(!owner.chem_effects[CE_STABLE] || prob(60))
+				if(!owner.has_chemical_effect(CE_STABLE, 1) || prob(60))
 					oxygen_reserve = max(0, oxygen_reserve-1)
 			else
 				oxygen_reserve = min(initial(oxygen_reserve), oxygen_reserve+1)
 			if(!oxygen_reserve) //(hardcrit)
 				owner.Paralyse(3)
-			var/can_heal = damage && damage < max_damage && (damage % damage_threshold_value || owner.chem_effects[CE_BRAIN_REGEN] || (!past_damage_threshold(3) && owner.chem_effects[CE_STABLE]))
+			var/can_heal = damage && damage < max_damage && (damage % damage_threshold_value || LAZYACCESS(owner.chem_effects, CE_BRAIN_REGEN) || (!past_damage_threshold(3) && LAZYACCESS(owner.chem_effects, CE_STABLE)))
 			var/damprob
 			//Effects of bloodloss
+			var/stability_effect = LAZYACCESS(owner.chem_effects, CE_STABLE)
 			switch(blood_volume)
 
 				if(BLOOD_VOLUME_SAFE to INFINITY)
@@ -166,12 +167,12 @@
 				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 					if(prob(1))
 						to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woozy","faint")]...</span>")
-					damprob = owner.chem_effects[CE_STABLE] ? 30 : 60
+					damprob = stability_effect ? 30 : 60
 					if(!past_damage_threshold(2) && prob(damprob))
 						take_internal_damage(1)
 				if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
 					owner.eye_blurry = max(owner.eye_blurry,6)
-					damprob = owner.chem_effects[CE_STABLE] ? 40 : 80
+					damprob = stability_effect ? 40 : 80
 					if(!past_damage_threshold(4) && prob(damprob))
 						take_internal_damage(1)
 					if(!owner.paralysis && prob(10))
@@ -179,7 +180,7 @@
 						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
 				if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 					owner.eye_blurry = max(owner.eye_blurry,6)
-					damprob = owner.chem_effects[CE_STABLE] ? 60 : 100
+					damprob = stability_effect ? 60 : 100
 					if(!past_damage_threshold(6) && prob(damprob))
 						take_internal_damage(1)
 					if(!owner.paralysis && prob(15))
@@ -187,7 +188,7 @@
 						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
 				if(-(INFINITY) to BLOOD_VOLUME_SURVIVE) // Also see heart.dm, being below this point puts you into cardiac arrest.
 					owner.eye_blurry = max(owner.eye_blurry,6)
-					damprob = owner.chem_effects[CE_STABLE] ? 80 : 100
+					damprob = stability_effect ? 80 : 100
 					if(prob(damprob))
 						take_internal_damage(1)
 					if(prob(damprob))

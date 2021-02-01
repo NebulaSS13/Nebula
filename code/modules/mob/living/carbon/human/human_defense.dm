@@ -42,7 +42,7 @@ meteor_act
 
 	radio_interrupt_cooldown = world.time + RADIO_INTERRUPT_DEFAULT
 
-	if(!affected.can_feel_pain() || (chem_effects[CE_PAINKILLER]/3 > agony_amount))//stops blurry eyes and stutter if you can't feel pain
+	if(!affected.can_feel_pain() || (LAZYACCESS(chem_effects, CE_PAINKILLER)/3 > agony_amount))//stops blurry eyes and stutter if you can't feel pain
 		agony_amount = 0
 
 	..(stun_amount, agony_amount, def_zone)

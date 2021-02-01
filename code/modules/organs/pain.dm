@@ -16,10 +16,10 @@ mob/var/next_pain_time = 0
 // force means it ignores anti-spam timer
 mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/item/organ/external/affecting, var/nohalloss)
 	set waitfor = FALSE
-	if(!message || stat || !can_feel_pain() || chem_effects[CE_PAINKILLER] > power)
+	if(!message || stat || !can_feel_pain() || has_chemical_effect(CE_PAINKILLER, power))
 		return
 
-	power -= chem_effects[CE_PAINKILLER]/2	//Take the edge off.
+	power -= LAZYACCESS(chem_effects, CE_PAINKILLER)/2	//Take the edge off.
 
 	// Excessive halloss is horrible, just give them enough to make it visible.
 	if(!nohalloss && power)
@@ -66,7 +66,7 @@ mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/it
 		if(dam > maxdam && (maxdam == 0 || prob(70)) )
 			damaged_organ = E
 			maxdam = dam
-	if(damaged_organ && chem_effects[CE_PAINKILLER] < maxdam)
+	if(damaged_organ && has_chemical_effect(CE_PAINKILLER, maxdam))
 		if(maxdam > 10 && paralysis)
 			paralysis = max(0, paralysis - round(maxdam/10))
 		if(maxdam > 50 && prob(maxdam / 5))

@@ -269,25 +269,25 @@
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/vodka, 100)
 
-/obj/item/chems/food/drinks/bottle/tequilla
-	name = "Caccavo Guaranteed Quality Tequilla"
+/obj/item/chems/food/drinks/bottle/tequila
+	name = "Caccavo Guaranteed Quality tequila"
 	desc = "Made from premium petroleum distillates, pure thalidomide and other fine quality ingredients!"
-	icon_state = "tequillabottle"
+	icon_state = "tequilabottle"
 	center_of_mass = @"{'x':16,'y':3}"
 
-/obj/item/chems/food/drinks/bottle/tequilla/Initialize()
+/obj/item/chems/food/drinks/bottle/tequila/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/ethanol/tequilla, 100)
+	reagents.add_reagent(/decl/material/liquid/ethanol/tequila, 100)
 
 /obj/item/chems/food/drinks/bottle/patron
 	name = "Wrapp Artiste Patron"
-	desc = "Silver laced tequilla, served in space night clubs across the galaxy."
+	desc = "Silver laced tequila, served in space night clubs across the galaxy."
 	icon_state = "patronbottle"
 	center_of_mass = @"{'x':16,'y':6}"
 
 /obj/item/chems/food/drinks/bottle/patron/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/ethanol/tequilla, 95)
+	reagents.add_reagent(/decl/material/liquid/ethanol/tequila, 95)
 	reagents.add_reagent(/decl/material/solid/metal/silver, 5)
 
 /obj/item/chems/food/drinks/bottle/rum
