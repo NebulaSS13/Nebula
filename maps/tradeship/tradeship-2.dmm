@@ -1884,7 +1884,7 @@
 /turf/simulated/wall,
 /area/ship/trade/crew/medbay)
 "eh" = (
-/turf/simulated/wall/natural,
+/turf/exterior/wall,
 /area/space)
 "el" = (
 /obj/structure/disposalpipe/segment,
@@ -1944,7 +1944,7 @@
 /turf/simulated/wall/r_wall,
 /area/ship/trade/crew/medbay)
 "ew" = (
-/turf/simulated/wall/natural/random/high_chance,
+/turf/exterior/wall/random/high_chance,
 /area/space)
 "ex" = (
 /obj/effect/paint/brown,

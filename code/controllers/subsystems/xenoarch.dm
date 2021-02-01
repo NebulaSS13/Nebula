@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(xenoarch)
 	return pickweight(digsite_types_weighted)
 
 /datum/controller/subsystem/xenoarch/proc/SetupXenoarch()
-	for(var/turf/simulated/wall/natural/M in global.natural_walls)
+	for(var/turf/exterior/wall/M in global.natural_walls)
 		if(!M.density)
 			continue
 
@@ -60,7 +60,7 @@ SUBSYSTEM_DEF(xenoarch)
 
 		var/list/viable_adjacent_turfs = list()
 		if(target_digsite_size > 1)
-			for(var/turf/simulated/wall/natural/T in orange(2, M))
+			for(var/turf/exterior/wall/T in orange(2, M))
 				if(!T.density)
 					continue
 				if(T.finds)
@@ -75,7 +75,7 @@ SUBSYSTEM_DEF(xenoarch)
 			turfs_to_process += pick_n_take(viable_adjacent_turfs)
 
 		while(turfs_to_process.len)
-			var/turf/simulated/wall/natural/archeo_turf = pop(turfs_to_process)
+			var/turf/exterior/wall/archeo_turf = pop(turfs_to_process)
 
 			processed_turfs.Add(archeo_turf)
 			if(isnull(archeo_turf.finds))
@@ -109,13 +109,13 @@ SUBSYSTEM_DEF(xenoarch)
 	for(var/i = 1 to num_artifacts_spawn)
 		final_artifact_spawning_turfs += pick_n_take(artifact_spawning_turfs)
 	artifact_spawning_turfs = final_artifact_spawning_turfs
-	for(var/turf/simulated/wall/natural/artifact_turf in artifact_spawning_turfs)
+	for(var/turf/exterior/wall/artifact_turf in artifact_spawning_turfs)
 		artifact_turf.artifact_find = new()
 
 /datum/controller/subsystem/xenoarch/proc/get_nearest_artifact(var/turf/source)
 	var/artifact_distance = INFINITY
 	var/artifact_id 
-	for(var/turf/simulated/wall/natural/T in artifact_spawning_turfs)
+	for(var/turf/exterior/wall/T in artifact_spawning_turfs)
 		if(T.artifact_find)
 			var/cur_dist = get_dist(source, T) * 2
 			if(cur_dist < artifact_distance)
