@@ -12,9 +12,7 @@
 	attack_verb = list("challenged")
 	blood_overlay_type = "bloodyhands"
 	bodytype_restricted = list(BODYTYPE_HUMANOID)
-
-	var/obj/item/clothing/ring/ring = null		//Covered ring
-	var/mob/living/carbon/human/wearer = null	//Used for covered rings when dropping
+	var/obj/item/clothing/ring/covering_ring
 
 /obj/item/clothing/gloves/update_clothing_icon()
 	if(ismob(loc))
@@ -27,34 +25,42 @@
 /obj/item/clothing/gloves/get_fibers()
 	return "material from a pair of [name]."
 
-/obj/item/clothing/gloves/mob_can_equip(mob/user)
-	var/mob/living/carbon/human/H = user
-	if(istype(H.gloves, /obj/item/clothing/ring))
-		ring = H.gloves
-		if(!ring.undergloves)
-			to_chat(user, "You are unable to wear \the [src] as \the [H.gloves] are in the way.")
-			ring = null
+/obj/item/clothing/gloves/mob_can_equip(mob/M, slot, disable_warning = 0, force = 0)
+	var/obj/item/clothing/ring/check_ring
+	var/mob/living/carbon/human/H = M
+	if(slot == slot_gloves_str && istype(H) && H.gloves)
+		check_ring = H.gloves
+		if(!istype(check_ring) || !check_ring.can_fit_under_gloves || !H.unEquip(check_ring, src))
+			to_chat(M, SPAN_WARNING("You are unable to wear \the [src] as \the [H.gloves] are in the way."))
 			return FALSE
-		if(!H.unEquip(ring, src))//Remove the ring (or other under-glove item in the hand slot?) so you can put on the gloves.
-			ring = null
-			return FALSE
-	if(!..())
-		if(ring) //Put the ring back on if the check fails.
-			if(H.equip_to_slot_if_possible(ring, slot_gloves_str))
-				src.ring = null
-		return FALSE
-	if (ring)
-		to_chat(user, "You slip \the [src] on over \the [ring].")
-	wearer = H //TODO clean this when magboots are cleaned
-	return TRUE
+	. = ..()
+	if(check_ring)
+		if(.)
+			covering_ring = check_ring
+			to_chat(M, SPAN_NOTICE("You slip \the [src] on over \the [covering_ring]."))
+		else
+			M.equip_to_slot_if_possible(check_ring, slot_gloves_str, disable_warning = TRUE)
 
-/obj/item/clothing/gloves/dropped()
+/obj/item/clothing/gloves/Destroy()
+	QDEL_NULL(covering_ring)
+	. = ..()
+
+/obj/item/clothing/gloves/equipped()
+	. = ..()
+	if(covering_ring)
+		var/mob/living/carbon/human/H = loc
+		if(istype(H) && H.gloves != src)
+			H.equip_to_slot_if_possible(covering_ring, slot_gloves_str, disable_warning = TRUE)
+		if(!istype(H) || (H.gloves != src && H.gloves != covering_ring))
+			covering_ring.dropInto(get_turf(src))
+			covering_ring = null
+
+/obj/item/clothing/gloves/dropped(var/mob/user)
 	..()
-	if(!wearer)
-		return
-	var/mob/living/carbon/human/H = wearer
-	if(ring && istype(H))
-		if(!H.equip_to_slot_if_possible(ring, slot_gloves_str))
-			ring.dropInto(loc)
-		src.ring = null
-	wearer = null
+	var/mob/living/carbon/human/H = user
+	if(covering_ring)
+		if(istype(H))
+			H.equip_to_slot_if_possible(covering_ring, slot_gloves_str, disable_warning = TRUE)
+		if(!istype(H) || H.gloves != covering_ring)
+			covering_ring.dropInto(loc)
+		covering_ring = null
