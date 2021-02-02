@@ -1,0 +1,10 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - tweak: Amputating the second-to-last organ on a human mob (typically leaving the
+      torso) will drop the last organ as a limb and destroy the mob -in other words
+      you can now chop bodies up entirely instead of being left with a weird unwieldly
+      torso.
+  - tweak: Amputation is faster but messier if you're doing it improperly (improvised
+      tool or circumstances).
+  - tweak: Failing an amputation will now get the tool stuck in the person's limb.
