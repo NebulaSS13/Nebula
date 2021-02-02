@@ -94,3 +94,8 @@
 #define BLOOD_VOLUME_BAD     60
 #define BLOOD_VOLUME_SURVIVE 30
 
+// enum-ish values for surgery conditions
+#define OPERATE_DENY     0
+#define OPERATE_PASSABLE 1
+#define OPERATE_OKAY     2
+#define OPERATE_IDEAL    3

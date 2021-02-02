@@ -925,7 +925,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(!clean)
 		victim.shock_stage += min_broken_damage
 
+	var/mob/living/carbon/human/last_owner = owner
 	removed(null, ignore_children)
+	if(istype(last_owner) && !QDELETED(last_owner) && length(last_owner.organs) <= 1)
+		last_owner.physically_destroyed(FALSE, disintegrate)
+
 	if(QDELETED(src))
 		return
 

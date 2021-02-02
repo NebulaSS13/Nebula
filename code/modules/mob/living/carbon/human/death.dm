@@ -85,3 +85,14 @@
 		E.status |= ORGAN_DISFIGURED
 	update_body(1)
 	return
+
+/mob/living/carbon/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DROPLIMB_BLUNT)
+	for(var/obj/item/organ/external/limb in organs)
+		var/limb_can_amputate = (limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
+		limb.limb_flags |= ORGAN_FLAG_CAN_AMPUTATE
+		limb.droplimb(TRUE, droplimb_type, TRUE, TRUE)
+		if(!QDELETED(limb) && !limb_can_amputate)
+			limb.limb_flags &= ~ORGAN_FLAG_CAN_AMPUTATE
+	dump_contents()
+	if(!skip_qdel && !QDELETED(src))
+		qdel(src)
