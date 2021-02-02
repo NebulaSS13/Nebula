@@ -97,16 +97,12 @@ var/list/mining_floors = list()
 		return ..(W,user)
 
 /turf/simulated/floor/asteroid/proc/gets_dug()
-
 	if(dug)
 		return
-
 	for(var/i=0;i<(rand(3)+2);i++)
-		new/obj/item/ore/glass(src)
-
-	dug = 1
+		LAZYADD(., new/obj/item/ore/glass(src))
+	dug = TRUE
 	icon_state = "asteroid_dug"
-	return
 
 /turf/simulated/floor/asteroid/proc/updateMineralOverlays(var/update_neighbors)
 
