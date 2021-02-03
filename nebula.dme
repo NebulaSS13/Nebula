@@ -3230,7 +3230,6 @@
 #include "code\unit_tests\integrated_circuits.dm"
 #include "code\unit_tests\job_tests.dm"
 #include "code\unit_tests\json.dm"
-#include "code\unit_tests\loadout_tests.dm"
 #include "code\unit_tests\machine_tests.dm"
 #include "code\unit_tests\map_tests.dm"
 #include "code\unit_tests\materials.dm"
