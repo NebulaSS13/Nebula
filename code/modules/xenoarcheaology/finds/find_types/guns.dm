@@ -1,8 +1,15 @@
 // Ballistic gun
 /decl/archaeological_find/gun
 	item_type = "gun"
+	new_icon_state = ICON_STATE_WORLD
 	responsive_reagent = /decl/material/solid/metal/iron
 	possible_types = list(/obj/item/gun/projectile/revolver)
+	var/gun_icons = list(
+		'icons/obj/guns/xenoarch/gun_1.dmi',
+		'icons/obj/guns/xenoarch/gun_2.dmi',
+		'icons/obj/guns/xenoarch/gun_3.dmi',
+		'icons/obj/guns/xenoarch/gun_4.dmi'
+	)
 
 /decl/archaeological_find/gun/spawn_item(atom/loc)
 	var/obj/item/gun/projectile/revolver/new_gun = ..()
@@ -24,8 +31,8 @@
 
 	return new_gun
 
-/decl/archaeological_find/gun/new_icon_state()
-	return "gun[rand(1,4)]"
+/decl/archaeological_find/gun/new_icon()
+	return pick(gun_icons)
 
 /decl/archaeological_find/gun/get_additional_description()
 	return "This is an antique weapon, you're not sure if it will fire or not."
@@ -33,6 +40,7 @@
 // Energy gun
 /decl/archaeological_find/laser
 	item_type = "gun"
+	new_icon_state = ICON_STATE_WORLD
 	modification_flags = XENOFIND_APPLY_DECOR | XENOFIND_REPLACE_ICON
 	responsive_reagent = /decl/material/solid/metal/iron
 	possible_types = list(
@@ -40,6 +48,14 @@
 		/obj/item/gun/energy/laser,
 		/obj/item/gun/energy/xray,
 		/obj/item/gun/energy/captain
+	)
+	var/egun_icons = list(
+		'icons/obj/guns/xenoarch/egun_1.dmi',
+		'icons/obj/guns/xenoarch/egun_2.dmi',
+		'icons/obj/guns/xenoarch/egun_3.dmi',
+		'icons/obj/guns/xenoarch/egun_4.dmi',
+		'icons/obj/guns/xenoarch/egun_5.dmi',
+		'icons/obj/guns/xenoarch/egun_6.dmi'
 	)
 
 /decl/archaeological_find/laser/spawn_item(atom/loc)
@@ -57,8 +73,8 @@
 
 	return new_gun
 
-/decl/archaeological_find/laser/new_icon_state()
-	return "egun[rand(1,6)]"
+/decl/archaeological_find/laser/new_icon()
+	return pick(egun_icons)
 
 /decl/archaeological_find/laser/get_additional_description()
 	return "This is an antique weapon, you're not sure if it will fire or not."
