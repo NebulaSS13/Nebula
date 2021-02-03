@@ -70,7 +70,7 @@ var/list/obj/machinery/network/requests_console/allConsoles = list()
 		var/list/all_departments = decls_repository.get_decls_of_subtype(/decl/department)
 		for(var/key in all_departments)
 			var/decl/department/candidate = all_departments[key]
-			if(candidate.title == department)
+			if(lowertext(candidate.name) == lowertext(department))
 				set_department(candidate)
 				found_name = TRUE
 				break
@@ -81,8 +81,8 @@ var/list/obj/machinery/network/requests_console/allConsoles = list()
 /obj/machinery/network/requests_console/proc/set_department(var/decl/department/_department)
 	if(istype(_department))
 		department = _department.reference
-		announcement.title = "[_department.title] announcement"
-		SetName("[_department.title] Requests Console")
+		announcement.title = "[_department.name] announcement"
+		SetName("[_department.name] Requests Console")
 	else if(istext(department))
 		department = _department
 		announcement.title = "[_department] announcement"
@@ -190,13 +190,9 @@ var/list/obj/machinery/network/requests_console/allConsoles = list()
 		var/list/choices = list()
 		var/list/all_departments = decls_repository.get_decls_of_subtype(/decl/department)
 		for(var/dtype in all_departments)
-			var/decl/department/dept = all_departments[dtype]
-			if(dept.reference)
-				choices[dept.reference] = dept
+			choices += all_departments[dtype]
 		var/choice = input(user, "Select a new department from the list:", "Department Selection", department) as null|anything in (choices + "Custom")
 		if(!CanPhysicallyInteract(user))
-			return TOPIC_HANDLED
-		if(!choice)
 			return TOPIC_HANDLED
 		if(choice == "Custom")
 			var/input = input(user, "Enter a custom name:", "Custom Selection", department) as null|text
@@ -207,7 +203,9 @@ var/list/obj/machinery/network/requests_console/allConsoles = list()
 			sanitize(input)
 			set_department(input)
 			return TOPIC_REFRESH
-		set_department(choices[choice])
+		else if(!istype(choice, /decl/department))
+			return TOPIC_HANDLED
+		set_department(choice)
 		return TOPIC_REFRESH
 
 /obj/machinery/network/requests_console/attackby(var/obj/item/O, var/mob/user)

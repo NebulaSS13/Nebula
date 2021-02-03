@@ -408,7 +408,7 @@
 		if(LAZYLEN(job.department_refs) && job.primary_department)
 			var/decl/department/dept = get_department_by_reference(job.primary_department)
 			if(dept)
-				dat += "<b>Department:</b> [dept.title]."
+				dat += "<b>Department:</b> [dept.name]."
 			if(job.head_position)
 				dat += "You are in charge of this department."
 

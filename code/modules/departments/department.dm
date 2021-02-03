@@ -14,7 +14,7 @@ var/list/departments_by_reference
 	. = global.departments_by_reference[dept_ref]
 
 /decl/department
-	var/title                       // Player facing. Can be changed freely without breaking code or updating refrences in jobs.
+	var/name                        // Player facing. Can be changed freely without breaking code or updating refrences in jobs.
 	var/reference                   // Code facing. Jobs reference their department by this.
 	var/announce_channel = "Common" // The Channel for spawn annoncement. Leave as common if unsure. The channel will be selected based of the first deparment listed in a jobs .department_refs
 	var/list/goals = list() 
@@ -28,8 +28,8 @@ var/list/departments_by_reference
 	if(!reference)
 		crash_at("Department [type] initialized with no reference.")
 	. = ..()
-	if(!title)
-		title = reference
+	if(!name)
+		name = reference
 	if(LAZYLEN(goals) <= 0)
 		return
 	var/list/possible_goals = goals.Copy()

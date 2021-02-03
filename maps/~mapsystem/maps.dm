@@ -285,7 +285,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	for(var/department in station_departments)
 		var/decl/department/dept = get_department_by_reference(department)
 		if(istype(dept))
-			department_accounts[department] = create_account("[dept.title] Account", "[dept.title]", department_money, ACCOUNT_TYPE_DEPARTMENT)
+			department_accounts[department] = create_account("[dept.name] Account", "[dept.name]", department_money, ACCOUNT_TYPE_DEPARTMENT)
 
 	department_accounts["Vendor"] = create_account("Vendor Account", "Vendor", 0, ACCOUNT_TYPE_DEPARTMENT)
 	vendor_account = department_accounts["Vendor"]

@@ -3,9 +3,8 @@
 	var/list/dept_data = list()
 	for(var/dept_key in global.departments_by_reference)
 		var/decl/department/dept = global.departments_by_reference[dept_key]
-		dept_data += list(list("names" = list(), "header" = dept.title, "ref" = dept.reference))
-	
-	
+		dept_data += list(list("names" = list(), "header" = dept.name, "ref" = dept.reference))
+		
 	var/list/misc //Special departments for easier access
 	for(var/list/department in dept_data)
 		if(department["ref"] == "misc")
