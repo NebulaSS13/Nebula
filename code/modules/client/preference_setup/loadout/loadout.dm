@@ -351,10 +351,10 @@ var/list/gear_datums = list()
 	var/whitelisted        //Term to check the whitelist for..
 	var/sort_category = "General"
 	var/flags              //Special tweaks in new
-	var/custom_setup_proc  //Special tweak in New
+	var/custom_setup_proc                 //Special tweak in New
+	var/list/custom_setup_proc_arguments  //Special tweak in New
 	var/category
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
-	var/implant_into = null
 
 /datum/gear/New()
 	if(FLAGS_EQUALS(flags, GEAR_HAS_TYPE_SELECTION|GEAR_HAS_SUBTYPE_SELECTION))
@@ -372,7 +372,7 @@ var/list/gear_datums = list()
 		gear_tweaks += gear_tweak_free_name
 		gear_tweaks += gear_tweak_free_desc
 	if(custom_setup_proc)
-		gear_tweaks += new/datum/gear_tweak/custom_setup(custom_setup_proc)
+		gear_tweaks += new/datum/gear_tweak/custom_setup(custom_setup_proc, custom_setup_proc_arguments)
 	var/options = get_gear_tweak_options()
 	for(var/tweak in options)
 		var/optargs = options[tweak]
@@ -407,16 +407,16 @@ var/list/gear_datums = list()
 	return item
 
 /datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
-	var/obj/item/item = spawn_item(H, H, metadata)
+	var/obj/item/item = spawn_and_validate_item(H, H, metadata)
+	if(!item)
+		return
+
 	if(H.equip_to_slot_if_possible(item, slot, del_on_fail = 1, force = 1))
 		. = item
 
 /datum/gear/proc/spawn_in_storage_or_drop(var/mob/living/carbon/human/H, var/metadata)
-	var/obj/item/item = spawn_item(H, H, metadata)
-	item.add_fingerprint(H)
-
-	if(implant_into)
-		implant_into_mob(H, item)
+	var/obj/item/item = spawn_and_validate_item(H, H, metadata)
+	if(!item)
 		return
 
 	var/atom/placed_in = H.equip_to_storage(item)
@@ -429,26 +429,17 @@ var/list/gear_datums = list()
 	else
 		to_chat(H, "<span class='danger'>Dropping \the [item] on the ground!</span>")
 
-/datum/gear/proc/implant_into_mob(var/mob/living/carbon/human/H, obj/item/I)
-	if(!implant_into)
+/datum/gear/proc/spawn_and_validate_item(mob/living/carbon/human/H, metadata)
+	PRIVATE_PROC(TRUE)
+
+	var/obj/item/item = spawn_item(H, H, metadata)
+	if(QDELETED(item))
 		return
 
-	var/obj/item/organ/external/organ_to_implant_into = H.get_organ(implant_into)
+	if(!(flags & GEAR_NO_FINGERPRINTS))
+		item.add_fingerprint(H)
 
-	if(istype(I, /obj/item/organ/internal/augment))
-		var/obj/item/organ/internal/augment/A = I
-		var/implantloc = A.parent_organ
-		organ_to_implant_into = H.get_organ(implantloc)
-		if(A.augment_flags == AUGMENTATION_MECHANIC)
-			if(!BP_IS_PROSTHETIC(organ_to_implant_into))
-				to_chat(H, SPAN_DANGER("Your [organ_to_implant_into.name] is not prosthetic, and therefore the [A] can not be installed!"))
-				qdel(A)
-				return
-		A.replaced(H, organ_to_implant_into)
-		to_chat(H, SPAN_NOTICE("Implanting you with [A] in your [organ_to_implant_into.name]."))
-
-	if(istype(I, /obj/item/implant))
-		var/obj/item/implant/IM = I
-		IM.forceMove(organ_to_implant_into)
-		IM.implanted(H)
-		to_chat(H, SPAN_NOTICE("Implanting you with [IM] in your [organ_to_implant_into.name]."))
+	if(flags & GEAR_NO_EQUIP)
+		return
+	
+	return item
