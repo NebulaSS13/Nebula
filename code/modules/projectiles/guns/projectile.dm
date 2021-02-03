@@ -2,7 +2,6 @@
 	name = "gun"
 	desc = "A gun that fires bullets."
 	icon = 'icons/obj/guns/pistol.dmi'
-	icon_state = "pistol"
 	origin_tech = "{'combat':2,'materials':2}"
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/metal/steel
