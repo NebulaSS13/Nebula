@@ -40,6 +40,7 @@ var/list/responsive_carriers = list(
 	I.SetName(new_name)
 	if(modification_flags & XENOFIND_REPLACE_ICON)
 		I.icon = new_icon()
+		I.has_inventory_icon = check_state_in_icon(ICON_STATE_INV, I.icon)
 		I.icon_state = new_icon_state()
 	I.desc = jointext(descriptors, "\n")
 	I.forceMove(location)
