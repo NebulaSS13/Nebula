@@ -1,9 +1,8 @@
 // Generates a simple HTML crew manifest for use in various places
 /proc/html_crew_manifest(var/monochrome, var/OOC, records = GLOB.all_crew_records)
 	var/list/dept_data = list()
-	var/list/dept_list = SSdepartments.departments
-	for(var/dept_key in dept_list)
-		var/datum/department/dept = dept_list[dept_key]
+	for(var/dept_key in global.departments_by_reference)
+		var/decl/department/dept = global.departments_by_reference[dept_key]
 		dept_data += list(list("names" = list(), "header" = dept.title, "ref" = dept.reference))
 	
 	
@@ -106,9 +105,8 @@
 
 /proc/nano_crew_manifest()
 	var/list/dept_data 
-	var/list/dept_list = SSdepartments.departments
-	for(var/dept_key in dept_list)
-		var/datum/department/dept = dept_list[dept_key]
+	for(var/dept_key in global.departments_by_reference)
+		var/decl/department/dept = global.departments_by_reference[dept_key]
 		dept_data += list("[dept.reference]" = filtered_nano_crew_manifest(SSjobs.titles_by_department(dept.reference))) 
 	return dept_data
 	

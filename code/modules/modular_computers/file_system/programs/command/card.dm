@@ -48,8 +48,9 @@
 	data["centcom_access"] = is_centcom
 
 	data["titles_by_dept"] = list()
-	for(var/dept_key in SSdepartments.departments)
-		var/datum/department/dept = SSdepartments.departments[dept_key]
+	var/list/all_departments = decls_repository.get_decls_of_subtype(/decl/department)
+	for(var/dept_key in all_departments)
+		var/decl/department/dept = all_departments[dept_key]
 		var/list/map_jobs = SSjobs.titles_by_department(dept.reference)
 		if(LAZYLEN(map_jobs))
 			data["titles_by_dept"] += list(list(

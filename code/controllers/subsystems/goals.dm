@@ -39,14 +39,15 @@ SUBSYSTEM_DEF(goals)
 		disable()
 
 /datum/controller/subsystem/goals/proc/update_department_goal(var/department_ref, var/goal_type, var/progress)
-	var/datum/department/dept = SSdepartments.departments[department_ref]
+	var/decl/department/dept = get_department_by_reference(department_ref)
 	if(dept)
 		dept.update_progress(goal_type, progress)
 
 /datum/controller/subsystem/goals/proc/get_roundend_summary()
 	. = list()
-	for(var/thing in SSdepartments.departments)
-		var/datum/department/dept = SSdepartments.departments[thing]
+	var/list/all_departments = decls_repository.get_decls_of_subtype(/decl/department)
+	for(var/thing in all_departments)
+		var/decl/department/dept = all_departments[thing]
 		if (LAZYLEN(SSjobs.titles_by_department(dept)))
 			. += "<b>[dept.title] had the following shift goals:</b>"
 			. += dept.summarize_goals(show_success = TRUE)

@@ -62,12 +62,14 @@ var/list/obj/machinery/network/requests_console/allConsoles = list()
 	announcement.newscast = 1
 	allConsoles += src
 	// Try and find it; this is legacy mapping compatibility for the most part.
-	if(SSdepartments.departments[department])
-		set_department(SSdepartments.departments[department])
+	var/decl/department/dept = get_department_by_reference(department)
+	if(dept)
+		set_department(dept)
 	else
 		var/found_name = FALSE
-		for(var/key in SSdepartments.departments)
-			var/datum/department/candidate = SSdepartments.departments[key]
+		var/list/all_departments = decls_repository.get_decls_of_subtype(/decl/department)
+		for(var/key in all_departments)
+			var/decl/department/candidate = all_departments[key]
 			if(candidate.title == department)
 				set_department(candidate)
 				found_name = TRUE
@@ -76,7 +78,7 @@ var/list/obj/machinery/network/requests_console/allConsoles = list()
 			set_department(department)
 	set_light(1)
 
-/obj/machinery/network/requests_console/proc/set_department(var/datum/department/_department)
+/obj/machinery/network/requests_console/proc/set_department(var/decl/department/_department)
 	if(istype(_department))
 		department = _department.reference
 		announcement.title = "[_department.title] announcement"
@@ -185,9 +187,13 @@ var/list/obj/machinery/network/requests_console/allConsoles = list()
 		return TOPIC_REFRESH
 
 	if(href_list["set_department"])
-		var/list/choices = SSdepartments.departments.Copy()
-		choices += "Custom"
-		var/choice = input(user, "Select a new department from the list:", "Department Selection", department) as null|anything in choices
+		var/list/choices = list()
+		var/list/all_departments = decls_repository.get_decls_of_subtype(/decl/department)
+		for(var/dtype in all_departments)
+			var/decl/department/dept = all_departments[dtype]
+			if(dept.reference)
+				choices[dept.reference] = dept
+		var/choice = input(user, "Select a new department from the list:", "Department Selection", department) as null|anything in (choices + "Custom")
 		if(!CanPhysicallyInteract(user))
 			return TOPIC_HANDLED
 		if(!choice)

@@ -1,4 +1,4 @@
-/datum/department/command
+/decl/department/command
 	goals = list(/datum/goal/department/paperwork/tradeship)
 
 var/list/tradeship_paperwork_spawn_turfs = list()

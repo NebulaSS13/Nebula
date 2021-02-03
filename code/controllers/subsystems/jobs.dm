@@ -105,8 +105,9 @@ SUBSYSTEM_DEF(jobs)
 				must_fill_titles += job.title
 			if(job.department_refs)
 				for(var/dept_ref in job.department_refs)
-					if(dept_ref in SSdepartments.departments)
-						LAZYDISTINCTADD(positions_by_department[dept_ref], job.title)
+					var/decl/department/dept = get_department_by_reference(dept_ref)
+					if(dept)
+						LAZYDISTINCTADD(positions_by_department[dept.reference], job.title)
 
 	// Set up syndicate phrases.
 	syndicate_code_phrase = generate_code_phrase()

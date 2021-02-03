@@ -33,11 +33,12 @@
 		to_chat(src, SPAN_NOTICE("<a href='?src=\ref[mind];add_goal=1;add_goal_caller=\ref[mind.current]'>Add Random Goal</a>"))
 	
 	for(var/dept_key in mind.assigned_job.department_refs)
-		var/datum/department/dept = SSdepartments.departments[dept_key]
-		if(LAZYLEN(dept.goals))
-			to_chat(src, SPAN_NOTICE("<br><br><font size = 3><b>This round, [dept.title] has the following departmental goals:</b></font><br>[jointext(dept.summarize_goals(show_success), "<br>")]"))
-		else
-			to_chat(src, SPAN_NOTICE("<br><br><font size = 3><b>[dept.title] has no departmental goals this round.</b></font>"))
+		var/decl/department/dept = get_department_by_reference(dept_key)
+		if(dept)
+			if(LAZYLEN(dept.goals))
+				to_chat(src, SPAN_NOTICE("<br><br><font size = 3><b>This round, [dept.title] has the following departmental goals:</b></font><br>[jointext(dept.summarize_goals(show_success), "<br>")]"))
+			else
+				to_chat(src, SPAN_NOTICE("<br><br><font size = 3><b>[dept.title] has no departmental goals this round.</b></font>"))
 
 	if(LAZYLEN(mind.goals))
 		to_chat(mind.current, SPAN_NOTICE("<br><br>You can check your round goals with the <b>Show Goals</b> verb."))
