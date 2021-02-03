@@ -5,10 +5,10 @@
 	var/list/failures = list()
 	for(var/job_title in SSjobs.titles_to_datums)
 		var/datum/job/job = SSjobs.titles_to_datums[job_title]
-		if(!isnull(job.primary_department) && !get_department_by_reference(job.primary_department))
+		if(!isnull(job.primary_department) && !SSjobs.get_department_by_reference(job.primary_department))
 			failures += "[job.type] ([job_title]) had invalid primary reference: [job.primary_department || "NULL"]"
 		for(var/dept_ref in job.department_refs)
-			if(!get_department_by_reference(dept_ref))
+			if(!SSjobs.get_department_by_reference(dept_ref))
 				failures += "[job.type] ([job_title]) had invalid secondary reference: [dept_ref]"
 	if(length(failures))
 		fail("Some jobs had invalid department references:\n[jointext(failures, "\n")]")

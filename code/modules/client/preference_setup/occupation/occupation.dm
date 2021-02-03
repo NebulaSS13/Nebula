@@ -406,7 +406,7 @@
 		send_rsc(user, job.get_job_icon(), "job[ckey(rank)].png")
 		dat += "<img src=job[ckey(rank)].png width=96 height=96 style='float:left;'>"
 		if(LAZYLEN(job.department_refs) && job.primary_department)
-			var/decl/department/dept = get_department_by_reference(job.primary_department)
+			var/decl/department/dept = SSjobs.get_department_by_reference(job.primary_department)
 			if(dept)
 				dat += "<b>Department:</b> [dept.name]."
 			if(job.head_position)

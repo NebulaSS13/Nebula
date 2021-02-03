@@ -1,18 +1,6 @@
 /proc/cmp_departments_dsc(var/decl/department/a, var/decl/department/b)
 	. = b.display_priority - a.display_priority
 
-var/list/departments_by_reference
-/proc/get_department_by_reference(var/dept_ref)
-	if(!global.departments_by_reference)
-		global.departments_by_reference = list()
-		var/list/all_departments = decls_repository.get_decls_of_subtype(/decl/department)
-		for(var/dtype in all_departments)
-			var/decl/department/dept = all_departments[dtype]
-			if(dept.reference)
-				global.departments_by_reference[dept.reference] = dept
-		global.departments_by_reference = sortTim(global.departments_by_reference, /proc/cmp_departments_dsc, TRUE)
-	. = global.departments_by_reference[dept_ref]
-
 /decl/department
 	var/name                        // Player facing. Can be changed freely without breaking code or updating refrences in jobs.
 	var/reference                   // Code facing. Jobs reference their department by this.

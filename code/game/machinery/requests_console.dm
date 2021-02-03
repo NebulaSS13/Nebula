@@ -62,7 +62,7 @@ var/list/obj/machinery/network/requests_console/allConsoles = list()
 	announcement.newscast = 1
 	allConsoles += src
 	// Try and find it; this is legacy mapping compatibility for the most part.
-	var/decl/department/dept = get_department_by_reference(department)
+	var/decl/department/dept = SSjobs.get_department_by_reference(department)
 	if(dept)
 		set_department(dept)
 	else

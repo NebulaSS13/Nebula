@@ -283,7 +283,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			station_departments |= dept
 
 	for(var/department in station_departments)
-		var/decl/department/dept = get_department_by_reference(department)
+		var/decl/department/dept = SSjobs.get_department_by_reference(department)
 		if(istype(dept))
 			department_accounts[department] = create_account("[dept.name] Account", "[dept.name]", department_money, ACCOUNT_TYPE_DEPARTMENT)
 
