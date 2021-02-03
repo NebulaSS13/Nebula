@@ -45,7 +45,8 @@
 	return
 
 /mob/living/proc/handle_chemicals_in_body()
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	chem_effects = null
 
 /mob/living/proc/handle_random_events()
 	return

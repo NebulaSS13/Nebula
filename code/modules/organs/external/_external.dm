@@ -683,7 +683,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(max(istype(T) && T.dirt*10, 2*owner.germ_level) > W.germ_level && W.infection_check())
 			W.germ_level++
 
-	var/antibiotics = owner.chem_effects[CE_ANTIBIOTIC]
+	var/antibiotics = LAZYACCESS(owner.chem_effects, CE_ANTIBIOTIC)
 	if (!antibiotics)
 		for(var/datum/wound/W in wounds)
 			//Infected wounds raise the organ's germ level
@@ -763,7 +763,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		// slow healing
 		var/heal_amt = 0
 		// if damage >= 50 AFTER treatment then it's probably too severe to heal within the timeframe of a round.
-		if (!owner.chem_effects[CE_TOXIN] && W.can_autoheal() && W.wound_damage() && brute_ratio < 0.5 && burn_ratio < 0.5)
+		if (!LAZYACCESS(owner.chem_effects, CE_TOXIN) && W.can_autoheal() && W.wound_damage() && brute_ratio < 0.5 && burn_ratio < 0.5)
 			heal_amt += 0.5
 
 		//we only update wounds once in [wound_update_accuracy] ticks so have to emulate realtime

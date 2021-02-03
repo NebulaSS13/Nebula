@@ -19,7 +19,7 @@
 				emote("custom", AUDIBLE_MESSAGE, "[pick("grunts", "babbles", "gibbers", "jabbers", "burbles")] aimlessly.")
 				return
 
-	if(has_chem_effect(CE_VOICELOSS, 1))
+	if(has_chemical_effect(CE_VOICELOSS, 1))
 		whispering = TRUE
 
 	message = sanitize(message)
@@ -92,7 +92,7 @@
 			return 1
 		if (istype(other, /mob/living/carbon/brain))
 			return 1
-		if (istype(other, /mob/living/carbon/slime))
+		if (isslime(other))
 			return 1
 
 	//This is already covered by mob/say_understands()

@@ -241,7 +241,7 @@
 	if(!owner || !germ_level)
 		return
 
-	var/antibiotics = owner.chem_effects[CE_ANTIBIOTIC]
+	var/antibiotics = LAZYACCESS(owner.chem_effects, CE_ANTIBIOTIC)
 	if (!antibiotics)
 		return
 

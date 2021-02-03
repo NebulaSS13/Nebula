@@ -108,7 +108,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 
 		if(istype(src,/mob/living/))
 			var/mob/living/carbon/M = src
-			if (istype(M) && M.hallucination_power > 50 && M.chem_effects[CE_MIND] < 1)
+			if (istype(M) && M.hallucination_power > 50 && LAZYACCESS(M.chem_effects, CE_MIND) < 1)
 				S.environment = PSYCHOTIC
 			else if (M.drugged)
 				S.environment = DRUGGED

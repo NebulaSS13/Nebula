@@ -129,7 +129,7 @@
 		/obj/item/chems/food/drinks/flask/vacuumflask = 5,
 		/obj/item/chems/food/drinks/bottle/gin = 5,
 		/obj/item/chems/food/drinks/bottle/whiskey = 5,
-		/obj/item/chems/food/drinks/bottle/tequilla = 5,
+		/obj/item/chems/food/drinks/bottle/tequila = 5,
 		/obj/item/chems/food/drinks/bottle/vodka = 5,
 		/obj/item/chems/food/drinks/bottle/vermouth = 5,
 		/obj/item/chems/food/drinks/bottle/rum = 5,

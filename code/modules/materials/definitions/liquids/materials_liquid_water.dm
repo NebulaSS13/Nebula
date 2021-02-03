@@ -23,9 +23,9 @@
 		/decl/material/solid/ice = 1
 	)
 
-/decl/material/liquid/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/water/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
-	if(istype(M, /mob/living/carbon/slime) || alien == IS_SLIME)
+	if(isslime(M) || alien == IS_SLIME)
 		M.adjustToxLoss(2 * removed)
 	else if(ishuman(M))
 		var/list/data = REAGENT_DATA(holder, type)
@@ -46,7 +46,7 @@
 						if(prob(10)) //Only annoy them a /bit/
 							to_chat(M,"<span class='danger'>You feel your insides curdle and burn!</span> \[<a href='?src=\ref[holder];deconvert=\ref[M]'>Give Into Purity</a>\]")
 
-/decl/material/liquid/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/water/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.adjust_hydration(removed * 10)
 	affect_blood(M, alien, removed, holder)
@@ -100,9 +100,9 @@
 			M.adjust_fire_stacks(-(amount / 10))
 			holder.remove_reagent(type, amount)
 
-/decl/material/liquid/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/water/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
-	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
+	if(!isslime(M) && alien != IS_SLIME)
 		return
 	M.adjustToxLoss(10 * removed)	// Babies have 150 health, adults have 200; So, 15 units and 20
 	var/mob/living/carbon/slime/S = M
@@ -111,6 +111,6 @@
 			S.Target = null
 		if(S.Victim)
 			S.Feedstop()
-	if(M.chem_doses[type] == removed)
+	if(LAZYACCESS(M.chem_doses, type) == removed)
 		M.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
 		M.confused = max(M.confused, 2)

@@ -55,7 +55,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	if(temperature > chilling_point && temperature < heating_point)
 		return TRUE
 
-/decl/material/liquid/random/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/random/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	FOR_ALL_EFFECTS
 		var/data = REAGENT_DATA(holder, type)
 		effect.affect_blood(M, alien, removed, LAZYACCESS(data, effect.type))
