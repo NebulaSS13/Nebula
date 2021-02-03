@@ -1,3 +1,21 @@
+/datum/unit_test/jobs_shall_have_valid_department_references
+	name = "JOBS: Shall have valid department references"
+
+/datum/unit_test/jobs_shall_have_valid_department_references/start_test()
+	var/list/failures = list()
+	for(var/job_title in SSjobs.titles_to_datums)
+		var/datum/job/job = SSjobs.titles_to_datums[job_title]
+		if(!isnull(job.primary_department) && !get_department_by_reference(job.primary_department))
+			failures += "[job.type] ([job_title]) had invalid primary reference: [job.primary_department || "NULL"]"
+		for(var/dept_ref in job.department_refs)
+			if(!get_department_by_reference(dept_ref))
+				failures += "[job.type] ([job_title]) had invalid secondary reference: [dept_ref]"
+	if(length(failures))
+		fail("Some jobs had invalid department references:\n[jointext(failures, "\n")]")
+	else
+		pass("All jobs had valid department references.")
+	return 1
+
 /datum/unit_test/jobs_shall_have_a_valid_outfit_type
 	name = "JOBS: Shall have a valid outfit type"
 
