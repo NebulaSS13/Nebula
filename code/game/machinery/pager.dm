@@ -5,10 +5,10 @@
 	desc = "A button used to request the presence of anyone in the department."
 	anchored = 1
 	idle_power_usage = 2
-	var/acknowledged = 0
-	var/last_paged
-	var/department = DEPT_COMMAND
 	var/location
+	var/last_paged
+	var/acknowledged = FALSE
+	var/department = /decl/department/command
 
 /obj/machinery/network/pager/Initialize()
 	. = ..()
@@ -59,16 +59,16 @@
 		MS.send_to_department(department,"Page to <b>[location]</b> was acknowledged.", "*ack*")
 
 /obj/machinery/network/pager/medical
-	department = DEPT_MEDICAL
+	department = /decl/department/medical
 
 /obj/machinery/network/pager/cargo 
-	department = DEPT_SUPPLY
+	department = /decl/department/supply
 
 /obj/machinery/network/pager/security 
-	department = DEPT_SECURITY
+	department = /decl/department/security
 
 /obj/machinery/network/pager/science
-	department = DEPT_SCIENCE
+	department = /decl/department/science
 
 /obj/machinery/network/pager/engineering
-	department = DEPT_ENGINEERING
+	department = /decl/department/engineering

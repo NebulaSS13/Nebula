@@ -112,5 +112,5 @@
 /decl/cultural_info/proc/get_qualifications()
 	return qualifications
 
-/decl/cultural_info/proc/get_possible_personal_goals(var/department_refs)
+/decl/cultural_info/proc/get_possible_personal_goals(var/department_types)
 	return

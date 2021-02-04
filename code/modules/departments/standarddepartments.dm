@@ -1,68 +1,68 @@
 /decl/department/engineering
 	name = "Engineering"
-	reference = DEPT_ENGINEERING
 	announce_channel = "Engineering"
 	colour = "#ffa500"
 	display_priority = 2
+	display_color = "#fff5cc"
 
 /decl/department/security
 	name = "Security"
-	reference = DEPT_SECURITY
 	announce_channel = "Security"
 	colour = "#dd0000"
 	display_priority = 2
+	display_color = "#ffddf0"
 
 /decl/department/medical
 	name = "Medical"
-	reference = DEPT_MEDICAL
 	goals = list(/datum/goal/department/medical_fatalities)
 	announce_channel = "Medical"
 	colour = "#008000"
 	display_priority = 2
+	display_color = "#ffeef0"
 
 /decl/department/science
 	name = "Science"
-	reference = DEPT_SCIENCE
 	goals = list(/datum/goal/department/extract_slime_cores)
 	announce_channel = "Science"
 	colour = "#a65ba6"
+	display_color = "#e79fff"
 
 /decl/department/civilian
 	name = "Civilian"
-	reference = DEPT_CIVILIAN
 	display_priority = 1
+	display_color = "#dddddd"
 
 /decl/department/command
 	name = "Command"
-	reference = DEPT_COMMAND
 	colour = "#800080"
 	display_priority = 3
+	display_color = "#ccccff"
 
 /decl/department/miscellaneous
-	name = "Miscellaneous"
-	reference = DEPT_MISC
+	name = "Misc"
 	display_priority = -1
+	display_color = "#ccffcc"
 
 /decl/department/service
 	name = "Service"
-	reference = DEPT_SERVICE
 	announce_channel = "Service"
 	colour = "#88b764"
+	display_color = "#d0f0c0"
 
 /decl/department/supply
 	name = "Supply"
-	reference = DEPT_SUPPLY
 	announce_channel = "Supply"
 	colour = "#bb9040"
+	display_color = "#f0e68c"
 
 /decl/department/support
-	name = "Command Support"
-	reference = DEPT_SUPPORT
+	name = "Support"
 	announce_channel = "Command"
 	colour = "#800080"
+	display_color = "#87ceeb"
 
 /decl/department/exploration
 	name = "Exploration"
-	reference = DEPT_EXPLORATION
 	announce_channel = "Exploration"
 	colour = "#68099e"
+	display_color = "#b784a7"

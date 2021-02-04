@@ -6,7 +6,7 @@
 	total_positions = 2
 	hud_icon = "hudsecurityofficer"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/security
-	department_refs = list(DEPT_SECURITY)
+	department_types = list(/decl/department/security)
 	selection_color = "#990000"
 	economic_power = 7
 	minimal_player_age = 7
@@ -39,7 +39,7 @@
 	total_positions = 1
 	hud_icon = "huddetective"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/detective
-	department_refs = list(DEPT_SECURITY)
+	department_types = list(/decl/department/security)
 	selection_color = "#630000"
 	economic_power = 7
 	minimal_player_age = 3

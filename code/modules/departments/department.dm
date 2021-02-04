@@ -2,22 +2,18 @@
 	. = b.display_priority - a.display_priority
 
 /decl/department
-	var/name                        // Player facing. Can be changed freely without breaking code or updating refrences in jobs.
-	var/reference                   // Code facing. Jobs reference their department by this.
-	var/announce_channel = "Common" // The Channel for spawn annoncement. Leave as common if unsure. The channel will be selected based of the first deparment listed in a jobs .department_refs
+	var/name
+	var/announce_channel = "Common" // The Channel for spawn annoncement. Leave as common if unsure. The channel will be selected based of the first deparment listed in a jobs .department_types
 	var/list/goals = list() 
 	var/min_goals = 1
 	var/max_goals = 2
 	var/colour = "#808080"
 	var/request_console_flags = 0   // use RC_ASSIST etc here to control department console behavior
 	var/display_priority = 0
+	var/display_color = "#ffffff"
 
 /decl/department/Initialize()
-	if(!reference)
-		crash_at("Department [type] initialized with no reference.")
 	. = ..()
-	if(!name)
-		name = reference
 	if(LAZYLEN(goals) <= 0)
 		return
 	var/list/possible_goals = goals.Copy()
@@ -32,11 +28,11 @@
 		else
 			qdel(deptgoal)
 	if (request_console_flags & RC_ASSIST)
-		req_console_assistance |= reference
+		req_console_assistance |= name
 	if (request_console_flags & RC_SUPPLY)
-		req_console_supplies |= reference
+		req_console_supplies |= name
 	if (request_console_flags & RC_INFO)
-		req_console_information |= reference
+		req_console_information |= name
 
 /decl/department/proc/summarize_goals(var/show_success = FALSE)
 	. = list()

@@ -4,7 +4,7 @@
 	supervisors = "the Lieutenant and the Captain"
 	spawn_positions = 1
 	total_positions = 2
-	department_refs = list(DEPT_SCIENCE)
+	department_types = list(/decl/department/science)
 	outfit_type = /decl/hierarchy/outfit/job/ministation/scientist
 	min_skill = list(
 		SKILL_LITERACY = SKILL_ADEPT,

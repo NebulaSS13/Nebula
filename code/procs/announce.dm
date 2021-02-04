@@ -148,7 +148,7 @@
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
 		return "Common"
-	var/decl/department/dept = SSjobs.get_department_by_reference(job.primary_department)
-	if(dept && LAZYLEN(job.department_refs & SSjobs.departments_by_reference))
+	var/decl/department/dept = SSjobs.get_department_by_type(job.primary_department)
+	if(dept?.announce_channel)
 		return dept.announce_channel
 	return "Common"

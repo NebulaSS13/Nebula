@@ -62,7 +62,7 @@ var/list/obj/machinery/network/requests_console/allConsoles = list()
 	announcement.newscast = 1
 	allConsoles += src
 	// Try and find it; this is legacy mapping compatibility for the most part.
-	var/decl/department/dept = SSjobs.get_department_by_reference(department)
+	var/decl/department/dept = SSjobs.get_department_by_name(department)
 	if(dept)
 		set_department(dept)
 	else
@@ -80,7 +80,7 @@ var/list/obj/machinery/network/requests_console/allConsoles = list()
 
 /obj/machinery/network/requests_console/proc/set_department(var/decl/department/_department)
 	if(istype(_department))
-		department = _department.reference
+		department = _department.name
 		announcement.title = "[_department.name] announcement"
 		SetName("[_department.name] Requests Console")
 	else if(istext(department))

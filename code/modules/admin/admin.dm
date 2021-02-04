@@ -77,7 +77,7 @@ var/global/floorIsLava = 0
 		<A href='?src=\ref[src];boot2=\ref[M]'>Kick</A> |
 		<A href='?_src_=holder;warn=[last_ckey]'>Warn</A> |
 		<A href='?src=\ref[src];newban=\ref[M];last_key=[last_ckey]'>Ban</A> |
-		<A href='?src=\ref[src];jobban2=\ref[M]'>Jobban</A> |
+		<A href='?src=\ref[src];jobban_panel_target=\ref[M]'>Jobban</A> |
 		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A>
 	"}
 
