@@ -22,7 +22,6 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 	var/time_multiplier = 5 //The multiplier on how long it takes the shunt drive to charge.
 	var/max_jump_distance = 8 //How many overmap tiles can this move the ship?
 	var/sabotaged = null
-	var/sabotaged_warn = FALSE
 	var/sabotaged_amt = 0 //amount of crystals used to sabotage us.
 
 	var/static/datum/announcement/priority/ftl_announcement = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice2.ogg'))
@@ -88,7 +87,7 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 			return FALSE
 
 		switch(tc_input)
-			if(10 to 25)
+			if(10 to 24)
 				sabotaged = SHUNT_SABOTAGE_MINOR
 			if(25 to 49)
 				sabotaged = SHUNT_SABOTAGE_MAJOR
@@ -99,8 +98,9 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 		TC.use(tc_input)
 		to_chat(user, SPAN_DANGER("You successfully sabotage [src] by inserting the crystals!"))
 		return TRUE
+	. = ..()
 
-/obj/machinery/ftl_shunt/core/attack_hand(var/mob/user)
+/obj/machinery/ftl_shunt/core/physical_attack_hand(var/mob/user)
 	if(sabotaged)
 		var/skill_delay = user.skill_delay_mult(SKILL_ENGINES, 0.3)
 		if(!user.skill_check(SKILL_ENGINES, SKILL_BASIC))
@@ -117,6 +117,7 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 		sabotaged = null
 		sabotaged_amt = 0
 		return TRUE
+	. = ..()
 
 //Custom procs.
 //Finds fuel ports.
@@ -164,6 +165,16 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 
 	var/announcetxt = replacetext(shunt_start_text, "%%TIME%%", "[eta] minutes.")
 
+	if(use_power != POWER_USE_ACTIVE)
+		update_use_power(POWER_USE_ACTIVE)
+
+	if(sabotaged)
+		for(var/mob/living/carbon/human/H in GLOB.living_mob_list_) //Give engineers a hint that something might be very, very wrong.
+			if(!(H.z in ftl_computer.linked.map_z))
+				continue
+			if(H.skill_check(SKILL_ENGINES, SKILL_EXPERT))
+				to_chat(H, SPAN_DANGER("The deck vibrates with a harmonic that sets your teeth on edge and fills you with dread."))
+
 	ftl_announcement.Announce(announcetxt, "FTL Shunt Management System", new_sound = sound('sound/misc/notice2.ogg'))
 	return FTL_START_CONFIRMED
 
@@ -187,7 +198,7 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 		do_sabotage()
 		return
 
-	use_power = POWER_USE_IDLE
+	update_use_power(POWER_USE_IDLE)
 	var/destination = locate(shunt_x, shunt_y, GLOB.using_map.overmap_z)
 	var/jumpdist = get_dist(get_turf(ftl_computer.linked), destination)
 	var/obj/effect/portal/wormhole/W = new(destination) //Generate a wormhole effect on overmap to give some indication that something is about to happen.
@@ -216,7 +227,7 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 		if(6 to INFINITY)
 			shunt_sev = SHUNT_SEVERITY_CRITICAL
 
-	for(var/mob/living/carbon/human/H in world) //Affect mobs, skip synthetics.
+	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_) //Affect mobs, skip synthetics.
 		sound_to(H, 'sound/machines/hyperspace_end.ogg')
 		if(!(H.z in ftl_computer.linked.map_z))
 			continue
@@ -377,21 +388,7 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 	if((stat & (BROKEN|NOPOWER)) & charging)
 		cancel_shunt()
 
-	if(!length(fuel_ports))
-		find_ports()
-
 	if(charging)
-
-		if(sabotaged && !sabotaged_warn)
-			for(var/mob/living/carbon/human/H in world) //Give engineers a hint that something might be very, very wrong.
-				if(!(H.z in ftl_computer.linked.map_z))
-					continue
-				if(H.skill_check(SKILL_ENGINES, SKILL_EXPERT))
-					to_chat(H, SPAN_DANGER("The deck vibrates with a harmonic that sets your teeth on edge and fills you with dread."))
-			sabotaged_warn = TRUE
-
-		if(use_power != POWER_USE_ACTIVE)
-			update_use_power(POWER_USE_ACTIVE)
 		if(world.time >= charge_time) //We've probably finished charging up.
 			charging = FALSE
 			if(use_fuel(required_fuel_joules))
@@ -399,9 +396,6 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 			else
 				cancel_shunt() //Not enough fuel for whatever reason. Cancel.
 		SSradiation.radiate(src, (active_power_usage / 1000))
-
-	if(!charging)
-		update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/ftl_shunt/fuel_port
 	name = "superluminal shunt fuel port"
@@ -431,7 +425,6 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 		master.fuel_ports -= src
 	master = null
 	QDEL_NULL(fuel)
-	return TRUE
 
 /obj/machinery/ftl_shunt/fuel_port/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/fuel_assembly))
@@ -447,9 +440,8 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 			return TRUE
 
 	. = ..()
-	return FALSE
 
-/obj/machinery/ftl_shunt/fuel_port/attack_hand(var/mob/user)
+/obj/machinery/ftl_shunt/fuel_port/physical_attack_hand(var/mob/user)
 	if(fuel)
 		to_chat(user, SPAN_NOTICE("You begin to remove the fuel assembly from [src]..."))
 		if(!do_after(user, 20, src))
@@ -462,7 +454,6 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 		return TRUE
 
 	. = ..()
-	return FALSE
 
 /obj/machinery/ftl_shunt/fuel_port/proc/has_fuel()
 	return !!fuel

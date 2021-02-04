@@ -12,6 +12,7 @@
 
 /obj/machinery/computer/ship/ftl/Destroy()
 	. = ..()
+	linked_core.ftl_computer = null
 	linked_core = null
 
 /obj/machinery/computer/ship/ftl/proc/recalc_cost()
@@ -22,6 +23,10 @@
 /obj/machinery/computer/ship/ftl/proc/find_core()
 	if(!linked)
 		return
+
+	if(linked_core)
+		linked_core.ftl_computer = null
+		linked_core = null
 
 	for(var/obj/machinery/ftl_shunt/core/C in SSmachines.machinery)
 		if(C.z in linked.map_z)
@@ -57,7 +62,7 @@
 
 /obj/machinery/computer/ship/ftl/OnTopic(var/mob/user, var/list/href_list, state)
 	if(..())
-		return TOPIC_HANDLED
+		return ..()
 
 	if (!linked)
 		return TOPIC_NOACTION
@@ -69,11 +74,11 @@
 				fumble = rand(-2, 2)
 			var/input_x = input(user, "Enter Destination X Coordinates", "FTL Computer", linked_core.shunt_x) as num|null
 			if(input_x >= GLOB.using_map.overmap_size)
-				to_chat(user, SPAN_WARNING("Input invalid. Must be between 0 and [GLOB.using_map.overmap_size - 1]."))
-			else
+				input_x = min(input_x, GLOB.using_map.overmap_size - 1)
+			else if(CanInteract(user, state))
 				if(isnull(input_x))
 					input_x = linked_core.shunt_x
-				linked_core.shunt_x = input_x + fumble
+				linked_core.shunt_x = clamp((input_x + fumble), 1, (GLOB.using_map.overmap_size - 1))
 				recalc_cost()
 				if(fumble)
 					to_chat(user, SPAN_WARNING("You fumble the input because of your inexperience!"))
@@ -86,11 +91,11 @@
 				fumble = rand(-2, 2)
 			var/input_y = input(user, "Enter Destination Y Coordinates", "FTL Computer", linked_core.shunt_y) as num|null
 			if(input_y >= GLOB.using_map.overmap_size)
-				to_chat(user, SPAN_WARNING("Input invalid. Must be between 0 and [GLOB.using_map.overmap_size - 1]."))
-			else
+				input_y = min(input_y, GLOB.using_map.overmap_size - 1)
+			else if(CanInteract(user, state))
 				if(isnull(input_y))
 					input_y = linked_core.shunt_y
-				linked_core.shunt_y = input_y + fumble
+				linked_core.shunt_y = clamp((input_y + fumble), 1, (GLOB.using_map.overmap_size - 1))
 				recalc_cost()
 				if(fumble)
 					to_chat(user, SPAN_WARNING("You fumble the input because of your inexperience!"))
@@ -108,7 +113,7 @@
 			var/dist = get_dist(locate(linked_core.shunt_x, linked_core.shunt_y, GLOB.using_map.overmap_z), get_turf(linked))
 			if(dist > 3) //We are above the safe jump distance, give them a warning.
 				var/warning = alert(user, "Current shunt distance is above safe distance! Do you wish to continue?","Jump Safety System", "Yes", "No")
-				if(warning == "No" && !user.incapacitated() && user.Adjacent(src) && linked_core)
+				if(warning == "No" && CanInteract(user, state))
 					return TOPIC_REFRESH
 
 			if(dist >= linked_core.max_jump_distance)
@@ -135,7 +140,7 @@
 	if(href_list["cancel_shunt"])
 		if(linked_core)
 			var/warning = alert(user, "Cancel current shunt?","Jump Safety System", "Yes", "No")
-			if(warning == "Yes" && !user.incapacitated() && user.Adjacent(src) && linked_core)
+			if(warning == "Yes" && CanInteract(user, state))
 				linked_core.cancel_shunt()
 			else
 				return TOPIC_REFRESH
