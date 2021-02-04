@@ -1,8 +1,7 @@
 
 /obj/item/gun/projectile/pistol/random
 	name = "pistol"
-	icon  = 'icons/obj/guns/randompistol.dmi'
-	icon_state = "preview"
+	icon = 'icons/obj/guns/random_pistol/base.dmi'
 	var/decl/gun_look/gun_look
 	var/handle_icon
 	var/ammo_offset
@@ -13,42 +12,29 @@
 	var/list/global/noun = list(
 		"Justice", "Protection", "Defense", "Penetrator", "Compensator", "Police Special", "Combat", "Point & Shoot"
 	)
-	var/list/global/appearance_cache = list()
 
 /obj/item/gun/projectile/pistol/random/Initialize()
 	var/index = pick(caliber, rand(200,900), "P-[rand(10,99)]")
 	desc = "A semi-automatic pistol of unknown origin. The inscription on the side claims the model is '[pick(descriptor)] [pick(noun)] [index]'"
 	var/list/styles = decls_repository.get_decls_of_type(/decl/gun_look)
-	var/decl/gun_look/style = pick(styles)
-	gun_look = styles[style]
-	handle_icon = gun_look.get_handle_icon()
+	gun_look = styles[pick(styles)]
+	handle_icon = pick(gun_look.handle_icons)
 	. = ..()
-	has_inventory_icon = TRUE
 
 /obj/item/gun/projectile/pistol/random/update_base_icon()
-	var/base_state = get_world_inventory_state()
-	icon_state = "[base_state]_[gun_look.base_icon_state]"
-	overlays += image(icon, "[base_state]_[gun_look.front_icon_state]")
-	overlays += image(icon, "[base_state]_[handle_icon]")
+	..()
+	overlays += image(gun_look.icon, icon_state)
+	overlays += image(handle_icon, icon_state)
 
 /obj/item/gun/projectile/pistol/random/get_ammo_indicator()
-	var/mutable_appearance/ammo_indicator = ..()
-	var/base_state = get_world_inventory_state()
-	ammo_indicator.icon_state = replacetext(ammo_indicator.icon_state, "[base_state]_", "")
-	ammo_indicator.pixel_x = gun_look.ammo_offset[base_state][1]
-	ammo_indicator.pixel_y = gun_look.ammo_offset[base_state][2]
-	return ammo_indicator
+	return gun_look.adjust_ammo_indicator(..(), get_world_inventory_state())
 
 /obj/item/gun/projectile/pistol/random/get_safety_indicator()
-	var/base_state = get_world_inventory_state()
 	var/mutable_appearance/safety = mutable_appearance(icon, "safety[safety()]")
-	safety.pixel_x = gun_look.safety_offset[base_state][1]
-	safety.pixel_y = gun_look.safety_offset[base_state][2]
-	return safety
+	return gun_look.adjust_safety_indicator(safety, get_world_inventory_state())
 
 /decl/gun_look
-	var/base_icon_state =  "base"
-	var/front_icon_state =  "gunbits1"
+	var/icon =  'icons/obj/guns/random_pistol/looks/plated.dmi'
 	 // offsets for LEDs, base state = x,y
 	var/list/ammo_offset = list(
 		ICON_STATE_WORLD = list(15, 15),
@@ -58,12 +44,24 @@
 		ICON_STATE_WORLD = list(17, 15),
 		ICON_STATE_INV = list(17, 17)
 	)
+	var/list/handle_icons = list(
+		'icons/obj/guns/random_pistol/handle/ergonomic.dmi',
+		'icons/obj/guns/random_pistol/handle/black.dmi',
+		'icons/obj/guns/random_pistol/handle/revolver.dmi'
+	)
 
-/decl/gun_look/proc/get_handle_icon()
-	return  "handle[rand(1,3)]"
+/decl/gun_look/proc/adjust_ammo_indicator(mutable_appearance/ammo_indicator, base_state)
+	ammo_indicator.icon_state = replacetext(ammo_indicator.icon_state, "[base_state]_", "")
+	ammo_indicator.pixel_x = ammo_offset[base_state][1]
+	ammo_indicator.pixel_y = ammo_offset[base_state][2]
+	return ammo_indicator
 
-/decl/gun_look/two
-	front_icon_state =  "gunbits2"
+/decl/gun_look/proc/adjust_safety_indicator(mutable_appearance/safety, base_state)
+	safety.pixel_x = safety_offset[base_state][1]
+	safety.pixel_y = safety_offset[base_state][2]
+	return safety
+/decl/gun_look/cover
+	icon =  'icons/obj/guns/random_pistol/looks/cover.dmi'
 	ammo_offset = list(
 		ICON_STATE_WORLD = list(11, 14),
 		ICON_STATE_INV = list(8, 15)
@@ -73,8 +71,8 @@
 		ICON_STATE_INV = list(10, 15)
 	)
 
-/decl/gun_look/three
-	front_icon_state =  "gunbits3"
+/decl/gun_look/short
+	icon =  'icons/obj/guns/random_pistol/looks/short.dmi'
 	ammo_offset = list(
 		ICON_STATE_WORLD = list(16, 14),
 		ICON_STATE_INV = list(16, 15)
@@ -84,8 +82,8 @@
 		ICON_STATE_INV = list(18, 15)
 	)
 
-/decl/gun_look/four
-	front_icon_state =  "gunbits4"
+/decl/gun_look/drilled
+	icon =  'icons/obj/guns/random_pistol/looks/drilled.dmi'
 	ammo_offset = list(
 		ICON_STATE_WORLD = list(16, 14),
 		ICON_STATE_INV = list(16, 15)
