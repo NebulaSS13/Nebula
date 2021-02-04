@@ -126,7 +126,7 @@
 			continue
 
 		for(var/species_type in R.species_locked)
-			if(ispath(species_variation, species_type))
+			if(!(ispath(species_variation, species_type)))
 				design_cache.Remove(R)
 				return
 

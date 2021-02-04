@@ -107,7 +107,7 @@
 
 	// Take reagents, if any are applicable.
 	var/reagents_taken = take_reagents(O, user)
-	if(reagents_taken != SUBSTANCE_TAKEN_NONE && !has_recycler)
+	if(reagents_taken != SUBSTANCE_TAKEN_NONE)
 		show_intake_message(user, reagents_taken, O)
 		updateUsrDialog()
 		return TRUE
