@@ -1,0 +1,7 @@
+author: eckff
+delete-after: true
+changes:
+  - rscadd: Added the panic bunker support from Hestia repository. By default, it
+      turned off and can be toggled on in config or manually for a round.
+  - admin: Admins can control the panic bunker state and add/revoke bypass in Server
+      section with R_SERVER flag.
