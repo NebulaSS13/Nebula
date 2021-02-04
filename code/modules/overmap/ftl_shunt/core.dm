@@ -402,6 +402,7 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 	desc = "A fuel port for an FTL shunt."
 	icon_state = "empty"
 
+	var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/material/gas/hydrogen/deuterium = 25000, /decl/material/gas/hydrogen = 25000, /decl/material/solid/exotic_matter = 50000)
 	var/obj/item/fuel_assembly/fuel
 	var/obj/machinery/ftl_shunt/core/master
 	var/max_fuel = 0
