@@ -38,7 +38,7 @@
 	vodka		spawn_reagent = /decl/material/liquid/ethanol/vodka
 	gin			spawn_reagent = /decl/material/liquid/ethanol/gin
 	rum			spawn_reagent = /decl/material/liquid/ethanol/rum
-	tequila		spawn_reagent = /decl/material/liquid/ethanol/tequilla
+	tequila		spawn_reagent = /decl/material/liquid/ethanol/tequila
 	vermouth	spawn_reagent = /decl/material/liquid/ethanol/vermouth
 	cognac		spawn_reagent = /decl/material/liquid/ethanol/cognac
 	ale			spawn_reagent = /decl/material/liquid/ethanol/ale

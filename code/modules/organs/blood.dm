@@ -191,7 +191,7 @@
 	for(var/R in reagents.reagent_volumes)
 		temp_chem[R] = REAGENT_VOLUME(reagents, R)
 	data["trace_chem"] = temp_chem
-	data["dose_chem"] = chem_doses.Copy()
+	data["dose_chem"] = chem_doses ? chem_doses.Copy() : list()
 	data["blood_colour"] = species.get_blood_colour(src)
 	return data
 
@@ -292,8 +292,8 @@ proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
 	var/min_efficiency = recent_pump ? 0.5 : 0.3
 	blood_volume *= max(min_efficiency, (1-(heart.damage / heart.max_damage)))
 
-	if(!heart.open && chem_effects[CE_BLOCKAGE])
-		blood_volume *= max(0, 1-chem_effects[CE_BLOCKAGE])
+	if(!heart.open && has_chemical_effect(CE_BLOCKAGE, 1))
+		blood_volume *= max(0, 1-LAZYACCESS(chem_effects, CE_BLOCKAGE))
 
 	return min(blood_volume, 100)
 
@@ -315,7 +315,7 @@ proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
 
 	var/blood_volume_mod = max(0, 1 - getOxyLoss()/(species.total_health/2))
 	var/oxygenated_mult = 0
-	if(chem_effects[CE_OXYGENATED])
+	if(has_chemical_effect(CE_OXYGENATED, 1))
 		oxygenated_mult = 0.5
 	blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
 	blood_volume = blood_volume * blood_volume_mod

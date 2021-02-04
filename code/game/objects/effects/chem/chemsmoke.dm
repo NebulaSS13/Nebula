@@ -159,10 +159,9 @@
 		return
 
 	if(LAZYLEN(chemholder.reagents.reagent_volumes))
-		for(var/turf/T in wallList)
+		for(var/turf/T in (wallList|targetTurfs))
 			chemholder.reagents.touch_turf(T)
 		for(var/turf/T in targetTurfs)
-			chemholder.reagents.touch_turf(T)
 			for(var/atom/A in T.contents)
 				if(istype(A, /obj/effect/effect/smoke/chem) || istype(A, /mob))
 					continue

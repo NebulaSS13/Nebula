@@ -21,8 +21,8 @@
 /datum/random_map/automata/cave_system/mountains/snow
 	iterations = 2
 	descriptor = "ice mountains"
-	wall_type =  /turf/simulated/wall/natural/ice
-	mineral_turf = /turf/simulated/wall/natural/random/ice
+	wall_type =  /turf/exterior/wall/ice
+	mineral_turf = /turf/exterior/wall/random/ice
 	rock_color = COLOR_CYAN_BLUE
 
 /datum/random_map/noise/exoplanet/snow

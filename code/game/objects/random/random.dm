@@ -258,7 +258,7 @@
 				/obj/item/chems/food/drinks/bottle/gin,
 				/obj/item/chems/food/drinks/bottle/agedwhiskey,
 				/obj/item/chems/food/drinks/bottle/vodka,
-				/obj/item/chems/food/drinks/bottle/tequilla,
+				/obj/item/chems/food/drinks/bottle/tequila,
 				/obj/item/chems/food/drinks/bottle/absinthe,
 				/obj/item/chems/food/drinks/bottle/wine,
 				/obj/item/chems/food/drinks/bottle/cognac,

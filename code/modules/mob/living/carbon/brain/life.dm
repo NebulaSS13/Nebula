@@ -69,8 +69,7 @@
 
 
 /mob/living/carbon/brain/handle_chemicals_in_body()
-	chem_effects.Cut()
-
+	..()
 	if(touching) touching.metabolize()
 	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
 	if(istype(ingested)) ingested.metabolize()

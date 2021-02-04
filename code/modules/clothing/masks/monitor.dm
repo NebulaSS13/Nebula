@@ -76,12 +76,11 @@
 
 /obj/item/clothing/mask/monitor/mob_can_equip(var/mob/living/carbon/human/user, var/slot)
 	. = ..()
-	if(. && istype(user))
+	if(. && (slot == slot_head_str || slot == slot_wear_mask_str))
 		var/obj/item/organ/external/E = user.organs_by_name[BP_HEAD]
-		if(istype(E) && BP_IS_PROSTHETIC(E))
-			return TRUE
-		to_chat(user, SPAN_WARNING("You must have a synthetic head to install this upgrade."))
-	return FALSE
+		if(!istype(E) || !BP_IS_PROSTHETIC(E))
+			to_chat(user, SPAN_WARNING("You must have a robotic head to install this upgrade."))
+			return FALSE
 
 /obj/item/clothing/mask/monitor/attack_self(mob/user)
 	set_monitor_state()

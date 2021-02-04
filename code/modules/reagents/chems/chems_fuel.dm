@@ -10,7 +10,7 @@
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
 	value = 1.5
 
-/decl/material/liquid/fuel/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/fuel/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjustToxLoss(2 * removed)
 
 /decl/material/liquid/fuel/explosion_act(obj/item/chems/holder, severity)

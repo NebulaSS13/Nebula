@@ -133,7 +133,7 @@
 	icon_state = "bottle19"
 
 	attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-		if(!istype(M, /mob/living/carbon/slime))//If target is not a slime.
+		if(!isslime(M))//If target is not a slime.
 			to_chat(user, "<span class='warning'> The potion only works on baby slimes!</span>")
 			return ..()
 		if(M.is_adult) //Can't tame adults
@@ -167,7 +167,7 @@
 	icon_state = "bottle19"
 
 	attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-		if(!istype(M, /mob/living/carbon/slime/))//If target is not a slime.
+		if(!isslime(M))//If target is not a slime.
 			to_chat(user, "<span class='warning'> The potion only works on slimes!</span>")
 			return ..()
 		if(M.stat)
@@ -199,7 +199,7 @@
 	icon_state = "bottle16"
 
 	attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-		if(!istype(M, /mob/living/carbon/slime))//If target is not a slime.
+		if(!isslime(M))//If target is not a slime.
 			to_chat(user, "<span class='warning'> The steroid only works on baby slimes!</span>")
 			return ..()
 		if(M.is_adult) //Can't tame adults

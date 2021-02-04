@@ -1,0 +1,4 @@
+author: comma
+delete-after: true
+changes:
+  - tweak: Need to be on same tile as rollerbed to buckle to it.

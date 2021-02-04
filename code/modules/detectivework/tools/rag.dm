@@ -87,15 +87,10 @@
 		to_chat(user, "<span class='warning'>The [initial(name)] is dry!</span>")
 	else
 		user.visible_message("\The [user] starts to wipe down [A] with [src]!")
-		reagents.splash(A, 1) //get a small amount of liquid on the thing we're wiping.
 		update_name()
 		if(do_after(user,30, progress = 1))
 			user.visible_message("\The [user] finishes wiping off the [A]!")
-			if(isturf(A))
-				var/turf/T = A
-				T.clean(src, user)
-			else
-				A.clean_blood()
+			reagents.splash(A, FLUID_EVAPORATION_POINT)
 
 /obj/item/chems/glass/rag/attack(atom/target, mob/user , flag)
 	if(isliving(target))

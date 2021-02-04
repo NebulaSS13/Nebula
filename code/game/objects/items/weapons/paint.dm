@@ -18,19 +18,14 @@ var/global/list/cached_icons = list()
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	var/pigment
 
-/obj/item/chems/glass/paint/afterattack(turf/simulated/target, mob/user, proximity)
-	if(!proximity) return
-	if(istype(target) && reagents.total_volume > 5)
-		user.visible_message("<span class='warning'>\The [target] has been splashed with something by [user]!</span>")
-		reagents.trans_to_turf(target, 5)
-	else
-		return ..()
-
 /obj/item/chems/glass/paint/Initialize()
 	. = ..()
-	reagents.add_reagent(/decl/material/liquid/narcotics, reagents.maximum_volume-10)
 	if(pigment)
-		reagents.add_reagent(pigment, reagents.maximum_volume-10)
+		var/amt = round(reagents.maximum_volume/2)
+		reagents.add_reagent(pigment, amt)
+		reagents.add_reagent(/decl/material/liquid/paint, amt)
+	else
+		reagents.add_reagent(/decl/material/liquid/paint, reagents.maximum_volume)
 
 /obj/item/chems/glass/paint/on_update_icon()
 	overlays.Cut()
@@ -41,35 +36,35 @@ var/global/list/cached_icons = list()
 
 /obj/item/chems/glass/paint/red
 	name = "red paint bucket"
-	pigment = /decl/material/pigment/red
+	pigment = /decl/material/liquid/pigment/red
 
 /obj/item/chems/glass/paint/yellow
 	name = "yellow paint bucket"
-	pigment = /decl/material/pigment/yellow
+	pigment = /decl/material/liquid/pigment/yellow
 
 /obj/item/chems/glass/paint/green
 	name = "green paint bucket"
-	pigment = /decl/material/pigment/green
+	pigment = /decl/material/liquid/pigment/green
 
 /obj/item/chems/glass/paint/blue
 	name = "blue paint bucket"
-	pigment = /decl/material/pigment/blue
+	pigment = /decl/material/liquid/pigment/blue
 
 /obj/item/chems/glass/paint/purple
 	name = "purple paint bucket"
-	pigment = /decl/material/pigment/purple
+	pigment = /decl/material/liquid/pigment/purple
 
 /obj/item/chems/glass/paint/black
 	name = "black paint bucket"
-	pigment = /decl/material/pigment/black
+	pigment = /decl/material/liquid/pigment/black
 
 /obj/item/chems/glass/paint/white
 	name = "white paint bucket"
-	pigment = /decl/material/pigment/white
+	pigment = /decl/material/liquid/pigment/white
 
 /obj/item/chems/glass/paint/random
 	name = "odd paint bucket"
 
 /obj/item/chems/glass/paint/random/Initialize()
-	pigment = pick(subtypesof(/decl/material/pigment))
+	pigment = pick(subtypesof(/decl/material/liquid/pigment))
 	. = ..()

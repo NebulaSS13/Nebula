@@ -23,6 +23,7 @@
 
 /mob/living/carbon/alien/ascent_nymph/handle_chemicals_in_body()
 	// Do metabolism.
+	..()
 	var/datum/reagents/metabolism/ingested_reagents = get_ingested_reagents()
 	if(istype(ingested_reagents))
 		ingested_reagents.metabolize()

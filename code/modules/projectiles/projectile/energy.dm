@@ -15,10 +15,10 @@
 	damage = 5
 	agony = 20
 	life_span = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
-	muzzle_type = /obj/effect/projectile/bullet/muzzle
+	muzzle_type = /obj/effect/projectile/muzzle/bullet
 	var/flash_range = 1
 	var/brightness = 7
-	var/light_colour = "#ffffff"
+	var/light_flash_color = COLOR_WHITE
 
 /obj/item/projectile/energy/flash/on_impact(var/atom/A)
 	var/turf/T = flash_range? src.loc : get_turf(A)
@@ -40,7 +40,7 @@
 	sparks.start()
 
 	new /obj/effect/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
-	new /obj/effect/effect/smoke/illumination(T, 5, 4, 1, light_colour)
+	new /obj/effect/effect/smoke/illumination(T, 5, 4, 1, light_flash_color)
 
 //blinds people like the flash round, but in a larger area and can also be used for temporary illumination
 /obj/item/projectile/energy/flash/flare
@@ -51,12 +51,12 @@
 	brightness = 15
 
 /obj/item/projectile/energy/flash/flare/on_impact(var/atom/A)
-	light_colour = pick("#e58775", "#ffffff", "#faa159", "#e34e0e")
-	set_light(1, 1, 4, 2, light_colour)
+	light_flash_color = pick("#e58775", "#ffffff", "#faa159", "#e34e0e")
+	set_light(1, 1, 4, 2, light_flash_color)
 	..() //initial flash
 
 	//residual illumination
-	new /obj/effect/effect/smoke/illumination(loc, rand(190,240), 8, 1, light_colour) //same lighting power as flare
+	new /obj/effect/effect/smoke/illumination(loc, rand(190,240), 8, 1, light_flash_color) //same lighting power as flare
 
 	var/turf/TO = get_turf(src)
 	var/area/AO = TO.loc

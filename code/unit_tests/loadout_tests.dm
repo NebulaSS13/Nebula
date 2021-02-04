@@ -22,8 +22,7 @@
 		pass("All /datum/gear definitions had correct settings.")
 	return  1
 
-// Disabled due to consistent false positives due to DM string comparison or icon state stuff, unclear.
-/*
+
 /datum/unit_test/loadout_test_shall_have_valid_icon_states
 	name = "LOADOUT: Entries shall have valid icon states"
 
@@ -48,7 +47,7 @@
 				var/obj/O = G.path
 				if(ispath(G.path, /obj))
 					O = new G.path()
-					if(!(O.icon_state in icon_states(O.icon)))
+					if(!is_string_in_list(O.icon_state, icon_states(O.icon)))
 						log_unit_test("[G] - [G.path]: Did not find the icon state '[O.icon_state]' in the icon '[O.icon]'.")
 						failed = TRUE
 					qdel(O)
@@ -61,7 +60,6 @@
 	else
 		pass("All /datum/gear definitions had correct icon states.")
 	return  1
-*/
 
 /datum/unit_test/loadout_test_gear_path_tweaks_shall_be_of_gear_path
 	name = "LOADOUT: Gear path tweaks shall be of gear path."

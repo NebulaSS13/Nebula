@@ -52,10 +52,6 @@
 
 /obj/effect/fluid/Destroy()
 	var/turf/simulated/T = get_turf(src)
-	if(istype(T))
-		if(length(T.zone?.fuel_objs))
-			T.zone.fuel_objs -= src
-		T.wet_floor()
 	STOP_PROCESSING(SSobj, src)
 	for(var/thing in neighbors)
 		var/obj/effect/fluid/F = thing
@@ -64,6 +60,10 @@
 	neighbors = null
 	REMOVE_ACTIVE_FLUID(src)
 	. = ..()
+	if(istype(T))
+		if(length(T.zone?.fuel_objs))
+			T.zone.fuel_objs -= src
+		T.wet_floor()
 
 /obj/effect/fluid/proc/remove_fuel(var/amt)
 	for(var/rtype in reagents.reagent_volumes)
@@ -85,7 +85,7 @@
 /obj/effect/fluid/Process()
 
 	// Evaporation! TODO: add fumes to the air from this, if appropriate.
-	if(reagents.total_volume > FLUID_EVAPORATION_POINT && reagents.total_volume <= FLUID_PUDDLE && prob(35))
+	if(reagents.total_volume > FLUID_EVAPORATION_POINT && reagents.total_volume <= FLUID_PUDDLE && prob(15))
 		reagents.remove_any(min(reagents.total_volume, 1))
 
 	if(reagents.total_volume <= FLUID_EVAPORATION_POINT)

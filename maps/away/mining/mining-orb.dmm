@@ -20,10 +20,10 @@
 /turf/simulated/floor/asteroid,
 /area/mine/unexplored)
 "ag" = (
-/turf/simulated/wall/natural/random/high_chance,
+/turf/exterior/wall/random/high_chance,
 /area/mine/unexplored)
 "ah" = (
-/turf/simulated/wall/natural/random,
+/turf/exterior/wall/random,
 /area/mine/unexplored)
 "ai" = (
 /turf/simulated/wall/sandstone,
@@ -42,7 +42,7 @@
 /turf/simulated/wall/alium,
 /area/mine/unexplored)
 "an" = (
-/turf/simulated/wall/natural,
+/turf/exterior/wall,
 /area/mine/unexplored)
 "ao" = (
 /turf/simulated/wall/alium,
@@ -124,7 +124,7 @@
 /turf/space,
 /area/space)
 "aS" = (
-/turf/simulated/wall/natural,
+/turf/exterior/wall,
 /area/mine/explored)
 "aT" = (
 /obj/effect/overmap/visitable/sector/orb,

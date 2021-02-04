@@ -58,12 +58,12 @@
 		/decl/material/liquid/ethanol/vodka =      0.1
 	)
 
-/decl/cocktail/tequilla_sunrise
-	name = "tequilla sunrise"
-	description = "A simple cocktail of tequilla and orange juice. Much like a screwdriver."
+/decl/cocktail/tequila_sunrise
+	name = "tequila sunrise"
+	description = "A simple cocktail of tequila and orange juice. Much like a screwdriver."
 	ratios = list(
 		/decl/material/liquid/drink/juice/orange = 0.6,
-		/decl/material/liquid/ethanol/tequilla =   0.1
+		/decl/material/liquid/ethanol/tequila =   0.1
 	)
 
 /decl/cocktail/classic_martini
@@ -164,7 +164,7 @@
 	name = "Brave Bull"
 	description = "A strong cocktail of tequila and coffee liquor."
 	ratios = list(
-		/decl/material/liquid/ethanol/tequilla =      0.45,
+		/decl/material/liquid/ethanol/tequila =      0.45,
 		/decl/material/liquid/ethanol/coffee/kahlua = 0.25
 	)
 
@@ -236,7 +236,7 @@
 	name = "margarita"
 	description = "A classic cocktail of antiquity."
 	ratios = list(
-		/decl/material/liquid/ethanol/tequilla = 0.35,
+		/decl/material/liquid/ethanol/tequila = 0.35,
 		/decl/material/liquid/drink/juice/lime = 0.35
 	)
 
@@ -248,7 +248,7 @@
 		/decl/material/liquid/ethanol/rum =      0.1,
 		/decl/material/liquid/ethanol/vodka =    0.1, 
 		/decl/material/liquid/ethanol/gin =      0.1, 
-		/decl/material/liquid/ethanol/tequilla = 0.1	
+		/decl/material/liquid/ethanol/tequila = 0.1	
 	)
 
 /decl/cocktail/threemileisland
@@ -259,7 +259,7 @@
 		/decl/material/liquid/ethanol/rum =      0.1,
 		/decl/material/liquid/ethanol/vodka =    0.1, 
 		/decl/material/liquid/ethanol/gin =      0.1, 
-		/decl/material/liquid/ethanol/tequilla = 0.1,
+		/decl/material/liquid/ethanol/tequila = 0.1,
 		/decl/material/solid/metal/uranium
 	)
 
@@ -492,7 +492,7 @@
 	name = "Patron"
 	description = "Tequila mixed with flaked silver, for those with moderate expensive tastes."
 	ratios = list(
-		/decl/material/liquid/ethanol/tequilla = 0.7,
+		/decl/material/liquid/ethanol/tequila = 0.7,
 		/decl/material/solid/metal/silver
 	)
 

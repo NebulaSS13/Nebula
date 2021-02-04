@@ -78,13 +78,14 @@
 /obj/item/organ/internal/lungs/insectoid/serpentid/handle_failed_breath()
 	var/mob/living/carbon/human/H = owner
 
-	H.adjustOxyLoss(-(HUMAN_MAX_OXYLOSS * owner.chem_effects[CE_OXYGENATED]))
+	var/oxygenated = LAZYACCESS(owner.chem_effects, CE_OXYGENATED)
+	H.adjustOxyLoss(-(HUMAN_MAX_OXYLOSS * oxygenated))
 
-	if(breath_fail_ratio < 0.25 && owner.chem_effects[CE_OXYGENATED])
+	if(breath_fail_ratio < 0.25 && oxygenated)
 		H.oxygen_alert = 0
 	if(breath_fail_ratio >= 0.25 && (damage || world.time > last_successful_breath + 2 MINUTES))
 		H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * breath_fail_ratio)
-		if(owner.chem_effects[CE_OXYGENATED])
+		if(oxygenated)
 			H.oxygen_alert = 1
 		else
 			H.oxygen_alert = 2

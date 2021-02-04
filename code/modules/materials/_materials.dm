@@ -388,18 +388,25 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
 
+	if(REAGENT_VOLUME(holder, type) < FLUID_EVAPORATION_POINT)
+		return
+
+	if(istype(T) && dirtiness <= DIRTINESS_CLEAN)
+		T.clean_blood()
+		T.remove_cleanables()
+
 	if(istype(T, /turf/simulated))
 		var/turf/simulated/wall/W = T
 		if(defoliant)
 			for(var/obj/effect/overlay/wallrot/E in W)
 				W.visible_message(SPAN_NOTICE("\The [E] is completely dissolved by the solution!"))
 				qdel(E)
-		if(slipperiness != 0 && REAGENT_VOLUME(holder, type) >= 5)
+		if(slipperiness != 0)
 			if(slipperiness < 0)
 				W.unwet_floor(TRUE)
 			else
 				W.wet_floor(slipperiness)
-		if(dirtiness != DIRTINESS_NEUTRAL && REAGENT_VOLUME(holder, type) >= 1)
+		if(dirtiness != DIRTINESS_NEUTRAL)
 			if(dirtiness > DIRTINESS_NEUTRAL)
 				var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate() in W
 				if (!dirtoverlay)
@@ -416,7 +423,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 						qdel(B)
 				if(dirtiness <= DIRTINESS_CLEAN)
 					W.dirt = 0
-					if(W.wet > 1)
+					if(W.wet > 1 && slipperiness <= 0)
 						W.unwet_floor(FALSE)
 					W.clean_blood()
 					for(var/mob/living/carbon/slime/M in W)
@@ -454,7 +461,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(!(flags & IGNORE_MOB_SIZE) && location != CHEM_TOUCH)
 		effective *= (MOB_SIZE_MEDIUM/M.mob_size)
 
-	M.chem_doses[type] = M.chem_doses[type] + effective
+	var/dose = LAZYACCESS(M.chem_doses, type) + effective
+	LAZYSET(M.chem_doses, type, dose)
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(location)
 			if(CHEM_INJECT)
@@ -465,7 +473,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				affect_touch(M, alien, effective, holder)
 	holder.remove_reagent(type, removed)
 
-/decl/material/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(radioactivity)
 		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
 
@@ -499,11 +507,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(euphoriant)
 		M.adjust_drugged(euphoriant, euphoriant_max)
 
-/decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(affect_blood_on_ingest)
 		affect_blood(M, alien, removed * 0.5, holder)
 
-/decl/material/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 
 	if(!istype(M))
 		return
@@ -564,7 +572,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		if(!M.unacidable)
 			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage))
 
-/decl/material/proc/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
+/decl/material/proc/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.adjustToxLoss(REM)
 

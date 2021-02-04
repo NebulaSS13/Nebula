@@ -64,7 +64,7 @@
 						vision += pick(E.actors) + " " + pick("killing","dying","gored","expiring","exploding","mauled","burning","flayed","in agony") + ". "
 					to_chat(H, "<span class='danger'><font size=2>[uppertext(vision)]</font></span>")
 					H.Paralyse(2)
-					H.hallucination(20, 100)
+					H.set_hallucination(20, 100)
 				return
 	to_chat(user, "<span class='notice'>\The [src] is still.</span>")
 	return ..()

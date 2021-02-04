@@ -99,7 +99,7 @@
 			if (I_DISARM) // We stun the target, with the intention to feed
 				var/stunprob = 1
 
-				if (powerlevel > 0 && !istype(A, /mob/living/carbon/slime))
+				if (powerlevel > 0 && !isslime(A))
 					switch(power * 10)
 						if(0) stunprob *= 10
 						if(1 to 2) stunprob *= 20

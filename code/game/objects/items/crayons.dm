@@ -109,7 +109,7 @@
 	if(istype(M) && M == user)
 		to_chat(M, "You take a bite of the crayon and swallow it.")
 		M.adjust_nutrition(1)
-		M.reagents.add_reagent(/decl/material/pigment,min(5,uses)/3)
+		M.reagents.add_reagent(/decl/material/liquid/pigment,min(5,uses)/3)
 		if(uses)
 			uses -= 5
 			if(uses <= 0)

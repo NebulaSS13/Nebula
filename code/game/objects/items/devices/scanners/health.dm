@@ -297,12 +297,12 @@
 			print_reagent_default_message = FALSE
 			. += "<span class='scan_warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.</span>"
 
-	if(H.chem_doses.len)
+	if(length(H.chem_doses))
 		var/list/chemtraces = list()
 		for(var/T in H.chem_doses)
 			var/decl/material/R = T
 			if(initial(R.scannable))
-				chemtraces += "[initial(R.name)] ([H.chem_doses[T]])"
+				chemtraces += "[initial(R.name)] ([LAZYACCESS(H.chem_doses, T)])"
 		if(chemtraces.len)
 			. += "<span class='scan_notice'>Metabolism products of [english_list(chemtraces)] found in subject's system.</span>"
 

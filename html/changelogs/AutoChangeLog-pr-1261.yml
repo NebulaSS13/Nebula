@@ -1,0 +1,4 @@
+author: comma
+delete-after: true
+changes:
+  - tweak: Fires no longer destroy wiring under floor tiles.

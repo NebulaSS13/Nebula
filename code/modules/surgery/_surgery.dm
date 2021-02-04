@@ -28,6 +28,9 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	var/hidden_from_codex                // Is this surgery a secret?
 	var/list/additional_codex_lines
 
+/decl/surgery_step/proc/get_speed_modifier(var/mob/user, var/mob/target, var/obj/item/tool)
+	. = 1
+
 //returns how well tool is suited for this step
 /decl/surgery_step/proc/tool_quality(obj/item/tool)
 	for (var/T in allowed_tools)
@@ -238,7 +241,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 				LAZYSET(M.surgeries_in_progress, zone, operation_data)
 				S.begin_step(user, M, zone, src)
 				var/skill_reqs = S.get_skill_reqs(user, M, src, zone)
-				var/duration = user.skill_delay_mult(skill_reqs[1]) * rand(S.min_duration, S.max_duration)
+				var/duration = user.skill_delay_mult(skill_reqs[1]) * rand(S.min_duration, S.max_duration) * S.get_speed_modifier(user, M, src)
 				if(prob(S.success_chance(user, M, src, zone)) && do_mob(user, M, duration))
 					S.end_step(user, M, zone, src)
 					handle_post_surgery()
@@ -264,15 +267,16 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 /proc/can_operate(mob/living/carbon/M, mob/living/carbon/user)
 	var/turf/T = get_turf(M)
 	if(locate(/obj/machinery/optable, T))
-		. = TRUE
-	if(locate(/obj/structure/bed, T))
-		. = TRUE
-	if(locate(/obj/structure/table, T))
-		. = TRUE
-	if(locate(/obj/effect/rune/, T))
-		. = TRUE
-
-	if(M == user)
+		. = OPERATE_IDEAL
+	else if(locate(/obj/structure/table, T))
+		. = OPERATE_OKAY
+	else if(locate(/obj/structure/bed, T))
+		. = OPERATE_PASSABLE
+	else if(locate(/obj/effect/rune, T))
+		. = OPERATE_PASSABLE
+	else
+		. = OPERATE_DENY
+	if(. != OPERATE_DENY && M == user)
 		var/hitzone = check_zone(user.zone_sel.selecting, M)
 		var/list/badzones = list(BP_HEAD)
 		var/obj/item/organ/external/E = M.get_organ(M.get_active_held_item_slot())
@@ -280,4 +284,5 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			badzones |= E.organ_tag
 			badzones |= E.parent_organ
 		if(hitzone in badzones)
-			return FALSE
+			return OPERATE_DENY
+		. = min(., OPERATE_OKAY) // it's awkward no matter what
