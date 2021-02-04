@@ -753,7 +753,7 @@ default behaviour is:
 	return TRUE
 
 /mob/living/handle_drowning()
-	if(!can_drown() || !loc.is_flooded(lying))
+	if(!can_drown() || !loc.is_flooded(lying) || holding_breath)
 		return FALSE
 	if(prob(5))
 		var/obj/effect/fluid/F = locate() in loc

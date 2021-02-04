@@ -4,14 +4,20 @@
 
 //Start of a breath chain, calls breathe()
 /mob/living/carbon/handle_breathing()
-	if((life_tick % MOB_BREATH_DELAY) == 0 || failed_last_breath || is_asystole()) //First, resolve location and get a breath
+	if((life_tick - last_breath_tick >= MOB_BREATH_DELAY) || failed_last_breath || is_asystole()) //First, resolve location and get a breath
 		breathe()
 
 /mob/living/carbon/proc/breathe(var/active_breathe = 1)
+	last_breath_tick = life_tick
 
 	if(!need_breathe()) return
 
-	var/datum/gas_mixture/breath = null
+	if(stat != CONSCIOUS && holding_breath)
+		holding_breath = (holding_breath >= 2 ? 3 : 0)
+
+	if(holding_breath == 3)
+		holding_breath = 0
+		handle_post_breath(breath)
 
 	//First, check if we can breathe at all
 	if(handle_drowning() || (is_asystole() && !(CE_STABLE in chem_effects) && active_breathe)) //crit aka circulatory shock
@@ -21,7 +27,7 @@
 		losebreath--
 		if (prob(10) && !is_asystole() && active_breathe) //Gasp per 10 ticks? Sounds about right.
 			INVOKE_ASYNC(src, .proc/emote, "gasp")
-	else
+	else if(holding_breath < 2 || !breath)
 		//Okay, we can breathe, now check if we can get air
 		var/volume_needed = get_breath_volume()
 		breath = get_breath_from_internal(volume_needed) //First, check for air from internals
@@ -34,6 +40,8 @@
 			breath = vacuum //still nothing? must be vacuum
 
 	handle_breath(breath)
+	if(holding_breath == 1)
+		holding_breath = 2
 	handle_post_breath(breath)
 
 /mob/living/carbon/proc/get_breath_from_internal(var/volume_needed=STD_BREATH_VOLUME) //hopefully this will allow overrides to specify a different default volume without breaking any cases where volume is passed in.
@@ -94,5 +102,7 @@
 	return
 
 /mob/living/carbon/proc/handle_post_breath(datum/gas_mixture/breath)
+	if(holding_breath)
+		return
 	if(breath)
 		loc.assume_air(breath) //by default, exhale

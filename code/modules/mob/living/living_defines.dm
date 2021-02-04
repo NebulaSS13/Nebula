@@ -36,6 +36,7 @@
 	var/fire_stacks
 
 	var/failed_last_breath = 0 //This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
+	var/holding_breath = 0 //Used for when the mob is trying to hold their breath. 1 means they need to get a breath, 2 means they're currently holding their breath, 3 means they're going to release their held breath.
 	var/possession_candidate // Can be possessed by ghosts if unplayed.
 
 	var/eye_blind = null	//Carbon

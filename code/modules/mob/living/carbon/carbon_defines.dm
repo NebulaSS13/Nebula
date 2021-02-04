@@ -11,6 +11,9 @@
 	var/datum/reagents/metabolism/touching = null
 	var/losebreath = 0 //if we failed to breathe last tick
 
+	var/datum/gas_mixture/breath = null
+	var/last_breath_tick = 0
+
 	var/coughedtime = null
 	var/ignore_rads = FALSE
 	var/cpr_time = 1.0
