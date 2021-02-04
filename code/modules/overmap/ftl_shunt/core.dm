@@ -423,6 +423,7 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 	if(initial_id_tag)
 		var/datum/extension/local_network_member/local_network = get_extension(src, /datum/extension/local_network_member)
 		local_network.set_tag(null, initial_id_tag)
+	. == ..()
 
 /obj/machinery/ftl_shunt/fuel_port/Destroy()
 	. = ..()
