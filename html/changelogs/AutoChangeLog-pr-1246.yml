@@ -1,5 +1,0 @@
-author: eckff
-delete-after: true
-changes:
-  - rscadd: Added augmentation implanting support code if anyone would like to add
-      implants or augmentations in loadout.
