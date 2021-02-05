@@ -262,7 +262,7 @@ proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
 
 //Percentage of maximum blood volume, affected by the condition of circulation organs
 /mob/living/carbon/human/proc/get_blood_circulation()
-	var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
+	var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
 	var/blood_volume = get_blood_volume()
 	if(!heart)
 		return 0.25 * blood_volume

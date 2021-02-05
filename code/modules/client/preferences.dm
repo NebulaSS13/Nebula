@@ -294,7 +294,7 @@ var/list/time_prefs_fixed = list()
 			var/status = organ_data[name]
 			if(!status)
 				continue
-			var/obj/item/organ/I = character.internal_organs_by_name[name]
+			var/obj/item/organ/I = character.get_internal_organ(name)
 			if(I)
 				if(status == "assisted")
 					I.mechassist()

@@ -69,7 +69,7 @@
 						if(chest)
 							chest.fracture()
 
-					var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
+					var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
 					if(heart)
 						heart.external_pump = list(world.time, 0.4 + 0.1*pumping_skill + rand(-0.1,0.1))
 
@@ -88,12 +88,12 @@
 				if((head && (head.body_parts_covered & SLOT_FACE)) || (wear_mask && (wear_mask.body_parts_covered & SLOT_FACE)))
 					to_chat(H, "<span class='warning'>You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!</span>")
 					return TRUE
-				if (!H.internal_organs_by_name[H.species.breathing_organ])
+				if (!H.get_internal_organ(H.species.breathing_organ))
 					to_chat(H, "<span class='danger'>You need lungs for mouth-to-mouth resuscitation!</span>")
 					return TRUE
 				if(!need_breathe())
 					return TRUE
-				var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species.breathing_organ]
+				var/obj/item/organ/internal/lungs/L = get_internal_organ(species.breathing_organ)
 				if(L)
 					var/datum/gas_mixture/breath = H.get_breath_from_environment()
 					var/fail = L.handle_breath(breath, 1)

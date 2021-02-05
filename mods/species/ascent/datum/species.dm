@@ -390,7 +390,7 @@
 
 	H.remove_cloaking_source(src)
 
-	var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
+	var/obj/item/organ/internal/B = H.get_internal_organ(BP_BRAIN)
 	if(istype(B,/obj/item/organ/internal/brain/insectoid/serpentid))
 		var/obj/item/organ/internal/brain/insectoid/serpentid/N = B
 		tally += N.lowblood_tally * 2

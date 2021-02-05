@@ -399,7 +399,7 @@
 		env.merge(removed)
 
 	for(var/mob/living/carbon/human/subject in view(src, min(7, round(sqrt(power/6)))))
-		var/obj/item/organ/internal/eyes/eyes = subject.internal_organs_by_name[BP_EYES]
+		var/obj/item/organ/internal/eyes/eyes = subject.get_internal_organ(BP_EYES)
 		if (!eyes)
 			continue
 		if (BP_IS_PROSTHETIC(eyes))

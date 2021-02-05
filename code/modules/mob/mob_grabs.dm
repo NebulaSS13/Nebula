@@ -11,6 +11,10 @@
 /mob/proc/get_organ(var/zone)
 	return
 // End grab casting stubs.
+/mob/proc/get_internal_organ(var/organ_tag)
+	return
+/mob/proc/get_internal_organs()
+	return
 
 /mob/can_be_grabbed(var/mob/grabber, var/target_zone)
 	if(!grabber.can_pull_mobs)

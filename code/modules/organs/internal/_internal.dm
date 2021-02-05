@@ -28,8 +28,7 @@
 
 /obj/item/organ/internal/Destroy()
 	if(owner)
-		owner.internal_organs.Remove(src)
-		owner.internal_organs_by_name[organ_tag] = null
+		owner.internal_organs -= src
 		owner.internal_organs_by_name -= organ_tag
 		while(null in owner.internal_organs)
 			owner.internal_organs -= null
@@ -52,11 +51,9 @@
 
 /obj/item/organ/internal/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
 	if(owner)
-		owner.internal_organs_by_name[organ_tag] = null
-		owner.internal_organs_by_name -= organ_tag
-		owner.internal_organs_by_name -= null
-		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
 		owner.internal_organs -= src
+		owner.internal_organs_by_name -= organ_tag
+		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
 		E.update_internal_organs_cost()
 
 		if(detach)
@@ -94,7 +91,6 @@
 /obj/item/organ/internal/remove_rejuv()
 	if(owner)
 		owner.internal_organs -= src
-		owner.internal_organs_by_name[organ_tag] = null
 		owner.internal_organs_by_name -= organ_tag
 		while(null in owner.internal_organs)
 			owner.internal_organs -= null

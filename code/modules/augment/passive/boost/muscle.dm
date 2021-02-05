@@ -17,9 +17,9 @@
 	//1.st Determine where we are and who we should be asking for guidance
 	//we must be second to activate buff
 	if(organ_tag == BP_AUGMENT_L_LEG)
-		other = owner.internal_organs_by_name[BP_AUGMENT_R_LEG]
+		other = owner.get_internal_organ(BP_AUGMENT_R_LEG)
 	else if(organ_tag == BP_AUGMENT_R_LEG)
-		other = owner.internal_organs_by_name[BP_AUGMENT_L_LEG]
+		other = owner.get_internal_organ(BP_AUGMENT_L_LEG)
 	if(other && istype(other))
 		var/datum/skill_buff/augment/muscle/A
 		A = owner.buff_skill(buffs, 0, buffpath)

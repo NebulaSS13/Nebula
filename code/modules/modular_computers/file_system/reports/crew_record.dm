@@ -91,7 +91,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_sex(gender_term)
 	set_age(H ? H.age : 30)
 	set_status(GLOB.default_physical_status)
-	set_species(H ? H.get_species() : GLOB.using_map.default_species)
+	set_species_name(H ? H.get_species_name() : GLOB.using_map.default_species)
 	set_branch(H ? (H.char_branch && H.char_branch.name) : "None")
 	set_rank(H ? (H.char_rank && H.char_rank.name) : "None")
 	set_public_record(H && H.public_record && !jobban_isbanned(H, "Records") ? html_decode(H.public_record) : "No record supplied")
@@ -176,7 +176,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		silicon_type = "AI"
 		robojob = "Artificial Intelligence"
 	set_job(S ? robojob : "Unset")
-	set_species(silicon_type)
+	set_species_name(silicon_type)
 
 	set_implants("Robotic body")
 
@@ -261,7 +261,7 @@ FIELD_LIST("Sex", sex, record_genders(), null, access_change_ids)
 FIELD_NUM("Age", age, null, access_change_ids)
 FIELD_LIST_EDIT("Status", status, GLOB.physical_statuses, null, access_medical)
 
-FIELD_SHORT("Species",species, null, access_change_ids)
+FIELD_SHORT("Species",species_name, null, access_change_ids)
 FIELD_LIST("Branch", branch, record_branches(), null, access_change_ids)
 FIELD_LIST("Rank", rank, record_ranks(), null, access_change_ids)
 FIELD_SHORT("Religion", religion, access_chapel_office, access_change_ids)
