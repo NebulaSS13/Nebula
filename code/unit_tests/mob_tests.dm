@@ -33,7 +33,7 @@
 			var/species_organ = H.species.breathing_organ
 			var/obj/item/organ/internal/lungs/L
 			H.apply_effect(20, STUN, 0)
-			L = H.internal_organs_by_name[species_organ]
+			L = H.get_internal_organ(species_organ)
 			L.last_successful_breath = -INFINITY
 			test_subjects[S.name] = list(H, damage_check(H, OXY))
 	return 1
@@ -108,7 +108,7 @@ proc/damage_check(var/mob/living/M, var/damage_type)
 			loss = M.getOxyLoss()
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				var/obj/item/organ/internal/lungs/L = H.internal_organs_by_name["lungs"]
+				var/obj/item/organ/internal/lungs/L = H.get_internal_organ(BP_LUNGS)
 				if(L)
 					loss = L.oxygen_deprivation
 		if(CLONE)
@@ -181,7 +181,7 @@ proc/damage_check(var/mob/living/M, var/damage_type)
 		var/species_organ = H.species.breathing_organ
 		var/obj/item/organ/internal/lungs/L
 		if(species_organ)
-			L = H.internal_organs_by_name[species_organ]
+			L = H.get_internal_organ(species_organ)
 		if(L)
 			L.last_successful_breath = -INFINITY
 

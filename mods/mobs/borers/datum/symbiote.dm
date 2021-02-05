@@ -106,7 +106,7 @@ GLOBAL_LIST_INIT(symbiote_starting_points, new)
 /datum/job/symbiote/proc/find_valid_hosts(var/just_checking)
 	. = list()
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
-		if(H.stat == DEAD || !H.client || !H.ckey || !H.internal_organs_by_name[BP_BRAIN])
+		if(H.stat == DEAD || !H.client || !H.ckey || !H.has_brain())
 			continue
 		var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
 		if(BP_IS_PROSTHETIC(head) || BP_IS_CRYSTAL(head) || head.has_growths())

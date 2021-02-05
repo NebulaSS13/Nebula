@@ -19,7 +19,7 @@
 
 	adjustOxyLoss(maxHealth)//cease life functions
 	setBrainLoss(maxHealth)
-	var/obj/item/organ/internal/heart/corpse_heart = internal_organs_by_name[BP_HEART]
+	var/obj/item/organ/internal/heart/corpse_heart = get_internal_organ(BP_HEART)
 	if(corpse_heart)
 		corpse_heart.pulse = PULSE_NONE//actually stops heart to make worried explorers not care too much
 	if(corpse)

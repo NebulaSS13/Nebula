@@ -1209,9 +1209,8 @@ obj/item/organ/external/proc/remove_clamps()
 					if(thing.vital || BP_IS_PROSTHETIC(thing))
 						continue
 					internal_organs -= thing
-					owner.internal_organs_by_name[thing.organ_tag] = null
+					owner.internal_organs -= thing
 					owner.internal_organs_by_name -= thing.organ_tag
-					owner.internal_organs.Remove(thing)
 					qdel(thing)
 
 		while(null in owner.internal_organs)

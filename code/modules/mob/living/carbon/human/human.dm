@@ -61,21 +61,21 @@
 
 /mob/living/carbon/human/get_ingested_reagents()
 	if(should_have_organ(BP_STOMACH))
-		var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+		var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
 		if(stomach)
 			return stomach.ingested
 	return touching // Kind of a shitty hack, but makes more sense to me than digesting them.
 
 /mob/living/carbon/human/proc/metabolize_ingested_reagents()
 	if(should_have_organ(BP_STOMACH))
-		var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+		var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
 		if(stomach)
 			stomach.metabolize()
 
 /mob/living/carbon/human/get_fullness()
 	if(!should_have_organ(BP_STOMACH))
 		return ..()
-	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
 	if(stomach)
 		return nutrition + (stomach.ingested.total_volume * 10)
 	return 0 //Always hungry, but you can't actually eat. :(
@@ -99,7 +99,7 @@
 				stat("Tank Pressure", internal.air_contents.return_pressure())
 				stat("Distribution Pressure", internal.distribute_pressure)
 
-		var/obj/item/organ/internal/cell/potato = internal_organs_by_name[BP_CELL]
+		var/obj/item/organ/internal/cell/potato = get_internal_organ(BP_CELL)
 		if(potato && potato.cell)
 			stat("Battery charge:", "[potato.get_charge()]/[potato.cell.maxcharge]")
 
@@ -538,7 +538,7 @@
 				if(hasHUD(user, HUD_MEDICAL))
 					to_chat(usr, "<b>Name:</b> [E.get_name()]")
 					to_chat(usr, "<b>Gender:</b> [E.get_sex()]")
-					to_chat(usr, "<b>Species:</b> [E.get_species()]")
+					to_chat(usr, "<b>Species:</b> [E.get_species_name()]")
 					to_chat(usr, "<b>Blood Type:</b> [E.get_bloodtype()]")
 					to_chat(usr, "<b>Details:</b> [E.get_medRecord()]")
 					read = 1
@@ -570,7 +570,7 @@
 /mob/living/carbon/human/eyecheck()
 	var/total_protection = flash_protection
 	if(species.has_organ[species.vision_organ])
-		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[species.vision_organ]
+		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
 		if(!I?.is_usable())
 			return FLASH_PROTECTION_MAJOR
 		total_protection = I.get_total_protection(flash_protection)
@@ -580,28 +580,28 @@
 
 /mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	if(species.has_organ[species.vision_organ])
-		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[species.vision_organ]
+		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
 		if(!isnull(I))
 			I.additional_flash_effects(intensity)
 	return ..()
 
 /mob/living/carbon/human/proc/getFlashMod()
 	if(species.vision_organ)
-		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[species.vision_organ]
+		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
 		if(istype(I))
 			return I.flash_mod
 	return species.flash_mod
 
 /mob/living/carbon/human/proc/getDarkvisionRange()
 	if(species.vision_organ)
-		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[species.vision_organ]
+		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
 		if(istype(I))
 			return I.darksight_range
 	return species.darksight_range
 
 /mob/living/carbon/human/proc/getDarkvisionTint()
 	if(species.vision_organ)
-		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[species.vision_organ]
+		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
 		if(istype(I))
 			return I.darksight_tint
 	return species.darksight_tint
@@ -610,7 +610,7 @@
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
 /mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = BP_BRAIN)
 
-	var/obj/item/organ/affecting = internal_organs_by_name[brain_tag]
+	var/obj/item/organ/affecting = get_internal_organ(brain_tag)
 
 	target_zone = check_zone(target_zone, src)
 	if(!affecting || affecting.parent_organ != target_zone)
@@ -636,10 +636,10 @@
 	dna.check_integrity(src)
 	return
 
-/mob/living/carbon/human/get_species()
+/mob/living/carbon/human/get_species_name()
 	if(!species)
 		set_species()
-	return species.name
+	. = ..()
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)
@@ -665,7 +665,7 @@
 
 	Stun(3)
 
-	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
 	var/nothing_to_puke = FALSE
 	if(should_have_organ(BP_STOMACH))
 		if(!istype(stomach) || (stomach.ingested.total_volume <= 0 && stomach.contents.len == 0))
@@ -908,11 +908,11 @@
 	..()
 
 /mob/living/carbon/human/proc/is_lung_ruptured()
-	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[BP_LUNGS]
+	var/obj/item/organ/internal/lungs/L = get_internal_organ(BP_LUNGS)
 	return L && L.is_bruised()
 
 /mob/living/carbon/human/proc/rupture_lung()
-	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[BP_LUNGS]
+	var/obj/item/organ/internal/lungs/L = get_internal_organ(BP_LUNGS)
 	if(L)
 		L.rupture()
 
@@ -971,7 +971,7 @@
 				if(!istype(O,/obj/item/implant) && O.w_class > ITEM_SIZE_TINY && prob(5)) //Moving with things stuck in you could be bad.
 					jostle_internal_object(organ, O)
 
-	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
 	if(stomach && stomach.contents.len)
 		for(var/obj/item/O in stomach.contents)
 			if((O.edge || O.sharp) && prob(5))
@@ -1344,16 +1344,11 @@
 	..()
 
 /mob/living/carbon/human/has_brain()
-	if(internal_organs_by_name[BP_BRAIN])
-		var/obj/item/organ/internal/brain = internal_organs_by_name[BP_BRAIN]
-		if(brain && istype(brain))
-			return 1
-	return 0
+	. = istype(get_internal_organ(BP_BRAIN), /obj/item/organ/internal)
 
 /mob/living/carbon/human/check_has_eyes()
-	if(internal_organs_by_name[BP_EYES])
-		var/obj/item/organ/internal/eyes = internal_organs_by_name[BP_EYES]
-		. = eyes && eyes.is_usable()
+	var/obj/item/organ/internal/eyes = get_internal_organ(BP_EYES)
+	. = istype(eyes) && eyes.is_usable()
 
 /mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
 	if((species.check_no_slip(src)) || (shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP)))
@@ -1447,7 +1442,7 @@
 
 // Similar to get_pulse, but returns only integer numbers instead of text.
 /mob/living/carbon/human/proc/get_pulse_as_number()
-	var/obj/item/organ/internal/heart/heart_organ = internal_organs_by_name[BP_HEART]
+	var/obj/item/organ/internal/heart/heart_organ = get_internal_organ(BP_HEART)
 	if(!heart_organ)
 		return 0
 
@@ -1468,7 +1463,7 @@
 
 //generates realistic-ish pulse output based on preset levels as text
 /mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
-	var/obj/item/organ/internal/heart/heart_organ = internal_organs_by_name[BP_HEART]
+	var/obj/item/organ/internal/heart/heart_organ = get_internal_organ(BP_HEART)
 	if(!heart_organ)
 		// No heart, no pulse
 		return "0"
@@ -1484,7 +1479,7 @@
 // output for machines ^	 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ output for people
 
 /mob/living/carbon/human/proc/pulse()
-	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
+	var/obj/item/organ/internal/heart/H = get_internal_organ(BP_HEART)
 	return H ? H.pulse : PULSE_NONE
 
 /mob/living/carbon/human/can_devour(atom/movable/victim, var/silent = FALSE)
@@ -1492,7 +1487,7 @@
 	if(!should_have_organ(BP_STOMACH))
 		return ..()
 
-	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
 	if(!stomach || !stomach.is_usable())
 		if(!silent)
 			to_chat(src, SPAN_WARNING("Your stomach is not functional!"))
@@ -1511,7 +1506,7 @@
 	. = stomach.get_devour_time(victim) || ..()
 
 /mob/living/carbon/human/move_to_stomach(atom/movable/victim)
-	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
 	if(istype(stomach))
 		victim.forceMove(stomach)
 
@@ -1538,7 +1533,7 @@
 
 /mob/living/carbon/human/get_breath_volume()
 	. = ..()
-	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
+	var/obj/item/organ/internal/heart/H = get_internal_organ(BP_HEART)
 	if(H && !H.open)
 		. *= (!BP_IS_PROSTHETIC(H)) ? pulse()/PULSE_NORM : 1.5
 
@@ -1610,12 +1605,12 @@
 /mob/living/carbon/human/proc/resuscitate()
 	if(!is_asystole() || !should_have_organ(BP_HEART))
 		return
-	var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
+	var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
 	if(istype(heart) && !(heart.status & ORGAN_DEAD))
 		var/species_organ = species.breathing_organ
 		var/active_breaths = 0
 		if(species_organ)
-			var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
+			var/obj/item/organ/internal/lungs/L = get_internal_organ(species_organ)
 			if(L)
 				active_breaths = L.active_breathing
 		if(!nervous_system_failure() && active_breaths)
@@ -1683,7 +1678,7 @@
 	if(istype(T) && T.is_flooded(lying) && should_have_organ(BP_LUNGS))
 		var/can_breathe_water = (istype(wear_mask) && wear_mask.filters_water()) ? TRUE : FALSE
 		if(!can_breathe_water)
-			var/obj/item/organ/internal/lungs/lungs = internal_organs_by_name[BP_LUNGS]
+			var/obj/item/organ/internal/lungs/lungs = get_internal_organ(BP_LUNGS)
 			if(lungs && lungs.can_drown())
 				can_breathe_water = TRUE
 		if(can_breathe_water)
@@ -1725,7 +1720,7 @@
 /mob/living/carbon/human/handle_additional_vomit_reagents(var/obj/effect/decal/cleanable/vomit/vomit)
 	..()
 	if(should_have_organ(BP_STOMACH))
-		var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+		var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
 		if(!stomach || stomach.is_broken() || (stomach.is_bruised() && prob(stomach.damage)))
 			if(should_have_organ(BP_HEART))
 				vessel.trans_to_obj(vomit, 5)

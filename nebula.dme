@@ -3243,6 +3243,7 @@
 #include "code\unit_tests\shuttle_tests.dm"
 #include "code\unit_tests\submaps.dm"
 #include "code\unit_tests\subsystem_tests.dm"
+#include "code\unit_tests\surgery.dm"
 #include "code\unit_tests\test_obj.dm"
 #include "code\unit_tests\time_tests.dm"
 #include "code\unit_tests\unique_tests.dm"

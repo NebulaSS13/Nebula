@@ -13,7 +13,7 @@
 	stat_immune = 0
 
 	var/suppressing = FALSE
-	var/mob/living/carbon/human/victim = null
+	var/mob/living/victim
 	var/strapped = 0.0
 	var/obj/machinery/computer/operating/computer = null
 
@@ -32,7 +32,7 @@
 /obj/machinery/optable/attackby(var/obj/item/O, var/mob/user)
 	if (istype(O, /obj/item/grab))
 		var/obj/item/grab/G = O
-		if(iscarbon(G.affecting) && check_table(G.affecting))
+		if(isliving(G.affecting) && check_table(G.affecting))
 			take_victim(G.affecting,usr)
 			qdel(O)
 			return
@@ -87,42 +87,41 @@
 	if(!victim || !victim.lying || victim.loc != loc)
 		suppressing = FALSE
 		victim = null
-		if(locate(/mob/living/carbon/human) in loc)
-			for(var/mob/living/carbon/human/H in loc)
-				if(H.lying)
-					victim = H
-					break
-	icon_state = (victim && victim.pulse()) ? "table2-active" : "table2-idle"
+		for(var/mob/living/carbon/human/H in loc)
+			if(H.lying)
+				victim = H
+				break
 	if(victim)
 		if(suppressing && victim.sleeping < 3)
 			victim.Sleeping(3 - victim.sleeping)
-		return 1
-	return 0
+	. = !!victim
+	update_icon()
+
+/obj/machinery/optable/on_update_icon()
+	icon_state = "table2-idle"
+	if(ishuman(victim))
+		var/mob/living/carbon/human/H = victim
+		if(H.pulse())
+			icon_state = "table2-active"
 
 /obj/machinery/optable/Process()
 	check_victim()
 
-/obj/machinery/optable/proc/take_victim(mob/living/carbon/C, mob/living/carbon/user)
-	if (C == user)
-		user.visible_message("[user] climbs on \the [src].","You climb on \the [src].")
+/obj/machinery/optable/proc/take_victim(mob/living/target, mob/living/user)
+	if (target == user)
+		user.visible_message( \
+		SPAN_NOTICE("\The [user] climbs on \the [src]."), \
+		SPAN_NOTICE("You climb on \the [src]."))
 	else
-		visible_message("<span class='notice'>\The [C] has been laid on \the [src] by [user].</span>")
-	if (C.client)
-		C.client.perspective = EYE_PERSPECTIVE
-		C.client.eye = src
-	C.resting = 1
-	C.dropInto(loc)
-	src.add_fingerprint(user)
-	if(ishuman(C))
-		var/mob/living/carbon/human/H = C
-		src.victim = H
-		icon_state = H.pulse() ? "table2-active" : "table2-idle"
-	else
-		icon_state = "table2-idle"
+		visible_message(SPAN_NOTICE("\The [target] has been laid on \the [src] by \the [user]."))
+	target.resting = 1
+	target.dropInto(loc)
+	add_fingerprint(user)
+	update_icon()
 
 /obj/machinery/optable/MouseDrop_T(mob/target, mob/user)
 	var/mob/living/M = user
-	if(user.stat || user.restrained() || !iscarbon(target) || !check_table(target))
+	if(user.stat || user.restrained() || !isliving(target) || !check_table(target))
 		return
 	if(istype(M))
 		take_victim(target,user)
@@ -135,7 +134,7 @@
 
 	take_victim(usr,usr)
 
-/obj/machinery/optable/proc/check_table(mob/living/carbon/patient)
+/obj/machinery/optable/proc/check_table(mob/living/patient)
 	check_victim()
 	if(src.victim && get_turf(victim) == get_turf(src) && victim.lying)
 		to_chat(usr, "<span class='warning'>\The [src] is already occupied!</span>")
