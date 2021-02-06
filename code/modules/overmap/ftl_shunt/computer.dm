@@ -141,7 +141,7 @@
 		if(linked_core)
 			var/warning = alert(user, "Cancel current shunt?","Jump Safety System", "Yes", "No")
 			if(warning == "Yes" && CanInteract(user, state))
-				linked_core.cancel_shunt()
+				linked_core.cancel_shunt(FALSE)
 			else
 				return TOPIC_REFRESH
 		return TOPIC_REFRESH

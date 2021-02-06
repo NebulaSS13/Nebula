@@ -3,7 +3,7 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 /obj/machinery/ftl_shunt
 	anchored = 1
 	icon = 'icons/obj/shunt_drive.dmi'
-	var/initial_id_tag
+	var/initial_id_tag = "ftl"
 
 /obj/machinery/ftl_shunt/core
 	name = "superluminal shunt core"
@@ -187,7 +187,7 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 	charge_started = null
 	cooldown = null
 	required_fuel_joules = null
-	if(silent)
+	if(!silent)
 		ftl_announcement.Announce(shunt_cancel_text, "FTL Shunt Management System", new_sound = sound('sound/misc/notice2.ogg'))
 	update_use_power(POWER_USE_IDLE)
 
