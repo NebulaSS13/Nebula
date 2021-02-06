@@ -6,8 +6,8 @@
 	//Surgery info
 	//Active emote/pose
 	var/pose = null
-	var/datum/reagents/metabolism/bloodstr = null
-	var/datum/reagents/metabolism/touching = null
+	var/datum/reagents/metabolism/bloodstr
+	var/datum/reagents/metabolism/touching
 	var/losebreath = 0 //if we failed to breathe last tick
 
 	var/coughedtime = null

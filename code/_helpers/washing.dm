@@ -22,9 +22,10 @@
 		M.back.clean_blood()
 
 	//flush away reagents on the skin
-	if(M.touching)
-		var/remove_amount = M.touching.maximum_volume * M.reagent_permeability() //take off your suit first
-		M.touching.remove_any(remove_amount)
+	var/datum/reagents/touching_reagents = M.get_contact_reagents()
+	if(touching_reagents)
+		var/remove_amount = touching_reagents.maximum_volume * M.reagent_permeability() //take off your suit first
+		touching_reagents.remove_any(remove_amount)
 
 	if(!ishuman(M))
 		if(M.wear_mask)

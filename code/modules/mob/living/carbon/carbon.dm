@@ -22,11 +22,6 @@
 	return ..()
 
 /mob/living/carbon/rejuvenate()
-	bloodstr.clear_reagents()
-	touching.clear_reagents()
-	var/datum/reagents/R = get_ingested_reagents()
-	if(istype(R))
-		R.clear_reagents()
 	set_nutrition(400)
 	set_hydration(400)
 	..()
@@ -402,9 +397,6 @@
 		return FALSE
 	return !(species && species.species_flags & SPECIES_FLAG_NO_PAIN)
 
-/mob/living/carbon/proc/get_adjusted_metabolism(metabolism)
-	return metabolism
-
 /mob/living/carbon/proc/need_breathe()
 	return
 
@@ -482,3 +474,10 @@
 
 /mob/living/carbon/get_species_name()
 	return species.name
+
+/mob/living/carbon/get_contact_reagents()
+	return touching
+
+/mob/living/carbon/get_injected_reagents()
+	return bloodstr
+
