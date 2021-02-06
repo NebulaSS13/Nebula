@@ -167,3 +167,6 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 	var/time_string = time2text(world.realtime, "MM-DD")
 	var/time_list = splittext(time_string, "-")
 	return list(text2num(time_list[1]), text2num(time_list[2]))
+
+/proc/SQLtime()
+	return time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")

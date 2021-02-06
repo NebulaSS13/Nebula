@@ -87,7 +87,7 @@
 				banreason = "[banreason] (CUSTOM CID)"
 		else
 			message_admins("Ban process: A mob matching [playermob.ckey] was found at location [playermob.x], [playermob.y], [playermob.z]. Custom ip and computer id fields replaced with the ip and computer id from the located mob")
-		notes_add(banckey,banreason,usr)
+		add_note(banckey,banreason, null, usr.ckey, 0)
 
 		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey, banip, bancid )
 
@@ -506,7 +506,7 @@
 							msg = job
 						else
 							msg += ", [job]"
-					notes_add(LAST_CKEY(M), "Banned  from [msg] - [reason]", usr)
+					add_note(LAST_CKEY(M), "Banned  from [msg] - [reason]", null, usr, 0)
 					message_admins("[key_name_admin(usr)] banned [key_name_admin(M)] from [msg] for [mins_readable]", 1)
 					to_chat(M, "<span class='danger'>You have been jobbanned by [usr.client.ckey] from: [msg].</span>")
 					to_chat(M, "<span class='warning'>The reason is: [reason]</span>")
@@ -527,7 +527,7 @@
 							jobban_fullban(M, job, "[reason]; By [usr.ckey] on [time2text(world.realtime)]")
 							if(!msg)	msg = job
 							else		msg += ", [job]"
-						notes_add(LAST_CKEY(M), "Banned  from [msg] - [reason]", usr)
+						add_note(LAST_CKEY(M), "Banned  from [msg] - [reason]", null, usr.ckey, 0)
 						message_admins("[key_name_admin(usr)] banned [key_name_admin(M)] from [msg]", 1)
 						to_chat(M, "<span class='danger'>You have been jobbanned by [usr.client.ckey] from: [msg].</span>")
 						to_chat(M, "<span class='warning'>The reason is: [reason]</span>")
@@ -634,7 +634,7 @@
 				AddBan(mob_key, M.computer_id, reason, usr.ckey, 1, mins)
 				var/mins_readable = minutes_to_readable(mins)
 				ban_unban_log_save("[usr.client.ckey] has banned [mob_key]. - Reason: [reason] - This will be removed in [mins_readable].")
-				notes_add(mob_key,"[usr.client.ckey] has banned [mob_key]. - Reason: [reason] - This will be removed in [mins_readable].",usr)
+				add_note(mob_key,"[usr.client.ckey] has hard banned [mob_key]. - Reason: [reason] - This will be removed in [mins] minutes.", null, usr.ckey, 0)
 				to_chat(M, "<span class='danger'>You have been banned by [usr.client.ckey].\nReason: [reason].</span>")
 				to_chat(M, "<span class='warning'>This is a temporary ban, it will be removed in [mins_readable].</span>")
 				SSstatistics.add_field("ban_tmp",1)
@@ -671,7 +671,7 @@
 				else
 					to_chat(M, "<span class='warning'>No ban appeals URL has been set.</span>")
 				ban_unban_log_save("[usr.client.ckey] has permabanned [mob_key]. - Reason: [reason] - This is a ban until appeal.")
-				notes_add(mob_key,"[usr.client.ckey] has permabanned [mob_key]. - Reason: [reason] - This is a ban until appeal.",usr)
+				add_note(mob_key,"[usr.client.ckey] has hard permabanned [mob_key]. - Reason: [reason] - This is a permanent ban.", null, usr.ckey, 0)
 				log_and_message_admins("has banned [mob_key].\nReason: [reason]\nThis is a ban until appeal.")
 				SSstatistics.add_field("ban_perma",1)
 				DB_ban_record(BANTYPE_PERMA, M, -1, reason)
@@ -1675,28 +1675,69 @@
 		var/add = sanitize(input("Add Player Info") as null|text)
 		if(!add) return
 
-		notes_add(key,add,usr)
-		show_player_info(key)
+		add_note(key, add, null, usr.ckey, 0)
+		show_note(key)
 
 	if(href_list["remove_player_info"])
 		var/key = href_list["remove_player_info"]
 		var/index = text2num(href_list["remove_index"])
 
-		notes_del(key, index)
-		show_player_info(key)
+		remove_note(index)
+		show_note(key)
 
 	if(href_list["notes"])
-		if(href_list["notes"] == "set_filter")
-			var/choice = input(usr,"Please specify a text filter to use or cancel to clear.","Player Notes",null) as text|null
-			PlayerNotesPage(choice)
-		else
-			var/ckey = href_list["ckey"]
-			if(!ckey)
-				var/mob/M = locate(href_list["mob"])
-				if(ismob(M))
-					ckey = LAST_CKEY(M)
-			show_player_info(ckey)
+		var/ckey = href_list["ckey"]
+		if(!ckey)
+			var/mob/M = locate(href_list["mob"])
+			if(ismob(M))
+				ckey = LAST_CKEY(M)
+		show_note(ckey)
 		return
+
+	//Player Notes
+	if(href_list["addnote"])
+		var/target_ckey = href_list["addnote"]
+		add_note(target_ckey)
+
+	if(href_list["addnoteempty"])
+		add_note()
+
+	if(href_list["removenote"])
+		var/note_id = href_list["removenote"]
+		remove_note(note_id)
+
+	if(href_list["editnote"])
+		var/note_id = href_list["editnote"]
+		edit_note(note_id)
+
+	if(href_list["nonalpha"])
+		var/target = href_list["nonalpha"]
+		target = text2num(target)
+		show_note(index = target)
+
+	if(href_list["shownote"])
+		var/target = href_list["shownote"]
+		show_note(index = target)
+
+	if(href_list["shownoteckey"])
+		var/target_ckey = href_list["shownoteckey"]
+		show_note(target_ckey)
+
+	if(href_list["notessearch"])
+		var/target = href_list["notessearch"]
+		show_note(index = target)
+
+	if(href_list["noteedits"])
+		var/note_id = sanitizeSQL("[href_list["noteedits"]]")
+		var/DBQuery/query_noteedits = dbcon.NewQuery("SELECT `edits` FROM `erro_messages` WHERE `id` = '[note_id]'")
+		if(!query_noteedits.Execute())
+			var/err = query_noteedits.ErrorMsg()
+			log_game("SQL ERROR obtaining edits from notes table. Error : \[[err]\]\n")
+			return
+		if(query_noteedits.NextRow())
+			var/edit_log = query_noteedits.item[1]
+			show_browser(usr, edit_log,"window=noteedits")
+
 	if(href_list["setstaffwarn"])
 		var/mob/M = locate(href_list["setstaffwarn"])
 		if(!ismob(M)) return
@@ -1709,7 +1750,7 @@
 				var/reason = sanitize(input(usr,"Staff warn message","Staff Warn","Problem Player") as text|null)
 				if (!reason || reason == "")
 					return
-				notes_add(last_ckey,"\[AUTO\] Staff warn enabled: [reason]",usr)
+				add_note(last_ckey,"\[AUTO\] Staff warn enabled: [reason]", null, usr.ckey, 0)
 				reason += "\n-- Set by [usr.client.ckey]([usr.client.holder.rank])"
 				DB_staffwarn_record(last_ckey, reason)
 				if(M.client)
@@ -1728,7 +1769,7 @@
 				var/last_ckey = LAST_CKEY(M)
 				if(!DB_staffwarn_remove(last_ckey))
 					return
-				notes_add(last_ckey,"\[AUTO\] Staff warn disabled",usr)
+				add_note(last_ckey,"\[AUTO\] Staff warn disabled", null, usr.ckey, 0)
 				if(M.client)
 					M.client.staffwarn = null
 				log_and_message_admins("has removed the staffwarn on [last_ckey].\n")

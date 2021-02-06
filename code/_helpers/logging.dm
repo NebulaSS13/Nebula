@@ -188,6 +188,9 @@
 
 	return .
 
+/proc/get_key(var/whom)
+	return key_name(whom, include_name = 0)
+
 /proc/key_name_admin(var/whom, var/include_name = 1)
 	return key_name(whom, 1, include_name)
 
