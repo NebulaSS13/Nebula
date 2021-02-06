@@ -14,7 +14,7 @@
 	)
 	skill_points = 30
 	head_position = 1
-	department_refs = list(DEPT_COMMAND)
+	department_types = list(/decl/department/command)
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#1d1d4f"
@@ -74,9 +74,9 @@
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/mate
 	hud_icon = "hudheadofpersonnel"
 	head_position = 1
-	department_refs = list(
-		DEPT_COMMAND,
-		DEPT_CIVILIAN
+	department_types = list(
+		/decl/department/command,
+		/decl/department/civilian
 	)
 	total_positions = 1
 	spawn_positions = 1

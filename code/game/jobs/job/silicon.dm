@@ -1,7 +1,7 @@
 /datum/job/ai
 	title = "AI"
-	department_refs = list(DEPT_MISC)
-
+	department_types = list(/decl/department/miscellaneous)
+	event_categories = list("AI")
 	total_positions = 0 // Not used for AI, see is_position_available below and modules/mob/living/silicon/ai/latejoin.dm
 	spawn_positions = 1
 	selection_color = "#3f823f"
@@ -30,7 +30,8 @@
 
 /datum/job/cyborg
 	title = "Robot"
-	department_refs = list(DEPT_MISC)
+	event_categories = list("Robot")
+	department_types = list(/decl/department/miscellaneous)
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "your laws and the AI"

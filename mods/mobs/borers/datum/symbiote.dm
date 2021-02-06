@@ -11,7 +11,10 @@ GLOBAL_LIST_INIT(symbiote_starting_points, new)
 
 /datum/job/symbiote
 	title = "Symbiote"
-	department_refs = list(DEPT_CIVILIAN, DEPT_SCIENCE)
+	department_types = list(
+		/decl/department/civilian,
+		/decl/department/science
+	)
 	total_positions = -1
 	spawn_positions = -1
 	supervisors = "your host"

@@ -3,16 +3,31 @@ SUBSYSTEM_DEF(jobs)
 	init_order = SS_INIT_JOBS
 	flags = SS_NO_FIRE
 
-	var/list/archetype_job_datums =    list()
-	var/list/job_lists_by_map_name =   list()
-	var/list/titles_to_datums =        list()
-	var/list/types_to_datums =         list()
-	var/list/primary_job_datums =      list()
-	var/list/unassigned_roundstart =   list()
-	var/list/positions_by_department = list()
-	var/list/job_icons =               list()
-	var/job_config_file = "config/jobs.txt"
+	var/list/archetype_job_datums =     list()
+	var/list/job_lists_by_map_name =    list()
+	var/list/titles_to_datums =         list()
+	var/list/types_to_datums =          list()
+	var/list/primary_job_datums =       list()
+	var/list/unassigned_roundstart =    list()
+	var/list/positions_by_department =  list()
+	var/list/job_icons =                list()
 	var/list/must_fill_titles =			list()
+	var/list/departments_by_type =      list()
+	var/list/departments_by_name =      list()
+	var/job_config_file = "config/jobs.txt"
+
+/datum/controller/subsystem/jobs/proc/get_department_by_name(var/dept_name)
+	if(!length(departments_by_name))
+		var/list/all_depts = decls_repository.get_decls_of_subtype(/decl/department)
+		for(var/dtype in all_depts)
+			var/decl/department/dept = all_depts[dtype]
+			departments_by_name[lowertext(dept.name)] = dept
+	. = departments_by_name[lowertext(dept_name)]
+
+/datum/controller/subsystem/jobs/proc/get_department_by_type(var/dept_ref)
+	if(!length(departments_by_type))
+		departments_by_type = sortTim(decls_repository.get_decls_of_subtype(/decl/department), /proc/cmp_departments_dsc, TRUE)
+	. = departments_by_type[dept_ref]
 
 /datum/controller/subsystem/jobs/Initialize(timeofday)
 
@@ -26,7 +41,7 @@ SUBSYSTEM_DEF(jobs)
 
 	for(var/datum/job/job in primary_job_datums)
 		if(isnull(job.primary_department))
-			job.primary_department = job.department_refs[1]
+			job.primary_department = job.department_types[1]
 
 	// Create abstract submap archetype jobs for use in prefs, etc.
 	archetype_job_datums.Cut()
@@ -103,10 +118,11 @@ SUBSYSTEM_DEF(jobs)
 				titles_to_datums[alt_title] = job
 			if(job.must_fill)
 				must_fill_titles += job.title
-			if(job.department_refs)
-				for(var/dept_ref in job.department_refs)
-					if(dept_ref in SSdepartments.departments)
-						LAZYDISTINCTADD(positions_by_department[dept_ref], job.title)
+			if(job.department_types)
+				for(var/dept_ref in job.department_types)
+					var/decl/department/dept = SSjobs.get_department_by_type(dept_ref)
+					if(dept)
+						LAZYDISTINCTADD(positions_by_department[dept.type], job.title)
 
 	// Set up syndicate phrases.
 	syndicate_code_phrase = generate_code_phrase()

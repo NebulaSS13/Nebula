@@ -1,6 +1,6 @@
 /datum/job/tradeship_doctor
 	title = "Junior Doctor"
-	department_refs = list(DEPT_MEDICAL)
+	department_types = list(/decl/department/medical)
 	head_position = 0
 	supervisors = "the Head Doctor and the Captain"
 	total_positions = 2
@@ -44,9 +44,9 @@
 /datum/job/tradeship_doctor/head
 	title = "Head Doctor"
 	head_position = 1
-	department_refs = list(
-		DEPT_MEDICAL,
-		DEPT_COMMAND
+	department_types = list(
+		/decl/department/medical,
+		/decl/department/command
 	)
 	supervisors = "the Captain and your own ethics"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/doc

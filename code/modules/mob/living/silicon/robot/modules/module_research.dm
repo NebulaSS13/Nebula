@@ -1,5 +1,6 @@
 /obj/item/robot_module/research
 	name = "research module"
+	associated_department = /decl/department/science
 	display_name = "Research"
 	channels = list(
 		"Science" = TRUE

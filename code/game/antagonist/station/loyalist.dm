@@ -23,8 +23,8 @@
 	faction_invisible = 1
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/submap)
 	skill_setter = /datum/antag_skill_setter/station
-
 	faction = "loyalist"
+	var/command_department_id = /decl/department/command
 
 /decl/special_role/loyalist/Initialize()
 	. = ..()
@@ -37,7 +37,7 @@
 		return
 	global_objectives = list()
 	for(var/mob/living/carbon/human/player in SSmobs.mob_list)
-		if(!player.mind || player.stat==2 || !(player.mind.assigned_role in SSjobs.titles_by_department(DEPT_COMMAND)))
+		if(!player.mind || player.stat==2 || !(player.mind.assigned_role in SSjobs.titles_by_department(command_department_id)))
 			continue
 		var/datum/objective/protect/loyal_obj = new
 		loyal_obj.target = player.mind
