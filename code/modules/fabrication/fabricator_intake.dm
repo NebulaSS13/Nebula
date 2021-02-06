@@ -61,6 +61,9 @@
 			else if(. != SUBSTANCE_TAKEN_FULL)
 				. = SUBSTANCE_TAKEN_SOME
 
+/obj/machinery/fabricator/proc/can_ingest(var/obj/item/thing)
+	. = (has_recycler || istype(thing, /obj/item/stack/material))
+
 /obj/machinery/fabricator/proc/show_intake_message(var/mob/user, var/value, var/obj/item/thing)
 	if(value == SUBSTANCE_TAKEN_FULL)
 		to_chat(user, SPAN_NOTICE("You fill \the [src] to capacity with \the [thing]."))
@@ -112,7 +115,7 @@
 		updateUsrDialog()
 		return TRUE
 	// Take everything if we have a recycler.
-	if(has_recycler && !is_robot_module(O) && user.unEquip(O))
+	if(can_ingest(O) && !is_robot_module(O) && user.unEquip(O))
 		var/result = max(take_materials(O, user), max(reagents_taken, take_reagents(O, user, TRUE)))
 		show_intake_message(user, result, O)
 		if(result == SUBSTANCE_TAKEN_NONE)
