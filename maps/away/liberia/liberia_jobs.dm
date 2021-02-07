@@ -10,7 +10,7 @@
 
 /datum/job/submap/merchant
 	title = "Merchant"
-	department_refs = list(DEPT_CIVILIAN)
+	department_types = /decl/department/civilian
 
 	total_positions = 4
 	info = "You are free traders who have drifted into unknown distances in search of profit. Travel, trade, make profit!"
