@@ -327,15 +327,15 @@ steam.start() -- spawns the effect
 
 /datum/effect/effect/system/smoke_spread/spread(var/i)
 	if(holder)
-		src.location = get_turf(holder)
+		if(QDELING(holder))
+			holder = null
+		else
+			src.location = get_turf(holder)
 	var/obj/effect/effect/smoke/smoke = new smoke_type(location)
 	src.total_smoke++
 	var/direction = src.direction
 	if(!direction)
-		if(src.cardinals)
-			direction = pick(GLOB.cardinal)
-		else
-			direction = pick(GLOB.alldirs)
+		direction = pick(src.cardinals ? GLOB.cardinal : GLOB.alldirs)
 	for(i=0, i<pick(0,1,1,1,2,2,2,3), i++)
 		sleep(1 SECOND)
 		if(QDELETED(smoke))
