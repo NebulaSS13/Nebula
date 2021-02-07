@@ -339,9 +339,7 @@
 				take_damage(200)
 			take_damage(100)
 			if(prob(80))
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-				s.set_up(2, 1, src)
-				s.start()
+				spark_at(src, amount=2, cardinal_only = TRUE)
 
 /obj/machinery/door/on_update_icon()
 	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))

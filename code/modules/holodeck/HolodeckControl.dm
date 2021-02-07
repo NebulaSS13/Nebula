@@ -207,9 +207,7 @@
 
 			for(var/turf/T in linkedholodeck)
 				if(prob(30))
-					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-					s.set_up(2, 1, T)
-					s.start()
+					spark_at(T, amount=2, cardinal_only = TRUE)
 				T.explosion_act(3)
 				T.hotspot_expose(1000,500,1)
 
@@ -296,9 +294,7 @@
 			if(L.name=="Atmospheric Test Start")
 				spawn(20)
 					var/turf/T = get_turf(L)
-					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-					s.set_up(2, 1, T)
-					s.start()
+					spark_at(T, amount=2, cardinal_only = TRUE)
 					if(T)
 						T.temperature = 5000
 						T.hotspot_expose(50000,50000,1)

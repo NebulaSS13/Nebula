@@ -135,9 +135,7 @@
 
 	make_jittery(min(shock_damage*5, 200))
 
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(5, 1, loc)
-	s.start()
+	spark_at(loc, amount=5, cardinal_only = TRUE)
 
 	return shock_damage
 

@@ -348,9 +348,7 @@
 	src.update_icon()
 
 /obj/machinery/microwave/proc/broke()
-	var/datum/effect/effect/system/spark_spread/s = new
-	s.set_up(2, 1, src)
-	s.start()
+	spark_at(src, amount=2, cardinal_only = TRUE)
 	src.visible_message("<span class='warning'>The microwave breaks!</span>") //Let them know they're stupid
 	src.broken = 2 // Make it broken so it can't be used util fixed
 	src.obj_flags = null //So you can't add condiments

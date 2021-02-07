@@ -17,7 +17,6 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'engineering':4,'materials':2}"
 	material = /decl/material/solid/metal/steel
-	var/datum/effect/effect/system/spark_spread/spark_system
 	var/stored_matter = 0
 	var/max_stored_matter = 120
 
@@ -52,14 +51,9 @@
 
 /obj/item/rcd/Initialize()
 	. = ..()
-	src.spark_system = new /datum/effect/effect/system/spark_spread
-	spark_system.set_up(5, 0, src)
-	spark_system.attach(src)
 	update_icon()	//Initializes the ammo counter
 
 /obj/item/rcd/Destroy()
-	qdel(spark_system)
-	spark_system = null
 	return ..()
 
 /obj/item/rcd/attackby(obj/item/W, mob/user)
@@ -93,7 +87,8 @@
 	work_mode = next_in_list(work_mode, work_modes)
 	to_chat(user, "<span class='notice'>Changed mode to '[work_mode]'</span>")
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
-	if(prob(20)) src.spark_system.start()
+	if(prob(20))
+		spark_at(src, amount = 5)
 
 /obj/item/rcd/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return

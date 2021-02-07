@@ -6,7 +6,6 @@
 	icon_screen = "comm_logs"
 	light_color = "#00b000"
 	var/hack_icon = "error"
-	var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread
 	var/noserver = "<span class='alert'>ALERT: No server detected.</span>"
 	var/incorrectkey = "<span class='warning'>ALERT: Incorrect decryption key!</span>"
 	var/defaultmsg = "<span class='notice'>Welcome. Please select an option.</span>"
@@ -59,8 +58,7 @@
 		if(linked_server)
 			emag = 1
 			screen = 2
-			spark_system.set_up(5, 0, src)
-			src.spark_system.start()
+			spark_at(src, amount = 5)
 			var/obj/item/paper/monitorkey/MK = new(loc)
 			// Will help make emagging the console not so easy to get away with.
 			MK.info += "<br><br><font color='red'>£%@%(*$%&(£&?*(%&£/{}</font>"
@@ -236,9 +234,9 @@
 					message = incorrectkey
 
 	//Turn the server on/off.
-	if (href_list["active"] && auth && linked_server) 
+	if (href_list["active"] && auth && linked_server)
 		linked_server.active = !linked_server.active
-	
+
 	//Find a server
 	if (href_list["find"])
 		var/list/local_message_servers = list()

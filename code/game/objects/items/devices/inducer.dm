@@ -94,9 +94,7 @@
 	if(C)
 		var/charge_length = 10
 		var/done_any = FALSE
-		var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
-		sparks.set_up(1, 1, user.loc)
-		sparks.start()
+		spark_at(user, amount = 1, cardinal_only = TRUE)
 		if(C.charge >= C.maxcharge)
 			to_chat(user, "<span class='notice'>\The [A] is fully charged!</span>")
 			recharging = FALSE
@@ -114,13 +112,12 @@
 					return TRUE
 				if(QDELETED(C))
 					return TRUE
-				sparks.start()
+				spark_at(user, amount = 1, cardinal_only = TRUE)
 				done_any = TRUE
 				induce(C)
 				if(O)
 					O.update_icon()
 			else
-				qdel(sparks)
 				break
 		if(done_any) // Only show a message if we succeeded at least once
 			user.visible_message("\The [user] recharged \the [A]!","<span class='notice'>You recharged \the [A]!</span>")

@@ -58,9 +58,7 @@
 	A.update_icon()
 
 	flick("echair1", src)
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(12, 1, src)
-	s.start()
+	spark_at(src, amount=12, cardinal_only = TRUE)
 	if(buckled_mob)
 		buckled_mob.burn_skin(85)
 		to_chat(buckled_mob, "<span class='danger'>You feel a deep shock course through your body!</span>")

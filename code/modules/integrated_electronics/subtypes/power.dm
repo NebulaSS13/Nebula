@@ -83,8 +83,6 @@
 	if(..()) // If the above code succeeds, do this below.
 		var/atom/movable/acting_object = get_object()
 		if(prob(20))
-			var/datum/effect/effect/system/spark_spread/s = new()
-			s.set_up(12, 1, src)
-			s.start()
+			spark_at(src, amount=12, cardinal_only = TRUE)
 			acting_object.visible_message("<span class='warning'>\The [acting_object] makes some sparks!</span>")
 		return TRUE

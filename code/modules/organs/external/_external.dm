@@ -233,12 +233,12 @@
 		child.show_decay_status(user)
 
 /obj/item/organ/external/attackby(obj/item/W, mob/user)
-	
+
 	var/obj/item/organ/external/E = W
 	if(BP_IS_PROSTHETIC(src) && istype(E) && BP_IS_PROSTHETIC(E))
-		
+
 		var/combined = FALSE
-		if(E.organ_tag == parent_organ) 
+		if(E.organ_tag == parent_organ)
 
 			if(length(E.children))
 				to_chat(usr, SPAN_WARNING("You cannot connect additional limbs to \the [E]."))
@@ -250,7 +250,7 @@
 			else
 				dropInto(loc)
 				forceMove(E)
-	
+
 			if(loc != E)
 				return
 
@@ -1230,7 +1230,7 @@ obj/item/organ/external/proc/remove_clamps()
 
 /obj/item/organ/external/is_usable()
 	. = ..()
-	. = . && !is_malfunctioning() 
+	. = . && !is_malfunctioning()
 	. = . && (!is_broken() || splinted) && !is_stump()
 	. = . && !(status & ORGAN_TENDON_CUT)
 	. = . && (!can_feel_pain() || get_pain() < pain_disability_threshold)
@@ -1346,12 +1346,7 @@ obj/item/organ/external/proc/remove_clamps()
 			"<span class='danger'>Your [src.name] explodes!</span>",\
 			"<span class='danger'>You hear an explosion!</span>")
 		explosion(get_turf(owner),-1,-1,2,3)
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-		spark_system.set_up(5, 0, victim)
-		spark_system.attach(owner)
-		spark_system.start()
-		spawn(10)
-			qdel(spark_system)
+		spark_at(victim, 5, holder=owner)
 		qdel(src)
 	else if(is_stump())
 		qdel(src)

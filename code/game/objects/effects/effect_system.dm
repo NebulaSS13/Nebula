@@ -121,9 +121,11 @@ steam.start() -- spawns the effect
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
 
-/proc/spark_at(turf/location)
-	var/datum/effect/effect/system/sparks = new /datum/effect/effect/system/spark_spread()
-	sparks.set_up(3, 0, location)
+/proc/spark_at(turf/location, amount = 3, cardinal_only = FALSE, holder = null)
+	var/datum/effect/effect/system/spark_spread/sparks = new()
+	sparks.set_up(amount, cardinal_only, location)
+	if(holder)
+		sparks.attach(holder)
 	sparks.start()
 
 /datum/effect/effect/system/spark_spread
@@ -462,9 +464,7 @@ steam.start() -- spawns the effect
 
 	start()
 		if (amount <= 2)
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
-			s.set_up(2, 1, location)
-			s.start()
+			spark_at(location, amount=2, cardinal_only = TRUE)
 
 			for(var/mob/M in viewers(5, location))
 				to_chat(M, "<span class='warning'>The solution violently explodes.</span>")

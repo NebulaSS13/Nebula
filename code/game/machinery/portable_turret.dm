@@ -54,8 +54,6 @@
 	var/shot_sound 			//what sound should play when the turret fires
 	var/eshot_sound			//what sound should play when the emagged turret fires
 
-	var/datum/effect/effect/system/spark_spread/spark_system	//the spark system, used for generating... sparks?
-
 	var/wrenching = 0
 	var/last_target			//last target fired at, prevents turrets from erratically firing at all valid targets in range
 
@@ -90,17 +88,9 @@
 
 /obj/machinery/porta_turret/Initialize()
 	. = ..()
-
-	//Sets up a spark system
-	spark_system = new /datum/effect/effect/system/spark_spread
-	spark_system.set_up(5, 0, src)
-	spark_system.attach(src)
-
 	setup()
 
 /obj/machinery/porta_turret/Destroy()
-	qdel(spark_system)
-	spark_system = null
 	. = ..()
 
 /obj/machinery/porta_turret/proc/setup()
@@ -354,7 +344,7 @@ var/list/turret_icons
 
 	health -= force
 	if (force > 5 && prob(45))
-		spark_system.start()
+		spark_at(src, amount = 5)
 	if(health <= 0)
 		die()	//the death process :(
 
@@ -410,7 +400,7 @@ var/list/turret_icons
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
 	health = 0
 	set_broken(TRUE)
-	spark_system.start()	//creates some sparks because they look cool
+	spark_at(src, amount = 5)
 	atom_flags |= ATOM_FLAG_CLIMBABLE // they're now climbable
 
 /obj/machinery/porta_turret/Process()

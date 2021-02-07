@@ -82,7 +82,7 @@
 /obj/item/rig_module/teleporter/proc/phase_in(var/mob/M,var/turf/T)
 	if(!M || !T)
 		return
-	holder.spark_system.start()
+	spark_at(holder, 5, holder = holder)
 	M.phase_in(T)
 
 /obj/item/rig_module/teleporter/proc/phase_out(var/mob/M,var/turf/T)

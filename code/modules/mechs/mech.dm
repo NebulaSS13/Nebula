@@ -44,9 +44,6 @@
 	var/obj/item/mech_component/sensors/head
 	var/obj/item/mech_component/chassis/body
 
-	// Invisible components.
-	var/datum/effect/effect/system/spark_spread/sparks
-
 	// Equipment tracking vars.
 	var/obj/item/mech_equipment/selected_system
 	var/selected_hardpoint
@@ -82,7 +79,6 @@
 
 	pixel_x = default_pixel_x
 	pixel_y = default_pixel_y
-	sparks = new(src)
 
 	// Grab all the supplied components.
 	if(source_frame)
