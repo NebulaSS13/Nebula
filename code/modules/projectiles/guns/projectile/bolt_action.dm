@@ -76,7 +76,7 @@
 	icon = 'icons/obj/guns/heavysniper.dmi'
 	force = 10
 	origin_tech = "{'combat':7,'materials':2,'esoteric':8}"
-	caliber = CALIBER_ANTIMATERIAL
+	caliber = CALIBER_ANTI_MATERIEL
 	screen_shake = 2 //extra kickback
 	one_hand_penalty = 6
 	accuracy = -2
