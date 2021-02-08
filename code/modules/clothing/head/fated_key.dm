@@ -81,7 +81,7 @@
 		if(H.organs && H.organs.len)
 			var/obj/item/organ/external/E = pick(H.organs)
 			if(istype(E))
-				E.droplimb()
+				E.dismember()
 
 /obj/item/projectile/sanctionedaction/before_move()
 	. = ..()

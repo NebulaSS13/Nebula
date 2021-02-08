@@ -366,24 +366,24 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		brute = 0.5 * brute
 	if(force_droplimb)
 		if(burn)
-			droplimb(0, (override_droplimb || DROPLIMB_BURN))
+			dismember(0, (override_droplimb || DISMEMBER_METHOD_BURN))
 		else if(brute)
-			droplimb(0, (override_droplimb || (edge_eligible ? DROPLIMB_EDGE : DROPLIMB_BLUNT)))
+			dismember(0, (override_droplimb || (edge_eligible ? DISMEMBER_METHOD_EDGE : DISMEMBER_METHOD_BLUNT)))
 		return TRUE
 
 	if(edge_eligible && brute >= max_damage / DROPLIMB_THRESHOLD_EDGE)
 		if(prob(brute))
-			droplimb(0, (override_droplimb || DROPLIMB_EDGE))
+			dismember(0, (override_droplimb || DISMEMBER_METHOD_EDGE))
 			return TRUE
 	else if(burn >= max_damage / DROPLIMB_THRESHOLD_DESTROY)
 		if(prob(burn/3))
-			droplimb(0, (override_droplimb || DROPLIMB_BURN))
+			dismember(0, (override_droplimb || DISMEMBER_METHOD_BURN))
 			return TRUE
 	else if(brute >= max_damage / DROPLIMB_THRESHOLD_DESTROY)
 		if(prob(brute))
-			droplimb(0, (override_droplimb || DROPLIMB_BLUNT))
+			dismember(0, (override_droplimb || DISMEMBER_METHOD_BLUNT))
 			return TRUE
 	else if(brute >= max_damage / DROPLIMB_THRESHOLD_TEAROFF)
 		if(prob(brute/3))
-			droplimb(0, (override_droplimb || DROPLIMB_EDGE))
+			dismember(0, (override_droplimb || DISMEMBER_METHOD_EDGE))
 			return TRUE

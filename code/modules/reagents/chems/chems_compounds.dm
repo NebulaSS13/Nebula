@@ -400,7 +400,7 @@
 				if(prob(25))
 					for(var/i = 1 to rand(3,5))
 						new /obj/item/shard(get_turf(E), result_mat)
-					E.droplimb(0, DROPLIMB_BLUNT)
+					E.dismember(0, DISMEMBER_METHOD_BLUNT)
 				else
 					E.take_external_damage(rand(20,30), 0)
 					E.status |= ORGAN_CRYSTAL

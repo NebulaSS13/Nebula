@@ -92,7 +92,7 @@
 			if(sponge && sponge.damage >= sponge.max_damage)
 				var/obj/item/organ/external/affecting = pop.get_organ(sponge.parent_organ)
 				if(affecting && !affecting.is_stump())
-					affecting.droplimb(0, DROPLIMB_BLUNT)
+					affecting.dismember(0, DISMEMBER_METHOD_BLUNT)
 					if(sponge) qdel(sponge)
 
 /datum/psi_complexus/proc/reset()

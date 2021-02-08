@@ -353,7 +353,7 @@
 		user.visible_message( \
 			SPAN_DANGER("\The [user] hacks off \the [target]'s [affected.name] at the [affected.amputation_point] with \the [tool]!"), \
 			SPAN_DANGER("You hack off \the [target]'s [affected.name] with \the [tool]!"))
-	affected.droplimb(clean_cut, DROPLIMB_EDGE)
+	affected.dismember(clean_cut, DISMEMBER_METHOD_EDGE)
 
 /decl/surgery_step/generic/amputate/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
