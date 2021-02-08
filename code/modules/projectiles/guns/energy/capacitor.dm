@@ -95,62 +95,6 @@ var/global/list/laser_wavelengths
 /obj/item/gun/energy/capacitor/afterattack(atom/A, mob/living/user, adjacent, params)
 	. = !charging && ..()
 
-/obj/item/gun/energy/capacitor/attackby(obj/item/W, mob/user)
-
-	if(charging)
-		return ..()
-
-	if(isScrewdriver(W))
-		if(length(capacitors))
-			var/obj/item/stock_parts/capacitor/capacitor = capacitors[1]
-			capacitor.charge = 0
-			user.put_in_hands(capacitor)
-			LAZYREMOVE(capacitors, capacitor)
-		else if(power_supply)
-			user.put_in_hands(power_supply)
-			power_supply = null
-		else
-			to_chat(user, SPAN_WARNING("\The [src] does not have a cell or capacitor installed."))
-			return TRUE
-		playsound(loc, 'sound/items/Screwdriver2.ogg', 25)
-		update_icon()
-		return TRUE
-
-	if(istype(W, /obj/item/cell))
-		if(power_supply)
-			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
-		else if(user.unEquip(W, src))
-			power_supply = W
-			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [src]."))
-			update_icon()
-		return TRUE
-
-	if(istype(W, /obj/item/stock_parts/capacitor))
-		if(length(capacitors) >= max_capacitors)
-			to_chat(user, SPAN_WARNING("\The [src] cannot fit any additional capacitors."))
-		else if(user.unEquip(W, src))
-			LAZYADD(capacitors, W)
-			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [src]."))
-			update_icon()
-		return TRUE
-
-	. = ..()
-
-/obj/item/gun/energy/capacitor/attack_self(var/mob/user)
-
-	if(charging)
-		for(var/obj/item/stock_parts/capacitor/capacitor in capacitors)
-			capacitor.charge = 0
-		update_icon()
-		charging = FALSE
-	else
-		var/new_wavelength = input("Select the desired laser wavelength.", "Capacitor Laser Wavelength", selected_wavelength) as null|anything in global.laser_wavelengths
-		if(!charging && new_wavelength != selected_wavelength && (loc == user || user.Adjacent(src)) && !user.incapacitated())
-			selected_wavelength = new_wavelength
-			to_chat(user, SPAN_NOTICE("You dial \the [src] wavelength to [selected_wavelength.name]."))
-			update_icon()
-	return TRUE
-
 /obj/item/gun/energy/capacitor/Process()
 	. = ..()
 
@@ -279,9 +223,3 @@ var/global/list/laser_wavelengths
 	capacitors = /obj/item/stock_parts/capacitor/super
 	projectile_type = /obj/item/projectile/beam/variable/split
 	wiring_color = COLOR_GOLD
-
-/obj/item/gun/energy/capacitor/rifle/linear_fusion/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
-		to_chat(user, SPAN_WARNING("\The [src] is hermetically sealed; you can't get the components out."))
-		return TRUE
-	. = ..()

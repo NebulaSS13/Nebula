@@ -60,13 +60,11 @@
 	var/silenced = 0
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/accuracy_power = 5  //increase of to-hit chance per 1 point of accuracy
-	var/bulk = 0			//how unwieldy this weapon for its size, affects accuracy when fired without aiming
 	var/last_handled		//time when hand gun's in became active, for purposes of aiming bonuses
 	var/scoped_accuracy = null  //accuracy used when zoomed in a scope
 	var/scope_zoom = 0
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
 	var/list/dispersion = list(0)
-	var/one_hand_penalty
 	var/combustion	//whether it creates hotspot when fired
 
 	var/next_fire_time = 0
@@ -210,7 +208,7 @@
 					SPAN_DANGER("You shoot yourself in [pew_loc] with \the [src]!"))
 				M.unEquip(src)
 		else
-			handle_click_empty(user)
+			handle_click_empty()
 		return 0
 	return 1
 
@@ -219,7 +217,7 @@
 		O.emp_act(severity)
 
 /obj/item/gun/afterattack(atom/A, mob/living/user, adjacent, params)
-	if(adjacent) return //A is adjacent, is the user, or is on the user's person
+	if(!adjacent) return //A is adjacent, is the user, or is on the user's person
 
 	if(!user.aiming)
 		user.aiming = new(user)
@@ -263,7 +261,7 @@
 		if(user.a_intent == I_HURT && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //reflex un-safeying
 			toggle_safety(user)
 		else
-			handle_click_empty(user)
+			handle_click_empty()
 			return
 
 	if(world.time < next_fire_time)
@@ -284,7 +282,7 @@
 	for(var/i in 1 to burst)
 		var/obj/projectile = consume_next_projectile(user)
 		if(!projectile)
-			handle_click_empty(user)
+			handle_click_empty()
 			break
 
 		process_accuracy(projectile, user, target, i, held_twohanded)
@@ -310,8 +308,8 @@
 	next_fire_time = world.time + delay
 
 //obtains the next projectile to fire
-/obj/item/gun/proc/consume_next_projectile()
-	return null
+/obj/item/gun/proc/consume_next_projectile(var/mob/user)
+	return receiver?.get_next_projectile(user)
 
 //used by aiming code
 /obj/item/gun/proc/can_hit(atom/target, var/mob/living/user)
@@ -330,13 +328,9 @@
 #undef FIREARM_MESSAGE_SPAM_TIME
 
 //called if there was no projectile to shoot
-/obj/item/gun/proc/handle_click_empty(mob/user)
-	if(check_fire_message_spam("click"))
-		if(user)
-			user.visible_message("*click click*", "<span class='danger'>*click*</span>")
-		else
-			src.visible_message("*click click*")
-	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
+/obj/item/gun/proc/handle_click_empty()
+	if(receiver)
+		receiver.handle_click_empty()
 
 //called after successfully firing
 /obj/item/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0, var/obj/projectile)
@@ -403,6 +397,7 @@
 			step(user,get_dir(target,user))
 			user.set_dir(old_dir)
 
+	receiver?.handle_post_holder_fire()
 	update_icon()
 
 
@@ -422,6 +417,7 @@
 		for(var/obj/item/grab/G in L.grabbed_by)
 			max_mult = max(max_mult, G.point_blank_mult())
 	P.damage *= max_mult
+	receiver?.process_point_blank()
 
 /obj/item/gun/proc/process_accuracy(obj/projectile, mob/living/user, atom/target, var/burst, var/held_twohanded)
 	var/obj/item/projectile/P = projectile
@@ -549,7 +545,7 @@
 		mouthshoot = 0
 		return
 	else
-		handle_click_empty(user)
+		handle_click_empty()
 		mouthshoot = 0
 		return
 
@@ -613,13 +609,6 @@
 	. = sel_mode + 1
 	if(. > firemodes.len)
 		. = 1
-
-/obj/item/gun/attack_self(mob/user)
-	var/datum/firemode/new_mode = switch_firemodes(user)
-	if(prob(20) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
-		new_mode = switch_firemodes(user)
-	if(new_mode)
-		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
 
 /obj/item/gun/proc/toggle_safety(var/mob/user)
 	safety_state = !safety_state

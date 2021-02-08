@@ -57,13 +57,3 @@
 	. = ..()
 	if(cap)
 		overlays += image(icon, "[icon_state]-toy")
-
-/obj/item/gun/projectile/revolver/capgun/attackby(obj/item/wirecutters/W, mob/user)
-	if(!istype(W) || !cap)
-		return ..()
-	to_chat(user, "<span class='notice'>You snip off the toy markings off the [src].</span>")
-	name = "revolver"
-	desc += " Someone snipped off the barrel's toy mark. How dastardly."
-	cap = FALSE
-	update_icon()
-	return 1

@@ -18,15 +18,6 @@
 	var/max_darts = 1
 	var/list/darts = new/list()
 
-/obj/item/gun/launcher/foam/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/foam_dart))
-		if(darts.len < max_darts)
-			if(!user.unEquip(I, src))
-				return
-			darts += I
-			to_chat(user, SPAN_NOTICE("You slot \the [I] into \the [src]."))
-		else
-			to_chat(user, SPAN_WARNING("\The [src] can hold no more darts."))
 
 /obj/item/gun/launcher/foam/consume_next_projectile()
 	if(darts.len)

@@ -75,21 +75,6 @@
 	update_icon()
 	..()
 
-/obj/item/gun/launcher/crossbow/attack_self(mob/user)
-	if(tension)
-		if(bolt)
-			user.visible_message("[user] relaxes the tension on [src]'s string and removes [bolt].","You relax the tension on [src]'s string and remove [bolt].")
-			bolt.dropInto(loc)
-			var/obj/item/arrow/A = bolt
-			bolt = null
-			A.removed(user)
-		else
-			user.visible_message("[user] relaxes the tension on [src]'s string.","You relax the tension on [src]'s string.")
-		tension = 0
-		update_icon()
-	else
-		draw(user)
-
 /obj/item/gun/launcher/crossbow/proc/draw(var/mob/user)
 
 	if(!bolt)
@@ -128,58 +113,6 @@
 
 	if(!bolt || !tension || current_user != user) //Arrow has been fired, bow has been relaxed or user has changed.
 		return
-
-
-/obj/item/gun/launcher/crossbow/attackby(obj/item/W, mob/user)
-	
-	if(istype(W, /obj/item/rcd))
-		var/obj/item/rcd/rcd = W
-		if(rcd.crafting && user.unEquip(rcd) && user.unEquip(src))
-			new /obj/item/gun/launcher/crossbow/rapidcrossbowdevice(get_turf(src))
-			qdel(rcd)
-			qdel_self()
-		else
-			to_chat(user, SPAN_WARNING("\The [rcd] is not prepared for installation in \the [src]."))
-		return
-
-	if(!bolt)
-		if (istype(W,/obj/item/arrow) && user.unEquip(W, src))
-			bolt = W
-			user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
-			update_icon()
-			return
-		else if(istype(W,/obj/item/stack/material/rods))
-			var/obj/item/stack/material/rods/R = W
-			if (R.use(1))
-				bolt = new /obj/item/arrow/rod(src)
-				bolt.fingerprintslast = src.fingerprintslast
-				bolt.dropInto(loc)
-				update_icon()
-				user.visible_message("[user] jams [bolt] into [src].","You jam [bolt] into [src].")
-				superheat_rod(user)
-			return
-
-	if(istype(W, /obj/item/cell))
-		if(!cell)
-			if(!user.unEquip(W, src))
-				return
-			cell = W
-			to_chat(user, "<span class='notice'>You jam [cell] into [src] and wire it to the firing coil.</span>")
-			superheat_rod(user)
-		else
-			to_chat(user, "<span class='notice'>[src] already has a cell installed.</span>")
-
-	else if(isScrewdriver(W))
-		if(cell)
-			var/obj/item/C = cell
-			C.dropInto(user.loc)
-			to_chat(user, "<span class='notice'>You jimmy [cell] out of [src] with [W].</span>")
-			cell = null
-		else
-			to_chat(user, "<span class='notice'>[src] doesn't have a cell installed.</span>")
-
-	else
-		..()
 
 /obj/item/gun/launcher/crossbow/proc/superheat_rod(var/mob/user)
 	if(!user || !cell || !bolt) return
@@ -228,39 +161,6 @@
 	else
 		to_chat(user, "<span class='warning'>The \'Low Ammo\' light on the device blinks yellow.</span>")
 		flick("[icon_state]-empty", src)
-
-
-/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/attack_self(mob/user)
-	if(tension)
-		user.visible_message("[user] relaxes the tension on [src]'s string.","You relax the tension on [src]'s string.")
-		tension = 0
-		update_icon()
-	else
-		generate_bolt(user)
-		draw(user)
-
-/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/rcd_ammo))
-		var/obj/item/rcd_ammo/cartridge = W
-		if((stored_matter + cartridge.remaining) > max_stored_matter)
-			to_chat(user, "<span class='notice'>The RCD can't hold that many additional matter-units.</span>")
-			return
-		stored_matter += cartridge.remaining
-		qdel(W)
-		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")
-		update_icon()
-
-	if(istype(W, /obj/item/arrow/rapidcrossbowdevice))
-		var/obj/item/arrow/rapidcrossbowdevice/A = W
-		if((stored_matter + 10) > max_stored_matter)
-			to_chat(user, "<span class='notice'>Unable to reclaim flashforged bolt. The RCD can't hold that many additional matter-units.</span>")
-			return
-		stored_matter += 10
-		qdel(A)
-		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>Flashforged bolt reclaimed. The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")
-		update_icon()
 
 /obj/item/gun/launcher/crossbow/rapidcrossbowdevice/on_update_icon()
 	overlays.Cut()

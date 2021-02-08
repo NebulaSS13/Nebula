@@ -29,23 +29,6 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-
-/obj/item/gun/energy/temperature/attack_self(mob/user)
-	user.set_machine(src)
-	var/temp_text = ""
-	if(firing_temperature > (T0C - 50))
-		temp_text = "<FONT color=black>[firing_temperature] ([round(firing_temperature-T0C)]&deg;C) ([round(firing_temperature*1.8-459.67)]&deg;F)</FONT>"
-	else
-		temp_text = "<FONT color=blue>[firing_temperature] ([round(firing_temperature-T0C)]&deg;C) ([round(firing_temperature*1.8-459.67)]&deg;F)</FONT>"
-
-	var/dat = {"<B>Freeze Gun Configuration: </B><BR>
-	Current output temperature: [temp_text]<BR>
-	Target output temperature: <A href='?src=\ref[src];temp=-100'>-</A> <A href='?src=\ref[src];temp=-10'>-</A> <A href='?src=\ref[src];temp=-1'>-</A> [current_temperature] <A href='?src=\ref[src];temp=1'>+</A> <A href='?src=\ref[src];temp=10'>+</A> <A href='?src=\ref[src];temp=100'>+</A><BR>
-	"}
-
-	show_browser(user, dat, "window=freezegun;size=450x300;can_resize=1;can_close=1;can_minimize=1")
-	onclose(user, "window=freezegun", src)
-
 /obj/item/gun/energy/temperature/Topic(user, href_list, state = global.inventory_topic_state)
 	..()
 

@@ -23,17 +23,6 @@
 	if(distance <= 2)
 		to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>")
 
-/obj/item/gun/launcher/rocket/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/ammo_casing/rocket))
-		if(rockets.len < max_rockets)
-			if(!user.unEquip(I, src))
-				return
-			rockets += I
-			to_chat(user, "<span class='notice'>You put the rocket in [src].</span>")
-			to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>")
-		else
-			to_chat(usr, "<span class='warning'>\The [src] cannot hold more rockets.</span>")
-
 /obj/item/gun/launcher/rocket/consume_next_projectile()
 	if(rockets.len)
 		var/obj/item/ammo_casing/rocket/I = rockets[1]

@@ -14,7 +14,7 @@
 	)
 
 /obj/item/gun/projectile/pistol/random/Initialize()
-	var/index = pick(get_caliber(), rand(200,900), "P-[rand(10,99)]")
+	var/index = pick(get_load_caliber(), rand(200,900), "P-[rand(10,99)]")
 	desc = "A semi-automatic pistol of unknown origin. The inscription on the side claims the model is '[pick(descriptor)] [pick(noun)] [index]'"
 	var/list/styles = decls_repository.get_decls_of_type(/decl/gun_look)
 	gun_look = styles[pick(styles)]

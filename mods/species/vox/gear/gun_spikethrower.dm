@@ -41,8 +41,8 @@
 	name = "spike thrower"
 	desc = "A vicious alien projectile weapon. Parts of it quiver gelatinously, as though the thing is insectile and alive."
 	w_class = ITEM_SIZE_LARGE
-	ammo_name = "spike"
-	ammo_type = /obj/item/spike
+	//ammo_name = "spike"
+	//ammo_type = /obj/item/spike
 	release_force = 30
 	icon = 'mods/species/vox/icons/gear/voxspike.dmi'
 	icon_state = ICON_STATE_WORLD

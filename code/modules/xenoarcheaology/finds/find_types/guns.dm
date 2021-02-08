@@ -18,17 +18,20 @@
 	if(prob(66))
 		new_gun.set_caliber(CALIBER_ALIEN)
 	//33% chance to fill it with a random amount of bullets
-	new_gun.max_shells = rand(1,12)
-	new_gun.loaded.Cut()
-	if(prob(33))
-		var/num_bullets = rand(1, new_gun.max_shells)
-		for(var/i = 1 to num_bullets)
-			var/obj/item/ammo_casing/A = new new_gun.ammo_type(new_gun)
-			new_gun.loaded += A
-			var/gun_caliber = new_gun.get_caliber()
-			if(A.caliber != gun_caliber)
-				A.caliber = gun_caliber
-				A.desc = "A bullet casing of unknown caliber."
+	var/obj/item/firearm_component/receiver/ballistic/proj_receiver = new_gun.receiver
+	if(istype(proj_receiver))
+		proj_receiver.max_shells = rand(1,12)
+		proj_receiver.loaded.Cut()
+		if(prob(33))
+			var/type_bullets = initial(proj_receiver.loaded)
+			var/num_bullets = rand(1, proj_receiver.max_shells)
+			for(var/i = 1 to num_bullets)
+				var/obj/item/ammo_casing/A = new type_bullets(proj_receiver)
+				proj_receiver.loaded += A
+				var/gun_caliber = new_gun.get_load_caliber()
+				if(A.caliber != gun_caliber)
+					A.caliber = gun_caliber
+					A.desc = "A bullet casing of unknown caliber."
 
 	return new_gun
 

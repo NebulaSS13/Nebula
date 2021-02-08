@@ -53,19 +53,20 @@
 	var/list/traits = list()
 
 	var/obj/item/firearm_component/barrel/ballistic/proj_barrel = barrel
+	var/obj/item/firearm_component/receiver/ballistic/proj_receiver = receiver
 	traits += "<br>Caliber: [proj_barrel?.caliber || "custom"]"
 
-	var/list/loading_ways = list()
-	if(load_method & SINGLE_CASING)
-		loading_ways += proj_barrel?.caliber ? "single [proj_barrel.caliber] rounds" : "single rounds"
-	if(load_method & SPEEDLOADER)
-		loading_ways += "speedloaders"
-	if(load_method & MAGAZINE)
-		loading_ways += "magazines"
-	traits += "Can be loaded using [english_list(loading_ways)]"
-
-	if(load_method & (SINGLE_CASING|SPEEDLOADER))
-		traits += "It can hold [max_shells] rounds."
+	if(istype(proj_receiver))
+		var/list/loading_ways = list()
+		if(proj_receiver.load_method & SINGLE_CASING)
+			loading_ways += proj_barrel?.caliber ? "single [proj_barrel.caliber] rounds" : "single rounds"
+		if(proj_receiver.load_method & SPEEDLOADER)
+			loading_ways += "speedloaders"
+		if(proj_receiver.load_method & MAGAZINE)
+			loading_ways += "magazines"
+		traits += "Can be loaded using [english_list(loading_ways)]"
+		if(proj_receiver.load_method & (SINGLE_CASING|SPEEDLOADER))
+			traits += "It can hold [proj_receiver.max_shells] rounds."
 
 	if(jam_chance)
 		traits += "It's prone to jamming."

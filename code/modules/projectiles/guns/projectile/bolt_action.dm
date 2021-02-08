@@ -39,21 +39,6 @@
 		loaded -= chambered
 		chambered = null
 
-/obj/item/gun/projectile/bolt_action/attack_self(mob/user)
-	bolt_open = !bolt_open
-	if(bolt_open)
-		if(chambered)
-			to_chat(user, "<span class='notice'>You work the bolt open, ejecting [chambered]!</span>")
-			unload_shell()
-		else
-			to_chat(user, "<span class='notice'>You work the bolt open.</span>")
-	else
-		to_chat(user, "<span class='notice'>You work the bolt closed.</span>")
-		playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltforward.ogg', 50, 1)
-		bolt_open = FALSE
-	add_fingerprint(user)
-	update_icon()
-
 /obj/item/gun/projectile/bolt_action/special_check(mob/user)
 	if(bolt_open)
 		to_chat(user, "<span class='warning'>You can't fire [src] while the bolt is open!</span>")

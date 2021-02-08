@@ -75,21 +75,6 @@
 	else
 		to_chat(user, "<span class='warning'>\The [src] is empty.</span>")
 
-/obj/item/gun/launcher/grenade/attack_self(mob/user)
-	pump(user)
-
-/obj/item/gun/launcher/grenade/attackby(obj/item/I, mob/user)
-	if((istype(I, /obj/item/grenade)))
-		load(I, user)
-	else
-		..()
-
-/obj/item/gun/launcher/grenade/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		unload(user)
-	else
-		..()
-
 /obj/item/gun/launcher/grenade/consume_next_projectile()
 	if(chambered)
 		chambered.det_time = 10
@@ -134,9 +119,6 @@
 	w_class = ITEM_SIZE_NORMAL
 	force = 5
 	max_grenades = 0
-
-/obj/item/gun/launcher/grenade/underslung/attack_self()
-	return
 
 //load and unload directly into chambered
 /obj/item/gun/launcher/grenade/underslung/load(obj/item/grenade/G, mob/user)

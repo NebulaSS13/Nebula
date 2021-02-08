@@ -30,7 +30,7 @@
 /obj/item/gun/projectile/zipgun/Initialize()
 	var/obj/item/ammo_casing/ammo = pick(ammo_types)
 	set_caliber(initial(ammo.caliber))
-	desc += " Uses [get_caliber() || "unmarked"] rounds."
+	desc += " Uses [get_load_caliber() || "unmarked"] rounds."
 	. = ..()
 
 /obj/item/gun/projectile/zipgun/unloaded

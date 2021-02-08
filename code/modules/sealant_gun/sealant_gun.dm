@@ -45,12 +45,6 @@
 	QDEL_NULL(loaded_tank)
 	. = ..()
 
-/obj/item/gun/launcher/sealant/attack_hand(mob/user)
-	if((src in user.get_held_items()) && loaded_tank)
-		unload_tank(user)
-		return TRUE
-	. = ..()
-
 /obj/item/gun/launcher/sealant/examine(mob/user, distance)
 	. = ..()
 	if(loc == user)
@@ -59,20 +53,6 @@
 		else
 			to_chat(user, SPAN_WARNING("\The [src] has no sealant loaded."))
 
-/obj/item/gun/launcher/sealant/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/sealant_tank) && user.unEquip(W, src))
-		loaded_tank = W
-		to_chat(user, SPAN_NOTICE("You slot \the [loaded_tank] into \the [src]."))
-		update_icon()
-		return TRUE
-	. = ..()
-
-/obj/item/gun/launcher/sealant/attack_self(mob/user)
-	if(loaded_tank)
-		unload_tank(user)
-		return TRUE
-	. = ..()
-	
 /obj/item/gun/launcher/sealant/proc/unload_tank(var/mob/user)
 	if(!loaded_tank)
 		to_chat(user, SPAN_WARNING("\The [src] has no tank loaded."))

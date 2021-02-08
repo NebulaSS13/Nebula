@@ -5,7 +5,7 @@
 	firearm_component_category = FIREARM_COMPONENT_BARREL
 
 /obj/item/firearm_component/barrel/proc/get_relative_projectile_size(var/obj/item/projectile/projectile)
-	return 0
+	return 1
 
 /obj/item/firearm_component/barrel/proc/get_caliber()
 	return

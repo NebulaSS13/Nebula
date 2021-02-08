@@ -4,15 +4,11 @@
 	icon = 'icons/obj/guns/dartgun.dmi'
 	icon_state = ICON_STATE_WORLD
 	barrel = /obj/item/firearm_component/barrel/ballistic/dart
+	receiver = /obj/item/firearm_component/receiver/ballistic/dart
 	fire_sound = 'sound/weapons/empty.ogg'
 	fire_sound_text = "a metallic click"
 	screen_shake = 0
 	silenced = 1
-	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/chemdart
-	allowed_magazines = /obj/item/ammo_magazine/chemdart
-	auto_eject = 0
-	handle_casings = CLEAR_CASINGS //delete casings instead of dropping them
 
 	var/list/beakers = list() //All containers inside the gun.
 	var/list/mixing = list() //Containers being used for mixing.
@@ -59,12 +55,6 @@
 					var/decl/material/R = GET_DECL(rtype)
 					to_chat(user, "<span class='notice'>[REAGENT_VOLUME(B.reagents, rtype)] units of [R.name]</span>")
 
-/obj/item/gun/projectile/dartgun/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/chems/glass))
-		add_beaker(I, user)
-		return 1
-	..()
-
 /obj/item/gun/projectile/dartgun/proc/add_beaker(var/obj/item/chems/glass/B, mob/user)
 	if(!istype(B, container_type))
 		to_chat(user, "<span class='warning'>[B] doesn't seem to fit into [src].</span>")
@@ -89,9 +79,6 @@
 		var/mix_amount = dart.reagent_amount/mixing.len
 		for(var/obj/item/chems/glass/beaker/B in mixing)
 			B.reagents.trans_to_obj(dart, mix_amount)
-
-/obj/item/gun/projectile/dartgun/attack_self(mob/user)
-	Interact(user)
 
 /obj/item/gun/projectile/dartgun/proc/Interact(mob/user)
 	user.set_machine(src)

@@ -91,44 +91,6 @@
 	darts -= next
 	next = null
 
-/obj/item/gun/launcher/syringe/attack_self(mob/user)
-	if(next)
-		user.visible_message("[user] unlatches and carefully relaxes the bolt on [src].", "<span class='warning'>You unlatch and carefully relax the bolt on [src], unloading the spring.</span>")
-		next = null
-	else if(darts.len)
-		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
-		user.visible_message("[user] draws back the bolt on [src], clicking it into place.", "<span class='warning'>You draw back the bolt on the [src], loading the spring!</span>")
-		next = darts[1]
-	add_fingerprint(user)
-
-/obj/item/gun/launcher/syringe/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		if(!darts.len)
-			to_chat(user, "<span class='warning'>[src] is empty.</span>")
-			return
-		if(next)
-			to_chat(user, "<span class='warning'>[src]'s cover is locked shut.</span>")
-			return
-		var/obj/item/syringe_cartridge/C = darts[1]
-		darts -= C
-		user.put_in_hands(C)
-		user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
-	else
-		..()
-
-/obj/item/gun/launcher/syringe/attackby(var/obj/item/A, mob/user)
-	if(istype(A, /obj/item/syringe_cartridge))
-		var/obj/item/syringe_cartridge/C = A
-		if(darts.len >= max_darts)
-			to_chat(user, "<span class='warning'>[src] is full!</span>")
-			return
-		if(!user.unEquip(C, src))
-			return
-		darts += C //add to the end
-		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
-	else
-		..()
-
 /obj/item/gun/launcher/syringe/rapid
 	name = "syringe gun revolver"
 	desc = "A modification of the syringe gun design, using a rotating cylinder to store up to five syringes. The spring still needs to be drawn between shots."

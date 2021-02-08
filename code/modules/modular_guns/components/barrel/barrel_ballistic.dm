@@ -1,5 +1,5 @@
 /obj/item/firearm_component/barrel/ballistic
-	var/caliber = CALIBER_PISTOL
+	var/caliber
 
 /obj/item/firearm_component/barrel/ballistic/get_caliber()
 	return caliber
@@ -12,13 +12,13 @@
 	name = "\improper [caliber] [name]"
 
 // Subtypes below.
-/obj/item/firearm_component/barrel/ballistic/shotgun
-	caliber = CALIBER_SHOTGUN
-
+/obj/item/firearm_component/barrel/ballistic/pistol
+	caliber = CALIBER_PISTOL
+	
 /obj/item/firearm_component/barrel/ballistic/sniper
 	caliber = CALIBER_ANTIMATERIAL
 
-/obj/item/firearm_component/barrel/ballistic/pistol
+/obj/item/firearm_component/barrel/ballistic/holdout
 	caliber = CALIBER_PISTOL_SMALL
 
 /obj/item/firearm_component/barrel/ballistic/rifle

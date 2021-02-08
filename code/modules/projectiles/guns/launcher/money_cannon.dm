@@ -96,40 +96,6 @@
 
 	return bling
 
-/obj/item/gun/launcher/money/attack_self(mob/user)
-	var/decl/currency/cur = GET_DECL(global.using_map.default_currency)
-	var/disp_amount = min(input(user, "How many [cur.name_singular] do you want to dispense at a time? (0 to [src.receptacle_value])", "Money Cannon Settings", 20) as num, receptacle_value)
-	if (disp_amount < 1)
-		to_chat(user, "<span class='warning'>You have to dispense at least one [cur.name_singular] at a time!</span>")
-		return
-	src.dispensing = disp_amount
-	to_chat(user, "<span class='notice'>You set [src] to dispense [dispensing] [cur.name_singular] at a time.</span>")
-
-/obj/item/gun/launcher/money/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		unload_receptacle(user)
-	else
-		return ..()
-
-/obj/item/gun/launcher/money/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/cash/))
-		var/obj/item/cash/bling = W
-		if(bling.absolute_worth < 1)
-			to_chat(user, "<span class='warning'>You can't seem to get \the [bling] to slide into the receptacle.</span>")
-			return
-
-		var/decl/currency/cur = GET_DECL(bling.currency)
-		if(bling.currency != global.using_map.default_currency)
-			to_chat(user, SPAN_WARNING("Due to local legislation and budget cuts, \the [src] will only accept [cur.name]."))
-			return
-
-		receptacle_value += bling.absolute_worth
-		to_chat(user, "<span class='notice'>You slide [bling.get_worth()] [cur.name_singular] into [src]'s receptacle.</span>")
-		qdel(bling)
-
-	else
-		to_chat(user, "<span class='warning'>That's not going to fit in there.</span>")
-
 /obj/item/gun/launcher/money/examine(mob/user)
 	. = ..(user)
 	var/decl/currency/cur = GET_DECL(global.using_map.default_currency)

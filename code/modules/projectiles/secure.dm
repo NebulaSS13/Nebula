@@ -26,20 +26,6 @@
 	if(distance <= 0 && is_secure_gun())
 		to_chat(user, "The registration screen shows, \"" + (registered_owner ? "[registered_owner]" : "unregistered") + "\"")
 
-/obj/item/gun/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/card/id) && is_secure_gun())
-		user.visible_message("[user] swipes an ID through \the [src].", range = 3)
-		if(!registered_owner)
-			var/obj/item/card/id/id = W
-			global.registered_weapons += src
-			verbs += /obj/item/gun/proc/reset_registration
-			registered_owner = id.registered_name
-			to_chat(user, SPAN_NOTICE("\The [src] chimes quietly as it registers to \"[registered_owner]\"."))
-		else
-			to_chat(user, SPAN_NOTICE("\The [src] buzzes quietly, refusing to register without first being reset."))
-	else
-		..()
-
 /obj/item/gun/emag_act(var/charges, var/mob/user)
 	if(!charges)
 		return NO_EMAG_ACT

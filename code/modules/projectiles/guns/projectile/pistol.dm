@@ -2,10 +2,8 @@
 /obj/item/gun/projectile/pistol
 	name = "pistol"
 	icon = 'icons/obj/guns/pistol.dmi'
-	load_method = MAGAZINE
-	barrel = /obj/item/firearm_component/barrel/ballistic
-	magazine_type = /obj/item/ammo_magazine/pistol
-	allowed_magazines = /obj/item/ammo_magazine/pistol
+	barrel = /obj/item/firearm_component/barrel/ballistic/pistol
+	receiver = /obj/item/firearm_component/receiver/ballistic/pistol
 	accuracy_power = 7
 	safety_icon = "safety"
 	ammo_indicator = TRUE
@@ -24,35 +22,11 @@
 	item_state = null
 	ammo_indicator = FALSE
 	w_class = ITEM_SIZE_SMALL
-	barrel = /obj/item/firearm_component/barrel/ballistic/pistol
+	barrel = /obj/item/firearm_component/barrel/ballistic/holdout
+	receiver = /obj/item/firearm_component/receiver/ballistic/holdout
 	silenced = 0
 	fire_delay = 4
 	origin_tech = "{'combat':2,'materials':2,'esoteric':8}"
-	magazine_type = /obj/item/ammo_magazine/pistol/small
-	allowed_magazines = /obj/item/ammo_magazine/pistol/small
-
-/obj/item/gun/projectile/pistol/holdout/attack_hand(mob/user)
-	if(silenced && user.is_holding_offhand(src))
-		to_chat(user, SPAN_NOTICE("You unscrew \the [silenced] from \the [src]."))
-		user.put_in_hands(silenced)
-		silenced = initial(silenced)
-		w_class = initial(w_class)
-		update_icon()
-		return
-	..()
-
-/obj/item/gun/projectile/pistol/holdout/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/silencer))
-		if(src in user.get_held_items())	//if we're not in his hands
-			to_chat(user, SPAN_WARNING("You'll need [src] in your hands to do that."))
-			return TRUE
-		if(user.unEquip(I, src))
-			to_chat(user, SPAN_NOTICE("You screw [I] onto [src]."))
-			silenced = I	//dodgy?
-			w_class = ITEM_SIZE_NORMAL
-			update_icon()
-		return TRUE
-	. = ..()
 
 /obj/item/gun/projectile/pistol/holdout/update_base_icon()
 	..()

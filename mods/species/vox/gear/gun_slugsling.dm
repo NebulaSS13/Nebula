@@ -59,8 +59,3 @@
 	if(S)
 		S.break_on_impact = (mode == "Impact")
 	return S
-
-
-/obj/item/gun/launcher/alien/slugsling/attack_self(var/mob/user)
-	mode = mode == "Impact" ? "Sentry" : "Impact"
-	to_chat(user,"<span class='notice'>You switch \the [src]'s mode to \"[mode]\"</span>")
