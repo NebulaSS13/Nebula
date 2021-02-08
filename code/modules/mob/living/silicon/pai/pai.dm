@@ -23,6 +23,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	name = "pAI"
 	icon = 'icons/mob/pai.dmi'
 	icon_state = "drone"
+	mob_sort_value = 3
 	hud_type = /datum/hud/pai
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
 	pass_flags = PASS_FLAG_TABLE

@@ -8,7 +8,7 @@
 	var/datum/browser/panel
 	var/show_invalid_jobs = 0
 	universal_speak = TRUE
-
+	mob_sort_value = 10
 	invisibility = 101
 
 	density = 0

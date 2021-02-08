@@ -8,6 +8,7 @@
 	health = 100
 	maxHealth = 100 //I dunno what to do with health at this point.
 	universal_understand = TRUE
+	mob_sort_value = 5
 
 	meat_type = null
 	meat_amount = 0

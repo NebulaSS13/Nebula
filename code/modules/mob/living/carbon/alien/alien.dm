@@ -5,6 +5,7 @@
 	health = 100
 	maxHealth = 100
 	mob_size = MOB_SIZE_TINY
+	mob_sort_value = 8
 	var/dead_icon
 	var/language
 	var/death_msg = "lets out a waning guttural screech, green blood bubbling from its maw."
