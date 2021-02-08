@@ -77,13 +77,13 @@
 
 					body += "<a href='?src=\ref[src];adminplayeropts="+ref+"'>Player Panel</a> - "
 					body += "<a href='?src=\ref[src];notes=show;mob="+ref+"'>Notes</a> - "
-					body += "<a href='?_src_=vars;Vars="+ref+"'>VV</a> - "
+					body += "<a href='?_src_=vars;Vars="+ref+"'>View Vars</a> - "
 					body += "<a href='?src=\ref[src];traitor="+ref+"'>Traitor Panel</a> - "
 					body += "<a href='?src=\ref[usr];priv_msg="+ref+"'>Send PM</a> - "
 					body += "<a href='?src=\ref[src];narrateto="+ref+"'>Direct Narrate</a> - "
 					body += "<a href='?src=\ref[src];adminplayerobservejump="+ref+"'>Jump To</a><br>"
 					if(antagonist > 0)
-						body += "<font size='2'><a href='?src=\ref[src];check_antagonist=1'><font color='red'><b>Antagonist</b></font></a></font>";
+						body += "<font size='2'><a href='?src=\ref[src];show_round_status=1'><font color='red'><b>Antagonist</b></font></a></font>";
 
 					body += "</td></tr></table>";
 
@@ -194,7 +194,7 @@
 			<tr id='title_tr'>
 				<td align='center'>
 					<font size='5'><b>Player panel</b></font><br>
-					Hover over a line to see more information - <a href='?src=\ref[src];check_antagonist=1'>Check antagonists</a>
+					Hover over a line to see more information, or click <a href='?src=\ref[src];show_round_status=1'>here</a> to check round info.
 					<p>
 				</td>
 			</tr>
@@ -278,7 +278,7 @@
 
 	show_browser(usr, dat, "window=players;size=600x480")
 
-/datum/admins/proc/check_antagonists()
+/datum/admins/proc/show_round_status()
 	if (GAME_STATE >= RUNLEVEL_GAME)
 		var/dat = list()
 		dat += "<html><head><title>Round Status</title></head><body><h1><B>Round Status</B></h1>"
