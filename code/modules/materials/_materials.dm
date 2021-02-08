@@ -496,7 +496,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			M.adjustToxLoss(toxicity_targets_organ ? (dam * 0.75) : dam)
 
 	if(solvent_power >= MAT_SOLVENT_STRONG)
-		M.take_organ_damage(0, removed * solvent_power)
+		M.take_organ_damage(0, removed * solvent_power, override_droplimb = DROPLIMB_ACID)
 
 	if(narcosis)
 		if(prob(10))
@@ -570,7 +570,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 					affecting.status |= ORGAN_DISFIGURED
 
 		if(!M.unacidable)
-			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage))
+			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), override_droplimb = DROPLIMB_ACID)
 
 /decl/material/proc/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)

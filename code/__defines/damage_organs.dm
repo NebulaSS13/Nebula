@@ -61,9 +61,10 @@
 #define ORGAN_FLAG_DEFORMED       BITFLAG(7) // The organ is permanently disfigured.
 
 // Droplimb types.
-#define DROPLIMB_EDGE 0
+#define DROPLIMB_EDGE  0
 #define DROPLIMB_BLUNT 1
-#define DROPLIMB_BURN 2
+#define DROPLIMB_BURN  2
+#define DROPLIMB_ACID  3
 
 // Robotics hatch_state defines.
 #define HATCH_CLOSED 0
