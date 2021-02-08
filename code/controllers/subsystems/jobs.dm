@@ -392,7 +392,7 @@ SUBSYSTEM_DEF(jobs)
 	for(var/mob/new_player/player in unassigned_roundstart)
 		if(player.client.prefs.alternate_option == RETURN_TO_LOBBY)
 			player.ready = 0
-			player.new_player_panel()
+			player.show_lobby_menu()
 			unassigned_roundstart -= player
 	return TRUE
 

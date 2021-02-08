@@ -1,7 +1,6 @@
 //admin verb groups - They can overlap if you so wish. Only one of each verb will exist in the verbs list regardless
 var/list/admin_verbs_default = list(
 	/datum/admins/proc/show_player_panel,	//shows an interface for individual players, with various links (links require additional flags,
-	/client/proc/player_panel,
 	/client/proc/secrets,
 	/client/proc/deadmin_self,			//destroys our own admin datum so we can play as a regular player,
 	/client/proc/hide_verbs,			//hides all our adminverbs,
@@ -14,7 +13,7 @@ var/list/admin_verbs_default = list(
 //	/client/proc/deadchat				//toggles deadchat on/off,
 	)
 var/list/admin_verbs_admin = list(
-	/client/proc/player_panel_new,		//shows an interface for all players, with links to various panels,
+	/client/proc/list_players,		//shows an interface for all players, with links to various panels,
 	/client/proc/invisimin,				//allows our mob to go invisible/visible,
 //	/datum/admins/proc/show_traitor_panel,	//interface which shows a mob's mind, -Removed due to rare practical use. Moved to debug verbs ~Errorage,
 	/datum/admins/proc/show_game_mode,  //Configuration window for the current game mode.,
@@ -315,7 +314,7 @@ var/list/admin_verbs_mod = list(
 	/client/proc/admin_ghost,			// allows us to ghost/reenter body at will,
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
-	/client/proc/player_panel_new,
+	/client/proc/list_players,
 	/client/proc/dsay,
 	/datum/admins/proc/show_skills,
 	/datum/admins/proc/show_player_panel,
@@ -438,20 +437,11 @@ var/list/admin_verbs_mod = list(
 			to_chat(mob, "<span class='notice'>Invisimin on. You are now as invisible as a ghost.</span>")
 			mob.alpha = max(mob.alpha - 100, 0)
 
-
-/client/proc/player_panel()
-	set name = "Player Panel"
+/client/proc/list_players()
+	set name = "List Players"
 	set category = "Admin"
 	if(holder)
-		holder.player_panel_old()
-	SSstatistics.add_field_details("admin_verb","PP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	return
-
-/client/proc/player_panel_new()
-	set name = "Player Panel New"
-	set category = "Admin"
-	if(holder)
-		holder.player_panel_new()
+		holder.list_players()
 	SSstatistics.add_field_details("admin_verb","PPN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 

@@ -15,7 +15,7 @@
 	set_sight(sight|SEE_TURFS)
 	GLOB.player_list |= src
 
-	new_player_panel()
+	show_lobby_menu()
 
 	if(!SScharacter_setup.initialized)
 		SScharacter_setup.newplayers_requiring_init += src

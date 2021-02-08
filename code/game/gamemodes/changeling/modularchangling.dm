@@ -161,10 +161,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	genomecost = 7
 	verbpath = /mob/proc/changeling_rapidregen
 
-
-
-// Modularchangling, totally stolen from the new player panel.  YAYY
-/datum/changeling/proc/EvolutionMenu()//The new one
+/datum/changeling/proc/EvolutionMenu()
 	set category = "Changeling"
 	set desc = "Level up!"
 
