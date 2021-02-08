@@ -5,6 +5,7 @@
 
 /mob/observer/eye
 	name = "Eye"
+	mob_sort_value = 1
 	var/name_sufix = "Eye"
 	icon = 'icons/mob/eye.dmi'
 	icon_state = "default-eye"

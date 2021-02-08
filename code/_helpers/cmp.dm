@@ -90,3 +90,9 @@
 
 /proc/cmp_cocktail_des(var/decl/cocktail/A, var/decl/cocktail/B)
 	. = B.mix_priority() - A.mix_priority()
+
+/proc/cmp_mob_sortvalue_asc(mob/a, mob/b)
+	. = a.mob_sort_value - b.mob_sort_value
+
+/proc/cmp_mob_sortvalue_des(mob/a, mob/b)
+	. = b.mob_sort_value - a.mob_sort_value

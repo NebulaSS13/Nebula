@@ -350,7 +350,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //Returns a list of all mobs with their name
 /proc/getmobs()
 
-	var/list/mobs = sortmobs()
+	var/list/mobs = get_sorted_mob_list()
 	var/list/names = list()
 	var/list/creatures = list()
 	var/list/namecounts = list()
@@ -375,40 +375,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 /proc/get_follow_targets()
 	return follow_repository.get_follow_targets()
-
-//Orders mobs by type then by name
-/proc/sortmobs()
-	var/list/moblist = list()
-	var/list/sortmob = sortAtom(SSmobs.mob_list)
-	for(var/mob/observer/eye/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/silicon/ai/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/silicon/pai/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/silicon/robot/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/deity/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/human/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/brain/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/alien/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/observer/ghost/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/new_player/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/slime/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/simple_animal/M in sortmob)
-		moblist.Add(M)
-//	for(var/mob/living/silicon/hivebot/M in world)
-//		mob_list.Add(M)
-//	for(var/mob/living/silicon/hive_mainframe/M in world)
-//		mob_list.Add(M)
-	return moblist
 
 // returns the turf located at the map edge in the specified direction relative to A
 // used for mass driver
