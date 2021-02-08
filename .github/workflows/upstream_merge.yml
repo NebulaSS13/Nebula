@@ -8,7 +8,7 @@ on:
         required: true
         default: 'NebulaSS13/Nebula'
       Branch:
-        description: 'Branch of upstrem to pull'
+        description: 'Branch of upstream to pull'
         required: true
         default: dev
 
