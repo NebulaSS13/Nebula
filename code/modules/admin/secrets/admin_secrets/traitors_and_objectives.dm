@@ -4,4 +4,4 @@
 /datum/admin_secret_item/admin_secret/traitors_and_objectives/execute(var/mob/user)
 	. = ..()
 	if(.)
-		user.client.holder.check_antagonists()
+		user.client.holder.show_round_status()

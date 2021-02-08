@@ -468,7 +468,7 @@ var/list/additional_antag_types = list()
 		if(P.client && P.ready)
 			. ++
 
-/datum/game_mode/proc/check_antagonists_topic(href, href_list[])
+/datum/game_mode/proc/round_status_topic(href, href_list[])
 	return 0
 
 /datum/game_mode/proc/create_antagonists()
