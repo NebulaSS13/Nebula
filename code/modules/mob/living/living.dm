@@ -903,3 +903,7 @@ default behaviour is:
 
 /mob/living/proc/get_adjusted_metabolism(metabolism)
 	return metabolism
+
+/mob/living/get_admin_job_string()
+	return "Living"
+

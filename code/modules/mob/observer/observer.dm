@@ -86,3 +86,6 @@ mob/observer/check_airflow_movable()
 
 /mob/observer/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)
 	. = text_content
+
+/mob/observer/get_admin_job_string()
+	return "Ghost"

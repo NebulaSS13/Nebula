@@ -1801,3 +1801,6 @@
 	for(var/bp in held_item_slots) 
 		if(organs_by_name[bp])
 			. |= organs_by_name[bp]
+
+/mob/living/carbon/human/get_admin_job_string()
+	return job || uppertext(species.name)

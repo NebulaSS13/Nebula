@@ -540,3 +540,7 @@
 		gene_damage = Clamp(amount, 0, maxHealth)
 		if(gene_damage >= maxHealth)
 			death()
+
+/mob/living/simple_animal/get_admin_job_string()
+	return "Animal"
+

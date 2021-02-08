@@ -551,3 +551,6 @@ mob/new_player/MayRespawn()
 
 /mob/new_player/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)
 	. = text_content
+
+/mob/new_player/get_admin_job_string()
+	return "New player"
