@@ -12,6 +12,7 @@
 	cost = 0.5
 	template_flags = TEMPLATE_FLAG_SPAWN_GUARANTEED
 	spawn_weight = 50
+	area_usage_test_exempted_root_areas = list(/area/liberia)
 	shuttles_to_initialise = list(
 		/datum/shuttle/autodock/overmap/mule
 	)
