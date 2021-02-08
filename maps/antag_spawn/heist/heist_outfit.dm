@@ -105,17 +105,19 @@
 			H.put_in_hands(primary)
 
 		if(istype(primary, /obj/item/gun/projectile))
-			var/obj/item/gun/projectile/bullet_thrower = primary
-			if(bullet_thrower.ammo_magazine)
-				H.equip_to_slot_or_del(new bullet_thrower.ammo_magazine.type(H), slot_l_store_str)
-				if(prob(20)) //don't want to give them too much
-					H.equip_to_slot_or_del(new bullet_thrower.ammo_magazine.type(H), slot_r_store_str)
-			else if(length(bullet_thrower.loaded))
-				var/obj/item/ammo_casing/casing = pick(bullet_thrower.loaded)
-				var/obj/item/storage/box/ammobox = new casing.type(get_turf(H.loc))
-				for(var/i in 1 to rand(3,5) + rand(0,2))
-					new bullet_thrower.loaded(ammobox)
-				H.put_in_hands(ammobox)
+			var/obj/item/gun/bullet_thrower = primary
+			var/obj/item/firearm_component/receiver/ballistic/proj_receiver = bullet_thrower.receiver
+			if(istype(proj_receiver))
+				if(proj_receiver.ammo_magazine)
+					H.equip_to_slot_or_del(new proj_receiver.ammo_magazine.type(H), slot_l_store_str)
+					if(prob(20)) //don't want to give them too much
+						H.equip_to_slot_or_del(new proj_receiver.ammo_magazine.type(H), slot_r_store_str)
+				else if(length(proj_receiver.loaded))
+					var/obj/item/ammo_casing/casing = pick(proj_receiver.loaded)
+					var/obj/item/storage/box/ammobox = new casing.type(get_turf(H.loc))
+					for(var/i in 1 to rand(3,5) + rand(0,2))
+						new casing.type(ammobox)
+					H.put_in_hands(ammobox)
 
 		if(holster)
 			var/obj/item/clothing/under/uniform = H.w_uniform

@@ -230,6 +230,29 @@
 		update_icon()
 		loc.update_icon()
 
+/obj/item/firearm_component/receiver/ballistic/show_examine_info(var/mob/user)
+	if(is_jammed && user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
+		to_chat(user, SPAN_WARNING("It looks jammed."))
+	if(ammo_magazine)
+		to_chat(user, "It has \a [ammo_magazine] loaded.")
+	if(user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
+		to_chat(user, "It has [length(loaded) + length(ammo_magazine?.stored_ammo) + !!chambered] round\s remaining.")
+
+/obj/item/firearm_component/receiver/ballistic/get_holder_overlay(holder_state)
+	var/image/ret = ..()
+	if(ret && ammo_indicator)
+		ret.overlays += get_ammo_indicator(holder_state)
+	return ret
+
+/obj/item/firearm_component/receiver/ballistic/proc/get_ammo_indicator(var/base_state)
+	var/remaining_shots = length(ammo_magazine?.stored_ammo)
+	if(!remaining_shots)
+		return mutable_appearance(icon, "[base_state]-ammo_bad")
+	else if(remaining_shots <= ammo_magazine.max_ammo * 0.5)
+		return mutable_appearance(icon, "[base_state]-ammo_warn") 
+	else
+		return mutable_appearance(icon, "[base_state]-ammo_ok") 
+
 // Subtypes
 /obj/item/firearm_component/receiver/ballistic/cycle
 	loaded = /obj/item/ammo_casing/shotgun/beanbag
@@ -237,17 +260,24 @@
 	handle_casings = CYCLE_CASINGS
 	max_shells = 2
 
-/obj/item/firearm_component/receiver/ballistic/dart
-	load_method = MAGAZINE
-	ammo_magazine = /obj/item/ammo_magazine/chemdart
-	allowed_magazines = /obj/item/ammo_magazine/chemdart
-	handle_casings = CLEAR_CASINGS
-
 /obj/item/firearm_component/receiver/ballistic/pistol
 	load_method = MAGAZINE
 	ammo_magazine = /obj/item/ammo_magazine/pistol
 	allowed_magazines = /obj/item/ammo_magazine/pistol
+	ammo_indicator = TRUE
 
-/obj/item/firearm_component/receiver/ballistic/holdout
+/obj/item/firearm_component/receiver/ballistic/pistol/get_ammo_indicator(base_state)
+	var/image/ret = ..()
+	if(ret && !length(ammo_magazine?.stored_ammo))
+		ret.overlays += "[base_state]-e"
+	return ret
+
+/obj/item/firearm_component/receiver/ballistic/pistol/holdout
 	ammo_magazine = /obj/item/ammo_magazine/pistol/small
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small
+	ammo_indicator = FALSE
+
+/obj/item/firearm_component/receiver/ballistic/zipgun
+	handle_casings = CYCLE_CASINGS
+	load_method = SINGLE_CASING
+	max_shells = 1 

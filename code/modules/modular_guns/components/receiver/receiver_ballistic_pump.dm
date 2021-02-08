@@ -3,6 +3,7 @@
 	handle_casings = HOLD_CASINGS
 	max_shells = 4
 	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
+	loaded = /obj/item/ammo_casing/shotgun/beanbag
 	var/next_pump = 0
 
 /obj/item/firearm_component/receiver/ballistic/pump/holder_attack_self(mob/user)

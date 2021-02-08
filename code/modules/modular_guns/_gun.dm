@@ -138,20 +138,6 @@
 /obj/item/gun/projectile/dartgun/attack_self(mob/user)
 	Interact(user)
 
-/obj/item/gun/projectile/bolt_action/attack_self(mob/user)
-	bolt_open = !bolt_open
-	if(bolt_open)
-		if(chambered)
-			to_chat(user, "<span class='notice'>You work the bolt open, ejecting [chambered]!</span>")
-			unload_shell()
-		else
-			to_chat(user, "<span class='notice'>You work the bolt open.</span>")
-	else
-		to_chat(user, "<span class='notice'>You work the bolt closed.</span>")
-		playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltforward.ogg', 50, 1)
-		bolt_open = FALSE
-	add_fingerprint(user)
-	update_icon()
 
 /obj/item/gun/launcher/grenade/underslung/attack_self()
 	return

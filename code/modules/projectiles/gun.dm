@@ -182,9 +182,11 @@
 /obj/item/gun/proc/special_check(var/mob/user)
 
 	if(!istype(user, /mob/living))
-		return 0
+		return FALSE
 	if(!user.check_dexterity(DEXTERITY_WEAPONS))
-		return 0
+		return FALSE
+	if(!receiver?.special_check(user))
+		return FALSE
 
 	var/mob/living/M = user
 	if(!safety() && world.time > last_safety_check + 5 MINUTES && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
@@ -397,7 +399,7 @@
 			step(user,get_dir(target,user))
 			user.set_dir(old_dir)
 
-	receiver?.handle_post_holder_fire()
+	receiver?.handle_post_holder_fire(user)
 	update_icon()
 
 

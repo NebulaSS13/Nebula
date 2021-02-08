@@ -28,4 +28,4 @@
 
 /decl/crafting_stage/screwdriver/zipgun
 	progress_message = "You secure the trigger assembly and finish off the zipgun."
-	product = /obj/item/gun/projectile/zipgun/unloaded
+	product = /obj/item/gun/projectile/zipgun
