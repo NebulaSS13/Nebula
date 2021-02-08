@@ -35,7 +35,7 @@
 							stored[mat] += crushing.matter[mat]
 						else
 							stored[mat] = crushing.matter[mat]
-					crushing.droplimb(disintegrate = DROPLIMB_BLUNT, silent = TRUE)
+					crushing.dismember(disintegrate = DISMEMBER_METHOD_BLUNT, silent = TRUE)
 					break
 	if(output_turf)
 		var/produced = 0
