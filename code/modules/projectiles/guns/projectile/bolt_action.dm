@@ -7,7 +7,7 @@
 	force = 5
 	slot_flags = SLOT_BACK
 	origin_tech = "{'combat':4,'materials':2}"
-	caliber = CALIBER_RIFLE
+	barrel = /obj/item/firearm_component/barrel/ballistic/rifle
 	handle_casings = HOLD_CASINGS
 	load_method = SINGLE_CASING
 	max_shells = 1
@@ -76,7 +76,7 @@
 	icon = 'icons/obj/guns/heavysniper.dmi'
 	force = 10
 	origin_tech = "{'combat':7,'materials':2,'esoteric':8}"
-	caliber = CALIBER_ANTI_MATERIEL
+	barrel = /obj/item/firearm_component/barrel/ballistic/sniper
 	screen_shake = 2 //extra kickback
 	one_hand_penalty = 6
 	accuracy = -2

@@ -3,7 +3,7 @@
 	name = "pistol"
 	icon = 'icons/obj/guns/pistol.dmi'
 	load_method = MAGAZINE
-	caliber = CALIBER_PISTOL
+	barrel = /obj/item/firearm_component/barrel/ballistic
 	magazine_type = /obj/item/ammo_magazine/pistol
 	allowed_magazines = /obj/item/ammo_magazine/pistol
 	accuracy_power = 7
@@ -24,7 +24,7 @@
 	item_state = null
 	ammo_indicator = FALSE
 	w_class = ITEM_SIZE_SMALL
-	caliber = CALIBER_PISTOL_SMALL
+	barrel = /obj/item/firearm_component/barrel/ballistic/pistol
 	silenced = 0
 	fire_delay = 4
 	origin_tech = "{'combat':2,'materials':2,'esoteric':8}"

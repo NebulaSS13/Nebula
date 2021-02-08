@@ -52,11 +52,12 @@
 	. = ..()
 	var/list/traits = list()
 
-	traits += "<br>Caliber: [caliber]"
+	var/obj/item/firearm_component/barrel/ballistic/proj_barrel = barrel
+	traits += "<br>Caliber: [proj_barrel?.caliber || "custom"]"
 
 	var/list/loading_ways = list()
 	if(load_method & SINGLE_CASING)
-		loading_ways += "loose [caliber] rounds"
+		loading_ways += proj_barrel?.caliber ? "single [proj_barrel.caliber] rounds" : "single rounds"
 	if(load_method & SPEEDLOADER)
 		loading_ways += "speedloaders"
 	if(load_method & MAGAZINE)

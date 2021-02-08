@@ -4,7 +4,7 @@
 	icon = 'icons/obj/guns/revolvers.dmi'
 	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"
-	caliber = CALIBER_PISTOL_MAGNUM
+	barrel = /obj/item/firearm_component/barrel/ballistic/revolver
 	origin_tech = "{'combat':2,'materials':2}"
 	handle_casings = CYCLE_CASINGS
 	max_shells = 6
@@ -48,7 +48,7 @@
 /obj/item/gun/projectile/revolver/capgun
 	name = "cap gun"
 	desc = "Looks almost like the real thing! Ages 8 and up."
-	caliber = CALIBER_CAPS
+	barrel = /obj/item/firearm_component/barrel/ballistic/capgun
 	origin_tech = "{'combat':1,'materials':1}"
 	ammo_type = /obj/item/ammo_casing/cap
 	var/cap = TRUE

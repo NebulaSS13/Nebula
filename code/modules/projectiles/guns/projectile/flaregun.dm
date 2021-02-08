@@ -11,8 +11,7 @@
 	slot_flags = SLOT_LOWER_BODY | SLOT_HOLSTER
 	material = /decl/material/solid/plastic
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
-
-	caliber = CALIBER_SHOTGUN
+	barrel = /obj/item/firearm_component/barrel/ballistic/shotgun
 	handle_casings = CYCLE_CASINGS
 	load_method = SINGLE_CASING|SPEEDLOADER
 	max_shells = 1

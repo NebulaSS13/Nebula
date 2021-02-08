@@ -16,7 +16,7 @@
 
 	//33% chance to be able to reload the gun with human ammunition
 	if(prob(66))
-		new_gun.caliber = "999"
+		new_gun.set_caliber(CALIBER_ALIEN)
 	//33% chance to fill it with a random amount of bullets
 	new_gun.max_shells = rand(1,12)
 	new_gun.loaded.Cut()
@@ -25,8 +25,9 @@
 		for(var/i = 1 to num_bullets)
 			var/obj/item/ammo_casing/A = new new_gun.ammo_type(new_gun)
 			new_gun.loaded += A
-			if(A.caliber != new_gun.caliber)
-				A.caliber = new_gun.caliber
+			var/gun_caliber = new_gun.get_caliber()
+			if(A.caliber != gun_caliber)
+				A.caliber = gun_caliber
 				A.desc = "A bullet casing of unknown caliber."
 
 	return new_gun

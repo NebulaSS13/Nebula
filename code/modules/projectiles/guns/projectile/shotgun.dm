@@ -1,3 +1,6 @@
+/obj/item/gun/projectile/shotgun
+	barrel = /obj/item/firearm_component/barrel/ballistic/shotgun
+
 /obj/item/gun/projectile/shotgun/pump
 	name = "shotgun"
 	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys."
@@ -8,7 +11,6 @@
 	force = 10
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
-	caliber = CALIBER_SHOTGUN
 	origin_tech = "{'combat':4,'materials':2}"
 	load_method = SINGLE_CASING
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
@@ -63,7 +65,6 @@
 	force = 10
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
-	caliber = CALIBER_SHOTGUN
 	origin_tech = "{'combat':3,'materials':1}"
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	one_hand_penalty = 2

@@ -9,7 +9,6 @@
 	space_recoil = 1
 	combustion = 1
 
-	var/caliber = CALIBER_PISTOL		//determines which casings will fit
 	var/handle_casings = EJECT_CASINGS	//determines how spent casings should be handled
 	var/load_method = SINGLE_CASING|SPEEDLOADER //1 = Single shells, 2 = box or quick loader, 3 = magazine
 	var/obj/item/ammo_casing/chambered = null
@@ -123,7 +122,7 @@
 	if(istype(A, /obj/item/ammo_magazine))
 		. = TRUE
 		var/obj/item/ammo_magazine/AM = A
-		if(!(load_method & AM.mag_type) || caliber != AM.caliber)
+		if(!(load_method & AM.mag_type) || get_caliber() != AM.caliber)
 			return //incompatible
 
 		switch(AM.mag_type)
@@ -148,7 +147,7 @@
 				for(var/obj/item/ammo_casing/C in AM.stored_ammo)
 					if(loaded.len >= max_shells)
 						break
-					if(C.caliber == caliber)
+					if(C.caliber == get_caliber())
 						C.forceMove(src)
 						loaded += C
 						AM.stored_ammo -= C //should probably go inside an ammo_magazine proc, but I guess less proc calls this way...
@@ -160,7 +159,7 @@
 	else if(istype(A, /obj/item/ammo_casing))
 		. = TRUE
 		var/obj/item/ammo_casing/C = A
-		if(!(load_method & SINGLE_CASING) || caliber != C.caliber)
+		if(!(load_method & SINGLE_CASING) || get_caliber() != C.caliber)
 			return //incompatible
 		if(loaded.len >= max_shells)
 			to_chat(user, "<span class='warning'>[src] is full.</span>")

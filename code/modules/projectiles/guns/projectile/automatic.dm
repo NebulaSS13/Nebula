@@ -5,7 +5,7 @@
 	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"
 	w_class = ITEM_SIZE_NORMAL
-	caliber = CALIBER_PISTOL_SMALL
+	barrel = /obj/item/firearm_component/barrel/ballistic/pistol
 	origin_tech = "{'combat':5,'materials':2}"
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	ammo_type = /obj/item/ammo_casing/pistol/small
@@ -43,7 +43,7 @@
 	icon = 'icons/obj/guns/bullpup_rifle.dmi'
 	w_class = ITEM_SIZE_HUGE
 	force = 10
-	caliber = CALIBER_RIFLE
+	barrel = /obj/item/firearm_component/barrel/ballistic/rifle
 	origin_tech = "{'combat':8,'materials':3}"
 	ammo_type = /obj/item/ammo_casing/rifle
 	slot_flags = SLOT_BACK
