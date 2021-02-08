@@ -78,7 +78,7 @@
 					body += "<a href='?src=\ref[src];adminplayeropts="+ref+"'>Player Panel</a> - "
 					body += "<a href='?src=\ref[src];notes=show;mob="+ref+"'>Notes</a> - "
 					body += "<a href='?_src_=vars;Vars="+ref+"'>View Vars</a> - "
-					body += "<a href='?src=\ref[src];traitor="+ref+"'>Traitor Panel</a> - "
+					body += "<a href='?src=\ref[src];show_special_roles="+ref+"'>Special Roles</a> - "
 					body += "<a href='?src=\ref[usr];priv_msg="+ref+"'>Send PM</a> - "
 					body += "<a href='?src=\ref[src];narrateto="+ref+"'>Direct Narrate</a> - "
 					body += "<a href='?src=\ref[src];adminplayerobservejump="+ref+"'>Jump To</a><br>"

@@ -232,7 +232,7 @@ var/list/admin_verbs_rejuv = list(
 var/list/admin_verbs_hideable = list(
 	/client/proc/deadmin_self,
 //	/client/proc/deadchat,
-	/datum/admins/proc/show_traitor_panel,
+	/datum/admins/proc/show_special_roles,
 	/datum/admins/proc/toggleenter,
 	/datum/admins/proc/toggleguests,
 	/datum/admins/proc/announce,
