@@ -355,5 +355,5 @@ GLOBAL_LIST_INIT(bodypart_coverage_cache, new)
 	. = GLOB.bodypart_coverage_cache[key]
 
 /proc/get_sorted_mob_list()
-	. = sortTime(SSmobs.mob_list.Copy(), /proc/cmp_name_asc)
+	. = sortTim(SSmobs.mob_list.Copy(), /proc/cmp_name_asc)
 	. = sortTim(., /proc/cmp_mob_sortvalue_asc)

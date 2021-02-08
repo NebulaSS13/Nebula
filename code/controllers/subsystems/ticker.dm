@@ -285,7 +285,7 @@ Helpers
 				if(player.create_character())
 					qdel(player)
 		else if(player && !player.ready)
-			player.new_player_panel()
+			player.show_lobby_menu()
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
 	for(var/mob/living/player in GLOB.player_list)

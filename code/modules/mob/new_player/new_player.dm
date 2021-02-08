@@ -23,7 +23,7 @@
 	. = ..()
 	verbs += /mob/proc/toggle_antag_pool
 
-/mob/new_player/proc/new_player_panel(force = FALSE)
+/mob/new_player/proc/show_lobby_menu(force = FALSE)
 	if(!SScharacter_setup.initialized && !force)
 		return // Not ready yet.
 	var/output = list()
@@ -117,7 +117,7 @@
 
 	if(href_list["refresh"])
 		panel.close()
-		new_player_panel()
+		show_lobby_menu()
 
 	if(href_list["observe"])
 		if(GAME_STATE < RUNLEVEL_LOBBY)
@@ -188,7 +188,7 @@
 		if(client)
 			client.prefs.process_link(src, href_list)
 	else if(!href_list["late_join"])
-		new_player_panel()
+		show_lobby_menu()
 
 	if(href_list["showpoll"])
 

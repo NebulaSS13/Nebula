@@ -79,7 +79,7 @@ var/list/time_prefs_fixed = list()
 	sanitize_preferences()
 	if(client && istype(client.mob, /mob/new_player))
 		var/mob/new_player/np = client.mob
-		np.new_player_panel(TRUE)
+		np.show_lobby_menu(TRUE)
 
 /datum/preferences/proc/load_and_update_character(var/slot)
 	load_character(slot)
