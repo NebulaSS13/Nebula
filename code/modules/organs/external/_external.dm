@@ -891,6 +891,13 @@ Note that amputating the affected organ does in fact remove the infection from t
 					"Your [src.name] flashes away into ashes!",
 					"You hear a crackling sound[gore]."
 					)
+			if(DROPLIMB_ACID)
+				var/gore = "[BP_IS_PROSTHETIC(src) ? "": " of melting flesh"]"
+				return list(
+					"\The [owner]'s [src.name] dissolves!",
+					"Your [src.name] dissolves!",
+					"You hear a hissing sound[gore]."
+					)
 			if(DROPLIMB_BLUNT)
 				var/gore = "[BP_IS_PROSTHETIC(src) ? "": " in shower of gore"]"
 				var/gore_sound = "[BP_IS_PROSTHETIC(src) ? "rending sound of tortured metal" : "sickening splatter of gore"]"
@@ -965,8 +972,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(src && istype(loc,/turf))
 					throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 				set_dir(SOUTH, TRUE)
-		if(DROPLIMB_BURN)
-			new /obj/effect/decal/cleanable/ash(get_turf(victim))
+		if(DROPLIMB_BURN, DROPLIMB_ACID)
+			if(disintegrate == DROPLIMB_BURN)
+				new /obj/effect/decal/cleanable/ash(get_turf(victim))
+			else
+				new /obj/effect/decal/cleanable/mucus(get_turf(victim))
 			for(var/obj/item/I in src)
 				if(I.w_class > ITEM_SIZE_SMALL && !istype(I,/obj/item/organ))
 					I.dropInto(loc)

@@ -279,19 +279,13 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 //Damages ONE external organ, organ gets randomly selected from damagable ones.
 //It automatically updates damage overlays if necesary
 //It automatically updates health status
-/mob/living/carbon/human/take_organ_damage(var/brute, var/burn, var/sharp = 0, var/edge = 0)
-	var/list/obj/item/organ/external/parts = get_damageable_organs()
-	if(!parts.len)
-		return
-
-	var/obj/item/organ/external/picked = pick(parts)
-	var/damage_flags = (sharp? DAM_SHARP : 0)|(edge? DAM_EDGE : 0)
-
-	if(picked.take_external_damage(brute, burn, damage_flags))
-		BITSET(hud_updateflag, HEALTH_HUD)
-
-	updatehealth()
-
+/mob/living/carbon/human/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
+	var/list/parts = get_damageable_organs()
+	if(length(parts))
+		var/obj/item/organ/external/picked = pick(parts)
+		if(picked.take_external_damage(brute, burn, override_droplimb = override_droplimb))
+			BITSET(hud_updateflag, HEALTH_HUD)
+		updatehealth()
 
 //Heal MANY external organs, in random order
 /mob/living/carbon/human/heal_overall_damage(var/brute, var/burn)
