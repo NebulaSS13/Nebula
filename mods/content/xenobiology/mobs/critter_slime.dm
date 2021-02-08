@@ -1,4 +1,4 @@
-/mob/living/simple_animal/slime
+/mob/living/critter/slime
 	name = "pet slime"
 	desc = "A lovable, domesticated slime."
 	icon = 'mods/content/xenobiology/icons/slimes/slime_baby.dmi'
@@ -15,7 +15,7 @@
 	gene_damage = -1
 	var/slime_type = /decl/slime_colour/grey
 
-/mob/living/simple_animal/slime/Initialize(var/ml, var/_stype = /decl/slime_colour/grey)
+/mob/living/critter/slime/Initialize(var/ml, var/_stype = /decl/slime_colour/grey)
 	. = ..()
 	slime_type = _stype
 	if(!ispath(slime_type, /decl/slime_colour))
@@ -25,32 +25,32 @@
 	SetName("pet [slime_data.name] slime")
 	regenerate_icons()
 
-/mob/living/simple_animal/slime/regenerate_icons()
+/mob/living/critter/slime/regenerate_icons()
 	icon = get_slime_icon()
 	cut_overlays()
 	
-/mob/living/simple_animal/slime/proc/get_slime_icon()
+/mob/living/critter/slime/proc/get_slime_icon()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 	return slime_data.baby_icon
 
-/mob/living/simple_animal/slime/proc/prompt_rename(var/mob/user)
+/mob/living/critter/slime/proc/prompt_rename(var/mob/user)
 	set waitfor = FALSE
 	var/newname = sanitize(input(user, "Would you like to give the slime a name?", "Name your new pet", "pet slime") as null|text, MAX_NAME_LEN)
 	if(QDELETED(src) || QDELETED(user))
 		return
 	SetName(newname || "pet slime")
 
-/mob/living/simple_animal/slime/can_force_feed(var/feeder, var/food, var/feedback)
+/mob/living/critter/slime/can_force_feed(var/feeder, var/food, var/feedback)
 	if(feedback)
 		to_chat(feeder, SPAN_WARNING("Where do you intend to put \the [food]? \The [src] doesn't have a mouth!"))
 	return FALSE
 
-/mob/living/simple_animal/slime/adult
+/mob/living/critter/slime/adult
 	icon = 'mods/content/xenobiology/icons/slimes/slime_adult.dmi'
 
-/mob/living/simple_animal/slime/adult/death()
+/mob/living/critter/slime/adult/death()
 	for(var/i = 1 to rand(2,3))
-		var/mob/living/simple_animal/slime/baby = new(get_turf(src), slime_type)
+		var/mob/living/critter/slime/baby = new(get_turf(src), slime_type)
 		if(client)
 			if(mind)
 				mind.transfer_to(baby)
@@ -58,11 +58,11 @@
 				baby.key = key
 	qdel(src)
 
-/mob/living/simple_animal/slime/adult/get_slime_icon()
+/mob/living/critter/slime/adult/get_slime_icon()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 	return slime_data.adult_icon
 
-/mob/living/simple_animal/slime/adult/regenerate_icons()
+/mob/living/critter/slime/adult/regenerate_icons()
 	..()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 	add_overlay(image(slime_data.mood_icon, "aslime-:33"))

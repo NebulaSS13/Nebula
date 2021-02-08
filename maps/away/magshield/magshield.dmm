@@ -1268,7 +1268,7 @@
 	icon_state = "4-8";
 	pixel_y = 0
 	},
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "cZ" = (
@@ -3436,7 +3436,7 @@
 /turf/simulated/floor/tiled/white/usedup,
 /area/magshield/south)
 "ja" = (
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/simulated/floor/tiled/white/usedup,
 /area/magshield/south)
 "jb" = (

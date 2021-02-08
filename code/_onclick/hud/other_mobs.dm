@@ -1,16 +1,16 @@
-/mob/living/simple_animal/construct
+/mob/living/critter/construct
 	hud_type = /datum/hud/construct
 
 /datum/hud/construct/FinalizeInstantiation()
 	var/constructtype
 
-	if(istype(mymob,/mob/living/simple_animal/construct/armoured) || istype(mymob,/mob/living/simple_animal/construct/behemoth))
+	if(istype(mymob,/mob/living/critter/construct/armoured) || istype(mymob,/mob/living/critter/construct/behemoth))
 		constructtype = "juggernaut"
-	else if(istype(mymob,/mob/living/simple_animal/construct/builder))
+	else if(istype(mymob,/mob/living/critter/construct/builder))
 		constructtype = "artificer"
-	else if(istype(mymob,/mob/living/simple_animal/construct/wraith))
+	else if(istype(mymob,/mob/living/critter/construct/wraith))
 		constructtype = "wraith"
-	else if(istype(mymob,/mob/living/simple_animal/construct/harvester))
+	else if(istype(mymob,/mob/living/critter/construct/harvester))
 		constructtype = "harvester"
 
 	if(constructtype)

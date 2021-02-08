@@ -20,11 +20,11 @@ var/list/slime_pain_messages = list(
 	qdel(src)
 	. = rand(2,3)
 
-/mob/living/simple_animal/mouse/eaten_by_slime()
+/mob/living/critter/mouse/eaten_by_slime()
 	new /obj/item/remains/mouse(get_turf(src))
 	. = ..()
 
-/mob/living/simple_animal/lizard/eaten_by_slime()
+/mob/living/critter/lizard/eaten_by_slime()
 	new /obj/item/remains/lizard(get_turf(src))
 	. = ..()
 

@@ -89,7 +89,7 @@
 /area/template_noop)
 "at" = (
 /obj/random/loot,
-/mob/living/simple_animal/hostile/slug,
+/mob/living/critter/hostile/slug,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "au" = (
@@ -105,7 +105,7 @@
 /area/template_noop)
 "aw" = (
 /obj/effect/decal/cleanable/mucus,
-/mob/living/simple_animal/hostile/creature,
+/mob/living/critter/hostile/creature,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "ax" = (
@@ -289,7 +289,7 @@
 /obj/random/trash,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/mucus,
-/mob/living/simple_animal/hostile/creature,
+/mob/living/critter/hostile/creature,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "bg" = (

@@ -37,7 +37,7 @@
 
 #define isalien(A) istype(A, /mob/living/carbon/alien)
 
-#define isanimal(A) istype(A, /mob/living/simple_animal)
+#define isanimal(A) istype(A, /mob/living/critter)
 
 #define isairlock(A) istype(A, /obj/machinery/door/airlock)
 
@@ -51,7 +51,7 @@
 
 #define isclient(A) istype(A, /client)
 
-#define iscorgi(A) istype(A, /mob/living/simple_animal/corgi)
+#define iscorgi(A) istype(A, /mob/living/critter/corgi)
 
 #define is_drone(A) istype(A, /mob/living/silicon/robot/drone)
 
@@ -63,7 +63,7 @@
 
 #define isliving(A) istype(A, /mob/living)
 
-#define ismouse(A) istype(A, /mob/living/simple_animal/mouse)
+#define ismouse(A) istype(A, /mob/living/critter/mouse)
 
 #define isnewplayer(A) istype(A, /mob/new_player)
 

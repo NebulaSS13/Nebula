@@ -1,4 +1,4 @@
-//basic transformation spell. Should work for most simple_animals
+//basic transformation spell. Should work for most critters
 
 /spell/targeted/shapeshift
 	name = "Shapeshift"
@@ -99,7 +99,7 @@
 	name = "Baleful Polymorth"
 	desc = "This spell transforms its target into a small, furry animal."
 	feedback = "BP"
-	possible_transformations = list(/mob/living/simple_animal/lizard,/mob/living/simple_animal/mouse,/mob/living/simple_animal/corgi)
+	possible_transformations = list(/mob/living/critter/lizard,/mob/living/critter/mouse,/mob/living/critter/corgi)
 
 	share_damage = 0
 	invocation = "Yo'balada!"
@@ -128,7 +128,7 @@
 	name = "Polymorph"
 	desc = "This spell transforms the wizard into the common parrot."
 	feedback = "AV"
-	possible_transformations = list(/mob/living/simple_animal/hostile/retaliate/parrot)
+	possible_transformations = list(/mob/living/critter/hostile/retaliate/parrot)
 
 	drop_items = 0
 	share_damage = 0
@@ -146,7 +146,7 @@
 	name = "Corrupt Form"
 	desc = "This spell shapes the wizard into a terrible, terrible beast."
 	feedback = "CF"
-	possible_transformations = list(/mob/living/simple_animal/hostile/faithless)
+	possible_transformations = list(/mob/living/critter/hostile/faithless)
 
 	invocation = "mutters something dark and twisted as their form begins to twist..."
 	invocation_type = SpI_EMOTE

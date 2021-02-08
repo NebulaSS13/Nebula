@@ -22,7 +22,7 @@
 	to_chat(user, "You set \the [src] to [mode] docile mode.")
 
 /obj/item/dociler/attack(var/mob/living/L, var/mob/user)
-	if(!istype(L, /mob/living/simple_animal))
+	if(!istype(L, /mob/living/critter))
 		to_chat(user, "<span class='warning'>\The [src] cannot not work on \the [L].</span>")
 		return
 
@@ -36,8 +36,8 @@
 		L.faction = user.faction
 	else
 		L.faction = null
-	if(istype(L,/mob/living/simple_animal/hostile))
-		var/mob/living/simple_animal/hostile/H = L
+	if(istype(L,/mob/living/critter/hostile))
+		var/mob/living/critter/hostile/H = L
 		H.LoseTarget()
 		H.attack_same = 0
 		H.friends += weakref(user)

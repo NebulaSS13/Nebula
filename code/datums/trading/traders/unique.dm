@@ -91,7 +91,7 @@
 	possible_origins = list("An indistinct location", "Unknown location", "The Diamond Sphere", "Beyond the Veil", "Deadverse")
 	name_language = TRADER_DEFAULT_NAME
 
-	possible_wanted_items = list(/mob/living/simple_animal/construct            = TRADER_SUBTYPES_ONLY,
+	possible_wanted_items = list(/mob/living/critter/construct            = TRADER_SUBTYPES_ONLY,
 								/obj/item/sword/cultblade                = TRADER_THIS_TYPE,
 								/obj/item/clothing/head/culthood                = TRADER_ALL,
 								/obj/item/clothing/suit/space/cult              = TRADER_ALL,
@@ -99,9 +99,9 @@
 								/obj/item/clothing/head/helmet/space/cult       = TRADER_ALL,
 								/obj/structure/cult                             = TRADER_SUBTYPES_ONLY,
 								/obj/structure/constructshell                   = TRADER_ALL,
-								/mob/living/simple_animal/familiar              = TRADER_SUBTYPES_ONLY,
-								/mob/living/simple_animal/familiar/pet          = TRADER_BLACKLIST,
-								/mob/living/simple_animal/hostile/mimic         = TRADER_ALL)
+								/mob/living/critter/familiar              = TRADER_SUBTYPES_ONLY,
+								/mob/living/critter/familiar/pet          = TRADER_BLACKLIST,
+								/mob/living/critter/hostile/mimic         = TRADER_ALL)
 
 	possible_trading_items = list(/obj/item/clothing/gloves/wizard        = TRADER_THIS_TYPE,
 								/obj/item/clothing/head/helmet/space/void/wizard = TRADER_THIS_TYPE,

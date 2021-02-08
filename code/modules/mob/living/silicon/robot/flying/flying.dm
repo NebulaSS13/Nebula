@@ -9,9 +9,9 @@
 
 	// They are not very heavy or strong.
 	mob_size =       MOB_SIZE_SMALL
-	mob_bump_flag =  SIMPLE_ANIMAL
-	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
-	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
+	mob_bump_flag =  CRITTER
+	mob_swap_flags = MONKEY|SLIME|CRITTER
+	mob_push_flags = MONKEY|SLIME|CRITTER
 
 /mob/living/silicon/robot/flying/initialize_components()
 	components["actuator"] =       new/datum/robot_component/actuator(src)

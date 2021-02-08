@@ -82,7 +82,7 @@
 
 
 // Mobs //
-/mob/living/simple_animal/hostile/retaliate/goat/hydro
+/mob/living/critter/hostile/retaliate/goat/hydro
 	name = "goat"
 	desc = "An impressive goat, in size and coat. His horns look pretty serious!"
 	health = 100
@@ -93,7 +93,7 @@
 /obj/item/natural_weapon/hooves/strong
 	force = 15
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/hydro
+/mob/living/critter/hostile/retaliate/malf_drone/hydro
 	name = "Farmbot"
 	desc = "The botanist's best friend. There's something slightly odd about the way it moves."
 	icon = 'maps/random_ruins/exoplanet_ruins/hydrobase/hydro.dmi'
@@ -107,12 +107,12 @@
 	maxHealth = 225
 	malfunctioning = 0
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/Initialize()
+/mob/living/critter/hostile/retaliate/malf_drone/hydro/Initialize()
 	. = ..()
 	if(prob(15))
 		projectiletype = /obj/item/projectile/beam/drone/weak
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/emp_act(severity)
+/mob/living/critter/hostile/retaliate/malf_drone/hydro/emp_act(severity)
 	health -= rand(5,10) * (severity + 1)
 	disabled = rand(15, 30)
 	malfunctioning = 1

@@ -81,7 +81,7 @@
 
 /obj/effect/spider/stickyweb/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
-	if(istype(mover, /mob/living/simple_animal/hostile/giant_spider))
+	if(istype(mover, /mob/living/critter/hostile/giant_spider))
 		return 1
 	else if(istype(mover, /mob/living))
 		if(prob(50))
@@ -141,7 +141,7 @@
 	anchored = 0
 	layer = BELOW_OBJ_LAYER
 	health = 3
-	var/mob/living/simple_animal/hostile/giant_spider/greater_form
+	var/mob/living/critter/hostile/giant_spider/greater_form
 	var/last_itch = 0
 	var/amount_grown = -1
 	var/obj/machinery/atmospherics/unary/vent_pump/entry_vent
@@ -150,11 +150,11 @@
 	var/growth_chance = 50 // % chance of beginning growth, and eventually become a beautiful death machine
 
 	var/shift_range = 6
-	var/castes = list(/mob/living/simple_animal/hostile/giant_spider = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/guard = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/nurse = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/spitter = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/hunter = 1)
+	var/castes = list(/mob/living/critter/hostile/giant_spider = 2,
+					  /mob/living/critter/hostile/giant_spider/guard = 2,
+					  /mob/living/critter/hostile/giant_spider/nurse = 2,
+					  /mob/living/critter/hostile/giant_spider/spitter = 2,
+					  /mob/living/critter/hostile/giant_spider/hunter = 1)
 
 /obj/effect/spider/spiderling/Initialize(var/mapload, var/atom/parent)
 	greater_form = pickweight(castes)

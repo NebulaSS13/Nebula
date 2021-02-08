@@ -18,7 +18,7 @@
 	cost = 1
 	area_usage_test_exempted_root_areas = list(/area/errant_pisces)
 
-/mob/living/simple_animal/hostile/carp/shark // generally stronger version of a carp that doesn't die from a mean look. Fance new sprites included, credits to F-Tang Steve
+/mob/living/critter/hostile/carp/shark // generally stronger version of a carp that doesn't die from a mean look. Fance new sprites included, credits to F-Tang Steve
 	name = "cosmoshark"
 	desc = "Enormous creature that resembles a shark with magenta glowing lines along its body and set of long deep-purple teeth."
 	icon = 'maps/away/errant_pisces/icons/cosmoshark.dmi'
@@ -35,13 +35,13 @@
 	break_stuff_probability = 35
 	faction = "shark"
 
-/mob/living/simple_animal/hostile/carp/shark/carp_randomify()
+/mob/living/critter/hostile/carp/shark/carp_randomify()
 	return
 
-/mob/living/simple_animal/hostile/carp/shark/on_update_icon()
+/mob/living/critter/hostile/carp/shark/on_update_icon()
 	return
 
-/mob/living/simple_animal/hostile/carp/shark/death()
+/mob/living/critter/hostile/carp/shark/death()
 	..()
 	var/datum/gas_mixture/environment = loc.return_air()
 	if (environment)
@@ -50,7 +50,7 @@
 		environment.merge(sharkmaw_chlorine)
 		visible_message(SPAN_WARNING("\The [src]'s body releases some gas from the gills with a quiet fizz!"))
 
-/mob/living/simple_animal/hostile/carp/shark/AttackingTarget()
+/mob/living/critter/hostile/carp/shark/AttackingTarget()
 	set waitfor = 0//to deal with sleep() possibly stalling other procs
 	. =..()
 	var/mob/living/L = .

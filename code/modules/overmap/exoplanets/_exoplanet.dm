@@ -33,7 +33,7 @@
 	var/image/skybox_image
 
 	var/list/actors = list() 	//things that appear in engravings on xenoarch finds.
-	var/list/species = list() 	//list of names to use for simple animals instead of 'alien creature'
+	var/list/species = list() 	//list of names to use for exofauna instead of 'alien creature'
 
 	var/datum/gas_mixture/atmosphere
 	var/list/breathgas = list()			//list of gases animals/plants require to survive

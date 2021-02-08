@@ -28,11 +28,11 @@ GLOBAL_LIST_INIT(symbiote_starting_points, new)
 	outfit_type = /decl/hierarchy/outfit/job/assistant
 	create_record = FALSE
 	var/check_whitelist // = "Symbiote"
-	var/static/mob/living/simple_animal/borer/preview_slug
+	var/static/mob/living/critter/borer/preview_slug
 
 /datum/job/symbiote/post_equip_rank(var/mob/person, var/alt_title)
 
-	var/mob/living/simple_animal/borer/symbiote = person
+	var/mob/living/critter/borer/symbiote = person
 	symbiote.SetName(symbiote.truename)
 	symbiote.real_name = symbiote.truename
 
@@ -59,7 +59,7 @@ GLOBAL_LIST_INIT(symbiote_starting_points, new)
 
 /datum/job/symbiote/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
 
-	var/mob/living/simple_animal/borer/symbiote/symbiote = new
+	var/mob/living/critter/borer/symbiote/symbiote = new
 	var/mob/living/carbon/human/host
 	try
 		// No clean way to handle kicking them back to the lobby at this point, so dump

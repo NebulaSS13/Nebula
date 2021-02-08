@@ -3,7 +3,7 @@
 	desc = "A potent chemical mix that will nullify a slime's powers, causing it to become docile and tame."
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = "bottle19"
-	var/slime_type = /mob/living/simple_animal/slime
+	var/slime_type = /mob/living/critter/slime
 	var/can_tame_adults = FALSE
 
 /obj/item/slime_potion/attack(mob/living/slime/M, mob/user)
@@ -17,7 +17,7 @@
 		if(M.client)
 			to_chat(user, SPAN_WARNING("\The [M] resists!"))
 			return TRUE
-		var/mob/living/simple_animal/slime/pet = new slime_type(M.loc, M.slime_type)
+		var/mob/living/critter/slime/pet = new slime_type(M.loc, M.slime_type)
 		to_chat(user, SPAN_NOTICE("You feed \the [pet] the potion, removing its powers and calming it."))
 		pet.prompt_rename(user)
 		qdel(M)
@@ -30,5 +30,5 @@
 	desc = "A potent chemical mix that will nullify a slime's powers, causing it to become docile and tame. This one is meant for adult slimes."
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = "bottle19"
-	slime_type = /mob/living/simple_animal/slime/adult
+	slime_type = /mob/living/critter/slime/adult
 	can_tame_adults = TRUE

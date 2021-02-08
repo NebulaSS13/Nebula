@@ -1710,7 +1710,7 @@
 /obj/random/coin,
 /obj/random/coin,
 /obj/item/storage/bag/cash,
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/simulated/floor/plating,
 /area/casino/casino_security)
 "eF" = (

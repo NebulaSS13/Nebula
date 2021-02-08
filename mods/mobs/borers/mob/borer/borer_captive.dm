@@ -17,7 +17,7 @@
 			to_chat(src, SPAN_WARNING("You cannot speak in IC (muted)."))
 			return
 
-	if(istype(src.loc,/mob/living/simple_animal/borer))
+	if(istype(src.loc,/mob/living/critter/borer))
 
 		message = sanitize(message)
 		if (!message)
@@ -26,7 +26,7 @@
 		if (stat == 2)
 			return say_dead(message)
 
-		var/mob/living/simple_animal/borer/B = src.loc
+		var/mob/living/critter/borer/B = src.loc
 		to_chat(src, "You whisper silently, \"[message]\"")
 		to_chat(B.host, "The captive mind of [src] whispers, \"[message]\"")
 
@@ -38,8 +38,8 @@
 
 /mob/living/captive_brain/process_resist()
 	//Resisting control by an alien mind.
-	if(istype(src.loc,/mob/living/simple_animal/borer))
-		var/mob/living/simple_animal/borer/B = src.loc
+	if(istype(src.loc,/mob/living/critter/borer))
+		var/mob/living/critter/borer/B = src.loc
 		var/mob/living/captive_brain/H = src
 
 		to_chat(H, "<span class='danger'>You begin doggedly resisting the parasite's control (this will take approximately sixty seconds).</span>")

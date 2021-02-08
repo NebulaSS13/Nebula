@@ -147,7 +147,7 @@ About the new airlock wires panel:
 				return
 	..(user)
 
-/obj/machinery/door/airlock/bumpopen(mob/living/simple_animal/user)
+/obj/machinery/door/airlock/bumpopen(mob/living/critter/user)
 	..(user)
 
 /obj/machinery/door/airlock/proc/isElectrified()
@@ -804,8 +804,8 @@ About the new airlock wires panel:
 		return TRUE
 
 
-	else if((stat & (BROKEN|NOPOWER)) && istype(user, /mob/living/simple_animal))
-		var/mob/living/simple_animal/A = user
+	else if((stat & (BROKEN|NOPOWER)) && istype(user, /mob/living/critter))
+		var/mob/living/critter/A = user
 		var/obj/item/I = A.get_natural_weapon()
 		if(I.force >= 10)
 			if(density)

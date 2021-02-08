@@ -10,7 +10,7 @@
 	list_as_special_role = FALSE
 
 /decl/ghosttrap/cortical_borer/forced(var/mob/user)
-	request_player(new /mob/living/simple_animal/borer(get_turf(user)), "A cortical borer needs a player.")
+	request_player(new /mob/living/critter/borer(get_turf(user)), "A cortical borer needs a player.")
 
 /decl/ghosttrap/cortical_borer/welcome_candidate(var/mob/target)
 	to_chat(target, SPAN_NOTICE("<b>You are a cortical borer!</b> You are a brain slug that worms its way \

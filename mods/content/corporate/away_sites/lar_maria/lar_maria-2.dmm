@@ -1224,7 +1224,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "dc" = (
-/mob/living/simple_animal/hostile/lar_maria/guard/ranged,
+/mob/living/critter/hostile/lar_maria/guard/ranged,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "dd" = (
@@ -1316,7 +1316,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "ds" = (
-/mob/living/simple_animal/hostile/lar_maria/virologist,
+/mob/living/critter/hostile/lar_maria/virologist,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "dt" = (
@@ -1660,7 +1660,7 @@
 /turf/simulated/wall,
 /area/lar_maria/office)
 "ev" = (
-/mob/living/simple_animal/hostile/lar_maria/virologist,
+/mob/living/critter/hostile/lar_maria/virologist,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/office)
 "ew" = (
@@ -1734,7 +1734,7 @@
 	dir = 1
 	},
 /obj/random/trash,
-/mob/living/simple_animal/hostile/lar_maria/virologist,
+/mob/living/critter/hostile/lar_maria/virologist,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "eJ" = (
@@ -2144,7 +2144,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "fV" = (
-/mob/living/simple_animal/hostile/lar_maria/guard,
+/mob/living/critter/hostile/lar_maria/guard,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "fW" = (
@@ -2152,7 +2152,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "fX" = (
-/mob/living/simple_animal/hostile/lar_maria/virologist/female,
+/mob/living/critter/hostile/lar_maria/virologist/female,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "fY" = (
@@ -2600,7 +2600,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/mob/living/simple_animal/hostile/lar_maria/virologist/female,
+/mob/living/critter/hostile/lar_maria/virologist/female,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
 "hr" = (

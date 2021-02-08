@@ -220,12 +220,12 @@
 /area/ministation/bridge)
 "aF" = (
 /obj/structure/glass_tank/aquarium,
-/mob/living/simple_animal/aquatic/fish,
-/mob/living/simple_animal/aquatic/fish,
-/mob/living/simple_animal/aquatic/fish,
-/mob/living/simple_animal/aquatic/fish,
-/mob/living/simple_animal/aquatic/fish,
-/mob/living/simple_animal/aquatic/fish/grump,
+/mob/living/critter/aquatic/fish,
+/mob/living/critter/aquatic/fish,
+/mob/living/critter/aquatic/fish,
+/mob/living/critter/aquatic/fish,
+/mob/living/critter/aquatic/fish,
+/mob/living/critter/aquatic/fish/grump,
 /turf/simulated/floor/tiled,
 /area/ministation/bridge)
 "aG" = (
@@ -4287,7 +4287,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
 "kz" = (
-/mob/living/simple_animal/cat/fluff/ran,
+/mob/living/critter/cat/fluff/ran,
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
 "kA" = (
@@ -6013,7 +6013,7 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/w)
 "oS" = (
-/mob/living/simple_animal/mouse,
+/mob/living/critter/mouse,
 /turf/simulated/floor/plating,
 /area/ministation/maint/w)
 "oT" = (
@@ -6065,7 +6065,7 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/mob/living/simple_animal/mouse,
+/mob/living/critter/mouse,
 /turf/simulated/floor/plating,
 /area/ministation/maint/e)
 "pb" = (
@@ -8289,7 +8289,7 @@
 	icon_state = "intercom";
 	pixel_x = -25
 	},
-/mob/living/simple_animal/mouse/brown/Tom,
+/mob/living/critter/mouse/brown/Tom,
 /turf/simulated/floor/wood,
 /area/ministation/cafe)
 "tT" = (
@@ -9063,7 +9063,7 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/mob/living/simple_animal/crow{
+/mob/living/critter/crow{
 	desc = "She's not a real doctor but she is a real bird.";
 	name = "Dr. Bird";
 	stop_automated_movement = 0
@@ -9480,7 +9480,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/mob/living/simple_animal/corgi/Ian,
+/mob/living/critter/corgi/Ian,
 /turf/simulated/floor/tiled,
 /area/ministation/hop)
 "wK" = (
@@ -10595,7 +10595,7 @@
 	icon_state = "intact";
 	dir = 6
 	},
-/mob/living/simple_animal/mouse,
+/mob/living/critter/mouse,
 /turf/simulated/floor/plating,
 /area/ministation/maint/sw)
 "zt" = (
@@ -11686,7 +11686,7 @@
 /turf/simulated/floor/airless,
 /area/ministation/ai_upload)
 "Ci" = (
-/mob/living/simple_animal/mouse,
+/mob/living/critter/mouse,
 /turf/simulated/floor/plating,
 /area/ministation/maint/se)
 "Cj" = (
@@ -12831,7 +12831,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "Fb" = (
-/mob/living/simple_animal/hostile/retaliate/parrot/Poly,
+/mob/living/critter/hostile/retaliate/parrot/Poly,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "Fc" = (
@@ -12868,7 +12868,7 @@
 	icon_state = "2-8"
 	},
 /obj/effect/decal/cleanable/dirt,
-/mob/living/simple_animal/opossum/poppy,
+/mob/living/critter/opossum/poppy,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "Fg" = (

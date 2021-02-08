@@ -132,7 +132,7 @@
 	uniform = /obj/item/clothing/under/color/orange
 	shoes = /obj/item/clothing/shoes/jackboots/tactical
 
-/mob/living/simple_animal/hostile/abolition_extremist
+/mob/living/critter/hostile/abolition_extremist
 	name = "abolition extremist"
 	desc = "Vigiliant fighter against slavery."
 	icon = 'maps/away/slavers/icons/abolitionist.dmi'
@@ -158,7 +158,7 @@
 	projectiletype = /obj/item/projectile/beam
 	faction = "extremist abolitionists"
 
-/mob/living/simple_animal/hostile/abolition_extremist/death(gibbed, deathmessage, show_dead_message)
+/mob/living/critter/hostile/abolition_extremist/death(gibbed, deathmessage, show_dead_message)
 	. = ..(gibbed, deathmessage, show_dead_message)
 	if(corpse)
 		new corpse(loc)

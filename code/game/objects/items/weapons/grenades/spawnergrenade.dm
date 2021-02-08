@@ -23,12 +23,12 @@
 
 /obj/item/grenade/spawnergrenade/manhacks
 	name = "manhack delivery grenade"
-	spawner_type = /mob/living/simple_animal/hostile/viscerator
+	spawner_type = /mob/living/critter/hostile/viscerator
 	deliveryamt = 5
 	origin_tech = "{'materials':3,'magnets':4,'esoteric':4}"
 
 /obj/item/grenade/spawnergrenade/spesscarp
 	name = "carp delivery grenade"
-	spawner_type = /mob/living/simple_animal/hostile/carp
+	spawner_type = /mob/living/critter/hostile/carp
 	deliveryamt = 5
 	origin_tech = "{'materials':3,'magnets':4,'esoteric':4}"

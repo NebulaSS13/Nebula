@@ -12,9 +12,9 @@
 	hud_state = "const_floor"
 	cast_sound = 'sound/effects/meteorimpact.ogg'
 	var/list/possible_spawns = list(
-		/mob/living/simple_animal/hostile/scarybat/cult,
-		/mob/living/simple_animal/hostile/creature/cult,
-		/mob/living/simple_animal/hostile/faithless/cult
+		/mob/living/critter/hostile/scarybat/cult,
+		/mob/living/critter/hostile/creature/cult,
+		/mob/living/critter/hostile/faithless/cult
 		)
 
 /spell/tear_veil/choose_targets()

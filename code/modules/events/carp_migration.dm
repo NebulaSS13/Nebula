@@ -58,11 +58,11 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 	while(I < n)
 		var/turf/T = get_random_edge_turf(direction,TRANSITIONEDGE + 2, Z)
 		if(isspaceturf(T))
-			var/mob/living/simple_animal/hostile/M
+			var/mob/living/critter/hostile/M
 			if(prob(96))
-				M = new /mob/living/simple_animal/hostile/carp(T)
+				M = new /mob/living/critter/hostile/carp(T)
 			else
-				M = new /mob/living/simple_animal/hostile/carp/pike(T)
+				M = new /mob/living/critter/hostile/carp/pike(T)
 				I += 3
 			GLOB.death_event.register(M,src,/datum/event/carp_migration/proc/reduce_carp_count)
 			GLOB.destroyed_event.register(M,src,/datum/event/carp_migration/proc/reduce_carp_count)
@@ -73,7 +73,7 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 		if(no_show)
 			break
 
-/datum/event/carp_migration/proc/check_gib(var/mob/living/simple_animal/hostile/carp/M)	//awesome road kills
+/datum/event/carp_migration/proc/check_gib(var/mob/living/critter/hostile/carp/M)	//awesome road kills
 	if(M.health <= 0 && prob(60))
 		M.gib()
 

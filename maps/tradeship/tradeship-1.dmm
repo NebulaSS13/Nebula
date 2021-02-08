@@ -3417,7 +3417,7 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/mob/living/simple_animal/cat/fluff/ran,
+/mob/living/critter/cat/fluff/ran,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science/fabricaton)
 "Qg" = (

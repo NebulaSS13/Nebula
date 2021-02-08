@@ -93,12 +93,6 @@
 		if (istype(other, /mob/living/carbon/brain))
 			return 1
 
-	//This is already covered by mob/say_understands()
-	//if (istype(other, /mob/living/simple_animal))
-	//	if((other.universal_speak && !speaking) || src.universal_speak || src.universal_understand)
-	//		return 1
-	//	return 0
-
 	return ..()
 
 /mob/living/carbon/human/GetVoice()

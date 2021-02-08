@@ -906,7 +906,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "cj" = (
-/mob/living/simple_animal/hostile/retaliate/parrot{
+/mob/living/critter/hostile/retaliate/parrot{
 	ears = list();
 	name = "\proper Meatbag";
 	speak = list("Yaaar!","Squaaak!","Fight me Matey!","BAWWWWK Vox trying to eat me!")

@@ -164,7 +164,7 @@
 			if(assailant)
 				admin_attack_log(TT.thrower, src, "Threw \an [O] at the victim.", "Had \an [O] thrown at them.", "threw \an [O] at")
 
-		if(O.can_embed() && (throw_damage > 5*O.w_class)) //Handles embedding for non-humans and simple_animals.
+		if(O.can_embed() && (throw_damage > 5*O.w_class)) //Handles embedding for non-humans and critters.
 			embed(O)
 
 	process_momentum(AM, TT)

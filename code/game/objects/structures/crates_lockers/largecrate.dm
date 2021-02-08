@@ -50,28 +50,28 @@
 
 /obj/structure/largecrate/animal/corgi
 	name = "corgi carrier"
-	held_type = /mob/living/simple_animal/corgi
+	held_type = /mob/living/critter/corgi
 
 /obj/structure/largecrate/animal/cow
 	name = "cow crate"
-	held_type = /mob/living/simple_animal/cow
+	held_type = /mob/living/critter/cow
 
 /obj/structure/largecrate/animal/goat
 	name = "goat crate"
-	held_type = /mob/living/simple_animal/hostile/retaliate/goat
+	held_type = /mob/living/critter/hostile/retaliate/goat
 
 /obj/structure/largecrate/animal/goose
 	name = "goose containment unit"
-	held_type = /mob/living/simple_animal/hostile/retaliate/goose
+	held_type = /mob/living/critter/hostile/retaliate/goose
 
 /obj/structure/largecrate/animal/cat
 	name = "cat carrier"
-	held_type = /mob/living/simple_animal/cat
+	held_type = /mob/living/critter/cat
 
 /obj/structure/largecrate/animal/cat/bones
-	held_type = /mob/living/simple_animal/cat/fluff/bones
+	held_type = /mob/living/critter/cat/fluff/bones
 
 /obj/structure/largecrate/animal/chick
 	name = "chicken crate"
 	held_count = 5
-	held_type = /mob/living/simple_animal/chick
+	held_type = /mob/living/critter/chick

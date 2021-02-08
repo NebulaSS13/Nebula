@@ -53,9 +53,9 @@
 	else
 		alert("Invalid mob")
 
-/client/proc/cmd_admin_animalize(var/mob/M in SSmobs.mob_list)
+/client/proc/cmd_admin_critterify(var/mob/M in SSmobs.mob_list)
 	set category = "Fun"
-	set name = "Make Simple Animal"
+	set name = "Make Critter"
 
 	if(GAME_STATE < RUNLEVEL_GAME)
 		alert("Wait until the game starts")

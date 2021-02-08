@@ -11,8 +11,8 @@
 	water_color = COLOR_BOTTLE_GREEN
 	has_trees = FALSE
 	flora_diversity = 5
-	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/hostile/retaliate/beast/samak/alt, /mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
-	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/jelly/mega)
+	fauna_types = list(/mob/living/critter/thinbug, /mob/living/critter/hostile/retaliate/beast/samak/alt, /mob/living/critter/yithian, /mob/living/critter/tindalos, /mob/living/critter/hostile/retaliate/jelly)
+	megafauna_types = list(/mob/living/critter/hostile/retaliate/jelly/mega)
 
 /obj/effect/overmap/visitable/sector/exoplanet/chlorine/generate_habitability()
 	habitability_class =  HABITABILITY_BAD

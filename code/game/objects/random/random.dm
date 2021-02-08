@@ -439,8 +439,8 @@
 	icon_state = "base"
 	var/vermin_chance = 0.1
 	var/list/locker_vermin = list(
-		/mob/living/simple_animal/mouse,
-		/mob/living/simple_animal/opossum
+		/mob/living/critter/mouse,
+		/mob/living/critter/opossum
 	)
 
 /obj/random/closet/spawn_choices()
@@ -1068,10 +1068,10 @@ something, make sure it's not in one of the other lists.*/
 	spawn_nothing_percentage = 80
 
 obj/random/hostile/spawn_choices()
-	return list(/mob/living/simple_animal/hostile/viscerator,
-				/mob/living/simple_animal/hostile/carp,
-				/mob/living/simple_animal/hostile/carp/pike,
-				/mob/living/simple_animal/hostile/vagrant/swarm)
+	return list(/mob/living/critter/hostile/viscerator,
+				/mob/living/critter/hostile/carp,
+				/mob/living/critter/hostile/carp/pike,
+				/mob/living/critter/hostile/vagrant/swarm)
 
 /*
 	Selects one spawn point out of a group of points with the same ID and asks it to generate its items

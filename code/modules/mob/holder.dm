@@ -112,6 +112,7 @@ var/list/holder_mob_icons = list(
 	"cat2" =              'icons/clothing/holders/holder_cat2.dmi',
 	"cat3" =              'icons/clothing/holders/holder_cat3.dmi',
 	"corgi" =             'icons/clothing/holders/holder_corgi.dmi',
+	"slug" =              'icons/clothing/holders/holder_slug.dmi',
 	"possum" =            'icons/clothing/holders/holder_possum.dmi',
 	"poppy" =             'icons/clothing/holders/holder_poppy.dmi'
 )

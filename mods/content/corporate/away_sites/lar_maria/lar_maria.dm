@@ -24,7 +24,7 @@
 	facial_styles_per_species = list(SPECIES_HUMAN = list("Shaved"))
 	genders_per_species = list(SPECIES_HUMAN = list(MALE))
 
-/mob/living/simple_animal/hostile/lar_maria
+/mob/living/critter/hostile/lar_maria
 	name = "Lar Maria hostile mob"
 	desc = "You shouldn't see me!"
 	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_sprites.dmi'
@@ -47,7 +47,7 @@
 	var/obj/effect/landmark/corpse/lar_maria/corpse = null
 	var/weapon = null
 
-/mob/living/simple_animal/hostile/lar_maria/death(gibbed, deathmessage, show_dead_message)
+/mob/living/critter/hostile/lar_maria/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
 	if(corpse)
 		new corpse (src.loc)
@@ -56,7 +56,7 @@
 	visible_message("<span class='warning'>Small shining spores float away from dying [src]!</span>")
 	qdel(src)
 
-/mob/living/simple_animal/hostile/lar_maria/test_subject
+/mob/living/critter/hostile/lar_maria/test_subject
 	name = "test subject"
 	desc = "Sick, filthy, angry and probably crazy human in an orange robe."
 	icon_state = "test_subject"
@@ -92,7 +92,7 @@
 	shoes = /obj/item/clothing/shoes/jackboots/duty
 	l_ear = /obj/item/radio/headset
 
-/mob/living/simple_animal/hostile/lar_maria/guard//angry guards armed with batons and shotguns. Still bite
+/mob/living/critter/hostile/lar_maria/guard//angry guards armed with batons and shotguns. Still bite
 	name = "\improper security"
 	desc = "Guard dressed at Zeng-Hu Pharmaceuticals uniform."
 	icon_state = "guard_light"
@@ -102,19 +102,19 @@
 	weapon = /obj/item/baton
 	corpse = /obj/effect/landmark/corpse/lar_maria/zhp_guard
 
-/mob/living/simple_animal/hostile/lar_maria/guard/Initialize()
+/mob/living/critter/hostile/lar_maria/guard/Initialize()
 	. = ..()
 	var/skin_color = pick(list("light","dark"))
 	icon_state = "guard_[skin_color]"
 	if (skin_color == "dark")
 		corpse = /obj/effect/landmark/corpse/lar_maria/zhp_guard/dark
 
-/mob/living/simple_animal/hostile/lar_maria/guard/ranged
+/mob/living/critter/hostile/lar_maria/guard/ranged
 	weapon = /obj/item/gun/projectile/shotgun/pump
 	ranged = 1
 	projectiletype = /obj/item/projectile/bullet/shotgun/beanbag
 
-/mob/living/simple_animal/hostile/lar_maria/guard/ranged/Initialize()
+/mob/living/critter/hostile/lar_maria/guard/ranged/Initialize()
 	. = ..()
 	icon_state = "[icon_state]_ranged"
 
@@ -123,7 +123,7 @@
 	icon = 'mods/content/corporate/icons/clothing/head/zhp_cap.dmi'
 	desc = "A green cap with Zeng-Hu Pharmaceuticals symbol on it."
 
-/mob/living/simple_animal/hostile/lar_maria/virologist
+/mob/living/critter/hostile/lar_maria/virologist
 	name = "\improper virologist"
 	desc = "Virologist dressed at Zeng-Hu Pharmaceuticals uniform."
 	icon_state = "virologist_m"
@@ -145,7 +145,7 @@
 	mask = /obj/item/clothing/mask/surgical
 	glasses = /obj/item/clothing/glasses/eyepatch/hud/medical
 
-/mob/living/simple_animal/hostile/lar_maria/virologist/female
+/mob/living/critter/hostile/lar_maria/virologist/female
 	icon_state = "virologist_f"
 	weapon = /obj/item/scalpel
 	corpse = /obj/effect/landmark/corpse/lar_maria/virologist_female

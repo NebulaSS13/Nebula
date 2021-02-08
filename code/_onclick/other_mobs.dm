@@ -76,7 +76,7 @@
 /*
 	Animals
 */
-/mob/living/simple_animal/UnarmedAttack(var/atom/A, var/proximity)
+/mob/living/critter/UnarmedAttack(var/atom/A, var/proximity)
 
 	if(!..())
 		return
@@ -92,6 +92,6 @@
 	else
 		A.attackby(get_natural_weapon(), src)
 
-// Attack hand but for simple animals
+// Attack hand but for critters
 /atom/proc/attack_animal(mob/user)
 	return attack_hand(user)

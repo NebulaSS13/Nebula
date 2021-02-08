@@ -97,7 +97,7 @@
 				flashfail = 1
 
 	else if(isanimal(M))
-		var/mob/living/simple_animal/SA = M
+		var/mob/living/critter/SA = M
 		var/safety = SA.eyecheck()
 		if(safety < FLASH_PROTECTION_MAJOR)
 			SA.Weaken(2)

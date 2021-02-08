@@ -1,7 +1,7 @@
-/mob/living/simple_animal/borer
+/mob/living/critter/borer
 	var/image/aura_image
 
-/mob/living/simple_animal/borer/Initialize(var/mapload, var/gen=1)
+/mob/living/critter/borer/Initialize(var/mapload, var/gen=1)
 
 	if(!SSmodpacks.loaded_modpacks["Cortical Borers"]) // Borer module not included.
 		log_debug("Attempted spawn of stubbed mobtype [type].")
@@ -16,23 +16,23 @@
 	M.Scale(0.33)
 	aura_image.transform = M
 
-/mob/living/simple_animal/borer/death(gibbed, deathmessage, show_dead_message)
+/mob/living/critter/borer/death(gibbed, deathmessage, show_dead_message)
 	if(aura_image)
 		destroy_aura_image(aura_image)
 		aura_image = null
 	. = ..()
 
-/mob/living/simple_animal/borer/Destroy()
+/mob/living/critter/borer/Destroy()
 	if(aura_image)
 		destroy_aura_image(aura_image)
 		aura_image = null
 	. = ..()
 
-/mob/living/simple_animal/borer/RangedAttack(atom/A, var/params)
+/mob/living/critter/borer/RangedAttack(atom/A, var/params)
 	. = ..()
 	if(!. && a_intent == I_DISARM && isliving(A) && !neutered && can_do_special_ranged_attack(FALSE))
 		var/mob/living/M = A
-		if(locate(/mob/living/simple_animal/borer) in M.contents)
+		if(locate(/mob/living/critter/borer) in M.contents)
 			to_chat(src, SPAN_WARNING("You cannot dominate a host who already has a passenger!"))
 		else
 			visible_message(SPAN_DANGER("\The [src] extends a writhing pseudopod towards \the [M]..."))

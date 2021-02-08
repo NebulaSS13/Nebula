@@ -22,9 +22,9 @@
 	can_pull_size = ITEM_SIZE_NORMAL
 	can_pull_mobs = MOB_PULL_SMALLER
 
-	mob_bump_flag = SIMPLE_ANIMAL
-	mob_swap_flags = SIMPLE_ANIMAL
-	mob_push_flags = SIMPLE_ANIMAL
+	mob_bump_flag = CRITTER
+	mob_swap_flags = CRITTER
+	mob_push_flags = CRITTER
 	mob_always_swap = 1
 
 	mob_size = MOB_SIZE_MEDIUM // Small mobs can't open doors, it's a huge pain for drones.

@@ -10,8 +10,8 @@
 	water_color = null
 	has_trees = FALSE
 	flora_diversity = 4
-	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/slug, /mob/living/simple_animal/hostile/antlion)
-	megafauna_types = list(/mob/living/simple_animal/hostile/antlion/mega)
+	fauna_types = list(/mob/living/critter/thinbug, /mob/living/critter/tindalos, /mob/living/critter/hostile/slug, /mob/living/critter/hostile/antlion)
+	megafauna_types = list(/mob/living/critter/hostile/antlion/mega)
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/generate_map()
 	if(prob(70))

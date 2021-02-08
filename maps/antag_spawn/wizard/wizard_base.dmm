@@ -552,7 +552,7 @@
 	},
 /area/map_template/wizard_station)
 "bw" = (
-/mob/living/simple_animal/hostile/creature{
+/mob/living/critter/hostile/creature{
 	name = "Experiment 35b"
 	},
 /turf/unsimulated/floor{
@@ -592,7 +592,7 @@
 	},
 /area/map_template/wizard_station)
 "bB" = (
-/mob/living/simple_animal/hostile/retaliate/goat{
+/mob/living/critter/hostile/retaliate/goat{
 	name = "Experiment 97d"
 	},
 /turf/unsimulated/floor{
@@ -626,7 +626,7 @@
 	},
 /area/map_template/wizard_station)
 "bG" = (
-/mob/living/simple_animal/crab{
+/mob/living/critter/crab{
 	name = "Experiment 68a"
 	},
 /turf/unsimulated/floor{

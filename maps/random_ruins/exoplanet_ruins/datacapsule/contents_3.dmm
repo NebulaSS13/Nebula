@@ -17,11 +17,11 @@
 /turf/template_noop,
 /area/template_noop)
 "e" = (
-/mob/living/simple_animal/hostile/giant_spider/guard,
+/mob/living/critter/hostile/giant_spider/guard,
 /turf/template_noop,
 /area/template_noop)
 "f" = (
-/mob/living/simple_animal/hostile/giant_spider/nurse,
+/mob/living/critter/hostile/giant_spider/nurse,
 /turf/template_noop,
 /area/template_noop)
 "g" = (

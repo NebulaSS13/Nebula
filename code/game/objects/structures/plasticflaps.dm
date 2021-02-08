@@ -12,7 +12,7 @@
 
 	var/list/mobs_can_pass = list(
 		/mob/living/bot,
-		/mob/living/simple_animal/mouse,
+		/mob/living/critter/mouse,
 		/mob/living/silicon/robot/drone
 		)
 	var/airtight = FALSE

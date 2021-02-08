@@ -133,7 +133,7 @@
 	ghost_trap_message = "They are occupying a living plant now."
 	
 /decl/ghosttrap/sentient_plant/forced(var/mob/user)
-	request_player(new /mob/living/simple_animal/mushroom(get_turf(user)), "Someone is harvesting a walking mushroom.", 15 SECONDS)
+	request_player(new /mob/living/critter/mushroom(get_turf(user)), "Someone is harvesting a walking mushroom.", 15 SECONDS)
 
 /decl/ghosttrap/sentient_plant/welcome_candidate(var/mob/target)
 	to_chat(target, "<span class='alium'><B>You awaken slowly, stirring into sluggish motion as the air caresses you.</B></span>")

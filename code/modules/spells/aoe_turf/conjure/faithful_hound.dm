@@ -10,7 +10,7 @@
 	range = 0
 
 	summon_amt = 1
-	summon_type = list(/mob/living/simple_animal/faithful_hound)
+	summon_type = list(/mob/living/critter/faithful_hound)
 	hud_state = "wiz_hound"
 
 /spell/aoe_turf/conjure/faithful_hound/before_cast()

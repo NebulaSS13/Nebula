@@ -8,8 +8,8 @@
 	material_force_multiplier = 0.1
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	var/list/accept_mobs = list(
-		/mob/living/simple_animal/lizard,
-		/mob/living/simple_animal/mouse
+		/mob/living/critter/lizard,
+		/mob/living/critter/mouse
 	)
 	var/contains = 0 // 0 = nothing, 1 = money, 2 = animal, 3 = spiderling
 

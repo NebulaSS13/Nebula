@@ -3,7 +3,7 @@
 	name_plural = "Cortical Borers"
 	flags = ANTAG_OVERRIDE_MOB | ANTAG_RANDSPAWN | ANTAG_OVERRIDE_JOB
 
-	mob_path = /mob/living/simple_animal/borer
+	mob_path = /mob/living/critter/borer
 	welcome_text = "Use your Infest power to crawl into the ear of a host and fuse with their brain. You can only take control temporarily, and at risk of hurting your host, so be clever and careful; your host is encouraged to help you however they can. Talk to your fellow borers with :x."
 	antag_indicator = "hudborer"
 	antaghud_indicator = "hudborer"
@@ -33,7 +33,7 @@
 	player.objectives += new /datum/objective/escape()
 
 /decl/special_role/borer/place_mob(var/mob/living/mob)
-	var/mob/living/simple_animal/borer/borer = mob
+	var/mob/living/critter/borer/borer = mob
 	if(istype(borer))
 		var/mob/living/carbon/human/host
 		for(var/mob/living/carbon/human/H in SSmobs.mob_list)

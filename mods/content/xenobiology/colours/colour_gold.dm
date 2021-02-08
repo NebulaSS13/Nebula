@@ -11,13 +11,13 @@
 	extract_icon = 'mods/content/xenobiology/icons/slimes/slime_extract_gold.dmi'
 	reaction_strings = list(/decl/material/solid/metal/uranium = "Synthesises a cute critter.")
 	var/list/possible_mobs = list(
-		/mob/living/simple_animal/cat,
-		/mob/living/simple_animal/cat/kitten,
-		/mob/living/simple_animal/corgi,
-		/mob/living/simple_animal/corgi/puppy,
-		/mob/living/simple_animal/cow,
-		/mob/living/simple_animal/chick,
-		/mob/living/simple_animal/chicken
+		/mob/living/critter/cat,
+		/mob/living/critter/cat/kitten,
+		/mob/living/critter/corgi,
+		/mob/living/critter/corgi/puppy,
+		/mob/living/critter/cow,
+		/mob/living/critter/chick,
+		/mob/living/critter/chicken
 	)
 
 /decl/slime_colour/gold/handle_uranium_reaction(var/datum/reagents/holder)

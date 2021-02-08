@@ -1677,7 +1677,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "ek" = (
-/mob/living/simple_animal/hostile/abolition_extremist,
+/mob/living/critter/hostile/abolition_extremist,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "el" = (
@@ -3385,7 +3385,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iE" = (
-/mob/living/simple_animal/hostile/abolition_extremist,
+/mob/living/critter/hostile/abolition_extremist,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iF" = (
@@ -4034,7 +4034,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "kk" = (
-/mob/living/simple_animal/hostile/abolition_extremist,
+/mob/living/critter/hostile/abolition_extremist,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "kl" = (
@@ -4113,7 +4113,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "kz" = (
-/mob/living/simple_animal/hostile/abolition_extremist,
+/mob/living/critter/hostile/abolition_extremist,
 /turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
 "kA" = (

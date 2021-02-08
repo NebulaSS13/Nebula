@@ -12,12 +12,12 @@
 
 /decl/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
-	var/mob/living/simple_animal/borer/B
+	var/mob/living/critter/borer/B
 
 	if(istype(speaker,/mob/living/carbon))
 		var/mob/living/carbon/M = speaker
 		B = M.has_brain_worms()
-	else if(istype(speaker,/mob/living/simple_animal/borer))
+	else if(istype(speaker,/mob/living/critter/borer))
 		B = speaker
 
 	if(B)

@@ -32,8 +32,8 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	bump_flag = MONKEY
-	swap_flags = MONKEY|SIMPLE_ANIMAL
-	push_flags = MONKEY|SIMPLE_ANIMAL
+	swap_flags = MONKEY|CRITTER
+	push_flags = MONKEY|CRITTER
 
 	heat_discomfort_strings = list(
 		"Your feathers prickle in the heat.",

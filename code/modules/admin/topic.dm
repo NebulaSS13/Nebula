@@ -237,18 +237,18 @@
 			if("human")				M.change_mob_type( /mob/living/carbon/human , null, null, delmob, href_list["species"])
 			if("monkey")			M.change_mob_type( /mob/living/carbon/human/monkey , null, null, delmob )
 			if("robot")				M.change_mob_type( /mob/living/silicon/robot , null, null, delmob )
-			if("cat")				M.change_mob_type( /mob/living/simple_animal/cat , null, null, delmob )
-			if("runtime")			M.change_mob_type( /mob/living/simple_animal/cat/fluff/runtime , null, null, delmob )
-			if("corgi")				M.change_mob_type( /mob/living/simple_animal/corgi , null, null, delmob )
-			if("ian")				M.change_mob_type( /mob/living/simple_animal/corgi/Ian , null, null, delmob )
-			if("crab")				M.change_mob_type( /mob/living/simple_animal/crab , null, null, delmob )
-			if("coffee")			M.change_mob_type( /mob/living/simple_animal/crab/Coffee , null, null, delmob )
-			if("parrot")			M.change_mob_type( /mob/living/simple_animal/hostile/retaliate/parrot , null, null, delmob )
-			if("polyparrot")		M.change_mob_type( /mob/living/simple_animal/hostile/retaliate/parrot/Poly , null, null, delmob )
-			if("constructarmoured")	M.change_mob_type( /mob/living/simple_animal/construct/armoured , null, null, delmob )
-			if("constructbuilder")	M.change_mob_type( /mob/living/simple_animal/construct/builder , null, null, delmob )
-			if("constructwraith")	M.change_mob_type( /mob/living/simple_animal/construct/wraith , null, null, delmob )
-			if("shade")				M.change_mob_type( /mob/living/simple_animal/shade , null, null, delmob )
+			if("cat")				M.change_mob_type( /mob/living/critter/cat , null, null, delmob )
+			if("runtime")			M.change_mob_type( /mob/living/critter/cat/fluff/runtime , null, null, delmob )
+			if("corgi")				M.change_mob_type( /mob/living/critter/corgi , null, null, delmob )
+			if("ian")				M.change_mob_type( /mob/living/critter/corgi/Ian , null, null, delmob )
+			if("crab")				M.change_mob_type( /mob/living/critter/crab , null, null, delmob )
+			if("coffee")			M.change_mob_type( /mob/living/critter/crab/Coffee , null, null, delmob )
+			if("parrot")			M.change_mob_type( /mob/living/critter/hostile/retaliate/parrot , null, null, delmob )
+			if("polyparrot")		M.change_mob_type( /mob/living/critter/hostile/retaliate/parrot/Poly , null, null, delmob )
+			if("constructarmoured")	M.change_mob_type( /mob/living/critter/construct/armoured , null, null, delmob )
+			if("constructbuilder")	M.change_mob_type( /mob/living/critter/construct/builder , null, null, delmob )
+			if("constructwraith")	M.change_mob_type( /mob/living/critter/construct/wraith , null, null, delmob )
+			if("shade")				M.change_mob_type( /mob/living/critter/shade , null, null, delmob )
 
 
 	/////////////////////////////////////new ban stuff
@@ -956,15 +956,15 @@
 
 		usr.client.cmd_admin_robotize(H)
 
-	else if(href_list["makeanimal"])
+	else if(href_list["makecritter"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/M = locate(href_list["makeanimal"])
+		var/mob/M = locate(href_list["makecritter"])
 		if(istype(M, /mob/new_player))
 			to_chat(usr, "This cannot be used on instances of type /mob/new_player")
 			return
 
-		usr.client.cmd_admin_animalize(M)
+		usr.client.cmd_admin_critterify(M)
 
 	else if(href_list["togmutate"])
 		if(!check_rights(R_SPAWN))	return

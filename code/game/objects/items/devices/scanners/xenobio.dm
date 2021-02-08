@@ -15,7 +15,7 @@
 
 	var/list/valid_targets = list(
 		/mob/living/carbon/human,
-		/mob/living/simple_animal
+		/mob/living/critter
 	)
 
 /obj/item/scanner/xenobio/is_valid_scan_target(atom/O)
@@ -55,7 +55,7 @@
 	. += "Pressure comfort zone:\t[species.warning_low_pressure] kPa to [species.warning_high_pressure] kPa"
 	. = jointext(., "<br>")
 
-/mob/living/simple_animal/xenobio_scan_results()
+/mob/living/critter/xenobio_scan_results()
 	. += "Data for \the [src]:"
 	. += "Species:\t[initial(name)]"
 	. += "Breathes:\t[list_gases(min_gas)]"

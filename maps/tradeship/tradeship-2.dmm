@@ -3845,7 +3845,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/mob/living/simple_animal/opossum/poppy,
+/mob/living/critter/opossum/poppy,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/engineering)
 "iB" = (
@@ -7046,7 +7046,7 @@
 /obj/structure/dogbed,
 /obj/item/clothing/shoes/color/brown,
 /obj/random/plushie,
-/mob/living/simple_animal/corgi/Ian,
+/mob/living/critter/corgi/Ian,
 /turf/simulated/floor/wood,
 /area/ship/trade/command/fmate)
 "Oc" = (

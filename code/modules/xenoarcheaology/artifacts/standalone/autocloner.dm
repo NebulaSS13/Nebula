@@ -15,23 +15,23 @@
 
 /obj/machinery/auto_cloner/proc/get_hostile_mob_types()
 	. = list(
-		/mob/living/simple_animal/hostile/giant_spider/nurse,
-		/mob/living/simple_animal/hostile/bear,
-		/mob/living/simple_animal/hostile/creature
+		/mob/living/critter/hostile/giant_spider/nurse,
+		/mob/living/critter/hostile/bear,
+		/mob/living/critter/hostile/creature
 	)
 
 /obj/machinery/auto_cloner/proc/get_passive_mob_types()
 	. = list(
-		/mob/living/simple_animal/cat,
-		/mob/living/simple_animal/corgi,
-		/mob/living/simple_animal/corgi/puppy,
-		/mob/living/simple_animal/chicken,
-		/mob/living/simple_animal/cow,
-		/mob/living/simple_animal/hostile/retaliate/parrot,
-		/mob/living/simple_animal/crab,
-		/mob/living/simple_animal/mouse,
-		/mob/living/simple_animal/hostile/retaliate/goat,
-		/mob/living/simple_animal/hostile/retaliate/goose
+		/mob/living/critter/cat,
+		/mob/living/critter/corgi,
+		/mob/living/critter/corgi/puppy,
+		/mob/living/critter/chicken,
+		/mob/living/critter/cow,
+		/mob/living/critter/hostile/retaliate/parrot,
+		/mob/living/critter/crab,
+		/mob/living/critter/mouse,
+		/mob/living/critter/hostile/retaliate/goat,
+		/mob/living/critter/hostile/retaliate/goose
 	)
 
 /obj/machinery/auto_cloner/Initialize()

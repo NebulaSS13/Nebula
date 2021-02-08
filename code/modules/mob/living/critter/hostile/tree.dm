@@ -1,0 +1,39 @@
+/mob/living/critter/hostile/tree
+	name = "pine tree"
+	desc = "A pissed off tree-like alien. It seems annoyed with the festivities..."
+	icon = 'icons/obj/flora/pinetrees.dmi'
+	icon_state = "pine_1"
+	icon_living = "pine_1"
+	icon_dead = "pine_1"
+	icon_gib = "pine_1"
+	speak_chance = 0
+	turns_per_move = 5
+	meat_type = /obj/item/chems/food/snacks/fish
+	response_help = "brushes"
+	response_disarm = "pushes"
+	response_harm = "hits"
+	speed = -1
+	maxHealth = 250
+	health = 250
+
+	pixel_x = -16
+
+	harm_intent_damage = 5
+	natural_weapon = /obj/item/natural_weapon/bite
+
+	//Space carp aren't affected by atmos.
+	min_gas = null
+	max_gas = null
+	minbodytemp = 0
+
+	faction = "carp"
+
+/mob/living/critter/hostile/tree/FindTarget()
+	. = ..()
+	if(.)
+		audible_emote("growls at [.]")
+
+/mob/living/critter/hostile/tree/death(gibbed, deathmessage, show_dead_message)
+	..(null,"is hacked into pieces!", show_dead_message)
+	new /obj/item/stack/material/wood(loc)
+	qdel(src)

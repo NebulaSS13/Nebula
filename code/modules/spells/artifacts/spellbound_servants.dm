@@ -103,13 +103,13 @@
 		if("Space Pike")
 			H.mutations |= mNobreath
 			H.mutations |= MUTATION_SPACERES
-			familiar_type = /mob/living/simple_animal/hostile/carp/pike
+			familiar_type = /mob/living/critter/hostile/carp/pike
 		if("Mouse")
 			H.verbs |= /mob/living/proc/ventcrawl
-			familiar_type = /mob/living/simple_animal/mouse
+			familiar_type = /mob/living/critter/mouse
 		if("Cat")
 			H.mutations |= mRun
-			familiar_type = /mob/living/simple_animal/cat
+			familiar_type = /mob/living/critter/cat
 		if("Bear")
 			var/obj/item/clothing/under/under = locate() in equipment
 			var/obj/item/clothing/head/head = locate() in equipment
@@ -130,7 +130,7 @@
 					laser = ARMOR_LASER_MINOR, 
 					energy = ARMOR_ENERGY_MINOR
 					)
-			familiar_type = /mob/living/simple_animal/hostile/bear
+			familiar_type = /mob/living/critter/hostile/bear
 	var/spell/targeted/shapeshift/familiar/F = new()
 	F.possible_transformations = list(familiar_type)
 	H.add_spell(F)

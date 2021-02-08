@@ -5,7 +5,7 @@
 /turf/template_noop,
 /area/template_noop)
 "b" = (
-/mob/living/simple_animal/hostile/viscerator,
+/mob/living/critter/hostile/viscerator,
 /turf/template_noop,
 /area/template_noop)
 "c" = (

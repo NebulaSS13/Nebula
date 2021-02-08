@@ -75,7 +75,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/decal/cleanable/dirt,
-/mob/living/simple_animal/hostile/giant_spider/hunter,
+/mob/living/critter/hostile/giant_spider/hunter,
 /turf/simulated/floor/wood/walnut,
 /area/yacht/bridge)
 "ao" = (
@@ -311,7 +311,7 @@
 	},
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/spider/stickyweb,
-/mob/living/simple_animal/hostile/giant_spider/hunter,
+/mob/living/critter/hostile/giant_spider/hunter,
 /turf/simulated/floor/wood/walnut,
 /area/yacht/living)
 "aV" = (
@@ -494,7 +494,7 @@
 /turf/simulated/floor/beach/water/ocean,
 /area/yacht/living)
 "by" = (
-/mob/living/simple_animal/hostile/giant_spider/hunter,
+/mob/living/critter/hostile/giant_spider/hunter,
 /turf/simulated/floor/beach/water/ocean,
 /area/yacht/living)
 "bz" = (

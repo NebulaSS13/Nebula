@@ -150,11 +150,11 @@ var/global/floorIsLava = 0
 					<A href='?src=\ref[src];makealien=\ref[M]'>Make Alien</A>
 				"}
 
-			//Simple Animals
+			//Critters
 			if(isanimal(M))
-				body += "<A href='?src=\ref[src];makeanimal=\ref[M]'>Re-Animalize</A> | "
+				body += "<A href='?src=\ref[src];makecritter=\ref[M]'>Re-Critterify</A> | "
 			else
-				body += "<A href='?src=\ref[src];makeanimal=\ref[M]'>Animalize</A> | "
+				body += "<A href='?src=\ref[src];makecritter=\ref[M]'>Critterify</A> | "
 
 			// DNA2 - Admin Hax
 			if(M.dna && iscarbon(M))

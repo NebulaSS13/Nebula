@@ -205,7 +205,7 @@
 		cuff_target(H)
 		return
 
-	if(istype(M, /mob/living/simple_animal))
+	if(istype(M, /mob/living/critter))
 		a_intent = I_HURT
 	else
 		a_intent = I_GRAB

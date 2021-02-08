@@ -549,29 +549,29 @@
 	mind.assigned_special_role = "Personal Artificial Intelligence"
 
 //Animals
-/mob/living/simple_animal/mind_initialize()
+/mob/living/critter/mind_initialize()
 	..()
 	mind.assigned_role = "Animal"
 
-/mob/living/simple_animal/corgi/mind_initialize()
+/mob/living/critter/corgi/mind_initialize()
 	..()
 	mind.assigned_role = "Corgi"
 
-/mob/living/simple_animal/shade/mind_initialize()
+/mob/living/critter/shade/mind_initialize()
 	..()
 	mind.assigned_role = "Shade"
 
-/mob/living/simple_animal/construct/builder/mind_initialize()
+/mob/living/critter/construct/builder/mind_initialize()
 	..()
 	mind.assigned_role = "Artificer"
 	mind.assigned_special_role = "Cultist"
 
-/mob/living/simple_animal/construct/wraith/mind_initialize()
+/mob/living/critter/construct/wraith/mind_initialize()
 	..()
 	mind.assigned_role = "Wraith"
 	mind.assigned_special_role = "Cultist"
 
-/mob/living/simple_animal/construct/armoured/mind_initialize()
+/mob/living/critter/construct/armoured/mind_initialize()
 	..()
 	mind.assigned_role = "Juggernaut"
 	mind.assigned_special_role = "Cultist"

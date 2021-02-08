@@ -4528,7 +4528,7 @@
 /area/liberia/captain)
 "hD" = (
 /obj/structure/table/woodentable/walnut,
-/mob/living/simple_animal/tindalos{
+/mob/living/critter/tindalos{
 	name = "Eddy"
 	},
 /turf/simulated/floor/carpet/red,

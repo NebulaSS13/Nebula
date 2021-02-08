@@ -36,8 +36,8 @@
 
 	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
 		if(!say_understands(speaker,language))
-			if(istype(speaker,/mob/living/simple_animal))
-				var/mob/living/simple_animal/S = speaker
+			if(istype(speaker,/mob/living/critter))
+				var/mob/living/critter/S = speaker
 				message = pick(S.speak)
 			else
 				if(language)
@@ -118,8 +118,8 @@
 
 	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
 		if(!say_understands(speaker,language))
-			if(istype(speaker,/mob/living/simple_animal))
-				var/mob/living/simple_animal/S = speaker
+			if(istype(speaker,/mob/living/critter))
+				var/mob/living/critter/S = speaker
 				if(S.speak && S.speak.len)
 					message = pick(S.speak)
 				else

@@ -11,7 +11,7 @@
 				continue
 			
 			var/turf/T = pick_n_take(spots)
-			new/mob/living/simple_animal/hostile/rogue_drone(T)
+			new/mob/living/critter/hostile/rogue_drone(T)
 
 /datum/event/rogue_maint_drones/announce()
 	var/stealth_chance = 70 - 20*severity

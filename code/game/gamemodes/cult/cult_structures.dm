@@ -102,18 +102,18 @@
 	light_outer_range=5
 	light_color="#ff0000"
 	spawnable=list(
-		/mob/living/simple_animal/hostile/scarybat,
-		/mob/living/simple_animal/hostile/creature,
-		/mob/living/simple_animal/hostile/faithless
+		/mob/living/critter/hostile/scarybat,
+		/mob/living/critter/hostile/creature,
+		/mob/living/critter/hostile/faithless
 	)
 
 /obj/effect/gateway/active/cult
 	light_outer_range=5
 	light_color="#ff0000"
 	spawnable=list(
-		/mob/living/simple_animal/hostile/scarybat/cult,
-		/mob/living/simple_animal/hostile/creature/cult,
-		/mob/living/simple_animal/hostile/faithless/cult
+		/mob/living/critter/hostile/scarybat/cult,
+		/mob/living/critter/hostile/creature/cult,
+		/mob/living/critter/hostile/faithless/cult
 	)
 
 /obj/effect/gateway/active/Initialize()
@@ -156,7 +156,7 @@
 				if(istype(W, /obj/item/implant))
 					qdel(W)
 
-		var/mob/living/new_mob = new /mob/living/simple_animal/corgi(A.loc)
+		var/mob/living/new_mob = new /mob/living/critter/corgi(A.loc)
 		new_mob.a_intent = I_HURT
 		if(M.mind)
 			M.mind.transfer_to(new_mob)

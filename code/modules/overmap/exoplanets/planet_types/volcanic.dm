@@ -19,8 +19,8 @@
 	surface_color = "#261e19"
 	water_color = "#c74d00"
 	flora_diversity = 3
-	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/hostile/retaliate/beast/shantak/lava, /mob/living/simple_animal/hostile/retaliate/beast/charbaby)
-	megafauna_types = list(/mob/living/simple_animal/hostile/drake)
+	fauna_types = list(/mob/living/critter/thinbug, /mob/living/critter/hostile/retaliate/beast/shantak/lava, /mob/living/critter/hostile/retaliate/beast/charbaby)
+	megafauna_types = list(/mob/living/critter/hostile/drake)
 	has_trees = FALSE
 
 /obj/effect/overmap/visitable/sector/exoplanet/volcanic/get_atmosphere_color()
@@ -37,7 +37,7 @@
 	S.set_trait(TRAIT_REQUIRES_WATER,0)
 	S.set_trait(TRAIT_HEAT_TOLERANCE, 1000 + S.get_trait(TRAIT_HEAT_TOLERANCE))
 
-/obj/effect/overmap/visitable/sector/exoplanet/volcanic/adapt_animal(var/mob/living/simple_animal/A)
+/obj/effect/overmap/visitable/sector/exoplanet/volcanic/adapt_animal(var/mob/living/critter/A)
 	..()
 	A.heat_damage_per_tick = 0 //animals not hot, no burning in lava
 

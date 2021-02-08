@@ -213,7 +213,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 				else
 					ai_text = stars(text)
 			if(isanimal(M) && !M.universal_speak)
-				var/mob/living/simple_animal/SA = M
+				var/mob/living/critter/SA = M
 				ai_text = pick(SA.speak)
 			var/name_used = M.GetVoice()
 			//This communication is imperfect because the holopad "filters" voices and is only designed to connect to the master only.
@@ -224,7 +224,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	var/name_used = M.GetVoice()
 	var/message
 	if(isanimal(M) && !M.universal_speak)
-		var/mob/living/simple_animal/SA = M
+		var/mob/living/critter/SA = M
 		message = get_hear_message(name_used, pick(SA.speak), verb, speaking)
 	else
 		message = get_hear_message(name_used, text, verb, speaking)

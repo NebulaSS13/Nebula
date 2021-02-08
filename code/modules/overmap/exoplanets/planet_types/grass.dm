@@ -7,8 +7,8 @@
 	plant_colors = list("#215a00","#195a47","#5a7467","#9eab88","#6e7248", "RANDOM")
 	map_generators = list(/datum/random_map/noise/exoplanet/grass)
 	flora_diversity = 6
-	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
-	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna, /mob/living/simple_animal/hostile/retaliate/goose/dire)
+	fauna_types = list(/mob/living/critter/yithian, /mob/living/critter/tindalos, /mob/living/critter/hostile/retaliate/jelly)
+	megafauna_types = list(/mob/living/critter/hostile/retaliate/parrot/space/megafauna, /mob/living/critter/hostile/retaliate/goose/dire)
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/generate_map()
 	if(prob(40))

@@ -1,16 +1,16 @@
-#define HAS_BRAIN_WORMS(HOST) (locate(/mob/living/simple_animal/borer) in HOST?.contents)
+#define HAS_BRAIN_WORMS(HOST) (locate(/mob/living/critter/borer) in HOST?.contents)
 
 /obj/item/organ/external/has_growths()
 	. = ..()
 	if(!.)
-		. = locate(/mob/living/simple_animal/borer) in implants
+		. = locate(/mob/living/critter/borer) in implants
 
 /mob/proc/has_brain_worms()
-	. = locate(/mob/living/simple_animal/borer) in contents
+	. = locate(/mob/living/critter/borer) in contents
 
 /mob/handle_pre_transformation()
 	. = ..()
-	var/mob/living/simple_animal/borer/borer = HAS_BRAIN_WORMS(src)
+	var/mob/living/critter/borer/borer = HAS_BRAIN_WORMS(src)
 	if(borer)
 		borer.detatch()
 		borer.leave_host()
@@ -19,7 +19,7 @@
 	var/last_hud_bitfield = hud_updateflag
 	. = ..()
 	if(stat != DEAD && has_brain_worms() && BITTEST(last_hud_bitfield, STATUS_HUD) && hud_list[STATUS_HUD] && hud_list[STATUS_HUD_OOC])
-		var/mob/living/simple_animal/borer/B = HAS_BRAIN_WORMS(src)
+		var/mob/living/critter/borer/B = HAS_BRAIN_WORMS(src)
 		if(B.controlling)
 			var/image/holder = hud_list[STATUS_HUD]
 			holder.icon_state = "hudbrainworm"
@@ -33,26 +33,26 @@
 
 /obj/item/organ/internal/brain/removed(var/mob/living/user)
 	if(istype(owner))
-		var/mob/living/simple_animal/borer/borer = HAS_BRAIN_WORMS(owner)
+		var/mob/living/critter/borer/borer = HAS_BRAIN_WORMS(owner)
 		if(borer)
 			borer.detatch()
 	. = ..()
 
 /mob/living/carbon/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	. = ..()
-	if(. && !QDELETED(implant) && istype(implant, /mob/living/simple_animal/borer))
-		var/mob/living/simple_animal/borer/worm = implant
+	if(. && !QDELETED(implant) && istype(implant, /mob/living/critter/borer))
+		var/mob/living/critter/borer/worm = implant
 		if(worm.controlling)
 			release_control()
 		worm.detatch()
 		worm.leave_host()
 
 /obj/item/glass_jar/Initialize()
-	accept_mobs |= /mob/living/simple_animal/borer
+	accept_mobs |= /mob/living/critter/borer
 	. = ..()
 
 /mob/death()
-	var/mob/living/simple_animal/borer/B = HAS_BRAIN_WORMS(src)
+	var/mob/living/critter/borer/B = HAS_BRAIN_WORMS(src)
 	if(B && B.controlling)
 		B.detatch()
 	. = ..()

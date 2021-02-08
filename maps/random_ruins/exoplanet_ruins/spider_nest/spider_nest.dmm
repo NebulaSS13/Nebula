@@ -123,7 +123,7 @@
 "w" = (
 /obj/effect/decal/cleanable/spiderling_remains,
 /obj/effect/decal/cleanable/blood,
-/mob/living/simple_animal/hostile/giant_spider,
+/mob/living/critter/hostile/giant_spider,
 /turf/simulated/floor/lino,
 /area/template_noop)
 "x" = (
@@ -131,7 +131,7 @@
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/blood/gibs/limb,
 /obj/effect/decal/cleanable/blood/drip,
-/mob/living/simple_animal/hostile/giant_spider/nurse,
+/mob/living/critter/hostile/giant_spider/nurse,
 /turf/simulated/floor/plating,
 /area/template_noop)
 "y" = (
@@ -159,7 +159,7 @@
 /area/template_noop)
 "C" = (
 /obj/random/loot,
-/mob/living/simple_animal/hostile/giant_spider/hunter,
+/mob/living/critter/hostile/giant_spider/hunter,
 /turf/simulated/floor/lino,
 /area/template_noop)
 "D" = (
@@ -195,7 +195,7 @@
 "I" = (
 /obj/item/paper,
 /obj/effect/decal/cleanable/blood/drip,
-/mob/living/simple_animal/hostile/giant_spider,
+/mob/living/critter/hostile/giant_spider,
 /turf/simulated/floor/lino,
 /area/template_noop)
 "J" = (

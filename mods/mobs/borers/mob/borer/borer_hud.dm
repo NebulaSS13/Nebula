@@ -1,11 +1,11 @@
-/mob/living/simple_animal/borer
+/mob/living/critter/borer
 	var/list/hud_elements = list()
 	var/obj/screen/intent/hud_intent_selector
 	var/obj/screen/borer/toggle_host_control/hud_toggle_control
 	var/obj/screen/borer/inject_chemicals/hud_inject_chemicals
 	var/obj/screen/borer/leave_host/hud_leave_host
 
-/mob/living/simple_animal/borer/proc/reset_ui_callback()
+/mob/living/critter/borer/proc/reset_ui_callback()
 	if(world.time >= last_special)
 		for(var/obj/thing in hud_elements)
 			thing.color = null
@@ -16,11 +16,11 @@
 	invisibility = INVISIBILITY_MAXIMUM
 
 /obj/screen/borer/Click(location, control, params)
-	if(!istype(usr, /mob/living/simple_animal/borer))
+	if(!istype(usr, /mob/living/critter/borer))
 		return FALSE
 	if(usr.stat == DEAD)
 		return FALSE
-	var/mob/living/simple_animal/borer/worm = usr
+	var/mob/living/critter/borer/worm = usr
 	if(!worm.host)
 		return FALSE
 	return TRUE
@@ -35,7 +35,7 @@
 	if(!.)
 		return FALSE
 
-	var/mob/living/simple_animal/borer/worm = usr
+	var/mob/living/critter/borer/worm = usr
 	if(!worm.can_use_borer_ability())
 		return
 
@@ -92,7 +92,7 @@
 	if(!.)
 		return FALSE
 
-	var/mob/living/simple_animal/borer/worm = usr
+	var/mob/living/critter/borer/worm = usr
 	if(!worm.can_use_borer_ability())
 		return
 
@@ -119,7 +119,7 @@
 	if(!.)
 		return FALSE
 
-	var/mob/living/simple_animal/borer/worm = usr
+	var/mob/living/critter/borer/worm = usr
 	if(!worm.can_use_borer_ability())
 		return
 

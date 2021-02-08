@@ -408,7 +408,7 @@
 
 //Holocarp
 
-/mob/living/simple_animal/hostile/carp/holodeck
+/mob/living/critter/hostile/carp/holodeck
 	icon = 'icons/mob/hologram.dmi'
 	icon_state = "Carp"
 	icon_living = "Carp"
@@ -418,17 +418,17 @@
 	meat_amount = 0
 	meat_type = null
 
-/mob/living/simple_animal/hostile/carp/holodeck/carp_randomify()
+/mob/living/critter/hostile/carp/holodeck/carp_randomify()
 	return
 
-/mob/living/simple_animal/hostile/carp/holodeck/on_update_icon()
+/mob/living/critter/hostile/carp/holodeck/on_update_icon()
 	return
 
-/mob/living/simple_animal/hostile/carp/holodeck/Initialize()
+/mob/living/critter/hostile/carp/holodeck/Initialize()
 	. = ..()
 	set_light(0.5, 0.1, 2) //hologram lighting
 
-/mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
+/mob/living/critter/hostile/carp/holodeck/proc/set_safety(var/safe)
 	if (safe)
 		faction = MOB_FACTION_NEUTRAL
 		natural_weapon.force = 0
@@ -438,9 +438,9 @@
 		faction = "carp"
 		natural_weapon.force = initial(natural_weapon.force)
 
-/mob/living/simple_animal/hostile/carp/holodeck/gib()
+/mob/living/critter/hostile/carp/holodeck/gib()
 	death()
 
-/mob/living/simple_animal/hostile/carp/holodeck/death()
+/mob/living/critter/hostile/carp/holodeck/death()
 	..(null, "fades away!", "You have been destroyed.")
 	qdel(src)

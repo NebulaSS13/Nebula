@@ -1909,7 +1909,7 @@
 	id_tag = "Harpoon_solar_port_sensor";
 	pixel_y = 25
 	},
-/mob/living/simple_animal/hostile/carp/shark,
+/mob/living/critter/hostile/carp/shark,
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
 "eC" = (
@@ -2178,7 +2178,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/blood,
-/mob/living/simple_animal/hostile/carp/shark,
+/mob/living/critter/hostile/carp/shark,
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_f)
 "eZ" = (
@@ -3012,7 +3012,7 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gM" = (
-/mob/living/simple_animal/hostile/carp/shark,
+/mob/living/critter/hostile/carp/shark,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gN" = (
@@ -3417,7 +3417,7 @@
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/infirmary)
 "hU" = (
-/mob/living/simple_animal/hostile/carp/shark,
+/mob/living/critter/hostile/carp/shark,
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/infirmary)
 "hV" = (
@@ -3624,7 +3624,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "iI" = (
-/mob/living/simple_animal/hostile/carp/shark,
+/mob/living/critter/hostile/carp/shark,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/dorms)
 "iJ" = (
@@ -3654,7 +3654,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/infirmary)
 "iO" = (
-/mob/living/simple_animal/hostile/carp/shark,
+/mob/living/critter/hostile/carp/shark,
 /turf/simulated/floor/plating,
 /area/errant_pisces/infirmary)
 "iP" = (
@@ -3802,7 +3802,7 @@
 /area/errant_pisces/live_storage)
 "jg" = (
 /obj/structure/lattice,
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/space,
 /area/errant_pisces/live_storage)
 "jh" = (
@@ -4146,7 +4146,7 @@
 /area/errant_pisces/science_wing)
 "kc" = (
 /obj/structure/lattice,
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/space,
 /area/errant_pisces/science_wing)
 "kd" = (
@@ -4970,7 +4970,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "mv" = (
-/mob/living/simple_animal/hostile/carp/shark,
+/mob/living/critter/hostile/carp/shark,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "mw" = (
@@ -6389,7 +6389,7 @@
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/fishing_wing)
 "pE" = (
-/mob/living/simple_animal/hostile/carp/shark,
+/mob/living/critter/hostile/carp/shark,
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/fishing_wing)
 "pF" = (
@@ -6550,7 +6550,7 @@
 /area/errant_pisces/fishing_wing)
 "pZ" = (
 /obj/structure/net,
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/space,
 /area/space)
 "qa" = (
@@ -6911,7 +6911,7 @@
 /area/space)
 "rc" = (
 /obj/structure/net,
-/mob/living/simple_animal/hostile/carp/shark,
+/mob/living/critter/hostile/carp/shark,
 /turf/space,
 /area/space)
 "sb" = (

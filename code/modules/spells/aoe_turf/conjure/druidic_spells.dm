@@ -31,7 +31,7 @@
 	range = 1
 
 	summon_amt = 1
-	summon_type = list(/mob/living/simple_animal/hostile/scarybat)
+	summon_type = list(/mob/living/critter/hostile/scarybat)
 
 	hud_state = "wiz_bats"
 
@@ -58,7 +58,7 @@
 	name_summon = 1
 
 	summon_amt = 1
-	summon_type = list(/mob/living/simple_animal/hostile/commanded/bear)
+	summon_type = list(/mob/living/critter/hostile/commanded/bear)
 	newVars = list("maxHealth" = 15,
 				"health" = 15,
 				"melee_damage_lower" = 10,

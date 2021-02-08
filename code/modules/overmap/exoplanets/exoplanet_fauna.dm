@@ -21,14 +21,14 @@
 	GLOB.death_event.register(A, src, /obj/effect/overmap/visitable/sector/exoplanet/proc/remove_animal)
 	GLOB.destroyed_event.register(A, src, /obj/effect/overmap/visitable/sector/exoplanet/proc/remove_animal)
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/adapt_animal(var/mob/living/simple_animal/A)
+/obj/effect/overmap/visitable/sector/exoplanet/proc/adapt_animal(var/mob/living/critter/A)
 	if(species[A.type])
 		A.SetName(species[A.type])
 		A.real_name = species[A.type]
 	else
 		A.SetName("alien creature")
 		A.real_name = "alien creature"
-		A.verbs |= /mob/living/simple_animal/proc/name_species
+		A.verbs |= /mob/living/critter/proc/name_species
 	if(atmosphere)
 		//Set up gases for living things
 		var/list/all_gasses = subtypesof(/decl/material/gas)
@@ -67,11 +67,11 @@
 
 	species[species_type] = newname
 	log_and_message_admins("renamed [species_type] to [newname]")
-	for(var/mob/living/simple_animal/A in animals)
+	for(var/mob/living/critter/A in animals)
 		if(istype(A,species_type))
 			A.SetName(newname)
 			A.real_name = newname
-			A.verbs -= /mob/living/simple_animal/proc/name_species
+			A.verbs -= /mob/living/critter/proc/name_species
 	return TRUE
 
 // Landmarks placed by random map generator

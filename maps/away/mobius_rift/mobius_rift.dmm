@@ -45,7 +45,7 @@
 /turf/simulated/floor/grass,
 /area/mobius_rift)
 "n" = (
-/mob/living/simple_animal/hostile/vagrant,
+/mob/living/critter/hostile/vagrant,
 /turf/simulated/floor/grass,
 /area/mobius_rift)
 "o" = (
@@ -57,7 +57,7 @@
 /turf/simulated/floor/grass,
 /area/mobius_rift)
 "q" = (
-/mob/living/simple_animal/hostile/vagrant,
+/mob/living/critter/hostile/vagrant,
 /turf/unsimulated/beach/sand,
 /area/mobius_rift)
 "r" = (

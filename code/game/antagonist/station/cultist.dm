@@ -99,12 +99,12 @@
 	. = ..()
 	if(.)
 		to_chat(player, "<span class='cult'>[conversion_blurb]</span>")
-		if(player.current && !istype(player.current, /mob/living/simple_animal/construct))
+		if(player.current && !istype(player.current, /mob/living/critter/construct))
 			player.current.add_language(/decl/language/cultcommon)
 
 /decl/special_role/cultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	. = ..()
-	if(. && player.current && !istype(player.current, /mob/living/simple_animal/construct))
+	if(. && player.current && !istype(player.current, /mob/living/critter/construct))
 		player.current.remove_language(/decl/language/cultcommon)
 
 /decl/special_role/cultist/update_antag_mob(var/datum/mind/player)

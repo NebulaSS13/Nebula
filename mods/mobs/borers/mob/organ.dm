@@ -35,7 +35,7 @@
 
 	..()
 
-	var/mob/living/simple_animal/borer/B = owner.has_brain_worms()
+	var/mob/living/critter/borer/B = owner.has_brain_worms()
 	if(B)
 		B.leave_host()
 		B.ckey = owner.ckey

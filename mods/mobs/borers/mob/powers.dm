@@ -5,7 +5,7 @@
 	set name = "Release Control"
 	set desc = "Release control of your host's body."
 
-	var/mob/living/simple_animal/borer/B = HAS_BRAIN_WORMS(src)
+	var/mob/living/critter/borer/B = HAS_BRAIN_WORMS(src)
 
 	if(B && B.host_brain)
 		to_chat(src, "<span class='danger'>You withdraw your probosci, releasing control of [B.host_brain]</span>")
@@ -25,7 +25,7 @@
 	set name = "Torment host"
 	set desc = "Punish your host with agony."
 
-	var/mob/living/simple_animal/borer/B = HAS_BRAIN_WORMS(src)
+	var/mob/living/critter/borer/B = HAS_BRAIN_WORMS(src)
 
 	if(!B)
 		return
@@ -43,7 +43,7 @@
 	set name = "Reproduce"
 	set desc = "Spawn several young."
 
-	var/mob/living/simple_animal/borer/B = HAS_BRAIN_WORMS(src)
+	var/mob/living/critter/borer/B = HAS_BRAIN_WORMS(src)
 
 	if(!B)
 		return
@@ -56,7 +56,7 @@
 
 		new /obj/effect/decal/cleanable/vomit(get_turf(src))
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-		new /mob/living/simple_animal/borer(get_turf(src), B.generation + 1)
+		new /mob/living/critter/borer(get_turf(src), B.generation + 1)
 
 	else
 		to_chat(src, "<span class='warning'>You do not have enough chemicals stored to reproduce.</span>")

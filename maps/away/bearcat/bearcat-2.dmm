@@ -3661,7 +3661,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/item/storage/backpack/dufflebag/syndie,
-/mob/living/simple_animal/hostile/vagrant,
+/mob/living/critter/hostile/vagrant,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/hidden)
 "gw" = (
@@ -3810,7 +3810,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/mob/living/simple_animal/hostile/vagrant,
+/mob/living/critter/hostile/vagrant,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/hidden)
 "gH" = (
@@ -4150,7 +4150,7 @@
 /obj/machinery/power/apc/derelict{
 	dir = 1
 	},
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/simulated/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "hl" = (
@@ -4588,7 +4588,7 @@
 	use_power = 1;
 	id_tag = "n2_in"
 	},
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/atmos)
 "hP" = (
@@ -4744,7 +4744,7 @@
 	pixel_x = -24;
 	req_access = newlist()
 	},
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "ia" = (
@@ -4879,7 +4879,7 @@
 /area/ship/scrap/maintenance/power)
 "io" = (
 /obj/structure/lattice,
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "iq" = (
@@ -4988,7 +4988,7 @@
 	pixel_y = 1;
 	d2 = 2
 	},
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/power)
 "iC" = (
@@ -5049,7 +5049,7 @@
 	icon_state = "intact";
 	dir = 9
 	},
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "iJ" = (
@@ -5100,7 +5100,7 @@
 /area/ship/scrap/maintenance/power)
 "iO" = (
 /obj/item/stack/material/rods,
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "iP" = (
@@ -5530,7 +5530,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning,
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jQ" = (
@@ -5563,7 +5563,7 @@
 /area/ship/scrap/maintenance/engine/aft)
 "jT" = (
 /obj/structure/lattice,
-/mob/living/simple_animal/hostile/carp,
+/mob/living/critter/hostile/carp,
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)
 "jU" = (

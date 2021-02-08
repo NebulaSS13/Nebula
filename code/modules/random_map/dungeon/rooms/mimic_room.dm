@@ -11,7 +11,7 @@
 	var/obj/structure/closet/C = new mimic_type(T)
 	item_spawns += C
 	if(prob(chance_of_mimic) && mimic_type)
-		new /mob/living/simple_animal/hostile/mimic/sleeping(get_turf(C),C)
+		new /mob/living/critter/hostile/mimic/sleeping(get_turf(C),C)
 
 //BASICALLY:
 //Create mimic in center of room.

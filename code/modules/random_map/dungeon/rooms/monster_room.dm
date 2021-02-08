@@ -1,6 +1,6 @@
 //Monster room: Generates a room FILLED with monsters.
 /datum/random_room/monster_room
-	var/list/available_mobs = list(/mob/living/simple_animal/hostile/carp)
+	var/list/available_mobs = list(/mob/living/critter/hostile/carp)
 
 /datum/random_room/monster_room/apply_to_map(var/xorigin,var/yorigin,var/zorigin)
 	if(available_mobs.len == 0) //no mobs no problem

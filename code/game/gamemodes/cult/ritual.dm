@@ -120,7 +120,7 @@
 		return species.get_blood_name()
 	return "blood"
 
-/mob/living/simple_animal/construct/get_blood_name()
+/mob/living/critter/construct/get_blood_name()
 	return "ichor"
 
 /mob/proc/mob_needs_tome()

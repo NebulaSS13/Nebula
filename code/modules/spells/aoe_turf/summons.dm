@@ -21,7 +21,7 @@
 	range = 1
 	cast_sound = 'sound/magic/summon_carp.ogg'
 
-	summon_type = list(/mob/living/simple_animal/hostile/carp)
+	summon_type = list(/mob/living/critter/hostile/carp)
 
 	hud_state = "wiz_carp"
 
@@ -37,7 +37,7 @@
 	summon_amt = 10
 	range = 3
 
-	summon_type = list(/mob/living/simple_animal/hostile/creature)
+	summon_type = list(/mob/living/critter/hostile/creature)
 
 	hud_state = "wiz_creature"
 
@@ -57,7 +57,7 @@
 	cooldown_min = 600
 	level_max = list(Sp_TOTAL = 4, Sp_SPEED = 2, Sp_POWER = 3)
 
-	summon_type = list(/mob/living/simple_animal/hostile/carp)
+	summon_type = list(/mob/living/critter/hostile/carp)
 
 	hud_state = "wiz_carp"
 

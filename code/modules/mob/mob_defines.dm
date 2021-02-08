@@ -137,7 +137,7 @@
 
 	var/voice_name = "unidentifiable voice"
 
-	var/faction = MOB_FACTION_NEUTRAL //Used for checking whether hostile simple animals will attack you, possibly more stuff later
+	var/faction = MOB_FACTION_NEUTRAL //Used for checking whether hostile mobs will attack you/allow you to interact with them
 	var/blinded = null
 	var/ear_deaf = null		//Carbon
 

@@ -1,4 +1,4 @@
-/mob/living/simple_animal/borer/UnarmedAttack(atom/A, proximity)
+/mob/living/critter/borer/UnarmedAttack(atom/A, proximity)
 
 	if(!isliving(A) || a_intent != I_GRAB)
 		return ..()

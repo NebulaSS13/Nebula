@@ -188,9 +188,9 @@
 	followed_type = /mob/observer/ghost
 	suffix = "Ghost"
 
-/datum/follow_holder/simple_animal
+/datum/follow_holder/critter
 	sort_order = 6
-	followed_type = /mob/living/simple_animal
+	followed_type = /mob/living/critter
 	suffix = "Animal"
 
 /datum/follow_holder/spiderling

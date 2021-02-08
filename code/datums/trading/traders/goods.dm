@@ -282,15 +282,15 @@ Sells devices, odds and ends, and medical stuff
 				"insult_bad"        = "I have traded dogs with more bark than that.",
 				)
 
-	possible_wanted_items = list(/mob/living/simple_animal/tindalos    = TRADER_THIS_TYPE,
-								/mob/living/simple_animal/tomato      = TRADER_THIS_TYPE,
-								/mob/living/simple_animal/yithian     = TRADER_THIS_TYPE,
-								/mob/living/simple_animal/hostile/retaliate/beast/diyaab = TRADER_THIS_TYPE,
-								/mob/living/simple_animal/hostile/retaliate/beast/shantak= TRADER_THIS_TYPE,
-								/mob/living/simple_animal/hostile/retaliate/beast/samak= TRADER_THIS_TYPE,
-								/mob/living/simple_animal/hostile/carp = TRADER_THIS_TYPE)
+	possible_wanted_items = list(/mob/living/critter/tindalos    = TRADER_THIS_TYPE,
+								/mob/living/critter/tomato      = TRADER_THIS_TYPE,
+								/mob/living/critter/yithian     = TRADER_THIS_TYPE,
+								/mob/living/critter/hostile/retaliate/beast/diyaab = TRADER_THIS_TYPE,
+								/mob/living/critter/hostile/retaliate/beast/shantak= TRADER_THIS_TYPE,
+								/mob/living/critter/hostile/retaliate/beast/samak= TRADER_THIS_TYPE,
+								/mob/living/critter/hostile/carp = TRADER_THIS_TYPE)
 
-	possible_trading_items = list(/mob/living/simple_animal/hostile/carp= TRADER_THIS_TYPE,
+	possible_trading_items = list(/mob/living/critter/hostile/carp= TRADER_THIS_TYPE,
 								/obj/item/dociler              = TRADER_THIS_TYPE,
 								/obj/item/beartrap			  = TRADER_THIS_TYPE,
 								/obj/item/scanner/xenobio = TRADER_THIS_TYPE)

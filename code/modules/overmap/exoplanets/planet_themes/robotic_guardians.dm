@@ -1,12 +1,12 @@
 /datum/exoplanet_theme/robotic_guardians
 	name = "Robotic Guardians"
 	var/list/guardian_types = list(
-		/mob/living/simple_animal/hostile/hivebot, 
-		/mob/living/simple_animal/hostile/hivebot/range, 
-		/mob/living/simple_animal/hostile/viscerator/hive
+		/mob/living/critter/hostile/hivebot, 
+		/mob/living/critter/hostile/hivebot/range, 
+		/mob/living/critter/hostile/viscerator/hive
 	)
 	var/list/mega_guardian_types = list(
-		/mob/living/simple_animal/hostile/hivebot/mega
+		/mob/living/critter/hostile/hivebot/mega
 	)
 
 /datum/exoplanet_theme/robotic_guardians/before_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)

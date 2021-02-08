@@ -76,7 +76,7 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 		return FALSE
 	for(var/i in template.get_affected_turfs(central_turf, 1))
 		var/turf/T = i
-		for(var/mob/living/simple_animal/monster in T)
+		for(var/mob/living/critter/monster in T)
 			qdel(monster)
 	template.load(central_turf,centered = TRUE)
 	var/datum/map_template/ruin = template

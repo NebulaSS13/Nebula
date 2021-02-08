@@ -20,7 +20,7 @@
 
 /obj/machinery/auto_cloner/get_passive_mob_types()
 	. = ..() || list()
-	. |= /mob/living/simple_animal/slime
+	. |= /mob/living/critter/slime
 
 /obj/machinery/smartfridge/secure/extract
 	name = "\improper Slime Extract Storage"

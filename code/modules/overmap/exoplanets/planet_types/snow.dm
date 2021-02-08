@@ -12,8 +12,8 @@
 	)
 	surface_color = "#e8faff"
 	water_color = "#b5dfeb"
-	fauna_types = list(/mob/living/simple_animal/hostile/retaliate/beast/samak, /mob/living/simple_animal/hostile/retaliate/beast/diyaab, /mob/living/simple_animal/hostile/retaliate/beast/shantak)
-	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/giant_crab)
+	fauna_types = list(/mob/living/critter/hostile/retaliate/beast/samak, /mob/living/critter/hostile/retaliate/beast/diyaab, /mob/living/critter/hostile/retaliate/beast/shantak)
+	megafauna_types = list(/mob/living/critter/hostile/retaliate/giant_crab)
 
 /obj/effect/overmap/visitable/sector/exoplanet/snow/get_target_temperature()
 	return T0C - rand(10, 100)

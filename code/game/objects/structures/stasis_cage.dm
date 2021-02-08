@@ -6,12 +6,12 @@
 	density = 1
 	layer = ABOVE_OBJ_LAYER
 
-	var/mob/living/simple_animal/contained
+	var/mob/living/critter/contained
 
 /obj/structure/stasis_cage/Initialize()
 	. = ..()
 
-	var/mob/living/simple_animal/A = locate() in loc
+	var/mob/living/critter/A = locate() in loc
 	if(A)
 		contain(A)
 
@@ -47,7 +47,7 @@
 	if(contained)
 		to_chat(user, "\The [contained] is kept inside.")
 
-/obj/structure/stasis_cage/proc/contain(var/mob/living/simple_animal/animal)
+/obj/structure/stasis_cage/proc/contain(var/mob/living/critter/animal)
 	if(contained || !istype(animal))
 		return
 
@@ -69,7 +69,7 @@
 	release()
 	return ..()
 
-/mob/living/simple_animal/handle_mouse_drop(atom/over, mob/user)
+/mob/living/critter/handle_mouse_drop(atom/over, mob/user)
 	if(istype(over, /obj/structure/stasis_cage))
 		var/obj/structure/stasis_cage/cage = over
 		if(!stat && !istype(buckled, /obj/effect/energy_net))

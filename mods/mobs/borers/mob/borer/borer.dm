@@ -1,4 +1,4 @@
-/mob/living/simple_animal/borer
+/mob/living/critter/borer
 	name = "cortical borer"
 	real_name = "cortical borer"
 	desc = "A small, quivering sluglike creature."
@@ -51,15 +51,15 @@
 /obj/item/holder/borer
 	origin_tech = "{'biotech':6}"
 
-/mob/living/simple_animal/borer/roundstart
+/mob/living/critter/borer/roundstart
 	roundstart = TRUE
 
-/mob/living/simple_animal/borer/symbiote
+/mob/living/critter/borer/symbiote
 	name = "symbiote"
 	real_name = "symbiote"
 	neutered = TRUE
 
-/mob/living/simple_animal/borer/Login()
+/mob/living/critter/borer/Login()
 	. = ..()
 	if(client)
 		client.screen |= hud_elements
@@ -68,13 +68,13 @@
 		var/decl/special_role/borer/borers = GET_DECL(/decl/special_role/borer)
 		borers.add_antagonist(mind)
 
-/mob/living/simple_animal/borer/Logout()
+/mob/living/critter/borer/Logout()
 	. = ..()
 	if(client)
 		client.screen -= hud_elements
 		client.screen -= hud_intent_selector
 
-/mob/living/simple_animal/borer/Initialize(var/mapload, var/gen=1)
+/mob/living/critter/borer/Initialize(var/mapload, var/gen=1)
 	hud_intent_selector =  new
 	hud_inject_chemicals = new
 	hud_leave_host =       new
@@ -98,7 +98,7 @@
 	if(!roundstart) 
 		request_player()
 
-/mob/living/simple_animal/borer/Destroy()
+/mob/living/critter/borer/Destroy()
 	if(client)
 		client.screen -= hud_elements
 		client.screen -= hud_intent_selector
@@ -109,10 +109,10 @@
 	hud_leave_host =       null
 	. = ..()
 
-/mob/living/simple_animal/borer/proc/set_borer_name()
+/mob/living/critter/borer/proc/set_borer_name()
 	truename = "[borer_names[min(generation, borer_names.len)]] [random_id("borer[generation]", 1000, 9999)]"
 
-/mob/living/simple_animal/borer/Life()
+/mob/living/critter/borer/Life()
 
 	sdisabilities = 0
 	if(host)
@@ -172,7 +172,7 @@
 				if(prob(host.getBrainLoss()/20))
 					INVOKE_ASYNC(host, /mob/proc/say, "*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
 
-/mob/living/simple_animal/borer/Stat()
+/mob/living/critter/borer/Stat()
 	. = ..()
 	statpanel("Status")
 
@@ -184,7 +184,7 @@
 	if (client.statpanel == "Status")
 		stat("Chemicals", chemicals)
 
-/mob/living/simple_animal/borer/proc/detatch()
+/mob/living/critter/borer/proc/detatch()
 
 	if(!host || !controlling) return
 
@@ -236,14 +236,14 @@
 	qdel(host_brain)
 
 #define COLOR_BORER_RED "#ff5555"
-/mob/living/simple_animal/borer/proc/set_ability_cooldown(var/amt)
+/mob/living/critter/borer/proc/set_ability_cooldown(var/amt)
 	last_special = world.time + amt
 	for(var/obj/thing in hud_elements)
 		thing.color = COLOR_BORER_RED
-	addtimer(CALLBACK(src, /mob/living/simple_animal/borer/proc/reset_ui_callback), amt)
+	addtimer(CALLBACK(src, /mob/living/critter/borer/proc/reset_ui_callback), amt)
 #undef COLOR_BORER_RED
 
-/mob/living/simple_animal/borer/proc/leave_host()
+/mob/living/critter/borer/proc/leave_host()
 
 	for(var/obj/thing in hud_elements)
 		thing.alpha =        0
@@ -269,10 +269,10 @@
 	return
 
 //Procs for grabbing players.
-/mob/living/simple_animal/borer/proc/request_player()
+/mob/living/critter/borer/proc/request_player()
 	var/decl/ghosttrap/G = GET_DECL(/decl/ghosttrap/cortical_borer)
 	G.request_player(src, "A cortical borer needs a player.")
 
-/mob/living/simple_animal/borer/flash_eyes(intensity, override_blindness_check, affect_silicon, visual, type)
+/mob/living/critter/borer/flash_eyes(intensity, override_blindness_check, affect_silicon, visual, type)
 	intensity *= 1.5
 	. = ..()
