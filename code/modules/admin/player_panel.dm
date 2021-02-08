@@ -75,13 +75,13 @@
 
 					body += "</td><td align='center'>";
 
-					body += "<a href='?src=\ref[src];adminplayeropts="+ref+"'>PP</a> - "
-					body += "<a href='?src=\ref[src];notes=show;mob="+ref+"'>N</a> - "
+					body += "<a href='?src=\ref[src];adminplayeropts="+ref+"'>Player Panel</a> - "
+					body += "<a href='?src=\ref[src];notes=show;mob="+ref+"'>Notes</a> - "
 					body += "<a href='?_src_=vars;Vars="+ref+"'>VV</a> - "
-					body += "<a href='?src=\ref[src];traitor="+ref+"'>TP</a> - "
-					body += "<a href='?src=\ref[usr];priv_msg=\ref"+ref+"'>PM</a> - "
-					body += "<a href='?src=\ref[src];narrateto="+ref+"'>DN</a> - "
-					body += "<a href='?src=\ref[src];adminplayerobservejump="+ref+"'>JMP</a><br>"
+					body += "<a href='?src=\ref[src];traitor="+ref+"'>Traitor Panel</a> - "
+					body += "<a href='?src=\ref[usr];priv_msg="+ref+"'>Send PM</a> - "
+					body += "<a href='?src=\ref[src];narrateto="+ref+"'>Direct Narrate</a> - "
+					body += "<a href='?src=\ref[src];adminplayerobservejump="+ref+"'>Jump To</a><br>"
 					if(antagonist > 0)
 						body += "<font size='2'><a href='?src=\ref[src];check_antagonist=1'><font color='red'><b>Antagonist</b></font></a></font>";
 
