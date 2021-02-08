@@ -1,4 +1,7 @@
 /obj/item/firearm_component/barrel
+	name = "barrel"
+	desc = "A long tube forming the barrel of a firearm."
+	icon_state = "world-barrel"
 	firearm_component_category = FIREARM_COMPONENT_BARREL
 
 /obj/item/firearm_component/barrel/proc/get_relative_projectile_size(var/obj/item/projectile/projectile)

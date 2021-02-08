@@ -9,6 +9,11 @@
 	space_recoil = 1
 	combustion = 1
 
+	receiver = /obj/item/firearm_component/receiver
+	barrel = /obj/item/firearm_component/barrel
+	stock = /obj/item/firearm_component/stock
+	grip = /obj/item/firearm_component/grip
+
 	var/handle_casings = EJECT_CASINGS	//determines how spent casings should be handled
 	var/load_method = SINGLE_CASING|SPEEDLOADER //1 = Single shells, 2 = box or quick loader, 3 = magazine
 	var/obj/item/ammo_casing/chambered = null

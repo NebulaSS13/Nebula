@@ -15,7 +15,11 @@
 				failures += "\the [firearm] ([gtype]) failed to initialize"
 				continue
 
-			var/list/firearm_components = list("barrel" = firearm.barrel)
+			if(!firearm.icon || !firearm.icon_state || !check_state_in_icon(firearm.icon_state, firearm.icon))
+				failures += "\the [firearm] ([gtype]) had an invalid icon_state ([firearm.icon_state], [firearm.icon])"
+				continue
+
+			var/list/firearm_components = firearm.get_modular_component_list()
 			for(var/fcomp in firearm_components)
 				var/obj/item/firearm_component/comp = firearm_components[fcomp]
 				if(!istype(comp) || QDELETED(comp))
