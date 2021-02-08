@@ -1290,18 +1290,18 @@
 		var/mob/M = locate(href_list["narrateto"])
 		usr.client.cmd_admin_direct_narrate(M)
 
-	else if(href_list["traitor"])
+	else if(href_list["show_special_roles"])
 		if(!check_rights(R_ADMIN|R_MOD))	return
 
 		if(GAME_STATE < RUNLEVEL_GAME)
 			alert("The game hasn't started yet!")
 			return
 
-		var/mob/M = locate(href_list["traitor"])
+		var/mob/M = locate(href_list["show_special_roles"])
 		if(!ismob(M))
 			to_chat(usr, "This can only be used on instances of type /mob.")
 			return
-		show_traitor_panel(M)
+		show_special_roles(M)
 
 	else if(href_list["skillpanel"])
 		if(!check_rights(R_INVESTIGATE))
