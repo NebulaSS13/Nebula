@@ -45,7 +45,7 @@ var/const/AIRLOCK_WIRE_SPEAKER = 4096
 		if(A.isElectrified())
 			if(A.shock(L, 100))
 				return 0
-	if(A.panel_open)
+	if(istype(A.construct_state, /decl/machine_construction/default/panel_closed/door/hacking))
 		return 1
 	return 0
 

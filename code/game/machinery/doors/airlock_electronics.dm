@@ -103,6 +103,16 @@
 			conf_access -= access
 		return TOPIC_REFRESH
 
+/obj/item/stock_parts/circuitboard/airlock_electronics/attackby(obj/item/W, mob/user)
+	if(istype(W.GetIdCard(), /obj/item/card/id))
+		if(!locked || check_access(W))
+			locked = !locked
+			to_chat(user, SPAN_NOTICE("[src] beeps as its hatch access is [locked ? null : "un"]locked."))
+		else if (locked)
+			to_chat(user, SPAN_WARNING("[src] buzzes, denying access to the circuitry."))
+		return TRUE
+	. = ..()
+
 /obj/item/stock_parts/circuitboard/airlock_electronics/secure
 	name = "secure airlock electronics"
 	desc = "designed to be somewhat more resistant to hacking than standard electronics."

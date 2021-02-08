@@ -414,7 +414,7 @@ About the new airlock wires panel:
 	if(welded)
 		weld_overlay = welded_file
 
-	if(panel_open)
+	if(panel_open || istype(construct_state, /decl/machine_construction/default/panel_closed/door/hacking))
 		panel_overlay = panel_file
 
 	if(brace)
@@ -765,22 +765,25 @@ About the new airlock wires panel:
 	else if(isWirecutter(C) || isMultitool(C) || istype(C, /obj/item/assembly/signaler))
 		return wires.Interact(user)
 
-	else if(isCrowbar(C) && !welded && !repairing)
-		// Add some minor damage as evidence of forcing.
-		if(health >= maxhealth)
-			take_damage(1)
-		if(arePowerSystemsOn())
-			to_chat(user, SPAN_WARNING("The airlock's motors resist your efforts to force it."))
-		else if(locked)
-			to_chat(user, SPAN_WARNING("The airlock's bolts prevent it from being forced."))
-		else if(brace)
-			to_chat(user, SPAN_WARNING("The airlock's brace holds it firmly in place."))
-		else
-			if(density)
-				open(1)
+	else if(isCrowbar(C))
+		if(!can_open(TRUE) && component_attackby(C, user))
+			return TRUE
+		else if(!repairing)
+			// Add some minor damage as evidence of forcing.
+			if(health >= maxhealth)
+				take_damage(1)
+			if(arePowerSystemsOn())
+				to_chat(user, SPAN_WARNING("The airlock's motors resist your efforts to force it."))
+			else if(locked)
+				to_chat(user, SPAN_WARNING("The airlock's bolts prevent it from being forced."))
+			else if(brace)
+				to_chat(user, SPAN_WARNING("The airlock's brace holds it firmly in place."))
 			else
-				close(1)
-		return TRUE
+				if(density)
+					open(1)
+				else
+					close(1)
+			return TRUE
 
 	if(istype(C, /obj/item/twohanded/fireaxe) && !arePowerSystemsOn() && !(user.a_intent == I_HURT))
 		var/obj/item/twohanded/fireaxe/F = C
@@ -852,6 +855,11 @@ About the new airlock wires panel:
 				return SPAN_NOTICE("You must disengage the bolts first.")
 		if(repairing)
 			return MCS_CONTINUE
+	var/decl/machine_construction/state = decls_repository.get_decl(state_path)
+	if(state && !state.locked && construct_state && construct_state.locked) // we're locked, we're becoming unlocked
+		var/obj/item/stock_parts/circuitboard/airlock_electronics/circuit = get_component_of_type(/obj/item/stock_parts/circuitboard/airlock_electronics)
+		if(circuit.locked && circuit.is_functional() && !circuit.check_access(user))
+			return SPAN_WARNING("\The [circuit] flashes red! You lack the access to unlock this.")
 	. = ..()
 
 /obj/machinery/door/airlock/dismantle(var/moved = FALSE)
