@@ -28,6 +28,8 @@
 		if((grabber.mob_size == mob_size) && grabber.can_pull_mobs == MOB_PULL_SMALLER)
 			to_chat(grabber, SPAN_WARNING("\The [src] is too large for you to move!"))
 			return FALSE
+		if(iscarbon(grabber))
+			last_handled_by_mob = weakref(grabber)
 
 /mob/proc/handle_grab_damage()
 	set waitfor = 0

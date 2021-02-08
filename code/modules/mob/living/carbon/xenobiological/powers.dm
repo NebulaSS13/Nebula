@@ -101,12 +101,10 @@
 
 	if(happyWithFood) // This means that the slime has either drained the victim or let it go
 		if(!client)
-			if(Victim && !rabid && !attacked && Victim.LAssailant && Victim.LAssailant != Victim)
-				if(!(Victim.LAssailant in Friends))
-					Friends[Victim.LAssailant] = 1
-				else
-					++Friends[Victim.LAssailant]
-
+			if(Victim && !rabid && !attacked && Victim.last_handled_by_mob)
+				var/mob/friend = Victim.last_handled_by_mob.resolve()
+				if(istype(friend) && !QDELETED(friend) && friend != Victim)
+					Friends[friend] = Friends[friend] + 1
 		else
 			to_chat(src, "<span class='notice'>This subject does not have a strong enough life energy anymore...</span>")
 

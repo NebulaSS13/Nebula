@@ -101,7 +101,7 @@ default behaviour is:
 			if(!(tmob.status_flags & CANPUSH))
 				now_pushing = 0
 				return
-			tmob.LAssailant = src
+			tmob.last_handled_by_mob = weakref(src)
 		if(isobj(AM) && !AM.anchored)
 			var/obj/I = AM
 			if(!can_pull_size || can_pull_size < I.w_class)
