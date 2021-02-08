@@ -1,8 +1,7 @@
 name: Merge
 
 on:
-  schedule:
-    - cron: "0 0 * * 6"
+  workflow_dispatch:
 
 jobs:
   Merge:
@@ -19,9 +18,9 @@ jobs:
           git fetch --all
       - name: Merge
         run: |
-          git merge upstream/dev
           git config --local user.email "action@github.com"
           git config --local user.name "Upstream Merger"
+          git merge upstream/dev
       - name: Push
         uses: ad-m/github-push-action@master
         with:
