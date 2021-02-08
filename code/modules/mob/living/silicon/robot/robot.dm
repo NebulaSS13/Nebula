@@ -1117,3 +1117,6 @@
 	if(.)
 		handle_selfinsert(W, user)
 		recalculate_synth_capacities()
+
+/mob/living/silicon/robot/get_admin_job_string()
+	return "Robot"

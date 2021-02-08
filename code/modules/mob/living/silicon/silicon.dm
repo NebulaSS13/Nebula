@@ -430,3 +430,6 @@
 		return
 
 	os.ui_interact(src)
+
+/mob/living/silicon/get_admin_job_string()
+	return "Silicon-based"

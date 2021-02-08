@@ -481,3 +481,6 @@
 /mob/living/carbon/get_injected_reagents()
 	return bloodstr
 
+/mob/living/carbon/get_admin_job_string()
+	return "Carbon-based"
+

@@ -224,50 +224,7 @@
 			if(i%2 == 0)
 				color = "#f2f2f2"
 			var/is_antagonist = is_special_character(M)
-
-			var/M_job = ""
-
-			if(isliving(M))
-
-				if(iscarbon(M)) //Carbon stuff
-					if(ishuman(M))
-						var/mob/living/carbon/human/H = M
-						M_job = H.job
-					else if(isslime(M))
-						M_job = "slime"
-					else if(issmall(M))
-						M_job = "Monkey"
-					else if(isalien(M))
-						M_job = "Alien"
-					else
-						M_job = "Carbon-based"
-
-				else if(issilicon(M)) //silicon
-					if(isAI(M))
-						M_job = "AI"
-					else if(ispAI(M))
-						M_job = "pAI"
-					else if(isrobot(M))
-						M_job = "Robot"
-					else
-						M_job = "Silicon-based"
-
-				else if(isanimal(M)) //simple animals
-					if(iscorgi(M))
-						M_job = "Corgi"
-					else
-						M_job = "Animal"
-
-				else
-					M_job = "Living"
-
-			else if(istype(M,/mob/new_player))
-				M_job = "New player"
-
-			else if(isghost(M))
-				M_job = "Ghost"
-			else
-				M_job = "Unknown ([M.type])"
+			var/M_job = M.get_admin_job_string()
 
 			M_job = replacetext(M_job, "'", "")
 			M_job = replacetext(M_job, "\"", "")

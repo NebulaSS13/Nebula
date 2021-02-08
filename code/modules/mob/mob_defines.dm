@@ -100,7 +100,7 @@
 	var/facing_dir = null   // Used for the ancient art of moonwalking.
 
 	var/name_archive //For admin things like possession
-	var/mob_sort_value = INFINITY // used for get_sorted_mob_list()
+	var/mob_sort_value = INFINITY // used for sorted player list, higher means closer to the bottom of the list.
 	var/timeofdeath = 0
 
 	var/bodytemperature = 310.055	//98.7 F

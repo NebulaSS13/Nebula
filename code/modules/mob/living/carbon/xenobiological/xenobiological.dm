@@ -314,3 +314,6 @@
 /mob/living/carbon/slime/can_be_buckled(var/mob/user)
 	to_chat(user, SPAN_WARNING("\The [src] is too squishy to buckle in."))
 	return FALSE
+
+/mob/living/carbon/slime/get_admin_job_string()
+	return "Slime"

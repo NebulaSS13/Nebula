@@ -770,3 +770,6 @@ var/list/ai_verbs_default = list(
 		os.system_boot()
 	if(os.run_program(filename))
 		os.ui_interact(src)
+
+/mob/living/silicon/ai/get_admin_job_string()
+	return "AI"

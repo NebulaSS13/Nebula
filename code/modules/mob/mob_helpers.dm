@@ -720,3 +720,6 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	result[2] = ainvis
 
 	return result
+
+/mob/proc/get_admin_job_string()
+	return "Unknown ([type])"
