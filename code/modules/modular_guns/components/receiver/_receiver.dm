@@ -93,15 +93,3 @@
 
 /obj/item/firearm_component/receiver/proc/unload_ammo(var/mob/user)
 	return
-
-/obj/item/firearm_component/receiver/proc/is_secured()
-	return FALSE
-
-/obj/item/firearm_component/receiver/proc/get_network()
-	return
-
-/obj/item/firearm_component/receiver/proc/get_authorized_mode(var/index)
-	return ALWAYS_AUTHORIZED
-
-/obj/item/firearm_component/receiver/proc/authorize(var/mode, var/authorized, var/by)
-	return FALSE

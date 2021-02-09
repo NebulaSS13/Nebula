@@ -607,8 +607,8 @@
 	set category = "Object"
 	set src in usr
 
-	var/obj/item/firearm_component/receiver/energy/secure/rec = receiver
-	if(istype(rec))
+	var/obj/item/firearm_component/grip/secure/G = grip
+	if(istype(G))
 		to_chat(usr, SPAN_WARNING("\The [src] cannot be reset."))
 		return
 	if(issilicon(usr))
@@ -619,6 +619,6 @@
 		to_chat(usr, SPAN_WARNING("\The [src] buzzes quietly, refusing your access."))
 		return
 	to_chat(usr, SPAN_NOTICE("\The [src] chimes quietly as its registration resets."))
-	rec.registered_owner = null
-	GLOB.registered_weapons -= rec
+	G.registered_owner = null
+	GLOB.registered_weapons -= G
 	verbs -= /obj/item/gun/proc/reset_registration
