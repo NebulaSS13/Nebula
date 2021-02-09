@@ -354,7 +354,7 @@
 		// Snowflaaaake.
 		if(istype(W, /obj/item/mmi))
 			var/obj/item/mmi/brain = W
-			if(brain.brainmob && brain.brainmob.client && brain.brainmob.key)
+			if(brain.holding_brain?.brainmob && brain.holding_brain.brainmob.client && brain.holding_brain.brainmob.key)
 				preserve = 1
 			else
 				continue

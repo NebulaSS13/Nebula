@@ -508,7 +508,7 @@
 	var/obj/item/mmi/M = tool
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected && istype(M))
-		if(!M.brainmob || !M.brainmob.client || !M.brainmob.ckey || M.brainmob.stat >= DEAD)
+		if(!M.holding_brain?.brainmob || !M.holding_brain.brainmob.client || !M.holding_brain.brainmob.ckey || M.holding_brain.brainmob.stat == DEAD)
 			to_chat(user, SPAN_WARNING("That brain is not usable."))
 		else if(BP_IS_CRYSTAL(affected))
 			to_chat(user, SPAN_WARNING("The crystalline interior of \the [affected] is incompatible with \the [M]."))
@@ -548,13 +548,13 @@
 	tool.forceMove(holder)
 	holder.stored_mmi = tool
 	holder.update_from_mmi()
-
-	if(M.brainmob && M.brainmob.mind)
-		M.brainmob.mind.transfer_to(target)
+	if(M.holding_brain?.brainmob?.mind)
+		M.holding_brain.brainmob.mind.transfer_to(target)
 
 /decl/surgery_step/robotics/install_mmi/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	user.visible_message("<span class='warning'>[user]'s hand slips.</span>", \
-	"<span class='warning'>Your hand slips.</span>")
+	user.visible_message(
+		SPAN_WARNING("\The [user]'s hand slips."), \
+		SPAN_WARNING("Your hand slips."))
 
 /decl/surgery_step/internal/remove_organ/robotic
 	name = "Remove robotic component"

@@ -62,14 +62,11 @@
 	. = ..()
 
 /obj/item/organ/internal/brain/proc/transfer_identity(var/mob/living/carbon/H)
-
 	if(!brainmob)
 		brainmob = new(src)
 		brainmob.SetName(H.real_name)
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna.Clone()
-		brainmob.timeofhostdeath = H.timeofdeath
-
 	if(H.mind)
 		H.mind.transfer_to(brainmob)
 
@@ -250,7 +247,7 @@
 /obj/item/organ/internal/brain/surgical_fix(mob/user)
 	var/blood_volume = owner.get_blood_oxygenation()
 	if(blood_volume < BLOOD_VOLUME_SURVIVE)
-		to_chat(user, "<span class='danger'>Parts of [src] didn't survive the procedure due to lack of air supply!</span>")
+		to_chat(user, "<span class='danger'>Parts of \the [src] didn't survive the procedure due to lack of air supply!</span>")
 		set_max_damage(Floor(max_damage - 0.25*damage))
 	heal_damage(damage)
 
@@ -259,3 +256,8 @@
 
 /obj/item/organ/internal/brain/get_mechanical_assisted_descriptor()
 	return "machine-interface [name]"
+
+/obj/item/organ/internal/brain/die()
+	if(brainmob && brainmob.stat != DEAD)
+		brainmob.death()
+	..()

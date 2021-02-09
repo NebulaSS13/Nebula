@@ -74,7 +74,7 @@
 		var/mob/living/brain/B
 		if(istype(W, /obj/item/mmi))
 			var/obj/item/mmi/M = W
-			B = M.brainmob
+			B = M.holding_brain?.brainmob
 		else
 			var/obj/item/organ/internal/posibrain/P = W
 			B = P.brainmob

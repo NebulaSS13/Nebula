@@ -62,7 +62,7 @@
 	// Components are basically robot organs.
 	var/list/components = list()
 
-	var/obj/item/mmi/mmi = null
+	var/obj/item/mmi/mmi
 
 	var/opened = 0
 	var/emagged = 0
@@ -210,18 +210,13 @@
 //If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
 //Improved /N
 /mob/living/silicon/robot/Destroy()
-	if(mmi)//Safety for when a cyborg gets dust()ed. Or there is no MMI inside.
-		if(mind)
-			mmi.dropInto(loc)
-			if(mmi.brainmob)
-				mind.transfer_to(mmi.brainmob)
-			else
-				to_chat(src, "<span class='danger'>Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug.</span>")
-				ghostize()
-				//ERROR("A borg has been destroyed, but its MMI lacked a brainmob, so the mind could not be transferred. Player: [ckey].")
-			mmi = null
+	if(mmi)
+		mmi.dropInto(loc)
+		if(mind && mmi.holding_brain?.brainmob)
+			mind.transfer_to(mmi.holding_brain.brainmob)
 		else
-			QDEL_NULL(mmi)
+			ghostize()
+		mmi = null
 	if(connected_ai)
 		connected_ai.connected_robots -= src
 	connected_ai = null

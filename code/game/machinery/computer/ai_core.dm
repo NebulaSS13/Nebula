@@ -142,7 +142,7 @@ var/global/list/empty_playable_ai_cores = list()
 						var/mob/living/brain/B
 						if(istype(P, /obj/item/mmi))
 							var/obj/item/mmi/M = P
-							B = M.brainmob
+							B = M.holding_brain?.brainmob
 						else
 							var/obj/item/organ/internal/posibrain/PB = P
 							B = PB.brainmob
@@ -155,13 +155,12 @@ var/global/list/empty_playable_ai_cores = list()
 						if(jobban_isbanned(B, "AI"))
 							to_chat(user, SPAN_WARNING("This [P] does not seem to fit."))
 							return
-						if(!user.unEquip(P, src))
-							return
-						if(B.mind)
-							clear_antag_roles(B.mind, 1)
-						brain = P
-						to_chat(usr, "Added [P].")
-						update_icon()
+						if(user.unEquip(P, src))
+							if(B.mind)
+								clear_antag_roles(B.mind, 1)
+							brain = P
+							to_chat(usr, "You connect \the [P] to the  frame and slide it into the casing.")
+							update_icon()
 						return TRUE
 
 					if(istype(P, /obj/item/stack/material))

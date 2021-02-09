@@ -322,28 +322,18 @@
 /obj/item/organ/internal/mmi_holder/Initialize(mapload, var/internal)
 	. = ..()
 	if(!stored_mmi)
-		stored_mmi = new(src)
+		stored_mmi = new /obj/item/mmi(src)
 	update_from_mmi()
 	persistantMind = owner.mind
 	ownerckey = owner.ckey
 
 /obj/item/organ/internal/mmi_holder/proc/update_from_mmi()
-
-	if(!stored_mmi.brainmob)
-		stored_mmi.brainmob = new(stored_mmi)
-		stored_mmi.holding_brain = new(stored_mmi)
-		stored_mmi.brainmob.container = stored_mmi
-		stored_mmi.brainmob.real_name = owner.real_name
-		stored_mmi.brainmob.SetName(stored_mmi.brainmob.real_name)
-		stored_mmi.SetName("[initial(stored_mmi.name)] ([owner.real_name])")
-
-	if(!owner) return
-
+	if(!owner) 
+		return
+	stored_mmi.update_icon()
 	name = stored_mmi.name
 	desc = stored_mmi.desc
 	icon = stored_mmi.icon
-
-	stored_mmi.icon_state = "mmi-full"
 	icon_state = stored_mmi.icon_state
 
 	if(owner && owner.stat == DEAD)
@@ -369,9 +359,9 @@
 		. = stored_mmi
 		stored_mmi.forceMove(src.loc)
 		if(persistantMind)
-			persistantMind.transfer_to(stored_mmi.brainmob)
+			persistantMind.transfer_to(stored_mmi.holding_brain.brainmob)
 		else
 			var/response = input(find_dead_player(ownerckey, 1), "Your [initial(stored_mmi.name)] has been removed from your body. Do you wish to return to life?", "Robotic Rebirth") as anything in list("Yes", "No")
 			if(response == "Yes")
-				persistantMind.transfer_to(stored_mmi.brainmob)
+				persistantMind.transfer_to(stored_mmi.holding_brain.brainmob)
 	qdel(src)
