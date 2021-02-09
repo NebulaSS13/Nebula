@@ -94,8 +94,8 @@
 /obj/structure/girder/attackby(var/obj/item/W, var/mob/user)
 	// Other methods of quickly destroying a girder.
 	if(W.is_special_cutting_tool(TRUE))
-		if(istype(W, /obj/item/gun/energy/plasmacutter))
-			var/obj/item/gun/energy/plasmacutter/cutter = W
+		if(istype(W, /obj/item/gun/plasmacutter))
+			var/obj/item/gun/plasmacutter/cutter = W
 			if(!cutter.slice(user))
 				return
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)

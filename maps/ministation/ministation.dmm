@@ -2432,9 +2432,9 @@
 /turf/simulated/floor/plating,
 /area/ministation/security)
 "fX" = (
-/obj/item/gun/energy/taser,
+/obj/item/gun/electrolaser,
 /obj/structure/closet/secure_closet/guncabinet,
-/obj/item/gun/energy/taser,
+/obj/item/gun/electrolaser,
 /obj/item/gun/shotgun/pump,
 /obj/item/gun/shotgun/pump,
 /turf/simulated/floor/plating,
@@ -10347,7 +10347,7 @@
 /area/ministation/medical)
 "yJ" = (
 /obj/structure/table/standard,
-/obj/item/gun/launcher/syringe,
+/obj/item/gun/syringe,
 /obj/item/flashlight/pen,
 /obj/item/flashlight/pen,
 /obj/item/clothing/suit/straight_jacket,

@@ -1,28 +1,19 @@
-
-/obj/item/gun/energy/lasertag
+/obj/item/gun/lasertag
 	name = "laser tag gun"
 	icon = 'icons/obj/guns/laser_carbine.dmi'
 	icon_state = ICON_STATE_WORLD
 	desc = "Standard issue weapon of the Imperial Guard."
 	origin_tech = "{'combat':1,'magnets':2}"
-	self_recharge = 1
 	material = /decl/material/solid/metal/steel
-	projectile_type = /obj/item/projectile/beam/lastertag/blue
-	var/required_vest
+	barrel = /obj/item/firearm_component/barrel/energy/lasertag
+	receiver = /obj/item/firearm_component/receiver/energy/lasertag
 
-/obj/item/gun/energy/lasertag/special_check(var/mob/living/carbon/human/M)
-	if(ishuman(M))
-		if(!istype(M.wear_suit, required_vest))
-			to_chat(M, "<span class='warning'>You need to be wearing your laser tag vest!</span>")
-			return 0
-	return ..()
-
-/obj/item/gun/energy/lasertag/blue
+/obj/item/gun/lasertag/blue
 	color = COLOR_SKY_BLUE
-	projectile_type = /obj/item/projectile/beam/lastertag/blue
-	required_vest = /obj/item/clothing/suit/bluetag
+	barrel = /obj/item/firearm_component/barrel/energy/lasertag/blue
+	receiver = /obj/item/firearm_component/receiver/energy/lasertag/blue
 
-/obj/item/gun/energy/lasertag/red
+/obj/item/gun/lasertag/red
 	color = COLOR_RED
-	projectile_type = /obj/item/projectile/beam/lastertag/red
-	required_vest = /obj/item/clothing/suit/redtag
+	barrel = /obj/item/firearm_component/barrel/energy/lasertag/red
+	receiver = /obj/item/firearm_component/receiver/energy/lasertag/red

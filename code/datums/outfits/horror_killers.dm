@@ -56,7 +56,7 @@
 		qdel(briefcase_item)
 	for(var/i=3, i>0, i--)
 		new /obj/item/cash/c1000(sec_briefcase)
-	new /obj/item/gun/energy/crossbow(sec_briefcase)
+	new /obj/item/gun/ecrossbow(sec_briefcase)
 	new /obj/item/gun/revolver(sec_briefcase)
 	new /obj/item/ammo_magazine/speedloader(sec_briefcase)
 	new /obj/item/plastique(sec_briefcase)

@@ -459,11 +459,11 @@
 	name = "mounted plasma cutter"
 	desc = "An industrial plasma cutter mounted onto the chassis of the mech. "
 	icon_state = "railauto" //TODO: Make a new sprite that doesn't get sec called on you.
-	holding_type = /obj/item/gun/energy/plasmacutter/mounted/mech
+	holding_type = /obj/item/gun/plasmacutter/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	origin_tech = "{'materials':4,'exoticmatter':4,'engineering':6,'combat':3}"
 	material = /decl/material/solid/metal/steel
 
-/obj/item/gun/energy/plasmacutter/mounted/mech
+/obj/item/gun/plasmacutter/mounted/mech
 	receiver = /obj/item/firearm_component/receiver/energy/plasmacutter/mech

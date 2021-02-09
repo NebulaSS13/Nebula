@@ -1,4 +1,6 @@
 /obj/item/firearm_component/receiver/energy/advanced
+	self_recharge = 1
+	one_hand_penalty = 1 //bulkier than an e-gun, but not quite the size of a carbine
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam),
@@ -7,14 +9,14 @@
 
 /*
 //override for failcheck behaviour
-/obj/item/gun/energy/gun/nuclear/Process()
+/obj/item/gun/egun/advanced/Process()
 	if(fail_counter > 0)
 		SSradiation.radiate(src, (fail_counter * 2))
 		fail_counter--
 
 	return ..()
 
-/obj/item/gun/energy/gun/nuclear/emp_act(severity)
+/obj/item/gun/egun/advanced/emp_act(severity)
 	..()
 	switch(severity)
 		if(1)
@@ -25,7 +27,7 @@
 			if(ismob(loc))
 				to_chat(loc, "<span class='warning'>\The [src] feels pleasantly warm.</span>")
 
-/obj/item/gun/energy/gun/nuclear/proc/get_charge_color()
+/obj/item/gun/egun/advanced/proc/get_charge_color()
 	switch(get_charge_ratio())
 		if(25)
 			return COLOR_RED
@@ -36,7 +38,7 @@
 		if(100)
 			return COLOR_LIME
 
-/obj/item/gun/energy/gun/nuclear/on_update_icon()
+/obj/item/gun/egun/advanced/on_update_icon()
 	indicator_color = get_charge_color()
 	. = ..()
 	var/list/new_overlays = list()
@@ -48,7 +50,7 @@
 
 	overlays += new_overlays
 
-/obj/item/gun/energy/gun/nuclear/add_onmob_charge_meter(image/I)
+/obj/item/gun/egun/advanced/add_onmob_charge_meter(image/I)
 	I.overlays += mutable_appearance(icon, "[I.icon_state]_charge", get_charge_color())
 	return I
 */

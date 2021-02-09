@@ -68,8 +68,8 @@
 		if(WT.remove_fuel(0, user))
 			deconstruct(user)
 		return
-	if(istype(C, /obj/item/gun/energy/plasmacutter))
-		var/obj/item/gun/energy/plasmacutter/cutter = C
+	if(istype(C, /obj/item/gun/plasmacutter))
+		var/obj/item/gun/plasmacutter/cutter = C
 		if(!cutter.slice(user))
 			return
 		deconstruct(user)

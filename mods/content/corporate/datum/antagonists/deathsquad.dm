@@ -30,7 +30,7 @@
 	mask =     /obj/item/clothing/mask/gas/swat
 	belt =     /obj/item/gun/revolver
 	hands = list(
-		/obj/item/gun/energy/laser,
+		/obj/item/gun/laser,
 		/obj/item/energy_blade/sword
 	)
 

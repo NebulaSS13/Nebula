@@ -242,8 +242,8 @@
 			if(WT.remove_fuel(0,user))
 				slice_into_parts(WT, user)
 				return
-		if(istype(W, /obj/item/gun/energy/plasmacutter))
-			var/obj/item/gun/energy/plasmacutter/cutter = W
+		if(istype(W, /obj/item/gun/plasmacutter))
+			var/obj/item/gun/plasmacutter/cutter = W
 			if(!cutter.slice(user))
 				return
 			slice_into_parts(W, user)

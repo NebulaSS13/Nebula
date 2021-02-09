@@ -12,8 +12,6 @@
 	slot_flags = SLOT_BACK
 	origin_tech = "{'combat':4,'materials':2}"
 	receiver = /obj/item/firearm_component/receiver/ballistic/pump
-	one_hand_penalty = 8
-	bulk = 6
 
 /obj/item/gun/shotgun/doublebarrel
 	name = "double-barreled shotgun"

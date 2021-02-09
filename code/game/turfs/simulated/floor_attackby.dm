@@ -151,8 +151,8 @@
 							visible_message("<span class='warning'>[user] has melted the plating's reinforcements! It should be possible to pry it off.</span>")
 							playsound(src, 'sound/items/Welder.ogg', 80, 1)
 				return
-		else if(istype(C, /obj/item/gun/energy/plasmacutter) && (is_plating()) && !broken && !burnt)
-			var/obj/item/gun/energy/plasmacutter/cutter = C
+		else if(istype(C, /obj/item/gun/plasmacutter) && (is_plating()) && !broken && !burnt)
+			var/obj/item/gun/plasmacutter/cutter = C
 			if(!cutter.slice(user))
 				return ..()
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)

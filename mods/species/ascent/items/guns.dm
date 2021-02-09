@@ -1,4 +1,4 @@
-/obj/item/gun/energy/particle
+/obj/item/gun/particle
 	name = "particle lance"
 	desc = "A long, thick-bodied energy rifle of some kind, clad in a curious indigo polymer and lit from within by Cherenkov radiation. The grip is clearly not designed for human hands."
 	icon = 'mods/species/ascent/icons/particle_rifle/rifle.dmi'
@@ -26,7 +26,7 @@
 		BODYTYPE_SNAKE =        'mods/species/ascent/icons/particle_rifle/inhands_serpentid.dmi'
 		)
 
-/obj/item/gun/energy/particle/small
+/obj/item/gun/particle/small
 	name = "particle projector"
 	desc = "A smaller variant on the Ascent particle lance, usually carried by drones and alates."
 	icon = 'mods/species/ascent/icons/particle_rifle/rifle_small.dmi'
@@ -44,7 +44,7 @@
 		)
 
 
-/obj/item/gun/energy/particle/on_update_icon()
+/obj/item/gun/particle/on_update_icon()
 	. = ..()
 	var/datum/firemode/current_mode = firemodes[sel_mode]
 	overlays = list(
@@ -52,25 +52,25 @@
 		image(icon, "[get_world_inventory_state()]-charge-[istype(power_supply) ? Floor(power_supply.percent()/20) : 0]")
 	)
 
-/obj/item/gun/magnetic/railgun/flechette/ascent
+/obj/item/gun/railgun/flechette/ascent
 	name = "mantid flechette rifle"
 	desc = "A viciously pronged rifle-like weapon."
 	has_safety = FALSE
 	one_hand_penalty = 6
 	var/charge_per_shot = 10
 
-/obj/item/gun/magnetic/railgun/flechette/ascent/get_cell()
+/obj/item/gun/railgun/flechette/ascent/get_cell()
 	if(isrobot(loc) || istype(loc, /obj/item/rig_module))
 		return loc.get_cell()
 
-/obj/item/gun/magnetic/railgun/flechette/ascent/show_ammo(var/mob/user)
+/obj/item/gun/railgun/flechette/ascent/show_ammo(var/mob/user)
 	var/obj/item/cell/cell = get_cell()
 	to_chat(user, "<span class='notice'>There are [cell ? Floor(cell.charge/charge_per_shot) : 0] shot\s remaining.</span>")
 
-/obj/item/gun/magnetic/railgun/flechette/ascent/check_ammo()
+/obj/item/gun/railgun/flechette/ascent/check_ammo()
 	var/obj/item/cell/cell = get_cell()
 	return cell && cell.charge >= charge_per_shot
 
-/obj/item/gun/magnetic/railgun/flechette/ascent/use_ammo()
+/obj/item/gun/railgun/flechette/ascent/use_ammo()
 	var/obj/item/cell/cell = get_cell()
 	if(cell) cell.use(charge_per_shot)

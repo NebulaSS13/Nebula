@@ -14,7 +14,7 @@
 	name = "Small Energy Gun"
 	desc = "A pocket-sized energy based sidearm with three different lethality settings."
 	item_cost = 16
-	path = /obj/item/gun/energy/gun/small
+	path = /obj/item/gun/egun/small
 
 /datum/uplink_item/item/visible_weapons/dartgun
 	name = "Dart Gun"
@@ -27,7 +27,7 @@
 	name = "Energy Crossbow"
 	desc = "A self-recharging, almost silent weapon employed by stealth operatives."
 	item_cost = 24
-	path = /obj/item/gun/energy/crossbow
+	path = /obj/item/gun/ecrossbow
 
 /datum/uplink_item/item/visible_weapons/energy_sword
 	name = "Energy Sword"
@@ -46,14 +46,14 @@
 /datum/uplink_item/item/badassery/money_cannon
 	name = "Modified Money Cannon"
 	item_cost = 48
-	path = /obj/item/gun/launcher/money/hacked
+	path = /obj/item/gun/money/hacked
 	desc = "Too much money? Not enough screaming? Try the Money Cannon."
 
 /datum/uplink_item/item/visible_weapons/energy_gun
 	name = "Energy Gun"
 	desc = "A energy based sidearm with three different lethality settings."
 	item_cost = 32
-	path = /obj/item/gun/energy/gun
+	path = /obj/item/gun/egun
 
 /datum/uplink_item/item/visible_weapons/revolver
 	name = "Magnum Revolver"
@@ -66,7 +66,7 @@
 	desc = "A pump action grenade launcher loaded with a random assortment of grenades"
 	item_cost = 60
 	antag_roles = list(/decl/special_role/mercenary)
-	path = /obj/item/gun/launcher/grenade/loaded
+	path = /obj/item/gun/grenade/loaded
 
 //These are for traitors (or other antags, perhaps) to have the option of purchasing some merc gear.
 /datum/uplink_item/item/visible_weapons/smg
@@ -87,7 +87,7 @@
 	name = "Advanced Energy Gun"
 	desc = "A highly experimental heavy energy weapon, with three different lethality settings."
 	item_cost = 60
-	path = /obj/item/gun/energy/gun/nuclear
+	path = /obj/item/gun/egun/advanced
 
 /datum/uplink_item/item/visible_weapons/heavysniper
 	name = "Anti-materiel Sniper Rifle"
@@ -113,7 +113,7 @@
 	name = "Flechette Rifle"
 	desc = "A railgun with two togglable fire modes, able to launch flechette ammunition at incredible speeds."
 	item_cost = 60
-	path = /obj/item/gun/magnetic/railgun/flechette
+	path = /obj/item/gun/railgun/flechette
 	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/visible_weapons/railgun // Like a semi-auto AMR
@@ -122,7 +122,7 @@
 			capable of firing slugs at intense speeds."
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT % 6)) / 6
 	antag_roles = list(/decl/special_role/mercenary)
-	path = /obj/item/gun/magnetic/railgun
+	path = /obj/item/gun/railgun
 
 /datum/uplink_item/item/visible_weapons/harpoonbomb
 	name = "Explosive Harpoon"
@@ -134,4 +134,4 @@
 	desc = "A laser weapon developed at great expense and subsequently banned, it sets its targets on fire with dispersed laser technology. \
 			Most of these blasters were swiftly bought back and destroyed - but not this one."
 	item_cost = 40
-	path = /obj/item/gun/energy/incendiary_laser
+	path = /obj/item/gun/incendiary

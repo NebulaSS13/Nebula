@@ -40,4 +40,4 @@
 
 /decl/crafting_stage/welding/cannon_valve
 	progress_message = "You weld the valve into place."
-	product = /obj/item/gun/launcher/pneumatic
+	product = /obj/item/gun/pneumatic

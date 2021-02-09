@@ -1,3 +1,6 @@
+GLOBAL_LIST_INIT(registered_weapons, list())
+GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
+
 /obj/item/firearm_component/grip/secure
 	var/list/authorized_modes = list(ALWAYS_AUTHORIZED)
 	var/default_mode_authorization = UNAUTHORIZED
@@ -78,7 +81,7 @@
 	return TRUE
 
 /*
-/obj/item/gun/energy/gun/secure/mounted/Initialize()
+/obj/item/gun/egun/secure/mounted/Initialize()
 	var/mob/borg = get_holder_of_type(src, /mob/living/silicon/robot)
 	if(!borg)
 		. = INITIALIZE_HINT_QDEL

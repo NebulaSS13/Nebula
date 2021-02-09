@@ -14,6 +14,8 @@
 		list(mode_name="short bursts",   burst=5, fire_delay=null, one_hand_penalty=5, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(1.6, 1.6, 2.0, 2.0, 2.4)),
 		list(mode_name="full auto",      can_autofire=1, burst=1, fire_delay=1, one_hand_penalty=7, burst_accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(2.0, 2.0, 2.0, 2.0, 2.4))
 	)
+	one_hand_penalty = 3
+	bulk = -1
 
 /obj/item/firearm_component/receiver/ballistic/submachine_gun/get_holder_overlay(holder_state)
 	var/image/ret = ..()

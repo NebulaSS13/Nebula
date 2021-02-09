@@ -177,8 +177,8 @@
 			cut_delay *= 1.2
 
 		else if(W.is_special_cutting_tool())
-			if(istype(W, /obj/item/gun/energy/plasmacutter))
-				var/obj/item/gun/energy/plasmacutter/cutter = W
+			if(istype(W, /obj/item/gun/plasmacutter))
+				var/obj/item/gun/plasmacutter/cutter = W
 				if(!cutter.slice(user))
 					return TRUE
 			dismantle_sound = "sparks"
@@ -260,8 +260,8 @@
 					else
 						return
 				else if (W.is_special_cutting_tool())
-					if(istype(W, /obj/item/gun/energy/plasmacutter))
-						var/obj/item/gun/energy/plasmacutter/cutter = W
+					if(istype(W, /obj/item/gun/plasmacutter))
+						var/obj/item/gun/plasmacutter/cutter = W
 						if(!cutter.slice(user))
 							return
 					cut_cover = 1
@@ -306,8 +306,8 @@
 					else
 						return
 				else if(W.is_special_cutting_tool())
-					if(istype(W, /obj/item/gun/energy/plasmacutter))
-						var/obj/item/gun/energy/plasmacutter/cutter = W
+					if(istype(W, /obj/item/gun/plasmacutter))
+						var/obj/item/gun/plasmacutter/cutter = W
 						if(!cutter.slice(user))
 							return
 					cut_cover = 1

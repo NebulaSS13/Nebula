@@ -24,9 +24,9 @@
 
 	var/list/spawn_guns = list(
 		/obj/item/gun/revolver/lasvolver,
-		/obj/item/gun/energy/gun,
-		/obj/item/gun/energy/crossbow,
-		/obj/item/gun/energy/pulse_pistol,
+		/obj/item/gun/egun,
+		/obj/item/gun/ecrossbow,
+		/obj/item/gun/pulse_pistol,
 		/obj/item/gun/automatic/smg,
 		/obj/item/gun/pistol/holdout,
 		/obj/item/gun/revolver,

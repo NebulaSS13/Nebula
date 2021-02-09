@@ -32,3 +32,9 @@
 		if(F.settings["projectile_type"])
 			projectile_value = max(projectile_value, atom_info_repository.get_combined_worth_for(F.settings["projectile_type"]))
 	. += max_shots * projectile_value
+
+/obj/item/gun/energy/get_hardpoint_status_value()
+	var/obj/item/cell/C = get_cell()
+	if(istype(C))
+		return C.charge/C.maxcharge
+	return null

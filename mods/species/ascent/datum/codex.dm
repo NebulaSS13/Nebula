@@ -6,8 +6,8 @@
 		/obj/item/multitool/mantid,
 		/obj/item/weldingtool/electric/mantid,
 		/obj/item/cell/mantid,
-		/obj/item/gun/energy/particle,
-		/obj/item/gun/energy/particle/small
+		/obj/item/gun/particle,
+		/obj/item/gun/particle/small
 	)
 	lore_text = "The Ascent is a hostile alien culture located rimward of the settled territories.\
 	Little is known about them, and diplomatic channels do not currently exist outside of informal \

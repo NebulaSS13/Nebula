@@ -113,14 +113,13 @@
 			to_chat(user, "<span class='warning'>\The [src] appears to be out of power!</span>")
 		new /obj/effect/temporary(get_turf(user),3, 'icons/effects/effects.dmi', "fire_goon")
 
-/obj/item/gun/energy/staff/beacon
+/obj/item/gun/staff/beacon
 	name = "holy beacon"
 	desc = "Look closely into its crystal; there's a miniature sun. Or maybe that's just some fancy LEDs. Either way, it looks thoroughly mystical."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "starstaff"
-	self_recharge = 0
-	max_shots = 10
-	projectile_type = /obj/item/projectile/energy/flash
+	receiver = /obj/item/firearm_component/receiver/energy/staff/beacon
+	barrel = /obj/item/firearm_component/barrel/energy/staff/beacon
 	required_antag_type = /decl/special_role/godcultist
 
 /obj/item/sword/blazing

@@ -1,4 +1,4 @@
-/obj/item/gun/launcher/sealant
+/obj/item/gun/sealant
 	name = "sealant gun"
 	desc = "A heavy, unwieldly device used to spray metal foam sealant onto hull breaches or damaged flooring."
 	icon =         'icons/obj/guns/sealant_gun.dmi'
@@ -8,43 +8,41 @@
 	w_class =       ITEM_SIZE_NO_CONTAINER
 	slot_flags =    SLOT_BACK
 	fire_sound =    'sound/effects/refill.ogg'
-	screen_shake =  FALSE
-	release_force = 5
 	fire_delay =    1
 	receiver = /obj/item/firearm_component/receiver/launcher/sealantgun
 	var/foam_charges_per_shot = 1
 	var/obj/item/sealant_tank/loaded_tank
 
-/obj/item/gun/launcher/sealant/on_update_icon()
+/obj/item/gun/sealant/on_update_icon()
 	update_world_inventory_state()
 	cut_overlays()
 	if(loaded_tank)
 		add_overlay("[icon_state]-tank")
 
-/obj/item/gun/launcher/sealant/apply_overlays(mob/user_mob, bodytype, image/overlay, slot)
+/obj/item/gun/sealant/apply_overlays(mob/user_mob, bodytype, image/overlay, slot)
 	. = ..()
 	if(loaded_tank)
 		overlay.overlays += image(icon, "[overlay.icon_state]-tank")
 
-/obj/item/gun/launcher/sealant/mapped
+/obj/item/gun/sealant/mapped
 	loaded_tank = /obj/item/sealant_tank/mapped
 
-/obj/item/gun/launcher/sealant/consume_next_projectile(mob/user)
+/obj/item/gun/sealant/consume_next_projectile(mob/user)
 	if(loaded_tank?.foam_charges >= foam_charges_per_shot)
 		loaded_tank.foam_charges -= foam_charges_per_shot
 		. = new /obj/item/clothing/sealant(src)
 
-/obj/item/gun/launcher/sealant/Initialize()
+/obj/item/gun/sealant/Initialize()
 	. = ..()
 	if(ispath(loaded_tank))
 		loaded_tank = new loaded_tank(src)	
 	update_icon()
 
-/obj/item/gun/launcher/sealant/Destroy()
+/obj/item/gun/sealant/Destroy()
 	QDEL_NULL(loaded_tank)
 	. = ..()
 
-/obj/item/gun/launcher/sealant/examine(mob/user, distance)
+/obj/item/gun/sealant/examine(mob/user, distance)
 	. = ..()
 	if(loc == user)
 		if(loaded_tank)
@@ -52,7 +50,7 @@
 		else
 			to_chat(user, SPAN_WARNING("\The [src] has no sealant loaded."))
 
-/obj/item/gun/launcher/sealant/proc/unload_tank(var/mob/user)
+/obj/item/gun/sealant/proc/unload_tank(var/mob/user)
 	if(!loaded_tank)
 		to_chat(user, SPAN_WARNING("\The [src] has no tank loaded."))
 		return

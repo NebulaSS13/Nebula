@@ -23,13 +23,15 @@
 
 /obj/item/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
-	for(var/obj/item/gun/energy/T in equipment)
-		if(T && T.power_supply)
-			if(T.power_supply.charge < T.power_supply.maxcharge)
-				T.power_supply.give(T.charge_cost * amount)
-				T.update_icon()
+	for(var/obj/item/gun/T in equipment)
+		var/obj/item/firearm_component/receiver/energy/rec = T.receiver
+		var/obj/item/firearm_component/barrel/energy/bar = T.barrel
+		if(istype(rec) && istype(bar) && rec.power_supply)
+			if(rec.power_supply.charge < rec.power_supply.maxcharge)
+				rec.power_supply.give(bar.charge_cost * amount)
+				rec.update_icon()
 			else
-				T.charge_tick = 0
+				rec.charge_tick = 0
 	var/obj/item/baton/robot/B = locate() in equipment
 	if(B && B.bcell)
 		B.bcell.give(amount)
@@ -51,14 +53,14 @@
 		/obj/item/borg/sight/hud/sec,
 		/obj/item/handcuffs/cyborg,
 		/obj/item/baton/robot,
-		/obj/item/gun/energy/gun/secure/mounted,
+		/obj/item/gun/egun/secure/mounted,
 		/obj/item/taperoll/police,
 		/obj/item/megaphone,
 		/obj/item/holowarrant,
 		/obj/item/crowbar,
 		/obj/item/hailer
 	)
-	emag = /obj/item/gun/energy/laser/mounted
+	emag = /obj/item/gun/laser/mounted
 
 /obj/item/robot_module/security/combat
 	name = "combat robot module"
@@ -71,10 +73,10 @@
 	equipment = list(
 		/obj/item/flash,
 		/obj/item/borg/sight/thermal,
-		/obj/item/gun/energy/laser/mounted,
-		/obj/item/gun/energy/plasmacutter,
+		/obj/item/gun/laser/mounted,
+		/obj/item/gun/plasmacutter,
 		/obj/item/borg/combat/shield,
 		/obj/item/borg/combat/mobility,
 		/obj/item/crowbar
 	)
-	emag = /obj/item/gun/energy/lasercannon/mounted
+	emag = /obj/item/gun/lasercannon/mounted

@@ -1,4 +1,4 @@
-/obj/item/gun/launcher/rocket
+/obj/item/gun/rocket
 	name = "rocket launcher"
 	desc = "MAGGOT."
 	icon = 'icons/obj/guns/launcher/rocket.dmi'
@@ -11,27 +11,5 @@
 	slot_flags = 0
 	origin_tech = "{'combat':8,'materials':5}"
 	fire_sound = 'sound/effects/bang.ogg'
-	combustion = 1
-
-	release_force = 15
-	throw_distance = 30
-	var/max_rockets = 1
-	var/list/rockets = new/list()
-
-/obj/item/gun/launcher/rocket/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 2)
-		to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>")
-
-/obj/item/gun/launcher/rocket/consume_next_projectile()
-	if(rockets.len)
-		var/obj/item/ammo_casing/rocket/I = rockets[1]
-		var/obj/item/missile/M = new (src)
-		M.primed = 1
-		rockets -= I
-		return M
-	return null
-
-/obj/item/gun/launcher/rocket/handle_post_fire(mob/user, atom/target)
-	log_and_message_admins("fired a rocket from a rocket launcher ([src.name]) at [target].")
-	..()
+	barrel = /obj/item/firearm_component/barrel/launcher/rocket
+	receiver = /obj/item/firearm_component/receiver/launcher/rocket

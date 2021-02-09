@@ -84,7 +84,11 @@
 
 /obj/item/clothing/suit/bomb_suit/security
 	icon = 'icons/clothing/suit/bombsuit_olive.dmi'
-	allowed = list(/obj/item/gun/energy,/obj/item/baton,/obj/item/handcuffs)
+	allowed = list(
+		/obj/item/gun,
+		/obj/item/baton,
+		/obj/item/handcuffs
+	)
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 
 /*

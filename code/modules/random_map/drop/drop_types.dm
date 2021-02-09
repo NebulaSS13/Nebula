@@ -34,10 +34,10 @@ var/global/list/datum/supply_drop_loot/supply_drop
 /datum/supply_drop_loot/lasers/New()
 	..()
 	contents = list(
-		/obj/item/gun/energy/laser,
-		/obj/item/gun/energy/laser,
-		/obj/item/gun/energy/sniperrifle,
-		/obj/item/gun/energy/ionrifle)
+		/obj/item/gun/laser,
+		/obj/item/gun/laser,
+		/obj/item/gun/esniper,
+		/obj/item/gun/ionrifle)
 
 /datum/supply_drop_loot/ballistics
 	name = "Ballistics"

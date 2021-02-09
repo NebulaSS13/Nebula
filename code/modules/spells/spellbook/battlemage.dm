@@ -22,7 +22,7 @@
 				/spell/radiant_aura =								1,
 				/spell/noclothes = 									1,
 				/obj/structure/closet/wizard/armor = 				1,
-				/obj/item/gun/energy/staff/focus = 			1,
+				/obj/item/gun/staff/focus = 			1,
 				/obj/item/dice/d20/cursed = 					1,
 				/obj/item/summoning_stone = 					2,
 				/obj/item/magic_rock = 						1,

@@ -5,5 +5,3 @@
 	fire_sound_text = "pop"
 	barrel = /obj/item/firearm_component/barrel/ballistic/lasbulb
 	receiver = /obj/item/firearm_component/receiver/ballistic/lasbulb
-	one_hand_penalty = 0
-	screen_shake = 0

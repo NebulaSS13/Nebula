@@ -26,7 +26,7 @@
 	var/locked = 1			//if the turret's behaviour control access is locked
 	var/controllock = 0		//if the turret responds to control panels
 
-	var/installation = /obj/item/gun/energy/gun		//the type of weapon installed
+	var/installation = /obj/item/gun/egun		//the type of weapon installed
 	var/gun_charge = 0		//the charge of the gun inserted
 	var/projectile = null	//holder for bullettype
 	var/eprojectile = null	//holder for the shot when emagged
@@ -73,7 +73,7 @@
 /obj/machinery/porta_turret/stationary
 	ailock = 1
 	lethal = 1
-	installation = /obj/item/gun/energy/laser
+	installation = /obj/item/gun/laser
 
 /obj/machinery/porta_turret/malf_upgrade(var/mob/living/silicon/ai/user)
 	..()
@@ -94,11 +94,7 @@
 	. = ..()
 
 /obj/machinery/porta_turret/proc/setup()
-	var/obj/item/gun/energy/E = installation	//All energy-based weapons are applicable
-	//var/obj/item/ammo_casing/shottype = E.projectile_type
-
-	projectile = initial(E.projectile_type)
-	eprojectile = projectile
+	var/obj/item/gun/E = installation
 	shot_sound = initial(E.fire_sound)
 	eshot_sound = shot_sound
 
@@ -106,26 +102,26 @@
 
 /obj/machinery/porta_turret/proc/weapon_setup(var/guntype)
 	switch(guntype)
-		if(/obj/item/gun/energy/laser/practice)
+		if(/obj/item/gun/laser/practice)
 			iconholder = 1
 			eprojectile = /obj/item/projectile/beam
 
-		if(/obj/item/gun/energy/captain)
+		if(/obj/item/gun/antique)
 			iconholder = 1
 
-		if(/obj/item/gun/energy/lasercannon)
+		if(/obj/item/gun/lasercannon)
 			iconholder = 1
 
-		if(/obj/item/gun/energy/taser)
+		if(/obj/item/gun/electrolaser)
 			eprojectile = /obj/item/projectile/beam
 			eshot_sound = 'sound/weapons/Laser.ogg'
 
-		if(/obj/item/gun/energy/gun)
+		if(/obj/item/gun/egun)
 			eprojectile = /obj/item/projectile/beam	//If it has, going to kill mode
 			eshot_sound = 'sound/weapons/Laser.ogg'
 			egun = 1
 
-		if(/obj/item/gun/energy/gun/nuclear)
+		if(/obj/item/gun/egun/advanced)
 			eprojectile = /obj/item/projectile/beam	//If it has, going to kill mode
 			eshot_sound = 'sound/weapons/Laser.ogg'
 			egun = 1
@@ -259,8 +255,12 @@ var/global/list/turret_icons
 				if(prob(70))
 					to_chat(user, "<span class='notice'>You remove the turret and salvage some components.</span>")
 					if(installation)
-						var/obj/item/gun/energy/Gun = new installation(loc)
-						Gun.power_supply.charge = gun_charge
+						var/obj/item/gun/Gun = new installation(loc)
+						projectile = Gun.get_projectile_type()
+						eprojectile = projectile
+						var/obj/item/firearm_component/receiver/energy/rec = Gun.receiver
+						if(istype(rec) && rec.power_supply) 
+							rec.power_supply.charge = gun_charge
 						Gun.update_icon()
 					if(prob(50))
 						new /obj/item/stack/material/steel(loc, rand(1,4))
@@ -705,16 +705,20 @@ var/global/list/turret_icons
 
 
 		if(3)
-			if(istype(I, /obj/item/gun/energy)) //the gun installation part
+			if(istype(I, /obj/item/gun)) //the gun installation part
 
 				if(isrobot(user))
 					return
-				var/obj/item/gun/energy/E = I //typecasts the item to an energy gun
+				var/obj/item/gun/E = I //typecasts the item to an energy gun
+				var/obj/item/firearm_component/receiver/energy/rec = E.receiver
+				if(!istype(rec))
+					to_chat(user, SPAN_WARNING("\The [E] is not compatible with \the [src]."))
 				if(!user.unEquip(I))
 					to_chat(user, "<span class='notice'>\the [I] is stuck to your hand, you cannot put it in \the [src]</span>")
 					return
 				installation = I.type //installation becomes I.type
-				gun_charge = E.power_supply.charge //the gun's charge is stored in gun_charge
+				if(rec.power_supply)
+					gun_charge = rec.power_supply.charge //the gun's charge is stored in gun_charge
 				to_chat(user, "<span class='notice'>You add [I] to the turret.</span>")
 				target_type = /obj/machinery/porta_turret
 
@@ -816,8 +820,10 @@ var/global/list/turret_icons
 				return
 			build_step = 3
 
-			var/obj/item/gun/energy/Gun = new installation(loc)
-			Gun.power_supply.charge = gun_charge
+			var/obj/item/gun/Gun = new installation(loc)
+			var/obj/item/firearm_component/receiver/energy/rec = Gun.receiver
+			if(istype(rec) && rec.power_supply) 
+				rec.power_supply.charge = gun_charge
 			Gun.update_icon()
 			installation = null
 			gun_charge = 0

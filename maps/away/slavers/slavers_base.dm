@@ -147,7 +147,7 @@
 	can_escape = TRUE
 	unsuitable_atmos_damage = 15
 	var/corpse = /obj/effect/landmark/corpse/abolitionist
-	var/weapon = /obj/item/gun/energy/laser
+	var/weapon = /obj/item/gun/laser
 	projectilesound = 'sound/weapons/laser.ogg'
 	ranged = 1
 	projectiletype = /obj/item/projectile/beam

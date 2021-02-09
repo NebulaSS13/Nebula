@@ -9,8 +9,6 @@
 	origin_tech = "{'combat':5,'materials':2}"
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	accuracy_power = 7
-	one_hand_penalty = 3
-	bulk = -1
 	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -31,8 +29,6 @@
 	slot_flags = SLOT_BACK
 	accuracy = 2
 	accuracy_power = 7
-	one_hand_penalty = 8
-	bulk = GUN_BULK_RIFLE
 	burst_delay = 1
 	material = /decl/material/solid/metal/steel
 	matter = list(

@@ -6119,7 +6119,7 @@
 	},
 /obj/item/handcuffs,
 /obj/item/telebaton,
-/obj/item/gun/energy/taser,
+/obj/item/gun/electrolaser,
 /obj/structure/closet/secure_closet{
 	req_access = list("ACCESS_HEAD_OF_PERSONNEL")
 	},

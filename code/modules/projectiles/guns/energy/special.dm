@@ -1,4 +1,4 @@
-/obj/item/gun/energy/ionrifle
+/obj/item/gun/ionrifle
 	name = "ion gun"
 	desc = "The Mk60 EW Halicon is a man portable anti-armor weapon designed to disable mechanical threats. Not the best of its type."
 	icon = 'icons/obj/guns/ion_rifle.dmi'
@@ -8,29 +8,25 @@
 	force = 10
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
-	one_hand_penalty = 4
-	charge_cost = 30
-	max_shots = 8
 	fire_delay = 30
-	projectile_type = /obj/item/projectile/ion
-	combustion = 0
+	barrel = /obj/item/firearm_component/barrel/energy/ionrifle
+	receiver = /obj/item/firearm_component/receiver/energy/ionrifle
 
-/obj/item/gun/energy/ionrifle/emp_act(severity)
+/obj/item/gun/ionrifle/emp_act(severity)
 	..(max(severity, 2)) //so it doesn't EMP itself, I guess
 
-/obj/item/gun/energy/decloner
+/obj/item/gun/decloner
 	name = "biological demolecularisor"
 	desc = "A gun that discharges high amounts of controlled radiation to slowly break a target into component elements."
 	icon = 'icons/obj/guns/decloner.dmi'
 	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':5,'materials':4,'powerstorage':3}"
-	max_shots = 10
-	projectile_type = /obj/item/projectile/energy/declone
-	combustion = 0
+	barrel = /obj/item/firearm_component/barrel/energy/decloner
+	receiver = /obj/item/firearm_component/receiver/energy/decloner
 	material = /decl/material/solid/metal/gold
 	matter = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_REINFORCEMENT)
 
-/obj/item/gun/energy/floragun
+/obj/item/gun/floragun
 	name = "floral somatoray"
 	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."
 	icon = 'icons/obj/guns/floral.dmi'
@@ -44,24 +40,23 @@
 	barrel =   /obj/item/firearm_component/barrel/energy/floral
 	receiver = /obj/item/firearm_component/receiver/energy/floral
 
-/obj/item/gun/energy/toxgun
+/obj/item/gun/radpistol
 	name = "radpistol"
 	desc = "A specialized firearm designed to fire lethal bursts of radiation."
 	icon = 'icons/obj/guns/toxgun.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'combat':5,'exoticmatter':4}"
-	projectile_type = /obj/item/projectile/energy/radiation
+	barrel = /obj/item/firearm_component/barrel/energy/radpistol
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
-	)
+	) 
 
-/obj/item/gun/energy/plasmacutter
+/obj/item/gun/plasmacutter
 	name = "plasma cutter"
 	desc = "A mining tool capable of expelling concentrated plasma bursts. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
-	charge_meter = 0
 	icon = 'icons/obj/guns/plasmacutter.dmi'
 	icon_state = ICON_STATE_WORLD
 	fire_sound = 'sound/weapons/plasma_cutter.ogg'
@@ -79,17 +74,18 @@
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
 
-/obj/item/gun/energy/plasmacutter/get_heat()
+/obj/item/gun/plasmacutter/get_heat()
 	. = max(..(), 3800)
 
-/obj/item/gun/energy/plasmacutter/mounted
+/obj/item/gun/plasmacutter/mounted
 	name = "mounted plasma cutter"
-	use_external_power = 1
-	max_shots = 4
+	barrel =   /obj/item/firearm_component/barrel/energy/plasmacutter/mounted
 	receiver = /obj/item/firearm_component/receiver/energy/plasmacutter/mounted
 
-/obj/item/gun/energy/plasmacutter/proc/slice(var/mob/M = null)
-	if(!receiver?.safety() && power_supply.checked_use(charge_cost)) //consumes a shot per use
+/obj/item/gun/plasmacutter/proc/slice(var/mob/M = null)
+	var/obj/item/firearm_component/receiver/energy/rec = receiver
+	var/obj/item/firearm_component/barrel/energy/bar = barrel
+	if(istype(rec) && istype(bar) && rec.safety() && rec.power_supply?.checked_use(bar.charge_cost)) //consumes a shot per use
 		if(M)
 			M.welding_eyecheck()//Welding tool eye check
 			if(check_accidents(M, "[M] loses grip on [src] from its sudden recoil!",SKILL_CONSTRUCTION, 60, SKILL_ADEPT))
@@ -99,10 +95,10 @@
 	handle_click_empty()
 	return 0
 
-/obj/item/gun/energy/plasmacutter/is_special_cutting_tool()
+/obj/item/gun/plasmacutter/is_special_cutting_tool()
 	return TRUE
 
-/obj/item/gun/energy/incendiary_laser
+/obj/item/gun/incendiary
 	name = "dispersive blaster"
 	desc = "The A&M 'Shayatin' was the first of a now-banned class of dispersive laser weapons which, instead of firing a focused beam, scan over a target rapidly with the goal of setting it ablaze."
 	icon = 'icons/obj/guns/incendiary_laser.dmi'

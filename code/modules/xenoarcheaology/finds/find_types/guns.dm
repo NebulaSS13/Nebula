@@ -48,10 +48,10 @@
 	modification_flags = XENOFIND_APPLY_DECOR | XENOFIND_REPLACE_ICON
 	responsive_reagent = /decl/material/solid/metal/iron
 	possible_types = list(
-		/obj/item/gun/energy/laser/practice,
-		/obj/item/gun/energy/laser,
-		/obj/item/gun/energy/xray,
-		/obj/item/gun/energy/captain
+		/obj/item/gun/laser/practice,
+		/obj/item/gun/laser,
+		/obj/item/gun/xray,
+		/obj/item/gun/antique
 	)
 	var/egun_icons = list(
 		'icons/obj/guns/xenoarch/egun_1.dmi',
@@ -63,7 +63,8 @@
 	)
 
 /decl/archaeological_find/laser/spawn_item(atom/loc)
-	var/obj/item/gun/energy/new_gun = ..()
+	var/obj/item/gun/new_gun = ..()
+/*
 	new_gun.charge_meter = 0
 
 	//10% chance to have an unchargeable cell
@@ -74,7 +75,7 @@
 		new_gun.power_supply.charge = rand(0, new_gun.power_supply.maxcharge)
 	else
 		new_gun.power_supply.charge = 0
-
+*/
 	return new_gun
 
 /decl/archaeological_find/laser/new_icon()

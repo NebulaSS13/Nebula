@@ -23,11 +23,13 @@
 		/obj/item/boombox,
 		/obj/item/bikehorn/airhorn,
 		/obj/item/party_light,
-		/obj/item/gun/launcher/money
+		/obj/item/gun/money
 	)
 
 /obj/item/robot_module/uncertified/party/finalize_equipment()
 	. = ..()
-	var/obj/item/gun/launcher/money/MC = new (src)
-	MC.receptacle_value = 5000
-	MC.dispensing = 100
+	var/obj/item/gun/MC = new /obj/item/gun/money(src)
+	var/obj/item/firearm_component/receiver/launcher/money/rec = MC.receiver
+	if(istype(rec))
+		rec.receptacle_value = 5000
+		rec.dispensing = 100

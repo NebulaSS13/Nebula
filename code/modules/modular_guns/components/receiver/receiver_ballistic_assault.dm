@@ -14,6 +14,8 @@
 		list(mode_name="3-round bursts", burst=3,    fire_delay=null, use_launcher=null, one_hand_penalty=9,  burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0)),
 		list(mode_name="fire grenades",  burst=null, fire_delay=null, use_launcher=1,    one_hand_penalty=10, burst_accuracy=null,          dispersion=null)
 	)
+	one_hand_penalty = 8
+	bulk = GUN_BULK_RIFLE
 
 /obj/item/firearm_component/receiver/ballistic/assault_rifle/get_holder_overlay(holder_state)
 	var/image/ret = ..()
@@ -23,7 +25,7 @@
 
 /*
 	var/use_launcher = 0
-	var/obj/item/gun/launcher/grenade/underslung/launcher
+	var/obj/item/gun/grenade/underslung/launcher
 
 /obj/item/gun/automatic/assault_rifle/Initialize()
 	. = ..()

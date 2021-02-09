@@ -20,7 +20,7 @@
 	name = "Corporate Officer"
 	head = /obj/item/clothing/head/beret/corp/centcom/officer
 	l_ear = /obj/item/radio/headset/heads/captain
-	belt = /obj/item/gun/energy
+	belt = /obj/item/gun/egun
 	id_pda_assignment = "Corporate Officer"
 
 /decl/hierarchy/outfit/nanotrasen/captain
@@ -28,7 +28,7 @@
 	uniform = /obj/item/clothing/under/centcom_captain
 	l_ear = /obj/item/radio/headset/heads/captain
 	head = /obj/item/clothing/head/beret/corp/centcom/captain
-	belt = /obj/item/gun/energy
+	belt = /obj/item/gun/egun
 	id_pda_assignment = "Corporate Captain"
 
 /decl/hierarchy/outfit/nanotrasen/commander

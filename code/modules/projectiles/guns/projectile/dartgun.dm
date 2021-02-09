@@ -7,5 +7,3 @@
 	receiver = /obj/item/firearm_component/receiver/ballistic/dart
 	fire_sound = 'sound/weapons/empty.ogg'
 	fire_sound_text = "a metallic click"
-	screen_shake = 0
-	silenced = 1

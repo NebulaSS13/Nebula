@@ -9,8 +9,6 @@
 	fire_delay = 12 //Revolvers are naturally slower-firing
 	accuracy = 2
 	accuracy_power = 8
-	one_hand_penalty = 2
-	bulk = 3
 
 /obj/item/gun/revolver/capgun
 	name = "cap gun"

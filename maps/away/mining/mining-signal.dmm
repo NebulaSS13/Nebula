@@ -1712,7 +1712,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/item/gun/energy/taser,
+/obj/item/gun/electrolaser,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "fD" = (
@@ -2419,7 +2419,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "hv" = (
-/obj/item/gun/energy/plasmacutter,
+/obj/item/gun/plasmacutter,
 /obj/structure/cable/orange{
 	d1 = 4;
 	d2 = 8;

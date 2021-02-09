@@ -29,7 +29,7 @@
 	rapid = 1
 	projectiletype = /obj/item/projectile/beam
 	corpse = /obj/effect/landmark/corpse/pirate/ranged
-	weapon1 = /obj/item/gun/energy/laser
+	weapon1 = /obj/item/gun/laser
 
 
 /mob/living/simple_animal/hostile/pirate/death(gibbed, deathmessage, show_dead_message)

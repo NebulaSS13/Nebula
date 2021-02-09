@@ -100,10 +100,12 @@
 			recharging = FALSE
 			return TRUE
 		user.visible_message("\The [user] starts recharging \the [A] with \the [src].","<span class='notice'>You start recharging \the [A] with \the [src].</span>")
-		if (istype(A, /obj/item/gun/energy))
-			charge_length = 30
-			if (user.get_skill_value(SKILL_WEAPONS) <= SKILL_ADEPT)
-				charge_length += rand(10, 30)
+		if (istype(A, /obj/item/gun))
+			var/obj/item/gun/G = A
+			if(istype(A, /obj/item/firearm_component/receiver/energy))
+				charge_length = 30
+				if (user.get_skill_value(SKILL_WEAPONS) <= SKILL_ADEPT)
+					charge_length += rand(10, 30)
 		if (user.get_skill_value(SKILL_ELECTRICAL) < SKILL_ADEPT)
 			charge_length += rand(40, 60)
 		while(C.charge < C.maxcharge)

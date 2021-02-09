@@ -1,6 +1,8 @@
 
 /obj/item/firearm_component/barrel/ballistic/revolver
 	caliber = CALIBER_PISTOL_MAGNUM
+	one_hand_penalty = 2
+	bulk = 3
 
 /obj/item/firearm_component/barrel/ballistic/revolver/capgun
 	caliber = CALIBER_CAPS

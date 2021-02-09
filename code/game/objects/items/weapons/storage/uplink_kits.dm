@@ -56,7 +56,7 @@
 		/obj/item/clothing/head/chameleon,
 		/obj/item/clothing/mask/chameleon,
 		/obj/item/storage/box/syndie_kit/chameleon,
-		/obj/item/gun/energy/chameleon,
+		/obj/item/gun/chameleon,
 		)
 
 /obj/item/storage/box/syndie_kit/chameleon
@@ -106,7 +106,7 @@
 
 /obj/item/storage/box/syndie_kit/syringegun
 	startswith = list(
-		/obj/item/gun/launcher/syringe/disguised,
+		/obj/item/gun/syringe/disguised,
 		/obj/item/syringe_cartridge = 4,
 		/obj/item/chems/syringe = 4
 	)

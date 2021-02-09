@@ -87,7 +87,7 @@
 	contains = list(/obj/item/flash = 4,
 					/obj/item/chems/spray/pepper = 4,
 					/obj/item/baton/loaded = 4,
-					/obj/item/gun/energy/taser = 4)
+					/obj/item/gun/electrolaser = 4)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "weapons crate"
@@ -95,7 +95,7 @@
 
 /decl/hierarchy/supply_pack/security/egun
 	name = "Weapons - Energy sidearms"
-	contains = list(/obj/item/gun/energy/gun/secure = 4)
+	contains = list(/obj/item/gun/egun/secure = 4)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "energy sidearms crate"
@@ -104,14 +104,14 @@
 
 /decl/hierarchy/supply_pack/security/egun/shady
 	name = "Weapons - Energy sidearms (For disposal)"
-	contains = list(/obj/item/gun/energy/gun = 4)
+	contains = list(/obj/item/gun/egun = 4)
 	cost = 60
 	contraband = 1
 	security_level = null
 
 /decl/hierarchy/supply_pack/security/ion
 	name = "Weapons - Electromagnetic"
-	contains = list(/obj/item/gun/energy/ionrifle = 2,
+	contains = list(/obj/item/gun/ionrifle = 2,
 					/obj/item/storage/box/emps)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/weapon

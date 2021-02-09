@@ -212,10 +212,10 @@
 /area/map_template/rescue_base/base)
 "aG" = (
 /obj/structure/table/rack,
-/obj/item/gun/energy/gun/nuclear,
-/obj/item/gun/energy/gun/nuclear,
-/obj/item/gun/energy/gun/nuclear,
-/obj/item/gun/energy/gun/nuclear,
+/obj/item/gun/egun/advanced,
+/obj/item/gun/egun/advanced,
+/obj/item/gun/egun/advanced,
+/obj/item/gun/egun/advanced,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -741,7 +741,7 @@
 /area/map_template/rescue_base/base)
 "bM" = (
 /obj/structure/table/rack,
-/obj/item/gun/launcher/grenade,
+/obj/item/gun/grenade,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -938,8 +938,8 @@
 /area/map_template/rescue_base/base)
 "cf" = (
 /obj/structure/table/rack,
-/obj/item/gun/energy/gun/nuclear,
-/obj/item/gun/energy/gun/nuclear,
+/obj/item/gun/egun/advanced,
+/obj/item/gun/egun/advanced,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -973,8 +973,8 @@
 /area/map_template/rescue_base/base)
 "ci" = (
 /obj/structure/table/rack,
-/obj/item/gun/energy/gun,
-/obj/item/gun/energy/gun,
+/obj/item/gun/egun,
+/obj/item/gun/egun,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1027,8 +1027,8 @@
 /obj/item/storage/box/syringegun,
 /obj/item/storage/box/syringegun,
 /obj/item/storage/box/syringegun,
-/obj/item/gun/launcher/syringe/rapid,
-/obj/item/gun/launcher/syringe/rapid,
+/obj/item/gun/syringe/rapid,
+/obj/item/gun/syringe/rapid,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1214,10 +1214,10 @@
 /area/map_template/rescue_base/base)
 "cx" = (
 /obj/structure/table/rack,
-/obj/item/gun/energy/laser,
-/obj/item/gun/energy/laser,
-/obj/item/gun/energy/laser,
-/obj/item/gun/energy/laser,
+/obj/item/gun/laser,
+/obj/item/gun/laser,
+/obj/item/gun/laser,
+/obj/item/gun/laser,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1268,8 +1268,8 @@
 /area/map_template/rescue_base/base)
 "cE" = (
 /obj/structure/table/rack,
-/obj/item/gun/energy/ionrifle,
-/obj/item/gun/energy/ionrifle,
+/obj/item/gun/ionrifle,
+/obj/item/gun/ionrifle,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1372,10 +1372,10 @@
 /area/map_template/rescue_base/base)
 "cM" = (
 /obj/structure/table/rack,
-/obj/item/gun/energy/gun,
-/obj/item/gun/energy/gun,
-/obj/item/gun/energy/gun,
-/obj/item/gun/energy/gun,
+/obj/item/gun/egun,
+/obj/item/gun/egun,
+/obj/item/gun/egun,
+/obj/item/gun/egun,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -2063,7 +2063,7 @@
 /area/map_template/rescue_base/base)
 "ek" = (
 /obj/structure/table/rack,
-/obj/item/gun/energy/gun,
+/obj/item/gun/egun,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"

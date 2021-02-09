@@ -283,3 +283,6 @@
 	load_method = SINGLE_CASING
 	max_shells = 1 
 	has_safety = FALSE
+
+/obj/item/firearm_component/receiver/ballistic/get_projectile_type()
+	return chambered?.BB?.type

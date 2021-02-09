@@ -243,8 +243,8 @@
 /area/unishi/bridge)
 "aW" = (
 /obj/structure/table/rack,
-/obj/item/gun/energy/laser,
-/obj/item/gun/energy/laser,
+/obj/item/gun/laser,
+/obj/item/gun/laser,
 /obj/item/clothing/suit/armor/pcarrier/blue,
 /obj/item/clothing/suit/armor/pcarrier/tan,
 /obj/item/clothing/suit/armor/pcarrier/tan,

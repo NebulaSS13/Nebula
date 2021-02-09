@@ -158,29 +158,33 @@
 	origin_tech = "{'materials':2,'engineering':3,'programming':3,'powerstorage':2,'combat':2}"
 
 /obj/item/borg/upgrade/weaponcooler/action(var/mob/living/silicon/robot/R)
-	if(..()) return 0
+	if(..()) 
+		return FALSE
 
 	if(!R.module || !(type in R.module.supported_upgrades))
 		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
 		to_chat(usr, "There's no mounting point for the module!")
-		return 0
+		return FALSE
 
-	var/obj/item/gun/energy/gun/secure/mounted/T = locate() in R.module
+	var/obj/item/gun/egun/secure/mounted/T = locate() in R.module
 	if(!T)
 		T = locate() in R.module.equipment
 	if(!T)
 		to_chat(usr, "This robot has had its energy gun removed!")
-		return 0
+		return FALSE
 
-	if(T.recharge_time <= 2)
+	var/obj/item/firearm_component/receiver/energy/rec = T.receiver
+	if(!istype(rec))
+		to_chat(usr, "This robot has a non-standard receiver in its energy gun!")
+		return FALSE
+
+	if(rec.recharge_time <= 2)
 		to_chat(R, "Maximum cooling achieved for this hardpoint!")
 		to_chat(usr, "There's no room for another cooling unit!")
-		return 0
-
+		return FALSE
 	else
-		T.recharge_time = max(2 , T.recharge_time - 4)
-
-	return 1
+		rec.recharge_time = max(2 , rec.recharge_time - 4)
+	return TRUE
 
 /obj/item/borg/upgrade/jetpack
 	name = "mining robot jetpack"

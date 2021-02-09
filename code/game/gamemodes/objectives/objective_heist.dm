@@ -52,15 +52,15 @@
 			target_amount = 6
 			loot = "six guns"
 		if(6)
-			target = /obj/item/gun/energy
+			target = /obj/item/gun/egun
 			target_amount = 4
 			loot = "four energy guns"
 		if(7)
-			target = /obj/item/gun/energy/laser
+			target = /obj/item/gun/laser
 			target_amount = 2
 			loot = "two laser guns"
 		if(8)
-			target = /obj/item/gun/energy/ionrifle
+			target = /obj/item/gun/ionrifle
 			target_amount = 1
 			loot = "an ion gun"
 

@@ -1079,7 +1079,7 @@
 /obj/item/seeds/random,
 /obj/item/seeds/random,
 /obj/item/seeds/random,
-/obj/item/gun/energy/floragun,
+/obj/item/gun/floragun,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "cK" = (

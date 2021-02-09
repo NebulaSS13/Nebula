@@ -58,4 +58,4 @@
 
 /decl/crafting_stage/screwdriver/coilgun
 	progress_message = "You secure the coilgun assembly together, finishing it off."
-	product = /obj/item/gun/magnetic
+	product = /obj/item/gun

@@ -4,7 +4,7 @@
 	suit = /obj/item/clothing/suit/armor/vest
 	hands = list(
 		/obj/item/knife/combat,
-		/obj/item/gun/energy/laser
+		/obj/item/gun/laser
 	)
 	r_pocket = /obj/item/grenade/smokebomb
 	shoes = /obj/item/clothing/shoes/color/black

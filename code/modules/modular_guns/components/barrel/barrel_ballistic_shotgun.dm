@@ -1,10 +1,12 @@
 /obj/item/firearm_component/barrel/ballistic/shotgun
 	caliber = CALIBER_SHOTGUN
 	one_hand_penalty = 4
+	bulk = 6
 
 /obj/item/firearm_component/barrel/ballistic/shotgun/double
 	w_class = ITEM_SIZE_HUGE
 	force = 10
+	one_hand_penalty = 8
 
 /obj/item/firearm_component/barrel/ballistic/shotgun/double/on_update_icon()
 	. = ..()
@@ -25,8 +27,8 @@
 
 /obj/item/firearm_component/barrel/ballistic/shotgun/double/holder_attackby(obj/item/W, mob/user)
 	if(w_class >= ITEM_SIZE_HUGE)
-		if(istype(W, /obj/item/gun/energy/plasmacutter))
-			var/obj/item/gun/energy/plasmacutter/cutter = W
+		if(istype(W, /obj/item/gun/plasmacutter))
+			var/obj/item/gun/plasmacutter/cutter = W
 			if(cutter.slice(user))
 				return shorten(W, user)
 		if(istype(W, /obj/item/circular_saw) || istype(W, /obj/item/energy_blade))

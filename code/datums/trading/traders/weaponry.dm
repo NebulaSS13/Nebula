@@ -48,10 +48,10 @@
 				"insult_bad"        = "That's... very mean. I won't think twice about blacklisting your channel, so stop."
 				)
 
-	possible_trading_items = list(/obj/item/gun/energy/taser                      = TRADER_THIS_TYPE,
-								/obj/item/gun/energy/xray                         = TRADER_THIS_TYPE,
-								/obj/item/gun/energy/laser                        = TRADER_THIS_TYPE,
-								/obj/item/gun/energy/gun                          = TRADER_THIS_TYPE,
+	possible_trading_items = list(/obj/item/gun/electrolaser                      = TRADER_THIS_TYPE,
+								/obj/item/gun/xray                         = TRADER_THIS_TYPE,
+								/obj/item/gun/laser                        = TRADER_THIS_TYPE,
+								/obj/item/gun/egun                          = TRADER_THIS_TYPE,
 								/obj/item/cell                                    = TRADER_THIS_TYPE,
 								/obj/item/cell/crap                               = TRADER_THIS_TYPE,
 								/obj/item/cell/high                               = TRADER_THIS_TYPE,
@@ -80,6 +80,6 @@
 	insult_drop = 0
 
 	possible_trading_items = list(/obj/item/gun/zipgun =            TRADER_THIS_TYPE,
-								/obj/item/gun/energy/laser/dogan =             TRADER_THIS_TYPE,
+								/obj/item/gun/laser/dogan =             TRADER_THIS_TYPE,
 								/obj/item/gun/automatic/smg/usi =   TRADER_THIS_TYPE,
 								/obj/item/clothing/accessory/storage/holster = TRADER_ALL)

@@ -39,3 +39,6 @@
 
 /obj/item/firearm_component/proc/holder_emag_act(var/charges, var/mob/user)
 	return NO_EMAG_ACT
+
+/obj/item/firearm_component/proc/get_projectile_type()
+	return

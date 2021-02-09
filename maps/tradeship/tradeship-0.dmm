@@ -2201,7 +2201,7 @@
 /area/ship/trade/aft_starboard_underside_maint)
 "Qh" = (
 /obj/structure/table/woodentable/mahogany,
-/obj/item/gun/launcher/crossbow,
+/obj/item/gun/crossbow,
 /obj/item/stack/material/rods,
 /obj/item/cell/crap/empty,
 /turf/simulated/floor/wood/walnut,

@@ -1,4 +1,4 @@
-/obj/item/gun/energy/gun/nuclear
+/obj/item/gun/egun/advanced
 	name = "advanced energy gun"
 	desc = "An energy gun with an experimental miniaturized reactor."
 	icon = 'icons/obj/guns/adv_egun.dmi'
@@ -6,8 +6,6 @@
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_LARGE
 	force = 8 //looks heavier than a pistol
-	self_recharge = 1
-	one_hand_penalty = 1 //bulkier than an e-gun, but not quite the size of a carbine
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,

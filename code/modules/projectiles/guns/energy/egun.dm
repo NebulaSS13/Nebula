@@ -1,5 +1,5 @@
 
-/obj/item/gun/energy/gun
+/obj/item/gun/egun
 	name = "energy gun"
 	desc = "Another bestseller of Lawson Arms and the FTU, the LAEP90 Perun is a versatile energy based sidearm, capable of switching between low, medium and high power projectile settings. In other words: stun, shock or kill."
 	icon = 'icons/obj/guns/energy_gun.dmi'
@@ -9,7 +9,7 @@
 	barrel = /obj/item/firearm_component/barrel/energy/sidearm
 	receiver = /obj/item/firearm_component/receiver/energy/sidearm
 
-/obj/item/gun/energy/gun/small
+/obj/item/gun/egun/small
 	name = "small energy gun"
 	desc = "A smaller model of the versatile LAEP90 Perun, the LAEP90-C packs considerable utility in a smaller package. Best used in situations where full-sized sidearms are inappropriate."
 	icon = 'icons/obj/guns/small_egun.dmi'
@@ -18,6 +18,6 @@
 	force = 2 //it's the size of a car key, what did you expect?
 	receiver = /obj/item/firearm_component/receiver/energy/sidearm/small
 
-/obj/item/gun/energy/gun/mounted
+/obj/item/gun/egun/mounted
 	name = "mounted energy gun"
 	receiver = /obj/item/firearm_component/receiver/energy/sidearm/mounted

@@ -66,7 +66,7 @@
 	interface_desc = "A flechette nanofabricator and launch system of Ascent design."
 	icon = 'mods/species/ascent/icons/ascent.dmi'
 	icon_state = "rifle"
-	gun = /obj/item/gun/magnetic/railgun/flechette/ascent
+	gun = /obj/item/gun/railgun/flechette/ascent
 
 /obj/item/rig_module/mounted/particle_rifle
 	name = "particle rifle"
@@ -75,7 +75,7 @@
 	interface_desc = "A mounted particle rifle of Ascent design."
 	icon = 'mods/species/ascent/icons/ascent.dmi'
 	icon_state = "rifle"
-	gun = /obj/item/gun/energy/particle
+	gun = /obj/item/gun/particle
 
 /obj/item/rig_module/device/multitool
 	name = "mantid integrated multitool"
@@ -271,7 +271,7 @@
 	icon = 'mods/species/ascent/icons/rig/rig_chest.dmi'
 	allowed = list(
 		/obj/item/clustertool,
-		/obj/item/gun/energy/particle/small,
+		/obj/item/gun/particle/small,
 		/obj/item/weldingtool/electric/mantid,
 		/obj/item/multitool/mantid,
 		/obj/item/stack/medical/resin,

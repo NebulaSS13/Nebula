@@ -1217,7 +1217,7 @@
 /obj/structure/table/rack,
 /obj/random/hardsuit,
 /obj/item/clothing/head/pirate,
-/obj/item/gun/launcher/money,
+/obj/item/gun/money,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "cY" = (
@@ -1450,7 +1450,7 @@
 /area/map_template/skipjack_station/start)
 "dB" = (
 /obj/structure/table/rack,
-/obj/item/gun/launcher/crossbow,
+/obj/item/gun/crossbow,
 /obj/item/stack/material/rods{
 	amount = 10
 	},
@@ -1740,7 +1740,7 @@
 /obj/item/chems/glass/bottle/sedatives,
 /obj/item/chems/glass/bottle/sedatives,
 /obj/item/chems/syringe,
-/obj/item/gun/launcher/syringe/rapid,
+/obj/item/gun/syringe/rapid,
 /obj/item/storage/box/syringegun,
 /obj/item/chems/glass/beaker/vial/random/toxin,
 /turf/simulated/floor/shuttle/white,

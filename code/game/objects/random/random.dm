@@ -273,16 +273,16 @@
 	icon_state = "energykill100"
 
 /obj/random/energy/spawn_choices()
-	return list(/obj/item/gun/energy/laser = 4,
-				/obj/item/gun/energy/gun = 3,
-				/obj/item/gun/energy/lasercannon = 2,
-				/obj/item/gun/energy/xray = 3,
-				/obj/item/gun/energy/sniperrifle = 1,
-				/obj/item/gun/energy/gun/nuclear = 1,
-				/obj/item/gun/energy/ionrifle = 2,
-				/obj/item/gun/energy/toxgun = 3,
-				/obj/item/gun/energy/taser = 4,
-				/obj/item/gun/energy/crossbow/largecrossbow = 2)
+	return list(/obj/item/gun/laser = 4,
+				/obj/item/gun/egun = 3,
+				/obj/item/gun/lasercannon = 2,
+				/obj/item/gun/xray = 3,
+				/obj/item/gun/esniper = 1,
+				/obj/item/gun/egun/advanced = 1,
+				/obj/item/gun/ionrifle = 2,
+				/obj/item/gun/radpistol = 3,
+				/obj/item/gun/electrolaser = 4,
+				/obj/item/gun/ecrossbow/largecrossbow = 2)
 
 /obj/random/projectile
 	name = "Random Projectile Weapon"
@@ -311,7 +311,7 @@
 
 /obj/random/handgun/spawn_choices()
 	return list(/obj/item/gun/pistol = 3,
-				/obj/item/gun/energy/gun = 3,
+				/obj/item/gun/egun = 3,
 				/obj/item/gun/pistol/holdout = 2
 				)
 

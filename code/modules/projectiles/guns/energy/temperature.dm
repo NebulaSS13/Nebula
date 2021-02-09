@@ -1,4 +1,4 @@
-/obj/item/gun/energy/temperature
+/obj/item/gun/temperature
 	name = "temperature gun"
 	icon = 'icons/obj/guns/freezegun.dmi'
 	icon_state = ICON_STATE_WORLD
@@ -9,61 +9,7 @@
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
-	charge_cost = 10
 	origin_tech = "{'combat':3,'materials':4,'powerstorage':3,'magnets':2}"
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
-	one_hand_penalty = 2
-	projectile_type = /obj/item/projectile/temp
-	cell_type = /obj/item/cell/high
-	combustion = 0
-	var/firing_temperature = T20C
-	var/current_temperature = T20C
-	indicator_color = COLOR_GREEN
-
-/obj/item/gun/energy/temperature/Initialize()
-	. = ..()
-	START_PROCESSING(SSobj, src)
-
-
-/obj/item/gun/energy/temperature/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	. = ..()
-
-/obj/item/gun/energy/temperature/Topic(user, href_list, state = global.inventory_topic_state)
-	..()
-
-/obj/item/gun/energy/temperature/OnTopic(user, href_list)
-	if(href_list["temp"])
-		var/amount = text2num(href_list["temp"])
-		if(amount > 0)
-			src.current_temperature = min(500, src.current_temperature+amount)
-		else
-			src.current_temperature = max(0, src.current_temperature+amount)
-		if(current_temperature < T0C)
-			indicator_color = COLOR_LUMINOL
-		else if(current_temperature > T0C + 100)
-			indicator_color = COLOR_ORANGE
-		else
-			indicator_color = COLOR_GREEN
-		. = TOPIC_REFRESH
-
-		update_icon()
-		attack_self(user)
-
-/obj/item/gun/energy/temperature/Process()
-	switch(firing_temperature)
-		if(0 to 100) charge_cost = 100
-		if(100 to 250) charge_cost = 50
-		if(251 to 300) charge_cost = 10
-		if(301 to 400) charge_cost = 50
-		if(401 to 500) charge_cost = 100
-
-	if(current_temperature != firing_temperature)
-		var/difference = abs(current_temperature - firing_temperature)
-		if(difference >= 10)
-			if(current_temperature < firing_temperature)
-				firing_temperature -= 10
-			else
-				firing_temperature += 10
-		else
-			firing_temperature = current_temperature
+	barrel = /obj/item/firearm_component/barrel/energy/temperature
+	receiver = /obj/item/firearm_component/receiver/energy/temperature

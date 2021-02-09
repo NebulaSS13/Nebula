@@ -349,7 +349,7 @@
 //*****************
 //**Chameleon Gun**
 //*****************
-/obj/item/gun/energy/chameleon
+/obj/item/gun/chameleon
 	name = "chameleon gun"
 	desc = "A hologram projector in the shape of a gun. There is a dial on the side to change the gun's disguise."
 	icon = 'icons/obj/guns/revolvers.dmi'
@@ -358,22 +358,18 @@
 	origin_tech = "{'combat':2,'materials':2,'esoteric':8}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 	matter = list()
-
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
-	projectile_type = /obj/item/projectile/chameleon
-	charge_meter = 0
-	charge_cost = 20 //uses next to no power, since it's just holograms
-	max_shots = 50
-
+	barrel = /obj/item/firearm_component/barrel/energy/chameleon
+	receiver = /obj/item/firearm_component/receiver/energy/chameleon
 	var/obj/item/projectile/copy_projectile
 	var/static/list/gun_choices
 
-/obj/item/gun/energy/chameleon/Initialize()
+/obj/item/gun/chameleon/Initialize()
 	. = ..()
 	if(!gun_choices)
 		gun_choices = generate_chameleon_choices(/obj/item/gun)
 
-/obj/item/gun/energy/chameleon/consume_next_projectile()
+/obj/item/gun/chameleon/consume_next_projectile()
 	var/obj/item/projectile/P = ..()
 	if(P && ispath(copy_projectile))
 		P.SetName(initial(copy_projectile.name))
@@ -387,7 +383,7 @@
 		P.impact_type = initial(copy_projectile.impact_type)
 	return P
 
-/obj/item/gun/energy/chameleon/OnDisguise(var/obj/item/gun/copy)
+/obj/item/gun/chameleon/OnDisguise(var/obj/item/gun/copy)
 	if(!istype(copy))
 		return
 
@@ -396,15 +392,12 @@
 	fire_sound_text = copy.fire_sound_text
 	icon = copy.icon
 
-	var/obj/item/gun/energy/E = copy
+	copy_projectile = null
+	var/obj/item/gun/E = copy
 	if(istype(E))
-		copy_projectile = E.projectile_type
-		//charge_meter = E.charge_meter //does not work very well with icon_state changes, ATM
-	else
-		copy_projectile = null
-		//charge_meter = 0
+		copy_projectile = E.get_projectile_type()
 
-/obj/item/gun/energy/chameleon/verb/change(picked in gun_choices)
+/obj/item/gun/chameleon/verb/change(picked in gun_choices)
 	set name = "Change Gun Appearance"
 	set category = "Chameleon Items"
 	set src in usr

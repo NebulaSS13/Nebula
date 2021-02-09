@@ -53,9 +53,10 @@
 			to_chat(user, SPAN_NOTICE("It holds [get_worth()] [cur.name] now."))
 			qdel(W)
 		return TRUE
-	else if(istype(W, /obj/item/gun/launcher/money))
-		var/obj/item/gun/launcher/money/L = W
-		L.absorb_cash(src, user)
+	else if(istype(W, /obj/item/gun))
+		var/obj/item/gun/L = W
+		return L.attackby(src, user)
+	. = ..()
 
 /obj/item/cash/on_update_icon()
 	icon_state = ""

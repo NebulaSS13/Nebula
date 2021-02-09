@@ -12,7 +12,7 @@
 	glasses =    /obj/item/clothing/glasses/thermal
 	holster =    /obj/item/clothing/accessory/storage/holster/armpit
 	suit_store = /obj/item/flashlight
-	hands =      list(/obj/item/gun/launcher/alien/spikethrower)
+	hands =      list(/obj/item/gun/alien/spikethrower)
 
 /decl/hierarchy/outfit/vox_raider/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
 	uniform = pick(/obj/item/clothing/under/vox/vox_robes, /obj/item/clothing/under/vox/vox_casual)

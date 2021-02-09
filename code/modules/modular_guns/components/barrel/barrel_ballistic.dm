@@ -26,18 +26,26 @@
 
 /obj/item/firearm_component/barrel/ballistic/sniper
 	caliber = CALIBER_ANTIMATERIAL
+	screen_shake = 2 //extra kickback
+	one_hand_penalty = 6
+	bulk = 8
 
 /obj/item/firearm_component/barrel/ballistic/holdout
 	caliber = CALIBER_PISTOL_SMALL
 
 /obj/item/firearm_component/barrel/ballistic/rifle
 	caliber = CALIBER_RIFLE
+	one_hand_penalty = 2
 
 /obj/item/firearm_component/barrel/ballistic/dart
 	caliber = CALIBER_DART
+	screen_shake = 0
 
 /obj/item/firearm_component/barrel/ballistic/lasbulb
 	caliber = CALIBER_PISTOL_LASBULB
+	one_hand_penalty = 0
+	screen_shake = 0
+	silenced = 1
 
 /*
 /obj/item/gun/pistol/holdout/attackby(obj/item/I, mob/user)
