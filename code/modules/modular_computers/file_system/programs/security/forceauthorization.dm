@@ -16,9 +16,11 @@
 	name = "Use of Force Authorization Manager"
 
 /datum/nano_module/program/forceauthorization/proc/is_gun_connected(obj/item/gun/G)
+	if(!G.receiver?.is_secured())
+		return FALSE
 	var/datum/computer_network/our_net = get_network()
 	var/mob/living/silicon/S = G.loc
-	var/datum/computer_network/gun_net = istype(S) ? S.get_computer_network() : G.get_network()
+	var/datum/computer_network/gun_net = istype(S) ? S.get_computer_network() : G.receiver.get_network()
 	return our_net == gun_net
 
 /datum/nano_module/program/forceauthorization/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
@@ -26,39 +28,36 @@
 	data["is_silicon_usr"] = issilicon(user)
 
 	data["guns"] = list()
-	for(var/obj/item/gun/G in global.registered_weapons)
-		if(G.standby)
-			continue
+	for(var/obj/item/firearm_component/receiver/energy/secure/G in global.registered_weapons)
 
-		if(!is_gun_connected(G))
+		if(G.standby || !G.holder || !is_gun_connected(G.holder))
 			continue
 
 		var/list/modes = list()
-		for(var/i = 1 to G.firemodes.len)
-			if(G.authorized_modes[i] == ALWAYS_AUTHORIZED)
+		for(var/i = 1 to length(G.firemodes))
+			if(G.get_authorized_mode(i) == ALWAYS_AUTHORIZED)
 				continue
 			var/datum/firemode/firemode = G.firemodes[i]
-			modes += list(list("index" = i, "mode_name" = firemode.name, "authorized" = G.authorized_modes[i]))
+			modes += list(list("index" = i, "mode_name" = firemode.name, "authorized" = G.get_authorized_mode(i)))
 
 		var/turf/T = get_turf(G)
-		data["guns"] += list(list("name" = "[G]", "ref" = "\ref[G]", "owner" = G.registered_owner, "modes" = modes, "loc" = list("x" = T.x, "y" = T.y, "z" = T.z)))
+		data["guns"] += list(list("name" = "[G.holder]", "ref" = "\ref[G]", "owner" = G.registered_owner, "modes" = modes, "loc" = list("x" = T.x, "y" = T.y, "z" = T.z)))
 	var/list/guns = data["guns"]
 	if(!guns.len)
 		data["message"] = "No weapons registered"
 
 	if(!data["is_silicon_usr"]) // don't send data even though they won't be able to see it
 		data["cyborg_guns"] = list()
-		for(var/obj/item/gun/energy/gun/secure/mounted/G in global.registered_cyborg_weapons)
-			if(!is_gun_connected(G))
+		for(var/obj/item/firearm_component/receiver/energy/secure/G in global.registered_cyborg_weapons)
+			if(!G.holder || !is_gun_connected(G.holder))
 				continue
 			var/list/modes = list() // we don't get location, unlike inside of the last loop, because borg locations are reported elsewhere.
-			for(var/i = 1 to G.firemodes.len)
-				if(G.authorized_modes[i] == ALWAYS_AUTHORIZED)
+			for(var/i = 1 to length(G.firemodes))
+				if(G.get_authorized_mode(i) == ALWAYS_AUTHORIZED)
 					continue
 				var/datum/firemode/firemode = G.firemodes[i]
-				modes += list(list("index" = i, "mode_name" = firemode.name, "authorized" = G.authorized_modes[i]))
-
-			data["cyborg_guns"] += list(list("name" = "[G]", "ref" = "\ref[G]", "owner" = G.registered_owner, "modes" = modes))
+				modes += list(list("index" = i, "mode_name" = firemode.name, "authorized" = G.get_authorized_mode(i)))
+			data["cyborg_guns"] += list(list("name" = "[G.holder]", "ref" = "\ref[G]", "owner" = G.registered_owner, "modes" = modes))
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -72,19 +71,19 @@
 		return 1
 
 	if(href_list["gun"] && ("authorize" in href_list) && href_list["mode"])
-		var/obj/item/gun/G = locate(href_list["gun"]) in global.registered_weapons
-		if(!is_gun_connected(G))
+		var/obj/item/firearm_component/receiver/energy/secure/G = locate(href_list["gun"]) in global.registered_weapons
+		if(!istype(G) || !G.holder || !is_gun_connected(G.holder))
 			return
 		var/do_authorize = text2num(href_list["authorize"])
 		var/mode = text2num(href_list["mode"])
-		return isnum(do_authorize) && isnum(mode) && G && G.authorize(mode, do_authorize, usr.name)
+		return isnum(do_authorize) && isnum(mode) && G.authorize(mode, do_authorize, usr.name)
 
 	if(href_list["cyborg_gun"] && ("authorize" in href_list) && href_list["mode"])
-		var/obj/item/gun/energy/gun/secure/mounted/M = locate(href_list["cyborg_gun"]) in global.registered_cyborg_weapons
-		if(!is_gun_connected(M))
+		var/obj/item/firearm_component/receiver/energy/secure/G  = locate(href_list["cyborg_gun"]) in global.registered_cyborg_weapons
+		if(!istype(G) || !G.holder || !is_gun_connected(G.holder))
 			return
 		var/do_authorize = text2num(href_list["authorize"])
 		var/mode = text2num(href_list["mode"])
-		return isnum(do_authorize) && isnum(mode) && M && M.authorize(mode, do_authorize, usr.name)
+		return isnum(do_authorize) && isnum(mode) && G.authorize(mode, do_authorize, usr.name)
 
 	return 0

@@ -39,15 +39,17 @@
 /obj/item/firearm_component/barrel/ballistic/lasbulb
 	caliber = CALIBER_PISTOL_LASBULB
 
-/obj/item/firearm_component/barrel/ballistic/revolver
-	caliber = CALIBER_PISTOL_MAGNUM
-
-/obj/item/firearm_component/barrel/ballistic/revolver/capgun
-	caliber = CALIBER_CAPS
-	var/cap = TRUE
-
-/obj/item/firearm_component/barrel/ballistic/revolver/capgun/get_holder_overlay(holder_state)
-	var/image/ret = ..()
-	if(ret && cap)
-		ret.overlays += "[holder_state]-cap"
-	return ret
+/*
+/obj/item/gun/projectile/pistol/holdout/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/silencer))
+		if(src in user.get_held_items())	//if we're not in his hands
+			to_chat(user, SPAN_WARNING("You'll need \the [holder || src] in your hands to do that."))
+			return TRUE
+		if(user.unEquip(I, src))
+			to_chat(user, SPAN_NOTICE("You screw [I] onto \the [holder || src]."))
+			silenced = I	//dodgy?
+			w_class = ITEM_SIZE_NORMAL
+			update_icon()
+		return TRUE
+	. = ..()
+*/

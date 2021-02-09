@@ -34,23 +34,20 @@
 	. = ..()
 
 /obj/item/firearm_component/barrel/ballistic/shotgun/double/proc/shorten(var/obj/item/cutting, var/mob/user)
-	var/obj/item/gun/holder = loc
-	if(!istype(holder))
-		return FALSE
-	to_chat(user, SPAN_NOTICE("You begin to shorten the barrel of \the [holder]."))
-	if(istype(holder.receiver, /obj/item/firearm_component/receiver/ballistic))
+	to_chat(user, SPAN_NOTICE("You begin to shorten \the [holder || src]."))
+	if(istype(holder?.receiver, /obj/item/firearm_component/receiver/ballistic))
 		var/obj/item/firearm_component/receiver/ballistic/proj_receiver = holder.receiver
 		if(length(proj_receiver.loaded))
 			for(var/i in 1 to proj_receiver.max_shells)
 				holder.Fire(user, user)
 			user.visible_message(SPAN_DANGER("\The [holder] goes off!"))
-	if(do_after(user, 30, holder) && w_class > ITEM_SIZE_NORMAL && (src in holder))
+	if(do_after(user, 30, holder || src) && w_class > ITEM_SIZE_NORMAL)
 		w_class = ITEM_SIZE_NORMAL
 		bulk = 2
 		one_hand_penalty = 2
 		force = 5
-		to_chat(user, SPAN_NOTICE("You shorten the barrel of \the [holder]!"))
+		to_chat(user, SPAN_NOTICE("You shorten \the [holder || src]!"))
 		update_icon()
-		holder.update_from_components()
+		holder?.update_from_components()
 		return TRUE
 	return FALSE

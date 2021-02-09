@@ -33,7 +33,7 @@
 /obj/item/firearm_component/receiver/ballistic/dart/show_examine_info(var/mob/user)
 	. = ..()
 	if(length(beakers))
-		to_chat(user, SPAN_NOTICE("\The [loc] contains:"))
+		to_chat(user, SPAN_NOTICE("\The [holder || src] contains:"))
 		for(var/obj/item/chems/glass/beaker/B in beakers)
 			for(var/rtype in B.reagents?.reagent_volumes)
 				var/decl/material/R = decls_repository.get_decl(rtype)
@@ -42,10 +42,10 @@
 /obj/item/firearm_component/receiver/ballistic/dart/holder_attackby(obj/item/W, mob/user)
 	if(istype(W, container_type))
 		if(length(beakers) >= max_beakers)
-			to_chat(user, SPAN_WARNING("\The [loc] already has [max_beakers] beakers in it - another one isn't going to fit!"))
+			to_chat(user, SPAN_WARNING("\The [holder || src] already has [max_beakers] beakers in it - another one isn't going to fit!"))
 		else if(user.unEquip(W, src))
 			beakers |= W
-			user.visible_message(SPAN_NOTICE("\The [user] inserts \a [W] into \the [loc]."))
+			user.visible_message(SPAN_NOTICE("\The [user] inserts \a [W] into \the [holder || src]."))
 		return TRUE
 	. = ..()
 	
@@ -55,7 +55,7 @@
 	
 /obj/item/firearm_component/receiver/ballistic/dart/interact(var/mob/user)
 	user.set_machine(src)
-	var/list/dat = list("<b>[src] mixing control:</b><br><br>")
+	var/list/dat = list("<b>[capitalize(name)] mixing control:</b><br><br>")
 	if(!length(beakers))
 		dat += "There are no beakers inserted!<br><br>"
 	else
@@ -83,7 +83,7 @@
 		dat += " \[<A href='?src=\ref[src];eject_cart=1'>Eject</A>\]<br>"
 	dat += "<br>\[<A href='?src=\ref[src];refresh=1'>Refresh</A>\]"
 
-	var/datum/browser/popup = new(user, "dartgun", "[src] mixing control")
+	var/datum/browser/popup = new(user, "dartgun", "[capitalize(src.name)] mixing control")
 	popup.set_content(jointext(dat,null))
 	popup.open()
 
@@ -91,7 +91,7 @@
 	mixing -= B
 	beakers -= B
 	user.put_in_hands(B)
-	user.visible_message(SPAN_NOTICE("\The [user] removes \a [B] from \the [loc]."))
+	user.visible_message(SPAN_NOTICE("\The [user] removes \a [B] from \the [holder || src]."))
 
 /obj/item/firearm_component/receiver/ballistic/dart/OnTopic(user, href_list)
 	. = ..()

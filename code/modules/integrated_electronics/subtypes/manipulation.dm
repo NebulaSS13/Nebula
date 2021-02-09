@@ -52,8 +52,8 @@
 		if(installed_gun.charge_cost)
 			power_draw_per_use = installed_gun.charge_cost
 		set_pin_data(IC_OUTPUT, 1, weakref(installed_gun))
-		if(installed_gun.firemodes.len)
-			var/datum/firemode/fm = installed_gun.firemodes[installed_gun.sel_mode]
+		if(length(installed_gun?.receiver?.firemodes))
+			var/datum/firemode/fm = installed_gun.receiver.firemodes[installed_gun.receiver.sel_mode]
 			set_pin_data(IC_OUTPUT, 2, fm.name)
 		push_data()
 	else
@@ -95,8 +95,8 @@
 				assembly.visible_message("<span class='danger'>[assembly] fires [installed_gun]!</span>")
 				shootAt(locate(target_x, target_y, T.z))
 		if(2)
-			var/datum/firemode/next_firemode = installed_gun.switch_firemodes()
-			set_pin_data(IC_OUTPUT, 2, next_firemode ? next_firemode.name : null)
+			var/datum/firemode/next_firemode = installed_gun.receiver?.switch_firemodes()
+			set_pin_data(IC_OUTPUT, 2, next_firemode?.name)
 			push_data()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/proc/shootAt(turf/target)

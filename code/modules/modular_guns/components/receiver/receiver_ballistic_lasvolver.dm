@@ -4,4 +4,4 @@
 
 /obj/item/firearm_component/receiver/ballistic/lasbulb/handle_post_holder_fire()
 	. = ..()
-	playsound(loc, 'sound/effects/rewind.ogg', 20, 0)
+	playsound(get_turf(src), 'sound/effects/rewind.ogg', 20, 0)

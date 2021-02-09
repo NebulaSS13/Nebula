@@ -17,15 +17,15 @@
 			var/obj/item/projectile/bullet/pellet/PP = chambered.BB
 			damage = PP.damage*PP.pellets
 		if(damage > 5)
-			var/mob/living/carbon/C = loc
+			var/mob/living/carbon/C = holder?.loc || loc
 			if(istype(C))
-				C.visible_message(SPAN_DANGER("\The [loc] explodes in [C]'s hands!"), SPAN_DANGER("\The [loc] explodes in your face!"))
+				C.visible_message(SPAN_DANGER("\The [holder || src] explodes in [C]'s hands!"), SPAN_DANGER("\The [holder || src] explodes in your face!"))
 				C.drop_from_inventory(src)
 				for(var/zone in list(BP_L_HAND, BP_R_HAND))
 					C.apply_damage(rand(10,20), def_zone=zone)
 			else
-				visible_message(SPAN_DANGER("\The [loc] explodes!"))
+				visible_message(SPAN_DANGER("\The [holder || src] explodes!"))
 			explosion(get_turf(src), -1, -1, 1)
-			qdel(loc)
+			qdel(holder || src)
 			return FALSE
 	. = ..()

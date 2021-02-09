@@ -25,11 +25,6 @@ var/global/list/registered_cyborg_weapons = list()
 	var/recharge_time = 4
 	var/charge_tick = 0
 
-/obj/item/gun/energy/switch_firemodes()
-	. = ..()
-	if(.)
-		update_icon()
-
 /obj/item/gun/energy/emp_act(severity)
 	..()
 	update_icon()

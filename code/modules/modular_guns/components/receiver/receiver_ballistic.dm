@@ -32,21 +32,16 @@
 	return caliber
 
 /obj/item/firearm_component/receiver/ballistic/get_next_projectile(var/mob/user)
-
-	if(!istype(loc, /obj/item/gun))
-		return
-
 	if(!is_jammed && prob(jam_chance))
-		loc.visible_message(SPAN_DANGER("\The [loc] jams!"))
+		user.visible_message(SPAN_DANGER("\The [holder || src] jams!"))
 		if(istype(user))
 			if(prob(user.skill_fail_chance(SKILL_WEAPONS, 100, SKILL_PROF)))
 				return
-			to_chat(user, SPAN_NOTICE("You reflexively clear the jam on \the [src]."))
+			to_chat(user, SPAN_NOTICE("You reflexively clear the jam on \the [holder || src]."))
 			is_jammed = FALSE
-			playsound(loc, 'sound/weapons/flipblade.ogg', 50, 1)
+			playsound(get_turf(src), 'sound/weapons/flipblade.ogg', 50, 1)
 	if(is_jammed)
 		return
-
 	if(length(loaded))
 		chambered = loaded[1]
 		if(handle_casings != HOLD_CASINGS)
@@ -74,15 +69,15 @@
 /obj/item/firearm_component/receiver/ballistic/handle_post_holder_fire()
 	if(chambered)
 		chambered.expend()
-	if(istype(loc, /obj/item/gun) && auto_eject && ammo_magazine && !length(ammo_magazine.stored_ammo))
+	if(auto_eject && ammo_magazine && !length(ammo_magazine.stored_ammo))
 		ammo_magazine.dropInto(get_turf(src))
-		loc.visible_message(SPAN_NOTICE("\The [ammo_magazine] falls out of \the [loc] and clatters on the floor!"))
+		var/atom/showing = holder || src
+		showing.visible_message(SPAN_NOTICE("\The [ammo_magazine] falls out of \the [showing] and clatters on the floor!"))
 		if(auto_eject_sound)
-			playsound(loc, auto_eject_sound, 40, 1)
+			playsound(get_turf(src), auto_eject_sound, 40, 1)
 		ammo_magazine.update_icon()
 		ammo_magazine = null
 		update_icon()
-		loc.update_icon()
 
 /obj/item/firearm_component/receiver/ballistic/process_point_blank(obj/projectile, mob/user, atom/target)
 	..()
@@ -106,9 +101,9 @@
 	switch(handle_casings)
 		if(EJECT_CASINGS)
 			chambered.dropInto(get_turf(src))
-			chambered.throw_at(get_ranged_target_turf(get_turf(src), turn(loc.dir,270), 1), rand(0,1), 5)
+			chambered.throw_at(get_ranged_target_turf(get_turf(src), (holder ? turn(holder.dir,270) : pick(GLOB.alldirs)), 1), rand(0,1), 5)
 			if(LAZYLEN(chambered.fall_sounds))
-				playsound(loc, pick(chambered.fall_sounds), 50, 1)
+				playsound(get_turf(src), pick(chambered.fall_sounds), 50, 1)
 		if(CYCLE_CASINGS)
 			if(ammo_magazine)
 				ammo_magazine.stored_ammo += chambered
@@ -140,19 +135,19 @@
 		if(magazine.mag_type == MAGAZINE)
 			if(allowed_magazines)
 				if(!(loading.type in (islist(allowed_magazines) ? allowed_magazines : list(allowed_magazines))))
-					to_chat(user, SPAN_WARNING("\The [loading] won't fit into \the [loc]."))
+					to_chat(user, SPAN_WARNING("\The [loading] won't fit into \the [holder || src]."))
 					return TRUE
 				if(ammo_magazine)
-					to_chat(user, SPAN_WARNING("\The [loc] already has a magazine loaded."))
+					to_chat(user, SPAN_WARNING("\The [holder || src] already has a magazine loaded."))
 					return TRUE
 				if(user.unEquip(loading, src))
 					ammo_magazine = loading
-					user.visible_message(SPAN_NOTICE("\The [user] inserts \the [loading] into \the [loc]."))
-					playsound(loc, mag_insert_sound, 50, 1)
+					user.visible_message(SPAN_NOTICE("\The [user] inserts \the [loading] into \the [holder || src]."))
+					playsound(get_turf(src), mag_insert_sound, 50, 1)
 
 		else if(magazine.mag_type == SPEEDLOADER)
 			if(length(loaded) >= max_shells)
-				to_chat(user, SPAN_WARNING("\The [loc] is full!"))
+				to_chat(user, SPAN_WARNING("\The [holder || src] is full!"))
 				return TRUE
 			var/count = 0
 			for(var/obj/item/ammo_casing/casing in magazine.stored_ammo)
@@ -164,19 +159,19 @@
 					magazine.stored_ammo -= casing
 					count++
 				if(count)
-					user.visible_message(SPAN_NOTICE("\The [user] reloads \the [loc]."), SPAN_NOTICE("You load [count] round\s into \the [loc]."))
-					playsound(loc, 'sound/weapons/empty.ogg', 50, 1)
+					user.visible_message(SPAN_NOTICE("\The [user] reloads \the [holder || src]."), SPAN_NOTICE("You load [count] round\s into \the [holder || src]."))
+					playsound(get_turf(src), 'sound/weapons/empty.ogg', 50, 1)
 
 	else if(istype(loading, /obj/item/ammo_casing))
 		. = TRUE
 		var/obj/item/ammo_casing/casing = loading
 		if(length(loaded) >= max_shells)
-			to_chat(user, SPAN_WARNING("\The [loc] is full."))
+			to_chat(user, SPAN_WARNING("\The [holder || src] is full."))
 			return
 		if(user.unEquip(casing, src))
 			loaded.Insert(1, casing)
-			user.visible_message(SPAN_NOTICE("\The [user] inserts \a [casing] into \the [loc]."), SPAN_NOTICE("You insert \a [casing] into \the [loc]."))
-			playsound(loc, load_sound, 50, 1)
+			user.visible_message(SPAN_NOTICE("\The [user] inserts \a [casing] into \the [holder || src]."), SPAN_NOTICE("You insert \a [casing] into \the [holder || src]."))
+			playsound(get_turf(src), load_sound, 50, 1)
 
 	if(.)
 		update_icon()
@@ -186,25 +181,24 @@
 /obj/item/firearm_component/receiver/ballistic/unload_ammo(var/mob/user)
 
 	if(is_jammed)
-		user.visible_message(SPAN_NOTICE("\The [user] begins to unjam \the [loc]."), SPAN_NOTICE("You clear the jam and unload \the [loc]."))
-		if(!do_after(user, 4, loc))
+		user.visible_message(SPAN_NOTICE("\The [user] begins to unjam \the [holder || src]."), SPAN_NOTICE("You clear the jam and unload \the [holder || src]."))
+		if(!do_after(user, 4, holder || src))
 			return
 		if(is_jammed)
 			is_jammed = FALSE
-			playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
+			playsound(get_turf(src), 'sound/weapons/flipblade.ogg', 50, 1)
 
 	if(ammo_magazine)
 		user.put_in_hands(ammo_magazine)
-		user.visible_message(SPAN_NOTICE("\The [user] removes \the [ammo_magazine] from \the [loc]."))
-		playsound(loc, mag_remove_sound, 50, 1)
+		user.visible_message(SPAN_NOTICE("\The [user] removes \the [ammo_magazine] from \the [holder || src]."))
+		playsound(get_turf(src), mag_remove_sound, 50, 1)
 		ammo_magazine.update_icon()
 		ammo_magazine = null
 		update_icon()
-		loc.update_icon()
 		return TRUE
 
 	if(!length(loaded))
-		to_chat(user, SPAN_WARNING("\The [loc] is empty."))
+		to_chat(user, SPAN_WARNING("\The [holder || src] is empty."))
 		return TRUE
 
 	if(load_method & SPEEDLOADER)
@@ -212,23 +206,22 @@
 		var/turf/T = get_turf(src)
 		for(var/obj/item/ammo_casing/casing in loaded)
 			if(LAZYLEN(casing.fall_sounds))
-				playsound(loc, pick(casing.fall_sounds), 50, 1)
+				playsound(get_turf(casing), pick(casing.fall_sounds), 50, 1)
 			casing.forceMove(T)
 			count++
 		loaded.Cut()
 		if(count)
-			user.visible_message(SPAN_NOTICE("\The [user] unloads \the [loc]."), SPAN_NOTICE("You unload [count] round\s from \the [loc]."))
+			user.visible_message(SPAN_NOTICE("\The [user] unloads \the [holder || src]."), SPAN_NOTICE("You unload [count] round\s from \the [holder || src]."))
 		. = TRUE
 	else if(load_method & SINGLE_CASING)
 		var/obj/item/ammo_casing/casing = loaded[loaded.len]
 		loaded -= casing
 		user.put_in_hands(casing)
-		user.visible_message(SPAN_NOTICE("\The [user] removes \a [casing] from \the [loc]."))
+		user.visible_message(SPAN_NOTICE("\The [user] removes \a [casing] from \the [holder || src]."))
 		. = TRUE
 
 	if(.)
 		update_icon()
-		loc.update_icon()
 
 /obj/item/firearm_component/receiver/ballistic/show_examine_info(var/mob/user)
 	if(is_jammed && user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
@@ -259,6 +252,10 @@
 	load_method = SINGLE_CASING|SPEEDLOADER
 	handle_casings = CYCLE_CASINGS
 	max_shells = 2
+	firemodes = list(
+		list(mode_name="fire one barrel at a time", burst=1),
+		list(mode_name="fire both barrels at once", burst=2),
+	)
 
 /obj/item/firearm_component/receiver/ballistic/pistol
 	load_method = MAGAZINE

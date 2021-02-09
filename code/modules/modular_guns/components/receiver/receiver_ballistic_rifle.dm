@@ -32,24 +32,23 @@
 			to_chat(user, SPAN_NOTICE("You work the bolt open."))
 	else
 		to_chat(user, SPAN_NOTICE("You work the bolt closed."))
-		playsound(loc, 'sound/weapons/guns/interaction/rifle_boltforward.ogg', 50, 1)
+		playsound(get_turf(src), 'sound/weapons/guns/interaction/rifle_boltforward.ogg', 50, 1)
 		bolt_open = FALSE
 	update_icon()
-	loc.update_icon()
 	return TRUE
 
 /obj/item/firearm_component/receiver/ballistic/rifle/proc/unload_shell()
 	if(chambered)
 		if(!bolt_open)
-			playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltback.ogg', 50, 1)
+			playsound(get_turf(src), 'sound/weapons/guns/interaction/rifle_boltback.ogg', 50, 1)
 			bolt_open = TRUE
-		chambered.dropInto(src.loc)
+		chambered.dropInto(get_turf(src))
 		loaded -= chambered
 		chambered = null
 
 /obj/item/firearm_component/receiver/ballistic/rifle/special_check(var/mob/user)
 	if(bolt_open)
-		to_chat(user, SPAN_WARNING("You can't fire \the [loc] while the bolt is open!"))
+		to_chat(user, SPAN_WARNING("You can't fire \the [holder || src] while the bolt is open!"))
 		return FALSE
 	. = ..()
 

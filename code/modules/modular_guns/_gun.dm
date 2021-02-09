@@ -15,6 +15,9 @@
 	var/obj/item/firearm_component/stock/stock
 	var/obj/item/firearm_component/grip/grip
 
+/obj/item/gun/proc/is_secure_gun()
+	return length(req_access)
+
 /obj/item/gun/proc/check_projectile_size_against_barrel(var/obj/item/projectile/projectile)
 	return barrel.get_relative_projectile_size(projectile)
 
@@ -39,6 +42,17 @@
 			bulk =             max(bulk,    comp.bulk)
 
 	update_icon()
+
+/obj/item/gun/emag_act(remaining_charges, mob/user, emag_source)
+	. = ..()
+	if(. == NO_EMAG_ACT)
+		var/list/firearm_components = get_modular_component_list()
+		for(var/fcomp in firearm_components)
+			var/obj/item/firearm_component/comp = firearm_components[fcomp]
+			if(istype(comp))
+				. = comp.holder_emag_act(remaining_charges, user)
+				if(. != NO_EMAG_ACT)
+					break
 
 /obj/item/gun/examine(mob/user, distance)
 	. = ..()
@@ -67,24 +81,6 @@
 	. = ..()
 
 /*
-/obj/item/gun/projectile/shotgun/pump/attack_self(mob/living/user)
-	if(world.time >= recentpump + 10)
-		pump(user)
-		recentpump = world.time
-
-/obj/item/gun/attack_self(mob/user)
-	var/datum/firemode/new_mode = switch_firemodes(user)
-	if(prob(20) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
-		new_mode = switch_firemodes(user)
-	if(new_mode)
-		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
-
-/obj/item/gun/projectile/attack_self(mob/user)
-	if(firemodes.len > 1)
-		..()
-	else
-		unload_ammo(user)
-
 /obj/item/gun/launcher/sealant/attack_self(mob/user)
 	if(loaded_tank)
 		unload_tank(user)
@@ -94,13 +90,13 @@
 /obj/item/gun/launcher/crossbow/attack_self(mob/living/user)
 	if(tension)
 		if(bolt)
-			user.visible_message("[user] relaxes the tension on [src]'s string and removes [bolt].","You relax the tension on [src]'s string and remove [bolt].")
-			bolt.dropInto(loc)
+			user.visible_message("[user] relaxes the tension on [holder || src]'s string and removes [bolt].","You relax the tension on [holder || src]'s string and remove [bolt].")
+			bolt.dropInto(get_turf(holder))
 			var/obj/item/arrow/A = bolt
 			bolt = null
 			A.removed(user)
 		else
-			user.visible_message("[user] relaxes the tension on [src]'s string.","You relax the tension on [src]'s string.")
+			user.visible_message("[user] relaxes the tension on [holder || src]'s string.","You relax the tension on [holder || src]'s string.")
 		tension = 0
 		update_icon()
 	else
@@ -108,11 +104,11 @@
 
 /obj/item/gun/launcher/alien/slugsling/attack_self(var/mob/living/user)
 	mode = mode == "Impact" ? "Sentry" : "Impact"
-	to_chat(user,"<span class='notice'>You switch \the [src]'s mode to \"[mode]\"</span>")
+	to_chat(user,"<span class='notice'>You switch \the [holder || src]'s mode to \"[mode]\"</span>")
 
 /obj/item/gun/launcher/crossbow/rapidcrossbowdevice/attack_self(mob/living/user)
 	if(tension)
-		user.visible_message("[user] relaxes the tension on [src]'s string.","You relax the tension on [src]'s string.")
+		user.visible_message("[user] relaxes the tension on [holder || src]'s string.","You relax the tension on [holder || src]'s string.")
 		tension = 0
 		update_icon()
 	else
@@ -128,16 +124,11 @@
 		charging = FALSE
 	else
 		var/new_wavelength = input("Select the desired laser wavelength.", "Capacitor Laser Wavelength", selected_wavelength) as null|anything in global.laser_wavelengths
-		if(!charging && new_wavelength != selected_wavelength && (loc == user || user.Adjacent(src)) && !user.incapacitated())
+		if(!charging && new_wavelength != selected_wavelength && (holder?.loc == user || user.Adjacent(src)) && !user.incapacitated())
 			selected_wavelength = new_wavelength
-			to_chat(user, SPAN_NOTICE("You dial \the [src] wavelength to [selected_wavelength.name]."))
+			to_chat(user, SPAN_NOTICE("You dial \the [holder || src]'s wavelength to [selected_wavelength.name]."))
 			update_icon()
 	return TRUE
-
-
-/obj/item/gun/projectile/dartgun/attack_self(mob/user)
-	Interact(user)
-
 
 /obj/item/gun/launcher/grenade/underslung/attack_self()
 	return
@@ -161,11 +152,11 @@
 
 /obj/item/gun/launcher/syringe/attack_self(mob/living/user)
 	if(next)
-		user.visible_message("[user] unlatches and carefully relaxes the bolt on [src].", "<span class='warning'>You unlatch and carefully relax the bolt on [src], unloading the spring.</span>")
+		user.visible_message("[user] unlatches and carefully relaxes the bolt on \the [holder || src].", "<span class='warning'>You unlatch and carefully relax the bolt on \the [holder || src], unloading the spring.</span>")
 		next = null
 	else if(darts.len)
-		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
-		user.visible_message("[user] draws back the bolt on [src], clicking it into place.", "<span class='warning'>You draw back the bolt on the [src], loading the spring!</span>")
+		playsound(holder, 'sound/weapons/flipblade.ogg', 50, 1)
+		user.visible_message("[user] draws back the bolt on \the [holder || src], clicking it into place.", "<span class='warning'>You draw back the bolt on the \the [holder || src], loading the spring!</span>")
 		next = darts[1]
 	add_fingerprint(user)
 
@@ -181,7 +172,7 @@
 		to_chat(user, "<span class='warning'>You have to dispense at least one [cur.name_singular] at a time!</span>")
 		return
 	src.dispensing = disp_amount
-	to_chat(user, "<span class='notice'>You set [src] to dispense [dispensing] [cur.name_singular] at a time.</span>")
+	to_chat(user, "<span class='notice'>You set [holder || src] to dispense [dispensing] [cur.name_singular] at a time.</span>")
 
 
 /obj/item/gun/launcher/grenade/attack_self(mob/user)
@@ -198,11 +189,7 @@
 	. = ..()
 	
 /*
-/obj/item/gun/projectile/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		unload_ammo(user, allow_dump=0)
-	else
-		return ..()
+
 
 /obj/item/gun/launcher/grenade/attack_hand(mob/user)
 	if(user.is_holding_offhand(src))
@@ -225,15 +212,15 @@
 /obj/item/gun/launcher/syringe/attack_hand(mob/living/user)
 	if(user.is_holding_offhand(src))
 		if(!darts.len)
-			to_chat(user, "<span class='warning'>[src] is empty.</span>")
+			to_chat(user, "<span class='warning'>[holder || src] is empty.</span>")
 			return
 		if(next)
-			to_chat(user, "<span class='warning'>[src]'s cover is locked shut.</span>")
+			to_chat(user, "<span class='warning'>[holder || src]'s cover is locked shut.</span>")
 			return
 		var/obj/item/syringe_cartridge/C = darts[1]
 		darts -= C
 		user.put_in_hands(C)
-		user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
+		user.visible_message("[user] removes \a [C] from [holder || src].", "<span class='notice'>You remove \a [C] from [holder || src].</span>")
 	else
 		..()
 
@@ -250,8 +237,8 @@
 
 		if(removing)
 			user.put_in_hands(removing)
-			user.visible_message("<span class='notice'>\The [user] removes \the [removing] from \the [src].</span>")
-			playsound(loc, 'sound/machines/click.ogg', 10, 1)
+			user.visible_message("<span class='notice'>\The [user] removes \the [removing] from \the [holder || src].</span>")
+			playsound(holder, 'sound/machines/click.ogg', 10, 1)
 			update_icon()
 			return
 	. = ..()
@@ -261,16 +248,6 @@
 		launcher.unload(user)
 	else
 		..()
-
-/obj/item/gun/projectile/pistol/holdout/attack_hand(mob/user)
-	if(silenced && user.is_holding_offhand(src))
-		to_chat(user, SPAN_NOTICE("You unscrew \the [silenced] from \the [src]."))
-		user.put_in_hands(silenced)
-		silenced = initial(silenced)
-		w_class = initial(w_class)
-		update_icon()
-		return
-	..()
 
 /obj/item/gun/launcher/sealant/attack_hand(mob/user)
 	if((src in user.get_held_items()) && loaded_tank)
@@ -288,21 +265,6 @@
 	. = ..()
 
 /*
-/obj/item/gun/projectile/attackby(var/obj/item/A, mob/user)
-	if(!load_ammo(A, user))
-		return ..()
-
-/obj/item/gun/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/card/id) && is_secure_gun())
-		user.visible_message("[user] swipes an ID through \the [src].", range = 3)
-		if(!registered_owner)
-			var/obj/item/card/id/id = W
-			GLOB.registered_weapons += src
-			verbs += /obj/item/gun/proc/reset_registration
-			registered_owner = id.registered_name
-			to_chat(user, SPAN_NOTICE("\The [src] chimes quietly as it registers to \"[registered_owner]\"."))
-		else
-			to_chat(user, SPAN_NOTICE("\The [src] buzzes quietly, refusing to register without first being reset."))
 	else
 		..()
 
@@ -322,27 +284,27 @@
 			user.put_in_hands(power_supply)
 			power_supply = null
 		else
-			to_chat(user, SPAN_WARNING("\The [src] does not have a cell or capacitor installed."))
+			to_chat(user, SPAN_WARNING("\The [holder || src] does not have a cell or capacitor installed."))
 			return TRUE
-		playsound(loc, 'sound/items/Screwdriver2.ogg', 25)
+		playsound(holder, 'sound/items/Screwdriver2.ogg', 25)
 		update_icon()
 		return TRUE
 
 	if(istype(W, /obj/item/cell))
 		if(power_supply)
-			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
+			to_chat(user, SPAN_WARNING("\The [holder || src] already has a cell installed."))
 		else if(user.unEquip(W, src))
 			power_supply = W
-			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [src]."))
+			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [holder || src]."))
 			update_icon()
 		return TRUE
 
 	if(istype(W, /obj/item/stock_parts/capacitor))
 		if(length(capacitors) >= max_capacitors)
-			to_chat(user, SPAN_WARNING("\The [src] cannot fit any additional capacitors."))
+			to_chat(user, SPAN_WARNING("\The [holder || src] cannot fit any additional capacitors."))
 		else if(user.unEquip(W, src))
 			LAZYADD(capacitors, W)
-			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [src]."))
+			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [holder || src]."))
 			update_icon()
 		return TRUE
 
@@ -351,7 +313,7 @@
 
 /obj/item/gun/energy/capacitor/rifle/linear_fusion/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
-		to_chat(user, SPAN_WARNING("\The [src] is hermetically sealed; you can't get the components out."))
+		to_chat(user, SPAN_WARNING("\The [holder || src] is hermetically sealed; you can't get the components out."))
 		return TRUE
 	. = ..()
 
@@ -365,7 +327,7 @@
 			return
 		stored_matter += cartridge.remaining
 		qdel(W)
-		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+		playsound(holder, 'sound/machines/click.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")
 		update_icon()
 
@@ -376,7 +338,7 @@
 			return
 		stored_matter += 10
 		qdel(A)
-		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+		playsound(holder, 'sound/machines/click.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>Flashforged bolt reclaimed. The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")
 		update_icon()
 
@@ -395,13 +357,13 @@
 			qdel(rcd)
 			qdel_self()
 		else
-			to_chat(user, SPAN_WARNING("\The [rcd] is not prepared for installation in \the [src]."))
+			to_chat(user, SPAN_WARNING("\The [rcd] is not prepared for installation in \the [holder || src]."))
 		return
 
 	if(!bolt)
 		if (istype(W,/obj/item/arrow) && user.unEquip(W, src))
 			bolt = W
-			user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
+			user.visible_message("[user] slides [bolt] into [holder || src].","You slide [bolt] into [holder || src].")
 			update_icon()
 			return
 		else if(istype(W,/obj/item/stack/material/rods))
@@ -409,9 +371,9 @@
 			if (R.use(1))
 				bolt = new /obj/item/arrow/rod(src)
 				bolt.fingerprintslast = src.fingerprintslast
-				bolt.dropInto(loc)
+				bolt.dropInto(get_turf(holder))
 				update_icon()
-				user.visible_message("[user] jams [bolt] into [src].","You jam [bolt] into [src].")
+				user.visible_message("[user] jams [bolt] into [holder || src].","You jam [bolt] into [holder || src].")
 				superheat_rod(user)
 			return
 
@@ -420,19 +382,19 @@
 			if(!user.unEquip(W, src))
 				return
 			cell = W
-			to_chat(user, "<span class='notice'>You jam [cell] into [src] and wire it to the firing coil.</span>")
+			to_chat(user, "<span class='notice'>You jam [cell] into [holder || src] and wire it to the firing coil.</span>")
 			superheat_rod(user)
 		else
-			to_chat(user, "<span class='notice'>[src] already has a cell installed.</span>")
+			to_chat(user, "<span class='notice'>[holder || src] already has a cell installed.</span>")
 
 	else if(isScrewdriver(W))
 		if(cell)
 			var/obj/item/C = cell
-			C.dropInto(user.loc)
-			to_chat(user, "<span class='notice'>You jimmy [cell] out of [src] with [W].</span>")
+			C.dropInto(get_turf(user))
+			to_chat(user, "<span class='notice'>You jimmy [cell] out of [holder || src] with [W].</span>")
 			cell = null
 		else
-			to_chat(user, "<span class='notice'>[src] doesn't have a cell installed.</span>")
+			to_chat(user, "<span class='notice'>[holder || src] doesn't have a cell installed.</span>")
 
 	else
 		..()
@@ -444,9 +406,9 @@
 			if(!user.unEquip(I, src))
 				return
 			darts += I
-			to_chat(user, SPAN_NOTICE("You slot \the [I] into \the [src]."))
+			to_chat(user, SPAN_NOTICE("You slot \the [I] into \the [holder || src]."))
 		else
-			to_chat(user, SPAN_WARNING("\The [src] can hold no more darts."))
+			to_chat(user, SPAN_WARNING("\The [holder || src] can hold no more darts."))
 
 
 /obj/item/gun/launcher/grenade/attackby(obj/item/I, mob/user)
@@ -465,11 +427,11 @@
 
 		var/decl/currency/cur = decls_repository.get_decl(bling.currency)
 		if(bling.currency != GLOB.using_map.default_currency)
-			to_chat(user, SPAN_WARNING("Due to local legislation and budget cuts, \the [src] will only accept [cur.name]."))
+			to_chat(user, SPAN_WARNING("Due to local legislation and budget cuts, \the [holder || src] will only accept [cur.name]."))
 			return
 
 		receptacle_value += bling.absolute_worth
-		to_chat(user, "<span class='notice'>You slide [bling.get_worth()] [cur.name_singular] into [src]'s receptacle.</span>")
+		to_chat(user, "<span class='notice'>You slide [bling.get_worth()] [cur.name_singular] into [holder || src]'s receptacle.</span>")
 		qdel(bling)
 
 	else
@@ -479,7 +441,7 @@
 /obj/item/gun/launcher/pneumatic/attackby(obj/item/W, mob/user)
 	if(!tank && istype(W,/obj/item/tank) && user.unEquip(W, src))
 		tank = W
-		user.visible_message("[user] jams [W] into [src]'s valve and twists it closed.","You jam [W] into [src]'s valve and twist it closed.")
+		user.visible_message("[user] jams [W] into [holder || src]'s valve and twists it closed.","You jam [W] into [holder || src]'s valve and twist it closed.")
 		update_icon()
 	else if(istype(W) && item_storage.can_be_inserted(W, user))
 		item_storage.handle_item_insertion(W)
@@ -491,22 +453,22 @@
 			if(!user.unEquip(I, src))
 				return
 			rockets += I
-			to_chat(user, "<span class='notice'>You put the rocket in [src].</span>")
+			to_chat(user, "<span class='notice'>You put the rocket in [holder || src].</span>")
 			to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>")
 		else
-			to_chat(usr, "<span class='warning'>\The [src] cannot hold more rockets.</span>")
+			to_chat(usr, "<span class='warning'>\The [holder || src] cannot hold more rockets.</span>")
 
 
 /obj/item/gun/launcher/syringe/attackby(var/obj/item/A, mob/user)
 	if(istype(A, /obj/item/syringe_cartridge))
 		var/obj/item/syringe_cartridge/C = A
 		if(darts.len >= max_darts)
-			to_chat(user, "<span class='warning'>[src] is full!</span>")
+			to_chat(user, "<span class='warning'>[holder || src] is full!</span>")
 			return
 		if(!user.unEquip(C, src))
 			return
 		darts += C //add to the end
-		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
+		user.visible_message("[user] inserts \a [C] into [holder || src].", "<span class='notice'>You insert \a [C] into [holder || src].</span>")
 	else
 		..()
 
@@ -516,37 +478,37 @@
 	if(removable_components)
 		if(istype(thing, /obj/item/cell))
 			if(cell)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [cell] installed.</span>")
+				to_chat(user, "<span class='warning'>\The [holder || src] already has \a [cell] installed.</span>")
 				return
 			if(!user.unEquip(thing, src))
 				return
 			cell = thing
-			playsound(loc, 'sound/machines/click.ogg', 10, 1)
-			user.visible_message("<span class='notice'>\The [user] slots \the [cell] into \the [src].</span>")
+			playsound(holder, 'sound/machines/click.ogg', 10, 1)
+			user.visible_message("<span class='notice'>\The [user] slots \the [cell] into \the [holder || src].</span>")
 			update_icon()
 			return
 
 		if(isScrewdriver(thing))
 			if(!capacitor)
-				to_chat(user, "<span class='warning'>\The [src] has no capacitor installed.</span>")
+				to_chat(user, "<span class='warning'>\The [holder || src] has no capacitor installed.</span>")
 				return
 			user.put_in_hands(capacitor)
-			user.visible_message("<span class='notice'>\The [user] unscrews \the [capacitor] from \the [src].</span>")
-			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+			user.visible_message("<span class='notice'>\The [user] unscrews \the [capacitor] from \the [holder || src].</span>")
+			playsound(holder, 'sound/items/Screwdriver.ogg', 50, 1)
 			capacitor = null
 			update_icon()
 			return
 
 		if(istype(thing, /obj/item/stock_parts/capacitor))
 			if(capacitor)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [capacitor] installed.</span>")
+				to_chat(user, "<span class='warning'>\The [holder || src] already has \a [capacitor] installed.</span>")
 				return
 			if(!user.unEquip(thing, src))
 				return
 			capacitor = thing
-			playsound(loc, 'sound/machines/click.ogg', 10, 1)
+			playsound(holder, 'sound/machines/click.ogg', 10, 1)
 			power_per_tick = (power_cost*0.15) * capacitor.rating
-			user.visible_message("<span class='notice'>\The [user] slots \the [capacitor] into \the [src].</span>")
+			user.visible_message("<span class='notice'>\The [user] slots \the [capacitor] into \the [holder || src].</span>")
 			update_icon()
 			return
 
@@ -557,12 +519,12 @@
 		var/obj/item/stack/ammo = thing
 		if(!istype(ammo))
 			if(loaded)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [loaded] loaded.</span>")
+				to_chat(user, "<span class='warning'>\The [holder || src] already has \a [loaded] loaded.</span>")
 				return
 			var/obj/item/magnetic_ammo/mag = thing
 			if(istype(mag))
 				if(!(load_type == mag.basetype))
-					to_chat(user, "<span class='warning'>\The [src] doesn't seem to accept \a [mag].</span>")
+					to_chat(user, "<span class='warning'>\The [holder || src] doesn't seem to accept \a [mag].</span>")
 					return
 				projectile_type = mag.projectile_type
 			if(!user.unEquip(thing, src))
@@ -580,72 +542,36 @@
 				loaded_ammo.amount += ammo_count
 			if(ammo_count <= 0)
 				// This will also display when someone tries to insert a stack of 0, but that shouldn't ever happen anyway.
-				to_chat(user, "<span class='warning'>\The [src] is already fully loaded.</span>")
+				to_chat(user, "<span class='warning'>\The [holder || src] is already fully loaded.</span>")
 				return
 			ammo.use(ammo_count)
 		else
 			if(loaded)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [loaded] loaded.</span>")
+				to_chat(user, "<span class='warning'>\The [holder || src] already has \a [loaded] loaded.</span>")
 				return
 			loaded = new load_type(src, 1)
 			ammo.use(1)
 
-		user.visible_message("<span class='notice'>\The [user] loads \the [src] with \the [loaded].</span>")
-		playsound(loc, 'sound/weapons/flipblade.ogg', 50, 1)
+		user.visible_message("<span class='notice'>\The [user] loads \the [holder || src] with \the [loaded].</span>")
+		playsound(holder, 'sound/weapons/flipblade.ogg', 50, 1)
 		update_icon()
 		return
 	. = ..()
 
-/obj/item/gun/projectile/automatic/assault_rifle/attackby(obj/item/I, mob/user)
-	if((istype(I, /obj/item/grenade)))
-		launcher.load(I, user)
-	else
-		..()
-
-/obj/item/gun/projectile/dartgun/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/chems/glass))
-		add_beaker(I, user)
-		return 1
-	..()
-
-/obj/item/gun/projectile/pistol/holdout/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/silencer))
-		if(src in user.get_held_items())	//if we're not in his hands
-			to_chat(user, SPAN_WARNING("You'll need [src] in your hands to do that."))
-			return TRUE
-		if(user.unEquip(I, src))
-			to_chat(user, SPAN_NOTICE("You screw [I] onto [src]."))
-			silenced = I	//dodgy?
-			w_class = ITEM_SIZE_NORMAL
-			update_icon()
-		return TRUE
-	. = ..()
-
-/obj/item/gun/projectile/revolver/capgun/attackby(obj/item/wirecutters/W, mob/user)
-	if(!istype(W) || !cap)
-		return ..()
-	to_chat(user, "<span class='notice'>You snip off the toy markings off the [src].</span>")
-	name = "revolver"
-	desc += " Someone snipped off the barrel's toy mark. How dastardly."
-	cap = FALSE
-	update_icon()
-	return 1
-
-
-
-
 /obj/item/gun/launcher/sealant/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/sealant_tank) && user.unEquip(W, src))
 		loaded_tank = W
-		to_chat(user, SPAN_NOTICE("You slot \the [loaded_tank] into \the [src]."))
+		to_chat(user, SPAN_NOTICE("You slot \the [loaded_tank] into \the [holder || src]."))
 		update_icon()
 		return TRUE
 	. = ..()
 */
 
-
 /obj/item/gun/on_update_icon()
 	force_icon_debug()
+	var/mob/user = loc
+	if(src in user.get_held_items())
+		user.update_inv_hands()
 
 /obj/item/gun/proc/force_icon_debug()
 	cut_overlays()
@@ -675,3 +601,24 @@
 
 /obj/item/gun/proc/set_caliber(var/caliber)
 	. = (barrel?.set_caliber(caliber) && receiver?.set_caliber(caliber))
+
+/obj/item/gun/proc/reset_registration()
+	set name = "Reset Registration"
+	set category = "Object"
+	set src in usr
+
+	var/obj/item/firearm_component/receiver/energy/secure/rec = receiver
+	if(istype(rec))
+		to_chat(usr, SPAN_WARNING("\The [src] cannot be reset."))
+		return
+	if(issilicon(usr))
+		to_chat(usr, SPAN_WARNING("You are not permitted to modify weapon registrations."))
+		return
+	usr.visible_message("\The [usr] presses the reset button on \the [src].", range = 3)
+	if(!allowed(usr))
+		to_chat(usr, SPAN_WARNING("\The [src] buzzes quietly, refusing your access."))
+		return
+	to_chat(usr, SPAN_NOTICE("\The [src] chimes quietly as its registration resets."))
+	rec.registered_owner = null
+	GLOB.registered_weapons -= rec
+	verbs -= /obj/item/gun/proc/reset_registration

@@ -14,7 +14,7 @@
 	if(chambered)
 		chambered.dropInto(get_turf(user)) 
 		if(LAZYLEN(chambered.fall_sounds))
-			playsound(loc, pick(chambered.fall_sounds), 50, 1)
+			playsound(get_turf(chambered), pick(chambered.fall_sounds), 50, 1)
 		chambered = null
 	if(length(loaded))
 		var/obj/item/ammo_casing/AC = loaded[1] //load next casing.

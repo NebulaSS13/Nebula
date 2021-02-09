@@ -69,10 +69,6 @@
 
 	var/next_fire_time = 0
 
-	var/sel_mode = 1 //index of the currently selected mode
-	var/list/firemodes = list()
-	var/selector_sound = 'sound/weapons/guns/selector.ogg'
-
 	//aiming system stuff
 	var/keep_aim = 1 	//1 for keep shooting until aim is lowered
 						//0 for one bullet after tarrget moves and aim is lowered
@@ -97,8 +93,6 @@
 
 /obj/item/gun/Initialize()
 	. = ..()
-	for(var/i in 1 to firemodes.len)
-		firemodes[i] = new /datum/firemode(src, firemodes[i])
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
 	if(scope_zoom)
@@ -585,32 +579,9 @@
 
 /obj/item/gun/examine(mob/user)
 	. = ..()
-	if(user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
-		if(firemodes.len > 1)
-			var/datum/firemode/current_mode = firemodes[sel_mode]
-			to_chat(user, "The fire selector is set to [current_mode.name].")
 	if(has_safety)
 		to_chat(user, "The safety is [safety() ? "on" : "off"].")
 	last_safety_check = world.time
-
-/obj/item/gun/proc/switch_firemodes()
-
-	var/next_mode = get_next_firemode()
-	if(!next_mode || next_mode == sel_mode)
-		return null
-
-	sel_mode = next_mode
-	var/datum/firemode/new_mode = firemodes[sel_mode]
-	new_mode.apply_to(src)
-	playsound(loc, selector_sound, 50, 1)
-	return new_mode
-
-/obj/item/gun/proc/get_next_firemode()
-	if(firemodes.len <= 1)
-		return null
-	. = sel_mode + 1
-	if(. > firemodes.len)
-		. = 1
 
 /obj/item/gun/proc/toggle_safety(var/mob/user)
 	safety_state = !safety_state

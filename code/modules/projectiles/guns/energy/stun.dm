@@ -8,11 +8,7 @@
 	max_shots = 5
 	projectile_type = /obj/item/projectile/beam/stun
 	combustion = 0
-
-	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
-		)
+	receiver = /obj/item/firearm_component/receiver/energy/electrolaser
 
 /obj/item/gun/energy/taser/mounted
 	name = "mounted electrolaser"

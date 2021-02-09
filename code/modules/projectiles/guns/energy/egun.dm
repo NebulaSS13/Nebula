@@ -11,12 +11,7 @@
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = "{'combat':3,'magnets':2}"
 	indicator_color = COLOR_CYAN
-
-	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, indicator_color=COLOR_CYAN),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, indicator_color=COLOR_YELLOW),
-		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, indicator_color=COLOR_RED),
-		)
+	receiver = /obj/item/firearm_component/receiver/energy/sidearm
 
 /obj/item/gun/energy/gun/small
 	name = "small energy gun"
@@ -26,12 +21,7 @@
 	max_shots = 5
 	w_class = ITEM_SIZE_SMALL
 	force = 2 //it's the size of a car key, what did you expect?
-
-	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, indicator_color=COLOR_CYAN),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, indicator_color=COLOR_YELLOW),
-		list(mode_name="kill", projectile_type=/obj/item/projectile/beam/smalllaser,indicator_color=COLOR_RED),
-		)
+	receiver = /obj/item/firearm_component/receiver/energy/sidearm/small
 
 /obj/item/gun/energy/gun/mounted
 	name = "mounted energy gun"
