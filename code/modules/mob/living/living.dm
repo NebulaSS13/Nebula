@@ -403,6 +403,17 @@ default behaviour is:
 	fire_stacks = 0
 
 /mob/living/proc/rejuvenate()
+
+	// Wipe all of our reagent lists.
+	var/datum/reagents/bloodstr_reagents = get_injected_reagents()
+	if(bloodstr_reagents)
+		bloodstr_reagents.clear_reagents()
+	var/datum/reagents/touching_reagents = get_contact_reagents()
+	if(touching_reagents)
+		touching_reagents.clear_reagents()
+	var/datum/reagents/ingested_reagents = get_ingested_reagents()
+	if(ingested_reagents)
+		ingested_reagents.clear_reagents()
 	if(reagents)
 		reagents.clear_reagents()
 
@@ -769,12 +780,19 @@ default behaviour is:
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.
 
 /mob/living/fluid_act(var/datum/reagents/fluids)
-	..()
 	for(var/thing in get_equipped_items(TRUE))
 		if(isnull(thing)) continue
 		var/atom/movable/A = thing
 		if(A.simulated)
 			A.fluid_act(fluids)
+	if(fluids.total_volume)
+		var/datum/reagents/touching_reagents = get_contact_reagents()
+		if(touching_reagents)
+			var/saturation =  min(fluids.total_volume, round(mob_size * 1.5 * reagent_permeability()) - touching_reagents.total_volume)
+			if(saturation > 0)
+				fluids.trans_to_holder(touching_reagents, saturation)
+	if(fluids.total_volume)
+		. = ..()
 
 /mob/living/proc/nervous_system_failure()
 	return FALSE
@@ -876,3 +894,12 @@ default behaviour is:
 
 /mob/living/proc/should_have_organ(var/organ_check)
 	return FALSE
+
+/mob/living/proc/get_contact_reagents()
+	return reagents
+
+/mob/living/proc/get_injected_reagents()
+	return reagents
+
+/mob/living/proc/get_adjusted_metabolism(metabolism)
+	return metabolism

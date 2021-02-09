@@ -436,7 +436,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			T.assume_gas(vapor, (volume * vapor_products[vapor]), temperature)
 		holder.remove_reagent(type, volume)
 
-/decl/material/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
+/decl/material/proc/on_mob_life(var/mob/living/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(QDELETED(src))
 		return // Something else removed us.
 	if(!istype(M))

@@ -264,10 +264,11 @@
 			print_reagent_default_message = FALSE
 			. += "<span class='scan_warning'>Warning: Unknown substance[(unknown>1)?"s":""] detected in subject's blood.</span>"
 
-	if(H.touching.total_volume)
+	var/datum/reagents/touching_reagents = H.get_contact_reagents()
+	if(touching_reagents && touching_reagents.total_volume)
 		var/unknown = 0
 		var/reagentdata[0]
-		for(var/A in H.touching.reagent_volumes)
+		for(var/A in touching_reagents.reagent_volumes)
 			var/decl/material/R = decls_repository.get_decl(A)
 			if(R.scannable)
 				print_reagent_default_message = FALSE

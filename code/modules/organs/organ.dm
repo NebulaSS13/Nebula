@@ -134,14 +134,16 @@
 			if(!ailment.treated_by_reagent_type)
 				continue
 			var/treated
-			if(REAGENT_VOLUME(owner.bloodstr, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
-				treated = owner.bloodstr
-			else if(REAGENT_VOLUME(owner.reagents, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
-				treated = owner.reagents
-			else
-				var/datum/reagents/ingested = owner.get_ingested_reagents()
-				if(ingested && REAGENT_VOLUME(ingested, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
-					treated = ingested
+			var/datum/reagents/bloodstr_reagents = owner.get_injected_reagents()
+			if(bloodstr_reagents)
+				if(REAGENT_VOLUME(bloodstr_reagents, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
+					treated = bloodstr_reagents
+				else if(REAGENT_VOLUME(owner.reagents, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
+					treated = owner.reagents
+				else
+					var/datum/reagents/ingested = owner.get_ingested_reagents()
+					if(ingested && REAGENT_VOLUME(ingested, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
+						treated = ingested
 			if(treated)
 				ailment.was_treated_by_medication(treated)
 

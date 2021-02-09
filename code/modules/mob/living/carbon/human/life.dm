@@ -520,35 +520,11 @@
 	return min(1,.)
 
 /mob/living/carbon/human/handle_chemicals_in_body()
-	..()
-	if(status_flags & GODMODE)
-		return 0
-
-	if(isSynthetic())
-		return
-
-	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
-
-	if(reagents)
-		if(touching) touching.metabolize()
-		if(bloodstr) bloodstr.metabolize()
-		if(ingested) metabolize_ingested_reagents()
-
-	// Trace chemicals
-	for(var/T in chem_doses)
-		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
-			continue
-		var/decl/material/R = T
-		var/dose = LAZYACCESS(chem_doses, T) - initial(R.metabolism)*2
-		LAZYSET(chem_doses, T, dose)
-		if(LAZYACCESS(chem_doses, T) <= 0)
-			LAZYREMOVE(chem_doses, T)
-
-	// Not an ideal place to handle this, but there doesn't seem to be a more appropriate centralized area.
-	if(has_chemical_effect(CE_GLOWINGEYES, 1))
-		update_eyes()
-
-	updatehealth()
+	. = ..()
+	if(.)
+		if(has_chemical_effect(CE_GLOWINGEYES, 1))
+			update_eyes()
+		updatehealth()
 
 // Check if we should die.
 /mob/living/carbon/human/proc/handle_death_check()
