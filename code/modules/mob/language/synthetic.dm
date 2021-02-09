@@ -48,7 +48,7 @@
 		O.show_message("[message_start] ([ghost_follow_link(speaker, O)]) [message_body]", 2)
 
 	for (var/mob/M in GLOB.dead_mob_list_)
-		if(!istype(M,/mob/new_player) && !istype(M,/mob/living/carbon/brain)) //No meta-evesdropping
+		if(!istype(M,/mob/new_player) && !isbrain(M)) //No meta-evesdropping
 			M.show_message("[message_start] ([ghost_follow_link(speaker, M)]) [message_body]", 2)
 
 	for (var/mob/living/S in GLOB.living_mob_list_)

@@ -161,7 +161,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = "Relinquish your life and enter the land of the dead."
 
 	if(stat == DEAD)
-		announce_ghost_joinleave(ghostize(1))
+		announce_ghost_joinleave(ghostize(CORPSE_CAN_REENTER))
 	else
 		var/response
 		if(src.client && src.client.holder)
@@ -178,8 +178,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			return
 		resting = 1
 		log_and_message_admins("has ghosted.")
-		var/mob/observer/ghost/ghost = ghostize(0)	//0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
-		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
+		var/mob/observer/ghost/ghost = ghostize(CORPSE_CANNOT_REENTER)
+		ghost.timeofdeath = world.time
 		announce_ghost_joinleave(ghost)
 
 /mob/observer/ghost/can_use_hands()	return 0

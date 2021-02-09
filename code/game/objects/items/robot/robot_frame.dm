@@ -71,7 +71,7 @@
 			to_chat(user, SPAN_WARNING("The frame is not ready for the central processor to be installed."))
 			return
 
-		var/mob/living/carbon/brain/B
+		var/mob/living/brain/B
 		if(istype(W, /obj/item/mmi))
 			var/obj/item/mmi/M = W
 			B = M.brainmob

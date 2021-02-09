@@ -46,15 +46,7 @@
 #define IS_PAI 3
 
 /mob/living/silicon/say_understands(var/other,var/decl/language/speaking = null)
-	//These only pertain to common. Languages are handled by mob/say_understands()
-	if (!speaking)
-		if (istype(other, /mob/living/carbon))
-			return 1
-		if (istype(other, /mob/living/silicon))
-			return 1
-		if (istype(other, /mob/living/carbon/brain))
-			return 1
-	return ..()
+	. = (!speaking && (iscarbon(other) || issilicon(other) || isbrain(other))) || ..()
 
 //For holopads only. Usable by AI.
 /mob/living/silicon/ai/proc/holopad_talk(var/message, verb, decl/language/speaking)

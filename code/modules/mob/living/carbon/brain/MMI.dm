@@ -31,11 +31,8 @@
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	req_access = list(access_robotics)
 
-	//Revised. Brainmob is now contained directly within object of transfer. MMI in this case.
-
-	var/locked = 0
-	var/mob/living/carbon/brain/brainmob = null//The current occupant.
-	var/obj/item/organ/internal/brain/brainobj = null	//The current brain organ.
+	var/locked = FALSE
+	var/obj/item/organ/internal/brain/holding_brain // The current brain organ.
 
 /obj/item/mmi/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O,/obj/item/organ/internal/brain) && !brainmob) //Time to stick a brain in it --NEO
@@ -58,7 +55,7 @@
 		brainmob.set_stat(CONSCIOUS)
 		brainmob.switch_from_dead_to_living_mob_list() //Update dem lists
 
-		brainobj = O
+		holding_brain = O
 
 		SetName("[initial(name)]: ([brainmob.real_name])")
 		update_icon()
@@ -90,10 +87,10 @@
 	else
 		to_chat(user, "<span class='notice'>You upend the MMI, spilling the brain onto the floor.</span>")
 		var/obj/item/organ/internal/brain/brain
-		if (brainobj)	//Pull brain organ out of MMI.
-			brainobj.forceMove(user.loc)
-			brain = brainobj
-			brainobj = null
+		if (holding_brain)	//Pull brain organ out of MMI.
+			holding_brain.forceMove(user.loc)
+			brain = holding_brain
+			holding_brain = null
 		else	//Or make a new one if empty.
 			brain = new(user.loc)
 		brainmob.container = null//Reset brainmob mmi var.

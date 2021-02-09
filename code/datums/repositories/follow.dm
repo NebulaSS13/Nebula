@@ -175,7 +175,7 @@
 
 /datum/follow_holder/brain
 	sort_order = 3
-	followed_type = /mob/living/carbon/brain
+	followed_type = /mob/living/brain
 	suffix = "Brain"
 
 /datum/follow_holder/alien

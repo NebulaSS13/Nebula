@@ -411,7 +411,7 @@ var/list/admin_verbs_mod = list(
 	else
 		//ghostize
 		var/mob/body = mob
-		var/mob/observer/ghost/ghost = body.ghostize(1)
+		var/mob/observer/ghost/ghost = body.ghostize(CORPSE_CAN_REENTER)
 		ghost.admin_ghosted = 1
 		if(body)
 			body.teleop = ghost

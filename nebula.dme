@@ -2167,8 +2167,6 @@
 #include "code\modules\mob\living\carbon\alien\update_icons.dm"
 #include "code\modules\mob\living\carbon\brain\brain.dm"
 #include "code\modules\mob\living\carbon\brain\death.dm"
-#include "code\modules\mob\living\carbon\brain\life.dm"
-#include "code\modules\mob\living\carbon\brain\login.dm"
 #include "code\modules\mob\living\carbon\brain\MMI.dm"
 #include "code\modules\mob\living\carbon\brain\robot.dm"
 #include "code\modules\mob\living\carbon\brain\say.dm"
