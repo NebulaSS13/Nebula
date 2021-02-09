@@ -1,13 +1,12 @@
 
-/obj/item/gun/projectile/pistol
+/obj/item/gun/pistol
 	name = "pistol"
 	icon = 'icons/obj/guns/pistol.dmi'
 	barrel = /obj/item/firearm_component/barrel/ballistic/pistol
 	receiver = /obj/item/firearm_component/receiver/ballistic/pistol
 	accuracy_power = 7
-	safety_icon = "safety"
 
-/obj/item/gun/projectile/pistol/holdout
+/obj/item/gun/pistol/holdout
 	name = "holdout pistol"
 	desc = "The Lumoco Arms P3 Whisper. A small, easily concealable gun."
 	icon = 'icons/obj/guns/holdout_pistol.dmi'

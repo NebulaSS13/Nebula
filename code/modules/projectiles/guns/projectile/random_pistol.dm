@@ -1,5 +1,5 @@
 
-/obj/item/gun/projectile/pistol/random
+/obj/item/gun/pistol/random
 	name = "pistol"
 	icon = 'icons/obj/guns/random_pistol/base.dmi'
 	var/decl/gun_look/gun_look
@@ -13,7 +13,7 @@
 		"Justice", "Protection", "Defense", "Penetrator", "Compensator", "Police Special", "Combat", "Point & Shoot"
 	)
 
-/obj/item/gun/projectile/pistol/random/Initialize()
+/obj/item/gun/pistol/random/Initialize()
 	var/index = pick(get_load_caliber(), rand(200,900), "P-[rand(10,99)]")
 	desc = "A semi-automatic pistol of unknown origin. The inscription on the side claims the model is '[pick(descriptor)] [pick(noun)] [index]'"
 	var/list/styles = decls_repository.get_decls_of_type(/decl/gun_look)
@@ -21,15 +21,15 @@
 	handle_icon = pick(gun_look.handle_icons)
 	. = ..()
 
-/obj/item/gun/projectile/pistol/random/update_base_icon()
+/obj/item/gun/pistol/random/update_base_icon()
 	..()
 	overlays += image(gun_look.icon, icon_state)
 	overlays += image(handle_icon, icon_state)
 
-/obj/item/gun/projectile/pistol/random/get_ammo_indicator()
+/obj/item/gun/pistol/random/get_ammo_indicator()
 	return gun_look.adjust_ammo_indicator(..(), get_world_inventory_state())
 
-/obj/item/gun/projectile/pistol/random/get_safety_indicator()
+/obj/item/gun/pistol/random/get_safety_indicator()
 	var/mutable_appearance/safety = mutable_appearance(icon, "safety[safety()]")
 	return gun_look.adjust_safety_indicator(safety, get_world_inventory_state())
 

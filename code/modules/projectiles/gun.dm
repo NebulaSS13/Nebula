@@ -29,21 +29,6 @@
 
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
 /obj/item/gun
-	name = "gun"
-	desc = "Its a gun. It's pretty terrible, though."
-	icon_state = ICON_STATE_WORLD
-	icon = 'icons/obj/guns/pistol.dmi'
-	obj_flags =  OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_LOWER_BODY|SLOT_HOLSTER
-	material = /decl/material/solid/metal/steel
-	w_class = ITEM_SIZE_NORMAL
-	throwforce = 5
-	throw_speed = 4
-	throw_range = 5
-	force = 5
-	origin_tech = "{'combat':1}"
-	attack_verb = list("struck", "hit", "bashed")
-	zoomdevicename = "scope"
 
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/pickup2.ogg'
@@ -55,8 +40,6 @@
 	var/fire_sound = 'sound/weapons/gunshot/gunshot.ogg'
 	var/fire_sound_text = "gunshot"
 	var/fire_anim = null
-	var/screen_shake = 0 //shouldn't be greater than 2 unless zoomed
-	var/space_recoil = 0 //knocks back in space
 	var/silenced = 0
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/accuracy_power = 5  //increase of to-hit chance per 1 point of accuracy
@@ -65,7 +48,6 @@
 	var/scope_zoom = 0
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
 	var/list/dispersion = list(0)
-	var/combustion	//whether it creates hotspot when fired
 
 	var/next_fire_time = 0
 
@@ -77,10 +59,6 @@
 	var/tmp/mob/living/last_moved_mob //Used to fire faster at more than one person.
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/tmp/lock_time = -100
-	var/tmp/last_safety_check = -INFINITY
-	var/safety_state = 1
-	var/has_safety = TRUE
-	var/safety_icon 	   //overlay to apply to gun based on safety state, if any
 
 	var/autofire_enabled = FALSE
 	var/atom/autofiring_at
@@ -147,22 +125,7 @@
 		update_icon() // In case item_state is set somewhere else.
 	..()
 
-/obj/item/gun/on_update_icon()
-	var/mob/living/M = loc
-	overlays.Cut()
-	update_base_icon()
-	if(istype(M))
-		if(M.skill_check(SKILL_WEAPONS,SKILL_BASIC))
-			overlays += image('icons/obj/guns/gui.dmi',"safety[safety()]")
-		if(src in M.get_held_items())
-			M.update_inv_hands()
-	if(safety_icon)
-		overlays +=	get_safety_indicator()
-
 /obj/item/gun/proc/update_base_icon()
-
-/obj/item/gun/proc/get_safety_indicator()
-	return mutable_appearance(icon, "[get_world_inventory_state()][safety_icon][safety()]")
 
 /obj/item/gun/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
@@ -183,9 +146,9 @@
 		return FALSE
 
 	var/mob/living/M = user
-	if(!safety() && world.time > last_safety_check + 5 MINUTES && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
+	if(receiver && !receiver.safety() && world.time > receiver.last_safety_check + 5 MINUTES && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		if(prob(30))
-			toggle_safety()
+			receiver.toggle_safety()
 			return 1
 	if(MUTATION_HULK in M.mutations)
 		to_chat(M, SPAN_WARNING("Your fingers are much too large for the trigger guard!"))
@@ -253,19 +216,20 @@
 	if((!waterproof && submerged()) || !special_check(user))
 		return
 
-	if(safety())
-		if(user.a_intent == I_HURT && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //reflex un-safeying
-			toggle_safety(user)
-		else
-			handle_click_empty()
-			return
+	if(receiver)
+		if(receiver.safety())
+			if(user.a_intent == I_HURT && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //reflex un-safeying
+				receiver.toggle_safety(user)
+			else
+				handle_click_empty()
+				return
+		receiver.last_safety_check = world.time
 
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
 			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
 		return
 
-	last_safety_check = world.time
 	if(set_click_cooldown)
 		var/shoot_time = (burst - 1) * burst_delay
 		user.setClickCooldown(shoot_time) //no clicking on things while shooting
@@ -509,7 +473,7 @@
 		mouthshoot = 0
 		return
 
-	if(safety())
+	if(receiver?.safety())
 		user.visible_message("*click click*", SPAN_DANGER("*click*"))
 		playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
 		mouthshoot = 0
@@ -577,35 +541,11 @@
 		accuracy = initial(accuracy)
 		screen_shake = initial(screen_shake)
 
-/obj/item/gun/examine(mob/user)
-	. = ..()
-	if(has_safety)
-		to_chat(user, "The safety is [safety() ? "on" : "off"].")
-	last_safety_check = world.time
-
-/obj/item/gun/proc/toggle_safety(var/mob/user)
-	safety_state = !safety_state
-	update_icon()
-	if(user)
-		to_chat(user, "<span class='notice'>You switch the safety [safety_state ? "on" : "off"] on [src].</span>")
-		last_safety_check = world.time
-		playsound(src, 'sound/weapons/flipblade.ogg', 30, 1)
-
-/obj/item/gun/verb/toggle_safety_verb()
-	set src in usr
-	set category = "Object"
-	set name = "Toggle Gun Safety"
-	if(usr == loc)
-		toggle_safety(usr)
-
 /obj/item/gun/CtrlClick(var/mob/user)
 	if(loc == user)
-		toggle_safety(user)
+		receiver?.toggle_safety(user)
 		return TRUE
 	. = ..()
-
-/obj/item/gun/proc/safety()
-	return has_safety && safety_state
 
 /obj/item/gun/equipped()
 	..()
@@ -633,7 +573,7 @@
 	return (autofire_enabled && world.time >= next_fire_time)
 
 /obj/item/gun/proc/check_accidents(mob/living/user, message = "[user] fumbles with the [src] and it goes off!",skill_path = SKILL_WEAPONS, fail_chance = 20, no_more_fail = SKILL_EXPERT, factor = 2)
-	if(istype(user) && !safety() && user.skill_fail_prob(skill_path, fail_chance, no_more_fail, factor) && special_check(user))
+	if(istype(user) && !receiver?.safety() && user.skill_fail_prob(skill_path, fail_chance, no_more_fail, factor) && special_check(user))
 		user.visible_message(SPAN_WARNING(message))
 		var/list/targets = list(user)
 		var/turf/checking = get_turf(src)
@@ -641,7 +581,6 @@
 		var/picked = pick(targets)
 		afterattack(picked, user)
 		return TRUE
-	return FALSE
 
 /obj/item/gun/handle_reflexive_fire(var/mob/user, var/atom/aiming_at)
 	. = ..()

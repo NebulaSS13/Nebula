@@ -121,7 +121,7 @@
 
 /decl/hierarchy/supply_pack/security/shotgun
 	name = "Weapons - Shotgun"
-	contains = list(/obj/item/gun/projectile/shotgun/pump = 2)
+	contains = list(/obj/item/gun/shotgun/pump = 2)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "shotgun crate"

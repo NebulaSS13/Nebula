@@ -372,10 +372,10 @@
 	},
 /obj/structure/closet/crate/freezer/rations,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/gun/projectile/zipgun,
-/obj/item/gun/projectile/zipgun,
-/obj/item/gun/projectile/zipgun,
-/obj/item/gun/projectile/zipgun,
+/obj/item/gun/zipgun,
+/obj/item/gun/zipgun,
+/obj/item/gun/zipgun,
+/obj/item/gun/zipgun,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "aU" = (

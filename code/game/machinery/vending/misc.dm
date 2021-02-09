@@ -101,7 +101,7 @@
 		/obj/item/chems/spray/waterflower = 2, 
 		/obj/item/storage/box/snappops = 3,
 		/obj/item/spirit_board = 1, 
-		/obj/item/gun/projectile/revolver/capgun = 1, 
+		/obj/item/gun/revolver/capgun = 1, 
 		/obj/item/ammo_magazine/caps = 4
 	)
 

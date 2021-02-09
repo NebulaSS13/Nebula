@@ -23,14 +23,14 @@
 	skill_setter = /datum/antag_skill_setter/station
 
 	var/list/spawn_guns = list(
-		/obj/item/gun/projectile/revolver/lasvolver,
+		/obj/item/gun/revolver/lasvolver,
 		/obj/item/gun/energy/gun,
 		/obj/item/gun/energy/crossbow,
 		/obj/item/gun/energy/pulse_pistol,
-		/obj/item/gun/projectile/automatic/smg,
-		/obj/item/gun/projectile/pistol/holdout,
-		/obj/item/gun/projectile/revolver,
-		/obj/item/gun/projectile/shotgun/doublebarrel/sawn
+		/obj/item/gun/automatic/smg,
+		/obj/item/gun/pistol/holdout,
+		/obj/item/gun/revolver,
+		/obj/item/gun/shotgun/doublebarrel/sawn
 		)
 
 /decl/special_role/renegade/create_objectives(var/datum/mind/player)

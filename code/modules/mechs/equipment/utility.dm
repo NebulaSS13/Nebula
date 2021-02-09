@@ -466,5 +466,4 @@
 	material = /decl/material/solid/metal/steel
 
 /obj/item/gun/energy/plasmacutter/mounted/mech
-	use_external_power = TRUE
-	has_safety = FALSE
+	receiver = /obj/item/firearm_component/receiver/energy/plasmacutter/mech

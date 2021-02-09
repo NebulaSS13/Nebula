@@ -1,4 +1,5 @@
 /obj/item/firearm_component/receiver/ballistic/submachine_gun
+	safety_icon = "safety"
 	caliber = CALIBER_PISTOL_SMALL
 	load_method = MAGAZINE
 	loaded = /obj/item/ammo_casing/pistol/small

@@ -25,7 +25,7 @@
 	icon_state = "russianranged"
 	icon_living = "russianranged"
 	corpse = /obj/effect/landmark/corpse/russian/ranged
-	dropped_weapon = /obj/item/gun/projectile/revolver
+	dropped_weapon = /obj/item/gun/revolver
 	ranged = 1
 	projectiletype = /obj/item/projectile/bullet
 	projectilesound = 'sound/weapons/gunshot/gunshot2.ogg'

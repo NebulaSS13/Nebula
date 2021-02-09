@@ -2065,8 +2065,8 @@
 /area/space)
 "hX" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/revolver,
-/obj/item/gun/projectile/revolver,
+/obj/item/gun/revolver,
+/obj/item/gun/revolver,
 /obj/item/ammo_magazine/speedloader,
 /obj/item/ammo_magazine/speedloader,
 /obj/effect/landmark/delete_on_shuttle{
@@ -2081,8 +2081,8 @@
 /area/map_template/merc_spawn)
 "iB" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/pistol,
-/obj/item/gun/projectile/pistol,
+/obj/item/gun/pistol,
+/obj/item/gun/pistol,
 /obj/item/ammo_magazine/pistol,
 /obj/item/ammo_magazine/pistol,
 /obj/item/ammo_magazine/pistol,

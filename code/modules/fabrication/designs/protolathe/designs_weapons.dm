@@ -48,7 +48,7 @@
 	path = /obj/item/gun/energy/decloner
 
 /datum/fabricator_recipe/protolathe/weapon/wt550
-	path = /obj/item/gun/projectile/automatic/smg
+	path = /obj/item/gun/automatic/smg
 
 /datum/fabricator_recipe/protolathe/weapon/bullpup
-	path = /obj/item/gun/projectile/automatic/assault_rifle
+	path = /obj/item/gun/automatic/assault_rifle

@@ -6,6 +6,19 @@
 	var/sel_mode = 1 //index of the currently selected mode
 	var/list/firemodes
 	var/selector_sound = 'sound/weapons/guns/selector.ogg'
+	var/screen_shake = 0
+	var/space_recoil = 0
+	var/combustion =   0
+	var/safety_state = 1
+	var/safety_icon 	   //overlay to apply to gun based on safety state, if any
+	var/has_safety = TRUE
+	var/tmp/last_safety_check = -INFINITY
+
+/obj/item/firearm_component/receiver/proc/get_safety_indicator()
+	return mutable_appearance(icon, "[icon_state][safety_icon][safety()]")
+
+/obj/item/firearm_component/receiver/proc/safety()
+	return has_safety && safety_state
 
 /obj/item/firearm_component/receiver/Initialize(ml, material_key)
 	LAZYINITLIST(firemodes)
@@ -20,6 +33,9 @@
 		if(length(firemodes) > 1)
 			var/datum/firemode/current_mode = firemodes[sel_mode]
 			to_chat(user, "The fire selector is set to [current_mode.name].")
+		if(has_safety)
+			last_safety_check = world.time
+			to_chat(user, "The safety is [safety() ? "on" : "off"].")
 
 /obj/item/firearm_component/receiver/holder_attackby(obj/item/W, mob/user)
 	. = load_ammo(user, W) || ..()
@@ -93,3 +109,14 @@
 
 /obj/item/firearm_component/receiver/proc/unload_ammo(var/mob/user)
 	return
+
+/obj/item/firearm_component/receiver/proc/toggle_safety(var/mob/user)
+	if(has_safety)
+		safety_state = !safety_state
+		update_icon()
+		if(user)
+			to_chat(user, SPAN_NOTICE("You switch the safety [safety_state ? "on" : "off"] on \the [holder || src]."))
+			last_safety_check = world.time
+			playsound(src, 'sound/weapons/flipblade.ogg', 30, 1)
+	else
+		to_chat(user, SPAN_WARNING("There is no safety on \the [holder || src]."))

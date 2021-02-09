@@ -16,12 +16,8 @@
 /obj/item/gun/energy/gun/secure/mounted
 	name = "robot energy gun"
 	desc = "A robot-mounted equivalent of the LAEP90-S, which is always registered to its owner."
-	self_recharge = 1
-	use_external_power = 1
-	one_hand_penalty = 0
-	has_safety = FALSE
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
-	grip = /obj/item/firearm_component/grip/secure
+	receiver = /obj/item/firearm_component/receiver/energy/sidearm/mounted
 
 /obj/item/gun/energy/laser/secure
 	name = "laser carbine"

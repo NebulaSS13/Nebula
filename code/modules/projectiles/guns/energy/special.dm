@@ -35,18 +35,14 @@
 	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."
 	icon = 'icons/obj/guns/floral.dmi'
 	icon_state = ICON_STATE_WORLD
-	charge_cost = 10
-	max_shots = 10
-	projectile_type = /obj/item/projectile/energy/floramut
 	origin_tech = "{'materials':2,'biotech':3,'powerstorage':3}"
-	self_recharge = 1
 	material = /decl/material/solid/metal/steel
-	receiver = /obj/item/firearm_component/receiver/energy/floral
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
-	combustion = 0
+	barrel =   /obj/item/firearm_component/barrel/energy/floral
+	receiver = /obj/item/firearm_component/receiver/energy/floral
 
 /obj/item/gun/energy/toxgun
 	name = "radpistol"
@@ -74,10 +70,9 @@
 	force = 8
 	origin_tech = "{'materials':4,'exoticmatter':4,'engineering':6,'combat':3}"
 	material = /decl/material/solid/metal/steel
-	projectile_type = /obj/item/projectile/beam/plasmacutter
-	max_shots = 10
-	self_recharge = 1
 	material = /decl/material/solid/metal/steel
+	receiver = /obj/item/firearm_component/receiver/energy/plasmacutter
+	barrel =   /obj/item/firearm_component/barrel/energy/plasmacutter
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
@@ -91,10 +86,10 @@
 	name = "mounted plasma cutter"
 	use_external_power = 1
 	max_shots = 4
-	has_safety = FALSE
+	receiver = /obj/item/firearm_component/receiver/energy/plasmacutter/mounted
 
 /obj/item/gun/energy/plasmacutter/proc/slice(var/mob/M = null)
-	if(!safety() && power_supply.checked_use(charge_cost)) //consumes a shot per use
+	if(!receiver?.safety() && power_supply.checked_use(charge_cost)) //consumes a shot per use
 		if(M)
 			M.welding_eyecheck()//Welding tool eye check
 			if(check_accidents(M, "[M] loses grip on [src] from its sudden recoil!",SKILL_CONSTRUCTION, 60, SKILL_ADEPT))
@@ -112,12 +107,11 @@
 	desc = "The A&M 'Shayatin' was the first of a now-banned class of dispersive laser weapons which, instead of firing a focused beam, scan over a target rapidly with the goal of setting it ablaze."
 	icon = 'icons/obj/guns/incendiary_laser.dmi'
 	icon_state = ICON_STATE_WORLD
-	safety_icon = "safety"
 	origin_tech = "{'combat':7,'magnets':4,'esoteric':4}"
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
 		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
-	projectile_type = /obj/item/projectile/beam/incendiary_laser
-	max_shots = 4
+	receiver = /obj/item/firearm_component/receiver/energy/incendiary
+	barrel =   /obj/item/firearm_component/barrel/energy/incendiary

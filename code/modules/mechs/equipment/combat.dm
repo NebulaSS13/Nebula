@@ -20,20 +20,16 @@
 
 /obj/item/gun/energy/taser/mounted/mech
 	use_external_power = TRUE
-	has_safety = FALSE
-	self_recharge = TRUE
-	projectile_type = /obj/item/projectile/beam/stun/heavy
+	barrel =   /obj/item/firearm_component/barrel/energy/heavy_stun
+	receiver = /obj/item/firearm_component/receiver/energy/electrolaser/mech
 
 /obj/item/gun/energy/ionrifle/mounted/mech
 	use_external_power = TRUE
-	has_safety = FALSE
-	self_recharge = TRUE
+	receiver = /obj/item/firearm_component/receiver/energy/ionrifle/mech
 
 /obj/item/gun/energy/laser/mounted/mech
 	name = "\improper CH-PS \"Immolator\" laser"
-	use_external_power = TRUE
-	has_safety = FALSE
-	self_recharge = TRUE
+	receiver = /obj/item/firearm_component/receiver/energy/laser/mech
 
 /obj/item/gun/energy/get_hardpoint_maptext()
 	return "[round(power_supply.charge / charge_cost)]/[max_shots]"

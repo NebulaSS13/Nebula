@@ -78,8 +78,8 @@
 			if(istype(holstered, /obj/item/gun))
 				var/obj/item/gun/G = holstered
 				G.check_accidents(user)
-				if(G.safety() && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //Experienced shooter will disable safety before shooting.
-					G.toggle_safety(user)
+				if(G.receiver?.safety() && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //Experienced shooter will disable safety before shooting.
+					G.receiver.toggle_safety(user)
 			usr.visible_message(
 				"<span class='danger'>\The [user] draws \the [holstered], ready to go!</span>",
 				"<span class='warning'>You draw \the [holstered], ready to go!</span>"

@@ -59,7 +59,7 @@
 /area/ship/trade/command/captain)
 "ag" = (
 /obj/item/bedsheet/captain,
-/obj/item/gun/projectile/pistol/holdout,
+/obj/item/gun/pistol/holdout,
 /obj/structure/bed/padded,
 /obj/effect/landmark/latejoin/cryo_captain,
 /obj/machinery/alarm{
@@ -7043,7 +7043,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/shieldbay)
 "Pb" = (
-/obj/item/gun/projectile/shotgun/pump{
+/obj/item/gun/shotgun/pump{
 	desc = "When words don't strike hard enough.";
 	name = "Solid Argument"
 	},

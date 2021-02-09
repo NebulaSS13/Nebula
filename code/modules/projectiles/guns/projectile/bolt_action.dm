@@ -1,4 +1,4 @@
-/obj/item/gun/projectile/bolt_action
+/obj/item/gun/bolt_action
 	name = "bolt-action rifle"
 	desc = "A slow-firing but reliable bolt-action rifle. Rather old-fashioned."
 	icon = 'icons/obj/guns/bolt_action.dmi'
@@ -12,7 +12,7 @@
 	one_hand_penalty = 2
 	fire_delay = 8
 
-/obj/item/gun/projectile/bolt_action/sniper
+/obj/item/gun/bolt_action/sniper
 	name = "anti-materiel rifle"
 	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to be used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease."
 	icon = 'icons/obj/guns/heavysniper.dmi'

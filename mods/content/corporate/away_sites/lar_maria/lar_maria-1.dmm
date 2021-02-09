@@ -1802,7 +1802,7 @@
 "eN" = (
 /obj/structure/closet,
 /obj/item/clothing/under/color/red,
-/obj/item/gun/projectile/shotgun/pump,
+/obj/item/gun/shotgun/pump,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "eO" = (

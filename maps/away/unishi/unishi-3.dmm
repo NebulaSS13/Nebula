@@ -459,7 +459,7 @@
 /obj/item/ammo_magazine/speedloader,
 /obj/item/ammo_magazine/speedloader,
 /obj/item/ammo_magazine/speedloader,
-/obj/item/gun/projectile/revolver,
+/obj/item/gun/revolver,
 /obj/item/handcuffs,
 /obj/machinery/light/small{
 	dir = 8
@@ -1406,7 +1406,7 @@
 "dL" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/green,
-/obj/item/gun/projectile/pistol/holdout,
+/obj/item/gun/pistol/holdout,
 /obj/item/storage/secure/briefcase,
 /obj/item/card/emag_broken,
 /obj/item/plastique,

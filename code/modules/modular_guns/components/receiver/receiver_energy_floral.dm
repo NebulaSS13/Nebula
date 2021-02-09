@@ -1,4 +1,7 @@
 /obj/item/firearm_component/receiver/energy/floral
+	self_recharge = 1
+	max_shots = 10
+	combustion = 0
 	firemodes = list(
 		list(mode_name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, indicator_color=COLOR_LIME),
 		list(mode_name="increase yield", projectile_type=/obj/item/projectile/energy/florayield, indicator_color=COLOR_YELLOW),

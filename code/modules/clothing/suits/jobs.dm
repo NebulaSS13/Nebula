@@ -69,7 +69,18 @@
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	blood_overlay_type = "coat"
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-	allowed = list(/obj/item/tank/emergency,/obj/item/flashlight,/obj/item/gun/energy,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/handcuffs,/obj/item/storage/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/taperecorder)
+	allowed = list(
+		/obj/item/tank/emergency,
+		/obj/item/flashlight,
+		/obj/item/gun,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/baton,
+		/obj/item/handcuffs,
+		/obj/item/storage/fancy/cigarettes,
+		/obj/item/flame/lighter,
+		/obj/item/taperecorder
+	)
 
 /obj/item/clothing/suit/storage/det_trench/grey
 	name = "grey trenchcoat"
@@ -93,7 +104,16 @@
 	desc = "A forensics technician jacket."
 	icon = 'icons/clothing/suit/forensic_red.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS
-	allowed = list(/obj/item/tank/emergency,/obj/item/flashlight,/obj/item/gun/energy,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/baton,/obj/item/handcuffs,/obj/item/taperecorder)
+	allowed = list(
+		/obj/item/tank/emergency,
+		/obj/item/flashlight,
+		/obj/item/gun,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/baton,
+		/obj/item/handcuffs,
+		/obj/item/taperecorder
+	)
 	armor = list(
 		melee = ARMOR_MELEE_SMALL,
 		bullet = ARMOR_BALLISTIC_MINOR,

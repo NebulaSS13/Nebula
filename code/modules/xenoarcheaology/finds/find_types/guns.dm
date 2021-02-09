@@ -3,7 +3,7 @@
 	item_type = "gun"
 	new_icon_state = ICON_STATE_WORLD
 	responsive_reagent = /decl/material/solid/metal/iron
-	possible_types = list(/obj/item/gun/projectile/revolver)
+	possible_types = list(/obj/item/gun/revolver)
 	var/gun_icons = list(
 		'icons/obj/guns/xenoarch/gun_1.dmi',
 		'icons/obj/guns/xenoarch/gun_2.dmi',
@@ -12,7 +12,7 @@
 	)
 
 /decl/archaeological_find/gun/spawn_item(atom/loc)
-	var/obj/item/gun/projectile/revolver/new_gun = ..()
+	var/obj/item/gun/revolver/new_gun = ..()
 
 	//33% chance to be able to reload the gun with human ammunition
 	if(prob(66))

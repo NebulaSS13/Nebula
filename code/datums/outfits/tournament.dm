@@ -25,7 +25,7 @@
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	hands = list(
 		/obj/item/knife/combat,
-		/obj/item/gun/projectile/revolver
+		/obj/item/gun/revolver
 	)
 	l_pocket = /obj/item/ammo_magazine/speedloader
 

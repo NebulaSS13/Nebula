@@ -28,7 +28,7 @@
 	shoes =    /obj/item/clothing/shoes/jackboots/swat
 	glasses =  /obj/item/clothing/glasses/thermal
 	mask =     /obj/item/clothing/mask/gas/swat
-	belt =     /obj/item/gun/projectile/revolver
+	belt =     /obj/item/gun/revolver
 	hands = list(
 		/obj/item/gun/energy/laser,
 		/obj/item/energy_blade/sword

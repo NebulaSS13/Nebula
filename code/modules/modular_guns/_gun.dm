@@ -6,9 +6,27 @@
 #define FIREARM_COMPONENT_FRAME    "frame"
 
 /obj/item/gun
+	name = "gun"
+	desc = "A gun that fires projectiles."
+	icon = 'icons/obj/guns/pistol.dmi'
+	icon_state = ICON_STATE_WORLD
+	obj_flags =  OBJ_FLAG_CONDUCTIBLE
+	slot_flags = SLOT_LOWER_BODY|SLOT_HOLSTER
+	material = /decl/material/solid/metal/steel
+	w_class = ITEM_SIZE_NORMAL
+	throwforce = 5
+	throw_speed = 4
+	throw_range = 5
+	force = 5
+	origin_tech = "{'combat':2,'materials':2}"
+	attack_verb = list("struck", "hit", "bashed")
+	zoomdevicename = "scope"
 
 	var/bulk = 0 // How unwieldy this weapon for its size, affects accuracy when fired without aiming.
 	var/one_hand_penalty = 0
+	var/screen_shake = 0 // shouldn't be greater than 2 unless zoomed
+	var/space_recoil = 0 // knocks back in space
+	var/combustion = 0
 
 	var/obj/item/firearm_component/receiver/receiver
 	var/obj/item/firearm_component/barrel/barrel
@@ -40,6 +58,10 @@
 			sharp =            max(sharp,   comp.sharp)
 			w_class =          max(w_class, comp.w_class)
 			bulk =             max(bulk,    comp.bulk)
+
+	screen_shake = max(max(initial(screen_shake), receiver?.screen_shake), barrel?.screen_shake)
+	space_recoil = max(max(initial(space_recoil), receiver?.space_recoil), barrel?.space_recoil)
+	combustion =   max(max(initial(combustion),   receiver?.combustion),   barrel?.combustion)
 
 	update_icon()
 
@@ -243,7 +265,7 @@
 			return
 	. = ..()
 
-/obj/item/gun/projectile/automatic/assault_rifle/attack_hand(mob/user)
+/obj/item/gun/automatic/assault_rifle/attack_hand(mob/user)
 	if(user.is_holding_offhand(src) && use_launcher)
 		launcher.unload(user)
 	else
@@ -568,12 +590,6 @@
 */
 
 /obj/item/gun/on_update_icon()
-	force_icon_debug()
-	var/mob/user = loc
-	if(src in user.get_held_items())
-		user.update_inv_hands()
-
-/obj/item/gun/proc/force_icon_debug()
 	cut_overlays()
 	var/base_icon_state = get_world_inventory_state()
 	icon_state = "[base_icon_state]-[FIREARM_COMPONENT_FRAME]"
@@ -584,6 +600,23 @@
 			var/image/I = comp.get_holder_overlay(base_icon_state)
 			if(I)
 				add_overlay(I)
+	var/mob/user = loc
+	if(src in user.get_held_items())
+		user.update_inv_hands()
+
+/*
+/obj/item/gun/on_update_icon()
+	var/mob/living/M = loc
+	overlays.Cut()
+	update_base_icon()
+	if(istype(M))
+		if(M.skill_check(SKILL_WEAPONS,SKILL_BASIC))
+			overlays += image('icons/obj/guns/gui.dmi',"safety[safety()]")
+		if(src in M.get_held_items())
+			M.update_inv_hands()
+	if(receiver?.safety_icon)
+		overlays +=	receiver.get_safety_indicator()
+*/
 
 /obj/item/gun/proc/get_modular_component_list()
 	. = list(
@@ -622,3 +655,10 @@
 	G.registered_owner = null
 	GLOB.registered_weapons -= G
 	verbs -= /obj/item/gun/proc/reset_registration
+
+/obj/item/gun/verb/toggle_safety_verb()
+	set src in usr
+	set category = "Object"
+	set name = "Toggle Gun Safety"
+	if(usr == loc && receiver)
+		receiver.toggle_safety(usr)

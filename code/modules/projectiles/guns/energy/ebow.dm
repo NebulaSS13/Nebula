@@ -8,22 +8,16 @@
 	origin_tech = "{'combat':2,'magnets':2,'esoteric':5}"
 	material = /decl/material/solid/metal/steel
 	slot_flags = SLOT_LOWER_BODY
-	silenced = 1
-	fire_sound = 'sound/weapons/Genhit.ogg'
-	projectile_type = /obj/item/projectile/energy/bolt
-	max_shots = 8
-	self_recharge = 1
-	charge_meter = 0
-	combustion = 0
+	receiver = /obj/item/firearm_component/receiver/energy/crossbow
+	barrel = /obj/item/firearm_component/barrel/energy/crossbow
 
 /obj/item/gun/energy/crossbow/ninja
 	name = "energy dart thrower"
-	projectile_type = /obj/item/projectile/energy/dart
-	max_shots = 5
+	receiver = /obj/item/firearm_component/receiver/energy/crossbow/ninja
+	barrel = /obj/item/firearm_component/barrel/energy/crossbow/ninja
 
 /obj/item/gun/energy/crossbow/ninja/mounted
-	use_external_power = 1
-	has_safety = FALSE
+	receiver = /obj/item/firearm_component/receiver/energy/crossbow/ninja/mounted
 
 /obj/item/gun/energy/crossbow/largecrossbow
 	name = "energy crossbow"
@@ -32,4 +26,4 @@
 	force = 10
 	one_hand_penalty = 1
 	material = /decl/material/solid/metal/steel
-	projectile_type = /obj/item/projectile/energy/bolt/large
+	barrel = /obj/item/firearm_component/barrel/energy/crossbow/large

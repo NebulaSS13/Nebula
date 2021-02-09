@@ -2435,8 +2435,8 @@
 /obj/item/gun/energy/taser,
 /obj/structure/closet/secure_closet/guncabinet,
 /obj/item/gun/energy/taser,
-/obj/item/gun/projectile/shotgun/pump,
-/obj/item/gun/projectile/shotgun/pump,
+/obj/item/gun/shotgun/pump,
+/obj/item/gun/shotgun/pump,
 /turf/simulated/floor/plating,
 /area/ministation/security)
 "fY" = (
@@ -11043,7 +11043,7 @@
 "Au" = (
 /obj/structure/closet/chefcloset,
 /obj/item/storage/box/ammo/beanbags,
-/obj/item/gun/projectile/shotgun/doublebarrel,
+/obj/item/gun/shotgun/doublebarrel,
 /obj/item/clothing/suit/storage/hooded/wintercoat/hydro,
 /turf/simulated/floor/wood,
 /area/ministation/cafe)

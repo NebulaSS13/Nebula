@@ -57,7 +57,7 @@
 	for(var/i=3, i>0, i--)
 		new /obj/item/cash/c1000(sec_briefcase)
 	new /obj/item/gun/energy/crossbow(sec_briefcase)
-	new /obj/item/gun/projectile/revolver(sec_briefcase)
+	new /obj/item/gun/revolver(sec_briefcase)
 	new /obj/item/ammo_magazine/speedloader(sec_briefcase)
 	new /obj/item/plastique(sec_briefcase)
 	H.put_in_hands_or_del(sec_briefcase)

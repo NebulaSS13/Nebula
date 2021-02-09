@@ -6,7 +6,7 @@
 	caliber = CALIBER_CAPS
 	var/cap = TRUE
 /*
-/obj/item/gun/projectile/revolver/capgun/attackby(obj/item/wirecutters/W, mob/user)
+/obj/item/gun/revolver/capgun/attackby(obj/item/wirecutters/W, mob/user)
 	if(!istype(W) || !cap)
 		return ..()
 	to_chat(user, "<span class='notice'>You snip off the toy markings off the [holder || src].</span>")

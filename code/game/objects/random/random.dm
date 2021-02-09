@@ -291,16 +291,16 @@
 	icon_state = "revolver"
 
 /obj/random/projectile/spawn_choices()
-	return list(/obj/item/gun/projectile/shotgun/pump = 3,
-				/obj/item/gun/projectile/automatic/assault_rifle = 2,
-				/obj/item/gun/projectile/pistol = 3,
-				/obj/item/gun/projectile/pistol/holdout = 4,
-				/obj/item/gun/projectile/zipgun = 5,
-				/obj/item/gun/projectile/automatic/smg = 4,
-				/obj/item/gun/projectile/revolver = 2,
-				/obj/item/gun/projectile/shotgun/doublebarrel = 4,
-				/obj/item/gun/projectile/shotgun/doublebarrel/sawn = 3,
-				/obj/item/gun/projectile/bolt_action/sniper = 1
+	return list(/obj/item/gun/shotgun/pump = 3,
+				/obj/item/gun/automatic/assault_rifle = 2,
+				/obj/item/gun/pistol = 3,
+				/obj/item/gun/pistol/holdout = 4,
+				/obj/item/gun/zipgun = 5,
+				/obj/item/gun/automatic/smg = 4,
+				/obj/item/gun/revolver = 2,
+				/obj/item/gun/shotgun/doublebarrel = 4,
+				/obj/item/gun/shotgun/doublebarrel/sawn = 3,
+				/obj/item/gun/bolt_action/sniper = 1
 				)
 
 /obj/random/handgun
@@ -310,9 +310,9 @@
 	icon_state = "secguncomp"
 
 /obj/random/handgun/spawn_choices()
-	return list(/obj/item/gun/projectile/pistol = 3,
+	return list(/obj/item/gun/pistol = 3,
 				/obj/item/gun/energy/gun = 3,
-				/obj/item/gun/projectile/pistol/holdout = 2
+				/obj/item/gun/pistol/holdout = 2
 				)
 
 /obj/random/ammo

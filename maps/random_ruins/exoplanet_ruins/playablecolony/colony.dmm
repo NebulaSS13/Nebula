@@ -4534,9 +4534,9 @@
 /area/map_template/colony)
 "ii" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/pistol/holdout,
-/obj/item/gun/projectile/pistol/holdout,
-/obj/item/gun/projectile/pistol,
+/obj/item/gun/pistol/holdout,
+/obj/item/gun/pistol/holdout,
+/obj/item/gun/pistol,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
@@ -4743,7 +4743,7 @@
 /area/map_template/colony/jail)
 "iA" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/shotgun/doublebarrel,
+/obj/item/gun/shotgun/doublebarrel,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
@@ -5932,9 +5932,9 @@
 /area/map_template/colony/airlock)
 "kr" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/zipgun,
-/obj/item/gun/projectile/zipgun,
-/obj/item/gun/projectile/zipgun,
+/obj/item/gun/zipgun,
+/obj/item/gun/zipgun,
+/obj/item/gun/zipgun,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -7289,8 +7289,8 @@
 /area/map_template/colony/hydroponics)
 "mI" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/automatic/assault_rifle,
-/obj/item/gun/projectile/automatic/assault_rifle,
+/obj/item/gun/automatic/assault_rifle,
+/obj/item/gun/automatic/assault_rifle,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -8243,7 +8243,7 @@
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/warning/dust,
 /obj/structure/table/rack,
-/obj/item/gun/projectile/bolt_action{
+/obj/item/gun/bolt_action{
 	desc = "A large, unwieldy bolt-action rifle in shoddy condition. Chambered in small caliber, looks far scarier than it is. Vamoos ya varmint!";
 	name = "anti-varmint rifle"
 	},

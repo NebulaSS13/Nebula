@@ -1,7 +1,7 @@
-/obj/item/gun/projectile/shotgun
+/obj/item/gun/shotgun
 	barrel = /obj/item/firearm_component/barrel/ballistic/shotgun
 
-/obj/item/gun/projectile/shotgun/pump
+/obj/item/gun/shotgun/pump
 	name = "shotgun"
 	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys."
 	icon = 'icons/obj/guns/shotgun/pump.dmi'
@@ -15,7 +15,7 @@
 	one_hand_penalty = 8
 	bulk = 6
 
-/obj/item/gun/projectile/shotgun/doublebarrel
+/obj/item/gun/shotgun/doublebarrel
 	name = "double-barreled shotgun"
 	desc = "A true classic."
 	icon = 'icons/obj/guns/shotgun/doublebarrel.dmi'
@@ -27,7 +27,7 @@
 	origin_tech = "{'combat':3,'materials':1}"
 	burst_delay = 0
 
-/obj/item/gun/projectile/shotgun/doublebarrel/sawn
+/obj/item/gun/shotgun/doublebarrel/sawn
 	name = "sawn-off shotgun"
 	desc = "Omar's coming!"
 	icon = 'icons/obj/guns/shotgun/sawnoff.dmi'

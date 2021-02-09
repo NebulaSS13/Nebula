@@ -1,4 +1,7 @@
 /obj/item/firearm_component/receiver/ballistic
+	screen_shake = 1
+	space_recoil = 1
+	combustion = 1
 	var/caliber = CALIBER_PISTOL
 	var/handle_casings = EJECT_CASINGS
 	var/load_method = SINGLE_CASING|SPEEDLOADER
@@ -262,6 +265,7 @@
 	ammo_magazine = /obj/item/ammo_magazine/pistol
 	allowed_magazines = /obj/item/ammo_magazine/pistol
 	ammo_indicator = TRUE
+	safety_icon = "safety"
 
 /obj/item/firearm_component/receiver/ballistic/pistol/get_ammo_indicator(base_state)
 	var/image/ret = ..()
@@ -278,3 +282,4 @@
 	handle_casings = CYCLE_CASINGS
 	load_method = SINGLE_CASING
 	max_shells = 1 
+	has_safety = FALSE

@@ -8,7 +8,7 @@
 	name = "Zip Gun"
 	desc = "A pipe attached to crude wooden stock with firing mechanism, holds one round."
 	item_cost = 8
-	path = /obj/item/gun/projectile/zipgun
+	path = /obj/item/gun/zipgun
 
 /datum/uplink_item/item/visible_weapons/smallenergy_gun
 	name = "Small Energy Gun"
@@ -21,7 +21,7 @@
 	desc = "A gas-powered dart gun capable of delivering chemical payloads across short distances. \
 			Uses a unique cartridge loaded with hollow darts."
 	item_cost = 20
-	path = /obj/item/gun/projectile/dartgun
+	path = /obj/item/gun/dartgun
 
 /datum/uplink_item/item/visible_weapons/crossbow
 	name = "Energy Crossbow"
@@ -73,14 +73,14 @@
 	name = "Standard Submachine Gun"
 	desc = "A quick-firing weapon with three togglable fire modes."
 	item_cost = 52
-	path = /obj/item/gun/projectile/automatic/smg
+	path = /obj/item/gun/automatic/smg
 	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/visible_weapons/assaultrifle
 	name = "Assault Rifle"
 	desc = "A common rifle with three togglable fire modes."
 	item_cost = 60
-	path = /obj/item/gun/projectile/automatic/assault_rifle
+	path = /obj/item/gun/automatic/assault_rifle
 	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/visible_weapons/advanced_energy_gun
@@ -100,14 +100,14 @@
 	name = "Pump Shotgun"
 	desc = "A high compacity, pump-action shotgun regularly used for repelling boarding parties in close range scenarios."
 	item_cost = 52
-	path = /obj/item/gun/projectile/shotgun/pump
+	path = /obj/item/gun/shotgun/pump
 	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/visible_weapons/sawnoff
 	name = "Sawnoff Shotgun"
 	desc = "A shortened double-barrel shotgun, able to fire either one, or both, barrels at once."
 	item_cost = 45
-	path = /obj/item/gun/projectile/shotgun/doublebarrel/sawn
+	path = /obj/item/gun/shotgun/doublebarrel/sawn
 
 /datum/uplink_item/item/visible_weapons/flechetterifle
 	name = "Flechette Rifle"

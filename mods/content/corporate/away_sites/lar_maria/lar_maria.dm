@@ -105,7 +105,7 @@
 		corpse = /obj/effect/landmark/corpse/lar_maria/zhp_guard/dark
 
 /mob/living/simple_animal/hostile/lar_maria/guard/ranged
-	weapon = /obj/item/gun/projectile/shotgun/pump
+	weapon = /obj/item/gun/shotgun/pump
 	ranged = 1
 	projectiletype = /obj/item/projectile/bullet/shotgun/beanbag
 

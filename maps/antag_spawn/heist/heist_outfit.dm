@@ -39,7 +39,7 @@
 		)
 	var/list/raider_guns = list(
 		/obj/item/gun/energy/laser,
-		/obj/item/gun/projectile/revolver/lasvolver,
+		/obj/item/gun/revolver/lasvolver,
 		/obj/item/gun/energy/xray,
 		/obj/item/gun/energy/toxgun,
 		/obj/item/gun/energy/ionrifle,
@@ -48,14 +48,14 @@
 		/obj/item/gun/launcher/crossbow,
 		/obj/item/gun/launcher/grenade/loaded,
 		/obj/item/gun/launcher/pneumatic,
-		/obj/item/gun/projectile/automatic/smg,
-		/obj/item/gun/projectile/automatic/assault_rifle,
-		/obj/item/gun/projectile/shotgun/pump,
-		/obj/item/gun/projectile/shotgun/doublebarrel,
-		/obj/item/gun/projectile/shotgun/doublebarrel/sawn,
-		/obj/item/gun/projectile/pistol/holdout,
-		/obj/item/gun/projectile/revolver,
-		/obj/item/gun/projectile/zipgun
+		/obj/item/gun/automatic/smg,
+		/obj/item/gun/automatic/assault_rifle,
+		/obj/item/gun/shotgun/pump,
+		/obj/item/gun/shotgun/doublebarrel,
+		/obj/item/gun/shotgun/doublebarrel/sawn,
+		/obj/item/gun/pistol/holdout,
+		/obj/item/gun/revolver,
+		/obj/item/gun/zipgun
 		)
 	var/list/raider_holster = list(
 		/obj/item/clothing/accessory/storage/holster/armpit,
@@ -78,12 +78,12 @@
 		var/new_holster = pick(raider_holster) //raiders don't start with any backpacks, so let's be nice and give them a holster if they can use it.
 		var/turf/T = get_turf(H)
 
-		var/obj/item/primary = new new_gun(T)
+		var/obj/item/gun/primary = new new_gun(T)
 		var/obj/item/clothing/accessory/storage/holster/holster = null
 
 		//Give some of the raiders a pirate gun as a secondary
 		if(prob(60))
-			var/obj/item/secondary = new /obj/item/gun/projectile/zipgun(T)
+			var/obj/item/secondary = new /obj/item/gun/zipgun(T)
 			if(!(primary.slot_flags & SLOT_HOLSTER))
 				holster = new new_holster(T)
 				var/datum/extension/holster/holster_extension = get_extension(holster, /datum/extension/holster)
@@ -104,7 +104,7 @@
 		else
 			H.put_in_hands(primary)
 
-		if(istype(primary, /obj/item/gun/projectile))
+		if(istype(primary) && istype(primary.receiver, /obj/item/firearm_component/receiver/ballistic))
 			var/obj/item/gun/bullet_thrower = primary
 			var/obj/item/firearm_component/receiver/ballistic/proj_receiver = bullet_thrower.receiver
 			if(istype(proj_receiver))

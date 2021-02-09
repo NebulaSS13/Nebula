@@ -1,4 +1,4 @@
-/obj/item/gun/projectile/revolver/lasvolver
+/obj/item/gun/revolver/lasvolver
 	name = "lasvolver"
 	desc = "An inane combination of a lasgun and revolver, 'firing' special one-use flash capsules to produce laser bursts."
 	icon = 'icons/obj/guns/lasvolver.dmi'

@@ -45,11 +45,11 @@ var/global/list/datum/supply_drop_loot/supply_drop
 /datum/supply_drop_loot/ballistics/New()
 	..()
 	contents = list(
-		/obj/item/gun/projectile/pistol,
-		/obj/item/gun/projectile/shotgun/doublebarrel,
-		/obj/item/gun/projectile/shotgun/pump,
-		/obj/item/gun/projectile/automatic/smg,
-		/obj/item/gun/projectile/automatic/assault_rifle)
+		/obj/item/gun/pistol,
+		/obj/item/gun/shotgun/doublebarrel,
+		/obj/item/gun/shotgun/pump,
+		/obj/item/gun/automatic/smg,
+		/obj/item/gun/automatic/assault_rifle)
 
 /datum/supply_drop_loot/ballistics
 	name = "Ballistics"
@@ -57,11 +57,11 @@ var/global/list/datum/supply_drop_loot/supply_drop
 /datum/supply_drop_loot/ballistics/New()
 	..()
 	contents = list(
-		/obj/item/gun/projectile/pistol,
-		/obj/item/gun/projectile/shotgun/doublebarrel,
-		/obj/item/gun/projectile/shotgun/pump,
-		/obj/item/gun/projectile/automatic/smg,
-		/obj/item/gun/projectile/automatic/assault_rifle)
+		/obj/item/gun/pistol,
+		/obj/item/gun/shotgun/doublebarrel,
+		/obj/item/gun/shotgun/pump,
+		/obj/item/gun/automatic/smg,
+		/obj/item/gun/automatic/assault_rifle)
 
 /datum/supply_drop_loot/seeds
 	name = "Seeds"

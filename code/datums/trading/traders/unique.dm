@@ -35,7 +35,7 @@
 							/mob/living/carbon/human                                                   = TRADER_ALL
 							)
 
-	possible_trading_items = list(/obj/item/gun/projectile/automatic                            = TRADER_SUBTYPES_ONLY
+	possible_trading_items = list(/obj/item/gun/automatic                            = TRADER_SUBTYPES_ONLY
 							)
 
 	blacklisted_trade_items = null

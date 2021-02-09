@@ -414,15 +414,15 @@
 /area/casino/casino_maintenance)
 "bj" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/pistol{
+/obj/item/gun/pistol{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/gun/projectile/pistol{
+/obj/item/gun/pistol{
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/gun/projectile/pistol,
+/obj/item/gun/pistol,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bk" = (
@@ -714,7 +714,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/gun/projectile/shotgun/pump,
+/obj/item/gun/shotgun/pump,
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
@@ -759,7 +759,7 @@
 /area/casino/casino_hangar)
 "bU" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/shotgun/pump,
+/obj/item/gun/shotgun/pump,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bV" = (
@@ -1283,9 +1283,9 @@
 /area/casino/casino_security)
 "dA" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/shotgun/pump,
-/obj/item/gun/projectile/shotgun/pump,
-/obj/item/gun/projectile/shotgun/pump,
+/obj/item/gun/shotgun/pump,
+/obj/item/gun/shotgun/pump,
+/obj/item/gun/shotgun/pump,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "dB" = (
@@ -5349,7 +5349,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "Ab" = (
-/obj/item/gun/projectile/pistol,
+/obj/item/gun/pistol,
 /obj/item/ammo_casing/pistol/magnum/used,
 /obj/item/ammo_casing/pistol/magnum/used,
 /turf/simulated/floor/tiled,
@@ -5425,7 +5425,7 @@
 /area/casino/casino_kitchen)
 "Eb" = (
 /obj/effect/decal/cleanable/blood,
-/obj/item/gun/projectile/revolver,
+/obj/item/gun/revolver,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;

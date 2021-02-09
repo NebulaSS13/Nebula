@@ -1,9 +1,8 @@
-/obj/item/gun/projectile/revolver
+/obj/item/gun/revolver
 	name = "revolver"
 	desc = "The al-Maliki & Mosley Magnum Double Action is a choice revolver for when you absolutely, positively need to put a hole in the other guy."
 	icon = 'icons/obj/guns/revolvers.dmi'
 	icon_state = ICON_STATE_WORLD
-	safety_icon = "safety"
 	barrel = /obj/item/firearm_component/barrel/ballistic/revolver
 	receiver = /obj/item/firearm_component/receiver/ballistic/revolver
 	origin_tech = "{'combat':2,'materials':2}"
@@ -13,7 +12,7 @@
 	one_hand_penalty = 2
 	bulk = 3
 
-/obj/item/gun/projectile/revolver/capgun
+/obj/item/gun/revolver/capgun
 	name = "cap gun"
 	desc = "Looks almost like the real thing! Ages 8 and up."
 	barrel = /obj/item/firearm_component/barrel/ballistic/revolver/capgun

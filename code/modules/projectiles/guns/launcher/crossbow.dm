@@ -47,7 +47,7 @@
 	fire_sound_text = "a solid thunk"
 	fire_delay = 25
 	slot_flags = SLOT_BACK
-	has_safety = FALSE
+	receiver = /obj/item/firearm_component/receiver/launcher/crossbow
 
 	var/obj/item/bolt
 	var/tension = 0                         // Current draw on the bow.
@@ -56,9 +56,6 @@
 	var/obj/item/cell/cell = null    // Used for firing superheated rods.
 	var/current_user                        // Used to check if the crossbow has changed hands since being drawn.
 	var/draw_time = 20						// Time needed to draw the bow back by one "tension"
-
-/obj/item/gun/launcher/crossbow/toggle_safety(var/mob/user)
-	to_chat(user, "<span class='warning'>There's no safety on \the [src]!</span>")
 
 /obj/item/gun/launcher/crossbow/update_release_force()
 	release_force = tension*release_speed

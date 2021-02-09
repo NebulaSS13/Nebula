@@ -4,6 +4,7 @@
 	loaded = /obj/item/ammo_casing/pistol/magnum
 	mag_insert_sound = 'sound/weapons/guns/interaction/rev_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/rev_magout.ogg'
+	safety_icon = "safety"
 	var/chamber_offset = 0 //how many empty chambers in the cylinder until you hit a round
 
 /obj/item/firearm_component/receiver/ballistic/revolver/load_ammo(mob/user, obj/item/loading)
@@ -19,7 +20,7 @@
 	loaded = /obj/item/ammo_casing/cap
 
 /*
-/obj/item/gun/projectile/revolver/verb/spin_cylinder()
+/obj/item/gun/revolver/verb/spin_cylinder()
 	set name = "Spin cylinder"
 	set desc = "Fun when you're bored out of your skull."
 	set category = "Object"
@@ -33,7 +34,7 @@
 		chamber_offset = rand(0,max_shells - loaded.len)
 
 
-/obj/item/gun/projectile/revolver/AltClick()
+/obj/item/gun/revolver/AltClick()
 	if(CanPhysicallyInteract(usr))
 		spin_cylinder()
 
