@@ -1,5 +1,6 @@
 /datum/ai/human
 	name = "human"
+	expected_type = /mob/living/carbon/human
 
 /datum/ai/human/do_process(var/time_elapsed)
 	var/mob/living/carbon/human/H = body
