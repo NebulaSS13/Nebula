@@ -12,6 +12,7 @@
 	speed = -1
 	maxHealth = 80
 	health = 80
+	gene_damage = -1
 
 	harm_intent_damage = 10
 	natural_weapon = /obj/item/natural_weapon/faithless

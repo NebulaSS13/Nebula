@@ -13,6 +13,7 @@
 	can_escape = TRUE
 	var/emergency_protocols = 0
 	known_commands = list("stay", "stop", "attack", "follow", "heal", "emergency protocol")
+	gene_damage = -1
 
 	response_help = "waves their hands through"
 	response_harm = "hits"

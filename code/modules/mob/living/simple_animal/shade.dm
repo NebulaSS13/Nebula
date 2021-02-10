@@ -25,6 +25,7 @@
 	faction = "cult"
 	supernatural = 1
 	status_flags = CANPUSH
+	gene_damage = -1
 
 	bleed_colour = "#181933"
 
