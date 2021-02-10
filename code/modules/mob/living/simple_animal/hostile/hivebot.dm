@@ -49,7 +49,7 @@
 /mob/living/simple_animal/hostile/hivebot/death()
 	..(null, "blows apart!")
 	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)
-	spark_at(src, amount=3, cardinal_only = TRUE)
+	spark_at(src, cardinal_only = TRUE)
 	qdel(src)
 	return
 

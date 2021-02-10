@@ -214,7 +214,7 @@
 		reagent_glass.forceMove(Tsec)
 		reagent_glass = null
 
-	spark_at(src, amount=3, cardinal_only = TRUE)
+	spark_at(src, cardinal_only = TRUE)
 	qdel(src)
 	return
 

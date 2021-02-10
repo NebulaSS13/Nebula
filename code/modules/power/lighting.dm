@@ -278,7 +278,7 @@
 	else if(!lightbulb)
 		to_chat(user, "You stick \the [W] into the light socket!")
 		if(powered() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
-			spark_at(src, amount=3, cardinal_only = TRUE)
+			spark_at(src, cardinal_only = TRUE)
 			if (prob(75))
 				electrocute_mob(user, get_area(src), src, rand(0.7,1.0))
 

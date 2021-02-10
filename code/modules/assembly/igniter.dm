@@ -28,7 +28,7 @@
 					if(tank)
 						tank.try_detonate_reagents()
 
-			spark_at(src, amount=3, cardinal_only = TRUE)
+			spark_at(src, cardinal_only = TRUE)
 
 		return 1
 

@@ -229,7 +229,7 @@
 		shrapnel += new /obj/item/robot_parts/l_arm(Tsec)
 	shrapnel += new /obj/item/assembly/prox_sensor(Tsec)
 
-	spark_at(src, amount=3, cardinal_only = TRUE)
+	spark_at(src, cardinal_only = TRUE)
 
 	for(var/atom/movable/AM in shrapnel)
 		AM.throw_at(pick(things),5)

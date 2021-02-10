@@ -133,7 +133,7 @@
 
 	//Exceeding maximum power leads to some power loss
 	if(effective_gen > max_power && prob(5))
-		spark_at(src, amount=3, cardinal_only = TRUE)
+		spark_at(src, cardinal_only = TRUE)
 		stored_energy *= 0.5
 
 	//Power

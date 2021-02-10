@@ -39,7 +39,7 @@
 		else
 			new /obj/item/clothing/suit/armor/vest(Tsec)
 
-	spark_at(src, amount=3, cardinal_only = TRUE)
+	spark_at(src, cardinal_only = TRUE)
 
 	new /obj/effect/decal/cleanable/blood/oil(Tsec)
 	qdel(src)

@@ -289,7 +289,7 @@
 
 /obj/item/toy/snappop/throw_impact(atom/hit_atom)
 	..()
-	spark_at(src, amount=3, cardinal_only = TRUE)
+	spark_at(src, cardinal_only = TRUE)
 	new /obj/effect/decal/cleanable/ash(src.loc)
 	visible_message(SPAN_WARNING("The [src.name] explodes!"),SPAN_WARNING("You hear a snap!"))
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)

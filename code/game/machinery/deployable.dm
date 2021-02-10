@@ -94,7 +94,7 @@
 	var/turf/Tsec = get_turf(src)
 	new /obj/item/stack/material/rods(Tsec)
 
-	spark_at(src, amount=3, cardinal_only = TRUE)
+	spark_at(src, cardinal_only = TRUE)
 
 	explosion(src.loc,-1,-1,0)
 	if(src)

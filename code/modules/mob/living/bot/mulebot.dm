@@ -237,7 +237,7 @@
 	new /obj/item/stack/material/rods(Tsec)
 	new /obj/item/stack/cable_coil/cut(Tsec)
 
-	spark_at(src, amount=3, cardinal_only = TRUE)
+	spark_at(src, cardinal_only = TRUE)
 
 	new /obj/effect/decal/cleanable/blood/oil(Tsec)
 	..()

@@ -36,7 +36,7 @@
 		if(prob(50))
 			C.forceMove(get_step(src, pick(GLOB.alldirs)))
 
-	spark_at(src, amount=3, cardinal_only = TRUE)
+	spark_at(src, cardinal_only = TRUE)
 	qdel(src)
 
 /mob/living/bot/remotebot/attackby(var/obj/item/I, var/mob/living/user)

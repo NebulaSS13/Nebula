@@ -164,7 +164,7 @@ datum/track/proc/GetTrack()
 
 	explosion(src.loc, 0, 0, 1, rand(1,2), 1)
 
-	spark_at(src, amount=3, cardinal_only = TRUE)
+	spark_at(src, cardinal_only = TRUE)
 
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
 	qdel(src)

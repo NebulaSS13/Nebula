@@ -230,7 +230,7 @@
 		if(electrocute_mob(user, C, src))
 			if(C.powernet)
 				C.powernet.trigger_warning()
-			spark_at(src, amount=3, cardinal_only = TRUE)
+			spark_at(src, cardinal_only = TRUE)
 			if(user.stunned)
 				return 1
 		else

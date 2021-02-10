@@ -27,7 +27,7 @@
 		call(src,triggerproc)(M)
 
 /obj/effect/mine/proc/triggerrad(obj)
-	spark_at(src, amount=3, cardinal_only = TRUE)
+	spark_at(src, cardinal_only = TRUE)
 	obj:radiation += 50
 	randmutb(obj)
 	domutcheck(obj,null)
@@ -38,7 +38,7 @@
 	if(ismob(obj))
 		var/mob/M = obj
 		M.Stun(30)
-	spark_at(src, amount=3, cardinal_only = TRUE)
+	spark_at(src, cardinal_only = TRUE)
 	spawn(0)
 		qdel(src)
 
@@ -63,7 +63,7 @@
 		qdel(src)
 
 /obj/effect/mine/proc/triggerkick(obj)
-	spark_at(src, amount=3, cardinal_only = TRUE)
+	spark_at(src, cardinal_only = TRUE)
 	qdel(obj:client)
 	spawn(0)
 		qdel(src)

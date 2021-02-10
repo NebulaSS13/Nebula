@@ -41,7 +41,7 @@
 		target.dna.real_name = target.real_name
 
 		target.visible_message(SPAN_NOTICE("[target] molts away their shell, emerging as a new gyne."))
-		spark_at(src, amount=3, cardinal_only = TRUE)
+		spark_at(src, cardinal_only = TRUE)
 		target.AdjustStunned(6)
 		target.set_species(SPECIES_MANTID_GYNE)
 		new /obj/effect/temp_visual/emp_burst(loc)

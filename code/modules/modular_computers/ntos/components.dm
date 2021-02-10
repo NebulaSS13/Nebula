@@ -63,6 +63,7 @@
 /datum/extension/interactive/ntos/proc/voltage_overload()
 	var/atom/A = holder
 	if(istype(A))
+		spark_at(A, amount = 10, cardinal_only = TRUE, holder = A)
 		var/datum/effect/effect/system/spark_spread/s = new
 		s.set_up(10, 1, A)
 		s.start()
