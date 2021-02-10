@@ -234,8 +234,8 @@
 			src.id = t
 			to_chat(user, SPAN_NOTICE("The new ID of the window is [id]"))
 		return
-	else if(istype(W, /obj/item/gun/plasmacutter) && anchored)
-		var/obj/item/gun/plasmacutter/cutter = W
+	else if(istype(W, /obj/item/gun/hand/plasmacutter) && anchored)
+		var/obj/item/gun/hand/plasmacutter/cutter = W
 		if(!cutter.slice(user))
 			return
 		playsound(src, 'sound/items/Welder.ogg', 80, 1)

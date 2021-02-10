@@ -1,5 +1,5 @@
 
-/obj/item/gun/zipgun
+/obj/item/gun/hand/zipgun
 	name = "zip gun"
 	desc = "Little more than a barrel, handle, and firing mechanism, cheap makeshift firearms like this one are not uncommon in frontier systems."
 	icon = 'icons/obj/guns/zipgun.dmi'
@@ -22,7 +22,7 @@
 		/obj/item/ammo_casing/rifle
 		)
 
-/obj/item/gun/zipgun/Initialize()
+/obj/item/gun/hand/zipgun/Initialize()
 	. = ..()
 	var/obj/item/ammo_casing/ammo = pick(ammo_types)
 	set_caliber(initial(ammo.caliber))

@@ -9,7 +9,7 @@
 							/obj/item/toy/blink															= 200,
 							/obj/item/clothing/under/syndicate/tacticool								= 200,
 							/obj/item/toy/sword															= 200,
-							/obj/item/gun/revolver/capgun								= 200,
+							/obj/item/gun/hand/revolver/capgun								= 200,
 							/obj/item/gun/launcher/foam/crossbow														= 200,
 							/obj/item/storage/fancy/crayons										= 200,
 							/obj/item/toy/spinningtoy													= 200,

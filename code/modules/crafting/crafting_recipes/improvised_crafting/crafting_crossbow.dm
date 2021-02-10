@@ -44,4 +44,4 @@
 
 /decl/crafting_stage/screwdriver/crossbow
 	progress_message = "You secure the crossbow's various parts."
-	product = /obj/item/gun/crossbow
+	product = /obj/item/gun/long/crossbow

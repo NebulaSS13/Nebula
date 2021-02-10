@@ -273,16 +273,16 @@
 	icon_state = "energykill100"
 
 /obj/random/energy/spawn_choices()
-	return list(/obj/item/gun/laser = 4,
-				/obj/item/gun/egun = 3,
-				/obj/item/gun/lasercannon = 2,
-				/obj/item/gun/xray = 3,
-				/obj/item/gun/esniper = 1,
-				/obj/item/gun/egun/advanced = 1,
-				/obj/item/gun/ionrifle = 2,
-				/obj/item/gun/radpistol = 3,
-				/obj/item/gun/electrolaser = 4,
-				/obj/item/gun/ecrossbow/largecrossbow = 2)
+	return list(/obj/item/gun/long/laser = 4,
+				/obj/item/gun/hand/egun = 3,
+				/obj/item/gun/cannon/laser = 2,
+				/obj/item/gun/hand/xray = 3,
+				/obj/item/gun/cannon/esniper = 1,
+				/obj/item/gun/long/advanced_egun = 1,
+				/obj/item/gun/long/ion = 2,
+				/obj/item/gun/hand/radpistol = 3,
+				/obj/item/gun/hand/electrolaser = 4,
+				/obj/item/gun/hand/ecrossbow/largecrossbow = 2)
 
 /obj/random/projectile
 	name = "Random Projectile Weapon"
@@ -291,17 +291,18 @@
 	icon_state = "revolver"
 
 /obj/random/projectile/spawn_choices()
-	return list(/obj/item/gun/shotgun/pump = 3,
-				/obj/item/gun/automatic/assault_rifle = 2,
-				/obj/item/gun/pistol = 3,
-				/obj/item/gun/pistol/holdout = 4,
-				/obj/item/gun/zipgun = 5,
-				/obj/item/gun/automatic/smg = 4,
-				/obj/item/gun/revolver = 2,
-				/obj/item/gun/shotgun/doublebarrel = 4,
-				/obj/item/gun/shotgun/doublebarrel/sawn = 3,
-				/obj/item/gun/bolt_action/sniper = 1
-				)
+	return list(
+		/obj/item/gun/long/shotgun/pump = 3,
+		/obj/item/gun/long/assault_rifle = 2,
+		/obj/item/gun/hand/pistol = 3,
+		/obj/item/gun/hand/pistol/holdout = 4,
+		/obj/item/gun/hand/zipgun = 5,
+		/obj/item/gun/hand/submachine_gun = 4,
+		/obj/item/gun/hand/revolver = 2,
+		/obj/item/gun/long/shotgun/doublebarrel = 4,
+		/obj/item/gun/long/shotgun/doublebarrel/sawn = 3,
+		/obj/item/gun/cannon/anti_materiel = 1
+	)
 
 /obj/random/handgun
 	name = "Random Handgun"
@@ -310,9 +311,9 @@
 	icon_state = "secguncomp"
 
 /obj/random/handgun/spawn_choices()
-	return list(/obj/item/gun/pistol = 3,
-				/obj/item/gun/egun = 3,
-				/obj/item/gun/pistol/holdout = 2
+	return list(/obj/item/gun/hand/pistol = 3,
+				/obj/item/gun/hand/egun = 3,
+				/obj/item/gun/hand/pistol/holdout = 2
 				)
 
 /obj/random/ammo

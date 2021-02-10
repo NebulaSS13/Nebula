@@ -27,8 +27,8 @@
 
 /obj/item/firearm_component/barrel/ballistic/shotgun/double/holder_attackby(obj/item/W, mob/user)
 	if(w_class >= ITEM_SIZE_HUGE)
-		if(istype(W, /obj/item/gun/plasmacutter))
-			var/obj/item/gun/plasmacutter/cutter = W
+		if(istype(W, /obj/item/gun/hand/plasmacutter))
+			var/obj/item/gun/hand/plasmacutter/cutter = W
 			if(cutter.slice(user))
 				return shorten(W, user)
 		if(istype(W, /obj/item/circular_saw) || istype(W, /obj/item/energy_blade))

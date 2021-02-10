@@ -3,7 +3,7 @@
 	item_type = "gun"
 	new_icon_state = ICON_STATE_WORLD
 	responsive_reagent = /decl/material/solid/metal/iron
-	possible_types = list(/obj/item/gun/revolver)
+	possible_types = list(/obj/item/gun/hand/revolver)
 	var/gun_icons = list(
 		'icons/obj/guns/xenoarch/gun_1.dmi',
 		'icons/obj/guns/xenoarch/gun_2.dmi',
@@ -12,7 +12,7 @@
 	)
 
 /decl/archaeological_find/gun/spawn_item(atom/loc)
-	var/obj/item/gun/revolver/new_gun = ..()
+	var/obj/item/gun/hand/revolver/new_gun = ..()
 
 	//33% chance to be able to reload the gun with human ammunition
 	if(prob(66))
@@ -48,10 +48,10 @@
 	modification_flags = XENOFIND_APPLY_DECOR | XENOFIND_REPLACE_ICON
 	responsive_reagent = /decl/material/solid/metal/iron
 	possible_types = list(
-		/obj/item/gun/laser/practice,
-		/obj/item/gun/laser,
-		/obj/item/gun/xray,
-		/obj/item/gun/antique
+		/obj/item/gun/long/laser/practice,
+		/obj/item/gun/long/laser,
+		/obj/item/gun/hand/xray,
+		/obj/item/gun/hand/antique
 	)
 	var/egun_icons = list(
 		'icons/obj/guns/xenoarch/egun_1.dmi',

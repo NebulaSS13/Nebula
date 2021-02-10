@@ -102,7 +102,7 @@
 	allowed_tools = list(
 		/obj/item/weldingtool = 80,
 		/obj/item/circular_saw = 60,
-		/obj/item/gun/plasmacutter = 30
+		/obj/item/gun/hand/plasmacutter = 30
 	)
 	can_infect = 0
 	blood_level = 0

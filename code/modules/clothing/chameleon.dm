@@ -349,7 +349,7 @@
 //*****************
 //**Chameleon Gun**
 //*****************
-/obj/item/gun/chameleon
+/obj/item/gun/hand/chameleon
 	name = "chameleon gun"
 	desc = "A hologram projector in the shape of a gun. There is a dial on the side to change the gun's disguise."
 	icon = 'icons/obj/guns/revolvers.dmi'
@@ -364,12 +364,12 @@
 	var/obj/item/projectile/copy_projectile
 	var/static/list/gun_choices
 
-/obj/item/gun/chameleon/Initialize()
+/obj/item/gun/hand/chameleon/Initialize()
 	. = ..()
 	if(!gun_choices)
 		gun_choices = generate_chameleon_choices(/obj/item/gun)
 
-/obj/item/gun/chameleon/consume_next_projectile()
+/obj/item/gun/hand/chameleon/consume_next_projectile()
 	var/obj/item/projectile/P = ..()
 	if(P && ispath(copy_projectile))
 		P.SetName(initial(copy_projectile.name))
@@ -383,7 +383,7 @@
 		P.impact_type = initial(copy_projectile.impact_type)
 	return P
 
-/obj/item/gun/chameleon/OnDisguise(var/obj/item/gun/copy)
+/obj/item/gun/hand/chameleon/OnDisguise(var/obj/item/gun/copy)
 	if(!istype(copy))
 		return
 
@@ -397,7 +397,7 @@
 	if(istype(E))
 		copy_projectile = E.get_projectile_type()
 
-/obj/item/gun/chameleon/verb/change(picked in gun_choices)
+/obj/item/gun/hand/chameleon/verb/change(picked in gun_choices)
 	set name = "Change Gun Appearance"
 	set category = "Chameleon Items"
 	set src in usr

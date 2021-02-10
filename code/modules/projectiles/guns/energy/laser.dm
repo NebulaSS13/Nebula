@@ -1,4 +1,4 @@
-/obj/item/gun/laser
+/obj/item/gun/long/laser
 	name = "laser carbine"
 	desc = "A G40E carbine, designed to kill with concentrated energy blasts."
 	icon = 'icons/obj/guns/laser_carbine.dmi'
@@ -11,16 +11,16 @@
 	receiver = /obj/item/firearm_component/receiver/energy/laser
 	barrel = /obj/item/firearm_component/barrel/energy/laser
 
-/obj/item/gun/laser/mounted
+/obj/item/gun/long/laser/mounted
 	receiver = /obj/item/firearm_component/receiver/energy/laser/mounted
 
-/obj/item/gun/laser/practice
+/obj/item/gun/long/laser/practice
 	name = "practice laser carbine"
 	desc = "A modified version of the HI G40E, this one fires less concentrated energy bolts designed for target practice."
 	receiver = /obj/item/firearm_component/barrel/energy/laser/practice
 	receiver = /obj/item/firearm_component/receiver/energy/laser
 
-/obj/item/gun/antique
+/obj/item/gun/hand/antique
 	name = "antique laser gun"
 	icon = 'icons/obj/guns/caplaser.dmi'
 	icon_state = ICON_STATE_WORLD
@@ -32,7 +32,7 @@
 	receiver = /obj/item/firearm_component/receiver/energy/laser/antique
 	barrel = /obj/item/firearm_component/barrel/energy/laser/antique
 
-/obj/item/gun/lasercannon
+/obj/item/gun/cannon/laser
 	name = "laser cannon"
 	desc = "With the laser cannon, the lasing medium is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with small laser volumes!"
 	icon_state = "lasercannon"
@@ -50,7 +50,7 @@
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 
-/obj/item/gun/lasercannon/mounted
+/obj/item/gun/cannon/laser/mounted
 	name = "mounted laser cannon"
 	accuracy = 0 //mounted laser cannons don't need any help, thanks
 	receiver = /obj/item/firearm_component/receiver/energy/laser/cannon/mounted

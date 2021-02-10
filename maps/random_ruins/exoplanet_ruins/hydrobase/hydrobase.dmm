@@ -1045,7 +1045,7 @@
 /obj/structure/catwalk,
 /obj/random/toolbox,
 /obj/structure/table/rack,
-/obj/item/gun/zipgun,
+/obj/item/gun/hand/zipgun,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
 "cH" = (
@@ -1079,7 +1079,7 @@
 /obj/item/seeds/random,
 /obj/item/seeds/random,
 /obj/item/seeds/random,
-/obj/item/gun/floragun,
+/obj/item/gun/hand/floragun,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "cK" = (
@@ -2316,7 +2316,7 @@
 /obj/structure/table/rack,
 /obj/item/ammo_casing/shotgun/emp,
 /obj/item/ammo_casing/shotgun/emp,
-/obj/item/gun/shotgun/doublebarrel,
+/obj/item/gun/long/shotgun/doublebarrel,
 /obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},

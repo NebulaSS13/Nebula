@@ -117,7 +117,7 @@
 	var/slowdown_held = 3
 	var/slowdown_worn = 2
 /*
-/obj/item/gun/railgun/Initialize()
+/obj/item/gun/long/railgun/Initialize()
 
 	capacitor = new initial_capacitor_type(src)
 	capacitor.charge = capacitor.max_charge
@@ -135,18 +135,18 @@
 
 // Not going to check type repeatedly, if you code or varedit
 // load_type and get runtime errors, don't come crying to me.
-/obj/item/gun/railgun/show_ammo(var/mob/user)
+/obj/item/gun/long/railgun/show_ammo(var/mob/user)
 	var/obj/item/rcd_ammo/ammo = loaded
 	if (ammo)
 		to_chat(user, "<span class='notice'>There are [ammo.remaining] shot\s remaining in \the [loaded].</span>")
 	else
 		to_chat(user, "<span class='notice'>There is nothing loaded.</span>")
 
-/obj/item/gun/railgun/check_ammo()
+/obj/item/gun/long/railgun/check_ammo()
 	var/obj/item/rcd_ammo/ammo = loaded
 	return ammo && ammo.remaining
 
-/obj/item/gun/railgun/use_ammo()
+/obj/item/gun/long/railgun/use_ammo()
 	var/obj/item/rcd_ammo/ammo = loaded
 	ammo.remaining--
 	if(ammo.remaining <= 0)
@@ -154,7 +154,7 @@
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 		out_of_ammo()
 
-/obj/item/gun/railgun/proc/out_of_ammo()
+/obj/item/gun/long/railgun/proc/out_of_ammo()
 	qdel(loaded)
 	loaded = null
 	visible_message("<span class='warning'>\The [src] beeps and ejects its empty cartridge.</span>")
@@ -172,6 +172,6 @@
 		list(mode_name="short bursts", burst=3, fire_delay=null, one_hand_penalty=2, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
 	)
 /*
-/obj/item/gun/railgun/flechette/out_of_ammo()
+/obj/item/gun/long/railgun/flechette/out_of_ammo()
 	visible_message("<span class='warning'>\The [src] beeps to indicate the magazine is empty.</span>")
 */

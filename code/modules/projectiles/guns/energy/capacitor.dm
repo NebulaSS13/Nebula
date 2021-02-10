@@ -42,7 +42,7 @@ var/global/list/laser_wavelengths
 	damage_multiplier = 0.6
 	armour_multiplier = 0.5
 
-/obj/item/gun/capacitor
+/obj/item/gun/hand/capacitor_pistol
 	name = "capacitor pistol"
 	desc = "An excitingly chunky directed energy weapon that uses a modular capacitor array to charge each shot."
 	icon = 'icons/obj/guns/capacitor_pistol.dmi'
@@ -61,7 +61,7 @@ var/global/list/laser_wavelengths
 	receiver = /obj/item/firearm_component/receiver/energy/capacitor
 
 // Subtypes.
-/obj/item/gun/capacitor/rifle
+/obj/item/gun/long/capacitor_rifle
 	name = "capacitor rifle"
 	desc = "A heavy, unwieldly directed energy weapon that uses a linear capacitor array to charge a powerful beam."
 	icon = 'icons/obj/guns/capacitor_rifle.dmi'
@@ -71,7 +71,7 @@ var/global/list/laser_wavelengths
 	barrel = /obj/item/firearm_component/barrel/energy/capacitor/rifle
 	receiver = /obj/item/firearm_component/receiver/energy/capacitor/rifle
 
-/obj/item/gun/capacitor/rifle/linear_fusion
+/obj/item/gun/long/linear_fusion
 	name = "linear fusion rifle"
 	desc = "A chunky, angular, carbon-fiber-finish capacitor rifle, shipped complete with a self-charging power cell. The operating instructions seem to be written in backwards Cyrillic."
 	color = COLOR_GRAY40

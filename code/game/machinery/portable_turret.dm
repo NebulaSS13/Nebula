@@ -26,7 +26,7 @@
 	var/locked = 1			//if the turret's behaviour control access is locked
 	var/controllock = 0		//if the turret responds to control panels
 
-	var/installation = /obj/item/gun/egun		//the type of weapon installed
+	var/installation = /obj/item/gun/hand/egun		//the type of weapon installed
 	var/gun_charge = 0		//the charge of the gun inserted
 	var/projectile = null	//holder for bullettype
 	var/eprojectile = null	//holder for the shot when emagged
@@ -73,7 +73,7 @@
 /obj/machinery/porta_turret/stationary
 	ailock = 1
 	lethal = 1
-	installation = /obj/item/gun/laser
+	installation = /obj/item/gun/long/laser
 
 /obj/machinery/porta_turret/malf_upgrade(var/mob/living/silicon/ai/user)
 	..()
@@ -102,26 +102,26 @@
 
 /obj/machinery/porta_turret/proc/weapon_setup(var/guntype)
 	switch(guntype)
-		if(/obj/item/gun/laser/practice)
+		if(/obj/item/gun/long/laser/practice)
 			iconholder = 1
 			eprojectile = /obj/item/projectile/beam
 
-		if(/obj/item/gun/antique)
+		if(/obj/item/gun/hand/antique)
 			iconholder = 1
 
-		if(/obj/item/gun/lasercannon)
+		if(/obj/item/gun/cannon/laser)
 			iconholder = 1
 
-		if(/obj/item/gun/electrolaser)
+		if(/obj/item/gun/hand/electrolaser)
 			eprojectile = /obj/item/projectile/beam
 			eshot_sound = 'sound/weapons/Laser.ogg'
 
-		if(/obj/item/gun/egun)
+		if(/obj/item/gun/hand/egun)
 			eprojectile = /obj/item/projectile/beam	//If it has, going to kill mode
 			eshot_sound = 'sound/weapons/Laser.ogg'
 			egun = 1
 
-		if(/obj/item/gun/egun/advanced)
+		if(/obj/item/gun/long/advanced_egun)
 			eprojectile = /obj/item/projectile/beam	//If it has, going to kill mode
 			eshot_sound = 'sound/weapons/Laser.ogg'
 			egun = 1

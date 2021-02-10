@@ -25,13 +25,13 @@
 
 /*
 	var/use_launcher = 0
-	var/obj/item/gun/grenade/underslung/launcher
+	var/obj/item/gun/long/grenade/underslung/launcher
 
-/obj/item/gun/automatic/assault_rifle/Initialize()
+/obj/item/gun/long/assault_rifle/Initialize()
 	. = ..()
 	launcher = new(src)
 
-/obj/item/gun/automatic/assault_rifle/Fire(atom/target, mob/living/user, params, pointblank=0, reflex=0)
+/obj/item/gun/long/assault_rifle/Fire(atom/target, mob/living/user, params, pointblank=0, reflex=0)
 	if(use_launcher)
 		launcher.Fire(target, user, params, pointblank, reflex)
 		if(!launcher.chambered)
@@ -39,14 +39,14 @@
 	else
 		..()
 
-/obj/item/gun/automatic/assault_rifle/examine(mob/user)
+/obj/item/gun/long/assault_rifle/examine(mob/user)
 	. = ..()
 	if(launcher.chambered)
 		to_chat(user, "\The [launcher] has \a [launcher.chambered] loaded.")
 	else
 		to_chat(user, "\The [launcher] is empty.")
 
-/obj/item/gun/automatic/assault_rifle/attackby(obj/item/I, mob/user)
+/obj/item/gun/long/assault_rifle/attackby(obj/item/I, mob/user)
 	if((istype(I, /obj/item/grenade)))
 		launcher.load(I, user)
 	else

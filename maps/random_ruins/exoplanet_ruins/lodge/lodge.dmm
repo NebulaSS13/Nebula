@@ -193,7 +193,7 @@
 /area/template_noop)
 "I" = (
 /obj/structure/table/rack,
-/obj/item/gun/zipgun,
+/obj/item/gun/hand/zipgun,
 /obj/item/storage/box/ammo/shotgunshells,
 /turf/simulated/floor/wood,
 /area/template_noop)

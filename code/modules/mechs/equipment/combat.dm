@@ -2,7 +2,7 @@
 	name = "mounted electrolaser carbine"
 	desc = "A dual fire mode electrolaser system connected to the exosuit's targetting system."
 	icon_state = "mech_taser"
-	holding_type = /obj/item/gun/electrolaser/mounted/mech
+	holding_type = /obj/item/gun/hand/electrolaser/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
 
@@ -10,22 +10,22 @@
 	name = "mounted ion rifle"
 	desc = "An exosuit-mounted ion rifle. Handle with care."
 	icon_state = "mech_ionrifle"
-	holding_type = /obj/item/gun/ionrifle/mounted/mech
+	holding_type = /obj/item/gun/long/ion/mounted/mech
 
 /obj/item/mech_equipment/mounted_system/taser/laser
 	name = "\improper CH-PS \"Immolator\" laser"
 	desc = "An exosuit-mounted laser rifle. Handle with care."
 	icon_state = "mech_lasercarbine"
-	holding_type = /obj/item/gun/laser/mounted/mech
+	holding_type = /obj/item/gun/long/laser/mounted/mech
 
-/obj/item/gun/electrolaser/mounted/mech
+/obj/item/gun/hand/electrolaser/mounted/mech
 	barrel =   /obj/item/firearm_component/barrel/energy/heavy_stun
 	receiver = /obj/item/firearm_component/receiver/energy/electrolaser/mech
 
-/obj/item/gun/ionrifle/mounted/mech
+/obj/item/gun/long/ion/mounted/mech
 	receiver = /obj/item/firearm_component/receiver/energy/ionrifle/mech
 
-/obj/item/gun/laser/mounted/mech
+/obj/item/gun/long/laser/mounted/mech
 	name = "\improper CH-PS \"Immolator\" laser"
 	receiver = /obj/item/firearm_component/receiver/energy/laser/mech
 

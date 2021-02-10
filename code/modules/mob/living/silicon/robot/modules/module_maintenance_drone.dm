@@ -47,7 +47,7 @@
 		/datum/matter_synth/plastic = 1000,
 		/datum/matter_synth/wire =    30
 	)
-	emag = /obj/item/gun/plasmacutter
+	emag = /obj/item/gun/hand/plasmacutter
 	skills = list(
 		SKILL_LITERACY     = SKILL_ADEPT,
 		SKILL_ATMOS        = SKILL_EXPERT,

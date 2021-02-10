@@ -8,19 +8,16 @@
 /obj/item/gun
 	name = "gun"
 	desc = "A gun that fires projectiles."
-	icon = 'icons/obj/guns/pistol.dmi'
 	icon_state = ICON_STATE_WORLD
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_LOWER_BODY|SLOT_HOLSTER
 	material = /decl/material/solid/metal/steel
-	w_class = ITEM_SIZE_NORMAL
 	throwforce = 5
 	throw_speed = 4
 	throw_range = 5
-	force = 5
-	origin_tech = "{'combat':2,'materials':2}"
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
+
+	var/firearm_frame_subtype
 
 	var/total_firearm_bulk =             0 // How unwieldy this weapon for its size, affects accuracy when fired without aiming.
 	var/total_firearm_one_hand_penalty = 0
@@ -32,6 +29,24 @@
 	var/obj/item/firearm_component/barrel/barrel
 	var/obj/item/firearm_component/stock/stock
 	var/obj/item/firearm_component/grip/grip
+
+/obj/item/gun/Initialize()
+
+	if(!ispath(firearm_frame_subtype, /obj/item/gun))
+		crash_with("Firearm initialized with invalid frame subtype: [type] (name).")
+		return INITIALIZE_HINT_QDEL
+
+	if(type == firearm_frame_subtype)
+		crash_with("Firearm initialized with same type as frame subtype: [type] (name).")
+		return INITIALIZE_HINT_QDEL
+
+	var/list/firearm_components = get_modular_component_list()
+	for(var/fcomp in firearm_components)
+		var/fcomppath = firearm_components[fcomp]
+		if(fcomppath)
+			new fcomppath(src)
+	. = ..()
+	update_from_components()
 
 /obj/item/gun/proc/is_secure_gun()
 	return length(req_access)
@@ -86,15 +101,6 @@
 			if(istype(comp))
 				comp.show_examine_info(user)
 
-/obj/item/gun/Initialize()
-	var/list/firearm_components = get_modular_component_list()
-	for(var/fcomp in firearm_components)
-		var/fcomppath = firearm_components[fcomp]
-		if(fcomppath)
-			new fcomppath(src)
-	. = ..()
-	update_from_components()
-
 /obj/item/gun/attack_self(mob/user)
 	var/list/firearm_components = get_modular_component_list()
 	for(var/fcomp in firearm_components)
@@ -104,13 +110,13 @@
 	. = ..()
 
 /*
-/obj/item/gun/sealant/attack_self(mob/user)
+/obj/item/gun/cannon/sealant/attack_self(mob/user)
 	if(loaded_tank)
 		unload_tank(user)
 		return TRUE
 	. = ..()
 	
-/obj/item/gun/crossbow/attack_self(mob/living/user)
+/obj/item/gun/long/crossbow/attack_self(mob/living/user)
 	if(tension)
 		if(bolt)
 			user.visible_message("[user] relaxes the tension on [holder || src]'s string and removes [bolt].","You relax the tension on [holder || src]'s string and remove [bolt].")
@@ -129,7 +135,7 @@
 	mode = mode == "Impact" ? "Sentry" : "Impact"
 	to_chat(user,"<span class='notice'>You switch \the [holder || src]'s mode to \"[mode]\"</span>")
 
-/obj/item/gun/crossbow/rapidcrossbowdevice/attack_self(mob/living/user)
+/obj/item/gun/long/crossbow/rapidcrossbowdevice/attack_self(mob/living/user)
 	if(tension)
 		user.visible_message("[user] relaxes the tension on [holder || src]'s string.","You relax the tension on [holder || src]'s string.")
 		tension = 0
@@ -138,7 +144,7 @@
 		generate_bolt(user)
 		draw(user)
 
-/obj/item/gun/capacitor/attack_self(var/mob/user)
+/obj/item/gun/hand/capacitor_pistol/attack_self(var/mob/user)
 
 	if(charging)
 		for(var/obj/item/stock_parts/capacitor/capacitor in capacitors)
@@ -153,10 +159,10 @@
 			update_icon()
 	return TRUE
 
-/obj/item/gun/grenade/underslung/attack_self()
+/obj/item/gun/long/grenade/underslung/attack_self()
 	return
 
-/obj/item/gun/temperature/attack_self(mob/living/user)
+/obj/item/gun/long/temperature/attack_self(mob/living/user)
 	user.set_machine(src)
 	var/temp_text = ""
 	if(firing_temperature > (T0C - 50))
@@ -173,7 +179,7 @@
 	onclose(user, "window=freezegun", src)
 
 
-/obj/item/gun/syringe/attack_self(mob/living/user)
+/obj/item/gun/long/syringe/attack_self(mob/living/user)
 	if(next)
 		user.visible_message("[user] unlatches and carefully relaxes the bolt on \the [holder || src].", "<span class='warning'>You unlatch and carefully relax the bolt on \the [holder || src], unloading the spring.</span>")
 		next = null
@@ -184,11 +190,11 @@
 	add_fingerprint(user)
 
 
-/obj/item/gun/pneumatic/attack_self(mob/user)
+/obj/item/gun/long/pneumatic/attack_self(mob/user)
 	eject_tank(user)
 
 
-/obj/item/gun/money/attack_self(mob/user)
+/obj/item/gun/hand/money/attack_self(mob/user)
 	var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
 	var/disp_amount = min(input(user, "How many [cur.name_singular] do you want to dispense at a time? (0 to [src.receptacle_value])", "Money Cannon Settings", 20) as num, receptacle_value)
 	if (disp_amount < 1)
@@ -198,7 +204,7 @@
 	to_chat(user, "<span class='notice'>You set [holder || src] to dispense [dispensing] [cur.name_singular] at a time.</span>")
 
 
-/obj/item/gun/grenade/attack_self(mob/user)
+/obj/item/gun/long/grenade/attack_self(mob/user)
 	pump(user)
 
 */
@@ -214,25 +220,25 @@
 /*
 
 
-/obj/item/gun/grenade/attack_hand(mob/user)
+/obj/item/gun/long/grenade/attack_hand(mob/user)
 	if(user.is_holding_offhand(src))
 		unload(user)
 	else
 		..()
 
-/obj/item/gun/money/attack_hand(mob/user)
+/obj/item/gun/hand/money/attack_hand(mob/user)
 	if(user.is_holding_offhand(src))
 		unload_receptacle(user)
 	else
 		return ..()
 
-/obj/item/gun/pneumatic/attack_hand(mob/user)
+/obj/item/gun/long/pneumatic/attack_hand(mob/user)
 	if(user.is_holding_offhand(src))
 		unload_hopper(user)
 	else
 		return ..()
 
-/obj/item/gun/syringe/attack_hand(mob/living/user)
+/obj/item/gun/long/syringe/attack_hand(mob/living/user)
 	if(user.is_holding_offhand(src))
 		if(!darts.len)
 			to_chat(user, "<span class='warning'>[holder || src] is empty.</span>")
@@ -266,13 +272,13 @@
 			return
 	. = ..()
 
-/obj/item/gun/automatic/assault_rifle/attack_hand(mob/user)
+/obj/item/gun/long/assault_rifle/attack_hand(mob/user)
 	if(user.is_holding_offhand(src) && use_launcher)
 		launcher.unload(user)
 	else
 		..()
 
-/obj/item/gun/sealant/attack_hand(mob/user)
+/obj/item/gun/cannon/sealant/attack_hand(mob/user)
 	if((src in user.get_held_items()) && loaded_tank)
 		unload_tank(user)
 		return TRUE
@@ -292,7 +298,7 @@
 		..()
 
 
-/obj/item/gun/capacitor/attackby(obj/item/W, mob/user)
+/obj/item/gun/hand/capacitor_pistol/attackby(obj/item/W, mob/user)
 
 	if(charging)
 		return ..()
@@ -334,7 +340,7 @@
 	. = ..()
 
 
-/obj/item/gun/capacitor/rifle/linear_fusion/attackby(obj/item/W, mob/user)
+/obj/item/gun/long/linear_fusion/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		to_chat(user, SPAN_WARNING("\The [holder || src] is hermetically sealed; you can't get the components out."))
 		return TRUE
@@ -342,7 +348,7 @@
 
 	
 
-/obj/item/gun/crossbow/rapidcrossbowdevice/attackby(obj/item/W, mob/user)
+/obj/item/gun/long/crossbow/rapidcrossbowdevice/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/rcd_ammo))
 		var/obj/item/rcd_ammo/cartridge = W
 		if((stored_matter + cartridge.remaining) > max_stored_matter)
@@ -366,17 +372,17 @@
 		update_icon()
 
 
-/obj/item/gun/floragun/resolve_attackby(atom/A)
+/obj/item/gun/hand/floragun/resolve_attackby(atom/A)
 	if(istype(A,/obj/machinery/portable_atmospherics/hydroponics))
 		return FALSE // do afterattack, i.e. fire, at pointblank at trays.
 	return ..()
 
-/obj/item/gun/crossbow/attackby(obj/item/W, mob/user)
+/obj/item/gun/long/crossbow/attackby(obj/item/W, mob/user)
 	
 	if(istype(W, /obj/item/rcd))
 		var/obj/item/rcd/rcd = W
 		if(rcd.crafting && user.unEquip(rcd) && user.unEquip(src))
-			new /obj/item/gun/crossbow/rapidcrossbowdevice(get_turf(src))
+			new /obj/item/gun/long/crossbow/rapidcrossbowdevice(get_turf(src))
 			qdel(rcd)
 			qdel_self()
 		else
@@ -423,7 +429,7 @@
 		..()
 
 
-/obj/item/gun/foam/attackby(obj/item/I, mob/user)
+/obj/item/gun/hand/foam/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/foam_dart))
 		if(darts.len < max_darts)
 			if(!user.unEquip(I, src))
@@ -434,14 +440,14 @@
 			to_chat(user, SPAN_WARNING("\The [holder || src] can hold no more darts."))
 
 
-/obj/item/gun/grenade/attackby(obj/item/I, mob/user)
+/obj/item/gun/long/grenade/attackby(obj/item/I, mob/user)
 	if((istype(I, /obj/item/grenade)))
 		load(I, user)
 	else
 		..()
 
 
-/obj/item/gun/money/attackby(obj/item/W, mob/user)
+/obj/item/gun/hand/money/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/cash/))
 		var/obj/item/cash/bling = W
 		if(bling.absolute_worth < 1)
@@ -461,7 +467,7 @@
 		to_chat(user, "<span class='warning'>That's not going to fit in there.</span>")
 
 
-/obj/item/gun/pneumatic/attackby(obj/item/W, mob/user)
+/obj/item/gun/long/pneumatic/attackby(obj/item/W, mob/user)
 	if(!tank && istype(W,/obj/item/tank) && user.unEquip(W, src))
 		tank = W
 		user.visible_message("[user] jams [W] into [holder || src]'s valve and twists it closed.","You jam [W] into [holder || src]'s valve and twist it closed.")
@@ -470,7 +476,7 @@
 		item_storage.handle_item_insertion(W)
 
 
-/obj/item/gun/rocket/attackby(obj/item/I, mob/user)
+/obj/item/gun/cannon/rocket/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/ammo_casing/rocket))
 		if(rockets.len < max_rockets)
 			if(!user.unEquip(I, src))
@@ -482,7 +488,7 @@
 			to_chat(usr, "<span class='warning'>\The [holder || src] cannot hold more rockets.</span>")
 
 
-/obj/item/gun/syringe/attackby(var/obj/item/A, mob/user)
+/obj/item/gun/long/syringe/attackby(var/obj/item/A, mob/user)
 	if(istype(A, /obj/item/syringe_cartridge))
 		var/obj/item/syringe_cartridge/C = A
 		if(darts.len >= max_darts)
@@ -581,7 +587,7 @@
 		return
 	. = ..()
 
-/obj/item/gun/sealant/attackby(obj/item/W, mob/user)
+/obj/item/gun/cannon/sealant/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/sealant_tank) && user.unEquip(W, src))
 		loaded_tank = W
 		to_chat(user, SPAN_NOTICE("You slot \the [loaded_tank] into \the [holder || src]."))

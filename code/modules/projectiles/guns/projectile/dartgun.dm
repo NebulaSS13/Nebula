@@ -1,4 +1,4 @@
-/obj/item/gun/dartgun
+/obj/item/gun/hand/dartgun
 	name = "dart gun"
 	desc = "The Artemis is a gas-powered dart gun capable of delivering chemical cocktails swiftly across short distances."
 	icon = 'icons/obj/guns/dartgun.dmi'

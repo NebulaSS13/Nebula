@@ -56,7 +56,7 @@
 		/obj/item/clothing/head/chameleon,
 		/obj/item/clothing/mask/chameleon,
 		/obj/item/storage/box/syndie_kit/chameleon,
-		/obj/item/gun/chameleon,
+		/obj/item/gun/hand/chameleon,
 		)
 
 /obj/item/storage/box/syndie_kit/chameleon
@@ -87,14 +87,14 @@
 
 /obj/item/storage/box/syndie_kit/silenced
 	startswith = list(
-		/obj/item/gun/pistol/holdout,
+		/obj/item/gun/hand/pistol/holdout,
 		/obj/item/silencer,
 		/obj/item/ammo_magazine/pistol/small
 	)
 
 /obj/item/storage/backpack/satchel/syndie_kit/revolver
 	startswith = list(
-		/obj/item/gun/revolver,
+		/obj/item/gun/hand/revolver,
 		/obj/item/ammo_magazine/speedloader
 	)
 
@@ -106,7 +106,7 @@
 
 /obj/item/storage/box/syndie_kit/syringegun
 	startswith = list(
-		/obj/item/gun/syringe/disguised,
+		/obj/item/gun/hand/syringe_disguised,
 		/obj/item/syringe_cartridge = 4,
 		/obj/item/chems/syringe = 4
 	)
@@ -157,7 +157,7 @@
 
 /obj/item/storage/secure/briefcase/heavysniper
 	startswith = list(
-		/obj/item/gun/bolt_action/sniper,
+		/obj/item/gun/cannon/anti_materiel,
 		/obj/item/storage/box/ammo/sniperammo
 	)
 

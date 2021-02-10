@@ -1,4 +1,4 @@
-/obj/item/gun/temperature
+/obj/item/gun/long/temperature
 	name = "temperature gun"
 	icon = 'icons/obj/guns/freezegun.dmi'
 	icon_state = ICON_STATE_WORLD

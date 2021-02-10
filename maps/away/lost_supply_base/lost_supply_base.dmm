@@ -2072,7 +2072,7 @@
 	},
 /area/lost_supply_base/supply)
 "fX" = (
-/obj/item/gun/shotgun/pump,
+/obj/item/gun/long/shotgun/pump,
 /obj/effect/landmark/corpse/syndicate,
 /turf/simulated/floor/tiled/airless{
 	icon_state = "steel_broken4"

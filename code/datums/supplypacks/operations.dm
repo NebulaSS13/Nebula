@@ -31,7 +31,7 @@
 
 /decl/hierarchy/supply_pack/operations/plasma_cutter
 	name = "Equipment - Plasma Cutter"
-	contains = list(/obj/item/gun/plasmacutter)
+	contains = list(/obj/item/gun/hand/plasmacutter)
 	cost = 120
 	containertype = /obj/structure/closet/crate/secure
 	containername = "plasma cutter crate"

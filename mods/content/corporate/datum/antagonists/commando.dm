@@ -27,6 +27,6 @@
 	mask =    /obj/item/clothing/mask/gas/syndicate
 	backpack_contents = list(/obj/item/ammo_magazine/box/pistol = 1)
 	hands = list(
-		/obj/item/gun/laser,
+		/obj/item/gun/long/laser,
 		/obj/item/energy_blade/sword
 	)

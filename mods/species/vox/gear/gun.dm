@@ -61,18 +61,18 @@
 	. = ..()
 	set_extension(src, /datum/extension/voxform)
 
-/obj/item/gun/dartgun/vox
+/obj/item/gun/hand/dartgun/vox
 	name = "alien dart gun"
 	desc = "A small gas-powered dartgun, fitted for nonhuman hands."
 
-/obj/item/gun/dartgun/vox/medical
+/obj/item/gun/hand/dartgun/vox/medical
 	starting_chems = list(
 		/decl/material/liquid/burn_meds,
 		/decl/material/liquid/brute_meds,
 		/decl/material/liquid/antitoxins
 	)
 
-/obj/item/gun/dartgun/vox/raider
+/obj/item/gun/hand/dartgun/vox/raider
 	starting_chems = list(
 		/decl/material/liquid/hallucinogenics,
 		/decl/material/liquid/sedatives,

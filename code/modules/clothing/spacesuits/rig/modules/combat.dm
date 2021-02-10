@@ -250,7 +250,7 @@
 	interface_name = "mounted laser cannon"
 	interface_desc = "A shoulder-mounted cell-powered laser cannon."
 
-	gun = /obj/item/gun/lasercannon/mounted
+	gun = /obj/item/gun/cannon/laser/mounted
 
 /obj/item/rig_module/mounted/egun
 
@@ -271,7 +271,7 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 
-	gun = /obj/item/gun/egun/mounted
+	gun = /obj/item/gun/hand/egun/mounted
 
 /obj/item/rig_module/mounted/taser
 
@@ -291,7 +291,7 @@
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
-	gun = /obj/item/gun/electrolaser/mounted
+	gun = /obj/item/gun/hand/electrolaser/mounted
 
 /obj/item/rig_module/mounted/plasmacutter
 
@@ -306,7 +306,7 @@
 	interface_desc = "A forearm-mounted suit-powered plasma cutter."
 	origin_tech = "{'materials':5,'exoticmatter':4,'engineering':7,'combat':5}"
 
-	gun = /obj/item/gun/plasmacutter/mounted
+	gun = /obj/item/gun/hand/plasmacutter/mounted
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
@@ -350,7 +350,7 @@
 	active_power_cost = 0.5 KILOWATTS
 	passive_power_cost = 0
 
-	gun = /obj/item/gun/ecrossbow/ninja/mounted
+	gun = /obj/item/gun/hand/ecrossbow/ninja/mounted
 
 /obj/item/rig_module/mounted/energy_blade/Process()
 

@@ -1,5 +1,5 @@
 // Armor piercing projs
-/obj/item/gun/xray
+/obj/item/gun/hand/xray
 	name = "x-ray laser carbine"
 	desc = "A high-power laser gun capable of emitting concentrated x-ray blasts, that are able to penetrate laser-resistant armor much more readily than standard photonic beams."
 	icon = 'icons/obj/guns/xray.dmi'

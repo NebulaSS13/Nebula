@@ -4,7 +4,7 @@
 	suit = /obj/item/clothing/suit/armor/vest
 	hands = list(
 		/obj/item/knife/combat,
-		/obj/item/gun/laser
+		/obj/item/gun/long/laser
 	)
 	r_pocket = /obj/item/grenade/smokebomb
 	shoes = /obj/item/clothing/shoes/color/black
@@ -25,7 +25,7 @@
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	hands = list(
 		/obj/item/knife/combat,
-		/obj/item/gun/revolver
+		/obj/item/gun/hand/revolver
 	)
 	l_pocket = /obj/item/ammo_magazine/speedloader
 

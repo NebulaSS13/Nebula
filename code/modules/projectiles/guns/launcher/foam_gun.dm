@@ -1,4 +1,4 @@
-/obj/item/gun/foam
+/obj/item/gun/hand/foam
 	name = "foam blaster"
 	desc = "The classic Jorf blaster!"
 	icon = 'icons/obj/guns/foam/blaster.dmi'
@@ -13,7 +13,7 @@
 	material = /decl/material/solid/plastic
 	receiver = /obj/item/firearm_component/receiver/launcher/foam
 
-/obj/item/gun/foam/burst
+/obj/item/gun/hand/foam/burst
 	name = "foam machine pistol"
 	desc = "The Jorf Outlander, a machine pistol blaster, fires two darts in rapid succession. Holds 4 darts."
 	icon =  'icons/obj/guns/foam/pistol.dmi'
@@ -22,7 +22,7 @@
 	fire_delay = 12
 	receiver = /obj/item/firearm_component/receiver/launcher/foam/smg
 
-/obj/item/gun/foam/revolver
+/obj/item/gun/hand/foam/revolver
 	name = "foam revolver"
 	desc = "The Jorf Desperado is a revolver blaster, with a hammer action so you can fan the hammer like a real desperado! It holds 6 darts."
 	icon =  'icons/obj/guns/foam/revolver.dmi'
@@ -30,7 +30,7 @@
 	fire_delay = 4
 	receiver = /obj/item/firearm_component/receiver/launcher/foam/revolver
 
-/obj/item/gun/foam/revolver/tampered
+/obj/item/gun/hand/foam/revolver/tampered
 	receiver = /obj/item/firearm_component/receiver/launcher/foam/revolver/tampered
 //the projectile
 /obj/item/foam_dart
@@ -76,22 +76,22 @@
 	desc = "It's an official Jorf brand blaster, with three official Jorf brand darts!"
 	icon = 'icons/obj/guns/foam/boxes.dmi'
 	icon_state = "blaster_box"
-	startswith = list(/obj/item/gun/foam,
+	startswith = list(/obj/item/gun/hand/foam,
 					  /obj/item/foam_dart = 3)
 
 /obj/item/storage/box/large/foam_gun/burst
 	name = "\improper Jorf Outlander set"
 	desc = "It's an official Jorf brand Outlander, with six official Jorf brand darts!"
-	startswith = list(/obj/item/gun/foam/burst,
+	startswith = list(/obj/item/gun/hand/foam/burst,
 					  /obj/item/foam_dart = 6)
 
 /obj/item/storage/box/large/foam_gun/revolver
 	name = "\improper Jorf Desperado set"
 	desc = "It's an official Jorf brand Desperado, with eight official Jorf brand darts!"
-	startswith = list(/obj/item/gun/foam/revolver,
+	startswith = list(/obj/item/gun/hand/foam/revolver,
 					  /obj/item/foam_dart = 8)
 
 /obj/item/storage/box/large/foam_gun/revolver/tampered
 	desc = "It's a Jorf brand Desperado, with fourteen Jorf brand darts!"
-	startswith = list(/obj/item/gun/foam/revolver/tampered,
+	startswith = list(/obj/item/gun/hand/foam/revolver/tampered,
 					  /obj/item/foam_dart/tampered = 14)

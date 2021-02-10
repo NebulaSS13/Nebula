@@ -1,4 +1,4 @@
-/obj/item/gun/electrolaser
+/obj/item/gun/hand/electrolaser
 	name = "electrolaser"
 	desc = "The Mk30 NL is a small, low capacity gun used for non-lethal takedowns. It can switch between high and low intensity stun shots."
 	icon = 'icons/obj/guns/taser.dmi'
@@ -7,15 +7,15 @@
 	receiver = /obj/item/firearm_component/receiver/energy/electrolaser
 	barrel =   /obj/item/firearm_component/barrel/energy/electrolaser
 
-/obj/item/gun/electrolaser/mounted
+/obj/item/gun/hand/electrolaser/mounted
 	name = "mounted electrolaser"
 	receiver = /obj/item/firearm_component/receiver/energy/electrolaser/mounted
 
-/obj/item/gun/electrolaser/mounted/cyborg
+/obj/item/gun/hand/electrolaser/mounted/cyborg
 	name = "electrolaser"
 	receiver = /obj/item/firearm_component/receiver/energy/electrolaser/mounted/robot
 
-/obj/item/gun/plasma_stun
+/obj/item/gun/hand/plasma_stun
 	name = "plasma pulse projector"
 	desc = "The Mars Military Industries MA21 Selkie is a weapon that uses a laser pulse to ionise the local atmosphere, creating a disorienting pulse of plasma and deafening shockwave as the wave expands."
 	icon = 'icons/obj/guns/plasma_stun.dmi'
@@ -24,7 +24,7 @@
 	receiver = /obj/item/firearm_component/receiver/energy/plasma
 	barrel =   /obj/item/firearm_component/barrel/energy/plasma
 
-/obj/item/gun/confuseray
+/obj/item/gun/hand/confuseray
 	name = "disorientator"
 	desc = "The W-T Mk. 4 Disorientator is a small, low capacity, and short-ranged energy projector intended for personal defense with minimal risk of permanent damage or cross-fire."
 	icon = 'icons/obj/guns/confuseray.dmi'

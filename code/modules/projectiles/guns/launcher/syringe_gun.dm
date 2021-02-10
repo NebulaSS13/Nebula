@@ -60,7 +60,7 @@
 	icon_state = initial(icon_state) //reset icon state
 	update_icon()
 
-/obj/item/gun/syringe
+/obj/item/gun/long/syringe
 	name = "syringe gun"
 	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
 	icon = 'icons/obj/guns/launcher/syringe.dmi'
@@ -74,7 +74,7 @@
 	barrel = /obj/item/firearm_component/barrel/launcher/syringe
 	receiver = /obj/item/firearm_component/receiver/launcher/syringe
 
-/obj/item/gun/syringe/rapid
+/obj/item/gun/long/syringe/rapid
 	name = "syringe gun revolver"
 	desc = "A modification of the syringe gun design, using a rotating cylinder to store up to five syringes. The spring still needs to be drawn between shots."
 	icon = 'icons/obj/guns/launcher/syringe_rapid.dmi'
@@ -82,7 +82,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
-/obj/item/gun/syringe/disguised
+/obj/item/gun/hand/syringe_disguised
 	name = "deluxe electronic cigarette"
 	desc = "A premium model eGavana MK3 electronic cigarette, shaped like a cigar."
 	icon = 'icons/clothing/mask/smokables/cigarette_electronic_deluxe.dmi'

@@ -27,7 +27,7 @@
 	visible_message("<span class='warning'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
-	var/obj/item/gun/electrolaser/G = new(Tsec)
+	var/obj/item/gun/hand/electrolaser/G = new(Tsec)
 	var/obj/item/firearm_component/receiver/energy/rec = G.receiver
 	if(istype(rec) && rec.power_supply)
 		rec.power_supply.charge = 0

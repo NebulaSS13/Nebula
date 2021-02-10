@@ -642,8 +642,8 @@ About the new airlock wires panel:
 			return 0
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
-	else if(istype(item,/obj/item/gun/plasmacutter)) //They could probably just shoot them out, but who cares!
-		var/obj/item/gun/plasmacutter/cutter = item
+	else if(istype(item,/obj/item/gun/hand/plasmacutter)) //They could probably just shoot them out, but who cares!
+		var/obj/item/gun/hand/plasmacutter/cutter = item
 		if(!cutter.slice(user))
 			return 0
 		cut_verb = "cutting"

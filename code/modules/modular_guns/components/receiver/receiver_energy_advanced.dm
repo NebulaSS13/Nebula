@@ -9,14 +9,14 @@
 
 /*
 //override for failcheck behaviour
-/obj/item/gun/egun/advanced/Process()
+/obj/item/gun/long/advanced_egun/Process()
 	if(fail_counter > 0)
 		SSradiation.radiate(src, (fail_counter * 2))
 		fail_counter--
 
 	return ..()
 
-/obj/item/gun/egun/advanced/emp_act(severity)
+/obj/item/gun/long/advanced_egun/emp_act(severity)
 	..()
 	switch(severity)
 		if(1)
@@ -27,7 +27,7 @@
 			if(ismob(loc))
 				to_chat(loc, "<span class='warning'>\The [src] feels pleasantly warm.</span>")
 
-/obj/item/gun/egun/advanced/proc/get_charge_color()
+/obj/item/gun/long/advanced_egun/proc/get_charge_color()
 	switch(get_charge_ratio())
 		if(25)
 			return COLOR_RED
@@ -38,7 +38,7 @@
 		if(100)
 			return COLOR_LIME
 
-/obj/item/gun/egun/advanced/on_update_icon()
+/obj/item/gun/long/advanced_egun/on_update_icon()
 	indicator_color = get_charge_color()
 	. = ..()
 	var/list/new_overlays = list()
@@ -50,7 +50,7 @@
 
 	overlays += new_overlays
 
-/obj/item/gun/egun/advanced/add_onmob_charge_meter(image/I)
+/obj/item/gun/long/advanced_egun/add_onmob_charge_meter(image/I)
 	I.overlays += mutable_appearance(icon, "[I.icon_state]_charge", get_charge_color())
 	return I
 */

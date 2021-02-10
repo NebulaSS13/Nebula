@@ -22,7 +22,7 @@
 		/obj/item/toy/bosunwhistle,
 		/obj/item/sword/cult_toy,
 		/obj/item/bikehorn/airhorn,
-		/obj/item/gun/revolver/capgun,
+		/obj/item/gun/hand/revolver/capgun,
 		/obj/item/grenade/fake,
 		/obj/item/storage/backpack/clown,
 		/obj/item/organ/external/head,

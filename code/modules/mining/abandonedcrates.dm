@@ -93,7 +93,7 @@
 		if(79 to 80)
 			new/obj/item/pickaxe/gold(src)
 		if(81 to 82)
-			new/obj/item/gun/plasmacutter(src)
+			new/obj/item/gun/hand/plasmacutter(src)
 		if(83 to 84)
 			new/obj/item/sword/katana/toy(src)
 		if(85 to 88)

@@ -20,7 +20,7 @@
 	loaded = /obj/item/ammo_casing/cap
 
 /*
-/obj/item/gun/revolver/verb/spin_cylinder()
+/obj/item/gun/hand/revolver/verb/spin_cylinder()
 	set name = "Spin cylinder"
 	set desc = "Fun when you're bored out of your skull."
 	set category = "Object"
@@ -34,7 +34,7 @@
 		chamber_offset = rand(0,max_shells - loaded.len)
 
 
-/obj/item/gun/revolver/AltClick()
+/obj/item/gun/hand/revolver/AltClick()
 	if(CanPhysicallyInteract(usr))
 		spin_cylinder()
 

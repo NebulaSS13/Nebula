@@ -38,24 +38,24 @@
 		/obj/item/clothing/suit/poncho/colored,
 		)
 	var/list/raider_guns = list(
-		/obj/item/gun/laser,
-		/obj/item/gun/revolver/lasvolver,
-		/obj/item/gun/xray,
-		/obj/item/gun/radpistol,
-		/obj/item/gun/ionrifle,
-		/obj/item/gun/electrolaser,
-		/obj/item/gun/ecrossbow/largecrossbow,
-		/obj/item/gun/crossbow,
-		/obj/item/gun/grenade/loaded,
-		/obj/item/gun/pneumatic,
-		/obj/item/gun/automatic/smg,
-		/obj/item/gun/automatic/assault_rifle,
-		/obj/item/gun/shotgun/pump,
-		/obj/item/gun/shotgun/doublebarrel,
-		/obj/item/gun/shotgun/doublebarrel/sawn,
-		/obj/item/gun/pistol/holdout,
-		/obj/item/gun/revolver,
-		/obj/item/gun/zipgun
+		/obj/item/gun/long/laser,
+		/obj/item/gun/hand/revolver/lasvolver,
+		/obj/item/gun/hand/xray,
+		/obj/item/gun/hand/radpistol,
+		/obj/item/gun/long/ion,
+		/obj/item/gun/hand/electrolaser,
+		/obj/item/gun/hand/ecrossbow/largecrossbow,
+		/obj/item/gun/long/crossbow,
+		/obj/item/gun/long/grenade/loaded,
+		/obj/item/gun/long/pneumatic,
+		/obj/item/gun/hand/submachine_gun,
+		/obj/item/gun/long/assault_rifle,
+		/obj/item/gun/long/shotgun/pump,
+		/obj/item/gun/long/shotgun/doublebarrel,
+		/obj/item/gun/long/shotgun/doublebarrel/sawn,
+		/obj/item/gun/hand/pistol/holdout,
+		/obj/item/gun/hand/revolver,
+		/obj/item/gun/hand/zipgun
 		)
 	var/list/raider_holster = list(
 		/obj/item/clothing/accessory/storage/holster/armpit,
@@ -83,7 +83,7 @@
 
 		//Give some of the raiders a pirate gun as a secondary
 		if(prob(60))
-			var/obj/item/secondary = new /obj/item/gun/zipgun(T)
+			var/obj/item/secondary = new /obj/item/gun/hand/zipgun(T)
 			if(!(primary.slot_flags & SLOT_HOLSTER))
 				holster = new new_holster(T)
 				var/datum/extension/holster/holster_extension = get_extension(holster, /datum/extension/holster)

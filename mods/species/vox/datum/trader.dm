@@ -45,7 +45,7 @@
 								/obj/item/organ                     = TRADER_SUBTYPES_ONLY,
 								)
 
-	possible_trading_items = list(/obj/item/gun/dartgun/vox           = TRADER_SUBTYPES_ONLY,
+	possible_trading_items = list(/obj/item/gun/hand/dartgun/vox           = TRADER_SUBTYPES_ONLY,
 								/obj/item/trash                                         = TRADER_SUBTYPES_ONLY,
 								/obj/item/remains                                       = TRADER_ALL,
 								/obj/item/clothing/accessory                            = TRADER_ALL,

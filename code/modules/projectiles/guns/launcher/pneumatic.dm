@@ -1,4 +1,4 @@
-/obj/item/gun/pneumatic
+/obj/item/gun/long/pneumatic
 	name = "pneumatic cannon"
 	desc = "A large gas-powered cannon."
 	icon = 'icons/obj/guns/launcher/pneumatic.dmi'
@@ -12,7 +12,7 @@
 	fire_sound = 'sound/weapons/tablehit1.ogg'
 	receiver = /obj/item/firearm_component/receiver/launcher/pneumatic
 
-/obj/item/gun/pneumatic/small
+/obj/item/gun/hand/pneumatic/small
 	name = "small pneumatic cannon"
 	desc = "It looks smaller than your garden variety cannon"
 	w_class = ITEM_SIZE_NORMAL

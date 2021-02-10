@@ -9,11 +9,11 @@
 		)
 	var/decl/plantgene/gene = null
 /*
-/obj/item/gun/floragun/add_onmob_charge_meter(image/I)
+/obj/item/gun/hand/floragun/add_onmob_charge_meter(image/I)
 	I.overlays += mutable_appearance(icon, "[I.icon_state]100", indicator_color)
 	return I
 
-/obj/item/gun/floragun/afterattack(obj/target, mob/user, adjacent_flag)
+/obj/item/gun/hand/floragun/afterattack(obj/target, mob/user, adjacent_flag)
 	//allow shooting into adjacent hydrotrays regardless of intent
 	if(adjacent_flag && istype(target,/obj/machinery/portable_atmospherics/hydroponics))
 		user.visible_message("<span class='danger'>\The [user] fires \the [src] into \the [target]!</span>")
@@ -21,7 +21,7 @@
 		return
 	..()
 
-/obj/item/gun/floragun/verb/select_gene()
+/obj/item/gun/hand/floragun/verb/select_gene()
 	set name = "Select Gene"
 	set category = "Object"
 	set src in view(1)
@@ -37,7 +37,7 @@
 
 	return
 
-/obj/item/gun/floragun/consume_next_projectile()
+/obj/item/gun/hand/floragun/consume_next_projectile()
 	. = ..()
 	var/obj/item/projectile/energy/floramut/gene/G = .
 	if(istype(G))

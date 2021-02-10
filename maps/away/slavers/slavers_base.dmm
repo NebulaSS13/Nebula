@@ -1290,7 +1290,7 @@
 "dm" = (
 /obj/structure/table/rack,
 /obj/item/storage/box/ammo/stunshells,
-/obj/item/gun/shotgun/pump,
+/obj/item/gun/long/shotgun/pump,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dn" = (
@@ -1926,7 +1926,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "eT" = (
-/obj/item/gun/shotgun/pump,
+/obj/item/gun/long/shotgun/pump,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/hallway)

@@ -1,5 +1,5 @@
 //Fires bursts of weaker projs
-/obj/item/gun/pulse_pistol
+/obj/item/gun/hand/pulse_pistol
 	name = "pulse pistol"
 	desc = "A weapon that uses advanced pulse-based beam generation technology to emit powerful laser blasts. Even smaller than the carbine."
 	icon = 'icons/obj/guns/pulse_pistol.dmi'

@@ -30,13 +30,15 @@
 	origin = "SGS Severance"
 
 	possible_wanted_items = list(
-							/obj/item/chems/food/snacks/human                      = TRADER_SUBTYPES_ONLY,
-							/obj/item/chems/food/snacks/meat/human                 = TRADER_THIS_TYPE,
-							/mob/living/carbon/human                                                   = TRADER_ALL
-							)
+		/obj/item/chems/food/snacks/human      = TRADER_SUBTYPES_ONLY,
+		/obj/item/chems/food/snacks/meat/human = TRADER_THIS_TYPE,
+		/mob/living/carbon/human               = TRADER_ALL
+	)
 
-	possible_trading_items = list(/obj/item/gun/automatic                            = TRADER_SUBTYPES_ONLY
-							)
+	possible_trading_items = list(
+		/obj/item/gun/hand/submachine_gun      = TRADER_THIS_TYPE,
+		/obj/item/gun/long/assault_rifle       = TRADER_THIS_TYPE
+	)
 
 	blacklisted_trade_items = null
 

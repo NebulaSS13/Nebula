@@ -17,6 +17,10 @@
 /obj/item/firearm_component/barrel/energy/sidearm
 	projectile_type = /obj/item/projectile/beam/stun
 
+/obj/item/firearm_component/barrel/energy/sidearm/small
+	w_class = ITEM_SIZE_SMALL
+	force = 2 //it's the size of a car key, what did you expect?
+
 /obj/item/firearm_component/barrel/energy/plasma
 	projectile_type = /obj/item/projectile/energy/plasmastun
 
@@ -61,18 +65,18 @@
 
 /*
 
-/obj/item/gun/laser/secure/on_update_icon()
+/obj/item/gun/long/laser/secure/on_update_icon()
 	. = ..()
 	overlays += mutable_appearance(icon, "[icon_state]_stripe", COLOR_BLUE_GRAY)
 
-/obj/item/gun/laser/practice/on_update_icon()
+/obj/item/gun/long/laser/practice/on_update_icon()
 	. = ..()
 	overlays += mutable_appearance(icon, "[icon_state]_stripe", COLOR_ORANGE)
 
-/obj/item/gun/laser/practice/proc/hacked()
+/obj/item/gun/long/laser/practice/proc/hacked()
 	return projectile_type != /obj/item/projectile/beam/practice
 
-/obj/item/gun/laser/practice/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
+/obj/item/gun/long/laser/practice/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
 	if(hacked())
 		return NO_EMAG_ACT
 	to_chat(user, "<span class='warning'>You disable the safeties on [src] and crank the output to the lethal levels.</span>")
@@ -82,7 +86,7 @@
 	max_shots = rand(3,6) //will melt down after those
 	return 1
 
-/obj/item/gun/laser/practice/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+/obj/item/gun/long/laser/practice/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
 	..()
 	if(hacked())
 		max_shots--
@@ -110,7 +114,7 @@
 
 /obj/item/firearm_component/barrel/energy/laser/dogan
 /*
-/obj/item/gun/laser/dogan/consume_next_projectile()
+/obj/item/gun/long/laser/dogan/consume_next_projectile()
 	projectile_type = pick(/obj/item/projectile/beam/midlaser, /obj/item/projectile/beam/lastertag/red, /obj/item/projectile/beam)
 	return ..()
 */
@@ -140,19 +144,19 @@
 	var/current_temperature = T20C
 
 /*
-/obj/item/gun/temperature/Initialize()
+/obj/item/gun/long/temperature/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
 
-/obj/item/gun/temperature/Destroy()
+/obj/item/gun/long/temperature/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/gun/temperature/Topic(user, href_list, state = GLOB.inventory_state)
+/obj/item/gun/long/temperature/Topic(user, href_list, state = GLOB.inventory_state)
 	..()
 
-/obj/item/gun/temperature/OnTopic(user, href_list)
+/obj/item/gun/long/temperature/OnTopic(user, href_list)
 	if(href_list["temp"])
 		var/amount = text2num(href_list["temp"])
 		if(amount > 0)
@@ -170,7 +174,7 @@
 		update_icon()
 		attack_self(user)
 
-/obj/item/gun/temperature/Process()
+/obj/item/gun/long/temperature/Process()
 	switch(firing_temperature)
 		if(0 to 100) charge_cost = 100
 		if(100 to 250) charge_cost = 50

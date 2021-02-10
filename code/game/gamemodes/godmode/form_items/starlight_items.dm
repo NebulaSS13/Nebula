@@ -120,7 +120,6 @@
 	icon_state = "starstaff"
 	receiver = /obj/item/firearm_component/receiver/energy/staff/beacon
 	barrel = /obj/item/firearm_component/barrel/energy/staff/beacon
-	required_antag_type = /decl/special_role/godcultist
 
 /obj/item/sword/blazing
 	name = "blazing blade"

@@ -243,8 +243,8 @@
 /area/unishi/bridge)
 "aW" = (
 /obj/structure/table/rack,
-/obj/item/gun/laser,
-/obj/item/gun/laser,
+/obj/item/gun/long/laser,
+/obj/item/gun/long/laser,
 /obj/item/clothing/suit/armor/pcarrier/blue,
 /obj/item/clothing/suit/armor/pcarrier/tan,
 /obj/item/clothing/suit/armor/pcarrier/tan,
@@ -459,7 +459,7 @@
 /obj/item/ammo_magazine/speedloader,
 /obj/item/ammo_magazine/speedloader,
 /obj/item/ammo_magazine/speedloader,
-/obj/item/gun/revolver,
+/obj/item/gun/hand/revolver,
 /obj/item/handcuffs,
 /obj/machinery/light/small{
 	dir = 8
@@ -1406,7 +1406,7 @@
 "dL" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/green,
-/obj/item/gun/pistol/holdout,
+/obj/item/gun/hand/pistol/holdout,
 /obj/item/storage/secure/briefcase,
 /obj/item/card/emag_broken,
 /obj/item/plastique,

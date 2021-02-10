@@ -6164,7 +6164,7 @@
 	dir = 1
 	},
 /obj/structure/closet,
-/obj/item/gun/shotgun/pump,
+/obj/item/gun/long/shotgun/pump,
 /obj/random/lipstick,
 /obj/random/ammo,
 /obj/random/cash,
@@ -6591,7 +6591,7 @@
 	dir = 1
 	},
 /obj/structure/table/rack,
-/obj/item/gun/shotgun/pump,
+/obj/item/gun/long/shotgun/pump,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qk" = (

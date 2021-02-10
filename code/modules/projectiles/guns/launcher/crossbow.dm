@@ -38,7 +38,7 @@
 		S.dropInto(loc)
 		qdel(src)
 
-/obj/item/gun/crossbow
+/obj/item/gun/long/crossbow
 	name = "powered crossbow"
 	desc = "A modern twist on an old classic. Pick up that can."
 	icon = 'icons/obj/guns/launcher/crossbow.dmi'
@@ -58,7 +58,7 @@
 	desc = "The ultimate ghetto deconstruction implement."
 	throwforce = 4
 
-/obj/item/gun/crossbow/rapidcrossbowdevice
+/obj/item/gun/long/crossbow/rapidcrossbowdevice
 	name = "rapid crossbow device"
 	desc = "A hacked RCD turns an innocent construction tool into the penultimate deconstruction tool. Flashforges bolts using matter units when the string is drawn back."
 	icon = 'icons/obj/guns/launcher/rcd_bow.dmi'

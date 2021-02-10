@@ -52,25 +52,25 @@
 		image(icon, "[get_world_inventory_state()]-charge-[istype(power_supply) ? Floor(power_supply.percent()/20) : 0]")
 	)
 
-/obj/item/gun/railgun/flechette/ascent
+/obj/item/gun/long/railgun/flechette/ascent
 	name = "mantid flechette rifle"
 	desc = "A viciously pronged rifle-like weapon."
 	has_safety = FALSE
 	one_hand_penalty = 6
 	var/charge_per_shot = 10
 
-/obj/item/gun/railgun/flechette/ascent/get_cell()
+/obj/item/gun/long/railgun/flechette/ascent/get_cell()
 	if(isrobot(loc) || istype(loc, /obj/item/rig_module))
 		return loc.get_cell()
 
-/obj/item/gun/railgun/flechette/ascent/show_ammo(var/mob/user)
+/obj/item/gun/long/railgun/flechette/ascent/show_ammo(var/mob/user)
 	var/obj/item/cell/cell = get_cell()
 	to_chat(user, "<span class='notice'>There are [cell ? Floor(cell.charge/charge_per_shot) : 0] shot\s remaining.</span>")
 
-/obj/item/gun/railgun/flechette/ascent/check_ammo()
+/obj/item/gun/long/railgun/flechette/ascent/check_ammo()
 	var/obj/item/cell/cell = get_cell()
 	return cell && cell.charge >= charge_per_shot
 
-/obj/item/gun/railgun/flechette/ascent/use_ammo()
+/obj/item/gun/long/railgun/flechette/ascent/use_ammo()
 	var/obj/item/cell/cell = get_cell()
 	if(cell) cell.use(charge_per_shot)

@@ -48,7 +48,7 @@
 	silenced = 1
 
 /*
-/obj/item/gun/pistol/holdout/attackby(obj/item/I, mob/user)
+/obj/item/gun/hand/pistol/holdout/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/silencer))
 		if(src in user.get_held_items())	//if we're not in his hands
 			to_chat(user, SPAN_WARNING("You'll need \the [holder || src] in your hands to do that."))

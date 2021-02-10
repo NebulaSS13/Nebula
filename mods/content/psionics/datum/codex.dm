@@ -3,7 +3,7 @@
 	associated_strings = list("Cuchulain", "Foundation")
 	associated_paths = list(
 		/obj/item/storage/briefcase/foundation, 
-		/obj/item/gun/revolver/foundation,
+		/obj/item/gun/hand/revolver/foundation,
 		/obj/item/card/id/foundation,
 		/obj/item/card/id/foundation_civilian,
 		/obj/item/clothing/suit/storage/toggle/labcoat/foundation,

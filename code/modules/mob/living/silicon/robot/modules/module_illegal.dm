@@ -9,7 +9,7 @@
 	equipment = list(
 		/obj/item/flash,
 		/obj/item/energy_blade/sword,
-		/obj/item/gun/laser,
+		/obj/item/gun/long/laser,
 		/obj/item/crowbar,
 		/obj/item/card/emag,
 		/obj/item/tank/jetpack/carbondioxide

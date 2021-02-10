@@ -82,7 +82,7 @@
 
 /*
 /datum/fabricator_recipe/protolathe/tool/plasmacutter
-	path = /obj/item/gun/plasmacutter
+	path = /obj/item/gun/hand/plasmacutter
 */
 
 /datum/fabricator_recipe/protolathe/tool/pick_diamond

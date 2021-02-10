@@ -55,7 +55,7 @@
 	return list(
 		/obj/item/clothing/suit/armor/tdome/red = 3,
 		/obj/item/energy_blade/sword = 3,
-		/obj/item/gun/laser = 3,
+		/obj/item/gun/long/laser = 3,
 		/obj/item/baton = 3,
 		/obj/item/storage/box/flashbangs = 3,
 		/obj/item/clothing/head/helmet/thunderdome = 3
@@ -69,7 +69,7 @@
 	return list(
 		/obj/item/clothing/suit/armor/tdome/green = 3,
 		/obj/item/energy_blade/sword = 3,
-		/obj/item/gun/laser = 3,
+		/obj/item/gun/long/laser = 3,
 		/obj/item/baton = 3,
 		/obj/item/storage/box/flashbangs = 3,
 		/obj/item/clothing/head/helmet/thunderdome = 3

@@ -74,7 +74,7 @@
 	id_tag = "scraplock";
 	name = "External Lockdown"
 	},
-/obj/item/gun/antique,
+/obj/item/gun/hand/antique,
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "am" = (
@@ -301,7 +301,7 @@
 "aL" = (
 /obj/item/bedsheet/captain,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/item/gun/pistol/holdout,
+/obj/item/gun/hand/pistol/holdout,
 /obj/structure/bed/padded,
 /obj/effect/submap_landmark/spawnpoint/captain,
 /turf/simulated/floor/wood,
@@ -488,7 +488,7 @@
 /obj/item/radio/intercom{
 	pixel_x = -32
 	},
-/obj/item/gun/shotgun/pump{
+/obj/item/gun/long/shotgun/pump{
 	desc = "When words don't strike hard enough.";
 	name = "Solid Argument"
 	},

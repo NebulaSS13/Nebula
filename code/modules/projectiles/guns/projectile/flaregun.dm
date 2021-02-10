@@ -1,4 +1,4 @@
-/obj/item/gun/flare
+/obj/item/gun/hand/flare
 	name = "flaregun"
 	desc = "A single shot polymer flare gun, the XI-54 \"Sirius\" is a reliable way to launch flares away from yourself."
 	icon = 'icons/obj/guns/flaregun.dmi'

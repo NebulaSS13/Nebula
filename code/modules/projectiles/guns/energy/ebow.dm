@@ -1,5 +1,5 @@
 
-/obj/item/gun/ecrossbow
+/obj/item/gun/hand/ecrossbow
 	name = "mini energy-crossbow"
 	desc = "A weapon favored by many mercenary stealth specialists."
 	icon = 'icons/obj/guns/energy_crossbow.dmi'
@@ -11,15 +11,15 @@
 	receiver = /obj/item/firearm_component/receiver/energy/crossbow
 	barrel = /obj/item/firearm_component/barrel/energy/crossbow
 
-/obj/item/gun/ecrossbow/ninja
+/obj/item/gun/hand/ecrossbow/ninja
 	name = "energy dart thrower"
 	receiver = /obj/item/firearm_component/receiver/energy/crossbow/ninja
 	barrel = /obj/item/firearm_component/barrel/energy/crossbow/ninja
 
-/obj/item/gun/ecrossbow/ninja/mounted
+/obj/item/gun/hand/ecrossbow/ninja/mounted
 	receiver = /obj/item/firearm_component/receiver/energy/crossbow/ninja/mounted
 
-/obj/item/gun/ecrossbow/largecrossbow
+/obj/item/gun/hand/ecrossbow/largecrossbow
 	name = "energy crossbow"
 	desc = "A weapon favored by mercenary infiltration teams."
 	w_class = ITEM_SIZE_LARGE

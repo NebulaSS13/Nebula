@@ -6,7 +6,7 @@
 	name = "glowing staff core"
 	projectile_type = /obj/item/projectile/energy/flash
 
-/obj/item/firearm_component/barrel/energy/animate
+/obj/item/firearm_component/barrel/energy/staff/animate
 	name = "writhing staff core"
 	projectile_type = /obj/item/projectile/animate
 

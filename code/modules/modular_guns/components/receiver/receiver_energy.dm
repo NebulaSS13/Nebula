@@ -180,7 +180,7 @@
 	required_vest = /obj/item/clothing/suit/redtag
 
 /*
-/obj/item/gun/lasertag/special_check(var/mob/living/carbon/human/M)
+/obj/item/gun/long/lasertag/special_check(var/mob/living/carbon/human/M)
 	if(ishuman(M))
 		if(!istype(M.wear_suit, required_vest))
 			to_chat(M, "<span class='warning'>You need to be wearing your laser tag vest!</span>")

@@ -96,7 +96,7 @@
 /obj/structure/safe,
 /obj/item/chems/pill/cyanide,
 /obj/item/rig/medical/equipped,
-/obj/item/gun/antique,
+/obj/item/gun/hand/antique,
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/walnut,

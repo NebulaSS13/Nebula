@@ -19,17 +19,17 @@
 
 /*
 
-/obj/item/gun/capacitor/examine(mob/user, distance)
+/obj/item/gun/hand/capacitor_pistol/examine(mob/user, distance)
 	. = ..()
 	if(loc == user || distance <= 1)
 		to_chat(user, "The wavelength selector is dialled to [selected_wavelength.name].")
 	
-/obj/item/gun/capacitor/Destroy()
+/obj/item/gun/hand/capacitor_pistol/Destroy()
 	if(capacitors)
 		QDEL_NULL_LIST(capacitors)
 	. = ..()
 
-/obj/item/gun/capacitor/Initialize()
+/obj/item/gun/hand/capacitor_pistol/Initialize()
 	if(!laser_wavelengths)
 		laser_wavelengths = list()
 		for(var/laser in subtypesof(/decl/laser_wavelength))
@@ -42,13 +42,13 @@
 			capacitors += new capacitor_type(src)
 	. = ..()
 
-/obj/item/gun/capacitor/afterattack(atom/A, mob/living/user, adjacent, params)
+/obj/item/gun/hand/capacitor_pistol/afterattack(atom/A, mob/living/user, adjacent, params)
 	. = !charging && ..()
 
-/obj/item/gun/capacitor/Process()
+/obj/item/gun/hand/capacitor_pistol/Process()
 	. = ..()
 
-/obj/item/gun/capacitor/proc/charge(var/mob/user)
+/obj/item/gun/hand/capacitor_pistol/proc/charge(var/mob/user)
 	. = FALSE
 	if(!charging && istype(user))
 		charging = selected_wavelength
@@ -71,13 +71,13 @@
 			sleep(5)
 		charging = FALSE
 
-/obj/item/gun/capacitor/get_shots_remaining()
+/obj/item/gun/hand/capacitor_pistol/get_shots_remaining()
 	var/total_charge_cost = 0
 	for(var/obj/item/stock_parts/capacitor/capacitor in capacitors)
 		total_charge_cost += capacitor.max_charge
 	. = round(power_supply?.charge / (total_charge_cost / capacitor_charge_constant))
 
-/obj/item/gun/capacitor/on_update_icon()
+/obj/item/gun/hand/capacitor_pistol/on_update_icon()
 	cut_overlays()
 	var/image/I = image(icon, "[icon_state]-wiring")
 	I.color = wiring_color
@@ -115,7 +115,7 @@
 		var/mob/M = loc
 		M.update_inv_hands()
 
-/obj/item/gun/capacitor/get_mob_overlay(mob/user_mob, slot)
+/obj/item/gun/hand/capacitor_pistol/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
 	if(slot == BP_L_HAND || slot == BP_R_HAND || slot == slot_back_str)
 		var/image/I = image(icon, "[ret.icon_state]-wiring")
@@ -138,7 +138,7 @@
 					ret.add_overlay(I)
 	. = ret
 
-/obj/item/gun/capacitor/consume_next_projectile()
+/obj/item/gun/hand/capacitor_pistol/consume_next_projectile()
 
 	var/charged = charge(loc)
 	var/total_charge = 0

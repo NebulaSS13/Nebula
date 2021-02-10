@@ -26,7 +26,7 @@
 		/obj/item/uv_light,
 		/obj/item/crowbar
 	)
-	emag = /obj/item/gun/laser/mounted
+	emag = /obj/item/gun/long/laser/mounted
 	skills = list(
 		SKILL_LITERACY            = SKILL_ADEPT,
 		SKILL_COMPUTER            = SKILL_EXPERT,

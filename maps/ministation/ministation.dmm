@@ -2432,11 +2432,11 @@
 /turf/simulated/floor/plating,
 /area/ministation/security)
 "fX" = (
-/obj/item/gun/electrolaser,
+/obj/item/gun/hand/electrolaser,
 /obj/structure/closet/secure_closet/guncabinet,
-/obj/item/gun/electrolaser,
-/obj/item/gun/shotgun/pump,
-/obj/item/gun/shotgun/pump,
+/obj/item/gun/hand/electrolaser,
+/obj/item/gun/long/shotgun/pump,
+/obj/item/gun/long/shotgun/pump,
 /turf/simulated/floor/plating,
 /area/ministation/security)
 "fY" = (
@@ -10347,7 +10347,7 @@
 /area/ministation/medical)
 "yJ" = (
 /obj/structure/table/standard,
-/obj/item/gun/syringe,
+/obj/item/gun/long/syringe,
 /obj/item/flashlight/pen,
 /obj/item/flashlight/pen,
 /obj/item/clothing/suit/straight_jacket,
@@ -11043,7 +11043,7 @@
 "Au" = (
 /obj/structure/closet/chefcloset,
 /obj/item/storage/box/ammo/beanbags,
-/obj/item/gun/shotgun/doublebarrel,
+/obj/item/gun/long/shotgun/doublebarrel,
 /obj/item/clothing/suit/storage/hooded/wintercoat/hydro,
 /turf/simulated/floor/wood,
 /area/ministation/cafe)

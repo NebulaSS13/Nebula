@@ -1,4 +1,4 @@
-/obj/item/gun/money
+/obj/item/gun/hand/money
 	name = "money cannon"
 	desc = "A blocky, plastic novelty launcher that claims to be able to shoot money at considerable velocities."
 	icon = 'icons/obj/guns/launcher/money.dmi'
@@ -11,5 +11,5 @@
 	fire_sound = 'sound/weapons/gunshot/money_launcher.ogg'
 	receiver = /obj/item/firearm_component/receiver/launcher/money
 
-/obj/item/gun/money/hacked
+/obj/item/gun/hand/money/hacked
 	receiver = /obj/item/firearm_component/receiver/launcher/money/hacked

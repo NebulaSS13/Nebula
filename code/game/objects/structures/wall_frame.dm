@@ -75,8 +75,8 @@
 				place_window(user, loc, SOUTHWEST, ST)
 			return TRUE
 
-		if(istype(W, /obj/item/gun/plasmacutter))
-			var/obj/item/gun/plasmacutter/cutter = W
+		if(istype(W, /obj/item/gun/hand/plasmacutter))
+			var/obj/item/gun/hand/plasmacutter/cutter = W
 			if(!cutter.slice(user))
 				return
 			playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)

@@ -47,7 +47,7 @@
 			cutting = TRUE
 		else
 			to_chat(user, SPAN_WARNING("Turn \the [WT] on, first."))
-	else if(istype(W, /obj/item/gun/plasmacutter))
+	else if(istype(W, /obj/item/gun/hand/plasmacutter))
 		cutting = TRUE
 
 	if(cutting)

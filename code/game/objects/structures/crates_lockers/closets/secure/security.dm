@@ -15,7 +15,7 @@
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/radio/headset/heads/captain,
 		/obj/item/clothing/gloves/captain,
-		/obj/item/gun/egun,
+		/obj/item/gun/hand/egun,
 		/obj/item/telebaton,
 		/obj/item/clothing/under/dress/dress_cap,
 		/obj/item/clothing/head/caphat/formal,
@@ -79,7 +79,7 @@
 		/obj/item/storage/belt/holster/security,
 		/obj/item/flash,
 		/obj/item/baton/loaded,
-		/obj/item/gun/egun,
+		/obj/item/gun/hand/egun,
 		/obj/item/clothing/accessory/storage/holster/waist,
 		/obj/item/telebaton,
 		/obj/item/holowarrant
@@ -106,7 +106,7 @@
 		/obj/item/storage/belt/holster/security,
 		/obj/item/chems/spray/pepper,
 		/obj/item/baton/loaded,
-		/obj/item/gun/egun,
+		/obj/item/gun/hand/egun,
 		/obj/item/storage/box/holobadge,
 		/obj/item/holowarrant
 	)
@@ -131,7 +131,7 @@
 		/obj/item/taperoll/police,
 		/obj/item/hailer,
 		/obj/item/clothing/accessory/storage/vest/black,
-		/obj/item/gun/electrolaser,
+		/obj/item/gun/hand/electrolaser,
 		/obj/item/holowarrant,
 	)
 
@@ -178,7 +178,7 @@
 		/obj/item/radio/headset/headset_sec,
 		/obj/item/clothing/suit/armor/pcarrier/detective,
 		/obj/item/taperoll/police,
-		/obj/item/gun/pistol,
+		/obj/item/gun/hand/pistol,
 		/obj/item/clothing/accessory/storage/holster/armpit,
 		/obj/item/chems/food/drinks/flask/detflask,
 		/obj/item/storage/briefcase/crimekit,

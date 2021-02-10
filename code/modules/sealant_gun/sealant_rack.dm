@@ -2,7 +2,7 @@
 	name = "sealant tank rack"
 	icon = 'icons/obj/structures/sealant_props.dmi'
 	icon_state = "rack"
-	var/obj/item/gun/sealant/loaded_gun
+	var/obj/item/gun/cannon/sealant/loaded_gun
 	var/list/tanks
 	var/max_tanks = 5
 
@@ -45,7 +45,7 @@
 
 /obj/structure/sealant_rack/attackby(obj/item/O, mob/user)
 
-	if(istype(O, /obj/item/gun/sealant))
+	if(istype(O, /obj/item/gun/cannon/sealant))
 		if(loaded_gun)
 			to_chat(user, SPAN_WARNING("There is already a sealant gun hung up on \the [src]."))
 			return TRUE

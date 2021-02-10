@@ -1415,7 +1415,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/gun/pistol/holdout,
+/obj/item/gun/hand/pistol/holdout,
 /obj/random/handgun,
 /obj/random/handgun,
 /obj/random/projectile,

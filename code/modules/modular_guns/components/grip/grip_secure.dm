@@ -81,7 +81,7 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	return TRUE
 
 /*
-/obj/item/gun/egun/secure/mounted/Initialize()
+/obj/item/gun/hand/egun/secure/mounted/Initialize()
 	var/mob/borg = get_holder_of_type(src, /mob/living/silicon/robot)
 	if(!borg)
 		. = INITIALIZE_HINT_QDEL

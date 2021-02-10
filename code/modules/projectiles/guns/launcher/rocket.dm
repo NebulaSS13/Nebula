@@ -1,4 +1,4 @@
-/obj/item/gun/rocket
+/obj/item/gun/cannon/rocket
 	name = "rocket launcher"
 	desc = "MAGGOT."
 	icon = 'icons/obj/guns/launcher/rocket.dmi'

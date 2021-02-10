@@ -339,8 +339,8 @@
 /area/icarus/vessel)
 "bj" = (
 /obj/structure/table/rack,
-/obj/item/gun/shotgun/pump,
-/obj/item/gun/shotgun/pump,
+/obj/item/gun/long/shotgun/pump,
+/obj/item/gun/long/shotgun/pump,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "bk" = (
@@ -1054,7 +1054,7 @@
 /area/icarus/vessel)
 "dp" = (
 /obj/structure/closet,
-/obj/item/gun/shotgun/pump,
+/obj/item/gun/long/shotgun/pump,
 /obj/item/chems/spray/pepper,
 /obj/item/storage/box/handcuffs,
 /obj/machinery/atmospherics/unary/vent_pump/on{

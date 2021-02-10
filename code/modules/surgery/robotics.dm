@@ -185,7 +185,7 @@
 	description = "This procedure patches physical damage to a robotic prosthetic."
 	allowed_tools = list(
 		/obj/item/weldingtool = 100,
-		/obj/item/gun/plasmacutter = 50
+		/obj/item/gun/hand/plasmacutter = 50
 	)
 
 	min_duration = 50
@@ -209,8 +209,8 @@
 			var/obj/item/weldingtool/welder = tool
 			if(!welder.isOn() || !welder.remove_fuel(1,user))
 				return FALSE
-		if(istype(tool, /obj/item/gun/plasmacutter))
-			var/obj/item/gun/plasmacutter/cutter = tool
+		if(istype(tool, /obj/item/gun/hand/plasmacutter))
+			var/obj/item/gun/hand/plasmacutter/cutter = tool
 			if(!cutter.slice(user))
 				return FALSE
 		return TRUE

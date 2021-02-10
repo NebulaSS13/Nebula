@@ -1,4 +1,4 @@
-/obj/item/gun/egun/advanced
+/obj/item/gun/long/advanced_egun
 	name = "advanced energy gun"
 	desc = "An energy gun with an experimental miniaturized reactor."
 	icon = 'icons/obj/guns/adv_egun.dmi'

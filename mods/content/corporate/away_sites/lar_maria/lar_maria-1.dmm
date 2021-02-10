@@ -1781,7 +1781,7 @@
 "eJ" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/smokes,
-/obj/item/gun/electrolaser,
+/obj/item/gun/hand/electrolaser,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "eK" = (
@@ -1802,7 +1802,7 @@
 "eN" = (
 /obj/structure/closet,
 /obj/item/clothing/under/color/red,
-/obj/item/gun/shotgun/pump,
+/obj/item/gun/long/shotgun/pump,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "eO" = (
@@ -3109,7 +3109,7 @@
 /area/lar_maria/sec_wing)
 "hD" = (
 /obj/structure/table/rack,
-/obj/item/gun/electrolaser,
+/obj/item/gun/hand/electrolaser,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "hE" = (
@@ -3639,7 +3639,7 @@
 	dir = 4
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/gun/electrolaser,
+/obj/item/gun/hand/electrolaser,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "iE" = (
@@ -3690,7 +3690,7 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/obj/item/gun/electrolaser,
+/obj/item/gun/hand/electrolaser,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "iL" = (

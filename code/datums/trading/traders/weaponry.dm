@@ -18,8 +18,8 @@
 				"insult_bad"        = "If I had my gun I'd shoot you!"
 				)
 
-	possible_trading_items = list(/obj/item/gun/pistol/holdout    = TRADER_ALL,
-								/obj/item/gun/shotgun/pump= TRADER_SUBTYPES_ONLY,
+	possible_trading_items = list(/obj/item/gun/hand/pistol/holdout    = TRADER_ALL,
+								/obj/item/gun/long/shotgun/pump= TRADER_SUBTYPES_ONLY,
 								/obj/item/ammo_magazine                     = TRADER_SUBTYPES_ONLY,
 								/obj/item/ammo_magazine/rifle/empty          = TRADER_BLACKLIST,
 								/obj/item/ammo_magazine/pistol/small/empty         = TRADER_BLACKLIST,
@@ -48,10 +48,10 @@
 				"insult_bad"        = "That's... very mean. I won't think twice about blacklisting your channel, so stop."
 				)
 
-	possible_trading_items = list(/obj/item/gun/electrolaser                      = TRADER_THIS_TYPE,
-								/obj/item/gun/xray                         = TRADER_THIS_TYPE,
-								/obj/item/gun/laser                        = TRADER_THIS_TYPE,
-								/obj/item/gun/egun                          = TRADER_THIS_TYPE,
+	possible_trading_items = list(/obj/item/gun/hand/electrolaser                      = TRADER_THIS_TYPE,
+								/obj/item/gun/hand/xray                         = TRADER_THIS_TYPE,
+								/obj/item/gun/long/laser                        = TRADER_THIS_TYPE,
+								/obj/item/gun/hand/egun                          = TRADER_THIS_TYPE,
 								/obj/item/cell                                    = TRADER_THIS_TYPE,
 								/obj/item/cell/crap                               = TRADER_THIS_TYPE,
 								/obj/item/cell/high                               = TRADER_THIS_TYPE,
@@ -79,7 +79,7 @@
 	compliment_increase = 0
 	insult_drop = 0
 
-	possible_trading_items = list(/obj/item/gun/zipgun =            TRADER_THIS_TYPE,
-								/obj/item/gun/laser/dogan =             TRADER_THIS_TYPE,
-								/obj/item/gun/automatic/smg/usi =   TRADER_THIS_TYPE,
+	possible_trading_items = list(/obj/item/gun/hand/zipgun =            TRADER_THIS_TYPE,
+								/obj/item/gun/long/laser/dogan =             TRADER_THIS_TYPE,
+								/obj/item/gun/hand/submachine_gun/usi =   TRADER_THIS_TYPE,
 								/obj/item/clothing/accessory/storage/holster = TRADER_ALL)

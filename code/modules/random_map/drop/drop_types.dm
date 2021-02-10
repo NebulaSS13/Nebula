@@ -34,10 +34,10 @@ var/global/list/datum/supply_drop_loot/supply_drop
 /datum/supply_drop_loot/lasers/New()
 	..()
 	contents = list(
-		/obj/item/gun/laser,
-		/obj/item/gun/laser,
-		/obj/item/gun/esniper,
-		/obj/item/gun/ionrifle)
+		/obj/item/gun/long/laser,
+		/obj/item/gun/long/laser,
+		/obj/item/gun/cannon/esniper,
+		/obj/item/gun/long/ion)
 
 /datum/supply_drop_loot/ballistics
 	name = "Ballistics"
@@ -45,11 +45,11 @@ var/global/list/datum/supply_drop_loot/supply_drop
 /datum/supply_drop_loot/ballistics/New()
 	..()
 	contents = list(
-		/obj/item/gun/pistol,
-		/obj/item/gun/shotgun/doublebarrel,
-		/obj/item/gun/shotgun/pump,
-		/obj/item/gun/automatic/smg,
-		/obj/item/gun/automatic/assault_rifle)
+		/obj/item/gun/hand/pistol,
+		/obj/item/gun/long/shotgun/doublebarrel,
+		/obj/item/gun/long/shotgun/pump,
+		/obj/item/gun/hand/submachine_gun,
+		/obj/item/gun/long/assault_rifle)
 
 /datum/supply_drop_loot/ballistics
 	name = "Ballistics"
@@ -57,11 +57,11 @@ var/global/list/datum/supply_drop_loot/supply_drop
 /datum/supply_drop_loot/ballistics/New()
 	..()
 	contents = list(
-		/obj/item/gun/pistol,
-		/obj/item/gun/shotgun/doublebarrel,
-		/obj/item/gun/shotgun/pump,
-		/obj/item/gun/automatic/smg,
-		/obj/item/gun/automatic/assault_rifle)
+		/obj/item/gun/hand/pistol,
+		/obj/item/gun/long/shotgun/doublebarrel,
+		/obj/item/gun/long/shotgun/pump,
+		/obj/item/gun/hand/submachine_gun,
+		/obj/item/gun/long/assault_rifle)
 
 /datum/supply_drop_loot/seeds
 	name = "Seeds"
