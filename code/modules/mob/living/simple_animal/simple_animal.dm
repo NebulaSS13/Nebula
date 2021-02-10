@@ -16,6 +16,7 @@
 	skin_material = /decl/material/solid/skin 
 	skin_amount = 5
 
+	var/gene_damage = 0 // Set to -1 to disable gene damage for the mob.
 	var/show_stat_health = 1	//does the percentage health show in the stat panel for the mob
 
 	var/icon_living = ""
@@ -523,8 +524,19 @@
 		if(rand(25))
 			to_chat(attacker, SPAN_WARNING("Your attack has no obvious effect on \the [src]'s [description]!"))
 
-
 /mob/living/simple_animal/proc/get_natural_weapon()
 	if(ispath(natural_weapon))
 		natural_weapon = new natural_weapon(src)
 	return natural_weapon
+
+/mob/living/simple_animal/getCloneLoss()
+	. = max(0, gene_damage)
+
+/mob/living/simple_animal/adjustCloneLoss(var/amount)
+	setCloneLoss(gene_damage + amount)
+
+/mob/living/simple_animal/setCloneLoss(amount)
+	if(gene_damage >= 0)
+		gene_damage = Clamp(amount, 0, maxHealth)
+		if(gene_damage >= maxHealth)
+			death()
