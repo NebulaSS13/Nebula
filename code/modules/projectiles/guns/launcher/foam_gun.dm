@@ -12,6 +12,9 @@
 	icon =  'icons/obj/guns/foam/pistol.dmi'
 	receiver = /obj/item/firearm_component/receiver/launcher/foam/smg
 
+/obj/item/gun/hand/foam/crossbow
+	name = "foam crossbow"
+
 /obj/item/gun/hand/foam/revolver
 	name = "foam revolver"
 	desc = "The Jorf Desperado is a revolver blaster, with a hammer action so you can fan the hammer like a real desperado! It holds 6 darts."
@@ -66,8 +69,10 @@
 	desc = "It's an official Jorf brand blaster, with three official Jorf brand darts!"
 	icon = 'icons/obj/guns/foam/boxes.dmi'
 	icon_state = "blaster_box"
-	startswith = list(/obj/item/gun/hand/foam,
-					  /obj/item/foam_dart = 3)
+	startswith = list(
+		/obj/item/gun/hand/foam,
+		  /obj/item/foam_dart = 3
+	)
 
 /obj/item/storage/box/large/foam_gun/burst
 	name = "\improper Jorf Outlander set"

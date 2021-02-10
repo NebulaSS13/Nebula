@@ -1,4 +1,6 @@
 /obj/item/firearm_component
+	w_class = ITEM_SIZE_SMALL
+	var/is_underlay =      FALSE
 	var/bulk =             0
 	var/one_hand_penalty = 0
 	var/screen_shake =     0
@@ -19,6 +21,24 @@
 	if(holder)
 		uninstalled()
 	. = ..()
+
+/obj/item/firearm_component/proc/can_install(var/obj/item/gun/gun, var/mob/user)
+	if(firearm_component_category == FIREARM_COMPONENT_BARREL && gun.barrel)
+		to_chat(user, SPAN_WARNING("There is already a barrel installed in \the [gun]."))
+		return FALSE
+	if(firearm_component_category == FIREARM_COMPONENT_RECEIVER && gun.receiver)
+		to_chat(user, SPAN_WARNING("There is already a receiver installed in \the [gun]."))
+		return FALSE
+	if(firearm_component_category == FIREARM_COMPONENT_GRIP && gun.grip)
+		to_chat(user, SPAN_WARNING("There is already a grip installed in \the [gun]."))
+		return FALSE
+	if(firearm_component_category == FIREARM_COMPONENT_STOCK && gun.stock)
+		to_chat(user, SPAN_WARNING("There is already a stock installed in \the [gun]."))
+		return FALSE
+	return TRUE
+
+/obj/item/firearm_component/proc/can_uninstall(var/obj/item/gun/gun, var/mob/user)
+	return TRUE
 
 /obj/item/firearm_component/proc/installed(var/obj/item/gun/_holder, var/update_holder = TRUE)
 	if(holder == _holder || !istype(_holder))

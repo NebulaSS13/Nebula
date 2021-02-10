@@ -1,3 +1,7 @@
+#define SILENCER_INVALID -1
+#define SILENCER_NONE     0
+#define SILENCER_INHERENT 1
+
 #define FIREARM_CATEGORY_NONE      "default"
 #define FIREARM_COMPONENT_BARREL   "barrel"
 #define FIREARM_COMPONENT_GRIP     "grip"
@@ -55,11 +59,11 @@
 /obj/item/gun/Initialize()
 
 	if(!ispath(firearm_frame_subtype, /obj/item/gun))
-		crash_with("Firearm initialized with invalid frame subtype: [type] (name).")
+		PRINT_STACK_TRACE("Firearm initialized with invalid frame subtype: [type] (name).")
 		return INITIALIZE_HINT_QDEL
 
 	if(type == firearm_frame_subtype)
-		crash_with("Firearm initialized with same type as frame subtype: [type] (name).")
+		PRINT_STACK_TRACE("Firearm initialized with same type as frame subtype: [type] (name).")
 		return INITIALIZE_HINT_QDEL
 
 	var/list/firearm_components = get_modular_component_list()
@@ -176,21 +180,6 @@
 		generate_bolt(user)
 		draw(user)
 
-/obj/item/gun/hand/capacitor_pistol/attack_self(var/mob/user)
-
-	if(charging)
-		for(var/obj/item/stock_parts/capacitor/capacitor in capacitors)
-			capacitor.charge = 0
-		update_icon()
-		charging = FALSE
-	else
-		var/new_wavelength = input("Select the desired laser wavelength.", "Capacitor Laser Wavelength", selected_wavelength) as null|anything in global.laser_wavelengths
-		if(!charging && new_wavelength != selected_wavelength && (holder?.loc == user || user.Adjacent(src)) && !user.incapacitated())
-			selected_wavelength = new_wavelength
-			to_chat(user, SPAN_NOTICE("You dial \the [holder || src]'s wavelength to [selected_wavelength.name]."))
-			update_icon()
-	return TRUE
-
 /obj/item/gun/long/grenade/underslung/attack_self()
 	return
 
@@ -251,59 +240,6 @@
 	
 /*
 
-
-/obj/item/gun/long/grenade/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		unload(user)
-	else
-		..()
-
-/obj/item/gun/hand/money/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		unload_receptacle(user)
-	else
-		return ..()
-
-/obj/item/gun/long/pneumatic/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		unload_hopper(user)
-	else
-		return ..()
-
-/obj/item/gun/long/syringe/attack_hand(mob/living/user)
-	if(user.is_holding_offhand(src))
-		if(!darts.len)
-			to_chat(user, "<span class='warning'>[holder || src] is empty.</span>")
-			return
-		if(next)
-			to_chat(user, "<span class='warning'>[holder || src]'s cover is locked shut.</span>")
-			return
-		var/obj/item/syringe_cartridge/C = darts[1]
-		darts -= C
-		user.put_in_hands(C)
-		user.visible_message("[user] removes \a [C] from [holder || src].", "<span class='notice'>You remove \a [C] from [holder || src].</span>")
-	else
-		..()
-
-/obj/item/gun/attack_hand(var/mob/user)
-	if(user.is_holding_offhand(src))
-		var/obj/item/removing
-
-		if(loaded)
-			removing = loaded
-			loaded = null
-		else if(cell && removable_components)
-			removing = cell
-			cell = null
-
-		if(removing)
-			user.put_in_hands(removing)
-			user.visible_message("<span class='notice'>\The [user] removes \the [removing] from \the [holder || src].</span>")
-			playsound(holder, 'sound/machines/click.ogg', 10, 1)
-			update_icon()
-			return
-	. = ..()
-
 /obj/item/gun/long/assault_rifle/attack_hand(mob/user)
 	if(user.is_holding_offhand(src) && use_launcher)
 		launcher.unload(user)
@@ -315,70 +251,7 @@
 		unload_tank(user)
 		return TRUE
 	. = ..()
-*/
 
-/obj/item/gun/attackby(obj/item/W, mob/user)
-	var/list/firearm_components = get_modular_component_list()
-	for(var/fcomp in firearm_components)
-		var/obj/item/firearm_component/comp = firearm_components[fcomp]
-		if(istype(comp) && comp.holder_attackby(W, user))
-			return TRUE
-	. = ..()
-
-/*
-	else
-		..()
-
-
-/obj/item/gun/hand/capacitor_pistol/attackby(obj/item/W, mob/user)
-
-	if(charging)
-		return ..()
-
-	if(isScrewdriver(W))
-		if(length(capacitors))
-			var/obj/item/stock_parts/capacitor/capacitor = capacitors[1]
-			capacitor.charge = 0
-			user.put_in_hands(capacitor)
-			LAZYREMOVE(capacitors, capacitor)
-		else if(power_supply)
-			user.put_in_hands(power_supply)
-			power_supply = null
-		else
-			to_chat(user, SPAN_WARNING("\The [holder || src] does not have a cell or capacitor installed."))
-			return TRUE
-		playsound(holder, 'sound/items/Screwdriver2.ogg', 25)
-		update_icon()
-		return TRUE
-
-	if(istype(W, /obj/item/cell))
-		if(power_supply)
-			to_chat(user, SPAN_WARNING("\The [holder || src] already has a cell installed."))
-		else if(user.unEquip(W, src))
-			power_supply = W
-			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [holder || src]."))
-			update_icon()
-		return TRUE
-
-	if(istype(W, /obj/item/stock_parts/capacitor))
-		if(length(capacitors) >= max_capacitors)
-			to_chat(user, SPAN_WARNING("\The [holder || src] cannot fit any additional capacitors."))
-		else if(user.unEquip(W, src))
-			LAZYADD(capacitors, W)
-			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [holder || src]."))
-			update_icon()
-		return TRUE
-
-	. = ..()
-
-
-/obj/item/gun/long/linear_fusion/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
-		to_chat(user, SPAN_WARNING("\The [holder || src] is hermetically sealed; you can't get the components out."))
-		return TRUE
-	. = ..()
-
-	
 
 /obj/item/gun/long/crossbow/rapidcrossbowdevice/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/rcd_ammo))
@@ -534,7 +407,7 @@
 		..()
 
 
-/obj/item/gun/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/gun/magnet/attackby(var/obj/item/thing, var/mob/user)
 
 	if(removable_components)
 		if(istype(thing, /obj/item/cell))
@@ -630,6 +503,7 @@
 
 /obj/item/gun/on_update_icon()
 	cut_overlays()
+	var/list/new_underlays
 	var/base_icon_state = get_world_inventory_state()
 	icon_state = "[base_icon_state]-[FIREARM_COMPONENT_FRAME]"
 	var/list/firearm_components = get_modular_component_list()
@@ -638,7 +512,13 @@
 		if(istype(comp))
 			var/image/I = comp.get_holder_overlay(base_icon_state)
 			if(I)
-				add_overlay(I)
+				if(comp.is_underlay)
+					LAZYADD(new_underlays, I)
+				else
+					add_overlay(I)
+	compile_overlays()
+	underlays = new_underlays
+	
 	var/mob/user = loc
 	if(istype(user) && (src in user.get_held_items()))
 		user.update_inv_hands()
@@ -657,12 +537,13 @@
 		overlays +=	receiver.get_safety_indicator()
 */
 
+// Order of components determines order of layering for component overlays.
 /obj/item/gun/proc/get_modular_component_list()
 	. = list(
 		"[FIREARM_COMPONENT_BARREL]" =   barrel,
+		"[FIREARM_COMPONENT_STOCK]" =    stock,
 		"[FIREARM_COMPONENT_GRIP]" =     grip,
-		"[FIREARM_COMPONENT_RECEIVER]" = receiver,
-		"[FIREARM_COMPONENT_STOCK]" =    stock
+		"[FIREARM_COMPONENT_RECEIVER]" = receiver
 	)
 
 /obj/item/gun/proc/get_load_caliber()

@@ -3,46 +3,77 @@
 	fire_delay = 10
 
 	var/max_capacitors = 2
-	var/wiring_color = COLOR_CYAN_BLUE
 	var/list/capacitors = /obj/item/stock_parts/capacitor
 	var/const/charge_iteration_delay = 3
 	var/const/capacitor_charge_constant = 10
-	var/decl/laser_wavelength/charging
-	var/decl/laser_wavelength/selected_wavelength
 
-/obj/item/firearm_component/receiver/energy/capacitor/rifle
-	cell_type = /obj/item/cell/super
-	max_capacitors = 4
-	fire_delay = 20
-
-/obj/item/firearm_component/receiver/energy/capacitor/rifle/lfr
-	cell_type = /obj/item/cell/infinite
-	capacitors = /obj/item/stock_parts/capacitor/super
-	wiring_color = COLOR_GOLD
-
-/*
-
-/obj/item/gun/hand/capacitor_pistol/examine(mob/user, distance)
-	. = ..()
-	if(loc == user || distance <= 1)
-		to_chat(user, "The wavelength selector is dialled to [selected_wavelength.name].")
-	
-/obj/item/gun/hand/capacitor_pistol/Destroy()
-	if(capacitors)
-		QDEL_NULL_LIST(capacitors)
-	. = ..()
-
-/obj/item/gun/hand/capacitor_pistol/Initialize()
-	if(!laser_wavelengths)
-		laser_wavelengths = list()
-		for(var/laser in subtypesof(/decl/laser_wavelength))
-			laser_wavelengths += decls_repository.get_decl(laser)
-	selected_wavelength = pick(laser_wavelengths)
+/obj/item/firearm_component/receiver/energy/capacitor/Initialize(ml, material_key)
 	if(ispath(capacitors))
 		var/capacitor_type = capacitors
 		capacitors = list()
 		for(var/i = 1 to max_capacitors)
 			capacitors += new capacitor_type(src)
+	. = ..()
+
+/obj/item/firearm_component/receiver/energy/capacitor/holder_attack_self(mob/user)
+/*
+	if(charging)
+		for(var/obj/item/stock_parts/capacitor/capacitor in capacitors)
+			capacitor.charge = 0
+		update_icon()
+		charging = FALSE
+		return TRUE
+*/
+	. = ..()
+
+/obj/item/firearm_component/receiver/energy/capacitor/Destroy()
+	if(capacitors)
+		QDEL_NULL_LIST(capacitors)
+	. = ..()
+	
+/*
+/obj/item/gun/hand/capacitor_pistol/attackby(obj/item/W, mob/user)
+
+	if(charging)
+		return ..()
+
+	if(isScrewdriver(W))
+		if(length(capacitors))
+			var/obj/item/stock_parts/capacitor/capacitor = capacitors[1]
+			capacitor.charge = 0
+			user.put_in_hands(capacitor)
+			LAZYREMOVE(capacitors, capacitor)
+		else if(power_supply)
+			user.put_in_hands(power_supply)
+			power_supply = null
+		else
+			to_chat(user, SPAN_WARNING("\The [holder || src] does not have a cell or capacitor installed."))
+			return TRUE
+		playsound(holder, 'sound/items/Screwdriver2.ogg', 25)
+		update_icon()
+		return TRUE
+
+	if(istype(W, /obj/item/cell))
+		if(power_supply)
+			to_chat(user, SPAN_WARNING("\The [holder || src] already has a cell installed."))
+		else if(user.unEquip(W, src))
+			power_supply = W
+			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [holder || src]."))
+			update_icon()
+		return TRUE
+
+	if(istype(W, /obj/item/stock_parts/capacitor))
+		if(length(capacitors) >= max_capacitors)
+			to_chat(user, SPAN_WARNING("\The [holder || src] cannot fit any additional capacitors."))
+		else if(user.unEquip(W, src))
+			LAZYADD(capacitors, W)
+			to_chat(user, SPAN_NOTICE("You fit \the [W] into \the [holder || src]."))
+			update_icon()
+		return TRUE
+
+	. = ..()
+
+
 	. = ..()
 
 /obj/item/gun/hand/capacitor_pistol/afterattack(atom/A, mob/living/user, adjacent, params)

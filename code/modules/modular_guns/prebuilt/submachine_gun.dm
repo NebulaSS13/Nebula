@@ -1,3 +1,14 @@
+/obj/item/gun/hand/submachine_gun
+	name = "submachine gun"
+	desc = "The WT-550 Saber is a cheap self-defense weapon, mass-produced for paramilitary and private use."
+	icon = 'icons/obj/guns/sec_smg.dmi'
+	barrel = /obj/item/firearm_component/barrel/ballistic/pistol
+	receiver = /obj/item/firearm_component/receiver/ballistic/submachine_gun
+
+/obj/item/gun/hand/submachine_gun/cheap
+	desc = "A cheap mass-produced SMG. This one looks especially run-down. Uses pistol rounds."
+	receiver = /obj/item/firearm_component/receiver/ballistic/submachine_gun/cheap
+
 /obj/item/firearm_component/receiver/ballistic/submachine_gun
 	safety_icon = "safety"
 	caliber = CALIBER_PISTOL_SMALL

@@ -9,7 +9,7 @@
 	var/bolt_open = FALSE
 
 /obj/item/firearm_component/receiver/ballistic/rifle/sniper
-	caliber = CALIBER_ANTIMATERIAL
+	caliber = CALIBER_ANTI_MATERIEL
 	fire_delay = 12
 
 /obj/item/firearm_component/receiver/ballistic/rifle/get_holder_overlay(holder_state)

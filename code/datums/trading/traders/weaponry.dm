@@ -81,5 +81,5 @@
 
 	possible_trading_items = list(/obj/item/gun/hand/zipgun =            TRADER_THIS_TYPE,
 								/obj/item/gun/long/laser/dogan =             TRADER_THIS_TYPE,
-								/obj/item/gun/hand/submachine_gun/usi =   TRADER_THIS_TYPE,
+								/obj/item/gun/hand/submachine_gun/cheap =   TRADER_THIS_TYPE,
 								/obj/item/clothing/accessory/storage/holster = TRADER_ALL)

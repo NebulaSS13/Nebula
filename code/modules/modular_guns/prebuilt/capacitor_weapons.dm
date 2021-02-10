@@ -1,47 +1,3 @@
-var/global/list/laser_wavelengths
-
-/decl/laser_wavelength
-	var/name
-	var/color
-	var/light_color
-	var/damage_multiplier
-	var/armour_multiplier
-
-/decl/laser_wavelength/red
-	name = "638nm"
-	color = COLOR_RED
-	light_color = COLOR_RED_LIGHT
-	damage_multiplier = 1
-	armour_multiplier = 0.1
-
-/decl/laser_wavelength/yellow
-	name = "589nm"
-	color = COLOR_GOLD
-	light_color = COLOR_GOLD
-	damage_multiplier = 0.9
-	armour_multiplier = 0.2
-
-/decl/laser_wavelength/green
-	name = "515nm"
-	color = COLOR_LIME
-	light_color = COLOR_LIME
-	damage_multiplier = 0.8
-	armour_multiplier = 0.3
-
-/decl/laser_wavelength/blue
-	name = "473nm"
-	color = COLOR_CYAN
-	light_color = COLOR_BLUE_LIGHT
-	damage_multiplier = 0.7
-	armour_multiplier = 0.4
-
-/decl/laser_wavelength/violet
-	name = "405nm"
-	color = "#ff00dc"
-	light_color = "#ff00dc"
-	damage_multiplier = 0.6
-	armour_multiplier = 0.5
-
 /obj/item/gun/hand/capacitor_pistol
 	name = "capacitor pistol"
 	desc = "An excitingly chunky directed energy weapon that uses a modular capacitor array to charge each shot."
@@ -57,6 +13,7 @@ var/global/list/laser_wavelengths
 	)
 	barrel = /obj/item/firearm_component/barrel/energy/capacitor
 	receiver = /obj/item/firearm_component/receiver/energy/capacitor
+	grip = /obj/item/firearm_component/grip/capacitor
 
 // Subtypes.
 /obj/item/gun/long/capacitor_rifle
@@ -65,6 +22,15 @@ var/global/list/laser_wavelengths
 	icon = 'icons/obj/guns/capacitor_rifle.dmi'
 	barrel = /obj/item/firearm_component/barrel/energy/capacitor/rifle
 	receiver = /obj/item/firearm_component/receiver/energy/capacitor/rifle
+	grip = /obj/item/firearm_component/grip/capacitor/long
+
+/obj/item/firearm_component/barrel/energy/capacitor/rifle
+	one_hand_penalty = 6
+
+/obj/item/firearm_component/receiver/energy/capacitor/rifle
+	cell_type = /obj/item/cell/super
+	max_capacitors = 4
+	fire_delay = 20
 
 /obj/item/gun/long/linear_fusion
 	name = "linear fusion rifle"
@@ -72,3 +38,11 @@ var/global/list/laser_wavelengths
 	color = COLOR_GRAY40
 	barrel = /obj/item/firearm_component/barrel/energy/capacitor/rifle/lfr
 	receiver = /obj/item/firearm_component/receiver/energy/capacitor/rifle/lfr
+	grip = /obj/item/firearm_component/grip/capacitor/long/lfr
+
+/obj/item/firearm_component/barrel/energy/capacitor/rifle/lfr
+	projectile_type = /obj/item/projectile/beam/variable/split
+
+/obj/item/firearm_component/receiver/energy/capacitor/rifle/lfr
+	cell_type = /obj/item/cell/infinite
+	capacitors = /obj/item/stock_parts/capacitor/super

@@ -1,4 +1,5 @@
 /obj/item/firearm_component/barrel/ballistic
+	silenced = SILENCER_NONE
 	var/caliber
 
 /obj/item/firearm_component/barrel/ballistic/get_caliber()
@@ -27,7 +28,7 @@
 	accuracy_power = 7
 
 /obj/item/firearm_component/barrel/ballistic/sniper
-	caliber = CALIBER_ANTIMATERIAL
+	caliber = CALIBER_ANTI_MATERIEL
 	screen_shake = 2 //extra kickback
 	one_hand_penalty = 6
 	bulk = 8
@@ -54,20 +55,5 @@
 	caliber = CALIBER_PISTOL_LASBULB
 	one_hand_penalty = 0
 	screen_shake = 0
-	silenced = 1
+	silenced = SILENCER_INHERENT
 	fire_sound_text = "pop"
-
-/*
-/obj/item/gun/hand/pistol/holdout/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/silencer))
-		if(src in user.get_held_items())	//if we're not in his hands
-			to_chat(user, SPAN_WARNING("You'll need \the [holder || src] in your hands to do that."))
-			return TRUE
-		if(user.unEquip(I, src))
-			to_chat(user, SPAN_NOTICE("You screw [I] onto \the [holder || src]."))
-			silenced = I	//dodgy?
-			w_class = ITEM_SIZE_NORMAL
-			update_icon()
-		return TRUE
-	. = ..()
-*/

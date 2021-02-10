@@ -2,10 +2,13 @@
 	var/projectile_type = /obj/item/projectile/beam/practice
 	var/charge_cost = 20 //How much energy is needed to fire.
 
+/obj/item/firearm_component/barrel/energy/get_projectile_type()
+	return projectile_type
+
 /obj/item/firearm_component/barrel/energy/crossbow
 	projectile_type = /obj/item/projectile/energy/bolt
-	//silenced = 1
-	//fire_sound = 'sound/weapons/Genhit.ogg'
+	silenced = SILENCER_INHERENT
+	fire_sound = 'sound/weapons/Genhit.ogg'
 
 /obj/item/firearm_component/barrel/energy/crossbow/ninja
 	projectile_type = /obj/item/projectile/energy/dart
@@ -54,12 +57,12 @@
 
 /obj/item/firearm_component/barrel/energy/laser/cannon
 	projectile_type = /obj/item/projectile/beam/heavylaser
-	one_hand_penalty = 6 //large and heavy
+	one_hand_penalty = 6
 	charge_cost = 40
 	accuracy = 2
 
- /obj/item/firearm_component/barrel/energy/laser/cannon/mounted
- 	accuracy = 0 //mounted laser cannons don't need any help, thanks
+/obj/item/firearm_component/barrel/energy/laser/cannon/mounted
+ 	accuracy = 0
 
 /obj/item/firearm_component/barrel/energy/laser/antique
 	projectile_type = /obj/item/projectile/beam
@@ -257,6 +260,3 @@
 		else
 			firing_temperature = current_temperature
 */
-
-/obj/item/firearm_component/barrel/energy/get_projectile_type()
-	return projectile_type

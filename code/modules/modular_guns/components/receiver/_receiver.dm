@@ -62,6 +62,7 @@
 	. = ..()
 
 /obj/item/firearm_component/receiver/proc/switch_firemodes()
+/*
 	var/next_mode = get_next_firemode()
 	if(!next_mode || next_mode == sel_mode)
 		return null
@@ -70,6 +71,7 @@
 	new_mode.apply_to(holder)
 	playsound(holder, selector_sound, 50, 1)
 	return new_mode
+*/
 
 /obj/item/firearm_component/receiver/proc/get_next_firemode()
 	if(length(firemodes) <= 1)

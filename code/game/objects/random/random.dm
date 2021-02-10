@@ -507,7 +507,7 @@
 				/obj/item/toy/snappop,
 				/obj/item/toy/sword,
 				/obj/item/toy/water_balloon,
-				/obj/item/gun/launcher/foam/crossbow,
+				/obj/item/gun/hand/foam/crossbow,
 				/obj/item/toy/blink,
 				/obj/item/chems/spray/waterflower,
 				/obj/item/toy/prize/powerloader,
