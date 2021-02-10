@@ -2,7 +2,7 @@
     <h2>SYSTEM STATUS</h2>
     <div class="item">
         <div class="itemLabel">
-            Shunt Drive is:
+            Superluminal shunt is:
         </div>
         <div class="itemContent">
             {{if data.ftlstatus == 2}}
@@ -39,6 +39,15 @@
         </div>
         <div class="itemContent">
             {{:data.chargetime}} Minutes
+        </div>
+    </div>
+	
+    <div class="item">
+        <div class="itemLabel">
+            Charge Precentage:
+        </div>
+        <div class="itemContent">
+            {{:helper.displayBar(data.chargepercent, 0, 100)}}
         </div>
     </div>
 

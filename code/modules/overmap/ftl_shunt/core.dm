@@ -1,5 +1,3 @@
-var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/material/gas/hydrogen/deuterium = 25000, /decl/material/gas/hydrogen = 25000, /decl/material/solid/exotic_matter = 50000)
-
 /obj/machinery/ftl_shunt
 	anchored = 1
 	icon = 'icons/obj/shunt_drive.dmi'
@@ -11,10 +9,14 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 
 	var/list/fuel_ports = list() //We mainly use fusion fuels.
 	var/charge_time //We don't actually charge to a certain amount of power, we just charge for x amount of time depending on host ship mass.
-	var/charge_started
+	var/charge_interval = 0
+	var/charge_started = 0
 	var/charging = FALSE
+	var/jumping = FALSE
 	var/shunt_x = 1
 	var/shunt_y = 1
+	var/chargepercent = 0
+	var/last_percent_tick = 0
 	var/obj/machinery/computer/ship/ftl/ftl_computer
 	var/required_fuel_joules
 	var/cooldown_delay = 5 MINUTES
@@ -29,6 +31,7 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 	var/shunt_start_text = "Attention! All hands brace for faster-than-light transition! ETA: %%TIME%%"
 	var/shunt_cancel_text = "Attention! Faster-than-light transition cancelled."
 	var/shunt_complete_text = "Attention! Faster-than-light transition completed."
+	var/shunt_spooling_text = "Attention! Superluminal shunt charge complete, spooling up."
 
 	var/shunt_sabotage_text_minor = "Warning! Electromagnetic flux beyond safety limits - aborting shunt!"
 	var/shunt_sabotage_text_major = "Warning! Critical electromagnetic flux in accelerator core! Dumping core and aborting shunt!"
@@ -39,6 +42,7 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 	idle_power_usage = 1600
 	active_power_usage = 150000
 	icon_state = "bsd"
+	light_color = COLOR_BLUE
 
 //Base procs
 
@@ -49,6 +53,7 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 		var/datum/extension/local_network_member/local_network = get_extension(src, /datum/extension/local_network_member)
 		local_network.set_tag(null, initial_id_tag)
 	find_ports()
+	set_light(1, 1, 2)
 
 /obj/machinery/ftl_shunt/core/Destroy()
 	. = ..()
@@ -58,16 +63,38 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 	ftl_computer.linked_core = null
 	ftl_computer = null
 
+/obj/machinery/ftl_shunt/core/on_update_icon()
+	overlays.Cut()
+
+	if(charging)
+		var/image/I = image('icons/obj/shunt_drive.dmi', "activating")
+		var/matrix/M = new()
+		I.transform = M
+		overlays += I
+
+	if(jumping)
+		overlays += image('icons/obj/shunt_drive.dmi', "activated")
+		var/image/S = image('icons/obj/objects.dmi', "bhole3")
+		var/matrix/M = new()
+		M.Scale(0.75)
+		S.transform = M
+		S.alpha = 0
+		animate(S, alpha = 255, time = 5.9 SECONDS)
+		overlays += S
+
 /obj/machinery/ftl_shunt/core/examine(mob/user)
 	. = ..()
 	if(sabotaged)
-		switch(sabotaged)
-			if(SHUNT_SABOTAGE_MINOR)
-				to_chat(user, SPAN_WARNING("It looks like it's been tampered with in some way."))
-			if(SHUNT_SABOTAGE_MAJOR)
-				to_chat(user, SPAN_WARNING("Light behaves oddly around the core of [src], and it looks to have been tampered with!"))
-			if(SHUNT_SABOTAGE_CRITICAL)
-				to_chat(user, SPAN_DANGER("Light bends around the core of [src] in a manner that eerily reminds you of a singularity..."))
+		if(user.skill_check(SKILL_ENGINES, SKILL_ADEPT))
+			switch(sabotaged)
+				if(SHUNT_SABOTAGE_MINOR)
+					to_chat(user, SPAN_WARNING("It looks like it's been tampered with in some way, and the accelerator vanes seem out of place."))
+				if(SHUNT_SABOTAGE_MAJOR)
+					to_chat(user, SPAN_WARNING("Light behaves oddly around the core of [src], and it looks to have been tampered with! The vanes are definitely out of place."))
+				if(SHUNT_SABOTAGE_CRITICAL)
+					to_chat(user, SPAN_DANGER("Light bends around the core of [src] in a manner that eerily reminds you of a singularity... the vanes look completely misaligned!"))
+		else
+			to_chat(user, SPAN_WARNING("It looks like it's been tampered with, but you're not sure about to what extent."))
 
 /obj/machinery/ftl_shunt/core/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/stack/telecrystal))
@@ -79,6 +106,10 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 
 		if(TC.amount < tc_input)
 			to_chat(user, SPAN_WARNING("You don't have enough telecrystals for that."))
+			return FALSE
+
+		if(tc_input < 10)
+			to_chat(user, SPAN_WARNING("This really isn't a useful amount for sabotage."))
 			return FALSE
 
 		to_chat(user, SPAN_WARNING("You begin to insert the crystals into [src]..."))
@@ -102,18 +133,24 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 
 /obj/machinery/ftl_shunt/core/physical_attack_hand(var/mob/user)
 	if(sabotaged)
+		var/mob/living/carbon/human/h_user = null
+		if (!istype(user, /mob/living/carbon/human))
+			return
+		h_user = user //this is used specifically in the do_after because electrocute_act() is not a moblevel proc.
 		var/skill_delay = user.skill_delay_mult(SKILL_ENGINES, 0.3)
 		if(!user.skill_check(SKILL_ENGINES, SKILL_BASIC))
 			to_chat(user, SPAN_DANGER("You are nowhere near experienced enough to stick your hand into that thing."))
 			return FALSE
-		to_chat(user, SPAN_NOTICE("You reach your hand inside of [src] and slowly begin to remove a foreign object ..."))
+		to_chat(user, SPAN_NOTICE("You reach your hand inside of [src] and slowly begin to remove re-align the accelerator vanes..."))
 		if(!do_after(user, (4 SECOND * skill_delay), src))
+			to_chat(user, SPAN_WARNING("You try to pull your hand away from the vanes, but you touch a conductor!"))
+			h_user.electrocute_act(rand(150,250), src, def_zone = user.get_active_held_item_slot())
 			return FALSE
 		var/obj/item/stack/telecrystal/TC = new
 		TC.amount = sabotaged_amt
 		TC.forceMove(get_turf(user))
 		user.put_in_hands(TC)
-		to_chat(user, SPAN_NOTICE("You remove the object from [src], and it seems to return to normal."))
+		to_chat(user, SPAN_NOTICE("You realign the accelerator vanes by removing some kind of crystal, preventing what could have been a catastrophe."))
 		sabotaged = null
 		sabotaged_amt = 0
 		return TRUE
@@ -156,7 +193,8 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 	if(required_fuel_joules > get_fuel(fuel_ports))
 		return FTL_START_FAILURE_FUEL
 
-	charge_time = world.time + get_charge_time()
+	charge_interval = get_charge_time()
+	charge_time = world.time + charge_interval
 	//If we've gotten to this point then we're okay to start charging up.
 	charging = TRUE
 	charge_started = world.time
@@ -176,6 +214,7 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 				to_chat(H, SPAN_DANGER("The deck vibrates with a harmonic that sets your teeth on edge and fills you with dread."))
 
 	ftl_announcement.Announce(announcetxt, "FTL Shunt Management System", new_sound = sound('sound/misc/notice2.ogg'))
+	update_icon()
 	return FTL_START_CONFIRMED
 
 //Cancels the in-progress shunt.
@@ -183,16 +222,19 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 	if(!charging) //Not preparing for a jump.
 		return
 	charging = FALSE
+	charge_started = 0
 	charge_time = null
-	charge_started = null
 	cooldown = null
 	required_fuel_joules = null
 	if(!silent)
 		ftl_announcement.Announce(shunt_cancel_text, "FTL Shunt Management System", new_sound = sound('sound/misc/notice2.ogg'))
 	update_use_power(POWER_USE_IDLE)
+	update_icon()
+	chargepercent = 0
 
 //Starts the shunt, and then hands off to do_shunt to finish it.
 /obj/machinery/ftl_shunt/core/proc/execute_shunt()
+	ftl_announcement.Announce(shunt_spooling_text, "FTL Shunt Management System", new_sound = sound('sound/misc/notice2.ogg'))
 	if(sabotaged)
 		cancel_shunt(TRUE)
 		do_sabotage()
@@ -204,6 +246,8 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 	var/obj/effect/portal/wormhole/W = new(destination) //Generate a wormhole effect on overmap to give some indication that something is about to happen.
 	QDEL_IN(W, 6 SECONDS)
 	addtimer(CALLBACK(src, .proc/do_shunt, shunt_x, shunt_y, jumpdist, destination), 6 SECONDS)
+	jumping = TRUE
+	update_icon()
 	for(var/mob/living/carbon/M in world)
 		if(!(M.z in ftl_computer.linked.map_z))
 			continue
@@ -215,6 +259,10 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 	cooldown = world.time + cooldown_delay
 	update_use_power(POWER_USE_IDLE)
 	do_effects(jumpdist)
+	jumping = FALSE
+	update_icon()
+	chargepercent = 0
+	charge_started = 0
 
 //Handles all the effects of the jump.
 /obj/machinery/ftl_shunt/core/proc/do_effects(var/distance) //If we're jumping too far, have some !!FUN!! with people and ship systems.
@@ -229,10 +277,18 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 
 	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_) //Affect mobs, skip synthetics.
 		sound_to(H, 'sound/machines/hyperspace_end.ogg')
+
 		if(!(H.z in ftl_computer.linked.map_z))
 			continue
+
+		handle_spacefloat(H)
+
+		if(isnull(H) || QDELETED(H))
+			continue
+
 		if(H.isSynthetic())
 			continue //We don't affect synthetics.
+
 		switch(shunt_sev)
 			if(SHUNT_SEVERITY_MINOR)
 				to_chat(H, SPAN_NOTICE("You feel your insides flutter about inside of you as you are briefly shunted into an alternate dimension.")) //No major effects.
@@ -280,6 +336,22 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 					A.energy_fail(rand(60, 150))
 				if(prob(50))
 					A.overload_lighting(50)
+
+/obj/machinery/ftl_shunt/core/proc/handle_spacefloat(var/mob/living/carbon/human/H)
+	if(!H.check_space_footing())
+		 //Flip a coin ...
+		to_chat(H, SPAN_WARNING("Being untethered from a ship entering FTL is a bad idea, but you roll the dice..."))
+		if(prob(50))
+			to_chat(H, SPAN_NOTICE("and win, surviving the energy dancing over your body. Not unharmed, however."))
+			H.apply_damage(300, IRRADIATE, damage_flags = DAM_DISPERSED)
+			return
+		else
+			to_chat(H, SPAN_DANGER("and lose, being ripped apart in a nanosecond by energies beyond comprehension."))
+			if(H.isSynthetic())
+				new /obj/item/remains/robot(get_turf(H))
+			else
+				new /obj/item/remains/human(get_turf(H))
+			qdel(H)
 
 /obj/machinery/ftl_shunt/core/proc/do_sabotage()
 	var/announcetxt
@@ -339,7 +411,7 @@ var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/
 	var/total_fuel_joules
 
 	for(var/obj/machinery/ftl_shunt/fuel_port/F in input)
-		total_fuel_joules += F.get_fuel_joules()
+		total_fuel_joules += F.get_fuel_joules(FALSE)
 
 	return total_fuel_joules
 
@@ -389,6 +461,7 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 		cancel_shunt()
 
 	if(charging)
+		chargepercent = round(100.0*(world.time - charge_started)/charge_interval, 0.1)
 		if(world.time >= charge_time) //We've probably finished charging up.
 			charging = FALSE
 			if(use_fuel(required_fuel_joules))
@@ -463,7 +536,7 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 	if(fuel)
 		for(var/G in fuel.rod_quantities)
 			if(G in fuels)
-				. += (get_fuel_maximum ? fuel.rod_quantities[G] : 10000) * fuels[G]
+				. += (get_fuel_maximum ? 10000 : fuel.rod_quantities[G]) * fuels[G]
 
 /obj/machinery/ftl_shunt/fuel_port/proc/use_fuel_joules(var/joules)
 	if(!fuel)

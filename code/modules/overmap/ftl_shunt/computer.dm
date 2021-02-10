@@ -12,13 +12,14 @@
 
 /obj/machinery/computer/ship/ftl/Destroy()
 	. = ..()
-	linked_core.ftl_computer = null
-	linked_core = null
+	if(linked_core)
+		linked_core.ftl_computer = null
+		linked_core = null
 
 /obj/machinery/computer/ship/ftl/proc/recalc_cost()
 	var/jump_dist = get_dist(linked, locate(linked_core.shunt_x, linked_core.shunt_y, GLOB.using_map.overmap_z))
 	var/jump_cost = ((linked.vessel_mass * JOULES_PER_TON) / 1000) * jump_dist
-	cost = jump_cost
+	return jump_cost
 
 /obj/machinery/computer/ship/ftl/proc/find_core()
 	if(!linked)
@@ -42,20 +43,23 @@
 
 	if(!linked_core)
 		find_core()
-		return
+		if(!linked_core)
+			to_chat(user, SPAN_WARNING("Unable to establish connection to superluminal shunt."))
+			return
 	recalc_cost()
 
 	data["ftlstatus"] = linked_core.get_status()
 	data["shunt_x"] = linked_core.shunt_x
 	data["shunt_y"] = linked_core.shunt_y
 	data["fuel_joules"] = (linked_core.get_fuel(linked_core.fuel_ports) / 1000)
-	data["jumpcost"] = cost
+	data["jumpcost"] = recalc_cost()
 	data["chargetime"] = round((linked_core.get_charge_time() / 600))
+	data["chargepercent"] = linked_core.chargepercent
 	data["maxfuel"] = linked_core.get_fuel_maximum(linked_core.fuel_ports)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "ftl_computer.tmpl", "[linked.name] Shunt Drive Control", 420, 530, src)
+		ui = new(user, src, ui_key, "ftl_computer.tmpl", "[linked.name] Superluminal Shunt Control", 420, 530, src)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -75,11 +79,10 @@
 			var/input_x = input(user, "Enter Destination X Coordinates", "FTL Computer", linked_core.shunt_x) as num|null
 			if(input_x >= GLOB.using_map.overmap_size)
 				input_x = min(input_x, GLOB.using_map.overmap_size - 1)
-			else if(CanInteract(user, state))
+			if(CanInteract(user, state))
 				if(isnull(input_x))
 					input_x = linked_core.shunt_x
 				linked_core.shunt_x = clamp((input_x + fumble), 1, (GLOB.using_map.overmap_size - 1))
-				recalc_cost()
 				if(fumble)
 					to_chat(user, SPAN_WARNING("You fumble the input because of your inexperience!"))
 			return TOPIC_REFRESH
@@ -92,11 +95,10 @@
 			var/input_y = input(user, "Enter Destination Y Coordinates", "FTL Computer", linked_core.shunt_y) as num|null
 			if(input_y >= GLOB.using_map.overmap_size)
 				input_y = min(input_y, GLOB.using_map.overmap_size - 1)
-			else if(CanInteract(user, state))
+			if(CanInteract(user, state))
 				if(isnull(input_y))
 					input_y = linked_core.shunt_y
 				linked_core.shunt_y = clamp((input_y + fumble), 1, (GLOB.using_map.overmap_size - 1))
-				recalc_cost()
 				if(fumble)
 					to_chat(user, SPAN_WARNING("You fumble the input because of your inexperience!"))
 			return TOPIC_REFRESH
