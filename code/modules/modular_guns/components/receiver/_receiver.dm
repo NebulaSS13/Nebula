@@ -3,16 +3,20 @@
 	desc = "A complicated bit of machinery used to feed ammunition into the barrel of a firearm."
 	icon_state = "world-receiver"
 	firearm_component_category = FIREARM_COMPONENT_RECEIVER
+
 	var/sel_mode = 1 //index of the currently selected mode
 	var/list/firemodes
 	var/selector_sound = 'sound/weapons/guns/selector.ogg'
-	var/screen_shake = 0
-	var/space_recoil = 0
-	var/combustion =   0
 	var/safety_state = 1
 	var/safety_icon 	   //overlay to apply to gun based on safety state, if any
 	var/has_safety = TRUE
 	var/tmp/last_safety_check = -INFINITY
+
+	var/burst = 1
+	var/can_autofire = FALSE
+	var/fire_delay = 6 	//delay after shooting before the gun can be used again. Cannot be less than [burst_delay+1]
+	var/burst_delay = 1	//delay between shots, if firing in bursts
+	var/next_fire_time = 0
 
 /obj/item/firearm_component/receiver/proc/get_safety_indicator()
 	return mutable_appearance(icon, "[icon_state][safety_icon][safety()]")
@@ -21,10 +25,12 @@
 	return has_safety && safety_state
 
 /obj/item/firearm_component/receiver/Initialize(ml, material_key)
+	/*
 	LAZYINITLIST(firemodes)
 	for(var/i in 1 to length(firemodes))
 		firemodes[i] = new /datum/firemode(src, firemodes[i])
 	UNSETEMPTY(firemodes)
+	*/
 	. = ..()
 
 /obj/item/firearm_component/receiver/show_examine_info(mob/user)

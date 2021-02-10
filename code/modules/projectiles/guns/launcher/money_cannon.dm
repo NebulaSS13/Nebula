@@ -6,9 +6,7 @@
 	origin_tech = "{'combat':1,'materials':1}"
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
-	fire_sound_text = "a whoosh and a crisp, papery rustle"
-	fire_delay = 1
-	fire_sound = 'sound/weapons/gunshot/money_launcher.ogg'
+	barrel = /obj/item/firearm_component/barrel/launcher/money
 	receiver = /obj/item/firearm_component/receiver/launcher/money
 
 /obj/item/gun/hand/money/hacked

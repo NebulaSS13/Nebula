@@ -16,6 +16,7 @@
 	)
 	one_hand_penalty = 8
 	bulk = GUN_BULK_RIFLE
+	burst_delay = 1
 
 /obj/item/firearm_component/receiver/ballistic/assault_rifle/get_holder_overlay(holder_state)
 	var/image/ret = ..()

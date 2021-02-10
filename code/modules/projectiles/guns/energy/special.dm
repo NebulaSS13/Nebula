@@ -2,13 +2,6 @@
 	name = "ion gun"
 	desc = "The Mk60 EW Halicon is a man portable anti-armor weapon designed to disable mechanical threats. Not the best of its type."
 	icon = 'icons/obj/guns/ion_rifle.dmi'
-	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':2,'magnets':4}"
-	w_class = ITEM_SIZE_HUGE
-	force = 10
-	obj_flags =  OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BACK
-	fire_delay = 30
 	barrel = /obj/item/firearm_component/barrel/energy/ionrifle
 	receiver = /obj/item/firearm_component/receiver/energy/ionrifle
 
@@ -59,7 +52,6 @@
 	desc = "A mining tool capable of expelling concentrated plasma bursts. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	icon = 'icons/obj/guns/plasmacutter.dmi'
 	icon_state = ICON_STATE_WORLD
-	fire_sound = 'sound/weapons/plasma_cutter.ogg'
 	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
 	w_class = ITEM_SIZE_NORMAL
 	force = 8

@@ -2548,6 +2548,7 @@
 #include "code\modules\modular_guns\_gun.dm"
 #include "code\modules\modular_guns\gun_frame_subtypes.dm"
 #include "code\modules\modular_guns\components\_component.dm"
+#include "code\modules\modular_guns\components\accessory\_accessory.dm"
 #include "code\modules\modular_guns\components\barrel\_barrel.dm"
 #include "code\modules\modular_guns\components\barrel\barrel_ballistic.dm"
 #include "code\modules\modular_guns\components\barrel\barrel_ballistic_revolver.dm"

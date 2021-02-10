@@ -2,10 +2,14 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 
 /obj/item/firearm_component/grip/secure
+	name = "secure pistol grip"
 	var/list/authorized_modes = list(ALWAYS_AUTHORIZED)
 	var/default_mode_authorization = UNAUTHORIZED
 	var/registered_owner
 	var/standby
+
+/obj/item/firearm_component/grip/secure/long
+	name = "secure rifle grip"
 
 /obj/item/firearm_component/grip/secure/holder_emag_act(var/charges, var/mob/user)
 	if(holder?.is_secure_gun())

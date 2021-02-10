@@ -5,16 +5,9 @@
 	barrel = /obj/item/firearm_component/barrel/ballistic/rifle
 	receiver = /obj/item/firearm_component/receiver/ballistic/rifle
 
-	fire_delay = 8
-
 /obj/item/gun/cannon/anti_materiel
 	name = "anti-materiel rifle"
 	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to be used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease."
 	icon = 'icons/obj/guns/heavysniper.dmi'
 	barrel = /obj/item/firearm_component/barrel/ballistic/sniper
 	receiver = /obj/item/firearm_component/receiver/ballistic/rifle/sniper
-
-	accuracy = -2
-	scoped_accuracy = 8 //increased accuracy over the LWAP because only one shot
-	scope_zoom = 2
-	fire_delay = 12

@@ -1,9 +1,3 @@
-/obj/item/gun/Destroy()
-	global.registered_weapons -= src
-	. = ..()
-
-
-
 /obj/item/gun/proc/free_fire()
 	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	return security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level)

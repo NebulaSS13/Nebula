@@ -63,10 +63,10 @@
 
 /datum/uplink_item/item/visible_weapons/grenade_launcher
 	name = "Grenade Launcher"
-	desc = "A pump action grenade launcher loaded with a random assortment of grenades"
+	desc = "A pump action grenade launcher."
 	item_cost = 60
 	antag_roles = list(/decl/special_role/mercenary)
-	path = /obj/item/gun/long/grenade/loaded
+	path = /obj/item/gun/long/grenade
 
 //These are for traitors (or other antags, perhaps) to have the option of purchasing some merc gear.
 /datum/uplink_item/item/visible_weapons/smg
@@ -113,7 +113,7 @@
 	name = "Flechette Rifle"
 	desc = "A railgun with two togglable fire modes, able to launch flechette ammunition at incredible speeds."
 	item_cost = 60
-	path = /obj/item/gun/long/railgun/flechette
+	path = /obj/item/gun/cannon/flechette
 	antag_roles = list(/decl/special_role/mercenary)
 
 /datum/uplink_item/item/visible_weapons/railgun // Like a semi-auto AMR
@@ -122,7 +122,7 @@
 			capable of firing slugs at intense speeds."
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT % 6)) / 6
 	antag_roles = list(/decl/special_role/mercenary)
-	path = /obj/item/gun/long/railgun
+	path = /obj/item/gun/cannon/railgun
 
 /datum/uplink_item/item/visible_weapons/harpoonbomb
 	name = "Explosive Harpoon"

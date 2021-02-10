@@ -7,10 +7,6 @@
 	slot_flags = SLOT_LOWER_BODY|SLOT_HOLSTER
 	force = 6
 	w_class = ITEM_SIZE_NORMAL
-	burst_delay = 1
 	multi_aim = 1
-	burst_delay = 3
-	burst = 3
-	accuracy = -1
 	barrel = /obj/item/firearm_component/barrel/energy/pulse
 	receiver = /obj/item/firearm_component/receiver/energy/pulse

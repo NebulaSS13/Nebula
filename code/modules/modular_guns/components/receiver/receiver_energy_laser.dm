@@ -13,6 +13,7 @@
 
 /obj/item/firearm_component/receiver/energy/laser/cannon
 	max_shots = 6
+	fire_delay = 20
 
 /obj/item/firearm_component/receiver/energy/laser/cannon/mounted
 	self_recharge = 1

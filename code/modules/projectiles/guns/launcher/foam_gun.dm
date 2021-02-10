@@ -2,24 +2,14 @@
 	name = "foam blaster"
 	desc = "The classic Jorf blaster!"
 	icon = 'icons/obj/guns/foam/blaster.dmi'
-	icon_state = ICON_STATE_WORLD
-	force = 1
-	w_class = ITEM_SIZE_SMALL
-	obj_flags = null
-	slot_flags = SLOT_LOWER_BODY | SLOT_HOLSTER
-	accuracy = 1
-	fire_sound = 'sound/weapons/foamblaster.ogg'
-	fire_sound_text = "a pleasing 'pomp'"
 	material = /decl/material/solid/plastic
+	barrel = /obj/item/firearm_component/barrel/launcher/foam
 	receiver = /obj/item/firearm_component/receiver/launcher/foam
 
 /obj/item/gun/hand/foam/burst
 	name = "foam machine pistol"
 	desc = "The Jorf Outlander, a machine pistol blaster, fires two darts in rapid succession. Holds 4 darts."
 	icon =  'icons/obj/guns/foam/pistol.dmi'
-	w_class = ITEM_SIZE_NORMAL
-	burst = 2
-	fire_delay = 12
 	receiver = /obj/item/firearm_component/receiver/launcher/foam/smg
 
 /obj/item/gun/hand/foam/revolver
@@ -27,11 +17,11 @@
 	desc = "The Jorf Desperado is a revolver blaster, with a hammer action so you can fan the hammer like a real desperado! It holds 6 darts."
 	icon =  'icons/obj/guns/foam/revolver.dmi'
 	w_class = ITEM_SIZE_NORMAL
-	fire_delay = 4
 	receiver = /obj/item/firearm_component/receiver/launcher/foam/revolver
 
 /obj/item/gun/hand/foam/revolver/tampered
 	receiver = /obj/item/firearm_component/receiver/launcher/foam/revolver/tampered
+
 //the projectile
 /obj/item/foam_dart
 	name = "foam dart"

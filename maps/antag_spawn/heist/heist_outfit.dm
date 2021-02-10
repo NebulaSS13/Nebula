@@ -46,7 +46,7 @@
 		/obj/item/gun/hand/electrolaser,
 		/obj/item/gun/hand/ecrossbow/largecrossbow,
 		/obj/item/gun/long/crossbow,
-		/obj/item/gun/long/grenade/loaded,
+		/obj/item/gun/long/grenade,
 		/obj/item/gun/long/pneumatic,
 		/obj/item/gun/hand/submachine_gun,
 		/obj/item/gun/long/assault_rifle,
@@ -56,12 +56,12 @@
 		/obj/item/gun/hand/pistol/holdout,
 		/obj/item/gun/hand/revolver,
 		/obj/item/gun/hand/zipgun
-		)
+	)
 	var/list/raider_holster = list(
 		/obj/item/clothing/accessory/storage/holster/armpit,
 		/obj/item/clothing/accessory/storage/holster/waist,
 		/obj/item/clothing/accessory/storage/holster/hip
-		)
+	)
 
 /decl/hierarchy/outfit/raider/New()
 	randomize_clothing()

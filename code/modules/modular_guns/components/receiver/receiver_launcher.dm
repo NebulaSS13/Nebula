@@ -37,6 +37,7 @@
 
 /obj/item/firearm_component/receiver/launcher/crossbow
 	has_safety = FALSE
+	fire_delay = 25
 	var/obj/item/bolt
 	var/tension = 0                         // Current draw on the bow.
 	var/max_tension = 3                     // Highest possible tension.
@@ -123,10 +124,192 @@
 /obj/item/firearm_component/receiver/launcher/sealantgun
 	has_safety = FALSE
 	release_force = 5
+	fire_delay =    1
+	can_autofire =  TRUE
+
+/*
+	var/foam_charges_per_shot = 1
+	var/obj/item/sealant_tank/loaded_tank
+
+/obj/item/gun/cannon/sealant/on_update_icon()
+	update_world_inventory_state()
+	cut_overlays()
+	if(loaded_tank)
+		add_overlay("[icon_state]-tank")
+
+/obj/item/gun/cannon/sealant/apply_overlays(mob/user_mob, bodytype, image/overlay, slot)
+	. = ..()
+	if(loaded_tank)
+		overlay.overlays += image(icon, "[overlay.icon_state]-tank")
+
+/obj/item/gun/cannon/sealant/mapped
+	loaded_tank = /obj/item/sealant_tank/mapped
+
+/obj/item/gun/cannon/sealant/consume_next_projectile(mob/user)
+	if(loaded_tank?.foam_charges >= foam_charges_per_shot)
+		loaded_tank.foam_charges -= foam_charges_per_shot
+		. = new /obj/item/clothing/sealant(src)
+
+/obj/item/gun/cannon/sealant/Initialize()
+	. = ..()
+	if(ispath(loaded_tank))
+		loaded_tank = new loaded_tank(src)	
+	update_icon()
+
+/obj/item/gun/cannon/sealant/Destroy()
+	QDEL_NULL(loaded_tank)
+	. = ..()
+
+/obj/item/gun/cannon/sealant/examine(mob/user, distance)
+	. = ..()
+	if(loc == user)
+		if(loaded_tank)
+			to_chat(user, SPAN_NOTICE("The loaded tank has about [loaded_tank.foam_charges] liter\s of sealant left."))
+		else
+			to_chat(user, SPAN_WARNING("\The [src] has no sealant loaded."))
+
+/obj/item/gun/cannon/sealant/proc/unload_tank(var/mob/user)
+	if(!loaded_tank)
+		to_chat(user, SPAN_WARNING("\The [src] has no tank loaded."))
+		return
+
+	loaded_tank.dropInto(get_turf(src))
+	user.put_in_hands(loaded_tank)
+	to_chat(user, SPAN_NOTICE("You pop \the [loaded_tank] out of \the [src]."))
+	loaded_tank = null
+	update_icon()
+*/
 
 /obj/item/firearm_component/receiver/launcher/grenade
 	throw_distance = 7
 	release_force = 5
+
+/*
+	var/obj/item/grenade/chambered
+	var/list/grenades = new/list()
+	var/max_grenades = 5 //holds this + one in the chamber
+	var/whitelisted_grenades = list(
+		/obj/item/grenade/frag/shell)
+
+	var/blacklisted_grenades = list(
+		/obj/item/grenade/flashbang/clusterbang,
+		/obj/item/grenade/frag)
+
+	material = /decl/material/solid/metal/steel
+
+//revolves the magazine, allowing players to choose between multiple grenade types
+/obj/item/gun/long/grenade/proc/pump(mob/M)
+	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
+
+	var/obj/item/grenade/next
+	if(grenades.len)
+		next = grenades[1] //get this first, so that the chambered grenade can still be removed if the grenades list is empty
+	if(chambered)
+		grenades += chambered //rotate the revolving magazine
+		chambered = null
+	if(next)
+		grenades -= next //Remove grenade from loaded list.
+		chambered = next
+		to_chat(M, "<span class='warning'>You pump [src], loading \a [next] into the chamber.</span>")
+	else
+		to_chat(M, "<span class='warning'>You pump [src], but the magazine is empty.</span>")
+	update_icon()
+
+/obj/item/gun/long/grenade/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 2)
+		var/grenade_count = grenades.len + (chambered? 1 : 0)
+		to_chat(user, "Has [grenade_count] grenade\s remaining.")
+		if(chambered)
+			to_chat(user, "\A [chambered] is chambered.")
+
+/obj/item/gun/long/grenade/proc/load(obj/item/grenade/G, mob/user)
+	if(!can_load_grenade_type(G, user))
+		return
+
+	if(grenades.len >= max_grenades)
+		to_chat(user, "<span class='warning'>\The [src] is full.</span>")
+		return
+	if(!user.unEquip(G, src))
+		return
+	grenades.Insert(1, G) //add to the head of the list, so that it is loaded on the next pump
+	user.visible_message("\The [user] inserts \a [G] into \the [src].", "<span class='notice'>You insert \a [G] into \the [src].</span>")
+
+/obj/item/gun/long/grenade/proc/unload(mob/user)
+	if(grenades.len)
+		var/obj/item/grenade/G = grenades[grenades.len]
+		grenades.len--
+		user.put_in_hands(G)
+		user.visible_message("\The [user] removes \a [G] from [src].", "<span class='notice'>You remove \a [G] from \the [src].</span>")
+	else
+		to_chat(user, "<span class='warning'>\The [src] is empty.</span>")
+
+/obj/item/gun/long/grenade/consume_next_projectile()
+	if(chambered)
+		chambered.det_time = 10
+		chambered.activate(null)
+	return chambered
+
+/obj/item/gun/long/grenade/handle_post_fire(mob/user)
+	log_and_message_admins("fired a grenade ([chambered.name]) from a grenade launcher.")
+
+	chambered = null
+	..()
+
+/obj/item/gun/long/grenade/proc/can_load_grenade_type(obj/item/grenade/G, mob/user)
+	if(is_type_in_list(G, blacklisted_grenades) && ! is_type_in_list(G, whitelisted_grenades))
+		to_chat(user, "<span class='warning'>\The [G] doesn't seem to fit in \the [src]!</span>")
+		return FALSE
+	return TRUE
+
+// For uplink purchase, comes loaded with a random assortment of grenades
+/obj/item/gun/long/grenade/loaded/Initialize()
+	. = ..()
+
+	var/list/grenade_types = list(
+		/obj/item/grenade/anti_photon = 2,
+		/obj/item/grenade/smokebomb = 2,
+		/obj/item/grenade/chem_grenade/teargas = 2,
+		/obj/item/grenade/flashbang = 3,
+		/obj/item/grenade/empgrenade = 3,
+		/obj/item/grenade/frag/shell = 1,
+		)
+
+	var/grenade_type = pickweight(grenade_types)
+	chambered = new grenade_type(src)
+	for(var/i in 1 to max_grenades)
+		grenade_type = pickweight(grenade_types)
+		grenades += new grenade_type(src)
+
+//Underslung grenade launcher to be used with the Z8
+/obj/item/gun/long/grenade/underslung
+	name = "underslung grenade launcher"
+	desc = "Not much more than a tube and a firing mechanism, this grenade launcher is designed to be fitted to a rifle."
+	w_class = ITEM_SIZE_NORMAL
+	force = 5
+	max_grenades = 0
+
+//load and unload directly into chambered
+/obj/item/gun/long/grenade/underslung/load(obj/item/grenade/G, mob/user)
+	if(!can_load_grenade_type(G, user))
+		return
+
+	if(chambered)
+		to_chat(user, "<span class='warning'>\The [src] is already loaded.</span>")
+		return
+	if(!user.unEquip(G, src))
+		return
+	chambered = G
+	user.visible_message("\The [user] load \a [G] into \the [src].", "<span class='notice'>You load \a [G] into \the [src].</span>")
+
+/obj/item/gun/long/grenade/underslung/unload(mob/user)
+	if(chambered)
+		user.put_in_hands(chambered)
+		user.visible_message("\The [user] removes \a [chambered] from \the[src].", "<span class='notice'>You remove \a [chambered] from \the [src].</span>")
+		chambered = null
+	else
+		to_chat(user, "<span class='warning'>\The [src] is empty.</span>")
+*/
 
 /obj/item/firearm_component/receiver/launcher/rocket
 	release_force = 15
@@ -262,10 +445,12 @@
 
 /obj/item/firearm_component/receiver/launcher/foam/smg
 	max_darts = 4
-
+	burst = 2
+	fire_delay = 12
 
 /obj/item/firearm_component/receiver/launcher/foam/revolver
 	max_darts = 6
+	fire_delay = 4
 
 /obj/item/firearm_component/receiver/launcher/foam/revolver/tampered
 	release_force = 3
@@ -280,6 +465,7 @@
 
 
 /obj/item/firearm_component/receiver/launcher/pneumatic
+	fire_delay = 50
 	var/fire_pressure                           // Used in fire checks/pressure checks.
 	var/max_w_class = ITEM_SIZE_NORMAL          // Hopper intake size.
 	var/max_storage_space = DEFAULT_BOX_STORAGE // Total internal storage size.
@@ -396,6 +582,7 @@
 	max_w_class = ITEM_SIZE_TINY
 
 /obj/item/firearm_component/receiver/launcher/money
+	fire_delay = 1
 	release_force = 80
 	var/emagged = 0
 	var/receptacle_value = 0

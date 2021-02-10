@@ -17,8 +17,10 @@
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
 
-	var/firearm_frame_subtype
+	var/firearm_frame_subtype = /obj/item/gun
 
+	var/total_firearm_accuracy =         0
+	var/total_firearm_accuracy_power =   0
 	var/total_firearm_bulk =             0 // How unwieldy this weapon for its size, affects accuracy when fired without aiming.
 	var/total_firearm_one_hand_penalty = 0
 	var/total_firearm_screen_shake =     0 // shouldn't be greater than 2 unless zoomed
@@ -29,6 +31,26 @@
 	var/obj/item/firearm_component/barrel/barrel
 	var/obj/item/firearm_component/stock/stock
 	var/obj/item/firearm_component/grip/grip
+
+/obj/item/gun/Destroy()
+	var/list/firearm_components = get_modular_component_list()
+	for(var/fcomp in firearm_components)
+		var/obj/item/firearm_component/comp = firearm_components[fcomp]
+		if(istype(comp))
+			qdel(comp)
+	. = ..()
+
+/obj/item/gun/physically_destroyed(skip_qdel)
+	var/list/firearm_components = get_modular_component_list()
+	for(var/fcomp in firearm_components)
+		var/obj/item/firearm_component/comp = firearm_components[fcomp]
+		if(istype(comp))
+			comp.uninstalled()
+			if(prob(75))
+				comp.dropInto(loc)
+			else
+				comp.physically_destroyed(FALSE)
+	. = ..()
 
 /obj/item/gun/Initialize()
 
@@ -54,32 +76,42 @@
 /obj/item/gun/proc/check_projectile_size_against_barrel(var/obj/item/projectile/projectile)
 	return barrel.get_relative_projectile_size(projectile)
 
-/obj/item/gun/proc/update_from_components()
-
+/obj/item/gun/proc/reset_firearm_values()
+	edge =                           initial(edge)
+	sharp =                          initial(sharp)
+	force =                          initial(force)
+	w_class =                        initial(w_class)
 	total_firearm_one_hand_penalty = initial(total_firearm_one_hand_penalty)
 	total_firearm_bulk =             initial(total_firearm_bulk)
+	total_firearm_screen_shake =     initial(total_firearm_screen_shake)
+	total_firearm_space_recoil =     initial(total_firearm_space_recoil)
+	total_firearm_combustion =       initial(total_firearm_combustion)
+	total_firearm_accuracy_power =   initial(total_firearm_accuracy_power)
+	total_firearm_accuracy =         initial(total_firearm_accuracy)
+	verbs -= /obj/item/gun/proc/scope
 
-	edge =    initial(edge)
-	sharp =   initial(sharp)
-	force =   initial(force)
-	w_class = initial(w_class)
+/obj/item/gun/proc/take_component_values(var/obj/item/firearm_component/comp)
+	total_firearm_one_hand_penalty = max(total_firearm_one_hand_penalty, comp.one_hand_penalty)
+	total_firearm_bulk =             max(total_firearm_bulk,             comp.bulk)
+	total_firearm_screen_shake =     max(total_firearm_screen_shake,     comp.screen_shake)
+	total_firearm_space_recoil =     max(total_firearm_space_recoil,     comp.space_recoil)
+	total_firearm_combustion =       max(total_firearm_combustion,       comp.combustion)
+	total_firearm_accuracy_power =   max(total_firearm_accuracy_power,   comp.accuracy_power)
+	total_firearm_accuracy =         max(total_firearm_accuracy,         comp.accuracy)
+	force =                          max(force,                          comp.force)
+	edge =                           max(edge,                           comp.edge)
+	sharp =                          max(sharp,                          comp.sharp)
+	w_class =                        max(w_class,                        comp.w_class)
 
+/obj/item/gun/proc/update_from_components()
+	reset_firearm_values()
 	var/list/firearm_components = get_modular_component_list()
 	for(var/fcomp in firearm_components)
 		var/obj/item/firearm_component/comp = firearm_components[fcomp]
 		if(istype(comp))
-			total_firearm_one_hand_penalty = max(total_firearm_one_hand_penalty, comp.one_hand_penalty)
-			total_firearm_bulk =             max(total_firearm_bulk, comp.bulk)
-			force =            max(force,   comp.force)
-			edge =             max(edge,    comp.edge)
-			sharp =            max(sharp,   comp.sharp)
-			w_class =          max(w_class, comp.w_class)
-
-	total_firearm_screen_shake = max(max(initial(total_firearm_screen_shake), receiver?.screen_shake), barrel?.screen_shake)
-	total_firearm_space_recoil = max(max(initial(total_firearm_space_recoil), receiver?.space_recoil), barrel?.space_recoil)
-	total_firearm_combustion =   max(max(initial(total_firearm_combustion),   receiver?.combustion),   barrel?.combustion)
-
-	update_icon()
+			take_component_values(comp)
+			comp.apply_additional_firearm_tweaks(src)
+	queue_icon_update()
 
 /obj/item/gun/emag_act(remaining_charges, mob/user, emag_source)
 	. = ..()
@@ -608,7 +640,7 @@
 			if(I)
 				add_overlay(I)
 	var/mob/user = loc
-	if(src in user.get_held_items())
+	if(istype(user) && (src in user.get_held_items()))
 		user.update_inv_hands()
 
 /*

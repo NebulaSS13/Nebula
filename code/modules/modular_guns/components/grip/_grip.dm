@@ -1,8 +1,17 @@
 /obj/item/firearm_component/grip
-	name = "grip"
-	desc = "A textured grip meant for some kind of firearm."
+	name = "pistol grip"
+	desc = "A textured grip meant for a handgun."
 	icon_state = "world-grip"
 	firearm_component_category = FIREARM_COMPONENT_GRIP
+
+/obj/item/firearm_component/grip/long
+	name = "rifle grip"
+
+/obj/item/firearm_component/grip/staff
+	name = "staff handle"
+
+/obj/item/firearm_component/grip/cannon
+	name = "cannon grip"
 
 /obj/item/firearm_component/grip/proc/is_secured()
 	return FALSE

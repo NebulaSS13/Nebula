@@ -64,13 +64,7 @@
 	name = "syringe gun"
 	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
 	icon = 'icons/obj/guns/launcher/syringe.dmi'
-	icon_state = ICON_STATE_WORLD
-	w_class = ITEM_SIZE_LARGE
-	force = 7
 	material = /decl/material/solid/metal/steel
-	slot_flags = SLOT_LOWER_BODY
-	fire_sound = 'sound/weapons/empty.ogg'
-	fire_sound_text = "a metallic thunk"
 	barrel = /obj/item/firearm_component/barrel/launcher/syringe
 	receiver = /obj/item/firearm_component/receiver/launcher/syringe
 

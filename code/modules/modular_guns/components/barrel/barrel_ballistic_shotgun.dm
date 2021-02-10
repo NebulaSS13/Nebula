@@ -3,6 +3,10 @@
 	one_hand_penalty = 4
 	bulk = 6
 
+/obj/item/firearm_component/barrel/ballistic/shotgun/flaregun
+	fire_sound = 'sound/weapons/empty.ogg'
+	fire_sound_text = "a satisfying 'thump'"
+
 /obj/item/firearm_component/barrel/ballistic/shotgun/double
 	w_class = ITEM_SIZE_HUGE
 	force = 10

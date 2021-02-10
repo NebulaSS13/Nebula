@@ -3,6 +3,8 @@
 	caliber = CALIBER_PISTOL_MAGNUM
 	one_hand_penalty = 2
 	bulk = 3
+	accuracy = 2
+	accuracy_power = 8
 
 /obj/item/firearm_component/barrel/ballistic/revolver/capgun
 	caliber = CALIBER_CAPS

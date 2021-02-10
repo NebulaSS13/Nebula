@@ -5,6 +5,7 @@
 	mag_insert_sound = 'sound/weapons/guns/interaction/rev_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/rev_magout.ogg'
 	safety_icon = "safety"
+	fire_delay = 12 //Revolvers are naturally slower-firing
 	var/chamber_offset = 0 //how many empty chambers in the cylinder until you hit a round
 
 /obj/item/firearm_component/receiver/ballistic/revolver/load_ammo(mob/user, obj/item/loading)

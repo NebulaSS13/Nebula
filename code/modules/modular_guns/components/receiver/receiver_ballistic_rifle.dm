@@ -5,10 +5,12 @@
 	max_shells = 1
 	loaded = /obj/item/ammo_casing/shell
 	load_sound = 'sound/weapons/guns/interaction/rifle_load.ogg'
+	fire_delay = 8
 	var/bolt_open = FALSE
 
 /obj/item/firearm_component/receiver/ballistic/rifle/sniper
 	caliber = CALIBER_ANTIMATERIAL
+	fire_delay = 12
 
 /obj/item/firearm_component/receiver/ballistic/rifle/get_holder_overlay(holder_state)
 	var/image/ret = ..()

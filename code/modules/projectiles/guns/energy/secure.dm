@@ -23,4 +23,4 @@
 	name = "laser carbine"
 	desc = "A G40E carbine, designed to kill with concentrated energy blasts. Fitted with an NT1019 chip to make sure killcount is tracked appropriately."
 	req_access = list(list(access_brig, access_bridge))
-	grip = /obj/item/firearm_component/grip/secure
+	grip = /obj/item/firearm_component/grip/secure/long

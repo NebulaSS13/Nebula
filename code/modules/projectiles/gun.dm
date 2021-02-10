@@ -27,31 +27,14 @@
 	for(var/propname in settings)
 		gun.vars[propname] = settings[propname]
 
-//Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
 /obj/item/gun
-
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/pickup2.ogg'
 
 	var/waterproof = FALSE
-	var/burst = 1
-	var/fire_delay = 6 	//delay after shooting before the gun can be used again. Cannot be less than [burst_delay+1]
-	var/burst_delay = 1	//delay between shots, if firing in bursts
-	var/fire_sound = 'sound/weapons/gunshot/gunshot.ogg'
-	var/fire_sound_text = "gunshot"
-	var/fire_anim = null
-	var/silenced = 0
-	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
-	var/accuracy_power = 5  //increase of to-hit chance per 1 point of accuracy
 	var/last_handled		//time when hand gun's in became active, for purposes of aiming bonuses
-	var/scoped_accuracy = null  //accuracy used when zoomed in a scope
-	var/scope_zoom = 0
-	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
-	var/list/dispersion = list(0)
-
-	var/next_fire_time = 0
-
 	//aiming system stuff
+	var/fire_anim = null
 	var/keep_aim = 1 	//1 for keep shooting until aim is lowered
 						//0 for one bullet after tarrget moves and aim is lowered
 	var/multi_aim = 0 //Used to determine if you can target multiple people.
@@ -68,13 +51,6 @@
 	// Spam prevention
 	var/last_fire_message_type
 	var/last_fire_message_time
-
-/obj/item/gun/Initialize()
-	. = ..()
-	if(isnull(scoped_accuracy))
-		scoped_accuracy = accuracy
-	if(scope_zoom)
-		verbs += /obj/item/gun/proc/scope
 
 /obj/item/gun/Destroy()
 	// autofire timer is automatically cleaned up
@@ -225,21 +201,20 @@
 				return
 		receiver.last_safety_check = world.time
 
-	if(world.time < next_fire_time)
+	if(world.time < receiver.next_fire_time)
 		if (world.time % 3) //to prevent spam
 			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
 		return
 
-	if(set_click_cooldown)
-		var/shoot_time = (burst - 1) * burst_delay
-		user.setClickCooldown(shoot_time) //no clicking on things while shooting
-		next_fire_time = world.time + shoot_time
+	var/shoot_time = (receiver.burst - 1) * receiver.burst_delay
+	user.setClickCooldown(shoot_time) //no clicking on things while shooting
+	receiver.next_fire_time = world.time + shoot_time
 
 	var/held_twohanded = (user.can_wield_item(src) && src.is_held_twohanded(user))
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
-	for(var/i in 1 to burst)
+	for(var/i in 1 to receiver.burst)
 		var/obj/projectile = consume_next_projectile(user)
 		if(!projectile)
 			handle_click_empty()
@@ -254,18 +229,18 @@
 			handle_post_fire(user, target, pointblank, reflex, projectile)
 			update_icon()
 
-		if(i < burst)
-			sleep(burst_delay)
+		if(i < receiver.burst)
+			sleep(receiver.burst_delay)
 
 		if(!(target && target.loc))
 			target = targloc
 			pointblank = 0
 
 	//update timing
-	var/delay = min(max(burst_delay+1, fire_delay), DEFAULT_QUICK_COOLDOWN)
+	var/delay = min(max(receiver.burst_delay+1, receiver.fire_delay), DEFAULT_QUICK_COOLDOWN)
 	if(delay)
 		user.setClickCooldown(delay)
-	next_fire_time = world.time + delay
+	receiver.next_fire_time = world.time + delay
 
 //obtains the next projectile to fire
 /obj/item/gun/proc/consume_next_projectile(var/mob/user)
@@ -297,15 +272,15 @@
 	if(fire_anim)
 		flick(fire_anim, src)
 
-	if(!silenced && check_fire_message_spam("fire"))
+	if(!barrel.silenced && check_fire_message_spam("fire"))
 		var/user_message = SPAN_WARNING("You fire \the [src][pointblank ? " point blank":""] at \the [target][reflex ? " by reflex" : ""]!")
-		if (silenced)
+		if(barrel.silenced)
 			to_chat(user, user_message)
 		else
 			user.visible_message(
 				SPAN_DANGER("\The [user] fires \the [src][pointblank ? " point blank":""] at \the [target][reflex ? " by reflex" : ""]!"),
 				user_message,
-				SPAN_DANGER("You hear a [fire_sound_text]!")
+				SPAN_DANGER("You hear a [barrel.fire_sound_text]!")
 			)
 
 		if (pointblank && ismob(target))
@@ -336,7 +311,7 @@
 					to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
 
 	if(total_firearm_screen_shake)
-		shake_camera(user, max(burst_delay*burst, fire_delay), total_firearm_screen_shake)
+		shake_camera(user, max(receiver.burst_delay * receiver.burst, receiver.fire_delay), total_firearm_screen_shake)
 
 	if(total_firearm_combustion)
 		var/turf/curloc = get_turf(src)
@@ -384,8 +359,8 @@
 	if(!istype(P))
 		return //default behaviour only applies to true projectiles
 
-	var/acc_mod = burst_accuracy[min(burst, burst_accuracy.len)]
-	var/disp_mod = dispersion[min(burst, dispersion.len)]
+	var/acc_mod = barrel.burst_accuracy[min(burst, length(barrel.burst_accuracy))]
+	var/disp_mod = barrel.dispersion[min(burst, length(barrel.dispersion))]
 	var/stood_still = last_handled
 	//Not keeping gun active will throw off aim (for non-Masters)
 	if(user.skill_check(SKILL_WEAPONS, SKILL_PROF))
@@ -395,7 +370,7 @@
 
 	stood_still = max(0,round((world.time - stood_still)/10) - 1)
 	if(stood_still)
-		acc_mod += min(max(3, accuracy), stood_still)
+		acc_mod += min(max(3, total_firearm_accuracy), stood_still)
 	else
 		acc_mod -= w_class - ITEM_SIZE_NORMAL
 		acc_mod -= total_firearm_bulk
@@ -416,8 +391,8 @@
 		acc_mod += 2
 
 	acc_mod += user.ranged_accuracy_mods()
-	acc_mod += accuracy
-	P.hitchance_mod = accuracy_power*acc_mod
+	acc_mod += total_firearm_accuracy
+	P.hitchance_mod = total_firearm_accuracy_power*acc_mod
 	P.dispersion = disp_mod
 
 //does the actual launching of the projectile
@@ -448,12 +423,12 @@
 	return launched
 
 /obj/item/gun/proc/play_fire_sound(var/mob/user, var/obj/item/projectile/P)
-	var/shot_sound = fire_sound
+	var/shot_sound = barrel.fire_sound
 	var/shot_sound_vol = 50
 	if((istype(P) && P.fire_sound))
 		shot_sound = P.fire_sound
 		shot_sound_vol = P.fire_sound_vol
-	if(silenced)
+	if(barrel.silenced)
 		shot_sound_vol = 10
 
 	playsound(user, shot_sound, shot_sound_vol, 1)
@@ -482,8 +457,8 @@
 	var/obj/item/projectile/in_chamber = consume_next_projectile()
 	if (istype(in_chamber))
 		user.visible_message("<span class = 'warning'>[user] pulls the trigger.</span>")
-		var/shot_sound = in_chamber.fire_sound? in_chamber.fire_sound : fire_sound
-		if(silenced)
+		var/shot_sound = in_chamber.fire_sound? in_chamber.fire_sound : barrel.fire_sound
+		if(barrel.silenced)
 			playsound(user, shot_sound, 10, 1)
 		else
 			playsound(user, shot_sound, 50, 1)
@@ -514,7 +489,7 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, scope_zoom)
+	toggle_scope(usr, barrel.scope_zoom)
 
 /obj/item/gun/proc/toggle_scope(mob/user, var/zoom_amount=2.0)
 	//looking through a scope limits your periphereal vision
@@ -528,18 +503,20 @@
 
 	zoom(user, zoom_offset, view_size)
 	if(zoom)
-		accuracy = scoped_accuracy
+		total_firearm_accuracy = barrel.scoped_accuracy
 		if(user.skill_check(SKILL_WEAPONS, SKILL_PROF))
-			accuracy += 2
+			total_firearm_accuracy += 2
 		if(total_firearm_screen_shake)
 			total_firearm_screen_shake = round(total_firearm_screen_shake*zoom_amount+1) //screen shake is worse when looking through a scope
 
 //make sure accuracy and screen_shake are reset regardless of how the item is unzoomed.
+/*
 /obj/item/gun/zoom()
 	..()
 	if(!zoom)
 		accuracy = initial(accuracy)
 		update_from_components()
+*/
 
 /obj/item/gun/CtrlClick(var/mob/user)
 	if(loc == user)
@@ -570,7 +547,7 @@
 	clear_autofire()
 
 /obj/item/gun/proc/can_autofire()
-	return (autofire_enabled && world.time >= next_fire_time)
+	return (receiver && receiver.can_autofire && world.time >= receiver.next_fire_time)
 
 /obj/item/gun/proc/check_accidents(mob/living/user, message = "[user] fumbles with the [src] and it goes off!",skill_path = SKILL_WEAPONS, fail_chance = 20, no_more_fail = SKILL_EXPERT, factor = 2)
 	if(istype(user) && !receiver?.safety() && user.skill_fail_prob(skill_path, fail_chance, no_more_fail, factor) && special_check(user))

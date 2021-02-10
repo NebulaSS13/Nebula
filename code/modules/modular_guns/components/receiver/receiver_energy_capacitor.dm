@@ -1,5 +1,7 @@
 /obj/item/firearm_component/receiver/energy/capacitor
 	cell_type = /obj/item/cell/high
+	fire_delay = 10
+
 	var/max_capacitors = 2
 	var/wiring_color = COLOR_CYAN_BLUE
 	var/list/capacitors = /obj/item/stock_parts/capacitor
@@ -11,6 +13,7 @@
 /obj/item/firearm_component/receiver/energy/capacitor/rifle
 	cell_type = /obj/item/cell/super
 	max_capacitors = 4
+	fire_delay = 20
 
 /obj/item/firearm_component/receiver/energy/capacitor/rifle/lfr
 	cell_type = /obj/item/cell/infinite

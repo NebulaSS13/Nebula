@@ -45,8 +45,8 @@
 		installed_gun = gun
 		to_chat(user, "<span class='notice'>You slide \the [gun] into the firing mechanism.</span>")
 		playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
-		if(installed_gun.fire_delay)
-			cooldown_per_use = installed_gun.fire_delay * 10
+		if(installed_gun.receiver?.fire_delay)
+			cooldown_per_use = installed_gun.receiver.fire_delay * 10
 		if(cooldown_per_use < 30)
 			cooldown_per_use = 30 //If there's no defined fire delay let's put some
 		if(istype(installed_gun.barrel, /obj/item/firearm_component/receiver/energy))

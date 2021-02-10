@@ -35,22 +35,12 @@
 /obj/item/gun/cannon/laser
 	name = "laser cannon"
 	desc = "With the laser cannon, the lasing medium is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with small laser volumes!"
-	icon_state = "lasercannon"
 	icon = 'icons/obj/guns/laser_cannon.dmi'
-	icon_state = ICON_STATE_WORLD
-	origin_tech = "{'combat':4,'materials':3,'powerstorage':3}"
-	slot_flags = SLOT_LOWER_BODY|SLOT_BACK
-	w_class = ITEM_SIZE_HUGE
-	accuracy = 2
-	fire_delay = 20
 	material = /decl/material/solid/metal/steel
+	barrel = /obj/item/firearm_component/barrel/energy/laser/cannon
 	receiver = /obj/item/firearm_component/receiver/energy/laser/cannon
-	matter = list(
-		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
-	)
 
 /obj/item/gun/cannon/laser/mounted
 	name = "mounted laser cannon"
-	accuracy = 0 //mounted laser cannons don't need any help, thanks
+	barrel = /obj/item/firearm_component/barrel/energy/laser/cannon/mounted
 	receiver = /obj/item/firearm_component/receiver/energy/laser/cannon/mounted

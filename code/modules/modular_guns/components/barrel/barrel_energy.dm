@@ -36,6 +36,7 @@
 
 /obj/item/firearm_component/barrel/energy/plasmacutter
 	projectile_type = /obj/item/projectile/beam/plasmacutter
+	fire_sound = 'sound/weapons/plasma_cutter.ogg'
 
 /obj/item/firearm_component/barrel/energy/plasmacutter/mounted
 
@@ -55,6 +56,10 @@
 	projectile_type = /obj/item/projectile/beam/heavylaser
 	one_hand_penalty = 6 //large and heavy
 	charge_cost = 40
+	accuracy = 2
+
+ /obj/item/firearm_component/barrel/energy/laser/cannon/mounted
+ 	accuracy = 0 //mounted laser cannons don't need any help, thanks
 
 /obj/item/firearm_component/barrel/energy/laser/antique
 	projectile_type = /obj/item/projectile/beam
@@ -99,6 +104,61 @@
 /obj/item/firearm_component/barrel/energy/chameleon
 	projectile_type = /obj/item/projectile/chameleon
 	charge_cost = 20 //uses next to no power, since it's just holograms
+	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
+
+/*
+	var/obj/item/projectile/copy_projectile
+	var/global/list/gun_choices
+
+/obj/item/gun/hand/chameleon/Initialize()
+	. = ..()
+	if(!gun_choices)
+		gun_choices = generate_chameleon_choices(/obj/item/gun)
+
+/obj/item/gun/hand/chameleon/consume_next_projectile()
+	var/obj/item/projectile/P = ..()
+	if(P && ispath(copy_projectile))
+		P.SetName(initial(copy_projectile.name))
+		P.icon = initial(copy_projectile.icon)
+		P.icon_state = initial(copy_projectile.icon_state)
+		P.pass_flags = initial(copy_projectile.pass_flags)
+		P.hitscan = initial(copy_projectile.hitscan)
+		P.step_delay = initial(copy_projectile.step_delay)
+		P.muzzle_type = initial(copy_projectile.muzzle_type)
+		P.tracer_type = initial(copy_projectile.tracer_type)
+		P.impact_type = initial(copy_projectile.impact_type)
+	return P
+
+/obj/item/gun/hand/chameleon/OnDisguise(var/obj/item/gun/copy)
+	if(!istype(copy))
+		return
+
+	flags_inv = copy.flags_inv
+	fire_sound = copy.fire_sound
+	fire_sound_text = copy.fire_sound_text
+	icon = copy.icon
+
+	copy_projectile = null
+	var/obj/item/gun/E = copy
+	if(istype(E))
+		copy_projectile = E.get_projectile_type()
+
+/obj/item/gun/hand/chameleon/verb/change(picked in gun_choices)
+	set name = "Change Gun Appearance"
+	set category = "Chameleon Items"
+	set src in usr
+
+	if (!(usr.incapacitated()))
+		if(!ispath(gun_choices[picked]))
+			return
+
+		disguise(gun_choices[picked], usr)
+
+	//so our overlays update.
+	if (ismob(src.loc))
+		var/mob/M = src.loc
+		M.update_inv_hands()
+*/
 
 /obj/item/firearm_component/barrel/energy/radpistol
 	projectile_type = /obj/item/projectile/energy/radiation
@@ -123,6 +183,9 @@
 	projectile_type = /obj/item/projectile/beam/sniper
 	one_hand_penalty = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	charge_cost = 40
+	accuracy = -2 //shooting at the hip
+	scoped_accuracy = 9
+	scope_zoom = 2
 
 /obj/item/firearm_component/barrel/energy/lasertag
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
@@ -135,11 +198,13 @@
 
 /obj/item/firearm_component/barrel/energy/pulse
 	projectile_type = /obj/item/projectile/beam/pulse
+	accuracy = -1
 
 /obj/item/firearm_component/barrel/energy/temperature
 	one_hand_penalty = 2
 	charge_cost = 10
 	projectile_type = /obj/item/projectile/temp
+	fire_sound = 'sound/weapons/pulse3.ogg'
 	var/firing_temperature = T20C
 	var/current_temperature = T20C
 

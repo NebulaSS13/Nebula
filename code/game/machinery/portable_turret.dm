@@ -94,10 +94,6 @@
 	. = ..()
 
 /obj/machinery/porta_turret/proc/setup()
-	var/obj/item/gun/E = installation
-	shot_sound = initial(E.fire_sound)
-	eshot_sound = shot_sound
-
 	weapon_setup(installation)
 
 /obj/machinery/porta_turret/proc/weapon_setup(var/guntype)
@@ -258,6 +254,8 @@ var/global/list/turret_icons
 						var/obj/item/gun/Gun = new installation(loc)
 						projectile = Gun.get_projectile_type()
 						eprojectile = projectile
+						shot_sound = Gun.barrel?.fire_sound
+						eshot_sound = shot_sound
 						var/obj/item/firearm_component/receiver/energy/rec = Gun.receiver
 						if(istype(rec) && rec.power_supply) 
 							rec.power_supply.charge = gun_charge

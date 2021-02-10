@@ -49,8 +49,6 @@ var/global/list/laser_wavelengths
 	icon_state = ICON_STATE_WORLD
 	origin_tech = "{'combat':4,'materials':4,'powerstorage':4}"
 	w_class = ITEM_SIZE_NORMAL
-	accuracy = 2
-	fire_delay = 10
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -65,9 +63,6 @@ var/global/list/laser_wavelengths
 	name = "capacitor rifle"
 	desc = "A heavy, unwieldly directed energy weapon that uses a linear capacitor array to charge a powerful beam."
 	icon = 'icons/obj/guns/capacitor_rifle.dmi'
-	slot_flags = SLOT_BACK
-	fire_delay = 20
-	w_class = ITEM_SIZE_HUGE
 	barrel = /obj/item/firearm_component/barrel/energy/capacitor/rifle
 	receiver = /obj/item/firearm_component/receiver/energy/capacitor/rifle
 

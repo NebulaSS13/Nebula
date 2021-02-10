@@ -39,7 +39,7 @@
 	path = /obj/item/gun/long/grenade
 
 /datum/fabricator_recipe/protolathe/weapon/flechette
-	path = /obj/item/gun/long/railgun/flechette
+	path = /obj/item/gun/cannon/flechette
 
 /datum/fabricator_recipe/protolathe/weapon/radpistol
 	path = /obj/item/gun/hand/radpistol

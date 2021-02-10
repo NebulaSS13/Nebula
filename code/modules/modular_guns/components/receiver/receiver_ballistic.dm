@@ -251,6 +251,7 @@
 
 // Subtypes
 /obj/item/firearm_component/receiver/ballistic/cycle
+	burst_delay = 0
 	loaded = /obj/item/ammo_casing/shotgun/beanbag
 	load_method = SINGLE_CASING|SPEEDLOADER
 	handle_casings = CYCLE_CASINGS
@@ -277,6 +278,7 @@
 	ammo_magazine = /obj/item/ammo_magazine/pistol/small
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small
 	ammo_indicator = FALSE
+	fire_delay = 4
 
 /obj/item/firearm_component/receiver/ballistic/zipgun
 	handle_casings = CYCLE_CASINGS
@@ -286,3 +288,25 @@
 
 /obj/item/firearm_component/receiver/ballistic/get_projectile_type()
 	return chambered?.BB?.type
+
+/*
+	var/global/list/ammo_types = list(
+		/obj/item/ammo_casing/pistol,
+		/obj/item/ammo_casing/shotgun,
+		/obj/item/ammo_casing/shotgun,
+		/obj/item/ammo_casing/shotgun/pellet,
+		/obj/item/ammo_casing/shotgun/pellet,
+		/obj/item/ammo_casing/shotgun/pellet,
+		/obj/item/ammo_casing/shotgun/beanbag ,
+		/obj/item/ammo_casing/shotgun/stunshell,
+		/obj/item/ammo_casing/shotgun/flash,
+		/obj/item/ammo_casing/rifle,
+		/obj/item/ammo_casing/rifle
+		)
+
+/obj/item/gun/hand/zipgun/Initialize()
+	. = ..()
+	var/obj/item/ammo_casing/ammo = pick(ammo_types)
+	set_caliber(initial(ammo.caliber))
+	desc += " Uses [get_load_caliber() || "unmarked"] rounds."
+*/

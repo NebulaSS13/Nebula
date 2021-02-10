@@ -23,7 +23,6 @@
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	origin_tech = "{'combat':3,'materials':1}"
-	burst_delay = 0
 
 /obj/item/gun/long/shotgun/doublebarrel/sawn
 	name = "sawn-off shotgun"

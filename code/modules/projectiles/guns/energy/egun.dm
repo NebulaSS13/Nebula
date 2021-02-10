@@ -3,7 +3,6 @@
 	name = "energy gun"
 	desc = "Another bestseller of Lawson Arms and the FTU, the LAEP90 Perun is a versatile energy based sidearm, capable of switching between low, medium and high power projectile settings. In other words: stun, shock or kill."
 	icon = 'icons/obj/guns/energy_gun.dmi'
-	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
 	barrel = /obj/item/firearm_component/barrel/energy/sidearm
 	receiver = /obj/item/firearm_component/receiver/energy/sidearm
 

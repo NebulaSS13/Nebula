@@ -162,12 +162,16 @@
 
 /obj/item/firearm_component/receiver/energy/sniper
 	max_shots = 4
+	fire_delay = 35
 
 /obj/item/firearm_component/receiver/energy/pulse
 	indicator_color = COLOR_LUMINOL
 	max_shots = 21
 	one_hand_penalty=1 //a bit heavy
 	bulk = 0
+	burst_delay = 1
+	burst_delay = 3
+	burst = 3
 
 /obj/item/firearm_component/receiver/energy/lasertag
 	self_recharge = 1

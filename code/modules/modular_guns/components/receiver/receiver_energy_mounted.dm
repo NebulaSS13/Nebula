@@ -12,6 +12,7 @@
 	use_external_power = TRUE
 	has_safety = FALSE
 	self_recharge = TRUE
+	fire_delay = 30
 
 /obj/item/firearm_component/receiver/energy/laser/mech
 	use_external_power = TRUE
