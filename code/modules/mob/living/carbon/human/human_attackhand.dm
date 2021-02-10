@@ -129,6 +129,7 @@
 				to_chat(H, "<span class='notice'>You can't attack again so soon.</span>")
 				return TRUE
 			else
+				last_handled_by_mob = weakref(H)
 				H.last_attack = world.time
 
 			if(!affecting || affecting.is_stump())
