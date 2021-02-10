@@ -113,8 +113,9 @@
 		return program.can_run(user, program.computer.get_network())
 	return 1
 
-/datum/nano_module/program/comm/proc/get_shunt(var/compz) //this is so, so janky, but since modular computers have no PHYSICAL REFERENCE, needs must.
-	var/obj/effect/overmap/visitable/ship/sector = map_sectors["[compz]"]
+/datum/nano_module/program/comm/proc/get_shunt()
+	var/obj/comp = program.computer.get_physical_host()
+	var/obj/effect/overmap/visitable/ship/sector = map_sectors["[comp.z]"]
 	if(!sector)
 		return FALSE
 
@@ -208,7 +209,7 @@
 					return
 				if (selected_evac_option.needs_syscontrol && !ntn_cont)
 					return
-				if (selected_evac_option.requires_shunt && !get_shunt(program.computer.get_physical_host().z))
+				if (selected_evac_option.requires_shunt && !get_shunt())
 					return
 				var/confirm = alert("Are you sure you want to [selected_evac_option.option_desc]?", name, "No", "Yes")
 				if (confirm == "Yes" && can_still_topic())
