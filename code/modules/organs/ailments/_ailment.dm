@@ -23,7 +23,7 @@
 	var/third_person_treatement_message = "$USER$ treats $TARGET$'s ailment with $ITEM$." // Shown when treating other with an item.
 	var/self_treatement_message = "$USER$ treats $USER_HIS$ ailment with $ITEM$."         // Shown when treating self with an item.
 	var/medication_treatment_message = "Your ailment abates."                             // Shown when treated by a metabolized reagent.
-	var/diagnosis_string  /* ex: "$USER_HIS$ $ORGAN$ has something wrong with it" */        // Shown when grab-diagnosed by a doctor. Leave null to be undiagnosable.
+	var/diagnosis_string  /* ex: "$USER_HIS$ $ORGAN$ has something wrong with it" */      // Shown when grab-diagnosed by a doctor. Leave null to be undiagnosable.
 
 /datum/ailment/New(var/obj/item/organ/_organ)
 	..()
