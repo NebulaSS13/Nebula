@@ -28,13 +28,14 @@
 #define R_POSSESS       BITFLAG(6)
 #define R_PERMISSIONS   BITFLAG(7)
 #define R_STEALTH       BITFLAG(8)
-#define R_REJUVINATE    BITFLAG(9)
+#define R_REJUVENATE    BITFLAG(9)
 #define R_VAREDIT       BITFLAG(10)
 #define R_SOUNDS        BITFLAG(11)
 #define R_SPAWN         BITFLAG(12)
 #define R_MOD           BITFLAG(13)
 #define R_HOST          BITFLAG(14)
 #define R_INVESTIGATE   (R_ADMIN|R_MOD)
+#define R_EVERYTHING    (~0)
 
 #define R_MAXPERMISSION BITFLAG(14) // This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
