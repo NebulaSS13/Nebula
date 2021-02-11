@@ -11,7 +11,7 @@ var/global/list/empty_playable_ai_cores = list()
 
 	var/datum/ai_laws/laws
 	var/obj/item/stock_parts/circuitboard/circuit
-	var/obj/item/mmi/brain
+	var/obj/item/brain_interface/brain
 	var/authorized
 
 	var/circuit_secured = FALSE
@@ -138,10 +138,10 @@ var/global/list/empty_playable_ai_cores = list()
 
 				if(circuit && circuit_secured)
 
-					if((istype(P, /obj/item/mmi) || istype(P, /obj/item/organ/internal/posibrain)) && wired && circuit && circuit_secured)
+					if((istype(P, /obj/item/brain_interface) || istype(P, /obj/item/organ/internal/posibrain)) && wired && circuit && circuit_secured)
 						var/mob/living/brain/B
-						if(istype(P, /obj/item/mmi))
-							var/obj/item/mmi/M = P
+						if(istype(P, /obj/item/brain_interface))
+							var/obj/item/brain_interface/M = P
 							B = M.holding_brain?.brainmob
 						else
 							var/obj/item/organ/internal/posibrain/PB = P

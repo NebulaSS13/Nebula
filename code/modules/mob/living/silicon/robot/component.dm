@@ -1,4 +1,4 @@
-// TODO: remove the robot.mmi and robot.cell variables and completely rely on the robot component system
+// TODO: remove the robot.brain and robot.cell variables and completely rely on the robot component system
 
 /datum/robot_component/var/name
 /datum/robot_component/var/installed = 0

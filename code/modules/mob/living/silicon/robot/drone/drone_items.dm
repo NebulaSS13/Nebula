@@ -76,7 +76,7 @@
 	can_hold = list(
 		/obj/item/cell,
 		/obj/item/stock_parts,
-		/obj/item/mmi,
+		/obj/item/brain_interface,
 		/obj/item/robot_parts,
 		/obj/item/borg/upgrade,
 		/obj/item/flash,

@@ -60,8 +60,8 @@
 			parts[part.bp_tag] = part
 			update_icon()
 
-	// Install an MMI/brain.
-	else if(istype(W, /obj/item/mmi) || istype(W, /obj/item/organ/internal/posibrain))
+	// Install a brain interface.
+	else if(istype(W, /obj/item/brain_interface) || istype(W, /obj/item/organ/internal/posibrain))
 
 		if(!istype(loc,/turf))
 			to_chat(user, SPAN_WARNING("You can't put \the [W] in without the frame being on the ground."))
@@ -72,8 +72,8 @@
 			return
 
 		var/mob/living/brain/B
-		if(istype(W, /obj/item/mmi))
-			var/obj/item/mmi/M = W
+		if(istype(W, /obj/item/brain_interface))
+			var/obj/item/brain_interface/M = W
 			B = M.holding_brain?.brainmob
 		else
 			var/obj/item/organ/internal/posibrain/P = W
@@ -112,7 +112,7 @@
 		if(!O)
 			return
 
-		O.mmi = W
+		O.brain = W
 		O.set_invisibility(0)
 		O.custom_name = created_name
 		O.updatename("Default")

@@ -1,7 +1,6 @@
 /mob/living/silicon/robot/dust()
-	//Delete the MMI first so that it won't go popping out.
-	if(mmi)
-		qdel(mmi)
+	if(brain && !QDELETED(brain))
+		QDEL_NULL(brain)
 	..()
 
 /mob/living/silicon/robot/death(gibbed,deathmessage, show_dead_message)

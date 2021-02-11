@@ -54,8 +54,9 @@
 	set_extension(src, /datum/extension/hattable, hat_x, hat_y)
 
 	default_language = /decl/language/binary/drone
+
 	// NO BRAIN.
-	mmi = null
+	clear_brain()
 
 	//We need to screw with their HP a bit. They have around one fifth as much HP as a full borg.
 	for(var/V in components) if(V != "power cell")

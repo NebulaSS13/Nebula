@@ -255,8 +255,8 @@ Sells devices, odds and ends, and medical stuff
 		/obj/item/bot_kit = TRADER_THIS_TYPE,
 		/obj/item/paicard = TRADER_THIS_TYPE,
 		/obj/item/aicard  = TRADER_THIS_TYPE,
-		/mob/living/bot   = 
-	TRADER_SUBTYPES_ONLY)
+		/mob/living/bot   = TRADER_SUBTYPES_ONLY
+	)
 	speech = list("hail_generic" = "Welcome to ORIGIN! Let me walk you through our fine robotic selection!",
 				"hail_silicon"   = "Welcome to ORIGIN! Let- oh, you're a synth! Well, your money is good anyway. Welcome, welcome!",
 				"hail_deny"      = "ORIGIN no longer wants to speak to you.",

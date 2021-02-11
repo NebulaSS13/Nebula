@@ -26,7 +26,7 @@
 	replace_self_with(/obj/item/organ/internal/posibrain)
 
 /obj/item/organ/internal/brain/mechassist()
-	replace_self_with(/obj/item/organ/internal/mmi_holder)
+	replace_self_with(/obj/item/organ/internal/brain_holder)
 
 /obj/item/organ/internal/brain/getToxLoss()
 	return 0

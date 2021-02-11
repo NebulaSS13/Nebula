@@ -11,17 +11,14 @@ SUBSYSTEM_DEF(robots)
 
 	var/list/mob_types_by_title = list(
 		"robot, flying"  = /mob/living/silicon/robot/flying,
-		"drone, flying"  = /mob/living/silicon/robot/flying,
 		"cyborg, flying" = /mob/living/silicon/robot/flying
 	)
 
 	var/list/mmi_types_by_title = list(
-		"cyborg"         = /obj/item/mmi,
-		"robot"          = /obj/item/organ/internal/posibrain,
-		"drone"          = /obj/item/mmi/digital/robot,
-		"cyborg, flying" = /obj/item/mmi,
-		"robot, flying"  = /obj/item/organ/internal/posibrain,
-		"drone, flying"  = /obj/item/mmi/digital/robot
+		"cyborg"         = /obj/item/brain_interface/organic,
+		"robot"          = /obj/item/brain_interface/robot,
+		"cyborg, flying" = /obj/item/brain_interface/organic,
+		"robot, flying"  = /obj/item/brain_interface/robot
 	)
 
 /datum/controller/subsystem/robots/Initialize()
@@ -61,7 +58,7 @@ SUBSYSTEM_DEF(robots)
 			.[include_override] = modules[include_override]
 
 /datum/controller/subsystem/robots/proc/get_mmi_type_by_title(var/check_title)
-	. = mmi_types_by_title[lowertext(trim(check_title))] || /obj/item/mmi
+	. = mmi_types_by_title[lowertext(trim(check_title))] || /obj/item/brain_interface/robot
 
 /datum/controller/subsystem/robots/proc/get_mob_type_by_title(var/check_title)
 	. = mob_types_by_title[lowertext(trim(check_title))] || /mob/living/silicon/robot

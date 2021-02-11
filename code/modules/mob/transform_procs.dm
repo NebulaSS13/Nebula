@@ -66,7 +66,7 @@
 		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// stop the jams for AIs
 
 
-	var/mob/living/silicon/ai/O = new (loc, GLOB.using_map.default_law_type,,1)//No MMI but safety is in effect.
+	var/mob/living/silicon/ai/O = new (loc, GLOB.using_map.default_law_type, null, 1)
 	O.set_invisibility(0)
 	O.aiRestorePowerRoutine = 0
 	if(mind)
@@ -132,8 +132,8 @@
 		O.mind.original = O
 		var/mmi_type = SSrobots.get_mmi_type_by_title(O.mind.role_alt_title ? O.mind.role_alt_title : O.mind.assigned_role)
 		if(mmi_type)
-			O.mmi = new mmi_type(O)
-			O.mmi.transfer_identity(src)
+			O.brain = new mmi_type(O)
+			O.brain.transfer_identity(src)
 
 	O.dropInto(loc)
 	O.job = "Robot"

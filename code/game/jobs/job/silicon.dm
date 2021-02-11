@@ -56,5 +56,5 @@
 
 /datum/job/cyborg/New()
 	..()
-	alt_titles = SSrobots.robot_alt_titles.Copy()
-	alt_titles -= title // So the unit test doesn't flip out if a mob or mmi type is declared for our main title.
+	alt_titles = SSrobots.robot_alt_titles?.Copy() || list()
+	alt_titles -= title // So the brain interface/mob type unit test doesn't flip out about our main title.

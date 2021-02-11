@@ -15,7 +15,7 @@
 	)
 
 	var/obj/item/organ/internal/posibrain/container = null
-	var/emp_damage = 0//Handles a type of MMI damage
+	var/emp_damage = 0
 	var/alert = null
 	var/list/owner_channels = list()
 	var/list/law_channels = list()

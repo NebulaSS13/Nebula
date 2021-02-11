@@ -147,9 +147,8 @@
 		M.set_invisibility(101)
 
 		if(istype(M, /mob/living/silicon/robot))
-			var/mob/living/silicon/robot/Robot = M
-			if(Robot.mmi)
-				qdel(Robot.mmi)
+			var/mob/living/silicon/robot/R = M
+			R.clear_brain()
 		else
 			for(var/obj/item/W in M)
 				M.drop_from_inventory(W)
