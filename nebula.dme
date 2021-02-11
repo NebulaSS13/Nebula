@@ -1186,6 +1186,7 @@
 #include "code\game\objects\structures\iv_drip.dm"
 #include "code\game\objects\structures\janicart.dm"
 #include "code\game\objects\structures\lattice.dm"
+#include "code\game\objects\structures\memorial.dm"
 #include "code\game\objects\structures\mineral_bath.dm"
 #include "code\game\objects\structures\mop_bucket.dm"
 #include "code\game\objects\structures\morgue.dm"
