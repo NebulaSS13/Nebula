@@ -144,17 +144,18 @@ var/list/localhost_addresses = list(
 
 	#endif
 
-	if(!config.guests_allowed && IsGuestKey(key))
-		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
-		qdel(src)
-		return
-
-	if(config.player_limit != 0)
-		if((GLOB.clients.len >= config.player_limit) && !(ckey in admin_datums))
-			alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
-			log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
+	var/local_connection = (config.auto_local_admin && (isnull(address) || global.localhost_addresses[address]))
+	if(!local_connection)
+		if(!config.guests_allowed && IsGuestKey(key))
+			alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
 			qdel(src)
 			return
+		if(config.player_limit != 0)
+			if((GLOB.clients.len >= config.player_limit) && !(ckey in admin_datums))
+				alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
+				log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
+				qdel(src)
+				return
 
 	// Change the way they should download resources.
 	if(config.resource_urls && config.resource_urls.len)
@@ -170,7 +171,7 @@ var/list/localhost_addresses = list(
 
 	// Automatic admin rights for people connecting locally.
 	// Concept stolen from /tg/ with deepest gratitude.
-	if(config.auto_local_admin && (isnull(address) || global.localhost_addresses[address]) && !admin_datums[ckey])
+	if(local_connection && !admin_datums[ckey])
 		new /datum/admins("Local Host", R_EVERYTHING, ckey)
 
 	//Admin Authorisation
