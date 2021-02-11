@@ -260,7 +260,7 @@
 	addtimer(CALLBACK(src, .proc/do_shunt, shunt_x, shunt_y, jumpdist, destination), 6 SECONDS)
 	jumping = TRUE
 	update_icon()
-	for(var/mob/living/carbon/M in living_mob_list_)
+	for(var/mob/living/carbon/M in GLOB.living_mob_list_)
 		if(!(M.z in ftl_computer.linked.map_z))
 			continue
 		sound_to(M, 'sound/machines/hyperspace_begin.ogg')
@@ -511,7 +511,7 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 		if(!fuel)
 			if(!do_after(user, 2 SECONDS, src) || fuel)
 				return
-			if(user && !user.unEquip(O, src))
+			if(!user || !user.unEquip(O, src))
 				return
 			fuel = O
 			max_fuel = get_fuel_joules(TRUE)

@@ -114,13 +114,14 @@
 	return 1
 
 /datum/nano_module/program/comm/proc/get_shunt()
-		if(isnull(program.computer))
+	if(isnull(program.computer))
 		return FALSE
+
+	var/obj/comp = program.computer.get_physical_host()
 
 	if(isnull(comp))
 		return FALSE
 
-	var/obj/comp = program.computer.get_physical_host()
 	var/obj/effect/overmap/visitable/ship/sector = map_sectors["[comp.z]"]
 
 	if(!sector)
