@@ -28,6 +28,12 @@
 	mouse_opacity = 0
 	persistent = TRUE
 
+/obj/effect/decal/cleanable/dirt/Destroy()
+	var/turf/simulated/T = loc
+	. = ..()
+	if(istype(T) && !(locate(/obj/effect/decal/cleanable/dirt) in T))
+		T.dirt = 0
+
 /obj/effect/decal/cleanable/flour
 	name = "flour"
 	desc = "It's still good. Four second rule!"
