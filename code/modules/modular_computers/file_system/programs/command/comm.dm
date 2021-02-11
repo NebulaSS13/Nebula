@@ -116,6 +116,13 @@
 /datum/nano_module/program/comm/proc/get_shunt()
 	var/obj/comp = program.computer.get_physical_host()
 	var/obj/effect/overmap/visitable/ship/sector = map_sectors["[comp.z]"]
+
+	if(isnull(program.computer))
+		return FALSE
+
+	if(isnull(comp))
+		return FALSE
+
 	if(!sector)
 		return FALSE
 

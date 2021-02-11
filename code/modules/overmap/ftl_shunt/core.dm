@@ -5,7 +5,7 @@
 
 /obj/machinery/ftl_shunt/core
 	name = "superluminal shunt core"
-	desc = "An immensely powerful particle accelerator capable of forming a micro-wormhole and shunting an entire ship through it in a nanosecond."
+	desc = "An immensely powerful transdimensional superluminal bridge initiator capable of forming a micro-wormhole and shunting an entire ship through it in a nanosecond."
 
 	var/list/fuel_ports = list() //We mainly use fusion fuels.
 	var/charge_time //We don't actually charge to a certain amount of power, we just charge for x amount of time depending on host ship mass.
@@ -23,19 +23,19 @@
 	var/cooldown
 	var/time_multiplier = 5 //The multiplier on how long it takes the shunt drive to charge.
 	var/max_jump_distance = 8 //How many overmap tiles can this move the ship?
-	var/sabotaged = null
+	var/sabotaged
 	var/sabotaged_amt = 0 //amount of crystals used to sabotage us.
 
 	var/static/datum/announcement/priority/ftl_announcement = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice2.ogg'))
 
-	var/shunt_start_text = "Attention! All hands brace for faster-than-light transition! ETA: %%TIME%%"
-	var/shunt_cancel_text = "Attention! Faster-than-light transition cancelled."
-	var/shunt_complete_text = "Attention! Faster-than-light transition completed."
-	var/shunt_spooling_text = "Attention! Superluminal shunt charge complete, spooling up."
+	var/static/shunt_start_text = "Attention! All hands brace for faster-than-light transition! ETA: %%TIME%%"
+	var/static/shunt_cancel_text = "Attention! Faster-than-light transition cancelled."
+	var/static/shunt_complete_text = "Attention! Faster-than-light transition completed."
+	var/static/shunt_spooling_text = "Attention! Superluminal shunt charge complete, spooling up."
 
-	var/shunt_sabotage_text_minor = "Warning! Electromagnetic flux beyond safety limits - aborting shunt!"
-	var/shunt_sabotage_text_major = "Warning! Critical electromagnetic flux in accelerator core! Dumping core and aborting shunt!"
-	var/shunt_sabotage_text_critical = "ALERT! Critical malfunction in microsingularity containment core! Safety systems offline!"
+	var/static/shunt_sabotage_text_minor = "Warning! Electromagnetic flux beyond safety limits - aborting shunt!"
+	var/static/shunt_sabotage_text_major = "Warning! Critical electromagnetic flux in accelerator core! Dumping core and aborting shunt!"
+	var/static/shunt_sabotage_text_critical = "ALERT! Critical malfunction in microsingularity containment core! Safety systems offline!"
 
 	use_power = POWER_USE_OFF
 	power_channel = EQUIP
@@ -64,23 +64,23 @@
 	ftl_computer = null
 
 /obj/machinery/ftl_shunt/core/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 
 	if(charging)
 		var/image/I = image('icons/obj/shunt_drive.dmi', "activating")
 		var/matrix/M = new()
 		I.transform = M
-		overlays += I
+		add_overlay(I)
 
 	if(jumping)
-		overlays += image('icons/obj/shunt_drive.dmi', "activated")
+		add_overlay(image('icons/obj/shunt_drive.dmi', "activated"))
 		var/image/S = image('icons/obj/objects.dmi', "bhole3")
 		var/matrix/M = new()
 		M.Scale(0.75)
 		S.transform = M
 		S.alpha = 0
 		animate(S, alpha = 255, time = 5.9 SECONDS)
-		overlays += S
+		add_overlay(S)
 
 /obj/machinery/ftl_shunt/core/examine(mob/user)
 	. = ..()
@@ -94,12 +94,21 @@
 				if(SHUNT_SABOTAGE_CRITICAL)
 					to_chat(user, SPAN_DANGER("Light bends around the core of [src] in a manner that eerily reminds you of a singularity... the vanes look completely misaligned!"))
 		else
-			to_chat(user, SPAN_WARNING("It looks like it's been tampered with, but you're not sure about to what extent."))
+			to_chat(user, SPAN_WARNING("It looks like it's been tampered with, but you're not sure to what extent."))
 
 /obj/machinery/ftl_shunt/core/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/stack/telecrystal))
 		var/obj/item/stack/telecrystal/TC = O
+
+		if(TC.amount < 10)
+			to_chat(user, SPAN_WARNING("You don't have enough telecrystals to sabotage [src]."))
+			return FALSE
+
 		var/tc_input = input(user, "How many telecrystals do you want to put in?", "TC Input", 0) as num|null
+
+
+		if(QDELETED(user) || user.incapacitated() || !user.Adjacent(src) || !(TC in user.get_held_items()))
+			return FALSE
 
 		if(!tc_input)
 			return FALSE
@@ -108,11 +117,7 @@
 			to_chat(user, SPAN_WARNING("You don't have enough telecrystals for that."))
 			return FALSE
 
-		if(tc_input < 10)
-			to_chat(user, SPAN_WARNING("This really isn't a useful amount for sabotage."))
-			return FALSE
-
-		to_chat(user, SPAN_WARNING("You begin to insert the crystals into [src]..."))
+		to_chat(user, SPAN_DANGER("You begin to insert the crystals into [src]..."))
 
 		if(!do_after(user, 6 SECONDS, src))
 			return FALSE
@@ -141,16 +146,16 @@
 		if(!user.skill_check(SKILL_ENGINES, SKILL_BASIC))
 			to_chat(user, SPAN_DANGER("You are nowhere near experienced enough to stick your hand into that thing."))
 			return FALSE
-		to_chat(user, SPAN_NOTICE("You reach your hand inside of [src] and slowly begin to remove re-align the accelerator vanes..."))
+		to_chat(user, SPAN_NOTICE("You reach your hand inside of [src] and slowly begin to re-align the accelerator vanes..."))
 		if(!do_after(user, (4 SECOND * skill_delay), src))
-			to_chat(user, SPAN_WARNING("You try to pull your hand away from the vanes, but you touch a conductor!"))
+			to_chat(user, SPAN_DANGER("You try to pull your hand away from the vanes, but you touch a conductor!"))
 			h_user.electrocute_act(rand(150,250), src, def_zone = user.get_active_held_item_slot())
 			return FALSE
 		var/obj/item/stack/telecrystal/TC = new
 		TC.amount = sabotaged_amt
 		TC.forceMove(get_turf(user))
 		user.put_in_hands(TC)
-		to_chat(user, SPAN_NOTICE("You realign the accelerator vanes by removing some kind of crystal, preventing what could have been a catastrophe."))
+		to_chat(user, SPAN_NOTICE("You remove \the [TC] from \the [src] and realign the accelerator vanes, preventing what could have been a catastrophe."))
 		sabotaged = null
 		sabotaged_amt = 0
 		return TRUE
@@ -171,21 +176,28 @@
 //Starts the teleport process, returns 1-6, with 6 being the all-clear.
 /obj/machinery/ftl_shunt/core/proc/start_shunt()
 	var/shunt_distance
+
+	if(isnull(ftl_computer))
+		return
+
+	if(isnull(ftl_computer.linked))
+		return
+
 	var/vessel_mass = ftl_computer.linked.get_vessel_mass()
 	var/shunt_turf = locate(shunt_x, shunt_y, GLOB.using_map.overmap_z)
 
-	if(stat & (BROKEN))
+	if(stat & BROKEN)
 		return FTL_START_FAILURE_BROKEN
-	if(stat & (NOPOWER))
+	if(stat & NOPOWER)
 		return FTL_START_FAILURE_POWER
+
+	if(world.time <= cooldown)
+		return FTL_START_FAILURE_COOLDOWN
 
 	if(!length(fuel_ports)) //no fuel ports
 		find_ports()
 		if(!length(fuel_ports))
 			return FTL_START_FAILURE_OTHER
-
-	if(world.time <= cooldown)
-		return FTL_START_FAILURE_COOLDOWN
 
 	shunt_distance = get_dist(get_turf(ftl_computer.linked), shunt_turf)
 	required_fuel_joules = (vessel_mass * JOULES_PER_TON) * shunt_distance
@@ -347,15 +359,10 @@
 			return
 		else
 			to_chat(H, SPAN_DANGER("and lose, being ripped apart in a nanosecond by energies beyond comprehension."))
-			if(H.isSynthetic())
-				new /obj/item/remains/robot(get_turf(H))
-			else
-				new /obj/item/remains/human(get_turf(H))
-			qdel(H)
+			H.gib()
 
 /obj/machinery/ftl_shunt/core/proc/do_sabotage()
 	var/announcetxt
-	var/uhoh = FALSE
 
 	switch(sabotaged)
 		if(SHUNT_SABOTAGE_MINOR)
@@ -381,8 +388,6 @@
 		if(SHUNT_SABOTAGE_CRITICAL)
 			announcetxt = shunt_sabotage_text_critical
 
-			uhoh = TRUE //let the fuckening begin!
-
 			for(var/obj/machinery/power/apc/A in SSmachines.machinery) //Effect One: shut down power across the ship.
 				if(!(A.z in ftl_computer.linked.map_z))
 					continue
@@ -392,11 +397,11 @@
 				to_chat(H, SPAN_DANGER("The light around [src] warps before it emits a flash of incredibly bright, searing light!"))
 				H.flash_eyes(FLASH_PROTECTION_NONE)
 
+			new /obj/singularity/(get_turf(src))
+
 
 	ftl_announcement.Announce(announcetxt, "FTL Shunt Management System", new_sound = sound('sound/misc/ftlsiren.ogg'))
 
-	if(uhoh)
-		new /obj/singularity/(get_turf(src))
 
 //Returns status to ftl computer.
 /obj/machinery/ftl_shunt/core/proc/get_status()
@@ -408,19 +413,14 @@
 		return FTL_STATUS_GOOD
 
 /obj/machinery/ftl_shunt/core/proc/get_fuel(var/list/input)
-	var/total_fuel_joules
-
+	. = 0
 	for(var/obj/machinery/ftl_shunt/fuel_port/F in input)
-		total_fuel_joules += F.get_fuel_joules(FALSE)
-
-	return total_fuel_joules
+		. += F.get_fuel_joules(FALSE)
 
 /obj/machinery/ftl_shunt/core/proc/get_fuel_maximum(var/list/input)
-	var/max_fuel_joules = 0
+	. = 0
 	for(var/obj/machinery/ftl_shunt/fuel_port/F in input)
-		max_fuel_joules += F.get_fuel_joules(TRUE)
-
-	return max_fuel_joules
+		. += F.get_fuel_joules(TRUE)
 
 obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 	if(!length(fuel_ports))
@@ -432,13 +432,14 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 
 
 /obj/machinery/ftl_shunt/core/proc/use_fuel(var/joules_req)
-	var/joules_per_port
 	var/avail_fuel = get_fuel(fuel_ports)
-	var/list/fueled_ports = list()
-	var/ports_used
 
 	if(joules_req > avail_fuel) //Not enough fuel in the system.
 		return FALSE
+
+	var/list/fueled_ports = list()
+	var/ports_used
+	var/joules_per_port
 
 	for(var/obj/machinery/ftl_shunt/fuel_port/F in fuel_ports)
 		if(F.has_fuel())
@@ -457,11 +458,11 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 	return (ftl_computer.linked.vessel_mass * CHARGE_TIME_PER_TON) * time_multiplier
 
 /obj/machinery/ftl_shunt/core/Process()
-	if((stat & (BROKEN|NOPOWER)) & charging)
+	if((stat & (BROKEN|NOPOWER)) && charging)
 		cancel_shunt()
 
 	if(charging)
-		chargepercent = round(100.0*(world.time - charge_started)/charge_interval, 0.1)
+		chargepercent = round(100*(world.time - charge_started)/charge_interval, 0.1)
 		if(world.time >= charge_time) //We've probably finished charging up.
 			charging = FALSE
 			if(use_fuel(required_fuel_joules))
@@ -475,7 +476,13 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 	desc = "A fuel port for an FTL shunt."
 	icon_state = "empty"
 
-	var/list/global/fuels = list(/decl/material/gas/hydrogen/tritium = 25000, /decl/material/gas/hydrogen/deuterium = 25000, /decl/material/gas/hydrogen = 25000, /decl/material/solid/exotic_matter = 50000)
+	var/list/global/fuels = list(
+				/decl/material/gas/hydrogen/tritium = 25000,
+				/decl/material/gas/hydrogen/deuterium = 25000,
+				/decl/material/gas/hydrogen = 25000,
+				/decl/material/solid/exotic_matter = 50000
+				)
+
 	var/obj/item/fuel_assembly/fuel
 	var/obj/machinery/ftl_shunt/core/master
 	var/max_fuel = 0
@@ -503,11 +510,10 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 /obj/machinery/ftl_shunt/fuel_port/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/fuel_assembly))
 		if(!fuel)
-			if(!do_after(user, 20, src))
+			if(!do_after(user, 2 SECONDS, src) || fuel)
 				return
-			if(user && !user.unEquip(O))
+			if(user && !user.unEquip(O, src))
 				return
-			O.forceMove(src)
 			fuel = O
 			max_fuel = get_fuel_joules(TRUE)
 			update_icon()
@@ -518,9 +524,9 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 /obj/machinery/ftl_shunt/fuel_port/physical_attack_hand(var/mob/user)
 	if(fuel)
 		to_chat(user, SPAN_NOTICE("You begin to remove the fuel assembly from [src]..."))
-		if(!do_after(user, 20, src))
+		if(!do_after(user, 2 SECONDS, src) || !fuel || fuel.loc != src)
 			return FALSE
-		fuel.forceMove(get_turf(user))
+		fuel.dropInto(loc)
 		user.put_in_hands(fuel)
 		fuel = null
 		max_fuel = 0

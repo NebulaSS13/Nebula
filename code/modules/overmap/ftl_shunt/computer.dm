@@ -17,6 +17,8 @@
 		linked_core = null
 
 /obj/machinery/computer/ship/ftl/proc/recalc_cost()
+	if(!linked_core)
+		return INFINITY
 	var/jump_dist = get_dist(linked, locate(linked_core.shunt_x, linked_core.shunt_y, GLOB.using_map.overmap_z))
 	var/jump_cost = ((linked.vessel_mass * JOULES_PER_TON) / 1000) * jump_dist
 	return jump_cost
@@ -33,6 +35,7 @@
 		if(C.z in linked.map_z)
 			linked_core = C
 			C.ftl_computer = src
+			break
 
 /obj/machinery/computer/ship/ftl/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
@@ -71,37 +74,27 @@
 	if (!linked)
 		return TOPIC_NOACTION
 
-	if(href_list["set_shunt_x"])
-		if(linked_core)
-			var/fumble = 0
-			if(!user.skill_check(SKILL_PILOT, SKILL_ADEPT))
-				fumble = rand(-2, 2)
-			var/input_x = input(user, "Enter Destination X Coordinates", "FTL Computer", linked_core.shunt_x) as num|null
-			if(input_x >= GLOB.using_map.overmap_size)
-				input_x = min(input_x, GLOB.using_map.overmap_size - 1)
-			if(CanInteract(user, state))
-				if(isnull(input_x))
-					input_x = linked_core.shunt_x
-				linked_core.shunt_x = clamp((input_x + fumble), 1, (GLOB.using_map.overmap_size - 1))
-				if(fumble)
-					to_chat(user, SPAN_WARNING("You fumble the input because of your inexperience!"))
-			return TOPIC_REFRESH
+	if(href_list["set_shunt_x"] || href_list["set_shunt_y"])
+		if(!linked_core)
+			return TOPIC_NOACTION
 
-	if(href_list["set_shunt_y"])
-		if(linked_core)
-			var/fumble = 0
-			if(!user.skill_check(SKILL_PILOT, SKILL_ADEPT))
-				fumble = rand(-2, 2)
-			var/input_y = input(user, "Enter Destination Y Coordinates", "FTL Computer", linked_core.shunt_y) as num|null
-			if(input_y >= GLOB.using_map.overmap_size)
-				input_y = min(input_y, GLOB.using_map.overmap_size - 1)
-			if(CanInteract(user, state))
-				if(isnull(input_y))
-					input_y = linked_core.shunt_y
-				linked_core.shunt_y = clamp((input_y + fumble), 1, (GLOB.using_map.overmap_size - 1))
-				if(fumble)
-					to_chat(user, SPAN_WARNING("You fumble the input because of your inexperience!"))
-			return TOPIC_REFRESH
+		var/input_x = linked_core.shunt_x
+		var/input_y = linked_core.shunt_y
+		var/fumble = user.skill_check(SKILL_PILOT, SKILL_ADEPT) ? 0 : rand(-2, 2)
+
+		if(href_list["set_shunt_x"])
+			input_x = Clamp((input(user, "Enter Destination X Coordinates", "FTL Computer", input_x) as num|null) + fumble, 1, GLOB.using_map.overmap_size - 1)
+
+		if(href_list["set_shunt_y"])
+			input_y = Clamp((input(user, "Enter Destination Y Coordinates", "FTL Computer", input_y) as num|null) + fumble, 1, GLOB.using_map.overmap_size - 1)
+
+		if(!CanInteract(user, state))
+			return TOPIC_NOACTION
+		if(fumble)
+			to_chat(user, SPAN_WARNING("You fumble the input because of your inexperience!"))
+		linked_core.shunt_x = input_x
+		linked_core.shunt_y = input_y
+		return TOPIC_REFRESH
 
 	if(href_list["start_shunt"])
 		if(linked_core)
@@ -115,7 +108,7 @@
 			var/dist = get_dist(locate(linked_core.shunt_x, linked_core.shunt_y, GLOB.using_map.overmap_z), get_turf(linked))
 			if(dist > 3) //We are above the safe jump distance, give them a warning.
 				var/warning = alert(user, "Current shunt distance is above safe distance! Do you wish to continue?","Jump Safety System", "Yes", "No")
-				if(warning == "No" && CanInteract(user, state))
+				if(warning == "No" || !CanInteract(user, state))
 					return TOPIC_REFRESH
 
 			if(dist >= linked_core.max_jump_distance)
