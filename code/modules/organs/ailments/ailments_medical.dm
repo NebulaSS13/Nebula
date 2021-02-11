@@ -29,6 +29,7 @@
 	treated_by_reagent_type = /decl/material/liquid/nutriment/honey
 	treated_by_reagent_dosage = 1
 	medication_treatment_message = "You swallow, finding that your sore throat is rapidly recovering."
+	diagnosis_string = "$USER_HIS$ throat is red and inflamed."
 
 /datum/ailment/head/sore_throat/on_ailment_event()
 	to_chat(organ.owner, SPAN_DANGER("You swallow painfully past your sore throat."))
@@ -38,6 +39,7 @@
 	treated_by_reagent_type = /decl/material/liquid/antiseptic
 	treated_by_reagent_dosage = 1
 	medication_treatment_message = "The infuriating itching in your sinuses fades away."
+	diagnosis_string = "$USER_HIS$ sinuses are inflamed and running."
 
 /datum/ailment/head/sneezing/can_apply_to(obj/item/organ/_organ)
 	. = ..()
@@ -55,6 +57,7 @@
 	treated_by_item_type = /obj/item/stack/medical/bruise_pack
 	third_person_treatement_message = "$USER$ wraps $TARGET$'s sprained $ORGAN$ in $ITEM$."
 	self_treatement_message = "$USER$ wraps $USER_HIS$ sprained $ORGAN$ in $ITEM$."
+	diagnosis_string = "$USER_HIS$ $ORGAN$ is visibly swollen."
 
 /datum/ailment/sprain/on_ailment_event()
 	to_chat(organ.owner, SPAN_DANGER("Your sprained [organ.name] aches distractingly."))
@@ -68,6 +71,7 @@
 	treated_by_item_type = /obj/item/stack/medical/ointment
 	third_person_treatement_message = "$USER$ salves $TARGET$'s rash-stricken $ORGAN$ with $ITEM$."
 	self_treatement_message = "$USER$ salves $USER_HIS$ rash-stricken $ORGAN$ with $ITEM$."
+	diagnosis_string = "$USER_HIS$ $ORGAN$ is covered in a bumpy red rash."
 
 /datum/ailment/rash/on_ailment_event()
 	to_chat(organ.owner, SPAN_DANGER("A bright red rash across your [organ.name] itches abominably."))
@@ -79,6 +83,7 @@
 	applies_to_organ = list(BP_LUNGS)
 	treated_by_reagent_type = /decl/material/liquid/antiseptic
 	medication_treatment_message = "The infuriating tickling in your throat fades away."
+	diagnosis_string = "$USER_HIS$ throat is red and inflamed."
 
 /datum/ailment/coughing/can_apply_to(obj/item/organ/_organ)
 	. = ..()
@@ -94,6 +99,7 @@
 	name = "sore joint"
 	treated_by_reagent_type = /decl/material/liquid/painkillers
 	medication_treatment_message = "The dull pulse of pain in your $ORGAN$ fades away."
+	diagnosis_string = "$USER_HIS$ $ORGAN$ is visibly swollen."
 
 /datum/ailment/sore_joint/on_ailment_event()
 	var/obj/item/organ/external/E = organ
