@@ -115,6 +115,16 @@
 		return
 
 	user.visible_message("<span class='notice'>[user] starts inspecting [owner]'s [name] carefully.</span>")
+
+	for(var/datum/ailment/ailment in ailments)
+		if(ailment.diagnosis_string)
+			if(!do_mob(user, owner, 5))
+				return
+			to_chat(user, SPAN_NOTICE(ailment.replace_tokens(message = ailment.diagnosis_string, user = user)))
+
+	if(!do_mob(user, owner, 5))
+		return
+
 	if(LAZYLEN(wounds))
 		to_chat(user, "<span class='warning'>You find [get_wounds_desc()]</span>")
 		var/list/stuff = list()
@@ -126,7 +136,7 @@
 	else
 		to_chat(user, "<span class='notice'>You find no visible wounds.</span>")
 
-	to_chat(user, "<span class='notice'>Checking skin now...</span>")
+	to_chat(user, "<span class='notice'>You start checking [owner]'s skin...</span>")
 	if(!do_mob(user, owner, 10))
 		to_chat(user, "<span class='notice'>You must stand still to check [owner]'s skin for abnormalities.</span>")
 		return
@@ -142,7 +152,7 @@
 	else
 		to_chat(user, "<span class='warning'>[owner]'s skin is [english_list(badness)].</span>")
 
-	to_chat(user, "<span class='notice'>Checking bones now...</span>")
+	to_chat(user, "<span class='notice'>You start checking [owner]'s bones...</span>")
 	if(!do_mob(user, owner, 10))
 		to_chat(user, "<span class='notice'>You must stand still to feel [src] for fractures.</span>")
 		return
