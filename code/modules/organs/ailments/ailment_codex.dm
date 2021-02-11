@@ -35,5 +35,5 @@
 			ailment_cures += "Unknown."
 		ailment_table += "[jointext(ailment_cures,"<br>")]</td></tr>"
 	ailment_table += "</table>"
-	mechanics_text = "[mechanics_text]<br><h2>Known [display_name]</h2><br>[jointext(ailment_table, "")]"
+	mechanics_text = "[mechanics_text]<br><h2>Known [display_name]</h2>[jointext(ailment_table, "")]"
 	..()
