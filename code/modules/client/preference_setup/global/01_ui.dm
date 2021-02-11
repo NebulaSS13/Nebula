@@ -5,8 +5,10 @@ var/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 	var/ooccolor = "#010000" //Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
 	var/icon_size = 48
 	var/UI_style = "Midnight"
-	var/UI_style_color = "#ffffff"
-	var/UI_style_alpha = 255
+	var/UI_style_alpha =     255
+	var/UI_style_color =     COLOR_WHITE
+	var/UI_mouseover_alpha = 255
+	var/UI_mouseover_color = COLOR_AMBER
 	//Style for popup tooltips
 	var/tooltip_style = "Midnight"
 
@@ -15,38 +17,58 @@ var/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 	sort_order = 1
 
 /datum/category_item/player_setup_item/player_global/ui/load_preferences(var/savefile/S)
-	from_file(S["icon_size"],      pref.icon_size)
-	from_file(S["UI_style"],       pref.UI_style)
-	from_file(S["UI_style_color"], pref.UI_style_color)
-	from_file(S["UI_style_alpha"], pref.UI_style_alpha)
-	from_file(S["ooccolor"],       pref.ooccolor)
-	from_file(S["clientfps"],      pref.clientfps)
+	from_file(S["icon_size"],          pref.icon_size)
+	from_file(S["UI_style"],           pref.UI_style)
+	from_file(S["UI_mouseover_color"], pref.UI_mouseover_color)
+	from_file(S["UI_style_alpha"],     pref.UI_style_alpha)
+	from_file(S["UI_mouseover_alpha"], pref.UI_mouseover_alpha)
+	from_file(S["UI_style_alpha"],     pref.UI_style_alpha)
+	from_file(S["ooccolor"],           pref.ooccolor)
+	from_file(S["clientfps"],          pref.clientfps)
 
 /datum/category_item/player_setup_item/player_global/ui/save_preferences(var/savefile/S)
-	to_file(S["icon_size"],        pref.icon_size)
-	to_file(S["UI_style"],         pref.UI_style)
-	to_file(S["UI_style_color"],   pref.UI_style_color)
-	to_file(S["UI_style_alpha"],   pref.UI_style_alpha)
-	to_file(S["ooccolor"],         pref.ooccolor)
-	to_file(S["clientfps"],        pref.clientfps)
+	to_file(S["icon_size"],            pref.icon_size)
+	to_file(S["UI_style"],             pref.UI_style)
+	to_file(S["UI_mouseover_color"],   pref.UI_mouseover_color)
+	to_file(S["UI_mouseover_alpha"],   pref.UI_mouseover_alpha)
+	to_file(S["UI_style_color"],       pref.UI_style_color)
+	to_file(S["UI_style_alpha"],       pref.UI_style_alpha)
+	to_file(S["ooccolor"],             pref.ooccolor)
+	to_file(S["clientfps"],            pref.clientfps)
 
 /datum/category_item/player_setup_item/player_global/ui/sanitize_preferences()
-	pref.UI_style		= sanitize_inlist(pref.UI_style, all_ui_styles, initial(pref.UI_style))
-	pref.UI_style_color	= sanitize_hexcolor(pref.UI_style_color, initial(pref.UI_style_color))
-	pref.UI_style_alpha	= sanitize_integer(pref.UI_style_alpha, 0, 255, initial(pref.UI_style_alpha))
-	pref.ooccolor		= sanitize_hexcolor(pref.ooccolor, initial(pref.ooccolor))
-	pref.clientfps	    = sanitize_integer(pref.clientfps, CLIENT_MIN_FPS, CLIENT_MAX_FPS, initial(pref.clientfps))
+	pref.UI_style		    = sanitize_inlist(pref.UI_style, all_ui_styles, initial(pref.UI_style))
+	pref.UI_mouseover_color	= sanitize_hexcolor(pref.UI_mouseover_color, initial(pref.UI_mouseover_color))
+	pref.UI_mouseover_alpha	= sanitize_integer(pref.UI_mouseover_alpha, 0, 255, initial(pref.UI_mouseover_alpha))
+	pref.UI_style_color	    = sanitize_hexcolor(pref.UI_style_color, initial(pref.UI_style_color))
+	pref.UI_style_alpha	    = sanitize_integer(pref.UI_style_alpha, 0, 255, initial(pref.UI_style_alpha))
+	pref.ooccolor		    = sanitize_hexcolor(pref.ooccolor, initial(pref.ooccolor))
+	pref.clientfps	        = sanitize_integer(pref.clientfps, CLIENT_MIN_FPS, CLIENT_MAX_FPS, initial(pref.clientfps))
 
 	if(!isnum(pref.icon_size)) 
 		pref.icon_size = initial(pref.icon_size)
 	pref.client?.SetWindowIconSize(pref.icon_size)
 
+/datum/category_item/player_setup_item/player_global/ui/proc/get_ui_table(var/mob/user)
+	LAZYINITLIST(.)
+	. += "<tr><td>UI Color</td>"
+	. += "<td><a href='?src=\ref[src];select_color=1'><b>[pref.UI_style_color]</b></a></td>"
+	. += "<td><table style='display:inline;' bgcolor='[pref.UI_style_color]'><tr><td>__</td></tr></table></td>"
+	. += "<td><a href='?src=\ref[src];reset=ui'>reset</a></td>"
+	. += "</tr>"
+	. += "<tr><td>UI Opacity</td>"
+	. += "<td colspan = 2><a href='?src=\ref[src];select_alpha=1'><b>[pref.UI_style_alpha]</b></a></td>"
+	. += "<td><a href='?src=\ref[src];reset=alpha'>reset</a></td>"
+	. += "</tr>"
+
 /datum/category_item/player_setup_item/player_global/ui/content(var/mob/user)
-	. += "<b>UI Settings</b><br>"
+	. = "<b>UI Settings</b><br>"
 	. += "<b>UI Style:</b> <a href='?src=\ref[src];select_style=1'><b>[pref.UI_style]</b></a><br>"
-	. += "<b>Custom UI</b> (recommended for White UI):<br>"
-	. += "-Color: <a href='?src=\ref[src];select_color=1'><b>[pref.UI_style_color]</b></a> <table style='display:inline;' bgcolor='[pref.UI_style_color]'><tr><td>__</td></tr></table> <a href='?src=\ref[src];reset=ui'>reset</a><br>"
-	. += "-Alpha(transparency): <a href='?src=\ref[src];select_alpha=1'><b>[pref.UI_style_alpha]</b></a> <a href='?src=\ref[src];reset=alpha'>reset</a><br>"
+
+	. += "<b>Custom UI</b> (recommended for White UI):"
+	. += "<table style='margin: 0px auto; padding: 1px;'>"
+	. += jointext(get_ui_table(), null)
+	. += "</table><br>"
 	. += "<b>Tooltip Style:</b> <a href='?src=\ref[src];select_tooltip_style=1'><b>[pref.tooltip_style]</b></a><br>"
 	. += "<b>Default icon size:</b> <a href='?src=\ref[src];select_icon_size=1'>[pref.icon_size]x[pref.icon_size]</a><br>"
 
@@ -111,6 +133,10 @@ var/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 				pref.UI_style_color = initial(pref.UI_style_color)
 			if("alpha")
 				pref.UI_style_alpha = initial(pref.UI_style_alpha)
+			if("mouseover_color")
+				pref.UI_mouseover_color = initial(pref.UI_mouseover_color)
+			if("mouseover_alpha")
+				pref.UI_mouseover_alpha = initial(pref.UI_mouseover_alpha)
 			if("ooc")
 				pref.ooccolor = initial(pref.ooccolor)
 		return TOPIC_REFRESH
