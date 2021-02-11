@@ -2575,6 +2575,7 @@
 #include "code\modules\organs\pain.dm"
 #include "code\modules\organs\robolimbs.dm"
 #include "code\modules\organs\ailments\_ailment.dm"
+#include "code\modules\organs\ailments\ailment_codex.dm"
 #include "code\modules\organs\ailments\ailments_medical.dm"
 #include "code\modules\organs\ailments\faults\_fault.dm"
 #include "code\modules\organs\ailments\faults\fault_acid_discharge.dm"
