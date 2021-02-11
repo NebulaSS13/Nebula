@@ -449,6 +449,11 @@ var/list/ailment_reference_cache = list()
 	LAZYADD(ailments, new ailment.type(src))
 	return TRUE
 
+/obj/item/organ/proc/add_random_ailment()
+	var/list/possible_ailments = get_possible_ailments()
+	if(length(possible_ailments))
+		add_ailment(pick(possible_ailments))
+
 /obj/item/organ/proc/remove_ailment(var/datum/ailment/ailment)
 	if(ispath(ailment, /datum/ailment))
 		for(var/datum/ailment/ext_ailment in ailments)
