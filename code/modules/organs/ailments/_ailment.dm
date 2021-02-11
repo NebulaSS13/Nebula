@@ -65,7 +65,7 @@
 	return
 
 /datum/ailment/proc/treated_by_item(var/obj/item/treatment)
-	return !treated_by_item_type || istype(treatment, treated_by_item_type)
+	return treated_by_item_type && istype(treatment, treated_by_item_type)
 
 /datum/ailment/proc/was_treated_by_item(var/obj/item/treatment, var/mob/user, var/mob/target)
 	var/show_message
