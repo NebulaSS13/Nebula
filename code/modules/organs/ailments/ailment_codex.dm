@@ -11,7 +11,7 @@
 /datum/codex_entry/ailments/robotic
 	display_name = "Faults"
 	lore_text = "Prosthetic limbs can be prone to debilitating and often dangerous faults, especially if exposed to hostile conditions."
-	mechanics_text = "EMP damage can cause prosthetic limbs to develop problems, some of them more serious than others."
+	mechanics_text = "EMP damage or improper installation can cause prosthetic limbs to develop problems, some of them more serious than others."
 	show_robotics_recipes = TRUE
 	name_column = "Fault"
 	treatment_column = "Recommended repair"

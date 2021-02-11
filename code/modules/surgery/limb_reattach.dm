@@ -81,6 +81,10 @@
 	"<span class='notice'>You have attached [target]'s [E.name] to the [E.amputation_point].</span>")
 	E.replaced(target)
 	E.status |= ORGAN_CUT_AWAY
+
+	if(BP_IS_PROSTHETIC(E) && prob(user.skill_fail_chance(SKILL_DEVICES, 50, SKILL_ADEPT)))
+		E.add_random_ailment()
+
 	target.update_body()
 	target.updatehealth()
 	target.UpdateDamageIcon()
