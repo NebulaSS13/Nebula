@@ -83,10 +83,12 @@
 		var/fumble = user.skill_check(SKILL_PILOT, SKILL_ADEPT) ? 0 : rand(-2, 2)
 
 		if(href_list["set_shunt_x"])
-			input_x = Clamp((input(user, "Enter Destination X Coordinates", "FTL Computer", input_x) as num|null) + fumble, 1, GLOB.using_map.overmap_size - 1)
+			input_x = input(user, "Enter Destination X Coordinates", "FTL Computer", input_x) as num|null + fumble
+			input_x = Clamp(input_x, 1, GLOB.using_map.overmap_size - 1)
 
 		if(href_list["set_shunt_y"])
-			input_y = Clamp((input(user, "Enter Destination Y Coordinates", "FTL Computer", input_y) as num|null) + fumble, 1, GLOB.using_map.overmap_size - 1)
+			input_y = input(user, "Enter Destination Y Coordinates", "FTL Computer", input_y) as num|null + fumble
+			input_y = Clamp(input_y, 1, GLOB.using_map.overmap_size - 1)
 
 		if(!CanInteract(user, state))
 			return TOPIC_NOACTION

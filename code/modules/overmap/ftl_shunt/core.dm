@@ -260,7 +260,7 @@
 	addtimer(CALLBACK(src, .proc/do_shunt, shunt_x, shunt_y, jumpdist, destination), 6 SECONDS)
 	jumping = TRUE
 	update_icon()
-	for(var/mob/living/carbon/M in world)
+	for(var/mob/living/carbon/M in living_mob_list_)
 		if(!(M.z in ftl_computer.linked.map_z))
 			continue
 		sound_to(M, 'sound/machines/hyperspace_begin.ogg')
@@ -477,12 +477,11 @@ obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 	icon_state = "empty"
 
 	var/list/global/fuels = list(
-				/decl/material/gas/hydrogen/tritium = 25000,
-				/decl/material/gas/hydrogen/deuterium = 25000,
-				/decl/material/gas/hydrogen = 25000,
-				/decl/material/solid/exotic_matter = 50000
-				)
-
+		/decl/material/gas/hydrogen/tritium = 25000,
+		/decl/material/gas/hydrogen/deuterium = 25000,
+		/decl/material/gas/hydrogen = 25000,
+		/decl/material/solid/exotic_matter = 50000
+		)
 	var/obj/item/fuel_assembly/fuel
 	var/obj/machinery/ftl_shunt/core/master
 	var/max_fuel = 0
