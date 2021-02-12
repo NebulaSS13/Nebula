@@ -86,6 +86,15 @@
 		pref.skin_colour = "#333355"
 		pref.eye_colour = "#00ccff"
 
+// Spawns and sets up a brain interface in the head contents in case our brain is ever removed.
+/decl/species/utility_frame/create_organs(mob/living/carbon/human/H)
+	. = ..()
+	var/obj/item/organ/internal/brain/brain = H.get_internal_organ(BP_BRAIN)
+	var/obj/item/organ/external/head/head = H.get_organ(BP_HEAD)
+	var/obj/item/brain_interface/robot/empty/brainbox = new(head)
+	brainbox.holding_brain = brain
+	brainbox.update_from_brain()
+
 /decl/species/utility_frame/get_blood_name()
 	. = "coolant"
 

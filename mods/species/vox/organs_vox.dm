@@ -223,7 +223,7 @@
 	for(var/obj/item/organ/internal/O in head.contents)
 		O.take_internal_damage(rand(30,70))
 	do_backup()
-	..()
+	. = ..()
 
 /obj/item/organ/internal/voxstack/proc/overwrite()
 	if(owner.mind && owner.ckey) //Someone is already in this body!

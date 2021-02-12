@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(robots)
 		if(modules[include_override])
 			.[include_override] = modules[include_override]
 
-/datum/controller/subsystem/robots/proc/get_mmi_type_by_title(var/check_title)
+/datum/controller/subsystem/robots/proc/get_brain_type_by_title(var/check_title)
 	. = mmi_types_by_title[lowertext(trim(check_title))] || /obj/item/brain_interface/robot
 
 /datum/controller/subsystem/robots/proc/get_mob_type_by_title(var/check_title)

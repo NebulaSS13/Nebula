@@ -1,6 +1,6 @@
 /obj/item/brain_interface
 	name = "neural interface"
-	desc = "A complex life support shell that interfaces between a brain and electronic devices."
+	desc = "A complex life support shell that interfaces between a brain and an electronic device."
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/metal/steel
@@ -20,12 +20,11 @@
 	)
 
 /obj/item/brain_interface/proc/get_holder_internal_organ(var/atom/target)
-	var/obj/item/organ/internal/brain_holder/holder = new(target, 1)
-	forceMove(holder)
-	holder.stored_brain = src
-	holder.update_from_brain()
-	if(holding_brain?.brainmob?.mind && ismob(target))
-		holding_brain.brainmob.mind.transfer_to(target)
+	return
+
+/obj/item/brain_interface/proc/update_from_brain()
+	holding_brain?.brainmob?.SetName(initial(holding_brain.brainmob))
+	update_icon()
 
 /obj/item/brain_interface/on_update_icon()
 	icon_state = get_world_inventory_state()
@@ -53,7 +52,7 @@
 		verbs |= /obj/item/brain_interface/proc/toggle_radio_listening
 		verbs |= /obj/item/brain_interface/proc/toggle_radio_broadcasting
 	. = ..()
-	update_icon()
+	update_from_brain()
 
 /obj/item/brain_interface/attackby(var/obj/item/O, var/mob/user)
 

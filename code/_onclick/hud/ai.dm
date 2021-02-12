@@ -80,7 +80,7 @@
 			ui_ai_state_laws,
 			"State Laws",
 			"state_laws",
-			/mob/living/silicon/manage_laws_verb
+			/mob/living/proc/manage_laws_verb
 			)
 
 	adding += new /obj/screen/ai_button(null,

@@ -283,8 +283,11 @@
  */
 /obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1)
 
+	SHOULD_CALL_PARENT(TRUE)
+	. = src
+
 	if(!istype(owner))
-		return
+		return 
 	GLOB.dismembered_event.raise_event(owner, src)
 
 	action_button_name = null

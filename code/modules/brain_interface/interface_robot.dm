@@ -12,11 +12,13 @@
 	)
 	var/searching = FALSE
 
-/obj/item/brain_interface/robot/Initialize(ml, material_key)
-	. = ..()
+/obj/item/brain_interface/robot/empty
+	holding_brain = null
+
+/obj/item/brain_interface/robot/update_from_brain()
+	..()
 	if(holding_brain?.brainmob)
 		holding_brain.brainmob.SetName("[pick(list("ADA","DOS","GNU","MAC","WIN"))]-[random_id(type,1000,9999)]")
-		holding_brain.brainmob.real_name = holding_brain.brainmob.name
 
 /obj/item/brain_interface/robot/on_update_icon()
 	if(searching)

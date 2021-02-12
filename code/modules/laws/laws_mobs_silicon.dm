@@ -13,7 +13,8 @@
 	get_or_create_extension(src, default_law_extension_type)
 	verbs |= /mob/living/proc/show_laws_verb
 	verbs |= /mob/living/proc/state_laws_verb
-	verbs |= /mob/living/silicon/manage_laws_verb
+	verbs |= /mob/living/proc/manage_laws_verb
 
-/mob/living/silicon/manage_laws_verb()
+/mob/living/silicon/manage_laws_proc()
 	open_subsystem(/datum/nano_module/law_manager)
+	return TRUE

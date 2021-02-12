@@ -36,9 +36,8 @@
 
 	last_special = world.time + 20
 
-	E.removed(src)
+	E = E.removed(src)
 	E.forceMove(get_turf(src))
-
 	update_body()
 	updatehealth()
 	UpdateDamageIcon()

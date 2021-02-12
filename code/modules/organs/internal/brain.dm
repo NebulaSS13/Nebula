@@ -15,12 +15,18 @@
 	relative_size = 85
 	damage_reduction = 0
 
-	var/can_use_mmi = TRUE
+	var/can_use_brain_interface = TRUE
 	var/mob/living/brain/brainmob
 	var/const/damage_threshold_count = 10
 	var/damage_threshold_value
 	var/healed_threshold = 1
 	var/oxygen_reserve = 6
+
+/obj/item/organ/internal/brain/robotic
+	name = "computer intelligence module"
+	desc = "An excitingly chunky computer system made for running a complex machine intelligence."
+	icon_state = "brain-prosthetic"
+	can_use_brain_interface = FALSE
 
 /obj/item/organ/internal/brain/robotic/Initialize()
 	. = ..()
@@ -52,13 +58,13 @@
 /obj/item/organ/internal/brain/proc/transfer_player(var/mob/living/carbon/H)
 	if(!brainmob)
 		brainmob = new(src)
-		brainmob.SetName(H.real_name)
-		brainmob.real_name = H.real_name
-		brainmob.dna = H.dna.Clone()
+	brainmob.SetName(H.real_name)
+	brainmob.real_name = H.real_name
+	brainmob.dna = H.dna.Clone()
 	if(H.mind)
 		H.mind.transfer_to(brainmob)
 
-	to_chat(brainmob, "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [initial(src.name)].</span>")
+	to_chat(brainmob, SPAN_NOTICE("You feel slightly disoriented. That's normal when you're just \a [initial(src.name)]."))
 	callHook("debrain", list(brainmob))
 
 /obj/item/organ/internal/brain/examine(mob/user)
@@ -69,15 +75,21 @@
 		to_chat(user, "This one seems particularly lifeless. Perhaps it will regain some of its luster later..")
 
 /obj/item/organ/internal/brain/removed(var/mob/living/user)
-	if(!istype(owner))
-		return ..()
-
-	if(name == initial(name))
-		name = "\the [owner.real_name]'s [initial(name)]"
-
-	transfer_player(owner)
-
-	..()
+	var/obj/item/organ/external/E = user.get_organ(BP_HEAD)
+	if(istype(E))
+		for(var/obj/item/brain_interface/brainbox in E)
+			if(brainbox.holding_brain == src)
+				. = brainbox
+				break
+	if(istype(owner))
+		if(name == initial(name))
+			name = "[owner.real_name]'s [initial(name)]"
+		transfer_player(owner)
+	. = ..()
+	var/obj/item/brain_interface/brainbox = .
+	if(istype(brainbox))
+		forceMove(brainbox)
+		brainbox.update_icon()
 
 /obj/item/organ/internal/brain/replaced(var/mob/living/target)
 

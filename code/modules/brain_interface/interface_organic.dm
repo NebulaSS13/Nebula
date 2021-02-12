@@ -42,7 +42,7 @@
 			to_chat(user, SPAN_WARNING("That brain is well and truly dead."))
 			return TRUE
 	
-		if(!inserting_brain.brainmob || !inserting_brain.can_use_mmi)
+		if(!inserting_brain.brainmob || !inserting_brain.can_use_brain_interface)
 			to_chat(user, SPAN_WARNING("\The [inserting_brain] is completely useless."))
 			return TRUE
 

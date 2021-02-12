@@ -53,4 +53,8 @@
 		to_chat(src, SPAN_WARNING("You have no laws."))
 		verbs -= /mob/living/proc/manage_laws_verb
 		return
-	laws.manage_laws(src)
+	if(!manage_laws_proc())
+		laws.manage_laws(src)
+
+/mob/living/proc/manage_laws_proc()
+	return FALSE

@@ -998,8 +998,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 			gore.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/organ/I in internal_organs)
-				I.removed()
-				if(!QDELETED(I) && isturf(loc))
+				I = I.removed()
+				if(istype(I, /obj/item) && !QDELETED(I) && isturf(loc))
 					I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/I in src)
@@ -1283,7 +1283,7 @@ obj/item/organ/external/proc/remove_clamps()
 /obj/item/organ/external/removed(var/mob/living/user, var/ignore_children = 0)
 
 	if(!owner)
-		return
+		return src
 
 	if((body_part & SLOT_FOOT_LEFT) || (body_part & SLOT_FOOT_RIGHT))
 		owner.drop_from_inventory(owner.shoes)
@@ -1299,7 +1299,7 @@ obj/item/organ/external/proc/remove_clamps()
 	var/mob/living/carbon/human/victim = owner
 	var/is_robotic = BP_IS_PROSTHETIC(src)
 
-	..()
+	. = ..()
 
 	victim.bad_external_organs -= src
 
@@ -1321,18 +1321,18 @@ obj/item/organ/external/proc/remove_clamps()
 	// Attached organs also fly off.
 	if(!ignore_children)
 		for(var/obj/item/organ/external/O in children)
-			O.removed()
-			if(!QDELETED(O))
+			O = O.removed()
+			if(istype(O, /obj/item) && !QDELETED(O))
 				O.forceMove(src)
-
 				// if we didn't lose the organ we still want it as a child
-				children += O
-				O.parent = src
+				if(istype(O, /obj/item/organ))
+					children += O
+					O.parent = src
 
 	// Grab all the internal giblets too.
 	for(var/obj/item/organ/organ in internal_organs)
-		organ.removed(user, 0, 0)  // Organ stays inside and connected
-		if(!QDELETED(organ))
+		organ = organ.removed(user, 0, 0)  // Organ stays inside and connected
+		if(istype(organ) && !QDELETED(organ))
 			organ.forceMove(src)
 
 	// Remove parent references

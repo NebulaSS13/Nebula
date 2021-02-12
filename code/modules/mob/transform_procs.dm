@@ -130,7 +130,7 @@
 	mind.transfer_to(O)
 	if(O.mind && O.mind.assigned_role == "Robot")
 		O.mind.original = O
-		var/mmi_type = SSrobots.get_mmi_type_by_title(O.mind.role_alt_title ? O.mind.role_alt_title : O.mind.assigned_role)
+		var/mmi_type = SSrobots.get_brain_type_by_title(O.mind.role_alt_title ? O.mind.role_alt_title : O.mind.assigned_role)
 		if(mmi_type)
 			O.brain = new mmi_type(O)
 			O.brain.transfer_player(src)
