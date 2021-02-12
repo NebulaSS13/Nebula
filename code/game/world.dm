@@ -645,6 +645,12 @@ proc/setup_database_connection()
 	dbcon.Connect("dbi:mysql:[db]:[address]:[port]","[user]","[pass]")
 	. = dbcon.IsConnected()
 	if(.)
+		// Setting encoding and comparison (4-byte UTF-8) for the DB server ~bear1ake
+		var/DBQuery/unicode_query = dbcon.NewQuery("SET NAMES utf8mb4 COLLATE utf8mb4_general_ci")
+		if(!unicode_query.Execute())
+			global.failed_db_connections++
+			to_world_log(unicode_query.ErrorMsg())
+			return
 		global.failed_db_connections = 0	//If this connection succeeded, reset the failed connections counter.
 	else
 		global.failed_db_connections++		//If it failed, increase the failed connections counter.
