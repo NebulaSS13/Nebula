@@ -14792,16 +14792,17 @@
 /area/ministation/ai_core)
 "Kp" = (
 /obj/structure/table/standard,
-/obj/item/aiModule/asimov,
-/obj/item/aiModule/corp,
-/obj/item/aiModule/dais,
-/obj/item/aiModule/paladin,
-/obj/item/aiModule/protectStation,
-/obj/item/aiModule/quarantine,
-/obj/item/aiModule/reset,
-/obj/item/aiModule/robocop,
-/obj/item/aiModule/safeguard,
-/obj/item/aiModule/tyrant,
+/obj/item/ai_law_module/reset,
+/obj/item/ai_law_module/purge,
+/obj/item/ai_law_module/single,
+/obj/item/ai_law_module/single/quarantine,
+/obj/item/ai_law_module/variable,
+/obj/item/ai_law_module/lawset,
+/obj/item/ai_law_module/lawset/corp,
+/obj/item/ai_law_module/lawset/dais,
+/obj/item/ai_law_module/lawset/paladin,
+/obj/item/ai_law_module/lawset/justicar,
+/obj/item/ai_law_module/lawset/tyrant,
 /turf/simulated/floor/tiled/techmaint,
 /area/ministation/ai_upload)
 "Kq" = (
@@ -14810,8 +14811,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/ministation/ai_upload)
 "Kr" = (
-/obj/machinery/computer/upload/ai{
-	icon_state = "computer";
+/obj/machinery/computer/upload{
 	dir = 1
 	},
 /obj/machinery/flasher{

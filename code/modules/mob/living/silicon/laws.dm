@@ -1,19 +1,7 @@
 /mob/living/silicon
-	var/datum/ai_laws/laws
 	var/list/additional_law_channels = list("State" = "")
 
-/mob/living/silicon/Initialize()
-	. = ..()
-	if(!laws)
-		laws = GLOB.using_map.default_law_type
-	if(ispath(laws))
-		laws = new laws()
-	laws_sanity_check()
-
-/mob/living/silicon/proc/laws_sanity_check()
-	if (!src.laws)
-		laws = new GLOB.using_map.default_law_type
-
+/*
 /mob/living/silicon/proc/has_zeroth_law()
 	return laws.zeroth_law != null
 
@@ -27,22 +15,7 @@
 	if(tracking_entities)
 		to_chat(src, "<span class='warning'>Internal camera is currently being accessed.</span>")
 
-/mob/living/silicon/proc/add_ion_law(var/law)
-	laws_sanity_check()
-	laws.add_ion_law(law)
-	log_law("has given [src] the ion law: [law]")
-
-/mob/living/silicon/proc/add_inherent_law(var/law)
-	laws_sanity_check()
-	laws.add_inherent_law(law)
-	log_law("has given [src] the inherent law: [law]")
-
-/mob/living/silicon/proc/add_supplied_law(var/number, var/law)
-	laws_sanity_check()
-	laws.add_supplied_law(number, law)
-	log_law("has given [src] the supplied law: [law]")
-
-/mob/living/silicon/proc/delete_law(var/datum/ai_law/law)
+/mob/living/silicon/proc/delete_law(var/datum/law/law)
 	laws_sanity_check()
 	laws.delete_law(law)
 	log_law("has deleted a law belonging to [src]: [law.law]")
@@ -65,7 +38,7 @@
 	if(!silent)
 		log_law("cleared the supplied laws of [src]")
 
-/mob/living/silicon/proc/statelaws(var/datum/ai_laws/laws)
+/mob/living/silicon/proc/statelaws(var/datum/lawset/laws)
 	var/prefix = ""
 	if(MAIN_CHANNEL == lawchannel)
 		prefix = ";"
@@ -78,7 +51,7 @@
 
 	dostatelaws(lawchannel, prefix, laws)
 
-/mob/living/silicon/proc/dostatelaws(var/method, var/prefix, var/datum/ai_laws/laws)
+/mob/living/silicon/proc/dostatelaws(var/method, var/prefix, var//laws)
 	if(stating_laws[prefix])
 		to_chat(src, "<span class='notice'>[method]: Already stating laws using this communication method.</span>")
 		return
@@ -87,7 +60,7 @@
 
 	var/can_state = statelaw("[prefix]Current Active Laws:")
 
-	for(var/datum/ai_law/law in laws.laws_to_state())
+	for(var/datum/law/law in laws.laws_to_state())
 		can_state = statelaw("[prefix][law.get_index()]. [law.law]")
 		if(!can_state)
 			break
@@ -114,7 +87,4 @@
 /mob/living/silicon/proc/lawsync()
 	laws_sanity_check()
 	laws.sort_laws()
-
-/mob/living/silicon/proc/log_law(var/law_message)
-	log_and_message_admins(law_message)
-	GLOB.lawchanges += "[stationtime2text()] - [usr ? "[key_name(usr)]" : "EVENT"] [law_message]"
+*/

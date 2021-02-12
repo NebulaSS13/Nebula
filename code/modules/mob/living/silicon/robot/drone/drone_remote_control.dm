@@ -110,6 +110,6 @@
 	default_language = /decl/language/binary/drone
 
 	verbs -= /mob/living/silicon/robot/drone/proc/release_ai_control_verb
-	full_law_reset()
+	clear_laws()
 	updatename()
 	death()

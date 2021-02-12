@@ -78,7 +78,7 @@
 	if(player)
 		announce_ghost_joinleave(player, 0, "They have taken control over a maintenance drone.")
 		if(player.mob && player.mob.mind) player.mob.mind.reset()
-		new_drone.transfer_personality(player)
+		new_drone.transfer_player(player)
 
 	return new_drone
 

@@ -132,7 +132,7 @@
 	desc = "A module that can be used anonymously add a singular, top level law to an active AI. \
 	All you need to do is write in the law and insert it into any available AI Upload Console."
 	item_cost = 52
-	path = /obj/item/aiModule/syndicate
+	path = /obj/item/ai_law_module/freeform/hacked
 
 /datum/uplink_item/item/tools/supply_beacon
 	name = "Hacked Supply Beacon (DANGER!)"

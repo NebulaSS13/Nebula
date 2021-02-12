@@ -100,6 +100,10 @@
 	//set macro to normal incase it was overriden (like cyborg currently does)
 	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5")
 
+	var/datum/lawset/laws = get_laws()
+	if(laws)
+		laws.show_laws(src)
+
 /mob/living/carbon/Login()
 	. = ..()
 	if(internals && internal)

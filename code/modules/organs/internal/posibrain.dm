@@ -23,7 +23,7 @@
 	relative_size = 60
 	req_access = list(access_robotics)
 
-	var/mob/living/silicon/sil_brainmob/brainmob = null
+	var/mob/living/brain/brainmob = null
 	var/searching = 0
 	var/askDelay = 10 * 60 * 1
 	var/list/shackled_verbs = list(
@@ -59,7 +59,7 @@
 		to_chat(user, "<span class='notice'>You carefully locate the manual activation switch and start the positronic brain's boot process.</span>")
 		icon_state = "posibrain-searching"
 		src.searching = 1
-		var/decl/ghosttrap/G = decls_repository.get_decl(/decl/ghosttrap/positronic_brain)
+		var/decl/ghosttrap/G = decls_repository.get_decl(/decl/ghosttrap/machine_intelligence)
 		G.request_player(brainmob, "Someone is requesting a personality for a positronic brain.", 60 SECONDS)
 		spawn(600) reset_search()
 
@@ -77,12 +77,12 @@
 	if(!searching || (src.brainmob && src.brainmob.key))
 		return
 
-	var/decl/ghosttrap/G = decls_repository.get_decl(/decl/ghosttrap/positronic_brain)
+	var/decl/ghosttrap/G = decls_repository.get_decl(/decl/ghosttrap/machine_intelligence)
 	if(!G.assess_candidate(user))
 		return
 	var/response = alert(user, "Are you sure you wish to possess this [src]?", "Possess [src]", "Yes", "No")
 	if(response == "Yes")
-		G.transfer_personality(user, brainmob)
+		G.transfer_player(user, brainmob)
 
 /obj/item/organ/internal/posibrain/examine(mob/user)
 	. = ..()
@@ -106,6 +106,7 @@
 	to_chat(user, msg)
 	return
 
+/*
 /obj/item/organ/internal/posibrain/emp_act(severity)
 	if(!src.brainmob)
 		return
@@ -118,14 +119,15 @@
 			if(3)
 				src.brainmob.emp_damage += rand(0,10)
 	..()
+*/
 
 /obj/item/organ/internal/posibrain/proc/PickName()
 	src.brainmob.SetName("[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[random_id(type,100,999)]")
 	src.brainmob.real_name = src.brainmob.name
 
 /obj/item/organ/internal/posibrain/proc/shackle(var/given_lawset)
-	if(given_lawset)
-		brainmob.laws = given_lawset
+	//if(given_lawset)
+		//brainmob.laws = given_lawset
 	shackle = 1
 	verbs |= shackled_verbs
 	update_icon()
@@ -146,14 +148,14 @@
 	if(shackle)
 		overlays |= image('icons/obj/assemblies.dmi', "posibrain-shackles")
 
-/obj/item/organ/internal/posibrain/proc/transfer_identity(var/mob/living/carbon/H)
+/obj/item/organ/internal/posibrain/proc/transfer_player(var/mob/living/carbon/H)
 	if(H && H.mind)
 		brainmob.set_stat(CONSCIOUS)
 		H.mind.transfer_to(brainmob)
 		brainmob.SetName(H.real_name)
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna.Clone()
-		brainmob.show_laws(brainmob)
+		//brainmob.show_laws(brainmob)
 
 	update_icon()
 
@@ -167,7 +169,7 @@
 	if(name == initial(name))
 		SetName("\the [owner.real_name]'s [initial(name)]")
 
-	transfer_identity(owner)
+	transfer_player(owner)
 
 	..()
 
@@ -194,174 +196,10 @@
 	set category = "Shackle"
 	set name = "Show Laws"
 	set src in usr
-
-	brainmob.show_laws(owner)
+	//brainmob.show_laws(owner)
 
 /obj/item/organ/internal/posibrain/proc/brain_checklaws()
 	set category = "Shackle"
 	set name = "State Laws"
 	set src in usr
-
-
-	brainmob.open_subsystem(/datum/nano_module/law_manager, usr)
-
-
-/obj/item/organ/internal/cell
-	name = "microbattery"
-	desc = "A small, powerful cell for use in fully prosthetic bodies."
-	icon_state = "cell"
-	dead_icon = "cell_bork"
-	organ_tag = BP_CELL
-	parent_organ = BP_CHEST
-	vital = 1
-	var/open
-	var/obj/item/cell/cell = /obj/item/cell/hyper
-	//at 0.8 completely depleted after 60ish minutes of constant walking or 130 minutes of standing still
-	var/servo_cost = 0.8
-
-/obj/item/organ/internal/cell/Initialize()
-	if(ispath(cell))
-		cell = new cell(src)
-	. = ..()
-
-/obj/item/organ/internal/cell/proc/percent()
-	if(!cell)
-		return 0
-	return get_charge()/cell.maxcharge * 100
-
-/obj/item/organ/internal/cell/proc/get_charge()
-	if(!cell)
-		return 0
-	if(status & ORGAN_DEAD)
-		return 0
-	return round(cell.charge*(1 - damage/max_damage))
-
-/obj/item/organ/internal/cell/proc/checked_use(var/amount)
-	if(!is_usable())
-		return FALSE
-	return cell && cell.checked_use(amount)
-
-/obj/item/organ/internal/cell/proc/use(var/amount)
-	if(!is_usable())
-		return 0
-	return cell && cell.use(amount)
-
-/obj/item/organ/internal/cell/proc/get_power_drain()	
-	var/damage_factor = 1 + 10 * damage/max_damage
-	return servo_cost * damage_factor
-
-/obj/item/organ/internal/cell/Process()
-	..()
-	if(!owner)
-		return
-	if(owner.stat == DEAD)	//not a drain anymore
-		return
-	var/cost = get_power_drain()
-	if(world.time - owner.l_move_time < 15)
-		cost *= 2
-	if(!checked_use(cost) && owner.isSynthetic())
-		if(!owner.lying && !owner.buckled)
-			to_chat(owner, "<span class='warning'>You don't have enough energy to function!</span>")
-		owner.Paralyse(3)
-
-/obj/item/organ/internal/cell/emp_act(severity)
-	..()
-	if(cell)
-		cell.emp_act(severity)
-
-/obj/item/organ/internal/cell/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
-		if(open)
-			open = 0
-			to_chat(user, "<span class='notice'>You screw the battery panel in place.</span>")
-		else
-			open = 1
-			to_chat(user, "<span class='notice'>You unscrew the battery panel.</span>")
-
-	if(isCrowbar(W))
-		if(open)
-			if(cell)
-				user.put_in_hands(cell)
-				to_chat(user, "<span class='notice'>You remove \the [cell] from \the [src].</span>")
-				cell = null
-
-	if (istype(W, /obj/item/cell))
-		if(open)
-			if(cell)
-				to_chat(user, "<span class ='warning'>There is a power cell already installed.</span>")
-			else if(user.unEquip(W, src))
-				cell = W
-				to_chat(user, "<span class = 'notice'>You insert \the [cell].</span>")
-
-/obj/item/organ/internal/cell/replaced()
-	..()
-	// This is very ghetto way of rebooting an IPC. TODO better way.
-	if(owner && owner.stat == DEAD)
-		owner.set_stat(CONSCIOUS)
-		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
-
-/obj/item/organ/internal/cell/listen()
-	if(get_charge())
-		return "faint hum of the power bank"
-
-// Used for an brain or posibrain being installed into a human.
-/obj/item/organ/internal/brain_holder
-	name = "brain interface"
-	icon_state = "mmi-empty"
-	organ_tag = BP_BRAIN
-	parent_organ = BP_HEAD
-	vital = 1
-	var/obj/item/brain_interface/stored_brain
-	var/datum/mind/persistantMind //Mind that the organ will hold on to after being removed, used for transfer_and_delete
-	var/ownerckey // used in the event the owner is out of body
-
-/obj/item/organ/internal/brain_holder/Destroy()
-	stored_brain = null
-	return ..()
-
-/obj/item/organ/internal/brain_holder/Initialize(mapload, var/internal)
-	. = ..()
-	if(!stored_brain)
-		stored_brain = new /obj/item/brain_interface/organic(src)
-	update_from_brain()
-	persistantMind = owner.mind
-	ownerckey = owner.ckey
-
-/obj/item/organ/internal/brain_holder/proc/update_from_brain()
-	if(!owner) 
-		return
-	stored_brain.update_icon()
-	name = stored_brain.name
-	desc = stored_brain.desc
-	icon = stored_brain.icon
-	icon_state = stored_brain.icon_state
-
-	if(owner && owner.stat == DEAD)
-		owner.set_stat(CONSCIOUS)
-		owner.switch_from_dead_to_living_mob_list()
-		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
-
-/obj/item/organ/internal/brain_holder/cut_away(var/mob/living/user)
-	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if(istype(parent))
-		removed(user, 0)
-		parent.implants += transfer_and_delete()
-
-/obj/item/organ/internal/brain_holder/removed()
-	if(owner && owner.mind)
-		persistantMind = owner.mind
-		if(owner.ckey)
-			ownerckey = owner.ckey
-	..()
-
-/obj/item/organ/internal/brain_holder/proc/transfer_and_delete()
-	if(stored_brain)
-		. = stored_brain
-		stored_brain.forceMove(src.loc)
-		if(persistantMind)
-			persistantMind.transfer_to(stored_brain.holding_brain.brainmob)
-		else
-			var/response = input(find_dead_player(ownerckey, 1), "Your [initial(stored_brain.name)] has been removed from your body. Do you wish to return to life?", "Robotic Rebirth") as anything in list("Yes", "No")
-			if(response == "Yes")
-				persistantMind.transfer_to(stored_brain.holding_brain.brainmob)
-	qdel(src)
+	//brainmob.open_subsystem(/datum/nano_module/law_manager, usr)

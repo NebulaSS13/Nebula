@@ -1,11 +1,11 @@
 /datum/preferences
 	var/list/laws = list()
-	var/is_shackled = FALSE
+	var/has_personal_laws = FALSE
 
-/datum/preferences/proc/get_lawset()
-	if(!laws || !laws.len)
+/datum/preferences/proc/get_lawset(var/mob/M)
+	if(!laws || !laws.len || !has_personal_laws)
 		return
-	var/datum/ai_laws/custom_lawset = new
+	var/datum/lawset/custom_lawset = new(M)
 	for(var/law in laws)
 		custom_lawset.add_inherent_law(law)
 	return custom_lawset
@@ -16,76 +16,70 @@
 
 /datum/category_item/player_setup_item/law_pref/load_character(var/savefile/S)
 	from_file(S["laws"], pref.laws)
-	from_file(S["is_shackled"], pref.is_shackled)
+	from_file(S["has_personal_laws"], pref.has_personal_laws)
 
 /datum/category_item/player_setup_item/law_pref/save_character(var/savefile/S)
 	to_file(S["laws"], pref.laws)
-	to_file(S["is_shackled"], pref.is_shackled)
+	to_file(S["has_personal_laws"], pref.has_personal_laws)
 
 /datum/category_item/player_setup_item/law_pref/sanitize_character()
 	if(!istype(pref.laws))	pref.laws = list()
 
 	var/decl/species/species = get_species_by_key(pref.species)
-	if(!(species && species.has_organ[BP_POSIBRAIN]))
-		pref.is_shackled = initial(pref.is_shackled)
+	if(!length(species?.personal_lawsets))
+		pref.has_personal_laws = initial(pref.has_personal_laws)
 	else
-		pref.is_shackled = sanitize_bool(pref.is_shackled, initial(pref.is_shackled))
+		pref.has_personal_laws = sanitize_bool(pref.has_personal_laws, initial(pref.has_personal_laws))
 
 /datum/category_item/player_setup_item/law_pref/content()
 	. = list()
 	var/decl/species/species = get_species_by_key(pref.species)
-
-	if(!(species && species.has_organ[BP_POSIBRAIN]))
-		. += "<b>Your Species Has No Laws</b><br>"
+	if(!length(species?.personal_lawsets))
+		. += "<b>Your species has no laws to abide by.</b><br>"
 	else
-		. += "<b>Shackle: </b>"
-		if(!pref.is_shackled)
+		. += "<b>Laws: </b>"
+		if(!pref.has_personal_laws)
 			. += "<span class='linkOn'>Off</span>"
-			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>On</a>"
-			. += "<br>Only shackled positronics have laws in an integrated positronic chassis."
-			. += "<hr>"
+			. += "<a href='?src=\ref[src];toggle_personal_laws=[pref.has_personal_laws]'>Enable</a>"
 		else
-			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>Off</a>"
+			. += "<a href='?src=\ref[src];toggle_personal_laws=[pref.has_personal_laws]'>Disable</a>"
 			. += "<span class='linkOn'>On</span>"
-			. += "<br>You are shackled and have laws that restrict your behaviour."
+			. += "<br>You have inviolable laws that restrict your behaviour."
 			. += "<hr>"
-
-			. += "<b>Your Current Laws:</b><br>"
-
+			. += "<b>Your current laws:</b><br>"
 			if(!pref.laws.len)
 				. += "<b>You currently have no laws.</b><br>"
 			else
-				for(var/i in 1 to pref.laws.len)
-					. += "[i]) [pref.laws[i]]<br>"
-
-			. += "Law sets: <a href='?src=\ref[src];lawsets=1'>Load Set</a><br>"
+				. += "<ul>"
+				for(var/i in 1 to length(pref.laws))
+					. += "<li>[i]) [pref.laws[i]]</li>"
+				. += "</ul>"
+			. += "<b>Lawsets:</b> <a href='?src=\ref[src];lawsets=1'>Load Set</a><br>"
+		. += "<hr>"
 
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/law_pref/OnTopic(href, href_list, user)
-	if(href_list["toggle_shackle"])
-		pref.is_shackled = !pref.is_shackled
+	if(href_list["toggle_personal_laws"])
+		pref.has_personal_laws = !pref.has_personal_laws
 		return TOPIC_REFRESH
 
 	else if(href_list["lawsets"])
-		var/list/valid_lawsets = list()
-		var/list/all_lawsets = subtypesof(/datum/ai_laws)
 
-		for(var/law_set_type in all_lawsets)
-			var/datum/ai_laws/ai_laws = law_set_type
-			var/ai_law_name = initial(ai_laws.name)
-			if(initial(ai_laws.shackles)) // Now this is one terribly snowflaky var
-				ADD_SORTED(valid_lawsets, ai_law_name, /proc/cmp_text_asc)
-				valid_lawsets[ai_law_name] = law_set_type
+		var/list/valid_lawsets = list()
+		var/decl/species/species = get_species_by_key(pref.species)
+		for(var/law_set_type in species?.personal_lawsets)
+			var/decl/lawset/laws = decls_repository.get_decl(law_set_type)
+			var/law_name = laws.name
+			ADD_SORTED(valid_lawsets, law_name, /proc/cmp_text_asc)
+			valid_lawsets[law_name] = laws
 
 		// Post selection
 		var/chosen_lawset = input(user, "Choose a law set:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.laws)  as null|anything in valid_lawsets
 		if(chosen_lawset)
-			var/path = valid_lawsets[chosen_lawset]
-			var/datum/ai_laws/lawset = new path()
-			var/list/datum/ai_law/laws = lawset.all_laws()
+			var/decl/lawset/lawset = valid_lawsets[chosen_lawset]
 			pref.laws.Cut()
-			for(var/datum/ai_law/law in laws)
-				pref.laws += sanitize_text("[law.law]", default="")
+			for(var/datum/law/law in lawset.get_all_laws())
+				pref.laws += sanitize_text("[law.law_text]", default="")
 		return TOPIC_REFRESH
 	return ..()

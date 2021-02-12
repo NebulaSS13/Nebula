@@ -14,12 +14,10 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_network_change,
 	/mob/living/silicon/ai/proc/ai_statuschange,
 	/mob/living/silicon/ai/proc/ai_store_location,
-	/mob/living/silicon/ai/proc/ai_checklaws,
 	/mob/living/silicon/ai/proc/control_integrated_radio,
 	/mob/living/silicon/ai/proc/core,
 	/mob/living/silicon/ai/proc/pick_icon,
 	/mob/living/silicon/ai/proc/sensor_mode,
-	/mob/living/silicon/ai/proc/show_laws_verb,
 	/mob/living/silicon/ai/proc/toggle_acceleration,
 	/mob/living/silicon/ai/proc/toggle_camera_light,
 	/mob/living/silicon/ai/proc/multitool_mode,
@@ -118,7 +116,7 @@ var/list/ai_verbs_default = list(
 	src.verbs -= ai_verbs_default
 	src.verbs += /mob/living/verb/ghost
 
-/mob/living/silicon/ai/Initialize(mapload, var/datum/ai_laws/L, var/obj/item/brain_interface/B, var/safety = 0)
+/mob/living/silicon/ai/Initialize(mapload, var/supplied_lawset, var/obj/item/brain_interface/supplied_brain, var/safety = 0)
 	announcement = new()
 	announcement.title = "A.I. Announcement"
 	announcement.announcement_type = "A.I. Announcement"
@@ -141,8 +139,8 @@ var/list/ai_verbs_default = list(
 	holo_icon = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"))
 	holo_icon_longrange = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"), hologram_color = HOLOPAD_LONG_RANGE)
 
-	if(istype(L, /datum/ai_laws))
-		laws = L
+	if(supplied_lawset)
+		set_laws(supplied_lawset)
 
 	aiMulti = new(src)
 
@@ -158,12 +156,12 @@ var/list/ai_verbs_default = list(
 	add_language(/decl/language/sign, 0)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
-		if(!B || !B.holding_brain || !B.holding_brain.brainmob)//If there is no player/brain inside.
+		if(!supplied_brain || !supplied_brain.holding_brain || !supplied_brain.holding_brain.brainmob)//If there is no player/brain inside.
 			empty_playable_ai_cores += new/obj/structure/aicore/deactivated(loc)//New empty terminal.
 			qdel(src)//Delete AI.
 			return
-		if(B.holding_brain.brainmob.mind)
-			B.holding_brain.brainmob.mind.transfer_to(src)
+		if(supplied_brain.holding_brain.brainmob.mind)
+			supplied_brain.holding_brain.brainmob.mind.transfer_to(src)
 
 	create_powersupply()
 
@@ -178,11 +176,12 @@ var/list/ai_verbs_default = list(
 	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 
 	ai_list += src
-	. = ..()
+	. = ..(mapload, supplied_lawset)
 	ai_radio = silicon_radio
 	ai_radio.myAi = src
 
 /mob/living/silicon/ai/proc/on_mob_init()
+
 	to_chat(src, "<B>You are playing the [station_name()]'s AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>")
 	to_chat(src, "<B>To look at other areas, click on yourself to get a camera menu.</B>")
 	to_chat(src, "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>")
@@ -199,8 +198,11 @@ var/list/ai_verbs_default = list(
 			radio_text += ", "
 
 	to_chat(src, radio_text)
-	show_laws()
-	to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
+
+	var/datum/extension/laws/laws = get_extension(src, /datum/extension/laws)
+	if(laws)
+		laws.show_laws(src)
+		to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
 
 	//Prevents more than one active core spawning on the same tile. Technically just a sanitization for roundstart join
 	for(var/obj/structure/aicore/C in src.loc)

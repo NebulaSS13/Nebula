@@ -6,9 +6,10 @@
 	deform =                'mods/species/utility_frames/icons/body.dmi'
 	preview_icon =          'mods/species/utility_frames/icons/preview.dmi'
 	limb_blend =            ICON_MULTIPLY
-	cyborg_noun = null
+	cyborg_noun =           null
 
-	min_age =               1
+	personal_lawsets = list(/decl/lawset/asimov)
+
 	max_age =               20
 	hidden_from_codex =     FALSE
 	bodytype =              BODYTYPE_HUMANOID
@@ -47,8 +48,8 @@
 		TAG_CULTURE = list(CULTURE_SYNTHETIC)
 	)
 	has_organ = list(
-		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
-		BP_EYES = /obj/item/organ/internal/eyes/robot
+		BP_BRAIN = /obj/item/organ/internal/brain/robotic,
+		BP_EYES =  /obj/item/organ/internal/eyes/robot
 	)
 
 	exertion_effect_chance = 10

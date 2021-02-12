@@ -4,7 +4,6 @@
 	icon_state = "securityrobot"
 	modtype = "Security"
 	lawchannel = "State"
-	laws = /datum/ai_laws/syndicate_override
 	idcard = /obj/item/card/id/syndicate
 	module = /obj/item/robot_module/syndicate
 	silicon_radio = /obj/item/radio/borg/syndicate
@@ -12,6 +11,9 @@
 	cell = /obj/item/cell/super
 	pitch_toggle = 0
 
+/mob/living/silicon/robot/syndicate/Initialize(mapload, supplied_lawset)
+	. = ..(mapload, supplied_lawset || /decl/lawset/syndicate_override)
+	
 /mob/living/silicon/robot/combat
 	lawupdate = 0
 	scrambledcodes = 1

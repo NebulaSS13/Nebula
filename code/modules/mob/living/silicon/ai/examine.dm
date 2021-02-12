@@ -29,12 +29,3 @@
 		msg += "</span>"
 	msg += "*---------*"
 	to_chat(user, msg)
-	user.showLaws(src)
-	return
-
-/mob/proc/showLaws(var/mob/living/silicon/S)
-	return
-
-/mob/observer/ghost/showLaws(var/mob/living/silicon/S)
-	if(antagHUD || is_admin(src))
-		S.laws.show_laws(src)

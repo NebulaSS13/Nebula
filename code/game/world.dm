@@ -274,23 +274,24 @@ var/world_topic_spam_protect_time = world.timeofday
 				info["master"] = R.connected_ai?.name
 				info["sync"] = R.lawupdate
 
-			if(!S.laws)
+			var/datum/lawset/ai_laws = S.get_laws()
+			if(!ai_laws)
 				info["laws"] = null
 				return list2params(info)
 
 			var/list/lawset_parts = list(
-				"ion" = S.laws.ion_laws,
-				"inherent" = S.laws.inherent_laws,
-				"supplied" = S.laws.supplied_laws
+				"ion" =      ai_laws.ion_laws,
+				"inherent" = ai_laws.inherent_laws,
+				"supplied" = ai_laws.supplied_laws
 			)
 
 			for(var/law_type in lawset_parts)
 				var/laws = list()
-				for(var/datum/ai_law/L in lawset_parts[law_type])
-					laws += L.law
+				for(var/datum/law/L in lawset_parts[law_type])
+					laws += L.law_text
 				info[law_type] = list2params(laws)
 
-			info["zero"] = S.laws.zeroth_law ? S.laws.zeroth_law.law : null
+			info["zero"] = length(ai_laws.zeroth_laws) ? jointext(ai_laws.zeroth_laws, "<br>") : null
 
 			return list2params(info)
 

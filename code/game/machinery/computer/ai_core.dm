@@ -9,7 +9,6 @@ var/global/list/empty_playable_ai_cores = list()
 	tool_interaction_flags = TOOL_INTERACTION_ALL
 	material = /decl/material/solid/metal/plasteel
 
-	var/datum/ai_laws/laws
 	var/obj/item/stock_parts/circuitboard/circuit
 	var/obj/item/brain_interface/brain
 	var/authorized
@@ -18,8 +17,10 @@ var/global/list/empty_playable_ai_cores = list()
 	var/glass_installed = FALSE
 
 /obj/structure/aicore/Initialize()
-	if(!laws)
-		laws = new GLOB.using_map.default_law_type
+	var/datum/extension/laws/laws = get_or_create_extension(src, /datum/extension/laws)
+	if(!laws.lawset)
+		var/decl/lawset/lawset = decls_repository.get_decl(GLOB.using_map.default_law_type)
+		laws.set_laws(lawset.get_initial_lawset())
 	. = ..()
 
 /obj/structure/aicore/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
@@ -51,7 +52,8 @@ var/global/list/empty_playable_ai_cores = list()
 				if(open_for_latejoin)
 					empty_playable_ai_cores += D
 			else
-				var/mob/living/silicon/ai/A = new /mob/living/silicon/ai ( loc, laws, brain )
+				var/datum/extension/laws/laws = get_extension(src, /datum/extension/laws)
+				var/mob/living/silicon/ai/A = new(loc, laws?.lawset, brain)
 				if(A) //if there's no brain, the mob is deleted and a structure/AIcore is created
 					A.on_mob_init()
 					A.rename_self("ai", 1)
@@ -138,14 +140,9 @@ var/global/list/empty_playable_ai_cores = list()
 
 				if(circuit && circuit_secured)
 
-					if((istype(P, /obj/item/brain_interface) || istype(P, /obj/item/organ/internal/posibrain)) && wired && circuit && circuit_secured)
-						var/mob/living/brain/B
-						if(istype(P, /obj/item/brain_interface))
-							var/obj/item/brain_interface/M = P
-							B = M.holding_brain?.brainmob
-						else
-							var/obj/item/organ/internal/posibrain/PB = P
-							B = PB.brainmob
+					if(istype(P, /obj/item/brain_interface) && wired && circuit && circuit_secured)
+						var/obj/item/brain_interface/M = P
+						var/mob/living/brain/B = M.holding_brain?.brainmob
 						if(!B)
 							to_chat(user, SPAN_WARNING("Sticking an empty [P] into the frame would sort of defeat the purpose."))
 							return
@@ -179,19 +176,10 @@ var/global/list/empty_playable_ai_cores = list()
 							update_icon()
 						return TRUE
 
-			if(istype(P, /obj/item/aiModule/freeform))
-				var/obj/item/aiModule/freeform/M = P
-				laws.add_inherent_law(M.newFreeFormLaw)
-				to_chat(usr, "Added a freeform law.")
-				return TRUE
-
-			if(istype(P, /obj/item/aiModule))
-				var/obj/item/aiModule/module = P
-				laws.clear_inherent_laws()
-				if(module.laws)
-					for(var/datum/ai_law/AL in module.laws.inherent_laws)
-						laws.add_inherent_law(AL.law)
-				to_chat(usr, "Law module applied.")
+			if(istype(P, /obj/item/ai_law_module))
+				var/obj/item/ai_law_module/module = P
+				if(module.apply_to_ai_core(src))
+					to_chat(usr, "Law module applied.")
 				return TRUE
 
 /obj/structure/aicore/deactivated

@@ -547,10 +547,11 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		else if (M.see_in_dark == 0)
 			to_chat(usr, "Upload failed. Only a faint signal is being detected from the AI, and it is not responding to our requests. It may be low on power.")
 		else
-			M.add_ion_law(input)
-			for(var/mob/living/silicon/ai/O in SSmobs.mob_list)
-				to_chat(O, "<span class='warning'>" + input + "...LAWS UPDATED</span>")
-				O.show_laws()
+			var/datum/lawset/laws = M.get_laws()
+			if(laws)
+				laws.add_ion_law(input)
+				to_chat(M, SPAN_WARNING("[uppertext(input)]... LAWS UPDATED."))
+				laws.show_laws(M)
 
 	log_admin("Admin [key_name(usr)] has added a new AI law - [input]")
 	message_admins("Admin [key_name_admin(usr)] has added a new AI law - [input]", 1)

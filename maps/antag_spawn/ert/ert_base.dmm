@@ -175,13 +175,13 @@
 	},
 /area/map_template/rescue_base/base)
 "aC" = (
-/obj/item/aiModule/reset,
-/obj/item/aiModule/freeformcore,
-/obj/item/aiModule/protectStation,
-/obj/item/aiModule/quarantine,
-/obj/item/aiModule/paladin,
-/obj/item/aiModule/robocop,
-/obj/item/aiModule/safeguard,
+/obj/item/ai_law_module/reset,
+/obj/item/ai_law_module/freeform/auxillary,
+/obj/item/ai_law_module/single,
+/obj/item/ai_law_module/single/quarantine,
+/obj/item/ai_law_module/lawset/paladin,
+/obj/item/ai_law_module/robocop,
+/obj/item/ai_law_module/variable,
 /obj/structure/table/rack,
 /turf/unsimulated/floor{
 	icon_state = "vault";

@@ -24,6 +24,13 @@
 	var/inertia_move_delay = 5
 	var/atom/movable/inertia_ignore
 
+/atom/movable/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	var/datum/lawset/laws = get_laws()
+	if(laws && isghost(user))
+		to_chat(user, SPAN_NOTICE("<b>\The [src] has the following laws:</b>"))
+		laws.show_laws(user)
+
 //call this proc to start space drifting
 /atom/movable/proc/space_drift(direction)//move this down
 	if(!loc || direction & (UP|DOWN) || Process_Spacemove(0))

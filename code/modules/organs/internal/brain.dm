@@ -22,21 +22,9 @@
 	var/healed_threshold = 1
 	var/oxygen_reserve = 6
 
-/obj/item/organ/internal/brain/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
-	replace_self_with(/obj/item/organ/internal/posibrain)
-
-/obj/item/organ/internal/brain/mechassist()
-	replace_self_with(/obj/item/organ/internal/brain_holder)
-
-/obj/item/organ/internal/brain/getToxLoss()
-	return 0
-
-/obj/item/organ/internal/brain/proc/replace_self_with(replace_path)
-	var/mob/living/carbon/human/tmp_owner = owner
-	qdel(src)
-	if(tmp_owner)
-		tmp_owner.internal_organs_by_name[organ_tag] = new replace_path(tmp_owner, 1)
-		tmp_owner = null
+/obj/item/organ/internal/brain/robotic/Initialize()
+	. = ..()
+	robotize()
 
 /obj/item/organ/internal/brain/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	. = ..()
@@ -61,7 +49,7 @@
 	QDEL_NULL(brainmob)
 	. = ..()
 
-/obj/item/organ/internal/brain/proc/transfer_identity(var/mob/living/carbon/H)
+/obj/item/organ/internal/brain/proc/transfer_player(var/mob/living/carbon/H)
 	if(!brainmob)
 		brainmob = new(src)
 		brainmob.SetName(H.real_name)
@@ -87,7 +75,7 @@
 	if(name == initial(name))
 		name = "\the [owner.real_name]'s [initial(name)]"
 
-	transfer_identity(owner)
+	transfer_player(owner)
 
 	..()
 

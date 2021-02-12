@@ -8,8 +8,8 @@
 
 	var/current_view = 0
 
-	var/global/list/datum/ai_laws/admin_laws
-	var/global/list/datum/ai_laws/player_laws
+	var/global/list/admin_laws
+	var/global/list/player_laws
 	var/mob/living/silicon/owner = null
 
 /datum/nano_module/law_manager/New(var/mob/living/silicon/S)
@@ -20,10 +20,10 @@
 		admin_laws = new()
 		player_laws = new()
 
-		init_subtypes(/datum/ai_laws, admin_laws)
+		init_subtypes(/datum/lawset, admin_laws)
 		admin_laws = dd_sortedObjectList(admin_laws)
 
-		for(var/datum/ai_laws/laws in admin_laws)
+		for(var/datum/lawset/laws in admin_laws)
 			if(laws.selectable)
 				player_laws += laws
 
@@ -41,7 +41,7 @@
 		return 1
 
 	if(href_list["state_law"])
-		var/datum/ai_law/AL = locate(href_list["ref"]) in owner.laws.all_laws()
+		var/datum/law/AL = locate(href_list["ref"]) in owner.laws.all_laws()
 		if(AL)
 			var/state_law = text2num(href_list["state_law"])
 			owner.laws.set_state_law(AL, state_law)
@@ -64,7 +64,7 @@
 
 	if(href_list["add_supplied_law"])
 		if(supplied_law && supplied_law_position >= 1 && MIN_SUPPLIED_LAW_NUMBER <= MAX_SUPPLIED_LAW_NUMBER && is_traitor(usr))
-			owner.add_supplied_law(supplied_law_position, supplied_law)
+			owner.add_supplied_law(supplied_law, supplied_law_position)
 		return 1
 
 	if(href_list["change_zeroth_law"])
@@ -99,7 +99,7 @@
 
 	if(href_list["edit_law"])
 		if(is_traitor(usr))
-			var/datum/ai_law/AL = locate(href_list["edit_law"]) in owner.laws.all_laws()
+			var/datum/law/AL = locate(href_list["edit_law"]) in owner.laws.all_laws()
 			if(AL)
 				var/new_law = sanitize(input(usr, "Enter new law. Leaving the field blank will cancel the edit.", "Edit Law", AL.law))
 				if(new_law && new_law != AL.law && is_traitor(usr) && can_still_topic())
@@ -109,7 +109,7 @@
 
 	if(href_list["delete_law"])
 		if(is_traitor(usr))
-			var/datum/ai_law/AL = locate(href_list["delete_law"]) in owner.laws.all_laws()
+			var/datum/law/AL = locate(href_list["delete_law"]) in owner.laws.all_laws()
 			if(AL && is_traitor(usr))
 				owner.delete_law(AL)
 		return 1
@@ -119,14 +119,14 @@
 		return 1
 
 	if(href_list["state_law_set"])
-		var/datum/ai_laws/ALs = locate(href_list["state_law_set"]) in (is_admin(usr) ? admin_laws : player_laws)
+		var/datum/lawset/ALs = locate(href_list["state_law_set"]) in (is_admin(usr) ? admin_laws : player_laws)
 		if(ALs)
 			owner.statelaws(ALs)
 		return 1
 
 	if(href_list["transfer_laws"])
 		if(is_traitor(usr))
-			var/datum/ai_laws/ALs = locate(href_list["transfer_laws"]) in (is_admin(usr) ? admin_laws : player_laws)
+			var/datum/lawset/ALs = locate(href_list["transfer_laws"]) in (is_admin(usr) ? admin_laws : player_laws)
 			if(ALs)
 				log_and_message_admins("has transfered the [ALs.name] laws to [owner].")
 				ALs.sync(owner, 0)
@@ -183,16 +183,16 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/datum/nano_module/law_manager/proc/package_laws(var/list/data, var/field, var/list/datum/ai_law/laws)
+/datum/nano_module/law_manager/proc/package_laws(var/list/data, var/field, var/list/datum/law/laws)
 	var/packaged_laws[0]
-	for(var/datum/ai_law/AL in laws)
+	for(var/datum/law/AL in laws)
 		packaged_laws[++packaged_laws.len] = list("law" = AL.law, "index" = AL.get_index(), "state" = owner.laws.get_state_law(AL), "ref" = "\ref[AL]")
 	data[field] = packaged_laws
 	data["has_[field]"] = packaged_laws.len
 
-/datum/nano_module/law_manager/proc/package_multiple_laws(var/list/datum/ai_laws/laws)
+/datum/nano_module/law_manager/proc/package_multiple_laws(var/list/laws)
 	var/law_sets[0]
-	for(var/datum/ai_laws/ALs in laws)
+	for(var/datum/lawset/ALs in laws)
 		var/packaged_laws[0]
 		package_laws(packaged_laws, "zeroth_laws", list(ALs.zeroth_law, ALs.zeroth_law_borg))
 		package_laws(packaged_laws, "ion_laws", ALs.ion_laws)

@@ -25,7 +25,7 @@
 #include "clothing\under\security.dm"
 #include "clothing\under\uniforms.dm"
 #include "datum\ai_icons.dm"
-#include "datum\ai_laws.dm"
+#include "datum\laws.dm"
 #include "datum\robolimbs.dm"
 #include "datum\antagonists\commando.dm"
 #include "datum\antagonists\deathsquad.dm"

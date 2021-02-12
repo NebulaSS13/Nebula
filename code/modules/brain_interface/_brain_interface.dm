@@ -65,9 +65,9 @@
 
 	. = ..()
 
-/obj/item/brain_interface/proc/transfer_identity(var/mob/living/carbon/human/H)//Same deal as the regular brain proc. Used for human-->robot people.
+/obj/item/brain_interface/proc/transfer_player(var/mob/living/carbon/human/H)//Same deal as the regular brain proc. Used for human-->robot people.
 	if(holding_brain)
-		holding_brain.transfer_identity(H)
+		holding_brain.transfer_player(H)
 		SetName("[initial(name)] (\the [holding_brain])")
 	else
 		SetName(initial(name))

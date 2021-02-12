@@ -62,9 +62,11 @@
 	name = "Bobo"
 	origin = "Floating rock"
 
-	possible_wanted_items  = list(/obj/item/ore                        = TRADER_ALL)
-	possible_trading_items = list(/obj/machinery/power/supermatter            = TRADER_ALL,
-								/obj/item/aiModule                     = TRADER_SUBTYPES_ONLY)
+	possible_wanted_items  = list(/obj/item/ore = TRADER_ALL)
+	possible_trading_items = list(
+		/obj/machinery/power/supermatter = TRADER_ALL,
+		/obj/item/ai_law_module          = TRADER_SUBTYPES_ONLY
+	)
 	want_multiplier = 5000
 
 	speech = list("hail_generic"     = "Blub am MERCHANT. Blub hunger for things. Boo bring them to blub, yes?",

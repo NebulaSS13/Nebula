@@ -77,13 +77,6 @@
 			)
 
 	adding += new /obj/screen/ai_button(null,
-			ui_ai_state_laws,
-			"State Laws",
-			"state_laws",
-			/mob/living/silicon/ai/proc/ai_checklaws
-			)
-
-	adding += new /obj/screen/ai_button(null,
 			ui_ai_call_shuttle,
 			"Call Shuttle",
 			"call_shuttle",

@@ -29,8 +29,6 @@
 
 	mob_size = MOB_SIZE_MEDIUM // Small mobs can't open doors, it's a huge pain for drones.
 
-	laws = /datum/ai_laws/drone
-
 	silicon_camera = /obj/item/camera/siliconcam/drone_camera
 
 	//Used for self-mailing.
@@ -38,13 +36,14 @@
 	var/module_type = /obj/item/robot_module/drone
 	var/hat_x = 0
 	var/hat_y = -13
+	var/factory_lawset = /decl/lawset/drone
 
 	holder_type = /obj/item/holder/drone
 	ntos_type = null
 	starting_stock_parts = null
 
-/mob/living/silicon/robot/drone/Initialize()
-	. = ..()
+/mob/living/silicon/robot/drone/Initialize(mapload, var/supplied_lawset)
+	. = ..(mapload, (supplied_lawset || factory_lawset))
 
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	verbs += /mob/living/proc/hide
@@ -108,19 +107,19 @@
 		return 0
 	message_admins("<span class='adminnotice'>[key_name_admin(possessor)] has taken control of \the [src].</span>")
 	log_admin("[key_name(possessor)] took control of \the [src].")
-	transfer_personality(possessor.client)
+	transfer_player(possessor.client)
 	qdel(possessor)
 	return 1
 
 /mob/living/silicon/robot/drone/construction
 	name = "construction drone"
 	icon_state = "constructiondrone"
-	laws = /datum/ai_laws/construction_drone
 	module_type = /obj/item/robot_module/drone/construction
 	can_pull_size = ITEM_SIZE_STRUCTURE
 	can_pull_mobs = MOB_PULL_SAME
 	hat_x = 1
 	hat_y = -12
+	factory_lawset = /decl/lawset/construction_drone
 
 /mob/living/silicon/robot/drone/init()
 	additional_law_channels["Drone"] = ":d"
@@ -232,15 +231,14 @@
 	emagged = 1
 	lawupdate = 0
 	connected_ai = null
-	clear_supplied_laws()
-	clear_inherent_laws()
-	QDEL_NULL(laws)
-	laws = new /datum/ai_laws/syndicate_override
-	set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
 
+	var/decl/lawset/syndicate_override = decls_repository.get_decl(/decl/lawset/syndicate_override)
+	var/datum/lawset/new_laws = syndicate_override.get_initial_lawset()
+	new_laws.add_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
+	set_laws(new_laws)
 	if(!controlling_ai)
 		to_chat(src, "<b>Obey these laws:</b>")
-		laws.show_laws(src)
+		new_laws.show_laws(src)
 		to_chat(src, "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and \his commands.</span>")
 	return 1
 
@@ -287,8 +285,7 @@
 			to_chat(src, "<span class='danger'>You feel something attempting to modify your programming, but your hacked subroutines are unaffected.</span>")
 		else
 			to_chat(src, "<span class='danger'>A reset-to-factory directive packet filters through your data connection, and you obediently modify your programming to suit it.</span>")
-			full_law_reset()
-			show_laws()
+			clear_laws()
 
 /mob/living/silicon/robot/drone/proc/shut_down()
 
@@ -303,23 +300,17 @@
 			to_chat(src, "<span class='danger'>You feel a system kill order percolate through your tiny brain, and you obediently destroy yourself.</span>")
 			death()
 
-/mob/living/silicon/robot/drone/proc/full_law_reset()
-	clear_supplied_laws(1)
-	clear_inherent_laws(1)
-	clear_ion_laws(1)
-	QDEL_NULL(laws)
-	var/law_type = initial(laws) || GLOB.using_map.default_law_type
-	laws = new law_type
+/mob/living/silicon/robot/drone/clear_laws()
+	set_laws(factory_lawset || GLOB.using_map.default_law_type)
 
 //Reboot procs.
-
 /mob/living/silicon/robot/drone/proc/request_player()
 	if(too_many_active_drones())
 		return
 	var/decl/ghosttrap/G = decls_repository.get_decl(/decl/ghosttrap/maintenance_drone)
 	G.request_player(src, "Someone is attempting to reboot a maintenance drone.", 30 SECONDS)
 
-/mob/living/silicon/robot/drone/proc/transfer_personality(var/client/player)
+/mob/living/silicon/robot/drone/proc/transfer_player(var/client/player)
 	if(!player) return
 	src.ckey = player.ckey
 
@@ -328,7 +319,7 @@
 
 	lawupdate = 0
 	to_chat(src, "<b>Systems rebooted</b>. Loading base pattern maintenance protocol... <b>loaded</b>.")
-	full_law_reset()
+	clear_laws()
 	welcome_drone()
 
 /mob/living/silicon/robot/drone/proc/welcome_drone()
@@ -359,18 +350,3 @@
 		if(D.key && D.client)
 			drones++
 	return drones >= config.max_maint_drones
-
-/mob/living/silicon/robot/drone/show_laws(var/everyone = 0)
-	if(!controlling_ai)
-		return..()
-	to_chat(src, "<b>Obey these laws:</b>")
-	controlling_ai.laws_sanity_check()
-	controlling_ai.laws.show_laws(src)
-
-/mob/living/silicon/robot/drone/robot_checklaws()
-	set category = "Silicon Commands"
-	set name = "State Laws"
-
-	if(!controlling_ai)
-		return ..()
-	controlling_ai.open_subsystem(/datum/nano_module/law_manager)

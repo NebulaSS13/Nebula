@@ -1,5 +1,5 @@
 /datum/map/tradeship
-	default_law_type = /datum/ai_laws/corporate
+	default_law_type = /decl/lawset/corporate
 	default_assistant_title = "Deck Hand"
 	allowed_jobs = list(
 		/datum/job/tradeship_captain,

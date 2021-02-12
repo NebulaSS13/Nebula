@@ -5,11 +5,11 @@
 
 /obj/item/stock_parts/circuitboard/aiupload
 	name = "circuitboard (AI upload console)"
-	build_path = /obj/machinery/computer/upload/ai
+	build_path = /obj/machinery/computer/upload
 	origin_tech = "{'programming':4}"
 
 /obj/item/stock_parts/circuitboard/borgupload
-	name = "circuitboard (cyborg upload console)"
+	name = "circuitboard (robot upload console)"
 	build_path = /obj/machinery/computer/upload/robot
 	origin_tech = "{'programming':4}"
 

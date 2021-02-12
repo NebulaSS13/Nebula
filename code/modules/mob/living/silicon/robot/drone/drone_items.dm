@@ -81,7 +81,6 @@
 		/obj/item/borg/upgrade,
 		/obj/item/flash,
 		/obj/item/organ/internal/brain,
-		/obj/item/organ/internal/posibrain,
 		/obj/item/stack/cable_coil,
 		/obj/item/stock_parts/circuitboard,
 		/obj/item/slime_extract,

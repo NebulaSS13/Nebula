@@ -11,7 +11,8 @@
 
 
 /decl/ai_holo/proc/may_be_used_by_ai(var/mob/living/silicon/ai/AI)
-	return AI.is_traitor()
+	var/decl/special_role/traitors = decls_repository.get_decl(/decl/special_role/traitor)
+	return AI.mind && (AI.mind in traitors.current_antagonists)
 
 /decl/ai_holo/New()
 	..()

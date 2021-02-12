@@ -37,7 +37,4 @@
 		if( findtext(pose,".",length(pose)) == 0 && findtext(pose,"!",length(pose)) == 0 && findtext(pose,"?",length(pose)) == 0 )
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
 		msg += "\nIt [pose]"
-
 	to_chat(user, msg)
-	user.showLaws(src)
-	return

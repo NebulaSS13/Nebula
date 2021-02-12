@@ -61,7 +61,7 @@
 			update_icon()
 
 	// Install a brain interface.
-	else if(istype(W, /obj/item/brain_interface) || istype(W, /obj/item/organ/internal/posibrain))
+	else if(istype(W, /obj/item/brain_interface))
 
 		if(!istype(loc,/turf))
 			to_chat(user, SPAN_WARNING("You can't put \the [W] in without the frame being on the ground."))
@@ -71,13 +71,8 @@
 			to_chat(user, SPAN_WARNING("The frame is not ready for the central processor to be installed."))
 			return
 
-		var/mob/living/brain/B
-		if(istype(W, /obj/item/brain_interface))
-			var/obj/item/brain_interface/M = W
-			B = M.holding_brain?.brainmob
-		else
-			var/obj/item/organ/internal/posibrain/P = W
-			B = P.brainmob
+		var/obj/item/brain_interface/M = W
+		var/mob/living/brain/B = M.holding_brain?.brainmob
 
 		if(!B)
 			to_chat(user, SPAN_WARNING("Sticking an empty [W.name] into the frame would sort of defeat the purpose."))

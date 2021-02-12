@@ -133,7 +133,7 @@
 		var/mmi_type = SSrobots.get_mmi_type_by_title(O.mind.role_alt_title ? O.mind.role_alt_title : O.mind.assigned_role)
 		if(mmi_type)
 			O.brain = new mmi_type(O)
-			O.brain.transfer_identity(src)
+			O.brain.transfer_player(src)
 
 	O.dropInto(loc)
 	O.job = "Robot"

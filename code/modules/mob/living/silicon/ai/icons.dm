@@ -28,7 +28,8 @@
 	name = "[name] (Malf)"
 
 /datum/ai_icon/malf/may_used_by_ai(var/mob/living/silicon/ai/AI)
-	return istype(AI) && AI.is_traitor()
+	var/decl/special_role/traitors = decls_repository.get_decl(/decl/special_role/traitor)
+	return istype(AI) && AI.mind && (AI.mind in traitors.current_antagonists)
 
 /datum/ai_icon/red
 	name = "Red"

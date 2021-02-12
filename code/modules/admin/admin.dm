@@ -1287,10 +1287,11 @@ var/global/floorIsLava = 0
 		else
 			to_chat(usr, "<b>SOMETHING SILICON [key_name(S, usr)]'s laws:</b>")
 
-		if (S.laws == null)
+		var/datum/lawset/laws = S.get_laws()
+		if (!laws)
 			to_chat(usr, "[key_name(S, usr)]'s laws are null?? Contact a coder.")
 		else
-			S.laws.show_laws(usr)
+			laws.show_laws(usr)
 	if(!ai_number)
 		to_chat(usr, "<b>No AIs located</b>")//Just so you know the thing is actually working and not just ignoring you.
 

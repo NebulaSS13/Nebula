@@ -3,13 +3,13 @@
 	path = /obj/item/brain_interface/organic/empty
 
 /datum/fabricator_recipe/protolathe/brains/get_product_name()
-	. = "intelligence storage ([..()])"
+	. = "intelligence interface ([..()])"
 
-/datum/fabricator_recipe/protolathe/brains/mmi_radio
+/datum/fabricator_recipe/protolathe/brains/organic
 	path = /obj/item/brain_interface/organic/radio_enabled/empty
 	
-/datum/fabricator_recipe/protolathe/brains/posibrain
-	path = /obj/item/organ/internal/posibrain
+/datum/fabricator_recipe/protolathe/brains/robot
+	path = /obj/item/brain_interface/robot
 
 /datum/fabricator_recipe/protolathe/brains/paicard
 	path = /obj/item/paicard

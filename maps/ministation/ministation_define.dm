@@ -18,7 +18,7 @@
 	company_short = "RD"
 	overmap_event_areas = 11
 
-	default_law_type = /datum/ai_laws/nanotrasen
+	default_law_type = /decl/lawset/nanotrasen
 
 	lobby_screens = list('maps/ministation/lobby.png')
 

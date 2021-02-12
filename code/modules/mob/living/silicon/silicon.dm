@@ -46,9 +46,15 @@
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
 
-/mob/living/silicon/Initialize()
+/mob/living/silicon/Initialize(mapload, var/supplied_lawset)
+
 	GLOB.silicon_mob_list += src
+
 	. = ..()
+
+	if(!istype(supplied_lawset, /datum/lawset) && !ispath(supplied_lawset, /decl/lawset))
+		supplied_lawset = GLOB.using_map.default_law_type
+	set_laws(supplied_lawset)
 
 	if(silicon_radio)
 		silicon_radio = new silicon_radio(src)
@@ -83,9 +89,6 @@
 	if(ispath(idcard))
 		idcard = new idcard(src)
 		set_id_info(idcard)
-
-/mob/living/silicon/proc/show_laws()
-	return
 
 /mob/living/silicon/drop_item(var/Target)
 	for(var/obj/item/grab/grab in get_active_grabs())
@@ -343,11 +346,6 @@
 	for(var/obj/machinery/camera/C in A.cameras())
 		cameratext += "[(cameratext == "")? "" : "|"]<A HREF=?src=\ref[src];switchcamera=\ref[C]>[C.c_tag]</A>"
 	to_chat(src, "[A.alarm_name()]! ([(cameratext)? cameratext : "No Camera"])")
-
-
-/mob/living/silicon/proc/is_traitor()
-	var/decl/special_role/traitors = decls_repository.get_decl(/decl/special_role/traitor)
-	return mind && (mind in traitors.current_antagonists)
 
 /mob/living/silicon/adjustEarDamage()
 	return

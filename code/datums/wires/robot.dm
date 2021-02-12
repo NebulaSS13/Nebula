@@ -34,7 +34,9 @@ var/const/BORG_WIRE_CAMERA = 16
 			if(!mended)
 				if (R.lawupdate == 1)
 					to_chat(R, "LawSync protocol engaged.")
-					R.show_laws()
+					var/datum/extension/laws/laws = get_extension(R, /datum/extension/laws)
+					if(laws)
+						laws.show_laws(R)
 			else
 				if (R.lawupdate == 0 && !R.emagged)
 					R.lawupdate = 1

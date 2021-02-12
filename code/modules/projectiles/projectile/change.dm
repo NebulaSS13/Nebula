@@ -49,7 +49,7 @@
 				new_mob.job = "Robot"
 				var/mob/living/silicon/robot/R = new_mob
 				R.brain = new /obj/item/brain_interface/robot(new_mob)
-				R.brain.transfer_identity(M)	//Does not transfer key/client.
+				R.brain.transfer_player(M)	//Does not transfer key/client.
 			if("slime")
 				new_mob = new /mob/living/carbon/slime(M.loc)
 				new_mob.universal_speak = TRUE

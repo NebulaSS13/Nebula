@@ -417,7 +417,9 @@ Helpers
 		else
 			to_world("<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws when it was deactivated were:</b>")
 
-		aiPlayer.show_laws(1)
+		var/datum/lawset/laws = aiPlayer.get_laws()
+		if(laws)
+			laws.show_laws(world)
 
 		if (aiPlayer.connected_robots.len)
 			var/robolist = "<b>The AI's loyal minions were:</b> "
@@ -440,9 +442,9 @@ Helpers
 			else
 				to_world("<b>[robo.name] (Played by: [robo.key]) was unable to survive the rigors of being a synthetic without an AI. Its laws were:</b>")
 
-
-			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
-				robo.laws.show_laws(world)
+			var/datum/lawset/laws = robo.get_laws()
+			if(laws)
+				laws.show_laws(world)
 
 	if(dronecount)
 		to_world("<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance drone\s at the end of this round.</b>")

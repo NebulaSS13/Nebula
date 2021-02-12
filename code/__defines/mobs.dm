@@ -182,7 +182,6 @@
 #define BP_ACETONE  "acetone reactor"
 
 // Robo Organs.
-#define BP_POSIBRAIN         "posibrain"
 #define BP_VOICE             "vocal synthesiser"
 #define BP_STACK             "stack"
 #define BP_OPTICS            "optics"

@@ -22,7 +22,7 @@
 	update_icon()
 	SetName(initial(name))
 
-/obj/item/brain_interface/organic/transfer_identity(var/mob/living/carbon/human/H)
+/obj/item/brain_interface/organic/transfer_player(var/mob/living/carbon/human/H)
 	locked = TRUE
 	. = ..()
 

@@ -95,13 +95,11 @@
 	var/intenselight = 0	// Whether cyborg's integrated light was upgraded
 	var/vtec = FALSE
 
-	var/list/robot_verbs_default = list(
-		/mob/living/silicon/robot/proc/sensor_mode,
-		/mob/living/silicon/robot/proc/robot_checklaws
-	)
+	var/list/robot_verbs_default = list(/mob/living/silicon/robot/proc/sensor_mode)
 
-/mob/living/silicon/robot/Initialize()
+/mob/living/silicon/robot/Initialize(mapload, var/supplied_lawset)
 	. = ..()
+
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
@@ -182,11 +180,6 @@
 /mob/living/silicon/robot/fully_replace_character_name(pickedName as text)
 	custom_name = pickedName
 	updatename()
-
-/mob/living/silicon/robot/proc/sync()
-	if(lawupdate && connected_ai)
-		lawsync()
-		photosync()
 
 /mob/living/silicon/robot/drain_power(var/drain_check, var/surge, var/amount = 0)
 
@@ -921,8 +914,8 @@
 	// They stay locked down if their wire is cut.
 	if(wires.LockedCut())
 		state = 1
-	else if(has_zeroth_law())
-		state = 0
+	//else if(loaded_lawset.has_zeroth_law())
+	//	state = 0
 
 	if(lockcharge != state)
 		lockcharge = state
@@ -1014,9 +1007,10 @@
 		if(ROBOT_NOTIFICATION_NEW_NAME) //New Name
 			if(first_arg != second_arg)
 				to_chat(connected_ai, "<br><br><span class='notice'>NOTICE - [braintype] reclassification detected: [first_arg] is now designated as [second_arg].</span><br>")
+
 /mob/living/silicon/robot/proc/disconnect_from_ai()
 	if(connected_ai)
-		sync() // One last sync attempt
+		//sync() // One last sync attempt
 		connected_ai.connected_robots -= src
 		connected_ai = null
 
@@ -1026,7 +1020,7 @@
 		connected_ai = AI
 		connected_ai.connected_robots |= src
 		notify_ai(ROBOT_NOTIFICATION_NEW_UNIT)
-		sync()
+		//sync()
 
 /mob/living/silicon/robot/emag_act(var/remaining_charges, var/mob/user)
 	if(!opened)//Cover is closed
@@ -1056,12 +1050,16 @@
 				disconnect_from_ai()
 				to_chat(user, "You emag [src]'s interface.")
 				log_and_message_admins("emagged cyborg [key_name_admin(src)].  Laws overridden.", src)
-				clear_supplied_laws()
-				clear_inherent_laws()
-				laws = new /datum/ai_laws/syndicate_override
+
+				var/decl/lawset/syndicate_override = decls_repository.get_decl(/decl/lawset/syndicate_override)
+				var/datum/lawset/new_laws = syndicate_override.get_initial_lawset()
+				new_laws.clear_zeroth_laws()
+				new_laws.add_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
+				set_laws(new_laws)
+
 				var/time = time2text(world.realtime,"hh:mm:ss")
 				GLOB.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
-				set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
+
 				SetLockdown(0)
 				. = 1
 				spawn()
@@ -1078,8 +1076,10 @@
 					to_chat(src, "<span class='danger'>> N</span>")
 					sleep(20)
 					to_chat(src, "<span class='danger'>ERRORERRORERROR</span>")
-					to_chat(src, "<b>Obey these laws:</b>")
-					laws.show_laws(src)
+					var/datum/lawset/laws = get_laws()
+					if(laws)
+						to_chat(src, "<b>Obey these laws:</b>")
+						laws.show_laws(src)
 					to_chat(src, "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>")
 					if(module)
 						module.handle_emagged()
