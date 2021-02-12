@@ -143,7 +143,6 @@ Please contact me on #coderbus IRC. ~Carn x
 
 //UPDATES OVERLAYS FROM OVERLAYS_LYING/OVERLAYS_STANDING
 /mob/living/carbon/human/update_icons()
-	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again
 	update_hud()		//TODO: remove the need for this
 	overlays.Cut()
 
@@ -187,15 +186,23 @@ Please contact me on #coderbus IRC. ~Carn x
 
 	overlays = overlays_to_apply
 
+/mob/living/carbon/human/update_transform()
+	// First, get the correct size.
+	var/desired_scale_x = icon_scale_x
+	var/desired_scale_y = icon_scale_y
+
+	// If you want stuff like scaling based on species or something, here is a good spot to mix the numbers together.
+
 	var/matrix/M = matrix()
 	if(lying)
 		M.Turn(90)
-		M.Scale(size_multiplier)
+		M.Scale(desired_scale_x, desired_scale_y)
 		M.Translate(1, -6-default_pixel_z)
 	else
-		M.Scale(size_multiplier)
-		M.Translate(0, 16*(size_multiplier-1))
-	animate(src, transform = M, time = ANIM_LYING_TIME)
+		M.Scale(desired_scale_x, desired_scale_y)
+		M.Translate(0, 16*(desired_scale_y-1))
+
+	animate(src, transform = M, time = transform_animate_time)
 
 var/global/list/damage_icon_parts = list()
 
