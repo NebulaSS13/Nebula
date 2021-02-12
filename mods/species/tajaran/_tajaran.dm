@@ -1,5 +1,5 @@
-#define SPECIES_TAJARA "Tajaran"
-#define CULTURE_TAJARA "Tajaran"
+#define SPECIES_TAJARA "Tajara"
+#define CULTURE_TAJARAN "Tajaran"
 #define LANGUAGE_TAJARA "Siik'maas"
 #define BODYTYPE_FELINE "Feline Body"
 

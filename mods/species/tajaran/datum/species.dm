@@ -22,18 +22,21 @@
 	tail_animation = 'mods/species/tajaran/icons/tail.dmi'
 	tail = "tajtail"
 	tail_blend = ICON_MULTIPLY
+	default_h_style = "Tajaran Ears"
 
 	flesh_color = "#afa59e"
 	base_color = "#333333"
 	blood_color = "#862a51"
 	organs_icon = 'mods/species/tajaran/icons/organs.dmi'
 
-	default_h_style = "Tajaran Ears"
-
 	darksight_range = 7
 	darksight_tint = DARKTINT_GOOD
 	slowdown = -0.5
 	flash_mod = 2
+
+	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.5
+	gluttonous = GLUT_TINY
+	health_hud_intensity = 1.75
 
 	unarmed_attacks = list(
 		/decl/natural_attack/stomp, 
@@ -63,7 +66,7 @@
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
-			CULTURE_TAJARA
+			CULTURE_TAJARAN
 		)
 	)
 
