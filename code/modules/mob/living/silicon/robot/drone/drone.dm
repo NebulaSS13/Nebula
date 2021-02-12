@@ -45,6 +45,10 @@
 /mob/living/silicon/robot/drone/Initialize(mapload, var/supplied_lawset)
 	. = ..(mapload, (supplied_lawset || factory_lawset))
 
+	var/datum/extension/laws/laws = get_extension(src, /datum/extension/laws)
+	if(laws)
+		LAZYSET(laws.additional_law_channels, "Drone", ":d")
+
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	verbs += /mob/living/proc/hide
 	remove_language(/decl/language/binary)
@@ -122,9 +126,8 @@
 	factory_lawset = /decl/lawset/construction_drone
 
 /mob/living/silicon/robot/drone/init()
-	additional_law_channels["Drone"] = ":d"
-	if(!module) module = new module_type(src)
-
+	if(!module)
+		module = new module_type(src)
 	flavor_text = "It's a tiny little repair drone. The casing is stamped with a logo and the subscript: '[GLOB.using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
@@ -234,11 +237,11 @@
 
 	var/decl/lawset/syndicate_override = decls_repository.get_decl(/decl/lawset/syndicate_override)
 	var/datum/lawset/new_laws = syndicate_override.get_initial_lawset()
-	new_laws.add_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
+	new_laws.set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
 	set_laws(new_laws)
 	if(!controlling_ai)
 		to_chat(src, "<b>Obey these laws:</b>")
-		new_laws.show_laws(src)
+		new_laws.show_laws(src, TRUE)
 		to_chat(src, "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and \his commands.</span>")
 	return 1
 
@@ -275,11 +278,9 @@
 
 //CONSOLE PROCS
 /mob/living/silicon/robot/drone/proc/law_resync()
-
 	if(controlling_ai)
 		to_chat(src, "<span class='warning'>Someone issues a remote law reset order for this unit, but you disregard it.</span>")
 		return
-
 	if(stat != 2)
 		if(emagged)
 			to_chat(src, "<span class='danger'>You feel something attempting to modify your programming, but your hacked subroutines are unaffected.</span>")

@@ -291,7 +291,7 @@ var/world_topic_spam_protect_time = world.timeofday
 					laws += L.law_text
 				info[law_type] = list2params(laws)
 
-			info["zero"] = length(ai_laws.zeroth_laws) ? jointext(ai_laws.zeroth_laws, "<br>") : null
+			info["zero"] = ai_laws?.zeroth_law?.law_text
 
 			return list2params(info)
 

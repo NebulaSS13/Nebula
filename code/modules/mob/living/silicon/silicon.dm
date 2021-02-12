@@ -11,9 +11,6 @@
 	bone_amount = 0
 
 	var/syndicate = 0
-	var/const/MAIN_CHANNEL = "Main Frequency"
-	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
-	var/list/stating_laws = list()// Channels laws are currently being stated on
 	var/obj/item/radio/silicon_radio
 
 	var/list/hud_list[10]

@@ -914,8 +914,10 @@
 	// They stay locked down if their wire is cut.
 	if(wires.LockedCut())
 		state = 1
-	//else if(loaded_lawset.has_zeroth_law())
-	//	state = 0
+	else
+		var/datum/lawset/laws = get_laws()
+		if(laws?.zeroth_law)
+			stat = 0
 
 	if(lockcharge != state)
 		lockcharge = state
@@ -1010,7 +1012,9 @@
 
 /mob/living/silicon/robot/proc/disconnect_from_ai()
 	if(connected_ai)
-		//sync() // One last sync attempt
+		var/datum/lawset/laws = get_laws()
+		if(laws) 
+			laws.sync_laws()
 		connected_ai.connected_robots -= src
 		connected_ai = null
 
@@ -1019,8 +1023,10 @@
 		disconnect_from_ai()
 		connected_ai = AI
 		connected_ai.connected_robots |= src
+		var/datum/lawset/laws = get_laws()
+		if(laws) 
+			laws.sync_laws()
 		notify_ai(ROBOT_NOTIFICATION_NEW_UNIT)
-		//sync()
 
 /mob/living/silicon/robot/emag_act(var/remaining_charges, var/mob/user)
 	if(!opened)//Cover is closed
@@ -1053,8 +1059,7 @@
 
 				var/decl/lawset/syndicate_override = decls_repository.get_decl(/decl/lawset/syndicate_override)
 				var/datum/lawset/new_laws = syndicate_override.get_initial_lawset()
-				new_laws.clear_zeroth_laws()
-				new_laws.add_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
+				new_laws.set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
 				set_laws(new_laws)
 
 				var/time = time2text(world.realtime,"hh:mm:ss")
@@ -1079,7 +1084,7 @@
 					var/datum/lawset/laws = get_laws()
 					if(laws)
 						to_chat(src, "<b>Obey these laws:</b>")
-						laws.show_laws(src)
+						laws.show_laws(src, TRUE)
 					to_chat(src, "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>")
 					if(module)
 						module.handle_emagged()

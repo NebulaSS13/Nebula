@@ -32,14 +32,12 @@ var/const/BORG_WIRE_CAMERA = 16
 	switch(index)
 		if(BORG_WIRE_LAWCHECK) //Cut the law wire, and the borg will no longer receive law updates from its AI
 			if(!mended)
-				if (R.lawupdate == 1)
-					to_chat(R, "LawSync protocol engaged.")
-					var/datum/extension/laws/laws = get_extension(R, /datum/extension/laws)
-					if(laws)
-						laws.show_laws(R)
-			else
-				if (R.lawupdate == 0 && !R.emagged)
-					R.lawupdate = 1
+				if(R.lawupdate)
+					to_chat(R, SPAN_NOTICE("<b>Law synchronization protocols active, synchronizing with upstream controller.</b>"))
+					var/datum/extension/laws/laws = get_or_create_extension(R, R.default_law_extension_type)
+					laws.sync_laws()
+			else if(!R.lawupdate && !R.emagged)
+				R.lawupdate = TRUE
 
 		if (BORG_WIRE_AI_CONTROL) //Cut the AI wire to reset AI control
 			if(!mended)

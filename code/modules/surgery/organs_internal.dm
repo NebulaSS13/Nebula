@@ -190,17 +190,15 @@
 	// Extract the organ!
 	var/obj/item/organ/O = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(istype(O) && istype(affected))
-		affected.implants -= O
-		O.dropInto(target.loc)
-		if(!BP_IS_PROSTHETIC(affected))
-			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
-		else
-			playsound(target.loc, 'sound/items/Ratchet.ogg', 50, 1)
-
-	if(istype(O, /obj/item/organ/internal/brain_holder))
-		var/obj/item/organ/internal/brain_holder/brain = O
-		brain.transfer_and_delete()
+	if(istype(O))
+		if(istype(affected))
+			affected.implants -= O
+			O.dropInto(target.loc)
+			if(!BP_IS_PROSTHETIC(affected))
+				playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
+			else
+				playsound(target.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		O.handle_dismembered_item_contents_removal()
 
 /decl/surgery_step/internal/remove_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

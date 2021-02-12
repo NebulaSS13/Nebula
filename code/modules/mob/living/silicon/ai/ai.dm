@@ -139,12 +139,7 @@ var/list/ai_verbs_default = list(
 	holo_icon = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"))
 	holo_icon_longrange = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"), hologram_color = HOLOPAD_LONG_RANGE)
 
-	if(supplied_lawset)
-		set_laws(supplied_lawset)
-
 	aiMulti = new(src)
-
-	additional_law_channels["Holopad"] = ":h"
 
 	if (istype(loc, /turf))
 		add_ai_verbs(src)
@@ -176,7 +171,12 @@ var/list/ai_verbs_default = list(
 	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 
 	ai_list += src
+
 	. = ..(mapload, supplied_lawset)
+	var/datum/extension/laws/laws = get_extension(src, /datum/extension/laws)
+	if(laws)
+		LAZYSET(laws.additional_law_channels, "Holopad", ":h")
+
 	ai_radio = silicon_radio
 	ai_radio.myAi = src
 

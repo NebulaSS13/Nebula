@@ -37,7 +37,7 @@
 	if(issilicon(usr))
 		return 0
 
-	var/datum/extension/laws/laws = get_or_create_extension(A, /datum/extension/laws)
+	var/datum/extension/laws/laws = get_or_create_extension(A, A.default_law_extension_type)
 	laws.validate_lawset()
 	if(href_list["PRG_purgeAiLaws"])
 		laws.lawset.purge_laws()

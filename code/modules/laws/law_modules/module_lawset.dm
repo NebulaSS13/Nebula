@@ -19,8 +19,8 @@
 	return TRUE
 
 /obj/item/ai_law_module/lawset/apply_loaded_laws(var/datum/lawset/laws, var/atom/movable/target, var/mob/sender)	
-	//var/decl/lawset/lawset = decls_repository.get_decl(loaded_lawset)
-	//lawset.copy_to(laws)
+	var/decl/lawset/lawset = decls_repository.get_decl(loaded_lawset)
+	laws.copy_from(lawset.get_initial_lawset())
 
 /obj/item/ai_law_module/lawset/paladin
 	origin_tech = "{'programming':3,'materials':6}"

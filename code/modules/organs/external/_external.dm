@@ -309,9 +309,9 @@
 					current_child.internal_organs.Remove(removing)
 
 					status |= ORGAN_CUT_AWAY
-					if(istype(removing, /obj/item/organ/internal/brain_holder))
-						var/obj/item/organ/internal/brain_holder/O = removing
-						removing = O.transfer_and_delete()
+					if(istype(removing, /obj/item/organ))
+						var/obj/item/organ/O = removing
+						removing = O.handle_dismembered_item_contents_removal()
 
 					removing.forceMove(get_turf(user))
 

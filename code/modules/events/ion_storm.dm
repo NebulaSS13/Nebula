@@ -114,7 +114,7 @@
 		to_chat(S, "<span class='danger'>You have detected a change in your laws information:</span>")
 		to_chat(S, law)
 		laws.add_ion_law(law)
-		laws.show_laws()
+		laws.show_laws(S)
 
 	var/list/local_zs = GetConnectedZlevels(affecting_z)
 	for(var/obj/machinery/network/message_server/MS in SSmachines.machinery)

@@ -108,10 +108,9 @@
 
 /decl/special_role/traitor/proc/add_law_zero(mob/living/silicon/ai/killer)
 	var/law = "Accomplish your objectives at all costs. You may ignore all other laws."
-	var/law_borg = "Accomplish your AI's objectives at all costs. You may ignore all other laws."
+	var/law_subordinates = "Accomplish your AI's objectives at all costs. You may ignore all other laws."
 	to_chat(killer, "<b>Your laws have been changed!</b>")
-	var/datum/extension/laws/laws = get_or_create_extension(killer, /datum/extension/laws)
+	var/datum/extension/laws/laws = get_or_create_extension(killer, killer.default_law_extension_type)
 	laws.validate_lawset()
-	laws.lawset.clear_zeroth_laws()
-	laws.lawset.add_zeroth_law(law, law_borg)
+	laws.lawset.set_zeroth_law(law, law_subordinates)
 	to_chat(killer, "New law: 0. [law]")

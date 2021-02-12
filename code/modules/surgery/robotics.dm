@@ -542,14 +542,9 @@
 	"<span class='notice'>You have installed \the [tool] into [target]'s [affected.name].</span>")
 
 	var/obj/item/brain_interface/M = tool
-	var/obj/item/organ/internal/brain_holder/holder = new(target, 1)
+	var/obj/item/organ/internal/holder = M.get_holder_internal_organ(target)
 	var/mob/living/carbon/human/H = target
-	H.internal_organs_by_name[BP_BRAIN] = holder
-	tool.forceMove(holder)
-	holder.stored_brain = tool
-	holder.update_from_brain()
-	if(M.holding_brain?.brainmob?.mind)
-		M.holding_brain.brainmob.mind.transfer_to(target)
+	H.internal_organs_by_name[holder.organ_tag] = holder
 
 /decl/surgery_step/robotics/install_brain_interface/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message(

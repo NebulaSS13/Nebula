@@ -1,3 +1,6 @@
+/atom/movable
+	var/default_law_extension_type = /datum/extension/laws
+
 /atom/movable/proc/get_laws()
 	var/datum/extension/laws/laws = get_extension(src, /datum/extension/laws)
 	if(laws)
@@ -19,6 +22,12 @@
 			remove_extension(src, /datum/extension/laws)
 		return
 
-	var/datum/extension/laws/laws = get_or_create_extension(src, /datum/extension/laws)
+	var/datum/extension/laws/laws = get_or_create_extension(src, default_law_extension_type)
 	laws.set_laws(new_laws)
 	laws.lawset.owner = weakref(src)
+
+/atom/movable/proc/get_law_subordinates()
+	return
+
+/atom/movable/proc/get_law_superior()
+	return

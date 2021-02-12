@@ -461,3 +461,6 @@ var/list/ailment_reference_cache = list()
 				LAZYREMOVE(ailments, ext_ailment)
 				return TRUE
 	return FALSE
+
+/obj/item/organ/proc/handle_dismembered_item_contents_removal()
+	return src

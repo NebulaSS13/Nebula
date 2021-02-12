@@ -39,7 +39,7 @@
 	if(ismob(target))
 		var/mob/M = target
 		to_chat(M, "\The [sender] has uploaded a change to the laws you must follow, using \a [src]. From now on:")
-		laws.show_laws(M)
+		laws.show_laws(M, TRUE)
 
 /obj/item/ai_law_module/proc/log_law_changes(var/mob/target, var/mob/sender)
 	if(istype(target) && istype(sender))

@@ -3,7 +3,6 @@
 	scrambledcodes = 1
 	icon_state = "securityrobot"
 	modtype = "Security"
-	lawchannel = "State"
 	idcard = /obj/item/card/id/syndicate
 	module = /obj/item/robot_module/syndicate
 	silicon_radio = /obj/item/radio/borg/syndicate

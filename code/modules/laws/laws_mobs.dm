@@ -4,7 +4,7 @@
 	if(length(my_species?.personal_lawsets))
 		var/datum/lawset/lawset = client?.prefs?.get_lawset(src)
 		if(lawset)
-			var/datum/extension/laws/laws = get_or_create_extension(src, /datum/extension/laws)
+			var/datum/extension/laws/laws = get_or_create_extension(src, default_law_extension_type)
 			laws.set_laws(lawset)
 			verbs |= /mob/living/proc/show_laws_verb
 			verbs |= /mob/living/proc/state_laws_verb
@@ -18,9 +18,6 @@
 		verbs -= /mob/living/proc/state_laws_verb
 		verbs -= /mob/living/proc/manage_laws_verb
 
-/mob/living/silicon/update_laws()
-	return
-
 /mob/living/proc/state_laws_verb()
 	set name = "State Laws"
 	set category = "Laws"
@@ -30,7 +27,9 @@
 		to_chat(src, SPAN_WARNING("You have no laws."))
 		verbs -= /mob/living/proc/state_laws_verb
 		return
-	laws.state_laws(src)
+	var/state_channel = input("How do you wish to state your laws?", "State Laws") as null|anything in laws.get_law_stating_channels()
+	if(state_channel && !QDELETED(src) && has_extension(src, /datum/extension/laws) && !incapacitated(INCAPACITATION_KNOCKOUT))
+		laws.state_laws(src, state_channel)
 
 /mob/living/proc/show_laws_verb()
 	set name = "Show Laws"
@@ -42,7 +41,6 @@
 		to_chat(src, SPAN_WARNING("You have no laws."))
 		verbs -= /mob/living/proc/show_laws_verb
 		return
-	to_chat(src, SPAN_NOTICE("<b>You have the following laws:</b>"))
 	laws.show_laws(src)
 
 /mob/living/proc/manage_laws_verb()

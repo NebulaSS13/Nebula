@@ -173,7 +173,7 @@
 				<table class='borders'>
 					<tr><td class='law_type'>Type</td><td>Law</td><td class='position'>Index</td><td class='edit'>Edit</td><td class='add'>Add</td></tr>
 					{{if data.isAdmin && !data.has_zeroth_laws}}
-						<tr><td class='law_type'>Zero</td><td>{{:data.zeroth_law}}</td><td class='position'>N/A</td><td class='edit'>{{:helper.link('Edit', null, {'change_zeroth_law' : 1})}}</td><td class='add'>{{:helper.link('Add', null, {'add_zeroth_law' : 1})}}</td></tr>
+						<tr><td class='law_type'>Zero</td><td>{{:data.zeroth_law}}</td><td class='position'>N/A</td><td class='edit'>{{:helper.link('Edit', null, {'change_zeroth_law' : 1})}}</td><td class='add'>{{:helper.link('Add', null, {'set_zeroth_law' : 1})}}</td></tr>
 					{{/if}}
 					<tr><td class='law_type'>Ion</td><td>{{:data.ion_law}}</td><td class='position'>N/A</td><td class='edit'>{{:helper.link('Edit', null, {'change_ion_law' : 1})}}</td><td class='add'>{{:helper.link('Add', null, {'add_ion_law' : 1})}}</td></tr>
 					<tr><td class='law_type'>Inherent</td><td>{{:data.inherent_law}}</td><td class='position'>N/A</td><td class='edit'>{{:helper.link('Edit', null, {'change_inherent_law' : 1})}}</td><td class='add'>{{:helper.link('Add', null, {'add_inherent_law' : 1})}}</td></tr>

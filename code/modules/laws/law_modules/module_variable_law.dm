@@ -43,7 +43,6 @@
 	var/decl/special_role/traitors = decls_repository.get_decl(/decl/special_role/traitor)
 	if(!istype(M) || !M.mind || !(M.mind in traitors.current_antagonists))
 		to_chat(target, law)
-		laws.clear_zeroth_laws()
-		laws.add_zeroth_law(law)
+		laws.set_zeroth_law(law)
 	else
 		GLOB.lawchanges.Add("\The [target]'s existing law zero cannot be overriden.")

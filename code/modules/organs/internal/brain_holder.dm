@@ -13,6 +13,9 @@
 	stored_brain = null
 	return ..()
 
+/obj/item/organ/internal/brain_holder/handle_dismembered_item_contents_removal()
+	return transfer_and_delete()
+
 /obj/item/organ/internal/brain_holder/Initialize(mapload, var/internal)
 	. = ..()
 	if(!stored_brain)

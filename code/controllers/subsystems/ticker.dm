@@ -419,7 +419,7 @@ Helpers
 
 		var/datum/lawset/laws = aiPlayer.get_laws()
 		if(laws)
-			laws.show_laws(world)
+			laws.show_laws(world, TRUE)
 
 		if (aiPlayer.connected_robots.len)
 			var/robolist = "<b>The AI's loyal minions were:</b> "
@@ -444,7 +444,7 @@ Helpers
 
 			var/datum/lawset/laws = robo.get_laws()
 			if(laws)
-				laws.show_laws(world)
+				laws.show_laws(world, TRUE)
 
 	if(dronecount)
 		to_world("<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance drone\s at the end of this round.</b>")

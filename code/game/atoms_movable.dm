@@ -29,7 +29,7 @@
 	var/datum/lawset/laws = get_laws()
 	if(laws && isghost(user))
 		to_chat(user, SPAN_NOTICE("<b>\The [src] has the following laws:</b>"))
-		laws.show_laws(user)
+		laws.show_laws(user, TRUE)
 
 //call this proc to start space drifting
 /atom/movable/proc/space_drift(direction)//move this down

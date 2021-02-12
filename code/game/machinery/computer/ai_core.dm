@@ -17,7 +17,7 @@ var/global/list/empty_playable_ai_cores = list()
 	var/glass_installed = FALSE
 
 /obj/structure/aicore/Initialize()
-	var/datum/extension/laws/laws = get_or_create_extension(src, /datum/extension/laws)
+	var/datum/extension/laws/laws = get_or_create_extension(src, default_law_extension_type)
 	if(!laws.lawset)
 		var/decl/lawset/lawset = decls_repository.get_decl(GLOB.using_map.default_law_type)
 		laws.set_laws(lawset.get_initial_lawset())

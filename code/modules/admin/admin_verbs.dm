@@ -669,8 +669,8 @@ var/list/admin_verbs_mod = list(
 	var/mob/living/silicon/S = input("Select silicon.", "Manage Silicon Laws") as null|anything in GLOB.silicon_mob_list
 	if(!S) return
 
-	//var/datum/nano_module/law_manager/L = new(S)
-	//L.ui_interact(usr, state = GLOB.admin_state)
+	var/datum/nano_module/law_manager/L = new(S)
+	L.ui_interact(usr, state = GLOB.admin_state)
 	log_and_message_admins("has opened [S]'s law manager.")
 	SSstatistics.add_field_details("admin_verb","MSL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

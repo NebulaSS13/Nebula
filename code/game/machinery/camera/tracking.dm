@@ -259,7 +259,7 @@ mob/living/proc/near_camera()
 /mob/living/silicon/robot/tracking_initiated()
 	tracking_entities++
 	var/datum/lawset/laws = get_laws()
-	if(tracking_entities == 1 && laws?.has_zeroth_law())
+	if(tracking_entities == 1 && laws?.zeroth_law)
 		to_chat(src, "<span class='warning'>Internal camera is currently being accessed.</span>")
 
 /mob/living/proc/tracking_cancelled()
@@ -267,7 +267,7 @@ mob/living/proc/near_camera()
 /mob/living/silicon/robot/tracking_cancelled()
 	tracking_entities--
 	var/datum/lawset/laws = get_laws()
-	if(!tracking_entities && laws?.has_zeroth_law())
+	if(!tracking_entities && laws?.zeroth_law)
 		to_chat(src, "<span class='notice'>Internal camera is no longer being accessed.</span>")
 
 

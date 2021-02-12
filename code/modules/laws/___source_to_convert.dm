@@ -1,5 +1,5 @@
-/datum/nano_module/law_manager
-	name = "Law manager"
+/*
+
 	var/ion_law	= "IonLaw"
 	var/zeroth_law = "ZerothLaw"
 	var/inherent_law = "InherentLaw"
@@ -47,7 +47,7 @@
 			owner.laws.set_state_law(AL, state_law)
 		return 1
 
-	if(href_list["add_zeroth_law"])
+	if(href_list["set_zeroth_law"])
 		if(zeroth_law && is_admin(usr) && !owner.laws.zeroth_law)
 			owner.set_zeroth_law(zeroth_law)
 		return 1
@@ -158,8 +158,8 @@
 	data["supplied_law"] = supplied_law
 	data["supplied_law_position"] = supplied_law_position
 
-	package_laws(data, "zeroth_laws", list(owner.laws.zeroth_law))
-	package_laws(data, "ion_laws", owner.laws.ion_laws)
+	package_laws(data, "zeroth_laws",   list(owner.laws.zeroth_law))
+	package_laws(data, "ion_laws",      owner.laws.ion_laws)
 	package_laws(data, "inherent_laws", owner.laws.inherent_laws)
 	package_laws(data, "supplied_laws", owner.laws.supplied_laws)
 
@@ -199,21 +199,6 @@
 		package_laws(packaged_laws, "inherent_laws", ALs.inherent_laws)
 		package_laws(packaged_laws, "supplied_laws", ALs.supplied_laws)
 		law_sets[++law_sets.len] = list("name" = ALs.name, "header" = ALs.law_header, "ref" = "\ref[ALs]","laws" = packaged_laws)
-
 	return law_sets
 
-/datum/nano_module/law_manager/proc/is_traitor(var/mob/user)
-	return (is_admin(user) && !owner.is_slaved()) || owner.is_traitor()
-
-/mob/living/silicon/proc/is_slaved()
-	return 0
-
-/mob/living/silicon/robot/is_slaved()
-	return lawupdate && connected_ai ? sanitize(connected_ai.name) : null
-
-/datum/nano_module/law_manager/proc/sync_laws(var/mob/living/silicon/ai/AI)
-	if(!AI)
-		return
-	for(var/mob/living/silicon/robot/R in AI.connected_robots)
-		R.sync()
-	log_and_message_admins("has syncronized [AI]'s laws with its borgs.")
+*/

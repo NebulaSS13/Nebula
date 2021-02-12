@@ -143,15 +143,14 @@
 	icon_state = "drone-ascent"
 	spawn_sound = 'mods/species/ascent/sounds/ascent1.ogg'
 	cell =   /obj/item/cell/mantid
-	loaded_lawset = /decl/lawset/ascent
 	idcard = /obj/item/card/id/ascent
 	module = /obj/item/robot_module/flying/ascent
 	req_access = list(access_ascent)
 	silicon_radio = null
 	var/global/ascent_drone_count = 0
 
-/mob/living/silicon/robot/flying/ascent/Initialize()
-	. = ..()
+/mob/living/silicon/robot/flying/ascent/Initialize(ml)
+	. = ..(ml, /decl/lawset/ascent)
 	remove_language(/decl/language/binary)
 	default_language = /decl/language/mantid/nonvocal
 

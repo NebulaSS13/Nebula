@@ -2,12 +2,13 @@
 	var/list/laws = list()
 	var/has_personal_laws = FALSE
 
-/datum/preferences/proc/get_lawset(var/mob/M)
+/datum/preferences/proc/get_lawset(var/mob/owner)
 	if(!laws || !laws.len || !has_personal_laws)
 		return
-	var/datum/lawset/custom_lawset = new(M)
+	var/datum/lawset/custom_lawset = new(owner)
 	for(var/law in laws)
 		custom_lawset.add_inherent_law(law)
+	custom_lawset.owner = weakref(owner)
 	return custom_lawset
 
 /datum/category_item/player_setup_item/law_pref
