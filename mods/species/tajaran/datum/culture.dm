@@ -1,5 +1,5 @@
 /decl/cultural_info/culture/tajaran
-	name = CULTURE_TAJARA
+	name = CULTURE_TAJARAN
 	description = "The Tajaran culture is steeped in superstition and tradition from centuries of survival on their harsh, frozen homeworld."
 	language = /decl/language/tajaran
 	secondary_langs = list(
