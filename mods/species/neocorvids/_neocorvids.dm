@@ -9,6 +9,6 @@
 	. = ..()
 	LAZYSET(global.holder_mob_icons, lowertext(SPECIES_CORVID), 'mods/species/neocorvids/icons/holder.dmi')
 
-/datum/robolimb/New()
+/decl/prosthetics_manufacturer/New()
 	..()
 	LAZYDISTINCTADD(bodytypes_cannot_use, BODYTYPE_CORVID)

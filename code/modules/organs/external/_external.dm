@@ -500,7 +500,7 @@ This function completely restores a damaged organ to perfect condition.
 				remove_rejuv()
 			else if(status == "cyborg")
 				var/robodata = owner.client.prefs.rlimb_data[organ_tag]
-				if(robodata)
+				if(ispath(robodata, /decl/prosthetics_manufacturer))
 					robotize(robodata)
 				else
 					robotize()
@@ -1161,13 +1161,13 @@ obj/item/organ/external/proc/remove_clamps()
 
 /obj/item/organ/external/proc/get_dexterity()
 	if(model)
-		var/datum/robolimb/R = all_robolimbs[model]
+		var/decl/prosthetics_manufacturer/R = decls_repository.get_decl(model)
 		if(R)
 			return R.manual_dexterity
 	if(species)
 		return species.get_manual_dexterity(owner)
 
-/obj/item/organ/external/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/external/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
 
 	if(BP_IS_PROSTHETIC(src))
 		return
@@ -1176,19 +1176,21 @@ obj/item/organ/external/proc/remove_clamps()
 
 	slowdown = 0
 
-	if(company)
-		var/datum/robolimb/R = all_robolimbs[company]
-		if(istype(R) && R.check_can_install(organ_tag, owner))
-			model = company
-			force_icon = R.icon
-			name = "[R ? R.modifier_string : "robotic"] [initial(name)]"
-			desc = "[R.desc] It looks like it was produced by [R.company]."
-			slowdown = R.movement_slowdown
-			max_damage *= R.hardiness
-			min_broken_damage *= R.hardiness
-		else
-			R = basic_robolimb
+	if(!ispath(company, /decl/prosthetics_manufacturer))
+		crash_with("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
+		company = /decl/prosthetics_manufacturer
+	
+	var/decl/prosthetics_manufacturer/R = decls_repository.get_decl(company)
+	if(!R.check_can_install(organ_tag, (owner?.get_bodytype() || GLOB.using_map.default_bodytype), (owner?.get_species_name() || GLOB.using_map.default_species)))
+		R = decls_repository.get_decl(/decl/prosthetics_manufacturer)
 
+	model = company
+	force_icon = R.icon
+	name = "[R ? R.modifier_string : "robotic"] [initial(name)]"
+	desc = "[R.desc] It looks like it was produced by [R.name]."
+	slowdown = R.movement_slowdown
+	max_damage *= R.hardiness
+	min_broken_damage *= R.hardiness
 	dislocated = -1
 	remove_splint()
 	update_icon(1)
@@ -1470,7 +1472,7 @@ obj/item/organ/external/proc/remove_clamps()
 /obj/item/organ/external/proc/is_robotic()
 	. = FALSE
 	if(BP_IS_PROSTHETIC(src) && model)
-		var/datum/robolimb/R = all_robolimbs[model]
+		var/decl/prosthetics_manufacturer/R = decls_repository.get_decl(model)
 		. = R && R.is_robotic
 
 /obj/item/organ/external/proc/has_growths()

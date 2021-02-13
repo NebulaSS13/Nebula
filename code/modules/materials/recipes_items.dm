@@ -225,7 +225,7 @@
 
 /datum/stack_recipe/prosthetic
 	difficulty = 0
-	var/prosthetic_model = "wooden prosthesis"
+	var/prosthetic_model = /decl/prosthetics_manufacturer/wooden
 
 /datum/stack_recipe/prosthetic/spawn_result(mob/user, location, amount)
 	var/obj/item/organ/external/limb = ..()

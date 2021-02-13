@@ -278,10 +278,7 @@ var/list/time_prefs_fixed = list()
 					qdel(child)
 			qdel(O)
 		else if(status == "cyborg")
-			if(rlimb_data[name])
-				O.robotize(rlimb_data[name])
-			else
-				O.robotize()
+			O.robotize(rlimb_data[name])
 		else //normal organ
 			O.force_icon = initial(O.force_icon)
 			O.SetName(initial(O.name))

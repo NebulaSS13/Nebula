@@ -57,7 +57,7 @@
 
 /obj/item/organ/external/hand/insectoid/upper/get_dexterity()
 	. = DEXTERITY_GRIP
-	if(model && all_robolimbs[model])
+	if(model)
 		. = min(., ..())
 
 /obj/item/organ/external/hand/right/insectoid
@@ -76,7 +76,7 @@
 
 /obj/item/organ/external/hand/right/insectoid/upper/get_dexterity()
 	. = DEXTERITY_GRIP
-	if(model && all_robolimbs[model])
+	if(model)
 		. = min(., ..())
 
 /obj/item/organ/external/groin/insectoid
