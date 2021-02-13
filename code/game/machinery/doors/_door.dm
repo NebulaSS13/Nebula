@@ -100,6 +100,9 @@
 	update_nearby_tiles(need_rebuild=1)
 	if(autoset_access) // Delayed because apparently the dir is not set by mapping and we need to wait for nearby walls to init and turn us.
 		inherit_access_from_area()
+		var/obj/item/stock_parts/circuitboard/airlock_electronics/circuit = get_component_of_type(/obj/item/stock_parts/circuitboard/airlock_electronics)
+		if(circuit)
+			circuit.req_access = req_access?.Copy()
 
 /obj/machinery/door/Destroy()
 	set_density(0)
@@ -536,6 +539,11 @@
 	if((!requiresID() || allowed(null)) && can_open_manually)
 		toggle()
 	return TRUE
+
+/obj/machinery/door/components_are_accessible(var/path)
+	if(ispath(path, /obj/item/stock_parts/circuitboard))
+		return TRUE
+	return ..()
 
 // Public access
 

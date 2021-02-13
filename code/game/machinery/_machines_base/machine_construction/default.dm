@@ -96,12 +96,3 @@
 
 // Not implemented fully as the machine will qdel on transition to this. Path needed for checks.
 /decl/machine_construction/default/deconstructed
-
-// door variants, just use different boards
-/decl/machine_construction/default/panel_closed/door
-	needs_board = "door"
-	down_state = /decl/machine_construction/default/panel_open/door
-
-/decl/machine_construction/default/panel_open/door
-	needs_board = "door"
-	up_state = /decl/machine_construction/default/panel_closed/door
