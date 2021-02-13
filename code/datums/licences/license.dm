@@ -31,3 +31,7 @@
 	name = "Grandfathered In"
 	url = "https://en.wikipedia.org/wiki/Grandfather_clause"
 	attribution_mandatory = FALSE
+
+/decl/license/good_faith
+	name = "Good Faith Usage"
+	url = "https://en.wikipedia.org/wiki/Good_faith_(law)"
