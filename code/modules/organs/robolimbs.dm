@@ -30,6 +30,20 @@ var/datum/robolimb/basic_robolimb
 	var/movement_slowdown = 0
 	var/is_robotic = TRUE
 
+/datum/robolimb/proc/check_can_install(var/target_slot, var/mob/living/target_mob)
+	. = istext(target_slot) && istype(target_mob)
+	if(.)
+		if(!(target_slot in applies_to_part))
+			return FALSE
+		if(istype(target_mob))
+			var/target_bodytype = target_mob.get_bodytype()
+			if(islist(allowed_bodytypes) && !(target_bodtype in allowed_bodytypes))
+				return FALSE
+			if(islist(bodytypes_cannot_use) && (target_bodytype in bodytypes_cannot_use))
+				return FALSE
+			if(islist(species_restricted) && !(target_mob.get_species_name() in species_restricted))
+				return FALSE
+
 /datum/robolimb/wooden
 	company = "wooden prosthesis"
 	desc = "A crude wooden prosthetic."

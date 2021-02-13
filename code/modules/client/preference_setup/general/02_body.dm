@@ -540,21 +540,12 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					pref.rlimb_data[second_limb] = null
 
 			if("Prosthesis")
-				var/decl/species/temp_species = get_species_by_key(pref.species || GLOB.using_map.default_species)
-				var/tmp_bodytype = temp_species.get_bodytype(user)
-				var/list/usable_manufacturers = list()
+				var/list/usable_manufacturers
 				for(var/company in chargen_robolimbs)
 					var/datum/robolimb/M = chargen_robolimbs[company]
-					if(tmp_bodytype in M.bodytypes_cannot_use)
-						continue
-					if(length(M.species_restricted) && !(temp_species.name in M.species_restricted))
-						continue
-					if(M.applies_to_part.len && !(limb in M.applies_to_part))
-						continue
-					if(M.allowed_bodytypes && !(tmp_bodytype in M.allowed_bodytypes))
-						continue
-					usable_manufacturers[company] = M
-				if(!usable_manufacturers.len)
+					if(istype(M) && M.check_can_install(limb, M))
+						LAZYSET(usable_manufacturers, company, M)
+				if(!length(usable_manufacturers))
 					return
 				var/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in usable_manufacturers
 				if(!choice)

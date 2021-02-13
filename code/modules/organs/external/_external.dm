@@ -1178,15 +1178,7 @@ obj/item/organ/external/proc/remove_clamps()
 
 	if(company)
 		var/datum/robolimb/R = all_robolimbs[company]
-		var/can_apply = TRUE
-		if(!istype(R))
-			can_apply = FALSE
-		else if(species && ((species.get_bodytype() in R.bodytypes_cannot_use) || !(species.get_bodytype(owner) in R.allowed_bodytypes)))
-			can_apply = FALSE
-		else if(length(R.applies_to_part) && !(organ_tag in R.applies_to_part))
-			can_apply = FALSE
-
-		if(can_apply)
+		if(istype(R) && R.check_can_install(organ_tag, owner))
 			model = company
 			force_icon = R.icon
 			name = "[R ? R.modifier_string : "robotic"] [initial(name)]"
