@@ -1,7 +1,0 @@
-author: MistakeNot4892
-delete-after: true
-changes:
-  - rscadd: Ailments and prosthetic faults now have codex pages.
-  - rscadd: You can diagnose some ailments and faults with grab-examine diagnosis.
-  - rscadd: Failing a skill check after prosthetics replacement surgery can add a
-      fault to the prosthetic.
