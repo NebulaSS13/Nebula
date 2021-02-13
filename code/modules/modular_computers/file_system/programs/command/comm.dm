@@ -114,7 +114,7 @@
 	return 1
 
 /datum/nano_module/program/comm/proc/get_shunt()
-	if(isnull(program.computer))
+	if(isnull(program?.computer))
 		return FALSE
 
 	var/obj/comp = program.computer.get_physical_host()

@@ -68,8 +68,9 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/computer/ship/ftl/OnTopic(var/mob/user, var/list/href_list, state)
-	if(..())
-		return ..()
+	. = ..()
+	if(.)
+		return
 
 	if (!linked)
 		return TOPIC_NOACTION

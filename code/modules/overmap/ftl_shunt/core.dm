@@ -60,8 +60,9 @@
 	for(var/obj/machinery/ftl_shunt/fuel_port/FP in fuel_ports)
 		FP.master = null
 		fuel_ports -= FP
-	ftl_computer.linked_core = null
-	ftl_computer = null
+	if(ftl_computer)
+		ftl_computer.linked_core = null
+		ftl_computer = null
 
 /obj/machinery/ftl_shunt/core/on_update_icon()
 	cut_overlays()
@@ -138,10 +139,9 @@
 
 /obj/machinery/ftl_shunt/core/physical_attack_hand(var/mob/user)
 	if(sabotaged)
-		var/mob/living/carbon/human/h_user = null
-		if (!istype(user, /mob/living/carbon/human))
-			return
-		h_user = user //this is used specifically in the do_after because electrocute_act() is not a moblevel proc.
+		var/mob/living/carbon/human/h_user = user
+		if(!istype(h_user))
+			return TRUE
 		var/skill_delay = user.skill_delay_mult(SKILL_ENGINES, 0.3)
 		if(!user.skill_check(SKILL_ENGINES, SKILL_BASIC))
 			to_chat(user, SPAN_DANGER("You are nowhere near experienced enough to stick your hand into that thing."))
@@ -150,7 +150,7 @@
 		if(!do_after(user, (4 SECOND * skill_delay), src))
 			to_chat(user, SPAN_DANGER("You try to pull your hand away from the vanes, but you touch a conductor!"))
 			h_user.electrocute_act(rand(150,250), src, def_zone = user.get_active_held_item_slot())
-			return FALSE
+			return TRUE
 		var/obj/item/stack/telecrystal/TC = new
 		TC.amount = sabotaged_amt
 		TC.forceMove(get_turf(user))
@@ -168,6 +168,7 @@
 	var/datum/local_network/lan = network.get_local_network()
 	if(lan)
 		var/list/ports = lan.get_devices(/obj/machinery/ftl_shunt/fuel_port)
+		fuel_ports.Cut()
 		for(var/obj/machinery/ftl_shunt/fuel_port/FP in ports)
 			if(!FP.master)
 				FP.master = src
