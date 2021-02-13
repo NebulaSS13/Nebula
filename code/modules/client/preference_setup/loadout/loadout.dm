@@ -400,11 +400,13 @@ var/list/gear_datums = list()
 /datum/gear/proc/spawn_item(user, location, metadata)
 	var/datum/gear_data/gd = new(path, location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.tweak_gear_data(metadata && metadata["[gt]"], gd)
+		gt.tweak_gear_data(islist(metadata) && metadata["[gt]"], gd)
 	var/item = new gd.path(gd.location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.tweak_item(user, item, metadata && metadata["[gt]"])
-	return item
+		gt.tweak_item(user, item, islist(metadata) && metadata["[gt]"])
+	. = item
+	if(metadata && !islist(metadata))
+		crash_with("Loadout spawn_item() proc received non-null non-list metadata: '[json_encode(metadata)]'")
 
 /datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
 	var/obj/item/item = spawn_and_validate_item(H, H, metadata)
