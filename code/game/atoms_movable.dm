@@ -1,6 +1,6 @@
 /atom/movable
 	layer = OBJ_LAYER
-	appearance_flags = TILE_BOUND
+	appearance_flags = TILE_BOUND|PIXEL_SCALE
 	glide_size = 8
 	var/movable_flags
 	var/last_move = null
@@ -330,3 +330,4 @@
 
 /atom/movable/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
 	. = ..() || (mover && !(mover.movable_flags & MOVABLE_FLAG_NONDENSE_COLLISION) && !mover.density)
+

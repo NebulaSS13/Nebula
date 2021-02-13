@@ -14,6 +14,10 @@
 	var/list/climbers
 	var/climb_speed_mult = 1
 	var/explosion_resistance = 0
+	var/icon_scale_x = 1 // Holds state of horizontal scaling applied.
+	var/icon_scale_y = 1 // Ditto, for vertical scaling.
+	var/icon_rotation = 0 // And one for rotation as well.
+	var/transform_animate_time = 0 // If greater than zero, transform-based adjustments (scaling, rotating) will visually occur over this time.
 
 /atom/New(loc, ...)
 	//atom creation method that preloads variables at creation
@@ -611,3 +615,23 @@ its easier to just keep the beam vertical.
 
 /atom/proc/isflamesource()
 	. = FALSE
+
+// Transform setters.
+/atom/proc/set_rotation(new_rotation)
+	icon_rotation = new_rotation
+	update_transform()
+
+/atom/proc/set_scale(new_scale_x, new_scale_y)
+	if(isnull(new_scale_y))
+		new_scale_y = new_scale_x
+	if(new_scale_x != 0)
+		icon_scale_x = new_scale_x
+	if(new_scale_y != 0)
+		icon_scale_y = new_scale_y
+	update_transform()
+
+/atom/proc/update_transform()
+	var/matrix/M = matrix()
+	M.Scale(icon_scale_x, icon_scale_y)
+	M.Turn(icon_rotation)
+	animate(src, transform = M, transform_animate_time)

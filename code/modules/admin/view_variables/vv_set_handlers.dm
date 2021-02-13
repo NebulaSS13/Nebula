@@ -132,3 +132,22 @@
 	var/new_falloff = variable == "light_falloff_curve" ? var_value : A.light_falloff_curve
 
 	A.set_light(new_max, new_inner, new_outer, new_falloff)
+
+/decl/vv_set_handler/icon_rotation_handler
+	handled_type = /atom
+	handled_vars = list("icon_rotation" = /atom/proc/set_rotation)
+	predicates = list(/proc/is_num_predicate)
+
+/decl/vv_set_handler/icon_scale_handler
+	handled_type = /atom
+	handled_vars = list("icon_scale_x", "icon_scale_y")
+
+/decl/vv_set_handler/icon_scale_handler/handle_set_var(atom/A, variable, var_value, client)
+	var_value = text2num(var_value)
+	if(!is_num_predicate(var_value, client))
+		return
+	
+	var/new_scale_x = variable == "icon_scale_x" ? var_value : A.icon_scale_x
+	var/new_scale_y = variable == "icon_scale_y" ? var_value : A.icon_scale_y
+
+	A.set_scale(new_scale_x, new_scale_y)

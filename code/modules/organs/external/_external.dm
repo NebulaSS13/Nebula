@@ -7,7 +7,6 @@
 	min_broken_damage = 30
 	dir = SOUTH
 	organ_tag = "limb"
-	appearance_flags = PIXEL_SCALE
 
 	var/slowdown = 0
 
@@ -963,9 +962,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(DISMEMBER_METHOD_EDGE)
 			compile_icon()
 			add_blood(victim)
-			var/matrix/M = matrix()
-			M.Turn(rand(180))
-			src.transform = M
+			set_rotation(rand(180))
 			forceMove(get_turf(src))
 			if(!clean)
 				// Throw limb around.

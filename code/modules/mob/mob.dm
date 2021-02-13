@@ -587,6 +587,7 @@
 
 //Updates lying and icons
 /mob/proc/UpdateLyingBuckledAndVerbStatus()
+	var/last_lying = lying
 	if(!resting && cannot_stand() && can_stand_overridden())
 		lying = 0
 	else if(buckled)
@@ -614,8 +615,8 @@
 	if( update_icon )	//forces a full overlay update
 		update_icon = 0
 		regenerate_icons()
-	else if( lying != lying_prev )
-		update_icons()
+	if( lying != last_lying )
+		update_transform()
 
 /mob/proc/reset_layer()
 	if(lying)

@@ -106,7 +106,6 @@
 	base_type = /obj/machinery/pointdefense
 	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
 	uncreated_component_parts = null
-	appearance_flags = PIXEL_SCALE
 	var/active = TRUE
 	var/charge_cooldown = 1 SECOND  //time between it can fire at different targets
 	var/last_shot = 0

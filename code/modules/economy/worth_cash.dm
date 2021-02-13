@@ -17,7 +17,6 @@
 
 /obj/item/cash/Initialize(ml, material_key)
 	. = ..()
-	appearance_flags |= PIXEL_SCALE
 	if(!ispath(currency, /decl/currency))
 		currency = GLOB.using_map.default_currency
 	if(absolute_worth > 0)
@@ -182,7 +181,6 @@
 /obj/item/charge_stick/Initialize(ml, material_key)
 	. = ..()
 	id = "[grade]-card-[sequential_id("charge_stick")]"
-	appearance_flags |= PIXEL_SCALE
 	if(!ispath(currency, /decl/currency))
 		currency = GLOB.using_map.default_currency
 		update_name_desc()
