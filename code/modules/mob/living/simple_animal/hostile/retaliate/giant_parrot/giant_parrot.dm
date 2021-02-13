@@ -44,9 +44,7 @@
 		skin_material = ps.feathers
 		if(get_subspecies_name)
 			SetName(ps.name)
-	var/matrix/M = new
-	M.Scale(2)
-	transform = M
+	set_scale(2)
 	update_icon()
 
 /mob/living/simple_animal/hostile/retaliate/parrot/space/AttackingTarget()
