@@ -409,7 +409,7 @@ var/list/gear_datums = list()
 		crash_with("Loadout spawn_item() proc received non-null non-list metadata: '[json_encode(metadata)]'")
 
 /datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
-	var/obj/item/item = spawn_and_validate_item(H, H, metadata)
+	var/obj/item/item = spawn_and_validate_item(H, metadata)
 	if(!item)
 		return
 
@@ -417,7 +417,7 @@ var/list/gear_datums = list()
 		. = item
 
 /datum/gear/proc/spawn_in_storage_or_drop(var/mob/living/carbon/human/H, var/metadata)
-	var/obj/item/item = spawn_and_validate_item(H, H, metadata)
+	var/obj/item/item = spawn_and_validate_item(H, metadata)
 	if(!item)
 		return
 
