@@ -193,10 +193,10 @@
 	..()
 
 /datum/gear_tweak/custom_setup/tweak_item(var/user, var/item)
+	var/arglist = list(user)
 	if(length(additional_arguments))
-		call(item, custom_setup_proc)(arglist(list(user) + additional_arguments))
-	else
-		call(item, custom_setup_proc)(user)
+		arglist += additional_arguments
+	call(item, custom_setup_proc)(arglist(arglist))
 
 /*
 * Tablet Stuff
