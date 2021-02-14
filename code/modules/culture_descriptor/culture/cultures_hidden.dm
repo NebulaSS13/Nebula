@@ -18,6 +18,3 @@
 /decl/cultural_info/culture/hidden/monkey
 	name = CULTURE_MONKEY
 	language = /decl/language/human/monkey
-
-/decl/cultural_info/culture/hidden/monkey/get_random_name()
-	return "[lowertext(name)] ([rand(100,999)])"

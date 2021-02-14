@@ -880,3 +880,6 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			if(length(active_emotes))
 				var/decl/emote/exertion_emote = decls_repository.get_decl(pick(active_emotes))
 				exertion_emote.do_emote(H)
+
+/decl/species/proc/get_default_name()
+	return "[lowertext(name)] ([random_id(name, 100, 999)])"

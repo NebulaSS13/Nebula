@@ -31,13 +31,14 @@ SUBSYSTEM_DEF(lore)
 
 /datum/controller/subsystem/lore/Initialize()
 
-	for(var/ftype in subtypesof(/decl/cultural_info))
-		var/decl/cultural_info/culture = ftype
-		if(!initial(culture.name))
+	var/list/all_cultural_decls = decls_repository.get_decls_of_subtype(/decl/cultural_info)
+	for(var/ftype in all_cultural_decls)
+		var/decl/cultural_info/culture = all_cultural_decls[ftype]
+		if(!culture.name)
 			continue
-		culture = new culture
 		if(cultural_info_by_name[culture.name])
 			crash_with("Duplicate cultural datum ID - [culture.name] - [ftype]")
+			continue
 		cultural_info_by_name[culture.name] = culture
 		cultural_info_by_path[ftype] = culture
 		if(culture.category && !culture.hidden)

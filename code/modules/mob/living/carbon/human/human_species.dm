@@ -39,6 +39,10 @@
 /mob/living/carbon/human/dummy/mannequin/InitializeHud()
 	return	// Mannequins don't get HUDs
 
+/mob/living/carbon/human/monkey
+	gender = PLURAL
+
 /mob/living/carbon/human/monkey/Initialize(mapload)
-	gender = pick(MALE, FEMALE)
+	if(gender == PLURAL)
+		gender = pick(MALE, FEMALE)
 	. = ..(mapload, SPECIES_MONKEY)

@@ -1,7 +1,9 @@
+/mob/living/carbon/human/monkey/punpun
+	real_name = "Pun Pun"
+	gender = MALE
+
 /mob/living/carbon/human/monkey/punpun/Initialize()
 	. = ..()
-	name = "Pun Pun"
-	real_name = name
 	var/obj/item/clothing/C
 	if(prob(50))
 		C = new /obj/item/clothing/under/waiter/monke(src)

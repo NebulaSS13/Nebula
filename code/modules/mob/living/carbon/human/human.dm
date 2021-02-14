@@ -22,12 +22,23 @@
 		else
 			set_species()
 
-	var/decl/cultural_info/culture = SSlore.get_culture(cultural_info[TAG_CULTURE])
-	if(culture)
-		real_name = culture.get_random_name(src, gender, species.name)
-		name = real_name
-		if(mind)
-			mind.name = real_name
+	if(!real_name || real_name == "unknown")
+		world << "0 [real_name]"
+		var/newname
+		var/decl/cultural_info/culture = SSlore.get_culture(cultural_info[TAG_CULTURE])
+		if(culture)
+			newname = culture.get_random_name(src, gender, species.name)
+			world << "1 [newname]"
+		if(!newname || newname == name)
+			newname = species.get_default_name()
+			world << "2 [newname]"
+		if(newname && newname != name)
+			world << "3 [newname]"
+			real_name = newname
+			SetName(real_name)
+			if(mind)
+				mind.name = real_name
+	world << "4 [real_name]"
 
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, "100")
 	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
