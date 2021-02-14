@@ -143,7 +143,7 @@
 
 /obj/item/grab/proc/on_organ_loss(mob/victim, obj/item/organ/lost)
 	if(affecting != victim)
-		crash_with("A grab switched affecting targets without properly re-registering for dismemberment updates.")
+		PRINT_STACK_TRACE("A grab switched affecting targets without properly re-registering for dismemberment updates.")
 		return
 	var/obj/item/organ/O = get_targeted_organ()
 	if(!istype(O))

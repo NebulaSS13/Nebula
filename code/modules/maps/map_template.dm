@@ -14,7 +14,7 @@
 
 /datum/map_template/New(var/list/paths = null, var/rename = null)
 	if(paths && !islist(paths))
-		crash_with("Non-list paths passed into map template constructor.")
+		PRINT_STACK_TRACE("Non-list paths passed into map template constructor.")
 	if(paths)
 		mappaths = paths
 	if(mappaths)

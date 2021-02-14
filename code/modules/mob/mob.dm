@@ -335,7 +335,7 @@
 			distance = get_dist(source_turf, target_turf)
 
 	if(!A.examine(src, distance))
-		crash_with("Improper /examine() override: [log_info_line(A)]")
+		PRINT_STACK_TRACE("Improper /examine() override: [log_info_line(A)]")
 
 /mob/verb/pointed(atom/A as mob|obj|turf in view())
 	set name = "Point To"

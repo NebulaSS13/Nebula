@@ -58,7 +58,7 @@ Scent intensity
 
 /datum/extension/scent/Process()
 	if(!holder)
-		crash_with("Scent extension with scent '[scent]', intensity '[intensity]', descriptor '[descriptor]' and range of '[range]' attempted to emit_scent() without a holder.")
+		PRINT_STACK_TRACE("Scent extension with scent '[scent]', intensity '[intensity]', descriptor '[descriptor]' and range of '[range]' attempted to emit_scent() without a holder.")
 		qdel(src)
 		return PROCESS_KILL
 	emit_scent()

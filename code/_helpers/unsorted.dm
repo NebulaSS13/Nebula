@@ -823,5 +823,5 @@ var/list/WALLITEMS = list(
 	return "#[colour]"
 
 // call to generate a stack trace and print to runtime logs
-/proc/crash_at(msg, file, line)
+/proc/get_stack_trace(msg, file, line)
 	CRASH("%% [file],[line] %% [msg]")

@@ -66,7 +66,7 @@
 /turf/Destroy()
 
 	if (!changing_turf)
-		crash_with("Improper turf qdel. Do not qdel turfs directly.")
+		PRINT_STACK_TRACE("Improper turf qdel. Do not qdel turfs directly.")
 
 	changing_turf = FALSE
 

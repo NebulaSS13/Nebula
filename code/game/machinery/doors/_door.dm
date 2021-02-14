@@ -90,7 +90,7 @@
 	health = maxhealth
 #ifdef UNIT_TEST
 	if(autoset_access && length(req_access))
-		crash_with("A door with mapped access restrictions was set to autoinitialize access.")
+		PRINT_STACK_TRACE("A door with mapped access restrictions was set to autoinitialize access.")
 #endif
 
 /obj/machinery/door/LateInitialize()

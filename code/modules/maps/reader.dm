@@ -499,7 +499,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 		if(equal_position)//associative var, so do the association
 			if(isnum(left))
-				crash_with("Numerical key in associative list.")
+				PRINT_STACK_TRACE("Numerical key in associative list.")
 				break // This is invalid; apparently dm will runtime in this situation.
 			var/trim_right = trim_text(copytext(text,equal_position+1,position))//the content of the variable
 			to_return[left] = readlistitem(trim_right)

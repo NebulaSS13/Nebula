@@ -83,7 +83,7 @@
 		blood_DNA[dna.unique_enzymes] = dna.b_type
 		species = get_species_by_key(dna.species)
 		if (!species)
-			crash_with("Invalid DNA species. Expected a valid species name as string, was: [log_info_line(dna.species)]")
+			PRINT_STACK_TRACE("Invalid DNA species. Expected a valid species name as string, was: [log_info_line(dna.species)]")
 
 /obj/item/organ/proc/die()
 	damage = max_damage

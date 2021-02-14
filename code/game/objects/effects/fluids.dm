@@ -19,7 +19,7 @@
 	qdel(src)
 
 /obj/effect/fluid/Move()
-	crash_with("A fluid overlay had Move() called!")
+	PRINT_STACK_TRACE("A fluid overlay had Move() called!")
 	return FALSE
 
 /obj/effect/fluid/on_reagent_change()
