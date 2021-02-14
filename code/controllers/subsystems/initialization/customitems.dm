@@ -34,12 +34,12 @@ SUBSYSTEM_DEF(customitems)
 					var/datum/custom_item/citem = new(cached_json_decode(file2text(checkfile)))
 					var/result = citem.validate()
 					if(result)
-						crash_with("Invalid custom item [checkfile]: [result]")
+						PRINT_STACK_TRACE("Invalid custom item [checkfile]: [result]")
 					else
 						LAZYDISTINCTADD(custom_items_by_ckey[citem.ckey], citem)
 						item_count++
 				catch(var/exception/e)
-					crash_with("Exception loading custom item [checkfile]: [e] on [e.file]:[e.line]")
+					PRINT_STACK_TRACE("Exception loading custom item [checkfile]: [e] on [e.file]:[e.line]")
 
 	report_progress("Loaded [item_count] custom item\s from [dir_count] director[dir_count == 1 ? "y" : "ies"].")
 	. = ..()

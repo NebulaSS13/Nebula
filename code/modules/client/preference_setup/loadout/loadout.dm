@@ -406,7 +406,7 @@ var/list/gear_datums = list()
 		gt.tweak_item(user, item, islist(metadata) && metadata["[gt]"])
 	. = item
 	if(metadata && !islist(metadata))
-		crash_with("Loadout spawn_item() proc received non-null non-list metadata: '[json_encode(metadata)]'")
+		PRINT_STACK_TRACE("Loadout spawn_item() proc received non-null non-list metadata: '[json_encode(metadata)]'")
 
 /datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
 	var/obj/item/item = spawn_and_validate_item(H, metadata)

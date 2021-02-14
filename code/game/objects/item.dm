@@ -777,7 +777,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	user = user == src ? loc : (user || loc)
 	if(!istype(user))
-		crash_with("[log_info_line(src)]: Zoom user lost]")
+		PRINT_STACK_TRACE("[log_info_line(src)]: Zoom user lost]")
 		return
 
 	GLOB.stat_set_event.unregister(user, src, /obj/item/proc/unzoom)

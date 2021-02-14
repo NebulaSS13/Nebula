@@ -8,7 +8,7 @@
 /datum/ai/New(var/mob/living/target_body)
 	body = target_body
 	if(expected_type && !istype(body, expected_type))
-		crash_with("AI datum [type] received a body ([body ? body.type : "NULL"]) of unexpected type ([expected_type]).")
+		PRINT_STACK_TRACE("AI datum [type] received a body ([body ? body.type : "NULL"]) of unexpected type ([expected_type]).")
 	START_PROCESSING(SSai, src)
 
 /datum/ai/proc/can_process()
