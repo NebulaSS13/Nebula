@@ -1705,7 +1705,7 @@
 	. = LAZYACCESS(cultural_info, token)
 	if(!istype(., /decl/cultural_info))
 		. = GLOB.using_map.default_cultural_info[token]
-		crash_with("get_cultural_value() tried to return a non-instance value for token '[token]' - full culture list: [json_encode(cultural_info)] default species culture list: [json_encode(GLOB.using_map.default_cultural_info)]")
+		PRINT_STACK_TRACE("get_cultural_value() tried to return a non-instance value for token '[token]' - full culture list: [json_encode(cultural_info)] default species culture list: [json_encode(GLOB.using_map.default_cultural_info)]")
 
 /mob/living/carbon/human/needs_wheelchair()
 	var/stance_damage = 0
