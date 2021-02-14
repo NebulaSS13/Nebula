@@ -15,7 +15,6 @@
 var/req_console_assistance = list()
 var/req_console_supplies = list()
 var/req_console_information = list()
-var/list/obj/machinery/network/requests_console/allConsoles = list()
 
 /obj/machinery/network/requests_console
 	name = "Requests Console"
@@ -60,7 +59,6 @@ var/list/obj/machinery/network/requests_console/allConsoles = list()
 /obj/machinery/network/requests_console/Initialize(mapload, d)
 	. = ..()
 	announcement.newscast = 1
-	allConsoles += src
 	// Try and find it; this is legacy mapping compatibility for the most part.
 	var/decl/department/dept = SSjobs.get_department_by_name(department)
 	if(dept)
@@ -89,7 +87,6 @@ var/list/obj/machinery/network/requests_console/allConsoles = list()
 		SetName("[_department] Requests Console")
 
 /obj/machinery/network/requests_console/Destroy()
-	allConsoles -= src
 	. = ..()
 
 /obj/machinery/network/requests_console/interface_interact(mob/user)
@@ -171,8 +168,11 @@ var/list/obj/machinery/network/requests_console/allConsoles = list()
 		if(tempScreen == RCS_ANNOUNCE && !announcementConsole)
 			return
 		if(tempScreen == RCS_VIEWMSGS)
-			for (var/obj/machinery/network/requests_console/Console in allConsoles)
-				if (Console.department == department)
+			var/datum/extension/network_device/network_device = get_extension(src, /datum/extension/network_device)
+			var/datum/computer_network/network = network_device?.get_network()
+			for(var/datum/extension/network_device/console in network?.devices)
+				var/obj/machinery/network/requests_console/Console = console.holder
+				if(istype(Console) && Console.department == department)
 					Console.newmessagepriority = 0
 					Console.icon_state = "req_comp0"
 					Console.set_light(1)
