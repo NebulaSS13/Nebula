@@ -1177,7 +1177,7 @@ obj/item/organ/external/proc/remove_clamps()
 	slowdown = 0
 
 	if(!ispath(company, /decl/prosthetics_manufacturer))
-		crash_with("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
+		PRINT_STACK_TRACE("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
 		company = /decl/prosthetics_manufacturer
 	
 	var/decl/prosthetics_manufacturer/R = decls_repository.get_decl(company)

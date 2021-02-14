@@ -3,8 +3,8 @@
 	if(istype(D,/atom/movable)) {\
 		var/atom/movable/AM = D; \
 		if(AM.loc != null) {\
-			PRINT_STACK_TRACE("QDEL("+hint+"): "+AM.name+" was supposed to be in nullspace but isn't \
-						(LOCATION= "+AM.loc.name+" ("+AM.loc.x+","+AM.loc.y+","+AM.loc.z+") )! Destroy didn't do its job!"); \
+			PRINT_STACK_TRACE("QDEL([hint]): [AM.name] was supposed to be in nullspace but isn't \
+						(LOCATION= [AM.loc.name] ([AM.loc.x],[AM.loc.y],[AM.loc.z]) )! Destroy didn't do its job!"); \
 			AM.forceMove(null); \
 		} \
 	}
