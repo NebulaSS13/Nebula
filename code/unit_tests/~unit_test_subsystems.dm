@@ -132,6 +132,6 @@ SUBSYSTEM_DEF(unit_tests)
 
 		if (6)	// Finalization.
 			unit_test_final_message()
-			log_unit_test("Caught [GLOB.total_runtimes] Runtime\s.")
+			log_unit_test("Caught [global.total_runtimes] Runtime\s.")
 			del world
 
