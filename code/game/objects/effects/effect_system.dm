@@ -286,7 +286,7 @@ steam.start() -- spawns the effect
 	if (R.wear_suit != null)
 		return 0
 
-	R.burn_skin(0.75)
+	R.take_overall_damage(0, 0.75)
 	if (R.coughedtime != 1)
 		R.coughedtime = 1
 		R.emote("gasp")
