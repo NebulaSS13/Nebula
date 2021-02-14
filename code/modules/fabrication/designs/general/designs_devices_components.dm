@@ -57,10 +57,6 @@
 /datum/fabricator_recipe/device_component/cable_coil
 	path = /obj/item/stack/cable_coil/single
 
-/datum/fabricator_recipe/device_component/electropack
-	path = /obj/item/radio/electropack
-	hidden = TRUE
-
 /datum/fabricator_recipe/device_component/beartrap
 	path = /obj/item/beartrap
 	hidden = TRUE
