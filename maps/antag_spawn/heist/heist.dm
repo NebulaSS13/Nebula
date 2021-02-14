@@ -7,7 +7,8 @@
 	suffixes = list("heist/heist_base.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/skipjack)
 	apc_test_exempt_areas = list(
-		/area/map_template/skipjack_station = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/map_template/skipjack_station = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/map_template/syndicate_mothership/raider_base = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
 /datum/shuttle/autodock/multi/antag/skipjack
