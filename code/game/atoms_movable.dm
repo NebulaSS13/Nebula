@@ -117,7 +117,7 @@
 	// meh do nothing. we know what we're doing. pro engineers.
 #else
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
-		crash_with("Was deleted before initialization")
+		PRINT_STACK_TRACE("Was deleted before initialization")
 #endif
 
 	for(var/A in src)
@@ -246,7 +246,7 @@
 
 /atom/movable/overlay/Initialize()
 	if(!loc)
-		crash_with("[type] created in nullspace.")
+		PRINT_STACK_TRACE("[type] created in nullspace.")
 		return INITIALIZE_HINT_QDEL
 	master = loc
 	SetName(master.name)

@@ -2,7 +2,7 @@
 	if(!istype(starting) || !istype(ending) || !ispath(beam_type))
 		return
 	if(starting.z != ending.z)
-		crash_with("Projectile tracer generation of cross-Z beam detected. This feature is not supported!")			//Do it anyways though.
+		PRINT_STACK_TRACE("Projectile tracer generation of cross-Z beam detected. This feature is not supported!")			//Do it anyways though.
 	var/datum/point/midpoint = point_midpoint_points(starting, ending)
 	var/obj/effect/projectile/tracer/PB = new beam_type
 	source.update_effect(PB)

@@ -35,7 +35,7 @@
 	if(ispath(material, /decl/material))
 		material = decls_repository.get_decl(material)
 	else if(!istype(material))
-		crash_with("Wall has been supplied non-material '[newmaterial]'.")
+		PRINT_STACK_TRACE("Wall has been supplied non-material '[newmaterial]'.")
 		material = decls_repository.get_decl(get_default_material())
 
 	reinf_material = newrmaterial

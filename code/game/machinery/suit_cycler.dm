@@ -97,7 +97,7 @@
 /obj/machinery/suit_cycler/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(!length(available_modifications) || !length(available_bodytypes))
-		crash_with("Invalid setup: [log_info_line(src)]")
+		PRINT_STACK_TRACE("Invalid setup: [log_info_line(src)]")
 		return INITIALIZE_HINT_QDEL
 
 	if(populate_parts)

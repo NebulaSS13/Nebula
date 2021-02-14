@@ -380,7 +380,7 @@
 		return
 	if(isnull(Angle))	//Try to resolve through offsets if there's no Angle set.
 		if(isnull(xo) || isnull(yo))
-			crash_with("WARNING: Projectile [type] deleted due to being unable to resolve a target after Angle was null!")
+			PRINT_STACK_TRACE("WARNING: Projectile [type] deleted due to being unable to resolve a target after Angle was null!")
 			qdel(src)
 			return
 		var/turf/target = locate(Clamp(starting + xo, 1, world.maxx), Clamp(starting + yo, 1, world.maxy), starting.z)
@@ -434,7 +434,7 @@
 		xo = targloc.x - curloc.x
 		setAngle(get_projectile_angle(src, targloc))
 	else
-		crash_with("WARNING: Projectile [type] fired without either mouse parameters, or a target atom to aim at!")
+		PRINT_STACK_TRACE("WARNING: Projectile [type] fired without either mouse parameters, or a target atom to aim at!")
 		qdel(src)
 	if(Angle_offset)
 		setAngle(Angle + Angle_offset)
@@ -559,7 +559,7 @@
 		safety--
 		if(safety <= 0)
 			qdel(src)
-			crash_with("WARNING: [type] projectile encountered infinite recursion during hitscanning!")
+			PRINT_STACK_TRACE("WARNING: [type] projectile encountered infinite recursion during hitscanning!")
 			return	//Kill!
 		pixel_move(1, 1, TRUE)
 

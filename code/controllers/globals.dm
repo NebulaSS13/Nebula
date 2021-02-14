@@ -25,10 +25,10 @@ GLOBAL_REAL(GLOB, /datum/controller/global_vars)
 	if(global_vars == global_procs)
 		Initialize()
 	else
-		crash_with("Expected [global_vars] global init procs, were [global_procs].")
+		PRINT_STACK_TRACE("Expected [global_vars] global init procs, were [global_procs].")
 
 /datum/controller/global_vars/Destroy(force)
-	crash_with("There was an attempt to qdel the global vars holder!")
+	PRINT_STACK_TRACE("There was an attempt to qdel the global vars holder!")
 	if(!force)
 		return QDEL_HINT_LETMELIVE
 

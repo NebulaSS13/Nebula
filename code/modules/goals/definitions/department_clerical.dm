@@ -16,7 +16,7 @@
 		signatory_job_titles |= "[initial(job.total_positions) == 1 ? "the" : "a"] [initial(job.title)]"
 	waiting_for_signatories_description = replacetext(waiting_for_signatories_description, "%STAFF%", english_list(signatory_job_titles, and_text = " or "))
 	if(!length(paperwork_types))
-		crash_with("Paperwork goal [type] initialized with no available paperwork types!")
+		PRINT_STACK_TRACE("Paperwork goal [type] initialized with no available paperwork types!")
 		SSgoals.pending_goals -= src
 		return
 	paperwork_type = pick(paperwork_types)
@@ -35,13 +35,13 @@
 
 	var/list/start_candidates = get_spawn_turfs()
 	if(!length(start_candidates))
-		crash_with("Paperwork goal [type] initialized with no spawn landmarks mapped!")
+		PRINT_STACK_TRACE("Paperwork goal [type] initialized with no spawn landmarks mapped!")
 		SSgoals.pending_goals -= src
 		return FALSE
 
 	var/list/end_candidates = get_end_areas()
 	if(!length(end_candidates))
-		crash_with("Paperwork goal [type] initialized with no end landmarks mapped!")
+		PRINT_STACK_TRACE("Paperwork goal [type] initialized with no end landmarks mapped!")
 		SSgoals.pending_goals -= src
 		return FALSE
 
