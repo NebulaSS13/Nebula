@@ -197,6 +197,11 @@ var/list/time_prefs_fixed = list()
 		load_character(text2num(href_list["changeslot"]))
 		sanitize_preferences()
 		close_load_dialog(usr)
+
+		if(isnewplayer(client.mob))
+			var/mob/new_player/M = client.mob
+			M.new_player_panel()
+
 	else if(href_list["resetslot"])
 		if(real_name != input("This will reset the current slot. Enter the character's full name to confirm."))
 			return 0
