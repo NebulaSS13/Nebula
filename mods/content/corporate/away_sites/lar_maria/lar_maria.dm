@@ -57,7 +57,7 @@
 	qdel(src)
 
 /mob/living/simple_animal/hostile/lar_maria/test_subject
-	name = "\improper test subject"
+	name = "test subject"
 	desc = "Sick, filthy, angry and probably crazy human in an orange robe."
 	icon_state = "test_subject"
 	icon_living = "test_subject"
@@ -67,12 +67,12 @@
 	corpse = /obj/effect/landmark/corpse/lar_maria/test_subject
 
 /obj/effect/landmark/corpse/lar_maria/test_subject
-	name = "Dead test subject"
+	name = "dead test subject"
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/test_subject)
 	spawn_flags = CORPSE_SPAWNER_NO_RANDOMIZATION//no name, no hairs etc.
 
 /decl/hierarchy/outfit/corpse/test_subject
-	name = "Dead ZHP test subject"
+	name = "dead ZHP test subject"
 	uniform = /obj/item/clothing/under/color/orange
 	shoes = /obj/item/clothing/shoes/color/orange
 

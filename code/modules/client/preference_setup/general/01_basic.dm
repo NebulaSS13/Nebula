@@ -32,14 +32,6 @@ datum/preferences
 	pref.gender             = sanitize_inlist(pref.gender, S.genders, pick(S.genders))
 	pref.spawnpoint         = sanitize_inlist(pref.spawnpoint, spawntypes(), initial(pref.spawnpoint))
 	pref.be_random_name     = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
-	// This is a bit noodly. If pref.cultural_info[TAG_CULTURE] is null, then we haven't finished loading/sanitizing, which means we might purge
-	// numbers or w/e from someone's name by comparing them to the map default. So we just don't bother sanitizing at this point otherwise.
-	if(pref.cultural_info[TAG_CULTURE])
-		var/decl/cultural_info/check = SSlore.get_culture(pref.cultural_info[TAG_CULTURE])
-		if(check)
-			pref.real_name = check.sanitize_name(pref.real_name, pref.species)
-			if(!pref.real_name)
-				pref.real_name = random_name(pref.gender, pref.species)
 
 /datum/category_item/player_setup_item/physical/basic/content()
 	. = list()
@@ -62,7 +54,7 @@ datum/preferences
 		var/raw_name = input(user, "Choose your character's name:", "Character Name")  as text|null
 		if (!isnull(raw_name) && CanUseTopic(user))
 
-			var/decl/cultural_info/check = SSlore.get_culture(pref.cultural_info[TAG_CULTURE])
+			var/decl/cultural_info/check = decls_repository.get_decl(pref.cultural_info[TAG_CULTURE])
 			var/new_name = check.sanitize_name(raw_name, pref.species)
 			if(filter_block_message(user, new_name))
 				return TOPIC_NOACTION

@@ -8,14 +8,6 @@
 #define BODYTYPE_MANTID_SMALL "small mantid body"
 #define BODYTYPE_MANTID_LARGE "large mantid body"
 
-#define CULTURE_ASCENT           "The Ascent"
-#define HOME_SYSTEM_KHARMAANI    "Core"
-#define FACTION_ASCENT_NYMPH     "Ascent Nymph"
-#define FACTION_ASCENT_GYNE      "Ascent Gyne"
-#define FACTION_ASCENT_ALATE     "Ascent Alate"
-#define FACTION_ASCENT_SERPENTID "Ascent Serpentid"
-#define RELIGION_KHARMAANI       "Nest-Lineage Veneration"
-
 #define IS_MANTID    "mantid"
 #define IS_SERPENTID "serpentid"
 

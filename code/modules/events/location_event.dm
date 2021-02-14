@@ -5,7 +5,7 @@
 	. = affected_dest.viable_mundane_events
 
 /datum/event/location_event/announce()
-	var/decl/cultural_info/location/affected_dest = SSlore.get_culture(pick(GLOB.using_map.available_cultural_info[TAG_HOMEWORLD]))
+	var/decl/cultural_info/location/affected_dest = decls_repository.get_decl(pick(GLOB.using_map.available_cultural_info[TAG_HOMEWORLD]))
 	if(istype(affected_dest))
 		var/list/possible_events = get_possible_events(affected_dest)
 		if(length(possible_events))

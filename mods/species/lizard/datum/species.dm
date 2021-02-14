@@ -119,8 +119,8 @@
 /decl/species/lizard/New()
 	..()
 	LAZYINITLIST(available_cultural_info)
-	LAZYDISTINCTADD(available_cultural_info[TAG_CULTURE], CULTURE_LIZARD)
-	LAZYSET(default_cultural_info, TAG_CULTURE, CULTURE_LIZARD)
+	LAZYDISTINCTADD(available_cultural_info[TAG_CULTURE], /decl/cultural_info/culture/lizard)
+	LAZYSET(default_cultural_info, TAG_CULTURE, /decl/cultural_info/culture/lizard)
 
 /decl/species/lizard/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()

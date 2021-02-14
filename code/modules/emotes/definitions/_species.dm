@@ -9,7 +9,3 @@
 			if(emote_datum.check_user(src))
 				usable_emotes[emote_datum.key] = emote_datum
 	usable_emotes = sortAssoc(usable_emotes)
-
-/mob/living/carbon/human/set_species(var/new_species, var/default_colour = 1)
-	UNLINT(. = ..())
-	update_emotes()

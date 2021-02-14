@@ -14,7 +14,6 @@
 
 	if(!dna)
 		dna = new /datum/dna(null)
-		// Species name is handled by set_species()
 
 	if(!species)
 		if(new_species)
@@ -23,22 +22,12 @@
 			set_species()
 
 	if(!real_name || real_name == "unknown")
-		world << "0 [real_name]"
-		var/newname
-		var/decl/cultural_info/culture = SSlore.get_culture(cultural_info[TAG_CULTURE])
-		if(culture)
-			newname = culture.get_random_name(src, gender, species.name)
-			world << "1 [newname]"
-		if(!newname || newname == name)
-			newname = species.get_default_name()
-			world << "2 [newname]"
+		var/newname = species.get_default_name()
 		if(newname && newname != name)
-			world << "3 [newname]"
 			real_name = newname
 			SetName(real_name)
 			if(mind)
 				mind.name = real_name
-	world << "4 [real_name]"
 
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, "100")
 	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
@@ -1180,6 +1169,7 @@
 		if(istype(C) && !C.mob_can_equip(src, slot, 1))
 			unEquip(C)
 
+	update_emotes()
 	return 1
 
 /mob/living/carbon/human/proc/update_languages()
@@ -1703,15 +1693,18 @@
 	..()
 
 /mob/living/carbon/human/proc/set_cultural_value(var/token, var/decl/cultural_info/_culture, var/defer_language_update)
-	if(!istype(_culture))
-		_culture = SSlore.get_culture(_culture)
+	if(ispath(_culture, /decl/cultural_info))
+		_culture = decls_repository.get_decl(_culture)
 	if(istype(_culture))
-		cultural_info[token] = _culture
+		LAZYSET(cultural_info, token, _culture)
 		if(!defer_language_update)
 			update_languages()
 
 /mob/living/carbon/human/proc/get_cultural_value(var/token)
-	return cultural_info[token]
+	. = LAZYACCESS(cultural_info, token)
+	if(!istype(., /decl/cultural_info))
+		. = GLOB.using_map.default_cultural_info[token]
+		crash_with("get_cultural_value() tried to return a non-instance value for token '[token]' - full culture list: [json_encode(cultural_info)] default species culture list: [json_encode(GLOB.using_map.default_cultural_info)]")
 
 /mob/living/carbon/human/needs_wheelchair()
 	var/stance_damage = 0

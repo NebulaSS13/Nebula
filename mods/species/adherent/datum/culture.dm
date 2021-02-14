@@ -1,5 +1,5 @@
 /decl/cultural_info/culture/adherent
-	name = CULTURE_ADHERENT
+	name = "The Vigil"
 	description = "The Vigil is a relatively loose association of machine-servitors, adherents, built by a now-extinct culture. \
 	They are devoted to the memory of their long-dead creators, destroyed by the Scream, a solar flare which wiped out the vast \
 	majority of records of the creators and scrambled many sensor systems and minds, leaving the surviving adherents confused \

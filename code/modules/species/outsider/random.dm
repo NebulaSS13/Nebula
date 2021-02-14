@@ -15,7 +15,7 @@
 	limb_blend = ICON_MULTIPLY
 
 	force_cultural_info = list(
-		TAG_CULTURE = CULTURE_ALIUM
+		TAG_CULTURE = /decl/cultural_info/culture/hidden/alium
 	)
 
 	exertion_effect_chance = 10

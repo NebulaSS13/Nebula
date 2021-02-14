@@ -31,7 +31,7 @@
 			if(H.species.get_root_species_name() != SPECIES_MANTID_ALATE)
 				H.set_species(SPECIES_MANTID_ALATE)
 			H.gender = MALE
-		var/decl/cultural_info/culture/ascent/ascent_culture = SSlore.get_culture(CULTURE_ASCENT)
+		var/decl/cultural_info/culture/ascent/ascent_culture = decls_repository.get_decl(/decl/cultural_info/culture/ascent)
 		H.real_name = ascent_culture.get_random_name(H, H.gender)
 		H.name = H.real_name
 
