@@ -76,14 +76,13 @@
 /obj/item/organ/external/head/get_agony_multiplier()
 	return (owner && owner.headcheck(organ_tag)) ? 1.50 : 1
 
-/obj/item/organ/external/head/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
-	if(company)
-		var/datum/robolimb/R = all_robolimbs[company]
-		if(R)
-			can_intake_reagents = R.can_eat
-			draw_eyes = R.has_eyes
+/obj/item/organ/external/head/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	. = ..(company, skip_prosthetics, 1)
 	has_lips = null
+	if(model)
+		var/decl/prosthetics_manufacturer/R = decls_repository.get_decl(model)
+		can_intake_reagents = R.can_eat
+		draw_eyes = R.has_eyes
 
 /obj/item/organ/external/head/take_external_damage(brute, burn, damage_flags, used_weapon, override_droplimb)
 	. = ..()

@@ -39,20 +39,35 @@
 	var/obj/item/organ/external/E = tool
 	var/obj/item/organ/external/P = target.get_organ(E.parent_organ)
 	var/obj/item/organ/external/T = target.get_organ(E.organ_tag)
+
 	if(!P || P.is_stump())
 		to_chat(user, SPAN_WARNING("The [E.amputation_point] is missing!"))
-	else if(T && T.is_stump())
-		to_chat(user, SPAN_WARNING("You cannot attach \a [E] when there is a stump!"))
-	else if(T)
-		to_chat(user, SPAN_WARNING("There is already \a [E]!"))
-	else if(BP_IS_PROSTHETIC(P) && !BP_IS_PROSTHETIC(E))
-		to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a robotic body."))
-	else if(BP_IS_CRYSTAL(P) && !BP_IS_CRYSTAL(E))
+		return FALSE
+
+	if(T)
+		if(T.is_stump())
+			to_chat(user, SPAN_WARNING("You cannot attach \a [E] when there is a stump!"))
+		else
+			to_chat(user, SPAN_WARNING("There is already \a [T]!"))
+		return FALSE
+	if(BP_IS_PROSTHETIC(P))
+		if(!BP_IS_PROSTHETIC(E))
+			to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a robotic body."))
+		if(P.model)
+			var/decl/prosthetics_manufacturer/robo_model = decls_repository.get_decl(P.model)
+			if(!istype(robo_model) || !robo_model.check_can_install(E.organ_tag, target.get_bodytype(), target.get_species_name()))
+				to_chat(user, SPAN_WARNING("That model of prosthetic is incompatible with \the [target]."))
+				return FALSE
+
+	if(BP_IS_CRYSTAL(P) && !BP_IS_CRYSTAL(E))
 		to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a crystalline body."))
-	else if(!BP_IS_CRYSTAL(P) && BP_IS_CRYSTAL(E))
+		return FALSE
+
+	if(!BP_IS_CRYSTAL(P) && BP_IS_CRYSTAL(E))
 		to_chat(user, SPAN_WARNING("You cannot attach a crystalline part to a flesh body."))
-	else
-		. = TRUE
+		return FALSE
+
+	. = TRUE
 
 /decl/surgery_step/limb/attach/get_skill_reqs(mob/living/user, mob/living/target, obj/item/organ/external/tool)
 	if(istype(tool) && BP_IS_PROSTHETIC(tool))

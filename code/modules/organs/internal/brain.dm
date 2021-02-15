@@ -22,7 +22,7 @@
 	var/healed_threshold = 1
 	var/oxygen_reserve = 6
 
-/obj/item/organ/internal/brain/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/brain/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	replace_self_with(/obj/item/organ/internal/posibrain)
 
 /obj/item/organ/internal/brain/mechassist()
@@ -38,7 +38,7 @@
 		tmp_owner.internal_organs_by_name[organ_tag] = new replace_path(tmp_owner, 1)
 		tmp_owner = null
 
-/obj/item/organ/internal/brain/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/brain/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	. = ..()
 	icon_state = "brain-prosthetic"
 

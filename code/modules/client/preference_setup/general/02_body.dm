@@ -87,10 +87,17 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	to_file(S["b_type"], pref.b_type)
 	to_file(S["disabilities"], pref.disabilities)
 	to_file(S["organ_data"], pref.organ_data)
-	to_file(S["rlimb_data"], pref.rlimb_data)
 	to_file(S["body_markings"], pref.body_markings)
 	to_file(S["body_descriptors"], pref.body_descriptors)
 	to_file(S["bgstate"], pref.bgstate)
+
+	var/list/rlimb_string_data = list()
+	for(var/limb in pref.rlimb_data)
+		var/model = pref.rlimb_data[limb]
+		if(ispath(model))
+			var/decl/prosthetics_manufacturer/model_data = decls_repository.get_decl(model)
+			rlimb_string_data[limb] = model_data.name
+	to_file(S["rlimb_data"], rlimb_string_data)
 
 /datum/category_item/player_setup_item/physical/body/sanitize_character(var/savefile/S)
 
@@ -115,8 +122,28 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.skin_base = ""
 
 	pref.disabilities	= sanitize_integer(pref.disabilities, 0, 65535, initial(pref.disabilities))
-	if(!istype(pref.organ_data)) pref.organ_data = list()
-	if(!istype(pref.rlimb_data)) pref.rlimb_data = list()
+
+	if(!islist(pref.organ_data)) 
+		pref.organ_data = list()
+
+	if(!islist(pref.rlimb_data)) 
+		pref.rlimb_data = list()
+	if(length(pref.rlimb_data))
+		var/list/all_robolimbs = decls_repository.get_decls_of_type(/decl/prosthetics_manufacturer)
+		for(var/limb in pref.rlimb_data)
+			var/model = pref.rlimb_data[limb]
+			var/found = ispath(model, /decl/prosthetics_manufacturer)
+			if(!found)
+				model = lowertext(model)
+				for(var/model_type in all_robolimbs)
+					var/decl/prosthetics_manufacturer/model_data = all_robolimbs[model_type]
+					if(lowertext(model_data.name) == model)
+						pref.rlimb_data[limb] = model_type
+						found = TRUE
+						break
+			if(!found)
+				pref.rlimb_data[limb] = /decl/prosthetics_manufacturer
+
 	if(!istype(pref.body_markings))
 		pref.body_markings = list()
 	else
@@ -212,12 +239,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			++ind
 			if(ind > 1)
 				. += ", "
-			var/datum/robolimb/R
-			if(pref.rlimb_data[name] && all_robolimbs[pref.rlimb_data[name]])
-				R = all_robolimbs[pref.rlimb_data[name]]
-			else
-				R = basic_robolimb
-			. += "\t[R.company] [organ_name] prosthesis"
+			var/decl/prosthetics_manufacturer/R = pref.rlimb_data[name]
+			if(!ispath(R, /decl/prosthetics_manufacturer))
+				R = /decl/prosthetics_manufacturer
+			R = decls_repository.get_decl(R)
+			. += "\t[R.name] [organ_name] prosthesis"
 		else if(status == "amputated")
 			++ind
 			if(ind > 1)
@@ -540,29 +566,22 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					pref.rlimb_data[second_limb] = null
 
 			if("Prosthesis")
-				var/decl/species/temp_species = get_species_by_key(pref.species || GLOB.using_map.default_species)
-				var/tmp_bodytype = temp_species.get_bodytype(user)
-				var/list/usable_manufacturers = list()
-				for(var/company in chargen_robolimbs)
-					var/datum/robolimb/M = chargen_robolimbs[company]
-					if(tmp_bodytype in M.bodytypes_cannot_use)
-						continue
-					if(length(M.species_restricted) && !(temp_species.name in M.species_restricted))
-						continue
-					if(M.applies_to_part.len && !(limb in M.applies_to_part))
-						continue
-					if(M.allowed_bodytypes && !(tmp_bodytype in M.allowed_bodytypes))
-						continue
-					usable_manufacturers[company] = M
-				if(!usable_manufacturers.len)
+				var/list/usable_manufacturers
+				var/list/all_robolimbs = decls_repository.get_decls_of_type(/decl/prosthetics_manufacturer)
+				for(var/limb_type in all_robolimbs)
+					var/decl/prosthetics_manufacturer/R = all_robolimbs[limb_type]
+					if(!R.unavailable_at_chargen && R.check_can_install(limb, mob_species.bodytype, mob_species.name))
+						LAZYADD(usable_manufacturers, R)
+				if(!length(usable_manufacturers))
+					to_chat(user, SPAN_WARNING("There are no prosthetics available for this species and bodytype on your [limb]."))
 					return
-				var/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in usable_manufacturers
-				if(!choice)
+				var/decl/prosthetics_manufacturer/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in usable_manufacturers
+				if(!istype(choice))
 					return
-				pref.rlimb_data[limb] = choice
+				pref.rlimb_data[limb] = choice.type
 				pref.organ_data[limb] = "cyborg"
 				if(second_limb)
-					pref.rlimb_data[second_limb] = choice
+					pref.rlimb_data[second_limb] = choice.type
 					pref.organ_data[second_limb] = "cyborg"
 				if(third_limb && pref.organ_data[third_limb] == "amputated")
 					pref.organ_data[third_limb] = null
@@ -572,7 +591,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 						if(other_limb == BP_CHEST)
 							continue
 						pref.organ_data[other_limb] = "cyborg"
-						pref.rlimb_data[other_limb] = choice
+						pref.rlimb_data[other_limb] = choice.type
 					if(!pref.organ_data[BP_BRAIN])
 						pref.organ_data[BP_BRAIN] = "assisted"
 					for(var/internal_organ in list(BP_HEART,BP_EYES,BP_LUNGS,BP_LIVER,BP_KIDNEYS))
