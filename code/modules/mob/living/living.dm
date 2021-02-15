@@ -128,6 +128,7 @@ default behaviour is:
 					for(var/obj/structure/window/win in get_step(AM,t))
 						now_pushing = 0
 						return
+				AM.glide_size = glide_size
 				step(AM, t)
 				if (istype(AM, /mob/living))
 					var/mob/living/tmob = AM
