@@ -1,0 +1,6 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - rscadd: There is now a Mouseover Highlight preference that can be set to Show,
+      Hide or Show While Shift Held. This will highlight the object you are currently
+      mousing over. You can set colour and alpha for the highlight in your UI preferences.
