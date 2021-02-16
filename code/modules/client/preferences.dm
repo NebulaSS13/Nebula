@@ -200,7 +200,7 @@ var/list/time_prefs_fixed = list()
 
 		if(isnewplayer(client.mob))
 			var/mob/new_player/M = client.mob
-			M.new_player_panel()
+			M.show_lobby_menu()
 
 	else if(href_list["resetslot"])
 		if(real_name != input("This will reset the current slot. Enter the character's full name to confirm."))
