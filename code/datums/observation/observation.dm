@@ -61,6 +61,7 @@
 	var/expected_type = /datum          // The expected event source for this event. register() will CRASH() if it receives an unexpected type.
 	var/list/event_sources = list()     // Associative list of event sources, each with their own associative list. This associative list contains an instance/list of procs to call when the event is raised.
 	var/list/global_listeners = list()  // Associative list of instances that listen to all events of this type (as opposed to events belonging to a specific source) and the proc to call.
+	var/flags                           // See _defines.dm for available flags and what they do
 
 /decl/observ/New()
 	GLOB.all_observable_events += src
@@ -166,6 +167,10 @@
 /decl/observ/proc/register_global(var/datum/listener, var/proc_call)
 	// Sanity.
 	if (!(listener && proc_call))
+		return FALSE
+
+	if(flags & OBSERVATION_NO_GLOBAL_REGISTRATIONS)
+		PRINT_STACK_TRACE("Attempt to register globally was denied")
 		return FALSE
 
 	// Make sure the callbacks are setup.

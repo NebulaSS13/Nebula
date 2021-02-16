@@ -404,6 +404,7 @@
 #include "code\datums\observation\unequipped.dm"
 #include "code\datums\observation\zone_selected.dm"
 #include "code\datums\observation\~cleanup.dm"
+#include "code\datums\observation\~defines.dm"
 #include "code\datums\outfits\_defines.dm"
 #include "code\datums\outfits\horror_killers.dm"
 #include "code\datums\outfits\misc.dm"
