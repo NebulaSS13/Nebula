@@ -248,25 +248,21 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	var/display_freq = freq
 
-	var/list/obj/item/radio/radios = list()
+	var/list/radios = list()
 
 	// --- Broadcast only to intercom devices ---
-
 	if(data == 1)
-
-		for (var/obj/item/radio/intercom/R in connection.devices["[RADIO_CHAT]"])
-			if(R.receive_range(display_freq, level) > -1)
+		for(var/receiver in connection.devices["[RADIO_CHAT]"])
+			var/obj/item/radio/R = receiver
+			if(R.intercom && R.receive_range(display_freq, level) > -1)
 				radios += R
 
 	// --- Broadcast only to intercoms and station-bounced radios ---
 
 	else if(data == 2)
-
 		for (var/obj/item/radio/R in connection.devices["[RADIO_CHAT]"])
-
 			if(istype(R, /obj/item/radio/headset))
 				continue
-
 			if(R.receive_range(display_freq, level) > -1)
 				radios += R
 
@@ -281,15 +277,13 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	// --- Broadcast to ALL radio devices ---
 	else
-
 		for (var/obj/item/radio/R in connection.devices["[RADIO_CHAT]"])
 			if(R.receive_range(display_freq, level) > -1)
 				radios += R
 
 	for(var/obj/item/radio/R in radios)
-		if((R.last_radio_sound + 1 SECOND) < world.time && R != radio)
-			playsound(R.loc, 'sound/effects/radio_chatter.ogg', 10, 0, -6)
-			R.last_radio_sound = world.time
+		if(R != radio)
+			R.received_chatter(display_freq, level)
 
 	// Get a list of mobs who can hear from the radios we collected.
 	var/list/receive = get_mobs_in_radio_ranges(radios)

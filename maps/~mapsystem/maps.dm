@@ -336,3 +336,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/create_trade_hubs()
 	new /datum/trade_hub/singleton
+
+/datum/map/proc/get_radio_chatter_types()
+	return

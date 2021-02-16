@@ -12,6 +12,7 @@
 	layer = ABOVE_WINDOW_LAYER
 	cell = null
 	power_usage = 0
+	intercom = TRUE
 	var/number = 0
 	var/last_tick //used to delay the powercheck
 

@@ -217,6 +217,8 @@
 	var/list/speaker_coverage = list()
 	for(var/obj/item/radio/R in radios)
 		if(R)
+			if(R.virtual)
+				continue // We end up in this list because we need to receive signals, but should never actually display a message.
 			//Cyborg checks. Receiving message uses a bit of cyborg's charge.
 			var/obj/item/radio/borg/BR = R
 			if(istype(BR) && BR.myborg)
