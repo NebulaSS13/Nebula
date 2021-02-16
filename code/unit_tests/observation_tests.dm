@@ -6,15 +6,17 @@
 	template = /datum/unit_test/observation
 	async = 0
 	var/list/received_moves
+	var/list/received_name_set_events
 
 	var/list/stored_global_listen_count
 	var/list/stored_event_sources_count
 	var/list/stored_event_listen_count
 
 /datum/unit_test/observation/start_test()
-	if(!received_moves)
-		received_moves = list()
+	received_moves = received_moves || list()
+	received_name_set_events = received_name_set_events || list()
 	received_moves.Cut()
+	received_name_set_events.Cut()
 
 	for(var/global_listener in GLOB.moved_event.global_listeners)
 		GLOB.moved_event.unregister_global(global_listener)
@@ -70,29 +72,40 @@
 		var/list/l = entry
 		log_unit_test("[l[1]] - [l[2]] - [l[3]]")
 
+/datum/unit_test/observation/proc/receive_name_change(source, old_name, new_name)
+	received_name_set_events[++received_name_set_events.len] = list(source, old_name, new_name)
+
+/datum/unit_test/observation/proc/dump_received_names()
+	for(var/entry in received_name_set_events)
+		var/list/l = entry
+		log_unit_test("[l[1]] - [l[2]] - [l[3]]")
+
 /datum/unit_test/observation/global_listeners_shall_receive_events
 	name = "OBSERVATION: Global listeners shall receive events"
+	var/old_name
+	var/new_name
 
 /datum/unit_test/observation/global_listeners_shall_receive_events/conduct_test()
 	var/turf/start = get_safe_turf()
-	var/turf/target = get_step(start, NORTH)
 	var/obj/O = get_named_instance(/obj, start)
+	old_name = O.name
+	new_name = O.name + " (New)"
 
-	GLOB.moved_event.register_global(src, /datum/unit_test/observation/proc/receive_move)
-	O.forceMove(target)
+	GLOB.name_set_event.register_global(src, /datum/unit_test/observation/proc/receive_name_change)
+	O.SetName(new_name)
 
-	if(received_moves.len != 1)
-		fail("Expected 1 raised moved event, were [received_moves.len].")
-		dump_received_moves()
+	if(received_name_set_events.len != 1)
+		fail("Expected 1 raised name set event, were [received_name_set_events.len].")
+		dump_received_names()
 		return 1
 
-	var/list/event = received_moves[1]
-	if(event[1] != O || event[2] != start || event[3] != target)
-		fail("Unepected move event received. Expected [O], was [event[1]]. Expected [start], was [event[2]]. Expected [target], was [event[3]]")
+	var/list/event = received_name_set_events[1]
+	if(event[1] != O || event[2] != old_name || event[3] != new_name)
+		fail("Unepected name set event received. Expected [O], was [event[1]]. Expected [old_name], was [event[2]]. Expected [new_name], was [event[3]]")
 	else
-		pass("Received the expected move event.")
+		pass("Received the expected name set event.")
 
-	GLOB.moved_event.unregister_global(src)
+	GLOB.name_set_event.unregister_global(src)
 	qdel(O)
 	return 1
 
@@ -301,10 +314,10 @@
 	var/turf/T = get_safe_turf()
 	var/obj/O = get_named_instance(/obj, T)
 
-	GLOB.moved_event.register_global(O, /atom/movable/proc/move_to_turf)
+	GLOB.name_set_event.register_global(O, /atom/movable/proc/move_to_turf)
 	qdel(O)
 
-	if(null in GLOB.moved_event.global_listeners)
+	if(null in GLOB.name_set_event.global_listeners)
 		fail("The global listener list contains a null entry.")
 	else
 		pass("The global listener list does not contain a null entry.")
