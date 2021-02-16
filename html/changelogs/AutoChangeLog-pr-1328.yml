@@ -1,4 +1,0 @@
-author: silicons
-delete-after: true
-changes:
-  - bugfix: projectiles use a better get angle function now
