@@ -312,3 +312,5 @@
 #define CAN_INJECT 1
 #define INJECTION_PORT 2
 #define INJECTION_PORT_DELAY 3 SECONDS // used by injectors to apply delay due to searching for a port on the injectee's suit
+
+#define ADJUSTED_GLIDE_SIZE(DELAY) (CEILING((WORLD_ICON_SIZE / max((DELAY), world.tick_lag) * world.tick_lag) - world.tick_lag, 1) + (config.glide_size_delay))

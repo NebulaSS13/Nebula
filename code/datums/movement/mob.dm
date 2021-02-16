@@ -131,9 +131,10 @@
 	var/next_move
 
 /datum/movement_handler/mob/delay/DoMove(var/direction, var/mover, var/is_external)
-	if(is_external)
-		return
-	next_move = world.time + max(1, mob.movement_delay())
+	if(!is_external)
+		var/delay = max(1, mob.movement_delay())
+		next_move = world.time + delay
+		mob.glide_size = ADJUSTED_GLIDE_SIZE(delay)
 
 /datum/movement_handler/mob/delay/MayMove(var/mover, var/is_external)
 	if(IS_NOT_SELF(mover) && is_external)

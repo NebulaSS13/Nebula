@@ -136,6 +136,7 @@ var/list/gamemode_cache = list()
 	var/skill_sprint_cost_range = 0.8
 	var/minimum_stamina_recovery = 1
 	var/maximum_stamina_recovery = 3
+	var/glide_size_delay = 1
 
 	//Mob specific modifiers. NOTE: These will affect different mob types in different ways
 	var/human_delay = 0
@@ -821,6 +822,8 @@ var/list/gamemode_cache = list()
 					config.walk_delay = value
 				if("creep_delay")
 					config.creep_delay = value
+				if("glide_size_delay")
+					config.glide_size_delay = value
 				if("minimum_sprint_cost")
 					config.minimum_sprint_cost = value
 				if("skill_sprint_cost_range")

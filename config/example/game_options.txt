@@ -48,6 +48,10 @@ REVIVAL_BRAIN_LIFE -1
 RUN_DELAY 2
 WALK_DELAY 4
 CREEP_DELAY 6
+
+## Set this to 0 for perfectly smooth movement gliding, or 1 or more for delayed chess move style movements.
+#GLIDE_SIZE_DELAY 0
+
 MINIMUM_SPRINT_COST 0.8
 SKILL_SPRINT_COST_RANGE 0.8
 MINIMUM_STAMINA_RECOVERY 5
