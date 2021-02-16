@@ -95,7 +95,7 @@ var/list/bodypart_to_slot_lookup_table = list(
 	var/image/I = image(useicon, use_state)
 	I.color = color
 	I.appearance_flags = RESET_COLOR
-	. = apply_offsets(user_mob,  bodytype, I, get_fallback_slot(slot) || slot, bodypart)
+	. = apply_offsets(user_mob,  bodytype, I, slot, bodypart)
 	. = apply_overlays(user_mob, bodytype, ., slot)
 
 /mob/living/carbon/get_bodytype()
