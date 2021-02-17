@@ -78,7 +78,7 @@
 		return
 
 	for(var/thing in pref.cultural_info)
-		var/decl/cultural_info/culture = SSlore.get_culture(pref.cultural_info[thing])
+		var/decl/cultural_info/culture = decls_repository.get_decl(pref.cultural_info[thing])
 		if(istype(culture))
 			var/list/langs = culture.get_spoken_languages()
 			if(LAZYLEN(langs))

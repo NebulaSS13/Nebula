@@ -44,7 +44,7 @@
 		PLURAL
 	)
 	available_cultural_info = list(
-		TAG_CULTURE = list(CULTURE_SYNTHETIC)
+		TAG_CULTURE = list(/decl/cultural_info/culture/synthetic)
 	)
 	has_organ = list(
 		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,

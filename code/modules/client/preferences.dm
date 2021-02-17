@@ -223,7 +223,7 @@ var/list/time_prefs_fixed = list()
 	character.set_species(species)
 
 	if(be_random_name)
-		var/decl/cultural_info/culture = SSlore.get_culture(cultural_info[TAG_CULTURE])
+		var/decl/cultural_info/culture = decls_repository.get_decl(cultural_info[TAG_CULTURE])
 		if(culture) real_name = culture.get_random_name(gender)
 
 	if(config.humans_need_surnames)

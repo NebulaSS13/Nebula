@@ -129,25 +129,17 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/default_bodytype = BODYTYPE_HUMANOID
 
 	var/list/available_cultural_info = list(
-		TAG_HOMEWORLD = list(
-			HOME_SYSTEM_OTHER
-		),
-		TAG_FACTION = list(
-			FACTION_OTHER
-		),
-		TAG_CULTURE = list(
-			CULTURE_OTHER
-		),
-		TAG_RELIGION = list(
-			RELIGION_OTHER
-		)
+		TAG_HOMEWORLD = list(/decl/cultural_info/location/other),
+		TAG_FACTION =   list(/decl/cultural_info/faction/other),
+		TAG_CULTURE =   list(/decl/cultural_info/culture/other),
+		TAG_RELIGION =  list(/decl/cultural_info/religion/other)
 	)
 
 	var/list/default_cultural_info = list(
-		TAG_HOMEWORLD = HOME_SYSTEM_OTHER,
-		TAG_FACTION =   FACTION_OTHER,
-		TAG_CULTURE =   CULTURE_OTHER,
-		TAG_RELIGION =  RELIGION_OTHER
+		TAG_HOMEWORLD = /decl/cultural_info/location/other,
+		TAG_FACTION =   /decl/cultural_info/faction/other,
+		TAG_CULTURE =   /decl/cultural_info/culture/other,
+		TAG_RELIGION =  /decl/cultural_info/religion/other
 	)
 
 	var/access_modify_region = list(

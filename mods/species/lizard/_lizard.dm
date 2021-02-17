@@ -1,5 +1,4 @@
 #define SPECIES_LIZARD  "Lizard"
-#define CULTURE_LIZARD  "Lizard"
 #define LANGUAGE_LIZARD "Lizard Language"
 #define IS_LIZARD       "lizard"
 

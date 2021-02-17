@@ -66,7 +66,7 @@
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
-			CULTURE_TAJARAN
+			/decl/cultural_info/culture/tajaran
 		)
 	)
 

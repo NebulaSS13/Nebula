@@ -1,7 +1,7 @@
 GLOBAL_LIST_INIT(symbiote_starting_points, new)
 
 /decl/cultural_info/culture/symbiotic
-	name = CULTURE_SYMBIOTIC
+	name = "Symbiote Host"
 	description = "Your culture has always welcomed a form of brain-slug called cortical borers into their bodies, \
 	and your upbringing taught that this was a normal and beneficial state of affairs. Taking this background will \
 	allow symbiote players to join as your mind-partner. Symbiotes can secrete beneficial chemicals, translate languages \
