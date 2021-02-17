@@ -25,6 +25,7 @@
 
 	var/list/map_z = list()
 	var/list/consoles
+	var/list/shield_generators
 
 /obj/effect/overmap/visitable/Initialize()
 	. = ..()
