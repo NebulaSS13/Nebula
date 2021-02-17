@@ -29,14 +29,14 @@ var/repository/decls/decls_repository = new()
 
 /repository/decls/proc/get_decl(var/decl_type)
 	ASSERT(ispath(decl_type))
-	. = fetched_decls[decl_type]
-	if(!.)
-		. = new decl_type()
-		fetched_decls[decl_type] = .
+	var/decl/decl = fetched_decls[decl_type]
+	if(!decl)
+		decl = new decl_type()
+		fetched_decls[decl_type] = decl
 
-		var/decl/decl = .
 		if(istype(decl))
 			decl.Initialize()
+	return decl
 
 /repository/decls/proc/get_decls(var/list/decl_types)
 	. = list()
