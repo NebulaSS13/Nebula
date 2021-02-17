@@ -11,7 +11,6 @@ var/list/ticket_panels = list()
 	var/sql_id
 	var/opened_time
 	var/timeout = FALSE
-	var/to_check
 	var/to_close
 
 /datum/ticket/New(var/datum/client_lite/owner)
@@ -21,7 +20,7 @@ var/list/ticket_panels = list()
 	opened_time = world.time
 	if(establish_db_connection())
 		var/sql_ckey = sanitizeSQL(owner.ckey)
-		var/DBQuery/ticket_query = dbcon.NewQuery("INSERT INTO erro_admin_tickets(ckey, round, inround_id, status, open_date) VALUES ('[sql_ckey]', '[game_id]', [src.id], 'OPEN', NOW());")
+		var/DBQuery/ticket_query = dbcon.NewQuery("INSERT INTO `erro_admin_tickets`(`ckey`, `round`, `inround_id`, `status`, `open_date`) VALUES ('[sql_ckey]', '[game_id]', [src.id], 'OPEN', NOW());")
 		ticket_query.Execute()
 	addtimer(CALLBACK(src, .proc/timeoutcheck), 5 MINUTES)
 
@@ -46,7 +45,7 @@ var/list/ticket_panels = list()
 
 	if(timeout == TRUE)
 		if(establish_db_connection())
-			var/DBQuery/ticket_timeout = dbcon.NewQuery("UPDATE erro_admin_tickets SET status = 'TIMED_OUT' WHERE round = '[game_id]' AND inround_id = '[src.id]';")
+			var/DBQuery/ticket_timeout = dbcon.NewQuery("UPDATE `erro_admin_tickets` SET `status` = 'TIMED_OUT' WHERE `round` = '[game_id]' AND `inround_id` = '[src.id]';")
 			ticket_timeout.Execute()
 		to_chat(client_by_ckey(src.owner.ckey), "<span class='notice'><b>Your ticket has timed out. Please adminhelp again if your issue is not resolved.</b></span>")
 		SSwebhooks.send(WEBHOOK_AHELP_SENT, list("name" = "Ticket ([id]) (Game ID: [game_id]) Ticket Timed Out", "body" = "[src.owner.key_name(0)] 's ticket (ID [id]) has timed out."))
@@ -66,8 +65,8 @@ var/list/ticket_panels = list()
 
 	if(establish_db_connection())
 		var/sql_text = "[closed_by_not_assigned ? "CLOSED" : "SOLVED"]: [closed_by.ckey]\n"
-		var/DBQuery/ticket_text = dbcon.NewQuery("UPDATE erro_admin_tickets SET text = CONCAT(text, '[sql_text]') WHERE round = '[game_id]' AND inround_id = '[src.id]';")
-		var/DBQuery/ticket_close = dbcon.NewQuery("UPDATE erro_admin_tickets SET status = '[closed_by_not_assigned ? "CLOSED" : "SOLVED"]' WHERE round = '[game_id]' AND inround_id = '[src.id]';")
+		var/DBQuery/ticket_text = dbcon.NewQuery("UPDATE `erro_admin_tickets` SET `text` = CONCAT(text, '[sql_text]') WHERE `round` = '[game_id]' AND `inround_id` = '[src.id]';")
+		var/DBQuery/ticket_close = dbcon.NewQuery("UPDATE `erro_admin_tickets` SET `status` = '[closed_by_not_assigned ? "CLOSED" : "SOLVED"]' WHERE `round` = '[game_id]' AND `inround_id` = '[src.id]';")
 		ticket_text.Execute()
 		ticket_close.Execute()
 	
@@ -89,7 +88,7 @@ var/list/ticket_panels = list()
 	
 	if(src.status != TICKET_ASSIGNED)
 		if(establish_db_connection())
-			var/DBQuery/ticket_timeout = dbcon.NewQuery("UPDATE erro_admin_tickets SET status = 'ASSIGNED' WHERE round = '[game_id]' AND inround_id = '[src.id]';")
+			var/DBQuery/ticket_timeout = dbcon.NewQuery("UPDATE `erro_admin_tickets` SET `status` = 'ASSIGNED' WHERE `round` = '[game_id]' AND `inround_id` = '[src.id]';")
 			ticket_timeout.Execute()
 		src.status = TICKET_ASSIGNED
 
@@ -100,7 +99,7 @@ var/list/ticket_panels = list()
 				sql_assignee += "[_admin.ckey]"
 			else
 				sql_assignee += ", [_admin.ckey]"
-		var/DBQuery/ticket_take = dbcon.NewQuery("UPDATE erro_admin_tickets SET assignee = '[sql_assignee]' WHERE round = '[game_id]' AND inround_id = '[src.id]';")
+		var/DBQuery/ticket_take = dbcon.NewQuery("UPDATE `erro_admin_tickets` SET `assignee` = '[sql_assignee]' WHERE `round` = '[game_id]' AND `inround_id` = '[src.id]';")
 		ticket_take.Execute()
 
 	message_staff("<span class='notice'><b>[assigned_admin.key]</b> has assigned themself to <b>[src.owner.key_name(0)]'s</b> ticket.</span>")
