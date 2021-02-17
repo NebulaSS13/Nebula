@@ -96,7 +96,7 @@
 	dat += "<br>"
 	dat += "<b>VAT CONTENT</b><br>"
 	for(var/reagent_type in reagents?.reagent_volumes)
-		var/decl/material/R = decls_repository.get_decl(reagent_type)
+		var/decl/material/R = GET_DECL(reagent_type)
 		dat += "[R.name]: [REAGENT_VOLUME(reagents, reagent_type)]"
 		dat += "<A href='?src=\ref[src];disposeI=\ref[R]'>Purge</A><BR>"
 	dat += "<a href='?src=\ref[src];refresh=1'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"

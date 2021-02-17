@@ -194,7 +194,7 @@
 /mob/living/silicon/add_language(var/language, var/can_speak=1)
 	if(!ispath(language, /decl/language))
 		return
-	var/decl/language/added_language = decls_repository.get_decl(language)
+	var/decl/language/added_language = GET_DECL(language)
 	if(!added_language)
 		return
 
@@ -206,7 +206,7 @@
 /mob/living/silicon/remove_language(var/rem_language)
 	if(!ispath(rem_language, /decl/language))
 		return
-	var/decl/language/removed_language = decls_repository.get_decl(rem_language)
+	var/decl/language/removed_language = GET_DECL(rem_language)
 	if(!removed_language)
 		return
 
@@ -221,7 +221,7 @@
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
 
 	if(default_language)
-		var/decl/language/lang = decls_repository.get_decl(default_language)
+		var/decl/language/lang = GET_DECL(default_language)
 		dat += "Current default language: [lang.name] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
 
 	for(var/decl/language/L in languages)
@@ -346,7 +346,7 @@
 
 
 /mob/living/silicon/proc/is_traitor()
-	var/decl/special_role/traitors = decls_repository.get_decl(/decl/special_role/traitor)
+	var/decl/special_role/traitors = GET_DECL(/decl/special_role/traitor)
 	return mind && (mind in traitors.current_antagonists)
 
 /mob/living/silicon/adjustEarDamage()

@@ -38,7 +38,7 @@ var/list/natural_walls = list()
 		strata = global.default_strata_type_by_z["[z]"]
 	var/skey = "[strata]-[z]"
 	if(!global.default_material_by_strata_and_z[skey])
-		var/decl/strata/strata_info = decls_repository.get_decl(strata)
+		var/decl/strata/strata_info = GET_DECL(strata)
 		if(length(strata_info.base_materials))
 			global.default_material_by_strata_and_z[skey] = pick(strata_info.base_materials)
 	material = global.default_material_by_strata_and_z[skey]
@@ -59,11 +59,11 @@ var/list/natural_walls = list()
 	if(!ispath(material, /decl/material))
 		material = materialtype || get_default_material()
 	if(ispath(material, /decl/material))
-		material = decls_repository.get_decl(material)
+		material = GET_DECL(material)
 	if(!ispath(reinf_material, /decl/material))
 		reinf_material = rmaterialtype
 	if(ispath(reinf_material, /decl/material))
-		reinf_material = decls_repository.get_decl(reinf_material)
+		reinf_material = GET_DECL(reinf_material)
 	. = INITIALIZE_HINT_LATELOAD
 
 /turf/exterior/wall/LateInitialize()
@@ -82,13 +82,13 @@ var/list/natural_walls = list()
 /turf/exterior/wall/proc/set_material(var/decl/material/newmaterial, var/decl/material/newrmaterial)
 	material = newmaterial
 	if(ispath(material, /decl/material))
-		material = decls_repository.get_decl(material)
+		material = GET_DECL(material)
 	else if(!istype(material))
 		PRINT_STACK_TRACE("Wall has been supplied non-material '[newmaterial]'.")
-		material = decls_repository.get_decl(get_default_material())
+		material = GET_DECL(get_default_material())
 	reinf_material = newrmaterial
 	if(ispath(reinf_material, /decl/material))
-		reinf_material = decls_repository.get_decl(reinf_material)
+		reinf_material = GET_DECL(reinf_material)
 	else if(!istype(reinf_material))
 		reinf_material = null
 	update_material()
@@ -147,7 +147,7 @@ var/list/natural_walls = list()
 
 /turf/exterior/wall/proc/update_material()
 	if(!material)
-		material = decls_repository.get_decl(get_default_material())
+		material = GET_DECL(get_default_material())
 	if(material)
 		explosion_resistance = material.explosion_resistance
 	if(reinf_material && reinf_material.explosion_resistance > explosion_resistance)

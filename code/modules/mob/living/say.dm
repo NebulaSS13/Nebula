@@ -86,7 +86,7 @@ proc/get_radio_key_from_channel(var/channel)
 		if(dongle.translate_binary) return 1
 
 /mob/living/proc/get_default_language()
-	. = ispath(default_language, /decl/language) && decls_repository.get_decl(default_language)
+	. = ispath(default_language, /decl/language) && GET_DECL(default_language)
 
 /mob/proc/is_muzzled()
 	return istype(wear_mask, /obj/item/clothing/mask/muzzle) || istype(wear_mask, /obj/item/clothing/sealant)

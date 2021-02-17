@@ -55,15 +55,15 @@ var/list/wall_noblend_objects = list(
 	if(!ispath(material, /decl/material))
 		material = materialtype || get_default_material()
 	if(ispath(material, /decl/material))
-		material = decls_repository.get_decl(material)
+		material = GET_DECL(material)
 
 	if(!ispath(reinf_material, /decl/material))
 		reinf_material = rmaterialtype
 	if(ispath(reinf_material, /decl/material))
-		reinf_material = decls_repository.get_decl(reinf_material)
+		reinf_material = GET_DECL(reinf_material)
 
 	if(ispath(girder_material, /decl/material))
-		girder_material = decls_repository.get_decl(girder_material)
+		girder_material = GET_DECL(girder_material)
 
 	. = INITIALIZE_HINT_LATELOAD
 	set_extension(src, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
@@ -75,7 +75,7 @@ var/list/wall_noblend_objects = list(
 
 /turf/simulated/wall/Destroy()
 	STOP_PROCESSING(SSturf, src)
-	material = decls_repository.get_decl(/decl/material/placeholder)
+	material = GET_DECL(/decl/material/placeholder)
 	reinf_material = null
 	var/old_x = x
 	var/old_y = y

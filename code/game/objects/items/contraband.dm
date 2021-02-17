@@ -41,7 +41,7 @@
 
 	var/list/names = new
 	for(var/reagent_type in reagents.reagent_volumes)
-		var/decl/material/R = decls_repository.get_decl(reagent_type)
+		var/decl/material/R = GET_DECL(reagent_type)
 		names += R.liquid_name
 
 	desc = "Contains [english_list(names)]."

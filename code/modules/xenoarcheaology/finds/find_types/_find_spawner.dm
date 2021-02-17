@@ -7,7 +7,7 @@
 
 /obj/item/archaeological_find/Initialize()
 	..()
-	var/decl/archaeological_find/F = decls_repository.get_decl(pick(possible_finds))
+	var/decl/archaeological_find/F = GET_DECL(pick(possible_finds))
 	F.create_find(loc)
 	return INITIALIZE_HINT_QDEL
 

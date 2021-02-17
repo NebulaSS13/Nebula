@@ -21,7 +21,7 @@
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
 /obj/item/spirit_board/attack_ghost(var/mob/observer/ghost/user)
-	var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	if(cult.max_cult_rating >= CULT_GHOSTS_2)
 		spirit_board_pick_letter(user)
 	return ..()

@@ -174,7 +174,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		lobby_track_type = pickweight(lobby_tracks - exclude)
 	else
 		lobby_track_type = pick(subtypesof(/music_track) - exclude)
-	return decls_repository.get_decl(lobby_track_type)
+	return GET_DECL(lobby_track_type)
 
 /datum/map/proc/setup_map()
 	lobby_track = get_lobby_track()

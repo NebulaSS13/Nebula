@@ -70,7 +70,7 @@
 		var/decl/species/S = species_by_name[species_name]
 		for(var/trait_type in S.traits)
 			var/trait_level = S.traits[trait_type]
-			var/decl/trait/T = decls_repository.get_decl(trait_type)
+			var/decl/trait/T = GET_DECL(trait_type)
 			if(!T.Validate(trait_level))
 				invalid_species += S.type
 				break

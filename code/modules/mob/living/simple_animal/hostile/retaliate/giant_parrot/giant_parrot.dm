@@ -39,7 +39,7 @@
 	. = ..()
 	var/subspecies_type = safepick(subspecies)
 	if(subspecies_type)
-		var/decl/parrot_subspecies/ps = decls_repository.get_decl(subspecies_type)
+		var/decl/parrot_subspecies/ps = GET_DECL(subspecies_type)
 		icon_set = ps.icon_set
 		skin_material = ps.feathers
 		if(get_subspecies_name)

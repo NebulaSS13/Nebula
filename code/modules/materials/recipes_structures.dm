@@ -38,7 +38,7 @@
 /datum/stack_recipe/campfire/spawn_result(mob/user, location, amount)
 	var/obj/structure/fire_source/product = ..()
 	for(var/mat in product.matter)
-		var/decl/material/material = decls_repository.get_decl(mat)
+		var/decl/material/material = GET_DECL(mat)
 		if(material.fuel_value > 0)
 			product.fuel += material.fuel_value * round(product.matter[mat] / SHEET_MATERIAL_AMOUNT)
 	return product

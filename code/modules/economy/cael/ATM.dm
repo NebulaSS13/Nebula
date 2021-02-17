@@ -332,7 +332,7 @@
 				if(amount <= 0)
 					alert("That is not a valid amount.")
 				else if(amount > initial(E.max_worth))
-					var/decl/currency/cur = decls_repository.get_decl(initial(E.currency) || GLOB.using_map.default_currency)
+					var/decl/currency/cur = GET_DECL(initial(E.currency) || GLOB.using_map.default_currency)
 					alert("That amount exceeds the maximum amount holdable by charge sticks from this machine ([cur.format_value(initial(E.max_worth))]).")
 				else if(authenticated_account && amount > 0)
 					//create an entry in the account transaction log

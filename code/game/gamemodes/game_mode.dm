@@ -168,7 +168,7 @@ var/list/additional_antag_types = list()
 	var/enemy_count = 0
 	if(length(associated_antags))
 		for(var/antag_type in associated_antags)
-			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
+			var/decl/special_role/antag = GET_DECL(antag_type)
 			if(!antag)
 				continue
 			var/list/potential = list()
@@ -421,7 +421,7 @@ var/list/additional_antag_types = list()
 	var/list/players = list()
 	var/list/candidates = list()
 
-	var/decl/special_role/antag_template = decls_repository.get_decl(antag_type)
+	var/decl/special_role/antag_template = GET_DECL(antag_type)
 	if(!antag_template)
 		return candidates
 
@@ -479,14 +479,14 @@ var/list/additional_antag_types = list()
 	if(length(associated_antags))
 		antag_templates = list()
 		for(var/antag_type in associated_antags)
-			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
+			var/decl/special_role/antag = GET_DECL(antag_type)
 			antag_templates |= antag
 
 	if(length(global.additional_antag_types))
 		if(!antag_templates)
 			antag_templates = list()
 		for(var/antag_type in global.additional_antag_types)
-			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
+			var/decl/special_role/antag = GET_DECL(antag_type)
 			if(antag)
 				antag_templates |= antag
 

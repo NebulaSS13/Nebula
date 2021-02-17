@@ -120,7 +120,7 @@
 /obj/structure/fire_source/proc/check_atmos()
 	var/datum/gas_mixture/GM = loc?.return_air()
 	for(var/g in GM?.gas)
-		var/decl/material/oxidizer = decls_repository.get_decl(g)
+		var/decl/material/oxidizer = GET_DECL(g)
 		if(oxidizer.gas_flags & XGM_GAS_OXIDIZER)
 			return TRUE
 
@@ -244,7 +244,7 @@
 
 		var/modified_fuel = FALSE
 		for(var/mat in thing.matter)
-			var/decl/material/material = decls_repository.get_decl(mat)
+			var/decl/material/material = GET_DECL(mat)
 			if(material.fuel_value > 0)
 				modified_fuel = TRUE
 				var/add_fuel = round(thing.matter[mat] / SHEET_MATERIAL_AMOUNT) * material.fuel_value
@@ -273,7 +273,7 @@
 /obj/structure/fire_source/proc/take_reagents(datum/reagents/RG)
 	var/do_steam = FALSE
 	for(var/rtype in RG.reagent_volumes)
-		var/decl/material/R = decls_repository.get_decl(rtype)
+		var/decl/material/R = GET_DECL(rtype)
 		if(R.fuel_value <= 0)
 			do_steam = TRUE
 		fuel += REAGENT_VOLUME(RG, rtype) * R.fuel_value

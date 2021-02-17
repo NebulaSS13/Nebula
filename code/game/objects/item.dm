@@ -190,7 +190,7 @@
 		if(LAZYLEN(matter))
 			desc_comp += SPAN_NOTICE("Extractable materials:<BR>")
 			for(var/mat in matter)
-				var/decl/material/M = decls_repository.get_decl(mat)
+				var/decl/material/M = GET_DECL(mat)
 				desc_comp += "[capitalize(M.solid_name)]<BR>"
 		else
 			desc_comp += SPAN_DANGER("No extractable materials detected.<BR>")

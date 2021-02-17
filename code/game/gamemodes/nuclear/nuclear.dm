@@ -29,7 +29,7 @@ var/list/nuke_disks = list()
 	return FALSE
 
 /datum/game_mode/nuclear/declare_completion()
-	var/decl/special_role/merc = decls_repository.get_decl(/decl/special_role/mercenary)
+	var/decl/special_role/merc = GET_DECL(/decl/special_role/mercenary)
 	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || (merc && !merc.global_objectives.len))
 		..()
 		return
@@ -40,7 +40,7 @@ var/list/nuke_disks = list()
 			disk_rescued = FALSE
 			break
 	var/crew_evacuated = (SSevac.evacuation_controller.has_evacuated())
-	var/decl/special_role/mercenary/mercs = decls_repository.get_decl(/decl/special_role/mercenary)
+	var/decl/special_role/mercenary/mercs = GET_DECL(/decl/special_role/mercenary)
 	if(!disk_rescued &&  station_was_nuked && !syndies_didnt_escape)
 		SSstatistics.set_field_details("round_end_result","win - syndicate nuke")
 		to_world("<FONT size = 3><B>Mercenary Major Victory!</B></FONT>")

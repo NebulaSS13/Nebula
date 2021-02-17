@@ -155,7 +155,7 @@
 		if(!target.mind || !target.key)
 			to_chat(user, "<span class='warning'>\The [target] is mindless!</span>")
 			return TRUE
-		var/decl/special_role/thrall/thralls = decls_repository.get_decl(/decl/special_role/thrall)
+		var/decl/special_role/thrall/thralls = GET_DECL(/decl/special_role/thrall)
 		if(thralls.is_antagonist(target.mind))
 			to_chat(user, "<span class='warning'>\The [target] is already in thrall to someone!</span>")
 			return TRUE

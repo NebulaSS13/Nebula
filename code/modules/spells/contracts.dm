@@ -48,7 +48,7 @@
 	if(user.mind.assigned_special_role == "Spellbound Servant")
 		to_chat(user, "<span class='notice'>You are a servant. You have no need of apprenticeship.</span>")
 		return 0
-	var/decl/special_role/wizard/wizards = decls_repository.get_decl(/decl/special_role/wizard)
+	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 	if(wizards.add_antagonist_mind(user.mind, 1, "Wizard's Apprentice", "<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
 		to_chat(user, "<span class='notice'>With the signing of this paper you agree to become \the [contract_master]'s apprentice in the art of wizardry.</span>")
 		return 1

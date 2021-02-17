@@ -4,10 +4,10 @@
 /mob/living/proc/set_default_language(var/decl/language/language)
 
 	if(ispath(language, /decl/language))
-		language = decls_repository.get_decl(language)
+		language = GET_DECL(language)
 
 	if(species_language)
-		var/decl/language/species_lang = decls_repository.get_decl(species_language)
+		var/decl/language/species_lang = GET_DECL(species_language)
 		if(only_species_language && language != species_lang)
 			to_chat(src, "<span class='notice'>You can only speak your species language, [src.species_language].</span>")
 			return 0
@@ -34,7 +34,7 @@
 	set category = "IC"
 
 	if(default_language)
-		var/decl/language/lang = decls_repository.get_decl(default_language)
+		var/decl/language/lang = GET_DECL(default_language)
 		to_chat(src, "<span class='notice'>You are currently speaking [lang.name] by default.</span>")
 	else
 		to_chat(src, "<span class='notice'>Your current default language is your species or mob type default.</span>")

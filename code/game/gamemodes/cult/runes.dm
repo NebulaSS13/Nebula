@@ -21,7 +21,7 @@
 
 /obj/effect/rune/on_update_icon()
 	overlays.Cut()
-	var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	if(cult.rune_strokes[type])
 		var/list/f = cult.rune_strokes[type]
 		for(var/i in f)
@@ -62,7 +62,7 @@
 	if(user.is_muzzled() || user.silent)
 		to_chat(user, "You are unable to speak the words of the rune.")
 		return
-	var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	if(cult.powerless)
 		to_chat(user, "You read the words, but nothing happens.")
 		return fizzle(user)
@@ -86,7 +86,7 @@
 
 //Makes the speech a proc so all verbal components can be easily manipulated as a whole, or individually easily
 /obj/effect/rune/proc/speak_incantation(var/mob/living/user, var/incantation)
-	var/decl/language/L = decls_repository.get_decl(/decl/language/cultcommon)
+	var/decl/language/L = GET_DECL(/decl/language/cultcommon)
 	if(istype(L) && incantation && (L in user.languages))
 		user.say(incantation, L)
 
@@ -113,7 +113,7 @@
 	target.visible_message("<span class='warning'>The markings below [target] glow a bloody red.</span>")
 
 	to_chat(target, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
-	var/decl/special_role/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
 	if(!cult.can_become_antag(target.mind, 1))
 		to_chat(target, "<span class='danger'>Are you going insane?</span>")
 	else
@@ -140,7 +140,7 @@
 
 /obj/effect/rune/convert/Topic(href, href_list)
 	if(href_list["join"] && usr.loc == loc && !iscultist(usr))
-		var/decl/special_role/cult = decls_repository.get_decl(/decl/special_role/cultist)
+		var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
 		cult.add_antagonist(usr.mind, ignore_role = 1, do_not_equip = 1)
 
 /obj/effect/rune/teleport
@@ -151,11 +151,11 @@
 	. = ..()
 	var/area/A = get_area(src)
 	destination = A.name
-	var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	cult.teleport_runes += src
 
 /obj/effect/rune/teleport/Destroy()
-	var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	cult.teleport_runes -= src
 	var/turf/T = get_turf(src)
 	for(var/atom/movable/A in contents)
@@ -212,7 +212,7 @@
 
 /obj/effect/rune/teleport/proc/showOptions(var/mob/living/user)
 	var/list/t = list()
-	var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	for(var/obj/effect/rune/teleport/T in cult.teleport_runes)
 		if(T == src)
 			continue
@@ -466,7 +466,7 @@
 				H.adjustBrainLoss(2 + casters.len)
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
-		var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+		var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 		cult.add_cultiness(CULTINESS_PER_SACRIFICE)
 		var/obj/item/soulstone/full/F = new(get_turf(src))
 		for(var/mob/M in cultists | get_cultists())
@@ -753,7 +753,7 @@
 	strokes = 9
 
 /obj/effect/rune/tearreality/cast(var/mob/living/user)
-	var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	if(!cult.allow_narsie)
 		return
 	if(the_end_comes)
@@ -809,7 +809,7 @@
 				to_chat(M, "You see a vision of [name] keeling over dead, his blood glowing blue as it escapes his body and dissipates into thin air; you hear an otherwordly scream and feel very weak for a moment.")
 		log_and_message_admins("mended reality with the greatest sacrifice", user)
 		user.dust()
-		var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+		var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 		cult.powerless = 1
 		qdel(HECOMES)
 		qdel(src)

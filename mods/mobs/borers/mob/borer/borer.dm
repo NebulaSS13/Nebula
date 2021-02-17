@@ -65,7 +65,7 @@
 		client.screen |= hud_elements
 		client.screen |= hud_intent_selector
 	if(mind && !neutered)
-		var/decl/special_role/borer/borers = decls_repository.get_decl(/decl/special_role/borer)
+		var/decl/special_role/borer/borers = GET_DECL(/decl/special_role/borer)
 		borers.add_antagonist(mind)
 
 /mob/living/simple_animal/borer/Logout()
@@ -252,7 +252,7 @@
 	if(!host) return
 
 	if(host.mind)
-		var/decl/special_role/borer/borers = decls_repository.get_decl(/decl/special_role/borer)
+		var/decl/special_role/borer/borers = GET_DECL(/decl/special_role/borer)
 		borers.remove_antagonist(host.mind)
 
 	dropInto(host.loc)
@@ -270,7 +270,7 @@
 
 //Procs for grabbing players.
 /mob/living/simple_animal/borer/proc/request_player()
-	var/decl/ghosttrap/G = decls_repository.get_decl(/decl/ghosttrap/cortical_borer)
+	var/decl/ghosttrap/G = GET_DECL(/decl/ghosttrap/cortical_borer)
 	G.request_player(src, "A cortical borer needs a player.")
 
 /mob/living/simple_animal/borer/flash_eyes(intensity, override_blindness_check, affect_silicon, visual, type)

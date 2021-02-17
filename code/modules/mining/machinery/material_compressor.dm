@@ -43,8 +43,8 @@
 			var/sheets = min(Floor((stored[mat] / SHEET_MATERIAL_AMOUNT) / 2), (MAX_COMPRESS_ORE_PER_TICK - produced))
 			if(sheets <= 0)
 				continue
-			var/decl/material/source = decls_repository.get_decl(mat)
-			var/decl/material/product = source.ore_compresses_to ? decls_repository.get_decl(source.ore_compresses_to) : source
+			var/decl/material/source = GET_DECL(mat)
+			var/decl/material/product = source.ore_compresses_to ? GET_DECL(source.ore_compresses_to) : source
 			product.place_sheet(output_turf, sheets)
 			stored[mat] -= ceil(sheets * SHEET_MATERIAL_AMOUNT * 2)
 			if(stored[mat] <= 0)

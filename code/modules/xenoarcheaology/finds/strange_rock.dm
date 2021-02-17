@@ -10,7 +10,7 @@
 /obj/item/ore/strangerock/Initialize(mapload, var/find_type = 0)
 	. = ..(mapload)
 	if(find_type)
-		var/decl/archaeological_find/find = decls_repository.get_decl(find_type)
+		var/decl/archaeological_find/find = GET_DECL(find_type)
 		inside = find.create_find(src)
 
 /obj/item/ore/strangerock/Destroy()

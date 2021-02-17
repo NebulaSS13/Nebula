@@ -14,7 +14,7 @@
 /decl/crafting_stage/New()
 	var/stages = list()
 	for(var/nid in next_stages)
-		stages += decls_repository.get_decl(nid)
+		stages += GET_DECL(nid)
 	next_stages = stages
 	..()
 

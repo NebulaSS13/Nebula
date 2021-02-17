@@ -24,7 +24,7 @@
 				var/datum/category_item/underwear/WRI = pick(WRC.items)
 				all_underwear[WRC.name] = WRI.name
 
-		backpack = decls_repository.get_decl(pick(subtypesof(/decl/backpack_outfit)))
+		backpack = GET_DECL(pick(subtypesof(/decl/backpack_outfit)))
 		age = rand(current_species.min_age, current_species.max_age)
 		b_type = RANDOM_BLOOD_TYPE
 		if(H)

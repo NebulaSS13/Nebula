@@ -152,7 +152,7 @@
 	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20) /* kpa */
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+40, T0C+66) // K
 
-	var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+	var/decl/environment_data/env_info = GET_DECL(environment_type)
 	for(var/g in subtypesof(/decl/material/gas))
 		if(!env_info.important_gasses[g])
 			trace_gas += g
@@ -510,9 +510,9 @@
 	if(total)
 		var/pressure = environment.return_pressure()
 		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
-		var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+		var/decl/environment_data/env_info = GET_DECL(environment_type)
 		for(var/gas_id in env_info.important_gasses)
-			var/decl/material/mat = decls_repository.get_decl(gas_id)
+			var/decl/material/mat = GET_DECL(gas_id)
 			environment_data[++environment_data.len] = list(
 				"name" =  capitalize(mat.gas_name),
 				"value" = environment.gas[gas_id] / total * 100,
@@ -566,9 +566,9 @@
 						"panic"		= info["panic"],
 						"filters"	= list()
 					)
-				var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+				var/decl/environment_data/env_info = GET_DECL(environment_type)
 				for(var/gas_id in env_info.filter_gasses)
-					var/decl/material/mat = decls_repository.get_decl(gas_id)
+					var/decl/material/mat = GET_DECL(gas_id)
 					scrubbers[scrubbers.len]["filters"] += list(
 						list(
 							"name" = capitalize(mat.gas_name),
@@ -684,7 +684,7 @@
 					return TOPIC_REFRESH
 
 				if("set_scrub_gas")
-					var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+					var/decl/environment_data/env_info = GET_DECL(environment_type)
 					var/gas_path = locate(href_list["gas_id"]) // this is a softref to a decl path
 					if(env_info && (gas_path in env_info.filter_gasses))
 						var/list/signal = list()
@@ -819,7 +819,7 @@ FIRE ALARM
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
 	if(loc.z in GLOB.using_map.contact_levels)
-		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+		var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/firealarm/proc/get_cached_overlay(key)
@@ -871,7 +871,7 @@ FIRE ALARM
 			overlays += get_cached_overlay("fire1")
 			set_light(0.25, 0.1, 1, 2, COLOR_RED)
 		else if(z in GLOB.using_map.contact_levels)
-			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+			var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
 			var/decl/security_level/sl = security_state.current_security_level
 
 			set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
@@ -935,7 +935,7 @@ FIRE ALARM
 	var/d1
 	var/d2
 
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
 	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon))
 		A = A.loc
 

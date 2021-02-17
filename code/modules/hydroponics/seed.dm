@@ -474,7 +474,7 @@
 
 		if(prob(30))
 			for(var/R in subtypesof(/decl/material))
-				var/decl/material/mat = decls_repository.get_decl(R)
+				var/decl/material/mat = GET_DECL(R)
 				if(mat.toxicity)
 					banned_chems |= R
 

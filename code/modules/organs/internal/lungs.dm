@@ -197,7 +197,7 @@
 	// humans processing thousands of units of oxygen over the course of a round.
 	var/ratio = BP_IS_PROSTHETIC(src)? 0.66 : 1
 	for(var/gasname in breath.gas - breath_type)
-		var/decl/material/gas = decls_repository.get_decl(gasname)
+		var/decl/material/gas = GET_DECL(gasname)
 		if(gas.gas_metabolically_inert)
 			continue
 		// Little bit of sanity so we aren't trying to add 0.0000000001 units of CO2, and so we don't end up with 99999 units of CO2.

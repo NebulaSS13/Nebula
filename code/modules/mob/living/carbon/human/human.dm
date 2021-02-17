@@ -1155,7 +1155,7 @@
 	default_run_intent = null
 	move_intent = null
 	move_intents = species.move_intents.Copy()
-	set_move_intent(decls_repository.get_decl(move_intents[1]))
+	set_move_intent(GET_DECL(move_intents[1]))
 	if(!istype(move_intent))
 		set_next_usable_move_intent()
 
@@ -1695,7 +1695,7 @@
 
 /mob/living/carbon/human/proc/set_cultural_value(var/token, var/decl/cultural_info/_culture, var/defer_language_update)
 	if(ispath(_culture, /decl/cultural_info))
-		_culture = decls_repository.get_decl(_culture)
+		_culture = GET_DECL(_culture)
 	if(istype(_culture))
 		LAZYSET(cultural_info, token, _culture)
 		if(!defer_language_update)

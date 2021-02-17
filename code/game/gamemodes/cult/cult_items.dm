@@ -7,7 +7,7 @@
 
 /obj/item/sword/cultblade/attack(mob/living/M, mob/living/user, var/target_zone)
 
-	var/decl/special_role/godcult = decls_repository.get_decl(/decl/special_role/godcultist)
+	var/decl/special_role/godcult = GET_DECL(/decl/special_role/godcultist)
 	if(iscultist(user) || (user.mind in godcult.current_antagonists))
 		return ..()
 

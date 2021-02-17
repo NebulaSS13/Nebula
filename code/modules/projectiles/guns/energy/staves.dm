@@ -16,7 +16,7 @@
 
 /obj/item/gun/energy/staff/special_check(var/mob/user)
 	if(required_antag_type)
-		var/decl/special_role/antag = decls_repository.get_decl(required_antag_type)
+		var/decl/special_role/antag = GET_DECL(required_antag_type)
 		if(user.mind && !antag.is_antagonist(user.mind))
 			to_chat(usr, "<span class='warning'>You focus your mind on \the [src], but nothing happens!</span>")
 			return 0

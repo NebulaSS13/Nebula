@@ -67,7 +67,7 @@
 
 /obj/effect/fluid/proc/remove_fuel(var/amt)
 	for(var/rtype in reagents.reagent_volumes)
-		var/decl/material/liquid/fuel = decls_repository.get_decl(rtype)
+		var/decl/material/liquid/fuel = GET_DECL(rtype)
 		if(fuel.fuel_value)
 			var/removing = min(amt, reagents.reagent_volumes[rtype])
 			reagents.remove_reagent(rtype, removing)
@@ -78,7 +78,7 @@
 /obj/effect/fluid/proc/get_fuel_amount()
 	. = 0
 	for(var/rtype in reagents?.reagent_volumes)
-		var/decl/material/liquid/fuel = decls_repository.get_decl(rtype)
+		var/decl/material/liquid/fuel = GET_DECL(rtype)
 		if(fuel.fuel_value)
 			. += REAGENT_VOLUME(reagents, rtype) * fuel.fuel_value
 
@@ -148,7 +148,7 @@
 		update_lighting = FALSE
 		var/glowing
 		for(var/rtype in reagents.reagent_volumes)
-			var/decl/material/reagent = decls_repository.get_decl(rtype)
+			var/decl/material/reagent = GET_DECL(rtype)
 			if(REAGENT_VOLUME(reagents, rtype) >= 3 && reagent.radioactivity)
 				glowing = TRUE
 				break

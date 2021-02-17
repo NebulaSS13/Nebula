@@ -258,7 +258,7 @@
  */
 /obj/machinery/vending/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
-	var/decl/currency/cur = decls_repository.get_decl(vendor_currency)
+	var/decl/currency/cur = GET_DECL(vendor_currency)
 	var/list/data = list()
 	if(currently_vending)
 		data["mode"] = 1

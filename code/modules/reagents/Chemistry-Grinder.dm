@@ -134,7 +134,7 @@
 	data["beakercontents"] = list()
 	if(beaker?.reagents)
 		for(var/rtype in beaker.reagents.reagent_volumes)
-			var/decl/material/R = decls_repository.get_decl(rtype)
+			var/decl/material/R = GET_DECL(rtype)
 			data["beakercontents"] += "<b>[capitalize(R.name)]</b> ([REAGENT_VOLUME(beaker.reagents, rtype)]u)"
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)

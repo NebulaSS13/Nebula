@@ -267,7 +267,7 @@
 /obj/item/organ/proc/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
 	status = ORGAN_PROSTHETIC
 	reagents?.clear_reagents()
-	material = decls_repository.get_decl(apply_material)
+	material = GET_DECL(apply_material)
 	matter = null
 	create_matter()
 

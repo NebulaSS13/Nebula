@@ -56,7 +56,7 @@ var/global/list/sparring_attack_cache = list()
 			. = soft_variant
 
 /decl/natural_attack/proc/get_sparring_variant()
-	return sparring_variant_type && decls_repository.get_decl(sparring_variant_type)
+	return sparring_variant_type && GET_DECL(sparring_variant_type)
 
 /decl/natural_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/target, var/zone)
 	if(!user.restrained() && !user.incapacitated())

@@ -24,12 +24,12 @@
 			effective_rating = max(0, psi.rating-2)
 		var/rating_descriptor
 		if(mind && !psi.suppressed)
-			var/decl/special_role/paramount/paramounts = decls_repository.get_decl(/decl/special_role/paramount)
+			var/decl/special_role/paramount/paramounts = GET_DECL(/decl/special_role/paramount)
 			if(paramounts.is_antagonist(mind))
 				use_rating = "<font color = '#FF0000'><b>[effective_rating]-Alpha-Plus</b></font>"
 				rating_descriptor = "This indicates a completely deviant psi complexus, either beyond or outside anything currently recorded. Approach with care."
 			// This space intentionally left blank (for Omega-Minus psi vampires. todo)
-			var/decl/special_role/thrall/thralls = decls_repository.get_decl(/decl/special_role/thrall)
+			var/decl/special_role/thrall/thralls = GET_DECL(/decl/special_role/thrall)
 			if(viewer != usr && thralls.is_antagonist(mind) && ishuman(viewer))
 				var/mob/living/H = viewer
 				if(H.psi && H.psi.get_rank(PSI_REDACTION) >= PSI_RANK_GRANDMASTER)

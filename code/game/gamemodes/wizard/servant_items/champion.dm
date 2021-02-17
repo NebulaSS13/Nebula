@@ -63,7 +63,7 @@
 
 /obj/item/sword/excalibur/pickup(var/mob/living/user)
 	if(user.mind)
-		var/decl/special_role/wizard/wizards = decls_repository.get_decl(/decl/special_role/wizard)
+		var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 		if(!wizards.is_antagonist(user.mind) || user.mind.assigned_special_role != "Spellbound Servant")
 			START_PROCESSING(SSobj, src)
 			to_chat(user,"<span class='danger'>\The [src] heats up in your hands, burning you!</span>")
