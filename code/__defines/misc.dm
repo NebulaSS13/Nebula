@@ -265,7 +265,7 @@
 #define RC_SUPPLY 2		//Request Supplies
 #define RC_INFO   4		//Relay Info
 
-#define WORTH_TO_SUPPLY_POINTS_CONSTANT       0.0075
+#define WORTH_TO_SUPPLY_POINTS_CONSTANT       0.03
 #define WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT 5
 
 #define  ICON_STATE_WORLD  "world"
