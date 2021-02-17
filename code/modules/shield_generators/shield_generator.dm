@@ -9,6 +9,7 @@
 	wires = /datum/wires/shield_generator
 	uncreated_component_parts = null
 	stat_immune = 0
+
 	var/list/field_segments = list()	// List of all shield segments owned by this generator.
 	var/list/damaged_segments = list()	// List of shield segments that have failed and are currently regenerating.
 	var/shield_modes = 0				// Enabled shield mode flags
@@ -40,6 +41,8 @@
 	var/spinup_delay      = 20
 	var/spinup_counter    = 0
 
+	var/obj/effect/overmap/visitable/last_linked_overmap_object
+
 /obj/machinery/power/shield_generator/on_update_icon()
 	if(running)
 		icon_state = "generator1"
@@ -48,22 +51,52 @@
 
 
 /obj/machinery/power/shield_generator/Initialize()
-	. = ..()
+	..()
 	connect_to_network()
-
 	mode_list = list()
 	for(var/st in subtypesof(/datum/shield_mode/))
 		var/datum/shield_mode/SM = new st()
 		mode_list.Add(SM)
+	GLOB.moved_event.register(src, src, .proc/update_overmap_shield_list)
+	. = INITIALIZE_HINT_LATELOAD
 
+/obj/machinery/power/shield_generator/LateInitialize()
+	. = ..()
+	update_overmap_shield_list()
 
 /obj/machinery/power/shield_generator/Destroy()
 	shutdown_field()
 	field_segments = null
 	damaged_segments = null
 	mode_list = null
+	GLOB.moved_event.unregister(src, src)
 	. = ..()
+	update_overmap_shield_list()
 
+/obj/machinery/power/shield_generator/proc/update_overmap_shield_list()
+
+	var/list/check_sectors =   list(map_sectors["[z]"])
+	var/list/checked_sectors = list()
+	var/obj/effect/overmap/visitable/current_overmap_object
+
+	while(length(check_sectors))
+		var/obj/effect/overmap/visitable/sector = check_sectors[1]
+		if(sector.check_ownership(src))
+			current_overmap_object = sector
+			break
+
+		check_sectors -= sector
+		checked_sectors += sector
+		for(var/obj/effect/overmap/visitable/next_sector in sector)
+			if(!(next_sector in checked_sectors))
+				check_sectors |= next_sector
+
+	if(current_overmap_object != last_linked_overmap_object)
+		if(last_linked_overmap_object)
+			LAZYREMOVE(last_linked_overmap_object.shield_generators, src)
+		last_linked_overmap_object = current_overmap_object
+		if(last_linked_overmap_object)
+			LAZYDISTINCTADD(last_linked_overmap_object.shield_generators, src)
 
 /obj/machinery/power/shield_generator/RefreshParts()
 	max_energy = 0
