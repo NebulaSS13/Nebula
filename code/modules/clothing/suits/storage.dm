@@ -15,9 +15,8 @@
 	if (pockets.handle_attack_hand(user))
 		..(user)
 
-/obj/item/clothing/suit/storage/MouseDrop(obj/over_object)
-	if (pockets.handle_mousedrop(usr, over_object))
-		..(over_object)
+/obj/item/clothing/suit/storage/handle_mouse_drop(atom/over, mob/user)
+	. = pockets?.handle_storage_internal_mouse_drop(user, over) && ..()
 
 /obj/item/clothing/suit/storage/attackby(obj/item/W, mob/user)
 	..()

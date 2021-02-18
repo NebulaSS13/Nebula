@@ -35,25 +35,20 @@
 		return
 	toggle_open(user)
 
-/obj/structure/fireaxecabinet/MouseDrop(over_object, src_location, over_location)
-	if(over_object == usr)
-		var/mob/user = over_object
-		if(!istype(user))
-			return
-
+/obj/structure/fireaxecabinet/handle_mouse_drop(atom/over, mob/user)
+	if(over == user)
 		if(!open)
-			to_chat(user, "<span class='warning'>\The [src] is closed.</span>")
-			return
-
+			to_chat(user, SPAN_WARNING("\The [src] is closed."))
+			return TRUE
 		if(!fireaxe)
-			to_chat(user, "<span class='warning'>\The [src] is empty.</span>")
-			return
-
+			to_chat(user, SPAN_WARNING("\The [src] is empty."))
+			return TRUE
 		user.put_in_hands(fireaxe)
 		fireaxe = null
 		update_icon()
+		return TRUE
+	. = ..()
 
-	return
 /obj/structure/fireaxecabinet/Destroy()
 	QDEL_NULL(fireaxe)
 	. = ..()

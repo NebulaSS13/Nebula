@@ -111,8 +111,8 @@
 /obj/machinery/forensic/AltClick()
 	remove_sample(usr)
 
-/obj/machinery/forensic/MouseDrop(var/atom/other)
-	if(usr == other)
+/obj/machinery/forensic/handle_mouse_drop(var/atom/over, var/mob/user)
+	if(user == over)
 		remove_sample(usr)
-	else
-		return ..()
+		return TRUE
+	. = ..()

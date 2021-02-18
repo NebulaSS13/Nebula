@@ -52,10 +52,11 @@
 		return
 	return ..()
 
-/obj/item/organ/internal/augment/active/cyberbrain/MouseDrop(var/atom/over_object)
-	var/mob/M = usr
-	if(!istype(over_object, /obj/screen) && CanMouseDrop(M))
-		return attack_self(M)
+/obj/item/organ/internal/augment/active/cyberbrain/handle_mouse_drop(atom/over, mob/user)
+	if(!istype(over, /obj/screen))
+		attack_self(user)
+		return TRUE
+	. = ..()
 
 /obj/item/organ/internal/augment/active/cyberbrain/Process()
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)

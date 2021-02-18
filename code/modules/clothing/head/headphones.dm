@@ -50,8 +50,9 @@
 
 	update_icon()
 
-/obj/item/clothing/head/headphones/MouseDrop(mob/user)
+/obj/item/clothing/head/headphones/handle_mouse_drop(atom/over, mob/user)
 	interact(user)
+	return TRUE
 
 /obj/item/clothing/head/headphones/attack_self(mob/user)
 	..()

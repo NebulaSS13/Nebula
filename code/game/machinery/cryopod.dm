@@ -442,15 +442,17 @@
 		src.add_fingerprint(target)
 
 //Like grap-put, but for mouse-drop.
-/obj/machinery/cryopod/MouseDrop_T(var/mob/target, var/mob/user)
-	if(!check_occupant_allowed(target))
-		return
-	if(occupant)
-		to_chat(user, "<span class='notice'>\The [src] is in use.</span>")
-		return
-
-	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
-	attempt_enter(target, user)
+/obj/machinery/cryopod/receive_mouse_drop(var/atom/dropping, var/mob/user)
+	. = ..()
+	if(!. && check_occupant_allowed(dropping))
+		if(occupant)
+			to_chat(user, SPAN_WARNING("\The [src] is in use."))
+			return TRUE
+		user.visible_message( \
+			SPAN_NOTICE("\The [user] begins placing \the [dropping] into \the [src]."), \
+			SPAN_NOTICE("You start placing \the [dropping] into \the [src]."))
+		attempt_enter(dropping, user)
+		return TRUE
 
 /obj/machinery/cryopod/attackby(var/obj/item/G, var/mob/user)
 

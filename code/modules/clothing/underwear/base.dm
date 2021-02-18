@@ -9,8 +9,9 @@
 		return // Might as well check
 	DelayedEquipUnderwear(user, target)
 
-/obj/item/underwear/MouseDrop(var/atom/target)
-	DelayedEquipUnderwear(usr, target)
+/obj/item/underwear/handle_mouse_drop(atom/over, mob/user)
+	DelayedEquipUnderwear(user, over)
+	return TRUE
 
 /obj/item/underwear/proc/CanEquipUnderwear(var/mob/user, var/mob/living/carbon/human/H)
 	if(!CanAdjustUnderwear(user, H, "put on"))

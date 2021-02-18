@@ -36,21 +36,22 @@
 /obj/effect/hoist_hook/attack_hand(mob/living/user)
 	return // no, bad
 
-/obj/effect/hoist_hook/MouseDrop_T(atom/movable/AM,mob/user)
-	if (issilicon(user))
-		return
-
-	if (!AM.simulated || AM.anchored)
-		to_chat(user, SPAN_WARNING("You can't do that with \the [AM]."))
-		return
-	if (source_hoist.hoistee)
-		to_chat(user, SPAN_NOTICE("\The [source_hoist.hoistee] is already attached to \the [src]!"))
-		return
-	source_hoist.attach_hoistee(AM)
-	user.visible_message(
-		SPAN_NOTICE("[user] attaches \the [AM] to \the [src]."),
-		SPAN_NOTICE("You attach \the [AM] to \the [src]."),
-		"You hear something clamp into place.")
+/obj/effect/hoist_hook/receive_mouse_drop(atom/dropping, mob/user)
+	. = ..()
+	if(!. && istype(dropping, /atom/movable))
+		var/atom/movable/AM = dropping
+		if(!AM.simulated || AM.anchored)
+			to_chat(user, SPAN_WARNING("You can't do that with \the [AM]."))
+			return TRUE
+		if(source_hoist.hoistee)
+			to_chat(user, SPAN_NOTICE("\The [source_hoist.hoistee] is already attached to \the [src]!"))
+			return TRUE
+		source_hoist.attach_hoistee(AM)
+		user.visible_message(
+			SPAN_NOTICE("[user] attaches \the [AM] to \the [src]."),
+			SPAN_NOTICE("You attach \the [AM] to \the [src]."),
+			"You hear something clamp into place.")
+		return TRUE
 
 /obj/structure/hoist/proc/attach_hoistee(atom/movable/AM)
 	hoistee = AM
@@ -63,36 +64,18 @@
 
 	GLOB.destroyed_event.register(AM, src, .proc/release_hoistee)
 
-/obj/effect/hoist_hook/MouseDrop(atom/dest)
-	..()
-	if(!Adjacent(usr) || !dest.Adjacent(usr)) return // carried over from the default proc
-
-	if (!ishuman(usr))
-		return
-
-	if (usr.incapacitated())
-		to_chat(usr, SPAN_WARNING("You can't do that while incapacitated."))
-		return
-
-	if (!usr.check_dexterity(DEXTERITY_GRIP))
-		return
-
-	if (!source_hoist.hoistee)
-		return
-	if (!isturf(dest))
-		return
-	if (!dest.Adjacent(source_hoist.hoistee))
-		return
-
-	source_hoist.check_consistency()
-
-	var/turf/desturf = dest
-	source_hoist.hoistee.forceMove(desturf)
-	usr.visible_message(
-		SPAN_NOTICE("[usr] detaches \the [source_hoist.hoistee] from the hoist clamp."),
-		SPAN_NOTICE("You detach \the [source_hoist.hoistee] from the hoist clamp."),
-		"You hear something unclamp.")
-	source_hoist.release_hoistee()
+/obj/effect/hoist_hook/handle_mouse_drop(atom/over, mob/user)
+	if(source_hoist.hoistee && isturf(over) && !over.Adjacent(source_hoist.hoistee))
+		source_hoist.check_consistency()
+		var/turf/desturf = over
+		source_hoist.hoistee.forceMove(desturf)
+		user.visible_message(
+			SPAN_NOTICE("[usr] detaches \the [source_hoist.hoistee] from the hoist clamp."),
+			SPAN_NOTICE("You detach \the [source_hoist.hoistee] from the hoist clamp."),
+			"You hear something unclamp.")
+		source_hoist.release_hoistee()
+		return TRUE
+	. = ..()
 
 // This will handle mobs unbuckling themselves.
 /obj/effect/hoist_hook/unbuckle_mob()

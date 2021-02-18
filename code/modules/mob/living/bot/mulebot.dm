@@ -52,14 +52,11 @@
 	suffix = num2text(++amount)
 	name = "Mulebot #[suffix]"
 
-/mob/living/bot/mulebot/MouseDrop_T(var/atom/movable/C, var/mob/user)
-	if(user.stat)
-		return
-
-	if(!istype(C) || C.anchored || get_dist(user, src) > 1 || get_dist(src, C) > 1 )
-		return
-
-	load(C)
+/mob/living/bot/mulebot/receive_mouse_drop(var/atom/dropping, var/mob/user)
+	. = ..()
+	if(!.)
+		load(dropping)
+		return TRUE
 
 /mob/living/bot/mulebot/GetInteractTitle()
 	. = "<head><title>Mulebot [suffix ? "([suffix])" : ""]</title></head>"

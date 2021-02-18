@@ -56,13 +56,14 @@
 				light.icon_state = "light_mid"
 			overlays += light
 
-/obj/structure/iv_drip/MouseDrop(over_object, src_location, over_location)
-	if(!CanMouseDrop(over_object))
-		return
+/obj/structure/iv_drip/handle_mouse_drop(atom/over, mob/user)
 	if(attached)
 		drip_detach()
-	else if(ishuman(over_object))
-		hook_up(over_object, usr)
+		return TRUE
+	if(ishuman(over))
+		hook_up(over, user)
+		return TRUE
+	. = ..()
 
 /obj/structure/iv_drip/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/chems))

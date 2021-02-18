@@ -1,26 +1,13 @@
-/mob/living/MouseDrop(atom/over)
-	if(usr == src && usr != over)
-		if(istype(over, /mob/living/exosuit))
-			var/mob/living/exosuit/exosuit = over
-			if(exosuit.body)
-				if(usr.mob_size >= exosuit.body.min_pilot_size && usr.mob_size <= exosuit.body.max_pilot_size)
-					if(exosuit.enter(src))
-						return
-				else
-					to_chat(usr, SPAN_WARNING("You cannot pilot a exosuit of this size."))
-					return
-	return ..()
+/mob/living/exosuit/receive_mouse_drop(atom/dropping, mob/user)
+	. = ..()
+	if(!. && istype(dropping, /obj/machinery/portable_atmospherics/canister))
+		body.receive_mouse_drop(dropping, user)
+		return TRUE
 
-/mob/living/exosuit/MouseDrop_T(atom/dropping, mob/user)
-	var/obj/machinery/portable_atmospherics/canister/C = dropping
-	if(istype(C))
-		body.MouseDrop_T(dropping, user)
-	else . = ..()
-
-/mob/living/exosuit/MouseDrop(mob/living/carbon/human/over_object) //going from assumption none of previous options are relevant to exosuit
-	if(body)
-		if(!body.MouseDrop(over_object))
-			return ..()
+/mob/living/exosuit/handle_mouse_drop(atom/over, mob/user)
+	if(body?.handle_mouse_drop(over, user))
+		return TRUE
+	. = ..()
 
 /mob/living/exosuit/RelayMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
 	if(user && (user in pilots) && user.loc == src)

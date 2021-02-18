@@ -32,11 +32,10 @@
 			my_mob.client.screen -= src
 		my_mob = null
 
-/obj/screen/movable/ability_master/MouseDrop()
+/obj/screen/movable/ability_master/handle_mouse_drop(var/atom/over, var/mob/user)
 	if(showing)
-		return
-
-	return ..()
+		return FALSE
+	. = ..()
 
 /obj/screen/movable/ability_master/Click()
 	if(!ability_objects.len) // If we're empty for some reason.

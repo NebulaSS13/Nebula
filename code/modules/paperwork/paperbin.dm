@@ -13,9 +13,11 @@
 	var/list/papers = new/list()	//List of papers put in the bin for reference.
 
 
-/obj/item/paper_bin/MouseDrop(mob/user)
-	if(!user.incapacitated() && ((src in usr) || in_range(src, usr)) && !user.get_active_hand())
+/obj/item/paper_bin/handle_mouse_drop(atom/over, mob/user)
+	if((loc == user || in_range(src, user)) && user.get_empty_hand_slot())
 		user.put_in_hands(src)
+		return TRUE
+	. = ..()
 
 /obj/item/paper_bin/attack_hand(mob/user)
 	if(ishuman(user))

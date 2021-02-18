@@ -9,7 +9,7 @@
 	if (!loc)
 		return
 
-	if(machine && !CanMouseDrop(machine, src))
+	if(machine && !machine.CanUseTopic(src)) // unsure if this is a good idea, but using canmousedrop was ???
 		machine = null
 
 	//Handle temperature/pressure differences between body and environment

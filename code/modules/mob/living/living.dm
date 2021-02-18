@@ -903,3 +903,22 @@ default behaviour is:
 /mob/living/get_admin_job_string()
 	return "Living"
 
+/mob/living/handle_mouse_drop(atom/over, mob/user)
+	if(user == src && user != over)
+
+		if(isturf(over))
+			var/turf/T = over
+			var/obj/structure/glass_tank/A = locate() in user.loc
+			if(A && A.Adjacent(user) && A.Adjacent(T))
+				A.do_climb_out(user, T)
+				return TRUE
+
+		if(istype(over, /mob/living/exosuit))
+			var/mob/living/exosuit/exosuit = over
+			if(exosuit.body)
+				if(user.mob_size >= exosuit.body.min_pilot_size && user.mob_size <= exosuit.body.max_pilot_size)
+					exosuit.enter(src)
+				else
+					to_chat(usr, SPAN_WARNING("You cannot pilot a exosuit of this size."))
+				return TRUE
+	. = ..()

@@ -16,6 +16,9 @@
 	var/obj/master = null    //A reference to the object in the slot. Grabs or items, generally.
 	var/globalscreen = FALSE //Global screens are not qdeled when the holding mob is destroyed.
 
+/obj/screen/receive_mouse_drop(atom/dropping, mob/user)
+	return TRUE
+
 /obj/screen/Destroy()
 	master = null
 	return ..()

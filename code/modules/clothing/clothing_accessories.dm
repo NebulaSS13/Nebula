@@ -47,26 +47,17 @@
 		return
 	return ..()
 
-/obj/item/clothing/MouseDrop(var/obj/over_object)
-	if (!over_object || !(ishuman(usr) || issmall(usr)))
-		return
+/obj/item/clothing/check_mousedrop_adjacency(var/atom/over, var/mob/user)
+	. = (loc == user && istype(over, /obj/screen)) || ..()
 
-	//makes sure that the clothing is equipped so that we can't drag it into our hand from miles away.
-	if (!(src.loc == usr))
-		return
-
-	if (usr.incapacitated())
-		return
-
-	if(!istype(over_object, /obj/screen/inventory))
-		return
-
-	var/obj/screen/inventory/inv = over_object
-	src.add_fingerprint(usr)
-	if(usr.unEquip(src))
-		usr.equip_to_slot_if_possible(src, inv.slot_id)
-
-	src.add_fingerprint(usr)
+/obj/item/clothing/handle_mouse_drop(atom/over, mob/user)
+	if(ishuman(user) && loc == user && istype(over, /obj/screen/inventory))
+		var/obj/screen/inventory/inv = over
+		add_fingerprint(user)
+		if(user.unEquip(src))
+			user.equip_to_slot_if_possible(src, inv.slot_id)
+		return TRUE
+	. = ..()
 
 /obj/item/clothing/proc/update_accessory_slowdown()
 	slowdown_accessory = 0

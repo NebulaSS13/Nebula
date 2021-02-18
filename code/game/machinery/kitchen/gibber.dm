@@ -89,10 +89,11 @@
 	else
 		return ..()
 
-/obj/machinery/gibber/MouseDrop_T(mob/target, mob/user)
-	if(user.stat || user.restrained())
-		return
-	move_into_gibber(user,target)
+/obj/machinery/gibber/receive_mouse_drop(atom/dropping, mob/user)
+	. = ..()
+	if(!. && ismob(dropping))
+		move_into_gibber(user, dropping)
+		return TRUE
 
 /obj/machinery/gibber/proc/move_into_gibber(var/mob/user,var/mob/living/victim)
 

@@ -159,23 +159,24 @@
 	else
 		return ..()
 
-/obj/item/mech_component/chassis/MouseDrop_T(atom/dropping, mob/user)
-	var/obj/machinery/portable_atmospherics/canister/C = dropping
-	if(istype(C) && !C.anchored && do_after(user, 5, src))
-		if(C.anchored)
-			return
+/obj/item/mech_component/chassis/receive_mouse_drop(atom/dropping, mob/user)
+	. = ..()
+	if(!. && istype(dropping, /obj/machinery/portable_atmospherics/canister))
+		var/obj/machinery/portable_atmospherics/canister/C = dropping
+		if(!do_after(user, 5, src) || QDELETED(C) || C.anchored)
+			return TRUE
 		to_chat(user, SPAN_NOTICE("You install the canister in the [src]."))
 		if(air_supply)
-			air_supply.forceMove(get_turf(src))
+			air_supply.dropInto(get_turf(src))
 			air_supply = null
 		C.forceMove(src)
 		update_components()
-	else . = ..()
+	return TRUE
 
-obj/item/mech_component/chassis/MouseDrop(atom/over)
-	if(CanMouseDrop(over))
-		if(storage_compartment)
-			return storage_compartment.MouseDrop(over)
+/obj/item/mech_component/chassis/handle_mouse_drop(atom/over, mob/user)
+	if(storage_compartment)
+		return storage_compartment.handle_mouse_drop(over, user)
+	. = ..()
 
 /obj/item/mech_component/chassis/return_diagnostics(mob/user)
 	..()

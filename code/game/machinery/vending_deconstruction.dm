@@ -20,26 +20,23 @@
 /obj/structure/vending_refill/get_mechanics_info()
 	return "Drag to a vendor to restock. Generally can not be opened."
 
-/obj/structure/vending_refill/MouseDrop(obj/machinery/vending/over)
-	if(!CanMouseDrop(over, usr))
-		return
-	if(!istype(over))
-		return ..()
-	var/target_type = over.base_type || over.type
-	if(!ispath(expected_type, target_type))
-		return ..()
-
-	for(var/datum/stored_items/R in product_records)
-		for(var/datum/stored_items/record in over.product_records)
-			if(record.merge(R))
-				break
-		if(!QDELETED(R))
-			R.migrate(over)
-			over.product_records += R
-
-	product_records = null
-	SSnano.update_uis(over)
-	qdel(src)
+/obj/structure/vending_refill/handle_mouse_drop(var/atom/over, var/mob/user)
+	if(istype(over, /obj/machinery/vending))
+		var/obj/machinery/vending/vendor = over 
+		var/target_type = vendor.base_type || vendor.type
+		if(ispath(expected_type, target_type))
+			for(var/datum/stored_items/R in product_records)
+				for(var/datum/stored_items/record in vendor.product_records)
+					if(record.merge(R))
+						break
+				if(!QDELETED(R))
+					R.migrate(over)
+					vendor.product_records += R
+			product_records = null
+			SSnano.update_uis(vendor)
+			qdel(src)
+			return TRUE
+	. = ..()
 
 /obj/machinery/vending/dismantle()
 	var/obj/structure/vending_refill/dump = new(loc)

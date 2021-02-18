@@ -63,15 +63,12 @@
 			return 1
 	return 1
 
-
-/obj/structure/table/MouseDrop_T(obj/O, mob/user)
-	if ((!( istype(O, /obj/item) ) || user.get_active_hand() != O))
-		return ..()
-	if(isrobot(user))
-		return
-	user.unEquip(O)
-	if (O.loc != src.loc)
-		step(O, get_dir(O, src))
+/obj/structure/table/receive_mouse_drop(atom/dropping, mob/user)
+	. = ..()
+	if(!. && !isrobot(user) && isitem(dropping) && user.get_active_hand() == dropping && user.unEquip(dropping))
+		var/obj/item/I = dropping
+		I.dropInto(get_turf(src))
+		return TRUE
 
 /obj/structure/table/attackby(obj/item/W, mob/user, var/click_params)
 

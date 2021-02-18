@@ -185,10 +185,10 @@
 	. = ..()
 	SSnano.update_uis(src)
 
-/obj/machinery/vending/MouseDrop_T(var/obj/item/I, var/mob/user)
-	if(!CanMouseDrop(I, user) || (I.loc != user))
-		return
-	return attempt_to_stock(I, user)
+/obj/machinery/vending/receive_mouse_drop(atom/dropping, var/mob/user)
+	. = ..()
+	if(!. && dropping.loc == user && attempt_to_stock(dropping, user))
+		return TRUE
 
 /obj/machinery/vending/proc/attempt_to_stock(var/obj/item/I, var/mob/user)
 	for(var/datum/stored_items/vending_products/R in product_records)

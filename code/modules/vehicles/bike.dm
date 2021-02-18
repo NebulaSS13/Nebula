@@ -33,6 +33,9 @@
 			engine.prefill()
 	update_icon()
 
+/obj/vehicle/bike/user_buckle_mob(mob/living/M, mob/user)
+	return load(M)
+
 /obj/vehicle/bike/verb/toggle()
 	set name = "Toggle Engine"
 	set category = "Object"
@@ -120,10 +123,12 @@
 			return 1
 	return ..()
 
-/obj/vehicle/bike/MouseDrop_T(var/atom/movable/C, mob/user)
-	if(!load(C))
-		to_chat(user, "<span class='warning'> You were unable to load \the [C] onto \the [src].</span>")
-		return
+/obj/vehicle/bike/receive_mouse_drop(var/atom/dropping, mob/user)
+	. = ..()
+	if(!. && istype(dropping, /atom/movable))
+		if(!load(dropping))
+			to_chat(user, SPAN_WARNING("You were unable to load \the [dropping] onto \the [src]."))
+		return TRUE
 
 /obj/vehicle/bike/attack_hand(var/mob/user)
 	if(user == load)

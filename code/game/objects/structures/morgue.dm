@@ -139,20 +139,15 @@
 		return
 	return
 
-/obj/structure/m_tray/MouseDrop_T(atom/movable/O, mob/user)
-	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src) || user.contents.Find(O)))
-		return
-	if (!ismob(O) && !istype(O, /obj/structure/closet/body_bag))
-		return
-	if (!ismob(user) || user.incapacitated(INCAPACITATION_KNOCKOUT))
-		return
-	O.forceMove(src.loc)
-	if (user != O)
-		for(var/mob/B in viewers(user, 3))
-			if ((B.client && !( B.blinded )))
-				to_chat(B, "<span class='warning'>\The [user] stuffs [O] into [src]!</span>")
-	return
-
+/obj/structure/m_tray/receive_mouse_drop(atom/dropping, mob/user)
+	. = ..()
+	if(!. && (ismob(dropping) || istype(dropping, /obj/structure/closet/body_bag)))
+		var/atom/movable/AM = dropping
+		if(!AM.anchored)
+			AM.forceMove(loc)
+			if(user != dropping)
+				user.visible_message(SPAN_NOTICE("\The [user] stuffs \the [dropping] into \the [src]!"))
+			return TRUE
 
 /*
  * Crematorium
@@ -338,7 +333,7 @@
 	name = "crematorium tray"
 	desc = "Apply body before burning."
 	icon = 'icons/obj/structures/morgue.dmi'
-	icon_state = "cremat"
+	icon_state = "morguet"
 	density = 1
 	layer = BELOW_OBJ_LAYER
 	var/obj/structure/crematorium/connected = null
@@ -364,18 +359,15 @@
 		return
 	return
 
-/obj/structure/c_tray/MouseDrop_T(atom/movable/O, mob/user)
-	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src) || user.contents.Find(O)))
-		return
-	if (!ismob(O) && !istype(O, /obj/structure/closet/body_bag))
-		return
-	if (!ismob(user) || user.incapacitated())
-		return
-	O.forceMove(src.loc)
-	if (user != O)
-		for(var/mob/B in viewers(user, 3))
-			if ((B.client && !( B.blinded )))
-				to_chat(B, text("<span class='warning'>[] stuffs [] into []!</span>", user, O, src))
+/obj/structure/c_tray/receive_mouse_drop(atom/dropping, mob/user)
+	. = ..()
+	if(!. && (ismob(dropping) || istype(dropping, /obj/structure/closet/body_bag)))
+		var/atom/movable/AM = dropping
+		if(!AM.anchored)
+			AM.forceMove(loc)
+			if(user != dropping)
+				user.visible_message(SPAN_NOTICE("\The [user] stuffs \the [dropping] into \the [src]!"))
+			return TRUE
 
 /obj/machinery/button/crematorium
 	name = "crematorium igniter"

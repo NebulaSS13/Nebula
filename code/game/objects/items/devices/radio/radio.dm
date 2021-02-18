@@ -69,6 +69,7 @@
 /obj/item/radio/attack_self(mob/user)
 	user.set_machine(src)
 	interact(user)
+	return TRUE
 
 /obj/item/radio/interact(mob/user)
 	if(!user)

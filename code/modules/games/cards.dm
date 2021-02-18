@@ -245,22 +245,13 @@
 	cards = shuffle(cards)
 	user.visible_message("\The [user] shuffles [src].")
 
-/obj/item/deck/MouseDrop(atom/over)
-	if(over == usr && !usr.incapacitated() && (usr.contents.Find(src) || in_range(src, usr)))
-		if(!ishuman(over))
-			return
+/obj/item/deck/handle_mouse_drop(atom/over, mob/user)
+	if(over == user && loc == user && in_range(src, user) && user.get_empty_hand_slot())
+		user.put_in_hands(src)
+		return TRUE
+	. = ..()
 
-		if(!usr.get_active_hand()) //if active hand is empty
-			var/mob/living/carbon/human/H = over
-			var/obj/item/organ/external/temp = H.organs_by_name[H.get_active_held_item_slot()]
-			if(temp && !temp.is_usable())
-				to_chat(over, SPAN_NOTICE("You try to move your [temp.name], but cannot!"))
-				return
-
-			to_chat(over, SPAN_NOTICE("You pick up the [src]."))
-			usr.put_in_hands(src)
-
-/obj/item/pack/
+/obj/item/pack
 	name = "card pack"
 	desc = "For those with disposible income."
 
