@@ -40,6 +40,4 @@ GLOBAL_LIST_EMPTY(ckey_punished_for_spam) // this round; to avoid redundant reco
 	return ..()
 
 /client/MouseDrop()
-	if(!user_acted(src))
-		return
-	return ..()
+	. = user_acted(src) && ..()

@@ -64,16 +64,16 @@
 	if(beep && victim && victim.pulse())
 		playsound(src, 'sound/machines/quiet_beep.ogg')
 	
-/obj/machinery/vitals_monitor/MouseDrop(over_object, src_location, over_location)
-	if(!CanMouseDrop(over_object))
-		return
-	if(victim)
-		victim = null
-		update_use_power(POWER_USE_IDLE)
-	else if(ishuman(over_object))
-		victim = over_object
+/obj/machinery/vitals_monitor/handle_mouse_drop(var/atom/over, var/mob/user)
+	if(ishuman(over))
+		if(victim)
+			victim = null
+			update_use_power(POWER_USE_IDLE)
+		victim = over
 		update_use_power(POWER_USE_ACTIVE)
-		visible_message(SPAN_NOTICE("\The [src] is now showing data for [victim]."))
+		visible_message(SPAN_NOTICE("\The [src] is now showing data for \the [victim]."))
+		return TRUE
+	. = ..()
 
 /obj/machinery/vitals_monitor/on_update_icon()
 	overlays.Cut()

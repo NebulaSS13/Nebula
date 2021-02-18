@@ -384,19 +384,17 @@
 /obj/structure/hygiene/sink/is_pressurized_fluid_source()
 	return TRUE
 
-/obj/structure/hygiene/sink/MouseDrop_T(var/obj/item/thing, var/mob/user)
-	..()
-	if(!istype(thing) || !ATOM_IS_OPEN_CONTAINER(thing))
-		return ..()
-	if(!usr.Adjacent(src))
-		return ..()
-	if(!thing.reagents || thing.reagents.total_volume == 0)
-		to_chat(usr, "<span class='warning'>\The [thing] is empty.</span>")
-		return
-	// Clear the vessel.
-	visible_message("<span class='notice'>\The [usr] tips the contents of \the [thing] into \the [src].</span>")
-	thing.reagents.clear_reagents()
-	thing.update_icon()
+/obj/structure/hygiene/sink/receive_mouse_drop(var/atom/dropping, var/mob/user)
+	. = ..()
+	if(!. && isitem(dropping) && ATOM_IS_OPEN_CONTAINER(dropping))
+		var/obj/item/thing = dropping
+		if(thing.reagents?.total_volume <= 0)
+			to_chat(usr, SPAN_WARNING("\The [thing] is empty."))
+		else
+			visible_message(SPAN_NOTICE("\The [user] tips the contents of \the [thing] into \the [src]."))
+			thing.reagents.clear_reagents()
+			thing.update_icon()
+		return TRUE
 
 /obj/structure/hygiene/sink/attack_hand(var/mob/user)
 	if (ishuman(user))

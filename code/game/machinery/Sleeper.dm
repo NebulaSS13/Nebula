@@ -253,18 +253,17 @@
 		return TRUE
 	return ..()
 
-/obj/machinery/sleeper/MouseDrop_T(var/mob/target, var/mob/user)
-	if(!CanMouseDrop(target, user))
-		return
-	if(!istype(target))
-		return
-	if(target.buckled)
-		to_chat(user, SPAN_WARNING("Unbuckle the subject before attempting to move them."))
-		return
-	if(panel_open)
-		to_chat(user, SPAN_WARNING("Close the maintenance panel before attempting to place the subject in the sleeper."))
-		return
-	go_in(target, user)
+/obj/machinery/sleeper/receive_mouse_drop(var/atom/dropping, var/mob/user)
+	. = ..()
+	if(!. && ismob(dropping))
+		var/mob/target = dropping
+		if(target.buckled)
+			to_chat(user, SPAN_WARNING("Unbuckle the subject before attempting to move them."))
+		else if(panel_open)
+			to_chat(user, SPAN_WARNING("Close the maintenance panel before attempting to place the subject in the sleeper."))
+		else 
+			go_in(target, user)
+		return TRUE
 
 /obj/machinery/sleeper/relaymove(var/mob/user)
 	..()

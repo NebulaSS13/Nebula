@@ -12,10 +12,11 @@
 	layer = 4
 	construct_state = /decl/machine_construction/default/panel_closed
 
-/obj/machinery/fusion_fuel_compressor/MouseDrop_T(var/atom/movable/target, var/mob/user)
-	if(user.incapacitated() || !user.Adjacent(src))
-		return
-	return do_fuel_compression(target, user)
+/obj/machinery/fusion_fuel_compressor/receive_mouse_drop(var/atom/dropping, var/mob/user)
+	. = ..()
+	if(!.)
+		do_fuel_compression(dropping, user)
+		return TRUE
 
 /obj/machinery/fusion_fuel_compressor/attackby(var/obj/item/thing, var/mob/user)
 	return do_fuel_compression(thing, user) || ..()
@@ -36,7 +37,7 @@
 		return 1
 	else if(istype(thing, /obj/machinery/power/supermatter/shard))
 		var/obj/item/fuel_assembly/F = new(get_turf(src), /decl/material/solid/exotic_matter)
-		visible_message("<span class='notice'>\The [src] compresses the \[thing] into a new fuel assembly.</span>")
+		visible_message("<span class='notice'>\The [src] compresses \the [thing] into a new fuel assembly.</span>")
 		qdel(thing)
 		user.put_in_hands(F)
 		return 1

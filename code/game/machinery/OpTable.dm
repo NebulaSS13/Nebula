@@ -67,21 +67,16 @@
 	return TRUE
 
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
+	. = (air_group || height == 0 || (istype(mover) && mover.checkpass(PASS_FLAG_TABLE)))
 
-	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
-		return 1
-	else
-		return 0
-
-
-/obj/machinery/optable/MouseDrop_T(obj/O, mob/user)
-	if ((!( istype(O, /obj/item) ) || user.get_active_hand() != O))
-		return
-	if(!user.unEquip(O))
-		return
-	if (O.loc != src.loc)
-		step(O, get_dir(O, src))
+/obj/machinery/optable/receive_mouse_drop(atom/dropping, mob/user)
+	. = ..()
+	if(!.)
+		if(istype(dropping, /obj/item) && user.get_active_hand() == dropping && user.unEquip(dropping, loc))
+			return FALSE
+		if(isliving(dropping) && check_table(dropping))
+			take_victim(dropping, user)
+			return FALSE
 
 /obj/machinery/optable/proc/check_victim()
 	if(!victim || !victim.lying || victim.loc != loc)
@@ -119,19 +114,9 @@
 	add_fingerprint(user)
 	update_icon()
 
-/obj/machinery/optable/MouseDrop_T(mob/target, mob/user)
-	var/mob/living/M = user
-	if(user.stat || user.restrained() || !isliving(target) || !check_table(target))
-		return
-	if(istype(M))
-		take_victim(target,user)
-	else
-		return ..()
-
 /obj/machinery/optable/climb_on()
 	if(usr.stat || !ishuman(usr) || usr.restrained() || !check_table(usr))
 		return
-
 	take_victim(usr,usr)
 
 /obj/machinery/optable/proc/check_table(mob/living/patient)

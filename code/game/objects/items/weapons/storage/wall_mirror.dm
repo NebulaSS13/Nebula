@@ -22,10 +22,10 @@
 		/obj/item/chems/spray/cleaner/deodorant,
 		/obj/item/towel/random)
 
-/obj/item/storage/mirror/MouseDrop(obj/over_object)
-	if(!(. = ..()))
-		return
-	flick("mirror_open",src)
+/obj/item/storage/mirror/handle_mouse_drop(atom/over, mob/user)
+	. = ..()
+	if(.)
+		flick("mirror_open",src)
 
 /obj/item/storage/mirror/attack_hand(var/mob/living/carbon/human/user)
 	use_mirror(user)

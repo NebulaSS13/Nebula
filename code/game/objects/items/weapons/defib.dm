@@ -67,16 +67,15 @@
 	else
 		..()
 
-/obj/item/defibrillator/MouseDrop()
-	if(ismob(src.loc))
-		if(!CanMouseDrop(src))
-			return
-		var/mob/M = src.loc
-		if(!M.unEquip(src))
-			return
-		src.add_fingerprint(usr)
-		M.put_in_hands(src)
-
+// what is this proc doing?
+/obj/item/defibrillator/handle_mouse_drop(var/atom/over, var/mob/user)
+	if(ismob(loc))
+		var/mob/M = loc
+		if(M.unEquip(src))
+			add_fingerprint(usr)
+			M.put_in_hands(src)
+			return TRUE
+	. = ..()
 
 /obj/item/defibrillator/attackby(obj/item/W, mob/user, params)
 	if(W == paddles)

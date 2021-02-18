@@ -121,8 +121,10 @@
 	DROP_NULL(boots)
 	return ..()
 
-/obj/machinery/suit_cycler/MouseDrop_T(var/mob/target, var/mob/user)
-	. = CanMouseDrop(target, user) && try_move_inside(target, user)
+/obj/machinery/suit_cycler/receive_mouse_drop(var/atom/dropping, var/mob/user)
+	. = ..()
+	if(!. && ismob(dropping) && try_move_inside(dropping, user))
+		return TRUE
 
 /obj/machinery/suit_cycler/proc/try_move_inside(var/mob/living/target, var/mob/living/user)
 	if(!istype(target) || !istype(user) || !target.Adjacent(user) || !user.Adjacent(src) || user.incapacitated())

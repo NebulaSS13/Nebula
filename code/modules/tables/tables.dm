@@ -143,11 +143,11 @@
 
 	return ..()
 
-/obj/structure/table/MouseDrop_T(obj/item/stack/material/what)
-	if(can_reinforce && isliving(usr) && (!usr.stat) && istype(what) && usr.get_active_hand() == what && Adjacent(usr))
-		reinforce_table(what, usr)
-	else
-		return ..()
+/obj/structure/table/receive_mouse_drop(atom/dropping, mob/living/user)
+	. = ..()
+	if(!. && can_reinforce && user.get_active_hand() == dropping)
+		reinforce_table(dropping, user)
+		return TRUE
 
 /obj/structure/table/proc/reinforce_table(obj/item/stack/material/S, mob/user)
 	if(reinf_material)

@@ -414,7 +414,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 //This is called when a ghost is drag clicked to something.
 /mob/observer/ghost/MouseDrop(atom/over)
-	if(!usr || !over) return
+	SHOULD_CALL_PARENT(FALSE)
+	if(!usr || !over)
+		return
 	if(isghost(usr) && usr.client && isliving(over))
 		var/mob/living/M = over
 		// If they an admin, see if control can be resolved.
@@ -423,10 +425,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		// Otherwise, see if we can possess the target.
 		if(usr == src && try_possession(M))
 			return
-	if(istype(over, /obj/machinery/drone_fabricator))
-		if(try_drone_spawn(src, over))
-			return
-
+	if(istype(over, /obj/machinery/drone_fabricator) && try_drone_spawn(src, over))
+		return
 	return ..()
 
 /mob/observer/ghost/proc/try_possession(var/mob/living/M)

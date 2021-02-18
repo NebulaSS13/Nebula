@@ -74,8 +74,11 @@
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
 	if(assembly.enabled && assembly.screen_on)
 		ui_interact(user)
+		return TRUE
 	else if(!assembly.enabled && assembly.screen_on)
 		assembly.turn_on(user)
+		return TRUE
+	. = ..()
 
 /obj/item/modular_computer/attackby(var/obj/item/W, var/mob/user)
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)
@@ -106,10 +109,8 @@
 		to_chat(user, "\The [card_slot.stored_card] is inserted into it.")
 	assembly.examine(user)
 
-/obj/item/modular_computer/MouseDrop(var/atom/over_object)
-	var/mob/M = usr
-	if(!istype(over_object, /obj/screen) && CanMouseDrop(M))
-		return attack_self(M)
+/obj/item/modular_computer/handle_mouse_drop(atom/over, mob/user)
+	. = (!istype(over, /obj/screen) && attack_self(user)) || ..()
 
 /obj/item/modular_computer/afterattack(atom/target, mob/user, proximity)
 	. = ..()

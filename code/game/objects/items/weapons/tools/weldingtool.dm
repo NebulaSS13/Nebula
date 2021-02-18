@@ -74,21 +74,20 @@
 	else
 		to_chat(user, (distance <= 1 ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[tank] is attached.")
 
-/obj/item/weldingtool/MouseDrop(atom/over)
-	if(!CanMouseDrop(over, usr))
-		return
-
+/obj/item/weldingtool/handle_mouse_drop(atom/over, mob/user)
 	if(istype(over, /obj/item/weldpack))
 		var/obj/item/weldpack/wp = over
 		if(wp.welder)
-			to_chat(usr, "\The [wp] already has \a [wp.welder] attached.")
-		else if(usr.unEquip(src, wp))
+			to_chat(user, SPAN_WARNING("\The [wp] already has \a [wp.welder] attached."))
+			return TRUE
+		if(user.unEquip(src, wp))
 			wp.welder = src
-			usr.visible_message("[usr] attaches \the [src] to \the [wp].", "You attach \the [src] to \the [wp].")
+			user.visible_message( \
+				SPAN_NOTICE("\The [user] attaches \the [src] to \the [wp]."), \
+				SPAN_NOTICE("You attach \the [src] to \the [wp]."))
 			wp.update_icon()
-		return
-
-	..()
+			return TRUE
+	. = ..()
 
 /obj/item/weldingtool/attackby(obj/item/W, mob/user)
 	if(welding)

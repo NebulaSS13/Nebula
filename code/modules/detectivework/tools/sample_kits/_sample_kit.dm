@@ -39,6 +39,8 @@
 		to_chat(user, SPAN_WARNING("You are unable to locate any [evidence_type]s on \the [A]."))
 		. = ..()
 
-/obj/item/forensics/sample_kit/MouseDrop(atom/over)
-	if(ismob(src.loc) && CanMouseDrop(over))
-		afterattack(over, usr, TRUE)
+/obj/item/forensics/sample_kit/handle_mouse_drop(atom/over, mob/user)
+	if(ismob(loc))
+		afterattack(over, user, TRUE)
+		return TRUE
+	. = ..()

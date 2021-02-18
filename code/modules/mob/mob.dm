@@ -489,13 +489,16 @@
 			return TRUE
 	return FALSE
 
-/mob/MouseDrop(mob/M)
-	..()
-	if(M != usr) return
-	if(usr == src) return
-	if(!Adjacent(usr)) return
-	if(istype(M,/mob/living/silicon/ai)) return
-	show_inv(usr)
+/mob/handle_mouse_drop(atom/over, mob/user)
+	if(over == user && user != src && !istype(user, /mob/living/silicon/ai))
+		show_inv(user)
+		return TRUE
+	if(istype(over, /obj/vehicle/train))
+		var/obj/vehicle/train/beep = over
+		if(!beep.load(src))
+			to_chat(user, SPAN_WARNING("You were unable to load \the [src] onto \the [over]."))
+		return TRUE
+	. = ..()
 
 /mob/proc/can_use_hands()
 	return

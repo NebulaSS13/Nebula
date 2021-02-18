@@ -68,22 +68,26 @@
 		update_icon()
 		src.add_fingerprint(user)
 
-/obj/machinery/self_destruct/MouseDrop(atom/over)
-	if(!CanMouseDrop(over, usr))
-		return
-	if(over == usr && cylinder)
+/obj/machinery/self_destruct/handle_mouse_drop(var/atom/over, var/mob/user)
+	if(over == user && cylinder)
 		if(armed)
-			to_chat(usr, "Disarm the cylinder first.")
-		else
-			usr.visible_message("[usr] beings to carefully pick up [cylinder].", "You begin to carefully pick up [cylinder].")
-			if(do_after(usr, 70, src))
-				usr.put_in_hands(cylinder)
-				usr.visible_message("[usr] picks up [cylinder].", "You pick up [cylinder].")
-				density = 0
-				cylinder = null
+			to_chat(user, SPAN_WARNING("Disarm the cylinder first."))
+			return TRUE
+		user.visible_message( \
+			SPAN_NOTICE("\The [user] beings to carefully pick up \the [cylinder]."), \
+			SPAN_NOTICE("You begin to carefully pick up \the [cylinder]."))
+		if(!do_after(user, 70, src) || !cylinder)
+			return TRUE
+		user.put_in_hands(cylinder)
+		user.visible_message( \
+			SPAN_NOTICE("\The [user] picks up \the [cylinder]."), \
+			SPAN_NOTICE("You pick up \the [cylinder]."))
+		density = FALSE
+		cylinder = null
 		update_icon()
-		src.add_fingerprint(usr)
-	..()
+		add_fingerprint(user)
+		return TRUE
+	. = ..()
 
 /obj/machinery/self_destruct/explosion_act(severity)
 	..()
