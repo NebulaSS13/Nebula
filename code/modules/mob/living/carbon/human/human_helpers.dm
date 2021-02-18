@@ -329,10 +329,7 @@
 	..()
 
 /mob/living/carbon/human/proc/has_meson_effect()
-	. = FALSE
-	for(var/obj/screen/equipment_screen in equipment_overlays) // check through our overlays to see if we have any source of the meson overlay
-		if (equipment_screen.icon_state == "meson_hud")
-			return TRUE
+	return (GLOB.global_hud.meson in equipment_overlays)
 
 /mob/living/carbon/human/proc/is_in_pocket(var/obj/item/I)
 	return I in list(l_store, r_store)
