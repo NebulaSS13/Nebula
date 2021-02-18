@@ -112,10 +112,6 @@
 		if(machine)
 			if(machine.check_eye(src) < 0)
 				reset_view(null)
-		else
-			if(client && !client.adminobs)
-				reset_view(null)
-
 	return 1
 
 /mob/living/carbon/alien/handle_environment(var/datum/gas_mixture/environment)
