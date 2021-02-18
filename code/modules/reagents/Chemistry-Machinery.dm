@@ -150,6 +150,8 @@
 
 			if (href_list["createpill_multiple"])
 				count = input("Select the number of pills to make.", "Max [max_pill_count]", pillamount) as num
+				if(!CanInteract(user, state))
+					return
 				count = Clamp(count, 1, max_pill_count)
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
@@ -159,6 +161,8 @@
 			if (amount_per_pill > 30) amount_per_pill = 30
 
 			var/name = sanitizeSafe(input(usr,"Name:","Name your pill!","[reagents.get_primary_reagent_name()] ([amount_per_pill]u)"), MAX_NAME_LEN)
+			if(!CanInteract(user, state))
+				return
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
 				return
@@ -167,9 +171,8 @@
 				if(!name) name = reagents.get_primary_reagent_name()
 				P.SetName("[name] pill")
 				P.icon_state = "pill"+pillsprite
-				if(P.icon_state in list("pill1", "pill2", "pill3", "pill4", "pill5")) // if using greyscale, take colour from reagent
-					P.color = reagents.get_color()
 				reagents.trans_to_obj(P,amount_per_pill)
+				P.update_icon()
 				if(loaded_pill_bottle)
 					if(loaded_pill_bottle.contents.len < loaded_pill_bottle.max_storage_space)
 						P.forceMove(loaded_pill_bottle)

@@ -30,8 +30,6 @@ Single Use Emergency Pouches
 	. = ..()
 	name = "emergency [injury_type] pouch"
 	make_exact_fit()
-	for(var/obj/item/chems/pill/P in contents)
-		P.color = color
 	for(var/obj/item/chems/hypospray/autoinjector/A in contents)
 		A.band_color = color
 		A.update_icon()
@@ -185,12 +183,10 @@ Single Use Emergency Pouches
 /obj/item/chems/pill/pouch_pill/painkillers
 	chem_type = /decl/material/liquid/painkillers
 
-/obj/item/chems/pill/pouch_pill/Initialize()
-	. = ..()
+/obj/item/chems/pill/pouch_pill/initialize_reagents()
 	reagents.add_reagent(chem_type, chem_amount)
 	var/decl/material/reagent = decls_repository.get_decl(chem_type)
-	name = "emergency [reagent.liquid_name] pill ([reagents.total_volume]u)"
-	color = reagents.get_color()
+	SetName("emergency [reagent.liquid_name] pill ([reagents.total_volume]u)")
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto
 	name = "emergency autoinjector"
