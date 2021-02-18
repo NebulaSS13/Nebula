@@ -70,7 +70,7 @@
 		/obj/item/beach_ball/holoball,
 		/obj/item/toy/water_balloon,
 		/obj/item/toy/blink,
-		/obj/item/toy/crossbow,
+		/obj/item/gun/launcher/foam/crossbow,
 		/obj/item/gun/projectile/revolver/capgun,
 		/obj/item/sword/katana/toy,
 		/obj/item/toy/prize/deathripley,

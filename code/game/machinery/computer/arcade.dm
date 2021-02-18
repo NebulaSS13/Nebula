@@ -10,7 +10,7 @@
 							/obj/item/clothing/under/syndicate/tacticool								= 200,
 							/obj/item/toy/sword															= 200,
 							/obj/item/gun/projectile/revolver/capgun								= 200,
-							/obj/item/toy/crossbow														= 200,
+							/obj/item/gun/launcher/foam/crossbow														= 200,
 							/obj/item/storage/fancy/crayons										= 200,
 							/obj/item/toy/spinningtoy													= 200,
 							/obj/item/toy/prize/powerloader												= 100,
