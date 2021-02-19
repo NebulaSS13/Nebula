@@ -659,7 +659,7 @@
 /area/ship/trade/command/bridge)
 "bg" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/walllocker/emerglocker/north,
+/obj/structure/emergency_dispenser/north,
 /obj/machinery/floodlight,
 /obj/structure/handrail{
 	icon_state = "handrail";
@@ -763,7 +763,7 @@
 /area/ship/trade/shuttle/outgoing)
 "br" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/closet/walllocker/emerglocker/north,
+/obj/structure/emergency_dispenser/north,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/dock)
 "bv" = (
@@ -1840,7 +1840,7 @@
 /area/ship/trade/crew/kitchen)
 "ea" = (
 /obj/structure/disposalpipe/segment,
-/obj/structure/closet/walllocker/emerglocker/east,
+/obj/structure/emergency_dispenser/east,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
@@ -1933,7 +1933,7 @@
 /obj/structure/sign/warning/nosmoking_2{
 	pixel_y = 28
 	},
-/obj/structure/closet/walllocker/emerglocker/west,
+/obj/structure/emergency_dispenser/west,
 /obj/structure/handrail{
 	icon_state = "handrail";
 	dir = 4
@@ -2821,7 +2821,7 @@
 /turf/simulated/open,
 /area/ship/trade/cargo)
 "gt" = (
-/obj/structure/closet/walllocker/emerglocker/west,
+/obj/structure/emergency_dispenser/west,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -3795,7 +3795,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/atmos)
 "ix" = (
-/obj/structure/closet/walllocker/emerglocker/west,
+/obj/structure/emergency_dispenser/west,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 10
@@ -4094,7 +4094,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/shuttle/outgoing)
 "jd" = (
-/obj/structure/closet/walllocker/emerglocker/west,
+/obj/structure/emergency_dispenser/west,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /obj/structure/cable{
 	d1 = 1;
@@ -6103,7 +6103,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/atmos)
 "Dc" = (
-/obj/structure/closet/walllocker/emerglocker/north,
+/obj/structure/emergency_dispenser/north,
 /obj/machinery/light{
 	icon_state = "bulb1";
 	dir = 4
@@ -6484,7 +6484,7 @@
 	dir = 5
 	},
 /obj/machinery/light,
-/obj/structure/closet/walllocker/emerglocker/west,
+/obj/structure/emergency_dispenser/west,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/atmos)
 "Ic" = (
@@ -7123,7 +7123,7 @@
 /turf/simulated/floor/carpet/blue,
 /area/ship/trade/command/captain)
 "Pc" = (
-/obj/structure/closet/walllocker/emerglocker/east,
+/obj/structure/emergency_dispenser/east,
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable{
 	d1 = 1;
@@ -7307,7 +7307,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/cargo)
 "RL" = (
-/obj/structure/closet/walllocker/emerglocker/north,
+/obj/structure/emergency_dispenser/north,
 /obj/structure/handrail,
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/saloon)
