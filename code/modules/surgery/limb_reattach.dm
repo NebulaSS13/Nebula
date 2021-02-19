@@ -95,7 +95,14 @@
 	user.visible_message("<span class='notice'>[user] has attached [target]'s [E.name] to the [E.amputation_point].</span>",	\
 	"<span class='notice'>You have attached [target]'s [E.name] to the [E.amputation_point].</span>")
 	E.replaced(target)
-	E.status |= ORGAN_CUT_AWAY
+
+	// Modular bodyparts (like prosthetics) do not need to be reconnected.
+	if(E.get_modular_limb_category() != MODULAR_BODYPART_INVALID)
+		E.status &= ~ORGAN_CUT_AWAY
+		for(var/obj/item/organ/external/child in E.children)
+			child.status &= ~ORGAN_CUT_AWAY
+	else
+		E.status |= ORGAN_CUT_AWAY
 
 	if(BP_IS_PROSTHETIC(E) && prob(user.skill_fail_chance(SKILL_DEVICES, 50, SKILL_ADEPT)))
 		E.add_random_ailment()

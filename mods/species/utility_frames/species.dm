@@ -59,8 +59,6 @@
 	)
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/detach_limb,
-		/mob/living/carbon/human/proc/attach_limb,
 		/mob/living/carbon/human/proc/eyeglow
 	)
 

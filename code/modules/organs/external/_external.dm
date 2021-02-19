@@ -407,6 +407,8 @@
 		for(var/obj/item/organ/external/organ in children)
 			organ.replaced(owner)
 
+		owner.refresh_modular_limb_verbs()
+
 	if(!parent && parent_organ)
 		parent = owner.organs_by_name[src.parent_organ]
 		if(parent)
@@ -1218,6 +1220,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 		while(null in owner.internal_organs)
 			owner.internal_organs -= null
 
+		owner.refresh_modular_limb_verbs()
+
 	return 1
 
 /obj/item/organ/external/proc/get_damage()	//returns total damage
@@ -1356,6 +1360,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 		qdel(src)
 	else if(is_stump())
 		qdel(src)
+
+	victim.refresh_modular_limb_verbs()
 
 /obj/item/organ/external/proc/disfigure(var/type = "brute")
 	if(status & ORGAN_DISFIGURED)

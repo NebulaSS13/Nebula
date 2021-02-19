@@ -17,6 +17,7 @@
 	var/manual_dexterity = DEXTERITY_FULL
 	var/movement_slowdown = 0
 	var/is_robotic = TRUE
+	var/modular_bodyparts = MODULAR_BODYPART_INVALID
 	var/limb_tech = "{'engineering':1,'materials':1,'magnets':1}"
 
 /decl/prosthetics_manufacturer/proc/check_can_install(var/target_slot, var/target_bodytype, var/target_species)
@@ -31,13 +32,3 @@
 				return FALSE
 		if(target_species && islist(species_restricted) && !(target_species in species_restricted))
 			return FALSE
-
-/decl/prosthetics_manufacturer/wooden
-	name = "wooden prosthesis"
-	desc = "A crude wooden prosthetic."
-	icon = 'icons/mob/human_races/cyberlimbs/morgan/morgan_main.dmi'
-	modifier_string = "wooden"
-	hardiness = 0.75
-	manual_dexterity = DEXTERITY_SIMPLE_MACHINES
-	movement_slowdown = 1
-	is_robotic = FALSE
