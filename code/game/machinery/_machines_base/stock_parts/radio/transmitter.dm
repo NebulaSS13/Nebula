@@ -1,7 +1,7 @@
 /obj/item/stock_parts/radio/transmitter
 	name = "radio transmitter"
 	desc = "A radio transmitter designed for use with machines."
-	icon_state = "subspace_transmitter"
+	icon_state = "transmitter"
 	var/range = 60  // Limits transmit range
 	var/latency = 2 // Delay between event and transmission; doesn't apply to transmit on tick
 	var/buffer
@@ -111,12 +111,11 @@
 	part_flags = PART_FLAG_HAND_REMOVE
 	name = "basic radio transmitter"
 	desc = "A stock radio transmitter machine component. Can transmit updates regularly or on change."
-	color = COLOR_RED
 	material = /decl/material/solid/metal/steel
 
 /obj/item/stock_parts/radio/transmitter/on_event/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
 	name = "event radio transmitter"
 	desc = "A radio transmitter machine component which transmits when activated by an event."
-	color = COLOR_ORANGE
+	icon_state = "transmitter_event"
 	material = /decl/material/solid/metal/steel
