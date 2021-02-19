@@ -336,11 +336,8 @@
 /obj/item/disk/integrated_circuit/upgrade
 	name = "integrated circuit printer upgrade disk"
 	desc = "Install this into your integrated circuit printer to enhance it."
-	icon = 'icons/obj/assemblies/electronic_tools.dmi'
-	icon_state = "upgrade_disk"
-	item_state = "card-id"
-	w_class = ITEM_SIZE_SMALL
-
+	color = COLOR_GRAY20
+	label = "label_up"
 /obj/item/disk/integrated_circuit/upgrade/advanced
 	name = "integrated circuit printer upgrade disk - advanced designs"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one adds new, advanced designs to the printer."
@@ -350,6 +347,3 @@
 /obj/item/disk/integrated_circuit/upgrade/clone
 	name = "integrated circuit printer upgrade disk - instant cloner"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one allows the printer to duplicate assemblies instantaneously."
-	icon_state = "upgrade_disk_clone"
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)

@@ -1,9 +1,8 @@
 /obj/item/disk/botany
 	name = "flora data disk"
 	desc = "A small disk used for carrying data on plant genetics."
-	icon = 'icons/obj/hydroponics/hydroponics_machines.dmi'
-	icon_state = "disk"
-	w_class = ITEM_SIZE_TINY
+	color = COLOR_GREEN
+	label = "label_dna"
 
 	var/list/genes = list()
 	var/genesource = "unknown"
