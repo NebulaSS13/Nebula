@@ -176,7 +176,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 //card -> mob
 /mob/living/silicon/pai/proc/unfold()
-	if(stat || sleeping || paralysis || weakened)
+	if(incapacitated(INCAPACITATION_KNOCKOUT))
 		return
 	if(loc != card)
 		return
@@ -216,7 +216,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 //from mob -> card
 /mob/living/silicon/pai/proc/fold()
-	if(stat || sleeping || paralysis || weakened)
+	if(incapacitated(INCAPACITATION_KNOCKOUT))
 		return
 	if(loc == card)
 		return
