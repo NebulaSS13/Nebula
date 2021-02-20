@@ -61,40 +61,38 @@ var/const/AALARM_WIRE_AALARM = 16
 				A.post_alert(2)
 			A.update_icon()
 
+/datum/wires/alarm/proc/clear_shorted()
+	var/obj/machinery/alarm/A = holder
+	if(!istype(A))
+		return
+	if(A.shorted == 1)
+		A.shorted = 0
+		A.update_icon()
+
+/datum/wires/alarm/proc/clear_ai_disabled()
+	var/obj/machinery/alarm/A = holder
+	if(!istype(A))
+		return
+
 /datum/wires/alarm/UpdatePulsed(var/index)
 	var/obj/machinery/alarm/A = holder
 	switch(index)
 		if(AALARM_WIRE_IDSCAN)
 			A.locked = !A.locked
-//			log_debug("Idscan wire pulsed")
-
 
 		if (AALARM_WIRE_POWER)
-//			log_debug("Power wire pulsed")
-
 			if(A.shorted == 0)
 				A.shorted = 1
 				A.update_icon()
-
-			spawn(12000)
-				if(A.shorted == 1)
-					A.shorted = 0
-					A.update_icon()
-
+			addtimer(CALLBACK(src, .proc/clear_shorted), 20 MINUTES)
 
 		if (AALARM_WIRE_AI_CONTROL)
-//			log_debug("AI Control wire pulsed")
-
 			if (A.aidisabled == 0)
 				A.aidisabled = 1
 			A.updateDialog()
-			spawn(100)
-				if (A.aidisabled == 1)
-					A.aidisabled = 0
+			addtimer(CALLBACK(src, .proc/clear_ai_disabled, 10 SECONDS))
 
 		if(AALARM_WIRE_SYPHON)
-//			log_debug("Syphon wire pulsed")
-
 			if(A.mode == 1) // AALARM_MODE_SCRUB
 				A.mode = 3 // AALARM_MODE_PANIC
 			else

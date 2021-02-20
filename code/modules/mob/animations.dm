@@ -152,6 +152,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 	animate(src, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff, transform = rotated_transform, time = 2, easing = BACK_EASING | EASE_IN)
 	animate(pixel_x = default_pixel_x, pixel_y = default_pixel_y, transform = initial_transform, time = 2, easing = SINE_EASING)
 
+/mob/proc/clear_shown_overlays(var/list/show_to, var/image/I)
+	for(var/client/C in show_to)
+		C.images -= I
+
 /mob/do_attack_animation(atom/A, atom/movable/weapon)
 	..()
 	is_floating = 0 // If we were without gravity, the bouncing animation got stopped, so we make sure we restart the bouncing after the next movement.
@@ -178,7 +182,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 	for(var/mob/M in viewers(A))
 		if(M.client)
 			viewing |= M.client
-	flick_overlay(I, viewing, 5) // 5 ticks/half a second
+
+	for(var/client/C in viewing)
+		C.images += I
+	addtimer(CALLBACK(src, .proc/clear_shown_overlays, viewing, I), 5)
 
 	// Scale the icon.
 	I.transform *= 0.75

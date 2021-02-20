@@ -136,6 +136,14 @@ var/const/AIRLOCK_WIRE_SPEAKER = 4096
 		if(AIRLOCK_WIRE_SPEAKER)
 			A.speaker = mended
 
+/datum/wires/airlock/proc/reset_ai_control(var/obj/machinery/door/airlock/A)
+	if(!istype(A) || holder != A)
+		return
+	if(A.aiControlDisabled == 1)
+		A.aiControlDisabled = 0
+	else if(A.aiControlDisabled == 2)
+		A.aiControlDisabled = -1
+
 /datum/wires/airlock/UpdatePulsed(var/index)
 	var/obj/machinery/door/airlock/A = holder
 	switch(index)
@@ -162,13 +170,7 @@ var/const/AIRLOCK_WIRE_SPEAKER = 4096
 				A.aiControlDisabled = 1
 			else if(A.aiControlDisabled == -1)
 				A.aiControlDisabled = 2
-
-			spawn(10)
-				if(A)
-					if(A.aiControlDisabled == 1)
-						A.aiControlDisabled = 0
-					else if(A.aiControlDisabled == 2)
-						A.aiControlDisabled = -1
+			addtimer(CALLBACK(src, .proc/reset_ai_control, A), 1 SECOND)
 
 		if(AIRLOCK_WIRE_ELECTRIFY)
 			//one wire for electrifying the door. Sending a pulse through this electrifies the door for 30 seconds.

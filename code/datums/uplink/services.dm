@@ -41,10 +41,11 @@
 /datum/uplink_item/item/services/fake_update_annoncement/New()
 	..()
 	item_cost = round(DEFAULT_TELECRYSTAL_AMOUNT / 2)
+	addtimer(CALLBACK(src, .proc/finalize_announce), 2)
 
-	spawn(2)
-		name = "[command_name()] Update Announcement"
-		desc = "Causes a falsified [command_name()] Update."
+/datum/uplink_item/item/services/fake_update_annoncement/proc/finalize_announce()
+	name = "[command_name()] Update Announcement"
+	desc = "Causes a falsified [command_name()] Update."
 
 /***************
 * Service Item *

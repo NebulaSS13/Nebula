@@ -33,6 +33,14 @@
 			client.screen += screen
 	return screen
 
+/mob/proc/show_screen(var/screen, var/animated)
+	set waitfor = FALSE
+	animate(screen, alpha = 0, time = animated)
+	sleep(animated)
+	if(screen && client)
+		client.screen -= screen
+		qdel(screen)
+
 /mob/proc/clear_fullscreen(category, animated = 10)
 	var/obj/screen/fullscreen/screen = screens[category]
 	if(!screen)
@@ -41,12 +49,7 @@
 	screens -= category
 
 	if(animated)
-		spawn(0)
-			animate(screen, alpha = 0, time = animated)
-			sleep(animated)
-			if(client)
-				client.screen -= screen
-			qdel(screen)
+		show_screen(screen, animated)
 	else
 		if(client)
 			client.screen -= screen
