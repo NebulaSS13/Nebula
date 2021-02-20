@@ -56,7 +56,6 @@
 	. = ..()
 	health = max_health
 	electronics = new (src)
-	update_access()
 
 /obj/item/airlock_brace/Destroy()
 	if(airlock)
@@ -80,7 +79,6 @@
 			return
 		else
 			var/obj/item/card/id/C = W.GetIdCard()
-			update_access()
 			if(check_access(C))
 				to_chat(user, "You swipe \the [C] through \the [src].")
 				if(do_after(user, 10, airlock))
@@ -141,10 +139,3 @@
 	if(!max_health)
 		return 0
 	return (health / max_health) * 100
-
-/obj/item/airlock_brace/proc/update_access()
-	if(!electronics)
-		return
-	req_access = electronics.conf_access
-	if(electronics.one_access)
-		req_access = list(req_access)
