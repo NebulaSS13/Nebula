@@ -2,6 +2,7 @@
 #define SHUTTLE_FLAGS_PROCESS 1
 #define SHUTTLE_FLAGS_SUPPLY  2
 #define SHUTTLE_FLAGS_ZERO_G  4
+#define SHUTTLE_FLAGS_NO_CODE 8  // Essentially bypasses docking codes by extracting them from the target docking controller. Only relevant on /autodock.
 #define SHUTTLE_FLAGS_ALL (~SHUTTLE_FLAGS_NONE)
 
 #define SLANDMARK_FLAG_AUTOSET      1 // If set, will set base area and turf type to same as where it was spawned at.
