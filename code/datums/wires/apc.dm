@@ -25,6 +25,21 @@
 		return 1
 	return 0
 
+/datum/wires/apc/proc/reset_locked()
+	var/obj/machinery/power/apc/A = holder
+	if(A)
+		A.locked = TRUE
+
+/datum/wires/apc/proc/reset_shorted()
+	var/obj/machinery/power/apc/A = holder
+	if(A && !IsIndexCut(APC_WIRE_MAIN_POWER1) && !IsIndexCut(APC_WIRE_MAIN_POWER2))
+		A.shorted = FALSE
+
+/datum/wires/apc/proc/reset_ai_disabled()
+	var/obj/machinery/power/apc/A = holder
+	if(A && !IsIndexCut(APC_WIRE_AI_CONTROL))
+		A.aidisabled = 0
+
 /datum/wires/apc/UpdatePulsed(var/index)
 
 	var/obj/machinery/power/apc/A = holder
@@ -33,26 +48,17 @@
 
 		if(APC_WIRE_IDSCAN)
 			A.locked = 0
-
-			spawn(300)
-				if(A)
-					A.locked = 1
+			addtimer(CALLBACK(src, .proc/reset_locked), 30 SECONDS)
 
 		if (APC_WIRE_MAIN_POWER1, APC_WIRE_MAIN_POWER2)
 			if(A.shorted == 0)
 				A.shorted = 1
-
-				spawn(1200)
-					if(A && !IsIndexCut(APC_WIRE_MAIN_POWER1) && !IsIndexCut(APC_WIRE_MAIN_POWER2))
-						A.shorted = 0
-
+				addtimer(CALLBACK(src, .proc/reset_shorted), 2 MINUTES)
+	
 		if (APC_WIRE_AI_CONTROL)
 			if (A.aidisabled == 0)
 				A.aidisabled = 1
-
-				spawn(10)
-					if(A && !IsIndexCut(APC_WIRE_AI_CONTROL))
-						A.aidisabled = 0
+				addtimer(CALLBACK(src, .proc/reset_ai_disabled), 1 SECOND)
 
 /datum/wires/apc/UpdateCut(var/index, var/mended)
 	var/obj/machinery/power/apc/A = holder
