@@ -215,7 +215,7 @@
 		..()
 
 /obj/structure/bed/chair/janicart/relaymove(mob/user, direction)
-	if(user.stat || user.stunned || user.weakened || user.paralysis)
+	if(user.incapacitated(INCAPACITATION_DISRUPTED))
 		unbuckle_mob()
 	if(locate(/obj/item/key) in user.get_held_items())
 		step(src, direction)
