@@ -75,7 +75,7 @@
 
 /obj/machinery/power/shield_generator/proc/update_overmap_shield_list()
 
-	var/list/check_sectors =   list(map_sectors["[z]"])
+	var/list/check_sectors =   map_sectors["[z]"] ? list(map_sectors["[z]"]) : list()
 	var/list/checked_sectors = list()
 	var/obj/effect/overmap/visitable/current_overmap_object
 
