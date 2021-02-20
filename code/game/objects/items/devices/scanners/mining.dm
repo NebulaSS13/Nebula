@@ -63,8 +63,7 @@
 
 /obj/item/disk/survey
 	name = "survey data disk"
-	icon = 'icons/obj/items/device/diskette.dmi'
-	icon_state = "nucleardisk"
+	color = COLOR_DARK_BROWN
 	var/data
 
 /obj/item/disk/survey/examine(mob/user)
