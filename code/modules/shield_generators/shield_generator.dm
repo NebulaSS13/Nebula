@@ -77,10 +77,10 @@
 	var/obj/effect/overmap/visitable/current_overmap_object = get_owning_overmap_object()
 	if(current_overmap_object != last_linked_overmap_object)
 		if(last_linked_overmap_object)
-			LAZYREMOVE(last_linked_overmap_object.shield_generators, src)
+			last_linked_overmap_object.unregister_machine(src, /obj/machinery/power/shield_generator)
 		last_linked_overmap_object = current_overmap_object
 		if(last_linked_overmap_object)
-			LAZYDISTINCTADD(last_linked_overmap_object.shield_generators, src)
+			last_linked_overmap_object.register_machine(src, /obj/machinery/power/shield_generator)
 
 /obj/machinery/power/shield_generator/RefreshParts()
 	max_energy = 0

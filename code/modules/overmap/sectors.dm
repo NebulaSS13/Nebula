@@ -24,8 +24,34 @@
 	var/restricted_area = 0				// Regardless of if free_landing is set to TRUE, this square area (centered on the z level) will be restricted from free shuttle landing unless permitted by a docking becaon.
 
 	var/list/map_z = list()
-	var/list/consoles
-	var/list/shield_generators
+	var/list/associated_machinery
+
+/obj/effect/overmap/visitable/proc/get_linked_machines_of_type(var/base_type)
+	ASSERT(ispath(base_type, /obj/machinery))
+	for(var/thing in LAZYACCESS(associated_machinery, base_type))
+		var/weakref/machine_ref = thing
+		var/obj/machinery/machine = machine_ref.resolve()
+		if(istype(machine, base_type) && !QDELETED(machine))
+			LAZYDISTINCTADD(., machine)
+		else
+			LAZYREMOVE(associated_machinery[base_type], thing)
+
+/obj/effect/overmap/visitable/proc/unregister_machine(var/obj/machinery/machine, var/base_type)
+	ASSERT(istype(machine))
+	base_type = base_type || machine.base_type || machine.type
+	if(islist(associated_machinery) && associated_machinery[base_type])
+		LAZYREMOVE(associated_machinery[base_type], weakref(machine))
+
+/obj/effect/overmap/visitable/proc/register_machine(var/obj/machinery/machine, var/base_type)
+	ASSERT(istype(machine))
+	if(!QDELETED(machine))
+		base_type = base_type || machine.base_type || machine.type
+		LAZYINITLIST(associated_machinery)
+		LAZYDISTINCTADD(associated_machinery[base_type], weakref(machine))
+
+/obj/effect/overmap/visitable/Destroy()
+	associated_machinery = null
+	. = ..()
 
 /obj/effect/overmap/visitable/Initialize()
 	. = ..()
@@ -173,7 +199,8 @@
 
 /obj/effect/overmap/visitable/handle_overmap_pixel_movement()
 	..()
-	for(var/obj/machinery/computer/ship/machine in consoles)
+	for(var/thing in get_linked_machines_of_type(/obj/machinery/computer/ship))
+		var/obj/machinery/computer/ship/machine = thing
 		if(machine.z in map_z)
 			for(var/weakref/W in machine.viewers)
 				var/mob/M = W.resolve()
