@@ -122,7 +122,7 @@
 	if(isnull(comp))
 		return FALSE
 
-	var/obj/effect/overmap/visitable/ship/sector = get_owning_overmap_object()
+	var/obj/effect/overmap/visitable/ship/sector = comp.get_owning_overmap_object()
 
 	if(!istype(sector))
 		return
