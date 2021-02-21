@@ -64,7 +64,7 @@
 	if(islist(chemical_types))
 		B.chemical_types = chemical_types.Copy()
 	H.internal_organs_by_name[BP_BRAIN] = B
-	H.internal_organs |= B
+	H.internal_organs += B
 
 	var/obj/item/organ/external/affecting = H.get_organ(BP_HEAD)
 	affecting.implants -= src

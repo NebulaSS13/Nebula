@@ -137,12 +137,12 @@
 
 /obj/item/ammo_casing/shell
 	name = "shell casing"
-	desc = "An antimaterial shell casing."
-	caliber = CALIBER_ANTIMATERIAL
+	desc = "An anti-materiel shell casing."
+	caliber = CALIBER_ANTI_MATERIEL
 	projectile_type = /obj/item/projectile/bullet/rifle/shell
 	material = /decl/material/solid/metal/steel
 	color = COLOR_POLISHED_BRASS
-	icon = 'icons/obj/ammo/casings/antimaterial.dmi'
+	icon = 'icons/obj/ammo/casings/anti_materiel.dmi'
 
 /obj/item/ammo_casing/shell/apds
 	name = "\improper APDS shell casing"

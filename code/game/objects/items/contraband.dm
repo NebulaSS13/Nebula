@@ -14,7 +14,7 @@
 	startswith = list(/obj/item/chems/pill/zoom = 10)
 
 /obj/item/storage/pill_bottle/gleam
-	name = "bottle of Three Eye pills"
+	name = "bottle of Gleam pills"
 	desc = "Highly illegal drug. Stimulates rarely used portions of the brain."
 	wrapper_color = COLOR_BLUE
 	startswith = list(/obj/item/chems/pill/gleam = 10)

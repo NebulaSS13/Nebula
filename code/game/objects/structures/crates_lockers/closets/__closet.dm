@@ -305,7 +305,7 @@
 		return
 	if(ismob(O) && src.large)
 		return
-	if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis)
+	if(user.incapacitated())
 		return
 	if((!( istype(O, /atom/movable) ) || O.anchored || !Adjacent(user) || !Adjacent(O) || !user.Adjacent(O) || user.contents.Find(src)))
 		return

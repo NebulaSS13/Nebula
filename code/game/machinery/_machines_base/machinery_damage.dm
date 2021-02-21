@@ -1,4 +1,4 @@
-/obj/machinery/proc/take_damage(amount, damtype, silent)
+/obj/machinery/proc/take_damage(amount, damtype = BRUTE, silent = FALSE)
 	//Let's not bother initializing all the components for nothing
 	if(amount <= 0)
 		return

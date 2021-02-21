@@ -127,7 +127,7 @@
 
 	if(species_organ)
 		var/active_breaths = 0
-		var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
+		var/obj/item/organ/internal/lungs/L = get_internal_organ(species_organ)
 		if(L)
 			active_breaths = L.active_breathing
 		..(active_breaths)
@@ -183,7 +183,7 @@
 	//Vision
 	var/obj/item/organ/vision
 	if(species.vision_organ)
-		vision = internal_organs_by_name[species.vision_organ]
+		vision = get_internal_organ(species.vision_organ)
 
 	if(!species.vision_organ) // Presumably if a species has no vision organs, they see via some other means.
 		eye_blind =  0
@@ -304,7 +304,7 @@
 	if(!species_organ)
 		return
 
-	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
+	var/obj/item/organ/internal/lungs/L = get_internal_organ(species_organ)
 	if(!L || nervous_system_failure())
 		failed_last_breath = 1
 	else
@@ -520,40 +520,16 @@
 	return min(1,.)
 
 /mob/living/carbon/human/handle_chemicals_in_body()
-	..()
-	if(status_flags & GODMODE)
-		return 0
-
-	if(isSynthetic())
-		return
-
-	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
-
-	if(reagents)
-		if(touching) touching.metabolize()
-		if(bloodstr) bloodstr.metabolize()
-		if(ingested) metabolize_ingested_reagents()
-
-	// Trace chemicals
-	for(var/T in chem_doses)
-		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
-			continue
-		var/decl/material/R = T
-		var/dose = LAZYACCESS(chem_doses, T) - initial(R.metabolism)*2
-		LAZYSET(chem_doses, T, dose)
-		if(LAZYACCESS(chem_doses, T) <= 0)
-			LAZYREMOVE(chem_doses, T)
-
-	// Not an ideal place to handle this, but there doesn't seem to be a more appropriate centralized area.
-	if(has_chemical_effect(CE_GLOWINGEYES, 1))
-		update_eyes()
-
-	updatehealth()
+	. = ..()
+	if(.)
+		if(has_chemical_effect(CE_GLOWINGEYES, 1))
+			update_eyes()
+		updatehealth()
 
 // Check if we should die.
 /mob/living/carbon/human/proc/handle_death_check()
 	if(should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/brain = internal_organs_by_name[BP_BRAIN]
+		var/obj/item/organ/internal/brain/brain = get_internal_organ(BP_BRAIN)
 		if(!brain || (brain.status & ORGAN_DEAD))
 			return TRUE
 	return species.handle_death_check(src)
@@ -772,7 +748,7 @@
 				else							hydration_icon.icon_state = "hydration4"
 
 		if(isSynthetic())
-			var/obj/item/organ/internal/cell/C = internal_organs_by_name[BP_CELL]
+			var/obj/item/organ/internal/cell/C = get_internal_organ(BP_CELL)
 			if (istype(C))
 				var/chargeNum = Clamp(ceil(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
 				cells.icon_state = "charge[chargeNum]"
@@ -840,7 +816,7 @@
 	// Puke if toxloss is too high
 	var/vomit_score = 0
 	for(var/tag in list(BP_LIVER,BP_KIDNEYS))
-		var/obj/item/organ/internal/I = internal_organs_by_name[tag]
+		var/obj/item/organ/internal/I = get_internal_organ(tag)
 		if(I)
 			vomit_score += I.damage
 		else if (should_have_organ(tag))
@@ -1099,19 +1075,11 @@
 			reset_view(null, 0)
 		else if(viewflags)
 			set_sight(sight|viewflags)
-	else if(eyeobj)
-		if(eyeobj.owner != src)
-			reset_view(null)
-	else
-		var/isRemoteObserve = 0
-		if(z_eye)
-			isRemoteObserve = 1
-		else if((mRemote in mutations) && remoteview_target)
-			if(remoteview_target.stat == CONSCIOUS)
-				isRemoteObserve = 1
-		if(!isRemoteObserve && client && !client.adminobs)
-			remoteview_target = null
-			reset_view(null, 0)
+	if(eyeobj && eyeobj.owner != src)
+		reset_view(null)
+	if((mRemote in mutations) && remoteview_target && remoteview_target.stat != CONSCIOUS)
+		remoteview_target = null
+		reset_view(null, 0)
 
 	update_equipment_vision()
 	species.handle_vision(src)

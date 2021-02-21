@@ -126,27 +126,20 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/station_departments = list()//Gets filled automatically depending on jobs allowed
 
 	var/default_species = SPECIES_HUMAN
+	var/default_bodytype = BODYTYPE_HUMANOID
 
 	var/list/available_cultural_info = list(
-		TAG_HOMEWORLD = list(
-			HOME_SYSTEM_OTHER
-		),
-		TAG_FACTION = list(
-			FACTION_OTHER
-		),
-		TAG_CULTURE = list(
-			CULTURE_OTHER
-		),
-		TAG_RELIGION = list(
-			RELIGION_OTHER
-		)
+		TAG_HOMEWORLD = list(/decl/cultural_info/location/other),
+		TAG_FACTION =   list(/decl/cultural_info/faction/other),
+		TAG_CULTURE =   list(/decl/cultural_info/culture/other),
+		TAG_RELIGION =  list(/decl/cultural_info/religion/other)
 	)
 
 	var/list/default_cultural_info = list(
-		TAG_HOMEWORLD = HOME_SYSTEM_OTHER,
-		TAG_FACTION =   FACTION_OTHER,
-		TAG_CULTURE =   CULTURE_OTHER,
-		TAG_RELIGION =  RELIGION_OTHER
+		TAG_HOMEWORLD = /decl/cultural_info/location/other,
+		TAG_FACTION =   /decl/cultural_info/faction/other,
+		TAG_CULTURE =   /decl/cultural_info/culture/other,
+		TAG_RELIGION =  /decl/cultural_info/religion/other
 	)
 
 	var/access_modify_region = list(
@@ -278,14 +271,14 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	for(var/job in allowed_jobs)
 		var/datum/job/J = SSjobs.get_by_path(job)
-		var/list/dept = J.department_refs
+		var/list/dept = J.department_types
 		if(LAZYLEN(dept))
 			station_departments |= dept
 
 	for(var/department in station_departments)
-		var/datum/department/dept = SSdepartments.departments[department]
+		var/decl/department/dept = SSjobs.get_department_by_type(department)
 		if(istype(dept))
-			department_accounts[department] = create_account("[dept.title] Account", "[dept.title]", department_money, ACCOUNT_TYPE_DEPARTMENT)
+			department_accounts[department] = create_account("[dept.name] Account", "[dept.name]", department_money, ACCOUNT_TYPE_DEPARTMENT)
 
 	department_accounts["Vendor"] = create_account("Vendor Account", "Vendor", 0, ACCOUNT_TYPE_DEPARTMENT)
 	vendor_account = department_accounts["Vendor"]

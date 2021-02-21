@@ -274,7 +274,7 @@ datum/wound/puncture/massive
 	if(clean) damage_amt /= 2
 
 	switch(losstype)
-		if(DROPLIMB_EDGE, DROPLIMB_BLUNT)
+		if(DISMEMBER_METHOD_EDGE, DISMEMBER_METHOD_BLUNT)
 			damage_type = CUT
 			if(BP_IS_PROSTHETIC(lost_limb))
 				max_bleeding_stage = -1
@@ -295,7 +295,7 @@ datum/wound/puncture/massive
 					"clotted stump" = damage_amt*0.5,
 					"scarred stump" = 0
 				)
-		if(DROPLIMB_BURN)
+		if(DISMEMBER_METHOD_BURN, DISMEMBER_METHOD_ACID)
 			damage_type = BURN
 			stages = list(
 				"mangled charred stump" = damage_amt*1.3,

@@ -56,11 +56,15 @@
 		var/to_holding_target = container_volume * 0.5
 		var/from_remaining_target = container_volume - to_holding_target
 		var/datum/reagents/checking = get_first_reagent_holder(from)
+		if(!checking)
+			return "first holder is null."
 		if(checking?.total_volume != from_remaining_target)
-			return "first holder should have [from_remaining_target]u remaining but has [from.reagents.total_volume]u."
+			return "first holder should have [from_remaining_target]u remaining but has [checking.total_volume]u."
 		checking = get_second_reagent_holder(target)
+		if(!checking)
+			return "second holder is null."
 		if(checking?.total_volume != to_holding_target)
-			return "second holder should hold [to_holding_target]u but has [target.reagents.total_volume]u."
+			return "second holder should hold [to_holding_target]u but has [checking.total_volume]u."
 
 /datum/unit_test/chemistry/proc/validate_holders(var/atom/from, var/atom/target)
 	if(QDELETED(from))
@@ -86,11 +90,11 @@
 
 /datum/unit_test/chemistry/test_trans_to/to_mob
 	name = "CHEMISTRY: trans_to() Test (mob)"
-	recipient_type = /mob/living/carbon
+	recipient_type = /mob/living
 
 /datum/unit_test/chemistry/test_trans_to/to_mob/get_second_reagent_holder(var/atom/from)
-	var/mob/living/carbon/C = from
-	. = C.touching
+	var/mob/living/testmob = from
+	. = testmob.get_contact_reagents()
 
 /datum/unit_test/chemistry/test_trans_to_holder
 	name = "CHEMISTRY: trans_to_holder() Test"
@@ -110,7 +114,7 @@
 
 /datum/unit_test/chemistry/test_trans_to_mob
 	name = "CHEMISTRY: trans_to_mob() Test"
-	recipient_type = /mob/living/carbon
+	recipient_type = /mob/living
 
 /datum/unit_test/chemistry/test_trans_to_mob/perform_transfer(var/atom/from, var/atom/target)
 	. = ..()

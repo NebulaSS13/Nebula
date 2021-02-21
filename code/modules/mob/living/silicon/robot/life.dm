@@ -87,7 +87,7 @@
 		death()
 
 	if (src.stat != DEAD) //Alive.
-		if (src.paralysis || src.stunned || src.weakened || !src.has_power) //Stunned etc.
+		if (incapacitated(INCAPACITATION_DISRUPTED) || !has_power)
 			src.set_stat(UNCONSCIOUS)
 			if (src.stunned > 0)
 				AdjustStunned(-1)

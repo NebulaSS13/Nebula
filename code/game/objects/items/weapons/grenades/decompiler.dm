@@ -102,7 +102,7 @@
 					var/mob/living/carbon/human/H = thing
 					for(var/obj/item/organ/external/limb in H.organs)
 						if(BP_IS_PROSTHETIC(limb) && !limb.is_stump() && !length(limb.children))
-							limb.droplimb()
+							limb.dismember()
 							limb.forceMove(src)
 							thing = limb
 							break

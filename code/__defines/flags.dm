@@ -30,7 +30,6 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define MOVABLE_FLAG_Z_INTERACT           BITFLAG(1) // Should attackby and attack_hand be relayed through ladders and open spaces?
 #define MOVABLE_FLAG_EFFECTMOVE           BITFLAG(2) // Is this an effect that should move?
 #define MOVABLE_FLAG_DEL_SHUTTLE          BITFLAG(3) // Shuttle transistion will delete this.
-#define MOVABLE_FLAG_NONDENSE_COLLISION   BITFLAG(4) // Used for non-dense movables that should be capable of colliding when attempting to move onto dense atoms
 
 #define OBJ_FLAG_ANCHORABLE               BITFLAG(0) // This object can be stuck in place with a tool
 #define OBJ_FLAG_CONDUCTIBLE              BITFLAG(1) // Conducts electricity. (metal etc.)

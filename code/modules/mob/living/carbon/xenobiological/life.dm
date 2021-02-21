@@ -61,15 +61,9 @@
 	return temp_change
 
 /mob/living/carbon/slime/handle_chemicals_in_body()
-	..()
-	if(touching) touching.metabolize()
-	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
-	if(istype(ingested)) ingested.metabolize()
-	if(bloodstr) bloodstr.metabolize()
-
-	src.updatehealth()
-
-	return //TODO: DEFERRED
+	. = ..()
+	if(.)
+		updatehealth()
 
 /mob/living/carbon/slime/handle_regular_status_updates()
 
@@ -95,7 +89,7 @@
 		src.lying = 1
 		src.blinded = 1
 	else
-		if (src.paralysis || src.stunned || src.weakened || (status_flags && FAKEDEATH)) //Stunned etc.
+		if (incapacitated(INCAPACITATION_DISRUPTED) || (status_flags && FAKEDEATH)) //Stunned etc.
 			if (src.stunned > 0)
 				src.set_stat(CONSCIOUS)
 			if (src.weakened > 0)

@@ -11,6 +11,22 @@
 /proc/dd_range(var/low, var/high, var/num)
 	return max(low,min(high,num))
 
+/proc/get_projectile_angle(atom/source, atom/target)
+	var/sx = source.x * world.icon_size
+	var/sy = source.y * world.icon_size
+	var/tx = target.x * world.icon_size
+	var/ty = target.y * world.icon_size
+	var/atom/movable/AM
+	if(ismovable(source))
+		AM = source
+		sx += AM.step_x
+		sy += AM.step_y
+	if(ismovable(target))
+		AM = target
+		tx += AM.step_x
+		ty += AM.step_y
+	return SIMPLIFY_DEGREES(arctan(ty - sy, tx - sx))
+
 /proc/Get_Angle(atom/movable/start,atom/movable/end)//For beams.
 	if(!start || !end) return 0
 	var/dy
@@ -250,32 +266,29 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //Generalised helper proc for letting mobs rename themselves. Used to be clname() and ainame()
 //Last modified by Carn
 /mob/proc/rename_self(var/role, var/allow_numbers=0)
-	spawn(0)
-		var/oldname = real_name
+	set waitfor = FALSE
 
-		var/time_passed = world.time
-		var/newname
+	var/oldname = real_name
+	var/time_passed = world.time
+	var/newname
 
-		for(var/i=1,i<=3,i++)	//we get 3 attempts to pick a suitable name.
-			newname = input(src,"You are \a [role]. Would you like to change your name to something else?", "Name change",oldname) as text
-			if((world.time-time_passed)>3000)
-				return	//took too long
-			newname = sanitizeName(newname, ,allow_numbers)	//returns null if the name doesn't meet some basic requirements. Tidies up a few other things like bad-characters.
-
-			for(var/mob/living/M in GLOB.player_list)
-				if(M == src)
-					continue
-				if(!newname || M.real_name == newname)
-					newname = null
-					break
-			if(newname)
-				break	//That's a suitable name!
-			to_chat(src, "Sorry, that [role]-name wasn't appropriate, please try another. It's possibly too long/short, has bad characters or is already taken.")
-
-		if(!newname)	//we'll stick with the oldname then
-			return
-
-		fully_replace_character_name(newname)
+	for(var/i= 1 to 3)
+		newname = input(src,"You are \a [role]. Would you like to change your name to something else?", "Name change",oldname) as text
+		if((world.time-time_passed) > 5 MINUTES)
+			return	//took too long
+		newname = sanitizeName(newname, ,allow_numbers)	//returns null if the name doesn't meet some basic requirements. Tidies up a few other things like bad-characters.
+		for(var/mob/living/M in GLOB.player_list)
+			if(M == src)
+				continue
+			if(!newname || M.real_name == newname)
+				newname = null
+				break
+		if(newname)
+			break	//That's a suitable name!
+		to_chat(src, "Sorry, that [role]-name wasn't appropriate, please try another. It's possibly too long/short, has bad characters or is already taken.")
+	if(!newname)	//we'll stick with the oldname then
+		return
+	fully_replace_character_name(newname)
 
 //Picks a string of symbols to display as the law number for hacked or ion laws
 /proc/ionnum()
@@ -334,7 +347,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //Returns a list of all mobs with their name
 /proc/getmobs()
 
-	var/list/mobs = sortmobs()
+	var/list/mobs = get_sorted_mob_list()
 	var/list/names = list()
 	var/list/creatures = list()
 	var/list/namecounts = list()
@@ -359,40 +372,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 /proc/get_follow_targets()
 	return follow_repository.get_follow_targets()
-
-//Orders mobs by type then by name
-/proc/sortmobs()
-	var/list/moblist = list()
-	var/list/sortmob = sortAtom(SSmobs.mob_list)
-	for(var/mob/observer/eye/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/silicon/ai/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/silicon/pai/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/silicon/robot/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/deity/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/human/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/brain/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/alien/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/observer/ghost/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/new_player/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/slime/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/simple_animal/M in sortmob)
-		moblist.Add(M)
-//	for(var/mob/living/silicon/hivebot/M in world)
-//		mob_list.Add(M)
-//	for(var/mob/living/silicon/hive_mainframe/M in world)
-//		mob_list.Add(M)
-	return moblist
 
 // returns the turf located at the map edge in the specified direction relative to A
 // used for mass driver
@@ -823,5 +802,5 @@ var/list/WALLITEMS = list(
 	return "#[colour]"
 
 // call to generate a stack trace and print to runtime logs
-/proc/crash_at(msg, file, line)
+/proc/get_stack_trace(msg, file, line)
 	CRASH("%% [file],[line] %% [msg]")

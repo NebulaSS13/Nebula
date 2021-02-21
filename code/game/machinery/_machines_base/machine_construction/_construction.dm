@@ -82,13 +82,13 @@
 
 /decl/machine_construction/proc/attack_hand(mob/user, obj/machinery/machine)
 	if(!validate_state(machine))
-		crash_with("Machine [log_info_line(machine)] violated the state assumptions of the construction state [type]!")
+		PRINT_STACK_TRACE("Machine [log_info_line(machine)] violated the state assumptions of the construction state [type]!")
 		machine.attack_hand(user)
 		return TRUE
 
 /decl/machine_construction/proc/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if(!validate_state(machine))
-		crash_with("Machine [log_info_line(machine)] violated the state assumptions of the construction state [type]!")
+		PRINT_STACK_TRACE("Machine [log_info_line(machine)] violated the state assumptions of the construction state [type]!")
 		machine.attackby(I, user)
 		return TRUE
 

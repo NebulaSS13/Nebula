@@ -134,7 +134,7 @@
 			U.overlays += I
 
 			if(!reagents)
-				crash_with("A snack [type] failed to have a reagent holder when attacked with a [W.type]. It was [QDELETED(src) ? "" : "not"] being deleted.")
+				PRINT_STACK_TRACE("A snack [type] failed to have a reagent holder when attacked with a [W.type]. It was [QDELETED(src) ? "" : "not"] being deleted.")
 			else
 				reagents.trans_to_obj(U, min(reagents.total_volume,5))
 				if (reagents.total_volume <= 0)

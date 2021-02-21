@@ -12,8 +12,9 @@
 	response_disarm = "shoos"
 	response_harm   = "stomps on"
 	emote_see = list("jiggles", "bounces in place")
-	var/colour = "grey"
+	gene_damage = -1
 	pass_flags = PASS_FLAG_TABLE
+	var/colour = "grey"
 
 /mob/living/simple_animal/slime/can_force_feed(var/feeder, var/food, var/feedback)
 	if(feedback)

@@ -26,12 +26,13 @@
 		* Passing through in this case ignores anything with the throwpass flag, such as tables, racks, and morgue trays.
 */
 /turf/Adjacent(var/atom/neighbor, var/atom/target = null)
-	var/list/turf/Ts = get_turf(neighbor)
-
+	var/list/turf/Ts = list()
 	if(istype(neighbor, /atom/movable)) // incase our neighbor atom is a multitile atom
 		var/atom/movable/N = neighbor
-		Ts = N.locs
-		Ts |= get_turf(N.loc)
+		for(var/atom/A in N.locs)
+			Ts |= get_turf(A)
+	else
+		Ts += get_turf(neighbor)
 
 	for(var/turf/T0 in Ts)
 		if(T0 == src)

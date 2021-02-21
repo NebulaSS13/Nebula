@@ -335,7 +335,7 @@
 			distance = get_dist(source_turf, target_turf)
 
 	if(!A.examine(src, distance))
-		crash_with("Improper /examine() override: [log_info_line(A)]")
+		PRINT_STACK_TRACE("Improper /examine() override: [log_info_line(A)]")
 
 /mob/verb/pointed(atom/A as mob|obj|turf in view())
 	set name = "Point To"
@@ -587,6 +587,7 @@
 
 //Updates lying and icons
 /mob/proc/UpdateLyingBuckledAndVerbStatus()
+	var/last_lying = lying
 	if(!resting && cannot_stand() && can_stand_overridden())
 		lying = 0
 	else if(buckled)
@@ -614,8 +615,8 @@
 	if( update_icon )	//forces a full overlay update
 		update_icon = 0
 		regenerate_icons()
-	else if( lying != lying_prev )
-		update_icons()
+	if( lying != last_lying )
+		update_transform()
 
 /mob/proc/reset_layer()
 	if(lying)
@@ -733,7 +734,7 @@
 	resting = max(resting + amount,0)
 	return
 
-/mob/proc/get_species()
+/mob/proc/get_species_name()
 	return ""
 
 /mob/proc/get_visible_implants(var/class = 0)

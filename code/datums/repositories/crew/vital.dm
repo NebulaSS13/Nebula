@@ -4,7 +4,7 @@
 	crew_data["pulse"] = "N/A"
 	crew_data["pulse_span"] = "neutral"
 	if(!H.isSynthetic() && H.should_have_organ(BP_HEART))
-		var/obj/item/organ/internal/heart/O = H.internal_organs_by_name[BP_HEART]
+		var/obj/item/organ/internal/heart/O = H.get_internal_organ(BP_HEART)
 		if (!O || !BP_IS_PROSTHETIC(O)) // Don't make medical freak out over prosthetic hearts
 			crew_data["true_pulse"] = H.pulse()
 			crew_data["pulse"] = H.get_pulse(GETPULSE_TOOL)
@@ -24,7 +24,7 @@
 	crew_data["charge"] = "N/A"
 	crew_data["charge_span"] = "N/A"
 	if(H.isSynthetic())
-		var/obj/item/organ/internal/cell/cell = H.internal_organs_by_name[BP_CELL]
+		var/obj/item/organ/internal/cell/cell = H.get_internal_organ(BP_CELL)
 		if(cell)
 			crew_data["charge"] = cell.percent()
 			if(cell.percent() <= 10)

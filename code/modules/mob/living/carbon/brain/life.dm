@@ -67,24 +67,12 @@
 		//adjustFireLoss(2.5*discomfort)
 		adjustFireLoss(5.0*discomfort)
 
-
 /mob/living/carbon/brain/handle_chemicals_in_body()
-	..()
-	if(touching) touching.metabolize()
-	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
-	if(istype(ingested)) ingested.metabolize()
-	if(bloodstr) bloodstr.metabolize()
-
-	handle_confused()
-	// decrement dizziness counter, clamped to 0
-	if(resting)
-		dizziness = max(0, dizziness - 5)
-	else
-		dizziness = max(0, dizziness - 1)
-
-	updatehealth()
-
-	return //TODO: DEFERRED
+	. = ..()
+	if(.)
+		handle_confused()
+		dizziness = max(0, dizziness - (resting ? 5 : 1))
+		updatehealth()
 
 /mob/living/carbon/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
 	updatehealth()
@@ -93,7 +81,7 @@
 		blinded = 1
 		silent = 0
 	else				//ALIVE. LIGHTS ARE ON
-		if( !container && (health < config.health_threshold_dead || ((world.time - timeofhostdeath) > config.revival_brain_life)) )
+		if( !container && (health < config.health_threshold_dead || (config.revival_brain_life >= 0 && (world.time - timeofhostdeath) > config.revival_brain_life)) )
 			death()
 			blinded = 1
 			silent = 0
@@ -187,8 +175,4 @@
 		if (machine)
 			if (!( machine.check_eye(src) ))
 				reset_view(null)
-		else
-			if(client && !client.adminobs)
-				reset_view(null)
-
 	return 1

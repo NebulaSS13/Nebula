@@ -166,6 +166,7 @@
 		trading_items[item_type] = value
 	. = trading_items[trading_items[trading_num]]
 	. *= 1 + (margin - 1) * skill_curve(skill) //Trader will overcharge at lower skill.
+	. = max(1, round(.))
 
 /datum/trader/proc/get_buy_price(var/atom/movable/item, is_wanted, skill = SKILL_MAX)
 	if(ispath(item, /atom/movable))
@@ -175,6 +176,7 @@
 	if(is_wanted)
 		. *= want_multiplier
 	. *= max(1 - (margin - 1) * skill_curve(skill), 0.1) //Trader will underpay at lower skill.
+	. = max(1, round(.))
 
 /datum/trader/proc/offer_money_for_trade(var/trade_num, var/money_amount, skill = SKILL_MAX)
 	if(!(trade_flags & TRADER_MONEY))
@@ -182,7 +184,6 @@
 	var/value = get_item_value(trade_num, skill)
 	if(money_amount < value)
 		return TRADER_NOT_ENOUGH
-
 	return value
 
 /datum/trader/proc/offer_items_for_trade(var/list/offers, var/num, var/turf/location, skill = SKILL_MAX)
@@ -279,7 +280,6 @@
 /datum/trader/proc/what_do_you_want()
 	if(!(trade_flags & TRADER_GOODS))
 		return get_response(TRADER_NO_GOODS, "I don't deal in goods.")
-
 	. = get_response("what_want", "Hm, I want")
 	var/list/want_english = list()
 	for(var/wtype in wanted_items)

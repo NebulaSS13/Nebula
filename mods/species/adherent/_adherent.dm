@@ -2,14 +2,6 @@
 #define BODYTYPE_ADHERENT "Adherent Body"
 #define LANGUAGE_ADHERENT "Protocol"
 
-// Adherent cultures.
-#define CULTURE_ADHERENT             "The Vigil"
-#define HOME_SYSTEM_ADHERENT         "Canon"
-#define HOME_SYSTEM_ADHERENT_MOURNER "Monument World"
-#define FACTION_ADHERENT_PRESERVERS  "Preservers"
-#define FACTION_ADHERENT_LOYALISTS   "Loyalists"
-#define FACTION_ADHERENT_SEPARATISTS "Seperatists"
-
 #define BP_FLOAT        "floatation disc"
 #define BP_JETS         "maneuvering jets"
 #define BP_COOLING_FINS "cooling fins"

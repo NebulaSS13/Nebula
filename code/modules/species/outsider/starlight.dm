@@ -24,7 +24,7 @@
 	spawn_flags = SPECIES_IS_RESTRICTED
 	genders = list(NEUTER)
 	force_cultural_info = list(
-		TAG_CULTURE = CULTURE_STARLIGHT
+		TAG_CULTURE = /decl/cultural_info/culture/other
 	)
 
 /decl/species/starlight/handle_death_check(var/mob/living/carbon/human/H)

@@ -1,5 +1,6 @@
 /obj/item/robot_module/engineering
 	name = "engineering robot module"
+	associated_department = /decl/department/engineering
 	display_name = "Engineering"
 	channels = list(
 		"Engineering" = 1

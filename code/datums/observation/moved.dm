@@ -13,6 +13,7 @@ GLOBAL_DATUM_INIT(moved_event, /decl/observ/moved, new)
 /decl/observ/moved
 	name = "Moved"
 	expected_type = /atom/movable
+	flags = OBSERVATION_NO_GLOBAL_REGISTRATIONS
 
 /decl/observ/moved/register(var/atom/movable/mover, var/datum/listener, var/proc_call)
 	. = ..()

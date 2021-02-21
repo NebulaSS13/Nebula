@@ -214,7 +214,7 @@
 			var/datum/reagents/R = M.reagents
 			var/mob/living/carbon/human/H = M
 			if(istype(H))
-				R = H.touching
+				R = H.get_contact_reagents()
 			if(istype(R))
 				for(var/chem in chems)
 					R.add_reagent(chem,min(5,max(1,get_trait(TRAIT_POTENCY)/3)))

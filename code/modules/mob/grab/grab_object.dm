@@ -143,7 +143,7 @@
 
 /obj/item/grab/proc/on_organ_loss(mob/victim, obj/item/organ/lost)
 	if(affecting != victim)
-		crash_with("A grab switched affecting targets without properly re-registering for dismemberment updates.")
+		PRINT_STACK_TRACE("A grab switched affecting targets without properly re-registering for dismemberment updates.")
 		return
 	var/obj/item/organ/O = get_targeted_organ()
 	if(!istype(O))
@@ -275,6 +275,7 @@
 	return current_grab.grab_slowdown
 
 /obj/item/grab/proc/assailant_moved()
+	affecting.glide_size = assailant.glide_size // Note that this is called _after_ the Move() call resolves, so while it adjusts affecting's move animation, it won't adjust anything else depending on it.
 	current_grab.assailant_moved(src)
 
 /obj/item/grab/proc/restrains()

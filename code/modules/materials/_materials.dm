@@ -436,7 +436,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			T.assume_gas(vapor, (volume * vapor_products[vapor]), temperature)
 		holder.remove_reagent(type, volume)
 
-/decl/material/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
+/decl/material/proc/on_mob_life(var/mob/living/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(QDELETED(src))
 		return // Something else removed us.
 	if(!istype(M))
@@ -482,7 +482,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		var/dam = (toxicity * removed)
 		if(toxicity_targets_organ && ishuman(M))
 			var/mob/living/carbon/human/H = M
-			var/obj/item/organ/internal/I = H.internal_organs_by_name[toxicity_targets_organ]
+			var/obj/item/organ/internal/I = H.get_internal_organ(toxicity_targets_organ)
 			if(I)
 				var/can_damage = I.max_damage - I.damage
 				if(can_damage > 0)
@@ -496,7 +496,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			M.adjustToxLoss(toxicity_targets_organ ? (dam * 0.75) : dam)
 
 	if(solvent_power >= MAT_SOLVENT_STRONG)
-		M.take_organ_damage(0, removed * solvent_power)
+		M.take_organ_damage(0, removed * solvent_power, override_droplimb = DISMEMBER_METHOD_ACID)
 
 	if(narcosis)
 		if(prob(10))
@@ -570,7 +570,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 					affecting.status |= ORGAN_DISFIGURED
 
 		if(!M.unacidable)
-			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage))
+			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), override_droplimb = DISMEMBER_METHOD_ACID)
 
 /decl/material/proc/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)

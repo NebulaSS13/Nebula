@@ -83,7 +83,7 @@
 				to_chat(user, "<span class='warning'>You can't find anything on [H] to direct [src] into!</span>")
 				return
 
-			vision = H.internal_organs_by_name[H.species.vision_organ]
+			vision = H.get_internal_organ(H.species.vision_organ)
 			if(!vision)
 				vision = H.species.has_organ[H.species.vision_organ]
 				to_chat(user, "<span class='warning'>\The [H] is missing \his [initial(vision.name)]!</span>")

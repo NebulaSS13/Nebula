@@ -4,11 +4,10 @@
 	var/life_tick = 0      // The amount of life ticks that have processed on this mob.
 	var/obj/item/handcuffed = null //Whether or not the mob is handcuffed
 	//Surgery info
-	var/list/surgeries_in_progress
 	//Active emote/pose
 	var/pose = null
-	var/datum/reagents/metabolism/bloodstr = null
-	var/datum/reagents/metabolism/touching = null
+	var/datum/reagents/metabolism/bloodstr
+	var/datum/reagents/metabolism/touching
 	var/losebreath = 0 //if we failed to breathe last tick
 
 	var/coughedtime = null

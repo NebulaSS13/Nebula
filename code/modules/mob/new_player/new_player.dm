@@ -8,7 +8,7 @@
 	var/datum/browser/panel
 	var/show_invalid_jobs = 0
 	universal_speak = TRUE
-
+	mob_sort_value = 10
 	invisibility = 101
 
 	density = 0
@@ -23,7 +23,7 @@
 	. = ..()
 	verbs += /mob/proc/toggle_antag_pool
 
-/mob/new_player/proc/new_player_panel(force = FALSE)
+/mob/new_player/proc/show_lobby_menu(force = FALSE)
 	if(!SScharacter_setup.initialized && !force)
 		return // Not ready yet.
 	var/output = list()
@@ -55,7 +55,7 @@
 			else
 				output += "<a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> "
 
-	output += "<hr>Current character: <b>[client.prefs.real_name]</b>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
+	output += "<hr>Current character: <a href='byond://?src=\ref[client.prefs];load=1'><b>[client.prefs.real_name]</b></a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
 	if(GAME_STATE <= RUNLEVEL_LOBBY)
 		if(ready)
 			output += "<a class='linkOn' href='byond://?src=\ref[src];ready=0'>Un-Ready</a>"
@@ -117,7 +117,7 @@
 
 	if(href_list["refresh"])
 		panel.close()
-		new_player_panel()
+		show_lobby_menu()
 
 	if(href_list["observe"])
 		if(GAME_STATE < RUNLEVEL_LOBBY)
@@ -188,7 +188,7 @@
 		if(client)
 			client.prefs.process_link(src, href_list)
 	else if(!href_list["late_join"])
-		new_player_panel()
+		show_lobby_menu()
 
 	if(href_list["showpoll"])
 
@@ -430,7 +430,7 @@
 			return null
 		new_character = new(spawn_turf, chosen_species.name)
 		if(chosen_species.has_organ[BP_POSIBRAIN] && client && client.prefs.is_shackled)
-			var/obj/item/organ/internal/posibrain/B = new_character.internal_organs_by_name[BP_POSIBRAIN]
+			var/obj/item/organ/internal/posibrain/B = new_character.get_internal_organ(BP_POSIBRAIN)
 			if(B)	B.shackle(client.prefs.get_lawset())
 
 	if(!new_character)
@@ -503,14 +503,12 @@
 		return 0
 	return 1
 
-/mob/new_player/get_species()
+/mob/new_player/get_species_name()
 	var/decl/species/chosen_species
 	if(client.prefs.species)
 		chosen_species = get_species_by_key(client.prefs.species)
-
 	if(!chosen_species || !check_species_allowed(chosen_species, 0))
 		return GLOB.using_map.default_species
-
 	return chosen_species.name
 
 /mob/new_player/get_gender()
@@ -553,3 +551,6 @@ mob/new_player/MayRespawn()
 
 /mob/new_player/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)
 	. = text_content
+
+/mob/new_player/get_admin_job_string()
+	return "New player"

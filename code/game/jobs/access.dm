@@ -60,7 +60,7 @@
 	return null
 
 /obj/get_req_access()
-	return req_access
+	return req_access?.Copy()
 
 /proc/get_centcom_access(job)
 	switch(job)

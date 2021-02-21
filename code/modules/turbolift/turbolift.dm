@@ -130,13 +130,14 @@
 	if(floor_departure_sound)
 		playsound(control_panel_interior.loc, floor_departure_sound, 50, 1)
 
-	for(var/turf/T in destination)
-		for(var/atom/movable/AM in T)
-			if(istype(AM, /mob/living))
-				var/mob/living/M = AM
-				M.gib()
-			else if(AM.simulated)
-				qdel(AM)
+	if(!moving_upwards)
+		for(var/turf/T in destination)
+			for(var/atom/movable/AM in T)
+				if(istype(AM, /mob/living))
+					var/mob/living/M = AM
+					M.gib()
+				else if(AM.simulated)
+					qdel(AM)
 
 	origin.move_contents_to(destination)
 

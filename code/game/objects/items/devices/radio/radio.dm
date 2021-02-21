@@ -785,7 +785,7 @@
 
 /obj/item/radio/announcer/Destroy()
 	SHOULD_CALL_PARENT(FALSE)
-	crash_with("attempt to delete a [src.type] detected, and prevented.")
+	PRINT_STACK_TRACE("attempt to delete a [src.type] detected, and prevented.")
 	return QDEL_HINT_LETMELIVE
 
 /obj/item/radio/announcer/Initialize()

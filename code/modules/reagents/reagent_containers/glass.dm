@@ -61,9 +61,7 @@
 /obj/item/chems/glass/attack(mob/M, mob/user, def_zone)
 	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
 		return	..()
-	if(standard_feed_mob(user, M))
-		return
-	return 0
+	return FALSE
 
 /obj/item/chems/glass/standard_feed_mob(var/mob/user, var/mob/target)
 	if(!ATOM_IS_OPEN_CONTAINER(src))
@@ -88,6 +86,8 @@
 	if(standard_dispenser_refill(user, target)) //Are they clicking a water tank/some dispenser?
 		return TRUE
 	if(standard_pour_into(user, target)) //Pouring into another beaker?
+		return TRUE
+	if(standard_feed_mob(user, target))
 		return TRUE
 	if(user.a_intent == I_HURT)
 		if(standard_splash_mob(user,target))

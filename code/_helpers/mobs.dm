@@ -47,8 +47,8 @@ proc/random_facial_hair_style(gender, var/species)
 proc/random_name(gender, species)
 	if(species)
 		var/decl/species/current_species = get_species_by_key(species)
-		if(current_species)
-			var/decl/cultural_info/current_culture = SSlore.get_culture(current_species.default_cultural_info[TAG_CULTURE])
+		if(current_species) 
+			var/decl/cultural_info/current_culture = decls_repository.get_decl(current_species.default_cultural_info[TAG_CULTURE])
 			if(current_culture)
 				return current_culture.get_random_name(null, gender)
 	return capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
@@ -353,3 +353,7 @@ GLOBAL_LIST_INIT(bodypart_coverage_cache, new)
 				coverage += 0.05
 		GLOB.bodypart_coverage_cache[key] = coverage
 	. = GLOB.bodypart_coverage_cache[key]
+
+/proc/get_sorted_mob_list()
+	. = sortTim(SSmobs.mob_list.Copy(), /proc/cmp_name_asc)
+	. = sortTim(., /proc/cmp_mob_sortvalue_asc)

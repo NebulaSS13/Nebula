@@ -136,6 +136,7 @@ var/list/gamemode_cache = list()
 	var/skill_sprint_cost_range = 0.8
 	var/minimum_stamina_recovery = 1
 	var/maximum_stamina_recovery = 3
+	var/glide_size_delay = 1
 
 	//Mob specific modifiers. NOTE: These will affect different mob types in different ways
 	var/human_delay = 0
@@ -219,6 +220,7 @@ var/list/gamemode_cache = list()
 	var/radiation_material_resistance_divisor = 2 //A turf's possible radiation resistance is divided by this number, to get the real value.
 	var/radiation_lower_limit = 0.15 //If the radiation level for a turf would be below this, ignore it.
 
+	var/auto_local_admin = TRUE // If true, connections from 127.0.0.1 get automatic admin.
 	var/autostealth = 0 // Staff get automatic stealth after this many minutes
 
 	var/error_cooldown = 600 // The "cooldown" time for each occurrence of a unique error
@@ -737,9 +739,11 @@ var/list/gamemode_cache = list()
 				if("autostealth")
 					config.autostealth = text2num(value)
 
+				if("auto_local_admin")
+					config.auto_local_admin = text2num(value)
+
 				if("radiation_lower_limit")
 					radiation_lower_limit = text2num(value)
-
 
 				if("error_cooldown")
 					error_cooldown = text2num(value)
@@ -818,6 +822,8 @@ var/list/gamemode_cache = list()
 					config.walk_delay = value
 				if("creep_delay")
 					config.creep_delay = value
+				if("glide_size_delay")
+					config.glide_size_delay = value
 				if("minimum_sprint_cost")
 					config.minimum_sprint_cost = value
 				if("skill_sprint_cost_range")

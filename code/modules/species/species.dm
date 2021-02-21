@@ -194,8 +194,8 @@
 		BP_APPENDIX = /obj/item/organ/internal/appendix,
 		BP_EYES =     /obj/item/organ/internal/eyes
 		)
-	var/vision_organ              // If set, this organ is required for vision. Defaults to "eyes" if the species has them.
-	var/breathing_organ           // If set, this organ is required for breathing. Defaults to "lungs" if the species has them.
+	var/vision_organ              // If set, this organ is required for vision.
+	var/breathing_organ           // If set, this organ is required for breathing.
 
 	var/list/override_organ_types // Used for species that only need to change one or two entries in has_organ.
 
@@ -255,10 +255,10 @@
 	var/list/maneuvers = list(/decl/maneuver/leap)
 
 	var/list/available_cultural_info = list(
-		TAG_CULTURE =   list(CULTURE_OTHER),
-		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS),
-		TAG_FACTION =   list(FACTION_OTHER),
-		TAG_RELIGION =  list(RELIGION_OTHER)
+		TAG_CULTURE =   list(/decl/cultural_info/culture/other),
+		TAG_HOMEWORLD = list(/decl/cultural_info/location/stateless),
+		TAG_FACTION =   list(/decl/cultural_info/faction/other),
+		TAG_RELIGION =  list(/decl/cultural_info/religion/other)
 	)
 	var/list/force_cultural_info =                list()
 	var/list/default_cultural_info =              list()
@@ -417,7 +417,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		H.organs |= H.organs_by_name[name]
 
 	for(var/name in H.internal_organs_by_name)
-		H.internal_organs |= H.internal_organs_by_name[name]
+		H.internal_organs |= H.get_internal_organ(name)
 
 	for(var/obj/item/organ/O in (H.organs|H.internal_organs))
 		O.owner = H
@@ -880,3 +880,6 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			if(length(active_emotes))
 				var/decl/emote/exertion_emote = decls_repository.get_decl(pick(active_emotes))
 				exertion_emote.do_emote(H)
+
+/decl/species/proc/get_default_name()
+	return "[lowertext(name)] ([random_id(name, 100, 999)])"

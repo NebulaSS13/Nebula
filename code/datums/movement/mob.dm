@@ -131,9 +131,10 @@
 	var/next_move
 
 /datum/movement_handler/mob/delay/DoMove(var/direction, var/mover, var/is_external)
-	if(is_external)
-		return
-	next_move = world.time + max(1, mob.movement_delay())
+	if(!is_external)
+		var/delay = max(1, mob.movement_delay())
+		next_move = world.time + delay
+		mob.glide_size = ADJUSTED_GLIDE_SIZE(delay)
 
 /datum/movement_handler/mob/delay/MayMove(var/mover, var/is_external)
 	if(IS_NOT_SELF(mover) && is_external)
@@ -216,6 +217,7 @@
 	if(isturf(mob.loc))
 		for(var/atom/movable/M in mob.ret_grab())
 			if(M != src && M.loc != mob.loc && !M.anchored && get_dist(old_turf, M) <= 1)
+				M.glide_size = mob.glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
 				step(M, get_dir(M.loc, old_turf))
 		for(var/obj/item/grab/G in mob.get_active_grabs())
 			G.adjust_position()

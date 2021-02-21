@@ -32,7 +32,7 @@
 /obj/item/stack/Initialize(mapload, amount, material)
 
 	if(ispath(amount, /decl/material))
-		crash_with("Stack initialized with material ([amount]) instead of amount.")
+		PRINT_STACK_TRACE("Stack initialized with material ([amount]) instead of amount.")
 		material = amount
 	if (isnum(amount) && amount >= 1)
 		src.amount = amount

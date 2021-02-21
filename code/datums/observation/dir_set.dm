@@ -13,6 +13,7 @@ GLOBAL_DATUM_INIT(dir_set_event, /decl/observ/dir_set, new)
 /decl/observ/dir_set
 	name = "Direction Set"
 	expected_type = /atom
+	flags = OBSERVATION_NO_GLOBAL_REGISTRATIONS
 
 /decl/observ/dir_set/register(var/atom/dir_changer, var/datum/listener, var/proc_call)
 	. = ..()

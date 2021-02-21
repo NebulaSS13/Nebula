@@ -51,7 +51,7 @@
 /obj/item/storage/mirror/raider/proc/do_post_voxifying(var/mob/living/carbon/human/vox)
 	var/newname = sanitizeSafe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
 	if(!newname || newname == "")
-		var/decl/cultural_info/voxculture = SSlore.get_culture(CULTURE_VOX_RAIDER)
+		var/decl/cultural_info/voxculture = decls_repository.get_decl(/decl/cultural_info/culture/vox/raider)
 		newname = voxculture.get_random_name()
 	vox.real_name = newname
 	vox.SetName(vox.real_name)

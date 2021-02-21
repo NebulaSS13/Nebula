@@ -1,3 +1,8 @@
+var/list/localhost_addresses = list(
+	"127.0.0.1" = TRUE,
+	"::1" = TRUE
+)
+
 	////////////
 	//SECURITY//
 	////////////
@@ -139,17 +144,18 @@
 
 	#endif
 
-	if(!config.guests_allowed && IsGuestKey(key))
-		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
-		qdel(src)
-		return
-
-	if(config.player_limit != 0)
-		if((GLOB.clients.len >= config.player_limit) && !(ckey in admin_datums))
-			alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
-			log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
+	var/local_connection = (config.auto_local_admin && (isnull(address) || global.localhost_addresses[address]))
+	if(!local_connection)
+		if(!config.guests_allowed && IsGuestKey(key))
+			alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
 			qdel(src)
 			return
+		if(config.player_limit != 0)
+			if((GLOB.clients.len >= config.player_limit) && !(ckey in admin_datums))
+				alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
+				log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
+				qdel(src)
+				return
 
 	// Change the way they should download resources.
 	if(config.resource_urls && config.resource_urls.len)
@@ -162,6 +168,11 @@
 	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
 	GLOB.clients += src
 	GLOB.ckey_directory[ckey] = src
+
+	// Automatic admin rights for people connecting locally.
+	// Concept stolen from /tg/ with deepest gratitude.
+	if(local_connection && !admin_datums[ckey])
+		new /datum/admins("Local Host", R_EVERYTHING, ckey)
 
 	//Admin Authorisation
 	holder = admin_datums[ckey]
@@ -425,6 +436,18 @@ client/verb/character_setup()
 	var/mob/living/M = mob
 	if(istype(M))
 		M.OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
+
+/client/MouseUp(object, location, control, params)
+	. = ..()
+	var/mob/living/M = mob
+	if(istype(M))
+		M.OnMouseUp(object, location, control, params)
+
+/client/MouseDown(object, location, control, params)
+	. = ..()
+	var/mob/living/M = mob
+	if(istype(M) && !M.in_throw_mode)
+		M.OnMouseDown(object, location, control, params)
 
 /client/verb/SetWindowIconSize(var/val as num|text)
 	set hidden = 1

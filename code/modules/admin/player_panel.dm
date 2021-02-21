@@ -1,8 +1,8 @@
 
-/datum/admins/proc/player_panel_new()//The new one
+/datum/admins/proc/list_players()
 	if (!usr.client.holder)
 		return
-	var/dat = "<html><head><title>Admin Player Panel</title></head>"
+	var/dat = "<html><head><title>Admin Player List</title></head>"
 
 	//javascript, the part that does most of the work~
 	dat += {"
@@ -75,15 +75,15 @@
 
 					body += "</td><td align='center'>";
 
-					body += "<a href='?src=\ref[src];adminplayeropts="+ref+"'>PP</a> - "
-					body += "<a href='?src=\ref[src];notes=show;mob="+ref+"'>N</a> - "
-					body += "<a href='?_src_=vars;Vars="+ref+"'>VV</a> - "
-					body += "<a href='?src=\ref[src];traitor="+ref+"'>TP</a> - "
-					body += "<a href='?src=\ref[usr];priv_msg=\ref"+ref+"'>PM</a> - "
-					body += "<a href='?src=\ref[src];narrateto="+ref+"'>DN</a> - "
-					body += "<a href='?src=\ref[src];adminplayerobservejump="+ref+"'>JMP</a><br>"
+					body += "<a href='?src=\ref[src];adminplayeropts="+ref+"'>Player Panel</a> - "
+					body += "<a href='?src=\ref[src];notes=show;mob="+ref+"'>Notes</a> - "
+					body += "<a href='?_src_=vars;Vars="+ref+"'>View Vars</a> - "
+					body += "<a href='?src=\ref[src];show_special_roles="+ref+"'>Special Roles</a> - "
+					body += "<a href='?src=\ref[usr];priv_msg="+ref+"'>Send PM</a> - "
+					body += "<a href='?src=\ref[src];narrateto="+ref+"'>Direct Narrate</a> - "
+					body += "<a href='?src=\ref[src];adminplayerobservejump="+ref+"'>Jump To</a><br>"
 					if(antagonist > 0)
-						body += "<font size='2'><a href='?src=\ref[src];check_antagonist=1'><font color='red'><b>Antagonist</b></font></a></font>";
+						body += "<font size='2'><a href='?src=\ref[src];show_round_status=1'><font color='red'><b>Antagonist</b></font></a></font>";
 
 					body += "</td></tr></table>";
 
@@ -194,7 +194,7 @@
 			<tr id='title_tr'>
 				<td align='center'>
 					<font size='5'><b>Player panel</b></font><br>
-					Hover over a line to see more information - <a href='?src=\ref[src];check_antagonist=1'>Check antagonists</a>
+					Hover over a line to see more information, or click <a href='?src=\ref[src];show_round_status=1'>here</a> to check round info.
 					<p>
 				</td>
 			</tr>
@@ -212,7 +212,7 @@
 		<span id='maintable_data_archive'>
 		<table width='560' align='center' cellspacing='0' cellpadding='5' id='maintable_data'>"}
 
-	var/list/mobs = sortmobs()
+	var/list/mobs = get_sorted_mob_list()
 	var/i = 1
 	for(var/entry in mobs)
 		var/mob/M = entry
@@ -224,50 +224,7 @@
 			if(i%2 == 0)
 				color = "#f2f2f2"
 			var/is_antagonist = is_special_character(M)
-
-			var/M_job = ""
-
-			if(isliving(M))
-
-				if(iscarbon(M)) //Carbon stuff
-					if(ishuman(M))
-						var/mob/living/carbon/human/H = M
-						M_job = H.job
-					else if(isslime(M))
-						M_job = "slime"
-					else if(issmall(M))
-						M_job = "Monkey"
-					else if(isalien(M))
-						M_job = "Alien"
-					else
-						M_job = "Carbon-based"
-
-				else if(issilicon(M)) //silicon
-					if(isAI(M))
-						M_job = "AI"
-					else if(ispAI(M))
-						M_job = "pAI"
-					else if(isrobot(M))
-						M_job = "Robot"
-					else
-						M_job = "Silicon-based"
-
-				else if(isanimal(M)) //simple animals
-					if(iscorgi(M))
-						M_job = "Corgi"
-					else
-						M_job = "Animal"
-
-				else
-					M_job = "Living"
-
-			else if(istype(M,/mob/new_player))
-				M_job = "New player"
-
-			else if(isghost(M))
-				M_job = "Ghost"
-			else
-				M_job = "Unknown ([M.type])"
+			var/M_job = M.get_admin_job_string()
 
 			M_job = replacetext(M_job, "'", "")
 			M_job = replacetext(M_job, "\"", "")
@@ -321,76 +278,7 @@
 
 	show_browser(usr, dat, "window=players;size=600x480")
 
-//The old one
-/datum/admins/proc/player_panel_old()
-	if (!usr.client.holder)
-		return
-
-	var/dat = "<html><head><title>Player Menu</title></head>"
-	dat += "<body><table border=1 cellspacing=5><B><tr><th>Name</th><th>Real Name</th><th>Assigned Job</th><th>Key</th><th>Options</th><th>PM</th><th>Traitor?</th></tr></B>"
-	//add <th>IP:</th> to this if wanting to add back in IP checking
-	//add <td>(IP: [M.lastKnownIP])</td> if you want to know their ip to the lists below
-	var/list/mobs = sortmobs()
-
-	for(var/mob/M in mobs)
-		if(!M.ckey) continue
-
-		dat += "<tr><td>[M.name]</td>"
-		if(isAI(M))
-			dat += "<td>AI</td>"
-		else if(isrobot(M))
-			dat += "<td>Cyborg</td>"
-		else if(ishuman(M))
-			dat += "<td>[M.real_name]</td>"
-		else if(istype(M, /mob/living/silicon/pai))
-			dat += "<td>pAI</td>"
-		else if(istype(M, /mob/new_player))
-			dat += "<td>New Player</td>"
-		else if(isghost(M))
-			dat += "<td>Ghost</td>"
-		else if(issmall(M))
-			dat += "<td>Monkey</td>"
-		else if(isalien(M))
-			dat += "<td>Alien</td>"
-		else
-			dat += "<td>Unknown</td>"
-
-
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.mind && H.mind.assigned_role)
-				dat += "<td>[H.mind.assigned_role]</td>"
-		else
-			dat += "<td>NA</td>"
-
-
-		dat += {"<td>[M.key ? (M.client ? M.key : "[M.key] (DC)") : "No key"]</td>
-		<td align=center><A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>X</A></td>
-		<td align=center><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>
-		"}
-
-
-
-		if(usr.client)
-			switch(is_special_character(M))
-				if(0)
-					dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'>Traitor?</A></td>"}
-				if(1)
-					dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red>Traitor?</font></A></td>"}
-				if(2)
-					dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red><b>Traitor?</b></font></A></td>"}
-		else
-			dat += {"<td align=center> N/A </td>"}
-
-
-
-	dat += "</table></body></html>"
-
-	show_browser(usr, dat, "window=players;size=640x480")
-
-
-
-/datum/admins/proc/check_antagonists()
+/datum/admins/proc/show_round_status()
 	if (GAME_STATE >= RUNLEVEL_GAME)
 		var/dat = list()
 		dat += "<html><head><title>Round Status</title></head><body><h1><B>Round Status</B></h1>"

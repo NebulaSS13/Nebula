@@ -1,0 +1,6 @@
+#ifndef CONTENT_PACK_MOUSEOVER
+#define CONTENT_PACK_MOUSEOVER
+#include "mouse_highlight.dm"
+#include "mouse_highlight_client.dm"
+#include "mouse_highlight_prefs.dm"
+#endif

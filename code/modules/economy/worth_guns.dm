@@ -14,9 +14,9 @@
 	. += bulk * -5
 	. += accuracy * 10
 	. += scoped_accuracy * 5
-	if(!can_autofire)
+	if(!autofire_enabled)
 		for(var/datum/firemode/F in firemodes)
-			if(F.settings["can_autofire"])
+			if(F.settings["autofire_enabled"])
 				. += 100
 	. *= 10
 	. += ..()

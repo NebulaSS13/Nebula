@@ -45,9 +45,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/Initialize()
 	. = ..()
-	var/matrix/M = new
-	M.Scale(jelly_scale)
-	transform = M
+	set_scale(jelly_scale)
 	var/obj/item/W = get_natural_weapon()
 	if(W)
 		W.force *= jelly_scale

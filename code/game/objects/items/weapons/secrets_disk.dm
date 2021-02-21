@@ -1,18 +1,17 @@
 /obj/item/disk/secret_project
 	name = "'classified' project data disk"
 	desc = "A special disk for storing massive amounts of data. It is marked as classified, and has an ID card slot on top."
-	icon = 'icons/obj/cloning.dmi'
-	icon_state = "datadisk0"
-	item_state = "card-id"
-	w_class = ITEM_SIZE_SMALL
-	req_access = access_ce
+	color = COLOR_GRAY20
+	label = "label_warning"
+	req_access = list(access_ce)
 	var/subject = "some strange, incomprehensible design"
 	var/locked = 1
 
 /obj/item/disk/secret_project/science
+	color = COLOR_INDIGO
 	desc = "A special disk for storing massive amounts of data. It is marked as classified, and has an ID card slot on top. \
 	This one has a lengthy legal label on it denoting it the private, copyrighted property of the Expeditionary Corps Organisation."
-	req_access = access_rd
+	req_access = list(access_rd)
 
 /obj/item/disk/secret_project/Initialize()
 	. = ..()

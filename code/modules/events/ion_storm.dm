@@ -109,9 +109,9 @@
 		S.add_ion_law(law)
 		S.show_laws()
 
-	var/list/local_zs = GetConnectedZlevels(affecting_z)
-	for(var/obj/machinery/network/message_server/MS in SSmachines.machinery)
-		if((MS.z in local_zs) && !(MS.stat & (BROKEN|NOPOWER)))
+	for(var/z in affecting_z)
+		var/obj/machinery/network/message_server/MS = get_message_server_for_z(z)
+		if(MS)
 			MS.spamfilter.Cut()
 			var/i
 			for (i = 1, i <= MS.spamfilter_limit, i++)

@@ -58,7 +58,7 @@
 					low_nut_warning("head")
 
 		for(var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN))
-			var/obj/item/organ/internal/regen_organ = H.internal_organs_by_name[bpart]
+			var/obj/item/organ/internal/regen_organ = H.get_internal_organ(bpart)
 			if(BP_IS_PROSTHETIC(regen_organ))
 				continue
 			if(istype(regen_organ))

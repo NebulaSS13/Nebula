@@ -7,6 +7,7 @@
 	icon_state = "robot"
 	maxHealth = 300
 	health = 300
+	mob_sort_value = 4
 
 	mob_bump_flag = ROBOT
 	mob_swap_flags = ROBOT|MONKEY|SLIME|SIMPLE_ANIMAL
@@ -1116,3 +1117,6 @@
 	if(.)
 		handle_selfinsert(W, user)
 		recalculate_synth_capacities()
+
+/mob/living/silicon/robot/get_admin_job_string()
+	return "Robot"

@@ -1,6 +1,6 @@
 /datum/job/ministation/doctor
 	title = "Medical Doctor"
-	department_refs = list(DEPT_MEDICAL)
+	department_types = list(/decl/department/medical)
 	head_position = 0
 	supervisors = "the Lieutenant and the Captain"
 	total_positions = 2

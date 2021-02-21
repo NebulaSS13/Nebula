@@ -221,7 +221,7 @@
 	return istype(get_equipped_item(slot_l_ear_str), /obj/item/radio/headset) || istype(get_equipped_item(slot_r_ear_str), /obj/item/radio/headset)
 
 /mob/living/carbon/human/welding_eyecheck()
-	var/obj/item/organ/internal/eyes/E = src.internal_organs_by_name[species.vision_organ]
+	var/obj/item/organ/internal/eyes/E = src.get_internal_organ(species.vision_organ)
 	if(!E)
 		return
 	var/safety = eyecheck()
@@ -318,7 +318,7 @@
 
 	if(rogue_entries.len) // These entries did not cleanup after themselves before being destroyed
 		var/rogue_entries_as_string = jointext(map(rogue_entries, /proc/log_info_line), ", ")
-		crash_with("[log_info_line(src)] - Following cloaking entries were removed during cleanup: [rogue_entries_as_string]")
+		PRINT_STACK_TRACE("[log_info_line(src)] - Following cloaking entries were removed during cleanup: [rogue_entries_as_string]")
 
 	UNSETEMPTY(cloaking_sources)
 	return !cloaking_sources // If cloaking_sources wasn't initially null but is now, we've uncloaked
@@ -329,10 +329,7 @@
 	..()
 
 /mob/living/carbon/human/proc/has_meson_effect()
-	. = FALSE
-	for(var/obj/screen/equipment_screen in equipment_overlays) // check through our overlays to see if we have any source of the meson overlay
-		if (equipment_screen.icon_state == "meson_hud")
-			return TRUE
+	return (GLOB.global_hud.meson in equipment_overlays)
 
 /mob/living/carbon/human/proc/is_in_pocket(var/obj/item/I)
 	return I in list(l_store, r_store)

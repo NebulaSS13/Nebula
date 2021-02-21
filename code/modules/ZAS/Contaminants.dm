@@ -88,7 +88,7 @@ obj/var/contaminated = 0
 	//Burn skin if exposed.
 	if(vsc.contaminant_control.SKIN_BURNS)
 		if(!contaminant_head_protected() || !contaminant_suit_protected())
-			burn_skin(0.75)
+			take_overall_damage(0, 0.75)
 			if(prob(20)) to_chat(src, "<span class='danger'>Your skin burns!</span>")
 			updatehealth()
 
@@ -111,7 +111,7 @@ obj/var/contaminated = 0
 
 
 /mob/living/carbon/human/proc/burn_eyes()
-	var/obj/item/organ/internal/eyes/E = internal_organs_by_name[BP_EYES]
+	var/obj/item/organ/internal/eyes/E = get_internal_organ(BP_EYES)
 	if(E && !E.contaminant_guard)
 		if(prob(20)) to_chat(src, "<span class='danger'>Your eyes burn!</span>")
 		E.damage += 2.5

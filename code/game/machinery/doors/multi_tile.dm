@@ -20,13 +20,10 @@
 	opacity = 1
 	frame_type = /obj/structure/door_assembly/multi_tile
 
-/obj/machinery/door/airlock/multi_tile/Initialize()
+/obj/machinery/door/airlock/multi_tile/set_dir()
 	. = ..()
-	SetBounds()
-
-/obj/machinery/door/airlock/multi_tile/Move()
-	. = ..()
-	SetBounds()
+	if(.)
+		SetBounds()
 
 /obj/machinery/door/airlock/multi_tile/proc/SetBounds()
 	if(dir in list(NORTH, SOUTH))

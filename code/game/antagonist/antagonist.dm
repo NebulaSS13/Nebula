@@ -88,7 +88,7 @@
 
 /decl/special_role/New()
 	if(!name)
-		crash_with("Special role [type] created without name set.")
+		PRINT_STACK_TRACE("Special role [type] created without name set.")
 	if(ispath(skill_setter))
 		skill_setter = new skill_setter
 	..()

@@ -23,17 +23,11 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	. = ..()
 
 /obj/machinery/computer/ship/proc/sync_linked()
-	var/obj/effect/overmap/visitable/ship/sector = map_sectors["[z]"]
-	if(!sector)
+	var/obj/effect/overmap/visitable/ship/sector = get_owning_overmap_object()
+	if(!istype(sector))
 		return
-	return attempt_hook_up_recursive(sector)
-
-/obj/machinery/computer/ship/proc/attempt_hook_up_recursive(obj/effect/overmap/visitable/ship/sector)
-	if(attempt_hook_up(sector))
-		return sector
-	for(var/obj/effect/overmap/visitable/ship/candidate in sector)
-		if((. = .(candidate)))
-			return
+	attempt_hook_up(sector)
+	return linked
 
 /obj/machinery/computer/ship/proc/display_reconnect_dialog(var/mob/user, var/flavor)
 	var/datum/browser/written/popup = new (user, "[src]", "[src]")

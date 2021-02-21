@@ -6,7 +6,7 @@
 	spawn_positions = 1
 	hud_icon = "hudbartender"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/bartender
-	department_refs = list(DEPT_SERVICE)
+	department_types = list(/decl/department/service)
 	selection_color = "#3fbe4a"
 	economic_power = 5
 	access = list(
@@ -38,7 +38,7 @@
 	spawn_positions = 1
 	hud_icon = "hudcargotechnician"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/cargo
-	department_refs = list(DEPT_SERVICE)
+	department_types = list(/decl/department/service)
 	selection_color = "#8a7c00"
 	economic_power = 5
 	access = list(
@@ -81,7 +81,8 @@
 
 /datum/job/ministation/janitor
 	title = "Janitor"
-	department_refs = list(DEPT_SERVICE)
+	event_categories = list("Janitor")
+	department_types = list(/decl/department/service)
 	total_positions = 1
 	spawn_positions = 1
 	hud_icon = "hudjanitor"

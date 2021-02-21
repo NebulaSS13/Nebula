@@ -396,6 +396,9 @@ STARLIGHT 0
 ## Uncomment to enable auto-stealthing staff who are AFK for more than specified minutes
 # AUTOSTEALTH 30
 
+## Set to 0/1 to disable/enable automatic admin rights for users connecting from the host the server is running on.
+AUTO_LOCAL_ADMIN 0
+
 ## How many loadout points are available. Use 0 to disable loadout, and any negative number to indicate infinite points.
 MAX_GEAR_COST 10
 

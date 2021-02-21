@@ -6,7 +6,7 @@
 	var/list/minimal_access = list()      // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
 	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
 	var/list/software_on_spawn = list()   // Defines the software files that spawn on tablets and labtops
-	var/list/department_refs = list()	  // What deparements the job is in.
+	var/list/department_types = list()	  // What deparements the job is in.
 	var/primary_department = null 		  // A jobs primary deparment, defualts to the first in the department refs list if not set. Important for heads, the department they are head of needs to be this one.
 	var/total_positions = 0               // How many players can be this job
 	var/spawn_positions = 0               // How many players can spawn in as this job
@@ -16,6 +16,7 @@
 	var/must_fill = 0					  // If set to 1 this job will be have priority over other job preferences. Do not reccommend on jobs with more that one position.
 	var/not_random_selectable = 0		  // If set to 1 this job will not be selected when a player asks for a random job.
 	var/description						  // If set, returns a static description. To add dynamic text, overwrite this proc, call parent aka . = ..() and then . += "extra text" on the line after that.
+	var/list/event_categories
 
 	var/supervisors = null                // Supervisors, who this person answers to directly
 	var/selection_color = "#515151"       // Selection screen color
@@ -285,7 +286,7 @@
 	var/datum/mil_branch/branch = mil_branches.get_branch(branch_name)
 
 	if(!branch)
-		crash_with("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
+		PRINT_STACK_TRACE("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
 		return 0
 
 	if(is_type_in_list(branch, allowed_branches))
@@ -310,7 +311,7 @@
 	var/datum/mil_rank/rank = mil_branches.get_rank(branch_name, rank_name)
 
 	if(!rank)
-		crash_with("unknown rank \"[rank_name]\" in branch \"[branch_name]\" passed to is_rank_allowed()")
+		PRINT_STACK_TRACE("unknown rank \"[rank_name]\" in branch \"[branch_name]\" passed to is_rank_allowed()")
 		return 0
 
 	if(is_type_in_list(rank, allowed_ranks))

@@ -1,15 +1,18 @@
 /datum/ai
 	var/name
-	var/mob/living/body		// The parent mob we control.
-	var/wait_for = 	0 		// The next time we can process.
-	var/run_interval = 1 	// How long to wait between processes.
-	
+	var/mob/living/body             // The parent mob we control.
+	var/expected_type = /mob/living // Type of mob this AI applies to.
+	var/wait_for = 0                // The next time we can process.
+	var/run_interval = 1            // How long to wait between processes.
+
 /datum/ai/New(var/mob/living/target_body)
 	body = target_body
+	if(expected_type && !istype(body, expected_type))
+		PRINT_STACK_TRACE("AI datum [type] received a body ([body ? body.type : "NULL"]) of unexpected type ([expected_type]).")
 	START_PROCESSING(SSai, src)
 
 /datum/ai/proc/can_process()
-	if((body.client || body.mind) && !(body.status_flags & ENABLE_AI))
+	if(!body || ((body.client || body.mind) && !(body.status_flags & ENABLE_AI)))
 		return FALSE
 	if(wait_for > world.time)
 		return FALSE

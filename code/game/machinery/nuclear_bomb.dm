@@ -362,11 +362,8 @@ var/bomb_set
 /obj/item/disk/nuclear
 	name = "nuclear authentication disk"
 	desc = "Better keep this safe."
-	icon = 'icons/obj/items/device/diskette.dmi'
-	icon_state = "nucleardisk"
-	item_state = "card-id"
-	w_class = ITEM_SIZE_TINY
-
+	color = COLOR_GRAY20
+	label = "label_warning"
 
 /obj/item/disk/nuclear/Initialize()
 	. = ..()

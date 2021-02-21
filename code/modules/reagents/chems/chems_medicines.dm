@@ -11,7 +11,7 @@
 /decl/material/liquid/eyedrops/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[BP_EYES]
+		var/obj/item/organ/internal/eyes/E = H.get_internal_organ(BP_EYES)
 		if(E && istype(E) && !E.is_broken())
 			M.eye_blurry = max(M.eye_blurry - 5, 0)
 			M.eye_blind = max(M.eye_blind - 5, 0)
@@ -276,7 +276,7 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H.resuscitate())
-				var/obj/item/organ/internal/heart = H.internal_organs_by_name[BP_HEART]
+				var/obj/item/organ/internal/heart = H.get_internal_organ(BP_HEART)
 				heart.take_internal_damage(heart.max_damage * 0.15)
 
 /decl/material/liquid/stabilizer

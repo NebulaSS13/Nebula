@@ -414,7 +414,7 @@ About the new airlock wires panel:
 	if(welded)
 		weld_overlay = welded_file
 
-	if(panel_open)
+	if(panel_open || istype(construct_state, /decl/machine_construction/default/panel_closed/door/hacking))
 		panel_overlay = panel_file
 
 	if(brace)
@@ -562,7 +562,7 @@ About the new airlock wires panel:
 	. = ..()
 
 /obj/machinery/door/airlock/CanUseTopic(var/mob/user)
-	if(operating < 0) //emagged
+	if(emagged) //emagged
 		to_chat(user, SPAN_WARNING("Unable to interface: Internal error."))
 		return STATUS_CLOSE
 	if(issilicon(user) && !src.canAIControl())
@@ -744,7 +744,7 @@ About the new airlock wires panel:
 			. = ..()
 		return
 
-	if(!repairing && isWelder(C) && !( operating > 0 ) && density)
+	if(!repairing && isWelder(C) && !operating && density)
 		var/obj/item/weldingtool/W = C
 		if(!W.remove_fuel(0,user))
 			to_chat(user, SPAN_NOTICE("Your [W.name] doesn't have enough fuel."))
@@ -753,7 +753,7 @@ About the new airlock wires panel:
 		user.visible_message(SPAN_WARNING("\The [user] begins welding \the [src] [welded ? "open" : "closed"]!"),
 							SPAN_NOTICE("You begin welding \the [src] [welded ? "open" : "closed"]."))
 		if(do_after(user, (rand(3,5)) SECONDS, src))
-			if(density && !(operating > 0) && !repairing)
+			if(density && !operating && !repairing)
 				playsound(src, 'sound/items/Welder2.ogg', 50, 1)
 				welded = !welded
 				update_icon()
@@ -765,22 +765,25 @@ About the new airlock wires panel:
 	else if(isWirecutter(C) || isMultitool(C) || istype(C, /obj/item/assembly/signaler))
 		return wires.Interact(user)
 
-	else if(isCrowbar(C) && !welded && !repairing)
-		// Add some minor damage as evidence of forcing.
-		if(health >= maxhealth)
-			take_damage(1)
-		if(arePowerSystemsOn())
-			to_chat(user, SPAN_WARNING("The airlock's motors resist your efforts to force it."))
-		else if(locked)
-			to_chat(user, SPAN_WARNING("The airlock's bolts prevent it from being forced."))
-		else if(brace)
-			to_chat(user, SPAN_WARNING("The airlock's brace holds it firmly in place."))
-		else
-			if(density)
-				open(1)
+	else if(isCrowbar(C))
+		if(density && !can_open(TRUE) && component_attackby(C, user))
+			return TRUE
+		else if(!repairing)
+			// Add some minor damage as evidence of forcing.
+			if(health >= maxhealth)
+				take_damage(1)
+			if(arePowerSystemsOn())
+				to_chat(user, SPAN_WARNING("The airlock's motors resist your efforts to force it."))
+			else if(locked)
+				to_chat(user, SPAN_WARNING("The airlock's bolts prevent it from being forced."))
+			else if(brace)
+				to_chat(user, SPAN_WARNING("The airlock's brace holds it firmly in place."))
 			else
-				close(1)
-		return TRUE
+				if(density)
+					open(1)
+				else
+					close(1)
+			return TRUE
 
 	if(istype(C, /obj/item/twohanded/fireaxe) && !arePowerSystemsOn() && !(user.a_intent == I_HURT))
 		var/obj/item/twohanded/fireaxe/F = C
@@ -834,12 +837,10 @@ About the new airlock wires panel:
 	return ..()
 
 /obj/machinery/door/airlock/cannot_transition_to(state_path, mob/user)
-	if(reason_broken & MACHINE_BROKEN_GENERIC)
-		return SPAN_WARNING("\The [src] looks broken; try repairing it first.")
 	if(ispath(state_path, /decl/machine_construction/default/deconstructed))
 		if(brace)
 			return SPAN_NOTICE("Remove \the [brace] first!")
-		if(operating >= 0) // if emagged, apparently bypass all this crap; that's what < 0 would mean.
+		if(!emagged) // if emagged, apparently bypass all this crap;
 			if(operating)
 				return SPAN_NOTICE("\The [src] is in use.")
 			if(!welded)
@@ -910,7 +911,7 @@ About the new airlock wires panel:
 		return 0
 
 	if(!forced)
-		if(!arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR))
+		if(emagged || !arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR))
 			return 0
 
 	if(locked || welded)
@@ -923,7 +924,7 @@ About the new airlock wires panel:
 
 	if(!forced)
 		//despite the name, this wire is for general door control.
-		if(!arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR))
+		if(emagged || !arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR))
 			return	0
 
 	return ..()
@@ -1011,8 +1012,7 @@ About the new airlock wires panel:
 		brace.airlock = src
 		brace.forceMove(src)
 		if(brace.electronics)
-			brace.electronics.set_access(src)
-			brace.update_access()
+			brace.req_access = get_req_access()
 		queue_icon_update()
 
 	if (glass)
@@ -1086,11 +1086,11 @@ About the new airlock wires panel:
 	return
 
 // Braces can act as an extra layer of armor - they will take damage first.
-/obj/machinery/door/airlock/take_damage(var/amount)
+/obj/machinery/door/airlock/take_damage(var/amount, damtype=BRUTE)
 	if(brace)
 		brace.take_damage(amount)
 	else
-		..(amount)
+		..()
 	update_icon()
 
 /obj/machinery/door/airlock/examine(mob/user)

@@ -109,7 +109,7 @@
 	. = ..()
 	robotize()
 
-/obj/item/organ/internal/eyes/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/eyes/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	..()
 	name = "optical sensor"
 	icon = 'icons/obj/robot_component.dmi'

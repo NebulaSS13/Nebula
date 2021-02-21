@@ -132,7 +132,4 @@
 
 /mob/living/simple_animal/hostile/antlion/mega/Initialize()
 	. = ..()
-	var/matrix/M = new
-	M.Scale(1.5)
-	transform = M
-	update_icon()
+	set_scale(1.5)

@@ -14,7 +14,7 @@
 	var/mob/living/silicon/pai/pai
 
 /obj/item/paicard/relaymove(var/mob/user, var/direction)
-	if(user.stat || user.stunned)
+	if(user.incapacitated(INCAPACITATION_KNOCKOUT))
 		return
 	var/obj/item/rig/rig = src.get_rig()
 	if(istype(rig))

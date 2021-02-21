@@ -75,7 +75,7 @@
 		CtrlClickOn(A)
 		return 1
 
-	if(stat || paralysis || stunned || weakened || sleeping)
+	if(incapacitated(INCAPACITATION_KNOCKOUT))
 		return
 
 	// Do not allow player facing change in fixed chairs

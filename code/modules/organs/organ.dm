@@ -83,7 +83,7 @@
 		blood_DNA[dna.unique_enzymes] = dna.b_type
 		species = get_species_by_key(dna.species)
 		if (!species)
-			crash_with("Invalid DNA species. Expected a valid species name as string, was: [log_info_line(dna.species)]")
+			PRINT_STACK_TRACE("Invalid DNA species. Expected a valid species name as string, was: [log_info_line(dna.species)]")
 
 /obj/item/organ/proc/die()
 	damage = max_damage
@@ -134,14 +134,16 @@
 			if(!ailment.treated_by_reagent_type)
 				continue
 			var/treated
-			if(REAGENT_VOLUME(owner.bloodstr, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
-				treated = owner.bloodstr
-			else if(REAGENT_VOLUME(owner.reagents, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
-				treated = owner.reagents
-			else
-				var/datum/reagents/ingested = owner.get_ingested_reagents()
-				if(ingested && REAGENT_VOLUME(ingested, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
-					treated = ingested
+			var/datum/reagents/bloodstr_reagents = owner.get_injected_reagents()
+			if(bloodstr_reagents)
+				if(REAGENT_VOLUME(bloodstr_reagents, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
+					treated = bloodstr_reagents
+				else if(REAGENT_VOLUME(owner.reagents, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
+					treated = owner.reagents
+				else
+					var/datum/reagents/ingested = owner.get_ingested_reagents()
+					if(ingested && REAGENT_VOLUME(ingested, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
+						treated = ingested
 			if(treated)
 				ailment.was_treated_by_medication(treated)
 
@@ -446,6 +448,11 @@ var/list/ailment_reference_cache = list()
 		return FALSE
 	LAZYADD(ailments, new ailment.type(src))
 	return TRUE
+
+/obj/item/organ/proc/add_random_ailment()
+	var/list/possible_ailments = get_possible_ailments()
+	if(length(possible_ailments))
+		add_ailment(pick(possible_ailments))
 
 /obj/item/organ/proc/remove_ailment(var/datum/ailment/ailment)
 	if(ispath(ailment, /datum/ailment))

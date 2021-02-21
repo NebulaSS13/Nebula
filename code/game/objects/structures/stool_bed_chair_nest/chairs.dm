@@ -14,23 +14,6 @@
 		rotate(user)
 	return TRUE
 
-/obj/structure/bed/chair/attackby(obj/item/W, mob/user)
-	..()
-	if(!reinf_material && istype(W, /obj/item/assembly/shock_kit))
-		var/obj/item/assembly/shock_kit/SK = W
-		if(!SK.status)
-			to_chat(user, SPAN_NOTICE("\The [SK] is not ready to be attached!"))
-			return
-		if(!user.unEquip(SK))
-			return
-		var/obj/structure/bed/chair/e_chair/E = new (src.loc, material.type)
-		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		E.set_dir(dir)
-		E.part = SK
-		SK.forceMove(E)
-		SK.master = E
-		qdel(src)
-
 /obj/structure/bed/chair/post_buckle_mob()
 	update_icon()
 	return ..()

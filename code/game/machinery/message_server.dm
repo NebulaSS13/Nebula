@@ -145,7 +145,7 @@
 		if(!J)
 			continue
 
-		if(department in J.department_refs)
+		if(department in J.department_types)
 			to_chat(H, "<span class='notice'>Your [pda.name] alerts you to the fact that somebody is requesting your presence at your department.</span>")
 			reached++
 

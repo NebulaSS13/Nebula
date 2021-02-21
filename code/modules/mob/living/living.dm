@@ -101,7 +101,7 @@ default behaviour is:
 			if(!(tmob.status_flags & CANPUSH))
 				now_pushing = 0
 				return
-			tmob.LAssailant = src
+			tmob.last_handled_by_mob = weakref(src)
 		if(isobj(AM) && !AM.anchored)
 			var/obj/I = AM
 			if(!can_pull_size || can_pull_size < I.w_class)
@@ -128,6 +128,7 @@ default behaviour is:
 					for(var/obj/structure/window/win in get_step(AM,t))
 						now_pushing = 0
 						return
+				AM.glide_size = glide_size
 				step(AM, t)
 				if (istype(AM, /mob/living))
 					var/mob/living/tmob = AM
@@ -179,6 +180,10 @@ default behaviour is:
 		updatehealth()
 		to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
 
+/mob/living/proc/update_body(var/update_icons=1)
+	if(update_icons)
+		queue_icon_update()
+
 /mob/living/proc/updatehealth()
 	if(status_flags & GODMODE)
 		health = 100
@@ -191,11 +196,6 @@ default behaviour is:
 //affects them once clothing is factored in. ~Errorage
 /mob/living/proc/calculate_affecting_pressure(var/pressure)
 	return
-
-
-//sort of a legacy burn method for /electrocute, /shock, and the e_chair
-/mob/living/proc/burn_skin(burn_amount)
-	take_overall_damage(0, burn_amount)
 
 /mob/living/proc/increaseBodyTemp(value)
 	return 0
@@ -360,11 +360,11 @@ default behaviour is:
 	src.updatehealth()
 
 // damage ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/take_organ_damage(var/brute, var/burn, var/emp=0)
-	if(status_flags & GODMODE)	return 0	//godmode
-	adjustBruteLoss(brute)
-	adjustFireLoss(burn)
-	src.updatehealth()
+/mob/living/proc/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
+	if(!(status_flags & GODMODE))
+		adjustBruteLoss(brute)
+		adjustFireLoss(burn)
+		updatehealth()
 
 // heal MANY external organs, in random order
 /mob/living/proc/heal_overall_damage(var/brute, var/burn)
@@ -399,6 +399,17 @@ default behaviour is:
 	fire_stacks = 0
 
 /mob/living/proc/rejuvenate()
+
+	// Wipe all of our reagent lists.
+	var/datum/reagents/bloodstr_reagents = get_injected_reagents()
+	if(bloodstr_reagents)
+		bloodstr_reagents.clear_reagents()
+	var/datum/reagents/touching_reagents = get_contact_reagents()
+	if(touching_reagents)
+		touching_reagents.clear_reagents()
+	var/datum/reagents/ingested_reagents = get_ingested_reagents()
+	if(ingested_reagents)
+		ingested_reagents.clear_reagents()
 	if(reagents)
 		reagents.clear_reagents()
 
@@ -475,7 +486,7 @@ default behaviour is:
 /mob/living/carbon/basic_revival(var/repair_brain = TRUE)
 	if(repair_brain && should_have_organ(BP_BRAIN))
 		repair_brain = FALSE
-		var/obj/item/organ/internal/brain/brain = internal_organs_by_name[BP_BRAIN]
+		var/obj/item/organ/internal/brain/brain = get_internal_organ(BP_BRAIN)
 		if(brain.damage > (brain.max_damage/2))
 			brain.damage = (brain.max_damage/2)
 		if(brain.status & ORGAN_DEAD)
@@ -765,12 +776,19 @@ default behaviour is:
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.
 
 /mob/living/fluid_act(var/datum/reagents/fluids)
-	..()
 	for(var/thing in get_equipped_items(TRUE))
 		if(isnull(thing)) continue
 		var/atom/movable/A = thing
 		if(A.simulated)
 			A.fluid_act(fluids)
+	if(fluids.total_volume)
+		var/datum/reagents/touching_reagents = get_contact_reagents()
+		if(touching_reagents)
+			var/saturation =  min(fluids.total_volume, round(mob_size * 1.5 * reagent_permeability()) - touching_reagents.total_volume)
+			if(saturation > 0)
+				fluids.trans_to_holder(touching_reagents, saturation)
+	if(fluids.total_volume)
+		. = ..()
 
 /mob/living/proc/nervous_system_failure()
 	return FALSE
@@ -866,3 +884,22 @@ default behaviour is:
 
 /mob/living/proc/get_ingested_reagents()
 	return reagents
+
+/mob/living/proc/get_species()
+	return
+
+/mob/living/proc/should_have_organ(var/organ_check)
+	return FALSE
+
+/mob/living/proc/get_contact_reagents()
+	return reagents
+
+/mob/living/proc/get_injected_reagents()
+	return reagents
+
+/mob/living/proc/get_adjusted_metabolism(metabolism)
+	return metabolism
+
+/mob/living/get_admin_job_string()
+	return "Living"
+

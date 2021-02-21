@@ -120,7 +120,7 @@ var/datum/mil_branches/mil_branches = new()
 
 	for(var/rank_path in rank_types)
 		if(!ispath(rank_path, /datum/mil_rank))
-			crash_with("[name]'s rank_types includes [rank_path], which is not a subtype of /datum/mil_rank.")
+			PRINT_STACK_TRACE("[name]'s rank_types includes [rank_path], which is not a subtype of /datum/mil_rank.")
 			continue
 		var/datum/mil_rank/rank = new rank_path ()
 		ranks[rank.name] = rank
@@ -155,7 +155,7 @@ var/datum/mil_branches/mil_branches = new()
 	mil_branches.spawn_branches_by_species_ = list()
 	for(var/branch_path in GLOB.using_map.branch_types)
 		if(!ispath(branch_path, /datum/mil_branch))
-			crash_with("populate_branches() attempted to instantiate object with path [branch_path], which is not a subtype of /datum/mil_branch.")
+			PRINT_STACK_TRACE("populate_branches() attempted to instantiate object with path [branch_path], which is not a subtype of /datum/mil_branch.")
 			continue
 
 		var/datum/mil_branch/branch = new branch_path ()

@@ -5,6 +5,7 @@
 	w_class = ITEM_SIZE_NO_CONTAINER
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
+	var/associated_department
 	var/hide_on_manifest = 0
 	var/channels = list()
 	var/networks = list()
