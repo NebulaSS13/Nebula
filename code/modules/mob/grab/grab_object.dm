@@ -275,7 +275,7 @@
 	return current_grab.grab_slowdown
 
 /obj/item/grab/proc/assailant_moved()
-	affecting.glide_size = assailant.glide_size
+	affecting.glide_size = assailant.glide_size // Note that this is called _after_ the Move() call resolves, so while it adjusts affecting's move animation, it won't adjust anything else depending on it.
 	current_grab.assailant_moved(src)
 
 /obj/item/grab/proc/restrains()

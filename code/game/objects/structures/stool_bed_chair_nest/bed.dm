@@ -107,7 +107,8 @@
 /obj/structure/bed/Move()
 	. = ..()
 	if(buckled_mob)
-		buckled_mob.forceMove(src.loc)
+		buckled_mob.glide_size = glide_size // Setting loc apparently does animate with glide size.
+		buckled_mob.forceMove(loc)
 
 /obj/structure/bed/forceMove()
 	. = ..()

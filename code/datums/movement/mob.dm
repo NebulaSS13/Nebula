@@ -217,6 +217,7 @@
 	if(isturf(mob.loc))
 		for(var/atom/movable/M in mob.ret_grab())
 			if(M != src && M.loc != mob.loc && !M.anchored && get_dist(old_turf, M) <= 1)
+				M.glide_size = mob.glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
 				step(M, get_dir(M.loc, old_turf))
 		for(var/obj/item/grab/G in mob.get_active_grabs())
 			G.adjust_position()
