@@ -76,6 +76,24 @@
 	if((object.z in map_z) && !(get_area(object) in SSshuttle.shuttle_areas))
 		return 1
 
+// Returns the /obj/effect/overmap/visitable to which the atom belongs based on localtion, or null
+/atom/proc/get_owning_overmap_object()
+	var/z = get_z(src)
+	var/list/check_sectors =   map_sectors["[z]"] ? list(map_sectors["[z]"]) : list()
+	var/list/checked_sectors = list()
+
+	while(length(check_sectors))
+		var/obj/effect/overmap/visitable/sector = check_sectors[1]
+		if(sector.check_ownership(src))
+			. = sector
+			break
+
+		check_sectors -= sector
+		checked_sectors += sector
+		for(var/obj/effect/overmap/visitable/next_sector in sector)
+			if(!(next_sector in checked_sectors))
+				check_sectors |= next_sector
+
 //If shuttle_name is false, will add to generic waypoints; otherwise will add to restricted. Does not do checks.
 /obj/effect/overmap/visitable/proc/add_landmark(obj/effect/shuttle_landmark/landmark, shuttle_name)
 	landmark.sector_set(src, shuttle_name)
