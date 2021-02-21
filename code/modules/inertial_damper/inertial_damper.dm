@@ -73,9 +73,9 @@ var/list/ship_inertial_dampers = list()
 	update_nearby_tiles(locs)
 	controller = new(src)
 
-	for(var/obj/effect/overmap/visitable/ship/S in SSshuttle.ships)
-		if(S.check_ownership(src))
-			S.inertial_dampers |= controller
+	var/obj/effect/overmap/visitable/ship/S = get_owning_overmap_object()
+	if(istype(S))
+		S.inertial_dampers |= controller
 
 	src.overlays += "activated"
 
