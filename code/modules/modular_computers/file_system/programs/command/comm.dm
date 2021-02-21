@@ -122,10 +122,10 @@
 	if(isnull(comp))
 		return FALSE
 
-	var/obj/effect/overmap/visitable/ship/sector = map_sectors["[comp.z]"]
+	var/obj/effect/overmap/visitable/ship/sector = get_owning_overmap_object()
 
-	if(!sector)
-		return FALSE
+	if(!istype(sector))
+		return
 
 	for(var/obj/machinery/ftl_shunt/core/C in SSmachines.machinery)
 		if(C.z in sector.map_z)
