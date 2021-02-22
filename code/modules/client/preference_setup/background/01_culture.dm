@@ -88,24 +88,34 @@
 /datum/category_item/player_setup_item/background/culture/content()
 	. = list()
 	for(var/token in tokens)
+
 		var/decl/cultural_info/culture = decls_repository.get_decl(pref.cultural_info[token])
-		var/title = "<a href='?src=\ref[src];expand_options_[token]=1'>[tokens[token]]</a><b>- </b>[pref.cultural_info[token]]"
-		var/append_text = "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
-		. += culture.get_description(title, append_text, verbose = !hidden[token])
-		if (expanded[token])
+
+		. += "<table width = '100%'>"
+		. += "<tr><td colspan=3><center><h3>[culture.desc_type]: <a href='?src=\ref[src];expand_options_[token]=1'>[culture.name] <small>\[[expanded[token] ? "-" : "+"]\]</small></a></h3>"
+		if(expanded[token])
 			var/list/valid_values
 			GET_ALLOWED_VALUES(valid_values, token)
-			if (!hidden[token])
-				. += "<br>"
-			. += "<table width=100%><tr><td colspan=3>"
-			for (var/V in valid_values)
-				var/decl/cultural_info/CI = V
-				if (pref.cultural_info[token] == CI)
-					. += "<span class='linkOn'>[CI]</span> "
+			. += "</center></td></tr>"
+			. += "<tr><td colspan=3><center>"
+			for(var/culture_path in valid_values)
+				var/decl/cultural_info/culture_data = decls_repository.get_decl(culture_path)
+				if(pref.cultural_info[token] == culture_data.type)
+					. += "<span class='linkOn'>[culture_data.name]</span> "
 				else
-					. += "<a href='?src=\ref[src];set_token_entry_[token]=[CI]'>[CI]</a> "
-			. += "</table>"
-		. += "<hr>"
+					. += "<a href='?src=\ref[src];set_token_entry_[token]=\ref[culture_data]'>[culture_data.name]</a> "
+		. += "</center><hr/></td></tr>"
+
+		var/list/culture_info = culture.get_description(!hidden[token])
+		. += "<tr><td width = '200px'>"
+		. += "<small>[culture_info["details"] || "No additionald details."]</small>"
+		. += "</td><td>"
+		. += "[culture_info["body"] || "No description."]"
+		. += "</td><td width = '50px'>"
+		. += "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
+		. += "</td></tr>"
+		. += "</table><hr>"
+
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/background/culture/OnTopic(var/href,var/list/href_list, var/mob/user)
@@ -120,11 +130,13 @@
 			expanded[token] = !expanded[token]
 			return TOPIC_REFRESH
 
-		var/new_token = href_list["set_token_entry_[token]"]
-		if (!isnull(new_token))
-			pref.cultural_info[token] = new_token
-			return TOPIC_REFRESH
-			
+		var/decl/cultural_info/new_token = href_list["set_token_entry_[token]"]
+		if(!isnull(new_token))
+			new_token = locate(new_token)
+			if(istype(new_token))
+				pref.cultural_info[token] = new_token.type
+				return TOPIC_REFRESH
+
 	. = ..()
 
 #undef GET_ALLOWED_VALUES
