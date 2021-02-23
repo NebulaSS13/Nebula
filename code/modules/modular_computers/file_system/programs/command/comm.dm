@@ -97,6 +97,7 @@
 			option["option_target"] = EO.option_target
 			option["needs_syscontrol"] = EO.needs_syscontrol
 			option["silicon_allowed"] = EO.silicon_allowed
+			option["requires_shunt"] = EO.requires_shunt
 			processed_evac_options[++processed_evac_options.len] = option
 	data["evac_options"] = processed_evac_options
 
@@ -111,6 +112,28 @@
 	if(program)
 		return program.can_run(user, program.computer.get_network())
 	return 1
+
+/datum/nano_module/program/comm/proc/get_shunt()
+	if(isnull(program?.computer))
+		return FALSE
+
+	var/obj/comp = program.computer.get_physical_host()
+
+	if(isnull(comp))
+		return FALSE
+
+	var/obj/effect/overmap/visitable/ship/sector = comp.get_owning_overmap_object()
+
+	if(!istype(sector))
+		return
+
+	for(var/obj/machinery/ftl_shunt/core/C in SSmachines.machinery)
+		if(C.z in sector.map_z)
+			if(C.get_status() != 2) //magic number because defines are lower than this file.
+				return TRUE
+
+	return FALSE
+
 
 /datum/nano_module/program/comm/proc/obtain_message_listener()
 	if(program)
@@ -193,6 +216,8 @@
 				if (!selected_evac_option.silicon_allowed && issilicon(user))
 					return
 				if (selected_evac_option.needs_syscontrol && !ntn_cont)
+					return
+				if (selected_evac_option.requires_shunt && !get_shunt())
 					return
 				var/confirm = alert("Are you sure you want to [selected_evac_option.option_desc]?", name, "No", "Yes")
 				if (confirm == "Yes" && can_still_topic())
