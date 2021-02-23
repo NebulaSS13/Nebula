@@ -35,11 +35,10 @@ var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 /obj/effect/overmap/visitable/ship/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	SSshuttle.ships -= src
-	if(LAZYLEN(consoles))
-		for(var/obj/machinery/computer/ship/machine in consoles)
-			if(machine.linked == src)
-				machine.linked = null
-		consoles = null
+	for(var/thing in get_linked_machines_of_type(/obj/machinery/computer/ship))
+		var/obj/machinery/computer/ship/machine = thing
+		if(machine.linked == src)
+			machine.linked = null
 	. = ..()
 
 /obj/effect/overmap/visitable/ship/proc/set_thrust_limit(var/thrust_limit)
