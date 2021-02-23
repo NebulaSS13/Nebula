@@ -36,9 +36,9 @@
 		var/decl/department/dept = SSjobs.get_department_by_type(dept_key)
 		if(dept)
 			if(LAZYLEN(dept.goals))
-				to_chat(src, SPAN_NOTICE("<br><br><font size = 3><b>This round, [dept.name] has the following departmental goals:</b></font><br>[jointext(dept.summarize_goals(show_success), "<br>")]"))
+				to_chat(src, SPAN_NOTICE("<br><br><font size = 3><b>This round, [dept.name] has the following [dept.noun_adj] goals:</b></font><br>[jointext(dept.summarize_goals(show_success), "<br>")]"))
 			else
-				to_chat(src, SPAN_NOTICE("<br><br><font size = 3><b>[dept.name] has no departmental goals this round.</b></font>"))
+				to_chat(src, SPAN_NOTICE("<br><br><font size = 3><b>[dept.name] has no [dept.noun_adj] goals this round.</b></font>"))
 
 	if(LAZYLEN(mind.goals))
 		to_chat(mind.current, SPAN_NOTICE("<br><br>You can check your round goals with the <b>Show Goals</b> verb."))
