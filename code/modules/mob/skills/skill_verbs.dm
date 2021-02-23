@@ -174,7 +174,7 @@ The Appraise verb. Used on objects to estimate their value.
 			var/high = low + level
 			if(!low && multiple >= 2)
 				low = 10 ** (multiple - 1) //Adjusts the lowball estimate away from 0 if the item has a high upper estimate.
-			var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
+			var/decl/currency/cur = GET_DECL(GLOB.using_map.default_currency)
 			message = "You appraise the item to be worth between [low] and [high] [cur.name]."
 	to_chat(src, message)
 

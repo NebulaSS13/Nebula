@@ -3,14 +3,14 @@ turf/exterior/wall/random
 
 /turf/exterior/wall/random/proc/get_weighted_mineral_list()
 	if(strata)
-		var/decl/strata/strata_info = decls_repository.get_decl(strata)
+		var/decl/strata/strata_info = GET_DECL(strata)
 		. = strata_info.ores_sparse
 	if(!.)
 		. = SSmaterials.weighted_minerals_sparse
 
 /turf/exterior/wall/random/high_chance/get_weighted_mineral_list()
 	if(strata)
-		var/decl/strata/strata_info = decls_repository.get_decl(strata)
+		var/decl/strata/strata_info = GET_DECL(strata)
 		. = strata_info.ores_rich
 	if(!.)
 		. = SSmaterials.weighted_minerals_rich

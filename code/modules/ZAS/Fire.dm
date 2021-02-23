@@ -233,7 +233,7 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 
 		//*** Get the fuel and oxidizer amounts
 		for(var/g in gas)
-			var/decl/material/mat = decls_repository.get_decl(g)
+			var/decl/material/mat = GET_DECL(g)
 			if(mat.gas_flags & XGM_GAS_FUEL)
 				gas_fuel += gas[g]
 			if(mat.gas_flags & XGM_GAS_OXIDIZER)
@@ -306,7 +306,7 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 		remove_by_flag(XGM_GAS_OXIDIZER, used_oxidizers)
 		var/datum/gas_mixture/burned_fuel = remove_by_flag(XGM_GAS_FUEL, used_gas_fuel)
 		for(var/g in burned_fuel.gas)
-			var/decl/material/mat = decls_repository.get_decl(g)
+			var/decl/material/mat = GET_DECL(g)
 			if(mat.burn_product)
 				adjust_gas(mat.burn_product, burned_fuel.gas[g])
 
@@ -328,7 +328,7 @@ datum/gas_mixture/proc/check_recombustibility(list/fuel_objs)
 	. = 0
 	for(var/g in gas)
 		if(gas[g] >= 0.1)
-			var/decl/material/gas = decls_repository.get_decl(g)
+			var/decl/material/gas = GET_DECL(g)
 			if(gas.gas_flags & XGM_GAS_OXIDIZER)
 				. = 1
 				break
@@ -342,7 +342,7 @@ datum/gas_mixture/proc/check_recombustibility(list/fuel_objs)
 	. = 0
 	for(var/g in gas)
 		if(gas[g] >= 0.1)
-			var/decl/material/gas = decls_repository.get_decl(g)
+			var/decl/material/gas = GET_DECL(g)
 			if(gas.gas_flags & XGM_GAS_OXIDIZER)
 				. = 1
 				break
@@ -351,7 +351,7 @@ datum/gas_mixture/proc/check_recombustibility(list/fuel_objs)
 	. = 0
 	for(var/g in gas)
 		if(QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
-			var/decl/material/gas = decls_repository.get_decl(g)
+			var/decl/material/gas = GET_DECL(g)
 			if(gas.gas_flags & XGM_GAS_OXIDIZER)
 				. = 1
 				break
@@ -365,7 +365,7 @@ datum/gas_mixture/proc/check_recombustibility(list/fuel_objs)
 	. = 0
 	for(var/g in gas)
 		if(QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
-			var/decl/material/gas = decls_repository.get_decl(g)
+			var/decl/material/gas = GET_DECL(g)
 			if(gas.gas_flags & XGM_GAS_FUEL)
 				. = 1
 				break

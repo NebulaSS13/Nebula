@@ -18,7 +18,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /obj/effect/gas_overlay/Initialize(mapload, gas)
 	. = ..()
-	material = decls_repository.get_decl(gas)
+	material = GET_DECL(gas)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 	if(material.gas_tile_overlay)
@@ -271,8 +271,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		shard_icon = shard_type
 	if(!burn_armor)
 		burn_armor = brute_armor
-
 	generate_armor_values()
+
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
 	for(var/ctype in cocktails)
 		var/decl/cocktail/cocktail = cocktails[ctype]

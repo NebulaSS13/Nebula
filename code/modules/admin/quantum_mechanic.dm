@@ -22,7 +22,7 @@
 	Q.set_dir(mob.dir)
 	Q.ckey = ckey
 
-	var/decl/hierarchy/outfit/outfit = decls_repository.get_decl(/decl/hierarchy/outfit/quantum)
+	var/decl/hierarchy/outfit/outfit = GET_DECL(/decl/hierarchy/outfit/quantum)
 	outfit.equip(Q)
 
 	//Sort out ID

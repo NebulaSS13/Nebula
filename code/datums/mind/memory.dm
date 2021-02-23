@@ -7,7 +7,7 @@
 	. = mind.StoreMemory(memory, options)
 
 /datum/mind/proc/StoreMemory(var/memory, var/options)
-	var/decl/memory_options/MO = decls_repository.get_decl(options || /decl/memory_options/default)
+	var/decl/memory_options/MO = GET_DECL(options || /decl/memory_options/default)
 	return MO.Create(src, memory)
 
 /datum/mind/proc/RemoveMemory(var/datum/memory/memory, var/mob/remover)

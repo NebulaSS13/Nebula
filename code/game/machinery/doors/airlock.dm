@@ -93,10 +93,10 @@ var/list/airlock_overlays = list()
 	var/emag_file = 'icons/obj/doors/station/emag.dmi'
 
 /obj/machinery/door/airlock/get_material()
-	return decls_repository.get_decl(mineral ? mineral : /decl/material/solid/metal/steel)
+	return GET_DECL(mineral ? mineral : /decl/material/solid/metal/steel)
 
 /obj/machinery/door/airlock/proc/get_window_material()
-	return decls_repository.get_decl(window_material)
+	return GET_DECL(window_material)
 
 /obj/machinery/door/airlock/get_codex_value()
 	return "airlock"
@@ -1031,7 +1031,7 @@ About the new airlock wires panel:
 		var/obj/item/stock_parts/circuitboard/electronics = assembly.electronics
 		install_component(electronics, FALSE) // will be refreshed in parent call; unsafe to refresh prior to calling ..() in Initialize
 		electronics.construct(src)
-		var/decl/material/mat = decls_repository.get_decl(assembly.glass_material)
+		var/decl/material/mat = GET_DECL(assembly.glass_material)
 
 		if(assembly.glass == 1) // supposed to use material in this case
 			mineral = assembly.glass_material

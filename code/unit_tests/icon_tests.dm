@@ -104,7 +104,7 @@
 	var/list/invalid_posters = list()
 
 	for(var/poster_type in subtypesof(/decl/poster))
-		var/decl/poster/P = decls_repository.get_decl(poster_type)
+		var/decl/poster/P = GET_DECL(poster_type)
 		if(!(P.icon_state in contraband_icons))
 			invalid_posters += poster_type
 

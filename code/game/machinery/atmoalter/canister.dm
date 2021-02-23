@@ -204,7 +204,7 @@ update_flag
 	if(T)
 		T.assume_air(air_contents)
 	for(var/path in matter)
-		var/decl/material/material = decls_repository.get_decl(path)
+		var/decl/material/material = GET_DECL(path)
 		if(material)
 			material.place_sheet(get_turf(src), round(matter[path]/SHEET_MATERIAL_AMOUNT))
 	qdel(src)

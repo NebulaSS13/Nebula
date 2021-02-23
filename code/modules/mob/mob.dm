@@ -52,7 +52,7 @@
 	if(!move_intent)
 		move_intent = move_intents[1]
 	if(ispath(move_intent))
-		move_intent = decls_repository.get_decl(move_intent)
+		move_intent = GET_DECL(move_intent)
 	var/ai_type = get_ai_type()
 	if(ai_type)
 		ai = new ai_type(src)
@@ -155,7 +155,7 @@
 	for(var/o in objs)
 		var/obj/O = o
 		if(radio_message)
-			O.hear_talk(src, radio_message, null, decls_repository.get_decl(/decl/language/noise))
+			O.hear_talk(src, radio_message, null, GET_DECL(/decl/language/noise))
 		else
 			O.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
 

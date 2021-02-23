@@ -238,7 +238,7 @@
 			var/gases[0]
 			for(var/g in env.gas)
 				var/gas[0]
-				var/decl/material/mat = decls_repository.get_decl(g)
+				var/decl/material/mat = GET_DECL(g)
 				gas["name"] = capitalize(mat.gas_name)
 				gas["percent"] = round((env.gas[g] / t_moles) * 100)
 				gases[++gases.len] = gas

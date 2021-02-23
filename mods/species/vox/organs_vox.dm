@@ -84,7 +84,7 @@
 		// Handle some post-metabolism reagent processing for generally inedible foods.
 		if(ingested.total_volume > 0)
 			for(var/rtype in ingested.reagent_volumes)
-				var/decl/material/R = decls_repository.get_decl(rtype)
+				var/decl/material/R = GET_DECL(rtype)
 				var/inedible_nutriment_amount = gains_nutriment_from_inedible_reagents[R]
 				if(inedible_nutriment_amount > 0)
 					owner.adjust_nutrition(inedible_nutriment_amount)
@@ -116,7 +116,7 @@
 
 		// Convert stored matter into sheets.
 		for(var/mat in check_materials)
-			var/decl/material/M = decls_repository.get_decl(mat)
+			var/decl/material/M = GET_DECL(mat)
 			if(M && M.stack_type && stored_matter[mat] >= SHEET_MATERIAL_AMOUNT)
 
 				// Remove as many sheets as possible from the gizzard.

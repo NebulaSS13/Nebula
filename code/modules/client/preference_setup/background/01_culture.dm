@@ -64,7 +64,7 @@
 	// This is a bit noodly. If pref.cultural_info[TAG_CULTURE] is null, then we haven't finished loading/sanitizing, which means we might purge
 	// numbers or w/e from someone's name by comparing them to the map default. So we just don't bother sanitizing at this point otherwise.
 	if(pref.cultural_info[TAG_CULTURE])
-		var/decl/cultural_info/check = decls_repository.get_decl(pref.cultural_info[TAG_CULTURE])
+		var/decl/cultural_info/check = GET_DECL(pref.cultural_info[TAG_CULTURE])
 		if(check)
 			pref.real_name = check.sanitize_name(pref.real_name, pref.species)
 			if(!pref.real_name)
@@ -81,7 +81,7 @@
 		var/entry = pref.cultural_info[token]
 		if(entry)
 			if(ispath(entry, /decl/cultural_info))
-				var/decl/cultural_info/culture = decls_repository.get_decl(entry)
+				var/decl/cultural_info/culture = GET_DECL(entry)
 				entry = culture.name
 		to_file(S[token], entry)
 
@@ -89,7 +89,7 @@
 	. = list()
 	for(var/token in tokens)
 
-		var/decl/cultural_info/culture = decls_repository.get_decl(pref.cultural_info[token])
+		var/decl/cultural_info/culture = GET_DECL(pref.cultural_info[token])
 
 		. += "<table width = '100%'>"
 		. += "<tr><td colspan=3><center><h3>[culture.desc_type]: <a href='?src=\ref[src];expand_options_[token]=1'>[culture.name] <small>\[[expanded[token] ? "-" : "+"]\]</small></a></h3>"
@@ -99,7 +99,7 @@
 			. += "</center></td></tr>"
 			. += "<tr><td colspan=3><center>"
 			for(var/culture_path in valid_values)
-				var/decl/cultural_info/culture_data = decls_repository.get_decl(culture_path)
+				var/decl/cultural_info/culture_data = GET_DECL(culture_path)
 				if(pref.cultural_info[token] == culture_data.type)
 					. += "<span class='linkOn'>[culture_data.name]</span> "
 				else

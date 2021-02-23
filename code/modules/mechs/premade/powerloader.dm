@@ -114,7 +114,7 @@
 		body = new /obj/item/mech_component/chassis/heavy(src)
 		body.color = "#385b3c"
 
-	material = decls_repository.get_decl(/decl/material/solid/metal/plasteel/ocp)
+	material = GET_DECL(/decl/material/solid/metal/plasteel/ocp)
 
 /mob/living/exosuit/premade/firefighter/spawn_mech_equipment()
 	..()

@@ -222,7 +222,7 @@
 			return TRUE
 		else
 			for(var/rtype in container?.reagents?.reagent_volumes)
-				var/decl/material/liquid/ethanol/booze = decls_repository.get_decl(rtype)
+				var/decl/material/liquid/ethanol/booze = GET_DECL(rtype)
 				if(istype(booze) && booze.strength <= 40)
 					return TRUE
 	return FALSE

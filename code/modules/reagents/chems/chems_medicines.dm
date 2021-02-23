@@ -109,13 +109,13 @@
 	var/removing = (4 * removed)
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	for(var/R in ingested.reagent_volumes)
-		var/decl/material/chem = decls_repository.get_decl(R)
+		var/decl/material/chem = GET_DECL(R)
 		if((remove_generic && chem.toxicity) || (R in remove_toxins))
 			M.reagents.remove_reagent(R, removing)
 			return
 
 	for(var/R in M.reagents?.reagent_volumes)
-		var/decl/material/chem = decls_repository.get_decl(R)
+		var/decl/material/chem = GET_DECL(R)
 		if((remove_generic && chem.toxicity) || (R in remove_toxins))
 			M.reagents.remove_reagent(R, removing)
 			return

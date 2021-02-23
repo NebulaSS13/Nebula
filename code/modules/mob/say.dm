@@ -106,7 +106,7 @@
 /mob/proc/parse_language(var/message)
 	var/prefix = copytext_char(message,1,2)
 	if(length(message) >= 1 && prefix == get_prefix_key(/decl/prefix/audible_emote))
-		return decls_repository.get_decl(/decl/language/noise)
+		return GET_DECL(/decl/language/noise)
 
 	if(length(message) >= 2 && is_language_prefix(prefix))
 		var/language_prefix = lowertext(copytext_char(message, 2 ,3))

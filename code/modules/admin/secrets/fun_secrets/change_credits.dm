@@ -12,7 +12,7 @@ GLOBAL_VAR_INIT(end_credits_title, null)
 	var/music_track/selected = input("Select a music track for the credits.", "Server music list") as null|anything in sounds
 
 	if(selected)
-		var/music_track/track = decls_repository.get_decl(selected)
+		var/music_track/track = GET_DECL(selected)
 		GLOB.end_credits_song = track.song
 	
 	SSstatistics.add_field_details("admin_verb","CECS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

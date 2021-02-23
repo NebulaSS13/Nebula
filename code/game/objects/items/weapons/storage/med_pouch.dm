@@ -185,7 +185,7 @@ Single Use Emergency Pouches
 
 /obj/item/chems/pill/pouch_pill/initialize_reagents()
 	reagents.add_reagent(chem_type, chem_amount)
-	var/decl/material/reagent = decls_repository.get_decl(chem_type)
+	var/decl/material/reagent = GET_DECL(chem_type)
 	SetName("emergency [reagent.liquid_name] pill ([reagents.total_volume]u)")
 
 /obj/item/chems/hypospray/autoinjector/pouch_auto

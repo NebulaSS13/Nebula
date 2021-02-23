@@ -37,7 +37,7 @@ var/list/_trait_types
 
 /mob/living/proc/SetTrait(trait_type, trait_level)
 	SHOULD_NOT_SLEEP(TRUE)
-	var/decl/trait/T = decls_repository.get_decl(trait_type)
+	var/decl/trait/T = GET_DECL(trait_type)
 	if(!T.Validate(trait_level))
 		return FALSE
 	
@@ -45,7 +45,7 @@ var/list/_trait_types
 	return TRUE
 
 /mob/living/carbon/human/SetTrait(trait_type, trait_level)
-	var/decl/trait/T = decls_repository.get_decl(trait_type)
+	var/decl/trait/T = GET_DECL(trait_type)
 	if(!T.Validate(trait_level))
 		return FALSE
 	

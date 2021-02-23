@@ -5,7 +5,7 @@
 	var/list/failed = list()
 	var/list/passed = list()
 	for(var/mat in SSmaterials.materials_by_name)
-		var/decl/material/mat_datum = decls_repository.get_decl(mat)
+		var/decl/material/mat_datum = GET_DECL(mat)
 		var/list/checking = list(
 			"dissolves" = mat_datum.dissolves_into,
 			"heats" = mat_datum.heating_products,
@@ -34,7 +34,7 @@
 	var/list/failed_designs = list()
 	var/list/passed_designs = list()
 	for(var/owner_mat in SSmaterials.materials_by_name)
-		var/decl/material/mat_datum = decls_repository.get_decl(owner_mat)
+		var/decl/material/mat_datum = GET_DECL(owner_mat)
 		for(var/datum/stack_recipe/recipe in mat_datum.get_recipes())
 			var/obj/product = recipe.spawn_result()
 			var/failed

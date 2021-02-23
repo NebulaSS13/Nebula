@@ -110,7 +110,7 @@
 	slowdown = species.get_slowdown(owner)
 	if(species)
 		for(var/attack_type in species.unarmed_attacks)
-			var/decl/natural_attack/attack = decls_repository.get_decl(attack_type)
+			var/decl/natural_attack/attack = GET_DECL(attack_type)
 			if(istype(attack) && (organ_tag in attack.usable_with_limbs))
 				LAZYADD(unarmed_attacks, attack_type)
 
@@ -1161,7 +1161,7 @@ obj/item/organ/external/proc/remove_clamps()
 
 /obj/item/organ/external/proc/get_dexterity()
 	if(model)
-		var/decl/prosthetics_manufacturer/R = decls_repository.get_decl(model)
+		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
 		if(R)
 			return R.manual_dexterity
 	if(species)
@@ -1180,9 +1180,9 @@ obj/item/organ/external/proc/remove_clamps()
 		PRINT_STACK_TRACE("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
 		company = /decl/prosthetics_manufacturer
 	
-	var/decl/prosthetics_manufacturer/R = decls_repository.get_decl(company)
+	var/decl/prosthetics_manufacturer/R = GET_DECL(company)
 	if(!R.check_can_install(organ_tag, (owner?.get_bodytype() || GLOB.using_map.default_bodytype), (owner?.get_species_name() || GLOB.using_map.default_species)))
-		R = decls_repository.get_decl(/decl/prosthetics_manufacturer)
+		R = GET_DECL(/decl/prosthetics_manufacturer)
 
 	model = company
 	force_icon = R.icon
@@ -1472,7 +1472,7 @@ obj/item/organ/external/proc/remove_clamps()
 /obj/item/organ/external/proc/is_robotic()
 	. = FALSE
 	if(BP_IS_PROSTHETIC(src) && model)
-		var/decl/prosthetics_manufacturer/R = decls_repository.get_decl(model)
+		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
 		. = R && R.is_robotic
 
 /obj/item/organ/external/proc/has_growths()

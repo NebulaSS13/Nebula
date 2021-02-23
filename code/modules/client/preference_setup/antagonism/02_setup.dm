@@ -37,7 +37,7 @@
 	if(!istype(pref.uplink_sources))
 		pref.uplink_sources = list()
 		for(var/entry in GLOB.default_uplink_source_priority)
-			pref.uplink_sources += decls_repository.get_decl(entry)
+			pref.uplink_sources += GET_DECL(entry)
 
 /datum/category_item/player_setup_item/antagonism/basic/content(var/mob/user)
 	. +="<b>Antag Setup:</b><br>"

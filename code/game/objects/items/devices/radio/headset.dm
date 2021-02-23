@@ -50,7 +50,7 @@
 /obj/item/radio/headset/handle_message_mode(mob/living/M, message, channel)
 	if (channel == "special")
 		if (translate_binary)
-			var/decl/language/binary = decls_repository.get_decl(/decl/language/binary)
+			var/decl/language/binary = GET_DECL(/decl/language/binary)
 			binary.broadcast(M, message)
 		return null
 

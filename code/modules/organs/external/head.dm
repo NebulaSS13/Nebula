@@ -80,7 +80,7 @@
 	. = ..(company, skip_prosthetics, 1)
 	has_lips = null
 	if(model)
-		var/decl/prosthetics_manufacturer/R = decls_repository.get_decl(model)
+		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
 		can_intake_reagents = R.can_eat
 		draw_eyes = R.has_eyes
 

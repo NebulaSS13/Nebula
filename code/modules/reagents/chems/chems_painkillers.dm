@@ -56,7 +56,7 @@
 	if(ingested)
 		var/list/pool = M.reagents.reagent_volumes | ingested.reagent_volumes
 		for(var/rtype in pool)
-			var/decl/material/liquid/ethanol/booze = decls_repository.get_decl(rtype)
+			var/decl/material/liquid/ethanol/booze = GET_DECL(rtype)
 			if(!istype(booze) ||LAZYACCESS(M.chem_doses, rtype) < 2) //let them experience false security at first
 				continue
 			. = 1

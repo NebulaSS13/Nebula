@@ -10,7 +10,7 @@
 
 datum/track/proc/GetTrack()
 	if(ispath(track, /music_track))
-		var/music_track/music_track = decls_repository.get_decl(track)
+		var/music_track/music_track = GET_DECL(track)
 		return music_track.song
 	return track // Allows admins to continue their adminbus simply by overriding the track var
 

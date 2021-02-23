@@ -15,7 +15,7 @@
 /proc/iscultist(var/mob/player)
 	if(!player.mind)
 		return 0
-	var/decl/special_role/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
 	if(player.mind in cult.current_antagonists)
 		return 1
 
@@ -127,7 +127,7 @@
 		update_cult_magic(to_update)
 
 /decl/special_role/cultist/proc/update_cult_magic(var/list/to_update)
-	var/decl/special_role/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
 	if(CULT_RUNES_1 in to_update)
 		for(var/datum/mind/H in cult.current_antagonists)
 			if(H.current)
@@ -156,7 +156,7 @@
 
 /decl/special_role/cultist/Topic(href, href_list)
 	if(href_list["confirmleave"])
-		var/decl/special_role/cult = decls_repository.get_decl(/decl/special_role/cultist)
+		var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
 		cult.remove_antagonist(usr.mind, 1)
 
 /decl/special_role/cultist/proc/remove_cultiness(var/amount)

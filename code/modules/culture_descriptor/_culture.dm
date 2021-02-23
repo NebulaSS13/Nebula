@@ -42,11 +42,11 @@
 /decl/cultural_info/proc/get_random_name(var/mob/M, var/gender)
 	var/decl/language/_language
 	if(name_language)
-		_language = decls_repository.get_decl(name_language)
+		_language = GET_DECL(name_language)
 	else if(default_language)
-		_language = decls_repository.get_decl(default_language)
+		_language = GET_DECL(default_language)
 	else if(language)
-		_language = decls_repository.get_decl(language)
+		_language = GET_DECL(language)
 	if(_language)
 		return _language.get_random_name(gender)
 	return capitalize(pick(gender==FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
@@ -70,13 +70,13 @@
 	if(LAZYLEN(spoken_langs))
 		var/list/spoken_lang_names = list()
 		for(var/thing in spoken_langs)
-			var/decl/language/lang = decls_repository.get_decl(thing)
+			var/decl/language/lang = GET_DECL(thing)
 			spoken_lang_names |= lang.name
 		. += "<b>Language(s):</b> [english_list(spoken_lang_names)]."
 	if(LAZYLEN(secondary_langs))
 		var/list/secondary_lang_names = list()
 		for(var/thing in secondary_langs)
-			var/decl/language/lang = decls_repository.get_decl(thing)
+			var/decl/language/lang = GET_DECL(thing)
 			secondary_lang_names |= lang.name
 		. += "<b>Optional language(s):</b> [english_list(secondary_lang_names)]."
 	if(!isnull(economic_power))

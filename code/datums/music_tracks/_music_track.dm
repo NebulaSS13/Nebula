@@ -8,7 +8,7 @@
 	var/volume = 70
 
 /music_track/New()
-	license = decls_repository.get_decl(license)
+	license = GET_DECL(license)
 
 /music_track/proc/play_to(var/listener)
 	to_chat(listener, "<span class='good'>Now Playing:</span>")

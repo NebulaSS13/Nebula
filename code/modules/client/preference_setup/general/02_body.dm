@@ -95,7 +95,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	for(var/limb in pref.rlimb_data)
 		var/model = pref.rlimb_data[limb]
 		if(ispath(model))
-			var/decl/prosthetics_manufacturer/model_data = decls_repository.get_decl(model)
+			var/decl/prosthetics_manufacturer/model_data = GET_DECL(model)
 			rlimb_string_data[limb] = model_data.name
 	to_file(S["rlimb_data"], rlimb_string_data)
 
@@ -242,7 +242,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			var/decl/prosthetics_manufacturer/R = pref.rlimb_data[name]
 			if(!ispath(R, /decl/prosthetics_manufacturer))
 				R = /decl/prosthetics_manufacturer
-			R = decls_repository.get_decl(R)
+			R = GET_DECL(R)
 			. += "\t[R.name] [organ_name] prosthesis"
 		else if(status == "amputated")
 			++ind

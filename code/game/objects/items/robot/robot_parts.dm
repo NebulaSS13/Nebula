@@ -23,7 +23,7 @@
 		if(!ispath(model, /decl/prosthetics_manufacturer))
 			model = /decl/prosthetics_manufacturer
 		model_info = model
-		var/decl/prosthetics_manufacturer/R = decls_repository.get_decl(model)
+		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
 		if(R)
 			SetName("[R.name] [initial(name)]")
 			desc = "[R.desc]"

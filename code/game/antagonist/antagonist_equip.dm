@@ -18,7 +18,7 @@
 		player.species.equip_survival_gear(player)
 
 	if(default_outfit)
-		var/decl/hierarchy/outfit/outfit = decls_repository.get_decl(default_outfit)
+		var/decl/hierarchy/outfit/outfit = GET_DECL(default_outfit)
 		outfit.equip(player)
 
 	create_id(player)

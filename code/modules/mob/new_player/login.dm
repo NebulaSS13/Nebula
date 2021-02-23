@@ -31,7 +31,7 @@
 		client.prefs?.apply_post_login_preferences()
 		maybe_send_staffwarns("connected as new player")
 
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
 	var/decl/security_level/SL = security_state.current_security_level
 	var/alert_desc = ""
 	if(SL.up_description)

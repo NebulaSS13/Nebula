@@ -105,7 +105,7 @@ Machinery implementation
 
 /obj/machinery/Initialize()
 	for(var/path in public_variables)
-		public_variables[path] = decls_repository.get_decl(path)
+		public_variables[path] = GET_DECL(path)
 	for(var/path in public_methods)
-		public_methods[path] = decls_repository.get_decl(path)
+		public_methods[path] = GET_DECL(path)
 	. = ..()

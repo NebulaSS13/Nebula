@@ -27,11 +27,11 @@
 	if(ispath(_mat, /decl/material))
 		material = _mat
 	if(ispath(material, /decl/material))
-		material = decls_repository.get_decl(material)
+		material = GET_DECL(material)
 	if(ispath(_reinf_mat, /decl/material))
 		reinf_material = _reinf_mat
 	if(ispath(reinf_material, /decl/material))
-		reinf_material = decls_repository.get_decl(reinf_material)
+		reinf_material = GET_DECL(reinf_material)
 	. = ..()
 	update_materials()
 	if(!CanFluidPass())

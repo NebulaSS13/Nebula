@@ -7,7 +7,7 @@
 		use_attack = null
 		var/list/other_attacks = list()
 		for(var/u_attack_type in available_attacks)
-			var/decl/natural_attack/u_attack = decls_repository.get_decl(u_attack_type)
+			var/decl/natural_attack/u_attack = GET_DECL(u_attack_type)
 			if(!u_attack.is_usable(src, target, hit_zone))
 				continue
 			if(u_attack.is_starting_default)
@@ -284,7 +284,7 @@
 	set src = usr
 	var/list/choices
 	for(var/thing in get_natural_attacks())
-		var/decl/natural_attack/u_attack = decls_repository.get_decl(thing)
+		var/decl/natural_attack/u_attack = GET_DECL(thing)
 		if(istype(u_attack))
 			var/image/radial_button = new
 			radial_button.name = capitalize(u_attack.name)

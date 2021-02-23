@@ -207,7 +207,7 @@
 			src.healths.icon_state = "health7"
 
 	if (src.syndicate && src.client)
-		var/decl/special_role/traitors = decls_repository.get_decl(/decl/special_role/traitor)
+		var/decl/special_role/traitors = GET_DECL(/decl/special_role/traitor)
 		for(var/datum/mind/tra in traitors.current_antagonists)
 			if(tra.current)
 				// TODO: Update to new antagonist system.

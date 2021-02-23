@@ -64,7 +64,7 @@
 				var/percentage = round(mixture.gas[mix]/total_moles * 100, 0.01)
 				if(!percentage)
 					continue
-				var/decl/material/mat = decls_repository.get_decl(mix)
+				var/decl/material/mat = GET_DECL(mix)
 				switch(mode)
 					if(MV_MODE)
 						perGas_add_string = ", Moles: [round(mixture.gas[mix], 0.01)]"

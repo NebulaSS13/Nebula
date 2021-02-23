@@ -314,7 +314,7 @@ its easier to just keep the beam vertical.
 /atom/proc/try_detonate_reagents(var/severity = 3)
 	if(reagents)
 		for(var/rtype in reagents.reagent_volumes)
-			var/decl/material/R = decls_repository.get_decl(rtype)
+			var/decl/material/R = GET_DECL(rtype)
 			R.explosion_act(src, severity)
 
 /atom/proc/explosion_act(var/severity)

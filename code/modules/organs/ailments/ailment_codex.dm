@@ -29,7 +29,7 @@
 			var/obj/item/thing = ailment.treated_by_item_type
 			ailment_cures += "[ailment.treated_by_item_cost] x [initial(thing.name)]"
 		if(ailment.treated_by_reagent_type)
-			var/decl/material/mat = decls_repository.get_decl(ailment.treated_by_reagent_type)
+			var/decl/material/mat = GET_DECL(ailment.treated_by_reagent_type)
 			ailment_cures += "[ailment.treated_by_reagent_dosage]u [mat.name]"
 		if(!length(ailment_cures))
 			ailment_cures += "Unknown."

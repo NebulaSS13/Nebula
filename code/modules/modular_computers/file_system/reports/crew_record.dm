@@ -73,7 +73,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		formal_name = H.real_name
 		if(H.client && H.client.prefs)
 			for(var/culturetag in H.client.prefs.cultural_info)
-				var/decl/cultural_info/culture = decls_repository.get_decl(H.client.prefs.cultural_info[culturetag])
+				var/decl/cultural_info/culture = GET_DECL(H.client.prefs.cultural_info[culturetag])
 				if(H.char_rank && H.char_rank.name_short)
 					formal_name = "[formal_name][culture.get_formal_name_suffix()]"
 				else
@@ -129,7 +129,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		if(H.client && H.client.prefs)
 			var/list/qualifications
 			for(var/culturetag in H.client.prefs.cultural_info)
-				var/decl/cultural_info/culture = decls_repository.get_decl(H.client.prefs.cultural_info[culturetag])
+				var/decl/cultural_info/culture = GET_DECL(H.client.prefs.cultural_info[culturetag])
 				var/extra_note = culture.get_qualifications()
 				if(extra_note)
 					LAZYADD(qualifications, extra_note)

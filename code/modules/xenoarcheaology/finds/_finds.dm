@@ -9,16 +9,16 @@
 									//used in conjunction with analysis machines to determine correct suspension field type
 
 /datum/find/New(var/digsite_type, var/exc_req)
-	var/decl/xenoarch_digsite/digsite = decls_repository.get_decl(digsite_type)
+	var/decl/xenoarch_digsite/digsite = GET_DECL(digsite_type)
 	find_type = pickweight(digsite.find_types)
 	excavation_required = exc_req
 	clearance_range = rand(4, 12)
 	dissonance_spread = rand(1500, 2500) / 100
 
 /datum/find/proc/get_responsive_reagent()
-	var/decl/archaeological_find/find = decls_repository.get_decl(find_type)
+	var/decl/archaeological_find/find = GET_DECL(find_type)
 	return find.responsive_reagent
 
 /datum/find/proc/spawn_find_item(location)
-	var/decl/archaeological_find/find = decls_repository.get_decl(find_type)
+	var/decl/archaeological_find/find = GET_DECL(find_type)
 	return find.create_find(location)

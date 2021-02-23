@@ -218,7 +218,7 @@ var/list/gear_datums = list()
 		if(allowed && G.allowed_skills)
 			var/list/skills_required = list()//make it into instances? instead of path
 			for(var/skill in G.allowed_skills)
-				var/decl/hierarchy/skill/instance = decls_repository.get_decl(skill)
+				var/decl/hierarchy/skill/instance = GET_DECL(skill)
 				skills_required[instance] = G.allowed_skills[skill]
 
 			allowed = skill_check(jobs, skills_required)//Checks if a single job has all the skills required

@@ -34,7 +34,7 @@
 	set name = "Join as Actor"
 	set desc = "Join as an Actor to entertain the crew through television!"
 
-	var/decl/special_role/actors = decls_repository.get_decl(/decl/special_role/actor)
+	var/decl/special_role/actors = GET_DECL(/decl/special_role/actor)
 	if(!MayRespawn(1) || !actors.can_become_antag(usr.mind, 1))
 		return
 

@@ -11,7 +11,7 @@
 	var/one_access = FALSE //if set, door would receive OR instead of AND on the access restrictions.
 
 /obj/machinery/cannot_transition_to(state_path, mob/user)
-	var/decl/machine_construction/state = decls_repository.get_decl(state_path)
+	var/decl/machine_construction/state = GET_DECL(state_path)
 	if(state && !state.locked && construct_state && construct_state.locked) // we're locked, we're becoming unlocked
 		for(var/obj/item/stock_parts/access_lock/lock in get_all_components_of_type(/obj/item/stock_parts/access_lock))
 			if(lock.locked && !lock.check_access(user))

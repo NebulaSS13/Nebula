@@ -22,7 +22,7 @@
 	if(. == INITIALIZE_HINT_QDEL)
 		return
 
-	current_grab = decls_repository.get_decl(use_grab_state)
+	current_grab = GET_DECL(use_grab_state)
 	if(!istype(current_grab))
 		return INITIALIZE_HINT_QDEL
 	assailant = loc

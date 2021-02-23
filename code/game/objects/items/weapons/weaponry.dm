@@ -33,7 +33,7 @@
 
 	if(iscultist(M))
 		M.visible_message("<span class='notice'>\The [user] waves \the [src] over \the [M]'s head.</span>")
-		var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+		var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 		cult.offer_uncult(M)
 		return
 

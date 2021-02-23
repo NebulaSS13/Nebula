@@ -276,3 +276,5 @@
 #else
 #define hex2num(X) text2num(X, 16)
 #endif
+
+#define GET_DECL(D) (ispath(D, /decl) ? (decls_repository.fetched_decls[D] || decls_repository.get_decl(D)) : null)

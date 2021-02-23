@@ -535,7 +535,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		return 0
 
 	for(var/attack_type in unarmed_attacks)
-		var/decl/natural_attack/attack = decls_repository.get_decl(attack_type)
+		var/decl/natural_attack/attack = GET_DECL(attack_type)
 		if(!istype(attack) || !attack.is_usable(H))
 			continue
 		if(attack.shredding)
@@ -807,15 +807,15 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				else if(damage_types[kind] < 1)
 					dat += "</br><b>Resistant to [kind].</b>"
 			if(breath_type)
-				var/decl/material/mat = decls_repository.get_decl(breath_type)
+				var/decl/material/mat = GET_DECL(breath_type)
 				dat += "</br><b>They breathe [mat.gas_name].</b>"
 			if(exhale_type)
-				var/decl/material/mat = decls_repository.get_decl(exhale_type)
+				var/decl/material/mat = GET_DECL(exhale_type)
 				dat += "</br><b>They exhale [mat.gas_name].</b>"
 			if(LAZYLEN(poison_types))
 				var/list/poison_names = list()
 				for(var/g in poison_types)
-					var/decl/material/mat = decls_repository.get_decl(exhale_type)
+					var/decl/material/mat = GET_DECL(exhale_type)
 					poison_names |= mat.gas_name
 				dat += "</br><b>[capitalize(english_list(poison_names))] [LAZYLEN(poison_names) == 1 ? "is" : "are"] poisonous to them.</b>"
 			dat += "</small>"
@@ -854,7 +854,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		var/pain_level = pain_emotes_with_pain_level[pain_emotes]
 		if(pain_level >= pain_power)
 			// This assumes that if a pain-level has been defined it also has a list of emotes to go with it
-			var/decl/emote/E = decls_repository.get_decl(pick(pain_emotes))
+			var/decl/emote/E = GET_DECL(pick(pain_emotes))
 			return E.key
 
 /decl/species/proc/handle_exertion(mob/living/carbon/human/H)
@@ -878,7 +878,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		if (prob(10))
 			var/list/active_emotes = synthetic ? exertion_emotes_synthetic : exertion_emotes_biological
 			if(length(active_emotes))
-				var/decl/emote/exertion_emote = decls_repository.get_decl(pick(active_emotes))
+				var/decl/emote/exertion_emote = GET_DECL(pick(active_emotes))
 				exertion_emote.do_emote(H)
 
 /decl/species/proc/get_default_name()

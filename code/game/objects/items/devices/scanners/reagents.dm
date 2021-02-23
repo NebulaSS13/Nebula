@@ -25,7 +25,7 @@
 	. = list("Chemicals found in [O]:")
 	var/one_percent = O.reagents.total_volume / 100
 	for (var/rtype in O.reagents.reagent_volumes)
-		var/decl/material/R = decls_repository.get_decl(rtype)
+		var/decl/material/R = GET_DECL(rtype)
 		. += "[R.name][details ? ": [REAGENT_VOLUME(O.reagents, rtype) / one_percent]%" : ""]"
 
 /obj/item/scanner/reagent/adv

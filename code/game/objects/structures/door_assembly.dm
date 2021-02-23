@@ -112,7 +112,7 @@
 		if (WT.remove_fuel(0, user))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 			if(glass == 1)
-				var/decl/material/glass_material_datum = decls_repository.get_decl(glass_material)
+				var/decl/material/glass_material_datum = GET_DECL(glass_material)
 				if(glass_material_datum)
 					var/mat_name = glass_material_datum.solid_name || glass_material_datum.name
 					user.visible_message("[user] welds the [mat_name] plating off the airlock assembly.", "You start to weld the [mat_name] plating off the airlock assembly.")
