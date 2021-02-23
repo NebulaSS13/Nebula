@@ -44,14 +44,16 @@ SUBSYSTEM_DEF(goals)
 		dept.update_progress(goal_type, progress)
 
 /datum/controller/subsystem/goals/proc/get_roundend_summary()
+
 	. = list()
 	var/list/all_departments = decls_repository.get_decls_of_subtype(/decl/department)
 	for(var/dtype in all_departments)
 		var/decl/department/dept = all_departments[dtype]
-		. += "<b>[dept.name] had the following shift goals:</b>"
-		. += dept.summarize_goals(show_success = TRUE)
+		if(LAZYLEN(dept.goals))
+			. += "<b>[dept.name] had the following [dept.noun] goals:</b>"
+			. += dept.summarize_goals(show_success = TRUE)
+
 	if(LAZYLEN(.))
 		. = "<br>[jointext(., "<br>")]"
 	else
 		. = "<br><b>There were no departmental goals this round.</b>"
-
