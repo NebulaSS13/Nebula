@@ -159,6 +159,8 @@
 
 	GLOB.name_set_event.register(alarm_area, src, .proc/change_area_name)
 	set_frequency(frequency)
+	for(var/device_tag in alarm_area.air_scrub_names + alarm_area.air_vent_names)
+		send_signal(device_tag, list()) // ask for updates; they initialized before us and we didn't get the data
 	queue_icon_update()
 
 /obj/machinery/alarm/get_req_access()
