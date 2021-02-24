@@ -51,10 +51,6 @@
 	build_path = /obj/machinery/power/solar_control
 	origin_tech = "{'programming':2,'powerstorage':2}"
 
-/obj/item/stock_parts/circuitboard/powermonitor
-	name = "circuitboard (power monitoring console)"
-	build_path = /obj/machinery/computer/power_monitor
-
 /obj/item/stock_parts/circuitboard/prisoner
 	name = "circuitboard (prisoner management console)"
 	build_path = /obj/machinery/computer/prisoner

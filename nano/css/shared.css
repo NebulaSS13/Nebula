@@ -30,7 +30,7 @@ hr {
     height: 1px;
 }
 
-.link, .linkOn, .linkOff, .selected, .disabled, .yellowButton, .redButton {
+.link, .linkOn, .linkOff, .selected, .disabled, .yellowButton, .redButton, .greenButton{
     float: left;
     min-width: 15px;
     height: 16px;
@@ -192,6 +192,10 @@ abbr {
 
 .yellowButton {
     background: #cacc00;
+}
+
+.greenButton {
+	background: #00aa00;
 }
 
 .highlight {
