@@ -33,7 +33,7 @@
 		M.bodytemperature = min(310, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 // Juices
-/decl/material/chem/drink/juice
+/decl/material/liquid/drink/juice
 	fruit_descriptor = "sweet"
 
 /decl/material/liquid/drink/juice/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)

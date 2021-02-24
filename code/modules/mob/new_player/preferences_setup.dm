@@ -17,12 +17,15 @@
 				hair_colour = current_species.get_random_hair_color()
 				facial_hair_colour = prob(75) ? hair_colour : current_species.get_random_facial_hair_color()
 
+		if(all_underwear)
+			all_underwear.Cut()
 		if(current_species.appearance_flags & HAS_UNDERWEAR)
-			if(all_underwear)
-				all_underwear.Cut()
 			for(var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
 				var/datum/category_item/underwear/WRI = pick(WRC.items)
 				all_underwear[WRC.name] = WRI.name
+
+		for(var/M in body_markings)
+			body_markings[M] = get_random_colour()
 
 		backpack = GET_DECL(pick(subtypesof(/decl/backpack_outfit)))
 		age = rand(current_species.min_age, current_species.max_age)

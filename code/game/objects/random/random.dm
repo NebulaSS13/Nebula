@@ -886,7 +886,7 @@ obj/random/obstruction/spawn_choices()
 	name = "random currency"
 	desc = "LOADSAMONEY!"
 	icon = 'icons/obj/items/money.dmi'
-	icon_state = "spacecash1"
+	icon_state = "cash"
 
 /obj/random/cash/spawn_choices()
 	return list(/obj/item/cash/c1 = 4,

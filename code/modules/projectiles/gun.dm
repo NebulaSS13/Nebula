@@ -177,10 +177,10 @@
 	return I
 
 /obj/item/gun/experimental_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/I = ..()
-	if(user_mob.can_wield_item(src) && is_held_twohanded(user_mob) && check_state_in_icon("[I.icon_state]-wielded", icon))
-		I.icon_state = "[I.icon_state]-wielded"
-	return I
+	var/image/ret = ..()
+	if(ret && user_mob.can_wield_item(src) && is_held_twohanded(user_mob) && check_state_in_icon("[ret.icon_state]-wielded", icon))
+		ret.icon_state = "[ret.icon_state]-wielded"
+	return ret
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.

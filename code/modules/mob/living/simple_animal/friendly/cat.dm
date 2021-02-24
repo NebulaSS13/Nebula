@@ -210,7 +210,7 @@
 	return
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
-/mob/living/simple_animal/cat/fluff/Runtime
+/mob/living/simple_animal/cat/fluff/runtime
 	name = "Runtime"
 	desc = "Her fur has the look and feel of velvet, and her tail quivers occasionally."
 	gender = FEMALE
