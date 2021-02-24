@@ -88,7 +88,7 @@
 
 /obj/item/clothing/head/helmet/riot/experimental_mob_overlay()
 	var/image/ret = ..()
-	if(up && check_state_in_icon("[ret.icon_state]_up", icon))
+	if(ret && up && check_state_in_icon("[ret.icon_state]_up", icon))
 		ret.icon_state = "[ret.icon_state]_up"
 	return ret
 

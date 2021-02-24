@@ -53,7 +53,7 @@
 
 /obj/item/clothing/suit/armor/reactive/experimental_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
-	if(active && check_state_in_icon("[ret.icon_state]_on", icon))
+	if(ret && active && check_state_in_icon("[ret.icon_state]_on", icon))
 		ret.icon_state = "[ret.icon_state]_on"
 	return ret
 	
