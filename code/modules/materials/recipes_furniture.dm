@@ -153,14 +153,6 @@
 /datum/stack_recipe/furniture/machine/spawn_result(mob/user, location, amount)
 	return new result_type(location)
 
-/datum/stack_recipe/furniture/turret
-	title = "turret frame"
-	result_type = /obj/machinery/porta_turret_construct
-	req_amount = 5
-	time = 25
-
-/datum/stack_recipe/furniture/turret/spawn_result(mob/user, location, amount)
-	return new result_type(location)
 
 /datum/stack_recipe/furniture/door_assembly
 	time = 50

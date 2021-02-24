@@ -83,13 +83,15 @@
 		chambered.expend()
 		process_chambered()
 
-/obj/item/gun/projectile/process_point_blank(obj/projectile, mob/user, atom/target)
+/obj/item/gun/projectile/process_point_blank(obj/projectile, atom/movable/firer, atom/target)
 	..()
 	if(chambered && ishuman(target))
 		var/mob/living/carbon/human/H = target
 		var/zone = BP_CHEST
-		if(user && user.zone_sel)
-			zone = user.zone_sel.selecting
+		if(isliving(firer))
+			var/mob/living/user = firer
+			if(user.zone_sel)
+				zone = user.zone_sel.selecting
 		var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(H, zone)
 		if(E)
 			chambered.put_residue_on(E)
@@ -231,7 +233,7 @@
 
 /obj/item/gun/projectile/afterattack(atom/A, mob/living/user)
 	..()
-	if(auto_eject && ammo_magazine && ammo_magazine.stored_ammo && !ammo_magazine.stored_ammo.len)
+	if(auto_eject && isliving(user) && ammo_magazine && ammo_magazine.stored_ammo && !ammo_magazine.stored_ammo.len)
 		ammo_magazine.dropInto(loc)
 		user.visible_message(
 			"[ammo_magazine] falls out and clatters on the floor!",

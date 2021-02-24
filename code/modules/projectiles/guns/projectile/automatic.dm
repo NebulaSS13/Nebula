@@ -110,9 +110,9 @@
 	launcher.unload(user)
 	return TRUE
 
-/obj/item/gun/projectile/automatic/assault_rifle/grenade/Fire(atom/target, mob/living/user, params, pointblank=0, reflex=0)
+/obj/item/gun/projectile/automatic/assault_rifle/grenade/Fire(atom/target, atom/movable/firer, clickparams, pointblank = FALSE, reflex = FALSE, set_click_cooldown = TRUE, target_zone = BP_CHEST)
 	if(use_launcher)
-		launcher.Fire(target, user, params, pointblank, reflex)
+		launcher.Fire(target, firer, clickparams, pointblank, reflex)
 		if(!launcher.chambered)
 			switch_firemodes() //switch back automatically
 	else
@@ -162,7 +162,7 @@
 	var/spin_up_time = null
 	var/sound_token
 
-/obj/item/gun/projectile/automatic/machine/Fire(atom/target, mob/living/user, clickparams, pointblank, reflex, set_click_cooldown)
+/obj/item/gun/projectile/automatic/machine/Fire(atom/target, mob/living/user, clickparams, pointblank, reflex, set_click_cooldown, target_zone)
 	if(!spin_up_time || world.time < spin_up_time + 1 SECONDS)
 		return FALSE
 	. = ..()

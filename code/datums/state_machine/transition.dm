@@ -13,4 +13,4 @@
 
 // Tells the FSM if it should or should not be allowed to transfer to the target state.
 /decl/state_transition/proc/is_open(datum/holder)
-	return FALSE 
+	return FALSE

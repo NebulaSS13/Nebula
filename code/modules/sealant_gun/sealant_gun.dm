@@ -30,7 +30,7 @@
 /obj/item/gun/launcher/sealant/mapped
 	loaded_tank = /obj/item/sealant_tank/mapped
 
-/obj/item/gun/launcher/sealant/consume_next_projectile(mob/user)
+/obj/item/gun/launcher/sealant/consume_next_projectile()
 	if(loaded_tank?.foam_charges >= foam_charges_per_shot)
 		loaded_tank.foam_charges -= foam_charges_per_shot
 		. = new /obj/item/clothing/sealant(src)

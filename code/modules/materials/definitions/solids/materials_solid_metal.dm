@@ -201,7 +201,6 @@
 	. += new/datum/stack_recipe_list("tiling", create_recipe_list(/datum/stack_recipe/tile/metal))
 	. += new/datum/stack_recipe/furniture/computerframe(src)
 	. += new/datum/stack_recipe/furniture/machine(src)
-	. += new/datum/stack_recipe/furniture/turret(src)
 	. += new/datum/stack_recipe_list("airlock assemblies", create_recipe_list(/datum/stack_recipe/furniture/door_assembly))
 	. += new/datum/stack_recipe/grenade(src)
 	. += new/datum/stack_recipe/light(src)

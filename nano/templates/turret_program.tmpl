@@ -1,0 +1,14 @@
+{{for data.area_turrets}}
+    <h2><span class="itemLabelWidest">{{:value.area_name}}:</span></h2>
+    <table style="width:100%">
+    <tr><td style="width:40%">Turret<th>Status<th>Logs</th>
+    {{for value.turrets :turretValue:turretIndex}}
+        <tr class="candystripe">
+        <td>{{:helper.link(turretValue.tag, '', {'settings' : 1, 'turret' : turretValue.tag})}}</td>
+        <td>{{:turretValue.enabled ? 'ENABLED' : 'DISABLED'}}</td>
+        <td>{{:helper.link('LOGS', '', {'logs' : 1, 'turret' : turretValue.tag})}}</td>
+    {{/for}}
+    </table>
+{{empty}}
+    No turrets located on the network. You may lack the required access.
+{{/for}}

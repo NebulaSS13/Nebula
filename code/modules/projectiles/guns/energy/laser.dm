@@ -45,12 +45,12 @@
 	max_shots = rand(3,6) //will melt down after those
 	return 1
 
-/obj/item/gun/energy/laser/practice/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+/obj/item/gun/energy/laser/practice/handle_post_fire(atom/movable/firer, atom/target, var/pointblank=0, var/reflex=0)
 	..()
 	if(hacked())
 		max_shots--
 		if(!max_shots) //uh hoh gig is up
-			to_chat(user, "<span class='danger'>\The [src] sizzles in your hands, acrid smoke rising from the firing end!</span>")
+			to_chat(firer, "<span class='danger'>\The [src] sizzles in your hands, acrid smoke rising from the firing end!</span>")
 			desc += " The optical pathway is melted and useless."
 			projectile_type = null
 
