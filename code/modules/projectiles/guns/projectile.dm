@@ -82,13 +82,15 @@
 		chambered.expend()
 		process_chambered()
 
-/obj/item/gun/projectile/process_point_blank(obj/projectile, mob/user, atom/target)
+/obj/item/gun/projectile/process_point_blank(obj/projectile, atom/movable/firer, atom/target)
 	..()
 	if(chambered && ishuman(target))
 		var/mob/living/carbon/human/H = target
 		var/zone = BP_CHEST
-		if(user && user.zone_sel)
-			zone = user.zone_sel.selecting
+		if(isliving(firer))
+			var/mob/living/user = firer
+			if(user.zone_sel)
+				zone = user.zone_sel.selecting
 		var/obj/item/organ/external/E = H.get_organ(zone)
 		if(E)
 			chambered.put_residue_on(E)

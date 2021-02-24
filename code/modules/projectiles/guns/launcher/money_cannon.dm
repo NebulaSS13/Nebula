@@ -77,7 +77,7 @@
 	to_chat(user, "<span class='notice'>You load [bling] into [src].</span>")
 	qdel(bling)
 
-/obj/item/gun/launcher/money/consume_next_projectile(mob/user=null)
+/obj/item/gun/launcher/money/consume_next_projectile()
 	if(!receptacle_value || receptacle_value < 1)
 		return null
 

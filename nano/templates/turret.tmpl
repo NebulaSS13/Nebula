@@ -1,0 +1,73 @@
+<div style="min-width: 480px">
+
+	<h3>Power System</h3>
+
+	<div class="item">
+		<div class="itemLabel">
+			Power:
+		</div>
+		<div class="itemContentNarrow">
+			{{:helper.link('On', 'power', {'set_enabled' : 1}, data.enabled ? 'selected' : null)}}
+			{{:helper.link('Off', 'close', {'set_enabled' : 0}, data.enabled ? null : 'selected')}}
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemLabel">
+			Power Cell:
+		</div>
+		{{if data.cellCharge == null}}
+			<div class="itemContent bad">
+				No cell detected!
+			</div>
+		{{else}}
+
+			{{:helper.displayBar(data.cellCharge, 0, 100, (data.cellCharge >= 50) ? 'good' : (data.cellCharge >= 25) ? 'average' : 'bad')}}
+			<div class="itemContent" style="width: 60px">
+				{{:helper.round(data.cellCharge*10)/10}}%
+			</div>
+		{{/if}}
+	</div>
+
+	<h3>Weapon System</h3>
+
+	<div class="item">
+		<div class="itemLabel">
+			Installed Weapon:
+		</div>
+		<div class="itemContent">
+			{{if data.weaponName == null}}
+				<div class="itemContent bad">
+					No weapon detected!
+				</div>
+			{{else}}
+				{{:data.weaponName}}
+			{{/if}}
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemLabel">
+			Bearing:
+		</div>
+		<div class="itemContent">
+			{{:helper.link('-10&deg;', 'triangle-1-w', {'adjust_bearing' : -10})}}
+			{{:helper.link('-5&deg;', 'triangle-1-w', {'adjust_bearing' : -5})}}
+			{{:helper.link(data.currentBearing+'&deg;', null, {'set_bearing' : 1})}}
+			{{:helper.link('+5&deg;', 'triangle-1-e', {'adjust_bearing' : 5})}}
+			{{:helper.link('+10&deg;', 'triangle-1-e', {'adjust_bearing' : 10})}}
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemLabel">
+			Control:
+		</div>
+		<div class="itemContent">
+			{{:helper.link('Manual Fire', 'alert', {'manual_fire' : 1}, null, data.weaponName ? 'redButton' : 'disabled')}}
+		</div>
+	</div>
+
+</div>
+
+

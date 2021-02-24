@@ -76,11 +76,11 @@
 /obj/item/gun/launcher/pneumatic/attack_self(mob/user)
 	eject_tank(user)
 
-/obj/item/gun/launcher/pneumatic/consume_next_projectile(mob/user=null)
+/obj/item/gun/launcher/pneumatic/consume_next_projectile(atom/movable/firer)
 	if(!item_storage.contents.len)
 		return null
 	if (!tank)
-		to_chat(user, "There is no gas tank in [src]!")
+		to_chat(firer, "There is no gas tank in [src]!")
 		return null
 
 	var/environment_pressure = 10
@@ -92,7 +92,7 @@
 
 	fire_pressure = (tank.air_contents.return_pressure() - environment_pressure)*pressure_setting/100
 	if(fire_pressure < 10)
-		to_chat(user, "There isn't enough gas in the tank to fire [src].")
+		to_chat(firer, "There isn't enough gas in the tank to fire [src].")
 		return null
 
 	var/obj/item/launched = item_storage.contents[1]
