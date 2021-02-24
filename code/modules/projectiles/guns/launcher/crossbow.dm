@@ -66,13 +66,13 @@
 /obj/item/gun/launcher/crossbow/update_release_force()
 	release_force = tension*release_speed
 
-/obj/item/gun/launcher/crossbow/consume_next_projectile(mob/user=null)
-	if(tension <= 0)
-		to_chat(user, "<span class='warning'>\The [src] is not drawn back!</span>")
+/obj/item/gun/launcher/crossbow/consume_next_projectile(atom/movable/firer)
+	if(tension <= 0 && isliving(firer))
+		to_chat(firer, "<span class='warning'>\The [src] is not drawn back!</span>")
 		return null
 	return bolt
 
-/obj/item/gun/launcher/crossbow/handle_post_fire(mob/user, atom/target)
+/obj/item/gun/launcher/crossbow/handle_post_fire(atom/movable/firer, atom/target)
 	bolt = null
 	tension = 0
 	update_icon()

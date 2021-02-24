@@ -96,7 +96,7 @@
 		chambered.activate(null)
 	return chambered
 
-/obj/item/gun/launcher/grenade/handle_post_fire(mob/user)
+/obj/item/gun/launcher/grenade/handle_post_fire(atom/movable/firer)
 	log_and_message_admins("fired a grenade ([chambered.name]) from a grenade launcher.")
 
 	chambered = null

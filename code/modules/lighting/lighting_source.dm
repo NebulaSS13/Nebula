@@ -144,8 +144,6 @@
 		lum_g = 1
 		lum_b = 1
 
-#define POLAR_TO_CART_X(R,T) ((R) * cos(T))
-#define POLAR_TO_CART_Y(R,T) ((R) * sin(T))
 #define DETERMINANT(A_X,A_Y,B_X,B_Y) ((A_X)*(B_Y) - (A_Y)*(B_X))
 #define MINMAX(NUM) ((NUM) < 0 ? -round(-(NUM)) : round(NUM))
 #define ARBITRARY_NUMBER 10

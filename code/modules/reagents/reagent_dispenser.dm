@@ -203,7 +203,7 @@
 /obj/structure/reagent_dispensers/fueltank/bullet_act(var/obj/item/projectile/Proj)
 	//FIXME: Probably should check if it can actual inflict that structure damage first.
 	if(Proj.get_structure_damage())
-		if(istype(Proj.firer))
+		if(isliving(Proj.firer))
 			var/turf/turf = get_turf(src)
 			if(turf)
 				var/area/area = turf.loc || "*unknown area*"
