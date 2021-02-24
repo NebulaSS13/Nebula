@@ -67,7 +67,7 @@ datum/preferences
 				return TOPIC_NOACTION
 
 	else if(href_list["random_name"])
-		pref.real_name = random_name(pref.gender, pref.species)
+		pref.real_name = pref.get_random_name()
 		return TOPIC_REFRESH
 
 	else if(href_list["always_random_name"])
