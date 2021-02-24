@@ -1059,7 +1059,11 @@
 	return TRUE
 
 /mob/proc/handle_pre_transformation()
-	return
+	for(var/obj/item/W in contents)
+		if(istype(W, /obj/item/implant))
+			qdel(W)
+		else
+			drop_from_inventory(W)
 
 /mob/get_mass()
 	return mob_size
@@ -1076,3 +1080,15 @@
 /mob/proc/adjust_drugged(var/amt, var/maxamt = 100)
 	drugged = Clamp(drugged + amt, 0, maxamt)
 	. = drugged
+
+/mob/proc/get_telecomms_race_info()
+	return list("Unknown", FALSE)
+
+/mob/proc/can_enter_cryopod(var/mob/user)
+	if(stat == DEAD)
+		if(user == src)
+			to_chat(src, SPAN_WARNING("You cannot use that, as you are dead."))
+		else
+			to_chat(user, SPAN_WARNING("\The [src] cannot use that, as they are dead."))
+		return FALSE
+	return TRUE

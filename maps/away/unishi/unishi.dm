@@ -1,5 +1,6 @@
 #include "unishi_areas.dm"
 #include "unishi_jobs.dm"
+#include "../../../mods/content/xenobiology/_xenobiology.dme"
 
 /obj/effect/submap_landmark/joinable_submap/unishi
 	name = "SRV Verne"

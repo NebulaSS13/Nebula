@@ -171,15 +171,6 @@
 						break
 				if(safe)
 					continue
-				// Slime reactions have extra requirements
-				if(istype(other_reaction, /datum/chemical_reaction/slime))
-					var/datum/chemical_reaction/slime/other_slime = other_reaction
-					if(other_slime.required)
-						if(!istype(reaction, /datum/chemical_reaction/slime))
-							continue
-						var/datum/chemical_reaction/slime/our_slime = reaction
-						if(!ispath(our_slime.required, other_slime.required)) // This would mean our requirement is stronger than theirs
-							continue
 
 				// Now check for reagents
 				for(var/reagent_path in other_reaction.required_reagents)

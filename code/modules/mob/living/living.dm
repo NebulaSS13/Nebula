@@ -77,9 +77,6 @@ default behaviour is:
 				forceMove(tmob.loc)
 				tmob.forceMove(oldloc)
 				now_pushing = 0
-				for(var/mob/living/carbon/slime/slime in view(1,tmob))
-					if(slime.Victim == tmob)
-						slime.UpdateFeed()
 				return
 
 			if(!can_move_mob(tmob, 0, 0))
@@ -524,17 +521,10 @@ default behaviour is:
 /mob/living/Move(a, b, flag)
 	if (buckled)
 		return
-
 	. = ..()
-
 	handle_grabs_after_move()
-
 	if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
 		s_active.close(src)
-
-	if(update_slimes)
-		for(var/mob/living/carbon/slime/M in view(1,src))
-			M.UpdateFeed()
 
 /mob/living/verb/resist()
 	set name = "Resist"

@@ -11,20 +11,6 @@
 	toxicity = 0
 	hidden_from_codex = TRUE
 
-/decl/material/liquid/slimejelly
-	name = "slime jelly"
-	lore_text = "A gooey semi-liquid produced from one of the deadliest lifeforms in existence."
-	taste_description = "slime"
-	taste_mult = 1.3
-	toxicity = 10
-	heating_products = list(
-		/decl/material/liquid/denatured_toxin = 1
-	)
-	heating_point = 100 CELSIUS
-	heating_message = "becomes clear."
-	color = "#cf3600"
-	metabolism = REM * 0.25
-
 /decl/material/liquid/plasticide
 	name = "plasticide"
 	lore_text = "Liquid plastic, do not eat."

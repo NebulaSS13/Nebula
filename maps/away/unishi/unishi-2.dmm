@@ -1676,8 +1676,8 @@
 /turf/simulated/floor/tiled,
 /area/unishi/hydro)
 "es" = (
-/mob/living/carbon/slime,
-/mob/living/carbon/slime,
+/mob/living/slime,
+/mob/living/slime,
 /mob/living/carbon/human/monkey,
 /mob/living/carbon/human/monkey,
 /mob/living/carbon/human/monkey,
@@ -1687,7 +1687,7 @@
 /obj/structure/window/borosilicate_reinforced{
 	dir = 4
 	},
-/mob/living/carbon/slime,
+/mob/living/slime,
 /mob/living/carbon/human/monkey,
 /mob/living/carbon/human/monkey,
 /turf/simulated/floor/reinforced,
@@ -1753,7 +1753,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/hydro)
 "eB" = (
-/mob/living/carbon/slime,
+/mob/living/slime,
 /mob/living/carbon/human/monkey,
 /mob/living/carbon/human/monkey,
 /turf/simulated/floor/reinforced,

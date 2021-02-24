@@ -503,13 +503,11 @@
 		return
 
 	if(src.occupant)
-		to_chat(usr, "<span class='notice'><B>\The [src] is in use.</B></span>")
+		to_chat(usr, SPAN_WARNING("\The [src] is in use."))
 		return
 
-	for(var/mob/living/carbon/slime/M in range(1,usr))
-		if(M.Victim == usr)
-			to_chat(usr, "You're too busy getting your life sucked out of you.")
-			return
+	if(!usr.can_enter_cryopod(usr))
+		return
 
 	visible_message("\The [usr] starts climbing into \the [src].", range = 3)
 

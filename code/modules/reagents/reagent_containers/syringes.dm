@@ -127,9 +127,6 @@
 			to_chat(user, "<span class='notice'>There is already a blood sample in this syringe.</span>")
 			return
 		if(istype(target, /mob/living/carbon))
-			if(isslime(target))
-				to_chat(user, "<span class='warning'>You are unable to locate any blood.</span>")
-				return
 			var/amount = REAGENTS_FREE_SPACE(reagents)
 			var/mob/living/carbon/T = target
 			if(!T.dna)
@@ -175,7 +172,7 @@
 			to_chat(user, "<span class='notice'>[target] is empty.</span>")
 			return
 
-		if(!ATOM_IS_OPEN_CONTAINER(target) && !istype(target, /obj/structure/reagent_dispensers) && !istype(target, /obj/item/slime_extract))
+		if(!ATOM_IS_OPEN_CONTAINER(target) && !istype(target, /obj/structure/reagent_dispensers))
 			to_chat(user, "<span class='notice'>You cannot directly remove reagents from this object.</span>")
 			return
 
@@ -198,7 +195,7 @@
 	if(istype(target, /obj/item/implantcase/chem))
 		return
 
-	if(!ATOM_IS_OPEN_CONTAINER(target) && !ismob(target) && !istype(target, /obj/item/chems/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/smokable/cigarette) && !istype(target, /obj/item/storage/fancy/cigarettes))
+	if(!ATOM_IS_OPEN_CONTAINER(target) && !ismob(target) && !istype(target, /obj/item/chems/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette) && !istype(target, /obj/item/storage/fancy/cigarettes))
 		to_chat(user, "<span class='notice'>You cannot directly fill this object.</span>")
 		return
 	if(!REAGENTS_FREE_SPACE(target.reagents))

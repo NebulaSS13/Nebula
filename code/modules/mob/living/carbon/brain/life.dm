@@ -176,3 +176,6 @@
 			if (!( machine.check_eye(src) ))
 				reset_view(null)
 	return 1
+
+/mob/living/carbon/brain/can_change_intent()
+	return TRUE

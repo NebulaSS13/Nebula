@@ -39,8 +39,6 @@
 			return 1
 	if (istype(other, /mob/living/carbon/human))
 		return 1
-	if (isslime(other))
-		return 1
 	return ..()
 
 /mob/living/carbon/brain/UpdateLyingBuckledAndVerbStatus()

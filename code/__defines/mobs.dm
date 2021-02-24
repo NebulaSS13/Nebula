@@ -277,7 +277,7 @@
 
 #define SPECIES_BLOOD_DEFAULT 560
 
-#define SLIME_EVOLUTION_THRESHOLD 10
+#define SLIME_EVOLUTION_THRESHOLD 15
 
 //Used in mob/proc/get_input
 #define MOB_INPUT_TEXT "text"

@@ -66,17 +66,6 @@
 		return 1
 	return 0
 
-/obj/machinery/smartfridge/secure/extract
-	name = "\improper Slime Extract Storage"
-	desc = "A refrigerated storage unit for slime extracts."
-	icon_contents = "slime"
-	initial_access = list(access_research)
-
-/obj/machinery/smartfridge/secure/extract/accept_check(var/obj/item/O)
-	if(istype(O,/obj/item/slime_extract))
-		return 1
-	return 0
-
 /obj/machinery/smartfridge/secure/medbay
 	name = "\improper Refrigerated Medicine Storage"
 	desc = "A refrigerated storage unit for storing medicine and chemicals."

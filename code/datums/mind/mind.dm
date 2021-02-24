@@ -532,11 +532,6 @@
 	if(!mind.assigned_role)
 		mind.assigned_role = GLOB.using_map.default_assistant_title
 
-//slime
-/mob/living/carbon/slime/mind_initialize()
-	..()
-	mind.assigned_role = "slime"
-
 //AI
 /mob/living/silicon/ai/mind_initialize()
 	..()

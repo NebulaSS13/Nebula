@@ -1289,7 +1289,7 @@
 /turf/simulated/floor,
 /area/ministation/science)
 "du" = (
-/mob/living/carbon/slime,
+/mob/living/slime,
 /turf/simulated/floor,
 /area/ministation/science)
 "dv" = (
