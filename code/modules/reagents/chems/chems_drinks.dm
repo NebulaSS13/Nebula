@@ -3,7 +3,7 @@
 	lore_text = "Uh, some kind of drink."
 	color = "#e78108"
 	hidden_from_codex = TRUE // They don't need to generate a codex entry, their recipes will do that.
-	value = 1.2
+	value = 0.4
 
 	var/nutrition = 0 // Per unit
 	var/hydration = 6 // Per unit

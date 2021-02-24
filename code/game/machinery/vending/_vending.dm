@@ -72,7 +72,7 @@
 /obj/machinery/vending/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(isnull(markup))
-		markup = 1 + (rand() * 2)
+		markup = 1.1 + (rand() * 0.4)
 	if(!ispath(vendor_currency, /decl/currency))
 		vendor_currency = GLOB.using_map.default_currency
 	if(product_slogans)
