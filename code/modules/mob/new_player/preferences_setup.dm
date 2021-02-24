@@ -92,3 +92,11 @@
 	dress_preview_mob(mannequin)
 
 	update_character_previews(new /mutable_appearance(mannequin))
+
+/datum/preferences/proc/get_random_name()
+	var/decl/cultural_info/culture/check_culture = cultural_info[TAG_CULTURE]
+	if(ispath(check_culture, /decl/cultural_info))
+		check_culture = GET_DECL(check_culture)
+		return check_culture.get_random_name(client?.mob, gender)
+	else
+		return random_name(gender, species)

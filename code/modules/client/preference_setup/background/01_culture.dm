@@ -68,7 +68,7 @@
 		if(check)
 			pref.real_name = check.sanitize_name(pref.real_name, pref.species)
 			if(!pref.real_name)
-				pref.real_name = random_name(pref.gender, pref.species)
+				pref.real_name = check.get_random_name(preference_mob(), pref.gender)
 
 /datum/category_item/player_setup_item/background/culture/load_character(var/savefile/S)
 	for(var/token in tokens)

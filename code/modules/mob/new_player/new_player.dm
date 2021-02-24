@@ -151,7 +151,7 @@
 			qdel(mannequin)
 
 			if(client.prefs.be_random_name)
-				client.prefs.real_name = random_name(client.prefs.gender)
+				client.prefs.real_name = client.prefs.get_random_name()
 			observer.real_name = client.prefs.real_name
 			observer.SetName(observer.real_name)
 			if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
@@ -440,7 +440,7 @@
 
 	if(GLOB.random_players)
 		client.prefs.gender = pick(MALE, FEMALE)
-		client.prefs.real_name = random_name(new_character.gender)
+		client.prefs.real_name = client.prefs.get_random_name()
 		client.prefs.randomize_appearance_and_body_for(new_character)
 	client.prefs.copy_to(new_character)
 

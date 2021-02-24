@@ -69,7 +69,7 @@ var/list/time_prefs_fixed = list()
 		GET_DECL(/decl/hierarchy/skill)
 	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
-	real_name = random_name(gender,species)
+	real_name = get_random_name()
 	b_type = RANDOM_BLOOD_TYPE
 
 	if(client && !IsGuestKey(client.key))
