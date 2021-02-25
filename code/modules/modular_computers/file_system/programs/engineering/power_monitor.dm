@@ -125,7 +125,7 @@
 		if(!CanInteract(user, state) || QDELETED(A))
 			return 0
 
-		A.operating = !A.operating
+		A.toggle_breaker()
 
 	if(href_list["toggle_powerchannel_equip"] || href_list["toggle_powerchannel_light"] || href_list["toggle_powerchannel_enviro"]) //I'm sure there's a better way to do this.
 		var/obj/machinery/power/apc/A
@@ -134,15 +134,15 @@
 
 		if(href_list["toggle_powerchannel_equip"])
 			A = locate(href_list["toggle_powerchannel_equip"])
-			powerchannel = 1
+			powerchannel = APC_POWERCHAN_EQUIPMENT
 
 		if(href_list["toggle_powerchannel_light"])
 			A = locate(href_list["toggle_powerchannel_light"])
-			powerchannel = 2
+			powerchannel = APC_POWERCHAN_LIGHTING
 
 		if(href_list["toggle_powerchannel_enviro"])
 			A = locate(href_list["toggle_powerchannel_enviro"])
-			powerchannel = 3
+			powerchannel = APC_POWERCHAN_ENVIRONMENT
 
 		if(A.is_critical && !is_sysadmin(user))
 			to_chat(user, SPAN_WARNING("Unsyndicated connections require system administrator access."))
@@ -156,20 +156,13 @@
 
 		switch(input)
 			if("ON")
-				power_setting = 3
+				power_setting = POWERCHAN_ON
 			if("OFF")
-				power_setting = 0
+				power_setting = POWERCHAN_OFF
 			if("AUTO")
-				power_setting = 4
+				power_setting = POWERCHAN_ON_AUTO
 
-		switch(powerchannel)
-			if(1)
-				A.equipment = power_setting
-			if(2)
-				A.lighting = power_setting
-			if(3)
-				A.environ = power_setting
-		A.force_update_channels()
+		A.set_channel_state_manual(powerchannel, power_setting)
 
 
 	else if( href_list["setsensor"] )

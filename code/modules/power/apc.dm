@@ -9,13 +9,8 @@
 // There are three different power channels, lighting, equipment, and enviroment
 // Each may have one of the following states
 
-#define POWERCHAN_OFF		0	// Power channel is off
-#define POWERCHAN_OFF_TEMP	1	// Power channel is off until there is power
-#define POWERCHAN_OFF_AUTO	2	// Power channel is off until power passes a threshold
-#define POWERCHAN_ON		3	// Power channel is on until there is no power
-#define POWERCHAN_ON_AUTO	4	// Power channel is on until power drops below a threshold
-
 // Power channels set to Auto change when power levels rise or drop below a threshold
+// Power channel defines have been shifted to power.dm in __defines. 2/25/2021
 
 #define AUTO_THRESHOLD_LIGHTING  50
 #define AUTO_THRESHOLD_EQUIPMENT 25
@@ -933,6 +928,16 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	emp_hardened = 1
 	to_chat(user, "\The [src] has been upgraded. It is now protected against EM pulses.")
 	return 1
+
+/obj/machinery/power/apc/proc/set_channel_state_manual(var/channel, var/state)
+	switch(channel)
+		if(APC_POWERCHAN_EQUIPMENT)
+			equipment = state
+		if(APC_POWERCHAN_LIGHTING)
+			lighting = state
+		if(APC_POWERCHAN_ENVIRONMENT)
+			environ = state
+	force_update_channels()
 
 
 
