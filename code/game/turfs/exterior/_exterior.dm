@@ -14,11 +14,11 @@
 	var/obj/effect/overmap/visitable/sector/exoplanet/owner
 
 /turf/exterior/ChangeTurf()
-	var/last_affecting_heat_sources
-	. = ..()
-	var/turf/exterior/ext = .
+	var/last_affecting_heat_sources = affecting_heat_sources
+	var/turf/exterior/ext = ..()
 	if(istype(ext))
 		ext.affecting_heat_sources = last_affecting_heat_sources
+	return ext
 
 /turf/exterior/is_plating()
 	return !density

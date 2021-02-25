@@ -22,6 +22,7 @@
 
 //Creates a new turf
 /turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+
 	if (!N)
 		return
 
@@ -39,29 +40,26 @@
 	var/old_lighting_overlay = lighting_overlay
 	var/old_corners = corners
 	var/old_ao_neighbors = ao_neighbors
+	var/old_permit_ao = permit_ao
 	var/old_above = above
 	var/old_prev_type = prev_type
-
-//	log_debug("Replacing [src.type] with [N]")
+	var/old_density = density
 
 	changing_turf = TRUE
 
-	if(connections) connections.erase_all()
+	if(connections) 
+		connections.erase_all()
 
 	overlays.Cut()
 	underlays.Cut()
 
-	// Run the Destroy() chain.
 	qdel(src)
 
 	var/old_opaque_counter = opaque_counter
-	var/turf/simulated/W = new N(src)
+	var/turf/W = new N(src)
 
 	above = old_above
 	prev_type = old_prev_type
-
-	if (permit_ao)
-		regenerate_ao()
 
 	W.opaque_counter = old_opaque_counter
 	W.RecalculateOpacity()
@@ -72,7 +70,7 @@
 	if(ispath(N, /turf/simulated))
 		if(old_fire)
 			fire = old_fire
-		if (istype(W,/turf/simulated/floor))
+		if(istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
 	else if(old_fire)
 		qdel(old_fire)
@@ -80,29 +78,37 @@
 	if(tell_universe)
 		GLOB.universe.OnTurfChange(W)
 
-	SSair.mark_for_update(src) //handle the addition of the new turf.
+	SSair.mark_for_update(W) //handle the addition of the new turf.
 
 	for(var/turf/S in range(W,1))
 		S.update_starlight()
 
-	W.post_change()
 	. = W
-
+	W.post_change()
 	W.ao_neighbors = old_ao_neighbors
 	if(lighting_overlays_initialised)
-		lighting_overlay = old_lighting_overlay
-		affecting_lights = old_affecting_lights
-		corners = old_corners
-		if((old_opacity != opacity) || (dynamic_lighting != old_dynamic_lighting))
-			reconsider_lights()
-		if(dynamic_lighting != old_dynamic_lighting)
-			if(dynamic_lighting)
-				lighting_build_overlay()
+		W.lighting_overlay = old_lighting_overlay
+		W.affecting_lights = old_affecting_lights
+		W.corners = old_corners
+		if(W.dynamic_lighting != old_dynamic_lighting)
+			if(W.dynamic_lighting)
+				W.lighting_build_overlay()
 			else
-				lighting_clear_overlay()
+				W.lighting_clear_overlay()
+			W.reconsider_lights()
+		else if(W.opacity != old_opacity)
+			W.reconsider_lights()
 
-	for(var/turf/T in RANGE_TURFS(src, 1))
-		T.update_icon()
+	for(var/turf/T in RANGE_TURFS(W, 1))
+		T.queue_icon_update()
+
+	GLOB.turf_changed_event.raise_event(W, old_density, W.density, old_opacity, W.opacity)
+	updateVisibility(W, FALSE)
+	if(W.density != old_density)
+		GLOB.density_set_event.raise_event(W, old_density, W.density)
+		W.regenerate_ao()
+	else if(W.permit_ao != old_permit_ao)
+		W.regenerate_ao()
 
 /turf/proc/transport_properties_from(turf/other)
 	if(!istype(other, src.type))
