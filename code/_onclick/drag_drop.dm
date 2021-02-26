@@ -10,7 +10,7 @@
 		. = ..()
 
 /atom/proc/handle_mouse_drop(var/atom/over, var/mob/user)
-	. = receive_mouse_drop(src, user)
+	. = over.receive_mouse_drop(src, user)
 
 // This proc checks if an atom can be mousedropped onto the target by the user.
 /atom/proc/can_mouse_drop(var/atom/over, var/mob/user = usr, var/incapacitation_flags = INCAPACITATION_DEFAULT)
