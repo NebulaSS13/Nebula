@@ -75,14 +75,7 @@
 	else
 		layer = open_layer
 
-
-	if(width > 1)
-		if(dir in list(EAST, WEST))
-			bound_width = width * world.icon_size
-			bound_height = world.icon_size
-		else
-			bound_width = world.icon_size
-			bound_height = width * world.icon_size
+	set_bounds()
 
 	if (turf_hand_priority)
 		set_extension(src, /datum/extension/turf_hand, turf_hand_priority)
@@ -129,10 +122,29 @@
 		return 0
 	return 1
 
+/obj/machinery/door/proc/set_bounds()
+	if (dir == NORTH || dir == SOUTH)
+		bound_width = width * world.icon_size
+		bound_height = world.icon_size
+	else
+		bound_width = world.icon_size
+		bound_height = width * world.icon_size
+
 /obj/machinery/door/set_density(new_density)
 	. = ..()
 	if(.)
 		explosion_resistance = density ? initial(explosion_resistance) : 0
+
+/obj/machinery/door/set_dir(new_dir)
+	if(new_dir & (EAST|WEST))
+		new_dir = WEST
+	else
+		new_dir = SOUTH
+
+	. = ..(new_dir)
+
+	if(.)
+		set_bounds()
 
 /obj/machinery/door/Bumped(atom/AM)
 	if(panel_open || operating) return
@@ -336,18 +348,11 @@
 		visible_message("<span class = 'warning'>\The [src.name] breaks!</span>")
 
 /obj/machinery/door/on_update_icon()
-	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
-		if(connections in list(WEST, EAST, EAST|WEST))
-			set_dir(SOUTH)
-		else
-			set_dir(EAST)
-	else
-		set_dir(SOUTH)
-
 	if(density)
 		icon_state = "door1"
 	else
 		icon_state = "door0"
+
 	SSradiation.resistance_cache.Remove(get_turf(src))
 
 /obj/machinery/door/proc/do_animate(animation)
@@ -446,17 +451,8 @@
 			source.thermal_conductivity = initial(source.thermal_conductivity)
 
 /obj/machinery/door/Move(new_loc, new_dir)
-	update_nearby_tiles()
-
 	. = ..()
-	if(width > 1)
-		if(dir in list(EAST, WEST))
-			bound_width = width * world.icon_size
-			bound_height = world.icon_size
-		else
-			bound_width = world.icon_size
-			bound_height = width * world.icon_size
-
+	update_nearby_tiles()
 	if(.)
 		dismantle(TRUE)
 

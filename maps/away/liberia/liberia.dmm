@@ -459,7 +459,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/cryo)
 "aY" = (
-/obj/machinery/door/airlock/multi_tile/glass/maintenance{
+/obj/machinery/door/airlock/double/glass/maintenance{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
@@ -1263,7 +1263,7 @@
 /area/liberia/hallway)
 "cj" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/multi_tile/glass/maintenance{
+/obj/machinery/door/airlock/double/glass/maintenance{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
@@ -2419,7 +2419,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/door/airlock/multi_tile/glass/maintenance{
+/obj/machinery/door/airlock/double/glass/maintenance{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,

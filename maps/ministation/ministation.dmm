@@ -7443,7 +7443,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/corner/paleblue/full,
-/obj/machinery/door/airlock/multi_tile/glass/medical{
+/obj/machinery/door/airlock/double/glass/medical{
 	autoset_access = 0;
 	name = "medbay airlock"
 	},
