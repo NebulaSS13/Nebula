@@ -66,10 +66,10 @@
 	playsound(user.loc, 'sound/weapons/handcuffs.ogg', 30, 1, -3)
 	return TRUE
 
-/obj/item/assembly/mousetrap/attack_self(mob/living/user)
+/obj/item/assembly/mousetrap/attack_self(mob/user)
 	. = toggle_arming(user) || ..()
 
-/obj/item/assembly/mousetrap/attack_hand(mob/living/user)
+/obj/item/assembly/mousetrap/attack_hand(mob/user)
 	. = toggle_arming(user) || ..()
 
 /obj/item/assembly/mousetrap/Crossed(atom/movable/AM)

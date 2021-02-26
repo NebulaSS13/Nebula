@@ -28,7 +28,7 @@
 		to_chat(user, "<span class='notice'>You have to be closer if you want to read it.</span>")
 
 //hit yourself with it
-/obj/item/holowarrant/attack_self(mob/living/user)
+/obj/item/holowarrant/attack_self(mob/user)
 	ui_interact(user)
 
 /obj/item/holowarrant/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null)

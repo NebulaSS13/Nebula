@@ -64,7 +64,7 @@
 	detail_overlay.color = detail_color
 	overlays += detail_overlay
 
-/obj/item/card/data/attackby(obj/item/I, mob/living/user)
+/obj/item/card/data/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/integrated_electronics/detailer))
 		var/obj/item/integrated_electronics/detailer/D = I
 		detail_color = D.detail_color

@@ -67,7 +67,7 @@
 
 			to_chat(user, "<span class='notice'>[html_icon(src)] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
 
-/obj/item/depth_scanner/attack_self(var/mob/living/user)
+/obj/item/depth_scanner/attack_self(var/mob/user)
 	interact(user)
 
 /obj/item/depth_scanner/interact(var/mob/user)

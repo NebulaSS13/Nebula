@@ -131,7 +131,7 @@
 	if(forceLeft)
 		B.pulse(forceLeft - 1, dirs)
 
-/obj/effect/blob/proc/attack_living(var/mob/living/L)
+/obj/effect/blob/proc/attack_living(var/mob/L)
 	if(!L)
 		return
 	var/blob_damage = pick(BRUTE, BURN)

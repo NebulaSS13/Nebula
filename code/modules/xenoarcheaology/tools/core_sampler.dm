@@ -28,7 +28,7 @@
 /obj/item/core_sampler/on_update_icon()
 	icon_state = "sampler[!!sample]"
 
-/obj/item/core_sampler/attack_self(var/mob/living/user)
+/obj/item/core_sampler/attack_self(var/mob/user)
 	if(sample)
 		to_chat(user, SPAN_NOTICE("You eject the sample."))
 		user.put_in_hands(sample)

@@ -12,7 +12,7 @@
 	. = ..()
 	color = get_random_colour(lower = 150)
 
-/obj/item/haircomb/attack_self(var/mob/living/carbon/human/user)
+/obj/item/haircomb/attack_self(mob/user)
 	if(!user.incapacitated())
 		user.visible_message("<span class='notice'>\The [user] uses \the [src] to comb their hair with incredible style and sophistication. What a [user.gender == FEMALE ? "lady" : "guy"].</span>")
 
@@ -25,10 +25,11 @@
 	icon_state = "brush"
 	item_state = "brush"
 
-/obj/item/haircomb/brush/attack_self(mob/living/carbon/human/user)
-	if(!user.incapacitated())
-		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[user.h_style]
+/obj/item/haircomb/brush/attack_self(mob/user)
+	if(ishuman(user) && !user.incapacitated())
+		var/mob/living/carbon/human/H = user
+		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[H.h_style]
 		if(hair_style.flags & VERY_SHORT)
-			user.visible_message("<span class='notice'>\The [user] just sort of runs \the [src] over their scalp.</span>")
+			H.visible_message(SPAN_NOTICE("\The [H] just sort of runs \the [src] over their scalp."))
 		else
-			user.visible_message("<span class='notice'>\The [user] meticulously brushes their hair with \the [src].</span>")
+			H.visible_message(SPAN_NOTICE("\The [H] meticulously brushes their hair with \the [src]."))

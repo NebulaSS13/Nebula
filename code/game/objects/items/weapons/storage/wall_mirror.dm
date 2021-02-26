@@ -27,7 +27,7 @@
 	if(.)
 		flick("mirror_open",src)
 
-/obj/item/storage/mirror/attack_hand(var/mob/living/carbon/human/user)
+/obj/item/storage/mirror/attack_hand(mob/user)
 	use_mirror(user)
 
 /obj/item/storage/mirror/proc/use_mirror(var/mob/living/carbon/human/user)

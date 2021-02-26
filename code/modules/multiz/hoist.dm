@@ -33,7 +33,7 @@
 
 	var/obj/structure/hoist/source_hoist
 
-/obj/effect/hoist_hook/attack_hand(mob/living/user)
+/obj/effect/hoist_hook/attack_hand(mob/user)
 	return // no, bad
 
 /obj/effect/hoist_hook/receive_mouse_drop(atom/dropping, mob/user)
@@ -156,7 +156,7 @@
 	if(. && (severity == 1 || (severity == 2 && prob(50)) || (severity == 3 && prob(25))))
 		source_hoist.break_hoist()
 
-/obj/structure/hoist/attack_hand(mob/living/user)
+/obj/structure/hoist/attack_hand(mob/user)
 	if (!ishuman(user))
 		return
 

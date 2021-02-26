@@ -138,7 +138,7 @@
 	if(udder && prob(5))
 		udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
 
-/mob/living/simple_animal/cow/attack_hand(mob/living/carbon/M)
+/mob/living/simple_animal/cow/attack_hand(mob/M)
 	if(!stat && M.a_intent == I_DISARM && icon_state != icon_dead)
 		M.visible_message("<span class='warning'>[M] tips over [src].</span>","<span class='notice'>You tip over [src].</span>")
 		Weaken(30)

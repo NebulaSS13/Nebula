@@ -169,24 +169,26 @@
 			return (base_block_chance - round(damage / 2.5)) //block bullets and beams using the old block chance
 	return base_block_chance
 
-/obj/item/shield/energy/attack_self(mob/living/user)
-	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, "<span class='warning'>You beat yourself in the head with [src].</span>")
-		user.take_organ_damage(5)
+/obj/item/shield/energy/attack_self(mob/user)
+	if((MUTATION_CLUMSY in user.mutations) && prob(50))
+		to_chat(user, SPAN_DANGER("You beat yourself in the head with [src]."))
+		if(isliving(user))
+			var/mob/living/M = user
+			M.take_organ_damage(5, 0)
 	active = !active
 	if (active)
 		force = 10
 		update_icon()
 		w_class = ITEM_SIZE_HUGE
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>\The [src] is now active.</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] is now active."))
 
 	else
 		force = 3
 		update_icon()
 		w_class = ITEM_SIZE_TINY
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>\The [src] can now be concealed.</span>")
+		to_chat(user, SPAN_NOTICE("\The [src] can now be concealed."))
 
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user

@@ -31,7 +31,7 @@
 	if(.)
 		src.emote("roars in rage!")
 
-/mob/living/simple_animal/hostile/commanded/bear/attack_hand(mob/living/carbon/human/M)
+/mob/living/simple_animal/hostile/commanded/bear/attack_hand(mob/M)
 	..()
 	if(M.a_intent == I_HURT)
 		src.emote("roars in rage!")

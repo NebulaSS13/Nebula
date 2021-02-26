@@ -1092,3 +1092,6 @@
 			to_chat(user, SPAN_WARNING("\The [src] cannot use that, as they are dead."))
 		return FALSE
 	return TRUE
+
+/mob/proc/get_species()
+	return

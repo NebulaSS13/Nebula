@@ -85,7 +85,7 @@
 	A.attack_ai(src)
 	return TRUE
 
-/atom/proc/attack_ai(mob/user)
+/atom/proc/attack_ai(mob/living/silicon/ai/user)
 	return
 
 /*

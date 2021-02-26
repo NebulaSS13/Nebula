@@ -111,9 +111,10 @@
 /obj/structure/defensive_barrier/CtrlClick(mob/living/user)
 	try_pack_up(user)
 
-/obj/structure/defensive_barrier/attack_hand(mob/living/carbon/human/user)
+/obj/structure/defensive_barrier/attack_hand(mob/user)
 
-	if(ishuman(user) && user.species.can_shred(user) && user.a_intent == I_HURT)
+	var/decl/species/species = user.get_species()
+	if(ishuman(user) && species?.can_shred(user) && user.a_intent == I_HURT)
 		take_damage(20)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		return TRUE

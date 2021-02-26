@@ -262,26 +262,27 @@
 	Proj.on_hit(src)
 	return 0
 
-/mob/living/simple_animal/attack_hand(mob/living/carbon/human/M)
+/mob/living/simple_animal/attack_hand(mob/user)
 	..()
 
-	switch(M.a_intent)
+	switch(user.a_intent)
 
 		if(I_HELP)
 			if (health > 0)
-				M.visible_message("<span class='notice'>[M] [response_help] \the [src].</span>")
-				M.update_personal_goal(/datum/goal/achievement/specific_object/pet, type)
+				user.visible_message(SPAN_NOTICE("\The [user] [response_help] \the [src]."))
+				user.update_personal_goal(/datum/goal/achievement/specific_object/pet, type)
 
 		if(I_DISARM)
-			M.visible_message("<span class='notice'>[M] [response_disarm] \the [src].</span>")
-			M.do_attack_animation(src)
+			user.visible_message(SPAN_NOTICE("\The [user] [response_disarm] \the [src]."))
+			user.do_attack_animation(src)
 			//TODO: Push the mob away or something
 
 		if(I_HURT)
 			var/dealt_damage = harm_intent_damage
 			var/harm_verb = response_harm
-			if(ishuman(M))
-				var/decl/natural_attack/attack = M.get_unarmed_attack(src)
+			if(ishuman(user))
+				var/mob/living/carbon/human/H = user
+				var/decl/natural_attack/attack = H.get_unarmed_attack(src)
 				if(istype(attack))
 					dealt_damage = attack.damage <= dealt_damage ? dealt_damage : attack.damage
 					harm_verb = pick(attack.attack_verb)
@@ -289,10 +290,8 @@
 						adjustBleedTicks(dealt_damage)
 
 			adjustBruteLoss(dealt_damage)
-			M.visible_message("<span class='warning'>[M] [harm_verb] \the [src]!</span>")
-			M.do_attack_animation(src)
-
-	return
+			user.visible_message(SPAN_DANGER("\The [user] [harm_verb] \the [src]!"))
+			user.do_attack_animation(src)
 
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/stack/medical))

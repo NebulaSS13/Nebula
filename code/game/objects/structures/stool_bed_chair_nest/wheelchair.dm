@@ -44,7 +44,7 @@
 	if(bloodiness)
 		create_track()
 
-/obj/structure/bed/chair/wheelchair/attack_hand(mob/living/user)
+/obj/structure/bed/chair/wheelchair/attack_hand(mob/user)
 	user_unbuckle_mob(user)
 
 /obj/structure/bed/chair/wheelchair/Bump(atom/A)

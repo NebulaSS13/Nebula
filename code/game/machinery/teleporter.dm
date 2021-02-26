@@ -41,7 +41,7 @@
 		to_chat(user, "<span class='notice'>The console is locked on to \[[T.loc.name]\].</span>")
 
 
-/obj/machinery/computer/teleporter/attackby(var/obj/I, var/mob/living/user)
+/obj/machinery/computer/teleporter/attackby(var/obj/I, var/mob/user)
 	if(istype(I, /obj/item/card/data/))
 		var/obj/item/card/data/C = I
 		if(stat & (NOPOWER|BROKEN) & (C.function != "teleporter"))

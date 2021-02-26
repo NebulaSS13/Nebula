@@ -58,7 +58,7 @@
 /obj/item/flame/lighter/proc/shutoff_effects(mob/user)
 	user.visible_message("<span class='notice'>[user] quietly shuts off the [src].</span>")
 
-/obj/item/flame/lighter/attack_self(mob/living/user)
+/obj/item/flame/lighter/attack_self(mob/user)
 	if(!lit)
 		if(reagents.has_reagent(/decl/material/liquid/fuel))
 			light(user)

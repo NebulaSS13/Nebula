@@ -311,7 +311,7 @@
 
 // ai attack - make lights flicker, because why not
 
-/obj/machinery/light/attack_ai(mob/user)
+/obj/machinery/light/attack_ai(mob/living/silicon/ai/user)
 	src.flicker(1)
 
 // attack with hand - remove tube/bulb

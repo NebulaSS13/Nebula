@@ -203,7 +203,7 @@
 		target_mob = user
 		MoveToTarget()
 
-/mob/living/simple_animal/hostile/attack_hand(mob/living/carbon/human/M)
+/mob/living/simple_animal/hostile/attack_hand(mob/M)
 	. = ..()
 	if(M.a_intent == I_HURT && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = M

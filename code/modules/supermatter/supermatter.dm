@@ -438,7 +438,7 @@
 		ui_interact(user)
 	return
 
-/obj/machinery/power/supermatter/attack_ai(mob/user)
+/obj/machinery/power/supermatter/attack_ai(mob/living/silicon/ai/user)
 	ui_interact(user)
 
 /obj/machinery/power/supermatter/attack_ghost(mob/user)
@@ -479,7 +479,7 @@
 		ui.set_auto_update(1)
 
 
-/obj/machinery/power/supermatter/attackby(obj/item/W, mob/living/user)
+/obj/machinery/power/supermatter/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/tape_roll))
 		to_chat(user, "You repair some of the damage to \the [src] with \the [W].")
 		damage = max(damage -10, 0)

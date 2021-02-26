@@ -293,7 +293,7 @@
 			pixel_x = 0
 			pixel_y = 0
 
-/obj/item/attack_ai(mob/user)
+/obj/item/attack_ai(mob/living/silicon/ai/user)
 	if (istype(src.loc, /obj/item/robot_module))
 		//If the item is part of a cyborg module, equip it
 		if(!isrobot(user))

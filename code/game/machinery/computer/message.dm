@@ -38,7 +38,7 @@
 				break
 	. = tracking_linked_server
 
-/obj/machinery/computer/message_monitor/attackby(obj/item/O, mob/living/user)
+/obj/machinery/computer/message_monitor/attackby(obj/item/O, mob/user)
 	if(stat & (NOPOWER|BROKEN))
 		..()
 		return

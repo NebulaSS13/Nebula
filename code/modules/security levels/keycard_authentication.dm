@@ -22,7 +22,7 @@
 	//1 = select event
 	//2 = authenticate
 
-/obj/machinery/keycard_auth/attack_ai(mob/user)
+/obj/machinery/keycard_auth/attack_ai(mob/living/silicon/ai/user)
 	to_chat(user, "<span class='warning'>A firewall prevents you from interfacing with this device!</span>")
 	return
 

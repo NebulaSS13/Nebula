@@ -199,7 +199,7 @@
 		if(istype(slime_ai))
 			return slime_ai.adjust_friendship(user, amount)
 
-/mob/living/slime/attack_hand(mob/living/carbon/human/user)
+/mob/living/slime/attack_hand(mob/user)
 
 	if(stat == DEAD)
 		visible_message(SPAN_NOTICE("\The [user] pokes \the [src]."))

@@ -112,7 +112,7 @@
 	open = round(rand(0, 1))
 	update_icon()
 
-/obj/structure/hygiene/toilet/attack_hand(var/mob/living/user)
+/obj/structure/hygiene/toilet/attack_hand(var/mob/user)
 	if(swirlie)
 		usr.visible_message(
 			"<span class='danger'>[user] slams the toilet seat onto [swirlie.name]'s head!</span>",
@@ -140,7 +140,7 @@
 /obj/structure/hygiene/toilet/on_update_icon()
 	icon_state = "toilet[open][cistern]"
 
-/obj/structure/hygiene/toilet/attackby(obj/item/I, var/mob/living/user)
+/obj/structure/hygiene/toilet/attackby(obj/item/I, var/mob/user)
 	if(isCrowbar(I))
 		to_chat(user, "<span class='notice'>You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"].</span>")
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
@@ -429,7 +429,7 @@
 		"<span class='notice'>You wash your hands using \the [src].</span>")
 
 
-/obj/structure/hygiene/sink/attackby(obj/item/O, var/mob/living/user)
+/obj/structure/hygiene/sink/attackby(obj/item/O, var/mob/user)
 	if(isplunger(O) && clogged > 0)
 		return ..()
 
@@ -449,9 +449,11 @@
 		if(B.bcell)
 			if(B.bcell.charge > 0 && B.status == 1)
 				flick("baton_active", src)
-				user.Stun(10)
-				user.stuttering = 10
-				user.Weaken(10)
+				if(isliving(user))
+					var/mob/living/M = user
+					M.Stun(10)
+					M.stuttering = 10
+					M.Weaken(10)
 				if(isrobot(user))
 					var/mob/living/silicon/robot/R = user
 					R.cell.charge -= 20

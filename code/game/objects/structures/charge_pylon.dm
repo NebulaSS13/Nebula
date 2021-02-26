@@ -8,11 +8,11 @@
 	opacity = FALSE
 	var/next_use
 
-/obj/structure/charge_pylon/attack_ai(var/mob/living/user)
+/obj/structure/charge_pylon/attack_ai(var/mob/user)
 	if(Adjacent(user))
 		attack_hand(user)
 
-/obj/structure/charge_pylon/attack_hand(var/mob/living/user)
+/obj/structure/charge_pylon/attack_hand(var/mob/user)
 	charge_user(user)
 
 /obj/structure/charge_pylon/proc/charge_user(var/mob/living/user)

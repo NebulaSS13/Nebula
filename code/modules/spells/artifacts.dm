@@ -31,9 +31,11 @@
 /obj/item/dice/d20/cursed
 	desc = "A dice with twenty sides said to have an ill effect on those that are unlucky..."
 
-/obj/item/dice/d20/cursed/attack_self(mob/living/user)
+/obj/item/dice/d20/cursed/attack_self(mob/user)
 	..()
-	if(icon_state == "[name][sides]")
-		user.adjustBruteLoss(-30)
-	else if(icon_state == "[name]1")
-		user.adjustBruteLoss(30)
+	if(isliving(user))
+		var/mob/living/M = user
+		if(icon_state == "[name][sides]")
+			M.adjustBruteLoss(-30)
+		else if(icon_state == "[name]1")
+			M.adjustBruteLoss(30)

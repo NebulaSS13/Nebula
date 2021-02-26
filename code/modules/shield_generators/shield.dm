@@ -332,6 +332,6 @@
 				if(!(F in affected_shields))
 					F.impact_effect(i, affected_shields) // Spread the effect to them
 
-/obj/effect/shield/attack_hand(var/mob/living/user)
+/obj/effect/shield/attack_hand(var/mob/user)
 	impact_effect(3) // Harmless, but still produces the 'impact' effect.
 	..()

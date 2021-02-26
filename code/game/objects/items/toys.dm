@@ -654,7 +654,7 @@
 	set_light(0.6, 0.5, 2, 2, "#ff0000")
 	return ..()
 
-/obj/item/marshalling_wand/attack_self(mob/living/user)
+/obj/item/marshalling_wand/attack_self(mob/user)
 	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
 	if (user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'>[user] beckons with \the [src], signalling forward motion.</span>",

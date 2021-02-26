@@ -115,3 +115,9 @@
 			return L
 
 	return null
+
+/mob/proc/is_silenced()
+	. = is_muzzled()
+
+/mob/proc/is_muzzled()
+	return istype(wear_mask, /obj/item/clothing/mask/muzzle) || istype(wear_mask, /obj/item/clothing/sealant)

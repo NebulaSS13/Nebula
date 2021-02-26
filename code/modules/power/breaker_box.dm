@@ -44,7 +44,7 @@
 	else
 		to_chat(user, "<span class='warning'>It seems to be offline.</span>")
 
-/obj/machinery/power/breakerbox/attack_ai(mob/user)
+/obj/machinery/power/breakerbox/attack_ai(mob/living/silicon/ai/user)
 	if(update_locked)
 		to_chat(user, "<span class='warning'>System locked. Please try again later.</span>")
 		return

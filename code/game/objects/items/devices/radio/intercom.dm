@@ -99,7 +99,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/radio/intercom/attack_ai(mob/user)
+/obj/item/radio/intercom/attack_ai(mob/living/silicon/ai/user)
 	src.add_fingerprint(user)
 	spawn (0)
 		attack_self(user)

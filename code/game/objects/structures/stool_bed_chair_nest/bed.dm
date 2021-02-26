@@ -185,7 +185,7 @@
 		return 1
 	..()
 
-/obj/structure/bed/roller/attack_hand(mob/living/user)
+/obj/structure/bed/roller/attack_hand(mob/user)
 	if(beaker && !buckled_mob)
 		remove_beaker(user)
 	else

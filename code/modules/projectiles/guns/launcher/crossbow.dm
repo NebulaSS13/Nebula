@@ -75,7 +75,7 @@
 	update_icon()
 	..()
 
-/obj/item/gun/launcher/crossbow/attack_self(mob/living/user)
+/obj/item/gun/launcher/crossbow/attack_self(mob/user)
 	if(tension)
 		if(bolt)
 			user.visible_message("[user] relaxes the tension on [src]'s string and removes [bolt].","You relax the tension on [src]'s string and remove [bolt].")
@@ -230,7 +230,7 @@
 		flick("[icon_state]-empty", src)
 
 
-/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/attack_self(mob/living/user)
+/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/attack_self(mob/user)
 	if(tension)
 		user.visible_message("[user] relaxes the tension on [src]'s string.","You relax the tension on [src]'s string.")
 		tension = 0

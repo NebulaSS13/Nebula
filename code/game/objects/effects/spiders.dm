@@ -13,7 +13,7 @@
 	if(!QDELETED(src) && (severity == 1 || (severity == 2 && prob(50) || (severity == 3 && prob(5)))))
 		qdel(src)
 
-/obj/effect/spider/attack_hand(mob/living/user)
+/obj/effect/spider/attack_hand(mob/user)
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)

@@ -24,7 +24,7 @@
 				4 = Screwdriver panel closed and is fully built (you cannot attach upgrades)
 	*/
 
-/obj/item/camera_assembly/attackby(obj/item/W, mob/living/user)
+/obj/item/camera_assembly/attackby(obj/item/W, mob/user)
 
 	switch(state)
 

@@ -517,7 +517,7 @@
 	complexity = 4
 	power_draw_per_use = 5
 
-/obj/item/integrated_circuit/input/funnel/attackby_react(obj/item/I, mob/living/user, intent)
+/obj/item/integrated_circuit/input/funnel/attackby_react(obj/item/I, mob/user, intent)
 	var/atom/movable/target = get_pin_data_as_type(IC_INPUT, 1, /atom/movable)
 	var/obj/item/chems/container = I
 
