@@ -10,7 +10,7 @@
 	var/buckle_sound
 	var/mob/living/buckled_mob = null
 
-/obj/attack_hand(mob/living/user)
+/obj/attack_hand(mob/user)
 	. = ..()
 	if(can_buckle && buckled_mob)
 		user_unbuckle_mob(user)

@@ -18,7 +18,7 @@
 		linked_god.leave_pylon()
 	return ..()
 
-/obj/structure/deity/pylon/attack_hand(var/mob/living/L)
+/obj/structure/deity/pylon/attack_hand(var/mob/L)
 	if(!linked_god)
 		return
 	if(L in intuned)

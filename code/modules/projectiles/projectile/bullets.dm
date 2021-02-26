@@ -28,7 +28,7 @@
 		var/mob/living/L = target
 		shake_camera(L, 3, 2)
 
-/obj/item/projectile/bullet/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier)
+/obj/item/projectile/bullet/attack_mob(var/mob/target_mob, var/distance, var/miss_modifier)
 	if(penetrating > 0 && damage > 20 && prob(damage))
 		mob_passthrough_check = 1
 	else

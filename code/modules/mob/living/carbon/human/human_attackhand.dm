@@ -24,16 +24,16 @@
 		if(length(limb.unarmed_attacks) && limb.is_usable())
 			. |= limb.unarmed_attacks
 
-/mob/living/carbon/human/attack_hand(mob/living/carbon/M)
+/mob/living/carbon/human/attack_hand(mob/user)
 
 	remove_cloaking_source(species)
 
 	// Grabs are handled at a lower level.
-	if(istype(M) && M.a_intent == I_GRAB)
+	if(user.a_intent == I_GRAB)
 		return ..()
 
 	// Should this all be in Touch()?
-	var/mob/living/carbon/human/H = M
+	var/mob/living/carbon/human/H = user
 	if(istype(H))
 		if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))
 			H.do_attack_animation(src)
@@ -44,14 +44,14 @@
 				if(G.resolve_openhand_attack())
 					return TRUE
 
-	switch(M.a_intent)
+	switch(user.a_intent)
 		if(I_HELP)
 			if(H != src && istype(H) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !(H.zone_sel.selecting == BP_R_ARM || H.zone_sel.selecting == BP_L_ARM))
 				if (!cpr_time)
 					return TRUE
 
-				var/pumping_skill = max(M.get_skill_value(SKILL_MEDICAL),M.get_skill_value(SKILL_ANATOMY))
-				var/cpr_delay = 15 * M.skill_delay_mult(SKILL_ANATOMY, 0.2)
+				var/pumping_skill = max(user.get_skill_value(SKILL_MEDICAL), user.get_skill_value(SKILL_ANATOMY))
+				var/cpr_delay = 15 * user.skill_delay_mult(SKILL_ANATOMY, 0.2)
 				cpr_time = 0
 
 				H.visible_message("<span class='notice'>\The [H] is trying to perform CPR on \the [src].</span>")
@@ -102,8 +102,8 @@
 							losebreath = 0
 						to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
 
-			else if(!(M == src && apply_pressure(M, M.zone_sel.selecting)))
-				help_shake_act(M)
+			else if(!(user == src && apply_pressure(user, user.zone_sel.selecting)))
+				help_shake_act(user)
 			return TRUE
 
 		if(I_HURT)
@@ -133,7 +133,7 @@
 				H.last_attack = world.time
 
 			if(!affecting || affecting.is_stump())
-				to_chat(M, "<span class='danger'>They are missing that limb!</span>")
+				to_chat(user, "<span class='danger'>They are missing that limb!</span>")
 				return TRUE
 
 			switch(src.a_intent)
@@ -146,7 +146,7 @@
 					if(MayMove() && src!=H && prob(20))
 						block = 1
 
-			if (LAZYLEN(M.grabbed_by))
+			if (LAZYLEN(user.grabbed_by))
 				// Someone got a good grip on them, they won't be able to do much damage
 				rand_damage = max(1, rand_damage - 2)
 
@@ -224,7 +224,7 @@
 
 		if(I_DISARM)
 			if(H.species)
-				admin_attack_log(M, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
+				admin_attack_log(user, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
 				H.species.disarm_attackhand(H, src)
 				return TRUE
 	. = ..()

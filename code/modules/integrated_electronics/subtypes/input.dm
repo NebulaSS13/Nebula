@@ -1141,7 +1141,7 @@
 		"on read" = IC_PINTYPE_PULSE_OUT
 	)
 
-/obj/item/integrated_circuit/input/data_card_reader/attackby_react(obj/item/I, mob/living/user, intent)
+/obj/item/integrated_circuit/input/data_card_reader/attackby_react(obj/item/I, mob/user, intent)
 	var/obj/item/card/data/card = I
 	var/write_mode = get_pin_data(IC_INPUT, 3)
 	if(istype(card))

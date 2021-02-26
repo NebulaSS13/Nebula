@@ -45,7 +45,7 @@
 	if(iscultist(user))
 		to_chat(user, "This is \a [cultname] rune.")
 
-/obj/effect/rune/attackby(var/obj/item/I, var/mob/living/user)
+/obj/effect/rune/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/book/tome) && iscultist(user))
 		user.visible_message("<span class='notice'>[user] rubs \the [src] with \the [I], and \the [src] is absorbed by it.</span>", "You retrace your steps, carefully undoing the lines of \the [src].")
 		qdel(src)
@@ -55,11 +55,11 @@
 		qdel(src)
 		return
 
-/obj/effect/rune/attack_hand(var/mob/living/user)
+/obj/effect/rune/attack_hand(var/mob/user)
 	if(!iscultist(user))
 		to_chat(user, "You can't mouth the arcane scratchings without fumbling over them.")
 		return
-	if(user.is_muzzled() || user.silent)
+	if(user.is_silenced())
 		to_chat(user, "You are unable to speak the words of the rune.")
 		return
 	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
@@ -68,7 +68,7 @@
 		return fizzle(user)
 	cast(user)
 
-/obj/effect/rune/attack_ai(var/mob/living/user) // Cult borgs!
+/obj/effect/rune/attack_ai(var/mob/user) // Cult borgs!
 	if(Adjacent(user))
 		attack_hand(user)
 
@@ -294,14 +294,14 @@
 		else
 			to_chat(user, "<span class='danger'>It is about to dissipate.</span>")
 
-/obj/effect/cultwall/attack_hand(var/mob/living/user)
+/obj/effect/cultwall/attack_hand(var/mob/user)
 	if(iscultist(user))
 		user.visible_message("<span class='notice'>\The [user] touches \the [src], and it fades.</span>", "<span class='notice'>You touch \the [src], whispering the old ritual, making it disappear.</span>")
 		qdel(src)
 	else
 		to_chat(user, "<span class='notice'>You touch \the [src]. It feels wet and becomes harder the further you push your arm.</span>")
 
-/obj/effect/cultwall/attackby(var/obj/item/I, var/mob/living/user)
+/obj/effect/cultwall/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/nullrod))
 		user.visible_message("<span class='notice'>\The [user] touches \the [src] with \the [I], and it disappears.</span>", "<span class='notice'>You disrupt the vile magic with the deadening field of \the [I].</span>")
 		qdel(src)
@@ -794,7 +794,7 @@
 		command_announcement.Announce("Gravitational anomaly has ceased.")
 		qdel(src)
 
-/obj/effect/rune/tearreality/attack_hand(var/mob/living/user)
+/obj/effect/rune/tearreality/attack_hand(var/mob/user)
 	..()
 	if(HECOMES && !iscultist(user))
 		var/input = input(user, "Are you SURE you want to sacrifice yourself?", "DO NOT DO THIS") in list("Yes", "No")

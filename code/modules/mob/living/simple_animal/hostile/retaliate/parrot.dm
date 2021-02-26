@@ -223,29 +223,21 @@
  * Attack responces
  */
 //Humans, monkeys, aliens
-/mob/living/simple_animal/hostile/retaliate/parrot/attack_hand(mob/living/carbon/M)
-	..()
-	if(client)
-		return
-
-	if(simple_parrot) //all the real stuff gets handled in /hostile/retaliate
-		return
-
-	if(!stat && M.a_intent == I_HURT)
+/mob/living/simple_animal/hostile/retaliate/parrot/attack_hand(mob/user)
+	. = ..()
+	if(!client && !simple_parrot && !stat && user.a_intent == I_HURT)
 		icon_state = "[icon_set]_fly" //It is going to be flying regardless of whether it flees or attacks
-
 		if(parrot_state == PARROT_PERCH)
 			parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
-
-		parrot_interest = M
+		parrot_interest = user
 		parrot_state = PARROT_SWOOP //The parrot just got hit, it WILL move, now to pick a direction..
-
-		if(M.health < 50) //Weakened mob? Fight back!
-			parrot_state |= PARROT_ATTACK
-		else
-			parrot_state |= PARROT_FLEE		//Otherwise, fly like a bat out of hell!
-			drop_held_item(0)
-	return
+		if(isliving(user))
+			var/mob/living/M = user
+			if(M.health < 50) //Weakened mob? Fight back!
+				parrot_state |= PARROT_ATTACK
+				return
+		parrot_state |= PARROT_FLEE		//Otherwise, fly like a bat out of hell!
+		drop_held_item(0)
 
 //Mobs with objects
 /mob/living/simple_animal/hostile/retaliate/parrot/attackby(var/obj/item/O, var/mob/user)

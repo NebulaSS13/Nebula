@@ -177,7 +177,7 @@
 			if(get_dist(M.current, src) <= 3)
 				. += M.current
 
-/obj/structure/deity/radiant_statue/attack_hand(var/mob/living/L)
+/obj/structure/deity/radiant_statue/attack_hand(var/mob/L)
 	if(!istype(L))
 		return
 	var/obj/O = L.get_equipped_item(slot_wear_suit_str)

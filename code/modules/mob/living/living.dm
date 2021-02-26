@@ -875,9 +875,6 @@ default behaviour is:
 /mob/living/proc/get_ingested_reagents()
 	return reagents
 
-/mob/living/proc/get_species()
-	return
-
 /mob/living/proc/should_have_organ(var/organ_check)
 	return FALSE
 

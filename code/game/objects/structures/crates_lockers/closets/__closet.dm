@@ -306,7 +306,7 @@
 			user.show_viewers(SPAN_DANGER("\The [user] stuffs \the [dropping] into \the [src]!"))
 		return TRUE
 
-/obj/structure/closet/attack_ai(mob/user)
+/obj/structure/closet/attack_ai(mob/living/silicon/ai/user)
 	if(istype(user, /mob/living/silicon/robot) && Adjacent(user)) // Robots can open/close it, but not the AI.
 		attack_hand(user)
 

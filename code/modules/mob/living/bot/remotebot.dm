@@ -41,7 +41,7 @@
 	s.start()
 	qdel(src)
 
-/mob/living/bot/remotebot/attackby(var/obj/item/I, var/mob/living/user)
+/mob/living/bot/remotebot/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/bot_controller) && !controller)
 		user.visible_message("\The [user] waves \the [I] over \the [src].")
 		to_chat(user, "<span class='notice'>You link \the [src] to \the [I].</span>")
@@ -162,7 +162,7 @@
 	icon = 'icons/obj/items/bot_kit.dmi'
 	icon_state = "remotebot"
 
-/obj/item/bot_kit/attack_self(var/mob/living/user)
+/obj/item/bot_kit/attack_self(var/mob/user)
 	to_chat(user, "You quickly dismantle the box and retrieve the controller and the remote bot itself.")
 	var/turf/T = get_turf(src.loc)
 	new /mob/living/bot/remotebot(T)

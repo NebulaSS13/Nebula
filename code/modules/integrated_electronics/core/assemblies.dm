@@ -410,7 +410,7 @@
 				visible_message("<span class='notice'>\The [user] points \the [src] towards \the [target].</span>")
 
 
-/obj/item/electronic_assembly/attackby(obj/item/I, mob/living/user)
+/obj/item/electronic_assembly/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/wrench))
 		if(istype(loc, /turf) && (IC_FLAG_ANCHORABLE & circuit_flags))
 			user.visible_message("\The [user] wrenches \the [src]'s anchoring bolts [anchored ? "back" : "into position"].")

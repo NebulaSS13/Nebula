@@ -114,7 +114,7 @@
 // Proc: attack_ai()
 // Parameters: None
 // Description: AI requires the RCON wire to be intact to operate the SMES.
-/obj/machinery/power/smes/buildable/attack_ai(mob/user)
+/obj/machinery/power/smes/buildable/attack_ai(mob/living/silicon/ai/user)
 	if(RCon)
 		..()
 	else // RCON wire cut

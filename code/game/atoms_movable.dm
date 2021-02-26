@@ -321,9 +321,10 @@
 /atom/movable/proc/get_bullet_impact_effect_type()
 	return BULLET_IMPACT_NONE
 
-/atom/movable/attack_hand(mob/living/user)
+/atom/movable/attack_hand(mob/user)
 	// Anchored check so we can operate switches etc on grab intent without getting grab failure msgs.
-	if(istype(user) && !user.lying && user.a_intent == I_GRAB && !anchored)
-		user.make_grab(src)
+	if(isliving(user) && !user.lying && user.a_intent == I_GRAB && !anchored)
+		var/mob/living/M = user
+		M.make_grab(src)
 		return 0
 	. = ..()

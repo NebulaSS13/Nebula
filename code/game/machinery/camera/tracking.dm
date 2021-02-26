@@ -183,7 +183,7 @@
 				return
 			sleep(10)
 
-/obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user)
+/obj/machinery/camera/attack_ai(mob/living/silicon/ai/user)
 	if (!istype(user))
 		return
 	if (!src.can_use())

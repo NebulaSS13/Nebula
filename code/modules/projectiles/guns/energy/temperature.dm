@@ -30,7 +30,7 @@
 	. = ..()
 
 
-/obj/item/gun/energy/temperature/attack_self(mob/living/user)
+/obj/item/gun/energy/temperature/attack_self(mob/user)
 	user.set_machine(src)
 	var/temp_text = ""
 	if(firing_temperature > (T0C - 50))

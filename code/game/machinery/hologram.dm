@@ -164,7 +164,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	return 0
 
 /obj/machinery/hologram/holopad/attack_ai(mob/living/silicon/ai/user)
-	if (!istype(user))
+	if(!istype(user))
 		return
 	/*There are pretty much only three ways to interact here.
 	I don't need to check for client since they're clicking on an object.

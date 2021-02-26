@@ -214,7 +214,7 @@
 		else
 			return attack_tendons(G, I, user, G.target_zone)
 
-/decl/grab/normal/proc/attack_throat(var/obj/item/grab/G, var/obj/item/W, var/mob/living/carbon/human/user)
+/decl/grab/normal/proc/attack_throat(var/obj/item/grab/G, var/obj/item/W, mob/user)
 	var/mob/living/affecting = G.get_affecting_mob()
 	if(!affecting)
 		return
@@ -257,7 +257,7 @@
 	admin_attack_log(user, affecting, "Knifed their victim", "Was knifed", "knifed")
 	return 1
 
-/decl/grab/normal/proc/attack_tendons(var/obj/item/grab/G, var/obj/item/W, var/mob/living/carbon/human/user, var/target_zone)
+/decl/grab/normal/proc/attack_tendons(var/obj/item/grab/G, var/obj/item/W, mob/user, var/target_zone)
 	var/mob/living/affecting = G.get_affecting_mob()
 	if(!affecting)
 		return

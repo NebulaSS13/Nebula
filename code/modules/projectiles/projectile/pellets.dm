@@ -16,7 +16,7 @@
 	var/pellet_loss = round((distance - 1)/range_step) //pellets lost due to distance
 	return max(pellets - pellet_loss, 1)
 
-/obj/item/projectile/bullet/pellet/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier)
+/obj/item/projectile/bullet/pellet/attack_mob(var/mob/target_mob, var/distance, var/miss_modifier)
 	if (pellets < 0) return 1
 
 	var/total_pellets = get_pellets(distance)

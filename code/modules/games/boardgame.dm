@@ -16,7 +16,7 @@
 	else
 		..()
 
-/obj/item/board/attack_hand(mob/living/carbon/human/M)
+/obj/item/board/attack_hand(mob/M)
 	if(M.machine == src)
 		return ..()
 	else

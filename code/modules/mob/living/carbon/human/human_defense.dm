@@ -213,7 +213,7 @@ meteor_act
 
 	return 1
 
-/mob/living/carbon/human/proc/attack_bloody(obj/item/W, mob/living/attacker, var/effective_force, var/hit_zone)
+/mob/living/carbon/human/proc/attack_bloody(obj/item/W, mob/attacker, var/effective_force, var/hit_zone)
 	if(W.damtype != BRUTE)
 		return
 

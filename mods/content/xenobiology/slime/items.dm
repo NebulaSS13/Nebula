@@ -78,7 +78,7 @@
 	else
 		icon_state = "golem"
 
-/obj/effect/golemrune/attack_hand(mob/living/user)
+/obj/effect/golemrune/attack_hand(mob/user)
 	var/mob/observer/ghost/ghost
 	for(var/mob/observer/ghost/O in src.loc)
 		if(!O.client)

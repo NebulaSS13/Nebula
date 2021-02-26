@@ -159,7 +159,7 @@
 		anchored = !anchored
 	return 1
 
-/obj/attack_hand(mob/living/user)
+/obj/attack_hand(mob/user)
 	if(Adjacent(user))
 		add_fingerprint(user)
 	..()

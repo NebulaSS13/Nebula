@@ -12,12 +12,12 @@
 	var/insults = 0
 	var/list/insultmsg = list("FUCK EVERYONE!", "I'M A TATER!", "ALL SECURITY TO SHOOT ME ON SIGHT!", "I HAVE A BOMB!", "CAPTAIN IS A COMDOM!", "FOR THE SYNDICATE!")
 
-/obj/item/megaphone/attack_self(mob/living/user)
-	if (user.client)
+/obj/item/megaphone/attack_self(mob/user)
+	if(user.client)
 		if(user.client.prefs.muted & MUTE_IC)
 			to_chat(src, "<span class='warning'>You cannot speak in IC (muted).</span>")
 			return
-	if(user.silent)
+	if(user.is_silenced())
 		return
 	if(spamcheck)
 		to_chat(user, "<span class='warning'>\The [src] needs to recharge!</span>")

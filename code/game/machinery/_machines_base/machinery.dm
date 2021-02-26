@@ -249,7 +249,7 @@ Class Procs:
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-/obj/machinery/attack_ai(mob/user)
+/obj/machinery/attack_ai(mob/living/silicon/ai/user)
 	if(CanUseTopic(user, DefaultTopicState()) > STATUS_CLOSE)
 		return interface_interact(user)
 
