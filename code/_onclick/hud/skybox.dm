@@ -52,10 +52,6 @@
 			screen |= skybox
 		skybox.screen_loc = "CENTER:[skybox.base_offset_x - T.x],CENTER:[skybox.base_offset_y - T.y]"
 
-/mob/Login()
-	..()
-	client.update_skybox(1)
-
 /mob/Move()
 	var/old_z = get_z(src)
 	. = ..()
