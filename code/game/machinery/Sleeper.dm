@@ -30,6 +30,8 @@
 		/decl/material/liquid/mutagenics,
 		/decl/material/liquid/acid
 	)
+	var/open_sound = 'sound/machines/podopen.ogg'
+	var/close_sound = 'sound/machines/podclose.ogg'
 
 /obj/machinery/sleeper/standard/Initialize(mapload, d, populate_parts)
 	. = ..()
@@ -313,6 +315,8 @@
 			to_chat(user, SPAN_WARNING("\The [src] is already occupied."))
 			return
 		set_occupant(M)
+		if(close_sound)
+			playsound(src, close_sound, 40)
 
 /obj/machinery/sleeper/proc/go_out()
 	if(!occupant)
@@ -322,6 +326,8 @@
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.dropInto(loc)
 	set_occupant(null)
+	if(open_sound)
+		playsound(src, open_sound, 40)
 
 	for(var/obj/O in (contents - (component_parts + loaded_canisters))) // In case an object was dropped inside or something. Excludes the beaker and component parts.
 		if(O != beaker)

@@ -12,6 +12,8 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	var/open_sound = 'sound/machines/podopen.ogg'
+	var/close_sound = 'sound/machines/podclose.ogg'
 
 /obj/machinery/bodyscanner/examine(mob/user)
 	. = ..()
@@ -58,6 +60,8 @@
 	update_use_power(POWER_USE_IDLE)
 	update_icon()
 	SetName(initial(name))
+	if(open_sound)
+		playsound(src, open_sound, 40)
 
 /obj/machinery/bodyscanner/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()
@@ -95,6 +99,8 @@
 	SetName("[name] ([occupant])")
 
 	src.add_fingerprint(user)
+	if(close_sound)
+		playsound(src, close_sound, 40)
 	return TRUE
 
 /obj/machinery/bodyscanner/on_update_icon()
