@@ -50,10 +50,16 @@
 
 /obj/structure/backup_server/attackby(obj/item/W, mob/user, var/click_params)
 	if(isCrowbar(W))
-		to_chat(user, SPAN_NOTICE("You pry out the data drive from \the [src]."))
-		playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-		var/obj/item/stock_parts/computer/hard_drive/cluster/drive = new(get_turf(src))
-		drive.origin_tech = "{'[TECH_DATA]':[rand(4,5)],'[TECH_ENGINEERING]':[rand(4,5)],'[TECH_EXOTIC_MATTER]':[rand(4,5)],'[TECH_COMBAT]':[rand(2,5)],'[TECH_ESOTERIC]':[rand(0,6)]}"
+		if(disk_looted)
+			to_chat(user, SPAN_WARNING("There's no disk in \the [src]."))
+		else
+			to_chat(user, SPAN_NOTICE("You pry out the data drive from \the [src]."))
+			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
+			var/obj/item/stock_parts/computer/hard_drive/cluster/drive = new(get_turf(src))
+			drive.origin_tech = "{'[TECH_DATA]':[rand(4,5)],'[TECH_ENGINEERING]':[rand(4,5)],'[TECH_EXOTIC_MATTER]':[rand(4,5)],'[TECH_COMBAT]':[rand(2,5)],'[TECH_ESOTERIC]':[rand(0,6)]}"
+			disk_looted = TRUE
+		return TRUE
+	. = ..()
 		
 /obj/effect/landmark/map_load_mark/ejected_datapod
 	name = "random datapod contents"
