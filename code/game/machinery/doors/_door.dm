@@ -93,12 +93,12 @@
 		PRINT_STACK_TRACE("A door with mapped access restrictions was set to autoinitialize access.")
 #endif
 
-/obj/machinery/door/LateInitialize()
+/obj/machinery/door/LateInitialize(mapload, dir=0, populate_parts=TRUE)
 	..()
 	update_connections(1)
 	update_icon()
 	update_nearby_tiles(need_rebuild=1)
-	if(autoset_access || length(req_access)) // Delayed because apparently the dir is not set by mapping and we need to wait for nearby walls to init and turn us.
+	if(populate_parts && (autoset_access || length(req_access))) // Delayed because apparently the dir is not set by mapping and we need to wait for nearby walls to init and turn us.
 		var/obj/item/stock_parts/access_lock/lock = install_component(/obj/item/stock_parts/access_lock/buildable, refresh_parts = FALSE)
 		if(autoset_access)
 			lock.autoset = TRUE
