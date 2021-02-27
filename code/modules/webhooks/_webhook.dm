@@ -1,7 +1,7 @@
 /decl/webhook
 	var/id
 	var/list/urls
-	var/mentions
+	var/list/mentions
 
 /decl/webhook/proc/get_message(var/list/data)
 	. = list()
@@ -23,18 +23,18 @@
 	)
 
 /decl/webhook/proc/send(var/list/data)
-	var/message = get_message(data)
-	var/use_mentions = get_mentions()
+	var/list/message = get_message(data)
 	if(message)
-		if(use_mentions)
-			if(message["content"])
-				message["content"] = "[use_mentions]: [message["content"]]"
-			else
-				message["content"] = "[use_mentions]"
-		message = json_encode(message)
 		. = TRUE
 		for(var/target_url in urls)
-			var/list/httpresponse = http_post(target_url, message)
+			var/url_message =  message.Copy()
+			var/list/url_mentions = jointext(get_mentions(target_url), ", ")
+			if(length(url_mentions))
+				if(url_message["content"])
+					url_message["content"] = "[url_mentions]: [url_message["content"]]"
+				else
+					url_message["content"] = "[url_mentions]"
+			var/list/httpresponse = http_post(target_url, json_encode(url_message))
 			if(!islist(httpresponse))
 				. = FALSE
 				continue
@@ -47,5 +47,8 @@
 					log_debug("Webhooks: unknown HTTP code while sending to '[target_url]': [httpresponse["status_code"]]. Data: [httpresponse["body"]].")
 			. = FALSE
 
-/decl/webhook/proc/get_mentions()
-	return mentions
+/decl/webhook/proc/get_mentions(var/mentioning_url)
+	. = mentions?.Copy()
+	var/url_mentions = LAZYACCESS(urls, mentioning_url)
+	if(length(url_mentions))
+		LAZYDISTINCTADD(., url_mentions)
