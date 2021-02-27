@@ -15,9 +15,17 @@
 
 	id = "[random_id(/obj/machinery/computer/teleporter, 1000, 9999)]"
 
-	station = locate(/obj/machinery/teleport/station, get_step(src, turn(dir, 90)))
+	for (var/dir in GLOB.cardinal)
+		var/obj/machinery/teleport/station/found_station = locate() in get_step(src, dir)
+		if(found_station)
+			station = found_station
+			break
 	if(station)
-		hub = locate(/obj/machinery/teleport/hub, get_step(station, turn(dir, 90)))
+		for (var/dir in GLOB.cardinal)
+			var/obj/machinery/teleport/hub/found_hub = locate() in get_step(station, dir)
+			if(found_hub)
+				hub = found_hub
+				break
 
 	if(istype(station))
 		station.hub = hub
@@ -192,25 +200,53 @@
 
 
 /obj/machinery/teleport/hub
-	name = "teleporter hub"
-	desc = "The teleporter hub handles all of the impossibly complex busywork required in instant matter transmission."
-	icon_state = "tele0"
-	dir = EAST
+	name = "teleporter pad"
+	desc = "The teleporter pad handles all of the impossibly complex busywork required in instant matter transmission."
+	icon_state = "pad"
 	idle_power_usage = 10
 	active_power_usage = 2000
 	var/obj/machinery/computer/teleporter/com
+	light_color = "#02d1c7"
+
+/obj/machinery/teleport/hub/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD // Hub sometimes initializes before stations and computers which mucks with icon update
+
+/obj/machinery/teleport/hub/LateInitialize()
+	. = ..()
+	queue_icon_update()
+
+/obj/machinery/teleport/hub/on_update_icon()
+	cut_overlays()
+	if (com?.station?.engaged)
+		var/image/I = image(icon, src, "[initial(icon_state)]_active_overlay")
+		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		I.layer = ABOVE_LIGHTING_LAYER
+		add_overlay(I)
+		set_light(0.4, 1.2, 4, 10)
+	else
+		set_light(0)
+		if (operable())
+			var/image/I = image(icon, src, "[initial(icon_state)]_idle_overlay")
+			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+			I.layer = ABOVE_LIGHTING_LAYER
+			add_overlay(I)
 
 /obj/machinery/teleport/hub/Bumped(var/atom/movable/M)
-	spawn()
-		if (src.icon_state == "tele1")
-			teleport(M)
-			use_power_oneoff(5000)
+	if (com?.station?.engaged)
+		teleport(M)
+		use_power_oneoff(5000)
 
 /obj/machinery/teleport/hub/proc/teleport(atom/movable/M)
+	if (!com)
+		return
 	do_teleport(M, com.locked)
 	if(com.one_time_use) //Make one-time-use cards only usable one time!
-		com.one_time_use = 0
+		com.one_time_use = FALSE
 		com.locked = null
+		if (com.station)
+			com.station.engaged = FALSE
+		queue_icon_update()
 	return
 
 /obj/machinery/teleport/hub/Destroy()
@@ -220,13 +256,35 @@
 /obj/machinery/teleport/station
 	name = "projector"
 	desc = "This machine is capable of projecting a miniature wormhole leading directly to its provided target."
-	icon_state = "controller"
-	dir = EAST
-	var/engaged = 0
+	icon_state = "station"
+	var/engaged = FALSE
 	idle_power_usage = 10
 	active_power_usage = 2000
 	var/obj/machinery/computer/teleporter/com
 	var/obj/machinery/teleport/hub/hub
+
+/obj/machinery/teleport/station/Initialize()
+	. = ..()
+	for (var/target_dir in GLOB.cardinal)
+		var/obj/machinery/teleport/hub/found_pad = locate() in get_step(src, target_dir)
+		if(found_pad)
+			set_dir(get_dir(src, found_pad))
+			break
+	queue_icon_update()
+
+/obj/machinery/teleport/station/on_update_icon()
+	. = ..()
+	cut_overlays()
+	if (engaged)
+		var/image/I = image(icon, src, "[initial(icon_state)]_active_overlay")
+		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		I.layer = ABOVE_LIGHTING_LAYER
+		add_overlay(I)
+	else if (operable())
+		var/image/I = image(icon, src, "[initial(icon_state)]_idle_overlay")
+		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		I.layer = ABOVE_LIGHTING_LAYER
+		add_overlay(I)
 
 /obj/machinery/teleport/station/attackby(var/obj/item/W, var/mob/user)
 	attack_hand(user)
@@ -254,25 +312,27 @@
 			audible_message("<span class='warning'>Failure: Unable to establish connection to provided coordinates. Please reinstate coordinate matrix.</span>")
 			return
 
+	engaged = TRUE
+	queue_icon_update()
 	if (hub)
-		hub.icon_state = "tele1"
+		hub.queue_icon_update()
 		use_power_oneoff(5000)
 		update_use_power(POWER_USE_ACTIVE)
 		hub.update_use_power(POWER_USE_ACTIVE)
 		audible_message("<span class='notice'>Teleporter engaged!</span>")
-	src.engaged = 1
 	return
 
 /obj/machinery/teleport/station/proc/disengage()
 	if(stat & BROKEN)
 		return
 
+	engaged = FALSE
+	queue_icon_update()
 	if (hub)
-		hub.icon_state = "tele0"
+		hub.queue_icon_update()
 		hub.update_use_power(POWER_USE_IDLE)
 		update_use_power(POWER_USE_IDLE)
 		audible_message("<span class='notice'>Teleporter disengaged!</span>")
-	src.engaged = 0
 	return
 
 /obj/machinery/teleport/station/Destroy()
@@ -285,9 +345,3 @@
 	. = ..()
 	if (engaged && (stat & NOPOWER))
 		disengage()
-
-/obj/machinery/teleport/station/on_update_icon()
-	if(stat & NOPOWER)
-		icon_state = panel_open ? "controller-o" : "controller-p"
-	else
-		icon_state = "controller"
