@@ -35,6 +35,8 @@
 		floortype = initial_flooring
 	if(floortype)
 		set_flooring(GET_DECL(floortype))
+	if(!ml)
+		RemoveLattice()
 
 /turf/simulated/floor/proc/set_flooring(var/decl/flooring/newflooring)
 	make_plating(defer_icon_update = 1)

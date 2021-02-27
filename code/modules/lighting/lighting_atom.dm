@@ -62,12 +62,6 @@
 		else
 			light = new /datum/light_source(src, .)
 
-/atom/Destroy()
-	if(light)
-		light.destroy()
-		light = null
-	return ..()
-
 /atom/set_opacity()
 	. = ..()
 	if(.)

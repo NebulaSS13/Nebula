@@ -10,11 +10,6 @@
 /turf/drain_power()
 	return -1
 
-/atom/Destroy()
-	if(opacity)
-		updateVisibility(src)
-	. = ..()
-
 // DOORS
 
 // Simply updates the visibility of the area when it opens/closes/destroyed.
