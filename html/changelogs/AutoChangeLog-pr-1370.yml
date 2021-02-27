@@ -1,0 +1,5 @@
+author: comma
+delete-after: true
+changes:
+  - tweak: Wall emergency lockers renamed to emergency dispensers (since they're not
+      lockers at all), and given new icon
