@@ -365,5 +365,5 @@
 
 	playsound(src, 'sound/effects/metalhit.ogg', 50, 1)
 	visible_message(SPAN_DANGER("\The [user] [pick(W.attack_verb)] \the [src] with \the [W]!"))
-	take_damage(10)
+	take_damage(W.force/10)
 	return TRUE
