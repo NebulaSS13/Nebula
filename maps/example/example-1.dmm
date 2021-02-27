@@ -126,6 +126,13 @@
 /obj/effect/floor_decal/corner/orange/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/constructionsite)
+"pm" = (
+/obj/effect/floor_decal/corner/orange{
+	dir = 5
+	},
+/obj/machinery/computer/teleporter,
+/turf/simulated/floor/tiled/steel_grid,
+/area/constructionsite)
 "qt" = (
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/effect/floor_decal/corner/orange{
@@ -195,6 +202,10 @@
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
+"wj" = (
+/obj/item/radio/beacon,
+/turf/simulated/floor/tiled/steel_grid,
+/area/constructionsite)
 "wB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -262,6 +273,11 @@
 "Hk" = (
 /turf/space,
 /area/space)
+"Iv" = (
+/obj/effect/floor_decal/corner/orange/mono,
+/obj/machinery/teleport/hub,
+/turf/simulated/floor/tiled/monotile,
+/area/constructionsite)
 "JG" = (
 /obj/effect/floor_decal/corner/orange{
 	dir = 9
@@ -400,6 +416,13 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 1
 	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/constructionsite)
+"Yp" = (
+/obj/effect/floor_decal/corner/orange{
+	dir = 5
+	},
+/obj/machinery/teleport/station,
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "YO" = (
@@ -1394,7 +1417,7 @@ Hk
 fU
 fU
 eg
-EO
+pm
 qJ
 qJ
 qJ
@@ -1428,11 +1451,11 @@ Hk
 fU
 fU
 eg
-EO
+Yp
 qJ
 qJ
 qJ
-dI
+wj
 wB
 dI
 wB
@@ -1462,7 +1485,7 @@ Hk
 fU
 fU
 eg
-wF
+Iv
 NQ
 kw
 Mo
