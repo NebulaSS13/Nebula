@@ -843,7 +843,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/dock)
 "bA" = (
-/obj/structure/closet/walllocker/emerglocker/south,
+/obj/structure/emergency_dispenser/south,
 /obj/item/radio/intercom{
 	pixel_x = -32
 	},
@@ -1248,7 +1248,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/saloon)
 "co" = (
-/obj/structure/closet/walllocker/emerglocker/north,
+/obj/structure/emergency_dispenser/north,
 /obj/structure/bed/chair/wood,
 /obj/item/deck/tarot,
 /turf/simulated/floor/tiled/usedup,
@@ -1929,7 +1929,7 @@
 /area/ship/scrap/crew/kitchen)
 "dx" = (
 /obj/structure/disposalpipe/segment,
-/obj/structure/closet/walllocker/emerglocker/east,
+/obj/structure/emergency_dispenser/east,
 /obj/machinery/light_switch{
 	pixel_x = -25
 	},
@@ -1995,7 +1995,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/kitchen)
 "dG" = (
-/obj/structure/closet/walllocker/emerglocker/north,
+/obj/structure/emergency_dispenser/north,
 /obj/structure/closet/secure_closet/freezer/fridge/bearcat,
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -2081,7 +2081,7 @@
 /obj/structure/sign/warning/nosmoking_2{
 	pixel_y = 28
 	},
-/obj/structure/closet/walllocker/emerglocker/west,
+/obj/structure/emergency_dispenser/west,
 /obj/machinery/light/small{
 	icon_state = "bulb1";
 	dir = 8
@@ -3354,7 +3354,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo)
 "fO" = (
-/obj/structure/closet/walllocker/emerglocker/west,
+/obj/structure/emergency_dispenser/west,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -3451,7 +3451,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/wash)
 "fY" = (
-/obj/structure/closet/walllocker/emerglocker/east,
+/obj/structure/emergency_dispenser/east,
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable{
 	d1 = 1;
@@ -4634,7 +4634,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "hS" = (
-/obj/structure/closet/walllocker/emerglocker/west,
+/obj/structure/emergency_dispenser/west,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 10
@@ -5914,7 +5914,7 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "Sm" = (
-/obj/structure/closet/walllocker/emerglocker/west,
+/obj/structure/emergency_dispenser/west,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /obj/structure/cable{
 	d1 = 1;
