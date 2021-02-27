@@ -216,6 +216,8 @@
 
 /mob/proc/Life()
 	SHOULD_NOT_SLEEP(TRUE)
+	if(ability_master)
+		ability_master.update_spells(0)
 
 #define UNBUCKLED 0
 #define PARTIALLY_BUCKLED 1
