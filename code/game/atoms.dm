@@ -71,8 +71,15 @@
 	return
 
 /atom/Destroy()
+	overlays.Cut()
+	underlays.Cut()
 	global.is_currently_exploding -= src
 	QDEL_NULL(reagents)
+	if(light)
+		light.destroy()
+		light = null
+	if(opacity)
+		updateVisibility(src)
 	. = ..()
 
 /atom/proc/reveal_blood()

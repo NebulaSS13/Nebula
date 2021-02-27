@@ -98,7 +98,7 @@
 		ChangeTurf(get_base_turf_by_area(src))
 
 /turf/exterior/on_update_icon(var/update_neighbors)
-	..() // Recalc AO and flooding overlay.
+	. = ..() // Recalc AO and flooding overlay.
 	cut_overlays()
 	if(LAZYLEN(decals))
 		add_overlay(decals)

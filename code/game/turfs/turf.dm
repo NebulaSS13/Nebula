@@ -44,11 +44,23 @@
 	else
 		luminosity = 1
 	RecalculateOpacity()
-	if (mapload && permit_ao)
-		queue_ao()
+
+	if(mapload)
+		queue_ao(TRUE)
+		queue_icon_update()
+		update_starlight()
+	else
+		regenerate_ao()
+		for(var/thing in RANGE_TURFS(src, 1))
+			var/turf/T = thing
+			if(istype(T))
+				T.update_starlight()
+				T.queue_icon_update()
+		SSair.mark_for_update(src)
+	updateVisibility(src, FALSE)
+
 	if (z_flags & ZM_MIMIC_BELOW)
 		setup_zmimic(mapload)
-	update_starlight()
 	if(flooded && !density)
 		fluid_update(FALSE)
 
@@ -83,6 +95,9 @@
 
 	if (bound_overlay)
 		QDEL_NULL(bound_overlay)
+
+	if(connections) 
+		connections.erase_all()
 
 	..()
 	return QDEL_HINT_IWILLGC
@@ -345,12 +360,13 @@ var/const/enterloopsanity = 100
 	if(!A.show_starlight)
 		return
 	//Let's make sure not to break everything if people use a crazy setting.
-	var/turf/T = locate(/turf/simulated) in RANGE_TURFS(src,1)
-	if(T)
-		A = get_area(T)
-		if(A && A.dynamic_lighting)
-			set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.background_color)
-			return
+	for(var/thing in RANGE_TURFS(src,1))
+		if(istype(thing, /turf/simulated))
+			var/turf/simulated/T = thing
+			A = get_area(T)
+			if(A?.dynamic_lighting)
+				set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.background_color)
+				return
 	set_light(0)
 
 /turf/proc/get_footstep_sound(var/mob/caller)

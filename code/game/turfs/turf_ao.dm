@@ -10,9 +10,9 @@
 	var/ao_queued = AO_UPDATE_NONE
 
 /turf/proc/regenerate_ao()
-	for (var/thing in RANGE_TURFS(src, 1))
+	for(var/thing in RANGE_TURFS(src, 1))
 		var/turf/T = thing
-		if (T.permit_ao)
+		if(istype(T) && T.permit_ao)
 			T.queue_ao(TRUE)
 
 /turf/proc/calculate_ao_neighbors()
