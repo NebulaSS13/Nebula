@@ -182,6 +182,8 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	var/open_sound = 'sound/machines/podopen.ogg'
+	var/close_sound = 'sound/machines/podclose.ogg'
 
 /obj/machinery/cryopod/robot
 	name = "robotic storage unit"
@@ -434,6 +436,8 @@
 		if(!do_after(user, 20, src)|| QDELETED(target))
 			return
 		set_occupant(target)
+		if(close_sound)
+			playsound(src, close_sound, 40)
 
 		// Book keeping!
 		log_and_message_admins("has entered a stasis pod")
@@ -537,6 +541,8 @@
 
 	occupant.dropInto(loc)
 	set_occupant(null)
+	if(open_sound)
+		playsound(src, open_sound, 40)
 
 	icon_state = base_icon_state
 
@@ -602,3 +608,6 @@
 			dead.set_dir(dir) //skeleton is oriented as cryo
 	else
 		to_chat(user, "<span class='notice'>The glass cover is already open.</span>")
+
+/obj/machinery/cryopod/proc/on_mob_spawn()
+	playsound(src, 'sound/machines/ding.ogg', 30, 1)
