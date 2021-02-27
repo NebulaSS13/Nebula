@@ -15,20 +15,13 @@
 	combustion = 1
 	bulk = GUN_BULK_RIFLE + 3
 
-	var/initial_cell_type = /obj/item/cell/hyper
-	var/initial_capacitor_type = /obj/item/stock_parts/capacitor/adv // 6-8 shots
+	cell = /obj/item/cell/hyper
+	capacitor = /obj/item/stock_parts/capacitor/adv // 6-8 shots
 	gun_unreliable = 0
 	var/slowdown_held = 3
 	var/slowdown_worn = 2
 
 /obj/item/gun/magnetic/railgun/Initialize()
-
-	capacitor = new initial_capacitor_type(src)
-	capacitor.charge = capacitor.max_charge
-
-	cell = new initial_cell_type(src)
-	if (ispath(loaded))
-		loaded = new loaded (src, load_sheet_max)
 	LAZYSET(slowdown_per_slot, BP_L_HAND,        slowdown_held)
 	LAZYSET(slowdown_per_slot, BP_R_HAND,        slowdown_held)
 	LAZYSET(slowdown_per_slot, slot_back_str,    slowdown_worn)
@@ -70,8 +63,8 @@
 	one_hand_penalty = 2
 	fire_delay = 8
 	removable_components = FALSE
-	initial_cell_type = /obj/item/cell/hyper
-	initial_capacitor_type = /obj/item/stock_parts/capacitor/adv
+	cell = /obj/item/cell/hyper
+	capacitor = /obj/item/stock_parts/capacitor/adv
 	slot_flags = SLOT_BACK
 	power_cost = 100
 	load_type = /obj/item/magnetic_ammo
