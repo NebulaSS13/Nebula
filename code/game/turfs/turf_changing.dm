@@ -25,40 +25,56 @@
 	if (!N)
 		return
 
+	// Spawning space in the middle of a multiz stack should just spawn an open turf.
 	if(ispath(N, /turf/space))
 		var/turf/below = GetBelow(src)
 		if(istype(below) && !isspaceturf(below))
 			N = /turf/simulated/open
 
-	var/old_air =       air
-	var/old_fire =      fire
-	var/old_above =     above
-	var/old_opacity =   opacity
-	var/old_density =   density
-	var/old_prev_type = prev_type
+	// Track a number of old values for the purposes of raising 
+	// state change events after changing the turf to the new type.
+	var/old_air =              air
+	var/old_fire =             fire
+	var/old_above =            above
+	var/old_opacity =          opacity
+	var/old_density =          density
+	var/old_corners =          corners
+	var/old_prev_type =        prev_type
+	var/old_lighting_overlay = lighting_overlay
+	var/old_dynamic_lighting = dynamic_lighting
 
 	changing_turf = TRUE
 
 	qdel(src)
-	var/turf/W = new N(src)
+	. = new N(src)
 
-	above = old_above
-	prev_type = old_prev_type
+	var/turf/W = .
+	W.above =            old_above     // Multiz ref tracking. 
+	W.prev_type =        old_prev_type // Shuttle transition turf tracking.
 
+	// Copy over our precalculated lighting and update if needed.
+	W.corners =          old_corners
+	W.lighting_overlay = old_lighting_overlay
+	if(W.dynamic_lighting != old_dynamic_lighting)
+		if(W.dynamic_lighting)
+			W.lighting_build_overlay()
+		else
+			W.lighting_clear_overlay()
+		W.reconsider_lights()
+
+	// Update ZAS, atmos and fire.
 	if(keep_air)
 		W.air = old_air
 	if(old_fire)
-		if(ispath(N, /turf/simulated))
+		if(istype(W, /turf/simulated))
 			W.fire = old_fire
 		else if(old_fire)
 			qdel(old_fire)
 
+	// Raise appropriate events.
+	W.post_change()
 	if(tell_universe)
 		GLOB.universe.OnTurfChange(W)
-
-	. = W
-	W.post_change()
-
 	GLOB.turf_changed_event.raise_event(W, old_density, W.density, old_opacity, W.opacity)
 	if(W.density != old_density)
 		GLOB.density_set_event.raise_event(W, old_density, W.density)
