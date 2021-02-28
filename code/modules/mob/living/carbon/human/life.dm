@@ -106,7 +106,7 @@
 /mob/living/carbon/human/proc/handle_stamina()
 	if((world.time - last_quick_move_time) > 5 SECONDS)
 		var/mod = (lying + (nutrition / initial(nutrition))) / 2
-		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1+chem_effects[CE_ENERGETIC]))
+		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1+LAZYACCESS(chem_effects,CE_ENERGETIC)))
 
 /mob/living/carbon/human/set_stat(var/new_stat)
 	var/old_stat = stat
@@ -127,7 +127,7 @@
 
 	if(species_organ)
 		var/active_breaths = 0
-		var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
+		var/obj/item/organ/internal/lungs/L = get_internal_organ(species_organ)
 		if(L)
 			active_breaths = L.active_breathing
 		..(active_breaths)
@@ -183,7 +183,7 @@
 	//Vision
 	var/obj/item/organ/vision
 	if(species.vision_organ)
-		vision = internal_organs_by_name[species.vision_organ]
+		vision = get_internal_organ(species.vision_organ)
 
 	if(!species.vision_organ) // Presumably if a species has no vision organs, they see via some other means.
 		eye_blind =  0
@@ -304,7 +304,7 @@
 	if(!species_organ)
 		return
 
-	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
+	var/obj/item/organ/internal/lungs/L = get_internal_organ(species_organ)
 	if(!L || nervous_system_failure())
 		failed_last_breath = 1
 	else
@@ -389,7 +389,7 @@
 		else
 			burn_dam = COLD_DAMAGE_LEVEL_3
 		SetStasis(getCryogenicFactor(bodytemperature), STASIS_COLD)
-		if(!chem_effects[CE_CRYO])
+		if(!has_chemical_effect(CE_CRYO, 1))
 			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
 			fire_alert = max(fire_alert, 1)
 
@@ -520,41 +520,16 @@
 	return min(1,.)
 
 /mob/living/carbon/human/handle_chemicals_in_body()
-
-	chem_effects.Cut()
-
-	if(status_flags & GODMODE)
-		return 0
-
-	if(isSynthetic())
-		return
-
-	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
-
-	if(reagents)
-		if(touching) touching.metabolize()
-		if(bloodstr) bloodstr.metabolize()
-		if(ingested) metabolize_ingested_reagents()
-
-	// Trace chemicals
-	for(var/T in chem_doses)
-		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
-			continue
-		var/decl/material/R = T
-		chem_doses[T] -= initial(R.metabolism)*2
-		if(chem_doses[T] <= 0)
-			chem_doses -= T
-
-	// Not an ideal place to handle this, but there doesn't seem to be a more appropriate centralized area.
-	if(chem_effects[CE_GLOWINGEYES])
-		update_eyes()
-
-	updatehealth()
+	. = ..()
+	if(.)
+		if(has_chemical_effect(CE_GLOWINGEYES, 1))
+			update_eyes()
+		updatehealth()
 
 // Check if we should die.
 /mob/living/carbon/human/proc/handle_death_check()
 	if(should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/brain = internal_organs_by_name[BP_BRAIN]
+		var/obj/item/organ/internal/brain/brain = get_internal_organ(BP_BRAIN)
 		if(!brain || (brain.status & ORGAN_DEAD))
 			return TRUE
 	return species.handle_death_check(src)
@@ -723,7 +698,7 @@
 			healths_ma.icon_state = "blank"
 			healths_ma.overlays = null
 
-			if (chem_effects[CE_PAINKILLER] > 100)
+			if(has_chemical_effect(CE_PAINKILLER, 100))
 				healths_ma.icon_state = "health_numb"
 			else
 				// Generate a by-limb health display.
@@ -773,7 +748,7 @@
 				else							hydration_icon.icon_state = "hydration4"
 
 		if(isSynthetic())
-			var/obj/item/organ/internal/cell/C = internal_organs_by_name[BP_CELL]
+			var/obj/item/organ/internal/cell/C = get_internal_organ(BP_CELL)
 			if (istype(C))
 				var/chargeNum = Clamp(ceil(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
 				cells.icon_state = "charge[chargeNum]"
@@ -841,16 +816,16 @@
 	// Puke if toxloss is too high
 	var/vomit_score = 0
 	for(var/tag in list(BP_LIVER,BP_KIDNEYS))
-		var/obj/item/organ/internal/I = internal_organs_by_name[tag]
+		var/obj/item/organ/internal/I = get_internal_organ(tag)
 		if(I)
 			vomit_score += I.damage
 		else if (should_have_organ(tag))
 			vomit_score += 45
-	if(chem_effects[CE_TOXIN] || radiation)
+	if(has_chemical_effect(CE_TOXIN, 1) || radiation)
 		vomit_score += 0.5 * getToxLoss()
-	if(chem_effects[CE_ALCOHOL_TOXIC])
-		vomit_score += 10 * chem_effects[CE_ALCOHOL_TOXIC]
-	if(chem_effects[CE_ALCOHOL])
+	if(has_chemical_effect(CE_ALCOHOL_TOXIC, 1))
+		vomit_score += 10 * LAZYACCESS(chem_effects, CE_ALCOHOL_TOXIC)
+	if(has_chemical_effect(CE_ALCOHOL, 1))
 		vomit_score += 10
 	if(stat != DEAD && vomit_score > 25 && prob(10))
 		vomit(vomit_score, vomit_score/25)

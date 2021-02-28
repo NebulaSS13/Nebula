@@ -73,7 +73,7 @@
 					visible_message(SPAN_DANGER("\The [src] rips \the [H]'s [eating.name] clean off!"))
 					for(var/mtype in eating.matter)
 						reagents.add_reagent(mtype, Floor(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
-					eating.droplimb(silent = TRUE)
+					eating.dismember(silent = TRUE)
 					qdel(eating)
 					break
 

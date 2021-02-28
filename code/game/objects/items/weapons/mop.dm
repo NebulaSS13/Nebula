@@ -34,13 +34,13 @@
 			if(F.reagents.total_volume > FLUID_SHALLOW)
 				to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
 			else
-				user.visible_message("<span class='notice'>\The [user] begins to mop up \the [T].</span>")
+				user.visible_message(SPAN_NOTICE("\The [user] begins to mop up \the [T]."))
 				if(do_after(user, 40, T) && F && !QDELETED(F))
 					if(F.reagents.total_volume > FLUID_SHALLOW)
 						to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
 					else
 						qdel(F)
-						to_chat(user, "<span class='notice'>You have finished mopping!</span>")
+						to_chat(user, SPAN_NOTICE("You have finished mopping!"))
 			return
 		moppable = TRUE
 
@@ -49,19 +49,21 @@
 
 	if(moppable)
 		if(reagents.total_volume < 1)
-			to_chat(user, "<span class='notice'>Your mop is dry!</span>")
+			to_chat(user, SPAN_WARNING("Your mop is dry!"))
 			return
 		var/turf/T = get_turf(A)
 		if(!T)
 			return
 
-		user.visible_message("<span class='warning'>\The [user] begins to clean \the [T].</span>")
-
-		if(do_after(user, mopspeed, T))
-			if(T)
-				T.clean(src, user)
-			to_chat(user, "<span class='notice'>You have finished mopping!</span>")
-
+		var/trans_amt = FLUID_EVAPORATION_POINT
+		if(user.a_intent == I_HURT)
+			trans_amt = round(FLUID_PUDDLE * 0.25)
+			user.visible_message(SPAN_DANGER("\The [user] begins to aggressively mop \the [T]!"))
+		else
+			user.visible_message(SPAN_NOTICE("\The [user] begins to clean \the [T]."))
+		if(do_after(user, mopspeed, T) && reagents?.total_volume)
+			reagents.splash(T, trans_amt)
+			to_chat(user, SPAN_NOTICE("You have finished mopping!"))
 
 /obj/effect/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/mop) || istype(I, /obj/item/soap))

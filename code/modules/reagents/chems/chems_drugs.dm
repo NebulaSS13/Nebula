@@ -8,7 +8,7 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 2
 
-/decl/material/liquid/amphetamines/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/amphetamines/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(prob(5))
 		M.emote(pick("twitch", "blink_r", "shiver"))
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
@@ -22,7 +22,7 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 2
 
-/decl/material/liquid/narcotics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/narcotics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.jitteriness = max(M.jitteriness - 5, 0)
 	if(prob(80))
 		M.adjustBrainLoss(5.25 * removed)
@@ -41,18 +41,18 @@
 	scannable = 1
 	value = 2
 
-/decl/material/liquid/nicotine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nicotine/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	if(prob(volume*20))
 		M.add_chemical_effect(CE_PULSE, 1)
-	if(volume <= 0.02 && M.chem_doses[type] >= 0.05 && world.time > REAGENT_DATA(holder, type) + 3 MINUTES)
+	if(volume <= 0.02 && LAZYACCESS(M.chem_doses, type) >= 0.05 && world.time > REAGENT_DATA(holder, type) + 3 MINUTES)
 		LAZYSET(holder.reagent_data, type, world.time)
 		to_chat(M, "<span class='warning'>You feel antsy, your concentration wavers...</span>")
 	else if(world.time > REAGENT_DATA(holder, type) + 3 MINUTES)
 		LAZYSET(holder.reagent_data, type, world.time)
 		to_chat(M, "<span class='notice'>You feel invigorated and calm.</span>")
 
-/decl/material/liquid/nicotine/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/nicotine/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
@@ -65,15 +65,16 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 2
 
-/decl/material/liquid/sedatives/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/sedatives/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.make_jittery(-50)
 	var/threshold = 1
-	if(M.chem_doses[type] < 0.5 * threshold)
-		if(M.chem_doses[type] == metabolism * 2 || prob(5))
+	var/dose = LAZYACCESS(M.chem_doses, type)
+	if(dose < 0.5 * threshold)
+		if(dose == metabolism * 2 || prob(5))
 			M.emote("yawn")
-	else if(M.chem_doses[type] < 1 * threshold)
+	else if(dose < 1 * threshold)
 		M.eye_blurry = max(M.eye_blurry, 10)
-	else if(M.chem_doses[type] < 2 * threshold)
+	else if(dose < 2 * threshold)
 		if(prob(50))
 			M.Weaken(2)
 			M.add_chemical_effect(CE_SEDATE, 1)
@@ -99,7 +100,7 @@
 	euphoriant = 15
 	euphoriant_max = 15
 
-/decl/material/liquid/psychoactives/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/psychoactives/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.adjust_drugged(15, 15)
 	M.add_chemical_effect(CE_PULSE, -1)
@@ -113,9 +114,9 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 2
 
-/decl/material/liquid/hallucinogenics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/hallucinogenics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_MIND, -2)
-	M.hallucination(50, 50)
+	M.set_hallucination(50, 50)
 
 /decl/material/liquid/psychotropics
 	name = "psychotropics"
@@ -129,14 +130,15 @@
 	euphoriant_max = 30
 	fruit_descriptor = "hallucinogenic"
 
-/decl/material/liquid/psychotropics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/psychotropics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/threshold = 1
-	if(M.chem_doses[type] < 1 * threshold)
+	var/dose = LAZYACCESS(M.chem_doses, type)
+	if(dose < 1 * threshold)
 		M.apply_effect(3, STUTTER)
 		M.make_dizzy(5)
 		if(prob(5))
 			M.emote(pick("twitch", "giggle"))
-	else if(M.chem_doses[type] < 2 * threshold)
+	else if(dose < 2 * threshold)
 		M.apply_effect(3, STUTTER)
 		M.make_jittery(5)
 		M.make_dizzy(5)
@@ -193,12 +195,12 @@
 		"THE LIGHT THE DARK A STAR IN CHAINS"
 	)
 
-/decl/material/liquid/glowsap/gleam/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/glowsap/gleam/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	. = ..()
 	M.add_client_color(/datum/client_color/thirdeye)
 	M.add_chemical_effect(CE_THIRDEYE, 1)
 	M.add_chemical_effect(CE_MIND, -2)
-	M.hallucination(50, 50)
+	M.set_hallucination(50, 50)
 	M.make_jittery(3)
 	M.make_dizzy(3)
 	if(prob(0.1) && ishuman(M))
@@ -212,7 +214,7 @@
 	. = ..()
 	parent.remove_client_color(/datum/client_color/thirdeye)
 
-/decl/material/liquid/glowsap/gleam/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/glowsap/gleam/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
 	M.adjustBrainLoss(rand(1, 5))
 	if(ishuman(M) && prob(10))
 		var/mob/living/carbon/human/H = M

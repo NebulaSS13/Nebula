@@ -1,3 +1,5 @@
+var/list/surgeries_in_progress = list()
+
 // A list of types that will not attempt to perform surgery if the user is on help intent.
 GLOBAL_LIST_INIT(surgery_tool_exceptions, list(
 	/obj/item/auto_cpr,
@@ -13,7 +15,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 /* SURGERY STEPS */
 /decl/surgery_step
 	var/name
-	var/description = "A mysterious surgical procedure."
+	var/description
 	var/list/allowed_tools               // type path referencing tools that can be used for this step, and how well are they suited for it
 	var/list/allowed_species             // type paths referencing races that this step applies to.
 	var/list/disallowed_species          // type paths referencing races that this step applies to.
@@ -27,6 +29,11 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	var/strict_access_requirement = TRUE // Whether or not this surgery will be fuzzy on size requirements.
 	var/hidden_from_codex                // Is this surgery a secret?
 	var/list/additional_codex_lines
+	var/expected_mob_type = /mob/living/carbon/human
+	var/surgery_step_category = /decl/surgery_step
+
+/decl/surgery_step/proc/get_speed_modifier(var/mob/user, var/mob/target, var/obj/item/tool)
+	. = 1
 
 //returns how well tool is suited for this step
 /decl/surgery_step/proc/tool_quality(obj/item/tool)
@@ -35,38 +42,37 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			return allowed_tools[T]
 	return 0
 
-/decl/surgery_step/proc/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	return TRUE
 
 // Checks if this step applies to the user mob at all
-/decl/surgery_step/proc/is_valid_target(mob/living/carbon/human/target)
-	if(!hasorgans(target))
-		return 0
+/decl/surgery_step/proc/is_valid_target(mob/living/target)
+	. = ((!expected_mob_type || istype(target, expected_mob_type)) && isliving(target))
+	if(.)
+		var/decl/species/species = target.get_species()
+		if(allowed_species)
+			. = FALSE
+			if(species)
+				for(var/species_name in allowed_species)
+					if(species.get_root_species_name(target) == species_name)
+						return TRUE
+		if(species && disallowed_species)
+			for(var/species_name in disallowed_species)
+				if(species.get_root_species_name(target) == species_name)
+					return FALSE
 
-	if(allowed_species)
-		for(var/species in allowed_species)
-			if(target.species.get_root_species_name(target) == species)
-				return 1
-
-	if(disallowed_species)
-		for(var/species in disallowed_species)
-			if(target.species.get_root_species_name(target) == species)
-				return 0
-
-	return 1
-
-/decl/surgery_step/proc/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool, target_zone)
+/decl/surgery_step/proc/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool, target_zone)
 	if(delicate)
 		return SURGERY_SKILLS_DELICATE
 	else
 		return SURGERY_SKILLS_GENERIC
 
 // checks whether this step can be applied with the given user and target
-/decl/surgery_step/proc/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/can_use(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	return assess_bodypart(user, target, target_zone, tool) && assess_surgery_candidate(user, target, target_zone, tool)
 
-/decl/surgery_step/proc/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(istype(target) && target_zone)
+/decl/surgery_step/proc/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
+	if(ishuman(target) && target_zone)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if(affected)
 			// Check various conditional flags.
@@ -94,39 +100,41 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 				 affected.how_open() < open_threshold))
 					return FALSE
 			// Check if clothing is blocking access
-			var/obj/item/I = target.get_covering_equipped_item_by_zone(target_zone)
+			var/mob/living/carbon/human/C = target
+			var/obj/item/I = C.get_covering_equipped_item_by_zone(target_zone)
 			if(I && (I.item_flags & ITEM_FLAG_THICKMATERIAL))
 				to_chat(user,SPAN_NOTICE("The material covering this area is too thick for you to do surgery through!"))
 				return FALSE
 			return affected
 	return FALSE
 
-/decl/surgery_step/proc/assess_surgery_candidate(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/assess_surgery_candidate(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	return ishuman(target)
 
 // does stuff to begin the step, usually just printing messages. Moved germs transfering and bloodying here too
-/decl/surgery_step/proc/begin_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/begin_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if (can_infect && affected)
 		spread_germs_to_organ(affected, user)
 	if(ishuman(user) && prob(60))
 		var/mob/living/carbon/human/H = user
 		if (blood_level)
-			H.bloody_hands(target,0)
+			H.bloody_hands(target,2)
 		if (blood_level > 1)
-			H.bloody_body(target,0)
-	if(shock_level)
-		target.shock_stage = max(target.shock_stage, shock_level)
+			H.bloody_body(target,2)
+	if(shock_level && ishuman(target))
+		var/mob/living/carbon/human/H = target
+		H.shock_stage = max(H.shock_stage, shock_level)
 
 // does stuff to end the step, which is normally print a message + do whatever this step changes
-/decl/surgery_step/proc/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	return
 
 // stuff that happens when the step fails
-/decl/surgery_step/proc/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	return null
 
-/decl/surgery_step/proc/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool, target_zone)
+/decl/surgery_step/proc/success_chance(mob/living/user, mob/living/target, obj/item/tool, target_zone)
 	. = tool_quality(tool)
 	if(user == target)
 		. -= 10
@@ -171,7 +179,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
 	E.germ_level = max(germ_level,E.germ_level) //as funny as scrubbing microbes out with clean gloves is - no.
 
-/obj/item/proc/do_surgery(mob/living/carbon/M, mob/living/user, fuckup_prob)
+/obj/item/proc/do_surgery(mob/living/M, mob/living/user, fuckup_prob)
 
 	// Check for the Hippocratic oath.
 	if(!istype(M) || user.a_intent == I_HURT)
@@ -186,7 +194,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			if(!zone)
 				return FALSE
 
-	if(LAZYACCESS(M.surgeries_in_progress, zone))
+	if(zone in global.surgeries_in_progress["\ref[M]"])
 		to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))
 		return TRUE
 
@@ -230,15 +238,15 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	// Otherwise we can make a start on surgery!
 	else if(istype(M) && !QDELETED(M) && user.a_intent != I_HURT && user.get_active_hand() == src)
 		// Double-check this in case it changed between initial check and now.
-		if(zone in M.surgeries_in_progress)
+		if(zone in global.surgeries_in_progress["\ref[M]"])
 			to_chat(user, SPAN_WARNING("You can't operate on this area while surgery is already in progress."))
 		else if(S.can_use(user, M, zone, src) && S.is_valid_target(M))
 			var/operation_data = S.pre_surgery_step(user, M, zone, src)
 			if(operation_data)
-				LAZYSET(M.surgeries_in_progress, zone, operation_data)
+				LAZYSET(global.surgeries_in_progress["\ref[M]"], zone, operation_data)
 				S.begin_step(user, M, zone, src)
 				var/skill_reqs = S.get_skill_reqs(user, M, src, zone)
-				var/duration = user.skill_delay_mult(skill_reqs[1]) * rand(S.min_duration, S.max_duration)
+				var/duration = user.skill_delay_mult(skill_reqs[1]) * rand(S.min_duration, S.max_duration) * S.get_speed_modifier(user, M, src)
 				if(prob(S.success_chance(user, M, src, zone)) && do_mob(user, M, duration))
 					S.end_step(user, M, zone, src)
 					handle_post_surgery()
@@ -247,7 +255,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 				else
 					to_chat(user, SPAN_WARNING("You must remain close to your patient to conduct surgery."))
 				if(!QDELETED(M))
-					LAZYREMOVE(M.surgeries_in_progress, zone) // Clear the in-progress flag.
+					LAZYREMOVE(global.surgeries_in_progress["\ref[M]"], zone) // Clear the in-progress flag.
 					if(ishuman(M))
 						var/mob/living/carbon/human/H = M
 						H.update_surgery()
@@ -264,15 +272,16 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 /proc/can_operate(mob/living/carbon/M, mob/living/carbon/user)
 	var/turf/T = get_turf(M)
 	if(locate(/obj/machinery/optable, T))
-		. = TRUE
-	if(locate(/obj/structure/bed, T))
-		. = TRUE
-	if(locate(/obj/structure/table, T))
-		. = TRUE
-	if(locate(/obj/effect/rune/, T))
-		. = TRUE
-
-	if(M == user)
+		. = OPERATE_IDEAL
+	else if(locate(/obj/structure/table, T))
+		. = OPERATE_OKAY
+	else if(locate(/obj/structure/bed, T))
+		. = OPERATE_PASSABLE
+	else if(locate(/obj/effect/rune, T))
+		. = OPERATE_PASSABLE
+	else
+		. = OPERATE_DENY
+	if(. != OPERATE_DENY && M == user)
 		var/hitzone = check_zone(user.zone_sel.selecting, M)
 		var/list/badzones = list(BP_HEAD)
 		var/obj/item/organ/external/E = M.get_organ(M.get_active_held_item_slot())
@@ -280,4 +289,5 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			badzones |= E.organ_tag
 			badzones |= E.parent_organ
 		if(hitzone in badzones)
-			return FALSE
+			return OPERATE_DENY
+		. = min(., OPERATE_OKAY) // it's awkward no matter what

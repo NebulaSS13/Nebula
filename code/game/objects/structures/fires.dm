@@ -24,9 +24,9 @@
 	var/const/light_power_high =  0.8
 	var/const/light_power_mid =   0.6
 	var/const/light_power_low =   0.4
-	var/const/light_colour_high = "#ffdd55"
-	var/const/light_colour_mid =  "#ff9900"
-	var/const/light_colour_low =  "#ff0000"
+	var/const/light_color_high = "#ffdd55"
+	var/const/light_color_mid =  "#ff9900"
+	var/const/light_color_low =  "#ff0000"
 
 	var/list/affected_exterior_turfs
 	var/list/exterior_temperature = 30 // Celcius, but it is added directly to a Kelvin value so don't do any conversion.
@@ -330,13 +330,13 @@
 		if(FIRE_LIT)
 			if(fuel >= HIGH_FUEL)
 				add_overlay("[icon_state]_lit")
-				set_light(l_max_bright = light_power_high, l_outer_range = light_range_high, l_color = light_colour_high)
+				set_light(l_max_bright = light_power_high, l_outer_range = light_range_high, l_color = light_color_high)
 			else if(fuel <= LOW_FUEL)
 				add_overlay("[icon_state]_lit_dying")
-				set_light(l_max_bright = light_power_low,  l_outer_range = light_range_mid,  l_color = light_colour_low)
+				set_light(l_max_bright = light_power_low,  l_outer_range = light_range_mid,  l_color = light_color_low)
 			else
 				add_overlay("[icon_state]_lit_low")
-				set_light(l_max_bright = light_power_mid,  l_outer_range = light_range_low,  l_color = light_colour_mid)
+				set_light(l_max_bright = light_power_mid,  l_outer_range = light_range_low,  l_color = light_color_mid)
 
 		if(FIRE_DEAD)
 			add_overlay("[icon_state]_burnt")

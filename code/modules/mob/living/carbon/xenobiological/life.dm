@@ -61,16 +61,9 @@
 	return temp_change
 
 /mob/living/carbon/slime/handle_chemicals_in_body()
-	chem_effects.Cut()
-
-	if(touching) touching.metabolize()
-	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
-	if(istype(ingested)) ingested.metabolize()
-	if(bloodstr) bloodstr.metabolize()
-
-	src.updatehealth()
-
-	return //TODO: DEFERRED
+	. = ..()
+	if(.)
+		updatehealth()
 
 /mob/living/carbon/slime/handle_regular_status_updates()
 

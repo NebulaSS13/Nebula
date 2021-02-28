@@ -34,7 +34,7 @@
 /obj/item/clothing/glasses/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret && active && check_state_in_icon("[ret.icon_state]-active", ret.icon))
-		ret.overlays += "[ret.icon_state]-active"
+		ret.icon_state = "[ret.icon_state]-active"
 	return ret
 
 /obj/item/clothing/glasses/Destroy()

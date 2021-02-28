@@ -1,5 +1,5 @@
 /mob/living/carbon/human/proc/update_eyes()
-	var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[species.vision_organ ? species.vision_organ : BP_EYES]
+	var/obj/item/organ/internal/eyes/eyes = get_internal_organ(species.vision_organ || BP_EYES)
 	if(eyes)
 		eyes.update_colour()
 		regenerate_icons()
@@ -48,7 +48,7 @@
 
 			if (!lying && !buckled && world.time - l_move_time < 15)
 			//Moving around with fractured ribs won't do you any good
-				if (prob(10) && !stat && can_feel_pain() && chem_effects[CE_PAINKILLER] < 50 && E.is_broken() && E.internal_organs.len)
+				if (prob(10) && !stat && can_feel_pain() && LAZYACCESS(chem_effects, CE_PAINKILLER) < 50 && E.is_broken() && E.internal_organs.len)
 					custom_pain("Pain jolts through your broken [E.encased ? E.encased : E.name], staggering you!", 50, affecting = E)
 					drop_held_items()
 					Stun(2)
@@ -231,12 +231,12 @@
 
 /mob/living/carbon/human/is_asystole()
 	if(isSynthetic())
-		var/obj/item/organ/internal/cell/C = internal_organs_by_name[BP_CELL]
+		var/obj/item/organ/internal/cell/C = get_internal_organ(BP_CELL)
 		if(istype(C))
 			if(!C.is_usable() || !C.percent())
 				return TRUE
 	else if(should_have_organ(BP_HEART))
-		var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
+		var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
 		if(!istype(heart) || !heart.is_working())
 			return TRUE
 	return FALSE

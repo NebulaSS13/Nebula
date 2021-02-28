@@ -22,8 +22,7 @@
 		pass("All /datum/gear definitions had correct settings.")
 	return  1
 
-// Disabled due to consistent false positives due to DM string comparison or icon state stuff, unclear.
-/*
+
 /datum/unit_test/loadout_test_shall_have_valid_icon_states
 	name = "LOADOUT: Entries shall have valid icon states"
 
@@ -48,7 +47,7 @@
 				var/obj/O = G.path
 				if(ispath(G.path, /obj))
 					O = new G.path()
-					if(!(O.icon_state in icon_states(O.icon)))
+					if(!is_string_in_list(O.icon_state, icon_states(O.icon)))
 						log_unit_test("[G] - [G.path]: Did not find the icon state '[O.icon_state]' in the icon '[O.icon]'.")
 						failed = TRUE
 					qdel(O)
@@ -61,7 +60,6 @@
 	else
 		pass("All /datum/gear definitions had correct icon states.")
 	return  1
-*/
 
 /datum/unit_test/loadout_test_gear_path_tweaks_shall_be_of_gear_path
 	name = "LOADOUT: Gear path tweaks shall be of gear path."
@@ -125,3 +123,44 @@
 
 	pass("Succesfully called all custom setup procs without runtimes")
 	return  1
+
+
+/datum/unit_test/loadout_custom_setup_tweak_shall_be_applied_as_expected
+	name = "LOADOUT: Custom setup tweak shall be applied as expected"
+
+/datum/unit_test/loadout_custom_setup_tweak_shall_be_applied_as_expected/start_test()
+	var/datum/gear/G = new /datum/gear/loadout_test()
+	var/obj/unit_test/loadout/instance = new G.path()
+	var/mob/user = new()
+	for(var/datum/gear_tweak/custom_setup/cs in G.gear_tweaks)
+		cs.tweak_item(user, instance)
+
+	if(instance.loadout_mob == user && instance.loadout_var == G.custom_setup_proc_arguments[1])
+		pass("Succesfully applied custom tweak")
+	else
+		fail("Failed to apply custom tweak")
+
+	QDEL_NULL(G)
+	QDEL_NULL(instance)
+	QDEL_NULL(user)
+
+	return  TRUE
+
+/datum/gear/loadout_test
+	category = /datum/gear/loadout_test
+	path = /obj/unit_test/loadout
+	custom_setup_proc = /obj/unit_test/loadout/proc/loadout_proc
+	custom_setup_proc_arguments = list(5)
+
+/obj/unit_test/loadout
+	var/loadout_mob
+	var/loadout_var
+
+/obj/unit_test/loadout/Destroy()
+	loadout_mob = null
+	loadout_var = null
+	return ..()
+
+/obj/unit_test/loadout/proc/loadout_proc(user, arg)
+	loadout_mob = user
+	loadout_var = arg

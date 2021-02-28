@@ -733,7 +733,7 @@
 	resting = max(resting + amount,0)
 	return
 
-/mob/proc/get_species()
+/mob/proc/get_species_name()
 	return ""
 
 /mob/proc/get_visible_implants(var/class = 0)
@@ -993,9 +993,6 @@
 		return
 	var/obj/screen/zone_sel/selector = mob.zone_sel
 	selector.set_selected_zone(next_in_list(mob.zone_sel.selecting,zones))
-
-/mob/proc/has_chem_effect(chem, threshold)
-	return FALSE
 
 /mob/proc/has_admin_rights()
 	return check_rights(R_ADMIN, 0, src)

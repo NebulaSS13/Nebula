@@ -36,12 +36,12 @@
 	glass_desc = "A well-known alcohol with a variety of applications."
 	value = 1.2
 
-/decl/material/liquid/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.adjustToxLoss(removed * 2 * alcohol_toxicity)
 	M.add_chemical_effect(CE_ALCOHOL_TOXIC, alcohol_toxicity)
 
-/decl/material/liquid/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -53,7 +53,7 @@
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 	var/strength_mod = (M.GetTraitLevel(/decl/trait/malus/ethanol) * 2.5) || 1
 
-	var/effective_dose = M.chem_doses[type] * strength_mod * (1 + REAGENT_VOLUME(holder, type)/60) //drinking a LOT will make you go down faster
+	var/effective_dose = LAZYACCESS(M.chem_doses, type) * strength_mod * (1 + REAGENT_VOLUME(holder, type)/60) //drinking a LOT will make you go down faster
 	if(effective_dose >= strength) // Early warning
 		M.make_dizzy(6) // It is decreased at the speed of 3 per tick
 	if(effective_dose >= strength * 2) // Slurring
@@ -120,7 +120,7 @@
 /decl/material/liquid/ethanol/beer/good
 	taste_description = "beer"
 
-/decl/material/liquid/ethanol/beer/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/beer/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
@@ -163,7 +163,7 @@
 /decl/material/liquid/ethanol/coffee
 	overdose = 45
 
-/decl/material/liquid/ethanol/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/coffee/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -175,7 +175,7 @@
 	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
-/decl/material/liquid/ethanol/coffee/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/coffee/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
 	M.make_jittery(5)
 
 /decl/material/liquid/ethanol/coffee/kahlua
@@ -220,14 +220,14 @@
 	glass_name = "sake"
 	glass_desc = "A glass of sake."
 
-/decl/material/liquid/ethanol/tequilla
+/decl/material/liquid/ethanol/tequila
 	name = "tequila"
 	lore_text = "A strong and mildly flavoured, mexican produced spirit. Feeling thirsty hombre?"
 	taste_description = "paint stripper"
 	color = "#ffff91"
 	strength = 25
 
-	glass_name = "tequilla"
+	glass_name = "tequila"
 	glass_desc = "Now all that's missing is the weird colored shades!"
 
 /decl/material/liquid/ethanol/thirteenloko
@@ -241,7 +241,7 @@
 	glass_name = "Thirteen Loko"
 	glass_desc = "This is a glass of Thirteen Loko, it appears to be of the highest quality. The drink, not the glass."
 
-/decl/material/liquid/ethanol/thirteenloko/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/thirteenloko/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -373,19 +373,20 @@
 	euphoriant = 50
 	euphoriant_max = 50
 
-/decl/material/liquid/ethanol/pwine/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/ethanol/pwine/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
-	if(M.chem_doses[type] > 30)
+	var/dose = LAZYACCESS(M.chem_doses, type)
+	if(dose > 30)
 		M.adjustToxLoss(2 * removed)
-	if(M.chem_doses[type] > 60 && ishuman(M) && prob(5))
+	if(dose > 60 && ishuman(M) && prob(5))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
+		var/obj/item/organ/internal/heart/L = H.get_internal_organ(BP_HEART)
 		if (L && istype(L))
-			if(M.chem_doses[type] < 120)
+			if(dose < 120)
 				L.take_internal_damage(10 * removed, 0)
 			else
 				L.take_internal_damage(100, 0)

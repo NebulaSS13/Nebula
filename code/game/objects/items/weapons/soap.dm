@@ -57,9 +57,12 @@
 		var/turf/T = get_turf(target)
 		if(!T)
 			return
-		user.visible_message("<span class='warning'>[user] starts scrubbing \the [T].</span>")
-		T.clean(src, user, 80, "<span class='notice'>You scrub \the [target.name] clean.</span>")
-		cleaned = TRUE
+		user.visible_message(SPAN_NOTICE("\The [user] starts scrubbing \the [T]."))
+		if(do_after(user, 8 SECONDS, T) && reagents?.total_volume)
+			reagents.splash(T, FLUID_EVAPORATION_POINT)
+			to_chat(user, SPAN_NOTICE("You scrub \the [target] clean."))
+			cleaned = TRUE
+
 	else if(istype(target,/obj/structure/hygiene/sink))
 		to_chat(user, "<span class='notice'>You wet \the [src] in the sink.</span>")
 		wet()

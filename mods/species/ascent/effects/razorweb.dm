@@ -153,7 +153,7 @@
 		if(E && !armour_prob)
 			E = H.organs_by_name[E]
 			visible_message(SPAN_DANGER("The crystalline strands slice straight through \the [H]'s [E.amputation_point || E.name]!"))
-			E.droplimb()
+			E.dismember()
 			severed = TRUE
 
 	if(!severed && !armour_prob)

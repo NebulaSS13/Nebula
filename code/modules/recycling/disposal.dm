@@ -150,6 +150,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		user.visible_message("<span class='warning'>[user] starts climbing into [src].</span>", \
 							 "<span class='notice'>You start climbing into [src].</span>")
 	else
+		if(istype(M) && iscarbon(user))
+			M.last_handled_by_mob = weakref(user)
 		user.visible_message("<span class='[is_dangerous ? "warning" : "notice"]'>[user] starts stuffing [AM] into [src].</span>", \
 							 "<span class='notice'>You start stuffing [AM] into [src].</span>")
 

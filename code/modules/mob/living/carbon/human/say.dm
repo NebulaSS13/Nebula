@@ -19,14 +19,14 @@
 				emote("custom", AUDIBLE_MESSAGE, "[pick("grunts", "babbles", "gibbers", "jabbers", "burbles")] aimlessly.")
 				return
 
-	if(has_chem_effect(CE_VOICELOSS, 1))
+	if(has_chemical_effect(CE_VOICELOSS, 1))
 		whispering = TRUE
 
 	message = sanitize(message)
 	var/obj/item/organ/internal/voicebox/voice = locate() in internal_organs
 	var/snowflake_speak = (speaking && (speaking.flags & (NONVERBAL|SIGNLANG))) || (voice && voice.is_usable() && voice.assists_languages[speaking])
 	if(!isSynthetic() && need_breathe() && failed_last_breath && !snowflake_speak)
-		var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species.breathing_organ]
+		var/obj/item/organ/internal/lungs/L = get_internal_organ(species.breathing_organ)
 		if(!L || L.breath_fail_ratio > 0.9)
 			if(L && world.time < L.last_successful_breath + 2 MINUTES) //if we're in grace suffocation period, give it up for last words
 				to_chat(src, "<span class='warning'>You use your remaining air to say something!</span>")
@@ -92,7 +92,7 @@
 			return 1
 		if (istype(other, /mob/living/carbon/brain))
 			return 1
-		if (istype(other, /mob/living/carbon/slime))
+		if (isslime(other))
 			return 1
 
 	//This is already covered by mob/say_understands()

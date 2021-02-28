@@ -82,7 +82,7 @@
 	// Brain activity.
 	var/brain_result = "normal"
 	if(H.should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
+		var/obj/item/organ/internal/brain/brain = H.get_internal_organ(BP_BRAIN)
 		if(!brain || H.stat == DEAD || (H.status_flags & FAKEDEATH))
 			brain_result = "<span class='scan_danger'>none, patient is braindead</span>"
 		else if(H.stat != DEAD)
@@ -264,10 +264,11 @@
 			print_reagent_default_message = FALSE
 			. += "<span class='scan_warning'>Warning: Unknown substance[(unknown>1)?"s":""] detected in subject's blood.</span>"
 
-	if(H.touching.total_volume)
+	var/datum/reagents/touching_reagents = H.get_contact_reagents()
+	if(touching_reagents && touching_reagents.total_volume)
 		var/unknown = 0
 		var/reagentdata[0]
-		for(var/A in H.touching.reagent_volumes)
+		for(var/A in touching_reagents.reagent_volumes)
 			var/decl/material/R = decls_repository.get_decl(A)
 			if(R.scannable)
 				print_reagent_default_message = FALSE
@@ -297,12 +298,12 @@
 			print_reagent_default_message = FALSE
 			. += "<span class='scan_warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.</span>"
 
-	if(H.chem_doses.len)
+	if(length(H.chem_doses))
 		var/list/chemtraces = list()
 		for(var/T in H.chem_doses)
 			var/decl/material/R = T
 			if(initial(R.scannable))
-				chemtraces += "[initial(R.name)] ([H.chem_doses[T]])"
+				chemtraces += "[initial(R.name)] ([LAZYACCESS(H.chem_doses, T)])"
 		if(chemtraces.len)
 			. += "<span class='scan_notice'>Metabolism products of [english_list(chemtraces)] found in subject's system.</span>"
 

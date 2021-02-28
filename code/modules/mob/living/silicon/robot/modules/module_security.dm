@@ -1,4 +1,5 @@
 /obj/item/robot_module/security
+	associated_department = /decl/department/security
 	channels = list(
 		"Security" = TRUE
 	)

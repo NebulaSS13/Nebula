@@ -1,5 +1,6 @@
 /mob/living/carbon/alien/ascent_nymph/Life()
-	UNLINT(. = ..()) // Unlinting because metabolize in handle_chemicals_in_body() has a non-execution chance of triggering an emote.
+
+	. = ..()
 	if(stat == DEAD)
 		return
 	
@@ -20,12 +21,6 @@
 		adjust_hydration(DEFAULT_THIRST_FACTOR * -1)
 
 	update_nymph_hud()
-
-/mob/living/carbon/alien/ascent_nymph/handle_chemicals_in_body()
-	// Do metabolism.
-	var/datum/reagents/metabolism/ingested_reagents = get_ingested_reagents()
-	if(istype(ingested_reagents))
-		ingested_reagents.metabolize()
 
 /mob/living/carbon/alien/ascent_nymph/proc/update_nymph_hud()
 	// Update the HUD.

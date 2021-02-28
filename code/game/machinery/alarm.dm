@@ -570,7 +570,7 @@
 					scrubbers[scrubbers.len]["filters"] += list(
 						list(
 							"name" = capitalize(mat.gas_name),
-							"id"   = gas_id,
+							"id"   = "\ref[gas_id]",
 							"val"  = (gas_id in info["scrubbing_gas"])
 						)
 					)
@@ -683,8 +683,11 @@
 
 				if("set_scrub_gas")
 					var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
-					if(env_info && (href_list["gas_id"] in env_info.filter_gasses))
-						send_signal(device_id, list(href_list["command"] = list(href_list["gas_id"] = text2num(href_list["val"]))) )
+					var/gas_path = locate(href_list["gas_id"]) // this is a softref to a decl path
+					if(env_info && (gas_path in env_info.filter_gasses))
+						var/list/signal = list()
+						signal[gas_path] = text2num(href_list["val"])
+						send_signal(device_id, list(href_list["command"] = signal))
 					return TOPIC_REFRESH
 
 				if("set_threshold")

@@ -739,7 +739,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	var/mob/living/carbon/human/T = changeling_sting(15,/mob/proc/changeling_lsdsting)
 	if(!T)	return 0
 	spawn(rand(300,600))
-		if(T)	T.hallucination(400, 80)
+		if(T)	T.set_hallucination(400, 80)
 	SSstatistics.add_field_details("changeling_powers","HS")
 	return 1
 

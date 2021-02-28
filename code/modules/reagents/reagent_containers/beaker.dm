@@ -57,6 +57,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,25,30,60,120]"
 	material_force_multiplier = 0.5
+	w_class = ITEM_SIZE_LARGE
 
 /obj/item/chems/glass/beaker/bowl
 	name = "mixing bowl"

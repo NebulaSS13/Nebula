@@ -2,7 +2,7 @@
 /crew_sensor_modifier/binary/process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos, var/list/crew_data)
 	crew_data["alert"] = FALSE
 	if(!H.isSynthetic() && H.should_have_organ(BP_HEART))
-		var/obj/item/organ/internal/heart/O = H.internal_organs_by_name[BP_HEART]
+		var/obj/item/organ/internal/heart/O = H.get_internal_organ(BP_HEART)
 		if (!O || !BP_IS_PROSTHETIC(O)) // Don't make medical freak out over prosthetic hearts
 			var/pulse = H.pulse()
 			if(pulse == PULSE_NONE || pulse == PULSE_THREADY)
@@ -10,7 +10,7 @@
 		if(H.get_blood_oxygenation() < BLOOD_VOLUME_SAFE)
 			crew_data["alert"] = TRUE
 	if(H.isSynthetic())
-		var/obj/item/organ/internal/cell/cell = H.internal_organs_by_name[BP_CELL]
+		var/obj/item/organ/internal/cell/cell = H.get_internal_organ(BP_CELL)
 		if(!cell || cell.percent() < 10)
 			crew_data["alert"] = TRUE
 	return ..()

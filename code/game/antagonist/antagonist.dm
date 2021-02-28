@@ -110,6 +110,15 @@
 			GLOB.hud_icon_reference[faction_name] = antaghud_indicator
 	. = TRUE
 
+/decl/special_role/proc/get_antag_text(mob/recipient)
+	return antag_text
+
+/decl/special_role/proc/get_welcome_text(mob/recipient)
+	return welcome_text
+
+/decl/special_role/proc/get_leader_welcome_text(mob/recipient)
+	return leader_welcome_text
+
 /decl/special_role/proc/tick()
 	return 1
 

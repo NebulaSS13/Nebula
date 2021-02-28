@@ -188,23 +188,29 @@
 /obj/item/chems/food/snacks/icecream
 	name = "ice cream cone"
 	desc = "Delicious waffle cone, but no ice cream."
+	icon = 'icons/obj/icecream.dmi'
 	icon_state = "icecream_cone_waffle" //default for admin-spawned cones, href_list["cone"] should overwrite this all the time
 	layer = ABOVE_OBJ_LAYER
 	bitesize = 3
 	volume = 20
-
-	var/ice_creamed = 0
+	var/ice_creamed
 	var/cone_type
 
 /obj/item/chems/food/snacks/icecream/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment, 5)
+	update_icon()
+
+/obj/item/chems/food/snacks/icecream/on_update_icon()
+	cut_overlays()
+	if(ice_creamed)
+		add_overlay("icecream_[ice_creamed]")
 
 /obj/item/chems/food/snacks/icecream/proc/add_ice_cream(var/flavour_name)
 	name = "[flavour_name] icecream"
-	src.overlays += "icecream_[flavour_name]"
 	desc = "Delicious [cone_type] cone with a dollop of [flavour_name] ice cream."
-	ice_creamed = 1
+	ice_creamed = flavour_name
+	update_icon()
 
 #undef ICECREAM_VANILLA
 #undef ICECREAM_CHOCOLATE

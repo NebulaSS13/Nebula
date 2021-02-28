@@ -17,7 +17,7 @@
 	return		//make sure this is never picked up
 
 /obj/item/storage/internal/mob_can_equip()
-	return 0	//make sure this is never picked up
+	return FALSE //make sure this is never picked up
 
 //Helper procs to cleanly implement internal storages - storage items that provide inventory slots for other items.
 //These procs are completely optional, it is up to the master item to decide when it's storage get's opened by calling open()

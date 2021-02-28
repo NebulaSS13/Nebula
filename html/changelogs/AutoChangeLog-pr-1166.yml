@@ -1,4 +1,0 @@
-author: SolatK
-delete-after: true
-changes:
-  - bugfix: Dropped mobs should not take the same direction with those who held them

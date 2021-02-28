@@ -7,7 +7,6 @@
 	slot_flags = SLOT_UPPER_BODY
 	w_class = ITEM_SIZE_NORMAL
 	force = 0
-	made_of_cloth = TRUE
 
 	valid_accessory_slots = list(
 		ACCESSORY_SLOT_UTILITY,

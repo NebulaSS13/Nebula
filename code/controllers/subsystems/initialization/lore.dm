@@ -59,10 +59,10 @@ SUBSYSTEM_DEF(lore)
 	return tagged_info[token]
 
 /datum/controller/subsystem/lore/proc/refresh_credits_from_departments()
-	for(var/thing in SSdepartments.departments)
-		var/datum/department/dept = SSdepartments.departments[thing]
-		if(dept.title)
-			credits_nouns |= uppertext(dept.title)
+	var/list/all_departments = decls_repository.get_decls_of_subtype(/decl/department)
+	for(var/thing in all_departments)
+		var/decl/department/dept = all_departments[thing]
+		credits_nouns |= uppertext(dept.name)
 
 /datum/controller/subsystem/lore/proc/get_end_credits_title(var/force)
 	if(!GLOB.end_credits_title || force)

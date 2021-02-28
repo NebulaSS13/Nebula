@@ -127,7 +127,7 @@
 			to_chat(user, "<span class='notice'>There is already a blood sample in this syringe.</span>")
 			return
 		if(istype(target, /mob/living/carbon))
-			if(istype(target, /mob/living/carbon/slime))
+			if(isslime(target))
 				to_chat(user, "<span class='warning'>You are unable to locate any blood.</span>")
 				return
 			var/amount = REAGENTS_FREE_SPACE(reagents)

@@ -7,7 +7,7 @@
 	user.regenerate_icons()
 
 /decl/emote/slime/check_user(var/atom/user)
-	return istype(user, /mob/living/carbon/slime)
+	return isslime(user)
 
 /decl/emote/slime/pout
 	key = "pout"

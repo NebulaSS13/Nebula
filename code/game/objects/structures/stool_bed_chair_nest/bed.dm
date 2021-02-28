@@ -250,7 +250,8 @@
 			attach_iv(buckled_mob, usr)
 		return
 	if(ishuman(over_object))
-		if(user_buckle_mob(over_object, usr))
+		var/mob/M = over_object
+		if(loc == M.loc && user_buckle_mob(M, usr))
 			attach_iv(buckled_mob, usr)
 			return
 	if(beaker)

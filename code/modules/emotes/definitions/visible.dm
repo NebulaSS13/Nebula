@@ -332,3 +332,24 @@
 /decl/emote/visible/tilt
 	key = "tilt"
 	emote_message_3p = "USER tilts USER_THEIR head."
+
+/decl/emote/visible/spin
+	key = "spin"
+	check_restraints = TRUE
+	emote_message_3p = "USER spins!"
+
+/decl/emote/visible/spin/do_extra(mob/user)
+	if(istype(user))
+		user.spin(20, 1)
+
+/decl/emote/visible/sidestep
+	key = "sidestep"
+	check_restraints = TRUE
+	emote_message_3p = "USER steps rhythmically and moves side to side."
+
+/decl/emote/visible/sidestep/do_extra(mob/user)
+	if(istype(user))
+		animate(user, pixel_x = 5, time = 5)
+		sleep(3)
+		animate(user, pixel_x = -5, time = 5)
+		animate(pixel_x = user.default_pixel_x, pixel_y = user.default_pixel_x, time = 2)

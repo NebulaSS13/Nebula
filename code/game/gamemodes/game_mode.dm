@@ -425,7 +425,6 @@ var/list/additional_antag_types = list()
 	if(!antag_template)
 		return candidates
 
-	var/antag_id = lowertext(antag_template.name)
 	// If this is being called post-roundstart then it doesn't care about ready status.
 	if(GAME_STATE == RUNLEVEL_GAME)
 		for(var/mob/player in GLOB.player_list)
@@ -433,8 +432,8 @@ var/list/additional_antag_types = list()
 				continue
 			if(istype(player, /mob/new_player))
 				continue
-			if(!antag_id || (antag_id in player.client.prefs.be_special_role))
-				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
+			if(!antag_template.name || (antag_template.name in player.client.prefs.be_special_role))
+				log_debug("[player.key] had [antag_template.name] enabled, so we are drafting them.")
 				candidates += player.mind
 	else
 		// Assemble a list of active players without jobbans.
@@ -444,15 +443,15 @@ var/list/additional_antag_types = list()
 
 		// Get a list of all the people who want to be the antagonist for this round
 		for(var/mob/new_player/player in players)
-			if(!antag_id || (antag_id in player.client.prefs.be_special_role))
-				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
+			if(!antag_template.name || (antag_template.name in player.client.prefs.be_special_role))
+				log_debug("[player.key] had [antag_template.name] enabled, so we are drafting them.")
 				candidates += player.mind
 				players -= player
 
 		// If we don't have enough antags, draft people who voted for the round.
 		if(candidates.len < required_enemies)
 			for(var/mob/new_player/player in players)
-				if(!antag_id || ((antag_id in player.client.prefs.be_special_role) || (antag_id in player.client.prefs.may_be_special_role)))
+				if(!antag_template.name || ((antag_template.name in player.client.prefs.be_special_role) || (antag_template.name in player.client.prefs.may_be_special_role)))
 					log_debug("[player.key] has not selected never for this role, so we are drafting them.")
 					candidates += player.mind
 					players -= player

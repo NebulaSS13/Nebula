@@ -24,6 +24,7 @@
 	projectiletype = /obj/item/projectile/beam/drone
 	projectilesound = 'sound/weapons/laser3.ogg'
 	destroy_surroundings = 0
+	gene_damage = -1
 
 	meat_type =     null
 	meat_amount =   0

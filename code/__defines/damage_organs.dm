@@ -61,9 +61,10 @@
 #define ORGAN_FLAG_DEFORMED       BITFLAG(7) // The organ is permanently disfigured.
 
 // Droplimb types.
-#define DROPLIMB_EDGE 0
-#define DROPLIMB_BLUNT 1
-#define DROPLIMB_BURN 2
+#define DISMEMBER_METHOD_EDGE  0
+#define DISMEMBER_METHOD_BLUNT 1
+#define DISMEMBER_METHOD_BURN  2
+#define DISMEMBER_METHOD_ACID  3
 
 // Robotics hatch_state defines.
 #define HATCH_CLOSED 0
@@ -94,3 +95,8 @@
 #define BLOOD_VOLUME_BAD     60
 #define BLOOD_VOLUME_SURVIVE 30
 
+// enum-ish values for surgery conditions
+#define OPERATE_DENY     0
+#define OPERATE_PASSABLE 1
+#define OPERATE_OKAY     2
+#define OPERATE_IDEAL    3

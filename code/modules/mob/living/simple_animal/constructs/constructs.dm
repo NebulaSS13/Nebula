@@ -26,6 +26,7 @@
 	mob_swap_flags = HUMAN|SIMPLE_ANIMAL|SLIME|MONKEY
 	mob_push_flags = ALLMOBS
 	bleed_colour = "#331111"
+	gene_damage = -1
 
 	meat_type =     null
 	meat_amount =   0

@@ -70,7 +70,7 @@
 /obj/item/organ/internal/eyes/proc/update_colour()
 	if(!owner)
 		return
-	if(owner.chem_effects[CE_GLOWINGEYES])
+	if(owner.has_chemical_effect(CE_GLOWINGEYES, 1))
 		eye_colour = "#75bdd6" // blue glow, hardcoded for now.
 	else
 		eye_colour = owner.eye_colour

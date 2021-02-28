@@ -166,7 +166,7 @@
 		/decl/material/solid/potassium = 1
 	)
 
-/decl/material/solid/mineral/potassium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/solid/mineral/potassium/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	if(volume > 3)
 		M.add_chemical_effect(CE_PULSE, 1)

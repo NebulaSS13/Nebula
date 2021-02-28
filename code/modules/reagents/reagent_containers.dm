@@ -51,7 +51,7 @@
 /obj/item/chems/attack_self(mob/user)
 	return
 
-/obj/item/chems/afterattack(obj/target, mob/user, flag)
+/obj/item/chems/afterattack(atom/target, mob/user, flag)
 	return
 
 /obj/item/chems/attackby(obj/item/W, mob/user)
@@ -105,9 +105,12 @@
 		return 1
 
 	var/contained = REAGENT_LIST(src)
-	admin_attack_log(user, target, "Used \the [name] containing [contained] to splash the victim.", "Was splashed by \the [name] containing [contained].", "used \the [name] containing [contained] to splash")
 
-	user.visible_message("<span class='danger'>[target] has been splashed with something by [user]!</span>", "<span class = 'notice'>You splash the solution onto [target].</span>")
+	admin_attack_log(user, target, "Used \the [name] containing [contained] to splash the victim.", "Was splashed by \the [name] containing [contained].", "used \the [name] containing [contained] to splash")
+	user.visible_message( \
+		SPAN_DANGER("\The [target] has been splashed with the contents of \the [src] by \the [user]!"), \
+		SPAN_DANGER("You splash \the [target] with the contents of \the [src]."))
+
 	reagents.splash(target, reagents.total_volume)
 	return 1
 

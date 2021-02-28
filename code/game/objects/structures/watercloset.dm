@@ -348,9 +348,7 @@
 	if(!ismist && is_washing)
 		return
 	is_washing = 1
-	var/turf/T = get_turf(src)
-	reagents.splash(T, reagents.total_volume)
-	T.clean(src)
+	reagents.splash(get_turf(src), reagents.total_volume)
 	spawn(100)
 		is_washing = 0
 
@@ -466,9 +464,12 @@
 					"<span class='userdanger'>[user] was stunned by \his wet [O]!</span>")
 				return 1
 	else if(istype(O, /obj/item/mop))
-		O.reagents.add_reagent(/decl/material/liquid/water, 5)
-		to_chat(user, "<span class='notice'>You wet \the [O] in \the [src].</span>")
-		playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
+		if(REAGENTS_FREE_SPACE(O.reagents) >= 5)
+			O.reagents.add_reagent(/decl/material/liquid/water, 5)
+			to_chat(user, SPAN_NOTICE("You wet \the [O] in \the [src]."))
+			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
+		else
+			to_chat(user, SPAN_WARNING("\The [O] is saturated."))
 		return
 
 	var/turf/location = user.loc

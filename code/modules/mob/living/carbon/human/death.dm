@@ -5,7 +5,7 @@
 			I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 
 	for(var/obj/item/organ/external/E in src.organs)
-		E.droplimb(0,DROPLIMB_EDGE,1)
+		E.dismember(0,DISMEMBER_METHOD_EDGE,1)
 
 	sleep(1)
 
@@ -85,3 +85,14 @@
 		E.status |= ORGAN_DISFIGURED
 	update_body(1)
 	return
+
+/mob/living/carbon/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DISMEMBER_METHOD_BLUNT)
+	for(var/obj/item/organ/external/limb in organs)
+		var/limb_can_amputate = (limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
+		limb.limb_flags |= ORGAN_FLAG_CAN_AMPUTATE
+		limb.dismember(TRUE, droplimb_type, TRUE, TRUE)
+		if(!QDELETED(limb) && !limb_can_amputate)
+			limb.limb_flags &= ~ORGAN_FLAG_CAN_AMPUTATE
+	dump_contents()
+	if(!skip_qdel && !QDELETED(src))
+		qdel(src)

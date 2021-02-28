@@ -229,23 +229,8 @@
 		product.SetName("[cooking_obj.name] [product.name]")
 
 /obj/machinery/cooker/proc/change_product_appearance(var/obj/item/chems/food/snacks/product)
-	if(product.type == /obj/item/chems/food/snacks/variable) // Base type, generic.
-		product.appearance = cooking_obj
-		product.color = food_color
-		product.filling_color = food_color
-
-		// Make 'em into a corpse.
-		if(istype(cooking_obj, /obj/item/holder))
-			var/matrix/M = matrix()
-			M.Turn(90)
-			M.Translate(1,-6)
-			product.transform = M
-	else
-		var/image/I = image(product.icon, "[product.icon_state]_filling")
+	if(istype(product))
 		if(istype(cooking_obj, /obj/item/chems/food/snacks))
 			var/obj/item/chems/food/snacks/S = cooking_obj
-			I.color = S.filling_color
-		if(!I.color)
-			I.color = food_color
-		product.overlays += I
-
+			food_color = S.filling_color
+		product.update_food_appearance_from(cooking_obj, food_color)

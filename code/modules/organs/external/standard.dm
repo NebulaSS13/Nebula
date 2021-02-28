@@ -29,7 +29,7 @@
 /obj/item/organ/external/chest/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	if(..())
 		// Give them a new cell.
-		var/obj/item/organ/internal/cell/C = owner.internal_organs_by_name[BP_CELL]
+		var/obj/item/organ/internal/cell/C = owner.get_internal_organ(BP_CELL)
 		if(!istype(C))
 			owner.internal_organs_by_name[BP_CELL] = new /obj/item/organ/internal/cell(owner,1)
 

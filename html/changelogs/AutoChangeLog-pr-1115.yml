@@ -1,5 +1,0 @@
-author: eckff
-delete-after: true
-changes:
-  - bugfix: Fixes monitor mask initial world icon.
-  - rscadd: Adds radial icon choice for monitors.

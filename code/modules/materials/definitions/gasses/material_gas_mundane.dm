@@ -20,7 +20,7 @@
 	taste_description = "nothing"
 	metabolism = 0.05
 
-/decl/material/gas/helium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/gas/helium/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_SQUEAKY, 1)
 
@@ -42,31 +42,35 @@
 	taste_description = "stale air"
 	metabolism = 0.05 // As with helium.
 
-/decl/material/gas/carbon_monoxide/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/gas/carbon_monoxide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(!istype(M))
 		return
 	var/warning_message
 	var/warning_prob = 10
-	var/dosage = M.chem_doses[type]
+	var/dosage = LAZYACCESS(M.chem_doses, type)
+	var/mob/living/carbon/human/H = M
 	if(dosage >= 3)
 		warning_message = pick("extremely dizzy","short of breath","faint","confused")
 		warning_prob = 15
 		M.adjustOxyLoss(10,20)
-		M.co2_alert = 1
+		if(istype(H))
+			H.co2_alert = 1
 	else if(dosage >= 1.5)
 		warning_message = pick("dizzy","short of breath","faint","momentarily confused")
-		M.co2_alert = 1
 		M.adjustOxyLoss(3,5)
+		if(istype(H))
+			H.co2_alert = 1
 	else if(dosage >= 0.25)
 		warning_message = pick("a little dizzy","short of breath")
 		warning_prob = 10
-		M.co2_alert = 0
-	else
-		M.co2_alert = 0
-	if(dosage > 1 && M.losebreath < 15)
-		M.losebreath++
+		if(istype(H))
+			H.co2_alert = 0
+	else if(istype(H))
+		H.co2_alert = 0
+	if(istype(H) && dosage > 1 && H.losebreath < 15)
+		H.losebreath++
 	if(warning_message && prob(warning_prob))
-		to_chat(M, "<span class='warning'>You feel [warning_message].</span>")
+		to_chat(M, SPAN_WARNING("You feel [warning_message]."))
 
 /decl/material/gas/methyl_bromide
 	name = "methyl bromide"
@@ -80,17 +84,20 @@
 		/decl/material/gas/methyl_bromide = 1
 	)
 
-/decl/material/gas/methyl_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/gas/methyl_bromide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	. = ..()
-	if(istype(M))
-		for(var/obj/item/organ/external/E in M.organs)
-			if(LAZYLEN(E.implants))
-				for(var/obj/effect/spider/spider in E.implants)
-					if(prob(25))
-						E.implants -= spider
-						M.visible_message("<span class='notice'>The dying form of \a [spider] emerges from inside \the [M]'s [E.name].</span>")
-						qdel(spider)
-						break
+	if(!ishuman(M))
+		return
+	var/mob/living/carbon/human/H = M
+	for(var/obj/item/organ/external/E in H.organs)
+		if(!LAZYLEN(E.implants))
+			continue
+		for(var/obj/effect/spider/spider in E.implants)
+			if(prob(25))
+				E.implants -= spider
+				H.visible_message(SPAN_NOTICE("The dying form of \a [spider] emerges from inside \the [M]'s [E.name]."))
+				qdel(spider)
+				break
 
 /decl/material/gas/nitrous_oxide
 	name = "sleeping agent"
@@ -104,8 +111,8 @@
 	gas_symbol = "N2O"
 	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
 
-/decl/material/gas/nitrous_oxide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	var/dosage = M.chem_doses[type]
+/decl/material/gas/nitrous_oxide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+	var/dosage = LAZYACCESS(M.chem_doses, type)
 	if(dosage >= 1)
 		if(prob(5)) M.Sleeping(3)
 		M.dizziness =  max(M.dizziness, 3)
@@ -196,8 +203,8 @@
 	gas_symbol_html = "Xe"
 	gas_symbol = "Xe"
 
-/decl/material/gas/xenon/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	var/dosage = M.chem_doses[type]
+/decl/material/gas/xenon/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+	var/dosage = LAZYACCESS(M.chem_doses, type)
 	if(dosage >= 1)
 		if(prob(5)) M.Sleeping(3)
 		M.dizziness =  max(M.dizziness, 3)

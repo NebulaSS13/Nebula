@@ -9,10 +9,10 @@
 /turf/simulated/open,
 /area/icarus/open)
 "ad" = (
-/turf/simulated/wall/natural,
+/turf/exterior/wall,
 /area/icarus/open)
 "ae" = (
-/turf/simulated/wall/natural,
+/turf/exterior/wall,
 /area/icarus/vessel)
 "af" = (
 /obj/structure/grille,
@@ -474,7 +474,7 @@
 /area/icarus/vessel)
 "bG" = (
 /obj/structure/closet,
-/obj/item/chems/food/drinks/bottle/tequilla,
+/obj/item/chems/food/drinks/bottle/tequila,
 /obj/item/chems/food/drinks/bottle/wine,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;

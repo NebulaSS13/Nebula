@@ -39,7 +39,8 @@ var/list/responsive_carriers = list(
 		new_name = "[pick(name_prefixes)] [new_name]"
 	I.SetName(new_name)
 	if(modification_flags & XENOFIND_REPLACE_ICON)
-		I.icon = new_icon
+		I.icon = new_icon()
+		I.has_inventory_icon = check_state_in_icon(ICON_STATE_INV, I.icon)
 		I.icon_state = new_icon_state()
 	I.desc = jointext(descriptors, "\n")
 	I.forceMove(location)
@@ -55,6 +56,9 @@ var/list/responsive_carriers = list(
 /decl/archaeological_find/proc/spawn_item(atom/loc)
 	var/spawn_type = pickweight(possible_types)
 	return new spawn_type(loc)
+
+/decl/archaeological_find/proc/new_icon()
+	return new_icon
 
 /decl/archaeological_find/proc/new_icon_state()
 	if(new_icon_state)

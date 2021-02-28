@@ -168,7 +168,7 @@
 		seed.dropInto(loc)
 
 		if(seed.seed.name == "new line" || isnull(SSplants.seeds[seed.seed.name]))
-			seed.seed.uid = SSplants.seeds.len + 1
+			seed.seed.uid = sequential_id(/datum/seed/)
 			seed.seed.name = "[seed.seed.uid]"
 			SSplants.seeds[seed.seed.name] = seed.seed
 

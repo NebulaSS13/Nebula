@@ -7,10 +7,11 @@
 //	generic slime surgery step datum
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/slime
+	allowed_species = null
+	disallowed_species = null
+	expected_mob_type = /mob/living/carbon/slime
 	hidden_from_codex = TRUE
-
-/decl/surgery_step/slime/is_valid_target(mob/living/carbon/slime/target)
-	return isslime(target)
+	surgery_step_category = /decl/surgery_step/slime
 
 /decl/surgery_step/slime/assess_bodypart(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
 	return TRUE
@@ -18,7 +19,7 @@
 /decl/surgery_step/slime/assess_surgery_candidate(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
 	return isslime(target) && target.stat == DEAD
 
-/decl/surgery_step/slime/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+/decl/surgery_step/slime/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
 	return list(SKILL_SCIENCE = SKILL_ADEPT)
 
 //////////////////////////////////////////////////////////////////
@@ -26,6 +27,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/slime/cut_flesh
 	name = "Make incision in slime"
+	description = "This procedure begins slime core removal surgery by cutting an incision open."
 	allowed_tools = list(
 		/obj/item/scalpel = 100,
 		/obj/item/knife = 75,
@@ -55,6 +57,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/slime/cut_innards
 	name = "Dissect innards"
+	description = "This procedure disconnects slime cores from the innards."
 	allowed_tools = list(
 		/obj/item/scalpel = 100,
 		/obj/item/knife = 75,
@@ -84,6 +87,7 @@
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/slime/saw_core
 	name = "Remove slime core"
+	description = "This procedure completely separates a slime cores and allows it to be removed."
 	allowed_tools = list(
 		/obj/item/scalpel/manager = 100,
 		/obj/item/circular_saw = 100,

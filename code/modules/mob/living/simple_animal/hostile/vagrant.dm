@@ -24,6 +24,8 @@
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
+	gene_damage = -1
+
 	var/cloaked = 0
 	var/mob/living/carbon/human/gripping = null
 	var/blood_per_tick = 3

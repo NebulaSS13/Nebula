@@ -15,7 +15,7 @@
 /datum/random_map/automata/cave_system/mountains
 	iterations = 2
 	descriptor = "space mountains"
-	wall_type =  /turf/simulated/wall/natural
+	wall_type =  /turf/exterior/wall
 	cell_threshold = 6
 	target_turf_type = null
 	floor_type = null
@@ -30,7 +30,7 @@
 		floor_type = world.turf
 	..()
 
-/datum/random_map/automata/cave_system/mountains/get_additional_spawns(value, var/turf/simulated/wall/natural/T)
+/datum/random_map/automata/cave_system/mountains/get_additional_spawns(value, var/turf/exterior/wall/T)
 	if(istype(T))
 		T.paint_color = rock_color
 		T.queue_icon_update()

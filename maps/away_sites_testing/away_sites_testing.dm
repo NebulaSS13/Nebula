@@ -19,6 +19,7 @@
 	#include "../away/slavers/slavers_base.dm"
 	#include "../away/unishi/unishi.dm"
 	#include "../away/yacht/yacht.dm"
+	#include "../away/liberia/liberia.dm"
 
 	#define USING_MAP_DATUM /datum/map/away_sites_testing
 

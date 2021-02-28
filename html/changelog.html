@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  <title>Baystation 12 Changelog</title>
+  <title>Nebula13 Changelog</title>
   <link rel="stylesheet" type="text/css" href="changelog.css">
   <base target="_blank" />
   <script type='text/javascript'>
@@ -23,27 +23,22 @@
 <table align='center' class="top">
 	<tr>
 		<td valign='top'>
-			<div align='center'><font size='3'><b>Baystation 12</b></font></div>
+			<div align='center'><font size='3'><b>Nebula13</b></font></div>
 			<div align='center'><font size='3'><b><i>A Space Station 13 Project</i></b></font></div>
 			
-			<p><div align='center'><font size='3'><a href="http://wiki.baystation12.net/">Wiki</a> | <a href="https://github.com/Baystation12/Baystation12/">Source code</a></font></div></p>
+			<p><div align='center'><font size='3'><a href="https://github.com/NebulaSS13/Nebula/">Source code</a></font></div></p>
             <font size='2'>Code licensed under <a href="http://www.gnu.org/licenses/agpl.html">AGPLv3</a>. Content licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.<br><br>
-			<font size='2'><b>Visit our IRC channels:</b> #bs12 and #codershuttle on irc.sorcery.net</font><br>
-			<font size='2'><b>Join our Discord server:</b> <a href='https://discord.gg/DrtRFxs'>-Click Here-</a><br></font>
-			<font size='2'><b>Support Baystation on Patreon:</b> <a href='https://www.patreon.com/bs12'>-Click Here-</a><br></font>
 			</td>
 	</tr>
 </table>
 
-<br><b>Baystation 12 Credit List</b>
+<br><b>Nebula13 Credit List</b>
 <table align='center' class="top">
 	<tr>
 		<td valign='top'>
-            <font size='2'><b>Developers:</b> afterthought, chinsky, F-Tang Steve, mloc, PsiOmegaDelta, xales<br></font>
-			<font size='2'><b>Currently Active GitHub contributor list:</b> <a href='https://github.com/Baystation12/Baystation12/graphs/contributors'>-Click Here-</a><br></font>
-			<p><font size='2'><b>Credits:</b> Abi79, Apple_Master, Arcalane, Aryn, babydoll, Cael_Aislinn, Ccomp5950, chinsky, CompactNinja, Deus Dactyl, DopeGhoti, Erthilo, Flashkirby, Hawk_v3, Head, Ipsil, Invisty, JoeyJo0, Lexusjjss, Melonstorm, Miniature, mloc, NerdyBoy1104, PsiOmegaDelta, Searif, SkyMarshal, Snapshot, Spectre, Strumpetplaya, Sunfall, Tastyfish, Uristqwerty, Xenone, cib, faux, Zuhayr<br></p>
-			<font size='2'><b>Special thanks to:</b> The developers of /tg/station, /vg/station, GoonStation, the original Space Station 13, and BYOND</font>
-			<div align='center'><font size='2' color='red'><b><br>Have a bug to report?</b> Visit our <a href="https://github.com/Baystation12/Baystation12/issues?labels=Bug&state=open">Issue Tracker</a>.<br></font></div>
+			<font size='2'><b>Contributor list:</b> <a href='https://github.com/NebulaSS13/Nebula/graphs/contributors'>-Click Here-</a><br></font>
+			<font size='2'><b>Special thanks to:</b> the developers of Baystation 12, ScavStation, /tg/station, /vg/station, GoonStation, the original Space Station 13, and BYOND.<br></font>
+			<div align='center'><font size='2' color='red'><b><br>Have a bug to report?</b> Visit our <a href="https://github.com/NebulaSS13/Nebula/issues?labels=Bug&state=open">Issue Tracker</a>.<br></font></div>
 		</td>
 	</tr>
 </table>
@@ -57,294 +52,154 @@
 		-->
 		<div class="commit sansserif">
 
-			<h2 class="date">12 February 2020</h2>
+			<h2 class="date">08 February 2021</h2>
+			<h3 class="author">eckff updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added a overmap-based merchant submap ship - Liberia.</li>
+			</ul>
+
+			<h2 class="date">05 February 2021</h2>
+			<h3 class="author">comma updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Need to be on same tile as rollerbed to buckle to it.</li>
+				<li class="tweak">Fires no longer destroy wiring under floor tiles.</li>
+				<li class="bugfix">Guns found in xenoarch now have icons again</li>
+				<li class="imageadd">Added inhands for xenoarch find blades</li>
+			</ul>
+			<h3 class="author">eckff updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added the panic bunker support from Hestia repository. By default, it turned off and can be toggled on in config or manually for a round.</li>
+				<li class="admin">Admins can control the panic bunker state and add/revoke bypass in Server section with R_SERVER flag.</li>
+			</ul>
+
+			<h2 class="date">04 February 2021</h2>
+			<h3 class="author">eckff updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Tweaked bucket world-icon state. It's little bit bigger now, but still tiny.</li>
+				<li class="rscadd">Added augmentation implanting support code if anyone would like to add implants or augmentations in loadout.</li>
+			</ul>
+
+			<h2 class="date">03 February 2021</h2>
+			<h3 class="author">MistakeNot4892 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Amputating the second-to-last organ on a human mob (typically leaving the torso) will drop the last organ as a limb and destroy the mob -in other words you can now chop bodies up entirely instead of being left with a weird unwieldly torso.</li>
+				<li class="tweak">Amputation is faster but messier if you're doing it improperly (improvised tool or circumstances).</li>
+				<li class="tweak">Failing an amputation will now get the tool stuck in the person's limb.</li>
+			</ul>
+
+			<h2 class="date">02 February 2021</h2>
+			<h3 class="author">MistakeNot4892 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Firearms now use pixel-precise projectile iteration, ported from Aurora.</li>
+			</ul>
+
+			<h2 class="date">31 January 2021</h2>
+			<h3 class="author">comma updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Credsticks are now tiny instead of normal sized</li>
+			</ul>
+
+			<h2 class="date">30 January 2021</h2>
+			<h3 class="author">eckff updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscdel">Removed the privacy poll.</li>
+			</ul>
+
+			<h2 class="date">28 January 2021</h2>
+			<h3 class="author">comma updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Ha ha ha I am abusing my GitHub maint powers to make chinsky commit a changelog via the bot workflow. Science!</li>
+			</ul>
+
+			<h2 class="date">27 January 2021</h2>
+			<h3 class="author">MistakeNot4892 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Will the bot generate the changelog now? Let's find out.</li>
+				<li class="tweak">Coat racks are now material-based and craftable.</li>
+				<li class="tweak">Coat rack backend has been rewritten to support hanging any hat or suit item.</li>
+				<li class="experiment">A bunch of structures have been rewritten to use some shared code. As a result, you can examine most structures to see some tips on how to interact with them, and you will find several construction/deconstruction steps have changed.</li>
+				<li class="tweak">Metal structures must be dismantled with a welding tool, while other materials use a crowbar.</li>
+				<li class="tweak">Girders are now 'supports', and are reinforced by using a material stack on them before anchoring. Using a screwdriver will remove the reinforcement, or toggle whether or not the support will produce a fake wall.</li>
+				<li class="experiment">This is going to be buggy, please report issues and problems.</li>
+			</ul>
+			<h3 class="author">N8-Toe updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added chemical saftey suits to code, protect against gas in the air but need to be used with a face covering mask, unimplemented at this time.</li>
+			</ul>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="admin">Disposal bin stuffing and flushing are now attack logs instead of admin logs.</li>
+				<li class="tweak">Cutting the ID Scan wire on doors will now disable ID scanning. If the door is 'secure', this blocks access entirely. For all other doors, this fully bypasses access requirements.</li>
+				<li class="bugfix">Windoors are now properly emag-able.</li>
+				<li class="tweak">Emagged windoors will now provide feedback that they are broken when you try to close them.</li>
+				<li class="tweak">You can now tell if a door's control board has been fried by examining the door with an IT skill of trained or higher.</li>
+				<li class="tweak">'Mild' labels in medical scans are now highlighted in yellow and bold to make them more noticeable.</li>
+				<li class="rscadd">Windows and airlock windows are now paintable.</li>
+				<li class="admin">Smothering people with a rag and hitting people with an ignited rag now generates attack logs.</li>
+				<li class="tweak">You now require a grab to smother people with a rag.</li>
+				<li class="tweak">Smothering people with a rag now has a timed progress bar - 3 seconds if your CQC skill is trained or above, 6 seconds for everyone else.</li>
+				<li class="rscadd">General station/ship lights now have randomized tones - The old default warm yellow, a cool blue, and pure white.</li>
+			</ul>
+			<h3 class="author">SierrqKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="admin">Banned player's mobs now have their ckey stripped so they display the permanent SSD message and instantly cryo.</li>
+			</ul>
+			<h3 class="author">SolatK updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Dropped mobs should not take the same direction with those who held them</li>
+				<li class="bugfix">CE rig now have a boots</li>
+			</ul>
 			<h3 class="author">SomeoneStoleMyNickname updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="bugfix">The Guidebooks Hacking and Repair and Construction should now work as intended.</li>
+				<li class="rscadd">Added a new digital pencode tag. [redacted] creates the string R E D A C E D in black lettes on black background to give the illusion of redacted contend in reports.</li>
 			</ul>
-
-			<h2 class="date">10 February 2020</h2>
-			<h3 class="author">Flying_loulou updated:</h3>
+			<h3 class="author">The Stalker updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="rscadd">Fleet engineers rejoice ! The fleet unlocked some funds, in order to provide you with a dedicated uniform, constituted of a polo, some pants, and a jacket (available in the uniform vendor, under the utility extra section).</li>
+				<li class="rscadd">Finished up some unused void suits. So they have stats (finally)</li>
+				<li class="rscadd">Added new materials to vender and recipes. Will be doing a part two i gues. Will eventually look into finishing the cotton plant or make a mega edition pack of new weapons</li>
 			</ul>
-
-			<h2 class="date">08 February 2020</h2>
-			<h3 class="author">mikomyazaki updated:</h3>
+			<h3 class="author">Winter updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="bugfix">Atmospherics' tank controllers work again when controlling the output vent.</li>
+				<li class="rscadd">Added textbooks. Textbooks are items that give skillbuffs while you are actively using them. Textbooks require basic literacy to use, and you must have the specific textbook for your skill level.</li>
+				<li class="rscadd">Added a book merchant who sells textbooks.</li>
+				<li class="tweak">Molluscs and Mollusc meat now have monetary value.</li>
+				<li class="maptweak">Tradeship now always starts the round with a book trader available.</li>
+				<li class="maptweak">Tradeship has four randomized textbooks in various locations at roundstart.</li>
+				<li class="experiment">Please report balance issues (and of course bugs) that may arrise from this feature.</li>
+				<li class="tweak">Bonus: Codex links now open new windows.</li>
+				<li class="rscadd">Those with Master Literacy can now make their own textbooks. Blank textbooks are acquired via an autobinder and then written using a pen.</li>
+				<li class="rscadd">Includes codex information on this process.</li>
+				<li class="tweak">Made textbooks in general to be one size smaller to allow being put in bags.</li>
+				<li class="tweak">Very basic support for fabricators to get colours from something else other than pipe_colors</li>
+				<li class="experiment">Unsure how this impacts skill balance, please report on that if there are issues.</li>
 			</ul>
-			<h3 class="author">zaredman updated:</h3>
+			<h3 class="author">comma updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="maptweak">Removes Explorer and Pilot access to Xenobiology, Xenoarchaeology, Toxins, and assorted labs. Pathfinder retains their original access.</li>
+				<li class="tweak">Desert planets now have 'dry mud' turfs in the areas where quicksands can spawn.</li>
+				<li class="rscadd">Added new type of toolbox - electrician's. It holds all needed tools for machinery components interactions and several boxes of most common components. Can be found in supply (electrical maintenance pack) and electrical locker</li>
+				<li class="balance">Engineering vendomats now vend APC/air alarm kits instead of just circuitboards.</li>
+				<li class="balance">Most machinery components are now tiny rather than small</li>
+				<li class="bugfix">APCs can be fixed again after explosions</li>
+				<li class="tweak">APCs now don't draw screen overlay / glow if screen component is destroyed</li>
+				<li class="tweak">APCs now don't report cell power in UI etc if battery backup is destroyed</li>
+				<li class="tweak">APCs now show that external power is not coming in if terminal component is destroyed</li>
+				<li class="experiment">Machines can actually be destroyed fully by strong explosions again (not just component damage)</li>
+				<li class="tweak">Added categories to textile designs</li>
+				<li class="balance">Costs for armor items are adjusted, generally more expensive to produce</li>
+				<li class="tweak">Holsters now leave their fibers on things put inside.</li>
+				<li class="tweak">Crowbarring doors now leaves scuffing on them, visible when examined up close. Can be repaired as any other damage.</li>
+				<li class="tweak">Gas tanks will now dump their content into air when destroyed</li>
 			</ul>
-
-			<h2 class="date">07 February 2020</h2>
-			<h3 class="author">Chinsky updated:</h3>
+			<h3 class="author">eckff updated:</h3>
 			<ul class="changes bgimages16">
-				<li class="tweak">Various drinking glasses are now printed from a microlathe instead of being vended. Bar now has pre-loaded microlathe for this purpose.</li>
-				<li class="rscadd">Added new type of drinking glass - flute glass.</li>
-				<li class="tweak">Added transparency to some reagents, namely water and booze.</li>
-				<li class="tweak">Can now select recipies category in fabricators</li>
-				<li class="tweak">More types of glasses can take accessories like sticks or straws now, try it out.</li>
+				<li class="rscadd">Backported Adherent species from Baystation12.</li>
+				<li class="rscadd">Backported Lizards species (previously Unathi).</li>
+				<li class="imageadd">Lizard people get new dark sprite.</li>
+				<li class="bugfix">Fixes monitor mask initial world icon.</li>
+				<li class="rscadd">Adds radial icon choice for monitors.</li>
+				<li class="tweak">Roundstart can now be any hour.</li>
 			</ul>
-
-			<h2 class="date">05 February 2020</h2>
-			<h3 class="author">mikomyazaki updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="admin">Mobs without the UI elements to use psionics can no longer be granted psionics. e.g. simple animals.</li>
-				<li class="bugfix">Polytools now allow you to extend tools again.</li>
-			</ul>
-
-			<h2 class="date">03 February 2020</h2>
-			<h3 class="author">mikomyazaki updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Throwing items at a disposal chute will properly dispose of them again.</li>
-				<li class="bugfix">Fixes a bug where (for example) throwing an object at a grilled window would hit the grill inside the window instead of the window.</li>
-			</ul>
-
-			<h2 class="date">31 January 2020</h2>
-			<h3 class="author">Lorwp updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="soundadd">Energy melee weapons now have an on-hit sound</li>
-			</ul>
-			<h3 class="author">mikomyazaki updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Paper will now check if your pen works before you start writing instead of after you've written your text.</li>
-				<li class="tweak">If your retractable pen isn't in its active state when you start writing on something, your character will automatically click it.</li>
-				<li class="tweak">Retractable pens will now toggle to their active state when you write on anything (union cards, people, the wall) instead of only paper.</li>
-			</ul>
-			<h3 class="author">zaredman updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Security now has access to a written statement, weapons license, arrest report, and restraining order template on the Reports program.  Paperwork masochists, rejoice.</li>
-			</ul>
-
-			<h2 class="date">30 January 2020</h2>
-			<h3 class="author">Anticept updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Farmbots now refill from a sink at a higher rate, up from 10 to 100 per cycle.</li>
-			</ul>
-			<h3 class="author">Cheb Pomidorov updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">You can now lock and unlock coffins using a screwdriver. Locked coffins can be struggled out of, similarly to welded closets.</li>
-			</ul>
-			<h3 class="author">Imienny updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added a new roles to Vox Scavenger away site, "Shoal Biotechnician", "Shoal Technician" and "Quill"</li>
-			</ul>
-			<h3 class="author">MrKicker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">AI can now make multi-line announcements</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscdel">IPCs can no longer be counsellors.</li>
-			</ul>
-			<h3 class="author">WezYo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Flying drones can now open windoors</li>
-			</ul>
-			<h3 class="author">Xaytan updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Adds welding goggles as an option in loadout.</li>
-			</ul>
-			<h3 class="author">afterthought2 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Pipe meters, vents, scrubbers, and pumps now use radio components.</li>
-			</ul>
-			<h3 class="author">mikomyazaki updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Guest pass icon will now change colour to black when expired.</li>
-				<li class="tweak">Guest pass machine gets an updated UI.</li>
-				<li class="tweak">Humanoid Dionaea now get the audible chirp emotes.</li>
-				<li class="soundadd">Added a new multichirp (*mchirp) audible emote sound effect for humanoid Dionaea.</li>
-				<li class="bugfix">Portable drives now work properly in modular computers for all operations.</li>
-				<li class="bugfix">Dense objects will now properly stop throwing/leaping.</li>
-				<li class="bugfix">Hand teleporters will now create portals that aren't random, when you are linked to a teleport computer on a connected z-level.</li>
-				<li class="tweak">Hand teleporters will now only list teleport computers that are on a connected z-level.</li>
-				<li class="bugfix">Can no longer right-click darkness due to being unconscious to see what is on that turf.</li>
-				<li class="tweak">Decreased difficulty of installing augments to the same level as installing robotic organs.</li>
-				<li class="imageadd">Adds three xenowear options for Space-Adapted humans - Leg braces, neck brace and venter.</li>
-				<li class="imageadd">Adds animations for the sleeper & bodyscanner when active & occupied.</li>
-				<li class="soundadd">Adds a scanning sound for the bodyscanner.</li>
-				<li class="tweak">Space-Adapted humans' stamina now depends slightly upon gravity levels, with better stamina than baseline humans in low-gravity, worse in standard gravity.</li>
-				<li class="tweak">Space-Adapted humans are adapted for lower-pressure environments, but suffer in higher pressure environments faster relative to baseline humans.</li>
-				<li class="bugfix">The Vox shuttle can now return to its hangar properly.</li>
-			</ul>
-			<h3 class="author">quardbreak updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Tweaked welding sounds on airlock and vents. Now after weld operation you should hear second sound like you end your action.</li>
-			</ul>
-			<h3 class="author">zkxs updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Combining stacks from an inventory no longer leaves bugged sprites</li>
-				<li class="bugfix">Having more than 10 brain damage no longer grants immunity to peridaxon's side effects (confusion and drowsiness)</li>
-				<li class="spellcheck">Sec HUD goggles description grammar fix</li>
-				<li class="rscadd">Adherent can now float over tables</li>
-			</ul>
-
-			<h2 class="date">03 January 2020</h2>
-			<h3 class="author">Devildabeast updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Changes "restricted roles" to the broader "casual roles" in loadoout.</li>
-				<li class="tweak">Adjusts several loadout item restrictions.</li>
-			</ul>
-			<h3 class="author">Imienny updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Replaced spoon in MRE with spork</li>
-			</ul>
-			<h3 class="author">mikomyazaki updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Nymphs and Golems are no longer valid targets for auto-traitor.</li>
-				<li class="bugfix">Mercenary radio channel now works again for mercs, raiders, traitors etc.</li>
-			</ul>
-			<h3 class="author">zkxs updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixes a runtime when using an atmos analyzer on a pit</li>
-			</ul>
-
-			<h2 class="date">28 December 2019</h2>
-			<h3 class="author">Cheb Pomidorov updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Scientists and Research Assistants can now enter areas such as Medbay and Brig's hallways and the Bridge Entry.</li>
-			</ul>
-			<h3 class="author">Devildabeast updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Changes the Mentalist's Mind Read time limit from 25 seconds to 60.</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Mercenary and Provocateur starting points are hidden from the Torch's roundstart sensor message.</li>
-			</ul>
-			<h3 class="author">zkxs updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">The psionic signal event can no longer give synthetics genetic disabilities</li>
-			</ul>
-
-			<h2 class="date">27 December 2019</h2>
-			<h3 class="author">babydoll updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Increased damage taken when falling down a hole to another deck.</li>
-				<li class="tweak">Increased duration of stun after falling.</li>
-			</ul>
-			<h3 class="author">mikomyazaki updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Merchant station teleporter computer will now display the proper messages relating to costs.</li>
-			</ul>
-
-			<h2 class="date">23 December 2019</h2>
-			<h3 class="author">mikomyazaki updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Can't put objects inside bags that are in pockets anymore.</li>
-				<li class="tweak">Updated traitor extended round description so it is appropriate for the SEV Torch setting.</li>
-				<li class="bugfix">Double doors are properly solid again.</li>
-			</ul>
-
-			<h2 class="date">22 December 2019</h2>
-			<h3 class="author">Chinsky updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">During the metor rounds, evacuation jump will be called automatically after announcement that rocks are coming. It will take 30ish minutes to arrive</li>
-				<li class="tweak">Since there's less time and Torch is /very/ sturdy (thicc hull and PD), initial intensity is bumped a bit and escalation is going faster, so will hit max intensity at around 30 minutes mark.</li>
-				<li class="tweak">After the jump mode will check for some important things and will print red/green text about them:  helm console (need to have at least one and powered), thrusters (ditto), bluespace drive (the room must be powered).</li>
-			</ul>
-			<h3 class="author">mikomyazaki updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Trained Forensics now provides a much larger bonus to making simple incisions on dead targets for autopsies.</li>
-			</ul>
-
-			<h2 class="date">21 December 2019</h2>
-			<h3 class="author">Imienny updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Tweaked TC cost of uplinks in Character Setup menu, radio uplink now gives you 30% more TC, uplink Implant cost only 20% of total TC and taking TC without uplink gives you 50% more TC.</li>
-				<li class="tweak">Message shown after receiving PDA uplink now should explain better how to access uplink.</li>
-				<li class="tweak">Delay for removing knives from boots was decreased to one second</li>
-				<li class="tweak">Using combi-knifes on intent other than help intent will now open their blade</li>
-				<li class="tweak">Portable freezers can now fit inside backpacks and have capacity of large box</li>
-				<li class="tweak">Combat knifes can now fit inside boots</li>
-			</ul>
-			<h3 class="author">mikomyazaki updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Sleepers will now properly display the amount of a drug in the occupant on the UI.</li>
-				<li class="tweak">R-UST now has a prompt to tell you when hitting the shutdown button will cause an instant explosion, asking whether you're sure.</li>
-				<li class="maptweak">R-UST room machinery starts the round anchored.</li>
-				<li class="tweak">Improves the fuel injector controller UI, with injection rate and toggle all injectors controls.</li>
-			</ul>
-
-			<h2 class="date">20 December 2019</h2>
-			<h3 class="author">Cajoes updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added orderable replacement barricade tape rolls from supply.</li>
-			</ul>
-			<h3 class="author">PsyCommando updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Made the currency used in text entries read from the current map. Mainly to help with downstream stuff.</li>
-			</ul>
-			<h3 class="author">afterthought2 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Buildable radio components for machines are now available. They will have limited use with machines currently.</li>
-				<li class="tweak">When building air sensors, you now must also add a power component and a radio transmitter. You can use a multitool on the radio transmitter while standing near a machine to configure it.</li>
-			</ul>
-			<h3 class="author">ghostsheet updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Mercenary gamemode is now overmap.</li>
-			</ul>
-
-			<h2 class="date">19 December 2019</h2>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">PTR bullets aren't hitscan and do a little less damage and penetration.</li>
-			</ul>
-			<h3 class="author">babydoll updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added foam dart launchers.</li>
-				<li class="rscadd">Foam dart launchers can now be won as prizes from arcade machines.</li>
-				<li class="rscadd">Added a modified foam dart launcher to the uplink's gimmick weapons menu.</li>
-			</ul>
-
-			<h2 class="date">17 December 2019</h2>
-			<h3 class="author">CrimsonShrike updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Drill heads show current status while mounted and can be examined for information when not mounted on an exosuit drill.</li>
-			</ul>
-			<h3 class="author">EcklesFire updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Adjusted renegade numbers.</li>
-				<li class="bugfix">Removed duplicate vars.</li>
-			</ul>
-
-			<h2 class="date">15 December 2019</h2>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Starborn, Blueforged, and Promethean variations properly show the head, torso, and groin.</li>
-			</ul>
-
-			<h2 class="date">12 December 2019</h2>
-			<h3 class="author">Rowtree updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixes recently added drink strengths to a more accurate level.</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Bald boosters get bald ears.</li>
-			</ul>
-			<h3 class="author">mikomyazaki updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">AIs can now spawn properly at roundstart.</li>
-			</ul>
-			<h3 class="author">zaredman updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Biowaste disposal cart access to only require surgery access instead of requiring 6 different accesses. Corpsmen rejoice!</li>
-			</ul>
-		</div>
-
-<b>GoonStation 13 Development Team</b>
-	<div class = "top">
-	<b>Coders:</b> Stuntwaffle, Showtime, Pantaloons, Nannek, Keelin, Exadv1, hobnob, Justicefries, 0staf, sniperchance, AngriestIBM, BrianOBlivion<br>
-	<b>Spriters:</b> Supernorn, Haruhi, Stuntwaffle, Pantaloons, Rho, SynthOrange, I Said No<br>
-	</div>
-<br>
-<p class="lic"><a name="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="88x31.png" alt="Creative Commons License" /></a><br><i>Except where otherwise noted, Goon Station 13 is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-Noncommercial-Share Alike 3.0 License</a>.<br>Rights are currently extended to <a href="http://forums.somethingawful.com/">SomethingAwful Goons</a> only.</i></p>
-<p class="lic">Some icons by <a href="http://p.yusukekamiyamane.com/">Yusuke Kamiyamane</a>. All rights reserved. Licensed under a <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>.</p>
+</div>
 </td></tr></table>
 </body>
 </html>

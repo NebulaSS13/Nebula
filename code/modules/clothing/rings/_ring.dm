@@ -5,4 +5,4 @@
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_HANDS
 	gender = NEUTER
-	var/undergloves = 1
+	var/can_fit_under_gloves = TRUE
