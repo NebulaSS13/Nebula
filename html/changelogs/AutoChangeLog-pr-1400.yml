@@ -1,4 +1,0 @@
-author: comma
-delete-after: true
-changes:
-  - bugfix: Airlocks no longer spawn extra lock when constructed

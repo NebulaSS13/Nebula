@@ -1,6 +1,0 @@
-author: MistakeNot4892
-delete-after: true
-changes:
-  - tweak: Webhook config now supports per-endpoint mention lists. Consult config/example/webhooks.json
-      for the format. If you don't need individual pings, you don't need to update
-      anything.
