@@ -33,13 +33,6 @@ var/list/ventcrawl_machinery = list(
 		return FALSE
 	return ventcrawl_carry()
 
-/mob/living/Login()
-	. = ..()
-	//login during ventcrawl
-	if(is_ventcrawling && istype(loc, /obj/machinery/atmospherics)) //attach us back into the pipes
-		remove_ventcrawl()
-		add_ventcrawl(loc)
-
 /mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(is_type_in_list(carried_item, can_enter_vent_with))
 		return !get_inventory_slot(carried_item)
