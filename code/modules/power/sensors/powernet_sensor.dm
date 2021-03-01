@@ -161,6 +161,7 @@
 			APC_entry["breaker"] = A.operating
 			APC_entry["failure"] = A.failure_timer
 			APC_entry["telemetry"] = A.aidisabled
+			APC_entry["remote_control"] = A.remote_control
 			// Channel Statuses
 			APC_entry["s_equipment"] = S[A.equipment+1]
 			APC_entry["s_lighting"] = S[A.lighting+1]

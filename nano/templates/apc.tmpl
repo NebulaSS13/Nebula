@@ -95,6 +95,15 @@
 			</div>
 		</div>
 	{{/if}}
+	
+	<div class="item">
+		<div class="itemLabel">
+			Telepresence Control: 
+		</div>
+		<div class="itemContent">
+			{{:helper.link('Enabled', 'signal', {'toggle_rc' : 1}, data.remote_control ? 'selected' : null)}}{{:helper.link('Disabled', 'close', {'toggle_rc' : 1}, data.remote_control ? null : 'selected')}}
+		</div>
+	</div>
 
 
 	<h3>Power Channels</h3>

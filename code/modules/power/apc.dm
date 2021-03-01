@@ -121,6 +121,7 @@
 	var/global/list/status_overlays_equipment
 	var/global/list/status_overlays_lighting
 	var/global/list/status_overlays_environ
+	var/remote_control = FALSE //is remote control enabled?
 	var/autoname = 1
 	var/cover_removed = FALSE           // Cover is gone; can't close it anymore.
 	var/locked = TRUE                   // This is the interface, not the hardware.
@@ -519,6 +520,7 @@
 		"coverLocked" = coverlocked,
 		"failTime" = failure_timer * 2,
 		"siliconUser" = istype(user, /mob/living/silicon),
+		"remote_control" = remote_control,
 		"powerChannels" = list(
 			list(
 				"title" = "Equipment",
@@ -682,6 +684,10 @@
 	if(href_list["overload"])
 		if(istype(user, /mob/living/silicon))
 			overload_lighting()
+		return TOPIC_REFRESH
+
+	if(href_list["toggle_rc"])
+		remote_control = !remote_control
 		return TOPIC_REFRESH
 
 /obj/machinery/power/apc/proc/force_update_channels()

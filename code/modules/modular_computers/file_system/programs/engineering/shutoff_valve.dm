@@ -17,9 +17,16 @@
 	name = "Shutoff valve monitor"
 
 /datum/nano_module/program/shutoff_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
-	data["valves"] = list()
+	var/list/list/data = host.initial_data()
+	var/list/z_valves = list()
+	var/list/zs = GetConnectedZlevels(get_z(nano_host()))
+
 	for(var/obj/machinery/atmospherics/valve/shutoff/S in shutoff_valves)
+		if(S.z in zs)
+			z_valves += S
+
+	data["valves"] = list()
+	for(var/obj/machinery/atmospherics/valve/shutoff/S in z_valves)
 		data["valves"][++data["valves"].len] = list("name" = S.name, "enable" = S.close_on_leaks, "open" = S.open, "location" = get_area(S), "ref" = "\ref[S]")
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -40,21 +47,9 @@
 
 		// Invalid ref
 		if(!istype(S) || QDELETED(S))
-			return 0
+			return 1
 
 		S.close_on_leaks = !S.close_on_leaks
-
-	if(href_list["toggle_open"])
-		var/obj/machinery/atmospherics/valve/shutoff/S = locate(href_list["toggle_open"])
-
-		// Invalid ref
-		if(!istype(S) || QDELETED(S))
-			return 0
-
-		if(S.open)
-			S.close()
-		else
-			S.open()
 
 	return
 

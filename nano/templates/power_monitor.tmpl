@@ -56,7 +56,7 @@
 			{{:data.focus.total_used_all}}
 		</div>
 		<h3>Sensor Readings</h3>
-		<table><tr><th>APC Name<th>Breaker<th>Equipment<th>Lighting<th>Environment<th>Cell Status<th>APC Load
+		<table><tr><th>APC Name<th>Breaker<th>RC<th>Equipment<th>Lighting<th>Environment<th>Cell Status<th>APC Load
         {{for data.focus.apc_data}}
             <tr>
             {{if value.failure || value.telemetry}}
@@ -67,9 +67,11 @@
 				<td>{{:helper.link('MALFUNCT', 'alert', null, 'disabled', 'redButton')}}
 				<td>{{:helper.link('MALFUNCT', 'alert', null, 'disabled', 'redButton')}}
 				<td>{{:helper.link('MALFUNCT', 'alert', null, 'disabled', 'redButton')}}
+				<td>{{:helper.link('MALFUNCT', 'alert', null, 'disabled', 'redButton')}}
             {{else}}
                 <td>{{:value.name}}
                 <td>{{:helper.link(value.breaker ? 'On' : 'Off', 'power',{'toggle_breaker' : value.ref}, null, value.breaker ? 'greenButton' : 'redButton')}}
+				<td>{{:helper.link(value.remote_control ? 'Enabled' : 'Disabled', value.remote_control ? 'signal' : 'close', null, 'greenButton')}}
                 <td>{{:helper.link(value.s_equipment, null, {'toggle_powerchannel_equip' : value.ref}, null, value.n_equipment < 3 ? 'redButton' : 'greenButton')}}
                 <td>{{:helper.link(value.s_lighting, null, {'toggle_powerchannel_light' : value.ref}, null, value.n_lighting < 3 ? 'redButton' : 'greenButton')}}
                 <td>{{:helper.link(value.s_environment, null, {'toggle_powerchannel_enviro' : value.ref}, null, value.n_environment < 3 ? 'redButton' : 'greenButton')}}
