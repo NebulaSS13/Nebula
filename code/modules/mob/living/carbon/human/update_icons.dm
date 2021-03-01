@@ -180,20 +180,33 @@ Please contact me on #coderbus IRC. ~Carn x
 		var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
 		if(istype(head) && !head.is_stump())
 			var/image/I = head.get_eye_overlay()
-			if(I) overlays_to_apply += I
+			if(I) 
+				overlays_to_apply += I
 
 	if(auras)
 		overlays_to_apply += auras
 
 	overlays = overlays_to_apply
 
-/mob/living/carbon/human/update_transform()
-	// First, get the correct size.
-	var/desired_scale_x = icon_scale_x
-	var/desired_scale_y = icon_scale_y
-
+/mob/living/carbon/human/proc/get_icon_scale_mult()
 	// If you want stuff like scaling based on species or something, here is a good spot to mix the numbers together.
+	return list(icon_scale_x, icon_scale_y)
 
+/mob/living/carbon/human/update_transform()
+
+	// First, get the correct size.
+	var/list/icon_scale_values = get_icon_scale_mult()
+	var/desired_scale_x = icon_scale_values[1]
+	var/desired_scale_y = icon_scale_values[2]
+
+	// Apply KEEP_TOGETHER so all the component overlays don't ignore PIXEL_SCALE 
+	// when scaling, or remove it if we aren't doing any scaling (due to cost).
+	if(desired_scale_x == 1 && desired_scale_y == 1)
+		appearance_flags &= ~KEEP_TOGETHER
+	else
+		appearance_flags |= KEEP_TOGETHER
+
+	// Scale/translate/rotate and apply the transform.
 	var/matrix/M = matrix()
 	if(lying)
 		M.Turn(90)
@@ -202,7 +215,6 @@ Please contact me on #coderbus IRC. ~Carn x
 	else
 		M.Scale(desired_scale_x, desired_scale_y)
 		M.Translate(0, 16*(desired_scale_y-1))
-
 	animate(src, transform = M, time = transform_animate_time)
 
 var/global/list/damage_icon_parts = list()
@@ -651,7 +663,7 @@ var/global/list/damage_icon_parts = list()
 	if(client)
 		client.screen |= contents
 		if(hud_used)
-			hud_used.hidden_inventory_update() 	//Updates the screenloc of the items on the 'other' inventory bar
+			hud_used.hidden_inventory_update() //Updates the screenloc of the items on the 'other' inventory bar
 
 /mob/living/carbon/human/update_inv_handcuffed(var/update_icons=1)
 	if(handcuffed)

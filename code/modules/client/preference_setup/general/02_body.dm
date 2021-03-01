@@ -273,46 +273,63 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				else
 					. += "\tMechanically assisted [organ_name]"
 	if(!ind)
-		. += "\[...\]<br><br>"
-	else
-		. += "<br><br>"
+		. += "\[...\]"
+	. += "</td></tr></table><hr/>"
 
 	if(LAZYLEN(pref.body_descriptors))
-		. += "<table>"
+		. += "<h3>Physical Appearance</h3>"
+		. += "<table width = '100%'>"
 		for(var/entry in pref.body_descriptors)
 			var/datum/mob_descriptor/descriptor = mob_species.descriptors[entry]
-			. += "<tr><td><b>[capitalize(descriptor.chargen_label)]:</b></td><td>[descriptor.get_standalone_value_descriptor(pref.body_descriptors[entry])]</td><td><a href='?src=\ref[src];change_descriptor=[entry]'>Change</a><br/></td></tr>"
-		. += "</table><br>"
+			. += "<tr><td><b>[capitalize(descriptor.chargen_label)]</b></td><td align = 'center'>"
+			for(var/i = 1 to length(descriptor.standalone_value_descriptors))
+				var/use_string = descriptor.standalone_value_descriptors[i]
+				if(i == pref.body_descriptors[entry])
+					. += "<span class='linkOn'>[use_string]</span>"
+				else
+					. += "<a href='?src=\ref[src];set_descriptor=\ref[descriptor];set_descriptor_value=[i]'>[use_string]</a>"
+			. += "</td></tr>"
+		. += "</table>"
 
-	. += "</td><td><b>Preview</b><br>"
-	. += "<br><a href='?src=\ref[src];cycle_bg=1'>Cycle background</a>"
-	. += "<br><a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_LOADOUT]'>[pref.equip_preview_mob & EQUIP_PREVIEW_LOADOUT ? "Hide loadout" : "Show loadout"]</a>"
-	. += "<br><a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_JOB]'>[pref.equip_preview_mob & EQUIP_PREVIEW_JOB ? "Hide job gear" : "Show job gear"]</a>"
-	. += "</td></tr></table>"
-
-	. += "<b>Hair</b><br>"
+	. += "<h3>Colouration</h3>"
+	. += "<table width = '100%'>"
+	. += "<tr>"
+	. += "<td><b>Hair</b></td>"
+	. += "<td><a href='?src=\ref[src];hair_style=1'>[pref.h_style]</a></td>"
+	. += "<td>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "<a href='?src=\ref[src];hair_color=1'>Change Color</a> <font face='fixedsys' size='3' color='[pref.hair_colour]'><table style='display:inline;' bgcolor='[pref.hair_colour]'><tr><td>__</td></tr></table></font> "
-	. += " Style: <a href='?src=\ref[src];hair_style=1'>[pref.h_style]</a><br>"
-
-	. += "<br><b>Facial</b><br>"
+		. += "<font face='fixedsys' size='3' color='[pref.hair_colour]'><table style='display:inline;' bgcolor='[pref.hair_colour]'><tr><td>__</td></tr></table></font> <a href='?src=\ref[src];hair_color=1'>Change</a>"
+	. += "</td>"
+	. += "<tr>"
+	. += "</tr>"
+	. += "<td><b>Facial</b></td>"
+	. += "<td><a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a></td>"
+	. += "<td>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "<a href='?src=\ref[src];facial_color=1'>Change Color</a> <font face='fixedsys' size='3' color='[pref.facial_hair_colour]'><table  style='display:inline;' bgcolor='[pref.facial_hair_colour]'><tr><td>__</td></tr></table></font> "
-	. += " Style: <a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a><br>"
-
+		. += "<font face='fixedsys' size='3' color='[pref.facial_hair_colour]'><table  style='display:inline;' bgcolor='[pref.facial_hair_colour]'><tr><td>__</td></tr></table></font> <a href='?src=\ref[src];facial_color=1'>Change</a>"
+	. += "</td>"
+	. += "</tr>"
 	if(has_flag(mob_species, HAS_EYE_COLOR))
-		. += "<br><b>Eyes</b><br>"
-		. += "<a href='?src=\ref[src];eye_color=1'>Change Color</a> <font face='fixedsys' size='3' color='[pref.eye_colour]'><table  style='display:inline;' bgcolor='[pref.eye_colour]'><tr><td>__</td></tr></table></font><br>"
-
+		. += "<tr>"
+		. += "<td><b>Eyes</b></td>"
+		. += "<td><font face='fixedsys' size='3' color='[pref.eye_colour]'><table  style='display:inline;' bgcolor='[pref.eye_colour]'><tr><td>__</td></tr></table></font> <a href='?src=\ref[src];eye_color=1'>Change</a></td>"
+		. += "</tr>"
 	if(has_flag(mob_species, HAS_SKIN_COLOR))
-		. += "<br><b>Body Color</b><br>"
-		. += "<a href='?src=\ref[src];skin_color=1'>Change Color</a> <font face='fixedsys' size='3' color='[pref.skin_colour]'><table style='display:inline;' bgcolor='[pref.skin_colour]'><tr><td>__</td></tr></table></font><br>"
+		. += "<tr>"
+		. += "<td><b>Body</b></td>"
+		. += "<td><font face='fixedsys' size='3' color='[pref.skin_colour]'><table style='display:inline;' bgcolor='[pref.skin_colour]'><tr><td>__</td></tr></table></font> <a href='?src=\ref[src];skin_color=1'>Change</a></td>"
+		. += "</tr>"
+	. += "</table>"
 
-	. += "<br><a href='?src=\ref[src];marking_style=1'>Body Markings +</a><br>"
+	. += "<h3>Markings</h3>"
+	. += "<table width = '100%'>"
 	for(var/M in pref.body_markings)
-		. += "[M] <a href='?src=\ref[src];marking_remove=[M]'>-</a> <a href='?src=\ref[src];marking_color=[M]'>Color</a>"
-		. += "<font face='fixedsys' size='3' color='[pref.body_markings[M]]'><table style='display:inline;' bgcolor='[pref.body_markings[M]]'><tr><td>__</td></tr></table></font>"
-		. += "<br>"
+		. += "<tr>"
+		. += "<td>[M]</td><td><a href='?src=\ref[src];marking_remove=[M]'>Remove</a></td>"
+		. += "<td><font face='fixedsys' size='3' color='[pref.body_markings[M]]'><table style='display:inline;' bgcolor='[pref.body_markings[M]]'><tr><td>__</td></tr></table></font><a href='?src=\ref[src];marking_color=[M]'>Change</a></td>"
+		. += "</tr>"
+	. += "<tr><td colspan = 3><a href='?src=\ref[src];marking_style=1'>Add marking</a></td></tr>"
+	. += "</table>"
 
 	. = jointext(.,null)
 
@@ -326,19 +343,15 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		hide_species = !hide_species
 		return TOPIC_REFRESH
 
+	if(href_list["set_descriptor"])
+		var/datum/mob_descriptor/descriptor = locate(href_list["set_descriptor"])
+		if(istype(descriptor) && (descriptor.name in pref.body_descriptors))
+			pref.body_descriptors[descriptor.name] = Clamp(text2num(href_list["set_descriptor_value"]), 1, length(descriptor.standalone_value_descriptors))
+			return TOPIC_REFRESH_UPDATE_PREVIEW
+
 	else if(href_list["random"])
 		pref.randomize_appearance_and_body_for()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
-
-	else if(href_list["change_descriptor"])
-		if(mob_species.descriptors)
-			var/desc_id = href_list["change_descriptor"]
-			if(pref.body_descriptors[desc_id])
-				var/datum/mob_descriptor/descriptor = mob_species.descriptors[desc_id]
-				var/choice = input("Please select a descriptor.", "Descriptor") as null|anything in descriptor.chargen_value_descriptors
-				if(choice && mob_species.descriptors[desc_id]) // Check in case they sneakily changed species.
-					pref.body_descriptors[desc_id] = descriptor.chargen_value_descriptors[choice]
-					return TOPIC_REFRESH
 
 	else if(href_list["blood_type"])
 		var/new_b_type = input(user, "Choose your character's blood-type:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in valid_bloodtypes
@@ -645,14 +658,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["disabilities"])
 		var/disability_flag = text2num(href_list["disabilities"])
 		pref.disabilities ^= disability_flag
-		return TOPIC_REFRESH_UPDATE_PREVIEW
-
-	else if(href_list["toggle_preview_value"])
-		pref.equip_preview_mob ^= text2num(href_list["toggle_preview_value"])
-		return TOPIC_REFRESH_UPDATE_PREVIEW
-
-	else if(href_list["cycle_bg"])
-		pref.bgstate = next_in_list(pref.bgstate, pref.bgstate_options)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	return ..()
