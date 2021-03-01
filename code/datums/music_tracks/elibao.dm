@@ -1,4 +1,4 @@
-/music_track/elibao
+/decl/music_track/elibao
 	artist = "Earthcrusher"
 	title = "every light is blinking at once"
 	song = 'sound/music/elibao.ogg'

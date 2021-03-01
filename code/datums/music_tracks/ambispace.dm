@@ -1,4 +1,4 @@
-/music_track/ambispace
+/decl/music_track/ambispace
 	artist = "Alstroemeria Records"
 	title = "Bad Apple!! (slowed down)"
 	song = 'sound/ambience/ambispace.ogg'

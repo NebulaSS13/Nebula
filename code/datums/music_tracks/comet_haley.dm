@@ -1,4 +1,4 @@
-/music_track/comet_haley
+/decl/music_track/comet_haley
 	artist = "Stellardrone"
 	title = "Comet Halley"
 	album = "Light Years"

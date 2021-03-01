@@ -1,4 +1,4 @@
-/music_track/lysendraa
+/decl/music_track/lysendraa
 	artist = "TALES"
 	title = "Memories Of Lysendraa"
 	album = "The Seskian Wars"

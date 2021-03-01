@@ -1,4 +1,4 @@
-/music_track/epicintro2017
+/decl/music_track/epicintro2017
 	artist = "Sascha Ende"
 	title = "Epic Intro 2017"
 	song = 'sound/music/epic2017.ogg'

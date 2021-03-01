@@ -1,4 +1,4 @@
-/music_track/absconditus
+/decl/music_track/absconditus
 	artist = "Zhay Tee"
 	title = "Absconditus"
 	album = "Minerva: Metastasis OST"

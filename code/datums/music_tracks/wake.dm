@@ -1,4 +1,4 @@
-/music_track/wake
+/decl/music_track/wake
 	artist = "Ryan Little"
 	title = "Wake"
 	song = 'sound/music/wake.ogg'

@@ -1,4 +1,4 @@
-/music_track/human
+/decl/music_track/human
 	artist = "Borrtex"
 	title = "Human"
 	album = "Creation"
