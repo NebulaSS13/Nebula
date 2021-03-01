@@ -2,6 +2,10 @@
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_CORVID, 'mods/species/neocorvids/icons/clothing/gloves.dmi')
 
+/obj/item/clothing/accessory/cloak/Initialize()
+	. = ..()
+	LAZYSET(sprite_sheets, BODYTYPE_CORVID, 'mods/species/neocorvids/icons/clothing/cloak.dmi')
+
 /obj/item/clothing/under/corvid_smock
 	name = "smock"
 	desc = "A loose-fitting smock favoured by neocorvids."

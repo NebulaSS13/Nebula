@@ -119,6 +119,22 @@
 	name = "Corvid Crest"
 	icon_state = "corvid_crest"
 
+/datum/sprite_accessory/hair/corvid/mane
+	name = "Corvid Mane"
+	icon_state = "corvid_mane"
+
+/datum/sprite_accessory/hair/corvid/upright
+	name = "Corvid Upright"
+	icon_state = "corvid_upright"
+
+/datum/sprite_accessory/hair/corvid/fluffymohawk
+	name = "Corvid Fluffy Mohawk"
+	icon_state = "corvid_fluffymohawk"
+
+/datum/sprite_accessory/hair/corvid/twies
+	name = "Corvid Twies"
+	icon_state = "corvid_twies"
+
 /datum/sprite_accessory/marking/corvid
 	name = "Beak (Head)"
 	icon_state = "beak"
