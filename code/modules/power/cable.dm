@@ -230,7 +230,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		return
 	. = ..()
 
-obj/structure/cable/proc/cableColor(var/colorC)
+/obj/structure/cable/proc/cableColor(var/colorC)
 	var/color_n = "#dd0000"
 	if(colorC)
 		color_n = colorC

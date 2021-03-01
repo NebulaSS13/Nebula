@@ -29,7 +29,7 @@
 	. = ..()
 	update_nearby_tiles(need_rebuild=1)
 
-obj/structure/windoor_assembly/Destroy()
+/obj/structure/windoor_assembly/Destroy()
 	set_density(0)
 	update_nearby_tiles()
 	..()

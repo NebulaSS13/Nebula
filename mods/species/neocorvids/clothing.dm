@@ -33,23 +33,23 @@
 	category = /datum/gear/suit/corvid
 	whitelisted = list(SPECIES_CORVID)
 
-datum/gear/suit/corvid/smock
+/datum/gear/suit/corvid/smock
 	display_name = "plain smock (Neocorvid)"
 	path = /obj/item/clothing/under/corvid_smock
 	flags = GEAR_HAS_COLOR_SELECTION
 
-datum/gear/suit/corvid/smock_worker
+/datum/gear/suit/corvid/smock_worker
 	display_name = "worker's smock (Neocorvid)"
 	path = /obj/item/clothing/under/corvid_smock/worker
 
-datum/gear/suit/corvid/smock_rainbow
+/datum/gear/suit/corvid/smock_rainbow
 	display_name = "rainbow smock (Neocorvid)"
 	path = /obj/item/clothing/under/corvid_smock/rainbow
 
-datum/gear/suit/corvid/smock_security
+/datum/gear/suit/corvid/smock_security
 	display_name = "armoured smock (Neocorvid)"
 	path = /obj/item/clothing/under/corvid_smock/security
 
-datum/gear/suit/corvid/smock_engineering
+/datum/gear/suit/corvid/smock_engineering
 	display_name = "hazard smock (Neocorvid)"
 	path = /obj/item/clothing/under/corvid_smock/engineering

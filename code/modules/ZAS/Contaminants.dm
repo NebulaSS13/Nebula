@@ -38,7 +38,7 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 	var/N2O_HALLUCINATION_DESC = "Does being in sleeping gas cause you to hallucinate?"
 
 
-obj/var/contaminated = 0
+/obj/var/contaminated = 0
 
 
 /obj/item/proc/can_contaminate()
@@ -152,7 +152,7 @@ obj/var/contaminated = 0
 	if(gloves) gloves.contaminate()
 
 
-turf/Entered(obj/item/I)
+/turf/Entered(obj/item/I)
 	. = ..()
 	//Items that are in contaminants, but not on a mob, can still be contaminated.
 	if(istype(I) && vsc && vsc.contaminant_control.CLOTH_CONTAMINATION && I.can_contaminate())

@@ -24,7 +24,7 @@
 
 	return mobs
 
-proc/random_hair_style(gender, species)
+/proc/random_hair_style(gender, species)
 	species = species || GLOB.using_map.default_species
 	var/h_style = "Bald"
 
@@ -35,7 +35,7 @@ proc/random_hair_style(gender, species)
 
 	return h_style
 
-proc/random_facial_hair_style(gender, var/species)
+/proc/random_facial_hair_style(gender, var/species)
 	species = species || GLOB.using_map.default_species
 	var/f_style = "Shaved"
 	var/decl/species/mob_species = get_species_by_key(species)
@@ -44,7 +44,7 @@ proc/random_facial_hair_style(gender, var/species)
 		f_style = pick(valid_facialhairstyles)
 		return f_style
 
-proc/random_name(gender, species)
+/proc/random_name(gender, species)
 	if(species)
 		var/decl/species/current_species = get_species_by_key(species)
 		if(current_species) 
@@ -53,7 +53,7 @@ proc/random_name(gender, species)
 				return current_culture.get_random_name(null, gender)
 	return capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 
-proc/random_skin_tone(var/decl/species/current_species)
+/proc/random_skin_tone(var/decl/species/current_species)
 	var/species_tone = current_species ? 35 - current_species.max_skin_tone() : -185
 	switch(pick(60;"caucasian", 15;"afroamerican", 10;"african", 10;"latino", 5;"albino"))
 		if("caucasian")		. = -10
@@ -65,7 +65,7 @@ proc/random_skin_tone(var/decl/species/current_species)
 
 	return min(max(. + rand(-25, 25), species_tone), 34)
 
-proc/skintone2racedescription(tone)
+/proc/skintone2racedescription(tone)
 	switch (tone)
 		if(30 to INFINITY)		return "albino"
 		if(20 to 30)			return "pale"
@@ -77,7 +77,7 @@ proc/skintone2racedescription(tone)
 		if(-INFINITY to -65)	return "black"
 		else					return "unknown"
 
-proc/age2agedescription(age)
+/proc/age2agedescription(age)
 	switch(age)
 		if(0 to 1)			return "infant"
 		if(1 to 3)			return "toddler"

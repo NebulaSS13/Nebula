@@ -575,13 +575,13 @@
 				/obj/item/chems/spray/cleaner = 2,
 				/obj/item/grenade/chem_grenade/cleaner = 1)
 
-obj/random/obstruction //Large objects to block things off in maintenance
+/obj/random/obstruction //Large objects to block things off in maintenance
 	name = "random obstruction"
 	desc = "This is a random obstruction."
 	icon = 'icons/obj/cult.dmi'
 	icon_state = "cultgirder"
 
-obj/random/obstruction/spawn_choices()
+/obj/random/obstruction/spawn_choices()
 	return list(/obj/structure/barricade,
 				/obj/structure/girder,
 				/obj/structure/girder/displaced,
@@ -1067,7 +1067,7 @@ something, make sure it's not in one of the other lists.*/
 	icon_state = "standing"
 	spawn_nothing_percentage = 80
 
-obj/random/hostile/spawn_choices()
+/obj/random/hostile/spawn_choices()
 	return list(/mob/living/simple_animal/hostile/viscerator,
 				/mob/living/simple_animal/hostile/carp,
 				/mob/living/simple_animal/hostile/carp/pike,

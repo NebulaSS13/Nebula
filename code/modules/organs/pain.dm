@@ -1,4 +1,4 @@
-mob/proc/flash_pain(var/target)
+/mob/proc/flash_pain(var/target)
 	if(pain)
 		var/matrix/M
 		if(client && max(client.last_view_x_dim, client.last_view_y_dim) > 7)

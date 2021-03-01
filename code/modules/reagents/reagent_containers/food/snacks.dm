@@ -3592,7 +3592,7 @@
 
 //Sol Vendor
 
-obj/item/chems/food/snacks/lunacake
+/obj/item/chems/food/snacks/lunacake
 	name = "moon cake"
 	icon_state = "lunacake_wrapped"
 	desc = "Now with 20% less lawsuit enabling regolith!"
@@ -3604,14 +3604,14 @@ obj/item/chems/food/snacks/lunacake
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
-obj/item/chems/food/snacks/lunacake/mochicake
+/obj/item/chems/food/snacks/lunacake/mochicake
 	name = "mochi"
 	icon_state = "mochicake_wrapped"
 	desc = "A type of rice cake with an extremely soft, glutinous texture."
 	trash = /obj/item/trash/mochicakewrap
 	nutriment_desc = list("sweet" = 4, "rice" = 1)
 
-obj/item/chems/food/snacks/lunacake/mooncake
+/obj/item/chems/food/snacks/lunacake/mooncake
 	name = "dark side moon cake"
 	icon_state = "mooncake_wrapped"
 	desc = "Explore the dark side! May contain trace amounts of reconstituted cocoa."
@@ -3620,7 +3620,7 @@ obj/item/chems/food/snacks/lunacake/mooncake
 	nutriment_desc = list("sweet" = 4, "chocolate" = 1)
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
-obj/item/chems/food/snacks/triton
+/obj/item/chems/food/snacks/triton
 	name = "\improper Tidal Gobs"
 	icon_state = "tidegobs"
 	desc = "Contains over 9000% of your daily recommended intake of salt."
@@ -3631,7 +3631,7 @@ obj/item/chems/food/snacks/triton
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/chems/food/snacks/saturn
+/obj/item/chems/food/snacks/saturn
 	name = "snack rings"
 	icon_state = "saturno"
 	desc = "A day ration of salt, styrofoam and possibly sawdust."
@@ -3642,7 +3642,7 @@ obj/item/chems/food/snacks/saturn
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/chems/food/snacks/jupiter
+/obj/item/chems/food/snacks/jupiter
 	name = "probably gelatin"
 	icon_state = "jupiter"
 	desc = "Some kind of gel, maybe?"
@@ -3653,7 +3653,7 @@ obj/item/chems/food/snacks/jupiter
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/chems/food/snacks/pluto
+/obj/item/chems/food/snacks/pluto
 	name = "nutrient rods"
 	icon_state = "pluto"
 	desc = "Baseless tasteless nutrient rods to get you through the day. Now even less rash inducing!"
@@ -3664,7 +3664,7 @@ obj/item/chems/food/snacks/pluto
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/chems/food/snacks/mars
+/obj/item/chems/food/snacks/mars
 	name = "instant potato and eggs"
 	icon_state = "mars"
 	desc = "A steaming self-heated bowl of sweet eggs and taters!"
@@ -3675,7 +3675,7 @@ obj/item/chems/food/snacks/mars
 	nutriment_amt = 8
 	bitesize = 2
 
-obj/item/chems/food/snacks/venus
+/obj/item/chems/food/snacks/venus
 	name = "hot cakes"
 	icon_state = "venus"
 	desc = "Hot takes on hot cakes, a timeless classic now finally fit for human consumption!"
@@ -3691,7 +3691,7 @@ obj/item/chems/food/snacks/venus
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/capsaicin = 5)
 
-obj/item/chems/food/snacks/oort
+/obj/item/chems/food/snacks/oort
 	name = "\improper Cloud Rocks"
 	icon_state = "oort"
 	desc = "Pop rocks. The new formula guarantees fewer shrapnel induced oral injuries."
@@ -3707,7 +3707,7 @@ obj/item/chems/food/snacks/oort
 
 //weebo vend! So japanese it hurts
 
-obj/item/chems/food/snacks/ricecake
+/obj/item/chems/food/snacks/ricecake
 	name = "rice ball"
 	icon_state = "ricecake"
 	desc = "A snack food made from balled up rice."
@@ -3715,7 +3715,7 @@ obj/item/chems/food/snacks/ricecake
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/chems/food/snacks/pokey
+/obj/item/chems/food/snacks/pokey
 	name = "chocolate coated biscuit sticks"
 	icon_state = "pokeys"
 	desc = "A bundle of chocolate coated biscuit sticks. Not as exciting as they seem."
@@ -3723,7 +3723,7 @@ obj/item/chems/food/snacks/pokey
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/chems/food/snacks/weebonuts
+/obj/item/chems/food/snacks/weebonuts
 	name = "spicy nuts"
 	icon_state = "weebonuts"
 	trash = /obj/item/trash/weebonuts
@@ -3735,7 +3735,7 @@ obj/item/chems/food/snacks/weebonuts
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/capsaicin = 1)
 
-obj/item/chems/food/snacks/chocobanana
+/obj/item/chems/food/snacks/chocobanana
 	name = "choco banana"
 	icon_state = "chocobanana"
 	trash = /obj/item/trash/stick
@@ -3747,7 +3747,7 @@ obj/item/chems/food/snacks/chocobanana
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 10)
 
-obj/item/chems/food/snacks/dango
+/obj/item/chems/food/snacks/dango
 	name = "dango"
 	icon_state = "dango"
 	trash = /obj/item/trash/stick

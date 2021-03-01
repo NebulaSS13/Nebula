@@ -22,7 +22,7 @@
 	else
 		M.examinate(src)
 
-obj/item/board/attackby(obj/item/I, mob/user)
+/obj/item/board/attackby(obj/item/I, mob/user)
 	if(!addPiece(I,user))
 		..()
 
