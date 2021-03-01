@@ -1,4 +1,4 @@
-/music_track/salutjohn
+/decl/music_track/salutjohn
 	artist = "Quimorucru"
 	title = "Salut John"
 	song = 'sound/music/salutjohn.ogg'

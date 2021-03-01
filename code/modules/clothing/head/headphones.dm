@@ -73,7 +73,7 @@
 	if(!(user.get_inventory_slot(src) in list(slot_l_ear_str, slot_r_ear_str)))
 		return
 	if(current_track)
-		var/music_track/track = GET_DECL(GLOB.music_tracks[current_track])
+		var/decl/music_track/track = GET_DECL(GLOB.music_tracks[current_track])
 		sound_to(user, sound(null, channel = sound_channel))
 		sound_to(user, sound(track.song, repeat = 1, wait = 0, volume = music_volume, channel = sound_channel))
 

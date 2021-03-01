@@ -1,4 +1,4 @@
-/music_track/thunderdome
+/decl/music_track/thunderdome
 	artist = "MashedByMachines"
 	title = "THUNDERDOME (a.k.a. -Sector11)"
 	song = 'sound/music/THUNDERDOME.ogg'

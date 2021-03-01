@@ -1,4 +1,4 @@
-/music_track/level3_mod
+/decl/music_track/level3_mod
 	artist = "X-CEED"
 	title = "Flip-Flap"
 	song = 'sound/music/title1.ogg'

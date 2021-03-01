@@ -1,4 +1,4 @@
-/music_track/torch
+/decl/music_track/torch
 	artist = "L. Luke Leimer/LorenLuke"
 	title = "Torch: A Light in the Darkness"
 	song = 'sound/music/Torch.ogg'

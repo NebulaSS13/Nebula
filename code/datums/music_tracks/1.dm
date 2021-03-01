@@ -1,4 +1,4 @@
-/music_track/digit_one
+/decl/music_track/digit_one
 	artist = "Kelly Bailey"
 	title = "Half-Life 2 - Tracking Device"
 	song = 'sound/music/1.ogg'

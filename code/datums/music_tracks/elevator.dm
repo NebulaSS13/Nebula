@@ -1,4 +1,4 @@
-/music_track/elevator
+/decl/music_track/elevator
 	artist = "Kevin MacLeod"
 	title = "Local Forecast (Elevator)"
 	song = 'sound/music/elevatormusic.ogg'

@@ -1,4 +1,4 @@
-/music_track/treacherous_voyage
+/decl/music_track/treacherous_voyage
 	artist = "Jon Luc Hefferman"
 	title = "Treacherous Voyage"
 	album = "Eilean Mor"

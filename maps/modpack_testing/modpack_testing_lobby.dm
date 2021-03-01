@@ -1,2 +1,2 @@
 /datum/map/modpack_testing
-	lobby_tracks = list(/music_track/absconditus)
+	lobby_tracks = list(/decl/music_track/absconditus)
