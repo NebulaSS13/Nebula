@@ -19,11 +19,31 @@
 	var/door_color = "none"
 	var/stripe_color = "none"
 	var/symbol_color = "none"
+	var/width = 1 // For multi-tile doors
 
-/obj/structure/door_assembly/Initialize(mapload, d) // would be desirable to improve material handling here
-	. = ..(mapload)
-	set_dir(d)
+/obj/structure/door_assembly/Initialize(mapload, _mat, _reinf_mat, _dir)
+	. = ..(mapload, _mat, _reinf_mat)
+	set_dir(_dir)
 	update_icon()
+
+/obj/structure/door_assembly/set_dir(new_dir)
+	if(new_dir & (EAST|WEST))
+		new_dir = WEST
+	else
+		new_dir = SOUTH
+
+	. = ..(new_dir)
+
+	if(.)
+		set_bounds()
+
+/obj/structure/door_assembly/proc/set_bounds()
+	if (dir == NORTH || dir == SOUTH)
+		bound_width = width * world.icon_size
+		bound_height = world.icon_size
+	else
+		bound_width = world.icon_size
+		bound_height = width * world.icon_size
 
 /obj/structure/door_assembly/door_assembly_hatch
 	icon = 'icons/obj/doors/hatch/door.dmi'
@@ -49,14 +69,13 @@
 	airlock_type = /obj/machinery/door/airlock/external
 	paintable = 0
 
-/obj/structure/door_assembly/multi_tile
+/obj/structure/door_assembly/double
 	icon = 'icons/obj/doors/double/door.dmi'
 	fill_icon = 'icons/obj/doors/double/fill_steel.dmi'
 	glass_icon = 'icons/obj/doors/double/fill_glass.dmi'
 	panel_icon = 'icons/obj/doors/double/panel.dmi'
-	dir = EAST
-	var/width = 1
-	airlock_type = /obj/machinery/door/airlock/multi_tile
+	airlock_type = /obj/machinery/door/airlock/double
+	width = 2
 
 /obj/structure/door_assembly/blast
 	name = "blast door assembly"
@@ -79,24 +98,6 @@
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'
 	icon_state = "pdoor1"
 	airlock_type = /obj/machinery/door/blast/shutters
-
-/obj/structure/door_assembly/multi_tile/Initialize()
-	if(dir in list(EAST, WEST))
-		bound_width = width * world.icon_size
-		bound_height = world.icon_size
-	else
-		bound_width = world.icon_size
-		bound_height = width * world.icon_size
-	. = ..()
-
-/obj/structure/door_assembly/multi_tile/Move()
-	. = ..()
-	if(dir in list(EAST, WEST))
-		bound_width = width * world.icon_size
-		bound_height = world.icon_size
-	else
-		bound_width = world.icon_size
-		bound_height = width * world.icon_size
 
 /obj/structure/door_assembly/attackby(obj/item/W, mob/user)
 

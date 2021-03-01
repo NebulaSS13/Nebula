@@ -1219,7 +1219,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/bridge_unused)
 "XQ" = (
-/obj/machinery/door/airlock/multi_tile/engineering,
+/obj/machinery/door/airlock/double/engineering,
 /obj/machinery/door/firedoor,
 /obj/structure/cable/yellow{
 	d1 = 1;

@@ -1,7 +1,5 @@
 //Terribly sorry for the code doubling, but things go derpy otherwise.
-/obj/machinery/door/airlock/multi_tile
-	airlock_type = "double"
-	name = "\improper Airlock"
+/obj/machinery/door/airlock/double
 	icon = 'icons/obj/doors/double/door.dmi'
 	fill_file = 'icons/obj/doors/double/fill_steel.dmi'
 	color_file = 'icons/obj/doors/double/color.dmi'
@@ -15,36 +13,14 @@
 	panel_file = 'icons/obj/doors/double/panel.dmi'
 	welded_file = 'icons/obj/doors/double/welded.dmi'
 	emag_file = 'icons/obj/doors/double/emag.dmi'
-	width = 2
+
+	frame_type = /obj/structure/door_assembly/double
+	airlock_type = "double"
 	appearance_flags = 0
-	opacity = 1
-	frame_type = /obj/structure/door_assembly/multi_tile
+	opacity = TRUE
+	width = 2
 
-/obj/machinery/door/airlock/multi_tile/set_dir()
-	. = ..()
-	if(.)
-		SetBounds()
-
-/obj/machinery/door/airlock/multi_tile/proc/SetBounds()
-	if(dir in list(NORTH, SOUTH))
-		bound_width = width * world.icon_size
-		bound_height = world.icon_size
-	else
-		bound_width = world.icon_size
-		bound_height = width * world.icon_size
-
-
-/obj/machinery/door/airlock/multi_tile/on_update_icon(state=0, override=0)
-	..()
-	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
-		if(connections in list(WEST, EAST, EAST|WEST))
-			set_dir(SOUTH)
-		else
-			set_dir(WEST)
-	else
-		set_dir(SOUTH)
-
-/obj/machinery/door/airlock/multi_tile/update_connections(var/propagate = 0)
+/obj/machinery/door/airlock/double/update_connections(var/propagate = 0)
 	var/dirs = 0
 
 	for(var/direction in GLOB.cardinal)
@@ -78,105 +54,106 @@
 			dirs |= direction
 	connections = dirs
 
-/obj/machinery/door/airlock/multi_tile/command
+/obj/machinery/door/airlock/double/command
 	door_color = COLOR_COMMAND_BLUE
 
-/obj/machinery/door/airlock/multi_tile/security
+/obj/machinery/door/airlock/double/security
 	door_color = COLOR_NT_RED
 
-/obj/machinery/door/airlock/multi_tile/engineering
+/obj/machinery/door/airlock/double/engineering
 	name = "Maintenance Hatch"
 	door_color = COLOR_AMBER
 
-/obj/machinery/door/airlock/multi_tile/medical
+/obj/machinery/door/airlock/double/medical
 	door_color = COLOR_WHITE
 	stripe_color = COLOR_DEEP_SKY_BLUE
 
-/obj/machinery/door/airlock/multi_tile/virology
+/obj/machinery/door/airlock/double/virology
 	door_color = COLOR_WHITE
 	stripe_color = COLOR_GREEN
 
-/obj/machinery/door/airlock/multi_tile/mining
+/obj/machinery/door/airlock/double/mining
 	name = "Mining Airlock"
 	door_color = COLOR_PALE_ORANGE
 	stripe_color = COLOR_BEASTY_BROWN
 
-/obj/machinery/door/airlock/multi_tile/atmos
+/obj/machinery/door/airlock/double/atmos
 	door_color = COLOR_AMBER
 	stripe_color = COLOR_CYAN
 
-/obj/machinery/door/airlock/multi_tile/research
+/obj/machinery/door/airlock/double/research
 	door_color = COLOR_WHITE
 	stripe_color = COLOR_RESEARCH
 
-/obj/machinery/door/airlock/multi_tile/science
+/obj/machinery/door/airlock/double/science
 	door_color = COLOR_WHITE
 	stripe_color = COLOR_VIOLET
 
-/obj/machinery/door/airlock/multi_tile/sol
+/obj/machinery/door/airlock/double/sol
 	door_color = COLOR_BLUE_GRAY
 
-/obj/machinery/door/airlock/multi_tile/maintenance
+/obj/machinery/door/airlock/double/maintenance
 	name = "Maintenance Access"
 	stripe_color = COLOR_AMBER
 
-/obj/machinery/door/airlock/multi_tile/civilian
+/obj/machinery/door/airlock/double/civilian
 	stripe_color = COLOR_CIVIE_GREEN
 
-/obj/machinery/door/airlock/multi_tile/freezer
+/obj/machinery/door/airlock/double/freezer
 	name = "Freezer Airlock"
 	door_color = COLOR_WHITE
 
-/obj/machinery/door/airlock/multi_tile/glass
+/obj/machinery/door/airlock/double/glass
 	name = "Glass Airlock"
-	glass = 1
+	opacity = FALSE
+	glass = TRUE
 
-/obj/machinery/door/airlock/multi_tile/glass/command
+/obj/machinery/door/airlock/double/glass/command
 	door_color = COLOR_COMMAND_BLUE
 	stripe_color = COLOR_SKY_BLUE
 
-/obj/machinery/door/airlock/multi_tile/glass/security
+/obj/machinery/door/airlock/double/glass/security
 	door_color = COLOR_NT_RED
 	stripe_color = COLOR_ORANGE
 
-/obj/machinery/door/airlock/multi_tile/glass/engineering
+/obj/machinery/door/airlock/double/glass/engineering
 	door_color = COLOR_AMBER
 	stripe_color = COLOR_RED
 
-/obj/machinery/door/airlock/multi_tile/glass/medical
+/obj/machinery/door/airlock/double/glass/medical
 	door_color = COLOR_WHITE
 	stripe_color = COLOR_DEEP_SKY_BLUE
 
-/obj/machinery/door/airlock/multi_tile/glass/virology
+/obj/machinery/door/airlock/double/glass/virology
 	door_color = COLOR_WHITE
 	stripe_color = COLOR_GREEN
 
-/obj/machinery/door/airlock/multi_tile/glass/mining
+/obj/machinery/door/airlock/double/glass/mining
 	door_color = COLOR_PALE_ORANGE
 	stripe_color = COLOR_BEASTY_BROWN
 
-/obj/machinery/door/airlock/multi_tile/glass/atmos
+/obj/machinery/door/airlock/double/glass/atmos
 	door_color = COLOR_AMBER
 	stripe_color = COLOR_CYAN
 
-/obj/machinery/door/airlock/multi_tile/glass/research
+/obj/machinery/door/airlock/double/glass/research
 	door_color = COLOR_WHITE
 	stripe_color = COLOR_RESEARCH
 
-/obj/machinery/door/airlock/multi_tile/glass/science
+/obj/machinery/door/airlock/double/glass/science
 	door_color = COLOR_WHITE
 	stripe_color = COLOR_VIOLET
 
-/obj/machinery/door/airlock/multi_tile/glass/sol
+/obj/machinery/door/airlock/double/glass/sol
 	door_color = COLOR_BLUE_GRAY
 	stripe_color = COLOR_AMBER
 
-/obj/machinery/door/airlock/multi_tile/glass/freezer
+/obj/machinery/door/airlock/double/glass/freezer
 	door_color = COLOR_WHITE
 
-/obj/machinery/door/airlock/multi_tile/glass/maintenance
+/obj/machinery/door/airlock/double/glass/maintenance
 	name = "Maintenance Access"
 	stripe_color = COLOR_AMBER
 
-/obj/machinery/door/airlock/multi_tile/glass/civilian
+/obj/machinery/door/airlock/double/glass/civilian
 	stripe_color = COLOR_CIVIE_GREEN
