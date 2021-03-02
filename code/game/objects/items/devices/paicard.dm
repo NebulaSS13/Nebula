@@ -315,9 +315,9 @@
 			if(15) add_overlay("pai-question")
 
 /obj/item/paicard/proc/alertUpdate()
-	var/turf/T = get_turf_or_move(src.loc)
-	for (var/mob/M in viewers(T))
-		M.show_message("<span class='notice'>\The [src] flashes a message across its screen, \"Additional personalities available for download.\"</span>", 3, "<span class='notice'>\The [src] bleeps electronically.</span>", 2)
+	visible_message( \
+		message = SPAN_NOTICE("\The [src] flashes a message across its screen, \"Additional personalities available for download.\""), \
+		blind_message = SPAN_NOTICE("\The [src] bleeps electronically."))
 
 /obj/item/paicard/emp_act(severity)
 	for(var/mob/M in src)

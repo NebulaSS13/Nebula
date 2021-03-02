@@ -64,14 +64,10 @@
 		spawn(600) reset_search()
 
 /obj/item/organ/internal/posibrain/proc/reset_search() //We give the players sixty seconds to decide, then reset the timer.
-	if(src.brainmob && src.brainmob.key) return
-
-	src.searching = 0
-	icon_state = "posibrain"
-
-	var/turf/T = get_turf_or_move(src.loc)
-	for (var/mob/M in viewers(T))
-		M.show_message("<span class='notice'>The positronic brain buzzes quietly, and the golden lights fade away. Perhaps you could try again?</span>")
+	if(!brainmob?.key)
+		searching = FALSE
+		icon_state = "posibrain"
+		visible_message(SPAN_WARNING("The positronic brain buzzes quietly, and the golden lights fade away. Perhaps you could try again?"))
 
 /obj/item/organ/internal/posibrain/attack_ghost(var/mob/observer/ghost/user)
 	if(!searching || (src.brainmob && src.brainmob.key))

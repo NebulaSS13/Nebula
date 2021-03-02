@@ -142,9 +142,9 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	silence_time = world.timeofday + 120 * 10		// Silence for 2 minutes
 	to_chat(src, "<font color=green><b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b></font>")
 	if(prob(20))
-		var/turf/T = get_turf_or_move(loc)
-		for (var/mob/M in viewers(T))
-			M.show_message("<span class='warning'>A shower of sparks spray from [src]'s inner workings.</span>", 3, "<span class='warning'>You hear and smell the ozone hiss of electrical sparks being expelled violently.</span>", 2)
+		visible_message( \
+			message = SPAN_DANGER("A shower of sparks spray from [src]'s inner workings!"), \
+			blind_message = SPAN_DANGER("You hear and smell the ozone hiss of electrical sparks being expelled violently."))
 		return death(0)
 
 	switch(pick(1,2,3))
