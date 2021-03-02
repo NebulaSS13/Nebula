@@ -84,7 +84,7 @@
 
 	//Autohiss
 	autohiss_basic_map = list(
-		"r" = list("rr", "rrr", "rrrr")
+		"r" = list("rr", "rrr", "rrrr"),
 		"р" = list("рр", "ррр", "рррр")//thats r, not "pi"
 	)
 
