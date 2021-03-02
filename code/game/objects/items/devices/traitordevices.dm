@@ -40,9 +40,9 @@ effective or pretty fucking useless.
 		stun_victims += M
 		spawn()
 			if(prob(50))
-				M.Weaken(rand(10,20))
+				SET_STATUS_MAX(M, STAT_WEAK, rand(10,20))
 				if(prob(25))
-					M.Stun(rand(5,10))
+					SET_STATUS_MAX(M, STAT_STUN, rand(5, 10))
 				to_chat(M, "<span class='danger'>You feel a tremendous, paralyzing wave flood your mind.</span>")
 			else
 				to_chat(M, "<span class='danger'>You feel a sudden, electric jolt travel through your head.</span>")

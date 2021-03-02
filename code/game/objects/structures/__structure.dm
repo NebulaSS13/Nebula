@@ -191,7 +191,8 @@
 		// Slam their face against the table.
 		var/blocked = affecting_mob.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
 		if (prob(30 * (1 - blocked)))
-			affecting_mob.Weaken(5)
+			SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
+
 		affecting_mob.apply_damage(8, BRUTE, BP_HEAD)
 		visible_message(SPAN_DANGER("[G.assailant] slams [affecting_mob]'s face against \the [src]!"))
 		if (material)
@@ -211,7 +212,7 @@
 			return TRUE
 		G.affecting.forceMove(src.loc)
 		if(affecting_mob)
-			affecting_mob.Weaken(rand(2,5))
+			SET_STATUS_MAX(affecting_mob, STAT_WEAK, rand(2,5))
 		visible_message(SPAN_DANGER("[G.assailant] puts [G.affecting] on \the [src]."))
 		qdel(G)
 		return TRUE

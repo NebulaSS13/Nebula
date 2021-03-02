@@ -200,8 +200,8 @@
 /mob/living/bot/mulebot/Bump(var/mob/living/carbon/human/M)
 	if(!safety && istype(M))
 		visible_message("<span class='warning'>[src] knocks over [M]!</span>")
-		M.Stun(8)
-		M.Weaken(5)
+		SET_STATUS_MAX(M, STAT_STUN, 8)
+		SET_STATUS_MAX(M, STAT_WEAK, 5)
 	..()
 
 /mob/living/bot/mulebot/proc/runOver(var/mob/living/carbon/human/H)

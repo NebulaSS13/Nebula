@@ -88,10 +88,10 @@
 
 /obj/machinery/flasher/proc/do_flash(var/mob/living/victim, var/flash_time)
 	victim.flash_eyes()
-	victim.eye_blurry += flash_time
-	victim.confused += (flash_time + 2)
-	victim.Stun(flash_time / 2)
-	victim.Weaken(3)
+	ADJ_STATUS(victim, STAT_BLURRY, flash_time)
+	ADJ_STATUS(victim, STAT_CONFUSE, flash_time + 2)
+	SET_STATUS_MAX(victim, STAT_STUN, flash_time / 2)
+	SET_STATUS_MAX(victim, STAT_WEAK, 3)
 
 /obj/machinery/flasher/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

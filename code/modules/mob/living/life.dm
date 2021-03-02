@@ -36,6 +36,8 @@
 
 	handle_regular_hud_updates()
 
+	handle_status_effects()
+
 	return 1
 
 /mob/living/proc/handle_breathing()
@@ -98,7 +100,7 @@
 /mob/living/proc/handle_regular_status_updates()
 	updatehealth()
 	if(stat != DEAD)
-		if(paralysis)
+		if(HAS_STATUS(src, STAT_PARA))
 			set_stat(UNCONSCIOUS)
 		else if (status_flags & FAKEDEATH)
 			set_stat(UNCONSCIOUS)
@@ -106,82 +108,17 @@
 			set_stat(CONSCIOUS)
 		return 1
 
-/mob/living/proc/handle_statuses()
-	handle_stunned()
-	handle_weakened()
-	handle_paralysed()
-	handle_stuttering()
-	handle_silent()
-	handle_drugged()
-	handle_slurring()
-	handle_confused()
-
-/mob/living/proc/handle_stunned()
-	if(stunned)
-		AdjustStunned(-1)
-		if(!stunned)
-			update_icons()
-	return stunned
-
-/mob/living/proc/handle_weakened()
-	if(weakened)
-		weakened = max(weakened-1,0)
-		if(!weakened)
-			update_icons()
-	return weakened
-
-/mob/living/proc/handle_stuttering()
-	if(stuttering)
-		stuttering = max(stuttering-1, 0)
-	return stuttering
-
-/mob/living/proc/handle_silent()
-	if(silent)
-		silent = max(silent-1, 0)
-	return silent
-
-/mob/living/proc/handle_drugged()
-	return adjust_drugged(-1)
-
-/mob/living/proc/handle_slurring()
-	if(slurring)
-		slurring = max(slurring-1, 0)
-	return slurring
-
-/mob/living/proc/handle_paralysed()
-	if(paralysis)
-		AdjustParalysis(-1)
-		if(!paralysis)
-			update_icons()
-	return paralysis
-
 /mob/living/proc/handle_disabilities()
 	handle_impaired_vision()
 	handle_impaired_hearing()
 
-/mob/living/proc/handle_confused()
-	if(confused)
-		confused = max(0, confused - 1)
-	return confused
-
 /mob/living/proc/handle_impaired_vision()
-	//Eyes
-	if(sdisabilities & BLINDED || stat)	//blindness from disability or unconsciousness doesn't get better on its own
-		eye_blind = max(eye_blind, 1)
-	else if(eye_blind)			//blindness, heals slowly over time
-		eye_blind = max(eye_blind-1,0)
-	else if(eye_blurry)			//blurry eyes heal slowly
-		eye_blurry = max(eye_blurry-1, 0)
+	if((sdisabilities & BLINDED) || stat) //blindness from disability or unconsciousness doesn't get better on its own
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
 /mob/living/proc/handle_impaired_hearing()
-	//Ears
-	if(sdisabilities & DEAFENED)	//disabled-deaf, doesn't get better on its own
-		setEarDamage(null, max(ear_deaf, 1))
-	else if(ear_damage < 25)
-		adjustEarDamage(-0.05, -1)	// having ear damage impairs the recovery of ear_deaf
-	else if(ear_damage < 100)
-		adjustEarDamage(-0.05, 0)	// deafness recovers slowly over time, unless ear_damage is over 100. TODO meds that heal ear_damage
-
+	if((sdisabilities & DEAFENED) || stat) //disabled-deaf, doesn't get better on its own
+		SET_STATUS_MAX(src, STAT_TINNITUS, 1)
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/proc/handle_regular_hud_updates()
@@ -198,13 +135,13 @@
 	if(stat == DEAD)
 		return
 
-	if(eye_blind)
+	if(GET_STATUS(src, STAT_BLIND))
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 	else
 		clear_fullscreen("blind")
 		set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
-		set_fullscreen(eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
-		set_fullscreen(drugged, "high", /obj/screen/fullscreen/high)
+		set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
+		set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
 
 	set_fullscreen(stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
 

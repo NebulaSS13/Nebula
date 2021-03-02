@@ -26,7 +26,7 @@
 			M.visible_message( \
 				SPAN_DANGER("\The [S]'s flesh sizzles where \the [name] touches it!"), \
 				SPAN_DANGER("Your flesh is burned by \the [name]!"))
-			M.confused = max(M.confused, 2)
+			SET_STATUS_MAX(M, STAT_CONFUSE, 2)
 			var/datum/ai/slime/slime_ai = M.ai
 			if(istype(slime_ai))
 				slime_ai.attacked = max(slime_ai.attacked, rand(7,10)) // angery

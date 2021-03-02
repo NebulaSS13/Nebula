@@ -197,10 +197,10 @@
 	if(istype(loc, /turf))
 		var/turf/T = loc
 		. += T.movement_delay
-	if (drowsyness > 0)
+	if(HAS_STATUS(src, STAT_DROWSY))
 		. += 6
 	if(lying) //Crawling, it's slower
-		. += (8 + ((weakened * 3) + (confused * 2)))
+		. += (8 + ((GET_STATUS(src, STAT_WEAK) * 3) + (GET_STATUS(src, STAT_CONFUSE) * 2)))
 	. += move_intent.move_delay + (ENCUMBERANCE_MOVEMENT_MOD * encumbrance())
 #undef ENCUMBERANCE_MOVEMENT_MOD
 
@@ -233,7 +233,7 @@
 	return ((sdisabilities & BLINDED) || blinded || incapacitated(INCAPACITATION_KNOCKOUT))
 
 /mob/proc/is_deaf()
-	return ((sdisabilities & DEAFENED) || ear_deaf || incapacitated(INCAPACITATION_KNOCKOUT))
+	return ((sdisabilities & DEAFENED) || incapacitated(INCAPACITATION_KNOCKOUT))
 
 /mob/proc/is_physically_disabled()
 	return incapacitated(INCAPACITATION_DISABLED)
@@ -241,33 +241,34 @@
 /mob/proc/cannot_stand()
 	return incapacitated(INCAPACITATION_KNOCKDOWN)
 
+/mob/living/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
+	. = ..()
+	if(!.)
+		if((incapacitation_flags & INCAPACITATION_STUNNED)    && HAS_STATUS(src, STAT_STUN))
+			return TRUE
+		if((incapacitation_flags & INCAPACITATION_FORCELYING) && HAS_STATUS(src, STAT_WEAK))
+			return TRUE
+		if((incapacitation_flags & INCAPACITATION_KNOCKOUT)   && (HAS_STATUS(src, STAT_PARA)|| HAS_STATUS(src, STAT_ASLEEP)))
+			return TRUE
+		if((incapacitation_flags & INCAPACITATION_WEAKENED)   && HAS_STATUS(src, STAT_WEAK))
+			return TRUE
+
 /mob/proc/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
 	if(status_flags & ENABLE_AI)
-		return 1
-
-	if ((incapacitation_flags & INCAPACITATION_STUNNED) && stunned)
-		return 1
-
-	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (weakened || resting || pinned.len))
-		return 1
-
-	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && (stat || paralysis || sleeping || (status_flags & FAKEDEATH)))
-		return 1
-
+		return TRUE
+	if((incapacitation_flags & INCAPACITATION_FORCELYING) && (resting || pinned.len))
+		return TRUE
 	if((incapacitation_flags & INCAPACITATION_RESTRAINED) && restrained())
-		return 1
-
+		return TRUE
+	if((incapacitation_flags & INCAPACITATION_KNOCKOUT) && (stat || (status_flags & FAKEDEATH)))
+		return TRUE
 	if((incapacitation_flags & (INCAPACITATION_BUCKLED_PARTIALLY|INCAPACITATION_BUCKLED_FULLY)))
 		var/buckling = buckled()
 		if(buckling >= PARTIALLY_BUCKLED && (incapacitation_flags & INCAPACITATION_BUCKLED_PARTIALLY))
-			return 1
+			return TRUE
 		if(buckling == FULLY_BUCKLED && (incapacitation_flags & INCAPACITATION_BUCKLED_FULLY))
-			return 1
-
-	if((incapacitation_flags & INCAPACITATION_WEAKENED) && weakened)
-		return 1
-
-	return 0
+			return TRUE
+	return FALSE
 
 #undef UNBUCKLED
 #undef PARTIALLY_BUCKLED
@@ -659,73 +660,6 @@
 	set hidden = 1
 	return facedir(client.client_dir(SOUTH))
 
-/mob/proc/Stun(amount)
-	if(status_flags & CANSTUN)
-		facing_dir = null
-		stunned = max(max(stunned,amount),0) //can't go below 0, getting a low amount of stun doesn't lower your current stun
-		UpdateLyingBuckledAndVerbStatus()
-	return
-
-/mob/proc/SetStunned(amount) //if you REALLY need to set stun to a set amount without the whole "can't go below current stunned"
-	if(status_flags & CANSTUN)
-		stunned = max(amount,0)
-		UpdateLyingBuckledAndVerbStatus()
-	return
-
-/mob/proc/AdjustStunned(amount)
-	if(status_flags & CANSTUN)
-		stunned = max(stunned + amount,0)
-		UpdateLyingBuckledAndVerbStatus()
-	return
-
-/mob/proc/Weaken(amount)
-	if(status_flags & CANWEAKEN)
-		facing_dir = null
-		weakened = max(max(weakened,amount),0)
-		UpdateLyingBuckledAndVerbStatus()
-	return
-
-/mob/proc/SetWeakened(amount)
-	if(status_flags & CANWEAKEN)
-		weakened = max(amount,0)
-		UpdateLyingBuckledAndVerbStatus()
-	return
-
-/mob/proc/AdjustWeakened(amount)
-	if(status_flags & CANWEAKEN)
-		weakened = max(weakened + amount,0)
-		UpdateLyingBuckledAndVerbStatus()
-	return
-
-/mob/proc/Paralyse(amount)
-	if(status_flags & CANPARALYSE)
-		facing_dir = null
-		paralysis = max(max(paralysis,amount),0)
-	return
-
-/mob/proc/SetParalysis(amount)
-	if(status_flags & CANPARALYSE)
-		paralysis = max(amount,0)
-	return
-
-/mob/proc/AdjustParalysis(amount)
-	if(status_flags & CANPARALYSE)
-		paralysis = max(paralysis + amount,0)
-	return
-
-/mob/proc/Sleeping(amount)
-	facing_dir = null
-	sleeping = max(max(sleeping,amount),0)
-	return
-
-/mob/proc/SetSleeping(amount)
-	sleeping = max(amount,0)
-	return
-
-/mob/proc/AdjustSleeping(amount)
-	sleeping = max(sleeping + amount,0)
-	return
-
 /mob/proc/Resting(amount)
 	facing_dir = null
 	resting = max(max(resting,amount),0)
@@ -1015,7 +949,7 @@
 /mob/is_fluid_pushable(var/amt)
 	if(..() && !buckled && (lying || !Check_Shoegrip()) && (amt >= mob_size * (lying ? 5 : 10)))
 		if(!lying)
-			Weaken(1)
+			SET_STATUS_MAX(src, STAT_WEAK, 1)
 			if(lying && prob(10))
 				to_chat(src, "<span class='danger'>You are pushed down by the flood!</span>")
 		return TRUE
@@ -1028,7 +962,7 @@
 	return
 
 /mob/proc/get_sound_volume_multiplier()
-	if(ear_deaf)
+	if(GET_STATUS(src, STAT_DEAF))
 		return 0
 	return 1
 
@@ -1078,10 +1012,6 @@
 	. = ..()
 	if(!blinded)
 		flash_eyes()
-
-/mob/proc/adjust_drugged(var/amt, var/maxamt = 100)
-	drugged = Clamp(drugged + amt, 0, maxamt)
-	. = drugged
 
 /mob/proc/get_telecomms_race_info()
 	return list("Unknown", FALSE)

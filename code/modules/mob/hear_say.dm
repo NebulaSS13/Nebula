@@ -25,7 +25,7 @@
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
-	if(sleeping || stat == UNCONSCIOUS)
+	if(HAS_STATUS(src, STAT_ASLEEP) || stat == UNCONSCIOUS)
 		hear_sleep(message)
 		return
 
@@ -105,7 +105,7 @@
 	if(!client)
 		return
 
-	if(sleeping || stat==1) //If unconscious or sleeping
+	if(HAS_STATUS(src, STAT_ASLEEP) || stat == UNCONSCIOUS) //If unconscious or sleeping
 		hear_sleep(message)
 		return
 
@@ -223,7 +223,7 @@
 		formatted = language.format_message_radio(message, nverb)
 	else
 		formatted = "[verb], <span class=\"body\">\"[message]\"</span>"
-	if(sdisabilities & DEAFENED || ear_deaf)
+	if(sdisabilities & DEAFENED || GET_STATUS(src, STAT_DEAF))
 		var/mob/living/carbon/human/H = src
 		if(istype(H) && H.has_headset_in_ears() && prob(20))
 			to_chat(src, SPAN_WARNING("You feel your headset vibrate but can hear nothing from it!"))
@@ -251,7 +251,7 @@
 	if(!client)
 		return
 
-	if(sleeping || stat == UNCONSCIOUS)
+	if(HAS_STATUS(src, STAT_ASLEEP) || stat == UNCONSCIOUS)
 		return 0
 
 	if(say_understands(speaker, language))

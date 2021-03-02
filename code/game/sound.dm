@@ -31,7 +31,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 /proc/adjust_volume_for_hearer(var/volume, var/turf/turf_source, var/atom/listener)
 	if(ismob(listener))
 		var/mob/M = listener
-		if(M.ear_deaf)
+		if(GET_STATUS(M, STAT_DEAF))
 			return 0
 		volume *= M.get_sound_volume_multiplier()
 
@@ -63,7 +63,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 	return volume
 
 /mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, extrarange, override_env, envdry, envwet)
-	if(!src.client || ear_deaf > 0)
+	if(!src.client || is_deaf())
 		return
 
 	var/sound/S = soundin
@@ -110,11 +110,11 @@ var/const/FALLOFF_SOUNDS = 0.5
 			var/mob/living/carbon/M = src
 			if (istype(M) && M.hallucination_power > 50 && LAZYACCESS(M.chem_effects, CE_MIND) < 1)
 				S.environment = PSYCHOTIC
-			else if (M.drugged)
+			else if (HAS_STATUS(M, STAT_DRUGGY))
 				S.environment = DRUGGED
-			else if (M.drowsyness)
+			else if(HAS_STATUS(M, STAT_DROWSY))
 				S.environment = DIZZY
-			else if (M.confused)
+			else if (HAS_STATUS(M, STAT_CONFUSE))
 				S.environment = DIZZY
 			else if (M.stat == UNCONSCIOUS)
 				S.environment = UNDERWATER

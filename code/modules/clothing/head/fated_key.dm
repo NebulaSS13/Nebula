@@ -11,7 +11,7 @@
 	if(istype(user) && canremove && loc == user && slot == slot_head_str)
 		canremove = FALSE
 		to_chat(user, SPAN_DANGER("<font size=3>\The [src] shatters your mind as it sears through [user.isSynthetic() ? "metal and circuitry" : "flesh and bone"], embedding itself into your skull!</font>"))
-		user.Paralyse(5)
+		SET_STATUS_MAX(user, STAT_PARA, 5)
 		addtimer(CALLBACK(src, .proc/activate_role), 5 SECONDS)
 	else
 		canremove = TRUE

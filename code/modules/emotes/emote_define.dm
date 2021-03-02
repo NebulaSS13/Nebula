@@ -109,7 +109,7 @@
 		if(message_type == AUDIBLE_MESSAGE)
 			if(isliving(user))
 				var/mob/living/L = user
-				if(L.silent)
+				if(HAS_STATUS(L, STAT_SILENCE))
 					M.visible_message(message = "[user] opens their mouth silently!", self_message = "You cannot say anything!", blind_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
 					return
 				else

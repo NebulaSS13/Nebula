@@ -42,8 +42,6 @@
 /mob/living/slime/handle_regular_status_updates()
 	. = ..()
 	if(stat != DEAD)
-		if(confused)
-			confused--
 		set_stat(CONSCIOUS)
 		if(prob(30))
 			adjustOxyLoss(-1)

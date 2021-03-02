@@ -1,6 +1,8 @@
 /mob/living/silicon/pai/Life()
 
-	if (src.stat == 2)
+	SHOULD_CALL_PARENT(FALSE)
+
+	if (src.stat == DEAD)
 		return
 
 	if(src.cable)
@@ -23,7 +25,7 @@
 			silence_time = null
 			to_chat(src, "<font color=green>Communication circuit reinitialized. Speech and messaging functionality restored.</font>")
 
-	handle_statuses()
+	handle_status_effects()
 
 	if(health <= 0)
 		death(null,"gives one shrill beep before falling lifeless.")

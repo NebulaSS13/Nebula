@@ -18,7 +18,7 @@
 /obj/item/gun/launcher/money/hacked
 	emagged = 1
 
-/obj/item/gun/launcher/money/proc/vomit_cash(var/mob/vomit_onto, var/projectile_vomit)
+/obj/item/gun/launcher/money/proc/vomit_cash(var/mob/living/vomit_onto, var/projectile_vomit)
 	var/bundle_worth = Floor(receptacle_value / 10)
 	var/turf/T = get_turf(vomit_onto)
 	for(var/i = 1 to 10)
@@ -34,8 +34,8 @@
 				step(bling, pick(GLOB.cardinal))
 
 	if(projectile_vomit)
-		vomit_onto.AdjustStunned(3)
-		vomit_onto.AdjustWeakened(3)
+		ADJ_STATUS(vomit_onto, STAT_STUN, 3)
+		ADJ_STATUS(vomit_onto, STAT_WEAK, 3)
 		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] blasts themselves full in the face with \the [src]!</span>")
 		playsound(T, "sound/weapons/gunshot/money_launcher_jackpot.ogg", 100, 1)
 	else

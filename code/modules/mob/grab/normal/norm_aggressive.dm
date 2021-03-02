@@ -23,7 +23,7 @@
 			affecting_mob.drop_held_items()
 		// Keeps those who are on the ground down
 		if(affecting_mob.lying)
-			affecting_mob.Weaken(4)
+			SET_STATUS_MAX(affecting_mob, STAT_WEAK, 4)
 
 /decl/grab/normal/aggressive/can_upgrade(var/obj/item/grab/G)
 	. = ..()

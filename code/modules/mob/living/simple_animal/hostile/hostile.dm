@@ -92,7 +92,7 @@
 /mob/living/simple_animal/hostile/proc/MoveToTarget()
 	if(!can_act())
 		return
-	if(confused)
+	if(HAS_STATUS(src, STAT_CONFUSE))
 		walk_to(src, pick(orange(2, src)), 1, move_to_delay)
 		return
 	stop_automated_movement = 1

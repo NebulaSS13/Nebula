@@ -488,7 +488,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /decl/species/proc/handle_sleeping(var/mob/living/carbon/human/H)
 	if(prob(2) && !H.failed_last_breath && !H.isSynthetic())
-		if(!H.paralysis)
+		if(!HAS_STATUS(H, STAT_PARA))
 			H.emote("snore")
 		else
 			H.emote("groan")
@@ -551,27 +551,27 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	if(H.stat == DEAD)
 		return 1
 
-	if(!H.drugged)
+	if(!HAS_STATUS(H, STAT_DRUGGY))
 		H.set_see_in_dark((H.sight == (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : min(H.getDarkvisionRange() + H.equipment_darkness_modifier, 8))
 		if(H.equipment_see_invis)
 			H.set_see_invisible(max(min(H.see_invisible, H.equipment_see_invis), vision[2]))
 
 	if(H.equipment_tint_total >= TINT_BLIND)
-		H.eye_blind = max(H.eye_blind, 1)
+		SET_STATUS_MAX(H, STAT_BLIND, 1)
 
 	if(!H.client)//no client, no screen to update
 		return 1
 
-	H.set_fullscreen(H.eye_blind && !H.equipment_prescription, "blind", /obj/screen/fullscreen/blind)
+	H.set_fullscreen(GET_STATUS(H, STAT_BLIND) && !H.equipment_prescription, "blind", /obj/screen/fullscreen/blind)
 	H.set_fullscreen(H.stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
 
 	if(config.welder_vision)
 		H.set_fullscreen(H.equipment_tint_total, "welder", /obj/screen/fullscreen/impaired, H.equipment_tint_total)
 	var/how_nearsighted = get_how_nearsighted(H)
 	H.set_fullscreen(how_nearsighted, "nearsighted", /obj/screen/fullscreen/oxy, how_nearsighted)
-	H.set_fullscreen(H.eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
-	H.set_fullscreen(H.drugged, "high", /obj/screen/fullscreen/high)
-	if(H.drugged)
+	H.set_fullscreen(GET_STATUS(H, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
+	H.set_fullscreen(GET_STATUS(H, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
+	if(HAS_STATUS(H, STAT_DRUGGY))
 		H.add_client_color(/datum/client_color/oversaturated)
 	else
 		H.remove_client_color(/datum/client_color/oversaturated)

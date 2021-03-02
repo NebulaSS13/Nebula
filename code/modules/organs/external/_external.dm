@@ -164,8 +164,8 @@
 		return
 
 	if(owner && BP_IS_CRYSTAL(src)) // Crystalline robotics == piezoelectrics.
-		owner.Weaken(4 - severity)
-		owner.confused = max(owner.confused, 6 - (severity * 2))
+		SET_STATUS_MAX(owner, STAT_WEAK, 4 - severity)
+		SET_STATUS_MAX(owner, STAT_CONFUSE, 6 - (severity * 2))
 		return
 
 	var/burn_damage = 0

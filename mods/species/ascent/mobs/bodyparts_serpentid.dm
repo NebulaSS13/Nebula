@@ -119,7 +119,7 @@
 			lowblood_tally = 10
 			if(prob(10))
 				to_chat(owner, "<span class='warning'>Your body is barely functioning and is starting to shut down.</span>")
-				owner.Paralyse(1)
+				SET_STATUS_MAX(owner, STAT_PARA, 1)
 				var/obj/item/organ/internal/I = pick(owner.internal_organs)
 				I.take_internal_damage(5)
 	..()

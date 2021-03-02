@@ -675,11 +675,11 @@
 		affected |= M
 		if(iscarbon(M))
 			var/mob/living/carbon/C = M
-			C.eye_blurry += 50
-			C.Weaken(3)
-			C.Stun(5)
+			SET_STATUS_MAX(C, STAT_BLURRY, 50)
+			SET_STATUS_MAX(C, STAT_WEAK, 3)
+			SET_STATUS_MAX(C, STAT_STUN, 5)
 		else if(issilicon(M))
-			M.Weaken(10)
+			SET_STATUS_MAX(M, STAT_WEAK, 10)
 
 	admin_attacker_log_many_victims(user, affected, "Used a confuse rune.", "Was victim of a confuse rune.", "used a confuse rune on")
 	qdel(src)

@@ -11,7 +11,7 @@
 // Base variants are applied to everyone on the same Z level
 // Range variants are applied on per-range basis: numbers here are on point blank, it scales with the map size (assumes square shaped Z levels)
 #define DETONATION_RADS 40
-#define DETONATION_MOB_CONCUSSION 4			// Value that will be used for Weaken() for mobs.
+#define DETONATION_MOB_CONCUSSION 4			// Value that will be used for SET_STATUS_MAX(src, STAT_WEAK) on mobs.
 
 // Base amount of ticks for which a specific type of machine will be offline for. +- 20% added by RNG.
 // This does pretty much the same thing as an electrical storm, it just affects the whole Z level instantly.
@@ -212,7 +212,7 @@
 		if(!(TM.z in affected_z))
 			continue
 
-		mob.Weaken(DETONATION_MOB_CONCUSSION)
+		SET_STATUS_MAX(mob, STAT_WEAK, DETONATION_MOB_CONCUSSION)
 		to_chat(mob, "<span class='danger'>An invisible force slams you against the ground!</span>")
 
 	// Effect 2: Z-level wide electrical pulse

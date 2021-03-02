@@ -29,13 +29,13 @@
 		user.visible_message("<span class='danger'>\The [user] invokes \the [src] at [M].</span>", "<span class='danger'>You invoke \the [src] at [M].</span>")
 
 	if(issilicon(M))
-		M.Weaken(15)
-		M.silent += 15
+		SET_STATUS_MAX(M, STAT_WEAK, 15)
+		SET_STATUS_MAX(M, STAT_SILENCE, 15)
 	else if(iscarbon(M))
 		var/mob/living/carbon/C = M
-		C.silent += 15
-		C.Weaken(20)
-		C.Stun(20)
+		SET_STATUS_MAX(C, STAT_WEAK, 20)
+		SET_STATUS_MAX(C, STAT_STUN, 20)
+		SET_STATUS_MAX(C, STAT_SILENCE, 20)
 	admin_attack_log(user, M, "Used a stun talisman.", "Was victim of a stun talisman.", "used a stun talisman on")
 	user.unEquip(src)
 	qdel(src)

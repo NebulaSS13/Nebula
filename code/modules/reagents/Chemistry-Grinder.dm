@@ -241,20 +241,20 @@
 		beaker.reagents.add_reagent(/decl/material/solid/metal/iron, dam)
 	else
 		user.take_blood(beaker, dam)
-	user.Stun(2)
+	SET_STATUS_MAX(user, STAT_STUN, 2)
 	shake(user, 40)
 
-/obj/machinery/reagentgrinder/proc/shake(mob/user, duration)
+/obj/machinery/reagentgrinder/proc/shake(mob/living/user, duration)
 	if(!user)
 		return
 	for(var/i = 1 to duration)
 		sleep(1)
 		if(!Adjacent(user))
 			break
-		if(!user.is_jittery)
+		if(!HAS_STATUS(user, STAT_JITTER))
 			user.do_jitter(4)
 
-	if(!user.is_jittery)
+	if(!HAS_STATUS(user, STAT_JITTER))
 		user.do_jitter(0)
 
 /obj/machinery/reagentgrinder/juicer

@@ -100,7 +100,7 @@
 			else if(use_psi_mode == PSI_IMPLANT_SHOCK)
 				to_chat(imp_in, SPAN_DANGER("Your psi dampener punishes you with a violent neural shock!"))
 				imp_in.flash_eyes()
-				imp_in.Weaken(5)
+				SET_STATUS_MAX(imp_in, STAT_WEAK, 5)
 				if(isliving(imp_in))
 					var/mob/living/M = imp_in
 					if(M.psi) M.psi.stunned(5)

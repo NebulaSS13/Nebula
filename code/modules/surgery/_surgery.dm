@@ -149,13 +149,13 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		. -= round(H.shock_stage * 0.5)
-		if(H.eye_blurry)
+		if(GET_STATUS(H, STAT_BLURRY))
 			. -= 20
-		if(H.eye_blind)
+		if(GET_STATUS(H, STAT_BLIND))
 			. -= 60
 
 	if(delicate)
-		if(user.slurring)
+		if(HAS_STATUS(user, STAT_SLUR))
 			. -= 10
 		if(!target.lying)
 			. -= 30

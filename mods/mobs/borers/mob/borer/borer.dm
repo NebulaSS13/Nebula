@@ -117,16 +117,16 @@
 	sdisabilities = 0
 	if(host)
 		blinded = host.blinded
-		eye_blind = host.eye_blind
-		eye_blurry = host.eye_blurry
+		set_status(STAT_BLIND, GET_STATUS(host, STAT_BLIND))
+		set_status(STAT_BLURRY, GET_STATUS(host, STAT_BLURRY))
 		if(host.sdisabilities & BLINDED)
 			sdisabilities |= BLINDED
 		if(host.sdisabilities & DEAFENED)
 			sdisabilities |= DEAFENED
 	else
 		blinded =    FALSE
-		eye_blind =  0
-		eye_blurry = 0
+		set_status(STAT_BLIND, 0)
+		set_status(STAT_BLURRY, 0)
 
 	. = ..()
 	if(!.)

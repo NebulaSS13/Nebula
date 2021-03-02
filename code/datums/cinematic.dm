@@ -34,8 +34,8 @@ GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
 	for(var/mob/living/M in GLOB.living_mob_list_)
 		if(M.client)
 			M.client.screen += cinematic_screen //show every client the cinematic
-			viewers[M.client] = M.stunned
-			M.stunned = 8000
+			viewers[M.client] = GET_STATUS(M, STAT_STUN)
+			M.set_status(STAT_STUN, 8000)
 
 	override.nuke_act(cinematic_screen, station_missed) //cinematic happens here, as does mob death.
 	//If its actually the end of the round, wait for it to end.
@@ -44,6 +44,6 @@ GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
 
 	for(var/client/C in viewers)
 		if(C.mob)
-			C.mob.stunned = viewers[C]
+			C.mob.set_status(STAT_STUN, viewers[C])
 		C.screen -= cinematic_screen
 	QDEL_NULL(cinematic_screen)

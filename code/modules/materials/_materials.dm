@@ -503,7 +503,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			M.emote(pick("twitch", "drool", "moan"))
 
 	if(euphoriant)
-		M.adjust_drugged(euphoriant, euphoriant_max)
+		SET_STATUS_MAX(M, STAT_DRUGGY, min(GET_STATUS(M, STAT_DRUGGY) + euphoriant, euphoriant_max))
 
 /decl/material/proc/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(affect_blood_on_ingest)

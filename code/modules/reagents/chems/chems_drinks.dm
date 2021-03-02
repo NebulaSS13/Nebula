@@ -23,9 +23,9 @@
 		M.adjust_nutrition(nutrition * removed)
 	if(hydration)
 		M.adjust_hydration(hydration * removed)
-	M.dizziness = max(0, M.dizziness + adj_dizzy)
-	M.drowsyness = max(0, M.drowsyness + adj_drowsy)
-	M.sleeping = max(0, M.sleeping + adj_sleepy)
+	ADJ_STATUS(M, STAT_DIZZY, adj_dizzy)
+	ADJ_STATUS(M, STAT_DROWSY, adj_drowsy)
+	ADJ_STATUS(M, STAT_ASLEEP, adj_sleepy)
 
 	if(adj_temp > 0 && M.bodytemperature < 310) // 310 is the normal bodytemp. 310.055
 		M.bodytemperature = min(310, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
@@ -322,7 +322,7 @@
 	M.add_chemical_effect(CE_PULSE, 2)
 
 /decl/material/liquid/drink/coffee/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
-	M.make_jittery(5)
+	ADJ_STATUS(M, STAT_JITTER, 5)
 	M.add_chemical_effect(CE_PULSE, 1)
 
 /decl/material/liquid/drink/coffee/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
@@ -457,10 +457,10 @@
 		return
 
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
-	M.make_jittery(20)
-	M.adjust_drugged(30, 30)
-	M.dizziness += 5
-	M.drowsyness = 0
+	ADJ_STATUS(M, STAT_JITTER, 20)
+	ADJ_STATUS(M, STAT_DRUGGY, 30)
+	ADJ_STATUS(M, STAT_DIZZY, 5)
+	M.set_status(STAT_DROWSY, 0)
 
 /decl/material/liquid/drink/grenadine
 	name = "grenadine syrup"
@@ -714,8 +714,8 @@
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
-	M.drowsyness = max(0, M.drowsyness - 7)
-	M.make_jittery(2)
+	ADJ_STATUS(M, STAT_DROWSY, -7)
+	ADJ_STATUS(M, STAT_JITTER, 2)
 	M.add_chemical_effect(CE_PULSE, 1)
 
 /decl/material/liquid/drink/kefir

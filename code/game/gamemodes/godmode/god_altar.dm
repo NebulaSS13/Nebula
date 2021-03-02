@@ -23,7 +23,7 @@
 			var/mob/living/affecting_mob = G.get_affecting_mob()
 			if(istype(affecting_mob))
 				affecting_mob.dropInto(loc)
-				affecting_mob.Weaken(1)
+				SET_STATUS_MAX(affecting_mob, STAT_WEAK, 1)
 				user.visible_message("<span class='warning'>\The [user] throws \the [affecting_mob] onto \the [src]!</span>")
 				qdel(G)
 				return

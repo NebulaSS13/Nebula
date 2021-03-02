@@ -186,12 +186,13 @@
 /mob/living/slime/attack_ui(slot)
 	return
 
-/mob/living/slime/proc/set_confused(var/amt)
-	var/last_confused = confused
-	confused = max(confused, amt)
-	if(confused != last_confused && istype(ai, /datum/ai/slime))
-		var/datum/ai/slime/slime_ai = ai
-		slime_ai.update_mood()
+/decl/status_condition/confused/handle_changed_amount(mob/living/victim, new_amount, last_amount)
+	. = ..()
+	if(new_amount != last_amount && isslime(victim))
+		var/mob/living/slime/slime = victim
+		if(istype(slime.ai, /datum/ai/slime))
+			var/datum/ai/slime/slime_ai = slime.ai
+			slime_ai.update_mood()
 
 /mob/living/slime/proc/adjust_friendship(var/mob/user, var/amount)
 	if(user && amount != 0)
@@ -233,7 +234,7 @@
 
 		if(prey != feeding_on)
 			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-			set_confused(2)
+			SET_STATUS_MAX(src, STAT_CONFUSE, 2)
 			step_away(src, user)
 		else
 			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
@@ -246,7 +247,7 @@
 		if(I_DISARM)
 			if(prob(40))
 				visible_message(SPAN_DANGER("\The [user] shoves \the [src] and it wobbles around, disoriented!"))
-				set_confused(2)
+				SET_STATUS_MAX(src, STAT_CONFUSE, 2)
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			else
 				visible_message(SPAN_DANGER("\The [user] shoves \the [src]!"))

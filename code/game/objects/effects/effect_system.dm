@@ -260,7 +260,7 @@ steam.start() -- spawns the effect
 		return 0
 
 	M.drop_held_items()
-	M:sleeping += 1
+	ADJ_STATUS(M, STAT_ASLEEP, 1)
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
 		M.emote("cough")
@@ -469,7 +469,7 @@ steam.start() -- spawns the effect
 		for(var/mob/living/M in viewers(1, location))
 			if(prob (50 * amount))
 				to_chat(M, SPAN_DANGER("The explosion knocks you down!"))
-				M.Weaken(rand(1,5))
+				SET_STATUS_MAX(M, STAT_WEAK, rand(1,5))
 		return
 	else
 		var/devst = -1

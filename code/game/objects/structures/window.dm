@@ -279,12 +279,12 @@
 	if(G.damage_stage() < 2)
 		G.affecting.visible_message(SPAN_DANGER("[G.assailant] bashes [G.affecting] against \the [src]!"))
 		if(prob(50))
-			affecting_mob.Weaken(1)
+			SET_STATUS_MAX(affecting_mob, STAT_WEAK, 1)
 		affecting_mob.apply_damage(10, BRUTE, def_zone, used_weapon = src)
 		hit(25)
 	else
 		G.affecting.visible_message(SPAN_DANGER("[G.assailant] crushes [G.affecting] against \the [src]!"))
-		affecting_mob.Weaken(5)
+		SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
 		affecting_mob.apply_damage(20, BRUTE, def_zone, used_weapon = src)
 		hit(50)
 	return TRUE

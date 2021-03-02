@@ -55,7 +55,7 @@
 
 /decl/emote/visible/collapse/do_extra(var/mob/user)
 	if(istype(user))
-		user.Paralyse(2)
+		SET_STATUS_MAX(user, STAT_PARA, 2)
 
 /decl/emote/visible/flash
 	key = "flash"
@@ -114,8 +114,8 @@
 	emote_message_3p = "USER faints."
 
 /decl/emote/visible/faint/do_extra(var/mob/user)
-	if(istype(user) && user.sleeping <= 0)
-		user.sleeping += 10
+	if(istype(user) && !HAS_STATUS(user, STAT_ASLEEP))
+		SET_STATUS_MAX(user, STAT_ASLEEP, 10)
 
 /decl/emote/visible/frown
 	key = "frown"

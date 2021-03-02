@@ -33,7 +33,7 @@
 		return INITIALIZE_HINT_QDEL
 	target_zone = assailant.zone_sel?.selecting
 
-	var/mob/affecting_mob = get_affecting_mob()
+	var/mob/living/affecting_mob = get_affecting_mob()
 	if(affecting_mob)
 		affecting_mob.UpdateLyingBuckledAndVerbStatus()
 		if(ishuman(affecting_mob))
@@ -161,7 +161,7 @@
 	assailant.drop_from_inventory(src)
 
 /obj/item/grab/proc/get_affecting_mob()
-	. = ismob(affecting) && affecting
+	. = isliving(affecting) && affecting
 
 // Returns the organ of the grabbed person that the grabber is targeting
 /obj/item/grab/proc/get_targeted_organ()

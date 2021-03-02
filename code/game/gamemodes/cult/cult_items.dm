@@ -25,7 +25,7 @@
 
 	//random amount of damage between half of the blade's force and the full force of the blade.
 	user.apply_damage(rand(force/2, force), BRUTE, zone, (DAM_SHARP|DAM_EDGE), armor_pen = 100)
-	user.Weaken(5)
+	SET_STATUS_MAX(user, STAT_WEAK, 5)
 
 	if(user.unEquip(src))
 		throw_at(get_edge_target_turf(src, pick(GLOB.alldirs)), rand(1,3), throw_speed)
@@ -38,8 +38,7 @@
 /obj/item/sword/cultblade/pickup(mob/living/user)
 	if(!iscultist(user))
 		to_chat(user, "<span class='warning'>An overwhelming feeling of dread comes over you as you pick up the cultist's sword. It would be wise to be rid of this blade quickly.</span>")
-		user.make_dizzy(120)
-
+		SET_STATUS_MAX(user, STAT_DIZZY, 120)
 
 /obj/item/clothing/head/culthood
 	name = "cult hood"

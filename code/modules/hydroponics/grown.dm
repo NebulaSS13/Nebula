@@ -137,8 +137,8 @@
 
 			to_chat(M, "<span class='notice'>You slipped on the [name]!</span>")
 			playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-			M.Stun(8)
-			M.Weaken(5)
+			SET_STATUS_MAX(M, STAT_STUN, 8)
+			SET_STATUS_MAX(M, STAT_WEAK, 5)
 			seed.thrown_at(src,M)
 			QDEL_IN(src, 0)
 

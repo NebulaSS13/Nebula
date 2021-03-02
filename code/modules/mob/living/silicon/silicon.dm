@@ -96,11 +96,13 @@
 	switch(severity)
 		if(1)
 			src.take_organ_damage(0, 16, bypass_armour = TRUE)
-			if(prob(50)) Stun(rand(5,10))
-			else confused = (min(confused + 2, 40))
+			if(prob(50)) 
+				SET_STATUS_MAX(src, STAT_STUN, rand(5,10))
+			else
+				ADJ_STATUS(src, STAT_CONFUSE, rand(2,40))
 		if(2)
 			src.take_organ_damage(0, 7, bypass_armour = TRUE)
-			confused = (min(confused + 2, 30))
+			ADJ_STATUS(src, STAT_CONFUSE, rand(2,30))
 	flash_eyes(affect_silicon = 1)
 	to_chat(src, "<span class='danger'><B>*BZZZT*</B></span>")
 	to_chat(src, "<span class='danger'>Warning: Electromagnetic pulse detected.</span>")
@@ -122,7 +124,7 @@
 			"<span class='danger'>Energy pulse detected, system damaged!</span>", \
 			"<span class='warning'>You hear an electrical crack</span>")
 		if(prob(20))
-			Stun(2)
+			SET_STATUS_MAX(src, STAT_STUN, 2)
 		return
 
 /mob/living/silicon/proc/damage_mob(var/brute = 0, var/fire = 0, var/tox = 0)

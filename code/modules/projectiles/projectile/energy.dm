@@ -28,8 +28,8 @@
 	for (var/mob/living/carbon/M in viewers(T, flash_range))
 		if(M.eyecheck() < FLASH_PROTECTION_MAJOR)
 			M.flash_eyes()
-			M.eye_blurry += (brightness / 2)
-			M.confused += (brightness / 2)
+			ADJ_STATUS(M, STAT_BLURRY, brightness / 2)
+			ADJ_STATUS(M, STAT_CONFUSE, brightness / 2)
 
 	//snap pop
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
@@ -177,21 +177,22 @@
 			ear_safety += 1
 
 	if(!ear_safety)
-		M.make_dizzy(max_dizziness_amt)
-		M.ear_damage += rand(1, 10)
-		M.ear_deaf = max(M.ear_deaf,15)
-	else if(ear_safety > 1)
-		M.make_dizzy(min_dizziness_amt)
-	else
-		M.make_dizzy(med_dizziness_amt)
+		SET_STATUS_MAX(M, STAT_DIZZY, max_dizziness_amt)
+		ADJ_STATUS(M, STAT_TINNITUS, rand(1, 10))
+		SET_STATUS_MAX(M, STAT_DEAF, 15)
 
-	if(M.ear_damage >= 15)
+	else if(ear_safety > 1)
+		SET_STATUS_MAX(M, STAT_DIZZY, min_dizziness_amt)
+	else
+		SET_STATUS_MAX(M, STAT_DIZZY, med_dizziness_amt)
+
+	if(GET_STATUS(M, STAT_TINNITUS) >= 15)
 		to_chat(M, SPAN_DANGER("Your ears start to ring badly!"))
-		if(prob(M.ear_damage - 5))
+		if(prob(GET_STATUS(M, STAT_TINNITUS) - 5))
 			to_chat(M, SPAN_DANGER("You can't hear anything!"))
 			M.set_sdisability(DEAFENED)
 	else
-		if(M.ear_damage >= 5)
+		if(GET_STATUS(M, STAT_TINNITUS) >= 5)
 			to_chat(M, SPAN_DANGER("Your ears start to ring!"))
 
 /obj/item/projectile/energy/plasmastun/on_hit(var/atom/target)

@@ -47,35 +47,35 @@
 	//Flashing everyone
 	M.flash_eyes(FLASH_PROTECTION_MODERATE)
 	if(eye_safety < FLASH_PROTECTION_MODERATE)
-		M.Stun(2)
-		M.confused += 5
+		SET_STATUS_MAX(M, STAT_STUN, 2)
+		SET_STATUS_MAX(M, STAT_CONFUSE, 5)
 
 	//Now applying sound
 	if(ear_safety)
 		if(ear_safety < 2 && get_dist(M, T) <= 2)
-			M.Stun(1)
-			M.confused += 3
+			SET_STATUS_MAX(M, STAT_STUN, 1)
+			SET_STATUS_MAX(M, STAT_CONFUSE, 3)
 
 	else if(get_dist(M, T) <= 2)
-		M.Stun(3)
-		M.confused += 8
-		M.ear_damage += rand(0, 5)
-		M.ear_deaf = max(M.ear_deaf,15)
+		SET_STATUS_MAX(M, STAT_STUN, 3)
+		SET_STATUS_MAX(M, STAT_CONFUSE, 8)
+		SET_STATUS_MAX(M, STAT_TINNITUS, rand(0, 5))
+		SET_STATUS_MAX(M, STAT_DEAF, 15)
 
 	else if(get_dist(M, T) <= 5)
-		M.Stun(2)
-		M.confused += 5
-		M.ear_damage += rand(0, 3)
-		M.ear_deaf = max(M.ear_deaf,10)
+		SET_STATUS_MAX(M, STAT_STUN, 2)
+		SET_STATUS_MAX(M, STAT_CONFUSE, 5)
+		SET_STATUS_MAX(M, STAT_TINNITUS, rand(0, 3))
+		SET_STATUS_MAX(M, STAT_DEAF, 10)
 
 	else
-		M.Stun(1)
-		M.confused += 3
-		M.ear_damage += rand(0, 1)
-		M.ear_deaf = max(M.ear_deaf,5)
+		SET_STATUS_MAX(M, STAT_STUN, 1)
+		SET_STATUS_MAX(M, STAT_CONFUSE, 3)
+		SET_STATUS_MAX(M, STAT_TINNITUS, rand(0, 1))
+		SET_STATUS_MAX(M, STAT_DEAF, 5)
 
 	//This really should be in mob not every check
-	switch(M.ear_damage)
+	switch(GET_STATUS(M, STAT_TINNITUS))
 		if(1 to 14)
 			to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
 		if(15 to INFINITY)

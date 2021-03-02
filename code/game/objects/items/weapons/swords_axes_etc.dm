@@ -18,7 +18,7 @@
 /obj/item/classic_baton/attack(mob/M, mob/living/user)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>You club yourself over the head.</span>")
-		user.Weaken(3 * force)
+		SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
 			H.apply_damage(2*force, BRUTE, BP_HEAD)
@@ -74,7 +74,7 @@
 	if(on)
 		if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 			to_chat(user, "<span class='warning'>You club yourself over the head.</span>")
-			user.Weaken(3 * force)
+			SET_STATUS_MAX(user, STAT_WEAK, (3 * force))
 			if(ishuman(user))
 				var/mob/living/carbon/human/H = user
 				H.apply_damage(2*force, BRUTE, BP_HEAD)

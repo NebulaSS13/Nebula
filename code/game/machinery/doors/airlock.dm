@@ -143,7 +143,7 @@ About the new airlock wires panel:
 			if(istype(C) && C.hallucination_power > 25)
 				to_chat(user, SPAN_DANGER("You feel a powerful shock course through your body!"))
 				user.adjustHalLoss(10)
-				user.Stun(10)
+				SET_STATUS_MAX(user, STAT_STUN, 10)
 				return
 	..(user)
 

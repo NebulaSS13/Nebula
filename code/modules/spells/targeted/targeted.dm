@@ -159,17 +159,17 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 		H.fixblood()
 	target.regenerate_icons()
 	//disabling
-	target.Weaken(amt_weakened)
-	target.Paralyse(amt_paralysis)
-	target.Stun(amt_stunned)
+	SET_STATUS_MAX(target, STAT_WEAK, amt_weakened)
+	SET_STATUS_MAX(target, STAT_PARA, amt_paralysis)
+	SET_STATUS_MAX(target, STAT_STUN, amt_stunned)
 	if(amt_weakened || amt_paralysis || amt_stunned)
 		if(target.buckled)
 			target.buckled = null
-	target.eye_blind += amt_eye_blind
-	target.eye_blurry += amt_eye_blurry
-	target.dizziness += amt_dizziness
-	target.confused += amt_confused
-	target.stuttering += amt_stuttering
+	ADJ_STATUS(target, STAT_BLIND, amt_eye_blind)
+	ADJ_STATUS(target, STAT_BLURRY, amt_eye_blurry)
+	ADJ_STATUS(target, STAT_DIZZY, amt_dizziness)
+	ADJ_STATUS(target, STAT_CONFUSE, amt_confused)
+	ADJ_STATUS(target, STAT_STUTTER, amt_stuttering)
 	if(effect_state)
 		var/obj/o = new /obj/effect/temporary(get_turf(target), effect_duration, 'icons/effects/effects.dmi', effect_state)
 		o.color = effect_color

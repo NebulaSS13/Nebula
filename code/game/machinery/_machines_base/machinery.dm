@@ -336,7 +336,7 @@ Class Procs:
 
 			if(terminal && terminal.powernet)
 				terminal.powernet.trigger_warning()
-		if(user.stunned)
+		if(HAS_STATUS(user, STAT_STUN))
 			return 1
 	return 0
 

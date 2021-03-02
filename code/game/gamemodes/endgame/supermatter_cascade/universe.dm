@@ -114,7 +114,7 @@ var/global/universe_has_ended = 0
 		if(!istype(M.current,/mob/living))
 			continue
 		if(M.current.stat!=2)
-			M.current.Weaken(10)
+			SET_STATUS_MAX(M.current, STAT_WEAK, 10)
 			M.current.flash_eyes()
 
 		clear_antag_roles(M)

@@ -53,7 +53,7 @@
 
 			to_chat(src, SPAN_DANGER("You focus on [M] and freeze their limbs with a wave of terrible psionic dread."))
 			to_chat(M, SPAN_DANGER("You feel a creeping, horrible sense of dread come over you, freezing your limbs and setting your heart racing."))
-			M.Weaken(10)
+			SET_STATUS_MAX(M, STAT_WEAK, 10)
 			set_ability_cooldown(15 SECONDS)
 
 		return TRUE

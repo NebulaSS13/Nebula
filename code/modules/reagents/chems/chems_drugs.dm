@@ -23,11 +23,11 @@
 	value = 2
 
 /decl/material/liquid/narcotics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.jitteriness = max(M.jitteriness - 5, 0)
+	ADJ_STATUS(M, STAT_JITTER, -5)
 	if(prob(80))
 		M.adjustBrainLoss(5.25 * removed)
 	if(prob(50))
-		M.drowsyness = max(M.drowsyness, 3)
+		SET_STATUS_MAX(M, STAT_DROWSY, 3)
 	if(prob(10))
 		M.emote("drool")
 
@@ -66,22 +66,22 @@
 	value = 2
 
 /decl/material/liquid/sedatives/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.make_jittery(-50)
+	ADJ_STATUS(M, STAT_JITTER, -50)
 	var/threshold = 1
 	var/dose = LAZYACCESS(M.chem_doses, type)
 	if(dose < 0.5 * threshold)
 		if(dose == metabolism * 2 || prob(5))
 			M.emote("yawn")
 	else if(dose < 1 * threshold)
-		M.eye_blurry = max(M.eye_blurry, 10)
+		SET_STATUS_MAX(M, STAT_BLURRY, 10)
 	else if(dose < 2 * threshold)
 		if(prob(50))
-			M.Weaken(2)
+			SET_STATUS_MAX(M, STAT_WEAK, 2)
 			M.add_chemical_effect(CE_SEDATE, 1)
-		M.drowsyness = max(M.drowsyness, 20)
+		SET_STATUS_MAX(M, STAT_DROWSY, 20)
 	else
-		M.sleeping = max(M.sleeping, 20)
-		M.drowsyness = max(M.drowsyness, 60)
+		SET_STATUS_MAX(M, STAT_ASLEEP, 20)
+		SET_STATUS_MAX(M, STAT_DROWSY, 60)
 		M.add_chemical_effect(CE_SEDATE, 1)
 	M.add_chemical_effect(CE_PULSE, -1)
 
@@ -102,7 +102,7 @@
 
 /decl/material/liquid/psychoactives/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
-	M.adjust_drugged(15, 15)
+	ADJ_STATUS(M, STAT_DRUGGY, rand(15, 15))
 	M.add_chemical_effect(CE_PULSE, -1)
 
 /decl/material/liquid/hallucinogenics
@@ -135,23 +135,23 @@
 	var/dose = LAZYACCESS(M.chem_doses, type)
 	if(dose < 1 * threshold)
 		M.apply_effect(3, STUTTER)
-		M.make_dizzy(5)
+		ADJ_STATUS(M, STAT_DIZZY, 5)
 		if(prob(5))
 			M.emote(pick("twitch", "giggle"))
 	else if(dose < 2 * threshold)
 		M.apply_effect(3, STUTTER)
-		M.make_jittery(5)
-		M.make_dizzy(5)
-		M.adjust_drugged(35, 35)
+		ADJ_STATUS(M, STAT_JITTER,  5)
+		ADJ_STATUS(M, STAT_DIZZY,   5)
+		ADJ_STATUS(M, STAT_DRUGGY, 35)
 
 		if(prob(10))
 			M.emote(pick("twitch", "giggle"))
 	else
 		M.add_chemical_effect(CE_MIND, -1)
 		M.apply_effect(3, STUTTER)
-		M.make_jittery(10)
-		M.make_dizzy(10)
-		M.adjust_drugged(40, 40)
+		ADJ_STATUS(M, STAT_JITTER, 10)
+		ADJ_STATUS(M, STAT_DIZZY,  10)
+		ADJ_STATUS(M, STAT_DRUGGY, 40)
 		if(prob(15))
 			M.emote(pick("twitch", "giggle"))
 
@@ -201,8 +201,8 @@
 	M.add_chemical_effect(CE_THIRDEYE, 1)
 	M.add_chemical_effect(CE_MIND, -2)
 	M.set_hallucination(50, 50)
-	M.make_jittery(3)
-	M.make_dizzy(3)
+	ADJ_STATUS(M, STAT_JITTER, 3)
+	ADJ_STATUS(M, STAT_DIZZY,  3)
 	if(prob(0.1) && ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.seizure()

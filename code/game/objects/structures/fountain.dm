@@ -39,7 +39,8 @@
 /obj/structure/fountain/proc/time_dilation(var/mob/living/carbon/human/user)
 	for(var/mob/living/L in oviewers(7, src))
 		L.flash_eyes(3)
-		L.eye_blurry += 9
+		SET_STATUS_MAX(L, STAT_BLURRY, 9)
+
 	visible_message("<span class='warning'>\The [src] erupts in a bright flash of light!</span>")
 	playsound(src,'sound/items/time.ogg',100)
 

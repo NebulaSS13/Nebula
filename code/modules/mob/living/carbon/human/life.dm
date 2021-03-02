@@ -186,23 +186,23 @@
 		vision = get_internal_organ(species.vision_organ)
 
 	if(!species.vision_organ) // Presumably if a species has no vision organs, they see via some other means.
-		eye_blind =  0
+		set_status(STAT_BLIND, 0)
 		blinded =    0
-		eye_blurry = 0
+		set_status(STAT_BLURRY, 0)
 	else if(!vision || (vision && !vision.is_usable()))   // Vision organs cut out or broken? Permablind.
-		eye_blind =  1
+		set_status(STAT_BLIND, 1)
 		blinded =    1
-		eye_blurry = 1
+		set_status(STAT_BLURRY, 1)
 	else
 		//blindness
 		if(!(sdisabilities & BLINDED))
 			if(equipment_tint_total >= TINT_BLIND)	// Covered eyes, heal faster
-				eye_blurry = max(eye_blurry-2, 0)
+				ADJ_STATUS(src, STAT_BLURRY, -1) 
 
 /mob/living/carbon/human/handle_disabilities()
 	..()
 	if(stat != DEAD)
-		if ((disabilities & COUGHING) && prob(5) && paralysis <= 1)
+		if ((disabilities & COUGHING) && prob(5) && GET_STATUS(src, STAT_PARA) <= 1)
 			drop_held_items()
 			spawn(0)
 				emote("cough")
@@ -241,7 +241,7 @@
 				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
 					radiation -= 5 * RADIATION_SPEED_COEFFICIENT
 					to_chat(src, "<span class='warning'>You feel weak.</span>")
-					Weaken(3)
+					SET_STATUS_MAX(src, STAT_WEAK, 3)
 					if(!lying)
 						emote("collapse")
 				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
@@ -534,7 +534,6 @@
 			return TRUE
 	return species.handle_death_check(src)
 
-//DO NOT CALL handle_statuses() from this proc, it's called from living/Life() as long as this returns a true value.
 /mob/living/carbon/human/handle_regular_status_updates()
 	if(!handle_some_updates())
 		return 0
@@ -542,18 +541,16 @@
 	if(status_flags & GODMODE)	return 0
 
 	//SSD check, if a logged player is awake put them back to sleep!
-	if(ssd_check() && species.get_ssd(src) || player_triggered_sleeping)
-		Sleeping(2)
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 		blinded = 1
-		silent = 0
+		set_status(STAT_SILENCE, 0)
 	else				//ALIVE. LIGHTS ARE ON
 		updatehealth()	//TODO
 
 		if(handle_death_check())
 			death()
 			blinded = 1
-			silent = 0
+			set_status(STAT_SILENCE, 0)
 			return 1
 
 		if(hallucination_power)
@@ -563,20 +560,14 @@
 			if(!stat)
 				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
 				src.visible_message("<B>[src]</B> [species.halloss_message]")
-			Paralyse(10)
+			SET_STATUS_MAX(src, STAT_PARA, 10)
 
-		if(paralysis || sleeping)
+		if(HAS_STATUS(src, STAT_PARA) ||HAS_STATUS(src, STAT_ASLEEP))
 			blinded = 1
 			set_stat(UNCONSCIOUS)
 			animate_tail_reset()
 			adjustHalLoss(-3)
-			if(sleeping)
-				handle_dreams()
-				if (mind)
-					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of sedatives or similar.
-					if(client || sleeping > 3)
-						AdjustSleeping(-1)
-				species.handle_sleeping(src)
+
 			if(prob(2) && is_asystole() && isSynthetic())
 				visible_message("<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")]")
 		//CONSCIOUS
@@ -592,23 +583,23 @@
 
 		//Resting
 		if(resting)
-			dizziness = max(0, dizziness - 15)
-			jitteriness = max(0, jitteriness - 15)
+			ADJ_STATUS(src, STAT_DIZZY, -15)
+			ADJ_STATUS(src, STAT_JITTER, -15)
 			adjustHalLoss(-3)
 		else
-			dizziness = max(0, dizziness - 3)
-			jitteriness = max(0, jitteriness - 3)
+			ADJ_STATUS(src, STAT_DIZZY, -3)
+			ADJ_STATUS(src, STAT_JITTER, -3)
 			adjustHalLoss(-1)
 
-		if (drowsyness > 0)
-			drowsyness = max(0, drowsyness-1)
-			eye_blurry = max(2, eye_blurry)
-			if(drowsyness > 10)
-				var/zzzchance = min(5, 5*drowsyness/30)
-				if((prob(zzzchance) || drowsyness >= 60))
+		if(HAS_STATUS(src, STAT_DROWSY))
+			SET_STATUS_MAX(src, STAT_BLURRY, 2)
+			var/sleepy = GET_STATUS(src, STAT_DROWSY)
+			if(sleepy > 10)
+				var/zzzchance = min(5, 5*sleepy/30)
+				if((prob(zzzchance) || sleepy >= 60))
 					if(stat == CONSCIOUS)
 						to_chat(src, "<span class='notice'>You are about to fall asleep...</span>")
-					Sleeping(5)
+					SET_STATUS_MAX(src, STAT_ASLEEP, 5)
 
 		// If you're dirty, your gloves will become dirty, too.
 		if(gloves && germ_level > gloves.germ_level && prob(10))
@@ -627,8 +618,8 @@
 		if(hydration > 0)
 			adjust_hydration(-species.thirst_factor)
 
-		if(stasis_value > 1 && drowsyness < stasis_value * 4)
-			drowsyness += min(stasis_value, 3)
+		if(stasis_value > 1 && GET_STATUS(src, STAT_DROWSY) < stasis_value * 4)
+			ADJ_STATUS(src, STAT_DROWSY, min(stasis_value, 3))
 			if(!stat && prob(1))
 				to_chat(src, "<span class='notice'>You feel slow and sluggish...</span>")
 
@@ -877,30 +868,30 @@
 	if(shock_stage >= 30)
 		if(shock_stage == 30) visible_message("<b>[src]</b> is having trouble keeping \his eyes open.")
 		if(prob(30))
-			eye_blurry = max(2, eye_blurry)
-			stuttering = max(stuttering, 5)
+			SET_STATUS_MAX(src, STAT_BLURRY, 2)
+			SET_STATUS_MAX(src, STAT_STUTTER, 5)
 
 	if (shock_stage >= 60)
 		if(shock_stage == 60) visible_message("<b>[src]</b>'s body becomes limp.")
 		if (prob(2))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = TRUE)
-			Weaken(3)
+			SET_STATUS_MAX(src, STAT_WEAK, 3)
 
 	if(shock_stage >= 80)
 		if (prob(5))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = TRUE)
-			Weaken(5)
+			SET_STATUS_MAX(src, STAT_WEAK, 5)
 
 	if(shock_stage >= 120)
-		if(!paralysis && prob(2))
+		if(!HAS_STATUS(src, STAT_PARA) && prob(2))
 			custom_pain("[pick("You black out", "You feel like you could die any moment now", "You're about to lose consciousness")]!", shock_stage, nohalloss = TRUE)
-			Paralyse(5)
+			SET_STATUS_MAX(src, STAT_PARA, 5)
 
 	if(shock_stage == 150)
 		visible_message("<b>[src]</b> can no longer stand, collapsing!")
 
 	if(shock_stage >= 150)
-		Weaken(5)
+		SET_STATUS_MAX(src, STAT_WEAK, 5)
 
 /*
 	Called by life(), instead of having the individual hud items update icons each tick and check for status changes
@@ -1014,12 +1005,6 @@
 				holder.icon_state = "hudsyndicate"
 			hud_list[SPECIALROLE_HUD] = holder
 	hud_updateflag = 0
-
-/mob/living/carbon/human/handle_stunned()
-	if(!can_feel_pain())
-		stunned = 0
-		return 0
-	return ..()
 
 /mob/living/carbon/human/handle_fire()
 	if(..())

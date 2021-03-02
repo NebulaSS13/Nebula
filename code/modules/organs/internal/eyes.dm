@@ -86,9 +86,9 @@
 	if(!owner)
 		return
 	if(is_bruised())
-		owner.eye_blurry = 20
+		owner.set_status(STAT_BLURRY, 20)
 	if(is_broken())
-		owner.eye_blind = 20
+		owner.set_status(STAT_BLIND, 20)
 
 /obj/item/organ/internal/eyes/Initialize()
 	. = ..()
