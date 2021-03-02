@@ -465,12 +465,10 @@ steam.start() -- spawns the effect
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 			s.set_up(2, 1, location)
 			s.start()
-
-			for(var/mob/M in viewers(5, location))
-				to_chat(M, "<span class='warning'>The solution violently explodes.</span>")
-			for(var/mob/M in viewers(1, location))
-				if (prob (50 * amount))
-					to_chat(M, "<span class='warning'>The explosion knocks you down.</span>")
+			location.visible_message(SPAN_DANGER("The solution violently explodes!"))
+			for(var/mob/living/M in viewers(1, location))
+				if(prob (50 * amount))
+					to_chat(M, SPAN_DANGER("The explosion knocks you down!"))
 					M.Weaken(rand(1,5))
 			return
 		else
@@ -492,8 +490,7 @@ steam.start() -- spawns the effect
 			if (flashing && flashing_factor)
 				flash = (amount/4) * flashing_factor
 
-			for(var/mob/M in viewers(8, location))
-				to_chat(M, "<span class='warning'>The solution violently explodes.</span>")
+			location.visible_message(SPAN_DANGER("The solution violently explodes!"))
 
 			explosion(
 				location,
