@@ -371,8 +371,8 @@
 	for(var/obj/item/grab/G in grabs)
 		if(G.affecting && !(G.affecting in L))
 			L += G.affecting
-			var/mob/affecting_mob = G.get_affecting_mob()
-			if(affecting_mob)
+			var/mob/living/affecting_mob = G.get_affecting_mob()
+			if(istype(affecting_mob))
 				affecting_mob.ret_grab(L)
 	return L
 

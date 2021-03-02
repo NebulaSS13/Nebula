@@ -181,10 +181,10 @@
 	if (!G.force_danger())
 		to_chat(G.assailant, SPAN_WARNING("You need a better grip to do that!"))
 		return TRUE
-	var/mob/affecting_mob = G.get_affecting_mob()
-	if (G.assailant.a_intent == I_HURT)
+	var/mob/living/affecting_mob = G.get_affecting_mob()
+	if(G.assailant.a_intent == I_HURT)
 
-		if(!affecting_mob)
+		if(!istype(affecting_mob))
 			to_chat(G.assailant, SPAN_WARNING("You need to be grabbing a living creature to do that!"))
 			return TRUE
 
