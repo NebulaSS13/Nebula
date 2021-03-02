@@ -161,8 +161,8 @@
 	. = ..()
 
 /obj/structure/fire_source/grab_attack(var/obj/item/grab/G)
-	var/mob/affecting_mob = G.get_affecting_mob()
-	if(!affecting_mob)
+	var/mob/living/affecting_mob = G.get_affecting_mob()
+	if(!istype(affecting_mob))
 		return FALSE
 	if (G.assailant.a_intent != I_HURT)
 		return TRUE

@@ -17,7 +17,7 @@
 	break_chance_table = list(5, 20, 40, 80, 100)
 
 /decl/grab/normal/aggressive/process_effect(var/obj/item/grab/G)
-	var/mob/affecting_mob = G.get_affecting_mob()
+	var/mob/living/affecting_mob = G.get_affecting_mob()
 	if(istype(affecting_mob))
 		if(G.target_zone in list(BP_L_HAND, BP_R_HAND))
 			affecting_mob.drop_held_items()

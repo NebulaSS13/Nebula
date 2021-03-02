@@ -193,8 +193,8 @@
 			G.assailant.visible_message("<span class='warning'>\The [G.assailant] covers [G.affecting]'s eyes!</span>")
 
 /decl/grab/normal/check_special_target(var/obj/item/grab/G)
-	var/mob/affecting_mob = G.get_affecting_mob()
-	if(affecting_mob)
+	var/mob/living/affecting_mob = G.get_affecting_mob()
+	if(!istype(affecting_mob))
 		return FALSE
 	switch(G.target_zone)
 		if(BP_MOUTH)

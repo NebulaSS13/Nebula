@@ -271,11 +271,11 @@
 	if (!G.force_danger())
 		to_chat(G.assailant, SPAN_DANGER("You need a better grip to do that!"))
 		return TRUE
-	var/mob/affecting_mob = G.get_affecting_mob()
-	var/def_zone = ran_zone(BP_HEAD, 20, affecting_mob)
-	if(!affecting_mob)
+	var/mob/living/affecting_mob = G.get_affecting_mob()
+	if(!istype(affecting_mob))
 		attackby(G.affecting, G.assailant)
 		return TRUE
+	var/def_zone = ran_zone(BP_HEAD, 20, affecting_mob)
 	if(G.damage_stage() < 2)
 		G.affecting.visible_message(SPAN_DANGER("[G.assailant] bashes [G.affecting] against \the [src]!"))
 		if(prob(50))
