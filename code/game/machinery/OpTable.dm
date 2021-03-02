@@ -87,8 +87,8 @@
 				victim = H
 				break
 	if(victim)
-		if(suppressing && victim.sleeping < 3)
-			victim.Sleeping(3 - victim.sleeping)
+		if(suppressing && GET_STATUS(victim, STAT_ASLEEP) < 3)
+			SET_STATUS_MAX(victim, STAT_ASLEEP, 3)
 	. = !!victim
 	update_icon()
 

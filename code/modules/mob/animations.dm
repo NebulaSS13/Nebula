@@ -1,78 +1,7 @@
-/*
-adds a dizziness amount to a mob
-use this rather than directly changing var/dizziness
-since this ensures that the dizzy_process proc is started
-currently only humans get dizzy
-
-value of dizziness ranges from 0 to 1000
-below 100 is not dizzy
-*/
-
-/mob/var/dizziness = 0//Carbon
-/mob/var/is_dizzy = 0
-
-/mob/proc/make_dizzy(var/amount)
-	if(!istype(src, /mob/living/carbon/human)) // for the moment, only humans get dizzy
-		return
-
-	dizziness = min(1000, dizziness + amount)	// store what will be new value
-													// clamped to max 1000
-	if(dizziness > 100 && !is_dizzy)
-		spawn(0)
-			dizzy_process()
-
-
-/*
-dizzy process - wiggles the client's pixel offset over time
-spawned from make_dizzy(), will terminate automatically when dizziness gets <100
-note dizziness decrements automatically in the mob's Life() proc.
-*/
-/mob/proc/dizzy_process()
-	is_dizzy = 1
-	while(dizziness > 100)
-		if(client)
-			var/amplitude = dizziness*(sin(dizziness * 0.044 * world.time) + 1) / 70
-			client.pixel_x = amplitude * sin(0.008 * dizziness * world.time)
-			client.pixel_y = amplitude * cos(0.008 * dizziness * world.time)
-
-		sleep(1)
-	//endwhile - reset the pixel offsets to zero
-	is_dizzy = 0
-	if(client)
-		client.pixel_x = 0
-		client.pixel_y = 0
-
-// jitteriness - copy+paste of dizziness
-/mob/var/is_jittery = FALSE
-/mob/var/jitteriness = 0//Carbon
-
-/mob/proc/make_jittery(var/amount)
-	return //Only for living/carbon/human/
-
-/mob/living/carbon/human/make_jittery(var/amount)
-	if(jittery_damage())
-		jitteriness = Clamp(jitteriness + amount, 0, 1000)
-		if(jitteriness > 100)
-			jittery_process()
-
-// Typo from the original coder here, below lies the jitteriness process. So make of his code what you will, the previous comment here was just a copypaste of the above.
-/mob/proc/jittery_process()
-	set waitfor = 0
-	if(is_jittery)
-		return
-	is_jittery = TRUE
-	while(jitteriness > 100)
-		var/amplitude = min(4, jitteriness / 100)
-		do_jitter(amplitude)
-		sleep(1)
-	//endwhile - reset the pixel offsets to zero
-	is_jittery = FALSE
-	do_jitter(0)
-
 /mob/proc/do_jitter(amplitude)
 	pixel_x = default_pixel_x + rand(-amplitude, amplitude)
 	pixel_y = default_pixel_y + rand(-amplitude/3, amplitude/3)
-
+	
 //handles up-down floaty effect in space and zero-gravity
 /mob/var/is_floating = 0
 /mob/var/floatiness = 0

@@ -169,7 +169,7 @@
 		fail("Test needs to be re-written, mob has a stat = [H.stat]")
 		return 0
 
-	if(H.sleeping)
+	if(HAS_STATUS(H, STAT_ASLEEP))
 		fail("Test needs to be re-written, mob is sleeping for some unknown reason")
 		return 0
 

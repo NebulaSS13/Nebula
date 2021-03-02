@@ -218,7 +218,7 @@
 
 	if(affecting.incapacitated(INCAPACITATION_ALL))
 		break_strength--
-	if(affecting.confused)
+	if(HAS_STATUS(affecting, STAT_CONFUSE))
 		break_strength--
 
 	if(break_strength < 1)

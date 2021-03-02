@@ -638,9 +638,9 @@ var/list/slot_flags_enumeration = list(
 				if(M.stat != 2)
 					to_chat(M, SPAN_WARNING("You drop what you're holding and clutch at your eyes!"))
 					M.drop_held_items()
-				M.eye_blurry += 10
-				M.Paralyse(1)
-				M.Weaken(4)
+				SET_STATUS_MAX(M, STAT_BLURRY, 10)
+				SET_STATUS_MAX(M, STAT_PARA, 1)
+				SET_STATUS_MAX(M, STAT_WEAK, 4)
 			if (eyes.damage >= eyes.min_broken_damage)
 				if(M.stat != 2)
 					to_chat(M, SPAN_WARNING("You go blind!"))
@@ -649,7 +649,7 @@ var/list/slot_flags_enumeration = list(
 		affecting.take_external_damage(7)
 	else
 		M.take_organ_damage(7)
-	M.eye_blurry += rand(3,4)
+	SET_STATUS_MAX(M, STAT_BLURRY, rand(3,4))
 	return
 
 /obj/item/clean_blood()

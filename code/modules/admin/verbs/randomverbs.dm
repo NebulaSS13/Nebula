@@ -30,7 +30,7 @@
 		for(var/obj/item/W in M)
 			M.drop_from_inventory(W)
 		//teleport person to cell
-		M.Paralyse(5)
+		SET_STATUS_MAX(M, STAT_PARA, 5)
 		sleep(5)	//so they black out before warping
 		M.forceMove(pick(GLOB.prisonwarp))
 		if(istype(M, /mob/living/carbon/human))

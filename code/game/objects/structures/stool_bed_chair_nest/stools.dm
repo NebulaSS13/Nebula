@@ -79,7 +79,7 @@
 		dismantle() //This deletes self.
 
 		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE, damage = 20)
-		target.Weaken(10 * (1 - blocked))
+		SET_STATUS_MAX(target, STAT_WEAK, (10 * (1 - blocked)))
 		target.apply_damage(20, BRUTE, hit_zone, src)
 		return 1
 

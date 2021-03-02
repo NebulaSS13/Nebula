@@ -105,7 +105,7 @@
 	// TODO: Datumlize buckle-handling
 	if(istype(mob.buckled, /obj/vehicle))
 		//drunk driving
-		if(mob.confused && prob(20)) //vehicles tend to keep moving in the same direction
+		if(HAS_STATUS(mob, STAT_CONFUSE) && prob(20)) //vehicles tend to keep moving in the same direction
 			direction = turn(direction, pick(90, -90))
 		mob.buckled.relaymove(mob, direction)
 		return MOVEMENT_HANDLED
@@ -287,7 +287,7 @@
 
 /mob/proc/AdjustMovementDirection(var/direction)
 	. = direction
-	if(!confused)
+	if(!HAS_STATUS(src, STAT_CONFUSE))
 		return
 
 	var/stability = MOVING_DELIBERATELY(src) ? 75 : 25

@@ -39,7 +39,7 @@
 /obj/effect/mine/proc/triggerstun(obj)
 	if(ismob(obj))
 		var/mob/M = obj
-		M.Stun(30)
+		SET_STATUS_MAX(M, STAT_STUN, 30)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	s.set_up(3, 1, src)
 	s.start()

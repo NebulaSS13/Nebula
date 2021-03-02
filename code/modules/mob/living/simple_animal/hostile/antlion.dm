@@ -90,7 +90,7 @@
 	for(var/mob/living/carbon/human/H in get_turf(src))
 		H.attackby(natural_weapon, src)
 		visible_message(SPAN_DANGER("\The [src] tears into \the [H] from below!"))
-		H.Weaken(1)
+		SET_STATUS_MAX(H, STAT_WEAK, 1)
 
 /mob/living/simple_animal/hostile/antlion/proc/process_healing()
 	if(!incapacitated() && healing)

@@ -81,7 +81,7 @@ GLOBAL_VAR(spawntypes)
 					pack.handle_item_insertion(thing)
 
 			C.set_occupant(victim, 1)
-			victim.Sleeping(rand(1,3))
+			SET_STATUS_MAX(victim, STAT_ASLEEP, rand(1,3))
 			C.on_mob_spawn()
 			to_chat(victim,SPAN_NOTICE("You are slowly waking up from the cryostasis aboard [GLOB.using_map.full_name]. It might take a few seconds."))
 			return

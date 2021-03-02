@@ -39,7 +39,7 @@
 		return
 	body.a_intent_change(I_HELP)
 	var/new_mood
-	if(body.confused)
+	if(HAS_STATUS(body, STAT_CONFUSE))
 		new_mood = "pout"
 	else if(rabid || attacked)
 		new_mood = "angry"
@@ -63,7 +63,7 @@
 	if(attacked > 0)
 		attacked = Clamp(attacked--, 0, 50)
 
-	if(!slime || !body || slime.confused)
+	if(!slime || !body || HAS_STATUS(slime, STAT_CONFUSE))
 		return
 
 	// A hungry slime begins losing its friends.

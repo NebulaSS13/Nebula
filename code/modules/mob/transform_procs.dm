@@ -7,7 +7,7 @@
 		drop_from_inventory(W)
 	regenerate_icons()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
-	stunned = 1
+	set_status(STAT_STUN, 1)
 	icon = null
 	set_invisibility(101)
 	for(var/t in organs)
@@ -20,7 +20,7 @@
 	//animation = null
 
 	DEL_TRANSFORMATION_MOVEMENT_HANDLER(src)
-	stunned = 0
+	set_status(STAT_STUN, 0)
 	UpdateLyingBuckledAndVerbStatus()
 	set_invisibility(initial(invisibility))
 
@@ -271,7 +271,7 @@
 			return
 		src.mind.assigned_special_role = "Zombie"
 	log_admin("[key_name(src)] has transformed into a zombie!")
-	Weaken(5)
+	SET_STATUS_MAX(src, STAT_WEAK, 5)
 	if (should_have_organ(BP_HEART))
 		vessel.add_reagent(species.blood_reagent, species.blood_volume - vessel.total_volume)
 	for (var/o in organs)

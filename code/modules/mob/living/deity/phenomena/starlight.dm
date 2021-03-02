@@ -195,7 +195,7 @@
 	to_chat(L, "<span class='cult'>Your soul is ripped from your body as your master prepares to possess it.</span>")
 	to_chat(linked, "<span class='cult'>You prepare the body for possession. Keep it safe. If it is totally destroyed, you will die.</span>")
 	L.ghostize()
-	L.Weaken(1)
+	SET_STATUS_MAX(L, STAT_WEAK, 1)
 	new /obj/aura/starborn(L)
 	L.status_flags |= GODMODE
 	GLOB.destroyed_event.register(L,src,.proc/fail_ritual)

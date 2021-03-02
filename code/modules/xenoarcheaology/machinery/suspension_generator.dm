@@ -133,7 +133,7 @@
 	victim_number = 0
 	var/turf/T = get_turf(src)
 	for(var/mob/living/M in T)
-		M.weakened = max(M.weakened, 3)
+		SET_STATUS_MAX(M, STAT_WEAK, 3)
 		victim_number++
 		if(prob(5))
 			to_chat(M, SPAN_WARNING("[pick("You feel tingly","You feel like floating","It is hard to speak","You can barely move")]."))

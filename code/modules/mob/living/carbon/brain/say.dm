@@ -1,6 +1,6 @@
 //TODO: Convert this over for languages.
 /mob/living/carbon/brain/say(var/message)
-	if (silent)
+	if(HAS_STATUS(src, STAT_SILENCE))
 		return
 
 	message = sanitize(message)

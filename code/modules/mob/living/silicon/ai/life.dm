@@ -1,4 +1,7 @@
 /mob/living/silicon/ai/Life()
+
+	SHOULD_CALL_PARENT(FALSE)
+
 	if (src.stat == DEAD)
 		return
 
@@ -16,8 +19,6 @@
 	if(!psupply)
 		create_powersupply()
 
-	handle_stunned()	// Handle EMP-stun
-	handle_paralysed()	// Just in case something snuck in a Paralyse() call.
 	lying = 0			// Handle lying down
 
 	// We aren't shut down, and we lack external power. Try to fix it using the restoration routine.
@@ -30,11 +31,12 @@
 	handle_impaired_vision()
 	update_power_usage()
 	handle_power_oxyloss()
-	handle_confused()
 	update_sight()
 
 	process_queued_alarms()
 	handle_regular_hud_updates()
+	handle_status_effects()
+
 	switch(src.sensor_mode)
 		if (SEC_HUD)
 			process_sec_hud(src,0,src.eyeobj,get_computer_network())

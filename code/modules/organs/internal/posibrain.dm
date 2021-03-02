@@ -258,7 +258,7 @@
 	if(!checked_use(cost) && owner.isSynthetic())
 		if(!owner.lying && !owner.buckled)
 			to_chat(owner, "<span class='warning'>You don't have enough energy to function!</span>")
-		owner.Paralyse(3)
+		SET_STATUS_MAX(owner, STAT_PARA, 3)
 
 /obj/item/organ/internal/cell/emp_act(severity)
 	..()

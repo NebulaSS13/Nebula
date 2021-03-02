@@ -63,20 +63,20 @@
 
 	switch(effecttype)
 		if(STUN)
-			Stun(effect * blocked_mult(blocked))
+			SET_STATUS_MAX(src, STAT_STUN, effect * blocked_mult(blocked))
 		if(WEAKEN)
-			Weaken(effect * blocked_mult(blocked))
+			SET_STATUS_MAX(src, STAT_WEAK, effect * blocked_mult(blocked))
 		if(PARALYZE)
-			Paralyse(effect * blocked_mult(blocked))
+			SET_STATUS_MAX(src, STAT_PARA, effect * blocked_mult(blocked))
 		if(PAIN)
 			adjustHalLoss(effect * blocked_mult(blocked))
 		if(STUTTER)
 			if(status_flags & CANSTUN) // stun is usually associated with stutter - TODO CANSTUTTER flag?
-				stuttering = max(stuttering, effect * blocked_mult(blocked))
+				SET_STATUS_MAX(src, STAT_STUTTER, effect * blocked_mult(blocked))
 		if(EYE_BLUR)
-			eye_blurry = max(eye_blurry, effect * blocked_mult(blocked))
+			SET_STATUS_MAX(src, STAT_BLURRY, effect * blocked_mult(blocked))
 		if(DROWSY)
-			drowsyness = max(drowsyness, effect * blocked_mult(blocked))
+			SET_STATUS_MAX(src, STAT_DROWSY, effect * blocked_mult(blocked))
 	updatehealth()
 	return TRUE
 

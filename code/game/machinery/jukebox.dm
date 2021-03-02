@@ -126,15 +126,15 @@
 			var/mob/living/carbon/human/H = M
 			if(H.get_sound_volume_multiplier() < 0.2)
 				continue
-		M.sleeping = 0
-		M.stuttering += 20
-		M.ear_deaf += 30
-		M.Weaken(3)
+		M.set_status(STAT_ASLEEP,    0)
+		ADJ_STATUS(M, STAT_STUTTER,  20)
+		SET_STATUS_MAX(M, STAT_DEAF, 30)
+		SET_STATUS_MAX(M, STAT_WEAK,  3)
 		if(prob(30))
-			M.Stun(10)
-			M.Paralyse(4)
+			SET_STATUS_MAX(M, STAT_STUN, 10)
+			SET_STATUS_MAX(M, STAT_PARA,  4)
 		else
-			M.make_jittery(400)
+			M.set_status(STAT_JITTER, 400)
 	spawn(15)
 		explode()
 

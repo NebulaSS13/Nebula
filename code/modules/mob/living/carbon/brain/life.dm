@@ -70,8 +70,8 @@
 /mob/living/carbon/brain/handle_chemicals_in_body()
 	. = ..()
 	if(.)
-		handle_confused()
-		dizziness = max(0, dizziness - (resting ? 5 : 1))
+		if(resting)
+			ADJ_STATUS(src, STAT_DIZZY, -4)
 		updatehealth()
 
 /mob/living/carbon/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
@@ -79,12 +79,12 @@
 
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 		blinded = 1
-		silent = 0
+		set_status(STAT_SILENCE, 0)
 	else				//ALIVE. LIGHTS ARE ON
 		if( !container && (health < config.health_threshold_dead || (config.revival_brain_life >= 0 && (world.time - timeofhostdeath) > config.revival_brain_life)) )
 			death()
 			blinded = 1
-			silent = 0
+			set_status(STAT_SILENCE, 0)
 			return 1
 
 		//Handling EMP effect in the Life(), it's made VERY simply, and has some additional effects handled elsewhere
@@ -97,10 +97,10 @@
 				if(31 to INFINITY)
 					emp_damage = 30//Let's not overdo it
 				if(21 to 30)//High level of EMP damage, unable to see, hear, or speak
-					eye_blind = 1
+					set_status(STAT_BLIND, 1)
 					blinded = 1
-					ear_deaf = 1
-					silent = 1
+					SET_STATUS_MAX(src, STAT_DEAF, 1)
+					set_status(STAT_SILENCE, 1)
 					if(!alert)//Sounds an alarm, but only once per 'level'
 						emote("alarm")
 						to_chat(src, "<span class='warning'>Major electrical distruption detected: System rebooting.</span>")
@@ -110,13 +110,13 @@
 				if(20)
 					alert = 0
 					blinded = 0
-					eye_blind = 0
-					ear_deaf = 0
-					silent = 0
+					set_status(STAT_BLIND,   0)
+					set_status(STAT_DEAF,    0)
+					set_status(STAT_SILENCE, 0)
 					emp_damage -= 1
 				if(11 to 19)//Moderate level of EMP damage, resulting in nearsightedness and ear damage
-					eye_blurry = 1
-					ear_damage = 1
+					set_status(STAT_BLURRY, 1)
+					set_status(STAT_TINNITUS, 1)
 					if(!alert)
 						emote("alert")
 						to_chat(src, "<span class='warning'>Primary systems are now online.</span>")
@@ -125,8 +125,8 @@
 						emp_damage -= 1
 				if(10)
 					alert = 0
-					eye_blurry = 0
-					ear_damage = 0
+					set_status(STAT_BLURRY, 0)
+					set_status(STAT_TINNITUS, 0)
 					emp_damage -= 1
 				if(2 to 9)//Low level of EMP damage, has few effects(handled elsewhere)
 					if(!alert)
@@ -170,8 +170,8 @@
 		else
 			clear_fullscreen("blind")
 			set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
-			set_fullscreen(eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
-			set_fullscreen(drugged, "high", /obj/screen/fullscreen/high)
+			set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
+			set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
 		if (machine)
 			if (!( machine.check_eye(src) ))
 				reset_view(null)

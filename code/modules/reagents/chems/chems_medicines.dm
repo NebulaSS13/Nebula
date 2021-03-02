@@ -13,8 +13,8 @@
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/internal/eyes/E = H.get_internal_organ(BP_EYES)
 		if(E && istype(E) && !E.is_broken())
-			M.eye_blurry = max(M.eye_blurry - 5, 0)
-			M.eye_blind = max(M.eye_blind - 5, 0)
+			ADJ_STATUS(M, STAT_BLURRY, -5) 
+			ADJ_STATUS(M, STAT_BLIND, -5)
 			E.damage = max(E.damage - 5 * removed, 0)
 
 /decl/material/liquid/antirads
@@ -102,7 +102,7 @@
 
 /decl/material/liquid/antitoxins/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(remove_generic)
-		M.drowsyness = max(0, M.drowsyness - 6 * removed)
+		ADJ_STATUS(M, STAT_DROWSY, -6 * removed)
 		M.adjust_hallucination(-9 * removed)
 		M.add_up_to_chemical_effect(CE_ANTITOX, 1)
 
@@ -157,10 +157,10 @@
 		LAZYSET(holder.reagent_data, type, world.time)
 		to_chat(M, "<span class='warning'>You lose focus...</span>")
 	else
-		M.drowsyness = max(M.drowsyness - 5, 0)
-		M.AdjustParalysis(-1)
-		M.AdjustStunned(-1)
-		M.AdjustWeakened(-1)
+		ADJ_STATUS(M, STAT_DROWSY, -5)
+		ADJ_STATUS(M, STAT_PARA, -1)
+		ADJ_STATUS(M, STAT_STUN, -1)
+		ADJ_STATUS(M, STAT_WEAK, -1)
 		if(world.time > REAGENT_DATA(holder, type) + 5 MINUTES)
 			LAZYSET(holder.reagent_data, type, world.time)
 			to_chat(M, "<span class='notice'>Your mind feels focused and undivided.</span>")
@@ -238,8 +238,8 @@
 /decl/material/liquid/retrovirals/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjustCloneLoss(-20 * removed)
 	if(LAZYACCESS(M.chem_doses, type) > 10)
-		M.make_dizzy(5)
-		M.make_jittery(5)
+		ADJ_STATUS(M, STAT_DIZZY, 5)
+		ADJ_STATUS(M, STAT_JITTER, 5)
 	var/needs_update = M.mutations.len > 0
 	M.mutations.Cut()
 	M.disabilities = 0
@@ -270,7 +270,7 @@
 		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
 	M.add_chemical_effect(CE_PULSE, 2)
 	if(dose > 10)
-		M.make_jittery(5)
+		ADJ_STATUS(M, STAT_JITTER, 5)
 	if(volume >= 5 && M.is_asystole())
 		holder.remove_reagent(type, 5)
 		if(ishuman(M))
@@ -320,8 +320,8 @@
 	M.add_chemical_effect(CE_BRAIN_REGEN, 1)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		H.confused++
-		H.drowsyness++
+		ADJ_STATUS(H, STAT_CONFUSE, 1)
+		ADJ_STATUS(H, STAT_DROWSY, 1)
 
 /decl/material/liquid/oxy_meds
 	name = "oxygel"

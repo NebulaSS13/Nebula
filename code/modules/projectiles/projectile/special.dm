@@ -85,7 +85,7 @@
 		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 			if(prob(15))
 				H.apply_damage((rand(30,80)),IRRADIATE, damage_flags = DAM_DISPERSED)
-				H.Weaken(5)
+				SET_STATUS_MAX(H, STAT_WEAK, 5)
 				for (var/mob/V in viewers(src))
 					V.show_message("<span class='warning'>[M] writhes in pain as \his vacuoles boil.</span>", 3, "<span class='warning'>You hear the crunching of leaves.</span>", 2)
 			if(prob(35))
@@ -138,7 +138,7 @@
 /obj/item/projectile/beam/mindflayer/on_hit(var/atom/target, var/blocked = 0)
 	if(ishuman(target))
 		var/mob/living/carbon/human/M = target
-		M.confused += rand(5,8)
+		ADJ_STATUS(M, STAT_CONFUSE, rand(5,8))
 
 /obj/item/projectile/chameleon
 	name = "bullet"

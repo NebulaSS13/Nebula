@@ -125,10 +125,6 @@
 	if(health > maxHealth)
 		health = maxHealth
 
-	handle_stunned()
-	handle_weakened()
-	handle_paralysed()
-	handle_confused()
 	handle_supernatural()
 	handle_impaired_vision()
 	
@@ -254,7 +250,7 @@
 	if(Proj.agony)
 		damage += Proj.agony / 6
 		if(health < Proj.agony * 3)
-			Paralyse(Proj.agony / 20)
+			SET_STATUS_MAX(src, STAT_PARA, Proj.agony / 20)
 			visible_message("<span class='warning'>[src] is stunned momentarily!</span>")
 
 	bullet_impact_visuals(Proj)

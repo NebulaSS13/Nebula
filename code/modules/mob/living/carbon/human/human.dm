@@ -131,17 +131,17 @@
 			b_loss = 60
 			f_loss = 60
 			if (get_sound_volume_multiplier() >= 0.2)
-				ear_damage += 30
-				ear_deaf += 120
+				SET_STATUS_MAX(src, STAT_TINNITUS, 30)
+				SET_STATUS_MAX(src, STAT_DEAF, 120)
 			if(prob(70))
-				Paralyse(10)
+				SET_STATUS_MAX(src, STAT_PARA, 10)
 		if(3)
 			b_loss = 30
 			if (get_sound_volume_multiplier() >= 0.2)
-				ear_damage += 15
-				ear_deaf += 60
+				SET_STATUS_MAX(src, STAT_TINNITUS, 15)
+				SET_STATUS_MAX(src, STAT_DEAF, 60)
 			if (prob(50))
-				Paralyse(10)
+				SET_STATUS_MAX(src, STAT_PARA, 10)
 
 	// focus most of the blast on one organ
 	apply_damage(0.7 * b_loss, BRUTE, null, DAM_EXPLODE, used_weapon = "Explosive blast")
@@ -662,7 +662,7 @@
 
 /mob/living/carbon/human/empty_stomach()
 
-	Stun(3)
+	SET_STATUS_MAX(src, STAT_STUN, 3)
 
 	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(BP_STOMACH)
 	var/nothing_to_puke = FALSE

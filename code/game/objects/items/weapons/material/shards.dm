@@ -123,7 +123,7 @@
 					affecting.take_external_damage(5, 0)
 					H.updatehealth()
 					if(affecting.can_feel_pain())
-						H.Weaken(3)
+						SET_STATUS_MAX(H, STAT_WEAK, 3)
 					return
 				check -= picked
 			return

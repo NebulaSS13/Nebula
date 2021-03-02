@@ -123,7 +123,7 @@
 /obj/item/baton/attack(mob/M, mob/user)
 	if(status && (MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='danger'>You accidentally hit yourself with the [src]!</span>")
-		user.Weaken(30)
+		SET_STATUS_MAX(user, STAT_WEAK, 30)
 		deductcharge(hitcost)
 		return
 	return ..()

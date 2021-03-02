@@ -44,7 +44,7 @@
 		var/datum/effect/effect/system/spark_spread/s = new
 		s.set_up(3, 1, src)
 		s.start()
-		target.AdjustStunned(6)
+		ADJ_STATUS(target, STAT_STUN, 6)
 		target.set_species(SPECIES_MANTID_GYNE)
 		new /obj/effect/temp_visual/emp_burst(loc)
 		for(var/obj/item/organ/external/E in target.organs)

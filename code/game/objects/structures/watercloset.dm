@@ -451,9 +451,9 @@
 				flick("baton_active", src)
 				if(isliving(user))
 					var/mob/living/M = user
-					M.Stun(10)
-					M.stuttering = 10
-					M.Weaken(10)
+					SET_STATUS_MAX(M, STAT_STUN, 10)
+					SET_STATUS_MAX(M, STAT_STUTTER, 10)
+					SET_STATUS_MAX(M, STAT_WEAK, 10)
 				if(isrobot(user))
 					var/mob/living/silicon/robot/R = user
 					R.cell.charge -= 20

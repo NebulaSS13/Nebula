@@ -170,7 +170,7 @@
 		to_chat(G.assailant, SPAN_WARNING("You need a better grip!"))
 		return TRUE
 	affecting_mob.forceMove(get_turf(src))
-	affecting_mob.Weaken(5)
+	SET_STATUS_MAX(affecting_mob, STAT_WEAK, 5)
 	visible_message(SPAN_DANGER("\The [G.assailant] hurls \the [affecting_mob] onto \the [src]!"))
 	burn(affecting_mob)
 	return TRUE

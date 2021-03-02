@@ -34,7 +34,7 @@
 			if(prob(1))
 				if(owner.can_feel_pain())
 					owner.custom_pain("You feel a stinging pain in your abdomen!")
-					owner.Weaken(10)
+					SET_STATUS_MAX(owner, STAT_WEAK, 10)
 
 				var/obj/item/organ/external/E = owner.get_organ(parent_organ)
 				E.sever_artery()

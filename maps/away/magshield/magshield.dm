@@ -78,7 +78,7 @@
 			eye_safety = M.eyecheck()
 			if(eye_safety < FLASH_PROTECTION_MODERATE)
 				M.flash_eyes()
-				M.Stun(2)
+				SET_STATUS_MAX(M, STAT_STUN, 2)
 
 /obj/structure/magshield/maggen/attack_hand(mob/user)
 	..()

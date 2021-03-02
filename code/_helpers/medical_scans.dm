@@ -44,7 +44,7 @@
 	scan["oxygen"] =           H.getOxyLoss()
 	scan["radiation"] =        H.radiation
 	scan["genetic"] =          H.getCloneLoss()
-	scan["paralysis"] =        H.paralysis
+	scan["paralysis"] =        GET_STATUS(H, STAT_PARA)
 	scan["immune_system"] =    H.get_immunity()
 	scan["reagents"] = list()
 

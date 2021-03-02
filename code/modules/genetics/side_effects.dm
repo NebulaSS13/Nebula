@@ -24,7 +24,7 @@
 	S.start(H)
 	addtimer(CALLBACK(H, /mob/proc/Weaken, rand(0, S.duration / 50)), 20)
 	sleep(S.duration)
-	H.SetWeakened(0)
+	H.set_status(STAT_WEAK, 0)
 	S.finish(H)
 
 
@@ -72,5 +72,5 @@
 
 	finish(mob/living/carbon/human/H)
 		if(!H.reagents.has_reagent(/decl/material/liquid/antitoxins))
-			H.confused += 100
+			ADJ_STATUS(H, STAT_CONFUSE, 100)
 

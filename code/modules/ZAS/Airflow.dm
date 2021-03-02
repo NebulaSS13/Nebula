@@ -16,7 +16,7 @@ Contains helper procs for airflow, handled in /connection_group.
 		return 0
 	if(!lying)
 		to_chat(src, "<span class='warning'>The sudden rush of air knocks you over!</span>")
-	Weaken(5)
+	SET_STATUS_MAX(src, STAT_WEAK, 5)
 	last_airflow_stun = world.time
 
 /mob/living/silicon/airflow_stun()
@@ -105,7 +105,7 @@ Contains helper procs for airflow, handled in /connection_group.
 		M.show_message("<span class='danger'>\The [src] slams into \a [A]!</span>",1,"<span class='danger'>You hear a loud slam!</span>",2)
 	playsound(src.loc, "smash.ogg", 25, 1, -1)
 	var/weak_amt = istype(A,/obj/item) ? A:w_class : rand(1,5) //Heheheh
-	Weaken(weak_amt)
+	SET_STATUS_MAX(src, STAT_WEAK, weak_amt)
 	. = ..()
 
 /obj/airflow_hit(atom/A)
@@ -134,10 +134,10 @@ Contains helper procs for airflow, handled in /connection_group.
 	apply_damage(b_loss/3, BRUTE, BP_GROIN, used_weapon =  "Airflow")
 
 	if(airflow_speed > 10)
-		Paralyse(round(airflow_speed * vsc.airflow_stun))
-		Stun(paralysis + 3)
+		SET_STATUS_MAX(src, STAT_PARA, round(airflow_speed * vsc.airflow_stun))
+		SET_STATUS_MAX(src, STAT_STUN, GET_STATUS(src, STAT_PARA) + 3)
 	else
-		Stun(round(airflow_speed * vsc.airflow_stun/2))
+		SET_STATUS_MAX(src, STAT_STUN, round(airflow_speed * vsc.airflow_stun/2))
 	. = ..()
 
 /zone/proc/movables()

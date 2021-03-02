@@ -78,8 +78,8 @@
 			if(!Adjacent(victim))
 				release_grab()
 			else if(prob(continue_grab_prob))
-				H.Weaken(1)
-				H.Stun(1)
+				SET_STATUS_MAX(H, STAT_WEAK, 1)
+				SET_STATUS_MAX(H, STAT_STUN, 1)
 				grab_damage++
 				visible_message(SPAN_MFAUNA("\The [src] tightens its grip on \the [victim]!"))
 				return
@@ -87,8 +87,8 @@
 		if(!victim && can_perform_ability(H))
 			GLOB.destroyed_event.register(victim, src, .proc/release_grab)
 			victim = H
-			H.Weaken(grab_duration)
-			H.Stun(grab_duration)
+			SET_STATUS_MAX(H, STAT_WEAK, grab_duration)
+			SET_STATUS_MAX(H, STAT_STUN, grab_duration)
 			visible_message(SPAN_MFAUNA("\The [src] catches \the [victim] in its powerful pincer!"))
 			stop_automation = TRUE
 

@@ -22,7 +22,7 @@
 
 /datum/ailment/head/tinnitus/on_ailment_event()
 	to_chat(organ.owner, SPAN_DANGER("Your ears ring with an irritating, high-pitched tone."))
-	organ.owner.ear_deaf = max(organ.owner.ear_deaf, 3)
+	SET_STATUS_MAX(organ.owner, STAT_DEAF, 3)
 
 /datum/ailment/head/sore_throat
 	name = "sore throat"

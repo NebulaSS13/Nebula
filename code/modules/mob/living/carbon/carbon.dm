@@ -117,17 +117,17 @@
 
 	switch(shock_damage)
 		if(11 to 15)
-			Stun(1)
+			SET_STATUS_MAX(src, STAT_STUN, 1)
 		if(16 to 20)
-			Stun(2)
+			SET_STATUS_MAX(src, STAT_STUN, 2)
 		if(21 to 25)
-			Weaken(2)
+			SET_STATUS_MAX(src, STAT_WEAK, 2)
 		if(26 to 30)
-			Weaken(5)
+			SET_STATUS_MAX(src, STAT_WEAK, 5)
 		if(31 to INFINITY)
-			Weaken(10) //This should work for now, more is really silly and makes you lay there forever
+			SET_STATUS_MAX(src, STAT_WEAK, 10) //This should work for now, more is really silly and makes you lay there forever
 
-	make_jittery(min(shock_damage*5, 200))
+	set_status(STAT_JITTER, min(shock_damage*5, 200))
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(5, 1, loc)
@@ -188,11 +188,11 @@
 			if(show_ssd && ssd_check())
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
-			else if(lying || src.sleeping || player_triggered_sleeping)
-				src.player_triggered_sleeping = 0
-				src.sleeping = max(0,src.sleeping - 5)
-				if(src.sleeping == 0)
-					src.resting = 0
+			else if(lying ||HAS_STATUS(src, STAT_ASLEEP) || player_triggered_sleeping)
+				player_triggered_sleeping = 0
+				ADJ_STATUS(src, STAT_ASLEEP, -5)
+				if(!HAS_STATUS(src, STAT_ASLEEP))
+					resting = FALSE
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
@@ -209,9 +209,9 @@
 					src.IgniteMob()
 
 			if(stat != DEAD)
-				AdjustParalysis(-3)
-				AdjustStunned(-3)
-				AdjustWeakened(-3)
+				ADJ_STATUS(src, STAT_PARA, -3)
+				ADJ_STATUS(src, STAT_STUN, -3)
+				ADJ_STATUS(src, STAT_WEAK, -3)
 
 			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
@@ -275,7 +275,7 @@
 	var/skill_mod = 0.2
 	if(!skill_check(SKILL_HAULING, min(round(itemsize - ITEM_SIZE_HUGE) + 2, SKILL_MAX)))
 		if(prob(30))
-			Weaken(2)
+			SET_STATUS_MAX(src, STAT_WEAK, 2)
 			message = "\The [src] barely manages to throw \the [item], and is knocked off-balance!"
 	else
 		skill_mod += 0.2
@@ -344,7 +344,7 @@
 		return FALSE
 	to_chat(src, SPAN_WARNING("You slipped on [slipped_on]!"))
 	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
-	Weaken(Floor(stun_duration/2))
+	SET_STATUS_MAX(src, STAT_WEAK, Floor(stun_duration/2))
 	return TRUE
 
 /mob/living/carbon/get_default_language()

@@ -159,7 +159,7 @@
 		M.mutations.Remove(MUTATION_HULK)
 		M.update_mutations()		//update our mutation overlays
 		to_chat(M, "<span class='warning'>You suddenly feel very weak.</span>")
-		M.Weaken(3)
+		SET_STATUS_MAX(M, STAT_WEAK, 3)
 		M.emote("collapse")
 
 /datum/dna/gene/basic/xray

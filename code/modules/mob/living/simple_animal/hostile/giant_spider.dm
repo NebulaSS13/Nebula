@@ -449,7 +449,7 @@ Hunter caste procs
 		var/mob/living/target = hit_atom
 		stop_automation = FALSE
 		visible_message(SPAN_DANGER("\The [src] slams into \the [target], knocking them over!"))
-		target.Weaken(1)
+		SET_STATUS_MAX(target, STAT_WEAK, 1)
 		MoveToTarget()
 
 /******************

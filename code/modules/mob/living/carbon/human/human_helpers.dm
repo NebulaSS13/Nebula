@@ -230,12 +230,12 @@
 			to_chat(src, "<span class='warning'>Your eyes sting a little.</span>")
 			E.damage += rand(1, 2)
 			if(E.damage > 12)
-				eye_blurry += rand(3,6)
+				ADJ_STATUS(src, STAT_BLURRY, rand(3,6))
 		if(FLASH_PROTECTION_MINOR)
 			to_chat(src, "<span class='warning'>Your eyes stings!</span>")
 			E.damage += rand(1, 4)
 			if(E.damage > 10)
-				eye_blurry += rand(3,6)
+				ADJ_STATUS(src, STAT_BLURRY, rand(3,6))
 				E.damage += rand(1, 4)
 		if(FLASH_PROTECTION_NONE)
 			to_chat(src, "<span class='warning'>Your eyes burn!</span>")
@@ -244,15 +244,15 @@
 				E.damage += rand(4,10)
 		if(FLASH_PROTECTION_REDUCED)
 			to_chat(src, "<span class='danger'>Your equipment intensifies the welder's glow. Your eyes itch and burn severely.</span>")
-			eye_blurry += rand(12,20)
+			ADJ_STATUS(src, STAT_BLURRY, rand(12,20))
 			E.damage += rand(12, 16)
 	if(safety<FLASH_PROTECTION_MAJOR)
 		if(E.damage > 10)
 			to_chat(src, "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>")
 		if (E.damage >= E.min_bruised_damage)
 			to_chat(src, "<span class='danger'>You go blind!</span>")
-			eye_blind = 5
-			eye_blurry = 5
+			set_status(STAT_BLIND, 5)
+			set_status(STAT_BLURRY, 5)
 			disabilities |= NEARSIGHTED
 			spawn(100)
 				disabilities &= ~NEARSIGHTED

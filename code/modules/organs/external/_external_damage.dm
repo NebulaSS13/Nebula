@@ -300,9 +300,9 @@
 		else if(agony_amount > 0.5 * max_damage)
 			owner.visible_message(SPAN_WARNING("\The [owner] reels in pain!"))
 			if(has_genitals() || agony_amount > max_damage)
-				owner.Weaken(4)
+				SET_STATUS_MAX(owner, STAT_WEAK, 4)
 			else
-				owner.Stun(4)
+				SET_STATUS_MAX(owner, STAT_STUN, 4)
 			return 1
 
 /obj/item/organ/external/proc/get_agony_multiplier()

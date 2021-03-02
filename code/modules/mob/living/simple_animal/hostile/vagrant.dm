@@ -97,8 +97,8 @@
 	if(ishuman(.))
 		var/mob/living/carbon/human/H = .
 		if(gripping == H)
-			H.Weaken(1)
-			H.Stun(1)
+			SET_STATUS_MAX(H, STAT_WEAK, 1)
+			SET_STATUS_MAX(H, STAT_STUN, 1)
 			return
 		//This line ensures there's always a reasonable chance of grabbing, while still
 		//Factoring in health
@@ -106,8 +106,8 @@
 			gripping = H
 			cloaked = 0
 			update_icon()
-			H.Weaken(1)
-			H.Stun(1)
+			SET_STATUS_MAX(H, STAT_WEAK, 1)
+			SET_STATUS_MAX(H, STAT_STUN, 1)
 			H.visible_message("<span class='danger'>\the [src] latches onto \the [H], pulsating!</span>")
 			src.forceMove(gripping.loc)
 

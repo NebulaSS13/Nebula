@@ -43,7 +43,7 @@
 			SPAN_DANGER("\The [src] pounces at \the [M]!"), \
 			SPAN_DANGER("\The [src] pounces at you!"))
 		if(prob(40))
-			M.Weaken(power * 0.5)
+			SET_STATUS_MAX(src, STAT_WEAK, (power * 0.5))
 		return
 
 	if(a_intent == I_GRAB && slime_attach(M))
@@ -54,6 +54,6 @@
 			M.visible_message( \
 				SPAN_DANGER("\The [src] pounces at \the [M]!"), \
 				SPAN_DANGER("\The [src] pounces at you!"))
-			M.Weaken(power * 0.5)
+			SET_STATUS_MAX(M, STAT_WEAK, (power * 0.5))
 		else
 			A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped")

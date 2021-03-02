@@ -3,4 +3,4 @@
 
 /datum/ailment/fault/overstimulation/on_ailment_event()
 	organ.owner.emote("collapse")
-	organ.owner.Stun(rand(2, 4))
+	SET_STATUS_MAX(organ.owner, STAT_STUN, rand(2, 4))

@@ -37,10 +37,10 @@
 			switch(get_dist(M, location))
 				if(0 to 3)
 					M.flash_eyes()
-					M.Weaken(15)
+					SET_STATUS_MAX(M, STAT_WEAK, 15)
 				if(4 to 5)
 					M.flash_eyes()
-					M.Stun(5)
+					SET_STATUS_MAX(M, STAT_STUN, 5)
 
 /datum/chemical_reaction/grenade_reaction/emp_pulse
 	name = "EMP Pulse"
