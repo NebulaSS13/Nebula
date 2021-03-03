@@ -1817,3 +1817,18 @@
 	if(isMonkey())
 		return list("Monkey", FALSE)
 	return list("Sapient Race", TRUE)
+
+/mob/living/carbon/human/breathing_hole_covered()
+	. = ..() || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT))
+
+/mob/living/carbon/human/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine))
+	. = ..(species.breath_type, species.poison_types)
+
+/mob/living/carbon/human/get_possible_internals_sources()
+	. = ..() | list(
+		"suit" =         list(s_store,                 "on"),
+		"belt" =         list(belt,                    "on"),
+		"left_pocket" =  list(l_store,                 "in"),
+		"right pocket" = list(r_store,                 "in"),
+		"rig" =          list(wearing_rig?.air_supply, "in")
+	)
