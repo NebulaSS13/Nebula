@@ -17,7 +17,7 @@
 		"nav_casino_antag",
 	)
 	initial_restricted_waypoints = list(
-		"Casino Cutter" = list("nav_casino_hangar"),
+		/datum/shuttle/autodock/overmap/casino_cutter = list("nav_casino_hangar"),
 	)
 
 /obj/effect/overmap/visitable/ship/casino/Initialize()

@@ -520,6 +520,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	parent_type = /datum
 	var/list/attributes
 	var/target_path
+	var/current_map_hash
 
 /dmm_suite/preloader/proc/setup(list/the_attributes, path)
 	if(LAZYLEN(the_attributes))
@@ -544,6 +545,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 					break
 			if (!found)
 				throw ex
+	what.modify_mapped_vars(current_map_hash)
 	GLOB.use_preloader = FALSE
 
 /area/template_noop

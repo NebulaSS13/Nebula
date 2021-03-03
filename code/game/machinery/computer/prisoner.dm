@@ -7,21 +7,17 @@
 	icon_screen = "explosive"
 	light_color = "#a91515"
 	initial_access = list(access_armory)
-	var/id = 0.0
 	var/temp = null
 	var/status = 0
 	var/timeleft = 60
 	var/stop = 0.0
 	var/screen = 0 // 0 - No Access Denied, 1 - Access allowed
 
+/obj/machinery/computer/prisoner/interface_interact(user)
+	interact(user)
+	return TRUE	
 
-/obj/machinery/computer/prisoner/attack_ai(var/mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/computer/prisoner/attack_hand(var/mob/user as mob)
-	if(..())
-		return
-	user.set_machine(src)
+/obj/machinery/computer/prisoner/interact(var/mob/user)
 	var/dat
 	dat += "<B>Prisoner Implant Manager System</B><BR>"
 	if(screen == 0)
@@ -57,45 +53,34 @@
 
 	show_browser(user, dat, "window=computer;size=400x500")
 	onclose(user, "computer")
-	return
-
-
-/obj/machinery/computer/prisoner/Process()
-	if(!..())
-		src.updateDialog()
-	return
 
 /obj/machinery/computer/prisoner/Topic(href, href_list)
 	if(..())
 		return
-	if((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
-		usr.set_machine(src)
+	. = TOPIC_REFRESH
 
-		if(href_list["inject1"])
-			var/obj/item/implant/I = locate(href_list["inject1"])
-			if(I)	I.activate(1)
+	if(href_list["inject1"])
+		var/obj/item/implant/I = locate(href_list["inject1"])
+		if(I)	I.activate(1)
 
-		else if(href_list["inject5"])
-			var/obj/item/implant/I = locate(href_list["inject5"])
-			if(I)	I.activate(5)
+	else if(href_list["inject5"])
+		var/obj/item/implant/I = locate(href_list["inject5"])
+		if(I)	I.activate(5)
 
-		else if(href_list["inject10"])
-			var/obj/item/implant/I = locate(href_list["inject10"])
-			if(I)	I.activate(10)
+	else if(href_list["inject10"])
+		var/obj/item/implant/I = locate(href_list["inject10"])
+		if(I)	I.activate(10)
 
-		else if(href_list["lock"])
-			if(src.allowed(usr))
-				screen = !screen
-			else
-				to_chat(usr, "Unauthorized Access.")
+	else if(href_list["lock"])
+		if(src.allowed(usr))
+			screen = !screen
+		else
+			to_chat(usr, "Unauthorized Access.")
 
-		else if(href_list["warn"])
-			var/warning = sanitize(input(usr,"Message:","Enter your message here!",""))
-			if(!warning) return
-			var/obj/item/implant/I = locate(href_list["warn"])
-			if((I)&&(I.imp_in))
-				var/mob/living/carbon/R = I.imp_in
-				to_chat(R, "<span class='notice'>You hear a voice in your head saying: '[warning]'</span>")
-
-	src.updateUsrDialog()
-	return
+	else if(href_list["warn"])
+		var/warning = sanitize(input(usr,"Message:","Enter your message here!",""))
+		if(!warning) return
+		var/obj/item/implant/I = locate(href_list["warn"])
+		if((I)&&(I.imp_in))
+			var/mob/living/carbon/R = I.imp_in
+			to_chat(R, "<span class='notice'>You hear a voice in your head saying: '[warning]'</span>")

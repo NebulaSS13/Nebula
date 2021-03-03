@@ -1400,7 +1400,7 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/window/brigdoor/eastleft{
-	id = "tank";
+	id_tag = "tank";
 	name = "drunk tank"
 	},
 /obj/structure/cable{
@@ -3021,7 +3021,7 @@
 	name = "Drunk Tank";
 	pixel_x = 1;
 	pixel_y = -29;
-	id = "tank"
+	id_tag = "tank"
 	},
 /obj/item/stool/padded,
 /turf/simulated/floor/plating,

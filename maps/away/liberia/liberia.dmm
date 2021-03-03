@@ -6738,7 +6738,6 @@
 "oM" = (
 /obj/effect/floor_decal/solarpanel,
 /obj/machinery/power/solar{
-	id = "auxsolarsport";
 	name = "Aft Port Solar Array"
 	},
 /obj/structure/cable/yellow{
@@ -8905,7 +8904,6 @@
 "VX" = (
 /obj/effect/floor_decal/solarpanel,
 /obj/machinery/power/solar{
-	id = "auxsolarsport";
 	name = "Aft Port Solar Array"
 	},
 /obj/structure/cable/yellow,

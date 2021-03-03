@@ -9,13 +9,17 @@
 
 	category = /datum/shuttle/autodock/ferry
 
-/datum/shuttle/autodock/ferry/New(_name)
+/datum/shuttle/autodock/ferry/New(map_hash)
+	if(map_hash)
+		ADJUST_TAG_VAR(waypoint_station, map_hash)
+		ADJUST_TAG_VAR(waypoint_offsite, map_hash)
+
 	if(waypoint_station)
 		waypoint_station = SSshuttle.get_landmark(waypoint_station)
 	if(waypoint_offsite)
 		waypoint_offsite = SSshuttle.get_landmark(waypoint_offsite)
 
-	..(_name, get_location_waypoint(location))
+	..(map_hash, get_location_waypoint(location))
 
 	next_location = get_location_waypoint(!location)
 

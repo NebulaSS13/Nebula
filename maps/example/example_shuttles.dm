@@ -3,7 +3,7 @@
 	landmark_tag = "nav_example_station"
 	docking_controller = "lower_level_dock"
 	special_dock_targets = list(
-		"Example" = "example_shuttle_starboard"
+		/datum/shuttle/autodock/ferry/example = "STARBOARD"
 	)
 
 /obj/effect/shuttle_landmark/upper_level
@@ -11,7 +11,7 @@
 	landmark_tag = "nav_example_offsite"
 	docking_controller = "upper_level_dock"
 	special_dock_targets = list(
-		"Example" = "example_shuttle_port"
+		/datum/shuttle/autodock/ferry/example = "PORT"
 	)
 
 /datum/shuttle/autodock/ferry/example
@@ -23,6 +23,10 @@
 	location = 0
 	waypoint_station = "nav_example_station"
 	waypoint_offsite = "nav_example_offsite"
+	docking_cues = list(
+		"STARBOARD" = "example_shuttle_starboard",
+		"PORT" = "example_shuttle_port"
+	)
 
 /obj/turbolift_map_holder/example
 	name = "Example elevator placeholder"

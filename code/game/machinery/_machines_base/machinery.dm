@@ -153,6 +153,10 @@ Class Procs:
 /obj/machinery/Process()
 	return PROCESS_KILL // Only process if you need to.
 
+/obj/machinery/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(id_tag, map_hash)
+
 /obj/machinery/proc/set_broken(new_state, cause = MACHINE_BROKEN_GENERIC)
 	if(stat_immune & BROKEN)
 		return FALSE

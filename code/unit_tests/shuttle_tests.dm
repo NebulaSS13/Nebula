@@ -7,8 +7,8 @@
 	for(var/obj/effect/overmap/visitable/sector in world)
 		var/list/failures = list()
 		for(var/generic in sector.initial_generic_waypoints)
-			for(var/shuttle in sector.initial_restricted_waypoints)
-				if(generic in sector.initial_restricted_waypoints[shuttle])
+			for(var/shuttle_type in sector.initial_restricted_waypoints)
+				if(generic in sector.initial_restricted_waypoints[shuttle_type])
 					failures += generic
 					break
 		if(length(failures))

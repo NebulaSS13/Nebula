@@ -6,15 +6,17 @@ var/list/escape_pods_by_name = list()
 	category = /datum/shuttle/autodock/ferry/escape_pod
 	move_time = 100
 
-/datum/shuttle/autodock/ferry/escape_pod/New()
+/datum/shuttle/autodock/ferry/escape_pod/New(map_hash)
+	..()
+	if(map_hash)
+		ADJUST_TAG_VAR(arming_controller, map_hash) // Unclear how functional this is with lateloaded maps; adjusting for consistency.
+
 	if(name in escape_pods_by_name)
 		CRASH("An escape pod with the name '[name]' has already been defined.")
 	move_time = SSevac.evacuation_controller.evac_transit_delay + rand(-30, 60)
 	escape_pods_by_name[name] = src
 	escape_pods += src
 	move_time = round(SSevac.evacuation_controller.evac_transit_delay/10)
-
-	..()
 
 	//find the arming controller (berth)
 	var/arming_controller_tag = arming_controller

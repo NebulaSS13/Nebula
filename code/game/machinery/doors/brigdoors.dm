@@ -21,7 +21,6 @@
 	initial_access = list(access_brig)
 	anchored = 1.0    		// can't pick it up
 	density = 0       		// can walk through it.
-	var/id = null     		// id of door it controls.
 	var/releasetime = 0		// when world.timeofday reaches it - release the prisoner
 	var/timing = 1    		// boolean, true/1 timer is on, false/0 means it's not timing
 	var/picture_state		// icon_state of alert picture, if not displaying text/numbers
@@ -38,15 +37,15 @@
 
 /obj/machinery/door_timer/LateInitialize()
 	for(var/obj/machinery/door/window/brigdoor/M in SSmachines.machinery)
-		if (M.id == src.id)
+		if (M.id_tag == id_tag)
 			targets += M
 
 	for(var/obj/machinery/flasher/F in SSmachines.machinery)
-		if(F.id_tag == src.id)
+		if(F.id_tag == id_tag)
 			targets += F
 
 	for(var/obj/structure/closet/secure_closet/brig/C in world)
-		if(C.id == src.id)
+		if(C.id == id_tag)
 			targets += C
 
 	if(targets.len==0)
@@ -117,7 +116,7 @@
 	timing = 0
 
 	if (broadcast_to_huds)
-		broadcast_security_hud_message("The timer for [id] has expired.", src)
+		broadcast_security_hud_message("The timer for [id_tag] has expired.", src)
 
 	for(var/obj/machinery/door/window/brigdoor/door in targets)
 		if(!door.density)	continue
@@ -219,7 +218,7 @@
 		set_picture("ai_bsod")
 		return
 	if(src.timing)
-		var/disp1 = id
+		var/disp1 = id_tag
 		var/timeleft = timeleft()
 		var/disp2 = "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
 		if(length(disp2) > CHARS_PER_LINE)
@@ -268,27 +267,27 @@
 
 /obj/machinery/door_timer/cell_1
 	name = "Cell 1"
-	id = "Cell 1"
+	id_tag = "Cell 1"
 
 /obj/machinery/door_timer/cell_2
 	name = "Cell 2"
-	id = "Cell 2"
+	id_tag = "Cell 2"
 
 /obj/machinery/door_timer/cell_3
 	name = "Cell 3"
-	id = "Cell 3"
+	id_tag = "Cell 3"
 
 /obj/machinery/door_timer/cell_4
 	name = "Cell 4"
-	id = "Cell 4"
+	id_tag = "Cell 4"
 
 /obj/machinery/door_timer/cell_5
 	name = "Cell 5"
-	id = "Cell 5"
+	id_tag = "Cell 5"
 
 /obj/machinery/door_timer/cell_6
 	name = "Cell 6"
-	id = "Cell 6"
+	id_tag = "Cell 6"
 
 #undef FONT_SIZE
 #undef FONT_COLOR

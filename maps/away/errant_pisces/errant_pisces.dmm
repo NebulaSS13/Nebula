@@ -506,9 +506,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/machinery/power/solar{
-	id = "HarpoonSolarStarboard"
-	},
+/obj/machinery/power/solar,
 /turf/simulated/floor/airless,
 /area/space)
 "bv" = (
@@ -530,9 +528,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/machinery/power/solar{
-	id = "HarpoonSolarStarboard"
-	},
+/obj/machinery/power/solar,
 /turf/simulated/floor/airless,
 /area/space)
 "bx" = (
@@ -671,9 +667,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/machinery/power/solar{
-	id = "HarpoonSolarPort"
-	},
+/obj/machinery/power/solar,
 /turf/simulated/floor/airless,
 /area/space)
 "bR" = (
@@ -682,9 +676,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/machinery/power/solar{
-	id = "HarpoonSolarPort"
-	},
+/obj/machinery/power/solar,
 /turf/simulated/floor/airless,
 /area/space)
 "bS" = (
@@ -2657,8 +2649,7 @@
 	},
 /obj/machinery/power/solar_control{
 	icon_state = "solar";
-	dir = 1;
-	id = "HarpoonSolarPort"
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
@@ -3234,12 +3225,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/machinery/power/solar{
-	id = "HarpoonSolarPort"
-	},
-/obj/machinery/power/solar{
-	id = "HarpoonSolarPort"
-	},
+/obj/machinery/power/solar,
 /turf/simulated/floor/airless,
 /area/space)
 "hq" = (

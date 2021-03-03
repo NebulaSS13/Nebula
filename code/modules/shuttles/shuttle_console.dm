@@ -10,6 +10,9 @@
 
 	var/ui_template = "shuttle_control_console.tmpl"
 
+/obj/machinery/computer/shuttle_control/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(shuttle_tag, map_hash)
 
 /obj/machinery/computer/shuttle_control/interface_interact(mob/user)
 	ui_interact(user)

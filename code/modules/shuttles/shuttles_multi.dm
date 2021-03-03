@@ -4,6 +4,15 @@
 	var/last_cache_rebuild_time = 0
 	category = /datum/shuttle/autodock/multi
 
+/datum/shuttle/autodock/multi/New(map_hash)
+	..()
+	if(map_hash)
+		var/new_tags = list()
+		for(var/thing in destination_tags)
+			ADJUST_TAG_VAR(thing, map_hash)
+			new_tags += map_hash
+		destination_tags = new_tags
+
 /datum/shuttle/autodock/multi/proc/set_destination(var/destination_key, mob/user)
 	if(moving_status != SHUTTLE_IDLE)
 		return
@@ -35,9 +44,11 @@
 
 	category = /datum/shuttle/autodock/multi/antag
 
-/datum/shuttle/autodock/multi/antag/New()
+/datum/shuttle/autodock/multi/antag/New(map_hash)
 	..()
 	if(home_waypoint)
+		if(map_hash)
+			ADJUST_TAG_VAR(home_waypoint, map_hash)
 		home_waypoint = SSshuttle.get_landmark(home_waypoint)
 	else
 		home_waypoint = current_location

@@ -198,6 +198,10 @@
 	anchored = 1
 	var/id = null
 
+/obj/structure/closet/secure_closet/brig/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(id, map_hash)
+
 /obj/structure/closet/secure_closet/brig/WillContain()
 	return list(
 		/obj/item/clothing/under/color/orange,

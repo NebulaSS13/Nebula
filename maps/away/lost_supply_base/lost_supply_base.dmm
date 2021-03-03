@@ -37,7 +37,6 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/power/solar{
-	id = "auxsolarstarboard";
 	name = "Starboard Auxiliary Solar Array"
 	},
 /obj/effect/floor_decal/solarpanel,
@@ -143,7 +142,6 @@
 "ao" = (
 /obj/structure/cable/yellow,
 /obj/machinery/power/solar{
-	id = "auxsolarstarboard";
 	name = "Starboard Auxiliary Solar Array"
 	},
 /obj/effect/floor_decal/solarpanel,
@@ -170,7 +168,6 @@
 /area/space)
 "as" = (
 /obj/machinery/power/solar{
-	id = "auxsolarstarboard";
 	name = "Starboard Auxiliary Solar Array"
 	},
 /obj/effect/floor_decal/solarpanel,
@@ -182,7 +179,6 @@
 /area/space)
 "au" = (
 /obj/machinery/power/solar{
-	id = "auxsolarstarboard";
 	name = "Starboard Auxiliary Solar Array"
 	},
 /obj/structure/cable/yellow,
@@ -314,7 +310,6 @@
 /area/lost_supply_base/solar)
 "aL" = (
 /obj/machinery/power/solar_control{
-	id = "suuplybasesolar";
 	name = "Solar Control";
 	track = 0
 	},
