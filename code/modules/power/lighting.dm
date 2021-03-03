@@ -30,6 +30,13 @@
 	active_power_usage = 20
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
 
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc/buildable
+	)
+	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
+	base_type = /obj/machinery/light/buildable
+	frame_type = /obj/item/frame/light
+
 	var/on = 0					// 1 if on, 0 if off
 	var/flickering = 0
 	var/light_type = /obj/item/light/tube		// the type of light item
@@ -39,12 +46,15 @@
 	var/obj/item/light/lightbulb
 
 	var/current_mode = null
-	uncreated_component_parts = list(
-		/obj/item/stock_parts/power/apc/buildable
-	)
-	construct_state = /decl/machine_construction/wall_frame/panel_closed/simple
-	base_type = /obj/machinery/light/buildable
-	frame_type = /obj/item/frame/light
+
+/obj/machinery/light/get_color()
+	return lightbulb ? lightbulb.get_color() : null
+
+/obj/machinery/light/set_color(color)
+	if (!lightbulb)
+		return
+	lightbulb.set_color(color)
+	queue_icon_update()
 
 /obj/machinery/light/buildable
 	uncreated_component_parts = null
@@ -99,6 +109,7 @@
 	. = ..()
 
 /obj/machinery/light/on_update_icon(var/trigger = 1)
+	atom_flags = atom_flags & ~ATOM_FLAG_CAN_BE_PAINTED
 	// Handle pixel offsets
 	pixel_y = 0
 	pixel_x = 0
@@ -129,6 +140,7 @@
 	switch(get_status())		// set icon_states
 		if(LIGHT_OK)
 			_state = "[base_state][on]"
+			atom_flags |= ATOM_FLAG_CAN_BE_PAINTED
 		if(LIGHT_EMPTY)
 			on = 0
 		if(LIGHT_BURNED)
@@ -265,7 +277,7 @@
 		// attempt to break the light
 		//If xenos decide they want to smash a light bulb with a toolbox, who am I to stop them? /N
 
-	else if(lightbulb && (lightbulb.status != LIGHT_BROKEN))
+	else if(lightbulb && (lightbulb.status != LIGHT_BROKEN) && user.a_intent != I_HELP)
 
 		if(prob(1 + W.force * 5))
 
@@ -477,10 +489,12 @@
 	force = 2
 	throwforce = 5
 	w_class = ITEM_SIZE_TINY
+	material = /decl/material/solid/metal/steel
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
+
 	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
 	var/base_state
 	var/switchcount = 0	// number of times switched
-	material = /decl/material/solid/metal/steel
 	var/rigged = 0		// true if rigged to explode
 	var/broken_chance = 2
 
@@ -503,6 +517,13 @@
 	if (random_tone)
 		b_colour = pick(random_tone_options)
 		update_icon()
+
+/obj/item/light/get_color()
+	return b_colour
+
+/obj/item/light/set_color(color)
+	b_colour = isnull(color) ? COLOR_WHITE : color
+	update_icon()
 
 /obj/item/light/tube
 	name = "light tube"
