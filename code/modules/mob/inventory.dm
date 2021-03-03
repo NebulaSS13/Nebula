@@ -326,3 +326,6 @@ var/list/slot_equipment_priority = list( \
 
 /mob/proc/is_holding_offhand(var/thing)
 	return FALSE
+
+/mob/proc/ui_toggle_internals()
+	return FALSE

@@ -483,3 +483,73 @@
 /mob/living/carbon/get_admin_job_string()
 	return "Carbon-based"
 
+/mob/living/carbon/proc/get_possible_internals_sources()
+	. = list("back" = list(back, "on"))
+
+/mob/living/carbon/proc/breathing_hole_covered()
+	. = (wear_mask && (wear_mask?.item_flags & ITEM_FLAG_AIRTIGHT))
+
+/mob/living/carbon/ui_toggle_internals()
+
+	if(incapacitated())
+		return
+
+	if(internal)
+		set_internals(null)
+		return
+
+	if(!breathing_hole_covered())
+		to_chat(src, SPAN_WARNING("You are not wearing a suitable mask or helmet."))
+		return
+
+	set_internals_to_best_available_tank()
+
+	if(!internal)
+		to_chat(src, SPAN_WARNING("You don't have a tank that is usable as internals."))
+
+
+/mob/living/carbon/proc/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine))
+
+	if(!ispath(breathes_gas))
+		return
+
+	var/list/possible_sources = get_possible_internals_sources()
+	for(var/slot in held_item_slots)
+		var/obj/item/tank/checking = get_equipped_item(slot)
+		if(istype(checking))
+			possible_sources[slot] = list(checking, "in")
+
+	var/selected_slot
+	var/selected_from
+	var/obj/item/tank/selected_obj
+	var/decl/material/breathing_gas = GET_DECL(breathes_gas)
+	for(var/slot_name in possible_sources)
+		var/list/checking_data = possible_sources[slot_name]
+		if(length(checking_data) < 2)
+			continue
+		var/obj/item/tank/checking = checking_data[1]
+		if(!istype(checking) || !checking.air_contents?.gas)
+			continue
+
+		var/valid_tank = (checking.manipulated_by && checking.manipulated_by != real_name && findtext(checking.desc, breathing_gas.name))
+		if(!valid_tank)
+			if(!checking.air_contents.gas[breathes_gas])
+				continue
+			var/is_poison = FALSE
+			for(var/poison in poison_gas)
+				if(checking.air_contents.gas[poison])
+					is_poison = TRUE
+					break
+			if(!is_poison)
+				valid_tank = TRUE
+			
+		if(valid_tank && (!selected_obj || selected_obj.air_contents.gas[breathes_gas] <  checking.air_contents.gas[breathes_gas]))
+			selected_obj =  checking
+			selected_slot = slot_name
+			selected_from = checking_data[2]
+
+	if(selected_obj)
+		if(selected_slot && selected_from)
+			set_internals(selected_obj, "\the [selected_obj] [selected_from] your [selected_slot]")
+		else
+			set_internals(selected_obj, "\the [selected_obj]")
