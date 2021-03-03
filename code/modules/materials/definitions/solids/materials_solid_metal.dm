@@ -185,7 +185,7 @@
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	color = "#a8a9b2"
 	explosion_resistance = 25
-	brute_armor = 6
+	brute_armor = 8
 	burn_armor = 10
 	hardness = MAT_VALUE_VERY_HARD
 	stack_origin_tech = "{'materials':2}"
