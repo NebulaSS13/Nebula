@@ -403,6 +403,7 @@
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
+	origin_tech = "{'biotech':3,'materials':4,'exoticmatter':2}"
 
 /obj/item/chems/syringe/noreact
 	name = "cryostasis syringe"
@@ -415,3 +416,4 @@
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
+	origin_tech = "{'biotech':4,'materials':4}"

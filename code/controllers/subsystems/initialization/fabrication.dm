@@ -46,14 +46,8 @@ SUBSYSTEM_DEF(fabrication)
 	crafting_recipes_to_init.Cut()
 
 	post_recipe_init = TRUE
-
-	for(var/weakref/ref in fabricators_to_init)
-		var/obj/machinery/fabricator/F = ref.resolve()
-		if(F)
-			init_fabricator(F)
-	fabricators_to_init.Cut()
-
 	init_rpd_lists()
+
 	. = ..()
 
 /datum/controller/subsystem/fabrication/proc/init_crafting_recipe(var/datum/stack_recipe/recipe)
@@ -108,12 +102,3 @@ SUBSYSTEM_DEF(fabrication)
 				return H
 			else
 				qdel(H)
-
-/datum/controller/subsystem/fabrication/proc/init_fabricator(obj/machinery/fabricator/fab)
-	if(post_recipe_init)
-		var/list/base_designs = get_initial_recipes(fab.fabricator_class)
-		fab.design_cache = islist(base_designs) ? base_designs.Copy() : list() // Don't want to mutate the subsystem cache.
-		fab.refresh_design_cache()
-	else
-		fabricators_to_init |= weakref(fab)
-	

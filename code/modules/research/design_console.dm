@@ -13,6 +13,10 @@
 	. = ..()
 	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_WIRED)
 
+/obj/machinery/computer/design_console/handle_post_network_connection()
+	..()
+	sync_network()
+
 /obj/machinery/computer/design_console/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/disk/design_disk))
 		if(disk)
@@ -174,12 +178,18 @@
 	if(!(analyzer in network?.get_devices_by_type(/obj/machinery/destructive_analyzer)))
 		return
 	var/list/adding_to_cache = analyzer.process_loaded()
-	LAZYINITLIST(local_cache)
-	for(var/tech in adding_to_cache)
-		local_cache[tech] = max(local_cache[tech], adding_to_cache[tech])
-	UNSETEMPTY(local_cache)
-	if(length(local_cache))
-		sync_network()
+	if(length(adding_to_cache))
+		LAZYINITLIST(local_cache)
+		for(var/tech in adding_to_cache)
+			var/current_level = local_cache[tech]     || 0
+			var/new_level =     adding_to_cache[tech] || 0
+			if(new_level == current_level)
+				local_cache[tech] = current_level+1
+			else
+				local_cache[tech] = max(current_level, new_level)
+		UNSETEMPTY(local_cache)
+		if(length(local_cache))
+			sync_network()
 
 /obj/machinery/computer/design_console/proc/get_network_tech_levels()
 	. = local_cache || list()

@@ -8,6 +8,7 @@
 		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
+	origin_tech = "{'materials':4,'magnets':3,'biotech':3}"
 
 /obj/item/organ/internal/augment/boost/reflex/buff()
 	if((. = ..()))

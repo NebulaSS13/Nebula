@@ -96,11 +96,12 @@
 	if(panel_open)
 		to_chat(user, SPAN_WARNING("You can't load \the [src] while it's opened."))
 		return TRUE
-	if(!O.origin_tech)
+	var/tech = O.get_origin_tech()
+	if(!tech)
 		to_chat(user, SPAN_WARNING("Nothing can be learned from \the [O]."))
 		return TRUE
 
-	var/list/techlvls = json_decode(O.origin_tech)
+	var/list/techlvls = cached_json_decode(tech)
 	if(!length(techlvls) || O.holographic)
 		to_chat(user, SPAN_WARNING("You cannot deconstruct this item."))
 		return TRUE
@@ -122,16 +123,19 @@
 	if(!loaded_item)
 		return
 	busy = TRUE
-	if(loaded_item.origin_tech)
-		. = json_decode(loaded_item.origin_tech)
-		var/increase = (locate(/datum/event/brain_expansion) in SSevent.active_events) ? 2 : 1
-		for(var/tech in .)
-			.[tech] += increase
-	else
-		. = list()
+	var/tech_json = loaded_item.get_origin_tech()
+	if(tech_json)
+		. = cached_json_decode(tech_json)
+		if(length(.) && (locate(/datum/event/brain_expansion) in SSevent.active_events))
+			for(var/tech in .)
+				.[tech] += 1
 	for(var/mat in loaded_item.matter)
 		LAZYSET(cached_materials, mat, cached_materials[mat] + (loaded_item.matter[mat] * material_return_modifier))
-	QDEL_NULL(loaded_item)
+	loaded_item.physically_destroyed(FALSE)
+	if(!QDELETED(loaded_item))
+		QDEL_NULL(loaded_item)
+	else
+		loaded_item = null
 	flick("d_analyzer_process", src)
 	addtimer(CALLBACK(src, .proc/refresh_busy), 2 SECONDS)
 
