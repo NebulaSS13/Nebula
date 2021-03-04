@@ -65,8 +65,7 @@
 
 	var/turf/center_loc = locate(round(world.maxx/2), round(world.maxy/2), world.maxz)
 	landmark = new (center_loc, shuttle)
-	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
-	add_landmark(landmark, shuttle_datum.type)
+	add_landmark(landmark) // we don't restrict it but it does a more strict check in is_valid anyway
 
 	var/visitor_dir = fore_dir
 	for(var/landmark_name in list("FORE", "PORT", "AFT", "STARBOARD"))
