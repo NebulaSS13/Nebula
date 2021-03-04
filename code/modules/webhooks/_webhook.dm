@@ -24,28 +24,46 @@
 
 /decl/webhook/proc/send(var/list/data)
 	var/list/message = get_message(data)
-	if(message)
-		. = TRUE
-		for(var/target_url in urls)
-			var/url_message =  message.Copy()
-			var/list/url_mentions = jointext(get_mentions(target_url), ", ")
-			if(length(url_mentions))
-				if(url_message["content"])
-					url_message["content"] = "[url_mentions]: [url_message["content"]]"
-				else
-					url_message["content"] = "[url_mentions]"
-			var/list/httpresponse = http_post(target_url, json_encode(url_message))
-			if(!islist(httpresponse))
-				. = FALSE
-				continue
-			switch(httpresponse["status_code"])
-				if (200 to 299)
-					continue
-				if (400 to 599)
-					log_debug("Webhooks: HTTP error code while sending to '[target_url]': [httpresponse["status_code"]]. Data: [httpresponse["body"]].")
-				else
-					log_debug("Webhooks: unknown HTTP code while sending to '[target_url]': [httpresponse["status_code"]]. Data: [httpresponse["body"]].")
+	if(!length(message))
+		return FALSE
+
+	if(config.disable_webhook_embeds)
+		var/list/embed_content
+		for(var/list/embed in message["embeds"])
+			if(embed["title"])
+				LAZYADD(embed_content, "**[embed["title"]]**")
+			if(embed["description"])
+				LAZYADD(embed_content, embed["description"])
+		if(length(embed_content))
+			if(message["content"])
+				message["content"] = "[message["content"]]\n[jointext(embed_content, "\n")]"
+			else
+				message["content"] = jointext(embed_content, "\n")
+		message -= "embeds"
+
+	. = TRUE
+	for(var/target_url in urls)
+
+		var/url_message =  message.Copy()
+		var/list/url_mentions = jointext(get_mentions(target_url), ", ")
+		if(length(url_mentions))
+			if(url_message["content"])
+				url_message["content"] = "[url_mentions]: [url_message["content"]]"
+			else
+				url_message["content"] = "[url_mentions]"
+
+		var/list/httpresponse = http_post(target_url, json_encode(url_message))
+		if(!islist(httpresponse))
 			. = FALSE
+			continue
+		switch(httpresponse["status_code"])
+			if (200 to 299)
+				continue
+			if (400 to 599)
+				log_debug("Webhooks: HTTP error code while sending to '[target_url]': [httpresponse["status_code"]]. Data: [httpresponse["body"]].")
+			else
+				log_debug("Webhooks: unknown HTTP code while sending to '[target_url]': [httpresponse["status_code"]]. Data: [httpresponse["body"]].")
+		. = FALSE
 
 /decl/webhook/proc/get_mentions(var/mentioning_url)
 	. = mentions?.Copy()
