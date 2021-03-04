@@ -98,7 +98,11 @@
 				var/decl/material/reg = mat
 				stored_substances_to_names[mat] = lowertext(initial(reg.name))
 
-	SSfabrication.init_fabricator(src)
+/obj/machinery/fabricator/handle_post_network_connection()
+	..()
+	var/list/base_designs = SSfabrication.get_initial_recipes(fabricator_class)
+	design_cache = islist(base_designs) ? base_designs.Copy() : list() // Don't want to mutate the subsystem cache.
+	refresh_design_cache()
 
 /obj/machinery/fabricator/proc/refresh_design_cache(var/list/known_tech)
 	if(length(installed_designs))

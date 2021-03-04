@@ -111,6 +111,7 @@
 	leaves_residue = 0
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	origin_tech = "{'combat':3,'materials':3}"
 
 /obj/item/ammo_casing/shotgun/stunshell/emp_act(severity)
 	if(prob(100/severity)) BB = null
@@ -134,6 +135,7 @@
 	projectile_type  = /obj/item/projectile/ion
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_REINFORCEMENT)
+	origin_tech = "{'combat':4,'materials':3}"
 
 /obj/item/ammo_casing/shell
 	name = "shell casing"

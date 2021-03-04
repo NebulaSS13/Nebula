@@ -1188,6 +1188,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	force_icon = R.icon
 	name = "[R ? R.modifier_string : "robotic"] [initial(name)]"
 	desc = "[R.desc] It looks like it was produced by [R.name]."
+	origin_tech = R.limb_tech
 	slowdown = R.movement_slowdown
 	max_damage *= R.hardiness
 	min_broken_damage *= R.hardiness

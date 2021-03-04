@@ -55,3 +55,10 @@
 
 /datum/fabricator_recipe/protolathe/misc/radio_beacon
 	path = /obj/item/radio_beacon
+
+
+/datum/fabricator_recipe/protolathe/integrated_printer_upgrade_advanced
+	path = /obj/item/disk/integrated_circuit/upgrade/advanced
+
+/datum/fabricator_recipe/protolathe/integrated_printer_upgrade_clone
+	path = /obj/item/disk/integrated_circuit/upgrade/clone

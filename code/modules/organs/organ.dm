@@ -5,6 +5,7 @@
 	w_class = ITEM_SIZE_TINY
 	default_action_type = /datum/action/item_action/organ
 	material = /decl/material/solid/meat
+	origin_tech = "{'materials':1,'biotech':1}"
 
 	// Strings.
 	var/organ_tag = "organ"           // Unique identifier.
@@ -17,7 +18,7 @@
 	// Reference data.
 	var/mob/living/carbon/human/owner // Current mob owning the organ.
 	var/datum/dna/dna                 // Original DNA.
-	var/decl/species/species         // Original species.
+	var/decl/species/species          // Original species.
 	var/list/ailments                 // Current active ailments if any.
 
 	// Damage vars.

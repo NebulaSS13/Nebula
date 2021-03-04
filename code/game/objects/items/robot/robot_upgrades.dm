@@ -7,7 +7,7 @@
 	icon = 'icons/obj/modules/module_cyborg_0.dmi'
 	icon_state = ICON_STATE_WORLD
 	material = /decl/material/solid/metal/steel
-
+	origin_tech = "{'materials':2,'engineering':3,'programming':3,'magnets':1}"
 	var/locked = 0
 	var/require_module = 0
 	var/installed = 0
@@ -57,6 +57,7 @@
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
+	origin_tech = "{'materials':2,'engineering':2,'programming':3,'magnets':2}"
 
 /obj/item/borg/upgrade/uncertified/combat
 	name = "ancient module"
@@ -154,6 +155,7 @@
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
+	origin_tech = "{'materials':2,'engineering':3,'programming':3,'powerstorage':2,'combat':2}"
 
 /obj/item/borg/upgrade/weaponcooler/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
@@ -190,6 +192,7 @@
 		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
+	origin_tech = "{'materials':2,'engineering':3,'programming':3,'magnets':3}"
 
 /obj/item/borg/upgrade/jetpack/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
@@ -215,6 +218,7 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
+	origin_tech = "{'materials':4,'engineering':4,'programming':3}"
 
 /obj/item/borg/upgrade/rcd/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
@@ -237,6 +241,7 @@
 		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
+	origin_tech = "{'materials':2,'engineering':2,'programming':3,'esoteric':2,'combat':2}"
 
 /obj/item/borg/upgrade/syndicate/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0

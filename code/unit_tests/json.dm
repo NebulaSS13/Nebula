@@ -19,7 +19,7 @@
 					else
 						var/decl/research_field/field = SSfabrication.get_research_field_by_id(tech)
 						if(!istype(field) || !field.name)
-							LAZYADD(failures, check_json)
+							LAZYADD(failures, "[subtype] - [tech]")
 		catch()
 			LAZYADD(failures, check_json)
 	if(LAZYLEN(failures))

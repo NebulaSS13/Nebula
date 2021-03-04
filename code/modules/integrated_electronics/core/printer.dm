@@ -338,12 +338,16 @@
 	desc = "Install this into your integrated circuit printer to enhance it."
 	color = COLOR_GRAY20
 	label = "label_up"
+	origin_tech = "{'materials':2,'engineering':2}"
+
 /obj/item/disk/integrated_circuit/upgrade/advanced
 	name = "integrated circuit printer upgrade disk - advanced designs"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one adds new, advanced designs to the printer."
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	origin_tech = "{'materials':3,'engineering':3}"
 
 /obj/item/disk/integrated_circuit/upgrade/clone
 	name = "integrated circuit printer upgrade disk - instant cloner"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one allows the printer to duplicate assemblies instantaneously."
+	origin_tech = "{'materials':3,'programming':5}"

@@ -28,10 +28,13 @@
 		name = get_product_name()
 	if(required_technology == TRUE)
 		if(ispath(path, /obj/item))
-			var/obj/item/O = path
-			var/tech = initial(O.origin_tech)
-			if(tech)
-				required_technology = json_decode(tech)
+			var/list/res = build(null, 1)
+			if(length(res))
+				var/obj/item/O = res[1]
+				var/tech = O.get_origin_tech()
+				if(tech)
+					required_technology = cached_json_decode(tech)
+				QDEL_NULL_LIST(res)
 		if(!islist(required_technology))
 			required_technology = list()
 	if(!resources)

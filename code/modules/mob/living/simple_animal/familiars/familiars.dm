@@ -171,7 +171,7 @@
 
 
 	speak_emote = list("meows", "purrs")
-	holder_type = /obj/item/holder/cat
+	holder_type = /obj/item/holder
 	mob_size = MOB_SIZE_SMALL
 
 	health = 25

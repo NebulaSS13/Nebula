@@ -152,6 +152,7 @@
 	maxcharge = 100
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	origin_tech = "{'powerstorage':2}"
 
 /obj/item/cell/crap
 	name = "old power cell"

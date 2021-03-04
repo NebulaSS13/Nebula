@@ -17,6 +17,7 @@
 	var/manual_dexterity = DEXTERITY_FULL
 	var/movement_slowdown = 0
 	var/is_robotic = TRUE
+	var/limb_tech = "{'engineering':1,'materials':1,'magnets':1}"
 
 /decl/prosthetics_manufacturer/proc/check_can_install(var/target_slot, var/target_bodytype, var/target_species)
 	. = istext(target_slot)

@@ -85,6 +85,9 @@
 	
 	var/datum/reagents/coating // reagent container for coating things like blood/oil, used for overlays and tracks
 
+/obj/item/proc/get_origin_tech()
+	return origin_tech
+
 /obj/item/create_matter()
 	..()
 	LAZYINITLIST(matter)

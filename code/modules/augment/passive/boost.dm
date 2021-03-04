@@ -2,14 +2,15 @@
 	var/id
 
 /obj/item/organ/internal/augment/boost
+	icon_state = "booster"
+	allowed_organs = list(BP_AUGMENT_HEAD)
+	origin_tech = "{'materials':2,'magnets':2,'engineering':2,'biotech':3}"
 	var/list/buffs = list()//Which abilities does this impact?
 	var/list/injury_debuffs = list()//If organ is damaged, should we reduce anything?
 	var/buffpath = /datum/skill_buff/augment //if you use something else it should be a subtype or it will runtime
 	var/active = 0 //mostly to control if we should remove buffs when we go
 	var/debuffing = 0 //if we applied a debuff
 	var/id //Unique Id assigned on new
-	icon_state = "booster"
-	allowed_organs = list(BP_AUGMENT_HEAD)
 
 /obj/item/organ/internal/augment/boost/Initialize()
 	. = ..()

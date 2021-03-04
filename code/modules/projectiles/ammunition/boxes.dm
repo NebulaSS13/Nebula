@@ -151,7 +151,7 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/box/smallpistol
-	name = "ammunition box"
+	name = "ammunition box (pistol, small)"
 	icon_state = "smallpistol"
 	origin_tech = "{'combat':2}"
 	material = /decl/material/solid/metal/steel
@@ -160,7 +160,7 @@
 	max_ammo = 30
 
 /obj/item/ammo_magazine/box/pistol
-	name = "ammunition box"
+	name = "ammunition box (pistol)"
 	icon_state = "smallpistol"
 	origin_tech = "{'combat':2}"
 	caliber = CALIBER_PISTOL
@@ -172,20 +172,22 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/box/emp/pistol
-	name = "ammunition box"
+	name = "ammunition box (pistol, haywire)"
 	desc = "A box containing loose rounds of standard EMP ammo."
 	labels = list("haywire")
 	ammo_type = /obj/item/ammo_casing/pistol/emp
 	caliber = CALIBER_PISTOL
 	max_ammo = 15
+	origin_tech = "{'combat':2,'magnets':2,'powerstorage':2}"
 
 /obj/item/ammo_magazine/box/emp/smallpistol
-	name = "ammunition box"
+	name = "ammunition box (pistol, small, haywire)"
 	desc = "A box containing loose rounds of small EMP ammo."
 	labels = list("haywire")
 	ammo_type = /obj/item/ammo_casing/pistol/small/emp
 	caliber = CALIBER_PISTOL_SMALL
 	max_ammo = 8
+	origin_tech = "{'combat':2,'magnets':2,'powerstorage':2}"
 
 /obj/item/ammo_magazine/rifle
 	name = "assault rifle magazine"
