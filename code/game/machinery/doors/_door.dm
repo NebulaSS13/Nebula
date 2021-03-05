@@ -53,6 +53,8 @@
 
 	atmos_canpass = CANPASS_PROC
 
+	var/set_dir_on_update = TRUE
+
 /obj/machinery/door/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
 	if(environment_smash >= 1)
 		damage = max(damage, 10)
@@ -136,10 +138,11 @@
 		explosion_resistance = density ? initial(explosion_resistance) : 0
 
 /obj/machinery/door/set_dir(new_dir)
-	if(new_dir & (EAST|WEST))
-		new_dir = WEST
-	else
-		new_dir = SOUTH
+	if(set_dir_on_update)
+		if(new_dir & (EAST|WEST))
+			new_dir = WEST
+		else
+			new_dir = SOUTH
 
 	. = ..(new_dir)
 
