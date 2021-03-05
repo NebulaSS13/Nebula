@@ -60,9 +60,9 @@ Used In File(s): \code\game\machinery\alarm.dm
                     <td>
                         <div class="item">
                             <div class="itemContent" style="width: 100%;">	
-                                {{:helper.link('Off',	null, { 'rcon' : 1}, data.remote_connection && !data.remote_access ? (data.rcon == 1 ? 'yellowButton' : 'disabled') : null, data.rcon == 1 ? 'selected' : null)}}
-                                {{:helper.link('Auto',	null, { 'rcon' : 2}, data.remote_connection && !data.remote_access ? (data.rcon == 2 ? 'yellowButton' : 'disabled') : null, data.rcon == 2 ? 'selected' : null)}}
-                                {{:helper.link('On',	null, { 'rcon' : 3}, data.remote_connection && !data.remote_access ? (data.rcon == 3 ? 'yellowButton' : 'disabled') : null, data.rcon == 3 ? 'selected' : null)}}
+                                {{:helper.link('Off',	null, { 'rcon' : 1}, !data.rcon_access ? (data.rcon == 1 ? 'yellowButton' : 'disabled') : null, data.rcon == 1 ? 'selected' : null)}}
+                                {{:helper.link('Auto',	null, { 'rcon' : 2}, !data.rcon_access ? (data.rcon == 2 ? 'yellowButton' : 'disabled') : null, data.rcon == 2 ? 'selected' : null)}}
+                                {{:helper.link('On',	null, { 'rcon' : 3}, !data.rcon_access ? (data.rcon == 3 ? 'yellowButton' : 'disabled') : null, data.rcon == 3 ? 'selected' : null)}}
                             </div>
                         </div>
                     </td>

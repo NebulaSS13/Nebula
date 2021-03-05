@@ -16,60 +16,85 @@
 
 /datum/nano_module/atmos_control
 	name = "Atmospherics Control"
-	var/obj/access = new()
-	var/emagged = 0
-	var/ui_ref
 	var/list/monitored_alarms = list()
+	var/list/filter_strings = list() // user weakref -> string filter
+	var/list/alarm_data_cache = list() // user weakref -> cached camera data
 
-/datum/nano_module/atmos_control/New(atmos_computer, var/list/req_access, monitored_alarm_ids)
-	..()
+/datum/nano_module/atmos_control/proc/set_monitored_alarms(monitored_alarm_ids) // you have to call this after creating the nanomodule if you want to set a custom list.
+	for(var/obj/machinery/alarm/alarm in SSmachines.machinery)
+		if(!monitored_alarm_ids || (alarm.alarm_id && (alarm.alarm_id in monitored_alarm_ids)))
+			monitored_alarms += alarm
+	monitored_alarms = dd_sortedObjectList(monitored_alarms)
 
-	if(istype(req_access))
-		access.req_access = req_access
-	else if(req_access)
-		log_debug("\The [src] was given an unepxected req_access: [req_access]")
-
-	if(monitored_alarm_ids)
-		for(var/obj/machinery/alarm/alarm in SSmachines.machinery)
-			if(alarm.alarm_id && (alarm.alarm_id in monitored_alarm_ids))
-				monitored_alarms += alarm
-		// machines may not yet be ordered at this point
-		monitored_alarms = dd_sortedObjectList(monitored_alarms)
-
-/datum/nano_module/atmos_control/Topic(href, href_list)
+/datum/nano_module/atmos_control/Topic(href, href_list, state)
 	if(..())
 		return 1
 
 	if(href_list["alarm"])
+		var/ui_ref = SSnano.get_open_ui(usr, src, "main")
 		if(ui_ref)
 			var/obj/machinery/alarm/alarm = locate(href_list["alarm"]) in (monitored_alarms.len ? monitored_alarms : SSmachines.machinery)
-			if(alarm)
-				var/datum/topic_state/TS = generate_state(alarm)
+			if(istype(alarm))
+				var/datum/topic_state/remote/TS = new (src, alarm, state)
 				alarm.ui_interact(usr, master_ui = ui_ref, state = TS)
 		return 1
 
+	if(href_list["filter_set"])
+		var/string = input(usr, "Set text filter:", "Filter Selection", filter_strings[weakref(usr)]) as null|text
+		if(!CanInteract(usr, state))
+			return TOPIC_REFRESH
+		string = sanitize(string)
+		string = lowertext(string)
+		if(!string)
+			filter_strings -= weakref(usr)
+		else
+			filter_strings[weakref(usr)] = string
+		alarm_data_cache -= weakref(usr)
+		return TOPIC_REFRESH
+	
+	if(href_list["refresh"])
+		alarm_data_cache -= weakref(usr)
+		return TOPIC_REFRESH		
+
 /datum/nano_module/atmos_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
-	var/alarms[0]
-	var/alarmsAlert[0]
-	var/alarmsDanger[0]
+	if(!length(monitored_alarms))
+		set_monitored_alarms()
 
-	// TODO: Move these to a cache, similar to cameras
-	for(var/obj/machinery/alarm/alarm in (monitored_alarms.len ? monitored_alarms : SSmachines.machinery))
-		var/turf/Z = get_host_z()
-		if (!Z || !AreConnectedZLevels(Z, alarm.z))
-			continue
-		var/danger_level = max(alarm.danger_level, alarm.alarm_area.atmosalm)
-		if(danger_level == 2)
-			alarmsAlert[++alarmsAlert.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
-		else if(danger_level == 1)
-			alarmsDanger[++alarmsDanger.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
-		else
-			alarms[++alarms.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
+	var/list/alarms_data = alarm_data_cache[weakref(user)]
+	var/filter = filter_strings[weakref(user)]
 
-	data["alarms"] = sortByKey(alarms, "name")
-	data["alarmsAlert"] = sortByKey(alarmsAlert, "name")
-	data["alarmsDanger"] = sortByKey(alarmsDanger, "name")
+	if(!alarms_data)
+		var/Z = get_host_z()
+		var/list/alarms = list()
+		var/list/alarmsAlert = list()
+		var/list/alarmsDanger = list()
+
+		for(var/obj/machinery/alarm/alarm in monitored_alarms)
+			if (!Z || !AreConnectedZLevels(Z, alarm.z))
+				continue
+			var/alarm_name = sanitize(alarm.name)
+			alarm_name = replacetext(alarm_name, " Air Alarm", "") // shorten titles
+
+			if(filter && !findtext(lowertext(alarm_name), filter))
+				continue
+
+			var/danger_level = max(alarm.danger_level, alarm.alarm_area.atmosalm)
+			if(danger_level == 2)
+				alarmsAlert[++alarmsAlert.len] = list("name" = alarm_name, "ref"= "\ref[alarm]", "danger" = danger_level)
+			else if(danger_level == 1)
+				alarmsDanger[++alarmsDanger.len] = list("name" = alarm_name, "ref"= "\ref[alarm]", "danger" = danger_level)
+			else
+				alarms[++alarms.len] = list("name" = alarm_name, "ref"= "\ref[alarm]", "danger" = danger_level)
+
+		alarms_data = list()
+		alarms_data["alarms"] = sortByKey(alarms, "name")
+		alarms_data["alarmsAlert"] = sortByKey(alarmsAlert, "name")
+		alarms_data["alarmsDanger"] = sortByKey(alarmsDanger, "name")
+		alarm_data_cache[weakref(user)] = alarms_data
+	
+	data += alarms_data
+	data["filter"] = filter || "---"
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
@@ -79,29 +104,3 @@
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
-	ui_ref = ui
-
-/datum/nano_module/atmos_control/proc/generate_state(air_alarm)
-	var/datum/topic_state/air_alarm/state = new()
-	state.atmos_control = src
-	state.air_alarm = air_alarm
-	return state
-
-/datum/topic_state/air_alarm
-	var/datum/nano_module/atmos_control/atmos_control	= null
-	var/obj/machinery/alarm/air_alarm					= null
-
-/datum/topic_state/air_alarm/can_use_topic(var/src_object, var/mob/user)
-	if(alarm_has_access(user))
-		return STATUS_INTERACTIVE
-	return STATUS_UPDATE
-
-/datum/topic_state/air_alarm/href_list(var/mob/user)
-	var/list/extra_href = list()
-	extra_href["remote_connection"] = 1
-	extra_href["remote_access"] = alarm_has_access(user)
-
-	return extra_href
-
-/datum/topic_state/air_alarm/proc/alarm_has_access(var/mob/user)
-	return user && (isAI(user) || atmos_control.access.allowed(user) || atmos_control.emagged || air_alarm.rcon_setting == RCON_YES || (air_alarm.alarm_area.atmosalm && air_alarm.rcon_setting == RCON_AUTO))

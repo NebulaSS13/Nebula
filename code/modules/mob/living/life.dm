@@ -9,7 +9,7 @@
 	if (!loc)
 		return
 
-	if(machine && !machine.CanUseTopic(src)) // unsure if this is a good idea, but using canmousedrop was ???
+	if(machine && (machine.CanUseTopic(src, machine.DefaultTopicState()) == STATUS_CLOSE)) // unsure if this is a good idea, but using canmousedrop was ???
 		machine = null
 
 	//Handle temperature/pressure differences between body and environment

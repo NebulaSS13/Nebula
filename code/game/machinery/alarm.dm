@@ -71,6 +71,7 @@
 	var/remote_control = 0
 	var/rcon_setting = 2
 	var/rcon_time = 0
+	var/rcon_remote_override_access = list(access_ce)
 	var/locked = 1
 	var/aidisabled = 0
 	var/shorted = 0
@@ -475,16 +476,13 @@
 
 /obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]
-	var/remote_connection = 0
-	var/remote_access = 0
-	if(state)
-		var/list/href = state.href_list(user)
-		remote_connection = href["remote_connection"]	// Remote connection means we're non-adjacent/connecting from another computer
-		remote_access = href["remote_access"]			// Remote access means we also have the privilege to alter the air alarm.
+	var/remote_connection = istype(state, /datum/topic_state/remote)  // Remote connection means we're non-adjacent/connecting from another computer
+	var/remote_access = remote_connection && CanInteract(user, state) // Remote access means we also have the privilege to alter the air alarm.
 
 	data["locked"] = locked && !issilicon(user)
 	data["remote_connection"] = remote_connection
 	data["remote_access"] = remote_access
+	data["rcon_access"] = (CanUseTopic(user, state, list("rcon" = TRUE)) == STATUS_INTERACTIVE)
 	data["rcon"] = rcon_setting
 	data["screen"] = screen
 
@@ -620,11 +618,17 @@
 
 	. = shorted ? STATUS_DISABLED : STATUS_INTERACTIVE
 
-	if(. == STATUS_INTERACTIVE)
-		var/extra_href = state.href_list(user)
-		// Prevent remote users from altering RCON settings unless they already have access
-		if(href_list["rcon"] && extra_href["remote_connection"] && !extra_href["remote_access"])
-			. = STATUS_UPDATE
+	if(. == STATUS_INTERACTIVE && istype(state, /datum/topic_state/remote))
+		. = STATUS_UPDATE
+		if(isAI(user))
+			. = STATUS_INTERACTIVE // Apparently always have access
+		if(rcon_setting == RCON_YES || (alarm_area.atmosalm && rcon_setting == RCON_AUTO))
+			. = STATUS_INTERACTIVE // Have rcon access
+
+		if(has_access(rcon_remote_override_access, user.GetAccess()))
+			. = STATUS_INTERACTIVE // They have the access to set rcon anyway
+		else if(href_list && href_list["rcon"])
+			. = STATUS_UPDATE // They don't have rcon access but are trying to set it: that's a no
 
 	return min(..(), .)
 
@@ -655,8 +659,8 @@
 		return TOPIC_REFRESH
 
 	// hrefs that need the AA unlocked -walter0o
-	var/extra_href = state.href_list(user)
-	if(!(locked && !extra_href["remote_connection"]) || extra_href["remote_access"] || issilicon(user))
+	var/forbidden = locked && !istype(state, /datum/topic_state/remote) && !issilicon(user)
+	if(!forbidden)
 		if(href_list["command"])
 			var/device_id = href_list["id_tag"]
 			switch(href_list["command"])
@@ -754,21 +758,22 @@
 			return TOPIC_REFRESH
 
 		if(href_list["atmos_alarm"])
-			if (alarm_area.atmosalert(2, src))
-				apply_danger_level(2)
-			update_icon()
+			set_alarm(2)
 			return TOPIC_REFRESH
 
 		if(href_list["atmos_reset"])
-			if (alarm_area.atmosalert(0, src))
-				apply_danger_level(0)
-			update_icon()
+			set_alarm(0)
 			return TOPIC_REFRESH
 
 		if(href_list["mode"])
 			mode = text2num(href_list["mode"])
 			apply_mode()
 			return TOPIC_REFRESH
+
+/obj/machinery/alarm/proc/set_alarm(danger_level)
+	if (alarm_area.atmosalert(danger_level, src))
+		apply_danger_level(danger_level)
+	update_icon()
 
 /obj/machinery/alarm/attackby(obj/item/W, mob/user)
 	if(!(stat & (BROKEN|NOPOWER)))
