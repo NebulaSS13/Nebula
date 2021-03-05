@@ -5,6 +5,7 @@
 	icon_state = "curtain_rolled"
 	force = 3 //just plastic
 	w_class = ITEM_SIZE_HUGE //curtains, yeap
+
 	var/obj/structure/curtain/holder = /obj/structure/curtain
 
 /obj/item/curtain/attackby(obj/item/W, mob/user)
@@ -47,6 +48,7 @@
 	opacity = TRUE
 	density = FALSE
 	anchored = TRUE
+
 	var/obj/item/curtain/holder = /obj/item/curtain
 
 /obj/structure/curtain/open
@@ -60,7 +62,7 @@
 
 /obj/structure/curtain/bullet_act(obj/item/projectile/P, def_zone)
 	if(!P.nodamage)
-		visible_message(SPAN_WARNING("[P] tears [src] down!"))
+		visible_message(SPAN_WARNING("[P] tears \the [src] down!"))
 		qdel(src)
 	else
 		..(P, def_zone)
@@ -96,12 +98,16 @@
 /obj/structure/curtain/proc/toggle()
 	playsound(src, 'sound/effects/curtain.ogg', 15, 1, -5)
 	set_opacity(!opacity)
-	if(opacity)
-		icon_state = "closed"
-		layer = ABOVE_HUMAN_LAYER
-	else
-		icon_state = "open"
-		layer = ABOVE_WINDOW_LAYER
+
+/obj/structure/curtain/set_opacity()
+	. = ..()
+	if(.)
+		update_icon()
+
+/obj/structure/curtain/on_update_icon()
+	. = ..()
+	icon_state = opacity ? "closed" : "open"
+	layer = opacity ? ABOVE_HUMAN_LAYER : ABOVE_WINDOW_LAYER
 
 // Normal subtypes
 /obj/structure/curtain/bed
