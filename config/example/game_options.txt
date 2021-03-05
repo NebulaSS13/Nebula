@@ -9,6 +9,9 @@ HEALTH_THRESHOLD_CRIT -50
 ## level of health at which a mob becomes dead
 HEALTH_THRESHOLD_DEAD -100
 
+## Uncomment this line to enable humans showing a visible message upon death ('X seizes up then falls limp, eyes dead and lifeless').
+# SHOW_HUMAN_DEATH_MESSAGE
+
 ## Determines whether bones can be broken through excessive damage to the organ
 ## 0 means bones can't break, 1 means they can
 BONES_CAN_BREAK 1
