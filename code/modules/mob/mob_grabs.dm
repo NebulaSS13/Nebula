@@ -47,3 +47,6 @@
 	. = list()
 	for(var/obj/item/grab/grab in contents)
 		. += grab
+
+/mob/get_object_size()
+	return mob_size	
