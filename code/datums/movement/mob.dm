@@ -262,10 +262,16 @@
 			G.affecting.forceMove(destination)
 			continue
 
-	//Moving with objects stuck in you can cause bad times.
+	// Sprinting uses up stamina and causes exertion effects.
 	if(MOVING_QUICKLY(mob))
 		mob.last_quick_move_time = world.time
 		mob.adjust_stamina(-(mob.get_stamina_used_per_step() * (1+mob.encumbrance())))
+		if(ishuman(mob))
+			var/decl/species/species = mob.get_species()
+			if(species)
+				species.handle_exertion(mob)
+
+	//Moving with objects stuck in you can cause bad times.
 	mob.handle_embedded_and_stomach_objects()
 	mob.moving = FALSE
 
