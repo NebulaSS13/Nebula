@@ -1,37 +1,36 @@
-/datum/preferences
-	//The mob should have a gender you want before running this proc. Will run fine without H
-	proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
-		var/decl/species/current_species = get_species_by_key(species || GLOB.using_map.default_species)
-		gender = pick(current_species.genders)
+//The mob should have a gender you want before running this proc. Will run fine without H
+/datum/preferences/proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
+	var/decl/species/current_species = get_species_by_key(species || GLOB.using_map.default_species)
+	gender = pick(current_species.genders)
 
-		h_style = random_hair_style(gender, species)
-		f_style = random_facial_hair_style(gender, species)
-		if(current_species)
-			if(current_species.appearance_flags & HAS_A_SKIN_TONE)
-				skin_tone = current_species.get_random_skin_tone() || skin_tone
-			if(current_species.appearance_flags & HAS_EYE_COLOR)
-				eye_colour = current_species.get_random_eye_color()
-			if(current_species.appearance_flags & HAS_SKIN_COLOR)
-				skin_colour = current_species.get_random_skin_color()
-			if(current_species.appearance_flags & HAS_HAIR_COLOR)
-				hair_colour = current_species.get_random_hair_color()
-				facial_hair_colour = prob(75) ? hair_colour : current_species.get_random_facial_hair_color()
+	h_style = random_hair_style(gender, species)
+	f_style = random_facial_hair_style(gender, species)
+	if(current_species)
+		if(current_species.appearance_flags & HAS_A_SKIN_TONE)
+			skin_tone = current_species.get_random_skin_tone() || skin_tone
+		if(current_species.appearance_flags & HAS_EYE_COLOR)
+			eye_colour = current_species.get_random_eye_color()
+		if(current_species.appearance_flags & HAS_SKIN_COLOR)
+			skin_colour = current_species.get_random_skin_color()
+		if(current_species.appearance_flags & HAS_HAIR_COLOR)
+			hair_colour = current_species.get_random_hair_color()
+			facial_hair_colour = prob(75) ? hair_colour : current_species.get_random_facial_hair_color()
 
-		if(all_underwear)
-			all_underwear.Cut()
-		if(current_species.appearance_flags & HAS_UNDERWEAR)
-			for(var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
-				var/datum/category_item/underwear/WRI = pick(WRC.items)
-				all_underwear[WRC.name] = WRI.name
+	if(all_underwear)
+		all_underwear.Cut()
+	if(current_species.appearance_flags & HAS_UNDERWEAR)
+		for(var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
+			var/datum/category_item/underwear/WRI = pick(WRC.items)
+			all_underwear[WRC.name] = WRI.name
 
-		for(var/M in body_markings)
-			body_markings[M] = get_random_colour()
+	for(var/M in body_markings)
+		body_markings[M] = get_random_colour()
 
-		backpack = GET_DECL(pick(subtypesof(/decl/backpack_outfit)))
-		age = rand(current_species.min_age, current_species.max_age)
-		b_type = RANDOM_BLOOD_TYPE
-		if(H)
-			copy_to(H)
+	backpack = GET_DECL(pick(subtypesof(/decl/backpack_outfit)))
+	age = rand(current_species.min_age, current_species.max_age)
+	b_type = RANDOM_BLOOD_TYPE
+	if(H)
+		copy_to(H)
 
 /datum/preferences/proc/dress_preview_mob(var/mob/living/carbon/human/mannequin)
 	var/update_icon = FALSE

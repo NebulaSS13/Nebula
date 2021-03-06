@@ -15,172 +15,172 @@
 	var/obj/item/assembly/a_right = null
 	var/obj/special_assembly = null
 
-	proc/attach(var/obj/item/D, var/obj/item/D2, var/mob/user)
-		return
+/obj/item/assembly_holder/proc/attach(var/obj/item/D, var/obj/item/D2, var/mob/user)
+	return
 
-	proc/attach_special(var/obj/O, var/mob/user)
-		return
+/obj/item/assembly_holder/proc/attach_special(var/obj/O, var/mob/user)
+	return
 
-	proc/process_activation(var/obj/item/D)
-		return
+/obj/item/assembly_holder/proc/process_activation(var/obj/item/D)
+	return
 
-	proc/detached()
-		return
-
-
-	IsAssemblyHolder()
-		return 1
+/obj/item/assembly_holder/proc/detached()
+	return
 
 
-	attach(var/obj/item/assembly/D, var/obj/item/assembly/D2, var/mob/user)
-		if((!D)||(!D2))
-			return 0
-		if((!istype(D))||(!istype(D2)))
-			return 0
-		if((D.secured)||(D2.secured))
-			return 0
-		if(user)
-			user.drop_from_inventory(D)
-			user.drop_from_inventory(D2)
-		D.holder = src
-		D2.holder = src
-		D.forceMove(src)
-		D2.forceMove(src)
-		a_left = D
-		a_right = D2
-		SetName("[D.name]-[D2.name] assembly")
+/obj/item/assembly_holder/IsAssemblyHolder()
+	return 1
+
+
+/obj/item/assembly_holder/attach(var/obj/item/assembly/D, var/obj/item/assembly/D2, var/mob/user)
+	if((!D)||(!D2))
+		return 0
+	if((!istype(D))||(!istype(D2)))
+		return 0
+	if((D.secured)||(D2.secured))
+		return 0
+	if(user)
+		user.drop_from_inventory(D)
+		user.drop_from_inventory(D2)
+	D.holder = src
+	D2.holder = src
+	D.forceMove(src)
+	D2.forceMove(src)
+	a_left = D
+	a_right = D2
+	SetName("[D.name]-[D2.name] assembly")
+	update_icon()
+	usr.put_in_hands(src)
+
+	return 1
+
+
+/obj/item/assembly_holder/attach_special(var/obj/O, var/mob/user)
+	if(!O)	return
+	if(!O.IsSpecialAssembly())	return 0
+
+/*	if(O:Attach_Holder())
+		special_assembly = O
 		update_icon()
-		usr.put_in_hands(src)
-
-		return 1
-
-
-	attach_special(var/obj/O, var/mob/user)
-		if(!O)	return
-		if(!O.IsSpecialAssembly())	return 0
-
-/*		if(O:Attach_Holder())
-			special_assembly = O
-			update_icon()
-			src.SetName("[a_left.name] [a_right.name] [special_assembly.name] assembly")
+		src.SetName("[a_left.name] [a_right.name] [special_assembly.name] assembly")
 */
-		return
+	return
 
-	HasProximity(atom/movable/AM as mob|obj)
-		if(a_left)
-			a_left.HasProximity(AM)
-		if(a_right)
-			a_right.HasProximity(AM)
-		if(special_assembly)
-			special_assembly.HasProximity(AM)
-
-
-	Crossed(atom/movable/AM as mob|obj)
-		if(a_left)
-			a_left.Crossed(AM)
-		if(a_right)
-			a_right.Crossed(AM)
-		if(special_assembly)
-			special_assembly.Crossed(AM)
+/obj/item/assembly_holder/HasProximity(atom/movable/AM as mob|obj)
+	if(a_left)
+		a_left.HasProximity(AM)
+	if(a_right)
+		a_right.HasProximity(AM)
+	if(special_assembly)
+		special_assembly.HasProximity(AM)
 
 
-	on_found(mob/finder as mob)
-		if(a_left)
-			a_left.on_found(finder)
-		if(a_right)
-			a_right.on_found(finder)
-		if(special_assembly)
-			if(istype(special_assembly, /obj/item))
-				var/obj/item/S = special_assembly
-				S.on_found(finder)
+/obj/item/assembly_holder/Crossed(atom/movable/AM as mob|obj)
+	if(a_left)
+		a_left.Crossed(AM)
+	if(a_right)
+		a_right.Crossed(AM)
+	if(special_assembly)
+		special_assembly.Crossed(AM)
 
 
-	Move()
-		..()
-		if(a_left && a_right)
-			a_left.holder_movement()
-			a_right.holder_movement()
-//		if(special_assembly)
-//			special_assembly:holder_movement()
-		return
+/obj/item/assembly_holder/on_found(mob/finder as mob)
+	if(a_left)
+		a_left.on_found(finder)
+	if(a_right)
+		a_right.on_found(finder)
+	if(special_assembly)
+		if(istype(special_assembly, /obj/item))
+			var/obj/item/S = special_assembly
+			S.on_found(finder)
 
 
-	attack_hand()//Perhapse this should be a holder_pickup proc instead, can add if needbe I guess
-		if(a_left && a_right)
-			a_left.holder_movement()
-			a_right.holder_movement()
-//		if(special_assembly)
-//			special_assembly:Holder_Movement()
-		..()
-		return
+/obj/item/assembly_holder/Move()
+	..()
+	if(a_left && a_right)
+		a_left.holder_movement()
+		a_right.holder_movement()
+//	if(special_assembly)
+//		special_assembly:holder_movement()
+	return
 
 
-	attackby(obj/item/W as obj, mob/user as mob)
-		if(isScrewdriver(W))
-			if(!a_left || !a_right)
-				to_chat(user, "<span class='warning'>BUG:Assembly part missing, please report this!</span>")
-				return
-			a_left.toggle_secure()
-			a_right.toggle_secure()
-			secured = !secured
-			if(secured)
-				to_chat(user, "<span class='notice'>\The [src] is ready!</span>")
-			else
-				to_chat(user, "<span class='notice'>\The [src] can now be taken apart!</span>")
-			update_icon()
+/obj/item/assembly_holder/attack_hand()//Perhapse this should be a holder_pickup proc instead, can add if needbe I guess
+	if(a_left && a_right)
+		a_left.holder_movement()
+		a_right.holder_movement()
+//	if(special_assembly)
+//		special_assembly:Holder_Movement()
+	..()
+	return
+
+
+/obj/item/assembly_holder/attackby(obj/item/W as obj, mob/user as mob)
+	if(isScrewdriver(W))
+		if(!a_left || !a_right)
+			to_chat(user, "<span class='warning'>BUG:Assembly part missing, please report this!</span>")
 			return
-		else if(W.IsSpecialAssembly())
-			attach_special(W, user)
+		a_left.toggle_secure()
+		a_right.toggle_secure()
+		secured = !secured
+		if(secured)
+			to_chat(user, "<span class='notice'>\The [src] is ready!</span>")
 		else
-			..()
+			to_chat(user, "<span class='notice'>\The [src] can now be taken apart!</span>")
+		update_icon()
 		return
+	else if(W.IsSpecialAssembly())
+		attach_special(W, user)
+	else
+		..()
+	return
 
 
-	attack_self(mob/user as mob)
-		src.add_fingerprint(user)
-		if(src.secured)
-			if(!a_left || !a_right)
-				to_chat(user, "<span class='warning'>Assembly part missing!</span>")
-				return
-			if(istype(a_left,a_right.type))//If they are the same type it causes issues due to window code
-				switch(alert("Which side would you like to use?",,"Left","Right"))
-					if("Left")	a_left.attack_self(user)
-					if("Right")	a_right.attack_self(user)
-				return
-			else
-				if(!istype(a_left,/obj/item/assembly/igniter))
-					a_left.attack_self(user)
-				if(!istype(a_right,/obj/item/assembly/igniter))
-					a_right.attack_self(user)
+/obj/item/assembly_holder/attack_self(mob/user as mob)
+	src.add_fingerprint(user)
+	if(src.secured)
+		if(!a_left || !a_right)
+			to_chat(user, "<span class='warning'>Assembly part missing!</span>")
+			return
+		if(istype(a_left,a_right.type))//If they are the same type it causes issues due to window code
+			switch(alert("Which side would you like to use?",,"Left","Right"))
+				if("Left")	a_left.attack_self(user)
+				if("Right")	a_right.attack_self(user)
+			return
 		else
-			var/turf/T = get_turf(src)
-			if(!T)	return 0
-			if(a_left)
-				a_left.holder = null
-				a_left.forceMove(T)
-			if(a_right)
-				a_right.holder = null
-				a_right.forceMove(T)
-			spawn(0)
-				qdel(src)
-		return
+			if(!istype(a_left,/obj/item/assembly/igniter))
+				a_left.attack_self(user)
+			if(!istype(a_right,/obj/item/assembly/igniter))
+				a_right.attack_self(user)
+	else
+		var/turf/T = get_turf(src)
+		if(!T)	return 0
+		if(a_left)
+			a_left.holder = null
+			a_left.forceMove(T)
+		if(a_right)
+			a_right.holder = null
+			a_right.forceMove(T)
+		spawn(0)
+			qdel(src)
+	return
 
 
-	process_activation(var/obj/D, var/normal = 1, var/special = 1)
-		if(!D)	return 0
-		if(!secured)
-			visible_message("[html_icon(src)] *beep* *beep*", "*beep* *beep*")
-		if((normal) && (a_right) && (a_left))
-			if(a_right != D)
-				a_right.pulsed(0)
-			if(a_left != D)
-				a_left.pulsed(0)
-		if(master)
-			master.receive_signal()
-//		if(special && special_assembly)
-//			if(!special_assembly == D)
-//				special_assembly.dothings()
-		return 1
+/obj/item/assembly_holder/process_activation(var/obj/D, var/normal = 1, var/special = 1)
+	if(!D)	return 0
+	if(!secured)
+		visible_message("[html_icon(src)] *beep* *beep*", "*beep* *beep*")
+	if((normal) && (a_right) && (a_left))
+		if(a_right != D)
+			a_right.pulsed(0)
+		if(a_left != D)
+			a_left.pulsed(0)
+	if(master)
+		master.receive_signal()
+//	if(special && special_assembly)
+//		if(!special_assembly == D)
+//			special_assembly.dothings()
+	return 1
 
 
 /obj/item/assembly_holder/Initialize()

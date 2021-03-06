@@ -29,7 +29,7 @@
 	STOP_PROCESSING(SSobj, src)
 	..()
 
-obj/item/clothing/mask/chewable/Destroy()
+/obj/item/clothing/mask/chewable/Destroy()
 	. = ..()
 	STOP_PROCESSING(SSobj, src)
 

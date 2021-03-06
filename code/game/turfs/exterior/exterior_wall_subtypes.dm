@@ -1,4 +1,4 @@
-turf/exterior/wall/random
+/turf/exterior/wall/random
 	reinf_material = null
 
 /turf/exterior/wall/random/proc/get_weighted_mineral_list()

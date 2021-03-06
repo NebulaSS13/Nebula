@@ -70,7 +70,7 @@
 				return DEVOUR_FAST
 
 
-obj/item/organ/internal/stomach/proc/throw_up()
+/obj/item/organ/internal/stomach/proc/throw_up()
 	set name = "Empty Stomach"
 	set category = "IC"
 	set src in usr

@@ -423,7 +423,7 @@
 	for(var/obj/machinery/ftl_shunt/fuel_port/F in input)
 		. += F.get_fuel_joules(TRUE)
 
-obj/machinery/ftl_shunt/core/proc/fuelpercentage()
+/obj/machinery/ftl_shunt/core/proc/fuelpercentage()
 	if(!length(fuel_ports))
 		return 0
 	var/fuel_max = get_fuel_maximum(fuel_ports)

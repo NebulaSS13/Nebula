@@ -136,25 +136,25 @@
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "struck", "hit")
 
-	attack_self(mob/user as mob)
-		src.active = !( src.active )
-		if (src.active)
-			to_chat(user, "<span class='notice'>You extend the plastic blade with a quick flick of your wrist.</span>")
-			playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
-			src.icon_state = "swordblue"
-			src.item_state = "swordblue"
-			src.w_class = ITEM_SIZE_HUGE
-		else
-			to_chat(user, "<span class='notice'>You push the plastic blade back down into the handle.</span>")
-			playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
-			src.icon_state = "sword0"
-			src.item_state = "sword0"
-			src.w_class = initial(w_class)
+/obj/item/toy/sword/attack_self(mob/user as mob)
+	src.active = !( src.active )
+	if (src.active)
+		to_chat(user, "<span class='notice'>You extend the plastic blade with a quick flick of your wrist.</span>")
+		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
+		src.icon_state = "swordblue"
+		src.item_state = "swordblue"
+		src.w_class = ITEM_SIZE_HUGE
+	else
+		to_chat(user, "<span class='notice'>You push the plastic blade back down into the handle.</span>")
+		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
+		src.icon_state = "sword0"
+		src.item_state = "sword0"
+		src.w_class = initial(w_class)
 
-		update_held_icon()
+	update_held_icon()
 
-		src.add_fingerprint(user)
-		return
+	src.add_fingerprint(user)
+	return
 
 /obj/item/sword/katana/toy
 	name = "toy katana"
