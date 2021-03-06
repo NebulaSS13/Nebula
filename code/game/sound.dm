@@ -136,7 +136,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 	sound_to(src, S)
 
 /client/proc/playtitlemusic()
-	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_YES)
+	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_YES && GLOB.using_map.lobby_track)
 		GLOB.using_map.lobby_track.play_to(src)
 
 /proc/get_rand_frequency()
