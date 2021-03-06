@@ -188,8 +188,8 @@
 			to_chat(mob, SPAN_WARNING("You're pinned down by \a [mob.pinned[1]]!"))
 		return MOVEMENT_STOP
 
-	for(var/obj/item/grab/G in mob.grabbed_by)
-		if(G.assailant != mob && (mob.restrained() || G.stop_move()))
+	for(var/obj/item/grab/G as anything in mob.grabbed_by)
+		if(G.assailant != mob && G.assailant != mover && (mob.restrained() || G.stop_move()))
 			if(mover == mob)
 				to_chat(mob, SPAN_WARNING("You're restrained and cannot move!"))
 			mob.ProcessGrabs()
@@ -223,9 +223,7 @@
 		for(var/atom/movable/AM as anything in mob.ret_grab())
 			if(AM != src && AM.loc != mob.loc && !AM.anchored && old_turf.Adjacent(AM))
 				AM.glide_size = mob.glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
-				// attempt 1: step(AM, get_dir(get_turf(AM), old_turf)) // Breaks on moving with a diagonal grab.
-				// attempt 2: AM.DoMove(get_dir(get_turf(AM), old_turf), mob, TRUE) // Why doesn't this work? :(
-				AM.dropInto(old_turf) // attempt 3
+				AM.DoMove(get_dir(get_turf(AM), old_turf), mob, TRUE)
 
 		for(var/obj/item/grab/G as anything in mob.get_active_grabs())
 			G.adjust_position()
@@ -233,7 +231,7 @@
 	if(QDELETED(mob)) // No idea why, but this was causing null check runtimes on live.
 		return
 
-	for(var/obj/item/grab/G as anything in mob)
+	for(var/obj/item/grab/G as anything in mob.get_active_grabs())
 		if(G.assailant_reverse_facing())
 			mob.set_dir(GLOB.reverse_dir[direction])
 		G.assailant_moved()
@@ -243,7 +241,7 @@
 	if(direction & (UP|DOWN))
 		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
 		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
-		for(var/obj/item/grab/G in mob.get_active_grabs())
+		for(var/obj/item/grab/G as anything in mob.get_active_grabs())
 			if(!G.affecting)
 				continue
 			var/turf/start = G.affecting.loc
