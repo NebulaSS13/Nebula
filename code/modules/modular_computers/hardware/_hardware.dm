@@ -21,7 +21,7 @@
 
 // Called on multitool click, prints diagnostic information to the user.
 /obj/item/stock_parts/computer/proc/diagnostics()
-	return list("Hardware Integrity Test... (Corruption: [initial(health) - health]/[initial(health)])")
+	return list("Hardware Integrity Test... (Corruption: [max_health ? round((max_health - health)/max_health * 100) : 0]%)")
 
 /obj/item/stock_parts/computer/Initialize()
 	. = ..()
