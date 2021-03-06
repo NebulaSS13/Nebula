@@ -32,10 +32,10 @@
 			last_handled_by_mob = weakref(grabber)
 
 /mob/proc/handle_grab_damage()
-	set waitfor = 0
+	set waitfor = FALSE
 
 /mob/proc/handle_grabs_after_move()
-	set waitfor = 0
+	set waitfor = FALSE
 
 /mob/proc/add_grab(var/obj/item/grab/grab)
 	return FALSE

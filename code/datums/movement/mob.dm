@@ -214,22 +214,30 @@
 	var/turf/old_turf = get_turf(mob)
 	step(mob, direction)
 
-	if(isturf(mob.loc))
-		for(var/atom/movable/M in mob.ret_grab())
-			if(M != src && M.loc != mob.loc && !M.anchored && get_dist(old_turf, M) <= 1)
-				M.glide_size = mob.glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
-				step(M, get_dir(M.loc, old_turf))
-		for(var/obj/item/grab/G in mob.get_active_grabs())
+	if(mob.loc == old_turf) // Did not move for whatever reason.
+		mob.moving = FALSE
+		return
+
+	var/turf/new_loc = mob.loc
+	if(istype(new_loc))
+		for(var/atom/movable/AM as anything in mob.ret_grab())
+			if(AM != src && AM.loc != mob.loc && !AM.anchored && old_turf.Adjacent(AM))
+				AM.glide_size = mob.glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
+				// attempt 1: step(AM, get_dir(get_turf(AM), old_turf)) // Breaks on moving with a diagonal grab.
+				// attempt 2: AM.DoMove(get_dir(get_turf(AM), old_turf), mob, TRUE) // Why doesn't this work? :(
+				AM.dropInto(old_turf) // attempt 3
+
+		for(var/obj/item/grab/G as anything in mob.get_active_grabs())
 			G.adjust_position()
 
 	if(QDELETED(mob)) // No idea why, but this was causing null check runtimes on live.
 		return
 
-	for (var/obj/item/grab/G in mob)
-		if (G.assailant_reverse_facing())
+	for(var/obj/item/grab/G as anything in mob)
+		if(G.assailant_reverse_facing())
 			mob.set_dir(GLOB.reverse_dir[direction])
 		G.assailant_moved()
-	for (var/obj/item/grab/G in mob.grabbed_by)
+	for(var/obj/item/grab/G as anything in mob.grabbed_by)
 		G.adjust_position()
 
 	if(direction & (UP|DOWN))
@@ -257,13 +265,11 @@
 			continue
 
 	//Moving with objects stuck in you can cause bad times.
-	if(get_turf(mob) != old_turf)
-		if(MOVING_QUICKLY(mob))
-			mob.last_quick_move_time = world.time
-			mob.adjust_stamina(-(mob.get_stamina_used_per_step() * (1+mob.encumbrance())))
-		mob.handle_embedded_and_stomach_objects()
-
-	mob.moving = 0
+	if(MOVING_QUICKLY(mob))
+		mob.last_quick_move_time = world.time
+		mob.adjust_stamina(-(mob.get_stamina_used_per_step() * (1+mob.encumbrance())))
+	mob.handle_embedded_and_stomach_objects()
+	mob.moving = FALSE
 
 /datum/movement_handler/mob/movement/MayMove(var/mob/mover)
 	return IS_SELF(mover) &&  mob.moving ? MOVEMENT_STOP : MOVEMENT_PROCEED
