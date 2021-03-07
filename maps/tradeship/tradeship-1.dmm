@@ -1070,7 +1070,7 @@
 "cJ" = (
 /obj/machinery/light,
 /obj/machinery/fabricator/imprinter{
-	initial_id_tag = "tradeship_rnd"
+	initial_network_id = "tradeship_rnd"
 	},
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science/fabricaton)
@@ -2793,7 +2793,7 @@
 	pixel_y = 0
 	},
 /obj/machinery/fabricator/robotics{
-	id_tag = "tradeship_rnd"
+	initial_network_id = "tradeship_rnd"
 	},
 /obj/machinery/newscaster{
 	pixel_y = -30
@@ -3121,7 +3121,7 @@
 	pixel_x = -22
 	},
 /obj/machinery/fabricator/protolathe{
-	initial_id_tag = "tradeship_rnd"
+	initial_network_id = "tradeship_rnd"
 	},
 /obj/machinery/alarm{
 	pixel_y = 24

@@ -25,6 +25,10 @@
 		fusion.set_tag(null, initial_id_tag)
 	. = ..()
 
+/obj/machinery/fusion_fuel_injector/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_id_tag, map_hash)
+
 /obj/machinery/fusion_fuel_injector/Destroy()
 	if(cur_assembly)
 		cur_assembly.dropInto(loc)

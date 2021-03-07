@@ -55,6 +55,10 @@
 	find_ports()
 	set_light(1, 1, 2)
 
+/obj/machinery/ftl_shunt/core/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_id_tag, map_hash)
+
 /obj/machinery/ftl_shunt/core/Destroy()
 	. = ..()
 	for(var/obj/machinery/ftl_shunt/fuel_port/FP in fuel_ports)
@@ -499,6 +503,10 @@
 		var/datum/extension/local_network_member/local_network = get_extension(src, /datum/extension/local_network_member)
 		local_network.set_tag(null, initial_id_tag)
 	. = ..()
+
+/obj/machinery/ftl_shunt/fuel_port/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_id_tag, map_hash)
 
 /obj/machinery/ftl_shunt/fuel_port/Destroy()
 	. = ..()

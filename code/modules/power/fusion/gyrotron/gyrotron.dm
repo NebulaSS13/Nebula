@@ -32,6 +32,10 @@
 	change_power_consumption(mega_energy * GYRO_POWER, POWER_USE_ACTIVE)
 	. = ..()
 
+/obj/machinery/power/emitter/gyrotron/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_id_tag, map_hash)
+
 /obj/machinery/power/emitter/gyrotron/Process()
 	change_power_consumption(mega_energy * GYRO_POWER, POWER_USE_ACTIVE)
 	. = ..()

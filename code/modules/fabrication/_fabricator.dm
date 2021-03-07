@@ -37,7 +37,6 @@
 		/decl/material/solid/plastic =   SHEET_MATERIAL_AMOUNT * 10
 	)
 
-	var/initial_id_tag
 	var/show_category = "All"
 	var/fab_status_flags = 0
 	var/mat_efficiency = 1.1
@@ -97,6 +96,10 @@
 			else if(ispath(mat, /decl/material))
 				var/decl/material/reg = mat
 				stored_substances_to_names[mat] = lowertext(initial(reg.name))
+
+/obj/machinery/fabricator/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_network_id, map_hash)
 
 /obj/machinery/fabricator/handle_post_network_connection()
 	..()

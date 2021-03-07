@@ -26,6 +26,10 @@
 			if(pointdefense_controllers.len > 1)
 				lan.remove_device(src)
 
+/obj/machinery/pointdefense_control/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_id_tag, map_hash)
+
 /obj/machinery/pointdefense_control/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(ui_template)
 		var/list/data = build_ui_data()
@@ -121,6 +125,10 @@
 	if(initial_id_tag)
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.set_tag(null, initial_id_tag)
+
+/obj/machinery/pointdefense/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_id_tag, map_hash)
 
 /obj/machinery/pointdefense/set_dir(new_dir)
 	if(new_dir != NORTH && new_dir != SOUTH) // Other dirs are invalid

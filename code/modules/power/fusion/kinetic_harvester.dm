@@ -23,6 +23,10 @@
 	queue_icon_update()
 	. = ..()
 
+/obj/machinery/kinetic_harvester/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_id_tag, map_hash)
+
 /obj/machinery/kinetic_harvester/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE
