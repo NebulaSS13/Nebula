@@ -16,7 +16,6 @@
 		)
 	shuttle_area = /area/map_template/ninja_dojo/start
 	current_location = "nav_ninja_start"
-	landmark_transition = "nav_ninja_transition"
 	announcer = "Proximity Sensor Array"
 	arrival_message = "Attention, anomalous sensor reading detected entering vessel proximity."
 	departure_message = "Attention, anomalous sensor reading detected leaving vessel proximity."
@@ -24,10 +23,6 @@
 /obj/effect/shuttle_landmark/ninja/start
 	name = "Clan Dojo"
 	landmark_tag = "nav_ninja_start"
-
-/obj/effect/shuttle_landmark/ninja/internim
-	name = "In transit"
-	landmark_tag = "nav_ninja_transition"
 
 // Areas
 /area/map_template/ninja_dojo

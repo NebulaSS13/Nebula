@@ -13,13 +13,11 @@
 	warmup_time = 0
 	defer_initialisation = TRUE
 	destination_tags = list(
-		"nav_ert_dock",
 		"nav_ert_start"
 		)
 	shuttle_area = /area/map_template/rescue_base/start
 	dock_target = "rescue_shuttle"
 	current_location = "nav_ert_start"
-	landmark_transition = "nav_ert_transition"
 	home_waypoint = "nav_ert_start"
 	announcer = "Proximity Sensor Array"
 	arrival_message = "Attention, vessel detected entering vessel proximity."
@@ -29,15 +27,6 @@
 	name = "Response Team Base"
 	landmark_tag = "nav_ert_start"
 	docking_controller = "rescue_base"
-
-/obj/effect/shuttle_landmark/ert/internim
-	name = "In transit"
-	landmark_tag = "nav_ert_transition"
-
-/obj/effect/shuttle_landmark/ert/dock
-	name = "Docking Port"
-	landmark_tag = "nav_ert_dock"
-	docking_controller = "rescue_shuttle_dock_airlock"
 
 // Areas
 

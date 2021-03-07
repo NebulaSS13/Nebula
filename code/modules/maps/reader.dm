@@ -532,7 +532,8 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 					break
 			if (!found)
 				throw ex
-	what.modify_mapped_vars(current_map_hash)
+	if(current_map_hash)
+		what.modify_mapped_vars(current_map_hash)
 	GLOB.use_preloader = FALSE
 
 /area/template_noop

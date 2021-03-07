@@ -2,6 +2,7 @@
 
 /datum/shuttle
 	var/name = ""
+	var/display_name = "" // User-facing; defaults to name.
 	var/warmup_time = 0
 	var/moving_status = SHUTTLE_IDLE
 
@@ -31,6 +32,8 @@
 
 /datum/shuttle/New(map_hash, var/obj/effect/shuttle_landmark/initial_location)
 	..()
+	if(!display_name)
+		display_name = name
 	if(map_hash) // We adjust all tag vars, including name, for the map on which they are loaded. This is also done on subtypes.
 		ADJUST_TAG_VAR(name, map_hash)
 		ADJUST_TAG_VAR(current_location, map_hash)

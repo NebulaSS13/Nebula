@@ -94,7 +94,8 @@
 /datum/map_template/proc/init_shuttles(var/pre_init_state, var/map_hash, var/list/initialized_areas_by_type)
 	for (var/shuttle_type in shuttles_to_initialise)
 		LAZYSET(SSshuttle.shuttles_to_initialize, shuttle_type, map_hash) // queue up for init.
-	SSshuttle.map_hash_to_areas[map_hash] = initialized_areas_by_type
+	if(map_hash)
+		SSshuttle.map_hash_to_areas[map_hash] = initialized_areas_by_type
 	SSshuttle.block_queue = pre_init_state
 	SSshuttle.clear_init_queue() // We will flush the queue unless there were other blockers, in which case they will do it.
 

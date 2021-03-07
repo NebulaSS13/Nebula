@@ -233,7 +233,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	id_tag = "admin_shuttle_dock_pump"
+	id_tag = "casino_dock_airlock"
 	},
 /obj/item/radio/intercom{
 	dir = 8;
@@ -261,7 +261,7 @@
 "aN" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
-	id_tag = "admin_shuttle_dock_pump"
+	id_tag = "casino_dock_airlock"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10
