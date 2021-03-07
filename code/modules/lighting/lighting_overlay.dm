@@ -127,8 +127,10 @@
 	return
 
 /atom/movable/lighting_overlay/Destroy()
+	// Do not remove this from SSlighting.overlay_queue
+	// or it will mess with the queue. It will fall out 
+	// safely during processing
 	total_lighting_overlays--
-	SSlighting.overlay_queue -= src
 
 	var/turf/T = loc
 	if(istype(T))
