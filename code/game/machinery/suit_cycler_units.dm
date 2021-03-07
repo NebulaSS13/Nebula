@@ -4,6 +4,17 @@
 	initial_access = list(access_construction)
 	available_modifications = list(/decl/item_modifier/space_suit/engineering, /decl/item_modifier/space_suit/atmos)
 
+/obj/machinery/suit_cycler/engineering/prepared
+	buildable = FALSE
+
+	helmet = /obj/item/clothing/head/helmet/space/void/engineering
+	suit = /obj/item/clothing/suit/space/void/engineering
+	boots = /obj/item/clothing/shoes/magboots
+
+/obj/machinery/suit_cycler/engineering/prepared/atmospheric
+	helmet = /obj/item/clothing/head/helmet/space/void/atmos
+	suit = /obj/item/clothing/suit/space/void/atmos
+
 /obj/machinery/suit_cycler/engineering/alt
 	available_modifications = list(
 		/decl/item_modifier/space_suit/engineering/alt,
@@ -29,6 +40,13 @@
 	initial_access = list(access_security)
 	available_modifications = list(/decl/item_modifier/space_suit/security, /decl/item_modifier/space_suit/security/alt)
 
+/obj/machinery/suit_cycler/security/prepared
+	buildable = FALSE
+
+	helmet = /obj/item/clothing/head/helmet/space/void/security
+	suit = /obj/item/clothing/suit/space/void/security
+	boots = /obj/item/clothing/shoes/magboots
+
 /obj/machinery/suit_cycler/security/alt
 	available_modifications = list(/decl/item_modifier/space_suit/security/alt)
 	buildable = FALSE
@@ -38,6 +56,13 @@
 	model_text = "Medical"
 	initial_access = list(access_medical)
 	available_modifications = list(/decl/item_modifier/space_suit/medical)
+
+/obj/machinery/suit_cycler/medical/prepared
+	buildable = FALSE
+
+	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt
+	suit = /obj/item/clothing/suit/space/void/medical/alt
+	boots = /obj/item/clothing/shoes/magboots
 
 /obj/machinery/suit_cycler/medical/alt
 	available_modifications = list(/decl/item_modifier/space_suit/medical/alt)
@@ -56,3 +81,14 @@
 	model_text = "Pilot"
 	initial_access = list(access_mining_office)
 	available_modifications = list(/decl/item_modifier/space_suit/pilot)
+
+/obj/machinery/suit_cycler/generic
+	name = "Generic suit cycler"
+	model_text = "Generic"
+	initial_access = list()
+
+/obj/machinery/suit_cycler/generic/prepared
+	buildable = FALSE
+
+	helmet = /obj/item/clothing/head/helmet/space
+	suit = /obj/item/clothing/suit/space
