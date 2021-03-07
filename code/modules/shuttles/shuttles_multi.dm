@@ -69,3 +69,11 @@
 	if(cloaked || isnull(arrival_message))
 		return
 	command_announcement.Announce(arrival_message, announcer || "[GLOB.using_map.boss_name]")
+
+/datum/shuttle/autodock/multi/test_landmark_setup()
+	. = ..()
+	if(.)
+		return
+	for(var/dest_tag in destination_tags)
+		if(!SSshuttle.get_landmark(dest_tag))
+			return "Could not locate at least one destination landmark (with tag [dest_tag])."

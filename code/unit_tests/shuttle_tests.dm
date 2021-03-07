@@ -20,3 +20,24 @@
 	else
 		pass("All sector landmark lists were configured properly.")
 	return 1
+
+// These tests help make sure shuttles on duplicate-capable maps are set up properly. Note that:
+// - You cannot set any of a /ferry or /multidock shuttle's waypoints to be on other templates if your template allows duplicates.
+/datum/unit_test/shuttles_shall_find_all_waypoints
+	name = "SHUTTLE: Shuttles shall find all of their set waypoints."
+
+/datum/unit_test/shuttles_shall_find_all_waypoints/start_test()
+	var/fail = FALSE
+
+	for(var/shuttle_name in SSshuttle.shuttles)
+		var/datum/shuttle/shuttle = SSshuttle.shuttles[shuttle_name]
+		var/problem = shuttle.test_landmark_setup()
+		if(problem)
+			log_bad("Shuttle [shuttle_name] of type [shuttle.type] had the following problem: [problem]")
+			fail = TRUE
+
+	if (fail)
+		fail("Some shuttles were misconfigured.")
+	else
+		pass("All shuttles were properly configured.")
+	return 1

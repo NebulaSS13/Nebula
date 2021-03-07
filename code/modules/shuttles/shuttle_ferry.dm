@@ -49,3 +49,18 @@
 /datum/shuttle/autodock/ferry/process_arrived()
 	..()
 	next_location = get_location_waypoint(!location)
+
+/datum/shuttle/autodock/ferry/test_landmark_setup()
+	. = ..()
+	if(.)
+		return
+	if(!waypoint_station)
+		if(initial(waypoint_station))
+			return "The station waypoint landmark (tag: [initial(waypoint_station)]) was not found."
+		else
+			return "A station waypoint was not properly set."
+	if(!waypoint_offsite)
+		if(initial(waypoint_offsite))
+			return "The offsite waypoint landmark (tag: [initial(waypoint_offsite)]) was not found."
+		else
+			return "A offsite waypoint was not properly set."

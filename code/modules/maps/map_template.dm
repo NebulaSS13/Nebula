@@ -111,7 +111,7 @@
 	var/list/atoms_to_initialise = list()
 	var/shuttle_state = pre_init_shuttles()
 
-	var/map_hash = "[sequential_id("map_id")]"
+	var/map_hash = (template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES) && "[sequential_id("map_id")]"
 	ASSERT(isnull(GLOB._preloader.current_map_hash)) // Recursive maploading is possible, but not from this block: recursive loads should be triggered in Initialize, from init_atoms below.
 	GLOB._preloader.current_map_hash = map_hash
 
@@ -157,7 +157,7 @@
 	var/list/atoms_to_initialise = list()
 	var/shuttle_state = pre_init_shuttles()
 
-	var/map_hash = "[sequential_id("map_id")]"
+	var/map_hash = (template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES) && "[sequential_id("map_id")]"
 	ASSERT(isnull(GLOB._preloader.current_map_hash))
 	GLOB._preloader.current_map_hash = map_hash
 

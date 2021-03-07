@@ -195,3 +195,10 @@
 
 /obj/effect/shuttle_landmark/transit
 	flags = SLANDMARK_FLAG_ZERO_G
+
+/datum/shuttle/autodock/test_landmark_setup()
+	. = ..()
+	if(.)
+		return
+	if(!landmark_transition && initial(landmark_transition))
+		return "A transition landmark was expected (tag: [initial(landmark_transition)]) but not found."

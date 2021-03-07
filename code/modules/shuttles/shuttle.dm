@@ -296,3 +296,16 @@
 	if(!next_location)
 		return "None"
 	return next_location.name
+
+// Testing
+// Returns either null (all good) or a string explaining any issues.
+/datum/shuttle/proc/test_landmark_setup()
+	if(!current_location)
+		if(initial(current_location))
+			return "Starting location (tag: [initial(current_location)]) was not found."
+		else
+			return "Starting location was not set or forwarded properly."
+	if(!motherdock && initial(motherdock))
+		return "The motherdock (tag: [initial(motherdock)]) was not found."
+	if(!mothershuttle && initial(mothershuttle))
+		return "The mothershuttle (tag: [initial(mothershuttle)]) was not found."
