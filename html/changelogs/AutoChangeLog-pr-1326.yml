@@ -1,0 +1,5 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - tweak: The status condition backend (paralyzed, asleep, etc) has been completely
+      rewritten; please report any inconsistencies or bugs.
