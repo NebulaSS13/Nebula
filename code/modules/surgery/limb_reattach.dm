@@ -128,7 +128,7 @@
 	name = "Connect limb"
 	description = "This procedure is used to reconnect a replaced severed limb."
 	allowed_tools = list(
-		TOOL_HEMOSTAT = 100,
+		TOOL_SUTURES = 100,
 		TOOL_CABLECOIL = 75
 	)
 	can_infect = 1
@@ -145,15 +145,15 @@
 
 /decl/surgery_step/limb/connect/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, target_zone)
-	user.visible_message("[user] starts connecting tendons and muscles in [target]'s [E.amputation_point] with [tool].", \
-	"You start connecting tendons and muscle in [target]'s [E.amputation_point].")
+	user.visible_message("[user] starts reattaching tendons and muscles in [target]'s [E.amputation_point] with [tool].", \
+	"You start reattaching tendons and muscle in [target]'s [E.amputation_point].")
 	..()
 
 /decl/surgery_step/limb/connect/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = GET_EXTERNAL_ORGAN(target, target_zone)
 	var/obj/item/organ/external/P = GET_EXTERNAL_ORGAN(target, E.parent_organ)
-	user.visible_message("<span class='notice'>[user] has connected tendons and muscles in [target]'s [E.amputation_point] with [tool].</span>",	\
-	"<span class='notice'>You have connected tendons and muscles in [target]'s [E.amputation_point] with [tool].</span>")
+	user.visible_message("<span class='notice'>[user] has reattached tendons and muscles in [target]'s [E.amputation_point] with [tool].</span>",	\
+	"<span class='notice'>You have reattached tendons and muscles in [target]'s [E.amputation_point] with [tool].</span>")
 
 	//This time we call add_organ but we want it to install in a non detached state
 	target.add_organ(E, P, FALSE, TRUE, FALSE)

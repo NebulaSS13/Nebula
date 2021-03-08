@@ -654,7 +654,7 @@
 
 
 /obj/item/integrated_circuit/manipulation/ai/attackby(var/obj/item/I, var/mob/user)
-	if(is_type_in_list(I, list(/obj/item/aicard, /obj/item/paicard, /obj/item/mmi)))
+	if(is_type_in_list(I, list(/obj/item/aicard, /obj/item/paicard, /obj/item/organ/internal/brain_interface)))
 		load_ai(user, I)
 	else return ..()
 

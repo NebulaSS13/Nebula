@@ -158,7 +158,7 @@
 	origin_tech = @'{"biotech":4,"materials":4,"magnets":2,"programming":3}'
 	relative_size = 10
 
-	var/ownerckey
+	var/stored_ckey
 	var/default_language
 	var/list/languages = list()
 	var/datum/mind/backup
@@ -174,7 +174,7 @@
 
 	var/user_vox = isspecies(user, SPECIES_VOX)
 	if (istype(backup))
-		var/owner_viable = find_dead_player(ownerckey, TRUE)
+		var/owner_viable = find_dead_player(stored_ckey, TRUE)
 		if (user_vox)
 			to_chat(user, SPAN_NOTICE("The integrity light on [src] blinks [owner_viable ? "rapidly. It can be implanted." : "slowly. It is dormant."]"))
 		else
@@ -194,7 +194,7 @@
 		backup = owner.mind
 		default_language = owner.default_language
 		if(owner.ckey)
-			ownerckey = owner.ckey
+			stored_ckey = owner.ckey
 
 /obj/item/organ/internal/voxstack/proc/backup_inviable()
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
@@ -212,7 +212,7 @@
 	set waitfor = FALSE
 	if(C && !backup_inviable())
 		prompting = TRUE
-		var/response = alert(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
+		var/response = alert(find_dead_player(stored_ckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
 		prompting = FALSE
 		if(src && response == "Yes" && owner == C)
 			overwrite()

@@ -24,7 +24,7 @@
 
 #define isatom(A) isloc(A)
 
-#define isbrain(A) istype(A, /mob/living/carbon/brain)
+#define isbrain(A) istype(A, /mob/living/brain)
 
 #define iscarbon(A) istype(A, /mob/living/carbon)
 

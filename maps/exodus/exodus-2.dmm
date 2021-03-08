@@ -34898,9 +34898,9 @@
 "bvA" = (
 /obj/effect/floor_decal/corner/paleblue,
 /obj/structure/table,
-/obj/item/mmi,
-/obj/item/mmi,
-/obj/item/mmi,
+/obj/item/organ/internal/brain_interface/empty,
+/obj/item/organ/internal/brain_interface/empty,
+/obj/item/organ/internal/brain_interface/empty,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/research/robotics)
 "bvB" = (
@@ -36562,7 +36562,7 @@
 /obj/item/flash/synthetic,
 /obj/item/flash/synthetic,
 /obj/item/flash/synthetic,
-/obj/item/organ/internal/posibrain,
+/obj/item/organ/internal/brain/robotic,
 /obj/item/robotanalyzer,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10

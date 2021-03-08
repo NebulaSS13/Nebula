@@ -4,4 +4,4 @@
 	icon = 'mods/species/bayliens/unathi/icons/organs.dmi'
 
 /obj/item/organ/internal/brain/lizard
-	can_use_mmi = FALSE
+	can_use_brain_interface = FALSE

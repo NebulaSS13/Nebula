@@ -15,7 +15,6 @@
 	description =           "Simple AI-driven robots are used for many menial or repetitive tasks in human space."
 	cyborg_noun = null
 	base_prosthetics_model = null
-
 	blood_types = list(/decl/blood_type/coolant)
 
 	available_bodytypes = list(/decl/bodytype/prosthetic/utility_frame)
@@ -58,3 +57,8 @@
 
 /decl/species/utility_frame/disfigure_msg(var/mob/living/carbon/human/H)
 	. = SPAN_DANGER("The faceplate is dented and cracked!\n")
+
+#ifdef MODPACK_SHACKLES
+/decl/species/utility_frame
+	can_be_shackled = TRUE
+#endif

@@ -28,7 +28,8 @@
 	W.write("is_shackled", pref.is_shackled)
 
 /datum/category_item/player_setup_item/law_pref/sanitize_character()
-	if(!istype(pref.laws))	pref.laws = list()
+	if(!istype(pref.laws))
+		pref.laws = list()
 
 	var/decl/bodytype/mob_bodytype = pref.get_bodytype_decl()
 	if(!mob_bodytype?.can_be_shackled)
@@ -68,6 +69,7 @@
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/law_pref/OnTopic(href, href_list, user)
+
 	if(href_list["toggle_shackle"])
 		pref.is_shackled = !pref.is_shackled
 		return TOPIC_REFRESH
@@ -107,6 +109,7 @@
 /decl/bodytype
 	var/can_be_shackled
 
-/decl/bodytype/Initialize()
-	. = ..()
-	can_be_shackled = !!(BP_POSIBRAIN in has_organ)
+#ifdef MODPACK_UTILITY_FRAMES
+/decl/species/utility_frame
+	can_be_shackled = TRUE
+#endif

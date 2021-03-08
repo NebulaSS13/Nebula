@@ -47,11 +47,14 @@
 		deathmessage = species.get_death_message(src) || "seizes up and falls limp..."
 	else
 		deathmessage = "no message"
+
 	. = ..(gibbed, deathmessage, show_dead_message)
+
 	if(!gibbed)
 		handle_organs()
 		if(species.death_sound)
 			playsound(loc, species.death_sound, 80, 1, 1)
+
 	handle_hud_list()
 
 /mob/living/carbon/human/proc/is_husked()
