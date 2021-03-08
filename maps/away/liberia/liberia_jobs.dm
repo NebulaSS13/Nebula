@@ -2,8 +2,6 @@
 /decl/submap_archetype/liberia
 	descriptor = "merchant ship"
 	map = "Liberia - Merchant Ship"
-	blacklisted_species = null
-	whitelisted_species = null
 	crew_jobs = list(
 		/datum/job/submap/merchant
 	)
