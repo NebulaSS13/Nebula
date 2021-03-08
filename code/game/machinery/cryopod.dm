@@ -168,7 +168,7 @@
 		/obj/item/integrated_circuit/input/teleporter_locator,
 		/obj/item/card/id/captains_spare,
 		/obj/item/aicard,
-		/obj/item/mmi,
+		/obj/item/brain_interface,
 		/obj/item/paicard,
 		/obj/item/gun,
 		/obj/item/pinpointer,
@@ -319,14 +319,14 @@
 // Also make sure there is a valid control computer
 /obj/machinery/cryopod/robot/despawn_occupant()
 	var/mob/living/silicon/robot/R = occupant
-	if(!istype(R)) return ..()
-
-	qdel(R.mmi)
-	for(var/obj/item/I in R.module) // the tools the borg has; metal, glass, guns etc
-		for(var/obj/item/O in I) // the things inside the tools, if anything; mainly for janiborg trash bags
-			O.forceMove(R)
-		qdel(I)
-	qdel(R.module)
+	if(istype(R))
+		R.clear_brain()
+		if(R.module)
+			for(var/obj/item/I in R.module) // the tools the borg has; metal, glass, guns etc
+				for(var/obj/item/O in I) // the things inside the tools, if anything; mainly for janiborg trash bags
+					O.forceMove(R)
+				qdel(I)
+			qdel(R.module)
 
 	. = ..()
 
@@ -354,9 +354,9 @@
 
 		var/preserve = null
 		// Snowflaaaake.
-		if(istype(W, /obj/item/mmi))
-			var/obj/item/mmi/brain = W
-			if(brain.brainmob && brain.brainmob.client && brain.brainmob.key)
+		if(istype(W, /obj/item/brain_interface))
+			var/obj/item/brain_interface/brain = W
+			if(brain.holding_brain?.brainmob && brain.holding_brain.brainmob.client && brain.holding_brain.brainmob.key)
 				preserve = 1
 			else
 				continue

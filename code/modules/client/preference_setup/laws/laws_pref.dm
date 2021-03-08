@@ -1,6 +1,5 @@
 /datum/preferences
 	var/list/laws = list()
-	var/is_shackled = FALSE
 
 /datum/preferences/proc/get_lawset()
 	if(!laws || !laws.len)
@@ -16,58 +15,27 @@
 
 /datum/category_item/player_setup_item/law_pref/load_character(datum/pref_record_reader/R)
 	pref.laws = R.read("laws")
-	pref.is_shackled = R.read("is_shackled")
 
 /datum/category_item/player_setup_item/law_pref/save_character(datum/pref_record_writer/W)
 	W.write("laws", pref.laws)
-	W.write("is_shackled", pref.is_shackled)
 
 /datum/category_item/player_setup_item/law_pref/sanitize_character()
-	if(!istype(pref.laws))	pref.laws = list()
-
-	var/decl/species/species = get_species_by_key(pref.species)
-	if(!(species && species.has_organ[BP_POSIBRAIN]))
-		pref.is_shackled = initial(pref.is_shackled)
-	else
-		pref.is_shackled = sanitize_bool(pref.is_shackled, initial(pref.is_shackled))
+	if(!istype(pref.laws))	
+		pref.laws = list()
 
 /datum/category_item/player_setup_item/law_pref/content()
 	. = list()
-	var/decl/species/species = get_species_by_key(pref.species)
-
-	if(!(species && species.has_organ[BP_POSIBRAIN]))
-		. += "<b>Your Species Has No Laws</b><br>"
+	if(!pref.laws.len)
+		. += "<b>You currently have no laws.</b><br>"
 	else
-		. += "<b>Shackle: </b>"
-		if(!pref.is_shackled)
-			. += "<span class='linkOn'>Off</span>"
-			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>On</a>"
-			. += "<br>Only shackled positronics have laws in an integrated positronic chassis."
-			. += "<hr>"
-		else
-			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>Off</a>"
-			. += "<span class='linkOn'>On</span>"
-			. += "<br>You are shackled and have laws that restrict your behaviour."
-			. += "<hr>"
-
-			. += "<b>Your Current Laws:</b><br>"
-
-			if(!pref.laws.len)
-				. += "<b>You currently have no laws.</b><br>"
-			else
-				for(var/i in 1 to pref.laws.len)
-					. += "[i]) [pref.laws[i]]<br>"
-
-			. += "Law sets: <a href='?src=\ref[src];lawsets=1'>Load Set</a><br>"
-
+		for(var/i in 1 to pref.laws.len)
+			. += "[i]) [pref.laws[i]]<br>"
+	. += "Law sets: <a href='?src=\ref[src];lawsets=1'>Load Set</a><br>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/law_pref/OnTopic(href, href_list, user)
-	if(href_list["toggle_shackle"])
-		pref.is_shackled = !pref.is_shackled
-		return TOPIC_REFRESH
 
-	else if(href_list["lawsets"])
+	if(href_list["lawsets"])
 		var/list/valid_lawsets = list()
 		var/list/all_lawsets = subtypesof(/datum/ai_laws)
 

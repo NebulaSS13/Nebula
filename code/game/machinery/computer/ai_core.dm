@@ -11,7 +11,7 @@ var/global/list/empty_playable_ai_cores = list()
 
 	var/datum/ai_laws/laws
 	var/obj/item/stock_parts/circuitboard/circuit
-	var/obj/item/mmi/brain
+	var/obj/item/brain_interface/brain
 	var/authorized
 
 	var/circuit_secured = FALSE
@@ -138,30 +138,23 @@ var/global/list/empty_playable_ai_cores = list()
 
 				if(circuit && circuit_secured)
 
-					if((istype(P, /obj/item/mmi) || istype(P, /obj/item/organ/internal/posibrain)) && wired && circuit && circuit_secured)
-						var/mob/living/carbon/brain/B
-						if(istype(P, /obj/item/mmi))
-							var/obj/item/mmi/M = P
-							B = M.brainmob
-						else
-							var/obj/item/organ/internal/posibrain/PB = P
-							B = PB.brainmob
-						if(!B)
+					if(istype(P, /obj/item/brain_interface) && wired && circuit && circuit_secured)
+						var/obj/item/brain_interface/M = P
+						if(!M.holding_brain?.brainmob)
 							to_chat(user, SPAN_WARNING("Sticking an empty [P] into the frame would sort of defeat the purpose."))
 							return
-						if(B.stat == 2)
+						if(M.holding_brain.brainmob.stat == DEAD)
 							to_chat(user, SPAN_WARNING("Sticking a dead [P] into the frame would sort of defeat the purpose."))
 							return
-						if(jobban_isbanned(B, "AI"))
+						if(jobban_isbanned(M.holding_brain.brainmob, "AI"))
 							to_chat(user, SPAN_WARNING("This [P] does not seem to fit."))
 							return
-						if(!user.unEquip(P, src))
-							return
-						if(B.mind)
-							clear_antag_roles(B.mind, 1)
-						brain = P
-						to_chat(usr, "Added [P].")
-						update_icon()
+						if(user.unEquip(P, src))
+							if(M.holding_brain.brainmob.mind)
+								clear_antag_roles(M.holding_brain.brainmob.mind, 1)
+							brain = P
+							to_chat(usr, "You connect \the [P] to the frame and slide it into the casing.")
+							update_icon()
 						return TRUE
 
 					if(istype(P, /obj/item/stack/material))

@@ -1,5 +1,4 @@
-// This system is used to grab a ghost from observers with the required preferences 
-// and lack of bans set. See posibrain.dm for an example of how they are called/used.
+// This system is used to grab a ghost from observers with the required preferences and lack of bans set.
 /decl/ghosttrap
 	var/name
 	var/minutes_since_death = 0     // If non-zero the ghost must have been dead for this many minutes to be allowed to spawn
@@ -97,31 +96,35 @@
 /***********************************
 * Positronic brains. *
 ***********************************/
-/decl/ghosttrap/positronic_brain
-	name = "positronic brain"
+/decl/ghosttrap/machine_intelligence
+	name = "machine intelligence"
 	ban_checks = list("AI","Robot")
-	pref_check = "ghost_posibrain"
-	ghost_trap_message = "They are occupying a positronic brain now."
+	pref_check = "ghost_machine_intelligence"
+	ghost_trap_message = "They are occupying a computer intelligence core now."
 
-/decl/ghosttrap/positronic_brain/forced(var/mob/user)
-	var/obj/item/organ/internal/posibrain/brain = new(get_turf(user))
-	if(!brain.brainmob)
-		brain.init()
-	request_player(brain.brainmob, "Someone is requesting a personality for a positronic brain.", 60 SECONDS)
+/decl/ghosttrap/machine_intelligence/transfer_personality(mob/candidate, mob/target)
+	if(assess_candidate(candidate))
+		var/obj/item/brain_interface/robotic/brain = target.loc?.loc
+		if(istype(brain))
+			brain.transfer_player(candidate)
+			brain.searching = FALSE
+			brain.update_icon()
+		announce_ghost_joinleave(candidate, 0, "[ghost_trap_message]")
+		if(brain?.holding_brain?.brainmob)
+			welcome_candidate(brain.holding_brain.brainmob)
+			. = TRUE
 
-/decl/ghosttrap/positronic_brain/welcome_candidate(var/mob/target)
-	to_chat(target, "<b>You are a positronic brain, brought into existence on [station_name()].</b>")
+/decl/ghosttrap/machine_intelligence/forced(var/mob/user)
+	var/obj/item/brain_interface/robotic/brain = new(get_turf(user))
+	request_player(brain.holding_brain.brainmob, "Someone is requesting a player for a machine intelligence.", 60 SECONDS)
+
+/decl/ghosttrap/machine_intelligence/welcome_candidate(var/mob/target)
+	to_chat(target, "<b>You are a machine intelligence, brought into existence on [station_name()].</b>")
 	to_chat(target, "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>")
 	to_chat(target, "<b>Remember, the purpose of your existence is to serve the crew and the [station_name()]. Above all else, do no harm.</b>")
 	to_chat(target, "<b>Use say [target.get_language_prefix()]b to speak to other artificial intelligences.</b>")
 	var/turf/T = get_turf(target)
-	var/obj/item/organ/internal/posibrain/P = target.loc
-	T.visible_message("<span class='notice'>\The [P] chimes quietly.</span>")
-	if(!istype(P)) //wat
-		return
-	P.searching = 0
-	P.SetName("positronic brain ([P.brainmob.name])")
-	P.update_icon()
+	T.visible_message(SPAN_NOTICE("\The [target] beeps loudly."))
 
 /***********************************
 * Walking mushrooms and such. *

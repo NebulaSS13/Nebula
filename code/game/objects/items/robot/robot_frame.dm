@@ -60,8 +60,8 @@
 			parts[part.bp_tag] = part
 			update_icon()
 
-	// Install an MMI/brain.
-	else if(istype(W, /obj/item/mmi) || istype(W, /obj/item/organ/internal/posibrain))
+	// Install a brain.
+	else if(istype(W, /obj/item/brain_interface))
 
 		if(!istype(loc,/turf))
 			to_chat(user, SPAN_WARNING("You can't put \the [W] in without the frame being on the ground."))
@@ -71,31 +71,24 @@
 			to_chat(user, SPAN_WARNING("The frame is not ready for the central processor to be installed."))
 			return
 
-		var/mob/living/carbon/brain/B
-		if(istype(W, /obj/item/mmi))
-			var/obj/item/mmi/M = W
-			B = M.brainmob
-		else
-			var/obj/item/organ/internal/posibrain/P = W
-			B = P.brainmob
-
-		if(!B)
+		var/obj/item/brain_interface/M = W
+		if(!M.holding_brain?.brainmob)
 			to_chat(user, SPAN_WARNING("Sticking an empty [W.name] into the frame would sort of defeat the purpose."))
 			return
 
-		if(jobban_isbanned(B, "Robot"))
+		if(jobban_isbanned(M.holding_brain.brainmob, "Robot"))
 			to_chat(user, SPAN_WARNING("\The [W] does not seem to fit."))
 			return
 
-		if(B.stat == DEAD)
+		if(M.holding_brain.brainmob.stat == DEAD)
 			to_chat(user, SPAN_WARNING("Sticking a dead [W.name] into the frame would sort of defeat the purpose."))
 			return
 
 		var/ghost_can_reenter = 0
-		if(B.mind)
-			if(!B.key)
+		if(M.holding_brain.brainmob.mind)
+			if(!M.holding_brain.brainmob.key)
 				for(var/mob/observer/ghost/G in global.player_list)
-					if(G.can_reenter_corpse && G.mind == B.mind)
+					if(G.can_reenter_corpse && G.mind == M.holding_brain.brainmob.mind)
 						ghost_can_reenter = 1
 						break
 			else
@@ -112,11 +105,11 @@
 		if(!O)
 			return
 
-		O.mmi = W
+		O.brain = W
 		O.set_invisibility(0)
 		O.custom_name = created_name
 		O.updatename("Default")
-		B.mind.transfer_to(O)
+		M.holding_brain.brainmob.mind.transfer_to(O)
 		if(O.mind && O.mind.assigned_role)
 			O.job = O.mind.assigned_role
 		else

@@ -82,24 +82,7 @@
 				winset(client, "input", "text=[null]")
 
 /mob/living/carbon/human/say_understands(var/mob/other,var/decl/language/speaking = null)
-
-	if(species.can_understand(other))
-		return 1
-
-	//These only pertain to common. Languages are handled by mob/say_understands()
-	if (!speaking)
-		if (istype(other, /mob/living/silicon))
-			return 1
-		if (istype(other, /mob/living/carbon/brain))
-			return 1
-
-	//This is already covered by mob/say_understands()
-	//if (istype(other, /mob/living/simple_animal))
-	//	if((other.universal_speak && !speaking) || src.universal_speak || src.universal_understand)
-	//		return 1
-	//	return 0
-
-	return ..()
+	. = species.can_understand(other) || (!speaking && (issilicon(other) || isbrain(other))) || ..()
 
 /mob/living/carbon/human/GetVoice()
 

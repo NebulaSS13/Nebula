@@ -25,8 +25,8 @@
 		var/mob/living/silicon/robot/R = new(get_turf(M))
 		R.set_gender(M.gender)
 		R.job = "Robot"
-		R.mmi = new /obj/item/mmi(R)
-		R.mmi.transfer_identity(M)
+		R.brain = new /obj/item/brain_interface(R)
+		R.brain.transfer_player(M)
 		return R
 
 	if(get_species_by_key(choice))
