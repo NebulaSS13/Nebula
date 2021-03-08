@@ -32,7 +32,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		if(initial_access && length(initial_access) > 0)
 			for(var/access_list in initial_access)
 				// Each part is an AND component.
-				var/obj/item/stock_parts/network_lock/lock = install_component(/obj/item/stock_parts/network_lock/buildable, refresh_parts = FALSE)
+				var/obj/item/stock_parts/network_receiver/network_lock/lock = install_component(/obj/item/stock_parts/network_receiver/network_lock/buildable, refresh_parts = FALSE)
 				lock.grants = islist(access_list) ? access_list : list(access_list)
 
 	// Create the parts we are supposed to have. If not full_populate, this is only hard-baked parts, and more will be added later.
@@ -310,7 +310,7 @@ Standard helpers for users interacting with machinery parts.
 		var/obj/item/stock_parts/part = path
 		if(!(initial(part.part_flags) & PART_FLAG_HAND_REMOVE))
 			continue
-		var/obj/item/stock_parts/network_lock/lock = part
+		var/obj/item/stock_parts/network_receiver/network_lock/lock = part
 		if(istype(lock) && !allowed(user))
 			continue
 		if(components_are_accessible(path))

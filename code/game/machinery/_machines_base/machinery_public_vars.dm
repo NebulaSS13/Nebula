@@ -32,7 +32,7 @@ Must be implemented by subtypes.
 /decl/public_access/public_variable/proc/write_var_protected(datum/owner, new_value)
 	if(!can_write)
 		return FALSE
-	write_var(owner, new_value)
+	return write_var(owner, new_value)
 
 /*
 Listener registration. You must unregister yourself if you are destroyed; the owner being destroyed will be handled automatically.

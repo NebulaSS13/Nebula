@@ -452,7 +452,7 @@ Class Procs:
 
 /obj/machinery/get_req_access()
 	. = ..() || list()
-	for(var/obj/item/stock_parts/network_lock/lock in get_all_components_of_type(/obj/item/stock_parts/network_lock))
+	for(var/obj/item/stock_parts/network_receiver/network_lock/lock in get_all_components_of_type(/obj/item/stock_parts/network_receiver/network_lock))
 		.+= lock.get_req_access()
 
 /obj/machinery/get_contained_external_atoms()

@@ -281,6 +281,8 @@
 	if(.)
 		return
 	var/obj/item/stock_parts/computer/drive_slot/drive_slot = os.get_component(PART_D_SLOT)
+	if(!istype(drive_slot))
+		return "HARDWARE ERROR: No drive slot was found."
 	if(!drive_slot.check_functionality())
 		return "HARDWARE ERROR: [drive_slot] is non-operational"
 	if(!istype(drive_slot.stored_drive))
