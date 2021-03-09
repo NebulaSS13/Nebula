@@ -1,4 +1,4 @@
-/turf/simulated/wall/proc/update_material()
+/turf/simulated/wall/proc/update_material(var/update_neighbors)
 	if(construction_stage != -1)
 		if(reinf_material)
 			construction_stage = 6
@@ -13,10 +13,18 @@
 	update_strings()
 	set_opacity(material.opacity >= 0.5)
 	SSradiation.resistance_cache.Remove(src)
-	for(var/turf/simulated/wall/W in RANGE_TURFS(src, 1))
-		W.wall_connections = null
-		W.other_connections = null
-		W.queue_icon_update()
+	if(update_neighbors)
+		var/iterate_turfs = list()
+		for(var/turf/simulated/wall/W in RANGE_TURFS(src, 1))
+			W.wall_connections = null
+			W.other_connections = null
+			iterate_turfs += W
+		for(var/turf/simulated/wall/W as anything in iterate_turfs)
+			W.update_icon()
+	else
+		wall_connections = null
+		other_connections = null
+		update_icon()
 
 /turf/simulated/wall/proc/update_strings()
 	if(reinf_material)

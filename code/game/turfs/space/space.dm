@@ -9,6 +9,7 @@
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	permit_ao = FALSE
 	z_eventually_space = TRUE
+	turf_flags = TURF_FLAG_SKIP_ICON_INIT
 	var/static/list/dust_cache
 
 /turf/space/proc/build_dust_cache()
@@ -26,22 +27,25 @@
 		dust_cache["[i]"] = I
 
 /turf/space/Initialize()
-	. = ..()
+
+	SHOULD_CALL_PARENT(FALSE)
+	atom_flags |= ATOM_FLAG_INITIALIZED
+
 	update_starlight()
 	if (!dust_cache)
 		build_dust_cache()
 	appearance = dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"]
 
 	if(!HasBelow(z))
-		return
+		return INITIALIZE_HINT_NORMAL
+
 	var/turf/below = GetBelow(src)
-
 	if(isspaceturf(below))
-		return
-	var/area/A = below.loc
+		return INITIALIZE_HINT_NORMAL
 
+	var/area/A = below.loc
 	if(!below.density && (A.area_flags & AREA_FLAG_EXTERNAL))
-		return
+		return INITIALIZE_HINT_NORMAL
 
 	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
 

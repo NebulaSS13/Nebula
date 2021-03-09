@@ -66,9 +66,9 @@ var/list/natural_walls = list()
 		reinf_material = GET_DECL(reinf_material)
 	. = INITIALIZE_HINT_LATELOAD
 
-/turf/exterior/wall/LateInitialize()
+/turf/exterior/wall/LateInitialize(var/ml)
 	..()
-	update_material()
+	update_material(!ml)
 	spread_deposit()
 
 /turf/exterior/wall/explosion_act(severity)
@@ -145,7 +145,7 @@ var/list/natural_walls = list()
 		SetName("natural [material.solid_name] wall")
 		desc = "A natural cliff face composed of bare [material.solid_name]."
 
-/turf/exterior/wall/proc/update_material()
+/turf/exterior/wall/proc/update_material(var/update_neighbors)
 	if(!material)
 		material = GET_DECL(get_default_material())
 	if(material)
@@ -154,8 +154,11 @@ var/list/natural_walls = list()
 		explosion_resistance = reinf_material.explosion_resistance
 	update_strings()
 	set_opacity(material.opacity >= 0.5)
-	for(var/turf/exterior/T in RANGE_TURFS(src, 1))
-		T.queue_icon_update()
+	if(update_neighbors)
+		for(var/turf/exterior/T in RANGE_TURFS(src, 1))
+			T.queue_icon_update()
+	else
+		queue_icon_update()
 	if(reinf_material?.ore_icon_overlay)
 		ore_overlay = image('icons/turf/mining_decals.dmi', "[reinf_material.ore_icon_overlay]")
 		ore_overlay.appearance_flags = RESET_COLOR
