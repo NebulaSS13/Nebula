@@ -16,7 +16,7 @@
 	var/downgrade_on_move = 0					// If the grab needs to be downgraded when the grabber moves.
 	var/force_danger = 0						// If the grab is strong enough to be able to force someone to do something harmful to them.
 	var/restrains = 0							// If the grab acts like cuffs and prevents action from the victim.
-	var/grab_slowdown = 7
+	var/grab_slowdown = 0.15                    // Multiplier for the object size (w_class or mob_size) of the grabbed atom, applied as slowdown.
 	var/shift = 0
 	var/success_up =   "You get a better grip on rep_affecting."
 	var/success_down = "You adjust your grip on rep_affecting."

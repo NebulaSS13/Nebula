@@ -250,11 +250,11 @@
 	var/volume = REAGENT_VOLUME(holder, type)
 	M.add_chemical_effect(CE_PULSE, 1)
 	M.add_chemical_effect(CE_BREATHLOSS, 0.02 * volume)
-	if(volume >= 5)
+	if(volume >= 10)
 		M.add_chemical_effect(CE_PULSE, 1)
-		M.add_chemical_effect(CE_SLOWDOWN, (volume/5) ** 2)
-	else if(LAZYACCESS(M.chem_doses, type) > 20) //after prolonged exertion
-		ADJ_STATUS(M, STAT_JITTER, 10)
+		M.add_chemical_effect(CE_SLOWDOWN, (volume/10) ** 2)
+	else if(LAZYACCESS(M.chem_doses, type) > 30) //after prolonged exertion
+		ADJ_STATUS(M, STAT_JITTER, 5)
 
 /decl/material/liquid/nanoblood
 	name = "nanoblood"

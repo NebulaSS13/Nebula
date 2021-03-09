@@ -201,3 +201,6 @@
 
 /obj/get_mass()
 	return min(2**(w_class-1), 100)
+
+/obj/get_object_size()
+	return w_class

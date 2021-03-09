@@ -860,7 +860,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 /decl/species/proc/handle_exertion(mob/living/carbon/human/H)
 	if (!exertion_effect_chance)
 		return
-	var/chance = exertion_effect_chance * H.encumbrance()
+	var/chance = max((100 - H.stamina), exertion_effect_chance * H.encumbrance())
 	if (chance && prob(H.skill_fail_chance(SKILL_HAULING, chance)))
 		var/synthetic = H.isSynthetic()
 		if (synthetic)
