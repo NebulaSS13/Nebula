@@ -21,10 +21,22 @@
 	var/list/excessive_mobs= actual_mobs - expected_mobs
 
 	if(missing_mobs.len || excessive_mobs.len)
-		fail("[helper_proc] did not return the expected mobs. Expected [english_list(expected_mobs)], was [english_list(actual_mobs)]")
+		log_bad("Expected: ")
+		for(var/expected in expected_mobs)
+			log_bad("\t[log_info_line(expected)]")
+		log_bad("Was: ")
+		for(var/actual in actual_mobs)
+			log_bad("\t[log_info_line(actual)]")
+		log_bad("Missing: ")
+		for(var/missing in missing_mobs)
+			log_bad("\t[log_info_line(missing)]")
+		log_bad("Excess: ")
+		for(var/excess in excessive_mobs)
+			log_bad("\t[log_info_line(excess)]")
 		log_debug(mob_one.virtual_mob.sight)
 		log_debug(mob_one.virtual_mob.see_invisible)
 		log_debug(mob_one.virtual_mob.see_in_dark)
+		fail("[helper_proc] did not return the expected mobs")
 	else
 		pass("[helper_proc] returned the expected mobs.")
 
@@ -48,7 +60,7 @@
 	storage = new(mob_one.loc)
 	mob_one.forceMove(storage)
 	expected_mobs = list(mob_one, mob_two, mob_three)
-/datum/unit_test/virtual/helper/check_hearers_in_range_with_mob_inside_storage/Destroy()
+/datum/unit_test/virtual/helper/check_hearers_in_range_with_mob_inside_storage/teardown_test()
 	QDEL_NULL(storage)
 	. = ..()
 
@@ -89,7 +101,7 @@
 	storage = new(mob_one.loc)
 	mob_one.forceMove(storage)
 	expected_mobs = list(mob_one, mob_two)
-/datum/unit_test/virtual/helper/check_hosts_in_view_range_with_mob_inside_object/Destroy()
+/datum/unit_test/virtual/helper/check_hosts_in_view_range_with_mob_inside_object/teardown_test()
 	QDEL_NULL(storage)
 	. = ..()
 

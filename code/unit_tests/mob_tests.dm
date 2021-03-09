@@ -1,4 +1,3 @@
-
 /*
  *
  *  Mob Unit Tests.
@@ -190,6 +189,7 @@
 	var/ending_damage = damage_check(H, damagetype)
 
 	var/ending_health = H.health
+	qdel(H)
 
 	// Now test this stuff.
 

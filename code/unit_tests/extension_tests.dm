@@ -101,6 +101,7 @@
 	else
 		fail("[log_info_line(four)] had unexpected arguments:\n[log_info_line(four.holder)]\n[log_info_line(four.first_argument)]\n[log_info_line(four.second_argument)]")
 
+	qdel(O)
 	return TRUE
 
 /datum/unit_test/extensions/immediate_extension_shall_be_provided_arguments_as_expected
@@ -117,6 +118,7 @@
 	else
 		fail("[log_info_line(five)] had unexpected arguments:\n[log_info_line(five.holder)]\n[log_info_line(five.first_argument)]\n[log_info_line(five.second_argument)]")
 
+	qdel(O)
 	return TRUE
 
 /datum/unit_test/extensions/get_or_create_extension_shall_initialize_as_expected
@@ -141,6 +143,7 @@
 	else
 		pass("All assertions passed.")
 
+	qdel(O)
 	return TRUE
 
 /datum/unit_test/extensions/get_or_create_extension_with_arguments_shall_initialize_as_expected
@@ -156,6 +159,7 @@
 	else
 		fail("[log_info_line(four)] had unexpected arguments:\n[log_info_line(four.holder)]\n[log_info_line(four.first_argument)]\n[log_info_line(four.second_argument)]")
 
+	qdel(O)
 	return TRUE
 
 /datum/extension/test_one
