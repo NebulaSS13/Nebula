@@ -45,18 +45,26 @@
 		luminosity = 1
 	RecalculateOpacity()
 
+	if(!(turf_flags & TURF_FLAG_SKIP_ICON_INIT))
+		if(mapload)
+			queue_ao(TRUE)
+			update_icon()
+		else
+			regenerate_ao()
+			for(var/thing in RANGE_TURFS(src, 1))
+				var/turf/T = thing
+				if(istype(T) && !(T.turf_flags & TURF_FLAG_SKIP_ICON_INIT))
+					T.queue_icon_update()
+
 	if(mapload)
-		queue_ao(TRUE)
-		queue_icon_update()
 		update_starlight()
 	else
-		regenerate_ao()
 		for(var/thing in RANGE_TURFS(src, 1))
 			var/turf/T = thing
 			if(istype(T))
 				T.update_starlight()
-				T.queue_icon_update()
 		SSair.mark_for_update(src)
+
 	updateVisibility(src, FALSE)
 
 	if (z_flags & ZM_MIMIC_BELOW)

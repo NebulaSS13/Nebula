@@ -69,9 +69,9 @@ var/list/wall_noblend_objects = list(
 	set_extension(src, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	START_PROCESSING(SSturf, src) //Used for radiation.
 
-/turf/simulated/wall/LateInitialize()
+/turf/simulated/wall/LateInitialize(var/ml)
 	..()
-	update_material()
+	update_material(!ml)
 
 /turf/simulated/wall/Destroy()
 	STOP_PROCESSING(SSturf, src)
