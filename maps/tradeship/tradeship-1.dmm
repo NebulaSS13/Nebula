@@ -2082,10 +2082,6 @@
 /obj/machinery/suit_cycler/tradeship,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/eva)
-"fe" = (
-/obj/effect/landmark/test/space_turf,
-/turf/space,
-/area/space)
 "fs" = (
 /obj/structure/closet/wardrobe/mixed,
 /obj/item/storage/backpack/dufflebag,
@@ -2526,11 +2522,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
-"pq" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/test/safe_turf,
-/turf/simulated/floor/tiled,
-/area/ship/trade/cargo/lower)
 "pr" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall/hull,
@@ -4948,7 +4939,7 @@ aa
 aa
 aa
 aa
-fe
+aa
 aa
 aa
 aa
@@ -6894,7 +6885,7 @@ du
 du
 aU
 du
-pq
+du
 Dh
 bv
 du

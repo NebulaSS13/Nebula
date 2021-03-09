@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/space,
-/area/space)
+/area/test_area/edge_of_map)
 "b" = (
 /turf/unsimulated/wall,
 /area/test_area/powered_dynamic_lighting)
@@ -52,8 +52,31 @@
 	icon_state = "hydrofloor"
 	},
 /area/test_area/requires_power_non_dynamic_lighting)
+"m" = (
+/turf/unsimulated/wall,
+/area/test_area/general)
+"n" = (
+/turf/simulated/floor,
+/area/test_area/general)
+"o" = (
+/turf/space,
+/area/test_area/general)
+"p" = (
+/obj/effect/landmark/test/safe_turf,
+/turf/simulated/floor,
+/area/test_area/general)
+"q" = (
+/obj/effect/landmark/test/space_turf,
+/turf/space,
+/area/test_area/general)
 
 (1,1,1) = {"
+a
+a
+a
+a
+a
+a
 a
 a
 a
@@ -96,8 +119,20 @@ a
 a
 a
 a
+a
+a
+a
+a
+a
+a
 "}
 (3,1,1) = {"
+a
+a
+a
+a
+a
+a
 a
 a
 a
@@ -140,8 +175,20 @@ a
 a
 a
 a
+a
+a
+a
+a
+a
+a
 "}
 (5,1,1) = {"
+a
+a
+a
+a
+a
+a
 a
 a
 a
@@ -184,8 +231,20 @@ a
 a
 a
 a
+a
+a
+a
+a
+a
+a
 "}
 (7,1,1) = {"
+a
+a
+a
+a
+a
+a
 a
 a
 a
@@ -215,6 +274,12 @@ a
 a
 a
 a
+m
+m
+m
+m
+m
+m
 b
 b
 b
@@ -237,6 +302,12 @@ a
 a
 a
 a
+m
+n
+n
+n
+n
+n
 b
 d
 b
@@ -259,6 +330,12 @@ a
 a
 a
 a
+m
+n
+n
+n
+n
+n
 b
 d
 b
@@ -281,6 +358,12 @@ a
 a
 a
 a
+m
+n
+n
+p
+n
+n
 b
 d
 b
@@ -303,6 +386,12 @@ a
 a
 a
 a
+m
+n
+n
+n
+n
+n
 b
 b
 b
@@ -325,6 +414,12 @@ a
 a
 a
 a
+m
+n
+n
+n
+n
+n
 b
 d
 b
@@ -347,6 +442,12 @@ a
 a
 a
 a
+m
+m
+m
+m
+m
+m
 b
 b
 b
@@ -369,6 +470,12 @@ a
 a
 a
 a
+m
+m
+m
+m
+m
+m
 c
 c
 c
@@ -391,6 +498,12 @@ a
 a
 a
 a
+m
+o
+o
+o
+o
+o
 c
 e
 c
@@ -413,6 +526,12 @@ a
 a
 a
 a
+m
+o
+o
+o
+o
+o
 c
 e
 c
@@ -435,6 +554,12 @@ a
 a
 a
 a
+m
+o
+o
+q
+o
+o
 c
 e
 c
@@ -457,6 +582,12 @@ a
 a
 a
 a
+m
+o
+o
+o
+o
+o
 c
 c
 c
@@ -479,6 +610,12 @@ a
 a
 a
 a
+m
+o
+o
+o
+o
+o
 c
 e
 c
@@ -501,6 +638,12 @@ a
 a
 a
 a
+m
+m
+m
+m
+m
+m
 c
 c
 c
@@ -516,6 +659,12 @@ a
 a
 "}
 (22,1,1) = {"
+a
+a
+a
+a
+a
+a
 a
 a
 a
@@ -558,8 +707,20 @@ a
 a
 a
 a
+a
+a
+a
+a
+a
+a
 "}
 (24,1,1) = {"
+a
+a
+a
+a
+a
+a
 a
 a
 a
@@ -602,8 +763,20 @@ a
 a
 a
 a
+a
+a
+a
+a
+a
+a
 "}
 (26,1,1) = {"
+a
+a
+a
+a
+a
+a
 a
 a
 a
@@ -646,8 +819,20 @@ a
 a
 a
 a
+a
+a
+a
+a
+a
+a
 "}
 (28,1,1) = {"
+a
+a
+a
+a
+a
+a
 a
 a
 a

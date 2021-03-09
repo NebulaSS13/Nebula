@@ -39,6 +39,10 @@
 			fail("Error after transfer: [error]")
 		else
 			pass("Final reagent holders had correct values.")
+
+	qdel(from)
+	if(!isturf(target))
+		qdel(target)
 	return TRUE
 
 /datum/unit_test/chemistry/proc/perform_transfer(var/atom/from, var/atom/target)

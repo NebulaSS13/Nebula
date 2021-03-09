@@ -1220,9 +1220,6 @@
 /obj/structure/plasticflaps/airtight,
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
-"df" = (
-/turf/simulated/wall,
-/area/ministation/cargo)
 "dg" = (
 /obj/structure/closet,
 /obj/random/maintenance,
@@ -2830,9 +2827,6 @@
 /area/ministation/science)
 "hh" = (
 /obj/structure/closet/l3closet/scientist,
-/turf/simulated/floor/tiled/white,
-/area/ministation/science)
-"hi" = (
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
 "hj" = (
@@ -10340,18 +10334,6 @@
 /obj/machinery/computer/arcade/battle,
 /turf/simulated/floor/shuttle/blue,
 /area/ministation/arrival_shuttle)
-"yN" = (
-/turf/simulated/floor/shuttle/blue,
-/area/ministation/arrival_shuttle)
-"yO" = (
-/turf/simulated/floor/shuttle/blue,
-/area/ministation/arrival_shuttle)
-"yP" = (
-/turf/simulated/floor/shuttle/blue,
-/area/ministation/arrival_shuttle)
-"yQ" = (
-/turf/simulated/floor/shuttle/blue,
-/area/ministation/arrival_shuttle)
 "yR" = (
 /obj/machinery/computer/cryopod{
 	pixel_y = 32
@@ -11397,18 +11379,10 @@
 /obj/item/flashlight/lamp,
 /turf/simulated/floor/holofloor/lino,
 /area/ministation/telecomms)
-"Bz" = (
-/obj/effect/landmark/test/safe_turf,
-/turf/simulated/floor/tiled,
-/area/ministation/hall/s)
 "BA" = (
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/ministation/maint/sw)
-"BB" = (
-/obj/effect/landmark/test/space_turf,
-/turf/space,
-/area/space)
 "BC" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "stripe";
@@ -16234,10 +16208,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/ministation/hall/n)
-"Rw" = (
-/obj/machinery/door/airlock/hatch/maintenance,
-/turf/simulated/floor/plating,
-/area/ministation/court)
 "RD" = (
 /turf/simulated/wall/r_wall,
 /area/ministation/cryo)
@@ -16343,18 +16313,11 @@
 	},
 /turf/simulated/floor/plating,
 /area/ministation/maint/detective)
-"SF" = (
-/obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/plating,
-/area/ministation/court)
 "SN" = (
 /obj/machinery/camera/autoname{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
-/area/ministation/court)
-"SS" = (
-/turf/simulated/wall,
 /area/ministation/court)
 "ST" = (
 /obj/structure/lattice,
@@ -43521,7 +43484,7 @@ mS
 xf
 la
 yk
-yN
+yj
 yj
 zS
 yj
@@ -43778,7 +43741,7 @@ mS
 xf
 la
 yk
-yO
+yj
 zo
 zo
 zo
@@ -44035,7 +43998,7 @@ mS
 kE
 la
 yk
-yP
+yj
 yj
 yj
 yj
@@ -44292,7 +44255,7 @@ mS
 xh
 la
 yk
-yQ
+yj
 zo
 zo
 zo
@@ -45026,7 +44989,7 @@ cd
 cn
 cy
 cO
-df
+au
 dD
 dI
 eF
@@ -45540,7 +45503,7 @@ ce
 cm
 cy
 cN
-df
+au
 dF
 dI
 dI
@@ -49117,7 +49080,7 @@ aa
 aa
 aa
 aa
-BB
+aa
 aa
 aa
 aa
@@ -49424,7 +49387,7 @@ aV
 aV
 sC
 tv
-Bz
+aV
 aV
 aV
 wf
@@ -49905,13 +49868,13 @@ ah
 ah
 ah
 dR
-SS
+Ib
 UI
 UI
 CY
 UI
 ZP
-SS
+Ib
 di
 eQ
 di
@@ -50162,13 +50125,13 @@ cu
 cW
 cV
 dS
-SS
+Ib
 Qh
 Od
 ND
 Od
 Xe
-SS
+Ib
 eR
 fD
 fV
@@ -50419,13 +50382,13 @@ cv
 cJ
 cJ
 dT
-SS
+Ib
 Zt
 Od
 ND
 Od
 Od
-SS
+Ib
 eS
 dm
 dU
@@ -50676,7 +50639,7 @@ cw
 Qq
 cW
 Zr
-Rw
+OD
 Ir
 Ir
 UD
@@ -50933,7 +50896,7 @@ cw
 cJ
 cX
 cJ
-SS
+Ib
 Sf
 Pk
 TF
@@ -51190,7 +51153,7 @@ cw
 cw
 cw
 cJ
-SS
+Ib
 Ir
 Ir
 ND
@@ -51447,7 +51410,7 @@ aa
 aa
 cw
 cK
-SS
+Ib
 IB
 ZZ
 PT
@@ -51704,7 +51667,7 @@ aa
 aa
 cw
 cJ
-SS
+Ib
 Nc
 Ms
 Vv
@@ -51961,13 +51924,13 @@ ad
 aa
 cw
 cK
-SS
-SS
-SS
-SS
-SS
-SS
-SS
+Ib
+Ib
+Ib
+Ib
+Ib
+Ib
+Ib
 eW
 fJ
 fZ
@@ -52220,7 +52183,7 @@ ad
 cn
 aa
 aa
-SS
+Ib
 MA
 YQ
 dX
@@ -52477,7 +52440,7 @@ aa
 ad
 aa
 aa
-SF
+Ia
 Nw
 dq
 dY
@@ -52734,7 +52697,7 @@ aa
 aa
 aa
 aa
-SF
+Ia
 Nw
 OP
 Nw
@@ -52991,7 +52954,7 @@ aa
 aa
 aa
 aa
-SS
+Ib
 Vj
 YY
 Po
@@ -53248,13 +53211,13 @@ aa
 aa
 aa
 aa
-SS
-SS
-SS
-SS
-SS
+Ib
+Ib
+Ib
+Ib
+Ib
 fa
-SS
+Ib
 Wv
 SC
 Wv
@@ -56598,7 +56561,7 @@ fb
 fK
 gd
 ae
-hi
+db
 db
 ih
 iL
