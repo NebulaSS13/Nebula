@@ -9,7 +9,7 @@
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	permit_ao = FALSE
 	z_eventually_space = TRUE
-	turf_flags = TURF_FLAG_SKIP_ICON_INIT
+	turf_flags = (TURF_FLAG_SKIP_ICON_INIT | TURF_FLAG_SKIP_AO_INIT)
 	var/static/list/dust_cache
 
 /turf/space/proc/build_dust_cache()
@@ -26,12 +26,19 @@
 		I.overlays += im
 		dust_cache["[i]"] = I
 
-/turf/space/Initialize()
+/turf/space/proc/update_starlight()
+	if(config.starlight && (locate(/turf/simulated) in RANGE_TURFS(src, 1)))
+		set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.background_color)
+	else
+		set_light(0)
+
+/turf/space/Initialize(var/mapload)
 
 	SHOULD_CALL_PARENT(FALSE)
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
 	update_starlight()
+
 	if (!dust_cache)
 		build_dust_cache()
 	appearance = dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"]

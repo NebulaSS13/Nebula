@@ -45,24 +45,20 @@
 		luminosity = 1
 	RecalculateOpacity()
 
-	if(!(turf_flags & TURF_FLAG_SKIP_ICON_INIT))
-		if(mapload)
-			queue_ao(TRUE)
-			update_icon()
-		else
-			regenerate_ao()
-			for(var/thing in RANGE_TURFS(src, 1))
-				var/turf/T = thing
-				if(istype(T) && !(T.turf_flags & TURF_FLAG_SKIP_ICON_INIT))
-					T.queue_icon_update()
-
 	if(mapload)
-		update_starlight()
+		if(!(turf_flags & TURF_FLAG_SKIP_AO_INIT))
+			queue_ao(TRUE)
+		if(!(turf_flags & TURF_FLAG_SKIP_ICON_INIT))
+			update_icon()
 	else
 		for(var/thing in RANGE_TURFS(src, 1))
 			var/turf/T = thing
-			if(istype(T))
-				T.update_starlight()
+			if(!istype(T))
+				continue
+			if(!(T.turf_flags & TURF_FLAG_SKIP_ICON_INIT))
+				T.update_icon()
+			if(!(T.turf_flags & TURF_FLAG_SKIP_AO_INIT))
+				T.queue_ao(TRUE)
 		SSair.mark_for_update(src)
 
 	updateVisibility(src, FALSE)
@@ -360,22 +356,6 @@ var/const/enterloopsanity = 100
 
 /turf/proc/is_floor()
 	return FALSE
-
-/turf/proc/update_starlight()
-	if(!config.starlight)
-		return
-	var/area/A = get_area(src)
-	if(!A.show_starlight)
-		return
-	//Let's make sure not to break everything if people use a crazy setting.
-	for(var/thing in RANGE_TURFS(src,1))
-		if(istype(thing, /turf/simulated))
-			var/turf/simulated/T = thing
-			A = get_area(T)
-			if(A?.dynamic_lighting)
-				set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.background_color)
-				return
-	set_light(0)
 
 /turf/proc/get_footstep_sound(var/mob/caller)
 	return
