@@ -89,7 +89,6 @@ Subtypes
 /datum/terminal_command/man/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/list/manargs = get_arguments(text)
 	if(!length(manargs) || isnum(text2num(manargs[1])))
-		. = list()
 		var/selected_page = (length(manargs)) ? text2num(manargs[1]) : 1
 		
 		var/list/valid_commands = list()
@@ -465,6 +464,23 @@ Subtypes
 	needs_network = TRUE
 
 /datum/terminal_command/com/proper_input_entered(text, mob/user, datum/terminal/terminal)
+	// If the user is unskilled, call a random method
+	if(!user.skill_check(core_skill, SKILL_EXPERT))
+		var/target_tag = terminal.network_target
+		if(!target_tag)
+			return "com: No network target set. Use 'target' to set a network target."
+
+		var/datum/computer_network/network = terminal.computer.get_network()
+		var/datum/extension/network_device/D = network.get_device_by_tag(target_tag)
+
+		if(!istype(D))
+			return "com: Could not find target device with network tag [target_tag]."
+
+		if(!D.has_commands)
+			return "com: Target device cannot receive commmands."
+
+		return D.random_method(user)
+
 	var/list/com_args = get_arguments(text)
 	if(!length(com_args))
 		return "com: Improper syntax, use com \[variable\] \[value\]."
@@ -493,9 +509,10 @@ Subtypes
 // Lists the commands available on the target device.
 /datum/terminal_command/listcom
 	name = "listcom"
-	man_entry = list("Format: listcom \[pg number\]", "Lists commands available on the current network target.")
+	man_entry = list("Format: listcom \[pg number / command\]", "Lists commands available on the current network target.", "If a command is given as an argument, provides information about that command.")
 	pattern = @"^listcom"
 	needs_network = TRUE
+	skill_needed = SKILL_EXPERT
 
 /datum/terminal_command/listcom/proper_input_entered(text, mob/user, datum/terminal/terminal)	
 	var/target_tag = terminal.network_target
@@ -512,18 +529,36 @@ Subtypes
 		return "listcom: Target device cannot receive commmands."
 
 	var/list/listcom_args = get_arguments(text)
+	if(!length(listcom_args) || isnum(text2num(listcom_args[1])))
+		. = list()
+		var/selected_page = (length(listcom_args)) ? text2num(listcom_args[1]) : 1
 
-	var/selected_page = (length(listcom_args)) ? text2num(listcom_args[1]) : 1
-	if(!isnum(selected_page))
-		return "listcom: Improper syntax, use format listcom \[page number\]."
+		var/list/valid_commands = list()
+		for(var/alias in D.command_and_call)
+			valid_commands += "Method - [alias]"
+		for(var/alias in D.command_and_write)
+			valid_commands += "Variable - [alias]"
+
+		return print_as_page(valid_commands, "command", selected_page, terminal.history_max_length - 1)
+
+	var/selected_alias = listcom_args[1]
+	var/decl/public_access/selected_ref = D.command_and_call[selected_alias] || D.command_and_write[selected_alias]
+	if(selected_alias in D.command_and_call)
+		selected_ref = D.command_and_call[selected_alias]
+	else if(selected_alias in D.command_and_write)
+		selected_ref = D.command_and_write[selected_alias]
+	else
+		return "listcom: No command with alias '[selected_alias]' found."
 	
-	var/list/valid_commands = list()
-	for(var/alias in D.command_and_call)
-		valid_commands += "[alias]"
-	for(var/alias in D.command_and_write)
-		valid_commands += "[alias]"
-	
-	return print_as_page(valid_commands, "command", selected_page, terminal.history_max_length - 1)
+	. = list()
+	. += "[selected_ref.name]: [selected_ref.desc]"
+	if(istype(selected_ref, /decl/public_access/public_variable))
+		var/decl/public_access/public_variable/pub_var = selected_ref
+		. += "Var Type: [pub_var.var_type]"
+		. += "Writable: [pub_var.can_write ? "TRUE" : "FALSE"]"
+	else if(istype(selected_ref, /decl/public_access/public_method))
+		var/decl/public_access/public_method/pub_method = selected_ref
+		. += "Has Arguments: [pub_method.forward_args ? "TRUE" : "FALSE"]"
 
 // Adds a command attached to a random reference, either a variable or a method.
 /datum/terminal_command/addcom

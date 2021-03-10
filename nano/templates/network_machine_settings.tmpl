@@ -33,51 +33,5 @@
 		{{:helper.link(data.network_tag, null, { "change_net_tag" : 1 })}}
 	</div>
 	<hr>
-	{{if data.commands}}
-		<div class="item">
-			<div class="itemLabel">
-				Method Commands:
-			</div>
-			<div class="itemContent">
-				<table width = '90%'>
-					<th>(-)</th>
-					<th>Alias</th>
-					<th>Reference</th>
-					<th>Info</th>
-					{{for data.methods}}
-						<tr>
-							<td>{{:helper.link("(-)", null, {"remove_command" : value.alias, "change_methods" : 1})}}</td>
-							<td>{{:helper.link(value.alias, null, {"change_command_alias" : value.alias, "change_methods" : 1})}}</td>
-							<td>{{:helper.link(value.reference_name, null, {"change_reference" : value.alias, "change_methods" : 1})}}</td>
-							<td>{{:helper.link("?", null, {"command_desc" : value.reference, "change_methods" : 1})}}</td>
-						</tr>
-					{{/for}}
-				</table>
-				{{:helper.link("(+)", null, {"add_command" : 1, "change_methods" : 1})}}
-			</div>
-		</div>
-		<div class="item">
-			<div class="itemLabel">
-				Variable Commands:
-			</div>
-			<div class="itemContent">
-				<table width = '90%'>
-					<th>(-)</th>
-					<th>Alias</th>
-					<th>Reference</th>
-					<th>Info</th>
-					{{for data.variables}}
-						<tr>
-							<td>{{:helper.link("(-)", null, {"remove_command" : value.alias, "change_variables" : 1})}}</td>
-							<td>{{:helper.link(value.alias, null, {"change_command_alias" : value.alias, "change_variables" : 1})}}</td>
-							<td>{{:helper.link(value.reference_name, null, {"change_reference" : value.alias, "change_variables" : 1})}}</td>
-							<td>{{:helper.link("?", null, {"command_desc" : value.reference, "change_variables" : 1})}}</td>
-						</tr>
-					{{/for}}
-				</table>
-				{{:helper.link("(+)", null, {"add_command" : 1, "change_variables" : 1})}}
-			</div>
-		</div>
-	{{/if}}
 	<i>EXONET Firmware v110.04.4h Copyright EXONETWORKS INC</i>
 {{/if}} 

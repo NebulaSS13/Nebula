@@ -12,6 +12,8 @@
 	var/list/command_and_call // alias -> public method to be called.
 	var/list/command_and_write // alias -> public variable to be written to or read from.
 
+	var/last_rand_time 		   // Last time a random method was called.
+
 /datum/extension/network_device/New(datum/holder, n_id, n_key, c_type, autojoin = TRUE)
 	..()
 	network_id = n_id
@@ -25,9 +27,8 @@
 		SSnetworking.queue_connection(src)
 	
 	if(has_commands)
-		LAZYINITLIST(command_and_call)
-		LAZYINITLIST(command_and_write)
-	
+		reload_commands()
+
 /datum/extension/network_device/Destroy()
 	disconnect()
 	. = ..()
@@ -207,12 +208,6 @@
 	else if(href_list["change_net_tag"])
 		do_change_net_tag(user)
 		return TOPIC_REFRESH
-	else if(href_list["change_methods"])
-		command_list_topic(command_and_call, get_public_methods(), user, href_list)
-		return TOPIC_REFRESH
-	else if(href_list["change_variables"])
-		command_list_topic(command_and_write, get_public_variables(), user, href_list)
-		return TOPIC_REFRESH
 
 /datum/extension/network_device/proc/has_access(mob/user)
 	var/datum/computer_network/network = get_network()
@@ -225,52 +220,6 @@
 		return TRUE
 	var/obj/M = holder
 	return M.allowed(user)
-
-/datum/extension/network_device/proc/command_list_topic(list/selected_commands, list/valid_commands, mob/user, href_list)
-	if(href_list["remove_command"])
-		var/thing = href_list["remove_command"]
-		LAZYREMOVE(selected_commands, thing)
-		return TOPIC_REFRESH
-
-	if(href_list["change_command_alias"])
-		var/thing = href_list["change_command_alias"]
-		if(selected_commands && selected_commands[thing])
-			var/new_key = input(user, "Select a new alias for this command:", "Alias Select", thing) as null|text
-			if(!new_key || !can_interact(user))
-				return TOPIC_REFRESH
-			if(!selected_commands || !selected_commands[thing])
-				return TOPIC_REFRESH
-			selected_commands[new_key] = selected_commands[thing]
-			selected_commands -= thing
-		return TOPIC_REFRESH
-
-	if(href_list["change_reference"])
-		var/thing = href_list["change_reference"]
-		var/decl/public_access/variable = selected_commands && selected_commands[thing]
-		if(!variable || !LAZYLEN(valid_commands))
-			return TOPIC_REFRESH
-		var/list/valid_variables = list()
-		for(var/path in valid_commands)
-			valid_variables |= valid_commands[path]
-		var/new_var = input(user, "Select a new reference for this alias:", "Reference Select", thing) as null|anything in valid_variables
-		if(!new_var || !can_interact(user))
-			return TOPIC_REFRESH
-		if(!(selected_commands && selected_commands[thing] == variable))
-			return TOPIC_REFRESH
-		set_command_reference(selected_commands, thing, new_var)
-		return TOPIC_REFRESH
-	
-	if(href_list["add_command"])
-		if(!LAZYLEN(valid_commands))
-			return TOPIC_REFRESH
-		add_command(selected_commands, null, valid_commands)
-		return TOPIC_REFRESH
-
-	if(href_list["command_desc"])
-		var/decl/public_access/variable = locate(href_list["command_desc"])
-		if(istype(variable))
-			to_chat(user, variable.desc)
-		return TOPIC_NOACTION
 
 // Return the target of any commands passed to this device.
 /datum/extension/network_device/proc/get_command_target()
@@ -386,21 +335,42 @@
 					if("FALSE")
 						return FALSE
 
-/datum/extension/network_device/proc/sanitize_commands()
+// Calls a random method for skill failure etc.
+/datum/extension/network_device/proc/random_method(var/user)
+	if(world.time < last_rand_time + 5 SECONDS)
+		return "Reinstancing command system, please try again in a few moments."
+	if(user && !has_access(user))
+		return "Access denied"
+	var/rand_alias = pick(command_and_call)
+	var/decl/public_access/public_method/rand_method = command_and_call[rand_alias]
+	rand_method.perform(get_command_target(), list())
+	last_rand_time = world.time
+	return "Encoding fault, incorrect command resolution likely"
+
+// Reloads commands and automatically adds them to the proper lists.
+/datum/extension/network_device/proc/reload_commands()
+	LAZYCLEARLIST(command_and_call)
+	LAZYCLEARLIST(command_and_write)
+
 	var/obj/machinery/M = get_command_target()
 	if(!has_commands || !istype(M))
-		LAZYCLEARLIST(command_and_call)
-		LAZYCLEARLIST(command_and_write)
 		return
-	for(var/thing in command_and_call)
-		var/decl/public_access/pub = command_and_call[thing]
-		if(!istype(pub) || !(pub.type in M.public_methods))
-			command_and_call -= thing
-	for(var/thing in command_and_write)
-		var/decl/public_access/pub = command_and_write[thing]
-		if(!istype(pub) || !(pub.type in M.public_variables))
-			command_and_write -= thing
 
+	var/list/pub_methods = get_public_methods()
+	var/list/pub_vars = get_public_variables()
+
+	for(var/path in pub_methods)
+		var/decl/public_access/pub = pub_methods[path]
+		var/alias = pub.name
+		alias = replacetext(alias, " ", "_")
+		LAZYSET(command_and_call, alias, pub) 
+
+	for(var/path in pub_vars)
+		var/decl/public_access/pub = pub_vars[path]
+		var/alias = pub.name
+		alias = replacetext(alias, " ", "_")
+		LAZYSET(command_and_write, alias, pub) 
+	
 //Subtype for passive devices, doesn't init until asked for
 /datum/extension/network_device/lazy
 	base_type = /datum/extension/network_device
