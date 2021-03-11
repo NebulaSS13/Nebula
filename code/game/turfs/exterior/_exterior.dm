@@ -60,12 +60,7 @@
 		set_light(owner.lightlevel, 0.1, 2)
 		if(owner.planetary_area && istype(loc, world.area))
 			ChangeArea(src, owner.planetary_area)
-	..()
-	. = INITIALIZE_HINT_LATELOAD
-
-/turf/exterior/LateInitialize()
 	. = ..()
-	update_icon(TRUE)
 
 /turf/exterior/levelupdate()
 	for(var/obj/O in src)
@@ -97,7 +92,7 @@
 	if(!istype(src, get_base_turf_by_area(src)) && (severity == 1 || (severity == 2 && prob(40))))
 		ChangeTurf(get_base_turf_by_area(src))
 
-/turf/exterior/on_update_icon(var/update_neighbors)
+/turf/exterior/on_update_icon()
 	. = ..() // Recalc AO and flooding overlay.
 	cut_overlays()
 	if(LAZYLEN(decals))
@@ -127,8 +122,6 @@
 				if(WEST)
 					I.pixel_x -= world.icon_size
 			add_overlay(I)
-		if(update_neighbors)
-			turf_to_check.update_icon()
 
 	if(icon_has_corners)
 		for(var/direction in GLOB.cornerdirs)
@@ -161,8 +154,3 @@
 		vis_contents += air.graphic
 	else
 		vis_contents.Cut()
-
-	if(update_neighbors)
-		for(var/direction in GLOB.cornerdirs)
-			var/turf/turf_to_check = get_step(src,direction)
-			turf_to_check?.update_icon()
