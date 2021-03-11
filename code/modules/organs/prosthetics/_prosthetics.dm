@@ -12,8 +12,8 @@
 	. = MODULAR_BODYPART_INVALID
 	if(BP_IS_PROSTHETIC(src) && model)
 		var/decl/prosthetics_manufacturer/manufacturer = decls_repository.get_decl(model)
-		if(!isnull(manufacturer?.modular_bodyparts))
-			. = manufacturer.modular_bodyparts
+		if(!isnull(manufacturer?.modular_prosthetic_tier))
+			. = manufacturer.modular_prosthetic_tier
 
 // Checks if a limb could theoretically be removed.
 // Note that this does not currently bother checking if a child or internal organ is vital.

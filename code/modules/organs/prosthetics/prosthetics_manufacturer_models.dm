@@ -7,4 +7,4 @@
 	manual_dexterity = DEXTERITY_SIMPLE_MACHINES
 	movement_slowdown = 1
 	is_robotic = FALSE
-	modular_bodyparts = MODULAR_BODYPART_PROSTHETIC
+	modular_prosthetic_tier = MODULAR_BODYPART_PROSTHETIC
