@@ -78,7 +78,7 @@
 /area/ministation/janitor
 	name = "\improper Custodial Closet"
 	req_access = list(access_janitor)
-	icon_state = "pink"
+	icon_state = "janitor"
 
 /area/ministation/commons
 	name = "\improper Common Area"
@@ -119,6 +119,15 @@
 	req_access =list(access_lawyer)
 	secure = TRUE
 	icon_state = "pink"
+
+/area/ministation/library
+	name = "\improper Library"
+	icon_state = "LIB"
+
+/area/ministation/atmospherics
+	name = "\improper Atmospherics"
+	req_access = list(access_atmospherics)
+	icon_state = "ATMOS"
 
 /area/ministation/science
 	name = "\improper Research & Development Laboratory"

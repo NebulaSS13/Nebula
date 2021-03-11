@@ -344,7 +344,7 @@
 "Kt" = (
 /obj/structure/window/borosilicate_reinforced,
 /obj/structure/showcase{
-	desc = "It's actually a yinglet inside the box piloting the shuttle but don't tell anyone.";
+	desc = "It's actually a possum inside the box piloting the shuttle but don't tell anyone.";
 	icon_state = "message_server_o_off";
 	name = "auto-pilot system"
 	},

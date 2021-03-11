@@ -114,3 +114,24 @@
 		SKILL_HAULING  = SKILL_BASIC
 	)
 	skill_points = 18
+
+/datum/job/ministation/librarian
+	title = "Librarian"
+	event_categories = list("Librarian")
+	department_types = list(/decl/department/service)
+	total_positions = 1
+	spawn_positions = 2
+	hud_icon = "hudlibrarian"
+	supervisors = "the Lieutenant, the Captain, and the smell of old paper"
+	economic_power = 5
+	selection_color = "#008800"
+	access = list(access_library)
+	minimal_access = list(access_library)
+	alt_titles = list(
+		"Curator",
+		"Archivist"
+	)
+	outfit_type = /decl/hierarchy/outfit/job/ministation/librarian
+	min_skill = list(
+		SKILL_LITERACY = SKILL_AVERAGE
+	)

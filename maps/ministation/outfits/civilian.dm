@@ -26,6 +26,13 @@
 	id_type = /obj/item/card/id/ministation/janitor
 	pda_type = /obj/item/modular_computer/pda
 
+/decl/hierarchy/outfit/job/ministation/librarian
+	l_ear = /obj/item/radio/headset/headset_service
+	name = MINISTATION_OUTFIT_JOB_NAME("Librarian")
+	uniform = /obj/item/clothing/under/librarian
+	id_type = /obj/item/card/id/ministation/librarian
+	pda_type = /obj/item/modular_computer/pda
+
 //cards
 /obj/item/card/id/ministation/cargo
 	name = "identification card"
@@ -40,3 +47,7 @@
 /obj/item/card/id/ministation/janitor
 	desc = "A card issued to custodial staff."
 	job_access_type = /datum/job/ministation/janitor
+
+/obj/item/card/id/ministation/librarian
+	desc = "A card issued to the station librarian."
+	job_access_type = /datum/job/ministation/librarian
