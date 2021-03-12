@@ -1,0 +1,4 @@
+author: Andrew-Fall
+delete-after: true
+changes:
+  - tweak: Drastically increases large map loading speed
