@@ -24,8 +24,8 @@ var/global/list/radio_beacons = list()
 /obj/item/radio/beacon/toggle_panel(var/mob/user)
 	return FALSE
 
-/obj/item/radio/beacon/hear_talk()
-	return
+/obj/item/radio/beacon/hear_talk(mob/speaker, list/phrases, verb = "says")
+	SHOULD_CALL_PARENT(FALSE)
 
 /obj/item/radio/beacon/emp_act(severity)
 	if(functioning && severity >= 1)

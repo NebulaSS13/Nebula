@@ -57,19 +57,21 @@
 		. = TOPIC_REFRESH
 	. = ..()
 
-/obj/structure/deity/pylon/hear_talk(mob/M, text, verb, decl/language/speaking)
+/obj/structure/deity/pylon/hear_talk(mob/speaker, list/phrases, verb = "says")
+	..()
 	if(!linked_god)
 		return
 	if(linked_god.pylon != src)
-		if(!(M in intuned))
+		if(!(speaker in intuned))
 			return
 		for(var/obj/structure/deity/pylon/P in linked_god.structures)
 			if(P == src || linked_god.pylon == P)
 				continue
-			P.audible_message("<b>\The [P]</b> resonates, \"[text]\"")
-	to_chat(linked_god, "[html_icon(src)] <span class='game say'><span class='name'>[M]</span> (<A href='?src=\ref[linked_god];jump=\ref[src];'>P</A>) [verb], [linked_god.pylon == src ? "<b>" : ""]<span class='message'><span class='body'>\"[text]\"</span></span>[linked_god.pylon == src ? "</b>" : ""]</span>")
+			P.audible_message("<b>\The [P]</b> resonates, \"[compile_mixed_language_text_for(speaker, P, phrases)]\"")
+
+	to_chat(linked_god, "[html_icon(src)] <span class='game say'><span class='name'>[speaker]</span> (<A href='?src=\ref[linked_god];jump=\ref[src];'>P</A>) [verb], [linked_god.pylon == src ? "<b>" : ""]<span class='message'><span class='body'>\"[compile_mixed_language_text_for(speaker, linked_god, phrases)]\"</span></span>[linked_god.pylon == src ? "</b>" : ""]</span>")
 	if(linked_god.minions.len)
 		for(var/minion in linked_god.minions)
 			var/datum/mind/mind = minion
 			if(mind.current && mind.current.eyeobj) //If it is currently having a vision of some sort
-				to_chat(mind.current,"[html_icon(src)] <span class='game say'><span class='name'>[M]</span> (<A href='?src=\ref[src];vision_jump=\ref[src];'>J</A>) [verb], <span class='message'<span class='body'>\"[text]\"</span></span>")
+				to_chat(mind.current,"[html_icon(src)] <span class='game say'><span class='name'>[speaker]</span> (<A href='?src=\ref[src];vision_jump=\ref[src];'>J</A>) [verb], <span class='message'<span class='body'>\"[compile_mixed_language_text_for(speaker, mind.current, phrases)]\"</span></span>")

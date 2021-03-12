@@ -21,10 +21,6 @@
 		new_name += " [..(gender,1)]"
 	return new_name
 
-//#803b56 is color
-
-/decl/language/tajaran/format_message(message, verb)
-	return "[verb], <span class='message'><span style='color: #803b56'>\"[capitalize(message)]\"</span></span>"
-
-/decl/language/tajaran/format_message_radio(message, verb)
-	return "[verb], <span style='color: #803b56'>\"[capitalize(message)]\"</span>"
+// Can't use color var as CSS is not overridable/modifiable from a modpack currently.
+/decl/language/tajaran/colourize_message(message)
+	return "<span style='color: #803b56'>[message]</span>"

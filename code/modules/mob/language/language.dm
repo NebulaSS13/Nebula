@@ -1,9 +1,25 @@
+// TODO: generate a uid for speech with specific language/listener configuration
+// TODO: cache phrase lists as they pass through here
+/proc/compile_mixed_language_text_for(var/mob/speaker, var/mob/listener, var/list/phrases, var/colourize = TRUE)
+	for(var/list/phrase in phrases)
+		var/message = phrase[2]
+		if(message)
+			var/decl/language/speaking = phrase[1]
+			if(istype(speaking))
+				if(istype(listener) && !listener.say_understands(speaker, speaking))
+					message = speaking.scramble(message, listener.languages)
+				else if(isobj(listener) && !speaking.machine_understands)
+					message = speaking.scramble(message)
+				if(colourize)
+					message = speaking.colourize_message(message)
+		LAZYADD(., message)
+	. = jointext(., " ")
+
 #define SCRAMBLE_CACHE_LEN 20
 
 /*
 	Datum based languages. Easily editable and modular.
 */
-
 /* Current unused keys, please update when you use one.
  * e
  * j
@@ -79,42 +95,22 @@
 	. = "[trim(jointext(., " "))]"
 
 /decl/language/proc/scramble(mob/living/speaker, input, list/known_languages)
-
 	var/understand_chance = 0
 	for(var/decl/language/L in known_languages)
 		if(LAZYACCESS(partial_understanding, L.name))
 			understand_chance += partial_understanding[L.name]
-
-	var/list/words = splittext(input, " ")
-	var/list/scrambled_text = list()
-	var/new_sentence = 0
-	for(var/w in words)
-		var/nword = "[w] "
-		var/input_ending = copytext(w, length(w))
-		var/ends_sentence = findtext(".?!",input_ending)
+	for(var/w in splittext(input, " "))
 		if(!prob(understand_chance))
-			nword = scramble_word(w)
-			if(new_sentence)
-				nword = capitalize(nword)
-				new_sentence = FALSE
-			if(ends_sentence)
-				nword = trim(nword)
-				nword = "[nword][input_ending] "
-
-		if(ends_sentence)
-			new_sentence = TRUE
-
-		scrambled_text += nword
-
-	. = jointext(scrambled_text, null)
-	. = capitalize(.)
-	. = trim(.)
+			w = scramble_word(w)
+		LAZYADD(., w)
+	. = format_speech(trim(jointext(., " ")))
 
 /decl/language/proc/scramble_word(var/input)
+
 	if(!syllables || !syllables.len)
 		return stars(input)
 
-	// If the input is cached already, move it to the end of the cache and return it
+	// If the input is cached already, move it to the end of the cache (refresh) and return it
 	if(input in scramble_cache)
 		var/n = scramble_cache[input]
 		scramble_cache -= input
@@ -122,21 +118,11 @@
 		return n
 
 	var/input_size = length(input)
-	var/scrambled_text = ""
-	var/capitalize = 0
-
-	while(length(scrambled_text) < input_size)
-		var/next = pick(syllables)
-		if(capitalize)
-			next = capitalize(next)
-			capitalize = 0
-		scrambled_text += next
-		var/chance = rand(100)
-		if(chance <= 5)
-			scrambled_text += ". "
-			capitalize = 1
-		else if(chance > 5 && chance <= space_chance)
-			scrambled_text += " "
+	while(length(.) < input_size)
+		. += pick(syllables)
+		if(prob(space_chance))
+			. += " "
+	. = trim(.)
 
 	// Add it to cache, cutting old entries if the list is too long
 	scramble_cache[input] = scrambled_text
@@ -145,14 +131,17 @@
 
 	return scrambled_text
 
+/decl/language/proc/colourize_message(message)
+	return "<span class='[colour]'>[message]</span>"
+
 /decl/language/proc/format_message(message, verb)
-	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(message)]\"</span></span>"
+	return "[verb], <span class='message'>\"[colourize_message(capitalize(message))]\"</span>"
 
 /decl/language/proc/format_message_plain(message, verb)
 	return "[verb], \"[capitalize(message)]\""
 
 /decl/language/proc/format_message_radio(message, verb)
-	return "[verb], <span class='[colour]'>\"[capitalize(message)]\"</span>"
+	return "[verb], <span class='message'>\"[colourize_message(capitalize(message))]\"</span>"
 
 /decl/language/proc/get_talkinto_msg_range(message)
 	// if you yell, you'll be heard from two tiles over instead of one

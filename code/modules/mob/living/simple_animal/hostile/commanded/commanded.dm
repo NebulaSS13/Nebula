@@ -9,16 +9,16 @@
 	var/list/allowed_targets = list() //WHO CAN I KILL D:
 	var/retribution = 1 //whether or not they will attack us if we attack them like some kinda dick.
 
-/mob/living/simple_animal/hostile/commanded/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/living/simple_animal/hostile/commanded/hear_say(var/list/phrases, var/verb = "says", var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol, var/scramble = FALSE)
 	if((weakref(speaker) in friends) || speaker == master)
 		command_buffer.Add(speaker)
-		command_buffer.Add(lowertext(html_decode(message)))
+		command_buffer.Add(lowertext(html_decode(compile_mixed_language_text_for(speaker, src, phrases, colourize = FALSE))))
 	return 0
 
-/mob/living/simple_animal/hostile/commanded/hear_radio(var/message, var/verb="says", var/decl/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
+/mob/living/simple_animal/hostile/commanded/hear_radio(var/list/phrases, var/verb="says", var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
 	if((weakref(speaker) in friends) || speaker == master)
 		command_buffer.Add(speaker)
-		command_buffer.Add(lowertext(html_decode(message)))
+		command_buffer.Add(lowertext(html_decode(compile_mixed_language_text_for(speaker, src, phrases, colourize = FALSE))))
 	return 0
 
 /mob/living/simple_animal/hostile/commanded/Life()

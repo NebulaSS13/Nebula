@@ -61,8 +61,8 @@
 			if(3)
 				src.visible_message("<span class='danger'>\The [src] snaps at the air!</span>")
 
-/mob/living/simple_animal/faithful_hound/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
-	if(password && findtext(message,password))
+/mob/living/simple_animal/faithful_hound/hear_say(var/list/phrases, var/verb = "says", var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol, var/scramble = FALSE)
+	if(password && findtext(compile_mixed_language_text_for(speaker, src, phrases, colourize = FALSE), password))
 		allowed_mobs |= speaker
 		spawn(10)
 			src.visible_message("<span class='notice'>\The [src] nods in understanding towards \the [speaker].</span>")

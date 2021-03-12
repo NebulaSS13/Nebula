@@ -5,11 +5,11 @@ var/global/list/special_channel_keys = list(
 	"h" = MESSAGE_MODE_DEPARTMENT,
 	"+" = MESSAGE_MODE_SPECIAL,    //activate radio-specific special functions
 	"w" = MESSAGE_MODE_WHISPER,
-	"к" = MESSAGE_MODE_RIGHT,
-	"д" = MESSAGE_MODE_LEFT,
-	"ш" = MESSAGE_MODE_INTERCOM,
-	"р" = MESSAGE_MODE_DEPARTMENT,
-	"ц" = MESSAGE_MODE_WHISPER
+	"?" = MESSAGE_MODE_RIGHT,
+	"?" = MESSAGE_MODE_LEFT,
+	"?" = MESSAGE_MODE_INTERCOM,
+	"?" = MESSAGE_MODE_DEPARTMENT,
+	"?" = MESSAGE_MODE_WHISPER
 )
 
 /mob/proc/say()
@@ -42,7 +42,7 @@ var/global/list/special_channel_keys = list(
 /mob/proc/say_dead(var/message)
 	communicate(/decl/communication_channel/dsay, client, message)
 
-/mob/proc/say_understands(mob/speaker, decl/language/speaking)
+/mob/proc/say_understands(var/mob/other, var/decl/language/speaking)
 	if(stat == DEAD || universal_speak || universal_understand)
 		return TRUE
 	if(!istype(speaker))
@@ -51,7 +51,7 @@ var/global/list/special_channel_keys = list(
 		return speaking.can_be_understood_by(speaker, src)
 	return (speaker.universal_speak || istype(speaker, type) || istype(src, speaker.type))
 
-/mob/proc/say_quote(var/message, var/decl/language/speaking = null)
+/mob/proc/say_quote(var/message, var/decl/language/speaking)
 	var/ending = copytext(message, length(message))
 	if(speaking)
 		return speaking.get_spoken_verb(src, ending)

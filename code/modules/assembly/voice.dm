@@ -19,7 +19,14 @@
 	global.listening_objects -= src
 	return ..()
 
-/obj/item/assembly/voice/hear_talk(mob/living/M, msg)
+/obj/item/assembly/voice/hear_talk(mob/speaker, list/phrases, verb = "says")
+
+	..()
+
+	var/msg = compile_mixed_language_text_for(speaker, src, phrases)
+	if(!msg)
+		return
+
 	if(listening)
 		recorded = msg
 		listening = 0

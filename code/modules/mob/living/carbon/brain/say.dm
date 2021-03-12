@@ -34,5 +34,5 @@
 		if(istype(container, /obj/item/mmi/radio_enabled))
 			var/obj/item/mmi/radio_enabled/R = container
 			if(R.radio)
-				spawn(0) R.radio.hear_talk(src, sanitize(message), verb, speaking)
+				spawn(0) R.radio.hear_talk(src, list(get_default_language(), sanitize(message)), verb)
 		..(trim(message), speaking, verb)

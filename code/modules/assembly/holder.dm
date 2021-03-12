@@ -198,11 +198,12 @@
 //			special_assembly.dothings()
 	return 1
 
-/obj/item/assembly_holder/hear_talk(mob/living/M, msg, verb, decl/language/speaking)
+/obj/item/assembly_holder/hear_talk(mob/speaker, list/phrases, verb = "says")
+	..()
 	if(a_right)
-		a_right.hear_talk(M,msg,verb,speaking)
+		a_right.hear_talk(speaker, phrases, verb)
 	if(a_left)
-		a_left.hear_talk(M,msg,verb,speaking)
+		a_left.hear_talk(speaker, phrases, verb)
 
 /obj/item/assembly_holder/examine(mob/user, distance)
 	. = ..()

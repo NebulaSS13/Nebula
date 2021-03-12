@@ -50,7 +50,7 @@
 	if(life_tick%30==15)
 		hud_updateflag = 1022
 
-	voice = GetVoice()
+	voice = get_voice()
 
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !is_in_stasis())

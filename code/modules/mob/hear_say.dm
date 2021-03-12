@@ -1,17 +1,11 @@
 // At minimum every mob has a hear_say proc.
 
-/mob/proc/hear_say(var/message, var/verb = "says", var/decl/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
-	if(!client)
-		return
+/mob/proc/hear_say(var/list/phrases, var/verb = "says", var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol, var/scramble = FALSE, var/speech_flags)
 
-	if(speaker && !speaker.client && isghost(src) && get_preference_value(/datum/client_preference/ghost_ears) == PREF_ALL_SPEECH && !(speaker in view(src)))
-			//Does the speaker have a client?  It's either random stuff that observers won't care about (Experiment 97B says, 'EHEHEHEHEHEHEHE')
-			//Or someone snoring.  So we make it where they won't hear it.
+	//Does the speaker have a client?  It's either random stuff that observers won't care about (Experiment 97B says, 'EHEHEHEHEHEHEHE')
+	//Or someone snoring.  So we make it where they won't hear it.
+	if(!client || (speaker && !speaker.client && isghost(src) && get_preference_value(/datum/client_preference/ghost_ears) == PREF_ALL_SPEECH && !(speaker in view(src))))
 		return
-
-	if(language && (language.flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG)))
-		sound_vol = 0
-		speech_sound = null
 
 	//make sure the air can transmit speech - hearer's side
 	var/turf/T = get_turf(src)
@@ -26,13 +20,15 @@
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
 	if(HAS_STATUS(src, STAT_ASLEEP) || stat == UNCONSCIOUS)
-		hear_sleep(message)
+		hear_sleep(speaker, phrases)
 		return
 
-	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.
-	if (language && (language.flags & LANG_FLAG_NONVERBAL))
-		if (!speaker || (src.sdisabilities & BLINDED || src.blinded) || !(speaker in view(src)))
-			message = stars(message)
+	for(var/list/phrase in phrases)
+		var/decl/language/language = phrases[1]
+		if(istype(language) && (language.flags & (NONVERBAL|SIGNLANG)))
+			sound_vol = 0
+			speech_sound = null
+			break
 
 	var/understands_language = say_understands(speaker, language)
 	if(!(language && (language.flags & LANG_FLAG_INNATE))) // skip understanding checks for INNATE languages
@@ -45,7 +41,6 @@
 	var/speaker_name = speaker?.GetVoice() || "Unknown"
 	if(italics)
 		message = "<i>[message]</i>"
-
 	var/track = null
 	if(isghost(src))
 		if(speaker_name != speaker.real_name && speaker.real_name)
@@ -84,6 +79,12 @@
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
 			src.playsound_local(source, speech_sound, sound_vol, 1)
 
+	// TODO: reimplement 'says in Catspeak' thing
+	on_hear_say("<span class='game say'>[track]<span class='name'>[speaker_name]</span>[alt_name] [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
+	if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
+		var/turf/source = speaker? get_turf(speaker) : get_turf(src)
+		src.playsound_local(source, speech_sound, sound_vol, 1)
+
 /mob/proc/on_hear_say(var/message)
 	to_chat(src, message)
 
@@ -91,23 +92,22 @@
 	var/time = say_timestamp()
 	to_chat(src, "[time] [message]")
 
-/mob/proc/hear_radio(var/message, var/verb="says", var/decl/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="")
+/mob/proc/hear_radio(var/list/phrases, var/verb="says", var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="", var/language_flags)
 
 	if(!client)
 		return
 
 	if(HAS_STATUS(src, STAT_ASLEEP) || stat == UNCONSCIOUS) //If unconscious or sleeping
-		hear_sleep(message)
+		hear_sleep(speaker, phrases)
 		return
 
-	var/track = null
+	// You cannot use nonverbal languages over a radio/
+	if(language_flags & NONVERBAL)
+		return
 
-	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.
-	if (language && (language.flags & LANG_FLAG_NONVERBAL))
-		if (!speaker || (src.sdisabilities & BLINDED || src.blinded) || !(speaker in view(src)))
-			message = stars(message)
-
-	if(!(language && (language.flags & LANG_FLAG_INNATE))) // skip understanding checks for LANG_FLAG_INNATE languages
+	/*
+	// skip understanding checks for INNATE languages
+	if(!(language_flags & INNATE))
 		if(!say_understands(speaker,language))
 			if(istype(speaker,/mob/living/simple_animal))
 				var/mob/living/simple_animal/S = speaker
@@ -120,31 +120,22 @@
 					message = language.scramble(speaker, message, languages)
 				else
 					message = stars(message)
-
 		if(hard_to_hear)
 			if(hard_to_hear <= 5)
 				message = stars(message)
 			else // Used for compression
 				message = RadioChat(null, message, 80, 1+(hard_to_hear/10))
+	*/
 
-	var/speaker_name = vname ? vname : speaker.name
-
-	if(istype(speaker, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = speaker
-		if(H.voice && !vname)
-			speaker_name = H.voice
-
+	var/speaker_name
 	if(hard_to_hear)
 		speaker_name = "unknown"
-
-	var/changed_voice
-
-	if(istype(src, /mob/living/silicon/ai) && !hard_to_hear)
-		var/jobname // the mob's "job"
-		var/mob/living/carbon/human/impersonating //The crew member being impersonated, if any.
-
-		if (ishuman(speaker))
+	else
+		speaker_name = (vname ? vname : speaker.name)
+		if(istype(speaker, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = speaker
+			if(H.voice)
+				speaker_name = H.voice
 
 			if(istype(H.get_equipped_item(slot_wear_mask_str), /obj/item/clothing/mask/chameleon/voice))
 				changed_voice = 1
@@ -195,31 +186,14 @@
 		else
 			track = "[speaker_name]"
 
-	var/formatted
-	if (language)
-		var/nverb = verb
-		if (say_understands(speaker, language))
-			var/skip = FALSE
-			if (isliving(src))
-				var/mob/living/L = src
-				skip = L.default_language == language
-			if (!skip)
-				switch(src.get_preference_value(/datum/client_preference/language_display))
-					if (PREF_FULL)
-						nverb = "[verb] in [language.name]"
-					if(PREF_SHORTHAND)
-						nverb = "[verb] ([language.shorthand])"
-					if(PREF_OFF)
-						nverb = verb
-		formatted = language.format_message_radio(message, nverb)
-	else
-		formatted = "[verb], <span class=\"body\">\"[message]\"</span>"
-	if(sdisabilities & DEAFENED || GET_STATUS(src, STAT_DEAF))
+	// TODO: reimplement 'says in Catspeak' thing
+	if((sdisabilities & DEAFENED) || GET_STATUS(src, STAT_DEAF))
 		var/mob/living/carbon/human/H = src
 		if(istype(H) && H.has_headset_in_ears() && prob(20))
 			to_chat(src, SPAN_WARNING("You feel your headset vibrate but can hear nothing from it!"))
-	else
-		on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
+			return
+
+	on_hear_radio(part_a, speaker_name, track, part_b, part_c, "[verb], <span class=\"body\">\"[compile_mixed_language_text_for(speaker, src, phrases)]\"</span>")
 
 /proc/say_timestamp()
 	return "<span class='say_quote'>\[[stationtime2text()]\]</span>"
@@ -273,7 +247,8 @@
 			M.show_message(message)
 	src.show_message(message)
 
-/mob/proc/hear_sleep(var/message)
+/mob/proc/hear_sleep(var/mob/speaker, var/list/phrases)
+	var/message = compile_mixed_language_text_for(speaker, src, phrases, colourize = FALSE)
 	if (is_deaf())
 		return
 	var/heard = ""

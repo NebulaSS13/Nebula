@@ -30,10 +30,11 @@
 		var/mob/living/M = src.loc
 		M.say(pick(heard_talk))
 
-/obj/item/clothing/mask/gas/poltergeist/hear_talk(mob/M, text)
+/obj/item/clothing/mask/gas/poltergeist/hear_talk(mob/speaker, list/phrases, verb = "says")
 	..()
+	var/text = compile_mixed_language_text_for(speaker, src, phrases)
 	if(heard_talk.len > max_stored_messages)
 		heard_talk.Remove(pick(heard_talk))
 	heard_talk.Add(text)
-	if(istype(src.loc, /mob/living) && world.time - last_twitch > 50)
+	if(istype(loc, /mob/living) && world.time - last_twitch > 50)
 		last_twitch = world.time

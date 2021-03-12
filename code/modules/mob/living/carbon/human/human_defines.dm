@@ -28,7 +28,7 @@
 
 	var/icon/stand_icon = null
 
-	var/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
+	var/voice = ""	//Instead of new say code calling get_voice() over and over and over, we're just going to ask this variable, which gets updated in Life()
 
 	var/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
 	/// organs we check until they are good.

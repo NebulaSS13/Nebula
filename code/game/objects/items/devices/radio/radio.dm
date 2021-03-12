@@ -324,27 +324,26 @@
 				return channel.frequency
 	return frequency
 
-/obj/item/radio/talk_into(mob/living/M, message, message_mode, var/verb = "says", var/decl/language/speaking = null)
+/obj/item/radio/talk_into(mob/speaker, list/phrases, channel, var/verb = "says")
 	set waitfor = FALSE
 	if(!on) return 0 // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
-	if(!M || !message) return 0
+	if(!speaker)
+		return 0
 
-	if(speaking && (speaking.flags & (LANG_FLAG_NONVERBAL|LANG_FLAG_SIGNLANG))) return 0
-
-	if (!broadcasting)
+	if(!broadcasting)
 		// Sedation chemical effect should prevent radio use.
-		var/mob/living/carbon/C = M
+		var/mob/living/carbon/C = speaker
 		if(istype(C) && (C.has_chemical_effect(CE_SEDATE, 1) || C.incapacitated(INCAPACITATION_DISRUPTED)))
-			to_chat(M, SPAN_WARNING("You're unable to reach \the [src]."))
+			to_chat(speaker, SPAN_WARNING("You're unable to reach \the [src]."))
 			return 0
 
 		if((istype(C)) && C.radio_interrupt_cooldown > world.time)
-			to_chat(M, SPAN_WARNING("You're disrupted as you reach for \the [src]."))
+			to_chat(speaker, SPAN_WARNING("You're disrupted as you reach for \the [src]."))
 			return 0
 
-		if(istype(M))
-			M.trigger_aiming(TARGET_CAN_RADIO)
+		if(istype(speaker))
+			speaker.trigger_aiming(TARGET_CAN_RADIO)
 
 	addtimer(CALLBACK(src, .proc/transmit, M, message, message_mode, verb, speaking), 0)
 

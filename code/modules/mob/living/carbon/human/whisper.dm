@@ -17,7 +17,7 @@
 	if (src.stat)
 		return
 
-	if(get_id_name("Unknown") == GetVoice())
+	if(get_id_name("Unknown") == get_voice())
 		SetName(get_id_name("Unknown"))
 
 	whisper_say(message)

@@ -106,27 +106,15 @@
 		return "asks"
 	return verb
 
-/mob/living/proc/format_say_message(var/message = null)
-	if(!message)
-		return
-
-	message = html_decode(message)
-
-	var/end_char = copytext_char(message, -1)
-	if(!(end_char in list(".", "?", "!", "-", "~")))
-		message += "."
-
-	return html_encode(message)
-
 /mob/living/say(var/message, var/decl/language/speaking, var/verb = "says", var/alt_name = "", whispering)
 	set waitfor = FALSE
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
-			to_chat(src, "<span class='warning'>You cannot speak in IC (Muted).</span>")
+			to_chat(src, SPAN_WARNING("You cannot speak in IC (Muted)."))
 			return
 
 	if(stat)
-		if(stat == 2)
+		if(stat == DEAD)
 			return say_dead(message)
 		return
 
@@ -149,72 +137,111 @@
 	//parse the language code and consume it
 	if(!speaking)
 		speaking = parse_language(message)
-		if(speaking)
-			message = copytext_char(message,2+length_char(speaking.key))
-		else
-			speaking = get_any_good_language(set_default=TRUE)
-			if (!speaking)
+		if(!speaking)
+			speaking = get_default_language() || get_any_good_language(set_default=TRUE)
+			if(!speaking)
 				to_chat(src, SPAN_WARNING("You don't know a language and cannot speak."))
 				emote("custom", AUDIBLE_MESSAGE, "[pick("grunts", "babbles", "gibbers", "jabbers", "burbles")] aimlessly.")
 				return
+
+	if(is_muzzled() && !(speaking.flags & SIGNLANG))
+		to_chat(src, SPAN_WARNING("You're muzzled and cannot speak!"))
+		return
 
 	// This is broadcast to all mobs with the language,
 	// irrespective of distance or anything else.
 	if(speaking && (speaking.flags & LANG_FLAG_HIVEMIND))
 		speaking.broadcast(src,trim(message))
-		return 1
+		return TRUE
 
 	if((is_muzzled()) && !(speaking && (speaking.flags & LANG_FLAG_SIGNLANG)))
 		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
 		return
 
-	if (speaking)
-		if(whispering)
-			verb = speaking.whisper_verb ? speaking.whisper_verb : speaking.speech_verb
+	//handle nonverbal and sign languages here
+	if(speaking.flags & SIGNLANG)
+		log_say("[name]/[key] : SIGN: [message]")
+		return say_signlang(message, pick(speaking.signlang_verb), speaking)
+
+	if(whispering)
+		verb = speaking.whisper_verb ? speaking.whisper_verb : speaking.speech_verb
+	else
+		verb = say_quote(message, speaking)
+
+	var/list/phrases
+	var/list/my_languages = list()
+	for(var/decl/language/L in languages)
+		my_languages[L.key] = L
+
+	var/lang_prefix = get_prefix_key(/decl/prefix/language)
+	var/lang_regex_string = "[lang_prefix](\[[jointext(my_languages, null)]\])"
+	var/regex/lang_prefix_regex = regex(lang_regex_string)
+
+	if(copytext(message, 1, 2) != lang_prefix)
+		if(speaking)
+			message = "[lang_prefix][speaking.key] [message]"
 		else
-			verb = say_quote(message, speaking)
+			message = "[lang_prefix][my_languages[1]] [message]"
 
-	message = trim_left(message)
-	message = handle_autohiss(message, speaking)
-	message = format_say_message(message)
-	message = filter_modify_message(message)
+	var/list/substrings = splittext(message, lang_prefix_regex)
+	// splittext() with a regex seems to sometimes insert empty strings.
+	for(var/substring in substrings)
+		if(!substring || !istext(substring))
+			substrings -= substring
 
-	if(speaking && !speaking.can_be_spoken_properly_by(src))
-		message = speaking.muddle(message)
+	for(var/i = 1; i <= length(substrings); i += 2)
 
-	if(!(speaking && (speaking.flags & LANG_FLAG_NO_STUTTER)))
-		var/list/message_data = list(message, verb, 0)
-		if(handle_speech_problems(message_data))
-			message = message_data[1]
-			verb = message_data[2]
+		if(length(substrings) < i+1)
+			break
 
-	if(!message || message == "")
-		return 0
+		var/decl/language/L = my_languages[substrings[i]]
+		if(istype(L) && !speaking)
+			speaking = L
 
-	var/list/obj/item/used_radios = list()
-	if(handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name))
-		return 1
+		var/phrase_string = trim(substrings[i+1])
+
+		if(L && !L.can_be_spoken_properly_by(src))
+			phrase_string = L.muddle(phrase_string)
+
+		if(!L || !(L.flags & NO_STUTTER))
+			var/list/message_data = list(phrase_string, verb, 0)
+			if(handle_speech_problems(message_data))
+				phrase_string = message_data[1]
+				verb = message_data[2]
+
+		if(phrase_string)
+			phrase_string = trim_left(phrase_string)
+			phrase_string = handle_autohiss(phrase_string, L)
+			phrase_string = filter_modify_message(phrase_string)
+			LAZYADD(phrases, list(list(L, phrase_string)))
+
+	if(!length(phrases))
+		return TRUE
+
+	var/list/used_radios = list()
+	if(handle_message_mode(message_mode, phrases, null, verb, used_radios, alt_name))
+		return TRUE
 
 	var/list/handle_v = (istype(speaking) && speaking.get_spoken_sound()) || handle_speech_sound()
 	var/sound/speech_sound = handle_v[1]
 	var/sound_vol = handle_v[2]
 
-	var/italics = 0
+	var/italics = FALSE
 	var/message_range = world.view
 
 	if(whispering)
-		italics = 1
-		message_range = 1
+		italics = TRUE
+		message_range = TRUE
 
 	//speaking into radios
 	if(used_radios.len)
-		italics = 1
-		message_range = 1
+		italics = TRUE
+		message_range = TRUE
 		if(speaking)
 			message_range = speaking.get_talkinto_msg_range(message)
 		var/msg
 		if(!speaking || !(speaking.flags & LANG_FLAG_NO_TALK_MSG))
-			msg = "<span class='notice'>\The [src] talks into \the [used_radios[1]].</span>"
+			msg = SPAN_NOTICE("\The [src] talks into \the [used_radios[1]].")
 		for(var/mob/living/M in hearers(5, src))
 			if((M != src) && msg)
 				M.show_message(msg)
@@ -261,39 +288,33 @@
 
 	var/list/speech_bubble_recipients = list()
 	for(var/mob/M in listening)
-		if(M)
-			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
-			if(M.client)
-				speech_bubble_recipients += M.client
+		M.hear_say(phrases, verb, alt_name, italics, src, speech_sound, sound_vol)
+		if(M.client)
+			speech_bubble_recipients += M.client
 
 	for(var/obj/O in listening_obj)
-		spawn(0)
-			if(O) //It's possible that it could be deleted in the meantime.
-				O.hear_talk(src, message, verb, speaking)
+		O.hear_talk(src, phrases, verb)
 
 	var/list/eavesdroppers = list()
 	if(whispering)
-		var/eavesdroping_range = 5
-		var/list/eavesdroping = list()
-		var/list/eavesdroping_obj = list()
-		get_mobs_and_objs_in_view_fast(T, eavesdroping_range, eavesdroping, eavesdroping_obj)
-		eavesdroping -= listening
-		eavesdroping_obj -= listening_obj
-		for(var/mob/M in eavesdroping)
-			if(M)
-				M.hear_say(stars(message), verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
-				if(M.client)
-					eavesdroppers |= M.client
+		var/eavesdropping_range = 5
+		var/list/eavesdropping = list()
+		var/list/eavesdropping_obj = list()
+		get_mobs_and_objs_in_view_fast(T, eavesdropping_range, eavesdropping, eavesdropping_obj)
+		eavesdropping -= listening
+		eavesdropping_obj -= listening_obj
+		for(var/mob/M in eavesdropping)
+			M.hear_say(phrases, verb, alt_name, italics, src, speech_sound, sound_vol, scramble = TRUE)
+			if(M.client)
+				eavesdroppers |= M.client
 
-		for(var/obj/O in eavesdroping)
-			spawn(0)
-				if(O) //It's possible that it could be deleted in the meantime.
-					O.hear_talk(src, stars(message), verb, speaking)
+		for(var/obj/O in eavesdropping)
+			O.hear_talk(src, phrases, verb)
 
-	INVOKE_ASYNC(GLOBAL_PROC, .proc/animate_speech_bubble, speech_bubble, speech_bubble_recipients | eavesdroppers, 30)
-	INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, message, speaking, italics, speech_bubble_recipients)
+	animate_speech_bubble(speech_bubble, (speech_bubble_recipients | eavesdroppers), 30)
+	animate_chat(phrases, speaking, italics, speech_bubble_recipients)
 	if(length(eavesdroppers))
-		INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, stars(message), speaking, italics, eavesdroppers)
+		animate_chat(phrases, speaking, italics, eavesdroppers, scramble = TRUE)
 
 	if(whispering)
 		log_whisper("[name]/[key] : [message]")

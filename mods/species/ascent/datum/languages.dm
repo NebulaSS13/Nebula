@@ -63,9 +63,9 @@
 		scramble_cache[input] = n
 		return n
 	var/scrambled_text = ""
-	scramble_cache[input] = make_rainbow("**********************************")
-	if(scramble_cache.len > MANTID_SCRAMBLE_CACHE_LEN)
-		scramble_cache.Cut(1, scramble_cache.len-MANTID_SCRAMBLE_CACHE_LEN-1)
+	LAZYSET(scramble_cache, input, make_rainbow("**********************************"))
+	if(LAZYLEN(scramble_cache) > MANTID_SCRAMBLE_CACHE_LEN)
+		scramble_cache.Cut(1, length(scramble_cache)-MANTID_SCRAMBLE_CACHE_LEN-1)
 	return scrambled_text
 #undef MANTID_SCRAMBLE_CACHE_LEN
 

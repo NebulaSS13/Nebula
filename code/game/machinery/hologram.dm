@@ -210,55 +210,39 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 /*This is the proc for special two-way communication between AI and holopad/people talking near holopad.
 For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 // Note that speaking may be null here, presumably due to echo effects/non-mob transmission.
-/obj/machinery/hologram/holopad/hear_talk(mob/living/M, text, verb, decl/language/speaking)
-	if(M)
+/obj/machinery/hologram/holopad/hear_talk(mob/speaker, list/phrases, verb = "says")
+	..()
+	if(speaker)
+		if(isanimal(speaker) && !speaker.universal_speak)
+			var/mob/living/simple_animal/SA = speaker
+			phrases = list(GET_DECL(/decl/language/noise), pick(SA.speak))
 		for(var/mob/living/silicon/ai/master in masters)
-			var/ai_text = text
-			if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.
-				if(speaking)
-					ai_text = speaking.scramble(M, text)
-				else
-					ai_text = stars(text)
-			if(isanimal(M) && !M.universal_speak)
-				var/mob/living/simple_animal/SA = M
-				ai_text = pick(SA.speak)
-			var/name_used = M.GetVoice()
 			//This communication is imperfect because the holopad "filters" voices and is only designed to connect to the master only.
 			var/short_links = master.get_preference_value(/datum/client_preference/ghost_follow_link_length) == PREF_SHORT
 			var/follow = short_links ? "\[F]" : "\[Follow]"
-			var/prefix = "<a href='byond://?src=\ref[master];trackname=[html_encode(name_used)];track=\ref[M]'>[follow]</a>"
-			master.show_message(get_hear_message(name_used, ai_text, verb, speaking, prefix), 2)
-	var/name_used = M.GetVoice()
-	var/message
-	if(isanimal(M) && !M.universal_speak)
-		var/mob/living/simple_animal/SA = M
-		message = get_hear_message(name_used, pick(SA.speak), verb, speaking)
-	else
-		message = get_hear_message(name_used, text, verb, speaking)
+			var/prefix = "<a href='byond://?src=\ref[master];trackname=[html_encode(speaker.get_voice())];track=\ref[speaker]'>[follow]</a>"
+			master.show_message(get_hear_message(speaker, phrases, verb, prefix), 2)
+
+	var/message = get_hear_message(speaker, phrases, verb)
 	if(targetpad && !targetpad.incoming_connection) //If this is the pad you're making the call from and the call is accepted
 		targetpad.audible_message(message)
 		targetpad.last_message = message
+
 	if(sourcepad && sourcepad.targetpad && !sourcepad.targetpad.incoming_connection) //If this is a pad receiving a call and the call is accepted
-		if(name_used==caller_id||text==last_message||findtext(text, "Holopad received")) //prevent echoes
+		if(speaker.get_voice() == caller_id || findtext(text, "Holopad received")) //prevent echoes
 			return
 		sourcepad.audible_message(message)
 
-/obj/machinery/hologram/holopad/proc/get_hear_message(name_used, text, verb, decl/language/speaking, prefix = "")
-	if(speaking)
-		return "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span>[prefix] [speaking.format_message(text, verb)]</span></i>"
-	return "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span>[prefix] [verb], <span class='message'>\"[text]\"</span></span></i>"
+/obj/machinery/hologram/holopad/proc/get_hear_message(var/mob/speaker, var/list/phrases, verb, prefix = "")
+	return "<i><span class='game say'>Holopad received, <span class='name'>[speaker.get_voice()]</span>[prefix] [verb], <span class='message'>\"[compile_mixed_language_text_for(speaker, src, phrases)]\"</span></span></i>"
 
 /obj/machinery/hologram/holopad/see_emote(mob/living/M, text)
 	if(M)
 		for(var/mob/living/silicon/ai/master in masters)
-			//var/name_used = M.GetVoice()
 			var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[text]</span></span></i>"
-			//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
 			master.show_message(rendered, 2)
 		for(var/mob/living/carbon/master in masters)
-			//var/name_used = M.GetVoice()
 			var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[text]</span></span></i>"
-			//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
 			master.show_message(rendered, 2)
 		if(targetpad)
 			targetpad.visible_message("<i><span class='message'>[text]</span></i>")

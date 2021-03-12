@@ -15,15 +15,8 @@ var/global/list/floating_chat_colors = list()
 /atom/movable
 	var/list/stored_chat_text
 
-/atom/movable/proc/animate_chat(message, decl/language/language, small, list/show_to, duration = CHAT_MESSAGE_LIFESPAN)
+/atom/movable/proc/animate_chat(list/phrases, decl/language/language, small, list/show_to, duration = CHAT_MESSAGE_LIFESPAN, var/scramble)
 	set waitfor = FALSE
-
-	/// Get rid of any URL schemes that might cause BYOND to automatically wrap something in an anchor tag
-	var/static/regex/url_scheme = new(@"[A-Za-z][A-Za-z0-9+-\.]*:\/\/", "g")
-	message = replacetext(message, url_scheme, "")
-
-	var/static/regex/html_metachars = new(@"&[A-Za-z]{1,7};", "g")
-	message = replacetext(message, html_metachars, "")
 
 	//additional style params for the message
 	var/style
@@ -33,13 +26,11 @@ var/global/list/floating_chat_colors = list()
 	if(small)
 		fontsize = 6
 
-	if(copytext_char(message, length_char(message) - 1) == "!!")
+	var/last_phrase = phrases[length(phrases)]
+	if(copytext_char(last_phrase, length_char(last_phrase) - 1) == "!!")
 		fontsize = 8
 		limit = 60
 		style += "font-weight: bold;"
-
-	if(length_char(message) > limit)
-		message = "[copytext_char(message, 1, limit)]..."
 
 	if(!global.floating_chat_colors[name])
 		global.floating_chat_colors[name] = get_random_colour(0, 160, 230)

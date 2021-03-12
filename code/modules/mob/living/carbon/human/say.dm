@@ -15,8 +15,8 @@
 					return
 			else if(L.breath_fail_ratio > 0.7 || (L.breath_fail_ratio > 0.4 && length(message) > 10) || (L.breath_fail_ratio > 0.2 && length(message) > 30))
 				whispering = TRUE
-	if(name != GetVoice())
-		if(get_id_name("Unknown") == GetVoice())
+	if(name != get_voice())
+		if(get_id_name("Unknown") == get_voice())
 			SetName(get_id_name("Unknown"))
 	. = ..(message, speaking, verb, alt_name, whispering)
 
@@ -54,10 +54,10 @@
 					say(temp)
 				winset(client, "input", "text=[null]")
 
-/mob/living/carbon/human/say_understands(mob/speaker, decl/language/speaking)
+/mob/living/carbon/human/say_understands(var/mob/other, var/decl/language/speaking)
 	return (!speaking && (issilicon(speaker) || istype(speaker, /mob/announcer) || isbrain(speaker))) || ..()
 
-/mob/living/carbon/human/GetVoice()
+/mob/living/carbon/human/get_voice()
 
 	var/voice_sub
 	var/obj/item/rig/rig = get_rig()
@@ -111,7 +111,7 @@
 
 	return ..(message_data)
 
-/mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+/mob/living/carbon/human/handle_message_mode(mob/speaker, list/phrases, channel, verb = "says", used_radios, alt_name)
 	if(message_mode == MESSAGE_MODE_WHISPER) //It's going to get sanitized again immediately, so decode.
 		whisper_say(html_decode(message), speaking, alt_name)
 		return TRUE

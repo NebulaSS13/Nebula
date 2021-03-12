@@ -101,8 +101,10 @@
 	if(distance <= 1 && maintenance)
 		to_chat(user, "<span class='notice'>The wires are exposed.</span>")
 
-/obj/item/taperecorder/hear_talk(mob/living/M, msg, var/verb="says", decl/language/speaking=null)
+/obj/item/taperecorder/hear_talk(mob/speaker, list/phrases, var/verb)
+	..()
 	if(mytape && recording)
+		mytape.record_speech("[speaker.name] [verb], \"[compile_mixed_language_text_for(speaker, src, phrases)]\"")
 
 		if(speaking)
 			if(!speaking.machine_understands)
