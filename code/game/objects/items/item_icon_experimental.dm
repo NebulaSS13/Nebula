@@ -11,7 +11,7 @@ var/list/icon_state_cache = list()
 	// isicon() is apparently quite expensive so short-circuit out early if we can.
 	if(!istext(checkstate) || isnull(checkicon) || !(isfile(checkicon) || isicon(checkicon))) 
 		return FALSE
-	var/checkkey = "[checkicon]"
+	var/checkkey = "\ref[checkicon]"
 	var/list/check = global.icon_state_cache[checkkey]
 	if(!check)
 		check = list()
