@@ -224,7 +224,6 @@
 					bug.gib()
 				else
 					qdel(AM) //it just gets atomized I guess? TODO throw it into space somewhere, prevents people from using shuttles as an atom-smasher
-	var/list/powernets = list()
 	for(var/area/A in shuttle_area)
 		// if there was a zlevel above our origin, erase our ceiling now we're leaving
 		if(HasAbove(current_location.z))
@@ -235,13 +234,11 @@
 		if(knockdown)
 			A.throw_unbuckled_occupants(4, 1)
 
-		for(var/obj/structure/cable/C in A)
-			powernets |= C.powernet
 	if(logging_home_tag)
 		var/datum/shuttle_log/s_log = SSshuttle.shuttle_logs[src]
 		s_log.handle_move(current_location, destination)
 
-	translate_turfs(turf_translation, current_location.base_area, current_location.base_turf)
+	var/list/new_turfs = translate_turfs(turf_translation, current_location.base_area, current_location.base_turf)
 	current_location = destination
 
 	// if there's a zlevel above our destination, paint in a ceiling on it so we retain our air
@@ -254,16 +251,7 @@
 						continue
 					TA.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE)
 
-	// Remove all powernets that were affected, and rebuild them.
-	var/list/cables = list()
-	for(var/datum/powernet/P in powernets)
-		cables |= P.cables
-		qdel(P)
-	for(var/obj/structure/cable/C in cables)
-		if(!C.powernet)
-			var/datum/powernet/NewPN = new()
-			NewPN.add_cable(C)
-			propagate_network(C,C.powernet)
+	handle_pipes_and_power_on_move(new_turfs)
 
 	if(mothershuttle)
 		var/datum/shuttle/mothership = SSshuttle.shuttles[mothershuttle]
@@ -272,6 +260,40 @@
 				mothership.shuttle_area |= shuttle_area
 			else
 				mothership.shuttle_area -= shuttle_area
+
+// Remove all powernets and pipenets that were affected, and rebuild them.
+/datum/shuttle/proc/handle_pipes_and_power_on_move(var/list/new_turfs)
+	var/list/powernets = list()	
+	var/list/cables = list()
+	var/list/pipes = list()
+
+	for(var/turf/T in new_turfs)
+		for(var/obj/structure/cable/cable in T)
+			powernets |= cable.powernet
+		for(var/obj/machinery/atmospherics/pipe in T)
+			pipes |= pipe
+			if(LAZYLEN(pipe.nodes_to_networks))
+				pipes |= pipe.nodes_to_networks // This gets all pipes that used to be adjacent to us
+		for(var/direction in GLOB.cardinal) // We do this so that if a shuttle lands in a way that should imply a new pipe/power connection, that actually happens
+			var/turf/neighbor = get_step(T, direction)
+			if(neighbor)
+				for(var/obj/structure/cable/cable in neighbor)
+					powernets |= cable.powernet
+				for(var/obj/machinery/atmospherics/pipe in neighbor)
+					pipes |= pipe
+
+	for(var/datum/powernet/P in powernets)
+		cables |= P.cables
+		qdel(P)
+	for(var/obj/structure/cable/C in cables)
+		if(!C.powernet)
+			var/datum/powernet/NewPN = new()
+			NewPN.add_cable(C)
+			propagate_network(C,C.powernet)
+	for(var/obj/machinery/atmospherics/pipe as anything in pipes)
+		pipe.atmos_init() // this will clear pipenet/pipeline
+	for(var/obj/machinery/atmospherics/pipe as anything in pipes)
+		pipe.build_network()
 
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()

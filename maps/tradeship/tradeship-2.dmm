@@ -7716,7 +7716,7 @@
 	icon_state = "4-10"
 	},
 /obj/machinery/button/access/interior{
-	id_tag = "bearcat_shuttle";
+	id_tag = "tradeship_shuttle";
 	pixel_x = -12;
 	pixel_y = 20
 	},
