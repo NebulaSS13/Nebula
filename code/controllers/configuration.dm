@@ -208,6 +208,7 @@ var/list/gamemode_cache = list()
 	var/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
 
 	var/aggressive_changelog = 0
+	var/disable_webhook_embeds = FALSE
 
 	var/ghosts_can_possess_animals = 0
 	var/delist_when_no_admins = FALSE
@@ -730,6 +731,9 @@ var/list/gamemode_cache = list()
 
 				if("map_switching")
 					config.allow_map_switching = 1
+
+				if("disable_webhook_embeds")
+					config.disable_webhook_embeds = TRUE
 
 				if("auto_map_vote")
 					config.auto_map_vote = 1
