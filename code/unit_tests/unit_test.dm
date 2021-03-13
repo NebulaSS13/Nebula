@@ -58,8 +58,9 @@ var/ascii_reset = "[ascii_esc]\[0m"
 	var/reported = 0	// If it's reported a success or failure.  Any tests that have not are assumed to be failures.
 	var/why_disabled = "No reason set."   // If we disable a unit test we will display why so it reminds us to check back on it later.
 
-	var/safe_landmark
-	var/space_landmark
+	var/static/safe_landmark
+	var/static/space_landmark
+	var/check_cleanup
 
 /datum/unit_test/proc/log_debug(var/message)
 	log_unit_test("[ascii_yellow]---  DEBUG  --- \[[name]\]: [message][ascii_reset]")
@@ -96,11 +97,12 @@ var/ascii_reset = "[ascii_esc]\[0m"
 // Executed after the test has run - Primarily intended for shared cleanup (generally in templates)
 /datum/unit_test/proc/teardown_test()
 	SHOULD_CALL_PARENT(TRUE)
-	var/failed = FALSE
 
 #ifdef UNIT_TEST
-	if(!async) // Async tests run at the same time, so cleaning up after any one completes risks breaking following tests
-		var/ignored_types = list(/atom/movable/lighting_overlay, /obj/effect/landmark)
+	var/cleanup_failed = FALSE
+
+	if(!async && check_cleanup) // Async tests run at the same time, so cleaning up after any one completes risks breaking other tests
+		var/ignored_types = list(/atom/movable/lighting_overlay, /obj/effect/landmark/test)
 		var/z_levels = list()
 		var/turf/safe = get_safe_turf()
 		var/turf/space = get_space_turf()
@@ -114,13 +116,14 @@ var/ascii_reset = "[ascii_esc]\[0m"
 						continue
 					log_bad("Test area contained: [log_info_line(atom)]")
 					qdel(atom)
-					failed = TRUE
+					cleanup_failed = TRUE
+
+	if(cleanup_failed)
+		fail("Test did not cleanup after itself")
 #endif
 
-	if(failed)
-		fail("Test did not cleanup after itself")
-
 /datum/unit_test/proc/get_safe_turf()
+	check_cleanup = TRUE
 	if(!safe_landmark)
 		for(var/landmark in landmarks_list)
 			if(istype(landmark, /obj/effect/landmark/test/safe_turf))
@@ -129,6 +132,7 @@ var/ascii_reset = "[ascii_esc]\[0m"
 	return get_turf(safe_landmark)
 
 /datum/unit_test/proc/get_space_turf()
+	check_cleanup = TRUE
 	if(!space_landmark)
 		for(var/landmark in landmarks_list)
 			if(istype(landmark, /obj/effect/landmark/test/space_turf))
