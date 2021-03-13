@@ -37,7 +37,7 @@
 /datum/event/rogue_drone/end()
 	var/num_recovered = 0
 	for(var/mob/living/simple_animal/hostile/retaliate/malf_drone/D in drones_list)
-		spark_at(D.loc, amount=3)
+		spark_at(D.loc)
 		D.z = GLOB.using_map.admin_levels[1]
 		D.has_loot = 0
 

@@ -108,5 +108,5 @@
 			S.light("[user] snaps \his fingers and \the [S.name] lights up.")
 			playsound(S.loc, "sparks", 50, 1)
 		else
-			spark_at(get_turf(target), amount=3)
+			spark_at(get_turf(target))
 		return TRUE

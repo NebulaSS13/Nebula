@@ -65,7 +65,7 @@
 
 /obj/item/chameleon/proc/disrupt(var/delete_dummy = 1)
 	if(active_dummy)
-		spark_at(src, amount = 2, cardinal_only = TRUE, holder = src)
+		spark_at(src, amount = 5, cardinal_only = TRUE, holder = src)
 		eject_all()
 		if(delete_dummy)
 			qdel(active_dummy)

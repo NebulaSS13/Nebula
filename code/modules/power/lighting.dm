@@ -370,7 +370,7 @@
 		if(lightbulb && !(lightbulb.status == LIGHT_BROKEN))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		if(on)
-			spark_at(src, 3, TRUE)
+			spark_at(src, cardinal_only = TRUE)
 	lightbulb.status = LIGHT_BROKEN
 	update_icon()
 
