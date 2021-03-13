@@ -173,7 +173,7 @@
 		if (0 to 15)
 			// Small overcharge
 			// Sparks, Weak shock
-			spark_at(src, 2, TRUE)
+			spark_at(src, amount = 2, cardinal_only = TRUE)
 			if(user_protected && prob(80))
 				to_chat(h_user, SPAN_WARNING("Small electrical arc almost burns your hand. Luckily you had your gloves on!"))
 			else
@@ -184,7 +184,7 @@
 		if (16 to 35)
 			// Medium overcharge
 			// Sparks, Medium shock, Weak EMP
-			spark_at(src, 4, TRUE)
+			spark_at(src, amount = 4, cardinal_only = TRUE)
 			if (user_protected && prob(25))
 				to_chat(h_user, SPAN_WARNING("Medium electrical arc sparks and almost burns your hand. Luckily you had your gloves on!"))
 			else
@@ -198,7 +198,7 @@
 		if (36 to 60)
 			// Strong overcharge
 			// Sparks, Strong shock, Strong EMP, 10% light overload. 1% APC failure
-			spark_at(src, 7, TRUE)
+			spark_at(src, amount = 7, cardinal_only = TRUE)
 			if (user_protected)
 				to_chat(h_user, SPAN_DANGER("Strong electrical arc sparks between you and [src], ignoring your gloves and burning your hand!"))
 				h_user.electrocute_act(rand(30,60), src, def_zone = h_user.get_active_held_item_slot())
@@ -217,7 +217,7 @@
 		if (61 to INFINITY)
 			// Massive overcharge
 			// Sparks, Near - instantkill shock, Strong EMP, 25% light overload, 5% APC failure. 50% of SMES explosion. This is bad.
-			spark_at(src, 10, TRUE)
+			spark_at(src, amount = 10, cardinal_only = TRUE)
 			to_chat(h_user, SPAN_WARNING("Massive electrical arc sparks between you and [src].<br>Last thing you can think about is <span class='danger'>\"Oh shit...\"</span>"))
 			// Remember, we have few gigajoules of electricity here.. Turn them into crispy toast.
 			h_user.electrocute_act(rand(170,210), src, def_zone = ran_zone(null))
