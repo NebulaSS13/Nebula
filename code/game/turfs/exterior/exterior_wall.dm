@@ -200,10 +200,9 @@ var/list/natural_walls = list()
 	var/image/I
 	for(var/i = 1 to 4)
 		var/apply_state = "[wall_connections[i]]"
-		if(check_state_in_icon(apply_state, material_icon_base))
-			I = image(material_icon_base, apply_state, dir = 1<<(i-1))
-			I.color = base_color
-			add_overlay(I)
+		I = image(material_icon_base, apply_state, dir = 1<<(i-1))
+		I.color = base_color
+		add_overlay(I)
 		if(shine)
 			I = image(material_icon_base, "shine[wall_connections[i]]", dir = 1<<(i-1))
 			I.appearance_flags |= RESET_ALPHA

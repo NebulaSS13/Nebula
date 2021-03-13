@@ -114,21 +114,17 @@
 	var/image/I
 	var/base_color = paint_color ? paint_color : material.color
 	if(!density)
-		if(check_state_in_icon(material_icon_base, "fwall_open"))
-			I = image(material_icon_base, "fwall_open")
-			I.color = base_color
-			add_overlay(I)
+		I = image(material_icon_base, "fwall_open")
+		I.color = base_color
+		add_overlay(I)
 		return
 
 	for(var/i = 1 to 4)
-		var/apply_state = "[wall_connections[i]]"
-		if(check_state_in_icon(apply_state, material_icon_base))
-			I = image(material_icon_base, apply_state, dir = 1<<(i-1))
-			I.color = base_color
-			add_overlay(I)
-		if(other_connections[i] != "0" && check_state_in_icon(apply_state, material_icon_base))
-			apply_state = "other[wall_connections[i]]"
-			I = image(material_icon_base, apply_state, dir = 1<<(i-1))
+		I = image(material_icon_base, "[wall_connections[i]]", dir = 1<<(i-1))
+		I.color = base_color
+		add_overlay(I)
+		if(other_connections[i] != "0")
+			I = image(material_icon_base, "other[wall_connections[i]]", dir = 1<<(i-1))
 			I.color = base_color
 			add_overlay(I)
 
@@ -139,18 +135,16 @@
 			I.color = reinf_color
 			add_overlay(I)
 		else
-			if(check_state_in_icon("0", reinf_material.icon_reinf))
-				// Directional icon
-				for(var/i = 1 to 4)
-					var/apply_state = "[wall_connections[i]]"
-					if(check_state_in_icon(apply_state, reinf_material.icon_reinf))
-						I = image(reinf_material.icon_reinf, apply_state, dir = 1<<(i-1))
-						I.color = reinf_color
-						add_overlay(I)
-			else if(check_state_in_icon("full", reinf_material.icon_reinf))
-				I = image(reinf_material.icon_reinf, "full")
+			if(reinf_material.use_reinf_state)
+				I = image(reinf_material.icon_reinf, reinf_material.use_reinf_state)
 				I.color = reinf_color
 				add_overlay(I)
+			else
+				// Directional icon
+				for(var/i = 1 to 4)
+					I = image(reinf_material.icon_reinf, "[wall_connections[i]]", dir = 1<<(i-1))
+					I.color = reinf_color
+					add_overlay(I)
 
 	var/image/texture = material.get_wall_texture()
 	if(texture)
@@ -162,7 +156,7 @@
 				apply_icon = "other[wall_connections[i]]"
 			else
 				apply_icon = "[wall_connections[i]]"
-			if(apply_icon && check_state_in_icon(apply_icon, material.icon_stripe))
+			if(apply_icon)
 				I = image(material.icon_stripe, apply_icon, dir = 1<<(i-1))
 				I.color = stripe_color
 				add_overlay(I)

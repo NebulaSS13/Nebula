@@ -95,6 +95,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/icon_stripe = 'icons/turf/walls/stripes.dmi'
 	var/icon_base_natural = 'icons/turf/walls/natural.dmi'
 	var/icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
+	var/use_reinf_state = "full"
 
 	var/door_icon_base = "metal"                         // Door base icon tag. See header.
 	var/table_icon_base = "metal"
