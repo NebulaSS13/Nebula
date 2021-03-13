@@ -2,6 +2,7 @@
 	name = "ERT Base"
 	id = "ert_spawn"
 	suffixes = list("ert/ert_base.dmm")
+	modify_tag_vars = FALSE
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/rescue)
 	apc_test_exempt_areas = list(
 		/area/map_template/rescue_base = NO_SCRUBBER|NO_VENT|NO_APC

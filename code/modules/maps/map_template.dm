@@ -11,6 +11,7 @@
 	var/base_turf_for_zs = null
 	var/accessibility_weight = 0
 	var/template_flags = TEMPLATE_FLAG_ALLOW_DUPLICATES
+	var/modify_tag_vars = TRUE // Will modify tag vars so that duplicate templates are handled properly. May have compatibility issues with legacy maps (esp. with ferry shuttles).
 
 /datum/map_template/New(var/list/paths = null, var/rename = null)
 	if(paths && !islist(paths))
@@ -112,7 +113,7 @@
 	var/list/atoms_to_initialise = list()
 	var/shuttle_state = pre_init_shuttles()
 
-	var/map_hash = (template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES) && "[sequential_id("map_id")]"
+	var/map_hash = modify_tag_vars && "[sequential_id("map_id")]"
 	ASSERT(isnull(GLOB._preloader.current_map_hash)) // Recursive maploading is possible, but not from this block: recursive loads should be triggered in Initialize, from init_atoms below.
 	GLOB._preloader.current_map_hash = map_hash
 
@@ -158,7 +159,7 @@
 	var/list/atoms_to_initialise = list()
 	var/shuttle_state = pre_init_shuttles()
 
-	var/map_hash = (template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES) && "[sequential_id("map_id")]"
+	var/map_hash = modify_tag_vars && "[sequential_id("map_id")]"
 	ASSERT(isnull(GLOB._preloader.current_map_hash))
 	GLOB._preloader.current_map_hash = map_hash
 

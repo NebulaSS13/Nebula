@@ -2,6 +2,7 @@
 	name = "Ninja Base"
 	id = "ninja_spawn"
 	suffixes = list("ninja/ninja_base.dmm")
+	modify_tag_vars = FALSE
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/ninja)
 	apc_test_exempt_areas = list(
 		/area/map_template/ninja_dojo = NO_SCRUBBER|NO_VENT|NO_APC

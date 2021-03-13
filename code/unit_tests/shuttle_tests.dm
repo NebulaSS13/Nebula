@@ -41,3 +41,19 @@
 	else
 		pass("All shuttles were properly configured.")
 	return 1
+
+/datum/unit_test/allow_duplicate_templates_shall_use_tag_modification
+	name = "SHUTTLE: All map templates allowing duplicate spawns use tag modification."
+
+/datum/unit_test/allow_duplicate_templates_shall_use_tag_modification/start_test()
+	var/list/failures = list()
+
+	for(var/template_name in SSmapping.map_templates)
+		var/datum/map_template/template = SSmapping.map_templates[template_name]
+		if((template.template_flags & (TEMPLATE_FLAG_ALLOW_DUPLICATES | TEMPLATE_FLAG_TEST_DUPLICATES)) && !template.modify_tag_vars)
+			failures += template_name
+	if (length(failures))
+		fail("The following templates were misconfigured: [english_list(failures)].")
+	else
+		pass("All templates were properly configured.")
+	return 1
