@@ -3,10 +3,12 @@
 // with a handful of specific items.
 
 // For checking if we have a specific state, for inventory icons and nonhumanoid species.
-// Cached cause asking icons is expensive
+// Cached cause asking icons is expensive. This is still expensive, so avoid using it if
+// you can reasonably expect the icon_state to exist beforehand, or if you can cache the
+// value somewhere (as done below with use_single_icon in /obj/item/Initialize()).
 var/list/icon_state_cache = list()
 /proc/check_state_in_icon(var/checkstate, var/checkicon)
-	if(!checkstate || !istext(checkstate) || !isicon(checkicon))
+	if(!checkstate || !istext(checkstate) || isnull(checkicon) || istext(checkicon) || isnum(checkicon))
 		return FALSE
 	var/list/check = global.icon_state_cache[checkicon]
 	if(!check)
