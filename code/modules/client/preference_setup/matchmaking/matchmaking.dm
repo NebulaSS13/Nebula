@@ -69,7 +69,7 @@ var/global/datum/matchmaker/matchmaker = new()
 	if(!M.current)	//no extremely platonic relationships
 		return FALSE
 
-	var/decl/special_role/special_role_data = ispath(M.assigned_special_role, /decl/special_role) && decls_repository.get_decl(M.assigned_special_role)
+	var/decl/special_role/special_role_data = ispath(M.assigned_special_role, /decl/special_role) && GET_DECL(M.assigned_special_role)
 	if(special_role_data && (special_role_data.flags & ANTAG_OVERRIDE_JOB))
 		return FALSE
 
@@ -128,7 +128,7 @@ var/global/datum/matchmaker/matchmaker = new()
 				continue
 			var/datum/job/coworker = SSjobs.get_by_title(M.job)
 			if(coworker && holder.assigned_job && other.holder.assigned_job)
-				if(LAZYLEN(coworker.department_refs & holder.assigned_job.department_refs) || LAZYLEN(coworker.department_refs & other.holder.assigned_job.department_refs))
+				if(LAZYLEN(coworker.department_types & holder.assigned_job.department_types) || LAZYLEN(coworker.department_types & other.holder.assigned_job.department_types))
 					candidates[M] = 5	//coworkers are 5 times as likely to know about your relations
 
 		for(var/i=1 to 5)

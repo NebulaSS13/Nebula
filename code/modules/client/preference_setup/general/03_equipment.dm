@@ -45,7 +45,7 @@
 	to_file(S["backpack"], pref.backpack.name)
 	to_file(S["backpack_metadata"], pref.backpack_metadata)
 	
-	var/decl/starting_cash_choice/cash_choice = decls_repository.get_decl(pref.starting_cash_choice)
+	var/decl/starting_cash_choice/cash_choice = GET_DECL(pref.starting_cash_choice)
 	to_file(S["starting_cash_choice"], lowertext(cash_choice.name))
 
 /datum/category_item/player_setup_item/physical/equipment/sanitize_character()
@@ -118,7 +118,7 @@
 		. += " <a href='?src=\ref[src];backpack=[pref.backpack.name];tweak=\ref[bt]'>[bt.get_ui_content(get_backpack_metadata(pref.backpack, bt))]</a>"
 	. += "<br>"
 
-	var/decl/starting_cash_choice/cash_choice = decls_repository.get_decl(pref.starting_cash_choice)
+	var/decl/starting_cash_choice/cash_choice = GET_DECL(pref.starting_cash_choice)
 	. += "<br><b>Personal finances:</b><br><a href='?src=\ref[src];change_cash_choice=1'>[capitalize(cash_choice.name)]</a><br>"
 	return jointext(.,null)
 
@@ -212,7 +212,7 @@
 		from_file(character["backbag"], old_index)
 
 		if(old_index > 0 && old_index <= old_index_to_backpack_type.len)
-			pref.backpack = decls_repository.get_decl(old_index_to_backpack_type[old_index])
+			pref.backpack = GET_DECL(old_index_to_backpack_type[old_index])
 		else
 			pref.backpack = get_default_outfit_backpack()
 

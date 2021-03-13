@@ -89,8 +89,6 @@
 
 #define issilicon(A) istype(A, /mob/living/silicon)
 
-#define isslime(A) istype(A, /mob/living/carbon/slime)
-
 #define isunderwear(A) istype(A, /obj/item/underwear)
 
 #define isvirtualmob(A) istype(A, /mob/observer/virtual)
@@ -197,4 +195,4 @@
 
 #define FONT_GIANT(X) "<font size='5'>[X]</font>"
 
-#define crash_with(X) crash_at(X, __FILE__, __LINE__)
+#define PRINT_STACK_TRACE(X) get_stack_trace(X, __FILE__, __LINE__)

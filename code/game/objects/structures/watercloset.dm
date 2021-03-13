@@ -112,7 +112,7 @@
 	open = round(rand(0, 1))
 	update_icon()
 
-/obj/structure/hygiene/toilet/attack_hand(var/mob/living/user)
+/obj/structure/hygiene/toilet/attack_hand(var/mob/user)
 	if(swirlie)
 		usr.visible_message(
 			"<span class='danger'>[user] slams the toilet seat onto [swirlie.name]'s head!</span>",
@@ -140,7 +140,7 @@
 /obj/structure/hygiene/toilet/on_update_icon()
 	icon_state = "toilet[open][cistern]"
 
-/obj/structure/hygiene/toilet/attackby(obj/item/I, var/mob/living/user)
+/obj/structure/hygiene/toilet/attackby(obj/item/I, var/mob/user)
 	if(isCrowbar(I))
 		to_chat(user, "<span class='notice'>You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"].</span>")
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
@@ -384,19 +384,17 @@
 /obj/structure/hygiene/sink/is_pressurized_fluid_source()
 	return TRUE
 
-/obj/structure/hygiene/sink/MouseDrop_T(var/obj/item/thing, var/mob/user)
-	..()
-	if(!istype(thing) || !ATOM_IS_OPEN_CONTAINER(thing))
-		return ..()
-	if(!usr.Adjacent(src))
-		return ..()
-	if(!thing.reagents || thing.reagents.total_volume == 0)
-		to_chat(usr, "<span class='warning'>\The [thing] is empty.</span>")
-		return
-	// Clear the vessel.
-	visible_message("<span class='notice'>\The [usr] tips the contents of \the [thing] into \the [src].</span>")
-	thing.reagents.clear_reagents()
-	thing.update_icon()
+/obj/structure/hygiene/sink/receive_mouse_drop(var/atom/dropping, var/mob/user)
+	. = ..()
+	if(!. && isitem(dropping) && ATOM_IS_OPEN_CONTAINER(dropping))
+		var/obj/item/thing = dropping
+		if(thing.reagents?.total_volume <= 0)
+			to_chat(usr, SPAN_WARNING("\The [thing] is empty."))
+		else
+			visible_message(SPAN_NOTICE("\The [user] tips the contents of \the [thing] into \the [src]."))
+			thing.reagents.clear_reagents()
+			thing.update_icon()
+		return TRUE
 
 /obj/structure/hygiene/sink/attack_hand(var/mob/user)
 	if (ishuman(user))
@@ -431,7 +429,7 @@
 		"<span class='notice'>You wash your hands using \the [src].</span>")
 
 
-/obj/structure/hygiene/sink/attackby(obj/item/O, var/mob/living/user)
+/obj/structure/hygiene/sink/attackby(obj/item/O, var/mob/user)
 	if(isplunger(O) && clogged > 0)
 		return ..()
 
@@ -451,9 +449,11 @@
 		if(B.bcell)
 			if(B.bcell.charge > 0 && B.status == 1)
 				flick("baton_active", src)
-				user.Stun(10)
-				user.stuttering = 10
-				user.Weaken(10)
+				if(isliving(user))
+					var/mob/living/M = user
+					SET_STATUS_MAX(M, STAT_STUN, 10)
+					SET_STATUS_MAX(M, STAT_STUTTER, 10)
+					SET_STATUS_MAX(M, STAT_WEAK, 10)
 				if(isrobot(user))
 					var/mob/living/silicon/robot/R = user
 					R.cell.charge -= 20

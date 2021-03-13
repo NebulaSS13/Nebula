@@ -6,7 +6,7 @@
 	var/list/minimal_access = list()      // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
 	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
 	var/list/software_on_spawn = list()   // Defines the software files that spawn on tablets and labtops
-	var/list/department_refs = list()	  // What deparements the job is in.
+	var/list/department_types = list()	  // What deparements the job is in.
 	var/primary_department = null 		  // A jobs primary deparment, defualts to the first in the department refs list if not set. Important for heads, the department they are head of needs to be this one.
 	var/total_positions = 0               // How many players can be this job
 	var/spawn_positions = 0               // How many players can spawn in as this job
@@ -16,6 +16,7 @@
 	var/must_fill = 0					  // If set to 1 this job will be have priority over other job preferences. Do not reccommend on jobs with more that one position.
 	var/not_random_selectable = 0		  // If set to 1 this job will not be selected when a player asks for a random job.
 	var/description						  // If set, returns a static description. To add dynamic text, overwrite this proc, call parent aka . = ..() and then . += "extra text" on the line after that.
+	var/list/event_categories
 
 	var/supervisors = null                // Supervisors, who this person answers to directly
 	var/selection_color = "#515151"       // Selection screen color
@@ -98,7 +99,7 @@
 /datum/job/proc/create_cash_on_hand(var/mob/living/carbon/human/H, var/datum/money_account/M)
 	if(!istype(M) || !ispath(H.client?.prefs?.starting_cash_choice, /decl/starting_cash_choice))
 		return 0
-	var/decl/starting_cash_choice/cash = decls_repository.get_decl(H.client.prefs.starting_cash_choice)
+	var/decl/starting_cash_choice/cash = GET_DECL(H.client.prefs.starting_cash_choice)
 	for(var/obj/item/thing in cash.get_cash_objects(H, M))
 		. += thing.get_base_value()
 		H.equip_to_storage_or_put_in_hands(thing)
@@ -143,7 +144,7 @@
 			var/datum/transaction/T = M.transaction_log[1]
 			remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.get_source_name()]<br>"
 		if(cash_on_hand > 0)
-			var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
+			var/decl/currency/cur = GET_DECL(GLOB.using_map.default_currency)
 			remembered_info += "<b>Your cash on hand is:</b> [cur.format_value(cash_on_hand)]<br>"
 		H.StoreMemory(remembered_info, /decl/memory_options/system)
 		H.mind.initial_account = M
@@ -285,7 +286,7 @@
 	var/datum/mil_branch/branch = mil_branches.get_branch(branch_name)
 
 	if(!branch)
-		crash_with("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
+		PRINT_STACK_TRACE("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
 		return 0
 
 	if(is_type_in_list(branch, allowed_branches))
@@ -310,7 +311,7 @@
 	var/datum/mil_rank/rank = mil_branches.get_rank(branch_name, rank_name)
 
 	if(!rank)
-		crash_with("unknown rank \"[rank_name]\" in branch \"[branch_name]\" passed to is_rank_allowed()")
+		PRINT_STACK_TRACE("unknown rank \"[rank_name]\" in branch \"[branch_name]\" passed to is_rank_allowed()")
 		return 0
 
 	if(is_type_in_list(rank, allowed_ranks))
@@ -458,7 +459,7 @@
 
 /datum/job/proc/post_equip_rank(var/mob/person, var/alt_title)
 	if(is_semi_antagonist && person.mind)
-		var/decl/special_role/provocateur/provocateurs = decls_repository.get_decl(/decl/special_role/provocateur)
+		var/decl/special_role/provocateur/provocateurs = GET_DECL(/decl/special_role/provocateur)
 		provocateurs.add_antagonist(person.mind)
 
 /datum/job/proc/get_alt_title_for(var/client/C)

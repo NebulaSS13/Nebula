@@ -88,7 +88,7 @@
 	owner = null
 	return ..()
 
-obj/aiming_overlay/proc/update_aiming_deferred()
+/obj/aiming_overlay/proc/update_aiming_deferred()
 	set waitfor = 0
 	sleep(0)
 	update_aiming()
@@ -111,7 +111,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 
 	if(!(aiming_with in owner) || (istype(owner, /mob/living/carbon/human) && !(aiming_with in owner.get_held_items())))
 		to_chat(owner, SPAN_WARNING("You must keep hold of your weapon!"))
-	else if(owner.eye_blind)
+	else if(GET_STATUS(owner, STAT_BLIND))
 		to_chat(owner, SPAN_WARNING("You are blind and cannot see your target!"))
 	else if(!aiming_at || !istype(aiming_at.loc, /turf))
 		to_chat(owner, SPAN_WARNING("You have lost sight of your target!"))

@@ -6,14 +6,17 @@
 {{else}}
 
 <div>
-	{{:helper.link((data.oneAccess ? "One" : "All") + ' Required', data.oneAccess ? "lock" : "unlock", {'one_access' : 1})}}
 	{{:helper.link('Access Setup: ' + (data.autoset ? "AUTO" : "MANUAL"), data.autoset ? "lock" : "unlock", {'autoset' : 1})}}
-	{{:helper.link('Clear', 'refresh', {'clear' : 1})}}
 	{{if data.lockable}}
 		{{:helper.link('Lock', 'lock', {'lock' : 1})}}
 	{{/if}}
+{{if !data.autoset}}
+	{{:helper.link((data.oneAccess ? "One" : "All") + ' Required', data.oneAccess ? "lock" : "unlock", {'one_access' : 1})}}
+	{{:helper.link('Clear', 'refresh', {'clear' : 1})}}
+	{{/if}}
 </div>
 
+{{if !data.autoset}}
 <table>
 	<thead>
 		<tr>
@@ -36,6 +39,7 @@
 		</tr>
 	</tbody>
 </table>
+{{/if}}
 
 {{/if}}
 

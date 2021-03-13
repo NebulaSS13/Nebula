@@ -1,6 +1,6 @@
 /atom/movable
 	layer = OBJ_LAYER
-	appearance_flags = TILE_BOUND
+	appearance_flags = TILE_BOUND|PIXEL_SCALE
 	glide_size = 8
 	var/movable_flags
 	var/last_move = null
@@ -117,7 +117,7 @@
 	// meh do nothing. we know what we're doing. pro engineers.
 #else
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
-		crash_with("Was deleted before initialization")
+		PRINT_STACK_TRACE("Was deleted before initialization")
 #endif
 
 	for(var/A in src)
@@ -246,7 +246,7 @@
 
 /atom/movable/overlay/Initialize()
 	if(!loc)
-		crash_with("[type] created in nullspace.")
+		PRINT_STACK_TRACE("[type] created in nullspace.")
 		return INITIALIZE_HINT_QDEL
 	master = loc
 	SetName(master.name)
@@ -321,12 +321,10 @@
 /atom/movable/proc/get_bullet_impact_effect_type()
 	return BULLET_IMPACT_NONE
 
-/atom/movable/attack_hand(mob/living/user)
+/atom/movable/attack_hand(mob/user)
 	// Anchored check so we can operate switches etc on grab intent without getting grab failure msgs.
-	if(istype(user) && !user.lying && user.a_intent == I_GRAB && !anchored)
-		user.make_grab(src)
+	if(isliving(user) && !user.lying && user.a_intent == I_GRAB && !anchored)
+		var/mob/living/M = user
+		M.make_grab(src)
 		return 0
 	. = ..()
-
-/atom/movable/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
-	. = ..() || (mover && !(mover.movable_flags & MOVABLE_FLAG_NONDENSE_COLLISION) && !mover.density)

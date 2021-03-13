@@ -20,8 +20,8 @@
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
-			CULTURE_OTHER,
-			CULTURE_HUMAN
+			/decl/cultural_info/culture/other,
+			/decl/cultural_info/culture/human
 		)
 	)
 

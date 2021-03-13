@@ -7,21 +7,22 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 1.5
 
-/decl/material/liquid/paralytics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/paralytics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/threshold = 2
-	if(M.chem_doses[type] >= metabolism * threshold * 0.5)
-		M.confused = max(M.confused, 2)
+	var/dose = LAZYACCESS(M.chem_doses, type)
+	if(dose >= metabolism * threshold * 0.5)
+		SET_STATUS_MAX(M, STAT_CONFUSE, 2)
 		M.add_chemical_effect(CE_VOICELOSS, 1)
-	if(M.chem_doses[type] > threshold * 0.5)
-		M.make_dizzy(3)
-		M.Weaken(2)
-	if(M.chem_doses[type] == round(threshold * 0.5, metabolism))
+	if(dose > threshold * 0.5)
+		ADJ_STATUS(M, STAT_DIZZY, 3)
+		SET_STATUS_MAX(M, STAT_WEAK, 2)
+	if(dose == round(threshold * 0.5, metabolism))
 		to_chat(M, SPAN_WARNING("Your muscles slacken and cease to obey you."))
-	if(M.chem_doses[type] >= threshold)
+	if(dose >= threshold)
 		M.add_chemical_effect(CE_SEDATE, 1)
-		M.eye_blurry = max(M.eye_blurry, 10)
+		SET_STATUS_MAX(M, STAT_BLURRY, 10)
 
-	if(M.chem_doses[type] > 1 * threshold)
+	if(dose > 1 * threshold)
 		M.adjustToxLoss(removed)
 
 /decl/material/liquid/presyncopics
@@ -39,7 +40,7 @@
 	)
 	value = 1.5
 
-/decl/material/liquid/presyncopics/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/presyncopics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/drug_strength = 4
-	M.make_dizzy(drug_strength)
-	M.confused = max(M.confused, drug_strength * 5)
+	ADJ_STATUS(M, STAT_DIZZY, drug_strength)
+	SET_STATUS_MAX(M, STAT_CONFUSE, drug_strength * 5)

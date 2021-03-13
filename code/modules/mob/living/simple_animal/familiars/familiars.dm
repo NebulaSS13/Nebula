@@ -13,6 +13,7 @@
 	min_gas = list(/decl/material/gas/oxygen = 1)
 	max_gas = null
 	unsuitable_atmos_damage = 1
+	gene_damage = -1
 
 	var/list/wizardy_spells = list()
 
@@ -170,7 +171,7 @@
 
 
 	speak_emote = list("meows", "purrs")
-	holder_type = /obj/item/holder/cat
+	holder_type = /obj/item/holder
 	mob_size = MOB_SIZE_SMALL
 
 	health = 25

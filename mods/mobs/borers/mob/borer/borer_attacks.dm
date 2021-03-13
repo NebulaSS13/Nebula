@@ -50,11 +50,11 @@
 
 	//Update their traitor status.
 	if(host.mind && !neutered)
-		var/decl/special_role/borer/borers = decls_repository.get_decl(/decl/special_role/borer)
+		var/decl/special_role/borer/borers = GET_DECL(/decl/special_role/borer)
 		borers.add_antagonist_mind(host.mind, 1, borers.faction_name, borers.faction_welcome)
 
 	if(istype(host, /mob/living/carbon/human))
-		var/obj/item/organ/I = H.internal_organs_by_name[BP_BRAIN]
+		var/obj/item/organ/I = H.get_internal_organ(BP_BRAIN)
 		if(!I) // No brain organ, so the borer moves in and replaces it permanently.
 			replace_brain()
 		else if(E) // If they're in normally, implant removal can get them out.

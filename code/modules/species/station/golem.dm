@@ -39,9 +39,9 @@
 	is_crystalline = TRUE
 
 	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_CULTIST,
-		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
-		TAG_FACTION =   FACTION_OTHER
+		TAG_CULTURE =   /decl/cultural_info/culture/hidden/cultist,
+		TAG_HOMEWORLD = /decl/cultural_info/location/stateless,
+		TAG_FACTION =   /decl/cultural_info/faction/other
 	)
 
 	traits = list(/decl/trait/metabolically_inert = TRAIT_LEVEL_EXISTS)

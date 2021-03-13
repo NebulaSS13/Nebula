@@ -7,6 +7,7 @@
 	idle_power_usage = 30
 	active_power_usage = 2500
 	base_type = /obj/machinery/fabricator/imprinter
+	has_recycler = FALSE
 	fabricator_class = FABRICATOR_CLASS_IMPRINTER
 	base_storage_capacity = list(
 		/decl/material/solid/glass =              SHEET_MATERIAL_AMOUNT * 50,

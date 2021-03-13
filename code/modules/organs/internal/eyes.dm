@@ -70,7 +70,7 @@
 /obj/item/organ/internal/eyes/proc/update_colour()
 	if(!owner)
 		return
-	if(owner.chem_effects[CE_GLOWINGEYES])
+	if(owner.has_chemical_effect(CE_GLOWINGEYES, 1))
 		eye_colour = "#75bdd6" // blue glow, hardcoded for now.
 	else
 		eye_colour = owner.eye_colour
@@ -86,9 +86,9 @@
 	if(!owner)
 		return
 	if(is_bruised())
-		owner.eye_blurry = 20
+		owner.set_status(STAT_BLURRY, 20)
 	if(is_broken())
-		owner.eye_blind = 20
+		owner.set_status(STAT_BLIND, 20)
 
 /obj/item/organ/internal/eyes/Initialize()
 	. = ..()
@@ -109,7 +109,7 @@
 	. = ..()
 	robotize()
 
-/obj/item/organ/internal/eyes/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/eyes/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	..()
 	name = "optical sensor"
 	icon = 'icons/obj/robot_component.dmi'

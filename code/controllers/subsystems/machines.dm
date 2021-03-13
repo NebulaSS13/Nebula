@@ -7,7 +7,7 @@
 if (Datum.is_processing) {\
 	if(Datum.is_processing != "SSmachines.[#List]")\
 	{\
-		crash_with("Failed to start processing. [log_info_line(Datum)] is already being processed by [Datum.is_processing] but queue attempt occured on SSmachines.[#List]."); \
+		PRINT_STACK_TRACE("Failed to start processing. [log_info_line(Datum)] is already being processed by [Datum.is_processing] but queue attempt occured on SSmachines.[#List]."); \
 	}\
 } else {\
 	Datum.is_processing = "SSmachines.[#List]";\
@@ -19,7 +19,7 @@ if(Datum.is_processing) {\
 	if(SSmachines.List.Remove(Datum)) {\
 		Datum.is_processing = null;\
 	} else {\
-		crash_with("Failed to stop processing. [log_info_line(Datum)] is being processed by [is_processing] and not found in SSmachines.[#List]"); \
+		PRINT_STACK_TRACE("Failed to stop processing. [log_info_line(Datum)] is being processed by [is_processing] and not found in SSmachines.[#List]"); \
 	}\
 }
 
@@ -156,15 +156,15 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 			if(M in processing)
 				processing.Remove(M)
 				M.is_processing = null
-				crash_with("[log_info_line(M)] was found illegally queued on SSmachines.")
+				PRINT_STACK_TRACE("[log_info_line(M)] was found illegally queued on SSmachines.")
 				continue
 			else if(resumed)
 				current_run.Cut() // Abandon current run; assuming that we were improperly resumed with the wrong process queue.
-				crash_with("[log_info_line(M)] was in the wrong subqueue on SSmachines on a resumed fire.")
+				PRINT_STACK_TRACE("[log_info_line(M)] was in the wrong subqueue on SSmachines on a resumed fire.")
 				process_machinery(0)
 				return
 			else // ??? possibly dequeued by another machine or something ???
-				crash_with("[log_info_line(M)] was in the wrong subqueue on SSmachines on an unresumed fire.")
+				PRINT_STACK_TRACE("[log_info_line(M)] was in the wrong subqueue on SSmachines on an unresumed fire.")
 				continue
 
 		if(!QDELETED(M) && (M.ProcessAll(wait) == PROCESS_KILL))

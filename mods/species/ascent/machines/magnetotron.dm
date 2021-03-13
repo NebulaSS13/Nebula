@@ -7,7 +7,7 @@
 	icon = 'icons/obj/structures/weightlifter.dmi'
 
 /obj/machinery/ascent_magnetotron/proc/display_message(var/message)
-	var/decl/language/speaking = decls_repository.get_decl(/decl/language/mantid/nonvocal)
+	var/decl/language/speaking = GET_DECL(/decl/language/mantid/nonvocal)
 	for(var/mob/M in viewers())
 		if(M.can_speak(speaking))
 			to_chat(M, "\icon[src] " + SPAN_WARNING("\The [src] flashes, \"[message]\""))
@@ -42,7 +42,7 @@
 
 		target.visible_message(SPAN_NOTICE("[target] molts away their shell, emerging as a new gyne."))
 		spark_at(src, cardinal_only = TRUE)
-		target.AdjustStunned(6)
+		ADJ_STATUS(target, STAT_STUN, 6)
 		target.set_species(SPECIES_MANTID_GYNE)
 		new /obj/effect/temp_visual/emp_burst(loc)
 		for(var/obj/item/organ/external/E in target.organs)

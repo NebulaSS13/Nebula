@@ -150,6 +150,8 @@
 
 			if (href_list["createpill_multiple"])
 				count = input("Select the number of pills to make.", "Max [max_pill_count]", pillamount) as num
+				if(!CanInteract(user, state))
+					return
 				count = Clamp(count, 1, max_pill_count)
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
@@ -159,6 +161,8 @@
 			if (amount_per_pill > 30) amount_per_pill = 30
 
 			var/name = sanitizeSafe(input(usr,"Name:","Name your pill!","[reagents.get_primary_reagent_name()] ([amount_per_pill]u)"), MAX_NAME_LEN)
+			if(!CanInteract(user, state))
+				return
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
 				return
@@ -167,9 +171,8 @@
 				if(!name) name = reagents.get_primary_reagent_name()
 				P.SetName("[name] pill")
 				P.icon_state = "pill"+pillsprite
-				if(P.icon_state in list("pill1", "pill2", "pill3", "pill4", "pill5")) // if using greyscale, take colour from reagent
-					P.color = reagents.get_color()
 				reagents.trans_to_obj(P,amount_per_pill)
+				P.update_icon()
 				if(loaded_pill_bottle)
 					if(loaded_pill_bottle.contents.len < loaded_pill_bottle.max_storage_space)
 						P.forceMove(loaded_pill_bottle)
@@ -201,7 +204,7 @@
 /obj/machinery/chem_master/proc/fetch_contaminants(mob/user, datum/reagents/reagents, decl/material/main_reagent)
 	. = list()
 	for(var/rtype in reagents.reagent_volumes)
-		var/decl/material/reagent = decls_repository.get_decl(rtype)
+		var/decl/material/reagent = GET_DECL(rtype)
 		if(reagent != main_reagent && prob(user.skill_fail_chance(core_skill, 100)))
 			. += reagent
 
@@ -269,7 +272,7 @@
 		else
 			dat += "Add to buffer:<BR>"
 			for(var/rtype in R.reagent_volumes)
-				var/decl/material/G = decls_repository.get_decl(rtype)
+				var/decl/material/G = GET_DECL(rtype)
 				dat += "[G.name], [REAGENT_VOLUME(R, rtype)] Units - "
 				dat += "<A href='?src=\ref[src];analyze=\ref[G]'>(Analyze)</A> "
 				dat += "<A href='?src=\ref[src];add=\ref[G];amount=1'>(1)</A> "
@@ -281,7 +284,7 @@
 		dat += "<HR>Transfer to <A href='?src=\ref[src];toggle=1'>[(!mode ? "disposal" : "beaker")]:</A><BR>"
 		if(reagents.total_volume)
 			for(var/rtype in reagents.reagent_volumes)
-				var/decl/material/N = decls_repository.get_decl(rtype)
+				var/decl/material/N = GET_DECL(rtype)
 				dat += "[N.name], [REAGENT_VOLUME(reagents, rtype)] Units - "
 				dat += "<A href='?src=\ref[src];analyze=\ref[N]'>(Analyze)</A> "
 				dat += "<A href='?src=\ref[src];remove=\ref[N];amount=1'>(1)</A> "

@@ -145,10 +145,10 @@
 
 /proc/get_announcement_frequency(var/datum/job/job)
 	// During red alert all jobs are announced on main frequency.
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
 	if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
 		return "Common"
-
-	if(LAZYLEN(job.department_refs & SSdepartments.departments))
-		return SSdepartments.departments[job.primary_department].announce_channel
+	var/decl/department/dept = SSjobs.get_department_by_type(job.primary_department)
+	if(dept?.announce_channel)
+		return dept.announce_channel
 	return "Common"

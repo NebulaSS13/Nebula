@@ -359,17 +359,11 @@ var/list/solars_list = list()
 /obj/machinery/power/solar_control/on_update_icon()
 	if(stat & BROKEN)
 		icon_state = "broken"
-		overlays.Cut()
 		return
 	if(stat & NOPOWER)
 		icon_state = "c_unpowered"
-		overlays.Cut()
 		return
 	icon_state = "solar"
-	overlays.Cut()
-	if(cdir > -1)
-		overlays += image('icons/obj/computer.dmi', "solcon-o", ABOVE_OBJ_LAYER, angle2dir(cdir))
-	return
 
 /obj/machinery/power/solar_control/interface_interact(mob/user)
 	interact(user)

@@ -61,7 +61,7 @@
 
 /obj/item/proc/set_material(var/new_material)
 	if(new_material)
-		material = decls_repository.get_decl(new_material)
+		material = GET_DECL(new_material)
 	if(istype(material))
 		health = round(material_health_multiplier * material.integrity)
 		max_health = health

@@ -332,7 +332,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/closet/walllocker/emerglocker/north,
+/obj/structure/emergency_dispenser/north,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/machinery/door/airlock,
 /turf/simulated/floor/wood/yew,

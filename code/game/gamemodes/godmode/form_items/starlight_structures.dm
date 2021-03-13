@@ -3,7 +3,7 @@
 
 /obj/structure/deity/pylon/starlight
 	name = "sun pylon"
-	desc = "A minature sun, floating ontop of a small pillar."
+	desc = "A miniature sun, floating ontop of a small pillar."
 	icon_state = "star_pylon"
 
 /obj/structure/deity/gateway
@@ -129,7 +129,7 @@
 		for(var/s in possible_forms[looking_for]["spells"])
 			var/spell/S = new s
 			H.add_spell(S)
-		var/decl/special_role/godcultist/godcult = decls_repository.get_decl(/decl/special_role/godcultist)
+		var/decl/special_role/godcultist/godcult = GET_DECL(/decl/special_role/godcultist)
 		godcult.add_antagonist_mind(H.mind, 1, "[looking_for] of [linked_god]", "You are a powerful entity in the service to \the [linked_god]. [possible_forms[looking_for]["species"]]", specific_god = linked_god)
 		stop_looking_for(TRUE)
 
@@ -177,7 +177,7 @@
 			if(get_dist(M.current, src) <= 3)
 				. += M.current
 
-/obj/structure/deity/radiant_statue/attack_hand(var/mob/living/L)
+/obj/structure/deity/radiant_statue/attack_hand(var/mob/L)
 	if(!istype(L))
 		return
 	var/obj/O = L.get_equipped_item(slot_wear_suit_str)

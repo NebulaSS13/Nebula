@@ -63,6 +63,8 @@
 */
 /datum/shuttle/autodock/proc/dock()
 	if(active_docking_controller && shuttle_docking_controller)
+		if(flags & SHUTTLE_FLAGS_NO_CODE)
+			set_docking_codes(active_docking_controller.docking_codes)
 		shuttle_docking_controller.initiate_docking(active_docking_controller.id_tag)
 		last_dock_attempt_time = world.time
 

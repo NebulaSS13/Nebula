@@ -16,6 +16,9 @@
 	var/obj/master = null    //A reference to the object in the slot. Grabs or items, generally.
 	var/globalscreen = FALSE //Global screens are not qdeled when the holding mob is destroyed.
 
+/obj/screen/receive_mouse_drop(atom/dropping, mob/user)
+	return TRUE
+
 /obj/screen/Destroy()
 	master = null
 	return ..()
@@ -102,7 +105,7 @@
 	if(!usr.canClick())
 		return
 
-	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+	if(usr.incapacitated())
 		return 1
 
 	if(!(owner in usr))
@@ -117,7 +120,7 @@
 /obj/screen/storage/Click()
 	if(!usr.canClick())
 		return 1
-	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
+	if(usr.incapacitated(INCAPACITATION_DISRUPTED))
 		return 1
 	if(master)
 		var/obj/item/I = usr.get_active_hand()
@@ -259,92 +262,8 @@
 				L.lookup()
 
 		if("internal")
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
-				if(!C.stat && !C.stunned && !C.paralysis && !C.restrained())
-					if(C.internal)
-						C.set_internals(null)
-					else
+			usr.ui_toggle_internals()
 
-						var/no_mask
-						if(!(C.wear_mask && C.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
-							var/mob/living/carbon/human/H = C
-							if(!(H.head && H.head.item_flags & ITEM_FLAG_AIRTIGHT))
-								no_mask = 1
-
-						if(no_mask)
-							to_chat(C, "<span class='notice'>You are not wearing a suitable mask or helmet.</span>")
-							return 1
-						else
-							var/list/nicename = null
-							var/list/tankcheck = null
-							var/breathes = /decl/material/gas/oxygen    //default, we'll check later
-							var/poisons = list(/decl/material/gas/chlorine)
-							var/list/contents = list()
-							var/from = "on"
-
-							if(ishuman(C))
-								var/mob/living/carbon/human/H = C
-								breathes = H.species.breath_type
-								poisons = H.species.poison_types
-								nicename = list ("suit", "back", "belt", "left pocket", "right pocket")
-								tankcheck = list (H.s_store, C.back, H.belt, H.l_store, H.r_store) | H.get_held_items()
-							else
-								nicename = list("back")
-								tankcheck = list(C.back) | C.get_held_items()
-
-							// Rigs are a fucking pain since they keep an air tank in nullspace.
-							if(istype(C.back,/obj/item/rig))
-								var/obj/item/rig/rig = C.back
-								if(rig.air_supply)
-									from = "in"
-									nicename |= "hardsuit"
-									tankcheck |= rig.air_supply
-
-							for(var/i=1, i<tankcheck.len+1, ++i)
-								if(istype(tankcheck[i], /obj/item/tank))
-									var/obj/item/tank/t = tankcheck[i]
-									if (!isnull(t.manipulated_by) && t.manipulated_by != C.real_name && findtext(t.desc,breathes))
-										contents.Add(t.air_contents.total_moles)	//Someone messed with the tank and put unknown gasses
-										continue					//in it, so we're going to believe the tank is what it says it is
-
-									var/breathable = FALSE
-									if(t.air_contents.gas[breathes])
-										breathable = TRUE
-										for(var/poison in poisons)
-											if(t.air_contents.gas[poison])
-												breathable = FALSE
-												break
-									if(breathable)
-										contents.Add(t.air_contents.gas[breathes])
-									else
-										contents.Add(0)
-
-								else
-									//no tank so we set contents to 0
-									contents.Add(0)
-
-							//Alright now we know the contents of the tanks so we have to pick the best one.
-
-							var/best = 0
-							var/bestcontents = 0
-							for(var/i=1, i <  contents.len + 1 , ++i)
-								if(!contents[i])
-									continue
-								if(contents[i] > bestcontents)
-									best = i
-									bestcontents = contents[i]
-
-							//We've determined the best container now we set it as our internals
-							if(best)
-								if(nicename[best])
-									C.set_internals(tankcheck[best], "\the [tankcheck[best]] [from] your [nicename[best]]")
-								else
-									C.set_internals(tankcheck[best], "\the [tankcheck[best]]")
-
-							if(!C.internal)
-								var/decl/material/breath_data = decls_repository.get_decl(breathes)
-								to_chat(C, SPAN_WARNING("You don't have \a [breath_data.gas_name] tank."))
 		if("act_intent")
 			usr.a_intent_change("right")
 

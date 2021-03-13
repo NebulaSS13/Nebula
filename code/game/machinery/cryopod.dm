@@ -182,6 +182,8 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	var/open_sound = 'sound/machines/podopen.ogg'
+	var/close_sound = 'sound/machines/podclose.ogg'
 
 /obj/machinery/cryopod/robot
 	name = "robotic storage unit"
@@ -434,6 +436,8 @@
 		if(!do_after(user, 20, src)|| QDELETED(target))
 			return
 		set_occupant(target)
+		if(close_sound)
+			playsound(src, close_sound, 40)
 
 		// Book keeping!
 		log_and_message_admins("has entered a stasis pod")
@@ -442,15 +446,17 @@
 		src.add_fingerprint(target)
 
 //Like grap-put, but for mouse-drop.
-/obj/machinery/cryopod/MouseDrop_T(var/mob/target, var/mob/user)
-	if(!check_occupant_allowed(target))
-		return
-	if(occupant)
-		to_chat(user, "<span class='notice'>\The [src] is in use.</span>")
-		return
-
-	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
-	attempt_enter(target, user)
+/obj/machinery/cryopod/receive_mouse_drop(var/atom/dropping, var/mob/user)
+	. = ..()
+	if(!. && check_occupant_allowed(dropping))
+		if(occupant)
+			to_chat(user, SPAN_WARNING("\The [src] is in use."))
+			return TRUE
+		user.visible_message( \
+			SPAN_NOTICE("\The [user] begins placing \the [dropping] into \the [src]."), \
+			SPAN_NOTICE("You start placing \the [dropping] into \the [src]."))
+		attempt_enter(dropping, user)
+		return TRUE
 
 /obj/machinery/cryopod/attackby(var/obj/item/G, var/mob/user)
 
@@ -501,13 +507,11 @@
 		return
 
 	if(src.occupant)
-		to_chat(usr, "<span class='notice'><B>\The [src] is in use.</B></span>")
+		to_chat(usr, SPAN_WARNING("\The [src] is in use."))
 		return
 
-	for(var/mob/living/carbon/slime/M in range(1,usr))
-		if(M.Victim == usr)
-			to_chat(usr, "You're too busy getting your life sucked out of you.")
-			return
+	if(!usr.can_enter_cryopod(usr))
+		return
 
 	visible_message("\The [usr] starts climbing into \the [src].", range = 3)
 
@@ -537,6 +541,8 @@
 
 	occupant.dropInto(loc)
 	set_occupant(null)
+	if(open_sound)
+		playsound(src, open_sound, 40)
 
 	icon_state = base_icon_state
 
@@ -602,3 +608,6 @@
 			dead.set_dir(dir) //skeleton is oriented as cryo
 	else
 		to_chat(user, "<span class='notice'>The glass cover is already open.</span>")
+
+/obj/machinery/cryopod/proc/on_mob_spawn()
+	playsound(src, 'sound/machines/ding.ogg', 30, 1)

@@ -80,8 +80,11 @@
 			occupant = null
 			STOP_PROCESSING(SSobj, src)
 
-/obj/structure/mineral_bath/MouseDrop_T(var/atom/movable/O, var/mob/user)
-	enter_bath(O, user)
+/obj/structure/mineral_bath/receive_mouse_drop(var/atom/dropping, var/mob/user)
+	. = ..()
+	if(!. && ismob(dropping))
+		enter_bath(dropping, user)
+		return TRUE
 
 /obj/structure/mineral_bath/relaymove(var/mob/user)
 	if(user == occupant)

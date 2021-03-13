@@ -3745,7 +3745,7 @@
 "jR" = (
 /obj/structure/table/marble,
 /obj/item/chems/food/drinks/bottle/gin,
-/obj/item/chems/food/drinks/bottle/tequilla{
+/obj/item/chems/food/drinks/bottle/tequila{
 	pixel_x = -10
 	},
 /obj/item/chems/food/drinks/bottle/vodka{

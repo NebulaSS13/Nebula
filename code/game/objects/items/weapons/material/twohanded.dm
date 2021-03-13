@@ -142,7 +142,7 @@
 	return ret
 
 /obj/item/twohanded/spear/proc/get_shaft_overlay(var/base_state)
-	var/decl/material/M = decls_repository.get_decl(shaft_material)
+	var/decl/material/M = GET_DECL(shaft_material)
 	var/mutable_appearance/shaft = mutable_appearance(icon, base_state, M.color)
 	shaft.alpha = 155 + 100 * M.opacity
 	return shaft

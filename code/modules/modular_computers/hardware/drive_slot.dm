@@ -67,7 +67,7 @@
 		loc.verbs |= /obj/item/stock_parts/computer/drive_slot/proc/verb_eject_drive
 	return TRUE
 
-/obj/item/stock_parts/computer/drive_slot/attackby(obj/item/stock_parts/computer/hard_drive/portable/I, mob/living/user)
+/obj/item/stock_parts/computer/drive_slot/attackby(obj/item/stock_parts/computer/hard_drive/portable/I, mob/user)
 	if(!istype(I))
 		return
 	insert_drive(I, user)

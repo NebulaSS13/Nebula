@@ -27,16 +27,19 @@
 	. = ..()
 	update_icon()
 
-/obj/machinery/recharge_station/MouseDrop_T(var/mob/living/target, var/mob/user)
-	if(!CanMouseDrop(target, user) || !istype(target))
-		return FALSE
-	user.visible_message(SPAN_NOTICE("\The [user] begins placing \the [target] into \the [src]."), SPAN_NOTICE("You start placing \the [target] into \the [src]."))
-	if(!do_after(user, 30, src))
-		return
-	if(target.buckled)
-		to_chat(user, SPAN_WARNING("Unbuckle the subject before attempting to move them."))
-		return FALSE	
-	go_in(target)
+/obj/machinery/recharge_station/receive_mouse_drop(var/atom/dropping, var/mob/user)
+	. = ..()
+	if(!. && isliving(dropping))
+		user.visible_message( \
+			SPAN_NOTICE("\The [user] begins placing \the [dropping] into \the [src]."), \
+			SPAN_NOTICE("You start placing \the [dropping] into \the [src]."))
+		if(do_after(user, 30, src))
+			var/mob/living/target = dropping
+			if(target.buckled)
+				to_chat(user, SPAN_WARNING("Unbuckle the subject before attempting to move them."))
+			else
+				go_in(target)
+		return TRUE
 
 /obj/machinery/recharge_station/Process()
 	if(stat & (BROKEN | NOPOWER))
@@ -78,7 +81,7 @@
 
 	if(ishuman(occupant))
 		var/mob/living/carbon/human/H = occupant
-		var/obj/item/organ/internal/cell/potato = H.internal_organs_by_name[BP_CELL]
+		var/obj/item/organ/internal/cell/potato = H.get_internal_organ(BP_CELL)
 		if(potato)
 			target = potato.cell
 		if((!target || target.percent() > 95) && istype(H.back,/obj/item/rig))
@@ -199,7 +202,7 @@
 		if(istype(H.back,/obj/item/rig))
 			var/obj/item/rig/R = H.back
 			return R.cell
-		return H.internal_organs_by_name["cell"]
+		return H.get_internal_organ(BP_CELL)
 	return 0
 
 /obj/machinery/recharge_station/proc/go_out()

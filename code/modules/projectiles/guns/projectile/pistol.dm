@@ -2,7 +2,6 @@
 /obj/item/gun/projectile/pistol
 	name = "pistol"
 	icon = 'icons/obj/guns/pistol.dmi'
-	icon_state = ICON_STATE_WORLD
 	load_method = MAGAZINE
 	caliber = CALIBER_PISTOL
 	magazine_type = /obj/item/ammo_magazine/pistol
@@ -22,7 +21,6 @@
 	name = "holdout pistol"
 	desc = "The Lumoco Arms P3 Whisper. A small, easily concealable gun."
 	icon = 'icons/obj/guns/holdout_pistol.dmi'
-	icon_state = ICON_STATE_WORLD
 	item_state = null
 	ammo_indicator = FALSE
 	w_class = ITEM_SIZE_SMALL

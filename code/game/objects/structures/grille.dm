@@ -231,7 +231,7 @@
 			if(C.powernet)
 				C.powernet.trigger_warning()
 			spark_at(src, cardinal_only = TRUE)
-			if(user.stunned)
+			if(HAS_STATUS(user, STAT_STUN))
 				return 1
 		else
 			return 0

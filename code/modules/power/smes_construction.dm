@@ -112,7 +112,7 @@
 // Proc: attack_ai()
 // Parameters: None
 // Description: AI requires the RCON wire to be intact to operate the SMES.
-/obj/machinery/power/smes/buildable/attack_ai(mob/user)
+/obj/machinery/power/smes/buildable/attack_ai(mob/living/silicon/ai/user)
 	if(RCon)
 		..()
 	else // RCON wire cut
@@ -202,11 +202,11 @@
 			if (user_protected)
 				to_chat(h_user, SPAN_DANGER("Strong electrical arc sparks between you and [src], ignoring your gloves and burning your hand!"))
 				h_user.electrocute_act(rand(30,60), src, def_zone = h_user.get_active_held_item_slot())
-				h_user.Paralyse(3)
+				SET_STATUS_MAX(h_user, STAT_PARA, 3)
 			else
 				to_chat(h_user, SPAN_DANGER("Strong electrical arc sparks between you and [src], knocking you out for a while!"))
 				h_user.electrocute_act(rand(40,80), src, def_zone = ran_zone(null))
-				h_user.Paralyse(6)
+				SET_STATUS_MAX(h_user, STAT_PARA, 6)
 			spawn(0)
 				empulse(src.loc, 8, 16)
 			charge = 0
@@ -221,7 +221,7 @@
 			to_chat(h_user, SPAN_WARNING("Massive electrical arc sparks between you and [src].<br>Last thing you can think about is <span class='danger'>\"Oh shit...\"</span>"))
 			// Remember, we have few gigajoules of electricity here.. Turn them into crispy toast.
 			h_user.electrocute_act(rand(170,210), src, def_zone = ran_zone(null))
-			h_user.Paralyse(8)
+			SET_STATUS_MAX(h_user, STAT_PARA, 8)
 			spawn(0)
 				empulse(src.loc, 32, 64)
 			charge = 0

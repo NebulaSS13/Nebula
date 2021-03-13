@@ -63,8 +63,7 @@
 
 /obj/item/disk/survey
 	name = "survey data disk"
-	icon = 'icons/obj/items/device/diskette.dmi'
-	icon_state = "nucleardisk"
+	color = COLOR_DARK_BROWN
 	var/data
 
 /obj/item/disk/survey/examine(mob/user)
@@ -88,7 +87,7 @@
 			continue
 
 		for(var/metal in resources.resources)
-			var/decl/material/mat = decls_repository.get_decl(metal)
+			var/decl/material/mat = GET_DECL(metal)
 			if(mat.ore_type_value)
 				metals[mat.ore_type_value] += resources.resources[metal]
 			if(mat.ore_data_value && !resources.surveyed)

@@ -5,8 +5,3 @@
 
 /mob/living/carbon/make_grab(var/atom/movable/target, var/grab_tag = /decl/grab/simple)
 	. = ..(target, species?.grab_type || grab_tag)
-
-/mob/living/carbon/can_be_grabbed(var/mob/grabber, var/target_zone)
-	. = ..()
-	if(.)
-		LAssailant = iscarbon(grabber) && grabber

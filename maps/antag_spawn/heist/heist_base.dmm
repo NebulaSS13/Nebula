@@ -101,7 +101,6 @@
 /area/map_template/syndicate_mothership/raider_base)
 "as" = (
 /obj/machinery/vending/snack{
-	name = "Getmore Chocolate Corp";
 	markup = 0
 	},
 /turf/unsimulated/floor{
@@ -205,8 +204,7 @@
 	},
 /obj/item/soap,
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aI" = (
@@ -214,8 +212,7 @@
 	pixel_y = 32
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aJ" = (
@@ -224,8 +221,7 @@
 	},
 /obj/random/trash,
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aK" = (
@@ -321,15 +317,13 @@
 /area/map_template/syndicate_mothership/raider_base)
 "aS" = (
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aT" = (
 /obj/effect/decal/cleanable/blood,
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aU" = (
@@ -390,14 +384,12 @@
 /area/map_template/syndicate_mothership/raider_base)
 "ba" = (
 /obj/structure/hygiene/sink{
-	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
 	pixel_y = 2
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bb" = (
@@ -503,19 +495,16 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bl" = (
 /obj/structure/hygiene/sink{
-	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
 	pixel_y = 2
 	},
 /obj/item/storage/mirror{
 	dir = 4;
-	pixel_x = -28;
-	pixel_y = 0
+	pixel_x = -28
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bm" = (
@@ -532,8 +521,7 @@
 	dir = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bo" = (
@@ -586,7 +574,6 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bt" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 6
 	},
 /turf/unsimulated/floor{
@@ -647,12 +634,6 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bz" = (
 /obj/item/cat_hide,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/map_template/syndicate_mothership/raider_base)
-"bA" = (
-/obj/structure/table/rack,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -883,8 +864,9 @@
 /area/map_template/syndicate_mothership/raider_base)
 "cd" = (
 /obj/machinery/vending/cigarette{
-	name = "hacked cigarette machine";
-	markup = 0products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	markup = 0;
+	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2);
+	name = "hacked cigarette machine"
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -925,7 +907,6 @@
 /area/map_template/syndicate_mothership/raider_base)
 "cj" = (
 /mob/living/simple_animal/hostile/retaliate/parrot{
-	available_channels = list();
 	ears = list();
 	name = "\proper Meatbag";
 	speak = list("Yaaar!","Squaaak!","Fight me Matey!","BAWWWWK Vox trying to eat me!")
@@ -1033,8 +1014,7 @@
 "cx" = (
 /obj/machinery/door/airlock/external{
 	icon_state = "door_closed";
-	id_tag = "raider_northwest_lock";
-	locked = 0
+	id_tag = "raider_northwest_lock"
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
@@ -1061,7 +1041,6 @@
 /area/map_template/skipjack_station/start)
 "cA" = (
 /obj/machinery/door/airlock/external{
-	density = 1;
 	id_tag = "skipjack_shuttle_outer";
 	name = "Ship External Access"
 	},
@@ -1107,7 +1086,6 @@
 /area/map_template/skipjack_station/start)
 "cH" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 2;
 	id_tag = "merc_shuttle_pump"
 	},
 /turf/simulated/floor/plating,
@@ -1121,13 +1099,13 @@
 /area/map_template/skipjack_station/start)
 "cJ" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	tag_airpump = "raider_west_vent";
-	tag_exterior_door = "raider_northwest_lock";
 	frequency = 1331;
 	id_tag = "raider_west_control";
-	tag_interior_door = "raider_southwest_lock";
 	pixel_x = 24;
-	tag_chamber_sensor = "raider_west_sensor"
+	tag_airpump = "raider_west_vent";
+	tag_chamber_sensor = "raider_west_sensor";
+	tag_exterior_door = "raider_northwest_lock";
+	tag_interior_door = "raider_southwest_lock"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
@@ -1141,7 +1119,6 @@
 	dir = 8
 	},
 /obj/machinery/computer/station_alert/all{
-	icon_state = "computer";
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/red,
@@ -1181,8 +1158,8 @@
 "cO" = (
 /obj/machinery/constructable_frame/computerframe,
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
@@ -1214,8 +1191,7 @@
 "cS" = (
 /obj/machinery/door/airlock/external{
 	icon_state = "door_closed";
-	id_tag = "raider_southwest_lock";
-	locked = 0
+	id_tag = "raider_southwest_lock"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
 /turf/simulated/floor/plating,
@@ -1319,8 +1295,8 @@
 /obj/random/voidhelmet,
 /obj/random/maintenance,
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
@@ -1586,7 +1562,6 @@
 /area/map_template/skipjack_station/start)
 "dP" = (
 /obj/structure/hygiene/sink{
-	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
 	pixel_y = 2
@@ -1712,9 +1687,7 @@
 "ek" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
-	icon_state = "sink";
-	pixel_x = 11;
-	pixel_y = 0
+	pixel_x = 11
 	},
 /turf/simulated/floor/shuttle/white,
 /area/map_template/skipjack_station/start)
@@ -1775,9 +1748,7 @@
 "eu" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
-	icon_state = "sink";
-	pixel_x = 11;
-	pixel_y = 0
+	pixel_x = 11
 	},
 /turf/simulated/floor/shuttle/black,
 /area/map_template/skipjack_station/start)
@@ -1851,9 +1822,6 @@
 	},
 /obj/item/baton/cattleprod,
 /turf/simulated/floor/shuttle/white,
-/area/map_template/skipjack_station/start)
-"eE" = (
-/turf/space,
 /area/map_template/skipjack_station/start)
 "eF" = (
 /obj/structure/bed,
@@ -2769,7 +2737,7 @@ ab
 ab
 aq
 aq
-bA
+bU
 bU
 bU
 aq
@@ -2913,8 +2881,8 @@ aq
 aq
 aq
 aq
-bA
-bA
+bU
+bU
 bU
 aq
 aq
@@ -4089,7 +4057,7 @@ cR
 cR
 cR
 cR
-eE
+aa
 aa
 aa
 aa

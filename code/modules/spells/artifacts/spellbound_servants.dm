@@ -57,14 +57,14 @@
 	spells = list(/spell/noclothes)
 
 /datum/spellbound_type/apprentice/set_antag(var/datum/mind/M, var/mob/master)
-	var/decl/special_role/wizard/wizards = decls_repository.get_decl(/decl/special_role/wizard)
+	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 	wizards.add_antagonist_mind(M, 1, "Wizard's Apprentice", "<b>You are an apprentice-type Servant! You're just an ordinary Wizard-To-Be, with no special abilities, but do not need robes to cast spells. Follow your teacher's orders!</b>")
 
 /datum/spellbound_type/servant
 	var/spiel = "You don't do anything in particular."
 
 /datum/spellbound_type/servant/set_antag(var/datum/mind/M, var/mob/master)
-	var/decl/special_role/wizard/wizards = decls_repository.get_decl(/decl/special_role/wizard)
+	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 	wizards.add_antagonist_mind(M, 1, "Spellbound Servant", "<b>You are a [name]-type Servant!</b> [spiel]")
 
 /datum/spellbound_type/servant/caretaker
@@ -209,7 +209,7 @@
 	if(last_called > world.time )
 		return
 	last_called = world.time + 30 SECONDS
-	var/decl/ghosttrap/G = decls_repository.get_decl(/decl/ghosttrap/wizard_familiar)
+	var/decl/ghosttrap/G = GET_DECL(/decl/ghosttrap/wizard_familiar)
 	for(var/mob/observer/ghost/ghost in GLOB.player_list)
 		if(G.assess_candidate(ghost,null,FALSE))
 			to_chat(ghost,"<span class='notice'><b>A wizard is requesting a Spell-Bound Servant!</b></span> (<a href='?src=\ref[src];master=\ref[user]'>Join</a>)")
@@ -249,7 +249,7 @@
 
 /obj/item/summoning_stone/interact(var/mob/user)
 	var/list/types = subtypesof(/datum/spellbound_type) - /datum/spellbound_type/servant
-	var/decl/special_role/wizard/wizards = decls_repository.get_decl(/decl/special_role/wizard)
+	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 	if(user.mind && !wizards.is_antagonist(user.mind))
 		use_type(pick(types),user)
 		return

@@ -1,8 +1,8 @@
-var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
+var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
 
 /datum/preferences
 	var/species
-	var/b_type = "A+"                    //blood type (not-chooseable)
+	var/b_type                           //blood type
 	var/h_style = "Bald"                 //Hair type
 	var/hair_colour = COLOR_BLACK
 	var/skin_colour = COLOR_BLACK
@@ -87,10 +87,17 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	to_file(S["b_type"], pref.b_type)
 	to_file(S["disabilities"], pref.disabilities)
 	to_file(S["organ_data"], pref.organ_data)
-	to_file(S["rlimb_data"], pref.rlimb_data)
 	to_file(S["body_markings"], pref.body_markings)
 	to_file(S["body_descriptors"], pref.body_descriptors)
 	to_file(S["bgstate"], pref.bgstate)
+
+	var/list/rlimb_string_data = list()
+	for(var/limb in pref.rlimb_data)
+		var/model = pref.rlimb_data[limb]
+		if(ispath(model))
+			var/decl/prosthetics_manufacturer/model_data = GET_DECL(model)
+			rlimb_string_data[limb] = model_data.name
+	to_file(S["rlimb_data"], rlimb_string_data)
 
 /datum/category_item/player_setup_item/physical/body/sanitize_character(var/savefile/S)
 
@@ -102,6 +109,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.h_style		= sanitize_inlist(pref.h_style, GLOB.hair_styles_list, initial(pref.h_style))
 	pref.f_style		= sanitize_inlist(pref.f_style, GLOB.facial_hair_styles_list, initial(pref.f_style))
 	pref.b_type			= sanitize_text(pref.b_type, initial(pref.b_type))
+	if(!pref.b_type || !(pref.b_type in global.valid_bloodtypes))
+		pref.b_type = RANDOM_BLOOD_TYPE
 
 	if(!pref.species || !(pref.species in get_playable_species()))
 		pref.species = GLOB.using_map.default_species
@@ -115,8 +124,28 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.skin_base = ""
 
 	pref.disabilities	= sanitize_integer(pref.disabilities, 0, 65535, initial(pref.disabilities))
-	if(!istype(pref.organ_data)) pref.organ_data = list()
-	if(!istype(pref.rlimb_data)) pref.rlimb_data = list()
+
+	if(!islist(pref.organ_data)) 
+		pref.organ_data = list()
+
+	if(!islist(pref.rlimb_data)) 
+		pref.rlimb_data = list()
+	if(length(pref.rlimb_data))
+		var/list/all_robolimbs = decls_repository.get_decls_of_type(/decl/prosthetics_manufacturer)
+		for(var/limb in pref.rlimb_data)
+			var/model = pref.rlimb_data[limb]
+			var/found = ispath(model, /decl/prosthetics_manufacturer)
+			if(!found)
+				model = lowertext(model)
+				for(var/model_type in all_robolimbs)
+					var/decl/prosthetics_manufacturer/model_data = all_robolimbs[model_type]
+					if(lowertext(model_data.name) == model)
+						pref.rlimb_data[limb] = model_type
+						found = TRUE
+						break
+			if(!found)
+				pref.rlimb_data[limb] = /decl/prosthetics_manufacturer
+
 	if(!istype(pref.body_markings))
 		pref.body_markings = list()
 	else
@@ -212,12 +241,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			++ind
 			if(ind > 1)
 				. += ", "
-			var/datum/robolimb/R
-			if(pref.rlimb_data[name] && all_robolimbs[pref.rlimb_data[name]])
-				R = all_robolimbs[pref.rlimb_data[name]]
-			else
-				R = basic_robolimb
-			. += "\t[R.company] [organ_name] prosthesis"
+			var/decl/prosthetics_manufacturer/R = pref.rlimb_data[name]
+			if(!ispath(R, /decl/prosthetics_manufacturer))
+				R = /decl/prosthetics_manufacturer
+			R = GET_DECL(R)
+			. += "\t[R.name] [organ_name] prosthesis"
 		else if(status == "amputated")
 			++ind
 			if(ind > 1)
@@ -247,46 +275,63 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				else
 					. += "\tMechanically assisted [organ_name]"
 	if(!ind)
-		. += "\[...\]<br><br>"
-	else
-		. += "<br><br>"
+		. += "\[...\]"
+	. += "</td></tr></table><hr/>"
 
 	if(LAZYLEN(pref.body_descriptors))
-		. += "<table>"
+		. += "<h3>Physical Appearance</h3>"
+		. += "<table width = '100%'>"
 		for(var/entry in pref.body_descriptors)
 			var/datum/mob_descriptor/descriptor = mob_species.descriptors[entry]
-			. += "<tr><td><b>[capitalize(descriptor.chargen_label)]:</b></td><td>[descriptor.get_standalone_value_descriptor(pref.body_descriptors[entry])]</td><td><a href='?src=\ref[src];change_descriptor=[entry]'>Change</a><br/></td></tr>"
-		. += "</table><br>"
+			. += "<tr><td><b>[capitalize(descriptor.chargen_label)]</b></td><td align = 'center'>"
+			for(var/i = 1 to length(descriptor.standalone_value_descriptors))
+				var/use_string = descriptor.standalone_value_descriptors[i]
+				if(i == pref.body_descriptors[entry])
+					. += "<span class='linkOn'>[use_string]</span>"
+				else
+					. += "<a href='?src=\ref[src];set_descriptor=\ref[descriptor];set_descriptor_value=[i]'>[use_string]</a>"
+			. += "</td></tr>"
+		. += "</table>"
 
-	. += "</td><td><b>Preview</b><br>"
-	. += "<br><a href='?src=\ref[src];cycle_bg=1'>Cycle background</a>"
-	. += "<br><a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_LOADOUT]'>[pref.equip_preview_mob & EQUIP_PREVIEW_LOADOUT ? "Hide loadout" : "Show loadout"]</a>"
-	. += "<br><a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_JOB]'>[pref.equip_preview_mob & EQUIP_PREVIEW_JOB ? "Hide job gear" : "Show job gear"]</a>"
-	. += "</td></tr></table>"
-
-	. += "<b>Hair</b><br>"
+	. += "<h3>Colouration</h3>"
+	. += "<table width = '100%'>"
+	. += "<tr>"
+	. += "<td><b>Hair</b></td>"
+	. += "<td><a href='?src=\ref[src];hair_style=1'>[pref.h_style]</a></td>"
+	. += "<td>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "<a href='?src=\ref[src];hair_color=1'>Change Color</a> <font face='fixedsys' size='3' color='[pref.hair_colour]'><table style='display:inline;' bgcolor='[pref.hair_colour]'><tr><td>__</td></tr></table></font> "
-	. += " Style: <a href='?src=\ref[src];hair_style=1'>[pref.h_style]</a><br>"
-
-	. += "<br><b>Facial</b><br>"
+		. += "<font face='fixedsys' size='3' color='[pref.hair_colour]'><table style='display:inline;' bgcolor='[pref.hair_colour]'><tr><td>__</td></tr></table></font> <a href='?src=\ref[src];hair_color=1'>Change</a>"
+	. += "</td>"
+	. += "<tr>"
+	. += "</tr>"
+	. += "<td><b>Facial</b></td>"
+	. += "<td><a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a></td>"
+	. += "<td>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "<a href='?src=\ref[src];facial_color=1'>Change Color</a> <font face='fixedsys' size='3' color='[pref.facial_hair_colour]'><table  style='display:inline;' bgcolor='[pref.facial_hair_colour]'><tr><td>__</td></tr></table></font> "
-	. += " Style: <a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a><br>"
-
+		. += "<font face='fixedsys' size='3' color='[pref.facial_hair_colour]'><table  style='display:inline;' bgcolor='[pref.facial_hair_colour]'><tr><td>__</td></tr></table></font> <a href='?src=\ref[src];facial_color=1'>Change</a>"
+	. += "</td>"
+	. += "</tr>"
 	if(has_flag(mob_species, HAS_EYE_COLOR))
-		. += "<br><b>Eyes</b><br>"
-		. += "<a href='?src=\ref[src];eye_color=1'>Change Color</a> <font face='fixedsys' size='3' color='[pref.eye_colour]'><table  style='display:inline;' bgcolor='[pref.eye_colour]'><tr><td>__</td></tr></table></font><br>"
-
+		. += "<tr>"
+		. += "<td><b>Eyes</b></td>"
+		. += "<td><font face='fixedsys' size='3' color='[pref.eye_colour]'><table  style='display:inline;' bgcolor='[pref.eye_colour]'><tr><td>__</td></tr></table></font> <a href='?src=\ref[src];eye_color=1'>Change</a></td>"
+		. += "</tr>"
 	if(has_flag(mob_species, HAS_SKIN_COLOR))
-		. += "<br><b>Body Color</b><br>"
-		. += "<a href='?src=\ref[src];skin_color=1'>Change Color</a> <font face='fixedsys' size='3' color='[pref.skin_colour]'><table style='display:inline;' bgcolor='[pref.skin_colour]'><tr><td>__</td></tr></table></font><br>"
+		. += "<tr>"
+		. += "<td><b>Body</b></td>"
+		. += "<td><font face='fixedsys' size='3' color='[pref.skin_colour]'><table style='display:inline;' bgcolor='[pref.skin_colour]'><tr><td>__</td></tr></table></font> <a href='?src=\ref[src];skin_color=1'>Change</a></td>"
+		. += "</tr>"
+	. += "</table>"
 
-	. += "<br><a href='?src=\ref[src];marking_style=1'>Body Markings +</a><br>"
+	. += "<h3>Markings</h3>"
+	. += "<table width = '100%'>"
 	for(var/M in pref.body_markings)
-		. += "[M] <a href='?src=\ref[src];marking_remove=[M]'>-</a> <a href='?src=\ref[src];marking_color=[M]'>Color</a>"
-		. += "<font face='fixedsys' size='3' color='[pref.body_markings[M]]'><table style='display:inline;' bgcolor='[pref.body_markings[M]]'><tr><td>__</td></tr></table></font>"
-		. += "<br>"
+		. += "<tr>"
+		. += "<td>[M]</td><td><a href='?src=\ref[src];marking_remove=[M]'>Remove</a></td>"
+		. += "<td><font face='fixedsys' size='3' color='[pref.body_markings[M]]'><table style='display:inline;' bgcolor='[pref.body_markings[M]]'><tr><td>__</td></tr></table></font><a href='?src=\ref[src];marking_color=[M]'>Change</a></td>"
+		. += "</tr>"
+	. += "<tr><td colspan = 3><a href='?src=\ref[src];marking_style=1'>Add marking</a></td></tr>"
+	. += "</table>"
 
 	. = jointext(.,null)
 
@@ -300,22 +345,18 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		hide_species = !hide_species
 		return TOPIC_REFRESH
 
+	if(href_list["set_descriptor"])
+		var/datum/mob_descriptor/descriptor = locate(href_list["set_descriptor"])
+		if(istype(descriptor) && (descriptor.name in pref.body_descriptors))
+			pref.body_descriptors[descriptor.name] = Clamp(text2num(href_list["set_descriptor_value"]), 1, length(descriptor.standalone_value_descriptors))
+			return TOPIC_REFRESH_UPDATE_PREVIEW
+
 	else if(href_list["random"])
 		pref.randomize_appearance_and_body_for()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
-	else if(href_list["change_descriptor"])
-		if(mob_species.descriptors)
-			var/desc_id = href_list["change_descriptor"]
-			if(pref.body_descriptors[desc_id])
-				var/datum/mob_descriptor/descriptor = mob_species.descriptors[desc_id]
-				var/choice = input("Please select a descriptor.", "Descriptor") as null|anything in descriptor.chargen_value_descriptors
-				if(choice && mob_species.descriptors[desc_id]) // Check in case they sneakily changed species.
-					pref.body_descriptors[desc_id] = descriptor.chargen_value_descriptors[choice]
-					return TOPIC_REFRESH
-
 	else if(href_list["blood_type"])
-		var/new_b_type = input(user, "Choose your character's blood-type:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in valid_bloodtypes
+		var/new_b_type = input(user, "Choose your character's blood-type:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in global.valid_bloodtypes
 		if(new_b_type && CanUseTopic(user))
 			pref.b_type = new_b_type
 			return TOPIC_REFRESH
@@ -540,29 +581,22 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					pref.rlimb_data[second_limb] = null
 
 			if("Prosthesis")
-				var/decl/species/temp_species = get_species_by_key(pref.species || GLOB.using_map.default_species)
-				var/tmp_bodytype = temp_species.get_bodytype(user)
-				var/list/usable_manufacturers = list()
-				for(var/company in chargen_robolimbs)
-					var/datum/robolimb/M = chargen_robolimbs[company]
-					if(tmp_bodytype in M.bodytypes_cannot_use)
-						continue
-					if(length(M.species_restricted) && !(temp_species.name in M.species_restricted))
-						continue
-					if(M.applies_to_part.len && !(limb in M.applies_to_part))
-						continue
-					if(M.allowed_bodytypes && !(tmp_bodytype in M.allowed_bodytypes))
-						continue
-					usable_manufacturers[company] = M
-				if(!usable_manufacturers.len)
+				var/list/usable_manufacturers
+				var/list/all_robolimbs = decls_repository.get_decls_of_type(/decl/prosthetics_manufacturer)
+				for(var/limb_type in all_robolimbs)
+					var/decl/prosthetics_manufacturer/R = all_robolimbs[limb_type]
+					if(!R.unavailable_at_chargen && R.check_can_install(limb, mob_species.bodytype, mob_species.name))
+						LAZYADD(usable_manufacturers, R)
+				if(!length(usable_manufacturers))
+					to_chat(user, SPAN_WARNING("There are no prosthetics available for this species and bodytype on your [limb]."))
 					return
-				var/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in usable_manufacturers
-				if(!choice)
+				var/decl/prosthetics_manufacturer/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in usable_manufacturers
+				if(!istype(choice))
 					return
-				pref.rlimb_data[limb] = choice
+				pref.rlimb_data[limb] = choice.type
 				pref.organ_data[limb] = "cyborg"
 				if(second_limb)
-					pref.rlimb_data[second_limb] = choice
+					pref.rlimb_data[second_limb] = choice.type
 					pref.organ_data[second_limb] = "cyborg"
 				if(third_limb && pref.organ_data[third_limb] == "amputated")
 					pref.organ_data[third_limb] = null
@@ -572,7 +606,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 						if(other_limb == BP_CHEST)
 							continue
 						pref.organ_data[other_limb] = "cyborg"
-						pref.rlimb_data[other_limb] = choice
+						pref.rlimb_data[other_limb] = choice.type
 					if(!pref.organ_data[BP_BRAIN])
 						pref.organ_data[BP_BRAIN] = "assisted"
 					for(var/internal_organ in list(BP_HEART,BP_EYES,BP_LUNGS,BP_LIVER,BP_KIDNEYS))
@@ -626,14 +660,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["disabilities"])
 		var/disability_flag = text2num(href_list["disabilities"])
 		pref.disabilities ^= disability_flag
-		return TOPIC_REFRESH_UPDATE_PREVIEW
-
-	else if(href_list["toggle_preview_value"])
-		pref.equip_preview_mob ^= text2num(href_list["toggle_preview_value"])
-		return TOPIC_REFRESH_UPDATE_PREVIEW
-
-	else if(href_list["cycle_bg"])
-		pref.bgstate = next_in_list(pref.bgstate, pref.bgstate_options)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	return ..()

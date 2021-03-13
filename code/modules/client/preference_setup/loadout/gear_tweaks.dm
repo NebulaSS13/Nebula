@@ -182,13 +182,21 @@
 */
 /datum/gear_tweak/custom_setup
 	var/custom_setup_proc
+	var/additional_arguments
 
-/datum/gear_tweak/custom_setup/New(custom_setup_proc)
+/datum/gear_tweak/custom_setup/New(custom_setup_proc, list/additional_arguments)
+	if(additional_arguments && !istype(additional_arguments))
+		CRASH("Expected a list of argument, was [log_info_line(additional_arguments)]")
+
 	src.custom_setup_proc = custom_setup_proc
+	src.additional_arguments = additional_arguments
 	..()
 
 /datum/gear_tweak/custom_setup/tweak_item(var/user, var/item)
-	call(item, custom_setup_proc)(user)
+	var/arglist = list(user)
+	if(length(additional_arguments))
+		arglist += additional_arguments
+	call(item, custom_setup_proc)(arglist(arglist))
 
 /*
 * Tablet Stuff

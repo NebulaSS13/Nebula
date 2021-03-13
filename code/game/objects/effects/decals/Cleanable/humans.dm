@@ -126,14 +126,15 @@ var/global/list/image/splatter_cache=list()
 	remove_extension(src, /datum/extension/scent)
 	STOP_PROCESSING(SSobj, src)
 
-/obj/effect/decal/cleanable/blood/attack_hand(mob/living/carbon/human/user)
+/obj/effect/decal/cleanable/blood/attack_hand(mob/user)
 	..()
-	if (amount && length(blood_data) && istype(user))
-		if (user.gloves)
+	if (amount && length(blood_data) && ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.gloves)
 			return
 		var/taken = rand(1,amount)
 		amount -= taken
-		to_chat(user, "<span class='notice'>You get some of \the [src] on your hands.</span>")
+		to_chat(user, SPAN_NOTICE("You get some of \the [src] on your hands."))
 		for(var/bloodthing in blood_data)
 			user.add_blood(null, max(1, amount/length(blood_data)), blood_data[bloodthing])
 		user.verbs += /mob/living/carbon/human/proc/bloody_doodle

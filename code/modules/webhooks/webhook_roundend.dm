@@ -4,7 +4,7 @@
 // Data expects three numerical fields: "survivors", "escaped", "ghosts", "clients"
 /decl/webhook/roundend/get_message(var/list/data)
 	. = ..()
-	var/desc = "A round of **[SSticker.mode ? SSticker.mode.name : "Unknown"]** has ended.\n\n"
+	var/desc = "A round of **[SSticker.mode ? SSticker.mode.name : "Unknown"]** ([game_id]) has ended.\n\n"
 	if(data)
 		var/s_escaped =  "Escaped"
 		if(!SSevac.evacuation_controller.emergency_evacuation)
@@ -19,7 +19,7 @@
 		desc += "Round duration: **[roundduration2text()]**"
 
 	.["embeds"] = list(list(
-		"title" = "Round [game_id] is ending.",
+		"title" = GLOB.end_credits_title,
 		"description" = desc,
 		"color" = COLOR_WEBHOOK_DEFAULT
 	))

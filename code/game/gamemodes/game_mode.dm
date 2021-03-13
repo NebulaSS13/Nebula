@@ -168,7 +168,7 @@ var/list/additional_antag_types = list()
 	var/enemy_count = 0
 	if(length(associated_antags))
 		for(var/antag_type in associated_antags)
-			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
+			var/decl/special_role/antag = GET_DECL(antag_type)
 			if(!antag)
 				continue
 			var/list/potential = list()
@@ -421,11 +421,10 @@ var/list/additional_antag_types = list()
 	var/list/players = list()
 	var/list/candidates = list()
 
-	var/decl/special_role/antag_template = decls_repository.get_decl(antag_type)
+	var/decl/special_role/antag_template = GET_DECL(antag_type)
 	if(!antag_template)
 		return candidates
 
-	var/antag_id = lowertext(antag_template.name)
 	// If this is being called post-roundstart then it doesn't care about ready status.
 	if(GAME_STATE == RUNLEVEL_GAME)
 		for(var/mob/player in GLOB.player_list)
@@ -433,8 +432,8 @@ var/list/additional_antag_types = list()
 				continue
 			if(istype(player, /mob/new_player))
 				continue
-			if(!antag_id || (antag_id in player.client.prefs.be_special_role))
-				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
+			if(!antag_template.name || (antag_template.name in player.client.prefs.be_special_role))
+				log_debug("[player.key] had [antag_template.name] enabled, so we are drafting them.")
 				candidates += player.mind
 	else
 		// Assemble a list of active players without jobbans.
@@ -444,15 +443,15 @@ var/list/additional_antag_types = list()
 
 		// Get a list of all the people who want to be the antagonist for this round
 		for(var/mob/new_player/player in players)
-			if(!antag_id || (antag_id in player.client.prefs.be_special_role))
-				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
+			if(!antag_template.name || (antag_template.name in player.client.prefs.be_special_role))
+				log_debug("[player.key] had [antag_template.name] enabled, so we are drafting them.")
 				candidates += player.mind
 				players -= player
 
 		// If we don't have enough antags, draft people who voted for the round.
 		if(candidates.len < required_enemies)
 			for(var/mob/new_player/player in players)
-				if(!antag_id || ((antag_id in player.client.prefs.be_special_role) || (antag_id in player.client.prefs.may_be_special_role)))
+				if(!antag_template.name || ((antag_template.name in player.client.prefs.be_special_role) || (antag_template.name in player.client.prefs.may_be_special_role)))
 					log_debug("[player.key] has not selected never for this role, so we are drafting them.")
 					candidates += player.mind
 					players -= player
@@ -469,7 +468,7 @@ var/list/additional_antag_types = list()
 		if(P.client && P.ready)
 			. ++
 
-/datum/game_mode/proc/check_antagonists_topic(href, href_list[])
+/datum/game_mode/proc/round_status_topic(href, href_list[])
 	return 0
 
 /datum/game_mode/proc/create_antagonists()
@@ -480,14 +479,14 @@ var/list/additional_antag_types = list()
 	if(length(associated_antags))
 		antag_templates = list()
 		for(var/antag_type in associated_antags)
-			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
+			var/decl/special_role/antag = GET_DECL(antag_type)
 			antag_templates |= antag
 
 	if(length(global.additional_antag_types))
 		if(!antag_templates)
 			antag_templates = list()
 		for(var/antag_type in global.additional_antag_types)
-			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
+			var/decl/special_role/antag = GET_DECL(antag_type)
 			if(antag)
 				antag_templates |= antag
 
@@ -521,7 +520,7 @@ var/list/additional_antag_types = list()
 //////////////////////////
 //Reports player logouts//
 //////////////////////////
-proc/display_roundstart_logout_report()
+/proc/display_roundstart_logout_report()
 	var/msg = "<span class='notice'><b>Roundstart logout report</b>\n\n"
 	for(var/mob/living/L in SSmobs.mob_list)
 

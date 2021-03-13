@@ -32,7 +32,7 @@
 /obj/item/stack/Initialize(mapload, amount, material)
 
 	if(ispath(amount, /decl/material))
-		crash_with("Stack initialized with material ([amount]) instead of amount.")
+		PRINT_STACK_TRACE("Stack initialized with material ([amount]) instead of amount.")
 		material = amount
 	if (isnum(amount) && amount >= 1)
 		src.amount = amount
@@ -99,7 +99,7 @@
 			title+= " ([R.req_amount] [src.singular_name]\s)"
 			var/skill_label = ""
 			if(!user.skill_check(SKILL_CONSTRUCTION, R.difficulty))
-				var/decl/hierarchy/skill/S = decls_repository.get_decl(SKILL_CONSTRUCTION)
+				var/decl/hierarchy/skill/S = GET_DECL(SKILL_CONSTRUCTION)
 				skill_label = "<font color='red'>\[[S.levels[R.difficulty]]]</font>"
 			if (can_build)
 				t1 +="[skill_label]<A href='?src=\ref[src];sublist=[recipes_sublist];make=[i];multiplier=1'>[title]</A>"

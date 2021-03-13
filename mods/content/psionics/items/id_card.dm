@@ -23,16 +23,18 @@
 		else
 			to_chat(user, SPAN_NOTICE("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe it implicitly."))
 
-/obj/item/card/id/foundation/attack_self(var/mob/living/user)
+/obj/item/card/id/foundation/attack_self(var/mob/user)
 	. = ..()
-	if(istype(user))
-		for(var/mob/M in viewers(world.view, get_turf(user))-user)
-			if(user.psi && isliving(M))
-				var/mob/living/L = M
-				if(!L.psi)
-					to_chat(L, SPAN_NOTICE("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe \the [user] implicitly."))
-					continue
-			to_chat(M, SPAN_WARNING("There is a psionic compulsion surrounding \the [src] in a flicker of indescribable light."))
+	if(isliving(user))
+		var/mob/living/show = user
+		if(show.psi)
+			for(var/mob/M in viewers(world.view, get_turf(user))-user)
+				if(isliving(M))
+					var/mob/living/L = M
+					if(!L.psi)
+						to_chat(L, SPAN_NOTICE("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe \the [user] implicitly."))
+						continue
+				to_chat(M, SPAN_WARNING("There is a psionic compulsion surrounding \the [src] in a flicker of indescribable light."))
 
 /obj/item/card/id/foundation/on_update_icon()
 	return

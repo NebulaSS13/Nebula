@@ -6,7 +6,7 @@
 		return TRUE // Doesn't necessarily mean the mob physically moved
 
 /mob/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	. = lying || ..() || (mover == buckled)
+	. = lying || ..() || !mover.density
 
 /mob/proc/SetMoveCooldown(var/timeout)
 	var/datum/movement_handler/mob/delay/delay = GetMovementHandler(/datum/movement_handler/mob/delay)
@@ -272,7 +272,7 @@
 	var/checking_intent = (istype(move_intent) ? move_intent.type : move_intents[1])
 	for(var/i = 1 to length(move_intents)) // One full iteration of the move set.
 		checking_intent = next_in_list(checking_intent, move_intents)
-		if(set_move_intent(decls_repository.get_decl(checking_intent)))
+		if(set_move_intent(GET_DECL(checking_intent)))
 			return
 
 /mob/proc/set_move_intent(var/decl/move_intent/next_intent)
@@ -285,27 +285,27 @@
 
 /mob/proc/get_movement_datum_by_flag(var/move_flag = MOVE_INTENT_DELIBERATE)
 	for(var/m_intent in move_intents)
-		var/decl/move_intent/check_move_intent = decls_repository.get_decl(m_intent)
+		var/decl/move_intent/check_move_intent = GET_DECL(m_intent)
 		if(check_move_intent.flags & move_flag)
 			return check_move_intent
 
 /mob/proc/get_movement_datum_by_missing_flag(var/move_flag = MOVE_INTENT_DELIBERATE)
 	for(var/m_intent in move_intents)
-		var/decl/move_intent/check_move_intent = decls_repository.get_decl(m_intent)
+		var/decl/move_intent/check_move_intent = GET_DECL(m_intent)
 		if(!(check_move_intent.flags & move_flag))
 			return check_move_intent
 
 /mob/proc/get_movement_datums_by_flag(var/move_flag = MOVE_INTENT_DELIBERATE)
 	. = list()
 	for(var/m_intent in move_intents)
-		var/decl/move_intent/check_move_intent = decls_repository.get_decl(m_intent)
+		var/decl/move_intent/check_move_intent = GET_DECL(m_intent)
 		if(check_move_intent.flags & move_flag)
 			. += check_move_intent
 
 /mob/proc/get_movement_datums_by_missing_flag(var/move_flag = MOVE_INTENT_DELIBERATE)
 	. = list()
 	for(var/m_intent in move_intents)
-		var/decl/move_intent/check_move_intent = decls_repository.get_decl(m_intent)
+		var/decl/move_intent/check_move_intent = GET_DECL(m_intent)
 		if(!(check_move_intent.flags & move_flag))
 			. += check_move_intent
 

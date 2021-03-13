@@ -54,7 +54,7 @@
 	var/list/blood_doses = list()
 
 	if(length(reagents.reagent_volumes) == 1)
-		var/decl/material/liquid/random/random = decls_repository.get_decl(reagents.reagent_volumes[1])
+		var/decl/material/liquid/random/random = GET_DECL(reagents.reagent_volumes[1])
 		if(istype(random))
 			return random.get_scan_data(user)
 

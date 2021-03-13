@@ -118,7 +118,7 @@
 
 /datum/dna/gene/disability/deaf/activate(var/mob/M, var/connected, var/flags)
 	..(M,connected,flags)
-	M.ear_deaf = 1
+	M.set_status(STAT_DEAF, 1)
 
 /datum/dna/gene/disability/nearsighted
 	name="Nearsightedness"

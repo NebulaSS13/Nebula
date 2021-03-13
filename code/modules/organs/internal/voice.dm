@@ -10,7 +10,7 @@
 	var/list/language_datums = list()
 	if(LAZYLEN(assists_languages))
 		for(var/L in assists_languages)
-			var/lang = decls_repository.get_decl(L)
+			var/lang = GET_DECL(L)
 			if(lang) language_datums[lang] = TRUE
 	assists_languages = language_datums
 

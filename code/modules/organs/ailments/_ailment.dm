@@ -23,6 +23,7 @@
 	var/third_person_treatement_message = "$USER$ treats $TARGET$'s ailment with $ITEM$." // Shown when treating other with an item.
 	var/self_treatement_message = "$USER$ treats $USER_HIS$ ailment with $ITEM$."         // Shown when treating self with an item.
 	var/medication_treatment_message = "Your ailment abates."                             // Shown when treated by a metabolized reagent.
+	var/diagnosis_string  /* ex: "$USER_HIS$ $ORGAN$ has something wrong with it" */      // Shown when grab-diagnosed by a doctor. Leave null to be undiagnosable.
 
 /datum/ailment/New(var/obj/item/organ/_organ)
 	..()
@@ -65,7 +66,21 @@
 	return
 
 /datum/ailment/proc/treated_by_item(var/obj/item/treatment)
-	return !treated_by_item_type || istype(treatment, treated_by_item_type)
+	return treated_by_item_type && istype(treatment, treated_by_item_type)
+
+/datum/ailment/proc/replace_tokens(var/message, var/obj/item/treatment, var/mob/user, var/mob/target)
+	. = message
+	if(treatment)
+		. = replacetext(., "$ITEM$", "\the [treatment]")
+	if(user)
+		var/datum/gender/G = gender_datums[user.gender]
+		. = replacetext(., "$USER$", "\the [user]")
+		. = replacetext(., "$USER_HIS$", G.his)
+	if(target)
+		. = replacetext(., "$TARGET$", "\the [target]")
+	if(organ)
+		. = replacetext(., "$ORGAN$", organ.name)
+	. = capitalize(trim(.))
 
 /datum/ailment/proc/was_treated_by_item(var/obj/item/treatment, var/mob/user, var/mob/target)
 	var/show_message
@@ -76,14 +91,8 @@
 	if(!show_message)
 		return
 	
-	var/datum/gender/G = gender_datums[user.gender]
-	show_message = replacetext(show_message, "$USER_HIS$", G.his)
-	show_message = replacetext(show_message, "$USER$", "\the [user]")
-	show_message = replacetext(show_message, "$TARGET$", "\the [target]")
-	show_message = replacetext(show_message, "$ITEM$", "\the [treatment]")
-	show_message = replacetext(show_message, "$ORGAN$", organ.name)
+	user.visible_message(SPAN_NOTICE(replace_tokens(show_message, treatment, user, target)))
 
-	user.visible_message(SPAN_NOTICE(capitalize(show_message)))
 	if(istype(treatment, /obj/item/stack))
 		var/obj/item/stack/stack = treatment
 		stack.use(1)

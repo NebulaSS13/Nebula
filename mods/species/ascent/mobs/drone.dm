@@ -180,4 +180,4 @@
 	emp_act(2)
 
 /mob/living/silicon/robot/flying/ascent/emp_act(severity)
-	confused = min(confused + rand(3, 5), (severity == 1 ? 40 : 30))
+	SET_STATUS_MAX(src, STAT_CONFUSE, rand(3, 5))

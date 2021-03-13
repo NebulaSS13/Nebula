@@ -1,11 +1,12 @@
-/mob/living/exosuit/Stun()
-	return 0
+/mob/living/exosuit
+	var/static/list/ignore_status_conditions = list(
+		STAT_STUN,
+		STAT_WEAK,
+		STAT_PARA
+	)
 
-/mob/living/exosuit/Weaken()
-	return 0
-
-/mob/living/exosuit/Paralyse()
-	return 0
+/mob/living/exosuit/set_status(condition, amount)
+	. = !(condition in ignore_status_conditions) && ..()
 
 /mob/living/exosuit/getOxyLoss()
 	return 0

@@ -23,7 +23,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
 /mob/dview/Destroy()
 	SHOULD_CALL_PARENT(FALSE)
-	crash_with("Prevented attempt to delete dview mob: [log_info_line(src)]")
+	PRINT_STACK_TRACE("Prevented attempt to delete dview mob: [log_info_line(src)]")
 	return QDEL_HINT_LETMELIVE // Prevents destruction
 
 /mob/dview/Initialize()

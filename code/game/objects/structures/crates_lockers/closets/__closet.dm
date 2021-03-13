@@ -31,7 +31,7 @@
 		verbs += /obj/structure/closet/proc/togglelock_verb
 
 	if(ispath(closet_appearance))
-		var/decl/closet_appearance/app = decls_repository.get_decl(closet_appearance)
+		var/decl/closet_appearance/app = GET_DECL(closet_appearance)
 		if(app)
 			icon = app.icon
 			color = null
@@ -235,7 +235,7 @@
 	if(src.opened)
 		if(istype(W, /obj/item/grab))
 			var/obj/item/grab/G = W
-			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
+			src.receive_mouse_drop(G.affecting, user)      //act like they were dragged onto the closet
 			return 0
 		if(isWelder(W))
 			var/obj/item/weldingtool/WT = W
@@ -295,30 +295,15 @@
 						 "You hear welding.")
 	dismantle(src)
 
-/obj/structure/closet/MouseDrop_T(atom/movable/O, mob/user)
-	if(istype(O, /obj/screen))	//fix for HUD elements making their way into the world	-Pete
-		return
-	if(O.loc == user)
-		return
-	if(ismob(O) && src.large)
-		return
-	if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis)
-		return
-	if((!( istype(O, /atom/movable) ) || O.anchored || !Adjacent(user) || !Adjacent(O) || !user.Adjacent(O) || user.contents.Find(src)))
-		return
-	if(!isturf(user.loc)) // are you in a container/closet/pod/etc?
-		return
-	if(!src.opened)
-		return
-	if(istype(O, /obj/structure/closet))
-		return
-	step_towards(O, src.loc)
-	if(user != O)
-		user.show_viewers("<span class='danger'>[user] stuffs [O] into [src]!</span>")
-	src.add_fingerprint(user)
-	return
+/obj/structure/closet/receive_mouse_drop(atom/dropping, mob/user)
+	. = ..()
+	if(!. && opened && !istype(dropping, /obj/structure/closet) && (large || !ismob(dropping)))
+		step_towards(dropping, loc)
+		if(user != dropping)
+			user.show_viewers(SPAN_DANGER("\The [user] stuffs \the [dropping] into \the [src]!"))
+		return TRUE
 
-/obj/structure/closet/attack_ai(mob/user)
+/obj/structure/closet/attack_ai(mob/living/silicon/ai/user)
 	if(istype(user, /mob/living/silicon/robot) && Adjacent(user)) // Robots can open/close it, but not the AI.
 		attack_hand(user)
 

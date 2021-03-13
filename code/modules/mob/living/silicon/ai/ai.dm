@@ -51,6 +51,7 @@ var/list/ai_verbs_default = list(
 	name = "AI"
 	icon = 'icons/mob/AI.dmi'//
 	icon_state = "ai"
+	mob_sort_value = 2
 	anchored = 1 // -- TLE
 	density = 1
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
@@ -697,7 +698,8 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/on_update_icon()
 	if(!selected_sprite || !(selected_sprite in available_icons()))
-		selected_sprite = decls_repository.get_decl(default_ai_icon)
+		// This should NOT be using the decl repository as default_ai_icon is a datum. TODO: rewrite AI icon handling.
+		selected_sprite = decls_repository.get_decl(default_ai_icon) 
 
 	icon = selected_sprite.icon
 	if(stat == DEAD)
@@ -769,3 +771,6 @@ var/list/ai_verbs_default = list(
 		os.system_boot()
 	if(os.run_program(filename))
 		os.ui_interact(src)
+
+/mob/living/silicon/ai/get_admin_job_string()
+	return "AI"

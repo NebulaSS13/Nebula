@@ -1,7 +1,7 @@
 /obj/item/stock_parts/network_lock
 	name = "network access lock"
 	desc = "An id-based access lock preventing tampering with a machine's hardware and software. Connects wirelessly to network."
-	icon_state = "scan_module"
+	icon_state = "net_lock"
 	part_flags = PART_FLAG_QDEL
 	base_type = /obj/item/stock_parts/network_lock
 

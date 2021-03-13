@@ -5,13 +5,13 @@
 	. = affected_dest.viable_mundane_events
 
 /datum/event/location_event/announce()
-	var/decl/cultural_info/location/affected_dest = SSlore.get_culture(pick(GLOB.using_map.available_cultural_info[TAG_HOMEWORLD]))
+	var/decl/cultural_info/location/affected_dest = GET_DECL(pick(GLOB.using_map.available_cultural_info[TAG_HOMEWORLD]))
 	if(istype(affected_dest))
 		var/list/possible_events = get_possible_events(affected_dest)
 		if(length(possible_events))
 			var/event_type = pick(possible_events)
 			if(ispath(event_type, /decl/location_event))
-				var/decl/location_event/event = decls_repository.get_decl(event_type)
+				var/decl/location_event/event = GET_DECL(event_type)
 				news_network.SubmitArticle(event.announce(affected_dest), "News Daily", "News Daily", null, 1)
 
 /datum/event/location_event/mundane_news

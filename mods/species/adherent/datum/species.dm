@@ -55,20 +55,18 @@
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
-			CULTURE_ADHERENT
+			/decl/cultural_info/culture/adherent
 		),
 		TAG_HOMEWORLD = list(
-			HOME_SYSTEM_ADHERENT,
-			HOME_SYSTEM_ADHERENT_MOURNER
+			/decl/cultural_info/location/adherent,
+			/decl/cultural_info/location/adherent/monument
 		),
 		TAG_FACTION = list(
-			FACTION_ADHERENT_PRESERVERS,
-			FACTION_ADHERENT_LOYALISTS,
-			FACTION_ADHERENT_SEPARATISTS
+			/decl/cultural_info/faction/adherent,
+			/decl/cultural_info/faction/adherent/loyalists,
+			/decl/cultural_info/faction/adherent/separatists
 		),
-		TAG_RELIGION =  list(
-			RELIGION_OTHER
-		)
+		TAG_RELIGION =  list(/decl/cultural_info/religion/other)
 	)
 
 	has_limbs = list(

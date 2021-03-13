@@ -9,6 +9,7 @@
 	attack_cooldown = 2.5*DEFAULT_WEAPON_COOLDOWN
 	melee_accuracy_bonus = -25
 	material = /decl/material/solid/metal/steel
+	origin_tech = "{'engineering':3,'materials':2}"
 
 // BRACE - Can be installed on airlock to reinforce it and keep it closed.
 /obj/item/airlock_brace
@@ -19,8 +20,9 @@
 	icon_state = "brace_open"
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
-
 	material_health_multiplier = 0.6
+	origin_tech = "{'engineering':3,'materials':2}"
+
 	var/obj/machinery/door/airlock/airlock = null
 	var/obj/item/stock_parts/circuitboard/airlock_electronics/brace/electronics
 
@@ -56,7 +58,6 @@
 	. = ..()
 	health = max_health
 	electronics = new (src)
-	update_access()
 
 /obj/item/airlock_brace/Destroy()
 	if(airlock)
@@ -80,7 +81,6 @@
 			return
 		else
 			var/obj/item/card/id/C = W.GetIdCard()
-			update_access()
 			if(check_access(C))
 				to_chat(user, "You swipe \the [C] through \the [src].")
 				if(do_after(user, 10, airlock))
@@ -141,10 +141,3 @@
 	if(!max_health)
 		return 0
 	return (health / max_health) * 100
-
-/obj/item/airlock_brace/proc/update_access()
-	if(!electronics)
-		return
-	req_access = electronics.conf_access
-	if(electronics.one_access)
-		req_access = list(req_access)

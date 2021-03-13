@@ -49,9 +49,9 @@
 	)
 
 	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_MONKEY,
-		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
-		TAG_FACTION =   FACTION_OTHER
+		TAG_CULTURE =   /decl/cultural_info/culture/hidden/monkey,
+		TAG_HOMEWORLD = /decl/cultural_info/location/stateless,
+		TAG_FACTION =   /decl/cultural_info/faction/other
 	)
 
 	ai = /datum/ai/monkey

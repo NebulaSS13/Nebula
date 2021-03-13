@@ -142,7 +142,7 @@
 				var/obj/structure/cable/N = T.get_cable_node()
 				if (prob(50) && electrocute_mob(user, N, N))
 					spark_at(machine, amount=5, cardinal_only = TRUE)
-					if(user.stunned)
+					if(HAS_STATUS(user, STAT_STUN))
 						return TRUE
 				C.use(10)
 				user.visible_message(\
@@ -165,7 +165,7 @@
 			if(terminal && (machine == loc) && machine.components_are_accessible(type))
 				if (prob(50) && electrocute_mob(user, terminal.powernet, terminal))
 					spark_at(machine, amount=5, cardinal_only = TRUE)
-					if(user.stunned)
+					if(HAS_STATUS(user, STAT_STUN))
 						return TRUE
 				new /obj/item/stack/cable_coil(T, 10)
 				to_chat(user, "<span class='notice'>You cut the cables and dismantle the power terminal.</span>")

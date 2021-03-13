@@ -82,8 +82,9 @@ var/ascii_reset = "[ascii_esc]\[0m"
 	reported = 1
 	log_unit_test("[ascii_yellow]--- SKIPPED --- \[[name]\]: [message][ascii_reset]")
 
+// Executed before the test runs - Primarily intended for shared setup (generally in templates)
 /datum/unit_test/proc/setup_test()
-	// Executed before the test runs - Primarily intended for shared setup (generally in templates)
+	return
 
 /datum/unit_test/proc/start_test()
 	fail("No test proc - [type]")
@@ -92,8 +93,32 @@ var/ascii_reset = "[ascii_esc]\[0m"
 	fail("No check results proc - [type]")
 	return 1
 
+// Executed after the test has run - Primarily intended for shared cleanup (generally in templates)
 /datum/unit_test/proc/teardown_test()
-	// Executed after the test has run - Primarily intended for shared cleanup (generally in templates)
+	SHOULD_CALL_PARENT(TRUE)
+	var/failed = FALSE
+
+#ifdef UNIT_TEST
+	if(!async) // Async tests run at the same time, so cleaning up after any one completes risks breaking following tests
+		var/ignored_types = list(/atom/movable/lighting_overlay, /obj/effect/landmark)
+		var/z_levels = list()
+		var/turf/safe = get_safe_turf()
+		var/turf/space = get_space_turf()
+		z_levels |= safe.z
+		z_levels |= space.z
+
+		for(var/z_level in z_levels)
+			for(var/T in block(locate(1, 1, z_level), locate(world.maxx, world.maxy, z_level)))
+				for(var/atom in T)
+					if(is_type_in_list(atom, ignored_types))
+						continue
+					log_bad("Test area contained: [log_info_line(atom)]")
+					qdel(atom)
+					failed = TRUE
+#endif
+
+	if(failed)
+		fail("Test did not cleanup after itself")
 
 /datum/unit_test/proc/get_safe_turf()
 	if(!safe_landmark)
@@ -134,14 +159,17 @@ var/ascii_reset = "[ascii_esc]\[0m"
 /proc/do_unit_test(datum/unit_test/test, end_time, skip_disabled_tests = TRUE)
 	if(test.disabled && skip_disabled_tests)
 		test.pass("[ascii_red]Check Disabled: [test.why_disabled]")
-		return
+		return FALSE
 	if(world.time > end_time)
 		test.fail("Unit Tests Ran out of time")   // This should never happen, and if it does either fix your unit tests to be faster or if you can make them async checks.
-		return
+		return FALSE
 	test.setup_test()
 	if (test.start_test() == null)	// Runtimed.
 		test.fail("Test Runtimed")
-	return 1
+		return FALSE
+	if(!test.async)
+		test.teardown_test()
+	return TRUE
 
 //For async tests. Returns 1 if done.
 /proc/check_unit_test(datum/unit_test/test, end_time)

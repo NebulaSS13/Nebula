@@ -104,6 +104,7 @@ var/list/gamemode_cache = list()
 
 	//game_options.txt configs
 
+	var/show_human_death_message = FALSE
 	var/health_threshold_dead = -100
 
 	var/organ_health_multiplier = 0.9
@@ -136,6 +137,7 @@ var/list/gamemode_cache = list()
 	var/skill_sprint_cost_range = 0.8
 	var/minimum_stamina_recovery = 1
 	var/maximum_stamina_recovery = 3
+	var/glide_size_delay = 1
 
 	//Mob specific modifiers. NOTE: These will affect different mob types in different ways
 	var/human_delay = 0
@@ -219,6 +221,7 @@ var/list/gamemode_cache = list()
 	var/radiation_material_resistance_divisor = 2 //A turf's possible radiation resistance is divided by this number, to get the real value.
 	var/radiation_lower_limit = 0.15 //If the radiation level for a turf would be below this, ignore it.
 
+	var/auto_local_admin = TRUE // If true, connections from 127.0.0.1 get automatic admin.
 	var/autostealth = 0 // Staff get automatic stealth after this many minutes
 
 	var/error_cooldown = 600 // The "cooldown" time for each occurrence of a unique error
@@ -235,6 +238,9 @@ var/list/gamemode_cache = list()
 	var/do_not_prevent_spam = FALSE //If this is true, skips spam prevention for user actions; inputs, verbs, macros, etc.
 	var/max_acts_per_interval = 140 //Number of actions per interval permitted for spam protection.
 	var/act_interval = 0.1 SECONDS //Interval for spam prevention.
+
+	var/panic_bunker = FALSE //is the panic bunker enabled?
+	var/panic_bunker_message = "Sorry! The panic bunker is enabled. Please head to our Discord or forum to get yourself added to the panic bunker bypass."
 
 	var/lock_client_view_x
 	var/lock_client_view_y
@@ -734,9 +740,11 @@ var/list/gamemode_cache = list()
 				if("autostealth")
 					config.autostealth = text2num(value)
 
+				if("auto_local_admin")
+					config.auto_local_admin = text2num(value)
+
 				if("radiation_lower_limit")
 					radiation_lower_limit = text2num(value)
-
 
 				if("error_cooldown")
 					error_cooldown = text2num(value)
@@ -774,6 +782,11 @@ var/list/gamemode_cache = list()
 				if ("act_interval")
 					config.act_interval = text2num(value) SECONDS
 
+				if("panic_bunker")
+					config.panic_bunker = TRUE
+				if("panic_bunker_message")
+					config.panic_bunker_message = value
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
@@ -783,6 +796,8 @@ var/list/gamemode_cache = list()
 			value = text2num(value)
 
 			switch(name)
+				if("show_human_death_message")
+					config.show_human_death_message = TRUE
 				if("health_threshold_dead")
 					config.health_threshold_dead = value
 				if("revival_pod_plants")
@@ -810,6 +825,8 @@ var/list/gamemode_cache = list()
 					config.walk_delay = value
 				if("creep_delay")
 					config.creep_delay = value
+				if("glide_size_delay")
+					config.glide_size_delay = value
 				if("minimum_sprint_cost")
 					config.minimum_sprint_cost = value
 				if("skill_sprint_cost_range")

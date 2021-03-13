@@ -11,20 +11,6 @@
 	toxicity = 0
 	hidden_from_codex = TRUE
 
-/decl/material/liquid/slimejelly
-	name = "slime jelly"
-	lore_text = "A gooey semi-liquid produced from one of the deadliest lifeforms in existence."
-	taste_description = "slime"
-	taste_mult = 1.3
-	toxicity = 10
-	heating_products = list(
-		/decl/material/liquid/denatured_toxin = 1
-	)
-	heating_point = 100 CELSIUS
-	heating_message = "becomes clear."
-	color = "#cf3600"
-	metabolism = REM * 0.25
-
 /decl/material/liquid/plasticide
 	name = "plasticide"
 	lore_text = "Liquid plastic, do not eat."
@@ -78,9 +64,9 @@
 	taste_mult = 1.2
 	metabolism = REM * 0.25
 
-/decl/material/liquid/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/venom/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(prob(REAGENT_VOLUME(holder, type)*2))
-		M.confused = max(M.confused, 3)
+		SET_STATUS_MAX(M, STAT_CONFUSE, 3)
 	..()
 
 /decl/material/liquid/cyanide //Fast and Lethal
@@ -92,9 +78,9 @@
 	metabolism = REM * 2
 	toxicity_targets_organ = BP_HEART
 
-/decl/material/liquid/cyanide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/cyanide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
-	M.sleeping += 1
+	ADJ_STATUS(M, STAT_ASLEEP, 1)
 
 /decl/material/liquid/heartstopper
 	name = "heartstopper"
@@ -107,19 +93,19 @@
 	toxicity_targets_organ = BP_HEART
 	taste_mult = 1.2
 
-/decl/material/liquid/heartstopper/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/heartstopper/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
-	M.confused += 1.5
+	ADJ_STATUS(M, STAT_CONFUSE, 1.5)
 
-/decl/material/liquid/heartstopper/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/heartstopper/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.stat != UNCONSCIOUS)
 			if(H.losebreath >= 10)
-				H.losebreath = max(10, M.losebreath-10)
+				H.losebreath = max(10, H.losebreath-10)
 			H.adjustOxyLoss(2)
-			H.Weaken(10)
+			SET_STATUS_MAX(H, STAT_WEAK, 10)
 		M.add_chemical_effect(CE_NOPULSE, 1)
 
 /decl/material/liquid/zombiepowder
@@ -138,13 +124,13 @@
 	)
 	taste_mult = 1.2
 
-/decl/material/liquid/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/zombiepowder/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.status_flags |= FAKEDEATH
 	M.adjustOxyLoss(3 * removed)
-	M.Weaken(10)
-	M.silent = max(M.silent, 10)
-	if(M.chem_doses[type] <= removed) //half-assed attempt to make timeofdeath update only at the onset
+	SET_STATUS_MAX(M, STAT_WEAK, 10)
+	SET_STATUS_MAX(M, STAT_SILENCE, 10)
+	if(LAZYACCESS(M.chem_doses, type) <= removed) //half-assed attempt to make timeofdeath update only at the onset
 		M.timeofdeath = world.time
 	M.add_chemical_effect(CE_NOPULSE, 1)
 
@@ -220,14 +206,14 @@
 	hidden_from_codex = TRUE
 	var/amount_to_zombify = 5
 
-/decl/material/liquid/zombie/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/zombie/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed * 0.5, holder)
 
-/decl/material/liquid/zombie/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/zombie/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/true_dose = H.chem_doses[type] + REAGENT_VOLUME(holder, type)
+		var/true_dose = LAZYACCESS(H.chem_doses, type) + REAGENT_VOLUME(holder, type)
 		if (true_dose >= amount_to_zombify)
 			H.zombify()
 		else if (true_dose > 1 && prob(20))

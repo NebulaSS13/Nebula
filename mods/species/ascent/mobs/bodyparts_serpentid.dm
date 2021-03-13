@@ -78,13 +78,14 @@
 /obj/item/organ/internal/lungs/insectoid/serpentid/handle_failed_breath()
 	var/mob/living/carbon/human/H = owner
 
-	H.adjustOxyLoss(-(HUMAN_MAX_OXYLOSS * owner.chem_effects[CE_OXYGENATED]))
+	var/oxygenated = LAZYACCESS(owner.chem_effects, CE_OXYGENATED)
+	H.adjustOxyLoss(-(HUMAN_MAX_OXYLOSS * oxygenated))
 
-	if(breath_fail_ratio < 0.25 && owner.chem_effects[CE_OXYGENATED])
+	if(breath_fail_ratio < 0.25 && oxygenated)
 		H.oxygen_alert = 0
 	if(breath_fail_ratio >= 0.25 && (damage || world.time > last_successful_breath + 2 MINUTES))
 		H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * breath_fail_ratio)
-		if(owner.chem_effects[CE_OXYGENATED])
+		if(oxygenated)
 			H.oxygen_alert = 1
 		else
 			H.oxygen_alert = 2
@@ -118,7 +119,7 @@
 			lowblood_tally = 10
 			if(prob(10))
 				to_chat(owner, "<span class='warning'>Your body is barely functioning and is starting to shut down.</span>")
-				owner.Paralyse(1)
+				SET_STATUS_MAX(owner, STAT_PARA, 1)
 				var/obj/item/organ/internal/I = pick(owner.internal_organs)
 				I.take_internal_damage(5)
 	..()
@@ -163,7 +164,7 @@
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/head/insectoid/serpentid/get_eye_overlay()
-	var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
+	var/obj/item/organ/internal/eyes/eyes = owner.get_internal_organ(owner.species.vision_organ || BP_EYES)
 	if(eyes)
 		return eyes.get_special_overlay()
 

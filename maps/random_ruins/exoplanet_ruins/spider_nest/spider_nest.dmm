@@ -8,7 +8,7 @@
 	},
 /area/template_noop)
 "c" = (
-/obj/structure/closet/walllocker/emerglocker/east,
+/obj/structure/emergency_dispenser/east,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/lino,
 /area/template_noop)

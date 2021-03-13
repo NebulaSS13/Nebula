@@ -11,7 +11,7 @@
 	origin_tech = "{'wormholes':4}"
 
 /obj/item/teleportation_scroll/attack_self(mob/user)
-	var/decl/special_role/wizard/wizards = decls_repository.get_decl(/decl/special_role/wizard)
+	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 	if((user.mind && !wizards.is_antagonist(user.mind)))
 		to_chat(usr, "<span class='warning'>You stare at the scroll but cannot make sense of the markings!</span>")
 		return

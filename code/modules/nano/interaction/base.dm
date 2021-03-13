@@ -19,9 +19,6 @@
 /datum/topic_state
 	var/check_access = TRUE // Whether this topic state should bypass access checks or not.
 
-/datum/topic_state/proc/href_list(var/mob/user)
-	return list()
-
 /datum/topic_state/proc/can_use_topic(var/src_object, var/mob/user)
 	return STATUS_CLOSE
 

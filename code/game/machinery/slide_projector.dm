@@ -123,7 +123,6 @@
 	icon_state = "white"
 	anchored = TRUE
 	simulated = FALSE
-	appearance_flags = PIXEL_SCALE
 	blend_mode = BLEND_ADD
 	plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	alpha = 100

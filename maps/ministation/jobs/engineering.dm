@@ -5,7 +5,7 @@
 	spawn_positions = 2
 	hud_icon = "hudengineer"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/engineer
-	department_refs = list(DEPT_ENGINEERING)
+	department_types = list(/decl/department/engineering)
 	selection_color = "#5b4d20"
 	economic_power = 5
 	minimal_player_age = 3

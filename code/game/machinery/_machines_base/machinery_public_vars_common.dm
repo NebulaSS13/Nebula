@@ -27,7 +27,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 	call_proc = /obj/machinery/proc/toggle_input_toggle
 
 /obj/machinery/proc/toggle_input_toggle()
-	var/decl/public_access/public_variable/variable = decls_repository.get_decl(/decl/public_access/public_variable/input_toggle)
+	var/decl/public_access/public_variable/variable = GET_DECL(/decl/public_access/public_variable/input_toggle)
 	variable.write_var(src, !input_toggle)
 
 /decl/public_access/public_variable/area_uid

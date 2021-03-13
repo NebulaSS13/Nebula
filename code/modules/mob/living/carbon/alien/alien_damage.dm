@@ -9,14 +9,14 @@
 		if (2.0)
 			b_loss += 60
 			f_loss += 60
-			ear_damage += 30
-			ear_deaf += 120
+			SET_STATUS_MAX(src, STAT_TINNITUS, 30)
+			SET_STATUS_MAX(src, STAT_DEAF, 120)
 		if(3)
 			b_loss += 30
 			if (prob(50))
-				Paralyse(1)
-			ear_damage += 15
-			ear_deaf += 60
+				SET_STATUS_MAX(src, STAT_PARA, 1)
+			SET_STATUS_MAX(src, STAT_TINNITUS, 15)
+			SET_STATUS_MAX(src, STAT_DEAF, 60)
 	adjustBruteLoss(b_loss)
 	adjustFireLoss(f_loss)
 	updatehealth()

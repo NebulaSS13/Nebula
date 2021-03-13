@@ -37,7 +37,10 @@
 	underlays.Cut()
 	desc = initial(desc)
 
-/obj/structure/artifact/MouseDrop(var/obj/structure/anomaly_container/over_object)
-	if(istype(over_object) && Adjacent(over_object) && CanMouseDrop(over_object, usr))
-		Bumped(usr)
-		over_object.contain(src)
+/obj/structure/artifact/handle_mouse_drop(atom/over, mob/user)
+	if(istype(over, /obj/structure/anomaly_container))
+		Bumped(user)
+		var/obj/structure/anomaly_container/box = over
+		box.contain(src)
+		return TRUE
+	. = ..()

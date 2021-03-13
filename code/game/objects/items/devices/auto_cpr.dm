@@ -61,7 +61,7 @@
 			if(prob(5))
 				E.fracture()
 		else
-			var/obj/item/organ/internal/heart/heart = H.internal_organs_by_name[BP_HEART]
+			var/obj/item/organ/internal/heart/heart = H.get_internal_organ(BP_HEART)
 			if(heart)
 				heart.external_pump = list(world.time, 0.6)
 

@@ -57,13 +57,13 @@
 
 /datum/fabricator_recipe/robotics/prosthetic/get_product_name()
 	. = "prosthetic limb ([..()])"
-	if(model)
-		var/datum/robolimb/brand = model
-		return "[.] ([initial(brand.company)])"
+	if(ispath(model))
+		var/decl/prosthetics_manufacturer/brand = GET_DECL(model)
+		return "[.] ([brand.name])"
 
 /datum/fabricator_recipe/robotics/prosthetic/build()
 	. = ..()
 	for(var/obj/item/organ/external/E in .)
 		E.robotize(model)
 
-DEFINE_ROBOLIMB_DESIGNS(/datum/robolimb, generic, "Unbranded")
+DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer, generic, "Unbranded")

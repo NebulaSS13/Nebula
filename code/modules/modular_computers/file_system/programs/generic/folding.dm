@@ -77,7 +77,7 @@ GLOBAL_LIST_INIT(science_strings, list(
 					to_chat(holder, SPAN_WARNING("The [computer] starts to get very warm."))
 				if(2)
 					to_chat(holder, SPAN_WARNING("The [computer] gets scaldingly hot, burning you!"))
-					holder.burn_skin(0.45)
+					holder.take_overall_damage(0, 0.45)
 				if(3)
 					to_chat(holder, SPAN_WARNING("The [computer] pings an error chime."))
 					crashed = TRUE

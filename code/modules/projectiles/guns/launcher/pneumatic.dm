@@ -134,10 +134,10 @@
 	update_held_icon()
 
 /obj/item/gun/launcher/pneumatic/experimental_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/I = ..()
-	if(tank)
-		I.icon_state += "-tank" 
-	return I
+	var/image/ret = ..()
+	if(ret && tank)
+		ret.icon_state += "-tank" 
+	return ret
 
 /obj/item/gun/launcher/pneumatic/small
 	name = "small pneumatic cannon"

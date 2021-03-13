@@ -72,7 +72,7 @@
 /obj/machinery/vending/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(isnull(markup))
-		markup = 1 + (rand() * 2)
+		markup = 1.1 + (rand() * 0.4)
 	if(!ispath(vendor_currency, /decl/currency))
 		vendor_currency = GLOB.using_map.default_currency
 	if(product_slogans)
@@ -185,10 +185,10 @@
 	. = ..()
 	SSnano.update_uis(src)
 
-/obj/machinery/vending/MouseDrop_T(var/obj/item/I, var/mob/user)
-	if(!CanMouseDrop(I, user) || (I.loc != user))
-		return
-	return attempt_to_stock(I, user)
+/obj/machinery/vending/receive_mouse_drop(atom/dropping, var/mob/user)
+	. = ..()
+	if(!. && dropping.loc == user && attempt_to_stock(dropping, user))
+		return TRUE
 
 /obj/machinery/vending/proc/attempt_to_stock(var/obj/item/I, var/mob/user)
 	for(var/datum/stored_items/vending_products/R in product_records)
@@ -258,7 +258,7 @@
  */
 /obj/machinery/vending/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
-	var/decl/currency/cur = decls_repository.get_decl(vendor_currency)
+	var/decl/currency/cur = GET_DECL(vendor_currency)
 	var/list/data = list()
 	if(currently_vending)
 		data["mode"] = 1

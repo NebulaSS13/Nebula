@@ -70,6 +70,7 @@
 
 	next_move = 1
 	set_sight(sight|SEE_SELF)
+
 	..()
 
 	my_client = client
@@ -97,8 +98,22 @@
 	if(machine)
 		machine.on_user_login(src)
 
+	client.update_skybox(1)
+	if(ability_master)
+		ability_master.update_abilities(1, src)
+		ability_master.toggle_open(1)
+	GLOB.logged_in_event.raise_event(src)
+
 	//set macro to normal incase it was overriden (like cyborg currently does)
 	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5")
+
+	if(mind)
+		if(!mind.learned_spells)
+			mind.learned_spells = list()
+		if(ability_master && ability_master.spell_objects)
+			for(var/obj/screen/ability/spell/screen in ability_master.spell_objects)
+				var/spell/S = screen.spell
+				mind.learned_spells |= S
 
 /mob/living/carbon/Login()
 	. = ..()

@@ -43,7 +43,7 @@
 /mob/living/proc/harvest_skin()
 	. = list()
 	if(skin_material && skin_amount)
-		var/decl/material/M = decls_repository.get_decl(skin_material)
+		var/decl/material/M = GET_DECL(skin_material)
 		. += new M.stack_type(get_turf(src), skin_amount, skin_material)
 		blood_splatter(get_turf(src), src, large = TRUE)
 
@@ -51,7 +51,7 @@
 	. = list()
 	var/turf/T = get_turf(src)
 	if(bone_material && bone_amount)
-		var/decl/material/M = decls_repository.get_decl(bone_material)
+		var/decl/material/M = GET_DECL(bone_material)
 		. += new M.stack_type(T, bone_amount, bone_material)
 		blood_splatter(T, src, large = TRUE)
 	if(skull_type)
@@ -103,8 +103,11 @@
 		to_chat(user, SPAN_WARNING("\The [occupant] is so badly mangled that removing them from \the [src] would be pointless."))
 		return
 
-/obj/structure/kitchenspike/MouseDrop_T(var/mob/target, var/mob/user)
-	try_spike(target, user)
+/obj/structure/kitchenspike/receive_mouse_drop(var/atom/dropping, var/mob/user)
+	. = ..()
+	if(!. && ismob(dropping))
+		try_spike(dropping, user)
+		return TRUE
 
 /obj/structure/kitchenspike/proc/try_spike(var/mob/living/target, var/mob/living/user)
 	if(!istype(target) || !Adjacent(user) || user.incapacitated())

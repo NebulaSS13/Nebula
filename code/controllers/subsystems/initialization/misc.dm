@@ -8,8 +8,6 @@ SUBSYSTEM_DEF(misc)
 		GLOB.using_map.perform_map_generation()
 	GLOB.using_map.build_exterior_atmosphere()
 
-	// Create robolimbs for chargen.
-	populate_robolimb_list()
 	setupgenetics()
 
 	transfer_controller = new

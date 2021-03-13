@@ -21,7 +21,7 @@
 /datum/category_item/player_setup_item/background/languages/save_character(var/savefile/S)
 	var/list/language_names = list()
 	for(var/lang in pref.alternate_languages)
-		var/decl/language/lang_decl = decls_repository.get_decl(lang)
+		var/decl/language/lang_decl = GET_DECL(lang)
 		if(istype(lang_decl))
 			language_names |= lang_decl.name
 	to_file(S["language"], language_names)
@@ -58,7 +58,7 @@
 		sanitize_alt_languages()
 		var/list/available_languages = list()
 		for(var/lang in (allowed_languages - free_languages))
-			available_languages |= decls_repository.get_decl(lang)
+			available_languages |= GET_DECL(lang)
 
 		if(!length(available_languages))
 			alert(user, "There are no additional languages available to select.")
@@ -78,7 +78,7 @@
 		return
 
 	for(var/thing in pref.cultural_info)
-		var/decl/cultural_info/culture = SSlore.get_culture(pref.cultural_info[thing])
+		var/decl/cultural_info/culture = GET_DECL(pref.cultural_info[thing])
 		if(istype(culture))
 			var/list/langs = culture.get_spoken_languages()
 			if(LAZYLEN(langs))
@@ -97,7 +97,7 @@
 
 /datum/category_item/player_setup_item/background/languages/proc/is_allowed_language(var/mob/user, var/decl/language/lang)
 	if(ispath(lang, /decl/language))
-		lang = decls_repository.get_decl(lang)
+		lang = GET_DECL(lang)
 	if(isnull(allowed_languages) || isnull(free_languages))
 		rebuild_language_cache(user)
 	if(!user || ((lang.flags & RESTRICTED) && is_alien_whitelisted(user, lang)))
@@ -110,7 +110,7 @@
 	var/preference_mob = preference_mob()
 	rebuild_language_cache(preference_mob)
 	for(var/L in pref.alternate_languages)
-		var/decl/language/lang = decls_repository.get_decl(L)
+		var/decl/language/lang = GET_DECL(L)
 		if(!lang || !is_allowed_language(preference_mob, lang))
 			pref.alternate_languages -= L
 	if(LAZYLEN(free_languages))
@@ -127,7 +127,7 @@
 	if(LAZYLEN(pref.alternate_languages))
 		for(var/i = 1 to length(pref.alternate_languages))
 			var/lang = pref.alternate_languages[i]
-			var/decl/language/lang_instance = decls_repository.get_decl(lang)
+			var/decl/language/lang_instance = GET_DECL(lang)
 			if(free_languages[lang])
 				LAZYADD(., "- [lang_instance.name] (required).<br>")
 			else

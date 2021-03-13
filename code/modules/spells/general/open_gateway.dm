@@ -17,7 +17,7 @@
 	var/turf/T = get_turf(H)
 	holder.visible_message("<span class='notice'>A gateway opens up underneath \the [H]!</span>")
 	var/g
-	var/decl/special_role/godcultist/godcult = decls_repository.get_decl(/decl/special_role/godcultist)
+	var/decl/special_role/godcultist/godcult = GET_DECL(/decl/special_role/godcultist)
 	if(H.mind && (H.mind in godcult.current_antagonists))
 		g = godcult.get_deity(H.mind)
 	return list(new /obj/structure/deity/gateway(T,g))

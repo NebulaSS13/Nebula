@@ -218,7 +218,7 @@ var/list/gear_datums = list()
 		if(allowed && G.allowed_skills)
 			var/list/skills_required = list()//make it into instances? instead of path
 			for(var/skill in G.allowed_skills)
-				var/decl/hierarchy/skill/instance = decls_repository.get_decl(skill)
+				var/decl/hierarchy/skill/instance = GET_DECL(skill)
 				skills_required[instance] = G.allowed_skills[skill]
 
 			allowed = skill_check(jobs, skills_required)//Checks if a single job has all the skills required
@@ -351,7 +351,8 @@ var/list/gear_datums = list()
 	var/whitelisted        //Term to check the whitelist for..
 	var/sort_category = "General"
 	var/flags              //Special tweaks in new
-	var/custom_setup_proc  //Special tweak in New
+	var/custom_setup_proc                 //Special tweak in New
+	var/list/custom_setup_proc_arguments  //Special tweak in New
 	var/category
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
 
@@ -371,7 +372,7 @@ var/list/gear_datums = list()
 		gear_tweaks += gear_tweak_free_name
 		gear_tweaks += gear_tweak_free_desc
 	if(custom_setup_proc)
-		gear_tweaks += new/datum/gear_tweak/custom_setup(custom_setup_proc)
+		gear_tweaks += new/datum/gear_tweak/custom_setup(custom_setup_proc, custom_setup_proc_arguments)
 	var/options = get_gear_tweak_options()
 	for(var/tweak in options)
 		var/optargs = options[tweak]
@@ -399,20 +400,26 @@ var/list/gear_datums = list()
 /datum/gear/proc/spawn_item(user, location, metadata)
 	var/datum/gear_data/gd = new(path, location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.tweak_gear_data(metadata && metadata["[gt]"], gd)
+		gt.tweak_gear_data(islist(metadata) && metadata["[gt]"], gd)
 	var/item = new gd.path(gd.location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.tweak_item(user, item, metadata && metadata["[gt]"])
-	return item
+		gt.tweak_item(user, item, islist(metadata) && metadata["[gt]"])
+	. = item
+	if(metadata && !islist(metadata))
+		PRINT_STACK_TRACE("Loadout spawn_item() proc received non-null non-list metadata: '[json_encode(metadata)]'")
 
 /datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
-	var/obj/item/item = spawn_item(H, H, metadata)
+	var/obj/item/item = spawn_and_validate_item(H, metadata)
+	if(!item)
+		return
+
 	if(H.equip_to_slot_if_possible(item, slot, del_on_fail = 1, force = 1))
 		. = item
 
 /datum/gear/proc/spawn_in_storage_or_drop(var/mob/living/carbon/human/H, var/metadata)
-	var/obj/item/item = spawn_item(H, H, metadata)
-	item.add_fingerprint(H)
+	var/obj/item/item = spawn_and_validate_item(H, metadata)
+	if(!item)
+		return
 
 	var/atom/placed_in = H.equip_to_storage(item)
 	if(placed_in)
@@ -423,3 +430,18 @@ var/list/gear_datums = list()
 		to_chat(H, "<span class='notice'>Placing \the [item] in your hands!</span>")
 	else
 		to_chat(H, "<span class='danger'>Dropping \the [item] on the ground!</span>")
+
+/datum/gear/proc/spawn_and_validate_item(mob/living/carbon/human/H, metadata)
+	PRIVATE_PROC(TRUE)
+
+	var/obj/item/item = spawn_item(H, H, metadata)
+	if(QDELETED(item))
+		return
+
+	if(!(flags & GEAR_NO_FINGERPRINTS))
+		item.add_fingerprint(H)
+
+	if(flags & GEAR_NO_EQUIP)
+		return
+	
+	return item

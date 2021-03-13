@@ -72,7 +72,7 @@ the HUD updates properly! */
 	P.Turf = get_turf(P.Mob)
 	return P
 
-proc/can_process_hud(var/mob/M)
+/proc/can_process_hud(var/mob/M)
 	if(!M)
 		return 0
 	if(!M.client)

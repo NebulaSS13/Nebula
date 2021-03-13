@@ -25,7 +25,7 @@
 		if(do_mob(assailant, affecting, action_cooldown - 1))
 			G.attacking = 0
 			G.action_used()
-			affecting.Weaken(2)
+			SET_STATUS_MAX(affecting, STAT_WEAK, 2)
 			affecting.visible_message("<span class='notice'>[assailant] pins [affecting] to the ground!</span>")
 
 			return 1
@@ -176,11 +176,11 @@
 	if(istype(affecting_mob) && G.special_target_functional)
 		switch(G.target_zone)
 			if(BP_MOUTH)
-				if(affecting_mob.silent < 2)
-					affecting_mob.silent = 2
+				if(GET_STATUS(affecting_mob, STAT_SILENCE) < 2)
+					affecting_mob.set_status(STAT_SILENCE, 2)
 			if(BP_EYES)
-				if(affecting_mob.eye_blind < 2)
-					affecting_mob.eye_blind = 2
+				if(GET_STATUS(affecting_mob, STAT_BLIND) < 2)
+					affecting_mob.set_status(STAT_BLIND, 2)
 
 // Handles when they change targeted areas and something is supposed to happen.
 /decl/grab/normal/special_target_change(var/obj/item/grab/G, old_zone, new_zone)
@@ -193,8 +193,8 @@
 			G.assailant.visible_message("<span class='warning'>\The [G.assailant] covers [G.affecting]'s eyes!</span>")
 
 /decl/grab/normal/check_special_target(var/obj/item/grab/G)
-	var/mob/affecting_mob = G.get_affecting_mob()
-	if(affecting_mob)
+	var/mob/living/affecting_mob = G.get_affecting_mob()
+	if(!istype(affecting_mob))
 		return FALSE
 	switch(G.target_zone)
 		if(BP_MOUTH)
@@ -214,7 +214,7 @@
 		else
 			return attack_tendons(G, I, user, G.target_zone)
 
-/decl/grab/normal/proc/attack_throat(var/obj/item/grab/G, var/obj/item/W, var/mob/living/carbon/human/user)
+/decl/grab/normal/proc/attack_throat(var/obj/item/grab/G, var/obj/item/W, mob/user)
 	var/mob/living/affecting = G.get_affecting_mob()
 	if(!affecting)
 		return
@@ -257,7 +257,7 @@
 	admin_attack_log(user, affecting, "Knifed their victim", "Was knifed", "knifed")
 	return 1
 
-/decl/grab/normal/proc/attack_tendons(var/obj/item/grab/G, var/obj/item/W, var/mob/living/carbon/human/user, var/target_zone)
+/decl/grab/normal/proc/attack_tendons(var/obj/item/grab/G, var/obj/item/W, mob/user, var/target_zone)
 	var/mob/living/affecting = G.get_affecting_mob()
 	if(!affecting)
 		return

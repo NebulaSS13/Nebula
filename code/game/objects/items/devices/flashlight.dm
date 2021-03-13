@@ -83,7 +83,7 @@
 				to_chat(user, "<span class='warning'>You can't find anything on [H] to direct [src] into!</span>")
 				return
 
-			vision = H.internal_organs_by_name[H.species.vision_organ]
+			vision = H.get_internal_organ(H.species.vision_organ)
 			if(!vision)
 				vision = H.species.has_organ[H.species.vision_organ]
 				to_chat(user, "<span class='warning'>\The [H] is missing \his [initial(vision.name)]!</span>")
@@ -114,7 +114,7 @@
 			to_chat(user, "<span class='notice'>\The [H]'s pupils give an eerie glow!</span>")
 		if(vision.damage)
 			to_chat(user, "<span class='warning'>There's visible damage to [H]'s [vision.name]!</span>")
-		else if(H.eye_blurry)
+		else if(HAS_STATUS(H, STAT_BLURRY))
 			to_chat(user, "<span class='notice'>\The [H]'s pupils react slower than normally.</span>")
 		if(H.getBrainLoss() > 15)
 			to_chat(user, "<span class='notice'>There's visible lag between left and right pupils' reactions.</span>")

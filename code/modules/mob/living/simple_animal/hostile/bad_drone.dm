@@ -15,6 +15,7 @@
 	minbodytemp = 0
 	speed = 4
 	mob_size = MOB_SIZE_TINY
+	gene_damage = -1
 	var/corpse = /obj/effect/decal/cleanable/blood/gibs/robot
 
 /mob/living/simple_animal/hostile/rogue_drone/Initialize()

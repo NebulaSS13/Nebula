@@ -91,14 +91,18 @@
 		// Update global type to string cache.
 		if(!stored_substances_to_names[mat])
 			if(ispath(mat, /decl/material))
-				var/decl/material/mat_instance = decls_repository.get_decl(mat)
+				var/decl/material/mat_instance = GET_DECL(mat)
 				if(istype(mat_instance))
 					stored_substances_to_names[mat] =  lowertext(mat_instance.name)
 			else if(ispath(mat, /decl/material))
 				var/decl/material/reg = mat
 				stored_substances_to_names[mat] = lowertext(initial(reg.name))
 
-	SSfabrication.init_fabricator(src)
+/obj/machinery/fabricator/handle_post_network_connection()
+	..()
+	var/list/base_designs = SSfabrication.get_initial_recipes(fabricator_class)
+	design_cache = islist(base_designs) ? base_designs.Copy() : list() // Don't want to mutate the subsystem cache.
+	refresh_design_cache()
 
 /obj/machinery/fabricator/proc/refresh_design_cache(var/list/known_tech)
 	if(length(installed_designs))
@@ -126,7 +130,7 @@
 			continue
 
 		for(var/species_type in R.species_locked)
-			if(ispath(species_variation, species_type))
+			if(!(ispath(species_variation, species_type)))
 				design_cache.Remove(R)
 				return
 
@@ -184,7 +188,7 @@
 	for(var/mat in stored_material)
 		if(ispath(mat, /decl/material))
 			var/mat_name = stored_substances_to_names[mat]
-			var/decl/material/M = decls_repository.get_decl(mat_name)
+			var/decl/material/M = GET_DECL(mat_name)
 			if(stored_material[mat] > SHEET_MATERIAL_AMOUNT)
 				M.place_sheet(get_turf(src), round(stored_material[mat] / SHEET_MATERIAL_AMOUNT), M.type)
 	..()

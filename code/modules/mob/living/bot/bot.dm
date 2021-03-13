@@ -68,9 +68,9 @@
 	if(health <= 0)
 		death()
 		return
-	weakened = 0
-	stunned = 0
-	paralysis = 0
+	set_status(STAT_WEAK, 0)
+	set_status(STAT_STUN, 0)
+	set_status(STAT_PARA, 0)
 
 	if(on && !client && !busy)
 		handleAI()
@@ -81,8 +81,6 @@
 		set_stat(CONSCIOUS)
 	else
 		health = maxHealth - getFireLoss() - getBruteLoss()
-	setOxyLoss(0)
-	setToxLoss(0)
 
 /mob/living/bot/death()
 	explode()
@@ -119,7 +117,7 @@
 	else
 		..()
 
-/mob/living/bot/attack_ai(var/mob/user)
+/mob/living/bot/attack_ai(var/mob/living/user)
 	Interact(user)
 
 /mob/living/bot/attack_hand(var/mob/user)

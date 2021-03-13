@@ -19,14 +19,14 @@
 				emote("custom", AUDIBLE_MESSAGE, "[pick("grunts", "babbles", "gibbers", "jabbers", "burbles")] aimlessly.")
 				return
 
-	if(has_chem_effect(CE_VOICELOSS, 1))
+	if(has_chemical_effect(CE_VOICELOSS, 1))
 		whispering = TRUE
 
 	message = sanitize(message)
 	var/obj/item/organ/internal/voicebox/voice = locate() in internal_organs
 	var/snowflake_speak = (speaking && (speaking.flags & (NONVERBAL|SIGNLANG))) || (voice && voice.is_usable() && voice.assists_languages[speaking])
 	if(!isSynthetic() && need_breathe() && failed_last_breath && !snowflake_speak)
-		var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species.breathing_organ]
+		var/obj/item/organ/internal/lungs/L = get_internal_organ(species.breathing_organ)
 		if(!L || L.breath_fail_ratio > 0.9)
 			if(L && world.time < L.last_successful_breath + 2 MINUTES) //if we're in grace suffocation period, give it up for last words
 				to_chat(src, "<span class='warning'>You use your remaining air to say something!</span>")
@@ -92,8 +92,6 @@
 			return 1
 		if (istype(other, /mob/living/carbon/brain))
 			return 1
-		if (istype(other, /mob/living/carbon/slime))
-			return 1
 
 	//This is already covered by mob/say_understands()
 	//if (istype(other, /mob/living/simple_animal))
@@ -148,7 +146,7 @@
 	return verb
 
 /mob/living/carbon/human/handle_speech_problems(var/list/message_data)
-	if(silent || (sdisabilities & MUTED))
+	if(HAS_STATUS(src, STAT_SILENCE) || (sdisabilities & MUTED))
 		message_data[1] = ""
 		. = 1
 
@@ -230,7 +228,7 @@
 
 /mob/living/carbon/human/can_speak(decl/language/speaking)
 	if(ispath(speaking, /decl/language))
-		speaking = decls_repository.get_decl(speaking)
+		speaking = GET_DECL(speaking)
 	if(species && speaking && (speaking.name in species.assisted_langs))
 		for(var/obj/item/organ/internal/voicebox/I in src.internal_organs)
 			if(I.is_usable() && I.assists_languages[speaking])
@@ -241,7 +239,7 @@
 /mob/living/carbon/human/parse_language(var/message)
 	var/prefix = copytext(message,1,2)
 	if(length(message) >= 1 && prefix == get_prefix_key(/decl/prefix/audible_emote))
-		return decls_repository.get_decl(/decl/language/noise)
+		return GET_DECL(/decl/language/noise)
 
 	if(length(message) >= 2 && is_language_prefix(prefix))
 		var/language_prefix = lowertext(copytext(message, 2 ,3))

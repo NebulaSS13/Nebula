@@ -1,4 +1,4 @@
-/music_track/chasing_time
+/decl/music_track/chasing_time
 	artist = "Dexter Britain"
 	title = "Chasing Time"
 	album = "Creative Commons Vol. 1"

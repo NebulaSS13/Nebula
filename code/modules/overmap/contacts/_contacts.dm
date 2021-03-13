@@ -62,10 +62,10 @@
 	var/obj/effect/overmap/visitable/visitable_effect = effect
 	if(!visitable_effect || !istype(visitable_effect))
 		return FALSE
-	for(var/obj/machinery/power/shield_generator/S in SSmachines.machinery)
-		if(S.z in visitable_effect.map_z)
-			if(S.running == SHIELD_RUNNING)
-				return TRUE
+	for(var/thing in visitable_effect.get_linked_machines_of_type(/obj/machinery/power/shield_generator))
+		var/obj/machinery/power/shield_generator/S = thing 
+		if(S.running == SHIELD_RUNNING)
+			return TRUE
 	return FALSE
 
 /datum/overmap_contact/proc/ping()

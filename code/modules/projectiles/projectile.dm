@@ -10,6 +10,7 @@
 	anchored = 1 //There's a reason this is here, Mport. God fucking damn it -Agouri. Find&Fix by Pete. The reason this is here is to stop the curving of emitter shots.
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = 0
+	randpixel = 0	
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
 	var/mob/firer = null//Who shot it
@@ -46,6 +47,7 @@
 	var/eyeblur = 0
 	var/drowsy = 0
 	var/agony = 0
+
 	var/embed = 0 // whether or not the projectile can embed itself in the mob
 	var/space_knockback = 0	//whether or not it will knock things back in space
 	var/penetration_modifier = 0.2 //How much internal damage this projectile can deal, as a multiplier.
@@ -312,7 +314,7 @@
 
 /obj/item/projectile/explosion_act()
 	SHOULD_CALL_PARENT(FALSE)
-	return 
+	return
 
 /obj/item/projectile/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 1
@@ -362,7 +364,7 @@
 /obj/item/projectile/proc/old_style_target(atom/target, atom/source)
 	if(!source)
 		source = get_turf(src)
-	setAngle(Get_Angle(source, target))
+	setAngle(get_projectile_angle(source, target))
 
 /obj/item/projectile/proc/fire(angle, atom/direct_target)
 	//If no Angle needs to resolve it from xo/yo!
@@ -379,11 +381,11 @@
 		return
 	if(isnull(Angle))	//Try to resolve through offsets if there's no Angle set.
 		if(isnull(xo) || isnull(yo))
-			crash_with("WARNING: Projectile [type] deleted due to being unable to resolve a target after Angle was null!")
+			PRINT_STACK_TRACE("WARNING: Projectile [type] deleted due to being unable to resolve a target after Angle was null!")
 			qdel(src)
 			return
 		var/turf/target = locate(Clamp(starting + xo, 1, world.maxx), Clamp(starting + yo, 1, world.maxy), starting.z)
-		setAngle(Get_Angle(src, target))
+		setAngle(get_projectile_angle(src, target))
 	if(dispersion)
 		var/DeviationAngle = (dispersion * 15)
 		setAngle(Angle + rand(-DeviationAngle, DeviationAngle))
@@ -431,9 +433,9 @@
 	else if(targloc && curloc)
 		yo = targloc.y - curloc.y
 		xo = targloc.x - curloc.x
-		setAngle(Get_Angle(src, targloc))
+		setAngle(get_projectile_angle(src, targloc))
 	else
-		crash_with("WARNING: Projectile [type] fired without either mouse parameters, or a target atom to aim at!")
+		PRINT_STACK_TRACE("WARNING: Projectile [type] fired without either mouse parameters, or a target atom to aim at!")
 		qdel(src)
 	if(Angle_offset)
 		setAngle(Angle + Angle_offset)
@@ -558,7 +560,7 @@
 		safety--
 		if(safety <= 0)
 			qdel(src)
-			crash_with("WARNING: [type] projectile encountered infinite recursion during hitscanning!")
+			PRINT_STACK_TRACE("WARNING: [type] projectile encountered infinite recursion during hitscanning!")
 			return	//Kill!
 		pixel_move(1, 1, TRUE)
 

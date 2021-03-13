@@ -51,7 +51,7 @@
 		return
 	for(var/material in O.matter)
 		if(materials[material] + O.matter[material] > metal_max)
-			var/decl/material/material_datum = decls_repository.get_decl(material)
+			var/decl/material/material_datum = GET_DECL(material)
 			if(material_datum)
 				to_chat(user, "<span class='notice'>[src] can't hold any more [material_datum.name]!</span>")
 			return
@@ -151,7 +151,7 @@
 		HTML += "Materials: "
 		var/list/dat = list()
 		for(var/material in materials)
-			var/decl/material/material_datum = decls_repository.get_decl(material)
+			var/decl/material/material_datum = GET_DECL(material)
 			dat += "[materials[material]]/[metal_max] [material_datum.name]"
 		HTML += jointext(dat, "; ")
 		HTML += ".<br><br>"
@@ -325,7 +325,7 @@
 /obj/item/integrated_circuit_printer/proc/subtract_material_costs(var/list/cost, var/mob/user)
 	for(var/material in cost)
 		if(materials[material] < cost[material])
-			var/decl/material/material_datum = decls_repository.get_decl(material)
+			var/decl/material/material_datum = GET_DECL(material)
 			to_chat(user, "<span class='warning'>You need [cost[material]] [material_datum.name] to build that!</span>")
 			return FALSE
 	for(var/material in cost) //Iterate twice to make sure it's going to work before deducting
@@ -336,20 +336,18 @@
 /obj/item/disk/integrated_circuit/upgrade
 	name = "integrated circuit printer upgrade disk"
 	desc = "Install this into your integrated circuit printer to enhance it."
-	icon = 'icons/obj/assemblies/electronic_tools.dmi'
-	icon_state = "upgrade_disk"
-	item_state = "card-id"
-	w_class = ITEM_SIZE_SMALL
+	color = COLOR_GRAY20
+	label = "label_up"
+	origin_tech = "{'materials':2,'engineering':2}"
 
 /obj/item/disk/integrated_circuit/upgrade/advanced
 	name = "integrated circuit printer upgrade disk - advanced designs"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one adds new, advanced designs to the printer."
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	origin_tech = "{'materials':3,'engineering':3}"
 
 /obj/item/disk/integrated_circuit/upgrade/clone
 	name = "integrated circuit printer upgrade disk - instant cloner"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one allows the printer to duplicate assemblies instantaneously."
-	icon_state = "upgrade_disk_clone"
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	origin_tech = "{'materials':3,'programming':5}"

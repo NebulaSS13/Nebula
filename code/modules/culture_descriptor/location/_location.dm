@@ -2,7 +2,7 @@
 	desc_type = "Home System"
 	category = TAG_HOMEWORLD
 	var/distance = 0
-	var/ruling_body = FACTION_OTHER
+	var/ruling_body = "Other Faction"
 	var/capital
 
 	// Used by the random news generator. Populate with subtypes of /decl/location_event. 

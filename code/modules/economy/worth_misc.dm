@@ -1,9 +1,6 @@
 /obj/item/disk/survey/get_base_value()
 	. = holographic ? 0 : (sqrt(data) * 5)
 
-/obj/item/slime_extract/get_base_value()
-	. = ..() * Uses
-
 /obj/machinery/power/supermatter/get_value_multiplier()
 	. = 1
 

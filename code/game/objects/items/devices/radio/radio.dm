@@ -18,6 +18,10 @@
 	var/subspace_transmission = 0
 	var/syndie = 0//Holder to see if it's a syndicate encrypted radio
 	var/intercept = 0 //can intercept other channels
+
+	var/intercom = FALSE // If an intercom, will receive data == 1 packets.
+	var/virtual =  FALSE // If virtual, will receive all broadcasts but will never notify nearby listeners.
+
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	throw_speed = 2
@@ -69,6 +73,7 @@
 /obj/item/radio/attack_self(mob/user)
 	user.set_machine(src)
 	interact(user)
+	return TRUE
 
 /obj/item/radio/interact(mob/user)
 	if(!user)
@@ -222,7 +227,7 @@
 	if(.)
 		SSnano.update_uis(src)
 
-/obj/item/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
+/obj/item/radio/proc/autosay(var/message, var/from, var/channel, var/sayverb = "states") //BS12 EDIT
 	var/datum/radio_frequency/connection = null
 	if(channel && channels && channels.len > 0)
 		if (channel == "department")
@@ -235,7 +240,7 @@
 		return
 	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
 	A.fully_replace_character_name(from)
-	talk_into(A, message, channel,"states")
+	talk_into(A, message, channel, sayverb)
 	qdel(A)
 
 // Interprets the message mode when talking into a radio, possibly returning a connection datum
@@ -266,7 +271,7 @@
 	if (!broadcasting)
 		// Sedation chemical effect should prevent radio use.
 		var/mob/living/carbon/C = M
-		if ((istype(C)) && (C.chem_effects[CE_SEDATE] || C.incapacitated(INCAPACITATION_DISRUPTED)))
+		if(istype(C) && (C.has_chemical_effect(CE_SEDATE, 1) || C.incapacitated(INCAPACITATION_DISRUPTED)))
 			to_chat(M, SPAN_WARNING("You're unable to reach \the [src]."))
 			return 0
 
@@ -759,6 +764,12 @@
 		ui.set_initial_data(data)
 		ui.open()
 
+// Used for radios that need to do something upon chatter.
+/obj/item/radio/proc/received_chatter(display_freq, level)
+	if((last_radio_sound + 1 SECOND) < world.time)
+		playsound(loc, 'sound/effects/radio_chatter.ogg', 10, 0, -6)
+		last_radio_sound = world.time
+
 /obj/item/radio/proc/config(op)
 	if(radio_controller)
 		for (var/ch_name in channels)
@@ -785,7 +796,7 @@
 
 /obj/item/radio/announcer/Destroy()
 	SHOULD_CALL_PARENT(FALSE)
-	crash_with("attempt to delete a [src.type] detected, and prevented.")
+	PRINT_STACK_TRACE("attempt to delete a [src.type] detected, and prevented.")
 	return QDEL_HINT_LETMELIVE
 
 /obj/item/radio/announcer/Initialize()

@@ -22,7 +22,7 @@
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 	if(ispath(padding_material, /decl/material))
-		padding_material = decls_repository.get_decl(padding_material)
+		padding_material = GET_DECL(padding_material)
 	force = round(material.get_blunt_damage()*0.4)
 	update_icon()
 
@@ -62,7 +62,7 @@
 		desc = "A stool. Apply butt with care. It's made of [material.use_name]."
 
 /obj/item/stool/proc/add_padding(var/padding_type)
-	padding_material = decls_repository.get_decl(padding_type)
+	padding_material = GET_DECL(padding_type)
 	update_icon()
 
 /obj/item/stool/proc/remove_padding()
@@ -79,7 +79,7 @@
 		dismantle() //This deletes self.
 
 		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE, damage = 20)
-		target.Weaken(10 * (1 - blocked))
+		SET_STATUS_MAX(target, STAT_WEAK, (10 * (1 - blocked)))
 		target.apply_damage(20, BRUTE, hit_zone, src)
 		return 1
 

@@ -30,6 +30,8 @@
 	can_escape = TRUE
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
+	holder_type = /obj/item/holder
+
 	var/is_angry = FALSE 
 
 /mob/living/simple_animal/opossum/Life()

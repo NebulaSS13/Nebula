@@ -1,4 +1,15 @@
 <div class='item'>
+	{{:helper.link('Refresh', 'refresh', {'refresh' : 1})}}
+</div>
+<div class='item'>
+	<div class='itemLabel'>
+		Filter term: 
+	</div>
+	<div class='itemContent'>
+		{{:helper.link(data.filter, null, {'filter_set' : 1})}}
+	</div>
+</div>
+<div class='item'>
 	{{for data.alarmsAlert}}
         {{:helper.link(value.name, null, {'alarm' : value.ref}, null, 'redButton')}}
     {{/for}}

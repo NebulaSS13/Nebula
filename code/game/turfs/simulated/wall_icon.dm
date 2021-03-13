@@ -1,11 +1,11 @@
-/turf/simulated/wall/proc/update_material()
+/turf/simulated/wall/proc/update_material(var/update_neighbors)
 	if(construction_stage != -1)
 		if(reinf_material)
 			construction_stage = 6
 		else
 			construction_stage = null
 	if(!material)
-		material = decls_repository.get_decl(get_default_material())
+		material = GET_DECL(get_default_material())
 	if(material)
 		explosion_resistance = material.explosion_resistance
 	if(reinf_material && reinf_material.explosion_resistance > explosion_resistance)
@@ -13,10 +13,18 @@
 	update_strings()
 	set_opacity(material.opacity >= 0.5)
 	SSradiation.resistance_cache.Remove(src)
-	for(var/turf/simulated/wall/W in RANGE_TURFS(src, 1))
-		W.wall_connections = null
-		W.other_connections = null
-		W.queue_icon_update()
+	if(update_neighbors)
+		var/iterate_turfs = list()
+		for(var/turf/simulated/wall/W in RANGE_TURFS(src, 1))
+			W.wall_connections = null
+			W.other_connections = null
+			iterate_turfs += W
+		for(var/turf/simulated/wall/W as anything in iterate_turfs)
+			W.update_icon()
+	else
+		wall_connections = null
+		other_connections = null
+		update_icon()
 
 /turf/simulated/wall/proc/update_strings()
 	if(reinf_material)
@@ -33,20 +41,20 @@
 
 	material = newmaterial
 	if(ispath(material, /decl/material))
-		material = decls_repository.get_decl(material)
+		material = GET_DECL(material)
 	else if(!istype(material))
-		crash_with("Wall has been supplied non-material '[newmaterial]'.")
-		material = decls_repository.get_decl(get_default_material())
+		PRINT_STACK_TRACE("Wall has been supplied non-material '[newmaterial]'.")
+		material = GET_DECL(get_default_material())
 
 	reinf_material = newrmaterial
 	if(ispath(reinf_material, /decl/material))
-		reinf_material = decls_repository.get_decl(reinf_material)
+		reinf_material = GET_DECL(reinf_material)
 	else if(!istype(reinf_material))
 		reinf_material = null
 
 	girder_material = newgmaterial
 	if(ispath(girder_material, /decl/material))
-		girder_material = decls_repository.get_decl(girder_material)
+		girder_material = GET_DECL(girder_material)
 	else if(!istype(girder_material))
 		girder_material = null
 

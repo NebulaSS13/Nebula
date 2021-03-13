@@ -26,13 +26,10 @@
 	if(hold && hold.handle_attack_hand(user))	//otherwise interact as a regular storage item
 		..(user)
 
-/obj/item/clothing/accessory/storage/MouseDrop(obj/over_object)
-	var/obj/item/clothing/suit = loc
-	if(istype(suit))
-		return
-
-	if(hold && hold.handle_mousedrop(usr, over_object))
-		..(over_object)
+/obj/item/clothing/accessory/storage/handle_mouse_drop(atom/over, mob/user)
+	if(!istype(loc, /obj/item/clothing) && hold?.handle_storage_internal_mouse_drop(user, over))
+		. = ..(over)
+	return TRUE
 
 /obj/item/clothing/accessory/storage/attackby(obj/item/W, mob/user)
 	if(hold)

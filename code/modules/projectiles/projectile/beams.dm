@@ -150,7 +150,7 @@
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
 		if(istype(M.wear_suit, /obj/item/clothing/suit/redtag))
-			M.Weaken(5)
+			SET_STATUS_MAX(M, STAT_WEAK, 5)
 	return 1
 
 /obj/item/projectile/beam/lastertag/red
@@ -165,7 +165,7 @@
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
 		if(istype(M.wear_suit, /obj/item/clothing/suit/bluetag))
-			M.Weaken(5)
+			SET_STATUS_MAX(M, STAT_WEAK, 5)
 	return 1
 
 /obj/item/projectile/beam/lastertag/omni//A laser tag bolt that stuns EVERYONE
@@ -183,7 +183,7 @@
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
 		if((istype(M.wear_suit, /obj/item/clothing/suit/bluetag))||(istype(M.wear_suit, /obj/item/clothing/suit/redtag)))
-			M.Weaken(5)
+			SET_STATUS_MAX(M, STAT_WEAK, 5)
 	return 1
 
 /obj/item/projectile/beam/sniper
@@ -276,10 +276,10 @@
 	if(istype(target, /mob/living))
 		var/mob/living/L = target
 		var/potency = rand(potency_min, potency_max)
-		L.confused += potency
-		L.eye_blurry += potency
-		if(L.confused >= 10)
-			L.Stun(1)
+		ADJ_STATUS(L, STAT_CONFUSE, potency)
+		ADJ_STATUS(L, STAT_BLURRY, potency)
+		if(GET_STATUS(L, STAT_CONFUSE) >= 10)
+			SET_STATUS_MAX(L, STAT_STUN, 1)
 	return 1
 
 /obj/item/projectile/beam/particle

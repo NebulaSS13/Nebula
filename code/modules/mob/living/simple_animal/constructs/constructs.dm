@@ -26,6 +26,7 @@
 	mob_swap_flags = HUMAN|SIMPLE_ANIMAL|SLIME|MONKEY
 	mob_push_flags = ALLMOBS
 	bleed_colour = "#331111"
+	gene_damage = -1
 
 	meat_type =     null
 	meat_amount =   0
@@ -125,7 +126,7 @@
 	force = 30
 
 /mob/living/simple_animal/construct/armoured/Life()
-	weakened = 0
+	set_status(STAT_WEAK, 0)
 	if ((. = ..()))
 		return 
 

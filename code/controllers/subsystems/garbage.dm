@@ -3,8 +3,8 @@
 	if(istype(D,/atom/movable)) {\
 		var/atom/movable/AM = D; \
 		if(AM.loc != null) {\
-			crash_with("QDEL("+hint+"): "+AM.name+" was supposed to be in nullspace but isn't \
-						(LOCATION= "+AM.loc.name+" ("+AM.loc.x+","+AM.loc.y+","+AM.loc.z+") )! Destroy didn't do its job!"); \
+			PRINT_STACK_TRACE("QDEL([hint]): [AM.name] was supposed to be in nullspace but isn't \
+						(LOCATION= [AM.loc.name] ([AM.loc.x],[AM.loc.y],[AM.loc.z]) )! Destroy didn't do its job!"); \
 			AM.forceMove(null); \
 		} \
 	}
@@ -306,7 +306,7 @@ SUBSYSTEM_DEF(garbage)
 	if(!D)
 		return
 	if(!istype(D))
-		crash_with("qdel() can only handle /datum (sub)types, was passed: [log_info_line(D)]")
+		PRINT_STACK_TRACE("qdel() can only handle /datum (sub)types, was passed: [log_info_line(D)]")
 		del(D)
 		return
 	var/datum/qdel_item/I = SSgarbage.items[D.type]
@@ -341,7 +341,7 @@ SUBSYSTEM_DEF(garbage)
 				// indicates the objects Destroy() does not respect force
 				#ifdef TESTING
 				if(!I.no_respect_force)
-					crash_with("WARNING: [D.type] has been force deleted, but is \
+					PRINT_STACK_TRACE("WARNING: [D.type] has been force deleted, but is \
 						returning an immortal QDEL_HINT, indicating it does \
 						not respect the force flag for qdel(). It has been \
 						placed in the queue, further instances of this type \
@@ -368,7 +368,7 @@ SUBSYSTEM_DEF(garbage)
 			else
 				#ifdef TESTING
 				if(!I.no_hint)
-					crash_with("WARNING: [D.type] is not returning a qdel hint. It is being placed in the queue. Further instances of this type will also be queued.")
+					PRINT_STACK_TRACE("WARNING: [D.type] is not returning a qdel hint. It is being placed in the queue. Further instances of this type will also be queued.")
 				#endif
 				I.no_hint++
 				SSgarbage.PreQueue(D)

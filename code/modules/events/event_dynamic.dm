@@ -8,11 +8,6 @@ var/list/event_last_fired = list()
 	var/minutes_passed = world.time/600
 
 	var/list/active_with_role = number_active_with_role()
-	//var/engineer_count = number_active_with_role("Engineer")
-	//var/security_count = number_active_with_role("Security")
-	//var/medical_count = number_active_with_role("Medical")
-	//var/AI_count = number_active_with_role("AI")
-	//var/janitor_count = number_active_with_role("Janitor")
 
 	// Maps event names to event chances
 	// For each chance, 100 represents "normal likelihood", anything below 100 is "reduced likelihood", anything above 100 is "increased likelihood"
@@ -92,56 +87,23 @@ var/list/event_last_fired = list()
 // with a specific role.
 // Note that this isn't sorted by department, because e.g. having a roboticist shouldn't make meteors spawn.
 /proc/number_active_with_role()
-	var/list/active_with_role = list()
-	active_with_role["Engineer"] = 0
-	active_with_role["Medical"] = 0
-	active_with_role["Security"] = 0
-	active_with_role["Scientist"] = 0
-	active_with_role["AI"] = 0
-	active_with_role["Robot"] = 0
-	active_with_role["Janitor"] = 0
-	active_with_role["Gardener"] = 0
 
+	. = list()
 	for(var/mob/M in GLOB.player_list)
-		if(!M.mind || !M.client || M.client.is_afk(10 MINUTES)) // longer than 10 minutes AFK counts them as inactive
+
+		if(!M.mind || !M.client || M.client.is_afk(10 MINUTES))
 			continue
 
-		active_with_role["Any"]++
+		.["Any"]++
 
 		if(istype(M, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = M
-			if(R.module)
-				if(istype(R.module, /obj/item/robot_module/engineering))
-					active_with_role["Engineer"]++
-				else if(istype(R.module, /obj/item/robot_module/security))
-					active_with_role["Security"]++
-				else if(istype(R.module, /obj/item/robot_module/medical))
-					active_with_role["Medical"]++
-				else if(istype(R.module, /obj/item/robot_module/research))
-					active_with_role["Scientist"]++
-
-		if(M.mind.assigned_role in SSjobs.titles_by_department("engineering"))
-			active_with_role["Engineer"]++
-
-		if(M.mind.assigned_role in SSjobs.titles_by_department("medical"))
-			active_with_role["Medical"]++
-
-		if(M.mind.assigned_role in SSjobs.titles_by_department("security"))
-			active_with_role["Security"]++
-
-		if(M.mind.assigned_role in SSjobs.titles_by_department("science"))
-			active_with_role["Scientist"]++
-
-		if(M.mind.assigned_role == "AI")
-			active_with_role["AI"]++
-
-		if(M.mind.assigned_role == "Robot")
-			active_with_role["Robot"]++
-
-		if(M.mind.assigned_role == "Janitor")
-			active_with_role["Janitor"]++
-
-		if(M.mind.assigned_role == "Gardener")
-			active_with_role["Gardener"]++
-
-	return active_with_role
+			if(R.module?.associated_department)
+				var/decl/department/dept = GET_DECL(R.module.associated_department)
+				.[dept.name] = .[dept.name] + 1
+		else
+			for(var/dtype in M.mind?.assigned_job?.department_types)
+				var/decl/department/dept = GET_DECL(dtype)
+				.[dept.name] = .[dept.name] + 1
+				for(var/job_category in M.mind.assigned_job.event_categories)
+					.[job_category] = .[job_category] + 1

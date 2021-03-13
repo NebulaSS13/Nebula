@@ -6,7 +6,7 @@
 	scan["time"] = stationtime2text()
 	var/brain_result
 	if(H.should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
+		var/obj/item/organ/internal/brain/brain = H.get_internal_organ(BP_BRAIN)
 		if(!brain || H.stat == DEAD || (H.status_flags & FAKEDEATH))
 			brain_result = 0
 		else if(H.stat != DEAD)
@@ -17,7 +17,7 @@
 
 	var/pulse_result
 	if(H.should_have_organ(BP_HEART))
-		var/obj/item/organ/internal/heart/heart = H.internal_organs_by_name[BP_HEART]
+		var/obj/item/organ/internal/heart/heart = H.get_internal_organ(BP_HEART)
 		if(!heart)
 			pulse_result = 0
 		else if(BP_IS_PROSTHETIC(heart))
@@ -44,13 +44,13 @@
 	scan["oxygen"] =           H.getOxyLoss()
 	scan["radiation"] =        H.radiation
 	scan["genetic"] =          H.getCloneLoss()
-	scan["paralysis"] =        H.paralysis
+	scan["paralysis"] =        GET_STATUS(H, STAT_PARA)
 	scan["immune_system"] =    H.get_immunity()
 	scan["reagents"] = list()
 
 	if(H.reagents?.total_volume)
 		for(var/reagent_type in H.reagents.reagent_volumes)
-			var/decl/material/R = decls_repository.get_decl(reagent_type)
+			var/decl/material/R = GET_DECL(reagent_type)
 			var/list/reagent  = list()
 			reagent["name"]= R.name
 			reagent["quantity"] = round(REAGENT_VOLUME(H.reagents, R.type),1)

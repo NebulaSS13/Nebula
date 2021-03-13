@@ -10,9 +10,9 @@
 	var/ao_queued = AO_UPDATE_NONE
 
 /turf/proc/regenerate_ao()
-	for (var/thing in RANGE_TURFS(src, 1))
+	for(var/thing in RANGE_TURFS(src, 1))
 		var/turf/T = thing
-		if (T.permit_ao)
+		if(istype(T) && T.permit_ao)
 			T.queue_ao(TRUE)
 
 /turf/proc/calculate_ao_neighbors()
@@ -107,10 +107,3 @@
 #undef PROCESS_AO_CORNER
 #undef AO_TURF_CHECK
 #undef AO_SELF_CHECK
-
-/turf/ChangeTurf()
-	var/old_density = density
-	var/old_permit_ao = permit_ao
-	. = ..()
-	if(density != old_density || permit_ao != old_permit_ao)
-		regenerate_ao()

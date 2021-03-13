@@ -28,8 +28,7 @@
 
 /obj/item/organ/internal/Destroy()
 	if(owner)
-		owner.internal_organs.Remove(src)
-		owner.internal_organs_by_name[organ_tag] = null
+		owner.internal_organs -= src
 		owner.internal_organs_by_name -= organ_tag
 		while(null in owner.internal_organs)
 			owner.internal_organs -= null
@@ -52,11 +51,9 @@
 
 /obj/item/organ/internal/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
 	if(owner)
-		owner.internal_organs_by_name[organ_tag] = null
-		owner.internal_organs_by_name -= organ_tag
-		owner.internal_organs_by_name -= null
-		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
 		owner.internal_organs -= src
+		owner.internal_organs_by_name -= organ_tag
+		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
 		E.update_internal_organs_cost()
 
 		if(detach)
@@ -94,7 +91,6 @@
 /obj/item/organ/internal/remove_rejuv()
 	if(owner)
 		owner.internal_organs -= src
-		owner.internal_organs_by_name[organ_tag] = null
 		owner.internal_organs_by_name -= organ_tag
 		while(null in owner.internal_organs)
 			owner.internal_organs -= null
@@ -105,7 +101,7 @@
 /obj/item/organ/internal/is_usable()
 	return ..() && !is_broken()
 
-/obj/item/organ/internal/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	..()
 	min_bruised_damage += 5
 	min_broken_damage += 10
@@ -129,7 +125,7 @@
 	min_broken_damage = Floor(0.75 * max_damage)
 	min_bruised_damage = Floor(0.25 * max_damage)
 
-obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
+/obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 	take_internal_damage(amount, silent)
 
 /obj/item/organ/internal/proc/take_internal_damage(amount, var/silent=0)
@@ -176,7 +172,7 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 	handle_regeneration()
 
 /obj/item/organ/internal/proc/handle_regeneration()
-	if(!damage || BP_IS_PROSTHETIC(src) || !owner || owner.chem_effects[CE_TOXIN] || owner.is_asystole())
+	if(!damage || BP_IS_PROSTHETIC(src) || !owner || LAZYACCESS(owner.chem_effects, CE_TOXIN) || owner.is_asystole())
 		return
 	if(damage < 0.1*max_damage)
 		heal_damage(0.1)

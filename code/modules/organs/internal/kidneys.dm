@@ -9,7 +9,7 @@
 	max_damage = 70
 	relative_size = 10
 
-/obj/item/organ/internal/kidneys/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/kidneys/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	. = ..()
 	icon_state = "kidneys-prosthetic"
 
@@ -36,7 +36,7 @@
 			owner.reagents.add_reagent(/decl/material/solid/potassium, REM*2)
 
 	//If your kidneys aren't working, your body's going to have a hard time cleaning your blood.
-	if(!owner.chem_effects[CE_ANTITOX])
+	if(!LAZYACCESS(owner.chem_effects, CE_ANTITOX))
 		if(prob(33))
 			if(is_broken())
 				owner.adjustToxLoss(0.5)

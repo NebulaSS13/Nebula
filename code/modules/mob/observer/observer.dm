@@ -38,7 +38,7 @@ var/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 		SSghost_images.queue_global_image_update()
 	. = ..()
 
-mob/observer/check_airflow_movable()
+/mob/observer/check_airflow_movable()
 	return FALSE
 
 /mob/observer/CanPass()
@@ -86,3 +86,6 @@ mob/observer/check_airflow_movable()
 
 /mob/observer/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)
 	. = text_content
+
+/mob/observer/get_admin_job_string()
+	return "Ghost"

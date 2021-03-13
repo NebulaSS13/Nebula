@@ -36,13 +36,13 @@
 				data -= taste
 	. = data
 
-/decl/material/liquid/nutriment/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nutriment/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(!injectable)
 		M.adjustToxLoss(0.2 * removed)
 		return
 	affect_ingest(M, alien, removed, holder)
 
-/decl/material/liquid/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nutriment/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	adjust_nutrition(M, alien, removed)
 
 	if(M.HasTrait(/decl/trait/metabolically_inert))
@@ -151,7 +151,7 @@
 	color = "#482000"
 	fruit_descriptor = "bitter"
 
-/decl/material/liquid/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/nutriment/coffee/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 

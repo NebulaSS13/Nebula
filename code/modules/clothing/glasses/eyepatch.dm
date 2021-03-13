@@ -59,7 +59,7 @@
 
 /obj/item/clothing/glasses/eyepatch/hud/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/res = ..()
-	if(active && check_state_in_icon("[res.icon_state]-eye", res.icon))
+	if(res && active && check_state_in_icon("[res.icon_state]-eye", res.icon))
 		var/image/eye = overlay_image(res.icon, "[res.icon_state]-eye", flags = RESET_COLOR)
 		eye.color = eye_color
 		eye.layer = ABOVE_LIGHTING_LAYER

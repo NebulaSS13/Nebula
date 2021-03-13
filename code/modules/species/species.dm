@@ -194,8 +194,8 @@
 		BP_APPENDIX = /obj/item/organ/internal/appendix,
 		BP_EYES =     /obj/item/organ/internal/eyes
 		)
-	var/vision_organ              // If set, this organ is required for vision. Defaults to "eyes" if the species has them.
-	var/breathing_organ           // If set, this organ is required for breathing. Defaults to "lungs" if the species has them.
+	var/vision_organ              // If set, this organ is required for vision.
+	var/breathing_organ           // If set, this organ is required for breathing.
 
 	var/list/override_organ_types // Used for species that only need to change one or two entries in has_organ.
 
@@ -255,10 +255,10 @@
 	var/list/maneuvers = list(/decl/maneuver/leap)
 
 	var/list/available_cultural_info = list(
-		TAG_CULTURE =   list(CULTURE_OTHER),
-		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS),
-		TAG_FACTION =   list(FACTION_OTHER),
-		TAG_RELIGION =  list(RELIGION_OTHER)
+		TAG_CULTURE =   list(/decl/cultural_info/culture/other),
+		TAG_HOMEWORLD = list(/decl/cultural_info/location/stateless),
+		TAG_FACTION =   list(/decl/cultural_info/faction/other),
+		TAG_RELIGION =  list(/decl/cultural_info/religion/other)
 	)
 	var/list/force_cultural_info =                list()
 	var/list/default_cultural_info =              list()
@@ -417,7 +417,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		H.organs |= H.organs_by_name[name]
 
 	for(var/name in H.internal_organs_by_name)
-		H.internal_organs |= H.internal_organs_by_name[name]
+		H.internal_organs |= H.get_internal_organ(name)
 
 	for(var/obj/item/organ/O in (H.organs|H.internal_organs))
 		O.owner = H
@@ -488,7 +488,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /decl/species/proc/handle_sleeping(var/mob/living/carbon/human/H)
 	if(prob(2) && !H.failed_last_breath && !H.isSynthetic())
-		if(!H.paralysis)
+		if(!HAS_STATUS(H, STAT_PARA))
 			H.emote("snore")
 		else
 			H.emote("groan")
@@ -535,7 +535,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		return 0
 
 	for(var/attack_type in unarmed_attacks)
-		var/decl/natural_attack/attack = decls_repository.get_decl(attack_type)
+		var/decl/natural_attack/attack = GET_DECL(attack_type)
 		if(!istype(attack) || !attack.is_usable(H))
 			continue
 		if(attack.shredding)
@@ -551,27 +551,27 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	if(H.stat == DEAD)
 		return 1
 
-	if(!H.drugged)
+	if(!HAS_STATUS(H, STAT_DRUGGY))
 		H.set_see_in_dark((H.sight == (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : min(H.getDarkvisionRange() + H.equipment_darkness_modifier, 8))
 		if(H.equipment_see_invis)
 			H.set_see_invisible(max(min(H.see_invisible, H.equipment_see_invis), vision[2]))
 
 	if(H.equipment_tint_total >= TINT_BLIND)
-		H.eye_blind = max(H.eye_blind, 1)
+		SET_STATUS_MAX(H, STAT_BLIND, 1)
 
 	if(!H.client)//no client, no screen to update
 		return 1
 
-	H.set_fullscreen(H.eye_blind && !H.equipment_prescription, "blind", /obj/screen/fullscreen/blind)
+	H.set_fullscreen(GET_STATUS(H, STAT_BLIND) && !H.equipment_prescription, "blind", /obj/screen/fullscreen/blind)
 	H.set_fullscreen(H.stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
 
 	if(config.welder_vision)
 		H.set_fullscreen(H.equipment_tint_total, "welder", /obj/screen/fullscreen/impaired, H.equipment_tint_total)
 	var/how_nearsighted = get_how_nearsighted(H)
 	H.set_fullscreen(how_nearsighted, "nearsighted", /obj/screen/fullscreen/oxy, how_nearsighted)
-	H.set_fullscreen(H.eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
-	H.set_fullscreen(H.drugged, "high", /obj/screen/fullscreen/high)
-	if(H.drugged)
+	H.set_fullscreen(GET_STATUS(H, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
+	H.set_fullscreen(GET_STATUS(H, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
+	if(HAS_STATUS(H, STAT_DRUGGY))
 		H.add_client_color(/datum/client_color/oversaturated)
 	else
 		H.remove_client_color(/datum/client_color/oversaturated)
@@ -807,15 +807,15 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				else if(damage_types[kind] < 1)
 					dat += "</br><b>Resistant to [kind].</b>"
 			if(breath_type)
-				var/decl/material/mat = decls_repository.get_decl(breath_type)
+				var/decl/material/mat = GET_DECL(breath_type)
 				dat += "</br><b>They breathe [mat.gas_name].</b>"
 			if(exhale_type)
-				var/decl/material/mat = decls_repository.get_decl(exhale_type)
+				var/decl/material/mat = GET_DECL(exhale_type)
 				dat += "</br><b>They exhale [mat.gas_name].</b>"
 			if(LAZYLEN(poison_types))
 				var/list/poison_names = list()
 				for(var/g in poison_types)
-					var/decl/material/mat = decls_repository.get_decl(exhale_type)
+					var/decl/material/mat = GET_DECL(exhale_type)
 					poison_names |= mat.gas_name
 				dat += "</br><b>[capitalize(english_list(poison_names))] [LAZYLEN(poison_names) == 1 ? "is" : "are"] poisonous to them.</b>"
 			dat += "</small>"
@@ -854,13 +854,13 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		var/pain_level = pain_emotes_with_pain_level[pain_emotes]
 		if(pain_level >= pain_power)
 			// This assumes that if a pain-level has been defined it also has a list of emotes to go with it
-			var/decl/emote/E = decls_repository.get_decl(pick(pain_emotes))
+			var/decl/emote/E = GET_DECL(pick(pain_emotes))
 			return E.key
 
 /decl/species/proc/handle_exertion(mob/living/carbon/human/H)
 	if (!exertion_effect_chance)
 		return
-	var/chance = exertion_effect_chance * H.encumbrance()
+	var/chance = max((100 - H.stamina), exertion_effect_chance * H.encumbrance())
 	if (chance && prob(H.skill_fail_chance(SKILL_HAULING, chance)))
 		var/synthetic = H.isSynthetic()
 		if (synthetic)
@@ -878,5 +878,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		if (prob(10))
 			var/list/active_emotes = synthetic ? exertion_emotes_synthetic : exertion_emotes_biological
 			if(length(active_emotes))
-				var/decl/emote/exertion_emote = decls_repository.get_decl(pick(active_emotes))
+				var/decl/emote/exertion_emote = GET_DECL(pick(active_emotes))
 				exertion_emote.do_emote(H)
+
+/decl/species/proc/get_default_name()
+	return "[lowertext(name)] ([random_id(name, 100, 999)])"

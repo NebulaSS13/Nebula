@@ -64,7 +64,7 @@
 			return 1
 		var/totalfizzy = 0
 		for(var/rtype in reagents.reagent_volumes)
-			var/decl/material/re = decls_repository.get_decl(rtype)
+			var/decl/material/re = GET_DECL(rtype)
 			if("fizz" in re.glass_special)
 				totalfizzy += REAGENT_VOLUME(reagents, rtype)
 		if(totalfizzy >= reagents.total_volume / 5) // 20% fizzy by volume
@@ -79,7 +79,7 @@
 		if(!("vapor" in R.glass_special))
 			var/totalvape = 0
 			for(var/rtype in reagents.reagent_volumes)
-				var/decl/material/re = decls_repository.get_decl(rtype)
+				var/decl/material/re = GET_DECL(rtype)
 				if("vapor" in re.glass_special)
 					totalvape += REAGENT_VOLUME(reagents, type)
 			if(totalvape >= volume * 0.6) // 60% vapor by container volume

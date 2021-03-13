@@ -16,13 +16,13 @@
 	else
 		..()
 
-/obj/item/board/attack_hand(mob/living/carbon/human/M)
+/obj/item/board/attack_hand(mob/M)
 	if(M.machine == src)
 		return ..()
 	else
 		M.examinate(src)
 
-obj/item/board/attackby(obj/item/I, mob/user)
+/obj/item/board/attackby(obj/item/I, mob/user)
 	if(!addPiece(I,user))
 		..()
 

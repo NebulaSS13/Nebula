@@ -7,7 +7,7 @@
 		use_attack = null
 		var/list/other_attacks = list()
 		for(var/u_attack_type in available_attacks)
-			var/decl/natural_attack/u_attack = decls_repository.get_decl(u_attack_type)
+			var/decl/natural_attack/u_attack = GET_DECL(u_attack_type)
 			if(!u_attack.is_usable(src, target, hit_zone))
 				continue
 			if(u_attack.is_starting_default)
@@ -24,16 +24,16 @@
 		if(length(limb.unarmed_attacks) && limb.is_usable())
 			. |= limb.unarmed_attacks
 
-/mob/living/carbon/human/attack_hand(mob/living/carbon/M)
+/mob/living/carbon/human/attack_hand(mob/user)
 
 	remove_cloaking_source(species)
 
 	// Grabs are handled at a lower level.
-	if(istype(M) && M.a_intent == I_GRAB)
+	if(user.a_intent == I_GRAB)
 		return ..()
 
 	// Should this all be in Touch()?
-	var/mob/living/carbon/human/H = M
+	var/mob/living/carbon/human/H = user
 	if(istype(H))
 		if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))
 			H.do_attack_animation(src)
@@ -44,14 +44,14 @@
 				if(G.resolve_openhand_attack())
 					return TRUE
 
-	switch(M.a_intent)
+	switch(user.a_intent)
 		if(I_HELP)
 			if(H != src && istype(H) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !(H.zone_sel.selecting == BP_R_ARM || H.zone_sel.selecting == BP_L_ARM))
 				if (!cpr_time)
 					return TRUE
 
-				var/pumping_skill = max(M.get_skill_value(SKILL_MEDICAL),M.get_skill_value(SKILL_ANATOMY))
-				var/cpr_delay = 15 * M.skill_delay_mult(SKILL_ANATOMY, 0.2)
+				var/pumping_skill = max(user.get_skill_value(SKILL_MEDICAL), user.get_skill_value(SKILL_ANATOMY))
+				var/cpr_delay = 15 * user.skill_delay_mult(SKILL_ANATOMY, 0.2)
 				cpr_time = 0
 
 				H.visible_message("<span class='notice'>\The [H] is trying to perform CPR on \the [src].</span>")
@@ -69,7 +69,7 @@
 						if(chest)
 							chest.fracture()
 
-					var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
+					var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
 					if(heart)
 						heart.external_pump = list(world.time, 0.4 + 0.1*pumping_skill + rand(-0.1,0.1))
 
@@ -88,12 +88,12 @@
 				if((head && (head.body_parts_covered & SLOT_FACE)) || (wear_mask && (wear_mask.body_parts_covered & SLOT_FACE)))
 					to_chat(H, "<span class='warning'>You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!</span>")
 					return TRUE
-				if (!H.internal_organs_by_name[H.species.breathing_organ])
+				if (!H.get_internal_organ(H.species.breathing_organ))
 					to_chat(H, "<span class='danger'>You need lungs for mouth-to-mouth resuscitation!</span>")
 					return TRUE
 				if(!need_breathe())
 					return TRUE
-				var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species.breathing_organ]
+				var/obj/item/organ/internal/lungs/L = get_internal_organ(species.breathing_organ)
 				if(L)
 					var/datum/gas_mixture/breath = H.get_breath_from_environment()
 					var/fail = L.handle_breath(breath, 1)
@@ -102,8 +102,8 @@
 							losebreath = 0
 						to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
 
-			else if(!(M == src && apply_pressure(M, M.zone_sel.selecting)))
-				help_shake_act(M)
+			else if(!(user == src && apply_pressure(user, user.zone_sel.selecting)))
+				help_shake_act(user)
 			return TRUE
 
 		if(I_HURT)
@@ -129,10 +129,11 @@
 				to_chat(H, "<span class='notice'>You can't attack again so soon.</span>")
 				return TRUE
 			else
+				last_handled_by_mob = weakref(H)
 				H.last_attack = world.time
 
 			if(!affecting || affecting.is_stump())
-				to_chat(M, "<span class='danger'>They are missing that limb!</span>")
+				to_chat(user, "<span class='danger'>They are missing that limb!</span>")
 				return TRUE
 
 			switch(src.a_intent)
@@ -145,7 +146,7 @@
 					if(MayMove() && src!=H && prob(20))
 						block = 1
 
-			if (LAZYLEN(M.grabbed_by))
+			if (LAZYLEN(user.grabbed_by))
 				// Someone got a good grip on them, they won't be able to do much damage
 				rand_damage = max(1, rand_damage - 2)
 
@@ -223,7 +224,7 @@
 
 		if(I_DISARM)
 			if(H.species)
-				admin_attack_log(M, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
+				admin_attack_log(user, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
 				H.species.disarm_attackhand(H, src)
 				return TRUE
 	. = ..()
@@ -283,7 +284,7 @@
 	set src = usr
 	var/list/choices
 	for(var/thing in get_natural_attacks())
-		var/decl/natural_attack/u_attack = decls_repository.get_decl(thing)
+		var/decl/natural_attack/u_attack = GET_DECL(thing)
 		if(istype(u_attack))
 			var/image/radial_button = new
 			radial_button.name = capitalize(u_attack.name)

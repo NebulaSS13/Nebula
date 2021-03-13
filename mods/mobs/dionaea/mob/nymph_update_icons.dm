@@ -2,7 +2,7 @@
 	cut_overlays()
 	if(stat == DEAD)
 		icon_state = "[initial(icon_state)]_dead"
-	else if(lying || resting || stunned)
+	else if(incapacitated(INCAPACITATION_KNOCKOUT))
 		icon_state = "[initial(icon_state)]_sleep"
 	else
 		icon_state = "[initial(icon_state)]"

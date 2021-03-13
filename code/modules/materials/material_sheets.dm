@@ -20,7 +20,7 @@
 	if(!_reinf_material)
 		_reinf_material = reinf_material
 	if(_reinf_material)
-		reinf_material = decls_repository.get_decl(_reinf_material)
+		reinf_material = GET_DECL(_reinf_material)
 		if(!istype(reinf_material))
 			reinf_material = null
 	base_state = icon_state

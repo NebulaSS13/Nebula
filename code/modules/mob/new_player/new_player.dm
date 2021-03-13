@@ -8,7 +8,7 @@
 	var/datum/browser/panel
 	var/show_invalid_jobs = 0
 	universal_speak = TRUE
-
+	mob_sort_value = 10
 	invisibility = 101
 
 	density = 0
@@ -23,7 +23,7 @@
 	. = ..()
 	verbs += /mob/proc/toggle_antag_pool
 
-/mob/new_player/proc/new_player_panel(force = FALSE)
+/mob/new_player/proc/show_lobby_menu(force = FALSE)
 	if(!SScharacter_setup.initialized && !force)
 		return // Not ready yet.
 	var/output = list()
@@ -55,7 +55,7 @@
 			else
 				output += "<a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> "
 
-	output += "<hr>Current character: <b>[client.prefs.real_name]</b>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
+	output += "<hr>Current character: <a href='byond://?src=\ref[client.prefs];load=1'><b>[client.prefs.real_name]</b></a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
 	if(GAME_STATE <= RUNLEVEL_LOBBY)
 		if(ready)
 			output += "<a class='linkOn' href='byond://?src=\ref[src];ready=0'>Un-Ready</a>"
@@ -81,7 +81,7 @@
 			stat("Game Mode:", PUBLIC_GAME_MODE)
 		var/list/additional_antag_ids = list()
 		for(var/antag_type in global.additional_antag_types)
-			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
+			var/decl/special_role/antag = GET_DECL(antag_type)
 			additional_antag_ids |= lowertext(antag.name)
 		var/extra_antags = list2params(additional_antag_ids)
 		stat("Added Antagonists:", extra_antags ? extra_antags : "None")
@@ -117,7 +117,7 @@
 
 	if(href_list["refresh"])
 		panel.close()
-		new_player_panel()
+		show_lobby_menu()
 
 	if(href_list["observe"])
 		if(GAME_STATE < RUNLEVEL_LOBBY)
@@ -151,7 +151,7 @@
 			qdel(mannequin)
 
 			if(client.prefs.be_random_name)
-				client.prefs.real_name = random_name(client.prefs.gender)
+				client.prefs.real_name = client.prefs.get_random_name()
 			observer.real_name = client.prefs.real_name
 			observer.SetName(observer.real_name)
 			if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
@@ -188,7 +188,7 @@
 		if(client)
 			client.prefs.process_link(src, href_list)
 	else if(!href_list["late_join"])
-		new_player_panel()
+		show_lobby_menu()
 
 	if(href_list["showpoll"])
 
@@ -430,7 +430,7 @@
 			return null
 		new_character = new(spawn_turf, chosen_species.name)
 		if(chosen_species.has_organ[BP_POSIBRAIN] && client && client.prefs.is_shackled)
-			var/obj/item/organ/internal/posibrain/B = new_character.internal_organs_by_name[BP_POSIBRAIN]
+			var/obj/item/organ/internal/posibrain/B = new_character.get_internal_organ(BP_POSIBRAIN)
 			if(B)	B.shackle(client.prefs.get_lawset())
 
 	if(!new_character)
@@ -440,7 +440,7 @@
 
 	if(GLOB.random_players)
 		client.prefs.gender = pick(MALE, FEMALE)
-		client.prefs.real_name = random_name(new_character.gender)
+		client.prefs.real_name = client.prefs.get_random_name()
 		client.prefs.randomize_appearance_and_body_for(new_character)
 	client.prefs.copy_to(new_character)
 
@@ -503,14 +503,12 @@
 		return 0
 	return 1
 
-/mob/new_player/get_species()
+/mob/new_player/get_species_name()
 	var/decl/species/chosen_species
 	if(client.prefs.species)
 		chosen_species = get_species_by_key(client.prefs.species)
-
 	if(!chosen_species || !check_species_allowed(chosen_species, 0))
 		return GLOB.using_map.default_species
-
 	return chosen_species.name
 
 /mob/new_player/get_gender()
@@ -529,7 +527,7 @@
 /mob/new_player/show_message(msg, type, alt, alt_type)
 	return
 
-mob/new_player/MayRespawn()
+/mob/new_player/MayRespawn()
 	return 1
 
 /mob/new_player/touch_map_edge()
@@ -544,7 +542,7 @@ mob/new_player/MayRespawn()
 
 	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_NO)
 		return
-	var/music_track/new_track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
+	var/decl/music_track/new_track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
 	if(new_track)
 		new_track.play_to(src)
 
@@ -553,3 +551,6 @@ mob/new_player/MayRespawn()
 
 /mob/new_player/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)
 	. = text_content
+
+/mob/new_player/get_admin_job_string()
+	return "New player"

@@ -49,7 +49,7 @@ Scent intensity
 /datum/extension/scent/New()
 	..()
 	if(ispath(intensity))
-		intensity = decls_repository.get_decl(intensity)
+		intensity = GET_DECL(intensity)
 	START_PROCESSING(SSprocessing, src)
 
 /datum/extension/scent/Destroy()
@@ -58,7 +58,7 @@ Scent intensity
 
 /datum/extension/scent/Process()
 	if(!holder)
-		crash_with("Scent extension with scent '[scent]', intensity '[intensity]', descriptor '[descriptor]' and range of '[range]' attempted to emit_scent() without a holder.")
+		PRINT_STACK_TRACE("Scent extension with scent '[scent]', intensity '[intensity]', descriptor '[descriptor]' and range of '[range]' attempted to emit_scent() without a holder.")
 		qdel(src)
 		return PROCESS_KILL
 	emit_scent()
@@ -97,7 +97,7 @@ This will let you set an extension without needing to define it beforehand. Note
 	if(provided_scent && provided_intensity && provided_descriptor && provided_range)
 		scent = provided_scent
 		if(ispath(provided_intensity))
-			intensity = decls_repository.get_decl(provided_intensity)
+			intensity = GET_DECL(provided_intensity)
 		descriptor = provided_descriptor
 		range = provided_range
 	else
@@ -118,10 +118,10 @@ To add a scent extension to an atom using a reagent's info, where R. is the reag
 	if(!smelly_atom.reagents || !smelly_atom.reagents.total_volume)
 		return
 	for(var/reagent_type in smelly_atom.reagents.reagent_volumes)
-		var/decl/material/R = decls_repository.get_decl(reagent_type)
+		var/decl/material/R = GET_DECL(reagent_type)
 		if(!R.scent)
 			continue
-		var/decl/scent_intensity/SI = decls_repository.get_decl(R.scent_intensity)
+		var/decl/scent_intensity/SI = GET_DECL(R.scent_intensity)
 		var/r_scent_intensity = REAGENT_VOLUME(smelly_atom.reagents, reagent_type) * SI.intensity
 		if(r_scent_intensity > scent_intensity)
 			smelliest = R

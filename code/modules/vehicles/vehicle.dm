@@ -144,7 +144,7 @@
 		if(was_on)
 			turn_on()
 
-/obj/vehicle/attack_ai(mob/user)
+/obj/vehicle/attack_ai(mob/living/silicon/ai/user)
 	return
 
 /obj/vehicle/unbuckle_mob(mob/user)

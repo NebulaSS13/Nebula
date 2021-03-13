@@ -1888,7 +1888,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/livestock)
 "GQ" = (
-/mob/living/carbon/slime,
+/mob/living/slime,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/livestock)
 "Hk" = (

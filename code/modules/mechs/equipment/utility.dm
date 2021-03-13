@@ -411,57 +411,50 @@
 		//Better materials = faster drill!
 		var/delay = max(5, 20 - drill_head.material.brute_armor)
 		owner.setClickCooldown(delay) //Don't spamclick!
-		if(do_after(owner, delay, target) && drill_head)
-			if(src == owner.selected_system)
-				if(drill_head.durability <= 0)
-					drill_head.shatter()
-					drill_head = null
-					return
 
-				if(istype(target, /turf/exterior/wall))
-					for(var/turf/exterior/wall/M in range(target,1))
-						if(get_dir(owner,M)&owner.dir)
-							M.dismantle_wall()
-							drill_head.durability -= 1
-				else if(istype(target, /turf/simulated/wall))
-					var/turf/simulated/wall/W = target
-					if(max(W.material.hardness, W.reinf_material ? W.reinf_material.hardness : 0) > drill_head.material.hardness)
-						to_chat(user, "<span class='warning'>\The [target] is too hard to drill through with this drill head.</span>")
-					target.explosion_act(2)
+		if(!do_after(owner, delay, target) || !drill_head || src != owner.selected_system)
+			to_chat(user, SPAN_WARNING("You must stay still while the drill is engaged!"))
+			return FALSE
+
+		if(drill_head.durability <= 0)
+			drill_head.shatter()
+			drill_head = null
+			return FALSE
+
+		var/list/ore_products
+		if(istype(target, /turf/exterior/wall))
+			for(var/turf/exterior/wall/M in RANGE_TURFS(target,1))
+				if(get_dir(owner,M) & owner.dir)
+					for(var/obj/item/ore/ore in M.dismantle_wall())
+						LAZYADD(ore_products, ore)
 					drill_head.durability -= 1
-					log_and_message_admins("used [src] on the wall [W].", user, owner.loc)
-				else if(istype(target, /turf/simulated/floor/asteroid))
-					for(var/turf/simulated/floor/asteroid/M in range(target,1))
-						if(get_dir(owner,M)&owner.dir)
-							M.gets_dug()
-							drill_head.durability -= 1
-				else if(target.loc == T)
-					target.explosion_act(2)
+		else if(istype(target, /turf/simulated/wall))
+			var/turf/simulated/wall/W = target
+			if(max(W.material.hardness, W.reinf_material ? W.reinf_material.hardness : 0) > drill_head.material.hardness)
+				to_chat(user, "<span class='warning'>\The [target] is too hard to drill through with this drill head.</span>")
+			target.explosion_act(2)
+			drill_head.durability -= 1
+			log_and_message_admins("used [src] on the wall [W].", user, owner.loc)
+		else if(istype(target, /turf/simulated/floor/asteroid))
+			for(var/turf/simulated/floor/asteroid/M in RANGE_TURFS(target,1))
+				if(get_dir(owner,M) & owner.dir)
+					LAZYDISTINCTADD(ore_products, M.gets_dug())
 					drill_head.durability -= 1
-					log_and_message_admins("[src] used to drill [target].", user, owner.loc)
+		else if(target.loc == T)
+			target.explosion_act(2)
+			drill_head.durability -= 1
+			log_and_message_admins("[src] used to drill [target].", user, owner.loc)
 
-
-
-
-				if(owner.hardpoints.len) //if this isn't true the drill should not be working to be fair
-					for(var/hardpoint in owner.hardpoints)
-						var/obj/item/I = owner.hardpoints[hardpoint]
-						if(!istype(I))
-							continue
-						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in I //clamps work, but anythin that contains an ore crate internally is valid
-						if(ore_box)
-							for(var/obj/item/ore/ore in range(T,1))
-								if(get_dir(owner,ore)&owner.dir)
-									ore.Move(ore_box)
-
-		else
-			to_chat(user, "You must stay still while the drill is engaged!")
-
-
-		return 1
-
-
-
+		if(!length(owner.hardpoints) || !length(ore_products))
+			return TRUE
+		for(var/hardpoint in owner.hardpoints)
+			//clamps work, but anythin that contains an ore crate internally is valid
+			var/obj/structure/ore_box/ore_box = locate() in owner.hardpoints[hardpoint]
+			if(ore_box)
+				for(var/obj/item/ore/ore in ore_products)
+					if(get_dir(owner,ore) & owner.dir)
+						ore.forceMove(ore_box)
+		return TRUE
 
 /obj/item/mech_equipment/mounted_system/taser/plasma
 	name = "mounted plasma cutter"

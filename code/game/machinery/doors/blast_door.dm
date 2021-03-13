@@ -61,7 +61,7 @@
 		set_opacity(0)
 		layer = open_layer
 
-	implicit_material = decls_repository.get_decl(/decl/material/solid/metal/plasteel)
+	implicit_material = GET_DECL(/decl/material/solid/metal/plasteel)
 
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()

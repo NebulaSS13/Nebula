@@ -2222,7 +2222,7 @@
 	},
 /area/constructionsite/hallway/aft)
 "hf" = (
-/obj/machinery/door/airlock/multi_tile/glass{
+/obj/machinery/door/airlock/double/glass{
 	name = "Emergency Entrance"
 	},
 /turf/simulated/floor/airless,

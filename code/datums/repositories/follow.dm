@@ -193,11 +193,6 @@
 	followed_type = /mob/living/simple_animal
 	suffix = "Animal"
 
-/datum/follow_holder/slime
-	sort_order = 6
-	followed_type = /mob/living/carbon/slime
-	suffix = "Slime"
-
 /datum/follow_holder/spiderling
 	sort_order = 6
 	followed_type = /obj/effect/spider/spiderling

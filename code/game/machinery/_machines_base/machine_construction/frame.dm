@@ -140,7 +140,7 @@
 		if(new_machine.construct_state)
 			new_machine.construct_state.post_construct(new_machine)
 		else
-			crash_with("Machine of type [new_machine.type] was built from a circuit and frame, but had no construct state set.")
+			PRINT_STACK_TRACE("Machine of type [new_machine.type] was built from a circuit and frame, but had no construct state set.")
 		qdel(machine)
 		return TRUE
 

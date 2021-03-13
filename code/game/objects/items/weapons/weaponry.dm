@@ -28,12 +28,12 @@
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='danger'>The rod slips out of your hand and hits your head.</span>")
 		user.take_organ_damage(10)
-		user.Paralyse(20)
+		SET_STATUS_MAX(user, STAT_PARA, 20)
 		return
 
 	if(iscultist(M))
 		M.visible_message("<span class='notice'>\The [user] waves \the [src] over \the [M]'s head.</span>")
-		var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+		var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 		cult.offer_uncult(M)
 		return
 
@@ -231,7 +231,7 @@
 	healthcheck()
 	..()
 
-obj/effect/energy_net/user_unbuckle_mob(mob/user)
+/obj/effect/energy_net/user_unbuckle_mob(mob/user)
 	return escape_net(user)
 
 

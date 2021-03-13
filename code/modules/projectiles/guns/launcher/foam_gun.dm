@@ -43,6 +43,12 @@
 			D.dropInto(user.loc)
 			D.mix_up()
 
+/obj/item/gun/launcher/foam/crossbow
+	name = "foam dart crossbow"
+	desc = "A weapon favored by many overactive children. Ages 8 and up."
+	icon = 'icons/obj/guns/energy_crossbow.dmi'
+	max_darts = 5
+
 /obj/item/gun/launcher/foam/burst
 	name = "foam machine pistol"
 	desc = "The Jorf Outlander, a machine pistol blaster, fires two darts in rapid succession. Holds 4 darts."

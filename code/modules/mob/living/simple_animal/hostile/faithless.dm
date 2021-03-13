@@ -12,6 +12,7 @@
 	speed = -1
 	maxHealth = 80
 	health = 80
+	gene_damage = -1
 
 	harm_intent_damage = 10
 	natural_weapon = /obj/item/natural_weapon/faithless
@@ -51,7 +52,7 @@
 	var/mob/living/L = .
 	if(istype(L))
 		if(prob(12))
-			L.Weaken(3)
+			SET_STATUS_MAX(L, STAT_WEAK, 3)
 			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
 
 /mob/living/simple_animal/hostile/faithless/cult

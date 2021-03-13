@@ -10,6 +10,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	blinded = 0
 	anchored = 1	//  don't get pushed around
 	universal_speak = TRUE
+	mob_sort_value = 9
 
 	mob_flags = MOB_FLAG_HOLY_BAD
 	movement_handlers = list(/datum/movement_handler/mob/multiz_connected, /datum/movement_handler/mob/incorporeal)
@@ -65,7 +66,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		name = capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 	real_name = name
 
-	var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	cult.add_ghost_magic(src)
 
 	ghost_multitool = new(src)
@@ -413,7 +414,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 //This is called when a ghost is drag clicked to something.
 /mob/observer/ghost/MouseDrop(atom/over)
-	if(!usr || !over) return
+	SHOULD_CALL_PARENT(FALSE)
+	if(!usr || !over)
+		return
 	if(isghost(usr) && usr.client && isliving(over))
 		var/mob/living/M = over
 		// If they an admin, see if control can be resolved.
@@ -422,10 +425,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		// Otherwise, see if we can possess the target.
 		if(usr == src && try_possession(M))
 			return
-	if(istype(over, /obj/machinery/drone_fabricator))
-		if(try_drone_spawn(src, over))
-			return
-
+	if(istype(over, /obj/machinery/drone_fabricator) && try_drone_spawn(src, over))
+		return
 	return ..()
 
 /mob/observer/ghost/proc/try_possession(var/mob/living/M)
@@ -514,7 +515,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/MayRespawn(var/feedback = 0, var/respawn_time = 0)
 	if(!client)
 		return 0
-	if(mind?.current && mind.current.stat != DEAD && (can_reenter_corpse in list(CORPSE_CAN_REENTER, CORPSE_CAN_REENTER_AND_RESPAWN)))
+	if(mind?.current && !QDELETED(mind.current) && mind.current.stat != DEAD && (can_reenter_corpse in list(CORPSE_CAN_REENTER, CORPSE_CAN_REENTER_AND_RESPAWN)))
 		if(feedback)
 			to_chat(src, "<span class='warning'>Your non-dead body prevents you from respawning.</span>")
 		return 0

@@ -104,8 +104,8 @@
 	visible_message("<span class='danger'>[user] strikes [src] with [I].</span>")
 	check_health()
 
-/obj/structure/closet/statue/MouseDrop_T()
-	return
+/obj/structure/closet/statue/receive_mouse_drop(atom/dropping, var/mob/user)
+	return TRUE
 
 /obj/structure/closet/statue/relaymove()
 	return

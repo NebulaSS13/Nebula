@@ -19,11 +19,13 @@
 
 /obj/item/robot_parts/Initialize(mapload, var/model)
 	. = ..(mapload)
-	if(model_info && model)
+	if(model_info)
+		if(!ispath(model, /decl/prosthetics_manufacturer))
+			model = /decl/prosthetics_manufacturer
 		model_info = model
-		var/datum/robolimb/R = all_robolimbs[model]
+		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
 		if(R)
-			SetName("[R.company] [initial(name)]")
+			SetName("[R.name] [initial(name)]")
 			desc = "[R.desc]"
 			if(icon_state in icon_states(R.icon))
 				icon = R.icon

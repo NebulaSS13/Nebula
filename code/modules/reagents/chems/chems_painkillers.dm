@@ -13,37 +13,38 @@
 	var/pain_power = 80 //magnitide of painkilling effect
 	var/effective_dose = 0.5 //how many units it need to process to reach max power
 
-/decl/material/liquid/painkillers/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/liquid/painkillers/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	var/effectiveness = 1
-	if(M.chem_doses[type] < effective_dose) //some ease-in ease-out for the effect
-		effectiveness = M.chem_doses[type]/effective_dose
+	var/dose = LAZYACCESS(M.chem_doses, type)
+	if(dose < effective_dose) //some ease-in ease-out for the effect
+		effectiveness = dose/effective_dose
 	else if(volume < effective_dose)
 		effectiveness = volume/effective_dose
 	M.add_chemical_effect(CE_PAINKILLER, pain_power * effectiveness)
-	if(M.chem_doses[type] > 0.5 * overdose)
+	if(dose > 0.5 * overdose)
 		M.add_chemical_effect(CE_SLOWDOWN, 1)
 		if(prob(1))
-			M.slurring = max(M.slurring, 10)
-	if(M.chem_doses[type] > 0.75 * overdose)
+			SET_STATUS_MAX(M, STAT_SLUR, 10)
+	if(dose > 0.75 * overdose)
 		M.add_chemical_effect(CE_SLOWDOWN, 1)
 		if(prob(5))
-			M.slurring = max(M.slurring, 20)
-	if(M.chem_doses[type] > overdose)
+			SET_STATUS_MAX(M, STAT_SLUR, 20)
+	if(dose > overdose)
 		M.add_chemical_effect(CE_SLOWDOWN, 1)
-		M.slurring = max(M.slurring, 30)
+		SET_STATUS_MAX(M, STAT_SLUR, 30)
 		if(prob(1))
-			M.Weaken(2)
-			M.drowsyness = max(M.drowsyness, 5)
+			SET_STATUS_MAX(M, STAT_WEAK, 2)
+			SET_STATUS_MAX(M, STAT_DROWSY, 5)
 	var/boozed = isboozed(M)
 	if(boozed)
 		M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
 		M.add_chemical_effect(CE_BREATHLOSS, 0.1 * boozed) //drinking and opiating makes breathing kinda hard
 
-/decl/material/liquid/painkillers/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/painkillers/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
 	..()
-	M.hallucination(120, 30)
-	M.adjust_drugged(10, 10)
+	M.set_hallucination(120, 30)
+	ADJ_STATUS(M, STAT_DRUGGY, 10)
 	M.add_chemical_effect(CE_PAINKILLER, pain_power*0.5) //extra painkilling for extra trouble
 	M.add_chemical_effect(CE_BREATHLOSS, 0.6) //Have trouble breathing, need more air
 	if(isboozed(M))
@@ -55,8 +56,8 @@
 	if(ingested)
 		var/list/pool = M.reagents.reagent_volumes | ingested.reagent_volumes
 		for(var/rtype in pool)
-			var/decl/material/liquid/ethanol/booze = decls_repository.get_decl(rtype)
-			if(!istype(booze) || M.chem_doses[rtype] < 2) //let them experience false security at first
+			var/decl/material/liquid/ethanol/booze = GET_DECL(rtype)
+			if(!istype(booze) ||LAZYACCESS(M.chem_doses, rtype) < 2) //let them experience false security at first
 				continue
 			. = 1
 			if(booze.strength < 40) //liquor stuff hits harder

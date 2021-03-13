@@ -258,7 +258,7 @@
 				/obj/item/chems/food/drinks/bottle/gin,
 				/obj/item/chems/food/drinks/bottle/agedwhiskey,
 				/obj/item/chems/food/drinks/bottle/vodka,
-				/obj/item/chems/food/drinks/bottle/tequilla,
+				/obj/item/chems/food/drinks/bottle/tequila,
 				/obj/item/chems/food/drinks/bottle/absinthe,
 				/obj/item/chems/food/drinks/bottle/wine,
 				/obj/item/chems/food/drinks/bottle/cognac,
@@ -506,7 +506,7 @@
 				/obj/item/toy/snappop,
 				/obj/item/toy/sword,
 				/obj/item/toy/water_balloon,
-				/obj/item/toy/crossbow,
+				/obj/item/gun/launcher/foam/crossbow,
 				/obj/item/toy/blink,
 				/obj/item/chems/spray/waterflower,
 				/obj/item/toy/prize/powerloader,
@@ -575,13 +575,13 @@
 				/obj/item/chems/spray/cleaner = 2,
 				/obj/item/grenade/chem_grenade/cleaner = 1)
 
-obj/random/obstruction //Large objects to block things off in maintenance
+/obj/random/obstruction //Large objects to block things off in maintenance
 	name = "random obstruction"
 	desc = "This is a random obstruction."
 	icon = 'icons/obj/cult.dmi'
 	icon_state = "cultgirder"
 
-obj/random/obstruction/spawn_choices()
+/obj/random/obstruction/spawn_choices()
 	return list(/obj/structure/barricade,
 				/obj/structure/girder,
 				/obj/structure/girder/displaced,
@@ -886,7 +886,7 @@ obj/random/obstruction/spawn_choices()
 	name = "random currency"
 	desc = "LOADSAMONEY!"
 	icon = 'icons/obj/items/money.dmi'
-	icon_state = "spacecash1"
+	icon_state = "cash"
 
 /obj/random/cash/spawn_choices()
 	return list(/obj/item/cash/c1 = 4,
@@ -1067,7 +1067,7 @@ something, make sure it's not in one of the other lists.*/
 	icon_state = "standing"
 	spawn_nothing_percentage = 80
 
-obj/random/hostile/spawn_choices()
+/obj/random/hostile/spawn_choices()
 	return list(/mob/living/simple_animal/hostile/viscerator,
 				/mob/living/simple_animal/hostile/carp,
 				/mob/living/simple_animal/hostile/carp/pike,

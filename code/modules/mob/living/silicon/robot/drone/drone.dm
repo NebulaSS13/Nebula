@@ -315,7 +315,7 @@
 /mob/living/silicon/robot/drone/proc/request_player()
 	if(too_many_active_drones())
 		return
-	var/decl/ghosttrap/G = decls_repository.get_decl(/decl/ghosttrap/maintenance_drone)
+	var/decl/ghosttrap/G = GET_DECL(/decl/ghosttrap/maintenance_drone)
 	G.request_player(src, "Someone is attempting to reboot a maintenance drone.", 30 SECONDS)
 
 /mob/living/silicon/robot/drone/proc/transfer_personality(var/client/player)

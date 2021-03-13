@@ -62,7 +62,7 @@
 /obj/item/storage/pill_bottle/afterattack(mob/living/target, mob/living/user, proximity_flag)
 	. = (proximity_flag && user == target && pop_pill(user)) || ..()
 
-/obj/item/storage/pill_bottle/attack_self(mob/living/user)
+/obj/item/storage/pill_bottle/attack_self(mob/user)
 	. = pop_pill(user) || ..()
 
 /obj/item/storage/pill_bottle/Initialize()

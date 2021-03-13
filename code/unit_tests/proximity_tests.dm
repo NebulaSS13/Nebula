@@ -16,6 +16,7 @@
 /datum/unit_test/proximity/teardown_test()
 	QDEL_NULL(proximity_listener)
 	wall = null
+	..()
 
 /datum/unit_test/proximity/proc/SetWallOpacity(opacity)
 	for(var/turf/simulated/wall/wall in range(7, proximity_listener))

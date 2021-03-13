@@ -29,8 +29,8 @@
 			continue
 		to_chat(S, SPAN_WARNING("Your integrated sensors detect an ionospheric anomaly. Your systems will be impacted as you begin a partial restart."))
 		var/ionbug = rand(5, 15)
-		S.confused += ionbug
-		S.eye_blurry += ionbug-1
+		ADJ_STATUS(S, STAT_CONFUSE, ionbug)
+		ADJ_STATUS(S, STAT_BLURRY, ionbug-1)
 	for(var/mob/living/silicon/S in SSmobs.mob_list)
 		if(is_drone(S) || !(isAI(S) || isrobot(S)))
 			continue
@@ -109,9 +109,9 @@
 		S.add_ion_law(law)
 		S.show_laws()
 
-	var/list/local_zs = GetConnectedZlevels(affecting_z)
-	for(var/obj/machinery/network/message_server/MS in SSmachines.machinery)
-		if((MS.z in local_zs) && !(MS.stat & (BROKEN|NOPOWER)))
+	for(var/z in affecting_z)
+		var/obj/machinery/network/message_server/MS = get_message_server_for_z(z)
+		if(MS)
 			MS.spamfilter.Cut()
 			var/i
 			for (i = 1, i <= MS.spamfilter_limit, i++)

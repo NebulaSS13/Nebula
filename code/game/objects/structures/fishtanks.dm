@@ -146,20 +146,20 @@ var/list/global/aquarium_states_and_layers = list(
 	return 1
 
 /obj/structure/glass_tank/do_climb(var/mob/living/user)
-	if (!can_climb(user))
+	if(!istype(user) || !can_climb(user))
 		return
-	usr.visible_message(SPAN_WARNING("\The [user] starts climbing into \the [src]!"))
+	user.visible_message(SPAN_WARNING("\The [user] starts climbing into \the [src]!"))
 	if(!do_after(user,50))
 		return
 	if (!can_climb(user))
 		return
-	usr.forceMove(src.loc)
+	user.forceMove(src.loc)
 	if (get_turf(user) == get_turf(src))
-		usr.visible_message(SPAN_WARNING("\The [user] climbs into \the [src]!"))
+		user.visible_message(SPAN_WARNING("\The [user] climbs into \the [src]!"))
 
 /obj/structure/glass_tank/verb/climb_out()
 	set name = "Climb Out Of Tank"
-	set desc = "Climbs out of a fishtank."
+	set desc = "Climbs out of a tank."
 	set category = "Object"
 	set src in oview(0) // Same turf.
 
@@ -176,15 +176,6 @@ var/list/global/aquarium_states_and_layers = list(
 		do_climb_out(usr, pick(valid_turfs))
 	else
 		to_chat(usr, SPAN_WARNING("There's nowhere to climb out to!"))
-
-/mob/living/MouseDrop(atom/over)
-	if(usr == src && isturf(over))
-		var/turf/T = over
-		var/obj/structure/glass_tank/A = locate() in usr.loc
-		if(A && A.Adjacent(usr) && A.Adjacent(T))
-			A.do_climb_out(usr, T)
-			return
-	return ..()
 
 /obj/structure/glass_tank/proc/do_climb_out(mob/living/user, turf/target)
 	if(get_turf(user) != get_turf(src))

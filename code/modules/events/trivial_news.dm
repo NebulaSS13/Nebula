@@ -4,7 +4,7 @@
 /datum/event/trivial_news/announce()
 	var/author = "Editor Mike Hammers"
 	var/channel = "The Gibson Gazette"
-	var/decl/cultural_info/location/affected_dest = SSlore.get_culture(pick(GLOB.using_map.available_cultural_info[TAG_HOMEWORLD]))
+	var/decl/cultural_info/location/affected_dest = GET_DECL(pick(GLOB.using_map.available_cultural_info[TAG_HOMEWORLD]))
 	if(!istype(affected_dest))
 		return
 	var/body = pick(

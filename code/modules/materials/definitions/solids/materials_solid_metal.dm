@@ -185,7 +185,7 @@
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	color = "#a8a9b2"
 	explosion_resistance = 25
-	brute_armor = 6
+	brute_armor = 8
 	burn_armor = 10
 	hardness = MAT_VALUE_VERY_HARD
 	stack_origin_tech = "{'materials':2}"
@@ -283,7 +283,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	taste_description = "metal"
 
-/decl/material/solid/metal/iron/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/solid/metal/iron/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 

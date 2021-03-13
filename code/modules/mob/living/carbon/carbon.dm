@@ -22,11 +22,6 @@
 	return ..()
 
 /mob/living/carbon/rejuvenate()
-	bloodstr.clear_reagents()
-	touching.clear_reagents()
-	var/datum/reagents/R = get_ingested_reagents()
-	if(istype(R))
-		R.clear_reagents()
 	set_nutrition(400)
 	set_hydration(400)
 	..()
@@ -86,15 +81,14 @@
 		visible_message(SPAN_DANGER("\The [M] bursts out of \the [src]!"))
 	..()
 
-/mob/living/carbon/attack_hand(var/mob/living/carbon/human/M)
-	if(istype(M))
-		var/obj/item/organ/external/temp = M.organs_by_name[M.get_active_held_item_slot()]
-		if(!temp)
-			to_chat(M, SPAN_WARNING("You don't have a usable limb!"))
-			return TRUE
-		if(!temp.is_usable())
-			to_chat(M, SPAN_WARNING("You can't use your [temp.name]."))
-			return TRUE
+/mob/living/carbon/attack_hand(mob/user)
+	var/obj/item/organ/external/temp = user.get_organ(user.get_active_held_item_slot())
+	if(!temp)
+		to_chat(user, SPAN_WARNING("You don't have a usable limb!"))
+		return TRUE
+	if(!temp.is_usable())
+		to_chat(user, SPAN_WARNING("You can't use your [temp.name]."))
+		return TRUE
 	. = ..()
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
@@ -123,17 +117,17 @@
 
 	switch(shock_damage)
 		if(11 to 15)
-			Stun(1)
+			SET_STATUS_MAX(src, STAT_STUN, 1)
 		if(16 to 20)
-			Stun(2)
+			SET_STATUS_MAX(src, STAT_STUN, 2)
 		if(21 to 25)
-			Weaken(2)
+			SET_STATUS_MAX(src, STAT_WEAK, 2)
 		if(26 to 30)
-			Weaken(5)
+			SET_STATUS_MAX(src, STAT_WEAK, 5)
 		if(31 to INFINITY)
-			Weaken(10) //This should work for now, more is really silly and makes you lay there forever
+			SET_STATUS_MAX(src, STAT_WEAK, 10) //This should work for now, more is really silly and makes you lay there forever
 
-	make_jittery(min(shock_damage*5, 200))
+	set_status(STAT_JITTER, min(shock_damage*5, 200))
 
 	spark_at(loc, amount=5, cardinal_only = TRUE)
 
@@ -192,11 +186,11 @@
 			if(show_ssd && ssd_check())
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
-			else if(lying || src.sleeping || player_triggered_sleeping)
-				src.player_triggered_sleeping = 0
-				src.sleeping = max(0,src.sleeping - 5)
-				if(src.sleeping == 0)
-					src.resting = 0
+			else if(lying ||HAS_STATUS(src, STAT_ASLEEP) || player_triggered_sleeping)
+				player_triggered_sleeping = 0
+				ADJ_STATUS(src, STAT_ASLEEP, -5)
+				if(!HAS_STATUS(src, STAT_ASLEEP))
+					resting = FALSE
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
@@ -213,9 +207,9 @@
 					src.IgniteMob()
 
 			if(stat != DEAD)
-				AdjustParalysis(-3)
-				AdjustStunned(-3)
-				AdjustWeakened(-3)
+				ADJ_STATUS(src, STAT_PARA, -3)
+				ADJ_STATUS(src, STAT_STUN, -3)
+				ADJ_STATUS(src, STAT_WEAK, -3)
 
 			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
@@ -279,7 +273,7 @@
 	var/skill_mod = 0.2
 	if(!skill_check(SKILL_HAULING, min(round(itemsize - ITEM_SIZE_HUGE) + 2, SKILL_MAX)))
 		if(prob(30))
-			Weaken(2)
+			SET_STATUS_MAX(src, STAT_WEAK, 2)
 			message = "\The [src] barely manages to throw \the [item], and is knocked off-balance!"
 	else
 		skill_mod += 0.2
@@ -348,20 +342,8 @@
 		return FALSE
 	to_chat(src, SPAN_WARNING("You slipped on [slipped_on]!"))
 	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
-	Weaken(Floor(stun_duration/2))
+	SET_STATUS_MAX(src, STAT_WEAK, Floor(stun_duration/2))
 	return TRUE
-
-/mob/living/carbon/add_chemical_effect(var/effect, var/magnitude = 1)
-	if(effect in chem_effects)
-		chem_effects[effect] += magnitude
-	else
-		chem_effects[effect] = magnitude
-
-/mob/living/carbon/add_up_to_chemical_effect(var/effect, var/magnitude = 1)
-	if(effect in chem_effects)
-		chem_effects[effect] = max(magnitude, chem_effects[effect])
-	else
-		chem_effects[effect] = magnitude
 
 /mob/living/carbon/get_default_language()
 	. = ..()
@@ -407,16 +389,10 @@
 /mob/living/carbon/proc/can_devour(atom/movable/victim)
 	return FALSE
 
-/mob/living/carbon/proc/should_have_organ(var/organ_check)
-	return 0
-
-/mob/living/carbon/proc/can_feel_pain(var/check_organ)
+/mob/living/carbon/can_feel_pain(var/check_organ)
 	if(isSynthetic())
-		return 0
+		return FALSE
 	return !(species && species.species_flags & SPECIES_FLAG_NO_PAIN)
-
-/mob/living/carbon/proc/get_adjusted_metabolism(metabolism)
-	return metabolism
 
 /mob/living/carbon/proc/need_breathe()
 	return
@@ -449,9 +425,6 @@
 	for(var/source in stasis_sources)
 		stasis_value += stasis_sources[source]
 	stasis_sources.Cut()
-
-/mob/living/carbon/has_chem_effect(chem, threshold)
-	return (chem_effects[chem] >= threshold)
 
 /mob/living/carbon/get_sex()
 	return species.get_sex(src)
@@ -492,3 +465,89 @@
 		fluids.trans_to_holder(touching, saturation)
 	if(fluids.total_volume)
 		..()
+
+/mob/living/carbon/get_species()
+	return species
+
+/mob/living/carbon/get_species_name()
+	return species.name
+
+/mob/living/carbon/get_contact_reagents()
+	return touching
+
+/mob/living/carbon/get_injected_reagents()
+	return bloodstr
+
+/mob/living/carbon/get_admin_job_string()
+	return "Carbon-based"
+
+/mob/living/carbon/proc/get_possible_internals_sources()
+	. = list("back" = list(back, "on"))
+
+/mob/living/carbon/proc/breathing_hole_covered()
+	. = (wear_mask && (wear_mask?.item_flags & ITEM_FLAG_AIRTIGHT))
+
+/mob/living/carbon/ui_toggle_internals()
+
+	if(incapacitated())
+		return
+
+	if(internal)
+		set_internals(null)
+		return
+
+	if(!breathing_hole_covered())
+		to_chat(src, SPAN_WARNING("You are not wearing a suitable mask or helmet."))
+		return
+
+	set_internals_to_best_available_tank()
+
+	if(!internal)
+		to_chat(src, SPAN_WARNING("You don't have a tank that is usable as internals."))
+
+
+/mob/living/carbon/proc/set_internals_to_best_available_tank(var/breathes_gas = /decl/material/gas/oxygen, var/list/poison_gas = list(/decl/material/gas/chlorine))
+
+	if(!ispath(breathes_gas))
+		return
+
+	var/list/possible_sources = get_possible_internals_sources()
+	for(var/slot in held_item_slots)
+		var/obj/item/tank/checking = get_equipped_item(slot)
+		if(istype(checking))
+			possible_sources[slot] = list(checking, "in")
+
+	var/selected_slot
+	var/selected_from
+	var/obj/item/tank/selected_obj
+	var/decl/material/breathing_gas = GET_DECL(breathes_gas)
+	for(var/slot_name in possible_sources)
+		var/list/checking_data = possible_sources[slot_name]
+		if(length(checking_data) < 2)
+			continue
+		var/obj/item/tank/checking = checking_data[1]
+		if(!istype(checking) || !checking.air_contents?.gas)
+			continue
+
+		var/valid_tank = (checking.manipulated_by && checking.manipulated_by != real_name && findtext(checking.desc, breathing_gas.name))
+		if(!valid_tank)
+			if(!checking.air_contents.gas[breathes_gas])
+				continue
+			var/is_poison = FALSE
+			for(var/poison in poison_gas)
+				if(checking.air_contents.gas[poison])
+					is_poison = TRUE
+					break
+			if(!is_poison)
+				valid_tank = TRUE
+			
+		if(valid_tank && (!selected_obj || selected_obj.air_contents.gas[breathes_gas] <  checking.air_contents.gas[breathes_gas]))
+			selected_obj =  checking
+			selected_slot = slot_name
+			selected_from = checking_data[2]
+
+	if(selected_obj)
+		if(selected_slot && selected_from)
+			set_internals(selected_obj, "\the [selected_obj] [selected_from] your [selected_slot]")
+		else
+			set_internals(selected_obj, "\the [selected_obj]")

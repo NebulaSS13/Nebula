@@ -37,7 +37,7 @@
 /obj/effect/mine/proc/triggerstun(obj)
 	if(ismob(obj))
 		var/mob/M = obj
-		M.Stun(30)
+		SET_STATUS_MAX(M, STAT_STUN, 30)
 	spark_at(src, cardinal_only = TRUE)
 	spawn(0)
 		qdel(src)

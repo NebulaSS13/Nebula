@@ -66,10 +66,10 @@ var/list/time_prefs_fixed = list()
 
 /datum/preferences/proc/setup()
 	if(!length(GLOB.skills))
-		decls_repository.get_decl(/decl/hierarchy/skill)
+		GET_DECL(/decl/hierarchy/skill)
 	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
-	real_name = random_name(gender,species)
+	real_name = get_random_name()
 	b_type = RANDOM_BLOOD_TYPE
 
 	if(client && !IsGuestKey(client.key))
@@ -79,7 +79,7 @@ var/list/time_prefs_fixed = list()
 	sanitize_preferences()
 	if(client && istype(client.mob, /mob/new_player))
 		var/mob/new_player/np = client.mob
-		np.new_player_panel(TRUE)
+		np.show_lobby_menu(TRUE)
 
 /datum/preferences/proc/load_and_update_character(var/slot)
 	load_character(slot)
@@ -197,6 +197,11 @@ var/list/time_prefs_fixed = list()
 		load_character(text2num(href_list["changeslot"]))
 		sanitize_preferences()
 		close_load_dialog(usr)
+
+		if(isnewplayer(client.mob))
+			var/mob/new_player/M = client.mob
+			M.show_lobby_menu()
+
 	else if(href_list["resetslot"])
 		if(real_name != input("This will reset the current slot. Enter the character's full name to confirm."))
 			return 0
@@ -218,7 +223,7 @@ var/list/time_prefs_fixed = list()
 	character.set_species(species)
 
 	if(be_random_name)
-		var/decl/cultural_info/culture = SSlore.get_culture(cultural_info[TAG_CULTURE])
+		var/decl/cultural_info/culture = GET_DECL(cultural_info[TAG_CULTURE])
 		if(culture) real_name = culture.get_random_name(gender)
 
 	if(config.humans_need_surnames)
@@ -278,10 +283,7 @@ var/list/time_prefs_fixed = list()
 					qdel(child)
 			qdel(O)
 		else if(status == "cyborg")
-			if(rlimb_data[name])
-				O.robotize(rlimb_data[name])
-			else
-				O.robotize()
+			O.robotize(rlimb_data[name])
 		else //normal organ
 			O.force_icon = initial(O.force_icon)
 			O.SetName(initial(O.name))
@@ -294,7 +296,7 @@ var/list/time_prefs_fixed = list()
 			var/status = organ_data[name]
 			if(!status)
 				continue
-			var/obj/item/organ/I = character.internal_organs_by_name[name]
+			var/obj/item/organ/I = character.get_internal_organ(name)
 			if(I)
 				if(status == "assisted")
 					I.mechassist()
@@ -331,12 +333,17 @@ var/list/time_prefs_fixed = list()
 			if(O)
 				O.markings[M] = list("color" = mark_color, "datum" = mark_datum)
 
+	if(LAZYLEN(character.descriptors))
+		for(var/entry in body_descriptors)
+			character.descriptors[entry] = body_descriptors[entry]
+
 	character.force_update_limbs()
 	character.update_mutations(0)
 	character.update_body(0)
 	character.update_underwear(0)
 	character.update_hair(0)
 	character.update_icons()
+	character.update_transform()
 
 	if(is_preview_copy)
 		return
@@ -362,10 +369,6 @@ var/list/time_prefs_fixed = list()
 	character.sec_record = sec_record
 	character.gen_record = gen_record
 	character.exploit_record = exploit_record
-
-	if(LAZYLEN(character.descriptors))
-		for(var/entry in body_descriptors)
-			character.descriptors[entry] = body_descriptors[entry]
 
 	if(!character.isSynthetic())
 		character.set_nutrition(rand(140,360))

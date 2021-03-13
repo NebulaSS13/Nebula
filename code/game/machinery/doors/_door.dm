@@ -75,14 +75,7 @@
 	else
 		layer = open_layer
 
-
-	if(width > 1)
-		if(dir in list(EAST, WEST))
-			bound_width = width * world.icon_size
-			bound_height = world.icon_size
-		else
-			bound_width = world.icon_size
-			bound_height = width * world.icon_size
+	set_bounds()
 
 	if (turf_hand_priority)
 		set_extension(src, /datum/extension/turf_hand, turf_hand_priority)
@@ -90,16 +83,21 @@
 	health = maxhealth
 #ifdef UNIT_TEST
 	if(autoset_access && length(req_access))
-		crash_with("A door with mapped access restrictions was set to autoinitialize access.")
+		PRINT_STACK_TRACE("A door with mapped access restrictions was set to autoinitialize access.")
 #endif
 
-/obj/machinery/door/LateInitialize()
+/obj/machinery/door/LateInitialize(mapload, dir=0, populate_parts=TRUE)
 	..()
 	update_connections(1)
 	update_icon()
 	update_nearby_tiles(need_rebuild=1)
-	if(autoset_access) // Delayed because apparently the dir is not set by mapping and we need to wait for nearby walls to init and turn us.
-		inherit_access_from_area()
+	if(populate_parts && (autoset_access || length(req_access))) // Delayed because apparently the dir is not set by mapping and we need to wait for nearby walls to init and turn us.
+		var/obj/item/stock_parts/access_lock/lock = install_component(/obj/item/stock_parts/access_lock/buildable, refresh_parts = FALSE)
+		if(autoset_access)
+			lock.autoset = TRUE
+			lock.req_access = get_auto_access()
+		else
+			lock.req_access = req_access.Copy()
 
 /obj/machinery/door/Destroy()
 	set_density(0)
@@ -124,10 +122,29 @@
 		return 0
 	return 1
 
+/obj/machinery/door/proc/set_bounds()
+	if (dir == NORTH || dir == SOUTH)
+		bound_width = width * world.icon_size
+		bound_height = world.icon_size
+	else
+		bound_width = world.icon_size
+		bound_height = width * world.icon_size
+
 /obj/machinery/door/set_density(new_density)
 	. = ..()
 	if(.)
 		explosion_resistance = density ? initial(explosion_resistance) : 0
+
+/obj/machinery/door/set_dir(new_dir)
+	if(new_dir & (EAST|WEST))
+		new_dir = WEST
+	else
+		new_dir = SOUTH
+
+	. = ..(new_dir)
+
+	if(.)
+		set_bounds()
 
 /obj/machinery/door/Bumped(atom/AM)
 	if(panel_open || operating) return
@@ -182,7 +199,7 @@
 
 	if(damage)
 		//cap projectile damage so that there's still a minimum number of hits required to break the door
-		take_damage(min(damage, 100))
+		take_damage(min(damage, 100), Proj.damage_type)
 
 /obj/machinery/door/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
 	..()
@@ -277,7 +294,7 @@
 		do_animate("emag")
 		sleep(6)
 		open()
-		operating = -1
+		emagged = TRUE
 		return 1
 
 /obj/machinery/door/bash(obj/item/I, mob/user)
@@ -289,22 +306,23 @@
 		else
 			user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [I]!</span>")
 			playsound(src.loc, hitsound, 100, 1)
-			take_damage(I.force)
+			take_damage(I.force, I.damtype)
 		return TRUE
 	return FALSE
 
-/obj/machinery/door/take_damage(var/damage)
-	..()
+/obj/machinery/door/take_damage(var/damage, damtype=BRUTE)
 	var/initialhealth = src.health
 	src.health = max(0, src.health - damage)
 	if(src.health <= 0 && initialhealth > 0)
+		visible_message(SPAN_WARNING("\The [src] breaks down!"))
 		src.set_broken(TRUE)
 	else if(src.health < src.maxhealth / 4 && initialhealth >= src.maxhealth / 4)
-		visible_message("\The [src] looks like it's about to break!" )
+		visible_message(SPAN_WARNING("\The [src] looks like it's about to break!"))
 	else if(src.health < src.maxhealth / 2 && initialhealth >= src.maxhealth / 2)
-		visible_message("\The [src] looks seriously damaged!" )
+		visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
 	else if(src.health < src.maxhealth * 3/4 && initialhealth >= src.maxhealth * 3/4)
-		visible_message("\The [src] shows signs of damage!" )
+		visible_message(SPAN_WARNING("\The [src] shows signs of damage!"))
+	..(max(0, damage - initialhealth), damtype)
 	update_icon()
 
 /obj/machinery/door/examine(mob/user)
@@ -329,31 +347,12 @@
 	if(. && new_state && (cause & MACHINE_BROKEN_GENERIC))
 		visible_message("<span class = 'warning'>\The [src.name] breaks!</span>")
 
-/obj/machinery/door/explosion_act(severity)
-	..()
-	if(!QDELETED(src))
-		if(severity == 1 || (severity == 2 && prob(25)))
-			qdel(src)
-		else
-			if(severity == 2)
-				take_damage(200)
-			take_damage(100)
-			if(prob(80))
-				spark_at(src, amount=2, cardinal_only = TRUE)
-
 /obj/machinery/door/on_update_icon()
-	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
-		if(connections in list(WEST, EAST, EAST|WEST))
-			set_dir(SOUTH)
-		else
-			set_dir(EAST)
-	else
-		set_dir(SOUTH)
-
 	if(density)
 		icon_state = "door1"
 	else
 		icon_state = "door0"
+
 	SSradiation.resistance_cache.Remove(get_turf(src))
 
 /obj/machinery/door/proc/do_animate(animation)
@@ -452,17 +451,8 @@
 			source.thermal_conductivity = initial(source.thermal_conductivity)
 
 /obj/machinery/door/Move(new_loc, new_dir)
-	update_nearby_tiles()
-
 	. = ..()
-	if(width > 1)
-		if(dir in list(EAST, WEST))
-			bound_width = width * world.icon_size
-			bound_height = world.icon_size
-		else
-			bound_width = world.icon_size
-			bound_height = width * world.icon_size
-
+	update_nearby_tiles()
 	if(.)
 		dismantle(TRUE)
 
@@ -517,23 +507,34 @@
 	if (T && !T.density)
 		return get_area(T)
 
-/obj/machinery/door/proc/inherit_access_from_area()
+/obj/machinery/door/get_auto_access()
 	var/area/fore = access_area_by_dir(dir)
 	var/area/aft = access_area_by_dir(GLOB.reverse_dir[dir])
 	fore = fore || aft
 	aft = aft || fore
 
 	if (!fore && !aft)
-		req_access = list()
+		return list()
 	else if (fore.secure || aft.secure)
-		req_access = req_access_union(fore, aft)
+		return req_access_union(fore, aft)
 	else
-		req_access = req_access_diff(fore, aft)
+		return req_access_diff(fore, aft)
+
+/obj/machinery/door/get_req_access()
+	. = list()
+	for(var/obj/item/stock_parts/access_lock/lock in get_all_components_of_type(/obj/item/stock_parts/access_lock))
+		if(lock.locked && length(lock.req_access))
+			. |= lock.req_access
 
 /obj/machinery/door/do_simple_ranged_interaction(var/mob/user)
 	if((!requiresID() || allowed(null)) && can_open_manually)
 		toggle()
 	return TRUE
+
+/obj/machinery/door/components_are_accessible(var/path)
+	if(ispath(path, /obj/item/stock_parts/circuitboard))
+		return TRUE
+	return ..()
 
 // Public access
 

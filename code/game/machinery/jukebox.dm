@@ -1,19 +1,3 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
-
-/datum/track
-	var/title
-	var/track
-
-/datum/track/New(var/title, var/track)
-	src.title = title
-	src.track = track
-
-datum/track/proc/GetTrack()
-	if(ispath(track, /music_track))
-		var/music_track/music_track = decls_repository.get_decl(track)
-		return music_track.song
-	return track // Allows admins to continue their adminbus simply by overriding the track var
-
 /obj/machinery/media/jukebox
 	name = "mediatronic jukebox"
 	desc = "An immense, standalone touchscreen on a swiveling base, equipped with phased array speakers. Embossed on one corner of the ultrathin bezel is the brand name, 'Leitmotif Enterprise Edition'."
@@ -142,15 +126,15 @@ datum/track/proc/GetTrack()
 			var/mob/living/carbon/human/H = M
 			if(H.get_sound_volume_multiplier() < 0.2)
 				continue
-		M.sleeping = 0
-		M.stuttering += 20
-		M.ear_deaf += 30
-		M.Weaken(3)
+		M.set_status(STAT_ASLEEP,    0)
+		ADJ_STATUS(M, STAT_STUTTER,  20)
+		SET_STATUS_MAX(M, STAT_DEAF, 30)
+		SET_STATUS_MAX(M, STAT_WEAK,  3)
 		if(prob(30))
-			M.Stun(10)
-			M.Paralyse(4)
+			SET_STATUS_MAX(M, STAT_STUN, 10)
+			SET_STATUS_MAX(M, STAT_PARA,  4)
 		else
-			M.make_jittery(400)
+			M.set_status(STAT_JITTER, 400)
 	spawn(15)
 		explode()
 

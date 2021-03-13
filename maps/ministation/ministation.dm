@@ -6,6 +6,7 @@ Now poorly imported for Nebula!
 
 #if !defined(USING_MAP_DATUM)
 
+	#include "../../mods/content/xenobiology/_xenobiology.dme"
 	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/species/ascent/_ascent.dme"
 

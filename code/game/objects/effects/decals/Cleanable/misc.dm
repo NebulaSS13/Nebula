@@ -28,6 +28,12 @@
 	mouse_opacity = 0
 	persistent = TRUE
 
+/obj/effect/decal/cleanable/dirt/Destroy()
+	var/turf/simulated/T = loc
+	. = ..()
+	if(istype(T) && !(locate(/obj/effect/decal/cleanable/dirt) in T))
+		T.dirt = 0
+
 /obj/effect/decal/cleanable/flour
 	name = "flour"
 	desc = "It's still good. Four second rule!"
@@ -74,9 +80,7 @@
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	create_reagents(30, src)
 	if(prob(75))
-		var/matrix/M = matrix()
-		M.Turn(pick(90, 180, 270))
-		transform = M
+		set_rotation(pick(90, 180, 270))
 
 /obj/effect/decal/cleanable/vomit/on_update_icon()
 	. = ..()

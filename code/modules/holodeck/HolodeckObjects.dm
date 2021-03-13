@@ -251,7 +251,7 @@
 	. = ..()
 	item_color = pick("red","blue","green","purple")
 
-/obj/item/holo/esword/attack_self(mob/living/user)
+/obj/item/holo/esword/attack_self(mob/user)
 	active = !active
 	if (active)
 		force = 30
@@ -356,7 +356,7 @@
 	active_power_usage = 6
 	power_channel = ENVIRON
 
-/obj/machinery/readybutton/attack_ai(mob/user)
+/obj/machinery/readybutton/attack_ai(mob/living/silicon/ai/user)
 	to_chat(user, "The AI is not to interact with these devices!")
 	return
 

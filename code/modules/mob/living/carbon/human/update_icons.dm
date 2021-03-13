@@ -114,27 +114,28 @@ Please contact me on #coderbus IRC. ~Carn x
 #define HO_DAMAGE_LAYER     3
 #define HO_SURGERY_LAYER    4 //bs12 specific.
 #define HO_UNDERWEAR_LAYER  5
-#define HO_UNIFORM_LAYER    6
-#define HO_ID_LAYER         7
-#define HO_SHOES_LAYER      8
-#define HO_GLOVES_LAYER     9
-#define HO_BELT_LAYER       10
-#define HO_SUIT_LAYER       11
-#define HO_TAIL_LAYER       12 //bs12 specific. this hack is probably gonna come back to haunt me
+#define HO_TAIL_UNDER_LAYER 6
+#define HO_UNIFORM_LAYER    7
+#define HO_ID_LAYER         8
+#define HO_SHOES_LAYER      9
+#define HO_GLOVES_LAYER     10
+#define HO_BELT_LAYER       11
+#define HO_SUIT_LAYER       12
 #define HO_GLASSES_LAYER    13
 #define HO_BELT_LAYER_ALT   14
 #define HO_SUIT_STORE_LAYER 15
 #define HO_BACK_LAYER       16
-#define HO_HAIR_LAYER       17 //TODO: make part of head layer?
-#define HO_GOGGLES_LAYER    18
-#define HO_EARS_LAYER       19
-#define HO_FACEMASK_LAYER   20
-#define HO_HEAD_LAYER       21
-#define HO_COLLAR_LAYER     22
-#define HO_HANDCUFF_LAYER   23
-#define HO_INHAND_LAYER     24
-#define HO_FIRE_LAYER       25 //If you're on fire
-#define TOTAL_LAYERS        25
+#define HO_TAIL_OVER_LAYER  17 //bs12 specific. this hack is probably gonna come back to haunt me
+#define HO_HAIR_LAYER       18 //TODO: make part of head layer?
+#define HO_GOGGLES_LAYER    19
+#define HO_EARS_LAYER       20
+#define HO_FACEMASK_LAYER   21
+#define HO_HEAD_LAYER       22
+#define HO_COLLAR_LAYER     23
+#define HO_HANDCUFF_LAYER   24
+#define HO_INHAND_LAYER     25
+#define HO_FIRE_LAYER       26 //If you're on fire
+#define TOTAL_LAYERS        26
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -143,7 +144,6 @@ Please contact me on #coderbus IRC. ~Carn x
 
 //UPDATES OVERLAYS FROM OVERLAYS_LYING/OVERLAYS_STANDING
 /mob/living/carbon/human/update_icons()
-	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again
 	update_hud()		//TODO: remove the need for this
 	overlays.Cut()
 
@@ -180,22 +180,42 @@ Please contact me on #coderbus IRC. ~Carn x
 		var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
 		if(istype(head) && !head.is_stump())
 			var/image/I = head.get_eye_overlay()
-			if(I) overlays_to_apply += I
+			if(I) 
+				overlays_to_apply += I
 
 	if(auras)
 		overlays_to_apply += auras
 
 	overlays = overlays_to_apply
 
+/mob/living/carbon/human/proc/get_icon_scale_mult()
+	// If you want stuff like scaling based on species or something, here is a good spot to mix the numbers together.
+	return list(icon_scale_x, icon_scale_y)
+
+/mob/living/carbon/human/update_transform()
+
+	// First, get the correct size.
+	var/list/icon_scale_values = get_icon_scale_mult()
+	var/desired_scale_x = icon_scale_values[1]
+	var/desired_scale_y = icon_scale_values[2]
+
+	// Apply KEEP_TOGETHER so all the component overlays don't ignore PIXEL_SCALE 
+	// when scaling, or remove it if we aren't doing any scaling (due to cost).
+	if(desired_scale_x == 1 && desired_scale_y == 1)
+		appearance_flags &= ~KEEP_TOGETHER
+	else
+		appearance_flags |= KEEP_TOGETHER
+
+	// Scale/translate/rotate and apply the transform.
 	var/matrix/M = matrix()
 	if(lying)
 		M.Turn(90)
-		M.Scale(size_multiplier)
+		M.Scale(desired_scale_x, desired_scale_y)
 		M.Translate(1, -6-default_pixel_z)
 	else
-		M.Scale(size_multiplier)
-		M.Translate(0, 16*(size_multiplier-1))
-	animate(src, transform = M, time = ANIM_LYING_TIME)
+		M.Scale(desired_scale_x, desired_scale_y)
+		M.Translate(0, 16*(desired_scale_y-1))
+	animate(src, transform = M, time = transform_animate_time)
 
 var/global/list/damage_icon_parts = list()
 
@@ -265,7 +285,7 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 //BASE MOB SPRITE
-/mob/living/carbon/human/proc/update_body(var/update_icons=1)
+/mob/living/carbon/human/update_body(var/update_icons=1)
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
 
@@ -291,7 +311,7 @@ var/global/list/damage_icon_parts = list()
 		icon_key += "[lip_style]"
 	else
 		icon_key += "nolips"
-	var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[species.vision_organ ? species.vision_organ : BP_EYES]
+	var/obj/item/organ/internal/eyes/eyes = get_internal_organ(species.vision_organ || BP_EYES)
 	icon_key += istype(eyes) ? eyes.eye_colour : COLOR_BLACK
 
 	for(var/organ_tag in species.has_limbs)
@@ -375,9 +395,7 @@ var/global/list/damage_icon_parts = list()
 
 	//tail
 	update_tail_showing(0)
-
-	if(update_icons)
-		queue_icon_update()
+	..()
 
 //UNDERWEAR OVERLAY
 
@@ -645,7 +663,7 @@ var/global/list/damage_icon_parts = list()
 	if(client)
 		client.screen |= contents
 		if(hud_used)
-			hud_used.hidden_inventory_update() 	//Updates the screenloc of the items on the 'other' inventory bar
+			hud_used.hidden_inventory_update() //Updates the screenloc of the items on the 'other' inventory bar
 
 /mob/living/carbon/human/update_inv_handcuffed(var/update_icons=1)
 	if(handcuffed)
@@ -674,17 +692,18 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
-	overlays_standing[HO_TAIL_LAYER] = null
+	overlays_standing[HO_TAIL_OVER_LAYER] = null
+	overlays_standing[HO_TAIL_UNDER_LAYER] = null
 
 	var/species_tail = species.get_tail(src)
 
 	if(species_tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
 		var/icon/tail_s = get_tail_icon()
-		overlays_standing[HO_TAIL_LAYER] = image(tail_s, icon_state = "[species_tail]_s")
+		overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER] = image(tail_s, icon_state = "[species_tail]_s")
 		animate_tail_reset(0)
 
 	if(update_icons)
-		queue_icon_update()
+		update_icons()
 
 /mob/living/carbon/human/proc/get_tail_icon()
 	var/icon_key = "[species.get_icon_cache_uid(src)][skin_colour][hair_colour]"
@@ -704,9 +723,14 @@ var/global/list/damage_icon_parts = list()
 
 	return tail_icon
 
+/mob/living/carbon/human/set_dir()
+	. = ..()
+	if(. && species.get_tail())
+		update_tail_showing()
+
 
 /mob/living/carbon/human/proc/set_tail_state(var/t_state)
-	var/image/tail_overlay = overlays_standing[HO_TAIL_LAYER]
+	var/image/tail_overlay = overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER]
 
 	if(tail_overlay && species.get_tail_animation(src))
 		tail_overlay.icon_state = t_state
@@ -718,7 +742,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
 	var/t_state = "[species.get_tail(src)]_once"
 
-	var/image/tail_overlay = overlays_standing[HO_TAIL_LAYER]
+	var/image/tail_overlay = overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER]
 	if(tail_overlay && tail_overlay.icon_state == t_state)
 		return //let the existing animation finish
 
@@ -726,7 +750,7 @@ var/global/list/damage_icon_parts = list()
 	if(tail_overlay)
 		spawn(20)
 			//check that the animation hasn't changed in the meantime
-			if(overlays_standing[HO_TAIL_LAYER] == tail_overlay && tail_overlay.icon_state == t_state)
+			if(overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER] == tail_overlay && tail_overlay.icon_state == t_state)
 				animate_tail_stop()
 
 	if(update_icons)
@@ -822,6 +846,7 @@ var/global/list/damage_icon_parts = list()
 #undef HO_DAMAGE_LAYER
 #undef HO_SURGERY_LAYER
 #undef HO_UNDERWEAR_LAYER
+#undef HO_TAIL_UNDER_LAYER
 #undef HO_UNIFORM_LAYER
 #undef HO_ID_LAYER
 #undef HO_SHOES_LAYER
@@ -829,11 +854,11 @@ var/global/list/damage_icon_parts = list()
 #undef HO_BELT_LAYER
 #undef HO_EARS_LAYER
 #undef HO_SUIT_LAYER
-#undef HO_TAIL_LAYER
 #undef HO_GLASSES_LAYER
 #undef HO_BELT_LAYER_ALT
 #undef HO_SUIT_STORE_LAYER
 #undef HO_BACK_LAYER
+#undef HO_TAIL_OVER_LAYER
 #undef HO_HAIR_LAYER
 #undef HO_GOGGLES_LAYER
 #undef HO_FACEMASK_LAYER

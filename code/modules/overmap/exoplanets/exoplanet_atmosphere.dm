@@ -23,7 +23,7 @@
 	var/gas_list = get_mandatory_gasses()
 	for(var/g in gas_list)
 		total_moles = max(0, total_moles - gas_list[g])
-		var/decl/material/mat = decls_repository.get_decl(g)
+		var/decl/material/mat = GET_DECL(g)
 		if(mat.gas_flags & XGM_GAS_OXIDIZER)
 			badflag |= XGM_GAS_FUEL
 		if(mat.gas_flags & XGM_GAS_FUEL)
@@ -39,7 +39,7 @@
 
 	// Prune gases that won't stay gaseous
 	for(var/g in newgases)
-		var/decl/material/mat = decls_repository.get_decl(g)
+		var/decl/material/mat = GET_DECL(g)
 		if(mat.gas_flags & badflag)
 			newgases -= g
 		if(mat.gas_condensation_point && mat.gas_condensation_point <= atmosphere.temperature)
@@ -52,14 +52,14 @@
 	while(i <= gasnum && total_moles && newgases.len)
 		if(badflag)
 			for(var/g in newgases)
-				var/decl/material/mat = decls_repository.get_decl(g)
+				var/decl/material/mat = GET_DECL(g)
 				if(mat.gas_flags & badflag)
 					newgases -= g
 		var/ng = pick_n_take(newgases)	//pick a gas
 
 
 		// Make sure atmosphere is not flammable
-		var/decl/material/mat = decls_repository.get_decl(ng)
+		var/decl/material/mat = GET_DECL(ng)
 		if(mat.gas_flags & XGM_GAS_OXIDIZER)
 			badflag |= XGM_GAS_FUEL
 		if(mat.gas_flags & XGM_GAS_FUEL)

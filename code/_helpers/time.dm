@@ -3,10 +3,10 @@
 		minutes = text2num(minutes)
 
 	if (minutes < 0)
-		crash_with("Negative minutes value supplied to minutes_to_readable().")
+		PRINT_STACK_TRACE("Negative minutes value supplied to minutes_to_readable().")
 		return "INFINITE"
 	else if (isnull(minutes))
-		crash_with("Null minutes value supplied to minutes_to_readable().")
+		PRINT_STACK_TRACE("Null minutes value supplied to minutes_to_readable().")
 		return "BAD INPUT"
 	
 	var/hours = 0
@@ -85,7 +85,7 @@ var/next_station_date_change = 1 DAY
 	return time2text(station_time_in_ticks, "hh:mm:ss")
 
 /* Returns 1 if it is the selected month and day */
-proc/isDay(var/month, var/day)
+/proc/isDay(var/month, var/day)
 	if(isnum(month) && isnum(day))
 		var/MM = text2num(time2text(world.timeofday, "MM")) // get the current month
 		var/DD = text2num(time2text(world.timeofday, "DD")) // get the current day

@@ -72,7 +72,7 @@
 	playsound(usr, 'mods/species/ascent/sounds/razorweb_break.ogg', 50)
 	qdel_self()
 
-/obj/effect/razorweb/attack_hand(mob/living/user)
+/obj/effect/razorweb/attack_hand(mob/user)
 	user.visible_message(SPAN_DANGER("\The [user] yanks on \the [src]!"))
 	entangle(user, TRUE)
 	qdel_self()
@@ -153,7 +153,7 @@
 		if(E && !armour_prob)
 			E = H.organs_by_name[E]
 			visible_message(SPAN_DANGER("The crystalline strands slice straight through \the [H]'s [E.amputation_point || E.name]!"))
-			E.droplimb()
+			E.dismember()
 			severed = TRUE
 
 	if(!severed && !armour_prob)

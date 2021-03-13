@@ -28,7 +28,7 @@
 
 /datum/graph/Destroy(forced)
 	if(!forced && (length(nodes) || LAZYLEN(pending_connections) || LAZYLEN(pending_disconnections)))
-		crash_with("Prevented attempt to delete a network that still has nodes: [length(nodes)] - [LAZYLEN(pending_connections)] - [LAZYLEN(pending_disconnections)]")
+		PRINT_STACK_TRACE("Prevented attempt to delete a network that still has nodes: [length(nodes)] - [LAZYLEN(pending_connections)] - [LAZYLEN(pending_disconnections)]")
 		return QDEL_HINT_LETMELIVE
 	. = ..()
 
@@ -247,7 +247,7 @@
 		var/datum/node/physical/N = pending_movements[pending_movements.len]
 		pending_movements.len--
 		if(!N.holder.CheckNodeNeighbours())
-			crash_with("Invalid override of CheckNodeNeighbours() - Shall return true: [log_info_line(N.holder)]")
+			PRINT_STACK_TRACE("Invalid override of CheckNodeNeighbours() - Shall return true: [log_info_line(N.holder)]")
 
 	LAZYCLEARLIST(pending_movements)
 

@@ -396,6 +396,9 @@ STARLIGHT 0
 ## Uncomment to enable auto-stealthing staff who are AFK for more than specified minutes
 # AUTOSTEALTH 30
 
+## Set to 0/1 to disable/enable automatic admin rights for users connecting from the host the server is running on.
+AUTO_LOCAL_ADMIN 0
+
 ## How many loadout points are available. Use 0 to disable loadout, and any negative number to indicate infinite points.
 MAX_GEAR_COST 10
 
@@ -425,6 +428,12 @@ RADIATION_LOWER_LIMIT 0.15
 
 ## Uncomment this to modify the number of actions permitted per interval before being kicked for spam.
 #MAX_ACTS_PER_INTERVAL 140
+
+## Is the panic bunker currently on by default.
+#PANIC_BUNKER
+
+## A message when user did not pass the panic bunker.
+#PANIC_BUNKER_MESSAGE Sorry! The panic bunker is enabled. Please head to our Discord or forum to get yourself added to the panic bunker bypass.
 
 ##Clients will be unable to connect unless their version is equal to or higher than this (a number, e.g. 511)
 #MINIMUM_BYOND_VERSION

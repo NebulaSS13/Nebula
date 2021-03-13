@@ -1,4 +1,3 @@
-
 /*
  *
  *  Mob Unit Tests.
@@ -33,7 +32,7 @@
 			var/species_organ = H.species.breathing_organ
 			var/obj/item/organ/internal/lungs/L
 			H.apply_effect(20, STUN, 0)
-			L = H.internal_organs_by_name[species_organ]
+			L = H.get_internal_organ(species_organ)
 			L.last_successful_breath = -INFINITY
 			test_subjects[S.name] = list(H, damage_check(H, OXY))
 	return 1
@@ -64,7 +63,7 @@
 
 /var/default_mobloc = null
 
-proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living/carbon/human)
+/proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living/carbon/human)
 	var/list/test_result = list("result" = FAILURE, "msg"    = "", "mobref" = null)
 
 	if(isnull(mobloc))
@@ -94,7 +93,7 @@ proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living
 //Generic Check
 // TODO: Need to make sure I didn't just recreate the wheel here.
 
-proc/damage_check(var/mob/living/M, var/damage_type)
+/proc/damage_check(var/mob/living/M, var/damage_type)
 	var/loss = null
 
 	switch(damage_type)
@@ -108,7 +107,7 @@ proc/damage_check(var/mob/living/M, var/damage_type)
 			loss = M.getOxyLoss()
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				var/obj/item/organ/internal/lungs/L = H.internal_organs_by_name["lungs"]
+				var/obj/item/organ/internal/lungs/L = H.get_internal_organ(BP_LUNGS)
 				if(L)
 					loss = L.oxygen_deprivation
 		if(CLONE)
@@ -169,7 +168,7 @@ proc/damage_check(var/mob/living/M, var/damage_type)
 		fail("Test needs to be re-written, mob has a stat = [H.stat]")
 		return 0
 
-	if(H.sleeping)
+	if(HAS_STATUS(H, STAT_ASLEEP))
 		fail("Test needs to be re-written, mob is sleeping for some unknown reason")
 		return 0
 
@@ -181,7 +180,7 @@ proc/damage_check(var/mob/living/M, var/damage_type)
 		var/species_organ = H.species.breathing_organ
 		var/obj/item/organ/internal/lungs/L
 		if(species_organ)
-			L = H.internal_organs_by_name[species_organ]
+			L = H.get_internal_organ(species_organ)
 		if(L)
 			L.last_successful_breath = -INFINITY
 
@@ -190,6 +189,7 @@ proc/damage_check(var/mob/living/M, var/damage_type)
 	var/ending_damage = damage_check(H, damagetype)
 
 	var/ending_health = H.health
+	qdel(H)
 
 	// Now test this stuff.
 
@@ -237,27 +237,27 @@ proc/damage_check(var/mob/living/M, var/damage_type)
 // Human damage check.
 // =================================================================
 
-datum/unit_test/mob_damage/brute
+/datum/unit_test/mob_damage/brute
 	name = "MOB: Human Brute damage check"
 	damagetype = BRUTE
 
-datum/unit_test/mob_damage/fire
+/datum/unit_test/mob_damage/fire
 	name = "MOB: Human Fire damage check"
 	damagetype = BURN
 
-datum/unit_test/mob_damage/tox
+/datum/unit_test/mob_damage/tox
 	name = "MOB: Human Toxin damage check"
 	damagetype = TOX
 
-datum/unit_test/mob_damage/oxy
+/datum/unit_test/mob_damage/oxy
 	name = "MOB: Human Oxygen damage check"
 	damagetype = OXY
 
-datum/unit_test/mob_damage/clone
+/datum/unit_test/mob_damage/clone
 	name = "MOB: Human Clone damage check"
 	damagetype = CLONE
 
-datum/unit_test/mob_damage/halloss
+/datum/unit_test/mob_damage/halloss
 	name = "MOB: Human Halloss damage check"
 	damagetype = PAIN
 
@@ -421,7 +421,7 @@ datum/unit_test/mob_damage/halloss
 			failed[mobtype] = "invalid meat_type ([mtype]) but meat_amount above zero"
 
 		var/smat =   initial(animal.skin_material)
-		var/stype =  (smat && istype(decls_repository.get_decl(smat), /decl/material))
+		var/stype =  (smat && istype(GET_DECL(smat), /decl/material))
 		var/scount = initial(animal.skin_amount) > 0
 		if(stype && scount)
 			check_skin += mobtype
@@ -431,7 +431,7 @@ datum/unit_test/mob_damage/halloss
 			failed[mobtype] = "invalid skin_material ([smat]) but skin_amount above zero"
 
 		var/bmat =   initial(animal.bone_material)
-		var/btype =  (bmat && istype(decls_repository.get_decl(bmat), /decl/material))
+		var/btype =  (bmat && istype(GET_DECL(bmat), /decl/material))
 		var/bcount = initial(animal.bone_amount) > 0
 		if(btype && bcount)
 			check_bones += mobtype

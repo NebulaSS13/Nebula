@@ -21,7 +21,7 @@
 		return
 
 	//No goals to display
-	if(!(allow_modification || LAZYLEN(mind.goals)) && !(LAZYLEN(mind.assigned_job.department_refs)))
+	if(!(allow_modification || LAZYLEN(mind.goals)) && !(LAZYLEN(mind.assigned_job.department_types)))
 		return
 
 	to_chat(src, "<hr>")
@@ -32,12 +32,13 @@
 	if(allow_modification && LAZYLEN(mind.goals) < 5)
 		to_chat(src, SPAN_NOTICE("<a href='?src=\ref[mind];add_goal=1;add_goal_caller=\ref[mind.current]'>Add Random Goal</a>"))
 	
-	for(var/dept_key in mind.assigned_job.department_refs)
-		var/datum/department/dept = SSdepartments.departments[dept_key]
-		if(LAZYLEN(dept.goals))
-			to_chat(src, SPAN_NOTICE("<br><br><font size = 3><b>This round, [dept.title] has the following departmental goals:</b></font><br>[jointext(dept.summarize_goals(show_success), "<br>")]"))
-		else
-			to_chat(src, SPAN_NOTICE("<br><br><font size = 3><b>[dept.title] has no departmental goals this round.</b></font>"))
+	for(var/dept_key in mind.assigned_job.department_types)
+		var/decl/department/dept = SSjobs.get_department_by_type(dept_key)
+		if(dept)
+			if(LAZYLEN(dept.goals))
+				to_chat(src, SPAN_NOTICE("<br><br><font size = 3><b>This round, [dept.name] has the following [dept.noun_adj] goals:</b></font><br>[jointext(dept.summarize_goals(show_success), "<br>")]"))
+			else
+				to_chat(src, SPAN_NOTICE("<br><br><font size = 3><b>[dept.name] has no [dept.noun_adj] goals this round.</b></font>"))
 
 	if(LAZYLEN(mind.goals))
 		to_chat(mind.current, SPAN_NOTICE("<br><br>You can check your round goals with the <b>Show Goals</b> verb."))

@@ -220,7 +220,7 @@
 			var/injection_delay = 3 SECONDS
 			if(injection_status == INJECTION_PORT)
 				injection_delay += INJECTION_PORT_DELAY
-			if(istype(C, /mob/living/carbon/slime) || !C.dna || !injection_status)
+			if(!C.dna || !injection_status)
 				activate_pin(3)
 				return
 			C.visible_message("<span class='danger'>\The [acting_object] is trying to take a blood sample from [C]!</span>", \
@@ -421,7 +421,7 @@
 		if(1)
 			var/cont[0]
 			for(var/rtype in reagents.reagent_volumes)
-				var/decl/material/RE = decls_repository.get_decl(rtype)
+				var/decl/material/RE = GET_DECL(rtype)
 				cont += RE.name
 			set_pin_data(IC_OUTPUT, 3, cont)
 			push_data()
@@ -488,7 +488,7 @@
 		return
 
 	for(var/rtype in source.reagents.reagent_volumes)
-		var/decl/material/G = decls_repository.get_decl(rtype)
+		var/decl/material/G = GET_DECL(rtype)
 		if(!direction_mode)
 			if(G.name in demand)
 				source.reagents.trans_type_to(target, G.type, transfer_amount)
@@ -517,7 +517,7 @@
 	complexity = 4
 	power_draw_per_use = 5
 
-/obj/item/integrated_circuit/input/funnel/attackby_react(obj/item/I, mob/living/user, intent)
+/obj/item/integrated_circuit/input/funnel/attackby_react(obj/item/I, mob/user, intent)
 	var/atom/movable/target = get_pin_data_as_type(IC_INPUT, 1, /atom/movable)
 	var/obj/item/chems/container = I
 

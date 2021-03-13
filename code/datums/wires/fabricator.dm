@@ -44,6 +44,12 @@
 			else
 				A.fab_status_flags |= FAB_DISABLED
 
+/datum/wires/fabricator/proc/reset_flag(var/index, var/flag)
+	var/obj/machinery/fabricator/A = holder
+	if(A && !IsIndexCut(index) && flag)
+		A.fab_status_flags &= ~flag
+		Interact(usr)
+
 /datum/wires/fabricator/UpdatePulsed(index)
 	if(IsIndexCut(index))
 		return
@@ -54,28 +60,21 @@
 				A.fab_status_flags &= ~FAB_HACKED
 			else
 				A.fab_status_flags |= FAB_HACKED
-			spawn(50)
-				if(A && !IsIndexCut(index))
-					A.fab_status_flags &= ~FAB_HACKED
-					Interact(usr)
+			addtimer(CALLBACK(src, .proc/reset_flag, index, FAB_HACKED), 5 SECONDS)
+
 		if(AUTOLATHE_SHOCK_WIRE)
 			if(A.fab_status_flags & FAB_SHOCKED)
 				A.fab_status_flags &= ~FAB_SHOCKED
 			else
 				A.fab_status_flags |= FAB_SHOCKED
-			spawn(50)
-				if(A && !IsIndexCut(index))
-					A.fab_status_flags &= ~FAB_SHOCKED
-					Interact(usr)
+			addtimer(CALLBACK(src, .proc/reset_flag, index, FAB_SHOCKED), 5 SECONDS)
+
 		if(AUTOLATHE_DISABLE_WIRE)
 			if(A.fab_status_flags & FAB_DISABLED)
 				A.fab_status_flags &= ~FAB_DISABLED
 			else
 				A.fab_status_flags |= FAB_DISABLED
-			spawn(50)
-				if(A && !IsIndexCut(index))
-					A.fab_status_flags &= ~FAB_DISABLED
-					Interact(usr)
+			addtimer(CALLBACK(src, .proc/reset_flag, index, FAB_DISABLED), 5 SECONDS)
 
 #undef AUTOLATHE_HACK_WIRE
 #undef AUTOLATHE_SHOCK_WIRE

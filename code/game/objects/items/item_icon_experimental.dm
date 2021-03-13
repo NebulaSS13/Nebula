@@ -86,7 +86,8 @@ var/list/bodypart_to_slot_lookup_table = list(
 		var/fallback = get_fallback_slot(slot)
 		if(!fallback)
 			return new /image
-		use_state = "[bodytype]-[fallback]"
+		slot = fallback
+		use_state = "[bodytype]-[slot]"
 
 	if(!check_state_in_icon(use_state, useicon))
 		return new /image

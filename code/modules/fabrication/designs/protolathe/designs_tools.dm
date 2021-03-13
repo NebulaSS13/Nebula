@@ -47,7 +47,7 @@
 /datum/fabricator_recipe/protolathe/tool/advancedsyringe
 	path = /obj/item/chems/syringe/advanced
 
-/datum/fabricator_recipe/protolathe/tool/slime_scanner
+/datum/fabricator_recipe/protolathe/tool/xenoscanner
 	path = /obj/item/scanner/xenobio
 
 /datum/fabricator_recipe/protolathe/tool/robot_scanner

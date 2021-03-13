@@ -28,7 +28,8 @@
 
 /obj/item/screwdriver/experimental_mob_overlay()
 	var/image/res = ..()
-	res.color = handle_color
+	if(res)
+		res.color = handle_color
 	return res
 
 /obj/item/screwdriver/get_on_belt_overlay()

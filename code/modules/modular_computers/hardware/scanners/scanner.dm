@@ -50,7 +50,7 @@
 
 /obj/item/stock_parts/computer/scanner/proc/do_on_afterattack(mob/user, atom/target, proximity)
 
-/obj/item/stock_parts/computer/scanner/attackby(obj/W, mob/living/user)
+/obj/item/stock_parts/computer/scanner/attackby(obj/W, mob/user)
 	do_on_attackby(user, W)
 
 /obj/item/stock_parts/computer/scanner/proc/do_on_attackby(mob/user, atom/target)

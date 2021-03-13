@@ -1,3 +1,3 @@
 /mob/living/carbon/brain/Login()
 	..()
-	sleeping = 0
+	set_status(STAT_ASLEEP, 0)

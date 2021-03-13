@@ -473,7 +473,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 			// channel tag the signal
 			var/list/data = get_channel_info(signal.frequency)
-			signal.data["channel_tag"] = data[1]
+			signal.data["channel_tag"] =   data[1]
 			signal.data["channel_color"] = data[2]
 
 			//Is this a test signal? Bypass logging
@@ -497,21 +497,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 				log.parameters["realname"] = signal.data["realname"]
 				log.parameters["language"] = signal.data["language"]
 
-				var/race = "Unknown"
-				if(ishuman(M) || isbrain(M))
-					race = "Sapient Race"
-					log.parameters["intelligible"] = 1
-				else if(M.isMonkey())
-					race = "Monkey"
-				else if(issilicon(M))
-					race = "Artificial Life"
-					log.parameters["intelligible"] = 1
-				else if(isslime(M))
-					race = "Slime"
-				else if(isanimal(M))
-					race = "Domestic Animal"
-
-				log.parameters["race"] = race
+				var/list/tcomms_data = M.get_telecomms_race_info()
+				log.parameters["race"] =         tcomms_data[1]
+				log.parameters["intelligible"] = tcomms_data[2]
 
 				if(!istype(M, /mob/new_player) && M)
 					log.parameters["uspeech"] = M.universal_speak

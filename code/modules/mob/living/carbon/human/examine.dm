@@ -150,13 +150,13 @@
 		msg += "<span class='warning'>[T.He] [T.is] [html_icon(buckled)] buckled to [buckled]!</span>\n"
 
 	//Jitters
-	if(is_jittery)
-		if(jitteriness >= 300)
-			msg += "<span class='warning'><B>[T.He] [T.is] convulsing violently!</B></span>\n"
-		else if(jitteriness >= 200)
-			msg += "<span class='warning'>[T.He] [T.is] extremely jittery.</span>\n"
-		else if(jitteriness >= 100)
-			msg += "<span class='warning'>[T.He] [T.is] twitching ever so slightly.</span>\n"
+	var/jitteriness = GET_STATUS(src, STAT_JITTER)
+	if(jitteriness >= 300)
+		msg += "<span class='warning'><B>[T.He] [T.is] convulsing violently!</B></span>\n"
+	else if(jitteriness >= 200)
+		msg += "<span class='warning'>[T.He] [T.is] extremely jittery.</span>\n"
+	else if(jitteriness >= 100)
+		msg += "<span class='warning'>[T.He] [T.is] twitching ever so slightly.</span>\n"
 
 	//Disfigured face
 	if(!skipface) //Disfigurement only matters for the head currently.

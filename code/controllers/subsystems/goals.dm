@@ -38,18 +38,21 @@ SUBSYSTEM_DEF(goals)
 	if(!length(pending_goals))
 		disable()
 
-/datum/controller/subsystem/goals/proc/update_department_goal(var/department_ref, var/goal_type, var/progress)
-	var/datum/department/dept = SSdepartments.departments[department_ref]
+/datum/controller/subsystem/goals/proc/update_department_goal(var/department_type, var/goal_type, var/progress)
+	var/decl/department/dept = SSjobs.get_department_by_type(department_type)
 	if(dept)
 		dept.update_progress(goal_type, progress)
 
 /datum/controller/subsystem/goals/proc/get_roundend_summary()
+
 	. = list()
-	for(var/thing in SSdepartments.departments)
-		var/datum/department/dept = SSdepartments.departments[thing]
-		if (LAZYLEN(SSjobs.titles_by_department(dept)))
-			. += "<b>[dept.title] had the following shift goals:</b>"
+	var/list/all_departments = decls_repository.get_decls_of_subtype(/decl/department)
+	for(var/dtype in all_departments)
+		var/decl/department/dept = all_departments[dtype]
+		if(LAZYLEN(dept.goals))
+			. += "<b>[dept.name] had the following [dept.noun] goals:</b>"
 			. += dept.summarize_goals(show_success = TRUE)
+
 	if(LAZYLEN(.))
 		. = "<br>[jointext(., "<br>")]"
 	else

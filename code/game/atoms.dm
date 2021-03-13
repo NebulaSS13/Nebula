@@ -14,6 +14,10 @@
 	var/list/climbers
 	var/climb_speed_mult = 1
 	var/explosion_resistance = 0
+	var/icon_scale_x = 1 // Holds state of horizontal scaling applied.
+	var/icon_scale_y = 1 // Ditto, for vertical scaling.
+	var/icon_rotation = 0 // And one for rotation as well.
+	var/transform_animate_time = 0 // If greater than zero, transform-based adjustments (scaling, rotating) will visually occur over this time.
 
 /atom/New(loc, ...)
 	//atom creation method that preloads variables at creation
@@ -48,7 +52,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	if(atom_flags & ATOM_FLAG_INITIALIZED)
-		crash_with("Warning: [src]([type]) initialized multiple times!")
+		PRINT_STACK_TRACE("Warning: [src]([type]) initialized multiple times!")
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
 	if(light_max_bright && light_outer_range)
@@ -67,8 +71,15 @@
 	return
 
 /atom/Destroy()
+	overlays.Cut()
+	underlays.Cut()
 	global.is_currently_exploding -= src
 	QDEL_NULL(reagents)
+	if(light)
+		light.destroy()
+		light = null
+	if(opacity)
+		updateVisibility(src)
 	. = ..()
 
 /atom/proc/reveal_blood()
@@ -310,7 +321,7 @@ its easier to just keep the beam vertical.
 /atom/proc/try_detonate_reagents(var/severity = 3)
 	if(reagents)
 		for(var/rtype in reagents.reagent_volumes)
-			var/decl/material/R = decls_repository.get_decl(rtype)
+			var/decl/material/R = GET_DECL(rtype)
 			R.explosion_act(src, severity)
 
 /atom/proc/explosion_act(var/severity)
@@ -545,14 +556,14 @@ its easier to just keep the beam vertical.
 
 /atom/proc/object_shaken()
 	for(var/mob/living/M in climbers)
-		M.Weaken(1)
+		SET_STATUS_MAX(M, STAT_WEAK, 1)
 		to_chat(M, "<span class='danger'>You topple as you are shaken off \the [src]!</span>")
 		climbers.Cut(1,2)
 
 	for(var/mob/living/M in get_turf(src))
 		if(M.lying) return //No spamming this on people.
 
-		M.Weaken(3)
+		SET_STATUS_MAX(M, STAT_WEAK, 3)
 		to_chat(M, "<span class='danger'>You topple as \the [src] moves under you!</span>")
 
 		if(prob(25))
@@ -577,13 +588,6 @@ its easier to just keep the beam vertical.
 			H.UpdateDamageIcon()
 			H.updatehealth()
 	return
-
-/atom/MouseDrop_T(mob/target, mob/user)
-	var/mob/living/H = user
-	if(istype(H) && can_climb(H) && target == user)
-		do_climb(target)
-	else
-		return ..()
 
 /atom/proc/get_color()
 	return color
@@ -611,3 +615,23 @@ its easier to just keep the beam vertical.
 
 /atom/proc/isflamesource()
 	. = FALSE
+
+// Transform setters.
+/atom/proc/set_rotation(new_rotation)
+	icon_rotation = new_rotation
+	update_transform()
+
+/atom/proc/set_scale(new_scale_x, new_scale_y)
+	if(isnull(new_scale_y))
+		new_scale_y = new_scale_x
+	if(new_scale_x != 0)
+		icon_scale_x = new_scale_x
+	if(new_scale_y != 0)
+		icon_scale_y = new_scale_y
+	update_transform()
+
+/atom/proc/update_transform()
+	var/matrix/M = matrix()
+	M.Scale(icon_scale_x, icon_scale_y)
+	M.Turn(icon_rotation)
+	animate(src, transform = M, transform_animate_time)

@@ -152,16 +152,13 @@
 	return panel_open
 
 /obj/machinery/portable_atmospherics/proc/log_open()
-	if(air_contents.gas.len == 0)
-		return
-
-	var/gases = ""
-	for(var/gas in air_contents.gas)
-		if(gases)
-			gases += ", [gas]"
-		else
-			gases = gas
-	log_and_message_admins("opened [src.name], containing [gases].")
+	if(length(air_contents?.gas))
+		var/list/gases
+		for(var/gas in air_contents.gas)
+			var/decl/material/gasdata = GET_DECL(gas)
+			LAZYADD(gases, gasdata.gas_name)
+		if(length(gases))
+			log_and_message_admins("opened \the [src], containing [english_list(gases)].")
 
 /obj/machinery/portable_atmospherics/powered/dismantle()
 	if(isturf(loc))

@@ -30,6 +30,8 @@
 		/decl/material/liquid/mutagenics,
 		/decl/material/liquid/acid
 	)
+	var/open_sound = 'sound/machines/podopen.ogg'
+	var/close_sound = 'sound/machines/podclose.ogg'
 
 /obj/machinery/sleeper/standard/Initialize(mapload, d, populate_parts)
 	. = ..()
@@ -54,7 +56,7 @@
 		return FALSE
 	if(!emagged)
 		for(var/rid in canister.reagents?.reagent_volumes)
-			var/decl/material/reagent = decls_repository.get_decl(rid)
+			var/decl/material/reagent = GET_DECL(rid)
 			for(var/banned_type in banned_chem_types)
 				if(istype(reagent, banned_type))
 					to_chat(user, SPAN_WARNING("Automatic safety checking indicates the present of a prohibited substance in this canister."))
@@ -253,18 +255,17 @@
 		return TRUE
 	return ..()
 
-/obj/machinery/sleeper/MouseDrop_T(var/mob/target, var/mob/user)
-	if(!CanMouseDrop(target, user))
-		return
-	if(!istype(target))
-		return
-	if(target.buckled)
-		to_chat(user, SPAN_WARNING("Unbuckle the subject before attempting to move them."))
-		return
-	if(panel_open)
-		to_chat(user, SPAN_WARNING("Close the maintenance panel before attempting to place the subject in the sleeper."))
-		return
-	go_in(target, user)
+/obj/machinery/sleeper/receive_mouse_drop(var/atom/dropping, var/mob/user)
+	. = ..()
+	if(!. && ismob(dropping))
+		var/mob/target = dropping
+		if(target.buckled)
+			to_chat(user, SPAN_WARNING("Unbuckle the subject before attempting to move them."))
+		else if(panel_open)
+			to_chat(user, SPAN_WARNING("Close the maintenance panel before attempting to place the subject in the sleeper."))
+		else 
+			go_in(target, user)
+		return TRUE
 
 /obj/machinery/sleeper/relaymove(var/mob/user)
 	..()
@@ -314,6 +315,8 @@
 			to_chat(user, SPAN_WARNING("\The [src] is already occupied."))
 			return
 		set_occupant(M)
+		if(close_sound)
+			playsound(src, close_sound, 40)
 
 /obj/machinery/sleeper/proc/go_out()
 	if(!occupant)
@@ -323,6 +326,8 @@
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.dropInto(loc)
 	set_occupant(null)
+	if(open_sound)
+		playsound(src, open_sound, 40)
 
 	for(var/obj/O in (contents - (component_parts + loaded_canisters))) // In case an object was dropped inside or something. Excludes the beaker and component parts.
 		if(O != beaker)

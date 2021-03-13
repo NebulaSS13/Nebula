@@ -66,7 +66,7 @@
 	data["authenticated"] = is_autenthicated(user)
 	data["boss_short"] = GLOB.using_map.boss_short
 
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
 	data["current_security_level_ref"] = any2ref(security_state.current_security_level)
 	data["current_security_level_title"] = security_state.current_security_level.name
 
@@ -97,6 +97,7 @@
 			option["option_target"] = EO.option_target
 			option["needs_syscontrol"] = EO.needs_syscontrol
 			option["silicon_allowed"] = EO.silicon_allowed
+			option["requires_shunt"] = EO.requires_shunt
 			processed_evac_options[++processed_evac_options.len] = option
 	data["evac_options"] = processed_evac_options
 
@@ -111,6 +112,28 @@
 	if(program)
 		return program.can_run(user, program.computer.get_network())
 	return 1
+
+/datum/nano_module/program/comm/proc/get_shunt()
+	if(isnull(program?.computer))
+		return FALSE
+
+	var/obj/comp = program.computer.get_physical_host()
+
+	if(isnull(comp))
+		return FALSE
+
+	var/obj/effect/overmap/visitable/ship/sector = comp.get_owning_overmap_object()
+
+	if(!istype(sector))
+		return
+
+	for(var/obj/machinery/ftl_shunt/core/C in SSmachines.machinery)
+		if(C.z in sector.map_z)
+			if(C.get_status() != 2) //magic number because defines are lower than this file.
+				return TRUE
+
+	return FALSE
+
 
 /datum/nano_module/program/comm/proc/obtain_message_listener()
 	if(program)
@@ -194,6 +217,8 @@
 					return
 				if (selected_evac_option.needs_syscontrol && !ntn_cont)
 					return
+				if (selected_evac_option.requires_shunt && !get_shunt())
+					return
 				var/confirm = alert("Are you sure you want to [selected_evac_option.option_desc]?", name, "No", "Yes")
 				if (confirm == "Yes" && can_still_topic())
 					SSevac.evacuation_controller.handle_evac_option(selected_evac_option.option_target, user)
@@ -218,7 +243,7 @@
 		if("setalert")
 			. = 1
 			if(is_autenthicated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
-				var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+				var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
 				var/decl/security_level/target_level = locate(href_list["target"]) in security_state.comm_console_security_levels
 				if(target_level && security_state.can_switch_to(target_level))
 					var/confirm = alert("Are you sure you want to change the alert level to [target_level.name]?", name, "No", "Yes")

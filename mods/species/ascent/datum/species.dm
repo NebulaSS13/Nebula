@@ -97,10 +97,10 @@
 	)
 
 	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_ASCENT,
-		TAG_HOMEWORLD = HOME_SYSTEM_KHARMAANI,
-		TAG_FACTION =   FACTION_ASCENT_ALATE,
-		TAG_RELIGION =  RELIGION_KHARMAANI
+		TAG_CULTURE =   /decl/cultural_info/culture/ascent,
+		TAG_HOMEWORLD = /decl/cultural_info/location/kharmaani,
+		TAG_FACTION =   /decl/cultural_info/faction/ascent_alate,
+		TAG_RELIGION =  /decl/cultural_info/religion/kharmaani
 	)
 
 	descriptors = list(
@@ -172,10 +172,10 @@
 	)
 
 	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_ASCENT,
-		TAG_HOMEWORLD = HOME_SYSTEM_KHARMAANI,
-		TAG_FACTION =   FACTION_ASCENT_GYNE,
-		TAG_RELIGION =  RELIGION_KHARMAANI
+		TAG_CULTURE =   /decl/cultural_info/culture/ascent,
+		TAG_HOMEWORLD = /decl/cultural_info/location/kharmaani,
+		TAG_FACTION =   /decl/cultural_info/faction/ascent_gyne,
+		TAG_RELIGION =  /decl/cultural_info/religion/kharmaani
 	)
 
 /decl/species/mantid/gyne/New()
@@ -237,10 +237,10 @@
 		BP_R_FOOT =       list("path" = /obj/item/organ/external/foot/right/insectoid)
 		)
 	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_ASCENT,
-		TAG_HOMEWORLD = HOME_SYSTEM_KHARMAANI,
-		TAG_FACTION =   FACTION_ASCENT_SERPENTID,
-		TAG_RELIGION =  RELIGION_KHARMAANI
+		TAG_CULTURE =   /decl/cultural_info/culture/ascent,
+		TAG_HOMEWORLD = /decl/cultural_info/location/kharmaani,
+		TAG_FACTION =   /decl/cultural_info/faction/ascent_serpentid,
+		TAG_RELIGION =  /decl/cultural_info/religion/kharmaani
 	)
 	hidden_from_codex = TRUE
 	silent_steps = TRUE
@@ -390,7 +390,7 @@
 
 	H.remove_cloaking_source(src)
 
-	var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
+	var/obj/item/organ/internal/B = H.get_internal_organ(BP_BRAIN)
 	if(istype(B,/obj/item/organ/internal/brain/insectoid/serpentid))
 		var/obj/item/organ/internal/brain/insectoid/serpentid/N = B
 		tally += N.lowblood_tally * 2

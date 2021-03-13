@@ -1,7 +1,9 @@
+/mob/living/carbon/human/monkey/punpun
+	real_name = "Pun Pun"
+	gender = MALE
+
 /mob/living/carbon/human/monkey/punpun/Initialize()
 	. = ..()
-	name = "Pun Pun"
-	real_name = name
 	var/obj/item/clothing/C
 	if(prob(50))
 		C = new /obj/item/clothing/under/waiter/monke(src)
@@ -31,9 +33,6 @@
 
 /mob/living/carbon/human/blank/Initialize(mapload)
 	. = ..(mapload, "Vat-Grown Human")
-
-/mob/living/carbon/human/blank/Initialize()
-	. = ..()
 	var/number = "[pick(possible_changeling_IDs)]-[rand(1,30)]"
 	fully_replace_character_name("Subject [number]")
 	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/blank_subject)

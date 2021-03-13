@@ -23,7 +23,7 @@
 				to_chat(src, "<span class = 'warning'>\The [S] pulls \the [hand] from your grip!</span>")
 		if(!lying && (!shoes || !(shoes.item_flags & ITEM_FLAG_NOSLIP)) && (!species || !(species.check_no_slip(src))) && prob(current_size*5))
 			to_chat(src, "<span class='danger'>A strong gravitational force slams you to the ground!</span>")
-			Weaken(current_size)
+			SET_STATUS_MAX(src, STAT_WEAK, current_size)
 	..()
 
 /obj/singularity_act()

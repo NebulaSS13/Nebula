@@ -221,7 +221,7 @@
 	return istype(get_equipped_item(slot_l_ear_str), /obj/item/radio/headset) || istype(get_equipped_item(slot_r_ear_str), /obj/item/radio/headset)
 
 /mob/living/carbon/human/welding_eyecheck()
-	var/obj/item/organ/internal/eyes/E = src.internal_organs_by_name[species.vision_organ]
+	var/obj/item/organ/internal/eyes/E = src.get_internal_organ(species.vision_organ)
 	if(!E)
 		return
 	var/safety = eyecheck()
@@ -230,12 +230,12 @@
 			to_chat(src, "<span class='warning'>Your eyes sting a little.</span>")
 			E.damage += rand(1, 2)
 			if(E.damage > 12)
-				eye_blurry += rand(3,6)
+				ADJ_STATUS(src, STAT_BLURRY, rand(3,6))
 		if(FLASH_PROTECTION_MINOR)
 			to_chat(src, "<span class='warning'>Your eyes stings!</span>")
 			E.damage += rand(1, 4)
 			if(E.damage > 10)
-				eye_blurry += rand(3,6)
+				ADJ_STATUS(src, STAT_BLURRY, rand(3,6))
 				E.damage += rand(1, 4)
 		if(FLASH_PROTECTION_NONE)
 			to_chat(src, "<span class='warning'>Your eyes burn!</span>")
@@ -244,15 +244,15 @@
 				E.damage += rand(4,10)
 		if(FLASH_PROTECTION_REDUCED)
 			to_chat(src, "<span class='danger'>Your equipment intensifies the welder's glow. Your eyes itch and burn severely.</span>")
-			eye_blurry += rand(12,20)
+			ADJ_STATUS(src, STAT_BLURRY, rand(12,20))
 			E.damage += rand(12, 16)
 	if(safety<FLASH_PROTECTION_MAJOR)
 		if(E.damage > 10)
 			to_chat(src, "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>")
 		if (E.damage >= E.min_bruised_damage)
 			to_chat(src, "<span class='danger'>You go blind!</span>")
-			eye_blind = 5
-			eye_blurry = 5
+			set_status(STAT_BLIND, 5)
+			set_status(STAT_BLURRY, 5)
 			disabilities |= NEARSIGHTED
 			spawn(100)
 				disabilities &= ~NEARSIGHTED
@@ -318,7 +318,7 @@
 
 	if(rogue_entries.len) // These entries did not cleanup after themselves before being destroyed
 		var/rogue_entries_as_string = jointext(map(rogue_entries, /proc/log_info_line), ", ")
-		crash_with("[log_info_line(src)] - Following cloaking entries were removed during cleanup: [rogue_entries_as_string]")
+		PRINT_STACK_TRACE("[log_info_line(src)] - Following cloaking entries were removed during cleanup: [rogue_entries_as_string]")
 
 	UNSETEMPTY(cloaking_sources)
 	return !cloaking_sources // If cloaking_sources wasn't initially null but is now, we've uncloaked
@@ -329,10 +329,7 @@
 	..()
 
 /mob/living/carbon/human/proc/has_meson_effect()
-	. = FALSE
-	for(var/obj/screen/equipment_screen in equipment_overlays) // check through our overlays to see if we have any source of the meson overlay
-		if (equipment_screen.icon_state == "meson_hud")
-			return TRUE
+	return (GLOB.global_hud.meson in equipment_overlays)
 
 /mob/living/carbon/human/proc/is_in_pocket(var/obj/item/I)
 	return I in list(l_store, r_store)

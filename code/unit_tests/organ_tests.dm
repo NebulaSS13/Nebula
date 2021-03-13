@@ -25,7 +25,7 @@
 /datum/unit_test/species_organ_creation/proc/check_internal_organs(var/mob/living/carbon/human/H, var/decl/species/species)
 	. = 1
 	for(var/organ_tag in species.has_organ)
-		var/obj/item/organ/internal/I = H.internal_organs_by_name[organ_tag]
+		var/obj/item/organ/internal/I = H.get_internal_organ(organ_tag)
 		if(!istype(I))
 			fail("[species.name] failed to register internal organ for tag \"[organ_tag]\" to internal_organs_by_name.")
 			. = 0
@@ -133,7 +133,7 @@
 	if(!(I in H.internal_organs))
 		fail("[H.species.name] internal organ [I] not in internal_organs.")
 		return 0
-	var/found = H.internal_organs_by_name[I.organ_tag]
+	var/found = H.get_internal_organ(I.organ_tag)
 	if(I != found)
 		fail("[H.species.name] internal organ [I] not in internal_organs_by_name. Organ tag was \"[I.organ_tag]\", found [found? found : "nothing"] instead.")
 		return 0
@@ -150,7 +150,7 @@
 	if(I in H.internal_organs)
 		fail("[H.species.name] internal organ [I] was not removed from internal_organs.")
 		return 0
-	var/found = H.internal_organs_by_name[I.organ_tag]
+	var/found = H.get_internal_organ(I.organ_tag)
 	if(found)
 		fail("[H.species.name] internal organ [I] was not removed from internal_organs_by_name. Organ tag was \"[I.organ_tag]\".")
 		return 0

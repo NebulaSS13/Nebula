@@ -18,7 +18,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /obj/effect/gas_overlay/Initialize(mapload, gas)
 	. = ..()
-	material = decls_repository.get_decl(gas)
+	material = GET_DECL(gas)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 	if(material.gas_tile_overlay)
@@ -271,8 +271,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		shard_icon = shard_type
 	if(!burn_armor)
 		burn_armor = brute_armor
-
 	generate_armor_values()
+
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
 	for(var/ctype in cocktails)
 		var/decl/cocktail/cocktail = cocktails[ctype]
@@ -426,8 +426,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 					if(W.wet > 1 && slipperiness <= 0)
 						W.unwet_floor(FALSE)
 					W.clean_blood()
-					for(var/mob/living/carbon/slime/M in W)
-						M.adjustToxLoss(rand(5, 10))
 
 	if(length(vapor_products))
 		var/volume = REAGENT_VOLUME(holder, type)
@@ -436,7 +434,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			T.assume_gas(vapor, (volume * vapor_products[vapor]), temperature)
 		holder.remove_reagent(type, volume)
 
-/decl/material/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
+/decl/material/proc/on_mob_life(var/mob/living/M, var/alien, var/location, var/datum/reagents/holder) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(QDELETED(src))
 		return // Something else removed us.
 	if(!istype(M))
@@ -461,7 +459,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(!(flags & IGNORE_MOB_SIZE) && location != CHEM_TOUCH)
 		effective *= (MOB_SIZE_MEDIUM/M.mob_size)
 
-	M.chem_doses[type] = M.chem_doses[type] + effective
+	var/dose = LAZYACCESS(M.chem_doses, type) + effective
+	LAZYSET(M.chem_doses, type, dose)
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(location)
 			if(CHEM_INJECT)
@@ -472,7 +471,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				affect_touch(M, alien, effective, holder)
 	holder.remove_reagent(type, removed)
 
-/decl/material/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(radioactivity)
 		M.apply_damage(radioactivity * removed, IRRADIATE, armor_pen = 100)
 
@@ -481,7 +480,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		var/dam = (toxicity * removed)
 		if(toxicity_targets_organ && ishuman(M))
 			var/mob/living/carbon/human/H = M
-			var/obj/item/organ/internal/I = H.internal_organs_by_name[toxicity_targets_organ]
+			var/obj/item/organ/internal/I = H.get_internal_organ(toxicity_targets_organ)
 			if(I)
 				var/can_damage = I.max_damage - I.damage
 				if(can_damage > 0)
@@ -495,7 +494,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			M.adjustToxLoss(toxicity_targets_organ ? (dam * 0.75) : dam)
 
 	if(solvent_power >= MAT_SOLVENT_STRONG)
-		M.take_organ_damage(0, removed * solvent_power)
+		M.take_organ_damage(0, removed * solvent_power, override_droplimb = DISMEMBER_METHOD_ACID)
 
 	if(narcosis)
 		if(prob(10))
@@ -504,13 +503,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			M.emote(pick("twitch", "drool", "moan"))
 
 	if(euphoriant)
-		M.adjust_drugged(euphoriant, euphoriant_max)
+		SET_STATUS_MAX(M, STAT_DRUGGY, min(GET_STATUS(M, STAT_DRUGGY) + euphoriant, euphoriant_max))
 
-/decl/material/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(affect_blood_on_ingest)
 		affect_blood(M, alien, removed * 0.5, holder)
 
-/decl/material/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/proc/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 
 	if(!istype(M))
 		return
@@ -569,9 +568,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 					affecting.status |= ORGAN_DISFIGURED
 
 		if(!M.unacidable)
-			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage))
+			M.take_organ_damage(0, min(removed * solvent_power * ((removed < solvent_melt_dose) ? 0.1 : 0.2), solvent_max_damage), override_droplimb = DISMEMBER_METHOD_ACID)
 
-/decl/material/proc/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
+/decl/material/proc/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder) // Overdose effect. Doesn't happen instantly.
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.adjustToxLoss(REM)
 

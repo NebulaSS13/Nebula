@@ -5,17 +5,17 @@
 	var/mob/living/silicon/ai/controlling_ai
 	var/obj/item/radio/drone_silicon_radio
 
-/mob/living/silicon/robot/drone/attack_ai(var/mob/living/silicon/ai/user)
+/mob/living/silicon/robot/drone/attack_ai(mob/living/silicon/ai/user)
 
 	if(!istype(user) || controlling_ai || !config.allow_drone_spawn)
 		return
 
 	if(stat != 2 || client || key)
-		to_chat(user, "<span class='warning'>You cannot take control of an autonomous, active drone.</span>")
+		to_chat(user, SPAN_WARNING("You cannot take control of an autonomous, active drone."))
 		return
 
 	if(health < -35 || emagged)
-		to_chat(user, "<span class='notice'><b>WARNING:</b> connection timed out.</span>")
+		to_chat(user, SPAN_WARNING("<b>WARNING:</b> connection timed out."))
 		return
 	
 	assume_control(user)
@@ -45,7 +45,7 @@
 	updatename()
 	to_chat(src, "<span class='notice'><b>You have shunted your primary control loop into \a [initial(name)].</b> Use the <b>Release Control</b> verb to return to your core.</span>")
 
-/obj/machinery/drone_fabricator/attack_ai(var/mob/living/silicon/ai/user)
+/obj/machinery/drone_fabricator/attack_ai(mob/living/silicon/ai/user)
 
 	if(!istype(user) || user.controlling_drone || !config.allow_drone_spawn)
 		return
@@ -80,11 +80,6 @@
 	if(controlling_drone)
 		controlling_drone.release_ai_control("<b>WARNING: Primary control loop failure.</b> Session terminated.")
 	. = ..(gibbed)
-
-/mob/living/silicon/ai/Life()
-	. = ..()
-	if(controlling_drone && stat != CONSCIOUS)
-		controlling_drone.release_ai_control("<b>WARNING: Primary control loop failure.</b> Session terminated.")
 
 /mob/living/silicon/robot/drone/proc/release_ai_control_verb()
 	set name = "Release Control"

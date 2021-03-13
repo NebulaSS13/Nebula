@@ -9,7 +9,7 @@
 	if (!loc)
 		return
 
-	if(machine && !CanMouseDrop(machine, src))
+	if(machine && (machine.CanUseTopic(src, machine.DefaultTopicState()) == STATUS_CLOSE)) // unsure if this is a good idea, but using canmousedrop was ???
 		machine = null
 
 	//Handle temperature/pressure differences between body and environment
@@ -36,6 +36,8 @@
 
 	handle_regular_hud_updates()
 
+	handle_status_effects()
+
 	return 1
 
 /mob/living/proc/handle_breathing()
@@ -45,7 +47,48 @@
 	return
 
 /mob/living/proc/handle_chemicals_in_body()
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	chem_effects = null
+
+	// TODO: handle isSynthetic() properly via Psi's metabolism modifiers for contact reagents like acid.
+	if((status_flags & GODMODE) || isSynthetic())
+		return FALSE
+
+	// Metabolize any reagents currently in our body and keep a reference for chem dose checking.
+	var/datum/reagents/metabolism/touching_reagents = metabolize_touching_reagents()
+	var/datum/reagents/metabolism/bloodstr_reagents = metabolize_injected_reagents()
+	var/datum/reagents/metabolism/ingested_reagents = metabolize_ingested_reagents()
+
+	// Update chem dosage.
+	// TODO: refactor chem dosage above isSynthetic() and GODMODE checks.
+	if(length(chem_doses))
+		for(var/T in chem_doses)
+			if(bloodstr_reagents?.has_reagent(T) || ingested_reagents?.has_reagent(T) || touching_reagents?.has_reagent(T))
+				continue
+			var/decl/material/R = T
+			var/dose = LAZYACCESS(chem_doses, T) - initial(R.metabolism)*2
+			LAZYSET(chem_doses, T, dose)
+			if(LAZYACCESS(chem_doses, T) <= 0)
+				LAZYREMOVE(chem_doses, T)
+	return TRUE
+
+/mob/living/proc/metabolize_touching_reagents()
+	var/datum/reagents/metabolism/touching_reagents = get_contact_reagents()
+	if(istype(touching_reagents))
+		touching_reagents.metabolize()
+		return touching_reagents
+		
+/mob/living/proc/metabolize_injected_reagents()
+	var/datum/reagents/metabolism/injected_reagents = get_injected_reagents()
+	if(istype(injected_reagents))
+		injected_reagents.metabolize()
+		return injected_reagents
+		
+/mob/living/proc/metabolize_ingested_reagents()
+	var/datum/reagents/metabolism/ingested_reagents = get_ingested_reagents()
+	if(istype(ingested_reagents))
+		ingested_reagents.metabolize()
+		return ingested_reagents
 
 /mob/living/proc/handle_random_events()
 	return
@@ -57,7 +100,7 @@
 /mob/living/proc/handle_regular_status_updates()
 	updatehealth()
 	if(stat != DEAD)
-		if(paralysis)
+		if(HAS_STATUS(src, STAT_PARA))
 			set_stat(UNCONSCIOUS)
 		else if (status_flags & FAKEDEATH)
 			set_stat(UNCONSCIOUS)
@@ -65,82 +108,17 @@
 			set_stat(CONSCIOUS)
 		return 1
 
-/mob/living/proc/handle_statuses()
-	handle_stunned()
-	handle_weakened()
-	handle_paralysed()
-	handle_stuttering()
-	handle_silent()
-	handle_drugged()
-	handle_slurring()
-	handle_confused()
-
-/mob/living/proc/handle_stunned()
-	if(stunned)
-		AdjustStunned(-1)
-		if(!stunned)
-			update_icons()
-	return stunned
-
-/mob/living/proc/handle_weakened()
-	if(weakened)
-		weakened = max(weakened-1,0)
-		if(!weakened)
-			update_icons()
-	return weakened
-
-/mob/living/proc/handle_stuttering()
-	if(stuttering)
-		stuttering = max(stuttering-1, 0)
-	return stuttering
-
-/mob/living/proc/handle_silent()
-	if(silent)
-		silent = max(silent-1, 0)
-	return silent
-
-/mob/living/proc/handle_drugged()
-	return adjust_drugged(-1)
-
-/mob/living/proc/handle_slurring()
-	if(slurring)
-		slurring = max(slurring-1, 0)
-	return slurring
-
-/mob/living/proc/handle_paralysed()
-	if(paralysis)
-		AdjustParalysis(-1)
-		if(!paralysis)
-			update_icons()
-	return paralysis
-
 /mob/living/proc/handle_disabilities()
 	handle_impaired_vision()
 	handle_impaired_hearing()
 
-/mob/living/proc/handle_confused()
-	if(confused)
-		confused = max(0, confused - 1)
-	return confused
-
 /mob/living/proc/handle_impaired_vision()
-	//Eyes
-	if(sdisabilities & BLINDED || stat)	//blindness from disability or unconsciousness doesn't get better on its own
-		eye_blind = max(eye_blind, 1)
-	else if(eye_blind)			//blindness, heals slowly over time
-		eye_blind = max(eye_blind-1,0)
-	else if(eye_blurry)			//blurry eyes heal slowly
-		eye_blurry = max(eye_blurry-1, 0)
+	if((sdisabilities & BLINDED) || stat) //blindness from disability or unconsciousness doesn't get better on its own
+		SET_STATUS_MAX(src, STAT_BLIND, 2)
 
 /mob/living/proc/handle_impaired_hearing()
-	//Ears
-	if(sdisabilities & DEAFENED)	//disabled-deaf, doesn't get better on its own
-		setEarDamage(null, max(ear_deaf, 1))
-	else if(ear_damage < 25)
-		adjustEarDamage(-0.05, -1)	// having ear damage impairs the recovery of ear_deaf
-	else if(ear_damage < 100)
-		adjustEarDamage(-0.05, 0)	// deafness recovers slowly over time, unless ear_damage is over 100. TODO meds that heal ear_damage
-
+	if((sdisabilities & DEAFENED) || stat) //disabled-deaf, doesn't get better on its own
+		SET_STATUS_MAX(src, STAT_TINNITUS, 1)
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/proc/handle_regular_hud_updates()
@@ -157,13 +135,13 @@
 	if(stat == DEAD)
 		return
 
-	if(eye_blind)
+	if(GET_STATUS(src, STAT_BLIND))
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 	else
 		clear_fullscreen("blind")
 		set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
-		set_fullscreen(eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
-		set_fullscreen(drugged, "high", /obj/screen/fullscreen/high)
+		set_fullscreen(GET_STATUS(src, STAT_BLURRY), "blurry", /obj/screen/fullscreen/blurry)
+		set_fullscreen(GET_STATUS(src, STAT_DRUGGY), "high", /obj/screen/fullscreen/high)
 
 	set_fullscreen(stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
 

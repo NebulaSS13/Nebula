@@ -1,8 +1,8 @@
 /decl/material/liquid/crystal_agent/do_material_check(var/mob/living/carbon/M)
-	var/decl/special_role/wizard/wizards = decls_repository.get_decl(/decl/special_role/wizard)
+	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 	. = (M.psi || (M.mind && wizards.is_antagonist(M.mind))) ? MAT_NULLGLASS : ..()
 	
-/decl/material/liquid/glowsap/gleam/affect_overdose(var/mob/living/carbon/M, var/alien, var/datum/reagents/holder)
+/decl/material/liquid/glowsap/gleam/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
 	..()
 	if(M.psi)
 		M.psi.check_latency_trigger(30, "a [name] overdose")
@@ -17,7 +17,7 @@
 	var/list/blood_data = REAGENT_DATA(holder, /decl/material/liquid/blood)
 	var/weakref/donor_ref = LAZYACCESS(blood_data, "donor")
 	var/mob/living/donor = donor_ref?.resolve()
-	var/decl/special_role/wizard/wizards = decls_repository.get_decl(/decl/special_role/wizard)
+	var/decl/special_role/wizard/wizards = GET_DECL(/decl/special_role/wizard)
 	. = (istype(donor) && (donor.psi || (donor.mind && wizards.is_antagonist(donor.mind))))
 
 /datum/chemical_reaction/synthesis/nullglass/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)

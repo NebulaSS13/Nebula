@@ -4,6 +4,7 @@
 	health = 20
 	maxHealth = 20
 	universal_speak = FALSE
+	mob_sort_value = 12
 
 	mob_bump_flag = SIMPLE_ANIMAL
 	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
@@ -16,6 +17,7 @@
 	skin_material = /decl/material/solid/skin 
 	skin_amount = 5
 
+	var/gene_damage = 0 // Set to -1 to disable gene damage for the mob.
 	var/show_stat_health = 1	//does the percentage health show in the stat panel for the mob
 
 	var/icon_living = ""
@@ -123,10 +125,6 @@
 	if(health > maxHealth)
 		health = maxHealth
 
-	handle_stunned()
-	handle_weakened()
-	handle_paralysed()
-	handle_confused()
 	handle_supernatural()
 	handle_impaired_vision()
 	
@@ -252,7 +250,7 @@
 	if(Proj.agony)
 		damage += Proj.agony / 6
 		if(health < Proj.agony * 3)
-			Paralyse(Proj.agony / 20)
+			SET_STATUS_MAX(src, STAT_PARA, Proj.agony / 20)
 			visible_message("<span class='warning'>[src] is stunned momentarily!</span>")
 
 	bullet_impact_visuals(Proj)
@@ -260,26 +258,27 @@
 	Proj.on_hit(src)
 	return 0
 
-/mob/living/simple_animal/attack_hand(mob/living/carbon/human/M)
+/mob/living/simple_animal/attack_hand(mob/user)
 	..()
 
-	switch(M.a_intent)
+	switch(user.a_intent)
 
 		if(I_HELP)
 			if (health > 0)
-				M.visible_message("<span class='notice'>[M] [response_help] \the [src].</span>")
-				M.update_personal_goal(/datum/goal/achievement/specific_object/pet, type)
+				user.visible_message(SPAN_NOTICE("\The [user] [response_help] \the [src]."))
+				user.update_personal_goal(/datum/goal/achievement/specific_object/pet, type)
 
 		if(I_DISARM)
-			M.visible_message("<span class='notice'>[M] [response_disarm] \the [src].</span>")
-			M.do_attack_animation(src)
+			user.visible_message(SPAN_NOTICE("\The [user] [response_disarm] \the [src]."))
+			user.do_attack_animation(src)
 			//TODO: Push the mob away or something
 
 		if(I_HURT)
 			var/dealt_damage = harm_intent_damage
 			var/harm_verb = response_harm
-			if(ishuman(M))
-				var/decl/natural_attack/attack = M.get_unarmed_attack(src)
+			if(ishuman(user))
+				var/mob/living/carbon/human/H = user
+				var/decl/natural_attack/attack = H.get_unarmed_attack(src)
 				if(istype(attack))
 					dealt_damage = attack.damage <= dealt_damage ? dealt_damage : attack.damage
 					harm_verb = pick(attack.attack_verb)
@@ -287,10 +286,8 @@
 						adjustBleedTicks(dealt_damage)
 
 			adjustBruteLoss(dealt_damage)
-			M.visible_message("<span class='warning'>[M] [harm_verb] \the [src]!</span>")
-			M.do_attack_animation(src)
-
-	return
+			user.visible_message(SPAN_DANGER("\The [user] [harm_verb] \the [src]!"))
+			user.do_attack_animation(src)
 
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/stack/medical))
@@ -467,8 +464,7 @@
 				B.icon_state = pick("dir_splatter_1","dir_splatter_2")
 				B.basecolor = bleed_colour
 				var/scale = min(1, round(mob_size / MOB_SIZE_MEDIUM, 0.1))
-				var/matrix/M = new()
-				B.transform = M.Scale(scale)
+				B.set_scale(scale)
 				B.update_icon()
 
 /mob/living/simple_animal/handle_fire()
@@ -523,8 +519,25 @@
 		if(rand(25))
 			to_chat(attacker, SPAN_WARNING("Your attack has no obvious effect on \the [src]'s [description]!"))
 
-
 /mob/living/simple_animal/proc/get_natural_weapon()
 	if(ispath(natural_weapon))
 		natural_weapon = new natural_weapon(src)
 	return natural_weapon
+
+/mob/living/simple_animal/getCloneLoss()
+	. = max(0, gene_damage)
+
+/mob/living/simple_animal/adjustCloneLoss(var/amount)
+	setCloneLoss(gene_damage + amount)
+
+/mob/living/simple_animal/setCloneLoss(amount)
+	if(gene_damage >= 0)
+		gene_damage = Clamp(amount, 0, maxHealth)
+		if(gene_damage >= maxHealth)
+			death()
+
+/mob/living/simple_animal/get_admin_job_string()
+	return "Animal"
+
+/mob/living/simple_animal/get_telecomms_race_info()
+	return list("Domestic Animal", FALSE)

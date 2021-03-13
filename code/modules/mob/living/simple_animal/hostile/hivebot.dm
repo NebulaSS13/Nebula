@@ -19,6 +19,7 @@
 		melee = ARMOR_MELEE_KNIVES
 		)
 	bleed_colour = SYNTH_BLOOD_COLOUR
+	gene_damage = -1
 
 	meat_type =     null
 	meat_amount =   0

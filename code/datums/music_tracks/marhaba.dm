@@ -1,4 +1,4 @@
-/music_track/marhaba
+/decl/music_track/marhaba
 	artist = "Ian Alex Mac"
 	title = "Marhaba"
 	album = "Cues"

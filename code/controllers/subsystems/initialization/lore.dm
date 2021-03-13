@@ -3,9 +3,6 @@ SUBSYSTEM_DEF(lore)
 	init_order = SS_INIT_LORE
 	flags = SS_NO_FIRE
 
-	var/list/cultural_info_by_name =      list()
-	var/list/cultural_info_by_path =      list()
-	var/list/tagged_info =                list()
 	var/list/dreams = list(
 		"a familiar face", "voices from all around", "a traitor", "an ally",
 		"darkness", "light", "a catastrophe", "a loved one", "warmth", "freezing",
@@ -16,6 +13,7 @@ SUBSYSTEM_DEF(lore)
 		"an old home", "right behind you", "standing above you", "someone near by", "a place forgotten"
 	)
 
+	var/list/tagged_info =             list()
 	var/list/credits_other =           list("ATTACK! ATTACK! ATTACK!")
 	var/list/credits_adventure_names = list("QUEST", "FORCE", "ADVENTURE")
 	var/list/credits_crew_names =      list("EVERYONE")
@@ -31,16 +29,10 @@ SUBSYSTEM_DEF(lore)
 
 /datum/controller/subsystem/lore/Initialize()
 
-	for(var/ftype in subtypesof(/decl/cultural_info))
-		var/decl/cultural_info/culture = ftype
-		if(!initial(culture.name))
-			continue
-		culture = new culture
-		if(cultural_info_by_name[culture.name])
-			crash_with("Duplicate cultural datum ID - [culture.name] - [ftype]")
-		cultural_info_by_name[culture.name] = culture
-		cultural_info_by_path[ftype] = culture
-		if(culture.category && !culture.hidden)
+	var/list/all_cultural_decls = decls_repository.get_decls_of_subtype(/decl/cultural_info)
+	for(var/ftype in all_cultural_decls)
+		var/decl/cultural_info/culture = all_cultural_decls[ftype]
+		if(culture.name && culture.category && !culture.hidden)
 			if(!tagged_info[culture.category])
 				tagged_info[culture.category] = list()
 			var/list/tag_list = tagged_info[culture.category]
@@ -59,10 +51,10 @@ SUBSYSTEM_DEF(lore)
 	return tagged_info[token]
 
 /datum/controller/subsystem/lore/proc/refresh_credits_from_departments()
-	for(var/thing in SSdepartments.departments)
-		var/datum/department/dept = SSdepartments.departments[thing]
-		if(dept.title)
-			credits_nouns |= uppertext(dept.title)
+	var/list/all_departments = decls_repository.get_decls_of_subtype(/decl/department)
+	for(var/thing in all_departments)
+		var/decl/department/dept = all_departments[thing]
+		credits_nouns |= uppertext(dept.name)
 
 /datum/controller/subsystem/lore/proc/get_end_credits_title(var/force)
 	if(!GLOB.end_credits_title || force)
@@ -79,9 +71,6 @@ SUBSYSTEM_DEF(lore)
 		possible_titles |= credits_other
 		GLOB.end_credits_title = pick(possible_titles)
 	. = GLOB.end_credits_title
-
-/datum/controller/subsystem/lore/proc/get_culture(var/culture_ident)
-	return cultural_info_by_name[culture_ident] ? cultural_info_by_name[culture_ident] : cultural_info_by_path[culture_ident]
 
 /datum/controller/subsystem/lore/proc/get_language_by_name(var/language_name)
 	if(!languages_by_name)

@@ -67,14 +67,6 @@
 	show_browser(src, file(RULES_FILE), "window=rules;size=480x320")
 #undef RULES_FILE
 
-#define LORE_FILE "config/lore.html"
-/client/verb/lore_splash()
-	set name = "Lore"
-	set desc = "Links to the beginner Lore wiki."
-	set hidden = 1
-	show_browser(src, file(LORE_FILE), "window=lore;size=480x320")
-#undef LORE_FILE
-
 /client/verb/hotkeys_help()
 	set name = "Hotkeys Help"
 	set category = "OOC"
@@ -82,7 +74,7 @@
 	var/admin = {"<font color='purple'>
 Admin:
 \tF5 = Aghost (admin-ghost)
-\tF6 = player-panel-new
+\tF6 = list-players
 \tF7 = admin-pm
 \tF8 = Invisimin
 </font>"}

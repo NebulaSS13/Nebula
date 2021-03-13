@@ -474,7 +474,7 @@
 /area/icarus/vessel)
 "bG" = (
 /obj/structure/closet,
-/obj/item/chems/food/drinks/bottle/tequilla,
+/obj/item/chems/food/drinks/bottle/tequila,
 /obj/item/chems/food/drinks/bottle/wine,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;

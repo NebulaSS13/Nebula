@@ -33,12 +33,12 @@
 		. = ..()
 
 
-/obj/item/storage/secure/MouseDrop(over_object, src_location, over_location)
+/obj/item/storage/secure/handle_mouse_drop(atom/over, mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)
-	if (lock.locked)
-		src.add_fingerprint(usr)
-		return
-	..()
+	if(lock.locked)
+		add_fingerprint(user)
+		return TRUE
+	. = ..()
 
 /obj/item/storage/secure/AltClick(mob/user)
 	var/datum/extension/lockable/lock = get_extension(src, /datum/extension/lockable)

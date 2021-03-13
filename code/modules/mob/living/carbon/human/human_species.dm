@@ -1,5 +1,5 @@
 /mob/living/carbon/human/dummy
-	real_name = "Test Dummy"
+	real_name = "test dummy"
 	status_flags = GODMODE|CANPUSH
 	virtual_mob = null
 
@@ -14,12 +14,25 @@
 	for(var/obj/item/I in loc)
 		equip_to_appropriate_slot(I)
 
+/mob/living/carbon/human/corpse
+	real_name = "corpse"
+
 /mob/living/carbon/human/corpse/Initialize(mapload, new_species, obj/effect/landmark/corpse/corpse)
+
 	. = ..(mapload, new_species)
+
+	var/decl/cultural_info/culture = get_cultural_value(TAG_CULTURE)
+	if(culture)
+		var/newname = culture.get_random_name(src, gender, species.name)
+		if(newname && newname != name)
+			real_name = newname
+			SetName(newname)
+			if(mind)
+				mind.name = real_name
 
 	adjustOxyLoss(maxHealth)//cease life functions
 	setBrainLoss(maxHealth)
-	var/obj/item/organ/internal/heart/corpse_heart = internal_organs_by_name[BP_HEART]
+	var/obj/item/organ/internal/heart/corpse_heart = get_internal_organ(BP_HEART)
 	if(corpse_heart)
 		corpse_heart.pulse = PULSE_NONE//actually stops heart to make worried explorers not care too much
 	if(corpse)
@@ -39,6 +52,10 @@
 /mob/living/carbon/human/dummy/mannequin/InitializeHud()
 	return	// Mannequins don't get HUDs
 
+/mob/living/carbon/human/monkey
+	gender = PLURAL
+
 /mob/living/carbon/human/monkey/Initialize(mapload)
-	gender = pick(MALE, FEMALE)
+	if(gender == PLURAL)
+		gender = pick(MALE, FEMALE)
 	. = ..(mapload, SPECIES_MONKEY)

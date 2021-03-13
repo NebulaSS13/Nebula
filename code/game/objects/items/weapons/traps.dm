@@ -69,7 +69,7 @@
 	else
 		..()
 
-/obj/item/beartrap/proc/attack_mob(mob/living/L)
+/obj/item/beartrap/proc/attack_mob(mob/L)
 
 	var/target_zone
 	if(L.lying)

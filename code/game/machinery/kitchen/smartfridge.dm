@@ -66,17 +66,6 @@
 		return 1
 	return 0
 
-/obj/machinery/smartfridge/secure/extract
-	name = "\improper Slime Extract Storage"
-	desc = "A refrigerated storage unit for slime extracts."
-	icon_contents = "slime"
-	initial_access = list(access_research)
-
-/obj/machinery/smartfridge/secure/extract/accept_check(var/obj/item/O)
-	if(istype(O,/obj/item/slime_extract))
-		return 1
-	return 0
-
 /obj/machinery/smartfridge/secure/medbay
 	name = "\improper Refrigerated Medicine Storage"
 	desc = "A refrigerated storage unit for storing medicine and chemicals."
@@ -186,7 +175,7 @@
 				var/decl/material/solid/skin/skin_mat = skin.material
 				if(!skin_mat.tans_to)
 					continue
-				var/decl/material/leather_mat = decls_repository.get_decl(skin_mat.tans_to)
+				var/decl/material/leather_mat = GET_DECL(skin_mat.tans_to)
 				stock_item(new leather_mat.stack_type(get_turf(src), skin.amount, skin_mat.tans_to))
 				remove_thing = TRUE
 
@@ -258,18 +247,15 @@
 	update_icon()
 
 /obj/machinery/smartfridge/attackby(var/obj/item/O, var/mob/user)
-	if(stat & NOPOWER)
-		to_chat(user, "<span class='notice'>\The [src] is unpowered and useless.</span>")
-		return
-
 	if(accept_check(O))
 		if(!user.unEquip(O))
 			return
 		stock_item(O)
 		user.visible_message("<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", "<span class='notice'>You add \the [O] to \the [src].</span>")
 		update_icon()
+		return TRUE
 
-	else if(istype(O, /obj/item/storage))
+	if(istype(O, /obj/item/storage))
 		var/obj/item/storage/bag/P = O
 		var/plants_loaded = 0
 		for(var/obj/G in P.contents)
@@ -282,12 +268,8 @@
 			user.visible_message("<span class='notice'>\The [user] loads \the [src] with the contents of \the [P].</span>", "<span class='notice'>You load \the [src] with the contents of \the [P].</span>")
 			if(P.contents.len > 0)
 				to_chat(user, "<span class='notice'>Some items were refused.</span>")
-	else if ((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(O))
-		wrench_floor_bolts(user)
-		power_change()
-	else
-		to_chat(user, "<span class='notice'>\The [src] smartly refuses [O].</span>")
-	return 1
+		return TRUE
+	return ..()
 
 /obj/machinery/smartfridge/secure/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)

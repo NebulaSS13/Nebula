@@ -7,7 +7,7 @@
 		drop_from_inventory(W)
 	regenerate_icons()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
-	stunned = 1
+	set_status(STAT_STUN, 1)
 	icon = null
 	set_invisibility(101)
 	for(var/t in organs)
@@ -20,7 +20,7 @@
 	//animation = null
 
 	DEL_TRANSFORMATION_MOVEMENT_HANDLER(src)
-	stunned = 0
+	set_status(STAT_STUN, 0)
 	UpdateLyingBuckledAndVerbStatus()
 	set_invisibility(initial(invisibility))
 
@@ -143,39 +143,6 @@
 	qdel(src) // Queues us for a hard delete
 	return O
 
-/mob/living/carbon/human/proc/slimeize(adult as num, reproduce as num)
-	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
-		return
-	for(var/obj/item/W in src)
-		drop_from_inventory(W)
-	regenerate_icons()
-	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
-	icon = null
-	set_invisibility(101)
-	for(var/t in organs)
-		qdel(t)
-
-	var/mob/living/carbon/slime/new_slime
-	if(reproduce)
-		var/number = pick(14;2,3,4)	//reproduce (has a small chance of producing 3 or 4 offspring)
-		var/list/babies = list()
-		for(var/i=1,i<=number,i++)
-			var/mob/living/carbon/slime/M = new/mob/living/carbon/slime(loc)
-			M.set_nutrition(round(nutrition/number))
-			step_away(M,src)
-			babies += M
-		new_slime = pick(babies)
-	else
-		new_slime = new /mob/living/carbon/slime(loc)
-		if(adult)
-			new_slime.is_adult = 1
-		else
-	new_slime.key = key
-
-	to_chat(new_slime, "<B>You are now a slime. Skreee!</B>")
-	qdel(src)
-	return
-
 /mob/living/carbon/human/proc/corgize()
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
@@ -285,11 +252,11 @@
 	if(ispath(MP, /mob/living/simple_animal/tomato))
 		return 1
 	if(ispath(MP, /mob/living/simple_animal/mouse))
-		return 1 //It is impossible to pull up the player panel for mice (Fixed! - Nodrak)
+		return 1
 	if(ispath(MP, /mob/living/simple_animal/hostile/bear))
-		return 1 //Bears will auto-attack mobs, even if they're player controlled (Fixed! - Nodrak)
+		return 1
 	if(ispath(MP, /mob/living/simple_animal/hostile/retaliate/parrot))
-		return 1 //Parrots are no longer unfinished! -Nodrak
+		return 1
 
 	//Not in here? Must be untested!
 	return 0
@@ -304,7 +271,7 @@
 			return
 		src.mind.assigned_special_role = "Zombie"
 	log_admin("[key_name(src)] has transformed into a zombie!")
-	Weaken(5)
+	SET_STATUS_MAX(src, STAT_WEAK, 5)
 	if (should_have_organ(BP_HEART))
 		vessel.add_reagent(species.blood_reagent, species.blood_volume - vessel.total_volume)
 	for (var/o in organs)

@@ -22,7 +22,7 @@
 		icon_state = dead_icon
 	..()
 
-/obj/item/organ/internal/heart/robotize(var/company, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/heart/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	. = ..()
 	icon_state = "heart-prosthetic"
 
@@ -44,8 +44,8 @@
 		return
 
 	// pulse mod starts out as just the chemical effect amount
-	var/pulse_mod = owner.chem_effects[CE_PULSE]
-	var/is_stable = owner.chem_effects[CE_STABLE]
+	var/pulse_mod = LAZYACCESS(owner.chem_effects, CE_PULSE)
+	var/is_stable = LAZYACCESS(owner.chem_effects, CE_STABLE)
 		
 	// If you have enough heart chemicals to be over 2, you're likely to take extra damage.
 	if(pulse_mod > 2 && !is_stable)
@@ -65,7 +65,7 @@
 	if(oxy < BLOOD_VOLUME_BAD) //MOAR
 		pulse_mod++
 
-	if(owner.status_flags & FAKEDEATH || owner.chem_effects[CE_NOPULSE])
+	if(owner.status_flags & FAKEDEATH || LAZYACCESS(owner.chem_effects, CE_NOPULSE))
 		pulse = Clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_2FAST) //pretend that we're dead. unlike actual death, can be inflienced by meds
 		return
 
@@ -102,7 +102,7 @@
 		//High pulse value corresponds to a fast rate of heartbeat.
 		//Divided by 2, otherwise it is too slow.
 		var/rate = (PULSE_THREADY - pulse)/2
-		if(owner.chem_effects[CE_PULSE] > 2)
+		if(owner.has_chemical_effect(CE_PULSE, 2))
 			heartbeat++
 
 		if(heartbeat >= rate)
@@ -175,8 +175,8 @@
 				SPAN_DANGER("Blood sprays out from \the [owner]'s [spray_organ]!"),
 				FONT_HUGE(SPAN_DANGER("Blood sprays out from your [spray_organ]!"))
 			)
-			owner.Stun(1)
-			owner.eye_blurry = 2
+			SET_STATUS_MAX(owner, STAT_STUN, 1)
+			owner.set_status(STAT_BLURRY, 2)
 
 			//AB occurs every heartbeat, this only throttles the visible effect
 			next_blood_squirt = world.time + 80

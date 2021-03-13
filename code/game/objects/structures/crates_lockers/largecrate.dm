@@ -68,9 +68,6 @@
 	name = "cat carrier"
 	held_type = /mob/living/simple_animal/cat
 
-/obj/structure/largecrate/animal/cat/bones
-	held_type = /mob/living/simple_animal/cat/fluff/bones
-
 /obj/structure/largecrate/animal/chick
 	name = "chicken crate"
 	held_count = 5

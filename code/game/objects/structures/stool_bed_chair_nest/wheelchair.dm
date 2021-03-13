@@ -5,10 +5,8 @@
 	anchored = FALSE
 	buckle_movable = TRUE
 	movement_handlers = list(/datum/movement_handler/deny_multiz, /datum/movement_handler/delay = list(5), /datum/movement_handler/move_relay_self)
-	movable_flags = MOVABLE_FLAG_NONDENSE_COLLISION
 
 	var/item_form_type = /obj/item/wheelchair_kit
-	var/driving = FALSE
 	var/bloodiness
 
 /obj/structure/bed/chair/wheelchair/Initialize()
@@ -36,43 +34,17 @@
 
 /obj/structure/bed/chair/wheelchair/relaymove(mob/user, direction)
 	// Redundant check?
-	if(user.stat || user.stunned || user.weakened || user.paralysis || user.lying || user.restrained())
+	if(user.incapacitated())
 		return
 	if(propelled)
 		return
-	// Let's roll
-	driving = TRUE
-	//--1---Move occupant---1--//
-	if(buckled_mob)
-		buckled_mob.buckled = null
-		step(buckled_mob, direction)
-		buckled_mob.buckled = src
-	//--2--Move wheelchair--2--//
+
 	step(src, direction)
-	if(buckled_mob) // Make sure it stays beneath the occupant
-		Move(buckled_mob.loc)
 	set_dir(direction)
 	if(bloodiness)
 		create_track()
-	driving = FALSE
 
-/obj/structure/bed/chair/wheelchair/Move()
-	. = ..()
-	if(buckled_mob)
-		var/mob/living/occupant = buckled_mob
-		if(!driving)
-			if (occupant && (src.loc != occupant.loc))
-				if (propelled)
-					for (var/mob/O in src.loc)
-						if (O != occupant)
-							Bump(O)
-				else
-					unbuckle_mob()
-		else
-			if (occupant && (src.loc != occupant.loc))
-				src.forceMove(occupant.loc) // Failsafe to make sure the wheelchair stays beneath the occupant after driving
-
-/obj/structure/bed/chair/wheelchair/attack_hand(mob/living/user)
+/obj/structure/bed/chair/wheelchair/attack_hand(mob/user)
 	user_unbuckle_mob(user)
 
 /obj/structure/bed/chair/wheelchair/Bump(atom/A)

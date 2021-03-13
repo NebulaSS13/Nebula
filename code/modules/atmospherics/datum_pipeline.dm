@@ -102,7 +102,7 @@
 		return
 
 	if(network == new_network) // Should be caught by the above check in all reasonable cases, so we crash and try to clean up as best we can.
-		crash_with("pipeline - pipenet reference mismatch.")
+		PRINT_STACK_TRACE("pipeline - pipenet reference mismatch.")
 	else
 		qdel(network)
 

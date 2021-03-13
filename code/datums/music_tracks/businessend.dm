@@ -1,4 +1,4 @@
-/music_track/businessend
+/decl/music_track/businessend
 	artist = "Cletus Got Shot"
 	title = "Business End"
 	song = 'sound/music/businessend.ogg'

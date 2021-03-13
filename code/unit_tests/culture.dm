@@ -17,12 +17,12 @@
 					var/val = species.default_cultural_info[token]
 					if(!val)
 						fails++
-						log_bad("Default cultural value '[val]' for [species_name] tag '[token]' is null, must be a string.")
-					else if(!istext(val))
+						log_bad("Default cultural value '[val]' for [species_name] tag '[token]' is null, must be a type.")
+					else if(istext(val))
 						fails++
-						log_bad("Default cultural value '[val]' for [species_name] tag '[token]' is an invalid type, must be a string.")
+						log_bad("Default cultural value '[val]' for [species_name] tag '[token]' is text, must be a type.")
 					else
-						var/decl/cultural_info/culture = SSlore.get_culture(val)
+						var/decl/cultural_info/culture = ispath(val, /decl/cultural_info) && GET_DECL(val)
 						if(!istype(culture))
 							fails++
 							log_bad("Default cultural value '[val]' for [species_name] tag '[token]' is not a valid culture label.")
@@ -45,12 +45,12 @@
 					var/val = species.force_cultural_info[token]
 					if(!val)
 						fails++
-						log_bad("Forced cultural value for [species_name] tag '[token]' is null, must be a string.")
-					else if(!istext(val))
+						log_bad("Forced cultural value for [species_name] tag '[token]' is null, must be a type.")
+					else if(istext(val))
 						fails++
-						log_bad("Forced cultural value for [species_name] tag '[token]' is an invalid type, must be a string.")
+						log_bad("Forced cultural value for [species_name] tag '[token]' is text, must be a type.")
 					else
-						var/decl/cultural_info/culture = SSlore.get_culture(val)
+						var/decl/cultural_info/culture = ispath(val, /decl/cultural_info) && GET_DECL(val)
 						if(!istype(culture))
 							fails++
 							log_bad("Forced cultural value '[val]' for [species_name] tag '[token]' is not a valid culture label.")
@@ -74,16 +74,19 @@
 					log_bad("Available cultural info for [species_name] tag '[token]' is empty, must have at least one entry.")
 				else
 					for(var/val in species.available_cultural_info[token])
-						var/decl/cultural_info/culture = SSlore.get_culture(val)
-						if(!istype(culture))
-							fails++
-							log_bad("Available cultural value '[val]' for [species_name] tag '[token]' is not a valid culture label.")
-						else if(culture.category != token)
-							fails++
-							log_bad("Available cultural value '[val]' for [species_name] tag '[token]' does not match culture datum category ([culture.category] must equal [token]).")
-						else if(!culture.description)
-							fails++
-							log_bad("Available cultural value '[val]' for [species_name] tag '[token]' does not have a description set.")
+						if(istext(val))
+							log_bad("Available cultural value '[val]' for [species_name] tag '[token]' is text, must be a type.")
+						else
+							var/decl/cultural_info/culture = ispath(val, /decl/cultural_info) && GET_DECL(val)
+							if(!istype(culture))
+								fails++
+								log_bad("Available cultural value '[val]' for [species_name] tag '[token]' is not a valid culture label.")
+							else if(culture.category != token)
+								fails++
+								log_bad("Available cultural value '[val]' for [species_name] tag '[token]' does not match culture datum category ([culture.category] must equal [token]).")
+							else if(!culture.description)
+								fails++
+								log_bad("Available cultural value '[val]' for [species_name] tag '[token]' does not have a description set.")
 
 	if(fails > 0)
 		fail("[fails] invalid cultural value(s)")

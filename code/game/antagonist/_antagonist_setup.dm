@@ -6,7 +6,7 @@
 
  To use:
 	- Get the appropriate datum via the decls repository ie. 
-	  var/decl/special_role/A = decls_repository.get_decl(/decl/special_role/traitor)
+	  var/decl/special_role/A = GET_DECL(/decl/special_role/traitor)
 	- Call add_antagonist() on the desired target mind ie. A.add_antagonist(mob.mind)
 	- To ignore protected roles, supply a positive second argument.
 	- To skip equipping with appropriate gear, supply a positive third argument.

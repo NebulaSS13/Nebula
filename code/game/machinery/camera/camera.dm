@@ -162,7 +162,7 @@
 		destroy()
 		return TRUE
 
-/obj/machinery/camera/attackby(obj/item/W, mob/living/user)
+/obj/machinery/camera/attackby(obj/item/W, mob/user)
 	update_coverage()
 	var/datum/wires/camera/camera_wires = wires
 	// DECONSTRUCTION

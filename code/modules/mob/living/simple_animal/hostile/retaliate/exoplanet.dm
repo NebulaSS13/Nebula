@@ -206,9 +206,10 @@
 	force = 5
 	attack_verb = list("singed")
 
-/mob/living/simple_animal/hostile/retaliate/beast/charbaby/attack_hand(mob/living/carbon/human/H)
+/mob/living/simple_animal/hostile/retaliate/beast/charbaby/attack_hand(mob/user)
 	. = ..()
-	reflect_unarmed_damage(H, BURN, "amorphous mass")
+	if(ishuman(user))
+		reflect_unarmed_damage(user, BURN, "amorphous mass")
 
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby/AttackingTarget()
 	. = ..()

@@ -44,7 +44,7 @@
 		PLURAL
 	)
 	available_cultural_info = list(
-		TAG_CULTURE = list(CULTURE_SYNTHETIC)
+		TAG_CULTURE = list(/decl/cultural_info/culture/synthetic)
 	)
 	has_organ = list(
 		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
@@ -67,7 +67,7 @@
 /decl/species/utility_frame/post_organ_rejuvenate(obj/item/organ/org, mob/living/carbon/human/H)
 	var/obj/item/organ/external/E = org
 	if(istype(E) && !BP_IS_PROSTHETIC(E))
-		E.robotize(SPECIES_FRAME)
+		E.robotize(/decl/prosthetics_manufacturer/utility_frame)
 	var/obj/item/organ/external/head/head = org
 	if(istype(head))
 		head.glowing_eyes = TRUE

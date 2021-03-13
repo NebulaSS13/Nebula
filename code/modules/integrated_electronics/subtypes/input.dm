@@ -144,7 +144,7 @@
 	if(!istype(H)) //Invalid input
 		return
 	if(H.Adjacent(get_turf(src))) // Like normal analysers, it can't be used at range.
-		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
+		var/obj/item/organ/internal/brain/brain = H.get_internal_organ(BP_BRAIN)
 		set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
 		set_pin_data(IC_OUTPUT, 2, H.get_pulse_as_number())
 		set_pin_data(IC_OUTPUT, 3, (H.stat == 0))
@@ -198,7 +198,7 @@
 	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 
 
-		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
+		var/obj/item/organ/internal/brain/brain = H.get_internal_organ(BP_BRAIN)
 		set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
 		set_pin_data(IC_OUTPUT, 2, (H.stat == 0))
 		set_pin_data(IC_OUTPUT, 3, damage_to_severity(100 * H.getBruteLoss() / H.maxHealth))
@@ -218,49 +218,6 @@
 /obj/item/integrated_circuit/input/adv_med_scanner/old
 	name = "integrated advanced medical analyser"
 	spawn_flags = 0
-
-/obj/item/integrated_circuit/input/slime_scanner
-	name = "slime_scanner"
-	desc = "A very small version of the xenobio analyser. This allows the machine to know every needed properties of slime. Output mutation list is non-associative."
-	icon_state = "medscan_adv"
-	complexity = 12
-	inputs = list("target" = IC_PINTYPE_REF)
-	outputs = list(
-		"colour"				= IC_PINTYPE_STRING,
-		"adult"					= IC_PINTYPE_BOOLEAN,
-		"nutrition"				= IC_PINTYPE_NUMBER,
-		"charge"				= IC_PINTYPE_NUMBER,
-		"health"				= IC_PINTYPE_NUMBER,
-		"possible mutation"		= IC_PINTYPE_LIST,
-		"genetic destability"	= IC_PINTYPE_NUMBER,
-		"slime core amount"		= IC_PINTYPE_NUMBER,
-		"Growth progress"		= IC_PINTYPE_NUMBER,
-	)
-	activators = list("scan" = IC_PINTYPE_PULSE_IN, "on scanned" = IC_PINTYPE_PULSE_OUT)
-	spawn_flags = IC_SPAWN_RESEARCH
-	power_draw_per_use = 80
-
-/obj/item/integrated_circuit/input/slime_scanner/do_work()
-	var/mob/living/carbon/slime/T = get_pin_data_as_type(IC_INPUT, 1, /mob/living/carbon/slime)
-	if(!isslime(T)) //Invalid input
-		return
-	if(T in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
-
-		set_pin_data(IC_OUTPUT, 1, T.colour)
-		set_pin_data(IC_OUTPUT, 2, T.is_adult)
-		set_pin_data(IC_OUTPUT, 3, T.nutrition/T.get_max_nutrition())
-		set_pin_data(IC_OUTPUT, 4, T.powerlevel)
-		set_pin_data(IC_OUTPUT, 5, round(T.health/T.maxHealth,0.01)*100)
-		set_pin_data(IC_OUTPUT, 6, T.GetMutations())
-		set_pin_data(IC_OUTPUT, 7, T.mutation_chance)
-		set_pin_data(IC_OUTPUT, 8, T.cores)
-		set_pin_data(IC_OUTPUT, 9, T.amount_grown/SLIME_EVOLUTION_THRESHOLD)
-
-
-	push_data()
-	activate_pin(2)
-
-
 
 /obj/item/integrated_circuit/input/plant_scanner
 	name = "integrated plant analyzer"
@@ -1148,7 +1105,7 @@
 	var/list/gas_names = list()
 	var/list/gas_amounts = list()
 	for(var/id in gases)
-		var/decl/material/mat = decls_repository.get_decl(id)
+		var/decl/material/mat = GET_DECL(id)
 		gas_names.Add(mat.gas_name)
 		gas_amounts.Add(round(gases[id], 0.001))
 
@@ -1184,7 +1141,7 @@
 		"on read" = IC_PINTYPE_PULSE_OUT
 	)
 
-/obj/item/integrated_circuit/input/data_card_reader/attackby_react(obj/item/I, mob/living/user, intent)
+/obj/item/integrated_circuit/input/data_card_reader/attackby_react(obj/item/I, mob/user, intent)
 	var/obj/item/card/data/card = I
 	var/write_mode = get_pin_data(IC_INPUT, 3)
 	if(istype(card))

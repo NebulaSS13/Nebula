@@ -1,5 +1,6 @@
 /datum/ai/nymph
 	name = "nymph"
+	expected_type = /mob/living/carbon/alien/diona
 	var/emote_prob = 3
 	var/wander_prob = 44
 

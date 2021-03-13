@@ -3,25 +3,22 @@
 	name = "Dispenser Cartridges"
 
 #define SEC_PACK(_tname, _type, _name, _cname, _cost, _access)\
-	decl/hierarchy/supply_pack/dispenser_cartridges{\
-		_tname {\
-			name = _name ;\
-			containername = _cname ;\
-			containertype = /obj/structure/closet/crate/secure;\
-			access = list( _access );\
-			cost = _cost ;\
-			contains = list( _type , _type );\
-		}\
+/decl/hierarchy/supply_pack/dispenser_cartridges/##_tname{\
+	name = _name ;\
+	containername = _cname ;\
+	containertype = /obj/structure/closet/crate/secure;\
+	access = list( _access );\
+	cost = _cost ;\
+	contains = list( _type , _type );\
 	}
+
 #define PACK(_tname, _type, _name, _cname, _cost)\
-	decl/hierarchy/supply_pack/dispenser_cartridges{\
-		_tname {\
-			name = _name ;\
-			containername = _cname ;\
-			containertype = /obj/structure/closet/crate;\
-			cost = _cost ;\
-			contains = list( _type , _type );\
-		}\
+/decl/hierarchy/supply_pack/dispenser_cartridges/##_tname{\
+	name = _name ;\
+	containername = _cname ;\
+	containertype = /obj/structure/closet/crate;\
+	cost = _cost ;\
+	contains = list( _type , _type );\
 	}
 
 // Chemistry-restricted (raw reagents excluding sugar/water)

@@ -14,7 +14,7 @@
 	startswith = list(/obj/item/chems/pill/zoom = 10)
 
 /obj/item/storage/pill_bottle/gleam
-	name = "bottle of Three Eye pills"
+	name = "bottle of Gleam pills"
 	desc = "Highly illegal drug. Stimulates rarely used portions of the brain."
 	wrapper_color = COLOR_BLUE
 	startswith = list(/obj/item/chems/pill/gleam = 10)
@@ -41,7 +41,7 @@
 
 	var/list/names = new
 	for(var/reagent_type in reagents.reagent_volumes)
-		var/decl/material/R = decls_repository.get_decl(reagent_type)
+		var/decl/material/R = GET_DECL(reagent_type)
 		names += R.liquid_name
 
 	desc = "Contains [english_list(names)]."

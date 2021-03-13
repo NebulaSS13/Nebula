@@ -10,7 +10,7 @@
 	point_blank_mult = 1
 	same_tile = 0
 	breakability = 3
-	grab_slowdown = 10
+	grab_slowdown = 0.35
 	upgrade_cooldown = 20
 	can_downgrade_on_resist = 0
 	icon_state = "reinforce"

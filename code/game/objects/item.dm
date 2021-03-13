@@ -85,6 +85,9 @@
 	
 	var/datum/reagents/coating // reagent container for coating things like blood/oil, used for overlays and tracks
 
+/obj/item/proc/get_origin_tech()
+	return origin_tech
+
 /obj/item/create_matter()
 	..()
 	LAZYINITLIST(matter)
@@ -190,7 +193,7 @@
 		if(LAZYLEN(matter))
 			desc_comp += SPAN_NOTICE("Extractable materials:<BR>")
 			for(var/mat in matter)
-				var/decl/material/M = decls_repository.get_decl(mat)
+				var/decl/material/M = GET_DECL(mat)
 				desc_comp += "[capitalize(M.solid_name)]<BR>"
 		else
 			desc_comp += SPAN_DANGER("No extractable materials detected.<BR>")
@@ -198,33 +201,29 @@
 
 	return ..(user, distance, "", desc_comp)
 
-// Partially copied from atom/MouseDrop()
 // This is going to need a solid go-over to properly integrate all the movement procs into each
 // other and make sure everything is updating nicely. Snowflaking it for now. ~Jan 2020
-/obj/item/MouseDrop(var/atom/over)
-	if(usr && over && Adjacent(usr))
-		if(over == usr)
-			usr.face_atom(src)
-			dragged_onto(over)
-		else if(usr.client && istype(over, /obj/screen/inventory) && (over in usr.client.screen))
-			var/obj/screen/inventory/inv = over
-			if(!inv.slot_id)
-				return
-			if(!usr.check_dexterity(DEXTERITY_GRIP, silent = TRUE))
-				to_chat(usr, SPAN_NOTICE("You begin putting on \the [src]..."))
-				if(!do_after(usr, 3 SECONDS, src) || QDELETED(over) || QDELETED(src) || QDELETED(usr))
-					return
-			if(istype(loc, /obj/item/storage))
-				var/obj/item/storage/bag = loc
-				bag.remove_from_storage(src)
-				dropInto(get_turf(bag))
-			else if(istype(loc, /mob))
-				var/mob/M = loc
-				if(!M.unEquip(src, get_turf(src)))
-					return
-			usr.equip_to_slot_if_possible(src, inv.slot_id)
-		return
-	return ..()
+/obj/item/handle_mouse_drop(atom/over, mob/user)
+
+	if(over == user)
+		usr.face_atom(src)
+		dragged_onto(over)
+		return TRUE
+
+	var/obj/screen/inventory/inv = over
+	if(user.client && istype(inv) && inv.slot_id && (over in user.client.screen))
+		if(istype(loc, /obj/item/storage))
+			var/obj/item/storage/bag = loc
+			bag.remove_from_storage(src)
+			dropInto(get_turf(bag))
+		else if(istype(loc, /mob))
+			var/mob/M = loc
+			if(!M.unEquip(src, get_turf(src)))
+				return ..()
+		user.equip_to_slot_if_possible(src, inv.slot_id)
+		return TRUE
+
+	. = ..()
 
 /obj/item/proc/dragged_onto(var/mob/user)
 	attack_hand(user)
@@ -297,7 +296,7 @@
 			pixel_x = 0
 			pixel_y = 0
 
-/obj/item/attack_ai(mob/user)
+/obj/item/attack_ai(mob/living/silicon/ai/user)
 	if (istype(src.loc, /obj/item/robot_module))
 		//If the item is part of a cyborg module, equip it
 		if(!isrobot(user))
@@ -620,7 +619,7 @@ var/list/slot_flags_enumeration = list(
 
 	if(istype(H))
 
-		var/obj/item/organ/internal/eyes/eyes = H.internal_organs_by_name[BP_EYES]
+		var/obj/item/organ/internal/eyes/eyes = H.get_internal_organ(BP_EYES)
 
 		if(H != user)
 			for(var/mob/O in (viewers(M) - user - M))
@@ -642,9 +641,9 @@ var/list/slot_flags_enumeration = list(
 				if(M.stat != 2)
 					to_chat(M, SPAN_WARNING("You drop what you're holding and clutch at your eyes!"))
 					M.drop_held_items()
-				M.eye_blurry += 10
-				M.Paralyse(1)
-				M.Weaken(4)
+				SET_STATUS_MAX(M, STAT_BLURRY, 10)
+				SET_STATUS_MAX(M, STAT_PARA, 1)
+				SET_STATUS_MAX(M, STAT_WEAK, 4)
 			if (eyes.damage >= eyes.min_broken_damage)
 				if(M.stat != 2)
 					to_chat(M, SPAN_WARNING("You go blind!"))
@@ -653,7 +652,7 @@ var/list/slot_flags_enumeration = list(
 		affecting.take_external_damage(7)
 	else
 		M.take_organ_damage(7)
-	M.eye_blurry += rand(3,4)
+	SET_STATUS_MAX(M, STAT_BLURRY, rand(3,4))
 	return
 
 /obj/item/clean_blood()
@@ -756,9 +755,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	user.visible_message("\The [user] peers through [zoomdevicename ? "the [zoomdevicename] of [src]" : "[src]"].")
 
-	GLOB.destroyed_event.register(src, src, /obj/item/proc/unzoom)
-	GLOB.moved_event.register(src, src, /obj/item/proc/unzoom)
-	GLOB.dir_set_event.register(src, src, /obj/item/proc/unzoom)
+	GLOB.destroyed_event.register(user, src, /obj/item/proc/unzoom)
+	GLOB.moved_event.register(user, src, /obj/item/proc/unzoom)
+	GLOB.dir_set_event.register(user, src, /obj/item/proc/unzoom)
 	GLOB.item_unequipped_event.register(src, src, /obj/item/proc/zoom_drop)
 	GLOB.stat_set_event.register(user, src, /obj/item/proc/unzoom)
 
@@ -770,16 +769,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return
 	zoom = 0
 
-	GLOB.destroyed_event.unregister(src, src, /obj/item/proc/unzoom)
-	GLOB.moved_event.unregister(src, src, /obj/item/proc/unzoom)
-	GLOB.dir_set_event.unregister(src, src, /obj/item/proc/unzoom)
+	GLOB.destroyed_event.unregister(user, src, /obj/item/proc/unzoom)
+	GLOB.moved_event.unregister(user, src, /obj/item/proc/unzoom)
+	GLOB.dir_set_event.unregister(user, src, /obj/item/proc/unzoom)
 	GLOB.item_unequipped_event.unregister(src, src, /obj/item/proc/zoom_drop)
-
-	user = user == src ? loc : (user || loc)
-	if(!istype(user))
-		crash_with("[log_info_line(src)]: Zoom user lost]")
-		return
-
 	GLOB.stat_set_event.unregister(user, src, /obj/item/proc/unzoom)
 
 	if(!user.client)

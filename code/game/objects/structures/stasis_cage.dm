@@ -15,6 +15,11 @@
 	if(A)
 		contain(A)
 
+/obj/structure/stasis_cage/attackby(obj/item/O, mob/user)
+	if(contained && istype(O, /obj/item/scanner/xenobio))
+		return contained.attackby(O, user)
+	. = ..()
+
 /obj/structure/stasis_cage/attack_hand(var/mob/user)
 	try_release(user)
 
@@ -64,17 +69,20 @@
 	release()
 	return ..()
 
-/mob/living/simple_animal/MouseDrop(var/obj/structure/stasis_cage/over_object)
-	if(istype(over_object) && Adjacent(over_object) && CanMouseDrop(over_object, usr))
-
-		if(!stat && !istype(src.buckled, /obj/effect/energy_net))
-			to_chat(usr, "It's going to be difficult to convince \the [src] to move into \the [over_object] without capturing it in a net.")
-			return
-
-		usr.visible_message("[usr] begins stuffing \the [src] into \the [over_object].", "You begin stuffing \the [src] into \the [over_object].")
-		Bumped(usr)
-		if(do_after(usr, 20, over_object))
-			usr.visible_message("[usr] has stuffed \the [src] into \the [over_object].", "You have stuffed \the [src] into \the [over_object].")
-			over_object.contain(src)
-	else
-		return ..()
+/mob/living/simple_animal/handle_mouse_drop(atom/over, mob/user)
+	if(istype(over, /obj/structure/stasis_cage))
+		var/obj/structure/stasis_cage/cage = over
+		if(!stat && !istype(buckled, /obj/effect/energy_net))
+			to_chat(user, SPAN_WARNING("It's going to be difficult to convince \the [src] to move into \the [cage] without capturing it in a net."))
+			return TRUE
+		user.visible_message( \
+			SPAN_NOTICE("\The [user] begins stuffing \the [src] into \the [cage]."), \
+			SPAN_NOTICE("You begin stuffing \the [src] into \the [cage]."))
+		Bumped(user)
+		if(do_after(user, 20, cage))
+			cage.visible_message( \
+				SPAN_NOTICE("\The [user] has stuffed \the [src] into \the [cage]."), \
+				SPAN_NOTICE("You have stuffed \the [src] into \the [cage]."))
+			cage.contain(src)
+		return TRUE
+	. = ..()

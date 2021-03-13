@@ -5,6 +5,7 @@
 
 /mob/observer/eye
 	name = "Eye"
+	mob_sort_value = 1
 	var/name_sufix = "Eye"
 	icon = 'icons/mob/eye.dmi'
 	icon_state = "default-eye"
@@ -77,6 +78,7 @@
 	LAZYREMOVE(user.additional_vision_handlers, src)
 	remove_visual(owner)
 	owner.eyeobj = null
+	owner.reset_view()
 	if(click_handler_type)
 		owner.RemoveClickHandler(click_handler_type)
 	owner = null

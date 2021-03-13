@@ -133,7 +133,7 @@
 		var/new_pressure = round(air_sample.return_pressure(),0.1)
 
 		if(abs(pressure - new_pressure) > 0.001 || pressure == null)
-			var/decl/public_access/public_variable/airlock_pressure/pressure_var = decls_repository.get_decl(/decl/public_access/public_variable/airlock_pressure)
+			var/decl/public_access/public_variable/airlock_pressure/pressure_var = GET_DECL(/decl/public_access/public_variable/airlock_pressure)
 			pressure_var.write_var(src, new_pressure)
 
 			var/new_alert = (pressure < ONE_ATMOSPHERE*0.8)

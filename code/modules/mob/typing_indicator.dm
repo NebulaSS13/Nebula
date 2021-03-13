@@ -14,7 +14,7 @@ I IS TYPIN'!'
 /atom/movable/overlay/typing_indicator/Initialize()
 	. = ..()
 	if(!istype(master, /mob))
-		crash_with("Master of typing_indicator has invalid type: [master.type].")
+		PRINT_STACK_TRACE("Master of typing_indicator has invalid type: [master.type].")
 
 /atom/movable/overlay/typing_indicator/Destroy()
 	var/mob/M = master

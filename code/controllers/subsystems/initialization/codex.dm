@@ -82,7 +82,7 @@ SUBSYSTEM_DEF(codex)
 		popup.open()
 
 /datum/controller/subsystem/codex/proc/get_guide(var/category)
-	var/decl/codex_category/cat = decls_repository.get_decl(category)
+	var/decl/codex_category/cat = GET_DECL(category)
 	. = cat?.guide_html
 
 /datum/controller/subsystem/codex/proc/retrieve_entries_for_string(var/searching)

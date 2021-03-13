@@ -53,6 +53,7 @@
 	origin_tech = "{'powerstorage':1,'engineering':1}"
 	battery_rating = 30
 	material = /decl/material/solid/metal/steel
+	origin_tech = "{'powerstorage':2,'engineering':1}"
 
 // This is not intended to be obtainable in-game. Intended for adminbus and debugging purposes.
 /obj/item/stock_parts/computer/battery_module/lambda

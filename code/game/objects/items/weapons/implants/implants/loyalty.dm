@@ -20,7 +20,7 @@
 	if(!istype(M, /mob/living/carbon/human))
 		return FALSE
 	var/mob/living/carbon/human/H = M
-	var/decl/special_role/antag_data = ispath(H.mind.assigned_special_role, /decl/special_role) && decls_repository.get_decl(H.mind.assigned_special_role)
+	var/decl/special_role/antag_data = ispath(H.mind.assigned_special_role, /decl/special_role) && GET_DECL(H.mind.assigned_special_role)
 	if(antag_data && (antag_data.flags & ANTAG_IMPLANT_IMMUNE))
 		H.visible_message("[H] seems to resist the implant!", "You feel the corporate tendrils of [GLOB.using_map.company_name] try to invade your mind!")
 		return FALSE

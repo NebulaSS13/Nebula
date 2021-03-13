@@ -39,6 +39,10 @@
 			fail("Error after transfer: [error]")
 		else
 			pass("Final reagent holders had correct values.")
+
+	qdel(from)
+	if(!isturf(target))
+		qdel(target)
 	return TRUE
 
 /datum/unit_test/chemistry/proc/perform_transfer(var/atom/from, var/atom/target)
@@ -56,11 +60,15 @@
 		var/to_holding_target = container_volume * 0.5
 		var/from_remaining_target = container_volume - to_holding_target
 		var/datum/reagents/checking = get_first_reagent_holder(from)
+		if(!checking)
+			return "first holder is null."
 		if(checking?.total_volume != from_remaining_target)
-			return "first holder should have [from_remaining_target]u remaining but has [from.reagents.total_volume]u."
+			return "first holder should have [from_remaining_target]u remaining but has [checking.total_volume]u."
 		checking = get_second_reagent_holder(target)
+		if(!checking)
+			return "second holder is null."
 		if(checking?.total_volume != to_holding_target)
-			return "second holder should hold [to_holding_target]u but has [target.reagents.total_volume]u."
+			return "second holder should hold [to_holding_target]u but has [checking.total_volume]u."
 
 /datum/unit_test/chemistry/proc/validate_holders(var/atom/from, var/atom/target)
 	if(QDELETED(from))
@@ -86,11 +94,11 @@
 
 /datum/unit_test/chemistry/test_trans_to/to_mob
 	name = "CHEMISTRY: trans_to() Test (mob)"
-	recipient_type = /mob/living/carbon
+	recipient_type = /mob/living
 
 /datum/unit_test/chemistry/test_trans_to/to_mob/get_second_reagent_holder(var/atom/from)
-	var/mob/living/carbon/C = from
-	. = C.touching
+	var/mob/living/testmob = from
+	. = testmob.get_contact_reagents()
 
 /datum/unit_test/chemistry/test_trans_to_holder
 	name = "CHEMISTRY: trans_to_holder() Test"
@@ -110,7 +118,7 @@
 
 /datum/unit_test/chemistry/test_trans_to_mob
 	name = "CHEMISTRY: trans_to_mob() Test"
-	recipient_type = /mob/living/carbon
+	recipient_type = /mob/living
 
 /datum/unit_test/chemistry/test_trans_to_mob/perform_transfer(var/atom/from, var/atom/target)
 	. = ..()
@@ -167,15 +175,6 @@
 						break
 				if(safe)
 					continue
-				// Slime reactions have extra requirements
-				if(istype(other_reaction, /datum/chemical_reaction/slime))
-					var/datum/chemical_reaction/slime/other_slime = other_reaction
-					if(other_slime.required)
-						if(!istype(reaction, /datum/chemical_reaction/slime))
-							continue
-						var/datum/chemical_reaction/slime/our_slime = reaction
-						if(!ispath(our_slime.required, other_slime.required)) // This would mean our requirement is stronger than theirs
-							continue
 
 				// Now check for reagents
 				for(var/reagent_path in other_reaction.required_reagents)

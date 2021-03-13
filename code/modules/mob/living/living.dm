@@ -77,9 +77,6 @@ default behaviour is:
 				forceMove(tmob.loc)
 				tmob.forceMove(oldloc)
 				now_pushing = 0
-				for(var/mob/living/carbon/slime/slime in view(1,tmob))
-					if(slime.Victim == tmob)
-						slime.UpdateFeed()
 				return
 
 			if(!can_move_mob(tmob, 0, 0))
@@ -101,7 +98,7 @@ default behaviour is:
 			if(!(tmob.status_flags & CANPUSH))
 				now_pushing = 0
 				return
-			tmob.LAssailant = src
+			tmob.last_handled_by_mob = weakref(src)
 		if(isobj(AM) && !AM.anchored)
 			var/obj/I = AM
 			if(!can_pull_size || can_pull_size < I.w_class)
@@ -114,8 +111,8 @@ default behaviour is:
 			..()
 			var/saved_dir = AM.dir
 			if (!istype(AM, /atom/movable) || AM.anchored)
-				if(confused && prob(50) && !MOVING_DELIBERATELY(src))
-					Weaken(2)
+				if(HAS_STATUS(src, STAT_CONFUSE) && prob(50) && !MOVING_DELIBERATELY(src))
+					SET_STATUS_MAX(src, STAT_WEAK, 2)
 					playsound(loc, "punch", 25, 1, -1)
 					visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
 					src.apply_damage(5, BRUTE)
@@ -128,6 +125,7 @@ default behaviour is:
 					for(var/obj/structure/window/win in get_step(AM,t))
 						now_pushing = 0
 						return
+				AM.glide_size = glide_size
 				step(AM, t)
 				if (istype(AM, /mob/living))
 					var/mob/living/tmob = AM
@@ -179,6 +177,10 @@ default behaviour is:
 		updatehealth()
 		to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
 
+/mob/living/proc/update_body(var/update_icons=1)
+	if(update_icons)
+		queue_icon_update()
+
 /mob/living/proc/updatehealth()
 	if(status_flags & GODMODE)
 		health = 100
@@ -191,11 +193,6 @@ default behaviour is:
 //affects them once clothing is factored in. ~Errorage
 /mob/living/proc/calculate_affecting_pressure(var/pressure)
 	return
-
-
-//sort of a legacy burn method for /electrocute, /shock, and the e_chair
-/mob/living/proc/burn_skin(burn_amount)
-	take_overall_damage(0, burn_amount)
 
 /mob/living/proc/increaseBodyTemp(value)
 	return 0
@@ -354,17 +351,17 @@ default behaviour is:
 
 
 // heal ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = 0)
+/mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = FALSE)
 	adjustBruteLoss(-brute)
 	adjustFireLoss(-burn)
 	src.updatehealth()
 
 // damage ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/take_organ_damage(var/brute, var/burn, var/emp=0)
-	if(status_flags & GODMODE)	return 0	//godmode
-	adjustBruteLoss(brute)
-	adjustFireLoss(burn)
-	src.updatehealth()
+/mob/living/proc/take_organ_damage(var/brute = 0, var/burn = 0, var/bypass_armour = FALSE, var/override_droplimb)
+	if(!(status_flags & GODMODE))
+		adjustBruteLoss(brute)
+		adjustFireLoss(burn)
+		updatehealth()
 
 // heal MANY external organs, in random order
 /mob/living/proc/heal_overall_damage(var/brute, var/burn)
@@ -399,6 +396,17 @@ default behaviour is:
 	fire_stacks = 0
 
 /mob/living/proc/rejuvenate()
+
+	// Wipe all of our reagent lists.
+	var/datum/reagents/bloodstr_reagents = get_injected_reagents()
+	if(bloodstr_reagents)
+		bloodstr_reagents.clear_reagents()
+	var/datum/reagents/touching_reagents = get_contact_reagents()
+	if(touching_reagents)
+		touching_reagents.clear_reagents()
+	var/datum/reagents/ingested_reagents = get_ingested_reagents()
+	if(ingested_reagents)
+		ingested_reagents.clear_reagents()
 	if(reagents)
 		reagents.clear_reagents()
 
@@ -407,9 +415,9 @@ default behaviour is:
 	setOxyLoss(0)
 	setCloneLoss(0)
 	setBrainLoss(0)
-	SetParalysis(0)
-	SetStunned(0)
-	SetWeakened(0)
+	set_status(STAT_PARA, 0)
+	set_status(STAT_STUN, 0)
+	set_status(STAT_WEAK, 0)
 
 	// shut down ongoing problems
 	radiation = 0
@@ -418,15 +426,8 @@ default behaviour is:
 	disabilities = 0
 
 	// fix blindness and deafness
-	blinded = 0
-	eye_blind = 0
-	eye_blurry = 0
-	ear_deaf = 0
-	ear_damage = 0
-	drowsyness = 0
-	drugged = 0
-	jitteriness = 0
-	confused = 0
+	blinded =     0
+	clear_status_effects()
 
 	heal_overall_damage(getBruteLoss(), getFireLoss())
 
@@ -475,7 +476,7 @@ default behaviour is:
 /mob/living/carbon/basic_revival(var/repair_brain = TRUE)
 	if(repair_brain && should_have_organ(BP_BRAIN))
 		repair_brain = FALSE
-		var/obj/item/organ/internal/brain/brain = internal_organs_by_name[BP_BRAIN]
+		var/obj/item/organ/internal/brain/brain = get_internal_organ(BP_BRAIN)
 		if(brain.damage > (brain.max_damage/2))
 			brain.damage = (brain.max_damage/2)
 		if(brain.status & ORGAN_DEAD)
@@ -506,24 +507,17 @@ default behaviour is:
 	..()
 	if(!skill_check(SKILL_MEDICAL, SKILL_BASIC))
 		for(var/obj/item/grab/grab in get_active_grabs())
-			var/mob/affecting_mob = grab.get_affecting_mob()
+			var/mob/living/affecting_mob = grab.get_affecting_mob()
 			if(affecting_mob)
 				affecting_mob.handle_grab_damage()
 
 /mob/living/Move(a, b, flag)
 	if (buckled)
 		return
-
 	. = ..()
-
 	handle_grabs_after_move()
-
 	if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
 		s_active.close(src)
-
-	if(update_slimes)
-		for(var/mob/living/carbon/slime/M in view(1,src))
-			M.UpdateFeed()
 
 /mob/living/verb/resist()
 	set name = "Resist"
@@ -534,7 +528,7 @@ default behaviour is:
 		resist_grab()
 		if(resting)
 			lay_down()
-		if(!weakened)
+		if(!HAS_STATUS(src, STAT_WEAK))
 			process_resist()
 
 /mob/living/proc/process_resist()
@@ -642,18 +636,6 @@ default behaviour is:
 /mob/living/carbon/get_contained_external_atoms()
 	. = contents - (internal_organs|organs)
 
-//damage/heal the mob ears and adjust the deaf amount
-/mob/living/adjustEarDamage(var/damage, var/deaf)
-	ear_damage = max(0, ear_damage + damage)
-	ear_deaf = max(0, ear_deaf + deaf)
-
-//pass a negative argument to skip one of the variable
-/mob/living/setEarDamage(var/damage = null, var/deaf = null)
-	if(!isnull(damage))
-		ear_damage = damage
-	if(!isnull(deaf))
-		ear_deaf = deaf
-
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client
 
@@ -727,24 +709,24 @@ default behaviour is:
 	. = 0
 	if(incapacitated(INCAPACITATION_UNRESISTING))
 		. += 100
-	if(eye_blind)
+	if(HAS_STATUS(src, STAT_BLIND))
 		. += 75
-	if(eye_blurry)
+	if(HAS_STATUS(src, STAT_BLURRY))
 		. += 15
-	if(confused)
+	if(HAS_STATUS(src, STAT_CONFUSE))
 		. += 30
 	if(MUTATION_CLUMSY in mutations)
 		. += 40
 
 /mob/living/proc/ranged_accuracy_mods()
 	. = 0
-	if(jitteriness)
+	if(HAS_STATUS(src, STAT_JITTER))
 		. -= 2
-	if(confused)
+	if(HAS_STATUS(src, STAT_CONFUSE))
 		. -= 2
-	if(eye_blind)
+	if(HAS_STATUS(src, STAT_BLIND))
 		. -= 5
-	if(eye_blurry)
+	if(HAS_STATUS(src, STAT_BLURRY))
 		. -= 1
 	if(MUTATION_CLUMSY in mutations)
 		. -= 3
@@ -765,12 +747,19 @@ default behaviour is:
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.
 
 /mob/living/fluid_act(var/datum/reagents/fluids)
-	..()
 	for(var/thing in get_equipped_items(TRUE))
 		if(isnull(thing)) continue
 		var/atom/movable/A = thing
 		if(A.simulated)
 			A.fluid_act(fluids)
+	if(fluids.total_volume)
+		var/datum/reagents/touching_reagents = get_contact_reagents()
+		if(touching_reagents)
+			var/saturation =  min(fluids.total_volume, round(mob_size * 1.5 * reagent_permeability()) - touching_reagents.total_volume)
+			if(saturation > 0)
+				fluids.trans_to_holder(touching_reagents, saturation)
+	if(fluids.total_volume)
+		. = ..()
 
 /mob/living/proc/nervous_system_failure()
 	return FALSE
@@ -781,10 +770,10 @@ default behaviour is:
 /mob/living/proc/seizure()
 	set waitfor = 0
 	sleep(rand(5,10))
-	if(!paralysis && stat == CONSCIOUS)
+	if(!HAS_STATUS(src, STAT_PARA) && stat == CONSCIOUS)
 		visible_message(SPAN_DANGER("\The [src] starts having a seizure!"))
-		Paralyse(rand(8,16))
-		make_jittery(rand(150,200))
+		SET_STATUS_MAX(src, STAT_PARA, rand(8,16))
+		set_status(STAT_JITTER, rand(150,200))
 		adjustHalLoss(rand(50,60))
 
 /mob/living/proc/get_digestion_product()
@@ -799,11 +788,17 @@ default behaviour is:
 /mob/living/proc/adjust_hydration(var/amt)
 	return
 
+/mob/living/proc/has_chemical_effect(var/chem, var/threshold_over, var/threshold_under)
+	var/val = LAZYACCESS(chem_effects, chem)
+	. = (isnull(threshold_over) || val >= threshold_over) && (isnull(threshold_under) || val <= threshold_under)
+
 /mob/living/proc/add_chemical_effect(var/effect, var/magnitude = 1)
-	return
+	magnitude += LAZYACCESS(chem_effects, effect)
+	LAZYSET(chem_effects, effect, magnitude)
 
 /mob/living/proc/add_up_to_chemical_effect(var/effect, var/magnitude = 1)
-	return
+	magnitude = max(magnitude, LAZYACCESS(chem_effects, effect))
+	LAZYSET(chem_effects, effect, magnitude)
 
 /mob/living/proc/adjust_immunity(var/amt)
 	return
@@ -860,3 +855,42 @@ default behaviour is:
 
 /mob/living/proc/get_ingested_reagents()
 	return reagents
+
+/mob/living/proc/should_have_organ(var/organ_check)
+	return FALSE
+
+/mob/living/proc/get_contact_reagents()
+	return reagents
+
+/mob/living/proc/get_injected_reagents()
+	return reagents
+
+/mob/living/proc/get_adjusted_metabolism(metabolism)
+	return metabolism
+
+/mob/living/get_admin_job_string()
+	return "Living"
+
+/mob/living/handle_mouse_drop(atom/over, mob/user)
+	if(user == src && user != over)
+
+		if(isturf(over))
+			var/turf/T = over
+			var/obj/structure/glass_tank/A = locate() in user.loc
+			if(A && A.Adjacent(user) && A.Adjacent(T))
+				A.do_climb_out(user, T)
+				return TRUE
+
+		if(istype(over, /mob/living/exosuit))
+			var/mob/living/exosuit/exosuit = over
+			if(exosuit.body)
+				if(user.mob_size >= exosuit.body.min_pilot_size && user.mob_size <= exosuit.body.max_pilot_size)
+					exosuit.enter(src)
+				else
+					to_chat(usr, SPAN_WARNING("You cannot pilot a exosuit of this size."))
+				return TRUE
+	. = ..()
+
+/mob/living/is_deaf()
+	. = ..() || GET_STATUS(src, STAT_DEAF)
+

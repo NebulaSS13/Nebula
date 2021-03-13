@@ -95,22 +95,22 @@
 
 	available_cultural_info = list(
 		TAG_CULTURE =   list(
-			CULTURE_VOX_ARKSHIP,
-			CULTURE_VOX_SALVAGER,
-			CULTURE_VOX_RAIDER
+			/decl/cultural_info/culture/vox,
+			/decl/cultural_info/culture/vox/salvager,
+			/decl/cultural_info/culture/vox/raider
 		),
 		TAG_HOMEWORLD = list(
-			HOME_SYSTEM_VOX_ARK,
-			HOME_SYSTEM_VOX_SHROUD,
-			HOME_SYSTEM_VOX_SHIP
+			/decl/cultural_info/location/vox,
+			/decl/cultural_info/location/vox/shroud,
+			/decl/cultural_info/location/vox/ship
 		),
 		TAG_FACTION = list(
-			FACTION_VOX_RAIDER,
-			FACTION_VOX_CREW,
-			FACTION_VOX_APEX
+			/decl/cultural_info/faction/vox,
+			/decl/cultural_info/faction/vox/raider,
+			/decl/cultural_info/faction/vox/apex
 		),
 		TAG_RELIGION =  list(
-			RELIGION_VOX
+			/decl/cultural_info/religion/vox
 		)
 	)
 
