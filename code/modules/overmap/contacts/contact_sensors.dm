@@ -43,7 +43,9 @@
 	
 	// Update our own marker icon regardless of power or sensor connections.
 	var/sensor_range = 0
-	if(sensors.use_power)
+
+	var/obj/machinery/shipsensors/sensors = get_sensors()
+	if(sensors?.use_power)
 		sensor_range = round(sensors.range,1)
 	var/datum/overmap_contact/self_record = contact_datums[linked]
 	self_record.update_marker_icon(sensor_range)

@@ -4,11 +4,17 @@
 	icon_screen = "teleport"
 	light_color = "#77fff8"
 	extra_view = 4
-	var/obj/machinery/shipsensors/sensors
+	var/weakref/sensor_ref
 	var/list/last_scan
 	var/working_sound = 'sound/machines/sensors/dradis.ogg'
 	var/datum/sound_token/sound_token
 	var/sound_id
+
+/obj/machinery/computer/ship/sensors/proc/get_sensors()
+	var/obj/machinery/shipsensors/sensors = sensor_ref?.resolve()
+	if(!istype(sensors) || QDELETED(sensors))
+		sensor_ref = null
+	return sensors
 
 /obj/machinery/computer/ship/sensors/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)
 	if(!(. = ..()))
@@ -20,7 +26,7 @@
 		return
 	for(var/obj/machinery/shipsensors/S in SSmachines.machinery)
 		if(linked.check_ownership(S))
-			sensors = S
+			sensor_ref = weakref(S)
 			break
 
 /obj/machinery/computer/ship/sensors/proc/update_sound()
@@ -28,7 +34,9 @@
 		return
 	if(!sound_id)
 		sound_id = "[type]_[sequential_id(/obj/machinery/computer/ship/sensors)]"
-	if(linked && sensors.use_power ** sensors.powered())
+
+	var/obj/machinery/shipsensors/sensors = get_sensors()
+	if(sensors && linked && sensors.use_power ** sensors.powered())
 		var/volume = 10
 		if(!sound_token)
 			sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, working_sound, volume = volume, range = 10)
@@ -43,6 +51,7 @@
 
 	var/data[0]
 
+	var/obj/machinery/shipsensors/sensors = get_sensors()
 	data["viewing"] = viewing_overmap(user)
 	if(sensors)
 		data["on"] = sensors.use_power
@@ -111,6 +120,7 @@
 		find_sensors()
 		return TOPIC_REFRESH
 
+	var/obj/machinery/shipsensors/sensors = get_sensors()
 	if(sensors)
 		if (href_list["range"])
 			var/nrange = input("Set new sensors range", "Sensor range", sensors.range) as num|null
