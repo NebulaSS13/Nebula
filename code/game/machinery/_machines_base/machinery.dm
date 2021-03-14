@@ -249,7 +249,7 @@ Class Procs:
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-/obj/machinery/attack_ai(mob/user)
+/obj/machinery/attack_ai(mob/living/silicon/ai/user)
 	if(CanUseTopic(user, DefaultTopicState()) > STATUS_CLOSE)
 		return interface_interact(user)
 
@@ -336,7 +336,7 @@ Class Procs:
 
 			if(terminal && terminal.powernet)
 				terminal.powernet.trigger_warning()
-		if(user.stunned)
+		if(HAS_STATUS(user, STAT_STUN))
 			return 1
 	return 0
 

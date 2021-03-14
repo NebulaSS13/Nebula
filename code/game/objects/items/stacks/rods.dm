@@ -54,7 +54,7 @@
 	else
 		icon_state = base_state
 
-/obj/item/stack/material/rods/attackby(obj/item/W, mob/living/user)
+/obj/item/stack/material/rods/attackby(obj/item/W, mob/user)
 	if(isWelder(W))
 		var/obj/item/weldingtool/WT = W
 

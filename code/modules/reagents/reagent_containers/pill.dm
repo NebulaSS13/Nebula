@@ -77,8 +77,7 @@
 
 		admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [REAGENT_LIST(src)]")
 		reagents.trans_to(target, reagents.total_volume)
-		for(var/mob/O in viewers(2, user))
-			O.show_message("<span class='warning'>[user] puts something in \the [target].</span>", 1)
+		user.visible_message(SPAN_NOTICE("\The [user] puts something in \the [target]."), range = 2)
 		qdel(src)
 	return
 

@@ -46,15 +46,12 @@
 			return attack_self(user)
 	return ..()
 
-/obj/item/modular_computer/pda/wrist/MouseDrop(var/obj/over_object)
-	if(ishuman(usr))
-		if(loc != usr) return
-		if(usr.restrained() || usr.incapacitated()) return
-		if (!usr.unEquip(src)) return
-		usr.put_in_hands(src)
-		src.add_fingerprint(usr)
-		return
-	return ..()
+/obj/item/modular_computer/pda/wrist/handle_mouse_drop(atom/over, mob/user)
+	if(ishuman(user) && loc == user && user.unEquip(src))
+		user.put_in_hands(src)
+		add_fingerprint(usr)
+		return TRUE
+	. = ..()
 
 // wrist box //
 

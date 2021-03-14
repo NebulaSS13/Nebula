@@ -1,7 +1,7 @@
 /proc/get_footstep(var/footstep_type, var/mob/caller)
 	. = caller && caller.get_footstep(footstep_type)
 	if(!.)
-		var/decl/footsteps/FS = decls_repository.get_decl(footstep_type)
+		var/decl/footsteps/FS = GET_DECL(footstep_type)
 		. = pick(FS.footstep_sounds)
 
 /turf/simulated/get_footstep_sound(var/mob/caller)

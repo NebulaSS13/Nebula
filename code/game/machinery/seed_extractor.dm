@@ -12,7 +12,7 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 
-obj/machinery/seed_extractor/attackby(var/obj/item/O, var/mob/user)
+/obj/machinery/seed_extractor/attackby(var/obj/item/O, var/mob/user)
 	if((. = component_attackby(O, user)))
 		return
 	// Fruits and vegetables.

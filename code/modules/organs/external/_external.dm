@@ -110,7 +110,7 @@
 	slowdown = species.get_slowdown(owner)
 	if(species)
 		for(var/attack_type in species.unarmed_attacks)
-			var/decl/natural_attack/attack = decls_repository.get_decl(attack_type)
+			var/decl/natural_attack/attack = GET_DECL(attack_type)
 			if(istype(attack) && (organ_tag in attack.usable_with_limbs))
 				LAZYADD(unarmed_attacks, attack_type)
 
@@ -164,8 +164,8 @@
 		return
 
 	if(owner && BP_IS_CRYSTAL(src)) // Crystalline robotics == piezoelectrics.
-		owner.Weaken(4 - severity)
-		owner.confused = max(owner.confused, 6 - (severity * 2))
+		SET_STATUS_MAX(owner, STAT_WEAK, 4 - severity)
+		SET_STATUS_MAX(owner, STAT_CONFUSE, 6 - (severity * 2))
 		return
 
 	var/burn_damage = 0
@@ -406,6 +406,8 @@
 
 		for(var/obj/item/organ/external/organ in children)
 			organ.replaced(owner)
+
+		owner.refresh_modular_limb_verbs()
 
 	if(!parent && parent_organ)
 		parent = owner.organs_by_name[src.parent_organ]
@@ -1082,7 +1084,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(W.clamped)
 			return 1
 
-obj/item/organ/external/proc/remove_clamps()
+/obj/item/organ/external/proc/remove_clamps()
 	var/rval = 0
 	for(var/datum/wound/W in wounds)
 		rval |= W.clamped
@@ -1161,7 +1163,7 @@ obj/item/organ/external/proc/remove_clamps()
 
 /obj/item/organ/external/proc/get_dexterity()
 	if(model)
-		var/decl/prosthetics_manufacturer/R = decls_repository.get_decl(model)
+		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
 		if(R)
 			return R.manual_dexterity
 	if(species)
@@ -1180,14 +1182,15 @@ obj/item/organ/external/proc/remove_clamps()
 		PRINT_STACK_TRACE("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
 		company = /decl/prosthetics_manufacturer
 	
-	var/decl/prosthetics_manufacturer/R = decls_repository.get_decl(company)
+	var/decl/prosthetics_manufacturer/R = GET_DECL(company)
 	if(!R.check_can_install(organ_tag, (owner?.get_bodytype() || GLOB.using_map.default_bodytype), (owner?.get_species_name() || GLOB.using_map.default_species)))
-		R = decls_repository.get_decl(/decl/prosthetics_manufacturer)
+		R = GET_DECL(/decl/prosthetics_manufacturer)
 
 	model = company
 	force_icon = R.icon
 	name = "[R ? R.modifier_string : "robotic"] [initial(name)]"
 	desc = "[R.desc] It looks like it was produced by [R.name]."
+	origin_tech = R.limb_tech
 	slowdown = R.movement_slowdown
 	max_damage *= R.hardiness
 	min_broken_damage *= R.hardiness
@@ -1216,6 +1219,8 @@ obj/item/organ/external/proc/remove_clamps()
 
 		while(null in owner.internal_organs)
 			owner.internal_organs -= null
+
+		owner.refresh_modular_limb_verbs()
 
 	return 1
 
@@ -1356,6 +1361,8 @@ obj/item/organ/external/proc/remove_clamps()
 	else if(is_stump())
 		qdel(src)
 
+	victim.refresh_modular_limb_verbs()
+
 /obj/item/organ/external/proc/disfigure(var/type = "brute")
 	if(status & ORGAN_DISFIGURED)
 		return
@@ -1472,7 +1479,7 @@ obj/item/organ/external/proc/remove_clamps()
 /obj/item/organ/external/proc/is_robotic()
 	. = FALSE
 	if(BP_IS_PROSTHETIC(src) && model)
-		var/decl/prosthetics_manufacturer/R = decls_repository.get_decl(model)
+		var/decl/prosthetics_manufacturer/R = GET_DECL(model)
 		. = R && R.is_robotic
 
 /obj/item/organ/external/proc/has_growths()

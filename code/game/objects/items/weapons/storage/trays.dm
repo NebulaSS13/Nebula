@@ -54,7 +54,7 @@
 /obj/item/storage/tray/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50)) // There is a better way to do this but I'll be damned if I'm the one to fix it.
 		to_chat(user, SPAN_DANGER("You accidentally slam yourself with the [src]!"))
-		user.Weaken(1)
+		SET_STATUS_MAX(user, STAT_WEAK, 1)
 		user.take_organ_damage(2)
 		if(prob(50))
 			playsound(M, hitsound, 50, 1)

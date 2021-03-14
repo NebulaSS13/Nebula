@@ -96,11 +96,13 @@
 	switch(severity)
 		if(1)
 			src.take_organ_damage(0, 16, bypass_armour = TRUE)
-			if(prob(50)) Stun(rand(5,10))
-			else confused = (min(confused + 2, 40))
+			if(prob(50)) 
+				SET_STATUS_MAX(src, STAT_STUN, rand(5,10))
+			else
+				ADJ_STATUS(src, STAT_CONFUSE, rand(2,40))
 		if(2)
 			src.take_organ_damage(0, 7, bypass_armour = TRUE)
-			confused = (min(confused + 2, 30))
+			ADJ_STATUS(src, STAT_CONFUSE, rand(2,30))
 	flash_eyes(affect_silicon = 1)
 	to_chat(src, "<span class='danger'><B>*BZZZT*</B></span>")
 	to_chat(src, "<span class='danger'>Warning: Electromagnetic pulse detected.</span>")
@@ -122,7 +124,7 @@
 			"<span class='danger'>Energy pulse detected, system damaged!</span>", \
 			"<span class='warning'>You hear an electrical crack</span>")
 		if(prob(20))
-			Stun(2)
+			SET_STATUS_MAX(src, STAT_STUN, 2)
 		return
 
 /mob/living/silicon/proc/damage_mob(var/brute = 0, var/fire = 0, var/tox = 0)
@@ -194,7 +196,7 @@
 /mob/living/silicon/add_language(var/language, var/can_speak=1)
 	if(!ispath(language, /decl/language))
 		return
-	var/decl/language/added_language = decls_repository.get_decl(language)
+	var/decl/language/added_language = GET_DECL(language)
 	if(!added_language)
 		return
 
@@ -206,7 +208,7 @@
 /mob/living/silicon/remove_language(var/rem_language)
 	if(!ispath(rem_language, /decl/language))
 		return
-	var/decl/language/removed_language = decls_repository.get_decl(rem_language)
+	var/decl/language/removed_language = GET_DECL(rem_language)
 	if(!removed_language)
 		return
 
@@ -221,7 +223,7 @@
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
 
 	if(default_language)
-		var/decl/language/lang = decls_repository.get_decl(default_language)
+		var/decl/language/lang = GET_DECL(default_language)
 		dat += "Current default language: [lang.name] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
 
 	for(var/decl/language/L in languages)
@@ -346,7 +348,7 @@
 
 
 /mob/living/silicon/proc/is_traitor()
-	var/decl/special_role/traitors = decls_repository.get_decl(/decl/special_role/traitor)
+	var/decl/special_role/traitors = GET_DECL(/decl/special_role/traitor)
 	return mind && (mind in traitors.current_antagonists)
 
 /mob/living/silicon/adjustEarDamage()
@@ -433,3 +435,6 @@
 
 /mob/living/silicon/get_admin_job_string()
 	return "Silicon-based"
+
+/mob/living/silicon/get_telecomms_race_info()
+	return list("Artificial Life", TRUE)

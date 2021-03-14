@@ -52,4 +52,4 @@
 			to_chat(H, SPAN_NOTICE(pick(drastic_messages)))
 
 	if(prob(dizziness_prob))
-		H.dizziness += rand(3,5)
+		ADJ_STATUS(H, STAT_DIZZY, rand(3,5))

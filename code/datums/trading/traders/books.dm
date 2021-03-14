@@ -30,7 +30,6 @@
 
 	speech = list("hail_generic" = "Yes hello hello! Many fine paperstacks for sale! Please buy!",
 					"hail_deny" = "Not in! I'm not here! Go away!!",
-					"hail_yinglet" = "Books!  Paper stuffs!  Come and get 'em hot off za presses!  Can't read?  No problem!  Zhey burn oh so good!  Can read?  Great!  Don't want to read 'em even so?  Zhey STILL BURN!",
 
 					"insult_good" = "Zhat hurts friend!",
 					"insult_bad" = "Ohhhhhh!! Why you picking a fight?! You will lose!",

@@ -2,6 +2,7 @@
 	var/moved = FALSE
 
 /obj/screen/movable/MouseDrop(over_object, src_location, over_location, src_control, over_control, params)
+	SHOULD_CALL_PARENT(FALSE)
 	var/list/PM = params2list(params)
 	if(LAZYLEN(PM) && PM["screen-loc"])
 		var/list/screen_loc_params = splittext(PM["screen-loc"], ",")

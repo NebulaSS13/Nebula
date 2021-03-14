@@ -58,9 +58,7 @@
 	adjust_stamina(-100)
 	reset_plane_and_layer()
 	UpdateLyingBuckledAndVerbStatus()
-
-	dizziness = 0
-	jitteriness = 0
+	clear_status_effects()
 
 	set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
 	set_see_in_dark(8)

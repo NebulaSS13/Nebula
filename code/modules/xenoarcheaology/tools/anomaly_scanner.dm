@@ -16,7 +16,7 @@
 	var/last_scan_time = 0
 	var/scan_delay = 25
 
-/obj/item/ano_scanner/attack_self(var/mob/living/user)
+/obj/item/ano_scanner/attack_self(var/mob/user)
 	interact(user)
 
 /obj/item/ano_scanner/interact(var/mob/living/user)

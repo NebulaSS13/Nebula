@@ -73,20 +73,20 @@
 	for(var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
 		effect.process()
 
-/obj/structure/artifact/attack_robot(mob/living/user)
+/obj/structure/artifact/attack_robot(mob/user)
 	if(!CanPhysicallyInteract(user))
 		return
 	visible_message(SPAN_NOTICE("[user] touches \the [src]."))
 	check_triggers(/datum/artifact_trigger/proc/on_touch, user)
 	touched(user)
 
-/obj/structure/artifact/attack_hand(mob/living/user)
+/obj/structure/artifact/attack_hand(mob/user)
 	. = ..()
 	visible_message(SPAN_NOTICE("[user] touches \the [src]."))
 	check_triggers(/datum/artifact_trigger/proc/on_touch, user)
 	touched(user)
 
-/obj/structure/artifact/attackby(obj/item/W, mob/living/user)
+/obj/structure/artifact/attackby(obj/item/W, mob/user)
 	. = ..()
 	visible_message(SPAN_WARNING("[user] hits \the [src] with \the [W]."))
 	check_triggers(/datum/artifact_trigger/proc/on_hit, W, user)

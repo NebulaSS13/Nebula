@@ -26,7 +26,7 @@ calculate text size per text.
 	var/list/tastes = list() //descriptor = strength
 	if(minimum_percent <= 100)
 		for(var/reagent_type in reagent_volumes)
-			var/decl/material/R = decls_repository.get_decl(reagent_type)
+			var/decl/material/R = GET_DECL(reagent_type)
 			if(!R.taste_mult)
 				continue
 			if(istype(R, /decl/material/liquid/nutriment))

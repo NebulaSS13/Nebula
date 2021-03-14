@@ -18,12 +18,15 @@
 	name = "Culture"
 	sort_order = 1
 	var/list/hidden
+	var/list/expanded
 	var/list/tokens = ALL_CULTURAL_TAGS
 
 /datum/category_item/player_setup_item/background/culture/New()
 	hidden = list()
+	expanded = list()
 	for(var/token in tokens)
 		hidden[token] = TRUE
+		expanded[token] = FALSE
 	..()
 
 /datum/category_item/player_setup_item/background/culture/sanitize_character()
@@ -61,11 +64,11 @@
 	// This is a bit noodly. If pref.cultural_info[TAG_CULTURE] is null, then we haven't finished loading/sanitizing, which means we might purge
 	// numbers or w/e from someone's name by comparing them to the map default. So we just don't bother sanitizing at this point otherwise.
 	if(pref.cultural_info[TAG_CULTURE])
-		var/decl/cultural_info/check = decls_repository.get_decl(pref.cultural_info[TAG_CULTURE])
+		var/decl/cultural_info/check = GET_DECL(pref.cultural_info[TAG_CULTURE])
 		if(check)
 			pref.real_name = check.sanitize_name(pref.real_name, pref.species)
 			if(!pref.real_name)
-				pref.real_name = random_name(pref.gender, pref.species)
+				pref.real_name = check.get_random_name(preference_mob(), pref.gender)
 
 /datum/category_item/player_setup_item/background/culture/load_character(var/savefile/S)
 	for(var/token in tokens)
@@ -78,17 +81,41 @@
 		var/entry = pref.cultural_info[token]
 		if(entry)
 			if(ispath(entry, /decl/cultural_info))
-				var/decl/cultural_info/culture = decls_repository.get_decl(entry)
+				var/decl/cultural_info/culture = GET_DECL(entry)
 				entry = culture.name
 		to_file(S[token], entry)
 
 /datum/category_item/player_setup_item/background/culture/content()
 	. = list()
 	for(var/token in tokens)
-		var/decl/cultural_info/culture = decls_repository.get_decl(pref.cultural_info[token])
-		var/title = "<b>[tokens[token]]<a href='?src=\ref[src];set_[token]=1'><small>?</small></a>:</b><a href='?src=\ref[src];set_[token]=2'>[culture.name]</a>"
-		var/append_text = "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
-		. += culture.get_description(title, append_text, verbose = !hidden[token])
+
+		var/decl/cultural_info/culture = GET_DECL(pref.cultural_info[token])
+
+		. += "<table width = '100%'>"
+		. += "<tr><td colspan=3><center><h3>[culture.desc_type]: <a href='?src=\ref[src];expand_options_[token]=1'>[culture.name] <small>\[[expanded[token] ? "-" : "+"]\]</small></a></h3>"
+		if(expanded[token])
+			var/list/valid_values
+			GET_ALLOWED_VALUES(valid_values, token)
+			. += "</center></td></tr>"
+			. += "<tr><td colspan=3><center>"
+			for(var/culture_path in valid_values)
+				var/decl/cultural_info/culture_data = GET_DECL(culture_path)
+				if(pref.cultural_info[token] == culture_data.type)
+					. += "<span class='linkOn'>[culture_data.name]</span> "
+				else
+					. += "<a href='?src=\ref[src];set_token_entry_[token]=\ref[culture_data]'>[culture_data.name]</a> "
+		. += "</center><hr/></td></tr>"
+
+		var/list/culture_info = culture.get_description(!hidden[token])
+		. += "<tr><td width = '200px'>"
+		. += "<small>[culture_info["details"] || "No additionald details."]</small>"
+		. += "</td><td>"
+		. += "[culture_info["body"] || "No description."]"
+		. += "</td><td width = '50px'>"
+		. += "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
+		. += "</td></tr>"
+		. += "</table><hr>"
+
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/background/culture/OnTopic(var/href,var/list/href_list, var/mob/user)
@@ -98,33 +125,18 @@
 		if(href_list["toggle_verbose_[token]"])
 			hidden[token] = !hidden[token]
 			return TOPIC_REFRESH
+		
+		if(href_list["expand_options_[token]"])
+			expanded[token] = !expanded[token]
+			return TOPIC_REFRESH
 
-		var/check_href = text2num(href_list["set_[token]"])
-		if(check_href > 0)
-
-			var/list/valid_values
-			if(check_href == 1)
-				valid_values = SSlore.get_all_entries_tagged_with(token)
-			else
-				GET_ALLOWED_VALUES(valid_values, token)
-			for(var/i = 1 to length(valid_values))
-				valid_values[i] = decls_repository.get_decl(valid_values[i])
-			var/decl/cultural_info/choice = input("Please select an entry.") as null|anything in valid_values
-			if(!istype(choice))
-				return
-
-			// Check if anything changed between now and then.
-			if(check_href == 1)
-				valid_values = SSlore.get_all_entries_tagged_with(token)
-			else
-				GET_ALLOWED_VALUES(valid_values, token)
-
-			if(choice.type in valid_values)
-				if(check_href == 1)
-					show_browser(user, choice.get_description(), "window=[token];size=700x400")
-				else
-					pref.cultural_info[token] = choice.type
+		var/decl/cultural_info/new_token = href_list["set_token_entry_[token]"]
+		if(!isnull(new_token))
+			new_token = locate(new_token)
+			if(istype(new_token))
+				pref.cultural_info[token] = new_token.type
 				return TOPIC_REFRESH
+
 	. = ..()
 
 #undef GET_ALLOWED_VALUES

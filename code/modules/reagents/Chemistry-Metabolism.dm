@@ -5,7 +5,7 @@
 
 /datum/reagents/metabolism/clear_reagent(var/reagent_type)
 	if(REAGENT_VOLUME(src, reagent_type))
-		var/decl/material/current = decls_repository.get_decl(reagent_type)
+		var/decl/material/current = GET_DECL(reagent_type)
 		current.on_leaving_metabolism(parent, metabolism_class)
 	. = ..()
 
@@ -24,6 +24,6 @@
 			var/mob/living/carbon/human/H = parent
 			metabolism_type = H.species.reagent_tag
 		for(var/rtype in reagent_volumes)
-			var/decl/material/current = decls_repository.get_decl(rtype)
+			var/decl/material/current = GET_DECL(rtype)
 			current.on_mob_life(parent, metabolism_type, metabolism_class, src)
 		update_total()

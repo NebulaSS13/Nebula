@@ -10,7 +10,7 @@
 	var/usage_flags = PROGRAM_ALL
 	var/external_slot				// Whether attackby will be passed on it even with a closed panel
 
-/obj/item/stock_parts/computer/attackby(var/obj/item/W, var/mob/living/user)
+/obj/item/stock_parts/computer/attackby(var/obj/item/W, var/mob/user)
 	// Multitool. Runs diagnostics
 	if(isMultitool(W))
 		to_chat(user, "***** DIAGNOSTICS REPORT *****")
@@ -21,7 +21,7 @@
 
 // Called on multitool click, prints diagnostic information to the user.
 /obj/item/stock_parts/computer/proc/diagnostics()
-	return list("Hardware Integrity Test... (Corruption: [initial(health) - health]/[initial(health)])")
+	return list("Hardware Integrity Test... (Corruption: [max_health ? round((max_health - health)/max_health * 100) : 0]%)")
 
 /obj/item/stock_parts/computer/Initialize()
 	. = ..()

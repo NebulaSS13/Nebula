@@ -1,5 +1,6 @@
 #include "unishi_areas.dm"
 #include "unishi_jobs.dm"
+#include "../../../mods/content/xenobiology/_xenobiology.dme"
 
 /obj/effect/submap_landmark/joinable_submap/unishi
 	name = "SRV Verne"
@@ -86,12 +87,11 @@
 
 /obj/structure/closet/crate/secure/large/supermatter/experimentalsm/WillContain()
 	return list(/obj/machinery/power/supermatter/randomsample)
-
-obj/item/paper/prof1
+/obj/item/paper/prof1
 	name = "Error log"
 	info = "<large> COMPUTER ID: 15231 <br> Attempting recovery of document directory. <br> Three files recovered <br> Printing file (1/2) <br> </large> ... about your concerns. I told you that the shielding is strong enough to avoid ANY leaks of radiation or hazardous materials. The entire lab is 100% isolated from the ship in terms of even the air supply. Leave me and my students the fuck alone. Your job is to maintain the fucking reactor an !#@!dqma211.<br> <large> File (2/3) Tested SM </large> This thing has a lot of potential. It doesn't produce any measurable levels of gas, or even significant thermal signature. The potential is nearly limitless. We've had to fine tune our activation procedures as even a short beam of the emitter seems to activate this thing. CTI Engineering dept still won't fucking answer where they got this thing, but it's simply amazing. I've sent an ema #@^%da12k"
 
-obj/item/paper/prof2
+/obj/item/paper/prof2
 	name = "Error log"
 	info = "<large> COMPUTER ID: 15131 <br> Attempting recovery of document directory. <br> Three files recovered <br> Printing file (1/2) <br> </large> Email to iodc@net <br> To whom it may concern, <br> I recieved your email today in regards to the research I am conducting. You have no legal right to question our research or attempt to block it. Per article 323, scientific research is protected information, that you have absolutely zero claim to. The compound is secret in composition, but I can fully promise you that it contains absolutely no proprietary molecules, and thus you have no claim whatsoever to it or the technologies to it. Your threats are laughable at best, and have been forwarded to CTI legal. Do not contact me aga!#!41asjw. <br> <large> Printing file (2/2) <br> </large> Email from fuckyou@12cmal <br> We have ways of making you comply. "
 

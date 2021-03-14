@@ -89,7 +89,7 @@ GLOBAL_VAR_INIT(default_gyne, create_gyne_name())
 	maturity = min(100, maturity + 1)
 	ready_to_hatch = maturity == 100 && !ready_to_hatch // Lazy flip from change.
 	if(ready_to_hatch)
-		var/decl/ghosttrap/G = decls_repository.get_decl(/decl/ghosttrap/kharmaani_egg)
+		var/decl/ghosttrap/G = GET_DECL(/decl/ghosttrap/kharmaani_egg)
 		G.request_player(src, "A mantid nymph is ready to hatch and needs a player.")
 
 /obj/structure/insectoid_egg/proc/hatch(var/client/C)

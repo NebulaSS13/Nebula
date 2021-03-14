@@ -2,11 +2,11 @@
 	name = "MUSIC TRACK: Validate Music Tracks"
 
 /datum/unit_test/music_track_validate/start_test()
-	var/music_tracks_by_type = decls_repository.get_decls_of_subtype(/music_track)
+	var/music_tracks_by_type = decls_repository.get_decls_of_subtype(/decl/music_track)
 
 	var/list/bad_tracks = list()
 	for(var/music_track_type in music_tracks_by_type)
-		var/music_track/music_track = music_tracks_by_type[music_track_type]
+		var/decl/music_track/music_track = music_tracks_by_type[music_track_type]
 		if(!music_track.song)
 			log_bad("[music_track_type] - Missing song")
 			bad_tracks |= music_track
@@ -40,7 +40,7 @@
 	for(var/obj/machinery/media/jukebox/jukebox in world)
 		for(var/entry in jukebox.tracks)
 			var/datum/track/track = entry
-			if(!track.title || !ispath(track.track, /music_track))
+			if(!track.title || !ispath(track.track, /decl/music_track))
 				bad_boxes += jukebox
 				log_bad("Invalid jukebox track: [log_info_line(jukebox)]")
 				break

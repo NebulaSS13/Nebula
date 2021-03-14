@@ -13,4 +13,5 @@
 		/datum/job/ministation/janitor,
 		/datum/job/ministation/scientist,
 		/datum/job/ministation/security,
+		/datum/job/ministation/librarian
 	)

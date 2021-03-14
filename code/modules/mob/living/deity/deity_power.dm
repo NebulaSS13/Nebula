@@ -3,12 +3,6 @@
 	var/power_min = 10
 	var/power_per_regen = 1
 
-/mob/living/deity/Life()
-	. = ..()
-	if(.)
-		if(power_per_regen < 0 || power < power_min)
-			adjust_power(power_per_regen)
-
 /mob/living/deity/proc/adjust_power(var/amount)
 	if(amount)
 		power = max(0, power + amount)

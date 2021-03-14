@@ -147,8 +147,7 @@ var/global/floorIsLava = 0
 			else if(ishuman(M))
 				body += {"<A href='?src=\ref[src];makeai=\ref[M]'>Make AI</A> |
 					<A href='?src=\ref[src];makerobot=\ref[M]'>Make Robot</A> |
-					<A href='?src=\ref[src];makealien=\ref[M]'>Make Alien</A> |
-					<A href='?src=\ref[src];makeslime=\ref[M]'>Make slime</A>
+					<A href='?src=\ref[src];makealien=\ref[M]'>Make Alien</A>
 				"}
 
 			//Simple Animals
@@ -1218,7 +1217,7 @@ var/global/floorIsLava = 0
 	if(length(SSticker.mode.associated_antags))
 		out += "<b>Core antag templates:</b></br>"
 		for(var/antag_type in SSticker.mode.associated_antags)
-			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
+			var/decl/special_role/antag = GET_DECL(antag_type)
 			if(antag)
 				out += "<a href='?src=\ref[SSticker.mode];debug_antag=\ref[antag]'>[antag.name]</a>.</br>"
 
@@ -1438,25 +1437,21 @@ var/global/floorIsLava = 0
 	log_and_message_admins("attempting to force mode autospawn.")
 	SSticker.mode.process_autoantag()
 
-/datum/admins/proc/paralyze_mob(mob/H as mob in GLOB.player_list)
+/datum/admins/proc/paralyze_mob(mob/living/M as mob in GLOB.player_list)
 	set category = "Admin"
 	set name = "Toggle Paralyze"
 	set desc = "Toggles paralyze state, which stuns, blinds and mutes the victim."
 
-	var/msg
-
-	if(!isliving(H))
+	if(!isliving(M))
+		to_chat(usr, SPAN_WARNING("This verb can only be used on /mob/living targets."))
 		return
 
 	if(check_rights(R_INVESTIGATE))
-		if (H.paralysis == 0)
-			H.paralysis = 8000
-			msg = "has paralyzed [key_name(H)]."
+		if(!HAS_STATUS(M, STAT_PARA))
+			M.set_status(STAT_PARA, 8000)
 		else
-			H.paralysis = 0
-			msg = "has unparalyzed [key_name(H)]."
-		log_and_message_admins(msg)
-
+			M.set_status(STAT_PARA, 0)
+		log_and_message_admins("has [HAS_STATUS(M, STAT_PARA) ? "paralyzed" : "unparalyzed"] [key_name(M)].")
 
 /datum/admins/proc/sendFax()
 	set category = "Special Verbs"

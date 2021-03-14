@@ -81,7 +81,7 @@ SUBSYSTEM_DEF(jobs)
 
 	// Init skills.
 	if(!GLOB.skills.len)
-		decls_repository.get_decl(/decl/hierarchy/skill)
+		GET_DECL(/decl/hierarchy/skill)
 	if(!GLOB.skills.len)
 		log_error("<span class='warning'>Error setting up job skill requirements, no skill datums found!</span>")
 

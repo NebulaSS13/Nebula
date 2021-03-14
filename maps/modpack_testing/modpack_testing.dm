@@ -3,12 +3,13 @@
 	#include "modpack_testing_lobby.dm"
 	#include "blank.dmm"
 
+	#include "../../mods/content/mundane.dm"
+	#include "../../mods/content/bigpharma/_bigpharma.dme"
 	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/content/government/_government.dme"
-	#include "../../mods/content/mundane.dm"
 	#include "../../mods/content/modern_earth/_modern_earth.dme"
 	#include "../../mods/content/psionics/_psionics.dme"
-	#include "../../mods/content/bigpharma/_bigpharma.dme"
+	#include "../../mods/content/xenobiology/_xenobiology.dme"
 
 	#include "../../mods/mobs/dionaea/_dionaea.dme"
 	#include "../../mods/mobs/borers/_borers.dme"

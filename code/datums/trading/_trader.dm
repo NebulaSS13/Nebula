@@ -76,7 +76,7 @@
 		if(name_language == TRADER_DEFAULT_NAME)
 			name = capitalize(pick(GLOB.first_names_female + GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 		else
-			var/decl/language/L = decls_repository.get_decl(name_language)
+			var/decl/language/L = GET_DECL(name_language)
 			if(istype(L))
 				name = L.get_random_name(pick(MALE,FEMALE))
 	if(possible_origins && possible_origins.len)
@@ -138,7 +138,7 @@
 	. = replacetext(., "MERCHANT", name)
 	. = replacetext(., "ORIGIN", origin)
 
-	var/decl/currency/cur = decls_repository.get_decl(trader_currency)
+	var/decl/currency/cur = GET_DECL(trader_currency)
 	. = replacetext(.,"CURRENCY_SINGULAR", cur.name_singular)
 	. = replacetext(.,"CURRENCY", cur.name)
 

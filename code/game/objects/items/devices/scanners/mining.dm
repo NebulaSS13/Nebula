@@ -87,7 +87,7 @@
 			continue
 
 		for(var/metal in resources.resources)
-			var/decl/material/mat = decls_repository.get_decl(metal)
+			var/decl/material/mat = GET_DECL(metal)
 			if(mat.ore_type_value)
 				metals[mat.ore_type_value] += resources.resources[metal]
 			if(mat.ore_data_value && !resources.surveyed)

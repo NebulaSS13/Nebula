@@ -81,7 +81,7 @@
 			stat("Game Mode:", PUBLIC_GAME_MODE)
 		var/list/additional_antag_ids = list()
 		for(var/antag_type in global.additional_antag_types)
-			var/decl/special_role/antag = decls_repository.get_decl(antag_type)
+			var/decl/special_role/antag = GET_DECL(antag_type)
 			additional_antag_ids |= lowertext(antag.name)
 		var/extra_antags = list2params(additional_antag_ids)
 		stat("Added Antagonists:", extra_antags ? extra_antags : "None")
@@ -151,7 +151,7 @@
 			qdel(mannequin)
 
 			if(client.prefs.be_random_name)
-				client.prefs.real_name = random_name(client.prefs.gender)
+				client.prefs.real_name = client.prefs.get_random_name()
 			observer.real_name = client.prefs.real_name
 			observer.SetName(observer.real_name)
 			if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
@@ -440,7 +440,7 @@
 
 	if(GLOB.random_players)
 		client.prefs.gender = pick(MALE, FEMALE)
-		client.prefs.real_name = random_name(new_character.gender)
+		client.prefs.real_name = client.prefs.get_random_name()
 		client.prefs.randomize_appearance_and_body_for(new_character)
 	client.prefs.copy_to(new_character)
 
@@ -527,7 +527,7 @@
 /mob/new_player/show_message(msg, type, alt, alt_type)
 	return
 
-mob/new_player/MayRespawn()
+/mob/new_player/MayRespawn()
 	return 1
 
 /mob/new_player/touch_map_edge()
@@ -542,7 +542,7 @@ mob/new_player/MayRespawn()
 
 	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_NO)
 		return
-	var/music_track/new_track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
+	var/decl/music_track/new_track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
 	if(new_track)
 		new_track.play_to(src)
 

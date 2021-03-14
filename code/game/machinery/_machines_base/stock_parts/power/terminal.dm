@@ -144,7 +144,7 @@
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 					s.set_up(5, 1, machine)
 					s.start()
-					if(user.stunned)
+					if(HAS_STATUS(user, STAT_STUN))
 						return TRUE
 				C.use(10)
 				user.visible_message(\
@@ -169,7 +169,7 @@
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 					s.set_up(5, 1, machine)
 					s.start()
-					if(user.stunned)
+					if(HAS_STATUS(user, STAT_STUN))
 						return TRUE
 				new /obj/item/stack/cable_coil(T, 10)
 				to_chat(user, "<span class='notice'>You cut the cables and dismantle the power terminal.</span>")

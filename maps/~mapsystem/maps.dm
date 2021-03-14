@@ -95,7 +95,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/lobby_screens = list('icons/default_lobby.png')
 	var/current_lobby_screen
 	// The track that will play in the lobby screen.
-	var/music_track/lobby_track
+	var/decl/music_track/lobby_track
 	// The list of lobby tracks to pick() from. If left unset will randomly select among all available /music_track subtypes.
 	var/list/lobby_tracks = list()
 
@@ -173,8 +173,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	else if(LAZYLEN(lobby_tracks))
 		lobby_track_type = pickweight(lobby_tracks - exclude)
 	else
-		lobby_track_type = pick(subtypesof(/music_track) - exclude)
-	return decls_repository.get_decl(lobby_track_type)
+		lobby_track_type = pick(subtypesof(/decl/music_track) - exclude)
+	return GET_DECL(lobby_track_type)
 
 /datum/map/proc/setup_map()
 	lobby_track = get_lobby_track()
@@ -336,3 +336,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/create_trade_hubs()
 	new /datum/trade_hub/singleton
+
+/datum/map/proc/get_radio_chatter_types()
+	return

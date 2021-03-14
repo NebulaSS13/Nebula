@@ -304,11 +304,11 @@ var/list/mob/living/forced_ambiance_list = new
 		var/mob/living/carbon/human/H = mob
 		if(prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_PROF)))
 			if(!MOVING_DELIBERATELY(H))
-				H.AdjustStunned(6)
-				H.AdjustWeakened(6)
+				ADJ_STATUS(H, STAT_STUN, 6)
+				ADJ_STATUS(H, STAT_WEAK, 6)
 			else
-				H.AdjustStunned(3)
-				H.AdjustWeakened(3)
+				ADJ_STATUS(H, STAT_STUN, 3)
+				ADJ_STATUS(H, STAT_WEAK, 3)
 			to_chat(mob, "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>")
 
 /area/proc/throw_unbuckled_occupants(var/maxrange, var/speed, var/direction = null)

@@ -18,7 +18,7 @@
 		currency = GLOB.using_map.default_currency
 
 /datum/money_account/proc/format_value_by_currency(var/amt)
-	var/decl/currency/cur = decls_repository.get_decl(currency)
+	var/decl/currency/cur = GET_DECL(currency)
 	. = cur.format_value(amt)
 
 // is_source inverts the amount.

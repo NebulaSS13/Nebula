@@ -17,7 +17,7 @@
 			return custom_emote(1, copytext(message,2))
 
 		if(copytext(message,1,2) == ";")
-			var/decl/language/L = decls_repository.get_decl(/decl/language/binary/drone)
+			var/decl/language/L = GET_DECL(/decl/language/binary/drone)
 			if(istype(L))
 				return L.broadcast(src,trim(copytext(message,2)))
 

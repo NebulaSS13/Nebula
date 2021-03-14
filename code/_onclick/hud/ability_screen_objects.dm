@@ -32,11 +32,10 @@
 			my_mob.client.screen -= src
 		my_mob = null
 
-/obj/screen/movable/ability_master/MouseDrop()
+/obj/screen/movable/ability_master/handle_mouse_drop(var/atom/over, var/mob/user)
 	if(showing)
-		return
-
-	return ..()
+		return FALSE
+	. = ..()
 
 /obj/screen/movable/ability_master/Click()
 	if(!ability_objects.len) // If we're empty for some reason.
@@ -134,12 +133,6 @@
 		if(S.spell == s)
 			return S
 	return null
-
-/mob/Login()
-	..()
-	if(ability_master)
-		ability_master.update_abilities(1, src)
-		ability_master.toggle_open(1)
 
 /mob/Initialize()
 	. = ..()
@@ -329,11 +322,6 @@
 	ability_objects.Add(A)
 	if(my_mob.client)
 		toggle_open(2) //forces the icons to refresh on screen
-
-/mob/Life()
-	UNLINT(..())
-	if(ability_master)
-		ability_master.update_spells(0)
 
 /obj/screen/movable/ability_master/proc/update_spells(var/forced = 0)
 	for(var/obj/screen/ability/spell/spell in spell_objects)

@@ -5,7 +5,7 @@ var/list/reagent_names_to_medication_names
 /proc/get_medication_name_from_reagent_name(var/reagent_name)
 	. = LAZYACCESS(global.reagent_names_to_medication_names, reagent_name)
 	if(!.)
-		var/decl/language/bigpharma/pharma = decls_repository.get_decl(/decl/language/bigpharma)
+		var/decl/language/bigpharma/pharma = GET_DECL(/decl/language/bigpharma)
 		LAZYSET(global.reagent_names_to_medication_names, reagent_name, pharma.get_random_name())
 		. = global.reagent_names_to_medication_names[reagent_name]
 

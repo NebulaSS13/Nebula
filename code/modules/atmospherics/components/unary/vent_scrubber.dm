@@ -183,7 +183,7 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/proc/toggle_panic()
-	var/decl/public_access/public_variable/panic/panic = decls_repository.get_decl(/decl/public_access/public_variable/panic)
+	var/decl/public_access/public_variable/panic/panic = GET_DECL(/decl/public_access/public_variable/panic)
 	panic.write_var(src, !panic)
 
 /obj/machinery/atmospherics/unary/vent_scrubber/proc/set_scrub_gas(var/list/gases)

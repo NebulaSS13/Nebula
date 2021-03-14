@@ -155,7 +155,7 @@
 	if(length(air_contents?.gas))
 		var/list/gases
 		for(var/gas in air_contents.gas)
-			var/decl/material/gasdata = decls_repository.get_decl(gas)
+			var/decl/material/gasdata = GET_DECL(gas)
 			LAZYADD(gases, gasdata.gas_name)
 		if(length(gases))
 			log_and_message_admins("opened \the [src], containing [english_list(gases)].")

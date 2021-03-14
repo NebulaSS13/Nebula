@@ -5,6 +5,7 @@
 	var/needs_syscontrol = FALSE
 	var/silicon_allowed = TRUE
 	var/abandon_ship = FALSE
+	var/requires_shunt = FALSE
 
 /datum/evacuation_option/proc/execute(var/mob/user)
 	return

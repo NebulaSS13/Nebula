@@ -71,8 +71,15 @@
 	return
 
 /atom/Destroy()
+	overlays.Cut()
+	underlays.Cut()
 	global.is_currently_exploding -= src
 	QDEL_NULL(reagents)
+	if(light)
+		light.destroy()
+		light = null
+	if(opacity)
+		updateVisibility(src)
 	. = ..()
 
 /atom/proc/reveal_blood()
@@ -314,7 +321,7 @@ its easier to just keep the beam vertical.
 /atom/proc/try_detonate_reagents(var/severity = 3)
 	if(reagents)
 		for(var/rtype in reagents.reagent_volumes)
-			var/decl/material/R = decls_repository.get_decl(rtype)
+			var/decl/material/R = GET_DECL(rtype)
 			R.explosion_act(src, severity)
 
 /atom/proc/explosion_act(var/severity)
@@ -549,14 +556,14 @@ its easier to just keep the beam vertical.
 
 /atom/proc/object_shaken()
 	for(var/mob/living/M in climbers)
-		M.Weaken(1)
+		SET_STATUS_MAX(M, STAT_WEAK, 1)
 		to_chat(M, "<span class='danger'>You topple as you are shaken off \the [src]!</span>")
 		climbers.Cut(1,2)
 
 	for(var/mob/living/M in get_turf(src))
 		if(M.lying) return //No spamming this on people.
 
-		M.Weaken(3)
+		SET_STATUS_MAX(M, STAT_WEAK, 3)
 		to_chat(M, "<span class='danger'>You topple as \the [src] moves under you!</span>")
 
 		if(prob(25))
@@ -581,13 +588,6 @@ its easier to just keep the beam vertical.
 			H.UpdateDamageIcon()
 			H.updatehealth()
 	return
-
-/atom/MouseDrop_T(mob/target, mob/user)
-	var/mob/living/H = user
-	if(istype(H) && can_climb(H) && target == user)
-		do_climb(target)
-	else
-		return ..()
 
 /atom/proc/get_color()
 	return color

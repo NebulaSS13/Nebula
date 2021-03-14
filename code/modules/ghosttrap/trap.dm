@@ -189,7 +189,7 @@
 	var/obj/item/soulstone/S = target.loc
 	if(istype(S))
 		if(S.is_evil)
-			var/decl/special_role/cult = decls_repository.get_decl(/decl/special_role/cultist)
+			var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
 			cult.add_antagonist(target.mind)
 			to_chat(target, "<b>Remember, you serve the one who summoned you first, and the cult second.</b>")
 		else

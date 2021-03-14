@@ -106,7 +106,7 @@
 		SetName(n_name)
 	add_fingerprint(usr)
 
-/obj/item/paper/attack_self(mob/living/user)
+/obj/item/paper/attack_self(mob/user)
 	if(user.a_intent == I_HURT)
 		if(icon_state == "scrap")
 			user.show_message("<span class='warning'>\The [src] is already crumpled.</span>")
@@ -124,7 +124,7 @@
 			spawn(20)
 				spam_flag = 0
 
-/obj/item/paper/attack_ai(var/mob/living/silicon/ai/user)
+/obj/item/paper/attack_ai(mob/living/silicon/ai/user)
 	show_content(user)
 
 /obj/item/paper/attack(mob/living/carbon/M, mob/living/carbon/user)

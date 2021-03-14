@@ -125,7 +125,7 @@
 	update_icon()
 
 /obj/structure/bed/proc/add_padding(var/padding_type)
-	reinf_material = decls_repository.get_decl(padding_type)
+	reinf_material = GET_DECL(padding_type)
 	update_icon()
 
 /obj/structure/bed/psych
@@ -185,7 +185,7 @@
 		return 1
 	..()
 
-/obj/structure/bed/roller/attack_hand(mob/living/user)
+/obj/structure/bed/roller/attack_hand(mob/user)
 	if(beaker && !buckled_mob)
 		remove_beaker(user)
 	else
@@ -240,26 +240,26 @@
 	queue_icon_update()
 	STOP_PROCESSING(SSobj,src)
 
-/obj/structure/bed/roller/MouseDrop(over_object, src_location, over_location)
-	..()
-	if(!CanMouseDrop(over_object))	return
-	if(!(ishuman(usr) || isrobot(usr)))	return
-	if(over_object == buckled_mob && beaker)
-		if(iv_attached)
-			detach_iv(buckled_mob, usr)
-		else
-			attach_iv(buckled_mob, usr)
-		return
-	if(ishuman(over_object))
-		var/mob/M = over_object
-		if(loc == M.loc && user_buckle_mob(M, usr))
-			attach_iv(buckled_mob, usr)
-			return
+/obj/structure/bed/roller/handle_mouse_drop(atom/over, mob/user)
+	if(ishuman(user) || isrobot(user))
+		if(over == buckled_mob && beaker)
+			if(iv_attached)
+				detach_iv(buckled_mob, user)
+			else
+				attach_iv(buckled_mob, user)
+			return TRUE
+	if(ishuman(over))
+		var/mob/M = over
+		if(loc == M.loc && user_buckle_mob(M, user))
+			attach_iv(buckled_mob, user)
+			return TRUE
 	if(beaker)
-		remove_beaker(usr)
-		return
-	if(buckled_mob)	return
-	collapse()
+		remove_beaker(user)
+		return TRUE
+	if(!buckled_mob)
+		collapse()
+		return TRUE
+	. = ..()
 
 /obj/item/roller
 	name = "roller bed"

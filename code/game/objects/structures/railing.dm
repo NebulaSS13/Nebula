@@ -202,14 +202,14 @@
 					playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
 					var/blocked = H.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
 					if (prob(30 * (1 - blocked)))
-						H.Weaken(5)
+						SET_STATUS_MAX(H, STAT_WEAK, 5)
 					H.apply_damage(8, BRUTE, BP_HEAD)
 				else
 					if (get_turf(H) == get_turf(src))
 						H.forceMove(get_step(src, src.dir))
 					else
 						H.dropInto(loc)
-					H.Weaken(5)
+					SET_STATUS_MAX(H, STAT_WEAK, 5)
 					visible_message("<span class='danger'>[G.assailant] throws \the [H] over \the [src].</span>")
 			else
 				to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")

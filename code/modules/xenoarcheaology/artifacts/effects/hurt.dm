@@ -29,5 +29,5 @@
 		if(strong)
 			C.apply_radiation(25 * weakness)
 			C.set_nutrition(min(50 * weakness, C.nutrition))
-			C.make_dizzy(6 * weakness)
-			C.Weaken(6 * weakness)
+			SET_STATUS_MAX(C, STAT_DIZZY, 6 * weakness)
+			SET_STATUS_MAX(C, STAT_WEAK, 6 * weakness)

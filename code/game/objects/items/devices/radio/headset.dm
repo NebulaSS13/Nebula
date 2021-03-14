@@ -50,7 +50,7 @@
 /obj/item/radio/headset/handle_message_mode(mob/living/M, message, channel)
 	if (channel == "special")
 		if (translate_binary)
-			var/decl/language/binary = decls_repository.get_decl(/decl/language/binary)
+			var/decl/language/binary = GET_DECL(/decl/language/binary)
 			binary.broadcast(M, message)
 		return null
 
@@ -304,11 +304,10 @@
 			encryption_keys += W
 			recalculateChannels(1)
 
-/obj/item/radio/headset/MouseDrop(var/obj/over_object)
-	var/mob/M = usr
-	if((!istype(over_object, /obj/screen)) && (src in M) && CanUseTopic(M))
-		return attack_self(M)
-	return
+/obj/item/radio/headset/handle_mouse_drop(var/atom/over, var/mob/user)
+	if(!istype(over, /obj/screen) && loc == user && CanUseTopic(user) && attack_self(user))
+		return TRUE
+	. = ..()
 
 /obj/item/radio/headset/recalculateChannels(var/setDescription = 0)
 	src.channels = list()

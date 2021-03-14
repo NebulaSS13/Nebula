@@ -58,7 +58,7 @@
 /datum/fabricator_recipe/robotics/prosthetic/get_product_name()
 	. = "prosthetic limb ([..()])"
 	if(ispath(model))
-		var/decl/prosthetics_manufacturer/brand = decls_repository.get_decl(model)
+		var/decl/prosthetics_manufacturer/brand = GET_DECL(model)
 		return "[.] ([brand.name])"
 
 /datum/fabricator_recipe/robotics/prosthetic/build()

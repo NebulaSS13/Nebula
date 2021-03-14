@@ -42,11 +42,11 @@
 /decl/cultural_info/proc/get_random_name(var/mob/M, var/gender)
 	var/decl/language/_language
 	if(name_language)
-		_language = decls_repository.get_decl(name_language)
+		_language = GET_DECL(name_language)
 	else if(default_language)
-		_language = decls_repository.get_decl(default_language)
+		_language = GET_DECL(default_language)
 	else if(language)
-		_language = decls_repository.get_decl(language)
+		_language = GET_DECL(language)
 	if(_language)
 		return _language.get_random_name(gender)
 	return capitalize(pick(gender==FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
@@ -54,27 +54,12 @@
 /decl/cultural_info/proc/sanitize_name(var/new_name)
 	return sanitizeName(new_name)
 
-#define COLLAPSED_CULTURE_BLURB_LEN 48
-/decl/cultural_info/proc/get_description(var/header, var/append, var/verbose = TRUE)
-	var/list/dat = list()
-	dat += "<table padding='8px'><tr>"
-	dat += "<td width='260px'>"
-	dat += "[header ? header : "<b>[desc_type]:</b>[name]"]<br>"
-	if(verbose)
-		dat += "<small>"
-		dat += "[jointext(get_text_details(), "<br>")]"
-		dat += "</small>"
-	dat += "</td><td width>"
-	if(verbose || length(get_text_body()) <= COLLAPSED_CULTURE_BLURB_LEN)
-		dat += "[get_text_body()]"
+/decl/cultural_info/proc/get_description(var/verbose = TRUE)
+	LAZYSET(., "details", jointext(get_text_details(), "<br>"))
+	if(verbose || length(get_text_body()) <= 50)
+		LAZYSET(., "body", get_text_body())
 	else
-		dat += "[copytext(get_text_body(), 1, COLLAPSED_CULTURE_BLURB_LEN)] \[...\]"
-	dat += "</td>"
-	if(append)
-		dat += "<td width = '100px'>[append]</td>"
-	dat += "</tr></table><hr>"
-	return jointext(dat, null)
-#undef COLLAPSED_CULTURE_BLURB_LEN
+		LAZYSET(., "body", "[copytext(get_text_body(), 1, 44)] <small>\[...\]</small>")
 
 /decl/cultural_info/proc/get_text_body()
 	return description
@@ -85,13 +70,13 @@
 	if(LAZYLEN(spoken_langs))
 		var/list/spoken_lang_names = list()
 		for(var/thing in spoken_langs)
-			var/decl/language/lang = decls_repository.get_decl(thing)
+			var/decl/language/lang = GET_DECL(thing)
 			spoken_lang_names |= lang.name
 		. += "<b>Language(s):</b> [english_list(spoken_lang_names)]."
 	if(LAZYLEN(secondary_langs))
 		var/list/secondary_lang_names = list()
 		for(var/thing in secondary_langs)
-			var/decl/language/lang = decls_repository.get_decl(thing)
+			var/decl/language/lang = GET_DECL(thing)
 			secondary_lang_names |= lang.name
 		. += "<b>Optional language(s):</b> [english_list(secondary_lang_names)]."
 	if(!isnull(economic_power))

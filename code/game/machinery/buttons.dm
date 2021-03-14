@@ -57,7 +57,7 @@
 		return
 
 	operating = TRUE
-	var/decl/public_access/public_variable/variable = decls_repository.get_decl(/decl/public_access/public_variable/button_active)
+	var/decl/public_access/public_variable/variable = GET_DECL(/decl/public_access/public_variable/button_active)
 	state = !state
 	variable.write_var(src, !active)
 	use_power_oneoff(500)

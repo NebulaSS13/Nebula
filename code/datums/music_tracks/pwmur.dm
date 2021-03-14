@@ -1,4 +1,4 @@
-/music_track/pwmur
+/decl/music_track/pwmur
 	artist = "Earthcrusher"
 	title = "phoron will make us rich"
 	song = 'sound/music/pwmur.ogg'

@@ -29,7 +29,7 @@ effective or pretty fucking useless.
 	var/times_used = 0 //Number of times it's been used.
 	var/max_uses = 2
 
-/obj/item/batterer/attack_self(mob/living/carbon/user, flag = 0, emp = 0)
+/obj/item/batterer/attack_self(mob/user, flag = 0, emp = 0)
 	if(!user) 	return
 	if(times_used >= max_uses)
 		to_chat(user, "<span class='warning'>The mind batterer has been burnt out!</span>")
@@ -40,9 +40,9 @@ effective or pretty fucking useless.
 		stun_victims += M
 		spawn()
 			if(prob(50))
-				M.Weaken(rand(10,20))
+				SET_STATUS_MAX(M, STAT_WEAK, rand(10,20))
 				if(prob(25))
-					M.Stun(rand(5,10))
+					SET_STATUS_MAX(M, STAT_STUN, rand(5, 10))
 				to_chat(M, "<span class='danger'>You feel a tremendous, paralyzing wave flood your mind.</span>")
 			else
 				to_chat(M, "<span class='danger'>You feel a sudden, electric jolt travel through your head.</span>")

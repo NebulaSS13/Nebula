@@ -66,7 +66,7 @@
 		to_chat(user, SPAN_NOTICE("It contains:"))
 		if(LAZYLEN(reagents?.reagent_volumes))
 			for(var/rtype in reagents.reagent_volumes)
-				var/decl/material/R = decls_repository.get_decl(rtype)
+				var/decl/material/R = GET_DECL(rtype)
 				to_chat(user, SPAN_NOTICE("[REAGENT_VOLUME(reagents, rtype)] units of [R.name]"))
 		else
 			to_chat(user, SPAN_NOTICE("Nothing."))

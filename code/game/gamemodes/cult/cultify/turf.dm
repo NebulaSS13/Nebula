@@ -24,8 +24,8 @@
 	cultify_wall()
 
 /turf/simulated/floor/proc/cultify_floor()
-	set_flooring(decls_repository.get_decl(/decl/flooring/reinforced/cult))
-	var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	set_flooring(GET_DECL(/decl/flooring/reinforced/cult))
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	cult.add_cultiness(CULTINESS_PER_TURF)
 
 /turf/proc/cultify_wall()
@@ -36,5 +36,5 @@
 		ChangeTurf(/turf/simulated/wall/cult/reinf)
 	else
 		ChangeTurf(/turf/simulated/wall/cult)
-	var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 	cult.add_cultiness(CULTINESS_PER_TURF)

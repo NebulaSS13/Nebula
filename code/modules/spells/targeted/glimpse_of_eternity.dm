@@ -16,11 +16,11 @@
 	for(var/t in targets)
 		var/mob/living/L = t
 		if(L.faction != user.faction) //Worse for non-allies
-			L.eye_blind += 5
-			L.Stun(5)
+			SET_STATUS_MAX(L, STAT_BLIND, 5)
+			SET_STATUS_MAX(L, STAT_STUN, 5)
 			new /obj/effect/temporary(get_turf(L), 5, 'icons/effects/effects.dmi', "electricity_constant")
 		else
-			L.eye_blind += 2
+			SET_STATUS_MAX(L, STAT_BLIND, 2)
 			L.adjustBruteLoss(-10)
 			L.adjustFireLoss(-10)
 			new /obj/effect/temporary(get_turf(L), 5, 'icons/effects/effects.dmi', "green_sparkles")

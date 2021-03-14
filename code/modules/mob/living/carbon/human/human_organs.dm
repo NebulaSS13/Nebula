@@ -51,7 +51,7 @@
 				if (prob(10) && !stat && can_feel_pain() && LAZYACCESS(chem_effects, CE_PAINKILLER) < 50 && E.is_broken() && E.internal_organs.len)
 					custom_pain("Pain jolts through your broken [E.encased ? E.encased : E.name], staggering you!", 50, affecting = E)
 					drop_held_items()
-					Stun(2)
+					SET_STATUS_MAX(src, STAT_STUN, 2)
 
 				//Moving makes open wounds get infected much faster
 				for(var/datum/wound/W in E.wounds)
@@ -145,7 +145,7 @@
 			if(limb_pain)
 				emote("scream")
 			custom_emote(VISIBLE_MESSAGE, "collapses!")
-		Weaken(3) //can't emote while weakened, apparently.
+		SET_STATUS_MAX(src, STAT_WEAK, 3) //can't emote while weakened, apparently.
 
 /mob/living/carbon/human/proc/handle_grasp()
 	for(var/bp in held_item_slots)
@@ -172,7 +172,7 @@
 					to_chat(src, SPAN_WARNING("You lose your balance as [affected.name] [pick("malfunctions", "freezes","shudders")]!"))
 			else
 				return
-	Weaken(4)
+	SET_STATUS_MAX(src, STAT_WEAK, 4)
 
 /mob/living/carbon/human/proc/grasp_damage_disarm(var/obj/item/organ/external/affected)
 

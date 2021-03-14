@@ -23,7 +23,7 @@
 	var/list/stacks = list()
 	for(var/stack in stacked)
 		if(stacked[stack] > 0)
-			var/decl/material/mat = decls_repository.get_decl(stack)
+			var/decl/material/mat = GET_DECL(stack)
 			stacks += list(list("name" = "[capitalize(mat.solid_name)] x [stacked[stack]]", "key" = "\ref[mat]"))
 	data["stacks"] = stacks
 	return data
@@ -52,6 +52,6 @@
 	if(output_turf)
 		for(var/sheet in stacked)
 			if(stacked[sheet] >= stack_max)
-				var/decl/material/stackmat = decls_repository.get_decl(sheet)
+				var/decl/material/stackmat = GET_DECL(sheet)
 				stackmat.place_sheet(output_turf, stack_max)
 				stacked[sheet] -= stack_max

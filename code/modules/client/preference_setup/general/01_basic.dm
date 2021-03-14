@@ -1,4 +1,4 @@
-datum/preferences
+/datum/preferences
 	var/gender = MALE					//gender of character (well duh)
 	var/age = 30						//age of character
 	var/spawnpoint = "Default" 			//where this character will spawn (0-2).
@@ -54,7 +54,7 @@ datum/preferences
 		var/raw_name = input(user, "Choose your character's name:", "Character Name")  as text|null
 		if (!isnull(raw_name) && CanUseTopic(user))
 
-			var/decl/cultural_info/check = decls_repository.get_decl(pref.cultural_info[TAG_CULTURE])
+			var/decl/cultural_info/check = GET_DECL(pref.cultural_info[TAG_CULTURE])
 			var/new_name = check.sanitize_name(raw_name, pref.species)
 			if(filter_block_message(user, new_name))
 				return TOPIC_NOACTION
@@ -67,7 +67,7 @@ datum/preferences
 				return TOPIC_NOACTION
 
 	else if(href_list["random_name"])
-		pref.real_name = random_name(pref.gender, pref.species)
+		pref.real_name = pref.get_random_name()
 		return TOPIC_REFRESH
 
 	else if(href_list["always_random_name"])

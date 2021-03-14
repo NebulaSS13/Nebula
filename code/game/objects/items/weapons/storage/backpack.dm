@@ -339,11 +339,11 @@
 		/obj/item/crowbar
 	)
 
-/obj/item/storage/backpack/satchel/flat/MouseDrop(var/obj/over_object)
+/obj/item/storage/backpack/satchel/flat/handle_mouse_drop(var/atom/over, var/mob/user)
 	var/turf/T = get_turf(src)
 	if(hides_under_flooring() && isturf(T) && !T.is_plating())
-		return
-	..()
+		return TRUE
+	. = ..()
 
 /obj/item/storage/backpack/satchel/flat/hide(var/i)
 	set_invisibility(i ? 101 : 0)

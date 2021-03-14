@@ -71,18 +71,18 @@
 			if(mat.flags & MAT_FLAG_FUSION_FUEL)
 				material_info += "<li>It can be used in a fusion reaction.</li>"
 			if(mat.ore_compresses_to && mat.ore_compresses_to != mat.type)
-				var/decl/material/M = decls_repository.get_decl(mat.ore_compresses_to)
+				var/decl/material/M = GET_DECL(mat.ore_compresses_to)
 				material_info += "<li>It can be compressed into [M.solid_name].</li>"
 			if(length(mat.heating_products))
 				var/list/heat_prod = list()
 				for(var/mtype in mat.heating_products)
-					var/decl/material/M = decls_repository.get_decl(mtype)
+					var/decl/material/M = GET_DECL(mtype)
 					heat_prod += "[mat.heating_products[mtype] * 100]% [M.solid_name]"
 				material_info += "<li>It can be smelted into [english_list(heat_prod)] at a temperature of [mat.heating_point] Kelvin.</li>"
 			if(length(mat.chilling_products))
 				var/list/chill_prod = list()
 				for(var/mtype in mat.chilling_products)
-					var/decl/material/M = decls_repository.get_decl(mtype)
+					var/decl/material/M = GET_DECL(mtype)
 					chill_prod += "[mat.chilling_products[mtype] * 100]% [M.solid_name]"
 				material_info += "<li>It can be cooled into [english_list(chill_prod)] at a temperature of [mat.chilling_point] Kelvin.</li>"
 
@@ -95,7 +95,7 @@
 			if(mat.gas_flags & XGM_GAS_FUEL)
 				gas_info+= "<li>It is flammable.</li>"
 				if(mat.burn_product)
-					var/decl/material/firemat = decls_repository.get_decl(mat.burn_product)
+					var/decl/material/firemat = GET_DECL(mat.burn_product)
 					gas_info+= "<li>It produces [firemat.gas_name] when burned.</li>"
 			if(mat.gas_flags & XGM_GAS_OXIDIZER)
 				gas_info+= "<li>It is an oxidizer, required to sustain fire.</li>"

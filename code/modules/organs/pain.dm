@@ -1,4 +1,4 @@
-mob/proc/flash_pain(var/target)
+/mob/proc/flash_pain(var/target)
 	if(pain)
 		var/matrix/M
 		if(client && max(client.last_view_x_dim, client.last_view_y_dim) > 7)
@@ -46,7 +46,7 @@ mob/proc/flash_pain(var/target)
 		var/force_emote = species.get_pain_emote(src, power)
 		if(force_emote && prob(power))
 			var/decl/emote/use_emote = usable_emotes[force_emote]
-			if(!(use_emote.message_type == AUDIBLE_MESSAGE && silent))
+			if(!(use_emote.message_type == AUDIBLE_MESSAGE &&HAS_STATUS(src, STAT_SILENCE)))
 				emote(force_emote)
 
 /mob/living/carbon/human/proc/handle_pain()
@@ -67,8 +67,8 @@ mob/proc/flash_pain(var/target)
 			damaged_organ = E
 			maxdam = dam
 	if(damaged_organ && has_chemical_effect(CE_PAINKILLER, maxdam))
-		if(maxdam > 10 && paralysis)
-			paralysis = max(0, paralysis - round(maxdam/10))
+		if(maxdam > 10 &&HAS_STATUS(src, STAT_PARA))
+			ADJ_STATUS(src, STAT_PARA, -(round(maxdam/10)))
 		if(maxdam > 50 && prob(maxdam / 5))
 			drop_held_items()
 		var/burning = damaged_organ.burn_dam > damaged_organ.brute_dam

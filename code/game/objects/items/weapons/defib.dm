@@ -67,16 +67,15 @@
 	else
 		..()
 
-/obj/item/defibrillator/MouseDrop()
-	if(ismob(src.loc))
-		if(!CanMouseDrop(src))
-			return
-		var/mob/M = src.loc
-		if(!M.unEquip(src))
-			return
-		src.add_fingerprint(usr)
-		M.put_in_hands(src)
-
+// what is this proc doing?
+/obj/item/defibrillator/handle_mouse_drop(var/atom/over, var/mob/user)
+	if(ismob(loc))
+		var/mob/M = loc
+		if(M.unEquip(src))
+			add_fingerprint(usr)
+			M.put_in_hands(src)
+			return TRUE
+	. = ..()
 
 /obj/item/defibrillator/attackby(obj/item/W, mob/user, params)
 	if(W == paddles)
@@ -367,7 +366,8 @@
 	if(istype(potato) && potato.cell)
 		var/obj/item/cell/C = potato.cell
 		C.give(chargecost)
-	H.AdjustSleeping(-60)
+
+	ADJ_STATUS(H, STAT_ASLEEP, -60)
 	log_and_message_admins("used \a [src] to revive [key_name(H)].")
 
 /obj/item/shockpaddles/proc/lowskill_revive(mob/living/carbon/human/H, mob/living/user)
@@ -437,7 +437,7 @@
 	M.reload_fullscreen()
 
 	M.emote("gasp")
-	M.Weaken(rand(10,25))
+	SET_STATUS_MAX(M, STAT_WEAK, rand(10,25))
 	M.updatehealth()
 	apply_brain_damage(M, deadtime)
 

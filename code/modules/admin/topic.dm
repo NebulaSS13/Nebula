@@ -235,11 +235,10 @@
 		switch(href_list["simplemake"])
 			if("observer")			M.change_mob_type( /mob/observer/ghost , null, null, delmob )
 			if("human")				M.change_mob_type( /mob/living/carbon/human , null, null, delmob, href_list["species"])
-			if("slime")				M.change_mob_type( /mob/living/carbon/slime , null, null, delmob )
 			if("monkey")			M.change_mob_type( /mob/living/carbon/human/monkey , null, null, delmob )
 			if("robot")				M.change_mob_type( /mob/living/silicon/robot , null, null, delmob )
 			if("cat")				M.change_mob_type( /mob/living/simple_animal/cat , null, null, delmob )
-			if("runtime")			M.change_mob_type( /mob/living/simple_animal/cat/fluff/Runtime , null, null, delmob )
+			if("runtime")			M.change_mob_type( /mob/living/simple_animal/cat/fluff/runtime , null, null, delmob )
 			if("corgi")				M.change_mob_type( /mob/living/simple_animal/corgi , null, null, delmob )
 			if("ian")				M.change_mob_type( /mob/living/simple_animal/corgi/Ian , null, null, delmob )
 			if("crab")				M.change_mob_type( /mob/living/simple_animal/crab , null, null, delmob )
@@ -808,7 +807,9 @@
 		M.update_icons()
 
 		//so they black out before warping
-		M.Paralyse(5)
+		if(isliving(M))
+			var/mob/living/L = M
+			SET_STATUS_MAX(L, STAT_PARA, 5)
 		sleep(5)
 		if(!M)	return
 
@@ -838,7 +839,9 @@
 		for(var/obj/item/I in M)
 			M.drop_from_inventory(I)
 
-		M.Paralyse(5)
+		if(isliving(M))
+			var/mob/living/L = M
+			SET_STATUS_MAX(L, STAT_PARA, 5)
 		sleep(5)
 		M.forceMove(pick(GLOB.tdome1))
 		spawn(50)
@@ -863,7 +866,9 @@
 		for(var/obj/item/I in M)
 			M.drop_from_inventory(I)
 
-		M.Paralyse(5)
+		if(isliving(M))
+			var/mob/living/L = M
+			SET_STATUS_MAX(L, STAT_PARA, 5)
 		sleep(5)
 		M.forceMove(pick(GLOB.tdome2))
 		spawn(50)
@@ -884,8 +889,10 @@
 		if(istype(M, /mob/living/silicon/ai))
 			to_chat(usr, "This cannot be used on instances of type /mob/living/silicon/ai")
 			return
-
-		M.Paralyse(5)
+		
+		if(isliving(M))
+			var/mob/living/L = M
+			SET_STATUS_MAX(L, STAT_PARA, 5)
 		sleep(5)
 		M.forceMove(pick(GLOB.tdomeadmin))
 		spawn(50)
@@ -914,7 +921,11 @@
 			var/mob/living/carbon/human/observer = M
 			observer.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket(observer), slot_w_uniform_str)
 			observer.equip_to_slot_or_del(new /obj/item/clothing/shoes/color/black(observer), slot_shoes_str)
-		M.Paralyse(5)
+
+		if(isliving(M))
+			var/mob/living/L = M
+			SET_STATUS_MAX(L, STAT_PARA, 5)
+
 		sleep(5)
 		M.forceMove(pick(GLOB.tdomeobserve))
 		spawn(50)
@@ -946,16 +957,6 @@
 
 		log_and_message_admins("AIized [key_name_admin(H)]!")
 		H.AIize()
-
-	else if(href_list["makeslime"])
-		if(!check_rights(R_SPAWN))	return
-
-		var/mob/living/carbon/human/H = locate(href_list["makeslime"])
-		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
-			return
-
-		usr.client.cmd_admin_slimeize(H)
 
 	else if(href_list["makerobot"])
 		if(!check_rights(R_SPAWN))	return
@@ -1171,9 +1172,9 @@
 			M.gib()
 		else
 			M.adjustBruteLoss( min( 99 , (M.health - 1) )    )
-			M.Stun(20)
-			M.Weaken(20)
-			M.stuttering = 20
+			SET_STATUS_MAX(M, STAT_STUN, 20)
+			SET_STATUS_MAX(M, STAT_WEAK, 20)
+			M.set_status(STAT_STUTTER, 20)
 
 	else if(href_list["CentcommReply"])
 		var/mob/living/L = locate(href_list["CentcommReply"])
@@ -1743,13 +1744,13 @@
 		show_player_panel(M)
 
 
-mob/living/proc/can_centcom_reply()
+/mob/living/proc/can_centcom_reply()
 	return 0
 
-mob/living/carbon/human/can_centcom_reply()
+/mob/living/carbon/human/can_centcom_reply()
 	return istype(l_ear, /obj/item/radio/headset) || istype(r_ear, /obj/item/radio/headset)
 
-mob/living/silicon/ai/can_centcom_reply()
+/mob/living/silicon/ai/can_centcom_reply()
 	return silicon_radio != null && !check_unable(2)
 
 /datum/proc/extra_admin_link(var/prefix, var/sufix, var/short_links)

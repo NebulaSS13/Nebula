@@ -25,20 +25,18 @@
 
 /decl/material/liquid/water/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
-	if(isslime(M) || alien == IS_SLIME)
-		M.adjustToxLoss(2 * removed)
-	else if(ishuman(M))
+	if(ishuman(M))
 		var/list/data = REAGENT_DATA(holder, type)
 		if(data && data["holy"])
 			if(iscultist(M))
 				if(prob(10))
-					var/decl/special_role/cultist/cult = decls_repository.get_decl(/decl/special_role/cultist)
+					var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
 					cult.offer_uncult(M)
 				if(prob(2))
 					var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
 					M.visible_message("<span class='warning'>\The [M] coughs up \the [S]!</span>")
 			else
-				var/decl/special_role/godcult = decls_repository.get_decl(/decl/special_role/godcultist)
+				var/decl/special_role/godcult = GET_DECL(/decl/special_role/godcultist)
 				if(M.mind && godcult.is_antagonist(M.mind))
 					if(REAGENT_VOLUME(holder, type) > 5)
 						M.adjustHalLoss(5)
@@ -99,18 +97,3 @@
 		else
 			M.adjust_fire_stacks(-(amount / 10))
 			holder.remove_reagent(type, amount)
-
-/decl/material/liquid/water/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
-	..()
-	if(!isslime(M) && alien != IS_SLIME)
-		return
-	M.adjustToxLoss(10 * removed)	// Babies have 150 health, adults have 200; So, 15 units and 20
-	var/mob/living/carbon/slime/S = M
-	if(!S.client && istype(S))
-		if(S.Target) // Like cats
-			S.Target = null
-		if(S.Victim)
-			S.Feedstop()
-	if(LAZYACCESS(M.chem_doses, type) == removed)
-		M.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
-		M.confused = max(M.confused, 2)

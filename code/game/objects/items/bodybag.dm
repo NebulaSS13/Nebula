@@ -6,10 +6,11 @@
 	icon = 'icons/obj/closets/bodybag.dmi'
 	icon_state = "bodybag_folded"
 	w_class = ITEM_SIZE_SMALL
-	attack_self(mob/user)
-		var/obj/structure/closet/body_bag/R = new /obj/structure/closet/body_bag(user.loc)
-		R.add_fingerprint(user)
-		qdel(src)
+	
+/obj/item/bodybag/attack_self(mob/user)
+	var/obj/structure/closet/body_bag/R = new /obj/structure/closet/body_bag(user.loc)
+	R.add_fingerprint(user)
+	qdel(src)
 
 
 /obj/item/storage/box/bodybags
@@ -92,10 +93,11 @@
 	. = new item_path(get_turf(src))
 	qdel(src)
 
-/obj/structure/closet/body_bag/MouseDrop(over_object, src_location, over_location)
-	..()
-	if((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
-		fold(usr)
+/obj/structure/closet/body_bag/handle_mouse_drop(var/atom/over, var/mob/user)
+	if(over == user && (in_range(src, user) || (src in user.contents)))
+		fold(user)
+		return TRUE
+	. = ..()
 
 /obj/item/robot_rack/body_bag
 	name = "stasis bag rack"

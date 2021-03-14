@@ -40,7 +40,7 @@
 		else if (get_dist(src, user) == 1)
 			to_chat(user, SPAN_ITALIC("Something is hidden inside."))
 
-/obj/item/clothing/shoes/attack_hand(var/mob/living/user)
+/obj/item/clothing/shoes/attack_hand(var/mob/user)
 	if (remove_hidden(user))
 		return
 	..()

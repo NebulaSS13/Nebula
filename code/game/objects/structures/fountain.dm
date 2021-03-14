@@ -16,16 +16,18 @@
 	light_color = get_random_colour(lower = 190)
 	set_light(0.6, 3, 5, 2, light_color)
 
-/obj/structure/fountain/attack_hand(var/mob/living/user)
+/obj/structure/fountain/attack_hand(var/mob/user)
 	if(user.incapacitated())
 		return
 	if(!CanPhysicallyInteract(user))
 		return
 	if(used)
-		to_chat(user, "\The [src] is still and lifeless...")
+		to_chat(user,  SPAN_WARNING("\The [src] is still and lifeless..."))
 		return
-	if(!ishuman(user) || user.isSynthetic())
-		to_chat(user, "Try as you might to touch the fountain, some force prevents you from doing so.")
+
+	var/mob/living/carbon/human/H = user
+	if(!istype(H) || H.isSynthetic())
+		to_chat(user, SPAN_WARNING("A feeling of foreboding stills your hand. The fountain is not for your kind."))
 		return
 
 	if(alert("As you reach out to touch the fountain, a feeling of doubt overcomes you. Steel yourself and proceed?",,"Yes", "No") == "Yes")
@@ -37,7 +39,8 @@
 /obj/structure/fountain/proc/time_dilation(var/mob/living/carbon/human/user)
 	for(var/mob/living/L in oviewers(7, src))
 		L.flash_eyes(3)
-		L.eye_blurry += 9
+		SET_STATUS_MAX(L, STAT_BLURRY, 9)
+
 	visible_message("<span class='warning'>\The [src] erupts in a bright flash of light!</span>")
 	playsound(src,'sound/items/time.ogg',100)
 

@@ -1,4 +1,4 @@
-/music_track/floating
+/decl/music_track/floating
 	artist = "Unknown"
 	title = "Unknown"
 	song = 'sound/music/main.ogg'

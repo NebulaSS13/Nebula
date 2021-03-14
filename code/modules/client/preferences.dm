@@ -66,10 +66,10 @@ var/list/time_prefs_fixed = list()
 
 /datum/preferences/proc/setup()
 	if(!length(GLOB.skills))
-		decls_repository.get_decl(/decl/hierarchy/skill)
+		GET_DECL(/decl/hierarchy/skill)
 	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
-	real_name = random_name(gender,species)
+	real_name = get_random_name()
 	b_type = RANDOM_BLOOD_TYPE
 
 	if(client && !IsGuestKey(client.key))
@@ -223,7 +223,7 @@ var/list/time_prefs_fixed = list()
 	character.set_species(species)
 
 	if(be_random_name)
-		var/decl/cultural_info/culture = decls_repository.get_decl(cultural_info[TAG_CULTURE])
+		var/decl/cultural_info/culture = GET_DECL(cultural_info[TAG_CULTURE])
 		if(culture) real_name = culture.get_random_name(gender)
 
 	if(config.humans_need_surnames)
@@ -333,12 +333,17 @@ var/list/time_prefs_fixed = list()
 			if(O)
 				O.markings[M] = list("color" = mark_color, "datum" = mark_datum)
 
+	if(LAZYLEN(character.descriptors))
+		for(var/entry in body_descriptors)
+			character.descriptors[entry] = body_descriptors[entry]
+
 	character.force_update_limbs()
 	character.update_mutations(0)
 	character.update_body(0)
 	character.update_underwear(0)
 	character.update_hair(0)
 	character.update_icons()
+	character.update_transform()
 
 	if(is_preview_copy)
 		return
@@ -364,10 +369,6 @@ var/list/time_prefs_fixed = list()
 	character.sec_record = sec_record
 	character.gen_record = gen_record
 	character.exploit_record = exploit_record
-
-	if(LAZYLEN(character.descriptors))
-		for(var/entry in body_descriptors)
-			character.descriptors[entry] = body_descriptors[entry]
 
 	if(!character.isSynthetic())
 		character.set_nutrition(rand(140,360))

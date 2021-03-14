@@ -56,7 +56,7 @@
 
 /obj/item/implant/psi_control/proc/get_psi_mode()
 	if(psi_mode == PSI_IMPLANT_AUTOMATIC)
-		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+		var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
 		return security_state.current_security_level.psionic_control_level
 	return psi_mode
 
@@ -100,7 +100,7 @@
 			else if(use_psi_mode == PSI_IMPLANT_SHOCK)
 				to_chat(imp_in, SPAN_DANGER("Your psi dampener punishes you with a violent neural shock!"))
 				imp_in.flash_eyes()
-				imp_in.Weaken(5)
+				SET_STATUS_MAX(imp_in, STAT_WEAK, 5)
 				if(isliving(imp_in))
 					var/mob/living/M = imp_in
 					if(M.psi) M.psi.stunned(5)

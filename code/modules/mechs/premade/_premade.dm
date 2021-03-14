@@ -19,7 +19,7 @@
 		body.decal = decal
 		body.prebuild()
 	if(!material)
-		material = decls_repository.get_decl(/decl/material/solid/metal/steel)
+		material = GET_DECL(/decl/material/solid/metal/steel)
 	. = ..()
 
 	spawn_mech_equipment()

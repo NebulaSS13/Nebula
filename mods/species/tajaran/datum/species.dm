@@ -84,7 +84,8 @@
 
 	//Autohiss
 	autohiss_basic_map = list(
-		"r" = list("rr", "rrr", "rrrr")
+		"r" = list("rr", "rrr", "rrrr"),
+		"р" = list("рр", "ррр", "рррр")//thats not "pi"
 	)
 
 	autohiss_exempt = list(LANGUAGE_TAJARA)

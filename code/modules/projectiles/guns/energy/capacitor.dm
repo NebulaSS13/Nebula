@@ -83,7 +83,7 @@ var/list/laser_wavelengths
 	if(!laser_wavelengths)
 		laser_wavelengths = list()
 		for(var/laser in subtypesof(/decl/laser_wavelength))
-			laser_wavelengths += decls_repository.get_decl(laser)
+			laser_wavelengths += GET_DECL(laser)
 	selected_wavelength = pick(laser_wavelengths)
 	if(ispath(capacitors))
 		var/capacitor_type = capacitors

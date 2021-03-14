@@ -40,19 +40,17 @@
 	if(attached)
 		overlays += image('icons/obj/bloodpack.dmi', "dongle")
 
-/obj/item/chems/ivbag/MouseDrop(over_object, src_location, over_location)
-	if(!CanMouseDrop(over_object))
-		return
-	if(!ismob(loc))
-		return
-	if(attached)
-		visible_message("\The [attached] is taken off \the [src]")
-		attached = null
-	else if(ishuman(over_object))
-		if(do_IV_hookup(over_object, usr, src))
-			attached = over_object
-			START_PROCESSING(SSobj,src)
-	update_icon()
+/obj/item/chems/ivbag/handle_mouse_drop(atom/over, mob/user)
+	if(ismob(loc))
+		if(attached)
+			visible_message(SPAN_NOTICE("\The [attached] is taken off \the [src]."))
+			attached = null
+		else if(ishuman(over) && do_IV_hookup(over, user, src))
+			attached = over
+			START_PROCESSING(SSobj, src)
+		update_icon()
+		return TRUE
+	. = ..()
 
 /obj/item/chems/ivbag/Process()
 	if(!ismob(loc))

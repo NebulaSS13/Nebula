@@ -18,7 +18,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /obj/effect/gas_overlay/Initialize(mapload, gas)
 	. = ..()
-	material = decls_repository.get_decl(gas)
+	material = GET_DECL(gas)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 	if(material.gas_tile_overlay)
@@ -271,8 +271,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		shard_icon = shard_type
 	if(!burn_armor)
 		burn_armor = brute_armor
-
 	generate_armor_values()
+
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
 	for(var/ctype in cocktails)
 		var/decl/cocktail/cocktail = cocktails[ctype]
@@ -426,8 +426,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 					if(W.wet > 1 && slipperiness <= 0)
 						W.unwet_floor(FALSE)
 					W.clean_blood()
-					for(var/mob/living/carbon/slime/M in W)
-						M.adjustToxLoss(rand(5, 10))
 
 	if(length(vapor_products))
 		var/volume = REAGENT_VOLUME(holder, type)
@@ -505,7 +503,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			M.emote(pick("twitch", "drool", "moan"))
 
 	if(euphoriant)
-		M.adjust_drugged(euphoriant, euphoriant_max)
+		SET_STATUS_MAX(M, STAT_DRUGGY, min(GET_STATUS(M, STAT_DRUGGY) + euphoriant, euphoriant_max))
 
 /decl/material/proc/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(affect_blood_on_ingest)

@@ -423,7 +423,7 @@
 		if(ORION_TRAIL_FLUX)
 			if(istype(usr,/mob/living/carbon) && prob(75))
 				var/mob/living/carbon/M = usr
-				M.Weaken(3)
+				SET_STATUS_MAX(M, STAT_WEAK, 3)
 				src.visible_message("A sudden gust of powerful wind slams \the [M] into the floor!", "You hear a large fwooshing sound, followed by a bang.")
 				M.take_organ_damage(10)
 			else
@@ -448,7 +448,7 @@
 			close_browser(M, "window=arcade")
 			for(var/i=0;i<10;i++)
 				sleep(10)
-				M.Stun(5)
+				SET_STATUS_MAX(M, STAT_STUN, 5)
 				M.adjustBruteLoss(10)
 				M.adjustFireLoss(10)
 			usr.gib() //So that people can't cheese it and inject a lot of kelo/bicard before losing

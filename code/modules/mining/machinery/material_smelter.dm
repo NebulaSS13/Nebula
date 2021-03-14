@@ -38,7 +38,7 @@
 
 /obj/machinery/material_processing/smeltery/proc/can_eat(var/obj/item/eating)
 	for(var/mtype in eating.matter)
-		var/decl/material/mat = decls_repository.get_decl(mtype)
+		var/decl/material/mat = GET_DECL(mtype)
 		if(mat.melting_point > temperature)
 			return FALSE
 	return TRUE
@@ -79,7 +79,7 @@
 
 	if(output_turf)
 		for(var/mtype in casting)
-			var/decl/material/mat = decls_repository.get_decl(mtype)
+			var/decl/material/mat = GET_DECL(mtype)
 			var/ramt = REAGENT_VOLUME(reagents, mtype) || 0
 			var/samt = Floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
 			if(samt > 0)
@@ -109,7 +109,7 @@
 	data["is_alloying"] = !(atom_flags & ATOM_FLAG_NO_REACT)
 	var/list/materials = list()
 	for(var/mtype in show_materials)
-		var/decl/material/mat = decls_repository.get_decl(mtype)
+		var/decl/material/mat = GET_DECL(mtype)
 		var/ramt = REAGENT_VOLUME(reagents, mtype) || 0
 		var/samt = Floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
 		materials += list(list("label" = "[ramt]u [mat.solid_name] ([samt] ingot\s)", "casting" = (mtype in casting), "key" = "\ref[mat]"))

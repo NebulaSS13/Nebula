@@ -12,7 +12,7 @@
 	. = ..()
 	color_selection = pick(GLOB.possible_cable_colours)
 
-obj/item/cable_painter/examine(mob/user, distance)
+/obj/item/cable_painter/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
 		to_chat(user, "The color is currently set to [lowertext(color_selection)].")

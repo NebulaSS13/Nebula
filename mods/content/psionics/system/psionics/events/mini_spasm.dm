@@ -23,7 +23,7 @@
 	for(var/obj/item/radio/radio in GLOB.listening_objects)
 		if(radio.on)
 			for(var/mob/living/victim in range(radio.canhear_range, radio.loc))
-				if(isnull(victims[victim]) && victim.stat == CONSCIOUS && !victim.ear_deaf)
+				if(isnull(victims[victim]) && victim.stat == CONSCIOUS && !GET_STATUS(victim, STAT_DEAF))
 					victims[victim] = radio
 	for(var/thing in victims)
 		var/mob/living/victim = thing
@@ -44,8 +44,8 @@
 	if(victim.psi)
 		to_chat(victim, SPAN_DANGER("A hauntingly familiar sound hisses from [html_icon(source)] \the [source], and your vision flickers!"))
 		victim.psi.backblast(rand(5,15))
-		victim.Paralyse(5)
-		victim.make_jittery(100)
+		SET_STATUS_MAX(victim, STAT_PARA, 5)
+		ADJ_STATUS(victim, STAT_JITTER, 100)
 	else
 		to_chat(victim, SPAN_DANGER("An indescribable, brain-tearing sound hisses from [html_icon(source)] \the [source], and you collapse in a seizure!"))
 		victim.seizure()

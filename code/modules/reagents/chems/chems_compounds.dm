@@ -35,7 +35,7 @@
 	. = ..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.set_hallucination(60, 20)
-	M.adjust_drugged(2)
+	ADJ_STATUS(M, STAT_DRUGGY, 2)
 
 /decl/material/solid/blackpepper
 	name = "black pepper"
@@ -65,8 +65,6 @@
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 	if(prob(1))
 		M.emote("shiver")
-	if(isslime(M))
-		M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
 	holder.remove_reagent(/decl/material/liquid/capsaicin, 5)
 
 /decl/material/liquid/capsaicin
@@ -112,9 +110,6 @@
 		if(prob(5))
 			M.custom_emote(2, "[pick("dry heaves!","coughs!","splutters!")]")
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
-
-	if(isslime(M))
-		M.bodytemperature += rand(0, 15) + slime_temp_adj
 
 /decl/material/liquid/capsaicin/condensed
 	name = "condensed capsaicin"
@@ -167,13 +162,13 @@
 			to_chat(M, "<span class='warning'>Your [eye_protection] protects your eyes from the pepperspray!</span>")
 	else
 		to_chat(M, "<span class='warning'>The pepperspray gets in your eyes!</span>")
-		M.confused += 2
+		ADJ_STATUS(M, STAT_CONFUSE, 2)
 		if(mouth_covered)
-			M.eye_blurry = max(M.eye_blurry, effective_strength * 3)
-			M.eye_blind = max(M.eye_blind, effective_strength)
+			SET_STATUS_MAX(M, STAT_BLURRY, effective_strength * 3)
+			SET_STATUS_MAX(M, STAT_BLIND, effective_strength)
 		else
-			M.eye_blurry = max(M.eye_blurry, effective_strength * 5)
-			M.eye_blind = max(M.eye_blind, effective_strength * 2)
+			SET_STATUS_MAX(M, STAT_BLURRY, effective_strength * 5)
+			SET_STATUS_MAX(M, STAT_BLIND, effective_strength * 2)
 
 	if(mouth_covered)
 		to_chat(M, "<span class='warning'>Your [face_protection] protects you from the pepperspray!</span>")
@@ -182,11 +177,11 @@
 			to_chat(M, "<span class='warning'>Your [partial_face_protection] partially protects you from the pepperspray!</span>")
 			stun_probability *= 0.5
 		to_chat(M, "<span class='danger'>Your face and throat burn!</span>")
-		if(M.stunned > 0  && !M.lying)
-			M.Weaken(4)
+		if(HAS_STATUS(M, STAT_STUN)  && !M.lying)
+			SET_STATUS_MAX(M, STAT_WEAK, 4)
 		if(prob(stun_probability))
 			M.custom_emote(2, "[pick("coughs!","coughs hysterically!","splutters!")]")
-			M.Stun(3)
+			SET_STATUS_MAX(M, STAT_STUN, 3)
 
 /decl/material/liquid/capsaicin/condensed/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	holder.remove_reagent(/decl/material/liquid/frostoil, 5)
@@ -205,10 +200,7 @@
 		if(prob(5))
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 			M.custom_emote(2, "[pick("coughs.","gags.","retches.")]")
-			M.Stun(2)
-
-	if(isslime(M))
-		M.bodytemperature += rand(15, 30)
+			SET_STATUS_MAX(M, STAT_STUN, 2)
 
 /decl/material/liquid/mutagenics
 	name = "mutagenics"
@@ -258,11 +250,11 @@
 	var/volume = REAGENT_VOLUME(holder, type)
 	M.add_chemical_effect(CE_PULSE, 1)
 	M.add_chemical_effect(CE_BREATHLOSS, 0.02 * volume)
-	if(volume >= 5)
+	if(volume >= 10)
 		M.add_chemical_effect(CE_PULSE, 1)
-		M.add_chemical_effect(CE_SLOWDOWN, (volume/5) ** 2)
-	else if(LAZYACCESS(M.chem_doses, type) > 20) //after prolonged exertion
-		M.make_jittery(10)
+		M.add_chemical_effect(CE_SLOWDOWN, (volume/10) ** 2)
+	else if(LAZYACCESS(M.chem_doses, type) > 30) //after prolonged exertion
+		ADJ_STATUS(M, STAT_JITTER, 5)
 
 /decl/material/liquid/nanoblood
 	name = "nanoblood"

@@ -14,6 +14,11 @@
 	var/list/autohiss_extra_map = null
 	var/list/autohiss_exempt = null
 
+/decl/species/proc/get_autohiss_map(var/mode)
+	. = autohiss_basic_map?.Copy() || list()
+	if(mode == GLOB.PREF_FULL && autohiss_extra_map)
+		. |= autohiss_extra_map
+
 /decl/species/proc/handle_autohiss(message, decl/language/lang, mode)
 	if(!autohiss_basic_map)
 		return message
@@ -22,10 +27,7 @@
 	if(autohiss_exempt && (lang.name in autohiss_exempt))
 		return message
 
-	var/map = autohiss_basic_map.Copy()
-	if(mode == GLOB.PREF_FULL && autohiss_extra_map)
-		map |= autohiss_extra_map
-
+	var/map = get_autohiss_map(mode)
 	. = list()
 
 	while(length(message))

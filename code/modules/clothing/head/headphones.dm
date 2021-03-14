@@ -50,8 +50,9 @@
 
 	update_icon()
 
-/obj/item/clothing/head/headphones/MouseDrop(mob/user)
+/obj/item/clothing/head/headphones/handle_mouse_drop(atom/over, mob/user)
 	interact(user)
+	return TRUE
 
 /obj/item/clothing/head/headphones/attack_self(mob/user)
 	..()
@@ -72,7 +73,7 @@
 	if(!(user.get_inventory_slot(src) in list(slot_l_ear_str, slot_r_ear_str)))
 		return
 	if(current_track)
-		var/music_track/track = decls_repository.get_decl(GLOB.music_tracks[current_track])
+		var/decl/music_track/track = GET_DECL(GLOB.music_tracks[current_track])
 		sound_to(user, sound(null, channel = sound_channel))
 		sound_to(user, sound(track.song, repeat = 1, wait = 0, volume = music_volume, channel = sound_channel))
 

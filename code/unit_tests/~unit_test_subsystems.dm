@@ -80,15 +80,19 @@ SUBSYSTEM_DEF(unit_tests)
 	while (curr.len)
 		var/datum/unit_test/test = curr[curr.len]
 		curr.len--
-		if(do_unit_test(test, end_unit_tests))
-			if(test.async)
-				async_tests += test
-			else
-				test.teardown_test()
+		if(test.async)
+			async_tests += test
+		else
+			do_unit_test(test, end_unit_tests)
 		total_unit_tests++
 		if (MC_TICK_CHECK)
 			return
+
+	// Once we have dealt with all synchronous tests
+	//  start all async tests and proceed to the next stage
 	if (!curr.len)
+		for(var/test in async_tests)
+			do_unit_test(test, end_unit_tests)
 		stage++
 
 /datum/controller/subsystem/unit_tests/proc/handle_async(resumed = 0)
@@ -127,7 +131,7 @@ SUBSYSTEM_DEF(unit_tests)
 		if (4)	// do normal tests
 			handle_tests()
 
-		if (5)
+		if (5) // do async tests
 			handle_async(resumed)
 
 		if (6)	// Finalization.

@@ -35,8 +35,8 @@
 		return
 
 	//must place on a wall and user must not be inside a closet/exosuit/whatever
-	var/turf/W = A
-	if (!W.is_wall() || !isturf(user.loc))
+	var/turf/W = get_turf(A)
+	if(!istype(W) || !W.is_wall() || !isturf(user.loc))
 		to_chat(user, "<span class='warning'>You can't place this here!</span>")
 		return
 
@@ -115,7 +115,7 @@
 			pixel_y = 0
 
 /obj/structure/sign/poster/proc/set_poster(var/poster_type)
-	var/decl/poster/design = decls_repository.get_decl(poster_type)
+	var/decl/poster/design = GET_DECL(poster_type)
 	SetName("[initial(name)] - [design.name]")
 	desc = "[initial(desc)] [design.desc]"
 	icon_state = design.icon_state

@@ -32,7 +32,7 @@
 	if(!istype(get_area(src),/area/map_template/syndicate_mothership))
 		return ..()
 
-	var/decl/special_role/raider/raiders = decls_repository.get_decl(/decl/special_role/raider)
+	var/decl/special_role/raider/raiders = GET_DECL(/decl/special_role/raider)
 	if(!istype(user) || !user.mind || !user.mind.assigned_special_role != raiders || user.species.name == SPECIES_VOX || !is_alien_whitelisted(user, SPECIES_VOX))
 		return ..()
 
@@ -40,7 +40,7 @@
 	if(choice != "Yes")
 		return ..()
 
-	var/decl/hierarchy/outfit/outfit = decls_repository.get_decl(/decl/hierarchy/outfit/vox_raider)
+	var/decl/hierarchy/outfit/outfit = GET_DECL(/decl/hierarchy/outfit/vox_raider)
 	var/mob/living/carbon/human/vox/vox = new(get_turf(src), SPECIES_VOX)
 	outfit.equip(vox)
 	if(user.mind)
@@ -51,11 +51,11 @@
 /obj/item/storage/mirror/raider/proc/do_post_voxifying(var/mob/living/carbon/human/vox)
 	var/newname = sanitizeSafe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
 	if(!newname || newname == "")
-		var/decl/cultural_info/voxculture = decls_repository.get_decl(/decl/cultural_info/culture/vox/raider)
+		var/decl/cultural_info/voxculture = GET_DECL(/decl/cultural_info/culture/vox/raider)
 		newname = voxculture.get_random_name()
 	vox.real_name = newname
 	vox.SetName(vox.real_name)
-	var/decl/special_role/raider/raiders = decls_repository.get_decl(/decl/special_role/raider)
+	var/decl/special_role/raider/raiders = GET_DECL(/decl/special_role/raider)
 	raiders.update_access(vox)
 
 /obj/item/magic_rock/Initialize(ml, material_key)

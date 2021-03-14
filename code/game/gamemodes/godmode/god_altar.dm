@@ -20,10 +20,10 @@
 	if(istype(I, /obj/item/grab))
 		var/obj/item/grab/G = I
 		if(G.force_danger())
-			var/mob/affecting_mob = G.get_affecting_mob()
-			if(affecting_mob)
+			var/mob/living/affecting_mob = G.get_affecting_mob()
+			if(istype(affecting_mob))
 				affecting_mob.dropInto(loc)
-				affecting_mob.Weaken(1)
+				SET_STATUS_MAX(affecting_mob, STAT_WEAK, 1)
 				user.visible_message("<span class='warning'>\The [user] throws \the [affecting_mob] onto \the [src]!</span>")
 				qdel(G)
 				return
@@ -41,7 +41,7 @@
 	cycles_before_converted--
 	if(!cycles_before_converted)
 		src.visible_message("For one thundering moment, \the [target] cries out in pain before going limp and broken.")
-		var/decl/special_role/godcultist/godcult = decls_repository.get_decl(/decl/special_role/godcultist)
+		var/decl/special_role/godcultist/godcult = GET_DECL(/decl/special_role/godcultist)
 		godcult.add_antagonist_mind(target.mind,1, "Servant of [linked_god]","Your loyalty may be faulty, but you know that it now has control over you...", specific_god=linked_god)
 		remove_target()
 		return

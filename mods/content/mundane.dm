@@ -1,5 +1,6 @@
 #ifndef MODPACK_MUNDANE
 #define MODPACK_MUNDANE
+#endif
 
 // Modern/contemporary concepts.
 /decl/modpack/mundane
@@ -14,4 +15,3 @@
 		"a snake","a plant monster","a field of flowers","a needle","a blade","an ocean"
 	) 
 
-#endif

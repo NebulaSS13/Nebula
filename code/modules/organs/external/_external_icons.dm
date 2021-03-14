@@ -21,7 +21,7 @@ var/list/limb_icon_cache = list()
 	skin_base = ""
 	hair_colour = human.hair_colour
 	if(BP_IS_PROSTHETIC(src) && !(human.species.appearance_flags & HAS_BASE_SKIN_COLOURS) && model)
-		var/decl/prosthetics_manufacturer/franchise = decls_repository.get_decl(model)
+		var/decl/prosthetics_manufacturer/franchise = GET_DECL(model)
 		if(!(franchise && franchise.skintone))
 			return
 		skin_blend = franchise.limb_blend
@@ -40,7 +40,7 @@ var/list/limb_icon_cache = list()
 	skin_base = dna.skin_base
 	hair_colour = rgb(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
 	if(BP_IS_PROSTHETIC(src) && model)
-		var/decl/prosthetics_manufacturer/franchise = decls_repository.get_decl(model)
+		var/decl/prosthetics_manufacturer/franchise = GET_DECL(model)
 		if(!(franchise && franchise.skintone))
 			return
 	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (species.appearance_flags & HAS_A_SKIN_TONE))

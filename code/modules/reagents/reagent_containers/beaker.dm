@@ -83,6 +83,7 @@
 	material = /decl/material/solid/metal/steel
 	applies_material_name = FALSE
 	applies_material_colour = FALSE
+	origin_tech = "{'materials':2}"
 
 /obj/item/chems/glass/beaker/advanced
 	name = "advanced beaker"
@@ -100,6 +101,7 @@
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
+	origin_tech = "{'exoticmatter':2,'materials':6}"
 
 /obj/item/chems/glass/beaker/vial
 	name = "vial"

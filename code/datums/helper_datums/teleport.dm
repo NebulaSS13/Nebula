@@ -49,5 +49,5 @@
 	do_spark(target)
 
 /proc/do_teleport(var/atom/movable/target, var/atom/destination, var/precision = 0, var/type = /decl/teleport/sparks)
-	var/decl/teleport/tele = decls_repository.get_decl(type)
+	var/decl/teleport/tele = GET_DECL(type)
 	tele.teleport(target, destination, precision)

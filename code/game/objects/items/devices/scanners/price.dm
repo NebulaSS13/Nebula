@@ -22,7 +22,7 @@
 
 /obj/item/scanner/price/scan(atom/movable/target, mob/user)
 	scan_title = "Price estimations"
-	var/decl/currency/cur = decls_repository.get_decl(scanner_currency)
+	var/decl/currency/cur = GET_DECL(scanner_currency)
 	var/data = "\The [target]: [cur.format_value(target.get_combined_monetary_worth())]"
 	if(!scan_data)
 		scan_data = data

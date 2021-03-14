@@ -100,3 +100,8 @@
 #define OPERATE_PASSABLE 1
 #define OPERATE_OKAY     2
 #define OPERATE_IDEAL    3
+
+#define MODULAR_BODYPART_INVALID    0 // Cannot be detached or reattached.
+#define MODULAR_BODYPART_PROSTHETIC 1 // Can be detached or reattached freely.
+#define MODULAR_BODYPART_CYBERNETIC 2 // Can be detached or reattached to compatible parent organs.
+

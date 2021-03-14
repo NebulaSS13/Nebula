@@ -24,7 +24,7 @@
 	if(!ispath(currency, /decl/currency))
 		currency = GLOB.using_map.default_currency
 	if(isnull(absolute_worth))
-		var/decl/currency/cur = decls_repository.get_decl(currency)
+		var/decl/currency/cur = GET_DECL(currency)
 		var/list/coins = list()
 		for(var/datum/denomination/denomination in cur.denominations)
 			if(denomination.faces)
@@ -49,7 +49,7 @@
 /obj/item/coin/examine(mob/user, distance)
 	. = ..()
 	if((distance <= 1 || loc == user) && user.skill_check(SKILL_FINANCE, SKILL_ADEPT))
-		var/decl/currency/cur = decls_repository.get_decl(currency)
+		var/decl/currency/cur = GET_DECL(currency)
 		var/datum/denomination/denomination = cur.denominations_by_value[currency_worth]
 		to_chat(user, "It looks like an antiquated minting of \a [denomination.name].")
 
@@ -68,7 +68,7 @@
 	if(!can_flip)
 		return
 
-	var/decl/currency/cur = decls_repository.get_decl(currency)
+	var/decl/currency/cur = GET_DECL(currency)
 	var/datum/denomination/denomination = cur.denominations_by_value[currency_worth]
 
 	if(!denomination || !length(denomination.faces))

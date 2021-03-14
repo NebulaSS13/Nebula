@@ -15,15 +15,18 @@
 	var/obj/item/charge_stick/stored_stick = null
 
 /obj/item/stock_parts/computer/charge_stick_slot/proc/get_currency_name()
-	var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
+	var/decl/currency/cur = GET_DECL(GLOB.using_map.default_currency)
 	return cur.name
 
 /obj/item/stock_parts/computer/charge_stick_slot/diagnostics()
 	. = ..()
-	. += "[name] status: [stored_stick ? "[get_currency_name()]-stick Inserted" : "[get_currency_name()]-stick Not Present"]\n"
-	. += "Stick status: [stored_stick.is_locked() ? "Locked" : "Unlocked"]\n"
+	. += "[name] status: [stored_stick ? "[get_currency_name()]-stick Inserted" : "[get_currency_name()]-stick Not Present"]"
+	if(!stored_stick)
+		. += "\nStick status: Missing"
+	else
+		. += "\nStick status: [stored_stick.is_locked() ? "Locked" : "Unlocked"]"
 	if(!stored_stick.is_locked())
-		. += "Stick balance: [stored_stick.loaded_worth]\n"
+		. += "\nStick balance: [stored_stick.loaded_worth]"
 
 /obj/item/stock_parts/computer/charge_stick_slot/proc/verb_eject_stick()
 	set name = "Remove Charge-stick"
@@ -79,7 +82,7 @@
 		loc.verbs |= /obj/item/stock_parts/computer/charge_stick_slot/proc/verb_eject_stick
 	return TRUE
 
-/obj/item/stock_parts/computer/charge_stick_slot/attackby(obj/item/card/id/I, mob/living/user)
+/obj/item/stock_parts/computer/charge_stick_slot/attackby(obj/item/card/id/I, mob/user)
 	if(!istype(I))
 		return
 	insert_stick(I, user)

@@ -110,7 +110,7 @@
 /area/template_noop)
 "ax" = (
 /obj/structure/bed/chair/office/light,
-/obj/structure/closet/walllocker/emerglocker/east,
+/obj/structure/emergency_dispenser/east,
 /turf/simulated/floor/tiled/white,
 /area/template_noop)
 "ay" = (

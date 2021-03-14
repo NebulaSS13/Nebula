@@ -77,7 +77,7 @@
 		/decl/material/solid/gemstone/diamond = 20
 	)
 
-	var/decl/material/mat = decls_repository.get_decl(pick(loot))
+	var/decl/material/mat = GET_DECL(pick(loot))
 	explanation_text = "Ransack the [station_name()] and escape with [loot[mat.type]] unit\s of [mat.solid_name]."
 
 /datum/objective/heist/preserve_crew

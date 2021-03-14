@@ -74,6 +74,14 @@
 	if(istype(H))
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/corvid_smock/worker, slot_w_uniform_str)
 
+/decl/species/corvid/handle_post_species_pref_set(var/datum/preferences/pref)
+	pref.body_markings = pref.body_markings || list()
+	if(!pref.body_markings["Beak (Head)"])
+		pref.body_markings["Beak (Head)"] = "#454545"
+	if(!pref.body_markings["Tailfeathers (Groin)"])
+		pref.body_markings["Tailfeathers (Groin)"] = "#252525"
+	pref.skin_colour = "#252525"
+
 /obj/item/organ/internal/eyes/corvid
 	eye_icon = 'mods/species/neocorvids/icons/eyes.dmi'
 
@@ -84,10 +92,10 @@
 	species_allowed = list(SPECIES_CORVID)
 	blend = ICON_MULTIPLY
 
-/datum/sprite_accessory/hair/corvid/ears
-	name = "Corvid Curly"
-	icon_state = "corvid_ears"
-
+/datum/sprite_accessory/hair/corvid/mohawk
+	name = "Corvid Mohawk"
+	icon_state = "corvid_mohawk"
+	
 /datum/sprite_accessory/hair/corvid/spiky
 	name = "Corvid Spiky"
 	icon_state = "corvid_spiky"
@@ -103,6 +111,23 @@
 	icon = 'mods/species/neocorvids/icons/markings.dmi'
 	species_allowed = list(SPECIES_CORVID)
 	blend = ICON_MULTIPLY
+
+/datum/sprite_accessory/marking/corvid/resomi
+	name = "Raptor Ears (Head)"
+	icon_state = "ears"
+
+/datum/sprite_accessory/marking/corvid/tail
+	name = "Tailfeathers (Groin)"
+	icon_state = "feathered_tail"
+	body_parts = list(BP_GROIN)
+
+/datum/sprite_accessory/marking/corvid/tail/resomi
+	name = "Raptor Tail (Groin)"
+	icon_state = "raptor_tail"
+
+/datum/sprite_accessory/marking/corvid/tail/resomi_feathers
+	name = "Raptor Tailfeathers (Groin)"
+	icon_state = "raptor_tail_feathers"
 
 /datum/sprite_accessory/marking/corvid/wing_feathers
 	name = "Wing Feathers (Left)"

@@ -10,7 +10,7 @@
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "A soft cotton towel."
 
-/obj/item/towel/attack_self(mob/living/user)
+/obj/item/towel/attack_self(mob/user)
 	if(user.a_intent == I_GRAB)
 		lay_out()
 		return

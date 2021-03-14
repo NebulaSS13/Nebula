@@ -9,53 +9,52 @@
 	w_class = ITEM_SIZE_SMALL
 	var/obj/item/stored_item = null
 
-/obj/item/evidencebag/MouseDrop(var/obj/item/I)
-	if (!ishuman(usr))
-		return
+/obj/item/evidencebag/handle_mouse_drop(atom/over, mob/user)
+	if(user.get_empty_hand_slot() && isitem(over))
 
-	var/mob/living/carbon/human/user = usr
+		var/obj/item/I = over
 
-	if(!user.get_empty_hand_slot())
-		return //bag must be in your hands to use
+		if(I.anchored)
+			return ..()
 
-	if (isturf(I.loc))
-		if (!user.Adjacent(I))
-			return
-	else
-		//If it isn't on the floor. Do some checks to see if it's in our hands or a box. Otherwise give up.
-		if(istype(I.loc,/obj/item/storage))	//in a container.
-			var/sdepth = I.storage_depth(user)
-			if (sdepth == -1 || sdepth > 1)
-				return	//too deeply nested to access
+		if(istype(I, /obj/item/evidencebag))
+			to_chat(user, SPAN_WARNING("You find putting an evidence bag in another evidence bag to be slightly absurd."))
+			return TRUE
 
-			var/obj/item/storage/U = I.loc
-			user.client.screen -= I
-			U.contents.Remove(I)
-		else if(I in user.get_held_items())
-			user.drop_from_inventory(I)
+		if(I.w_class > ITEM_SIZE_NORMAL)
+			to_chat(user, SPAN_WARNING("\The [I] won't fit in \the [src]."))
+			return TRUE
+
+		if(stored_item)
+			to_chat(user, SPAN_WARNING("\The [src] already has something inside it."))
+			return TRUE
+
+		if(isturf(I.loc))
+			if(!user.Adjacent(I))
+				return ..()
 		else
-			return
+			//If it isn't on the floor. Do some checks to see if it's in our hands or a box. Otherwise give up.
+			if(istype(I.loc, /obj/item/storage))	//in a container.
+				var/sdepth = I.storage_depth(user)
+				if (sdepth == -1 || sdepth > 1)
+					return ..() //too deeply nested to access
+				var/obj/item/storage/U = I.loc
+				user.client.screen -= I
+				U.contents.Remove(I)
+			else if(I in user.get_held_items())
+				user.drop_from_inventory(I)
+			else
+				return ..()
 
-	if(!istype(I) || I.anchored)
-		return
-
-	if(istype(I, /obj/item/evidencebag))
-		to_chat(user, "<span class='notice'>You find putting an evidence bag in another evidence bag to be slightly absurd.</span>")
-		return
-
-	if(I.w_class > ITEM_SIZE_NORMAL)
-		to_chat(user, "<span class='notice'>[I] won't fit in [src].</span>")
-		return
-
-	if(stored_item)
-		to_chat(user, "<span class='notice'>[src] already has something inside it.</span>")
-		return
-
-	user.visible_message("[user] puts [I] into [src]", "You put [I] inside [src].",\
-	"You hear a rustle as someone puts something into a plastic bag.")
-	if(!user.skill_check(SKILL_FORENSICS, SKILL_BASIC))
-		I.add_fingerprint(user)
-	store_item(I)
+		user.visible_message( \
+			SPAN_NOTICE("\The [user] puts \the [I] into \the [src]."), \
+			SPAN_NOTICE("You put \the [I] inside \the [src]."), \
+			"You hear a rustle as someone puts something into a plastic bag.")
+		if(!user.skill_check(SKILL_FORENSICS, SKILL_BASIC))
+			I.add_fingerprint(user)
+		store_item(I)
+		return TRUE
+	. = ..()
 
 /obj/item/evidencebag/proc/store_item(obj/item/I)
 	I.forceMove(src)
@@ -86,7 +85,6 @@
 	if(stored_item)
 		user.visible_message("[user] takes [stored_item] out of [src]", "You take [stored_item] out of [src].",\
 		"You hear someone rustle around in a plastic bag, and remove something.")
-
 		user.put_in_hands(stored_item)
 		empty()
 	else

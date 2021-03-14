@@ -532,11 +532,6 @@
 	if(!mind.assigned_role)
 		mind.assigned_role = GLOB.using_map.default_assistant_title
 
-//slime
-/mob/living/carbon/slime/mind_initialize()
-	..()
-	mind.assigned_role = "slime"
-
 //AI
 /mob/living/silicon/ai/mind_initialize()
 	..()
@@ -583,5 +578,5 @@
 
 /datum/mind/proc/get_special_role_name()
 	if(assigned_special_role)
-		var/decl/special_role/special_role = ispath(assigned_special_role, /decl/special_role) && decls_repository.get_decl(assigned_special_role)
+		var/decl/special_role/special_role = ispath(assigned_special_role, /decl/special_role) && GET_DECL(assigned_special_role)
 		return special_role?.name || assigned_special_role

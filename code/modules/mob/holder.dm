@@ -8,7 +8,7 @@ var/list/holder_mob_icon_cache = list()
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
 	origin_tech = null
 	pixel_y = 8
-
+	origin_tech = "{'biotech':1}"
 	var/last_holder
 
 /obj/item/holder/Initialize()
@@ -19,6 +19,10 @@ var/list/holder_mob_icon_cache = list()
 	for(var/atom/movable/AM in src)
 		qdel(AM)
 	qdel(src)
+
+/obj/item/holder/physically_destroyed()
+	SHOULD_CALL_PARENT(FALSE)
+	destroy_all()
 
 /obj/item/holder/Destroy()
 	for(var/atom/movable/AM in src)
@@ -112,7 +116,8 @@ var/list/holder_mob_icons = list(
 	"cat2" =              'icons/clothing/holders/holder_cat2.dmi',
 	"cat3" =              'icons/clothing/holders/holder_cat3.dmi',
 	"corgi" =             'icons/clothing/holders/holder_corgi.dmi',
-	"slug" =              'icons/clothing/holders/holder_slug.dmi'
+	"possum" =            'icons/clothing/holders/holder_possum.dmi',
+	"poppy" =             'icons/clothing/holders/holder_poppy.dmi'
 )
 
 /obj/item/holder/proc/sync(var/mob/living/M)

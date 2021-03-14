@@ -75,7 +75,7 @@
 		return 0.01 // Divide by zero protection.
 
 	for(var/mat in propellant.gas)
-		var/decl/material/gas/G = decls_repository.get_decl(mat)
+		var/decl/material/gas/G = GET_DECL(mat)
 		// 0.08 chosen to get the RATIO of the specific heat, we don't have cV/cP here, so this is a rough approximate.
 		var/ratio = (G.gas_specific_heat / 25) + 0.8// These numbers are meaningless, just magic numbers to calibrate range.
 		ratio_specific_heat += ratio * (propellant.gas[mat] / propellant.total_moles)

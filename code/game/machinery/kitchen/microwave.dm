@@ -212,7 +212,7 @@
 			if (R == /decl/material/liquid/frostoil)
 				display_name = "Coldsauce"
 			else
-				var/decl/material/reagent = decls_repository.get_decl(R)
+				var/decl/material/reagent = GET_DECL(R)
 				display_name = reagent.name
 			dat += "<B>[display_name]:</B> [REAGENT_VOLUME(reagents, R)] unit\s"
 

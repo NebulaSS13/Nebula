@@ -83,7 +83,7 @@
 		owned_field.ChangeFieldStrength(value)
 
 /obj/machinery/power/fusion_core/physical_attack_hand(var/mob/user)
-	visible_message("<span class='notice'>\The [user] hugs \the [src] to make it feel better!</span>")
+	visible_message(SPAN_NOTICE("\The [user] hugs \the [src] to make it feel better!"))
 	if(owned_field)
 		Shutdown()
 	return TRUE

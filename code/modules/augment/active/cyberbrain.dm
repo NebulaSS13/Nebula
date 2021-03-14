@@ -4,6 +4,8 @@
 	icon_state = "cyberbrain"
 	allowed_organs = list(BP_AUGMENT_HEAD)
 	augment_flags = AUGMENTATION_MECHANIC
+	origin_tech = "{'materials':2,'magnets':3,'engineering':3,'biotech':2,'programming':4}"
+
 	var/list/default_hardware = list(
 		/obj/item/stock_parts/computer/processor_unit/small,
 		/obj/item/stock_parts/computer/hard_drive/small,
@@ -52,10 +54,11 @@
 		return
 	return ..()
 
-/obj/item/organ/internal/augment/active/cyberbrain/MouseDrop(var/atom/over_object)
-	var/mob/M = usr
-	if(!istype(over_object, /obj/screen) && CanMouseDrop(M))
-		return attack_self(M)
+/obj/item/organ/internal/augment/active/cyberbrain/handle_mouse_drop(atom/over, mob/user)
+	if(!istype(over, /obj/screen))
+		attack_self(user)
+		return TRUE
+	. = ..()
 
 /obj/item/organ/internal/augment/active/cyberbrain/Process()
 	var/datum/extension/assembly/assembly = get_extension(src, /datum/extension/assembly)

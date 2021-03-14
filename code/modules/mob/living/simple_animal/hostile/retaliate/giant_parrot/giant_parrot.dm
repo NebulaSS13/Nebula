@@ -39,7 +39,7 @@
 	. = ..()
 	var/subspecies_type = safepick(subspecies)
 	if(subspecies_type)
-		var/decl/parrot_subspecies/ps = decls_repository.get_decl(subspecies_type)
+		var/decl/parrot_subspecies/ps = GET_DECL(subspecies_type)
 		icon_set = ps.icon_set
 		skin_material = ps.feathers
 		if(get_subspecies_name)
@@ -52,7 +52,7 @@
 	if(ishuman(.) && can_perform_ability(.))
 		var/mob/living/carbon/human/H = .
 		if(prob(70))
-			H.Weaken(rand(2,3))
+			SET_STATUS_MAX(H, STAT_WEAK, rand(2,3))
 			cooldown_ability(ability_cooldown / 1.5)
 			visible_message(SPAN_MFAUNA("\The [src] flaps its wings mightily and bowls over \the [H] with a gust!"))
 

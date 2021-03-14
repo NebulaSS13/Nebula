@@ -1,0 +1,82 @@
+<div style="min-width: 680px">
+    <h2>SYSTEM STATUS</h2>
+    <div class="item">
+        <div class="itemLabel">
+            Superluminal shunt is:
+        </div>
+        <div class="itemContent">
+            {{if data.ftlstatus == 2}}
+                Offline
+            {{else data.ftlstatus == 1}}
+                Cooling Down
+            {{else data.ftlstatus == 3}}
+                Online
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="itemLabel">
+            Remaining Fuel:
+        </div>
+        <div class="itemContent">
+            {{:data.fuel_joules}} MJ
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="itemLabel">
+            Estimated Fuel Cost:
+        </div>
+        <div class="itemContent">
+            {{:data.jumpcost}} MJ
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="itemLabel">
+            Estimated Charge Time:
+        </div>
+        <div class="itemContent">
+            {{:data.chargetime}} Minutes
+        </div>
+    </div>
+	
+    <div class="item">
+        <div class="itemLabel">
+            Charge Precentage:
+        </div>
+        <div class="itemContent">
+            {{:helper.displayBar(data.chargepercent, 0, 100)}}
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="itemLabel">
+            Shunt X Coordinates:
+        </div>
+        <div class="itemContent">
+            {{:helper.link(data.shunt_x, null, { 'set_shunt_x' : 1})}}
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="itemLabel">
+            Shunt Y Coordinates:
+        </div>
+        <div class="itemContent">
+            {{:helper.link(data.shunt_y, null, { 'set_shunt_y' : 1})}}
+        </div>
+    </div>
+        
+    <div class="item">    
+        <div class="itemContent">
+            {{:helper.link("Engage Shunt Drive", 'alert', { 'start_shunt' : 1 })}}
+        </div>
+    </div>
+    <div class="item">
+        <div class="itemContent">
+            {{:helper.link("Disengage Shunt Drive", 'alert', { 'cancel_shunt' : 1 })}}
+        </div>
+    </div>
+</div>

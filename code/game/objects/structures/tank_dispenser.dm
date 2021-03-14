@@ -31,7 +31,7 @@
 		if(1 to 4)	overlays += "hydrogen-[hydrogentanks]"
 		if(5 to INFINITY) overlays += "hydrogen-5"
 
-/obj/structure/dispenser/attack_ai(mob/user)
+/obj/structure/dispenser/attack_ai(mob/living/silicon/ai/user)
 	if(user.Adjacent(src))
 		return attack_hand(user)
 	..()

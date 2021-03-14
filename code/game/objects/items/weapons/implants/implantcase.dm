@@ -27,7 +27,7 @@
 /obj/item/implantcase/proc/update_description()
 	if (imp)
 		desc = "A case containing \a [imp]."
-		origin_tech = imp.origin_tech
+		origin_tech = imp.get_origin_tech()
 	else
 		desc = "A case for implants."
 		origin_tech = null

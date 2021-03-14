@@ -91,7 +91,7 @@
 	darts -= next
 	next = null
 
-/obj/item/gun/launcher/syringe/attack_self(mob/living/user)
+/obj/item/gun/launcher/syringe/attack_self(mob/user)
 	if(next)
 		user.visible_message("[user] unlatches and carefully relaxes the bolt on [src].", "<span class='warning'>You unlatch and carefully relax the bolt on [src], unloading the spring.</span>")
 		next = null
@@ -101,7 +101,7 @@
 		next = darts[1]
 	add_fingerprint(user)
 
-/obj/item/gun/launcher/syringe/attack_hand(mob/living/user)
+/obj/item/gun/launcher/syringe/attack_hand(mob/user)
 	if(user.is_holding_offhand(src))
 		if(!darts.len)
 			to_chat(user, "<span class='warning'>[src] is empty.</span>")

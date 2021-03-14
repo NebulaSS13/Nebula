@@ -14,6 +14,7 @@
 	return ..()
 
 /turf/simulated/floor/fixed/on_update_icon()
+	queue_ao(FALSE)
 	update_flood_overlay()
 
 /turf/simulated/floor/fixed/is_plating()
@@ -36,7 +37,7 @@
 
 /turf/simulated/floor/fixed/alium/Initialize()
 	. = ..()
-	var/decl/material/A = decls_repository.get_decl(/decl/material/solid/metal/aliumium)
+	var/decl/material/A = GET_DECL(/decl/material/solid/metal/aliumium)
 	if(!A)
 		return
 	color = A.color
@@ -49,7 +50,7 @@
 
 /turf/simulated/floor/fixed/alium/explosion_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
-	var/decl/material/A = decls_repository.get_decl(/decl/material/solid/metal/aliumium)
+	var/decl/material/A = GET_DECL(/decl/material/solid/metal/aliumium)
 	if(prob(A.explosion_resistance))
 		return
 	if(severity == 1)

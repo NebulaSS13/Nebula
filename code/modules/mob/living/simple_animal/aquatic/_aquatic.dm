@@ -29,7 +29,7 @@
 		if(icon_state == icon_living)
 			icon_state = "[icon_living]_dying"
 		walk(src, 0)
-		Paralyse(3)
+		SET_STATUS_MAX(src, STAT_PARA, 3)
 	. = ..()
 
 /mob/living/simple_animal/aquatic/handle_atmos(var/atmos_suitable = 1)

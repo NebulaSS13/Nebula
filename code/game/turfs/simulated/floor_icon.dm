@@ -109,48 +109,43 @@ var/list/flooring_cache = list()
 
 /decl/flooring/proc/test_link(var/turf/origin, var/turf/T)
 	var/is_linked = FALSE
-	//is_wall is true for wall turfs and for floors containing a low wall
-	if(T.is_wall())
-		if(wall_smooth == SMOOTH_ALL)
-			is_linked = TRUE
-
-	//If is_hole is true, then it's space or openspace
-	else if(T.is_open())
-		if(space_smooth == SMOOTH_ALL)
-			is_linked = TRUE
-
-
-	//If we get here then its a normal floor
-	else if (T.is_floor())
-		var/turf/simulated/floor/t = T
-
-		//Check for window frames.
-		if(wall_smooth == SMOOTH_ALL)
-			for(var/obj/structure/wall_frame/WF in T.contents)
+	if(istype(origin) && istype(T))
+		//is_wall is true for wall turfs and for floors containing a low wall
+		if(T.is_wall())
+			if(wall_smooth == SMOOTH_ALL)
+				is_linked = TRUE
+		//If is_hole is true, then it's space or openspace
+		else if(T.is_open())
+			if(space_smooth == SMOOTH_ALL)
 				is_linked = TRUE
 
-		//If the floor is the same as us,then we're linked,
-		if (istype(src, t.flooring))
-			is_linked = TRUE
-		else if (floor_smooth == SMOOTH_ALL)
-			is_linked = TRUE
-
-		else if (floor_smooth != SMOOTH_NONE)
-
-			//If we get here it must be using a whitelist or blacklist
-			if (floor_smooth == SMOOTH_WHITELIST)
-				for (var/v in flooring_whitelist)
-					if (istype(t.flooring, v))
-						//Found a match on the list
-						is_linked = TRUE
-						break
-			else if(floor_smooth == SMOOTH_BLACKLIST)
-				is_linked = TRUE //Default to true for the blacklist, then make it false if a match comes up
-				for (var/v in flooring_whitelist)
-					if (istype(t.flooring, v))
-						//Found a match on the list
-						is_linked = FALSE
-						break
+		//If we get here then its a normal floor
+		else if (T.is_floor())
+			var/turf/simulated/floor/t = T
+			//Check for window frames.
+			if(wall_smooth == SMOOTH_ALL)
+				for(var/obj/structure/wall_frame/WF in T.contents)
+					is_linked = TRUE
+			//If the floor is the same as us,then we're linked,
+			if (istype(src, t.flooring))
+				is_linked = TRUE
+			else if (floor_smooth == SMOOTH_ALL)
+				is_linked = TRUE
+			else if (floor_smooth != SMOOTH_NONE)
+				//If we get here it must be using a whitelist or blacklist
+				if (floor_smooth == SMOOTH_WHITELIST)
+					for (var/v in flooring_whitelist)
+						if (istype(t.flooring, v))
+							//Found a match on the list
+							is_linked = TRUE
+							break
+				else if(floor_smooth == SMOOTH_BLACKLIST)
+					is_linked = TRUE //Default to true for the blacklist, then make it false if a match comes up
+					for (var/v in flooring_whitelist)
+						if (istype(t.flooring, v))
+							//Found a match on the list
+							is_linked = FALSE
+							break
 	return is_linked
 
 /decl/flooring/proc/symmetric_test_link(var/turf/A, var/turf/B)

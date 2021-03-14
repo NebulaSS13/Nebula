@@ -35,7 +35,7 @@
 
 	var/list/unsorted_overlays = list()
 	for(var/id in subtypesof(/decl/material/gas))
-		var/decl/material/mat = decls_repository.get_decl(id)
+		var/decl/material/mat = GET_DECL(id)
 		unsorted_overlays |= mat.gas_tile_overlay
 
 	for(var/turf/simulated/T in world)

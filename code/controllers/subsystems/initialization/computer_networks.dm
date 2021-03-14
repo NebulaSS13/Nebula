@@ -1,3 +1,6 @@
+/datum/proc/handle_post_network_connection()
+	return
+
 SUBSYSTEM_DEF(networking)
 	name = "Computer Networks"
 	priority = SS_PRIORITY_COMPUTER_NETS
@@ -23,9 +26,10 @@ SUBSYSTEM_DEF(networking)
 				connected = device.connect()
 			else
 				connected = device.connect_to_any()
-			if(!connected)
+			if(connected)
+				device.holder?.handle_post_network_connection()
+			else
 				connection_queue += device
-
 		if(MC_TICK_CHECK)
 			return
 

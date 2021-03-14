@@ -40,5 +40,5 @@
 			return
 		if(prob(message_prob))
 			to_chat(H, SPAN_NOTICE(pick(sleepy_messages)))
-		H.drowsyness = min(H.drowsyness + speed * weakness, limit * weakness)
-		H.eye_blurry = min(H.eye_blurry + speed * weakness, limit * weakness)
+		H.set_status(STAT_DROWSY, min(GET_STATUS(H, STAT_DROWSY) + speed * weakness, limit * weakness))
+		H.set_status(STAT_BLURRY, min(GET_STATUS(H, STAT_BLURRY) + speed * weakness, limit * weakness))

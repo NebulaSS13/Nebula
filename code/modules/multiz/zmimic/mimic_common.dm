@@ -10,7 +10,7 @@
 
 /turf/update_icon()
 	..()
-	if (above)
+	if(above)
 		update_above()
 
 /atom/movable/update_icon()

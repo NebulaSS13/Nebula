@@ -40,7 +40,7 @@
 /obj/item/spy_bug/attack_self(mob/user)
 	radio.attack_self(user)
 
-/obj/item/spy_bug/attackby(obj/W, mob/living/user)
+/obj/item/spy_bug/attackby(obj/W, mob/user)
 	if(istype(W, /obj/item/spy_monitor))
 		var/obj/item/spy_monitor/SM = W
 		SM.pair(src, user)
@@ -88,7 +88,7 @@
 	radio.attack_self(user)
 	view_cameras(user)
 
-/obj/item/spy_monitor/attackby(obj/W, mob/living/user)
+/obj/item/spy_monitor/attackby(obj/W, mob/user)
 	if(istype(W, /obj/item/spy_bug))
 		pair(W, user)
 	else

@@ -222,9 +222,9 @@ ARMCHAIR(yellow)
 	title = "emergency shutter"
 	result_type = /obj/structure/firedoor_assembly
 
-/datum/stack_recipe/furniture/door_assembly/multi_tile
-	title = "multi-tile airlock assembly"
-	result_type = /obj/structure/door_assembly/multi_tile
+/datum/stack_recipe/furniture/door_assembly/double
+	title = "double airlock assembly"
+	result_type = /obj/structure/door_assembly/double
 
 /datum/stack_recipe/furniture/door_assembly/blast
 	title = "blast door assembly"

@@ -59,7 +59,7 @@
 /turf/unsimulated/wall/cascade/attack_ghost(mob/user)
 	user.examinate(src)
 
-/turf/unsimulated/wall/cascade/attack_ai(mob/user)
+/turf/unsimulated/wall/cascade/attack_ai(mob/living/silicon/ai/user)
 	user.examinate(src)
 
 /turf/unsimulated/wall/cascade/attack_hand(mob/user)
@@ -72,7 +72,7 @@
 	Consume(user)
 	return TRUE
 
-/turf/unsimulated/wall/cascade/attackby(obj/item/W, mob/living/user)
+/turf/unsimulated/wall/cascade/attackby(obj/item/W, mob/user)
 	user.visible_message("<span class=\"warning\">\The [user] touches \a [W] to \the [src] as a silence fills the room...</span>",\
 		"<span class=\"danger\">You touch \the [W] to \the [src] when everything suddenly goes silent.\"</span>\n<span class=\"notice\">\The [W] flashes into dust as you flinch away from \the [src].</span>",\
 		"<span class=\"warning\">Everything suddenly goes silent.</span>")

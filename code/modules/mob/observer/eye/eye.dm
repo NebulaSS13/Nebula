@@ -78,6 +78,7 @@
 	LAZYREMOVE(user.additional_vision_handlers, src)
 	remove_visual(owner)
 	owner.eyeobj = null
+	owner.reset_view()
 	if(click_handler_type)
 		owner.RemoveClickHandler(click_handler_type)
 	owner = null

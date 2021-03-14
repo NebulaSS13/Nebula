@@ -55,27 +55,27 @@
 
 	var/effective_dose = LAZYACCESS(M.chem_doses, type) * strength_mod * (1 + REAGENT_VOLUME(holder, type)/60) //drinking a LOT will make you go down faster
 	if(effective_dose >= strength) // Early warning
-		M.make_dizzy(6) // It is decreased at the speed of 3 per tick
+		ADJ_STATUS(M, STAT_DIZZY, 6) // It is decreased at the speed of 3 per tick
 	if(effective_dose >= strength * 2) // Slurring
 		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
-		M.slurring = max(M.slurring, 30)
+		SET_STATUS_MAX(M, STAT_SLUR, 30)
 	if(effective_dose >= strength * 3) // Confusion - walking in random directions
 		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
-		M.confused = max(M.confused, 20)
+		SET_STATUS_MAX(M, STAT_CONFUSE, 20)
 	if(effective_dose >= strength * 4) // Blurry vision
 		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
-		M.eye_blurry = max(M.eye_blurry, 10)
+		SET_STATUS_MAX(M, STAT_BLURRY, 10)
 	if(effective_dose >= strength * 5) // Drowsyness - periodically falling asleep
 		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
-		M.drowsyness = max(M.drowsyness, 20)
+		SET_STATUS_MAX(M, STAT_DROWSY, 20)
 	if(effective_dose >= strength * 6) // Toxic dose
 		M.add_chemical_effect(CE_ALCOHOL_TOXIC, alcohol_toxicity)
 	if(effective_dose >= strength * 7) // Pass out
-		M.Paralyse(20)
-		M.Sleeping(30)
+		SET_STATUS_MAX(M, STAT_PARA, 20)
+		SET_STATUS_MAX(M, STAT_ASLEEP, 30)
 
 	if(euphoriant)
-		M.adjust_drugged(euphoriant, euphoriant_max)
+		ADJ_STATUS(M, STAT_DRUGGY, rand(euphoriant, euphoriant_max))
 
 	if(adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
 		M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
@@ -124,8 +124,7 @@
 	..()
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
-
-	M.jitteriness = max(M.jitteriness - 3, 0)
+	ADJ_STATUS(M, STAT_JITTER, -3)
 
 /decl/material/liquid/ethanol/bluecuracao
 	name = "blue curacao"
@@ -169,14 +168,14 @@
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
-	M.dizziness = max(0, M.dizziness - 5)
-	M.drowsyness = max(0, M.drowsyness - 3)
-	M.sleeping = max(0, M.sleeping - 2)
+	ADJ_STATUS(M, STAT_DIZZY, -5)
+	ADJ_STATUS(M, STAT_DROWSY, -3)
+	ADJ_STATUS(M, STAT_ASLEEP, -2)
 	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 /decl/material/liquid/ethanol/coffee/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
-	M.make_jittery(5)
+	ADJ_STATUS(M, STAT_JITTER, 5)
 
 /decl/material/liquid/ethanol/coffee/kahlua
 	name = "coffee liqueur"
@@ -247,10 +246,10 @@
 	if(M.HasTrait(/decl/trait/metabolically_inert))
 		return
 
-	M.drowsyness = max(0, M.drowsyness - 7)
+	ADJ_STATUS(M, STAT_DROWSY, -7)
 	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
-	M.make_jittery(5)
+	ADJ_STATUS(M, STAT_JITTER, 5)
 	M.add_chemical_effect(CE_PULSE, 2)
 
 /decl/material/liquid/ethanol/vermouth

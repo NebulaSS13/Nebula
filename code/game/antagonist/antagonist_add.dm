@@ -7,9 +7,12 @@
 		base_to_load = null
 		if(SSmapping.map_templates[initial(base.name)])
 			base = SSmapping.map_templates[initial(base.name)]
-		else
+		if(!base)
 			base = new base()
-		report_progress("Loading map template '[base]' for [name]...")
+		else if(base.loaded > 0)
+			report_progress("Map template '[base]' is already loaded, skipping additional load for [name].")
+			return TRUE
+		report_progress("Loading map template '[base]' for [name].")
 		. = base.load_new_z()
 		if(.)
 			get_starting_locations()

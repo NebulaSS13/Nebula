@@ -18,7 +18,7 @@
 	response_harm   = "kicks"
 	minbodytemp = 223		//Below -50 Degrees Celsius
 	maxbodytemp = 323	//Above 50 Degrees Celsius
-	holder_type = /obj/item/holder/cat
+	holder_type = /obj/item/holder
 	mob_size = MOB_SIZE_SMALL
 	possession_candidate = 1
 	pass_flags = PASS_FLAG_TABLE
@@ -112,7 +112,7 @@
 	if(O.force)
 		set_flee_target(user? user : src.loc)
 
-/mob/living/simple_animal/cat/attack_hand(mob/living/carbon/human/M)
+/mob/living/simple_animal/cat/attack_hand(mob/M)
 	. = ..()
 	if(M.a_intent == I_HURT)
 		set_flee_target(M)
@@ -210,7 +210,7 @@
 	return
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
-/mob/living/simple_animal/cat/fluff/Runtime
+/mob/living/simple_animal/cat/fluff/runtime
 	name = "Runtime"
 	desc = "Her fur has the look and feel of velvet, and her tail quivers occasionally."
 	gender = FEMALE
@@ -219,6 +219,10 @@
 	icon_living = "cat"
 	icon_dead = "cat_dead"
 	skin_material = /decl/material/solid/skin/fur/black
+	holder_type = /obj/item/holder/runtime
+
+/obj/item/holder/runtime
+	origin_tech = "{'programming':1,'biotech':1}"
 
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"
@@ -232,24 +236,6 @@
 	bone_amount = 3
 	skin_amount = 3
 
-// Leaving this here for now.
-/obj/item/holder/cat/fluff/bones
-	name = "Bones"
-	desc = "It's Bones! Meow."
-	gender = MALE
-	icon_state = "cat3"
-
-/mob/living/simple_animal/cat/fluff/bones
-	name = "Bones"
-	desc = "That's Bones the cat. He's a laid back, black cat. Meow."
-	gender = MALE
-	icon_state = "cat3"
-	item_state = "cat3"
-	icon_living = "cat3"
-	icon_dead = "cat3_dead"
-	holder_type = /obj/item/holder/cat/fluff/bones
-	var/friend_name = "Erstatz Vryroxes"
-
 /mob/living/simple_animal/cat/kitten/Initialize()
 	. = ..()
 	gender = pick(MALE, FEMALE)
@@ -262,6 +248,7 @@
 	item_state = "cat2"
 	icon_living = "cat2"
 	icon_dead = "cat2_dead"
+	holder_type = /obj/item/holder/runtime
 
 /mob/living/simple_animal/cat/harvest_skin()
 	. = ..()

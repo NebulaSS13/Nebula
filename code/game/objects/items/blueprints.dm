@@ -15,8 +15,8 @@
 	if(set_valid_z_levels())
 		set_extension(src, /datum/extension/eye/blueprints)
 
-/obj/item/blueprints/attack_self(var/mob/living/carbon/human/user)
-	if (!istype(user) || !user.check_dexterity(DEXTERITY_COMPLEX_TOOLS)) // Monkeys et al. cannot blueprint.
+/obj/item/blueprints/attack_self(mob/user)
+	if (!ishuman(user) || !user.check_dexterity(DEXTERITY_COMPLEX_TOOLS)) // Monkeys et al. cannot blueprint.
 		to_chat(user, SPAN_WARNING("This stack of blue paper means nothing to you."))
 		return
 
@@ -59,7 +59,7 @@
 	name = "outpost blueprints"
 	icon_state = "blueprints2"
 
-/obj/item/blueprints/outpost/attack_self(var/mob/living/carbon/human/user)
+/obj/item/blueprints/outpost/attack_self(mob/user)
 	var/obj/effect/overmap/visitable/sector/S = map_sectors["[get_z(user)]"]
 	area_prefix = S.name
 	. = ..()

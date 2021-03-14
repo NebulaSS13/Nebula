@@ -5,7 +5,7 @@
 	if(!M.mind || !M.client)
 		return
 
-	convert_to_faction(M.mind, decls_repository.get_decl(/decl/special_role/revolutionary))
+	convert_to_faction(M.mind, GET_DECL(/decl/special_role/revolutionary))
 
 /mob/living/proc/convert_to_faction(var/datum/mind/player, var/decl/special_role/faction)
 
@@ -54,4 +54,4 @@
 	if(!M.mind || !M.client)
 		return
 
-	convert_to_faction(M.mind, decls_repository.get_decl(/decl/special_role/loyalist))
+	convert_to_faction(M.mind, GET_DECL(/decl/special_role/loyalist))

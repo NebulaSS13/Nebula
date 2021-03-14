@@ -21,10 +21,13 @@
 	var/confirm = alert(user, "This will destroy the item inside forever. Are you sure?","Confirm Analyze","Yes","No")
 	if(confirm == "Yes" && !QDELETED(loaded_item) && !user.incapacitated() && loc == user)
 		to_chat(user, "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down.")
-		var/list/tech_found = json_decode(loaded_item.origin_tech)
+		var/list/tech_found = cached_json_decode(loaded_item.get_origin_tech())
 		for(var/tech in tech_found)
-			if(saved_tech_levels[tech] < tech_found[tech])
+			if(saved_tech_levels[tech] == tech_found[tech])
+				saved_tech_levels[tech] = (tech_found[tech]+1)
+			else if(saved_tech_levels[tech] < tech_found[tech])
 				saved_tech_levels[tech] = tech_found[tech]
+
 		flick("portable_analyzer_scan", src)
 		QDEL_NULL(loaded_item)
 
@@ -49,7 +52,8 @@
 		to_chat(user, SPAN_WARNING("\The [src] already has something inside.  Analyze or eject it first."))
 		return
 	var/obj/item/I = target
-	if(!I.origin_tech)
+	var/tech = I.get_origin_tech() 
+	if(!tech)
 		to_chat(user, SPAN_WARNING("\The [I] has no interesting data to analyze."))
 		return
 	I.forceMove(src)

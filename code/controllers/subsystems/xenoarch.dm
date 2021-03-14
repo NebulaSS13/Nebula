@@ -98,7 +98,7 @@ SUBSYSTEM_DEF(xenoarch)
 
 			//have a chance for an artifact to spawn here, but not in animal or plant digsites
 			
-			var/decl/xenoarch_digsite/D = decls_repository.get_decl(digsite)
+			var/decl/xenoarch_digsite/D = GET_DECL(digsite)
 			if(isnull(M.artifact_find) && D.can_have_anomalies)
 				artifact_spawning_turfs.Add(archeo_turf)
 		CHECK_TICK

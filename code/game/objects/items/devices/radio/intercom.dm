@@ -12,6 +12,7 @@
 	layer = ABOVE_WINDOW_LAYER
 	cell = null
 	power_usage = 0
+	intercom = TRUE
 	var/number = 0
 	var/last_tick //used to delay the powercheck
 
@@ -99,7 +100,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/radio/intercom/attack_ai(mob/user)
+/obj/item/radio/intercom/attack_ai(mob/living/silicon/ai/user)
 	src.add_fingerprint(user)
 	spawn (0)
 		attack_self(user)

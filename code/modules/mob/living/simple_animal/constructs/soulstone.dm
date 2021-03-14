@@ -83,7 +83,7 @@
 	if(!shade.key) // No key = hasn't been used
 		to_chat(user, "<span class='notice'>You cut your finger and let the blood drip on \the [src].</span>")
 		user.remove_blood_simple(1)
-		var/decl/ghosttrap/S = decls_repository.get_decl(/decl/ghosttrap/cult_shade)
+		var/decl/ghosttrap/S = GET_DECL(/decl/ghosttrap/cult_shade)
 		S.request_player(shade, "The soul stone shade summon ritual has been performed. ")
 	else if(!shade.client) // Has a key but no client - shade logged out
 		to_chat(user, "<span class='notice'>\The [shade] in \the [src] is dormant.</span>")
@@ -132,7 +132,7 @@
 		C.key = S.shade.key
 		//C.cancel_camera()
 		if(S.is_evil)
-			var/decl/special_role/cult = decls_repository.get_decl(/decl/special_role/cultist)
+			var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
 			cult.add_antagonist(C.mind)
 		qdel(S)
 		qdel(src)

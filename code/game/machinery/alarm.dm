@@ -71,6 +71,7 @@
 	var/remote_control = 0
 	var/rcon_setting = 2
 	var/rcon_time = 0
+	var/rcon_remote_override_access = list(access_ce)
 	var/locked = 1
 	var/aidisabled = 0
 	var/shorted = 0
@@ -152,13 +153,15 @@
 	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20) /* kpa */
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+40, T0C+66) // K
 
-	var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+	var/decl/environment_data/env_info = GET_DECL(environment_type)
 	for(var/g in subtypesof(/decl/material/gas))
 		if(!env_info.important_gasses[g])
 			trace_gas += g
 
 	GLOB.name_set_event.register(alarm_area, src, .proc/change_area_name)
 	set_frequency(frequency)
+	for(var/device_tag in alarm_area.air_scrub_names + alarm_area.air_vent_names)
+		send_signal(device_tag, list()) // ask for updates; they initialized before us and we didn't get the data
 	queue_icon_update()
 
 /obj/machinery/alarm/get_req_access()
@@ -473,16 +476,13 @@
 
 /obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]
-	var/remote_connection = 0
-	var/remote_access = 0
-	if(state)
-		var/list/href = state.href_list(user)
-		remote_connection = href["remote_connection"]	// Remote connection means we're non-adjacent/connecting from another computer
-		remote_access = href["remote_access"]			// Remote access means we also have the privilege to alter the air alarm.
+	var/remote_connection = istype(state, /datum/topic_state/remote)  // Remote connection means we're non-adjacent/connecting from another computer
+	var/remote_access = remote_connection && CanInteract(user, state) // Remote access means we also have the privilege to alter the air alarm.
 
 	data["locked"] = locked && !issilicon(user)
 	data["remote_connection"] = remote_connection
 	data["remote_access"] = remote_access
+	data["rcon_access"] = (CanUseTopic(user, state, list("rcon" = TRUE)) == STATUS_INTERACTIVE)
 	data["rcon"] = rcon_setting
 	data["screen"] = screen
 
@@ -508,9 +508,9 @@
 	if(total)
 		var/pressure = environment.return_pressure()
 		environment_data[++environment_data.len] = list("name" = "Pressure", "value" = pressure, "unit" = "kPa", "danger_level" = pressure_dangerlevel)
-		var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+		var/decl/environment_data/env_info = GET_DECL(environment_type)
 		for(var/gas_id in env_info.important_gasses)
-			var/decl/material/mat = decls_repository.get_decl(gas_id)
+			var/decl/material/mat = GET_DECL(gas_id)
 			environment_data[++environment_data.len] = list(
 				"name" =  capitalize(mat.gas_name),
 				"value" = environment.gas[gas_id] / total * 100,
@@ -564,9 +564,9 @@
 						"panic"		= info["panic"],
 						"filters"	= list()
 					)
-				var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+				var/decl/environment_data/env_info = GET_DECL(environment_type)
 				for(var/gas_id in env_info.filter_gasses)
-					var/decl/material/mat = decls_repository.get_decl(gas_id)
+					var/decl/material/mat = GET_DECL(gas_id)
 					scrubbers[scrubbers.len]["filters"] += list(
 						list(
 							"name" = capitalize(mat.gas_name),
@@ -586,16 +586,14 @@
 			modes[++modes.len] = list("name" = "Off - Shuts off vents and scrubbers", 			"mode" = AALARM_MODE_OFF,			"selected" = mode == AALARM_MODE_OFF, 			"danger" = 0)
 			data["modes"] = modes
 			data["mode"] = mode
+
 		if(AALARM_SCREEN_SENSORS)
 			var/list/selected
 			var/thresholds[0]
-
-			var/list/gas_names = list(
-				/decl/material/gas/oxygen         = "O<sub>2</sub>",
-				/decl/material/gas/carbon_dioxide = "CO<sub>2</sub>",
-				"other"          = "Other")
-			for (var/g in gas_names)
-				thresholds[++thresholds.len] = list("name" = gas_names[g], "settings" = list())
+			var/decl/environment_data/env_info = GET_DECL(environment_type)
+			for(var/g in env_info?.important_gasses)
+				var/decl/material/mat = GET_DECL(g)
+				thresholds[++thresholds.len] = list("name" = (mat?.gas_symbol_html || "Other"), "settings" = list())
 				selected = TLV[g]
 				for(var/i = 1, i <= 4, i++)
 					thresholds[thresholds.len]["settings"] += list(list("env" = g, "val" = i, "selected" = selected[i]))
@@ -620,11 +618,17 @@
 
 	. = shorted ? STATUS_DISABLED : STATUS_INTERACTIVE
 
-	if(. == STATUS_INTERACTIVE)
-		var/extra_href = state.href_list(user)
-		// Prevent remote users from altering RCON settings unless they already have access
-		if(href_list["rcon"] && extra_href["remote_connection"] && !extra_href["remote_access"])
-			. = STATUS_UPDATE
+	if(. == STATUS_INTERACTIVE && istype(state, /datum/topic_state/remote))
+		. = STATUS_UPDATE
+		if(isAI(user))
+			. = STATUS_INTERACTIVE // Apparently always have access
+		if(rcon_setting == RCON_YES || (alarm_area.atmosalm && rcon_setting == RCON_AUTO))
+			. = STATUS_INTERACTIVE // Have rcon access
+
+		if(has_access(rcon_remote_override_access, user.GetAccess()))
+			. = STATUS_INTERACTIVE // They have the access to set rcon anyway
+		else if(href_list && href_list["rcon"])
+			. = STATUS_UPDATE // They don't have rcon access but are trying to set it: that's a no
 
 	return min(..(), .)
 
@@ -655,8 +659,8 @@
 		return TOPIC_REFRESH
 
 	// hrefs that need the AA unlocked -walter0o
-	var/extra_href = state.href_list(user)
-	if(!(locked && !extra_href["remote_connection"]) || extra_href["remote_access"] || issilicon(user))
+	var/forbidden = locked && !istype(state, /datum/topic_state/remote) && !issilicon(user)
+	if(!forbidden)
 		if(href_list["command"])
 			var/device_id = href_list["id_tag"]
 			switch(href_list["command"])
@@ -682,7 +686,7 @@
 					return TOPIC_REFRESH
 
 				if("set_scrub_gas")
-					var/decl/environment_data/env_info = decls_repository.get_decl(environment_type)
+					var/decl/environment_data/env_info = GET_DECL(environment_type)
 					var/gas_path = locate(href_list["gas_id"]) // this is a softref to a decl path
 					if(env_info && (gas_path in env_info.filter_gasses))
 						var/list/signal = list()
@@ -754,21 +758,22 @@
 			return TOPIC_REFRESH
 
 		if(href_list["atmos_alarm"])
-			if (alarm_area.atmosalert(2, src))
-				apply_danger_level(2)
-			update_icon()
+			set_alarm(2)
 			return TOPIC_REFRESH
 
 		if(href_list["atmos_reset"])
-			if (alarm_area.atmosalert(0, src))
-				apply_danger_level(0)
-			update_icon()
+			set_alarm(0)
 			return TOPIC_REFRESH
 
 		if(href_list["mode"])
 			mode = text2num(href_list["mode"])
 			apply_mode()
 			return TOPIC_REFRESH
+
+/obj/machinery/alarm/proc/set_alarm(danger_level)
+	if (alarm_area.atmosalert(danger_level, src))
+		apply_danger_level(danger_level)
+	update_icon()
 
 /obj/machinery/alarm/attackby(obj/item/W, mob/user)
 	if(!(stat & (BROKEN|NOPOWER)))
@@ -817,7 +822,7 @@ FIRE ALARM
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
 	if(loc.z in GLOB.using_map.contact_levels)
-		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+		var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/firealarm/proc/get_cached_overlay(key)
@@ -869,7 +874,7 @@ FIRE ALARM
 			overlays += get_cached_overlay("fire1")
 			set_light(0.25, 0.1, 1, 2, COLOR_RED)
 		else if(z in GLOB.using_map.contact_levels)
-			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+			var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
 			var/decl/security_level/sl = security_state.current_security_level
 
 			set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
@@ -933,7 +938,7 @@ FIRE ALARM
 	var/d1
 	var/d2
 
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
 	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon))
 		A = A.loc
 

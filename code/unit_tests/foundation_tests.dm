@@ -28,3 +28,5 @@
 	. = . && start.x == T.x
 	. = . && start.y + 1 == T.y
 	. = . && start.z == T.z
+
+	qdel(T)

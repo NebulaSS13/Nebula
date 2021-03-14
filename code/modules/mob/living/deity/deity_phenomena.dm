@@ -28,11 +28,15 @@
 
 /mob/living/deity/Life()
 	. = ..()
-	if(. && silenced)
-		if(!--silenced)
-			to_chat(src, "<span class='notice'>You are no longer silenced.</span>")
-			var/obj/screen/intent/deity/SD = hud_used.action_intent
-			SD.color = null
+	if(.)
+		if(silenced > 0)
+			silenced--
+			if(!silenced)
+				to_chat(src, "<span class='notice'>You are no longer silenced.</span>")
+				var/obj/screen/intent/deity/SD = hud_used.action_intent
+				SD.color = null
+		if(power_per_regen < 0 || power < power_min)
+			adjust_power(power_per_regen)
 
 /mob/living/deity/Destroy()
 	for(var/phenom in phenomenas)

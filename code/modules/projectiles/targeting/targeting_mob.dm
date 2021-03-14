@@ -32,10 +32,6 @@
 	if(lying)
 		stop_aiming(no_message=1)
 
-/mob/living/Weaken(amount)
-	stop_aiming(no_message=1)
-	..()
-
 /mob/living/Destroy()
 	if(aiming)
 		qdel(aiming)

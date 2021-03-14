@@ -5,7 +5,7 @@ var/list/chat_modifiers_in_use
 	global.chat_blockers_in_use = list()
 	global.chat_modifiers_in_use = list()
 	for(var/filtertype in typesof(/decl/chat_filter))
-		var/decl/chat_filter/chat_filter = decls_repository.get_decl(filtertype)
+		var/decl/chat_filter/chat_filter = GET_DECL(filtertype)
 		if(!chat_filter.disabled && chat_filter.filter_category != chat_filter.type)
 			if(chat_filter.can_deny_message)
 				global.chat_blockers_in_use += chat_filter

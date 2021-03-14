@@ -77,9 +77,6 @@ default behaviour is:
 				forceMove(tmob.loc)
 				tmob.forceMove(oldloc)
 				now_pushing = 0
-				for(var/mob/living/carbon/slime/slime in view(1,tmob))
-					if(slime.Victim == tmob)
-						slime.UpdateFeed()
 				return
 
 			if(!can_move_mob(tmob, 0, 0))
@@ -114,8 +111,8 @@ default behaviour is:
 			..()
 			var/saved_dir = AM.dir
 			if (!istype(AM, /atom/movable) || AM.anchored)
-				if(confused && prob(50) && !MOVING_DELIBERATELY(src))
-					Weaken(2)
+				if(HAS_STATUS(src, STAT_CONFUSE) && prob(50) && !MOVING_DELIBERATELY(src))
+					SET_STATUS_MAX(src, STAT_WEAK, 2)
 					playsound(loc, "punch", 25, 1, -1)
 					visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
 					src.apply_damage(5, BRUTE)
@@ -418,9 +415,9 @@ default behaviour is:
 	setOxyLoss(0)
 	setCloneLoss(0)
 	setBrainLoss(0)
-	SetParalysis(0)
-	SetStunned(0)
-	SetWeakened(0)
+	set_status(STAT_PARA, 0)
+	set_status(STAT_STUN, 0)
+	set_status(STAT_WEAK, 0)
 
 	// shut down ongoing problems
 	radiation = 0
@@ -429,15 +426,8 @@ default behaviour is:
 	disabilities = 0
 
 	// fix blindness and deafness
-	blinded = 0
-	eye_blind = 0
-	eye_blurry = 0
-	ear_deaf = 0
-	ear_damage = 0
-	drowsyness = 0
-	drugged = 0
-	jitteriness = 0
-	confused = 0
+	blinded =     0
+	clear_status_effects()
 
 	heal_overall_damage(getBruteLoss(), getFireLoss())
 
@@ -517,24 +507,17 @@ default behaviour is:
 	..()
 	if(!skill_check(SKILL_MEDICAL, SKILL_BASIC))
 		for(var/obj/item/grab/grab in get_active_grabs())
-			var/mob/affecting_mob = grab.get_affecting_mob()
+			var/mob/living/affecting_mob = grab.get_affecting_mob()
 			if(affecting_mob)
 				affecting_mob.handle_grab_damage()
 
 /mob/living/Move(a, b, flag)
 	if (buckled)
 		return
-
 	. = ..()
-
 	handle_grabs_after_move()
-
 	if (s_active && !( s_active in contents ) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.
 		s_active.close(src)
-
-	if(update_slimes)
-		for(var/mob/living/carbon/slime/M in view(1,src))
-			M.UpdateFeed()
 
 /mob/living/verb/resist()
 	set name = "Resist"
@@ -545,7 +528,7 @@ default behaviour is:
 		resist_grab()
 		if(resting)
 			lay_down()
-		if(!weakened)
+		if(!HAS_STATUS(src, STAT_WEAK))
 			process_resist()
 
 /mob/living/proc/process_resist()
@@ -653,18 +636,6 @@ default behaviour is:
 /mob/living/carbon/get_contained_external_atoms()
 	. = contents - (internal_organs|organs)
 
-//damage/heal the mob ears and adjust the deaf amount
-/mob/living/adjustEarDamage(var/damage, var/deaf)
-	ear_damage = max(0, ear_damage + damage)
-	ear_deaf = max(0, ear_deaf + deaf)
-
-//pass a negative argument to skip one of the variable
-/mob/living/setEarDamage(var/damage = null, var/deaf = null)
-	if(!isnull(damage))
-		ear_damage = damage
-	if(!isnull(deaf))
-		ear_deaf = deaf
-
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client
 
@@ -738,24 +709,24 @@ default behaviour is:
 	. = 0
 	if(incapacitated(INCAPACITATION_UNRESISTING))
 		. += 100
-	if(eye_blind)
+	if(HAS_STATUS(src, STAT_BLIND))
 		. += 75
-	if(eye_blurry)
+	if(HAS_STATUS(src, STAT_BLURRY))
 		. += 15
-	if(confused)
+	if(HAS_STATUS(src, STAT_CONFUSE))
 		. += 30
 	if(MUTATION_CLUMSY in mutations)
 		. += 40
 
 /mob/living/proc/ranged_accuracy_mods()
 	. = 0
-	if(jitteriness)
+	if(HAS_STATUS(src, STAT_JITTER))
 		. -= 2
-	if(confused)
+	if(HAS_STATUS(src, STAT_CONFUSE))
 		. -= 2
-	if(eye_blind)
+	if(HAS_STATUS(src, STAT_BLIND))
 		. -= 5
-	if(eye_blurry)
+	if(HAS_STATUS(src, STAT_BLURRY))
 		. -= 1
 	if(MUTATION_CLUMSY in mutations)
 		. -= 3
@@ -799,10 +770,10 @@ default behaviour is:
 /mob/living/proc/seizure()
 	set waitfor = 0
 	sleep(rand(5,10))
-	if(!paralysis && stat == CONSCIOUS)
+	if(!HAS_STATUS(src, STAT_PARA) && stat == CONSCIOUS)
 		visible_message(SPAN_DANGER("\The [src] starts having a seizure!"))
-		Paralyse(rand(8,16))
-		make_jittery(rand(150,200))
+		SET_STATUS_MAX(src, STAT_PARA, rand(8,16))
+		set_status(STAT_JITTER, rand(150,200))
 		adjustHalLoss(rand(50,60))
 
 /mob/living/proc/get_digestion_product()
@@ -885,9 +856,6 @@ default behaviour is:
 /mob/living/proc/get_ingested_reagents()
 	return reagents
 
-/mob/living/proc/get_species()
-	return
-
 /mob/living/proc/should_have_organ(var/organ_check)
 	return FALSE
 
@@ -902,4 +870,27 @@ default behaviour is:
 
 /mob/living/get_admin_job_string()
 	return "Living"
+
+/mob/living/handle_mouse_drop(atom/over, mob/user)
+	if(user == src && user != over)
+
+		if(isturf(over))
+			var/turf/T = over
+			var/obj/structure/glass_tank/A = locate() in user.loc
+			if(A && A.Adjacent(user) && A.Adjacent(T))
+				A.do_climb_out(user, T)
+				return TRUE
+
+		if(istype(over, /mob/living/exosuit))
+			var/mob/living/exosuit/exosuit = over
+			if(exosuit.body)
+				if(user.mob_size >= exosuit.body.min_pilot_size && user.mob_size <= exosuit.body.max_pilot_size)
+					exosuit.enter(src)
+				else
+					to_chat(usr, SPAN_WARNING("You cannot pilot a exosuit of this size."))
+				return TRUE
+	. = ..()
+
+/mob/living/is_deaf()
+	. = ..() || GET_STATUS(src, STAT_DEAF)
 

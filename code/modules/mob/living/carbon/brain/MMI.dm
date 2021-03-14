@@ -1,13 +1,10 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
-
 /obj/item/mmi/digital/Initialize()
-	src.brainmob = new(src)
-	src.brainmob.set_stat(CONSCIOUS)
-	src.brainmob.add_language(/decl/language/binary)
-	src.brainmob.add_language(/decl/language/machine)
-
-	src.brainmob.container = src
-	src.brainmob.silent = 0
+	brainmob = new(src)
+	brainmob.set_stat(CONSCIOUS)
+	brainmob.add_language(/decl/language/binary)
+	brainmob.add_language(/decl/language/machine)
+	brainmob.container = src
+	brainmob.set_status(STAT_SILENCE, 0)
 	PickName()
 	. = ..()
 

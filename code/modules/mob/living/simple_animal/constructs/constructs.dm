@@ -126,7 +126,7 @@
 	force = 30
 
 /mob/living/simple_animal/construct/armoured/Life()
-	weakened = 0
+	set_status(STAT_WEAK, 0)
 	if ((. = ..()))
 		return 
 

@@ -58,12 +58,6 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
-	inherent_verbs = list(
-		/mob/living/carbon/human/proc/detach_limb,
-		/mob/living/carbon/human/proc/attach_limb,
-		/mob/living/carbon/human/proc/eyeglow
-	)
-
 /decl/species/utility_frame/post_organ_rejuvenate(obj/item/organ/org, mob/living/carbon/human/H)
 	var/obj/item/organ/external/E = org
 	if(istype(E) && !BP_IS_PROSTHETIC(E))

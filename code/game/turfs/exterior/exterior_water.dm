@@ -10,7 +10,7 @@
 /turf/exterior/water/is_flooded(lying_mob, absolute)
 	. = absolute ? ..() : lying_mob
 
-/turf/exterior/water/attackby(obj/item/O, var/mob/living/user)
+/turf/exterior/water/attackby(obj/item/O, var/mob/user)
 	if (reagent_type && ATOM_IS_OPEN_CONTAINER(O) && O.reagents)
 		var/fill_amount = O.reagents.maximum_volume - O.reagents.total_volume
 		if(fill_amount <= 0)

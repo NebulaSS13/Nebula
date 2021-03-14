@@ -176,19 +176,19 @@
 
 // Language handling.
 /mob/proc/add_language(var/language)
-	var/decl/language/new_language = decls_repository.get_decl(language)
+	var/decl/language/new_language = GET_DECL(language)
 	if(!istype(new_language) || (new_language in languages))
 		return 0
 	languages.Add(new_language)
 	return 1
 
 /mob/proc/remove_language(var/rem_language)
-	var/decl/language/L = decls_repository.get_decl(rem_language)
+	var/decl/language/L = GET_DECL(rem_language)
 	. = (L in languages)
 	languages.Remove(L)
 
 /mob/living/remove_language(rem_language)
-	var/decl/language/L = decls_repository.get_decl(rem_language)
+	var/decl/language/L = GET_DECL(rem_language)
 	if(default_language == L)
 		default_language = null
 	return ..()
@@ -198,7 +198,7 @@
 	if(!speaking)
 		return 0
 
-	if (only_species_language && speaking != decls_repository.get_decl(species_language))
+	if (only_species_language && speaking != GET_DECL(species_language))
 		return 0
 
 	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || (speaking in src.languages)))
@@ -228,7 +228,7 @@
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
 
 	if(default_language)
-		var/decl/language/lang = decls_repository.get_decl(default_language)
+		var/decl/language/lang = GET_DECL(default_language)
 		dat += "Current default language: [lang.name] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
 
 	for(var/decl/language/L in languages)

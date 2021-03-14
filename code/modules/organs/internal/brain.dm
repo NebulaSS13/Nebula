@@ -154,7 +154,7 @@
 			else
 				oxygen_reserve = min(initial(oxygen_reserve), oxygen_reserve+1)
 			if(!oxygen_reserve) //(hardcrit)
-				owner.Paralyse(3)
+				SET_STATUS_MAX(owner, STAT_PARA, 3)
 			var/can_heal = damage && damage < max_damage && (damage % damage_threshold_value || LAZYACCESS(owner.chem_effects, CE_BRAIN_REGEN) || (!past_damage_threshold(3) && LAZYACCESS(owner.chem_effects, CE_STABLE)))
 			var/damprob
 			//Effects of bloodloss
@@ -171,23 +171,23 @@
 					if(!past_damage_threshold(2) && prob(damprob))
 						take_internal_damage(1)
 				if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-					owner.eye_blurry = max(owner.eye_blurry,6)
+					SET_STATUS_MAX(owner, STAT_BLURRY, 6)
 					damprob = stability_effect ? 40 : 80
 					if(!past_damage_threshold(4) && prob(damprob))
 						take_internal_damage(1)
-					if(!owner.paralysis && prob(10))
-						owner.Paralyse(rand(1,3))
+					if(!HAS_STATUS(owner, STAT_PARA) && prob(10))
+						SET_STATUS_MAX(owner, STAT_PARA, rand(1,3))
 						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
 				if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-					owner.eye_blurry = max(owner.eye_blurry,6)
+					SET_STATUS_MAX(owner, STAT_BLURRY, 6)
 					damprob = stability_effect ? 60 : 100
 					if(!past_damage_threshold(6) && prob(damprob))
 						take_internal_damage(1)
-					if(!owner.paralysis && prob(15))
-						owner.Paralyse(3,5)
+					if(!HAS_STATUS(owner, STAT_PARA) && prob(15))
+						SET_STATUS_MAX(owner, STAT_PARA, rand(3,5))
 						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
 				if(-(INFINITY) to BLOOD_VOLUME_SURVIVE) // Also see heart.dm, being below this point puts you into cardiac arrest.
-					owner.eye_blurry = max(owner.eye_blurry,6)
+					SET_STATUS_MAX(owner, STAT_BLURRY, 6)
 					damprob = stability_effect ? 80 : 100
 					if(prob(damprob))
 						take_internal_damage(1)
@@ -201,16 +201,16 @@
 	if(damage >= 10) //This probably won't be triggered by oxyloss or mercury. Probably.
 		var/damage_secondary = damage * 0.20
 		owner.flash_eyes()
-		owner.eye_blurry += damage_secondary
-		owner.confused += damage_secondary * 2
-		owner.Paralyse(damage_secondary)
-		owner.Weaken(round(damage, 1))
+		SET_STATUS_MAX(owner, STAT_BLURRY, damage_secondary)
+		SET_STATUS_MAX(owner, STAT_CONFUSE, damage_secondary * 2)
+		SET_STATUS_MAX(owner, STAT_PARA, damage_secondary)
+		SET_STATUS_MAX(owner, STAT_WEAK, round(damage, 1))
 		if(prob(30))
 			addtimer(CALLBACK(src, .proc/brain_damage_callback, damage), rand(6, 20) SECONDS, TIMER_UNIQUE)
 
 /obj/item/organ/internal/brain/proc/brain_damage_callback(var/damage) //Confuse them as a somewhat uncommon aftershock. Side note: Only here so a spawn isn't used. Also, for the sake of a unique timer.
 	to_chat(owner, "<span class = 'notice' font size='10'><B>I can't remember which way is forward...</B></span>")
-	owner.confused += damage
+	ADJ_STATUS(owner, STAT_CONFUSE, damage)
 
 /obj/item/organ/internal/brain/proc/handle_disabilities()
 	if(owner.stat)
@@ -218,34 +218,34 @@
 	if((owner.disabilities & EPILEPSY) && prob(1))
 		owner.seizure()
 	else if((owner.disabilities & TOURETTES) && prob(10))
-		owner.Stun(10)
+		SET_STATUS_MAX(owner, STAT_STUN, 10)
 		switch(rand(1, 3))
 			if(1)
 				owner.emote("twitch")
 			if(2 to 3)
 				owner.say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
-		owner.make_jittery(100)
+		ADJ_STATUS(owner, STAT_JITTER, 100)
 	else if((owner.disabilities & NERVOUS) && prob(10))
-		owner.stuttering = max(10, owner.stuttering)
+		SET_STATUS_MAX(owner, STAT_STUTTER, 10)
 
 /obj/item/organ/internal/brain/proc/handle_damage_effects()
 	if(owner.stat)
 		return
 	if(damage > 0 && prob(1))
 		owner.custom_pain("Your head feels numb and painful.",10)
-	if(is_bruised() && prob(1) && owner.eye_blurry <= 0)
+	if(is_bruised() && prob(1) && !HAS_STATUS(owner, STAT_BLURRY))
 		to_chat(owner, "<span class='warning'>It becomes hard to see for some reason.</span>")
-		owner.eye_blurry = 10
+		owner.set_status(STAT_BLURRY, 10)
 	var/held = owner.get_active_hand()
 	if(damage >= 0.5*max_damage && prob(1) && held)
 		to_chat(owner, "<span class='danger'>Your hand won't respond properly, and you drop what you are holding!</span>")
 		owner.unEquip(held)
 	if(damage >= 0.6*max_damage)
-		owner.slurring = max(owner.slurring, 2)
+		SET_STATUS_MAX(owner, STAT_SLUR, 2)
 	if(is_broken())
 		if(!owner.lying)
 			to_chat(owner, "<span class='danger'>You black out!</span>")
-		owner.Paralyse(10)
+		SET_STATUS_MAX(owner, STAT_PARA, 10)
 
 /obj/item/organ/internal/brain/surgical_fix(mob/user)
 	var/blood_volume = owner.get_blood_oxygenation()

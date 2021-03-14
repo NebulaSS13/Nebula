@@ -1,4 +1,4 @@
-/music_track/lasers
+/decl/music_track/lasers
 	artist = "Earthcrusher"
 	title = "lasers rip apart the bulkhead"
 	song = 'sound/music/lasers_rip_apart_the_bulkhead.ogg'
