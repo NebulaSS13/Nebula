@@ -190,7 +190,6 @@
 /turf/simulated/floor/tiled,
 /area/ministation/bridge)
 "az" = (
-/obj/machinery/computer/power_monitor,
 /obj/effect/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled,
 /area/ministation/bridge)
