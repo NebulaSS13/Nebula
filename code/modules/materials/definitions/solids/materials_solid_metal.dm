@@ -92,6 +92,7 @@
 	brute_armor = 5
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	use_reinf_state = null
 	color = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
@@ -155,6 +156,7 @@
 	weight = MAT_VALUE_LIGHT
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	use_reinf_state = null
 	color = "#cccdcc"
 	hitsound = 'sound/weapons/smash.ogg'
 	taste_description = "metal"
@@ -183,6 +185,7 @@
 	melting_point = 6000
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	use_reinf_state = null
 	color = "#a8a9b2"
 	explosion_resistance = 25
 	brute_armor = 8
@@ -237,6 +240,7 @@
 	melting_point = 12000
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	use_reinf_state = null
 	color = "#9bc6f2"
 	brute_armor = 4
 	burn_armor = 20

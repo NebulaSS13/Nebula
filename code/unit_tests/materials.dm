@@ -67,3 +67,51 @@
 	else
 		pass("[length(passed_designs)] crafting recipes had consistent output materials.")
 	return 1 
+
+/datum/unit_test/material_wall_icons_shall_have_valid_states
+	name = "MATERIALS: Material Wall Icons Shall Have Valid States"
+	var/const/fwall_state = "fwall_open"
+
+/datum/unit_test/material_wall_icons_shall_have_valid_states/start_test()
+	var/list/failed
+	var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
+	for(var/mat_type in all_materials)
+		var/decl/material/mat = all_materials[mat_type]
+
+		if(mat.icon_base)
+			if(!check_state_in_icon(fwall_state, mat.icon_base))
+				LAZYADD(failed, "[mat_type] - '[mat.icon_base]' - missing false wall opening animation '[fwall_state]'")
+
+		for(var/i = 0 to 7)
+			if(mat.icon_base)
+				if(!check_state_in_icon("[i]", mat.icon_base))
+					LAZYADD(failed, "[mat_type] - '[mat.icon_base]' - missing directional base icon state '[i]'")
+				if(!check_state_in_icon("other[i]", mat.icon_base))
+					LAZYADD(failed, "[mat_type] - '[mat.icon_base]' - missing connective base icon state 'other[i]'")
+
+			if(mat.icon_stripe)
+				if(!check_state_in_icon("[i]", mat.icon_stripe))
+					LAZYADD(failed, "[mat_type] - '[mat.icon_stripe]' - missing directional stripe icon state '[i]'")
+				if(!check_state_in_icon("other[i]", mat.icon_stripe))
+					LAZYADD(failed, "[mat_type] - '[mat.icon_stripe]' - missing connective stripe icon state 'other[i]'")
+
+			if(mat.icon_base_natural)
+				if(!check_state_in_icon("[i]", mat.icon_base_natural))
+					LAZYADD(failed, "[mat_type] - '[mat.icon_base_natural]' - missing directional natural icon state '[i]'")
+				if(!check_state_in_icon("shine[i]", mat.icon_base_natural))
+					LAZYADD(failed, "[mat_type] - '[mat.icon_base_natural]' - missing natural shine icon state 'shine[i]'")
+
+		if(mat.icon_reinf)
+			if(mat.use_reinf_state)
+				if(!check_state_in_icon(mat.use_reinf_state, mat.icon_reinf))
+					LAZYADD(failed, "[mat_type] - '[mat.icon_reinf]' - missing reinf icon state '[mat.use_reinf_state]'")
+			else
+				for(var/i = 0 to 7)
+					if(!check_state_in_icon("[i]", mat.icon_reinf))
+						LAZYADD(failed, "[mat_type] - '[mat.icon_reinf]' - missing directional reinf icon state '[i]'")
+
+	if(length(failed))
+		fail("[length(failed)] material\s had invalid wall icon states: [jointext(failed, "\n")].")
+	else
+		pass("All materials had valid wall icon states.")
+	return 1 

@@ -3,8 +3,9 @@
 	lore_text = "A generic polymeric material. Probably the most flexible and useful substance ever created by human science; mostly used to make disposable cutlery."
 	stack_type = /obj/item/stack/material/plastic
 	flags = MAT_FLAG_BRITTLE
-	icon_base = 'icons/turf/walls/solid.dmi'
+	icon_base = 'icons/turf/walls/plastic.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	use_reinf_state = null
 	color = COLOR_EGGSHELL
 	door_icon_base = "plastic"
 	hardness = MAT_VALUE_FLEXIBLE
@@ -49,6 +50,7 @@
 	integrity = 10
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	use_reinf_state = null
 	color = "#aaaaaa"
 	hardness = MAT_VALUE_SOFT
 	brute_armor = 1
