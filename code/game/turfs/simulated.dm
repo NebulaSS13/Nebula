@@ -42,12 +42,6 @@
 		B.clean_blood()
 	. = ..()
 
-/turf/simulated/Initialize()
-	. = ..()
-	if(istype(loc, /area/chapel))
-		holy = 1
-	levelupdate()
-
 /turf/simulated/proc/AddTracks(var/typepath,var/bloodDNA,var/comingdir,var/goingdir,var/bloodcolor=COLOR_BLOOD_HUMAN)
 	var/obj/effect/decal/cleanable/blood/tracks/tracks = locate(typepath) in src
 	if(!tracks)
@@ -178,10 +172,16 @@
 		return TRUE
 	return ..()
 
-/turf/simulated/Initialize()
+/turf/simulated/Initialize(var/ml)
+	if(istype(loc, /area/chapel))
+		holy = 1
+	levelupdate()
 	if(GAME_STATE >= RUNLEVEL_GAME)
 		fluid_update()
 	. = ..()
+	if(!ml)
+		for(var/turf/space/space in RANGE_TURFS(src, 1))
+			space.update_starlight()
 
 /turf/simulated/Destroy()
 	if (zone)

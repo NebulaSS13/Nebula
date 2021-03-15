@@ -1,8 +1,9 @@
 #define DEBUG
 // Turf-only flags.
-#define TURF_FLAG_NOJAUNT        BITFLAG(0) // This is used in literally one place, turf.dm, to block ethereal jaunt.
-#define TURF_FLAG_NORUINS        BITFLAG(1) // Used by the ruin generator to skip placing loaded ruins on this turf.
-#define TURF_FLAG_SKIP_ICON_INIT BITFLAG(2) // Skips icon init process in /turf/Initialize()
+#define TURF_FLAG_NOJAUNT             BITFLAG(0) // This is used in literally one place, turf.dm, to block ethereal jaunt.
+#define TURF_FLAG_NORUINS             BITFLAG(1) // Used by the ruin generator to skip placing loaded ruins on this turf.
+#define TURF_FLAG_SKIP_ICON_INIT      BITFLAG(2) // Skips icon init process in /turf/Initialize()
+#define TURF_FLAG_SKIP_AO_INIT        BITFLAG(3) // Skips ambient occlusion updates in /turf/Initialize()
 
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
 #define RUIN_MAP_EDGE_PAD 15
