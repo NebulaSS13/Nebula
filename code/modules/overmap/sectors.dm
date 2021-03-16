@@ -64,10 +64,7 @@
 	if(!GLOB.using_map.overmap_z)
 		build_overmap()
 
-	start_x = start_x || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
-	start_y = start_y || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
-
-	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
+	move_to_starting_location()
 
 	docking_codes = "[ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))]"
 
@@ -90,6 +87,11 @@
 				ADJUST_TAG_VAR(old_tag, map_hash)
 				new_restricted += old_tag
 			initial_restricted_waypoints[shuttle_type] = new_restricted
+
+/obj/effect/overmap/visitable/proc/move_to_starting_location()
+	start_x = start_x || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
+	start_y = start_y || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
+	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
 
 //This is called later in the init order by SSshuttle to populate sector objects. Importantly for subtypes, shuttles will be created by then.
 /obj/effect/overmap/visitable/proc/populate_sector_objects()
