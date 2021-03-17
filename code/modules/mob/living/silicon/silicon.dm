@@ -91,7 +91,7 @@
 	for(var/obj/item/grab/grab in get_active_grabs())
 		qdel(grab)
 		. = TRUE
-	
+
 /mob/living/silicon/emp_act(severity)
 	switch(severity)
 		if(1)
@@ -114,9 +114,7 @@
 /mob/living/silicon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, def_zone = null)
 
 	if (istype(source, /obj/machinery/containment_field))
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(5, 1, loc)
-		s.start()
+		spark_at(loc, amount=5, cardinal_only = TRUE)
 
 		shock_damage *= 0.75	//take reduced damage
 		take_overall_damage(0, shock_damage)
@@ -383,7 +381,7 @@
 
 /mob/living/silicon/get_bullet_impact_effect_type(var/def_zone)
 	return BULLET_IMPACT_METAL
-	
+
 /mob/living/silicon/proc/get_computer_network()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
@@ -403,7 +401,7 @@
 	if(!length(stock_parts))
 		to_chat(user, SPAN_WARNING("No parts left to remove"))
 		return
-	
+
 	var/obj/item/stock_parts/remove = input(user, "Which component do you want to pry out?", "Remove Component") as null|anything in stock_parts
 	if(!remove || !(remove in stock_parts) || !Adjacent(user))
 		return
@@ -424,7 +422,7 @@
 	if(!istype(os))
 		to_chat(src, SPAN_WARNING("You seem to be lacking an NTOS capable device!"))
 		return
-	
+
 	if(!os.on)
 		os.system_boot()
 	if(!os.on)

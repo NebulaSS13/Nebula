@@ -387,7 +387,7 @@
 	interfaced_with = target
 	drain_loc = interfaced_with.loc
 
-	holder.spark_system.start()
+	spark_at(holder, 5, holder = holder)
 	playsound(H.loc, 'sound/effects/sparks2.ogg', 50, 1)
 
 	return 1
@@ -411,7 +411,7 @@
 	if(!H || !istype(H))
 		return 0
 
-	holder.spark_system.start()
+	spark_at(holder, 5, holder = holder)
 	playsound(H.loc, 'sound/effects/sparks2.ogg', 50, 1)
 
 	if(!holder.cell)

@@ -18,7 +18,7 @@
 	var/destroyed = 0
 	var/list/connections
 	var/list/other_connections
-	
+
 /obj/structure/grille/clear_connections()
 	connections = null
 	other_connections = null
@@ -106,7 +106,7 @@
 		damage_dealt += 5
 	else
 		damage_dealt += 1
-	
+
 	attack_generic(user,damage_dealt,attack_message)
 
 /obj/structure/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -230,9 +230,7 @@
 		if(electrocute_mob(user, C, src))
 			if(C.powernet)
 				C.powernet.trigger_warning()
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(3, 1, src)
-			s.start()
+			spark_at(src, cardinal_only = TRUE)
 			if(HAS_STATUS(user, STAT_STUN))
 				return 1
 		else

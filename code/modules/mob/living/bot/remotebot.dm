@@ -36,9 +36,7 @@
 		if(prob(50))
 			C.forceMove(get_step(src, pick(GLOB.alldirs)))
 
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(3, 1, src)
-	s.start()
+	spark_at(src, cardinal_only = TRUE)
 	qdel(src)
 
 /mob/living/bot/remotebot/attackby(var/obj/item/I, var/mob/user)

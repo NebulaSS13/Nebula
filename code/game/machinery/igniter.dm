@@ -145,9 +145,7 @@
 
 
 	flick("migniter-spark", src)
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(2, 1, src)
-	s.start()
+	spark_at(src, amount=2, cardinal_only = TRUE)
 	src.last_spark = world.time
 	use_power_oneoff(2000)
 	var/turf/location = src.loc

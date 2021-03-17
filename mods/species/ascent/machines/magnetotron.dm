@@ -24,7 +24,7 @@
 	if(!isspecies(target, SPECIES_MANTID_ALATE))
 		display_message("Invalid biological signature detected. Safety mechanisms engaged, only alates may undergo metamorphosis.")
 		return TRUE
-	
+
 	visible_message(SPAN_NOTICE("\icon[src] \The [src] begins to crackle and hum with energy as magnetic fields begin to fluctuate."))
 	if(!prob(100 / (get_total_gynes() + 1)))
 		// Oops it killed us.
@@ -41,9 +41,7 @@
 		target.dna.real_name = target.real_name
 
 		target.visible_message(SPAN_NOTICE("[target] molts away their shell, emerging as a new gyne."))
-		var/datum/effect/effect/system/spark_spread/s = new
-		s.set_up(3, 1, src)
-		s.start()
+		spark_at(src, cardinal_only = TRUE)
 		ADJ_STATUS(target, STAT_STUN, 6)
 		target.set_species(SPECIES_MANTID_GYNE)
 		new /obj/effect/temp_visual/emp_burst(loc)

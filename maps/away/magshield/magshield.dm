@@ -98,9 +98,7 @@
 			return
 		R.use(1)
 		visible_message("<span class='warning'>\The [src] stops rotating and releases cloud of sparks. Better get to safe distance!</span>")
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(10, 0, src)
-		s.start()
+		spark_at(src, amount=10)
 		sleep(50)
 		visible_message("<span class='warning'>\The [src] explodes!</span>")
 		var/turf/T = get_turf(src)

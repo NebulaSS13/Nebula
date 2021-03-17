@@ -121,9 +121,11 @@ steam.start() -- spawns the effect
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
 
-/proc/spark_at(turf/location)
-	var/datum/effect/effect/system/sparks = new /datum/effect/effect/system/spark_spread()
-	sparks.set_up(3, 0, location)
+/proc/spark_at(turf/location, amount = 3, cardinal_only = FALSE, holder = null)
+	var/datum/effect/effect/system/spark_spread/sparks = new()
+	sparks.set_up(amount, cardinal_only, location)
+	if(holder)
+		sparks.attach(holder)
 	sparks.start()
 
 /datum/effect/effect/system/spark_spread
@@ -325,15 +327,15 @@ steam.start() -- spawns the effect
 
 /datum/effect/effect/system/smoke_spread/spread(var/i)
 	if(holder)
-		src.location = get_turf(holder)
+		if(QDELING(holder))
+			holder = null
+		else
+			src.location = get_turf(holder)
 	var/obj/effect/effect/smoke/smoke = new smoke_type(location)
 	src.total_smoke++
 	var/direction = src.direction
 	if(!direction)
-		if(src.cardinals)
-			direction = pick(GLOB.cardinal)
-		else
-			direction = pick(GLOB.alldirs)
+		direction = pick(src.cardinals ? GLOB.cardinal : GLOB.alldirs)
 	for(i=0, i<pick(0,1,1,1,2,2,2,3), i++)
 		sleep(1 SECOND)
 		if(QDELETED(smoke))
@@ -462,9 +464,7 @@ steam.start() -- spawns the effect
 
 /datum/effect/effect/system/reagents_explosion/start()
 	if (amount <= 2)
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
-		s.set_up(2, 1, location)
-		s.start()
+		spark_at(location, amount = 2, cardinal_only = TRUE)
 		location.visible_message(SPAN_DANGER("The solution violently explodes!"))
 		for(var/mob/living/M in viewers(1, location))
 			if(prob (50 * amount))

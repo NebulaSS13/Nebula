@@ -50,9 +50,7 @@
 /mob/living/simple_animal/hostile/hivebot/death()
 	..(null, "blows apart!")
 	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(3, 1, src)
-	s.start()
+	spark_at(src, cardinal_only = TRUE)
 	qdel(src)
 	return
 
@@ -152,7 +150,7 @@ The megabot
 	natural_weapon = /obj/item/natural_weapon/circular_saw
 	speed = 0
 	natural_armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
+		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_PISTOL
 		)
 	can_escape = TRUE
@@ -181,7 +179,7 @@ The megabot
 	. = ..()
 	if(!.)
 		return
-	
+
 	if(time_last_used_ability < world.time)
 		switch_mode(ATTACK_MODE_ROCKET)
 
@@ -206,7 +204,7 @@ The megabot
 				overlays += image(icon, "laser")
 			if(ATTACK_MODE_ROCKET)
 				overlays += image(icon, "rocket")
-		
+
 /mob/living/simple_animal/hostile/hivebot/mega/proc/switch_mode(var/new_mode)
 	if(!new_mode || new_mode == attack_mode)
 		return

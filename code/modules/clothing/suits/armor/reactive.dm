@@ -27,10 +27,7 @@
 		var/turf/picked = pick(turfs)
 		if(!isturf(picked)) return
 
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-		spark_system.set_up(5, 0, user.loc)
-		spark_system.start()
-		playsound(user.loc, "sparks", 50, 1)
+		spark_at(user.loc, amount=5)
 
 		user.forceMove(picked)
 		return PROJECTILE_FORCE_MISS
@@ -56,4 +53,3 @@
 	if(ret && active && check_state_in_icon("[ret.icon_state]_on", icon))
 		ret.icon_state = "[ret.icon_state]_on"
 	return ret
-	

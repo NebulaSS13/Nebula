@@ -81,7 +81,6 @@
 	var/lower_mod = 0
 	var/jetpack = 0
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail = null
-	var/datum/effect/effect/system/spark_spread/spark_system
 	var/jeton = 0
 	var/killswitch = 0
 	var/killswitch_time = 60
@@ -103,9 +102,6 @@
 
 /mob/living/silicon/robot/Initialize()
 	. = ..()
-	spark_system = new /datum/effect/effect/system/spark_spread()
-	spark_system.set_up(5, 0, src)
-	spark_system.attach(src)
 
 	add_language(/decl/language/binary, 1)
 	add_language(/decl/language/machine, 1)
@@ -480,8 +476,8 @@
 
 /mob/living/silicon/robot/bullet_act(var/obj/item/projectile/Proj)
 	..(Proj)
-	if(prob(75) && Proj.damage > 0) 
-		spark_system.start()
+	if(prob(75) && Proj.damage > 0)
+		spark_at(src, 5, holder=src)
 	return 2
 
 /mob/living/silicon/robot/attackby(obj/item/W, mob/user)
@@ -674,7 +670,7 @@
 
 	else
 		if(!(istype(W, /obj/item/robotanalyzer) || istype(W, /obj/item/scanner/health)) && W.force && user.a_intent != I_HELP)
-			spark_system.start()
+			spark_at(src, 5, holder=src)
 		return ..()
 
 /mob/living/silicon/robot/proc/handle_selfinsert(obj/item/W, mob/user)

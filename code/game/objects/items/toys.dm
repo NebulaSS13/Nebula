@@ -173,9 +173,7 @@
 
 /obj/item/toy/snappop/throw_impact(atom/hit_atom)
 	..()
-	var/datum/effect/effect/system/spark_spread/s = new
-	s.set_up(3, 1, src)
-	s.start()
+	spark_at(src, cardinal_only = TRUE)
 	new /obj/effect/decal/cleanable/ash(src.loc)
 	visible_message(SPAN_WARNING("The [src.name] explodes!"),SPAN_WARNING("You hear a snap!"))
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
@@ -187,9 +185,7 @@
 		if(!MOVING_DELIBERATELY(M))
 			to_chat(M, "<span class='warning'>You step on the snap pop!</span>")
 
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(2, 0, src)
-			s.start()
+			spark_at(src, amount=2)
 			new /obj/effect/decal/cleanable/ash(src.loc)
 			src.visible_message("<span class='warning'>The [src.name] explodes!</span>","<span class='warning'>You hear a snap!</span>")
 			playsound(src, 'sound/effects/snap.ogg', 50, 1)
@@ -664,9 +660,9 @@
 							"<span class='notice'>You hold \the [src] above your head, signalling a stop.</span>")
 	else if (user.a_intent == I_GRAB)
 		var/wand_dir
-		if(user.get_equipped_item(BP_L_HAND) == src) 
+		if(user.get_equipped_item(BP_L_HAND) == src)
 			wand_dir = "left"
-		else if (user.get_equipped_item(BP_R_HAND) == src) 
+		else if (user.get_equipped_item(BP_R_HAND) == src)
 			wand_dir = "right"
 		else
 			wand_dir = pick("left", "right")

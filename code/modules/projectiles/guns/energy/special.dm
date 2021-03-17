@@ -127,7 +127,6 @@
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
-	var/datum/effect/effect/system/spark_spread/spark_system
 
 /obj/item/gun/energy/plasmacutter/get_heat()
 	. = max(..(), 3800)
@@ -138,23 +137,13 @@
 	max_shots = 4
 	has_safety = FALSE
 
-/obj/item/gun/energy/plasmacutter/Initialize()
-	. = ..()
-	spark_system = new /datum/effect/effect/system/spark_spread
-	spark_system.set_up(5, 0, src)
-	spark_system.attach(src)
-
-/obj/item/gun/energy/plasmacutter/Destroy()
-	QDEL_NULL(spark_system)
-	return ..()
-
 /obj/item/gun/energy/plasmacutter/proc/slice(var/mob/M = null)
 	if(!safety() && power_supply.checked_use(charge_cost)) //consumes a shot per use
 		if(M)
 			M.welding_eyecheck()//Welding tool eye check
 			if(check_accidents(M, "[M] loses grip on [src] from its sudden recoil!",SKILL_CONSTRUCTION, 60, SKILL_ADEPT))
 				return 0
-		spark_system.start()
+		spark_at(src, amount = 5, holder = src)
 		return 1
 	handle_click_empty(M)
 	return 0

@@ -214,9 +214,7 @@
 		reagent_glass.forceMove(Tsec)
 		reagent_glass = null
 
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(3, 1, src)
-	s.start()
+	spark_at(src, cardinal_only = TRUE)
 	qdel(src)
 	return
 

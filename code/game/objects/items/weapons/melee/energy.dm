@@ -157,7 +157,7 @@
 	if(!lighting_color)
 		var/color_hex = list("red" = COLOR_SABER_RED,  "blue" = COLOR_SABER_BLUE, "green" = COLOR_SABER_GREEN, "purple" = COLOR_SABER_PURPLE)
 		lighting_color = color_hex[blade_color]
-	
+
 	. = ..()
 
 /obj/item/energy_blade/sword/green
@@ -183,9 +183,7 @@
 
 /obj/item/energy_blade/sword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(.)
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-		spark_system.set_up(5, 0, user.loc)
-		spark_system.start()
+		spark_at(src, amount = 5, holder = src)
 		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
 
 /obj/item/energy_blade/sword/get_parry_chance(mob/user)
@@ -227,13 +225,9 @@
 	active_attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
 	var/mob/living/creator
-	var/datum/effect/effect/system/spark_spread/spark_system
 
 /obj/item/energy_blade/blade/Initialize()
 	. = ..()
-	spark_system = new /datum/effect/effect/system/spark_spread()
-	spark_system.set_up(5, 0, src)
-	spark_system.attach(src)
 	START_PROCESSING(SSobj, src)
 
 /obj/item/energy_blade/blade/Destroy()

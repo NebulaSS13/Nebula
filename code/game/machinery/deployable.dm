@@ -34,9 +34,7 @@
 					to_chat(user, "Barrier lock toggled off.")
 					return
 			else
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-				s.set_up(2, 1, src)
-				s.start()
+				spark_at(src, amount=2, cardinal_only = TRUE)
 				visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
 				return
 		return
@@ -96,9 +94,7 @@
 	var/turf/Tsec = get_turf(src)
 	new /obj/item/stack/material/rods(Tsec)
 
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(3, 1, src)
-	s.start()
+	spark_at(src, cardinal_only = TRUE)
 
 	explosion(src.loc,-1,-1,0)
 	if(src)
@@ -109,16 +105,12 @@
 		src.emagged = 1
 		src.req_access.Cut()
 		to_chat(user, "You break the ID authentication lock on \the [src].")
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(2, 1, src)
-		s.start()
+		spark_at(src, amount=2, cardinal_only = TRUE)
 		visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
 		return 1
 	else if (src.emagged == 1)
 		src.emagged = 2
 		to_chat(user, "You short out the anchoring mechanism on \the [src].")
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(2, 1, src)
-		s.start()
+		spark_at(src, amount=2, cardinal_only = TRUE)
 		visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
 		return 1

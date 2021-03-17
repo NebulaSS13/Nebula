@@ -89,7 +89,7 @@
 		playsound(owner.loc,'sound/mecha/internaldmgalarm.ogg',35,1)
 		return difference
 	else return 0
-		
+
 /obj/item/mech_equipment/shields/proc/toggle()
 	if(!aura)
 		return
@@ -98,7 +98,7 @@
 	update_icon()
 	if(aura.active)
 		START_PROCESSING(SSobj, src)
-	else 
+	else
 		STOP_PROCESSING(SSobj, src)
 	owner.update_icon()
 
@@ -108,16 +108,16 @@
 		return
 	if(aura.active)
 		icon_state = "shield_droid_a"
-	else 
+	else
 		icon_state = "shield_droid"
 
 /obj/item/mech_equipment/shields/Process()
 	if(charge >= max_charge)
 		return
 	if((world.time - last_recharge) < cooldown)
-		return	
+		return
 	var/obj/item/cell/cell = owner.get_cell()
-	
+
 	var/actual_required_power = Clamp(max_charge - charge, 0, charging_rate)
 
 	charge += cell.use(actual_required_power)
@@ -125,7 +125,7 @@
 /obj/item/mech_equipment/shields/get_hardpoint_status_value()
 	return charge / max_charge
 
-/obj/item/mech_equipment/shields/get_hardpoint_maptext()	
+/obj/item/mech_equipment/shields/get_hardpoint_maptext()
 	return "[(aura && aura.active) ? "ONLINE" : "OFFLINE"]: [round((charge / max_charge) * 100)]%"
 
 /obj/aura/mechshield
@@ -138,12 +138,12 @@
 	plane = DEFAULT_PLANE
 	pixel_x = 8
 	pixel_y = 4
-	mouse_opacity = 0 
+	mouse_opacity = 0
 
 /obj/aura/mechshield/Initialize(var/maploading, var/obj/item/mech_equipment/shields/holder)
 	. = ..()
 	shields = holder
-		
+
 /obj/aura/mechshield/added_to(var/mob/living/target)
 	. = ..()
 	target.vis_contents += src
@@ -165,7 +165,7 @@
 		user.vis_contents -= src
 	shields = null
 	. = ..()
-	
+
 /obj/aura/mechshield/proc/toggle()
 	active = !active
 
@@ -173,15 +173,15 @@
 
 	if(active)
 		flick("shield_raise", src)
-	else 
+	else
 		flick("shield_drop", src)
-	
+
 
 /obj/aura/mechshield/on_update_icon()
 	. = ..()
 	if(active)
 		icon_state = "shield"
-	else 
+	else
 		icon_state = "shield_null"
 
 /obj/aura/mechshield/bullet_act(var/obj/item/projectile/P, var/def_zone)
@@ -198,10 +198,7 @@
 			if(P.damage <= 0)
 				return AURA_FALSE|AURA_CANCEL
 
-			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-			spark_system.set_up(5, 0, user)
-			spark_system.start()
-			playsound(loc, "sparks", 25, 1)
+			spark_at(user, amount=5)
 
 /obj/aura/mechshield/hitby(atom/movable/M, var/datum/thrownthing/TT)
 	. = ..()

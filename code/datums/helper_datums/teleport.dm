@@ -32,16 +32,10 @@
 			return 0
 	return 1
 
-/decl/teleport/sparks
-	var/datum/effect/effect/system/spark_spread/spark = new
-
 /decl/teleport/sparks/proc/do_spark(var/atom/target)
 	if(!target.simulated)
 		return
-	var/turf/T = get_turf(target)
-	spark.set_up(5,1,target)
-	spark.attach(T)
-	spark.start()
+	spark_at(get_turf(target), amount=5, cardinal_only = TRUE, holder=target)
 
 /decl/teleport/sparks/teleport_target(var/atom/target, var/atom/destination, var/precision)
 	do_spark(target)

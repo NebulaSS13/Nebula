@@ -79,7 +79,6 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 
-	var/datum/effect/effect/system/spark_spread/spark_system
 	var/datum/fabricator_recipe/pipe/P
 	var/pipe_color = "white"
 	var/datum/browser/written/popup
@@ -88,15 +87,9 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 	. = ..()
 	if(!length(GLOB.rpd_pipe_selection))
 		return INITIALIZE_HINT_QDEL
-	spark_system = new /datum/effect/effect/system/spark_spread
-	spark_system.set_up(5, 0, src)
-	spark_system.attach(src)
+	spark_at(src, amount = 5, holder = src)
 	var/list/L = GLOB.rpd_pipe_selection[GLOB.rpd_pipe_selection[1]]
 	P = L[1]
-
-/obj/item/rpd/Destroy()
-	QDEL_NULL(spark_system)
-	return ..()
 
 /obj/item/rpd/proc/get_console_data(var/list/pipe_categories, var/color_options = FALSE)
 	. = list()
@@ -120,7 +113,8 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 		P = locate(href_list["select"])
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		interact(user)
-		if(prob(10)) src.spark_system.start()
+		if(prob(10))
+			spark_at(src, amount = 5, holder = src)
 		return TOPIC_HANDLED
 	if(href_list["color"])
 		var/choice = input(user, "What color do you want pipes to have?") as null|anything in pipe_colors
@@ -154,7 +148,8 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 			playsound(get_turf(user), 'sound/items/Deconstruct.ogg', 50, 1)
 
 		P.build(T, 1, pipe_colors[pipe_color])
-		if(prob(20)) src.spark_system.start()
+		if(prob(20))
+			spark_at(src, amount = 5, holder = src)
 
 /obj/item/rpd/examine(var/mob/user, distance)
 	. = ..()

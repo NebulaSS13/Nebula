@@ -41,7 +41,6 @@
 	var/flickering = 0
 	var/light_type = /obj/item/light/tube		// the type of light item
 	var/accepts_light_type = /obj/item/light/tube
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 
 	var/obj/item/light/lightbulb
 
@@ -93,8 +92,6 @@
 /obj/machinery/light/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 
-	s.set_up(1, 1, src)
-
 	if(populate_parts)
 		lightbulb = new light_type(src)
 		if(prob(lightbulb.broken_chance))
@@ -105,7 +102,6 @@
 
 /obj/machinery/light/Destroy()
 	QDEL_NULL(lightbulb)
-	QDEL_NULL(s)
 	. = ..()
 
 /obj/machinery/light/on_update_icon(var/trigger = 1)
@@ -294,9 +290,7 @@
 	else if(!lightbulb)
 		to_chat(user, "You stick \the [W] into the light socket!")
 		if(powered() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(3, 1, src)
-			s.start()
+			spark_at(src, cardinal_only = TRUE)
 			if (prob(75))
 				electrocute_mob(user, get_area(src), src, rand(0.7,1.0))
 
@@ -388,8 +382,7 @@
 		if(lightbulb && !(lightbulb.status == LIGHT_BROKEN))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		if(on)
-			s.set_up(3, 1, src)
-			s.start()
+			spark_at(src, cardinal_only = TRUE)
 	lightbulb.status = LIGHT_BROKEN
 	update_icon()
 

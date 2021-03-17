@@ -20,7 +20,6 @@
 	var/obj/item/card/id/held_card
 	var/editing_security_level = 0
 	var/view_screen = NO_SCREEN
-	var/datum/effect/effect/system/spark_spread/spark_system
 	var/account_security_level = 0
 	var/charge_stick_type = /obj/item/charge_stick
 
@@ -31,12 +30,8 @@
 /obj/machinery/atm/Initialize()
 	. = ..()
 	machine_id = "[station_name()] ATM #[num_financial_terminals++]"
-	spark_system = new /datum/effect/effect/system/spark_spread
-	spark_system.set_up(5, 0, src)
-	spark_system.attach(src)
 
 /obj/machinery/atm/Destroy()
-	QDEL_NULL(spark_system)
 	QDEL_NULL(held_card)
 	authenticated_account = null
 	. = ..()
@@ -66,7 +61,7 @@
 	if(!emagged)
 		//short out the machine, shoot sparks, spew money!
 		emagged = 1
-		spark_system.start()
+		spark_at(src, amount = 5, holder = src)
 		var/obj/item/cash/cash = new(get_turf(src))
 		cash.adjust_worth(rand(100,500))
 
