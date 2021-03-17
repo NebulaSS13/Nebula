@@ -76,7 +76,7 @@
 	var/turf/below = GetBelow(src)
 	if(below)
 		for(var/obj/machinery/atmospherics/target in below)
-			if(istype(target, /obj/machinery/atmospherics/pipe/zpipe/down) && check_connect_types(target,src))
+			if(istype(target, /obj/machinery/atmospherics/pipe/zpipe/up) && check_connect_types(target,src))
 				nodes += target
 
 ///////////////////////
