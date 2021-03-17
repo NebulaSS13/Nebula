@@ -25,7 +25,7 @@
 	air_out.volume = 800
 	volume_ratio = air_in.volume / (air_in.volume + air_out.volume)
 
-/obj/machinery/atmospherics/pipeturbine/get_initialze_directions()
+/obj/machinery/atmospherics/pipeturbine/get_initialize_directions()
 	switch(dir)
 		if(NORTH)
 			initialize_directions = EAST|WEST

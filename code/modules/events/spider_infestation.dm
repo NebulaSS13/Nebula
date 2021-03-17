@@ -16,7 +16,7 @@
 /datum/event/spider_infestation/start()
 	var/list/vents = list()
 	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in world)
-		if(!temp_vent.welded && length(temp_vent.nodes_to_networks) && (temp_vent.loc.z in affecting_z))
+		if(!temp_vent.welded && LAZYLEN(temp_vent.nodes_to_networks) && (temp_vent.loc.z in affecting_z))
 			var/datum/pipe_network/net = temp_vent.nodes_to_networks[temp_vent.nodes_to_networks[1]]
 			if(net.normal_members.len > 50)
 				vents += temp_vent

@@ -35,15 +35,14 @@
 	if(anchored)
 		set_dir(dir) // making sure
 		atmos_init()
-		for(var/obj/machinery/atmospherics/node in nodes)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 			node.atmos_init()
 		build_network()
-		for(var/obj/machinery/atmospherics/node in nodes)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 			node.build_network()
 	else
-		for(var/obj/machinery/atmospherics/node in nodes)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 			node.disconnect(src)
 		for(var/node in nodes_to_networks)
-			qdel(nodes_to_networks[nodes])
-		nodes.Cut()
-		nodes_to_networks.Cut()
+			QDEL_NULL(nodes_to_networks[node])
+		nodes_to_networks = null

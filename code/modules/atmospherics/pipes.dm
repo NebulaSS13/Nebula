@@ -62,7 +62,7 @@
 		QDEL_NULL(sound_token)
 
 /obj/machinery/atmospherics/pipe/proc/pipeline_expansion()
-	return nodes
+	return nodes_to_networks || list()
 
 /obj/machinery/atmospherics/pipe/proc/check_pressure(pressure)
 	//Return 1 if parent should continue checking other pipes
@@ -134,10 +134,10 @@
 	..()
 
 /obj/machinery/atmospherics/pipe/disconnect(obj/machinery/atmospherics/reference)
-	if(reference in nodes)
+	if(reference in nodes_to_networks)
 		if(istype(reference, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
-		nodes -= reference
+		LAZYREMOVE(nodes_to_networks, reference)
 	update_icon()
 
 /obj/machinery/atmospherics/get_color()
@@ -164,7 +164,7 @@
 /obj/machinery/atmospherics/pipe/set_color(new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
-	for(var/obj/machinery/atmospherics/node in nodes)
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 		node.update_icon()
 
 /obj/machinery/atmospherics/pipe/proc/try_leak()
@@ -199,7 +199,6 @@
 /obj/machinery/atmospherics/pipe/simple
 	icon = 'icons/atmos/pipes.dmi'
 	icon_state = "11"
-	var/pipe_icon = "" //what kind of pipe it is and from which dmi is the icon manager getting its icons, "" for simple pipes, "hepipe" for HE pipes, "hejunction" for HE junctions
 	name = "pipe"
 	desc = "A one meter section of regular pipe."
 
@@ -706,9 +705,8 @@
 
 /obj/machinery/atmospherics/proc/universal_underlays(var/direction)
 	var/turf/T = loc
-	var/nodes = nodes_in_dir(direction)
 	var/connections = list("", "-supply", "-scrubbers")
-	for(var/obj/machinery/atmospherics/node in nodes)
+	for(var/obj/machinery/atmospherics/node as anything in nodes_in_dir(direction))
 		if(node.icon_connect_type in connections)
 			connections[icon_connect_type] = node
 	for(var/suffix in connections)

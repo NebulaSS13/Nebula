@@ -59,7 +59,7 @@
 	if(above)
 		for(var/obj/machinery/atmospherics/target in above)
 			if(istype(target, /obj/machinery/atmospherics/pipe/zpipe/down) && check_connect_types(target,src))
-				nodes += target
+				LAZYDISTINCTADD(nodes_to_networks, target)
 
 ///////////////////////
 // and the down pipe //
@@ -77,7 +77,7 @@
 	if(below)
 		for(var/obj/machinery/atmospherics/target in below)
 			if(istype(target, /obj/machinery/atmospherics/pipe/zpipe/up) && check_connect_types(target,src))
-				nodes += target
+				LAZYDISTINCTADD(nodes_to_networks, target)
 
 ///////////////////////
 // supply/scrubbers  //

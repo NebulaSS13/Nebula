@@ -44,9 +44,9 @@
 
 /obj/machinery/atmospherics/valve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(open) // connect everything
-		for(var/obj/machinery/atmospherics/node in nodes)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 			if(nodes_to_networks[node] != new_network)
-				qdel(nodes_to_networks[node])
+				QDEL_NULL(nodes_to_networks[node])
 				nodes_to_networks[node] = new_network
 				if(node != reference)
 					node.network_expand(new_network, src)
@@ -60,7 +60,7 @@
 
 	open = TRUE
 
-	if(length(nodes_to_networks))
+	if(LAZYLEN(nodes_to_networks))
 		var/datum/pipe_network/winner_network = nodes_to_networks[nodes_to_networks[1]]
 		for(var/node in nodes_to_networks)
 			if(nodes_to_networks[node] != winner_network)
@@ -77,7 +77,7 @@
 	open = FALSE
 
 	for(var/node in nodes_to_networks)
-		qdel(nodes_to_networks[node])
+		QDEL_NULL(nodes_to_networks[node])
 
 	build_network()
 

@@ -41,7 +41,10 @@
 	update_icon()
 
 /obj/machinery/atmospherics/tvalve/proc/paired_dirs() // these two dirs are connected
-	return state ? list(turn(dir, 180), turn(dir, -90)) : list(turn(dir, 180), dir)
+	if(state) // "go to side"
+		return list(turn(dir, 180), turn(dir, -90)) 
+	else      // "go straight"
+		return list(turn(dir, 180), dir)
 
 // feed in node; recover all the other nodes that this one should be connected to, depending on state
 /obj/machinery/atmospherics/tvalve/proc/get_nodes_connected_to(obj/machinery/atmospherics/node)
@@ -58,9 +61,9 @@
 		. |= nodes_in_dir(other_dir)
 
 /obj/machinery/atmospherics/tvalve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
-	for(var/obj/machinery/atmospherics/node in get_nodes_connected_to(reference))
+	for(var/obj/machinery/atmospherics/node as anything in get_nodes_connected_to(reference))
 		if(nodes_to_networks[node] != new_network)
-			qdel(nodes_to_networks[node])
+			QDEL_NULL(nodes_to_networks[node])
 			nodes_to_networks[node] = new_network
 			if(node != reference)
 				node.network_expand(new_network, src)
@@ -74,7 +77,7 @@
 	// we are just going to rebuild networks, as we can't split them anyway.
 
 	for(var/node in nodes_to_networks)
-		qdel(nodes_to_networks[node])
+		QDEL_NULL(nodes_to_networks[node])
 	build_network()
 
 	update_icon()
@@ -87,7 +90,7 @@
 	state = 0
 
 	for(var/node in nodes_to_networks)
-		qdel(nodes_to_networks[node])
+		QDEL_NULL(nodes_to_networks[node])
 	build_network()
 
 	update_icon()
@@ -165,7 +168,10 @@
 	uncreated_component_parts = null
 
 /obj/machinery/atmospherics/tvalve/mirrored/paired_dirs()
-	return state ? list(turn(dir, 180), turn(dir, 90)) : list(turn(dir, 180), dir)
+	if(state) // "go to side" but other side
+		return list(turn(dir, 180), turn(dir, 90))
+	else
+		return list(turn(dir, 180), dir)
 
 /obj/machinery/atmospherics/tvalve/digital		// can be controlled by AI
 	name = "digital switching valve"

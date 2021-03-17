@@ -24,7 +24,7 @@
 	. = ..()
 
 /obj/machinery/atmospherics/unary/heat_exchanger/on_update_icon()
-	if(length(nodes))
+	if(LAZYLEN(nodes_to_networks))
 		icon_state = "intact"
 	else
 		icon_state = "exposed"

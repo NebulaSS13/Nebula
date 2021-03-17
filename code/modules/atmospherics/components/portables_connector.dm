@@ -48,7 +48,7 @@
 /obj/machinery/atmospherics/portables_connector/return_network(obj/machinery/atmospherics/reference)
 	. = ..()
 	if(reference == connected_device) // Legacy carryover; unsure why this is supported, though.
-		if(length(nodes_to_networks))
+		if(LAZYLEN(nodes_to_networks))
 			return nodes_to_networks[nodes_to_networks[1]]
 
 /obj/machinery/atmospherics/portables_connector/return_network_air(datum/pipe_network/reference)

@@ -25,7 +25,7 @@
 	var/heating = 0		//mainly for icon updates
 
 /obj/machinery/atmospherics/unary/heater/on_update_icon()
-	if(length(nodes))
+	if(LAZYLEN(nodes_to_networks))
 		if(use_power && heating)
 			icon_state = "heater_1"
 		else
@@ -41,7 +41,7 @@
 		update_icon()
 		return
 
-	if(length(nodes_to_networks) && air_contents.total_moles && air_contents.temperature < set_temperature)
+	if(LAZYLEN(nodes_to_networks) && air_contents.total_moles && air_contents.temperature < set_temperature)
 		air_contents.add_thermal_energy(power_rating * HEATER_PERF_MULT)
 		use_power_oneoff(power_rating)
 

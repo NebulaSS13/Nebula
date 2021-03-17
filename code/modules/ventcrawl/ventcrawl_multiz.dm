@@ -15,6 +15,6 @@
 	if(target) ventcrawl_to(usr, target, DOWN)
 
 /obj/machinery/atmospherics/pipe/zpipe/proc/check_ventcrawl(var/turf/target)
-	for(var/node in nodes)
+	for(var/node in nodes_to_networks)
 		if(node in target)
 			return node

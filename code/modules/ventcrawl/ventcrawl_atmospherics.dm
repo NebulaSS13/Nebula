@@ -55,7 +55,7 @@
 				return target
 
 /obj/machinery/atmospherics/proc/isConnectable(var/obj/machinery/atmospherics/target)
-	return (target in nodes)
+	return (target in nodes_to_networks)
 
 /obj/machinery/atmospherics/valve/isConnectable()
 	return (open && ..())

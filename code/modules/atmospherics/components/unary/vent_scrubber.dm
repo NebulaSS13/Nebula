@@ -115,7 +115,7 @@
 	if (hibernate > world.time)
 		return 1
 
-	if (!length(nodes))
+	if (!LAZYLEN(nodes_to_networks))
 		update_use_power(POWER_USE_OFF)
 	//broadcast_status()
 	if(!use_power || (stat & (NOPOWER|BROKEN)))
@@ -169,12 +169,12 @@
 			return SPAN_WARNING("You cannot take this [src] apart, turn it off first.")
 		var/turf/T = get_turf(src)
 		var/hidden_pipe_check = FALSE
-		for(var/obj/machinery/atmospherics/node in nodes)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 			if(node.level)
 				hidden_pipe_check = TRUE
 				break
 		if (hidden_pipe_check && isturf(T) && !T.is_plating())
-			return SPAN_NOTICE("You must remove the plating first.")
+			return SPAN_WARNING("You must remove the plating first.")
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
 		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)

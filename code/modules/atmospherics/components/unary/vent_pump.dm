@@ -155,7 +155,7 @@
 	if (hibernate > world.time)
 		return 1
 
-	if (!length(nodes))
+	if (!LAZYLEN(nodes_to_networks))
 		update_use_power(POWER_USE_OFF)
 	if(!can_pump())
 		return 0
@@ -301,19 +301,19 @@
 /obj/machinery/atmospherics/unary/vent_pump/cannot_transition_to(state_path, mob/user)
 	if(state_path == /decl/machine_construction/default/deconstructed)
 		if(!(stat & NOPOWER) && use_power)
-			return SPAN_NOTICE("You cannot unwrench \the [src], turn it off first.")
+			return SPAN_WARNING("You cannot unwrench \the [src], turn it off first.")
 		var/turf/T = src.loc
 		var/hidden_pipe_check = FALSE
-		for(var/obj/machinery/atmospherics/node in nodes)
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 			if(node.level)
 				hidden_pipe_check = TRUE
 				break
 		if (hidden_pipe_check && isturf(T) && !T.is_plating())
-			return SPAN_NOTICE("You must remove the plating first.")
+			return SPAN_WARNING("You must remove the plating first.")
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
 		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-			return SPAN_NOTICE("You cannot unwrench \the [src], it is too exerted due to internal pressure.")
+			return SPAN_WARNING("You cannot unwrench \the [src], it is too exerted due to internal pressure.")
 	return ..()
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/get_console_data()

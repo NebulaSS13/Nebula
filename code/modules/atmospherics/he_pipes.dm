@@ -30,12 +30,14 @@
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
 	atmos_initalized = TRUE
-	nodes.Cut()
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+		QDEL_NULL(nodes_to_networks[node])
+	nodes_to_networks = null
 	for(var/direction in GLOB.cardinal)
 		if(direction & initialize_directions_he) // connect to HE pipes with HE ends in the HE directions
 			for(var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/target in get_step(src,direction))
 				if((target.initialize_directions_he & get_dir(target, src)) && check_connect_types(target, src))
-					nodes |= target
+					LAZYDISTINCTADD(nodes_to_networks, target)
 		else if(direction & initialize_directions) // and to normal pipes normally in the other directions
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if((target.initialize_directions & get_dir(target, src)) && check_connect_types(target, src))
@@ -43,7 +45,7 @@
 						var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/heat = target
 						if(heat.initialize_directions_he & get_dir(target, src)) // this means we are connecting a normal end to an HE end on an HE part; not OK
 							continue
-					nodes |= target
+					LAZYDISTINCTADD(nodes_to_networks, target)
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/Process()

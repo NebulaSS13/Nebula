@@ -25,7 +25,7 @@
 	var/cooling = 0
 
 /obj/machinery/atmospherics/unary/freezer/on_update_icon()
-	if(length(nodes))
+	if(LAZYLEN(nodes_to_networks))
 		if(use_power && cooling)
 			icon_state = "freezer_1"
 		else
@@ -94,7 +94,7 @@
 		update_icon()
 		return
 
-	if(length(nodes_to_networks) && air_contents.temperature > set_temperature)
+	if(LAZYLEN(nodes_to_networks) && air_contents.temperature > set_temperature)
 		cooling = 1
 
 		var/heat_transfer = max( -air_contents.get_thermal_energy_change(set_temperature - 5), 0 )
