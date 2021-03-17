@@ -1939,7 +1939,6 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "gg" = (
-/obj/machinery/computer/power_monitor,
 /obj/effect/decal/cleanable/cobweb2,
 /obj/structure/cable,
 /turf/simulated/floor/plating,

@@ -1,3 +1,5 @@
+var/list/shutoff_valves = list()
+
 /obj/machinery/atmospherics/valve/shutoff
 	icon = 'icons/atmos/clamp.dmi'
 	icon_state = "map_vclamp0"
@@ -22,8 +24,13 @@
 
 /obj/machinery/atmospherics/valve/shutoff/Initialize()
 	. = ..()
+	shutoff_valves += src
 	open()
 	hide(1)
+
+/obj/machinery/atmospherics/valve/shutoff/Destroy()
+	. = ..()
+	shutoff_valves -= src
 
 /obj/machinery/atmospherics/valve/shutoff/interface_interact(var/mob/user)
 	if(CanInteract(user, DefaultTopicState()))

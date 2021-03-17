@@ -9,13 +9,8 @@
 // There are three different power channels, lighting, equipment, and enviroment
 // Each may have one of the following states
 
-#define POWERCHAN_OFF		0	// Power channel is off
-#define POWERCHAN_OFF_TEMP	1	// Power channel is off until there is power
-#define POWERCHAN_OFF_AUTO	2	// Power channel is off until power passes a threshold
-#define POWERCHAN_ON		3	// Power channel is on until there is no power
-#define POWERCHAN_ON_AUTO	4	// Power channel is on until power drops below a threshold
-
 // Power channels set to Auto change when power levels rise or drop below a threshold
+// Power channel defines have been shifted to power.dm in __defines. 2/25/2021
 
 #define AUTO_THRESHOLD_LIGHTING  50
 #define AUTO_THRESHOLD_EQUIPMENT 25
@@ -126,6 +121,7 @@
 	var/global/list/status_overlays_equipment
 	var/global/list/status_overlays_lighting
 	var/global/list/status_overlays_environ
+	var/remote_control = FALSE //is remote control enabled?
 	var/autoname = 1
 	var/cover_removed = FALSE           // Cover is gone; can't close it anymore.
 	var/locked = TRUE                   // This is the interface, not the hardware.
@@ -178,7 +174,7 @@
 	GLOB.name_set_event.register(area, src, .proc/change_area_name)
 
 	. = ..()
-	
+
 	if (populate_parts)
 		init_round_start()
 	else
@@ -414,7 +410,7 @@
 /obj/machinery/power/apc/cannot_transition_to(state_path, mob/user)
 	if(ispath(state_path, /decl/machine_construction/wall_frame/panel_closed) && cover_removed)
 		return SPAN_NOTICE("You cannot close the cover: it was completely removed!")
-	. = ..()	
+	. = ..()
 
 /obj/machinery/power/apc/proc/force_open_panel(mob/user)
 	var/decl/machine_construction/wall_frame/panel_closed/closed_state = construct_state
@@ -524,6 +520,7 @@
 		"coverLocked" = coverlocked,
 		"failTime" = failure_timer * 2,
 		"siliconUser" = istype(user, /mob/living/silicon),
+		"remote_control" = remote_control,
 		"powerChannels" = list(
 			list(
 				"title" = "Equipment",
@@ -687,6 +684,10 @@
 	if(href_list["overload"])
 		if(istype(user, /mob/living/silicon))
 			overload_lighting()
+		return TOPIC_REFRESH
+
+	if(href_list["toggle_rc"])
+		remote_control = !remote_control
 		return TOPIC_REFRESH
 
 /obj/machinery/power/apc/proc/force_update_channels()
@@ -933,6 +934,16 @@
 	emp_hardened = 1
 	to_chat(user, "\The [src] has been upgraded. It is now protected against EM pulses.")
 	return 1
+
+/obj/machinery/power/apc/proc/set_channel_state_manual(var/channel, var/state)
+	switch(channel)
+		if(APC_POWERCHAN_EQUIPMENT)
+			equipment = state
+		if(APC_POWERCHAN_LIGHTING)
+			lighting = state
+		if(APC_POWERCHAN_ENVIRONMENT)
+			environ = state
+	force_update_channels()
 
 
 

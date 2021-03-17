@@ -56,24 +56,37 @@
 			{{:data.focus.total_used_all}}
 		</div>
 		<h3>Sensor Readings</h3>
-		<table><tr><th>APC Name<th>Equipment<th>Lighting<th>Environment<th>Cell Status<th>APC Load
-		{{for data.focus.apc_data}}
-			<tr>
-			<td>{{:value.name}}
-			<td>{{:value.s_equipment}}
-			<td>{{:value.s_lighting}}
-			<td>{{:value.s_environment}}
-			{{if value.cell_status == "N"}}
-				<td>{{:helper.link(value.cell_charge + '%', 'batt_disc', null,'disabled', 'width75btn')}}
-			{{else value.cell_status == "C"}}
-				<td>{{:helper.link(value.cell_charge + '%', 'batt_chrg', null,'disabled', 'width75btn')}}
-			{{else}}
-				<td>{{:helper.link(value.cell_charge + '%', 'batt_full', null,'disabled', 'width75btn')}}
-			{{/if}}
-			<td>{{:value.total_load}}
-		{{empty}}
-			<tr><td>No APCs detected in connected powernet.
-		{{/for}}
+		<table><tr><th>APC Name<th>Breaker<th>RC<th>Equipment<th>Lighting<th>Environment<th>Cell Status<th>APC Load
+        {{for data.focus.apc_data}}
+            <tr>
+            {{if value.failure || value.telemetry}}
+				<td>{{:value.name}}
+                <td>{{:helper.link('MALFUNCT', 'alert', null, 'disabled', 'redButton')}}
+				<td>{{:helper.link('MALFUNCT', 'alert', null, 'disabled', 'redButton')}}
+				<td>{{:helper.link('MALFUNCT', 'alert', null, 'disabled', 'redButton')}}
+				<td>{{:helper.link('MALFUNCT', 'alert', null, 'disabled', 'redButton')}}
+				<td>{{:helper.link('MALFUNCT', 'alert', null, 'disabled', 'redButton')}}
+				<td>{{:helper.link('MALFUNCT', 'alert', null, 'disabled', 'redButton')}}
+				<td>{{:helper.link('MALFUNCT', 'alert', null, 'disabled', 'redButton')}}
+            {{else}}
+                <td>{{:value.name}}
+                <td>{{:helper.link(value.breaker ? 'On' : 'Off', 'power',{'toggle_breaker' : value.ref}, null, value.breaker ? 'greenButton' : 'redButton')}}
+				<td>{{:helper.link(value.remote_control ? 'Enabled' : 'Disabled', value.remote_control ? 'signal' : 'close', null, 'greenButton')}}
+                <td>{{:helper.link(value.s_equipment, null, {'toggle_powerchannel_equip' : value.ref}, null, value.n_equipment < 3 ? 'redButton' : 'greenButton')}}
+                <td>{{:helper.link(value.s_lighting, null, {'toggle_powerchannel_light' : value.ref}, null, value.n_lighting < 3 ? 'redButton' : 'greenButton')}}
+                <td>{{:helper.link(value.s_environment, null, {'toggle_powerchannel_enviro' : value.ref}, null, value.n_environment < 3 ? 'redButton' : 'greenButton')}}
+                {{if value.cell_status == "N"}}
+                    <td>{{:helper.link(value.cell_charge + '%', 'batt_disc', null,'disabled', 'width75btn')}}
+                {{else value.cell_status == "C"}}
+                    <td>{{:helper.link(value.cell_charge + '%', 'batt_chrg', null,'disabled', 'width75btn')}}
+                {{else}}
+                    <td>{{:helper.link(value.cell_charge + '%', 'batt_full', null,'disabled', 'width75btn')}}
+                {{/if}}
+				<td>{{:value.total_load}}           
+		   {{/if}}
+        {{empty}}
+            <tr><td>No APCs detected in connected powernet.
+        {{/for}}
 		</table>
 	{{/if}}
 {{else}}
