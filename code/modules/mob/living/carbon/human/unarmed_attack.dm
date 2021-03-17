@@ -188,12 +188,10 @@ var/global/list/sparring_attack_cache = list()
 	if(!affecting)
 		return ..()
 
-	var/organ = affecting.name
-
 	attack_damage = Clamp(attack_damage, 1, 5) // We expect damage input of 1 to 5 for this proc. But we leave this check juuust in case.
 
 	if(target == user)
-		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [organ]!</span>")
+		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in \the [affecting]!</span>")
 		return 0
 
 	target.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
@@ -215,16 +213,16 @@ var/global/list/sparring_attack_cache = list()
 					if(5)
 						user.visible_message(pick(
 							10; "<span class='danger'>[user] gave [target] a solid slap across \his face!</span>",
-							90; "<span class='danger'>[user] smashed \his [pick(attack_noun)] into [target]'s [pick("[organ]", "face", "jaw")]!</span>"
+							90; "<span class='danger'>[user] smashed \his [pick(attack_noun)] into [target]'s [pick("[affecting.name]", "face", "jaw")]!</span>"
 							))
 			else
 				// ----- BODY ----- //
 				switch(attack_damage)
-					if(1 to 2)	user.visible_message("<span class='danger'>[user] threw a glancing punch at [target]'s [organ]!</span>")
-					if(1 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ]!</span>")
-					if(5)		user.visible_message("<span class='danger'>[user] smashed \his [pick(attack_noun)] into [target]'s [organ]!</span>")
+					if(1 to 2)	user.visible_message("<span class='danger'>[user] threw a glancing punch at [target]'s [affecting.name]!</span>")
+					if(1 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \the [affecting]!</span>")
+					if(5)		user.visible_message("<span class='danger'>[user] smashed \his [pick(attack_noun)] into [target]'s [affecting.name]!</span>")
 	else
-		user.visible_message("<span class='danger'>[user] [pick("punched", "threw a punch at", "struck", "slammed their [pick(attack_noun)] into")] [target]'s [organ]!</span>") //why do we have a separate set of verbs for lying targets?
+		user.visible_message("<span class='danger'>[user] [pick("punched", "threw a punch at", "struck", "slammed their [pick(attack_noun)] into")] [target]'s [affecting.name]!</span>") //why do we have a separate set of verbs for lying targets?
 
 /decl/natural_attack/kick
 	name = "kick"
@@ -252,12 +250,11 @@ var/global/list/sparring_attack_cache = list()
 	if(!affecting)
 		return ..()
 
-	var/organ = affecting.name
 	attack_damage = Clamp(attack_damage, 1, 5)
 	switch(attack_damage)
-		if(1 to 2)	user.visible_message("<span class='danger'>[user] threw [target] a glancing [pick(attack_noun)] to the [organ]!</span>") //it's not that they're kicking lightly, it's that the kick didn't quite connect
-		if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ]!</span>")
-		if(5)		user.visible_message("<span class='danger'>[user] landed a strong [pick(attack_noun)] against [target]'s [organ]!</span>")
+		if(1 to 2)	user.visible_message("<span class='danger'>[user] threw [target] a glancing [pick(attack_noun)] to \the [affecting]!</span>") //it's not that they're kicking lightly, it's that the kick didn't quite connect
+		if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \the [affecting]!</span>")
+		if(5)		user.visible_message("<span class='danger'>[user] landed a strong [pick(attack_noun)] against [target]'s [affecting.name]!</span>")
 
 /decl/natural_attack/stomp
 	name = "stomp"
@@ -294,7 +291,6 @@ var/global/list/sparring_attack_cache = list()
 	if(!affecting)
 		return ..()
 
-	var/organ = affecting.name
 	var/obj/item/clothing/shoes = user.shoes
 	attack_damage = Clamp(attack_damage, 1, 5)
 
@@ -302,12 +298,12 @@ var/global/list/sparring_attack_cache = list()
 	switch(attack_damage)
 		if(1 to 4)
 			user.visible_message(pick(
-				"<span class='danger'>[user] stomped on [target]'s [organ][pick("", "with their [shoe_text]")]!</span>",
-				"<span class='danger'>[user] stomped \his [shoe_text] down onto [target]'s [organ]!</span>"))
+				"<span class='danger'>[user] stomped on [target]'s [affecting.name][pick("", "with their [shoe_text]")]!</span>",
+				"<span class='danger'>[user] stomped \his [shoe_text] down onto [target]'s [affecting.name]!</span>"))
 		if(5)
 			user.visible_message(pick(
-				"<span class='danger'>[user] stomped down hard onto [target]'s [organ][pick("", "with their [shoe_text]")]!</span>",
-				"<span class='danger'>[user] slammed \his [shoe_text] down onto [target]'s [organ]!</span>"))
+				"<span class='danger'>[user] stomped down hard onto [target]'s [affecting.name][pick("", "with their [shoe_text]")]!</span>",
+				"<span class='danger'>[user] slammed \his [shoe_text] down onto [target]'s [affecting.name]!</span>"))
 
 /decl/natural_attack/light_strike
 	name = "light strike"
