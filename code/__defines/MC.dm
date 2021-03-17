@@ -95,8 +95,18 @@ if(Datum.is_processing) {\
 #define TIMER_STOPPABLE    BITFLAG(3) // Timer can be stopped using deltimer()
 #define TIMER_NO_HASH_WAIT BITFLAG(4) // For unique timers: don't distinguish timers by wait
 #define TIMER_LOOP         BITFLAG(5) // Repeat the timer until it's deleted.
+#define TIMER_DELETE_ME    BITFLAG(6) // Delete the timer on parent datum Destroy() and when deltimer'd
 
 #define TIMER_ID_NULL -1
+
+/**
+	Create a new timer and add it to the queue.
+	* Arguments:
+	* * callback the callback to call on timer finish
+	* * wait deciseconds to run the timer for
+	* * flags flags for this timer, see: code\__DEFINES\subsystems.dm
+*/
+#define addtimer(args...) _addtimer(args, file = __FILE__, line = __LINE__)
 
 //SUBSYSTEM STATES
 #define SS_IDLE 0		//aint doing shit.
