@@ -78,17 +78,10 @@ Thus, the two variables affect pump operation are set in New():
 	else
 		icon_state = "[use_power ? "on" : "off"]"
 
-/obj/machinery/atmospherics/binary/pump/update_underlays()
-	if(..())
-		underlays.Cut()
-		var/turf/T = get_turf(src)
-		if(!istype(T))
-			return
-		add_underlay(T, node1, turn(dir, -180))
-		add_underlay(T, node2, dir)
+	build_device_underlays(FALSE)
 
 /obj/machinery/atmospherics/binary/pump/hide(var/i)
-	update_underlays()
+	update_icon()
 
 /obj/machinery/atmospherics/binary/pump/Process()
 	last_power_draw = 0
@@ -102,15 +95,12 @@ Thus, the two variables affect pump operation are set in New():
 
 	if(pressure_delta > 0.01 && air1.temperature > 0)
 		//Figure out how much gas to transfer to meet the target pressure.
-		var/transfer_moles = calculate_transfer_moles(air1, air2, pressure_delta, (network2)? network2.volume : 0)
+		var/datum/pipe_network/output = network_in_dir(dir)
+		var/transfer_moles = calculate_transfer_moles(air1, air2, pressure_delta, output?.volume)
 		power_draw = pump_gas(src, air1, air2, transfer_moles, power_rating)
 
 		if(transfer_moles > 0)
-			if(network1)
-				network1.update = 1
-
-			if(network2)
-				network2.update = 1
+			update_networks()
 
 	if (power_draw >= 0)
 		last_power_draw = power_draw

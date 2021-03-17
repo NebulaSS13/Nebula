@@ -496,26 +496,6 @@
 
 //=======================================================================================
 
-/datum/unit_test/simple_pipes_shall_not_face_north_or_west // The init code is worthless and cannot handle it
-	name = "MAP: Simple pipes shall not face north or west"
-
-/datum/unit_test/simple_pipes_shall_not_face_north_or_west/start_test()
-	var/failures = 0
-	for(var/obj/machinery/atmospherics/pipe/simple/pipe in world) // Pipes are removed from the SSmachines list during init.
-		if(!istype(pipe, /obj/machinery/atmospherics/pipe/simple/hidden) && !istype(pipe, /obj/machinery/atmospherics/pipe/simple/visible))
-			continue
-		if(pipe.dir == NORTH || pipe.dir == WEST)
-			log_bad("Following pipe had an invalid direction: [log_info_line(pipe)]")
-			failures++
-
-	if(failures)
-		fail("[failures] simple pipe\s faced the wrong direction.")
-	else
-		pass("All simple pipes faced an appropriate direction.")
-	return 1
-
-//=======================================================================================
-
 /datum/unit_test/shutoff_valves_shall_connect_to_two_different_pipe_networks
 	name = "MAP: Shutoff valves shall connect to two different pipe networks"
 
@@ -524,7 +504,7 @@
 	for(var/obj/machinery/atmospherics/valve/shutoff/SV in SSmachines.machinery)
 		SV.close()
 	for(var/obj/machinery/atmospherics/valve/shutoff/SV in SSmachines.machinery)
-		if(SV.network_node1 == SV.network_node2)
+		if(SV.network_in_dir(SV.dir) == SV.network_in_dir(turn(SV.dir, 180)))
 			log_bad("Following shutoff valve does not connect to two different pipe networks: [log_info_line(SV)]")
 			failures++
 

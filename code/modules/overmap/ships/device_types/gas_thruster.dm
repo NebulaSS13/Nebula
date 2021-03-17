@@ -18,8 +18,7 @@
 		return 0
 	. = get_exhaust_velocity(removed)
 	playsound(E.loc, 'sound/machines/thruster.ogg', 100 * thrust_limit * partial, 0, world.view * 4, 0.1)
-	if(E.network)
-		E.network.update = 1
+	E.update_networks()
 	E.update_icon()
 
 	var/exhaust_dir = GLOB.reverse_dir[E.dir]
