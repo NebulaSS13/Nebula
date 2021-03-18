@@ -89,14 +89,23 @@ if(Datum.is_processing) {\
 
 // -- SStimer stuff --
 
-#define TIMER_UNIQUE       BITFLAG(0) // Don't run if there is an identical unique timer active
-#define TIMER_OVERRIDE     BITFLAG(1) // For unique timers: Replace the old timer rather then not start this one
-#define TIMER_CLIENT_TIME  BITFLAG(2) // Timing should be based on how timing progresses on clients, not the server - this is more expensive, so should only be used with things that need to progress client-side (like animate or sound)
-#define TIMER_STOPPABLE    BITFLAG(3) // Timer can be stopped using deltimer()
-#define TIMER_NO_HASH_WAIT BITFLAG(4) // For unique timers: don't distinguish timers by wait
-#define TIMER_LOOP         BITFLAG(5) // Repeat the timer until it's deleted.
+#define TIMER_UNIQUE       BITFLAG(0) // Don't run if there is an identical unique timer active.
+#define TIMER_OVERRIDE     BITFLAG(1) // For unique timers: Replace the old timer rather than not start this one.
+#define TIMER_CLIENT_TIME  BITFLAG(2) // Timing should be based on how timing progresses on clients, not the server - this is more expensive, so should only be used with things that need to progress client-side (like animate or sound).
+#define TIMER_STOPPABLE    BITFLAG(3) // Timer can be stopped using deltimer().
+#define TIMER_NO_HASH_WAIT BITFLAG(4) // For unique timers: don't distinguish timers by wait.
+#define TIMER_LOOP         BITFLAG(5) // Repeat the timer until it's deleted or the parent is destroyed.
 
 #define TIMER_ID_NULL -1
+
+/**
+	Create a new timer and add it to the queue.
+	* Arguments:
+	* * callback the callback to call on timer finish
+	* * wait deciseconds to run the timer for
+	* * flags flags for this timer, see: code\__DEFINES\subsystems.dm
+*/
+#define addtimer(args...) _addtimer(args, file = __FILE__, line = __LINE__)
 
 //SUBSYSTEM STATES
 #define SS_IDLE 0		//aint doing shit.
