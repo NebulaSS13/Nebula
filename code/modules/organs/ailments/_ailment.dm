@@ -46,8 +46,6 @@
 	if(organ)
 		LAZYREMOVE(organ.ailments, src)
 		organ = null
-	deltimer(timer_id)
-	timer_id = null
 	. = ..()
 
 /datum/ailment/proc/begin_ailment_event()

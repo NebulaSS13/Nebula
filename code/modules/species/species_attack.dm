@@ -133,16 +133,13 @@
 	if(!affecting)
 		return ..()
 
-	var/organ = affecting.name
 	attack_damage = Clamp(attack_damage, 1, 6)
 	attack_damage = 3 + attack_damage - rand(1, 5)
 	switch(attack_damage)
 
-		if(1 to 5)	user.visible_message("<span class='danger'>[user] glanced [target] with their [pick(attack_noun)] in the [organ]!</span>")
-
-		if(6 to 7)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ] with their [pick(attack_noun)]!</span>")
-
-		if(8)		user.visible_message("<span class='danger'>[user] landed a heavy blow with their [pick(attack_noun)] against [target]'s [organ]!</span>")
+		if(1 to 5)	user.visible_message("<span class='danger'>[user] glanced [target] with their [pick(attack_noun)] in \the [affecting]!</span>")
+		if(6 to 7)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \the [affecting] with their [pick(attack_noun)]!</span>")
+		if(8)		user.visible_message("<span class='danger'>[user] landed a heavy blow with their [pick(attack_noun)] against [target]'s [affecting.name]!</span>")
 
 /decl/natural_attack/punch/weak
 	attack_verb = list("swiped", "smacked", "smecked")
