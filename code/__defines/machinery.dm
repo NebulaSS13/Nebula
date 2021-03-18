@@ -42,18 +42,24 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define AI_CAMERA_LUMINOSITY 6
 
 // Camera networks
-#define NETWORK_CRESCENT "Crescent"
+// Station networks
+#define NETWORK_PUBLIC "Public"
 #define NETWORK_ENGINEERING "Engineering"
-#define NETWORK_ERT "ZeEmergencyResponseTeam"
-#define NETWORK_EXODUS "Exodus"
 #define NETWORK_MEDICAL "Medical"
-#define NETWORK_MERCENARY "MercurialNet"
-#define NETWORK_MINE "Mining"
 #define NETWORK_RESEARCH "Research"
-#define NETWORK_ROBOTS "Robots"
 #define NETWORK_SECURITY "Security"
+
+#define NETWORK_ROBOTS "Robots"
+#define NETWORK_MINE "Mining"
+#define NETWORK_SECRET "Secret"
+
+// Non-station networks
+#define NETWORK_CRESCENT "Crescent"
+#define NETWORK_ERT "ZeEmergencyResponseTeam"
+#define NETWORK_MERCENARY "MercurialNet"
 #define NETWORK_THUNDER "Thunderdome"
 
+// Alarm networks
 #define NETWORK_ALARM_ATMOS "Atmosphere Alarms"
 #define NETWORK_ALARM_CAMERA "Camera Alarms"
 #define NETWORK_ALARM_FIRE "Fire Alarms"
@@ -61,7 +67,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NETWORK_ALARM_POWER "Power Alarms"
 
 // Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
-var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWORK_CRESCENT, "Secret")
+var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWORK_CRESCENT, NETWORK_SECRET)
 
 
 //singularity defines

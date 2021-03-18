@@ -49,7 +49,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai
 	name = "AI"
-	icon = 'icons/mob/AI.dmi'//
+	icon = 'icons/mob/AI.dmi'
 	icon_state = "ai"
 	mob_sort_value = 2
 	anchored = 1 // -- TLE
@@ -57,12 +57,12 @@ var/list/ai_verbs_default = list(
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
 	maxHealth = 200
-	var/list/network = list("Exodus")
+	var/list/network = list(NETWORK_PUBLIC)
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
 	var/viewalerts = 0
-	var/icon/holo_icon//Blue hologram. Face is assigned when AI is created.
+	var/icon/holo_icon //Blue hologram. Face is assigned when AI is created.
 	var/icon/holo_icon_longrange //Yellow hologram.
 	var/holo_icon_malf = FALSE // for new hologram system
 	var/obj/item/multitool/aiMulti = null
@@ -699,7 +699,7 @@ var/list/ai_verbs_default = list(
 /mob/living/silicon/ai/on_update_icon()
 	if(!selected_sprite || !(selected_sprite in available_icons()))
 		// This should NOT be using the decl repository as default_ai_icon is a datum. TODO: rewrite AI icon handling.
-		selected_sprite = decls_repository.get_decl(default_ai_icon) 
+		selected_sprite = decls_repository.get_decl(default_ai_icon)
 
 	icon = selected_sprite.icon
 	if(stat == DEAD)
