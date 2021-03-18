@@ -72,6 +72,7 @@
 
 
 /obj/machinery/atmospherics/pipe/atmos_init()
+	qdel(parent)
 	..()
 	var/turf/T = loc
 	if(level == 1 && !T.is_plating())
@@ -691,6 +692,7 @@
 	desc = "An adapter for regular, supply and scrubbers pipes."
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL|CONNECT_TYPE_HE
 	icon_state = "map_universal"
+	build_icon_state = "universal"
 
 /obj/machinery/atmospherics/pipe/simple/hidden/universal/on_update_icon(var/safety = 0)
 	if(!atmos_initalized)
@@ -708,7 +710,7 @@
 	var/connections = list("", "-supply", "-scrubbers")
 	for(var/obj/machinery/atmospherics/node as anything in nodes_in_dir(direction))
 		if(node.icon_connect_type in connections)
-			connections[icon_connect_type] = node
+			connections[node.icon_connect_type] = node
 	for(var/suffix in connections)
 		add_underlay(T, connections[suffix], direction, suffix, "retracted")
 
