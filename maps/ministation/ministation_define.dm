@@ -29,7 +29,7 @@
 	evac_controller_type = /datum/evacuation_controller/ministation_substitute
 
 	station_networks = list(
-		NETWORK_EXODUS,
+		NETWORK_PUBLIC,
 		NETWORK_MINE,
 		NETWORK_SECURITY,
 		NETWORK_RESEARCH,

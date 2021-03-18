@@ -81,7 +81,7 @@
 			if(isScrewdriver(W))
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 
-				var/input = sanitize(input(usr, "Which networks would you like to connect this camera to? Separate networks with a comma. No Spaces!\nFor example: Exodus,Security,Secret", "Set Network", camera_network ? camera_network : NETWORK_EXODUS))
+				var/input = sanitize(input(usr, "Which networks would you like to connect this camera to? Separate networks with a comma. No Spaces!\nFor example: [NETWORK_PUBLIC],[NETWORK_SECURITY],[NETWORK_SECRET]", "Set Network", camera_network ? camera_network : NETWORK_PUBLIC))
 				if(!input)
 					to_chat(usr, "No input found please hang up and try your call again.")
 					return
