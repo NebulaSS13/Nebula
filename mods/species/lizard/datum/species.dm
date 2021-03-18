@@ -1,3 +1,16 @@
+/datum/appearance_descriptor/age/lizard
+	standalone_value_descriptors = list(
+		"an infant" =       1,
+		"a toddler" =       3,
+		"a child" =         7,
+		"an adolescent" =  13,
+		"a young adult" =  18,
+		"an adult" =       25,
+		"middle-aged" =    50,
+		"aging" =         150,
+		"elderly" =       260
+	)
+
 /decl/species/lizard
 	name = SPECIES_LIZARD
 	name_plural = SPECIES_LIZARD
@@ -36,8 +49,7 @@
 	health_hud_intensity = 2
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 2
 
-	min_age = 18
-	max_age = 260
+	age_descriptor = /datum/appearance_descriptor/age/lizard
 
 	body_temperature = null // cold-blooded, implemented the same way nabbers do it
 
@@ -85,9 +97,9 @@
 		BP_BRAIN = /obj/item/organ/internal/brain/lizard
 	)
 
-	descriptors = list(
-		/datum/mob_descriptor/height = 2,
-		/datum/mob_descriptor/build = 2
+	appearance_descriptors = list(
+		/datum/appearance_descriptor/height = 1.25,
+		/datum/appearance_descriptor/build =  1.25
 		)
 
 	default_emotes = list(

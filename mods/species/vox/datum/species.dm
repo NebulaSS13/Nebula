@@ -1,3 +1,16 @@
+/datum/appearance_descriptor/age/vox
+	chargen_min_index = 3
+	chargen_max_index = 6
+	standalone_value_descriptors = list(
+		"freshly spawned" =  1,
+		"a larva" =          2,
+		"a juvenile" =       5,
+		"an adolescent" =    8,
+		"an adult" =        12,
+		"senescent" =       50,
+		"withered" =        65
+	)
+
 #define IS_VOX "vox"
 
 /decl/species/vox
@@ -49,9 +62,8 @@
 	cold_level_2 = 50
 	cold_level_3 = -1
 	
-	min_age = 1
-	max_age = 100
-	
+	age_descriptor = /datum/appearance_descriptor/age/vox
+
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
 	stomach_capacity = 12
 
@@ -87,10 +99,10 @@
 		)
 
 	genders = list(NEUTER)
-	descriptors = list(
-		/datum/mob_descriptor/height = -1,
-		/datum/mob_descriptor/build = 1,
-		/datum/mob_descriptor/vox_markings = 0
+	appearance_descriptors = list(
+		/datum/appearance_descriptor/height =       0.75,
+		/datum/appearance_descriptor/build =        1.25,
+		/datum/appearance_descriptor/vox_markings = 1
 		)
 
 	available_cultural_info = list(

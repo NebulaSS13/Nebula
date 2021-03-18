@@ -12,7 +12,7 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	var/skin_tone = 0                    //Skin tone
 	var/skin_base = ""                   //Base skin colour
 	var/list/body_markings = list()
-	var/list/body_descriptors = list()
+	var/list/appearance_descriptors = list()
 
 	// maps each organ to either null(intact), "cyborg" or "amputated"
 	// will probably not be able to do this for head and torso ;)
@@ -45,7 +45,7 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	from_file(S["organ_data"], pref.organ_data)
 	from_file(S["rlimb_data"], pref.rlimb_data)
 	from_file(S["body_markings"], pref.body_markings)
-	from_file(S["body_descriptors"], pref.body_descriptors)
+	from_file(S["appearance_descriptors"], pref.appearance_descriptors)
 	from_file(S["bgstate"], pref.bgstate)
 
 	// Grandfathering in older saves post colour rewrite.
@@ -88,7 +88,7 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	to_file(S["disabilities"], pref.disabilities)
 	to_file(S["organ_data"], pref.organ_data)
 	to_file(S["body_markings"], pref.body_markings)
-	to_file(S["body_descriptors"], pref.body_descriptors)
+	to_file(S["appearance_descriptors"], pref.appearance_descriptors)
 	to_file(S["bgstate"], pref.bgstate)
 
 	var/list/rlimb_string_data = list()
@@ -154,18 +154,17 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	sanitize_organs()
 
 	var/list/last_descriptors = list()
-	if(islist(pref.body_descriptors))
-		last_descriptors = pref.body_descriptors.Copy()
-	pref.body_descriptors = list()
+	if(islist(pref.appearance_descriptors))
+		last_descriptors = pref.appearance_descriptors.Copy()
 
-	if(LAZYLEN(mob_species.descriptors))
-		for(var/entry in mob_species.descriptors)
-			var/datum/mob_descriptor/descriptor = mob_species.descriptors[entry]
-			if(istype(descriptor))
-				if(isnull(last_descriptors[entry]))
-					pref.body_descriptors[entry] = descriptor.default_value // Species datums have initial default value.
-				else
-					pref.body_descriptors[entry] = Clamp(last_descriptors[entry], 1, LAZYLEN(descriptor.standalone_value_descriptors))
+	pref.appearance_descriptors = list()
+	for(var/entry in mob_species.appearance_descriptors)
+		var/datum/appearance_descriptor/descriptor = mob_species.appearance_descriptors[entry]
+		if(istype(descriptor))
+			if(isnull(last_descriptors[descriptor.name]))
+				pref.appearance_descriptors[descriptor.name] = descriptor.default_value // Species datums have initial default value.
+			else
+				pref.appearance_descriptors[descriptor.name] = descriptor.sanitize_value(last_descriptors[descriptor.name])
 
 	if(!pref.bgstate || !(pref.bgstate in pref.bgstate_options))
 		pref.bgstate = "000"
@@ -278,15 +277,20 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 		. += "\[...\]"
 	. += "</td></tr></table><hr/>"
 
-	if(LAZYLEN(pref.body_descriptors))
+	if(LAZYLEN(pref.appearance_descriptors))
 		. += "<h3>Physical Appearance</h3>"
 		. += "<table width = '100%'>"
-		for(var/entry in pref.body_descriptors)
-			var/datum/mob_descriptor/descriptor = mob_species.descriptors[entry]
-			. += "<tr><td><b>[capitalize(descriptor.chargen_label)]</b></td><td align = 'center'>"
-			for(var/i = 1 to length(descriptor.standalone_value_descriptors))
-				var/use_string = descriptor.standalone_value_descriptors[i]
-				if(i == pref.body_descriptors[entry])
+		for(var/entry in pref.appearance_descriptors)
+			var/datum/appearance_descriptor/descriptor = mob_species.appearance_descriptors[entry]
+			. += "<tr><td><b>[capitalize(descriptor.chargen_label)]</b></td>"
+			if(descriptor.has_custom_value())
+				. += "<td align = 'center' width = '50px'><a href='?src=\ref[src];set_descriptor=\ref[descriptor];set_descriptor_custom=1'>[descriptor.get_value_text(pref.appearance_descriptors[entry])]</a></td><td align = 'center'>"
+			else
+				. += "<td align = 'center' colspan = 2>"
+			for(var/i = descriptor.chargen_min_index to descriptor.chargen_max_index)
+				var/use_string = descriptor.chargen_value_descriptors[i]
+				var/desc_index = descriptor.get_index_from_value(pref.appearance_descriptors[entry])
+				if(i == desc_index)
 					. += "<span class='linkOn'>[use_string]</span>"
 				else
 					. += "<a href='?src=\ref[src];set_descriptor=\ref[descriptor];set_descriptor_value=[i]'>[use_string]</a>"
@@ -346,10 +350,19 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 		return TOPIC_REFRESH
 
 	if(href_list["set_descriptor"])
-		var/datum/mob_descriptor/descriptor = locate(href_list["set_descriptor"])
-		if(istype(descriptor) && (descriptor.name in pref.body_descriptors))
-			pref.body_descriptors[descriptor.name] = Clamp(text2num(href_list["set_descriptor_value"]), 1, length(descriptor.standalone_value_descriptors))
-			return TOPIC_REFRESH_UPDATE_PREVIEW
+
+		var/datum/appearance_descriptor/descriptor = locate(href_list["set_descriptor"])
+		if(istype(descriptor) && (descriptor.name in pref.appearance_descriptors))
+
+			if(href_list["set_descriptor_value"])
+				pref.appearance_descriptors[descriptor.name] = descriptor.get_value_from_index(text2num(href_list["set_descriptor_value"]))
+				return TOPIC_REFRESH_UPDATE_PREVIEW
+
+			if(href_list["set_descriptor_custom"])
+				var/new_age = input(user, "Choose your character's [descriptor.name] (between [descriptor.get_min_chargen_value()] and [descriptor.get_max_chargen_value()]).", CHARACTER_PREFERENCE_INPUT_TITLE, pref.appearance_descriptors[descriptor.name]) as num|null
+				if(new_age && CanUseTopic(user) && (descriptor.name in pref.appearance_descriptors))
+					pref.appearance_descriptors[descriptor.name] = descriptor.sanitize_value(new_age)
+					return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["random"])
 		pref.randomize_appearance_and_body_for()
@@ -396,7 +409,6 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 			//reset hair colour and skin colour
 			pref.hair_colour = COLOR_BLACK
 			pref.skin_tone = 0
-			pref.age = max(min(pref.age, mob_species.max_age), mob_species.min_age)
 
 			reset_limbs() // Safety for species with incompatible manufacturers; easier than trying to do it case by case.
 			pref.body_markings.Cut() // Basically same as above.

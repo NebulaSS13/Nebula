@@ -1,6 +1,5 @@
 /datum/preferences
 	var/gender = MALE					//gender of character (well duh)
-	var/age = 30						//age of character
 	var/spawnpoint = "Default" 			//where this character will spawn (0-2).
 	var/metadata = ""
 	var/real_name						//our character's name
@@ -12,7 +11,6 @@
 
 /datum/category_item/player_setup_item/physical/basic/load_character(var/savefile/S)
 	from_file(S["gender"],                pref.gender)
-	from_file(S["age"],                   pref.age)
 	from_file(S["spawnpoint"],            pref.spawnpoint)
 	from_file(S["OOC_Notes"],             pref.metadata)
 	from_file(S["real_name"],             pref.real_name)
@@ -20,18 +18,16 @@
 
 /datum/category_item/player_setup_item/physical/basic/save_character(var/savefile/S)
 	to_file(S["gender"],                  pref.gender)
-	to_file(S["age"],                     pref.age)
 	to_file(S["spawnpoint"],              pref.spawnpoint)
 	to_file(S["OOC_Notes"],               pref.metadata)
 	to_file(S["real_name"],               pref.real_name)
 	to_file(S["name_is_always_random"],   pref.be_random_name)
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
-	var/decl/species/S  = get_species_by_key(pref.species) || get_species_by_key(GLOB.using_map.default_species)
-	pref.age            = sanitize_integer(pref.age, S.min_age, S.max_age, initial(pref.age))
-	pref.gender         = sanitize_inlist(pref.gender, S.genders, pick(S.genders))
-	pref.spawnpoint     = sanitize_inlist(pref.spawnpoint, spawntypes(), initial(pref.spawnpoint))
-	pref.be_random_name = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
+	var/decl/species/S =   get_species_by_key(pref.species) || get_species_by_key(GLOB.using_map.default_species)
+	pref.gender             = sanitize_inlist(pref.gender, S.genders, pick(S.genders))
+	pref.spawnpoint         = sanitize_inlist(pref.spawnpoint, spawntypes(), initial(pref.spawnpoint))
+	pref.be_random_name     = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
 
 /datum/category_item/player_setup_item/physical/basic/content()
 	. = list()
@@ -43,7 +39,6 @@
 
 	var/decl/pronouns/G = get_pronouns_by_gender(pref.gender)
 	. += "<b>Gender:</b> <a href='?src=\ref[src];gender=1'>[capitalize(G.name)]</a><br>"
-	. += "<b>Age:</b> <a href='?src=\ref[src];age=1'>[pref.age]</a><br>"
 	. += "<b>Spawn Point</b>: <a href='?src=\ref[src];spawnpoint=1'>[pref.spawnpoint]</a>"
 	if(config.allow_Metadata)
 		. += "<br><b>OOC Notes:</b> <a href='?src=\ref[src];metadata=1'> Edit </a>"
@@ -85,13 +80,6 @@
 				ResetFacialHair()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
-	else if(href_list["age"])
-		var/new_age = input(user, "Choose your character's age:\n([S.min_age]-[S.max_age])", CHARACTER_PREFERENCE_INPUT_TITLE, pref.age) as num|null
-		if(new_age && CanUseTopic(user))
-			pref.age = max(min(round(text2num(new_age)), S.max_age), S.min_age)
-			pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		// The age may invalidate skill loadouts
-			return TOPIC_REFRESH
-
 	else if(href_list["spawnpoint"])
 		var/list/spawnkeys = list()
 		for(var/spawntype in spawntypes())
@@ -102,7 +90,7 @@
 		return TOPIC_REFRESH
 
 	else if(href_list["metadata"])
-		var/new_metadata = sanitize(input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , pref.metadata) as message|null)
+		var/new_metadata = sanitize(input(user, "Enter any information you'd like others to see, such as roleplay preferences:", "Game Preference" , pref.metadata) as message|null)
 		if(new_metadata && CanUseTopic(user))
 			pref.metadata = new_metadata
 			return TOPIC_REFRESH

@@ -16,7 +16,6 @@
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 
-	var/age = 30		//Player's age (pure fluff)
 	var/b_type = "A+"	//Player's bloodtype
 
 	var/list/worn_underwear = list()
@@ -94,8 +93,15 @@
 	var/became_older
 	var/became_younger
 
-	var/list/descriptors
+	var/list/appearance_descriptors
 
 	var/list/smell_cooldown
 
 	ai = /datum/ai/human
+
+/mob/living/carbon/human/proc/get_age()
+	. = LAZYACCESS(appearance_descriptors, "age") || 30
+
+/mob/living/carbon/human/proc/set_age(var/val)
+	var/datum/appearance_descriptor/age = LAZYACCESS(species.appearance_descriptors, "age")
+	LAZYSET(appearance_descriptors, "age", age.sanitize_value(val))

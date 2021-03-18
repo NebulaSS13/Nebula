@@ -108,15 +108,18 @@
 					L[skill] = level
 					sum += spent
 
-		points_by_job[job] = job.skill_points							//We compute how many points we had.
+		points_by_job[job] = job.skill_points                            // We compute how many points we had.
 		if(!job.no_skill_buffs)
-			points_by_job[job] += S.skills_from_age(age)				//Applies the species-appropriate age modifier.
-			points_by_job[job] += S.job_skill_buffs[job.type]			//Applies the per-job species modifier, if any.
+			points_by_job[job] += S.skills_from_age(get_character_age()) // Applies the species-appropriate age modifier.
+			points_by_job[job] += S.job_skill_buffs[job.type]            // Applies the per-job species modifier, if any.
 
 		if((points_by_job[job] >= sum) && sum)				//we didn't overspend, so use sanitized imported data
 			.[job] = L
 			points_by_job[job] -= sum						//if we overspent, or did no spending, default to not including the job at all
 		purge_skills_missing_prerequisites(job)
+
+/datum/preferences/proc/get_character_age()
+	return appearance_descriptors["age"] || 30
 
 /datum/preferences/proc/check_skill_prerequisites(datum/job/job, decl/hierarchy/skill/S)
 	if(!S.prerequisites)

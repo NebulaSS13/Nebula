@@ -78,7 +78,7 @@
 	var/mob/living/carbon/human/H = player.current
 	if(istype(H))
 		H.set_gender(pick(H.species.genders))
-		H.age = rand(25,45)
+		H.set_age(rand(25,45))
 		H.dna.ready_dna(H)
 
 	return

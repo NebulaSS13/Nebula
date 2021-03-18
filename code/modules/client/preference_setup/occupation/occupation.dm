@@ -159,7 +159,7 @@
 				else if(!job.player_old_enough(user.client))
 					var/available_in_days = job.available_in_days(user.client)
 					bad_message = "\[IN [(available_in_days)] DAYS]"
-				else if(LAZYACCESS(job.minimum_character_age, species_name) && user.client && (user.client.prefs.age < job.minimum_character_age[species_name]))
+				else if(LAZYACCESS(job.minimum_character_age, species_name) && user.client && (user.client.prefs.get_character_age() < job.minimum_character_age[species_name]))
 					bad_message = "\[MIN CHAR AGE: [job.minimum_character_age[species_name]]]"
 				else if(!job.is_species_allowed(S))
 					bad_message = "<b>\[SPECIES RESTRICTED]</b>"

@@ -16,7 +16,7 @@
 
 /decl/hierarchy/outfit/job/captain/post_equip(var/mob/living/carbon/human/H)
 	..()
-	if(H.age>49)
+	if(H.get_age() > 49)
 		// Since we can have something other than the default uniform at this
 		// point, check if we can actually attach the medal
 		var/obj/item/clothing/uniform = H.w_uniform

@@ -24,7 +24,7 @@
 		fingerprint = "N/A"
 
 	var/decl/pronouns/G = H.get_pronouns(ignore_coverings = TRUE)
-	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species_name()]\nGender: [capitalize(G.name)]\nAge: [H.age]\nPlace of Birth: [pob]\nFingerprint: [fingerprint]"
+	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species_name()]\nGender: [capitalize(G.name)]\nAge: [H.get_age()]\nPlace of Birth: [pob]\nFingerprint: [fingerprint]"
 
 /obj/item/passport/attack_self(mob/user)
 	user.visible_message(

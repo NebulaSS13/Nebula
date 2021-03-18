@@ -22,7 +22,7 @@
 			var/mob/living/carbon/human/kidmob = kid.holder.current
 			if(!istype(kidmob))
 				continue
-			if(abs(holdermob.age - kidmob.age) > 3)
+			if(abs(holdermob.get_age() - kidmob.get_age()) > 3)
 				creche -= kid		//No creepers please, it's okay if the pool is small.
 				continue
 			var/kidhome =    kidmob.get_cultural_value(TAG_HOMEWORLD)

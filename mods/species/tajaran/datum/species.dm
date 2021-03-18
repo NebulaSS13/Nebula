@@ -1,3 +1,16 @@
+/datum/appearance_descriptor/age/tajaran
+	standalone_value_descriptors = list(
+		"an infant" =       1,
+		"a toddler" =       3,
+		"a child" =         7,
+		"an adolescent" =  13,
+		"a young adult" =  18,
+		"an adult" =       30,
+		"middle-aged" =    55,
+		"aging" =          80,
+		"elderly" =       140
+	)
+
 /decl/species/tajaran
 	name = SPECIES_TAJARA
 	name_plural = "Tajaran"
@@ -8,8 +21,7 @@
 	sexybits_location = BP_GROIN
 	limb_blend = ICON_MULTIPLY
 
-	min_age = 17
-	max_age = 140
+	age_descriptor = /datum/appearance_descriptor/age/tajaran
 
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR

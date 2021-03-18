@@ -26,8 +26,12 @@
 	for(var/M in body_markings)
 		body_markings[M] = get_random_colour()
 
+	for(var/entry in current_species.appearance_descriptors)
+		var/datum/appearance_descriptor/descriptor = current_species.appearance_descriptors[entry]
+		if(istype(descriptor))
+			appearance_descriptors[descriptor.name] = descriptor.randomize_value()
+
 	backpack = GET_DECL(pick(subtypesof(/decl/backpack_outfit)))
-	age = rand(current_species.min_age, current_species.max_age)
 	b_type = RANDOM_BLOOD_TYPE
 	if(H)
 		copy_to(H)

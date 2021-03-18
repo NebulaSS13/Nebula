@@ -4,7 +4,7 @@
 		var/modify_x = 1
 		var/modify_y = 1
 		for(var/entry in descriptors)
-			var/datum/mob_descriptor/descriptor = species.descriptors[entry]
+			var/datum/appearance_descriptor/descriptor = species.descriptors[entry]
 			var/list/new_scale_info = descriptor.get_mob_scale_adjustments(descriptors[entry])
 			if(length(new_scale_info))
 				modify_x += new_scale_info[1]
@@ -12,7 +12,7 @@
 		.[1] *= modify_x
 		.[2] *= modify_y
 
-/datum/mob_descriptor/height/get_mob_scale_adjustments(var/offset_value)
+/datum/appearance_descriptor/height/get_mob_scale_adjustments(var/offset_value)
 	. = list(0, 0)
 	switch(offset_value)
 		if(1)
@@ -24,7 +24,7 @@
 		if(5)
 			.[2] =  0.06
 
-/datum/mob_descriptor/build/get_mob_scale_adjustments(var/offset_value)
+/datum/appearance_descriptor/build/get_mob_scale_adjustments(var/offset_value)
 	. = list(0, 0)
 	switch(offset_value)
 		if(1)
