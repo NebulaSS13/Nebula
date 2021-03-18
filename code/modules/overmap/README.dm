@@ -41,7 +41,7 @@ If it's player's main base (e.g Exodus), set 'base' var to 1, so it adds itself 
 If this place cannot be reached or left with EVA, set 'in_space' var to 0
 If you want exploration shuttles (look below) to be able to dock here, set up waypoints lists.
 generic_waypoints is list of landmark_tags of waypoints any shttle should be able to visit.
-restricted_waypoints is list of 'shuttle name = list(landmark_tags)' pairs for waypoints only those shuttles can visit
+restricted_waypoints is list of 'shuttle type = list(landmark_tags)' pairs for waypoints only those shuttles can visit
 
 *************************************************************
 # Helm console

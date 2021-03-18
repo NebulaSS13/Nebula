@@ -22,6 +22,10 @@
 		lanm.set_tag(null, initial_id_tag)
 	find_core()
 
+/obj/machinery/atmospherics/unary/engine/fusion/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_id_tag, map_hash)
+
 /obj/machinery/atmospherics/unary/engine/fusion/proc/find_core()
 	harvest_from = null
 	var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)

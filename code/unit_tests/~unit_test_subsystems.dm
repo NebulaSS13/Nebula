@@ -43,18 +43,22 @@ SUBSYSTEM_DEF(unit_tests)
 		if(istype(map_template, /datum/map_template/ruin/away_site))
 			report_progress("Skipping template '[map_template]' ([map_template.type]): Is an Away Site")
 			continue
-
-		// Suggestion: Do smart things here to squeeze as many templates as possible into the same Z-level
-		if(map_template.tallness == 1)
-			INCREMENT_WORLD_Z_SIZE
-			GLOB.using_map.sealed_levels += world.maxz
-			var/corner = locate(world.maxx/2, world.maxy/2, world.maxz)
-			log_unit_test("Loading template '[map_template]' ([map_template.type]) at [log_info_line(corner)]")
-			map_template.load(corner)
-		else // Multi-Z templates are loaded using different means
-			log_unit_test("Loading template '[map_template]' ([map_template.type]) at Z-level [world.maxz+1] with a tallness of [map_template.tallness]")
-			map_template.load_new_z()
+		load_template(map_template)
+		if(map_template.template_flags & TEMPLATE_FLAG_TEST_DUPLICATES)
+			load_template(map_template)
 	log_unit_test("Map Templates Loaded")
+
+/datum/controller/subsystem/unit_tests/proc/load_template(datum/map_template/map_template)
+	// Suggestion: Do smart things here to squeeze as many templates as possible into the same Z-level
+	if(map_template.tallness == 1)
+		INCREMENT_WORLD_Z_SIZE
+		GLOB.using_map.sealed_levels += world.maxz
+		var/corner = locate(world.maxx/2, world.maxy/2, world.maxz)
+		log_unit_test("Loading template '[map_template]' ([map_template.type]) at [log_info_line(corner)]")
+		map_template.load(corner)
+	else // Multi-Z templates are loaded using different means
+		log_unit_test("Loading template '[map_template]' ([map_template.type]) at Z-level [world.maxz+1] with a tallness of [map_template.tallness]")
+		map_template.load_new_z()
 
 /datum/controller/subsystem/unit_tests/proc/start_game()
 	if (GAME_STATE >= RUNLEVEL_POSTGAME)

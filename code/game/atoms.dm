@@ -82,6 +82,10 @@
 		updateVisibility(src)
 	. = ..()
 
+// This is called by the maploader prior to Initialize to perform static modifications to vars set on the map. Intended use case: adjust tag vars on duplicate templates.
+/atom/proc/modify_mapped_vars(map_hash)
+	SHOULD_CALL_PARENT(TRUE)
+
 /atom/proc/reveal_blood()
 	return
 

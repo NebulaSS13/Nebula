@@ -32,6 +32,10 @@
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.set_tag(null, initial_id_tag)
 
+/obj/machinery/power/fusion_core/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_id_tag, map_hash)
+
 /obj/machinery/power/fusion_core/Process()
 	if((stat & BROKEN) || !powernet || !owned_field)
 		Shutdown()

@@ -4,6 +4,10 @@
 	program = /datum/computer/file/embedded_program/docking/simple
 	var/tag_door
 
+/obj/machinery/embedded_controller/radio/simple_docking_controller/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(tag_door, map_hash)
+
 /obj/machinery/embedded_controller/radio/simple_docking_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 	var/datum/computer/file/embedded_program/docking/simple/docking_program = program

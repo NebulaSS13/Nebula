@@ -3,6 +3,7 @@
 	id = "mercenary_spawn"
 	suffixes = list("mercenary/mercenary_base.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/merc_shuttle)
+	template_flags = TEMPLATE_FLAG_TEST_DUPLICATES
 	apc_test_exempt_areas = list(
 		/area/map_template/merc_spawn = NO_SCRUBBER|NO_VENT
 	)

@@ -90,6 +90,7 @@
 #define TEMPLATE_FLAG_CLEAR_CONTENTS   4 // if it should destroy objects it spawns on top of
 #define TEMPLATE_FLAG_NO_RUINS         8 // if it should forbid ruins from spawning on top of it
 #define TEMPLATE_FLAG_NO_RADS          16// Removes all radiation from the template after spawning.
+#define TEMPLATE_FLAG_TEST_DUPLICATES  32// Makes unit testing attempt to spawn mutliple copies of this template. Assumes unit testing is spawning at least one copy.
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.

@@ -2695,7 +2695,7 @@
 	dir = 8
 	},
 /obj/machinery/door/window/brigdoor/eastright{
-	id = "Cell 2"
+	id_tag = "Cell 2"
 	},
 /obj/effect/floor_decal/corner/red{
 	icon_state = "corner_white";
@@ -3549,7 +3549,7 @@
 	dir = 8
 	},
 /obj/machinery/door/window/brigdoor/eastright{
-	id = "Cell 1"
+	id_tag = "Cell 1"
 	},
 /obj/effect/floor_decal/corner/red{
 	icon_state = "corner_white";

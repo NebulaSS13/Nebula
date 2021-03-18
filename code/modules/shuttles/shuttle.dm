@@ -2,6 +2,7 @@
 
 /datum/shuttle
 	var/name = ""
+	var/display_name = "" // User-facing; defaults to name.
 	var/warmup_time = 0
 	var/moving_status = SHUTTLE_IDLE
 
@@ -29,16 +30,26 @@
 	var/mothershuttle //tag of mothershuttle
 	var/motherdock    //tag of mothershuttle landmark, defaults to starting location
 
-/datum/shuttle/New(_name, var/obj/effect/shuttle_landmark/initial_location)
+/datum/shuttle/New(map_hash, var/obj/effect/shuttle_landmark/initial_location)
 	..()
-	if(_name)
-		src.name = _name
+	if(!display_name)
+		display_name = name
+	if(map_hash) // We adjust all tag vars, including name, for the map on which they are loaded. This is also done on subtypes.
+		ADJUST_TAG_VAR(name, map_hash)
+		ADJUST_TAG_VAR(current_location, map_hash)
+		ADJUST_TAG_VAR(logging_home_tag, map_hash)
+		ADJUST_TAG_VAR(mothershuttle, map_hash)
+		ADJUST_TAG_VAR(motherdock, map_hash)
 
 	var/list/areas = list()
 	if(!islist(shuttle_area))
 		shuttle_area = list(shuttle_area)
 	for(var/T in shuttle_area)
-		var/area/A = locate(T)
+		var/area/A
+		if(map_hash && islist(SSshuttle.map_hash_to_areas[map_hash]))
+			A = SSshuttle.map_hash_to_areas[map_hash][T] // We try to find the correct area of the given type.
+		else
+			A = locate(T) // But if this is a mainmap shuttle, there is only one anyway so just find it.
 		if(!istype(A))
 			CRASH("Shuttle \"[name]\" couldn't locate area [T].")
 		areas += A
@@ -163,7 +174,7 @@
 	if(current_location == destination)
 		log_error("Error when attempting to force move a shuttle: Attempted to move [src] to its current location [destination].")
 		return FALSE
-	if(destination.shuttle_restricted != name)
+	if(destination.shuttle_restricted != type)
 		log_error("Error when attempting to force move a shuttle: Destination location not restricted for [src]'s use.")
 		return FALSE
 	
@@ -288,3 +299,16 @@
 	if(!next_location)
 		return "None"
 	return next_location.name
+
+// Testing
+// Returns either null (all good) or a string explaining any issues.
+/datum/shuttle/proc/test_landmark_setup()
+	if(!current_location)
+		if(initial(current_location))
+			return "Starting location (tag: [initial(current_location)]) was not found."
+		else
+			return "Starting location was not set or forwarded properly."
+	if(!motherdock && initial(motherdock))
+		return "The motherdock (tag: [initial(motherdock)]) was not found."
+	if(!mothershuttle && initial(mothershuttle))
+		return "The mothershuttle (tag: [initial(mothershuttle)]) was not found."

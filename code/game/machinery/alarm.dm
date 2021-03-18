@@ -164,6 +164,10 @@
 		send_signal(device_tag, list()) // ask for updates; they initialized before us and we didn't get the data
 	queue_icon_update()
 
+/obj/machinery/alarm/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(alarm_id, map_hash)
+
 /obj/machinery/alarm/get_req_access()
 	if(!locked)
 		return list()

@@ -9,7 +9,7 @@
 	var/list/initial_restricted_waypoints //For use with non-automatic landmarks (automatic ones add themselves).
 
 	var/list/generic_waypoints = list()    //waypoints that any shuttle can use
-	var/list/restricted_waypoints = list() //waypoints for specific shuttles
+	var/list/restricted_waypoints = list() //waypoints for specific shuttle types
 	var/docking_codes
 
 	var/start_x			//Coordinates for self placing
@@ -76,6 +76,21 @@
 	LAZYADD(SSshuttle.sectors_to_initialize, src) //Queued for further init. Will populate the waypoint lists; waypoints not spawned yet will be added in as they spawn.
 	SSshuttle.clear_init_queue()
 
+/obj/effect/overmap/visitable/modify_mapped_vars(map_hash)
+	..()
+	if(map_hash)
+		var/new_generic
+		for(var/old_tag in initial_generic_waypoints)
+			ADJUST_TAG_VAR(old_tag, map_hash)
+			LAZYADD(new_generic, old_tag)
+		initial_generic_waypoints = new_generic
+		for(var/shuttle_type in initial_restricted_waypoints)
+			var/new_restricted = list()
+			for(var/old_tag in initial_restricted_waypoints[shuttle_type])
+				ADJUST_TAG_VAR(old_tag, map_hash)
+				new_restricted += old_tag
+			initial_restricted_waypoints[shuttle_type] = new_restricted
+
 //This is called later in the init order by SSshuttle to populate sector objects. Importantly for subtypes, shuttles will be created by then.
 /obj/effect/overmap/visitable/proc/populate_sector_objects()
 
@@ -121,28 +136,28 @@
 				check_sectors |= next_sector
 
 //If shuttle_name is false, will add to generic waypoints; otherwise will add to restricted. Does not do checks.
-/obj/effect/overmap/visitable/proc/add_landmark(obj/effect/shuttle_landmark/landmark, shuttle_name)
-	landmark.sector_set(src, shuttle_name)
-	if(shuttle_name)
-		LAZYADD(restricted_waypoints[shuttle_name], landmark)
+/obj/effect/overmap/visitable/proc/add_landmark(obj/effect/shuttle_landmark/landmark, shuttle_restricted_type)
+	landmark.sector_set(src, shuttle_restricted_type)
+	if(shuttle_restricted_type)
+		LAZYADD(restricted_waypoints[shuttle_restricted_type], landmark)
 	else
 		generic_waypoints += landmark
 
-/obj/effect/overmap/visitable/proc/remove_landmark(obj/effect/shuttle_landmark/landmark, shuttle_name)
-	if(shuttle_name)
-		var/list/shuttles = restricted_waypoints[shuttle_name]
+/obj/effect/overmap/visitable/proc/remove_landmark(obj/effect/shuttle_landmark/landmark, shuttle_restricted_type)
+	if(shuttle_restricted_type)
+		var/list/shuttles = restricted_waypoints[shuttle_restricted_type]
 		LAZYREMOVE(shuttles, landmark)
 	else
 		generic_waypoints -= landmark
 
-/obj/effect/overmap/visitable/proc/get_waypoints(var/shuttle_name)
+/obj/effect/overmap/visitable/proc/get_waypoints(var/shuttle_type)
 	. = list()
 	for(var/obj/effect/overmap/visitable/contained in src)
-		. += contained.get_waypoints(shuttle_name)
+		. += contained.get_waypoints(shuttle_type)
 	for(var/thing in generic_waypoints)
 		.[thing] = name
-	if(shuttle_name in restricted_waypoints)
-		for(var/thing in restricted_waypoints[shuttle_name])
+	if(shuttle_type in restricted_waypoints)
+		for(var/thing in restricted_waypoints[shuttle_type])
 			.[thing] = name
 
 /obj/effect/overmap/visitable/proc/generate_skybox()

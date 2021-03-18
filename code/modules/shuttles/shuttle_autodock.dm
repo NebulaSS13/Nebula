@@ -6,6 +6,7 @@
 	var/current_dock_target
 	//ID of the controller on the shuttle
 	var/dock_target = null
+	var/docking_cues = null // A list of string cues -> controller tags, if we have multiple controllers. On landmarks set special_dock_target = list(our type -> docking cue) to determine which dock is used.
 	var/datum/computer/file/embedded_program/docking/shuttle_docking_controller
 	var/docking_codes
 
@@ -18,8 +19,13 @@
 	category = /datum/shuttle/autodock
 	flags = SHUTTLE_FLAGS_PROCESS | SHUTTLE_FLAGS_ZERO_G
 
-/datum/shuttle/autodock/New(var/_name, var/obj/effect/shuttle_landmark/start_waypoint)
-	..(_name, start_waypoint)
+/datum/shuttle/autodock/New(var/map_hash, var/obj/effect/shuttle_landmark/start_waypoint)
+	..()
+	if(map_hash)
+		ADJUST_TAG_VAR(landmark_transition, map_hash)
+		ADJUST_TAG_VAR(dock_target, map_hash)
+		for(var/cue in docking_cues)
+			ADJUST_TAG_VAR(docking_cues[cue], map_hash)
 
 	//Initial dock
 	active_docking_controller = current_location.docking_controller
@@ -53,8 +59,8 @@
 	..()
 
 /datum/shuttle/autodock/proc/update_docking_target(var/obj/effect/shuttle_landmark/location)
-	if(location && location.special_dock_targets && location.special_dock_targets[name])
-		current_dock_target = location.special_dock_targets[name]
+	if(location && docking_cues && location.special_dock_targets && location.special_dock_targets[type])
+		current_dock_target = docking_cues[location.special_dock_targets[type]]
 	else
 		current_dock_target = dock_target
 	shuttle_docking_controller = SSshuttle.docking_registry[current_dock_target]
@@ -189,3 +195,10 @@
 
 /obj/effect/shuttle_landmark/transit
 	flags = SLANDMARK_FLAG_ZERO_G
+
+/datum/shuttle/autodock/test_landmark_setup()
+	. = ..()
+	if(.)
+		return
+	if(!landmark_transition && initial(landmark_transition))
+		return "A transition landmark was expected (tag: [initial(landmark_transition)]) but not found."

@@ -10,6 +10,10 @@
 	icon_state = "shuttle"
 	moving_state = "shuttle_moving"
 
+/obj/effect/overmap/visitable/ship/landable/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(shuttle, map_hash)
+
 /obj/effect/overmap/visitable/ship/landable/Destroy()
 	GLOB.shuttle_moved_event.unregister(SSshuttle.shuttles[shuttle], src)
 	return ..()
@@ -61,7 +65,7 @@
 
 	var/turf/center_loc = locate(round(world.maxx/2), round(world.maxy/2), world.maxz)
 	landmark = new (center_loc, shuttle)
-	add_landmark(landmark, shuttle)
+	add_landmark(landmark) // we don't restrict it but it does a more strict check in is_valid anyway
 
 	var/visitor_dir = fore_dir
 	for(var/landmark_name in list("FORE", "PORT", "AFT", "STARBOARD"))
@@ -106,6 +110,9 @@
 /obj/effect/shuttle_landmark/ship/cannot_depart(datum/shuttle/shuttle)
 	if(LAZYLEN(visitors))
 		return "Cannot maneuver with other shuttles nearby."
+
+/obj/effect/shuttle_landmark/ship/is_valid(datum/shuttle/shuttle)
+	return (shuttle.name == shuttle_name) && ..()
 
 /obj/effect/shuttle_landmark/visiting_shuttle
 	flags = SLANDMARK_FLAG_AUTOSET | SLANDMARK_FLAG_ZERO_G | SLANDMARK_FLAG_DISCONNECTED

@@ -20,6 +20,10 @@
 	. = ..()
 	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_WIRED)
 
+/obj/machinery/destructive_analyzer/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_network_id, map_hash)
+
 /obj/machinery/destructive_analyzer/RefreshParts()
 	var/T = 0
 	for(var/obj/item/stock_parts/S in src)

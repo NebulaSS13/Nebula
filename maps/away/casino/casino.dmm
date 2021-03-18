@@ -233,7 +233,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	id_tag = "admin_shuttle_dock_pump"
+	id_tag = "casino_dock_airlock"
 	},
 /obj/item/radio/intercom{
 	dir = 8;
@@ -261,7 +261,7 @@
 "aN" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
-	id_tag = "admin_shuttle_dock_pump"
+	id_tag = "casino_dock_airlock"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10
@@ -1480,7 +1480,6 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/power/solar{
-	id = "auxsolarstarboard";
 	name = "Starboard Auxiliary Solar Array"
 	},
 /obj/effect/floor_decal/solarpanel,
@@ -1743,7 +1742,6 @@
 "eI" = (
 /obj/structure/cable/yellow,
 /obj/machinery/power/solar{
-	id = "auxsolarstarboard";
 	name = "Starboard Auxiliary Solar Array"
 	},
 /obj/effect/floor_decal/solarpanel,
@@ -2198,7 +2196,6 @@
 /area/casino/casino_mainfloor)
 "fM" = (
 /obj/machinery/power/solar{
-	id = "auxsolarstarboard";
 	name = "Starboard Auxiliary Solar Array"
 	},
 /obj/structure/cable/yellow,
@@ -2580,7 +2577,6 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/power/solar{
-	id = "auxsolarsport";
 	name = "Port Auxiliary Solar Array"
 	},
 /obj/effect/floor_decal/solarpanel,
@@ -2704,7 +2700,6 @@
 "hk" = (
 /obj/structure/cable/yellow,
 /obj/machinery/power/solar{
-	id = "auxsolarsport";
 	name = "Port Auxiliary Solar Array"
 	},
 /obj/effect/floor_decal/solarpanel,
@@ -2728,7 +2723,6 @@
 /area/casino/casino_solar_control)
 "hm" = (
 /obj/machinery/power/solar_control{
-	id = "solar";
 	name = "Solar Control";
 	track = 0
 	},

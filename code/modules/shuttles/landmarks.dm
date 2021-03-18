@@ -11,7 +11,7 @@
 	var/landmark_tag
 	//ID of the controller on the dock side
 	var/datum/computer/file/embedded_program/docking/docking_controller
-	//ID of controller used for this landmark for shuttles with multiple ones.
+	//Docking cues for shuttles with multiple docking controllers. Format: shuttle type -> string cue. On the shuttle, set docking_cues as well.
 	var/list/special_dock_targets
 
 	//when the shuttle leaves this landmark, it will leave behind the base area
@@ -19,7 +19,7 @@
 	var/area/base_area
 	//Will also leave this type of turf behind if set, if the turfs do not have prev_type set.
 	var/turf/base_turf
-	//Name of the shuttle, null for generic waypoint
+	//Type path of a shuttle to which this landmark is restricted, null for generic waypoint.
 	var/shuttle_restricted
 	var/flags = 0
 
@@ -51,6 +51,12 @@
 		if(location && location.docking_codes)
 			docking_controller.docking_codes = location.docking_codes
 
+/obj/effect/shuttle_landmark/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(landmark_tag, map_hash)
+	if(docking_controller)
+		ADJUST_TAG_VAR(docking_controller, map_hash)
+
 /obj/effect/shuttle_landmark/forceMove()
 	var/obj/effect/overmap/visitable/map_origin = map_sectors["[z]"]
 	. = ..()
@@ -62,8 +68,8 @@
 			map_destination.add_landmark(src, shuttle_restricted)
 
 //Called when the landmark is added to an overmap sector.
-/obj/effect/shuttle_landmark/proc/sector_set(var/obj/effect/overmap/visitable/O, shuttle_name)
-	shuttle_restricted = shuttle_name
+/obj/effect/shuttle_landmark/proc/sector_set(var/obj/effect/overmap/visitable/O, shuttle_restricted_type)
+	shuttle_restricted = shuttle_restricted_type
 
 /obj/effect/shuttle_landmark/proc/is_valid(var/datum/shuttle/shuttle)
 	if(shuttle.current_location == src)

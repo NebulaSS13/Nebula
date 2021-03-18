@@ -2,6 +2,7 @@
 	name = "Ninja Base"
 	id = "ninja_spawn"
 	suffixes = list("ninja/ninja_base.dmm")
+	modify_tag_vars = FALSE
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/ninja)
 	apc_test_exempt_areas = list(
 		/area/map_template/ninja_dojo = NO_SCRUBBER|NO_VENT|NO_APC
@@ -16,7 +17,6 @@
 		)
 	shuttle_area = /area/map_template/ninja_dojo/start
 	current_location = "nav_ninja_start"
-	landmark_transition = "nav_ninja_transition"
 	announcer = "Proximity Sensor Array"
 	arrival_message = "Attention, anomalous sensor reading detected entering vessel proximity."
 	departure_message = "Attention, anomalous sensor reading detected leaving vessel proximity."
@@ -24,10 +24,6 @@
 /obj/effect/shuttle_landmark/ninja/start
 	name = "Clan Dojo"
 	landmark_tag = "nav_ninja_start"
-
-/obj/effect/shuttle_landmark/ninja/internim
-	name = "In transit"
-	landmark_tag = "nav_ninja_transition"
 
 // Areas
 /area/map_template/ninja_dojo

@@ -11,8 +11,8 @@
 	var/skill_needed = SKILL_BASIC
 	var/operator_skill = SKILL_MIN
 
-/datum/shuttle/autodock/overmap/New(var/_name, var/obj/effect/shuttle_landmark/start_waypoint)
-	..(_name, start_waypoint)
+/datum/shuttle/autodock/overmap/New(var/map_hash, var/obj/effect/shuttle_landmark/start_waypoint)
+	..()
 	refresh_fuel_ports_list()
 
 /datum/shuttle/autodock/overmap/proc/refresh_fuel_ports_list() //loop through all
@@ -67,7 +67,7 @@
 /datum/shuttle/autodock/overmap/proc/get_possible_destinations()
 	var/list/res = list()
 	for (var/obj/effect/overmap/visitable/S in range(get_turf(waypoint_sector(current_location)), range))
-		var/list/waypoints = S.get_waypoints(name)
+		var/list/waypoints = S.get_waypoints(type)
 		for(var/obj/effect/shuttle_landmark/LZ in waypoints)
 			if(LZ.is_valid(src))
 				res["[waypoints[LZ]] - [LZ.name]"] = LZ

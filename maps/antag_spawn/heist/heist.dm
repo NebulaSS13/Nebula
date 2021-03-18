@@ -5,6 +5,7 @@
 	name = "Heist Base"
 	id = "heist_spawn"
 	suffixes = list("heist/heist_base.dmm")
+	modify_tag_vars = FALSE
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/skipjack)
 	apc_test_exempt_areas = list(
 		/area/map_template/skipjack_station = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -16,13 +17,11 @@
 	defer_initialisation = TRUE
 	warmup_time = 0
 	destination_tags = list(
-		"nav_skipjack_dock",
 		"nav_skipjack_start"
 		)
 	shuttle_area =  /area/map_template/skipjack_station/start
 	dock_target = "skipjack_shuttle"
 	current_location = "nav_skipjack_start"
-	landmark_transition = "nav_skipjack_transition"
 	announcer = "Proximity Sensor Array"
 	home_waypoint = "nav_skipjack_start"
 	arrival_message = "Attention, vessel detected entering vessel proximity."
@@ -32,15 +31,6 @@
 	name = "Raider Outpost"
 	landmark_tag = "nav_skipjack_start"
 	docking_controller = "skipjack_base"
-
-/obj/effect/shuttle_landmark/skipjack/internim
-	name = "In transit"
-	landmark_tag = "nav_skipjack_transition"
-
-/obj/effect/shuttle_landmark/skipjack/dock
-	name = "Docking Port"
-	landmark_tag = "nav_skipjack_dock"
-	docking_controller = "skipjack_shuttle_dock_airlock"
 
 //Areas
 /area/map_template/skipjack_station

@@ -27,7 +27,7 @@
 	max_speed = 1/(1 SECOND)
 	known = 1
 	initial_restricted_waypoints = list(
-		"Mule" = list("nav_mule_start")
+		/datum/shuttle/autodock/overmap/mule = list("nav_mule_start")
 	)
 
 /obj/effect/submap_landmark/joinable_submap/liberia

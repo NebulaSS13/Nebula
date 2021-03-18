@@ -20,6 +20,10 @@
 	. = ..()
 	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, signal_strength)
 
+/obj/item/stock_parts/network_lock/modify_mapped_vars(map_hash)
+	..()
+	ADJUST_TAG_VAR(initial_network_id, map_hash)
+
 /obj/item/stock_parts/network_lock/emag_act(remaining_charges, mob/user, emag_source)
 	. = ..()
 	if(length(req_access) && istype(loc, /obj/machinery)) // Don't emag it outside; you can just cut access without it anyway.
