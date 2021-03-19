@@ -6,7 +6,7 @@ SUBSYSTEM_DEF(networking)
 	priority = SS_PRIORITY_COMPUTER_NETS
 	flags = SS_BACKGROUND | SS_NO_INIT
 	wait = 2 SECOND
-	runlevels = RUNLEVEL_INIT | RUNLEVELS_DEFAULT
+	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
 
 	var/list/networks = list()
 	var/list/connection_queue = list()

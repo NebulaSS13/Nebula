@@ -65,8 +65,7 @@
 		airlock = null
 	qdel(electronics)
 	electronics = null
-	..()
-
+	return ..()
 
 // Interact with the electronics to set access requirements.
 /obj/item/airlock_brace/attack_self(mob/user)

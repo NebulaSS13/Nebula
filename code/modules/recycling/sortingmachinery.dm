@@ -501,7 +501,7 @@
 /obj/machinery/disposal/deliveryChute/Destroy()
 	if(trunk)
 		trunk.linked = null
-	..()
+	return ..()
 
 /obj/item/stack/package_wrap/cyborg
 	name = "package wrapper synthesizer"
