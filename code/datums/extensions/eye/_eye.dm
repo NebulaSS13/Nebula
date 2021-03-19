@@ -49,7 +49,8 @@
 	GLOB.destroyed_event.register(current_looker, src, /datum/extension/eye/proc/unlook)
 	GLOB.destroyed_event.register(extension_eye, src, /datum/extension/eye/proc/unlook)
 
-	GLOB.stat_set_event.register(current_looker, src, /datum/extension/eye/proc/unlook)
+	if(isliving(current_looker))
+		GLOB.stat_set_event.register(current_looker, src, /datum/extension/eye/proc/unlook)
 	GLOB.logged_out_event.register(current_looker, src, /datum/extension/eye/proc/unlook)
 
 	return TRUE
@@ -62,7 +63,8 @@
 	GLOB.destroyed_event.unregister(current_looker, src, /datum/extension/eye/proc/unlook)
 	GLOB.destroyed_event.unregister(extension_eye, src, /datum/extension/eye/proc/unlook)
 
-	GLOB.stat_set_event.unregister(current_looker, src, /datum/extension/eye/proc/unlook)
+	if(isliving(current_looker))
+		GLOB.stat_set_event.unregister(current_looker, src, /datum/extension/eye/proc/unlook)
 	GLOB.logged_out_event.unregister(current_looker, src, /datum/extension/eye/proc/unlook)
 
 	QDEL_NULL(extension_eye)

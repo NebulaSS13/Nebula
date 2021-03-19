@@ -759,7 +759,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	GLOB.moved_event.register(user, src, /obj/item/proc/unzoom)
 	GLOB.dir_set_event.register(user, src, /obj/item/proc/unzoom)
 	GLOB.item_unequipped_event.register(src, src, /obj/item/proc/zoom_drop)
-	GLOB.stat_set_event.register(user, src, /obj/item/proc/unzoom)
+	if(isliving(user))
+		GLOB.stat_set_event.register(user, src, /obj/item/proc/unzoom)
 
 /obj/item/proc/zoom_drop(var/obj/item/I, var/mob/user)
 	unzoom(user)
@@ -773,7 +774,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	GLOB.moved_event.unregister(user, src, /obj/item/proc/unzoom)
 	GLOB.dir_set_event.unregister(user, src, /obj/item/proc/unzoom)
 	GLOB.item_unequipped_event.unregister(src, src, /obj/item/proc/zoom_drop)
-	GLOB.stat_set_event.unregister(user, src, /obj/item/proc/unzoom)
+	if(isliving(user))
+		GLOB.stat_set_event.unregister(user, src, /obj/item/proc/unzoom)
 
 	if(!user.client)
 		return
