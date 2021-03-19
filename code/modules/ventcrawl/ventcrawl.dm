@@ -106,7 +106,8 @@ var/list/ventcrawl_machinery = list(
 				break
 
 	if(vent_found)
-		if(vent_found.network && (vent_found.network.normal_members.len || vent_found.network.line_members.len))
+		var/datum/pipe_network/network = vent_found.network_in_dir(vent_found.dir)
+		if(network && (network.normal_members.len || network.line_members.len))
 
 			to_chat(src, "You begin climbing into the ventilation system...")
 			if(vent_found.air_contents && !issilicon(src))

@@ -50,18 +50,23 @@ var/list/shutoff_valves = list()
 /obj/machinery/atmospherics/valve/shutoff/Process()
 	..()
 
-	if (!network_node1 || !network_node2)
-		if(open)
-			close()
+	var/directions = initialize_directions
+	var/leaking = FALSE
+	for(var/node in nodes_to_networks)
+		directions &= ~get_dir(src, node) // connected in this direction
+		var/datum/pipe_network/net = nodes_to_networks[node]
+		if(length(net.leaks))
+			leaking = TRUE
+
+	if(directions && open) // disconnected on one side.
+		close()
 		return
 
-	if (!close_on_leaks)
-		if (!open)
-			open()
+	if(!close_on_leaks && !open)
+		open()
 		return
 
-	if (network_node1.leaks.len || network_node2.leaks.len)
-		if (open)
-			close()
-	else if (!open)
+	if(leaking && open)
+		close()
+	else if(!leaking && !open)
 		open()

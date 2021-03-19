@@ -9,11 +9,6 @@
 	initialize_directions = SOUTH
 
 	var/obj/machinery/portable_atmospherics/connected_device
-
-	var/obj/machinery/atmospherics/node
-
-	var/datum/pipe_network/network
-
 	var/on = 0
 	use_power = POWER_USE_OFF
 
@@ -30,17 +25,10 @@
 
 /obj/machinery/atmospherics/portables_connector/on_update_icon()
 	icon_state = "connector"
-
-/obj/machinery/atmospherics/portables_connector/update_underlays()
-	if(..())
-		underlays.Cut()
-		var/turf/T = get_turf(src)
-		if(!istype(T))
-			return
-		add_underlay(T, node, dir)
+	build_device_underlays(FALSE)
 
 /obj/machinery/atmospherics/portables_connector/hide(var/i)
-	update_underlays()
+	update_icon()
 
 /obj/machinery/atmospherics/portables_connector/Process()
 	..()
@@ -49,85 +37,23 @@
 	if(!connected_device)
 		on = 0
 		return
-	if(network)
-		network.update = 1
+	update_networks()
 	return 1
-
-// Housekeeping and pipe network stuff below
-/obj/machinery/atmospherics/portables_connector/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
-	if((reference == node) && (network != new_network))
-		qdel(network)
-		network = new_network
-
-	new_network.normal_members |= src
 
 /obj/machinery/atmospherics/portables_connector/Destroy()
 	if(connected_device)
 		connected_device.disconnect()
-
-	if(node)
-		node.disconnect(src)
-		qdel(network)
-
-	node = null
-
 	. = ..()
 
-/obj/machinery/atmospherics/portables_connector/atmos_init()
-	..()
-	if(node) return
-
-	var/node_connect = dir
-
-	for(var/obj/machinery/atmospherics/target in get_step(src,node_connect))
-		if(target.initialize_directions & get_dir(target,src))
-			if (check_connect_types(target,src))
-				node = target
-				break
-
-	update_icon()
-	update_underlays()
-
-/obj/machinery/atmospherics/portables_connector/build_network()
-	if(!network && node)
-		network = new /datum/pipe_network()
-		network.normal_members += src
-		network.build_network(node, src)
-
-
 /obj/machinery/atmospherics/portables_connector/return_network(obj/machinery/atmospherics/reference)
-	build_network()
-
-	if(reference==node)
-		return network
-
-	if(reference==connected_device)
-		return network
-
-	return null
-
-/obj/machinery/atmospherics/portables_connector/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
-	if(network == old_network)
-		network = new_network
-
-	return 1
+	. = ..()
+	if(reference == connected_device) // Legacy carryover; unsure why this is supported, though.
+		if(LAZYLEN(nodes_to_networks))
+			return nodes_to_networks[nodes_to_networks[1]]
 
 /obj/machinery/atmospherics/portables_connector/return_network_air(datum/pipe_network/reference)
-	var/list/results = list()
-
 	if(connected_device)
-		results += connected_device.air_contents
-
-	return results
-
-/obj/machinery/atmospherics/portables_connector/disconnect(obj/machinery/atmospherics/reference)
-	if(reference==node)
-		qdel(network)
-		node = null
-
-	update_underlays()
-
-	return null
+		return list(connected_device.air_contents)
 
 /obj/machinery/atmospherics/portables_connector/deconstruction_pressure_check()
 	var/datum/gas_mixture/int_air = return_air()

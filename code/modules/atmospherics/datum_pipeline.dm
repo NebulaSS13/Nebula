@@ -113,7 +113,7 @@
 
 	for(var/obj/machinery/atmospherics/pipe/edge in edges)
 		for(var/obj/machinery/atmospherics/result in edge.pipeline_expansion())
-			if(!istype(result,/obj/machinery/atmospherics/pipe) && (result!=reference))
+			if(!istype(result,/obj/machinery/atmospherics/pipe))
 				result.network_expand(new_network, edge)
 
 /datum/pipeline/proc/return_network(obj/machinery/atmospherics/reference)

@@ -7,12 +7,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/unary_atmos/construct(var/obj/machinery/atmospherics/unary/U)
-	//TODO: Move this stuff into the relevant constructor when pipe/construction.dm is cleaned up.
-	U.atmos_init()
-	U.build_network()
-	if (U.node)
-		U.node.atmos_init()
-		U.node.build_network()
+	U.build(src)
 
 /obj/item/stock_parts/circuitboard/unary_atmos/heater
 	name = "circuitboard (gas heating system)"

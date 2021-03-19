@@ -27,9 +27,7 @@ Pipelines + Other Objects -> Pipe network
 	var/initialize_directions = 0
 	var/pipe_color
 
-	var/global/datum/pipe_icon_manager/icon_manager
-	var/obj/machinery/atmospherics/node1
-	var/obj/machinery/atmospherics/node2
+	var/list/nodes_to_networks // lazylist of node -> network to which the node connection belongs if any
 
 	var/atmos_initalized = FALSE
 	var/build_icon = 'icons/obj/pipe-item.dmi'
@@ -39,9 +37,6 @@ Pipelines + Other Objects -> Pipe network
 	var/rotate_class = PIPE_ROTATE_STANDARD
 
 /obj/machinery/atmospherics/Initialize()
-	if(!icon_manager)
-		icon_manager = new()
-
 	if(!pipe_color)
 		pipe_color = color
 	color = null
@@ -52,8 +47,37 @@ Pipelines + Other Objects -> Pipe network
 	set_dir(dir) // Does full dir init.
 	. = ..()
 
+/obj/machinery/atmospherics/Destroy()
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+		QDEL_NULL(nodes_to_networks[node])
+		node.disconnect(src)
+	nodes_to_networks = null
+	. = ..()
+
 /obj/machinery/atmospherics/proc/atmos_init()
 	atmos_initalized = TRUE
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+		QDEL_NULL(nodes_to_networks[node])
+	nodes_to_networks = null
+	for(var/direction in GLOB.cardinal)
+		if(direction & initialize_directions)
+			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
+				if((target.initialize_directions & get_dir(target,src)) && check_connect_types(target, src))
+					LAZYDISTINCTADD(nodes_to_networks, target)
+	update_icon()
+
+/obj/machinery/atmospherics/proc/nodes_in_dir(var/direction)
+	. = list()
+	for(var/node in nodes_to_networks)
+		if(get_dir(src, node) == direction)
+			. += node
+
+/obj/machinery/atmospherics/proc/network_in_dir(var/direction)
+	if(!LAZYLEN(nodes_to_networks))
+		return
+	for(var/node in nodes_in_dir(direction))
+		if(nodes_to_networks[node])
+			return nodes_to_networks[node]
 
 /obj/machinery/atmospherics/hide(var/do_hide)
 	if(do_hide && level == 1)
@@ -61,35 +85,46 @@ Pipelines + Other Objects -> Pipe network
 	else
 		reset_plane_and_layer()
 
-/obj/machinery/atmospherics/proc/add_underlay(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type)
+/obj/machinery/atmospherics/proc/add_underlay(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type, var/default_state = "exposed")
+	var/state = default_state
 	if(node)
-		if(!T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))			
-			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "down" + icon_connect_type)
+		if(T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+			state = "down"
 		else
-			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "intact" + icon_connect_type)
-	else
-		underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "exposed" + icon_connect_type)
+			state = "intact"
 
-/obj/machinery/atmospherics/proc/update_underlays()
-	if(check_icon_cache())
-		return 1
-	else
-		return 0
+	var/image/I = image('icons/atmos/pipe_underlays.dmi', "[state][icon_connect_type]", dir = direction)
+	I.color = color_cache_name(node)
+	underlays += I
+
+// Code sharing for non-pipe devices
+/obj/machinery/atmospherics/proc/build_device_underlays(hide_hidden_pipes = TRUE)
+	underlays.Cut()
+	var/turf/T = get_turf(src)
+	if(!istype(T))
+		return
+	var/disconnected_directions = initialize_directions
+	var/visible_directions = 0
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+		var/node_dir = get_dir(src, node)
+		disconnected_directions &= ~node_dir
+		if(hide_hidden_pipes && !T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+			continue
+		else
+			add_underlay(T, node, node_dir, node.icon_connect_type)
+			visible_directions |= node_dir
+	for(var/direction in GLOB.cardinal)
+		if(disconnected_directions & direction)
+			add_underlay(T, null, direction) // adds a disconnected underlay there
+			visible_directions |= direction
+
+	return visible_directions // returns flag with all directions in which a visible underlay was added
 
 /obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/atmos1, obj/machinery/atmospherics/atmos2)
 	return (atmos1.connect_types & atmos2.connect_types)
 
 /obj/machinery/atmospherics/proc/check_connect_types_construction(obj/machinery/atmospherics/atmos1, obj/item/pipe/pipe2)
 	return (atmos1.connect_types & pipe2.connect_types)
-
-/obj/machinery/atmospherics/proc/check_icon_cache(var/safety = 0)
-	if(!istype(icon_manager))
-		if(!safety) //to prevent infinite loops
-			icon_manager = new()
-			check_icon_cache(1)
-		return 0
-
-	return 1
 
 /obj/machinery/atmospherics/proc/color_cache_name(var/obj/machinery/atmospherics/node)
 	//Don't use this for standard pipes
@@ -108,35 +143,75 @@ Pipelines + Other Objects -> Pipe network
 	// Check to see if should be added to network. Add self if so and adjust variables appropriately.
 	// Note don't forget to have neighbors look as well!
 
-	return null
+	// Default behavior is: one network for all nodes in a given dir
+	for(var/obj/machinery/atmospherics/node as anything in nodes_in_dir(get_dir(src, reference)))
+		if(nodes_to_networks[node] != new_network)
+			qdel(nodes_to_networks[node])
+			nodes_to_networks[node] = new_network
+			if(node != reference)
+				node.network_expand(new_network, src)
+
+	new_network.normal_members |= src
+
+// argument null -> update all
+/obj/machinery/atmospherics/proc/update_networks(direction)
+	for(var/node in nodes_to_networks)
+		if(direction && !(get_dir(src, node) & direction))
+			continue
+		var/datum/pipe_network/net = nodes_to_networks[node]
+		net.update = 1
 
 /obj/machinery/atmospherics/proc/build_network()
 	// Called to build a network from this node
-
-	return null
+	for(var/node in nodes_to_networks)
+		if(!nodes_to_networks[node])
+			var/datum/pipe_network/net = new
+			nodes_to_networks[node] = net
+			net.normal_members += src
+			net.build_network(node, src)
 
 /obj/machinery/atmospherics/proc/return_network(obj/machinery/atmospherics/reference)
 	// Returns pipe_network associated with connection to reference
 	// Notes: should create network if necessary
 	// Should never return null
-
-	return null
+	build_network()
+	return LAZYACCESS(nodes_to_networks, reference)
 
 /obj/machinery/atmospherics/proc/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
 	// Used when two pipe_networks are combining
+	for(var/node in nodes_to_networks)
+		if(nodes_to_networks[node] == old_network)
+			nodes_to_networks[node] = new_network
 
-/obj/machinery/atmospherics/proc/return_network_air(datum/pipe_network/reference)
 	// Return a list of gas_mixture(s) in the object
 	//		associated with reference pipe_network for use in rebuilding the networks gases list
 	// Is permitted to return null
+/obj/machinery/atmospherics/proc/return_network_air(datum/pipe_network/reference)
+	var/directions = 0
+	for(var/node in nodes_to_networks)
+		if(nodes_to_networks[node] == reference)
+			directions |= get_dir(src, node)
+	for(var/direction in GLOB.cardinal)
+		if(!(direction & directions))
+			continue
+		var/air = air_in_dir(direction)
+		if(air)
+			LAZYDISTINCTADD(., air)
+
+// implement internally
+/obj/machinery/atmospherics/proc/air_in_dir(direction)
 
 /obj/machinery/atmospherics/proc/disconnect(obj/machinery/atmospherics/reference)
+	if(reference in nodes_to_networks)
+		qdel(nodes_to_networks[reference])
+		LAZYREMOVE(nodes_to_networks, reference)
+		update_icon()
 
 /obj/machinery/atmospherics/on_update_icon()
 	return null
 
 // returns all pipe's endpoints. You can override, but you may then need to use a custom /item/pipe constructor.
-/obj/machinery/atmospherics/proc/get_initialze_directions()
+/obj/machinery/atmospherics/proc/get_initialize_directions()
 	return base_pipe_initialize_directions(dir, connect_dir_type)
 
 /proc/base_pipe_initialize_directions(dir, connect_dir_type)
@@ -157,7 +232,7 @@ Pipelines + Other Objects -> Pipe network
 
 /obj/machinery/atmospherics/set_dir(new_dir)
 	. = ..()
-	initialize_directions = get_initialze_directions()
+	initialize_directions = get_initialize_directions()
 
 // Used by constructors. Shouldn't generally be called from elsewhere.
 /obj/machinery/proc/set_initial_level()
@@ -181,3 +256,12 @@ Pipelines + Other Objects -> Pipe network
 		if(!do_after(user, unwrench_time, src))
 			return MCS_BLOCK
 	return ..()
+
+// called after being built by hand, before the pipe item or circuit is deleted
+/obj/machinery/atmospherics/proc/build(obj/item/builder)
+	atmos_init()
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+		node.atmos_init()
+	build_network()
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+		node.build_network()

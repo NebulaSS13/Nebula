@@ -332,3 +332,23 @@
 	else
 		pass("All pipes were mapped properly.")
 	return 1
+
+/datum/unit_test/atmos_machinery_node_reciprocity
+	name = "ATMOS MACHINERY: all atmos machines shall be nodes of their nodes."
+
+/datum/unit_test/atmos_machinery_node_reciprocity/start_test()
+	var/fail = FALSE
+	for(var/obj/machinery/atmospherics/machine in SSmachines.machinery)
+		for(var/obj/machinery/atmospherics/node as anything in machine.nodes_to_networks)
+			if(node == machine)
+				log_bad("[log_info_line(machine)] was its own node.")
+				fail = TRUE
+			if(!(machine in node.nodes_to_networks))
+				log_bad("[log_info_line(machine)] has [log_info_line(node)] in its nodes list, but not vice versa.")
+				fail = TRUE
+
+	if(fail)
+		fail("Some machines failed to have reciprocal node connections.")
+	else
+		pass("All machines had reciprocal node connections.")
+	return 1

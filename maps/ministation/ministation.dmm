@@ -808,7 +808,6 @@
 /turf/simulated/floor/tiled,
 /area/ministation/bridge/vault)
 "bU" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/fireaxecabinet{
 	pixel_y = -32
 	},
@@ -7464,7 +7463,6 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/w)
 "sb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
 	icon_state = "0-4";
 	d2 = 4
@@ -8796,10 +8794,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/ministation/medical)
 "uZ" = (
-/obj/machinery/atmospherics/pipe/manifold{
-	icon_state = "manifold";
-	level = 2
-	},
 /turf/simulated/floor/tiled/dark,
 /area/ministation/medical)
 "va" = (

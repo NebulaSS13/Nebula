@@ -15,7 +15,7 @@
 	construct_state = /decl/machine_construction/pipe
 
 /obj/machinery/atmospherics/unary/thermal_plate/on_update_icon()
-	if(node)
+	if(LAZYLEN(nodes_to_networks))
 		icon_state = "intact_off"
 	else
 		icon_state = "exposed"
@@ -57,7 +57,7 @@
 	internal_removed.temperature = final_temperature
 	air_contents.merge(internal_removed)
 
-	network.update = 1
+	update_networks()
 
 	return 1
 
@@ -77,7 +77,6 @@
 	internal_removed.temperature = final_temperature
 	air_contents.merge(internal_removed)
 
-	if (network)
-		network.update = 1
+	update_networks()
 
 	return 1

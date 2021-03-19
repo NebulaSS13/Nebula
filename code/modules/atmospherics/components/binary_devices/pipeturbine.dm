@@ -16,9 +16,6 @@
 
 	var/dP = 0
 
-	var/datum/pipe_network/network1
-	var/datum/pipe_network/network2
-
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/default/panel_closed
 
@@ -27,6 +24,8 @@
 	air_in.volume = 200
 	air_out.volume = 800
 	volume_ratio = air_in.volume / (air_in.volume + air_out.volume)
+
+/obj/machinery/atmospherics/pipeturbine/get_initialize_directions()
 	switch(dir)
 		if(NORTH)
 			initialize_directions = EAST|WEST
@@ -37,18 +36,11 @@
 		if(WEST)
 			initialize_directions = NORTH|SOUTH
 
-/obj/machinery/atmospherics/pipeturbine/Destroy()
-	if(node1)
-		node1.disconnect(src)
-		QDEL_NULL(network1)
-	if(node2)
-		node2.disconnect(src)
-		QDEL_NULL(network2)
-
-	node1 = null
-	node2 = null
-
-	. = ..()
+/obj/machinery/atmospherics/pipeturbine/air_in_dir(direction)
+	if(direction == turn(dir, -90)) // can't tell from sprites if this is even right; old implementation basically randomized this
+		return air_out
+	else if(direction == turn(dir, 90))
+		return air_in
 
 /obj/machinery/atmospherics/pipeturbine/Process()
 	..()
@@ -68,11 +60,7 @@
 			air_out.merge(air_all)
 
 		update_icon()
-
-		if (network1)
-			network1.update = 1
-		if (network2)
-			network2.update = 1
+		update_networks()
 
 /obj/machinery/atmospherics/pipeturbine/on_update_icon()
 	overlays.Cut()
@@ -84,88 +72,6 @@
 		overlays += image('icons/obj/pipeturbine.dmi', "med-turb")
 	if (kin_energy > 1000000)
 		overlays += image('icons/obj/pipeturbine.dmi', "hi-turb")
-
-//Goddamn copypaste from binary base class because atmospherics machinery API is not damn flexible
-/obj/machinery/atmospherics/pipeturbine/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
-	if((reference == node1) && (new_network != network1))
-		qdel(network1)
-		network1 = new_network
-
-	if((reference == node2) && (new_network != network2))
-		qdel(network2)
-		network2 = new_network
-
-	new_network.normal_members |= src
-
-/obj/machinery/atmospherics/pipeturbine/atmos_init()
-	..()
-	if(node1 && node2) return
-
-	var/node2_connect = turn(dir, -90)
-	var/node1_connect = turn(dir, 90)
-
-	for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
-		if(target.initialize_directions & get_dir(target,src))
-			node1 = target
-			break
-
-	for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
-		if(target.initialize_directions & get_dir(target,src))
-			node2 = target
-			break
-
-/obj/machinery/atmospherics/pipeturbine/build_network()
-	if(!network1 && node1)
-		network1 = new /datum/pipe_network()
-		network1.normal_members += src
-		network1.build_network(node1, src)
-
-	if(!network2 && node2)
-		network2 = new /datum/pipe_network()
-		network2.normal_members += src
-		network2.build_network(node2, src)
-
-
-/obj/machinery/atmospherics/pipeturbine/return_network(obj/machinery/atmospherics/reference)
-	build_network()
-
-	if(reference==node1)
-		return network1
-
-	if(reference==node2)
-		return network2
-
-	return null
-
-/obj/machinery/atmospherics/pipeturbine/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
-	if(network1 == old_network)
-		network1 = new_network
-	if(network2 == old_network)
-		network2 = new_network
-
-	return 1
-
-/obj/machinery/atmospherics/pipeturbine/return_network_air(datum/pipe_network/reference)
-	var/list/results = list()
-
-	if(network1 == reference)
-		results += air_in
-	if(network2 == reference)
-		results += air_out
-
-	return results
-
-/obj/machinery/atmospherics/pipeturbine/disconnect(obj/machinery/atmospherics/reference)
-	if(reference==node1)
-		qdel(network1)
-		node1 = null
-
-	else if(reference==node2)
-		qdel(network2)
-		node2 = null
-
-	return null
-
 
 /obj/machinery/power/turbinemotor
 	name = "motor"

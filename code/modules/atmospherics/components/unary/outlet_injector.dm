@@ -64,19 +64,7 @@
 	else
 		icon_state = "[use_power ? "on" : "off"]"
 
-/obj/machinery/atmospherics/unary/outlet_injector/update_underlays()
-	if(..())
-		underlays.Cut()
-		var/turf/T = get_turf(src)
-		if(!istype(T))
-			return
-		if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
-			return
-		else
-			if(node)
-				add_underlay(T, node, dir, node.icon_connect_type)
-			else
-				add_underlay(T,, dir)
+	build_device_underlays()
 
 /obj/machinery/atmospherics/unary/outlet_injector/proc/get_console_data()
 	. = list()
@@ -109,8 +97,8 @@
 	if(environment && air_contents.temperature > 0)
 		var/transfer_moles = (volume_rate/air_contents.volume)*air_contents.total_moles //apply flow rate limit
 		power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
-		if(network && (transfer_moles > 0))
-			network.update = 1
+		if(transfer_moles > 0)
+			update_networks()
 
 	if (power_draw >= 0)
 		last_power_draw = power_draw
@@ -133,14 +121,12 @@
 	if(air_contents.temperature > 0)
 		var/power_used = pump_gas(src, air_contents, environment, air_contents.total_moles, power_rating)
 		use_power_oneoff(power_used)
-
-		if(network)
-			network.update = 1
+		update_networks()
 
 	flick("inject", src)
 
 /obj/machinery/atmospherics/unary/outlet_injector/hide(var/i)
-	update_underlays()
+	update_icon()
 
 /obj/machinery/atmospherics/unary/outlet_injector/attackby(var/obj/item/O, var/mob/user)
 	if(isMultitool(O))

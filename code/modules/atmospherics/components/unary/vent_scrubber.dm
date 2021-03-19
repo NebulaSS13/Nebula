@@ -63,7 +63,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/Initialize()
 	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_FILTER
-	icon = null
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Destroy()
 	var/area/A = get_area(src)
@@ -73,41 +72,15 @@
 		A.air_scrub_names -= id_tag
 	. = ..()
 
-/obj/machinery/atmospherics/unary/vent_scrubber/on_update_icon(var/safety = 0)
-	if(!check_icon_cache())
-		return
-
-	overlays.Cut()
-
-
-	var/turf/T = get_turf(src)
-	if(!istype(T))
-		return
-
-	var/scrubber_icon = "scrubber"
+/obj/machinery/atmospherics/unary/vent_scrubber/on_update_icon()
 	if(welded)
-		scrubber_icon += "weld"
+		icon_state = "weld"
+	else if((stat & NOPOWER) || !use_power)
+		icon_state = "off"
 	else
-		if(!powered())
-			scrubber_icon += "off"
-		else
-			scrubber_icon += "[use_power ? "[scrubbing ? "on" : "in"]" : "off"]"
+		icon_state = "[scrubbing ? "on" : "in"]"
 
-	overlays += icon_manager.get_atmos_icon("device", , , scrubber_icon)
-
-/obj/machinery/atmospherics/unary/vent_scrubber/update_underlays()
-	if(..())
-		underlays.Cut()
-		var/turf/T = get_turf(src)
-		if(!istype(T))
-			return
-		if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
-			return
-		else
-			if(node)
-				add_underlay(T, node, dir, node.icon_connect_type)
-			else
-				add_underlay(T,, dir)
+	build_device_underlays()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Initialize()
 	if (!id_tag)
@@ -142,7 +115,7 @@
 	if (hibernate > world.time)
 		return 1
 
-	if (!node)
+	if (!LAZYLEN(nodes_to_networks))
 		update_use_power(POWER_USE_OFF)
 	//broadcast_status()
 	if(!use_power || (stat & (NOPOWER|BROKEN)))
@@ -173,14 +146,13 @@
 		last_power_draw = power_draw
 		use_power_oneoff(power_draw)
 
-	if(network && (transfer_moles > 0))
-		network.update = 1
+	if(transfer_moles > 0)
+		update_networks()
 
 	return 1
 
 /obj/machinery/atmospherics/unary/vent_scrubber/hide(var/i) //to make the little pipe section invisible, the icon changes.
 	update_icon()
-	update_underlays()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/proc/toggle_panic()
 	var/decl/public_access/public_variable/panic/panic = GET_DECL(/decl/public_access/public_variable/panic)
@@ -196,7 +168,12 @@
 		if (!(stat & NOPOWER) && use_power)
 			return SPAN_WARNING("You cannot take this [src] apart, turn it off first.")
 		var/turf/T = get_turf(src)
-		if (node && node.level==1 && isturf(T) && !T.is_plating())
+		var/hidden_pipe_check = FALSE
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+			if(node.level)
+				hidden_pipe_check = TRUE
+				break
+		if (hidden_pipe_check && isturf(T) && !T.is_plating())
 			return SPAN_WARNING("You must remove the plating first.")
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()

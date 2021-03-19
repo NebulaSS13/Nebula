@@ -39,16 +39,11 @@
 /obj/machinery/atmospherics/unary/tank/set_initial_level()
 	level = 1 // Always on top, apparently.
 
-/obj/machinery/atmospherics/unary/tank/update_underlays()
-	if(..())
-		underlays.Cut()
-		var/turf/T = get_turf(src)
-		if(!istype(T))
-			return
-		add_underlay(T, node, dir)
+/obj/machinery/atmospherics/unary/tank/on_update_icon()
+	build_device_underlays(FALSE)
 
 /obj/machinery/atmospherics/unary/tank/hide()
-	update_underlays()
+	update_icon()
 
 /obj/machinery/atmospherics/unary/tank/return_air()
 	return air_contents

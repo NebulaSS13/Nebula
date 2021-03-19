@@ -103,7 +103,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/Initialize()
 	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
-	icon = null
 	update_sound()
 
 /obj/machinery/atmospherics/unary/vent_pump/Destroy()
@@ -124,50 +123,22 @@
 	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
-
-/obj/machinery/atmospherics/unary/vent_pump/on_update_icon(var/safety = 0)
-	if(!check_icon_cache())
-		return
-	if (!node)
-		return
-
-	overlays.Cut()
-
-	var/vent_icon = "vent"
-
-	var/turf/T = get_turf(src)
-	if(!istype(T))
-		return
-
-	if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
-		vent_icon += "h"
+/obj/machinery/atmospherics/unary/vent_pump/on_update_icon()
+	var/visible_directions = build_device_underlays()
+	var/vent_prefix = visible_directions ? "" : "h" // h prefix for hidden == no visible directions
+	var/vent_icon
 
 	if(welded)
-		vent_icon += "weld"
-	else if(!powered())
-		vent_icon += "off"
+		vent_icon = "weld"
+	else if((stat & NOPOWER) || !use_power)
+		vent_icon = "off"
 	else
-		vent_icon += "[use_power ? "[pump_direction ? "out" : "in"]" : "off"]"
+		vent_icon += "[pump_direction ? "out" : "in"]"
 
-	overlays += icon_manager.get_atmos_icon("device", , , vent_icon)
-
-/obj/machinery/atmospherics/unary/vent_pump/update_underlays()
-	if(..())
-		underlays.Cut()
-		var/turf/T = get_turf(src)
-		if(!istype(T))
-			return
-		if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
-			return
-		else
-			if(node)
-				add_underlay(T, node, dir, node.icon_connect_type)
-			else
-				add_underlay(T,, dir)
+	icon_state = "[vent_prefix][vent_icon]"
 
 /obj/machinery/atmospherics/unary/vent_pump/hide()
 	update_icon()
-	update_underlays()
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/can_pump()
 	if(stat & (NOPOWER|BROKEN))
@@ -184,7 +155,7 @@
 	if (hibernate > world.time)
 		return 1
 
-	if (!node)
+	if (!LAZYLEN(nodes_to_networks))
 		update_use_power(POWER_USE_OFF)
 	if(!can_pump())
 		return 0
@@ -203,7 +174,8 @@
 			transfer_moles = calculate_transfer_moles(air_contents, environment, pressure_delta)
 			power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
 		else //external -> internal
-			transfer_moles = calculate_transfer_moles(environment, air_contents, pressure_delta, (network)? network.volume : 0)
+			var/datum/pipe_network/network = network_in_dir(dir)
+			transfer_moles = calculate_transfer_moles(environment, air_contents, pressure_delta, network?.volume)
 
 			//limit flow rate from turfs
 			transfer_moles = min(transfer_moles, environment.total_moles*air_contents.volume/environment.volume)	//group_multiplier gets divided out here
@@ -215,8 +187,8 @@
 		if(pump_direction && pressure_checks == PRESSURE_CHECK_EXTERNAL) //99% of all vents
 			hibernate = world.time + (rand(100,200))
 
-	if(network && (transfer_moles > 0))
-		network.update = 1
+	if(transfer_moles > 0)
+		update_networks()
 	if (power_draw >= 0)
 		last_power_draw = power_draw
 		use_power_oneoff(power_draw)
@@ -329,14 +301,19 @@
 /obj/machinery/atmospherics/unary/vent_pump/cannot_transition_to(state_path, mob/user)
 	if(state_path == /decl/machine_construction/default/deconstructed)
 		if(!(stat & NOPOWER) && use_power)
-			return SPAN_NOTICE("You cannot unwrench \the [src], turn it off first.")
+			return SPAN_WARNING("You cannot unwrench \the [src], turn it off first.")
 		var/turf/T = src.loc
-		if (node && node.level==1 && isturf(T) && !T.is_plating())
-			return SPAN_NOTICE("You must remove the plating first.")
+		var/hidden_pipe_check = FALSE
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+			if(node.level)
+				hidden_pipe_check = TRUE
+				break
+		if (hidden_pipe_check && isturf(T) && !T.is_plating())
+			return SPAN_WARNING("You must remove the plating first.")
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
 		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-			return SPAN_NOTICE("You cannot unwrench \the [src], it is too exerted due to internal pressure.")
+			return SPAN_WARNING("You cannot unwrench \the [src], it is too exerted due to internal pressure.")
 	return ..()
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/get_console_data()

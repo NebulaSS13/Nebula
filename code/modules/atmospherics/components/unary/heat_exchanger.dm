@@ -24,20 +24,22 @@
 	. = ..()
 
 /obj/machinery/atmospherics/unary/heat_exchanger/on_update_icon()
-	if(node)
+	if(LAZYLEN(nodes_to_networks))
 		icon_state = "intact"
 	else
 		icon_state = "exposed"
 
 /obj/machinery/atmospherics/unary/heat_exchanger/atmos_init()
-	if(!partner)
-		var/partner_connect = turn(dir,180)
+	if(partner)
+		partner.partner = null
+		partner = null
+	var/partner_connect = turn(dir,180)
 
-		for(var/obj/machinery/atmospherics/unary/heat_exchanger/target in get_step(src,partner_connect))
-			if(target.dir & get_dir(src,target))
-				partner = target
-				partner.partner = src
-				break
+	for(var/obj/machinery/atmospherics/unary/heat_exchanger/target in get_step(src,partner_connect))
+		if(target.dir & get_dir(src,target))
+			partner = target
+			partner.partner = src
+			break
 	..()
 
 /obj/machinery/atmospherics/unary/heat_exchanger/Process()
@@ -65,13 +67,12 @@
 		air_contents.temperature = new_temperature
 		partner.air_contents.temperature = new_temperature
 
-	if(network)
-		if(abs(old_temperature-air_contents.temperature) > 1)
-			network.update = 1
 
-	if(partner.network)
-		if(abs(other_old_temperature-partner.air_contents.temperature) > 1)
-			partner.network.update = 1
+	if(abs(old_temperature-air_contents.temperature) > 1)
+		update_networks()
+
+	if(abs(other_old_temperature-partner.air_contents.temperature) > 1)
+		partner.update_networks()
 
 /obj/machinery/atmospherics/unary/heat_exchanger/deconstruction_pressure_check()
 	var/datum/gas_mixture/int_air = return_air()

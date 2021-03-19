@@ -71,68 +71,6 @@ Buildable meters
 /obj/item/pipe/attack_self(mob/user)
 	return rotate(user)
 
-/obj/item/pipe/proc/build_unary(var/obj/machinery/atmospherics/unary/P, var/pipefailtext)
-	P.atmos_init()
-	if (QDELETED(P))
-		to_chat(usr, pipefailtext)
-		return 1
-	P.build_network()
-	if(P.node)
-		P.node.atmos_init()
-		P.node.build_network()
-	return 0
-
-/obj/item/pipe/proc/build_binary(var/obj/machinery/atmospherics/pipe/simple/P, var/pipefailtext)
-	P.atmos_init()
-	if (QDELETED(P))
-		to_chat(usr, pipefailtext)
-		return 1
-	P.build_network()
-	if(P.node1)
-		P.node1.atmos_init()
-		P.node1.build_network()
-	if(P.node2)
-		P.node2.atmos_init()
-		P.node2.build_network()
-	return 0
-
-/obj/item/pipe/proc/build_trinary(var/obj/machinery/atmospherics/pipe/manifold/P, var/pipefailtext)
-	P.atmos_init()
-	if (QDELETED(P))
-		to_chat(usr, pipefailtext)
-		return 1
-	P.build_network()
-	if(P.node1)
-		P.node1.atmos_init()
-		P.node1.build_network()
-	if(P.node2)
-		P.node2.atmos_init()
-		P.node2.build_network()
-	if(P.node3)
-		P.node3.atmos_init()
-		P.node3.build_network()
-	return 0
-
-/obj/item/pipe/proc/build_quaternary(var/obj/machinery/atmospherics/pipe/manifold4w/P, var/pipefailtext)
-	P.atmos_init()
-	if (QDELETED(P))
-		to_chat(usr, pipefailtext)
-		return 1
-	P.build_network()
-	if(P.node1)
-		P.node1.atmos_init()
-		P.node1.build_network()
-	if(P.node2)
-		P.node2.atmos_init()
-		P.node2.build_network()
-	if(P.node3)
-		P.node3.atmos_init()
-		P.node3.build_network()
-	if(P.node4)
-		P.node4.atmos_init()
-		P.node4.build_network()
-	return 0
-
 /obj/item/pipe/attackby(var/obj/item/W, var/mob/user)
 	if(!isWrench(W))
 		return ..()
@@ -149,9 +87,6 @@ Buildable meters
 			return 1
 	// no conflicts found
 
-	var/pipefailtext = "<span class='warning'>There's nothing to connect this pipe section to!</span>" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
-
-	//TODO: Move all of this stuff into the various pipe constructors.
 	var/obj/machinery/atmospherics/P = new constructed_path(get_turf(src))
 	var/datum/extension/parts_stash/stash = get_extension(src, /datum/extension/parts_stash)
 	if(stash)
@@ -160,26 +95,7 @@ Buildable meters
 	P.pipe_color = color
 	P.set_dir(dir)
 	P.set_initial_level()
-
-	if(P.pipe_class == PIPE_CLASS_UNARY)
-		if(build_unary(P, pipefailtext))
-			return 1
-
-	if(P.pipe_class == PIPE_CLASS_BINARY)
-		if(build_binary(P, pipefailtext))
-			return 1
-
-	if(P.pipe_class == PIPE_CLASS_TRINARY)
-		if(build_trinary(P, pipefailtext))
-			return 1
-
-	if(P.pipe_class == PIPE_CLASS_QUATERNARY)
-		if(build_quaternary(P, pipefailtext))
-			return 1
-
-	if(P.pipe_class == PIPE_CLASS_OMNI)
-		P.atmos_init()
-		P.build_network()
+	P.build(src)
 
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	user.visible_message( \

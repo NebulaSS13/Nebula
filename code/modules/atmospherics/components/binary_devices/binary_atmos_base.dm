@@ -5,9 +5,6 @@
 	var/datum/gas_mixture/air1
 	var/datum/gas_mixture/air2
 
-	var/datum/pipe_network/network1
-	var/datum/pipe_network/network2
-
 	pipe_class = PIPE_CLASS_BINARY
 	connect_dir_type = SOUTH | NORTH
 
@@ -19,107 +16,11 @@
 	air2.volume = 200
 	. = ..()
 
-// Housekeeping and pipe network stuff below
-/obj/machinery/atmospherics/binary/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
-	if((reference == node1) && (network1 != new_network))
-		qdel(network1)
-		network1 = new_network
-
-	if((reference == node2) && (network2 != new_network))
-		qdel(network2)
-		network2 = new_network
-
-	new_network.normal_members |= src
-
-/obj/machinery/atmospherics/binary/atmos_init()
-	..()
-	if(node1 && node2) return
-
-	var/node2_connect = dir
-	var/node1_connect = turn(dir, 180)
-
-	for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
-		if(target.initialize_directions & get_dir(target,src))
-			if (check_connect_types(target,src))					
-				node1 = target
-				break
-
-	for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))			
-		if(target.initialize_directions & get_dir(target,src))				
-			if (check_connect_types(target,src))					
-				node2 = target
-				break
-
-	update_icon()
-	update_underlays()
-
-/obj/machinery/atmospherics/binary/build_network()
-	if(!network1 && node1)
-		network1 = new /datum/pipe_network()
-		network1.normal_members += src
-		network1.build_network(node1, src)
-
-	if(!network2 && node2)
-		network2 = new /datum/pipe_network()
-		network2.normal_members += src
-		network2.build_network(node2, src)
-
-
-/obj/machinery/atmospherics/binary/return_network(obj/machinery/atmospherics/reference)
-	build_network()
-
-	if(reference==node1)
-		return network1
-
-	if(reference==node2)
-		return network2
-
-	return null
-
-/obj/machinery/atmospherics/binary/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
-	if(network1 == old_network)
-		network1 = new_network
-	if(network2 == old_network)
-		network2 = new_network
-
-	return 1
-
-/obj/machinery/atmospherics/binary/return_network_air(datum/pipe_network/reference)
-	var/list/results = list()
-
-	if(network1 == reference)
-		results += air1
-	if(network2 == reference)
-		results += air2
-
-	return results
-
-/obj/machinery/atmospherics/binary/disconnect(obj/machinery/atmospherics/reference)
-	if(reference==node1)
-		qdel(network1)
-		node1 = null
-
-	else if(reference==node2)
-		qdel(network2)
-		node2 = null
-
-	update_icon()
-	update_underlays()
-
-	return null
-		
-/obj/machinery/atmospherics/binary/Destroy()
-	if(node1)
-		node1.disconnect(src)
-		qdel(network1)
-	if(node2)
-		node2.disconnect(src)
-		qdel(network2)
-
-	node1 = null
-	node2 = null
-
-	. = ..()
+/obj/machinery/atmospherics/binary/air_in_dir(direction)
+	if(direction == dir)
+		return air2
+	else if(direction == turn(dir, 180))
+		return air1
 
 /obj/machinery/atmospherics/binary/deconstruction_pressure_check()
 	var/datum/gas_mixture/int_air = return_air()
@@ -132,26 +33,16 @@
 /obj/machinery/atmospherics/binary/wrench_floor_bolts(user)
 	. = ..()
 	if(anchored)
-		if(dir & (NORTH|SOUTH))
-			initialize_directions = NORTH|SOUTH
-		else if(dir & (EAST|WEST))
-			initialize_directions = EAST|WEST
-
+		set_dir(dir) // making sure
 		atmos_init()
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+			node.atmos_init()
 		build_network()
-		if (node1)
-			node1.atmos_init()
-			node1.build_network()
-		if (node2)
-			node2.atmos_init()
-			node2.build_network()
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+			node.build_network()
 	else
-		if(node1)
-			node1.disconnect(src)
-			qdel(network1)
-		if(node2)
-			node2.disconnect(src)
-			qdel(network2)
-
-		node1 = null
-		node2 = null
+		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+			node.disconnect(src)
+		for(var/node in nodes_to_networks)
+			QDEL_NULL(nodes_to_networks[node])
+		nodes_to_networks = null

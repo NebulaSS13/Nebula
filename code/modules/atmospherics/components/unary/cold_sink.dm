@@ -24,36 +24,14 @@
 	var/set_temperature = T20C		// Thermostat
 	var/cooling = 0
 
-/obj/machinery/atmospherics/unary/freezer/atmos_init()
-	..()
-	if(node)
-		return
-
-	var/node_connect = dir
-
-	for(var/obj/machinery/atmospherics/target in get_step(src, node_connect))
-		if(target.initialize_directions & get_dir(target, src))
-			node = target
-			break
-
-	//copied from pipe construction code since heaters/freezers don't use fittings and weren't doing this check - this all really really needs to be refactored someday.
-	//check that there are no incompatible pipes/machinery in our own location
-	for(var/obj/machinery/atmospherics/M in src.loc)
-		if(M != src && (M.initialize_directions & node_connect) && M.check_connect_types(M,src))	// matches at least one direction on either type of pipe & same connection type
-			node = null
-			break
-
-	update_icon()
-
 /obj/machinery/atmospherics/unary/freezer/on_update_icon()
-	if(node)
+	if(LAZYLEN(nodes_to_networks))
 		if(use_power && cooling)
 			icon_state = "freezer_1"
 		else
 			icon_state = "freezer"
 	else
 		icon_state = "freezer_0"
-	return
 
 /obj/machinery/atmospherics/unary/freezer/interface_interact(mob/user)
 	ui_interact(user)
@@ -116,7 +94,7 @@
 		update_icon()
 		return
 
-	if(network && air_contents.temperature > set_temperature)
+	if(LAZYLEN(nodes_to_networks) && air_contents.temperature > set_temperature)
 		cooling = 1
 
 		var/heat_transfer = max( -air_contents.get_thermal_energy_change(set_temperature - 5), 0 )
@@ -132,7 +110,7 @@
 
 		use_power_oneoff(power_rating)
 
-		network.update = 1
+		update_networks()
 	else
 		cooling = 0
 

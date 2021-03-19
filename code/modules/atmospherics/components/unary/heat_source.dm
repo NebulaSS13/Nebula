@@ -24,39 +24,14 @@
 	var/set_temperature = T20C	//thermostat
 	var/heating = 0		//mainly for icon updates
 
-/obj/machinery/atmospherics/unary/heater/atmos_init()
-	..()
-	if(node)
-		return
-
-	var/node_connect = dir
-
-	//check that there is something to connect to
-	for(var/obj/machinery/atmospherics/target in get_step(src, node_connect))
-		if(target.initialize_directions & get_dir(target, src))
-			node = target
-			break
-
-	//copied from pipe construction code since heaters/freezers don't use fittings and weren't doing this check - this all really really needs to be refactored someday.
-	//check that there are no incompatible pipes/machinery in our own location
-	for(var/obj/machinery/atmospherics/M in src.loc)
-		if(M != src && (M.initialize_directions & node_connect) && M.check_connect_types(M,src))	// matches at least one direction on either type of pipe & same connection type
-			node = null
-			break
-
-	update_icon()
-
-
 /obj/machinery/atmospherics/unary/heater/on_update_icon()
-	if(node)
+	if(LAZYLEN(nodes_to_networks))
 		if(use_power && heating)
 			icon_state = "heater_1"
 		else
 			icon_state = "heater"
 	else
 		icon_state = "heater_0"
-	return
-
 
 /obj/machinery/atmospherics/unary/heater/Process()
 	..()
@@ -66,12 +41,12 @@
 		update_icon()
 		return
 
-	if(network && air_contents.total_moles && air_contents.temperature < set_temperature)
+	if(LAZYLEN(nodes_to_networks) && air_contents.total_moles && air_contents.temperature < set_temperature)
 		air_contents.add_thermal_energy(power_rating * HEATER_PERF_MULT)
 		use_power_oneoff(power_rating)
 
 		heating = 1
-		network.update = 1
+		update_networks()
 	else
 		heating = 0
 
