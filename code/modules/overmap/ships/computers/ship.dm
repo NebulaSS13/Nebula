@@ -65,7 +65,8 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 			sensor.reveal_contacts(user)
 
 	GLOB.moved_event.register(user, src, /obj/machinery/computer/ship/proc/unlook)
-	GLOB.stat_set_event.register(user, src, /obj/machinery/computer/ship/proc/unlook)
+	if(isliving(user))
+		GLOB.stat_set_event.register(user, src, /obj/machinery/computer/ship/proc/unlook)
 	LAZYDISTINCTADD(viewers, weakref(user))
 
 /obj/machinery/computer/ship/proc/unlook(var/mob/user)
@@ -79,7 +80,8 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 			sensor.hide_contacts(user)
 
 	GLOB.moved_event.unregister(user, src, /obj/machinery/computer/ship/proc/unlook)
-	GLOB.stat_set_event.unregister(user, src, /obj/machinery/computer/ship/proc/unlook)
+	if(isliving(user))
+		GLOB.stat_set_event.unregister(user, src, /obj/machinery/computer/ship/proc/unlook)
 	LAZYREMOVE(viewers, weakref(user))
 
 /obj/machinery/computer/ship/proc/viewing_overmap(mob/user)
