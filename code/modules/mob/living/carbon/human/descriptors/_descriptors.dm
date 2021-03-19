@@ -66,7 +66,7 @@
 /datum/appearance_descriptor/proc/get_mob_overlay(var/mob/applying, var/offset_value)
 	return
 
-/datum/appearance_descriptor/proc/get_third_person_message_start(var/datum/gender/my_gender)
+/datum/appearance_descriptor/proc/get_third_person_message_start(var/decl/pronouns/my_gender)
 	return "[my_gender.He] [my_gender.is]"
 
 /datum/appearance_descriptor/proc/get_first_person_message_start()
@@ -84,7 +84,7 @@
 /datum/appearance_descriptor/proc/get_species_text(var/use_name)
 	. = " for \a [use_name]"
 
-/datum/appearance_descriptor/proc/get_initial_comparison_component(var/mob/me, var/mob/them, var/datum/gender/my_gender, var/datum/gender/other_gender, var/my_value)
+/datum/appearance_descriptor/proc/get_initial_comparison_component(var/mob/me, var/mob/them, var/decl/pronouns/my_gender, var/decl/pronouns/other_gender, var/my_value)
 	if(!skip_species_mention)
 		var/mob/living/carbon/human/H = me
 		var/mob/living/carbon/human/O = them
@@ -92,7 +92,7 @@
 			. = get_species_text("\improper [H.species.name]")
 	. = "[get_third_person_message_start(my_gender)] [get_standalone_value_descriptor(my_value)][.]"
 
-/datum/appearance_descriptor/proc/get_secondary_comparison_component(var/datum/gender/my_gender, var/datum/gender/other_gender, var/my_value, var/comparing_value)
+/datum/appearance_descriptor/proc/get_secondary_comparison_component(var/decl/pronouns/my_gender, var/decl/pronouns/other_gender, var/my_value, var/comparing_value)
 	var/variance = abs(1-(my_value/comparing_value)) * comparison_variance_multiplier
 	if(variance < equivalent_variance_threshold)
 		. = "[.], [get_comparative_value_string_equivalent(my_gender, other_gender)]"
@@ -127,15 +127,15 @@
 /datum/appearance_descriptor/proc/get_index_from_value(var/value)
 	return value
 
-/datum/appearance_descriptor/proc/get_comparative_value_string_equivalent(var/datum/gender/my_gender, var/datum/gender/other_gender)
+/datum/appearance_descriptor/proc/get_comparative_value_string_equivalent(var/decl/pronouns/my_gender, var/decl/pronouns/other_gender)
 	return comparative_value_descriptor_equivalent
 
-/datum/appearance_descriptor/proc/get_comparative_value_string_smaller(var/value, var/datum/gender/my_gender, var/datum/gender/other_gender)
+/datum/appearance_descriptor/proc/get_comparative_value_string_smaller(var/value, var/decl/pronouns/my_gender, var/decl/pronouns/other_gender)
 	var/maxval = LAZYLEN(comparative_value_descriptors_smaller)
 	value = Clamp(ceil(value * maxval), 1, maxval)
 	return comparative_value_descriptors_smaller[value]
 
-/datum/appearance_descriptor/proc/get_comparative_value_string_larger(var/value, var/datum/gender/my_gender, var/datum/gender/other_gender)
+/datum/appearance_descriptor/proc/get_comparative_value_string_larger(var/value, var/decl/pronouns/my_gender, var/decl/pronouns/other_gender)
 	var/maxval = LAZYLEN(comparative_value_descriptors_larger)
 	value = Clamp(ceil(value * maxval), 1, maxval)
 	return comparative_value_descriptors_larger[value]
