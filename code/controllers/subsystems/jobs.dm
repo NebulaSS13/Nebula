@@ -591,9 +591,15 @@ SUBSYSTEM_DEF(jobs)
 	if(!C)
 		return
 
+	var/location_name = station_name()
+
+	var/obj/effect/overmap/visitable/V = C.mob.get_owning_overmap_object()
+	if(istype(V))
+		location_name = V.name
+
 	var/style = "font-family: 'Fixedsys'; -dm-text-outline: 1 black; font-size: 11px;"
 	var/area/A = get_area(C.mob)
-	var/text = "[stationdate2text()], [stationtime2text()]\n[station_name()], [A.name]"
+	var/text = "[stationdate2text()], [stationtime2text()]\n[location_name], [A.name]"
 	text = uppertext(text)
 
 	var/obj/effect/overlay/T = new()
