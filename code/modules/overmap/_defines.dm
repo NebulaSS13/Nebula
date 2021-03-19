@@ -3,20 +3,21 @@
 //Dimension of overmap (squares 4 lyfe)
 var/global/list/map_sectors = list()
 
-/area/overmap/
+/area/overmap
 	name = "System Map"
 	icon_state = "start"
 	requires_power = 0
 	base_turf = /turf/unsimulated/map
-	dynamic_lighting = 0
+	dynamic_lighting = FALSE
 
 /turf/unsimulated/map
 	icon = 'icons/turf/space.dmi'
 	icon_state = "map"
 	permit_ao = FALSE
+	dynamic_lighting = FALSE
 
 /turf/unsimulated/map/edge
-	opacity = 1
+	opacity = TRUE
 
 /turf/unsimulated/map/Initialize(var/ml)
 	. = ..(ml)
