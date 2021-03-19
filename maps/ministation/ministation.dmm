@@ -1748,7 +1748,6 @@
 /area/ministation/hall/s)
 "eq" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 6
 	},
 /turf/simulated/floor/plating,
@@ -3222,7 +3221,6 @@
 /area/ministation/science)
 "hN" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 5
 	},
 /turf/simulated/floor/bluegrid{
@@ -3440,7 +3438,6 @@
 /area/ministation/science)
 "ip" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 9
 	},
 /turf/simulated/floor/bluegrid{
@@ -5474,7 +5471,6 @@
 /area/ministation/science)
 "nu" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -10642,7 +10638,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 6
 	},
 /mob/living/simple_animal/mouse,
@@ -10839,7 +10834,6 @@
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 10
 	},
 /turf/simulated/floor/plating,
@@ -11602,7 +11596,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 10
 	},
 /turf/simulated/floor/plating,
@@ -11618,7 +11611,6 @@
 	name = "Distribution Loop"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 6
 	},
 /turf/simulated/floor/plating,
@@ -11837,7 +11829,6 @@
 "Cz" = (
 /obj/machinery/light/small,
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 5
 	},
 /turf/simulated/floor/plating,

@@ -199,7 +199,6 @@
 /area/unishi/engineering)
 "aD" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 10
 	},
 /obj/structure/sign/warning/airlock,
@@ -750,7 +749,6 @@
 "bV" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4;
-	icon_state = "intact";
 	
 	},
 /turf/simulated/floor,

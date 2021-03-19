@@ -33,7 +33,6 @@
 /area/map_template/crashed_pod)
 "af" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
 	dir = 6
 	},
 /turf/simulated/wall/r_wall,
@@ -102,7 +101,6 @@
 /area/map_template/crashed_pod)
 "am" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 6
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -251,7 +249,6 @@
 /area/map_template/crashed_pod)
 "aD" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
 	dir = 5
 	},
 /turf/simulated/wall,
@@ -424,8 +421,7 @@
 /area/map_template/crashed_pod)
 "aT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/item/trash/tastybread,
@@ -433,7 +429,6 @@
 /area/map_template/crashed_pod)
 "aU" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
 	dir = 6
 	},
 /obj/machinery/light/small{

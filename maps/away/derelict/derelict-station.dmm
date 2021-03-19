@@ -1590,7 +1590,6 @@
 /area/constructionsite/hallway/fore)
 "fa" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
 	dir = 5
 	},
 /obj/machinery/light/small,
@@ -1625,7 +1624,6 @@
 /area/constructionsite/teleporter)
 "fc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/machinery/door/airlock/external{
@@ -1637,7 +1635,6 @@
 /area/constructionsite/teleporter)
 "fd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1648,7 +1645,6 @@
 /area/constructionsite/teleporter)
 "fe" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -1784,7 +1780,6 @@
 /area/constructionsite/teleporter)
 "fv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	icon_state = "intact";
 	dir = 9
 	},
 /turf/simulated/floor/tiled/dark,
@@ -2628,8 +2623,7 @@
 /area/constructionsite/hallway/aft)
 "iG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/wall,
 /area/constructionsite/atmospherics)
@@ -2873,7 +2867,6 @@
 /area/constructionsite/atmospherics)
 "jq" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 5
 	},
 /turf/simulated/floor/airless,
