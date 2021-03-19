@@ -261,7 +261,6 @@
 	try_leak()
 
 /obj/machinery/atmospherics/pipe/simple/visible
-	icon_state = "intact"
 	level = 2
 
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers
