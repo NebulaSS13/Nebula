@@ -432,7 +432,7 @@ Subtypes
 	var/list/rename_args = get_arguments(text)
 
 	if(length(rename_args) < 2)
-		return "rename: Improper syntax, use move \[file name\] \[new name\]."
+		return "rename: Improper syntax, use rename \[file name\] \[new name\]."
 	var/datum/computer_file/F = terminal.current_disk.get_file(rename_args[1])
 	if(!F)
 		return "rename: Could not find file with name [rename_args[1]]."
