@@ -3,6 +3,7 @@ SUBSYSTEM_DEF(icon_update)
 	wait = 1
 	priority = SS_PRIORITY_ICON_UPDATE
 	init_order = SS_INIT_ICON_UPDATE
+	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT // If you make it not fire in lobby, you also have to remove atoms from queue in Destroy.
 
 	// Linked lists, queue_refs[x] should have null or args stored in queue_args[x]
 	var/list/queue_refs = list()	// Atoms
@@ -31,10 +32,10 @@ SUBSYSTEM_DEF(icon_update)
 		queue_refs.len -= 1
 		queue_args.len -= 1
 
-		A.icon_update_queued = FALSE
-
 		if(QDELETED(A))
 			continue
+
+		A.icon_update_queued = FALSE
 
 		if (islist(myArgs))
 			A.update_icon(arglist(myArgs))
