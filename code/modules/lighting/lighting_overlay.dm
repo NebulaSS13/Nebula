@@ -28,7 +28,7 @@
 
 /atom/movable/lighting_overlay/New(var/atom/loc, var/no_update = FALSE)
 	var/turf/T = loc //If this runtimes atleast we'll know what's creating overlays outside of turfs.
-	if(T.dynamic_lighting)
+	if(TURF_IS_DYNAMICALLY_LIT(T))
 		. = ..()
 		verbs.Cut()
 		total_lighting_overlays++
@@ -52,7 +52,7 @@
 			log_debug("A lighting overlay realised it was in nullspace in update_overlay() and got pooled!")
 		qdel(src)
 		return
-	if(!T.dynamic_lighting)
+	if(!TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
 		qdel(src)
 		return
 

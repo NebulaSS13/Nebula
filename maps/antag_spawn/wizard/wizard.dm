@@ -10,5 +10,5 @@
 	name = "\improper Wizard's Den"
 	icon_state = "yellow"
 	requires_power = 0
-	dynamic_lighting = 0
+	dynamic_lighting = FALSE
 	req_access = list(access_syndicate)

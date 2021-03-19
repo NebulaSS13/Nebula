@@ -10,4 +10,4 @@
 	name = "\improper Deity Spawn"
 	icon_state = "yellow"
 	requires_power = 0
-	dynamic_lighting = 0
+	dynamic_lighting = FALSE

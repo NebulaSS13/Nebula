@@ -67,7 +67,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "space"
 	requires_power = 1
 	always_unpowered = 1
-	dynamic_lighting = 1
+	dynamic_lighting = TRUE
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
@@ -98,7 +98,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "\improper Centcom"
 	icon_state = "centcom"
 	requires_power = 0
-	dynamic_lighting = 0
+	dynamic_lighting = FALSE
 	req_access = list(access_cent_general)
 
 /area/centcom/holding
@@ -211,7 +211,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Keelin's private beach"
 	icon_state = "null"
 	luminosity = 1
-	dynamic_lighting = 0
+	dynamic_lighting = FALSE
 	requires_power = 0
 	var/sound/mysound = null
 
