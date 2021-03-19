@@ -244,7 +244,7 @@ Subtypes
 
 /datum/terminal_command/cd
 	name = "cd"
-	man_entry = list("Format: cd \[target\] \[network tag\]", "Changes the current disk to the target.", "Local, Removable, and Network are supported.")
+	man_entry = list("Format: cd \[target\] \[network tag\]", "Changes the current disk to the target.", "LOCAL, REMOVABLE, and NETWORK are supported.")
 	pattern = @"^cd"
 
 /datum/terminal_command/cd/proper_input_entered(text, mob/user, datum/terminal/terminal)
@@ -253,7 +253,7 @@ Subtypes
 
 	var/list/cd_args = get_arguments(text)
 
-	var/target = cd_args[1]
+	var/target = uppertext(cd_args[1])
 	if(target == "LOCAL")
 		terminal.current_disk = terminal.disks[/datum/file_storage/disk]
 		if(!terminal.current_disk)
@@ -263,7 +263,7 @@ Subtypes
 			terminal.current_disk = null
 			return "cd: [error]"
 		return "cd: Changed to local disk."
-	if(target == "REMOVABLE")
+	else if(target == "REMOVABLE")
 		terminal.current_disk = terminal.disks[/datum/file_storage/disk/removable]
 		if(!terminal.current_disk)
 			return "cd: Could not locate removable disk."
@@ -273,7 +273,7 @@ Subtypes
 			return "cd: [error]"
 		return "cd: Changed to removable disk"
 
-	if(target == "NETWORK")
+	else if(target == "NETWORK")
 		var/datum/extension/interactive/ntos/origin = terminal.computer
 		if(!origin || !origin.get_network_status())
 			return "cd: Check network connectivity."
@@ -296,6 +296,8 @@ Subtypes
 			terminal.current_disk = null
 			return "cd: [error]"
 		return "cd: Changed to remote file server with tag [network_tag]."
+	else
+		return "cd: Target disk not recognized. LOCAL, REMOVABLE, and NETWORK are supported."
 
 /datum/terminal_command/ls
 	name = "ls"
@@ -319,104 +321,104 @@ Subtypes
 	
 	return print_as_page(file_data, "file", selected_page, terminal.history_max_length - 1)
 
-/datum/terminal_command/delete
-	name = "del"
-	man_entry = list("Format: del \[file name\]", "Deletes the file given in the current disk.")
-	pattern = @"^del\b"
+/datum/terminal_command/remove
+	name = "rm"
+	man_entry = list("Format: rm \[file name\]", "Removes the file given in the current disk.")
+	pattern = @"^rm\b"
 
-/datum/terminal_command/delete/proper_input_entered(text, mob/user, datum/terminal/terminal)
+/datum/terminal_command/remove/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(!terminal.current_disk)
-		return "del: No disk selected."
+		return "rm: No disk selected."
 	
-	var/file_name = copytext(text, 5)
+	var/file_name = copytext(text, 4)
 
 	var/deleted = terminal.current_disk.delete_file(file_name)
 	if(deleted)
-		return "del: Deleted file [file_name]."
+		return "rm: Removed file [file_name]."
 	else
-		return "del: Failed to delete file [file_name]."
+		return "rm: Failed to remove file [file_name]."
 
 /datum/terminal_command/move
-	name = "move"
-	man_entry = list("Format: move \[file name\] \[destination\]", "Moves a file in the current disk to another.")
-	pattern = @"^move"
+	name = "mv"
+	man_entry = list("Format: mv \[file name\] \[destination\]", "Moves a file in the current disk to another.")
+	pattern = @"^mv"
 
 /datum/terminal_command/move/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(!terminal.current_disk)
-		return "move: No disk selected."
+		return "mv: No disk selected."
 	
-	var/list/move_args = get_arguments(text)
-	if(length(move_args) < 2)
-		return "move: Improper syntax, use move \[file name\] \[destination\]."
-	var/datum/computer_file/F = terminal.current_disk.get_file(move_args[1])
+	var/list/mv_args = get_arguments(text)
+	if(length(mv_args) < 2)
+		return "mv: Improper syntax, use mv \[file name\] \[destination\]."
+	var/datum/computer_file/F = terminal.current_disk.get_file(mv_args[1])
 	if(!F)
-		return "move: Could not find file with name [move_args[1]]."
+		return "mv: Could not find file with name [mv_args[1]]."
 
 	// Find the destination.
 	var/datum/file_storage/dest
-	var/target = uppertext(move_args[2])
+	var/target = uppertext(mv_args[2])
 	if(target == "LOCAL")
 		dest = terminal.disks[/datum/file_storage/disk]
 		if(!dest)
-			return "move: Could not locate disk."
+			return "mv: Could not locate disk."
 		var/error = dest.check_errors()
 		if(error)
-			return "move: [error]"
+			return "mv: [error]"
 	else if(target == "REMOVABLE")
 		dest = terminal.disks[/datum/file_storage/disk/removable]
 		if(!dest)
-			return "move: Could not locate removable disk."
+			return "mv: Could not locate removable disk."
 		var/error = dest.check_errors()
 		if(error)
-			return "move: [error]"
+			return "mv: [error]"
 	else
 		var/datum/extension/interactive/ntos/origin = terminal.computer
 		if(!origin || !origin.get_network_status())
-			return "move: Check network connectivity."
+			return "mv: Check network connectivity."
 		var/datum/computer_network/network = terminal.computer.get_network()
 		var/datum/extension/network_device/mainframe/M = network.get_device_by_tag(target)
 		if(!istype(M))
-			return "move: Could not locate destination with tag [target]."
+			return "mv: Could not locate destination with tag [target]."
 		if(!M.has_access(user))
-			return "move: Access denied to destination with tag [target]"
+			return "mv: Access denied to destination with tag [target]"
 		dest = terminal.disks[/datum/file_storage/network]
 		if(!dest)
-			return "move: Could not locate remote file server."
+			return "mv: Could not locate remote file server."
 
 		var/datum/file_storage/network/N = dest
 		N.server = target
 		var/error = dest.check_errors()
 		if(error)
-			return "move: [error]"
+			return "mv: [error]"
 
 	if(!dest)
-		return "move: Could not locate file destination."
+		return "mv: Could not locate file destination."
 	
 	terminal.current_move = new(terminal.current_disk, dest, F)
-	return "move: Beginning file copy..."
+	return "mv: Beginning file move..."
 
 /datum/terminal_command/copy
-	name = "copy"
-	man_entry = list("Format: copy \[file name\]", "Copies a file in the current disk.")
-	pattern = @"^copy"
+	name = "cp"
+	man_entry = list("Format: cp \[file name\]", "Copies a file in the current disk.")
+	pattern = @"^cp"
 
 /datum/terminal_command/copy/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(!terminal.current_disk)
-		return "copy: No disk selected."
+		return "cp: No disk selected."
 	
-	if(length(text) < 6)
-		return "copy: Improper syntax, use copy \[file name\]."
+	if(length(text) < 4)
+		return "cp: Improper syntax, use copy \[file name\]."
 
-	var/target_name = copytext(text, 6)
+	var/target_name = copytext(text, 4)
 	var/datum/computer_file/F = terminal.current_disk.get_file(target_name)
 	if(!F)
-		return "copy: Could not find file with name [target_name]."
+		return "cp: Could not find file with name [target_name]."
 
 	var/copied_file = F.clone(TRUE)
 	if(terminal.current_disk.store_file(copied_file))
-		return "copy: Successfully copied file [F.filename]."
+		return "cp: Successfully copied file [F.filename]."
 	else
-		return "copy: Could not copy file!"
+		return "cp: Could not copy file!"
 
 /datum/terminal_command/rename
 	name = "rename"
@@ -686,32 +688,32 @@ Subtypes
 	else
 		return "namecom: Failed to change alias, '[namecom_args[2]]' already in use."
 
-/datum/terminal_command/delcom
-	name = "delcom"
-	man_entry = list("Format: delcom \[alias\]", "Removes a command with the given alias on the current network target.")
-	pattern = @"^delcom"
+/datum/terminal_command/rmcom
+	name = "rmcom"
+	man_entry = list("Format: rmcom \[alias\]", "Removes a command with the given alias on the current network target.")
+	pattern = @"^rmcom"
 	needs_network = TRUE
 	skill_needed = SKILL_EXPERT
 
-/datum/terminal_command/delcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	var/list/delcom_args = get_arguments(text)
-	if(!length(delcom_args))
-		return "delcom: Improper syntax, use delcom \[alias\]."
+/datum/terminal_command/rmcom/proper_input_entered(text, mob/user, datum/terminal/terminal)
+	var/list/rmcom_args = get_arguments(text)
+	if(!length(rmcom_args))
+		return "rmcom: Improper syntax, use rmcom \[alias\]."
 	
 	var/target_tag = terminal.network_target
 	if(!target_tag)
-		return "delcom: No network target set. Use 'target' to set a network target."
+		return "rmcom: No network target set. Use 'target' to set a network target."
 	
 	var/datum/computer_network/network = terminal.computer.get_network()
 	var/datum/extension/network_device/D = network.get_device_by_tag(target_tag)
 
 	if(!istype(D))
-		return "delcom: Could not find target device with network tag [target_tag]."
+		return "rmcom: Could not find target device with network tag [target_tag]."
 
 	if(!D.has_commands)
-		return "delcom: Target device cannot receive commmands."
+		return "rmcom: Target device cannot receive commmands."
 
-	if(D.remove_command(delcom_args[1]))
-		return "delcom: Removed command with alias '[delcom_args[1]]' from target device."
+	if(D.remove_command(rmcom_args[1]))
+		return "rmcom: Removed command with alias '[rmcom_args[1]]' from target device."
 	else
-		return "delcom: No command with alias '[delcom_args[1]]' found on target device."
+		return "rmcom: No command with alias '[rmcom_args[1]]' found on target device."

@@ -34,9 +34,8 @@
 	computer = null
 	current_disk = null
 	for(var/D in disks)
-		var/datum/file_storage/FS = disks[D]
-		qdel(FS)
-		disks[D] = null
+		qdel(disks[D])
+	disks = null
 	if(current_move)
 		qdel(current_move)
 	if(panel)
@@ -56,13 +55,11 @@
 /datum/terminal/Process()
 	if(current_move)
 		var/result = current_move.update_progress()
-		var/error
 		if(!result)
 			if(QDELETED(current_move))
-				error = "File Move Cancelled: Unknown error."
+				append_to_history("File Move Cancelled: Unknown error.")
 			else
-				error = "File Move Cancelled: Unable to store '[current_move.transferring.filename]' at [current_move.transfer_to]"
-			append_to_history(error)
+				append_to_history("File Move Cancelled: Unable to store '[current_move.transferring.filename]' at [current_move.transfer_to]")
 			QDEL_NULL(current_move)
 			return
 		if(current_move.left_to_transfer)

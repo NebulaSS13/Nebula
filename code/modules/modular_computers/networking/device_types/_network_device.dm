@@ -219,7 +219,7 @@
 	if(id && istype(id, /obj/item/card/id/network) && network.access_controller && (id.user_id in network.access_controller.administrators))
 		return TRUE
 	var/obj/M = holder
-	return M.allowed(user)
+	return M.check_access(user)
 
 // Return the target of any commands passed to this device.
 /datum/extension/network_device/proc/get_command_target()
@@ -343,7 +343,7 @@
 		return "Access denied"
 	var/rand_alias = pick(command_and_call)
 	var/decl/public_access/public_method/rand_method = command_and_call[rand_alias]
-	rand_method.perform(get_command_target(), list())
+	rand_method.perform(get_command_target())
 	last_rand_time = world.time
 	return "Encoding fault, incorrect command resolution likely"
 
