@@ -377,11 +377,8 @@
 	set_light(0)
 	var/do_set_light = FALSE
 
-	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
-		if(connections in list(WEST, EAST, EAST|WEST))
-			set_dir(SOUTH)
-		else
-			set_dir(EAST)
+	if(connections & (NORTH|SOUTH))
+		set_dir(EAST)
 	else
 		set_dir(SOUTH)
 
