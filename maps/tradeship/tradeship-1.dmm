@@ -1070,9 +1070,7 @@
 /area/ship/trade/crew/dorms2)
 "cJ" = (
 /obj/machinery/light,
-/obj/machinery/fabricator/imprinter{
-	initial_network_id = "tradeship_rnd"
-	},
+/obj/machinery/fabricator/imprinter,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science/fabricaton)
 "cL" = (
@@ -2800,9 +2798,7 @@
 	pixel_x = 24;
 	pixel_y = 0
 	},
-/obj/machinery/fabricator/robotics{
-	initial_network_id = "tradeship_rnd"
-	},
+/obj/machinery/fabricator/robotics,
 /obj/machinery/newscaster{
 	pixel_y = -30
 	},
@@ -3144,9 +3140,7 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/obj/machinery/fabricator/protolathe{
-	initial_network_id = "tradeship_rnd"
-	},
+/obj/machinery/fabricator/protolathe,
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
