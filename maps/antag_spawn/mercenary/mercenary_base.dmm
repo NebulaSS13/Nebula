@@ -612,8 +612,7 @@
 "aZ" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /turf/simulated/wall/r_titanium,
 /area/map_template/merc_shuttle)
@@ -803,8 +802,7 @@
 	pixel_x = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -825,8 +823,7 @@
 "bq" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /turf/simulated/wall/r_titanium,
 /area/map_template/merc_shuttle)
@@ -931,8 +928,7 @@
 	},
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
@@ -1312,7 +1308,6 @@
 "cf" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
 	dir = 5
 	},
 /turf/simulated/wall/titanium,
@@ -1353,7 +1348,6 @@
 	pixel_x = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	icon_state = "intact-supply";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor/grid,

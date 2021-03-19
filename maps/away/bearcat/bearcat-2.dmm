@@ -773,7 +773,6 @@
 	tag_interior_door = "dock_port_in"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/structure/cable{
@@ -798,7 +797,6 @@
 	pixel_y = 20
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/machinery/door/airlock/external/bolted{
@@ -814,8 +812,7 @@
 /area/ship/scrap/dock)
 "by" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -894,7 +891,6 @@
 /area/ship/scrap/dock)
 "bE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
 	dir = 6
 	},
 /obj/structure/cable{
@@ -919,7 +915,6 @@
 	pixel_y = 20
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/machinery/door/airlock/external/bolted{
@@ -950,7 +945,6 @@
 	tag_interior_door = "dock_star_in"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/structure/cable{
@@ -1028,7 +1022,6 @@
 "bM" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
 	dir = 9
 	},
 /turf/simulated/floor/tiled/usedup,
@@ -1072,7 +1065,6 @@
 /area/ship/scrap/dock)
 "bQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/usedup,
@@ -2622,7 +2614,6 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 6
 	},
 /obj/machinery/meter,
@@ -2635,7 +2626,6 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/machinery/door/airlock/autoname/engineering/bearcat,
@@ -2647,7 +2637,6 @@
 	icon_state = "5-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 10
 	},
 /turf/simulated/floor/usedup,
@@ -2825,7 +2814,6 @@
 	icon_state = "4-9"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 6
 	},
 /turf/simulated/floor/usedup,
@@ -2843,7 +2831,6 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 10
 	},
 /obj/machinery/meter,
@@ -2862,7 +2849,6 @@
 "eV" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 6
 	},
 /turf/simulated/floor/usedup,
@@ -2998,7 +2984,6 @@
 "fj" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 10
 	},
 /turf/simulated/floor/usedup,
@@ -3028,7 +3013,6 @@
 	req_access = newlist()
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 6
 	},
 /obj/structure/undies_wardrobe,
@@ -3053,7 +3037,6 @@
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/white/diagonal,
@@ -3079,7 +3062,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/white/diagonal,
@@ -3107,7 +3089,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/usedup,
@@ -3130,7 +3111,6 @@
 	},
 /obj/structure/disposalpipe/junction,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 10
 	},
 /turf/simulated/floor/tiled/usedup,
@@ -3164,7 +3144,6 @@
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 6
 	},
 /obj/structure/cable{
@@ -3184,7 +3163,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/structure/cable{
@@ -3204,7 +3182,6 @@
 	},
 /obj/random/junk,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/structure/cable{
@@ -3218,7 +3195,6 @@
 	},
 /obj/random/maintenance,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/structure/table/standard,
@@ -3230,7 +3206,6 @@
 "fz" = (
 /obj/effect/decal/cleanable/cobweb2,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 10
 	},
 /turf/simulated/floor/usedup,
@@ -3258,7 +3233,6 @@
 "fG" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 5
 	},
 /turf/space,
@@ -3274,7 +3248,6 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/floor/usedup,
@@ -3286,7 +3259,6 @@
 /obj/random/clothing,
 /obj/random/clothing,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 9
 	},
 /obj/item/storage/backpack/dufflebag,
@@ -3393,7 +3365,6 @@
 "fS" = (
 /obj/random/junk,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 5
 	},
 /turf/simulated/floor/usedup,
@@ -3409,7 +3380,6 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/floor/usedup,
@@ -3417,7 +3387,6 @@
 "fU" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 9
 	},
 /turf/space,
@@ -3875,7 +3844,6 @@
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 5
 	},
 /obj/machinery/alarm{
@@ -3898,7 +3866,6 @@
 	icon_state = "4-9"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
@@ -3920,7 +3887,6 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment{
@@ -3942,7 +3908,6 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/floor/usedup,
@@ -3977,7 +3942,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/machinery/power/apc/derelict{
@@ -3997,7 +3961,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/floor/usedup,
@@ -4015,7 +3978,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/machinery/alarm{
@@ -4042,7 +4004,6 @@
 	pixel_z = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 9
 	},
 /turf/simulated/floor/usedup,
@@ -4108,7 +4069,6 @@
 /area/ship/scrap/maintenance/power)
 "hh" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/blue,
@@ -4137,7 +4097,6 @@
 /area/ship/scrap/maintenance/atmos)
 "hk" = (
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/blue{
@@ -4155,7 +4114,6 @@
 /area/ship/scrap/maintenance/atmos)
 "hl" = (
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
 	dir = 10
 	},
 /obj/machinery/meter,
@@ -4348,11 +4306,9 @@
 /area/ship/scrap/maintenance/atmos)
 "hA" = (
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
 	dir = 5
 	},
 /obj/effect/floor_decal/corner/blue,
@@ -4393,7 +4349,6 @@
 	pixel_y = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -4421,7 +4376,6 @@
 	icon_state = "4-10"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/usedup,
@@ -4441,7 +4395,6 @@
 	},
 /obj/structure/ladder,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/usedup,
@@ -4466,7 +4419,6 @@
 	pixel_y = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
@@ -5046,7 +4998,6 @@
 /area/ship/scrap/maintenance/engine/aft)
 "iI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 9
 	},
 /mob/living/simple_animal/hostile/carp,
@@ -5224,7 +5175,6 @@
 /area/ship/scrap/maintenance/engine/aft)
 "iZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/floor/airless,
@@ -5232,8 +5182,7 @@
 "ja" = (
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible/green{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /obj/structure/closet/crate/solar,
 /turf/simulated/floor/airless,
@@ -5403,7 +5352,6 @@
 /area/ship/scrap/maintenance/engine/aft)
 "jx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/machinery/meter,
@@ -5422,14 +5370,12 @@
 /area/ship/scrap/maintenance/engine/aft)
 "jz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/wall,
 /area/ship/scrap/maintenance/power)
 "jA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
 	dir = 10
 	},
 /turf/simulated/wall,
@@ -5705,7 +5651,6 @@
 /area/ship/scrap/maintenance/power)
 "uf" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
-	icon_state = "intact";
 	dir = 5
 	},
 /obj/effect/decal/cleanable/ash,
@@ -5757,7 +5702,6 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/machinery/door/airlock/autoname/engineering/bearcat,
@@ -5906,7 +5850,6 @@
 /area/ship/scrap/hidden)
 "Qe" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	icon_state = "intact";
 	dir = 10
 	},
 /obj/machinery/meter,

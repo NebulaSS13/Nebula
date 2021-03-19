@@ -2024,7 +2024,6 @@
 /area/slavers_base/hangar)
 "fi" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 9
 	},
 /obj/structure/cable{
@@ -2292,14 +2291,12 @@
 /area/slavers_base/maint)
 "fG" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "fH" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 9
 	},
 /turf/simulated/floor/airless/ceiling,

@@ -756,8 +756,7 @@
 /area/map_template/colony/tcomms)
 "bH" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 6;
-	icon_state = "intact"
+	dir = 6
 	},
 /turf/simulated/floor/reinforced/nitrogen,
 /area/map_template/colony/atmospherics)
@@ -777,8 +776,7 @@
 /area/template_noop)
 "bJ" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/wall/r_wall,
 /area/map_template/colony/atmospherics)
@@ -795,8 +793,7 @@
 /area/map_template/colony)
 "bL" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 6;
-	icon_state = "intact"
+	dir = 6
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/map_template/colony/atmospherics)
@@ -869,8 +866,7 @@
 /area/template_noop)
 "bS" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /obj/machinery/air_sensor{
 	id_tag = "c1"
@@ -935,8 +931,7 @@
 /area/map_template/colony)
 "bW" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /obj/machinery/air_sensor{
 	id_tag = "c2"
@@ -958,8 +953,7 @@
 /area/map_template/colony/tcomms)
 "bY" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /obj/machinery/air_sensor{
 	id_tag = "c3"
@@ -1044,8 +1038,7 @@
 /area/map_template/colony/engineering)
 "ch" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos/tank{
 	id_tag = "cn2o"
@@ -1102,8 +1095,7 @@
 /area/map_template/colony/atmospherics)
 "cm" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/atmospherics)
@@ -1119,8 +1111,7 @@
 /area/map_template/colony)
 "co" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/atmospherics)
@@ -1221,8 +1212,7 @@
 /area/map_template/colony/atmospherics)
 "cA" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos/tank{
 	id_tag = "co2o"
@@ -1231,8 +1221,7 @@
 /area/map_template/colony/atmospherics)
 "cB" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1275,8 +1264,7 @@
 /area/map_template/colony/dorms)
 "cH" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
 	id_tag = "co2n"
@@ -1291,8 +1279,7 @@
 /area/map_template/colony/dorms)
 "cJ" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
 	id_tag = "cco2n"
@@ -1326,8 +1313,7 @@
 /area/map_template/colony/atmospherics)
 "cO" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1346,8 +1332,7 @@
 /area/template_noop)
 "cQ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/machinery/meter,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1367,8 +1352,7 @@
 /area/map_template/colony/atmospherics)
 "cS" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/atmospherics)
@@ -1384,30 +1368,26 @@
 /area/map_template/colony/engineering)
 "cU" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/atmospherics)
 "cV" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/atmospherics)
 "cW" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/machinery/meter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/atmospherics)
 "cX" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/machinery/atmospherics/binary/pump,
 /turf/simulated/floor/tiled/techfloor,
@@ -1446,8 +1426,7 @@
 /area/map_template/colony)
 "db" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos/tank{
 	id_tag = "cco2o"
@@ -1478,8 +1457,7 @@
 /area/map_template/colony)
 "dd" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/atmospherics)
@@ -1489,15 +1467,13 @@
 /area/map_template/colony/atmospherics)
 "df" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/atmospherics)
 "dg" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/machinery/meter,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -2312,8 +2288,7 @@
 /area/map_template/colony/command)
 "eE" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /obj/effect/floor_decal/corner_techfloor_grid{
@@ -2884,8 +2859,7 @@
 /area/map_template/colony/engineering)
 "fz" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /obj/effect/floor_decal/techfloor{
 	dir = 8;
@@ -3757,8 +3731,7 @@
 /area/map_template/colony/atmospherics)
 "gM" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/machinery/meter,
 /obj/effect/floor_decal/techfloor{
@@ -4072,8 +4045,7 @@
 /area/map_template/colony)
 "hq" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -4427,8 +4399,7 @@
 /area/map_template/colony)
 "hX" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/effect/floor_decal/corner_techfloor_grid{
 	dir = 5;
@@ -6112,8 +6083,7 @@
 /area/map_template/colony)
 "kD" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced_borosilicate,
@@ -6334,8 +6304,7 @@
 /area/map_template/colony/jail)
 "kY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced_borosilicate,
@@ -6372,8 +6341,7 @@
 /area/map_template/colony)
 "lc" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
 	id_tag = "cn2n"
@@ -6418,8 +6386,7 @@
 	locked = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
@@ -6889,8 +6856,7 @@
 /area/map_template/colony)
 "lZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /obj/structure/catwalk,
 /obj/structure/cable{
@@ -7527,8 +7493,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /turf/exterior/concrete,
 /area/map_template/colony/mineralprocessing)
@@ -8542,8 +8507,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /obj/structure/catwalk,
 /turf/exterior/concrete,

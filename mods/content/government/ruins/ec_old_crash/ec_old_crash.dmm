@@ -720,7 +720,6 @@
 "bC" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 10
 	},
 /obj/structure/cable{
@@ -1406,7 +1405,6 @@
 /area/map_template/ecship/engineering)
 "cO" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/yellow{
@@ -1642,7 +1640,6 @@
 /obj/structure/catwalk,
 /obj/structure/handrail,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 6
 	},
 /obj/effect/landmark/scorcher,
@@ -1685,7 +1682,6 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 5
 	},
 /obj/structure/cable{
@@ -1698,7 +1694,6 @@
 /area/map_template/ecship/engineering)
 "dq" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/structure/cable{
@@ -1712,7 +1707,6 @@
 "dr" = (
 /obj/structure/bed/chair,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/structure/cable{
@@ -1759,7 +1753,6 @@
 "dt" = (
 /obj/machinery/door/airlock/external,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/structure/cable{
@@ -1770,7 +1763,6 @@
 /area/map_template/ecship/engineering)
 "du" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/structure/handrail{
@@ -1787,7 +1779,6 @@
 /obj/structure/catwalk,
 /obj/structure/handrail,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/effect/landmark/scorcher,
@@ -1796,7 +1787,6 @@
 "dw" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 9
 	},
 /obj/effect/landmark/scorcher,
@@ -1907,7 +1897,6 @@
 "dI" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/effect/landmark/scorcher,
@@ -1937,7 +1926,6 @@
 "dO" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 6
 	},
 /obj/structure/cable{
@@ -1980,7 +1968,6 @@
 "dX" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 5
 	},
 /obj/effect/landmark/scorcher,
@@ -1989,7 +1976,6 @@
 "dY" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/effect/landmark/scorcher,
@@ -2014,7 +2000,6 @@
 	name = "\improper OXYGEN"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/wall/r_wall/hull,
@@ -2046,7 +2031,6 @@
 /area/map_template/ecship/engine)
 "ee" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/wall/r_wall/hull,
@@ -2091,7 +2075,6 @@
 "ej" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
 	dir = 6
 	},
 /obj/effect/landmark/scorcher,
@@ -2125,8 +2108,7 @@
 /area/map_template/ecship/engine)
 "em" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecship/engine)

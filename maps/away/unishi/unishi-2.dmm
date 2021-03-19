@@ -1037,7 +1037,6 @@
 /area/unishi/toxins)
 "cI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/wall/ocp_wall,
@@ -1382,14 +1381,12 @@
 /area/unishi/common)
 "dF" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
-	icon_state = "intact";
 	dir = 6
 	},
 /turf/simulated/wall/r_wall,
 /area/unishi/toxins)
 "dG" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/wall/r_wall,
@@ -1403,7 +1400,6 @@
 /area/unishi/toxins)
 "dI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
-	icon_state = "intact";
 	dir = 10
 	},
 /turf/simulated/wall/titanium,
@@ -1628,7 +1624,6 @@
 /area/unishi/hydro)
 "ek" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
-	icon_state = "intact";
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -1947,7 +1942,6 @@
 "fb" = (
 /obj/effect/vine,
 /obj/machinery/atmospherics/pipe/simple/visible/green{
-	icon_state = "intact";
 	dir = 5
 	},
 /obj/machinery/seed_extractor,
@@ -2905,7 +2899,6 @@
 "hm" = (
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/floor,

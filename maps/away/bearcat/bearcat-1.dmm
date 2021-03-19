@@ -343,7 +343,6 @@
 "aN" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
 	dir = 5
 	},
 /turf/simulated/floor/tiled/usedup,
@@ -361,7 +360,6 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
 	dir = 9
 	},
 /turf/simulated/floor/tiled/usedup,
@@ -2401,7 +2399,6 @@
 	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
 	dir = 5
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -2412,7 +2409,6 @@
 /area/ship/scrap/maintenance/eva)
 "eA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/machinery/door/airlock/external/bolted{
@@ -2443,7 +2439,6 @@
 	pixel_y = 40
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
 	dir = 4
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{

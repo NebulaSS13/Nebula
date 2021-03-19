@@ -320,7 +320,6 @@
 /area/djstation)
 "tb" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 9
 	},
 /turf/simulated/floor/airless,
@@ -385,8 +384,7 @@
 /area/djstation)
 "Ab" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 6;
-	icon_state = "intact"
+	dir = 6
 	},
 /turf/simulated/floor/airless,
 /area/djstation)
@@ -397,7 +395,6 @@
 	locked = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
 	dir = 4
 	},
 /turf/simulated/floor/airless,
