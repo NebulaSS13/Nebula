@@ -319,7 +319,7 @@
 				return command_args
 		if(IC_FORMAT_COLOR)
 			return sanitize_hexcolor(command_args, null)
-		if(IC_FORMAT_NUMBER)
+		if(IC_FORMAT_NUMBER, IC_FORMAT_INDEX)
 			if(istext(command_args))
 				return text2num(command_args)
 			if(isnum(command_args))

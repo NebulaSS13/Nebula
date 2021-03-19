@@ -20,7 +20,7 @@
 	..()
 	ADJUST_TAG_VAR(initial_network_id, map_hash)
 
-/obj/item/stock_parts/network_lock/emag_act(remaining_charges, mob/user, emag_source)
+/obj/item/stock_parts/network_receiver/network_lock/emag_act(remaining_charges, mob/user, emag_source)
 	. = ..()
 	if(length(req_access) && istype(loc, /obj/machinery)) // Don't emag it outside; you can just cut access without it anyway.
 		emagged = TRUE

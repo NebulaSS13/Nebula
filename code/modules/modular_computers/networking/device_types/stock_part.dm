@@ -11,7 +11,7 @@
 		return FALSE
 	var/atom/H = holder
 	var/obj/M = H.loc
-	return M.allowed(user)
+	return M.check_access(user)
 
 /datum/extension/network_device/stock_part/get_command_target()
 	var/atom/A = holder

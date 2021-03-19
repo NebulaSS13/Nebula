@@ -982,6 +982,11 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/proc/toggle_lock(var/forced = 0)
 	return locked ? unlock() : lock()
 
+/obj/machinery/door/airlock/allowed(mob/M)
+	if(locked)
+		return 0
+	return ..(M)
+
 /obj/machinery/door/airlock/Initialize(var/mapload, var/d, var/populate_parts = TRUE, var/obj/structure/door_assembly/assembly = null)
 	if(!populate_parts)
 		inherit_from_assembly(assembly)
