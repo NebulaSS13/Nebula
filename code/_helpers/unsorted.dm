@@ -631,12 +631,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 					copiedobjs += newobjs
 					copiedobjs += newmobs
 
-//					var/area/AR = X.loc
-
-//					if(AR.dynamic_lighting)
-//						X.opacity = !X.opacity
-//						X.sd_SetOpacity(!X.opacity)			//TODO: rewrite this code so it's not messed by lighting ~Carn
-
 					toupdate += X
 
 					refined_src -= T

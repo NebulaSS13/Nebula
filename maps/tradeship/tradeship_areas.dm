@@ -249,7 +249,7 @@
 	name = "\improper Cargo Elevator"
 	icon_state = "shuttle"
 	requires_power = 0
-	dynamic_lighting = 1
+	dynamic_lighting = TRUE
 	sound_env = STANDARD_STATION
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg')

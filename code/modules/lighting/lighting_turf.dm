@@ -48,8 +48,7 @@
 	if(lighting_overlay)
 		return
 
-	var/area/A = loc
-	if(A.dynamic_lighting && dynamic_lighting)
+	if(TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
 		if(!lighting_corners_initialised)
 			generate_missing_corners()
 
@@ -66,8 +65,7 @@
 // Used to get a scaled lumcount.
 /turf/proc/get_lumcount(var/minlum = 0, var/maxlum = 1)
 	if(!lighting_overlay)
-		var/area/A = loc
-		if(A.dynamic_lighting && dynamic_lighting)
+		if(TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
 			var/atom/movable/lighting_overlay/O = new /atom/movable/lighting_overlay(src)
 			lighting_overlay = O
 

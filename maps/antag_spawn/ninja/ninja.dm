@@ -30,13 +30,13 @@
 	name = "\improper Ninja Base"
 	icon_state = "green"
 	requires_power = 0
-	dynamic_lighting = 1
+	dynamic_lighting = TRUE
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	req_access = list(access_syndicate)
 
 /area/map_template/ninja_dojo/dojo
 	name = "\improper Clan Dojo"
-	dynamic_lighting = 0
+	dynamic_lighting = FALSE
 
 /area/map_template/ninja_dojo/start
 	name = "\improper Clan Dojo"

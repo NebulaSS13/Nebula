@@ -35,13 +35,13 @@
 	name = "\improper Response Team Base"
 	icon_state = "yellow"
 	requires_power = 0
-	dynamic_lighting = 1
+	dynamic_lighting = TRUE
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/map_template/rescue_base/base
 	name = "\improper Barracks"
 	icon_state = "yellow"
-	dynamic_lighting = 0
+	dynamic_lighting = FALSE
 
 /area/map_template/rescue_base/start
 	name = "\improper Response Team Base"

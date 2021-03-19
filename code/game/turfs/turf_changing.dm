@@ -56,7 +56,7 @@
 	W.corners =          old_corners
 	W.lighting_overlay = old_lighting_overlay
 	if(W.dynamic_lighting != old_dynamic_lighting)
-		if(W.dynamic_lighting)
+		if(TURF_IS_DYNAMICALLY_LIT_UNSAFE(W))
 			W.lighting_build_overlay()
 		else
 			W.lighting_clear_overlay()

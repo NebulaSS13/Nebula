@@ -48,7 +48,7 @@
 /area/map_template/syndicate_mothership/raider_base
 	name = "\improper Raider Base"
 	requires_power = 0
-	dynamic_lighting = 0
+	dynamic_lighting = FALSE
 	req_access = list(access_syndicate)
 
 /obj/machinery/computer/shuttle_control/multi/raider

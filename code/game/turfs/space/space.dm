@@ -4,7 +4,7 @@
 	icon = 'icons/turf/space.dmi'
 	explosion_resistance = 3
 	icon_state = "default"
-	dynamic_lighting = 0
+	dynamic_lighting = FALSE
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	permit_ao = FALSE
