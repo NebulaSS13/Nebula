@@ -7,6 +7,7 @@
 	#include "../../mods/content/government/ruins/ec_old_crash/ec_old_crash.dm"
 	#include "../../mods/content/corporate/_corporate.dme"
 	#include "../../mods/content/corporate/away_sites/lar_maria/lar_maria.dm"
+	#include "../../mods/content/generic_shuttles/_generic_shuttles.dme"
 	#include "../../mods/species/utility_frames/_utility_frames.dme"
 	#include "../../mods/species/tajaran/_tajaran.dme"
 	#include "../../mods/species/neocorvids/_neocorvids.dme"

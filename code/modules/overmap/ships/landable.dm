@@ -125,6 +125,8 @@
 	// Configure shuttle datum
 	GLOB.shuttle_moved_event.register(shuttle_datum, src, .proc/on_shuttle_jump)
 	on_landing(landmark, shuttle_datum.current_location) // We "land" at round start to properly place ourselves on the overmap.
+	if(landmark == shuttle_datum.current_location)
+		status = SHIP_STATUS_OVERMAP // we spawned on the overmap, so have to initialize our state properly.
 
 /obj/effect/shuttle_landmark/ship
 	name = "Open Space"
