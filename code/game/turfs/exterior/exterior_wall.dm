@@ -1,3 +1,5 @@
+#define MAT_DROP_CHANCE 30
+
 var/list/default_strata_type_by_z = list()
 var/list/default_material_by_strata_and_z = list()
 var/list/default_strata_types = list()
@@ -222,6 +224,8 @@ var/list/natural_walls = list()
 	if(reinf_material?.ore_result_amount)
 		for(var/i = 1 to reinf_material.ore_result_amount)
 			pass_geodata_to(new /obj/item/ore(src, reinf_material.type))
+	if(prob(MAT_DROP_CHANCE))
+		pass_geodata_to(new /obj/item/ore(src, material.type))
 	destroy_artifacts(null, INFINITY)
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
 	. = ChangeTurf(floor_type || get_base_turf_by_area(src))
@@ -247,3 +251,5 @@ var/list/natural_walls = list()
 	set_extension(O, /datum/extension/geological_data)
 	var/datum/extension/geological_data/newdata = get_extension(O, /datum/extension/geological_data)
 	newdata.set_data(ours.geodata.get_copy())
+
+#undef MAT_DROP_CHANCE
