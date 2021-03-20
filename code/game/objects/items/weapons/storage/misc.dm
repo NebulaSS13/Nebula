@@ -159,6 +159,8 @@
 	icon_state = "lollijar"
 	max_storage_space = 20
 	startswith = list(/obj/item/clothing/mask/chewable/candy/lolli/weak_meds = 15)
+	drop_sound = 'sound/foley/bottledrop1.ogg'
+	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 
 /obj/item/storage/medical_lolli_jar/on_update_icon()
 	. = ..()

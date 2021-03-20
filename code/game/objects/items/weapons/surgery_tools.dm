@@ -21,6 +21,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'materials':1,'biotech':1}"
+	drop_sound = 'sound/foley/knifedrop3.ogg'
 
 /*
  * Hemostat
@@ -36,6 +37,7 @@
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'materials':1,'biotech':1}"
 	attack_verb = list("attacked", "pinched")
+	drop_sound = 'sound/foley/knifedrop3.ogg'
 
 /*
  * Cautery
@@ -94,6 +96,8 @@
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
+	pickup_sound = 'sound/foley/knife1.ogg' 
+	drop_sound = 'sound/foley/knifedrop3.ogg'
 /*
  * Researchable Scalpels
  */
@@ -104,6 +108,7 @@
 	damtype = "fire"
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	pickup_sound = 'sound/foley/pickup2.ogg'
 
 /obj/item/scalpel/laser2
 	name = "laser scalpel"
@@ -116,6 +121,7 @@
 		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
+	pickup_sound = 'sound/foley/pickup2.ogg'
 
 /obj/item/scalpel/laser3
 	name = "laser scalpel"
@@ -129,6 +135,7 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
+	pickup_sound = 'sound/foley/pickup2.ogg'
 
 /obj/item/scalpel/manager
 	name = "incision management system"
@@ -142,13 +149,14 @@
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
+	pickup_sound = 'sound/foley/pickup2.ogg'
 
 /*
  * Circular Saw
  */
 /obj/item/circular_saw
 	name = "circular saw"
-	desc = "For heavy duty cutting."
+	desc = "For heavy-duty cutting."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "saw3"
 	hitsound = 'sound/weapons/circsawhit.ogg'
@@ -164,12 +172,13 @@
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
 	sharp = 1
 	edge = 1
+	pickup_sound = 'sound/foley/pickup2.ogg'
+	drop_sound = 'sound/foley/knifedrop3.ogg'
 
 /obj/item/circular_saw/get_autopsy_descriptors()
 	. = ..()
 	. += "serrated"
 
-//misc, formerly from code/defines/weapons.dm
 /obj/item/bonegel
 	name = "bone gel"
 	icon = 'icons/obj/surgery.dmi'
@@ -198,3 +207,5 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "hit", "bludgeoned")
+	pickup_sound = 'sound/foley/pickup2.ogg'
+	drop_sound = 'sound/foley/knifedrop3.ogg'

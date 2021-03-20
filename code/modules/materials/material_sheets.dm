@@ -9,6 +9,8 @@
 	randpixel = 3
 	icon = 'icons/obj/materials.dmi'
 	matter = null
+	pickup_sound = 'sound/foley/tooldrop3.ogg'
+	drop_sound = 'sound/foley/tooldrop2.ogg'
 
 	var/decl/material/reinf_material
 	var/material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME

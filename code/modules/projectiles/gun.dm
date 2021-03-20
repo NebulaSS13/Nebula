@@ -45,6 +45,9 @@
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
 
+	drop_sound = 'sound/foley/drop1.ogg'
+	pickup_sound = 'sound/foley/pickup2.ogg'
+
 	var/waterproof = FALSE
 	var/burst = 1
 	var/fire_delay = 6 	//delay after shooting before the gun can be used again. Cannot be less than [burst_delay+1]

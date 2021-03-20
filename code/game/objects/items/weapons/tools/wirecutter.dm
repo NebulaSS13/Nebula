@@ -12,6 +12,7 @@
 	sharp = 1
 	edge = 1
 	applies_material_colour = TRUE
+	drop_sound = 'sound/foley/singletooldrop1.ogg'
 
 	var/handle_color
 	var/global/valid_colours = list(COLOR_RED, COLOR_MAROON, COLOR_SEDONA, PIPE_COLOR_YELLOW, COLOR_BABY_BLUE)

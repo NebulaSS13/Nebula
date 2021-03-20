@@ -10,6 +10,9 @@
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	material = /decl/material/solid/metal/aluminium
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	drop_sound = 'sound/foley/drop1.ogg'
+	pickup_sound = 'sound/foley/pickup2.ogg'
+
 	var/scan_title
 	var/scan_data
 	var/window_width = 450

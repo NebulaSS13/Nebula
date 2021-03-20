@@ -15,6 +15,9 @@
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	applies_material_name = TRUE
 	applies_material_colour = TRUE
+	pickup_sound = 'sound/foley/knife1.ogg' 
+	drop_sound = 'sound/foley/knifedrop3.ogg'
+
 	var/draw_handle
 	var/handle_color
 	var/valid_handle_colors

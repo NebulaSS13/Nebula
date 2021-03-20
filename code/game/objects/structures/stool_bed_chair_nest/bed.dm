@@ -268,6 +268,7 @@
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
+	pickup_sound = 'sound/foley/pickup2.ogg'
 	var/structure_form_type = /obj/structure/bed/roller	//The deployed form path.
 
 /obj/item/roller/attack_self(mob/user)

@@ -13,6 +13,7 @@
 	center_of_mass = @"{'x':16,'y':20}"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 	applies_material_colour = TRUE
+	drop_sound = 'sound/foley/bardrop1.ogg'
 	var/global/valid_colours = list(COLOR_RED_GRAY, COLOR_MAROON, COLOR_DARK_BROWN, COLOR_GRAY20)
 	var/handle_color
 	var/shape_variations = 1
