@@ -117,6 +117,7 @@
 
 
 /proc/translate_turfs(var/list/translation, var/area/base_area = null, var/turf/base_turf)
+	. = list()
 	for(var/turf/source in translation)
 
 		var/turf/target = translation[source]
@@ -124,10 +125,10 @@
 		if(target)
 			if(base_area)
 				ChangeArea(target, get_area(source))
-				transport_turf_contents(source, target)
+				. += transport_turf_contents(source, target)
 				ChangeArea(source, base_area)
 			else
-				transport_turf_contents(source, target)
+				. += transport_turf_contents(source, target)
 	//change the old turfs
 	for(var/turf/source in translation)
 		var/old_turf = source.prev_type || base_turf || get_base_turf_by_area(source)
