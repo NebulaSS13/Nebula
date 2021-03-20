@@ -244,17 +244,17 @@
 	color = "#eeddcc"
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
-	metabolism = REM
+	metabolism = REM*2
 
 /decl/material/liquid/lactate/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	M.add_chemical_effect(CE_PULSE, 1)
-	M.add_chemical_effect(CE_BREATHLOSS, 0.02 * volume)
 	if(volume >= 10)
 		M.add_chemical_effect(CE_PULSE, 1)
-		M.add_chemical_effect(CE_SLOWDOWN, (volume/10) ** 2)
+		M.add_chemical_effect(CE_SLOWDOWN, (volume/15) ** 2)
 	else if(LAZYACCESS(M.chem_doses, type) > 30) //after prolonged exertion
 		ADJ_STATUS(M, STAT_JITTER, 5)
+		M.add_chemical_effect(CE_BREATHLOSS, 0.02 * volume)
 
 /decl/material/liquid/nanoblood
 	name = "nanoblood"

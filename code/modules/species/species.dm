@@ -276,14 +276,16 @@
 
 	var/datum/ai/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs. This will override mob AIs.
 
-	var/exertion_effect_chance = 0
+	var/exertion_emote_chance =    5
+	var/exertion_effect_chance =   0
 	var/exertion_hydration_scale = 0
 	var/exertion_nutrition_scale = 0
-	var/exertion_charge_scale = 0
-	var/exertion_reagent_scale = 0
-	var/exertion_reagent_path = null
-	var/list/exertion_emotes_biological = null
-	var/list/exertion_emotes_synthetic = null
+	var/exertion_charge_scale =    0
+	var/exertion_reagent_scale =   0
+
+	var/exertion_reagent_path
+	var/list/exertion_emotes_biological
+	var/list/exertion_emotes_synthetic
 
 	var/list/traits = list() // An associative list of /decl/traits and trait level - See individual traits for valid levels
 /*
@@ -875,7 +877,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				H.adjust_nutrition(-DEFAULT_HUNGER_FACTOR * exertion_nutrition_scale)
 			if (exertion_reagent_scale && !isnull(exertion_reagent_path))
 				H.make_reagent(REM * exertion_reagent_scale, exertion_reagent_path)
-		if (prob(10))
+		if(prob(exertion_emote_chance))
 			var/list/active_emotes = synthetic ? exertion_emotes_synthetic : exertion_emotes_biological
 			if(length(active_emotes))
 				var/decl/emote/exertion_emote = GET_DECL(pick(active_emotes))
