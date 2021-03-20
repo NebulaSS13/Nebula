@@ -12,6 +12,7 @@
 	removed_by_welder = TRUE
 	value = 0.2
 	sparse_material_weight = 2
+	ore_result_amount = 7
 	rich_material_weight = 37
 	heating_point = T20C + 10 // Above room temperature, to avoid drinks melting.
 	stack_type = /obj/item/stack/material/generic/brick
@@ -36,8 +37,8 @@
 	name = "lukrite ice"
 	ore_name = "lukrite ice"
 	value = 0.3
-	sparse_material_weight = 27
-	rich_material_weight = 22
+	sparse_material_weight = 20
+	rich_material_weight = 16
 
 /decl/material/solid/ice/rubenium
 	heating_products = list(
@@ -48,8 +49,8 @@
 	name = "rubenium ice"
 	ore_name = "rubenium ice"
 	value = 0.4
-	sparse_material_weight = 35
-	rich_material_weight = 12
+	sparse_material_weight = 20
+	rich_material_weight = 13
 
 /decl/material/solid/ice/trigarite
 	heating_products = list(
@@ -60,8 +61,8 @@
 	name = "trigarite ice"
 	ore_name = "trigarite ice"
 	value = 0.5
-	sparse_material_weight = 38
-	rich_material_weight = 23
+	sparse_material_weight = 20
+	rich_material_weight = 15
 
 /decl/material/solid/ice/ediroite
 	heating_products = list(
@@ -72,5 +73,5 @@
 	name = "ediroite ice"
 	ore_name = "ediroite ice"
 	value = 0.2
-	sparse_material_weight = 21
-	rich_material_weight = 39
+	sparse_material_weight = 20
+	rich_material_weight = 16
