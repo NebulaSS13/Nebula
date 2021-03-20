@@ -4,6 +4,10 @@
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	w_class = ITEM_SIZE_NO_CONTAINER
 
+	pickup_sound = null
+	drop_sound =   null
+	equip_sound =  null
+
 	var/atom/movable/affecting = null
 	var/mob/assailant = null
 	var/decl/grab/current_grab

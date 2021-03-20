@@ -78,14 +78,27 @@
 	///Sound used when equipping the item into a valid slot
 	var/equip_sound
 	///Sound uses when picking the item up (into your hands)
-	var/pickup_sound
+	var/pickup_sound = 'sound/foley/paperpickup2.ogg'
 	///Sound uses when dropping the item, or when its thrown.
-	var/drop_sound
+	var/drop_sound = 'sound/foley/drop1.ogg'
 	
 	var/datum/reagents/coating // reagent container for coating things like blood/oil, used for overlays and tracks
 
 	var/tmp/has_inventory_icon	// do not set manually
 	var/tmp/use_single_icon
+
+// Foley sound callbacks
+/obj/item/proc/equipped_sound_callback()
+	if(ismob(loc) && equip_sound)
+		playsound(src, equip_sound, 25, 0)
+
+/obj/item/proc/pickup_sound_callback()
+	if(ismob(loc) && pickup_sound)
+		playsound(src, pickup_sound, 25, 0)
+
+/obj/item/proc/dropped_sound_callback()
+	if(!ismob(loc) && drop_sound)
+		playsound(src, drop_sound, 25, 0)
 
 /obj/item/proc/get_origin_tech()
 	return origin_tech
@@ -349,8 +362,6 @@
 				playsound(hit_atom, 'sound/weapons/genhit.ogg', volume, TRUE, -1)
 		else
 			playsound(hit_atom, 'sound/weapons/throwtap.ogg', 1, volume, -1)
-	else if(drop_sound)
-		playsound(src, drop_sound, 50)
 
 // apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user)
@@ -359,6 +370,8 @@
 	update_twohanding()
 	for(var/obj/item/thing in user?.get_held_items())
 		thing.update_twohanding()
+	if(drop_sound && SSticker.mode)
+		addtimer(CALLBACK(src, .proc/dropped_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
@@ -391,15 +404,13 @@
 		for(var/obj/item/held in M.get_held_items())
 			held.update_twohanding()
 
-	if(slot_flags & global.slot_flags_enumeration[slot])
-		if(equip_sound)
-			playsound(src, equip_sound, 50)
-		else if(drop_sound)
-			playsound(src, drop_sound, 50)
-	else if(isliving(user) && pickup_sound)
-		var/mob/living/L = user
-		if(slot in L.held_item_slots)
-			playsound(src, pickup_sound, 50)
+	if(SSticker.mode && (equip_sound || pickup_sound))
+		if((slot_flags & global.slot_flags_enumeration[slot]) && equip_sound)
+			addtimer(CALLBACK(src, .proc/equipped_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
+		else if(isliving(user) && pickup_sound)
+			var/mob/living/L = user
+			if(slot in L.held_item_slots)
+				addtimer(CALLBACK(src, .proc/pickup_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 
 //Defines which slots correspond to which slot flags
 var/list/slot_flags_enumeration = list(

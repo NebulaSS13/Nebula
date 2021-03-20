@@ -14,6 +14,9 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 1 //glass doesn't dissolve in acid
 
+	drop_sound = 'sound/foley/bottledrop1.ogg'
+	pickup_sound = 'sound/foley/bottlepickup1.ogg'
+
 	var/list/can_be_placed_into = list(
 		/obj/machinery/chem_master/,
 		/obj/machinery/chemical_dispenser,
@@ -117,6 +120,8 @@
 	material = /decl/material/solid/plastic
 	material_force_multiplier = 0.2
 	slot_flags = SLOT_HEAD
+	drop_sound = 'sound/foley/donk1.ogg'
+	pickup_sound = 'sound/foley/pickup2.ogg'
 
 /obj/item/chems/glass/bucket/wood
 	desc = "It's a wooden bucket. How rustic."

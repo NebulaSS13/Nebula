@@ -8,6 +8,9 @@
 	item_state = "broken_beer" //Generic held-item sprite until unique ones are made.
 	force = 5
 
+	drop_sound = 'sound/foley/bottledrop1.ogg'
+	pickup_sound = 'sound/foley/bottlepickup1.ogg'
+
 	var/smash_duration = 5 //Directly relates to the 'weaken' duration. Lowered by armor (i.e. helmets)
 	var/isGlass = TRUE //Whether the 'bottle' is made of glass or not so that milk cartons dont shatter when someone gets hit by it
 	var/obj/item/chems/glass/rag/rag = null
@@ -518,6 +521,8 @@
 	item_state = "carton"
 	center_of_mass = @"{'x':16,'y':7}"
 	isGlass = 0
+	drop_sound = 'sound/foley/drop1.ogg'
+	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
 /obj/item/chems/food/drinks/bottle/orangejuice/Initialize()
 	. = ..()
@@ -530,6 +535,8 @@
 	item_state = "carton"
 	center_of_mass = @"{'x':16,'y':8}"
 	isGlass = 0
+	drop_sound = 'sound/foley/drop1.ogg'
+	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
 /obj/item/chems/food/drinks/bottle/cream/Initialize()
 	. = ..()
@@ -542,6 +549,8 @@
 	item_state = "carton"
 	center_of_mass = @"{'x':16,'y':8}"
 	isGlass = 0
+	drop_sound = 'sound/foley/drop1.ogg'
+	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
 /obj/item/chems/food/drinks/bottle/tomatojuice/Initialize()
 	. = ..()
@@ -554,6 +563,8 @@
 	item_state = "carton"
 	center_of_mass = @"{'x':16,'y':8}"
 	isGlass = 0
+	drop_sound = 'sound/foley/drop1.ogg'
+	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
 /obj/item/chems/food/drinks/bottle/limejuice/Initialize()
 	. = ..()

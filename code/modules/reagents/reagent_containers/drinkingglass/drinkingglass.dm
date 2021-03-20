@@ -15,6 +15,9 @@
 	volume = 30
 	material = /decl/material/solid/glass
 
+	drop_sound = 'sound/foley/bottledrop1.ogg'
+	pickup_sound = 'sound/foley/bottlepickup1.ogg'
+
 	var/list/extras = list() // List of extras. Two extras maximum
 
 	var/rim_pos // Position of the rim for fruit slices. list(y, x_left, x_right)

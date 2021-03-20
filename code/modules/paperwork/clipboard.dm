@@ -11,6 +11,9 @@
 	slot_flags = SLOT_LOWER_BODY
 	applies_material_name = FALSE
 	material = /decl/material/solid/wood
+	drop_sound = 'sound/foley/tooldrop5.ogg'
+	pickup_sound = 'sound/foley/paperpickup2.ogg'
+
 	var/obj/item/pen/haspen		//The stored pen.
 	var/obj/item/toppaper	//The topmost piece of paper.
 

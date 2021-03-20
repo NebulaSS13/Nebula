@@ -17,6 +17,10 @@
 	material = /decl/material/solid/metal/steel
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
+
+	pickup_sound = 'sound/foley/knife1.ogg' 
+	drop_sound = 'sound/foley/knifedrop3.ogg'
+
 	var/draw_handle
 
 /obj/item/sword/update_force()
@@ -77,8 +81,8 @@
 	desc = "A high-tech take on a woefully underpowered weapon. Can't mistake its sound for anything."
 	material = /decl/material/solid/metal/titanium
 	hitsound = 'sound/weapons/anime_sword.wav'
+	pickup_sound = 'sound/weapons/katana_out.wav'
 
-/obj/item/sword/katana/vibro/equipped(mob/living/user, slot)
-	if(slot in user.held_item_slots)
-		playsound(src, 'sound/weapons/katana_out.wav', 50, 1, -5)
-	
+/obj/item/sword/katana/vibro/pickup_sound_callback()
+	if(ismob(loc) && pickup_sound)
+		playsound(src, pickup_sound, 50, -1, 5)

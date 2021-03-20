@@ -17,6 +17,8 @@
 	icon = 'icons/obj/card.dmi'
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
+	drop_sound = 'sound/foley/paperpickup1.ogg'
+	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
 /obj/item/card/union
 	name = "union card"

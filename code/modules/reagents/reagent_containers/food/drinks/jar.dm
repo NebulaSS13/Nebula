@@ -9,6 +9,8 @@
 	item_state = "beaker"
 	center_of_mass = @"{'x':15,'y':8}"
 	unacidable = 1
+	drop_sound = 'sound/foley/bottledrop1.ogg'
+	pickup_sound = 'sound/foley/bottlepickup1.ogg'
 
 /obj/item/chems/food/drinks/jar/on_reagent_change()
 	if(LAZYLEN(reagents.reagent_volumes))

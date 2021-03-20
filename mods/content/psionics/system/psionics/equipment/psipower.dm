@@ -4,6 +4,11 @@
 	atom_flags = 0
 	simulated = 1
 	anchored = 1
+
+	pickup_sound = null
+	drop_sound =   null
+	equip_sound =  null
+
 	var/maintain_cost = 3
 	var/mob/living/owner
 
