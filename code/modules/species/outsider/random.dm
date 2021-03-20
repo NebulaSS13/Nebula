@@ -20,7 +20,7 @@
 
 	exertion_effect_chance = 10
 	exertion_hydration_scale = 1
-	exertion_reagent_scale = 5
+	exertion_reagent_scale = 1
 	exertion_reagent_path = /decl/material/liquid/lactate
 	exertion_emotes_biological = list(
 		/decl/emote/exertion/biological,
