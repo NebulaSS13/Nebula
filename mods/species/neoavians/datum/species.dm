@@ -1,3 +1,16 @@
+/datum/appearance_descriptor/age/neoavian
+	chargen_min_index = 3
+	chargen_max_index = 6
+	standalone_value_descriptors = list(
+		"a hatchling" =     1,
+		"an fledgeling" =   6,
+		"a young adult" =  12,
+		"an adult" =       25,
+		"middle-aged" =    35,
+		"aging" =          45,
+		"elderly" =        50
+	)
+
 /decl/species/neoavian
 	name = SPECIES_AVIAN
 	bodytype = BODYTYPE_AVIAN
@@ -6,9 +19,9 @@
 	These days they are more commonly found pursuing their own careers and goals on the fringes of human space or around their adopted homeworld \
 	of Hyperion. Neo-avian naming conventions tend to be a chosen name followed by the species of the person, followed by the location they were hatched."
 
+	age_descriptor = /datum/appearance_descriptor/age/neoavian
+
 	meat_type = /obj/item/chems/food/snacks/meat/chicken
-	min_age = 12
-	max_age = 45
 	health_hud_intensity = 3
 
 	base_color = "#000616"
@@ -53,6 +66,14 @@
 		/decl/natural_attack/bite/sharp,
 		/decl/natural_attack/claws,
 		/decl/natural_attack/stomp/weak
+	)
+
+	available_cultural_info = list(
+		TAG_CULTURE = list(
+			/decl/cultural_info/culture/neoavian,
+			/decl/cultural_info/culture/neoavian/saurian,
+			/decl/cultural_info/culture/other
+		)
 	)
 
 /decl/species/neoavian/New()
