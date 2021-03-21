@@ -49,7 +49,6 @@
 		return TRUE
 	enabled = !enabled
 	update_use_power(enabled + 1)
-	update_icon()
 	to_chat(user, "You turn \the [src] [enabled ? "on" : "off"].")
 	return TRUE
 

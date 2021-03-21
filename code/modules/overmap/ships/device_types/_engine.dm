@@ -95,4 +95,3 @@ var/list/ship_engines = list()
 			M.power_change()
 		if(is_on())//if everything is in working order, start booting!
 			next_on = world.time + boot_time
-	M.update_icon()

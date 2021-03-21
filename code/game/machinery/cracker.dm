@@ -24,20 +24,17 @@
 	else
 		update_use_power(POWER_USE_IDLE)
 	user.visible_message(SPAN_NOTICE("\The [user] [use_power == POWER_USE_ACTIVE ? "engages" : "disengages"] \the [src]."))
-	update_icon()
 	return TRUE
 
 /obj/machinery/portable_atmospherics/cracker/power_change()
 	. = ..()
 	if(. && (stat & NOPOWER))
 		update_use_power(POWER_USE_IDLE)
-		update_icon()
 
 /obj/machinery/portable_atmospherics/cracker/set_broken(new_state)
 	. = ..()
 	if(. && (stat & BROKEN))
 		update_use_power(POWER_USE_IDLE)
-		update_icon()
 
 /obj/machinery/portable_atmospherics/cracker/Process()
 	..()

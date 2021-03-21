@@ -172,7 +172,6 @@
 /obj/machinery/media/jukebox/proc/StopPlaying()
 	playing = 0
 	update_use_power(POWER_USE_IDLE)
-	update_icon()
 	QDEL_NULL(sound_token)
 
 
@@ -186,7 +185,6 @@
 
 	playing = 1
 	update_use_power(POWER_USE_ACTIVE)
-	update_icon()
 
 /obj/machinery/media/jukebox/proc/AdjustVolume(var/new_volume)
 	volume = Clamp(new_volume, 0, 50)

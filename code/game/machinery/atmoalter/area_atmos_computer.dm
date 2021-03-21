@@ -107,7 +107,6 @@
 			return
 
 		scrubber.update_use_power(text2num(href_list["toggle"]) ? POWER_USE_ACTIVE : POWER_USE_IDLE)
-		scrubber.update_icon()
 
 /obj/machinery/computer/area_atmos/proc/validscrubber(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber)
 	if(!isobj(scrubber) || get_dist(scrubber.loc, src.loc) > src.range || scrubber.loc.z != src.loc.z)
