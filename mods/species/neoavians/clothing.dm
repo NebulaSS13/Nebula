@@ -1,29 +1,10 @@
-/datum/appearance_descriptor/age/neocorvid
-	chargen_min_index = 3
-	chargen_max_index = 6
-	standalone_value_descriptors = list(
-		"a hatchling" =     1,
-		"an fledgeling" =   6,
-		"a young adult" =  12,
-		"an adult" =       25,
-		"middle-aged" =    35,
-		"aging" =          45,
-		"elderly" =        50
-	)
+/obj/item/clothing/gloves/Initialize()
+	. = ..()
+	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/gloves.dmi')
 
-/decl/species/corvid
-	name = SPECIES_CORVID
-	bodytype = BODYTYPE_CORVID
-	name_plural = "Corvidae"
-	description = "Corvid uplifts were among the first sophonts produced by human science to aid in colonizing Mars. These days they \
-	are more commonly found pursuing their own careers and goals on the fringes of human space or around their adopted homeworld \
-	of Hyperion. Corvid naming conventions are a chosen name followed by the species of the person, followed by the location they were hatched."
-
-	meat_type = /obj/item/chems/food/snacks/meat/chicken
-
-	age_descriptor = /datum/appearance_descriptor/age/neocorvid
-
-	health_hud_intensity = 3
+/obj/item/clothing/accessory/cloak/Initialize()
+	. = ..()
+	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/cloak.dmi')
 
 /obj/item/clothing/under/avian_smock
 	name = "smock"

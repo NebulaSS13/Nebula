@@ -1,7 +1,7 @@
 /decl/language/corvid
 	name = "Crow Cant"
 	shorthand = "CR"
-	desc = "A rough, loud language spoken by neo-corvids."
+	desc = "A rough, loud language spoken by neo-corvids and other post-avian species."
 	speech_verb = "chirps"
 	ask_verb = "rattles"
 	exclaim_verb = "calls"
@@ -15,10 +15,10 @@
 			"skre","ahk","ek","rawk","kraa","ii","kri","ka"
 		)
 	speech_sounds = list(
-		'mods/species/neocorvids/sound/crow1.ogg',
-		'mods/species/neocorvids/sound/crow2.ogg',
-		'mods/species/neocorvids/sound/crow3.ogg',
-		'mods/species/neocorvids/sound/crow4.ogg'
+		'mods/species/neoavians/sound/crow1.ogg',
+		'mods/species/neoavians/sound/crow2.ogg',
+		'mods/species/neoavians/sound/crow3.ogg',
+		'mods/species/neoavians/sound/crow4.ogg'
 	)
 
 /decl/language/corvid/get_random_name(gender)
