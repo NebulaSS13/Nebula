@@ -19,7 +19,7 @@
 
 	// Nom.
 	for(var/atom/movable/A in src)
-		Consume(A)
+		try_supermatter_consume(null, A, src)
 
 /turf/unsimulated/wall/cascade/Destroy()
 	STOP_PROCESSING(SSturf, src)	
@@ -63,14 +63,9 @@
 	user.examinate(src)
 
 /turf/unsimulated/wall/cascade/attack_hand(mob/user)
-	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src]... And then blinks out of existance.</span>",\
-		"<span class=\"danger\">You reach out and touch \the [src]. Everything immediately goes quiet. Your last thought is \"That was not a wise decision.\"</span>",\
-		"<span class=\"warning\">You hear an unearthly noise.</span>")
-
-	playsound(src, 'sound/effects/supermatter.ogg', 50, 1)
-
-	Consume(user)
-	return TRUE
+	if(try_supermatter_consume(user, src, TRUE))
+		return TRUE
+	return ..()
 
 /turf/unsimulated/wall/cascade/attackby(obj/item/W, mob/user)
 	user.visible_message("<span class=\"warning\">\The [user] touches \a [W] to \the [src] as a silence fills the room...</span>",\
@@ -80,31 +75,12 @@
 	playsound(src, 'sound/effects/supermatter.ogg', 50, 1)
 
 	user.drop_from_inventory(W)
-	Consume(W)
+	Bumped(W)
 	return TRUE
-
-#define MayConsume(A) (istype(A) && A.simulated && !isobserver(A))
-
-/turf/unsimulated/wall/cascade/Bumped(var/atom/movable/AM)
-	if(!MayConsume(AM))
-		return
-
-	if(istype(AM, /mob/living))
-		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",\
-		"<span class=\"danger\">You slam into \the [src] as your ears are filled with unearthly ringing. Your last thought is \"Oh, fuck.\"</span>",\
-		"<span class=\"warning\">You hear an unearthly noise as a wave of heat washes over you.</span>")
-	else
-		AM.visible_message("<span class=\"warning\">\The [AM] smacks into \the [src] and rapidly flashes to ash.</span>",\
-		"<span class=\"warning\">You hear a loud crack as you are washed with a wave of heat.</span>")
-
-	playsound(src, 'sound/effects/supermatter.ogg', 50, 1)
-	Consume(AM)
 
 /turf/unsimulated/wall/cascade/Entered(var/atom/movable/AM)
 	Bumped(AM)
 
-/turf/unsimulated/wall/cascade/proc/Consume(var/atom/movable/AM)
-	if(MayConsume(AM))
-		qdel(AM)
-
-#undef MayConsume
+/turf/unsimulated/wall/cascade/Bumped(var/atom/movable/AM)
+	if(!try_supermatter_consume(null, AM))
+		return ..()

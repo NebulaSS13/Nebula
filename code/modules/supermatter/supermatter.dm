@@ -24,6 +24,62 @@
 
 #define WARNING_DELAY 20			//seconds between warnings.
 
+var/list/supermatter_final_thoughts = list(
+	"Oh, fuck.",
+	"That was not a wise decision."
+)
+
+// Returns a truthy value that is also used for power generation by the supermatter core itself.
+/proc/try_supermatter_consume(var/mob/user, var/atom/movable/victim, var/atom/source, var/collided)
+
+	if(!istype(victim) || istype(victim, /obj/effect) || !victim.simulated || isobserver(victim))
+		return 0
+
+	var/decl/pronouns/victim_pronouns = victim.get_pronouns()
+	var/touch_message = collided ? "slams" " touches"
+	if(isliving(victim))
+		if(user)
+			var/hurls = (collided ? "hurls" : "pushes")
+			source.visible_message(
+				SPAN_DANGER("\The [user] [hurls] \the [victim] into \the [source], inducing a resonance! [victim_pronouns.He] starts to glow and catches aflame before flashing into ash."),\
+				SPAN_DANGER("\The [user] [hurls] you into \the [source], and your ears are filled with unearthly ringing."), \
+				SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as a wave of heat washes over you."))
+		else
+			source.visible_message(
+				SPAN_DANGER("\The [victim] [collided ? "slams into" : "touches"] \the [source], inducing a resonance! [victim_pronouns.He] starts to glow and catches aflame before flashing into ash."),\
+				SPAN_DANGER("You [collided ? "slam into", "touch"] \the [source], and your ears are filled with unearthly ringing. Your last thought is \"[pick(global.supermatter_final_thoughts]\""), \
+				SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as a wave of heat washes over you."))
+	else
+		if(user)
+			var/decl/pronouns/user_pronouns = user.get_pronouns()
+			source.visible_message( \
+				SPAN_DANGER("\The [user][collided ? "throws" : "touches"] \the [victim] [collided ? "into" : "to"] \the [source] and [victim_prounouns.he] instantly flashes away into ashes."), \
+				SPAN_WARNING("You hear a loud crack as you are washed with a wave of heat."))
+		else
+			source.visible_message( \
+				SPAN_DANGER("\The [victim] [collided ? "smacks into" : "touches"] \the [source] and instantly flashes away into ashes."), \
+				SPAN_WARNING("You hear a loud crack as you are washed with a wave of heat."))
+	playsound(source, 'sound/effects/supermatter.ogg', 50, 1)
+
+	if(isliving(victim))
+		victim.dust()
+		. = 2
+	else
+		. = 1
+		qdel(victim)
+
+	//Some poor sod got eaten, go ahead and irradiate people nearby.
+	var/list/viewers = viewers(source)
+	for(var/mob/living/M in range(10, get_turf(source)))
+		if(M in viewers)
+			M.show_message( \
+				SPAN_DANGER("As \the [src] slowly stops resonating, you find your skin covered in new radiation burns."), 1,\
+				SPAN_DANGER("The unearthly ringing subsides and you notice you have new radiation burns."), 2)
+		else
+			M.show_message(SPAN_DANGER("You hear an uneartly ringing and notice your skin is covered in fresh radiation burns.", 2))
+	var/rads = 500
+	SSradiation.radiate(source, rads)
+
 /obj/machinery/power/supermatter
 	name = "Supermatter"
 	desc = "A strangely translucent and iridescent crystal. <span class='danger'>You get headaches just from looking at it.</span>"
@@ -445,11 +501,9 @@
 	ui_interact(user)
 
 /obj/machinery/power/supermatter/attack_hand(mob/user)
-	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src], inducing a resonance... \his body starts to glow and bursts into flames before flashing into ash.</span>",\
-		"<span class=\"danger\">You reach out and touch \the [src]. Everything starts burning and all you can hear is ringing. Your last thought is \"That was not a wise decision.\"</span>",\
-		"<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
-
-	Consume(user)
+	if(Consume(user, TRUE))
+		return TRUE
+	return ..()
 
 // This is purely informational UI that may be accessed by AIs or robots
 /obj/machinery/power/supermatter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -478,8 +532,8 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-
 /obj/machinery/power/supermatter/attackby(obj/item/W, mob/user)
+
 	if(istype(W, /obj/item/tape_roll))
 		to_chat(user, "You repair some of the damage to \the [src] with \the [W].")
 		damage = max(damage -10, 0)
@@ -487,46 +541,20 @@
 	user.visible_message("<span class=\"warning\">\The [user] touches \a [W] to \the [src] as a silence fills the room...</span>",\
 		"<span class=\"danger\">You touch \the [W] to \the [src] when everything suddenly goes silent.\"</span>\n<span class=\"notice\">\The [W] flashes into dust as you flinch away from \the [src].</span>",\
 		"<span class=\"warning\">Everything suddenly goes silent.</span>")
-
 	user.drop_from_inventory(W)
-	Consume(W)
-
+	Consume(W, TRUE)
 	user.apply_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
 
-
 /obj/machinery/power/supermatter/Bumped(atom/AM)
-	if(istype(AM, /obj/effect))
+	if(!Consume(AM))
+		return ..()
+
+/obj/machinery/power/supermatter/proc/Consume(var/mob/living/user, var/touched)
+	. = try_supermatter_consume(user, src, touched)
+	if(. <= 0)
 		return
-	if(istype(AM, /mob/living))
-		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",\
-		"<span class=\"danger\">You slam into \the [src] as your ears are filled with unearthly ringing. Your last thought is \"Oh, fuck.\"</span>",\
-		"<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
-	else if(!grav_pulling) //To prevent spam, detonating supermatter does not indicate non-mobs being destroyed
-		AM.visible_message("<span class=\"warning\">\The [AM] smacks into \the [src] and rapidly flashes to ash.</span>",\
-		"<span class=\"warning\">You hear a loud crack as you are washed with a wave of heat.</span>")
-
-	Consume(AM)
-
-
-/obj/machinery/power/supermatter/proc/Consume(var/mob/living/user)
-	if(istype(user))
-		user.dust()
-		power += 200
-	else
-		qdel(user)
-
-	power += 200
-
-	//Some poor sod got eaten, go ahead and irradiate people nearby.
-	for(var/mob/living/l in range(10))
-		if(l in view())
-			l.show_message("<span class=\"warning\">As \the [src] slowly stops resonating, you find your skin covered in new radiation burns.</span>", 1,\
-				"<span class=\"warning\">The unearthly ringing subsides and you notice you have new radiation burns.</span>", 2)
-		else
-			l.show_message("<span class=\"warning\">You hear an uneartly ringing and notice your skin is covered in fresh radiation burns.</span>", 2)
-	var/rads = 500
-	SSradiation.radiate(src, rads)
-
+	power += . * 200
+	. = !!.
 
 /proc/supermatter_pull(var/atom/target, var/pull_range = 255, var/pull_power = STAGE_FIVE)
 	for(var/atom/A in range(pull_range, target))
