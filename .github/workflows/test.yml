@@ -5,7 +5,7 @@ on:
     branches:
       - dev
   pull_request:
-    branches: 
+    branches:
       - dev
   workflow_dispatch:
 
@@ -18,9 +18,9 @@ jobs:
   DreamChecker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
       - name: Setup Cache
-        uses: actions/cache@v2
+        uses: actions/cache@26968a09c0ea4f3e233fdddbafd1166051a095f6
         with:
           path: $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
           key: ${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}
@@ -42,9 +42,9 @@ jobs:
   Code:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
       - name: Setup Cache
-        uses: actions/cache@v2
+        uses: actions/cache@26968a09c0ea4f3e233fdddbafd1166051a095f6
         with:
           path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
@@ -71,9 +71,9 @@ jobs:
       matrix:
         map_path: [example, tradeship, ministation, away_sites_testing, modpack_testing]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
       - name: Setup Cache
-        uses: actions/cache@v2
+        uses: actions/cache@26968a09c0ea4f3e233fdddbafd1166051a095f6
         with:
           path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
