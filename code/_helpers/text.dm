@@ -382,8 +382,6 @@
 
 #define starts_with(string, substring) (copytext(string,1,1+length(substring)) == substring)
 
-#define gender2text(gender) capitalize(gender)
-
 /**
  * Strip out the special beyond characters for \proper and \improper
  * from text that will be sent to the browser.

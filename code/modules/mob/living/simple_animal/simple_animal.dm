@@ -294,15 +294,16 @@
 		if(stat != DEAD)
 			var/obj/item/stack/medical/MED = O
 			if(!MED.animal_heal)
-				to_chat(user, "<span class='notice'>That [MED] won't help \the [src] at all!</span>")
+				to_chat(user, SPAN_WARNING("\The [MED] won't help \the [src] at all!"))
 				return
 			if(health < maxHealth)
 				if(MED.can_use(1))
 					adjustBruteLoss(-MED.animal_heal)
-					visible_message("<span class='notice'>[user] applies the [MED] on [src].</span>")
+					visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
 					MED.use(1)
 		else
-			to_chat(user, "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>")
+			var/decl/pronouns/G = get_pronouns()
+			to_chat(user, SPAN_WARNING("\The [src] is dead, medical items won't bring [G.him] back to life."))
 		return
 
 	if(istype(O, /obj/item/flash))
@@ -314,35 +315,35 @@
 		if(istype(O, /obj/item/knife/kitchen/cleaver))
 			var/victim_turf = get_turf(src)
 			if(!locate(/obj/structure/table, victim_turf))
-				to_chat(user, SPAN_NOTICE("You need to place \the [src] on a table to butcher it."))
+				to_chat(user, SPAN_WARNING("You need to place \the [src] on a table to butcher it."))
 				return
 			var/time_to_butcher = (mob_size)
-			to_chat(user, SPAN_NOTICE("You begin harvesting \the [src]."))
+			to_chat(user, SPAN_WARNING("You begin harvesting \the [src]."))
 			if(do_after(user, time_to_butcher, src, same_direction = TRUE))
 				if(prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_ADEPT)))
-					to_chat(user, SPAN_NOTICE("You botch harvesting \the [src], and ruin some of the meat in the process."))
+					to_chat(user, SPAN_DANGER("You botch harvesting \the [src], and ruin some of the meat in the process."))
 					subtract_meat(user)
 					return
 				else	
 					harvest(user, user.get_skill_value(SKILL_COOKING))
 					return
 			else
-				to_chat(user, SPAN_NOTICE("Your hand slips with your movement, and some of the meat is ruined."))
+				to_chat(user, SPAN_DANGER("Your hand slips with your movement, and some of the meat is ruined."))
 				subtract_meat(user)
 				return
 				
 	else
 		if(!O.force)
-			visible_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
+			visible_message(SPAN_NOTICE("\The [user] gently taps [src] with \the [O]."))
 		else
 			O.attack(src, user, user.zone_sel?.selecting || ran_zone())
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 
-	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user]!</span>")
+	visible_message(SPAN_DANGER("\The [src] has been attacked with \the [O] by \the [user]!"))
 
 	if(O.force <= resistance)
-		to_chat(user, "<span class='danger'>This weapon is ineffective; it does no damage.</span>")
+		to_chat(user, SPAN_WARNING("This weapon is ineffective; it does no damage."))
 		return 0
 
 	var/damage = O.force

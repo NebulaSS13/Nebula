@@ -893,4 +893,3 @@ default behaviour is:
 
 /mob/living/is_deaf()
 	. = ..() || GET_STATUS(src, STAT_DEAF)
-

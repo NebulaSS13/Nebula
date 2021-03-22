@@ -32,11 +32,10 @@ var/list/supermatter_final_thoughts = list(
 // Returns a truthy value that is also used for power generation by the supermatter core itself.
 /proc/try_supermatter_consume(var/mob/user, var/atom/movable/victim, var/atom/source, var/collided)
 
-	if(!istype(victim) || istype(victim, /obj/effect) || !victim.simulated || isobserver(victim))
+	if(!istype(victim) || !istype(source) || istype(victim, /obj/effect) || !victim.simulated || isobserver(victim))
 		return 0
 
 	var/decl/pronouns/victim_pronouns = victim.get_pronouns()
-	var/touch_message = collided ? "slams" " touches"
 	if(isliving(victim))
 		if(user)
 			var/hurls = (collided ? "hurls" : "pushes")
@@ -46,14 +45,13 @@ var/list/supermatter_final_thoughts = list(
 				SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as a wave of heat washes over you."))
 		else
 			source.visible_message(
-				SPAN_DANGER("\The [victim] [collided ? "slams into" : "touches"] \the [source], inducing a resonance! [victim_pronouns.He] starts to glow and catches aflame before flashing into ash."),\
-				SPAN_DANGER("You [collided ? "slam into", "touch"] \the [source], and your ears are filled with unearthly ringing. Your last thought is \"[pick(global.supermatter_final_thoughts]\""), \
+				SPAN_DANGER("\The [victim] [collided ? "slams into" : "touches"] \the [source], inducing a resonance! [victim_pronouns.He] starts to glow and catches aflame before flashing into ash."), \
+				SPAN_DANGER("You [collided ? "slam into" : "touch"] \the [source], and your ears are filled with unearthly ringing. Your last thought is \"[pick(global.supermatter_final_thoughts)]\""), \
 				SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as a wave of heat washes over you."))
 	else
 		if(user)
-			var/decl/pronouns/user_pronouns = user.get_pronouns()
 			source.visible_message( \
-				SPAN_DANGER("\The [user][collided ? "throws" : "touches"] \the [victim] [collided ? "into" : "to"] \the [source] and [victim_prounouns.he] instantly flashes away into ashes."), \
+				SPAN_DANGER("\The [user][collided ? "throws" : "touches"] \the [victim] [collided ? "into" : "to"] \the [source] and [victim_pronouns.he] instantly flashes away into ashes."), \
 				SPAN_WARNING("You hear a loud crack as you are washed with a wave of heat."))
 		else
 			source.visible_message( \
@@ -62,7 +60,8 @@ var/list/supermatter_final_thoughts = list(
 	playsound(source, 'sound/effects/supermatter.ogg', 50, 1)
 
 	if(isliving(victim))
-		victim.dust()
+		var/mob/living/M = victim
+		M.dust()
 		. = 2
 	else
 		. = 1
@@ -73,10 +72,10 @@ var/list/supermatter_final_thoughts = list(
 	for(var/mob/living/M in range(10, get_turf(source)))
 		if(M in viewers)
 			M.show_message( \
-				SPAN_DANGER("As \the [src] slowly stops resonating, you find your skin covered in new radiation burns."), 1,\
+				SPAN_DANGER("As \the [source] slowly stops resonating, you find your skin covered in new radiation burns."), 1,\
 				SPAN_DANGER("The unearthly ringing subsides and you notice you have new radiation burns."), 2)
 		else
-			M.show_message(SPAN_DANGER("You hear an uneartly ringing and notice your skin is covered in fresh radiation burns.", 2))
+			M.show_message(SPAN_DANGER("You hear an uneartly ringing and notice your skin is covered in fresh radiation burns."), 2)
 	var/rads = 500
 	SSradiation.radiate(source, rads)
 
@@ -501,7 +500,7 @@ var/list/supermatter_final_thoughts = list(
 	ui_interact(user)
 
 /obj/machinery/power/supermatter/attack_hand(mob/user)
-	if(Consume(user, TRUE))
+	if(Consume(null, user, TRUE))
 		return TRUE
 	return ..()
 
@@ -542,15 +541,15 @@ var/list/supermatter_final_thoughts = list(
 		"<span class=\"danger\">You touch \the [W] to \the [src] when everything suddenly goes silent.\"</span>\n<span class=\"notice\">\The [W] flashes into dust as you flinch away from \the [src].</span>",\
 		"<span class=\"warning\">Everything suddenly goes silent.</span>")
 	user.drop_from_inventory(W)
-	Consume(W, TRUE)
+	Consume(user, W, TRUE)
 	user.apply_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
 
 /obj/machinery/power/supermatter/Bumped(atom/AM)
-	if(!Consume(AM))
+	if(!Consume(null, AM))
 		return ..()
 
-/obj/machinery/power/supermatter/proc/Consume(var/mob/living/user, var/touched)
-	. = try_supermatter_consume(user, src, touched)
+/obj/machinery/power/supermatter/proc/Consume(var/mob/living/user, var/obj/item/thing, var/touched)
+	. = try_supermatter_consume(user, thing, src, touched)
 	if(. <= 0)
 		return
 	power += . * 200

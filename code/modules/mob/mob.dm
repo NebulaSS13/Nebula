@@ -318,8 +318,8 @@
 			if(isobj(A.loc))
 				look_target = "inside \the [A.loc]"
 			if(A == src)
-				var/datum/gender/T = gender_datums[get_gender()]
-				look_target = "at [T.self]"
+				var/decl/pronouns/G = get_pronouns()
+				look_target = "at [G.self]"
 			for(var/mob/M in viewers(4, src))
 				if(M == src)
 					continue
@@ -519,9 +519,6 @@
 
 /mob/proc/is_ready()
 	return client && !!mind
-
-/mob/proc/get_gender()
-	return gender
 
 /mob/proc/see(message)
 	if(!is_active())

@@ -63,7 +63,7 @@
 	user.examinate(src)
 
 /turf/unsimulated/wall/cascade/attack_hand(mob/user)
-	if(try_supermatter_consume(user, src, TRUE))
+	if(try_supermatter_consume(null, user, src, TRUE))
 		return TRUE
 	return ..()
 
@@ -82,5 +82,5 @@
 	Bumped(AM)
 
 /turf/unsimulated/wall/cascade/Bumped(var/atom/movable/AM)
-	if(!try_supermatter_consume(null, AM))
+	if(!try_supermatter_consume(null, AM, src))
 		return ..()

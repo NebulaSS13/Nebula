@@ -186,9 +186,10 @@
 					hit_zone = ran_zone(hit_zone, target = src)
 				if(prob(15) && hit_zone != BP_CHEST) // Missed!
 					if(!src.lying)
-						attack_message = "[H] attempted to strike [src], but missed!"
+						attack_message = "\The [H] attempted to strike \the [src], but missed!"
 					else
-						attack_message = "[H] attempted to strike [src], but \he rolled out of the way!"
+						var/decl/pronouns/G = get_pronouns()
+						attack_message = "\The [H] attempted to strike \the [src], but [G.he] rolled out of the way!"
 						src.set_dir(pick(GLOB.cardinal))
 					miss_type = 1
 
@@ -260,9 +261,14 @@
 		return 0
 
 	if(user == src)
-		user.visible_message("\The [user] starts applying pressure to \his [organ.name]!", "You start applying pressure to your [organ.name]!")
+		var/decl/pronouns/G = user.get_pronouns()
+		user.visible_message( \
+			SPAN_NOTICE("\The [user] starts applying pressure to [G.his] [organ.name]!"), \
+			SPAN_NOTICE("You start applying pressure to your [organ.name]!"))
 	else
-		user.visible_message("\The [user] starts applying pressure to [src]'s [organ.name]!", "You start applying pressure to [src]'s [organ.name]!")
+		user.visible_message( \
+			SPAN_NOTICE("\The [user] starts applying pressure to \the [src]'s [organ.name]!"), \
+			SPAN_NOTICE("You start applying pressure to \the [src]'s [organ.name]!"))
 	spawn(0)
 		organ.applied_pressure = user
 
@@ -272,9 +278,14 @@
 		organ.applied_pressure = null
 
 		if(user == src)
-			user.visible_message("\The [user] stops applying pressure to \his [organ.name]!", "You stop applying pressure to your [organ.name]!")
+			var/decl/pronouns/G = user.get_pronouns()
+			user.visible_message( \
+				SPAN_NOTICE("\The [user] stops applying pressure to [G.his] [organ.name]!"), \
+				SPAN_NOTICE("You stop applying pressure to your [organ.name]!"))
 		else
-			user.visible_message("\The [user] stops applying pressure to [src]'s [organ.name]!", "You stop applying pressure to [src]'s [organ.name]!")
+			user.visible_message( \
+				SPAN_NOTICE("\The [user] stops applying pressure to \the [src]'s [organ.name]!"), \
+				SPAN_NOTICE("You stop applying pressure to \the [src]'s [organ.name]!"))
 
 	return 1
 

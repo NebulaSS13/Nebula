@@ -71,32 +71,34 @@
 	if(index <= page)
 		page++
 
+/obj/item/paper_bundle/proc/burn_callback(obj/item/flame/P, mob/user, span_class)
+	if(QDELETED(P) || QDELETED(user))
+		return
+	if(!Adjacent(user) || user.get_active_hand() != P || !P.lit)
+		to_chat(user, SPAN_WARNING("You must hold \the [P] steady to burn \the [src]."))
+		return
+	user.visible_message( \
+		"<span class='[span_class]'>\The [user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
+		"<span class='[span_class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
+	new /obj/effect/decal/cleanable/ash(loc)
+	qdel(src)
+
 /obj/item/paper_bundle/proc/burnpaper(obj/item/flame/P, mob/user)
-	var/class = "warning"
-
-	if(P.lit && !user.restrained())
-		if(istype(P, /obj/item/flame/lighter/zippo))
-			class = "rose>"
-
-		user.visible_message("<span class='[class]'>[user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!</span>", \
-		"<span class='[class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
-
-		spawn(20)
-			if(get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
-				user.visible_message("<span class='[class]'>[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
-				"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
-				new /obj/effect/decal/cleanable/ash(src.loc)
-				qdel(src)
-
-			else
-				to_chat(user, SPAN_WARNING("You must hold \the [P] steady to burn \the [src]."))
+	if(!P.lit || user.restrained())
+		return
+	var/span_class = istype(P, /obj/item/flame/lighter/zippo) ? "rose" : "warning"
+	var/decl/pronouns/G = user.get_pronouns()
+	user.visible_message( \
+		"<span class='[span_class]'>\The [user] holds \the [P] up to \the [src]. It looks like [G.he]'s trying to burn it!</span>", \
+		"<span class='[span_class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
+	addtimer(CALLBACK(src, .proc/burn_callback, P, user, span_class), 2 SECONDS)
 
 /obj/item/paper_bundle/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
 		src.show_content(user)
 	else
-		to_chat(user, "<span class='notice'>It is too far away.</span>")
+		to_chat(user, SPAN_WARNING("It is too far away."))
 
 /obj/item/paper_bundle/proc/show_content(mob/user)
 	var/dat

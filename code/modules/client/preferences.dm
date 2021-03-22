@@ -236,7 +236,7 @@ var/list/time_prefs_fixed = list()
 
 	character.fully_replace_character_name(real_name)
 
-	character.gender = gender
+	character.set_gender(gender)
 	character.age = age
 	character.b_type = b_type
 

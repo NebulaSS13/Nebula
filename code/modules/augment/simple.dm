@@ -37,10 +37,11 @@
 	else if(limb.organ_tag in list(BP_R_ARM, BP_R_HAND))
 		slot = BP_R_HAND
 	if(owner.equip_to_slot_if_possible(holding, slot))
-		GLOB.item_unequipped_event.register(holding, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped )
+		GLOB.item_unequipped_event.register(holding, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped)
+		var/decl/pronouns/G = owner.get_pronouns()
 		owner.visible_message(
-			SPAN_WARNING("[owner] extends \his [holding.name] from [limb]."),
-			SPAN_NOTICE("You extend your [holding.name] from [limb].")
+			SPAN_NOTICE("\The [owner] extends [G.his] [holding.name] from [G.his] [limb.name]."),
+			SPAN_NOTICE("You extend your [holding.name] from your [limb.name].")
 		)
 
 /obj/item/organ/internal/augment/active/simple/proc/retract()
@@ -50,14 +51,13 @@
 	if(ismob(holding.loc) && holding.loc == owner)
 		var/mob/M = holding.loc
 		if(!M.drop_from_inventory(holding, src))
-			to_chat(owner, "\the [holding.name] fails to retract.")
+			to_chat(owner, SPAN_WARNING("\The [holding.name] fails to retract."))
 			return
+		var/decl/pronouns/G = M.get_pronouns()
 		M.visible_message(
-			SPAN_WARNING("[M] retracts \his [holding.name] into [limb]."),
-			SPAN_NOTICE("You retract your [holding.name] into [limb].")
+			SPAN_NOTICE("\The [M] retracts [G.his] [holding.name] into [G.his] [limb.name]."),
+			SPAN_NOTICE("You retract your [holding.name] into [G.his] [limb.name].")
 		)
-
-
 
 /obj/item/organ/internal/augment/active/simple/activate()
 	if(!can_activate())
@@ -69,9 +69,7 @@
 		retract()
 
 /obj/item/organ/internal/augment/active/simple/can_activate()
-	if(..())
-		if(!holding)
-			to_chat(owner, SPAN_WARNING("The device is damaged and fails to deploy"))
-			return FALSE
-		return TRUE
-	return FALSE
+	. = ..()
+	if(. && !holding)
+		to_chat(owner, SPAN_WARNING("The device is damaged and fails to deploy"))
+		. = FALSE

@@ -23,12 +23,13 @@
 	else
 		fingerprint = "N/A"
 
-	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species_name()]\nGender: [gender2text(H.gender)]\nAge: [H.age]\nPlace of Birth: [pob]\nFingerprint: [fingerprint]"
+	var/decl/pronouns/G = H.get_pronouns(ignore_coverings = TRUE)
+	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species_name()]\nGender: [capitalize(G.name)]\nAge: [H.age]\nPlace of Birth: [pob]\nFingerprint: [fingerprint]"
 
 /obj/item/passport/attack_self(mob/user)
 	user.visible_message(
-		SPAN_ITALIC("[user] opens and checks [src]."),
-		SPAN_ITALIC("You open [src] and check for some main information."),
+		SPAN_ITALIC("\The [user] opens and checks \the [src]."),
+		SPAN_ITALIC("You open \the [src] and check for some main information."),
 		SPAN_ITALIC("You hear the faint rustle of pages."),
 		5)
-	to_chat(user, info || SPAN_WARNING("[src] is completely blank!"))
+	to_chat(user, info || SPAN_WARNING("\The [src] is completely blank!"))

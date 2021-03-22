@@ -158,8 +158,8 @@
 		H.set_internals(H.back)
 
 /decl/species/vox/disfigure_msg(var/mob/living/carbon/human/H)
-	var/datum/gender/T = gender_datums[H.get_gender()]
-	return "<span class='danger'>[T.His] beak-segments are cracked and chipped! [T.He] [T.is] not even recognizable.</span>\n"
+	var/decl/pronouns/G = H.get_pronouns()
+	return "<span class='danger'>[G.His] beak-segments are cracked and chipped! [G.He] [G.is] not even recognizable.</span>\n"
 	
 /decl/species/vox/skills_from_age(age)
 	. = 8

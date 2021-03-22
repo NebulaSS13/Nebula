@@ -27,11 +27,11 @@
 	to_file(S["name_is_always_random"],   pref.be_random_name)
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
-	var/decl/species/S =   get_species_by_key(pref.species) || get_species_by_key(GLOB.using_map.default_species)
-	pref.age                = sanitize_integer(pref.age, S.min_age, S.max_age, initial(pref.age))
-	pref.gender             = sanitize_inlist(pref.gender, S.genders, pick(S.genders))
-	pref.spawnpoint         = sanitize_inlist(pref.spawnpoint, spawntypes(), initial(pref.spawnpoint))
-	pref.be_random_name     = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
+	var/decl/species/S  = get_species_by_key(pref.species) || get_species_by_key(GLOB.using_map.default_species)
+	pref.age            = sanitize_integer(pref.age, S.min_age, S.max_age, initial(pref.age))
+	pref.gender         = sanitize_inlist(pref.gender, S.genders, pick(S.genders))
+	pref.spawnpoint     = sanitize_inlist(pref.spawnpoint, spawntypes(), initial(pref.spawnpoint))
+	pref.be_random_name = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
 
 /datum/category_item/player_setup_item/physical/basic/content()
 	. = list()
@@ -40,7 +40,9 @@
 	. += "<a href='?src=\ref[src];random_name=1'>Randomize Name</A><br>"
 	. += "<a href='?src=\ref[src];always_random_name=1'>Always Random Name: [pref.be_random_name ? "Yes" : "No"]</a>"
 	. += "<hr>"
-	. += "<b>Gender:</b> <a href='?src=\ref[src];gender=1'><b>[gender2text(pref.gender)]</b></a><br>"
+
+	var/decl/pronouns/G = get_pronouns_by_gender(pref.gender)
+	. += "<b>Gender:</b> <a href='?src=\ref[src];gender=1'>[capitalize(G.name)]</a><br>"
 	. += "<b>Age:</b> <a href='?src=\ref[src];age=1'>[pref.age]</a><br>"
 	. += "<b>Spawn Point</b>: <a href='?src=\ref[src];spawnpoint=1'>[pref.spawnpoint]</a>"
 	if(config.allow_Metadata)

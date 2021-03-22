@@ -459,9 +459,10 @@
 					R.cell.charge -= 20
 				else
 					B.deductcharge(B.hitcost)
+				var/decl/pronouns/G = user.get_pronouns()
 				user.visible_message( \
-					"<span class='danger'>[user] was stunned by \his wet [O]!</span>", \
-					"<span class='userdanger'>[user] was stunned by \his wet [O]!</span>")
+					"<span class='danger'>[user] was stunned by [G.his] wet [O]!</span>", \
+					"<span class='userdanger'>[user] was stunned by [G.his] wet [O]!</span>")
 				return 1
 	else if(istype(O, /obj/item/mop))
 		if(REAGENTS_FREE_SPACE(O.reagents) >= 5)

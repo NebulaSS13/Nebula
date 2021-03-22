@@ -376,7 +376,7 @@
 /datum/sprite_accessory/hair/balding
 	name = "Balding Hair"
 	icon_state = "hair_e"
-	gender = MALE // turnoff!
+	gender = MALE
 	flags = VERY_SHORT
 
 /datum/sprite_accessory/hair/familyman

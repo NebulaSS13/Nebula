@@ -250,19 +250,18 @@
 		else if(!target.get_species())
 			CRASH("Target ([target]) of surgery [type] has no species!")
 		else
-			var/o_is = (O.gender == PLURAL) ? "are" : "is"
-			var/o_a =  (O.gender == PLURAL) ? "" : "a "
+			var/decl/pronouns/G = O.get_pronouns()
 			var/decl/species/species = target.get_species()
 			if(O.organ_tag == BP_POSIBRAIN && !species.has_organ[BP_POSIBRAIN])
 				to_chat(user, SPAN_WARNING("There's no place in [target] to fit \the [O.organ_tag]."))
 			else if(O.damage > (O.max_damage * 0.75))
-				to_chat(user, SPAN_WARNING("\The [O.name] [o_is] in no state to be transplanted."))
+				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] in no state to be transplanted."))
 			else if(O.w_class > affected.cavity_max_w_class)
-				to_chat(user, SPAN_WARNING("\The [O.name] [o_is] too big for [affected.cavity_name] cavity!"))
+				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] too big for [affected.cavity_name] cavity!"))
 			else 
 				var/obj/item/organ/internal/I = target.get_internal_organ(O.organ_tag)
 				if(I && (I.parent_organ == affected.organ_tag))
-					to_chat(user, SPAN_WARNING("\The [target] already has [o_a][O.name]."))
+					to_chat(user, SPAN_WARNING("\The [target] already has \a [O.name]."))
 				else
 					. = TRUE
 

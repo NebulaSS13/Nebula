@@ -104,8 +104,9 @@
 	. = ..()
 	if(.)
 		if(istype(target,/obj/item/clothing/mask/smokable/cigarette))
+			var/decl/pronouns/G = user.get_pronouns()
 			var/obj/item/clothing/mask/smokable/cigarette/S = target
-			S.light("[user] snaps \his fingers and \the [S.name] lights up.")
+			S.light("\The [user] snaps [G.his] fingers and \the [S] lights up.")
 			playsound(S.loc, "sparks", 50, 1)
 		else
 			spark_at(get_turf(target))

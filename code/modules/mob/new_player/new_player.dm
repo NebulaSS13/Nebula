@@ -439,7 +439,8 @@
 	new_character.lastarea = get_area(spawn_turf)
 
 	if(GLOB.random_players)
-		client.prefs.gender = pick(MALE, FEMALE)
+		var/decl/species/current_species = get_species_by_key(client.prefs.species || GLOB.using_map.default_species)
+		client.prefs.gender = pick(current_species.genders)
 		client.prefs.real_name = client.prefs.get_random_name()
 		client.prefs.randomize_appearance_and_body_for(new_character)
 	client.prefs.copy_to(new_character)
@@ -510,10 +511,6 @@
 	if(!chosen_species || !check_species_allowed(chosen_species, 0))
 		return GLOB.using_map.default_species
 	return chosen_species.name
-
-/mob/new_player/get_gender()
-	if(!client || !client.prefs) ..()
-	return client.prefs.gender
 
 /mob/new_player/is_ready()
 	return ready && ..()

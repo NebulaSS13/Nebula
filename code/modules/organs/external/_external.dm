@@ -462,12 +462,11 @@
 		if(BURN)  src.heal_damage(0, repair_amount, 0, 1)
 	owner.regenerate_icons()
 	if(user == src.owner)
-		user.visible_message("<span class='notice'>\The [user] patches [damage_desc] on \his [src.name] with [tool].</span>")
+		var/decl/pronouns/G = user.get_pronouns()
+		user.visible_message(SPAN_NOTICE("\The [user] patches [damage_desc] on [G.his] [name] with \the [tool]."))
 	else
-		user.visible_message("<span class='notice'>\The [user] patches [damage_desc] on [owner]'s [src.name] with [tool].</span>")
-
+		user.visible_message(SPAN_NOTICE("\The [user] patches [damage_desc] on \the [owner]'s [name] with \the [tool]."))
 	return 1
-
 
 /*
 This function completely restores a damaged organ to perfect condition.

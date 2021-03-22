@@ -104,7 +104,10 @@ var/global/list/sparring_attack_cache = list()
 						target.set_dir(GLOB.reverse_dir[target.dir])
 					target.apply_effect(attack_damage * 0.4, WEAKEN, armour)
 			if(BP_GROIN)
-				target.visible_message("<span class='warning'>[target] looks like \he is in pain!</span>", "<span class='warning'>[(target.gender=="female") ? "Oh god that hurt!" : "Oh no, not your[pick("testicles", "crown jewels", "clockweights", "family jewels", "marbles", "bean bags", "teabags", "sweetmeats", "goolies")]!"]</span>")
+				var/decl/pronouns/G = target.get_pronouns()
+				target.visible_message( \
+					SPAN_WARNING("\The [target] looks like [G.he] is in pain!"), \
+					SPAN_WARNING(G.get_message_for_being_kicked_in_the_dick()))
 				target.apply_effects(stutter = attack_damage * 2, agony = attack_damage* 3, blocked = armour)
 			if(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT)
 				if(!target.lying)
@@ -134,13 +137,17 @@ var/global/list/sparring_attack_cache = list()
 
 /decl/natural_attack/proc/handle_eye_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target)
 	var/obj/item/organ/internal/eyes/eyes = target.get_internal_organ(BP_EYES)
+	var/decl/pronouns/G = user.get_pronouns()
 	if(eyes)
 		eyes.take_internal_damage(rand(3,4), 1)
-		user.visible_message("<span class='danger'>[user] presses \his [eye_attack_text] into [target]'s [eyes.name]!</span>")
-		var/eye_pain = eyes.can_feel_pain()
-		to_chat(target, "<span class='danger'>You experience[(eye_pain) ? "" : " immense pain as you feel" ] [eye_attack_text_victim] being pressed into your [eyes.name][(eye_pain)? "." : "!"]</span>")
-		return
-	user.visible_message("<span class='danger'>[user] attempts to press \his [eye_attack_text] into [target]'s eyes, but they don't have any!</span>")
+		user.visible_message(SPAN_DANGER("\The [user] jams [G.his] [eye_attack_text] into \the [target]'s [eyes.name]!"))
+		if(eyes.can_feel_pain())
+			to_chat(target, SPAN_DANGER("You experience immense pain as [eye_attack_text_victim] are jammed into your [eyes.name]!"))
+		else
+			to_chat(target, SPAN_DANGER("You experience [eye_attack_text_victim] being jammed into your [eyes.name]."))
+	else
+		var/decl/pronouns/target_gender = target.get_pronouns()
+		user.visible_message(SPAN_DANGER("\The [user] attempts to press [G.his] [eye_attack_text] into \the [target]'s eyes, but [target_gender.he] [target_gender.does]n't have any!"))
 
 /decl/natural_attack/proc/damage_flags()
 	return (src.sharp? DAM_SHARP : 0)|(src.edge? DAM_EDGE : 0)
@@ -197,32 +204,42 @@ var/global/list/sparring_attack_cache = list()
 	target.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
 	user.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
 
+	var/decl/pronouns/user_gender =   user.get_pronouns()
+	var/decl/pronouns/target_gender = target.get_pronouns()
+	var/attack_string 
 	if(!target.lying)
 		switch(zone)
 			if(BP_HEAD, BP_MOUTH, BP_EYES)
 				// ----- HEAD ----- //
 				switch(attack_damage)
 					if(1 to 2)
-						user.visible_message("<span class='danger'>[user] slapped [target] across \his cheek!</span>")
+						attack_string = "slapped \the [target] across [target_gender.his] cheek"
 					if(3 to 4)
 						user.visible_message(pick(
-							80; "<span class='danger'>[user] [pick(attack_verb)] [target] in the head!</span>",
-							20; "<span class='danger'>[user] struck [target] in the head[pick("", " with a closed fist")]!</span>",
-							50; "<span class='danger'>[user] threw a hook against [target]'s head!</span>"
+							80; attack_string = "[pick(attack_verb)] \the [target] in the head",
+							20; attack_string = "struck \the [target] in the head[pick("", " with a closed fist")]",
+							50; attack_string = "threw a hook against \the [target]'s head"
 							))
 					if(5)
 						user.visible_message(pick(
-							10; "<span class='danger'>[user] gave [target] a solid slap across \his face!</span>",
-							90; "<span class='danger'>[user] smashed \his [pick(attack_noun)] into [target]'s [pick("[affecting.name]", "face", "jaw")]!</span>"
+							10; attack_string = "gave \the [target] a solid slap across [target_gender.his] face",
+							90; attack_string = "smashed [user_gender.his] [pick(attack_noun)] into \the [target]'s [pick("[affecting.name]", "face", "jaw")]"
 							))
 			else
 				// ----- BODY ----- //
 				switch(attack_damage)
-					if(1 to 2)	user.visible_message("<span class='danger'>[user] threw a glancing punch at [target]'s [affecting.name]!</span>")
-					if(1 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \the [affecting]!</span>")
-					if(5)		user.visible_message("<span class='danger'>[user] smashed \his [pick(attack_noun)] into [target]'s [affecting.name]!</span>")
+					if(1 to 2)	
+						attack_string = "threw a glancing punch at [target]'s [affecting.name]"
+					if(1 to 4)	
+						attack_string = "[pick(attack_verb)] [target] in \the [affecting]"
+					if(5)
+						attack_string = "smashed [user_gender.his] [pick(attack_noun)] into [target]'s [affecting.name]"
 	else
-		user.visible_message("<span class='danger'>[user] [pick("punched", "threw a punch at", "struck", "slammed their [pick(attack_noun)] into")] [target]'s [affecting.name]!</span>") //why do we have a separate set of verbs for lying targets?
+		//why do we have a separate set of verbs for lying targets?
+		attack_string = "[pick("punched", "threw a punch at", "struck", "slammed their [pick(attack_noun)] into")] \the [target]'s [affecting.name]"
+
+	if(attack_string)
+		user.visible_message(SPAN_DANGER("\The [user] [attack_string]!"))
 
 /decl/natural_attack/kick
 	name = "kick"
@@ -295,15 +312,19 @@ var/global/list/sparring_attack_cache = list()
 	attack_damage = Clamp(attack_damage, 1, 5)
 
 	var/shoe_text = shoes ? copytext(shoes.name, 1, -1) : "foot"
+	var/decl/pronouns/G = user.get_pronouns()
+	var/attack_string
 	switch(attack_damage)
 		if(1 to 4)
-			user.visible_message(pick(
-				"<span class='danger'>[user] stomped on [target]'s [affecting.name][pick("", "with their [shoe_text]")]!</span>",
-				"<span class='danger'>[user] stomped \his [shoe_text] down onto [target]'s [affecting.name]!</span>"))
+			attack_string = pick(
+				"stomped on \the [target]'s [affecting.name][pick("", "with their [shoe_text]")]",
+				"stomped [G.his] [shoe_text] down on \the [target]'s [affecting.name]")
 		if(5)
-			user.visible_message(pick(
-				"<span class='danger'>[user] stomped down hard onto [target]'s [affecting.name][pick("", "with their [shoe_text]")]!</span>",
-				"<span class='danger'>[user] slammed \his [shoe_text] down onto [target]'s [affecting.name]!</span>"))
+			attack_string = pick(
+				"stomped down hard on \the [target]'s [affecting.name][pick("", "with their [shoe_text]")]",
+				"slammed [G.his] [shoe_text] down on \the [target]'s [affecting.name]")
+	if(attack_string)
+		user.visible_message(SPAN_DANGER("\The [user] [attack_string]!"))
 
 /decl/natural_attack/light_strike
 	name = "light strike"

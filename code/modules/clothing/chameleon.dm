@@ -15,7 +15,7 @@
 	item_state = copy.item_state
 	body_parts_covered = copy.body_parts_covered
 	flags_inv = copy.flags_inv
-	gender = copy.gender
+	set_gender(copy.gender)
 	if(copy.sprite_sheets)
 		sprite_sheets = copy.sprite_sheets.Copy()
 

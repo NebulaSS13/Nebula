@@ -43,7 +43,7 @@
 /obj/effect/landmark/corpse/proc/randomize_appearance(var/mob/living/carbon/human/M, species_choice)
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_GENDER))
 		if(species_choice in genders_per_species)
-			M.change_gender(pick(genders_per_species[species_choice]))
+			M.set_gender(pick(genders_per_species[species_choice]), TRUE)
 		else
 			M.randomize_gender()
 
