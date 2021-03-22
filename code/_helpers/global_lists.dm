@@ -4,6 +4,7 @@
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
 var/global/list/landmarks_list = list()				//list of all landmarks created
 var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
+var/list/teleporter_beacons = list()				// List of all active teleporter beacons in world
 var/list/mannequins_
 
 // Uplinks
@@ -118,3 +119,25 @@ var/list/playable_species = list() // A list of ALL playable species, whiteliste
 /proc/get_playable_species()
 	build_species_lists()
 	. = global.playable_species
+
+/proc/get_valid_teleporter_beacons()
+	for (var/B in global.teleporter_beacons)
+		if (!isPlayerLevel(get_z(B)))
+			continue
+		var/area/A = get_area(B)
+		if (!A)
+			continue
+
+		if (istype(B, /obj/item/radio/beacon))
+			var/obj/item/radio/beacon/T = B
+			if (!T.functioning)
+				continue
+		else if (istype(B, /obj/item/implant/tracking))
+			var/obj/item/implant/tracking/T = B
+			if (!T.implanted || !ismob(T.loc))
+				continue
+			var/mob/M = T.loc
+			if (M.stat == DEAD && world.time > M.timeofdeath + 15 MINUTES)
+				continue
+
+		LAZYADD(., B)

@@ -1755,7 +1755,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cN" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
@@ -1763,7 +1763,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "cO" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4

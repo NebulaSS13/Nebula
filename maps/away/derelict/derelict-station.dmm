@@ -1438,14 +1438,6 @@
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
-"eC" = (
-/obj/structure/table/reinforced,
-/obj/random/powercell,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/maintenance,
-/turf/simulated/floor/tiled/dark,
-/area/constructionsite/teleporter)
 "eD" = (
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/airless,
@@ -1816,9 +1808,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
-"fB" = (
-/turf/simulated/floor/airless,
-/area/constructionsite/storage)
 "fC" = (
 /obj/machinery/fabricator/pipe,
 /turf/simulated/floor/tiled/dark,
@@ -1853,7 +1842,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fI" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
@@ -1861,7 +1850,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fJ" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
@@ -2583,8 +2572,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
-	external_pressure_bound_default = 0
-	icon_state = "map_vent_in";
+	external_pressure_bound_default = 0icon_state = "map_vent_in";
 	id_tag = "d_air_out";
 	internal_pressure_bound = 2000;
 	internal_pressure_bound_default = 2000;
@@ -3186,9 +3174,6 @@
 /obj/structure/sign/warning/compressed_gas,
 /turf/simulated/wall,
 /area/constructionsite/engineering)
-"kI" = (
-/turf/simulated/floor/airless,
-/area/constructionsite/engineering)
 "kJ" = (
 /turf/space,
 /area/constructionsite/engineering)
@@ -3326,9 +3311,6 @@
 /obj/structure/closet/radiation,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
-"lm" = (
-/turf/simulated/floor/airless,
-/area/constructionsite/engineering)
 "ln" = (
 /obj/random/maintenance,
 /turf/space,
@@ -3444,7 +3426,7 @@
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lD" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /obj/structure/cable{
 	icon_state = "0-2";
 	d2 = 2
@@ -3452,7 +3434,7 @@
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lE" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lF" = (
@@ -22082,7 +22064,7 @@ eO
 eh
 eD
 eh
-fB
+eh
 dY
 bo
 dz
@@ -24811,7 +24793,7 @@ aa
 iY
 ju
 kz
-kI
+kB
 kK
 kB
 kB
@@ -25024,7 +25006,7 @@ kK
 lg
 kK
 kB
-lm
+kB
 kz
 kP
 kP
@@ -25225,7 +25207,7 @@ kB
 kK
 lh
 kB
-kI
+kB
 kz
 kz
 kJ
@@ -26116,7 +26098,7 @@ dz
 bo
 eb
 eb
-eC
+eq
 eK
 eW
 fh

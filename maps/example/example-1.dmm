@@ -267,7 +267,7 @@
 /area/space)
 "Iv" = (
 /obj/effect/floor_decal/corner/orange/mono,
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /turf/simulated/floor/tiled/monotile,
 /area/constructionsite)
 "JG" = (
@@ -410,7 +410,7 @@
 /obj/effect/floor_decal/corner/orange{
 	dir = 5
 	},
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "Zi" = (

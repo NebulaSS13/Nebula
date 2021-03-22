@@ -123,14 +123,12 @@
 	var/turf/T = get_turf(src)
 	var/zlevels = GetConnectedZlevels(T.z)
 	var/cur_dist = world.maxx+world.maxy
-	for(var/obj/item/radio/beacon/R in world)
-		if(!R.functioning)
-			continue
-		if((R.z in zlevels) && R.frequency == tracking_freq)
-			var/check_dist = get_dist(src,R)
+	for(var/obj/item/radio/beacon/B in get_valid_teleporter_beacons())
+		if((B.z in zlevels) && B.frequency == tracking_freq)
+			var/check_dist = get_dist(src, B)
 			if(check_dist < cur_dist)
 				cur_dist = check_dist
-				. = weakref(R)
+				. = weakref(B)
 
 /obj/item/pinpointer/radio/attack_self(var/mob/user)
 	interact(user)

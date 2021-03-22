@@ -5,6 +5,14 @@
 	known = 1
 	var/id = 1
 
+/obj/item/implant/tracking/Initialize(ml, material_key)
+	. = ..()
+	global.teleporter_beacons += src
+
+/obj/item/implant/tracking/Destroy()
+	global.teleporter_beacons -= src
+	return ..()
+
 /obj/item/implant/tracking/get_data()
 	. = {"<b>Implant Specifications:</b><BR>
 	<b>Name:</b> Tracking Beacon<BR>

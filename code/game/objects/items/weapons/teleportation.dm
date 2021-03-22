@@ -57,11 +57,17 @@ Frequency:
 			var/turf/sr = get_turf(src)
 
 			if (sr)
+				var/list/found_beacons = list()
+				var/list/extra_signals = list()
+				for (var/B in get_valid_teleporter_beacons())
+					if (istype(B, /obj/item/radio/beacon))
+						found_beacons += B
+					else if (istype(B, /obj/item/implant/tracking))
+						extra_signals += B
+
 				src.temp += "<B>Located Beacons:</B><BR>"
 
-				for(var/obj/item/radio/beacon/W in world)
-					if(!W.functioning)
-						continue
+				for(var/obj/item/radio/beacon/W in found_beacons)
 					if (W.frequency == src.frequency)
 						var/turf/tr = get_turf(W)
 						if (tr.z == sr.z && tr)
@@ -79,15 +85,7 @@ Frequency:
 							src.temp += "[W.code]-[dir2text(get_dir(sr, tr))]-[direct]<BR>"
 
 				src.temp += "<B>Extranneous Signals:</B><BR>"
-				for (var/obj/item/implant/tracking/W in world)
-					if (!W.implanted || !(istype(W.loc,/obj/item/organ/external) || ismob(W.loc)))
-						continue
-					else
-						var/mob/M = W.loc
-						if (M.stat == 2)
-							if (M.timeofdeath + 6000 < world.time)
-								continue
-
+				for (var/obj/item/implant/tracking/W in extra_signals)
 					var/turf/tr = get_turf(W)
 					if (tr.z == sr.z && tr)
 						var/direct = max(abs(tr.x - sr.x), abs(tr.y - sr.y))

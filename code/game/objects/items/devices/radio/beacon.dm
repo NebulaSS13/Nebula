@@ -11,6 +11,14 @@
 	var/code = "electronic"
 	var/functioning = TRUE
 
+/obj/item/radio/beacon/Initialize()
+	. = ..()
+	global.teleporter_beacons += src
+
+/obj/item/radio/beacon/Destroy()
+	global.teleporter_beacons -= src
+	return ..()
+
 /obj/item/radio/beacon/hear_talk()
 	return
 
@@ -31,8 +39,8 @@
 	visible_message(SPAN_WARNING("\The [src] pops and cracks, and a thin wisp of dark smoke rises from the vents."), range = 2)
 	update_icon()
 	for(var/obj/machinery/computer/teleporter/T in SSmachines.machinery)
-		if(T.locked == src)
-			T.target_lost()
+		if(T.target == src)
+			T.lost_target()
 
 /obj/item/radio/beacon/on_update_icon()
 	if(!functioning)
@@ -55,7 +63,7 @@
 	anchored = TRUE
 	w_class = ITEM_SIZE_HUGE
 	randpixel = 0
-	
+
 	var/repair_fail_chance = 35
 
 /obj/item/radio/beacon/anchored/Initialize()

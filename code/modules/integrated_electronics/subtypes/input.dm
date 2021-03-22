@@ -762,12 +762,11 @@
 	var/obj/machinery/computer/teleporter/current_console = O.data_as_type(/obj/machinery/computer/teleporter)
 
 	. = list()
-	. += "Current selection: [(current_console && current_console.id) || "None"]"
+	. += "Current selection: [(current_console && current_console.teleporter_id) || "None"]"
 	. += "Please select a teleporter to lock in on:"
-	for(var/obj/machinery/teleport/hub/R in SSmachines.machinery)
-		var/obj/machinery/computer/teleporter/com = R.com
-		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable() && ARE_Z_CONNECTED(get_z(src), get_z(com)))
-			.["[com.id] ([R.icon_state == "tele1" ? "Active" : "Inactive"])"] = "tport=[any2ref(com)]"
+	for (var/obj/machinery/computer/teleporter/computer in SSmachines.machinery)
+		if (computer.target && computer.operable() && AreConnectedZLevels(get_z(src), get_z(computer)))
+			.["[computer.teleporter_id] ([computer.active ? "Active" : "Inactive"])"] = "tport=[any2ref(computer)]"
 	.["None (Dangerous)"] = "tport=random"
 
 /obj/item/integrated_circuit/input/teleporter_locator/OnICTopic(href_list, user)
@@ -1031,9 +1030,9 @@
 	power_draw_per_use = 40
 	var/list/mtypes = list(
 		/decl/material/solid/metal/steel,
-		/decl/material/solid/metal/silver, 
-		/decl/material/solid/metal/gold, 
-		/decl/material/solid/gemstone/diamond, 
+		/decl/material/solid/metal/silver,
+		/decl/material/solid/metal/gold,
+		/decl/material/solid/gemstone/diamond,
 		/decl/material/solid/metal/uranium,
 		/decl/material/solid/metal/plasteel,
 		/decl/material/solid/metal/titanium,
