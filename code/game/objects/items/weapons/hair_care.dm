@@ -14,7 +14,8 @@
 
 /obj/item/haircomb/attack_self(mob/user)
 	if(!user.incapacitated())
-		user.visible_message("<span class='notice'>\The [user] uses \the [src] to comb their hair with incredible style and sophistication. What a [user.gender == FEMALE ? "lady" : "guy"].</span>")
+		var/decl/pronouns/G = user.get_pronouns()
+		user.visible_message(SPAN_NOTICE("\The [user] uses \the [src] to comb their hair with incredible style and sophistication. What a [G.informal_term]."))
 
 /obj/item/haircomb/brush
 	name = "hairbrush"

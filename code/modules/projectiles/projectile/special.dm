@@ -86,8 +86,10 @@
 			if(prob(15))
 				H.apply_damage((rand(30,80)),IRRADIATE, damage_flags = DAM_DISPERSED)
 				SET_STATUS_MAX(H, STAT_WEAK, 5)
-				for (var/mob/V in viewers(src))
-					V.show_message("<span class='warning'>[M] writhes in pain as \his vacuoles boil.</span>", 3, "<span class='warning'>You hear the crunching of leaves.</span>", 2)
+				var/decl/pronouns/G = M.get_pronouns()
+				visible_message(
+					SPAN_DANGER("\The [M] writhes in pain as [G.his] vacuoles boil."), \
+					blind_message = SPAN_WARNING("You hear a crunching sound."))
 			if(prob(35))
 				if(prob(80))
 					randmutb(M)

@@ -300,8 +300,16 @@
 	name = "MOB: Species base skin presence"
 //	async = 1
 	var/failcount = 0
+	var/list/gender_test
 
 /datum/unit_test/species_base_skin/start_test()
+
+	var/list/all_genders = decls_repository.get_decls_of_type(/decl/pronouns)
+	for(var/thing in all_genders)
+		var/decl/pronouns/G = all_genders[thing]
+		if(G.icon_key)
+			LAZYDISTINCTADD(gender_test, "[G.icon_key]")
+
 	for(var/species_name in get_all_species())
 		var/decl/species/S = get_species_by_key(species_name)
 		if(S.base_skin_colours)
@@ -317,16 +325,17 @@
 			for(var/tag in S.has_limbs)
 				var/list/paths = S.has_limbs[tag]
 				var/obj/item/organ/external/E = paths["path"]
-				var/list/gender_test = list("")
-				if(initial(E.limb_flags) & ORGAN_FLAG_GENDERED_ICON)
-					gender_test = list("_m", "_f")
 				var/icon_name = initial(E.icon_name)
-
 				for(var/base in S.base_skin_colours)
-					for(var/gen in gender_test)
-						if(!("[icon_name][gen][S.base_skin_colours[base]]" in icon_states(S.icobase)))
-							to_fail = TRUE
-							log_debug("[S.name] has missing icon: [icon_name][gen][S.base_skin_colours[base]] for base [base] and limb tag [tag].")
+					if(initial(E.limb_flags) & ORGAN_FLAG_GENDERED_ICON)
+						for(var/gen in gender_test)
+							if(!check_state_in_icon("[icon_name][gen][S.base_skin_colours[base]]", S.icobase))
+								to_fail = TRUE
+								log_debug("[S.name] has missing gendered icon: [icon_name][gen][S.base_skin_colours[base]] for base [base] and limb tag [tag].")
+					else if(!check_state_in_icon("[icon_name][S.base_skin_colours[base]]", S.icobase))
+						to_fail = TRUE
+						log_debug("[S.name] has missing ungendered icon: [icon_name][S.base_skin_colours[base]] for base [base] and limb tag [tag].")
+
 			if(to_fail)
 				log_unit_test("[S.name] is missing one or more base icons.")
 				failcount++

@@ -1,5 +1,5 @@
 /obj/item/organ/internal/augment/active/polytool
-	name = "Polytool embedded module"
+	name = "embedded polytool module"
 	action_button_name = "Deploy Tool"
 	icon_state = "multitool"
 	allowed_organs = list(BP_AUGMENT_R_HAND, BP_AUGMENT_L_HAND)
@@ -41,24 +41,26 @@
 	if(I)
 		if(is_type_in_list(I,paths) && !(I.type in items)) //We don't want several of same but you can replace parts whenever
 			if(!owner.drop_from_inventory(I, src))
-				to_chat(owner, "\the [I] fails to retract.")
+				to_chat(owner, "\The [I] fails to retract.")
 				return
 			items += I
+			var/decl/pronouns/G = owner.get_pronouns()
 			owner.visible_message(
-				SPAN_WARNING("[owner] retracts \his [I] into [limb]."),
-				SPAN_NOTICE("You retract your [I] into [limb].")
+				SPAN_NOTICE("\The [owner] retracts [G.his] [I.name] into [G.his] [limb.name]."),
+				SPAN_NOTICE("You retract your [I.name] into your [limb.name].")
 			)
 		else
-			to_chat(owner, SPAN_WARNING("You must drop [I] before tool can be extend."))
+			to_chat(owner, SPAN_WARNING("You must drop \the [I] before the polytool can extend."))
 	else
-		var/obj/item = input(owner, "Select item for deploy") as null|anything in src
+		var/obj/item = input(owner, "Select the attachment to deploy.") as null|anything in src
 		if(!item || !(src in owner.internal_organs))
 			return
 		if(owner.equip_to_slot_if_possible(item, slot))
 			items -= item
 			//Keep track of it, make sure it returns
 			GLOB.item_unequipped_event.register(item, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped )
+			var/decl/pronouns/G = owner.get_pronouns()
 			owner.visible_message(
-				SPAN_WARNING("[owner] extends \his [item.name] from [limb]."),
-				SPAN_NOTICE("You extend your [item.name] from [limb].")
+				SPAN_NOTICE("\The [owner] extends [G.his] [item.name] from [G.his] [limb.name]."),
+				SPAN_NOTICE("You extend your [item.name] from your [limb.name].")
 			)

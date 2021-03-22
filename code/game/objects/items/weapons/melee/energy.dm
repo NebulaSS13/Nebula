@@ -75,8 +75,9 @@
 /obj/item/energy_blade/attack_self(mob/user)
 	if(active)
 		if((MUTATION_CLUMSY in user.mutations) && prob(50))
+			var/decl/pronouns/G = user.get_pronouns()
 			user.visible_message( \
-				SPAN_DANGER("\The [user] accidentally cuts \himself with \the [src]."), \
+				SPAN_DANGER("\The [user] accidentally cuts [G.self] with \the [src]."), \
 				SPAN_DANGER("You accidentally cut yourself with \the [src]."))
 			if(isliving(user))
 				var/mob/living/M = user

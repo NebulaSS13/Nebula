@@ -131,15 +131,22 @@
 	sensor_mode = modes.Find(switchMode) - 1
 
 	if (src.loc == user)
+		var/user_message
 		switch(sensor_mode)
 			if(0)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "You disable your suit's remote sensing equipment.")
+				user_message = "You disable your suit's remote sensing equipment."
 			if(1)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report whether you are live or dead.")
+				user_message = "Your suit will now report whether you are live or dead."
 			if(2)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report your vital lifesigns.")
+				user_message = "Your suit will now report your vital lifesigns."
 			if(3)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report your vital lifesigns as well as your coordinate position.")
+				user_message = "Your suit will now report your vital lifesigns as well as your coordinate position."
+
+		if(user_message)
+			var/decl/pronouns/G = user.get_pronouns()
+			user.visible_message( \
+				SPAN_NOTICE("\The [user] adjusts the tracking sensor on [G.his] [name]."), \
+				SPAN_NOTICE(user_message))
 
 	else if (ismob(src.loc))
 		if(sensor_mode == 0)

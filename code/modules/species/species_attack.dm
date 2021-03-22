@@ -27,37 +27,44 @@
 	if(!affecting)
 		return ..()
 
+	var/decl/pronouns/user_gender = user.get_pronouns()
 	attack_damage = Clamp(attack_damage, 1, 5)
-
 	if(target == user)
-		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [affecting.name]!</span>")
+		user.visible_message(SPAN_DANGER("\The [user] [pick(attack_verb)] [user_gender.self] in the [affecting.name]!"))
 		return 0
 
+	var/decl/pronouns/target_gender = target.get_pronouns()
+	var/attack_string
 	switch(zone)
 		if(BP_HEAD, BP_MOUTH, BP_EYES)
 			// ----- HEAD ----- //
 			switch(attack_damage)
-				if(1 to 2) user.visible_message("<span class='danger'>[user] scratched [target] across \his cheek!</span>")
+				if(1 to 2) 
+					attack_string = "scratches \the [target] across [target_gender.his] cheek"
 				if(3 to 4)
-					user.visible_message(pick(
-						80; user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target]'s [pick("face", "neck", affecting.name)]!</span>"),
-						20; user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [pick("[target] in the [affecting.name]", "[target] across \his [pick("face", "neck", affecting.name)]")]!</span>"),
-						))
+					attack_string = pick(
+						80; "[pick(attack_verb)] [target]'s [pick("face", "neck", affecting.name)]",
+						20; "[pick(attack_verb)] \the [target] [pick("in the [affecting.name]", "across [target_gender.his] [pick("face", "neck", affecting.name)]")]",
+					)
 				if(5)
-					user.visible_message(pick(
-						"<span class='danger'>[user] rakes \his [pick(attack_noun)] across [target]'s [pick("face", "neck", affecting.name)]!</span>",
-						"<span class='danger'>[user] tears \his [pick(attack_noun)] into [target]'s [pick("face", "neck", affecting.name)]!</span>",
-						))
+					attack_string = pick(
+						"rakes [user_gender.his] [pick(attack_noun)] across [target]'s [pick("face", "neck", affecting.name)]",
+						"tears [user_gender.his] [pick(attack_noun)] into [target]'s [pick("face", "neck", affecting.name)]",
+					)
 		else
 			// ----- BODY ----- //
 			switch(attack_damage)
-				if(1 to 2)	user.visible_message("<span class='danger'>[user] [pick("scratched", "grazed")] [target]'s [affecting.name]!</span>")
+				if(1 to 2)	
+					attack_string = "[pick("scratched", "grazed")] [target]'s [affecting.name]"
 				if(3 to 4)
-					user.visible_message(pick(
-						80; user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target]'s [affecting.name]!</span>"),
-						20; user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [pick("[target] in the [affecting.name]", "[target] across \his [affecting.name]")]!</span>"),
-						))
-				if(5)		user.visible_message("<span class='danger'>[user] tears \his [pick(attack_noun)] [pick("deep into", "into", "across")] [target]'s [affecting.name]!</span>")
+					attack_string = pick(
+						80; "[pick(attack_verb)] [target]'s [affecting.name]",
+						20; "[pick(attack_verb)] [pick("[target] in the [affecting.name]", "[target] across [target_gender.his] [affecting.name]")]",
+					)
+				if(5)
+					attack_string = "tears [user_gender.his] [pick(attack_noun)] [pick("deep into", "into", "across")] [target]'s [affecting.name]"
+	if(attack_string)
+		user.visible_message(SPAN_DANGER("\The [user] [attack_string]!"))
 
 /decl/natural_attack/claws/strong
 	attack_verb = list("slashed")

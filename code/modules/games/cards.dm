@@ -208,7 +208,8 @@
 	H.concealed = 1
 	H.update_icon()
 	if(user==target)
-		user.visible_message("\The [user] deals a card to \himself.")
+		var/decl/pronouns/G = user.get_pronouns()
+		user.visible_message("\The [user] deals a card to [G.self].")
 	else
 		user.visible_message("\The [user] deals a card to \the [target].")
 

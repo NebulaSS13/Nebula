@@ -9,15 +9,24 @@
 
 /obj/structure/skele_stand/Initialize()
 	. = ..()
-	gender = pick(MALE, FEMALE)
+	gender = pick(MALE, FEMALE, PLURAL)
 
 /obj/structure/skele_stand/proc/rattle_bones(mob/user, atom/thingy)
 	if((world.time - cooldown) <= 1 SECOND)
 		return //reduces spam.
+
+	var/decl/pronouns/G = get_pronouns()
 	if(user)
-		visible_message("\The [user] pushes on [src][thingy?" with \the [thingy]":""], giving the bones a good rattle.")
+		if(thingy)
+			visible_message(SPAN_NOTICE("\The [user] pushes \the [src] with \the [thingy], giving the bones a good rattle."))
+		else
+			visible_message(SPAN_NOTICE("\The [user] pushes \the [src], giving the bones a good rattle."))
 	else
-		visible_message("\The [src] rattles on \his stand upon hitting [thingy?"\the [thingy]":"something"].")
+		if(thingy)
+			visible_message(SPAN_NOTICE("\The [src] rattles on [G.his] stand as [G.he] is hit by \the [thingy]."))
+		else
+			visible_message(SPAN_NOTICE("\The [src] rattles on [G.his] stand."))
+
 	cooldown = world.time
 	playsound(loc, 'sound/effects/bonerattle.ogg', 40)
 

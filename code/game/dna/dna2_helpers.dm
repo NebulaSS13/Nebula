@@ -148,9 +148,9 @@
 
 		if(H.gender != NEUTER)
 			if (dna.GetUIState(DNA_UI_GENDER))
-				H.gender = FEMALE
+				H.set_gender(FEMALE)
 			else
-				H.gender = MALE
+				H.set_gender(MALE)
 
 		//Body markings
 		for(var/tag in dna.body_markings)

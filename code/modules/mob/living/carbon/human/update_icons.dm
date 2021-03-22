@@ -302,11 +302,8 @@ var/global/list/damage_icon_parts = list()
 		qdel(stand_icon)
 	stand_icon = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi',"blank")
 
-	var/g = "male"
-	if(gender == FEMALE)
-		g = "female"
-
-	var/icon_key = "[species.get_icon_cache_uid(src)][g][skin_tone][skin_colour]"
+	var/decl/pronouns/G = get_pronouns(ignore_coverings = TRUE)
+	var/icon_key = "[species.get_icon_cache_uid(src)][G.icon_key][skin_tone][skin_colour]"
 	if(lip_style)
 		icon_key += "[lip_style]"
 	else

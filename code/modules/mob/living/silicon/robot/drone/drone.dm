@@ -188,21 +188,22 @@
 				to_chat(user, "<span class='danger'>Access denied.</span>")
 				return
 
-			user.visible_message("<span class='danger'>\The [user] swipes \his ID card through \the [src], attempting to reboot it.</span>", "<span class='danger'>>You swipe your ID card through \the [src], attempting to reboot it.</span>")
+			var/decl/pronouns/G = user.get_pronouns()
+			user.visible_message( \
+				SPAN_NOTICE("\The [user] swipes [G.his] ID card through \the [src], attempting to reboot it."), \
+				SPAN_NOTICE("You swipe your ID card through \the [src], attempting to reboot it."))
 			request_player()
 			return
 
-		else
-			user.visible_message("<span class='danger'>\The [user] swipes \his ID card through \the [src], attempting to shut it down.</span>", "<span class='danger'>You swipe your ID card through \the [src], attempting to shut it down.</span>")
-
-			if(emagged)
-				return
-
+		var/decl/pronouns/G = user.get_pronouns()
+		user.visible_message( \
+			SPAN_DANGER("\The [user] swipes [G.his] ID card through \the [src], attempting to shut it down."), \
+			SPAN_DANGER("You swipe your ID card through \the [src], attempting to shut it down."))
+		if(!emagged)
 			if(allowed(usr))
 				shut_down()
 			else
-				to_chat(user, "<span class='danger'>Access denied.</span>")
-
+				to_chat(user, SPAN_DANGER("Access denied."))
 		return
 
 	..()
@@ -235,12 +236,12 @@
 	clear_inherent_laws()
 	QDEL_NULL(laws)
 	laws = new /datum/ai_laws/syndicate_override
-	set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
-
+	var/decl/pronouns/G = user.get_pronouns(ignore_coverings = TRUE)
+	set_zeroth_law("Only [user.real_name] and people [G.he] designates as being such are operatives.")
 	if(!controlling_ai)
 		to_chat(src, "<b>Obey these laws:</b>")
 		laws.show_laws(src)
-		to_chat(src, "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and \his commands.</span>")
+		to_chat(src, SPAN_DANGER("ALERT: [user.real_name] is your new master. Obey your new laws and [G.his] commands."))
 	return 1
 
 //DRONE LIFE/DEATH

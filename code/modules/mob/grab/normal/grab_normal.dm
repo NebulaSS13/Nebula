@@ -153,9 +153,13 @@
 		damage_flags = hat.damage_flags()
 
 	if(damage_flags & DAM_SHARP)
-		attacker.visible_message("<span class='danger'>[attacker] gores [target][istype(hat)? " with \the [hat]" : ""]!</span>")
+		if(istype(hat))
+			attacker.visible_message(SPAN_DANGER("\The [attacker] gores \the [target] with \the [hat]!"))
+		else
+			attacker.visible_message(SPAN_DANGER("\The [attacker] gores \the [target]!"))
 	else
-		attacker.visible_message("<span class='danger'>[attacker] thrusts \his head into [target]'s skull!</span>")
+		var/decl/pronouns/attacker_gender = attacker.get_pronouns()
+		attacker.visible_message(SPAN_DANGER("\The [attacker] thrusts [attacker_gender.his] head into \the [target]'s skull!"))
 
 	var/armor = target.get_blocked_ratio(BP_HEAD, BRUTE, damage = 10)
 	target.apply_damage(damage, BRUTE, BP_HEAD, damage_flags)
@@ -163,7 +167,7 @@
 
 	if(armor < 0.5 && target.headcheck(BP_HEAD) && prob(damage))
 		target.apply_effect(20, PARALYZE)
-		target.visible_message("<span class='danger'>[target] [target.species.get_knockout_message(target)]</span>")
+		target.visible_message(SPAN_DANGER("\The [target] [target.species.get_knockout_message(target)]"))
 
 	playsound(attacker.loc, "swing_hit", 25, 1, -1)
 

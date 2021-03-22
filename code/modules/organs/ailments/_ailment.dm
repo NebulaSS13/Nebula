@@ -71,7 +71,7 @@
 	if(treatment)
 		. = replacetext(., "$ITEM$", "\the [treatment]")
 	if(user)
-		var/datum/gender/G = gender_datums[user.gender]
+		var/decl/pronouns/G = user.get_pronouns()
 		. = replacetext(., "$USER$", "\the [user]")
 		. = replacetext(., "$USER_HIS$", G.his)
 	if(target)

@@ -85,9 +85,9 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_job(H ? GetAssignment(H) : "Unset")
 	var/gender_term = "Unset"
 	if(H)
-		var/datum/gender/G = gender_datums[H.get_sex()]
-		if(G)
-			gender_term = gender2text(G.formal_term)
+		var/decl/pronouns/G = H.get_pronouns(ignore_coverings = TRUE)
+		if(G && G.formal_term)
+			gender_term = G.formal_term
 	set_sex(gender_term)
 	set_age(H ? H.age : 30)
 	set_status(GLOB.default_physical_status)
@@ -303,9 +303,11 @@ FIELD_LONG("Exploitable Information", antagRecord, access_syndicate, access_synd
 /datum/report_field/options/crew_record/sex/proc/record_genders()
 	. = list()
 	. |= "Unset"
-	for(var/thing in gender_datums)
-		var/datum/gender/G = gender_datums[thing]
-		. |= gender2text(G.formal_term)
+	var/list/all_genders = decls_repository.get_decls_of_type(/decl/pronouns)
+	for(var/thing in all_genders)
+		var/decl/pronouns/G = all_genders[thing]
+		if(G.formal_term)
+			. |= G.formal_term
 
 /datum/report_field/options/crew_record/branch/proc/record_branches()
 	. = list()

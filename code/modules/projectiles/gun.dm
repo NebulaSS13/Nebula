@@ -198,17 +198,20 @@
 			toggle_safety()
 			return 1
 	if(MUTATION_HULK in M.mutations)
-		to_chat(M, "<span class='danger'>Your fingers are much too large for the trigger guard!</span>")
+		to_chat(M, SPAN_WARNING("Your fingers are much too large for the trigger guard!"))
 		return 0
 	if((MUTATION_CLUMSY in M.mutations) && prob(40)) //Clumsy handling
 		var/obj/P = consume_next_projectile()
 		if(P)
-			if(process_projectile(P, user, user, pick(BP_L_FOOT, BP_R_FOOT)))
+			var/pew_loc = pick(BP_L_FOOT, BP_R_FOOT)
+			if(process_projectile(P, user, user, pew_loc))
+				var/decl/pronouns/G = user.get_pronouns()
 				handle_post_fire(user, user)
+				var/obj/item/affecting = user.get_organ(pew_loc)
+				pew_loc = affecting ? "\the [affecting]" : "the foot"
 				user.visible_message(
-					"<span class='danger'>\The [user] shoots \himself in the foot with \the [src]!</span>",
-					"<span class='danger'>You shoot yourself in the foot with \the [src]!</span>"
-					)
+					SPAN_DANGER("\The [user] shoots [G.self] in [pew_loc] with \the [src]!"),
+					SPAN_DANGER("You shoot yourself in [pew_loc] with \the [src]!"))
 				M.unEquip(src)
 		else
 			handle_click_empty(user)

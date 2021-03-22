@@ -22,7 +22,8 @@
 	if(!affecting)
 		return
 	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.a_intent == I_HELP)
-		affecting.visible_message("<span class='warning'>[affecting] isn't prepared to fight back as [assailant] tightens \his grip!</span>")
+		var/decl/pronouns/assailant_gender = assailant.get_pronouns()
+		affecting.visible_message(SPAN_DANGER("\The [affecting] isn't prepared to fight back as [assailant] tightens [assailant_gender.his] grip!"))
 		G.done_struggle = TRUE
 		G.upgrade(TRUE)
 
@@ -37,7 +38,8 @@
 		return
 
 	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.a_intent == I_HELP)
-		affecting.visible_message("<span class='warning'>[affecting] isn't prepared to fight back as [assailant] tightens \his grip!</span>")
+		var/decl/pronouns/assailant_gender = assailant.get_pronouns()
+		affecting.visible_message(SPAN_DANGER("\The [affecting] isn't prepared to fight back as [assailant] tightens [assailant_gender.his] grip!"))
 		G.done_struggle = TRUE
 		G.upgrade(TRUE)
 	else

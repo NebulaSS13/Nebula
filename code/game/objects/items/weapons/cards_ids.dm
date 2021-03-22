@@ -261,11 +261,11 @@ var/const/NO_EMAG_ACT = -50
 
 	id_card.registered_name = real_name
 
-	var/gender_term = "Unset"
-	var/datum/gender/G = gender_datums[get_sex()]
+	var/decl/pronouns/G = get_pronouns()
 	if(G)
-		gender_term = gender2text(G.formal_term)
-	id_card.sex = gender2text(gender_term)
+		id_card.sex = capitalize(G.formal_term)
+	else
+		id_card.sex = "Unset"
 	id_card.set_id_photo(src)
 
 	if(dna)

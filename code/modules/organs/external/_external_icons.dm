@@ -71,15 +71,19 @@ var/list/limb_icon_cache = list()
 
 /obj/item/organ/external/var/icon_cache_key
 /obj/item/organ/external/on_update_icon(var/regenerate = 0)
-	var/gender = "_m"
-	if(!(limb_flags & ORGAN_FLAG_GENDERED_ICON))
-		gender = null
-	else if (dna && dna.GetUIState(DNA_UI_GENDER))
-		gender = "_f"
-	else if(owner && owner.gender == FEMALE)
-		gender = "_f"
 
-	icon_state = "[icon_name][gender]"
+	icon_state = "[icon_name]"
+	if(limb_flags & ORGAN_FLAG_GENDERED_ICON)
+		var/decl/pronouns/G
+		if(dna)
+			var/dna_gender = dna.GetUIState(DNA_UI_GENDER)
+			if(dna_gender)
+				G = get_pronouns_by_gender(dna_gender)
+		if(!G && owner)
+			G = owner.get_pronouns(ignore_coverings = TRUE)
+		if(G)
+			icon_state = "[icon_state][G.icon_key]"
+
 	if(species.base_skin_colours && !isnull(species.base_skin_colours[skin_base]))
 		icon_state += species.base_skin_colours[skin_base]
 	icon_cache_key = "[icon_state]_[species ? species.name : "unknown"]"

@@ -60,10 +60,8 @@
 			to_chat(user, SPAN_WARNING("\The [target] is too far away."))
 			return
 
-	var/datum/gender/user_gender = gender_datums[user.get_visible_gender()]
-	var/datum/gender/target_gender
-	if(target)
-		target_gender = gender_datums[target.get_visible_gender()]
+	var/decl/pronouns/user_gender =   user.get_pronouns()
+	var/decl/pronouns/target_gender = target?.get_pronouns()
 
 	var/use_3p
 	var/use_1p

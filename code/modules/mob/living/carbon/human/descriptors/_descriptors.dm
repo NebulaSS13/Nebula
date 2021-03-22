@@ -43,7 +43,7 @@
 /datum/mob_descriptor/proc/get_mob_overlay(var/mob/applying, var/offset_value)
 	return
 
-/datum/mob_descriptor/proc/get_third_person_message_start(var/datum/gender/my_gender)
+/datum/mob_descriptor/proc/get_third_person_message_start(var/decl/pronouns/my_gender)
 	return "[my_gender.He] [my_gender.is]"
 
 /datum/mob_descriptor/proc/get_first_person_message_start()
@@ -56,7 +56,7 @@
 		return standalone_value_descriptors[check_value]
 
 // Build a species-specific descriptor string.
-/datum/mob_descriptor/proc/get_initial_comparison_component(var/mob/me, var/datum/gender/my_gender, var/datum/gender/other_gender, var/my_value)
+/datum/mob_descriptor/proc/get_initial_comparison_component(var/mob/me, var/decl/pronouns/my_gender, var/decl/pronouns/other_gender, var/my_value)
 	var/species_text
 	if(ishuman(me) && !skip_species_mention)
 		var/mob/living/carbon/human/H = me
@@ -64,7 +64,7 @@
 		species_text = " for \a [use_name]"
 	. = "[get_third_person_message_start(my_gender)] [get_standalone_value_descriptor(my_value)][species_text]"
 
-/datum/mob_descriptor/proc/get_secondary_comparison_component(var/datum/gender/my_gender, var/datum/gender/other_gender, var/my_value, var/comparing_value)
+/datum/mob_descriptor/proc/get_secondary_comparison_component(var/decl/pronouns/my_gender, var/decl/pronouns/other_gender, var/my_value, var/comparing_value)
 	var/raw_value = my_value
 	my_value += comparison_offset
 	var/variance = abs((my_value)-comparing_value)
@@ -80,8 +80,8 @@
 /datum/mob_descriptor/proc/get_comparative_value_descriptor(var/my_value, var/mob/observer, var/mob/me)
 
 	// Store our gender info for later.
-	var/datum/gender/my_gender = gender_datums[me.get_gender()]
-	var/datum/gender/other_gender = gender_datums[observer.get_gender()]
+	var/decl/pronouns/my_gender = me.get_pronouns()
+	var/decl/pronouns/other_gender = observer.get_pronouns()
 
 	. = get_initial_comparison_component(me, my_gender, other_gender, my_value)
 
@@ -99,15 +99,15 @@
 	// We're done, add a full stop.
 	. = "[.]. "
 
-/datum/mob_descriptor/proc/get_comparative_value_string_equivalent(var/my_value, var/datum/gender/my_gender, var/datum/gender/other_gender)
+/datum/mob_descriptor/proc/get_comparative_value_string_equivalent(var/my_value, var/decl/pronouns/my_gender, var/decl/pronouns/other_gender)
 	return comparative_value_descriptor_equivalent
 
-/datum/mob_descriptor/proc/get_comparative_value_string_smaller(var/value, var/datum/gender/my_gender, var/datum/gender/other_gender)
+/datum/mob_descriptor/proc/get_comparative_value_string_smaller(var/value, var/decl/pronouns/my_gender, var/decl/pronouns/other_gender)
 	var/maxval = LAZYLEN(comparative_value_descriptors_smaller)
 	value = Clamp(ceil(value * maxval), 1, maxval)
 	return comparative_value_descriptors_smaller[value]
 
-/datum/mob_descriptor/proc/get_comparative_value_string_larger(var/value, var/datum/gender/my_gender, var/datum/gender/other_gender)
+/datum/mob_descriptor/proc/get_comparative_value_string_larger(var/value, var/decl/pronouns/my_gender, var/decl/pronouns/other_gender)
 	var/maxval = LAZYLEN(comparative_value_descriptors_larger)
 	value = Clamp(ceil(value * maxval), 1, maxval)
 	return comparative_value_descriptors_larger[value]

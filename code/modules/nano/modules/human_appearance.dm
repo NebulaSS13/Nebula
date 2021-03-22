@@ -29,7 +29,7 @@
 				return 1
 	if(href_list["gender"])
 		if(can_change(APPEARANCE_GENDER) && (href_list["gender"] in owner.species.genders))
-			if(owner.change_gender(href_list["gender"]))
+			if(owner.set_gender(href_list["gender"], TRUE))
 				cut_and_generate_data()
 				return 1
 	if(href_list["skin_tone"])
@@ -95,7 +95,8 @@
 	if(data["change_gender"])
 		var/genders[0]
 		for(var/gender in owner.species.genders)
-			genders[++genders.len] =  list("gender_name" = gender2text(gender), "gender_key" = gender)
+			var/decl/pronouns/G = get_pronouns_by_gender(gender)
+			genders[++genders.len] =  list("gender_name" = capitalize(G.name), "gender_key" = gender)
 		data["genders"] = genders
 	data["change_skin_tone"] = can_change_skin_tone()
 	data["change_skin_color"] = can_change_skin_color()

@@ -120,7 +120,7 @@
 
 	var/mob/living/silicon/robot/O = new supplied_robot_type( loc )
 
-	O.gender = gender
+	O.set_gender(gender)
 	O.set_invisibility(0)
 
 	if(!mind)

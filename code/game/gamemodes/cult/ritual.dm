@@ -319,7 +319,8 @@ var/list/Tier4Runes = list(
 	return
 
 /mob/living/carbon/human/message_cult_communicate()
-	visible_message("<span class='warning'>\The [src] cuts \his finger and starts drawing on the back of \his hand.</span>")
+	var/decl/pronouns/G = get_pronouns()
+	visible_message(SPAN_WARNING("\The [src] cuts [G.his] finger and starts drawing on the back of [G.his] hand."))
 
 /mob/proc/obscure()
 	set category = "Cult Magic"

@@ -86,7 +86,8 @@
 			vision = H.get_internal_organ(H.species.vision_organ)
 			if(!vision)
 				vision = H.species.has_organ[H.species.vision_organ]
-				to_chat(user, "<span class='warning'>\The [H] is missing \his [initial(vision.name)]!</span>")
+				var/decl/pronouns/G = H.get_pronouns()
+				to_chat(user, "<span class='warning'>\The [H] is missing [G.his] [initial(vision.name)]!</span>")
 				return
 
 			user.visible_message("<span class='notice'>\The [user] directs [src] into [M]'s [vision.name].</span>", \

@@ -67,9 +67,10 @@
 	if(is_deaf() || get_sound_volume_multiplier() < 0.2)
 		if(!language || !(language.flags & INNATE)) // INNATE is the flag for audible-emote-language, so we don't want to show an "x talks but you cannot hear them" message if it's set
 			if(speaker == src)
-				to_chat(src, "<span class='warning'>You cannot hear yourself speak!</span>")
+				to_chat(src, SPAN_WARNING("You cannot hear yourself speak!"))
 			else if(!is_blind())
-				to_chat(src, "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear \him.")
+				var/decl/pronouns/G = speaker.get_pronouns()
+				to_chat(src, "<span class='name'>\The [speaker_name]</span>[alt_name] talks but you cannot hear [G.him].")
 	else
 		if (language)
 			var/nverb = verb

@@ -356,12 +356,15 @@
 			var/obj/item/organ/external/hand = H.organs_by_name[user.get_active_held_item_slot()]
 			if(hand && hand.is_usable() && !hand.can_feel_pain())
 				user.apply_damage(3, BURN, hand.organ_tag, used_weapon = src)
-				user.visible_message(SPAN_WARNING("\The [user]'s [hand] burns and sizzles as \he touches the hot [get_fitting_name()]."), SPAN_WARNING("Your [hand] burns and sizzles as you remove the hot [get_fitting_name()]."))
+				var/decl/pronouns/G = user.get_pronouns()
+				user.visible_message( \
+					SPAN_DANGER("\The [user]'s [hand.name] burns and sizzles as [G.he] touches the hot [get_fitting_name()]."), \
+					SPAN_DANGER("Your [hand.name] burns and sizzles as you remove the hot [get_fitting_name()]."))
 		else
-			to_chat(user, "You try to remove the [get_fitting_name()], but it's too hot and you don't want to burn your hand.")
+			to_chat(user, SPAN_WARNING("You try to remove the [get_fitting_name()], but it's too hot and you don't want to burn your hand."))
 			return TRUE
 	else
-		to_chat(user, "You remove the [get_fitting_name()].")
+		to_chat(user, SPAN_NOTICE("You remove the [get_fitting_name()]."))
 
 	// create a light tube/bulb item and put it in the user's hand
 	user.put_in_active_hand(remove_bulb())	//puts it in our active hand

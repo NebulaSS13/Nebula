@@ -584,8 +584,9 @@ var/list/slot_flags_enumeration = list(
 		return 0
 	if(!istype(attacker))
 		return 0
+	var/decl/pronouns/G = attacker.get_pronouns()
 	attacker.apply_damage(force, damtype, attacker.get_active_held_item_slot(), used_weapon = src)
-	attacker.visible_message(SPAN_DANGER("\The [attacker] hurts \his hand on [src]!"))
+	attacker.visible_message(SPAN_DANGER("\The [attacker] hurts [G.his] hand on \the [src]!"))
 	playsound(target, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	playsound(target, hitsound, 50, 1, -1)
 	return 1

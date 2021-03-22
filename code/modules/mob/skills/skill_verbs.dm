@@ -74,55 +74,57 @@ Robots and antags can instruct.
 		if(skillset.owner.skill_check(S.type, SKILL_EXPERT))
 			return 1
 
-/mob/proc/instruct(mob/living/carbon/human/target as mob in oview(2))
-	set category = "IC"
-	set name = "Instruct"
-	set src = usr
+/mob/proc/can_instruct(mob/living/carbon/human/target, var/get_options = FALSE)
 
 	var/datum/skill_verb/instruct/SV = skillset.fetch_verb_datum(/datum/skill_verb/instruct)
 	if(!SV || !istype(target))
 		return
 	if(src == target)
-		to_chat(src, "<span class='notice'>Cannot instruct yourself.</span>")
+		to_chat(src, SPAN_WARNING("You cannot instruct yourself, except maybe in philosophy."))
 		return
-	if(incapacitated() || target.incapacitated())
-		to_chat(src, "<span class='notice'>[incapacitated() ? "You are in no state to teach right now!" : "\the [target] is in no state to be taught right now!"]</span>")
+	if(incapacitated())
+		to_chat(src, SPAN_WARNING("You are in no state to teach right now!"))
 		return
-
+	if(target.incapacitated())
+		to_chat(src, SPAN_WARNING("\The [target] is in no state to be taught right now!"))
+		return
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
-		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he recieved.</span>")
+		var/decl/pronouns/G = target.get_pronouns(ignore_coverings = TRUE)
+		to_chat(src, SPAN_WARNING("\The [target] [G.is] exhausted from all the training [G.he] recieved."))
 		return
 
-	var/options = list()
-	for(var/decl/hierarchy/skill/S in GLOB.skills)
-		if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
-			options[S.name] = S
+	if(!get_options)
+		. = TRUE
+	else
+		for(var/decl/hierarchy/skill/S in GLOB.skills)
+			if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
+				LAZYSET(., S.name, S)
+
+/mob/proc/instruct(mob/living/carbon/human/target as mob in oview(2))
+
+	set category = "IC"
+	set name = "Instruct"
+	set src = usr
+
+	var/list/options = can_instruct(target, get_options = TRUE)
 	if(!length(options))
-		to_chat(src, "<span class='notice'>There is nothing you can teach \the [target].</span>")
+		to_chat(src, SPAN_WARNING("There is nothing you can teach \the [target]."))
+		return
+
 	var/choice = input(src, "Select skill to instruct \the [target] in:", "Skill select") as null|anything in options
 	if(!(choice in options) || !(target in view(2)))
 		return
-	var/decl/hierarchy/skill/skill = options[choice]
 
-	if(!do_skilled(6 SECONDS, skill.type, target))
-		return
-	if(incapacitated() || target.incapacitated())
-		to_chat(src, "<span class='notice'>[incapacitated() ? "You are in no state to teach right now!" : "\the [target] is in no state to be taught right now!"]</span>")
-		return
-	if(target.too_many_buffs(/datum/skill_buff/instruct))
-		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he recieved.</span>")
-		return
-	if(target.skill_check(skill.type, SKILL_BASIC))
-		to_chat(src, "<span class='notice'>\The [target] is too skilled to gain any benefit from a short lesson.</span>")
-		return
-	if(!skill_check(skill.type, SKILL_EXPERT))
+	var/decl/hierarchy/skill/skill = options[choice]
+	if(!do_skilled(6 SECONDS, skill.type, target) || !can_instruct(target) || !skill_check(skill.type, SKILL_EXPERT))
 		return
 
 	target.buff_skill(list(skill.type = 1), buff_type = /datum/skill_buff/instruct)
-	visible_message("<span class='notice'>\The [src] trained \the [target] in the basics of \the [skill.name].</span>")
+	visible_message(SPAN_NOTICE("\The [src] trains \the [target] in the basics of [skill.name]."))
+	var/datum/skill_verb/instruct/SV = skillset.fetch_verb_datum(/datum/skill_verb/instruct)
 	SV.set_cooldown()
 
-/datum/skill_buff/instruct/
+/datum/skill_buff/instruct
 	limit = 3
 
 /datum/skill_buff/motivate/can_buff(mob/target)

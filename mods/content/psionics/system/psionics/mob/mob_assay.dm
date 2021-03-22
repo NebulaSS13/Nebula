@@ -5,7 +5,7 @@
 	var/use_He_is =  "You are"
 	var/use_He_has = "You have"
 	if(istype(machine) || viewer != src)
-		var/datum/gender/G = gender_datums[gender]
+		var/decl/pronouns/G = get_pronouns(ignore_coverings = TRUE)
 		use_He_is =  "[G.He] [G.is]"
 		use_He_has = "[G.He] [G.has]"
 

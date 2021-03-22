@@ -110,7 +110,10 @@ var/last_chew = 0
 	var/obj/item/organ/external/O = H.organs_by_name[H.get_active_held_item_slot()]
 	if (!O) return
 
-	H.visible_message("<span class='warning'>\The [H] chews on \his [O.name]!</span>", "<span class='warning'>You chew on your [O.name]!</span>")
+	var/decl/pronouns/G = H.get_pronouns()
+	H.visible_message( \
+		SPAN_DANGER("\The [H] chews on [G.his] [O.name]"), \
+		SPAN_DANGER("You chew on your [O.name]!"))
 	admin_attacker_log(H, "chewed on their [O.name]!")
 
 	O.take_external_damage(3,0, DAM_SHARP|DAM_EDGE ,"teeth marks")

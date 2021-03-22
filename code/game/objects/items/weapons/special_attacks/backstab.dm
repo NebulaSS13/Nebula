@@ -41,13 +41,17 @@ Proc returns a boolean if successful.
 		return FALSE
 
 	if( target.lying && ( target.dir in list(NORTH, EAST) ) )
-		location_check = FALSE //Skip the  check for locations if the enemy is floored. \His back is waiting for you, seductively. It's ready to take your knife.
+		location_check = FALSE //Skip the check for locations if the enemy is floored. His back is waiting for you, seductively. It's ready to take your knife.
 
 	//B-stabs can only occur on a mob from behind, in cases where they are both facing the same direction. More notably, a mob lying face-up cannot be backstabbed.
 	if(location_check)
 
 		if(!( sharp ))
-			user.visible_message("<span class = 'danger'>\The [user] tries to stab deep into \The [target]'s back, but it dinks off, scraping \him instead!</span>", "<span class = 'warning'>\The [src] is too dull for a proper backstab!</span>", "<span class = 'notice'>You hear a soft dinking noise.</span>")
+			var/decl/pronouns/G = target.get_pronouns()
+			user.visible_message(
+				SPAN_DANGER("\The [user] tries to stab deep into \the [target]'s back, but it dinks off, scraping [G.him] instead!"), \
+				SPAN_WARNING("\The [src] is too dull for a proper backstab!"), \
+				SPAN_WARNING("You hear a soft dinking noise."))
 			return FALSE
 
 		if(!( get_turf(user) == get_step(target, turn( target.dir, 180)) ) ) //You aren't behind them.
@@ -57,15 +61,15 @@ Proc returns a boolean if successful.
 			return FALSE
 
 		if( get_turf(user) == get_turf(target) ) //To prevent people from stabbing people from Neckgrab. Still possible when they're lying face down, but you're fucked anyways.
-			to_chat(user, "<span class = 'notice'>You are too close to [target] to stab them properly!</span>")
+			to_chat(user, SPAN_WARNING("You are too close to [target] to stab them properly!"))
 			return FALSE
 
 		if( target.lying && ( target.dir in list(WEST, SOUTH) ) ) //Failed the above lying check. His back isn't exposed.
-			to_chat(user, "<span class = 'notice'>You can't reach \The [target]'s back, flip them over!</span>")
+			to_chat(user, SPAN_WARNING("You can't reach \the [target]'s back, flip them over!"))
 			return FALSE
 
 		if(target_zone in list(BP_L_FOOT, BP_R_FOOT) ) //No feetstabs.
-			to_chat(user, "<span class = 'notice'>How do you expect to get a meaningful backstab on that floppy thing? </span>")
+			to_chat(user, SPAN_WARNING("How do you expect to get a meaningful backstab on that floppy thing?"))
 			return FALSE
 
 	if(damage >= 1) //Let's not do a damage check if it doesn't actually do damage.
@@ -78,16 +82,14 @@ Proc returns a boolean if successful.
 			H = target
 			var/obj/item/organ/external/stabbed_part = H.get_organ(target_zone)
 			if( !prob(H.get_blocked_ratio(target_zone, BRUTE, damage_flags, 0, damage) * 100) && !isnull(stabbed_part) && length(stabbed_part.internal_organs) )
-
 				var/obj/item/organ/internal/damaged_organ = pick(stabbed_part.internal_organs) //This could be improved by checking the size of an internal organ.
-
 				var/organ_damage = damage * 0.20
 				damaged_organ.take_internal_damage(organ_damage)
-				to_chat(user, "<span class = 'danger'>You stab [target] in the back of \His [stabbed_part]!</span>")
-				H.custom_pain("<span class = 'danger' font size='10'>You feel a stabbing pain in the back of your [stabbed_part]!</span>") //Only the stabber and stabbed should know how bad this is.
-
+				var/decl/pronouns/G = target.get_pronouns()
+				to_chat(user, SPAN_DANGER("You stab [target] in the back of [G.his] [stabbed_part.name]!"))
+				H.custom_pain(SPAN_DANGER("<font size='10'>You feel a stabbing pain in the back of your [stabbed_part.name]!</font>")) //Only the stabber and stabbed should know how bad this is.
 		else
 			target.apply_damage(damage, damage_type, target_zone, DAM_SHARP, src) //Backstabbing. Does extra damage to simple mobs only.
-			to_chat(user, "<span class = 'danger'>You stab [target] in the back!</span>")
+			to_chat(user, SPAN_DANGER("You stab [target] in the back!"))
 
 	return TRUE //Returns a value in case you want to layer additional behavior on this.

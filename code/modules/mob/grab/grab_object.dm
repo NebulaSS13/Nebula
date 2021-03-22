@@ -53,19 +53,19 @@
 		GLOB.zone_selected_event.register(assailant.zone_sel, src, .proc/on_target_change)
 	var/obj/item/organ/O = get_targeted_organ()
 
-	var/datum/gender/T = gender_datums[assailant.get_gender()]
+	var/decl/pronouns/G = assailant.get_pronouns()
 	if(O)
 		SetName("[name] ([O.name])")
 		GLOB.dismembered_event.register(affecting, src, .proc/on_organ_loss)
 		if(affecting != assailant)
 			visible_message(SPAN_DANGER("\The [assailant] has grabbed [affecting]'s [O.name]!"))
 		else
-			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [T.his] [O.name]!"))
+			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [G.his] [O.name]!"))
 	else
 		if(affecting != assailant)
 			visible_message(SPAN_DANGER("\The [assailant] has grabbed \the [affecting]!"))
 		else
-			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [T.self]!"))
+			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [G.self]!"))
 
 	if(affecting_mob && affecting_mob.a_intent != I_HELP)
 		upgrade(TRUE)
