@@ -39,6 +39,8 @@
 /obj/machinery/power/fusion_core/Process()
 	if((stat & BROKEN) || !powernet || !owned_field)
 		Shutdown()
+	else
+		owned_field.handle_tick()
 
 /obj/machinery/power/fusion_core/Topic(href, href_list)
 	if(..())
