@@ -31,3 +31,10 @@
 
 /datum/fabricator_recipe/robotics/augment/circuit
 	path = /obj/item/organ/internal/augment/active/simple/circuit
+
+/datum/fabricator_recipe/robotics/augment/hud
+	path = /obj/item/organ/internal/augment/active/hud/health
+
+/datum/fabricator_recipe/robotics/augment/hud/security
+	path = /obj/item/organ/internal/augment/active/hud/security
+

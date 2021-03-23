@@ -5,11 +5,6 @@
 	icon_state = "locator"
 	item_state = "locator"
 	origin_tech = "{'materials':2,'programming':2,'wormholes':2}"
-	material = /decl/material/solid/metal/aluminium
-	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
-	)
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
@@ -17,12 +12,12 @@
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 
-/obj/item/gps/attack_self(var/mob/user)
-	to_chat(user, "<span class='notice'>[html_icon(src)] \The [src] flashes <i>[get_coordinates()]</i>.</span>")
+/obj/item/gps/attack_self(mob/user)
+	to_chat(user, SPAN_NOTICE("[html_icon(src)] \The [src] flashes <i>[get_coordinates()]</i>."))
 
 /obj/item/gps/examine(mob/user)
 	. = ..()
-	to_chat(user, "<span class='notice'>\The [src]'s screen shows: <i>[get_coordinates()]</i>.</span>")
+	to_chat(user, SPAN_NOTICE("\The [src]'s screen shows: <i>[get_coordinates()]</i>."))
 
 /obj/item/gps/proc/get_coordinates()
 	var/turf/T = get_turf(src)
