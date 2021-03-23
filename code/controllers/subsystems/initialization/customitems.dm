@@ -2,15 +2,9 @@ SUBSYSTEM_DEF(customitems)
 	name = "Custom Items"
 	flags = SS_NO_FIRE
 	init_order = SS_INIT_MISC_LATE
-
 	var/list/custom_items_by_ckey = list()
-	var/list/item_states = list()
-	var/list/mob_states =  list()
 
 /datum/controller/subsystem/customitems/Initialize()
-
-	item_states = icon_states(CUSTOM_ITEM_OBJ)
-	mob_states =  icon_states(CUSTOM_ITEM_MOB)
 
 	if(!fexists(CUSTOM_ITEM_CONFIG))
 		report_progress("Custom item directory [CUSTOM_ITEM_CONFIG] does not exist, no custom items will be loaded.")
@@ -36,7 +30,7 @@ SUBSYSTEM_DEF(customitems)
 					if(result)
 						PRINT_STACK_TRACE("Invalid custom item [checkfile]: [result]")
 					else
-						LAZYDISTINCTADD(custom_items_by_ckey[citem.ckey], citem)
+						LAZYDISTINCTADD(custom_items_by_ckey[citem.character_ckey], citem)
 						item_count++
 				catch(var/exception/e)
 					PRINT_STACK_TRACE("Exception loading custom item [checkfile]: [e] on [e.file]:[e.line]")
@@ -58,7 +52,7 @@ SUBSYSTEM_DEF(customitems)
 		return
 	for(var/datum/custom_item/citem in key_list)
 		// Check for requisite ckey and character name.
-		if(citem.ckey != M.ckey || lowertext(citem.character_name) != lowertext(M.real_name))
+		if(citem.character_ckey != M.ckey || citem.character_name != lowertext(M.real_name))
 			continue
 		// Check for required access.
 		var/obj/item/card/id/current_id = M.wear_id
@@ -79,45 +73,48 @@ SUBSYSTEM_DEF(customitems)
 		place_custom_item(M,citem)
 
 /datum/custom_item
-	var/ckey
+	var/character_ckey
 	var/character_name
-	var/item_icon_state
 	var/item_desc
 	var/item_name
 	var/item_path
+	var/item_icon
+	var/item_state
 	var/apply_to_target_type
 	var/list/req_access
 	var/list/req_titles
 	var/list/additional_data
 
 /datum/custom_item/New(var/list/data)
-	ckey                 = ckey(data["ckey"])
-	character_name       = lowertext(data["character_name"])
-	item_name            = data["item_name"]
-	item_desc            = data["item_desc"]
-	item_icon_state      = data["item_icon_state"]
-	item_path            = text2path(data["item_path"])
-	req_access           = data["req_access"]                      || list()
-	req_titles           = data["req_titles"]                      || list()
-	additional_data      = data["additional_data"]                 || list()
-	apply_to_target_type = text2path(data["apply_to_target_type"]) || data["apply_to_target_type"]
+	character_ckey =       data["character_ckey"]
+	character_name =       data["character_name"]
+	item_name =            data["item_name"]
+	item_desc =            data["item_desc"]
+	item_icon =            data["item_icon"]
+	item_state =           data["item_state"]
+	req_access =           data["req_access"]
+	req_titles =           data["req_titles"]
+	item_path =            data["item_path"]
+	additional_data =      data["additional_data"]
+	apply_to_target_type = data["apply_to_target_type"]
+	finalize_data() // Separate proc in case of runtime.
+
+/datum/custom_item/proc/finalize_data()
+	character_ckey =       ckey(character_ckey)
+	character_name =       lowertext(character_name)
+	item_path =            item_path && text2path(item_path)
+	apply_to_target_type = apply_to_target_type && text2path(apply_to_target_type)
+	if(item_icon)
+		if(config.custom_item_icon_location)
+			item_icon = "[config.custom_item_icon_location]/[item_path]"
+		if(fexists(item_icon))
+			item_icon = file(item_icon)
 
 /datum/custom_item/proc/validate()
 	if(!ispath(item_path, /obj/item))
 		return SPAN_WARNING("The given item path is invalid or does not exist.")
 	if(apply_to_target_type && !ispath(apply_to_target_type, /obj/item))
 		return SPAN_WARNING("The target item path is invalid or does not exist.")
-	else if(item_icon_state)
-		if(ispath(item_path, /obj/item/kit/suit))
-			for(var/state in list("[item_icon_state]_suit", "[item_icon_state]_helmet"))
-				if(!(state in SScustomitems.item_states))
-					return SPAN_WARNING("The given item icon [state] does not exist.")
-				if(!(state in SScustomitems.mob_states))
-					return SPAN_WARNING("The given mob icon [state] does not exist.")
-		else
-			for(var/state in list(item_icon_state))
-				if(!(state in SScustomitems.item_states))
-					return SPAN_WARNING("The given item icon [state] does not exist.")
 
 /datum/custom_item/proc/spawn_item(var/newloc)
 	. = new item_path(newloc)

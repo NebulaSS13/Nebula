@@ -24,13 +24,20 @@ var/list/icon_state_cache = list()
 	var/tmp/has_inventory_icon	// do not set manually
 	var/tmp/use_single_icon
 
+/obj/item/proc/reconsider_single_icon(var/update_icon)
+	use_single_icon = check_state_in_icon(ICON_STATE_INV, icon) || check_state_in_icon(ICON_STATE_WORLD, icon)
+	if(use_single_icon)
+		has_inventory_icon = check_state_in_icon(ICON_STATE_INV, icon)
+		icon_state = get_world_inventory_state()
+		. = TRUE
+	else
+		has_inventory_icon = FALSE
+	if(. || update_icon)
+		update_icon()
+
 /obj/item/Initialize(ml, material_key)
 	. = ..()
-	if(check_state_in_icon(ICON_STATE_INV, icon) || check_state_in_icon(ICON_STATE_WORLD, icon))
-		use_single_icon = TRUE
-		has_inventory_icon = check_state_in_icon(ICON_STATE_INV, icon)
-		icon_state = ICON_STATE_WORLD
-		update_icon()
+	reconsider_single_icon() // TODO: manually set use_single_icon as appropriate and remove this from init
 
 /obj/item/hud_layerise()
 	..()

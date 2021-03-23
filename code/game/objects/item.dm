@@ -63,7 +63,7 @@
 
 	var/use_alt_layer = FALSE // Use the slot's alternative layer when rendering on a mob
 
-	var/list/sprite_sheets = list() // Assoc list of bodytype to icon override for on-mob icons when this item is held or worn.
+	var/list/sprite_sheets // Assoc list of bodytype to icon for producing onmob overlays when this item is held or worn.
 
 	// Material handling for material weapons (not used by default, unless material is supplied or set)
 	var/decl/material/material                      // Reference to material decl. If set to a string corresponding to a material ID, will init the item with that material.
@@ -792,14 +792,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return 0 // Process Kill
 
 /obj/item/proc/use_spritesheet(var/bodytype, var/slot, var/icon_state)
-	if(!sprite_sheets || !sprite_sheets[bodytype])
-		return 0
-	if(slot == BP_L_HAND || slot == BP_R_HAND)
-		return 0
-
-	if(icon_state in icon_states(sprite_sheets[bodytype]))
-		return 1
-
+	var/sprite_sheet = LAZYACCESS(sprite_sheets, bodytype)
+	if(!sprite_sheet || slot == BP_L_HAND || slot == BP_R_HAND)
+		return FALSE
+	if(check_state_in_icon(icon_state, sprite_sheet))
+		return TRUE
 	return (slot != slot_wear_suit_str && slot != slot_head_str)
 
 /obj/item/proc/get_icon_state(mob/user_mob, slot)
@@ -820,19 +817,13 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	var/mob_icon
 	var/spritesheet = FALSE
-	if(icon_override)
-		mob_icon = icon_override
-		if(slot == BP_L_HAND || slot == slot_l_ear_str)
-			mob_state = "[mob_state]_l"
-		if(slot == BP_R_HAND || slot == slot_r_ear_str)
-			mob_state = "[mob_state]_r"
-	else if(use_spritesheet(bodytype, slot, mob_state))
+	if(use_spritesheet(bodytype, slot, mob_state))
 		if(slot == slot_l_ear_str)
 			mob_state = "[mob_state]_l"
 		if(slot == slot_r_ear_str)
 			mob_state = "[mob_state]_r"
 		spritesheet = TRUE
-		mob_icon = sprite_sheets[bodytype]
+		mob_icon = LAZYACCESS(sprite_sheets, bodytype)
 	else
 		mob_icon = global.default_onmob_icons[slot]
 
@@ -888,7 +879,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(citem.item_desc)
 		desc = citem.item_desc
 	if(citem.item_icon)
-		icon = item_icon
+		icon = citem.item_icon
 	if(citem.item_state)
 		set_icon_state(citem.item_state)
 	

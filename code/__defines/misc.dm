@@ -85,12 +85,12 @@
 #define AREA_FLAG_IS_BACKGROUND     16// Blueprints can create areas on top of these areas. Cannot edit the name of or delete these areas.
 
 //Map template flags
-#define TEMPLATE_FLAG_ALLOW_DUPLICATES 1 // Lets multiple copies of the template to be spawned
-#define TEMPLATE_FLAG_SPAWN_GUARANTEED 2 // Makes it ignore away site budget and just spawn (only for away sites)
-#define TEMPLATE_FLAG_CLEAR_CONTENTS   4 // if it should destroy objects it spawns on top of
-#define TEMPLATE_FLAG_NO_RUINS         8 // if it should forbid ruins from spawning on top of it
-#define TEMPLATE_FLAG_NO_RADS          16// Removes all radiation from the template after spawning.
-#define TEMPLATE_FLAG_TEST_DUPLICATES  32// Makes unit testing attempt to spawn mutliple copies of this template. Assumes unit testing is spawning at least one copy.
+#define TEMPLATE_FLAG_ALLOW_DUPLICATES BITFLAG(0) // Lets multiple copies of the template to be spawned
+#define TEMPLATE_FLAG_SPAWN_GUARANTEED BITFLAG(1) // Makes it ignore away site budget and just spawn (only for away sites)
+#define TEMPLATE_FLAG_CLEAR_CONTENTS   BITFLAG(2) // if it should destroy objects it spawns on top of
+#define TEMPLATE_FLAG_NO_RUINS         BITFLAG(3) // if it should forbid ruins from spawning on top of it
+#define TEMPLATE_FLAG_NO_RADS          BITFLAG(4) // Removes all radiation from the template after spawning.
+#define TEMPLATE_FLAG_TEST_DUPLICATES  BITFLAG(5) // Makes unit testing attempt to spawn mutliple copies of this template. Assumes unit testing is spawning at least one copy.
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
@@ -99,12 +99,6 @@
 #endif
 #ifndef CUSTOM_ITEM_SYNTH_CONFIG
 #define CUSTOM_ITEM_SYNTH_CONFIG "config/custom_sprites.txt"
-#endif
-#ifndef CUSTOM_ITEM_OBJ
-#define CUSTOM_ITEM_OBJ 'icons/obj/custom_items_obj.dmi'
-#endif
-#ifndef CUSTOM_ITEM_MOB
-#define CUSTOM_ITEM_MOB 'icons/mob/custom_items_mob.dmi'
 #endif
 #ifndef CUSTOM_ITEM_SYNTH
 #define CUSTOM_ITEM_SYNTH 'icons/mob/custom_synthetic.dmi'

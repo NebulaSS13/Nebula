@@ -2,6 +2,17 @@
 	var/name
 	var/list/type_setups
 
+/decl/item_modifier/Initialize()
+	. = ..()
+	for(var/prop_type in type_setups)
+		var/obj/item/prop = atom_info_repository.get_instance_of(type_setups[prop_type])
+		var/list/type_setup = list()
+		type_setup[SETUP_NAME] = prop.name
+		type_setup[SETUP_ICON] = prop.icon
+		if(prop.sprite_sheets)
+			type_setup[SETUP_SPRITE_SHEETS] = prop.sprite_sheets.Copy()
+		type_setups[prop_type] = type_setup
+
 /decl/item_modifier/proc/RefitItem(var/obj/item/I)
 	if(!istype(I))
 		return FALSE
@@ -15,18 +26,6 @@
 		return FALSE
 
 	I.SetName(type_setup[SETUP_NAME])
-
-	var/icon_state = type_setup[SETUP_ICON_STATE]
-	if(icon_state)
-		I.icon_state = type_setup[SETUP_ICON_STATE]
-
-	var/onmob = type_setup[SETUP_ONMOB_ICON]
-	if(onmob)
-		I.use_single_icon = TRUE
-		I.icon = onmob
-
-	var/item_state = type_setup[SETUP_ITEM_STATE]
-	if(item_state)
-		I.item_state = item_state
-
+	I.icon = type_setup[SETUP_ICON]
+	I.reconsider_single_icon(TRUE)
 	return TRUE

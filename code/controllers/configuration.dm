@@ -180,6 +180,8 @@ var/list/gamemode_cache = list()
 	var/admin_irc = ""
 	var/announce_shuttle_dock_to_irc = FALSE
 
+	var/custom_item_icon_location // File location to look for custom items icons, needs to be relative to the executing binary.
+
 	// Event settings
 	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
 	// If the first delay has a custom start time
@@ -317,6 +319,9 @@ var/list/gamemode_cache = list()
 
 				if ("explosion_z_mult")
 					iterative_explosives_z_multiplier = text2num(value)
+
+				if ("custom_item_icon_location")
+					config.custom_item_icon_location = value
 
 				if ("log_ooc")
 					config.log_ooc = 1

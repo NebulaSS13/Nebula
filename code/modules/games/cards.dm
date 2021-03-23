@@ -8,14 +8,14 @@
 	return image(deck_icon, concealed ? back_icon : card_icon)
 
 /datum/playingcard/custom
-	var/use_custom_front = TRUE
-	var/use_custom_back = TRUE
+	var/use_custom_front
+	var/use_custom_back
 
 /datum/playingcard/custom/card_image(concealed, deck_icon)
 	if(concealed)
-		return image((src.use_custom_back ? CUSTOM_ITEM_OBJ : deck_icon), "[back_icon]")
+		return image(use_custom_back || deck_icon, "[back_icon]")
 	else
-		return image((src.use_custom_front ? CUSTOM_ITEM_OBJ : deck_icon), "[card_icon]")
+		return image(use_custom_front || deck_icon, "[card_icon]")
 
 /obj/item/deck
 	w_class = ITEM_SIZE_SMALL
@@ -36,11 +36,18 @@
 					P.back_icon = card_decl["back_icon"]
 				if(!isnull(card_decl["desc"]))
 					P.desc = card_decl["desc"]
-				if(!isnull(card_decl["use_custom_front"]))
-					P.use_custom_front = card_decl["use_custom_front"]
-				if(!isnull(card_decl["use_custom_back"]))
-					P.use_custom_back = card_decl["use_custom_back"]
+				finalize_custom_item_data(P, card_decl) // Separate proc in case of runtime.
 				cards += P
+
+/obj/item/deck/proc/finalize_custom_item_data(var/datum/playingcard/custom/P, var/card_decl)
+	if(!istype(P) || !card_decl)
+		return
+	if(!isnull(card_decl["use_custom_front"]))
+		var/card_front = card_decl["use_custom_front"]
+		P.use_custom_front = fexists(card_front) && file(card_front)
+	if(!isnull(card_decl["use_custom_back"]))
+		var/card_back = card_decl["use_custom_back"]
+		P.use_custom_back = fexists(card_back) && file(card_back)
 
 /obj/item/deck/holder
 	name = "card box"
