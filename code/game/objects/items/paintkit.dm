@@ -48,8 +48,6 @@
 		item_state = "[kit.new_icon]_helmet"
 		if(kit.new_icon_file)
 			icon = kit.new_icon_file
-		if(kit.new_mob_icon_file)
-			icon_override = kit.new_mob_icon_file
 		if(kit.new_light_overlay)
 			light_overlay = kit.new_light_overlay
 		to_chat(user, "You set about modifying the helmet into [src].")

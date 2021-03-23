@@ -60,7 +60,6 @@
 	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
 
 	var/base_parry_chance	// Will allow weapon to parry melee attacks if non-zero
-	var/icon_override = null  //Used to override hardcoded clothing dmis in human clothing proc.
 
 	var/use_alt_layer = FALSE // Use the slot's alternative layer when rendering on a mob
 
@@ -888,11 +887,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		SetName(citem.item_name)
 	if(citem.item_desc)
 		desc = citem.item_desc
-	if(citem.item_icon_state)
-		icon = CUSTOM_ITEM_OBJ
-		set_icon_state(citem.item_icon_state)
-		item_state = null
-		icon_override = CUSTOM_ITEM_MOB
+	if(citem.item_icon)
+		icon = item_icon
+	if(citem.item_state)
+		set_icon_state(citem.item_state)
 	
 /obj/item/proc/is_special_cutting_tool(var/high_power)
 	return FALSE
