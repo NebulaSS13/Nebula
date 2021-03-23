@@ -64,6 +64,7 @@
 	)
 	public_methods = list(
 		/decl/public_access/public_method/toggle_power,
+		/decl/public_access/public_method/toggle_pump_dir,
 		/decl/public_access/public_method/purge_pump,
 		/decl/public_access/public_method/refresh
 	)
@@ -237,6 +238,11 @@
 /obj/machinery/atmospherics/unary/vent_pump/proc/purge()
 	pressure_checks &= ~PRESSURE_CHECK_EXTERNAL
 	pump_direction = 0
+	queue_icon_update()
+
+/obj/machinery/atmospherics/unary/vent_pump/proc/toggle_pump_dir()
+	pump_direction = !pump_direction
+	queue_icon_update()
 
 /obj/machinery/atmospherics/unary/vent_pump/refresh()
 	..()
@@ -327,9 +333,8 @@
 	if((. = ..()))
 		return
 	if(href_list["switchMode"])
-		pump_direction = !pump_direction
+		toggle_pump_dir()
 		to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
-		queue_icon_update() //force the icon to refresh after changing directional mode.
 		return TOPIC_REFRESH
 
 /decl/public_access/public_variable/pump_dir
@@ -410,6 +415,11 @@
 	name = "activate purge mode"
 	desc = "Activates purge mode, overriding pressure checks and removing air."
 	call_proc = /obj/machinery/atmospherics/unary/vent_pump/proc/purge
+
+/decl/public_access/public_method/toggle_pump_dir
+	name = "toggle pump direction"
+	desc = "Toggles the pump's direction, from release to siphon or vice versa."
+	call_proc = /obj/machinery/atmospherics/unary/vent_pump/proc/toggle_pump_dir
 
 /decl/stock_part_preset/radio/event_transmitter/vent_pump
 	frequency = PUMP_FREQ

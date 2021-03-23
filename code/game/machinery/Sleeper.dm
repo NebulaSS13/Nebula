@@ -336,7 +336,6 @@
 
 /obj/machinery/sleeper/proc/set_occupant(var/mob/living/carbon/occupant)
 	src.occupant = occupant
-	update_icon()
 	if(!occupant)
 		SetName(initial(name))
 		update_use_power(POWER_USE_IDLE)

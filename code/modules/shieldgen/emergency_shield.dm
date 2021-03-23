@@ -131,7 +131,6 @@
 	if(active) return 0 //If it's already turned on, how did this get called?
 
 	src.active = 1
-	update_icon()
 
 	create_shields()
 
@@ -145,7 +144,6 @@
 	if(!active) return 0 //If it's already off, how did this get called?
 
 	src.active = 0
-	update_icon()
 
 	collapse_shields()
 

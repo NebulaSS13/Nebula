@@ -58,7 +58,6 @@
 	src.occupant.dropInto(loc)
 	src.occupant = null
 	update_use_power(POWER_USE_IDLE)
-	update_icon()
 	SetName(initial(name))
 	if(open_sound)
 		playsound(src, open_sound, 40)
@@ -94,7 +93,6 @@
 	src.occupant = target
 
 	update_use_power(POWER_USE_ACTIVE)
-	update_icon()
 	drop_contents()
 	SetName("[name] ([occupant])")
 

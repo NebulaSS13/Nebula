@@ -123,7 +123,6 @@
 		return SETUP_WARNING
 	P.target_pressure = P.max_pressure_setting
 	P.update_use_power(POWER_USE_IDLE)
-	P.update_icon()
 	return SETUP_OK
 
 
@@ -236,7 +235,6 @@
 		F.rebuild_filtering_list()
 
 	F.update_use_power(POWER_USE_IDLE)
-	F.update_icon()
 	return SETUP_OK
 
 

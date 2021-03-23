@@ -64,7 +64,6 @@
 		state |= WASHER_STATE_BLOODY
 
 	update_use_power(POWER_USE_ACTIVE)
-	update_icon()
 	addtimer(CALLBACK(src, /obj/machinery/washing_machine/proc/wash), 20 SECONDS)
 
 /obj/machinery/washing_machine/proc/wash()
@@ -86,11 +85,10 @@
 					addtimer(CALLBACK(C, /obj/item/clothing/proc/change_smell), detergent.smell_clean_time, TIMER_UNIQUE | TIMER_OVERRIDE)
 	QDEL_NULL(detergent)
 
-	update_use_power(POWER_USE_IDLE)
 	if(locate(/mob/living) in src)
 		gibs_ready = 1
 	state &= ~WASHER_STATE_RUNNING
-	update_icon()
+	update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/washing_machine/verb/climb_out()
 	set name = "Climb out"

@@ -288,10 +288,6 @@ var/global/datum/controller/radio/radio_controller
 	if(frequency)
 		frequency.remove_listener(device)
 
-		if(frequency.devices.len == 0)
-			qdel(frequency)
-			frequencies -= f_text
-
 	return 1
 
 /datum/controller/radio/proc/return_frequency(var/new_frequency as num)

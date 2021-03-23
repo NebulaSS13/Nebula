@@ -108,7 +108,6 @@
 		update_use_power(POWER_USE_IDLE)
 	else
 		update_use_power(POWER_USE_ACTIVE)
-	update_icon()
 
 /obj/machinery/artifact_harvester/Process()
 	if(!operable())

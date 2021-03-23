@@ -31,7 +31,6 @@ var/list/floor_light_cache = list()
 		anchored = !anchored
 		if(use_power)
 			update_use_power(POWER_USE_OFF)
-			queue_icon_update()
 		visible_message("<span class='notice'>\The [user] has [anchored ? "attached" : "detached"] \the [src].</span>")
 	else if(isWelder(W) && (damaged || (stat & BROKEN)))
 		var/obj/item/weldingtool/WT = W
@@ -78,7 +77,6 @@ var/list/floor_light_cache = list()
 	var/on = (use_power == POWER_USE_ACTIVE)
 	update_use_power(on ? POWER_USE_OFF : POWER_USE_ACTIVE)
 	visible_message("<span class='notice'>\The [user] turns \the [src] [!on ? "on" : "off"].</span>")
-	queue_icon_update()
 	return TRUE
 
 /obj/machinery/floor_light/set_broken(new_state)

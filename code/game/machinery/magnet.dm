@@ -153,9 +153,6 @@
 	else
 		update_use_power(POWER_USE_IDLE)
 
-	update_icon()
-
-
 /obj/machinery/magnetic_module/proc/magnetic_process() // proc that actually does the pulling
 	set waitfor = FALSE
 	if(pulling) return

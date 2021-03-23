@@ -120,6 +120,7 @@ This is /obj/machinery level code to properly manage power usage from the area.
 	use_power = new_use_power
 	var/new_power = get_power_usage()
 	REPORT_POWER_CONSUMPTION_CHANGE(old_power, new_power)
+	queue_icon_update()
 
 /obj/machinery/proc/update_power_channel(new_channel)
 	if(power_channel == new_channel)

@@ -78,7 +78,6 @@
 		return
 	if(href_list["toggle_power"])
 		update_use_power(!use_power)
-		queue_icon_update()
 		to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
 		return TOPIC_REFRESH
 

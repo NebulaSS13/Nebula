@@ -39,10 +39,6 @@
 	if(stat & NOPOWER)
 		update_use_power(POWER_USE_OFF)
 
-/obj/machinery/atmospherics/unary/engine/update_use_power(new_use_power)
-	..()
-	update_icon()
-
 /obj/machinery/atmospherics/unary/engine/RefreshParts()
 	..()
 	var/datum/extension/ship_engine/E = get_extension(src, /datum/extension/ship_engine)

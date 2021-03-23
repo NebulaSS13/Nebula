@@ -28,7 +28,6 @@
 		return
 	lit = !lit
 	update_use_power(lit ? POWER_USE_ACTIVE : POWER_USE_IDLE)
-	update_icon()
 
 /obj/machinery/holosign/on_update_icon()
 	if (!lit || inoperable())

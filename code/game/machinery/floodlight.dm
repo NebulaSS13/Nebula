@@ -45,7 +45,6 @@
 	set_light(l_max_bright, l_inner_range, l_outer_range)
 	update_use_power(POWER_USE_ACTIVE)
 	use_power_oneoff(active_power_usage)//so we drain cell if they keep trying to use it
-	update_icon()
 	if(loud)
 		visible_message("\The [src] turns on.")
 		playsound(src.loc, 'sound/effects/flashlight.ogg', 50, 0)
@@ -54,7 +53,6 @@
 /obj/machinery/floodlight/proc/turn_off(var/loud = 0)
 	set_light(0, 0)
 	update_use_power(POWER_USE_OFF)
-	update_icon()
 	if(loud)
 		visible_message("\The [src] shuts down.")
 		playsound(src.loc, 'sound/effects/flashlight.ogg', 50, 0)

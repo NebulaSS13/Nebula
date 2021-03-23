@@ -156,6 +156,8 @@
 	if(!actual_machine)
 		return
 	var/obj/item/stock_parts/radio/transmitter/basic/radio = holder
+	LAZYINITLIST(radio.transmit_on_change)
+	LAZYINITLIST(radio.transmit_on_tick)
 	radio.sanitize_events(actual_machine, radio.transmit_on_change)
 	radio.sanitize_events(actual_machine, radio.transmit_on_tick)
 
@@ -189,6 +191,7 @@
 	if(!actual_machine)
 		return
 	var/obj/item/stock_parts/radio/transmitter/on_event/radio = holder
+	LAZYINITLIST(radio.transmit_on_event)
 	if(!radio.is_valid_event(actual_machine, radio.event))
 		radio.event = null
 	radio.sanitize_events(actual_machine, radio.transmit_on_event)
@@ -232,6 +235,8 @@
 	if(!actual_machine)
 		return
 	var/obj/item/stock_parts/radio/receiver/radio = holder
+	LAZYINITLIST(radio.receive_and_call)
+	LAZYINITLIST(radio.receive_and_write)
 	radio.sanitize_events(actual_machine, radio.receive_and_call)
 	radio.sanitize_events(actual_machine, radio.receive_and_write)
 
@@ -239,10 +244,10 @@
 	var/obj/item/stock_parts/radio/receiver/radio = holder
 	var/list/dat = list()
 
-	dat += "<b>Transmit on change:</b><br>"
+	dat += "<b>Called on signal reception:</b><br>"
 	dat += event_list_to_selection_table("call", radio.receive_and_call)
 	dat += "<br>"
-	dat += "<b>Transmit every tick:</b><br>"
+	dat += "<b>Written to on signal reception:</b><br>"
 	dat += event_list_to_selection_table("write", radio.receive_and_write)
 	return ..() + JOINTEXT(dat)
 
@@ -257,4 +262,4 @@
 	if(href_list["call"])
 		return event_list_topic(radio.receive_and_call, actual_machine.public_methods, user, href_list)
 	if(href_list["write"])
-		return event_list_topic(radio.receive_and_write, radio.sanitize_events(actual_machine.public_variables.Copy()), user, href_list)
+		return event_list_topic(radio.receive_and_write, actual_machine.public_variables, user, href_list)

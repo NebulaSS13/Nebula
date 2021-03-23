@@ -63,7 +63,6 @@
 		queue_icon_update()
 	if(((stat & (BROKEN|NOPOWER)) || !anchored) && use_power >= POWER_USE_ACTIVE)
 		update_use_power(POWER_USE_IDLE)
-		queue_icon_update()
 
 /obj/machinery/reagent_temperature/interface_interact(var/mob/user)
 	interact(user)

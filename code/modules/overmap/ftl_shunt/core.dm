@@ -246,7 +246,6 @@
 	if(!silent)
 		ftl_announcement.Announce(shunt_cancel_text, "FTL Shunt Management System", new_sound = sound('sound/misc/notice2.ogg'))
 	update_use_power(POWER_USE_IDLE)
-	update_icon()
 	chargepercent = 0
 
 //Starts the shunt, and then hands off to do_shunt to finish it.
@@ -257,14 +256,13 @@
 		do_sabotage()
 		return
 
-	update_use_power(POWER_USE_IDLE)
 	var/destination = locate(shunt_x, shunt_y, GLOB.using_map.overmap_z)
 	var/jumpdist = get_dist(get_turf(ftl_computer.linked), destination)
 	var/obj/effect/portal/wormhole/W = new(destination) //Generate a wormhole effect on overmap to give some indication that something is about to happen.
 	QDEL_IN(W, 6 SECONDS)
 	addtimer(CALLBACK(src, .proc/do_shunt, shunt_x, shunt_y, jumpdist, destination), 6 SECONDS)
 	jumping = TRUE
-	update_icon()
+	update_use_power(POWER_USE_IDLE)
 	for(var/mob/living/carbon/M in GLOB.living_mob_list_)
 		if(!(M.z in ftl_computer.linked.map_z))
 			continue
@@ -274,10 +272,9 @@
 	ftl_computer.linked.forceMove(destination)
 	ftl_announcement.Announce(shunt_complete_text, "FTL Shunt Management System", new_sound = sound('sound/misc/notice2.ogg'))
 	cooldown = world.time + cooldown_delay
-	update_use_power(POWER_USE_IDLE)
 	do_effects(jumpdist)
 	jumping = FALSE
-	update_icon()
+	update_use_power(POWER_USE_IDLE)
 	chargepercent = 0
 	charge_started = 0
 
