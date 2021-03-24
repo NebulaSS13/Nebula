@@ -1024,3 +1024,6 @@
 
 /mob/proc/get_species()
 	return
+
+/mob/proc/get_bodytype()
+	return

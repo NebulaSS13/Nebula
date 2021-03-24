@@ -24,7 +24,7 @@
 
 /obj/item/clothing/head/headphones/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
-	if(headphones_on)
+	if(ret && headphones_on)
 		ret.icon_state = "[ret.icon_state]-on"
 	return ret
 

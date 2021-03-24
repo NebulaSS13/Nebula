@@ -49,8 +49,8 @@
 	else
 		icon_state = get_world_inventory_state()
 
-/obj/item/clothing/suit/storage/toggle/experimental_mob_overlay(mob/user_mob, slot)
+/obj/item/clothing/suit/storage/toggle/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
-	if(open && check_state_in_icon("[ret.icon_state]_open", icon))
+	if(ret && open && check_state_in_icon("[ret.icon_state]_open", icon))
 		ret.icon_state = "[ret.icon_state]_open"
 	return ret

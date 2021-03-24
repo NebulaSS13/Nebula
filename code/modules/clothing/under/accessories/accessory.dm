@@ -62,7 +62,7 @@
 		if(uniform.rolled_sleeves && hide_on_uniform_rollsleeves)
 			return FALSE
 
-/obj/item/clothing/accessory/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret && istype(loc, /obj/item/clothing/under))
 		var/new_state = ret.icon_state

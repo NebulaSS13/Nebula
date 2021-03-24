@@ -67,7 +67,7 @@
 		icon_state = "[icon_state]_up"
 	update_clothing_icon()	//so our mob-overlays
 
-/obj/item/clothing/head/welding/experimental_mob_overlay()
+/obj/item/clothing/head/welding/get_mob_overlay()
 	var/image/ret = ..()
 	if(ret && up && check_state_in_icon("[ret.icon_state]_up", icon))
 		ret.icon_state = "[ret.icon_state]_up"
@@ -124,7 +124,7 @@
 		icon_state = "[icon_state]_up"
 	update_clothing_icon()
 
-/obj/item/clothing/head/ushanka/experimental_mob_overlay()
+/obj/item/clothing/head/ushanka/get_mob_overlay()
 	var/image/ret = ..()
 	if(ret && up && check_state_in_icon("[ret.icon_state]_up", icon))
 		ret.icon_state = "[ret.icon_state]_up"

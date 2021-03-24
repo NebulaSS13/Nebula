@@ -57,15 +57,15 @@
 			eye.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		add_overlay(eye)
 
-/obj/item/clothing/glasses/eyepatch/hud/experimental_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/res = ..()
-	if(res && active && check_state_in_icon("[res.icon_state]-eye", res.icon))
-		var/image/eye = overlay_image(res.icon, "[res.icon_state]-eye", flags = RESET_COLOR)
+/obj/item/clothing/glasses/eyepatch/hud/get_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/ret = ..()
+	if(ret && active && check_state_in_icon("[ret.icon_state]-eye", ret.icon))
+		var/image/eye = overlay_image(ret.icon, "[ret.icon_state]-eye", flags = RESET_COLOR)
 		eye.color = eye_color
 		eye.layer = ABOVE_LIGHTING_LAYER
 		eye.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		res.overlays += eye
-	return res
+		ret.overlays += eye
+	return ret
 
 /obj/item/clothing/glasses/eyepatch/hud/security
 	name = "HUDpatch"

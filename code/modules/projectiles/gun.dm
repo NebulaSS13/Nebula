@@ -64,7 +64,6 @@
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
 	var/list/dispersion = list(0)
 	var/one_hand_penalty
-	var/wielded_item_state
 	var/combustion	//whether it creates hotspot when fired
 
 	var/next_fire_time = 0
@@ -171,12 +170,6 @@
 	return mutable_appearance(icon, "[get_world_inventory_state()][safety_icon][safety()]")
 
 /obj/item/gun/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/I = ..()
-	if(wielded_item_state && user_mob.can_wield_item(src) && is_held_twohanded(user_mob))
-		I.icon_state = wielded_item_state
-	return I
-
-/obj/item/gun/experimental_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret && user_mob.can_wield_item(src) && is_held_twohanded(user_mob) && check_state_in_icon("[ret.icon_state]-wielded", icon))
 		ret.icon_state = "[ret.icon_state]-wielded"

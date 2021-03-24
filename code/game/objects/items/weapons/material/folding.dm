@@ -52,10 +52,11 @@
 		M.update_inv_hands()
 	..()
 
-/obj/item/knife/folding/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/knife/folding/get_mob_overlay(mob/user_mob, slot, bodypart)
 	if(open)
 		return ..()
-	
+	return new /image
+
 //Subtypes
 /obj/item/knife/folding/wood
 	name = "peasant knife"

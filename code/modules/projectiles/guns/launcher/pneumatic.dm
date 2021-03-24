@@ -133,7 +133,7 @@
 
 	update_held_icon()
 
-/obj/item/gun/launcher/pneumatic/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/gun/launcher/pneumatic/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret && tank)
 		ret.icon_state += "-tank" 

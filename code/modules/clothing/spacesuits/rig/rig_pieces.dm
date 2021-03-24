@@ -28,9 +28,9 @@
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
 	
-/obj/item/clothing/head/helmet/space/rig/experimental_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
+/obj/item/clothing/head/helmet/space/rig/get_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/ret = ..()
-	if(user_mob?.check_rig_status() && check_state_in_icon("[ret.icon_state]-sealed", ret.icon))
+	if(ret && user_mob?.check_rig_status() && check_state_in_icon("[ret.icon_state]-sealed", ret.icon))
 		ret.icon_state = "[ret.icon_state]-sealed"
 	return ret
 
@@ -49,9 +49,9 @@
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
 	
-/obj/item/clothing/gloves/rig/experimental_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
+/obj/item/clothing/gloves/rig/get_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/ret = ..()
-	if(user_mob?.check_rig_status() && check_state_in_icon("[ret.icon_state]-sealed", ret.icon))
+	if(ret && user_mob?.check_rig_status() && check_state_in_icon("[ret.icon_state]-sealed", ret.icon))
 		ret.icon_state = "[ret.icon_state]-sealed"
 	return ret
 
@@ -70,9 +70,9 @@
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
 	
-/obj/item/clothing/shoes/magboots/rig/experimental_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
+/obj/item/clothing/shoes/magboots/rig/get_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/ret = ..()
-	if(user_mob?.check_rig_status() && check_state_in_icon("[ret.icon_state]-sealed", ret.icon))
+	if(ret && user_mob?.check_rig_status() && check_state_in_icon("[ret.icon_state]-sealed", ret.icon))
 		ret.icon_state = "[ret.icon_state]-sealed"
 	return ret
 
@@ -97,9 +97,9 @@
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
 	
-/obj/item/clothing/suit/space/rig/experimental_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
+/obj/item/clothing/suit/space/rig/get_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/ret = ..()
-	if(user_mob?.check_rig_status() && check_state_in_icon("[ret.icon_state]-sealed", ret.icon))
+	if(ret && user_mob?.check_rig_status() && check_state_in_icon("[ret.icon_state]-sealed", ret.icon))
 		ret.icon_state = "[ret.icon_state]-sealed"
 	return ret
 

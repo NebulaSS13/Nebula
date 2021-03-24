@@ -31,7 +31,7 @@
 	if(ispath(hud))
 		hud = new hud(src)
 
-/obj/item/clothing/glasses/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/clothing/glasses/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret && active && check_state_in_icon("[ret.icon_state]-active", ret.icon))
 		ret.icon_state = "[ret.icon_state]-active"
