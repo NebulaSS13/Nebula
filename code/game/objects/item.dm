@@ -111,11 +111,7 @@
 	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
-	if(check_state_in_icon(ICON_STATE_INV, icon) || check_state_in_icon(ICON_STATE_WORLD, icon))
-		use_single_icon = TRUE
-		has_inventory_icon = check_state_in_icon(ICON_STATE_INV, icon)
-		icon_state = ICON_STATE_WORLD
-		update_icon()
+	reconsider_single_icon()
 
 /obj/item/Destroy()
 	STOP_PROCESSING(SSobj, src)

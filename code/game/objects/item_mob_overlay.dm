@@ -6,6 +6,18 @@ var/list/bodypart_to_slot_lookup_table = list(
 	BP_L_HAND = "slot_l_hand",
 	BP_R_HAND = "slot_r_hand"
 )
+
+/obj/item/proc/reconsider_single_icon(var/update_icon)
+	use_single_icon = check_state_in_icon(ICON_STATE_INV, icon) || check_state_in_icon(ICON_STATE_WORLD, icon)
+	if(use_single_icon)
+		has_inventory_icon = check_state_in_icon(ICON_STATE_INV, icon)
+		icon_state = get_world_inventory_state()
+		. = TRUE
+	else
+		has_inventory_icon = FALSE
+	if(. || update_icon)
+		update_icon()
+
 // For checking if we have a specific state, for inventory icons and nonhumanoid species.
 // Cached cause asking icons is expensive. This is still expensive, so avoid using it if
 // you can reasonably expect the icon_state to exist beforehand, or if you can cache the
