@@ -16,5 +16,4 @@
 	burst_delay = 3
 	burst = 3
 	accuracy = -1
-	wielded_item_state = null
 	bulk = 0

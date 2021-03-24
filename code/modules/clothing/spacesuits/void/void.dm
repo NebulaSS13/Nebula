@@ -285,7 +285,7 @@ else if(##equipment_var) {\
 
 /obj/item/clothing/suit/space/void/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
-	if(tank && slot == slot_back_str)
+	if(ret && tank && slot == slot_back_str)
 		ret.overlays += tank.get_mob_overlay(user_mob, slot_back_str)
 	return ret
 

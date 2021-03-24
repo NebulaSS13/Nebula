@@ -374,13 +374,13 @@
 		add_overlay(I)
 
 /obj/item/storage/backpack/ert/get_mob_overlay(mob/user_mob, slot, bodypart)
-	. = ..()
-	if(slot == slot_back_str && marking_state)
-		var/image/ret = .
+	var/image/ret = ..()
+	if(ret && slot == slot_back_str && marking_state)
 		var/image/I = image(icon, "[ret.icon_state]-[marking_state]")
 		I.color = marking_colour
 		I.appearance_flags |= RESET_COLOR
 		ret.add_overlay(I)	
+	return ret
 
 /obj/item/storage/backpack/ert/commander
 	name = "emergency response team commander backpack"

@@ -35,7 +35,7 @@
 
 /obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
-	if(slot == slot_belt_str && contents.len)
+	if(ret && slot == slot_belt_str && length(contents))
 		var/list/ret_overlays = list()
 		for(var/obj/item/I in contents)
 			var/image/overlay = I.get_mob_overlay(user_mob, slot, bodypart)

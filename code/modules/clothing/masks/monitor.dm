@@ -46,7 +46,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/clothing/mask/monitor/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/clothing/mask/monitor/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret)
 		if(!(monitor_state_index in monitor_states))

@@ -55,13 +55,13 @@
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
-/obj/item/pickaxe/experimental_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/I = ..()
-	if(build_from_parts && check_state_in_icon("[I.icon_state]-handle", I.icon))
-		var/image/handle = image(I.icon, "[I.icon_state]-handle")
+/obj/item/pickaxe/get_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/ret = ..()
+	if(ret && build_from_parts && check_state_in_icon("[ret.icon_state]-handle", ret.icon))
+		var/image/handle = image(ret.icon, "[ret.icon_state]-handle")
 		handle.appearance_flags |= RESET_COLOR
-		I.add_overlay(handle)
-	return I
+		ret.add_overlay(handle)
+	return ret
 
 /obj/item/pickaxe/hammer
 	name = "sledgehammer"

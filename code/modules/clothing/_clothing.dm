@@ -65,18 +65,17 @@
 
 /obj/item/clothing/get_mob_overlay(mob/living/user_mob, slot, bodypart)
 	var/image/ret = ..()
-
-	if(slot in user_mob?.held_item_slots)
-		return ret
-
-	if(ishuman(user_mob))
-		var/mob/living/carbon/human/user_human = user_mob
-		if(blood_DNA && user_human.species.blood_mask)
-			var/image/bloodsies = overlay_image(user_human.species.blood_mask, blood_overlay_type, blood_color, RESET_COLOR)
-			bloodsies.appearance_flags |= NO_CLIENT_COLOR
-			ret.overlays += bloodsies
-	if(markings_icon && markings_color)
-		ret.overlays += mutable_appearance(ret.icon, markings_icon, markings_color)
+	if(ret)
+		if(slot in user_mob?.held_item_slots)
+			return ret
+		if(ishuman(user_mob))
+			var/mob/living/carbon/human/user_human = user_mob
+			if(blood_DNA && user_human.species.blood_mask)
+				var/image/bloodsies = overlay_image(user_human.species.blood_mask, blood_overlay_type, blood_color, RESET_COLOR)
+				bloodsies.appearance_flags |= NO_CLIENT_COLOR
+				ret.overlays += bloodsies
+		if(markings_icon && markings_color)
+			ret.overlays += mutable_appearance(ret.icon, markings_icon, markings_color)
 	return ret
 
 /obj/item/clothing/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)

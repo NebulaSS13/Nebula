@@ -84,6 +84,9 @@
 	
 	var/datum/reagents/coating // reagent container for coating things like blood/oil, used for overlays and tracks
 
+	var/tmp/has_inventory_icon	// do not set manually
+	var/tmp/use_single_icon
+
 /obj/item/proc/get_origin_tech()
 	return origin_tech
 
@@ -108,6 +111,11 @@
 	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
+	if(check_state_in_icon(ICON_STATE_INV, icon) || check_state_in_icon(ICON_STATE_WORLD, icon))
+		use_single_icon = TRUE
+		has_inventory_icon = check_state_in_icon(ICON_STATE_INV, icon)
+		icon_state = ICON_STATE_WORLD
+		update_icon()
 
 /obj/item/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -790,47 +798,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
-
-/obj/item/proc/use_spritesheet(var/bodytype, var/slot, var/icon_state)
-	var/sprite_sheet = LAZYACCESS(sprite_sheets, bodytype)
-	if(!sprite_sheet || slot == BP_L_HAND || slot == BP_R_HAND)
-		return FALSE
-	if(check_state_in_icon(icon_state, sprite_sheet))
-		return TRUE
-	return (slot != slot_wear_suit_str && slot != slot_head_str)
-
-/obj/item/proc/get_icon_state(mob/user_mob, slot)
-	. = (item_state || icon_state)
-
-/obj/item/proc/get_mob_overlay(mob/user_mob, slot, bodypart)
-
-	if(use_single_icon)
-		return experimental_mob_overlay(user_mob, slot, bodypart)
-
-	var/bodytype = BODYTYPE_HUMANOID
-	var/mob/living/carbon/human/user_human
-	if(ishuman(user_mob))
-		user_human = user_mob
-		bodytype = user_human.species.get_bodytype(user_human)
-
-	var/mob_state = get_icon_state(user_mob, slot)
-
-	var/mob_icon
-	var/spritesheet = FALSE
-	if(use_spritesheet(bodytype, slot, mob_state))
-		if(slot == slot_l_ear_str)
-			mob_state = "[mob_state]_l"
-		if(slot == slot_r_ear_str)
-			mob_state = "[mob_state]_r"
-		spritesheet = TRUE
-		mob_icon = LAZYACCESS(sprite_sheets, bodytype)
-	else
-		mob_icon = global.default_onmob_icons[slot]
-
-	if(user_human)
-		var/use_slot = (bodypart in user_human.species.equip_adjust) ? bodypart : slot
-		return user_human.species.get_offset_overlay_image(spritesheet, mob_icon, mob_state, color, use_slot)
-	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
 /obj/item/proc/get_examine_line()
 	if(coating)

@@ -223,7 +223,7 @@ var/list/laser_wavelengths
 
 /obj/item/gun/energy/capacitor/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
-	if(slot == BP_L_HAND || slot == BP_R_HAND || slot == slot_back_str)
+	if(ret && (slot == BP_L_HAND || slot == BP_R_HAND || slot == slot_back_str))
 		var/image/I = image(icon, "[ret.icon_state]-wiring")
 		I.color = wiring_color
 		I.appearance_flags |= RESET_COLOR
@@ -242,7 +242,7 @@ var/list/laser_wavelengths
 					I.color = selected_wavelength.color
 					I.appearance_flags |= RESET_COLOR
 					ret.add_overlay(I)
-	. = ret
+	return ret
 
 /obj/item/gun/energy/capacitor/consume_next_projectile()
 

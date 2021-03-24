@@ -86,7 +86,7 @@
 		icon_state = "[icon_state]_up"
 	update_clothing_icon()
 
-/obj/item/clothing/head/helmet/riot/experimental_mob_overlay()
+/obj/item/clothing/head/helmet/riot/get_mob_overlay()
 	var/image/ret = ..()
 	if(ret && up && check_state_in_icon("[ret.icon_state]_up", icon))
 		ret.icon_state = "[ret.icon_state]_up"

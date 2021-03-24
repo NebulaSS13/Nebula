@@ -38,12 +38,12 @@
 	else
 		icon_state = get_world_inventory_state()
 
-/obj/item/gun/projectile/dartgun/experimental_mob_overlay(mob/living/user_mob, slot, bodypart)
-	var/image/I = ..()
-	if(slot in user_mob.held_item_slots)
-		if(ammo_magazine)
-			I.icon_state += "-[Clamp(length(ammo_magazine.stored_ammo.len), 0, 5)]"
-	return I
+/obj/item/gun/projectile/dartgun/get_mob_overlay(mob/living/user_mob, slot, bodypart)
+	var/image/ret = ..()
+	if(ret && (slot in user_mob.held_item_slots) && ammo_magazine)
+		ret.icon_state += "-[Clamp(length(ammo_magazine.stored_ammo.len), 0, 5)]"
+	return ret
+
 /obj/item/gun/projectile/dartgun/consume_next_projectile()
 	. = ..()
 	var/obj/item/projectile/bullet/chemdart/dart = .

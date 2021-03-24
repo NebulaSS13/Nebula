@@ -19,20 +19,21 @@
 
 /obj/item/clothing/head/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
-	if(light_overlay_image)
-		ret.overlays -= light_overlay_image
-	if(on && slot == slot_head_str)
-		if(!light_overlay_image)
-			if(ishuman(user_mob))
-				var/mob/living/carbon/human/user_human = user_mob
-				var/use_icon = LAZYACCESS(sprite_sheets, user_human.species.get_bodytype(user_human))
-				if(use_icon)
-					light_overlay_image = user_human.species.get_offset_overlay_image(TRUE, use_icon, "[light_overlay]", color, slot)
+	if(ret)
+		if(light_overlay_image)
+			ret.overlays -= light_overlay_image
+		if(on && slot == slot_head_str)
+			if(!light_overlay_image)
+				if(ishuman(user_mob))
+					var/mob/living/carbon/human/user_human = user_mob
+					var/use_icon = LAZYACCESS(sprite_sheets, user_human.species.get_bodytype(user_human))
+					if(use_icon)
+						light_overlay_image = user_human.species.get_offset_overlay_image(TRUE, use_icon, "[light_overlay]", color, slot)
+					else
+						light_overlay_image = user_human.species.get_offset_overlay_image(FALSE, 'icons/mob/light_overlays.dmi', "[light_overlay]", color, slot)
 				else
-					light_overlay_image = user_human.species.get_offset_overlay_image(FALSE, 'icons/mob/light_overlays.dmi', "[light_overlay]", color, slot)
-			else
-				light_overlay_image = overlay_image('icons/mob/light_overlays.dmi', "[light_overlay]", null, RESET_COLOR)
-		ret.overlays |= light_overlay_image
+					light_overlay_image = overlay_image('icons/mob/light_overlays.dmi', "[light_overlay]", null, RESET_COLOR)
+			ret.overlays |= light_overlay_image
 	return ret
 
 /obj/item/clothing/head/attack_self(mob/user)

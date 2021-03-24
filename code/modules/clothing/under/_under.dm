@@ -47,17 +47,17 @@
 	if(check_state_in_icon("[BODYTYPE_HUMANOID]-[slot_w_uniform_str]-sleeves", icon))
 		verbs |= /obj/item/clothing/under/proc/roll_up_sleeves
 
-/obj/item/clothing/under/experimental_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/I = ..()
-	if(I && slot == slot_w_uniform_str)
-		if(rolled_down && check_state_in_icon("[I.icon_state]-rolled", I.icon))
-			I.icon_state = "[I.icon_state]-rolled"
+/obj/item/clothing/under/get_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/ret = ..()
+	if(ret && slot == slot_w_uniform_str)
+		if(rolled_down && check_state_in_icon("[ret.icon_state]-rolled", ret.icon))
+			ret.icon_state = "[ret.icon_state]-rolled"
 		else
-			if(check_state_in_icon("[I.icon_state]-[lowertext(user_mob.gender)]", I.icon))
-				I.icon_state = "[I.icon_state]-[lowertext(user_mob.gender)]"
-			if(rolled_sleeves && check_state_in_icon("[I.icon_state]-sleeves", I.icon))
-				I.icon_state = "[I.icon_state]-sleeves"
-	return I
+			if(check_state_in_icon("[ret.icon_state]-[lowertext(user_mob.gender)]", ret.icon))
+				ret.icon_state = "[ret.icon_state]-[lowertext(user_mob.gender)]"
+			if(rolled_sleeves && check_state_in_icon("[ret.icon_state]-sleeves", ret.icon))
+				ret.icon_state = "[ret.icon_state]-sleeves"
+	return ret
 
 /obj/item/clothing/under/proc/roll_down_clothes()
 

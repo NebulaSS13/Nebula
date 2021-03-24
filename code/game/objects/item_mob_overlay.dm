@@ -1,7 +1,11 @@
-// This file is an experiment in changing the way item icons are handled.
-// Not really expecting it to work out of the box, so we'll see how it goes
-// with a handful of specific items.
-
+// This is a temporary workaround for the slot => bodypart 
+// changes. In the long term this should be removed after 
+// all the `slot_l/r_hand-foo` states are renamed to just 
+// `l/r_hand-foo`. TODO: check if this is still here in 2025.
+var/list/bodypart_to_slot_lookup_table = list(
+	BP_L_HAND = "slot_l_hand",
+	BP_R_HAND = "slot_r_hand"
+)
 // For checking if we have a specific state, for inventory icons and nonhumanoid species.
 // Cached cause asking icons is expensive. This is still expensive, so avoid using it if
 // you can reasonably expect the icon_state to exist beforehand, or if you can cache the
@@ -20,24 +24,18 @@ var/list/icon_state_cache = list()
 		global.icon_state_cache[checkkey] = check
 	. = check[checkstate]
 
-/obj/item
-	var/tmp/has_inventory_icon	// do not set manually
-	var/tmp/use_single_icon
-
-/obj/item/proc/reconsider_single_icon(var/update_icon)
-	use_single_icon = check_state_in_icon(ICON_STATE_INV, icon) || check_state_in_icon(ICON_STATE_WORLD, icon)
-	if(use_single_icon)
-		has_inventory_icon = check_state_in_icon(ICON_STATE_INV, icon)
+/obj/item/proc/update_world_inventory_state()
+	if(use_single_icon && has_inventory_icon)
+		var/last_state = icon_state
 		icon_state = get_world_inventory_state()
-		. = TRUE
-	else
-		has_inventory_icon = FALSE
-	if(. || update_icon)
-		update_icon()
+		if(last_state != icon_state)
+			update_icon()
 
-/obj/item/Initialize(ml, material_key)
-	. = ..()
-	reconsider_single_icon() // TODO: manually set use_single_icon as appropriate and remove this from init
+/obj/item/proc/get_world_inventory_state()
+	if(use_single_icon)
+		if(plane == HUD_PLANE && has_inventory_icon)
+			return ICON_STATE_INV
+		return ICON_STATE_WORLD
 
 /obj/item/hud_layerise()
 	..()
@@ -47,37 +45,16 @@ var/list/icon_state_cache = list()
 	..()
 	update_world_inventory_state()
 
-/obj/item/proc/update_world_inventory_state()
-	if(use_single_icon && has_inventory_icon)
-		var/last_state = icon_state
-		icon_state = get_world_inventory_state()
-		if(last_state != icon_state)
-			update_icon()
+/obj/item/proc/get_mob_overlay(mob/user_mob, slot, bodypart)
 
-/obj/item/proc/get_world_inventory_state()
 	if(!use_single_icon)
-		return
-	if(plane == HUD_PLANE && has_inventory_icon)
-		return ICON_STATE_INV
-	else
-		return ICON_STATE_WORLD
-
-/mob/proc/get_bodytype()
-	return
-
-// This is a temporary workaround for the slot => bodypart 
-// changes. In the long term this should be removed after 
-// all the `slot_l/r_hand-foo` states are renamed to just 
-// `l/r_hand-foo`. TODO: check if this is still here in 2025.
-var/list/bodypart_to_slot_lookup_table = list(
-	BP_L_HAND = "slot_l_hand",
-	BP_R_HAND = "slot_r_hand"
-)
-
-/obj/item/proc/get_fallback_slot(var/slot)
-	return
-
-/obj/item/proc/experimental_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
+		var/mob_state = (item_state || icon_state)
+		var/mob_icon = global.default_onmob_icons[slot]
+		if(ishuman(user_mob))
+			var/mob/living/carbon/human/user_human = user_mob
+			var/use_slot = (bodypart in user_human.species.equip_adjust) ? bodypart : slot
+			return user_human.species.get_offset_overlay_image(FALSE, mob_icon, mob_state, color, use_slot)
+		return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
 	var/bodytype = user_mob?.get_bodytype() || BODYTYPE_HUMANOID
 	var/useicon =  get_icon_for_bodytype(bodytype)
@@ -109,8 +86,8 @@ var/list/bodypart_to_slot_lookup_table = list(
 	. = apply_offsets(user_mob,  bodytype, I, slot, bodypart)
 	. = apply_overlays(user_mob, bodytype, ., slot)
 
-/mob/living/carbon/get_bodytype()
-	. = species && species.get_bodytype(src)
+/obj/item/proc/get_fallback_slot(var/slot)
+	return
 
 /obj/item/proc/get_icon_for_bodytype(var/bodytype)
 	. = LAZYACCESS(sprite_sheets, bodytype) || icon

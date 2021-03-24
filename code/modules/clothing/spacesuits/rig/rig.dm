@@ -569,10 +569,7 @@
 
 /obj/item/rig/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
-	if(slot != slot_back_str || offline)
-		return ret
-
-	if(equipment_overlay_icon && LAZYLEN(installed_modules))
+	if(ret && slot == slot_back_str && !offline && equipment_overlay_icon && LAZYLEN(installed_modules))
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)
 				ret.overlays += image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]")

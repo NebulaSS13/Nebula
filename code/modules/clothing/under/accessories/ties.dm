@@ -75,7 +75,7 @@
 	tied = !tied
 	update_icon()
 
-/obj/item/clothing/accessory/bowtie/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/clothing/accessory/bowtie/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret && !tied && check_state_in_icon("[ret.icon_state]-untied", ret.icon))
 		ret.icon_state = "[ret.icon_state]-untied"

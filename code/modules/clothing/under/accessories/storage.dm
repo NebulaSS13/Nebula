@@ -115,11 +115,12 @@
 	if(contents_count > 0 && check_state_in_icon("[icon_state]-[contents_count]", icon))
 		icon_state = "[icon_state]-[contents_count]"
 	
-/obj/item/clothing/accessory/storage/knifeharness/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/clothing/accessory/storage/knifeharness/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
-	var/contents_count = min(length(contents), 2)
-	if(contents_count > 0 && check_state_in_icon("[ret.icon_state]-[contents_count]", ret.icon))
-		ret.icon_state = "[ret.icon_state]-[contents_count]"
+	if(ret)
+		var/contents_count = min(length(contents), 2)
+		if(contents_count > 0 && check_state_in_icon("[ret.icon_state]-[contents_count]", ret.icon))
+			ret.icon_state = "[ret.icon_state]-[contents_count]"
 	return ret
 
 /obj/item/clothing/accessory/storage/bandolier

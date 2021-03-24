@@ -76,11 +76,11 @@
 	if(!href_list["close"])
 		attack_self(usr)
 
-/obj/item/camera/tvcamera/experimental_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/I = ..()
-	if(I && camera.status && check_state_in_icon("[I.icon_state]-on", I.icon))
-		I.icon_state = "[I.icon_state]-on"
-	return I
+/obj/item/camera/tvcamera/get_mob_overlay(mob/user_mob, slot, bodypart)
+	var/image/ret = ..()
+	if(ret && camera.status && check_state_in_icon("[ret.icon_state]-on", ret.icon))
+		ret.icon_state = "[ret.icon_state]-on"
+	return ret
 
 /obj/item/camera/tvcamera/on_update_icon()
 	cut_overlays()

@@ -110,7 +110,7 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	if(charge_meter)
 		update_charge_meter()
 
-/obj/item/gun/energy/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/gun/energy/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret && charge_meter)
 		ret = add_onmob_charge_meter(ret)

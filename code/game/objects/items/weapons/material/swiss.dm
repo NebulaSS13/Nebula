@@ -84,9 +84,10 @@
 	if(active_tool != null)
 		overlays += overlay_image(icon, active_tool)
 
-/obj/item/knife/folding/swiss/experimental_mob_overlay(mob/user_mob, slot, bodypart)
+/obj/item/knife/folding/swiss/get_mob_overlay(mob/user_mob, slot, bodypart)
 	if(active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE)
 		return ..()
+	return new /image
 
 /obj/item/knife/folding/swiss/iscrowbar()
 	return active_tool == SWISSKNF_CROWBAR && can_use_tools

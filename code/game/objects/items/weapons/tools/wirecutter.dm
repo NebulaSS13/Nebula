@@ -22,17 +22,17 @@
 		handle_color = pick(valid_colours)
 	overlays += overlay_image(icon, "[get_world_inventory_state()]_handle", handle_color, flags=RESET_COLOR)
 
-/obj/item/wirecutters/experimental_mob_overlay()
-	var/image/res = ..()
-	if(res)
-		res.color = handle_color
-	return res
+/obj/item/wirecutters/get_mob_overlay()
+	var/image/ret = ..()
+	if(ret)
+		ret.color = handle_color
+	return ret
 
 /obj/item/wirecutters/get_on_belt_overlay()
-	var/image/res = ..()
-	if(res)
-		res.color = handle_color
-	return res
+	var/image/ret = ..()
+	if(ret)
+		ret.color = handle_color
+	return ret
 
 /obj/item/wirecutters/attack(mob/living/carbon/C, mob/user)
 	if(istype(C) && user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/handcuffs/cable)))
