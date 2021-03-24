@@ -96,9 +96,9 @@
 	if(markings_icon && markings_color)
 		add_overlay(mutable_appearance(icon, "[get_world_inventory_state()][markings_icon]", markings_color))
 	for(var/obj/item/clothing/accessory/accessory in accessories)
-		var/image/ret = accessory.get_inv_overlay()
-		if(ret)
-			add_overlay(ret)
+		var/image/I = accessory.get_attached_inventory_overlay()
+		if(I)
+			add_overlay(I)
 
 /obj/item/clothing/proc/change_smell(smell = SMELL_DEFAULT)
 	smell_state = smell
