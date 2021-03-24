@@ -256,7 +256,8 @@
 		integrity_key += "[!!length(nodes_in_dir(direction))]"
 
 	icon_state = "[integrity_key][icon_connect_type]"
-	color = pipe_color
+	if(!isnull(pipe_color))
+		color = pipe_color
 
 	try_leak()
 

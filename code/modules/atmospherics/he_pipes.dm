@@ -9,6 +9,7 @@
 	var/surface = 2	//surface area in m^2
 	var/icon_temperature = T20C //stop small changes in temperature causing an icon refresh
 	build_icon_state = "he"
+	atom_flags = 0 // no painting
 
 	minimum_temperature_difference = 20
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
@@ -90,7 +91,7 @@
 				var/h_b = heat2color_b(icon_temperature)
 
 				if(icon_temperature < 2000) //scale up overlay until 2000K
-					var/scale = (icon_temperature - 500) / 1500
+					var/scale = max((icon_temperature - 500) / 1500, 0)
 					h_r = 64 + (h_r - 64)*scale
 					h_g = 64 + (h_g - 64)*scale
 					h_b = 64 + (h_b - 64)*scale

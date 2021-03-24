@@ -17,6 +17,7 @@ var/list/shutoff_valves = list()
 
 /obj/machinery/atmospherics/valve/shutoff/on_update_icon()
 	icon_state = "vclamp[open]"
+	build_device_underlays(FALSE)
 
 /obj/machinery/atmospherics/valve/shutoff/examine(mob/user)
 	. = ..()
