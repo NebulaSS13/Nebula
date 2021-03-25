@@ -315,6 +315,3 @@
 	
 /obj/item/charge_stick/GetChargeStick()
 	return src
-
-/obj/item/coin/get_base_value()
-	. = max((holographic ? 0 : absolute_worth), ..())
