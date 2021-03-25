@@ -2687,10 +2687,16 @@
 /turf/simulated/floor/tiled/dark,
 /area/liberia/bridge)
 "ep" = (
-/obj/structure/table/standard,
-/obj/effect/floor_decal/corner/brown{
-	dir = 10
+/obj/machinery/atm{
+	pixel_y = -30
 	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/door/window/brigdoor/northleft{
+	req_access = newlist()
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "eq" = (
@@ -4515,10 +4521,6 @@
 /obj/item/scanner/price,
 /obj/machinery/light/small,
 /obj/item/scanner/price,
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 24
-	},
 /turf/simulated/floor/wood/walnut,
 /area/liberia/bar)
 "hB" = (
@@ -6928,6 +6930,20 @@
 /obj/effect/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/carpet/red,
 /area/liberia/traidingroom)
+"qc" = (
+/obj/machinery/atm{
+	pixel_y = -30
+	},
+/obj/structure/window/reinforced{
+	dir = 8;
+	health = null
+	},
+/obj/machinery/door/window/brigdoor/northleft{
+	req_access = newlist()
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/steel_grid,
+/area/liberia/mule)
 "qg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -25929,7 +25945,7 @@ bW
 cw
 cV
 ep
-bo
+ex
 aa
 aa
 oM
@@ -26130,8 +26146,8 @@ bA
 bX
 cx
 cW
-ep
-bo
+qc
+ex
 aa
 aa
 oM
