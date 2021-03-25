@@ -91,7 +91,7 @@
 
 	if(giver)
 		data["giver"] = !!giver
-		data["giver_name"] = giver.rank || giver.assignment || SSjobs.get_by_path(giver.job_access_type).title
+		data["giver_name"] = giver.rank || giver.assignment
 		data["giv_name"] = giv_name
 
 		var/list/giver_access = list()

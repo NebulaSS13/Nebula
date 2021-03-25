@@ -9,5 +9,4 @@
 /obj/item/card/id/ministation/scientist
 	name = "identification card"
 	desc = "A card issued to science staff."
-	job_access_type = /datum/job/ministation/scientist
 	detail_color = COLOR_PALE_PURPLE_GRAY

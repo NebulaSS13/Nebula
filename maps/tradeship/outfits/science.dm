@@ -7,7 +7,6 @@
 /obj/item/card/id/tradeship/science
 	name = "identification card"
 	desc = "A card issued to science staff."
-	job_access_type = /datum/job/tradeship_researcher
 	detail_color = COLOR_PALE_PURPLE_GRAY
 
 /decl/hierarchy/outfit/job/tradeship/hand/researcher/junior
@@ -17,5 +16,4 @@
 /obj/item/card/id/tradeship/science/head
 	name = "identification card"
 	desc = "A card which represents knowledge and reasoning."
-	job_access_type = /datum/job/tradeship_researcher/head
 	extra_details = list("goldstripe")

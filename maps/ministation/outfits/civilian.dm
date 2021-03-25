@@ -37,17 +37,13 @@
 /obj/item/card/id/ministation/cargo
 	name = "identification card"
 	desc = "A card issued to cargo staff."
-	job_access_type = /datum/job/ministation/cargo
 	detail_color = COLOR_BROWN
 
 /obj/item/card/id/ministation/bartender
 	desc = "A card issued to kitchen staff."
-	job_access_type = /datum/job/ministation/bartender
 
 /obj/item/card/id/ministation/janitor
 	desc = "A card issued to custodial staff."
-	job_access_type = /datum/job/ministation/janitor
 
 /obj/item/card/id/ministation/librarian
 	desc = "A card issued to the station librarian."
-	job_access_type = /datum/job/ministation/librarian

@@ -5,7 +5,7 @@
 	uniform = /obj/item/clothing/under/captain
 	l_ear = /obj/item/radio/headset/heads/captain
 	shoes = /obj/item/clothing/shoes/color/brown
-	id_type = /obj/item/card/id/gold/ministation
+	id_type = /obj/item/card/id/gold
 	pda_type = /obj/item/modular_computer/pda/heads/captain
 
 /decl/hierarchy/outfit/job/ministation/captain/New()
@@ -27,17 +27,11 @@
 			else
 				qdel(medal)
 
-/obj/item/card/id/gold/ministation
-	job_access_type = /datum/job/ministation/captain
-
 /decl/hierarchy/outfit/job/ministation/hop
 	name = MINISTATION_OUTFIT_JOB_NAME("Lieutenant")
 	uniform = /obj/item/clothing/under/head_of_personnel
 	l_ear = /obj/item/radio/headset/heads/hop
 	shoes = /obj/item/clothing/shoes/color/brown
-	id_type = /obj/item/card/id/silver/ministation
+	id_type = /obj/item/card/id/silver
 	pda_type = /obj/item/modular_computer/pda/heads/hop
 	backpack_contents = list(/obj/item/storage/box/ids = 1)
-
-/obj/item/card/id/silver/ministation
-	job_access_type = /datum/job/ministation/hop
