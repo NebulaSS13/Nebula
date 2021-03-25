@@ -638,51 +638,26 @@ The _flatIcons list is a cache for generated icon files.
 /proc/getFlatIcon(image/A, defdir=2, deficon=null, defstate="", defblend=BLEND_DEFAULT, always_use_defdir = 0)
 	// We start with a blank canvas, otherwise some icon procs crash silently
 	var/icon/flat = icon('icons/effects/effects.dmi', "icon_state"="nothing") // Final flattened icon
-	if(!A)
+	if(!A || A.alpha <= 0)
 		return flat
-	if(A.alpha <= 0)
-		return flat
-	var/noIcon = FALSE
 
-	var/curicon
-	if(A.icon)
-		curicon = A.icon
-	else
-		curicon = deficon
+	var/curicon =  A.icon || deficon
+	var/curstate = A.icon_state || defstate
+	var/curdir =   (A.dir != SOUTH && !always_use_defdir) ? A.dir : defdir
+	var/curblend = (A.blend_mode == BLEND_DEFAULT) ? defblend : A.blend_mode
 
-	if(!curicon)
-		noIcon = TRUE // Do not render this object.
-
-	var/curstate
-	if(A.icon_state)
-		curstate = A.icon_state
-	else
-		curstate = defstate
-
-	if(!noIcon && !(curstate in icon_states(curicon)))
-		if("" in icon_states(curicon))
+	if(curicon && !check_state_in_icon(curstate, curicon))
+		if(check_state_in_icon("", curicon))
 			curstate = ""
 		else
-			noIcon = TRUE // Do not render this object.
-
-	var/curdir
-	if(A.dir != 2 && !always_use_defdir)
-		curdir = A.dir
-	else
-		curdir = defdir
-
-	var/curblend
-	if(A.blend_mode == BLEND_DEFAULT)
-		curblend = defblend
-	else
-		curblend = A.blend_mode
+			curicon = null // Do not render this object.
 
 	// Layers will be a sorted list of icons/overlays, based on the order in which they are displayed
 	var/list/layers = list()
 	var/image/copy
 	// Add the atom's icon itself, without pixel_x/y offsets.
-	if(!noIcon)
-		copy = image(icon=curicon, icon_state=curstate, layer=A.layer, dir=curdir)
+	if(curicon)
+		copy = image(icon = curicon, icon_state = curstate, layer = A.layer, dir = curdir)
 		copy.color = A.color
 		copy.alpha = A.alpha
 		copy.blend_mode = curblend
@@ -726,30 +701,30 @@ The _flatIcons list is a cache for generated icon files.
 		else // All done
 			break
 
-	var/icon/add // Icon of overlay being added
-
-		// Current dimensions of flattened icon
-	var/flatX1=1
-	var/flatX2=flat.Width()
-	var/flatY1=1
-	var/flatY2=flat.Height()
-		// Dimensions of overlay being added
+	// Current dimensions of flattened icon
+	var/flatX1= 1
+	var/flatX2= flat.Width()
+	var/flatY1= 1
+	var/flatY2= flat.Height()
+	
+	// Dimensions of overlay being added
 	var/addX1
 	var/addX2
 	var/addY1
 	var/addY2
 
-	for(var/I in layers)
+	var/icon/add // Icon of overlay being added
+	for(var/image/I as anything in layers)
 
-		if(I:alpha == 0)
+		if(I.alpha == 0)
 			continue
 
 		if(I == copy) // 'I' is an /image based on the object being flattened.
 			curblend = BLEND_OVERLAY
-			add = icon(I:icon, I:icon_state, I:dir)
+			add = icon(I.icon, I.icon_state, I.dir)
 			// This checks for a silent failure mode of the icon routine. If the requested dir
 			// doesn't exist in this icon state it returns a 32x32 icon with 0 alpha.
-			if (I:dir != SOUTH && add.Width() == 32 && add.Height() == 32)
+			if (I.dir != SOUTH && add.Width() == 32 && add.Height() == 32)
 				// Check every pixel for blank (computationally expensive, but the process is limited
 				// by the amount of film on the station, only happens when we hit something that's
 				// turned, and bails at the very first pixel it sees.
@@ -764,25 +739,27 @@ The _flatIcons list is a cache for generated icon files.
 				// If we ALWAYS returned a null (which happens when GetPixel encounters something with alpha 0)
 				if (blankpixel)
 					// Pull the default direction.
-					add = icon(I:icon, I:icon_state)
+					add = icon(I.icon, I.icon_state)
 		else // 'I' is an appearance object.
 			if(istype(A,/obj/machinery/atmospherics) && (I in A.underlays))
-				var/image/Im = I
-				add = getFlatIcon(new/image(I), Im.dir, curicon, curstate, curblend, 1)
+				add = getFlatIcon(new /image(I), I.dir, curicon, curstate, curblend, 1)
 			else
 				add = getFlatIcon(new/image(I), curdir, curicon, curstate, curblend, always_use_defdir)
 
 		// Find the new dimensions of the flat icon to fit the added overlay
-		addX1 = min(flatX1, I:pixel_x+1)
-		addX2 = max(flatX2, I:pixel_x+add.Width())
-		addY1 = min(flatY1, I:pixel_y+1)
-		addY2 = max(flatY2, I:pixel_y+add.Height())
+		addX1 = min(flatX1, I.pixel_x + 1)
+		addX2 = max(flatX2, I.pixel_x + add.Width())
+		addY1 = min(flatY1, I.pixel_y + 1)
+		addY2 = max(flatY2, I.pixel_y + add.Height())
 
-		if(addX1!=flatX1 || addX2!=flatX2 || addY1!=flatY1 || addY2!=flatY2)
+		if(addX1 != flatX1 || addX2 != flatX2 || addY1 != flatY1 || addY2 != flatY2)
 			// Resize the flattened icon so the new icon fits
 			flat.Crop(addX1-flatX1+1, addY1-flatY1+1, addX2-flatX1+1, addY2-flatY1+1)
-			flatX1=addX1;flatX2=addX2
-			flatY1=addY1;flatY2=addY2
+			flatX1 = addX1
+			flatX2 = addX2
+			flatY1 = addY1
+			flatY2 = addY2
+
 		var/iconmode
 		if(I in A.overlays)
 			iconmode = ICON_OVERLAY
@@ -791,11 +768,20 @@ The _flatIcons list is a cache for generated icon files.
 		else
 			iconmode = blendMode2iconMode(curblend)
 		// Blend the overlay into the flattened icon
-		flat.Blend(add, iconmode, I:pixel_x + 2 - flatX1, I:pixel_y + 2 - flatY1)
+		flat.Blend(add, iconmode, I.pixel_x + 2 - flatX1, I.pixel_y + 2 - flatY1)
 
 	if(A.color)
-		flat.Blend(A.color, ICON_MULTIPLY)
-	if(A.alpha < 255)
+
+		// Probably a colour matrix, could also check length(A.color) == 20 if color normalization becomes more complex in the future.
+		if(islist(A.color))
+			flat.MapColors(arglist(A.color))
+
+		// Probably a valid color, could check length_char(A.color) == 7 if color normalization becomes etc etc etc.
+		else if(istext(A.color)) 
+			flat.Blend(A.color, ICON_MULTIPLY)
+
+	// Colour matrices track/apply alpha changes in MapColors() above, so only apply if color isn't a matrix.
+	if(A.alpha < 255 && !islist(A.color))
 		flat.Blend(rgb(255, 255, 255, A.alpha), ICON_MULTIPLY)
 
 	return icon(flat, "", SOUTH)
