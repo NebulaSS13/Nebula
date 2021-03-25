@@ -1,5 +1,6 @@
 /obj/item/coin
 	name = "coin"
+	desc = "A small coin."
 	icon = 'icons/obj/items/coin.dmi'
 	icon_state = "coin1"
 	applies_material_colour = TRUE
@@ -12,46 +13,14 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 
-	var/currency_worth
-	var/absolute_worth
-	var/currency
 	var/can_flip = TRUE
+	var/datum/denomination/denomination
 
 /obj/item/coin/Initialize()
 	. = ..()
-
-	// Grab a coin from our currency to use for our worth/coin flipping.
-	if(!ispath(currency, /decl/currency))
-		currency = GLOB.using_map.default_currency
-	if(isnull(absolute_worth))
-		var/decl/currency/cur = GET_DECL(currency)
-		var/list/coins = list()
-		for(var/datum/denomination/denomination in cur.denominations)
-			if(denomination.faces)
-				coins += denomination
-		if(length(coins))
-			var/datum/denomination/denomination = pick(coins)
-			currency_worth = denomination.marked_value
-			absolute_worth = Floor(denomination.marked_value / cur.absolute_value)
-			currency_worth = "[currency_worth]"
-		if(!absolute_worth || !currency_worth)
-			return INITIALIZE_HINT_QDEL
-
 	icon_state = "coin[rand(1,10)]"
 	if(material)
-		desc = "A rather thick coin stamped out of [material.solid_name]."
-	else
-		desc = "A rather thick coin."
-
-/obj/item/coin/get_single_monetary_worth()
-	. = max(..(), absolute_worth)
-
-/obj/item/coin/examine(mob/user, distance)
-	. = ..()
-	if((distance <= 1 || loc == user) && user.skill_check(SKILL_FINANCE, SKILL_ADEPT))
-		var/decl/currency/cur = GET_DECL(currency)
-		var/datum/denomination/denomination = cur.denominations_by_value[currency_worth]
-		to_chat(user, "It looks like an antiquated minting of \a [denomination.name].")
+		desc = "A old-style coin stamped out of [material.solid_name]."
 
 // "Coin Flipping, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
 /obj/item/coin/attack_self(var/mob/user)
@@ -68,10 +37,8 @@
 	if(!can_flip)
 		return
 
-	var/decl/currency/cur = GET_DECL(currency)
-	var/datum/denomination/denomination = cur.denominations_by_value[currency_worth]
-
-	if(!denomination || !length(denomination.faces))
+	var/list/faces = (denomination?.faces || list("heads", "tails"))
+	if(length(faces) <= 1)
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] is not the right shape to be flipped."))
 		return
@@ -111,15 +78,21 @@
 
 	if(!QDELETED(src))
 		if(!QDELETED(user) && loc == user && !thrown)
-			user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [rigged ? "on the side" : pick(denomination.faces)]!"))
+			user.visible_message(SPAN_NOTICE("...and catches it, revealing that \the [src] landed on [rigged ? "on the side" : pick(faces)]!"))
 		else
-			visible_message(SPAN_NOTICE("\The [src] landed on [rigged ? "on the side" : pick(denomination.faces)]!"))
+			visible_message(SPAN_NOTICE("\The [src] landed on [rigged ? "on the side" : pick(faces)]!"))
 
 	can_flip = TRUE
 
 /obj/item/coin/equipped(mob/user)
 	..()
 	transform = null
+
+/obj/item/coin/examine(mob/user, distance)
+	. = ..()
+	if(denomination && (distance <= 1 || loc == user) && user.skill_check(SKILL_FINANCE, SKILL_ADEPT))
+		var/decl/currency/map_cur = GET_DECL(GLOB.using_map.default_currency)
+		to_chat(user, "It looks like an antiquated minting of \a [denomination.name]. These days it would be worth around [map_cur.format_value(get_combined_monetary_worth())].")
 
 // Subtypes.
 /obj/item/coin/gold

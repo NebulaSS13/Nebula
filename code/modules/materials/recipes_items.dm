@@ -1,5 +1,4 @@
 //Recipes that produce items which aren't stacks or storage.
-
 /datum/stack_recipe/baseball_bat
 	title = "baseball bat"
 	result_type = /obj/item/twohanded/baseballbat
@@ -24,7 +23,19 @@
 /datum/stack_recipe/coin
 	title = "coin"
 	result_type = /obj/item/coin
-	one_per_turf = 1
+	var/datum/denomination/denomination
+
+/datum/stack_recipe/coin/New(decl/material/material, reinforce_material, datum/denomination/_denomination)
+	denomination = _denomination
+	. = ..()
+	title = denomination.name
+
+/datum/stack_recipe/coin/spawn_result(mob/user, location, amount)
+	var/obj/item/coin/coin = ..()
+	if(denomination)
+		coin.denomination = denomination
+		coin.SetName(coin.denomination.name)
+	return coin
 
 /datum/stack_recipe/ring
 	title = "ring"

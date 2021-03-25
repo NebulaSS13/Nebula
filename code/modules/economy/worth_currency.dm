@@ -6,9 +6,11 @@
 	var/marked_value
 	var/image/overlay
 	var/rotate_icon = TRUE
+	var/decl/currency/currency
 
-/datum/denomination/New(var/decl/currency/currency, var/value, var/value_name, var/colour = COLOR_PALE_BTL_GREEN)
+/datum/denomination/New(var/decl/currency/_currency, var/value, var/value_name, var/colour = COLOR_PALE_BTL_GREEN)
 	..()
+	currency = _currency
 	name = "[value_name] [currency.name_singular] [name || "piece"]"
 	state = state || "cash"
 	marked_value = value
@@ -90,7 +92,7 @@
 	state = "coin_large"
 
 /decl/currency/trader
-	name =     "scrip"
+	name = "scrip"
 	name_prefix = "$"
 	material = /decl/material/solid/metal/copper
 

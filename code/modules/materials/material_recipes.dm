@@ -35,8 +35,17 @@
 		. += new/datum/stack_recipe/baseball_bat(src)
 		. += new/datum/stack_recipe/urn(src)
 		. += new/datum/stack_recipe/spoon(src)
-		. += new/datum/stack_recipe/coin(src)
 		. += new/datum/stack_recipe/furniture/door(src)
+
+		var/list/coin_recipes = list()
+		var/list/all_currencies = decls_repository.get_decls_of_subtype(/decl/currency)
+		for(var/cur in all_currencies)
+			var/decl/currency/currency = all_currencies[cur]
+			for(var/datum/denomination/denomination in currency.denominations)
+				if(length(denomination.faces))
+					coin_recipes += new /datum/stack_recipe/coin(src, null, denomination)
+		if(length(coin_recipes))
+			. += new/datum/stack_recipe_list("antique coins", coin_recipes)
 
 	if(wall_support_value >= 10)
 		. += new/datum/stack_recipe/furniture/girder(src)
