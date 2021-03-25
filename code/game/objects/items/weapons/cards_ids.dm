@@ -170,8 +170,6 @@ var/const/NO_EMAG_ACT = -50
 	var/rank = null			//actual job
 	var/dorm = 0			// determines if this ID has claimed a dorm already
 
-	var/job_access_type     // Job type to acquire access rights from, if any
-
 	var/datum/mil_branch/military_branch = null //Vars for tracking branches and ranks on multi-crewtype maps
 	var/datum/mil_rank/military_rank = null
 
@@ -182,15 +180,7 @@ var/const/NO_EMAG_ACT = -50
 	var/extra_details
 
 /obj/item/card/id/Initialize()
-	.=..()
-	if(job_access_type)
-		var/datum/job/j = SSjobs.get_by_path(job_access_type)
-		if(j)
-			rank = j.title
-			assignment = rank
-			access |= j.get_access()
-			if(!detail_color)
-				detail_color = j.selection_color
+	. = ..()
 	update_icon()
 
 /obj/item/card/id/get_mob_overlay(mob/user_mob, slot, bodypart)
@@ -348,7 +338,7 @@ var/const/NO_EMAG_ACT = -50
 				id.military_branch = new_branch
 				id.military_rank = null
 			return
-	
+
 	to_chat(client, SPAN_WARNING("Input, must be an existing branch - [var_value] is invalid"))
 
 /decl/vv_set_handler/id_card_military_rank
@@ -377,7 +367,7 @@ var/const/NO_EMAG_ACT = -50
 		if(new_rank)
 			id.military_rank = new_rank
 			return
-	
+
 	to_chat(client, SPAN_WARNING("Input must be an existing rank belonging to military_branch - [var_value] is invalid"))
 
 /obj/item/card/id/syndicate_command
@@ -448,7 +438,6 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/card/id/civilian
 	name = "identification card"
 	desc = "A card issued to civilian staff."
-	job_access_type = DEFAULT_JOB_TYPE
 	detail_color = COLOR_CIVIE_GREEN
 
 /obj/item/card/id/civilian/head //This is not the HoP. There's no position that uses this right now.

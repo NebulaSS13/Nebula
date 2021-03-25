@@ -11,7 +11,6 @@
 /obj/item/card/id/tradeship/engineering
 	name = "identification card"
 	desc = "A card issued to engineering staff."
-	job_access_type = /datum/job/tradeship_engineer
 	detail_color = COLOR_SUN
 
 /decl/hierarchy/outfit/job/tradeship/chief_engineer
@@ -31,5 +30,4 @@
 /obj/item/card/id/tradeship/engineering/head
 	name = "identification card"
 	desc = "A card which represents creativity and ingenuity."
-	job_access_type = /datum/job/tradeship_engineer/head
 	extra_details = list("goldstripe")

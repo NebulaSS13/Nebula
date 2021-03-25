@@ -86,6 +86,16 @@
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(outfit) . = outfit.equip(H, title, alt_title)
 
+	if(!QDELETED(H) && length(access))
+		var/obj/item/card/id/id = H.GetIdCard()
+		if(id)
+			id.rank = title
+			id.assignment = id.rank
+			id.access |= get_access()
+			if(!id.detail_color)
+				id.detail_color = selection_color
+			id.update_icon()
+
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	if(alt_title && alt_titles)
 		. = alt_titles[alt_title]

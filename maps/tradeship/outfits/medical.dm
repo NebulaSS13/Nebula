@@ -8,7 +8,6 @@
 /obj/item/card/id/tradeship/medical
 	name = "identification card"
 	desc = "A card issued to medical staff."
-	job_access_type = /datum/job/tradeship_doctor
 	detail_color = COLOR_PALE_BLUE_GRAY
 
 /decl/hierarchy/outfit/job/tradeship/doc/junior
