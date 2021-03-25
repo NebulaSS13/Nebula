@@ -120,7 +120,7 @@ var/global/list/_client_preferences_by_type
 	description ="Ghost ears"
 	key = "CHAT_GHOSTEARS"
 	options = list(
-		PREF_ALL_SPEECH, 
+		PREF_ALL_SPEECH,
 		PREF_NEARBY
 	)
 
@@ -128,7 +128,7 @@ var/global/list/_client_preferences_by_type
 	description ="Ghost sight"
 	key = "CHAT_GHOSTSIGHT"
 	options = list(
-		PREF_ALL_EMOTES, 
+		PREF_ALL_EMOTES,
 		PREF_NEARBY
 	)
 
@@ -136,7 +136,7 @@ var/global/list/_client_preferences_by_type
 	description ="Ghost radio"
 	key = "CHAT_GHOSTRADIO"
 	options = list(
-		PREF_ALL_CHATTER, 
+		PREF_ALL_CHATTER,
 		PREF_NEARBY
 	)
 
@@ -208,15 +208,6 @@ var/global/list/_client_preferences_by_type
 /datum/client_preference/fullscreen_mode/changed(mob/preference_mob, new_value)
 	if(preference_mob.client)
 		preference_mob.client.toggle_fullscreen(new_value)
-
-/datum/client_preference/chat_position
-	description = "Alternative Chat Position"
-	key = "CHAT_ALT"
-	default_value = PREF_NO
-
-/datum/client_preference/chat_position/changed(mob/preference_mob, new_value)
-	if(preference_mob.client)
-		preference_mob.client.update_chat_position(new_value == PREF_YES)
 
 /datum/client_preference/autohiss
 	description = "Autohiss"
