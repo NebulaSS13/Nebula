@@ -69,11 +69,6 @@
 #define RECOMMENDED_VERSION 513
 /world/New()
 
-	// Enable debugger(?)
-	var/dll = world.GetConfig("env", "EXTOOLS_DLL")
-	if(dll)
-		call(dll, "debug_initialize")()
-
 	//set window title
 	name = "[config.server_name] - [GLOB.using_map.full_name]"
 
