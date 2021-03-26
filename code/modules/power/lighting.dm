@@ -149,9 +149,6 @@
 	if(istype(lightbulb, /obj/item/light))
 		var/image/I = image(icon, _state)
 		I.color = get_mode_color()
-		if(on)
-			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-			I.layer = ABOVE_LIGHTING_LAYER
 		add_overlay(I)
 
 	if(on)
