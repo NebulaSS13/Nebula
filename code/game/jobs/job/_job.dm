@@ -226,7 +226,7 @@
 			if(show_invalid_jobs)
 				return "<tr bgcolor='[selection_color]'><td style='padding-left:2px;padding-right:2px;'><a style='text-decoration: line-through' href='[href_string]'>[title]</a></td><td style='padding-left:2px;padding-right:2px;''><center>[current_positions]</center></td><td style='padding-left:2px;padding-right:2px;'><center>Active: [get_active_count()]</center></td></tr>"
 		else
-			return "<tr bgcolor='[selection_color]'><td style='padding-left:2px;padding-right:2px;'><a href='[href_string]'>[title]</a></center></td><td style='padding-left:2px;padding-right:2px;'>[current_positions]</center></td><td style='padding-left:2px;padding-right:2px;'><center>Active: [get_active_count()]</center></td></tr>"
+			return "<tr bgcolor='[selection_color]'><td style='padding-left:2px;padding-right:2px;'><a href='[href_string]'>[title]</a></td><td style='padding-left:2px;padding-right:2px;'><center>[current_positions]</center></td><td style='padding-left:2px;padding-right:2px;'><center>Active: [get_active_count()]</center></td></tr>"
 	return ""
 
 // Only players with the job assigned and AFK for less than 10 minutes count as active
