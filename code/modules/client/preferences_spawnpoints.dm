@@ -47,7 +47,7 @@ GLOBAL_VAR(spawntypes)
 
 /datum/spawnpoint/arrivals/New()
 	..()
-	turfs = GLOB.latejoin
+	turfs = global.latejoin_locations
 
 /datum/spawnpoint/gateway
 	display_name = "Gateway"
@@ -55,7 +55,7 @@ GLOBAL_VAR(spawntypes)
 
 /datum/spawnpoint/gateway/New()
 	..()
-	turfs = GLOB.latejoin_gateway
+	turfs = global.latejoin_gateway_locations
 
 /datum/spawnpoint/cryo
 	display_name = "Cryogenic Storage"
@@ -64,7 +64,7 @@ GLOBAL_VAR(spawntypes)
 
 /datum/spawnpoint/cryo/New()
 	..()
-	turfs = GLOB.latejoin_cryo
+	turfs = global.latejoin_cryo_locations
 
 /datum/spawnpoint/cryo/after_join(mob/living/carbon/human/victim)
 	if(!istype(victim))
@@ -93,7 +93,7 @@ GLOBAL_VAR(spawntypes)
 
 /datum/spawnpoint/cyborg/New()
 	..()
-	turfs = GLOB.latejoin_cyborg
+	turfs = global.latejoin_cyborg_locations
 
 /datum/spawnpoint/default
 	display_name = DEFAULT_SPAWNPOINT_ID

@@ -215,9 +215,7 @@
 /obj/machinery/computer/cryopod{
 	pixel_y = -32
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryo"
-	},
+/obj/effect/landmark/latejoin/cryo,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -237,9 +235,7 @@
 	icon_state = "loadingarea";
 	dir = 1
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryo"
-	},
+/obj/effect/landmark/latejoin/cryo,
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
@@ -291,9 +287,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryoTwo"
-	},
+/obj/effect/landmark/latejoin/cryo_two,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/escape_star)
 "aM" = (
@@ -312,9 +306,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryoTwo"
-	},
+/obj/effect/landmark/latejoin/cryo_two,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/escape_star)
 "aO" = (
@@ -841,9 +833,7 @@
 	dir = 1;
 	pixel_y = -30
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryo"
-	},
+/obj/effect/landmark/latejoin/cryo,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -2270,9 +2260,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryo"
-	},
+/obj/effect/landmark/latejoin/cryo,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -2410,9 +2398,7 @@
 /area/ship/trade/cargo/lower)
 "my" = (
 /obj/machinery/cryopod/robot,
-/obj/effect/landmark{
-	name = "JoinLateCyborg"
-	},
+/obj/effect/landmark/latejoin/cyborg,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
 "mN" = (
@@ -2441,9 +2427,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryoTwo"
-	},
+/obj/effect/landmark/latejoin/cryo_two,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/escape_star)
 "nf" = (
@@ -2554,9 +2538,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryoTwo"
-	},
+/obj/effect/landmark/latejoin/cryo_two,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/escape_star)
 "ql" = (

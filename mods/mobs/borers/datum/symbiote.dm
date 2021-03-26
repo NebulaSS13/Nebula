@@ -88,7 +88,7 @@ GLOBAL_LIST_INIT(symbiote_starting_points, new)
 		if(length(GLOB.symbiote_starting_points))
 			symbiote.forceMove(pick(GLOB.symbiote_starting_points))
 		else
-			symbiote.forceMove(pick(GLOB.latejoin))
+			symbiote.forceMove(pick(global.latejoin_locations))
 
 	if(H.mind)
 		H.mind.transfer_to(symbiote)

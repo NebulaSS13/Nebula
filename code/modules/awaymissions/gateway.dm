@@ -121,12 +121,6 @@
 		M.forceMove(get_step(awaygate.loc, SOUTH))
 		M.set_dir(SOUTH)
 		return
-	else
-		var/obj/effect/landmark/dest = pick(GLOB.awaydestinations)
-		if(dest)
-			M.forceMove(dest.loc)
-			M.set_dir(SOUTH)
-			use_power_oneoff(5000)
 
 /obj/machinery/gateway/centerstation/attackby(obj/item/W, mob/user)
 	if(isMultitool(W))

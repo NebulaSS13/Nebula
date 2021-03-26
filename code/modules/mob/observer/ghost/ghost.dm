@@ -59,7 +59,8 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		spawn(10) // wait for the observer mob to receive the client's key
 			mind = new /datum/mind(key)
 			mind.current = src
-	if(!T)	T = pick(GLOB.latejoin | GLOB.latejoin_cryo | GLOB.latejoin_gateway)			//Safety in case we cannot find the body's position
+	if(!T)
+		T = pick(global.latejoin_locations | global.latejoin_cryo_locations | global.latejoin_gateway_locations)
 	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
