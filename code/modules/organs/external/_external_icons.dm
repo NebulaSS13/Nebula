@@ -82,7 +82,7 @@ var/list/limb_icon_cache = list()
 		if(!G && owner)
 			G = owner.get_pronouns(ignore_coverings = TRUE)
 		if(G)
-			icon_state = "[icon_state][G.icon_key]"
+			icon_state = "[icon_state][G.icon_key || "_f"]"
 
 	if(species.base_skin_colours && !isnull(species.base_skin_colours[skin_base]))
 		icon_state += species.base_skin_colours[skin_base]
