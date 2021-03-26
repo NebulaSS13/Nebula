@@ -51,7 +51,7 @@
 
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			bodytype_restricted = list(H.species.get_bodytype(H))
+			bodytype_restricted = list(H.get_bodytype_category())
 		kit.use(1,user)
 		reconsider_single_icon()
 		return TRUE
@@ -70,7 +70,7 @@
 
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			bodytype_restricted = list(H.species.get_bodytype(H))
+			bodytype_restricted = list(H.get_bodytype_category())
 		kit.use(1,user)
 		reconsider_single_icon()
 		return TRUE

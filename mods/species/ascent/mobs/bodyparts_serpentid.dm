@@ -162,7 +162,6 @@
 /obj/item/organ/external/head/insectoid/serpentid
 	name = "head"
 	vital = 0
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/head/insectoid/serpentid/get_eye_overlay()
 	var/obj/item/organ/internal/eyes/eyes = owner.get_internal_organ(owner.species.vision_organ || BP_EYES)

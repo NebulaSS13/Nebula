@@ -48,7 +48,6 @@
 	if(dna)
 		dna.ready_dna(src)
 		dna.real_name = real_name
-		dna.skin_base = skin_base
 		sync_organ_dna()
 	make_blood()
 
@@ -1053,6 +1052,13 @@
 	else
 		to_chat(usr, "<span class='warning'>You failed to check the pulse. Try again.</span>")
 
+/mob/living/carbon/human/proc/set_bodytype(var/decl/bodytype/new_bodytype, var/rebuild_body = FALSE)
+	if(bodytype != new_bodytype)
+		bodytype = new_bodytype
+		if(bodytype && rebuild_body)
+			force_update_limbs()
+			update_body()
+
 /mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour = 1)
 	if(!dna)
 		if(!new_species)
@@ -1085,11 +1091,13 @@
 	if(species.holder_type)
 		holder_type = species.holder_type
 
-
-	if(!(gender in species.genders))
-		set_gender(species.genders[1])
+	var/decl/pronouns/pronouns = get_pronouns_by_gender(gender)
+	if(!istype(pronouns) || !(pronouns.type in species.available_pronouns))
+		pronouns = pick(species.available_pronouns)
+		set_gender(pronouns.name)
 
 	icon_state = lowertext(species.name)
+	set_bodytype(pick(species.available_bodytypes))
 
 	species.create_organs(src)
 	species.handle_post_spawn(src)
@@ -1099,9 +1107,9 @@
 	if(species.natural_armour_values)
 		set_extension(src, /datum/extension/armor, species.natural_armour_values)
 
-	default_pixel_x = initial(pixel_x) + species.pixel_offset_x
-	default_pixel_y = initial(pixel_y) + species.pixel_offset_y
-	default_pixel_z = initial(pixel_z) + species.pixel_offset_z
+	default_pixel_x = initial(pixel_x) + bodytype.pixel_offset_x
+	default_pixel_y = initial(pixel_y) + bodytype.pixel_offset_y
+	default_pixel_z = initial(pixel_z) + bodytype.pixel_offset_z
 	pixel_x = default_pixel_x
 	pixel_y = default_pixel_y
 	pixel_z = default_pixel_z

@@ -56,9 +56,8 @@
 #define ORGAN_FLAG_CAN_STAND      BITFLAG(2) // The organ contributes to standing.
 #define ORGAN_FLAG_HAS_TENDON     BITFLAG(3) // The organ can have its tendon cut.
 #define ORGAN_FLAG_FINGERPRINT    BITFLAG(4) // The organ has a fingerprint.
-#define ORGAN_FLAG_GENDERED_ICON  BITFLAG(5) // The icon state for this organ appends _m/_f.
-#define ORGAN_FLAG_HEALS_OVERKILL BITFLAG(6) // The organ heals from overkill damage.
-#define ORGAN_FLAG_DEFORMED       BITFLAG(7) // The organ is permanently disfigured.
+#define ORGAN_FLAG_HEALS_OVERKILL BITFLAG(5) // The organ heals from overkill damage.
+#define ORGAN_FLAG_DEFORMED       BITFLAG(6) // The organ is permanently disfigured.
 
 // Droplimb types.
 #define DISMEMBER_METHOD_EDGE  0

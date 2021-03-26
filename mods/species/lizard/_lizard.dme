@@ -5,6 +5,7 @@
 #include "datum\culture.dm"
 #include "datum\language.dm"
 #include "datum\species.dm"
+#include "datum\species_bodytypes.dm"
 #include "datum\sprite_accessory.dm"
 #include "organs\organs_internal.dm"
 #endif

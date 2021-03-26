@@ -5,16 +5,14 @@
 	unarmed_attacks = list(/decl/natural_attack/stomp, /decl/natural_attack/kick, /decl/natural_attack/punch, /decl/natural_attack/bite)
 	description = "A medium-sized creature prone to great ambition. If you are reading this, you are probably a human."
 	hidden_from_codex = FALSE
-	bandages_icon = 'icons/mob/bandage.dmi'
-	bodytype = BODYTYPE_HUMANOID
-	limb_icon_intensity = 0.7
-
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
-
-	sexybits_location = BP_GROIN
-
 	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair)
+
+	available_bodytypes = list(
+		/decl/bodytype/human,
+		/decl/bodytype/human/masculine
+	)
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(

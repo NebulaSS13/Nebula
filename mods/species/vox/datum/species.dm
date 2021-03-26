@@ -16,14 +16,6 @@
 /decl/species/vox
 	name = SPECIES_VOX
 	name_plural = SPECIES_VOX
-	icobase =         'mods/species/vox/icons/body/body.dmi'
-	deform =          'mods/species/vox/icons/body/body.dmi'
-	husk_icon =       'mods/species/vox/icons/body/husk.dmi'
-	damage_overlays = 'mods/species/vox/icons/body/damage_overlay.dmi'
-	damage_mask =     'mods/species/vox/icons/body/damage_mask.dmi'
-	blood_mask =      'mods/species/vox/icons/body/blood_mask.dmi'
-
-	bodytype = BODYTYPE_VOX
 
 	default_emotes = list(
 		/decl/emote/audible/vox_shriek
@@ -98,7 +90,9 @@
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 		)
 
-	genders = list(NEUTER)
+	available_pronouns = list(/decl/pronouns/neuter)
+	available_bodytypes = list(/decl/bodytype/vox)
+
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height =       0.75,
 		/datum/appearance_descriptor/build =        1.25,
@@ -139,21 +133,6 @@
 	exertion_emotes_synthetic = list(
 		/decl/emote/exertion/synthetic,
 		/decl/emote/exertion/synthetic/creak
-	)
-
-/decl/species/vox/New()
-	..()
-	equip_adjust = list(
-		BP_L_HAND =           list("[NORTH]" = list("x" =  0, "y" = -3), "[EAST]" = list("x" = 0, "y" = -3), "[SOUTH]" = list("x" =  0, "y" = -3),  "[WEST]" = list("x" =  0, "y" = -3)),
-		BP_R_HAND =           list("[NORTH]" = list("x" =  0, "y" = -3), "[EAST]" = list("x" = 0, "y" = -3), "[SOUTH]" = list("x" =  0, "y" = -3),  "[WEST]" = list("x" =  0, "y" = -3)),
-		slot_head_str =       list("[NORTH]" = list("x" =  0, "y" =  0), "[EAST]" = list("x" = 3, "y" =  0), "[SOUTH]" = list("x" =  0, "y" =  0),  "[WEST]" = list("x" = -3, "y" =  0)),
-		slot_wear_mask_str =  list("[NORTH]" = list("x" =  0, "y" =  0), "[EAST]" = list("x" = 4, "y" =  0), "[SOUTH]" = list("x" =  0, "y" =  0),  "[WEST]" = list("x" = -4, "y" =  0)),
-		slot_back_str =       list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" =  0, "y" = -2)),
-		slot_wear_suit_str =  list("[NORTH]" = list("x" =  0, "y" = -3), "[EAST]" = list("x" = 0, "y" = -3), "[SOUTH]" = list("x" =  0, "y" = -3),  "[WEST]" = list("x" =  0, "y" = -3)),
-		slot_w_uniform_str =  list("[NORTH]" = list("x" =  0, "y" = -3), "[EAST]" = list("x" = 0, "y" = -3), "[SOUTH]" = list("x" =  0, "y" = -3),  "[WEST]" = list("x" =  0, "y" = -3)),
-		slot_tie_str =        list("[NORTH]" = list("x" =  0, "y" = -3), "[EAST]" = list("x" = 0, "y" = -3), "[SOUTH]" = list("x" =  0, "y" = -3),  "[WEST]" = list("x" =  0, "y" = -3)),
-		slot_underpants_str = list("[NORTH]" = list("x" =  0, "y" = -3), "[EAST]" = list("x" = 0, "y" = -3), "[SOUTH]" = list("x" =  0, "y" = -3),  "[WEST]" = list("x" =  0, "y" = -3)),
-		slot_undershirt_str = list("[NORTH]" = list("x" =  0, "y" = -3), "[EAST]" = list("x" = 0, "y" = -3), "[SOUTH]" = list("x" =  0, "y" = -3),  "[WEST]" = list("x" =  0, "y" = -3))
 	)
 
 /decl/species/vox/equip_survival_gear(var/mob/living/carbon/human/H)

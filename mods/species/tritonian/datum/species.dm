@@ -3,7 +3,11 @@
 	name_plural = "Tritonians"
 	description = "'A human-derived genotype designed for colonizing aquatic worlds."
 
-	icobase =     'mods/species/tritonian/icons/tritonian_body.dmi'
+	available_bodytypes = list(
+		/decl/bodytype/human/tritonian,
+		/decl/bodytype/human/masculine/tritonian
+	)
+
 	preview_icon= 'mods/species/tritonian/icons/tritonian_preview.dmi'
 
 	slowdown   = 0.5

@@ -53,8 +53,9 @@
 		if(rolled_down && check_state_in_icon("[ret.icon_state]-rolled", ret.icon))
 			ret.icon_state = "[ret.icon_state]-rolled"
 		else
-			if(check_state_in_icon("[ret.icon_state]-[lowertext(user_mob.gender)]", ret.icon))
-				ret.icon_state = "[ret.icon_state]-[lowertext(user_mob.gender)]"
+			var/mob/living/carbon/human/user_human = user_mob
+			if(istype(user_human) && user_human.bodytype.uniform_state_modifier && check_state_in_icon("[ret.icon_state]-[user_human.bodytype.uniform_state_modifier]", ret.icon))
+				ret.icon_state = "[ret.icon_state]-[user_human.bodytype.uniform_state_modifier]"
 			if(rolled_sleeves && check_state_in_icon("[ret.icon_state]-sleeves", ret.icon))
 				ret.icon_state = "[ret.icon_state]-sleeves"
 	return ret

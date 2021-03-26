@@ -551,6 +551,3 @@
 			set_internals(selected_obj, "\the [selected_obj] [selected_from] your [selected_slot]")
 		else
 			set_internals(selected_obj, "\the [selected_obj]")
-
-/mob/living/carbon/get_bodytype()
-	. = species && species.get_bodytype(src)

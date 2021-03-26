@@ -1,6 +1,6 @@
 #define SPECIES_TAJARA "Tajara"
 #define LANGUAGE_TAJARA "Siik'maas"
-#define BODYTYPE_FELINE "Feline Body"
+#define BODYTYPE_FELINE "feline body"
 
 /obj/item/clothing/Initialize()
 	. = ..()

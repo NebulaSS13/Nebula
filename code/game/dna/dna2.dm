@@ -80,7 +80,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 	// New stuff
 	var/species
-	var/skin_base = ""
 	var/list/body_markings = list()
 	var/lineage
 
@@ -94,7 +93,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.real_name=real_name
 	new_dna.species=species || GLOB.using_map.default_species
 	new_dna.body_markings=body_markings.Copy()
-	new_dna.skin_base=skin_base
 	for(var/b=1;b<=DNA_SE_LENGTH;b++)
 		new_dna.SE[b]=SE[b]
 		if(b<=DNA_UI_LENGTH)
@@ -155,9 +153,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetUIValueRange(DNA_UI_BEARD_STYLE, beard, GLOB.facial_hair_styles_list.len,1)
 
 	body_markings.Cut()
-	skin_base = character.skin_base
 	for(var/obj/item/organ/external/E in character.organs)
-		E.skin_base = skin_base
 		if(E.markings.len)
 			body_markings[E.organ_tag] = E.markings.Copy()
 

@@ -21,7 +21,7 @@
 	encased = "ribcage"
 	artery_name = "aorta"
 	cavity_name = "thoracic"
-	limb_flags = ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/chest/proc/get_current_skin()
 	return
@@ -54,7 +54,7 @@
 	dislocated = -1
 	artery_name = "iliac artery"
 	cavity_name = "abdominal"
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM

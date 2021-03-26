@@ -19,6 +19,7 @@
 	var/mob/living/carbon/human/owner // Current mob owning the organ.
 	var/datum/dna/dna                 // Original DNA.
 	var/decl/species/species          // Original species.
+	var/decl/bodytype/bodytype        // Original bodytype.
 	var/list/ailments                 // Current active ailments if any.
 
 	// Damage vars.
@@ -68,7 +69,9 @@
 		set_dna(given_dna)
 	if (!species)
 		species = get_species_by_key(GLOB.using_map.default_species)
+
 	species.resize_organ(src)
+	bodytype = owner?.bodytype || species.default_bodytype
 
 	create_reagents(5 * (w_class-1)**2)
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, reagents.maximum_volume)
@@ -83,6 +86,7 @@
 		blood_DNA.Cut()
 		blood_DNA[dna.unique_enzymes] = dna.b_type
 		species = get_species_by_key(dna.species)
+		bodytype = owner?.bodytype || species.default_bodytype
 		if (!species)
 			PRINT_STACK_TRACE("Invalid DNA species. Expected a valid species name as string, was: [log_info_line(dna.species)]")
 

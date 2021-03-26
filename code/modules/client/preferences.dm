@@ -221,6 +221,7 @@ var/list/time_prefs_fixed = list()
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
 	character.set_species(species)
+	character.set_bodytype((character.species.get_bodytype_by_name(bodytype) || character.species.default_bodytype), TRUE) 
 
 	if(be_random_name)
 		var/decl/cultural_info/culture = GET_DECL(cultural_info[TAG_CULTURE])
@@ -248,9 +249,7 @@ var/list/time_prefs_fixed = list()
 	character.facial_hair_colour = facial_hair_colour
 
 	character.skin_colour = skin_colour
-
 	character.skin_tone = skin_tone
-	character.skin_base = skin_base
 
 	character.h_style = h_style
 	character.f_style = f_style
@@ -284,7 +283,6 @@ var/list/time_prefs_fixed = list()
 		else if(status == "cyborg")
 			O.robotize(rlimb_data[name])
 		else //normal organ
-			O.force_icon = initial(O.force_icon)
 			O.SetName(initial(O.name))
 			O.desc = initial(O.desc)
 

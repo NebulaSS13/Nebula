@@ -28,7 +28,6 @@
 #define HAS_SKIN_TONE_GRAV    BITFLAG(7)  // Skin tone selectable in chargen for grav-adapted humans (0-100)
 #define HAS_SKIN_TONE_SPCR    BITFLAG(8)  // Skin tone selectable in chargen for spacer humans (0-165)
 #define HAS_SKIN_TONE_TRITON  BITFLAG(9) 
-#define HAS_BASE_SKIN_COLOURS BITFLAG(10) // Has multiple base skin sprites to go off of
 #define HAS_A_SKIN_TONE (HAS_SKIN_TONE_NORMAL | HAS_SKIN_TONE_GRAV | HAS_SKIN_TONE_SPCR | HAS_SKIN_TONE_TRITON) // Species has a numeric skintone
 
 // Skin Defines

@@ -11,9 +11,12 @@
 	min_broken_damage =       25
 	arterial_bleed_severity = 0
 	encased = "ceramic hull"
-	force_icon = 'mods/species/adherent/icons/body.dmi'
+	icon = 'mods/species/adherent/icons/body_turquoise.dmi'
 	status = ORGAN_PROSTHETIC
 	limb_flags = ORGAN_FLAG_CAN_BREAK | ORGAN_FLAG_HEALS_OVERKILL
+
+/obj/item/organ/external/chest/crystal/update_limb_icon_file()
+	icon = bodytype?.icon_base || initial(icon)
 
 /obj/item/organ/external/groin/crystal
 	name =                    "trailing tendrils"
@@ -23,9 +26,12 @@
 	max_damage =              50
 	min_broken_damage =       25
 	encased = "ceramic hull"
-	force_icon = 'mods/species/adherent/icons/body.dmi'
+	icon = 'mods/species/adherent/icons/body_turquoise.dmi'
 	status = ORGAN_PROSTHETIC
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
+
+/obj/item/organ/external/groin/crystal/update_limb_icon_file()
+	icon = bodytype?.icon_base || initial(icon)
 
 /obj/item/organ/external/head/crystal
 	name =                    "chassis core"
@@ -38,9 +44,12 @@
 	min_broken_damage =       25
 	cavity_max_w_class =      ITEM_SIZE_NORMAL // Apparently their brains change w_class to this.
 	encased = "ceramic hull"
-	force_icon = 'mods/species/adherent/icons/body.dmi'
+	icon = 'mods/species/adherent/icons/body_turquoise.dmi'
 	status = ORGAN_PROSTHETIC
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
+
+/obj/item/organ/external/head/crystal/update_limb_icon_file()
+	icon = bodytype?.icon_base || initial(icon)
 
 /obj/item/organ/external/arm/crystal
 	name =                    "left grasping tendril"
@@ -50,9 +59,11 @@
 	dislocated =              -1
 	max_damage =              20
 	min_broken_damage =       10
-	force_icon = 'mods/species/adherent/icons/body.dmi'
 	status = ORGAN_PROSTHETIC
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
+
+/obj/item/organ/external/arm/crystal/update_limb_icon_file()
+	icon = bodytype?.icon_base || initial(icon)
 
 /obj/item/organ/external/arm/right/crystal
 	name =                    "right grasping tendril"
@@ -62,9 +73,12 @@
 	dislocated =              -1
 	max_damage =              20
 	min_broken_damage =       10
-	force_icon = 'mods/species/adherent/icons/body.dmi'
+	icon = 'mods/species/adherent/icons/body_turquoise.dmi'
 	status = ORGAN_PROSTHETIC
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
+
+/obj/item/organ/external/arm/right/crystal/update_limb_icon_file()
+	icon = bodytype?.icon_base || initial(icon)
 
 /obj/item/organ/external/hand/crystal
 	name =                    "left maniple tendril"
@@ -74,9 +88,12 @@
 	dislocated =              -1
 	max_damage =              20
 	min_broken_damage =       10
-	force_icon = 'mods/species/adherent/icons/body.dmi'
+	icon = 'mods/species/adherent/icons/body_turquoise.dmi'
 	status = ORGAN_PROSTHETIC
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
+
+/obj/item/organ/external/hand/crystal/update_limb_icon_file()
+	icon = bodytype?.icon_base || initial(icon)
 
 /obj/item/organ/external/hand/right/crystal
 	name =                    "right maniple tendril"
@@ -86,9 +103,12 @@
 	dislocated =              -1
 	max_damage =              20
 	min_broken_damage =       10
-	force_icon = 'mods/species/adherent/icons/body.dmi'
+	icon = 'mods/species/adherent/icons/body_turquoise.dmi'
 	status = ORGAN_PROSTHETIC
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
+
+/obj/item/organ/external/hand/right/crystal/update_limb_icon_file()
+	icon = bodytype?.icon_base || initial(icon)
 
 /obj/item/organ/external/tendril
 	name =                    "first tendril"
@@ -101,9 +121,12 @@
 	dislocated =              -1
 	max_damage =              20
 	min_broken_damage =       10
-	force_icon = 'mods/species/adherent/icons/body.dmi'
+	icon = 'mods/species/adherent/icons/body_turquoise.dmi'
 	status = ORGAN_PROSTHETIC
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
+
+/obj/item/organ/external/tendril/update_limb_icon_file()
+	icon = bodytype?.icon_base || initial(icon)
 
 /obj/item/organ/external/tendril/two
 	name =                    "second tendril"
