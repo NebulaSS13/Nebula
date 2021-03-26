@@ -1847,6 +1847,7 @@
 #include "code\modules\fabrication\fabricator_intake.dm"
 #include "code\modules\fabrication\fabricator_microlathe.dm"
 #include "code\modules\fabrication\fabricator_pipe.dm"
+#include "code\modules\fabrication\fabricator_presets.dm"
 #include "code\modules\fabrication\fabricator_protolathe.dm"
 #include "code\modules\fabrication\fabricator_robotics.dm"
 #include "code\modules\fabrication\fabricator_textile.dm"
