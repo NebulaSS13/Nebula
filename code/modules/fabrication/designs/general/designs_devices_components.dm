@@ -39,6 +39,12 @@
 /datum/fabricator_recipe/device_component/access_lock
 	path = /obj/item/stock_parts/access_lock/buildable
 
+/datum/fabricator_recipe/device_component/network_lock
+	path = /obj/item/stock_parts/network_receiver/network_lock/buildable
+
+/datum/fabricator_recipe/device_component/network_receiver
+	path = /obj/item/stock_parts/network_receiver/buildable
+
 /datum/fabricator_recipe/device_component/igniter
 	path = /obj/item/assembly/igniter
 

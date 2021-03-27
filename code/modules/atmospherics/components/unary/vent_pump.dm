@@ -369,9 +369,7 @@
 /decl/public_access/public_variable/pump_checks/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
 	if(new_value == "default")
 		new_value = machine.pressure_checks_default
-	var/sanitized = sanitize_integer(new_value, 0, 3)
-	if(new_value != sanitized)
-		return FALSE
+	new_value = sanitize_integer(text2num(new_value), 0, 3, machine.pressure_checks)
 	. = ..()
 	if(.)
 		machine.pressure_checks = new_value
@@ -390,7 +388,10 @@
 /decl/public_access/public_variable/pressure_bound/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
 	if(new_value == "default")
 		new_value = machine.internal_pressure_bound_default
-	new_value = Clamp(text2num(new_value), 0, MAX_PUMP_PRESSURE)
+	new_value = text2num(new_value)
+	if(!isnum(new_value))
+		return FALSE
+	new_value = clamp(new_value, 0, MAX_PUMP_PRESSURE)
 	. = ..()
 	if(.)
 		machine.internal_pressure_bound = new_value

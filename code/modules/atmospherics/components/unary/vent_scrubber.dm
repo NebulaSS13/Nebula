@@ -268,8 +268,7 @@
 	return machine.panic
 
 /decl/public_access/public_variable/panic/write_var(obj/machinery/atmospherics/unary/vent_scrubber/machine, new_value)
-	if(!(new_value in list(TRUE, FALSE)))
-		return FALSE
+	new_value = !!new_value
 	. = ..()
 	if(.)
 		machine.panic = new_value

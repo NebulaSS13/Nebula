@@ -8,6 +8,12 @@
 	var/network_tag		// human-readable network address, can be set by user. Networks enforce uniqueness, will change it if there's clash.
 	var/connection_type = NETWORK_CONNECTION_STRONG_WIRELESS  // affects signal strength
 
+	var/has_commands = FALSE  // Whether or not this device can be configured to receive commands to modify and call public variables and methods. 
+	var/list/command_and_call // alias -> public method to be called.
+	var/list/command_and_write // alias -> public variable to be written to or read from.
+
+	var/last_rand_time 		   // Last time a random method was called.
+
 /datum/extension/network_device/New(datum/holder, n_id, n_key, c_type, autojoin = TRUE)
 	..()
 	network_id = n_id
@@ -20,6 +26,9 @@
 	if(autojoin)
 		SSnetworking.queue_connection(src)
 	
+	if(has_commands)
+		reload_commands()
+
 /datum/extension/network_device/Destroy()
 	disconnect()
 	. = ..()
@@ -155,6 +164,22 @@
 	data["network_key"] = network_id ? "******" : "NOT SET"
 	data["network_tag"] = network_tag
 	data["status"] = get_signal_wordlevel()
+	
+	data["commands"] = has_commands
+	if(has_commands)
+		// For public methods.
+		var/method_list = list()
+		for(var/thing in command_and_call)
+			var/decl/public_access/variable = command_and_call[thing]
+			method_list += list(list("alias" = thing, "reference" = "\ref[variable]", "reference_name" = "[variable.name]"))
+		data["methods"] = method_list
+		// For public variables.
+		var/var_list = list()
+		for(var/thing in command_and_write)
+			var/decl/public_access/variable = command_and_write[thing]
+			var_list += list(list("alias" = thing, "reference" = "\ref[variable]", "reference_name" = "[variable.name]"))
+		data["variables"] = var_list
+				
 	return data
 
 /datum/extension/network_device/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nanoui/master_ui, datum/topic_state/state)
@@ -162,7 +187,7 @@
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		var/atom/A = holder
-		ui = new(user, src, ui_key, "network_machine_settings.tmpl", capitalize(A.name), 380, 500)
+		ui = new(user, src, ui_key, "network_machine_settings.tmpl", capitalize(A.name), 500, 500)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -194,8 +219,158 @@
 	if(id && istype(id, /obj/item/card/id/network) && network.access_controller && (id.user_id in network.access_controller.administrators))
 		return TRUE
 	var/obj/M = holder
-	return M.allowed(user)
+	return M.check_access(user)
 
+// Return the target of any commands passed to this device.
+/datum/extension/network_device/proc/get_command_target()
+	if(istype(holder, /obj/machinery))
+		return holder
+
+// Return the public methods and variables available for commands.
+/datum/extension/network_device/proc/get_public_methods()
+	var/obj/machinery/M = get_command_target()
+	if(istype(M))
+		return M.public_methods
+
+/datum/extension/network_device/proc/get_public_variables()
+	var/obj/machinery/M = get_command_target()
+	if(istype(M))
+		return M.public_variables
+
+/datum/extension/network_device/proc/set_command_reference(list/selected_commands, alias, reference)
+	if(!alias || !reference)
+		return
+	LAZYSET(selected_commands, alias, reference)
+
+/datum/extension/network_device/proc/add_command(list/selected_commands, alias, list/valid_commands)
+	if(!alias)
+		alias = copytext(md5(num2text(rand(0, 25))), 1, 11)
+	LAZYSET(selected_commands, alias, valid_commands[pick(valid_commands)])  // Random key and command
+	return alias
+
+/datum/extension/network_device/proc/change_command_alias(old_alias, new_alias)
+	new_alias = sanitize(new_alias)
+	new_alias = replacetext(new_alias, " ", "") // Strip spaces from the key.
+	
+	// Check if a command with the new alias already exists
+	if(LAZYACCESS(command_and_call, new_alias) || LAZYACCESS(command_and_write, new_alias))
+		return FALSE
+	
+	if(LAZYACCESS(command_and_call, old_alias))
+		LAZYSET(command_and_call, new_alias, LAZYACCESS(command_and_call, old_alias))
+		LAZYREMOVE(command_and_call, old_alias)
+		return TRUE
+
+	if(LAZYACCESS(command_and_write, old_alias))
+		LAZYSET(command_and_write, new_alias, LAZYACCESS(command_and_write, old_alias))
+		LAZYREMOVE(command_and_write, old_alias)
+		return TRUE
+
+/datum/extension/network_device/proc/remove_command(alias)
+	if(LAZYACCESS(command_and_call, alias))
+		LAZYREMOVE(command_and_call, alias)
+		return TRUE
+	if(LAZYACCESS(command_and_write, alias))
+		LAZYREMOVE(command_and_write, alias)
+		return TRUE
+	return FALSE
+
+// Any modification of public vars and calling methods from network commands. Return text feedback on success/unsuccess of command.
+/datum/extension/network_device/proc/on_command(command, command_args, mob/user)
+	var/datum/command_target = get_command_target()
+	if(!has_commands)
+		return "Device cannot receive commands."
+	if(!command_target)
+		return "No valid target found for command '[command]'"
+	if(!has_access(user))
+		return "Access denied."
+	if(command_and_call[command])
+		var/decl/public_access/public_method/method = command_and_call[command]
+		method.perform(command_target, command_args)
+		return "Successfully called method '[command]' on [network_tag]."
+	if(command_and_write[command])
+		var/decl/public_access/public_variable/variable = command_and_write[command]
+		if(command_args) // Write to a var.
+			command_args = sanitize_command_args(command_args, variable.var_type)
+			if(isnull(command_args)) // Command could not be converted into a form appropriate for the variable.
+				return "Improper argument type; correct type is [variable.var_type]"
+			if(variable.write_var_protected(command_target, command_args))
+				return "Successfully set variable '[command]' on [network_tag] to [command_args]."
+			return "Unable to set variable '[command]' on [network_tag]."
+		else			 // Read from a var.
+			return "Variable '[command]' on [network_tag] has value: [variable.access_var(command_target)]"
+	return "Command '[command]' not found on [network_tag]."
+
+// Returns the variable converted into the proper form, or null if it is unable to.
+/datum/extension/network_device/proc/sanitize_command_args(command_args, var_type)
+	// First check if the command is a list; if it is, only accept it if the expected type is a list.
+	if(islist(command_args))
+		if(var_type == IC_FORMAT_LIST)
+			return command_args
+		else
+			return null
+	switch(var_type)
+		if(IC_FORMAT_ANY)
+			return command_args
+		if(IC_FORMAT_STRING)
+			return "[command_args]"
+		if(IC_FORMAT_CHAR)
+			if(istext(command_args) && length(command_args) == 1)
+				return command_args
+		if(IC_FORMAT_COLOR)
+			return sanitize_hexcolor(command_args, null)
+		if(IC_FORMAT_NUMBER, IC_FORMAT_INDEX)
+			if(istext(command_args))
+				return text2num(command_args)
+			if(isnum(command_args))
+				return command_args
+		if(IC_FORMAT_DIR)
+			if(istext(command_args))
+				return text2dir(command_args)
+		if(IC_FORMAT_BOOLEAN)
+			if(istext(command_args))
+				switch(uppertext(command_args))
+					if("TRUE")
+						return TRUE
+					if("FALSE")
+						return FALSE
+
+// Calls a random method for skill failure etc.
+/datum/extension/network_device/proc/random_method(var/user)
+	if(world.time < last_rand_time + 5 SECONDS)
+		return "Reinstancing command system, please try again in a few moments."
+	if(user && !has_access(user))
+		return "Access denied"
+	var/rand_alias = pick(command_and_call)
+	var/decl/public_access/public_method/rand_method = command_and_call[rand_alias]
+	rand_method.perform(get_command_target())
+	last_rand_time = world.time
+	return "Encoding fault, incorrect command resolution likely"
+
+// Reloads commands and automatically adds them to the proper lists.
+/datum/extension/network_device/proc/reload_commands()
+	LAZYCLEARLIST(command_and_call)
+	LAZYCLEARLIST(command_and_write)
+
+	var/obj/machinery/M = get_command_target()
+	if(!has_commands || !istype(M))
+		return
+
+	var/list/pub_methods = get_public_methods()
+	var/list/pub_vars = get_public_variables()
+
+	for(var/path in pub_methods)
+		var/decl/public_access/pub = pub_methods[path]
+		var/alias = pub.name
+		alias = replacetext(alias, " ", "_")
+		LAZYSET(command_and_call, alias, pub) 
+
+	for(var/path in pub_vars)
+		var/decl/public_access/pub = pub_vars[path]
+		var/alias = pub.name
+		alias = replacetext(alias, " ", "_")
+		LAZYSET(command_and_write, alias, pub) 
+	
 //Subtype for passive devices, doesn't init until asked for
 /datum/extension/network_device/lazy
 	base_type = /datum/extension/network_device
