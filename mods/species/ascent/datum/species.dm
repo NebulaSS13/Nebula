@@ -280,7 +280,6 @@
 	preview_icon = 'mods/species/ascent/icons/species/body/serpentid/preview.dmi'
 
 	darksight_range = 8
-	darksight_tint = DARKTINT_GOOD
 	slowdown = -0.5
 	rarity_value = 4
 	hud_type = /datum/hud_data/serpentid

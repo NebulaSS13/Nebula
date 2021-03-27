@@ -50,20 +50,21 @@
 /obj/item/clothing/glasses/eyepatch/hud/on_update_icon()
 	cut_overlays()
 	if(active && check_state_in_icon("[icon_state]-eye", icon))
-		var/image/eye = overlay_image(icon, "[icon_state]-eye", flags=RESET_COLOR)
+		var/image/eye
+		if(plane == HUD_PLANE)
+			eye = overlay_image(icon, "[icon_state]-eye")
+		else
+			eye = emissive_overlay(icon, "[icon_state]-eye")
+		eye.appearance_flags |= RESET_COLOR
 		eye.color = eye_color
-		if(plane != HUD_PLANE)
-			eye.layer = ABOVE_LIGHTING_LAYER
-			eye.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		add_overlay(eye)
 
 /obj/item/clothing/glasses/eyepatch/hud/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret && active && check_state_in_icon("[ret.icon_state]-eye", ret.icon))
-		var/image/eye = overlay_image(ret.icon, "[ret.icon_state]-eye", flags = RESET_COLOR)
+		var/image/eye = emissive_overlay(ret.icon, "[ret.icon_state]-eye")
 		eye.color = eye_color
-		eye.layer = ABOVE_LIGHTING_LAYER
-		eye.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		eye.appearance_flags |= RESET_COLOR
 		ret.overlays += eye
 	return ret
 
