@@ -53,10 +53,7 @@
 			monitor_state_index = initial(monitor_state_index)
 		var/check_state = "[ret.icon_state]-[monitor_states[monitor_state_index]]"
 		if(check_state_in_icon(check_state, ret.icon))
-			var/image/I = image(ret.icon, check_state)
-			I.layer = ABOVE_LIGHTING_LAYER
-			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-			ret.overlays += I
+			ret.overlays += emissive_overlay(ret.icon, check_state)
 	return ret
 
 /obj/item/clothing/mask/monitor/set_dir()

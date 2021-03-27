@@ -46,10 +46,6 @@ I IS TYPIN'!'
 	if(.)
 		remove_typing_indicator()
 
-/mob/Logout()
-	remove_typing_indicator()
-	. = ..()
-
 /mob/verb/say_wrapper()
 	set name = ".Say"
 	set hidden = 1

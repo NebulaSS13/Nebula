@@ -51,7 +51,7 @@
 /obj/machinery/ion_thruster/on_update_icon()
 	cut_overlays()
 	if(!(stat & (NOPOWER | BROKEN)))
-		add_overlay(image_repository.overlay_image(icon, "ion_glow", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
+		add_overlay(emissive_overlay(icon, "ion_glow"))
 
 /obj/machinery/ion_thruster/power_change()
 	. = ..()

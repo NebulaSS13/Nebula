@@ -6,6 +6,7 @@ var/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 /mob/observer
 	density = 0
 	alpha = 127
+	layer = OBSERVER_LAYER
 	plane = OBSERVER_PLANE
 	invisibility = INVISIBILITY_OBSERVER
 	see_invisible = SEE_INVISIBLE_OBSERVER

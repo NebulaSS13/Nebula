@@ -124,7 +124,8 @@
 	anchored = TRUE
 	simulated = FALSE
 	blend_mode = BLEND_ADD
-	plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	layer = ABOVE_LIGHTING_LAYER
+	plane = ABOVE_LIGHTING_PLANE
 	alpha = 100
 	var/weakref/source
 

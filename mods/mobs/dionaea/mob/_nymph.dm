@@ -75,9 +75,7 @@
 
 	set_extension(src, /datum/extension/hattable/diona_nymph, 0, -8)
 
-	eyes = image(icon = icon, icon_state = "eyes_[icon_state]")
-	eyes.layer = EYE_GLOW_LAYER
-	eyes.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	eyes = emissive_overlay(icon = icon, icon_state = "eyes_[icon_state]")
 
 	if(prob(flower_chance))
 		flower = image(icon = icon, icon_state = "flower_back")

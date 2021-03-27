@@ -219,18 +219,12 @@
 /obj/machinery/teleport/hub/on_update_icon()
 	cut_overlays()
 	if (com?.station?.engaged)
-		var/image/I = image(icon, src, "[initial(icon_state)]_active_overlay")
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.layer = ABOVE_LIGHTING_LAYER
-		add_overlay(I)
+		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_active_overlay"))
 		set_light(4, 0.4)
 	else
 		set_light(0)
-		if (operable())
-			var/image/I = image(icon, src, "[initial(icon_state)]_idle_overlay")
-			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-			I.layer = ABOVE_LIGHTING_LAYER
-			add_overlay(I)
+		if(operable())
+			add_overlay(emissive_overlay(icon, "[initial(icon_state)]_idle_overlay"))
 
 /obj/machinery/teleport/hub/Bumped(var/atom/movable/M)
 	if (com?.station?.engaged)
@@ -276,15 +270,9 @@
 	. = ..()
 	cut_overlays()
 	if (engaged)
-		var/image/I = image(icon, src, "[initial(icon_state)]_active_overlay")
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.layer = ABOVE_LIGHTING_LAYER
-		add_overlay(I)
+		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_active_overlay"))
 	else if (operable())
-		var/image/I = image(icon, src, "[initial(icon_state)]_idle_overlay")
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.layer = ABOVE_LIGHTING_LAYER
-		add_overlay(I)
+		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_idle_overlay"))
 
 /obj/machinery/teleport/station/attackby(var/obj/item/W, var/mob/user)
 	attack_hand(user)

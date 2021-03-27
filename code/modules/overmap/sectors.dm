@@ -64,7 +64,7 @@ var/list/known_overmap_sectors
 	if(sector_flags & OVERMAP_SECTOR_KNOWN)
 		LAZYADD(global.known_overmap_sectors, src)
 		layer = ABOVE_LIGHTING_LAYER
-		plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		plane = ABOVE_LIGHTING_PLANE
 		for(var/obj/machinery/computer/ship/helm/H as anything in global.overmap_helm_computers)
 			H.add_known_sector(src)
 

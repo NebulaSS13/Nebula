@@ -33,6 +33,7 @@
 	area_name_effect.screen_loc = "LEFT+1,BOTTOM+2"
 
 	last_selected_image = image('icons/effects/blueprints.dmi', "selected")
+	last_selected_image.layer = OBSERVER_LAYER
 	last_selected_image.plane = OBSERVER_PLANE
 	last_selected_image.appearance_flags = NO_CLIENT_COLOR | RESET_COLOR
 
@@ -232,6 +233,7 @@
 			var/selection_icon_state = selected_turfs[T] ? "valid" : "invalid"
 			var/image/I = image('icons/effects/blueprints.dmi', T, selection_icon_state)
 			I.plane = OBSERVER_PLANE
+			I.layer = OBSERVER_LAYER
 			I.appearance_flags = NO_CLIENT_COLOR | RESET_COLOR
 			LAZYADD(selection_images, I)
 

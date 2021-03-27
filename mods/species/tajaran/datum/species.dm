@@ -34,7 +34,6 @@
 	organs_icon = 'mods/species/tajaran/icons/organs.dmi'
 
 	darksight_range = 7
-	darksight_tint = DARKTINT_GOOD
 	slowdown = -0.5
 	flash_mod = 2
 
