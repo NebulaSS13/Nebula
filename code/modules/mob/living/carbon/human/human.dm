@@ -591,19 +591,12 @@
 			return I.flash_mod
 	return species.flash_mod
 
-/mob/living/carbon/human/proc/getDarkvisionRange()
+/mob/living/carbon/human/proc/get_darksight_range()
 	if(species.vision_organ)
 		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
 		if(istype(I))
 			return I.darksight_range
 	return species.darksight_range
-
-/mob/living/carbon/human/proc/getDarkvisionTint()
-	if(species.vision_organ)
-		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
-		if(istype(I))
-			return I.darksight_tint
-	return species.darksight_tint
 
 //Used by various things that knock people out by applying blunt trauma to the head.
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.

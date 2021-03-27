@@ -23,9 +23,9 @@
 /obj/machinery/atmospherics/unary/engine/on_update_icon()
 	cut_overlays()
 	if(operable())
-		add_overlay(image_repository.overlay_image(icon, "indicator_power", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
+		add_overlay(emissive_overlay(icon, "indicator_power"))
 		if(use_power)
-			add_overlay(image_repository.overlay_image(icon, "nozzle_idle", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
+			add_overlay(emissive_overlay(icon, "nozzle_idle"))
 
 /obj/machinery/atmospherics/unary/engine/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0

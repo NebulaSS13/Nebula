@@ -94,11 +94,12 @@
 	..()
 	cut_overlays()
 	if(lit && check_state_in_icon("[icon_state]-on", icon))
-		var/image/I = image(icon, "[icon_state]-on")
+		var/image/I
+		if(plane == HUD_PLANE)
+			I = image(icon, "[icon_state]-on")
+		else
+			I = emissive_overlay(icon, "[icon_state]-on")
 		I.appearance_flags |= RESET_COLOR
-		if(plane != HUD_PLANE)
-			I.layer = ABOVE_LIGHTING_LAYER
-			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		add_overlay(I)
 	if(ismob(loc))
 		var/mob/living/M = loc
@@ -108,10 +109,8 @@
 /obj/item/clothing/mask/smokable/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret && lit && check_state_in_icon("[ret.icon_state]-on", ret.icon))
-		var/image/on_overlay = image(ret.icon, "[ret.icon_state]-on")
+		var/image/on_overlay = emissive_overlay(ret.icon, "[ret.icon_state]-on")
 		on_overlay.appearance_flags |= RESET_COLOR
-		on_overlay.layer = ABOVE_LIGHTING_LAYER
-		on_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		ret.add_overlay(on_overlay)
 	return ret
 
