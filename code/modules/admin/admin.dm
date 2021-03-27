@@ -122,7 +122,7 @@ var/global/floorIsLava = 0
 		if(extra_body)
 			body += "<br><br>"
 			body += extra_body
-			
+
 	if (M.client)
 		if(!istype(M, /mob/new_player))
 			body += "<br><br>"
@@ -1440,10 +1440,18 @@ var/global/floorIsLava = 0
 		return
 
 	if(check_rights(R_INVESTIGATE))
-		if(!HAS_STATUS(M, STAT_PARA))
+		if(!M.admin_paralyzed)
+			M.visible_message(
+				SPAN_OCCULT("OOC: \The [M] has been paralyzed by a staff member. Please hold all interactions with them until staff have finished with them."),
+				SPAN_OCCULT("OOC: You have been paralyzed by a staff member. Please refer to your currently open admin help ticket or, if you don't have one, admin help for assistance.")
+			)
 			M.set_status(STAT_PARA, 8000)
+			M.admin_paralyzed = TRUE
 		else
 			M.set_status(STAT_PARA, 0)
+			M.admin_paralyzed = FALSE
+			M.visible_message(SPAN_OCCULT("OOC: \The [M] has been released from paralysis by staff. You may resume interactions with them."))
+			to_chat(M, SPAN_OCCULT("OOC: You have been released from paralysis by staff and can return to your game."))
 		log_and_message_admins("has [HAS_STATUS(M, STAT_PARA) ? "paralyzed" : "unparalyzed"] [key_name(M)].")
 
 /datum/admins/proc/sendFax()
