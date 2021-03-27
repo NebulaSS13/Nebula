@@ -154,10 +154,6 @@ Thus, the two variables affect pump operation are set in New():
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/atmospherics/binary/pump/update_use_power(new_use_power)
-	. = ..()
-	queue_icon_update()
-
 /obj/machinery/atmospherics/binary/pump/Topic(href,href_list)
 	if((. = ..())) return
 
