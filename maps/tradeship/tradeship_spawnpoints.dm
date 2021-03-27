@@ -1,14 +1,10 @@
-GLOBAL_LIST_EMPTY(latejoin_cryo_two)
-GLOBAL_LIST_EMPTY(latejoin_cryo_captain)
+var/list/latejoin_cryo_two = list()
+var/list/latejoin_cryo_captain = list()
+/obj/effect/landmark/latejoin/cryo_two/add_loc()
+	global.latejoin_cryo_two |= get_turf(src)
 
-/obj/effect/landmark/Initialize()
-	if(name == "JoinLateCryoTwo")
-		GLOB.latejoin_cryo_two += loc
-		delete_me = 1
-	if(name == "JoinLateCryoCaptain")
-		GLOB.latejoin_cryo_captain += loc
-		delete_me = 1
-	. = ..()
+/obj/effect/landmark/latejoin/cryo_captain/add_loc()
+	global.latejoin_cryo_captain |= get_turf(src)
 
 /datum/map/tradeship
 	allowed_spawns = list("Port Cryogenic Storage", "Starboard Cryogenic Storage", "Robot Storage", "Captain Compartment")
@@ -26,7 +22,7 @@ GLOBAL_LIST_EMPTY(latejoin_cryo_captain)
 
 /datum/spawnpoint/cryo/two/New()
 	..()
-	turfs = GLOB.latejoin_cryo_two
+	turfs = global.latejoin_cryo_two
 
 /datum/spawnpoint/cryo/captain
 	display_name = "Captain Compartment"
@@ -35,4 +31,4 @@ GLOBAL_LIST_EMPTY(latejoin_cryo_captain)
 
 /datum/spawnpoint/cryo/captain/New()
 	..()
-	turfs = GLOB.latejoin_cryo_captain
+	turfs = global.latejoin_cryo_captain

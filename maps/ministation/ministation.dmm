@@ -3588,9 +3588,7 @@
 	icon_state = "body_scanner_0";
 	dir = 1
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryo"
-	},
+/obj/effect/landmark/latejoin/cryo,
 /obj/machinery/camera/network/medbay{
 	icon_state = "camera";
 	dir = 1
@@ -10599,9 +10597,7 @@
 	icon_state = "shuttle_chair";
 	dir = 8
 	},
-/obj/effect/landmark{
-	name = "JoinLate"
-	},
+/obj/effect/landmark/latejoin,
 /turf/simulated/floor/shuttle/blue,
 /area/ministation/arrival_shuttle)
 "zp" = (
@@ -15940,9 +15936,7 @@
 	icon_state = "body_scanner_0";
 	dir = 1
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryo"
-	},
+/obj/effect/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/dark,
 /area/ministation/cryo)
 "Mx" = (
@@ -15981,9 +15975,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/security)
 "MI" = (
-/obj/effect/landmark{
-	name = "JoinLateCyborg"
-	},
+/obj/effect/landmark/latejoin/cyborg,
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
 "MJ" = (
@@ -16879,9 +16871,7 @@
 	dir = 1;
 	pixel_y = -32
 	},
-/obj/effect/landmark{
-	name = "JoinLateCryo"
-	},
+/obj/effect/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/dark,
 /area/ministation/cryo)
 "Rd" = (

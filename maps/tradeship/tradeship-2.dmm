@@ -61,9 +61,7 @@
 /obj/item/bedsheet/captain,
 /obj/item/gun/projectile/pistol/holdout,
 /obj/structure/bed/padded,
-/obj/effect/landmark{
-	name = "JoinLateCryoCaptain"
-	},
+/obj/effect/landmark/latejoin/cryo_captain,
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";

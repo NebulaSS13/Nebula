@@ -25,9 +25,6 @@ var/datum/visualnet/camera/cameranet = new()
 
 // Runes
 var/global/list/rune_list = new()
-var/global/list/endgame_exits = list()
-var/global/list/endgame_safespawns = list()
-
 var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
 
 // Strings which corraspond to bodypart covering flags, useful for outputting what something covers.

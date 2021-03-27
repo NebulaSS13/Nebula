@@ -115,9 +115,6 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "mC" = (
-/obj/effect/landmark{
-	name = "tdome1"
-	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "oZ" = (
@@ -141,9 +138,6 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "qJ" = (
-/obj/effect/landmark{
-	name = "tdome2"
-	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "rY" = (
@@ -193,9 +187,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "us" = (
-/obj/effect/landmark{
-	name = "JoinLate"
-	},
+/obj/effect/landmark/latejoin,
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "vd" = (
