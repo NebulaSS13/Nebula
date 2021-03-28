@@ -2,8 +2,12 @@
 	// Reference to any open turf that might be above us to speed up atom Entered() updates.
 	var/tmp/turf/above
 	var/tmp/turf/below
-	var/tmp/atom/movable/openspace/turf_overlay/bound_overlay
-	var/tmp/atom/movable/openspace/multiplier/shadower		// Overlay used to multiply color of all OO overlays at once.
+	// If we're a delegate z-turf, this holds the appearance of the bottom-most Z-turf in the z-stack.
+	var/tmp/atom/movable/openspace/turf_delegate/bound_overlay
+	// Overlay used to multiply color of all OO overlays at once.
+	var/tmp/atom/movable/openspace/multiplier/shadower
+	// If this is a delegate (non-overwrite) Z-turf with a z-turf above, this is the delegate copy that's copying us.
+	var/tmp/atom/movable/openspace/delegate_copy/z_delegate
 	var/tmp/z_queued = 0	// How many times this turf is currently queued - multiple queue occurrences are allowed to ensure update consistency
 	var/tmp/z_eventually_space = FALSE
 	var/z_flags = 0
@@ -55,6 +59,9 @@
 		below = under
 		below.above = src
 
+	if (!(z_flags & ZM_MIMIC_OVERWRITE) && mouse_opacity)
+		mouse_opacity = 2
+
 	update_mimic(!mapload)	// Only recursively update if the map isn't loading.
 
 // Cleans up Z-mimic objects for this turf. You shouldn't call this directly 99% of the time.
@@ -64,6 +71,7 @@
 	z_queued = 0
 
 	QDEL_NULL(shadower)
+	QDEL_NULL(z_delegate)
 
 	for (var/atom/movable/openspace/overlay/OO in src)
 		OO.owning_turf_changed()
@@ -74,17 +82,3 @@
 	if (below)
 		below.above = null
 		below = null
-
-// Movable for mimicing turfs that don't allow appearance mutation.
-/atom/movable/openspace/turf_overlay
-	plane = OPENTURF_MAX_PLANE
-
-/atom/movable/openspace/turf_overlay/attackby(obj/item/W, mob/user)
-	return loc.attackby(W, user)
-
-/atom/movable/openspace/turf_overlay/attack_hand(mob/user)
-	return loc.attack_hand(user)
-
-/atom/movable/openspace/turf_overlay/examine(mob/examiner)
-	SHOULD_CALL_PARENT(FALSE)
-	. = loc.examine(examiner)
