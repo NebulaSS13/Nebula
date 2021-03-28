@@ -11,6 +11,7 @@ if(!click_handlers) { \
 	var/list/click_handlers
 
 /mob/Destroy()
+	QDEL_NULL(status_markers)
 	QDEL_NULL_LIST(click_handlers)
 	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
 	if(hattable?.hat)

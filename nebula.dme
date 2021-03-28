@@ -3066,6 +3066,7 @@
 #include "code\modules\sprite_accessories\_accessory_markings.dm"
 #include "code\modules\sprite_accessories\_accessory_skin.dm"
 #include "code\modules\status_conditions\_status.dm"
+#include "code\modules\status_conditions\_status_markers.dm"
 #include "code\modules\status_conditions\status_counters_simple.dm"
 #include "code\modules\status_conditions\status_dizzy.dm"
 #include "code\modules\status_conditions\status_jittery.dm"
