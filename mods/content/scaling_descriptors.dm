@@ -1,11 +1,11 @@
 /mob/living/carbon/human/get_icon_scale_mult()
 	. = ..()
-	if(LAZYLEN(descriptors))
+	if(LAZYLEN(appearance_descriptors))
 		var/modify_x = 1
 		var/modify_y = 1
-		for(var/entry in descriptors)
-			var/datum/appearance_descriptor/descriptor = species.descriptors[entry]
-			var/list/new_scale_info = descriptor.get_mob_scale_adjustments(descriptors[entry])
+		for(var/entry in appearance_descriptors)
+			var/datum/appearance_descriptor/descriptor = species.appearance_descriptors[entry]
+			var/list/new_scale_info = descriptor.get_mob_scale_adjustments(appearance_descriptors[entry])
 			if(length(new_scale_info))
 				modify_x += new_scale_info[1]
 				modify_y += new_scale_info[2]
