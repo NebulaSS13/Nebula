@@ -2215,6 +2215,7 @@
 #include "code\modules\mob\living\carbon\human\update_icons.dm"
 #include "code\modules\mob\living\carbon\human\whisper.dm"
 #include "code\modules\mob\living\carbon\human\descriptors\_descriptors.dm"
+#include "code\modules\mob\living\carbon\human\descriptors\descriptors_age.dm"
 #include "code\modules\mob\living\carbon\human\descriptors\descriptors_generic.dm"
 #include "code\modules\mob\living\deity\deity.dm"
 #include "code\modules\mob\living\deity\deity_boons.dm"

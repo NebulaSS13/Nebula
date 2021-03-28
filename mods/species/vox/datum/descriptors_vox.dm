@@ -1,4 +1,4 @@
-/datum/mob_descriptor/vox_markings
+/datum/appearance_descriptor/vox_markings
 	name = "neck markings"
 	chargen_label = "neck markings (rank)"
 	skip_species_mention = TRUE
@@ -28,8 +28,8 @@
 		"commanding your unquestioning obedience and respect"
 		)
 
-/datum/mob_descriptor/vox_markings/get_first_person_message_start()
+/datum/appearance_descriptor/vox_markings/get_first_person_message_start()
 	. = "Your neck markings are"
 
-/datum/mob_descriptor/vox_markings/get_third_person_message_start(var/decl/pronouns/my_gender)
+/datum/appearance_descriptor/vox_markings/get_third_person_message_start(var/decl/pronouns/my_gender)
 	. = "[my_gender.His] neck markings are"

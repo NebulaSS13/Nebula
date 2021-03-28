@@ -1,3 +1,14 @@
+/datum/appearance_descriptor/age/utility_frame
+	chargen_min_index = 1
+	chargen_max_index = 4
+	standalone_value_descriptors = list(
+		"brand new" =            1,
+		"worn" =                 5,
+		"an older model" =      12,
+		"nearing end-of-life" = 16,
+		"entirely obsolete" =   20
+	)
+	
 /decl/species/utility_frame
 	name =                  SPECIES_FRAME
 	name_plural =           "Utility Frames"
@@ -8,8 +19,8 @@
 	limb_blend =            ICON_MULTIPLY
 	cyborg_noun = null
 
-	min_age =               1
-	max_age =               20
+	age_descriptor =        /datum/appearance_descriptor/age/utility_frame
+
 	hidden_from_codex =     FALSE
 	bodytype =              BODYTYPE_HUMANOID
 	species_flags =         SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON

@@ -237,7 +237,6 @@ var/list/time_prefs_fixed = list()
 	character.fully_replace_character_name(real_name)
 
 	character.set_gender(gender)
-	character.age = age
 	character.b_type = b_type
 
 	character.eye_colour = eye_colour
@@ -333,9 +332,8 @@ var/list/time_prefs_fixed = list()
 			if(O)
 				O.markings[M] = list("color" = mark_color, "datum" = mark_datum)
 
-	if(LAZYLEN(character.descriptors))
-		for(var/entry in body_descriptors)
-			character.descriptors[entry] = body_descriptors[entry]
+	if(LAZYLEN(appearance_descriptors))
+		character.appearance_descriptors = appearance_descriptors.Copy()
 
 	character.force_update_limbs()
 	character.update_mutations(0)

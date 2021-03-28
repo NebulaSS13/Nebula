@@ -1,3 +1,36 @@
+/datum/appearance_descriptor/age/kharmaani
+	chargen_min_index = 3
+	chargen_max_index = 6
+	standalone_value_descriptors = list(
+		"a larva" =         1,
+		"a nymph" =         2,
+		"a juvenile" =      3,
+		"an adolescent" =   5,
+		"a young adult" =  12,
+		"a full adult" =   30,
+		"a matriarch" =    45,
+		"a queen" =        60,
+		"an imperatrix" = 150,
+		"a crone" =       500
+	)
+
+/datum/appearance_descriptor/age/kharmaani/gyne
+	chargen_min_index = 5
+	chargen_max_index = 9
+
+/datum/appearance_descriptor/age/serpentid
+	chargen_min_index = 3
+	chargen_max_index = 6
+	standalone_value_descriptors = list(
+		"a larva" =         1,
+		"a nymph" =         2,
+		"a juvenile" =      3,
+		"an adolescent" =   5,
+		"a young adult" =  12,
+		"a full adult" =   30,
+		"senescent" =      45
+	)
+
 /decl/species/mantid
 
 	name =                   SPECIES_MANTID_ALATE
@@ -36,8 +69,7 @@
 	radiation_mod =         0.5 // Not as biologically fragile as meatboys.
 	flash_mod =               2 // Highly photosensitive.
 
-	min_age =                 1
-	max_age =                20
+	age_descriptor = /datum/appearance_descriptor/age/kharmaani
 	slowdown =               -1
 	rarity_value =            3
 	gluttonous =              2
@@ -103,10 +135,10 @@
 		TAG_RELIGION =  /decl/cultural_info/religion/kharmaani
 	)
 
-	descriptors = list(
-		/datum/mob_descriptor/height = -1,
-		/datum/mob_descriptor/body_length = -2
-		)
+	appearance_descriptors = list(
+		/datum/appearance_descriptor/height =      0.75,
+		/datum/appearance_descriptor/body_length = 0.5
+	)
 
 	pain_emotes_with_pain_level = list(
 			list(/decl/emote/visible/ascent_shine, /decl/emote/visible/ascent_dazzle) = 80,
@@ -147,8 +179,8 @@
 	gluttonous =              3
 	slowdown =                2
 	rarity_value =           10
-	min_age =                 5
-	max_age =               500
+
+	age_descriptor = /datum/appearance_descriptor/age/kharmaani/gyne
 	blood_volume =         1200
 	spawns_with_stack =       0
 
@@ -166,9 +198,9 @@
 		BP_EGG = /obj/item/organ/internal/egg_sac/insectoid
 	)
 
-	descriptors = list(
-		/datum/mob_descriptor/height = 5,
-		/datum/mob_descriptor/body_length = 2
+	appearance_descriptors = list(
+		/datum/appearance_descriptor/height =      2,
+		/datum/appearance_descriptor/body_length = 1.25
 	)
 
 	force_cultural_info = list(
@@ -245,8 +277,7 @@
 	hidden_from_codex = TRUE
 	silent_steps = TRUE
 	antaghud_offset_y = 8
-	min_age = 8
-	max_age = 40
+	age_descriptor = /datum/appearance_descriptor/age/serpentid
 	skin_material = /decl/material/solid/skin/insect
 	bone_material = null
 	speech_sounds = list('sound/voice/bug.ogg')
@@ -302,9 +333,9 @@
 		"Green"  = "_green"
 	)
 	unarmed_attacks = list(/decl/natural_attack/serpentid)
-	descriptors = list(
-		/datum/mob_descriptor/height = 3,
-		/datum/mob_descriptor/body_length = 0
+	appearance_descriptors = list(
+		/datum/appearance_descriptor/height =      1.75,
+		/datum/appearance_descriptor/body_length = 1
 		)
 	pain_emotes_with_pain_level = list(
 			list(/decl/emote/audible/bug_hiss) = 40

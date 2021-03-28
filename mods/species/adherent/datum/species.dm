@@ -1,3 +1,15 @@
+/datum/appearance_descriptor/age/adherent
+	chargen_min_index = 3
+	chargen_max_index = 5
+	standalone_value_descriptors = list(
+		"newly minted" =                 1,
+		"showing some wear" =          500,
+		"worn" =                      4000,
+		"antique" =                   8000,
+		"unfathomably old" =         12000,
+		"ancient beyond measure" =  100000
+	)
+
 /decl/species/adherent
 	name = SPECIES_ADHERENT
 	name_plural = "Adherents"
@@ -25,8 +37,9 @@
 
 	siemens_coefficient =     0
 	rarity_value =            6
-	min_age =                 8000
-	max_age =                 12000
+
+	age_descriptor = /datum/appearance_descriptor/age/adherent
+
 	antaghud_offset_y =       14
 	warning_low_pressure =    50
 	hazard_low_pressure =     -1

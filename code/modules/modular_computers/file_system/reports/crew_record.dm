@@ -89,7 +89,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		if(G && G.formal_term)
 			gender_term = G.formal_term
 	set_sex(gender_term)
-	set_age(H ? H.age : 30)
+	set_age(H?.get_age() || 30)
 	set_status(GLOB.default_physical_status)
 	set_species_name(H ? H.get_species_name() : GLOB.using_map.default_species)
 	set_branch(H ? (H.char_branch && H.char_branch.name) : "None")

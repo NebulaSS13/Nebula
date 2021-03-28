@@ -50,11 +50,11 @@
 		user.became_older = TRUE
 		user.change_hair_color(80, 80, 80)
 		var/age_holder = round(rand(15,20))
-		user.age += age_holder
+		user.set_age(age_holder)
 	else               //become younger
 		to_chat(user, "<span class='cultannounce'>You touch the fountain. Everything stops - then reverses. You relive in an instant the events of your life. The fountain, yesterday's lunch, your first love, your first kiss. It all feels as though it just happened moments ago. Then it feels like it never happened at all. Time reverses back into normality and continues its advance. You feel great, but why are you here?</span>")
 		user.became_younger = TRUE
-		user.age = round(rand(15,17))
+		user.set_age(rand(15,17))
 	used = TRUE
 	desc = "The water flows beautifully from the spout, but the water in the pool does not ripple."
 

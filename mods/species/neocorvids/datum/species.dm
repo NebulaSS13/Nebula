@@ -1,3 +1,16 @@
+/datum/appearance_descriptor/age/neocorvid
+	chargen_min_index = 3
+	chargen_max_index = 6
+	standalone_value_descriptors = list(
+		"a hatchling" =     1,
+		"an fledgeling" =   6,
+		"a young adult" =  12,
+		"an adult" =       25,
+		"middle-aged" =    35,
+		"aging" =          45,
+		"elderly" =        50
+	)
+
 /decl/species/corvid
 	name = SPECIES_CORVID
 	bodytype = BODYTYPE_CORVID
@@ -7,8 +20,9 @@
 	of Hyperion. Corvid naming conventions are a chosen name followed by the species of the person, followed by the location they were hatched."
 
 	meat_type = /obj/item/chems/food/snacks/meat/chicken
-	min_age = 12
-	max_age = 45
+
+	age_descriptor = /datum/appearance_descriptor/age/neocorvid
+
 	health_hud_intensity = 3
 
 	base_color = "#000616"

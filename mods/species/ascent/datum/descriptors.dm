@@ -1,4 +1,4 @@
-/datum/mob_descriptor/body_length
+/datum/appearance_descriptor/body_length
 	name = "body length"
 	comparative_value_descriptor_equivalent = "around the same length as yours"
 	standalone_value_descriptors = list(
@@ -21,8 +21,8 @@
 		"easily twice your length"
 		)
 
-/datum/mob_descriptor/body_length/get_first_person_message_start()
+/datum/appearance_descriptor/body_length/get_first_person_message_start()
 	return "Your body is"
 
-/datum/mob_descriptor/body_length/get_third_person_message_start(var/decl/pronouns/my_gender)
+/datum/appearance_descriptor/body_length/get_third_person_message_start(var/decl/pronouns/my_gender)
 	return "[my_gender.His] body is"

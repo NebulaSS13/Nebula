@@ -69,8 +69,7 @@
 	var/taste_sensitivity = TASTE_NORMAL      // How sensitive the species is to minute tastes.
 	var/silent_steps
 
-	var/min_age = 17
-	var/max_age = 70
+	var/age_descriptor = /datum/appearance_descriptor/age
 
 	// Speech vars.
 	var/assisted_langs = list()               // The languages the species can't speak without an assisted organ.
@@ -246,9 +245,9 @@
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
 	var/job_skill_buffs = list()				// A list containing jobs (/datum/job), with values the extra points that job recieves.
 
-	var/list/descriptors = list(
-		/datum/mob_descriptor/height = 0,
-		/datum/mob_descriptor/build = 0
+	var/list/appearance_descriptors = list(
+		/datum/appearance_descriptor/height = 1,
+		/datum/appearance_descriptor/build =  1
 	)
 
 	var/standing_jump_range = 2
@@ -307,8 +306,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	you use the _str version of the slot.
 */
 
-/decl/species/New()
-
+/decl/species/Initialize()
+	..()
 	if(!codex_description)
 		codex_description = description
 
@@ -340,13 +339,17 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	else
 		hud = new()
 
-	if(LAZYLEN(descriptors))
-		var/list/descriptor_datums = list()
-		for(var/desctype in descriptors)
-			var/datum/mob_descriptor/descriptor = new desctype
-			descriptor.comparison_offset = descriptors[desctype]
-			descriptor_datums[descriptor.name] = descriptor
-		descriptors = descriptor_datums
+	if(LAZYLEN(appearance_descriptors))
+		for(var/desctype in appearance_descriptors)
+			var/datum/appearance_descriptor/descriptor = new desctype(appearance_descriptors[desctype])
+			appearance_descriptors -= desctype
+			appearance_descriptors[descriptor.name] = descriptor
+
+	if(!(/datum/appearance_descriptor/age in appearance_descriptors))
+		LAZYINITLIST(appearance_descriptors)
+		var/datum/appearance_descriptor/age/age = new age_descriptor(1)
+		appearance_descriptors.Insert(1, age.name)
+		appearance_descriptors[age.name] = age
 
 	//If the species has eyes, they are the default vision organ
 	if(!vision_organ && has_organ[BP_EYES])

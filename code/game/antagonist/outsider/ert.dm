@@ -25,7 +25,8 @@
 
 /decl/special_role/ert/create_default(var/mob/source)
 	var/mob/living/carbon/human/M = ..()
-	if(istype(M)) M.age = rand(25,45)
+	if(istype(M)) 
+		M.set_age(rand(25,45))
 
 /decl/special_role/ert/Initialize()
 	. = ..()
