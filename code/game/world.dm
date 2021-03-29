@@ -450,6 +450,8 @@ var/world_topic_last = world.timeofday
 		to_world("<span class=danger>World reboot waiting for external scripts. Please be patient.</span>")
 		return
 
+	game_log("World rebooted at [time_stamp()]")
+
 	..(reason)
 
 /world/Del()
