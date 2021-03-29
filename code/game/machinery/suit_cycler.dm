@@ -181,9 +181,6 @@
 		if(boots)
 			to_chat(user, SPAN_WARNING("The cycler already contains some boots."))
 			return
-		if(I.icon_override == CUSTOM_ITEM_MOB)
-			to_chat(user, "You cannot refit a customised voidsuit.")
-			return
 		if(!user.unEquip(I, src))
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
@@ -199,10 +196,6 @@
 
 		if(helmet)
 			to_chat(user, SPAN_WARNING("The cycler already contains a helmet."))
-			return
-
-		if(I.icon_override == CUSTOM_ITEM_MOB)
-			to_chat(user, "You cannot refit a customised voidsuit.")
 			return
 		if(!user.unEquip(I, src))
 			return
@@ -222,9 +215,6 @@
 			to_chat(user, SPAN_WARNING("The cycler already contains a voidsuit."))
 			return
 
-		if(I.icon_override == CUSTOM_ITEM_MOB)
-			to_chat(user, "You cannot refit a customised voidsuit.")
-			return
 		if(!user.unEquip(I, src))
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
@@ -427,6 +417,7 @@
 	T.visible_message(SPAN_NOTICE("\The [src] pings loudly."))
 	active = 0
 	updateUsrDialog()
+	update_icon()
 
 /obj/machinery/suit_cycler/proc/repair_suit()
 	if(!suit || !suit.damage || !suit.can_breach)

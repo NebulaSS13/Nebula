@@ -64,7 +64,9 @@
 	bodytype_restricted = list(BODYTYPE_MANTID_LARGE, BODYTYPE_MANTID_SMALL)
 	icon = 'mods/species/ascent/icons/clothing/under.dmi'
 	color = COLOR_DARK_GUNMETAL
-	sprite_sheets = list(BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/under_gyne.dmi')
+	sprite_sheets = list(
+		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/clothing/under_gyne.dmi'
+	)
 
 /obj/item/clothing/suit/storage/ascent
 	name = "mantid gear harness"

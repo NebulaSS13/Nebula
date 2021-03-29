@@ -1099,7 +1099,7 @@ var/global/floorIsLava = 0
 		to_chat(usr, "[assoc_key] has:")
 		var/list/current_items = SScustomitems.custom_items_by_ckey[assoc_key]
 		for(var/datum/custom_item/item in current_items)
-			to_chat(usr, "- name: [item.item_name] icon: [item.item_icon_state] path: [item.item_path] desc: [item.item_desc]")
+			to_chat(usr, "- name: [item.item_name] state: [item.item_state] icon: [item.item_icon] path: [item.item_path] desc: [item.item_desc]")
 
 /datum/admins/proc/spawn_plant(seedtype in SSplants.seeds)
 	set category = "Debug"

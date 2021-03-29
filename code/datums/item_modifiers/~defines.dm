@@ -1,4 +1,2 @@
 #undef SETUP_NAME
-#undef SETUP_ICON_STATE
-#undef SETUP_ITEM_STATE
-#undef SETUP_ONMOB_ICON
+#undef SETUP_ICON
