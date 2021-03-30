@@ -1,30 +1,71 @@
-// Areas.dm
+var/list/areas = list()
 
-
-
-// ===
 /area
+
+	level = null
+	name = "Unknown"
+	icon = 'icons/turf/areas.dmi'
+	icon_state = "unknown"
+	plane = DEFAULT_PLANE
+	layer = BASE_AREA_LAYER
+	luminosity =    0
+	mouse_opacity = 0
+
+	var/fire
+	var/party
+	var/eject
+
+	var/lightswitch =         TRUE
+	var/debug =               FALSE
+	var/requires_power =      TRUE
+	var/always_unpowered =    FALSE //this gets overriden to 1 for space in area/New()
+
+	var/atmos =               1
+	var/atmosalm =            0
+	var/poweralm =            1
+	var/power_equip =         1 // Status
+	var/power_light =         1
+	var/power_environ =       1
+	var/used_equip =          0  // Continuous drain; don't mess with these directly.
+	var/used_light =          0
+	var/used_environ =        0
+	var/oneoff_equip   =      0 //Used once and cleared each tick.
+	var/oneoff_light   =      0
+	var/oneoff_environ =      0
+	var/has_gravity =         TRUE
+	var/air_doors_activated = FALSE
+	var/show_starlight =      FALSE
+
+	var/obj/machinery/power/apc/apc
+	var/no_air
+	var/list/all_doors		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
+	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
+	var/list/forced_ambience
+	var/sound_env = STANDARD_STATION
+	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
+
 	var/global/global_uid = 0
 	var/uid
-	var/area_flags
-	var/show_starlight = FALSE
+	var/area_flags = 0
+
+	//all air alarms in area are connected via magic
+	var/list/air_vent_names = list()
+	var/list/air_scrub_names = list()
+	var/list/air_vent_info = list()
+	var/list/air_scrub_info = list()
 
 /area/New()
 	icon_state = ""
 	uid = ++global_uid
-
-	if(dynamic_lighting)
-		luminosity = 0
-	else
-		luminosity = 1
-
+	luminosity = !dynamic_lighting
 	..()
 
 /area/Initialize()
 	. = ..()
+	global.areas += src
 	if(!requires_power || !apc)
-		power_light = 0
-		power_equip = 0
+		power_light =   0
+		power_equip =   0
 		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
 
@@ -32,7 +73,12 @@
 	icon_state = "white"
 	blend_mode = BLEND_MULTIPLY
 
+/area/Del()
+	global.areas -= src
+	. = ..()
+	
 /area/Destroy()
+	global.areas -= src
 	..()
 	return QDEL_HINT_HARDDEL
 
@@ -311,11 +357,11 @@ var/list/mob/living/forced_ambiance_list = new
 				ADJ_STATUS(H, STAT_WEAK, 3)
 			to_chat(mob, "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>")
 
-/area/proc/throw_unbuckled_occupants(var/maxrange, var/speed, var/direction = null)
+/area/proc/throw_unbuckled_occupants(var/maxrange, var/speed, var/direction)
 	for(var/mob/M in src)
 		addtimer(CALLBACK(src, .proc/throw_unbuckled_occupant, M, maxrange, speed, direction), 0)
 
-/area/proc/throw_unbuckled_occupant(var/mob/M, var/maxrange, var/speed, var/direction = null)
+/area/proc/throw_unbuckled_occupant(var/mob/M, var/maxrange, var/speed, var/direction)
 	if(iscarbon(M))
 		if(M.buckled)
 			to_chat(M, SPAN_WARNING("Sudden acceleration presses you into your chair!"))
@@ -341,9 +387,6 @@ var/list/mob/living/forced_ambiance_list = new
 
 /area/has_gravity()
 	return has_gravity
-
-/area/space/has_gravity()
-	return 0
 
 /atom/proc/has_gravity()
 	var/area/A = get_area(src)

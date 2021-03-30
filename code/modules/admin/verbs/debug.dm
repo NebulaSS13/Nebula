@@ -198,7 +198,7 @@
 	var/list/areas_with_intercom = list()
 	var/list/areas_with_camera = list()
 
-	for(var/area/A in world)
+	for(var/area/A in global.areas)
 		if(!(A.type in areas_all))
 			areas_all.Add(A.type)
 

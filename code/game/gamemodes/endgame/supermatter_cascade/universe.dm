@@ -77,11 +77,14 @@ var/global/universe_has_ended = 0
 	universe_has_ended = TRUE
 
 /datum/universal_state/supermatter_cascade/proc/AreaSet()
-	for(var/area/A)
-		if(!istype(A,/area) || istype(A, /area/space) || istype(A,/area/beach))
-			continue
-
-		A.update_icon()
+	for(var/area/A as anything in global.areas)
+		var/invalid_area = FALSE
+		for(var/check_area in GLOB.using_map.get_universe_end_evac_areas())
+			if(istype(A, check_area))
+				invalid_area = TRUE
+				break
+		if(!invalid_area)
+			A.update_icon()
 
 /datum/universal_state/supermatter_cascade/OverlayAndAmbientSet()
 	spawn(0)

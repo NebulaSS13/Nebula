@@ -339,3 +339,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/get_radio_chatter_types()
 	return
+
+/datum/map/proc/get_universe_end_evac_areas()
+	. = list(/area/space)
+
+/datum/map/proc/get_specops_area()
+	return

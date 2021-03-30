@@ -508,8 +508,11 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		id_tag = "ds[sequential_id(/obj/item/disposal_switch_construct)]"
 
 /obj/item/disposal_switch_construct/afterattack(atom/A, mob/user, proximity)
-	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated() || !id_tag)
+	if(!proximity || !istype(A, /turf/simulated/floor) || user.incapacitated() || !id_tag)
 		return
+	var/area/area = get_area(A)
+	if(!istype(area) || (area.area_flags & AREA_FLAG_SHUTTLE))
+		return FALSE
 	var/found = 0
 	for(var/obj/structure/disposalpipe/diversion_junction/D in GLOB.diversion_junctions)
 		if(D.id_tag == src.id_tag)

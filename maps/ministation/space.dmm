@@ -5,14 +5,14 @@
 "ab" = (
 /obj/effect/paint/sun,
 /turf/simulated/wall/r_titanium,
-/area/supply)
+/area/ministation/supply)
 "ac" = (
 /turf/simulated/floor/shuttle/yellow,
-/area/supply)
+/area/ministation/supply)
 "ad" = (
 /obj/effect/shuttle_landmark/supply/start,
 /turf/simulated/floor/shuttle/yellow,
-/area/supply)
+/area/ministation/supply)
 "ae" = (
 /obj/machinery/door/airlock/external/bolted{
 	id_tag = "supply_shuttle_hatch";
@@ -20,7 +20,7 @@
 	use_power = 1
 	},
 /turf/simulated/floor/plating,
-/area/supply)
+/area/ministation/supply)
 "af" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/borosilicate_reinforced{
@@ -28,12 +28,12 @@
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/black,
-/area/supply)
+/area/ministation/supply)
 "ag" = (
 /obj/structure/shuttle/engine/propulsion,
 /obj/effect/paint/sun,
 /turf/simulated/wall/r_titanium,
-/area/supply)
+/area/ministation/supply)
 "ah" = (
 /obj/effect/shuttle_landmark/escape_pod/transit/pod1,
 /turf/space,
@@ -340,7 +340,7 @@
 "AD" = (
 /obj/structure/window/borosilicate_reinforced,
 /turf/simulated/floor/bluegrid,
-/area/supply)
+/area/ministation/supply)
 "Kt" = (
 /obj/structure/window/borosilicate_reinforced,
 /obj/structure/showcase{
@@ -349,14 +349,14 @@
 	name = "auto-pilot system"
 	},
 /turf/simulated/floor/bluegrid,
-/area/supply)
+/area/ministation/supply)
 "KH" = (
 /obj/machinery/light/small/emergency{
 	icon_state = "bulb_map";
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/yellow,
-/area/supply)
+/area/ministation/supply)
 "Mu" = (
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
 	dir = 8;
@@ -366,7 +366,7 @@
 	use_power = 1
 	},
 /turf/simulated/floor/shuttle/yellow,
-/area/supply)
+/area/ministation/supply)
 
 (1,1,1) = {"
 aa

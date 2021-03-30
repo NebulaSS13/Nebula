@@ -31,7 +31,7 @@ ESCAPE_POD(1)
 	warmup_time = 10
 	location = 1
 	dock_target = "supply_shuttle"
-	shuttle_area = /area/supply
+	shuttle_area = /area/ministation/supply
 	waypoint_offsite = "nav_cargo_start"
 	waypoint_station = "nav_cargo_station"
 

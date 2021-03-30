@@ -35,7 +35,7 @@
 			apcs += apc
 			// Greatly increase the chance for APCs in maintenance areas to be selected
 			var/area/A = get_area(apc)
-			if(istype(A,/area/maintenance))
+			if(istype(A) && (A.area_flags & AREA_FLAG_MAINTENANCE))
 				apcs += apc
 				apcs += apc
 

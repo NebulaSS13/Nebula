@@ -173,8 +173,8 @@
 	return ..()
 
 /turf/simulated/Initialize(var/ml)
-	if(istype(loc, /area/chapel))
-		holy = 1
+	var/area/A = loc
+	holy = istype(A) && (A.area_flags & AREA_FLAG_HOLY)
 	levelupdate()
 	if(GAME_STATE >= RUNLEVEL_GAME)
 		fluid_update()

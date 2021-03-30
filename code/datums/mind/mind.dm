@@ -481,17 +481,8 @@
 // check whether this mind's mob has been brigged for the given duration
 // have to call this periodically for the duration to work properly
 /datum/mind/proc/is_brigged(duration)
-	var/turf/T = current.loc
-	if(!istype(T))
-		brigged_since = -1
-		return 0
-	var/is_currently_brigged = 0
-	if(istype(T.loc,/area/security/brig))
-		is_currently_brigged = 1
-		if(current.GetIdCard())
-			is_currently_brigged = 0
-
-	if(!is_currently_brigged)
+	var/area/A = get_area(current)
+	if(!isturf(current.loc) || !istype(A) || !(A.area_flags & AREA_FLAG_PRISON) || current.GetIdCard())
 		brigged_since = -1
 		return 0
 

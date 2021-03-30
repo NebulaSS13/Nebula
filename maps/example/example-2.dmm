@@ -7,7 +7,7 @@
 /area/space)
 "ac" = (
 /turf/simulated/wall,
-/area/medical/surgery)
+/area/surgery)
 "ad" = (
 /obj/structure/iv_drip,
 /obj/item/chems/ivbag/blood/OMinus,
@@ -15,17 +15,17 @@
 /obj/item/chems/ivbag/blood/OMinus,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "ae" = (
 /obj/machinery/optable,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "af" = (
 /obj/machinery/computer/operating,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "ag" = (
 /obj/structure/table/glass,
 /obj/item/storage/box/syringes,
@@ -35,7 +35,7 @@
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "ah" = (
 /obj/structure/table/glass,
 /obj/item/storage/box/gloves,
@@ -45,16 +45,16 @@
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "ai" = (
 /obj/machinery/atmospherics/unary/freezer,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "aj" = (
 /obj/structure/lattice,
 /turf/simulated/open,
-/area/medical/surgery)
+/area/surgery)
 "ak" = (
 /obj/machinery/light/spot{
 	dir = 1
@@ -66,13 +66,13 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "al" = (
 /obj/structure/table/glass,
 /obj/item/storage/firstaid/surgery,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "am" = (
 /obj/structure/railing/mapped{
 	dir = 4
@@ -81,10 +81,10 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "an" = (
 /turf/simulated/open,
-/area/medical/surgery)
+/area/surgery)
 "ao" = (
 /obj/structure/table/glass,
 /obj/item/chems/dropper,
@@ -94,19 +94,19 @@
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "ap" = (
 /obj/machinery/body_scanconsole{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "aq" = (
 /obj/machinery/bodyscanner{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "ar" = (
 /obj/machinery/sleeper/standard,
 /obj/structure/railing/mapped{
@@ -116,7 +116,7 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "as" = (
 /obj/machinery/light_switch/on{
 	dir = 8;
@@ -126,7 +126,7 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "at" = (
 /obj/structure/table/glass,
 /obj/item/scalpel/laser1,
@@ -137,7 +137,7 @@
 /obj/item/storage/firstaid/adv,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "au" = (
 /obj/structure/ladder,
 /obj/structure/railing/mapped{
@@ -147,18 +147,18 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "av" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "aw" = (
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
 /obj/machinery/atmospherics/portables_connector,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "ay" = (
 /obj/machinery/light/spot{
 	dir = 4
@@ -167,48 +167,48 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "az" = (
 /obj/structure/closet/secure_closet/freezer/meat,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "aB" = (
 /obj/structure/hygiene/sink{
 	dir = 8;
 	pixel_x = -15
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "aC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "aD" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/blue,
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "aE" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "aF" = (
 /obj/machinery/fabricator/bioprinter,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "aG" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden,
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "aH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "aI" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
@@ -216,13 +216,13 @@
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/effect/floor_decal/corner/orange/mono,
 /turf/simulated/floor/tiled/monotile,
-/area/medical/surgery)
+/area/surgery)
 "aJ" = (
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "aK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
 	dir = 9
@@ -231,13 +231,13 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "aL" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "aM" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
@@ -245,13 +245,13 @@
 /obj/machinery/portable_atmospherics/canister/empty,
 /obj/effect/floor_decal/corner/orange/mono,
 /turf/simulated/floor/tiled/monotile,
-/area/medical/surgery)
+/area/surgery)
 "aO" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "aP" = (
 /obj/machinery/light/spot{
 	dir = 8
@@ -259,13 +259,13 @@
 /obj/machinery/design_database,
 /obj/effect/floor_decal/corner/mauve/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "aQ" = (
 /obj/machinery/light/spot,
 /obj/machinery/fabricator/protolathe,
 /obj/effect/floor_decal/corner/mauve/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "aR" = (
 /obj/structure/cable{
 	d2 = 2;
@@ -280,7 +280,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "aS" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -288,80 +288,80 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "aT" = (
 /obj/structure/cable,
 /obj/machinery/power/debug_items/infinite_generator,
 /obj/effect/floor_decal/corner/mauve/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "aU" = (
 /obj/machinery/light/spot,
 /obj/effect/floor_decal/corner/orange{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "aW" = (
 /obj/machinery/fabricator/imprinter,
 /obj/effect/floor_decal/corner/mauve/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "aX" = (
 /obj/machinery/destructive_analyzer,
 /obj/effect/floor_decal/corner/mauve/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "aZ" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "ba" = (
 /obj/machinery/fabricator/industrial,
 /obj/effect/floor_decal/corner/mauve/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "eY" = (
 /obj/effect/floor_decal/corner/orange{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "hN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "iE" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "kL" = (
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "lr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "qL" = (
 /obj/machinery/computer/design_console,
 /obj/effect/floor_decal/corner/mauve/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "qY" = (
 /obj/effect/floor_decal/corner/orange/mono,
 /turf/simulated/floor/tiled/monotile,
-/area/medical/surgery)
+/area/surgery)
 "tL" = (
 /obj/machinery/fabricator/robotics,
 /obj/effect/floor_decal/corner/mauve/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "zv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -370,32 +370,32 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "zS" = (
 /obj/effect/floor_decal/corner/orange{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "Dg" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "Em" = (
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "FJ" = (
 /obj/effect/floor_decal/corner/mauve/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "HZ" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "KB" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
@@ -404,30 +404,30 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "Ry" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "SE" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 "Tt" = (
 /obj/machinery/design_database,
 /obj/effect/floor_decal/corner/mauve/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "Vl" = (
 /obj/effect/floor_decal/corner/orange{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
-/area/medical/surgery)
+/area/surgery)
 "WO" = (
 /obj/structure/table/rack,
 /obj/item/stack/material/plasteel/fifty,
@@ -446,13 +446,13 @@
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/surgery)
+/area/surgery)
 "Zk" = (
 /obj/effect/floor_decal/corner/mauve{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/surgery)
+/area/surgery)
 
 (1,1,1) = {"
 aa

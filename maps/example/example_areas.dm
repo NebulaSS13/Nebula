@@ -6,10 +6,10 @@
 	name = "\improper Fore Starboard Maintenance - 2"
 	icon_state = "fsmaint"
 
-/area/medical/surgery
+/area/surgery
 	name = "\improper Operating Theatre"
 	icon_state = "surgery"
-
+	req_access = list(access_medical)
 
 /area/turbolift
 	name = "\improper Example Elevator"
@@ -49,3 +49,7 @@
 /area/turbolift/third
 	name = "Upper Level"
 	base_turf = /turf/simulated/open
+
+/area/shuttle/escape
+	name = "\improper Emergency Shuttle"
+	icon_state = "shuttle"
