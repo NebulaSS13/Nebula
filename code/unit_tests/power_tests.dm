@@ -54,7 +54,7 @@
 
 /datum/unit_test/areas_apc_uniqueness/start_test()
 	var/failure = ""
-	for(var/area/A in world)
+	for(var/area/A in global.areas)
 		var/obj/machinery/power/apc/found_apc = null
 		for(var/obj/machinery/power/apc/APC in A)
 			if(!found_apc)
@@ -76,7 +76,7 @@
 /datum/unit_test/area_power_tally_accuracy/start_test()
 	var/failed = FALSE
 	var/list/channel_names = list("equip", "light", "environ")
-	for(var/area/A in world)
+	for(var/area/A in global.areas)
 		var/list/old_values = list(A.used_equip, A.used_light, A.used_environ)
 		A.retally_power()
 		var/list/new_values = list(A.used_equip, A.used_light, A.used_environ)

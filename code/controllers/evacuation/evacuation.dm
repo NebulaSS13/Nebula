@@ -86,8 +86,8 @@
 	state = EVAC_PREPPING
 
 	if(emergency_evacuation)
-		for(var/area/A in world)
-			if(istype(A, /area/hallway))
+		for(var/area/A in global.areas)
+			if(istype(A) && (A.area_flags & AREA_FLAG_HALLWAY))
 				A.readyalert()
 		if(!skip_announce)
 			GLOB.using_map.emergency_shuttle_called_announcement()
@@ -114,8 +114,8 @@
 
 	if(emergency_evacuation)
 		evac_recalled.Announce(GLOB.using_map.emergency_shuttle_recall_message)
-		for(var/area/A in world)
-			if(istype(A, /area/hallway))
+		for(var/area/A in global.areas)
+			if(istype(A) && (A.area_flags & AREA_FLAG_HALLWAY))
 				A.readyreset()
 		emergency_evacuation = 0
 	else

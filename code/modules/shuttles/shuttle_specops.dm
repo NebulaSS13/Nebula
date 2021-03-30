@@ -129,9 +129,12 @@
 
 	launch_prep = 0
 
-
 /proc/launch_mauraders()
-	var/area/centcom/specops/special_ops = locate()//Where is the specops area located?
+	var/specops_area = GLOB.using_map.get_specops_area()
+	if(!specops_area)
+		return
+	
+	var/area/special_ops = locate(specops_area)//Where is the specops area located?
 	//Begin Marauder launchpad.
 	spawn(0)//So it parallel processes it.
 		for(var/obj/machinery/door/blast/M in special_ops)

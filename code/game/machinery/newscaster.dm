@@ -159,7 +159,8 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 /obj/machinery/newscaster/Initialize()
 	. = ..()
-	securityCaster = istype(get_area(src), /area/security)
+	var/area/A = get_area(src)
+	securityCaster = istype(A) && (A.area_flags & AREA_FLAG_SECURITY)
 	allCasters += src
 	paper_remaining = 15            // Will probably change this to something better
 	unit_no = "[sequential_id("obj/machinery/newscaster")]"

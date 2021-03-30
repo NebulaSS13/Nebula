@@ -91,11 +91,15 @@
 		spark_at(src, amount = 5)
 
 /obj/item/rcd/afterattack(atom/A, mob/user, proximity)
-	if(!proximity) return
+	if(!proximity)
+		return FALSE
 	if(disabled && !isrobot(user))
-		return 0
-	if(istype(get_area(A),/area/shuttle) || istype(get_turf(A), /turf/space/transit))
-		return 0
+		return FALSE
+	if(istype(get_turf(A), /turf/space/transit))
+		return FALSE
+	var/area/area = get_area(A)
+	if(!istype(area) || (area.area_flags & AREA_FLAG_SHUTTLE))
+		return FALSE
 	work_id++
 	work_mode.do_work(src, A, user)
 

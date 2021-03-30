@@ -18,7 +18,7 @@
 	var/list/bad_areas = list()
 	var/area_test_count = 0
 
-	for(var/area/A in world)
+	for(var/area/A in global.areas)
 		if(!A.z)
 			continue
 		if(!isPlayerLevel(A.z))
@@ -78,7 +78,7 @@
 
 /datum/unit_test/air_alarm_connectivity/check_result()
 	var/failed = FALSE
-	for(var/area/A in world)
+	for(var/area/A in global.areas)
 		if(!A.z)
 			continue
 		if(!isPlayerLevel(A.z))

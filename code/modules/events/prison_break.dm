@@ -3,30 +3,28 @@
 	announceWhen	= 75
 
 	var/releaseWhen = 60
-	var/list/area/areas = list()		//List of areas to affect. Filled by start()
+	var/list/area/areas = list()  // List of areas to affect. Filled by start()
 
-	var/eventDept = "Security"			//Department name in announcement
-	var/list/areaName = list("Brig")	//Names of areas mentioned in AI and Engineering announcements
-	var/list/areaType = list(/area/security/prison, /area/security/brig)	//Area types to include.
-	var/list/areaNotType = list()		//Area types to specifically exclude.
+	var/eventDept = "Security"	  // Department name in announcement
+	var/list/areaName =    list()	  // Names of areas mentioned in AI and Engineering announcements
+	var/list/areaType =    list()    // Area types to include.
+	var/list/areaNotType = list() // Area types to specifically exclude.
 
-/datum/event/prison_break/virology
+/datum/event/prison_break/New()
+	..()
+	for(var/atype in areaType)
+		for(var/subatype in typesof(atype)-areaNotType)
+			var/area/A = atype
+			areaName |= strip_improper(initial(A.name))
+
+/datum/event/prison_break/medical
 	eventDept = "Medical"
-	areaName = list("Virology")
-	areaType = list(/area/medical/virology, /area/medical/virologyaccess)
 
-/datum/event/prison_break/xenobiology
+/datum/event/prison_break/science
 	eventDept = "Science"
-	areaName = list("Xenobiology")
-	areaType = list(/area/rnd/xenobiology)
-	areaNotType = list(/area/rnd/xenobiology/xenoflora, /area/rnd/xenobiology/xenoflora_storage)
 
 /datum/event/prison_break/station
 	eventDept = "Local"
-	areaName = list("Brig","Virology","Xenobiology")
-	areaType = list(/area/security/prison, /area/security/brig, /area/medical/virology, /area/medical/virologyaccess, /area/rnd/xenobiology)
-	areaNotType = list(/area/rnd/xenobiology/xenoflora, /area/rnd/xenobiology/xenoflora_storage)
-
 
 /datum/event/prison_break/setup()
 	announceWhen = rand(75, 105)
@@ -34,14 +32,13 @@
 
 	src.endWhen = src.releaseWhen+2
 
-
 /datum/event/prison_break/announce()
 	if(areas && areas.len > 0)
 		command_announcement.Announce("[pick("Gr3yT1d3 virus","Malignant trojan",)] detected in [location_name()] [(eventDept == "Security")? "imprisonment":"containment"] subroutines. Secure any compromised areas immediately. [location_name()] AI involvement is recommended.", "[location_name()] Anti-Virus Alert", zlevels = affecting_z)
 
 
 /datum/event/prison_break/start()
-	for(var/area/A in world)
+	for(var/area/A in global.areas)
 		if(is_type_in_list(A,areaType) && !is_type_in_list(A,areaNotType))
 			areas += A
 

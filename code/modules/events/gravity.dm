@@ -9,7 +9,7 @@
 
 /datum/event/gravity/start()
 	gravity_is_on = 0
-	for(var/area/A in world)
+	for(var/area/A in global.areas)
 		if(A.z in affecting_z)
 			A.gravitychange(gravity_is_on)
 
@@ -17,7 +17,7 @@
 	if(!gravity_is_on)
 		gravity_is_on = 1
 
-		for(var/area/A in world)
+		for(var/area/A in global.areas)
 			if((A.z in affecting_z) && initial(A.has_gravity))
 				A.gravitychange(gravity_is_on)
 
