@@ -205,6 +205,9 @@
 		else if(!client)
 			msg += "<span class='deadsay'>[G.He] [G.is] [ssd_msg].</span>\n"
 
+	if (admin_paralyzed)
+		msg += SPAN_OCCULT("OOC: [G.He] [G.has] been paralyzed by staff. Please avoid interacting with [G.him] unless cleared to do so by staff.") + "\n"
+
 	var/obj/item/organ/external/head/H = organs_by_name[BP_HEAD]
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)
 		msg += "<span class='notice'>[G.He] [G.has] \"[H.forehead_graffiti]\" written on [G.his] [H.name] in [H.graffiti_style]!</span>\n"
@@ -360,7 +363,7 @@
 /mob/living/carbon/human/getHUDsource(hudtype)
 	var/obj/item/clothing/glasses/G = glasses
 	if(!istype(G))
-		return 
+		return
 	if(G.hud_type & hudtype)
 		return G
 	if(G.hud && (G.hud.hud_type & hudtype))

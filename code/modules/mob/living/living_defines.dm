@@ -41,6 +41,7 @@
 	var/list/obj/aura/auras = null //Basically a catch-all aura/force-field thing.
 
 	var/last_resist = 0
+	var/admin_paralyzed = FALSE
 
 	var/list/chem_effects
 	var/list/chem_doses
