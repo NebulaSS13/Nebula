@@ -10,4 +10,5 @@
 
 /obj/effect/decal/cleanable/filth/Initialize()
 	. = ..()
-	alpha = rand(180,220)
+	// Gets more transparent as it ages out
+	alpha = rand(200 / (age || 1), 250)
