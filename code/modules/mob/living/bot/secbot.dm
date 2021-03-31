@@ -127,7 +127,7 @@
 	var/mob/shooter = P.firer
 	. = ..()
 	//if we already have a target just ignore to avoid lots of checking
-	if(!target && health < curhealth && shooter && (shooter in view(world.view, src)))
+	if(!target && health < curhealth && istype(shooter) && (shooter in view(world.view, src)))
 		react_to_attack(shooter)
 
 /mob/living/bot/secbot/proc/begin_arrest(mob/target, var/threat)
