@@ -35,8 +35,8 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 		return TRUE
 	. = ..()
 
-/obj/item/firearm_component/grip/secure/Initialize(ml, material_key)
-	. = ..()
+/obj/item/firearm_component/grip/secure/handle_post_holder_init()
+	..()
 	if(holder?.is_secure_gun())
 		authorized_modes = list()
 		for(var/i = authorized_modes.len + 1 to length(holder.receiver?.firemodes))

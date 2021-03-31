@@ -117,3 +117,6 @@
 
 /obj/item/firearm_component/proc/apply_additional_firearm_tweaks(var/obj/item/gun/firearm)
 	return
+
+/obj/item/firearm_component/proc/handle_post_holder_init()
+	return

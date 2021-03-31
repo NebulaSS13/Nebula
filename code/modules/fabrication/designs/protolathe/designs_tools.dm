@@ -80,10 +80,8 @@
 /datum/fabricator_recipe/protolathe/tool/drill
 	path = /obj/item/pickaxe/drill
 
-/*
 /datum/fabricator_recipe/protolathe/tool/plasmacutter
 	path = /obj/item/gun/hand/plasmacutter
-*/
 
 /datum/fabricator_recipe/protolathe/tool/pick_diamond
 	path = /obj/item/pickaxe/diamond

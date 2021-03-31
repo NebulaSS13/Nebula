@@ -1,3 +1,4 @@
+/*
 /obj/item/gun/alien
 	var/last_regen = 0
 	var/ammo_gen_time = 100
@@ -35,22 +36,25 @@
 /obj/item/gun/alien/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/voxform)
+*/
 
 //Vox pinning weapon.
-/obj/item/gun/alien/spikethrower
+/obj/item/gun/long/spikethrower
 	name = "spike thrower"
 	desc = "A vicious alien projectile weapon. Parts of it quiver gelatinously, as though the thing is insectile and alive."
+/*
 	w_class = ITEM_SIZE_LARGE
-	//ammo_name = "spike"
-	//ammo_type = /obj/item/spike
+	ammo_name = "spike"
+	ammo_type = /obj/item/spike
 	release_force = 30
 	icon = 'mods/species/vox/icons/gear/voxspike.dmi'
 	icon_state = ICON_STATE_WORLD
 	fire_sound_text = "a strange noise"
 	fire_sound = 'sound/weapons/spike.ogg'
 
-/obj/item/gun/alien/spikethrower/on_update_icon()
+/obj/item/gun/long/spikethrower/on_update_icon()
 	icon_state = "[get_world_inventory_state()][Clamp(ammo,0,3)]"
+*/
 
 /obj/item/arrow/quill
 	name = "vox quill"

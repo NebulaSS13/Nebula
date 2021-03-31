@@ -42,7 +42,7 @@
 		rig_type = initial(rig_type)
 	. = ..()
 	if(.)
-		player.put_in_hands(new /obj/item/gun/particle)
+		player.put_in_hands(new /obj/item/gun/long/particle)
 
 /decl/special_role/hunter/equip_rig(rig_type, mob/living/carbon/human/player)
 	var/obj/item/rig/mantid/rig = ..()

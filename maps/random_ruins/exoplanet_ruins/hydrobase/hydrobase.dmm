@@ -2107,7 +2107,7 @@
 /obj/item/chems/pill/zoom,
 /obj/item/chems/pill/zoom,
 /obj/item/chems/pill/zoom,
-/obj/item/gun/launcher/foam/crossbow{
+/obj/item/gun/hand/foam/crossbow{
 	desc = "A miniature crossbow that fires some sort of dart from an internal magazine.";
 	name = "mini-crossbow"
 	},

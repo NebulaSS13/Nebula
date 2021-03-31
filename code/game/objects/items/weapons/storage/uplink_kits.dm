@@ -92,6 +92,10 @@
 		/obj/item/ammo_magazine/pistol/small
 	)
 
+/obj/item/storage/box/syndie_kit/silenced/Initialize()
+	. = ..()
+	make_exact_fit()
+
 /obj/item/storage/backpack/satchel/syndie_kit/revolver
 	startswith = list(
 		/obj/item/gun/hand/revolver,

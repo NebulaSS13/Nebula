@@ -91,7 +91,7 @@
 /obj/item/clothing/suit/storage/ascent/Initialize()
 	. = ..()
 	for(var/tool in list(
-		/obj/item/gun/particle/small,
+		/obj/item/gun/hand/particle,
 		/obj/item/multitool/mantid,
 		/obj/item/clustertool,
 		/obj/item/clustertool,

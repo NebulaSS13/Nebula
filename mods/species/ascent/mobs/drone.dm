@@ -10,7 +10,7 @@
 	// hack doors, windows etc. without having to constantly cycle through tools.
 	equipment = list(
 		/obj/item/flash,
-		/obj/item/gun/particle/small,
+		/obj/item/gun/hand/particle,
 		/obj/item/multitool/mantid,
 		/obj/item/clustertool,
 		/obj/item/clustertool,

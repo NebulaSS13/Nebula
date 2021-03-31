@@ -1,4 +1,3 @@
-
 /datum/unit_test/modular_guns
 	name = "GUNS: Modular Guns Shall Be Valid"
 	var/list/frame_subtypes = list(
@@ -22,7 +21,6 @@
 			// Check for valid base icons.
 			if(!firearm.icon || !firearm.icon_state || !check_state_in_icon(firearm.icon_state, firearm.icon))
 				failures += "\the [firearm] ([gtype]) had an invalid icon_state ([firearm.icon_state], [firearm.icon])"
-				continue
 
 			// Check for frame var overrides.
 			if(initial(frame.w_class) != initial(firearm.w_class))

@@ -1,5 +1,6 @@
 /obj/item/gun/hand/revolver/foundation
 	name = "\improper Foundation revolver"
+/*
 	icon = 'mods/content/psionics/icons/foundation.dmi'
 	icon_state = "foundation"
 	desc = "The CF 'Troubleshooter', a compact plastic-composite weapon designed for concealed carry by Cuchulain Foundation field agents. Smells faintly of copper."
@@ -7,6 +8,7 @@
 
 /obj/item/gun/hand/revolver/foundation/disrupts_psionics()
 	return FALSE
+*/
 
 /obj/item/storage/briefcase/foundation
 	name = "\improper Foundation briefcase"

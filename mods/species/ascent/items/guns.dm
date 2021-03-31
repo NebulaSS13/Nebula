@@ -1,7 +1,8 @@
-/obj/item/gun/particle
+/obj/item/gun/long/particle
 	name = "particle lance"
 	desc = "A long, thick-bodied energy rifle of some kind, clad in a curious indigo polymer and lit from within by Cherenkov radiation. The grip is clearly not designed for human hands."
 	icon = 'mods/species/ascent/icons/particle_rifle/rifle.dmi'
+/*
 	icon_state = ICON_STATE_WORLD
 	slot_flags = SLOT_BACK
 	force = 25 // Heavy as Hell.
@@ -24,12 +25,14 @@
 	sprite_sheets = list(
 		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/particle_rifle/inhands_gyne.dmi',
 		BODYTYPE_SNAKE =        'mods/species/ascent/icons/particle_rifle/inhands_serpentid.dmi'
-		)
+	)
+*/
 
-/obj/item/gun/particle/small
+/obj/item/gun/hand/particle
 	name = "particle projector"
 	desc = "A smaller variant on the Ascent particle lance, usually carried by drones and alates."
 	icon = 'mods/species/ascent/icons/particle_rifle/rifle_small.dmi'
+/*
 	force = 12
 	max_shots = 9
 	burst = 1
@@ -41,20 +44,22 @@
 		list(mode_name="stun",   projectile_type = /obj/item/projectile/beam/stun),
 		list(mode_name="shock",  projectile_type = /obj/item/projectile/beam/stun/shock),
 		list(mode_name="lethal", projectile_type = /obj/item/projectile/beam/particle/small)
-		)
+	)
 
-
-/obj/item/gun/particle/on_update_icon()
+/obj/item/gun/long/particle/on_update_icon()
 	. = ..()
 	var/datum/firemode/current_mode = firemodes[sel_mode]
 	overlays = list(
 		image(icon, "[get_world_inventory_state()]-[istype(current_mode) ? current_mode.name : "lethal"]"),
 		image(icon, "[get_world_inventory_state()]-charge-[istype(power_supply) ? Floor(power_supply.percent()/20) : 0]")
 	)
+*/
 
 /obj/item/gun/cannon/flechette/ascent
 	name = "mantid flechette rifle"
 	desc = "A viciously pronged rifle-like weapon."
+
+/*
 	has_safety = FALSE
 	one_hand_penalty = 6
 	var/charge_per_shot = 10
@@ -74,3 +79,4 @@
 /obj/item/gun/cannon/flechette/ascent/use_ammo()
 	var/obj/item/cell/cell = get_cell()
 	if(cell) cell.use(charge_per_shot)
+*/

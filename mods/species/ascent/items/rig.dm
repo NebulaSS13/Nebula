@@ -75,7 +75,7 @@
 	interface_desc = "A mounted particle rifle of Ascent design."
 	icon = 'mods/species/ascent/icons/ascent.dmi'
 	icon_state = "rifle"
-	gun = /obj/item/gun/particle
+	gun = /obj/item/gun/long/particle
 
 /obj/item/rig_module/device/multitool
 	name = "mantid integrated multitool"
@@ -271,7 +271,7 @@
 	icon = 'mods/species/ascent/icons/rig/rig_chest.dmi'
 	allowed = list(
 		/obj/item/clustertool,
-		/obj/item/gun/particle/small,
+		/obj/item/gun/hand/particle,
 		/obj/item/weldingtool/electric/mantid,
 		/obj/item/multitool/mantid,
 		/obj/item/stack/medical/resin,

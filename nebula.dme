@@ -3298,7 +3298,6 @@
 #include "code\unit_tests\map_tests.dm"
 #include "code\unit_tests\materials.dm"
 #include "code\unit_tests\mob_tests.dm"
-#include "code\unit_tests\modular_guns.dm"
 #include "code\unit_tests\movement_tests.dm"
 #include "code\unit_tests\music_test.dm"
 #include "code\unit_tests\organ_tests.dm"

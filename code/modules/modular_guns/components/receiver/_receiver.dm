@@ -128,3 +128,8 @@
 			playsound(src, 'sound/weapons/flipblade.ogg', 30, 1)
 	else
 		to_chat(user, SPAN_WARNING("There is no safety on \the [holder || src]."))
+
+/obj/item/firearm_component/receiver/proc/handle_auto_switch_safety(var/mob/user)
+	//Experienced shooter will disable safety before shooting.
+	if(safety() && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5))
+		toggle_safety(user)

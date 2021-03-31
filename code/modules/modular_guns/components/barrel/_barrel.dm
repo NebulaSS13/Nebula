@@ -54,4 +54,4 @@
 
 /obj/item/firearm_component/barrel/apply_additional_firearm_tweaks(var/obj/item/gun/firearm)
 	if(scope_zoom)
-		firearm |= /obj/item/gun/proc/scope
+		firearm.verbs |= /obj/item/gun/proc/scope

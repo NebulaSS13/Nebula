@@ -71,7 +71,17 @@
 		var/fcomppath = firearm_components[fcomp]
 		if(fcomppath)
 			new fcomppath(src)
-	. = ..()
+
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/item/gun/LateInitialize()
+	..()
+	var/list/firearm_components = get_modular_component_list()
+	for(var/fcomp in firearm_components)
+		var/obj/item/firearm_component/comp = firearm_components[fcomp]
+		if(istype(comp))
+			comp.handle_post_holder_init()
 	update_from_components()
 
 /obj/item/gun/proc/is_secure_gun()
@@ -167,7 +177,7 @@
 	else
 		draw(user)
 
-/obj/item/gun/alien/slugsling/attack_self(var/mob/living/user)
+/obj/item/gun/long/slugsling/attack_self(var/mob/living/user)
 	mode = mode == "Impact" ? "Sentry" : "Impact"
 	to_chat(user,"<span class='notice'>You switch \the [holder || src]'s mode to \"[mode]\"</span>")
 
