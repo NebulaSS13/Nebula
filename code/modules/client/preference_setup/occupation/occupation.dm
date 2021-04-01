@@ -329,7 +329,7 @@
 				set_to = JOB_LEVEL_NEVER
 			else if(set_to > JOB_LEVEL_NEVER)
 				set_to = JOB_LEVEL_HIGH
-		if(SetJob(user, set_job, set_to)) 
+		if(SetJob(user, set_job, set_to))
 			return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 
 	else if(href_list["char_branch"])
@@ -378,7 +378,6 @@
 		pref.ShowChoices(user) //Manual refresh to allow us to focus the panel, not the main window.
 		panel.set_content(generate_skill_content(J))
 		panel.open()
-		winset(user, panel.window_id, "focus=1") //Focuses the panel.
 
 	else if(href_list["skillinfo"])
 		var/decl/hierarchy/skill/S = locate(href_list["skillinfo"])
@@ -394,7 +393,7 @@
 		show_browser(user, jointext(HTML, null), "window=\ref[user]skillinfo")
 
 	else if(href_list["job_info"])
-		
+
 		var/rank = href_list["job_info"]
 		var/datum/job/job = SSjobs.get_by_title(rank)
 
@@ -444,7 +443,7 @@
 		pref.player_alt_titles[job.title] = new_title
 
 /datum/category_item/player_setup_item/occupation/proc/SetJob(mob/user, role, level)
-	
+
 	level = Clamp(level, JOB_LEVEL_HIGH, JOB_LEVEL_NEVER)
 	var/datum/job/job = SSjobs.get_by_title(role, TRUE)
 	if(!job)
