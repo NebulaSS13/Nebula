@@ -10,7 +10,7 @@
 	#include "../../mods/content/generic_shuttles/_generic_shuttles.dme"
 	#include "../../mods/species/utility_frames/_utility_frames.dme"
 	#include "../../mods/species/tajaran/_tajaran.dme"
-	#include "../../mods/species/neocorvids/_neocorvids.dme"
+	#include "../../mods/species/neoavians/_neoavians.dme"
 
 	#include "../away/bearcat/bearcat.dm"
 	#include "../away/casino/casino.dm"

@@ -131,3 +131,9 @@
 	path = /obj/item/clothing/suit/letterman
 	flags = GEAR_HAS_COLOR_SELECTION
 	cost = 1
+
+/datum/gear/suit/cloak
+	display_name = "plain cloak"
+	path = /obj/item/clothing/accessory/cloak
+	flags = GEAR_HAS_COLOR_SELECTION
+	cost = 3

@@ -1,0 +1,7 @@
+#ifndef CONTENT_PACK_NEOAVIANS
+#define CONTENT_PACK_NEOAVIANS
+#include "_neoavians.dm"
+#include "clothing.dm"
+#include "datum/language.dm"
+#include "datum/species.dm"
+#endif
