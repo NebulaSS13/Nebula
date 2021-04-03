@@ -45,7 +45,7 @@
 
 /mob/living/simple_animal/proc/name_species()
 	set name = "Name Alien Species"
-	set category = "Exploration"
+	set category = "IC"
 	set src in view()
 
 	if(!GLOB.using_map.use_overmap)
@@ -177,7 +177,7 @@
 	natural_armor = list(
 		melee = ARMOR_MELEE_RESISTANT
 		)
-	
+
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby
 	name = "charbaby"
 	desc = "A huge grubby creature."
