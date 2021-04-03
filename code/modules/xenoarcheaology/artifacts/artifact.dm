@@ -62,7 +62,7 @@
 		return
 
 	for(var/obj/item/grab/G in grabbed_by)
-		if(G.assailant)
+		if(isliving(G.assailant))
 			check_triggers(/datum/artifact_trigger/proc/on_touch, G.assailant)
 			touched(G.assailant)
 
@@ -94,7 +94,8 @@
 /obj/structure/artifact/Bumped(M)
 	..()
 	check_triggers(/datum/artifact_trigger/proc/on_bump, M)
-	touched(M)
+	if(isliving(M))
+		touched(M)
 
 /obj/structure/artifact/bullet_act(var/obj/item/projectile/P)
 	visible_message(SPAN_WARNING("\The [P] hits \the [src]!"))
