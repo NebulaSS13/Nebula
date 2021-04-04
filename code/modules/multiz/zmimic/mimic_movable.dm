@@ -71,6 +71,8 @@
 /atom/movable/openspace/singuloCanEat()
 	return
 
+// -- MULTIPLIER / SHADOWER --
+
 // Holder object used for dimming openspaces & copying lighting of below turf.
 /atom/movable/openspace/multiplier
 	name = "openspace multiplier"
@@ -118,21 +120,18 @@
 		c_list[CL_MATRIX_AB] *= -SHADOWER_DARKENING_FACTOR
 		color = c_list
 	else
-		// Not a color matrix, so we just ignore the lighting values.
+		// Not a color matrix, so we can just use the color var ourselves.
 		icon_state = "dark"	// this is actually just a white sprite, which is what this blending needs
-		color = list(
-			SHADOWER_DARKENING_FACTOR, 0, 0,
-			0, SHADOWER_DARKENING_FACTOR, 0,
-			0, 0, SHADOWER_DARKENING_FACTOR
-		)
+		color = SHADOWER_DARKENING_COLOR
 
-	var/turf/parent = loc
-	ASSERT(isturf(parent))
-	if (LAZYLEN(parent.ao_overlays_mimic))
-		overlays += parent.ao_overlays_mimic
-
-	if (bound_overlay)
+	if (our_overlays || priority_overlays)
+		compile_overlays()
+	else if (bound_overlay)
+		// compile_overlays() calls update_above().
 		update_above()
+
+// -- OPENSPACE OVERLAY --
+// todo: rename
 
 // Object used to hold a mimiced atom's appearance.
 /atom/movable/openspace/overlay
@@ -184,3 +183,51 @@
 /atom/movable/openspace/overlay/proc/owning_turf_changed()
 	if (!destruction_timer)
 		destruction_timer = addtimer(CALLBACK(src, /datum/.proc/qdel_self), 10 SECONDS, TIMER_STOPPABLE)
+
+// -- TURF DELEGATE --
+
+// This thing holds the mimic appearance for non-OVERWRITE turfs.
+/atom/movable/openspace/turf_delegate
+	plane = OPENTURF_MAX_PLANE
+	mouse_opacity = 0
+	no_z_overlay = TRUE  // Only one of these should ever be visible at a time, the mimic logic will handle that.
+
+/atom/movable/openspace/turf_delegate/attackby(obj/item/W, mob/user)
+	loc.attackby(W, user)
+
+/atom/movable/openspace/turf_delegate/attack_hand(mob/user as mob)
+	loc.attack_hand(user)
+
+/atom/movable/openspace/turf_delegate/attack_generic(mob/user as mob)
+	loc.attack_generic(user)
+
+/atom/movable/openspace/turf_delegate/examine(mob/examiner)
+	SHOULD_CALL_PARENT(FALSE)
+	. = loc.examine(examiner)
+
+
+// -- DELEGATE COPY --
+
+// A type for copying delegates' self-appearance.
+/atom/movable/openspace/delegate_copy
+	plane = OPENTURF_MAX_PLANE	// These *should* only ever be at the top?
+	mouse_opacity = 0
+	var/turf/delegate
+
+/atom/movable/openspace/delegate_copy/Initialize(mapload, ...)
+	. = ..()
+	ASSERT(isturf(loc))
+	delegate = loc:below
+
+/atom/movable/openspace/delegate_copy/attackby(obj/item/W, mob/user)
+	loc.attackby(W, user)
+
+/atom/movable/openspace/delegate_copy/attack_hand(mob/user as mob)
+	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
+
+/atom/movable/openspace/delegate_copy/attack_generic(mob/user as mob)
+	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
+
+/atom/movable/openspace/delegate_copy/examine(mob/examiner)
+	SHOULD_CALL_PARENT(FALSE)
+	. = delegate.examine(examiner)

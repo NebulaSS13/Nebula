@@ -17,7 +17,7 @@ var/list/z_levels = list() // Each Z-level is associated with the relevant map d
 			z_levels.len = i
 		z_levels[i] = src
 
-	if (length(SSzcopy.zstack_maximums))
+	if (length(SSzcopy.zlev_maximums))
 		SSzcopy.calculate_zstack_limits()
 
 /obj/effect/landmark/map_data/Destroy(forced)
