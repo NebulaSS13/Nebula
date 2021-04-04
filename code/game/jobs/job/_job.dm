@@ -86,7 +86,7 @@
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(outfit) . = outfit.equip(H, title, alt_title)
 
-	if(!QDELETED(H) && length(access))
+	if(!QDELETED(H))
 		var/obj/item/card/id/id = H.GetIdCard()
 		if(id)
 			id.rank = title
