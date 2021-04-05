@@ -18,6 +18,7 @@ var/global/list/sparring_attack_cache = list()
 	var/eye_attack_text_victim
 	var/list/usable_with_limbs = list(BP_L_HAND, BP_R_HAND)
 	var/is_starting_default = FALSE
+	var/should_attack_log = TRUE
 
 /decl/natural_attack/proc/summarize()
 	var/list/usable_limbs = list()
@@ -206,7 +207,7 @@ var/global/list/sparring_attack_cache = list()
 
 	var/decl/pronouns/user_gender =   user.get_pronouns()
 	var/decl/pronouns/target_gender = target.get_pronouns()
-	var/attack_string 
+	var/attack_string
 	if(!target.lying)
 		switch(zone)
 			if(BP_HEAD, BP_MOUTH, BP_EYES)
@@ -228,9 +229,9 @@ var/global/list/sparring_attack_cache = list()
 			else
 				// ----- BODY ----- //
 				switch(attack_damage)
-					if(1 to 2)	
+					if(1 to 2)
 						attack_string = "threw a glancing punch at [target]'s [affecting.name]"
-					if(1 to 4)	
+					if(1 to 4)
 						attack_string = "[pick(attack_verb)] [target] in \the [affecting]"
 					if(5)
 						attack_string = "smashed [user_gender.his] [pick(attack_noun)] into [target]'s [affecting.name]"
@@ -336,6 +337,7 @@ var/global/list/sparring_attack_cache = list()
 	sharp = 0
 	edge = 0
 	attack_sound = "light_strike"
+	should_attack_log = FALSE
 
 /decl/natural_attack/light_strike/punch
 	name = "light punch"
