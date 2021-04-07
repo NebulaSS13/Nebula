@@ -70,6 +70,3 @@
 #define LIGHT_SEMI 180
 #define LIGHT_WIDE 90
 #define LIGHT_NARROW 45
-
-// Temporary.
-#define LIGHTING_DUMMY_VALUE_DELETEME 0

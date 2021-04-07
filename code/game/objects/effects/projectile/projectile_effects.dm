@@ -24,7 +24,7 @@
 	light_color = initial(owner.light_color)
 	light_wedge = initial(owner.light_wedge)
 
-	set_light(light_range, LIGHTING_DUMMY_VALUE_DELETEME, light_power, LIGHTING_DUMMY_VALUE_DELETEME, light_color, light_wedge)
+	set_light_new(light_range, light_power, light_color, light_wedge)
 
 /obj/effect/projectile/on_update_icon()
 	cut_overlays()

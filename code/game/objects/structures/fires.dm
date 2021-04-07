@@ -330,13 +330,13 @@
 		if(FIRE_LIT)
 			if(fuel >= HIGH_FUEL)
 				add_overlay("[icon_state]_lit")
-				set_light(light_range_high, LIGHTING_DUMMY_VALUE_DELETEME, light_power_high, LIGHTING_DUMMY_VALUE_DELETEME, light_color_high)
+				set_light_new(light_range_high, light_power_high, light_color_high)
 			else if(fuel <= LOW_FUEL)
 				add_overlay("[icon_state]_lit_dying")
-				set_light(light_range_mid, LIGHTING_DUMMY_VALUE_DELETEME, light_power_mid, LIGHTING_DUMMY_VALUE_DELETEME, light_color_mid)
+				set_light_new(light_range_mid, light_power_mid, light_color_mid)
 			else
 				add_overlay("[icon_state]_lit_low")
-				set_light(light_range_low, LIGHTING_DUMMY_VALUE_DELETEME, light_power_low, LIGHTING_DUMMY_VALUE_DELETEME, light_color_low)
+				set_light_new(light_range_low, light_power_low, light_color_low)
 
 		if(FIRE_DEAD)
 			add_overlay("[icon_state]_burnt")
