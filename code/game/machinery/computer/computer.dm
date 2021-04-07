@@ -14,8 +14,8 @@
 
 	var/icon_keyboard = "generic_key"
 	var/icon_screen = "generic"
-	var/light_power_on = 0.2
 	var/light_range_on = 2
+	var/light_power_on = 1
 	var/overlay_layer
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	clicksound = "keyboard"
