@@ -47,7 +47,7 @@ var/list/natural_walls = list()
 	material = global.default_material_by_strata_and_z[skey]
 
 /turf/exterior/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
-	..(ml, FALSE)	// We update our own icon, no point doing it twice.
+	..(ml, TRUE)	// We update our own icon, no point doing it twice.
 
 	// Clear mapping icons.
 	icon = 'icons/turf/walls/solid.dmi'
