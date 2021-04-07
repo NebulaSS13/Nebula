@@ -41,7 +41,7 @@ var/req_console_information = list()
 	var/message = ""
 	var/recipient = "" //the department which will be receiving the message
 	var/priority = -1 //Priority of the message being sent
-	light_outer_range = 0
+	light_range = 0
 	var/datum/announcement/announcement = new
 
 	uncreated_component_parts = null
