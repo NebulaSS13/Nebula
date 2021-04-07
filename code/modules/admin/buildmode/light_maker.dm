@@ -36,4 +36,4 @@
 			A.set_light_new(light_range, light_power, l_color = light_color)
 	if(parameters["right"])
 		if(A)
-			A.set_light(0, l_color = COLOR_WHITE)
+			A.set_light_new(0, l_color = COLOR_WHITE)

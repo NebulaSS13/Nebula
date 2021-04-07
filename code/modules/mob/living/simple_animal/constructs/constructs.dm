@@ -128,7 +128,7 @@
 /mob/living/simple_animal/construct/armoured/Life()
 	set_status(STAT_WEAK, 0)
 	if ((. = ..()))
-		return 
+		return
 
 /mob/living/simple_animal/construct/armoured/bullet_act(var/obj/item/projectile/P)
 	if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
@@ -275,7 +275,7 @@
 	eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	eye_glow.layer = EYE_GLOW_LAYER
 	overlays += eye_glow
-	set_light(-2, 0.1, 1.5, l_color = "#ffffff")
+	set_light_new(1.5, -2, "#ffffff")
 
 ////////////////HUD//////////////////////
 

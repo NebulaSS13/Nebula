@@ -22,10 +22,10 @@
 
 	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
 		color = COLOR_VIOLET
-		set_light(1, 0.1, 2, l_color = "#ff9900")
 	else
 		color = COLOR_DEEP_SKY_BLUE
-		set_light(1, 0.1, 2, l_color = "#66ffff")
+
+	set_light_new(2, 1, color)
 
 	cut_overlays()
 	for(var/direction in GLOB.cardinal)

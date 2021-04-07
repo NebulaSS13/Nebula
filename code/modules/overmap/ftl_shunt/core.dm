@@ -53,7 +53,7 @@
 		var/datum/extension/local_network_member/local_network = get_extension(src, /datum/extension/local_network_member)
 		local_network.set_tag(null, initial_id_tag)
 	find_ports()
-	set_light(1, 1, 2)
+	set_light_new(2)
 
 /obj/machinery/ftl_shunt/core/modify_mapped_vars(map_hash)
 	..()
