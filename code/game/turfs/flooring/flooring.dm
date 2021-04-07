@@ -361,6 +361,23 @@
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_CROWBAR
 	color = "#00ffe1"
 
+/decl/flooring/glass
+	name = "glass flooring"
+	desc = "A window to the world outside. Or the world beneath your feet, rather."
+	icon = 'icons/turf/flooring/glassfloor.dmi'
+	icon_base = "glassfloor"
+	build_type = /obj/item/stack/material/glass/reinforced
+	damage_temperature = T100C
+	flags = TURF_REMOVE_CROWBAR | TURF_ACID_IMMUNE
+	can_engrave = FALSE
+	color = GLASS_COLOR
+
+/decl/flooring/glass/boro
+	name = "borosilicate glass flooring"
+	build_type = /obj/item/stack/material/glass/reinforced_borosilicate
+	color = GLASS_COLOR_SILICATE
+	damage_temperature = T0C + 4000
+
 /decl/flooring/snow
 	name = "snow"
 	desc = "Let it sno-ow... Let it snow..."
