@@ -100,6 +100,8 @@
 		/mob/living/silicon/robot/proc/robot_checklaws
 	)
 
+	light_wedge = LIGHT_WIDE
+
 /mob/living/silicon/robot/Initialize()
 	. = ..()
 

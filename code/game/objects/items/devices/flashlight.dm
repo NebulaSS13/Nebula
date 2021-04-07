@@ -23,6 +23,9 @@
 	var/flashlight_range = 3 //outer range of light when on, can be negative
 	var/flashlight_flags = 0 // FLASHLIGHT_ bitflags
 
+	light_wedge = LIGHT_WIDE
+	var/spawn_dir // a way for mappers to force which way a flashlight faces upon spawning
+
 /obj/item/flashlight/Initialize()
 	. = ..()
 
@@ -60,10 +63,32 @@
 	return 1
 
 /obj/item/flashlight/proc/set_flashlight()
+	if(light_wedge)
+		set_dir(pick(NORTH, SOUTH, EAST, WEST))
+		if(spawn_dir)
+			set_dir(spawn_dir)
 	if (on)
 		set_light_new(flashlight_range, flashlight_power, light_color)
 	else
 		set_light(0)
+
+/obj/item/flashlight/examine(mob/user, distance)
+	. = ..()
+	if(light_wedge && isturf(loc))
+		to_chat(user, FONT_SMALL(SPAN_NOTICE("\The [src] is facing [dir2text(dir)].")))
+
+/obj/item/flashlight/dropped(mob/user)
+	. = ..()
+	if(light_wedge)
+		set_dir(user.dir)
+		update_light()
+
+/obj/item/flashlight/throw_at()
+	. = ..()
+	if(light_wedge)
+		var/new_dir = pick(NORTH, SOUTH, EAST, WEST)
+		set_dir(new_dir)
+		update_light()
 
 /obj/item/flashlight/attack(mob/living/M, mob/living/user)
 	add_fingerprint(user)
@@ -160,6 +185,7 @@
 	w_class = ITEM_SIZE_TINY
 	flashlight_power = 0.25
 	flashlight_range = 2
+	light_wedge = LIGHT_OMNI
 
 /obj/item/flashlight/maglight
 	name = "maglight"
@@ -172,6 +198,7 @@
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	flashlight_power = 0.5
 	flashlight_range = 5
+	light_wedge = LIGHT_NARROW
 
 /******************************Lantern*******************************/
 /obj/item/flashlight/lantern
@@ -188,6 +215,8 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	flashlight_range = 5
+	light_wedge = LIGHT_OMNI
+	light_color = LIGHT_COLOR_FIRE
 
 /obj/item/flashlight/lantern/on_update_icon()
 	..()
@@ -219,7 +248,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	flashlight_power = 0.3
 	flashlight_range = 5
-
+	light_wedge = LIGHT_OMNI
 	on = 1
 
 // green-shaded desk lamp
@@ -255,6 +284,7 @@
 
 	flashlight_power = 0.8
 	flashlight_range = 5
+	light_wedge = LIGHT_OMNI
 
 /obj/item/flashlight/flare/Initialize()
 	. = ..()
@@ -394,6 +424,7 @@
 
 	flashlight_power = 1
 	flashlight_range = 5
+	light_wedge = LIGHT_OMNI
 
 //hand portable floodlights for emergencies. Less bulky than the large ones. But also less light. Unused green variant in the sheet.
 
@@ -409,6 +440,7 @@
 
 	flashlight_power = 1
 	flashlight_range = 7
+	light_wedge = LIGHT_WIDE
 
 /obj/item/flashlight/lamp/floodlamp/green
 	icon_state = "greenfloodlamp"

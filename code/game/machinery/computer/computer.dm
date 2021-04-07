@@ -56,7 +56,7 @@
 			add_overlay(image(icon,"[icon_keyboard]_off", overlay_layer))
 		return
 	else
-		set_light_new(light_power_on, light_range_on, light_color)
+		set_light_new(light_range_on, light_power_on, light_color)
 
 	if(stat & BROKEN)
 		add_overlay(image(icon,"[icon_state]_broken", overlay_layer))
