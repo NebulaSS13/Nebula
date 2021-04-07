@@ -1,8 +1,4 @@
-var/datum/controller/subsystem/lighting/SSlighting
-
-/var/lighting_profiling = FALSE
-
-/datum/controller/subsystem/lighting
+SUBSYSTEM_DEF(lighting)
 	name = "Lighting"
 	wait = LIGHTING_INTERVAL
 	priority = SS_PRIORITY_LIGHTING
@@ -31,9 +27,6 @@ var/datum/controller/subsystem/lighting/SSlighting
 	var/force_queued = TRUE
 	var/force_override = FALSE	// For admins.
 #endif
-
-/datum/controller/subsystem/lighting/New()
-	NEW_SS_GLOBAL(SSlighting)
 
 /datum/controller/subsystem/lighting/stat_entry()
 	var/list/out = list(
