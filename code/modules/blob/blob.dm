@@ -3,7 +3,7 @@
 	desc = "A pulsating mass of interwoven tendrils."
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blob"
-	light_outer_range = 2
+	light_range = 2
 	light_color = BLOB_COLOR_PULS
 	density = 1
 	opacity = 1
@@ -214,7 +214,7 @@ the master core becomes more vulnereable to damage as it weakens,
 but it also becomes more aggressive, and channels more of its energy into regenerating rather than spreading
 regen() will cover update_icon() for this proc
 */
-/obj/effect/blob/core/proc/process_core_health() 
+/obj/effect/blob/core/proc/process_core_health()
 	switch(get_health_percent())
 		if(75 to INFINITY)
 			brute_resist = 3.5

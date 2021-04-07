@@ -14,12 +14,6 @@
 	var/tmp/list/light_source_multi       // Any light sources that are "inside" of us, for example, if src here was a mob that's carrying a flashlight, that flashlight's light source would be part of this list.
 	var/tmp/datum/light_source/light_source_solo    // Same as above - this is a shortcut to avoid allocating the above list if we can
 
-	// -- BAY COMPAT DELETEME --
-	var/light_outer_range
-	var/light_max_bright
-	var/light_inner_range
-	// -- END BAY COMPAT DELETEME --
-
 // Nonesensical value for l_color default, so we can detect if it gets set to null.
 #define NONSENSICAL_VALUE -99999
 
