@@ -310,7 +310,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 /mob/living/silicon/pai/proc/toggle_integrated_light()
 	if(!light_on)
-		set_light_new(flashlight_range, flashlight_power, angle = light_wedge)
+		set_light(flashlight_range, flashlight_power, angle = light_wedge)
 		to_chat(src, SPAN_NOTICE("You enable your integrated light."))
 		light_on = TRUE
 	else

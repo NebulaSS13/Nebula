@@ -38,7 +38,7 @@
 		I.layer = ABOVE_LIGHTING_LAYER
 		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlays += I
-		set_light_new(2, 0.3, I.color)
+		set_light(2, 0.3, I.color)
 
 	var/turf/exterior/T = get_turf(src)
 	if(istype(T))

@@ -191,4 +191,4 @@
 /obj/item/spaceflare/on_update_icon()
 	if(active)
 		icon_state = "bluflare_on"
-		set_light_new(6, 2, "#85d1ff")
+		set_light(6, 2, "#85d1ff")

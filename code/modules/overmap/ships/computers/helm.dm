@@ -268,4 +268,4 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		set_light(0)
 	else
 		icon_state = "tele_nav"
-		set_light_new(light_range_on, light_power_on, light_color)
+		set_light(light_range_on, light_power_on, light_color)

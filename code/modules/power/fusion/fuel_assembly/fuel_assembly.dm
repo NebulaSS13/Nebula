@@ -20,7 +20,7 @@
 		desc += " It is warm to the touch."
 		START_PROCESSING(SSobj, src)
 	if(material.luminescence)
-		set_light_new(material.luminescence, material.luminescence, material.color)
+		set_light(material.luminescence, material.luminescence, material.color)
 	rod_quantities[material.type] = initial_amount
 	update_icon()
 

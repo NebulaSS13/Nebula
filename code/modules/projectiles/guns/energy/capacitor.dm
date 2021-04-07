@@ -256,7 +256,7 @@ var/list/laser_wavelengths
 	if(charged)
 		var/obj/item/projectile/P = new projectile_type(src)
 		P.color = selected_wavelength.color
-		P.set_light_new(l_color = selected_wavelength.light_color)
+		P.set_light(l_color = selected_wavelength.light_color)
 		P.damage = Floor(sqrt(total_charge) * selected_wavelength.damage_multiplier)
 		P.armor_penetration = Floor(sqrt(total_charge) * selected_wavelength.armour_multiplier)
 		. = P
@@ -287,5 +287,3 @@ var/list/laser_wavelengths
 		to_chat(user, SPAN_WARNING("\The [src] is hermetically sealed; you can't get the components out."))
 		return TRUE
 	. = ..()
-
-

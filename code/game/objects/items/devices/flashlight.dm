@@ -68,7 +68,7 @@
 		if(spawn_dir)
 			set_dir(spawn_dir)
 	if (on)
-		set_light_new(flashlight_range, flashlight_power, light_color)
+		set_light(flashlight_range, flashlight_power, light_color)
 	else
 		set_light(0)
 

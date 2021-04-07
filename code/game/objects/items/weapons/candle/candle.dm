@@ -51,7 +51,7 @@
 	if(!lit)
 		lit = 1
 		visible_message("<span class='notice'>\The [user] lights the [name].</span>")
-		set_light_new(candle_range, candle_power)
+		set_light(candle_range, candle_power)
 		START_PROCESSING(SSobj, src)
 
 /obj/item/flame/candle/Process()

@@ -27,7 +27,7 @@
 		update_icon()
 		update_air()
 		sleep(15)
-		set_light_new(1)
+		set_light(1)
 		src.blocks_air = 1
 		set_opacity(1)
 		for(var/turf/simulated/turf in loc)

@@ -89,7 +89,7 @@
 /obj/item/party_light/on_update_icon()
 	if (activated)
 		icon_state = "partylight-on"
-		set_light_new(7, 1)
+		set_light(7, 1)
 	else
 		icon_state = "partylight_off"
 		set_light(0)

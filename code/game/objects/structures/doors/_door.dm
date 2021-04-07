@@ -26,7 +26,7 @@
 	update_nearby_tiles(need_rebuild=TRUE)
 
 	if(material.luminescence)
-		set_light_new(material.luminescence, 0.5, material.color)
+		set_light(material.luminescence, 0.5, material.color)
 
 	if(material.opacity < 0.5)
 		alpha = 180

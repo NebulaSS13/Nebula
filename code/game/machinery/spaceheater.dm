@@ -28,10 +28,10 @@
 		set_light(0)
 	else if(active > 0)
 		icon_state = "sheater-heat"
-		set_light_new(3, l_color = COLOR_SEDONA)
+		set_light(3, l_color = COLOR_SEDONA)
 	else if(active < 0)
 		icon_state = "sheater-cool"
-		set_light_new(3, l_color = COLOR_DEEP_SKY_BLUE)
+		set_light(3, l_color = COLOR_DEEP_SKY_BLUE)
 	else
 		icon_state = "sheater-standby"
 		set_light(0)

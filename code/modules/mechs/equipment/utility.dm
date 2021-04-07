@@ -211,7 +211,7 @@
 /obj/item/mech_equipment/light/on_update_icon()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
-		set_light_new(l_range, l_power)
+		set_light(l_range, l_power)
 	else
 		icon_state = "[initial(icon_state)]"
 		set_light(0, 0)

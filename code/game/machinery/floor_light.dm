@@ -91,7 +91,7 @@ var/list/floor_light_cache = list()
 /obj/machinery/floor_light/proc/update_brightness()
 	if((use_power == POWER_USE_ACTIVE) && !(stat & (NOPOWER | BROKEN)))
 		if(light_range != default_light_range || light_power != default_light_power || light_color != default_light_color)
-			set_light_new(default_light_range, default_light_power, default_light_color)
+			set_light(default_light_range, default_light_power, default_light_color)
 			change_power_consumption((light_range + light_power) * 20, POWER_USE_ACTIVE)
 	else
 		if(light_range || light_power)

@@ -18,7 +18,7 @@
 /obj/item/uv_light/attack_self(var/mob/user)
 	on = !on
 	if(on)
-		set_light_new(range, 2, "#007fff")
+		set_light(range, 2, "#007fff")
 		START_PROCESSING(SSobj, src)
 	else
 		set_light(0)

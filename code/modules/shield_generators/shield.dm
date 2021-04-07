@@ -25,7 +25,7 @@
 	else
 		color = COLOR_DEEP_SKY_BLUE
 
-	set_light_new(2, 1, color)
+	set_light(2, 1, color)
 
 	cut_overlays()
 	for(var/direction in GLOB.cardinal)

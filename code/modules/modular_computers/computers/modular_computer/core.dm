@@ -102,7 +102,7 @@
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
 	if(assembly && assembly.enabled)
-		set_light_new(light_strength, l_color = (assembly.bsod || os?.updating) ? "#0000ff" : light_color)
+		set_light(light_strength, l_color = (assembly.bsod || os?.updating) ? "#0000ff" : light_color)
 	else
 		set_light(0)
 

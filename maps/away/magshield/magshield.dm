@@ -129,7 +129,7 @@
 
 /obj/structure/magshield/nav_light/Initialize()
 	. = ..()//try make flashing through the process
-	set_light_new(light_range, light_power, light_color)
+	set_light(light_range, light_power, light_color)
 
 
 /obj/structure/magshield/nav_light/red
