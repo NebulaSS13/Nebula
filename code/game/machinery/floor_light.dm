@@ -18,9 +18,8 @@ var/list/floor_light_cache = list()
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 
 	var/damaged
-	var/default_light_max_bright = 0.75
-	var/default_light_inner_range = 1
-	var/default_light_outer_range = 3
+	var/default_light_power = 0.75
+	var/default_light_range = 3
 	var/default_light_color = "#ffffff"
 
 /obj/machinery/floor_light/prebuilt
@@ -91,11 +90,11 @@ var/list/floor_light_cache = list()
 
 /obj/machinery/floor_light/proc/update_brightness()
 	if((use_power == POWER_USE_ACTIVE) && !(stat & (NOPOWER | BROKEN)))
-		if(light_outer_range != default_light_outer_range || light_max_bright != default_light_max_bright || light_color != default_light_color)
-			set_light(default_light_max_bright, default_light_inner_range, default_light_outer_range, l_color = default_light_color)
-			change_power_consumption((light_outer_range + light_max_bright) * 20, POWER_USE_ACTIVE)
+		if(light_range != default_light_range || light_power != default_light_power || light_color != default_light_color)
+			set_light_new(default_light_range, default_light_power, default_light_color)
+			change_power_consumption((light_range + light_power) * 20, POWER_USE_ACTIVE)
 	else
-		if(light_outer_range || light_max_bright)
+		if(light_range || light_power)
 			set_light(0)
 
 /obj/machinery/floor_light/on_update_icon()
@@ -128,7 +127,7 @@ var/list/floor_light_cache = list()
 	if(. && !QDELETED(src))
 		if(severity == 1 || (severity == 2 && prob(50)) || (severity == 3 && prob(5)))
 			physically_destroyed()
-		else 
+		else
 			if(severity == 2 && prob(20))
 				set_broken(TRUE)
 			if(isnull(damaged))
