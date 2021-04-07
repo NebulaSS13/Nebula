@@ -18,7 +18,7 @@
 /obj/item/uv_light/attack_self(var/mob/user)
 	on = !on
 	if(on)
-		set_light(0.5, 0.1, range, 2, "#007fff")
+		set_light_new(range, 2, "#007fff")
 		START_PROCESSING(SSobj, src)
 	else
 		set_light(0)
@@ -35,7 +35,7 @@
 	. = ..()
 	if(on)
 		update_icon()
-	
+
 /obj/item/uv_light/on_update_icon()
 	cut_overlays()
 	if(on)
@@ -44,7 +44,7 @@
 			I.layer = ABOVE_LIGHTING_LAYER
 			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		add_overlay(I)
-	
+
 /obj/item/uv_light/proc/clear_last_scan()
 	if(scanned.len)
 		for(var/atom/O in scanned)

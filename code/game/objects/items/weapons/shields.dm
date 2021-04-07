@@ -198,6 +198,6 @@
 /obj/item/shield/energy/on_update_icon()
 	icon_state = "eshield[active]"
 	if(active)
-		set_light(0.4, 0.1, 1, 2, "#006aff")
+		set_light_new(1.5, 1.5, "#006aff")
 	else
 		set_light(0)

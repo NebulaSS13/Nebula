@@ -82,7 +82,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 			fuel_objs -= fuel
 			if(remove_fire)
 				var/turf/T = fuel.loc
-				if(istype(T) && T.fire) 
+				if(istype(T) && T.fire)
 					qdel(T.fire)
 
 /turf/proc/create_fire(fl)
@@ -105,7 +105,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	zone.fire_tiles |= src
 	var/obj/effect/fluid/fuel = return_fluid()
-	if(fuel?.get_fuel_amount()) 
+	if(fuel?.get_fuel_amount())
 		zone.fuel_objs += fuel
 
 	return 0
@@ -139,13 +139,13 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	if(firelevel > 6)
 		icon_state = "3"
-		set_light(1, 2, 7)
+		set_light_new(7, 3, no_update = TRUE)
 	else if(firelevel > 2.5)
 		icon_state = "2"
-		set_light(0.7, 2, 5)
+		set_light_new(5, 2, no_update = TRUE)
 	else
 		icon_state = "1"
-		set_light(0.5, 1, 3)
+		set_light_new(3, 1, no_update = TRUE)
 
 	for(var/mob/living/L in loc)
 		L.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure())  //Burn the mobs!

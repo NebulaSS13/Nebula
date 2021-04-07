@@ -12,7 +12,22 @@
 	lit_heat = 1500
 	var/max_fuel = 5
 	var/random_colour = FALSE
-	var/available_colors = list(COLOR_WHITE, COLOR_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_BOTTLE_GREEN, COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_GUNMETAL, COLOR_RED, COLOR_YELLOW, COLOR_CYAN, COLOR_GREEN, COLOR_VIOLET, COLOR_NAVY_BLUE, COLOR_PINK)
+	var/list/available_colors = list(
+		COLOR_WHITE,
+		COLOR_BLUE_GRAY,
+		COLOR_GREEN_GRAY,
+		COLOR_BOTTLE_GREEN,
+		COLOR_DARK_GRAY,
+		COLOR_RED_GRAY,
+		COLOR_GUNMETAL,
+		COLOR_RED,
+		COLOR_YELLOW,
+		COLOR_CYAN,
+		COLOR_GREEN,
+		COLOR_VIOLET,
+		COLOR_NAVY_BLUE,
+		COLOR_PINK
+	)
 
 /obj/item/flame/lighter/Initialize()
 	. = ..()
@@ -30,7 +45,7 @@
 	lit = 1
 	update_icon()
 	light_effects(user)
-	set_light(0.6, 0.5, 2, l_color = COLOR_PALE_ORANGE)
+	set_light_new(2, 0.5, COLOR_PALE_ORANGE)
 	START_PROCESSING(SSobj, src)
 
 /obj/item/flame/lighter/proc/light_effects(mob/living/carbon/user)
@@ -97,7 +112,7 @@
 		if(ismob(loc) && prob(10) && REAGENT_VOLUME(reagents, /decl/material/liquid/fuel) < 1)
 			to_chat(loc, "<span class='warning'>\The [src]'s flame flickers.</span>")
 			set_light(0)
-			addtimer(CALLBACK(src, .atom/proc/set_light, 0.6, 0.5, 2), 4)
+			addtimer(CALLBACK(src, .atom/proc/set_light_new, 2, 0.5), 4)
 		reagents.remove_reagent(/decl/material/liquid/fuel, 0.05)
 	else
 		extinguish()
@@ -139,7 +154,15 @@
 	icon_state = "zippo"
 	item_state = "zippo"
 	max_fuel = 10
-	available_colors = list(COLOR_WHITE, COLOR_WHITE, COLOR_WHITE, COLOR_DARK_GRAY, COLOR_GUNMETAL, COLOR_BRONZE, COLOR_BRASS)
+	available_colors = list(
+		COLOR_WHITE,
+		COLOR_WHITE,
+		COLOR_WHITE,
+		COLOR_DARK_GRAY,
+		COLOR_GUNMETAL,
+		COLOR_BRONZE,
+		COLOR_BRASS
+	)
 
 /obj/item/flame/lighter/zippo/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
