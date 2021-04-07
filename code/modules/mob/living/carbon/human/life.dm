@@ -197,7 +197,7 @@
 		//blindness
 		if(!(sdisabilities & BLINDED))
 			if(equipment_tint_total >= TINT_BLIND)	// Covered eyes, heal faster
-				ADJ_STATUS(src, STAT_BLURRY, -1) 
+				ADJ_STATUS(src, STAT_BLURRY, -1)
 
 /mob/living/carbon/human/handle_disabilities()
 	..()
@@ -227,7 +227,7 @@
 			set_light(0)
 	else
 		if(species.appearance_flags & RADIATION_GLOWS)
-			set_light(0.3, 0.1, max(1,min(20,radiation/20)), 2, species.get_flesh_colour(src))
+			set_light_new(max(1,min(10,radiation/10)), max(1,min(20,radiation/20)), species.get_flesh_colour(src))
 		// END DOGSHIT SNOWFLAKE
 		var/damage = 0
 		radiation -= 1 * RADIATION_SPEED_COEFFICIENT
@@ -264,7 +264,7 @@
 		damage = Floor(damage * species.get_radiation_mod(src))
 		if(damage)
 			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
-			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT) 
+			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
 			updatehealth()
 			if(!isSynthetic() && organs.len)
 				var/obj/item/organ/external/O = pick(organs)

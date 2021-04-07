@@ -401,7 +401,7 @@ About the new airlock wires panel:
 			if(AIRLOCK_OPENING)
 				if(lights)
 					lights_overlay = lights_file
-					set_light(0.25, 0.1, 1, 2, COLOR_LIME)
+					set_light_new(2, 0.75, COLOR_LIME)
 
 		if(stat & BROKEN)
 			damage_overlay = sparks_broken_file

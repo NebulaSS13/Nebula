@@ -50,7 +50,7 @@
 
 /obj/item/projectile/energy/flash/flare/on_impact(var/atom/A)
 	light_flash_color = pick("#e58775", "#ffffff", "#faa159", "#e34e0e")
-	set_light(1, 1, 4, 2, light_flash_color)
+	set_light_new(4, 2, light_flash_color)
 	..() //initial flash
 
 	//residual illumination

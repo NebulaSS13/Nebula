@@ -241,7 +241,7 @@
 /mob/living/proc/IgniteMob()
 	if(fire_stacks > 0 && !on_fire)
 		on_fire = 1
-		set_light(0.6, 0.1, 4, l_color = COLOR_ORANGE)
+		set_light_new(4, l_color = COLOR_ORANGE)
 		update_fire()
 
 /mob/living/proc/ExtinguishMob()

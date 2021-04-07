@@ -20,9 +20,8 @@
 	icon = 'icons/obj/structures/pylon.dmi'
 	icon_state = "pylon"
 	var/isbroken = 0
-	light_max_bright = 0.5
-	light_inner_range = 1
-	light_outer_range = 13
+	light_power = 0.5
+	light_range = 13
 	light_color = "#3e0000"
 	var/obj/item/wepon = null
 
@@ -68,7 +67,7 @@
 		isbroken = 0
 		set_density(1)
 		icon_state = "pylon"
-		set_light(0.5)
+		set_light_new(13, 0.5)
 
 /obj/structure/cult/pylon/get_artifact_scan_data()
 	return "Tribal pylon - subject resembles statues/emblems built by cargo cult civilisations to honour energy systems from post-warp civilisations."

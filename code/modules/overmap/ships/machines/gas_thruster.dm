@@ -66,7 +66,7 @@
 	if(isturf(loc))
 		var/turf/T = loc
 		T.hotspot_expose(1000,125)
-	set_light(0.5, 1, 4)
+	set_light_new(5, 2)
 	set_dir(ndir)
 	QDEL_IN(src, 2 SECONDS)
 

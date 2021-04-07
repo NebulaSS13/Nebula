@@ -7,8 +7,8 @@
 	anchored = TRUE
 	unacidable = TRUE
 	light_color = "#00ffff"
-	light_outer_range = 2
-	light_max_bright = 1
+	light_range = 2
+	light_power = 1
 	mouse_opacity = 0
 	appearance_flags = 0
 	var/overlay_state

@@ -118,7 +118,7 @@
 				glow_icon = image(icon, "[icon_state]-glow")
 			glow_icon.alpha = Clamp(temperature - MINIMUM_GLOW_TEMPERATURE, MINIMUM_GLOW_VALUE, MAXIMUM_GLOW_VALUE)
 			LAZYADD(adding_overlays, glow_icon)
-			set_light(0.2, 0.1, 1, l_color = COLOR_RED)
+			set_light_new(1, l_color = COLOR_RED)
 		else
 			set_light(0)
 	else

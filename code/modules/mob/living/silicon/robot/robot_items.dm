@@ -52,7 +52,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] already has something inside.  Analyze or eject it first."))
 		return
 	var/obj/item/I = target
-	var/tech = I.get_origin_tech() 
+	var/tech = I.get_origin_tech()
 	if(!tech)
 		to_chat(user, SPAN_WARNING("\The [I] has no interesting data to analyze."))
 		return
@@ -89,7 +89,7 @@
 /obj/item/party_light/on_update_icon()
 	if (activated)
 		icon_state = "partylight-on"
-		set_light(1, 1, 7)
+		set_light_new(7, 1)
 	else
 		icon_state = "partylight_off"
 		set_light(0)
