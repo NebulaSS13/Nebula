@@ -18,6 +18,7 @@
 	#endif
 
 /atom/movable/lighting_overlay/New(newloc, update_now = FALSE)
+	atom_flags |= ATOM_FLAG_INITIALIZED
 	SSlighting.total_lighting_overlays += 1
 
 	var/turf/T         = loc // If this runtimes atleast we'll know what's creating overlays in things that aren't turfs.
