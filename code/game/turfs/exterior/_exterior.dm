@@ -13,6 +13,22 @@
 	var/list/affecting_heat_sources
 	var/obj/effect/overmap/visitable/sector/exoplanet/owner
 
+/turf/exterior/Initialize(mapload, no_update_icon = FALSE)
+	. = ..(mapload)	// second param is our own, don't pass to children
+	if (no_update_icon)
+		return
+
+	if (mapload)	// If this is a mapload, then our neighbors will be updating their own icons too -- doing it for them is rude.
+		update_icon()
+	else
+		for (var/turf/T in RANGE_TURFS(src, 1))
+			if (T == src)
+				continue
+			if (TICK_CHECK)	// not CHECK_TICK -- only queue if the server is overloaded
+				T.queue_icon_update()
+			else
+				T.update_icon()
+
 /turf/exterior/ChangeTurf()
 	var/last_affecting_heat_sources = affecting_heat_sources
 	var/turf/exterior/ext = ..()
@@ -115,7 +131,7 @@
 			switch(direction)
 				if(NORTH)
 					I.pixel_y += world.icon_size
-				if(SOUTH) 
+				if(SOUTH)
 					I.pixel_y -= world.icon_size
 				if(EAST)
 					I.pixel_x += world.icon_size
@@ -141,7 +157,7 @@
 					I.layer = layer + icon_edge_layer
 					if(direction & NORTH)
 						I.pixel_y += world.icon_size
-					else if(direction & SOUTH) 
+					else if(direction & SOUTH)
 						I.pixel_y -= world.icon_size
 					if(direction & EAST)
 						I.pixel_x += world.icon_size

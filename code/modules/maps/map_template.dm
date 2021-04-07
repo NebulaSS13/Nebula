@@ -139,8 +139,9 @@
 	init_atoms(atoms_to_initialise)
 	init_shuttles(shuttle_state, map_hash, initialized_areas_by_type)
 	after_load(initial_z)
-	for(var/light_z = initial_z to world.maxz)
-		create_lighting_overlays_zlevel(light_z)
+	if (SSlighting.initialized)
+		for(var/light_z = initial_z to world.maxz)
+			SSlighting.InitializeZlev(light_z)
 	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")
 	loaded++
 
@@ -177,7 +178,9 @@
 	init_atoms(atoms_to_initialise)
 	init_shuttles(shuttle_state, map_hash, initialized_areas_by_type)
 	after_load(T.z)
-	SSlighting.InitializeTurfs(atoms_to_initialise)	// Hopefully no turfs get placed on new coords by SSatoms.
+	if (SSlighting.initialized)
+		SSlighting.InitializeTurfs(atoms_to_initialise)	// Hopefully no turfs get placed on new coords by SSatoms.
+
 	log_game("[name] loaded at at [T.x],[T.y],[T.z]")
 	loaded++
 

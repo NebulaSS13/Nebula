@@ -508,8 +508,6 @@ var/list/localhost_addresses = list(
 	// Recenter skybox and lighting.
 	set_skybox_offsets(last_view_x_dim, last_view_y_dim)
 	if(mob)
-		if(mob.l_general)
-			mob.l_general.fit_to_client_view(last_view_x_dim, last_view_y_dim)
 		mob.reload_fullscreen()
 
 /client/proc/update_chat_position(use_alternative)
