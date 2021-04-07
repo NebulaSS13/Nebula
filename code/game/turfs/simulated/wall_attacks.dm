@@ -27,7 +27,7 @@
 		update_icon()
 		update_air()
 		sleep(15)
-		set_light(0.4, 0.1, 1)
+		set_light_new(1)
 		src.blocks_air = 1
 		set_opacity(1)
 		for(var/turf/simulated/turf in loc)
@@ -347,7 +347,7 @@
 		var/mob/living/L = user
 		if(L.a_intent == I_HELP)
 			return
-	
+
 	user.do_attack_animation(src)
 	var/material_divisor = max(material.brute_armor, reinf_material?.brute_armor)
 	if(W.damtype == BURN)

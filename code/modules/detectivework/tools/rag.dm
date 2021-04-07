@@ -182,7 +182,7 @@
 	if(!can_ignite())
 		return
 	START_PROCESSING(SSobj, src)
-	set_light(0.5, 0.1, 2, 2, "#e38f46")
+	set_light_new(2, 1, "#e38f46")
 	on_fire = 1
 	update_name()
 	update_icon()

@@ -27,7 +27,7 @@
 
 /turf/space/proc/update_starlight()
 	if(config.starlight && (locate(/turf/simulated) in RANGE_TURFS(src, 1)))
-		set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.background_color)
+		set_light_new(config.starlight, 0.75, l_color = SSskybox.background_color)
 	else
 		set_light(0)
 

@@ -120,7 +120,7 @@
 /obj/item/clothing/mask/smokable/ecig/on_update_icon()
 	..()
 	if(lit)
-		set_light(0.6, 0.5, brightness_on)
+		set_light_new(brightness_on)
 	else
 		set_light(0)
 	if(ec_cartridge && check_state_in_icon("[icon_state]-loaded", icon))
