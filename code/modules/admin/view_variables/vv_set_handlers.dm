@@ -137,7 +137,7 @@
 	VV_LIGHTING_SET(light_wedge)
 	VV_LIGHTING_SET(light_color)
 
-	A.set_light(new_light_range, LIGHTING_DUMMY_VALUE_DELETEME, new_light_power, LIGHTING_DUMMY_VALUE_DELETEME, new_light_color, new_light_wedge)
+	A.set_light_new(new_light_range, new_light_power, new_light_color, new_light_wedge)
 
 #undef VV_LIGHTING_SET
 
