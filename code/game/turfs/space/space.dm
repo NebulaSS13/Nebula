@@ -9,7 +9,6 @@
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	permit_ao = FALSE
 	z_eventually_space = TRUE
-	turf_flags = (TURF_FLAG_SKIP_ICON_INIT | TURF_FLAG_SKIP_AO_INIT)
 	var/static/list/dust_cache
 
 /turf/space/proc/build_dust_cache()

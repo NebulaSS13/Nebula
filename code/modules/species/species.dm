@@ -203,9 +203,9 @@
 	var/list/skin_overlays = list()
 
 	// An associative list of target zones (ex. BP_CHEST, BP_MOUTH) mapped to all possible keys associated
-	// with the zone. Unused on vanilla Nebula at time of commit, will be used by hands and inventory 
+	// with the zone. Unused on vanilla Nebula at time of commit, will be used by hands and inventory
 	// rewrite and for species with body layouts that do not map directly to the standard humanoid body.
-	var/list/limb_mapping 
+	var/list/limb_mapping
 
 	var/list/has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
@@ -372,7 +372,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		var/list/organ_data = has_limbs[limb_type]
 		var/obj/item/organ/limb_path = organ_data["path"]
 		organ_data["descriptor"] = initial(limb_path.name)
-	
+
 /decl/species/proc/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	if(istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack))
 		if (extendedtank)
@@ -543,7 +543,6 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	var/list/vision = H.get_accumulated_vision_handlers()
 	H.update_sight()
 	H.set_sight(H.sight|get_vision_flags(H)|H.equipment_vision_flags|vision[1])
-	H.change_light_color(H.getDarkvisionTint())
 
 	if(H.stat == DEAD)
 		return 1

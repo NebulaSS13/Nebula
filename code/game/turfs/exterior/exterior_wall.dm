@@ -13,7 +13,6 @@ var/list/natural_walls = list()
 	opacity =    TRUE
 	density =    TRUE
 	blocks_air = TRUE
-	turf_flags = TURF_FLAG_SKIP_ICON_INIT
 
 	var/strata
 	var/paint_color
@@ -48,8 +47,7 @@ var/list/natural_walls = list()
 	material = global.default_material_by_strata_and_z[skey]
 
 /turf/exterior/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
-
-	..(ml)
+	..(ml, FALSE)	// We update our own icon, no point doing it twice.
 
 	// Clear mapping icons.
 	icon = 'icons/turf/walls/solid.dmi'
@@ -134,7 +132,7 @@ var/list/natural_walls = list()
 		var/obj/item/pickaxe/P = W
 		playsound(user, P.drill_sound, 20, 1)
 		to_chat(user, SPAN_NOTICE("You start [P.drill_verb][destroy_artifacts(P, INFINITY)]."))
-		if(do_after(user, P.digspeed, src))		
+		if(do_after(user, P.digspeed, src))
 			to_chat(user, SPAN_NOTICE("You finish [P.drill_verb] \the [src]."))
 			dismantle_wall()
 		return TRUE

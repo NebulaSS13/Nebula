@@ -25,7 +25,6 @@ var/list/wall_noblend_objects = list(
 	explosion_resistance = 10
 	color = COLOR_GRAY40
 	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
-	turf_flags = TURF_FLAG_SKIP_ICON_INIT // Icon is already regenerated when material is set.
 
 	var/damage = 0
 	var/damage_overlay = 0

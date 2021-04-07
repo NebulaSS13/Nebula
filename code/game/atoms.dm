@@ -55,14 +55,14 @@
 		PRINT_STACK_TRACE("Warning: [src]([type]) initialized multiple times!")
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
-	if(light_max_bright && light_outer_range)
+	if(light_power && light_range)
 		update_light()
 
 	if(opacity)
 		updateVisibility(src)
 		var/turf/T = loc
 		if(istype(T))
-			T.RecalculateOpacity()
+			T.recalc_atom_opacity()
 
 	return INITIALIZE_HINT_NORMAL
 
@@ -75,9 +75,7 @@
 	underlays.Cut()
 	global.is_currently_exploding -= src
 	QDEL_NULL(reagents)
-	if(light)
-		light.destroy()
-		light = null
+	QDEL_NULL(light)
 	if(opacity)
 		updateVisibility(src)
 	. = ..()
