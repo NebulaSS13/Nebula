@@ -69,22 +69,12 @@
 		else
 			light = new /datum/light_source(src, .)
 
-// If we have opacity, make sure to tell (potentially) affected light sources.
-/atom/movable/Destroy()
-	var/turf/T = loc
-
-	. = ..()
-
-	if (opacity && istype(T))
-		T.recalc_atom_opacity()
-		T.reconsider_lights()
-
 
 // Should always be used to change the opacity of an atom.
 // It notifies (potentially) affected light sources so they can update (if needed).
 /atom/set_opacity(var/new_opacity)
 	. = ..()
-	if (new_opacity == opacity)
+	if (!.)
 		return
 
 	opacity = new_opacity
