@@ -182,7 +182,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 				enemy_tile.adjacent_fire_act(loc, air_contents, air_contents.temperature, air_contents.volume)
 
 	animate(src, color = fire_color(air_contents.temperature), 5)
-	set_light(l_color = color)
+	set_light_new(l_color = color)
 
 /obj/fire/Initialize(mapload, fl)
 	. = ..()
@@ -194,7 +194,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	var/datum/gas_mixture/air_contents = loc.return_air()
 	color = fire_color(air_contents.temperature)
-	set_light(0.5, 1, 3, l_color = color)
+	set_light_new(3, 0.5, color)
 
 	firelevel = fl
 	SSair.active_hotspots.Add(src)

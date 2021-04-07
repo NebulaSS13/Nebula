@@ -146,7 +146,7 @@ var/global/list/narsie_list = list()
 			T.desc = "something that goes beyond your understanding went this way"
 			T.icon = 'icons/turf/flooring/cult.dmi'
 			T.icon_state = "cult-narsie"
-			T.set_light(1)
+			T.set_light_new(1)
 
 /obj/singularity/narsie/proc/narsiewall(var/turf/T)
 	T.desc = "An opening has been made on that wall, but who can say if what you seek truly lies on the other side?"
@@ -154,7 +154,7 @@ var/global/list/narsie_list = list()
 	T.icon_state = "cult-narsie"
 	T.set_opacity(0)
 	T.set_density(0)
-	set_light(1)
+	set_light_new(1)
 
 /obj/singularity/narsie/large/consume(const/atom/A) //Has its own consume proc because it doesn't need energy and I don't want BoHs to explode it. --NEO
 //NEW BEHAVIOUR

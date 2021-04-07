@@ -29,11 +29,11 @@
 	var/obj/effect/projectile/invislight/light = locate() in loc
 	if(light)
 		light.light_color = color
-		light.set_light(l_color = light.light_color)
+		light.set_light_new(l_color = light.light_color)
 
 /obj/item/projectile/beam/variable/update_effect(var/obj/effect/projectile/effect)
 	effect.color = color
-	effect.set_light(l_color = effect.light_color)
+	effect.set_light_new(l_color = effect.light_color)
 
 /obj/item/projectile/beam/variable/split
 	muzzle_type = /obj/effect/projectile/muzzle/variable_heavy

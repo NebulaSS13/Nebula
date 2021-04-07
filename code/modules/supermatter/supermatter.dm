@@ -328,7 +328,7 @@ var/list/supermatter_final_thoughts = list(
 //Changes color and luminosity of the light to these values if they were not already set
 /obj/machinery/power/supermatter/proc/shift_light(var/lum, var/clr)
 	if(lum != light_outer_range || clr != light_color)
-		set_light(1, 0.1, lum, l_color = clr)
+		set_light_new(lum, l_color = clr)
 
 /obj/machinery/power/supermatter/proc/get_integrity()
 	var/integrity = damage / explosion_point

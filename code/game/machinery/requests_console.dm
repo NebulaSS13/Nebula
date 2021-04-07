@@ -74,7 +74,7 @@ var/req_console_information = list()
 				break
 		if(!found_name)
 			set_department(department)
-	set_light(1)
+	set_light_new(1)
 
 /obj/machinery/network/requests_console/proc/set_department(var/decl/department/_department)
 	if(istype(_department))
@@ -175,7 +175,7 @@ var/req_console_information = list()
 				if(istype(Console) && Console.department == department)
 					Console.newmessagepriority = 0
 					Console.icon_state = "req_comp0"
-					Console.set_light(1)
+					Console.set_light_new(1)
 		if(tempScreen == RCS_MAINMENU)
 			reset_message()
 		screen = tempScreen

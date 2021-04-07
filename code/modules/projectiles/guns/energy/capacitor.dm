@@ -73,7 +73,7 @@ var/list/laser_wavelengths
 	. = ..()
 	if(loc == user || distance <= 1)
 		to_chat(user, "The wavelength selector is dialled to [selected_wavelength.name].")
-	
+
 /obj/item/gun/energy/capacitor/Destroy()
 	if(capacitors)
 		QDEL_NULL_LIST(capacitors)
@@ -94,7 +94,7 @@ var/list/laser_wavelengths
 
 /obj/item/gun/energy/capacitor/afterattack(atom/A, mob/living/user, adjacent, params)
 	. = !charging && ..()
-	
+
 /obj/item/gun/energy/capacitor/attackby(obj/item/W, mob/user)
 
 	if(charging)
@@ -213,9 +213,9 @@ var/list/laser_wavelengths
 			I.appearance_flags |= RESET_COLOR
 			add_overlay(I)
 
-	// So much of this item is overlay based that it looks weird when 
+	// So much of this item is overlay based that it looks weird when
 	// being picked up and having all the detail snap in a tick later.
-	compile_overlays() 
+	compile_overlays()
 
 	if(ismob(loc))
 		var/mob/M = loc
@@ -256,7 +256,7 @@ var/list/laser_wavelengths
 	if(charged)
 		var/obj/item/projectile/P = new projectile_type(src)
 		P.color = selected_wavelength.color
-		P.set_light(l_color = selected_wavelength.light_color)
+		P.set_light_new(l_color = selected_wavelength.light_color)
 		P.damage = Floor(sqrt(total_charge) * selected_wavelength.damage_multiplier)
 		P.armor_penetration = Floor(sqrt(total_charge) * selected_wavelength.armour_multiplier)
 		. = P
@@ -288,4 +288,4 @@ var/list/laser_wavelengths
 		return TRUE
 	. = ..()
 
-	
+
