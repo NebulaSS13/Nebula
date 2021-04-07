@@ -351,7 +351,7 @@
 			icon_state = "alarm1"
 			new_color = COLOR_RED_LIGHT
 
-	set_light_new(2, new_color)
+	set_light_new(2, 0.25, new_color)
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
 	if(!signal || signal.encryption)
@@ -874,7 +874,7 @@ FIRE ALARM
 	else
 		if(!detecting)
 			overlays += get_cached_overlay("fire1")
-			set_light_new(2, COLOR_RED)
+			set_light_new(2, 0.25, COLOR_RED)
 		else if(z in GLOB.using_map.contact_levels)
 			var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
 			var/decl/security_level/sl = security_state.current_security_level

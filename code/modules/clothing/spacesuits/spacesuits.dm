@@ -26,6 +26,7 @@
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
 	brightness_on = 0.5
+	light_wedge = LIGHT_WIDE
 	on = 0
 
 	var/obj/machinery/camera/camera

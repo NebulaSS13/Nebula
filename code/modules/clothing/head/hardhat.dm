@@ -18,6 +18,7 @@
 	)
 	flags_inv = 0
 	siemens_coefficient = 0.9
+	light_wedge = LIGHT_WIDE
 	heat_protection = SLOT_HEAD
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
