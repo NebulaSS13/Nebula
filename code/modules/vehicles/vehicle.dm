@@ -11,7 +11,7 @@
 	density = 1
 	anchored = 1
 	animate_movement=1
-	light_outer_range = 3
+	light_range = 3
 
 	can_buckle = 1
 	buckle_movable = 1
@@ -116,7 +116,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	if(severity == 1)
 		explode()
-	else 
+	else
 		if(severity == 2)
 			health -= rand(5,10)*fire_dam_coeff
 			health -= rand(10,20)*brute_dam_coeff
@@ -161,7 +161,7 @@
 	if(powered && cell.charge < (charge_use * CELLRATE))
 		return 0
 	on = 1
-	set_light(0.8, 1, 5)
+	set_light_new(5, 0.8)
 	update_icon()
 	return 1
 

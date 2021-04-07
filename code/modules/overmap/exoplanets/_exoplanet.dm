@@ -142,7 +142,7 @@
 	if(!night)
 		light = lightlevel
 	for(var/turf/exterior/T in block(locate(daycolumn,1,min(map_z)),locate(daycolumn,maxy,max(map_z))))
-		T.set_light(light, 0.1, 2)
+		T.set_light_new(light)
 	daycolumn++
 	if(daycolumn > maxx)
 		daycolumn = 0

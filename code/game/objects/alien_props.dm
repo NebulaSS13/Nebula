@@ -65,7 +65,7 @@
 	. = ..()
 	if(!random_light_color)
 		random_light_color = get_random_colour(FALSE, 100, 255)
-	b_colour = random_light_color
+	b_color = random_light_color
 	color = random_light_color
 
 //Airlock

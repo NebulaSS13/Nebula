@@ -73,7 +73,7 @@
 		owner = null
 	else
 		//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
-		set_light(owner.lightlevel, 0.1, 2)
+		set_light_new(owner.lightlevel)
 		if(owner.planetary_area && istype(loc, world.area))
 			ChangeArea(src, owner.planetary_area)
 	. = ..()

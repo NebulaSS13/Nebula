@@ -26,7 +26,7 @@
 	var/lifetime = 10 SECONDS
 	var/expiry_time
 	var/list/decompiled_matter
-	
+
 /obj/effect/decompiler/Initialize()
 	. = ..()
 	expiry_time = world.time + lifetime
@@ -37,7 +37,7 @@
 /obj/effect/decompiler/proc/fade_in()
 	visible_message(SPAN_DANGER("\A [src] forms, reaching out hungrily!"))
 	playsound(loc, 'sound/magic/ethereal_enter.ogg', 75, FALSE)
-	set_light(0.8, 0, 4.5, l_color = LIGHT_COLOR_PURPLE)
+	set_light_new(4.5, 0.8, LIGHT_COLOR_PURPLE)
 	var/matrix/M = matrix()
 	M.Scale(0.01)
 	transform = M
@@ -89,7 +89,7 @@
 			var/atom/movable/thing = pick_n_take(eating)
 			if(QDELETED(thing) || !istype(thing) || !thing.simulated || thing.anchored || prob(15))
 				continue
-			
+
 			if(prob(30))
 
 				if(ismob(thing) && prob(50))
@@ -106,7 +106,7 @@
 							limb.forceMove(src)
 							thing = limb
 							break
-						
+
 			if(isitem(thing))
 				var/obj/item/eating_obj = thing
 				for(var/mat in eating_obj.matter)

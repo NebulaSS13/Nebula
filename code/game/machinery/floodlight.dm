@@ -50,7 +50,7 @@
 	return 1
 
 /obj/machinery/floodlight/proc/turn_off(var/loud = 0)
-	set_light(0, 0)
+	set_light(0)
 	update_use_power(POWER_USE_OFF)
 	if(loud)
 		visible_message("\The [src] shuts down.")

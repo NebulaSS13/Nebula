@@ -14,7 +14,7 @@
 	lawupdate = 0
 	density = 1
 	req_access = list(access_engine, access_robotics)
-	integrated_light_max_bright = 0.5
+	integrated_light_power = 0.5
 	local_transmit = 1
 	possession_candidate = 1
 	speed = -1
