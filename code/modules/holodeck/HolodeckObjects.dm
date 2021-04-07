@@ -424,7 +424,7 @@
 
 /mob/living/simple_animal/hostile/carp/holodeck/Initialize()
 	. = ..()
-	set_light_new(2) //hologram lighting
+	set_light(2) //hologram lighting
 
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
 	if (safe)

@@ -161,7 +161,7 @@
 	if(powered && cell.charge < (charge_use * CELLRATE))
 		return 0
 	on = 1
-	set_light_new(5, 0.8)
+	set_light(5, 0.8)
 	update_icon()
 	return 1
 

@@ -201,7 +201,7 @@
 		burn_fuel(amount)
 		if(M)
 			M.welding_eyecheck()//located in mob_helpers.dm
-			set_light_new(5, 0.7, COLOR_LIGHT_CYAN)
+			set_light(5, 0.7, COLOR_LIGHT_CYAN)
 			addtimer(CALLBACK(src, /atom/proc/update_icon), 5)
 		return 1
 	else
@@ -251,7 +251,7 @@
 			I.layer = ABOVE_LIGHTING_LAYER
 			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		add_overlay(I)
-		set_light_new(2.5, 0.6, lit_colour)
+		set_light(2.5, 0.6, lit_colour)
 	else
 		set_light(0)
 	var/mob/M = loc

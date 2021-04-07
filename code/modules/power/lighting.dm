@@ -167,9 +167,9 @@
 
 		var/changed = 0
 		if(current_mode && (current_mode in lightbulb.lighting_modes))
-			changed = set_light_new(arglist(lightbulb.lighting_modes[current_mode]))
+			changed = set_light(arglist(lightbulb.lighting_modes[current_mode]))
 		else
-			changed = set_light_new(lightbulb.b_range, lightbulb.b_power, lightbulb.b_color)
+			changed = set_light(lightbulb.b_range, lightbulb.b_power, lightbulb.b_color)
 
 		if(trigger && changed && get_status() == LIGHT_OK)
 			switch_check()

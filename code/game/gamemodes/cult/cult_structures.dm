@@ -67,7 +67,7 @@
 		isbroken = 0
 		set_density(1)
 		icon_state = "pylon"
-		set_light_new(13, 0.5)
+		set_light(13, 0.5)
 
 /obj/structure/cult/pylon/get_artifact_scan_data()
 	return "Tribal pylon - subject resembles statues/emblems built by cargo cult civilisations to honour energy systems from post-warp civilisations."
@@ -163,4 +163,3 @@
 			new_mob.key = M.key
 
 		to_chat(new_mob, "<B>Your form morphs into that of a corgi.</B>")//Because we don't have cluwnes
-

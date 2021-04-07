@@ -430,9 +430,9 @@
 /mob/living/silicon/robot/proc/update_robot_light()
 	if(lights_on)
 		if(intenselight)
-			set_light_new(integrated_light_power * 2, integrated_light_power)
+			set_light(integrated_light_power * 2, integrated_light_power)
 		else
-			set_light_new(integrated_light_power)
+			set_light(integrated_light_power)
 	else
 		set_light(0)
 

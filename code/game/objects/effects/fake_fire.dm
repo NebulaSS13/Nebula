@@ -11,7 +11,7 @@
 
 /obj/effect/fake_fire/Initialize()
 	. = ..()
-	set_light_new(3, 0.5, color)
+	set_light(3, 0.5, color)
 	START_PROCESSING(SSobj,src)
 	if(lifetime)
 		QDEL_IN(src,lifetime)

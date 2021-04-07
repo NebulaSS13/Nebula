@@ -31,17 +31,17 @@
 
 	// If the cell is almost empty rarely "flicker" the light. Aesthetic only.
 	if(prob(30))
-		set_light_new(l_range, l_power / 2)
+		set_light(l_range, l_power / 2)
 		spawn(20)
 			if(use_power)
-				set_light_new(l_range, l_power)
+				set_light(l_range, l_power)
 
 // Returns 0 on failure and 1 on success
 /obj/machinery/floodlight/proc/turn_on(var/loud = 0)
 	if(stat & NOPOWER)
 		return 0
 
-	set_light_new(l_range, l_power)
+	set_light(l_range, l_power)
 	update_use_power(POWER_USE_ACTIVE)
 	use_power_oneoff(active_power_usage)//so we drain cell if they keep trying to use it
 	if(loud)
@@ -76,4 +76,4 @@
 	l_range = light_mod*1.5 + initial(l_range)
 	change_power_consumption(initial(active_power_usage) * light_mod , POWER_USE_ACTIVE)
 	if(use_power)
-		set_light_new(l_range, l_power)
+		set_light(l_range, l_power)

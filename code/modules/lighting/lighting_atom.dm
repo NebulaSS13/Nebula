@@ -14,15 +14,11 @@
 	var/tmp/list/light_source_multi       // Any light sources that are "inside" of us, for example, if src here was a mob that's carrying a flashlight, that flashlight's light source would be part of this list.
 	var/tmp/datum/light_source/light_source_solo    // Same as above - this is a shortcut to avoid allocating the above list if we can
 
-// Nonesensical value for l_color default, so we can detect if it gets set to null.
+// Nonsensical value for l_color default, so we can detect if it gets set to null.
 #define NONSENSICAL_VALUE -99999
 
-// Temporary: remaps old args to new
-/atom/proc/set_light(l_max_bright, l_inner_range, l_outer_range, l_falloff_curve = NONSENSICAL_VALUE, l_color = NONSENSICAL_VALUE)
-	set_light_new(l_outer_range, l_max_bright, l_color)
-
 // The proc you should always use to set the light of this atom.
-/atom/proc/set_light_new(l_range, l_power, l_color = NONSENSICAL_VALUE, angle = NONSENSICAL_VALUE, no_update = FALSE)
+/atom/proc/set_light(l_range, l_power, l_color = NONSENSICAL_VALUE, angle = NONSENSICAL_VALUE, no_update = FALSE)
 	if(l_range > 0 && l_range < MINIMUM_USEFUL_LIGHT_RANGE)
 		l_range = MINIMUM_USEFUL_LIGHT_RANGE	//Brings the range up to 1.4
 	if (l_power != null)

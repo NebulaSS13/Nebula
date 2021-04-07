@@ -49,7 +49,7 @@
 
 /obj/item/clothing/head/proc/update_flashlight(var/mob/user = null)
 	if(on && !light_applied)
-		set_light_new(brightness_on)
+		set_light(brightness_on)
 		light_applied = 1
 	else if(!on && light_applied)
 		set_light(0)

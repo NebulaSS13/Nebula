@@ -223,7 +223,7 @@
 		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		I.layer = ABOVE_LIGHTING_LAYER
 		add_overlay(I)
-		set_light_new(4, 0.4)
+		set_light(4, 0.4)
 	else
 		set_light(0)
 		if (operable())

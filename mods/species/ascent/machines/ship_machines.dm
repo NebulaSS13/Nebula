@@ -190,7 +190,7 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 
 	if(on)
 		overlays |= field_image
-		set_light_new(6, 0.8, COLOR_CYAN)
+		set_light(6, 0.8, COLOR_CYAN)
 		icon_state = "core1"
 	else
 		overlays -= field_image

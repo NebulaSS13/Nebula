@@ -153,7 +153,7 @@
 				glowing = TRUE
 				break
 		if(glowing)
-			set_light_new(1, 0.2, COLOR_GREEN)
+			set_light(1, 0.2, COLOR_GREEN)
 		else
 			set_light(0)
 

@@ -37,7 +37,7 @@
 /obj/effect/decompiler/proc/fade_in()
 	visible_message(SPAN_DANGER("\A [src] forms, reaching out hungrily!"))
 	playsound(loc, 'sound/magic/ethereal_enter.ogg', 75, FALSE)
-	set_light_new(4.5, 0.8, LIGHT_COLOR_PURPLE)
+	set_light(4.5, 0.8, LIGHT_COLOR_PURPLE)
 	var/matrix/M = matrix()
 	M.Scale(0.01)
 	transform = M

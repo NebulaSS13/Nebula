@@ -275,7 +275,7 @@
 	eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	eye_glow.layer = EYE_GLOW_LAYER
 	overlays += eye_glow
-	set_light_new(1.5, -2, "#ffffff")
+	set_light(1.5, -2, "#ffffff")
 
 ////////////////HUD//////////////////////
 

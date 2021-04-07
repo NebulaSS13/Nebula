@@ -21,7 +21,7 @@
 
 /obj/structure/flora/seaweed/glow/Initialize()
 	. = ..()
-	set_light_new(3, 0.6, l_color = light_color)
+	set_light(3, 0.6, l_color = light_color)
 	icon_state = "glowweed[rand(1,3)]"
 
 /obj/effect/decal/cleanable/lichen
