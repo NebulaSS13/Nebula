@@ -33,9 +33,9 @@
 		)
 
 	var/light_min_range = 2
-	var/light_min_power = 0.2
-	var/light_max_range = 18
-	var/light_max_power = 1
+	var/light_min_power = 3
+	var/light_max_range = 12
+	var/light_max_power = 12
 
 	var/last_range
 	var/last_power
