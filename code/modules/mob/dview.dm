@@ -4,7 +4,12 @@
 var/mob/dview/dview_mob = new
 
 /mob/dview
+	anchored = TRUE
+	density = FALSE
+	invisibility = INVISIBILITY_ABSTRACT
 	see_in_dark = 1e6
+	simulated = FALSE
+	virtual_mob = null
 
 /mob/dview/Destroy(force = FALSE)
 	SHOULD_CALL_PARENT(FALSE)
