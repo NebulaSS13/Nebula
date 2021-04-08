@@ -174,6 +174,8 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 
 //DEFINITIONS FOR ASSET DATUMS START HERE.
+var/template_file_name = "all_templates.json"
+
 /datum/asset/nanoui
 	var/list/common = list()
 
@@ -185,9 +187,10 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		"nano/js/"
 	)
 	var/list/uncommon_dirs = list(
-		"nano/templates/",
 		"news_articles/images/"
 	)
+	var/template_dir = "nano/templates/"
+	var/template_temp_dir = "data/"
 
 /datum/asset/nanoui/register()
 	// Crawl the directories to find files.
@@ -204,6 +207,19 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 			if(copytext(filename, length(filename)) != "/") // Ignore directories.
 				if(fexists(path + filename))
 					register_asset(filename, fcopy_rsc(path + filename))
+
+	var/list/templates = flist(template_dir)
+	for(var/filename in templates)
+		if(copytext(filename, length(filename)) != "/")
+			templates[filename] = replacetext(replacetext(file2text(template_dir + filename), "\n", ""), "\t", "")
+		else
+			templates -= filename
+	var/full_file_name = template_temp_dir + global.template_file_name
+	if(fexists(full_file_name))
+		fdel(file(full_file_name))
+	var/template_file = file(full_file_name)
+	to_file(template_file, json_encode(templates))
+	register_asset(global.template_file_name, fcopy_rsc(template_file))
 
 	var/list/mapnames = list()
 	for(var/z in GLOB.using_map.map_levels)
