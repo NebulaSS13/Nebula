@@ -59,7 +59,6 @@
 	desc = "A simple alien device, perhaps some sort of light source."
 	color = COLOR_PURPLE
 	var/global/random_light_color
-	random_tone = FALSE
 
 /obj/item/light/alien/Initialize()
 	. = ..()
