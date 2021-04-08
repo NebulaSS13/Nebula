@@ -61,6 +61,7 @@
 
 // This color of overlay is very common - most of the station is this color when lit fully.
 // Tube lights are a bluish-white, so we can't just assume 1-1-1 is full-illumination.
+// -- If you want to change these, find them *by checking in-game*, just converting tubes' RGB color into floats will not work!
 #define LIGHTING_DEFAULT_TUBE_R 0.96
 #define LIGHTING_DEFAULT_TUBE_G 1
 #define LIGHTING_DEFAULT_TUBE_B 1

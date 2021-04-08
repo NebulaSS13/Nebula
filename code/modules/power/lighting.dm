@@ -506,18 +506,6 @@
 	var/b_color = LIGHT_COLOR_HALOGEN
 	var/list/lighting_modes = list()
 	var/sound_on
-	var/random_tone = TRUE
-	var/static/list/random_tone_options = list(
-		"#fffee0",
-		"#e0fefe",
-		"#fefefe",
-	)
-
-/obj/item/light/Initialize()
-	. = ..()
-	if (random_tone)
-		b_color = pick(random_tone_options)
-		update_icon()
 
 /obj/item/light/get_color()
 	return b_color
@@ -538,8 +526,8 @@
 	b_range = 5
 	b_color = LIGHT_COLOR_HALOGEN
 	lighting_modes = list(
-		LIGHTMODE_EMERGENCY = list(l_range = 4, l_power = 1, l_color = "#da0205"),
-		)
+		LIGHTMODE_EMERGENCY = list(l_range = 4, l_power = 1, l_color = LIGHT_COLOR_EMERGENCY),
+	)
 	sound_on = 'sound/machines/lightson.ogg'
 
 /obj/item/light/tube/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
@@ -569,18 +557,17 @@
 	b_range = 4
 	b_color = LIGHT_COLOR_TUNGSTEN
 	lighting_modes = list(
-		LIGHTMODE_EMERGENCY = list(l_range = 3, l_power = 1, l_color = "#da0205"),
-		)
+		LIGHTMODE_EMERGENCY = list(l_range = 3, l_power = 1, l_color = LIGHT_COLOR_EMERGENCY),
+	)
 
 /obj/item/light/bulb/red
-	color = "#da0205"
-	b_color = "#da0205"
-	random_tone = FALSE
+	color = LIGHT_COLOR_RED
+	b_color = LIGHT_COLOR_RED
 
 /obj/item/light/bulb/red/readylight
 	lighting_modes = list(
-		LIGHTMODE_READY = list(l_range = 5, l_power = 1, l_color = "#00ff00"),
-		)
+		LIGHTMODE_READY = list(l_range = 5, l_power = 1, l_color = LIGHT_COLOR_GREEN),
+	)
 
 /obj/item/light/throw_impact(atom/hit_atom)
 	..()
