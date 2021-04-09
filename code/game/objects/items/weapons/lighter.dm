@@ -45,7 +45,7 @@
 	lit = 1
 	update_icon()
 	light_effects(user)
-	set_light(2, COLOR_PALE_ORANGE)
+	set_light(2, l_color = COLOR_PALE_ORANGE)
 	START_PROCESSING(SSobj, src)
 
 /obj/item/flame/lighter/proc/light_effects(mob/living/carbon/user)

@@ -275,7 +275,7 @@
 	activation_sound = 'sound/effects/flare.ogg'
 	flashlight_flags = FLASHLIGHT_SINGLE_USE
 
-	flashlight_range = 8
+	flashlight_range = 5
 	flashlight_power = 3
 	light_wedge = LIGHT_OMNI
 
@@ -354,7 +354,7 @@
 	produce_heat = 0
 	activation_sound = 'sound/effects/glowstick.ogg'
 
-	flashlight_range = 4
+	flashlight_range = 3
 	flashlight_power = 2
 
 /obj/item/flashlight/flare/glowstick/Initialize()
@@ -419,7 +419,7 @@
 	on = TRUE //Bio-luminesence has one setting, on.
 	flashlight_flags = FLASHLIGHT_ALWAYS_ON
 
-	flashlight_range = 6
+	flashlight_range = 5
 	light_wedge = LIGHT_OMNI
 
 //hand portable floodlights for emergencies. Less bulky than the large ones. But also less light. Unused green variant in the sheet.
