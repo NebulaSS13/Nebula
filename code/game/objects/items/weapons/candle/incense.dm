@@ -5,7 +5,6 @@
 
 	available_colours = null
 	icon_set = "incense"
-	candle_power = 0.1
 	candle_range = 1
 
 	scent_types = list(/decl/scent_type/rose,
