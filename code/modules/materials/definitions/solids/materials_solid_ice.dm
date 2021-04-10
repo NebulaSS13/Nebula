@@ -6,6 +6,7 @@
 	)
 	name = "ice"
 	ore_name = "ice"
+	taste_description = "ice"
 	ore_spread_chance = 25
 	ore_scan_icon = "mineral_common"
 	ore_icon_overlay = "lump"
