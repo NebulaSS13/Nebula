@@ -53,6 +53,7 @@
 	ore_data_value = 2
 
 /decl/material/solid/metal/bronze
+	name = "bronze"
 	lore_text = "An alloy of copper and tin. Once used in weapons and laboring tools."
 	stack_type = /obj/item/stack/material/bronze
 	color = "#ccbc63"
@@ -62,6 +63,7 @@
 	value = 1.2
 
 /decl/material/solid/metal/brass
+	name = "brass"
 	lore_text = "An alloy of copper and zinc. Renowned for its golden color."
 	stack_type = /obj/item/stack/material/brass
 	color = "#dab900"
@@ -72,7 +74,7 @@
 
 /decl/material/solid/metal/copper
 	name = "copper"
-	lore_text = "A metal used in some components and many alloys. Known for its color shifting properties when oxidized."
+	lore_text = "A metal used in some components and many alloys. Known for its color-shifting properties when oxidized."
 	stack_type = /obj/item/stack/material/copper
 	color = COLOR_COPPER
 	weight = MAT_VALUE_NORMAL

@@ -367,7 +367,7 @@
 	icon_state = "ingot"
 	plural_icon_state = "ingot-mult"
 	max_icon_state = "ingot-max"
-	material = /decl/materal/solid/metal/zinc
+	material = /decl/material/solid/metal/zinc
 
 /obj/item/stack/material/zinc/ten
 	amount = 10
@@ -380,7 +380,7 @@
 	icon_state = "ingot"
 	plural_icon_state = "ingot-mult"
 	max_icon_state = "ingot-max"
-	material = /decl/materal/solid/metal/tungsten
+	material = /decl/material/solid/metal/tungsten
 
 /obj/item/stack/material/tungsten/ten
 	amount = 10
