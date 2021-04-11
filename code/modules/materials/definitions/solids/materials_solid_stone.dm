@@ -12,6 +12,8 @@
 	dissolves_into = list(
 		/decl/material/solid/silicon = 1
 	)
+	sheet_singular_name = "block"
+	sheet_plural_name = "blocks"
 
 /decl/material/solid/stone/generate_recipes(var/reinforce_material)
 	. = ..()

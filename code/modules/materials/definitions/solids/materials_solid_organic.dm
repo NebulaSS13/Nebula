@@ -20,6 +20,8 @@
 	fuel_value = 0.6
 	burn_product = /decl/material/gas/carbon_monoxide // placeholder for more appropriate toxins
 	dooropen_noise = 'sound/effects/doorcreaky.ogg'
+	sheet_singular_name = "sheet"
+	sheet_plural_name = "sheets"
 
 /decl/material/solid/plastic/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -64,6 +66,8 @@
 	value = 0.5
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
+	sheet_singular_name = "sheet"
+	sheet_plural_name = "sheets"
 
 /decl/material/solid/cardboard/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -92,6 +96,8 @@
 	hardness = MAT_VALUE_SOFT
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
+	sheet_singular_name = "bolt"
+	sheet_plural_name = "bolts"
 
 /decl/material/solid/cloth/yellow
 	name = "yellow"
@@ -184,6 +190,8 @@
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = MAT_VALUE_LIGHT
 	value = 0.8
+	sheet_singular_name = "slab" //no more meat ingots pls
+	sheet_plural_name = "slabs"
 
 /decl/material/solid/skin
 	name = "skin"
@@ -203,6 +211,8 @@
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	value = 1.2
 	var/tans_to = /decl/material/solid/leather
+	sheet_singular_name = "sheet"
+	sheet_plural_name = "sheets"
 
 /decl/material/solid/skin/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -231,6 +241,8 @@
 	name = "fur"
 	color = "#7a726d"
 	tans_to = /decl/material/solid/leather/fur
+	sheet_singular_name = "pelt"
+	sheet_plural_name = "pelts"
 
 /decl/material/solid/skin/fur/gray
 
@@ -328,6 +340,8 @@
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 	reflectiveness = MAT_VALUE_MATTE
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
+	sheet_singular_name = "sheet"
+	sheet_plural_name = "sheets"
 
 /decl/material/solid/leather/generate_recipes(var/reinforce_material)
 	. = ..()

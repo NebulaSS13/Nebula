@@ -97,6 +97,8 @@
 	hitsound = 'sound/weapons/smash.ogg'
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	value = 1.1
+	sheet_singular_name = "sheet"
+	sheet_plural_name = "sheets"
 	dissolves_into = list(
 		/decl/material/solid/metal/iron = 0.98,
 		/decl/material/solid/carbon = 0.02
@@ -160,6 +162,8 @@
 	color = "#cccdcc"
 	hitsound = 'sound/weapons/smash.ogg'
 	taste_description = "metal"
+	sheet_singular_name = "sheet"
+	sheet_plural_name = "sheets"
 
 /decl/material/solid/metal/aluminium/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -195,6 +199,8 @@
 	hitsound = 'sound/weapons/smash.ogg'
 	value = 1.4
 	reflectiveness = MAT_VALUE_MATTE
+	sheet_singular_name = "sheet"
+	sheet_plural_name = "sheets"
 
 /decl/material/solid/metal/plasteel/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -247,6 +253,8 @@
 	stack_origin_tech = "{'materials':3}"
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	value = 1.8
+	sheet_singular_name = "sheet"
+	sheet_plural_name = "sheets"
 
 /decl/material/solid/metal/osmium
 	name = "osmium"
