@@ -46,6 +46,7 @@
 	//How we smooth with space and openspace tiles
 	var/space_smooth = SMOOTH_ALL
 	//There are no lists for spaces
+	var/z_flags //same z flags used for turfs, i.e ZMIMIC_DEFAULT etc
 
 /decl/flooring/proc/on_remove()
 	return
@@ -371,6 +372,7 @@
 	flags = TURF_REMOVE_CROWBAR | TURF_ACID_IMMUNE
 	can_engrave = FALSE
 	color = GLASS_COLOR
+	z_flags = ZM_MIMIC_BELOW
 
 /decl/flooring/glass/boro
 	name = "borosilicate glass flooring"

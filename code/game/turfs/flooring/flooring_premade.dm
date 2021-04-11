@@ -371,7 +371,6 @@
 /turf/simulated/floor/glass
 	icon = 'icons/turf/flooring/glassfloor.dmi'
 	icon_state = "glassfloor"
-	z_flags = ZM_MIMIC_DEFAULTS
 	initial_flooring = /decl/flooring/glass
 
 /turf/simulated/floor/glass/boro
