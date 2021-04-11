@@ -20,6 +20,8 @@
 	hitsound = 'sound/effects/Glasshit.ogg'
 	conductive = 0
 	wall_support_value = MAT_VALUE_LIGHT
+	sheet_singular_name = "sheet"
+	sheet_plural_name = "sheets"
 
 /decl/material/solid/glass/proc/is_reinforced()
 	return (integrity > 75) //todo

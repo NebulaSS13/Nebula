@@ -60,7 +60,7 @@
 	. += new/datum/stack_recipe/prosthetic/left_foot(src)
 	. += new/datum/stack_recipe/prosthetic/right_foot(src)
 	. += new/datum/stack_recipe/campfire(src)
-	
+
 /decl/material/solid/wood/mahogany/generate_recipes(var/reinforce_material)
 	. = ..()
 	if(reinforce_material)
