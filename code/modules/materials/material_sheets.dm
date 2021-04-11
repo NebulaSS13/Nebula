@@ -323,10 +323,76 @@
 /obj/item/stack/material/aluminium/fifty
 	amount = 50
 
+/obj/item/stack/material/copper
+	name = "copper"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
+	max_icon_state = "ingot-max"
+	material = /decl/material/solid/metal/copper
+
+/obj/item/stack/material/copper/ten
+	amount = 10
+
+/obj/item/stack/material/copper/fifty
+	amount = 50
+
+/obj/item/stack/material/tin
+	name = "tin"
+	icon_state = "sheet"
+	plural_icon_state = "sheet-mult"
+	max_icon_state = "sheet-max"
+	material = /decl/material/solid/metal/tin
+
+/obj/item/stack/material/tin/ten
+	amount = 10
+
+/obj/item/stack/material/tin/fifty
+	amount = 50
+
+/obj/item/stack/material/lead
+	name = "lead"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
+	max_icon_state = "ingot-max"
+	material = /decl/material/solid/metal/lead
+
+/obj/item/stack/material/lead/ten
+	amount = 10
+
+/obj/item/stack/material/lead/fifty
+	amount = 50
+
+/obj/item/stack/material/zinc
+	name = "zinc"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
+	max_icon_state = "ingot-max"
+	material = /decl/materal/solid/metal/zinc
+
+/obj/item/stack/material/zinc/ten
+	amount = 10
+
+/obj/item/stack/material/zinc/fifty
+	amount = 50
+
+/obj/item/stack/material/tungsten
+	name = "tungsten"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
+	max_icon_state = "ingot-max"
+	material = /decl/materal/solid/metal/tungsten
+
+/obj/item/stack/material/tungsten/ten
+	amount = 10
+
+/obj/item/stack/material/tungsten/fifty
+	amount = 50
+
 /obj/item/stack/material/titanium
 	name = "titanium"
 	icon_state = "sheet"
 	plural_icon_state = "sheet-mult"
+	max_icon_state = "sheet-max"
 	material = /decl/material/solid/metal/titanium
 
 /obj/item/stack/material/titanium/ten
@@ -347,6 +413,32 @@
 	amount = 10
 
 /obj/item/stack/material/plasteel/fifty
+	amount = 50
+
+/obj/item/stack/material/bronze
+	name = "bronze"
+	icon_state = "sheet"
+	plural_icon_state = "sheet-mult"
+	max_icon_state = "sheet-max"
+	material = /decl/material/solid/metal/bronze
+
+/obj/item/stack/material/bronze/ten
+	amount = 10
+
+/obj/item/stack/material/bronze/fifty
+	amount = 50
+
+/obj/item/stack/material/brass
+	name = "brass"
+	icon_state = "sheet"
+	plural_icon_state = "sheet-mult"
+	max_icon_state = "sheet-max"
+	material = /decl/material/solid/metal/brass
+
+/obj/item/stack/material/brass/ten
+	amount = 10
+
+/obj/item/stack/material/brass/fifty
 	amount = 50
 
 /obj/item/stack/material/wood
