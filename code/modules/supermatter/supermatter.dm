@@ -24,6 +24,34 @@
 
 #define WARNING_DELAY 20			//seconds between warnings.
 
+//This is really gross and I hate doing it like this.
+
+var/list/accent_sounds_calm = list(
+		'sound/machines/supermatter/calm/1.ogg',
+		'sound/machines/supermatter/calm/2.ogg',
+		'sound/machines/supermatter/calm/3.ogg',
+		'sound/machines/supermatter/calm/4.ogg',
+		'sound/machines/supermatter/calm/5.ogg',
+		'sound/machines/supermatter/calm/6.ogg',
+		'sound/machines/supermatter/calm/7.ogg',
+		'sound/machines/supermatter/calm/8.ogg',
+		'sound/machines/supermatter/calm/9.ogg',
+		'sound/machines/supermatter/calm/10.ogg'
+		)
+
+var/list/accent_sounds_delam = list(
+		'sound/machines/supermatter/delam/1.ogg',
+		'sound/machines/supermatter/delam/2.ogg',
+		'sound/machines/supermatter/delam/3.ogg',
+		'sound/machines/supermatter/delam/4.ogg',
+		'sound/machines/supermatter/delam/5.ogg',
+		'sound/machines/supermatter/delam/6.ogg',
+		'sound/machines/supermatter/delam/7.ogg',
+		'sound/machines/supermatter/delam/8.ogg',
+		'sound/machines/supermatter/delam/9.ogg',
+		'sound/machines/supermatter/delam/10.ogg'
+		)
+
 var/list/supermatter_final_thoughts = list(
 	"Oh, fuck.",
 	"That was not a wise decision."
@@ -158,6 +186,10 @@ var/list/supermatter_final_thoughts = list(
 	var/aw_emerg = FALSE
 	var/aw_delam = FALSE
 	var/aw_EPR = FALSE
+
+	var/datum/sound_token/sound_token
+	var/sound_id
+	var/working_sound
 
 	var/list/threshholds = list( // List of lists defining the amber/red labeling threshholds in readouts. Numbers are minminum red and amber and maximum amber and red, in that order
 		list("name" = SUPERMATTER_DATA_EER,         "min_h" = -1, "min_l" = -1,  "max_l" = 150,  "max_h" = 300),
@@ -464,10 +496,11 @@ var/list/supermatter_final_thoughts = list(
 		var/effect = max(0, min(200, power * config_hallucination_power * sqrt( 1 / max(1,get_dist(subject, src)))) )
 		subject.adjust_hallucination(effect, 0.25 * effect)
 
-
 	SSradiation.radiate(src, power * radiation_release_modifier) //Better close those shutters!
 	power -= (power/decay_factor)**3		//energy losses due to radiation
 	handle_admin_warnings()
+
+	update_sound()
 
 	return 1
 
@@ -573,6 +606,30 @@ var/list/supermatter_final_thoughts = list(
 
 /obj/machinery/power/supermatter/get_artifact_scan_data()
 	return "Superdense crystalline structure - appears to have been shaped or hewn, lattice is approximately 20 times denser than should be possible."
+
+/obj/machinery/power/supermatter/proc/update_sound()
+	if(!sound_id)
+		sound_id = "[type]_[sequential_id(/obj/machinery/power/supermatter)]"
+
+	switch(damage)
+		if(0 to warning_point)
+			working_sound = 'sound/machines/supermatter/sm_calm.ogg'
+		if(warning_point to INFINITY)
+			working_sound = 'sound/machines/supermatter/sm_delam.ogg'
+	if(power > 0)
+		var/volume = 10 + max(100, (15*power))
+		if(!sound_token)
+			sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, working_sound, volume = volume)
+		sound_token.SetVolume(volume)
+		addtimer(CALLBACK(src, .proc/play_accent_sound), 6 SECONDS)
+	else if(sound_token)
+		QDEL_NULL(sound_token)
+
+/obj/machinery/power/supermatter/proc/play_accent_sound() //This is a proc purely so i can call it via timer.
+	if(damage > warning_point)
+		playsound(src, pick(accent_sounds_delam), 50, 1)
+	else
+		playsound(src, pick(accent_sounds_calm), 50, 1)
 
 /obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
 	name = "Supermatter Shard"
