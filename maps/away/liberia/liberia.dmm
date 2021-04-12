@@ -2536,30 +2536,28 @@
 	name = "basic resources crate";
 	req_access = list("ACCESS_MERCHANT")
 	},
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
-/obj/item/stack/material/plasteel{
-	amount = 40
-	},
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/plastic/fifty,
-/obj/item/stack/material/plastic/fifty,
-/obj/item/stack/material/glass/reinforced/fifty,
-/obj/item/stack/material/glass/reinforced/fifty,
-/obj/item/stack/material/wood/fifty,
-/obj/item/stack/material/wood/fifty,
+/obj/item/stack/material/reinforced/mapped/plasteel/forty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/panel/mapped/plastic/fifty,
+/obj/item/stack/material/panel/mapped/plastic/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/plank/mapped/wood/fifty,
+/obj/item/stack/material/plank/mapped/wood/fifty,
 /obj/machinery/door/window/brigdoor/northleft{
 	req_access = newlist()
 	},
-/obj/item/stack/material/titanium/fifty,
-/obj/item/stack/material/plastic/fifty,
-/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/reinforced/mapped/titanium/fifty,
+/obj/item/stack/material/panel/mapped/plastic/fifty,
+/obj/item/stack/material/shiny/mapped/aluminium/fifty,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "ed" = (
@@ -2597,10 +2595,10 @@
 	name = "resources crate";
 	req_access = list("ACCESS_MERCHANT")
 	},
-/obj/item/stack/material/diamond/ten,
-/obj/item/stack/material/gold/ten,
-/obj/item/stack/material/silver/ten,
-/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/gemstone/mapped/diamond/ten,
+/obj/item/stack/material/ingot/mapped/gold/ten,
+/obj/item/stack/material/ingot/mapped/silver/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
 /obj/machinery/door/window/brigdoor/northleft{
 	req_access = newlist()
 	},
@@ -2944,19 +2942,13 @@
 /area/liberia/atmos)
 "eN" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/glass{
-	amount = 15
-	},
-/obj/item/stack/material/plastic{
-	amount = 10
-	},
-/obj/item/stack/material/steel{
-	amount = 10
-	},
+/obj/item/stack/material/pane/mapped/glass/fifteen,
+/obj/item/stack/material/panel/mapped/plastic/ten,
+/obj/item/stack/material/sheet/mapped/steel/ten,
 /obj/item/paint_sprayer,
 /obj/item/clothing/gloves/insulated,
 /obj/item/suit_cooling_unit,
-/obj/item/stack/material/aluminium/ten,
+/obj/item/stack/material/shiny/mapped/aluminium/ten,
 /obj/effect/floor_decal/borderfloor{
 	dir = 8
 	},
@@ -6730,7 +6722,7 @@
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack/dark,
-/obj/item/stack/material/wood/bamboo/fifty,
+/obj/item/stack/material/plank/mapped/wood/bamboo/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "os" = (
@@ -7026,9 +7018,9 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "rc" = (
@@ -7268,14 +7260,14 @@
 /turf/simulated/floor/wood/walnut,
 /area/liberia/library)
 "sY" = (
-/obj/item/stack/material/plastic/ten{
+/obj/item/stack/material/panel/mapped/plastic/ten{
 	pixel_x = -4;
 	pixel_y = -4
 	},
-/obj/item/stack/material/aluminium/ten{
+/obj/item/stack/material/shiny/mapped/aluminium/ten{
 	pixel_y = -4
 	},
-/obj/item/stack/material/glass/ten{
+/obj/item/stack/material/pane/mapped/glass/ten{
 	pixel_x = 4;
 	pixel_y = -4
 	},
@@ -7521,8 +7513,8 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/stack/material/plastic/fifty,
-/obj/item/stack/material/plastic/fifty,
+/obj/item/stack/material/panel/mapped/plastic/fifty,
+/obj/item/stack/material/panel/mapped/plastic/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "ya" = (
@@ -7582,10 +7574,10 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/stack/material/aluminium/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "yS" = (
@@ -7778,10 +7770,10 @@
 /obj/structure/table/rack/dark,
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/stack/material/plasteel/fifty,
-/obj/item/stack/material/plasteel/fifty,
-/obj/item/stack/material/plasteel/fifty,
-/obj/item/stack/material/copper/fifty,
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/ingot/mapped/copper/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "BX" = (
@@ -8083,19 +8075,20 @@
 /area/liberia/engineeringstorage)
 "Ha" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
-/obj/item/stack/material/plastic/fifty,
-/obj/item/stack/material/titanium/fifty,
-/obj/item/stack/material/ocp/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
-/obj/item/stack/material/glass/reinforced/fifty,
-/obj/item/stack/material/aluminium/fifty,
-/obj/item/stack/material/plasteel/fifty,
+/obj/item/stack/material/panel/mapped/plastic/fifty,
+/obj/item/stack/material/reinforced/mapped/titanium/fifty,
+/obj/item/stack/material/reinforced/mapped/ocp/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light/small,
 /obj/machinery/power/apc/liberia{
@@ -9082,13 +9075,13 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack/dark,
 /obj/structure/railing/mapped,
-/obj/item/stack/material/wood/yew/twentyfive,
-/obj/item/stack/material/wood/walnut/twentyfive,
-/obj/item/stack/material/wood/maple/twentyfive,
-/obj/item/stack/material/wood/mahogany/ten,
-/obj/item/stack/material/wood/fifty,
-/obj/item/stack/material/wood/ebony/ten,
-/obj/item/stack/material/wood/bamboo/fifty,
+/obj/item/stack/material/plank/mapped/yew/twentyfive,
+/obj/item/stack/material/plank/mapped/walnut/twentyfive,
+/obj/item/stack/material/plank/mapped/maple/twentyfive,
+/obj/item/stack/material/plank/mapped/mahogany/ten,
+/obj/item/stack/material/plank/mapped/wood/fifty,
+/obj/item/stack/material/plank/mapped/ebony/ten,
+/obj/item/stack/material/plank/mapped/wood/bamboo/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "WM" = (
@@ -9177,8 +9170,8 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/stack/material/glass/reinforced/fifty,
-/obj/item/stack/material/glass/reinforced/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "Yy" = (

@@ -1,3 +1,4 @@
+// This machine is COMPLETELY BROKEN due to material and reagent reworks, TODO: total overhaul
 /obj/machinery/kinetic_harvester
 	name = "kinetic harvester"
 	desc = "A complicated mechanism for harvesting rapidly moving particles from a fusion toroid and condensing them into a usable form."
@@ -113,7 +114,7 @@
 			var/sheet_cost = (SHEET_MATERIAL_AMOUNT * 1.5)
 			var/sheets = Floor(stored[mat]/sheet_cost)
 			if(sheets > 0)
-				material.place_sheet(loc, sheets)
+				material.create_object(loc, sheets)
 				stored[mat] -= sheets * sheet_cost
 				if(stored[mat] <= 0)
 					stored -= mat

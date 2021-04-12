@@ -2294,9 +2294,9 @@
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/handgun,
-/obj/item/stack/material/diamond/ten,
-/obj/item/stack/material/gold/ten,
-/obj/item/stack/material/gold/ten,
+/obj/item/stack/material/gemstone/mapped/diamond/ten,
+/obj/item/stack/material/ingot/mapped/gold/ten,
+/obj/item/stack/material/ingot/mapped/gold/ten,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "fs" = (

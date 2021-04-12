@@ -179,6 +179,11 @@
 		else
 			do_animate("deny")
 
+/obj/machinery/door/physically_destroyed(skip_qdel)
+	SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 2)
+	SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 3, /obj/item/stack/material/rods)
+	. = ..()
+
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
 	..()
 
@@ -191,8 +196,7 @@
 			visible_message("<span class='danger'>\The [src.name] disintegrates!</span>")
 			switch (Proj.damage_type)
 				if(BRUTE)
-					new /obj/item/stack/material/steel(src.loc, 2)
-					new /obj/item/stack/material/rods(src.loc, 3)
+					physically_destroyed()
 				if(BURN)
 					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
 			qdel(src)

@@ -147,6 +147,16 @@
 	if(seed) 
 		seed.thrown_at(src,hit_atom)
 
+var/list/_wood_materials = list(
+	/decl/material/solid/wood,
+	/decl/material/solid/wood/mahogany,
+	/decl/material/solid/wood/maple,
+	/decl/material/solid/wood/ebony,
+	/decl/material/solid/wood/walnut,
+	/decl/material/solid/wood/bamboo,
+	/decl/material/solid/wood/yew
+)
+
 /obj/item/chems/food/snacks/grown/attackby(var/obj/item/W, var/mob/user)
 
 	if(seed)
@@ -170,15 +180,12 @@
 				return
 			else if(seed.chems)
 				if(isHatchet(W))
-					if(!isnull(seed.chems[/decl/material/solid/wood]))
-						user.visible_message("<span class='notice'>\The [user] makes planks out of \the [src].</span>")
-						new /obj/item/stack/material/wood(user.loc)
-						qdel(src)
-					else if(!isnull(seed.chems[/decl/material/solid/wood/bamboo]))
-						user.visible_message("<span class='notice'>\The [user] makes planks out of \the [src].</span>")
-						new /obj/item/stack/material/wood/bamboo(user.loc)
-						qdel(src)
-					return
+					for(var/wood_mat in global._wood_materials)
+						if(!isnull(seed.chems[wood_mat]))
+							user.visible_message("<span class='notice'>\The [user] makes planks out of \the [src].</span>")
+							SSmaterials.create_object(wood_mat, user.loc, rand(1,2))
+							qdel(src)
+							return
 				else if(!isnull(seed.chems[/decl/material/liquid/drink/juice/potato]))
 					to_chat(user, "You slice \the [src] into sticks.")
 					new /obj/item/chems/food/snacks/rawsticks(get_turf(src))

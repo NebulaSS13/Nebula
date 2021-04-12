@@ -124,7 +124,7 @@
 
 /obj/item/twohanded/spear/shatter(var/consumed)
 	if(!consumed)
-		new /obj/item/stack/material/rods(get_turf(src), 1, shaft_material)
+		SSmaterials.create_object(shaft_material, get_turf(src), 1, /obj/item/stack/material/rods)
 		new /obj/item/stack/cable_coil(get_turf(src), 3, cable_color)
 	..()
 

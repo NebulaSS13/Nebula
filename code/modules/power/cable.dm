@@ -481,7 +481,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	slot_flags = SLOT_LOWER_BODY
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
-	stacktype = /obj/item/stack/cable_coil
+	stack_merge_type = /obj/item/stack/cable_coil
 
 /obj/item/stack/cable_coil/Initialize()
 	. = ..()

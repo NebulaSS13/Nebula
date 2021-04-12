@@ -169,9 +169,10 @@
 	src.occupant.ghostize()
 	addtimer(CALLBACK(src, .proc/finish_gibbing), gib_time)
 
-	var/list/gib_products = shuffle(occupant.harvest_meat() | occupant.harvest_skin() | occupant.harvest_bones())
-	if(length(gib_products) <= 0)
+	var/list/gib_products = occupant.harvest_meat() | occupant.harvest_skin() | occupant.harvest_bones()
+	if(!length(gib_products))
 		return
+	gib_products = shuffle(gib_products)
 
 	var/slab_name =  occupant.name
 	var/slab_nutrition = 20

@@ -20,7 +20,7 @@
 	update_icon()
 
 /obj/machinery/constructable_frame/dismantle()
-	new /obj/item/stack/material/steel(loc, 5)
+	SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 5)
 	qdel(src)
 	return TRUE
 

@@ -21,8 +21,8 @@
 		/obj/item/stock_parts/smes_coil,
 		/obj/item/stock_parts/computer,
 		/obj/item/fuel_assembly,
-		/obj/item/stack/material/deuterium,
-		/obj/item/stack/material/tritium,
+		/obj/item/stack/material/aerogel/mapped/deuterium,
+		/obj/item/stack/material/aerogel/mapped/tritium,
 		/obj/item/stack/tile
 		)
 
@@ -141,7 +141,7 @@
 
 	can_hold = list(
 		/obj/item/stack/material
-		)
+	)
 
 /obj/item/gripper/examine(mob/user)
 	. = ..()

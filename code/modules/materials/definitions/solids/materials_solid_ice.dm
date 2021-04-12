@@ -1,5 +1,4 @@
 /decl/material/solid/ice
-	stack_type = null
 	color = "#a5f2f3"
 	heating_products = list(
 		/decl/material/liquid/water = 1
@@ -16,7 +15,6 @@
 	ore_result_amount = 7
 	rich_material_weight = 37
 	heating_point = T20C + 10 // Above room temperature, to avoid drinks melting.
-	stack_type = /obj/item/stack/material/generic/brick
 
 /decl/material/solid/ice/aspium
 	heating_products = list(

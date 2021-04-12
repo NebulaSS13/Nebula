@@ -12,12 +12,12 @@
 		</div>
 		<div class="itemContent">
 			{{if value.harvest}}
-				{{:helper.link('Collecting', null, {'toggle_harvest': value.material})}}
+				{{:helper.link('Collecting', null, {'toggle_harvest': value.material_ref})}}
 			{{else}}
-				{{:helper.link('Not collecting', null, {'toggle_harvest': value.material})}}
+				{{:helper.link('Not collecting', null, {'toggle_harvest': value.material_ref})}}
 			{{/if}}
 			{{if value.amount > 0}}
-				{{:helper.link('Remove sheets', null, {'remove_mat': value.material})}}
+				{{:helper.link('Remove sheets', null, {'remove_mat': value.material_ref})}}
 			{{/if}}
 		</div>
 	</div>

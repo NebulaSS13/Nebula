@@ -3,7 +3,6 @@
 	melting_point = 70
 	boiling_point = 180 // -90 C - cryogenic liquid threshold
 	color = COLOR_GRAY80
-	stack_type = null
 	shard_type = SHARD_NONE
 	conductive = 0
 	value = 0
@@ -14,6 +13,7 @@
 	hardness = 0
 	weight = 1
 	opacity = 0.3
+	default_solid_form = /obj/item/stack/material/aerogel
 
 /decl/material/gas/New()
 	if(!liquid_name)

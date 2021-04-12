@@ -9,13 +9,11 @@
 	reflectiveness = MAT_VALUE_MIRRORED
 	conductive = 0
 	ore_icon_overlay = "gems"
-	sheet_singular_name = "gem"
-	sheet_plural_name = "gems"
+	default_solid_form = /obj/item/stack/material/gemstone
 
 /decl/material/solid/gemstone/diamond
 	name = "diamond"
 	lore_text = "An extremely hard allotrope of carbon. Valued for its use in industrial tools."
-	stack_type = /obj/item/stack/material/diamond
 	brute_armor = 10
 	burn_armor = 50		// Diamond walls are immune to fire, therefore it makes sense for them to be almost undamageable by burn damage type.
 	stack_origin_tech = "{'materials':6}"
@@ -36,6 +34,5 @@
 	name = "crystal"
 	hardness = MAT_VALUE_VERY_HARD
 	reflectiveness = MAT_VALUE_VERY_SHINY
-	stack_type = null
 	hidden_from_codex = TRUE
 	value = 2

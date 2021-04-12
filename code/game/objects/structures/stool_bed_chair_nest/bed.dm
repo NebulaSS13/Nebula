@@ -120,7 +120,7 @@
 
 /obj/structure/bed/proc/remove_padding()
 	if(reinf_material)
-		reinf_material.place_sheet(get_turf(src))
+		reinf_material.create_object(get_turf(src))
 		reinf_material = null
 	update_icon()
 

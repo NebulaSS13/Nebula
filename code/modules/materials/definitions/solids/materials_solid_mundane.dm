@@ -1,6 +1,5 @@
 /decl/material/solid/slag
 	name = "slag"
-	stack_type = null
 	color = "#2e3a07"
 	ore_name = "slag"
 	ore_desc = "Someone messed up..."
@@ -17,6 +16,8 @@
 		/decl/material/gas/carbon_dioxide =    0.05
 	)
 	value = 0.1
+	default_solid_form = /obj/item/stack/material/lump
+
 	// Slag can be reclaimed into more useful forms by grinding it up and mixing it with strong acid.
 	dissolves_in = MAT_SOLVENT_STRONG
 	dissolves_into = list(
