@@ -42,12 +42,8 @@
 /obj/machinery/fabricator/proc/try_dump_material(var/mat_name)
 	mat_name = lowertext(mat_name)
 	for(var/mat_path in stored_substances_to_names)
-		if(stored_substances_to_names[mat_path] == mat_name)
-			if(ispath(mat_path, /decl/material))
-				var/decl/material/mat = GET_DECL(mat_path)
-				if(mat && stored_material[mat_path] > SHEET_MATERIAL_AMOUNT && mat.stack_type)
-					var/sheet_count = Floor(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)
-					stored_material[mat_path] -= sheet_count * SHEET_MATERIAL_AMOUNT
-					mat.place_sheet(get_turf(src), sheet_count)
-			else if(!isnull(stored_material[mat_path]))
-				stored_material[mat_path] = 0
+		if(stored_substances_to_names[mat_path] == mat_name && stored_material[mat_path] > SHEET_MATERIAL_AMOUNT)
+			var/sheet_count = Floor(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)
+			stored_material[mat_path] -= sheet_count * SHEET_MATERIAL_AMOUNT
+			SSmaterials.create_object(mat_path, get_turf(src), sheet_count)
+			break

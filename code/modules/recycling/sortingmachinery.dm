@@ -511,4 +511,4 @@
 	matter = null
 	uses_charge = 1
 	charge_costs = list(1)
-	stacktype = /obj/item/stack/package_wrap
+	stack_merge_type = /obj/item/stack/package_wrap

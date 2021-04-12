@@ -182,8 +182,7 @@
 	src.visible_message("<span class='danger'>\The [src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/stack/material/rods(Tsec)
-	new /obj/item/stack/material/rods(Tsec)
+	SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), 2, /obj/item/stack/material/rods)
 	new /obj/item/stack/cable_coil/cut(Tsec)
 
 	if(cell)

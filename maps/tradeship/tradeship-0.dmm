@@ -1334,9 +1334,7 @@
 	id_tag = "trash_sort"
 	},
 /obj/item/shard,
-/obj/item/stack/cable_coil/random{
-	amount = 3
-	},
+/obj/item/stack/cable_coil/random/three,
 /turf/simulated/floor,
 /area/ship/trade/loading_bay)
 "ne" = (
@@ -2102,7 +2100,7 @@
 	dir = 2
 	},
 /obj/structure/table/standard,
-/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
 /obj/item/storage/box/syringes,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/livestock)
@@ -2239,9 +2237,7 @@
 /turf/simulated/floor,
 /area/ship/trade/aft_starboard_underside_maint)
 "QW" = (
-/obj/item/stack/tile/floor{
-	amount = 5
-	},
+/obj/item/stack/tile/floor/five,
 /obj/item/crowbar/red,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/stool/padded,
@@ -2410,7 +2406,7 @@
 	d2 = 4
 	},
 /obj/structure/table/standard,
-/obj/item/stack/material/uranium,
+/obj/item/stack/material/puck/mapped/uranium,
 /obj/item/knife/table/plastic,
 /obj/item/clothing/accessory/bowtie/ugly,
 /obj/random/action_figure,

@@ -25,7 +25,7 @@
 /turf/template_noop,
 /area/template_noop)
 "g" = (
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /obj/structure/foamedmetal,
 /turf/template_noop,
 /area/template_noop)

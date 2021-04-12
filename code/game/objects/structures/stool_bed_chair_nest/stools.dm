@@ -67,7 +67,7 @@
 
 /obj/item/stool/proc/remove_padding()
 	if(padding_material)
-		padding_material.place_sheet(get_turf(src))
+		padding_material.create_object(get_turf(src))
 		padding_material = null
 	update_icon()
 
@@ -92,9 +92,9 @@
 
 /obj/item/stool/proc/dismantle()
 	if(material)
-		material.place_sheet(get_turf(src))
+		material.create_object(get_turf(src))
 	if(padding_material)
-		padding_material.place_sheet(get_turf(src))
+		padding_material.create_object(get_turf(src))
 	qdel(src)
 
 /obj/item/stool/attackby(obj/item/W, mob/user)

@@ -39,19 +39,21 @@
 		TRADER_INSULT_GOOD       = "Where this come from? Is trade no good?",
 		TRADER_INSULT_BAD        = "If you say all this at home, you be dead!"
 		)
-	possible_wanted_items = list(/obj/item/                  = TRADER_SUBTYPES_ONLY,
-								/obj/item/stack/material            = TRADER_SUBTYPES_ONLY,
-								/obj/item/stack/material/cyborg     = TRADER_BLACKLIST_ALL,
-								/obj/item/organ                     = TRADER_SUBTYPES_ONLY,
-								)
+	possible_wanted_items = list(
+		/obj/item/                      = TRADER_SUBTYPES_ONLY,
+		/obj/item/stack/material        = TRADER_SUBTYPES_ONLY,
+		/obj/item/stack/material/cyborg = TRADER_BLACKLIST_ALL,
+		/obj/item/organ                 = TRADER_SUBTYPES_ONLY,
+	)
 
-	possible_trading_items = list(/obj/item/gun/projectile/dartgun/vox           = TRADER_SUBTYPES_ONLY,
-								/obj/item/trash                                         = TRADER_SUBTYPES_ONLY,
-								/obj/item/remains                                       = TRADER_ALL,
-								/obj/item/clothing/accessory                            = TRADER_ALL,
-								/obj/item/robot_parts                                   = TRADER_SUBTYPES_ONLY,
-								/obj/item/robot_parts/robot_component                   = TRADER_BLACKLIST
-								)
+	possible_trading_items = list(
+		/obj/item/gun/projectile/dartgun/vox  = TRADER_SUBTYPES_ONLY,
+		/obj/item/trash                       = TRADER_SUBTYPES_ONLY,
+		/obj/item/remains                     = TRADER_ALL,
+		/obj/item/clothing/accessory          = TRADER_ALL,
+		/obj/item/robot_parts                 = TRADER_SUBTYPES_ONLY,
+		/obj/item/robot_parts/robot_component = TRADER_BLACKLIST
+	)
 
 	mob_transfer_message = "<span class='danger'>You are transported to the ORIGIN. When the transportation dizziness wears off, you find you are surrounded by cackling Vox...</span>"
 

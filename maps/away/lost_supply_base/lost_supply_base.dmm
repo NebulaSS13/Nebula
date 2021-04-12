@@ -48,7 +48,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /turf/simulated/floor/airless,
 /area/space)
 "ai" = (
@@ -160,10 +160,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/item/stack/material/rods{
-	amount = 50
-	},
-/obj/item/stack/material/steel,
+/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/sheet/mapped/steel,
 /turf/simulated/floor/airless,
 /area/space)
 "as" = (
@@ -554,7 +552,7 @@
 	pixel_x = 5;
 	pixel_y = -3
 	},
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /turf/simulated/floor/tiled/airless{
 	icon_state = "steel_burned0"
 	},
@@ -843,7 +841,7 @@
 	},
 /area/lost_supply_base/office)
 "cc" = (
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /turf/space,
 /area/space)
 "cd" = (
@@ -860,7 +858,7 @@
 /area/lost_supply_base)
 "cf" = (
 /obj/item/stack/material/rods,
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cg" = (
@@ -1034,7 +1032,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cE" = (
-/obj/item/stack/material/cardboard,
+/obj/item/stack/material/cardstock/mapped/cardboard,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "cF" = (
@@ -1227,7 +1225,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "dm" = (
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "dn" = (
@@ -1592,7 +1590,7 @@
 /turf/simulated/floor/shuttle/blue,
 /area/space)
 "ey" = (
-/obj/item/stack/material/cardboard,
+/obj/item/stack/material/cardstock/mapped/cardboard,
 /obj/item/grenade/fake,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
@@ -1993,7 +1991,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base)
 "fO" = (
@@ -2209,7 +2207,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base)
 "go" = (
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base)
 "gq" = (

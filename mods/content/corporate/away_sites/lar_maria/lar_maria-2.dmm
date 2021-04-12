@@ -169,7 +169,7 @@
 /area/lar_maria/solar_control)
 "av" = (
 /obj/structure/closet/crate/radiation,
-/obj/item/stack/material/tritium/fifty,
+/obj/item/stack/material/aerogel/mapped/tritium/fifty,
 /obj/item/stack/cable_coil/orange,
 /obj/item/wrench,
 /obj/item/wirecutters,

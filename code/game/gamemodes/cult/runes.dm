@@ -648,14 +648,14 @@
 		to_chat(user, "<span class='warning'>This rune needs to be placed on the defiled ground.</span>")
 		return fizzle(user)
 
-	var/obj/item/stack/material/steel/target
-	for(var/obj/item/stack/material/steel/S in get_turf(src))
-		if(S.get_amount() >= 10)
+	var/obj/item/stack/material/target
+	for(var/obj/item/stack/material/S in get_turf(src))
+		if(S.material?.type == /decl/material/solid/metal/steel && S.get_amount() >= 10)
 			target = S
 			break
 
 	if(!target)
-		to_chat(user, "<span class='warning'>You need ten sheets of metal to fold them into a construct shell.</span>")
+		to_chat(user, "<span class='warning'>You need ten sheets of steel to fold them into a construct shell.</span>")
 		return fizzle(user)
 
 	speak_incantation(user, "Da A[pick("'","`")]ig Osk!")

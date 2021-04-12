@@ -121,7 +121,7 @@
 						if(!WT.isOn())
 							return TRUE
 						to_chat(user, "<span class='notice'>You welded the [mat_name] plating off!</span>")
-						glass_material_datum.place_sheet(get_turf(src), 2)
+						glass_material_datum.create_object(get_turf(src), 2)
 						glass = 0
 						update_icon()
 					return TRUE
@@ -131,8 +131,7 @@
 					if(!WT.isOn())
 						return
 					to_chat(user, "<span class='notice'>You dissasembled the airlock assembly!</span>")
-					new /obj/item/stack/material/steel(src.loc, 4)
-					qdel (src)
+					dismantle()
 					return TRUE
 		else
 			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")

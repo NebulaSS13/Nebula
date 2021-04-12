@@ -2022,6 +2022,7 @@
 #include "code\modules\materials\material_armor.dm"
 #include "code\modules\materials\material_recipes.dm"
 #include "code\modules\materials\material_sheets.dm"
+#include "code\modules\materials\material_sheets_mapping.dm"
 #include "code\modules\materials\material_synth.dm"
 #include "code\modules\materials\materials_ore.dm"
 #include "code\modules\materials\recipes_furniture.dm"

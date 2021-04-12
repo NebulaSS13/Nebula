@@ -145,9 +145,9 @@ Using robohead because of restricting to roboticist */
 				desc = "This TV camera assembly needs casing."
 				return
 		if(4)
-			if(istype(W, /obj/item/stack/material/steel))
-				var/obj/item/stack/material/steel/S = W
-				if(S.use(1))
+			if(istype(W, /obj/item/stack/material))
+				var/obj/item/stack/material/S = W
+				if(S.material?.type == /decl/material/solid/metal/steel && S.use(1))
 					buildstep++
 					to_chat(user, "<span class='notice'>You encase the assembly.</span>")
 					var/turf/T = get_turf(src)

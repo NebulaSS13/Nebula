@@ -2676,8 +2676,8 @@
 	dir = 4
 	},
 /obj/machinery/fabricator/book,
-/obj/item/stack/material/plastic/ten,
-/obj/item/stack/material/wood/ten,
+/obj/item/stack/material/panel/mapped/plastic/ten,
+/obj/item/stack/material/plank/mapped/wood/ten,
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -4389,8 +4389,8 @@
 	dir = 8
 	},
 /obj/structure/closet/crate/radiation,
-/obj/item/stack/material/deuterium/fifty,
-/obj/item/stack/material/tritium/ten,
+/obj/item/stack/material/aerogel/mapped/deuterium/fifty,
+/obj/item/stack/material/aerogel/mapped/tritium/ten,
 /obj/structure/window/borosilicate_reinforced{
 	icon_state = "rwindow";
 	dir = 8
@@ -5164,8 +5164,8 @@
 	},
 /obj/structure/closet/toolcloset,
 /obj/item/storage/backpack/dufflebag/eng,
-/obj/item/stack/material/glass/reinforced/fifty,
-/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/structure/handrail,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/engineering)

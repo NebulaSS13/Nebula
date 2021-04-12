@@ -93,7 +93,7 @@
 	for(var/i = 0 to debris_count)
 		material.place_shard(loc)
 		if(reinf_material)
-			new /obj/item/stack/material/rods(loc, 1, reinf_material.type)
+			reinf_material.create_object(loc, 1, /obj/item/stack/material/rods)
 	qdel(src)
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
@@ -213,7 +213,7 @@
 		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 		to_chat(user, (construction_state ? SPAN_NOTICE("You have pried the window into the frame.") : SPAN_NOTICE("You have pried the window out of the frame.")))
 	else if(isWrench(W) && !anchored && (!construction_state || !reinf_material))
-		if(!material.stack_type)
+		if(!material)
 			to_chat(user, SPAN_NOTICE("You're not sure how to dismantle \the [src] properly."))
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -259,8 +259,8 @@
 	return
 
 /obj/structure/window/create_dismantled_products(turf/T)
-	var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 2)
-	if(S && reinf_material)
+	var/obj/item/stack/material/S = material.create_object(loc, is_fulltile() ? 4 : 2)
+	if(istype(S) && reinf_material)
 		S.reinf_material = reinf_material
 		S.update_strings()
 		S.update_icon()

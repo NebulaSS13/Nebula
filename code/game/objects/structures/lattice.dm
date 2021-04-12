@@ -54,8 +54,7 @@
 
 /obj/structure/lattice/proc/deconstruct(var/mob/user)
 	to_chat(user, SPAN_NOTICE("Slicing lattice joints..."))
-	new /obj/item/stack/material/rods(loc, 1, material.type)
-	qdel(src)
+	physically_destroyed()
 
 /obj/structure/lattice/attackby(obj/item/C, mob/user)
 

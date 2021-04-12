@@ -1233,10 +1233,10 @@
 	dir = 4
 	},
 /obj/machinery/light/small,
-/obj/item/stack/material/plastic/ten,
-/obj/item/stack/material/aluminium/ten,
-/obj/item/stack/material/steel/ten,
-/obj/item/stack/material/glass/ten,
+/obj/item/stack/material/panel/mapped/plastic/ten,
+/obj/item/stack/material/shiny/mapped/aluminium/ten,
+/obj/item/stack/material/sheet/mapped/steel/ten,
+/obj/item/stack/material/pane/mapped/glass/ten,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
@@ -1397,12 +1397,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/stack/material/plasteel/ten,
-/obj/item/stack/material/copper/fifty,
-/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/reinforced/mapped/plasteel/ten,
+/obj/item/stack/material/ingot/mapped/copper/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/rods/fifty,
-/obj/item/stack/material/glass/reinforced/fifty,
-/obj/item/stack/material/glass/reinforced_borosilicate/ten,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/pane/mapped/rborosilicate/ten,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -1914,12 +1914,12 @@
 /area/space)
 "eP" = (
 /obj/structure/closet/crate/uranium,
-/obj/item/stack/material/uranium/ten,
-/obj/item/stack/material/uranium/ten,
-/obj/item/stack/material/uranium/ten,
-/obj/item/stack/material/uranium/ten,
-/obj/item/stack/material/uranium/ten,
-/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
 /obj/structure/railing/mapped/no_density,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
@@ -2645,12 +2645,12 @@
 /area/map_template/merc_spawn)
 "HU" = (
 /obj/structure/closet/crate/uranium,
-/obj/item/stack/material/uranium/ten,
-/obj/item/stack/material/uranium/ten,
-/obj/item/stack/material/uranium/ten,
-/obj/item/stack/material/uranium/ten,
-/obj/item/stack/material/uranium/ten,
-/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "HV" = (
@@ -2751,12 +2751,12 @@
 /area/map_template/merc_spawn)
 "LY" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/ocp/ten,
-/obj/item/stack/material/ocp/ten,
-/obj/item/stack/material/ocp/ten,
-/obj/item/stack/material/glass/reinforced_borosilicate/ten,
-/obj/item/stack/material/glass/reinforced_borosilicate/ten,
-/obj/item/stack/material/glass/reinforced_borosilicate/ten,
+/obj/item/stack/material/reinforced/mapped/ocp/ten,
+/obj/item/stack/material/reinforced/mapped/ocp/ten,
+/obj/item/stack/material/reinforced/mapped/ocp/ten,
+/obj/item/stack/material/pane/mapped/rborosilicate/ten,
+/obj/item/stack/material/pane/mapped/rborosilicate/ten,
+/obj/item/stack/material/pane/mapped/rborosilicate/ten,
 /obj/structure/railing/mapped/no_density{
 	icon_state = "railing0-1";
 	dir = 8
@@ -3067,15 +3067,15 @@
 /area/map_template/merc_spawn)
 "YT" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/steel/ten,
-/obj/item/stack/material/steel/ten,
-/obj/item/stack/material/steel/ten,
+/obj/item/stack/material/sheet/mapped/steel/ten,
+/obj/item/stack/material/sheet/mapped/steel/ten,
+/obj/item/stack/material/sheet/mapped/steel/ten,
 /obj/item/stack/material/rods/ten,
 /obj/item/stack/material/rods/ten,
 /obj/item/stack/material/rods/ten,
-/obj/item/stack/material/glass/ten,
-/obj/item/stack/material/glass/ten,
-/obj/item/stack/material/glass/ten,
+/obj/item/stack/material/pane/mapped/glass/ten,
+/obj/item/stack/material/pane/mapped/glass/ten,
+/obj/item/stack/material/pane/mapped/glass/ten,
 /obj/structure/railing/mapped/no_density{
 	icon_state = "railing0-1";
 	dir = 8

@@ -88,17 +88,16 @@
 	else
 		return 0
 
+/obj/machinery/deployable/barrier/physically_destroyed(skip_qdel)
+	SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), 1, /obj/item/stack/material/rods)
+	. = ..()
+	
 /obj/machinery/deployable/barrier/proc/explode()
-
 	visible_message("<span class='danger'>[src] blows apart!</span>")
-	var/turf/Tsec = get_turf(src)
-	new /obj/item/stack/material/rods(Tsec)
-
 	spark_at(src, cardinal_only = TRUE)
-
 	explosion(src.loc,-1,-1,0)
-	if(src)
-		qdel(src)
+	if(!QDELETED(src))
+		physically_destroyed()
 
 /obj/machinery/deployable/barrier/emag_act(var/remaining_charges, var/mob/user)
 	if (src.emagged == 0)

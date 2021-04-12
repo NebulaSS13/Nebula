@@ -10,7 +10,7 @@
 
 /decl/hierarchy/supply_pack/supply/cardboard_sheets
 	name = "Material - cardboard sheets (50)"
-	contains = list(/obj/item/stack/material/cardboard/fifty)
+	contains = list(/obj/item/stack/material/cardstock/mapped/cardboard/fifty)
 	cost = 10
 	containername = "cardboard sheets crate"
 

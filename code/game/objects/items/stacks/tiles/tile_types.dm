@@ -50,7 +50,7 @@
 	desc = "A device that makes wood floor tiles."
 	uses_charge = 1
 	charge_costs = list(250)
-	stacktype = /obj/item/stack/tile/wood
+	stack_merge_type = /obj/item/stack/tile/wood
 	build_type = /obj/item/stack/tile/wood
 
 /obj/item/stack/tile/mahogany
@@ -201,7 +201,7 @@
 	matter = null
 	uses_charge = 1
 	charge_costs = list(250)
-	stacktype = /obj/item/stack/tile/floor
+	stack_merge_type = /obj/item/stack/tile/floor
 	build_type = /obj/item/stack/tile/floor
 
 /obj/item/stack/tile/linoleum

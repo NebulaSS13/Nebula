@@ -79,11 +79,10 @@
 
 	if(output_turf)
 		for(var/mtype in casting)
-			var/decl/material/mat = GET_DECL(mtype)
 			var/ramt = REAGENT_VOLUME(reagents, mtype) || 0
 			var/samt = Floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
 			if(samt > 0)
-				mat.place_sheet(output_turf, samt)
+				SSmaterials.create_object(mtype, output_turf, samt)
 				reagents.remove_reagent(mtype, ramt)
 	
 /obj/machinery/material_processing/smeltery/Topic(var/user, var/list/href_list)

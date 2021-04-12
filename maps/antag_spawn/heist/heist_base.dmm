@@ -426,18 +426,10 @@
 /area/map_template/syndicate_mothership/raider_base)
 "be" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -1323,12 +1315,8 @@
 /obj/item/storage/fancy/cigarettes,
 /obj/item/flame/lighter/zippo/random,
 /obj/item/clothing/gloves/insulated,
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/card/emag,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
@@ -1451,9 +1439,7 @@
 "dB" = (
 /obj/structure/table/rack,
 /obj/item/gun/launcher/crossbow,
-/obj/item/stack/material/rods{
-	amount = 10
-	},
+/obj/item/stack/material/rods/ten,
 /obj/machinery/light/small{
 	dir = 8
 	},

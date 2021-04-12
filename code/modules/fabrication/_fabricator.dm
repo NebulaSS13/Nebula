@@ -201,11 +201,8 @@
 
 /obj/machinery/fabricator/dismantle()
 	for(var/mat in stored_material)
-		if(ispath(mat, /decl/material))
-			var/mat_name = stored_substances_to_names[mat]
-			var/decl/material/M = GET_DECL(mat_name)
-			if(stored_material[mat] > SHEET_MATERIAL_AMOUNT)
-				M.place_sheet(get_turf(src), round(stored_material[mat] / SHEET_MATERIAL_AMOUNT), M.type)
+		if(stored_material[mat] > SHEET_MATERIAL_AMOUNT)
+			SSmaterials.create_object(mat, get_turf(src), round(stored_material[mat] / SHEET_MATERIAL_AMOUNT))
 	..()
 	return TRUE
 

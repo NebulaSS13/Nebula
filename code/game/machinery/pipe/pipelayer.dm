@@ -72,8 +72,7 @@
 			m = round(m)
 			if(m)
 				use_metal(m)
-				var/obj/item/stack/material/steel/MM = new (get_turf(src))
-				MM.amount = m
+				SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), m)
 				user.visible_message("<span class='notice'>[user] removes [m] sheet\s of metal from the \the [src].</span>", "<span class='notice'>You remove [m] sheet\s of metal from \the [src]</span>")
 		else
 			to_chat(user, "\The [src] is empty.")

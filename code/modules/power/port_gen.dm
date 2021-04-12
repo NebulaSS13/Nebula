@@ -124,7 +124,7 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 
-	var/sheet_path =     /obj/item/stack/material//aerogel     // Base object type that it will accept.
+	var/sheet_path =     /obj/item/stack/material/aerogel     // Base object type that it will accept.
 	var/sheet_material = /decl/material/gas/hydrogen/deuterium // Material type that the fuel needs to match.
 
 	var/max_power_output = 5	//The maximum power setting without emagging.
@@ -183,7 +183,7 @@
 		var/dump_amount = min(sheets, initial(sheet_prototype.max_amount))
 		if(sheet_material)
 			var/decl/material/mat = GET_DECL(sheet_material)
-			mat.place_sheet(loc, dump_amount) //mat.create_object(loc, dump_amount, sheet_path)
+			mat.create_object(loc, dump_amount, sheet_path)
 		else
 			new sheet_path(loc, dump_amount)
 		sheets -= dump_amount
@@ -395,7 +395,7 @@
 	name = "S.U.P.E.R.P.A.C.M.A.N.-type Portable Generator"
 	desc = "A power generator that utilizes uranium sheets as fuel. Can run for much longer than the standard PACMAN type generators. Rated for 80 kW max safe output."
 	icon_state = "portgen1"
-	sheet_path = /obj/item/stack/material//puck
+	sheet_path = /obj/item/stack/material/puck
 	sheet_material = /decl/material/solid/metal/uranium
 	time_per_sheet = 576 //same power output, but a 50 sheet stack will last 2 hours at max safe power
 	var/rad_power = 4

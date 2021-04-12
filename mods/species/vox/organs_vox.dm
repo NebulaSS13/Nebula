@@ -117,7 +117,7 @@
 		// Convert stored matter into sheets.
 		for(var/mat in check_materials)
 			var/decl/material/M = GET_DECL(mat)
-			if(M && M.stack_type && stored_matter[mat] >= SHEET_MATERIAL_AMOUNT)
+			if(M && stored_matter[mat] >= SHEET_MATERIAL_AMOUNT)
 
 				// Remove as many sheets as possible from the gizzard.
 				var/sheets = Floor(stored_matter[mat]/SHEET_MATERIAL_AMOUNT)
@@ -135,7 +135,7 @@
 						
 				// Create new stacks if needed.
 				if(sheets)
-					M.place_sheet(src, sheets)
+					M.create_object(src, sheets)
 					updated_stacks = TRUE
 
 		if(updated_stacks && prob(5))

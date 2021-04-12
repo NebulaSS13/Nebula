@@ -57,7 +57,7 @@
 // CHECKS
 
 /obj/machinery/camera/proc/isEmpProof()
-	var/O = locate(/obj/item/stack/material/osmium) in assembly.upgrades
+	var/O = locate(/obj/item/stock_parts/capacitor/adv) in assembly.upgrades
 	return O
 
 /obj/machinery/camera/proc/isXRay()
@@ -73,7 +73,7 @@
 // UPGRADE PROCS
 
 /obj/machinery/camera/proc/upgradeEmpProof()
-	assembly.upgrades.Add(new /obj/item/stack/material/osmium(assembly))
+	assembly.upgrades.Add(new /obj/item/stock_parts/capacitor/adv(assembly))
 	setPowerUsage()
 	update_coverage()
 

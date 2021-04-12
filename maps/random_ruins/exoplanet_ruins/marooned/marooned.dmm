@@ -8,16 +8,16 @@
 /area/template_noop)
 "ad" = (
 /obj/item/stack/material/rods,
-/obj/item/stack/material/ocp,
+/obj/item/stack/material/reinforced/mapped/ocp,
 /turf/template_noop,
 /area/template_noop)
 "ae" = (
-/obj/item/stack/material/ocp,
+/obj/item/stack/material/reinforced/mapped/ocp,
 /turf/template_noop,
 /area/template_noop)
 "af" = (
 /obj/structure/lattice,
-/obj/item/stack/material/ocp,
+/obj/item/stack/material/reinforced/mapped/ocp,
 /obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
@@ -33,7 +33,7 @@
 /turf/template_noop,
 /area/template_noop)
 "aj" = (
-/obj/item/stack/material/ocp,
+/obj/item/stack/material/reinforced/mapped/ocp,
 /obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)

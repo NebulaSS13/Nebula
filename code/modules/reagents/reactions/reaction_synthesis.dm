@@ -21,7 +21,8 @@
 	..()
 	created_volume = ceil(created_volume)
 	if(created_volume > 0)
-		new /obj/item/stack/material/generic(get_turf(holder.my_atom), created_volume, /decl/material/solid/fiberglass)
+		var/decl/material/mat = GET_DECL(/decl/material/solid/fiberglass)
+		mat.create_object(get_turf(holder.my_atom), created_volume)
 
 /datum/chemical_reaction/synthesis/crystalization/can_happen(datum/reagents/holder)
 	. = ..() && length(holder.reagent_volumes) > 1
@@ -48,7 +49,7 @@
 		if(rtype != /decl/material/liquid/crystal_agent)
 			var/solidifying = Floor(REAGENT_VOLUME(holder, rtype) / REAGENT_UNITS_PER_MATERIAL_SHEET)
 			if(solidifying)
-				new /obj/item/stack/material/generic(get_turf(holder.my_atom), solidifying, rtype)
+				SSmaterials.create_object(rtype, get_turf(holder.my_atom), solidifying, /obj/item/stack/material/cubes)
 				removing_reagents[rtype] = solidifying * REAGENT_UNITS_PER_MATERIAL_SHEET
 	for(var/rtype in removing_reagents)
 		holder.remove_reagent(rtype, removing_reagents[rtype])
@@ -60,7 +61,7 @@
 
 /datum/chemical_reaction/synthesis/plastication/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	new /obj/item/stack/material/plastic(get_turf(holder.my_atom), created_volume)
+	SSmaterials.create_object(/decl/material/solid/plastic, get_turf(holder.my_atom), created_volume)
 
 /datum/chemical_reaction/synthesis/resin_pack
 	name = "Resin Globule"

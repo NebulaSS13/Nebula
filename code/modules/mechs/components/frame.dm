@@ -90,7 +90,7 @@
 			if(!do_after(user, 5 * user.skill_delay_mult(SKILL_DEVICES)) || !material)
 				return
 			user.visible_message(SPAN_NOTICE("\The [user] crowbars the reinforcement off \the [src]."))
-			material.place_sheet(src.loc, 10)
+			material.create_object(src.loc, 10)
 			material = null
 			is_reinforced = 0
 			return

@@ -1312,40 +1312,18 @@
 	icon_state = "tube1";
 	dir = 1
 	},
-/obj/item/stack/material/steel{
-	amount = 50;
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/obj/item/stack/material/steel{
-	amount = 50;
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/obj/item/stack/material/steel{
-	amount = 50;
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/obj/item/stack/material/steel{
-	amount = 50;
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/obj/item/stack/material/steel{
-	amount = 50;
-	pixel_x = 0;
-	pixel_y = 0
-	},
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/random/tech_supply,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ep" = (
 /obj/structure/table/reinforced,
-/obj/item/stack/material/plasteel{
-	amount = 50
-	},
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
 /obj/random/tech_supply,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/dark,
@@ -3594,21 +3572,11 @@
 /area/space)
 "nb" = (
 /obj/structure/table/reinforced,
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/random/tech_supply,
 /obj/random/maintenance,
 /obj/machinery/camera/motion{
