@@ -3,8 +3,7 @@
 		if(parts.len)
 			to_chat(user, "Remove all components from \the [holder] before disassembling it.")
 			return TRUE
-		var/atom/movable/H = holder
-		new /obj/item/stack/material/steel( get_turf(H.loc), steel_sheet_cost )
+		SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(holder), steel_sheet_cost)
 		if(user)
 			user.visible_message("\The [holder] has been disassembled by [user].")
 		qdel(holder)

@@ -2,7 +2,6 @@
 	name = "metallic hydrogen"
 	lore_text = "When hydrogen is exposed to extremely high pressures and temperatures, such as at the core of gas giants like Jupiter, it can take on metallic properties and - more importantly - acts as a room temperature superconductor. Achieving solid metallic hydrogen at room temperature, though, has proven to be rather tricky."
 	name = "metallic hydrogen"
-	stack_type = /obj/item/stack/material/mhydrogen
 	color = "#e6c5de"
 	stack_origin_tech = "{'materials':6,'powerstorage':6,'magnets':5}"
 	heating_products = list(/decl/material/gas/hydrogen/tritium = 1)
@@ -13,8 +12,6 @@
 	value = 2
 	gas_symbol_html = "H*"
 	gas_symbol = "H*"
-	sheet_singular_name = "ingot"
-	sheet_plural_name = "ingots"
 	flags = MAT_FLAG_FUSION_FUEL
 	wall_name = "bulkhead"
 	construction_difficulty = MAT_VALUE_HARD_DIY
@@ -29,6 +26,7 @@
 	dissolves_into = list(
 		/decl/material/liquid/fuel/hydrazine = 1
 	)
+	default_solid_form = /obj/item/stack/material/segment
 
 /decl/material/solid/exotic_matter
 	name = "exotic matter"
@@ -42,8 +40,6 @@
 	table_icon_base = "stone"
 	shard_type = SHARD_SHARD
 	hardness = MAT_VALUE_RIGID
-	sheet_singular_name = "crystal"
-	sheet_plural_name = "crystals"
 	flags = MAT_FLAG_FUSION_FUEL
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	reflectiveness = MAT_VALUE_SHINY
@@ -61,3 +57,4 @@
 	vapor_products = list(
 		/decl/material/solid/exotic_matter = 1
 	)
+	default_solid_form = /obj/item/stack/material/segment

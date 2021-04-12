@@ -197,6 +197,7 @@
 
 /obj/structure/closet/shipping_wall/filled/WillContain()
 	return list(
-		/obj/item/stack/material/cardboard/ten,
+		/obj/item/stack/material/cardstock/mapped/cardboard/ten,
 		/obj/item/destTagger,
-		/obj/item/stack/package_wrap/twenty_five)
+		/obj/item/stack/package_wrap/twenty_five
+	)

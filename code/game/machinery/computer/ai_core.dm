@@ -65,7 +65,7 @@ var/global/list/empty_playable_ai_cores = list()
 		if(glass_installed)
 			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 			to_chat(user, SPAN_NOTICE("You remove the glass panel."))
-			new /obj/item/stack/material/glass/reinforced( loc, 2 )
+			SSmaterials.create_object(/decl/material/solid/glass, loc, 2, null, /decl/material/solid/metal/steel)
 			glass_installed = FALSE
 			return TRUE
 		if(brain)

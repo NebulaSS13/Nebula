@@ -112,6 +112,12 @@
 			product.category = category
 			if(product && populate_parts)
 				product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
+			if(ispath(product.item_path, /obj/item/stack/material))
+				var/obj/item/stack/material/M = product.item_path
+				var/decl/material/mat = GET_DECL(initial(M.material))
+				if(mat)
+					var/mat_amt = initial(M.amount)
+					product.item_name = "[mat.solid_name] [mat_amt == 1 ? initial(M.singular_name) : initial(M.plural_name)] ([mat_amt]x)"
 			product_records.Add(product)
 
 /obj/machinery/vending/Destroy()
@@ -463,9 +469,9 @@
 
 	for(var/datum/stored_items/vending_products/R in shuffle(product_records))
 		throw_item = R.get_product(loc)
-		if (throw_item)
+		if(!QDELETED(throw_item))
 			break
-	if (!throw_item)
+	if(QDELETED(throw_item))
 		return 0
 	spawn(0)
 		throw_item.throw_at(target, rand(1,2), 3)

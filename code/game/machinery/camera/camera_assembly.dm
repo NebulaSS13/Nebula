@@ -10,7 +10,11 @@
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 
 	//	Motion, EMP-Proof, X-Ray
-	var/list/obj/item/possible_upgrades = list(/obj/item/assembly/prox_sensor, /obj/item/stack/material/osmium, /obj/item/stock_parts/scanning_module)
+	var/list/obj/item/possible_upgrades = list(
+		/obj/item/assembly/prox_sensor,
+		/obj/item/stock_parts/capacitor/adv,
+		/obj/item/stock_parts/scanning_module
+	)
 	var/list/upgrades = list()
 	var/camera_name
 	var/camera_network

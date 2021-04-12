@@ -3,11 +3,10 @@
 	melting_point = 1000
 	boiling_point = 30000
 	door_icon_base = "stone"
-	sheet_singular_name = "brick"
-	sheet_plural_name = "bricks"
 	icon_base = 'icons/turf/walls/stone.dmi'
 	table_icon_base = "stone"
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
+	default_solid_form = /obj/item/stack/material/brick
 
 /decl/material/solid/New()
 	if(!liquid_name)

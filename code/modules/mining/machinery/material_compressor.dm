@@ -45,7 +45,7 @@
 				continue
 			var/decl/material/source = GET_DECL(mat)
 			var/decl/material/product = source.ore_compresses_to ? GET_DECL(source.ore_compresses_to) : source
-			product.place_sheet(output_turf, sheets)
+			product.create_object(output_turf, sheets)
 			stored[mat] -= ceil(sheets * SHEET_MATERIAL_AMOUNT * 2)
 			if(stored[mat] <= 0)
 				stored -= mat

@@ -223,7 +223,7 @@
 				if(anchored)
 					return
 				user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
-				material.place_sheet(loc, 2)
+				material.create_object(loc, 2)
 				qdel(src)
 			return
 	// Wrench Open
