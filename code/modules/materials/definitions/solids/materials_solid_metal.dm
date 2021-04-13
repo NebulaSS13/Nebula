@@ -164,6 +164,7 @@
 	conductive = 0
 	hidden_from_codex = TRUE
 	value = 0
+	abstract = TRUE
 
 /decl/material/solid/metal/steel/holographic/get_recipes(reinf_mat)
 	return list()
@@ -195,6 +196,7 @@
 	shard_type = SHARD_NONE
 	conductive = 0
 	hidden_from_codex = TRUE
+	abstract = TRUE
 
 /decl/material/solid/metal/aluminium/holographic/get_recipes(reinf_mat)
 	return list()

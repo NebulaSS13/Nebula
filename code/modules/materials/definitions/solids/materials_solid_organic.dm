@@ -40,6 +40,7 @@
 	stack_type = null
 	shard_type = SHARD_NONE
 	hidden_from_codex = TRUE
+	abstract = TRUE
 
 /decl/material/solid/plastic/holographic/get_recipes(reinf_mat)
 	return list()
@@ -58,7 +59,8 @@
 	brute_armor = 1
 	weight = MAT_VALUE_EXTREMELY_LIGHT - 5
 	ignition_point = T0C+232 // "the temperature at which book-paper catches fire, and burns." close enough
-	melting_point = T0C+232  // temperature at which cardboard walls would be destroyed
+	melting_point = null
+	boiling_point = null
 	stack_origin_tech = "{'materials':1}"
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
@@ -179,7 +181,8 @@
 	color = COLOR_DARK_RED
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
-	melting_point = T0C+300
+	melting_point = null
+	boiling_point = null
 	conductive = 1
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
@@ -199,7 +202,8 @@
 	color = "#9e8c72"
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
-	melting_point = T0C+300
+	melting_point = null
+	boiling_point = null
 	conductive = 0
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
@@ -303,7 +307,8 @@
 	color = "#f0edc7"
 	stack_type = /obj/item/stack/material/generic/bone
 	ignition_point = T0C+1100
-	melting_point = T0C+1800
+	melting_point = null
+	boiling_point = null
 	conductive = 0
 	hidden_from_codex = TRUE
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
@@ -330,7 +335,8 @@
 	stack_origin_tech = "{'materials':2}"
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
-	melting_point = T0C+300
+	melting_point = null
+	boiling_point = null
 	conductive = 0
 	stack_type = /obj/item/stack/material/generic/skin
 	hidden_from_codex = TRUE

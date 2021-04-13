@@ -91,6 +91,7 @@
 	shard_type = SHARD_NONE
 	value = 0
 	hidden_from_codex = TRUE
+	abstract = TRUE
 
 /decl/material/solid/wood/holographic/get_recipes(reinf_mat)
 	return list()
