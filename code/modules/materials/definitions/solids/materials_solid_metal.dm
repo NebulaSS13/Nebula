@@ -57,10 +57,35 @@
 	lore_text = "An alloy of copper and tin. Once used in weapons and laboring tools."
 	stack_type = /obj/item/stack/material/bronze
 	color = "#ccbc63"
-	hardness = MAT_VALUE_HARD
+	brute_armor = 3
+	hardness = MAT_VALUE_RIGID + 10
+	icon_base = 'icons/turf/walls/solid.dmi'
+	icon_reinf = 'icons/turf/walls/reinforced.dmi'
 	sheet_singular_name = "sheet"
 	sheet_plural_name = "sheets"
 	value = 1.2
+
+/decl/material/solid/metal/blackbronze
+	name = "black bronze"
+	lore_text = "An alloy of copper and silver. Used in ancient ceremonial gear."
+	color = "#3f352a"
+	brute_armor = 4
+	hardness = MAT_VALUE_HARD
+	reflectiveness = MAT_VALUE_MATTE
+	icon_base = 'icons/turf/walls/solid.dmi'
+	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
+	value = 1.4
+
+/decl/material/solid/metal/redgold
+	name = "red gold"
+	lore_text = "An alloy of copper and gold. A soft metal used for its ornamental properties."
+	color = "#ff7a59"
+	reflectiveness = MAT_VALUE_SHINY
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
+	value = 1.4
 
 /decl/material/solid/metal/brass
 	name = "brass"
@@ -166,6 +191,21 @@
 
 /decl/material/solid/metal/steel/holographic/get_recipes(reinf_mat)
 	return list()
+
+/decl/material/solid/metal/stainlesssteel
+	name = "stainless steel"
+	lore_text = "A reflective alloy of steel and chromium. Used for its reflective and sturdy properties."
+	wall_support_value = MAT_VALUE_HEAVY
+	integrity = 175
+	burn_armor = 10
+	color = "#a5a5a5"
+	icon_base = 'icons/turf/walls/solid.dmi'
+	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	use_reinf_state = null
+	hitsound = 'sound/weapons/smash.ogg'
+	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
+	reflectiveness = MAT_VALUE_MIRRORED
+	value = 1.3
 
 /decl/material/solid/metal/aluminium
 	name = "aluminium"
@@ -345,6 +385,22 @@
 	color = "#92aae4"
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
 	reflectiveness = MAT_VALUE_MATTE
+
+/decl/material/solid/metal/chromium
+	name = "chromium"
+	lore_text = "A heavy metal with near perfect reflectiveness. Used in stainless alloys."
+	color = "#dadada"
+	integrity = 200
+	burn_armor = 15 // Strong against laser weaponry, but not as good as OCP.
+	melting_point = 6000
+	icon_base = 'icons/turf/walls/solid.dmi'
+	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	use_reinf_state = null
+	value = 1.5
+	weight = MAT_VALUE_VERY_HEAVY
+	hardness = MAT_VALUE_HARD + 10
+	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
+	reflectiveness = MAT_VALUE_MIRRORED
 
 // Adminspawn only, do not let anyone get this.
 /decl/material/solid/metal/alienalloy
