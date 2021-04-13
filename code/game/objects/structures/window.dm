@@ -407,10 +407,10 @@
 			overlays += I
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	var/melting_point = material.melting_point
+	var/check_temperature = material?.get_heat_damage_threshold() || T100C
 	if(reinf_material)
-		melting_point += 0.25*reinf_material.melting_point
-	if(exposed_temperature > melting_point)
+		check_temperature += 0.25*max(reinf_material.ignition_point, reinf_material.melting_point)
+	if(exposed_temperature > check_temperature)
 		hit(damage_per_fire_tick, 0)
 	..()
 

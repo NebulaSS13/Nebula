@@ -110,17 +110,8 @@
 		matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()))
 	UNSETEMPTY(matter)
 
-/obj/item/ProcessAtomTemperature()
-	. = ..()
-	if(material)
-		var/state_change = material.check_matter_state_at_temperature(temperature, loc, max(1, Floor(get_matter_amount_modifier())))
-		if(state_change == MATTER_STATE_SOLID)
-			return
-		if(state_change == MATTER_STATE_LIQUID)
-			visible_message(SPAN_DANGER("\The [src] [gender == PLURAL ? "melt" : "melts"]!"))
-		else if(state_change == MATTER_STATE_GAS)
-			visible_message(SPAN_DANGER("\The [src] [gender == PLURAL ? "boil" : "boils"] away!"))
-		qdel(src)
+/obj/item/get_current_material_state()
+	return material?.check_matter_state_at_temperature(temperature, loc, max(1, Floor(get_matter_amount_modifier()))) || ..()
 
 /obj/item/Initialize(var/ml, var/material_key)
 	if(!ispath(material_key, /decl/material))

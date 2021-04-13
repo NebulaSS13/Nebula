@@ -70,11 +70,12 @@
 	if(abs(environment.temperature - bodytemperature) > 0 )
 		bodytemperature += ((environment.temperature - bodytemperature) / 6)
 
-	if(bodytemperature > material.melting_point * 1.45 ) //A bit higher because I like to assume there's a difference between a mech and a wall
+	var/check_temp = material?.get_heat_damage_threshold() || T100C
+	if(bodytemperature > check_temp * 1.45 ) //A bit higher because I like to assume there's a difference between a mech and a wall
 		var/damage = 5
-		if(bodytemperature > material.melting_point * 1.75 )
+		if(bodytemperature > check_temp * 1.75 )
 			damage = 10
-		if(bodytemperature > material.melting_point * 2.15 )
+		if(bodytemperature > check_temp * 2.15 )
 			damage = 15
 		apply_damage(damage, BURN)
 	//A possibility is to hook up interface icons here. But this works pretty well in my experience

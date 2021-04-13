@@ -24,6 +24,7 @@
 	wall_support_value = MAT_VALUE_LIGHT
 	sheet_singular_name = "sheet"
 	sheet_plural_name = "sheets"
+	dissolves_in = MAT_SOLVENT_IMPOSSIBLE
 
 /decl/material/solid/glass/proc/is_reinforced()
 	return (integrity > 75) //todo

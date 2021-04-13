@@ -37,6 +37,9 @@
 	if(!CanFluidPass())
 		fluid_update()
 
+/obj/structure/get_current_material_state()
+	return material?.check_matter_state_at_temperature(temperature, loc, max(1, Floor(get_matter_amount_modifier()))) || ..()
+
 /obj/structure/proc/show_examined_damage(mob/user, var/perc)
 	if(maxhealth == -1)
 		return

@@ -334,7 +334,8 @@
 		var/modifiers = params2list(params)
 		if(modifiers["shift"])
 			if(owner && owner.material)
-				usr.show_message(SPAN_NOTICE("Your suit's safe operating limit ceiling is [(celsius ? "[owner.material.melting_point - T0C] °C" : "[owner.material.melting_point] K" )]."), VISIBLE_MESSAGE)
+				var/check_temperature = owner.material.get_heat_damage_threshold()
+				usr.show_message(SPAN_NOTICE("Your suit's safe operating limit ceiling is [(celsius ? "[check_temperature - T0C] °C" : "[check_temperature] K" )]."), VISIBLE_MESSAGE)
 			return
 		if(modifiers["ctrl"])
 			celsius = !celsius
@@ -344,7 +345,7 @@
 			usr.show_message(SPAN_NOTICE("The life support panel blinks several times as it updates:"), VISIBLE_MESSAGE)
 
 			usr.show_message(SPAN_NOTICE("Chassis heat probe reports temperature of [(celsius ? "[owner.bodytemperature - T0C] °C" : "[owner.bodytemperature] K" )]."), VISIBLE_MESSAGE)
-			if(owner.material.melting_point < owner.bodytemperature)
+			if(owner.bodytemperature > (owner.material?.get_heat_damage_threshold() || T100C))
 				usr.show_message(SPAN_WARNING("Warning: Current chassis temperature exceeds operating parameters."), VISIBLE_MESSAGE)
 			var/air_contents = owner.loc.return_air()
 			if(!air_contents)
@@ -357,7 +358,7 @@
 /obj/screen/exosuit/heat/proc/Update()
 	//Relative value of heat
 	if(owner && owner.body && owner.body.diagnostics?.is_functional() && gauge_needle)
-		var/value = Clamp(owner.bodytemperature / (owner.material.melting_point * 1.55), 0, 1)
+		var/value = Clamp(owner.bodytemperature / (owner.material.get_heat_damage_threshold() * 1.55), 0, 1)
 		var/matrix/rot_matrix = matrix()
 		rot_matrix.Turn(Interpolate(-90, 90, value))
 		rot_matrix.Translate(0, -2)

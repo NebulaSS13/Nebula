@@ -369,6 +369,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				target.reagents.add_reagent(type, (amount * REAGENT_UNITS_PER_MATERIAL_SHEET))
 		return MATTER_STATE_LIQUID
 
+	// Should we be on fire?
+	if(!isnull(ignition_point) && check_temperature >= ignition_point)
+		return MATTER_STATE_AFLAME
+
 	// Whoever is calling us can go ahead and spawn a solid.
 	return MATTER_STATE_SOLID
 
@@ -643,3 +647,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	if(prop.reagents.has_reagent(/decl/material/solid/ice))
 		. = "iced [.]"
+
+/decl/material/proc/get_heat_damage_threshold()
+	. = T100C
+	if(!isnull(melting_point))
+		. = min(., melting_point)
+	if(!isnull(ignition_point))
+		. = min(., ignition_point)
+	if(!isnull(boiling_point))
+		. = min(., boiling_point)

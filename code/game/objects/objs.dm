@@ -204,3 +204,20 @@
 
 /obj/get_object_size()
 	return w_class
+
+/obj/proc/get_current_material_state()
+	return MATTER_STATE_SOLID
+
+/obj/ProcessAtomTemperature()
+	. = ..()
+	// TODO: make this a gradual process instead of having it all happen at once; possibly remove 
+	// portions of the matter var and set the string on the object to 'melted' or 'charred'.
+	var/state_change = get_current_material_state()
+	if(state_change != MATTER_STATE_SOLID)
+		if(state_change == MATTER_STATE_LIQUID)
+			visible_message(SPAN_DANGER("\The [src] [gender == PLURAL ? "melt" : "melts"]!"))
+		else if(state_change == MATTER_STATE_GAS)
+			visible_message(SPAN_DANGER("\The [src] [gender == PLURAL ? "boil" : "boils"] away!"))
+		else if(state_change == MATTER_STATE_AFLAME)
+			visible_message(SPAN_DANGER("\The [src] [gender == PLURAL ? "burn" : "burns"] away!"))
+		qdel(src)

@@ -209,8 +209,9 @@ var/list/wall_noblend_objects = list(
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	burn(adj_temp)
-	if(adj_temp > material.melting_point)
-		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - material.melting_point)))
+	var/check_temp = material.get_heat_damage_threshold()
+	if(adj_temp > check_temp)
+		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - check_temp)))
 
 	return ..()
 

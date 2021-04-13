@@ -239,7 +239,7 @@
 
 /obj/structure/grille/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!destroyed)
-		if(exposed_temperature > material.melting_point)
+		if(exposed_temperature > material.get_heat_damage_threshold())
 			take_damage(1)
 	..()
 

@@ -57,8 +57,8 @@
 	hardness = MAT_VALUE_SOFT
 	brute_armor = 1
 	weight = MAT_VALUE_EXTREMELY_LIGHT - 5
-	ignition_point = T0C+232 //"the temperature at which book-paper catches fire, and burns." close enough
-	melting_point = T0C+232 //temperature at which cardboard walls would be destroyed
+	ignition_point = T0C+232 // "the temperature at which book-paper catches fire, and burns." close enough
+	melting_point = T0C+232  // temperature at which cardboard walls would be destroyed
 	stack_origin_tech = "{'materials':1}"
 	door_icon_base = "wood"
 	destruction_desc = "crumples"

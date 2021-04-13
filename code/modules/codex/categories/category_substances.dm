@@ -42,8 +42,12 @@
 				material_info += "</ul>"
 
 			material_info += "<br>This substance has the following properties:<ul>"
-			material_info += "<li>Its melting point is [mat.melting_point] K.</li>"
-			material_info += "<li>Its boiling point is [mat.boiling_point] K.</li>"
+			if(!isnull(mat.ignition_point))
+				material_info += "<li>Its ignition point is [mat.ignition_point] K.</li>"
+			if(!isnull(mat.melting_point))
+				material_info += "<li>Its melting point is [mat.melting_point] K.</li>"
+			if(!isnull(mat.boiling_point))
+				material_info += "<li>Its boiling point is [mat.boiling_point] K.</li>"
 			if(mat.solvent_power > MAT_SOLVENT_NONE)
 				if(mat.solvent_power <= MAT_SOLVENT_MILD)
 					material_info += "<li>It is a mild solvent.</li>"
@@ -51,7 +55,7 @@
 					material_info += "<li>It is a moderately strong solvent, capable of removing ink.</li>"
 				else if(mat.solvent_power <= MAT_SOLVENT_STRONG)
 					material_info += "<li>It is a strong solvent and will burn exposed skin on contact.</li>"
-			if(LAZYLEN(mat.dissolves_into))
+			if(LAZYLEN(mat.dissolves_into) && mat.dissolves_in < MAT_SOLVENT_IMPOSSIBLE)
 				var/chems = list()
 				for(var/chemical in mat.dissolves_into)
 					var/decl/material/R = chemical
