@@ -523,3 +523,27 @@
 		/decl/material/solid/metal/gold = 0.7,
 		/decl/material/solid/metal/silver = 0.3
 	)
+
+/decl/material/solid/mineral/crocoite
+	name = "crocoite"
+	color = "#fa672c"
+	heating_products = list(
+		/decl/material/solid/metal/chromium = 0.3,
+		/decl/material/solid/metal/lead = 0.4,
+		/decl/material/solid/slag = 0.3
+	)
+	ore_name = "crocoite"
+	ore_result_amount = 10
+	ore_spread_chance = 5
+	ore_scan_icon = "mineral_uncommon"
+	ore_icon_overlay = "lump"
+	ore_type_value = ORE_PRECIOUS
+	ore_data_value = 1
+	value = 0.9
+	sparse_material_weight = 5
+	rich_material_weight = 10
+	fuel_value = 0.8
+	dissolves_into = list(
+		/decl/material/solid/metal/chromium = 0.6,
+		/decl/material/solid/metal/lead = 0.4
+	)

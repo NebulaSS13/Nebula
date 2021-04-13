@@ -375,6 +375,19 @@
 /obj/item/stack/material/zinc/fifty
 	amount = 50
 
+/obj/item/stack/material/chromium
+	name = "chromium"
+	icon_state = "sheet"
+	plural_icon_state = "sheet-mult"
+	max_icon_state = "sheet-max"
+	material = /decl/material/solid/metal/chromium
+
+/obj/item/stack/material/chromium/ten
+	amount = 10
+
+/obj/item/stack/material/chromium/fifty
+	amount = 50
+
 /obj/item/stack/material/tungsten
 	name = "tungsten"
 	icon_state = "ingot"
@@ -439,6 +452,45 @@
 	amount = 10
 
 /obj/item/stack/material/brass/fifty
+	amount = 50
+
+/obj/item/stack/material/blackbronze
+	name = "black bronze"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
+	max_icon_state = "ingot-max"
+	material = /decl/material/solid/metal/blackbronze
+
+/obj/item/stack/material/blackbronze/ten
+	amount = 10
+
+/obj/item/stack/material/blackbronze/fifty
+	amount = 50
+
+/obj/item/stack/material/redgold
+	name = "red gold"
+	icon_state = "ingot"
+	plural_icon_state = "ingot-mult"
+	max_icon_state = "ingot-max"
+	material = /decl/material/solid/metal/redgold
+
+/obj/item/stack/material/redgold/ten
+	amount = 10
+
+/obj/item/stack/material/redgold/fifty
+	amount = 50
+
+/obj/item/stack/material/stainlesssteel
+	name = "stainless steel"
+	icon_state = "sheet"
+	plural_icon_state = "sheet-mult"
+	max_icon_state = "sheet-max"
+	material = /decl/material/solid/metal/stainlesssteel
+
+/obj/item/stack/material/stainlesssteel/ten
+	amount = 10
+
+/obj/item/stack/material/stainlesssteel/fifty
 	amount = 50
 
 /obj/item/stack/material/wood

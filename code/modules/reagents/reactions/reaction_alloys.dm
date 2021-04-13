@@ -57,3 +57,30 @@
 		/decl/material/solid/metal/zinc = 1
 	)
 	result_amount = 3
+
+/datum/chemical_reaction/alloy/blackbronze
+	name = "Black Bronze"
+	result = /decl/material/solid/metal/blackbronze
+	required_reagents = list(
+		/decl/material/solid/metal/copper = 2, 
+		/decl/material/solid/metal/silver = 1
+	)
+	result_amount = 3
+
+/datum/chemical_reaction/alloy/redgold
+	name = "Red Gold"
+	result = /decl/material/solid/metal/redgold
+	required_reagents = list(
+		/decl/material/solid/metal/copper = 2, 
+		/decl/material/solid/metal/gold = 1
+	)
+	result_amount = 3
+
+/datum/chemical_reaction/alloy/stainlesssteel
+	name = "Stainless Steel"
+	result = /decl/material/solid/metal/stainlesssteel
+	required_reagents = list(
+		/decl/material/solid/metal/steel = 9, 
+		/decl/material/solid/metal/chromium = 1
+	)
+	result_amount = 10
