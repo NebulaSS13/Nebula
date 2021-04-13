@@ -19,7 +19,6 @@
 	var/carbon_stored = 0
 	var/carbon_efficiency = 0.5
 	var/intake_power_efficiency = 1
-	var/const/carbon_moles_per_piece = 50 //One 12g per mole * 50 = 600 g chunk of coal
 	var/phase = "filling"//"filling", "processing", "releasing"
 	var/datum/gas_mixture/inner_tank = new
 	var/tank_volume = 400//Litres
@@ -77,8 +76,8 @@
 			new_oxygen.temperature = T20C+30 //it's sort of hot after molecular bond breaking
 			inner_tank.merge(new_oxygen)
 			carbon_stored += co2_intake * carbon_efficiency
-			while (carbon_stored >= carbon_moles_per_piece)
-				carbon_stored -= carbon_moles_per_piece
+			while (carbon_stored >= MOLES_PER_SHEET)
+				carbon_stored -= MOLES_PER_SHEET
 				var/decl/material/M = GET_DECL(/decl/material/solid/mineral/graphite)
 				M.place_sheet(get_turf(src), 1, M.type)
 			power_draw = power_rating * co2_intake

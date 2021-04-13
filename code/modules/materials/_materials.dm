@@ -76,6 +76,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/lore_text
 	var/mechanics_text
 	var/antag_text
+	var/abstract = FALSE // Set to TRUE for stuff that needs to use material values but shouldn't exist in the game world (holographic etc)
 
 	var/affect_blood_on_ingest = TRUE
 
@@ -317,7 +318,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.
 /decl/material/proc/place_dismantled_girder(var/turf/target, var/decl/material/reinf_material)
-	new /obj/structure/girder(target, type, reinf_material && reinf_material.type)
+	if(check_matter_state_at_temperature(null, target, 1) == MATTER_STATE_SOLID)
+		return new /obj/structure/girder(target, type, reinf_material && reinf_material.type)
 
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.
@@ -326,12 +328,49 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 // Debris product. Used ALL THE TIME.
 /decl/material/proc/place_sheet(var/turf/target, var/amount = 1)
-	return stack_type ? new stack_type(target, amount, type) : null
+	if(stack_type && check_matter_state_at_temperature(null, target, 1) == MATTER_STATE_SOLID)
+		return new stack_type(target, amount, type)
 
 // As above.
 /decl/material/proc/place_shard(var/turf/target)
-	if(shard_type)
+	if(shard_type && check_matter_state_at_temperature(null, target, 1) == MATTER_STATE_SOLID)
 		return new /obj/item/shard(target, type)
+
+// Checks a location for any kind of temperature that would prevent the material from being solid.
+/decl/material/proc/check_matter_state_at_temperature(var/check_temperature, var/atom/target, var/amount)
+
+	// Fail out early if this is a nonsense check.
+	if(abstract || amount <= 0)
+		return MATTER_STATE_NONE
+	if(isnull(target))
+		return MATTER_STATE_SOLID
+	if(!istype(target))
+		return MATTER_STATE_NONE
+
+	if(isnull(check_temperature))
+		var/datum/gas_mixture/environment = target.return_air()
+		check_temperature = environment?.temperature || T20C
+
+	// Should we be a gas?
+	if(!isnull(boiling_point) && check_temperature >= boiling_point)
+		if(isturf(target) && amount >= 0)
+			var/turf/T = target
+			T.assume_gas(type, (amount * MOLES_PER_SHEET), check_temperature)
+		return MATTER_STATE_GAS
+
+	// Should we be a liquid?
+	if(!isnull(melting_point) && check_temperature >= melting_point)
+		if(amount > 0)
+			if(isturf(target))
+				var/obj/effect/fluid/F = locate() in target
+				if(!F) F = new(target)
+				F.reagents.add_reagent(type, (amount * REAGENT_UNITS_PER_MATERIAL_SHEET))
+			else if(target?.reagents)
+				target.reagents.add_reagent(type, (amount * REAGENT_UNITS_PER_MATERIAL_SHEET))
+		return MATTER_STATE_LIQUID
+
+	// Whoever is calling us can go ahead and spawn a solid.
+	return MATTER_STATE_SOLID
 
 // Used by walls and weapons to determine if they break or not.
 /decl/material/proc/is_brittle()

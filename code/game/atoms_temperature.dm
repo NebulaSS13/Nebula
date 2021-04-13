@@ -20,8 +20,14 @@
 
 /obj/Initialize()
 	. = ..()
+
 	temperature_coefficient = isnull(temperature_coefficient) ? Clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 	create_matter()
+
+	if(ATOM_IS_TEMPERATURE_SENSITIVE(src))
+		var/datum/gas_mixture/environment = loc?.return_air()
+		var/check_temp = environment?.temperature || T20C
+		ADJUST_ATOM_TEMPERATURE(src, check_temp)
 
 /obj/proc/HandleObjectHeating(var/obj/item/heated_by, var/mob/user, var/adjust_temp)
 	if(ATOM_IS_TEMPERATURE_SENSITIVE(src))
