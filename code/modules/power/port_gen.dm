@@ -112,7 +112,7 @@
 	desc = "A power generator that runs on solid deuterium sheets. Rated for 80 kW max safe output."
 
 	var/sheet_name = "Deuterium Sheets"
-	var/sheet_path = /obj/item/stack/material/deuterium
+	var/sheet_path = /obj/item/stack/material/aerogel/deuterium
 
 	/*
 		These values were chosen so that the generator can run safely up to 80 kW
@@ -506,7 +506,7 @@
 	name = "M.R.S.P.A.C.M.A.N.-type Portable Generator"
 	desc = "An advanced power generator that runs on tritium. Rated for 200 kW maximum safe output!"
 	icon_state = "portgen2"
-	sheet_path = /obj/item/stack/material/tritium
+	sheet_path = /obj/item/stack/material/aerogel/tritium
 	sheet_name = "Tritium Fuel Sheets"
 
 	//I don't think tritium has any other use, so we might as well make this rewarding for players

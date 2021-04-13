@@ -21,8 +21,8 @@
 		/obj/item/stock_parts/smes_coil,
 		/obj/item/stock_parts/computer,
 		/obj/item/fuel_assembly,
-		/obj/item/stack/material/deuterium,
-		/obj/item/stack/material/tritium,
+		/obj/item/stack/material/aerogel/deuterium,
+		/obj/item/stack/material/aerogel/tritium,
 		/obj/item/stack/tile
 		)
 

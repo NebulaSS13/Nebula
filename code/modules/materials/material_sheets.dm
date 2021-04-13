@@ -248,20 +248,6 @@
 /obj/item/stack/material/mhydrogen/ten
 	amount = 10
 
-//Fuel for MRSPACMAN generator.
-/obj/item/stack/material/tritium
-	name = "tritium"
-	icon_state = "puck"
-	plural_icon_state = "puck-mult"
-	max_icon_state = "puck-max"
-	material = /decl/material/gas/hydrogen/tritium
-
-/obj/item/stack/material/tritium/ten
-	amount = 10
-
-/obj/item/stack/material/tritium/fifty
-	amount = 50
-
 /obj/item/stack/material/osmium
 	name = "osmium"
 	icon_state = "ingot"
@@ -284,17 +270,6 @@
 	amount = 10
 
 /obj/item/stack/material/ocp/fifty
-	amount = 50
-
-// Fusion fuel.
-/obj/item/stack/material/deuterium
-	name = "deuterium"
-	icon_state = "puck"
-	plural_icon_state = "puck-mult"
-	max_icon_state = "puck-max"
-	material = /decl/material/gas/hydrogen/deuterium
-
-/obj/item/stack/material/deuterium/fifty
 	amount = 50
 
 /obj/item/stack/material/steel
@@ -643,3 +618,43 @@
 	icon_state = "brick"
 	plural_icon_state = "brick-mult"
 	max_icon_state = "brick-max"
+
+// Used as a sort of dummy material to prevent mapped gas sheets from instantly evaporating.
+/obj/item/stack/material/aerogel
+	name = "aerogel"
+	singular_name = "gel block"
+	plural_name = "gel blocks"
+	icon_state = "puck"
+	plural_icon_state = "puck-mult"
+	max_icon_state = "puck-max"
+	var/const/override_heat_damage_threshold = T100C
+
+/obj/item/stack/material/aerogel/get_current_material_state()
+	if(loc)
+		var/datum/gas_mixture/environment = loc.return_air()
+		if(environment?.temperature > override_heat_damage_threshold)
+			return MATTER_STATE_GAS
+	return MATTER_STATE_SOLID
+
+/obj/item/stack/material/aerogel/on_update_icon()
+	. = ..()
+	alpha = min(alpha, 150)
+
+// Fusion fuel.
+/obj/item/stack/material/aerogel/deuterium
+	name = "deuterium"
+	material = /decl/material/gas/hydrogen/deuterium
+
+/obj/item/stack/material/aerogel/deuterium/fifty
+	amount = 50
+	
+//Fuel for MRSPACMAN generator.
+/obj/item/stack/material/aerogel/tritium
+	name = "tritium"
+	material = /decl/material/gas/hydrogen/tritium
+
+/obj/item/stack/material/aerogel/tritium/ten
+	amount = 10
+
+/obj/item/stack/material/aerogel/tritium/fifty
+	amount = 50

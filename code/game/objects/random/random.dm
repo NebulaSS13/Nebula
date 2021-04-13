@@ -984,7 +984,7 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/stack/material/silver/ten = 7,
 				/obj/item/stack/material/osmium/ten = 7,
 				/obj/item/stack/material/platinum/ten = 8,
-				/obj/item/stack/material/tritium/ten = 7,
+				/obj/item/stack/material/aerogel/tritium/ten = 7,
 				/obj/item/stack/material/mhydrogen/ten = 6,
 				/obj/item/stack/material/plasteel/ten = 9,
 				/obj/item/storage/box/monkeycubes = 5,

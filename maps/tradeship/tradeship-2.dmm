@@ -4389,8 +4389,8 @@
 	dir = 8
 	},
 /obj/structure/closet/crate/radiation,
-/obj/item/stack/material/deuterium/fifty,
-/obj/item/stack/material/tritium/ten,
+/obj/item/stack/material/aerogel/deuterium/fifty,
+/obj/item/stack/material/aerogel/tritium/ten,
 /obj/structure/window/borosilicate_reinforced{
 	icon_state = "rwindow";
 	dir = 8

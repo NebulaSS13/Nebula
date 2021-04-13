@@ -18,7 +18,6 @@
 	applies_material_name = TRUE
 	unbreakable = 1 //It's already broken.
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
-	atom_flags = 0
 	var/has_handle
 
 /obj/item/shard/attack(mob/living/M, mob/living/user, var/target_zone)

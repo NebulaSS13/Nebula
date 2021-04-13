@@ -194,9 +194,9 @@
 /obj/random/contraband,
 /obj/random/contraband,
 /obj/random/contraband,
-/obj/item/stack/material/tritium/fifty,
-/obj/item/stack/material/deuterium/fifty,
-/obj/item/stack/material/deuterium/fifty,
+/obj/item/stack/material/aerogel/tritium/fifty,
+/obj/item/stack/material/aerogel/deuterium/fifty,
+/obj/item/stack/material/aerogel/deuterium/fifty,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/tcomms)
 "aF" = (
@@ -2347,8 +2347,8 @@
 /obj/item/stock_parts/smes_coil/super_io,
 /obj/item/stock_parts/smes_coil/weak,
 /obj/item/stock_parts/smes_coil/weak,
-/obj/item/stack/material/tritium/fifty,
-/obj/item/stack/material/tritium/fifty,
+/obj/item/stack/material/aerogel/tritium/fifty,
+/obj/item/stack/material/aerogel/tritium/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
 "eI" = (

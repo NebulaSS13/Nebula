@@ -14,3 +14,6 @@
 	hardness = 0
 	weight = 1
 	opacity = 0.3
+	sheet_singular_name = "gel block"
+	sheet_plural_name = "gel blocks"
+	stack_type = /obj/item/stack/material/aerogel
