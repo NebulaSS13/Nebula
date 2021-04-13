@@ -87,7 +87,7 @@ var/list/time_prefs_fixed = list()
 		SScharacter_setup.queue_preferences_save(src)
 		save_character()
 
-/datum/preferences/proc/ShowChoices(mob/user)
+/datum/preferences/proc/get_content(mob/user)
 	if(!SScharacter_setup.initialized)
 		return
 	if(!user || !user.client)
@@ -102,7 +102,7 @@ var/list/time_prefs_fixed = list()
 		update_preview_icon()
 	show_character_previews()
 
-	var/dat = "<html><body><center>"
+	var/dat = list("<center>")
 
 	if(path)
 		dat += "Slot - "
@@ -118,13 +118,28 @@ var/list/time_prefs_fixed = list()
 	dat += player_setup.header()
 	dat += "<br><HR></center>"
 	dat += player_setup.content(user)
+	return url_encode(JOINTEXT(dat))
 
-	dat += "</html></body>"
+/datum/preferences/proc/open_setup_window(mob/user)
 	winshow(user, "preferences_window", TRUE)
 	var/datum/browser/popup = new(user, "preferences_browser", "Character Setup", 800, 800)
-	popup.set_content(dat)
+	var/content = {"
+	<script type='text/javascript'>
+		function update_content(data){
+			document.getElementById('content').innerHTML = data
+		}
+	</script>
+	<html><body>
+		<div id='content'>Loading...</div>
+	</body></html>
+	"}
+	popup.set_content(content)
 	popup.open(FALSE) // Skip registring onclose on the browser pane
 	onclose(user, "preferences_window", src) // We want to register on the window itself
+	update_setup_window(user)
+
+/datum/preferences/proc/update_setup_window(mob/user)
+	send_output(user, get_content(user), "preferences_browser:update_content")
 
 /datum/preferences/proc/update_character_previews(mutable_appearance/MA)
 	if(!client)
@@ -175,7 +190,7 @@ var/list/time_prefs_fixed = list()
 		else
 			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
-	ShowChoices(usr)
+	update_setup_window(usr)
 	return 1
 
 /datum/preferences/Topic(href, list/href_list)
@@ -214,7 +229,7 @@ var/list/time_prefs_fixed = list()
 	else
 		return 0
 
-	ShowChoices(usr)
+	update_setup_window(usr)
 	return 1
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
