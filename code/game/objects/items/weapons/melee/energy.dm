@@ -1,4 +1,8 @@
 /obj/item/energy_blade
+	atom_flags = ATOM_FLAG_NO_BLOOD
+	sharp = 0
+	edge = 0
+	armor_penetration = 50
 	var/active = 0
 	var/active_force
 	var/active_throwforce
@@ -6,10 +10,6 @@
 	var/lighting_color
 	var/active_attack_verb
 	var/inactive_attack_verb = list()
-	sharp = 0
-	edge = 0
-	armor_penetration = 50
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 
 /obj/item/energy_blade/get_heat()
 	. = max(..(), 3500)
@@ -113,7 +113,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
+	atom_flags = ATOM_FLAG_NO_BLOOD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	origin_tech = "{'magnets':3,'combat':4}"
 	active_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
@@ -141,7 +141,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
+	atom_flags = ATOM_FLAG_NO_BLOOD
 	origin_tech = "{'magnets':3,'esoteric':4}"
 	sharp = 1
 	edge = 1
@@ -222,7 +222,7 @@
 	throw_speed = 1
 	throw_range = 1
 	w_class = ITEM_SIZE_TINY //technically it's just energy or something, I dunno
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
+	atom_flags = ATOM_FLAG_NO_BLOOD
 	active_attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
 	var/mob/living/creator

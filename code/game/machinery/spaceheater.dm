@@ -7,16 +7,13 @@
 	name = "space heater"
 	desc = "This heater is guaranteed not to set anything, or anyone, on fire."
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
-
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	clicksound = "switch"
-
-	light_power = 0.5
-
 	construct_state = /decl/machine_construction/default/panel_closed
 	stat_immune = 0
 	uncreated_component_parts = null
 
+	light_power = 0.5
 	var/on = 0
 	var/set_temperature = T0C + 20	//K
 	var/active = 0

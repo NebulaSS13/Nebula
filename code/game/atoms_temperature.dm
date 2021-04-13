@@ -24,18 +24,16 @@
 	temperature_coefficient = isnull(temperature_coefficient) ? Clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 	create_matter()
 
-	if(ATOM_IS_TEMPERATURE_SENSITIVE(src))
-		var/datum/gas_mixture/environment = loc?.return_air()
-		var/check_temp = environment?.temperature || T20C
-		ADJUST_ATOM_TEMPERATURE(src, check_temp)
+	var/datum/gas_mixture/environment = loc?.return_air()
+	var/check_temp = environment?.temperature || T20C
+	ADJUST_ATOM_TEMPERATURE(src, check_temp)
 
 /obj/proc/HandleObjectHeating(var/obj/item/heated_by, var/mob/user, var/adjust_temp)
-	if(ATOM_IS_TEMPERATURE_SENSITIVE(src))
-		visible_message(SPAN_NOTICE("\The [user] carefully heats \the [src] with \the [heated_by]."))
-		var/diff_temp = (adjust_temp - temperature)
-		if(diff_temp >= 0)
-			var/altered_temp = max(temperature + (ATOM_TEMPERATURE_EQUILIBRIUM_CONSTANT * temperature_coefficient * diff_temp), 0)
-			ADJUST_ATOM_TEMPERATURE(src, min(adjust_temp, altered_temp))
+	visible_message(SPAN_NOTICE("\The [user] carefully heats \the [src] with \the [heated_by]."))
+	var/diff_temp = (adjust_temp - temperature)
+	if(diff_temp >= 0)
+		var/altered_temp = max(temperature + (ATOM_TEMPERATURE_EQUILIBRIUM_CONSTANT * temperature_coefficient * diff_temp), 0)
+		ADJUST_ATOM_TEMPERATURE(src, min(adjust_temp, altered_temp))
 
 /mob/Initialize()
 	. = ..()

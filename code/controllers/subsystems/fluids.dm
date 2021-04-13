@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(fluids)
 /datum/controller/subsystem/fluids/New(start_timeofday)
 	equalizing_reagent_holder = new
 	equalizing_reagent_holder.unacidable = TRUE
-	equalizing_reagent_holder.atom_flags |= (ATOM_FLAG_NO_TEMP_CHANGE|ATOM_FLAG_OPEN_CONTAINER|ATOM_FLAG_NO_REACT)
+	equalizing_reagent_holder.atom_flags |= (ATOM_FLAG_OPEN_CONTAINER|ATOM_FLAG_NO_REACT)
 	equalizing_reagent_holder.create_reagents(FLUID_MAX_DEPTH * 9 * 3)
 	..()
 

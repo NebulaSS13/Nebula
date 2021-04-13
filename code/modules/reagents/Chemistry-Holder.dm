@@ -8,6 +8,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	var/maximum_volume = 120
 	var/atom/my_atom
 	var/cached_color
+	var/temperature = T20C
 
 /datum/reagents/New(var/maximum_volume = 120, var/atom/my_atom)
 	src.maximum_volume = maximum_volume
@@ -19,6 +20,10 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 #endif
 	..()
 	src.my_atom = my_atom
+
+// TODO in the future: heat capacity and gradual temperature equalization.
+/datum/reagents/proc/adjust_temperature(var/new_temperature)
+	temperature = new_temperature
 
 /datum/reagents/Destroy()
 	. = ..()
@@ -62,7 +67,6 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	var/reaction_occured = FALSE
 	var/list/eligible_reactions = list()
 
-	var/temperature = my_atom ? my_atom.temperature : T20C
 	for(var/thing in reagent_volumes)
 		var/decl/material/R = GET_DECL(thing)
 

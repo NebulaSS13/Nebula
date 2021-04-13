@@ -2,18 +2,15 @@
 	name = "atmoalter"
 	use_power = POWER_USE_OFF
 	construct_state = /decl/machine_construction/default/panel_closed
+	atom_flags = ATOM_FLAG_CLIMBABLE
 
 	var/datum/gas_mixture/air_contents = new
-
 	var/obj/machinery/atmospherics/portables_connector/connected_port
 	var/obj/item/tank/holding
-
 	var/volume = 0
 	var/destroyed = 0
-
 	var/start_pressure = ONE_ATMOSPHERE
 	var/maximum_pressure = 90 * ONE_ATMOSPHERE
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
 /obj/machinery/portable_atmospherics/Initialize()
 	..()

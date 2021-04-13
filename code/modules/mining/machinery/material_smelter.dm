@@ -19,7 +19,6 @@
 /obj/machinery/material_processing/smeltery/Initialize()
 	. = ..()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
-	atom_flags &= ~ATOM_FLAG_NO_TEMP_CHANGE
 	create_reagents(MAX_ORE_REAGENT_CONTENTS)
 	QUEUE_TEMPERATURE_ATOMS(src)
 

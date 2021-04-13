@@ -2,14 +2,14 @@
 	name = "photocopier"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "photocopier"
-	var/insert_anim = "photocopier_animation"
 	anchored = 1
 	density = 1
 	idle_power_usage = 30
 	active_power_usage = 200
 	power_channel = EQUIP
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	obj_flags = OBJ_FLAG_ANCHORABLE
+	var/insert_anim = "photocopier_animation"
 	var/obj/item/copyitem = null	//what's in the copier!
 	var/copies = 1	//how many copies to print!
 	var/toner = 30 //how much toner is left! woooooo~

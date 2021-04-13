@@ -116,6 +116,7 @@
 	value = 1.1
 	sheet_singular_name = "sheet"
 	sheet_plural_name = "sheets"
+	melting_point = 1600
 	dissolves_into = list(
 		/decl/material/solid/metal/iron = 0.98,
 		/decl/material/solid/carbon = 0.02

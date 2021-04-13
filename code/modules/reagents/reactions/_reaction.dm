@@ -28,15 +28,16 @@
 	if(holder.has_any_reagent(inhibitors))
 		return 0
 
-	var/temperature = holder.my_atom ? holder.my_atom.temperature : T20C
-	if(temperature < minimum_temperature || temperature > maximum_temperature)
+	if(holder.temperature < minimum_temperature || holder.temperature > maximum_temperature)
 		return 0
 
 	return 1
 
 /datum/chemical_reaction/proc/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
-	if(thermal_product && ATOM_IS_TEMPERATURE_SENSITIVE(holder.my_atom))
-		ADJUST_ATOM_TEMPERATURE(holder.my_atom, thermal_product)
+	if(holder && thermal_product)
+		holder.adjust_temperature(holder.temperature + thermal_product)
+		if(!(holder.my_atom?.atom_flags & ATOM_FLAG_INSULATED_CONTAINER))
+			ADJUST_ATOM_TEMPERATURE(holder.my_atom, holder.temperature)
 
 // This proc returns a list of all reagents it wants to use; if the holder has several reactions that use the same reagent, it will split the reagent evenly between them
 /datum/chemical_reaction/proc/get_used_reagents()

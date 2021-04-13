@@ -180,10 +180,6 @@
 
 /obj/structure/fire_source/attackby(var/obj/item/thing, var/mob/user)
 
-	if(ATOM_IS_TEMPERATURE_SENSITIVE(thing) && user.a_intent != I_HURT)
-		thing.HandleObjectHeating(src, user, DIRECT_HEAT)
-		return TRUE
-
 	if(ATOM_IS_OPEN_CONTAINER(thing))
 		if(thing.reagents?.total_volume)
 			user.visible_message(SPAN_DANGER("\The [user] pours the contents of \the [thing] into \the [src]!"))
@@ -202,6 +198,10 @@
 		if(istype(thing, /obj/item/flame/candle))
 			var/obj/item/flame/candle/flame = thing
 			flame.light(user)
+			return TRUE
+
+		if(user.a_intent != I_HURT)
+			thing.HandleObjectHeating(src, user, DIRECT_HEAT)
 			return TRUE
 
 	else if(thing.isflamesource())

@@ -4,15 +4,15 @@
 /mob/living/exosuit
 	name = "exosuit"
 	desc = "A powerful machine piloted from a cockpit, but worn like a suit of armour."
-	density =  TRUE
-	opacity =  TRUE
+	density = TRUE
+	opacity = TRUE
 	anchored = TRUE
 	default_pixel_x = -8
 	default_pixel_y = 0
 	status_flags = PASSEMOTES
-	a_intent =     I_HURT
-	mob_size =     MOB_SIZE_LARGE
-	atom_flags = ATOM_FLAG_SHIELD_CONTENTS | ATOM_FLAG_NO_TEMP_CHANGE
+	a_intent = I_HURT
+	mob_size = MOB_SIZE_LARGE
+	atom_flags = ATOM_FLAG_SHIELD_CONTENTS
 
 	meat_type = null
 	meat_amount = 0

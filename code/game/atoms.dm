@@ -1,6 +1,6 @@
 /atom
 	var/level = 2
-	var/atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
+	var/atom_flags = 0
 	var/list/blood_DNA
 	var/was_bloodied
 	var/blood_color
