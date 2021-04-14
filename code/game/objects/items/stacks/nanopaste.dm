@@ -5,6 +5,7 @@
 	icon = 'icons/obj/nanopaste.dmi'
 	icon_state = "tube"
 	origin_tech = "{'materials':4,'engineering':3}"
+	max_amount = 10
 	amount = 10
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
