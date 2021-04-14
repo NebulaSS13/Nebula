@@ -8,6 +8,14 @@
 	hidden_from_codex = TRUE
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = MAT_VALUE_LIGHT
+	dissolves_into = list(
+		/decl/material/solid/mineral/sand =    0.5,
+		/decl/material/solid/metal/iron =      0.2,
+		/decl/material/solid/metal/aluminium = 0.05,
+		/decl/material/solid/phosphorus =      0.05,
+		/decl/material/gas/sulfur_dioxide =    0.05,
+		/decl/material/gas/carbon_dioxide =    0.05
+	)
 	value = 0.1
 	// Slag can be reclaimed into more useful forms by grinding it up and mixing it with strong acid.
 	dissolves_in = MAT_SOLVENT_STRONG
