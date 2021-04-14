@@ -7,7 +7,7 @@
 	force = 7
 	origin_tech = "{'powerstorage':6,'engineering':4}"
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	slot_flags = SLOT_LOWER_BODY
 
 	var/powertransfer = 500

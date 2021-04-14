@@ -10,8 +10,9 @@
 	fabricator_class = FABRICATOR_CLASS_MICRO
 	base_storage_capacity = list(
 		/decl/material/solid/metal/aluminium = SHEET_MATERIAL_AMOUNT * 5,
-		/decl/material/solid/plastic =   SHEET_MATERIAL_AMOUNT * 5,
-		/decl/material/solid/glass   =   SHEET_MATERIAL_AMOUNT * 5
+		/decl/material/solid/plastic =         SHEET_MATERIAL_AMOUNT * 5,
+		/decl/material/solid/glass   =         SHEET_MATERIAL_AMOUNT * 5,
+		/decl/material/solid/fiberglass =      SHEET_MATERIAL_AMOUNT * 5
 	)
 
 //Subtype for mapping, starts preloaded with glass and set to print glasses

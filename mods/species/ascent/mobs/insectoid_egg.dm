@@ -27,10 +27,8 @@ GLOBAL_VAR_INIT(default_gyne, create_gyne_name())
 	var/hatching = FALSE				// If we're in the process of hatching.
 	var/hatched = FALSE					// Whether or not this egg has already hatched.
 
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
-	)
-
+	material = /decl/material/solid/gemstone/crystal
+	
 /obj/structure/insectoid_egg/Initialize()
 	. = ..()
 	START_PROCESSING(SSprocessing, src)

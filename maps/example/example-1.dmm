@@ -42,8 +42,10 @@
 "gO" = (
 /obj/structure/table/rack,
 /obj/item/stack/material/plasteel/fifty,
+/obj/item/stack/material/copper/fifty,
 /obj/item/stack/material/steel/fifty,
 /obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/glass/fiber/fifty,
 /obj/item/stack/material/gold/ten,
 /obj/item/stack/material/mhydrogen/ten,
 /obj/item/stack/material/silver/ten,

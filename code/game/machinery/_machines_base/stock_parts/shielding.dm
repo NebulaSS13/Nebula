@@ -11,7 +11,7 @@
 	desc = "A bloc of multi-use fuses, protecting the machine against the electrical current spikes."
 	protection_types = list(ELECTROCUTE)
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/shielding/kinetic
 	name = "internal armor"

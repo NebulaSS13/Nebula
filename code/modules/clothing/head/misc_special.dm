@@ -17,7 +17,10 @@
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/head/welding/default.dmi'
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT
+	)
 	armor = list(
 		melee = ARMOR_MELEE_SMALL
 	)

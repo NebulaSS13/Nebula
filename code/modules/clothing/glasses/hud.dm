@@ -1,5 +1,5 @@
 /obj/item/clothing/glasses/hud
-	name = "HUD"
+	name = "\improper HUD"
 	desc = "A heads-up display that provides important info in (almost) real time."
 	origin_tech = "{'magnets':3,'biotech':2}"
 	electric = 1

@@ -9,7 +9,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	material = /decl/material/solid/metal/aluminium
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/pickup2.ogg'
 

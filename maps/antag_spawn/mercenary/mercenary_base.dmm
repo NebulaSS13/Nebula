@@ -1398,6 +1398,7 @@
 	dir = 4
 	},
 /obj/item/stack/material/plasteel/ten,
+/obj/item/stack/material/copper/fifty,
 /obj/item/stack/material/steel/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/glass/reinforced/fifty,

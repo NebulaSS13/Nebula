@@ -3622,6 +3622,7 @@
 "Vm" = (
 /obj/item/tape_roll,
 /obj/item/stack/material/plasteel/fifty,
+/obj/item/stack/material/copper/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/steel/fifty,
 /obj/item/stack/material/plastic/fifty,
@@ -3629,6 +3630,7 @@
 /obj/structure/closet/crate,
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/glass/fiber/fifty,
 /obj/item/stack/material/glass/reinforced/fifty,
 /obj/item/clothing/head/welding,
 /obj/item/stack/material/cardboard/fifty,

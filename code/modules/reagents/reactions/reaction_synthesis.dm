@@ -4,6 +4,28 @@
 	result_amount = 1
 	mix_message = "The solution hardens and begins to crystallize."
 
+/datum/chemical_reaction/synthesis/fiberglass
+	name = "Fiberglass"
+	mix_message = "The glass fibers are bound up in the polymer as it hardens."
+	minimum_temperature = T100C
+	maximum_temperature = INFINITY
+
+/datum/chemical_reaction/synthesis/fiberglass/New()
+	required_reagents = list(
+		/decl/material/solid/glass =   ceil(REAGENT_UNITS_PER_MATERIAL_SHEET/2),
+		/decl/material/solid/plastic = ceil(REAGENT_UNITS_PER_MATERIAL_SHEET/2)
+	)
+	..()
+
+/datum/chemical_reaction/synthesis/fiberglass/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
+	..()
+	created_volume = ceil(created_volume)
+	if(created_volume > 0)
+		new /obj/item/stack/material/generic(get_turf(holder.my_atom), created_volume, /decl/material/solid/fiberglass)
+
+/datum/chemical_reaction/synthesis/crystalization/can_happen(datum/reagents/holder)
+	. = ..() && length(holder.reagent_volumes) > 1
+
 /datum/chemical_reaction/synthesis/crystalization
 	name = "Crystalization"
 	required_reagents = list(/decl/material/liquid/crystal_agent = 1)

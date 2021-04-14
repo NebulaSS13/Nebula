@@ -3915,6 +3915,7 @@
 /obj/structure/table/standard,
 /obj/item/clothing/glasses/welding,
 /obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/glass/fiber/fifty,
 /obj/item/stack/material/steel/fifty,
 /obj/item/stack/material/aluminium/fifty,
 /obj/machinery/camera/network/research{
@@ -5638,7 +5639,9 @@
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/plasteel/fifty,
+/obj/item/stack/material/copper/fifty,
 /obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/glass/fiber/fifty,
 /obj/item/stack/material/glass/reinforced/fifty,
 /turf/simulated/floor/tiled,
 /area/ministation/eva)
@@ -14229,6 +14232,7 @@
 "HP" = (
 /obj/structure/table/standard,
 /obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/glass/fiber/fifty,
 /obj/item/stack/material/glass/reinforced,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)

@@ -34,6 +34,11 @@
 	material = /decl/material/solid/glass
 	material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
+/obj/item/stack/material/cyborg/fiberglass
+	icon_state = "sheet"
+	material = /decl/material/solid/fiberglass
+	material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
+
 /obj/item/stack/material/cyborg/glass/reinforced
 	icon_state = "sheet-reinf"
 	material = /decl/material/solid/glass

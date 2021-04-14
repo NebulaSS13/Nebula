@@ -15,7 +15,7 @@
 	action_button_name = "Toggle Heatsink"
 
 	material = /decl/material/solid/metal/aluminium
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'magnets':2,'materials':2}"
 
 	var/on = 0								//is it turned on?
