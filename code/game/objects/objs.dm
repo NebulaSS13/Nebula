@@ -220,4 +220,5 @@
 			visible_message(SPAN_DANGER("\The [src] [gender == PLURAL ? "boil" : "boils"] away!"))
 		else if(state_change == MATTER_STATE_AFLAME)
 			visible_message(SPAN_DANGER("\The [src] [gender == PLURAL ? "burn" : "burns"] away!"))
+		dump_contents()
 		qdel(src)

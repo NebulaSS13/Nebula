@@ -8,6 +8,7 @@
 	icon_base = 'icons/turf/walls/stone.dmi'
 	table_icon_base = "stone"
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
+	min_fluid_opacity = FLUID_MAX_ALPHA
 
 /decl/material/solid/New()
 	if(!liquid_name)
