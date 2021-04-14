@@ -61,6 +61,7 @@
 	hardness = MAT_VALUE_RIGID + 10
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	use_reinf_state = null
 	sheet_singular_name = "sheet"
 	sheet_plural_name = "sheets"
 	value = 1.2
@@ -74,6 +75,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	use_reinf_state = null
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	value = 1.4
