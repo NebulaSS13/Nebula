@@ -7,7 +7,8 @@
 
 /atom/movable/Entered(var/atom/movable/atom, var/atom/old_loc)
 	. = ..()
-	QUEUE_TEMPERATURE_ATOMS(atom)
+	if(!(atom_flags & ATOM_FLAG_INSULATED_CONTAINER))
+		QUEUE_TEMPERATURE_ATOMS(atom)
 
 /obj
 	temperature_coefficient = null
@@ -24,8 +25,12 @@
 	temperature_coefficient = isnull(temperature_coefficient) ? Clamp(MAX_TEMPERATURE_COEFFICIENT - w_class, MIN_TEMPERATURE_COEFFICIENT, MAX_TEMPERATURE_COEFFICIENT) : temperature_coefficient
 	create_matter()
 
-	var/datum/gas_mixture/environment = loc?.return_air()
-	var/check_temp = environment?.temperature || T20C
+	var/check_temp = T20C
+	var/atom/myloc = loc
+	if(istype(myloc) && !(myloc.atom_flags & ATOM_FLAG_INSULATED_CONTAINER))
+		var/datum/gas_mixture/environment = myloc.return_air()
+		if(environment)
+			check_temp = environment.temperature
 	ADJUST_ATOM_TEMPERATURE(src, check_temp)
 
 /obj/proc/HandleObjectHeating(var/obj/item/heated_by, var/mob/user, var/adjust_temp)

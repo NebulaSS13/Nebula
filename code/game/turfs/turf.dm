@@ -208,7 +208,8 @@ var/const/enterloopsanity = 100
 
 	..()
 
-	QUEUE_TEMPERATURE_ATOMS(atom)
+	if(!(atom_flags & ATOM_FLAG_INSULATED_CONTAINER))
+		QUEUE_TEMPERATURE_ATOMS(atom)
 
 	if(!istype(atom, /atom/movable))
 		return

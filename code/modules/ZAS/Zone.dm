@@ -175,10 +175,11 @@ Class Procs:
 	if(abs(air.temperature - last_air_temperature) >= ATOM_TEMPERATURE_EQUILIBRIUM_THRESHOLD)
 		last_air_temperature = air.temperature
 		for(var/turf/simulated/T in contents)
-			for(var/check_atom in T.contents)
-				var/atom/checking = check_atom
-				if(checking.simulated)
-					QUEUE_TEMPERATURE_ATOMS(checking)
+			if(!(T.atom_flags & ATOM_FLAG_INSULATED_CONTAINER))
+				for(var/check_atom in T.contents)
+					var/atom/checking = check_atom
+					if(checking.simulated)
+						QUEUE_TEMPERATURE_ATOMS(checking)
 			CHECK_TICK
 
 /zone/proc/handle_condensation()
