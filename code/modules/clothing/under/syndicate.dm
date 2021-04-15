@@ -9,7 +9,7 @@
 		laser = ARMOR_LASER_MINOR
 		)
 	siemens_coefficient = 0.9
-	matter = list(/decl/material/solid/metal/plasteel = MATTER_AMOUNT_TRACE)
+	material_composition = list(/decl/material/solid/metal/plasteel = MATTER_AMOUNT_TRACE)
 
 /obj/item/clothing/under/syndicate/combat
 	name = "combat turtleneck"
@@ -24,4 +24,4 @@
 	armor = null
 	siemens_coefficient = 1
 	has_sensor = SUIT_HAS_SENSORS
-	matter = null
+	material_composition = null

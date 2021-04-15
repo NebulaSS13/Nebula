@@ -3,9 +3,9 @@
 	desc = "A small electronic device able to ignite combustible substances."
 	icon_state = "igniter"
 	origin_tech = "{'magnets':1}"
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/slag = MATTER_AMOUNT_TRACE
 	)
 

@@ -4,7 +4,7 @@
 	icon = 'icons/obj/assemblies/electronic_components.dmi'
 	icon_state = "template"
 	w_class = ITEM_SIZE_TINY
-	matter = list()				// To be filled later
+	material_composition = list()				// To be filled later
 	var/obj/item/electronic_assembly/assembly // Reference to the assembly holding this circuit, if any.
 	var/extended_desc
 	var/list/inputs
@@ -77,8 +77,11 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	setup_io(outputs, /datum/integrated_io, outputs_default, IC_OUTPUT)
 	outputs_default = null
 	setup_io(activators, /datum/integrated_io/activate, null, IC_ACTIVATOR)
-	if(!matter[/decl/material/solid/metal/steel])
-		matter[/decl/material/solid/metal/steel] = w_class * SScircuit.cost_multiplier // Default cost.
+	var/datum/materials/matter = get_material_composition()
+	if(!istype(matter))
+		set_material_composition(list(/decl/material/solid/metal/steel = w_class * SScircuit.cost_multiplier))
+	else if(!matter.get_material(/decl/material/solid/metal/steel))
+		matter.set_material(/decl/material/solid/metal/steel, w_class * SScircuit.cost_multiplier)
 	. = ..()
 
 /obj/item/integrated_circuit/proc/on_data_written() //Override this for special behaviour when new data gets pushed to the circuit.

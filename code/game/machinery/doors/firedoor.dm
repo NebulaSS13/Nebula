@@ -87,7 +87,7 @@
 		LAZYREMOVE(A.all_doors, src)
 	. = ..()
 
-/obj/machinery/door/firedoor/get_material()
+/obj/machinery/door/firedoor/get_primary_material()
 	return GET_DECL(/decl/material/solid/metal/steel)
 
 /obj/machinery/door/firedoor/examine(mob/user, distance)

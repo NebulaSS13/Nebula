@@ -123,7 +123,7 @@
 	icon = 'icons/clothing/suit/straightjacket.dmi'
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
 
 /obj/item/clothing/suit/straight_jacket/equipped(var/mob/user, var/slot)
 	if(slot == slot_wear_suit_str)
@@ -145,12 +145,13 @@
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	material_armor_multiplier = 0.8
-	material = /decl/material/solid/leather
+	material_composition = list(/decl/material/solid/leather = MATTER_AMOUNT_PRIMARY)
 	var/shine 
 	var/artificial_shine
 
-/obj/item/clothing/suit/leathercoat/set_material(var/new_material)
-	..()
+/obj/item/clothing/suit/leathercoat/Initialize()
+	. = ..()
+	var/decl/material/material = get_primary_material()
 	if(material)
 		if(material.reflectiveness >= MAT_VALUE_DULL)
 			shine = material.reflectiveness
@@ -165,7 +166,7 @@
 	return I
 
 /obj/item/clothing/suit/leathercoat/synth
-	material = /decl/material/solid/leather/synth
+	material_composition = list(/decl/material/solid/leather/synth = MATTER_AMOUNT_PRIMARY)
 	artificial_shine = 80
 
 //stripper
@@ -192,7 +193,7 @@
 	cold_protection = SLOT_UPPER_BODY|SLOT_ARMS
 	min_cold_protection_temperature = T0C - 20
 	siemens_coefficient = 0.7
-	material = /decl/material/solid/leather
+	material_composition = list(/decl/material/solid/leather = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/clothing/suit/storage/leather_jacket
 	name = "black leather jacket"

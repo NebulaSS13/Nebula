@@ -20,8 +20,10 @@
 	name = "haywire round"
 	desc = "A pistol bullet casing fitted with a single-use ion pulse generator."
 	projectile_type = /obj/item/projectile/ion/small
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TERTIARY
+	)
 	bullet_color = COLOR_ACID_CYAN
 	marking_color = COLOR_LUMINOL
 
@@ -65,7 +67,7 @@
 	spent_icon = "slshell-spent"
 	caliber = CALIBER_SHOTGUN
 	projectile_type = /obj/item/projectile/bullet/shotgun
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	fall_sounds = list('sound/weapons/guns/shotgun_fall.ogg')
 
 /obj/item/ammo_casing/shotgun/pellet
@@ -74,7 +76,7 @@
 	icon_state = "gshell"
 	spent_icon = "gshell-spent"
 	projectile_type = /obj/item/projectile/bullet/pellet/shotgun
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/ammo_casing/shotgun/blank
 	name = "shotgun shell"
@@ -82,7 +84,7 @@
 	icon_state = "blshell"
 	spent_icon = "blshell-spent"
 	projectile_type = /obj/item/projectile/bullet/blank
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/ammo_casing/shotgun/practice
 	name = "shotgun shell"
@@ -90,7 +92,7 @@
 	icon_state = "pshell"
 	spent_icon = "pshell-spent"
 	projectile_type = /obj/item/projectile/bullet/shotgun/practice
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/ammo_casing/shotgun/beanbag
 	name = "beanbag shell"
@@ -98,7 +100,7 @@
 	icon_state = "bshell"
 	spent_icon = "bshell-spent"
 	projectile_type = /obj/item/projectile/bullet/shotgun/beanbag
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 //Can stun in one hit if aimed at the head, but
 //is blocked by clothing that stops tasers and is vulnerable to EMP
@@ -109,8 +111,10 @@
 	spent_icon = "stunshell-spent"
 	projectile_type = /obj/item/projectile/energy/electrode/stunshot
 	leaves_residue = 0
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 	origin_tech = "{'combat':3,'materials':3}"
 
 /obj/item/ammo_casing/shotgun/stunshell/emp_act(severity)
@@ -124,8 +128,10 @@
 	icon_state = "fshell"
 	spent_icon = "fshell-spent"
 	projectile_type = /obj/item/projectile/energy/flash/flare
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 
 /obj/item/ammo_casing/shotgun/emp
 	name = "haywire slug"
@@ -133,8 +139,10 @@
 	icon_state = "empshell"
 	spent_icon = "empshell-spent"
 	projectile_type  = /obj/item/projectile/ion
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TERTIARY
+	)
 	origin_tech = "{'combat':4,'materials':3}"
 
 /obj/item/ammo_casing/shell
@@ -142,7 +150,7 @@
 	desc = "An anti-materiel shell casing."
 	caliber = CALIBER_ANTI_MATERIEL
 	projectile_type = /obj/item/projectile/bullet/rifle/shell
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	color = COLOR_POLISHED_BRASS
 	icon = 'icons/obj/ammo/casings/anti_materiel.dmi'
 
@@ -189,5 +197,7 @@
 	icon = 'icons/obj/ammo/casings/lasbulb.dmi'
 	color = COLOR_BLUE_GRAY
 	bullet_color = COLOR_BLUE_LIGHT
-	material = /decl/material/solid/glass
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY
+	)

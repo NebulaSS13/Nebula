@@ -87,7 +87,8 @@
 		if (R.use(1))
 			to_chat(user, "<span class='notice'>Constructing support lattice ...</span>")
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ReplaceWithLattice(R.material.type)
+			var/decl/material/material = R.get_primary_material()
+			ReplaceWithLattice(material?.type)
 			return TRUE
 
 	if (istype(C, /obj/item/stack/tile/floor))

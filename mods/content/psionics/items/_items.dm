@@ -1,5 +1,6 @@
 /obj/item/disrupts_psionics()
-	. = (material && material.is_psi_null()) ? src : FALSE
+	var/decl/material/material = get_primary_material()
+	. = (material?.is_psi_null()) ? src : FALSE
 
 /obj/item/withstand_psi_stress(var/stress, var/atom/source)
 	. = ..(stress, source)

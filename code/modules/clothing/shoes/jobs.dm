@@ -14,7 +14,7 @@
 	name = "jackboots"
 	desc = "Tall synthleather boots with an artificial shine."
 	icon = 'icons/clothing/feet/boots.dmi'
-	material = /decl/material/solid/leather/synth
+	material_composition = list(/decl/material/solid/leather/synth = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = TRUE
 	force = 3
 	armor = list(
@@ -33,19 +33,19 @@
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
-	var/artificail_shine = 20
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
+	var/artificial_shine = 20
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY)
 	origin_tech = "{'materials':2,'engineering':2}"
 
-/obj/item/clothing/shoes/jackboots/set_material(var/new_material)
-	..()
-	shine = max(shine, artificail_shine)
+/obj/item/clothing/shoes/jackboots/on_material_change()
+	. = ..()
+	shine = max(shine, artificial_shine)
 
 /obj/item/clothing/shoes/workboots
 	name = "workboots"
 	desc = "A pair of steel-toed work boots designed for use in industrial settings. Safety first."
 	icon = 'icons/clothing/feet/boots.dmi'
-	material = /decl/material/solid/leather/synth
+	material_composition = list(/decl/material/solid/leather/synth = MATTER_AMOUNT_PRIMARY)
 	color = "#d88d4b"
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT, 
@@ -60,5 +60,5 @@
 	heat_protection = SLOT_FEET
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY)
 	origin_tech = "{'materials':2,'engineering':2}"

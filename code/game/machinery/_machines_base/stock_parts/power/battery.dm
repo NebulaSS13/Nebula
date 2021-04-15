@@ -192,12 +192,12 @@
 
 /obj/item/stock_parts/power/battery/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/stock_parts/power/battery/buildable/crap
 	name = "battery backup (weak)"
 	desc = "The BAT84 is an all-in-one battery backup system sold at an affordable price."
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	charge_rate = 0.25
 	charge_wait_counter = 15
 
@@ -217,9 +217,9 @@
 	name = "battery backup (rapid)"
 	desc = "The Xcharge state-of-the-art battery backup claims to charge over ten times as fast as its competitors."
 	charge_rate = 5
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 
@@ -232,9 +232,9 @@
 	desc = "The Focal Point FOXUS is a battery backup device marketed for its fast startup time."
 	charge_wait_counter = 2
 	charge_rate = 0.8
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 

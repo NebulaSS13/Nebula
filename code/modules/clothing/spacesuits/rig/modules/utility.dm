@@ -39,9 +39,9 @@
 	use_power_cost = 200
 	origin_tech = "{'magnets':3,'biotech':3,'engineering':5}"
 	device = /obj/item/scanner/health
-	material = /decl/material/solid/plastic
-	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 
@@ -68,9 +68,9 @@
 	module_cooldown = 0
 	origin_tech = "{'materials':6,'powerstorage':4,'engineering':6}"
 	device = /obj/item/pickaxe/diamonddrill
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
@@ -87,9 +87,9 @@
 	selectable = 0
 	device = /obj/item/ano_scanner
 	origin_tech = "{'wormholes':4,'magnets':4,'engineering':6}"
-	material = /decl/material/solid/plastic
-	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 
@@ -106,9 +106,9 @@
 	use_power_cost = 200
 	device = /obj/item/scanner/mining
 	origin_tech = "{'materials':4,'magnets':4,'engineering':6}"
-	material = /decl/material/solid/plastic
-	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 
@@ -130,9 +130,9 @@
 	use_power_cost = 300
 	origin_tech = "{'materials':6,'magnets':5,'engineering':7}"
 	device = /obj/item/rcd/mounted
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
@@ -384,9 +384,9 @@
 	interface_name = "maneuvering jets"
 	interface_desc = "An inbuilt EVA maneuvering system that runs off the rig air supply."
 	origin_tech = "{'materials':6,'engineering':7}"
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 	var/obj/item/tank/jetpack/rig/jets
@@ -505,9 +505,9 @@
 	interface_desc = "Eats trash like no one's business."
 	origin_tech = "{'materials':5,'engineering':5}"
 	device = /obj/item/matter_decompiler
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 
@@ -518,9 +518,9 @@
 	interface_name = "mounted cooling unit"
 	interface_desc = "A heat sink with a liquid cooled radiator."
 	module_cooldown = 0 SECONDS //no cd because its critical for a life-support module
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 	var/charge_consumption = 0.5 KILOWATTS

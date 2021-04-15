@@ -4,9 +4,9 @@
 	icon = 'icons/obj/items/grenades/grenade_light.dmi'
 	det_time = 20
 	origin_tech = "{'wormholes':4,'materials':4}"
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 

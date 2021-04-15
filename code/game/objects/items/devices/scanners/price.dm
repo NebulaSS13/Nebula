@@ -5,9 +5,9 @@
 	icon_state = "price_scanner"
 	origin_tech = "{'materials':6,'magnets':4}"
 	scan_sound = 'sound/effects/checkout.ogg'
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 	var/scanner_currency

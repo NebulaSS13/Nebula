@@ -67,7 +67,8 @@
 
 /decl/crafting_stage/material/consume(var/mob/user, var/obj/item/thing, var/obj/item/target)
 	var/obj/item/stack/material/M = thing
-	. = istype(M) && (!stack_material || M.material.type == stack_material) && ..()
+	var/decl/material/material = M.get_primary_material()
+	. = istype(M) && (!stack_material || material?.type == stack_material) && ..()
 
 /decl/crafting_stage/welding/consume(var/mob/user, var/obj/item/thing, var/obj/item/target)
 	var/obj/item/weldingtool/T = thing

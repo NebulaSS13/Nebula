@@ -85,7 +85,7 @@
 		energy = ARMOR_ENERGY_MINOR
 		)
 	origin_tech = "{'materials':2, 'engineering':2}"
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY)
 
 //Forensics
 /obj/item/clothing/suit/storage/forensics
@@ -101,7 +101,7 @@
 		energy = ARMOR_ENERGY_MINOR
 		)
 	origin_tech = "{'materials':2, 'engineering':2}"
-	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_TERTIARY)
 
 /obj/item/clothing/suit/storage/forensics/red
 	name = "red jacket"

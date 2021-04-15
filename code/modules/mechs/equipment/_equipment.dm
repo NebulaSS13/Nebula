@@ -4,9 +4,9 @@
 	name = "exosuit hardpoint system"
 	icon = 'icons/mecha/mech_equipment.dmi'
 	icon_state = ""
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/osmium = MATTER_AMOUNT_TRACE
 	)
 	force = 10

@@ -5,11 +5,10 @@
 	randpixel = 8
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/ore/set_material(var/new_material)
+/obj/item/ore/Initialize(ml, material_key)
 	. = ..()
-	if(istype(material))
-		matter = list()
-		matter[material.type] = SHEET_MATERIAL_AMOUNT
+	var/decl/material/material = get_primary_material()
+	if(material)
 		name =       material.ore_name ? material.ore_name : "[material.name] chunk"
 		desc =       material.ore_desc ? material.ore_desc : "A lump of ore."
 		color =      material.color
@@ -35,28 +34,28 @@
 
 // Map definitions.
 /obj/item/ore/uranium
-	material = /decl/material/solid/mineral/pitchblende
+	material_composition = list(/decl/material/solid/mineral/pitchblende = MATTER_AMOUNT_PRIMARY)
 /obj/item/ore/iron
-	material = /decl/material/solid/mineral/hematite
+	material_composition = list(/decl/material/solid/mineral/hematite = MATTER_AMOUNT_PRIMARY)
 /obj/item/ore/coal
-	material = /decl/material/solid/mineral/graphite
+	material_composition = list(/decl/material/solid/mineral/graphite = MATTER_AMOUNT_PRIMARY)
 /obj/item/ore/glass
-	material = /decl/material/solid/mineral/sand
+	material_composition = list(/decl/material/solid/mineral/sand = MATTER_AMOUNT_PRIMARY)
 /obj/item/ore/silver
-	material = /decl/material/solid/metal/silver
+	material_composition = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_PRIMARY)
 /obj/item/ore/gold
-	material = /decl/material/solid/metal/gold
+	material_composition = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_PRIMARY)
 /obj/item/ore/diamond
-	material = /decl/material/solid/gemstone/diamond
+	material_composition = list(/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_PRIMARY)
 /obj/item/ore/osmium
-	material = /decl/material/solid/metal/platinum
+	material_composition = list(/decl/material/solid/metal/platinum = MATTER_AMOUNT_PRIMARY)
 /obj/item/ore/hydrogen
-	material = /decl/material/solid/metallic_hydrogen
+	material_composition = list(/decl/material/solid/metallic_hydrogen = MATTER_AMOUNT_PRIMARY)
 /obj/item/ore/slag
-	material = /decl/material/solid/slag
+	material_composition = list(/decl/material/solid/slag = MATTER_AMOUNT_PRIMARY)
 /obj/item/ore/phosphorite
-	material = /decl/material/solid/mineral/phosphorite
+	material_composition = list(/decl/material/solid/mineral/phosphorite = MATTER_AMOUNT_PRIMARY)
 /obj/item/ore/aluminium
-	material = /decl/material/solid/mineral/bauxite
+	material_composition = list(/decl/material/solid/mineral/bauxite = MATTER_AMOUNT_PRIMARY)
 /obj/item/ore/rutile
-	material = /decl/material/solid/mineral/rutile
+	material_composition = list(/decl/material/solid/mineral/rutile = MATTER_AMOUNT_PRIMARY)

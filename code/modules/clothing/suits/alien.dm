@@ -34,4 +34,4 @@
 	name = "general's cape"
 	desc = "An extremely decorated cape with an intricately runed design has been woven into the fabric of this cape with great care."
 	icon = 'icons/clothing/accessories/clothing/cape_leader.dmi'
-	matter = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE)
+	material_composition = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE)

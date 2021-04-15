@@ -85,7 +85,8 @@
 				var/obj/item/stack/material/rods/R = C
 				if (R.use(2))
 					playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-					new /obj/structure/catwalk(src, R.material.type)
+					var/decl/material/material = R.get_primary_material()
+					new /obj/structure/catwalk(src, material?.type || /decl/material/solid/metal/steel)
 					return TRUE
 				return
 			var/obj/item/stack/S = C

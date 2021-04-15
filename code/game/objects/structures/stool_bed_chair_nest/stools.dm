@@ -9,7 +9,7 @@
 	force = 10
 	throwforce = 10
 	w_class = ITEM_SIZE_HUGE
-	material = DEFAULT_FURNITURE_MATERIAL
+	material_composition = list(DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY)
 	var/base_icon = "stool"
 	var/decl/material/padding_material
 
@@ -19,6 +19,7 @@
 
 /obj/item/stool/Initialize()
 	. = ..()
+	var/decl/material/material = get_primary_material()
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 	if(ispath(padding_material, /decl/material))
@@ -44,6 +45,7 @@
 	icon_state = ""
 	// Base icon.
 	var/list/noverlays = list()
+	var/decl/material/material = get_primary_material()
 	var/image/I = image(icon, "[base_icon]_base")
 	I.color = material.color
 	noverlays |= I
@@ -91,6 +93,7 @@
 		physically_destroyed()
 
 /obj/item/stool/proc/dismantle()
+	var/decl/material/material = get_primary_material()
 	if(material)
 		material.place_sheet(get_turf(src))
 	if(padding_material)
@@ -115,8 +118,9 @@
 			padding_type = /decl/material/solid/carpet
 		else if(istype(W,/obj/item/stack/material))
 			var/obj/item/stack/material/M = W
-			if(M.material && (M.material.flags & MAT_FLAG_PADDING))
-				padding_type = M.material.type
+			var/decl/material/material = M.get_primary_material()
+			if(material && (material.flags & MAT_FLAG_PADDING))
+				padding_type = material.type
 		if(!padding_type)
 			to_chat(user, "You cannot pad \the [src] with that.")
 			return
@@ -139,4 +143,4 @@
 
 //Generated subtypes for mapping porpoises
 /obj/item/stool/wood
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)

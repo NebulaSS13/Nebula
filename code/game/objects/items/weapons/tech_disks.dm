@@ -3,8 +3,10 @@
 	icon = 'icons/obj/items/device/diskette.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/plastic
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
+	)
 	var/label = "label_blank"
 	
 /obj/item/disk/on_update_icon()

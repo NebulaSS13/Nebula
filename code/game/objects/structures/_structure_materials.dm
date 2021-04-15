@@ -1,16 +1,13 @@
 /obj/structure
-	var/decl/material/material
-	var/decl/material/reinf_material
 	var/material_alteration
 	var/dismantled
-
-/obj/structure/get_material()
-	. = material
 
 /obj/structure/proc/get_material_health_modifier()
 	. = 1
 
-/obj/structure/proc/update_materials(var/keep_health)
+/obj/structure/on_material_change()
+	. = ..()
+	var/decl/material/material = get_primary_material()
 	if(material_alteration & MAT_FLAG_ALTERATION_NAME)
 		update_material_name()
 	if(material_alteration & MAT_FLAG_ALTERATION_DESC)
@@ -22,42 +19,47 @@
 	hitsound = material?.hitsound || initial(hitsound)
 	if(maxhealth != -1)
 		maxhealth = initial(maxhealth) + material?.integrity*get_material_health_modifier()
+		var/decl/material/reinf_material = get_reinforcing_material()
 		if(reinf_material)
 			var/bonus_health = reinf_material.integrity * get_material_health_modifier()
 			maxhealth += bonus_health
-			if(!keep_health)
-				health += bonus_health
-		health = keep_health ? min(health, maxhealth) : maxhealth
+			health += bonus_health
+		health = maxhealth
 
 	queue_icon_update()
 
 /obj/structure/proc/update_material_name(var/override_name)
 	var/base_name = override_name || initial(name)
-	if(istype(material))
+	var/decl/material/material = get_primary_material()
+	if(material)
 		SetName("[material.solid_name] [base_name]")
 	else
 		SetName(base_name)
 
 /obj/structure/proc/update_material_desc(var/override_desc)
 	var/base_desc = override_desc || initial(desc)
-	if(istype(material))
+	var/decl/material/material = get_primary_material()
+	if(material)
 		desc = "[base_desc] This one is made of [material.solid_name]."
 	else
 		desc = base_desc
 
 /obj/structure/proc/update_material_colour(var/override_colour)
 	var/base_colour = override_colour || initial(color)
-	if(istype(material))
+	var/decl/material/material = get_primary_material()
+	if(material)
 		color = material.color
 	else
 		color = base_colour
 
 /obj/structure/proc/create_dismantled_products(var/turf/T)
 	if(parts_type)
-		new parts_type(T, (material && material.type), (reinf_material && reinf_material.type))
+		new parts_type(T, get_primary_material_type(), get_reinforcing_material_type())
 	else 
+		var/decl/material/material = get_primary_material()
 		if(material)
 			material.place_dismantled_product(T)
+		var/decl/material/reinf_material = get_reinforcing_material()
 		if(reinf_material)
 			reinf_material.place_dismantled_product(T)
 

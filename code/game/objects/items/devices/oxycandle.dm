@@ -5,7 +5,7 @@
 	icon_state = "oxycandle"
 	item_state = "oxycandle"
 	w_class = ITEM_SIZE_SMALL // Should fit into internal's box or maybe pocket
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	light_color = "#e58775"
 	light_range = 2
 	light_power = 1

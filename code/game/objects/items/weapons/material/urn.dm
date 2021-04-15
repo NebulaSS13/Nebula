@@ -6,7 +6,7 @@
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/urn/afterattack(var/obj/A, var/mob/user, var/proximity)
 	if(!istype(A, /obj/effect/decal/cleanable/ash))

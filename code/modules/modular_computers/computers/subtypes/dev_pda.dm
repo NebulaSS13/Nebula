@@ -4,10 +4,10 @@
 	icon = 'icons/obj/modular_computers/pda/pda.dmi'
 	screen_icon = 'icons/obj/modular_computers/pda/screens.dmi'
 	icon_state = ICON_STATE_WORLD
-	material = /decl/material/solid/metal/aluminium
-	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/plastic =     MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY,
+		/decl/material/solid/plastic =     MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/glass =       MATTER_AMOUNT_TRACE
 	)
 	w_class = ITEM_SIZE_SMALL

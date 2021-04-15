@@ -14,9 +14,9 @@
 		)
 	starting_accessories = null
 	siemens_coefficient = 0.7
-	material = /decl/material/solid/metal/plasteel
-	matter = list(
-		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/plasteel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/titanium = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 		)
 	origin_tech = "{'materials':3,'engineering':1,'combat':3}"
@@ -38,9 +38,9 @@
 		)
 	color = null
 	siemens_coefficient = 0.7
-	material = /decl/material/solid/metal/plasteel
-	matter = list(
-		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/plasteel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/titanium = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 		)
 	origin_tech = "{'materials':3,'engineering':1,'combat':3}"
@@ -59,9 +59,9 @@
 		)
 	siemens_coefficient = 0.7
 	slowdown = 1
-	material = /decl/material/solid/metal/plasteel
-	matter = list(
-		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/plasteel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/titanium = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 		)
 	origin_tech = "{'materials':3,'engineering':1,'combat':3}"

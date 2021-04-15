@@ -14,8 +14,8 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.5
-	material = /decl/material/solid/metal/steel
-	matter = list(
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
 		/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY
 		)
 	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
@@ -39,8 +39,10 @@
 		)
 	siemens_coefficient = 0.5
 	slowdown = 1
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY
+	)
 	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
 	
 /obj/item/clothing/accessory/armguards/riot
@@ -56,7 +58,9 @@
 		)
 	color = null
 	siemens_coefficient = 0.5
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY
+	)
 	origin_tech = "{'materials':1,'engineering':1,'combat':2}"
 

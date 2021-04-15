@@ -6,8 +6,10 @@
 	icon = 'icons/obj/assemblies/electronic_tools.dmi'
 	icon_state = "circuit_printer"
 	w_class = ITEM_SIZE_LARGE
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 
 	var/upgraded = FALSE		// When hit with an upgrade disk, will turn true, allowing it to print the higher tier circuits.
 	var/can_clone = TRUE		// Allows the printer to clone circuits, either instantly or over time depending on upgrade. Set to FALSE to disable entirely.
@@ -17,7 +19,7 @@
 	var/cloning = FALSE			// If the printer is currently creating a circuit
 	var/recycling = FALSE		// If an assembly is being emptied into this printer
 	var/list/program			// Currently loaded save, in form of list
-	var/materials = list(/decl/material/solid/metal/steel = 0)
+	var/stored_materials = list(/decl/material/solid/metal/steel = 0)
 	var/metal_max = 25 * SHEET_MATERIAL_AMOUNT
 
 /obj/item/integrated_circuit_printer/proc/check_interactivity(mob/user)
@@ -49,14 +51,15 @@
 /obj/item/integrated_circuit_printer/proc/recycle(obj/item/O, mob/user, obj/item/electronic_assembly/assembly)
 	if(!O.canremove) //in case we have an augment circuit
 		return
-	for(var/material in O.matter)
-		if(materials[material] + O.matter[material] > metal_max)
+	var/list/matter = O.get_matter_list()
+	for(var/material in matter)
+		if(stored_materials[material] + matter[material] > metal_max)
 			var/decl/material/material_datum = GET_DECL(material)
 			if(material_datum)
 				to_chat(user, "<span class='notice'>[src] can't hold any more [material_datum.name]!</span>")
 			return
-	for(var/material in O.matter)
-		materials[material] += O.matter[material]
+	for(var/material in matter)
+		stored_materials[material] += matter[material]
 	if(assembly)
 		assembly.remove_component(O)
 	if(user)
@@ -67,14 +70,19 @@
 /obj/item/integrated_circuit_printer/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/stack/material))
 		var/obj/item/stack/material/M = O
-		var/amt = M.amount
-		if(amt * SHEET_MATERIAL_AMOUNT + materials[M.material.type] > metal_max)
-			amt = -round(-(metal_max - materials[M.material.type]) / SHEET_MATERIAL_AMOUNT) //round up
-		if(M.use(amt))
-			materials[M.material.type] = min(metal_max, materials[M.material.type] + amt * SHEET_MATERIAL_AMOUNT)
-			to_chat(user, "<span class='warning'>You insert [M.material.solid_name] into \the [src].</span>")
-			if(user)
-				attack_self(user) // We're really bad at refreshing the UI, so this is the best we've got.
+		var/mat_type = M.get_primary_material_type()
+		if(mat_type)
+			var/amt = M.amount
+			if(amt * SHEET_MATERIAL_AMOUNT + stored_materials[mat_type] > metal_max)
+				amt = -round(-(metal_max - stored_materials[mat_type]) / SHEET_MATERIAL_AMOUNT) //round up
+			if(M.use(amt))
+				stored_materials[mat_type] = min(metal_max, stored_materials[mat_type] + amt * SHEET_MATERIAL_AMOUNT)
+				var/decl/material/material = GET_DECL(mat_type)
+				to_chat(user, "<span class='warning'>You insert [material.solid_name] into \the [src].</span>")
+				if(user)
+					attack_self(user) // We're really bad at refreshing the UI, so this is the best we've got.
+		return TRUE
+
 	if(istype(O, /obj/item/disk/integrated_circuit/upgrade/advanced))
 		if(upgraded)
 			to_chat(user, "<span class='warning'>[src] already has this upgrade. </span>")
@@ -150,9 +158,9 @@
 	else
 		HTML += "Materials: "
 		var/list/dat = list()
-		for(var/material in materials)
+		for(var/material in stored_materials)
 			var/decl/material/material_datum = GET_DECL(material)
-			dat += "[materials[material]]/[metal_max] [material_datum.name]"
+			dat += "[stored_materials[material]]/[metal_max] [material_datum.name]"
 		HTML += jointext(dat, "; ")
 		HTML += ".<br><br>"
 
@@ -221,10 +229,12 @@
 		var/list/cost
 		if(ispath(build_type, /obj/item/electronic_assembly))
 			var/obj/item/electronic_assembly/E = SScircuit.cached_assemblies[build_type]
-			cost = E.matter
+			var/list/matter = E.get_matter_list()
+			cost = matter?.Copy() || list()
 		else if(ispath(build_type, /obj/item/integrated_circuit))
 			var/obj/item/integrated_circuit/IC = SScircuit.cached_components[build_type]
-			cost = IC.matter
+			var/list/matter = IC.get_matter_list()
+			cost = matter?.Copy() || list()
 		else if(!(build_type in SScircuit.circuit_fabricator_recipe_list["Tools"]))
 			return
 
@@ -318,18 +328,18 @@
 				cloning = FALSE
 				var/cost = program["cost"]
 				for(var/material in cost)
-					materials[material] = min(metal_max, materials[material] + cost[material])
+					stored_materials[material] = min(metal_max, stored_materials[material] + cost[material])
 
 	interact(usr)
 
 /obj/item/integrated_circuit_printer/proc/subtract_material_costs(var/list/cost, var/mob/user)
 	for(var/material in cost)
-		if(materials[material] < cost[material])
+		if(stored_materials[material] < cost[material])
 			var/decl/material/material_datum = GET_DECL(material)
 			to_chat(user, "<span class='warning'>You need [cost[material]] [material_datum.name] to build that!</span>")
 			return FALSE
 	for(var/material in cost) //Iterate twice to make sure it's going to work before deducting
-		materials[material] -= cost[material]
+		stored_materials[material] -= cost[material]
 	return TRUE
 
 // FUKKEN UPGRADE DISKS
@@ -343,8 +353,10 @@
 /obj/item/disk/integrated_circuit/upgrade/advanced
 	name = "integrated circuit printer upgrade disk - advanced designs"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one adds new, advanced designs to the printer."
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 	origin_tech = "{'materials':3,'engineering':3}"
 
 /obj/item/disk/integrated_circuit/upgrade/clone

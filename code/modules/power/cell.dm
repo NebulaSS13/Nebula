@@ -11,9 +11,9 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 	var/charge			                // Current charge
@@ -134,8 +134,10 @@
 	throw_speed = 5
 	throw_range = 7
 	maxcharge = 100
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 
 /obj/item/cell/device/variable/Initialize(mapload, charge_amount)
 	maxcharge = charge_amount
@@ -150,8 +152,10 @@
 	desc = "A small power cell designed to power more energy-demanding devices."
 	icon_state = "hdevice"
 	maxcharge = 100
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 	origin_tech = "{'powerstorage':2}"
 
 /obj/item/cell/crap
@@ -159,9 +163,9 @@
 	desc = "A cheap old power cell. It's probably been in use for quite some time now."
 	origin_tech = "{'powerstorage':1}"
 	maxcharge = 100
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 
@@ -173,9 +177,9 @@
 	desc = "A standard and relatively cheap power cell, commonly used."
 	origin_tech = "{'powerstorage':1}"
 	maxcharge = 250
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 
@@ -184,9 +188,9 @@
 	desc = "A special power cell designed for heavy-duty use in area power controllers."
 	origin_tech = "{'powerstorage':1}"
 	maxcharge = 500
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 
@@ -197,9 +201,9 @@
 	origin_tech = "{'powerstorage':2}"
 	icon_state = "hcell"
 	maxcharge = 1000
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 
@@ -212,9 +216,9 @@
 	origin_tech = "{'powerstorage':3}"
 	icon_state = "hcell"
 	maxcharge = 1500
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE
 	)
 
@@ -225,9 +229,9 @@
 	origin_tech = "{'powerstorage':5}"
 	icon_state = "scell"
 	maxcharge = 2000
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE
 	)
 
@@ -240,9 +244,9 @@
 	origin_tech = "{'powerstorage':6}"
 	icon_state = "hpcell"
 	maxcharge = 3000
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE
@@ -257,9 +261,9 @@
 	icon_state = "icell"
 	origin_tech =  null
 	maxcharge = 3000
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE
 	)
 

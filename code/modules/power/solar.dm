@@ -208,7 +208,7 @@ var/list/solars_list = list()
 	item_state = "electropack"
 	w_class = ITEM_SIZE_HUGE // Pretty big!
 	anchored = 0
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	var/tracker = 0
 	var/glass_type = null
 
@@ -242,7 +242,7 @@ var/list/solars_list = list()
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return 1
 
-		if(istype(W, /obj/item/stack/material) && W.get_material_type() == /decl/material/solid/glass)
+		if(istype(W, /obj/item/stack/material) && W.get_primary_material_type() == /decl/material/solid/glass)
 			var/obj/item/stack/material/S = W
 			if(S.use(2))
 				glass_type = W.type

@@ -5,8 +5,10 @@
 	icon_state = "beacon"
 	item_state = "signaler"
 	origin_tech = "{'wormholes':1}"
-	material = /decl/material/solid/metal/aluminium
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 
 	var/code = "electronic"
 	var/functioning = TRUE

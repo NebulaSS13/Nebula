@@ -50,10 +50,11 @@
 		for(var/i = 1 to LAZYLEN(fuel_injectors))
 			var/list/injector = list()
 			var/obj/machinery/fusion_fuel_injector/I = fuel_injectors[i]
+			var/decl/material/material = I?.cur_assembly?.get_primary_material()
 			injector["id"] =       "#[i]"
 			injector["ref"] =       "\ref[I]"
 			injector["injecting"] =  I.injecting
-			injector["fueltype"] =  "[I.cur_assembly ? capitalize(I.cur_assembly.material.solid_name) : "No Fuel Inserted"]"
+			injector["fueltype"] =  "[material ? capitalize(material.solid_name) : "No Fuel Inserted"]"
 			injector["depletion"] = "[I.cur_assembly ? (I.cur_assembly.percent_depleted * 100) : 100]%"
 			injector["injection_rate"] = "[I.injection_rate * 100]%"
 			injectors += list(injector)

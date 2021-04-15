@@ -14,7 +14,7 @@
 	icon_state = "campfire"
 	anchored = TRUE
 	density = FALSE
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)
 
 	var/datum/effect/effect/system/steam_spread/steam // Used when being quenched.
 
@@ -229,25 +229,27 @@
 
 		if(istype(thing, /obj/item/stack))
 			var/obj/item/stack/stack = thing
-			if(stack.material.fuel_value > 0)
-				var/fuel_per_unit = 2 * stack.material.fuel_value
+			var/decl/material/material = stack.get_primary_material()
+			if(material?.fuel_value > 0)
+				var/fuel_per_unit = 2 * material.fuel_value
 				var/use_stacks = min(stack.amount, Floor((IDEAL_FUEL - fuel) / fuel_per_unit))
 				var/add_fuel = round(fuel_per_unit * use_stacks)
-				if(stack.material.burn_product)
-					if(waste[stack.material.burn_product])
-						waste[stack.material.burn_product] += add_fuel
+				if(material.burn_product)
+					if(waste[material.burn_product])
+						waste[material.burn_product] += add_fuel
 					else
-						waste[stack.material.burn_product] = add_fuel
+						waste[material.burn_product] = add_fuel
 				fuel += add_fuel
 				stack.use(use_stacks)
 				continue
 
 		var/modified_fuel = FALSE
-		for(var/mat in thing.matter)
+		var/list/matter = get_matter_list()
+		for(var/mat in matter)
 			var/decl/material/material = GET_DECL(mat)
 			if(material.fuel_value > 0)
 				modified_fuel = TRUE
-				var/add_fuel = round(thing.matter[mat] / SHEET_MATERIAL_AMOUNT) * material.fuel_value
+				var/add_fuel = round(matter[mat] / SHEET_MATERIAL_AMOUNT) * material.fuel_value
 				if(material.burn_product)
 					if(waste[material.burn_product])
 						waste[material.burn_product] += add_fuel

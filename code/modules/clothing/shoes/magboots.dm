@@ -10,7 +10,7 @@
 	action_button_name = "Toggle Magboots"
 	center_of_mass = null
 	randpixel = 0
-	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TERTIARY)
 	origin_tech = "{'materials':2,'engineering':2,'magnets':3}"
 	var/magpulse = 0
 	var/obj/item/clothing/shoes/covering_shoes

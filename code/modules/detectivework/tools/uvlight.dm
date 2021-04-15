@@ -6,7 +6,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	w_class = ITEM_SIZE_SMALL
 	action_button_name = "Toggle UV light"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	origin_tech = "{'magnets':1,'engineering':1}"
 	var/list/scanned = list()
 	var/list/stored_alpha = list()

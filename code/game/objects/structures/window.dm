@@ -10,7 +10,7 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CAN_BE_PAINTED
 	obj_flags = OBJ_FLAG_ROTATABLE
 	alpha = 180
-	material = /decl/material/solid/glass
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)
 	rad_resistance_modifier = 0.5
 	atmos_canpass = CANPASS_PROC
 	handle_generic_blending = TRUE
@@ -36,23 +36,26 @@
 	connections = dirs_to_corner_states(dirs)
 	other_connections = dirs_to_corner_states(other_dirs)
 
-/obj/structure/window/update_materials(var/keep_health)
+/obj/structure/window/on_material_change()
 	. = ..()
-	name = "[reinf_material ? "reinforced " : ""][material.solid_name] window"
-	desc = "A window pane made from [material.solid_name]."
+	var/decl/material/material =  get_primary_material()
+	var/decl/material/rmaterial = get_reinforcing_material()
+	if(material)
+		name = "[rmaterial ? "reinforced " : ""][material.solid_name] window"
+		desc = "A window pane made from [material.solid_name]."
+	else
+		name = "[rmaterial ? "reinforced " : ""]window"
+		desc = "A window pane."
 
 /obj/structure/window/Initialize(var/ml, var/dir_to_set, var/anchored, var/_mat, var/_reinf_mat)
 	. = ..(ml, _mat, _reinf_mat)
-	if(!istype(material))
-		. = INITIALIZE_HINT_QDEL
-	if(. != INITIALIZE_HINT_QDEL)
-		if(!isnull(anchored))
-			set_anchored(anchored)
-		if(!isnull(dir_to_set))
-			set_dir(dir_to_set)
-		if(is_fulltile())
-			layer = FULL_WINDOW_LAYER
-		. = INITIALIZE_HINT_LATELOAD
+	if(!isnull(anchored))
+		set_anchored(anchored)
+	if(!isnull(dir_to_set))
+		set_dir(dir_to_set)
+	if(is_fulltile())
+		layer = FULL_WINDOW_LAYER
+	. = INITIALIZE_HINT_LATELOAD
 
 // Updating connections may depend on material properties.
 /obj/structure/window/LateInitialize()
@@ -90,10 +93,14 @@
 		visible_message(SPAN_DANGER("\The [src] shatters!"))
 
 	var/debris_count = is_fulltile() ? 4 : 1
-	for(var/i = 0 to debris_count)
-		material.place_shard(loc)
-		if(reinf_material)
-			new /obj/item/stack/material/rods(loc, 1, reinf_material.type)
+	var/decl/material/material =  get_primary_material()
+	var/decl/material/rmaterial = get_reinforcing_material()
+	if(material)
+		for(var/i = 0 to debris_count)
+			material.place_shard(loc)
+	if(rmaterial)
+		for(var/i = 0 to debris_count)
+			new /obj/item/stack/material/rods(loc, 1, rmaterial.type)
 	qdel(src)
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
@@ -134,8 +141,10 @@
 	else if(isobj(AM))
 		var/obj/item/I = AM
 		tforce = I.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	if(reinf_material) tforce *= 0.25
-	if(health - tforce <= 7 && !reinf_material)
+	var/reinf = !!get_reinforcing_material()
+	if(reinf)
+		tforce *= 0.25
+	if(health - tforce <= 7 && !reinf)
 		set_anchored(FALSE)
 		step(src, get_dir(AM, src))
 	take_damage(tforce)
@@ -194,6 +203,7 @@
 
 	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
 
+	var/decl/material/reinf_material = get_reinforcing_material()
 	if(isScrewdriver(W))
 		if(reinf_material && construction_state >= 1)
 			construction_state = 3 - construction_state
@@ -213,7 +223,8 @@
 		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 		to_chat(user, (construction_state ? SPAN_NOTICE("You have pried the window into the frame.") : SPAN_NOTICE("You have pried the window out of the frame.")))
 	else if(isWrench(W) && !anchored && (!construction_state || !reinf_material))
-		if(!material.stack_type)
+		var/decl/material/material = get_primary_material()
+		if(!material?.stack_type)
 			to_chat(user, SPAN_NOTICE("You're not sure how to dismantle \the [src] properly."))
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -259,11 +270,11 @@
 	return
 
 /obj/structure/window/create_dismantled_products(turf/T)
-	var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 2)
-	if(S && reinf_material)
-		S.reinf_material = reinf_material
-		S.update_strings()
-		S.update_icon()
+	var/decl/material/material = get_primary_material()
+	if(material)
+		var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 2)
+		if(S && get_reinforcing_material())
+			S.set_reinforcing_material(get_reinforcing_material())
 
 /obj/structure/window/grab_attack(var/obj/item/grab/G)
 	if (G.assailant.a_intent != I_HURT)
@@ -290,7 +301,8 @@
 	return TRUE
 
 /obj/structure/window/proc/hit(var/damage, var/sound_effect = 1)
-	if(reinf_material) damage *= 0.5
+	if(get_reinforcing_material())
+		damage *= 0.5
 	take_damage(damage)
 
 /obj/structure/window/rotate(mob/user)
@@ -321,6 +333,7 @@
 
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
+	var/decl/material/reinf_material = get_reinforcing_material()
 	if(reinf_material)
 		to_chat(user, SPAN_NOTICE("It is reinforced with the [reinf_material.solid_name] lattice."))
 
@@ -330,9 +343,8 @@
 /obj/structure/window/get_color()
 	if (paint_color)
 		return paint_color
-	else if (material)
-		var/decl/material/window = get_material()
-		return window.color
+	else if(get_primary_material())
+		return get_primary_material_color()
 	else if (base_color)
 		return base_color
 	return ..()
@@ -365,6 +377,7 @@
 /obj/structure/window/on_update_icon()
 	//A little cludge here, since I don't know how it will work with slim windows. Most likely VERY wrong.
 	//this way it will only update full-tile ones
+	var/decl/material/reinf_material = get_reinforcing_material()
 	if(reinf_material)
 		basestate = reinf_basestate
 	else
@@ -373,9 +386,8 @@
 
 	if (paint_color)
 		color = paint_color
-	else if (material)
-		var/decl/material/window = get_material()
-		color = window.color
+	else if(get_primary_material())
+		color = get_primary_material_color()
 	else
 		color = GLASS_COLOR
 
@@ -407,7 +419,9 @@
 			overlays += I
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	var/melting_point = material.melting_point
+	var/decl/material/material = get_primary_material()
+	var/melting_point = material?.melting_point || T100C
+	var/decl/material/reinf_material = get_reinforcing_material()
 	if(reinf_material)
 		melting_point += 0.25*reinf_material.melting_point
 	if(exposed_temperature > melting_point)
@@ -428,7 +442,7 @@
 /obj/structure/window/borosilicate
 	name = "borosilicate window"
 	color = GLASS_COLOR_SILICATE
-	material = /decl/material/solid/glass/borosilicate
+	material_composition = list(/decl/material/solid/glass/borosilicate = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/window/borosilicate/full
 	dir = NORTHEAST
@@ -438,8 +452,10 @@
 	name = "reinforced borosilicate window"
 	icon_state = "rwindow"
 	color = GLASS_COLOR_SILICATE
-	material = /decl/material/solid/glass/borosilicate
-	reinf_material = /decl/material/solid/metal/steel
+	material_composition = list(
+		/decl/material/solid/glass/borosilicate = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
+	)
 
 /obj/structure/window/borosilicate_reinforced/full
 	dir = NORTHEAST
@@ -448,8 +464,10 @@
 /obj/structure/window/reinforced
 	name = "reinforced window"
 	icon_state = "rwindow"
-	material = /decl/material/solid/glass
-	reinf_material = /decl/material/solid/metal/steel
+	material_composition = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
+	)
 
 /obj/structure/window/reinforced/full
 	dir = NORTHEAST
@@ -585,7 +603,7 @@
 				return
 
 		if (ST.use(required_amount))
-			var/obj/structure/window/WD = new(loc, dir_to_set, FALSE, ST.material.type, ST.reinf_material && ST.reinf_material.type)
+			var/obj/structure/window/WD = new(loc, dir_to_set, FALSE, ST.get_primary_material_type(), ST.get_reinforcing_material_type())
 			to_chat(user, SPAN_NOTICE("You place [WD]."))
 			WD.construction_state = 0
 			WD.set_anchored(FALSE)

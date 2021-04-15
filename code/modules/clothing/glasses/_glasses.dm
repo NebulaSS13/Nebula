@@ -2,8 +2,10 @@
 	name = "glasses"
 	icon = 'icons/clothing/eyes/glasses_prescription.dmi'
 	icon_state = ICON_STATE_WORLD
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 	w_class = ITEM_SIZE_SMALL
 	body_parts_covered = SLOT_EYES
 	slot_flags = SLOT_EYES

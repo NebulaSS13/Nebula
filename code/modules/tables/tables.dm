@@ -59,21 +59,19 @@
 	. = break_to_parts()
 
 /obj/structure/table/Destroy()
-	material = null
-	reinf_material = null
+	set_material_composition(null)
 	update_connections(1) // Update tables around us to ignore us (material=null forces no connections)
 	for(var/obj/structure/table/T in oview(src, 1))
 		T.update_icon()
 	. = ..()
 
 /obj/structure/table/attackby(obj/item/W, mob/user)
-
+	var/decl/material/reinf_material = get_reinforcing_material()
 	if(reinf_material && isScrewdriver(W))
 		remove_reinforced(W, user)
 		if(!reinf_material)
 			update_desc()
 			update_icon()
-			update_materials()
 		return 1
 
 	if(carpeted && isCrowbar(W))
@@ -84,6 +82,7 @@
 		update_icon()
 		return 1
 
+	var/decl/material/material = get_primary_material()
 	if(!carpeted && material && istype(W, /obj/item/stack/tile/carpet))
 		var/obj/item/stack/tile/carpet/C = W
 		if(C.use(1))
@@ -97,13 +96,6 @@
 
 	if(!reinf_material && !carpeted && material && isWrench(W) && user.a_intent == I_HURT) //robots dont have disarm so it's harm
 		remove_material(W, user)
-		if(!material)
-			update_connections(1)
-			update_icon()
-			for(var/obj/structure/table/T in oview(src, 1))
-				T.update_icon()
-			update_desc()
-			update_materials()
 		return 1
 
 	if(!carpeted && !reinf_material && !material && isWrench(W) && user.a_intent == I_HURT)
@@ -120,12 +112,7 @@
 		return 1
 
 	if(!material && can_plate && istype(W, /obj/item/stack/material))
-		material = common_material_add(W, user, "plat")
-		if(material)
-			update_connections(1)
-			update_icon()
-			update_desc()
-			update_materials()
+		set_primary_material(common_material_add(W, user, "plat"))
 		return 1
 	if(istype(W, /obj/item/hand)) //playing cards
 		var/obj/item/hand/H = W
@@ -150,7 +137,7 @@
 		return TRUE
 
 /obj/structure/table/proc/reinforce_table(obj/item/stack/material/S, mob/user)
-	if(reinf_material)
+	if(get_reinforcing_material())
 		to_chat(user, "<span class='warning'>\The [src] is already reinforced!</span>")
 		return
 
@@ -158,6 +145,7 @@
 		to_chat(user, "<span class='warning'>\The [src] cannot be reinforced!</span>")
 		return
 
+	var/decl/material/material = get_primary_material()
 	if(!material)
 		to_chat(user, "<span class='warning'>Plate \the [src] before reinforcing it!</span>")
 		return
@@ -166,16 +154,16 @@
 		to_chat(user, "<span class='warning'>Put \the [src] back in place before reinforcing it!</span>")
 		return
 
-	reinf_material = common_material_add(S, user, "reinforc")
-	if(reinf_material)
-		update_materials()
+	set_reinforcing_material(common_material_add(S, user, "reinforc"))
 
 /obj/structure/table/proc/update_desc()
+	var/decl/material/material = get_primary_material()
 	if(material)
 		name = "[material.solid_name] table"
 	else
 		name = "table frame"
 
+	var/decl/material/reinf_material = get_reinforcing_material()
 	if(reinf_material)
 		name = "reinforced [name]"
 		desc = "[initial(desc)] This one seems to be reinforced with [reinf_material.solid_name]."
@@ -184,7 +172,7 @@
 
 // Returns the material to set the table to.
 /obj/structure/table/proc/common_material_add(obj/item/stack/material/S, mob/user, verb) // Verb is actually verb without 'e' or 'ing', which is added. Works for 'plate'/'plating' and 'reinforce'/'reinforcing'.
-	var/decl/material/M = S.get_material()
+	var/decl/material/M = S.get_primary_material()
 	if(!istype(M))
 		to_chat(user, "<span class='warning'>You cannot [verb]e \the [src] with \the [S].</span>")
 		return null
@@ -220,11 +208,19 @@
 	manipulating = 0
 	return null
 
+/obj/structure/table/on_material_change()
+	. = ..()
+	update_connections(1)
+	update_icon()
+	update_desc()
+	for(var/obj/structure/table/T in oview(src, 1))
+		T.update_icon()
+
 /obj/structure/table/proc/remove_reinforced(obj/item/screwdriver/S, mob/user)
-	reinf_material = common_material_remove(user, reinf_material, 40, "reinforcements", "screws", 'sound/items/Screwdriver.ogg')
+	set_reinforcing_material(common_material_remove(user, get_reinforcing_material(), 40, "reinforcements", "screws", 'sound/items/Screwdriver.ogg'))
 
 /obj/structure/table/proc/remove_material(obj/item/wrench/W, mob/user)
-	material = common_material_remove(user, material, 20, "plating", "bolts", 'sound/items/Ratchet.ogg')
+	set_primary_material(common_material_remove(user, get_primary_material(), 20, "plating", "bolts", 'sound/items/Ratchet.ogg'))
 
 // Returns a list of /obj/item/shard objects that were created as a result of this table's breakage.
 // Used for !fun! things such as embedding shards in the faces of tableslammed people.
@@ -238,12 +234,15 @@
 	reset_mobs_offset()
 	var/list/shards = list()
 	var/obj/item/shard/S = null
+	var/decl/material/reinf_material = get_reinforcing_material()
 	if(reinf_material)
 		if(reinf_material.stack_type && (full_return || prob(20)))
 			reinf_material.place_sheet(loc)
 		else
 			S = reinf_material.place_shard(loc)
 			if(S) shards += S
+
+	var/decl/material/material = get_primary_material()
 	if(material)
 		if(material.stack_type && (full_return || prob(20)))
 			material.place_sheet(loc)
@@ -274,6 +273,7 @@
 			I = image(icon, dir = 1<<(i-1), icon_state = connections ? connections[i] : "0")
 			overlays += I
 		// Standard table image
+		var/decl/material/material = get_primary_material()
 		if(material)
 			for(var/i = 1 to 4)
 				I = image(icon, "[material.table_icon_base]_[connections ? connections[i] : "0"]", dir = 1<<(i-1))
@@ -281,6 +281,7 @@
 				I.alpha = 255 * material.opacity
 				overlays += I
 		// Reinforcements
+		var/decl/material/reinf_material = get_reinforcing_material()
 		if(reinf_material)
 			for(var/i = 1 to 4)
 				I = image(icon, "[reinf_material.table_reinf]_[connections ? connections[i] : "0"]", dir = 1<<(i-1))
@@ -298,7 +299,7 @@
 		var/tabledirs = 0
 		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
 			var/obj/structure/table/T = locate(/obj/structure/table ,get_step(src,direction))
-			if (T && T.flipped == 1 && T.dir == src.dir && istype(material) && istype(T.material) && T.material.type == material.type)
+			if (T && T.flipped == 1 && T.dir == src.dir && T.get_primary_material() == get_primary_material())
 				type++
 				tabledirs |= direction
 		type = "[type]"
@@ -308,6 +309,7 @@
 			if (tabledirs & turn(dir,-90))
 				type += "+"
 		icon_state = "flip[type]"
+		var/decl/material/material = get_primary_material()
 		if(material)
 			var/image/I = image(icon, "[material.table_icon_base]_flip[type]")
 			I.color = material.color
@@ -316,6 +318,8 @@
 			name = "[material.solid_name] table"
 		else
 			name = "table frame"
+
+		var/decl/material/reinf_material = get_reinforcing_material()
 		if(reinf_material)
 			var/image/I = image(icon, "[reinf_material.table_reinf]_flip[type]")
 			I.color = reinf_material.color
@@ -329,6 +333,7 @@
 
 // set propagate if you're updating a table that should update tables around it too, for example if it's a new table or something important has changed (like material).
 /obj/structure/table/update_connections(propagate=0)
+	var/decl/material/material = get_primary_material()
 	if(!material)
 		connections = list("0", "0", "0", "0")
 
@@ -374,7 +379,7 @@
 		if(!T.can_connect()) continue
 		var/T_dir = get_dir(src, T)
 		if(T_dir in blocked_dirs) continue
-		if(material && T.material && material.type == T.material.type && flipped == T.flipped)
+		if(get_primary_material() == T.get_primary_material() && flipped == T.flipped)
 			connection_dirs |= T_dir
 		if(propagate)
 			spawn(0)

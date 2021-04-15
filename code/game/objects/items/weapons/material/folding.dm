@@ -13,7 +13,7 @@
 	sharp = FALSE
 	draw_handle = TRUE
 	valid_handle_colors = list(COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_DARK_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_DARK_GREEN_GRAY)
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 	var/open = FALSE
 	var/closed_attack_verbs = list("prodded", "tapped") //initial doesnt work with lists, rip

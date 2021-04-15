@@ -43,16 +43,16 @@
 			else if(!istype(product))
 				failed = "non-obj product returned ([product.type])"
 			else
-				LAZYINITLIST(product.matter) // For the purposes of the following tests not runtiming.
+				var/list/matter = product.get_matter_list()
 				if(!recipe.use_material && !recipe.use_reinf_material)
-					if(length(product.matter))
+					if(length(matter))
 						failed = "unsupplied material types"
-				else if(recipe.use_material && (product.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
-					failed = "excessive base material ([recipe.req_amount]/[ceil(product.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT)])"
-				else if(recipe.use_reinf_material && (product.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
-					failed = "excessive reinf material ([recipe.req_amount]/[ceil(product.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT)])"
+				else if(recipe.use_material && (matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
+					failed = "excessive base material ([recipe.req_amount]/[ceil(matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT)])"
+				else if(recipe.use_reinf_material && (matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
+					failed = "excessive reinf material ([recipe.req_amount]/[ceil(matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT)])"
 				else
-					for(var/mat in product.matter)
+					for(var/mat in matter)
 						if(mat != recipe.use_material && mat != recipe.use_reinf_material)
 							failed = "extra material type ([mat])"
 			if(failed)

@@ -106,8 +106,10 @@
 		laser = ARMOR_LASER_MINOR,
 		bio = ARMOR_BIO_STRONG
 		)
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 	origin_tech = "{'materials':2,'engineering':2}"
 
 /obj/item/clothing/mask/gas/syndicate
@@ -121,8 +123,10 @@
 		laser = ARMOR_LASER_MINOR,
 		bio = ARMOR_BIO_STRONG
 		)
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 	origin_tech = "{'materials':2,'engineering':2}"
 
 /obj/item/clothing/mask/gas/death_commando
@@ -145,7 +149,7 @@
 		bio = ARMOR_BIO_SHIELDED
 		)
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
-	material = /decl/material/solid/cloth
+	material_composition = list(/decl/material/solid/cloth = MATTER_AMOUNT_PRIMARY)
 	origin_tech = "{'materials':1,'engineering':2}"
 
 /obj/item/clothing/mask/gas/clown_hat

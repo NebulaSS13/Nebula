@@ -6,7 +6,7 @@
 	var/label = null
 	var/labels_left = 30
 	var/mode = 0	//off or on.
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/hand_labeler/attack()
 	return

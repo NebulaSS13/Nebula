@@ -5,7 +5,7 @@
 	//By default these fit on both flesh and robotic organs and are robotic
 	status = ORGAN_PROSTHETIC
 	default_action_type = /datum/action/item_action/organ/augment
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	origin_tech = "{'materials':1,'magnets':2,'engineering':2,'biotech':1}"
 
 	var/descriptor = ""

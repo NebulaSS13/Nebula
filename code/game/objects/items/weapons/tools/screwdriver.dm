@@ -5,7 +5,7 @@
 	icon_state = "screwdriver_preview"
 	slot_flags = SLOT_LOWER_BODY | SLOT_EARS
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	center_of_mass = @"{'x':16,'y':7}"
 	attack_verb = list("stabbed")
 	lock_picking_level = 5
@@ -49,4 +49,4 @@
 	return eyestab(M,user)
 
 /obj/item/screwdriver/gold
-	material = /decl/material/solid/metal/gold
+	material_composition = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_PRIMARY)

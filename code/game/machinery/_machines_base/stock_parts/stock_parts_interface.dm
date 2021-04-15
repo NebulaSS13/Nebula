@@ -3,7 +3,7 @@
 	desc = "Used in the construction of computers and other devices with an interactive screen."
 	icon_state = "output"
 	origin_tech = "{'materials':1}"
-	material = /decl/material/solid/glass
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)
 	base_type = /obj/item/stock_parts/console_screen
 	part_flags = PART_FLAG_HAND_REMOVE
 	health = 20
@@ -22,7 +22,7 @@
 	desc = "A standard part required by many machines to recieve user input."
 	icon_state = "input"
 	origin_tech = "{'materials':1}"
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 	base_type = /obj/item/stock_parts/keyboard
 	part_flags = PART_FLAG_HAND_REMOVE
 	w_class = ITEM_SIZE_TINY

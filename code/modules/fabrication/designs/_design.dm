@@ -59,11 +59,11 @@
 
 /obj/building_cost()
 	. = ..()
-	if(length(matter))
-		for(var/material in matter)
-			var/decl/material/M = GET_DECL(material)
-			if(istype(M))
-				.[M.type] = matter[material]
+	var/list/matter = get_matter_list()
+	for(var/material in matter)
+		var/decl/material/M = GET_DECL(material)
+		if(istype(M))
+			.[M.type] = matter[material]
 	if(reagents && length(reagents.reagent_volumes))
 		for(var/R in reagents.reagent_volumes)
 			.[R] = REAGENT_VOLUME(reagents, R)

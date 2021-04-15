@@ -111,7 +111,8 @@
 				H.set_hallucination(rand(100,150), 51)
 
 	for(var/obj/machinery/fusion_fuel_injector/I in range(world.view, origin))
-		if(I.cur_assembly && I.cur_assembly.material && I.cur_assembly.material.type == /decl/material/solid/exotic_matter)
+		var/decl/material/material = I.cur_assembly?.get_primary_material()
+		if(material?.type == /decl/material/solid/exotic_matter)
 			explosion(get_turf(I), 1, 2, 3)
 			if(!QDELETED(I))
 				QDEL_IN(I, 5)

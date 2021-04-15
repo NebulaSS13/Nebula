@@ -10,7 +10,7 @@
 	anchored = FALSE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE
 	obj_flags = OBJ_FLAG_ROTATABLE
-	material = DEFAULT_FURNITURE_MATERIAL
+	material_composition = list(DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY)
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	maxhealth = 100
 
@@ -28,8 +28,8 @@
 /obj/structure/railing/mapped/no_density
 	density = 0
 
-
 /obj/structure/railing/Process()
+	var/decl/material/material = get_primary_material()
 	if(!material || !material.radioactivity)
 		return
 	for(var/mob/living/L in range(1,src))
@@ -37,21 +37,26 @@
 
 /obj/structure/railing/Initialize()
 	. = ..()
-	if(!material)
-		return INITIALIZE_HINT_QDEL
-	if(material.products_need_process())
-		START_PROCESSING(SSobj, src)
-	if(material.conductive)
-		obj_flags |= OBJ_FLAG_CONDUCTIBLE
-	else
-		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 	if(anchored)
 		update_icon(FALSE)
+
+/obj/structure/railing/on_material_change()
+	var/decl/material/material = get_primary_material()
+	if(material)
+		if(material.products_need_process())
+			START_PROCESSING(SSobj, src)
+		if(material.conductive)
+			obj_flags |= OBJ_FLAG_CONDUCTIBLE
+		else
+			obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
+	else
+		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 
 /obj/structure/railing/get_material_health_modifier()
 	. = 0.2
 
 /obj/structure/railing/update_material_desc(override_desc)
+	var/decl/material/material = get_primary_material()
 	if(material)
 		desc = "A simple [material.solid_name] railing designed to protect against careless trespass."
 	else
@@ -88,10 +93,11 @@
 /obj/structure/railing/take_damage(amount)
 	health -= amount
 	if(health <= 0)
-		visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
+		var/decl/material/material = get_primary_material()
+		if(material)
+			visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
 		playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
-		material.place_shard(get_turf(usr))
-		qdel(src)
+		physically_destroyed()
 
 /obj/structure/railing/proc/NeighborsCheck(var/UpdateNeighbors = 1)
 	neighbor_status = 0
@@ -223,8 +229,7 @@
 				if(anchored)
 					return
 				user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
-				material.place_sheet(loc, 2)
-				qdel(src)
+				dismantle()
 			return
 	// Wrench Open
 		else
@@ -288,5 +293,6 @@
 /obj/structure/railing/do_climb(var/mob/living/user)
 	. = ..()
 	if(.)
-		if(!anchored || material.is_brittle())
+		var/decl/material/material = get_primary_material()
+		if(!anchored || material?.is_brittle())
 			take_damage(maxhealth) // Fatboy

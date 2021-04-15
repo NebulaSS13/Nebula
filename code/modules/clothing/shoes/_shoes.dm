@@ -12,7 +12,7 @@
 	permeability_coefficient = 0.50
 	force = 2
 	blood_overlay_type = "shoeblood"
-	material = /decl/material/solid/leather
+	material_composition = list(/decl/material/solid/leather = MATTER_AMOUNT_PRIMARY)
 	origin_tech = "{'materials':1,'engineering':1}"
 
 	var/can_fit_under_magboots = TRUE
@@ -158,9 +158,10 @@
 		var/mob/M = src.loc
 		M.update_inv_shoes()
 
-/obj/item/clothing/shoes/set_material(var/new_material)
-	..()
-	if(shine != -1 && material.reflectiveness >= MAT_VALUE_DULL)
+/obj/item/clothing/shoes/Initialize()
+	. = ..()
+	var/decl/material/material = get_primary_material()
+	if(material && shine != -1 && material.reflectiveness >= MAT_VALUE_DULL)
 		shine = material.reflectiveness
 
 /obj/item/clothing/shoes/on_update_icon()

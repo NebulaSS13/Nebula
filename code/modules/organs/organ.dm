@@ -4,7 +4,7 @@
 	germ_level = 0
 	w_class = ITEM_SIZE_TINY
 	default_action_type = /datum/action/item_action/organ
-	material = /decl/material/solid/meat
+	material_composition = list(/decl/material/solid/meat = MATTER_AMOUNT_PRIMARY)
 	origin_tech = "{'materials':1,'biotech':1}"
 
 	// Strings.
@@ -268,9 +268,9 @@
 /obj/item/organ/proc/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
 	status = ORGAN_PROSTHETIC
 	reagents?.clear_reagents()
-	material = GET_DECL(apply_material)
-	matter = null
-	create_matter()
+	var/list/comp = list()
+	comp[apply_material] = MATTER_AMOUNT_PRIMARY * get_matter_amount_modifier()
+	set_material_composition(comp)
 
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
 	status = ORGAN_ASSISTED

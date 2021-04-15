@@ -9,7 +9,7 @@ var/global/list/cached_icons = list()
 	icon = 'icons/obj/items/paint_bucket.dmi'
 	icon_state = "paintbucket"
 	item_state = "paintcan"
-	material = /decl/material/solid/metal/aluminium
+	material_composition = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY)
 	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[10,20,30,60]"

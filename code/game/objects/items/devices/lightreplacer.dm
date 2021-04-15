@@ -43,9 +43,9 @@
 	desc = "A lightweight automated device, capable of interfacing with and rapidly replacing standard light installations."
 	icon = 'icons/obj/items/light_replacer.dmi'
 	icon_state = ICON_STATE_WORLD
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -92,7 +92,7 @@
 	. = ..()
 
 /obj/item/lightreplacer/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/stack/material) && W.get_material_type() == /decl/material/solid/glass)
+	if(istype(W, /obj/item/stack/material) && W.get_primary_material_type() == /decl/material/solid/glass)
 		var/obj/item/stack/G = W
 		if(uses >= max_uses)
 			to_chat(user, "<span class='warning'>[src.name] is full.</span>")

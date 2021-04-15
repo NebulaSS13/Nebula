@@ -23,7 +23,7 @@
 		return FALSE
 
 /obj/structure/girder/handle_default_screwdriver_attackby(var/mob/user, var/obj/item/screwdriver)
-
+	var/decl/material/reinf_material = get_reinforcing_material()
 	if(reinf_material)
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		visible_message(SPAN_NOTICE("\The [user] begins unscrewing \the [reinf_material.solid_name] struts from \the [src]."))
@@ -46,7 +46,7 @@
 	. = ..()
 	if(!anchored)
 		icon_state = "displaced"
-	else if(reinf_material)
+	else if(get_reinforcing_material())
 		icon_state = "reinforced"
 	else
 		icon_state = initial(icon_state)
@@ -58,7 +58,7 @@
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
 	
 	var/effective_cover = cover
-	if(reinf_material)
+	if(get_reinforcing_material())
 		effective_cover *= 2
 	if(!anchored) 
 		effective_cover *= 0.5
@@ -70,7 +70,7 @@
 		return
 	if(!istype(Proj, /obj/item/projectile/beam))
 		damage *= 0.4
-	if(reinf_material)
+	if(get_reinforcing_material())
 		damage = Floor(damage * 0.75)
 	..()
 	if(damage)
@@ -80,12 +80,13 @@
 	return TRUE
 
 /obj/structure/girder/can_unanchor(var/mob/user)
-	if(anchored && reinf_material)
+	if(anchored && get_reinforcing_material())
 		to_chat(user, SPAN_WARNING("You must remove the support struts before you can dislodge \the [src]."))
 		return FALSE
 	. = ..()
 
 /obj/structure/girder/can_dismantle(var/mob/user)
+	var/decl/material/reinf_material = get_reinforcing_material()
 	if(reinf_material)
 		to_chat(user, SPAN_WARNING("You must use a screwdriver to remove the [reinf_material.solid_name] reinforcement before you can dismantle \the [src]."))
 		return FALSE
@@ -93,6 +94,7 @@
 
 /obj/structure/girder/attackby(var/obj/item/W, var/mob/user)
 	// Other methods of quickly destroying a girder.
+	var/decl/material/reinf_material = get_reinforcing_material()
 	if(W.is_special_cutting_tool(TRUE))
 		if(istype(W, /obj/item/gun/energy/plasmacutter))
 			var/obj/item/gun/energy/plasmacutter/cutter = W
@@ -128,59 +130,62 @@
 		to_chat(user, SPAN_WARNING("You will need at least two sheets of material clad a wall."))
 		return 0
 
-	if(!istype(S.material))
+	var/decl/material/material = S.get_primary_material()
+	if(!istype(material))
 		return 0
 
 	if(!anchored)
 		to_chat(user, SPAN_WARNING("You must anchor \the [src] before finishing the wall."))
 		return FALSE
 
-	if(S.material.weight > max(material.wall_support_value, reinf_material?.wall_support_value))
-		to_chat(user, SPAN_WARNING("You will need a support made of sturdier material to hold up [S.material.solid_name] cladding."))
+	var/decl/material/reinf_material = get_reinforcing_material()
+	if(material.weight > max(material.wall_support_value, reinf_material?.wall_support_value))
+		to_chat(user, SPAN_WARNING("You will need a support made of sturdier material to hold up [material.solid_name] cladding."))
 		return FALSE
 
 	add_hiddenprint(usr)
-	if(S.material.integrity < 50)
+	if(material.integrity < 50)
 		to_chat(user, SPAN_WARNING("This material is too soft for use in wall construction."))
 		return 0
 
-	to_chat(user, SPAN_NOTICE("You begin adding the [S.material.solid_name] cladding..."))
+	to_chat(user, SPAN_NOTICE("You begin adding the [material.solid_name] cladding..."))
 
 	if(!do_after(user,40,src) || !S.use(2))
 		return 1 //once we've gotten this far don't call parent attackby()
 
 	if(!prepped_for_fakewall)
-		to_chat(user, SPAN_NOTICE("You added the [S.material.solid_name] cladding!"))
+		to_chat(user, SPAN_NOTICE("You added the [material.solid_name] cladding!"))
 	else
 		to_chat(user, SPAN_NOTICE("You create a false wall! Push on it to open or close the passage."))
 
 	var/turf/Tsrc = get_turf(src)
 	Tsrc.ChangeTurf(/turf/simulated/wall)
 	var/turf/simulated/wall/T = get_turf(src)
-	T.set_material(S.material, reinf_material, material)
+	T.set_material(material, get_reinforcing_material(), material)
 	T.can_open = prepped_for_fakewall
 	T.add_hiddenprint(usr)
 	material = null
-	reinf_material = null
+	set_reinforcing_material(null)
 	qdel(src)
 	return 1
 
 /obj/structure/girder/proc/reinforce_with_material(obj/item/stack/material/S, mob/user) //if the verb is removed this can be renamed.
+	var/decl/material/reinf_material = get_reinforcing_material()
 	if(reinf_material)
 		to_chat(user, SPAN_WARNING("\The [src] is already reinforced."))
 		return TRUE
 	if(S.get_amount() < 2)
 		to_chat(user, SPAN_WARNING("You will need at least 2 sheets to reinforce \the [src]."))
 		return TRUE
-	var/decl/material/M = S.material
-	if(!istype(M) || M.integrity < 50)
-		to_chat(user, SPAN_WARNING("You cannot reinforce \the [src] with [M.solid_name]; it is too soft."))
+	var/decl/material/material = S.get_primary_material()
+	if(!istype(material) || material.integrity < 50)
+		to_chat(user, SPAN_WARNING("You cannot reinforce \the [src] with [material.solid_name]; it is too soft."))
 		return TRUE
-	visible_message(SPAN_NOTICE("\The [user] begins installing [M.solid_name] struts into \the [src]."))
+	visible_message(SPAN_NOTICE("\The [user] begins installing [material.solid_name] struts into \the [src]."))
 	if (!do_after(user, 4 SECONDS, src) || !S.use(2))
 		return TRUE
-	visible_message(SPAN_NOTICE("\The [user] finishes reinforcing \the [src] with [M.solid_name]."))
-	reinf_material = M
+	visible_message(SPAN_NOTICE("\The [user] finishes reinforcing \the [src] with [material.solid_name]."))
+	reinf_material = material
 	update_icon()
 	return 1
 
@@ -204,16 +209,14 @@
 	cover = 70
 
 /obj/structure/girder/cult/dismantle()
-	material = null
-	reinf_material = null
 	parts_type = null
 	. = ..()
 
 /obj/structure/girder/wood
-	material = /decl/material/solid/wood/mahogany
+	material_composition = list(/decl/material/solid/wood/mahogany = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/grille/wood
-	material = /decl/material/solid/wood/mahogany
+	material_composition = list(/decl/material/solid/wood/mahogany = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/lattice/wood
-	material = /decl/material/solid/wood/mahogany
+	material_composition = list(/decl/material/solid/wood/mahogany = MATTER_AMOUNT_PRIMARY)

@@ -133,8 +133,9 @@
 		if(length(.) && (locate(/datum/event/brain_expansion) in SSevent.active_events))
 			for(var/tech in .)
 				.[tech] += 1
-	for(var/mat in loaded_item.matter)
-		LAZYSET(cached_materials, mat, cached_materials[mat] + (loaded_item.matter[mat] * material_return_modifier))
+	var/list/matter = loaded_item.get_matter_list()
+	for(var/mat in matter)
+		LAZYSET(cached_materials, mat, cached_materials[mat] + (matter[mat] * material_return_modifier))
 	loaded_item.physically_destroyed(FALSE)
 	if(!QDELETED(loaded_item))
 		QDEL_NULL(loaded_item)

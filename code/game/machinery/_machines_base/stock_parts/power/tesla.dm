@@ -28,4 +28,4 @@
 
 /obj/item/stock_parts/power/apc/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)

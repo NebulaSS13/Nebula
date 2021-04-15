@@ -104,7 +104,7 @@ var/list/wall_noblend_objects = list(
 	if(!radiate())
 		return PROCESS_KILL
 
-/turf/simulated/wall/proc/get_material()
+/turf/simulated/wall/proc/get_primary_material()
 	return material
 
 /turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)

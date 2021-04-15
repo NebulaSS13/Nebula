@@ -125,8 +125,10 @@
 
 /obj/machinery/vending/materials/build_inventory()
 	..()
+/*
 	for(var/datum/stored_items/vending_products/P in product_records)
 		if(ispath(P.item_path, /obj/item/stack/material))
 			var/obj/item/stack/material/S = P.item_path
 			var/decl/material/sheet_material = GET_DECL(initial(S.material))
 			P.item_name = "[sheet_material.solid_name] [sheet_material.sheet_plural_name] ([initial(S.amount)]x)"
+*/

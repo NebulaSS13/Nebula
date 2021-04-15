@@ -19,6 +19,7 @@
 /obj/item/coin/Initialize()
 	. = ..()
 	icon_state = "coin[rand(1,10)]"
+	var/decl/material/material = get_primary_material()
 	if(material)
 		desc = "A old-style coin stamped out of [material.solid_name]."
 
@@ -96,19 +97,19 @@
 
 // Subtypes.
 /obj/item/coin/gold
-	material = /decl/material/solid/metal/gold
+	material_composition = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/coin/silver
-	material = /decl/material/solid/metal/silver
+	material_composition = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/coin/diamond
-	material = /decl/material/solid/gemstone/diamond
+	material_composition = list(/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/coin/iron
-	material = /decl/material/solid/metal/iron
+	material_composition = list(/decl/material/solid/metal/iron = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/coin/uranium
-	material = /decl/material/solid/metal/uranium
+	material_composition = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/coin/platinum
-	material = /decl/material/solid/metal/platinum
+	material_composition = list(/decl/material/solid/metal/platinum = MATTER_AMOUNT_PRIMARY)

@@ -7,7 +7,7 @@
 	icon_state = "bell"
 	thrown_material_force_multiplier = 0.3
 	hitsound = 'sound/items/oneding.ogg'
-	material = /decl/material/solid/metal/aluminium
+	material_composition = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 

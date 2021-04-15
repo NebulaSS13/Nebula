@@ -67,9 +67,9 @@
 	max_storage_space = 56
 	desc = "The latest and greatest in custodial convenience, a trashbag that is capable of holding vast quantities of garbage."
 	icon_state = "bluetrashbag"
-	material = /decl/material/solid/plastic
-	matter = list(
-		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = "{'exoticmatter':5,'materials':6}"

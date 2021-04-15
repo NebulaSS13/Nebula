@@ -22,8 +22,10 @@
 	heat_protection = SLOT_HEAD
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
-	material = /decl/material/solid/plastic
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY
+	)
 	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
 
 /obj/item/clothing/head/hardhat/orange

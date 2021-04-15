@@ -6,8 +6,10 @@
 	item_state = "inducer-sci"
 	force = 7
 	origin_tech = "{'powerstorage':6,'engineering':4}"
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 	slot_flags = SLOT_LOWER_BODY
 
 	var/powertransfer = 500

@@ -5,10 +5,10 @@
 	var/obj/structure/table/T
 	for(var/angle in list(-90,90))
 		T = locate() in get_step(src.loc,turn(direction,angle))
-		if(T && T.flipped == 0 && T.material && material && T.material.type == material.type)
+		if(T && T.flipped == 0 && T.get_primary_material() == get_primary_material())
 			return 0
 	T = locate() in get_step(src.loc,direction)
-	if (!T || T.flipped == 1 || T.material != material)
+	if (!T || T.flipped == 1 || T.get_primary_material() != get_primary_material())
 		return 1
 	return T.straight_table_check(direction)
 
@@ -21,7 +21,7 @@
 	if (!usr.can_touch(src) || ismouse(usr))
 		return
 
-	if(reinf_material || flipped < 0 || !flip(get_cardinal_dir(usr,src)))
+	if(get_reinforcing_material() || flipped < 0 || !flip(get_cardinal_dir(usr,src)))
 		to_chat(usr, "<span class='notice'>It won't budge.</span>")
 		return
 
@@ -50,7 +50,7 @@
 		L.Add(turn(src.dir,90))
 	for(var/new_dir in L)
 		var/obj/structure/table/T = locate() in get_step(src.loc,new_dir)
-		if(T && T.material && material && T.material.type == material.type)
+		if(T && T.get_primary_material() == get_primary_material())
 			if(T.flipped == 1 && T.dir == src.dir && !T.unflipping_check(new_dir))
 				return 0
 	return 1
@@ -92,7 +92,7 @@
 	atom_flags |= ATOM_FLAG_CHECKS_BORDER
 	for(var/D in list(turn(direction, 90), turn(direction, -90)))
 		var/obj/structure/table/T = locate() in get_step(src,D)
-		if(T && T.can_connect() && T.flipped == 0 && material && T.material && T.material.type == material.type)
+		if(T && T.can_connect() && T.flipped == 0 && get_primary_material() == T.get_primary_material())
 			T.flip(direction)
 	take_damage(rand(5, 10))
 	update_connections(1)
@@ -112,7 +112,7 @@
 	atom_flags &= ~ATOM_FLAG_CHECKS_BORDER
 	for(var/D in list(turn(dir, 90), turn(dir, -90)))
 		var/obj/structure/table/T = locate() in get_step(src.loc,D)
-		if(T && T.flipped == 1 && T.dir == src.dir && material && T.material && T.material.type == material.type)
+		if(T && T.flipped == 1 && T.dir == src.dir && T.get_primary_material() == get_primary_material())
 			T.unflip()
 
 	update_connections(1)

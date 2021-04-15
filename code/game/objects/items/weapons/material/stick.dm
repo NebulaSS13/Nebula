@@ -7,7 +7,7 @@
 	material_force_multiplier = 0.1
 	thrown_material_force_multiplier = 0.1
 	w_class = ITEM_SIZE_NORMAL
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)
 	attack_verb = list("poked", "jabbed")
 	applies_material_colour = TRUE
 	applies_material_name = TRUE

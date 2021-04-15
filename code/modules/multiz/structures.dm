@@ -11,7 +11,7 @@
 	opacity =  FALSE
 	anchored = TRUE
 	obj_flags = OBJ_FLAG_NOFALL
-	material = /decl/material/solid/metal/aluminium
+	material_composition = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY)
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT | TOOL_INTERACTION_ANCHOR
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 

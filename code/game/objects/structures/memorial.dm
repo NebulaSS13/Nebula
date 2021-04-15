@@ -8,7 +8,7 @@
 	density = TRUE
 	anchored = TRUE
 	unacidable = TRUE
-	material = /decl/material/solid/stone/marble
+	material_composition = list(/decl/material/solid/stone/marble = MATTER_AMOUNT_PRIMARY)
 	material_alteration = MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_NAME
 
 	var/list/fallen = list()

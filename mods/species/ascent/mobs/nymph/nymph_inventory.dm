@@ -26,16 +26,19 @@
 		collecting.w_class <= can_pull_size \
 	)
 
+/mob/living/carbon/alien/ascent_nymph
+	var/static/list/can_digest = list(
+		/decl/material/solid/mineral/sand,
+		/decl/material/solid/gemstone/crystal,
+		/decl/material/solid/mineral/quartz,
+		/decl/material/solid/glass
+	)
+
 /mob/living/carbon/alien/ascent_nymph/proc/contains_crystals(var/obj/item/W)
-	for(var/mat in W.matter)
-		if(mat == /decl/material/solid/mineral/sand)
-			. += W.matter[mat]
-		else if(mat == /decl/material/solid/gemstone/crystal)
-			. += W.matter[mat]
-		else if(mat == /decl/material/solid/mineral/quartz)
-			. += W.matter[mat]
-		else if(mat == /decl/material/solid/glass)
-			. += W.matter[mat]
+	var/datum/materials/materials = W.get_material_composition()
+	if(materials)
+		for(var/mat in can_digest)
+			. += materials.get_material(mat)
 
 /mob/living/carbon/alien/ascent_nymph/proc/collect(var/obj/item/collecting)
 	collecting.forceMove(src)

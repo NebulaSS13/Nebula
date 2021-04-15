@@ -8,7 +8,7 @@
 	origin_tech = "{'programming':2}"
 	usage_flags = PROGRAM_ALL
 	external_slot = TRUE
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 	var/obj/item/stock_parts/computer/hard_drive/portable/stored_drive = null
 

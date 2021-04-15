@@ -11,7 +11,7 @@
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "rg0"
 	icon_state = "rg"
-	material = /decl/material/solid/glass
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = @"[1,2,5]"
 	volume = 15
@@ -398,8 +398,8 @@
 	amount_per_transfer_from_this = 20
 	volume = 60
 	icon_state = "bs"
-	material = /decl/material/solid/glass
-	matter = list(
+	material_composition = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
@@ -411,9 +411,9 @@
 	volume = 20
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	icon_state = "cs"
-	material = /decl/material/solid/glass
-	matter = list(
-		/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = "{'biotech':4,'materials':4}"

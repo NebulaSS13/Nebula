@@ -1,2 +1,2 @@
 /obj/item/stack/get_value_multiplier()
-	. = matter ? ..() : amount
+	. = istype(get_material_composition(), /datum/materials) ? ..() : amount

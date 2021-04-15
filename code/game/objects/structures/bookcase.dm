@@ -7,7 +7,7 @@ GLOBAL_LIST_INIT(station_bookcases, new)
 	density = 1
 	opacity = 1
 	obj_flags = OBJ_FLAG_ANCHORABLE
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 

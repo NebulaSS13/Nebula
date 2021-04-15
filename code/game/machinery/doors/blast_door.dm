@@ -134,7 +134,7 @@
 	else
 		force_close()
 
-/obj/machinery/door/blast/get_material()
+/obj/machinery/door/blast/get_primary_material()
 	return implicit_material
 
 // Proc: attackby()
@@ -153,7 +153,7 @@
 		else
 			to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
 		return
-	if(istype(C, /obj/item/stack/material) && C.get_material_type() == /decl/material/solid/metal/plasteel)
+	if(istype(C, /obj/item/stack/material) && C.get_primary_material_type() == /decl/material/solid/metal/plasteel)
 		var/amt = Ceiling((maxhealth - health)/150)
 		if(!amt)
 			to_chat(user, "<span class='notice'>\The [src] is already fully functional.</span>")

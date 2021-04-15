@@ -10,7 +10,7 @@
 	obj_flags = OBJ_FLAG_NOFALL
 	handle_generic_blending = TRUE
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 	var/hatch_open = FALSE
 	var/decl/flooring/tiling/plated_tile
@@ -28,10 +28,6 @@
 /obj/structure/catwalk/Initialize()
 	. = ..()
 	DELETE_IF_DUPLICATE_OF(/obj/structure/catwalk)
-
-	if(!istype(material))
-		return INITIALIZE_HINT_QDEL
-
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/structure/catwalk/LateInitialize()
@@ -69,7 +65,7 @@
 		overlays += I
 
 /obj/structure/catwalk/create_dismantled_products(var/turf/T)
-	new /obj/item/stack/material/rods(T, 2, material.type)
+	new /obj/item/stack/material/rods(T, 2, get_primary_material_type())
 	if(plated_tile)
 		var/plate_path = plated_tile.build_type
 		new plate_path(T)

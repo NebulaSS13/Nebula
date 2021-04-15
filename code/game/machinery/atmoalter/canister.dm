@@ -3,32 +3,25 @@
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "yellow"
 	density = 1
-	var/health = 100.0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_GARGANTUAN
 	construct_state = /decl/machine_construction/pipe/welder
 	uncreated_component_parts = null
-	matter = list(
-		/decl/material/solid/metal/steel = 10 * SHEET_MATERIAL_AMOUNT
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY
 	)
+	start_pressure = 45 * ONE_ATMOSPHERE
+	volume = 1000
+	interact_offline = 1 // Allows this to be used when not in powered area.
 
 	var/valve_open = 0
 	var/release_pressure = ONE_ATMOSPHERE
 	var/release_flow_rate = ATMOS_DEFAULT_VOLUME_PUMP //in L/s
-
+	var/health = 100.0
 	var/canister_color = "yellow"
 	var/can_label = 1
-	start_pressure = 45 * ONE_ATMOSPHERE
 	var/temperature_resistance = 1000 + T0C
-	volume = 1000
-	interact_offline = 1 // Allows this to be used when not in powered area.
 	var/update_flag = 0
-
-/obj/machinery/portable_atmospherics/canister/Initialize(mapload, material)
-	if(ispath(material))
-		matter = list()
-		matter[material] = 10 * SHEET_MATERIAL_AMOUNT
-	. = ..(mapload)
 
 /obj/machinery/portable_atmospherics/canister/drain_power()
 	return -1
@@ -203,10 +196,9 @@ update_flag
 	var/turf/T = get_turf(src)
 	if(T)
 		T.assume_air(air_contents)
-	for(var/path in matter)
-		var/decl/material/material = GET_DECL(path)
-		if(material)
-			material.place_sheet(get_turf(src), round(matter[path]/SHEET_MATERIAL_AMOUNT))
+	var/datum/materials/matter = get_material_composition()
+	if(istype(matter))
+		matter.convert_to_sheets(get_turf(T))
 	qdel(src)
 
 /obj/machinery/portable_atmospherics/canister/Process()

@@ -4,7 +4,6 @@
 
 	var/obj_flags
 	var/list/req_access
-	var/list/matter //Used to store information about the contents of the object.
 	var/w_class // Size of the object.
 	var/unacidable = 0 //universal "unacidabliness" var, here so you can use it in any obj.
 	var/throwforce = 1
@@ -21,14 +20,54 @@
 	if(!anchored)
 		step(src, AM.last_move)
 
-/obj/proc/create_matter()
-	if(length(matter))
+// Not called by base /obj, called by /obj/item, /obj/structure and /obj/machinery.
+/obj/proc/create_material_composition(var/primary_material, var/reinforcement_material)
+
+	var/matter_amount_modifier = get_matter_amount_modifier()
+	var/list/matter = get_material_composition()
+
+	if(!islist(matter))
+		matter = list()
+	else if(length(matter))
 		for(var/mat in matter)
-			matter[mat] = round(matter[mat] * get_matter_amount_modifier())
-	UNSETEMPTY(matter)
+			matter[mat] = matter[mat] * matter_amount_modifier
+
+	if(length(matter))
+		var/datum/materials/materials = set_material_composition(matter)
+		if(materials)
+			if(primary_material)
+				materials.set_primary_material(primary_material)
+			if(reinforcement_material)
+				materials.set_reinforcing_material(reinforcement_material)
+			return
+
+	if(primary_material || reinforcement_material)
+		var/list/comp = list()
+		if(primary_material)
+			comp[primary_material] = round(MATTER_AMOUNT_PRIMARY * matter_amount_modifier)
+		if(reinforcement_material)
+			comp[reinforcement_material] = round(MATTER_AMOUNT_SECONDARY * matter_amount_modifier)
+		set_material_composition(comp)
+
+/obj/proc/get_matter_list()
+	var/datum/materials/matter = get_material_composition()
+	return istype(matter) ? matter.matter : list()
+
+/obj/proc/get_material_composition()
+	return
+
+/obj/proc/set_material_composition(var/list/new_materials)
+	if(islist(new_materials) && length(new_materials))
+		var/datum/materials/matter = get_material_composition()
+		if(!istype(matter))
+			matter = new(src)
+		matter.set_material_composition(new_materials)
+		return matter
+	return null
 
 /obj/Destroy()
 	STOP_PROCESSING(SSobj, src)
+	set_material_composition(null)
 	return ..()
 
 /obj/proc/get_matter_amount_modifier()

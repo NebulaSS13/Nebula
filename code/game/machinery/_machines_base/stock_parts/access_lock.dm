@@ -150,8 +150,10 @@
 		req_access = conf_access.Copy()
 /obj/item/stock_parts/access_lock/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 
 /decl/stock_part_preset/access_lock
 	expected_part_type = /obj/item/stock_parts/access_lock

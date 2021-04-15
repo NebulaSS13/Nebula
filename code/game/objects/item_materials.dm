@@ -1,5 +1,6 @@
 /obj/item/on_update_icon()
 	overlays.Cut()
+	var/decl/material/material = get_primary_material()
 	if(applies_material_colour && material)
 		color = material.color
 		alpha = 100 + material.opacity * 255
@@ -8,6 +9,7 @@
 
 /obj/item/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
+	var/decl/material/material = get_primary_material()
 	if(material && (material.is_brittle() || target.get_blocked_ratio(hit_zone, BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5))
 		check_shatter()
 
@@ -16,6 +18,7 @@
 		check_shatter()
 
 /obj/item/proc/check_shatter()
+	var/decl/material/material = get_primary_material()
 	if(material && !unbreakable && prob(material.hardness))
 		if(material.is_brittle())
 			health = 0
@@ -28,6 +31,7 @@
 		shatter(consumed)
 
 /obj/item/proc/shatter(var/consumed)
+	var/decl/material/material = get_primary_material()
 	var/turf/T = get_turf(src)
 	T.visible_message(SPAN_DANGER("\The [src] [material ? material.destruction_desc : "shatters"]!"))
 	playsound(src, "shatter", 70, 1)
@@ -35,13 +39,16 @@
 		material.place_shard(T)
 	qdel(src)
 
-/obj/item/get_material()
-	. = material
+/obj/item/get_primary_material()
+	var/datum/materials/matter = get_material_composition()
+	if(istype(matter))
+		return matter.get_primary_material()
 
 /obj/item/proc/update_force()
 	var/new_force
 	if(!max_force)
 		max_force = 5 * min(w_class, ITEM_SIZE_GARGANTUAN)
+	var/decl/material/material = get_primary_material()
 	if(material)
 		if(edge || sharp)
 			new_force = material.get_edge_damage()
@@ -58,27 +65,3 @@
 		armor_penetration += 2*max(0, material.brute_armor - 2)
 		throwforce = round(material.get_blunt_damage() * thrown_material_force_multiplier)
 		attack_cooldown += material.get_attack_cooldown()
-
-/obj/item/proc/set_material(var/new_material)
-	if(new_material)
-		material = GET_DECL(new_material)
-	if(istype(material))
-		health = round(material_health_multiplier * material.integrity)
-		max_health = health
-		if(material.products_need_process())
-			START_PROCESSING(SSobj, src)
-		if(material.conductive)
-			obj_flags |= OBJ_FLAG_CONDUCTIBLE
-		else
-			obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
-		update_force()
-		if(applies_material_name)
-			SetName("[material.solid_name] [initial(name)]")
-		if(material_armor_multiplier)
-			armor = material.get_armor(material_armor_multiplier)
-			armor_degradation_speed = material.armor_degradation_speed
-			if(length(armor))
-				set_extension(src, armor_type, armor, armor_degradation_speed)
-			else
-				remove_extension(src, armor_type)
-	queue_icon_update()

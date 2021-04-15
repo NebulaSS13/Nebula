@@ -2,7 +2,7 @@
 	volume = 40 //just over one and a half cups
 	amount_per_transfer_from_this = 5
 	atom_flags = 0 //starts closed
-	material = /decl/material/solid/metal/aluminium
+	material_composition = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY)
 
 //DRINKS
 
@@ -21,7 +21,7 @@
 	desc = "Pure drinking water, imported from the Martian poles."
 	icon_state = "waterbottle"
 	center_of_mass = @"{'x':15,'y':8}"
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/chems/food/drinks/cans/waterbottle/Initialize()
 	. = ..()

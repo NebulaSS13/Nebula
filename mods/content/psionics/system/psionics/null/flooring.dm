@@ -17,4 +17,4 @@
 /obj/item/stack/tile/floor_nullglass
 	name = "nullglass floor tile"
 	icon_state = "tile_nullglass"
-	material = MAT_NULLGLASS
+	material_composition = list(/decl/material/solid/nullglass = MATTER_AMOUNT_PRIMARY)

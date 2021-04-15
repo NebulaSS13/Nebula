@@ -1,7 +1,7 @@
 /obj/item/frame_holder
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/osmium = MATTER_AMOUNT_TRACE
 	)
 
@@ -17,7 +17,7 @@
 	icon_state = "backbone"
 	density = 1
 	pixel_x = -8
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 	dir = SOUTH
 
@@ -87,6 +87,7 @@
 	// Removing components.
 	if(isCrowbar(thing))
 		if(is_reinforced == FRAME_REINFORCED)
+			var/decl/material/material = get_primary_material()
 			if(!do_after(user, 5 * user.skill_delay_mult(SKILL_DEVICES)) || !material)
 				return
 			user.visible_message(SPAN_NOTICE("\The [user] crowbars the reinforcement off \the [src]."))
@@ -201,7 +202,8 @@
 	// Installing metal.
 	else if(istype(thing, /obj/item/stack/material))
 		var/obj/item/stack/material/M = thing
-		if(M.material)
+		var/decl/material/material = M.get_primary_material()
+		if(material)
 			if(is_reinforced)
 				to_chat(user, SPAN_WARNING("There is already a material reinforcement installed in \the [src]."))
 				return
@@ -216,7 +218,7 @@
 
 			visible_message("\The [user] reinforces \the [src] with \the [M].")
 			playsound(user.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-			material = M.material
+			set_primary_material(material)
 			is_reinforced = FRAME_REINFORCED
 			M.use(10)
 		else

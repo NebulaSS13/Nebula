@@ -3,6 +3,7 @@
 	w_class = ITEM_SIZE_STRUCTURE
 	layer = STRUCTURE_LAYER
 
+	var/datum/materials/material_composition //Used to store information about the material composition of the object.
 	var/last_damage_message
 	var/health = 0
 	var/maxhealth = 50
@@ -12,31 +13,22 @@
 	var/footstep_type
 	var/mob_offset
 
-/obj/structure/create_matter()
-	..()
-	if(material || reinf_material)
-		LAZYINITLIST(matter)
-		var/matter_mult = get_matter_amount_modifier()
-		if(material)
-			matter[material.type] = max(matter[material.type], round(MATTER_AMOUNT_PRIMARY * matter_mult))
-		if(reinf_material)
-			matter[reinf_material.type] = max(matter[reinf_material.type], round(MATTER_AMOUNT_REINFORCEMENT * matter_mult))
-		UNSETEMPTY(matter)
+/obj/structure/get_material_composition()
+	return material_composition
+
+/obj/structure/set_material_composition(var/list/new_materials)
+	material_composition = ..()
+	return material_composition
 
 /obj/structure/Initialize(var/ml, var/_mat, var/_reinf_mat)
-	if(ispath(_mat, /decl/material))
-		material = _mat
-	if(ispath(material, /decl/material))
-		material = GET_DECL(material)
-	if(ispath(_reinf_mat, /decl/material))
-		reinf_material = _reinf_mat
-	if(ispath(reinf_material, /decl/material))
-		reinf_material = GET_DECL(reinf_material)
 	. = ..()
-	update_materials()
+	create_material_composition((ispath(_mat, /decl/material) && _mat), (ispath(_reinf_mat, /decl/material) && _reinf_mat))
 	if(!CanFluidPass())
 		fluid_update()
 
+/obj/structure/on_material_change()
+	. = ..()
+	
 /obj/structure/proc/show_examined_damage(mob/user, var/perc)
 	if(maxhealth == -1)
 		return
@@ -65,7 +57,8 @@
 
 		if(tool_interaction_flags & TOOL_INTERACTION_DECONSTRUCT)
 			var/removed_with = "a crowbar"
-			if(material && material.removed_by_welder)
+			var/decl/material/material = get_primary_material()
+			if(material?.removed_by_welder)
 				removed_with = "a welding torch"
 			if(tool_interaction_flags & TOOL_INTERACTION_ANCHOR)
 				if(anchored)
@@ -104,12 +97,10 @@
 	if(health == -1) // This object does not take damage.
 		return
 
-	if(material && material.is_brittle())
-		if(reinf_material)
-			if(reinf_material.is_brittle())
-				damage *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
-		else
-			damage *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
+	var/decl/material/material = get_primary_material()
+	var/decl/material/reinf_material = get_reinforcing_material()
+	if(material?.is_brittle() && (!reinf_material || reinf_material?.is_brittle()))
+		damage *= STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER
 
 	playsound(loc, hitsound, 75, 1)
 	health = Clamp(health - damage, 0, maxhealth)
@@ -139,7 +130,8 @@
 /obj/structure/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()
 	var/dmg = 100
-	if(istype(material))
+	var/decl/material/material = get_primary_material()
+	if(material)
 		dmg = round(dmg * material.combustion_effect(get_turf(src),temperature, 0.3))
 	if(dmg)
 		take_damage(dmg)
@@ -195,7 +187,8 @@
 
 		affecting_mob.apply_damage(8, BRUTE, BP_HEAD)
 		visible_message(SPAN_DANGER("[G.assailant] slams [affecting_mob]'s face against \the [src]!"))
-		if (material)
+		var/decl/material/material = get_primary_material()
+		if(material)
 			playsound(loc, material.tableslam_noise, 50, 1)
 		else
 			playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)

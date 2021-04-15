@@ -8,7 +8,7 @@
 	icon = 'icons/obj/assemblies/electronic_setups.dmi'
 	icon_state = "setup_small"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	matter = list()		// To be filled later
+	material_composition = list()		// To be filled later
 	var/list/assembly_components = list()
 	var/list/ckeys_allowed_to_scan = list() // Players who built the circuit can scan it as a ghost.
 	var/max_components = IC_MAX_SIZE_BASE
@@ -92,9 +92,8 @@
 		if(D.check_access(src))
 			D.open()
 
-/obj/item/electronic_assembly/create_matter()
-	..()
-	LAZYSET(matter, /decl/material/solid/metal/steel, round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier)
+/obj/item/electronic_assembly/create_material_composition()
+	set_material_composition(list(/decl/material/solid/metal/steel = round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier))
 
 /obj/item/electronic_assembly/Initialize()
 	. = ..()

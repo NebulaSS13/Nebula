@@ -78,9 +78,10 @@
 	overlays = adding_notes
 
 /obj/item/cash/proc/update_from_worth()
+
 	var/decl/currency/cur = GET_DECL(currency)
-	matter = list()
-	matter[cur.material] = absolute_worth * max(1, round(SHEET_MATERIAL_AMOUNT/10))
+	set_material_composition(list(cur.material = ceil(absolute_worth * max(1, round(SHEET_MATERIAL_AMOUNT/10)))))
+
 	var/current_worth = get_worth()
 	if(cur.denominations_by_value["[current_worth]"]) // Single piece.
 		var/datum/denomination/denomination = cur.denominations_by_value["[current_worth]"]

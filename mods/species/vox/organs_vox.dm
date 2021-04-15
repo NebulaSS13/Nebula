@@ -93,18 +93,16 @@
 		var/list/check_materials
 		var/updated_stacks
 		for(var/obj/item/food in contents)
-			for(var/mat in food.matter)
+			var/datum/materials/matter = food.get_material_composition()
+			if(!istype(matter))
+				continue
+			for(var/mat in matter)
 				if(!can_digest_matter[mat] && !can_process_matter[mat])
 					continue
-
 				// Grab a chunk out of the object.
-				var/digested = min(food.matter[mat], rand(200,500))
-				food.matter[mat] -= digested
+				var/digested = min(matter.get_material(mat), rand(200,500))
+				matter.remove_material(mat, digested)
 				digested *= 0.75
-				if(food.matter[mat] <= 0)
-					food.matter -= mat
-				if(!food.matter.len)
-					qdel(food)
 
 				// Process it.
 				if(can_digest_matter[mat])
@@ -127,7 +125,7 @@
 
 				// Merge them into other stacks.
 				for(var/obj/item/stack/material/mat_stack in contents)
-					if(mat_stack.material == M && mat_stack.amount < mat_stack.max_amount)
+					if(mat_stack.get_primary_material() == M && mat_stack.amount < mat_stack.max_amount)
 						var/taking_sheets = min(sheets, mat_stack.get_max_amount() - mat_stack.amount)
 						mat_stack.add(taking_sheets)
 						sheets -= taking_sheets

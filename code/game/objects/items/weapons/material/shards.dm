@@ -13,12 +13,27 @@
 	thrown_material_force_multiplier = 0.1 // 3 with weight 30 (glass)
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
-	material = /decl/material/solid/glass
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	unbreakable = 1 //It's already broken.
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	var/has_handle
+
+/obj/item/shard/Initialize(ml, material_key)
+	. = ..()
+	var/decl/material/material = get_primary_material()
+	if(!material?.shard_type)
+		return INITIALIZE_HINT_QDEL
+	icon_state = "[material.shard_icon][pick("large", "medium", "small")]"
+	update_icon()
+	SetName("[material.solid_name] [material.shard_type]")
+	desc = "A small piece of [material.solid_name]. It looks sharp, you wouldn't want to step on it barefoot. Could probably be used as ... a throwing weapon?"
+	switch(material.shard_type)
+		if(SHARD_SPLINTER, SHARD_SHRAPNEL)
+			gender = PLURAL
+		else
+			gender = NEUTER
 
 /obj/item/shard/attack(mob/living/M, mob/living/user, var/target_zone)
 	. = ..()
@@ -30,43 +45,23 @@
 				to_chat(H, SPAN_DANGER("You slice your hand on \the [src]!"))
 				hand.take_external_damage(rand(5,10), used_weapon = src)
 
-/obj/item/shard/set_material(var/new_material)
-	..(new_material)
-	if(!istype(material))
-		return
-
-	icon_state = "[material.shard_icon][pick("large", "medium", "small")]"
-	update_icon()
-
-	if(material.shard_type)
-		SetName("[material.solid_name] [material.shard_type]")
-		desc = "A small piece of [material.solid_name]. It looks sharp, you wouldn't want to step on it barefoot. Could probably be used as ... a throwing weapon?"
-		switch(material.shard_type)
-			if(SHARD_SPLINTER, SHARD_SHRAPNEL)
-				gender = PLURAL
-			else
-				gender = NEUTER
-	else
-		qdel(src)
-
 /obj/item/shard/on_update_icon()
-	if(material)
-		color = material.color
-		// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
-		alpha = 255 * (1 - (1 - material.opacity)*(1 - material.opacity))
-	else
-		color = "#ffffff"
-		alpha = 255
+	color = get_primary_material_color()
+	// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
+	var/decl/material/material = get_primary_material()
+	alpha = 255 * material ? (1 - (1 - material.opacity)*(1 - material.opacity)) : 1
 
 /obj/item/shard/attackby(obj/item/W, mob/user)
-	if(isWelder(W) && material.shard_can_repair)
+
+	var/decl/material/material = get_primary_material()
+	if(material && isWelder(W) && material.shard_can_repair)
 		var/obj/item/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
 			material.place_sheet(get_turf(src))
 			qdel(src)
 			return
-	if(istype(W, /obj/item/stack/cable_coil))
 
+	if(istype(W, /obj/item/stack/cable_coil))
 		if(!material || (material.shard_type in list(SHARD_SPLINTER, SHARD_SHRAPNEL)))
 			to_chat(user, SPAN_WARNING("\The [src] is not suitable for using as a shank."))
 			return
@@ -130,13 +125,13 @@
 
 // Preset types - left here for the code that uses them
 /obj/item/shard/borosilicate
-	material = /decl/material/solid/glass/borosilicate
+	material_composition = list(/decl/material/solid/glass/borosilicate = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/shard/shrapnel
 	name = "shrapnel"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	w_class = ITEM_SIZE_TINY	//it's real small
 
 /obj/item/shard/plastic
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 	w_class = ITEM_SIZE_TINY

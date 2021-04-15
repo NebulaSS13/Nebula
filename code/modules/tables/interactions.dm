@@ -95,6 +95,7 @@
 		break_to_parts()
 		return
 
+	var/decl/material/material = get_primary_material()
 	if(can_plate && !material)
 		to_chat(user, "<span class='warning'>There's nothing to put \the [W] on! Try adding plating to \the [src] first.</span>")
 		return

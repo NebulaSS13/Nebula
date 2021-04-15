@@ -27,7 +27,7 @@ GLOBAL_VAR_INIT(default_gyne, create_gyne_name())
 	var/hatching = FALSE				// If we're in the process of hatching.
 	var/hatched = FALSE					// Whether or not this egg has already hatched.
 
-	matter = list(
+	material_composition = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 

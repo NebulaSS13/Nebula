@@ -2020,6 +2020,7 @@
 #include "code\modules\materials\_materials.dm"
 #include "code\modules\materials\_stack_recipe.dm"
 #include "code\modules\materials\material_armor.dm"
+#include "code\modules\materials\material_composition.dm"
 #include "code\modules\materials\material_recipes.dm"
 #include "code\modules\materials\material_sheets.dm"
 #include "code\modules\materials\material_synth.dm"

@@ -9,7 +9,8 @@
 			. = 0
 
 /obj/item/stack/material/disrupts_psionics()
-	return (material && material.is_psi_null()) ? src : FALSE
+	var/decl/material/material = get_primary_material()
+	return (material?.is_psi_null()) ? src : FALSE
 
 /obj/item/stack/material/nullglass
 	name = "nullglass"

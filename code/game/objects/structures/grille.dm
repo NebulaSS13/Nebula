@@ -10,7 +10,7 @@
 	explosion_resistance = 1
 	rad_resistance_modifier = 0.1
 	color = COLOR_STEEL
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	handle_generic_blending = TRUE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	maxhealth = 20
@@ -31,6 +31,7 @@
 	other_connections = dirs_to_corner_states(other_dirs)
 
 /obj/structure/grille/update_material_desc(override_desc)
+	var/decl/material/material = get_primary_material()
 	if(material)
 		desc = "A lattice of [material.solid_name] rods, with screws to secure it to the floor."
 	else
@@ -38,8 +39,6 @@
 
 /obj/structure/grille/Initialize()
 	. = ..()
-	if(!istype(material))
-		. = INITIALIZE_HINT_QDEL
 	if(. != INITIALIZE_HINT_QDEL)
 		. = INITIALIZE_HINT_LATELOAD
 
@@ -158,13 +157,14 @@
 		qdel(src)
 	else
 		set_density(0)
-		new /obj/item/stack/material/rods(get_turf(src), 1, material.type)
+		new /obj/item/stack/material/rods(get_turf(src), 1, get_primary_material_type())
 		destroyed = TRUE
 		update_icon()
 
 /obj/structure/grille/attackby(obj/item/W, mob/user)
 	if(isWirecutter(W))
-		if(!material.conductive || !shock(user, 100))
+		var/decl/material/material = get_primary_material()
+		if(!material?.conductive || !shock(user, 100))
 			cut_grille()
 
 	else if((isScrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
@@ -180,7 +180,8 @@
 //window placing
 	else if(istype(W,/obj/item/stack/material))
 		var/obj/item/stack/material/ST = W
-		if(ST.material.opacity > 0.7)
+		var/decl/material/material = ST.get_primary_material()
+		if(!material || material.opacity > 0.7)
 			return 0
 
 		var/dir_to_set = 5
@@ -218,7 +219,8 @@
 /obj/structure/grille/proc/shock(mob/user, prb)
 	if(!anchored || destroyed)		// anchored/destroyed grilles are never connected
 		return 0
-	if(!(material.conductive))
+	var/decl/material/material = get_primary_material()
+	if(material && !(material.conductive))
 		return 0
 	if(!prob(prb))
 		return 0
@@ -239,7 +241,8 @@
 
 /obj/structure/grille/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!destroyed)
-		if(exposed_temperature > material.melting_point)
+		var/decl/material/material = get_primary_material()
+		if(!material || exposed_temperature > material.melting_point)
 			take_damage(1)
 	..()
 
@@ -256,7 +259,7 @@
 /obj/structure/grille/cult
 	name = "cult grille"
 	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it."
-	material = /decl/material/solid/stone/cult
+	material_composition = list(/decl/material/solid/stone/cult = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/grille/cult/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
 	if(air_group)
@@ -273,11 +276,12 @@
 	if(ST.get_amount() < 2)
 		to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
 		return
-	user.visible_message(SPAN_NOTICE("\The [user] begins assembling a [ST.material.solid_name] grille."))
+	var/decl/material/material = ST.get_primary_material()
+	user.visible_message(SPAN_NOTICE("\The [user] begins assembling a [material.solid_name] grille."))
 	if(do_after(user, 1 SECOND, ST) && ST.use(2))
-		var/obj/structure/grille/F = new(loc, ST.material.type)
+		var/obj/structure/grille/F = new(loc, ST.get_primary_material_type())
 		user.visible_message(SPAN_NOTICE("\The [user] finishes building \a [F]."))
 		F.add_fingerprint(user)
 
 /obj/structure/grille/create_dismantled_products(var/turf/T)
-	new /obj/item/stack/material/rods(get_turf(src), (destroyed ? 1 : 2), material.type)
+	new /obj/item/stack/material/rods(get_turf(src), (destroyed ? 1 : 2), get_primary_material_type())

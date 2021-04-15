@@ -13,7 +13,7 @@
 	down_item_flags = ITEM_FLAG_THICKMATERIAL
 	pull_mask = 1
 	origin_tech = "{'materials':1}"
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/clothing/mask/breath/medical
 	desc = "A close-fitting sterile mask that can be manually connected to an air supply for treatment."

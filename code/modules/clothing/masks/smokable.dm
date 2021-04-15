@@ -317,7 +317,7 @@
 	name = "wooden tip"
 	icon = 'icons/clothing/mask/smokables/cigar.dmi'
 	desc = "A wooden mouthpiece from a cigar. Smells rather bad."
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/clothing/mask/smokable/cigarette/attackby(var/obj/item/W, var/mob/user)
 	..()

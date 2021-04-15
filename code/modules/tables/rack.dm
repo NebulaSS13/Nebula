@@ -6,7 +6,7 @@
 	can_plate = 0
 	can_reinforce = 0
 	flipped = -1
-	material = DEFAULT_FURNITURE_MATERIAL
+	material_composition = list(DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY)
 	handle_generic_blending = FALSE
 
 /obj/structure/table/rack/Initialize()
@@ -31,8 +31,6 @@
 	return FALSE
 
 /obj/structure/table/rack/holorack/dismantle()
-	material = null
-	reinf_material = null
 	parts_type = null
 	. = ..()
 

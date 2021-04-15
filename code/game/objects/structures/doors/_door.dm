@@ -16,20 +16,28 @@
 
 /obj/structure/door/Initialize()
 	. = ..()
-	if(!istype(material))
-		return INITIALIZE_HINT_QDEL
 	if(lock)
 		lock = new /datum/lock(src, lock)
-	if(!icon_base)
-		icon_base = material.door_icon_base
 	changing_state = FALSE
 	update_nearby_tiles(need_rebuild=TRUE)
-
-	if(material.luminescence)
-		set_light(material.luminescence, 0.5, material.color)
-
-	if(material.opacity < 0.5)
-		alpha = 180
+	
+/obj/structure/door/on_material_change()
+	. = ..()
+	var/decl/material/material = get_primary_material()
+	if(material)
+		icon_base = material.door_icon_base
+		if(material.luminescence)
+			set_light(material.luminescence, 0.5, material.color)
+		else
+			set_light(0)
+		if(material.opacity < 0.5)
+			alpha = 180
+		else
+			alpha = initial(alpha)
+	else
+		icon_base = initial(icon_base)
+		set_light(0)
+		alpha = initial(alpha)
 
 /obj/structure/door/Destroy()
 	update_nearby_tiles()
@@ -59,6 +67,7 @@
 	if(!can_close())
 		return FALSE
 	flick("[icon_base]closing", src)
+	var/decl/material/material = get_primary_material()
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 
 	changing_state = TRUE
@@ -73,6 +82,7 @@
 	if(!can_open())
 		return FALSE
 	flick("[icon_base]opening", src)
+	var/decl/material/material = get_primary_material()
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 
 	changing_state = TRUE
@@ -161,53 +171,53 @@
 	open()
 
 /obj/structure/door/iron
-	material = /decl/material/solid/metal/iron
+	material_composition = list(/decl/material/solid/metal/iron = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/silver
-	material = /decl/material/solid/metal/silver
+	material_composition = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/gold
-	material = /decl/material/solid/metal/gold
+	material_composition = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/uranium
-	material = /decl/material/solid/metal/uranium
+	material_composition = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/sandstone
-	material = /decl/material/solid/stone/sandstone
+	material_composition = list(/decl/material/solid/stone/sandstone = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/diamond
-	material = /decl/material/solid/gemstone/diamond
+	material_composition = list(/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/wood
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/mahogany
-	material = /decl/material/solid/wood/mahogany
+	material_composition = list(/decl/material/solid/wood/mahogany = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/maple
-	material = /decl/material/solid/wood/maple
+	material_composition = list(/decl/material/solid/wood/maple = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/ebony
-	material = /decl/material/solid/wood/ebony
+	material_composition = list(/decl/material/solid/wood/ebony = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/walnut
-	material = /decl/material/solid/wood/walnut
+	material_composition = list(/decl/material/solid/wood/walnut = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/cult
-	material = /decl/material/solid/stone/cult
+	material_composition = list(/decl/material/solid/stone/cult = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/wood/saloon
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)
 	opacity = FALSE
 
 /obj/structure/door/glass
-	material = /decl/material/solid/glass
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/plastic
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/exotic_matter
-	material = /decl/material/solid/exotic_matter
+	material_composition = list(/decl/material/solid/exotic_matter = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/door/shuttle
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)

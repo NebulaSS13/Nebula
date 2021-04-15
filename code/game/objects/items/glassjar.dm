@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items/jar.dmi'
 	icon_state = "jar"
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/glass
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)
 	material_force_multiplier = 0.1
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	drop_sound = 'sound/foley/bottledrop1.ogg'

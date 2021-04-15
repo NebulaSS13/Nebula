@@ -8,7 +8,7 @@
 	power_usage = 100
 	origin_tech = "{'powerstorage':2,'programming':3}"
 	external_slot = TRUE
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 	var/obj/item/aicard/stored_card
 	var/power_usage_idle = 100

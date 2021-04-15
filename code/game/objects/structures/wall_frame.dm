@@ -12,7 +12,7 @@
 	throwpass = 1
 	layer = TABLE_LAYER
 	rad_resistance_modifier = 0.5
-	material = DEFAULT_WALL_MATERIAL
+	material_composition = list(DEFAULT_WALL_MATERIAL = MATTER_AMOUNT_PRIMARY)
 	handle_generic_blending = TRUE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	maxhealth = 40
@@ -71,7 +71,8 @@
 		//window placing
 		if(istype(W,/obj/item/stack/material))
 			var/obj/item/stack/material/ST = W
-			if(ST.material.opacity <= 0.7)
+			var/decl/material/material = ST.get_primary_material()
+			if(material && material.opacity <= 0.7)
 				place_window(user, loc, SOUTHWEST, ST)
 			return TRUE
 
@@ -99,7 +100,7 @@
 	overlays.Cut()
 	var/image/I
 
-	var/new_color = (paint_color ? paint_color : material.color)
+	var/new_color = (paint_color ? paint_color : get_primary_material_color())
 	color = new_color
 
 	for(var/i = 1 to 4)
@@ -166,7 +167,7 @@
 	paint_color = COLOR_WALL_GUNMETAL
 
 /obj/structure/wall_frame/titanium
-	material = /decl/material/solid/metal/titanium
+	material_composition = list(/decl/material/solid/metal/titanium = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/wall_frame/hull
 	paint_color = COLOR_HULL

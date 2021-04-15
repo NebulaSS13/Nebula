@@ -5,4 +5,4 @@
 	icon =  'mods/content/xenobiology/icons/slimes/slime_extract_yellow.dmi'
 	icon_state = ICON_STATE_WORLD
 	maxcharge = 200
-	material = /decl/material/liquid/slimejelly
+	material_composition = list(/decl/material/liquid/slimejelly = MATTER_AMOUNT_PRIMARY)

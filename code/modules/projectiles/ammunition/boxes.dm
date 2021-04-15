@@ -3,7 +3,7 @@
 	icon_state = ICON_STATE_WORLD
 	caliber = CALIBER_PISTOL_MAGNUM
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	max_ammo = 6
 	var/list/global/bullet_offsets = list(
 		list("x" = 0, "y" = 0),
@@ -48,7 +48,7 @@
 	icon_state = "shotholder"
 	caliber = CALIBER_SHOTGUN
 	ammo_type = /obj/item/ammo_casing/shotgun
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	max_ammo = 4
 	multiple_sprites = 1
 	var/marking_color
@@ -79,26 +79,30 @@
 /obj/item/ammo_magazine/shotholder/beanbag
 	name = "beanbag shell holder"
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	marking_color = COLOR_PAKISTAN_GREEN
 
 /obj/item/ammo_magazine/shotholder/flash
 	name = "illumination shell holder"
 	ammo_type = /obj/item/ammo_casing/shotgun/flash
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 	marking_color = COLOR_PALE_YELLOW
 
 /obj/item/ammo_magazine/shotholder/stun
 	name = "stun shell holder"
 	ammo_type = /obj/item/ammo_casing/shotgun/stunshell
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 	marking_color = COLOR_MUZZLE_FLASH
 
 /obj/item/ammo_magazine/shotholder/empty
 	name = "shotgun ammunition holder"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/smg
@@ -106,7 +110,7 @@
 	icon_state = "smg_top"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/pistol/small
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	caliber = CALIBER_PISTOL_SMALL
 	max_ammo = 20
 	multiple_sprites = 1
@@ -128,7 +132,7 @@
 	origin_tech = "{'combat':2}"
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	ammo_type = /obj/item/ammo_casing/pistol
 	max_ammo = 10
 	multiple_sprites = 1
@@ -142,7 +146,7 @@
 
 /obj/item/ammo_magazine/pistol/small
 	icon_state = "holdout"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	caliber = CALIBER_PISTOL_SMALL
 	ammo_type = /obj/item/ammo_casing/pistol/small
 	max_ammo = 8
@@ -154,7 +158,7 @@
 	name = "ammunition box (pistol, small)"
 	icon_state = "smallpistol"
 	origin_tech = "{'combat':2}"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	caliber = CALIBER_PISTOL_SMALL
 	ammo_type = /obj/item/ammo_casing/pistol/small
 	max_ammo = 30
@@ -164,7 +168,7 @@
 	icon_state = "smallpistol"
 	origin_tech = "{'combat':2}"
 	caliber = CALIBER_PISTOL
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	ammo_type = /obj/item/ammo_casing/pistol
 	max_ammo = 30
 
@@ -195,7 +199,7 @@
 	origin_tech = "{'combat':2}"
 	mag_type = MAGAZINE
 	caliber = CALIBER_RIFLE
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	ammo_type = /obj/item/ammo_casing/rifle
 	max_ammo = 15 //if we lived in a world where normal mags had 30 rounds, this would be a 20 round mag
 	multiple_sprites = 1
@@ -213,7 +217,7 @@
 	icon_state = "T38"
 	caliber = CALIBER_CAPS
 	ammo_type = /obj/item/ammo_casing/cap
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	max_ammo = 7
 	multiple_sprites = 1
 

@@ -4,7 +4,7 @@
 /obj/item/knife/ritual/sacrifice
 	name = "sacrificial dagger"
 	desc = "This knife is dull but well used."
-	material = /decl/material/solid/stone/cult
+	material_composition = list(/decl/material/solid/stone/cult = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/knife/ritual/sacrifice/resolve_attackby(var/atom/a, var/mob/user, var/click_params)
 	var/turf/T = get_turf(a)

@@ -3,7 +3,7 @@
 	desc = "An updated, modular intercom that fits over the head. Takes encryption keys."
 	icon = 'icons/obj/items/device/radio/headsets/headset.dmi'
 	icon_state = ICON_STATE_WORLD
-	material = /decl/material/solid/metal/aluminium
+	material_composition = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY)
 	subspace_transmission = 1
 	canhear_range = 0 // can't hear headsets from very far away
 

@@ -59,9 +59,14 @@
 	// Temp block pending material/matter rework
 	if(use_material && use_material != DEFAULT_FURNITURE_MATERIAL && istype(O, /obj))
 		var/obj/struct = O
-		if(LAZYACCESS(struct.matter, DEFAULT_FURNITURE_MATERIAL) > 0)
-			struct.matter[use_material] = max(struct.matter[use_material], struct.matter[DEFAULT_FURNITURE_MATERIAL])
-			struct.matter -= DEFAULT_FURNITURE_MATERIAL
+		var/datum/materials/matter = struct.get_material_composition()
+		if(istype(matter))
+			var/mat_amount = matter.get_material(DEFAULT_FURNITURE_MATERIAL)
+			if(mat_amount > 0)
+				var/craft_material_amount = matter.get_material(use_material)
+				if(craft_material_amount < mat_amount)
+					matter.set_material(use_material, mat_amount)
+				matter.set_material(DEFAULT_FURNITURE_MATERIAL, 0)
 	// End temp block
 
 	return O

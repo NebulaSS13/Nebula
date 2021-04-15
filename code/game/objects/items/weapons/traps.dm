@@ -10,7 +10,7 @@
 	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'materials':1}"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	can_buckle = 0 //disallow manual un/buckling
 	var/deployed = 0
 

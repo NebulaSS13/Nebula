@@ -17,7 +17,7 @@
 	matter_multiplier = 0.3
 	material_flags = USE_MATERIAL_COLOR
 	stacktype = /obj/item/stack/material/rods
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 	pickup_sound = 'sound/foley/tooldrop3.ogg'
 	drop_sound = 'sound/foley/tooldrop2.ogg'
@@ -36,20 +36,28 @@
 	name = "metal rod synthesizer"
 	desc = "A device that makes metal rods."
 	gender = NEUTER
-	matter = null
+	material_composition = null
 	uses_charge = 1
 	charge_costs = list(500)
 
 /obj/item/stack/material/rods/Initialize()
 	. = ..()
 	update_icon()
-	throwforce = round(0.25*material.get_edge_damage())
-	force = round(0.5*material.get_blunt_damage())
+	var/decl/material/material = get_primary_material()
+	if(material)
+		throwforce = round(0.25*material.get_edge_damage())
+		force = round(0.5*material.get_blunt_damage())
 
 /obj/item/stack/material/on_update_icon()
 	if(material_flags & USE_MATERIAL_COLOR)
-		color = material.color
-		alpha = 100 + max(1, amount/25)*(material.opacity * 255)
+		var/decl/material/material = get_primary_material()
+		if(material)
+			color = material.color
+			alpha = 100 + max(1, amount/25)*(material.opacity * 255)
+		else 
+			color = initial(color)
+			alpha = initial(alpha) 
+
 	if(max_icon_state && amount > 0.5*max_amount)
 		icon_state = max_icon_state
 	else if(plural_icon_state && amount >= 2)

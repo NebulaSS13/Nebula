@@ -313,7 +313,8 @@
 	var/durability = 0
 
 /obj/item/drill_head/proc/get_durability_percentage()
-	return (durability * 100) / (2 * material.integrity)
+	var/decl/material/material = get_primary_material()
+	return (durability * 100) / (2 * material?.integrity)
 
 /obj/item/drill_head/examine(mob/user, distance)
 	. = ..()
@@ -332,7 +333,8 @@
 
 /obj/item/drill_head/Initialize()
 	. = ..()
-	durability = 2 * material.integrity
+	var/decl/material/material = get_primary_material()
+	durability = 2 * material?.integrity
 
 /obj/item/mech_equipment/drill
 	name = "drill"
@@ -408,7 +410,8 @@
 		var/T = target.loc
 
 		//Better materials = faster drill!
-		var/delay = max(5, 20 - drill_head.material.brute_armor)
+		var/decl/material/material = drill_head.get_primary_material()
+		var/delay = max(5, 20 - material?.brute_armor)
 		owner.setClickCooldown(delay) //Don't spamclick!
 
 		if(!do_after(owner, delay, target) || !drill_head || src != owner.selected_system)
@@ -429,7 +432,7 @@
 					drill_head.durability -= 1
 		else if(istype(target, /turf/simulated/wall))
 			var/turf/simulated/wall/W = target
-			if(max(W.material.hardness, W.reinf_material ? W.reinf_material.hardness : 0) > drill_head.material.hardness)
+			if(max(W.material.hardness, W.reinf_material ? W.reinf_material.hardness : 0) > material?.hardness)
 				to_chat(user, "<span class='warning'>\The [target] is too hard to drill through with this drill head.</span>")
 			target.explosion_act(2)
 			drill_head.durability -= 1
@@ -463,7 +466,7 @@
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	origin_tech = "{'materials':4,'exoticmatter':4,'engineering':6,'combat':3}"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/gun/energy/plasmacutter/mounted/mech
 	use_external_power = TRUE

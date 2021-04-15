@@ -31,11 +31,12 @@
 	. = SUBSTANCE_TAKEN_NONE
 	var/stacks_used = 1
 	var/mat_colour = thing.color
-	for(var/mat in thing.matter)
+	var/list/matter = thing.get_matter_list()
+	for(var/mat in matter)
 		var/decl/material/material_def = GET_DECL(mat)
 		if(!material_def || !base_storage_capacity[material_def.type])
 			continue
-		var/taking_material = min(thing.matter[mat], storage_capacity[material_def.type] - stored_material[material_def.type])
+		var/taking_material = min(matter[mat], storage_capacity[material_def.type] - stored_material[material_def.type])
 		if(taking_material <= 0)
 			continue
 		if(!mat_colour)

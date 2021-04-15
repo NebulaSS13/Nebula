@@ -42,7 +42,7 @@
 /obj/item/clothing/shoes/jackboots/medievalboots
 	name = "leather boots"
 	desc = "Old-fashioned leather boots. Probably not something you want to get kicked with."
-	material = /decl/material/solid/leather
+	material_composition = list(/decl/material/solid/leather)
 	force = 5
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
@@ -51,7 +51,7 @@
 		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_PADDED
 	)
-	artificail_shine = 0
+	artificial_shine = 0
 
 /obj/item/sword/excalibur
 	name = "champion's blade"

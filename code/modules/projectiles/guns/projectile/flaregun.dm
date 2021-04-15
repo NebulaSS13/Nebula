@@ -9,8 +9,10 @@
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = 0
 	slot_flags = SLOT_LOWER_BODY | SLOT_HOLSTER
-	material = /decl/material/solid/plastic
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY
+	)
 
 	caliber = CALIBER_SHOTGUN
 	handle_casings = CYCLE_CASINGS

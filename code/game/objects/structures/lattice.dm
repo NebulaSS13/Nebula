@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	layer = LATTICE_LAYER
 	color = COLOR_STEEL
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	obj_flags = OBJ_FLAG_NOFALL
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 
@@ -16,8 +16,6 @@
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL)
 		DELETE_IF_DUPLICATE_OF(/obj/structure/lattice)
-		if(!istype(material))
-			return INITIALIZE_HINT_QDEL
 		var/turf/T = loc
 		if(!istype(T) || !T.is_open())
 			return INITIALIZE_HINT_QDEL
@@ -28,10 +26,11 @@
 	update_neighbors()
 
 /obj/structure/lattice/update_material_desc()
+	var/decl/material/material = get_primary_material()
 	if(material)
 		desc = "A lightweight support [material.solid_name] lattice."
 	else
-		desc = "A lightweight support [material.solid_name] lattice."
+		desc = "A lightweight support lattice."
 
 /obj/structure/lattice/Destroy()
 	var/turf/old_loc = get_turf(src)
@@ -54,7 +53,7 @@
 
 /obj/structure/lattice/proc/deconstruct(var/mob/user)
 	to_chat(user, SPAN_NOTICE("Slicing lattice joints..."))
-	new /obj/item/stack/material/rods(loc, 1, material.type)
+	new /obj/item/stack/material/rods(loc, 1, get_primary_material_type())
 	qdel(src)
 
 /obj/structure/lattice/attackby(obj/item/C, mob/user)
@@ -87,7 +86,7 @@
 			return
 		else if(R.use(2))
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			new /obj/structure/catwalk(src.loc, R.material.type)
+			new /obj/structure/catwalk(src.loc, R.get_primary_material_type())
 			return
 		else
 			to_chat(user, SPAN_WARNING("You require at least two rods to complete the catwalk."))

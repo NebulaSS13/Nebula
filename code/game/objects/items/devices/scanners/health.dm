@@ -5,7 +5,7 @@
 	icon_state = "health"
 	item_state = "analyzer"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
-	material = /decl/material/solid/metal/aluminium
+	material_composition = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY)
 	origin_tech = "{'magnets':1,'biotech':1}"
 	printout_color = "#deebff"
 	var/mode = 1

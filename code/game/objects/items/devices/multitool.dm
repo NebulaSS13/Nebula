@@ -15,9 +15,9 @@
 	throw_range = 15
 	throw_speed = 3
 
-	material = /decl/material/solid/plastic
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
 	)
 

@@ -18,8 +18,9 @@
 				continue
 			for(var/mat in O.reagents?.reagent_volumes)
 				stored[mat] = stored[mat] + Floor((O.reagents.reagent_volumes[mat] / REAGENT_UNITS_PER_MATERIAL_UNIT) * 0.75) // liquid reagents, lossy
-			for(var/mat in O.matter)
-				stored[mat] = stored[mat] + O.matter[mat]
+			var/list/matter = O.get_matter_list()
+			for(var/mat in matter)
+				stored[mat] = stored[mat] + matter[mat]
 			qdel(O)
 			compressed++
 			if(compressed >= MAX_COMPRESS_ORE_PER_TICK)
@@ -30,12 +31,13 @@
 					if(!crushing.simulated || crushing.anchored || crushing.is_stump() || !prob(5))
 						continue
 					visible_message(SPAN_DANGER("\The [src] crushes \the [H]'s [crushing.name]!"))
-					for(var/mat in crushing.matter)
+					var/list/matter = crushing.get_matter_list()
+					for(var/mat in matter)
 						if(stored[mat])
-							stored[mat] += crushing.matter[mat]
+							stored[mat] += matter[mat]
 						else
-							stored[mat] = crushing.matter[mat]
-					crushing.dismember(disintegrate = DISMEMBER_METHOD_BLUNT, silent = TRUE)
+							stored[mat] = matter[mat]
+						crushing.dismember(disintegrate = DISMEMBER_METHOD_BLUNT, silent = TRUE)
 					break
 	if(output_turf)
 		var/produced = 0

@@ -82,7 +82,7 @@
 	sharp = 1
 	edge = 1
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = FALSE
 	applies_material_name = TRUE
 
@@ -114,7 +114,7 @@
 	edge = 0
 	sharp = 1
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
-	material = /decl/material/solid/glass
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	does_spin = FALSE
@@ -128,12 +128,13 @@
 	..()
 
 /obj/item/twohanded/spear/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
+	var/decl/material/material = get_primary_material()
 	if(applies_material_colour && material)
 		color = material.color
 		alpha = 100 + material.opacity * 255
-	overlays += get_shaft_overlay("shaft")
-	overlays += mutable_appearance(icon, "cable", cable_color)
+	add_overlay(get_shaft_overlay("shaft"))
+	add_overlay(mutable_appearance(icon, "cable", cable_color))
 
 /obj/item/twohanded/spear/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
@@ -151,17 +152,17 @@
 	return shaft
 
 /obj/item/twohanded/spear/diamond
-	material = /decl/material/solid/gemstone/diamond
+	material_composition = list(/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_PRIMARY)
 	shaft_material = /decl/material/solid/metal/gold
 	cable_color = COLOR_PURPLE
 
 /obj/item/twohanded/spear/steel
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	shaft_material = /decl/material/solid/wood
 	cable_color = COLOR_GREEN
 
 /obj/item/twohanded/spear/supermatter
-	material = /decl/material/solid/exotic_matter
+	material_composition = list(/decl/material/solid/exotic_matter = MATTER_AMOUNT_PRIMARY)
 	shaft_material = /decl/material/solid/wood/ebony
 	cable_color = COLOR_INDIGO
 
@@ -173,7 +174,7 @@
 	throwforce = 7
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
-	material = /decl/material/solid/wood/maple
+	material_composition = list(/decl/material/solid/wood/maple = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	max_force = 40	//for wielded
@@ -183,19 +184,19 @@
 
 //Predefined materials go here.
 /obj/item/twohanded/baseballbat/aluminium
-	material = /decl/material/solid/metal/aluminium
+	material_composition = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/twohanded/baseballbat/uranium
-	material = /decl/material/solid/metal/uranium
+	material_composition = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/twohanded/baseballbat/gold
-	material = /decl/material/solid/metal/gold
+	material_composition = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/twohanded/baseballbat/platinum
-	material = /decl/material/solid/metal/platinum
+	material_composition = list(/decl/material/solid/metal/platinum = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/twohanded/baseballbat/diamond
-	material = /decl/material/solid/gemstone/diamond
+	material_composition = list(/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/twohanded/pipewrench
 	name = "enormous pipe wrench"
@@ -205,7 +206,7 @@
 	material_force_multiplier = 0.6
 	unwielded_material_force_multiplier = 0.3
 	attack_verb = list("bludgeoned", "slammed", "smashed", "wrenched")
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = FALSE
 	applies_material_name = TRUE
 	w_class = ITEM_SIZE_NO_CONTAINER

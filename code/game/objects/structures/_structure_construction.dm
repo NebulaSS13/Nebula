@@ -17,6 +17,7 @@
 
 /obj/structure/proc/handle_default_welder_attackby(var/mob/user, var/obj/item/weldingtool/welder)
 	if((tool_interaction_flags & TOOL_INTERACTION_DECONSTRUCT) && can_dismantle(user))
+		var/decl/material/material = get_primary_material()
 		if(material && !material.removed_by_welder)
 			to_chat(user, SPAN_WARNING("\The [src] is too delicate to be dismantled with \the [welder]; try a crowbar."))
 			return TRUE
@@ -38,6 +39,7 @@
 
 /obj/structure/proc/handle_default_crowbar_attackby(var/mob/user, var/obj/item/crowbar)
 	if((tool_interaction_flags & TOOL_INTERACTION_DECONSTRUCT) && can_dismantle(user))
+		var/decl/material/material = get_primary_material()
 		if(material && material.removed_by_welder)
 			to_chat(user, SPAN_WARNING("\The [src] is too robust to be dismantled with \the [crowbar]; try a welding tool."))
 			return TRUE
@@ -100,7 +102,7 @@
 	return TRUE
 
 /obj/structure/proc/can_repair_with(var/obj/item/tool)
-	. = istype(tool, /obj/item/stack/material) && tool.get_material_type() == get_material_type()
+	. = istype(tool, /obj/item/stack/material) && tool.get_primary_material_type() == get_primary_material_type()
 
 /obj/structure/proc/handle_repair(mob/user, obj/item/tool)
 	var/obj/item/stack/stack = tool

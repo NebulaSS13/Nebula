@@ -32,8 +32,8 @@
 		bomb = ARMOR_BOMB_MINOR
 		)
 	slot = ACCESSORY_SLOT_ARMOR_C
-	material = /decl/material/solid/plastic
-	matter = list(
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
 	)
 	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
@@ -52,7 +52,7 @@
 		energy = ARMOR_ENERGY_SMALL,
 		bomb = ARMOR_BOMB_PADDED
 		)
-	matter = list(
+	material_composition = list(
 		/decl/material/solid/metal/plasteel = MATTER_AMOUNT_SECONDARY
 	)
 	origin_tech = "{'materials':2,'engineering':1,'combat':2}"
@@ -69,9 +69,9 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slowdown = 0.5
-	material = /decl/material/solid/metal/plasteel
-	matter = list(
-		/decl/material/solid/metal/titanium = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/plasteel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/titanium = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = "{'materials':3,'engineering':2,'combat':2}"
@@ -93,15 +93,15 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_A
-	material = /decl/material/solid/plastic
-	matter = list(
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
 	)
 	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
 
 /obj/item/clothing/accessory/armguards/craftable
 	material_armor_multiplier = 1
-	matter = null
+	material_composition = null
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 
@@ -122,15 +122,15 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_L
-	material = /decl/material/solid/plastic
-	matter = list(
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
 	)
 	origin_tech = "{'materials':1,'engineering':1,'combat':1}"
 
 /obj/item/clothing/accessory/legguards/craftable
 	material_armor_multiplier = 1
-	matter = null
+	material_composition = null
 	applies_material_colour = TRUE
 	applies_material_name =  TRUE
 

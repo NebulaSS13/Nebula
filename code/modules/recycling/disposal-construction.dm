@@ -8,7 +8,7 @@
 	icon_state = "conpipe-s"
 	anchored = 0
 	density = 0
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	level = 2
 	obj_flags = OBJ_FLAG_ROTATABLE
 	var/sort_type = ""

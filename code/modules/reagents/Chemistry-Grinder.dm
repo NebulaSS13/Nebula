@@ -100,7 +100,7 @@
 		return
 
 	if(istype(O,/obj/item/stack/material))
-		var/decl/material/material = O.get_material()
+		var/decl/material/material = O.get_primary_material()
 		if(!material)
 			to_chat(user, SPAN_NOTICE("\The [material.solid_name] cannot be ground down to any usable reagents."))
 			return TRUE
@@ -204,16 +204,15 @@
 
 		var/obj/item/stack/material/stack = O
 		if(istype(stack))
-			var/decl/material/material = stack.get_material()
-			if(!material)
+			var/mat_type = stack.get_primary_material_type()
+			if(!mat_type)
 				break
-
 			var/amount_to_take = max(0,min(stack.amount, Floor(remaining_volume / REAGENT_UNITS_PER_MATERIAL_SHEET)))
 			if(amount_to_take)
 				stack.use(amount_to_take)
 				if(QDELETED(stack))
 					holdingitems -= stack
-				beaker.reagents.add_reagent(material.type, (amount_to_take * REAGENT_UNITS_PER_MATERIAL_SHEET * skill_factor))
+				beaker.reagents.add_reagent(mat_type, (amount_to_take * REAGENT_UNITS_PER_MATERIAL_SHEET * skill_factor))
 				continue
 
 		else if(O.reagents)

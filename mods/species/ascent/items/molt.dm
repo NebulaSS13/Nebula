@@ -4,7 +4,7 @@
 	icon_state = "cocoon3"
 	color = COLOR_PURPLE
 	desc = "The molted carapace of some alien creature."
-	matter = list(
+	material_composition = list(
 		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
 	)
 	w_class = ITEM_SIZE_TINY

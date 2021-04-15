@@ -27,8 +27,10 @@
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/declone
 	combustion = 0
-	material = /decl/material/solid/metal/gold
-	matter = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TERTIARY
+	)
 
 /obj/item/gun/energy/floragun
 	name = "floral somatoray"
@@ -40,9 +42,9 @@
 	projectile_type = /obj/item/projectile/energy/floramut
 	origin_tech = "{'materials':2,'biotech':3,'powerstorage':3}"
 	self_recharge = 1
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
 	combustion = 0
@@ -100,9 +102,9 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = "{'combat':5,'exoticmatter':4}"
 	projectile_type = /obj/item/projectile/energy/radiation
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
 
@@ -117,13 +119,13 @@
 	w_class = ITEM_SIZE_NORMAL
 	force = 8
 	origin_tech = "{'materials':4,'exoticmatter':4,'engineering':6,'combat':3}"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	projectile_type = /obj/item/projectile/beam/plasmacutter
 	max_shots = 10
 	self_recharge = 1
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
@@ -158,9 +160,9 @@
 	icon_state = ICON_STATE_WORLD
 	safety_icon = "safety"
 	origin_tech = "{'combat':7,'magnets':4,'esoteric':4}"
-	material = /decl/material/solid/metal/aluminium
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 	projectile_type = /obj/item/projectile/beam/incendiary_laser

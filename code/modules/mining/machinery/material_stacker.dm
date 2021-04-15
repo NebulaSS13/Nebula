@@ -35,12 +35,13 @@
 
 	if(input_turf)
 		for(var/obj/item/stack/material/S in input_turf)
-			if(!S.material)
+			var/mat = S.get_primary_material_type()
+			if(!mat)
 				continue
-			if(isnull(stacked[S.material.type]))
-				stacked[S.material.type] = S.amount
+			if(isnull(stacked[mat]))
+				stacked[mat] = S.amount
 			else
-				stacked[S.material.type] += S.amount
+				stacked[mat] += S.amount
 			qdel(S)
 
 		if(emagged)

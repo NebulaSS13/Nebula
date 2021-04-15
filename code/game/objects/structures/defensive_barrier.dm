@@ -8,7 +8,7 @@
 	anchored =   TRUE
 	atom_flags = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_CHECKS_BORDER
 	can_buckle = TRUE
-	material =   /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	material_alteration = MAT_FLAG_ALTERATION_DESC | MAT_FLAG_ALTERATION_NAME
 	maxhealth = 200
 	var/secured
@@ -100,7 +100,7 @@
 		return FALSE
 
 	visible_message(SPAN_NOTICE("\The [user] packs up \the [src]."))
-	var/obj/item/defensive_barrier/B = new(get_turf(user), material?.type)
+	var/obj/item/defensive_barrier/B = new(get_turf(user), get_primary_material_type())
 	playsound(src, 'sound/items/Deconstruct.ogg', 100, 1)
 	B.stored_health = health
 	B.stored_max_health = maxhealth
@@ -179,12 +179,13 @@
 	icon = 'icons/obj/structures/barrier.dmi'
 	icon_state = "barrier_hand"
 	w_class = ITEM_SIZE_LARGE
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	var/stored_health = 200
 	var/stored_max_health = 200
 
 /obj/item/defensive_barrier/Initialize(ml, material_key)
 	. = ..()
+	var/decl/material/material = get_primary_material()
 	if(material)
 		name = "[material.solid_name] [initial(name)]"
 
@@ -204,7 +205,7 @@
 		return TRUE
 
 	playsound(src, 'sound/effects/extout.ogg', 100, 1)
-	var/obj/structure/defensive_barrier/B = new(get_turf(user), material?.type)
+	var/obj/structure/defensive_barrier/B = new(get_turf(user), get_primary_material_type())
 	B.set_dir(user.dir)
 	B.health = stored_health
 	if(loc == user)

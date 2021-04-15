@@ -28,8 +28,8 @@
 
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY
 	)
 	origin_tech = "{'materials':2,'engineering':2}"
 
@@ -100,9 +100,9 @@
 		bio = ARMOR_BIO_RESISTANT, 
 		rad = ARMOR_RAD_SHIELDED
 		)
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY
 	)
 
 	origin_tech = "{'materials':2,'engineering':2}"
@@ -121,9 +121,9 @@
 		rad = ARMOR_RAD_SHIELDED
 		)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL|HIDEGLOVES|HIDESHOES
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY
 	)
 	origin_tech = "{'materials':2,'engineering':2}"
 
@@ -148,9 +148,9 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	body_parts_covered = SLOT_HEAD
 	siemens_coefficient = 0.9
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY
 	)
 	origin_tech = "{'materials':2,'engineering':2}"
 
@@ -170,8 +170,8 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	siemens_coefficient = 0.9
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY
 	)
 	origin_tech = "{'materials':2,'engineering':2}"

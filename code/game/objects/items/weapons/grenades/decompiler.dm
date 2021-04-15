@@ -3,7 +3,7 @@
 	name = "decompiler grenade"
 	icon = 'icons/obj/items/grenades/delivery.dmi'
 	origin_tech = "{'materials':3,'magnets':2,'exoticmatter':3}"
-	matter = list(
+	material_composition = list(
 		/decl/material/solid/exotic_matter = MATTER_AMOUNT_TRACE
 	)
 
@@ -109,9 +109,12 @@
 
 			if(isitem(thing))
 				var/obj/item/eating_obj = thing
-				for(var/mat in eating_obj.matter)
-					decompiled_matter[mat] += eating_obj.matter[mat]
-				LAZYADD(eaten, eating_obj)
+				var/list/matter = get_matter_list()
+				if(istype(matter))
+					for(var/mat in matter)
+						decompiled_matter[mat] += matter[mat]
+					qdel(matter)
+					LAZYADD(eaten, eating_obj)
 
 	if(length(eaten))
 		playsound(loc, 'sound/magic/magic_missile.ogg', Clamp(length(eaten) * 10, 10, 50), FALSE)

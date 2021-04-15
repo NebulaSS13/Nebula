@@ -15,7 +15,7 @@
 	layer = ABOVE_HUMAN_LAYER
 	density = 1
 	anchored = 1
-	material = /decl/material/solid/metal/aliumium
+	material_composition = list(/decl/material/solid/metal/aliumium = MATTER_AMOUNT_PRIMARY)
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	var/active = 0
 

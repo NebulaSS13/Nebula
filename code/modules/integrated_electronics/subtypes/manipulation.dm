@@ -556,9 +556,9 @@
 	action_flags = IC_ACTION_LONG_RANGE
 
 	origin_tech = "{'magnets':1,'wormholes':3}"
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 

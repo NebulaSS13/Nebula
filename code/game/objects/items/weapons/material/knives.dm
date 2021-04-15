@@ -6,7 +6,7 @@
 	icon_state = ICON_STATE_WORLD
 	material_force_multiplier = 0.3
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	origin_tech = "{'materials':1}"
 	unbreakable = TRUE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -49,7 +49,7 @@
 	name = "table knife"
 	desc = "A simple table knife, used to cut up individual portions of food."
 	icon = 'icons/obj/items/weapon/knives/table.dmi'
-	material = /decl/material/solid/metal/aluminium
+	material_composition = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY)
 	material_force_multiplier = 0.1
 	sharp = FALSE
 	attack_verb = list("prodded")
@@ -57,13 +57,13 @@
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/knife/table/plastic
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/knife/table/primitive
 	name = "dueling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
 	icon = 'icons/obj/items/weapon/knives/savage.dmi'
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = FALSE
 	w_class = ITEM_SIZE_NORMAL
 
@@ -90,7 +90,7 @@
 /obj/item/knife/kitchen/cleaver/bronze
 	name = "master chef's cleaver"
 	desc = "A heavy blade used to process food. This one is so fancy, it must be for a truly exceptional chef. There aren't any here, so what it's doing here is anyone's guess."
-	material = /decl/material/solid/metal/bronze
+	material_composition = list(/decl/material/solid/metal/bronze = MATTER_AMOUNT_PRIMARY)
 	material_force_multiplier = 1 //25 with material bronze
 
 //fighting knives
@@ -108,10 +108,10 @@
 	. += "serrated"
 
 /obj/item/knife/combat/glass
-	material = /decl/material/solid/glass
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/knife/combat/titanium
-	material = /decl/material/solid/metal/titanium
+	material_composition = list(/decl/material/solid/metal/titanium = MATTER_AMOUNT_PRIMARY)
 
 //random stuff
 /obj/item/knife/hook
@@ -144,5 +144,5 @@
 /obj/item/knife/utility/lightweight
 	name = "lightweight utility knife"
 	desc = "A lightweight utility knife made out of a titanium alloy."
-	material = /decl/material/solid/metal/titanium
+	material_composition = list(/decl/material/solid/metal/titanium = MATTER_AMOUNT_PRIMARY)
 	draw_handle = FALSE

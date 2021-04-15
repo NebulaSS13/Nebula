@@ -54,10 +54,10 @@ var/list/laser_wavelengths
 	fire_delay = 10
 	slot_flags = SLOT_LOWER_BODY
 	cell_type = /obj/item/cell/high
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	projectile_type = /obj/item/projectile/beam/variable
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 

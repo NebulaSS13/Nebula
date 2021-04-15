@@ -6,7 +6,7 @@
 	desc = "Protected by FRM."
 	icon = 'icons/obj/modules/module_cyborg_0.dmi'
 	icon_state = ICON_STATE_WORLD
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	origin_tech = "{'materials':2,'engineering':3,'programming':3,'magnets':1}"
 	var/locked = 0
 	var/require_module = 0
@@ -52,9 +52,9 @@
 	name = "\improper Madhouse Productions Official Party Module"
 	desc = "A weird-looking chip with third-party additions crudely soldered in. It feels cheap and chintzy in the hand. Inscribed into the cheap-feeling circuit is the logo of Madhouse Productions, a group that arranges parties and entertainment venues."
 	new_module = "Party"
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = "{'materials':2,'engineering':2,'programming':3,'magnets':2}"
@@ -103,8 +103,10 @@
 	name = "robot emergency restart module"
 	desc = "Used to force a restart of a disabled-but-repaired robot, bringing it back online."
 	icon = 'icons/obj/modules/module_cyborg_1.dmi'
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 
 /obj/item/borg/upgrade/restart/action(var/mob/living/silicon/robot/R)
 	if(R.health < 0)
@@ -127,9 +129,9 @@
 	desc = "Used to kick in a robot's VTEC systems, increasing their speed."
 	icon = 'icons/obj/modules/module_cyborg_2.dmi'
 	require_module = 1
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 
@@ -149,9 +151,9 @@
 	desc = "Used to cool a mounted energy gun, increasing the potential current in it and thus its recharge rate."
 	icon = 'icons/obj/modules/module_cyborg_3.dmi'
 	require_module = 1
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
@@ -187,9 +189,9 @@
 	desc = "A carbon dioxide jetpack suitable for low-gravity mining operations."
 	icon = 'icons/obj/modules/module_cyborg_3.dmi'
 	require_module = 1
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = "{'materials':2,'engineering':3,'programming':3,'magnets':3}"
@@ -213,9 +215,9 @@
 	desc = "A rapid construction device module for use during construction operations."
 	icon = 'icons/obj/modules/module_cyborg_3.dmi'
 	require_module = 1
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = "{'materials':4,'engineering':4,'programming':3}"
@@ -236,9 +238,9 @@
 	desc = "Unlocks the hidden, deadlier functions of a robot."
 	icon = 'icons/obj/modules/module_cyborg_3.dmi'
 	require_module = 1
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = "{'materials':2,'engineering':2,'programming':3,'esoteric':2,'combat':2}"

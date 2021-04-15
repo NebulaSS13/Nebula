@@ -13,9 +13,9 @@
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	siemens_coefficient = 0.9
 	origin_tech = "{'materials':3, 'engineering':3}"
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TERTIARY
 	)
 
 /obj/item/clothing/suit/bio_suit
@@ -35,9 +35,9 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	siemens_coefficient = 0.9
 	origin_tech = "{'materials':3, 'engineering':3}"
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TERTIARY
 	)
 
 /obj/item/clothing/suit/bio_suit/Initialize()
@@ -90,7 +90,7 @@
 	icon = 'icons/clothing/suit/biosuit/plague.dmi'
 	flags_inv = HIDEGLOVES|HIDEJUMPSUIT|HIDETAIL
 	origin_tech = "{'materials':1,'engineering':1,'biotech':1}"
-	matter = list(
-		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT
+	material_composition = list(
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TERTIARY
 	)

@@ -40,9 +40,9 @@
 	icon = 'icons/obj/items/storage/backpack/backpack_holding.dmi'
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
-	material = /decl/material/solid/metal/gold
-	matter = list(
-		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
@@ -63,9 +63,9 @@
 /obj/item/storage/backpack/holding/duffle
 	name = "dufflebag of holding"
 	icon = 'icons/obj/items/storage/backpack/dufflebag_holding.dmi'
-	material = /decl/material/solid/metal/gold
-	matter = list(
-		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)

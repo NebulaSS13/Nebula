@@ -92,8 +92,8 @@ var/list/airlock_overlays = list()
 	var/welded_file = 'icons/obj/doors/station/welded.dmi'
 	var/emag_file = 'icons/obj/doors/station/emag.dmi'
 
-/obj/machinery/door/airlock/get_material()
-	return GET_DECL(mineral ? mineral : /decl/material/solid/metal/steel)
+/obj/machinery/door/airlock/get_primary_material()
+	return GET_DECL(mineral || /decl/material/solid/metal/steel)
 
 /obj/machinery/door/airlock/proc/get_window_material()
 	return GET_DECL(window_material)
@@ -545,7 +545,8 @@ About the new airlock wires panel:
 	if (src.isElectrified())
 		if (istype(mover, /obj/item))
 			var/obj/item/i = mover
-			if(i.material && i.material.conductive)
+			var/decl/material/material = i.get_primary_material()
+			if(!material || material.conductive)
 				spark_at(src, amount=5, cardinal_only = TRUE)
 	return ..()
 

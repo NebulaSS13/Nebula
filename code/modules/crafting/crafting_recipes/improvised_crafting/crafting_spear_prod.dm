@@ -15,7 +15,7 @@
 /decl/crafting_stage/material/stunprod_rod/consume(var/mob/user, var/obj/item/thing, var/obj/item/target)
 	. = ..()
 	if(.)
-		target.set_material(thing?.material.type)
+		target.set_primary_material(thing?.get_primary_material())
 
 /decl/crafting_stage/spear_blade_shard
 	completion_trigger_type = /obj/item/shard
@@ -24,14 +24,17 @@
 
 /decl/crafting_stage/spear_blade_shard/get_product(var/obj/item/work)
 	var/obj/item/shard/blade = locate() in work
-	. = new product(get_turf(work), blade && blade.material && blade.material.type)
+	var/decl/material/material = blade?.get_primary_material()
+
+	. = new product(get_turf(work), material?.type)
 	if(ispath(product,  /obj/item/twohanded/spear))
 		var/obj/item/twohanded/spear/S = .
 		var/obj/item/handcuffs/cable/C = locate() in work
 		if(C)
 			S.cable_color = C.color
-		if(work.material)
-			S.shaft_material = work.material.type
+		if(work)
+			material = work.get_primary_material()
+			S.shaft_material = material?.type
 		S.update_icon()
 
 /decl/crafting_stage/spear_blade_blade
@@ -41,7 +44,7 @@
 
 /decl/crafting_stage/spear_blade_blade/get_product(var/obj/item/work)
 	var/obj/item/butterflyblade/blade = locate() in work
-	. = new product(get_turf(work), blade && blade.material && blade.material.type)
+	. = new product(get_turf(work), blade?.get_primary_material_type())
 
 /decl/crafting_stage/stunprod_wirecutters
 	completion_trigger_type = /obj/item/wirecutters

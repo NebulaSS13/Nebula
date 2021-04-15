@@ -11,7 +11,7 @@
 	thrown_material_force_multiplier = 0.6
 	attack_verb = list("jabbed","stabbed","ripped")
 	does_spin = FALSE
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	var/spent
@@ -58,7 +58,7 @@
 	edge = 1
 	origin_tech = "{'materials':2,'combat':1}"
 	attack_verb = list("chopped", "torn", "cut")
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = FALSE
 	applies_material_name = TRUE
 	hitsound = "chop"
@@ -73,7 +73,7 @@
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_LOWER_BODY
-	material = /decl/material/solid/metal/titanium
+	material_composition = list(/decl/material/solid/metal/titanium = MATTER_AMOUNT_PRIMARY)
 	base_parry_chance = 50
 	max_force = 20
 	material_force_multiplier = 0.20 //20 with hardness 80 (titanium) or 15 with hardness 60 (steel)
@@ -96,8 +96,10 @@
 	name = "fabricated machete"
 	desc = "A long, machine-stamped blade with a somewhat ungainly handle. Found in military surplus stores, malls, and horror movies since before interstellar travel."
 	base_parry_chance = 40
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/plastic = MATTER_AMOUNT_TERTIARY
+	)
 
 /obj/item/hatchet/machete/deluxe
 	name = "deluxe machete"
@@ -114,7 +116,7 @@
 	thrown_material_force_multiplier = 0.25
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 
@@ -136,7 +138,7 @@
 	slot_flags = SLOT_BACK
 	origin_tech = "{'materials':2,'combat':2}"
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 
@@ -151,10 +153,10 @@
 	attack_verb = list("attacked", "bashed")
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/cross/silver
-	material = /decl/material/solid/metal/silver
+	material_composition = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/cross/gold
-	material = /decl/material/solid/metal/gold
+	material_composition = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_PRIMARY)

@@ -12,8 +12,10 @@
 	var/stabilization_on = 0
 	var/volume_rate = 500              //Needed for borg jetpack transfer
 	action_button_name = "Toggle Jetpack"
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TERTIARY
+	)
 	origin_tech = "{'materials':1,'engineering':3}"
 
 /obj/item/tank/jetpack/Initialize()

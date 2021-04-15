@@ -11,7 +11,7 @@
 	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 	markings_icon = "_marking"
-	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE)
+	material_composition = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE)
 	origin_tech = "{'materials':1,'engineering':1,'biotech':1}"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/cmo

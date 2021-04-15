@@ -19,7 +19,7 @@
 		energy = ARMOR_ENERGY_SMALL, 
 		bomb = ARMOR_BOMB_RESISTANT, 
 		bio = ARMOR_BIO_MINOR)
-	material = /decl/material/solid/leather
+	material_composition = list(/decl/material/solid/leather = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/clothing/gloves/thick/swat
 	desc = "These tactical gloves are somewhat fire and impact-resistant."
@@ -30,7 +30,7 @@
 	name = "combat gloves"
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
-	matter = list(
+	material_composition = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY,
 	)
 
@@ -55,20 +55,22 @@
 /obj/item/clothing/gloves/thick/duty
 	desc = "These brown duty gloves are made from a durable synthetic."
 	color = COLOR_BEASTY_BROWN
-	material = /decl/material/solid/leather
+	material_composition = list(/decl/material/solid/leather = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/clothing/gloves/thick/craftable
 	name = "gauntlets"
 	desc = "Made to be thrown at scoundrels. Pretty heavy."
 	icon = 'icons/clothing/hands/gauntlets.dmi'
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	material_armor_multiplier = 1
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 
-/obj/item/clothing/gloves/thick/craftable/set_material(var/new_material)
-	..()
-	if(material.conductive)
-		siemens_coefficient = 1
-	if(material.is_brittle())
-		item_flags &= ~ITEM_FLAG_THICKMATERIAL
+/obj/item/clothing/gloves/thick/craftable/Initialize()
+	. = ..()
+	var/decl/material/material = get_primary_material()
+	if(material)
+		if(material.conductive)
+			siemens_coefficient = 1
+		if(material.is_brittle())
+			item_flags &= ~ITEM_FLAG_THICKMATERIAL

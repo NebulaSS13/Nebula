@@ -19,7 +19,7 @@
 
 	var/cooldown = 0	//Cooldown for banging the tray with a rolling pin. based on world.time. very silly
 
-	material = /decl/material/solid/cardboard
+	material_composition = list(/decl/material/solid/cardboard = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 
@@ -118,7 +118,7 @@ TRAY TYPES GO HERE
 /obj/item/storage/tray/wood
 	name = "tray" //material names are automatic kay?
 	desc = "A wooden tray to serve food on."
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/storage/tray/metal
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -130,14 +130,14 @@ TRAY TYPES GO HERE
 /obj/item/storage/tray/metal/aluminium
 	name = "tray"
 	desc = "An aluminium tray to serve food on."
-	material = /decl/material/solid/metal/aluminium
+	material_composition = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/storage/tray/metal/silver
 	name = "platter"
 	desc = "You lazy bum."
-	material = /decl/material/solid/metal/silver
+	material_composition = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/storage/tray/metal/gold
 	name = "platter"
 	desc = "A gold tray to serve food on. But oh sofancy."
-	material = /decl/material/solid/metal/gold
+	material_composition = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_PRIMARY)

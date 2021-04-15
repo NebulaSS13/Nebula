@@ -4,7 +4,7 @@
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm_bitem"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	var/build_machine_type
 	var/reverse = 0 //if resulting object faces opposite its dir (like light fixtures)
 	var/fully_construct = FALSE // Results in a machine with all parts auto-installed and ready to go if TRUE; if FALSE, the machine will spawn without removable expected parts
@@ -18,9 +18,9 @@
 
 /obj/item/frame/attackby(obj/item/W, mob/user)
 	if(isWrench(W))
-		for(var/key in matter)
-			var/decl/material/material = GET_DECL(key)
-			material.place_sheet(get_turf(src), matter[key]/SHEET_MATERIAL_AMOUNT)
+		var/datum/materials/matter = get_material_composition()
+		if(istype(matter))
+			matter.convert_to_sheets(get_turf(src))
 		qdel(src)
 		return TRUE
 	. = ..()
@@ -92,26 +92,26 @@
 /obj/item/frame/light/small
 	name = "small light fixture frame"
 	icon_state = "bulb-construct-item"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	build_machine_type = /obj/machinery/light/small/buildable
 
 /obj/item/frame/light/spot
 	name = "spotlight fixture frame"
 	icon_state = "tube-construct-item"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	build_machine_type = /obj/machinery/light/spot/buildable
 
 /obj/item/frame/light/nav
 	name = "navigation light fixture frame"
 	icon_state = "tube-construct-item"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	build_machine_type = /obj/machinery/light/navigation/buildable
 
 /obj/item/frame/button
 	name = "button frame"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "launcherbtt"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	build_machine_type = /obj/machinery/button/buildable
 
 /obj/item/frame/button/modify_positioning(var/obj/machinery/button/product, _dir, click_params)
@@ -138,7 +138,7 @@
 	name = "wall charger frame"
 	icon = 'icons/obj/machines/recharger_wall.dmi'
 	icon_state = "wrecharger0"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	build_machine_type = /obj/machinery/recharger/wallcharger
 
 /obj/item/frame/button/wall_charger/kit
@@ -150,7 +150,7 @@
 	desc = "A wall-mounted ignition device."
 	icon = 'icons/obj/machines/igniter_mounted.dmi'
 	icon_state = "migniter"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	build_machine_type = /obj/machinery/sparker/buildable
 
 // Shifts it dead center of the turf you are looking at. Useful for items with antiquated icons.

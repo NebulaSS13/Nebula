@@ -18,8 +18,10 @@ AI MODULES
 	throw_speed = 3
 	throw_range = 15
 	origin_tech = "{'programming':3}"
-	material = /decl/material/solid/glass
-	matter = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TERTIARY
+	)
 	var/datum/ai_laws/laws = null
 
 /obj/item/aiModule/proc/install(obj/machinery/computer/upload/comp, mob/user)

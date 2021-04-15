@@ -13,7 +13,7 @@
 	base_icon = "square" // Base icon name
 	filling_states = @"[20,40,60,80,100]"
 	volume = 30
-	material = /decl/material/solid/glass
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)
 
 	drop_sound = 'sound/foley/bottledrop1.ogg'
 	pickup_sound = 'sound/foley/bottlepickup1.ogg'

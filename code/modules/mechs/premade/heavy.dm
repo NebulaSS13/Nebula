@@ -33,7 +33,7 @@
 	action_delay = 15
 	max_damage = 90
 	power_use = 60
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/mech_component/propulsion/heavy
 	name = "heavy legs"
@@ -44,7 +44,7 @@
 	turn_delay = 5
 	max_damage = 160
 	power_use = 100
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/mech_component/sensors/heavy
 	name = "heavy sensors"
@@ -53,7 +53,7 @@
 	icon_state = "heavy_head"
 	max_damage = 120
 	power_use = 0
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/mech_component/sensors/heavy/prebuild()
 	..()
@@ -71,8 +71,10 @@
 	mech_health = 500
 	power_use = 50
 	has_hardpoints = list(HARDPOINT_BACK)
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TERTIARY
+	)
 
 /obj/item/mech_component/chassis/heavy/prebuild()
 	pilot_positions = list(

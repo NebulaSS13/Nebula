@@ -9,7 +9,7 @@
 	one_hand_penalty = 2
 	bulk = GUN_BULK_RIFLE
 	origin_tech = "{'combat':3,'magnets':2}"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	projectile_type = /obj/item/projectile/beam/midlaser
 
 /obj/item/gun/energy/laser/mounted
@@ -79,9 +79,9 @@
 	max_shots = 6
 	accuracy = 2
 	fire_delay = 20
-	material = /decl/material/solid/metal/steel
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 

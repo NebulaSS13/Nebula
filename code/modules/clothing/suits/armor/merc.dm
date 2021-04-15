@@ -13,8 +13,10 @@
 		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
-	material = /decl/material/solid/metal/titanium
-	matter = list(/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/titanium = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TERTIARY
+	)
 	origin_tech = "{'materials':5,'engineering':2,'combat':3}"
 	
 /obj/item/clothing/accessory/armguards/merc
@@ -29,7 +31,7 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	color = null
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	origin_tech = "{'materials':2,'engineering':1,'combat':2}"
 
 /obj/item/clothing/accessory/legguards/merc
@@ -44,5 +46,5 @@
 		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	origin_tech = "{'materials':2,'engineering':1,'combat':2}"

@@ -10,7 +10,7 @@
 	var/list/clothing_choices = list()
 	siemens_coefficient = 0.8
 	bodytype_restricted = null
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY)
 
 /obj/item/clothing/shoes/jackboots/swat
 	name = "\improper SWAT boots"
@@ -38,26 +38,26 @@
 	desc = "A pair of durable brown boots. Waterproofed for use planetside."
 	applies_material_colour = FALSE
 	color = "#694e30"
-	artificail_shine = 0
+	artificial_shine = 0
 
 /obj/item/clothing/shoes/jackboots/desertboots
 	name = "desert boots"
 	desc = "A pair of durable tan boots. Designed for use in hot climates."
 	applies_material_colour = FALSE
 	color = "#9c8c6a"
-	artificail_shine = 0
+	artificial_shine = 0
 
 /obj/item/clothing/shoes/jackboots/duty
 	name = "duty boots"
 	desc = "A pair of steel-toed synthleather boots with a mirror shine."
-	artificail_shine = 40
+	artificial_shine = 40
 
 /obj/item/clothing/shoes/jackboots/tactical
 	name = "tactical boots"
 	desc = "Tan boots with extra padding and armor."
 	applies_material_colour = FALSE
 	color = "#9c8c6a"
-	artificail_shine = 0
+	artificial_shine = 0
 
 /obj/item/clothing/shoes/dress
 	name = "dress shoes"

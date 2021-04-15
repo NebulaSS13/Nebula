@@ -10,13 +10,14 @@
 	throw_range = 15
 	sharp = 1
 	edge =  1
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 
 /obj/item/star/throw_impact(atom/hit_atom)
 	..()
-	if(material.radioactivity>0 && istype(hit_atom,/mob/living))
+	var/decl/material/material = get_primary_material()
+	if(material && material.radioactivity>0 && istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
 		var/urgh = material.radioactivity
 		M.adjustToxLoss(rand(urgh/2,urgh))
@@ -27,4 +28,4 @@
 		user.throw_item(target)
 
 /obj/item/star/ninja
-	material = /decl/material/solid/metal/uranium
+	material_composition = list(/decl/material/solid/metal/uranium = MATTER_AMOUNT_PRIMARY)

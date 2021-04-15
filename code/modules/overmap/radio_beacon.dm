@@ -36,8 +36,11 @@
 	icon_state = "beacon"
 
 	origin_tech = "{'magnets':2, 'programming':2}"
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE, /decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/gold = MATTER_AMOUNT_TERTIARY
+	)
 
 	var/obj/effect/overmap/radio/signal	
 

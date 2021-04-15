@@ -2,7 +2,7 @@
 	name = "shoes"
 	desc = "A pair of shoes."
 	icon = 'icons/clothing/feet/generic_shoes.dmi'
-	material = /decl/material/solid/leather
+	material_composition = list(/decl/material/solid/leather = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	cold_protection = SLOT_FEET
@@ -15,7 +15,8 @@
 	name = "boots"
 	desc = "A pair of tall boots."
 
-/obj/item/clothing/shoes/craftable/set_material(var/new_material)
-	..()
-	if(istype(material))
+/obj/item/clothing/shoes/craftable/Initialize()
+	. = ..()
+	var/decl/material/material = get_primary_material()
+	if(material)
 		desc = "[initial(desc)]. These are made of [material.solid_name]."

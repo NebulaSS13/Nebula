@@ -33,8 +33,10 @@
 	name = "circuitboard (area power controller)"
 	desc = "Heavy-duty switching circuits for power control."
 	icon = 'icons/obj/modules/module_power.dmi'
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	build_path = /obj/machinery/power/apc/buildable

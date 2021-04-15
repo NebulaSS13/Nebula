@@ -1,8 +1,9 @@
 /////////////////////////////////////////
 //Material Rings
-/obj/item/clothing/ring/material/set_material(var/new_material)
+/obj/item/clothing/ring/material/Initialize()
 	. = ..()
-	if(istype(material))
+	var/decl/material/material = get_primary_material()
+	if(material)
 		name = "[material.solid_name] ring"
 		desc = "A ring made from [material.solid_name]."
 		color = material.color
@@ -13,7 +14,11 @@
 		if(!user.stat && !user.incapacitated() && user.Adjacent(src) && S.loc == user)
 			if(!inscription)
 				return
-			desc = "A ring made from [material.solid_name]."
+			var/decl/material/material = get_primary_material()
+			if(material)
+				desc = "A ring made from [material.solid_name]."
+			else
+				desc = initial(desc)
 			to_chat(user, "<span class='warning'>You carve \"[inscription]\" into \the [src].</span>")
 			desc += "<br>Written on \the [src] is the inscription \"[inscription]\""
 
@@ -30,18 +35,18 @@
 	. += " <a href='?src=\ref[src];examine=1'>\[View\]</a>"
 
 /obj/item/clothing/ring/material/wood
-	material = /decl/material/solid/wood/walnut
+	material_composition = list(/decl/material/solid/wood/walnut = MATTER_AMOUNT_PRIMARY)
 /obj/item/clothing/ring/material/plastic
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 /obj/item/clothing/ring/material/steel
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 /obj/item/clothing/ring/material/silver
-	material = /decl/material/solid/metal/silver
+	material_composition = list(/decl/material/solid/metal/silver = MATTER_AMOUNT_PRIMARY)
 /obj/item/clothing/ring/material/gold
-	material = /decl/material/solid/metal/gold
+	material_composition = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_PRIMARY)
 /obj/item/clothing/ring/material/platinum
-	material = /decl/material/solid/metal/platinum
+	material_composition = list(/decl/material/solid/metal/platinum = MATTER_AMOUNT_PRIMARY)
 /obj/item/clothing/ring/material/bronze
-	material = /decl/material/solid/metal/bronze
+	material_composition = list(/decl/material/solid/metal/bronze = MATTER_AMOUNT_PRIMARY)
 /obj/item/clothing/ring/material/glass
-	material = /decl/material/solid/glass
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)

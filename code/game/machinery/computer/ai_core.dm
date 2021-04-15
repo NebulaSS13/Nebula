@@ -7,7 +7,7 @@ var/global/list/empty_playable_ai_cores = list()
 	icon = 'icons/mob/AI.dmi'
 	icon_state = "0"
 	tool_interaction_flags = TOOL_INTERACTION_ALL
-	material = /decl/material/solid/metal/plasteel
+	material_composition = list(/decl/material/solid/metal/plasteel = MATTER_AMOUNT_PRIMARY)
 
 	var/datum/ai_laws/laws
 	var/obj/item/stock_parts/circuitboard/circuit
@@ -166,7 +166,7 @@ var/global/list/empty_playable_ai_cores = list()
 
 					if(istype(P, /obj/item/stack/material))
 						var/obj/item/stack/material/RG = P
-						if(RG.material.type != /decl/material/solid/glass || !RG.reinf_material || RG.get_amount() < 2)
+						if(RG.get_primary_material_type() != /decl/material/solid/glass || !RG.get_reinforcing_material() || RG.get_amount() < 2)
 							to_chat(user, SPAN_WARNING("You need two sheets of reinforced glass to put in the glass panel."))
 							return TRUE
 						if(!wired)

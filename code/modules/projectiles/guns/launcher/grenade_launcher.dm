@@ -13,8 +13,10 @@
 	throw_distance = 7
 	release_force = 5
 	combustion = 1
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	,)
 
 	var/obj/item/grenade/chambered
 	var/list/grenades = new/list()
@@ -25,8 +27,6 @@
 	var/blacklisted_grenades = list(
 		/obj/item/grenade/flashbang/clusterbang,
 		/obj/item/grenade/frag)
-
-	material = /decl/material/solid/metal/steel
 
 //revolves the magazine, allowing players to choose between multiple grenade types
 /obj/item/gun/launcher/grenade/proc/pump(mob/M)

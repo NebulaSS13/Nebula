@@ -30,4 +30,5 @@
 
 /decl/crafting_stage/screwdriver/balisong/get_product(var/obj/item/work)
 	var/obj/item/butterflyblade/blade = locate() in work
-	. = new product(get_turf(work), blade && blade.material && blade.material.type)
+	var/decl/material/material = blade?.get_primary_material()
+	. = new product(get_turf(work), material?.type)

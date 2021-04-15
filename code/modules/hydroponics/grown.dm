@@ -6,7 +6,7 @@
 	randpixel = 5
 	desc = "Nutritious! Probably."
 	slot_flags = SLOT_HOLSTER
-	material = /decl/material/solid/plantmatter
+	material_composition = list(/decl/material/solid/plantmatter = MATTER_AMOUNT_PRIMARY)
 
 	var/plantname
 	var/datum/seed/seed

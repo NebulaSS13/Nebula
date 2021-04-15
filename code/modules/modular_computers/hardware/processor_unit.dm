@@ -9,7 +9,7 @@
 	power_usage = 100
 	critical = 1
 	origin_tech = "{'programming':3,'engineering':2}"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 	var/processing_power = 2 // Used for DDoS speed calculations
 
@@ -21,7 +21,7 @@
 	power_usage = 25
 	processing_power = 1
 	origin_tech = "{'programming':2,'engineering':2}"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/stock_parts/computer/processor_unit/photonic
 	name = "photonic processor"
@@ -31,8 +31,10 @@
 	power_usage = 50
 	processing_power = 4
 	origin_tech = "{'programming':5,'engineering':4}"
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 
 /obj/item/stock_parts/computer/processor_unit/photonic/small
 	name = "photonic microprocessor"
@@ -42,5 +44,7 @@
 	power_usage = 10
 	processing_power = 2
 	origin_tech = "{'programming':4,'engineering':3}"
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)

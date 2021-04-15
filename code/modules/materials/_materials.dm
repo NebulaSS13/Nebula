@@ -50,15 +50,55 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			wood
 */
 
-//Returns the material the object is made of, if applicable.
-//Will we ever need to return more than one value here? Or should we just return the "dominant" material.
-/obj/proc/get_material()
-	return
+/obj/proc/on_material_change()
+	update_icon()
+
+/obj/proc/get_primary_material()
+	var/datum/materials/matter = get_material_composition()
+	return istype(matter) && matter.get_primary_material()
+
+/obj/proc/set_primary_material(var/material)
+	var/datum/materials/matter = get_material_composition()
+	return istype(matter) && matter.set_primary_material(material)
+
+/obj/proc/get_reinforcing_material()
+	var/datum/materials/matter = get_material_composition()
+	return istype(matter) && matter.get_reinforcing_material()
+
+/obj/proc/set_reinforcing_material(var/material)
+	var/datum/materials/matter = get_material_composition()
+	return istype(matter) && matter.set_reinforcing_material(material)
+
+/obj/proc/convert_material_to_sheets(var/material)
+	var/datum/materials/matter = get_material_composition()
+	return istype(matter) && matter.convert_material_to_sheets(material, get_turf(src))
+
+/obj/proc/get_primary_material_color()
+	var/datum/materials/matter = get_material_composition()
+	if(matter)
+		var/decl/material/material = matter.get_reinforcing_material()
+		if(material)
+			. = LAZYACCESS(matter.color_overrides, material.type)
+	if(!.)
+		. = COLOR_WHITE
+
+/obj/proc/get_reinforcing_material_color()
+	var/datum/materials/matter = get_material_composition()
+	if(matter)
+		var/decl/material/material = matter.get_reinforcing_material()
+		if(material)
+			. = LAZYACCESS(matter.color_overrides, material.type)
+	if(!.)
+		. = COLOR_WHITE
 
 //mostly for convenience
-/obj/proc/get_material_type()
-	var/decl/material/mat = get_material()
-	. = mat && mat.type
+/obj/proc/get_primary_material_type()
+	var/decl/material/mat = get_primary_material()
+	. = mat?.type
+
+/obj/proc/get_reinforcing_material_type()
+	var/decl/material/mat = get_reinforcing_material()
+	. = mat?.type
 
 // Material definition and procs follow.
 /decl/material
@@ -237,15 +277,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		to_chat(user, "<span class='warning'>You need need at least [needed_sheets] [target_stack.plural_name] for reinforcement with [used_stack].</span>")
 		return
 
-	var/decl/material/reinf_mat = used_stack.material
-	if(reinf_mat.integrity <= integrity || reinf_mat.is_brittle())
+	var/decl/material/reinf_mat = used_stack.get_primary_material()
+	if(!reinf_mat || reinf_mat.integrity <= integrity || reinf_mat.is_brittle())
 		to_chat(user, "<span class='warning'>The [reinf_mat.solid_name] is too structurally weak to reinforce the [name].</span>")
 		return
 
 	to_chat(user, "<span class='notice'>You reinforce the [target_stack] with the [reinf_mat.solid_name].</span>")
 	used_stack.use(1)
 	var/obj/item/stack/material/S = target_stack.split(needed_sheets)
-	S.reinf_material = reinf_mat
+	S.set_reinforcing_material(reinf_mat)
 	S.update_strings()
 	S.update_icon()
 	if(!QDELETED(target_stack))

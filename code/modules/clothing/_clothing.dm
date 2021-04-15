@@ -2,7 +2,7 @@
 	name = "clothing"
 	siemens_coefficient = 0.9
 	origin_tech = "{'materials':1,'engineering':1}"
-	material = /decl/material/solid/cloth
+	material_composition = list(/decl/material/solid/cloth = MATTER_AMOUNT_PRIMARY)
 
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
@@ -27,10 +27,13 @@
 		update_icon()
 
 // Sort of a placeholder for proper tailoring.
-#define RAG_COUNT(X) ceil((LAZYACCESS(X.matter, /decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
+#define RAG_COUNT(X) ceil((X.get_material(/decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
 
 /obj/item/clothing/attackby(obj/item/I, mob/user)
-	var/rags = RAG_COUNT(src)
+	var/rags = 0
+	var/datum/materials/matter = get_material_composition()
+	if(istype(matter))
+		rags = RAG_COUNT(matter)
 	if(rags && (I.edge || I.sharp) && user.a_intent == I_HURT)
 		if(length(accessories))
 			to_chat(user, SPAN_WARNING("You should remove the accessories attached to \the [src] first."))
@@ -47,7 +50,7 @@
 				new /obj/item/chems/glass/rag(get_turf(src))
 			if(loc == user)
 				user.drop_from_inventory(src)
-			LAZYREMOVE(matter, /decl/material/solid/cloth)
+			matter.clear_material(/decl/material/solid/cloth)
 			physically_destroyed()
 		return TRUE
 	. = ..()
@@ -173,9 +176,12 @@
 		if(SMELL_STINKY)
 			to_chat(user, "<span class='bad'>It's quite stinky!</span>")
 
-	var/rags = RAG_COUNT(src)
-	if(rags)
-		to_chat(user, SPAN_SUBTLE("With a sharp object, you could cut \the [src] up into [rags] rag\s."))
+
+	var/datum/materials/matter = get_material_composition()
+	if(istype(matter))
+		var/rags = RAG_COUNT(matter)
+		if(rags)
+			to_chat(user, SPAN_SUBTLE("With a sharp object, you could cut \the [src] up into [rags] rag\s."))
 
 #undef RAG_COUNT
 

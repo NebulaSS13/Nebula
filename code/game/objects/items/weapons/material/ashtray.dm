@@ -6,13 +6,14 @@
 	material_force_multiplier = 0.1
 	thrown_material_force_multiplier = 0.1
 	randpixel = 5
-	material = /decl/material/solid/metal/bronze
+	material_composition = list(/decl/material/solid/metal/bronze = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 	var/max_butts = 10
 
 /obj/item/ashtray/examine(mob/user)
 	. = ..()
+	var/decl/material/material = get_primary_material()
 	if(material)
 		to_chat(user, "It's made of [material.solid_name].")
 	if(contents.len >= max_butts)
@@ -70,7 +71,7 @@
 			update_icon()
 
 /obj/item/ashtray/plastic
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/ashtray/glass
-	material = /decl/material/solid/glass
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)

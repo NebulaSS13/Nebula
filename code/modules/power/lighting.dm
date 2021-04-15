@@ -492,7 +492,7 @@
 	force = 2
 	throwforce = 5
 	w_class = ITEM_SIZE_TINY
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
 
 	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
@@ -520,8 +520,10 @@
 	icon_state = "ltube"
 	base_state = "ltube"
 	item_state = "c_tube"
-	material = /decl/material/solid/glass
-	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TERTIARY
+	)
 
 	b_range = 5
 	b_color = LIGHT_COLOR_HALOGEN
@@ -551,7 +553,7 @@
 	base_state = "lbulb"
 	item_state = "contvapour"
 	broken_chance = 3
-	material = /decl/material/solid/glass
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)
 
 	b_power = 0.6
 	b_range = 4
@@ -579,7 +581,7 @@
 	icon_state = "fbulb"
 	base_state = "fbulb"
 	item_state = "egg4"
-	material = /decl/material/solid/glass
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)
 
 // update the icon state and description of the light
 /obj/item/light/on_update_icon()

@@ -15,7 +15,7 @@
 	icon = 'icons/obj/items/weapon/knives/folding/swiss.dmi'
 	valid_handle_colors = null
 	max_force = 5
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	applies_material_colour = TRUE
 	applies_material_name = TRUE
 

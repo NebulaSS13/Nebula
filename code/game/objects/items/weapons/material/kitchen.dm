@@ -1,6 +1,6 @@
 /obj/item/kitchen
 	icon = 'icons/obj/kitchen.dmi'
-	material = /decl/material/solid/metal/aluminium
+	material_composition = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY)
 	applies_material_name = TRUE
 	applies_material_colour = TRUE
 
@@ -62,7 +62,7 @@
 	icon_state = "fork"
 
 /obj/item/kitchen/utensil/fork/plastic
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/kitchen/utensil/spoon
 	name = "spoon"
@@ -72,7 +72,7 @@
 	material_force_multiplier = 0.1 //2 when wielded with weight 20 (steel)
 
 /obj/item/kitchen/utensil/spoon/plastic
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/kitchen/utensil/spork
 	name = "spork"
@@ -80,7 +80,7 @@
 	icon_state = "spork"
 
 /obj/item/kitchen/utensil/spork/plastic
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/kitchen/utensil/foon
 	name = "foon"
@@ -88,7 +88,7 @@
 	icon_state = "foon"
 
 /obj/item/kitchen/utensil/foon/plastic
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 
  /*
  * Rolling Pins
@@ -99,7 +99,7 @@
 	desc = "Used to knock out the Bartender."
 	icon_state = "rolling_pin"
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked")
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)
 	material_force_multiplier = 0.7 // 10 when wielded with weight 15 (wood)
 	thrown_material_force_multiplier = 1 // as above
 

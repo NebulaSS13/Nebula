@@ -9,7 +9,7 @@
 	melee_accuracy_bonus = -10
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = "{'engineering':1}"
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 	center_of_mass = @"{'x':16,'y':20}"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 	applies_material_colour = TRUE
@@ -41,7 +41,8 @@
 
 /obj/item/crowbar/afterattack(atom/target, mob/user)
 	. = ..()
-	if(!material.is_brittle())
+	var/decl/material/material = get_primary_material()
+	if(!material || !material.is_brittle())
 		return
 	var/break_chance = 5
 
@@ -55,18 +56,18 @@
 		playsound(user, 'sound/effects/snap.ogg', 40, 1)
 		to_chat(user, SPAN_WARNING("\The [src] shatters like the cheap garbage it was!"))
 		qdel(src)
-		user.put_in_hands(new /obj/item/shard(get_turf(user), material.type))
+		user.put_in_hands(new /obj/item/shard(get_turf(user), get_primary_material_type()))
 	return
 
 /obj/item/crowbar/red
 	handle_color = COLOR_MAROON
 
 /obj/item/crowbar/gold
-	material = /decl/material/solid/metal/gold
+	material_composition = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_PRIMARY)
 
 /obj/item/crowbar/cheap
 	name = "discount pry bar"
 	desc = "A plastic bar with a wedge. It looks so poorly manufactured that you're sure it will break if you try to use it."
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)
 	w_class = ITEM_SIZE_TINY
 	shape_variations = 6

@@ -183,13 +183,8 @@
 		return 0
 	return 1
 
-/obj/item/stack/create_matter()
-	..()
-	initial_matter = matter?.Copy()
-
 /obj/item/stack/proc/update_matter()
-	matter = initial_matter?.Copy()
-	create_matter()
+	return
 
 /obj/item/stack/proc/use(var/used)
 	if (!can_use(used))
@@ -262,6 +257,7 @@
 
 	var/orig_amount = src.amount
 	if (transfer && src.use(transfer))
+		var/decl/material/material = get_primary_material()
 		var/obj/item/stack/newstack = new src.type(loc, transfer, material?.type)
 		newstack.copy_from(src)
 		if (prob(transfer/orig_amount * 100))

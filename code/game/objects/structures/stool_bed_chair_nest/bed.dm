@@ -18,33 +18,44 @@
 	buckle_dir = SOUTH
 	buckle_lying = TRUE
 	buckle_sound = 'sound/effects/buckle.ogg'
-	material = DEFAULT_FURNITURE_MATERIAL
+	material_composition = list(DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY)
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 
 /obj/structure/bed/update_material_name()
-	if(reinf_material)
-		SetName("[reinf_material.adjective_name] [initial(name)]")
-	else if(material)
+	var/decl/material/material = get_reinforcing_material()
+	if(material)
 		SetName("[material.adjective_name] [initial(name)]")
-	else
-		SetName(initial(name))
+		return
+	material = get_primary_material()
+	if(material)
+		SetName("[material.adjective_name] [initial(name)]")
+		return
+	SetName(initial(name))
 
 /obj/structure/bed/update_material_desc()
-	if(reinf_material)
-		desc = "[initial(desc)] It's made of [material.use_name] and covered with [reinf_material.use_name]."
+	var/decl/material/material =  get_primary_material()
+	var/decl/material/rmaterial = get_reinforcing_material()
+	if(material)
+		if(rmaterial)
+			desc = "[initial(desc)] It's made of [material.use_name] and covered with [rmaterial.use_name]."
+		else
+			desc = "[initial(desc)] It's made of [material.use_name]."
 	else
-		desc = "[initial(desc)] It's made of [material.use_name]."
+		if(rmaterial)
+			desc = "[initial(desc)] It's covered with [rmaterial.use_name]."
+		else
+			desc = initial(desc)
 
 // Reuse the cache/code from stools, todo maybe unify.
 /obj/structure/bed/on_update_icon()
 	..()
 	var/new_overlays
-	if(istype(reinf_material))
+	if(get_reinforcing_material())
 		var/image/I = image(icon, "[icon_state]_padding")
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
-			I.color = reinf_material.color
+			I.color = get_reinforcing_material_color()
 		LAZYADD(new_overlays, I)
 	overlays = new_overlays
 
@@ -63,7 +74,7 @@
 	. = ..()
 	if(!.)
 		if(istype(W,/obj/item/stack))
-			if(reinf_material)
+			if(get_reinforcing_material())
 				to_chat(user, "\The [src] is already padded.")
 				return
 			var/obj/item/stack/C = W
@@ -75,8 +86,9 @@
 				padding_type = /decl/material/solid/carpet
 			else if(istype(W,/obj/item/stack/material))
 				var/obj/item/stack/material/M = W
-				if(M.material && (M.material.flags & MAT_FLAG_PADDING))
-					padding_type = M.material.type
+				var/decl/material/material = M.get_primary_material()
+				if(material && (material.flags & MAT_FLAG_PADDING))
+					padding_type = material.type
 			if(!padding_type)
 				to_chat(user, "You cannot pad \the [src] with that.")
 				return
@@ -88,7 +100,7 @@
 			return
 
 		else if(isWirecutter(W))
-			if(!reinf_material)
+			if(!get_reinforcing_material())
 				to_chat(user, "\The [src] has no padding to remove.")
 				return
 			to_chat(user, "You remove the padding from \the [src].")
@@ -119,13 +131,11 @@
 			unbuckle_mob()
 
 /obj/structure/bed/proc/remove_padding()
-	if(reinf_material)
-		reinf_material.place_sheet(get_turf(src))
-		reinf_material = null
+	convert_material_to_sheets(get_reinforcing_material_type())
 	update_icon()
 
 /obj/structure/bed/proc/add_padding(var/padding_type)
-	reinf_material = GET_DECL(padding_type)
+	set_reinforcing_material(padding_type)
 	update_icon()
 
 /obj/structure/bed/psych
@@ -134,12 +144,16 @@
 	icon_state = "psychbed"
 
 /obj/structure/bed/psych
-	material = /decl/material/solid/wood/walnut
-	reinf_material = /decl/material/solid/leather
+	material_composition = list(
+		/decl/material/solid/wood/walnut = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/leather = MATTER_AMOUNT_SECONDARY
+	)
 
 /obj/structure/bed/padded
-	material = /decl/material/solid/metal/aluminium
-	reinf_material = /decl/material/solid/cloth
+	material_composition = list(
+		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY
+	)
 
 /*
  * Roller beds

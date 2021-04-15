@@ -10,7 +10,7 @@
 	throw_range = 10
 	slot_flags = SLOT_LOWER_BODY
 	applies_material_name = FALSE
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)
 	drop_sound = 'sound/foley/tooldrop5.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
@@ -20,6 +20,7 @@
 /obj/item/clipboard/Initialize()
 	. = ..()
 	update_icon()
+	var/decl/material/material = get_primary_material()
 	if(material)
 		desc = initial(desc)
 		desc += " It's made of [material.use_name]."
@@ -169,20 +170,12 @@
 	return
 
 /obj/item/clipboard/ebony
-	material = /decl/material/solid/wood/ebony
-
+	material_composition = list(/decl/material/solid/wood/ebony = MATTER_AMOUNT_PRIMARY)
 /obj/item/clipboard/steel
-	material = /decl/material/solid/metal/steel
-	material = /decl/material/solid/metal/steel
-
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 /obj/item/clipboard/aluminium
-	material = /decl/material/solid/metal/aluminium
-	material = /decl/material/solid/metal/aluminium
-
+	material_composition = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_PRIMARY)
 /obj/item/clipboard/glass
-	material = /decl/material/solid/glass
-	material = /decl/material/solid/glass
-
+	material_composition = list(/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY)
 /obj/item/clipboard/plastic
-	material = /decl/material/solid/plastic
-	material = /decl/material/solid/plastic
+	material_composition = list(/decl/material/solid/plastic = MATTER_AMOUNT_PRIMARY)

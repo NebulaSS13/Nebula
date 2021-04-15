@@ -61,8 +61,10 @@
 	throw_range = 4
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = "{'materials':2}"
-	material = /decl/material/solid/glass
-	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TERTIARY
+	)
 	attack_verb = list("shoved", "bashed")
 	var/cooldown = 0 //shield bash cooldown. based on world.time
 	var/max_block = 15
@@ -101,7 +103,7 @@
 	throwforce = 7.0
 	throw_range = 3
 	w_class = ITEM_SIZE_HUGE
-	material = /decl/material/solid/metal/plasteel
+	material_composition = list(/decl/material/solid/metal/plasteel = MATTER_AMOUNT_PRIMARY)
 	max_block = 50
 	can_block_lasers = TRUE
 	slowdown_general = 1.5
@@ -119,8 +121,10 @@
 	throw_range = 20
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = "{'materials':1}"
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/wood = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/wood = MATTER_AMOUNT_TERTIARY
+	)
 	attack_verb = list("shoved", "bashed")
 
 /obj/item/shield/buckler/handle_shield(mob/user)

@@ -71,8 +71,8 @@
 							/obj/item/stack/cable_coil = 2,
 							/obj/item/stock_parts/matter_bin = 1,
 							/obj/item/stock_parts/capacitor = 2)
-	matter = list(
-		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+	material_composition = list(
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TERTIARY,
 		/decl/material/solid/metal/gold =       MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/silver =     MATTER_AMOUNT_TRACE
 	)

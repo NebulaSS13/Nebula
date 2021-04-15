@@ -96,8 +96,9 @@
 		if(source_frame.body)
 			source_frame.body.forceMove(src)
 			body = source_frame.body
-		if(source_frame.material)
-			material = source_frame.material
+		//var/decl/material/material = source_frame.get_primary_material()
+		//if(material)
+		//	set_primary_material(material)
 
 	updatehealth()
 

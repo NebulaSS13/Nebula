@@ -51,18 +51,21 @@
 	..()
 	take_damage(Proj.get_structure_damage())
 
-/obj/structure/proc/subtract_matter(var/obj/subtracting)
-	if(!length(matter))
+/obj/structure/displaycase/proc/subtract_matter(var/obj/subtracting)
+
+	if(!istype(subtracting))
 		return
-	if(!istype(subtracting) || !length(subtracting.matter))
+
+	var/datum/materials/my_matter = get_matter_list()
+	if(!istype(my_matter))
 		return
-	for(var/mat in matter)
-		if(!subtracting[mat])
-			continue
-		matter[mat] -= subtracting[mat]
-		if(matter[mat] <= 0)
-			matter -= mat
-	UNSETEMPTY(matter)
+
+	var/datum/materials/other_matter = subtracting.get_material_composition()
+	if(!istype(other_matter))
+		return
+
+	for(var/mat in my_matter.matter)
+		my_matter.remove_material(mat, other_matter.get_material(mat), FALSE)
 
 /obj/structure/displaycase/dismantle()
 	SHOULD_CALL_PARENT(FALSE)
@@ -75,7 +78,7 @@
 	if(.)
 		set_density(0)
 		destroyed = TRUE
-		subtract_matter(new /obj/item/shard(get_turf(src), material?.type))
+		subtract_matter(new /obj/item/shard(get_turf(src), get_primary_material_type()))
 		playsound(src, "shatter", 70, 1)
 		update_icon()
 

@@ -341,8 +341,10 @@
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/glass = MATTER_AMOUNT_TERTIARY
+	)
 	var/currTag = 0
 
 /obj/item/destTagger/proc/openwindow(mob/user)
@@ -508,7 +510,7 @@
 	icon = 'icons/obj/items/gift_wrapper.dmi'
 	icon_state = "deliveryPaper"
 	gender = NEUTER
-	matter = null
+	material_composition = null
 	uses_charge = 1
 	charge_costs = list(1)
 	stacktype = /obj/item/stack/package_wrap

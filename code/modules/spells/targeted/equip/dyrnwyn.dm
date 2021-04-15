@@ -21,7 +21,7 @@
 
 
 /spell/targeted/equip_item/dyrnwyn/summon_item(var/new_type)
-	var/obj/item/W = new new_type(null,material)
+	var/obj/item/W = new new_type(null, material)
 	W.SetName("\improper Dyrnwyn")
 	W.damtype = BURN
 	W.hitsound = 'sound/items/welder2.ogg'
@@ -32,7 +32,6 @@
 /spell/targeted/equip_item/dyrnwyn/empower_spell()
 	if(!..())
 		return 0
-
 	material = /decl/material/solid/metal/silver
 	return "Dyrnwyn has been made pure: it is now made of silver."
 

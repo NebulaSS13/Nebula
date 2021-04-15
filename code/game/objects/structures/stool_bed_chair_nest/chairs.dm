@@ -20,31 +20,35 @@
 
 /obj/structure/bed/chair/on_update_icon()
 	..()
+	var/mat_color = get_primary_material_color()
 	var/new_overlays
 	var/image/I = image(icon, "[icon_state]_over")
 	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 		I.appearance_flags |= RESET_COLOR
-		I.color = material.color
+		I.color = mat_color
 	LAZYADD(new_overlays, I)
 	I = image(icon, "[icon_state]_armrest")
 	I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 		I.appearance_flags |= RESET_COLOR
-		I.color = material.color
+		I.color = mat_color
 	LAZYADD(new_overlays, I)
+
+	var/decl/material/reinf_material = get_reinforcing_material() 
 	if(reinf_material)
+		mat_color = get_reinforcing_material_color()
 		I =  image(icon, "[icon_state]_padding_over")
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
-			I.color = reinf_material.color
+			I.color = mat_color
 		LAZYADD(new_overlays, I)
 		I = image(icon, "[icon_state]_padding_armrest")
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
-			I.color = reinf_material.color
+			I.color = mat_color
 		LAZYADD(new_overlays, I)
 	overlays += new_overlays
 
@@ -62,25 +66,55 @@
 		buckled_mob.set_dir(dir)
 
 /obj/structure/bed/chair/padded/red
-	reinf_material = /decl/material/solid/carpet
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/carpet = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/padded/brown
-	reinf_material = /decl/material/solid/leather
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/leather = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/padded/teal
-	reinf_material = /decl/material/solid/cloth/teal
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/teal = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/padded/black
-	reinf_material = /decl/material/solid/cloth/black
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/black = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/padded/green
-	reinf_material = /decl/material/solid/cloth/green
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/green = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/padded/purple
-	reinf_material = /decl/material/solid/cloth/purple
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/purple = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/padded/blue
-	reinf_material = /decl/material/solid/cloth/blue
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/blue = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/padded/beige
-	reinf_material = /decl/material/solid/cloth/beige
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/beige = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/padded/lime
-	reinf_material = /decl/material/solid/cloth/lime
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/lime = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/padded/yellow
-	reinf_material = /decl/material/solid/cloth/yellow
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/yellow = MATTER_AMOUNT_SECONDARY
+	)
 
 // Leaving this in for the sake of compilation.
 /obj/structure/bed/chair/comfy
@@ -89,33 +123,65 @@
 	icon_state = "comfychair"
 
 /obj/structure/bed/chair/comfy/brown
-	reinf_material = /decl/material/solid/leather
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/leather = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/comfy/red
-	reinf_material = /decl/material/solid/carpet
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/carpet = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/comfy/teal
-	reinf_material = /decl/material/solid/cloth/teal
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/teal = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/comfy/black
-	reinf_material = /decl/material/solid/cloth/black
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/black = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/comfy/green
-	reinf_material = /decl/material/solid/cloth/green
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/green = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/comfy/purple
-	reinf_material = /decl/material/solid/cloth/purple
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/purple = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/comfy/blue
-	reinf_material = /decl/material/solid/cloth/blue
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/blue = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/comfy/beige
-	reinf_material = /decl/material/solid/cloth/beige
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/beige = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/comfy/lime
-	reinf_material = /decl/material/solid/cloth/lime
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/lime = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/comfy/yellow
-	reinf_material = /decl/material/solid/cloth/yellow
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/yellow = MATTER_AMOUNT_SECONDARY
+	)
 
 /obj/structure/bed/chair/comfy/captain
 	name = "captain chair"
 	desc = "It's a chair. Only for the highest ranked asses."
 	icon_state = "capchair"
 	buckle_movable = 1
-	material = /decl/material/solid/metal/steel
-	reinf_material = /decl/material/solid/cloth/blue
+	material_composition = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/blue = MATTER_AMOUNT_SECONDARY
+	)
 
 /obj/structure/bed/chair/comfy/captain/on_update_icon()
 	..()
@@ -124,7 +190,7 @@
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
-			I.color = material.color
+			I.color = get_primary_material_color()
 		overlays |= I
 
 /obj/structure/bed/chair/armchair
@@ -133,25 +199,55 @@
 	icon_state = "armchair"
 
 /obj/structure/bed/chair/armchair/brown
-	reinf_material = /decl/material/solid/leather
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/leather = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/armchair/red
-	reinf_material = /decl/material/solid/carpet
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/carpet = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/armchair/teal
-	reinf_material = /decl/material/solid/cloth/teal
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/teal = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/armchair/black
-	reinf_material = /decl/material/solid/cloth/black
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/black = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/armchair/green
-	reinf_material = /decl/material/solid/cloth/green
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/green = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/armchair/purple
-	reinf_material = /decl/material/solid/cloth/purple
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/purple = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/armchair/blue
-	reinf_material = /decl/material/solid/cloth/blue
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/blue = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/armchair/beige
-	reinf_material = /decl/material/solid/cloth/beige
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/beige = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/armchair/lime
-	reinf_material = /decl/material/solid/cloth/lime
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/lime = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/armchair/yellow
-	reinf_material = /decl/material/solid/cloth/yellow
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/yellow = MATTER_AMOUNT_SECONDARY
+	)
 
 /obj/structure/bed/chair/office
 	name = "office chair"
@@ -197,9 +293,15 @@
 		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
 /obj/structure/bed/chair/office/light
-	reinf_material = /decl/material/solid/cloth
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/office/dark
-	reinf_material = /decl/material/solid/cloth/black
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/black = MATTER_AMOUNT_SECONDARY
+	)
 
 /obj/structure/bed/chair/office/comfy
 	name = "comfy office chair"
@@ -207,32 +309,62 @@
 	icon_state = "comfyofficechair"
 
 /obj/structure/bed/chair/office/comfy/brown
-	reinf_material = /decl/material/solid/leather
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/leather = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/office/comfy/red
-	reinf_material = /decl/material/solid/carpet
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/carpet = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/office/comfy/teal
-	reinf_material = /decl/material/solid/cloth/teal
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/teal = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/office/comfy/black
-	reinf_material = /decl/material/solid/cloth/black
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/black = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/office/comfy/green
-	reinf_material = /decl/material/solid/cloth/green
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/green = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/office/comfy/purple
-	reinf_material = /decl/material/solid/cloth/purple
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/purple = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/office/comfy/blue
-	reinf_material = /decl/material/solid/cloth/blue
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/blue = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/office/comfy/beige
-	reinf_material = /decl/material/solid/cloth/beige
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/beige = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/office/comfy/lime
-	reinf_material = /decl/material/solid/cloth/lime
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/lime = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/office/comfy/yellow
-	reinf_material = /decl/material/solid/cloth/yellow
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/yellow = MATTER_AMOUNT_SECONDARY
+	)
 
 /obj/structure/bed/chair/shuttle
 	name = "shuttle seat"
 	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."
 	icon_state = "shuttle_chair"
 	buckle_sound = 'sound/effects/metal_close.ogg'
-	material = /decl/material/solid/metal/steel
+	material_composition = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/bed/chair/shuttle/post_buckle_mob()
 	if(buckled_mob)
@@ -248,15 +380,24 @@
 		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
-			I.color = material.color
+			I.color = get_primary_material_color()
 		overlays |= I
 
 /obj/structure/bed/chair/shuttle/blue
-	reinf_material = /decl/material/solid/cloth/blue
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/blue = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/shuttle/black
-	reinf_material = /decl/material/solid/cloth/black
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth/black = MATTER_AMOUNT_SECONDARY
+	)
 /obj/structure/bed/chair/shuttle/white
-	reinf_material = /decl/material/solid/cloth
+	material_composition = list(
+		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY
+	)
 
 /obj/structure/bed/chair/wood
 	name = "classic chair"
@@ -272,45 +413,45 @@
 
 /obj/structure/bed/chair/wood/mahogany
 	color = WOOD_COLOR_RICH
-	material = /decl/material/solid/wood/mahogany
+	material_composition = list(/decl/material/solid/wood/mahogany = MATTER_AMOUNT_PRIMARY)
 /obj/structure/bed/chair/wood/maple
 	color = WOOD_COLOR_PALE
-	material = /decl/material/solid/wood/maple
+	material_composition = list(/decl/material/solid/wood/maple = MATTER_AMOUNT_PRIMARY)
 /obj/structure/bed/chair/wood/ebony
 	color = WOOD_COLOR_BLACK
-	material = /decl/material/solid/wood/ebony
+	material_composition = list(/decl/material/solid/wood/ebony = MATTER_AMOUNT_PRIMARY)
 /obj/structure/bed/chair/wood/walnut
 	color = WOOD_COLOR_CHOCOLATE
-	material = /decl/material/solid/wood/walnut
+	material_composition = list(/decl/material/solid/wood/walnut = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/bed/chair/wood/wings
 	name = "winged chair"
 	icon_state = "wooden_chair_wings"
 /obj/structure/bed/chair/wood/wings/mahogany
 	color = WOOD_COLOR_RICH
-	material = /decl/material/solid/wood/mahogany
+	material_composition = list(/decl/material/solid/wood/mahogany = MATTER_AMOUNT_PRIMARY)
 /obj/structure/bed/chair/wood/wings/maple
 	color = WOOD_COLOR_PALE
-	material = /decl/material/solid/wood/maple
+	material_composition = list(/decl/material/solid/wood/maple = MATTER_AMOUNT_PRIMARY)
 /obj/structure/bed/chair/wood/wings/ebony
 	color = WOOD_COLOR_BLACK
-	material = /decl/material/solid/wood/ebony
+	material_composition = list(/decl/material/solid/wood/ebony = MATTER_AMOUNT_PRIMARY)
 /obj/structure/bed/chair/wood/wings/walnut
 	color = WOOD_COLOR_CHOCOLATE
-	material = /decl/material/solid/wood/walnut
+	material_composition = list(/decl/material/solid/wood/walnut = MATTER_AMOUNT_PRIMARY)
 
 /obj/structure/bed/chair/pew
 	name = "pew"
 	desc = "A long, simple bench with a backboard, commonly found in places of worship, courtrooms and so on. Not known for being particularly comfortable."
 	icon_state = "pew"
 	color = WOOD_COLOR_GENERIC
-	material = /decl/material/solid/wood
+	material_composition = list(/decl/material/solid/wood = MATTER_AMOUNT_PRIMARY)
 	obj_flags = 0
 /obj/structure/bed/chair/pew/left
 	icon_state = "pew_left"
 /obj/structure/bed/chair/pew/mahogany
 	color = WOOD_COLOR_RICH
-	material = /decl/material/solid/wood/mahogany
+	material_composition = list(/decl/material/solid/wood/mahogany = MATTER_AMOUNT_PRIMARY)
 /obj/structure/bed/chair/pew/left/mahogany
 	color = WOOD_COLOR_RICH
-	material = /decl/material/solid/wood/mahogany
+	material_composition = list(/decl/material/solid/wood/mahogany = MATTER_AMOUNT_PRIMARY)

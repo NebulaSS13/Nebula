@@ -83,6 +83,7 @@ Class Procs:
 	throw_speed = 1
 	throw_range = 5
 
+	var/datum/materials/material_composition //Used to store information about the material composition of the object.
 	var/stat = 0
 	var/waterproof = TRUE
 	var/reason_broken = 0
@@ -121,6 +122,7 @@ Class Procs:
 
 /obj/machinery/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
+	create_material_composition()
 	if(d)
 		set_dir(d)
 	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF) // It's safe to remove machines from here, but only if base machinery/Process returned PROCESS_KILL.
@@ -461,3 +463,10 @@ Class Procs:
 /obj/machinery/proc/get_auto_access()
 	var/area/A = get_area(src)
 	return A?.req_access?.Copy()
+
+/obj/machinery/get_material_composition()
+	return material_composition
+
+/obj/machinery/set_material_composition(var/list/new_materials)
+	material_composition = ..()
+	return material_composition

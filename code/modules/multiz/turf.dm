@@ -81,7 +81,8 @@
 		if (R.use(1))
 			to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			new /obj/structure/lattice(locate(src.x, src.y, src.z), R.material.type)
+			var/decl/material/material = R.get_primary_material()
+			new /obj/structure/lattice(locate(src.x, src.y, src.z), material?.type)
 			return TRUE
 		return
 
@@ -175,7 +176,8 @@
 		if (R.use(1))
 			to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			new /obj/structure/lattice(locate(src.x, src.y, src.z), R.material.type)
+			var/decl/material/material = R.get_primary_material()
+			new /obj/structure/lattice(locate(src.x, src.y, src.z), material?.type)
 			return TRUE
 		return
 
