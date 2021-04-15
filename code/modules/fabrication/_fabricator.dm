@@ -57,6 +57,9 @@
 
 	var/species_variation = /decl/species/human // If this fabricator is a variant for a specific species, this will be checked to unlock species-specific designs.
 
+	// If TRUE, fills fabricator with material on initalize
+	var/prefilled = FALSE
+
 /obj/machinery/fabricator/Destroy()
 	QDEL_NULL(currently_building)
 	QDEL_NULL_LIST(queued_orders)
@@ -97,6 +100,9 @@
 				var/decl/material/reg = mat
 				stored_substances_to_names[mat] = lowertext(initial(reg.name))
 
+	if(prefilled)
+		fill_to_capacity()
+
 /obj/machinery/fabricator/modify_mapped_vars(map_hash)
 	..()
 	ADJUST_TAG_VAR(initial_network_id, map_hash)
@@ -106,6 +112,10 @@
 	var/list/base_designs = SSfabrication.get_initial_recipes(fabricator_class)
 	design_cache = islist(base_designs) ? base_designs.Copy() : list() // Don't want to mutate the subsystem cache.
 	refresh_design_cache()
+
+/obj/machinery/fabricator/proc/fill_to_capacity()
+	for(var/mat in storage_capacity)
+		stored_material[mat] = storage_capacity[mat]
 
 /obj/machinery/fabricator/proc/refresh_design_cache(var/list/known_tech)
 	if(length(installed_designs))
