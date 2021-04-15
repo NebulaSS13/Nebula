@@ -21,7 +21,7 @@
 		return
 
 	//No goals to display
-	if(!(allow_modification || LAZYLEN(mind.goals)) && !(LAZYLEN(mind.assigned_job.department_types)))
+	if(!(allow_modification || LAZYLEN(mind.goals)) && !(LAZYLEN(mind.assigned_job?.department_types)))
 		return
 
 	to_chat(src, "<hr>")
@@ -32,7 +32,7 @@
 	if(allow_modification && LAZYLEN(mind.goals) < 5)
 		to_chat(src, SPAN_NOTICE("<a href='?src=\ref[mind];add_goal=1;add_goal_caller=\ref[mind.current]'>Add Random Goal</a>"))
 	
-	for(var/dept_key in mind.assigned_job.department_types)
+	for(var/dept_key in mind.assigned_job?.department_types)
 		var/decl/department/dept = SSjobs.get_department_by_type(dept_key)
 		if(dept)
 			if(LAZYLEN(dept.goals))
