@@ -178,8 +178,8 @@
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
 
 	// An associative list of target zones (ex. BP_CHEST, BP_MOUTH) mapped to all possible keys associated
-	// with the zone. Unused on vanilla Nebula at time of commit, will be used by hands and inventory
-	// rewrite and for species with body layouts that do not map directly to the standard humanoid body.
+	// with the zone. Used for species with body layouts that do not map directly to the standard humanoid 
+	// body, currently serpentids and mantids.
 	var/list/limb_mapping
 
 	var/list/has_limbs = list(

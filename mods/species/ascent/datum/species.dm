@@ -124,6 +124,8 @@
 		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
 	)
 
+	limb_mapping = list(BP_CHEST = list(BP_CHEST, BP_M_HAND))
+
 	force_cultural_info = list(
 		TAG_CULTURE =   /decl/cultural_info/culture/ascent,
 		TAG_HOMEWORLD = /decl/cultural_info/location/kharmaani,
@@ -141,11 +143,6 @@
 			list(/decl/emote/visible/ascent_glimmer, /decl/emote/visible/ascent_pulse) = 50,
 			list(/decl/emote/visible/ascent_flicker, /decl/emote/visible/ascent_glint) = 20,
 		)
-
-///decl/species/mantid/New()
-	//..()
-	//LAZYINITLIST(limb_mapping)
-	//LAZYDISTINCTADD(limb_mapping, BP_CHEST, BP_M_HAND)
 
 /decl/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
 	return
@@ -221,6 +218,7 @@
 	name = SPECIES_SERPENTID
 	name_plural = "Serpentids"
 	spawn_flags = SPECIES_IS_RESTRICTED
+
 	has_organ = list(
 		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid/serpentid,
 		BP_EYES =              /obj/item/organ/internal/eyes/insectoid/serpentid,
@@ -230,6 +228,7 @@
 		BP_STOMACH =           /obj/item/organ/internal/stomach/insectoid,
 		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
 	)
+
 	has_limbs = list(
 		BP_CHEST =        list("path" = /obj/item/organ/external/chest/insectoid/serpentid),
 		BP_GROIN =        list("path" = /obj/item/organ/external/groin/insectoid/serpentid),
@@ -245,12 +244,19 @@
 		BP_L_FOOT =       list("path" = /obj/item/organ/external/foot/insectoid),
 		BP_R_FOOT =       list("path" = /obj/item/organ/external/foot/right/insectoid)
 		)
+
+	limb_mapping = list(
+		BP_L_HAND = list(BP_L_HAND, BP_L_HAND_UPPER),
+		BP_R_HAND = list(BP_R_HAND, BP_R_HAND_UPPER)
+	)
+
 	force_cultural_info = list(
 		TAG_CULTURE =   /decl/cultural_info/culture/ascent,
 		TAG_HOMEWORLD = /decl/cultural_info/location/kharmaani,
 		TAG_FACTION =   /decl/cultural_info/faction/ascent_serpentid,
 		TAG_RELIGION =  /decl/cultural_info/religion/kharmaani
 	)
+
 	hidden_from_codex = TRUE
 	silent_steps = TRUE
 	age_descriptor = /datum/appearance_descriptor/age/serpentid

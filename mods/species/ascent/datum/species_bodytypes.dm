@@ -39,9 +39,6 @@
 	antaghud_offset_y = 8
 
 /decl/bodytype/serpentid/Initialize()
-	//LAZYINITLIST(limb_mapping)
-	//LAZYDISTINCTADD(limb_mapping, BP_L_HAND, BP_L_HAND_UPPER)
-	//LAZYDISTINCTADD(limb_mapping, BP_R_HAND, BP_R_HAND_UPPER)
 	equip_adjust = list(
 		BP_L_HAND_UPPER =  list("[NORTH]" = list("x" =  0, "y" = 8),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" = -0, "y" = 8),  "[WEST]" = list("x" =  0, "y" = 8)),
 		BP_R_HAND_UPPER =  list("[NORTH]" = list("x" =  0, "y" = 8),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" =  0, "y" = 8),  "[WEST]" = list("x" =  0, "y" = 8)),

@@ -1,9 +1,9 @@
 /decl/bodytype/avian
 	name =              "avian"
-	bodytype_category = BODYTYPE_CORVID
-	icon_base =         'mods/species/neocorvids/icons/body.dmi'
-	damage_overlays =   'mods/species/neocorvids/icons/dam_corvid.dmi'
-	blood_mask =        'mods/species/neocorvids/icons/blood_corvid.dmi'
+	bodytype_category = BODYTYPE_AVIAN
+	icon_base =         'mods/species/neoavians/icons/body.dmi'
+	damage_overlays =   'mods/species/neoavians/icons/dam_avian.dmi'
+	blood_mask =        'mods/species/neoavians/icons/blood_avian.dmi'
 	limb_blend =        ICON_MULTIPLY
 	health_hud_intensity = 3
 
