@@ -9,7 +9,6 @@
 	var/eye_colour =         COLOR_BLACK
 
 	var/skin_tone = 0  //Skin tone
-	var/skin_base = "" //Skin base
 
 	var/damage_multiplier = 1 //multiplies melee combat damage
 	var/icon_update = 1 //whether icon updating shall take place

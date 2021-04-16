@@ -53,6 +53,9 @@ var/list/icon_state_cache = list()
 	..()
 	update_world_inventory_state()
 
+/mob/proc/get_bodytype_category()
+	return
+
 /obj/item/reset_plane_and_layer()
 	..()
 	update_world_inventory_state()
@@ -64,11 +67,11 @@ var/list/icon_state_cache = list()
 		var/mob_icon = global.default_onmob_icons[slot]
 		if(ishuman(user_mob))
 			var/mob/living/carbon/human/user_human = user_mob
-			var/use_slot = (bodypart in user_human.species.equip_adjust) ? bodypart : slot
-			return user_human.species.get_offset_overlay_image(FALSE, mob_icon, mob_state, color, use_slot)
+			var/use_slot = (bodypart in user_human.bodytype.equip_adjust) ? bodypart : slot
+			return user_human.bodytype.get_offset_overlay_image(FALSE, mob_icon, mob_state, color, use_slot)
 		return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
-	var/bodytype = user_mob?.get_bodytype() || BODYTYPE_HUMANOID
+	var/bodytype = user_mob?.get_bodytype_category() || BODYTYPE_HUMANOID
 	var/useicon =  get_icon_for_bodytype(bodytype)
 	if(bodytype != BODYTYPE_HUMANOID && !check_state_in_icon("[bodytype]-[slot]", useicon))
 		var/fallback = get_fallback_slot(slot)
@@ -98,6 +101,9 @@ var/list/icon_state_cache = list()
 	. = apply_offsets(user_mob,  bodytype, I, slot, bodypart)
 	. = apply_overlays(user_mob, bodytype, ., slot)
 
+/mob/living/carbon/human/get_bodytype_category()
+	. = bodytype.bodytype_category
+
 /obj/item/proc/get_fallback_slot(var/slot)
 	return
 
@@ -110,8 +116,8 @@ var/list/icon_state_cache = list()
 /obj/item/proc/apply_offsets(var/mob/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/H = user_mob
-		if(H.species.get_bodytype(H) != bodytype) 
-			overlay = H.species.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, bodypart || slot)
+		if(H.get_bodytype_category() != bodytype) 
+			overlay = H.bodytype.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, bodypart || slot)
 	. = overlay
 
 //Special proc belts use to compose their icon

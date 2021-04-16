@@ -10,7 +10,6 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	var/eye_colour = COLOR_BLACK
 	var/f_style = "Shaved"               //Face hair type
 	var/skin_tone = 0                    //Skin tone
-	var/skin_base = ""                   //Base skin colour
 	var/list/body_markings = list()
 	var/list/appearance_descriptors = list()
 
@@ -37,7 +36,6 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	from_file(S["skin_colour"], pref.skin_colour)
 	from_file(S["eye_colour"], pref.eye_colour)
 	from_file(S["skin_tone"], pref.skin_tone)
-	from_file(S["skin_base"], pref.skin_base)
 	from_file(S["hair_style_name"], pref.h_style)
 	from_file(S["facial_style_name"], pref.f_style)
 	from_file(S["b_type"], pref.b_type)
@@ -81,7 +79,6 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	to_file(S["facial_hair_colour"], pref.facial_hair_colour)
 	to_file(S["skin_colour"], pref.skin_colour)
 	to_file(S["eye_colour"], pref.eye_colour)
-	to_file(S["skin_base"], pref.skin_base)
 	to_file(S["hair_style_name"],pref.h_style)
 	to_file(S["facial_style_name"],pref.f_style)
 	to_file(S["b_type"], pref.b_type)
@@ -119,9 +116,6 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 
 	var/low_skin_tone = mob_species ? (35 - mob_species.max_skin_tone()) : -185
 	sanitize_integer(pref.skin_tone, low_skin_tone, 34, initial(pref.skin_tone))
-
-	if(!mob_species.base_skin_colours || isnull(mob_species.base_skin_colours[pref.skin_base]))
-		pref.skin_base = ""
 
 	pref.disabilities	= sanitize_integer(pref.disabilities, 0, 65535, initial(pref.disabilities))
 
@@ -182,9 +176,6 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	. += "<br>"
 
 	. += "Blood Type: <a href='?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
-
-	if(has_flag(mob_species, HAS_BASE_SKIN_COLOURS))
-		. += "Base Colour: <a href='?src=\ref[src];base_skin=1'>[pref.skin_base]</a><br>"
 
 	if(has_flag(mob_species, HAS_A_SKIN_TONE))
 		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.skin_tone + 35]/[mob_species.max_skin_tone()]</a><br>"
@@ -401,8 +392,10 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 		pref.species = choice
 		if(prev_species != pref.species)
 			mob_species = get_species_by_key(pref.species)
-			if(!(pref.gender in mob_species.genders))
-				pref.gender = mob_species.genders[1]
+			var/decl/pronouns/pronouns = get_pronouns_by_gender(pref.gender)
+			if(!istype(pronouns) || !(pronouns in mob_species.available_pronouns))
+				pronouns = mob_species.available_pronouns[1]
+				pref.gender = pronouns.name
 
 			ResetAllHair()
 
@@ -458,14 +451,6 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 		var/new_eyes = input(user, "Choose your character's eye colour:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.eye_colour) as color|null
 		if(new_eyes && has_flag(get_species_by_key(pref.species), HAS_EYE_COLOR) && CanUseTopic(user))
 			pref.eye_colour = new_eyes
-			return TOPIC_REFRESH_UPDATE_PREVIEW
-
-	else if(href_list["base_skin"])
-		if(!has_flag(mob_species, HAS_BASE_SKIN_COLOURS))
-			return TOPIC_NOACTION
-		var/new_s_base = input(user, "Choose your character's base colour:", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in mob_species.base_skin_colours
-		if(new_s_base && CanUseTopic(user))
-			pref.skin_base = new_s_base
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_tone"])
@@ -596,8 +581,9 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 				var/list/usable_manufacturers
 				var/list/all_robolimbs = decls_repository.get_decls_of_type(/decl/prosthetics_manufacturer)
 				for(var/limb_type in all_robolimbs)
+					var/decl/bodytype/B = mob_species.get_bodytype_by_name(pref.bodytype)
 					var/decl/prosthetics_manufacturer/R = all_robolimbs[limb_type]
-					if(!R.unavailable_at_chargen && R.check_can_install(limb, mob_species.bodytype, mob_species.name))
+					if(!R.unavailable_at_chargen && R.check_can_install(limb, B?.bodytype_category, mob_species.name))
 						LAZYADD(usable_manufacturers, R)
 				if(!length(usable_manufacturers))
 					to_chat(user, SPAN_WARNING("There are no prosthetics available for this species and bodytype on your [limb]."))

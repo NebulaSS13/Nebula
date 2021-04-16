@@ -18,29 +18,30 @@
 	They once served their creators faithfully, but were left orphaned by a stellar apocalypse."
 	hidden_from_codex = FALSE
 	silent_steps = TRUE
+	preview_icon = 'mods/species/adherent/icons/preview.dmi'
 
 	meat_type = null
 	bone_material = null
 	skin_material = null
 
-	genders =                 list(PLURAL)
+	available_pronouns = list(/decl/pronouns)
+	available_bodytypes = list(
+		/decl/bodytype/adherent,
+		/decl/bodytype/adherent/emerald,
+		/decl/bodytype/adherent/amethyst,
+		/decl/bodytype/adherent/sapphire,
+		/decl/bodytype/adherent/ruby,
+		/decl/bodytype/adherent/topaz,
+		/decl/bodytype/adherent/quartz,
+		/decl/bodytype/adherent/jet
+	)
 	cyborg_noun =             null
-
-	icon_template =           'mods/species/adherent/icons/template.dmi'
-	icobase =                 'mods/species/adherent/icons/body.dmi'
-	deform =                  'mods/species/adherent/icons/body.dmi'
-	preview_icon =            'mods/species/adherent/icons/preview.dmi'
-	damage_overlays =         'mods/species/adherent/icons/damage_overlay.dmi'
-	damage_mask =             'mods/species/adherent/icons/damage_mask.dmi'
-	blood_mask =              'mods/species/adherent/icons/blood_mask.dmi'
-	bodytype = BODYTYPE_ADHERENT
 
 	siemens_coefficient =     0
 	rarity_value =            6
 
 	age_descriptor = /datum/appearance_descriptor/age/adherent
 
-	antaghud_offset_y =       14
 	warning_low_pressure =    50
 	hazard_low_pressure =     -1
 	mob_size =                MOB_SIZE_LARGE
@@ -60,7 +61,7 @@
 	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_MINOR_CUT
 	spawn_flags =   SPECIES_CAN_JOIN
 
-	appearance_flags = HAS_EYE_COLOR | HAS_BASE_SKIN_COLOURS
+	appearance_flags = HAS_EYE_COLOR
 	blood_color = "#2de00d"
 	flesh_color = "#90edeb"
 	slowdown = -1
@@ -106,70 +107,6 @@
 		)
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 	max_players = 3
-
-	base_skin_colours = list(
-		"Turquoise"   = "",
-		"Emerald"     = "_green",
-		"Amethyst"    = "_purple",
-		"Sapphire"    = "_blue",
-		"Ruby"        = "_red",
-		"Topaz"       = "_yellow",
-		"Quartz"      = "_white",
-		"Jet"         = "_black"
-	)
-
-/decl/species/adherent/New()
-	equip_adjust = list(
-		"[BP_L_HAND]" = list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 0, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = 0, "y" = 14)
-			),
-
-		"[BP_R_HAND]" = list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 0, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = 0, "y" = 14)
-			),
-
-		"[slot_back_str]" = list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 0, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = 0, "y" = 14)
-			),
-
-		"[slot_belt_str]" = list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 0, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = 0, "y" = 14)
-			),
-
-		"[slot_head_str]" =   list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 3, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = -3, "y" = 14)
-			),
-
-		"[slot_l_ear_str]" =  list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 0, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = 0,  "y" = 14)
-			),
-
-		"[slot_r_ear_str]" =  list(
-			"[NORTH]" = list("x" = 0, "y" = 14),
-			"[EAST]"  = list("x" = 0, "y" = 14),
-			"[SOUTH]" = list("x" = 0, "y" = 14),
-			"[WEST]"  = list("x" = 0,  "y" = 14)
-			)
-	)
-	..()
 
 /decl/species/adherent/can_overcome_gravity(var/mob/living/carbon/human/H)
 	. = FALSE

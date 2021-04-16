@@ -13,7 +13,6 @@
 
 /decl/species/neoavian
 	name = SPECIES_AVIAN
-	bodytype = BODYTYPE_AVIAN
 	name_plural = "Neo-Avians"
 	description = "Avian species, largely crows, magpies and other corvids, were among the first sophonts uplifted to aid in colonizing Mars. \
 	These days they are more commonly found pursuing their own careers and goals on the fringes of human space or around their adopted homeworld \
@@ -22,16 +21,11 @@
 	age_descriptor = /datum/appearance_descriptor/age/neoavian
 
 	meat_type = /obj/item/chems/food/snacks/meat/chicken
-	health_hud_intensity = 3
 
 	base_color = "#000616"
 	reagent_tag = IS_AVIAN
 
-	icobase =         'mods/species/neoavians/icons/body.dmi'
-	deform =          'mods/species/neoavians/icons/body.dmi'
-	damage_overlays = 'mods/species/neoavians/icons/dam_avian.dmi'
-	blood_mask =      'mods/species/neoavians/icons/blood_avian.dmi'
-	limb_blend =      ICON_MULTIPLY
+	available_bodytypes = list(/decl/bodytype/avian)
 
 	total_health = 80
 	brute_mod = 1.35
@@ -74,21 +68,6 @@
 			/decl/cultural_info/culture/neoavian/saurian,
 			/decl/cultural_info/culture/other
 		)
-	)
-
-/decl/species/neoavian/New()
-	..()
-	equip_adjust = list(
-		BP_L_HAND =          list("[NORTH]" = list("x" =  3, "y" = -3), "[EAST]" = list("x" =  1, "y" = -3), "[SOUTH]" = list("x" = -3, "y" = -3),  "[WEST]" = list("x" = -5, "y" = -3)),
-		BP_R_HAND =          list("[NORTH]" = list("x" = -3, "y" = -3), "[EAST]" = list("x" =  5, "y" = -3), "[SOUTH]" = list("x" =  3, "y" = -3),  "[WEST]" = list("x" = -1, "y" = -3)),
-		slot_head_str =      list("[NORTH]" = list("x" =  0, "y" = -5), "[EAST]" = list("x" =  1, "y" = -5), "[SOUTH]" = list("x" =  0, "y" = -5),  "[WEST]" = list("x" = -1, "y" = -5)),
-		slot_wear_mask_str = list("[NORTH]" = list("x" =  0, "y" = -6), "[EAST]" = list("x" =  2, "y" = -6), "[SOUTH]" = list("x" =  0, "y" = -6),  "[WEST]" = list("x" = -2, "y" = -6)),
-		slot_glasses_str =   list("[NORTH]" = list("x" =  0, "y" = -6), "[EAST]" = list("x" =  1, "y" = -6), "[SOUTH]" = list("x" =  0, "y" = -6),  "[WEST]" = list("x" = -1, "y" = -6)),
-		slot_back_str =      list("[NORTH]" = list("x" =  0, "y" = -6), "[EAST]" = list("x" =  3, "y" = -6), "[SOUTH]" = list("x" =  0, "y" = -6),  "[WEST]" = list("x" = -3, "y" = -6)),
-		slot_w_uniform_str = list("[NORTH]" = list("x" =  0, "y" = -6), "[EAST]" = list("x" = -1, "y" = -6), "[SOUTH]" = list("x" =  0, "y" = -6),  "[WEST]" = list("x" =  1, "y" = -6)),
-		slot_wear_id_str =   list("[NORTH]" = list("x" =  0, "y" = -6), "[EAST]" = list("x" = -1, "y" = -6), "[SOUTH]" = list("x" =  0, "y" = -6),  "[WEST]" = list("x" =  1, "y" = -6)),
-		slot_wear_suit_str = list("[NORTH]" = list("x" =  0, "y" = -6), "[EAST]" = list("x" = -1, "y" = -6), "[SOUTH]" = list("x" =  0, "y" = -6),  "[WEST]" = list("x" =  1, "y" = -6)),
-		slot_belt_str =      list("[NORTH]" = list("x" =  0, "y" = -6), "[EAST]" = list("x" = -1, "y" = -6), "[SOUTH]" = list("x" =  0, "y" = -6),  "[WEST]" = list("x" =  1, "y" = -6))
 	)
 
 /decl/species/neoavian/equip_default_fallback_uniform(var/mob/living/carbon/human/H)

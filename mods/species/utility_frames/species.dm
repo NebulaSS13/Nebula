@@ -13,16 +13,12 @@
 	name =                  SPECIES_FRAME
 	name_plural =           "Utility Frames"
 	description =           "Simple AI-driven robots are used for many menial or repetitive tasks in human space."
-	icobase =               'mods/species/utility_frames/icons/body.dmi'
-	deform =                'mods/species/utility_frames/icons/body.dmi'
 	preview_icon =          'mods/species/utility_frames/icons/preview.dmi'
-	limb_blend =            ICON_MULTIPLY
 	cyborg_noun = null
 
+	available_bodytypes = list(/decl/bodytype/utility_frame)
 	age_descriptor =        /datum/appearance_descriptor/age/utility_frame
-
 	hidden_from_codex =     FALSE
-	bodytype =              BODYTYPE_HUMANOID
 	species_flags =         SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON
 	spawn_flags =           SPECIES_CAN_JOIN
 	appearance_flags =      HAS_SKIN_COLOR | HAS_EYE_COLOR
@@ -50,9 +46,9 @@
 		/decl/natural_attack/kick,
 		/decl/natural_attack/punch
 	)
-	genders = list(
-		NEUTER,
-		PLURAL
+	available_pronouns = list(
+		/decl/pronouns,
+		/decl/pronouns/neuter
 	)
 	available_cultural_info = list(
 		TAG_CULTURE = list(/decl/cultural_info/culture/synthetic)

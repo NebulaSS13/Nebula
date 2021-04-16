@@ -29,7 +29,8 @@
 		update_dna()
 
 /mob/living/carbon/human/proc/randomize_gender()
-	set_gender(pick(species.genders), TRUE)
+	var/decl/pronouns/pronouns = pick(species.available_pronouns)
+	set_gender(pronouns.name, TRUE)
 
 /mob/living/carbon/human/proc/change_hair(var/hair_style)
 	if(!hair_style)

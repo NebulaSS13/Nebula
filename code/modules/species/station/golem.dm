@@ -1,10 +1,14 @@
+/decl/bodytype/golem
+	name =              "humanoid"
+	bodytype_category = BODYTYPE_HUMANOID
+	icon_base =         'icons/mob/human_races/species/golem/body.dmi'
+	husk_icon =         'icons/mob/human_races/species/golem/husk.dmi'
+
 /decl/species/golem
 	name = SPECIES_GOLEM
 	name_plural = "Golems"
 
-	icobase = 'icons/mob/human_races/species/golem/body.dmi'
-	deform = 'icons/mob/human_races/species/golem/body.dmi'
-	husk_icon = 'icons/mob/human_races/species/golem/husk.dmi'
+	available_bodytypes = list(/decl/bodytype/golem)
 
 	unarmed_attacks = list(/decl/natural_attack/stomp, /decl/natural_attack/kick, /decl/natural_attack/punch)
 	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON
@@ -34,7 +38,7 @@
 		)
 
 	death_message = "becomes completely motionless..."
-	genders = list(NEUTER)
+	available_pronouns = list(/decl/pronouns/neuter)
 
 	is_crystalline = TRUE
 

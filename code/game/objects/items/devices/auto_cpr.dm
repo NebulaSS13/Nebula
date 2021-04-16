@@ -12,7 +12,7 @@
 /obj/item/auto_cpr/mob_can_equip(mob/living/carbon/human/H, slot, disable_warning = 0, force = 0)
 	. = ..()
 	if(. && slot == slot_wear_suit_str)
-		. = H.species.get_bodytype() == BODYTYPE_HUMANOID
+		. = H.get_bodytype_category() == BODYTYPE_HUMANOID
 
 /obj/item/auto_cpr/attack(mob/living/carbon/human/M, mob/living/user, var/target_zone)
 	if(istype(M) && user.a_intent == I_HELP)

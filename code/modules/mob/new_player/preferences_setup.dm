@@ -1,7 +1,9 @@
 //The mob should have a gender you want before running this proc. Will run fine without H
 /datum/preferences/proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
+
 	var/decl/species/current_species = get_species_by_key(species || GLOB.using_map.default_species)
-	gender = pick(current_species.genders)
+	var/decl/pronouns/pronouns = pick(current_species.available_pronouns)
+	gender = pronouns.name
 
 	h_style = random_hair_style(gender, species)
 	f_style = random_facial_hair_style(gender, species)

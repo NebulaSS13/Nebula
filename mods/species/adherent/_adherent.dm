@@ -1,5 +1,5 @@
 #define SPECIES_ADHERENT  "Adherent"
-#define BODYTYPE_ADHERENT "Adherent Body"
+#define BODYTYPE_ADHERENT "adherent body"
 #define LANGUAGE_ADHERENT "Protocol"
 
 #define BP_FLOAT        "floatation disc"

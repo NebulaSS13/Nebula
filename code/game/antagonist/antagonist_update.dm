@@ -38,8 +38,8 @@
 	var/image/I = image('icons/mob/hud.dmi', loc = other.current, icon_state = indicator, layer = ABOVE_HUMAN_LAYER)
 	if(ishuman(other.current))
 		var/mob/living/carbon/human/H = other.current
-		I.pixel_x = H.species.antaghud_offset_x
-		I.pixel_y = H.species.antaghud_offset_y
+		I.pixel_x = H.bodytype.antaghud_offset_x
+		I.pixel_y = H.bodytype.antaghud_offset_y
 	return I
 
 /decl/special_role/proc/update_all_icons()

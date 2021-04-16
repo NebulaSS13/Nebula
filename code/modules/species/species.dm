@@ -6,7 +6,7 @@
 
 	// Descriptors and strings.
 	var/name
-	var/name_plural                                      // Pluralized name (since "[name]s" is not always valid)
+	var/name_plural                           // Pluralized name (since "[name]s" is not always valid)
 	var/description
 	var/codex_description
 	var/ooc_codex_information
@@ -14,33 +14,14 @@
 	var/hidden_from_codex = TRUE
 	var/is_crystalline = FALSE
 
-	// Icon/appearance vars.
-	var/icobase =      'icons/mob/human_races/species/human/body.dmi'          // Normal icon set.
-	var/deform =       'icons/mob/human_races/species/human/deformed_body.dmi' // Mutated icon set.
 	var/preview_icon = 'icons/mob/human_races/species/human/preview.dmi'
-	var/lip_icon =     'icons/mob/human_races/species/human/lips.dmi'
-	var/husk_icon =    'icons/mob/human_races/species/default_husk.dmi'
-	var/bandages_icon
-	var/bodytype = BODYTYPE_OTHER
-	var/limb_icon_intensity = 1.5
+	var/list/available_bodytypes = list()
+	var/decl/bodytype/default_bodytype
 
-	// Damage overlay and masks.
-	var/damage_overlays = 'icons/mob/human_races/species/human/damage_overlay.dmi'
-	var/damage_mask =     'icons/mob/human_races/species/human/damage_mask.dmi'
-	var/blood_mask =      'icons/mob/human_races/species/human/blood_mask.dmi'
-
-	var/blood_color = COLOR_BLOOD_HUMAN               // Red.
-	var/flesh_color = "#ffc896"               // Pink.
+	var/blood_color = COLOR_BLOOD_HUMAN       // Red.
+	var/flesh_color = "#ffc896"             // Pink.
 	var/blood_oxy = 1
 	var/base_color                            // Used by changelings. Should also be used for icon previes..
-	var/limb_blend = ICON_ADD
-	var/tail                                  // Name of tail state in species effects icon file.
-	var/tail_animation                        // If set, the icon to obtain tail animation states from.
-	var/tail_blend = ICON_ADD
-	var/tail_hair
-	var/tail_hair_blend = ICON_ADD
-	var/tail_icon = 'icons/effects/species.dmi'
-	var/tail_states = 1
 
 	var/list/hair_styles
 	var/list/facial_hair_styles
@@ -51,15 +32,9 @@
 	var/default_f_style = "Shaved"
 
 	var/icon_cache_uid                        // Used for mob icon cache string.
-	var/icon_template = 'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.
-	var/pixel_offset_x = 0                    // Used for offsetting large icons.
-	var/pixel_offset_y = 0                    // Used for offsetting large icons.
-	var/pixel_offset_z = 0                    // Used for offsetting large icons.
-	var/antaghud_offset_x = 0                 // As above, but specifically for the antagHUD indicator.
-	var/antaghud_offset_y = 0                 // As above, but specifically for the antagHUD indicator.
 
-	var/mob_size	= MOB_SIZE_MEDIUM
-	var/strength    = STR_MEDIUM
+	var/mob_size = MOB_SIZE_MEDIUM
+	var/strength = STR_MEDIUM
 	var/show_ssd = "fast asleep"
 	var/short_sighted                         // Permanent weldervision.
 	var/light_sensitive                       // Ditto, but requires sunglasses to fix
@@ -118,7 +93,6 @@
 	var/sniff_message_3p = "sniffs the air."
 	var/sniff_message_1p = "You sniff the air."
 
-	var/limbs_are_nonsolid
 	var/spawns_with_stack = 0
 	// Environment tolerance/life processes vars.
 	var/reagent_tag                                             // Used for metabolizing reagents.
@@ -160,7 +134,6 @@
 	// HUD data vars.
 	var/datum/hud_data/hud
 	var/hud_type
-	var/health_hud_intensity = 1
 
 	var/grab_type = /decl/grab/normal/passive // The species' default grab type.
 
@@ -174,7 +147,11 @@
 	var/spawn_flags = 0           // Flags that specify who can spawn as this species
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
 	// Move intents. Earlier in list == default for that type of movement.
-	var/list/move_intents = list(/decl/move_intent/walk, /decl/move_intent/run, /decl/move_intent/creep)
+	var/list/move_intents = list(
+		/decl/move_intent/walk, 
+		/decl/move_intent/run, 
+		/decl/move_intent/creep
+	)
 
 	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
 	var/greater_form              // Greater form, if any, ie. human for monkeys.
@@ -200,11 +177,9 @@
 
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
 
-	var/list/skin_overlays = list()
-
 	// An associative list of target zones (ex. BP_CHEST, BP_MOUTH) mapped to all possible keys associated
-	// with the zone. Unused on vanilla Nebula at time of commit, will be used by hands and inventory
-	// rewrite and for species with body layouts that do not map directly to the standard humanoid body.
+	// with the zone. Used for species with body layouts that do not map directly to the standard humanoid 
+	// body, currently serpentids and mantids.
 	var/list/limb_mapping
 
 	var/list/has_limbs = list(
@@ -223,10 +198,11 @@
 
 	var/list/override_limb_types // Used for species that only need to change one or two entries in has_limbs.
 
-	// The basic skin colours this species uses
-	var/list/base_skin_colours
-
-	var/list/genders = list(MALE, FEMALE, PLURAL)
+	var/list/available_pronouns = list(
+		/decl/pronouns,
+		/decl/pronouns/female,
+		/decl/pronouns/male
+	)
 
 	// Bump vars
 	var/bump_flag = HUMAN	// What are we considered to be when bumped?
@@ -235,14 +211,9 @@
 
 	var/pass_flags = 0
 	var/breathing_sound = 'sound/voice/monkey.ogg'
-	var/list/equip_adjust = list()
-	var/list/equip_overlays = list()
 
 	var/list/base_auras
 
-	var/sexybits_location	//organ tag where they are located if they can be kicked for increased pain
-
-	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
 	var/job_skill_buffs = list()				// A list containing jobs (/datum/job), with values the extra points that job recieves.
 
 	var/list/appearance_descriptors = list(
@@ -287,29 +258,25 @@
 	var/list/exertion_emotes_synthetic
 
 	var/list/traits = list() // An associative list of /decl/traits and trait level - See individual traits for valid levels
-/*
-These are all the things that can be adjusted for equipping stuff and
-each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify
-the direction to shift the thing and what direction.
 
-example:
-	equip_adjust = list(
-		slot_back_str = list(NORTH = list(SOUTH = 12, EAST = 7), EAST = list(SOUTH = 2, WEST = 12))
-			)
-
-This would shift back items (backpacks, axes, etc.) when the mob
-is facing either north or east.
-When the mob faces north the back item icon is shifted 12 pixes down and 7 pixels to the right.
-When the mob faces east the back item icon is shifted 2 pixels down and 12 pixels to the left.
-
-The slots that you can use are found in items_clothing.dm and are the inventory slot string ones, so make sure
-	you use the _str version of the slot.
-*/
 
 /decl/species/Initialize()
 	..()
 	if(!codex_description)
 		codex_description = description
+
+	for(var/bodytype in available_bodytypes)
+		available_bodytypes -= bodytype
+		available_bodytypes += GET_DECL(bodytype)
+
+	if(ispath(default_bodytype))
+		default_bodytype = GET_DECL(default_bodytype)
+	else if(length(available_bodytypes) && !default_bodytype)
+		default_bodytype = available_bodytypes[1]
+
+	for(var/pronoun in available_pronouns)
+		available_pronouns -= pronoun
+		available_pronouns += GET_DECL(pronoun)
 
 	for(var/token in ALL_CULTURAL_TAGS)
 

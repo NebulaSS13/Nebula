@@ -22,7 +22,7 @@
 		BP_BRAIN = /obj/item/organ/internal/brain/starlight
 		)
 	spawn_flags = SPECIES_IS_RESTRICTED
-	genders = list(NEUTER)
+	available_pronouns = list(/decl/pronouns/neuter)
 	force_cultural_info = list(
 		TAG_CULTURE = /decl/cultural_info/culture/other
 	)

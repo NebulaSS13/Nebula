@@ -26,11 +26,11 @@
 			if(!light_overlay_image)
 				if(ishuman(user_mob))
 					var/mob/living/carbon/human/user_human = user_mob
-					var/use_icon = LAZYACCESS(sprite_sheets, user_human.species.get_bodytype(user_human))
+					var/use_icon = LAZYACCESS(sprite_sheets, user_human.get_bodytype_category(user_human))
 					if(use_icon)
-						light_overlay_image = user_human.species.get_offset_overlay_image(TRUE, use_icon, "[light_overlay]", color, slot)
+						light_overlay_image = user_human.bodytype.get_offset_overlay_image(TRUE, use_icon, "[light_overlay]", color, slot)
 					else
-						light_overlay_image = user_human.species.get_offset_overlay_image(FALSE, 'icons/mob/light_overlays.dmi', "[light_overlay]", color, slot)
+						light_overlay_image = user_human.bodytype.get_offset_overlay_image(FALSE, 'icons/mob/light_overlays.dmi', "[light_overlay]", color, slot)
 				else
 					light_overlay_image = overlay_image('icons/mob/light_overlays.dmi', "[light_overlay]", null, RESET_COLOR)
 			ret.overlays |= light_overlay_image
@@ -102,8 +102,8 @@
 		var/image/light_overlay = image(ret.icon, "[ret.icon_state]_light")
 		if(ishuman(user_mob))
 			var/mob/living/carbon/human/H = user_mob
-			if(H.species.get_bodytype(H) != bodytype)
-				light_overlay = H.species.get_offset_overlay_image(FALSE, light_overlay.icon, light_overlay.icon_state, null, slot)
+			if(H.get_bodytype_category() != bodytype)
+				light_overlay = H.bodytype.get_offset_overlay_image(FALSE, light_overlay.icon, light_overlay.icon_state, null, slot)
 		ret.overlays += light_overlay
 	return ret
 

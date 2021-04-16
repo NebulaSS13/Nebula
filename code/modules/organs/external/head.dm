@@ -15,7 +15,7 @@
 	artery_name = "cartoid artery"
 	cavity_name = "cranial"
 
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
 
 	var/draw_eyes = TRUE
 	var/glowing_eyes = FALSE
@@ -110,7 +110,7 @@
 			if(eye_glow) overlays |= eye_glow
 
 		if(owner.lip_style && !BP_IS_PROSTHETIC(src) && (species && (species.appearance_flags & HAS_LIPS)))
-			var/icon/lip_icon = new/icon(species?.lip_icon || 'icons/mob/human_races/species/lips.dmi', "lipstick_s")	
+			var/icon/lip_icon = new/icon(bodytype.get_lip_icon(owner) || 'icons/mob/human_races/species/lips.dmi', "lipstick_s")	
 			lip_icon.Blend(owner.lip_style, ICON_MULTIPLY)
 			overlays |= lip_icon
 			mob_icon.Blend(lip_icon, ICON_OVERLAY)
@@ -120,7 +120,7 @@
 	return mob_icon
 
 /obj/item/organ/external/head/proc/get_hair_icon()
-	var/image/res = image(species.icon_template,"")
+	var/image/res = image(bodytype.icon_template,"")
 	if(owner.f_style)
 		var/datum/sprite_accessory/facial_hair_style = GLOB.facial_hair_styles_list[owner.f_style]
 		if(facial_hair_style)

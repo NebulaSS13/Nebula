@@ -18,7 +18,8 @@
 	var/hydration = 400
 
 	var/obj/item/tank/internal = null//Human/Monkey
-	var/decl/species/species //Contains icon generation and language information, set during New().
+	var/decl/species/species   // Contains environment tolerances and language information, set during New().
+	var/decl/bodytype/bodytype // Contains icon generation info, set during set_species().
 
 	//these two help govern taste. The first is the last time a taste message was shown to the plaer.
 	//the second is the message in question.
