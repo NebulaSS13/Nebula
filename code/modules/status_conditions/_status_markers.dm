@@ -103,10 +103,10 @@
 	if(length(visible_markers))
 		var/x_offset = 12 - round(((length(visible_markers)-1) * 5))
 		var/y_offset = (world.icon_size - 4)
-		var/decl/species/species = owner.get_species()
-		if(species)
-			x_offset += species.antaghud_offset_x
-			y_offset += species.antaghud_offset_y
+		var/decl/bodytype/bodytype = owner.get_bodytype()
+		if(bodytype)
+			x_offset += bodytype.antaghud_offset_x
+			y_offset += bodytype.antaghud_offset_y
 		for(var/i = 1 to length(visible_markers))
 			var/obj/marker = visible_markers[i]
 			var/new_x_offset = x_offset + ((i-1) * 10)
