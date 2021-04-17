@@ -14,3 +14,10 @@
 	hardness = 0
 	weight = 1
 	opacity = 0.3
+
+/decl/material/gas/New()
+	if(!liquid_name)
+		liquid_name = "liquid [name]"
+	if(!solid_name)
+		solid_name = "frozen [name]"
+	..()
