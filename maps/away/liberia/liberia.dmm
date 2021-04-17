@@ -2538,6 +2538,7 @@
 	},
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/glass/fiber/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/plasteel{
@@ -7027,6 +7028,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/glass/fiber/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "rc" = (
@@ -7779,6 +7781,7 @@
 /obj/item/stack/material/plasteel/fifty,
 /obj/item/stack/material/plasteel/fifty,
 /obj/item/stack/material/plasteel/fifty,
+/obj/item/stack/material/copper/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "BX" = (
@@ -8089,6 +8092,7 @@
 /obj/item/stack/material/ocp/fifty,
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/glass/fiber/fifty,
 /obj/item/stack/material/glass/reinforced/fifty,
 /obj/item/stack/material/aluminium/fifty,
 /obj/item/stack/material/plasteel/fifty,

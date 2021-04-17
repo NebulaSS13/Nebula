@@ -10,7 +10,7 @@
 	one_hand_penalty = 1 //bulkier than an e-gun, but not quite the size of a carbine
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
 

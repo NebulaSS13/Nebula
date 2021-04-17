@@ -76,7 +76,7 @@
 	desc = "Yours is the drill that will pierce through the rock walls."
 	drill_verb = "drilling"
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/pickaxe/jackhammer
 	name = "sonic jackhammer"
@@ -95,7 +95,7 @@
 	drill_verb = "drilling"
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 

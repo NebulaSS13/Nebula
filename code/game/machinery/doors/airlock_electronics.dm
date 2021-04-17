@@ -2,7 +2,7 @@
 	name = "airlock electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"
-	material = /decl/material/solid/glass
+	material = /decl/material/solid/fiberglass
 
 	build_path = /obj/machinery/door/airlock
 	board_type = "door"

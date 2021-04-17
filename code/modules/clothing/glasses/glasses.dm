@@ -65,7 +65,8 @@
 	electric = TRUE
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/glass = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
@@ -93,7 +94,10 @@
 	icon = 'icons/clothing/eyes/goggles_welding.dmi'
 	action_button_name = "Flip Welding Goggles"
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT
+	)
 	use_alt_layer = TRUE
 	flash_protection = FLASH_PROTECTION_MAJOR
 	tint = TINT_HEAVY

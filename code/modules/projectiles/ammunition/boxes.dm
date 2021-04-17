@@ -86,14 +86,14 @@
 	name = "illumination shell holder"
 	ammo_type = /obj/item/ammo_casing/shotgun/flash
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	marking_color = COLOR_PALE_YELLOW
 
 /obj/item/ammo_magazine/shotholder/stun
 	name = "stun shell holder"
 	ammo_type = /obj/item/ammo_casing/shotgun/stunshell
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	marking_color = COLOR_MUZZLE_FLASH
 
 /obj/item/ammo_magazine/shotholder/empty

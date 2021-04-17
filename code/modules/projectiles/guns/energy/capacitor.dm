@@ -57,7 +57,7 @@ var/list/laser_wavelengths
 	material = /decl/material/solid/metal/steel
 	projectile_type = /obj/item/projectile/beam/variable
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 

@@ -146,4 +146,4 @@
 /obj/item/stock_parts/network_receiver/network_lock/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)

@@ -3,7 +3,7 @@
 	desc = "An atmospheric scanner module. It can scan the surroundings and report the composition of gases."
 	can_run_scan = 1
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/computer/scanner/atmos/can_use_scanner(mob/user, atom/target, proximity = TRUE)
 	if(!..())

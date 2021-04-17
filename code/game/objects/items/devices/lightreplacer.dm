@@ -46,7 +46,7 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE
 	)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY

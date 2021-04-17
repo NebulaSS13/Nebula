@@ -18,6 +18,11 @@ W
 	contains = list(/obj/item/stack/material/glass/fifty)
 	containername = "glass sheets crate"
 
+/decl/hierarchy/supply_pack/materials/fiberglass50
+	name = "50 fiberglass sheets"
+	contains = list(/obj/item/stack/material/glass/fiber/fifty)
+	containername = "fiberglass sheets crate"
+
 /decl/hierarchy/supply_pack/materials/plastic50
 	name = "50 plastic sheets"
 	contains = list(/obj/item/stack/material/plastic/fifty)
@@ -32,6 +37,11 @@ W
 	name = "50 plasteel sheets"
 	contains = list(/obj/item/stack/material/plasteel/fifty)
 	containername = "plasteel sheets crate"
+
+/decl/hierarchy/supply_pack/materials/copper50
+	name = "50 copper ingots"
+	contains = list(/obj/item/stack/material/copper/fifty)
+	containername = "copper ingots crate"
 
 /decl/hierarchy/supply_pack/materials/titanium50
 	name = "50 titanium sheets"

@@ -6,7 +6,7 @@
 	icon_state = "scan_module"
 	origin_tech = "{'magnets':1}"
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	base_type = /obj/item/stock_parts/scanning_module
 	w_class = ITEM_SIZE_TINY
 
@@ -25,7 +25,7 @@
 	icon_state = "micro_laser"
 	origin_tech = "{'magnets':1}"
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	base_type = /obj/item/stock_parts/micro_laser
 	w_class = ITEM_SIZE_TINY
 
@@ -43,7 +43,7 @@
 	icon_state = "capacitor"
 	origin_tech = "{'powerstorage':1}"
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	var/charge = 0
 	var/max_charge = 1000
 	base_type = /obj/item/stock_parts/capacitor
@@ -72,7 +72,7 @@
 	origin_tech = "{'magnets':3}"
 	rating = 2
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/manipulator/nano
 	name = "nano-manipulator"
@@ -114,7 +114,7 @@
 	rating = 3
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 
@@ -152,7 +152,7 @@
 	origin_tech = "{'powerstorage':5,'materials':4}"
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 	rating = 3
