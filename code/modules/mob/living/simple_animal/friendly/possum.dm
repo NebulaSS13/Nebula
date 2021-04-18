@@ -94,6 +94,10 @@
 /mob/living/simple_animal/opossum/poppy
 	name = "Poppy the Safety Possum"
 	desc = "It's an opossum, a small scavenging marsupial. It's wearing appropriate personal protective equipment, though."
+	icon_state = "poppy"
+	item_state = "poppy"
+	icon_living = "poppy"
+	icon_dead = "poppy_dead"
 	icon = 'icons/mob/simple_animal/poppy_possum.dmi'
 	var/aaa_words = list("delaminat", "meteor", "fire", "breach")
 
