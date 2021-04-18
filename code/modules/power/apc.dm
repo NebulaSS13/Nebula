@@ -70,6 +70,20 @@
 		/obj/item/cell/hyper
 	)
 
+/obj/machinery/power/apc/derelict
+	lighting = 0
+	equipment = 0
+	environ = 0
+	locked = 0
+	uncreated_component_parts = list(
+		/obj/item/cell/crap/empty
+	)
+
+/obj/machinery/power/apc/derelict/full
+	uncreated_component_parts = list(
+		/obj/item/cell/crap
+	)
+
 // Main APC code
 /obj/machinery/power/apc
 	name = "area power controller"
