@@ -16,7 +16,7 @@
 #define CE_STABLE        "stable"       // Stabilizing brain, pulse and breathing
 #define CE_ANTIBIOTIC    "antibiotic"   // Spaceacilin
 #define CE_BLOODRESTORE  "bloodrestore" // Iron/nutriment
-#define CE_PAINKILLER    "painkiller"
+#define CE_PAINKILLER    "painkiller"   // Reduces the impact of shock/pain
 #define CE_ALCOHOL       "alcohol"      // Liver filtering
 #define CE_ALCOHOL_TOXIC "alcotoxic"    // Liver damage
 #define CE_SPEEDBOOST    "gofast"       // Stimulants
@@ -37,6 +37,8 @@
 #define CE_ENERGETIC     "energetic"    // Speeds up stamina recovery.
 #define	CE_VOICELOSS     "whispers"     // Lowers the subject's voice to a whisper
 #define CE_GLOWINGEYES   "eyeglow"      // Causes eyes to glow.
+
+#define GET_CHEMICAL_EFFECT(X, C) (LAZYACCESS(X.chem_effects, C) || 0)
 
 //reagent flags
 #define IGNORE_MOB_SIZE BITFLAG(0)
