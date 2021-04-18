@@ -1,3 +1,7 @@
+# Branch Structure
+
+The repository has two main branches, `dev` and `stable`. Feature implementation, new assets, new maps, and other 'content' pull requests should be pointed at `dev`, while bugfixes for existing code, or fixes to broken assets like sprites or sounds, should be pointed at `stable`. `stable` will be merged back into `dev` periodically to keep the `dev` branch up to date with fixes, so duplicate pull requests are not necessary.
+
 # Contribution Standards
 
 This is a quick and dirty set of agreed-upon standards for contributions to the codebase. It is fairly informal at the moment and should be considered liable to change.
