@@ -139,7 +139,7 @@ var/list/slot_equipment_priority = list( \
 	return
 
 /mob/proc/put_in_active_hand(var/obj/item/W)
-	. = equip_to_slot_if_possible(W, get_active_held_item_slot())
+	. = equip_to_slot_if_possible(W, get_active_held_item_slot(), disable_warning = TRUE)
 
 //Puts the item into (one of) our inactive hand(s) if possible. returns 1 on success.
 /mob/proc/put_in_inactive_hand(var/obj/item/W)
@@ -147,7 +147,7 @@ var/list/slot_equipment_priority = list( \
 	for(var/slot in get_empty_hand_slots())
 		if(slot == active_slot)
 			continue
-		. = equip_to_slot_if_possible(W, slot)
+		. = equip_to_slot_if_possible(W, slot, disable_warning = TRUE)
 		if(.)
 			break
 //Puts the item our active hand if possible. Failing that it tries our inactive hand. Returns 1 on success.
