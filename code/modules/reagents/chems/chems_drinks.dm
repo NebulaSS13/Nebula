@@ -445,6 +445,7 @@
 	color = "#100800"
 	adj_temp = -5
 	adj_sleepy = -2
+	euphoriant = 30
 
 	glass_name = "mutagen cola"
 	glass_desc = "The unstable energy of a radioactive isotope in beverage form."
@@ -457,9 +458,10 @@
 		return
 
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
-	ADJ_STATUS(M, STAT_JITTER, 20)
-	ADJ_STATUS(M, STAT_DRUGGY, 30)
-	ADJ_STATUS(M, STAT_DIZZY, 5)
+	SET_STATUS_MAX(M, STAT_JITTER, 20)
+	SET_STATUS_MAX(M, STAT_DIZZY,  20)
+	ADJ_STATUS(M, STAT_DIZZY, 2)
+	ADJ_STATUS(M, STAT_JITTER, 2)
 	M.set_status(STAT_DROWSY, 0)
 
 /decl/material/liquid/drink/grenadine

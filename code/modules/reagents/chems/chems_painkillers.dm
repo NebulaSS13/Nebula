@@ -44,7 +44,7 @@
 /decl/material/liquid/painkillers/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
 	..()
 	M.set_hallucination(120, 30)
-	ADJ_STATUS(M, STAT_DRUGGY, 10)
+	SET_STATUS_MAX(M, STAT_DRUGGY, 10)
 	M.add_chemical_effect(CE_PAINKILLER, pain_power*0.5) //extra painkilling for extra trouble
 	M.add_chemical_effect(CE_BREATHLOSS, 0.6) //Have trouble breathing, need more air
 	if(isboozed(M))

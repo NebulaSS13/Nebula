@@ -193,7 +193,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/solvent_max_damage  = 0
 	var/slipperiness
 	var/euphoriant // If set, ingesting/injecting this material will cause the rainbow high overlay/behavior.
-	var/euphoriant_max // Set a cap on how much drugged state the material can cause.
 
 	var/glass_icon = DRINK_ICON_DEFAULT
 	var/glass_name = "something"
@@ -504,7 +503,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 			M.emote(pick("twitch", "drool", "moan"))
 
 	if(euphoriant)
-		SET_STATUS_MAX(M, STAT_DRUGGY, min(GET_STATUS(M, STAT_DRUGGY) + euphoriant, euphoriant_max))
+		SET_STATUS_MAX(M, STAT_DRUGGY, euphoriant)
 
 /decl/material/proc/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(affect_blood_on_ingest)

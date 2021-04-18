@@ -35,7 +35,7 @@
 	. = ..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.set_hallucination(60, 20)
-	ADJ_STATUS(M, STAT_DRUGGY, 2)
+	SET_STATUS_MAX(M, STAT_DRUGGY, 10)
 
 /decl/material/solid/blackpepper
 	name = "black pepper"
