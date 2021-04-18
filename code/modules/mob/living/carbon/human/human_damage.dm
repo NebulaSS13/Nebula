@@ -172,8 +172,9 @@
 
 	if (!heal)
 		amount = amount * species.get_toxins_mod(src)
-		if (CE_ANTITOX in chem_effects)
-			amount *= 1 - (LAZYACCESS(chem_effects, CE_ANTITOX) * 0.25)
+		var/antitox = GET_CHEMICAL_EFFECT(src, CE_ANTITOX)
+		if(antitox)
+			amount *= 1 - antitox * 0.25
 
 	var/list/pick_organs = shuffle(internal_organs.Copy())
 
@@ -413,8 +414,8 @@ This function restores all organs.
 	if (!can_feel_pain())
 		return 0
 
-	var/traumatic_shock = getHalLoss()                 // Pain.
-	traumatic_shock -= LAZYACCESS(chem_effects, CE_PAINKILLER) // TODO: check what is actually stored here.
+	var/traumatic_shock = getHalLoss()
+	traumatic_shock -= GET_CHEMICAL_EFFECT(src, CE_PAINKILLER)
 
 	if(stat == UNCONSCIOUS)
 		traumatic_shock *= 0.6

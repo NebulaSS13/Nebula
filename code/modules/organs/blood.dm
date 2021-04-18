@@ -295,7 +295,7 @@
 	blood_volume *= max(min_efficiency, (1-(heart.damage / heart.max_damage)))
 
 	if(!heart.open && has_chemical_effect(CE_BLOCKAGE, 1))
-		blood_volume *= max(0, 1-LAZYACCESS(chem_effects, CE_BLOCKAGE))
+		blood_volume *= max(0, 1-GET_CHEMICAL_EFFECT(src, CE_BLOCKAGE))
 
 	return min(blood_volume, 100)
 
