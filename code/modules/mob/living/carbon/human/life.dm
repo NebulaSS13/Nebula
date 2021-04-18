@@ -106,7 +106,7 @@
 /mob/living/carbon/human/proc/handle_stamina()
 	if((world.time - last_quick_move_time) > 5 SECONDS)
 		var/mod = (lying + (nutrition / initial(nutrition))) / 2
-		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1+LAZYACCESS(chem_effects,CE_ENERGETIC)))
+		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1 + GET_CHEMICAL_EFFECT(src, CE_ENERGETIC)))
 
 /mob/living/carbon/human/set_stat(var/new_stat)
 	var/old_stat = stat
@@ -815,7 +815,7 @@
 	if(has_chemical_effect(CE_TOXIN, 1) || radiation)
 		vomit_score += 0.5 * getToxLoss()
 	if(has_chemical_effect(CE_ALCOHOL_TOXIC, 1))
-		vomit_score += 10 * LAZYACCESS(chem_effects, CE_ALCOHOL_TOXIC)
+		vomit_score += 10 * GET_CHEMICAL_EFFECT(src, CE_ALCOHOL_TOXIC)
 	if(has_chemical_effect(CE_ALCOHOL, 1))
 		vomit_score += 10
 	if(stat != DEAD && vomit_score > 25 && prob(10))
@@ -1073,5 +1073,5 @@
 
 /mob/living/carbon/human/update_living_sight()
 	..()
-	if((CE_THIRDEYE in chem_effects) || (MUTATION_XRAY in mutations))
+	if(GET_CHEMICAL_EFFECT(src, CE_THIRDEYE) || (MUTATION_XRAY in mutations))
 		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)

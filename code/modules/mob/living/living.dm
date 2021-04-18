@@ -779,15 +779,11 @@ default behaviour is:
 	return
 
 /mob/living/proc/has_chemical_effect(var/chem, var/threshold_over, var/threshold_under)
-	var/val = LAZYACCESS(chem_effects, chem)
+	var/val = GET_CHEMICAL_EFFECT(src, chem)
 	. = (isnull(threshold_over) || val >= threshold_over) && (isnull(threshold_under) || val <= threshold_under)
 
 /mob/living/proc/add_chemical_effect(var/effect, var/magnitude = 1)
-	magnitude += LAZYACCESS(chem_effects, effect)
-	LAZYSET(chem_effects, effect, magnitude)
-
-/mob/living/proc/add_up_to_chemical_effect(var/effect, var/magnitude = 1)
-	magnitude = max(magnitude, LAZYACCESS(chem_effects, effect))
+	magnitude += GET_CHEMICAL_EFFECT(src, effect)
 	LAZYSET(chem_effects, effect, magnitude)
 
 /mob/living/proc/adjust_immunity(var/amt)

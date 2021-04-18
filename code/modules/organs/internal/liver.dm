@@ -28,11 +28,11 @@
 			spawn owner.vomit()
 
 	//Detox can heal small amounts of damage
-	if (damage < max_damage && !LAZYACCESS(owner.chem_effects, CE_TOXIN))
-		heal_damage(0.2 * LAZYACCESS(owner.chem_effects, CE_ANTITOX))
+	if (damage < max_damage && !GET_CHEMICAL_EFFECT(owner, CE_TOXIN))
+		heal_damage(0.2 * GET_CHEMICAL_EFFECT(owner, CE_ANTITOX))
 
-	var/alco = LAZYACCESS(owner.chem_effects, CE_ALCOHOL)
-	var/alcotox = LAZYACCESS(owner.chem_effects, CE_ALCOHOL_TOXIC)
+	var/alco = GET_CHEMICAL_EFFECT(owner, CE_ALCOHOL)
+	var/alcotox = GET_CHEMICAL_EFFECT(owner, CE_ALCOHOL_TOXIC)
 	// Get the effectiveness of the liver.
 	var/filter_effect = 3
 	if(is_bruised())
@@ -53,14 +53,14 @@
 		take_internal_damage(alcotox, prob(90)) // Chance to warn them
 
 	// Heal a bit if needed and we're not busy. This allows recovery from low amounts of toxloss.
-	if(!alco && !LAZYACCESS(owner.chem_effects, CE_TOXIN) && !owner.radiation && damage > 0)
+	if(!alco && !GET_CHEMICAL_EFFECT(owner, CE_TOXIN) && !owner.radiation && damage > 0)
 		if(damage < min_broken_damage)
 			heal_damage(0.2)
 		if(damage < min_bruised_damage)
 			heal_damage(0.3)
 
 	//Blood regeneration if there is some space
-	owner.regenerate_blood(0.1 + LAZYACCESS(owner.chem_effects, CE_BLOODRESTORE))
+	owner.regenerate_blood(0.1 + GET_CHEMICAL_EFFECT(owner, CE_BLOODRESTORE))
 
 	// Blood loss or liver damage make you lose nutriments
 	var/blood_volume = owner.get_blood_volume()

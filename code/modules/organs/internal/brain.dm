@@ -155,10 +155,10 @@
 				oxygen_reserve = min(initial(oxygen_reserve), oxygen_reserve+1)
 			if(!oxygen_reserve) //(hardcrit)
 				SET_STATUS_MAX(owner, STAT_PARA, 3)
-			var/can_heal = damage && damage < max_damage && (damage % damage_threshold_value || LAZYACCESS(owner.chem_effects, CE_BRAIN_REGEN) || (!past_damage_threshold(3) && LAZYACCESS(owner.chem_effects, CE_STABLE)))
+			var/can_heal = damage && damage < max_damage && (damage % damage_threshold_value || GET_CHEMICAL_EFFECT(owner, CE_BRAIN_REGEN) || (!past_damage_threshold(3) && GET_CHEMICAL_EFFECT(owner, CE_STABLE)))
 			var/damprob
 			//Effects of bloodloss
-			var/stability_effect = LAZYACCESS(owner.chem_effects, CE_STABLE)
+			var/stability_effect = GET_CHEMICAL_EFFECT(owner, CE_STABLE)
 			switch(blood_volume)
 
 				if(BLOOD_VOLUME_SAFE to INFINITY)

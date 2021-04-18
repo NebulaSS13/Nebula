@@ -78,7 +78,7 @@
 /obj/item/organ/internal/lungs/insectoid/serpentid/handle_failed_breath()
 	var/mob/living/carbon/human/H = owner
 
-	var/oxygenated = LAZYACCESS(owner.chem_effects, CE_OXYGENATED)
+	var/oxygenated = GET_CHEMICAL_EFFECT(owner, CE_OXYGENATED)
 	H.adjustOxyLoss(-(HUMAN_MAX_OXYLOSS * oxygenated))
 
 	if(breath_fail_ratio < 0.25 && oxygenated)
