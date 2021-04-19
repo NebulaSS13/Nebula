@@ -74,6 +74,7 @@
 	var/habitability_class	// if it's above bad, atmosphere will be adjusted to be better for humans (no extreme temps / oxygen to breathe)
 
 /obj/effect/overmap/visitable/sector/exoplanet/Initialize(mapload, z_level)
+	name = "[generate_planet_name()], \a [name]"
 	if(GLOB.using_map.use_overmap)
 		forceMove(locate(1, 1, z_level))
 	return ..()
@@ -92,7 +93,6 @@
 		var/datum/exoplanet_theme/T = pickweight(possible_themes)
 		themes += new T
 		possible_themes -= T
-	name = "[generate_planet_name()], \a [name]"
 
 	generate_habitability()
 	generate_atmosphere()

@@ -1,5 +1,6 @@
 LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
+var/list/overmap_helm_computers
 /obj/machinery/computer/ship/helm
 	name = "helm control console"
 	icon_keyboard = "teleport_key"
@@ -15,17 +16,20 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
-	get_known_sectors()
+	LAZYADD(global.overmap_helm_computers, src)
+	for(var/obj/effect/overmap/visitable/sector as anything in global.known_overmap_sectors)
+		add_known_sector(sector)
 
-/obj/machinery/computer/ship/helm/proc/get_known_sectors()
-	var/area/overmap/map = locate() in world
-	for(var/obj/effect/overmap/visitable/sector/S in map)
-		if ((S.sector_flags & OVERMAP_SECTOR_KNOWN))
-			var/datum/computer_file/data/waypoint/R = new()
-			R.fields["name"] = S.name
-			R.fields["x"] = S.x
-			R.fields["y"] = S.y
-			known_sectors[S.name] = R
+/obj/machinery/computer/ship/helm/Destroy()
+	. = ..()
+	LAZYREMOVE(global.overmap_helm_computers, src)
+
+/obj/machinery/computer/ship/helm/proc/add_known_sector(var/obj/effect/overmap/visitable/sector)
+	var/datum/computer_file/data/waypoint/R = new
+	R.fields["name"] = sector.name
+	R.fields["x"] =    sector.x
+	R.fields["y"] =    sector.y
+	known_sectors[sector.name] = R
 
 /obj/machinery/computer/ship/helm/Process()
 	..()
@@ -127,11 +131,11 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	if (href_list["add"])
 		var/datum/computer_file/data/waypoint/R = new()
-		var/sec_name = input("Input naviation entry name", "New navigation entry", "Sector #[known_sectors.len]") as text
+		var/sec_name = input("Input naviation entry name", "New navigation entry", "Sector #[length(known_sectors)]") as text
 		if(!CanInteract(user,state))
 			return TOPIC_NOACTION
 		if(!sec_name)
-			sec_name = "Sector #[known_sectors.len]"
+			sec_name = "Sector #[length(known_sectors)]"
 		R.fields["name"] = sec_name
 		if(sec_name in known_sectors)
 			to_chat(user, "<span class='warning'>Sector with that name already exists, please input a different name.</span>")
