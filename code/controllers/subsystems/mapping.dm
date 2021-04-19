@@ -54,7 +54,7 @@ SUBSYSTEM_DEF(mapping)
 
 	var/list/banned_maps = list() + banned_exoplanet_dmms + banned_space_dmms + banned_away_site_dmms
 
-	for(var/item in sortList(subtypesof(/datum/map_template), /proc/cmp_ruincost_priority))
+	for(var/item in sortTim(subtypesof(/datum/map_template), /proc/cmp_ruincost_priority))
 		var/datum/map_template/MT = includeTemplate(item, banned_maps)
 		if(!MT)
 			continue

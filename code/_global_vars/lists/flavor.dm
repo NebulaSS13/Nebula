@@ -133,4 +133,4 @@ GLOBAL_LIST_INIT(possible_cable_colours, SetupCableColors())
 		var/color = initial(C.color)
 
 		.[name] = color
-	. = sortAssoc(.)
+	. = sortTim(., /proc/cmp_text_asc)
