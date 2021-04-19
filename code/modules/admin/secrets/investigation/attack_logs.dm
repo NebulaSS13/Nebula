@@ -189,7 +189,7 @@
 			. |= al.attacker.client.ckey
 		if(check_victim && al.victim && al.victim.client.ckey != NO_CLIENT_CKEY)
 			. |= al.victim.client.ckey
-	. = sortList(.)
+	. = sortTim(., /proc/cmp_text_asc)
 	. += "*ANY*"
 
 /attack_filter/must_be_given_ckey/filter_attack(var/datum/attack_log/al)

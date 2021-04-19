@@ -172,7 +172,7 @@
 		. = FALSE
 
 /mob/observer/eye/blueprints/proc/check_contiguity()
-	var/turf/start_turf = DEFAULTPICK(selected_turfs, null)
+	var/turf/start_turf = SAFEPICK(selected_turfs)
 	if(!start_turf)
 		LAZYDISTINCTADD(errors, "no turfs were selected")
 		return FALSE

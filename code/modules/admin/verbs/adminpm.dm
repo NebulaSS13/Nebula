@@ -27,7 +27,7 @@
 				targets["[T.mob.real_name](as [T.mob.name]) - [T]"] = T
 		else
 			targets["(No Mob) - [T]"] = T
-	var/list/sorted = sortList(targets)
+	var/list/sorted = sortTim(targets, /proc/cmp_text_asc)
 	var/target = input(src,"To whom shall we send a message?","Admin PM",null) in sorted|null
 	cmd_admin_pm(targets[target],null)
 	SSstatistics.add_field_details("admin_verb","APM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

@@ -260,7 +260,7 @@ var/global/floorIsLava = 0
 		dat += "No notes found."
 	else
 		dat += "<table>"
-		note_keys = sortList(note_keys)
+		note_keys = sortTim(note_keys, /proc/cmp_text_asc)
 		for(var/t in note_keys)
 			dat += "<tr><td><a href='?src=\ref[src];notes=show;ckey=[t]'>[t]</a></td></tr>"
 		dat += "</table><br>"
@@ -394,7 +394,7 @@ var/global/floorIsLava = 0
 			"}
 		if(1)
 			dat+= "Feed Channels<HR>"
-			if( isemptylist(news_network.network_channels) )
+			if( !length(news_network.network_channels) )
 				dat+="<I>No active channels found...</I>"
 			else
 				for(var/datum/feed_channel/CHANNEL in news_network.network_channels)
@@ -459,7 +459,7 @@ var/global/floorIsLava = 0
 					No further feed story additions are allowed while the D-Notice is in effect.<BR><BR>
 				"}
 			else
-				if( isemptylist(src.admincaster_feed_channel.messages) )
+				if( !length(src.admincaster_feed_channel.messages) )
 					dat+="<I>No feed messages found in channel...</I><BR>"
 				else
 					var/i = 0
@@ -481,7 +481,7 @@ var/global/floorIsLava = 0
 				Keep in mind that users attempting to view a censored feed will instead see the \[REDACTED\] tag above it.</FONT>
 				<HR>Select Feed channel to get Stories from:<BR>
 			"}
-			if(isemptylist(news_network.network_channels))
+			if(!length(news_network.network_channels))
 				dat+="<I>No feed channels found active...</I><BR>"
 			else
 				for(var/datum/feed_channel/CHANNEL in news_network.network_channels)
@@ -494,7 +494,7 @@ var/global/floorIsLava = 0
 				morale, integrity or disciplinary behaviour. A D-Notice will render a channel unable to be updated by anyone, without deleting any feed
 				stories it might contain at the time. You can lift a D-Notice if you have the required access at any time.</FONT><HR>
 			"}
-			if(isemptylist(news_network.network_channels))
+			if(!length(news_network.network_channels))
 				dat+="<I>No feed channels found active...</I><BR>"
 			else
 				for(var/datum/feed_channel/CHANNEL in news_network.network_channels)
@@ -506,7 +506,7 @@ var/global/floorIsLava = 0
 				<B>[src.admincaster_feed_channel.channel_name]: </B><FONT SIZE=1>\[ created by: <FONT COLOR='maroon'>[src.admincaster_feed_channel.author]</FONT> \]</FONT><BR>
 				<FONT SIZE=2><A href='?src=\ref[src];ac_censor_channel_author=\ref[src.admincaster_feed_channel]'>[(src.admincaster_feed_channel.author=="\[REDACTED\]") ? ("Undo Author censorship") : ("Censor channel Author")]</A></FONT><HR>
 			"}
-			if( isemptylist(src.admincaster_feed_channel.messages) )
+			if( !length(src.admincaster_feed_channel.messages) )
 				dat+="<I>No feed messages found in channel...</I><BR>"
 			else
 				for(var/datum/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
@@ -526,7 +526,7 @@ var/global/floorIsLava = 0
 					No further feed story additions are allowed while the D-Notice is in effect.<BR><BR>
 				"}
 			else
-				if( isemptylist(src.admincaster_feed_channel.messages) )
+				if( !length(src.admincaster_feed_channel.messages) )
 					dat+="<I>No feed messages found in channel...</I><BR>"
 				else
 					for(var/datum/feed_message/MESSAGE in src.admincaster_feed_channel.messages)

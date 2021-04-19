@@ -298,7 +298,7 @@ Ccomp's first proc.
 
 	var/list/mobs = list()
 	var/list/ghosts = list()
-	var/list/sortmob = sortAtom(SSmobs.mob_list)                           // get the mob list.
+	var/list/sortmob = sortTim(SSmobs.mob_list, /proc/cmp_name_asc) // get the mob list.
 	var/any=0
 	for(var/mob/observer/ghost/M in sortmob)
 		mobs.Add(M)                                             //filter it where it's only ghosts
@@ -320,7 +320,7 @@ Ccomp's first proc.
 	. = list()
 	for(var/mob/observer/ghost/M in SSmobs.mob_list)
 		.[M.ckey] = M
-	. = sortAssoc(.)
+	. = sortTim(., /proc/cmp_text_asc)
 
 /client/proc/allow_character_respawn(var/selection in get_ghosts_by_key())
 	set category = "Special Verbs"

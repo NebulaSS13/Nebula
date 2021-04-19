@@ -21,7 +21,7 @@
 	var/path = root
 
 	for(var/i=0, i<max_iterations, i++)
-		var/list/choices = sortList(flist(path))
+		var/list/choices = sortTim(flist(path), /proc/cmp_text_asc)
 		if(path != root)
 			choices.Insert(1,"/")
 

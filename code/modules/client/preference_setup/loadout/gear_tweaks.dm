@@ -65,7 +65,7 @@
 		var/selection_type = valid_paths[path_name]
 		if(!ispath(selection_type, /obj/item))
 			CRASH("Expected an /obj/item path, was [log_info_line(selection_type)]")
-	src.valid_paths = sortAssoc(valid_paths)
+	src.valid_paths = sortTim(valid_paths, /proc/cmp_text_asc)
 
 /datum/gear_tweak/path/type/New(var/type_path)
 	..(atomtype2nameassoclist(type_path))

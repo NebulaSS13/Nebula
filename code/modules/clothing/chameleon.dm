@@ -40,7 +40,7 @@
 			if(name in .)
 				name += " \[[i++]\]"
 			.[name] = typepath
-	return sortAssoc(.)
+	return sortTim(., /proc/cmp_text_asc)
 
 //starts off as a jumpsuit
 /obj/item/clothing/under/chameleon

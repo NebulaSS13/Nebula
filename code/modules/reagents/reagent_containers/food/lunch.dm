@@ -102,7 +102,7 @@ var/list/lunchables_ethanol_reagents_ = list(
 	for(var/lunch in lunches)
 		var/obj/O = lunch
 		.[initial(O.name)] = lunch
-	return sortAssoc(.)
+	return sortTim(., /proc/cmp_text_asc)
 
 /proc/init_lunchable_reagent_list(var/list/banned_reagents, var/reagent_types)
 	. = list()
@@ -111,4 +111,4 @@ var/list/lunchables_ethanol_reagents_ = list(
 			continue
 		var/decl/material/reagent = reagent_type
 		.[initial(reagent.name)] = reagent_type
-	return sortAssoc(.)
+	return sortTim(., /proc/cmp_text_asc)

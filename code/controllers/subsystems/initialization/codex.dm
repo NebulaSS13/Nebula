@@ -42,7 +42,7 @@ SUBSYSTEM_DEF(codex)
 	for(var/thing in SScodex.entries_by_string)
 		var/datum/codex_entry/entry = SScodex.entries_by_string[thing]
 		index_file[entry.display_name] = entry
-	index_file = sortAssoc(index_file)
+	index_file = sortTim(index_file, /proc/cmp_text_asc)
 	. = ..()
 
 /datum/controller/subsystem/codex/proc/parse_links(string, viewer)
