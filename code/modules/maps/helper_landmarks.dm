@@ -3,6 +3,24 @@
 	name = "map loader landmark"
 	var/list/templates	//list of template types to pick from
 
+/obj/effect/landmark/map_load_mark/proc/get_template()
+	. = LAZYLEN(templates) && pick(templates)
+
+/obj/effect/landmark/map_load_mark/proc/load_template()
+	var/template = get_template()
+	var/turf/spawn_loc = get_turf(src)
+	qdel(src)
+	if(ispath(template, /datum/map_template) && istype(spawn_loc))
+		var/datum/map_template/M = new template
+		M.load(spawn_loc, TRUE)
+
+INITIALIZE_IMMEDIATE(/obj/effect/landmark/map_load_mark/non_template)
+/obj/effect/landmark/map_load_mark/non_template
+	name = "compile-time map loader landmark"
+/obj/effect/landmark/map_load_mark/non_template/Initialize()
+	. = ..()
+	LAZYADD(SSmapping.compile_time_map_markers, src)
+
 //Throw things in the area around randomly
 /obj/effect/landmark/carnage_mark
 	name = "carnage landmark"

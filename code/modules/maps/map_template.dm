@@ -58,7 +58,7 @@
 			atmos_machines += A
 		if(istype(A, /obj/machinery))
 			machines += A
-		if(istype(A,/obj/effect/landmark/map_load_mark))
+		if(istype(A, /obj/effect/landmark/map_load_mark))
 			LAZYADD(subtemplates_to_spawn, A)
 
 	var/notsuspended
@@ -187,14 +187,10 @@
 	return TRUE
 
 /datum/map_template/proc/after_load(z)
-	for(var/obj/effect/landmark/map_load_mark/mark in subtemplates_to_spawn)
+	for(var/obj/effect/landmark/map_load_mark/mark as anything in subtemplates_to_spawn)
 		subtemplates_to_spawn -= mark
-		if(LAZYLEN(mark.templates))
-			var/template = pick(mark.templates)
-			var/datum/map_template/M = new template()
-			M.load(get_turf(mark), TRUE)
-			qdel(mark)
-	LAZYCLEARLIST(subtemplates_to_spawn)
+		mark.load_template()
+	subtemplates_to_spawn = null
 
 /datum/map_template/proc/extend_bounds_if_needed(var/list/existing_bounds, var/list/new_bounds)
 	var/list/bounds_to_combine = existing_bounds.Copy()
@@ -203,7 +199,6 @@
 	for (var/max_bound in list(MAP_MAXX, MAP_MAXY, MAP_MAXZ))
 		bounds_to_combine[max_bound] = max(existing_bounds[max_bound], new_bounds[max_bound])
 	return bounds_to_combine
-
 
 /datum/map_template/proc/get_affected_turfs(turf/T, centered = FALSE)
 	var/turf/placement = T

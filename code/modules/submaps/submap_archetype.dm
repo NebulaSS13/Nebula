@@ -15,11 +15,6 @@
 		blacklisted_species |= SSmodpacks.default_submap_blacklisted_species
 	..()
 
-/decl/submap_archetype/Destroy()
-	if(SSmapping.submap_archetypes[descriptor] == src)
-		SSmapping.submap_archetypes -= descriptor
-	. = ..()
-
 // Generic ships to populate the list.
 /decl/submap_archetype/derelict
 	descriptor = "drifting wreck"

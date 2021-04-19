@@ -45,8 +45,10 @@ SUBSYSTEM_DEF(jobs)
 
 	// Create abstract submap archetype jobs for use in prefs, etc.
 	archetype_job_datums.Cut()
-	for(var/atype in SSmapping.submap_archetypes)
-		var/decl/submap_archetype/arch = SSmapping.submap_archetypes[atype]
+
+	var/list/submap_archetypes = decls_repository.get_decls_of_subtype(/decl/submap_archetype)
+	for(var/atype in submap_archetypes)
+		var/decl/submap_archetype/arch = submap_archetypes[atype]
 		for(var/jobtype in arch.crew_jobs)
 			var/datum/job/job = get_by_path(jobtype)
 			if(!job && ispath(jobtype, /datum/job/submap))
@@ -89,9 +91,9 @@ SUBSYSTEM_DEF(jobs)
 	// Populate/set up map job lists.
 	job_lists_by_map_name = list("[GLOB.using_map.full_name]" = list("jobs" = primary_job_datums, "default_to_hidden" = FALSE))
 
-	for(var/atype in SSmapping.submap_archetypes)
+	for(var/atype in submap_archetypes)
 		var/list/submap_job_datums
-		var/decl/submap_archetype/arch = SSmapping.submap_archetypes[atype]
+		var/decl/submap_archetype/arch = submap_archetypes[atype]
 		for(var/jobtype in arch.crew_jobs)
 			var/datum/job/job = get_by_path(jobtype)
 			if(job)

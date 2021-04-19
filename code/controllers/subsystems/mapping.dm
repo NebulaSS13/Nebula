@@ -3,18 +3,21 @@ SUBSYSTEM_DEF(mapping)
 	init_order = SS_INIT_MAPPING
 	flags = SS_NO_FIRE
 
-	var/list/map_templates = list()
-	var/list/space_ruins_templates = list()
+	var/list/map_templates =             list()
+	var/list/space_ruins_templates =     list()
 	var/list/exoplanet_ruins_templates = list()
-	var/list/away_sites_templates = list()
-	var/list/submaps = list()
-	var/list/submap_archetypes = list()
+	var/list/away_sites_templates =      list()
+	var/list/submaps =                   list()
+	var/list/compile_time_map_markers =  list()
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
+
 	// Load templates and build away sites.
+	for(var/obj/effect/landmark/map_load_mark/marker as anything in compile_time_map_markers)
+		compile_time_map_markers -= marker
+		marker.load_template()
+
 	preloadTemplates()
-	for(var/atype in subtypesof(/decl/submap_archetype))
-		submap_archetypes[atype] = new atype
 	GLOB.using_map.build_away_sites()
 	. = ..()
 
