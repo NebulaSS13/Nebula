@@ -230,9 +230,10 @@
 	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>"
 
-	show_browser(user, dat, text("window=mob[name];size=340x540"))
+	var/datum/browser/popup = new(user, "mob[name]", null, 340, 540)
+	popup.set_content(dat)
+	popup.open()
 	onclose(user, "mob[name]")
-	return
 
 // called when something steps onto a human
 // this handles mulebots and vehicles
@@ -1810,7 +1811,7 @@
 
 /mob/living/carbon/human/proc/get_hands_organs()
 	. = list()
-	for(var/bp in held_item_slots) 
+	for(var/bp in held_item_slots)
 		if(organs_by_name[bp])
 			. |= organs_by_name[bp]
 
