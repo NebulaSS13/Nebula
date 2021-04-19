@@ -24,6 +24,8 @@
 
 #define WARNING_DELAY 20			//seconds between warnings.
 
+#define LIGHT_POWER_CALC (max(power / 50, 1))
+
 var/list/supermatter_final_thoughts = list(
 	"Oh, fuck.",
 	"That was not a wise decision."
@@ -108,6 +110,7 @@ var/list/supermatter_final_thoughts = list(
 
 	var/base_icon_state = "darkmatter"
 
+	var/last_power
 	var/damage = 0
 	var/damage_archived = 0
 	var/safe_alert = "Crystaline hyperstructure returning to safe operating levels."
@@ -327,8 +330,9 @@ var/list/supermatter_final_thoughts = list(
 
 //Changes color and luminosity of the light to these values if they were not already set
 /obj/machinery/power/supermatter/proc/shift_light(var/lum, var/clr)
-	if(lum != light_range || clr != light_color)
-		set_light(lum, l_color = clr)
+	if(lum != light_range || abs(power - last_power) > 10 || clr != light_color)
+		set_light(lum, LIGHT_POWER_CALC, clr)
+		last_power = power
 
 /obj/machinery/power/supermatter/proc/get_integrity()
 	var/integrity = damage / explosion_point
@@ -592,6 +596,7 @@ var/list/supermatter_final_thoughts = list(
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return
 
+#undef LIGHT_POWER_CALC
 #undef DETONATION_MOB_CONCUSSION
 #undef DETONATION_APC_OVERLOAD_PROB
 #undef DETONATION_SHUTDOWN_APC
