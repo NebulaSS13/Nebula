@@ -5,14 +5,13 @@
 	color = "#c0c0c0"
 	animate_movement = NO_STEPS
 
-	var/known = 1				 //shows up on nav computers automatically
-	var/scannable				 //if set to TRUE will show up on ship sensors for detailed scans, and will ping when detected by scanners.
+	var/scannable                       // if set to TRUE will show up on ship sensors for detailed scans, and will ping when detected by scanners.
 
-	var/requires_contact = FALSE //whether or not the effect must be identified by ship sensors before being seen.
-	var/instant_contact  = FALSE //do we instantly identify ourselves to any ship in sensors range?
+	var/requires_contact = FALSE        // whether or not the effect must be identified by ship sensors before being seen.
+	var/instant_contact  = FALSE        // do we instantly identify ourselves to any ship in sensors range?
 	var/halted = FALSE
 	var/can_move = FALSE
-	var/sensor_visibility = 10	 //how likely it is to increase identification process each scan.
+	var/sensor_visibility = 10          // how likely it is to increase identification process each scan.
 
 	var/vessel_mass = 10000             // metric tonnes, very rough number, affects acceleration provided by engines
 
@@ -36,12 +35,6 @@
 
 	if(!GLOB.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
-
-	if(known)
-		layer = ABOVE_LIGHTING_LAYER
-		plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
-			H.get_known_sectors()
 
 	if(requires_contact)
 		invisibility = INVISIBILITY_OVERMAP // Effects that require identification have their images cast to the client via sensors.

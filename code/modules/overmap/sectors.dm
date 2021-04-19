@@ -1,3 +1,5 @@
+var/list/known_overmap_sectors
+
 //===================================================================================
 //Overmap object representing zlevel(s)
 //===================================================================================
@@ -50,6 +52,7 @@
 		LAZYDISTINCTADD(associated_machinery[base_type], weakref(machine))
 
 /obj/effect/overmap/visitable/Destroy()
+	LAZYREMOVE(global.known_overmap_sectors, src)
 	associated_machinery = null
 	. = ..()
 
@@ -57,6 +60,13 @@
 	. = ..()
 	if(. == INITIALIZE_HINT_QDEL)
 		return
+
+	if(sector_flags & OVERMAP_SECTOR_KNOWN)
+		LAZYADD(global.known_overmap_sectors, src)
+		layer = ABOVE_LIGHTING_LAYER
+		plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		for(var/obj/machinery/computer/ship/helm/H as anything in global.overmap_helm_computers)
+			H.add_known_sector(src)
 
 	find_z_levels()     // This populates map_z and assigns z levels to the ship.
 	register_z_levels() // This makes external calls to update global z level information.
