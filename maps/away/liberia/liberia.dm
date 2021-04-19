@@ -25,7 +25,7 @@
 	vessel_mass = 3000
 	fore_dir = WEST
 	max_speed = 1/(1 SECOND)
-	known = 1
+	sector_flags = OVERMAP_SECTOR_KNOWN
 	initial_restricted_waypoints = list(
 		/datum/shuttle/autodock/overmap/mule = list("nav_mule_start")
 	)
@@ -35,8 +35,8 @@
 	archetype = /decl/submap_archetype/liberia
 
 /obj/machinery/power/smes/buildable/preset/liberia
-	_input_maxed = TRUE
-	_output_maxed = TRUE
-	_input_on = TRUE
-	_output_on = TRUE
+	_input_maxed =   TRUE
+	_output_maxed =  TRUE
+	_input_on =      TRUE
+	_output_on =     TRUE
 	_fully_charged = TRUE
