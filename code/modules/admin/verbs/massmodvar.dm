@@ -37,7 +37,7 @@
 	for (var/V in O.vars)
 		names += V
 
-	names = sortList(names)
+	names = sortTim(names, /proc/cmp_text_asc)
 
 	var/variable = ""
 
