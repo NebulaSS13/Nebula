@@ -118,7 +118,7 @@ var/list/time_prefs_fixed = list()
 	dat += player_setup.header()
 	dat += "<br><HR></center>"
 	dat += player_setup.content(user)
-	return url_encode(JOINTEXT(dat))
+	return JOINTEXT(dat)
 
 /datum/preferences/proc/open_setup_window(mob/user)
 	winshow(user, "preferences_window", TRUE)
@@ -130,16 +130,15 @@ var/list/time_prefs_fixed = list()
 		}
 	</script>
 	<html><body>
-		<div id='content'>Loading...</div>
+		<div id='content'>[get_content(user)]</div>
 	</body></html>
 	"}
 	popup.set_content(content)
 	popup.open(FALSE) // Skip registring onclose on the browser pane
 	onclose(user, "preferences_window", src) // We want to register on the window itself
-	update_setup_window(user)
 
 /datum/preferences/proc/update_setup_window(mob/user)
-	send_output(user, get_content(user), "preferences_browser:update_content")
+	send_output(user, url_encode(get_content(user)), "preferences_browser:update_content")
 
 /datum/preferences/proc/update_character_previews(mutable_appearance/MA)
 	if(!client)
