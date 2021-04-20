@@ -81,7 +81,7 @@
 	for(var/mob/living/carbon/human/H in view(7, src)) // Time to find a patient!
 		if(confirmTarget(H))
 			target = H
-			if(last_newpatient_speak + 300 < world.time)
+			if(last_newpatient_speak + 300 < world.time && vocal)
 				var/message = pick("Hey, [H.name]! Hold on, I'm coming.", "Wait [H.name]! I want to help!", "[H.name], you appear to be injured!")
 				say(message)
 				custom_emote(1, "points at [H.name].")
@@ -171,7 +171,7 @@
 	if(H.a_intent == I_DISARM && !is_tipped)
 		H.visible_message(SPAN_DANGER("[H] begins tipping over [src]."), SPAN_WARNING("You begin tipping over [src]..."))
 
-		if(world.time > last_tipping_action_voice + 15 SECONDS)
+		if(world.time > last_tipping_action_voice + 15 SECONDS && vocal)
 			last_tipping_action_voice = world.time // message for tipping happens when we start interacting, message for righting comes after finishing
 			var/list/messagevoice = list("Hey, wait..." = 'sound/voice/medbot/hey_wait.ogg',"Please don't..." = 'sound/voice/medbot/please_dont.ogg',"I trusted you..." = 'sound/voice/medbot/i_trusted_you.ogg', "Nooo..." = 'sound/voice/medbot/nooo.ogg', "Oh fuck-" = 'sound/voice/medbot/oh_fuck.ogg')
 			var/message = pick(messagevoice)
@@ -346,7 +346,7 @@
 		messagevoice = list("Fuck you." = 'sound/voice/medbot/fuck_you.ogg', "Your behavior has been reported, have a nice day." = 'sound/voice/medbot/reported.ogg')
 
 	tipper_name = null
-	if(world.time > last_tipping_action_voice + 15 SECONDS)
+	if(world.time > last_tipping_action_voice + 15 SECONDS && vocal)
 		last_tipping_action_voice = world.time
 		var/message = pick(messagevoice)
 		say(message)
@@ -378,14 +378,14 @@
 		if(MEDBOT_PANIC_ENDING)
 			messagevoice = list("Is this the end?" = 'sound/voice/medbot/is_this_the_end.ogg', "Nooo!" = 'sound/voice/medbot/nooo.ogg')
 		if(MEDBOT_PANIC_END)
-			GLOB.global_announcer.autosay("PSYCH ALERT: Crewmember [tipper_name] recorded displaying antisocial tendencies torturing bots in [get_area(src)]. Please schedule psych evaluation.", "[src]", "Medical")
+			broadcast_medical_hud_message("PSYCH ALERT: Crewmember [tipper_name] recorded displaying antisocial tendencies torturing bots in [get_area(src)]. Please schedule psych evaluation.", src)
 			set_right() // strong independent medbot
 
-	if(messagevoice)
+	if(messagevoice && vocal)
 		var/message = pick(messagevoice)
 		say(message)
 		playsound(src, messagevoice[message], 70)
-	else if(prob(tipped_status * 0.2))
+	else if(prob(tipped_status * 0.2) && vocal)
 		playsound(src, 'sound/machines/warning-buzzer.ogg', 30)
 
 #undef MEDBOT_PANIC_NONE
