@@ -7,6 +7,7 @@ SUBSYSTEM_DEF(materials)
 
 	// Material vars.
 	var/list/materials
+	var/list/strata
 	var/list/materials_by_name
 	var/list/fusion_reactions
 	var/list/weighted_minerals_sparse = list()
@@ -26,7 +27,6 @@ SUBSYSTEM_DEF(materials)
 	var/list/wall_damage_overlays
 
 /datum/controller/subsystem/materials/Initialize()
-
 
 	// Init reaction list.
 	//Chemical Reactions - Initialises all /datum/chemical_reaction into a list
@@ -67,6 +67,8 @@ SUBSYSTEM_DEF(materials)
 		img.blend_mode = BLEND_MULTIPLY
 		img.alpha = (i * alpha_inc) - 1
 		LAZYADD(wall_damage_overlays, img)
+
+	strata = decls_repository.get_decls_of_subtype(/decl/strata) // for debug VV purposes
 
 	. = ..()
 
@@ -143,3 +145,26 @@ SUBSYSTEM_DEF(materials)
 
 /datum/controller/subsystem/materials/proc/get_cocktails_by_primary_ingredient(var/primary)
 	. = cocktails_by_primary_ingredient[primary]
+
+/datum/controller/subsystem/materials/proc/get_strata(var/turf/exterior/wall/location)
+	if(!istype(location))
+		return
+	var/obj/effect/overmap/visitable/sector/exoplanet/planet = map_sectors["[location.z]"]
+	if(istype(planet))
+		return planet.get_strata(location)
+	var/s_key = "[location.z]"
+	if(!global.default_strata_type_by_z[s_key])
+		global.default_strata_type_by_z[s_key] = pick(subtypesof(/decl/strata))
+	return global.default_strata_type_by_z[s_key]
+
+/datum/controller/subsystem/materials/proc/get_strata_material(var/turf/exterior/wall/location)
+	if(!istype(location))
+		return
+	if(!location.strata)
+		location.strata = get_strata(location)
+	var/skey = "[location.strata]-[location.z]"
+	if(!global.default_material_by_strata_and_z[skey])
+		var/decl/strata/strata = GET_DECL(location.strata)
+		if(length(strata.base_materials))
+			global.default_material_by_strata_and_z[skey] = pick(strata.base_materials)
+	return global.default_material_by_strata_and_z[skey]
