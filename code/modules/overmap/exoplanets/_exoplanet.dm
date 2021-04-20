@@ -72,6 +72,20 @@
 	var/list/spawned_features
 
 	var/habitability_class	// if it's above bad, atmosphere will be adjusted to be better for humans (no extreme temps / oxygen to breathe)
+	var/crust_strata // Decl type for exterior walls to use for material and ore gen.
+
+/obj/effect/overmap/visitable/sector/exoplanet/proc/get_strata()
+	return crust_strata
+
+/obj/effect/overmap/visitable/sector/exoplanet/proc/select_strata()
+	var/list/all_strata = decls_repository.get_decls_of_subtype(/decl/strata)
+	var/list/possible_strata = list()
+	for(var/stype in all_strata)
+		var/decl/strata/strata = all_strata[stype]
+		if(strata.is_valid_exoplanet_strata(src))
+			possible_strata += stype
+	if(length(possible_strata))
+		crust_strata = pick(possible_strata)
 
 /obj/effect/overmap/visitable/sector/exoplanet/Initialize(mapload, z_level)
 	name = "[generate_planet_name()], \a [name]"
@@ -98,6 +112,7 @@
 	generate_atmosphere()
 	for(var/datum/exoplanet_theme/T in themes)
 		T.adjust_atmosphere(src)
+	select_strata()
 	generate_flora()
 	generate_map()
 	generate_landing(2)

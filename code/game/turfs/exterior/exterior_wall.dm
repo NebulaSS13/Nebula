@@ -2,7 +2,6 @@
 
 var/list/default_strata_type_by_z = list()
 var/list/default_material_by_strata_and_z = list()
-var/list/default_strata_types = list()
 var/list/natural_walls = list()
 
 /turf/exterior/wall
@@ -26,26 +25,6 @@ var/list/natural_walls = list()
 	if(paint_color)
 		to_chat(user, SPAN_NOTICE("It has been <font color = '[paint_color]'>noticeably discoloured</font> by the elements."))
 
-/turf/exterior/wall/proc/set_strata_material()
-	if(material)
-		return
-	if(!strata)
-		if(!global.default_strata_type_by_z["[z]"])
-			if(!length(global.default_strata_types))
-				var/list/strata_types = decls_repository.get_decls_of_subtype(/decl/strata)
-				for(var/stype in strata_types)
-					var/decl/strata/check_strata = strata_types[stype]
-					if(check_strata.default_strata_candidate)
-						global.default_strata_types += stype
-			global.default_strata_type_by_z["[z]"] = pick(global.default_strata_types)
-		strata = global.default_strata_type_by_z["[z]"]
-	var/skey = "[strata]-[z]"
-	if(!global.default_material_by_strata_and_z[skey])
-		var/decl/strata/strata_info = GET_DECL(strata)
-		if(length(strata_info.base_materials))
-			global.default_material_by_strata_and_z[skey] = pick(strata_info.base_materials)
-	material = global.default_material_by_strata_and_z[skey]
-
 /turf/exterior/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
 	..(ml, TRUE)	// We update our own icon, no point doing it twice.
 
@@ -55,8 +34,10 @@ var/list/natural_walls = list()
 	color = null
 
 	// Init materials.
-	set_strata_material()
+	material = SSmaterials.get_strata_material(src)
+
 	global.natural_walls += src
+
 	set_extension(src, /datum/extension/geological_data)
 	if(!ispath(material, /decl/material))
 		material = materialtype || get_default_material()
