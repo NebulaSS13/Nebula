@@ -34,7 +34,7 @@
 	desc = "Heavy-duty switching circuits for power control."
 	icon = 'icons/obj/modules/module_power.dmi'
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	build_path = /obj/machinery/power/apc/buildable

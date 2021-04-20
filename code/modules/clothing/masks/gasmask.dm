@@ -107,7 +107,10 @@
 		bio = ARMOR_BIO_STRONG
 		)
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT
+	)
 	origin_tech = "{'materials':2,'engineering':2}"
 
 /obj/item/clothing/mask/gas/syndicate
@@ -122,7 +125,10 @@
 		bio = ARMOR_BIO_STRONG
 		)
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(
+		/decl/material/solid/glass = MATTER_AMOUNT_SECONDARY,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT
+	)
 	origin_tech = "{'materials':2,'engineering':2}"
 
 /obj/item/clothing/mask/gas/death_commando

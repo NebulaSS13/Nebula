@@ -38,15 +38,16 @@
 		/obj/item/stack/tile/floor/cyborg,
 		/obj/item/stack/material/cyborg/glass,
 		/obj/item/stack/material/cyborg/glass/reinforced,
+		/obj/item/stack/material/cyborg/fiberglass,
 		/obj/item/stack/cable_coil/cyborg,
 		/obj/item/stack/material/cyborg/plasteel,
 		/obj/item/stack/nanopaste
 	)
 	synths = list(
-		/datum/matter_synth/metal = 	30000,
-		/datum/matter_synth/glass = 	20000,
-		/datum/matter_synth/plasteel = 	10000,
-		/datum/matter_synth/nanite =    10000,
+		/datum/matter_synth/metal =    30000,
+		/datum/matter_synth/glass =    20000,
+		/datum/matter_synth/plasteel = 10000,
+		/datum/matter_synth/nanite =   10000,
 		/datum/matter_synth/wire
 	)
 
@@ -83,11 +84,11 @@
 // Copypasted from repair bot - todo generalize this step.
 /obj/item/robot_module/flying/ascent/finalize_synths()
 	. = ..()
-	var/datum/matter_synth/metal/metal =       locate() in synths
-	var/datum/matter_synth/glass/glass =       locate() in synths
-	var/datum/matter_synth/plasteel/plasteel = locate() in synths
-	var/datum/matter_synth/wire/wire =         locate() in synths
-	var/datum/matter_synth/nanite/nanite =     locate() in synths
+	var/datum/matter_synth/metal/metal =           locate() in synths
+	var/datum/matter_synth/glass/glass =           locate() in synths
+	var/datum/matter_synth/plasteel/plasteel =     locate() in synths
+	var/datum/matter_synth/wire/wire =             locate() in synths
+	var/datum/matter_synth/nanite/nanite =         locate() in synths
 
 	for(var/thing in list(
 		 /obj/item/stack/material/cyborg/steel,
@@ -101,7 +102,8 @@
 
 	for(var/thing in list(
 		 /obj/item/stack/material/cyborg/glass/reinforced,
-		 /obj/item/stack/material/cyborg/glass
+		 /obj/item/stack/material/cyborg/glass,
+		 /obj/item/stack/material/cyborg/fiberglass
 		))
 		var/obj/item/stack/stack = locate(thing) in equipment
 		LAZYDISTINCTADD(stack.synths, glass)

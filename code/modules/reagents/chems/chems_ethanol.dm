@@ -73,9 +73,8 @@
 	if(effective_dose >= strength * 7) // Pass out
 		SET_STATUS_MAX(M, STAT_PARA, 20)
 		SET_STATUS_MAX(M, STAT_ASLEEP, 30)
-
 	if(euphoriant)
-		ADJ_STATUS(M, STAT_DRUGGY, rand(euphoriant, euphoriant_max))
+		SET_STATUS_MAX(M, STAT_DRUGGY, euphoriant)
 
 	if(adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
 		M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
@@ -370,7 +369,6 @@
 	glass_name = "???"
 	glass_desc = "A black ichor with an oily purple sheer on top. Are you sure you should drink this?"
 	euphoriant = 50
-	euphoriant_max = 50
 
 /decl/material/liquid/ethanol/pwine/affect_ingest(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()

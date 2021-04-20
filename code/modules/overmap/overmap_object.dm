@@ -3,6 +3,7 @@
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "object"
 	color = "#c0c0c0"
+	animate_movement = NO_STEPS
 
 	var/known = 1				 //shows up on nav computers automatically
 	var/scannable				 //if set to TRUE will show up on ship sensors for detailed scans, and will ping when detected by scanners.
@@ -32,7 +33,7 @@
 
 /obj/effect/overmap/Initialize()
 	. = ..()
-	glide_size = world.icon_size
+
 	if(!GLOB.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
 

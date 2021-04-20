@@ -8,14 +8,9 @@
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE
 	)
 	w_class = ITEM_SIZE_SMALL
-	material = /decl/material/solid/metal/aluminium
-	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
-	)
 
 /obj/item/gps/attack_self(var/mob/user)
 	to_chat(user, "<span class='notice'>[html_icon(src)] \The [src] flashes <i>[get_coordinates()]</i>.</span>")

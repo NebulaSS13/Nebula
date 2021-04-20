@@ -88,9 +88,9 @@
 				alarms[++alarms.len] = list("name" = alarm_name, "ref"= "\ref[alarm]", "danger" = danger_level)
 
 		alarms_data = list()
-		alarms_data["alarms"] = sortByKey(alarms, "name")
-		alarms_data["alarmsAlert"] = sortByKey(alarmsAlert, "name")
-		alarms_data["alarmsDanger"] = sortByKey(alarmsDanger, "name")
+		alarms_data["alarms"] =       sortTim(alarms,       /proc/cmp_list_name_key_asc, TRUE)
+		alarms_data["alarmsAlert"] =  sortTim(alarmsAlert,  /proc/cmp_list_name_key_asc, TRUE)
+		alarms_data["alarmsDanger"] = sortTim(alarmsDanger, /proc/cmp_list_name_key_asc, TRUE)
 		alarm_data_cache[weakref(user)] = alarms_data
 	
 	data += alarms_data

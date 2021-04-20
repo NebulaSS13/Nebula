@@ -19,5 +19,5 @@
 	if(!liquid_name)
 		liquid_name = "liquid [name]"
 	if(!solid_name)
-		solid_name = "[name] ice"
+		solid_name = "frozen [name]"
 	..()

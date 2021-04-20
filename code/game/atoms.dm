@@ -278,11 +278,17 @@ its easier to just keep the beam vertical.
 //called to set the atom's dir and used to add behaviour to dir-changes
 /atom/proc/set_dir(new_dir)
 	SHOULD_CALL_PARENT(TRUE)
-	var/old_dir = dir
-	if(new_dir == old_dir)
-		return FALSE
+	. = new_dir != dir
 	dir = new_dir
-	return TRUE
+	if(.)
+		if(light_source_solo)
+			light_source_solo.source_atom.update_light()
+		else if(light_source_multi)
+			var/datum/light_source/L
+			for(var/thing in light_source_multi)
+				L = thing
+				if(L.light_angle)
+					L.source_atom.update_light()
 
 /atom/proc/set_icon_state(var/new_icon_state)
 	SHOULD_CALL_PARENT(TRUE)
@@ -396,7 +402,7 @@ its easier to just keep the beam vertical.
 		return TRUE
 
 /atom/proc/get_global_map_pos()
-	if(!islist(GLOB.global_map) || isemptylist(GLOB.global_map)) return
+	if(!islist(GLOB.global_map) || !length(GLOB.global_map)) return
 	var/cur_x = null
 	var/cur_y = null
 	var/list/y_arr = null

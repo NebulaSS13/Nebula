@@ -81,7 +81,7 @@
 	single_use = FALSE
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 	var/obj/item/chems/glass/beaker/vial/loaded_vial
@@ -206,4 +206,4 @@
 	band_color = COLOR_WHITE
 	starts_with = list()
 	material = /decl/material/solid/plastic
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)

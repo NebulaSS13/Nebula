@@ -49,4 +49,4 @@
 	projectile_type = /obj/item/projectile/beam/confuseray
 	combustion = 0
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)

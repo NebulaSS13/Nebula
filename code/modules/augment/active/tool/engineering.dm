@@ -1,11 +1,11 @@
 
 
 /obj/item/organ/internal/augment/active/polytool/engineer
-	name = "\improper Engineering toolset"
+	name = "engineering toolset"
 	action_button_name = "Deploy Engineering Tool"
 	desc = "A lightweight augmentation for the engineer on-the-go. This one comes with a series of common tools."
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	paths = list(
 		/obj/item/screwdriver/finger,
 		/obj/item/wrench/finger,

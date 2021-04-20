@@ -12,7 +12,7 @@
 	throw_range = 2
 
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/slag = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/metallic_hydrogen = MATTER_AMOUNT_REINFORCEMENT)
 
 	origin_tech = "{'powerstorage':3,'esoteric':5}"
 	var/drain_rate = 1500000		// amount of power to drain per tick

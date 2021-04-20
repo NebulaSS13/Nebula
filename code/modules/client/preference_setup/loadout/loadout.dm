@@ -35,10 +35,10 @@ var/list/gear_datums = list()
 		gear_datums[use_name] = new geartype
 		LC.gear[use_name] = gear_datums[use_name]
 
-	loadout_categories = sortAssoc(loadout_categories)
+	loadout_categories = sortTim(loadout_categories, /proc/cmp_text_asc)
 	for(var/loadout_category in loadout_categories)
 		var/datum/loadout_category/LC = loadout_categories[loadout_category]
-		LC.gear = sortAssoc(LC.gear)
+		LC.gear = sortTim(LC.gear, /proc/cmp_text_asc)
 	return 1
 
 /datum/category_item/player_setup_item/loadout

@@ -12,7 +12,7 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'engineering':1}"
 	drop_sound = 'sound/foley/tooldrop1.ogg'
 	var/lit_colour = COLOR_PALE_ORANGE
@@ -346,7 +346,7 @@
 /obj/item/weldingtool/experimental
 	tank = /obj/item/welder_tank/experimental
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 ///////////////////////
 //Welding tool tanks//

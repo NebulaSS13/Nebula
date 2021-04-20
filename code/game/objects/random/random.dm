@@ -546,22 +546,26 @@
 	icon_state = "sheet"
 
 /obj/random/material/spawn_choices()
-	return list(/obj/item/stack/material/steel/ten,
-				/obj/item/stack/material/glass/ten,
-				/obj/item/stack/material/glass/reinforced/ten,
-				/obj/item/stack/material/plastic/ten,
-				/obj/item/stack/material/wood/ten,
-				/obj/item/stack/material/cardboard/ten,
-				/obj/item/stack/material/rods/ten,
-				/obj/item/stack/material/plasteel/ten,
-				/obj/item/stack/material/steel/fifty,
-				/obj/item/stack/material/glass/fifty,
-				/obj/item/stack/material/glass/reinforced/fifty,
-				/obj/item/stack/material/plastic/fifty,
-				/obj/item/stack/material/wood/fifty,
-				/obj/item/stack/material/cardboard/fifty,
-				/obj/item/stack/material/rods/fifty,
-				/obj/item/stack/material/plasteel/fifty)
+	return list(
+		/obj/item/stack/material/steel/ten,
+		/obj/item/stack/material/glass/ten,
+		/obj/item/stack/material/glass/reinforced/ten,
+		/obj/item/stack/material/plastic/ten,
+		/obj/item/stack/material/wood/ten,
+		/obj/item/stack/material/cardboard/ten,
+		/obj/item/stack/material/rods/ten,
+		/obj/item/stack/material/plasteel/ten,
+		/obj/item/stack/material/steel/fifty,
+		/obj/item/stack/material/glass/fifty,
+		/obj/item/stack/material/glass/fiber/fifty,
+		/obj/item/stack/material/glass/reinforced/fifty,
+		/obj/item/stack/material/plastic/fifty,
+		/obj/item/stack/material/wood/fifty,
+		/obj/item/stack/material/cardboard/fifty,
+		/obj/item/stack/material/rods/fifty,
+		/obj/item/stack/material/plasteel/fifty,
+		/obj/item/stack/material/copper/fifty
+	)
 
 /obj/random/soap
 	name = "Random Cleaning Supplies"
@@ -987,6 +991,7 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/stack/material/tritium/ten = 7,
 				/obj/item/stack/material/mhydrogen/ten = 6,
 				/obj/item/stack/material/plasteel/ten = 9,
+				/obj/item/stack/material/copper/ten = 8,
 				/obj/item/storage/box/monkeycubes = 5,
 				/obj/item/storage/firstaid/surgery = 4,
 				/obj/item/cell/infinite = 1,

@@ -115,11 +115,13 @@
 	vend_delay = 21
 	base_type = /obj/machinery/vending/materials
 	products = list(
-		/obj/item/stack/material/steel/fifty = 3,
-		/obj/item/stack/material/plastic/fifty = 4,
-		/obj/item/stack/material/aluminium/fifty = 3,
-		/obj/item/stack/material/plasteel/ten = 4,
-		/obj/item/stack/material/glass/fifty = 4
+		/obj/item/stack/material/steel/fifty =       3,
+		/obj/item/stack/material/plastic/fifty =     4,
+		/obj/item/stack/material/aluminium/fifty =   3,
+		/obj/item/stack/material/plasteel/ten =      4,
+		/obj/item/stack/material/copper/fifty =      4,
+		/obj/item/stack/material/glass/fifty =       4,
+		/obj/item/stack/material/glass/fiber/fifty = 4
 	)
 	contraband = list(/obj/item/stack/material/ocp/ten = 3)
 

@@ -61,7 +61,7 @@
 	throw_range = 4
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = "{'materials':2}"
-	material = /decl/material/solid/glass
+	material = /decl/material/solid/fiberglass
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb = list("shoved", "bashed")
 	var/cooldown = 0 //shield bash cooldown. based on world.time

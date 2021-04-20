@@ -642,3 +642,13 @@
 	icon_state = "brick"
 	plural_icon_state = "brick-mult"
 	max_icon_state = "brick-max"
+
+/obj/item/stack/material/glass/fiber
+	name = "fiberglass sheet"
+	material = /decl/material/solid/fiberglass
+
+/obj/item/stack/material/glass/fiber/ten
+	amount = 10
+
+/obj/item/stack/material/glass/fiber/fifty
+	amount = 50

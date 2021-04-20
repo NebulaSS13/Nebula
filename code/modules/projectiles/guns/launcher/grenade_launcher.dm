@@ -14,7 +14,7 @@
 	release_force = 5
 	combustion = 1
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/obj/item/grenade/chambered
 	var/list/grenades = new/list()

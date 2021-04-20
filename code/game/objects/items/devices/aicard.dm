@@ -5,7 +5,7 @@
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_LOWER_BODY
 	origin_tech = "{'programming':4,'materials':4}"
-	material = /decl/material/solid/glass
+	material = /decl/material/solid/fiberglass
 	matter = list(/decl/material/solid/metal/gold = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/flush

@@ -32,7 +32,7 @@
 	processing_power = 4
 	origin_tech = "{'programming':5,'engineering':4}"
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/computer/processor_unit/photonic/small
 	name = "photonic microprocessor"
@@ -43,4 +43,4 @@
 	processing_power = 2
 	origin_tech = "{'programming':4,'engineering':3}"
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)

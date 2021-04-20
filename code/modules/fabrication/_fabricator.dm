@@ -33,8 +33,10 @@
 	var/list/base_storage_capacity = list(
 		/decl/material/solid/metal/steel =     SHEET_MATERIAL_AMOUNT * 20,
 		/decl/material/solid/metal/aluminium = SHEET_MATERIAL_AMOUNT * 20,
-		/decl/material/solid/glass =     SHEET_MATERIAL_AMOUNT * 10,
-		/decl/material/solid/plastic =   SHEET_MATERIAL_AMOUNT * 10
+		/decl/material/solid/metal/copper =    SHEET_MATERIAL_AMOUNT * 20,
+		/decl/material/solid/fiberglass =      SHEET_MATERIAL_AMOUNT * 10,
+		/decl/material/solid/glass =           SHEET_MATERIAL_AMOUNT * 10,
+		/decl/material/solid/plastic =         SHEET_MATERIAL_AMOUNT * 10
 	)
 
 	var/show_category = "All"
