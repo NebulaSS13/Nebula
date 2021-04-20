@@ -77,118 +77,70 @@
 	sparse_material_weight = 20
 	rich_material_weight = 16
 
+////////////////////////////////////
+// Gas Hydrates/Clathrates
+////////////////////////////////////
+
+//Hydrates gas are basically bubbles of gas trapped in water ice lattices
+/decl/material/solid/ice/hydrate
+	heating_point = T0C //the melting point is always water's
+
+//Little helper macro, since hydrates are all basically the same
+// DISPLAY_NAME is needed because of compounds with white spaces in their names
+#define DECLARE_HYDRATE_DNAME_PATH(PATH, NAME, DISPLAY_NAME)\
+/decl/material/solid/ice/hydrate/##NAME\
+	heating_products = list(##PATH = 0.2, /decl/material/liquid/water = 0.8); \
+/decl/material/solid/ice/hydrate/##NAME/New(){\
+	..(); \
+	ore_name = "[##DISPLAY_NAME] hydrate";\
+	name = ore_name;\
+}\
+/decl/material/solid/ice/hydrate/##NAME 
+
+#define DECLARE_HYDRATE_DNAME(NAME, DISPLAY_NAME) DECLARE_HYDRATE_DNAME_PATH(/decl/material/gas/##NAME, NAME, DISPLAY_NAME)
+#define DECLARE_HYDRATE(NAME) DECLARE_HYDRATE_DNAME(NAME, #NAME)
+
 //
-// Frozen basic gases
+// Definitions
 //
-/decl/material/solid/ice/hydrogen
-	heating_products = list(
-		/decl/material/gas/hydrogen = 1
-	)
-	name = "hydrogen ice"
-	ore_name = "hydrogen ice"
+DECLARE_HYDRATE(hydrogen)
 	value = 0.3
-	heating_point = 13 //k
 	sparse_material_weight = 20
-	rich_material_weight = 20
+	rich_material_weight   = 20
 
-/decl/material/solid/ice/oxygen
-	heating_products = list(
-		/decl/material/gas/oxygen = 1
-	)
-	name = "oxygen ice"
-	ore_name = "oxygen ice"
-	melting_point = 54 //K
-	sparse_material_weight = 10
-	rich_material_weight = 10
-
-/decl/material/solid/ice/nitrogen
-	heating_products = list(
-		/decl/material/gas/nitrogen = 1
-	)
-	name = "nitrogen ice"
-	ore_name = "nitrogen ice"
-	melting_point = 63 //K
-	sparse_material_weight = 10
-	rich_material_weight = 10
-
-/decl/material/solid/ice/carbon_dioxide
-	heating_products = list(
-		/decl/material/gas/carbon_dioxide = 1
-	)
-	name = "carbon dioxide ice"
-	ore_name = "carbon dioxide ice"
-	melting_point = 216 //K
-	sparse_material_weight = 8
-	rich_material_weight = 8
-
-/decl/material/solid/ice/methane
-	heating_products = list(
-		/decl/material/gas/methane = 1
-	)
-	name = "methane ice"
-	ore_name = "methane ice"
+DECLARE_HYDRATE(methane)
 	value = 0.3
-	melting_point = 90 //K
 	sparse_material_weight = 10
-	rich_material_weight = 10
+	rich_material_weight   = 10
 
-/decl/material/solid/ice/ammonia
-	heating_products = list(
-		/decl/material/gas/ammonia = 1
-	)
-	name = "ammonia ice"
-	ore_name = "ammonia ice"
-	melting_point = 195 //k
-	sparse_material_weight = 20
-	rich_material_weight = 16
+DECLARE_HYDRATE(oxygen)
+	sparse_material_weight = 10
+	rich_material_weight   = 10
 
-/decl/material/solid/ice/argon
-	heating_products = list(
-		/decl/material/gas/argon = 1
-	)
-	name = "argon ice"
-	ore_name = "argon ice"
-	melting_point = 83 //K
+DECLARE_HYDRATE(nitrogen)
+	sparse_material_weight = 10
+	rich_material_weight   = 10
+
+DECLARE_HYDRATE_DNAME(carbon_dioxide, "carbon dioxide")
 	sparse_material_weight = 8
-	rich_material_weight = 8
-	
-/decl/material/solid/ice/neon
-	heating_products = list(
-		/decl/material/gas/neon = 1
-	)
-	name = "neon ice"
-	ore_name = "neon ice"
-	melting_point = 24 //K
+	rich_material_weight   = 8
+
+DECLARE_HYDRATE(argon)
+	sparse_material_weight = 8
+	rich_material_weight   = 8
+
+DECLARE_HYDRATE(neon)
 	sparse_material_weight = 15
-	rich_material_weight = 15
+	rich_material_weight   = 15
 
-/decl/material/solid/ice/xenon
-	heating_products = list(
-		/decl/material/gas/xenon = 1
-	)
-	name = "xenon ice"
-	ore_name = "xenon ice"
-	value = 0.3
-	melting_point = 161 //k
+DECLARE_HYDRATE(krypton)
 	sparse_material_weight = 12
-	rich_material_weight = 12
+	rich_material_weight   = 12
 
-/decl/material/solid/ice/chlorine
-	heating_products = list(
-		/decl/material/gas/chlorine = 1
-	)
-	name = "chlorine ice"
-	ore_name = "chlorine ice"
-	melting_point = 171 //k
-	sparse_material_weight = 10
-	rich_material_weight = 10
+DECLARE_HYDRATE(xenon)
+	sparse_material_weight = 12
+	rich_material_weight   = 12
 
-/decl/material/solid/ice/sulfur_dioxide
-	heating_products = list(
-		/decl/material/gas/sulfur_dioxide = 1
-	)
-	name = "sulfur dioxide ice"
-	ore_name = "sulfur dioxide ice"
-	melting_point = 201 //k
-	sparse_material_weight = 10
-	rich_material_weight = 10
+#undef DECLARE_HYDRATE_DNAME_PATH
+#undef DECLARE_HYDRATE_DNAME
+#undef DECLARE_HYDRATE
