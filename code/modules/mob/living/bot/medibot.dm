@@ -59,7 +59,7 @@
 
 /mob/living/bot/medbot/handleIdle()
 	if(vocal && prob(1))
-		var/message_options = list(
+		var/static/message_options = list(
 			"Radar, put a mask on!" = 'sound/voice/medbot/mradar.ogg',
 			"There's always a catch, and it's the best there is." = 'sound/voice/medbot/mcatch.ogg',
 			"I knew it, I should've been a plastic surgeon." = 'sound/voice/medbot/msurgeon.ogg',
@@ -82,8 +82,15 @@
 		if(confirmTarget(H))
 			target = H
 			if(last_newpatient_speak + 300 < world.time && vocal)
-				var/message = pick("Hey, [H.name]! Hold on, I'm coming.", "Wait [H.name]! I want to help!", "[H.name], you appear to be injured!")
-				say(message)
+				if(vocal)
+					var/message_options = list(
+						"Hey, [H.name]! Hold on, I'm coming." = 'sound/voice/medbot/mcoming.ogg',
+						"Wait [H.name]! I want to help!" = 'sound/voice/medbot/mhelp.ogg',
+						"[H.name], you appear to be injured!" = 'sound/voice/medbot/minjured.ogg'
+						)
+					var/message = pick(message_options)
+					say(message)
+					playsound(src, message_options[message], 50, 0)
 				custom_emote(1, "points at [H.name].")
 				last_newpatient_speak = world.time
 			break
@@ -103,7 +110,7 @@
 
 	if(H.stat == DEAD)
 		if(vocal)
-			var/death_messages = list(
+			var/static/death_messages = list(
 				"No! Stay with me!" = 'sound/voice/medbot/mno.ogg',
 				"Live, damnit! LIVE!" = 'sound/voice/medbot/mlive.ogg',
 				"I... I've never lost a patient before. Not today, I mean." = 'sound/voice/medbot/mlost.ogg'
@@ -115,7 +122,7 @@
 	var/t = confirmTarget(H)
 	if(!t)
 		if(vocal)
-			var/possible_messages = list(
+			var/static/possible_messages = list(
 				"All patched up!" = 'sound/voice/medbot/mpatchedup.ogg',
 				"An apple a day keeps me away." = 'sound/voice/medbot/mapple.ogg',
 				"Feel better soon!" = 'sound/voice/medbot/mfeelbetter.ogg'
@@ -173,7 +180,7 @@
 
 		if(world.time > last_tipping_action_voice + 15 SECONDS && vocal)
 			last_tipping_action_voice = world.time // message for tipping happens when we start interacting, message for righting comes after finishing
-			var/list/messagevoice = list("Hey, wait..." = 'sound/voice/medbot/hey_wait.ogg',"Please don't..." = 'sound/voice/medbot/please_dont.ogg',"I trusted you..." = 'sound/voice/medbot/i_trusted_you.ogg', "Nooo..." = 'sound/voice/medbot/nooo.ogg', "Oh fuck-" = 'sound/voice/medbot/oh_fuck.ogg')
+			var/static/list/messagevoice = list("Hey, wait..." = 'sound/voice/medbot/hey_wait.ogg',"Please don't..." = 'sound/voice/medbot/please_dont.ogg',"I trusted you..." = 'sound/voice/medbot/i_trusted_you.ogg', "Nooo..." = 'sound/voice/medbot/nooo.ogg', "Oh fuck-" = 'sound/voice/medbot/oh_fuck.ogg')
 			var/message = pick(messagevoice)
 			say(message)
 			playsound(src, messagevoice[message], 70, FALSE)
