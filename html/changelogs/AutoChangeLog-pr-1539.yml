@@ -1,0 +1,7 @@
+author: Koollan
+delete-after: true
+changes:
+  - tweak: Changed a couple things about armor values of some of the new metals. Shinier
+      metals are now semi-useful for laser protection. Also, Slag is now able to be
+      dissolved into some reagents.
+  - rscadd: Added a new metal and more alloys.
