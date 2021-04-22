@@ -24,8 +24,6 @@
 
 	natural_weapon = /obj/item/natural_weapon/crow_claws
 
-	response_disarm = "gently moves aside"
-	response_harm   = "swats"
 	stop_automated_movement = TRUE
 	universal_speak = TRUE
 	pass_flags = PASS_FLAG_TABLE

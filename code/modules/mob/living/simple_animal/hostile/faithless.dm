@@ -8,8 +8,6 @@
 	turns_per_move = 5
 	response_help_1p = "You wave your hand through $TARGET."
 	response_help_3p = "$USER$ waves $USER_HIS$ hand through $TARGET."
-	response_disarm = "shoves"
-	response_harm = "hits"
 	speed = -1
 	maxHealth = 80
 	health = 80

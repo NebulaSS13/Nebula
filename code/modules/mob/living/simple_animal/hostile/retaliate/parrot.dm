@@ -43,9 +43,7 @@
 	natural_weapon = /obj/item/natural_weapon/beak
 	speak_chance = 1//1% (1 in 100) chance every tick; So about once per 150 seconds, assuming an average tick is 1.5s
 	turns_per_move = 5
-
-	response_disarm = "gently moves aside"
-	response_harm   = "swats"
+	response_harm = "swats"
 	stop_automated_movement = 1
 	universal_speak = TRUE
 

@@ -13,8 +13,6 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	response_disarm = "gently pushes aside"
-	response_harm   = "kicks"
 	minbodytemp = 223		//Below -50 Degrees Celsius
 	maxbodytemp = 323	//Above 50 Degrees Celsius
 	holder_type = /obj/item/holder

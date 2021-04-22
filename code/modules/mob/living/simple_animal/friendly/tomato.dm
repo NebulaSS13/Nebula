@@ -10,8 +10,6 @@
 	health = 15
 	response_help_3p = "$USER$ pokes $TARGET$."
 	response_help_1p = "You poke $TARGET$."
-	response_disarm = "pushes aside"
-	response_harm   = "smacks"
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite
 	pass_flags = PASS_FLAG_TABLE

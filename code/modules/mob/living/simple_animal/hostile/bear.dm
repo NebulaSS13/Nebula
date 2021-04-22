@@ -13,8 +13,7 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	response_disarm = "gently pushes aside"
-	response_harm   = "pokes"
+	response_harm = "pokes"
 	stop_automated_movement_when_pulled = 0
 	maxHealth = 60
 	health = 60
@@ -39,8 +38,7 @@
 /mob/living/simple_animal/hostile/bear/Hudson
 	name = "Hudson"
 	desc = ""
-	response_disarm = "gently pushes aside"
-	response_harm   = "pokes"
+	response_harm = "pokes"
 
 /mob/living/simple_animal/hostile/bear/do_delayed_life_action()
 	..()

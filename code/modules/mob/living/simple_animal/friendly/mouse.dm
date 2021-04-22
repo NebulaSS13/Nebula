@@ -16,8 +16,7 @@
 	see_in_dark = 6
 	health = 5
 	maxHealth = 5
-	response_disarm = "gently pushes aside"
-	response_harm   = "stamps on"
+	response_harm = "stamps on"
 	density = 0
 	minbodytemp = 223		//Below -50 Degrees Celsius
 	maxbodytemp = 323	//Above 50 Degrees Celsius

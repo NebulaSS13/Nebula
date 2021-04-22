@@ -2,10 +2,6 @@
 	name = "familiar"
 	desc = "No wizard is complete without a mystical sidekick."
 	supernatural = 1
-
-	response_disarm = "pushes"
-	response_harm = "hits"
-
 	universal_speak = FALSE
 	universal_understand = TRUE
 

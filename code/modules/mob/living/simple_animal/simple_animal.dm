@@ -38,8 +38,8 @@
 	//Interaction
 	var/response_help_1p = "You pet $TARGET$."
 	var/response_help_3p = "$USER$ pets $TARGET$."
-	var/response_disarm =  "tries to disarm"
-	var/response_harm =    "tries to hurt"
+	var/response_disarm =  "pushes aside"
+	var/response_harm =    "kicks"
 	var/harm_intent_damage = 3
 	var/can_escape = FALSE // 'smart' simple animals such as human enemies, or things small, big, sharp or strong enough to power out of a net
 
