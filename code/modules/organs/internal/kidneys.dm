@@ -36,7 +36,7 @@
 			owner.reagents.add_reagent(/decl/material/solid/potassium, REM*2)
 
 	//If your kidneys aren't working, your body's going to have a hard time cleaning your blood.
-	if(!LAZYACCESS(owner.chem_effects, CE_ANTITOX))
+	if(!GET_CHEMICAL_EFFECT(owner, CE_ANTITOX))
 		if(prob(33))
 			if(is_broken())
 				owner.adjustToxLoss(0.5)

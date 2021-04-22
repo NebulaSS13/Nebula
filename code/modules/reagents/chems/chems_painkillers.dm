@@ -14,6 +14,7 @@
 	var/effective_dose = 0.5 //how many units it need to process to reach max power
 
 /decl/material/liquid/painkillers/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+
 	var/volume = REAGENT_VOLUME(holder, type)
 	var/effectiveness = 1
 	var/dose = LAZYACCESS(M.chem_doses, type)
@@ -21,7 +22,9 @@
 		effectiveness = dose/effective_dose
 	else if(volume < effective_dose)
 		effectiveness = volume/effective_dose
-	M.add_chemical_effect(CE_PAINKILLER, pain_power * effectiveness)
+
+	M.add_chemical_effect(CE_PAINKILLER, (pain_power * effectiveness))
+
 	if(dose > 0.5 * overdose)
 		M.add_chemical_effect(CE_SLOWDOWN, 1)
 		if(prob(1))
@@ -36,6 +39,7 @@
 		if(prob(1))
 			SET_STATUS_MAX(M, STAT_WEAK, 2)
 			SET_STATUS_MAX(M, STAT_DROWSY, 5)
+
 	var/boozed = isboozed(M)
 	if(boozed)
 		M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)

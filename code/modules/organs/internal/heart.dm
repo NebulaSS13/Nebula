@@ -44,8 +44,8 @@
 		return
 
 	// pulse mod starts out as just the chemical effect amount
-	var/pulse_mod = LAZYACCESS(owner.chem_effects, CE_PULSE)
-	var/is_stable = LAZYACCESS(owner.chem_effects, CE_STABLE)
+	var/pulse_mod = GET_CHEMICAL_EFFECT(owner, CE_PULSE)
+	var/is_stable = GET_CHEMICAL_EFFECT(owner, CE_STABLE)
 		
 	// If you have enough heart chemicals to be over 2, you're likely to take extra damage.
 	if(pulse_mod > 2 && !is_stable)
@@ -65,7 +65,7 @@
 	if(oxy < BLOOD_VOLUME_BAD) //MOAR
 		pulse_mod++
 
-	if(owner.status_flags & FAKEDEATH || LAZYACCESS(owner.chem_effects, CE_NOPULSE))
+	if(owner.status_flags & FAKEDEATH || GET_CHEMICAL_EFFECT(owner, CE_NOPULSE))
 		pulse = Clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_2FAST) //pretend that we're dead. unlike actual death, can be inflienced by meds
 		return
 
@@ -166,7 +166,7 @@
 			if(PULSE_2FAST, PULSE_THREADY)
 				blood_max *= 1.5
 
-		if(CE_STABLE in owner.chem_effects)
+		if(GET_CHEMICAL_EFFECT(owner, CE_STABLE))
 			blood_max *= 0.8
 
 		if(world.time >= next_blood_squirt && istype(owner.loc, /turf) && do_spray.len)
