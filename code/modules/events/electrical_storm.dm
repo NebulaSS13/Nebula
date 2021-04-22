@@ -42,19 +42,40 @@
 	..()
 	valid_apcs = list()
 	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
-		if(A.z in affecting_z)
+		if(A.z in affecting_z && !A.is_critical)
 			valid_apcs.Add(A)
 	endWhen = (severity * 60) + startWhen
 
 /datum/event/electrical_storm/tick()
 	..()
-	var/shielded = FALSE
 	//See if shields can stop it first
+	var/overmap_only = TRUE
+	var/list/overmap_sectors = list()
+	for(var/i in affecting_z)
+		var/obj/effect/overmap/visitable/sector = map_sectors["[i]"]
+		if(istype(sector))
+			overmap_sectors |= sector
+		else
+			overmap_only = FALSE
+			break
+
 	var/list/shields = list()
-	for(var/obj/machinery/power/shield_generator/G in SSmachines.machinery)
-		if((G.z in affecting_z) && G.running && G.check_flag(MODEFLAG_EM))
-			shields += G
-	if(shields.len)
+	if(overmap_only)
+		for(var/obj/effect/overmap/visitable/sector as anything in overmap_sectors)
+			var/list/sector_shields = sector.get_linked_machines_of_type(/obj/machinery/power/shield_generator)
+			if(length(sector_shields))
+				shields |= sector_shields
+	else
+		for(var/obj/machinery/power/shield_generator/G in SSmachines.machinery)
+			if(G.z in affecting_z)
+				shields |= G
+
+	for(var/obj/machinery/power/shield_generator/G as anything in shields)
+		if(!(G.running) || !G.check_flag(MODEFLAG_EM))
+			shields -= G
+
+	var/shielded = FALSE
+	if(length(shields))
 		var/obj/machinery/power/shield_generator/shield_gen = pick(shields)
 		//Minor breaches aren't enough to let through frying amounts of power
 		if(shield_gen.take_shield_damage(30 * severity, SHIELD_DAMTYPE_EM) <= SHIELD_BREACHED_MINOR)
@@ -65,7 +86,7 @@
 	for(var/i=0, i< severity*2, i++) // up to 2/4/6 APCs per tick depending on severity
 		picked_apcs |= pick(valid_apcs)
 
-	for(var/obj/machinery/power/apc/T in picked_apcs)
+	for(var/obj/machinery/power/apc/T as anything in picked_apcs)
 		// Main breaker is turned off. Consider this APC protected.
 		if(!T.operating || T.failure_timer)
 			continue
@@ -111,7 +132,7 @@
 	if(last_bounce <= world.time && !shielded)
 		var/acceleration = rand(1,10) * severity
 		var/actual_accel = clamp(acceleration, KM_OVERMAP_RATE, 0)
-		if(prob(15)) //Small chance to fuck the heading up.
+		if(prob(50)) //Small chance to fuck the heading up.
 			S.set_dir(rand(1,8))
 		var/ax = 0
 		var/ay = 0
