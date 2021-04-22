@@ -11,7 +11,6 @@
 	emote_see = list("clacks")
 	speak_chance = 1
 	turns_per_move = 5
-	response_help = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "stomps"
 	stop_automated_movement = 1

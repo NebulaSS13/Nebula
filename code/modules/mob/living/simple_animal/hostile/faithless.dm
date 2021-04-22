@@ -6,7 +6,8 @@
 	icon_dead = "faithless_dead"
 	speak_chance = 0
 	turns_per_move = 5
-	response_help = "passes through"
+	response_help_1p = "You wave your hand through $TARGET."
+	response_help_3p = "$USER$ waves $USER_HIS$ hand through $TARGET."
 	response_disarm = "shoves"
 	response_harm = "hits"
 	speed = -1

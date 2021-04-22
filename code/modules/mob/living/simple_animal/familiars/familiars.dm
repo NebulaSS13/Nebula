@@ -3,7 +3,6 @@
 	desc = "No wizard is complete without a mystical sidekick."
 	supernatural = 1
 
-	response_help = "pets"
 	response_disarm = "pushes"
 	response_harm = "hits"
 
@@ -79,7 +78,8 @@
 
 	speak_emote = list("moans", "groans")
 
-	response_help = "thinks better of touching"
+	response_help_1p = "You think better of touching $TARGET$."
+	response_help_3p = "$USER$ thinks better of touching $TARGET$."
 
 	health = 150
 	maxHealth = 150

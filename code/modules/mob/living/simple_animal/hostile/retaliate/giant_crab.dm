@@ -10,7 +10,6 @@
 	emote_see = list("clacks")
 	speak_chance = 1
 	turns_per_move = 5
-	response_help  = "pats"
 	response_disarm = "gently nudges"
 	response_harm   = "strikes"
 	meat_amount = 12

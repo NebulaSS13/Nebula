@@ -5,7 +5,8 @@
 	speak = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
-	response_help  = "thinks better of touching"
+	response_help_1p = "You think better of touching $TARGET$."
+	response_help_3p = "$USER$ thinks better of touching $TARGET$."
 	response_disarm = "flailed at"
 	response_harm   = "punched"
 	icon_dead = "shade_dead"
