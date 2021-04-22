@@ -9,7 +9,6 @@
 	turns_per_move = 1
 	health = 5
 	maxHealth = 5
-	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "whacks"
 	harm_intent_damage = 5

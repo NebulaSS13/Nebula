@@ -20,7 +20,6 @@
 		/decl/material/gas/carbon_dioxide = 5
 	)
 
-	response_help = "pets"
 	response_harm = "hits"
 	response_disarm = "pushes"
 

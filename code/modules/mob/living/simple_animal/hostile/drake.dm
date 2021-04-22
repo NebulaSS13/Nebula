@@ -9,7 +9,6 @@
 	speak_emote = list("hisses")
 	emote_hear = list("clicks")
 	emote_see = list("flaps its wings idly")
-	response_help  = "pats"
 	response_disarm = "nudges"
 	response_harm   = "strikes"
 	break_stuff_probability = 15

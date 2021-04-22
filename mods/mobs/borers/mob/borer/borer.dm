@@ -4,7 +4,8 @@
 	desc = "A small, quivering sluglike creature."
 	speak_emote = list("chirrups")
 	emote_hear = list("chirrups")
-	response_help  = "pokes"
+	response_help_3p = "$USER$ pokes $TARGET$."
+	response_help_1p = "You poke $TARGET$."
 	response_disarm = "prods"
 	response_harm   = "stomps on"
 	icon_state = "brainslug"

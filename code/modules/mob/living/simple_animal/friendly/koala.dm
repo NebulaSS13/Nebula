@@ -16,7 +16,6 @@
 	speak_chance = 1
 	turns_per_move = 10 //lazy
 	see_in_dark = 6
-	response_help = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "kicks"
 	stop_automated_movement_when_pulled = 1

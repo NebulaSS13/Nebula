@@ -194,12 +194,12 @@
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
-				var/mob/living/carbon/human/hugger = M
-				if(istype(hugger))
-					hugger.species.hug(hugger,src)
-				else
-					M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
-								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
+				var/decl/bodytype/hugger_bodytype = M.get_bodytype()
+				if(!istype(hugger_bodytype) || !hugger_bodytype.hug(M, src))
+					M.visible_message(
+						SPAN_NOTICE("\The [M] hugs \the [src] to make [t_him] feel better."), \
+						SPAN_NOTICE("You hug \the [src] to make [t_him] feel better."))
+
 				if(M.fire_stacks >= (src.fire_stacks + 3))
 					src.fire_stacks += 1
 					M.fire_stacks -= 1

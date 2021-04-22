@@ -15,8 +15,7 @@
 	emote_hear = list("brays in a booming voice")
 	emote_see = list("stamps a mighty foot, shaking the surroundings")
 	meat_amount = 12
-	response_help  = "placates"
-	response_harm   = "assaults"
+	response_harm = "assaults"
 	health = 500
 	maxHealth = 500
 	mob_size = MOB_SIZE_LARGE

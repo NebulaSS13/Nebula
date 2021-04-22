@@ -9,7 +9,8 @@
 	speak_chance = 0
 	turns_per_move = 5
 	meat_type = /obj/item/chems/food/snacks/fish
-	response_help = "brushes"
+	response_help_3p = "$USER$ pokes $TARGET$."
+	response_help_1p = "You poke $TARGET$."
 	response_disarm = "pushes"
 	response_harm = "hits"
 	speed = -1
