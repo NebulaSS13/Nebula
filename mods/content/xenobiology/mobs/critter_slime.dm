@@ -8,8 +8,7 @@
 	speak_emote = list("chirps")
 	health = 100
 	maxHealth = 100
-	response_disarm = "shoos"
-	response_harm   = "stomps on"
+	response_harm = "stamps on"
 	emote_see = list("jiggles", "bounces in place")
 	gene_damage = -1
 	var/slime_type = /decl/slime_colour/grey

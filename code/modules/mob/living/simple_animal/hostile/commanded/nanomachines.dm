@@ -17,8 +17,8 @@
 
 	response_help_1p = "You wave your hand through $TARGET."
 	response_help_3p = "$USER$ waves $USER_HIS$ hand through $TARGET."
-	response_harm = "hits"
-	response_disarm = "fans at"
+	response_harm =    "agitates"
+	response_disarm =  "fans at"
 
 /obj/item/natural_weapon/nanomachine
 	name = "decompilers"

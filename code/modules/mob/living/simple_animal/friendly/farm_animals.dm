@@ -12,8 +12,6 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	response_disarm = "gently pushes aside"
-	response_harm   = "kicks"
 	faction = "goat"
 	health = 40
 	natural_weapon = /obj/item/natural_weapon/hooves
@@ -101,8 +99,6 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	response_disarm = "gently pushes aside"
-	response_harm   = "kicks"
 	health = 50
 
 	meat_type = /obj/item/chems/food/snacks/meat/beef
@@ -165,8 +161,6 @@
 	emote_see = list("pecks at the ground","flaps its tiny wings")
 	speak_chance = 2
 	turns_per_move = 2
-	response_disarm = "gently pushes aside"
-	response_harm   = "kicks"
 	health = 1
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	mob_size = MOB_SIZE_MINISCULE
@@ -208,8 +202,6 @@ var/global/chicken_count = 0
 	emote_see = list("pecks at the ground","flaps its wings viciously")
 	speak_chance = 2
 	turns_per_move = 3
-	response_disarm = "gently pushes aside"
-	response_harm   = "kicks"
 	health = 10
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SIZE_SMALL

@@ -17,8 +17,7 @@
 	speak_chance = 5
 	turns_per_move = 5
 	see_in_dark = 10
-	response_disarm = "gently pushes aside"
-	response_harm   = "pokes"
+	response_harm = "pokes"
 	maxHealth = 125
 	health = 125
 	natural_weapon = /obj/item/natural_weapon/bite

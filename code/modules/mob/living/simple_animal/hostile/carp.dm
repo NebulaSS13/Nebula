@@ -6,8 +6,6 @@
 	icon_gib = "carp_gib"
 	speak_chance = 0
 	turns_per_move = 3
-	response_disarm = "gently pushes aside the"
-	response_harm = "hits the"
 	speed = 2
 	maxHealth = 50
 	health = 50
