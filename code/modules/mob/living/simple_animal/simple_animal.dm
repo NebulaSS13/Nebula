@@ -259,14 +259,16 @@
 	Proj.on_hit(src)
 	return 0
 
+/mob/living/simple_animal/get_hug_zone_messages(var/zone)
+	. = ..() || list(response_help_3p, response_help_1p)
+
 /mob/living/simple_animal/attack_hand(mob/user)
 	..()
 
 	switch(user.a_intent)
 
 		if(I_HELP)
-			var/decl/bodytype/hugger_bodytype = user.get_bodytype()
-			if(health > 0 && istype(hugger_bodytype) && hugger_bodytype.hug(user, src, response_help_3p, response_help_1p))
+			if(health > 0 && user.attempt_hug(src))
 				user.update_personal_goal(/datum/goal/achievement/specific_object/pet, type)
 
 		if(I_DISARM)

@@ -690,11 +690,15 @@
 	if(istype(user,/mob/living/carbon/human))
 
 		var/mob/living/carbon/human/H = user
+		if(H.a_intent == I_HELP && H.attempt_hug(src))
+			return TRUE
+
 		if(H.a_intent == I_GRAB)
 			return ..()
-		if(H.species.can_shred(H))
+
+		if(H.a_intent == I_HURT && H.species.can_shred(H))
 			attack_generic(H, rand(30,50), "slashed")
-			return
+			return TRUE
 
 	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
 		var/datum/robot_component/cell_component = components["power cell"]

@@ -2108,6 +2108,7 @@
 #include "code\modules\mob\floating_message.dm"
 #include "code\modules\mob\hear_say.dm"
 #include "code\modules\mob\holder.dm"
+#include "code\modules\mob\hugs.dm"
 #include "code\modules\mob\inventory.dm"
 #include "code\modules\mob\login.dm"
 #include "code\modules\mob\logout.dm"

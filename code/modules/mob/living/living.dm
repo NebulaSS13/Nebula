@@ -879,3 +879,19 @@ default behaviour is:
 
 /mob/living/is_deaf()
 	. = ..() || GET_STATUS(src, STAT_DEAF)
+
+/mob/living/attempt_hug(mob/living/target, hug_3p, hug_1p)
+	. = ..()
+	if(.)
+
+		if(fire_stacks >= target.fire_stacks + 3)
+			target.fire_stacks += 1
+			fire_stacks -= 1
+		else if(target.fire_stacks >= fire_stacks + 3)
+			fire_stacks += 1
+			target.fire_stacks -= 1
+
+		if(on_fire && !target.on_fire)
+			target.IgniteMob()
+		else if(!on_fire && target.on_fire)
+			IgniteMob()

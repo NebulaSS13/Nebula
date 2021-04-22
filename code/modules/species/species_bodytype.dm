@@ -38,11 +38,8 @@
 
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
 
+	// Per-bodytype per-zone message strings, see /mob/proc/get_hug_zone_messages
 	var/list/hug_messages = list(
-		BP_HEAD = list(
-			"$USER$ pats $TARGET$ on the head.",
-			"You pat $TARGET$ on the head."
-		),
 		BP_L_HAND = list(
 			"$USER$ shakes $TARGET$'s hand.",
 			"You shake $TARGET$'s hand."
@@ -72,50 +69,5 @@
 /decl/bodytype/proc/check_dismember_type_override(var/disintegrate)
 	return disintegrate
 
-/decl/bodytype/proc/hug(var/mob/living/user, var/mob/living/target, var/hug_3p, var/hug_1p)
-
-	if(!istype(user) || !istype(target))
-		return FALSE
-
-	if(isnull(hug_3p) || isnull(hug_1p))
-
-		if(get_dir(user, target) == target.dir)
-			hug_3p = "$USER$ rubs $TARGET$'s back soothingly."
-			hug_1p = "You rubs $TARGET$'s back soothingly."
-		else
-			hug_3p = "$USER$ hugs $TARGET$ to make $TARGET_HIM$ feel better."
-			hug_1p = "You hug $TARGET$ to make $TARGET_HIM$ feel better."
-
-		var/decl/bodytype/target_bodytype = target.get_bodytype()
-		if(istype(target_bodytype))
-			if(user.zone_sel?.selecting in target_bodytype.hug_messages)
-				var/list/use_hug_messages = target_bodytype.hug_messages[user.zone_sel.selecting]
-				hug_3p = use_hug_messages[1]
-				hug_1p = use_hug_messages[2]
-
-	if(hug_1p && hug_3p)
-		var/decl/pronouns/my_pronouns = user.get_pronouns()
-		var/decl/pronouns/target_pronouns = target.get_pronouns()
-
-		hug_3p = replacetext(hug_3p, "$USER$",       "\the [user]")
-		hug_3p = replacetext(hug_3p, "$USER_HIM$",   my_pronouns.him)
-		hug_3p = replacetext(hug_3p, "$USER_HIS$",   my_pronouns.his)
-
-		hug_3p = replacetext(hug_3p, "$TARGET$",     "\the [target]")
-		hug_3p = replacetext(hug_3p, "$TARGET_HIM$", target_pronouns.him)
-		hug_3p = replacetext(hug_3p, "$TARGET_HIS$", target_pronouns.his)
-
-		hug_1p = replacetext(hug_1p, "$TARGET$",     "\the [target]")
-		hug_1p = replacetext(hug_1p, "$TARGET_HIM$", target_pronouns.him)
-		hug_1p = replacetext(hug_1p, "$TARGET_HIS$", target_pronouns.his)
-
-		target.visible_message(
-			SPAN_NOTICE(capitalize(hug_3p)),
-			SPAN_NOTICE(capitalize(hug_1p))
-		)
-
-		if(user != target)
-			user.update_personal_goal(/datum/goal/achievement/givehug, TRUE)
-			target.update_personal_goal(/datum/goal/achievement/gethug, TRUE)
-
-		return TRUE
+/decl/bodytype/proc/get_hug_zone_messages(var/zone)
+	return LAZYACCESS(hug_messages, zone)
