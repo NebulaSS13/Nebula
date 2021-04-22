@@ -101,9 +101,6 @@ var/list/icon_state_cache = list()
 	. = apply_offsets(user_mob,  bodytype, I, slot, bodypart)
 	. = apply_overlays(user_mob, bodytype, ., slot)
 
-/mob/living/carbon/human/get_bodytype_category()
-	. = bodytype.bodytype_category
-
 /obj/item/proc/get_fallback_slot(var/slot)
 	return
 

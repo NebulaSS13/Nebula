@@ -640,6 +640,12 @@
 		set_species()
 	. = ..()
 
+/mob/living/carbon/human/get_bodytype_category()
+	. = bodytype.bodytype_category
+
+/mob/living/carbon/human/get_bodytype()
+	return bodytype
+
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!xylophone)
 		var/decl/pronouns/G = get_pronouns()
