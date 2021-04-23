@@ -337,7 +337,7 @@
 					return
 
 				visible_message(SPAN_WARNING("\The [user] begins unwrenching the securing bolts holding \the [src] together."))
-				var/delay = 60 * user.skill_delay_mult(SKILL_DEVICES)
+				var/delay = 60 * user.skill_delay_mult(SKILL_DEVICES) * thing.tool_speed_mult
 				if(!do_after(user, delay) || !maintenance_protocols)
 					return
 				visible_message(SPAN_NOTICE("\The [user] loosens and removes the securing bolts, dismantling \the [src]."))
@@ -372,7 +372,7 @@
 				if(!body || !body.cell)
 					to_chat(user, SPAN_WARNING("There is no cell here for you to remove!"))
 					return
-				var/delay = 20 * user.skill_delay_mult(SKILL_DEVICES)
+				var/delay = 20 * user.skill_delay_mult(SKILL_DEVICES) * thing.tool_speed_mult
 				if(!do_after(user, delay) || !maintenance_protocols || !body || !body.cell)
 					return
 
@@ -388,7 +388,7 @@
 					return
 				if(!body) //Error
 					return
-				var/delay = min(50 * user.skill_delay_mult(SKILL_DEVICES), 50 * user.skill_delay_mult(SKILL_EVA))
+				var/delay = min(50 * user.skill_delay_mult(SKILL_DEVICES), 50 * user.skill_delay_mult(SKILL_EVA)) * thing.tool_speed_mult
 				visible_message(SPAN_NOTICE("\The [user] starts forcing the \the [src]'s emergency [body.hatch_descriptor] release using \the [thing]."))
 				if(!do_after(user, delay, src))
 					return

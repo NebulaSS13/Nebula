@@ -124,7 +124,7 @@
 			"<span class='notice'>\The [user] begins [src.anchored ? "securing" : "unsecuring"] the microwave.</span>", \
 			"<span class='notice'>You attempt to [src.anchored ? "secure" : "unsecure"] the microwave.</span>"
 			)
-		if (do_after(user,20, src))
+		if (do_after(user,20 * O.tool_speed_mult, src))
 			src.anchored = !src.anchored
 			user.visible_message( \
 			"<span class='notice'>\The [user] [src.anchored ? "secures" : "unsecures"] the microwave.</span>", \

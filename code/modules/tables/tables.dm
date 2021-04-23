@@ -112,7 +112,7 @@
 		manipulating = TRUE
 		user.visible_message(SPAN_NOTICE("\The [user] begins dismantling \the [src]."))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(!do_after(user, 20, src))
+		if(!do_after(user, 20 * W.tool_speed_mult, src))
 			manipulating = FALSE
 			return
 		user.visible_message(SPAN_NOTICE("\The [user] dismantles \the [src]."))

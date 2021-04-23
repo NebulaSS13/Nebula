@@ -2,7 +2,7 @@
 
 /decl/machine_construction/frame/unwrenched/state_is_valid(obj/machinery/machine)
 	return !machine.anchored
-	
+
 /decl/machine_construction/frame/unwrenched/validate_state(obj/machinery/constructable_frame/machine)
 	. = ..()
 	if(!.)
@@ -14,7 +14,7 @@
 /decl/machine_construction/frame/unwrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 20, machine))
+		if(do_after(user, 20 * I.tool_speed_mult, machine))
 			TRANSFER_STATE(/decl/machine_construction/frame/wrenched)
 			to_chat(user, "<span class='notice'>You wrench \the [machine] into place.</span>")
 			machine.anchored = TRUE
@@ -24,7 +24,7 @@
 			to_chat(user, "The welding tool must be on to complete this task.")
 			return TRUE
 		playsound(machine.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(do_after(user, 20, machine))
+		if(do_after(user, 20 * I.tool_speed_mult, machine))
 			if(!WT.isOn())
 				return TRUE
 			TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
@@ -51,7 +51,7 @@
 /decl/machine_construction/frame/wrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 20, machine))
+		if(do_after(user, 20 * I.tool_speed_mult, machine))
 			TRANSFER_STATE(/decl/machine_construction/frame/unwrenched)
 			to_chat(user, "<span class='notice'>You unfasten \the [machine].</span>")
 			machine.anchored = FALSE

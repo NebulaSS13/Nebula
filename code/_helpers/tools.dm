@@ -54,3 +54,15 @@
 
 /obj/item/hatchet/ishatchet()
 	return TRUE
+
+/obj/item/power_tool/iswrench()
+	return tool_flags & TOOL_FLAG_WRENCH
+
+/obj/item/power_tool/iscrowbar()
+	return tool_flags & TOOL_FLAG_CROWBAR
+
+/obj/item/power_tool/iswirecutter()
+	return tool_flags & TOOL_FLAG_WIRECUTTER
+
+/obj/item/power_tool/isscrewdriver()
+	return tool_flags & TOOL_FLAG_SCREWDRIVER

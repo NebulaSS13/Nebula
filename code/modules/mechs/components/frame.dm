@@ -233,7 +233,7 @@
 		var/last_reinforced_state = is_reinforced
 		visible_message("\The [user] begins adjusting the metal reinforcement inside \the [src].")
 
-		if(!user.do_skilled(4 SECONDS, SKILL_DEVICES,src) || last_reinforced_state != is_reinforced)
+		if(!user.do_skilled(4 SECONDS * thing.tool_speed_mult, SKILL_DEVICES,src) || last_reinforced_state != is_reinforced)
 			return
 
 		visible_message("\The [user] [(is_reinforced == 2) ? "unsecures" : "secures"] the metal reinforcement inside \the [src].")
@@ -255,7 +255,7 @@
 
 			var/last_reinforced_state = is_reinforced
 			visible_message("\The [user] begins welding the metal reinforcement inside \the [src].")
-			if(!do_after(user, 20 * user.skill_delay_mult(SKILL_DEVICES)) || last_reinforced_state != is_reinforced)
+			if(!do_after(user, 20 * user.skill_delay_mult(SKILL_DEVICES) * thing.tool_speed_mult) || last_reinforced_state != is_reinforced)
 				return
 
 			visible_message("\The [user] [(is_reinforced == FRAME_REINFORCED_WELDED) ? "unwelds the reinforcement from" : "welds the reinforcement into"] \the [src].")

@@ -158,7 +158,7 @@
 		if(isWrench(C))
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			user.visible_message(SPAN_WARNING("[user.name] starts frantically pumping the bolt override mechanism!"), SPAN_WARNING("You start frantically pumping the bolt override mechanism!"))
-			if(do_after(user, 160) && locked)
+			if(do_after(user, 160 * C.tool_speed_mult) && locked)
 				visible_message("\The [src] bolts disengage!")
 				locked = FALSE
 				return TRUE

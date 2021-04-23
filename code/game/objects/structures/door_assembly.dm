@@ -85,7 +85,7 @@
 	glass = -1
 	paintable = 0
 
-/obj/structure/door_assembly/blast/on_update_icon()	
+/obj/structure/door_assembly/blast/on_update_icon()
 
 /obj/structure/door_assembly/blast/morgue
 	name = "morgue door assembly"
@@ -145,7 +145,7 @@
 		else
 			user.visible_message("[user] begins securing the airlock assembly to the floor.", "You begin securing the airlock assembly to the floor.")
 
-		if(do_after(user, 40,src))
+		if(do_after(user, 40 * W.tool_speed_mult,src))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured the airlock assembly!</span>")
 			anchored = !anchored
@@ -168,7 +168,7 @@
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		user.visible_message("[user] cuts the wires from the airlock assembly.", "You start to cut the wires from airlock assembly.")
 
-		if(do_after(user, 40,src))
+		if(do_after(user, 40 * W.tool_speed_mult,src))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You cut the airlock wires.!</span>")
 			new/obj/item/stack/cable_coil(src.loc, 1)
@@ -203,7 +203,7 @@
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("\The [user] starts removing the electronics from the airlock assembly.", "You start removing the electronics from the airlock assembly.")
 
-		if(do_after(user, 40,src))
+		if(do_after(user, 40 * W.tool_speed_mult,src))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You removed the airlock electronics!</span>")
 			src.state = 1
@@ -214,7 +214,7 @@
 
 	else if(istype(W, /obj/item/stack/material) && !glass)
 		var/obj/item/stack/material/S = W
-		var/material_name = S.get_material_type()		
+		var/material_name = S.get_material_type()
 		if (S.get_amount() >= 2)
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")
@@ -230,7 +230,7 @@
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now finishing the airlock.</span>")
 
-		if(do_after(user, 40,src))
+		if(do_after(user, 40 * W.tool_speed_mult,src))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You finish the airlock!</span>")
 			var/obj/machinery/door/door = new airlock_type(get_turf(src), dir, FALSE, src)

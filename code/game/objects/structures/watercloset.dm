@@ -283,7 +283,7 @@
 		var/newtemp = input(user, "What setting would you like to set the temperature valve to?", "Water Temperature Valve") in temperature_settings
 		to_chat(user,"<span class='notice'>You begin to adjust the temperature valve with \the [I].</span>")
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 50, src))
+		if(do_after(user, 50 * I.tool_speed_mult, src))
 			watertemp = newtemp
 			user.visible_message(
 				"<span class='notice'>\The [user] adjusts \the [src] with \the [I].</span>",
