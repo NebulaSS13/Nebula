@@ -88,12 +88,11 @@
 //Little helper macro, since hydrates are all basically the same
 // DISPLAY_NAME is needed because of compounds with white spaces in their names
 #define DECLARE_HYDRATE_DNAME_PATH(PATH, NAME, DISPLAY_NAME)\
-/decl/material/solid/ice/hydrate/##NAME\
-	heating_products = list(##PATH = 0.2, /decl/material/liquid/water = 0.8); \
 /decl/material/solid/ice/hydrate/##NAME/New(){\
 	..(); \
-	ore_name = "[##DISPLAY_NAME] hydrate";\
-	name = ore_name;\
+	ore_name = "[##DISPLAY_NAME] hydrate"; \
+	heating_products = list(PATH = 0.2, /decl/material/liquid/water = 0.8); \
+	name = ore_name; \
 }\
 /decl/material/solid/ice/hydrate/##NAME 
 
