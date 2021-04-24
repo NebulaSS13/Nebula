@@ -279,7 +279,7 @@
 
 /mob/proc/reset_view(atom/A)
 	set waitfor = 0
-	while(shakecamera && client && !QDELETED(src))
+	while((shakecamera > world.time) && client && !QDELETED(src))
 		sleep(1)
 	if(!client || QDELETED(src))
 		return
