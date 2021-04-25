@@ -1,0 +1,6 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - tweak: You can now target head/hands/arms on help intent to do some more specific
+      hug actions (headpats and handshakes).
+  - tweak: You can now headpat simple animals and robots.
