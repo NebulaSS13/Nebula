@@ -9,4 +9,3 @@ SUBSYSTEM_DEF(misc_late)
 	var/decl/asset_cache/asset_cache = GET_DECL(/decl/asset_cache)
 	asset_cache.load()
 	. = ..()
-
