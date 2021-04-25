@@ -194,17 +194,7 @@
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
-				var/mob/living/carbon/human/hugger = M
-				if(istype(hugger))
-					hugger.species.hug(hugger,src)
-				else
-					M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
-								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
-				if(M.fire_stacks >= (src.fire_stacks + 3))
-					src.fire_stacks += 1
-					M.fire_stacks -= 1
-				if(M.on_fire)
-					src.IgniteMob()
+				M.attempt_hug(src)
 
 			if(stat != DEAD)
 				ADJ_STATUS(src, STAT_PARA, -3)

@@ -9,9 +9,7 @@
 	health = 5
 	maxHealth = 5
 	natural_weapon = /obj/item/natural_weapon/bite/weak
-	response_help  = "pets"
-	response_disarm = "shoos"
-	response_harm   = "stomps on"
+	response_harm = "stamps on"
 	mob_size = MOB_SIZE_MINISCULE
 	possession_candidate = 1
 	can_escape = TRUE

@@ -189,9 +189,6 @@
 	maxHealth = 45
 	natural_weapon = /obj/item/natural_weapon/charbaby
 	speed = 2
-	response_help =  "pats briefly"
-	response_disarm = "gently pushes"
-	response_harm = "strikes"
 	return_damage_min = 2
 	return_damage_max = 3
 	harm_intent_damage = 1

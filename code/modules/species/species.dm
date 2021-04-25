@@ -259,7 +259,6 @@
 
 	var/list/traits = list() // An associative list of /decl/traits and trait level - See individual traits for valid levels
 
-
 /decl/species/Initialize()
 	..()
 	if(!codex_description)
@@ -396,14 +395,6 @@
 		post_organ_rejuvenate(O, H)
 
 	H.sync_organ_dna()
-
-/decl/species/proc/hug(var/mob/living/carbon/human/H,var/mob/living/target)
-	var/decl/pronouns/G = target.get_pronouns()
-	H.visible_message("<span class='notice'>[H] hugs [target] to make [G.him] feel better!</span>", \
-					"<span class='notice'>You hug [target] to make [G.him] feel better!</span>")
-	if(H != target)
-		H.update_personal_goal(/datum/goal/achievement/givehug, TRUE)
-		target.update_personal_goal(/datum/goal/achievement/gethug, TRUE)
 
 /decl/species/proc/add_base_auras(var/mob/living/carbon/human/H)
 	if(base_auras)

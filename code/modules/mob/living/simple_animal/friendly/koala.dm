@@ -1,7 +1,7 @@
 //Koala
 /mob/living/simple_animal/koala
 	name = "koala"
-	desc = "A little grey bear. How much he gonna sleep today?"
+	desc = "A little grey bear. How long is he gonna sleep today?"
 	icon = 'icons/mob/simple_animal/koala.dmi'
 	icon_state = "koala"
 	icon_living = "koala"
@@ -16,7 +16,4 @@
 	speak_chance = 1
 	turns_per_move = 10 //lazy
 	see_in_dark = 6
-	response_help = "pets"
-	response_disarm = "gently pushes aside"
-	response_harm = "kicks"
 	stop_automated_movement_when_pulled = 1

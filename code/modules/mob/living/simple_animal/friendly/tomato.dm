@@ -8,9 +8,8 @@
 	turns_per_move = 5
 	maxHealth = 15
 	health = 15
-	response_help  = "prods"
-	response_disarm = "pushes aside"
-	response_harm   = "smacks"
+	response_help_3p = "$USER$ pokes $TARGET$."
+	response_help_1p = "You poke $TARGET$."
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite
 	pass_flags = PASS_FLAG_TABLE

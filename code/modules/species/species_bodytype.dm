@@ -38,6 +38,26 @@
 
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
 
+	// Per-bodytype per-zone message strings, see /mob/proc/get_hug_zone_messages
+	var/list/hug_messages = list(
+		BP_L_HAND = list(
+			"$USER$ shakes $TARGET$'s hand.",
+			"You shake $TARGET$'s hand."
+		),
+		BP_R_HAND = list(
+			"$USER$ shakes $TARGET$'s hand.",
+			"You shake $TARGET$'s hand."
+		),
+		BP_L_ARM = list(
+			"$USER$ pats $TARGET$ on the shoulder.",
+			"You pat $TARGET$ on the shoulder."
+		),
+		BP_R_ARM = list(
+			"$USER$ pats $TARGET$ on the shoulder.",
+			"You pat $TARGET$ on the shoulder."
+		)
+	)
+
 /decl/bodytype/Initialize()
 	. = ..()
 	if(!icon_deformed)
@@ -48,3 +68,6 @@
 
 /decl/bodytype/proc/check_dismember_type_override(var/disintegrate)
 	return disintegrate
+
+/decl/bodytype/proc/get_hug_zone_messages(var/zone)
+	return LAZYACCESS(hug_messages, zone)
