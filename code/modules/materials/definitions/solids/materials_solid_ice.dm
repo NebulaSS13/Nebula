@@ -76,3 +76,70 @@
 	value = 0.2
 	sparse_material_weight = 20
 	rich_material_weight = 16
+
+////////////////////////////////////
+// Gas Hydrates/Clathrates
+////////////////////////////////////
+
+//Hydrates gas are basically bubbles of gas trapped in water ice lattices
+/decl/material/solid/ice/hydrate
+	heating_point = T0C //the melting point is always water's
+
+//Little helper macro, since hydrates are all basically the same
+// DISPLAY_NAME is needed because of compounds with white spaces in their names
+#define DECLARE_HYDRATE_DNAME_PATH(PATH, NAME, DISPLAY_NAME)\
+/decl/material/solid/ice/hydrate/##NAME/New(){\
+	..(); \
+	ore_name = "[##DISPLAY_NAME] hydrate"; \
+	heating_products = list(PATH = 0.2, /decl/material/liquid/water = 0.8); \
+	name = ore_name; \
+}\
+/decl/material/solid/ice/hydrate/##NAME 
+
+#define DECLARE_HYDRATE_DNAME(NAME, DISPLAY_NAME) DECLARE_HYDRATE_DNAME_PATH(/decl/material/gas/##NAME, NAME, DISPLAY_NAME)
+#define DECLARE_HYDRATE(NAME) DECLARE_HYDRATE_DNAME(NAME, #NAME)
+
+//
+// Definitions
+//
+DECLARE_HYDRATE(hydrogen)
+	value = 0.3
+	sparse_material_weight = 20
+	rich_material_weight   = 20
+
+DECLARE_HYDRATE(methane)
+	value = 0.3
+	sparse_material_weight = 10
+	rich_material_weight   = 10
+
+DECLARE_HYDRATE(oxygen)
+	sparse_material_weight = 10
+	rich_material_weight   = 10
+
+DECLARE_HYDRATE(nitrogen)
+	sparse_material_weight = 10
+	rich_material_weight   = 10
+
+DECLARE_HYDRATE_DNAME(carbon_dioxide, "carbon dioxide")
+	sparse_material_weight = 8
+	rich_material_weight   = 8
+
+DECLARE_HYDRATE(argon)
+	sparse_material_weight = 8
+	rich_material_weight   = 8
+
+DECLARE_HYDRATE(neon)
+	sparse_material_weight = 15
+	rich_material_weight   = 15
+
+DECLARE_HYDRATE(krypton)
+	sparse_material_weight = 12
+	rich_material_weight   = 12
+
+DECLARE_HYDRATE(xenon)
+	sparse_material_weight = 12
+	rich_material_weight   = 12
+
+#undef DECLARE_HYDRATE_DNAME_PATH
+#undef DECLARE_HYDRATE_DNAME
+#undef DECLARE_HYDRATE
