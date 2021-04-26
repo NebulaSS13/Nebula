@@ -13,6 +13,8 @@
 	edge = 1
 	applies_material_colour = TRUE
 	drop_sound = 'sound/foley/singletooldrop1.ogg'
+	tool_sound = list('sound/items/Wirecutter.ogg')
+	tool_types = list(TOOL_FLAG_WIRECUTTER = 1)
 
 	var/handle_color
 	var/global/valid_colours = list(COLOR_RED, COLOR_MAROON, COLOR_SEDONA, PIPE_COLOR_YELLOW, COLOR_BABY_BLUE)

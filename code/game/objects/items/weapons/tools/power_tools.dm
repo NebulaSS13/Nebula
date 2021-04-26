@@ -1,9 +1,8 @@
 /obj/item/power_tool
-	var/tool_flags //bitflags for tools, listed in defines/items_tools.dm
 	var/tool_change_sound = 'sound/items/Ratchet.ogg' //the sound we use when change_type is called.
 
 /obj/item/power_tool/attack_self(var/mob/user)
-	change_type()
+	change_tool_type(user)
 
 /obj/item/power_tool/proc/change_type()
 	return
@@ -21,23 +20,21 @@
 	center_of_mass = @"{'x':17,'y':16}"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 	drop_sound = 'sound/foley/bardrop1.ogg'
-	tool_flags = TOOL_FLAG_CROWBAR
+	tool_types = list(TOOL_FLAG_CROWBAR = 1.5, TOOL_FLAG_WIRECUTTER = 1.5)
+	tool_change_sound = 'sound/items/change_jaws.ogg'
+	tool_sound = list('sound/items/jaws_pry.ogg')
 
 /obj/item/power_tool/hydraulic_cutter/change_type()
-	if(tool_flags & TOOL_FLAG_CROWBAR)
-		tool_flags = TOOL_FLAG_WIRECUTTER
-	else
-		tool_flags = TOOL_FLAG_CROWBAR
 	update_icon()
 	playsound(src.loc, tool_change_sound, 75, 1)
-
+/*
 /obj/item/power_tool/hydraulic_cutter/on_update_icon()
 	cut_overlays()
 	if(tool_flags & TOOL_FLAG_CROWBAR)
 		add_overlay(image(icon, "pry"))
 	else
 		add_overlay(image(icon, "cut"))
-
+*/
 /obj/item/power_tool/power_drill
 	name = "power drill"
 	desc = "A universal power drill, with heads for most common screw and bolt types."
@@ -51,19 +48,18 @@
 	center_of_mass = @"{'x':17,'y':16}"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 	drop_sound = 'sound/foley/bardrop1.ogg'
-	tool_flags = TOOL_FLAG_WRENCH
+	tool_types = list(TOOL_FLAG_WRENCH = 1.5, TOOL_FLAG_SCREWDRIVER = 1.5)
+	tool_change_sound = 'sound/items/change_drill.ogg'
+	tool_sound = list('sound/items/airwrench.ogg')
 
 /obj/item/power_tool/power_drill/change_type()
-	if(tool_flags & TOOL_FLAG_WRENCH)
-		tool_flags = TOOL_FLAG_SCREWDRIVER
-	else
-		tool_flags = TOOL_FLAG_WRENCH
 	update_icon()
 	playsound(src.loc, tool_change_sound, 75, 1)
-
+/*
 /obj/item/power_tool/power_drill/on_update_icon()
 	cut_overlays()
 	if(tool_flags & TOOL_FLAG_WRENCH)
 		add_overlay(image(icon, "bolt"))
 	else
 		add_overlay(image(icon, "screw"))
+*/

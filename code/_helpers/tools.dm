@@ -31,38 +31,26 @@
 /atom/proc/ishatchet()
 	return FALSE
 
-/obj/item/wrench/iswrench()
-	return TRUE
-
-/obj/item/weldingtool/iswelder()
-	return TRUE
-
 /obj/item/stack/cable_coil/iscoil()
-	return TRUE
-
-/obj/item/wirecutters/iswirecutter()
-	return TRUE
-
-/obj/item/screwdriver/isscrewdriver()
 	return TRUE
 
 /obj/item/multitool/ismultitool()
 	return TRUE
 
-/obj/item/crowbar/iscrowbar()
-	return TRUE
+/obj/item/iswrench()
+	return current_tool_type == TOOL_FLAG_WRENCH
 
-/obj/item/hatchet/ishatchet()
-	return TRUE
+/obj/item/iswelder()
+	return current_tool_type == TOOL_FLAG_WELDER
 
-/obj/item/power_tool/iswrench()
-	return tool_flags & TOOL_FLAG_WRENCH
+/obj/item/iswirecutter()
+	return current_tool_type == TOOL_FLAG_WIRECUTTER
 
-/obj/item/power_tool/iscrowbar()
-	return tool_flags & TOOL_FLAG_CROWBAR
+/obj/item/isscrewdriver()
+	return current_tool_type == TOOL_FLAG_SCREWDRIVER
 
-/obj/item/power_tool/iswirecutter()
-	return tool_flags & TOOL_FLAG_WIRECUTTER
+/obj/item/iscrowbar()
+	return current_tool_type == TOOL_FLAG_CROWBAR
 
-/obj/item/power_tool/isscrewdriver()
-	return tool_flags & TOOL_FLAG_SCREWDRIVER
+/obj/item/ishatchet()
+	return current_tool_type == TOOL_FLAG_HATCHET

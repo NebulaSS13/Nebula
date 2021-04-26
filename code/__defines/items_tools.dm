@@ -1,4 +1,6 @@
-#define TOOL_FLAG_WRENCH        BITFLAG(0)
-#define TOOL_FLAG_SCREWDRIVER   BITFLAG(1)
-#define TOOL_FLAG_CROWBAR       BITFLAG(2)
-#define TOOL_FLAG_WIRECUTTER    BITFLAG(3)
+#define TOOL_FLAG_WRENCH        "wrench"
+#define TOOL_FLAG_SCREWDRIVER   "screwdriver"
+#define TOOL_FLAG_CROWBAR       "crowbar"
+#define TOOL_FLAG_WIRECUTTER    "wirecutter"
+#define TOOL_FLAG_WELDER        "welder"
+#define TOOL_FLAG_HATCHET       "hatchet"

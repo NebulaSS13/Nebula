@@ -15,6 +15,8 @@
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'engineering':1}"
 	drop_sound = 'sound/foley/tooldrop1.ogg'
+	tool_types = list(TOOL_FLAG_WELDER = 1)
+	tool_sound = list('sound/items/Welder.ogg','sound/items/Welder2.ogg')
 	var/lit_colour = COLOR_PALE_ORANGE
 	var/waterproof = FALSE
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)

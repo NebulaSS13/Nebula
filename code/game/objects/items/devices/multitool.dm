@@ -22,6 +22,7 @@
 	)
 
 	origin_tech = "{'magnets':1,'engineering':1}"
+	tool_sound = list('sound/items/multitool_pulse.ogg')
 
 	var/buffer_name
 	var/atom/buffer_object

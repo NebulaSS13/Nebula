@@ -12,6 +12,8 @@
 	sharp = TRUE
 	applies_material_colour = TRUE
 	drop_sound = 'sound/foley/singletooldrop2.ogg'
+	tool_sound = list('sound/items/Screwdriver.ogg')
+	tool_types = list(TOOL_FLAG_SCREWDRIVER = 1)
 
 	var/global/valid_colours = list(COLOR_RED, COLOR_CYAN_BLUE, COLOR_PURPLE, COLOR_CHESTNUT, COLOR_ASSEMBLY_YELLOW, COLOR_BOTTLE_GREEN)
 	var/handle_color
