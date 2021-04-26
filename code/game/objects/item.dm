@@ -967,7 +967,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	to_chat(user, SPAN_NOTICE("You are now using [src] as an [get_tool_quality_descriptor(current_tool_type)] [current_tool_type]."))
 
 /obj/item/proc/get_tool_quality_descriptor(var/tool_type)
-	if(!tool_type in tool_types)
+	if(!(tool_type in tool_types))
 		return
 
 	switch(tool_types[tool_type])
