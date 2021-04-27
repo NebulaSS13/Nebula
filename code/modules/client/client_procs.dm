@@ -366,9 +366,9 @@ var/list/localhost_addresses = list(
 		message_staff("\[[holder.rank]\] [key_name(src)] logged out.")
 		if(!GLOB.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
 			send2adminirc("[key_name(src)] logged out - no more staff online.")
-			if(config.delist_when_no_admins && world.visibility_pref)
+			if(config.delist_when_no_admins && global.visibility_pref)
 				world.update_hub_visibility()
-				send2adminirc("Toggled hub visibility. The server is now invisible ([world.visibility_pref]).")
+				send2adminirc("Toggled hub visibility. The server is now invisible ([global.visibility_pref]).")
 
 //checks if a client is afk
 //3000 frames = 5 minutes
