@@ -1,5 +1,3 @@
-GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
-
 /*
 	A sound player/manager for looping 3D sound effects.
 
@@ -12,6 +10,14 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	The line above is currently a lie. Will probably just have to enforce moderately short sound ranges.
 */
 
+/proc/play_looping_sound(var/atom/source, var/sound_id, var/sound, var/volume, var/range, var/falloff = 1, var/echo, var/frequency, var/prefer_mute, var/datum/client_preference/preference, var/streaming)
+	var/decl/sound_player/sound_player = GET_DECL(/decl/sound_player)
+	return sound_player.PlayLoopingSound(source, sound_id, sound, volume, range, falloff, echo, frequency, prefer_mute, preference, streaming)
+
+/proc/get_sound_channel(var/datum/sound_token/sound_token)
+	var/decl/sound_player/sound_player = GET_DECL(/decl/sound_player)
+	return sound_player.PrivGetChannel(sound_token)
+
 /decl/sound_player
 	var/list/taken_channels // taken_channels and source_id_uses can be merged into one but would then require a meta-object to store the different values I desire.
 	var/list/sound_tokens_by_sound_id
@@ -20,7 +26,6 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	..()
 	taken_channels = list()
 	sound_tokens_by_sound_id = list()
-
 
 //This can be called if either we're doing whole sound setup ourselves or it will be as part of from-file sound setup
 /decl/sound_player/proc/PlaySoundDatum(var/atom/source, var/sound_id, var/sound/sound, var/range, var/prefer_mute, var/datum/client_preference/preference, var/streaming)
@@ -113,7 +118,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 		src.status |= SOUND_STREAM
 
 	if(sound.repeat) // Non-looping sounds may not reserve a sound channel due to the risk of not hearing when someone forgets to stop the token
-		var/channel = GLOB.sound_player.PrivGetChannel(src) //Attempt to find a channel
+		var/channel = get_sound_channel(src) //Attempt to find a channel
 		if(!isnum(channel))
 			CRASH("All available sound channels are in active use.")
 		sound.channel = channel
@@ -168,7 +173,8 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	QDEL_NULL(proxy_listener)
 	source = null
 
-	GLOB.sound_player.PrivStopSound(src)
+	var/decl/sound_player/sound_player = GET_DECL(/decl/sound_player)
+	sound_player.PrivStopSound(src)
 
 /datum/sound_token/proc/PrivLocateListeners(var/list/prior_turfs, var/list/current_turfs)
 	if(status & SOUND_STOPPED)
@@ -290,4 +296,4 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 /obj/sound_test/Initialize()
 	. = ..()
-	GLOB.sound_player.PlayLoopingSound(src, /obj/sound_test, sound, 50, 3)
+	play_looping_sound(src, /obj/sound_test, sound, 50, 3)
