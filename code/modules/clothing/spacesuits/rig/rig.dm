@@ -909,7 +909,7 @@
 
 /obj/item/rig/proc/forced_move(var/direction, var/mob/user)
 	if(malfunctioning)
-		direction = pick(GLOB.cardinal)
+		direction = pick(global.cardinal)
 
 	if(world.time < wearer_move_delay)
 		return

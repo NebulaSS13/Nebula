@@ -25,7 +25,7 @@
 		icon_state = initial(icon_state)
 
 /obj/machinery/body_scanconsole/proc/FindScanner()
-	for(var/D in GLOB.cardinal)
+	for(var/D in global.cardinal)
 		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, D))
 		if(src.connected)
 			break

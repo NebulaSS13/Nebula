@@ -79,7 +79,7 @@ var/list/natural_walls = list()
 /turf/exterior/wall/proc/spread_deposit()
 	if(!istype(reinf_material) || reinf_material.ore_spread_chance <= 0)
 		return
-	for(var/trydir in GLOB.cardinal)
+	for(var/trydir in global.cardinal)
 		if(!prob(reinf_material.ore_spread_chance))
 			continue
 		var/turf/exterior/wall/target_turf = get_step(src, trydir)
@@ -165,7 +165,7 @@ var/list/natural_walls = list()
 		return
 
 	var/list/wall_connections = list()
-	for(var/stepdir in GLOB.alldirs)
+	for(var/stepdir in global.alldirs)
 		var/turf/exterior/wall/T = get_step(src, stepdir)
 		if(istype(T))
 			wall_connections += get_dir(src, T)

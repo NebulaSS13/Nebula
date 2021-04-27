@@ -92,7 +92,7 @@
 	if(!machine)
 		return
 	var/obj/machinery/power/terminal/new_terminal = new (get_step(machine, terminal_dir))
-	new_terminal.set_dir(terminal_dir ? GLOB.reverse_dir[terminal_dir] : machine.dir)
+	new_terminal.set_dir(terminal_dir ? global.reverse_dir[terminal_dir] : machine.dir)
 	new_terminal.connect_to_network()
 	set_terminal(machine, new_terminal)
 
@@ -108,7 +108,7 @@
 
 /obj/item/stock_parts/power/terminal/proc/blocking_terminal_at_loc(var/obj/machinery/machine, var/turf/T, var/mob/user)
 	. = FALSE
-	var/check_dir = terminal_dir ? GLOB.reverse_dir[terminal_dir] : machine.dir
+	var/check_dir = terminal_dir ? global.reverse_dir[terminal_dir] : machine.dir
 	for(var/obj/machinery/power/terminal/term in T)
 		if(T.dir == check_dir)
 			to_chat(user, "<span class='notice'>There is already a terminal here.</span>")

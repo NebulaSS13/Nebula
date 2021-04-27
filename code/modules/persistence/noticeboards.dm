@@ -29,7 +29,7 @@
 
 		var/turf/here = get_turf(src)
 		var/placing = 0
-		for(var/checkdir in GLOB.cardinal)
+		for(var/checkdir in global.cardinal)
 			var/turf/T = get_step(here, checkdir)
 			if(!T)
 				continue

@@ -48,7 +48,7 @@
 			AM.fall(oldloc)
 
 /obj/structure/catwalk/proc/redraw_nearby_catwalks()
-	for(var/direction in GLOB.alldirs)
+	for(var/direction in global.alldirs)
 		var/obj/structure/catwalk/L = locate() in get_step(src, direction)
 		if(L)
 			L.update_connections()

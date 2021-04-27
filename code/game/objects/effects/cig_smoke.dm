@@ -11,7 +11,7 @@
 
 /obj/effect/effect/cig_smoke/Initialize()
 	. = ..()
-	set_dir(pick(GLOB.cardinal))
+	set_dir(pick(global.cardinal))
 	pixel_x = rand(0, 13)
 	pixel_y = rand(0, 13)
 	return INITIALIZE_HINT_LATELOAD

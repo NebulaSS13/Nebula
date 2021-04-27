@@ -78,7 +78,7 @@
 
 		var/list/wall_dirs =  list()
 		var/list/other_dirs = list()
-		for(var/stepdir in GLOB.alldirs)
+		for(var/stepdir in global.alldirs)
 			var/turf/T = get_step(src, stepdir)
 			if(!T)
 				continue
@@ -104,7 +104,7 @@
 							break
 					if(success)
 						wall_dirs += get_dir(src, T)
-						if(get_dir(src, T) in GLOB.cardinal)
+						if(get_dir(src, T) in global.cardinal)
 							other_dirs += get_dir(src, T)
 						break
 		wall_connections = dirs_to_corner_states(wall_dirs)

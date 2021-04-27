@@ -470,7 +470,7 @@
 /obj/machinery/door/proc/update_connections(var/propagate = 0)
 	var/dirs = 0
 
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		var/turf/T = get_step(src, direction)
 		var/success = 0
 
@@ -509,7 +509,7 @@
 
 /obj/machinery/door/get_auto_access()
 	var/area/fore = access_area_by_dir(dir)
-	var/area/aft = access_area_by_dir(GLOB.reverse_dir[dir])
+	var/area/aft = access_area_by_dir(global.reverse_dir[dir])
 	fore = fore || aft
 	aft = aft || fore
 

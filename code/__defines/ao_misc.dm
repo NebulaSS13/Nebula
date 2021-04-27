@@ -9,7 +9,7 @@ Define for getting a bitfield of adjacent turfs that meet a condition.
 	CALCULATE_NEIGHBORS(src, result, T, isopenturf(T))
 */
 #define CALCULATE_NEIGHBORS(ORIGIN, VAR, TVAR, FUNC) \
-	for (var/_tdir in GLOB.cardinal) {               \
+	for (var/_tdir in global.cardinal) {               \
 		TVAR = get_step(ORIGIN, _tdir);              \
 		if ((TVAR) && (FUNC)) {                      \
 			VAR |= 1 << _tdir;                       \

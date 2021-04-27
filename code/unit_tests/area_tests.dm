@@ -44,7 +44,7 @@
 		var/turf/T = turfs_to_check.Pop()
 		. |= T
 		var/turf/neighbour
-		for(var/direction in GLOB.cardinal)
+		for(var/direction in global.cardinal)
 			neighbour = get_step(T, direction)
 			SHOULD_CHECK_TURF(neighbour)
 #ifdef MULTIZAS

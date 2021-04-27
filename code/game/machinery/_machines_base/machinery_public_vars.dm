@@ -51,7 +51,7 @@ Must be implemented by subtypes.
 		if(IC_FORMAT_NUMBER)
 			return isnum(new_value)
 		if(IC_FORMAT_DIR)
-			return new_value in GLOB.alldirs
+			return new_value in global.alldirs
 		if(IC_FORMAT_BOOLEAN)
 			return new_value == !!new_value
 		if(IC_FORMAT_REF)

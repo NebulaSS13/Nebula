@@ -629,7 +629,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if(direction)
 		dirs = list( direction, turn(direction, -45), turn(direction, 45))
 	else
-		dirs = GLOB.alldirs.Copy()
+		dirs = global.alldirs.Copy()
 
 	src.streak(dirs)
 
@@ -638,6 +638,6 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if(direction)
 		dirs = list( direction, turn(direction, -45), turn(direction, 45))
 	else
-		dirs = GLOB.alldirs.Copy()
+		dirs = global.alldirs.Copy()
 
 	src.streak(dirs)

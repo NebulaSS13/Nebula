@@ -51,7 +51,7 @@
 	regen()
 	if(times_fired % attack_freq)
 		return
-	attempt_attack(GLOB.alldirs)
+	attempt_attack(global.alldirs)
 
 /obj/effect/blob/proc/take_damage(var/damage)
 	health -= damage
@@ -269,9 +269,9 @@ regen() will cover update_icon() for this proc
 	process_core_health()
 	regen()
 	for(var/I in 1 to times_to_pulse)
-		pulse(20, GLOB.alldirs)
-	attempt_attack(GLOB.alldirs)
-	attempt_attack(GLOB.alldirs)
+		pulse(20, global.alldirs)
+	attempt_attack(global.alldirs)
+	attempt_attack(global.alldirs)
 	blob_may_process = 1
 
 // Blob has a very small probability of growing these when spreading. These will spread the blob further.

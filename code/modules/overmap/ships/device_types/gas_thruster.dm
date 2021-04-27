@@ -21,7 +21,7 @@
 	E.update_networks()
 	E.update_icon()
 
-	var/exhaust_dir = GLOB.reverse_dir[E.dir]
+	var/exhaust_dir = global.reverse_dir[E.dir]
 	var/turf/T = get_step(holder, exhaust_dir)
 	if(T)
 		T.assume_air(removed)
@@ -58,7 +58,7 @@
 
 /datum/extension/ship_engine/gas/proc/get_nozzle_exit_pressure()
 	var/obj/machinery/atmospherics/unary/engine/E = holder
-	var/exhaust_dir = GLOB.reverse_dir[E.dir]
+	var/exhaust_dir = global.reverse_dir[E.dir]
 	var/turf/A = get_step(holder, exhaust_dir)
 	var/datum/gas_mixture/nozzle_exit_air = A.return_air()
 	var/exit_pressure = 0

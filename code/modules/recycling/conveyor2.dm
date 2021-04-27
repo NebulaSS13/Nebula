@@ -251,7 +251,7 @@ var/list/all_conveyor_switches = list()
 	if(!istype(area) || (area.area_flags & AREA_FLAG_SHUTTLE))
 		return FALSE
 	var/cdir = get_dir(A, user)
-	if(!(cdir in GLOB.cardinal) || A == user.loc)
+	if(!(cdir in global.cardinal) || A == user.loc)
 		return
 	for(var/obj/machinery/conveyor/CB in A)
 		if(CB.dir == cdir || CB.dir == turn(cdir,180))

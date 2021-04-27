@@ -233,7 +233,7 @@
 
 	for(var/obj/item/grab/G as anything in mob.get_active_grabs())
 		if(G.assailant_reverse_facing())
-			mob.set_dir(GLOB.reverse_dir[direction])
+			mob.set_dir(global.reverse_dir[direction])
 		G.assailant_moved()
 	for(var/obj/item/grab/G as anything in mob.grabbed_by)
 		G.adjust_position()
@@ -304,4 +304,4 @@
 	if(prob(stability))
 		return
 
-	return prob(50) ? GLOB.cw_dir[.] : GLOB.ccw_dir[.]
+	return prob(50) ? global.cw_dir[.] : global.ccw_dir[.]

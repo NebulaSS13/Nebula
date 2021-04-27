@@ -498,7 +498,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	if(narcosis)
 		if(prob(10))
-			M.SelfMove(pick(GLOB.cardinal))
+			M.SelfMove(pick(global.cardinal))
 		if(prob(narcosis))
 			M.emote(pick("twitch", "drool", "moan"))
 

@@ -31,7 +31,7 @@
 		bling.adjust_worth(nv)
 		if(projectile_vomit)
 			for(var/j = 1, j <= rand(2, 4), j++)
-				step(bling, pick(GLOB.cardinal))
+				step(bling, pick(global.cardinal))
 
 	if(projectile_vomit)
 		ADJ_STATUS(vomit_onto, STAT_STUN, 3)

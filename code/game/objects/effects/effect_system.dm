@@ -78,9 +78,9 @@ steam.start() -- spawns the effect
 	var/obj/effect/effect/steam/steam = new /obj/effect/effect/steam(location)
 	var/direction
 	if(src.cardinals)
-		direction = pick(GLOB.cardinal)
+		direction = pick(global.cardinal)
 	else
-		direction = pick(GLOB.alldirs)
+		direction = pick(global.alldirs)
 	for(i=0, i<pick(1,2,3), i++)
 		sleep(5)
 		step(steam,direction)
@@ -152,9 +152,9 @@ steam.start() -- spawns the effect
 	var/obj/effect/sparks/sparks = new /obj/effect/sparks(location)
 	var/direction
 	if(src.cardinals)
-		direction = pick(GLOB.cardinal)
+		direction = pick(global.cardinal)
 	else
-		direction = pick(GLOB.alldirs)
+		direction = pick(global.alldirs)
 	for(i=0, i<pick(1,2,3), i++)
 		sleep(5)
 		step(sparks,direction)
@@ -335,7 +335,7 @@ steam.start() -- spawns the effect
 	src.total_smoke++
 	var/direction = src.direction
 	if(!direction)
-		direction = pick(src.cardinals ? GLOB.cardinal : GLOB.alldirs)
+		direction = pick(src.cardinals ? global.cardinal : global.alldirs)
 	for(i=0, i<pick(0,1,1,1,2,2,2,3), i++)
 		sleep(1 SECOND)
 		if(QDELETED(smoke))

@@ -56,14 +56,14 @@ SUBSYSTEM_DEF(fluids)
 
 		var/flooded_a_neighbor
 		UPDATE_FLUID_BLOCKED_DIRS(T)
-		for(var/spread_dir in GLOB.cardinal)
+		for(var/spread_dir in global.cardinal)
 			if(T.fluid_blocked_dirs & spread_dir) 
 				continue
 			var/turf/next = get_step(T, spread_dir)
 			if(!istype(next) || next.flooded) 
 				continue
 			UPDATE_FLUID_BLOCKED_DIRS(next)
-			if((next.fluid_blocked_dirs & GLOB.reverse_dir[spread_dir]) || !next.CanFluidPass(spread_dir) || checked[next])
+			if((next.fluid_blocked_dirs & global.reverse_dir[spread_dir]) || !next.CanFluidPass(spread_dir) || checked[next])
 				continue
 			checked[next] = TRUE
 			flooded_a_neighbor = TRUE
@@ -123,13 +123,13 @@ SUBSYSTEM_DEF(fluids)
 						continue
 		
 		if(F.reagents.total_volume > FLUID_PUDDLE)
-			for(var/spread_dir in GLOB.cardinal)
+			for(var/spread_dir in global.cardinal)
 				if(T.fluid_blocked_dirs & spread_dir)
 					continue
 				var/turf/neighbor_turf = get_step(T, spread_dir)
 				if(!istype(neighbor_turf) || neighbor_turf.flooded)
 					continue
-				var/coming_from = GLOB.reverse_dir[spread_dir]
+				var/coming_from = global.reverse_dir[spread_dir]
 				UPDATE_FLUID_BLOCKED_DIRS(neighbor_turf)
 				if((neighbor_turf.fluid_blocked_dirs & coming_from) || checked[neighbor_turf] || !neighbor_turf.CanFluidPass(coming_from))
 					continue

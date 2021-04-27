@@ -205,7 +205,7 @@
 
 			stop_spin_bottle = TRUE
 			SpinAnimation(speed, loops, pick(0, 1)) //SpinAnimation(speed, loops, clockwise, segments)
-			transform = turn(matrix(), dir2angle(pick(GLOB.alldirs)))
+			transform = turn(matrix(), dir2angle(pick(global.alldirs)))
 			sleep(sleep_not_stacking) //Not stacking
 			stop_spin_bottle = FALSE
 

@@ -131,7 +131,7 @@
 
 	if(species.get_move_trail(src))
 		T.AddTracks(species.get_move_trail(src),bloodDNA, dir, 0, bloodcolor) // Coming
-		var/turf/simulated/from = get_step(src, GLOB.reverse_dir[dir])
+		var/turf/simulated/from = get_step(src, global.reverse_dir[dir])
 		if(istype(from))
 			from.AddTracks(species.get_move_trail(src), bloodDNA, 0, dir, bloodcolor) // Going
 

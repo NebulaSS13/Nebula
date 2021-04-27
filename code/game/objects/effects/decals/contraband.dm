@@ -41,7 +41,7 @@
 		return
 
 	var/placement_dir = get_dir(user, W)
-	if (!(placement_dir in GLOB.cardinal))
+	if (!(placement_dir in global.cardinal))
 		to_chat(user, "<span class='warning'>You must stand directly in front of the wall you wish to place that on.</span>")
 		return
 
@@ -67,7 +67,7 @@
 		return TRUE
 
 	//crude, but will cover most cases. We could do stuff like check pixel_x/y but it's not really worth it.
-	for (var/dir in GLOB.cardinal)
+	for (var/dir in global.cardinal)
 		var/turf/T = get_step(W, dir)
 		var/poster = locate(/obj/structure/sign/poster) in T
 		if (poster && placed_poster != poster)

@@ -118,7 +118,7 @@
 		return
 
 	var/neighbors = 0
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		var/turf/exterior/turf_to_check = get_step(src,direction)
 		if(!turf_to_check || turf_to_check.density)
 			continue
@@ -140,7 +140,7 @@
 			add_overlay(I)
 
 	if(icon_has_corners)
-		for(var/direction in GLOB.cornerdirs)
+		for(var/direction in global.cornerdirs)
 			var/turf/exterior/turf_to_check = get_step(src,direction)
 			if(!isturf(turf_to_check) || turf_to_check.density || istype(turf_to_check, type))
 				continue
