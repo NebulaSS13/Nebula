@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(event)
 				EVENT_LEVEL_MAJOR 		= new/datum/event_container/major
 			)
 	if(GLOB.using_map.use_overmap)
-		overmap_event_handler.create_events(GLOB.using_map.overmap_z, GLOB.using_map.overmap_size, GLOB.using_map.overmap_event_areas)
+		SSmapping.overmap_event_handler.create_events(GLOB.using_map.overmap_z, GLOB.using_map.overmap_size, GLOB.using_map.overmap_event_areas)
 	. = ..()
 
 /datum/controller/subsystem/event/Recover()
