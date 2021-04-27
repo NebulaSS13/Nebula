@@ -24,7 +24,7 @@
 	src.use_env = use_env
 	src.player = player
 
-	var/channel = GLOB.sound_player.PrivGetChannel(src) //Attempt to find a channel
+	var/channel = get_sound_channel(src) //Attempt to find a channel
 	if(!isnum(channel))
 		CRASH("All available sound channels are in active use.")
 	sound.channel = channel
