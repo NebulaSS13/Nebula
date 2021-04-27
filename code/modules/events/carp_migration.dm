@@ -48,7 +48,7 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 	var/Z = pick(affecting_z)
 
 	if(!direction)
-		direction = pick(GLOB.cardinal)
+		direction = pick(global.cardinal)
 
 	if(!speed)
 		speed = rand(1,3)
@@ -68,7 +68,7 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 			events_repository.register(/decl/observ/destroyed, M,src,/datum/event/carp_migration/proc/reduce_carp_count)
 			LAZYADD(GLOB.carp_count["[Z]"], M)
 			spawned_carp ++
-			M.throw_at(get_random_edge_turf(GLOB.reverse_dir[direction],TRANSITIONEDGE + 2, Z), 250, speed, callback = CALLBACK(src,/datum/event/carp_migration/proc/check_gib,M))
+			M.throw_at(get_random_edge_turf(global.reverse_dir[direction],TRANSITIONEDGE + 2, Z), 250, speed, callback = CALLBACK(src,/datum/event/carp_migration/proc/check_gib,M))
 		I++
 		if(no_show)
 			break

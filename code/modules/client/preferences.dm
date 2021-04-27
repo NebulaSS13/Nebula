@@ -154,7 +154,7 @@ var/list/time_prefs_fixed = list()
 	BG.icon_state = bgstate
 	BG.screen_loc = preview_screen_locs["BG"]
 
-	for(var/D in GLOB.cardinal)
+	for(var/D in global.cardinal)
 		var/obj/screen/setup_preview/O = LAZYACCESS(char_render_holders, "[D]")
 		if(!O)
 			O = new

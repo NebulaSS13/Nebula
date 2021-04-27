@@ -493,7 +493,7 @@
 /atom/movable/graph_test/proc/Connect(atom/movable/graph_test/neighbour)
 	var/direction = get_dir(src, neighbour)
 	neighoursByDirection[num2text(direction)] = neighbour
-	neighbour.neighoursByDirection[num2text(GLOB.flip_dir[direction])] = src
+	neighbour.neighoursByDirection[num2text(global.flip_dir[direction])] = src
 	node.Connect(neighbour.node)
 
 /atom/movable/graph_test/CheckNodeNeighbours()

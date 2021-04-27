@@ -50,7 +50,7 @@ GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window, /obj/
 
 	var/list/dirs
 	var/list/other_dirs
-	for(var/direction in GLOB.alldirs)
+	for(var/direction in global.alldirs)
 		var/turf/T = get_step(src, direction)
 		if(T)
 			for(var/obj/structure/S in T)
@@ -59,7 +59,7 @@ GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window, /obj/
 						S.update_connections()
 						S.update_icon()
 					LAZYADD(dirs, direction)
-			if((direction in GLOB.cardinal) && find_blendable_obj_in_turf(T, propagate))
+			if((direction in global.cardinal) && find_blendable_obj_in_turf(T, propagate))
 				LAZYDISTINCTADD(dirs, direction)
 				LAZYADD(other_dirs, direction)
 

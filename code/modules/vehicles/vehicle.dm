@@ -133,7 +133,7 @@
 	pulse2.icon_state = "empdisable"
 	pulse2.SetName("emp sparks")
 	pulse2.anchored = 1
-	pulse2.set_dir(pick(GLOB.cardinal))
+	pulse2.set_dir(pick(global.cardinal))
 
 	spawn(10)
 		qdel(pulse2)
@@ -303,7 +303,7 @@
 	//if these all result in the same turf as the vehicle or nullspace, pick a new turf with open space
 	if(!dest || dest == get_turf(src))
 		var/list/options = new()
-		for(var/test_dir in GLOB.alldirs)
+		for(var/test_dir in global.alldirs)
 			var/new_dir = get_step_to(src, get_step(src, test_dir))
 			if(new_dir && load.Adjacent(new_dir))
 				options += new_dir

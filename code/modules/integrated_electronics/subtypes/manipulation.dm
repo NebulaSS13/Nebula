@@ -574,7 +574,7 @@
 		playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
 		return
 
-	if(isnum(step_dir) && (!step_dir || (step_dir in GLOB.cardinal)))
+	if(isnum(step_dir) && (!step_dir || (step_dir in global.cardinal)))
 		rift_location = get_step(rift_location, step_dir) || rift_location
 	else
 		var/obj/item/electronic_assembly/assembly = get_object()

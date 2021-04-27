@@ -712,7 +712,7 @@
 
 /obj/item/electronic_assembly/wallmount/proc/mount_assembly(turf/on_wall, mob/user) //Yeah, this is admittedly just an abridged and kitbashed version of the wallframe attach procs.
 	var/ndir = get_dir(on_wall, user)
-	if(!(ndir in GLOB.cardinal))
+	if(!(ndir in global.cardinal))
 		return
 	var/turf/T = get_turf(user)
 	if(T.density)

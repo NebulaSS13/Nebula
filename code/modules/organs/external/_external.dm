@@ -967,7 +967,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(!clean)
 				// Throw limb around.
 				if(src && istype(loc,/turf))
-					throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
+					throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 				set_dir(SOUTH, TRUE)
 		if(DISMEMBER_METHOD_BURN, DISMEMBER_METHOD_ACID)
 			if(disintegrate == DISMEMBER_METHOD_BURN)
@@ -992,16 +992,16 @@ Note that amputating the affected organ does in fact remove the infection from t
 					G.basecolor =  use_blood_colour
 					G.update_icon()
 
-			gore.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
+			gore.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/organ/I in internal_organs)
 				I.removed()
 				if(!QDELETED(I) && isturf(loc))
-					I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
+					I.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/I in src)
 				I.dropInto(loc)
-				I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
+				I.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 
 			qdel(src)
 

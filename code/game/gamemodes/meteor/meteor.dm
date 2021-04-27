@@ -82,7 +82,7 @@
 		next_wave = round_duration_in_ticks + meteor_wave_delay
 		// Starts as barely noticeable dust impact, ends as barrage of most severe meteor types the code has to offer. Have fun.
 		spawn()
-			spawn_meteors(meteor_severity, get_meteor_types(), pick(GLOB.cardinal), pick(GLOB.using_map.station_levels))
+			spawn_meteors(meteor_severity, get_meteor_types(), pick(global.cardinal), pick(GLOB.using_map.station_levels))
 		var/escalated = FALSE
 		if(prob(escalation_probability) && (meteor_severity < maximal_severity))
 			meteor_severity++

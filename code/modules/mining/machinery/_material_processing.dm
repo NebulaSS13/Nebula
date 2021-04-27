@@ -38,7 +38,7 @@
 	if(input_turf)
 		overlay_dir = get_dir(src, input_turf)
 		if(overlay_dir != 0)
-			var/image/I = image('icons/obj/machines/mining_machine_overlays.dmi', "[GLOB.reverse_dir[overlay_dir]]")
+			var/image/I = image('icons/obj/machines/mining_machine_overlays.dmi', "[global.reverse_dir[overlay_dir]]")
 			I.layer = DECAL_LAYER
 			switch(overlay_dir)
 				if(NORTH) I.pixel_y += world.icon_size

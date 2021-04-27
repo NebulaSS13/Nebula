@@ -847,7 +847,7 @@ FIRE ALARM
 
 	pixel_x = 0
 	pixel_y = 0
-	var/walldir = (dir & (NORTH|SOUTH)) ? GLOB.reverse_dir[dir] : dir
+	var/walldir = (dir & (NORTH|SOUTH)) ? global.reverse_dir[dir] : dir
 	var/turf/T = get_step(get_turf(src), walldir)
 	if(istype(T) && T.density)
 		if(dir == SOUTH)
@@ -1017,7 +1017,7 @@ FIRE ALARM
 /obj/machinery/firealarm/Initialize(mapload, dir)
 	. = ..()
 	if(dir)
-		set_dir((dir & (NORTH|SOUTH)) ? dir : GLOB.reverse_dir[dir])
+		set_dir((dir & (NORTH|SOUTH)) ? dir : global.reverse_dir[dir])
 	queue_icon_update()
 
 /obj/machinery/partyalarm

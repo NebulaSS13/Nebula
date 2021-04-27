@@ -17,7 +17,7 @@
 	for(var/n in 1 to severity)
 		waves += rand(5,15)
 
-	start_side = pick(GLOB.cardinal)
+	start_side = pick(global.cardinal)
 	endWhen = worst_case_end()
 
 /datum/event/meteor_wave/announce()
@@ -111,9 +111,9 @@
 
 /datum/event/meteor_wave/overmap/tick()
 	if(victim && !victim.is_still()) //Meteors mostly fly in your face
-		start_side = prob(90) ? victim.fore_dir : pick(GLOB.cardinal)
+		start_side = prob(90) ? victim.fore_dir : pick(global.cardinal)
 	else //Unless you're standing
-		start_side = pick(GLOB.cardinal)
+		start_side = pick(global.cardinal)
 	..()
 
 /datum/event/meteor_wave/overmap/get_wave_size()

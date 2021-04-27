@@ -222,7 +222,7 @@
 
 /obj/machinery/cryopod/lifepod/proc/launch()
 	launched = 1
-	for(var/d in GLOB.cardinal)
+	for(var/d in global.cardinal)
 		var/turf/T = get_step(src,d)
 		var/obj/machinery/door/blast/B = locate() in T
 		if(B && B.density)

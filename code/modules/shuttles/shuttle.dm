@@ -274,7 +274,7 @@
 			pipes |= pipe
 			if(LAZYLEN(pipe.nodes_to_networks))
 				pipes |= pipe.nodes_to_networks // This gets all pipes that used to be adjacent to us
-		for(var/direction in GLOB.cardinal) // We do this so that if a shuttle lands in a way that should imply a new pipe/power connection, that actually happens
+		for(var/direction in global.cardinal) // We do this so that if a shuttle lands in a way that should imply a new pipe/power connection, that actually happens
 			var/turf/neighbor = get_step(T, direction)
 			if(neighbor)
 				for(var/obj/structure/cable/cable in neighbor)

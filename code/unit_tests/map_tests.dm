@@ -635,7 +635,7 @@
 	for(var/dir in list(C.d1, C.d2))
 		if(!dir) // Don't care about knots
 			continue
-		var/rev_dir = GLOB.reverse_dir[dir]
+		var/rev_dir = global.reverse_dir[dir]
 
 		var/list/exception = exceptions[source_turf]
 		if(exception && (dir in exception))
@@ -769,7 +769,7 @@
 			return trunk.linked
 		var/obj/structure/disposalpipe/next_pipe
 		for(var/obj/structure/disposalpipe/P in get_step(our_pipe, current_dir))
-			if(GLOB.reverse_dir[current_dir] & P.dpdir)
+			if(global.reverse_dir[current_dir] & P.dpdir)
 				next_pipe = P
 				break
 		if(!istype(next_pipe))

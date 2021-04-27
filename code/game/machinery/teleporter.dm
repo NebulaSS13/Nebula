@@ -15,13 +15,13 @@
 
 	id = "[random_id(/obj/machinery/computer/teleporter, 1000, 9999)]"
 
-	for (var/dir in GLOB.cardinal)
+	for (var/dir in global.cardinal)
 		var/obj/machinery/teleport/station/found_station = locate() in get_step(src, dir)
 		if(found_station)
 			station = found_station
 			break
 	if(station)
-		for (var/dir in GLOB.cardinal)
+		for (var/dir in global.cardinal)
 			var/obj/machinery/teleport/hub/found_hub = locate() in get_step(station, dir)
 			if(found_hub)
 				hub = found_hub
@@ -259,7 +259,7 @@
 
 /obj/machinery/teleport/station/Initialize()
 	. = ..()
-	for (var/target_dir in GLOB.cardinal)
+	for (var/target_dir in global.cardinal)
 		var/obj/machinery/teleport/hub/found_pad = locate() in get_step(src, target_dir)
 		if(found_pad)
 			set_dir(get_dir(src, found_pad))

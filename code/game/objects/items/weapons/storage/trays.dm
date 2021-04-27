@@ -44,7 +44,7 @@
 	set waitfor = 0
 	for(var/obj/item/I in contents)
 		if(remove_from_storage(I, target_loc) && !neatly)
-			I.throw_at(get_edge_target_turf(I.loc, pick(GLOB.alldirs)), rand(1,3), round(10/I.w_class))
+			I.throw_at(get_edge_target_turf(I.loc, pick(global.alldirs)), rand(1,3), round(10/I.w_class))
 	update_icon()
 
 /obj/item/storage/tray/shatter(consumed)

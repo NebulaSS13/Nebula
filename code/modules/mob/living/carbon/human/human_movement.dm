@@ -92,7 +92,7 @@
 			if(prob(50))
 				thrust.stabilization_on = 0
 			SetMoveCooldown(15)	//2 seconds of random rando panic drifting
-			step(src, pick(GLOB.alldirs))
+			step(src, pick(global.alldirs))
 			return 0
 
 	. = ..()

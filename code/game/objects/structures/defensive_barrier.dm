@@ -66,7 +66,7 @@
 		var/obj/item/projectile/proj = mover
 		if(Adjacent(proj?.firer))
 			return TRUE
-		if(mover.dir != GLOB.reverse_dir[dir])
+		if(mover.dir != global.reverse_dir[dir])
 			return TRUE
 		if(get_dist(proj.starting, loc) <= 1)//allows to fire from 1 tile away of barrier
 			return TRUE
