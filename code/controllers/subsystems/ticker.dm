@@ -84,7 +84,7 @@ SUBSYSTEM_DEF(ticker)
 	create_characters() //Create player characters and transfer them
 	collect_minds()
 	equip_characters()
-	for(var/mob/living/carbon/human/H in GLOB.player_list)
+	for(var/mob/living/carbon/human/H in global.player_list)
 		if(H.mind && !player_is_antag(H.mind, only_offstation_roles = 1))
 			var/datum/job/job = SSjobs.get_by_title(H.mind.assigned_role)
 			if(job && job.create_record)
@@ -102,7 +102,7 @@ SUBSYSTEM_DEF(ticker)
 			to_world("<h4>[global.current_holiday.announcement]</h4>")
 			global.current_holiday.set_up_holiday()
 
-	if(!length(GLOB.admins))
+	if(!length(global.admins))
 		send2adminirc("Round has started with no admins online.")
 
 /datum/controller/subsystem/ticker/proc/playing_tick()
@@ -273,7 +273,7 @@ Helpers
 		mode.announce()
 
 /datum/controller/subsystem/ticker/proc/create_characters()
-	for(var/mob/new_player/player in GLOB.player_list)
+	for(var/mob/new_player/player in global.player_list)
 		if(player && player.ready && player.mind)
 			if(player.mind.assigned_role=="AI")
 				player.close_spawn_windows()
@@ -287,13 +287,13 @@ Helpers
 			player.show_lobby_menu()
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
-	for(var/mob/living/player in GLOB.player_list)
+	for(var/mob/living/player in global.player_list)
 		if(player.mind)
 			minds += player.mind
 
 /datum/controller/subsystem/ticker/proc/equip_characters()
 	var/captainless=1
-	for(var/mob/living/carbon/human/player in GLOB.player_list)
+	for(var/mob/living/carbon/human/player in global.player_list)
 		if(player && player.mind && player.mind.assigned_role)
 			if(player.mind.assigned_role == "Captain")
 				captainless=0
@@ -301,7 +301,7 @@ Helpers
 				SSjobs.equip_rank(player, player.mind.assigned_role, 0)
 				SScustomitems.equip_custom_items(player)
 	if(captainless)
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M in global.player_list)
 			if(!istype(M,/mob/new_player))
 				to_chat(M, "Captainship not forced on anyone.")
 
@@ -383,7 +383,7 @@ Helpers
 	for(var/client/C)
 		if(!C.credits)
 			C.RollCredits()
-	for(var/mob/Player in GLOB.player_list)
+	for(var/mob/Player in global.player_list)
 		if(Player.mind && !isnewplayer(Player))
 			if(Player.stat != DEAD)
 				var/turf/playerTurf = get_turf(Player)

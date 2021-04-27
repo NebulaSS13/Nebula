@@ -89,7 +89,7 @@
 	if(mode.antag_scaling_coeff)
 
 		var/count = 0
-		for(var/mob/living/M in GLOB.player_list)
+		for(var/mob/living/M in global.player_list)
 			if(M.client)
 				count++
 

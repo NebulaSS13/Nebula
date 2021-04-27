@@ -251,7 +251,7 @@ var/template_file_name = "all_templates.json"
 		var/datum/asset/A = new type()
 		A.register()
 
-	for(var/client/C in GLOB.clients) // This is also called in client/New, but as we haven't initialized the cache until now, and it's possible the client is already connected, we risk doing it twice.
+	for(var/client/C in global.clients) // This is also called in client/New, but as we haven't initialized the cache until now, and it's possible the client is already connected, we risk doing it twice.
 		// Doing this to a client too soon after they've connected can cause issues, also the proc we call sleeps.
 		spawn(10)
 			getFilesSlow(C, cache, FALSE)

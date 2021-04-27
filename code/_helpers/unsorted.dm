@@ -277,7 +277,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		if((world.time-time_passed) > 5 MINUTES)
 			return	//took too long
 		newname = sanitizeName(newname, ,allow_numbers)	//returns null if the name doesn't meet some basic requirements. Tidies up a few other things like bad-characters.
-		for(var/mob/living/M in GLOB.player_list)
+		for(var/mob/living/M in global.player_list)
 			if(M == src)
 				continue
 			if(!newname || M.real_name == newname)
@@ -300,7 +300,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	var/select = null
 	var/list/borgs = list()
-	for (var/mob/living/silicon/robot/A in GLOB.player_list)
+	for (var/mob/living/silicon/robot/A in global.player_list)
 		if (A.stat == 2 || A.connected_ai || A.scrambledcodes || istype(A,/mob/living/silicon/robot/drone) || !(get_z(A) in zs))
 			continue
 		var/name = "[A.real_name] ([A.modtype] [A.braintype])"
@@ -315,7 +315,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/list/zs = get_valid_silicon_zs(z)
 
 	. = list()
-	for(var/mob/living/silicon/ai/A in GLOB.living_mob_list_)
+	for(var/mob/living/silicon/ai/A in global.living_mob_list_)
 		if(A.stat == DEAD || A.control_disabled || !(get_z(A) in zs))
 			continue
 		. += A

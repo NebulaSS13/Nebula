@@ -1,4 +1,4 @@
-GLOBAL_LIST_EMPTY(all_crew_records)
+var/list/all_crew_records = list()
 GLOBAL_LIST_INIT(blood_types, list("A-", "A+", "B-", "B+", "AB-", "AB+", "O-", "O+"))
 GLOBAL_LIST_INIT(physical_statuses, list("Active", "Disabled", "SSD", "Deceased", "MIA"))
 GLOBAL_VAR_INIT(default_physical_status, "Active")
@@ -23,7 +23,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 /datum/computer_file/report/crew_record/Destroy()
 	. = ..()
-	GLOB.all_crew_records.Remove(src)
+	global.all_crew_records.Remove(src)
 
 /datum/computer_file/report/crew_record/proc/add_grant(var/datum/computer_file/data/grant_record/new_grant)
 	grants |= weakref(new_grant)
@@ -144,7 +144,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 	if(H)
 		var/skills = list()
-		for(var/decl/hierarchy/skill/S in GLOB.skills)
+		for(var/decl/hierarchy/skill/S in global.skills)
 			var/level = H.get_skill_value(S.type)
 			if(level > SKILL_NONE)
 				skills += "[S.name], [S.levels[level]]"
@@ -187,7 +187,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 // Used by character creation to create a record for new arrivals.
 /proc/CreateModularRecord(var/mob/living/H, record_type = /datum/computer_file/report/crew_record)
 	var/datum/computer_file/report/crew_record/CR = new record_type()
-	GLOB.all_crew_records.Add(CR)
+	global.all_crew_records.Add(CR)
 	CR.load_from_mob(H)
 	var/datum/computer_network/network = get_local_network_at(get_turf(H))
 	if(network)
@@ -197,7 +197,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 // Gets crew records filtered by set of positions
 /proc/department_crew_manifest(var/list/filter_positions, var/blacklist = FALSE)
 	var/list/matches = list()
-	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+	for(var/datum/computer_file/report/crew_record/CR in global.all_crew_records)
 		var/rank = CR.get_job()
 		if(blacklist)
 			if(!(rank in filter_positions))
@@ -223,7 +223,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 //Should only be used for OOC stuff, for player-facing stuff you must go through the network.
 /proc/get_crewmember_record(var/name)
-	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+	for(var/datum/computer_file/report/crew_record/CR in global.all_crew_records)
 		if(CR.get_name() == name)
 			return CR
 	return null

@@ -263,7 +263,7 @@ var/list/supermatter_final_thoughts = list(
 	for(var/z in affected_z)
 		SSradiation.z_radiate(locate(1, 1, z), DETONATION_RADS, 1)
 
-	for(var/mob/living/mob in GLOB.living_mob_list_)
+	for(var/mob/living/mob in global.living_mob_list_)
 		var/turf/TM = get_turf(mob)
 		if(!TM)
 			continue
@@ -365,7 +365,7 @@ var/list/supermatter_final_thoughts = list(
 			GLOB.global_announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
 			public_alert = 1
 			global.using_map.unbolt_saferooms()
-			for(var/mob/M in GLOB.player_list)
+			for(var/mob/M in global.player_list)
 				var/turf/T = get_turf(M)
 				if(T && (T.z in global.using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
 					sound_to(M, 'sound/ambience/matteralarm.ogg')

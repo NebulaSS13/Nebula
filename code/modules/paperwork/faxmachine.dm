@@ -1,7 +1,7 @@
-GLOBAL_LIST_EMPTY(allfaxes)
-GLOBAL_LIST_EMPTY(alldepartments)
+var/list/allfaxes = list()
+var/list/alldepartments = list()
 
-GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
+var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 /obj/machinery/photocopier/faxmachine
 	name = "fax machine"
@@ -26,10 +26,11 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 
 	if(!admin_departments)
 		admin_departments = list("[global.using_map.boss_name]", "Sol Federal Police", "[global.using_map.boss_short] Supply") + global.using_map.map_admin_faxes
-	GLOB.allfaxes += src
-	if(!destination) destination = "[global.using_map.boss_name]"
-	if( !(("[department]" in GLOB.alldepartments) || ("[department]" in admin_departments)))
-		GLOB.alldepartments |= department
+	global.allfaxes += src
+	if(!destination)
+		destination = "[global.using_map.boss_name]"
+	if( !(("[department]" in global.alldepartments) || ("[department]" in admin_departments)))
+		global.alldepartments |= department
 
 /obj/machinery/photocopier/faxmachine/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/card/id))
@@ -128,7 +129,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		return TOPIC_REFRESH
 
 	if(href_list["dept"])
-		var/desired_destination = input(user, "Which department?", "Choose a department", "") as null|anything in (GLOB.alldepartments + admin_departments)
+		var/desired_destination = input(user, "Which department?", "Choose a department", "") as null|anything in (global.alldepartments + admin_departments)
 		if(desired_destination && CanInteract(user, state))
 			destination = desired_destination
 		return TOPIC_REFRESH
@@ -150,7 +151,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	use_power_oneoff(200)
 
 	var/success = 0
-	for(var/obj/machinery/photocopier/faxmachine/F in GLOB.allfaxes)
+	for(var/obj/machinery/photocopier/faxmachine/F in global.allfaxes)
 		if( F.department == destination )
 			success = F.recievefax(copyitem)
 
@@ -204,7 +205,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		return
 
 	rcvdcopy.forceMove(null) //hopefully this shouldn't cause trouble
-	GLOB.adminfaxes += rcvdcopy
+	global.adminfaxes += rcvdcopy
 
 	//message badmins that a fax has arrived
 	if (destination == global.using_map.boss_name)
@@ -228,7 +229,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	msg += "(<A HREF='?_src_=holder;take_ic=\ref[sender]'>TAKE</a>) (<a href='?_src_=holder;FaxReply=\ref[sender];originfax=\ref[src];replyorigin=[reply_type]'>REPLY</a>)</b>: "
 	msg += "Receiving '[sent.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[sent]'>view message</a></span>"
 
-	for(var/client/C in GLOB.admins)
+	for(var/client/C in global.admins)
 		if(check_rights((R_ADMIN|R_MOD),0,C))
 			to_chat(C, msg)
 			sound_to(C, 'sound/machines/dotprinter.ogg')

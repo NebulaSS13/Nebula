@@ -91,7 +91,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 				last_request = world.time
 				to_chat(user, "<span class='notice'>You request an AI's presence.</span>")
 				var/area/area = get_area(src)
-				for(var/mob/living/silicon/ai/AI in GLOB.living_mob_list_)
+				for(var/mob/living/silicon/ai/AI in global.living_mob_list_)
 					if(!AI.client)	continue
 					if (holopadType != HOLOPAD_LONG_RANGE && !AreConnectedZLevels(AI.z, src.z))
 						continue

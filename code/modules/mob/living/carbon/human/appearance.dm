@@ -39,7 +39,7 @@
 	if(h_style == hair_style)
 		return
 
-	if(!(hair_style in GLOB.hair_styles_list))
+	if(!(hair_style in global.hair_styles_list))
 		return
 
 	h_style = hair_style
@@ -54,7 +54,7 @@
 	if(f_style == facial_hair_style)
 		return
 
-	if(!(facial_hair_style in GLOB.facial_hair_styles_list))
+	if(!(facial_hair_style in global.facial_hair_styles_list))
 		return
 
 	f_style = facial_hair_style

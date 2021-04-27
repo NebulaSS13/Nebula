@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(statistics)
 	var/list/population_log = list()
 
 /datum/controller/subsystem/statistics/fire(resumed = FALSE)
-	population_log[time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")] = list("players" = LAZYLEN(GLOB.clients), "admin" = LAZYLEN(GLOB.admins))
+	population_log[time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")] = list("players" = LAZYLEN(global.clients), "admin" = LAZYLEN(global.admins))
 
 /datum/controller/subsystem/statistics/Shutdown()
 

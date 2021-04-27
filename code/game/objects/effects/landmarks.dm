@@ -168,9 +168,9 @@
 	name = "ruin_[sequential_id(/obj/effect/landmark/ruin)]"
 	. = ..()
 	ruin_template = my_ruin_template
-	GLOB.ruin_landmarks |= src
+	global.ruin_landmarks |= src
 
 /obj/effect/landmark/ruin/Destroy()
-	GLOB.ruin_landmarks -= src
+	global.ruin_landmarks -= src
 	ruin_template = null
 	. = ..()

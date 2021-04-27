@@ -130,7 +130,7 @@ var/list/ai_verbs_default = list(
 	var/pickedName = null
 	while(!pickedName)
 		pickedName = pick(GLOB.ai_names)
-		for (var/mob/living/silicon/ai/A in GLOB.silicon_mob_list)
+		for (var/mob/living/silicon/ai/A in global.silicon_mob_list)
 			if (A.real_name == pickedName && possibleNames.len > 1) //fixing the theoretically possible infinite loop
 				possibleNames -= pickedName
 				pickedName = null
@@ -532,7 +532,7 @@ var/list/ai_verbs_default = list(
 
 		var/personnel_list[] = list()
 
-		for(var/datum/computer_file/report/crew_record/t in GLOB.all_crew_records)//Look in data core locked.
+		for(var/datum/computer_file/report/crew_record/t in global.all_crew_records)//Look in data core locked.
 			personnel_list["[t.get_name()]: [t.get_rank()]"] = t.photo_front//Pull names, rank, and image.
 
 		if(personnel_list.len)

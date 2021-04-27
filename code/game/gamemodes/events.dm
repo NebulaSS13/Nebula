@@ -3,7 +3,7 @@ var/eventchance = 10 // Percent chance per 5 minutes.
 var/hadevent    = 0
 
 /proc/appendicitis()
-	for(var/mob/living/carbon/human/H in shuffle(GLOB.living_mob_list_))
+	for(var/mob/living/carbon/human/H in shuffle(global.living_mob_list_))
 		if(H.client && H.stat != DEAD)
 			var/obj/item/organ/internal/appendix/A = H.get_internal_organ(BP_APPENDIX)
 			if(!istype(A) || (A && A.inflamed))
@@ -58,7 +58,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 */
 
 	//AI laws
-	for(var/mob/living/silicon/ai/M in GLOB.living_mob_list_)
+	for(var/mob/living/silicon/ai/M in global.living_mob_list_)
 		if(M.stat != 2 && M.see_in_dark != 0)
 			var/who2 = pick("ALIENS", "BEARS", "CLOWNS", "XENOS", "PETES", "BOMBS", "FETISHES", "WIZARDS", "SYNDICATE AGENTS", "CENTCOM OFFICERS", "SPACE PIRATES", "TRAITORS", "MONKEYS",  "BEES", "CARP", "CRABS", "EELS", "BANDITS", "LIGHTS")
 			var/what2 = pick("BOLTERS", "STAVES", "DICE", "SINGULARITIES", "TOOLBOXES", "NETTLES", "AIRLOCKS", "CLOTHES", "WEAPONS", "MEDKITS", "BOMBS", "CANISTERS", "CHAIRS", "BBQ GRILLS", "ID CARDS", "CAPTAINS")
@@ -77,7 +77,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 			var/allergysev = pick("deathly", "mildly", "severely", "contagiously")
 			var/crew
 			var/list/pos_crew = list()
-			for(var/mob/living/carbon/human/pos in GLOB.player_list)
+			for(var/mob/living/carbon/human/pos in global.player_list)
 				pos_crew += pos.real_name
 			if(pos_crew.len)
 				crew = pick(pos_crew)

@@ -7,19 +7,19 @@ var/global/floorIsLava = 0
 /proc/message_admins(var/msg)
 	msg = "<span class=\"log_message\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
-	for(var/client/C in GLOB.admins)
+	for(var/client/C in global.admins)
 		if(R_ADMIN & C.holder.rights)
 			to_chat(C, msg)
 /proc/message_staff(var/msg)
 	msg = "<span class=\"log_message\"><span class=\"prefix\">STAFF LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
-	for(var/client/C in GLOB.admins)
+	for(var/client/C in global.admins)
 		if(C && C.holder && (R_INVESTIGATE & C.holder.rights))
 			to_chat(C, msg)
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
 	log_attack(text)
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
-	for(var/client/C in GLOB.admins)
+	for(var/client/C in global.admins)
 		if(check_rights(R_INVESTIGATE, 0, C))
 			if(C.get_preference_value(/datum/client_preference/staff/show_attack_logs) == global.PREF_SHOW)
 				var/msg = rendered
@@ -291,7 +291,7 @@ var/global/floorIsLava = 0
 	var/list/dat = list()
 
 	var/p_age = "unknown"
-	for(var/client/C in GLOB.clients)
+	for(var/client/C in global.clients)
 		if(C.ckey == key)
 			p_age = C.player_age
 			break
@@ -1298,7 +1298,7 @@ var/global/floorIsLava = 0
 		return
 
 	if(!M)
-		M = input("Select mob.", "Select mob.") as null|anything in GLOB.player_list
+		M = input("Select mob.", "Select mob.") as null|anything in global.player_list
 	if(!istype(M))
 		return
 	var/datum/nano_module/skill_ui/NM = /datum/nano_module/skill_ui
@@ -1432,7 +1432,7 @@ var/global/floorIsLava = 0
 	log_and_message_admins("attempting to force mode autospawn.")
 	SSticker.mode.process_autoantag()
 
-/datum/admins/proc/paralyze_mob(mob/living/M as mob in GLOB.player_list)
+/datum/admins/proc/paralyze_mob(mob/living/M as mob in global.player_list)
 	set category = "Admin"
 	set name = "Toggle Paralyze"
 	set desc = "Toggles paralyze state, which stuns, blinds and mutes the victim."
@@ -1460,8 +1460,8 @@ var/global/floorIsLava = 0
 	set category = "Special Verbs"
 	set name = "Send Fax"
 	set desc = "Sends a fax to this machine"
-	var/department = input("Choose a fax", "Fax") as null|anything in GLOB.alldepartments
-	for(var/obj/machinery/photocopier/faxmachine/sendto in GLOB.allfaxes)
+	var/department = input("Choose a fax", "Fax") as null|anything in global.alldepartments
+	for(var/obj/machinery/photocopier/faxmachine/sendto in global.allfaxes)
 		if(sendto.department == department)
 
 			if (!istype(src,/datum/admins))
@@ -1522,7 +1522,7 @@ datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 	var/obj/item/rcvdcopy
 	rcvdcopy = destination.copy(P)
 	rcvdcopy.forceMove(null) //hopefully this shouldn't cause trouble
-	GLOB.adminfaxes += rcvdcopy
+	global.adminfaxes += rcvdcopy
 
 
 
@@ -1530,12 +1530,12 @@ datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 		to_chat(src.owner, "<span class='notice'>Message reply to transmitted successfully.</span>")
 		if(P.sender) // sent as a reply
 			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")
-			for(var/client/C in GLOB.admins)
+			for(var/client/C in global.admins)
 				if((R_INVESTIGATE) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(P.sender)] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
 		else
 			log_admin("[key_name(src.owner)] has sent a fax message to [destination.department]")
-			for(var/client/C in GLOB.admins)
+			for(var/client/C in global.admins)
 				if((R_INVESTIGATE) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] has sent a fax message to [destination.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
 

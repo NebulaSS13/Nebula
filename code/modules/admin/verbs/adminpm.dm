@@ -158,7 +158,7 @@
 		ticket_text.Execute()
 
 	//we don't use message_admins here because the sender/receiver might get it too
-	for(var/client/X in GLOB.admins)
+	for(var/client/X in global.admins)
 		//check client/X is an admin and isn't the sender or recipient
 		if(X == C || X == src)
 			continue
@@ -187,7 +187,7 @@
 	admin_pm_repository.store_pm(src, "IRC-[sender]", msg)
 
 	to_chat(src, "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[sender]</span>: <span class='message'>[msg]</span></span></span>")
-	for(var/client/X in GLOB.admins)
+	for(var/client/X in global.admins)
 		if(X == src)
 			continue
 		if(X.holder.rights & R_ADMIN|R_MOD)

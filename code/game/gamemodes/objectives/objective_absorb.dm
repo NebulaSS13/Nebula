@@ -2,11 +2,11 @@
 	target_amount = rand (lowbound,highbound)
 	var/n_p = 1 //autowin
 	if (GAME_STATE == RUNLEVEL_SETUP)
-		for(var/mob/new_player/P in GLOB.player_list)
+		for(var/mob/new_player/P in global.player_list)
 			if(P.client && P.ready && P.mind!=owner)
 				n_p ++
 	else if (GAME_STATE == RUNLEVEL_GAME)
-		for(var/mob/living/carbon/human/P in GLOB.player_list)
+		for(var/mob/living/carbon/human/P in global.player_list)
 			if(P.client && !(P.mind.changeling) && P.mind!=owner)
 				n_p ++
 	target_amount = min(target_amount, n_p)

@@ -232,7 +232,7 @@
 	var/datum/job/job = SSjobs.get_by_title(new_record.get_job())
 	if(job)
 		var/skills = list()
-		for(var/decl/hierarchy/skill/S in GLOB.skills)
+		for(var/decl/hierarchy/skill/S in global.skills)
 			var/level = job.min_skill[S.type]
 			if(prob(10))
 				level = min(rand(1,3), job.max_skill[S.type])

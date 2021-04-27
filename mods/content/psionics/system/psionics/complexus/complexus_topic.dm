@@ -15,6 +15,6 @@
 			check_latency_trigger(100, "outside intervention", redactive = TRUE)
 			. = TRUE
 		if(.)
-			var/datum/admins/admin = GLOB.admins[usr.key]
+			var/datum/admins/admin = global.admins[usr.key]
 			if(istype(admin)) 
 				admin.show_player_panel(owner)

@@ -143,7 +143,7 @@
 
 	if(!speaker_mask) speaker_mask = speaker.name
 	message = format_message(message, get_spoken_verb(message))
-	for(var/mob/player in GLOB.player_list)
+	for(var/mob/player in global.player_list)
 		player.hear_broadcast(src, speaker, speaker_mask, message)
 
 /mob/proc/hear_broadcast(var/decl/language/language, var/mob/speaker, var/speaker_name, var/message)

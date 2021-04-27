@@ -175,7 +175,7 @@
 			user.psi.backblast(rand(10,25))
 			return TRUE
 
-		for(var/mob/observer/G in GLOB.dead_mob_list_)
+		for(var/mob/observer/G in global.dead_mob_list_)
 			if(G.mind && G.mind.current == target && G.client)
 				to_chat(G, SPAN_NOTICE("<font size = 3><b>Your body has been revived, <b>Re-Enter Corpse</b> to return to it.</b></font>"))
 				break

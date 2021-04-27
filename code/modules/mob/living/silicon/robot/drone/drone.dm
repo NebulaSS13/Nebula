@@ -227,7 +227,7 @@
 	log_and_message_admins("emagged drone [key_name_admin(src)].  Laws overridden.", user)
 	log_game("[key_name(user)] emagged drone [key_name(src)][controlling_ai ? " but AI [key_name(controlling_ai)] is in remote control" : " Laws overridden"].")
 	var/time = time2text(world.realtime,"hh:mm:ss")
-	GLOB.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
+	global.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
 
 	emagged = 1
 	lawupdate = 0
@@ -355,7 +355,7 @@
 
 /proc/too_many_active_drones()
 	var/drones = 0
-	for(var/mob/living/silicon/robot/drone/D in GLOB.silicon_mob_list)
+	for(var/mob/living/silicon/robot/drone/D in global.silicon_mob_list)
 		if(D.key && D.client)
 			drones++
 	return drones >= config.max_maint_drones

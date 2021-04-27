@@ -200,7 +200,7 @@
 	L.status_flags |= GODMODE
 	events_repository.register(/decl/observ/destroyed, L,src,.proc/fail_ritual)
 	addtimer(CALLBACK(src, .proc/succeed_ritual, L), 600 SECONDS) //6 minutes
-	for(var/mob/living/player in GLOB.player_list)
+	for(var/mob/living/player in global.player_list)
 		sound_to(player, 'sound/effects/cascade.ogg')
 		if(player?.mind?.assigned_job?.is_holy)
 			to_chat(player, "<span class='cult'>Something bad is coming.... you know you don't have much time. Find and destroy the vessel, before its too late.</span>")
@@ -214,7 +214,7 @@
 
 /datum/phenomena/divine_right/proc/succeed_ritual(var/mob/living/L)
 	to_chat(linked, "<span class='cult'>You have been reborn! Your power is limited here, focused on your body, but in return you are both eternal and physical.</span>")
-	for(var/mob/living/player in GLOB.player_list)
+	for(var/mob/living/player in global.player_list)
 		sound_to(player, 'sound/effects/cascade.ogg')
 		to_chat(player, "<span class='cult'>\The [linked] has been born into flesh. Kneel to its authority or else.</span>")
 	linked.mind.transfer_to(L)

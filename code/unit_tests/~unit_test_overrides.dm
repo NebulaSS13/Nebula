@@ -45,7 +45,7 @@ GLOBAL_DATUM(unit_test_last_obj_random_creation, /atom/movable)
 
 	return heaviest_choice
 
-GLOBAL_LIST_EMPTY(unit_test_obj_random_weights_by_type)
+var/list/unit_test_obj_random_weights_by_type = list()
 
 // If you adjust any of the values below, please also update /obj/structure/closet/proc/content_size(atom/movable/AM)
 /proc/unit_test_weight_of_path(var/path)

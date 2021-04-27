@@ -783,7 +783,7 @@ MEDICAL
 
 	//Choosing the skill
 	var/list/skill_choices = list()
-	for(var/decl/hierarchy/skill/S in GLOB.skills)
+	for(var/decl/hierarchy/skill/S in global.skills)
 		if(user.skill_check(S.type, SKILL_BASIC))
 			LAZYADD(skill_choices, S)
 	var/decl/hierarchy/skill/skill_choice = input(user, "What subject does your textbook teach?", "Textbook skill selection") as null|anything in skill_choices

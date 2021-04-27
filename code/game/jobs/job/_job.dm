@@ -245,7 +245,7 @@
 
 /datum/job/proc/get_active_count()
 	var/active = 0
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in global.player_list)
 		if(check_is_active(M))
 			active++
 	return active

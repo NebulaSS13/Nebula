@@ -103,14 +103,14 @@
 				break
 
 	var/who
-	for(var/client/C in GLOB.clients)
+	for(var/client/C in global.clients)
 		if(!who)
 			who = "[C]"
 		else
 			who += ", [C]"
 
 	var/adminwho
-	for(var/client/C in GLOB.admins)
+	for(var/client/C in global.admins)
 		if(!adminwho)
 			adminwho = "[C]"
 		else

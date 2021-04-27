@@ -25,7 +25,7 @@
 /decl/communication_channel/aooc/do_communicate(client/C, message)
 	var/datum/admins/holder = C.holder
 
-	for(var/client/target in GLOB.clients)
+	for(var/client/target in global.clients)
 		if(check_rights(R_INVESTIGATE, FALSE, target))
 			receive_communication(C, target, SPAN_AOOC("<EM>[get_options_bar(C, 0, 1, 1)]:</EM> <span class='message'>[message]</span>"))
 		else if(target.mob?.mind?.assigned_special_role)
@@ -34,7 +34,7 @@
 			receive_communication(C, target, SPAN_AOOC("<EM>[player_display]:</EM> <span class='message'>[message]</span>"))
 
 /decl/communication_channel/aooc/do_broadcast(message)
-	for (var/client/target in GLOB.clients)
+	for (var/client/target in global.clients)
 		if (check_rights(R_INVESTIGATE, FALSE, target) || target.mob?.mind?.assigned_special_role)
 			receive_broadcast(target, SPAN_AOOC("<strong>SYSTEM BROADCAST:</strong> <span class='message'>[message]</span>"))
 

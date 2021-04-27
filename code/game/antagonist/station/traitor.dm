@@ -83,7 +83,7 @@
 		return FALSE
 
 	var/list/dudes = list()
-	for(var/mob/living/carbon/human/man in GLOB.player_list)
+	for(var/mob/living/carbon/human/man in global.player_list)
 		if(man.client)
 			var/decl/cultural_info/culture = man.get_cultural_value(TAG_FACTION)
 			if(culture && prob(culture.subversive_potential))

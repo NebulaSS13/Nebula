@@ -11,7 +11,7 @@
 	var/obj/item/radio/radio
 
 /obj/item/camera/tvcamera/Destroy()
-	GLOB.listening_objects -= src
+	global.listening_objects -= src
 	QDEL_NULL(camera)
 	QDEL_NULL(radio)
 	. = ..()
@@ -24,7 +24,7 @@
 	radio.listening = FALSE
 	radio.set_frequency(ENT_FREQ)
 	radio.power_usage = 0
-	GLOB.listening_objects += src
+	global.listening_objects += src
 	. = ..()
 
 /obj/item/camera/tvcamera/examine(mob/user)

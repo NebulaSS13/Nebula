@@ -37,7 +37,7 @@
 	diary << "\[[time_stamp()]] [game_id] [category]: [text][log_end]"
 
 /proc/log_admin(text)
-	GLOB.admin_log.Add(text)
+	global.admin_log.Add(text)
 	if (config.log_admin)
 		game_log("ADMIN", text)
 
@@ -55,7 +55,7 @@
 	to_debug_listeners(text, "WARNING")
 
 /proc/to_debug_listeners(text, prefix = "DEBUG")
-	for(var/client/C in GLOB.admins)
+	for(var/client/C in global.admins)
 		if(C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == global.PREF_SHOW)
 			to_chat(C, "[prefix]: [text]")
 

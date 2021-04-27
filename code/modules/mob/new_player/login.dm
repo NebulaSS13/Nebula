@@ -13,7 +13,7 @@
 	global.using_map.show_titlescreen(client)
 	my_client = client
 	set_sight(sight|SEE_TURFS)
-	GLOB.player_list |= src
+	global.player_list |= src
 
 	show_lobby_menu()
 

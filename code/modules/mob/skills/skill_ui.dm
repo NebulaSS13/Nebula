@@ -142,7 +142,7 @@ The generic antag version.
 			return 1
 		var/level = text2num(href_list["add_skill"])
 		var/list/choices = list()
-		for(var/decl/hierarchy/skill/S in GLOB.skills)
+		for(var/decl/hierarchy/skill/S in global.skills)
 			if(can_select(S.type, level))
 				choices[S.name] = S.type
 		var/choice = input(usr, "Which skill would you like to add?", "Add Skill") as null|anything in choices

@@ -158,7 +158,7 @@ var/list/additional_antag_types = list()
 // Returns 0 if the mode can start and a message explaining the reason why it can't otherwise.
 /datum/game_mode/proc/startRequirements()
 	var/playerC = 0
-	for(var/mob/new_player/player in GLOB.player_list)
+	for(var/mob/new_player/player in global.player_list)
 		if((player.client)&&(player.ready))
 			playerC++
 
@@ -366,7 +366,7 @@ var/list/additional_antag_types = list()
 	var/escaped_humans = 0
 	var/escaped_total = 0
 
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in global.player_list)
 		if(M.client)
 			clients++
 			if(M.stat != DEAD)
@@ -382,7 +382,7 @@ var/list/additional_antag_types = list()
 				ghosts++
 
 	var/departmental_goal_summary = SSgoals.get_roundend_summary()
-	for(var/thing in GLOB.clients)
+	for(var/thing in global.clients)
 		var/client/client = thing
 		if(client.mob && client.mob.mind)
 			client.mob.mind.show_roundend_summary(departmental_goal_summary)
@@ -427,7 +427,7 @@ var/list/additional_antag_types = list()
 
 	// If this is being called post-roundstart then it doesn't care about ready status.
 	if(GAME_STATE == RUNLEVEL_GAME)
-		for(var/mob/player in GLOB.player_list)
+		for(var/mob/player in global.player_list)
 			if(!player.client)
 				continue
 			if(istype(player, /mob/new_player))
@@ -437,7 +437,7 @@ var/list/additional_antag_types = list()
 				candidates += player.mind
 	else
 		// Assemble a list of active players without jobbans.
-		for(var/mob/new_player/player in GLOB.player_list)
+		for(var/mob/new_player/player in global.player_list)
 			if( player.client && player.ready )
 				players += player
 
@@ -464,7 +464,7 @@ var/list/additional_antag_types = list()
 
 /datum/game_mode/proc/num_players()
 	. = 0
-	for(var/mob/new_player/P in GLOB.player_list)
+	for(var/mob/new_player/P in global.player_list)
 		if(P.client && P.ready)
 			. ++
 
@@ -506,7 +506,7 @@ var/list/additional_antag_types = list()
 		if(!station_missed)
 			end = cinematic_icon_states[2]
 			to_flick = "station_explode_fade_red"
-			for(var/mob/living/M in GLOB.living_mob_list_)
+			for(var/mob/living/M in global.living_mob_list_)
 				if(is_station_turf(get_turf(M)))
 					M.death()//No mercy
 		if(end)
@@ -526,7 +526,7 @@ var/list/additional_antag_types = list()
 
 		if(L.ckey)
 			var/found = 0
-			for(var/client/C in GLOB.clients)
+			for(var/client/C in global.clients)
 				if(C.ckey == L.ckey)
 					found = 1
 					break

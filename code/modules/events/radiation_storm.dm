@@ -45,7 +45,7 @@
 	for(var/z in affecting_z)
 		SSradiation.z_radiate(locate(1, 1, z), radiation_level, 1)
 
-	for(var/mob/living/carbon/C in GLOB.living_mob_list_)
+	for(var/mob/living/carbon/C in global.living_mob_list_)
 		var/area/A = get_area(C)
 		if(!A)
 			continue

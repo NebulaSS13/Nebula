@@ -40,18 +40,18 @@ var/list/admin_datums = list()
 		owner = C
 		owner.holder = src
 		owner.add_admin_verbs()	//TODO
-		GLOB.admins |= C
+		global.admins |= C
 
 /datum/admins/proc/disassociate()
 	if(owner)
-		GLOB.admins -= owner
+		global.admins -= owner
 		owner.remove_admin_verbs()
 		owner.deadmin_holder = owner.holder
 		owner.holder = null
 
 /datum/admins/proc/reassociate()
 	if(owner)
-		GLOB.admins += owner
+		global.admins += owner
 		owner.holder = src
 		owner.deadmin_holder = null
 		owner.add_admin_verbs()

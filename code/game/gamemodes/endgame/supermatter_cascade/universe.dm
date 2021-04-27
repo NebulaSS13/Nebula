@@ -40,7 +40,7 @@ var/global/universe_has_ended = 0
 	to_world("<span class='sinister' style='font-size:22pt'>You are blinded by a brilliant flash of energy.</span>")
 	sound_to(world, sound('sound/effects/cascade.ogg'))
 
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in global.player_list)
 		M.flash_eyes()
 
 	if(SSevac.evacuation_controller.cancel_evacuation())
@@ -113,7 +113,7 @@ var/global/universe_has_ended = 0
 			APC.queue_icon_update()
 
 /datum/universal_state/supermatter_cascade/proc/PlayerSet()
-	for(var/datum/mind/M in GLOB.player_list)
+	for(var/datum/mind/M in global.player_list)
 		if(!istype(M.current,/mob/living))
 			continue
 		if(M.current.stat!=2)

@@ -152,7 +152,7 @@
 
 /obj/effect/meteor/Initialize()
 	. = ..()
-	GLOB.meteor_list += src
+	global.meteor_list += src
 
 /obj/effect/meteor/Move()
 	. = ..() //process movement...
@@ -166,7 +166,7 @@
 
 /obj/effect/meteor/Destroy()
 	walk(src,0) //this cancels the walk_towards() proc
-	GLOB.meteor_list -= src
+	global.meteor_list -= src
 	. = ..()
 
 /obj/effect/meteor/Initialize()
@@ -219,7 +219,7 @@
 
 /obj/effect/meteor/proc/meteor_effect()
 	if(heavy)
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M in global.player_list)
 			var/turf/T = get_turf(M)
 			if(!T || T.z != src.z)
 				continue
