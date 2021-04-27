@@ -37,6 +37,9 @@
 /decl/global_vars/VV_hidden()
 	return list(
 		"admins",
+		"log_directory",
+		"world_qdel_log",
+		"world_href_log",
 		"forumsqladdress",
 		"forumsqldb",
 		"forumsqllogin",

@@ -565,21 +565,21 @@ var/world_topic_last = world.timeofday
 		src.status = s
 
 /world/proc/SetupLogs()
-	GLOB.log_directory = "data/logs/[time2text(world.realtime, "YYYY/MM/DD")]/round-"
+	global.log_directory = "data/logs/[time2text(world.realtime, "YYYY/MM/DD")]/round-"
 	if(game_id)
-		GLOB.log_directory += "[game_id]"
+		global.log_directory += "[game_id]"
 	else
-		GLOB.log_directory += "[replacetext(time_stamp(), ":", ".")]"
+		global.log_directory += "[replacetext(time_stamp(), ":", ".")]"
 
-	GLOB.world_qdel_log = file("[GLOB.log_directory]/qdel.log")
-	WRITE_FILE(GLOB.world_qdel_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
+	global.world_qdel_log = file("[global.log_directory]/qdel.log")
+	WRITE_FILE(global.world_qdel_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
 
-	GLOB.world_href_log = file("[GLOB.log_directory]/href.log") // Used for config-optional total href logging
-	diary = file("[GLOB.log_directory]/main.log") // This is the primary log, containing attack, admin, and game logs.
+	global.world_href_log = file("[global.log_directory]/href.log") // Used for config-optional total href logging
+	diary = file("[global.log_directory]/main.log") // This is the primary log, containing attack, admin, and game logs.
 	WRITE_FILE(diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]")
 
 	if(config && config.log_runtime)
-		var/runtime_log = file("[GLOB.log_directory]/runtime.log")
+		var/runtime_log = file("[global.log_directory]/runtime.log")
 		WRITE_FILE(runtime_log, "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]")
 		log = runtime_log // runtimes and some other output is logged directly to world.log, which is redirected here.
 
