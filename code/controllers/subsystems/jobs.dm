@@ -33,7 +33,7 @@ SUBSYSTEM_DEF(jobs)
 
 	// Create main map jobs.
 	primary_job_datums.Cut()
-	for(var/jobtype in (list(DEFAULT_JOB_TYPE) | GLOB.using_map.allowed_jobs))
+	for(var/jobtype in (list(DEFAULT_JOB_TYPE) | global.using_map.allowed_jobs))
 		var/datum/job/job = get_by_path(jobtype)
 		if(!job)
 			job = new jobtype
@@ -89,7 +89,7 @@ SUBSYSTEM_DEF(jobs)
 
 	// Update title and path tracking, submap list, etc.
 	// Populate/set up map job lists.
-	job_lists_by_map_name = list("[GLOB.using_map.full_name]" = list("jobs" = primary_job_datums, "default_to_hidden" = FALSE))
+	job_lists_by_map_name = list("[global.using_map.full_name]" = list("jobs" = primary_job_datums, "default_to_hidden" = FALSE))
 
 	for(var/atype in submap_archetypes)
 		var/list/submap_job_datums
@@ -102,8 +102,8 @@ SUBSYSTEM_DEF(jobs)
 			job_lists_by_map_name[arch.descriptor] = list("jobs" = submap_job_datums, "default_to_hidden" = TRUE)
 
 	// Update global map blacklists and whitelists.
-	for(var/mappath in GLOB.all_maps)
-		var/datum/map/M = GLOB.all_maps[mappath]
+	for(var/mappath in global.all_maps)
+		var/datum/map/M = global.all_maps[mappath]
 		M.setup_job_lists()
 
 	// Update valid job titles.
@@ -257,7 +257,7 @@ SUBSYSTEM_DEF(jobs)
 			continue
 		if(job.minimum_character_age && (player.client.prefs.get_character_age() < job.minimum_character_age))
 			continue
-		if(istype(job, get_by_title(GLOB.using_map.default_assistant_title))) // We don't want to give him assistant, that's boring!
+		if(istype(job, get_by_title(global.using_map.default_assistant_title))) // We don't want to give him assistant, that's boring!
 			continue
 		if(job.is_restricted(player.client.prefs))
 			continue
@@ -340,7 +340,7 @@ SUBSYSTEM_DEF(jobs)
 	var/datum/job/assist = new DEFAULT_JOB_TYPE ()
 	var/list/assistant_candidates = find_occupation_candidates(assist, 3)
 	for(var/mob/new_player/player in assistant_candidates)
-		assign_role(player, GLOB.using_map.default_assistant_title, mode = mode)
+		assign_role(player, global.using_map.default_assistant_title, mode = mode)
 		assistant_candidates -= player
 
 	//Select one head
@@ -386,7 +386,7 @@ SUBSYSTEM_DEF(jobs)
 	for(var/mob/new_player/player in unassigned_roundstart)
 		if(player.client.prefs.alternate_option == BE_ASSISTANT)
 			var/datum/job/ass = DEFAULT_JOB_TYPE
-			if((GLOB.using_map.flags & MAP_HAS_BRANCH) && player.client.prefs.branches[initial(ass.title)])
+			if((global.using_map.flags & MAP_HAS_BRANCH) && player.client.prefs.branches[initial(ass.title)])
 				var/datum/mil_branch/branch = mil_branches.get_branch(player.client.prefs.branches[initial(ass.title)])
 				ass = branch.assistant_job
 			assign_role(player, initial(ass.title), mode = mode)
@@ -477,9 +477,9 @@ SUBSYSTEM_DEF(jobs)
 
 	if(job)
 		if(H.client)
-			if(GLOB.using_map.flags & MAP_HAS_BRANCH)
+			if(global.using_map.flags & MAP_HAS_BRANCH)
 				H.char_branch = mil_branches.get_branch(H.client.prefs.branches[rank])
-			if(GLOB.using_map.flags & MAP_HAS_RANK)
+			if(global.using_map.flags & MAP_HAS_RANK)
 				H.char_rank = mil_branches.get_rank(H.client.prefs.branches[rank], H.client.prefs.ranks[rank])
 
 		// Transfers the skill settings for the job to the mob

@@ -25,9 +25,9 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	. = ..()
 
 	if(!admin_departments)
-		admin_departments = list("[GLOB.using_map.boss_name]", "Sol Federal Police", "[GLOB.using_map.boss_short] Supply") + GLOB.using_map.map_admin_faxes
+		admin_departments = list("[global.using_map.boss_name]", "Sol Federal Police", "[global.using_map.boss_short] Supply") + global.using_map.map_admin_faxes
 	GLOB.allfaxes += src
-	if(!destination) destination = "[GLOB.using_map.boss_name]"
+	if(!destination) destination = "[global.using_map.boss_name]"
 	if( !(("[department]" in GLOB.alldepartments) || ("[department]" in admin_departments)))
 		GLOB.alldepartments |= department
 
@@ -65,7 +65,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	dat += "<hr>"
 
 	if(authenticated)
-		dat += "<b>Logged in to:</b> [GLOB.using_map.boss_name] Quantum Entanglement Network<br><br>"
+		dat += "<b>Logged in to:</b> [global.using_map.boss_name] Quantum Entanglement Network<br><br>"
 
 		if(copyitem)
 			dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Item</a><br><br>"
@@ -207,13 +207,13 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	GLOB.adminfaxes += rcvdcopy
 
 	//message badmins that a fax has arrived
-	if (destination == GLOB.using_map.boss_name)
+	if (destination == global.using_map.boss_name)
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#006100")
 	else if (destination == "Sol Federal Police")
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#1f66a0")
-	else if (destination == "[GLOB.using_map.boss_short] Supply")
+	else if (destination == "[global.using_map.boss_short] Supply")
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#5f4519")
-	else if (destination in GLOB.using_map.map_admin_faxes)
+	else if (destination in global.using_map.map_admin_faxes)
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#510b74")
 	else
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, "UNKNOWN")

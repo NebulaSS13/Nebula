@@ -74,7 +74,7 @@
 	if(isnull(markup))
 		markup = 1.1 + (rand() * 0.4)
 	if(!ispath(vendor_currency, /decl/currency))
-		vendor_currency = GLOB.using_map.default_currency
+		vendor_currency = global.using_map.default_currency
 	if(product_slogans)
 		slogan_list += splittext(product_slogans, ";")
 

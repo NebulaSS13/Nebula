@@ -222,7 +222,7 @@ var/template_file_name = "all_templates.json"
 	register_asset(global.template_file_name, fcopy_rsc(template_file))
 
 	var/list/mapnames = list()
-	for(var/z in GLOB.using_map.map_levels)
+	for(var/z in global.using_map.map_levels)
 		mapnames += map_image_file_name(z)
 
 	var/list/filenames = flist(MAP_IMAGE_PATH)

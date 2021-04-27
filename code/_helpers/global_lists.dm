@@ -106,8 +106,8 @@ var/list/playable_species = list() // A list of ALL playable species, whiteliste
 			global.all_species[species.name] = species
 			if(!(species.spawn_flags & SPECIES_IS_RESTRICTED))
 				global.playable_species += species.name
-	if(GLOB.using_map.default_species)
-		global.playable_species |= GLOB.using_map.default_species
+	if(global.using_map.default_species)
+		global.playable_species |= global.using_map.default_species
 
 /proc/get_species_by_key(var/species_key)
 	build_species_lists()

@@ -15,7 +15,7 @@
 	var/obj/item/charge_stick/stored_stick = null
 
 /obj/item/stock_parts/computer/charge_stick_slot/proc/get_currency_name()
-	var/decl/currency/cur = GET_DECL(GLOB.using_map.default_currency)
+	var/decl/currency/cur = GET_DECL(global.using_map.default_currency)
 	return cur.name
 
 /obj/item/stock_parts/computer/charge_stick_slot/diagnostics()

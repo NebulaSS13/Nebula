@@ -66,7 +66,7 @@ var/global/universe_has_ended = 0
 	addtimer(CALLBACK(src, /datum/universal_state/supermatter_cascade/proc/finalize_end_of_universe), 5 MINUTES)
 
 /datum/universal_state/supermatter_cascade/proc/announce_end_of_universe(var/exit_exists)
-	var/end_message = "Attn. [GLOB.using_map.station_name]: Severe gravitational anomalies of unheard of scope have been detected in the local volume. Size and intensity of anomalies are increasing exponentially. Within the hour, a newborn black hole will have consumed everything in this sector."
+	var/end_message = "Attn. [global.using_map.station_name]: Severe gravitational anomalies of unheard of scope have been detected in the local volume. Size and intensity of anomalies are increasing exponentially. Within the hour, a newborn black hole will have consumed everything in this sector."
 	if(exit_exists)
 		end_message += "\n\nCuriously, the distortion is predicted to form a traversable wormhole quite close to your current location in approximately five minutes. The terminus is unknown, but it must be better than behind a hungry singularity. Godspeed."
 	end_message += "\n\nAUTOMATED ALERT: Link to [command_name()] lost."
@@ -79,7 +79,7 @@ var/global/universe_has_ended = 0
 /datum/universal_state/supermatter_cascade/proc/AreaSet()
 	for(var/area/A as anything in global.areas)
 		var/invalid_area = FALSE
-		for(var/check_area in GLOB.using_map.get_universe_end_evac_areas())
+		for(var/check_area in global.using_map.get_universe_end_evac_areas())
 			if(istype(A, check_area))
 				invalid_area = TRUE
 				break
@@ -89,7 +89,7 @@ var/global/universe_has_ended = 0
 /datum/universal_state/supermatter_cascade/OverlayAndAmbientSet()
 	spawn(0)
 		for(var/datum/lighting_corner/L in world)
-			if(L.z in GLOB.using_map.admin_levels)
+			if(L.z in global.using_map.admin_levels)
 				L.update_lumcount(1,1,1)
 			else
 				L.update_lumcount(0.0, 0.4, 1)

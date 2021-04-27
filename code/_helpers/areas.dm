@@ -107,7 +107,7 @@
 	. = !is_maint_area(A)
 
 /proc/is_coherent_area(var/area/A)
-	return !is_type_in_list(A, GLOB.using_map.area_coherency_test_exempt_areas)
+	return !is_type_in_list(A, global.using_map.area_coherency_test_exempt_areas)
 
 GLOBAL_LIST_INIT(is_station_but_not_space_or_shuttle_area, list(/proc/is_station_area, /proc/is_not_space_area, /proc/is_not_shuttle_area))
 

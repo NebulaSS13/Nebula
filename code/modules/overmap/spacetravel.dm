@@ -31,16 +31,16 @@ var/list/cached_space = list()
 	return 1
 
 /proc/get_deepspace(x,y)
-	var/obj/effect/overmap/visitable/sector/temporary/res = locate(x,y,GLOB.using_map.overmap_z)
+	var/obj/effect/overmap/visitable/sector/temporary/res = locate(x,y,global.using_map.overmap_z)
 	if(istype(res))
 		return res
 	else if(cached_space.len)
 		res = cached_space[cached_space.len]
 		cached_space -= res
-		res.forceMove(locate(x, y, GLOB.using_map.overmap_z))
+		res.forceMove(locate(x, y, global.using_map.overmap_z))
 		return res
 	else
-		return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, GLOB.using_map.get_empty_zlevel())
+		return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, global.using_map.get_empty_zlevel())
 
 /atom/movable/proc/lost_in_space()
 	for(var/atom/movable/AM in contents)
@@ -89,7 +89,7 @@ var/list/cached_space = list()
 
 	testing("[A] spacemoving from [M] ([M.x], [M.y]).")
 
-	var/turf/map = locate(M.x,M.y,GLOB.using_map.overmap_z)
+	var/turf/map = locate(M.x,M.y,global.using_map.overmap_z)
 	var/obj/effect/overmap/visitable/TM
 	for(var/obj/effect/overmap/visitable/O in map)
 		if(O != M && (O.sector_flags & OVERMAP_SECTOR_IN_SPACE) && prob(50))

@@ -48,7 +48,7 @@
 	set category = "IC"
 	set src in view()
 
-	if(!GLOB.using_map.use_overmap)
+	if(!global.using_map.use_overmap)
 		return
 	if(!CanInteract(usr, GLOB.conscious_state))
 		return

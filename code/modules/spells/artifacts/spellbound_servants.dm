@@ -241,7 +241,7 @@
 	w_class = ITEM_SIZE_TINY
 
 /obj/item/summoning_stone/attack_self(var/mob/user)
-	if(user.z in GLOB.using_map.admin_levels)
+	if(user.z in global.using_map.admin_levels)
 		to_chat(user, "<span class='warning'>You cannot use \the [src] here.</span>")
 		return
 	user.set_machine(src)

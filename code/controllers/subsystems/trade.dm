@@ -10,7 +10,7 @@ SUBSYSTEM_DEF(trade)
 
 /datum/controller/subsystem/trade/Initialize()
 	. = ..()
-	GLOB.using_map.create_trade_hubs()
+	global.using_map.create_trade_hubs()
 
 /datum/controller/subsystem/trade/fire(resumed = FALSE)
 

@@ -25,7 +25,7 @@
 	return mobs
 
 /proc/random_hair_style(gender, species)
-	species = species || GLOB.using_map.default_species
+	species = species || global.using_map.default_species
 	var/h_style = "Bald"
 
 	var/decl/species/mob_species = get_species_by_key(species)
@@ -36,7 +36,7 @@
 	return h_style
 
 /proc/random_facial_hair_style(gender, var/species)
-	species = species || GLOB.using_map.default_species
+	species = species || global.using_map.default_species
 	var/f_style = "Shaved"
 	var/decl/species/mob_species = get_species_by_key(species)
 	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)

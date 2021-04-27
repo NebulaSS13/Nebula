@@ -68,7 +68,7 @@
 	if (given_dna)
 		set_dna(given_dna)
 	if (!species)
-		species = get_species_by_key(GLOB.using_map.default_species)
+		species = get_species_by_key(global.using_map.default_species)
 
 	species.resize_organ(src)
 	bodytype = owner?.bodytype || species.default_bodytype

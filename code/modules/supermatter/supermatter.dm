@@ -364,10 +364,10 @@ var/list/supermatter_final_thoughts = list(
 		if((damage > emergency_point) && !public_alert)
 			GLOB.global_announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
 			public_alert = 1
-			GLOB.using_map.unbolt_saferooms()
+			global.using_map.unbolt_saferooms()
 			for(var/mob/M in GLOB.player_list)
 				var/turf/T = get_turf(M)
-				if(T && (T.z in GLOB.using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
+				if(T && (T.z in global.using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
 					sound_to(M, 'sound/ambience/matteralarm.ogg')
 		else if(safe_warned && public_alert)
 			GLOB.global_announcer.autosay(alert_msg, "Supermatter Monitor")
@@ -385,14 +385,14 @@ var/list/supermatter_final_thoughts = list(
 
 	if(damage > explosion_point)
 		if(!exploded)
-			if(!isspaceturf(L) && (L.z in GLOB.using_map.station_levels))
+			if(!isspaceturf(L) && (L.z in global.using_map.station_levels))
 				announce_warning()
 			explode()
 	else if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
 		shift_light(5, warning_color)
 		if(damage > emergency_point)
 			shift_light(7, emergency_color)
-		if(!isspaceturf(L) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && (L.z in GLOB.using_map.station_levels))
+		if(!isspaceturf(L) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && (L.z in global.using_map.station_levels))
 			announce_warning()
 	else
 		shift_light(4,initial(light_color))

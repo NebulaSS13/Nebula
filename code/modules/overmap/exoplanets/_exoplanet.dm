@@ -89,7 +89,7 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/Initialize(mapload, z_level)
 	name = "[generate_planet_name()], \a [name]"
-	if(GLOB.using_map.use_overmap)
+	if(global.using_map.use_overmap)
 		forceMove(locate(1, 1, z_level))
 	return ..()
 

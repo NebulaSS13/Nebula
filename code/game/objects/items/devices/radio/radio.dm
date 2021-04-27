@@ -51,7 +51,7 @@
 	wires = new(src)
 	if(ispath(cell))
 		cell = new(src)
-	internal_channels = GLOB.using_map.default_internal_channels()
+	internal_channels = global.using_map.default_internal_channels()
 	GLOB.listening_objects += src
 
 	if(frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ)
@@ -801,7 +801,7 @@
 
 /obj/item/radio/announcer/Initialize()
 	. = ..()
-	forceMove(locate(1,1,GLOB.using_map.contact_levels.len ? GLOB.using_map.contact_levels[1] : 1))
+	forceMove(locate(1,1,global.using_map.contact_levels.len ? global.using_map.contact_levels[1] : 1))
 
 /obj/item/radio/announcer/subspace
 	subspace_transmission = 1

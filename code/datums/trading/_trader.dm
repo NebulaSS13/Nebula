@@ -71,7 +71,7 @@
 /datum/trader/New()
 	..()
 	if(!ispath(trader_currency, /decl/currency))
-		trader_currency = GLOB.using_map.default_currency
+		trader_currency = global.using_map.default_currency
 	if(name_language)
 		if(name_language == TRADER_DEFAULT_NAME)
 			name = capitalize(pick(GLOB.first_names_female + GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))

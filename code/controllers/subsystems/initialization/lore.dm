@@ -67,7 +67,7 @@ SUBSYSTEM_DEF(lore)
 		possible_titles += "A VERY [pick(credits_adjectives)] [pick(credits_holidays)]"
 		possible_titles += "[pick(credits_adjectives)] [pick(credits_adventure_names)]"
 		possible_titles += "[pick(credits_topics)] [pick(credits_adventure_names)]"
-		possible_titles += "THE DAY [uppertext(GLOB.using_map.station_short)] STOOD STILL"
+		possible_titles += "THE DAY [uppertext(global.using_map.station_short)] STOOD STILL"
 		possible_titles |= credits_other
 		GLOB.end_credits_title = pick(possible_titles)
 	. = GLOB.end_credits_title

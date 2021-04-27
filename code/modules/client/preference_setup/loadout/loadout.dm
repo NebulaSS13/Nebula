@@ -23,7 +23,7 @@ var/list/gear_datums = list()
 		var/datum/gear/G = geartype
 		if(initial(G.category) == geartype)
 			continue
-		if(GLOB.using_map.loadout_blacklist && (geartype in GLOB.using_map.loadout_blacklist))
+		if(global.using_map.loadout_blacklist && (geartype in global.using_map.loadout_blacklist))
 			continue
 
 		var/use_name = initial(G.display_name)

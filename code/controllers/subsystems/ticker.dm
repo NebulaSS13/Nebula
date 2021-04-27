@@ -78,7 +78,7 @@ SUBSYSTEM_DEF(ticker)
 			world.Reboot("Failure to select gamemode. Tried [english_list(bad_modes)].")
 			return
 	// This means we succeeded in picking a game mode.
-	GLOB.using_map.setup_economy()
+	global.using_map.setup_economy()
 	Master.SetRunLevel(RUNLEVEL_GAME)
 
 	create_characters() //Create player characters and transfer them
@@ -95,8 +95,8 @@ SUBSYSTEM_DEF(ticker)
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup() // Drafts antags who don't override jobs.
 		to_world("<FONT color='blue'><B>Enjoy the game!</B></FONT>")
-		if(GLOB.using_map.welcome_sound)
-			sound_to(world, sound(pick(GLOB.using_map.welcome_sound)))
+		if(global.using_map.welcome_sound)
+			sound_to(world, sound(pick(global.using_map.welcome_sound)))
 		if(global.current_holiday)
 			to_world("<font color='blue'>and...</font>")
 			to_world("<h4>[global.current_holiday.announcement]</h4>")
@@ -113,7 +113,7 @@ SUBSYSTEM_DEF(ticker)
 		Master.SetRunLevel(RUNLEVEL_POSTGAME)
 		end_game_state = END_GAME_READY_TO_END
 		INVOKE_ASYNC(src, .proc/declare_completion)
-		if(config.allow_map_switching && config.auto_map_vote && GLOB.all_maps.len > 1)
+		if(config.allow_map_switching && config.auto_map_vote && global.all_maps.len > 1)
 			SSvote.initiate_vote(/datum/vote/map/end_game, automatic = 1)
 
 	else if(mode_finished && (end_game_state <= END_GAME_NOT_OVER))

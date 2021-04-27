@@ -64,10 +64,10 @@
 	return ..()
 
 /turf/space/LateInitialize()
-	if(GLOB.using_map.base_floor_area)
-		var/area/new_area = locate(GLOB.using_map.base_floor_area) || new GLOB.using_map.base_floor_area
+	if(global.using_map.base_floor_area)
+		var/area/new_area = locate(global.using_map.base_floor_area) || new global.using_map.base_floor_area
 		ChangeArea(src, new_area)
-	ChangeTurf(GLOB.using_map.base_floor_type)
+	ChangeTurf(global.using_map.base_floor_type)
 
 // override for space turfs, since they should never hide anything
 /turf/space/levelupdate()

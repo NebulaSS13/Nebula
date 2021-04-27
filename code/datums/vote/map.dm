@@ -9,14 +9,14 @@
 	return ..()
 
 /datum/vote/map/setup_vote()
-	for(var/name in GLOB.all_maps)
+	for(var/name in global.all_maps)
 		choices += name
 	..()
 
 /datum/vote/map/report_result()
 	if(..())
 		return 1
-	var/datum/map/M = GLOB.all_maps[result[1]]
+	var/datum/map/M = global.all_maps[result[1]]
 	fdel("use_map")
 	text2file(M.path, "use_map")
 

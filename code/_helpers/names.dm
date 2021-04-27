@@ -20,7 +20,7 @@ var/command_name = null
 	if (command_name)
 		return command_name
 
-	var/name = "[GLOB.using_map.boss_name]"
+	var/name = "[global.using_map.boss_name]"
 
 	command_name = name
 	return name
@@ -44,7 +44,7 @@ var/religion_name = null
 	return capitalize(name)
 
 /proc/system_name()
-	return GLOB.using_map.system_name ? GLOB.using_map.system_name : generate_system_name()
+	return global.using_map.system_name ? global.using_map.system_name : generate_system_name()
 
 /proc/generate_system_name()
 	return "[pick("Gilese","GSC", "Luyten", "GJ", "HD")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
@@ -56,10 +56,10 @@ var/religion_name = null
 	return pick("terrestial planet", "ice planet", "dwarf planet", "desert planet", "ocean planet", "lava planet", "gas giant", "forest planet")
 
 /proc/station_name()
-	if(!GLOB.using_map)
+	if(!global.using_map)
 		return config.server_name
-	if (GLOB.using_map.station_name)
-		return GLOB.using_map.station_name
+	if (global.using_map.station_name)
+		return global.using_map.station_name
 
 	var/random = rand(1,5)
 	var/name = ""
@@ -67,43 +67,43 @@ var/religion_name = null
 	//Rare: Pre-Prefix
 	if(prob(10))
 		name = pick(GLOB.station_prefixes)
-		GLOB.using_map.station_name = name + " "
+		global.using_map.station_name = name + " "
 
 	var/holiday_prefix = length(global.current_holiday?.station_prefixes) && pick(global.current_holiday.station_prefixes)
 	if(holiday_prefix)
 		name = holiday_prefix
-		GLOB.using_map.station_name = "[GLOB.using_map.station_name][holiday_prefix] "
+		global.using_map.station_name = "[global.using_map.station_name][holiday_prefix] "
 
 	// Suffix
 	name = pick(GLOB.station_suffixes)
-	GLOB.using_map.station_name += name + " "
+	global.using_map.station_name += name + " "
 
 	var/holiday_suffix = length(global.current_holiday?.station_suffixes) && pick(global.current_holiday.station_suffixes)
 	if(holiday_suffix)
-		GLOB.using_map.station_name += holiday_suffix
+		global.using_map.station_name += holiday_suffix
 	else
 		// ID Number
 		switch(random)
 			if(1)
-				GLOB.using_map.station_name += "[rand(1, 99)]"
+				global.using_map.station_name += "[rand(1, 99)]"
 			if(2)
-				GLOB.using_map.station_name += pick(GLOB.greek_letters)
+				global.using_map.station_name += pick(GLOB.greek_letters)
 			if(3)
-				GLOB.using_map.station_name += "\Roman[rand(1,99)]"
+				global.using_map.station_name += "\Roman[rand(1,99)]"
 			if(4)
-				GLOB.using_map.station_name += pick(GLOB.phonetic_alphabet)
+				global.using_map.station_name += pick(GLOB.phonetic_alphabet)
 			if(5)
-				GLOB.using_map.station_name += pick(GLOB.numbers_as_words)
+				global.using_map.station_name += pick(GLOB.numbers_as_words)
 
 	if (config && config.server_name)
 		world.name = "[config.server_name]: [name]"
 	else
-		world.name = GLOB.using_map.station_name
+		world.name = global.using_map.station_name
 
-	return GLOB.using_map.station_name
+	return global.using_map.station_name
 
 /proc/world_name(var/name)
-	GLOB.using_map.station_name = name
+	global.using_map.station_name = name
 
 	if (config && config.server_name)
 		world.name = "[config.server_name]: [name]"

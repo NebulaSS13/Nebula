@@ -49,7 +49,7 @@
 		to_chat(A, "<span class='danger'>Non-core laws reset.</span>")
 		return 1
 	if(href_list["PRG_uploadDefault"])
-		A.laws = new GLOB.using_map.default_law_type
+		A.laws = new global.using_map.default_law_type
 		to_chat(A, "<span class='danger'>All laws purged. Default lawset uploaded.</span>")
 		return 1
 	if(href_list["PRG_addCustomSuppliedLaw"])

@@ -515,7 +515,7 @@
 /mob/living/carbon/human/mind_initialize()
 	..()
 	if(!mind.assigned_role)
-		mind.assigned_role = GLOB.using_map.default_assistant_title
+		mind.assigned_role = global.using_map.default_assistant_title
 
 //AI
 /mob/living/silicon/ai/mind_initialize()

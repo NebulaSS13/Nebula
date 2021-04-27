@@ -183,7 +183,7 @@
 	if(istype(landing) && landing.is_open())
 		visible_message("\The [src] falls through \the [landing]!", "You hear a whoosh of displaced air.")
 	else
-		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the [GLOB.using_map.ground_noun].")
+		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the [global.using_map.ground_noun].")
 		if(fall_damage())
 			for(var/mob/living/M in landing.contents)
 				if(M == src)

@@ -15,7 +15,7 @@ GLOBAL_LIST_INIT(station_bookcases, new)
 	for(var/obj/item/I in loc)
 		if(istype(I, /obj/item/book))
 			I.forceMove(src)
-	if(z in GLOB.using_map.station_levels)
+	if(z in global.using_map.station_levels)
 		GLOB.station_bookcases += src
 	. = ..()
 

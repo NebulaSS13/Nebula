@@ -194,7 +194,7 @@ var/list/localhost_addresses = list(
 
 	. = ..()	//calls mob.Login()
 
-	GLOB.using_map.map_info(src)
+	global.using_map.map_info(src)
 
 	if(custom_event_msg && custom_event_msg != "")
 		to_chat(src, "<h1 class='alert'>Custom Event</h1>")

@@ -15,7 +15,7 @@ var/list/wrapped_species_by_ref = list()
 	var/default_form
 
 /decl/species/shapeshifter/New()
-	default_form = GLOB.using_map.default_species
+	default_form = global.using_map.default_species
 	valid_transform_species |= default_form
 	..()
 
