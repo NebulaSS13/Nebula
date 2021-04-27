@@ -6,16 +6,6 @@
 }
 #define GLOBAL_UNMANAGED(X, InitValue) /datum/controller/global_vars/proc/InitGlobal##X()
 
-#ifndef TESTING
-#define GLOBAL_PROTECT(X)\
-/datum/controller/global_vars/InitGlobal##X(){\
-	..();\
-	gvars_datum_protected_varlist += #X;\
-}
-#else
-#define GLOBAL_PROTECT(X)
-#endif
-
 #define GLOBAL_REAL_VAR(X) var/global/##X
 #define GLOBAL_REAL(X, Typepath) var/global##Typepath/##X
 

@@ -2,8 +2,6 @@ GLOBAL_REAL(GLOB, /datum/controller/global_vars)
 
 /datum/controller/global_vars
 	name = "Global Variables"
-
-	var/list/gvars_datum_protected_varlist
 	var/list/gvars_datum_in_built_vars
 	var/list/gvars_datum_init_order
 
@@ -13,7 +11,7 @@ GLOBAL_REAL(GLOB, /datum/controller/global_vars)
 	GLOB = src
 
 	var/datum/controller/exclude_these = new
-	gvars_datum_in_built_vars = exclude_these.vars + list("gvars_datum_protected_varlist", "gvars_datum_in_built_vars", "gvars_datum_init_order")
+	gvars_datum_in_built_vars = exclude_these.vars + list("gvars_datum_in_built_vars", "gvars_datum_init_order")
 	qdel(exclude_these)
 
 	var/global_vars = vars.len - gvars_datum_in_built_vars.len
@@ -33,7 +31,6 @@ GLOBAL_REAL(GLOB, /datum/controller/global_vars)
 		return QDEL_HINT_LETMELIVE
 
 	QDEL_NULL(statclick)
-	gvars_datum_protected_varlist.Cut()
 	gvars_datum_in_built_vars.Cut()
 
 	GLOB = null
@@ -43,16 +40,10 @@ GLOBAL_REAL(GLOB, /datum/controller/global_vars)
 /datum/controller/global_vars/stat_entry()
 	if(!statclick)
 		statclick = new/obj/effect/statclick/debug(null, "Initializing...", src)
-
 	stat("Globals:", statclick.update("Edit"))
-
-/datum/controller/global_vars/VV_hidden()
-	return ..() + gvars_datum_protected_varlist
 
 /datum/controller/global_vars/Initialize()
 	gvars_datum_init_order = list()
-	gvars_datum_protected_varlist = list("gvars_datum_protected_varlist")
-
 	//See https://github.com/tgstation/tgstation/issues/26954
 	for(var/I in typesof(/datum/controller/global_vars/proc))
 		var/start_tick = world.time
