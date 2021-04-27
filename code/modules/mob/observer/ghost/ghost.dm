@@ -303,9 +303,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	stop_following()
 	following = target
 	verbs |= /mob/observer/ghost/proc/scan_target
-	GLOB.moved_event.register(following, src, /atom/movable/proc/move_to_turf)
-	GLOB.dir_set_event.register(following, src, /atom/proc/recursive_dir_set)
-	GLOB.destroyed_event.register(following, src, /mob/observer/ghost/proc/stop_following)
+	events_repository.register(/decl/observ/moved, following, src, /atom/movable/proc/move_to_turf)
+	events_repository.register(/decl/observ/dir_set, following, src, /atom/proc/recursive_dir_set)
+	events_repository.register(/decl/observ/destroyed, following, src, /mob/observer/ghost/proc/stop_following)
 
 	to_chat(src, "<span class='notice'>Now following \the [following].</span>")
 	move_to_turf(following, loc, following.loc)
@@ -313,9 +313,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/proc/stop_following()
 	if(following)
 		to_chat(src, "<span class='notice'>No longer following \the [following]</span>")
-		GLOB.moved_event.unregister(following, src)
-		GLOB.dir_set_event.unregister(following, src)
-		GLOB.destroyed_event.unregister(following, src)
+		events_repository.unregister(/decl/observ/moved, following, src)
+		events_repository.unregister(/decl/observ/dir_set, following, src)
+		events_repository.unregister(/decl/observ/destroyed, following, src)
 		following = null
 		verbs -= /mob/observer/ghost/proc/scan_target
 

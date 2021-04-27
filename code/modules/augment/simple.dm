@@ -14,7 +14,7 @@
 
 /obj/item/organ/internal/augment/active/simple/Destroy()
 	if(holding)
-		GLOB.item_unequipped_event.unregister(holding, src)
+		events_repository.unregister(/decl/observ/item_unequipped, holding, src)
 		if(holding.loc == src)
 			QDEL_NULL(holding)
 	return ..()
@@ -23,7 +23,7 @@
 /obj/item/organ/internal/augment/active/simple/proc/holding_dropped()
 
 	//Stop caring
-	GLOB.item_unequipped_event.unregister(holding, src)
+	events_repository.unregister(/decl/observ/item_unequipped, holding, src)
 
 	if(holding.loc != src) //something went wrong and is no longer attached/ it broke
 		holding.canremove = 1
@@ -37,7 +37,7 @@
 	else if(limb.organ_tag in list(BP_R_ARM, BP_R_HAND))
 		slot = BP_R_HAND
 	if(owner.equip_to_slot_if_possible(holding, slot))
-		GLOB.item_unequipped_event.register(holding, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped)
+		events_repository.register(/decl/observ/item_unequipped, holding, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped)
 		var/decl/pronouns/G = owner.get_pronouns()
 		owner.visible_message(
 			SPAN_NOTICE("\The [owner] extends [G.his] [holding.name] from [G.his] [limb.name]."),

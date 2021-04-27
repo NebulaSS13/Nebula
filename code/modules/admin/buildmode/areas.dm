@@ -97,12 +97,12 @@ Right Click       - List/Create Area
 		return
 	UnselectArea()
 	selected_area = A
-	GLOB.destroyed_event.register(selected_area, src, .proc/UnselectArea)
+	events_repository.register(/decl/observ/destroyed, selected_area, src, .proc/UnselectArea)
 
 /datum/build_mode/areas/proc/UnselectArea()
 	if(!selected_area)
 		return
-	GLOB.destroyed_event.unregister(selected_area, src, .proc/UnselectArea)
+	events_repository.unregister(/decl/observ/destroyed, selected_area, src, .proc/UnselectArea)
 
 	var/has_turf = FALSE
 	for(var/turf/T in selected_area)

@@ -9,16 +9,16 @@
 	add_object()
 
 /datum/phenomena/movable_object/Destroy()
-	GLOB.destroyed_event.unregister(object_to_move,src)
+	events_repository.unregister(/decl/observ/destroyed, object_to_move,src)
 	if(!object_to_move.loc)
 		QDEL_NULL(object_to_move)
 	. = ..()
 
 /datum/phenomena/movable_object/proc/add_object()
 	if(object_to_move)
-		GLOB.destroyed_event.unregister(object_to_move,src)
+		events_repository.unregister(/decl/observ/destroyed, object_to_move,src)
 	object_to_move = new object_type()
-	GLOB.destroyed_event.register(object_to_move, src, .proc/add_object)
+	events_repository.register(/decl/observ/destroyed, object_to_move, src, .proc/add_object)
 
 /datum/phenomena/movable_object/activate(var/atom/a, var/mob/living/deity/user)
 	..()

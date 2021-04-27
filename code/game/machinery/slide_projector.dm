@@ -56,7 +56,7 @@
 /obj/item/storage/slide_projector/proc/stop_projecting()
 	if(projection)
 		QDEL_NULL(projection)
-	GLOB.moved_event.unregister(src, src, .proc/check_projections)
+	events_repository.unregister(/decl/observ/moved, src, src, .proc/check_projections)
 	update_icon()
 	
 /obj/item/storage/slide_projector/proc/project_at(turf/target)
@@ -70,7 +70,7 @@
 			break
 	projection = new projection_type(target)
 	projection.set_source(current_slide)
-	GLOB.moved_event.register(src, src, .proc/check_projections)
+	events_repository.register(/decl/observ/moved, src, src, .proc/check_projections)
 	update_icon()
 
 /obj/item/storage/slide_projector/attack_self(mob/user)

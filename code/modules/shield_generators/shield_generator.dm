@@ -57,7 +57,7 @@
 	for(var/st in subtypesof(/datum/shield_mode/))
 		var/datum/shield_mode/SM = new st()
 		mode_list.Add(SM)
-	GLOB.moved_event.register(src, src, .proc/update_overmap_shield_list)
+	events_repository.register(/decl/observ/moved, src, src, .proc/update_overmap_shield_list)
 	. = INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/power/shield_generator/LateInitialize()
@@ -69,7 +69,7 @@
 	field_segments = null
 	damaged_segments = null
 	mode_list = null
-	GLOB.moved_event.unregister(src, src)
+	events_repository.unregister(/decl/observ/moved, src, src)
 	. = ..()
 	update_overmap_shield_list()
 

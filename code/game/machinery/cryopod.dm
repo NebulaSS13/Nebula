@@ -268,12 +268,12 @@
 /obj/machinery/cryopod/proc/find_control_computer()
 	if(!control_computer)
 		control_computer = locate(/obj/machinery/computer/cryopod) in src.loc.loc
-		GLOB.destroyed_event.register(control_computer, src, .proc/clear_control_computer)
+		events_repository.register(/decl/observ/destroyed, control_computer, src, .proc/clear_control_computer)
 	return control_computer
 
 /obj/machinery/cryopod/proc/clear_control_computer()
 	if(control_computer)
-		GLOB.destroyed_event.unregister(control_computer, src)
+		events_repository.unregister(/decl/observ/destroyed, control_computer, src)
 		control_computer = null
 
 /obj/machinery/cryopod/proc/check_occupant_allowed(mob/M)

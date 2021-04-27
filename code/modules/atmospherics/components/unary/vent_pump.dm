@@ -110,7 +110,7 @@
 	QDEL_NULL(sound_token)
 	var/area/A = get_area(src)
 	if(A)
-		GLOB.name_set_event.unregister(A, src, .proc/change_area_name)
+		events_repository.unregister(/decl/observ/name_set, A, src, .proc/change_area_name)
 		A.air_vent_info -= id_tag
 		A.air_vent_names -= id_tag
 	. = ..()
@@ -225,7 +225,7 @@
 			var/new_name = "[A.name] Vent Pump #[A.air_vent_names.len+1]"
 			A.air_vent_names[id_tag] = new_name
 			SetName(new_name)
-			GLOB.name_set_event.register(A, src, .proc/change_area_name)
+			events_repository.register(/decl/observ/name_set, A, src, .proc/change_area_name)
 	. = ..()
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)

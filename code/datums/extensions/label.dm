@@ -25,7 +25,7 @@
 
 	var/old_name = atom_holder.name
 	atom_holder.name = "[atom_holder.name] ([label])"
-	GLOB.name_set_event.raise_event(src, old_name, atom_holder.name)
+	events_repository.raise_event(/decl/observ/name_set, src, old_name, atom_holder.name)
 
 /datum/extension/labels/proc/RemoveLabel(var/mob/user, var/label)
 	if(!(label in labels))
@@ -46,7 +46,7 @@
 	var/old_name = atom_holder.name
 	// We find and replace the first instance, since that's the one we removed from the list
 	atom_holder.name = replacetext(atom_holder.name, full_label, "", index, index + length(full_label))
-	GLOB.name_set_event.raise_event(src, old_name, atom_holder.name)
+	events_repository.raise_event(/decl/observ/name_set, src, old_name, atom_holder.name)
 
 // We may have to do something more complex here
 // in case something appends strings to something that's labelled rather than replace the name outright

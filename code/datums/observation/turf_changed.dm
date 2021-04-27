@@ -10,8 +10,6 @@
 //			/old_opacity: Opacity before the change
 //			/new_opacity: Opacity after the change
 
-GLOBAL_DATUM_INIT(turf_changed_event, /decl/observ/turf_changed, new)
-
 /decl/observ/turf_changed
 	name = "Turf Changed"
 	expected_type = /turf

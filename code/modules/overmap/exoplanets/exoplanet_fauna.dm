@@ -1,8 +1,8 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/remove_animal(var/mob/M)
 	animals -= M
-	GLOB.death_event.unregister(M, src)
-	GLOB.destroyed_event.unregister(M, src)
+	events_repository.unregister(/decl/observ/death, M, src)
+	events_repository.unregister(/decl/observ/destroyed, M, src)
 	repopulate_types |= M.type
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/handle_repopulation()
@@ -18,8 +18,8 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/track_animal(mob/A)
 	animals += A
-	GLOB.death_event.register(A, src, /obj/effect/overmap/visitable/sector/exoplanet/proc/remove_animal)
-	GLOB.destroyed_event.register(A, src, /obj/effect/overmap/visitable/sector/exoplanet/proc/remove_animal)
+	events_repository.register(/decl/observ/death, A, src, /obj/effect/overmap/visitable/sector/exoplanet/proc/remove_animal)
+	events_repository.register(/decl/observ/destroyed, A, src, /obj/effect/overmap/visitable/sector/exoplanet/proc/remove_animal)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/adapt_animal(var/mob/living/simple_animal/A)
 	if(species[A.type])

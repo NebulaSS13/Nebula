@@ -97,7 +97,7 @@
 	if(ability_master)
 		ability_master.update_abilities(1, src)
 		ability_master.toggle_open(1)
-	GLOB.logged_in_event.raise_event(src)
+	events_repository.raise_event(/decl/observ/logged_in, src)
 
 	//set macro to normal incase it was overriden (like cyborg currently does)
 	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5")
