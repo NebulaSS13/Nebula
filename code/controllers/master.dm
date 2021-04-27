@@ -10,7 +10,7 @@
 var/global/datum/controller/master/Master = new
 
 //THIS IS THE INIT ORDER
-//Master -> SSPreInit -> GLOB -> world -> config -> SSInit -> Failsafe
+//Master -> SSPreInit -> world -> config -> SSInit -> Failsafe
 //GOT IT MEMORIZED?
 
 /datum/controller/master
@@ -75,9 +75,6 @@ var/global/datum/controller/master/Master = new
 			for(var/I in subsytem_types)
 				_subsystems += new I
 		Master = src
-
-	if(!GLOB)
-		new /datum/controller/global_vars
 
 /datum/controller/master/Destroy()
 	..()

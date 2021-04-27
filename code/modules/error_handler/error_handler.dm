@@ -69,7 +69,8 @@ var/regex/actual_error_file_line
 			error_cooldown[erroruid] = 0
 			if(skipcount > 0)
 				to_world_log("\[[time_stamp()]] Skipped [skipcount] runtimes in [erroruid].")
-				global.error_cache.log_error(E, skip_count = skipcount)
+				if(istype(global.error_cache))
+					global.error_cache.log_error(E, skip_count = skipcount)
 
 	error_last_seen[erroruid] = world.time
 	error_cooldown[erroruid] = cooldown
@@ -102,7 +103,7 @@ var/regex/actual_error_file_line
 		desclines.Add(usrinfo)
 	if(silencing)
 		desclines += "  (This error will now be silenced for [configured_error_silence_time / 600] minutes)"
-	if(global.error_cache)
+	if(istype(global.error_cache)) // istype() rather than nullcheck to avoid new ordering weirdness
 		global.error_cache.log_error(E, desclines)
 
 	error_write_log("\[[time_stamp()]] Runtime in [erroruid]: [E]")
