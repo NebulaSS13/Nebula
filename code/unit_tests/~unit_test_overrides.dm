@@ -84,3 +84,20 @@ var/global/list/unit_test_obj_random_weights_by_type = list()
 	var/datum/map_template/MT = new map_template()
 	map_templates[MT.name] = MT
 	. = MT
+
+var/list/seen_decls
+/decl/New()
+	..()
+	// Some of this can be procced by globally scoped 
+	// new(), so we can't rely on pre-declaring lists.
+	if(!global.seen_decls)
+		global.seen_decls = list()
+	if(!global.seen_decls[type])
+		global.seen_decls[type] = list()
+	global.seen_decls[type] |= src
+	if(length(global.seen_decls[type]) > 1)
+		PRINT_STACK_TRACE("More than one /decl of type [type] created.")
+	spawn(1) // to avoid GET_DECL stack overflows
+		var/decl/existing_decl = GET_DECL(type)
+		if(existing_decl != src)
+			PRINT_STACK_TRACE("Non-repository or non-initialized /decl of type [type] created.")
