@@ -1,4 +1,4 @@
-GLOBAL_LIST(all_warrants)
+var/list/all_warrants
 
 /datum/computer_file/program/digitalwarrant
 	filename = "digitalwarrant"
@@ -39,7 +39,7 @@ GLOBAL_LIST(all_warrants)
 	if(active)
 		data["details"] = active.generate_nano_data(using_access)
 	else
-		for(var/datum/computer_file/report/warrant/W in GLOB.all_warrants)
+		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
 			LAZYADD(data[W.get_category()],  W.get_nano_summary())
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -55,21 +55,21 @@ GLOBAL_LIST(all_warrants)
 
 	if(href_list["editwarrant"])
 		. = 1
-		for(var/datum/computer_file/report/warrant/W in GLOB.all_warrants)
+		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
 			if(W.uid == text2num(href_list["editwarrant"]))
 				active = W
 				break
 
 	if(href_list["sendtoarchive"])
 		. = 1
-		for(var/datum/computer_file/report/warrant/W in GLOB.all_warrants)
+		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
 			if(W.uid == text2num(href_list["sendtoarchive"]))
 				W.archived = TRUE
 				break
 
 	if(href_list["restore"])
 		. = 1
-		for(var/datum/computer_file/report/warrant/W in GLOB.all_warrants)
+		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
 			if(W.uid == text2num(href_list["restore"]))
 				W.archived = FALSE
 				break
@@ -87,18 +87,18 @@ GLOBAL_LIST(all_warrants)
 		. = 1
 		if(!active)
 			return
-		broadcast_security_hud_message("[active.get_broadcast_summary()] has been [(active in GLOB.all_warrants) ? "edited" : "uploaded"].", nano_host())
-		LAZYDISTINCTADD(GLOB.all_warrants, active)
+		broadcast_security_hud_message("[active.get_broadcast_summary()] has been [(active in global.all_warrants) ? "edited" : "uploaded"].", nano_host())
+		LAZYDISTINCTADD(global.all_warrants, active)
 		active = null
 
 	if(href_list["deletewarrant"])
 		. = 1
 		if(!active)
-			for(var/datum/computer_file/report/warrant/W in GLOB.all_warrants)
+			for(var/datum/computer_file/report/warrant/W in global.all_warrants)
 				if(W.uid == text2num(href_list["deletewarrant"]))
 					active = W
 					break
-		LAZYREMOVE(GLOB.all_warrants, active)
+		LAZYREMOVE(global.all_warrants, active)
 		active = null
 
 	if(href_list["back"])

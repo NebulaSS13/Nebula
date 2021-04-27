@@ -9,7 +9,7 @@
 	for(var/some_global in global.vars)
 		. += some_global
 
-/var/decl/global_vars/global_vars_
+var/decl/global_vars/global_vars_
 
 /decl/global_vars/get_view_variables_header()
 	return "<b>Global Variables</b>"
