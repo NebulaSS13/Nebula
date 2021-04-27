@@ -9,16 +9,17 @@
 	for(var/some_global in global.vars)
 		. += some_global
 
-var/global/decl/global_vars/global_vars_
-
+// See globals.dm for where the protected variables list is defined/populated.
+// It is compile order dependant so has to live in exile :(
 /decl/global_vars/get_view_variables_header()
 	return "<b>Global Variables</b>"
 
 /decl/global_vars/get_view_variables_options()
 	return "" // Ensuring changes to the base proc never affect us
 
-/decl/global_vars/get_variables()
-	. = getallglobals() - VV_hidden()
+/decl/global_vars/VV_get_variables()
+	. = getallglobals()
+	. -= VV_hidden()
 	if(!usr || !check_rights(R_ADMIN|R_DEBUG, FALSE))
 		. -= VV_secluded()
 
@@ -35,30 +36,9 @@ var/global/decl/global_vars/global_vars_
 	return vars
 
 /decl/global_vars/VV_hidden()
-	return list(
-		"admins",
-		"log_directory",
-		"world_qdel_log",
-		"world_href_log",
-		"forumsqladdress",
-		"forumsqldb",
-		"forumsqllogin",
-		"forumsqlpass",
-		"forumsqlport",
-		"sqladdress",
-		"sqldb",
-		"sqllogin",
-		"sqlpass",
-		"sqlport",
-		"comms_password",
-		"ban_comms_password",
-		"login_export_addr"
-	)
+	return protected_vars
 
 /client/proc/debug_global_variables()
 	set category = "Debug"
 	set name = "View Global Variables"
-
-	if(!global_vars_)
-		global_vars_ = new()
-	debug_variables(global_vars_)
+	debug_variables(GET_DECL(/decl/global_vars))

@@ -10,6 +10,7 @@
 #define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include "code\__globals.dm"
 #include "code\_macros.dm"
 #include "code\client_macros.dm"
 #include "code\hub.dm"
@@ -43,7 +44,6 @@
 #include "code\__defines\flags.dm"
 #include "code\__defines\fluids.dm"
 #include "code\__defines\gamemode.dm"
-#include "code\__defines\globals.dm"
 #include "code\__defines\guns.dm"
 #include "code\__defines\hydroponics.dm"
 #include "code\__defines\integrated_circuits.dm"

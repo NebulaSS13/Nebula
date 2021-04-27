@@ -15,21 +15,16 @@ var/global/church_name = null
 
 	return name
 
-var/global/command_name = null
+var/global/command_name
 /proc/command_name()
-	if (command_name)
-		return command_name
-
-	var/name = "[global.using_map.boss_name]"
-
-	command_name = name
-	return name
+	if (global.command_name)
+		return global.command_name
+	global.command_name = "[global.using_map.boss_name]"
+	return global.command_name
 
 /proc/change_command_name(var/name)
-
-	command_name = name
-
-	return name
+	global.command_name = name
+	return global.command_name
 
 var/global/religion_name = null
 /proc/religion_name()
