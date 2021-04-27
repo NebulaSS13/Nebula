@@ -8,8 +8,9 @@ var/list/whitelist = list()
 	return 1
 
 /proc/load_whitelist()
-	whitelist = file2list(WHITELISTFILE)
-	if(!whitelist.len)	whitelist = null
+	whitelist = file2list(WHITELISTFILE, FALSE)
+	if(!length(whitelist))
+		whitelist = null
 
 /proc/check_whitelist(mob/M /*, var/rank*/)
 	if(!whitelist)
@@ -27,7 +28,7 @@ var/list/whitelist = list()
 			load_alienwhitelist()
 	return 1
 /proc/load_alienwhitelist()
-	var/text = file2text("config/alienwhitelist.txt")
+	var/text = safe_file2text("config/alienwhitelist.txt", FALSE)
 	if (!text)
 		log_misc("Failed to load config/alienwhitelist.txt")
 		return 0
