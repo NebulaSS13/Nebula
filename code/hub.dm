@@ -4,10 +4,11 @@
  */
 	hub = "Exadv1.spacestation13"
 	name = "Space Station 13 - Nebula13"
+	var/visibility_pref = FALSE
 
 /world/proc/update_hub_visibility()
-	GLOB.visibility_pref = !(GLOB.visibility_pref)
-	if(GLOB.visibility_pref)
+	visibility_pref = !(visibility_pref)
+	if(visibility_pref)
 		hub_password = "kMZy3U5jJHSiBQjr"
 	else
 		hub_password = "SORRYNOPASSWORD"
