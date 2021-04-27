@@ -24,6 +24,7 @@
 	if(!istype(viewer))
 		return FALSE
 	viewers |= viewer
+	var/decl/appearance_manager/appearance_manager = GET_DECL(/decl/appearance_manager)
 	appearance_manager.add_appearance(viewer, src)
 	return TRUE
 
@@ -31,5 +32,6 @@
 	if(!(viewer in viewers))
 		return FALSE
 	viewers -= viewer
+	var/decl/appearance_manager/appearance_manager = GET_DECL(/decl/appearance_manager)
 	appearance_manager.remove_appearance(viewer, src, refresh_images)
 	return TRUE

@@ -1,18 +1,13 @@
-var/decl/appearance_manager/appearance_manager = new()
-
 /decl/appearance_manager
 	var/list/appearances_
-	var/list/appearance_handlers_
 
 /decl/appearance_manager/New()
 	..()
 	appearances_ = list()
-	appearance_handlers_ = list()
-	for(var/entry in subtypesof(/decl/appearance_handler))
-		appearance_handlers_[entry] += new entry()
 
 /decl/appearance_manager/proc/get_appearance_handler(var/handler_type)
-	return appearance_handlers_[handler_type]
+	var/list/appearance_handlers = decls_repository.get_decls_of_subtype(/decl/appearance_handler)
+	return appearance_handlers[handler_type]
 
 /decl/appearance_manager/proc/add_appearance(var/mob/viewer, var/datum/appearance_data/ad)
 	var/PriorityQueue/pq = appearances_[viewer]
