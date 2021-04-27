@@ -21,7 +21,7 @@
 	if(all_underwear)
 		all_underwear.Cut()
 	if(current_species.appearance_flags & HAS_UNDERWEAR)
-		for(var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
+		for(var/datum/category_group/underwear/WRC in global.underwear.categories)
 			var/datum/category_item/underwear/WRI = pick(WRC.items)
 			all_underwear[WRC.name] = WRI.name
 

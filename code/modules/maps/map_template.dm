@@ -114,8 +114,8 @@
 	var/shuttle_state = pre_init_shuttles()
 
 	var/map_hash = modify_tag_vars && "[sequential_id("map_id")]"
-	ASSERT(isnull(GLOB._preloader.current_map_hash)) // Recursive maploading is possible, but not from this block: recursive loads should be triggered in Initialize, from init_atoms below.
-	GLOB._preloader.current_map_hash = map_hash
+	ASSERT(isnull(global._preloader.current_map_hash)) // Recursive maploading is possible, but not from this block: recursive loads should be triggered in Initialize, from init_atoms below.
+	global._preloader.current_map_hash = map_hash
 
 	var/initialized_areas_by_type = list()
 	for (var/mappath in mappaths)
@@ -126,7 +126,7 @@
 		else
 			return FALSE
 
-	GLOB._preloader.current_map_hash = null
+	global._preloader.current_map_hash = null
 
 	for (var/z_index = bounds[MAP_MINZ]; z_index <= bounds[MAP_MAXZ]; z_index++)
 		if (accessibility_weight)
@@ -161,8 +161,8 @@
 	var/shuttle_state = pre_init_shuttles()
 
 	var/map_hash = modify_tag_vars && "[sequential_id("map_id")]"
-	ASSERT(isnull(GLOB._preloader.current_map_hash))
-	GLOB._preloader.current_map_hash = map_hash
+	ASSERT(isnull(global._preloader.current_map_hash))
+	global._preloader.current_map_hash = map_hash
 
 	var/initialized_areas_by_type = list()
 	for (var/mappath in mappaths)
@@ -172,7 +172,7 @@
 		else
 			return FALSE
 
-	GLOB._preloader.current_map_hash = null
+	global._preloader.current_map_hash = null
 
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)

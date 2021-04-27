@@ -47,7 +47,7 @@
 	popup.set_content(jointext(dat,null))
 	popup.open()
 
-/obj/item/camera/tvcamera/Topic(bred, href_list, state = GLOB.physical_state)
+/obj/item/camera/tvcamera/Topic(bred, href_list, state = global.physical_topic_state)
 	if(..())
 		return 1
 	if (href_list["photo"])

@@ -14,7 +14,7 @@
 	data["channels_left"] = global.sound_channels.available_channels.stack.len
 	data["events_active"] = src.player.event_manager.events.len
 	data["max_channels"] = global.sound_channels.channel_ceiling
-	data["max_events"] = GLOB.musical_config.max_events
+	data["max_events"] = global.musical_config.max_events
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

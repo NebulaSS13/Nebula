@@ -13,7 +13,7 @@
 /datum/nano_module/program/crew_manifest
 	name = "Crew Manifest"
 
-/datum/nano_module/program/crew_manifest/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
+/datum/nano_module/program/crew_manifest/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = global.default_topic_state)
 	var/list/data = host.initial_data()
 
 	var/datum/computer_network/network = program.computer.get_network()

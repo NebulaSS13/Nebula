@@ -17,7 +17,7 @@
 		"Remote System Control" = NETWORK_SYSTEMCONTROL
 		)
 
-/datum/nano_module/program/network_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/network_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
 
 	data += "skill_fail"

@@ -4,7 +4,7 @@
 
 //global datum that will preload variables on atoms instanciation
 var/use_preloader = FALSE
-GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
+var/dmm_suite/preloader/_preloader = new
 
 /datum/map_load_metadata
 	var/bounds
@@ -334,7 +334,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		var/atype = members[index]
 		var/atom/instance = initialized_areas_by_type[atype]
 		if(!instance)
-			GLOB._preloader.setup(attr, atype)
+			global._preloader.setup(attr, atype)
 			instance = new atype(null)
 			initialized_areas_by_type[atype] = instance
 		if(crds)
@@ -391,7 +391,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 //Instance an atom at (x,y,z) and gives it the variables in attributes
 /dmm_suite/proc/instance_atom(path,list/attributes, turf/crds, no_changeturf)
-	GLOB._preloader.setup(attributes, path)
+	global._preloader.setup(attributes, path)
 
 	if(crds)
 		if(!no_changeturf && ispath(path, /turf))

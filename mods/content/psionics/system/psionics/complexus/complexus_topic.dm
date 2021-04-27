@@ -1,4 +1,4 @@
-/datum/psi_complexus/CanUseTopic(var/mob/user, var/datum/topic_state/state = GLOB.default_state)
+/datum/psi_complexus/CanUseTopic(var/mob/user, var/datum/topic_state/state = global.default_topic_state)
 	return (user.client && check_rights(R_ADMIN, FALSE, user.client))
 
 /datum/psi_complexus/Topic(var/href, var/list/href_list)

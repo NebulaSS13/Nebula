@@ -411,7 +411,7 @@
 /mob/living/carbon/human/CanUseTopic(mob/user, datum/topic_state/state, href_list)
 	. = ..()
 	if(href_list && (href_list["refresh"] || href_list["item"]))
-		return min(., ..(user, GLOB.physical_state, href_list))
+		return min(., ..(user, global.physical_topic_state, href_list))
 
 /mob/living/carbon/human/OnTopic(mob/user, href_list)
 	if (href_list["refresh"])

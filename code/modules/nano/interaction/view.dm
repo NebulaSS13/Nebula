@@ -1,7 +1,7 @@
 /*
 	This state checks that the src_object is in view of the user.
 */
-GLOBAL_DATUM_INIT(view_state, /datum/topic_state/view, new)
+var/datum/topic_state/view/view_state = new
 
 /datum/topic_state/view/can_use_topic(src_object, mob/user)
 	return user.view_can_use_topic(src_object)

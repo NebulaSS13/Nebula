@@ -52,7 +52,7 @@
 	if(!istype(pref.all_underwear))
 		pref.all_underwear = list()
 
-		for(var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
+		for(var/datum/category_group/underwear/WRC in global.underwear.categories)
 			for(var/datum/category_item/underwear/WRI in WRC.items)
 				if(WRI.is_default(pref.gender ? pref.gender : MALE))
 					pref.all_underwear[WRC.name] = WRI.name
@@ -66,7 +66,7 @@
 		pref.all_underwear_metadata = list()
 
 	for(var/underwear_category in pref.all_underwear)
-		var/datum/category_group/underwear/UWC = GLOB.underwear.categories_by_name[underwear_category]
+		var/datum/category_group/underwear/UWC = global.underwear.categories_by_name[underwear_category]
 		if(!UWC)
 			pref.all_underwear -= underwear_category
 		else
@@ -103,7 +103,7 @@
 /datum/category_item/player_setup_item/physical/equipment/content()
 	. = list()
 	. += "<b>Equipment:</b><br>"
-	for(var/datum/category_group/underwear/UWC in GLOB.underwear.categories)
+	for(var/datum/category_group/underwear/UWC in global.underwear.categories)
 		var/item_name = (pref.all_underwear && pref.all_underwear[UWC.name]) ? pref.all_underwear[UWC.name] : "None"
 		. += "[UWC.name]: <a href='?src=\ref[src];change_underwear=[UWC.name]'><b>[item_name]</b></a>"
 
@@ -156,7 +156,7 @@
 
 /datum/category_item/player_setup_item/physical/equipment/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["change_underwear"])
-		var/datum/category_group/underwear/UWC = GLOB.underwear.categories_by_name[href_list["change_underwear"]]
+		var/datum/category_group/underwear/UWC = global.underwear.categories_by_name[href_list["change_underwear"]]
 		if(!UWC)
 			return TOPIC_NOACTION
 		var/datum/category_item/underwear/selected_underwear = input(user, "Choose underwear:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.all_underwear[UWC.name]) as null|anything in UWC.items

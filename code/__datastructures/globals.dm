@@ -6,7 +6,3 @@
 }
 
 #define GLOBAL_RAW(X) /datum/controller/global_vars/var/global##X
-
-#define GLOBAL_DATUM_INIT(X, Typepath, InitValue) GLOBAL_RAW(Typepath/##X); GLOBAL_MANAGED(X, InitValue)
-
-#define GLOBAL_DATUM(X, Typepath) GLOBAL_RAW(Typepath/##X); GLOBAL_MANAGED(X, null)

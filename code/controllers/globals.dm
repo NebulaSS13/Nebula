@@ -15,7 +15,7 @@ var/global/datum/controller/global_vars/GLOB
 	qdel(exclude_these)
 
 	var/global_vars = vars.len - gvars_datum_in_built_vars.len
-	var/global_procs = length(typesof(/datum/controller/global_vars/proc))
+	var/global_procs = length(typesof(/datum/controller/global_vars))
 
 	report_progress("[global_vars] global variables")
 	report_progress("[global_procs] global init procs")

@@ -12,12 +12,12 @@ var/list/reg_dna = list()
 var/list/global_map = list()
 
 // Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it. Also headset, for things that should be affected by comms outages.
-GLOBAL_DATUM_INIT(global_announcer, /obj/item/radio/announcer, new)
-GLOBAL_DATUM_INIT(global_headset, /obj/item/radio/announcer/subspace, new)
+var/obj/item/radio/announcer/global_announcer = new
+var/obj/item/radio/announcer/subspace/global_headset = new
 
 var/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
-GLOBAL_DATUM_INIT(sun, /datum/sun, new)
-GLOBAL_DATUM_INIT(universe, /datum/universal_state, new)
+var/datum/sun/sun = new
+var/datum/universal_state/universe = new
 
 var/list/vowels = list("a","e","i","o","u")
 var/list/alphabet_no_vowels = list("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","z")

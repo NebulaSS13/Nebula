@@ -17,7 +17,7 @@
 	if(!preserve_appearance && (flags & ANTAG_SET_APPEARANCE))
 		spawn(3)
 			var/mob/living/carbon/human/H = player.current
-			if(istype(H)) H.change_appearance(APPEARANCE_ALL, H.loc, H, valid_species, state = GLOB.z_state)
+			if(istype(H)) H.change_appearance(APPEARANCE_ALL, H.loc, H, valid_species, state = global.z_topic_state)
 	return player.current
 
 /decl/special_role/proc/update_access(var/mob/living/player)

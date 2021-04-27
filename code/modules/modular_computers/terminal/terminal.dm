@@ -46,7 +46,7 @@
 /datum/terminal/proc/can_use(mob/user)
 	if(!user)
 		return FALSE
-	if(!CanInteractWith(user, computer, GLOB.default_state))
+	if(!CanInteractWith(user, computer, global.default_topic_state))
 		return FALSE
 	if(!computer || !computer.on)
 		return FALSE
