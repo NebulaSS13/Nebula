@@ -11,13 +11,13 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	var/message_type = "Story"
 
 /datum/announcement
-	var/title = "Attention"
+	var/title
 	var/announcer = ""
 	var/log = 0
 	var/sound
 	var/newscast = 0
 	var/channel_name = "Announcements"
-	var/announcement_type = "Announcement"
+	var/announcement_type
 
 /datum/announcement/priority
 	title = "Priority Announcement"
@@ -32,14 +32,16 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	log = do_log
 	newscast = do_newscast
 
-/datum/announcement/priority/command/New(var/do_log = 1, var/new_sound = 'sound/misc/notice2.ogg', var/do_newscast = 0)
-	..(do_log, new_sound, do_newscast)
-	title = "[command_name()] Update"
-	announcement_type = "[command_name()] Update"
-
 /datum/announcement/proc/Announce(var/message, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevels = global.using_map.contact_levels)
 	if(!message)
 		return
+
+	if(!title)
+		title = "[command_name()] Update"
+
+	if(!announcement_type)
+		announcement_type = "[command_name()] Update"
+
 	var/message_title = new_title ? new_title : title
 	var/message_sound = new_sound ? new_sound : sound
 

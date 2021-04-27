@@ -249,6 +249,15 @@ var/global/list/gamemode_cache = list()
 	var/max_client_view_x
 	var/max_client_view_y
 
+	var/static/list/protected_vars = list(
+		"comms_password",
+		"ban_comms_password",
+		"login_export_addr"
+	)
+
+/datum/configuration/VV_hidden()
+	. = ..() | protected_vars
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)

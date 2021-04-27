@@ -8,6 +8,6 @@ var/global/list/jobMax = list()
 
 var/global/diary = null
 
-var/global/log_directory
-var/global/world_qdel_log
-var/global/world_href_log
+GLOBAL_PROTECTED_UNTYPED(log_directory, null)
+GLOBAL_PROTECTED_UNTYPED(world_qdel_log, null)
+GLOBAL_PROTECTED_UNTYPED(world_href_log, null)

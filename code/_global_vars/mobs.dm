@@ -1,5 +1,6 @@
+GLOBAL_PROTECTED(admins, /list, list())   // all clients whom are admins
+
 var/global/list/clients =          list() // all clients
-var/global/list/admins =           list() // all clients whom are admins
 var/global/list/ckey_directory =   list() // all ckeys with associated client
 
 var/global/list/player_list =      list() // List of all mobs **with clients attached**. Excludes /mob/new_player
