@@ -135,7 +135,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	if(!priority_order || !priority_order.len)
 		priority_order = list()
 		for(var/entry in GLOB.default_uplink_source_priority)
-			priority_order += GET_DECL(entry)
+			priority_order |= GET_DECL(entry)
 
 	for(var/entry in priority_order)
 		var/decl/uplink_source/US = entry

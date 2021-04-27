@@ -103,7 +103,7 @@
 /decl/special_role/ninja/equip(var/mob/living/carbon/human/player)
 	. = ..()
 	if(.)
-		var/decl/uplink_source/pda/uplink_source = new
+		var/decl/uplink_source/pda/uplink_source = GET_DECL(/decl/uplink_source/pda)
 		uplink_source.setup_uplink_source(player, 0)
 
 /decl/special_role/ninja/proc/generate_ninja_directive(side)
