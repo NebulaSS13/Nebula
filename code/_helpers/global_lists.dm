@@ -11,11 +11,11 @@ var/list/obj/item/uplink/world_uplinks = list()
 
 //Preferences stuff
 //Hairstyles
-GLOBAL_LIST_EMPTY(hair_styles_list)        //stores /datum/sprite_accessory/hair indexed by name
-GLOBAL_LIST_EMPTY(facial_hair_styles_list) //stores /datum/sprite_accessory/facial_hair indexed by name
+var/list/hair_styles_list = list()        //stores /datum/sprite_accessory/hair indexed by name
+var/list/facial_hair_styles_list = list() //stores /datum/sprite_accessory/facial_hair indexed by name
 
 var/global/list/skin_styles_female_list = list()		//unused
-GLOBAL_LIST_EMPTY(body_marking_styles_list)		//stores /datum/sprite_accessory/marking indexed by name
+var/list/body_marking_styles_list = list()		//stores /datum/sprite_accessory/marking indexed by name
 
 GLOBAL_DATUM_INIT(underwear, /datum/category_collection/underwear, new())
 
@@ -77,19 +77,19 @@ var/global/list/string_slot_flags = list(
 	paths = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
 	for(var/path in paths)
 		var/datum/sprite_accessory/hair/H = new path()
-		GLOB.hair_styles_list[H.name] = H
+		global.hair_styles_list[H.name] = H
 
 	//Facial Hair - Initialise all /datum/sprite_accessory/facial_hair into an list indexed by facialhair-style name
 	paths = typesof(/datum/sprite_accessory/facial_hair) - /datum/sprite_accessory/facial_hair
 	for(var/path in paths)
 		var/datum/sprite_accessory/facial_hair/H = new path()
-		GLOB.facial_hair_styles_list[H.name] = H
+		global.facial_hair_styles_list[H.name] = H
 
 	//Body markings - Initialise all /datum/sprite_accessory/marking into an list indexed by marking name
 	paths = typesof(/datum/sprite_accessory/marking) - /datum/sprite_accessory/marking
 	for(var/path in paths)
 		var/datum/sprite_accessory/marking/M = new path()
-		GLOB.body_marking_styles_list[M.name] = M
+		global.body_marking_styles_list[M.name] = M
 
 	return 1
 

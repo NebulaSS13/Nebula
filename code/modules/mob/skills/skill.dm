@@ -1,4 +1,4 @@
-GLOBAL_LIST_EMPTY(skills)
+var/list/skills = list()
 
 /decl/hierarchy/skill
 	var/ID = "none"                        // ID of this skill. Needs to be unique.
@@ -33,9 +33,9 @@ GLOBAL_LIST_EMPTY(skills)
 /decl/hierarchy/skill/Initialize()
 	..()
 	if(is_hidden_category())
-		if(!GLOB.skills.len)
+		if(!global.skills.len)
 			for(var/decl/hierarchy/skill/C in children)
-				GLOB.skills += C.get_descendents()
+				global.skills += C.get_descendents()
 		else
 			log_error("<span class='warning'>Warning: multiple instances of /decl/hierarchy/skill have been created!</span>")
 

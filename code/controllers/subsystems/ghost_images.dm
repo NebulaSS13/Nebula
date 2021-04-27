@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(ghost_images)
 
 /datum/controller/subsystem/ghost_images/fire(resumed = 0)
 	if(!resumed && queue_all)
-		queue = GLOB.ghost_mob_list.Copy()
+		queue = global.ghost_mob_list.Copy()
 		queue_all = FALSE
 
 	var/list/curr = queue

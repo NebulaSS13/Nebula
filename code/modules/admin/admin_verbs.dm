@@ -515,7 +515,7 @@ var/list/admin_verbs_mod = list(
 		return
 
 	var/datum/preferences/D
-	var/client/C = GLOB.ckey_directory[warned_ckey]
+	var/client/C = global.ckey_directory[warned_ckey]
 	if(C)	D = C.prefs
 	else	D = SScharacter_setup.preferences_datums[warned_ckey]
 
@@ -642,7 +642,7 @@ var/list/admin_verbs_mod = list(
 
 	if(!check_rights(R_ADMIN)) return
 
-	var/mob/living/silicon/S = input("Select silicon.", "Rename Silicon.") as null|anything in GLOB.silicon_mob_list
+	var/mob/living/silicon/S = input("Select silicon.", "Rename Silicon.") as null|anything in global.silicon_mob_list
 	if(!S) return
 
 	var/new_name = sanitizeSafe(input(src, "Enter new name. Leave blank or as is to cancel.", "[S.real_name] - Enter new silicon name", S.real_name))
@@ -657,7 +657,7 @@ var/list/admin_verbs_mod = list(
 
 	if(!check_rights(R_ADMIN)) return
 
-	var/mob/living/silicon/S = input("Select silicon.", "Manage Silicon Laws") as null|anything in GLOB.silicon_mob_list
+	var/mob/living/silicon/S = input("Select silicon.", "Manage Silicon Laws") as null|anything in global.silicon_mob_list
 	if(!S) return
 
 	var/datum/nano_module/law_manager/L = new(S)
@@ -672,7 +672,7 @@ var/list/admin_verbs_mod = list(
 
 	if(!check_rights(R_FUN)) return
 
-	var/mob/living/carbon/human/H = input("Select mob.", "Change Mob Appearance - Admin") as null|anything in GLOB.human_mob_list
+	var/mob/living/carbon/human/H = input("Select mob.", "Change Mob Appearance - Admin") as null|anything in global.human_mob_list
 	if(!H) return
 
 	log_and_message_admins("is altering the appearance of [H].")
@@ -686,7 +686,7 @@ var/list/admin_verbs_mod = list(
 
 	if(!check_rights(R_FUN)) return
 
-	var/mob/living/carbon/human/H = input("Select mob.", "Change Mob Appearance - Self") as null|anything in GLOB.human_mob_list
+	var/mob/living/carbon/human/H = input("Select mob.", "Change Mob Appearance - Self") as null|anything in global.human_mob_list
 	if(!H) return
 
 	if(!H.client)
@@ -732,7 +732,7 @@ var/list/admin_verbs_mod = list(
 
 	if(!check_rights(R_FUN))	return
 
-	var/mob/living/carbon/human/M = input("Select mob.", "Edit Appearance") as null|anything in GLOB.human_mob_list
+	var/mob/living/carbon/human/M = input("Select mob.", "Edit Appearance") as null|anything in global.human_mob_list
 
 	if(!istype(M, /mob/living/carbon/human))
 		to_chat(usr, "<span class='warning'>You can only do this to humans!</span>")
@@ -764,12 +764,12 @@ var/list/admin_verbs_mod = list(
 		M.skin_tone =  -M.skin_tone + 35
 
 	// hair
-	var/new_hstyle = input(usr, "Select a hair style", "Grooming")  as null|anything in GLOB.hair_styles_list
+	var/new_hstyle = input(usr, "Select a hair style", "Grooming")  as null|anything in global.hair_styles_list
 	if(new_hstyle)
 		M.h_style = new_hstyle
 
 	// facial hair
-	var/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in GLOB.facial_hair_styles_list
+	var/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in global.facial_hair_styles_list
 	if(new_fstyle)
 		M.f_style = new_fstyle
 

@@ -103,8 +103,8 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	pref.facial_hair_colour = pref.facial_hair_colour || COLOR_BLACK
 	pref.eye_colour  =        pref.eye_colour         || COLOR_BLACK
 
-	pref.h_style		= sanitize_inlist(pref.h_style, GLOB.hair_styles_list, initial(pref.h_style))
-	pref.f_style		= sanitize_inlist(pref.f_style, GLOB.facial_hair_styles_list, initial(pref.f_style))
+	pref.h_style		= sanitize_inlist(pref.h_style, global.hair_styles_list, initial(pref.h_style))
+	pref.f_style		= sanitize_inlist(pref.f_style, global.facial_hair_styles_list, initial(pref.f_style))
 	pref.b_type			= sanitize_text(pref.b_type, initial(pref.b_type))
 	if(!pref.b_type || !(pref.b_type in global.valid_bloodtypes))
 		pref.b_type = RANDOM_BLOOD_TYPE
@@ -143,7 +143,7 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	if(!istype(pref.body_markings))
 		pref.body_markings = list()
 	else
-		pref.body_markings &= GLOB.body_marking_styles_list
+		pref.body_markings &= global.body_marking_styles_list
 
 	sanitize_organs()
 
@@ -483,9 +483,9 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	else if(href_list["marking_style"])
 		var/list/disallowed_markings = list()
 		for (var/M in pref.body_markings)
-			var/datum/sprite_accessory/marking/mark_style = GLOB.body_marking_styles_list[M]
+			var/datum/sprite_accessory/marking/mark_style = global.body_marking_styles_list[M]
 			disallowed_markings |= mark_style.disallows
-		var/list/usable_markings = pref.body_markings.Copy() ^ GLOB.body_marking_styles_list.Copy()
+		var/list/usable_markings = pref.body_markings.Copy() ^ global.body_marking_styles_list.Copy()
 		for(var/M in usable_markings)
 			var/datum/sprite_accessory/S = usable_markings[M]
 			if(is_type_in_list(S, disallowed_markings) || (S.species_allowed && !(mob_species.get_root_species_name() in S.species_allowed)) || (S.subspecies_allowed && !(mob_species.name in S.subspecies_allowed)))
@@ -678,7 +678,7 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 		pref.h_style = pick(valid_hairstyles)
 	else
 		//this shouldn't happen
-		pref.h_style = GLOB.hair_styles_list["Bald"]
+		pref.h_style = global.hair_styles_list["Bald"]
 
 /datum/category_item/player_setup_item/proc/ResetFacialHair()
 	var/decl/species/mob_species = get_species_by_key(pref.species)
@@ -688,7 +688,7 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 		pref.f_style = pick(valid_facialhairstyles)
 	else
 		//this shouldn't happen
-		pref.f_style = GLOB.facial_hair_styles_list["Shaved"]
+		pref.f_style = global.facial_hair_styles_list["Shaved"]
 
 /datum/category_item/player_setup_item/physical/body/proc/sanitize_organs()
 	var/decl/species/mob_species = get_species_by_key(pref.species)

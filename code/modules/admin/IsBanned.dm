@@ -21,7 +21,7 @@
 		key_cache[key] = 0
 		return list("reason"="guest", "desc"="\nReason: Guests not allowed. Please sign in with a byond account.")
 
-	var/client/C = GLOB.ckey_directory[ckeytext]
+	var/client/C = global.ckey_directory[ckeytext]
 	//If this isn't here, then topic call spam will result in all clients getting kicked with a connecting too fast error.
 	if (C && ckeytext == C.ckey && address == C.address && computer_id == C.computer_id)
 		key_cache[key] = 0

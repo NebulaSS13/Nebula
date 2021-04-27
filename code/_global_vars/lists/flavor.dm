@@ -23,7 +23,7 @@ GLOBAL_LIST_INIT(scarySounds, list(
 ))
 
 // Reference list for disposal sort junctions. Filled up by sorting junction's New()
-GLOBAL_LIST_EMPTY(tagger_locations)
+var/list/tagger_locations = list()
 
 GLOBAL_LIST_INIT(station_prefixes, list("", "Imperium", "Heretical", "Cuban",
 	"Psychic", "Elegant", "Common", "Uncommon", "Rare", "Unique",

@@ -24,7 +24,7 @@ var/list/cached_space = list()
 
 /obj/effect/overmap/visitable/sector/temporary/proc/can_die(var/mob/observer)
 	testing("Checking if sector at [map_z[1]] can die.")
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in global.player_list)
 		if(M != observer && (M.z in map_z))
 			testing("There are people on it.")
 			return 0

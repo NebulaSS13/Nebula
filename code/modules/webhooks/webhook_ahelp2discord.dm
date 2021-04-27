@@ -10,5 +10,5 @@
 	))
 
 /decl/webhook/ahelp_sent/get_mentions()
-	if(!length(GLOB.admins))
+	if(!length(global.admins))
 		return mentions

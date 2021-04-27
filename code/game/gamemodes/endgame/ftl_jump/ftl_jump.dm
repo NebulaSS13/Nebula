@@ -19,7 +19,7 @@
 					M.forceMove(T)
 			else
 				create_duplicate(M)
-	for(var/mob/goast in GLOB.ghost_mob_list)
+	for(var/mob/goast in global.ghost_mob_list)
 		goast.mouse_opacity = 0	//can't let you click that Dave
 		goast.set_invisibility(SEE_INVISIBLE_LIVING)
 		goast.alpha = 255
@@ -61,7 +61,7 @@
 		to_chat(M,"<span class='notice'>You feel rooted in material world again.</span>")
 		M.clear_fullscreen("wormhole")
 	M.set_status(STAT_CONFUSE, 0)
-	for(var/mob/goast in GLOB.ghost_mob_list)
+	for(var/mob/goast in global.ghost_mob_list)
 		goast.mouse_opacity = initial(goast.mouse_opacity)
 		goast.set_invisibility(initial(goast.invisibility))
 		goast.alpha = initial(goast.alpha)

@@ -10,7 +10,7 @@
 	var/maxdistance = (world.view + extrarange) * 2
 
  	// Looping through the player list has the added bonus of working for mobs inside containers
-	var/list/listeners = GLOB.player_list
+	var/list/listeners = global.player_list
 	if(!ignore_walls) //these sounds don't carry through walls
 		listeners = listeners & hearers(maxdistance, turf_source)
 

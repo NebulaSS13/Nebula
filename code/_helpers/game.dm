@@ -19,7 +19,7 @@
 
 /proc/living_observers_present(var/list/zlevels)
 	if(LAZYLEN(zlevels))
-		for(var/mob/M in GLOB.player_list) //if a tree ticks on the empty zlevel does it really tick
+		for(var/mob/M in global.player_list) //if a tree ticks on the empty zlevel does it really tick
 			if(M.stat != DEAD) //(no it doesn't)
 				var/turf/T = get_turf(M)
 				if(T && (T.z in zlevels))
@@ -236,8 +236,8 @@
 
 
 	// Try to find all the players who can hear the message
-	for(var/i = 1; i <= GLOB.player_list.len; i++)
-		var/mob/M = GLOB.player_list[i]
+	for(var/i = 1; i <= global.player_list.len; i++)
+		var/mob/M = global.player_list[i]
 		if(M)
 			var/turf/ear = get_turf(M)
 			if(ear)
@@ -259,13 +259,13 @@
 			objs += AM
 			hearturfs += get_turf(AM)
 
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in global.player_list)
 		if(checkghosts && M.stat == DEAD && M.get_preference_value(checkghosts) != global.PREF_NEARBY)
 			mobs |= M
 		else if(get_turf(M) in hearturfs)
 			mobs |= M
 
-	for(var/obj/O in GLOB.listening_objects)
+	for(var/obj/O in global.listening_objects)
 		if(get_turf(O) in hearturfs)
 			objs |= O
 
@@ -344,7 +344,7 @@
 	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
 	var/i = 0
 	while(candidates.len <= 0 && i < 5)
-		for(var/mob/observer/ghost/G in GLOB.player_list)
+		for(var/mob/observer/ghost/G in global.player_list)
 			if(((G.client.inactivity/10)/60) <= buffer + i) // the most active players are more likely to become an alien
 				if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
 					candidates += G.key

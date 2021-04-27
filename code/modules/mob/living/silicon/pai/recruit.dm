@@ -265,7 +265,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 	for(var/datum/paiCandidate/c in paiController.pai_candidates)
 		if(c.ready)
 			var/found = 0
-			for(var/mob/observer/ghost/o in GLOB.player_list)
+			for(var/mob/observer/ghost/o in global.player_list)
 				if(o.key == c.key && o.MayRespawn())
 					found = 1
 			if(found)
@@ -378,7 +378,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 /datum/paiController/proc/requestRecruits(var/mob/user)
 	inquirer = user
-	for(var/mob/observer/ghost/O in GLOB.player_list)
+	for(var/mob/observer/ghost/O in global.player_list)
 		if(!O.MayRespawn())
 			continue
 		if(jobban_isbanned(O, "pAI"))

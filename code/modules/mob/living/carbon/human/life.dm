@@ -1001,8 +1001,8 @@
 		holder.icon_state = "hudblank"
 		if(mind && mind.assigned_special_role)
 			var/special_role = mind.get_special_role_name()
-			if(special_role && GLOB.hud_icon_reference[special_role])
-				holder.icon_state = GLOB.hud_icon_reference[special_role]
+			if(special_role && global.hud_icon_reference[special_role])
+				holder.icon_state = global.hud_icon_reference[special_role]
 			else
 				holder.icon_state = "hudsyndicate"
 			hud_list[SPECIALROLE_HUD] = holder

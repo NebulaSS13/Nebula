@@ -199,7 +199,7 @@
 	if(engaging || ((world.time - last_shot) < charge_cooldown))
 		return
 	
-	if(GLOB.meteor_list.len == 0)
+	if(global.meteor_list.len == 0)
 		return
 	var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 	var/datum/local_network/lan = pointdefense.get_local_network()
@@ -211,7 +211,7 @@
 	if(!istype(PC))
 		return
 
-	for(var/obj/effect/meteor/M in GLOB.meteor_list)
+	for(var/obj/effect/meteor/M in global.meteor_list)
 		var/already_targeted = FALSE
 		for(var/weakref/WR in PC.targets)
 			var/obj/effect/meteor/m = WR.resolve()

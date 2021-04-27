@@ -32,7 +32,7 @@
 	var/missing_ages = 0
 	var/msg = ""
 
-	for(var/client/C in GLOB.clients)
+	for(var/client/C in global.clients)
 		if(C.player_age == "Requires database")
 			missing_ages = 1
 			continue
@@ -431,7 +431,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		return
 
 	var/mob/observer/ghost/G_found
-	for(var/mob/observer/ghost/G in GLOB.player_list)
+	for(var/mob/observer/ghost/G in global.player_list)
 		if(G.ckey == input)
 			G_found = G
 			break

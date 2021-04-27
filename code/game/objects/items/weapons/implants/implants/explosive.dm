@@ -48,7 +48,7 @@
 
 /obj/item/implant/explosive/Initialize()
 	. = ..()
-	GLOB.listening_objects += src
+	global.listening_objects += src
 	set_frequency(frequency)
 
 /obj/item/implant/explosive/Topic(href, href_list)
@@ -163,7 +163,7 @@
 	removed()
 	radio_controller.remove_object(src, frequency)
 	radio_connection = null
-	GLOB.listening_objects -= src
+	global.listening_objects -= src
 	return ..()
 
 /obj/item/implanter/explosive

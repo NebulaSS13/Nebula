@@ -52,7 +52,7 @@
 	if(ispath(cell))
 		cell = new(src)
 	internal_channels = global.using_map.default_internal_channels()
-	GLOB.listening_objects += src
+	global.listening_objects += src
 
 	if(frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ)
 		frequency = sanitize_frequency(frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ)
@@ -63,7 +63,7 @@
 
 /obj/item/radio/Destroy()
 	QDEL_NULL(wires)
-	GLOB.listening_objects -= src
+	global.listening_objects -= src
 	if(radio_controller)
 		radio_controller.remove_object(src, frequency)
 		for (var/ch_name in channels)

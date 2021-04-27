@@ -91,7 +91,7 @@
 			stat("Players: [totalPlayers]", "Players Ready: [totalPlayersReady]")
 			totalPlayers = 0
 			totalPlayersReady = 0
-			for(var/mob/new_player/player in GLOB.player_list)
+			for(var/mob/new_player/player in global.player_list)
 				var/highjob
 				if(player.client && player.client.prefs && player.client.prefs.job_high)
 					highjob = " as [player.client.prefs.job_high]"

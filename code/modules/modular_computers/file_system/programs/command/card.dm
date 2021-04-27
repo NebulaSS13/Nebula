@@ -252,7 +252,7 @@
 						id_card.side = photo
 				else if(href_list["load_data"])
 					var/list/ass_data = list()
-					for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+					for(var/datum/computer_file/report/crew_record/CR in global.all_crew_records)
 						ass_data.Add(list(CR.get_name() = CR))
 					var/selected_CR_name = input("Select crew record for write down to the card.", "Crew record selection") as null|anything in ass_data
 					var/datum/computer_file/report/crew_record/selected_CR = get_crewmember_record(selected_CR_name)

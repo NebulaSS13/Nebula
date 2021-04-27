@@ -82,9 +82,9 @@ SUBSYSTEM_DEF(jobs)
 						J.total_positions = 0
 
 	// Init skills.
-	if(!GLOB.skills.len)
+	if(!global.skills.len)
 		GET_DECL(/decl/hierarchy/skill)
-	if(!GLOB.skills.len)
+	if(!global.skills.len)
 		log_error("<span class='warning'>Error setting up job skill requirements, no skill datums found!</span>")
 
 	// Update title and path tracking, submap list, etc.
@@ -143,7 +143,7 @@ SUBSYSTEM_DEF(jobs)
 
 
 /datum/controller/subsystem/jobs/proc/reset_occupations()
-	for(var/mob/new_player/player in GLOB.player_list)
+	for(var/mob/new_player/player in global.player_list)
 		if((player) && (player.mind))
 			player.mind.assigned_job = null
 			player.mind.assigned_role = null
@@ -330,7 +330,7 @@ SUBSYSTEM_DEF(jobs)
 				A.spawn_positions = 3
 				break
 	//Get the players who are ready
-	for(var/mob/new_player/player in GLOB.player_list)
+	for(var/mob/new_player/player in global.player_list)
 		if(player.ready && player.mind && !player.mind.assigned_role)
 			unassigned_roundstart += player
 	if(unassigned_roundstart.len == 0)	return 0

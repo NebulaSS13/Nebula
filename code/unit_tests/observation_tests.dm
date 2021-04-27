@@ -23,16 +23,16 @@
 	for(var/global_listener in moved_event.global_listeners)
 		events_repository.unregister_global(/decl/observ/moved, global_listener)
 
-	stored_global_listen_count = GLOB.global_listen_count.Copy()
-	stored_event_sources_count = GLOB.event_sources_count.Copy()
-	stored_event_listen_count =  GLOB.event_listen_count.Copy()
+	stored_global_listen_count = global.global_listen_count.Copy()
+	stored_event_sources_count = global.event_sources_count.Copy()
+	stored_event_listen_count =  global.event_listen_count.Copy()
 
 	sanity_check_events("Pre-Test")
 	. = conduct_test()
 	sanity_check_events("Post-Test")
 
 /datum/unit_test/observation/proc/sanity_check_events(var/phase)
-	for(var/entry in GLOB.all_observable_events)
+	for(var/entry in global.all_observable_events)
 		var/decl/observ/event = entry
 		if(null in event.global_listeners)
 			fail("[phase]: [event] - The global listeners list contains a null entry.")
@@ -56,11 +56,11 @@
 									if(isnull(proc_call))
 										fail("[phase]: [event] - [listener]- The proc call list contains a null entry.")
 
-	for(var/entry in (GLOB.global_listen_count - stored_global_listen_count))
+	for(var/entry in (global.global_listen_count - stored_global_listen_count))
 		fail("[phase]: global_listen_count - Contained [log_info_line(entry)].")
-	for(var/entry in (GLOB.event_sources_count - stored_event_sources_count))
+	for(var/entry in (global.event_sources_count - stored_event_sources_count))
 		fail("[phase]: event_sources_count - Contained [log_info_line(entry)].")
-	for(var/entry in (GLOB.event_listen_count - stored_event_listen_count))
+	for(var/entry in (global.event_listen_count - stored_event_listen_count))
 		fail("[phase]: event_listen_count - Contained [log_info_line(entry)].")
 
 /datum/unit_test/observation/proc/conduct_test()

@@ -280,7 +280,7 @@
 	if(!check_rights(R_FUN))
 		return
 
-	var/mob/living/carbon/human/H = input("Select mob.", "Select equipment.") as null|anything in GLOB.human_mob_list
+	var/mob/living/carbon/human/H = input("Select mob.", "Select equipment.") as null|anything in global.human_mob_list
 	if(!H)
 		return
 
@@ -357,19 +357,19 @@
 
 	switch(input("Which list?") in list("Players","Admins","Mobs","Living Mobs","Dead Mobs", "Ghost Mobs", "Clients"))
 		if("Players")
-			to_chat(usr, jointext(GLOB.player_list,","))
+			to_chat(usr, jointext(global.player_list,","))
 		if("Admins")
-			to_chat(usr, jointext(GLOB.admins,","))
+			to_chat(usr, jointext(global.admins,","))
 		if("Mobs")
 			to_chat(usr, jointext(SSmobs.mob_list,","))
 		if("Living Mobs")
-			to_chat(usr, jointext(GLOB.living_mob_list_,","))
+			to_chat(usr, jointext(global.living_mob_list_,","))
 		if("Dead Mobs")
-			to_chat(usr, jointext(GLOB.dead_mob_list_,","))
+			to_chat(usr, jointext(global.dead_mob_list_,","))
 		if("Ghost Mobs")
-			to_chat(usr, jointext(GLOB.ghost_mob_list,","))
+			to_chat(usr, jointext(global.ghost_mob_list,","))
 		if("Clients")
-			to_chat(usr, jointext(GLOB.clients,","))
+			to_chat(usr, jointext(global.clients,","))
 
 // DNA2 - Admin Hax
 /client/proc/cmd_admin_toggle_block(var/mob/M,var/block)
@@ -402,7 +402,7 @@
 	set name = "Analyse Health"
 	set desc = "Get an advanced health reading on a human mob."
 
-	var/mob/living/carbon/human/H = input("Select mob.", "Analyse Health") as null|anything in GLOB.human_mob_list
+	var/mob/living/carbon/human/H = input("Select mob.", "Analyse Health") as null|anything in global.human_mob_list
 	if(!H)	return
 
 	cmd_analyse_health(H)
@@ -419,7 +419,7 @@
 	dat += text("<BR><A href='?src=\ref[];mach_close=scanconsole'>Close</A>", usr)
 	show_browser(usr, dat, "window=scanconsole;size=430x600")
 
-/client/proc/cmd_analyse_health_context(mob/living/carbon/human/H as mob in GLOB.human_mob_list)
+/client/proc/cmd_analyse_health_context(mob/living/carbon/human/H as mob in global.human_mob_list)
 	set category = null
 	set name = "Analyse Human Health"
 

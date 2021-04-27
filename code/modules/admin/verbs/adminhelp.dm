@@ -122,7 +122,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 
 	var/admin_number_afk = 0
 
-	for(var/client/X in GLOB.admins)
+	for(var/client/X in global.admins)
 		if((R_ADMIN|R_MOD) & X.holder.rights)
 			if(X.is_afk())
 				admin_number_afk++
@@ -132,7 +132,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			window_flash(X)
 	//show it to the person adminhelping too
 	to_chat(src, "<font color='blue'>PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]</font>")
-	var/admin_number_present = GLOB.admins.len - admin_number_afk
+	var/admin_number_present = global.admins.len - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
 	if(admin_number_present <= 0)
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)] - !![admin_number_afk ? "All admins AFK ([admin_number_afk])" : "No admins online"]!!")

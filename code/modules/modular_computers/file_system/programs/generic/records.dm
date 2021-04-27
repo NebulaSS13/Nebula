@@ -97,7 +97,7 @@
 			to_chat(usr, "Access Denied.")
 			return
 		active_record = new/datum/computer_file/report/crew_record()
-		GLOB.all_crew_records.Add(active_record)
+		global.all_crew_records.Add(active_record)
 		network.store_file(active_record, MF_ROLE_CREW_RECORDS)
 		return 1
 	if(href_list["print_active"])

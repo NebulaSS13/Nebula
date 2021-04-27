@@ -29,7 +29,7 @@
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	if(ispath(mytape))
 		mytape = new mytape(src)
-	GLOB.listening_objects += src
+	global.listening_objects += src
 	update_icon()
 
 /obj/item/taperecorder/empty
@@ -37,7 +37,7 @@
 
 /obj/item/taperecorder/Destroy()
 	QDEL_NULL(wires)
-	GLOB.listening_objects -= src
+	global.listening_objects -= src
 	if(mytape)
 		qdel(mytape)
 		mytape = null

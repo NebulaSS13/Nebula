@@ -1,4 +1,14 @@
-LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
+var/list/all_waypoints = list()
+
+/datum/computer_file/data/waypoint
+	var/list/fields = list()
+
+/datum/computer_file/data/waypoint/New()
+	global.all_waypoints += src
+	
+/datum/computer_file/data/waypoint/Destroy()
+	. = ..()
+	global.all_waypoints -= src
 
 var/list/overmap_helm_computers
 /obj/machinery/computer/ship/helm

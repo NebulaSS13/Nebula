@@ -827,10 +827,10 @@
 
 /obj/item/integrated_circuit/input/microphone/Initialize()
 	. = ..()
-	GLOB.listening_objects += src
+	global.listening_objects += src
 
 /obj/item/integrated_circuit/input/microphone/Destroy()
-	GLOB.listening_objects -= src
+	global.listening_objects -= src
 	. = ..()
 
 /obj/item/integrated_circuit/input/microphone/hear_talk(var/mob/living/M, text, verb, decl/language/speaking)

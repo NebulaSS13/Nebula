@@ -151,7 +151,7 @@ var/list/localhost_addresses = list(
 			qdel(src)
 			return
 		if(config.player_limit != 0)
-			if((GLOB.clients.len >= config.player_limit) && !(ckey in admin_datums))
+			if((global.clients.len >= config.player_limit) && !(ckey in admin_datums))
 				alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
 				log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
 				qdel(src)
@@ -166,8 +166,8 @@ var/list/localhost_addresses = list(
 		to_chat(src, "<span class='warning'>You are running an older version of BYOND than the server and may experience issues.</span>")
 		to_chat(src, "<span class='warning'>It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/.</span>")
 	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
-	GLOB.clients += src
-	GLOB.ckey_directory[ckey] = src
+	global.clients += src
+	global.ckey_directory[ckey] = src
 
 	// Automatic admin rights for people connecting locally.
 	// Concept stolen from /tg/ with deepest gratitude.
@@ -177,7 +177,7 @@ var/list/localhost_addresses = list(
 	//Admin Authorisation
 	holder = admin_datums[ckey]
 	if(holder)
-		GLOB.admins += src
+		global.admins += src
 		holder.owner = src
 		handle_staff_login()
 
@@ -246,9 +246,9 @@ var/list/localhost_addresses = list(
 	if(holder)
 		handle_staff_logout()
 		holder.owner = null
-		GLOB.admins -= src
-	GLOB.ckey_directory -= ckey
-	GLOB.clients -= src
+		global.admins -= src
+	global.ckey_directory -= ckey
+	global.clients -= src
 	return ..()
 
 /client/Destroy()
@@ -324,7 +324,7 @@ var/list/localhost_addresses = list(
 	var/admin_rank = "Player"
 	if(src.holder)
 		admin_rank = src.holder.rank
-		for(var/client/C in GLOB.clients)
+		for(var/client/C in global.clients)
 			if(C.staffwarn)
 				C.mob.send_staffwarn(src, "is connected", 0)
 
@@ -364,7 +364,7 @@ var/list/localhost_addresses = list(
 /client/proc/handle_staff_logout()
 	if(admin_datums[ckey] && GAME_STATE == RUNLEVEL_GAME) //Only report this stuff if we are currently playing.
 		message_staff("\[[holder.rank]\] [key_name(src)] logged out.")
-		if(!GLOB.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
+		if(!global.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
 			send2adminirc("[key_name(src)] logged out - no more staff online.")
 			if(config.delist_when_no_admins && global.visibility_pref)
 				world.update_hub_visibility()

@@ -134,7 +134,7 @@ var/world_topic_last = world.timeofday
 
 	else if(T == "players")
 		var/n = 0
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M in global.player_list)
 			if(M.client)
 				n++
 		return n
@@ -160,7 +160,7 @@ var/world_topic_last = world.timeofday
 		var/list/players = list()
 		var/list/admins = list()
 		var/legacy = input["status"] != "2"
-		for(var/client/C in GLOB.clients)
+		for(var/client/C in global.clients)
 			if(C.holder)
 				if(C.is_stealthed())
 					continue	//so stealthmins aren't revealed by the hub
@@ -230,7 +230,7 @@ var/world_topic_last = world.timeofday
 		var/target = ckey(input["target"])
 
 		var/client/C
-		for(var/client/K in GLOB.clients)
+		for(var/client/K in global.clients)
 			if(K.ckey == target)
 				C = K
 				break
@@ -370,7 +370,7 @@ var/world_topic_last = world.timeofday
 		var/client/C
 		var/req_ckey = ckey(input["adminmsg"])
 
-		for(var/client/K in GLOB.clients)
+		for(var/client/K in global.clients)
 			if(K.ckey == req_ckey)
 				C = K
 				break
@@ -392,7 +392,7 @@ var/world_topic_last = world.timeofday
 		sound_to(C, 'sound/effects/adminhelp.ogg')
 		to_chat(C, message)
 
-		for(var/client/A in GLOB.admins)
+		for(var/client/A in global.admins)
 			if(A != C)
 				to_chat(A, amessage)
 		return "Message Successful"
@@ -442,7 +442,7 @@ var/world_topic_last = world.timeofday
 	Master.Shutdown()
 
 	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
-		for(var/client/C in GLOB.clients)
+		for(var/client/C in global.clients)
 			to_chat(C, link("byond://[config.server]"))
 
 	if(config.wait_for_sigusr1_reboot && reason != 3)
@@ -514,7 +514,7 @@ var/world_topic_last = world.timeofday
 
 				var/ckey = copytext(line, 1, length(line)+1)
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
-				D.associate(GLOB.ckey_directory[ckey])
+				D.associate(global.ckey_directory[ckey])
 
 /world/proc/update_status()
 	var/s = "<b>[station_name()]</b>"
@@ -544,7 +544,7 @@ var/world_topic_last = world.timeofday
 		features += "AI allowed"
 
 	var/n = 0
-	for (var/mob/M in GLOB.player_list)
+	for (var/mob/M in global.player_list)
 		if (M.client)
 			n++
 

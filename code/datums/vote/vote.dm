@@ -71,7 +71,7 @@
 //Modifies the vote totals based on non-voting mobs.
 /datum/vote/proc/handle_default_votes()
 	if(!config.vote_no_default)
-		return length(GLOB.clients) - length(voted) //Number of non-voters (might not be active, though; should be revisited if the config option is used. This is legacy code.)
+		return length(global.clients) - length(voted) //Number of non-voters (might not be active, though; should be revisited if the config option is used. This is legacy code.)
 
 /datum/vote/proc/tally_result()
 	handle_default_votes()

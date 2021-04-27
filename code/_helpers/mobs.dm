@@ -223,27 +223,27 @@
 /mob/proc/add_to_living_mob_list()
 	return FALSE
 /mob/living/add_to_living_mob_list()
-	if((src in GLOB.living_mob_list_) || (src in GLOB.dead_mob_list_))
+	if((src in global.living_mob_list_) || (src in global.dead_mob_list_))
 		return FALSE
-	GLOB.living_mob_list_ += src
+	global.living_mob_list_ += src
 	return TRUE
 
 // Returns true if the mob was removed from the living list
 /mob/proc/remove_from_living_mob_list()
-	return GLOB.living_mob_list_.Remove(src)
+	return global.living_mob_list_.Remove(src)
 
 // Returns true if the mob was in neither the dead or living list
 /mob/proc/add_to_dead_mob_list()
 	return FALSE
 /mob/living/add_to_dead_mob_list()
-	if((src in GLOB.living_mob_list_) || (src in GLOB.dead_mob_list_))
+	if((src in global.living_mob_list_) || (src in global.dead_mob_list_))
 		return FALSE
-	GLOB.dead_mob_list_ += src
+	global.dead_mob_list_ += src
 	return TRUE
 
 // Returns true if the mob was removed form the dead list
 /mob/proc/remove_from_dead_mob_list()
-	return GLOB.dead_mob_list_.Remove(src)
+	return global.dead_mob_list_.Remove(src)
 
 //Find a dead mob with a brain and client.
 /proc/find_dead_player(var/find_key, var/include_observers = 0)
@@ -253,14 +253,14 @@
 	var/mob/selected = null
 
 	if(include_observers)
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M in global.player_list)
 			if((M.stat != DEAD) || (!M.client))
 				continue
 			if(M.ckey == find_key)
 				selected = M
 				break
 	else
-		for(var/mob/living/M in GLOB.player_list)
+		for(var/mob/living/M in global.player_list)
 			//Dead people only thanks!
 			if((M.stat != DEAD) || (!M.client))
 				continue

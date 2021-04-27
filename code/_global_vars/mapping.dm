@@ -1,1 +1,1 @@
-GLOBAL_LIST_EMPTY(ruin_landmarks)
+var/list/ruin_landmarks = list()

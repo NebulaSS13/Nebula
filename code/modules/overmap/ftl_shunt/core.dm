@@ -224,7 +224,7 @@
 		update_use_power(POWER_USE_ACTIVE)
 
 	if(sabotaged)
-		for(var/mob/living/carbon/human/H in GLOB.living_mob_list_) //Give engineers a hint that something might be very, very wrong.
+		for(var/mob/living/carbon/human/H in global.living_mob_list_) //Give engineers a hint that something might be very, very wrong.
 			if(!(H.z in ftl_computer.linked.map_z))
 				continue
 			if(H.skill_check(SKILL_ENGINES, SKILL_EXPERT))
@@ -263,7 +263,7 @@
 	addtimer(CALLBACK(src, .proc/do_shunt, shunt_x, shunt_y, jumpdist, destination), 6 SECONDS)
 	jumping = TRUE
 	update_use_power(POWER_USE_IDLE)
-	for(var/mob/living/carbon/M in GLOB.living_mob_list_)
+	for(var/mob/living/carbon/M in global.living_mob_list_)
 		if(!(M.z in ftl_computer.linked.map_z))
 			continue
 		sound_to(M, 'sound/machines/hyperspace_begin.ogg')
@@ -289,7 +289,7 @@
 		if(6 to INFINITY)
 			shunt_sev = SHUNT_SEVERITY_CRITICAL
 
-	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_) //Affect mobs, skip synthetics.
+	for(var/mob/living/carbon/human/H in global.living_mob_list_) //Affect mobs, skip synthetics.
 		sound_to(H, 'sound/machines/hyperspace_end.ogg')
 
 		if(!(H.z in ftl_computer.linked.map_z))

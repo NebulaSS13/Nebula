@@ -185,10 +185,10 @@
 
 /obj/item/assembly_holder/Initialize()
 	. = ..()
-	GLOB.listening_objects += src
+	global.listening_objects += src
 
 /obj/item/assembly_holder/Destroy()
-	GLOB.listening_objects -= src
+	global.listening_objects -= src
 	return ..()
 
 
