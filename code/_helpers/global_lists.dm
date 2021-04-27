@@ -17,7 +17,7 @@ var/list/facial_hair_styles_list = list() //stores /datum/sprite_accessory/facia
 var/global/list/skin_styles_female_list = list()		//unused
 var/list/body_marking_styles_list = list()		//stores /datum/sprite_accessory/marking indexed by name
 
-GLOBAL_DATUM_INIT(underwear, /datum/category_collection/underwear, new())
+var/datum/category_collection/underwear/underwear = new()
 
 // Visual nets
 var/list/datum/visualnet/visual_nets = list()

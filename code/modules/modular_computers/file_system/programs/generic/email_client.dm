@@ -182,7 +182,7 @@
 	last_message_count = 0
 	read_message_count = 0
 
-/datum/nano_module/program/email_client/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/email_client/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
 
 	// Password has been changed by other client connected to this email account

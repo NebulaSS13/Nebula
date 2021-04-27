@@ -1,4 +1,4 @@
-GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
+var/obj/temp_reagents_holder = new
 
 /datum/reagents
 	var/primary_reagent
@@ -315,7 +315,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	if(!amount)
 		return
 
-	var/datum/reagents/F = new(amount, GLOB.temp_reagents_holder)
+	var/datum/reagents/F = new(amount, global.temp_reagents_holder)
 	F.add_reagent(type, amount, REAGENT_DATA(src, type))
 	remove_reagent(type, amount)
 	. = F.trans_to(target, amount, multiplier) // Let this proc check the atom's type
@@ -385,7 +385,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			var/datum/reagents/R = L.get_contact_reagents()
 			if(R)
 				return trans_to_holder(R, amount, multiplier, copy)
-	var/datum/reagents/R = new /datum/reagents(amount, GLOB.temp_reagents_holder)
+	var/datum/reagents/R = new /datum/reagents(amount, global.temp_reagents_holder)
 	. = trans_to_holder(R, amount, multiplier, copy, 1)
 	R.touch_mob(target)
 	qdel(R)
@@ -393,7 +393,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 /datum/reagents/proc/trans_to_turf(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Turfs don't have any reagents (at least, for now). Just touch it.
 	if(!target || !target.simulated)
 		return
-	var/datum/reagents/R = new /datum/reagents(amount * multiplier, GLOB.temp_reagents_holder)
+	var/datum/reagents/R = new /datum/reagents(amount * multiplier, global.temp_reagents_holder)
 	. = trans_to_holder(R, amount, multiplier, copy, 1)
 	R.touch_turf(target)
 	if(R?.total_volume <= FLUID_EVAPORATION_POINT || QDELETED(target))
@@ -407,7 +407,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		return
 
 	if(!target.reagents)
-		var/datum/reagents/R = new /datum/reagents(amount * multiplier, GLOB.temp_reagents_holder)
+		var/datum/reagents/R = new /datum/reagents(amount * multiplier, global.temp_reagents_holder)
 		. = trans_to_holder(R, amount, multiplier, copy, 1)
 		R.touch_obj(target)
 		qdel(R)

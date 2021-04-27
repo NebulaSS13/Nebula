@@ -21,7 +21,7 @@
 	var/datum/computer_network/gun_net = istype(S) ? S.get_computer_network() : G.get_network()
 	return our_net == gun_net
 
-/datum/nano_module/program/forceauthorization/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/forceauthorization/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
 	data["is_silicon_usr"] = issilicon(user)
 

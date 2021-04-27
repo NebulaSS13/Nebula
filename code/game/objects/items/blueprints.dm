@@ -20,7 +20,7 @@
 		to_chat(user, SPAN_WARNING("This stack of blue paper means nothing to you."))
 		return
 
-	if(CanInteract(user, GLOB.default_state))
+	if(CanInteract(user, global.default_topic_state))
 		var/datum/extension/eye/blueprints = get_extension(src, /datum/extension/eye/)
 		if(!(user.z in valid_z_levels))
 			to_chat(user, SPAN_WARNING("The markings on this are entirely irrelevant to your whereabouts!"))

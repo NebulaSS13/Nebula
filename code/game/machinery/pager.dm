@@ -20,7 +20,7 @@
 	return attack_hand(user)
 
 /obj/machinery/network/pager/interface_interact(mob/living/user)
-	if(!CanInteract(user, GLOB.default_state))
+	if(!CanInteract(user, global.default_topic_state))
 		return FALSE
 	playsound(src, "button", 60)
 	flick("doorbellpressed",src)

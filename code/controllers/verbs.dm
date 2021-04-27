@@ -23,7 +23,7 @@
 
 	switch(controller)
 		if("Sun")
-			debug_variables(GLOB.sun)
+			debug_variables(global.sun)
 			SSstatistics.add_field_details("admin_verb","DSun")
 		if("Radio")
 			debug_variables(radio_controller)

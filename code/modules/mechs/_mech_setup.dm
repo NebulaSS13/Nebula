@@ -1,6 +1,6 @@
-GLOBAL_DATUM_INIT(default_hardpoint_background, /image, null)
-GLOBAL_DATUM_INIT(hardpoint_error_icon, /image, null)
-GLOBAL_DATUM_INIT(hardpoint_bar_empty, /image, null)
+var/image/default_hardpoint_background = null
+var/image/hardpoint_error_icon = null
+var/image/hardpoint_bar_empty = null
 
 var/list/hardpoint_bar_cache =       list()
 var/list/mech_damage_overlay_cache = list()

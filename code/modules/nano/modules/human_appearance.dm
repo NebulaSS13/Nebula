@@ -18,7 +18,7 @@
 	src.whitelist = species_whitelist
 	src.blacklist = species_blacklist
 
-/datum/nano_module/appearance_changer/Topic(ref, href_list, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/appearance_changer/Topic(ref, href_list, var/datum/topic_state/state = global.default_topic_state)
 	if(..())
 		return 1
 
@@ -84,7 +84,7 @@
 				return TRUE
 	return 0
 
-/datum/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	if(!owner || !owner.species)
 		return
 

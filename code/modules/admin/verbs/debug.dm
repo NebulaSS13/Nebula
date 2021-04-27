@@ -395,7 +395,7 @@
 	if(!check_rights(R_DEBUG))
 		return
 
-	GLOB.error_cache.show_to(usr.client)
+	global.error_cache.show_to(usr.client)
 
 /client/proc/cmd_analyse_health_panel()
 	set category = "Debug"

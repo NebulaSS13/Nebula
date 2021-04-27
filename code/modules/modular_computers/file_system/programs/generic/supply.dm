@@ -59,7 +59,7 @@
 	var/notifications_enabled = FALSE
 	var/admin_access = list(access_cargo, access_mailsorting)
 
-/datum/nano_module/supply/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
+/datum/nano_module/supply/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = global.default_topic_state)
 	var/list/data = host.initial_data()
 	var/is_admin = check_access(user, admin_access)
 	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)

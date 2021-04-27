@@ -56,7 +56,7 @@
 		alarm_data_cache -= weakref(usr)
 		return TOPIC_REFRESH		
 
-/datum/nano_module/atmos_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/atmos_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
 	if(!length(monitored_alarms))
 		set_monitored_alarms()

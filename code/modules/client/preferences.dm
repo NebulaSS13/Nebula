@@ -318,7 +318,7 @@ var/list/time_prefs_fixed = list()
 	character.worn_underwear = list()
 
 	for(var/underwear_category_name in all_underwear)
-		var/datum/category_group/underwear/underwear_category = GLOB.underwear.categories_by_name[underwear_category_name]
+		var/datum/category_group/underwear/underwear_category = global.underwear.categories_by_name[underwear_category_name]
 		if(underwear_category)
 			var/underwear_item_name = all_underwear[underwear_category_name]
 			var/datum/category_item/underwear/UWD = underwear_category.items_by_name[underwear_item_name]

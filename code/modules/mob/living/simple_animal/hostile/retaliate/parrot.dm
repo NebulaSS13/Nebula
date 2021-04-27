@@ -143,7 +143,7 @@
 	return
 
 /mob/living/simple_animal/hostile/retaliate/parrot/DefaultTopicState()
-	return GLOB.physical_state
+	return global.physical_topic_state
 
 /mob/living/simple_animal/hostile/retaliate/parrot/OnTopic(mob/user, href_list)
 	//Is the user's mob type able to do this?

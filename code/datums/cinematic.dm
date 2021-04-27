@@ -1,4 +1,4 @@
-GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
+var/datum/cinematic/cinematic = new
 //Was moved from the gameticker to here. Could use further improvement.
 
 /datum/cinematic

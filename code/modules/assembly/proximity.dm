@@ -127,7 +127,7 @@
 	return
 
 
-/obj/item/assembly/prox_sensor/Topic(href, href_list, state = GLOB.physical_state)
+/obj/item/assembly/prox_sensor/Topic(href, href_list, state = global.physical_topic_state)
 	if((. = ..()))
 		close_browser(usr, "window=prox")
 		onclose(usr, "prox")

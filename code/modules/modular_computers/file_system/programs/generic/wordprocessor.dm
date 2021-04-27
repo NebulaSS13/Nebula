@@ -121,7 +121,7 @@
 /datum/nano_module/program/computer_wordprocessor
 	name = "Word Processor"
 
-/datum/nano_module/program/computer_wordprocessor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/computer_wordprocessor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
 	var/datum/computer_file/program/wordprocessor/PRG
 	PRG = program

@@ -314,7 +314,7 @@
 		return
 
 	SSticker.mode.handle_latejoin(character)
-	GLOB.universe.OnPlayerLatejoin(character)
+	global.universe.OnPlayerLatejoin(character)
 	spawnpoint.after_join(character)
 	if(job.create_record)
 		if(character.mind.assigned_role != "Robot")

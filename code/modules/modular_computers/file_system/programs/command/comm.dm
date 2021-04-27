@@ -41,7 +41,7 @@
 	..()
 	crew_announcement.newscast = 1
 
-/datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 
 	var/list/data = host.initial_data()
 
@@ -362,7 +362,7 @@ var/last_message_id = 0
 	if(isnull(emergency))
 		emergency = 1
 
-	if(!GLOB.universe.OnShuttleCall(usr))
+	if(!global.universe.OnShuttleCall(usr))
 		to_chat(user, "<span class='notice'>Cannot establish a connection.</span>")
 		return
 

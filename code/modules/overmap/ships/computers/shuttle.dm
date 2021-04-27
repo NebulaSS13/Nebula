@@ -43,7 +43,7 @@
 		else
 			to_chat(usr, SPAN_WARNING("No valid landing sites in range."))
 		possible_d = shuttle.get_possible_destinations()
-		if(CanInteract(usr, GLOB.default_state) && (D in possible_d))
+		if(CanInteract(usr, global.default_topic_state) && (D in possible_d))
 			shuttle.set_destination(possible_d[D])
 		return TOPIC_REFRESH
 	if(href_list["manual_landing"])
@@ -76,7 +76,7 @@
 			to_chat(user, SPAN_WARNING("No valid landing sites in range!"))
 			return
 
-	if(target_sector && CanInteract(user, GLOB.default_state))
+	if(target_sector && CanInteract(user, global.default_topic_state))
 		var/datum/extension/eye/landing_eye = get_extension(src, /datum/extension/eye)
 		if(landing_eye)
 			if(landing_eye.current_looker) // Double checking in case someone jumped ahead of us.
