@@ -76,7 +76,7 @@
 	if(chargetype & finaltarget.weaknesses)
 		var/turf/T = finaltarget.loc
 		qdel(finaltarget)
-		overmap_event_handler.update_hazards(T)
+		SSmapping.overmap_event_handler.update_hazards(T)
 
 /obj/machinery/computer/ship/disperser/proc/handle_beam(turf/start, direction)
 	set waitfor = FALSE
