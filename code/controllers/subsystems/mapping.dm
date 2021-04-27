@@ -10,7 +10,11 @@ SUBSYSTEM_DEF(mapping)
 	var/list/submaps =                   list()
 	var/list/compile_time_map_markers =  list()
 
+	var/decl/overmap_event_handler/overmap_event_handler
+
 /datum/controller/subsystem/mapping/Initialize(timeofday)
+
+	overmap_event_handler = GET_DECL(/decl/overmap_event_handler)
 
 	// Load templates and build away sites.
 	for(var/obj/effect/landmark/map_load_mark/marker as anything in compile_time_map_markers)
