@@ -98,7 +98,7 @@
 	if(!fexists(filename))
 		return
 
-	var/list/entries = cached_json_decode(file2text(filename))
+	var/list/entries = cached_json_decode(safe_file2text(filename, FALSE))
 	if(!length(entries))
 		return
 
