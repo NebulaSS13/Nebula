@@ -2,10 +2,11 @@
 
 #define SETUP_FAILED TRUE
 
-GLOBAL_LIST_INIT(default_uplink_source_priority, list(
+var/list/default_uplink_source_priority = list(
 	/decl/uplink_source/pda,
 	/decl/uplink_source/radio,
-	/decl/uplink_source/unit))
+	/decl/uplink_source/unit
+)
 
 /decl/uplink_source
 	var/name
@@ -32,7 +33,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	if(!HDD)
 		return SETUP_FAILED
 
-	var/pda_pass = "[rand(100,999)] [pick(GLOB.greek_letters)]"
+	var/pda_pass = "[rand(100,999)] [pick(global.greek_letters)]"
 	var/obj/item/uplink/T = new(P, M.mind, amount)
 	P.hidden_uplink = T
 	var/datum/computer_file/program/uplink/program = new(pda_pass)
@@ -134,7 +135,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 	if(!priority_order || !priority_order.len)
 		priority_order = list()
-		for(var/entry in GLOB.default_uplink_source_priority)
+		for(var/entry in global.default_uplink_source_priority)
 			priority_order |= GET_DECL(entry)
 
 	for(var/entry in priority_order)

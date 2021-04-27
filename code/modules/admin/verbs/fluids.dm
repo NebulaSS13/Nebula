@@ -57,7 +57,7 @@
 	name = "open water"
 	flooded = TRUE
 
-GLOBAL_LIST_INIT(submerged_levels, new)
+var/list/submerged_levels = list()
 /datum/admins/proc/submerge_map()
 	set category = "Admin"
 	set desc = "Submerge the map in an ocean."
@@ -74,7 +74,7 @@ GLOBAL_LIST_INIT(submerged_levels, new)
 	if(alert("Do you wish to flood this z-level, or this entire z-sector?", null, "This level", "Connected levels") == "Connected levels")
 		flooding_levels = GetConnectedZlevels(usr.z)
 	for(var/submerge_z in flooding_levels)
-		if(GLOB.submerged_levels["[submerge_z]"])
+		if(global.submerged_levels["[submerge_z]"])
 			flooding_levels -= "[submerge_z]"
 	if(!length(flooding_levels))
 		to_chat(usr, SPAN_WARNING("This part of the map has already been dropped into an ocean."))
@@ -108,13 +108,13 @@ GLOBAL_LIST_INIT(submerged_levels, new)
 		if(check_level < first_level)
 			first_level = check_level
 	flooding_levels -= first_level
-	GLOB.submerged_levels["[first_level]"] = TRUE
+	global.submerged_levels["[first_level]"] = TRUE
 	global.using_map.base_turf_by_z["[first_level]"] = /turf/exterior/seafloor
 	new /datum/random_map/noise/seafloor/replace_space(null, 1, 1, first_level, world.maxx, world.maxy)
 
 	// Generate open space for the remaining z-levels.
 	for(var/submerge_z in flooding_levels)
-		GLOB.submerged_levels["[submerge_z]"] = TRUE
+		global.submerged_levels["[submerge_z]"] = TRUE
 		global.using_map.base_turf_by_z["[submerge_z]"] = /turf/simulated/open
 		for(var/thing in block(locate(1, 1, submerge_z), locate(world.maxx, world.maxy, submerge_z)))
 			var/turf/T = thing

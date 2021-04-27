@@ -107,7 +107,7 @@
 		var/datum/extension/network_device/mainframe/M = locate(href_list["add_role"])
 		if(!istype(M))
 			return TOPIC_HANDLED
-		var/new_roles = GLOB.all_mainframe_roles - M.roles
+		var/new_roles = global.all_mainframe_roles - M.roles
 		if(!length(new_roles))
 			to_chat(usr, SPAN_WARNING("This server already has all possible roles enabled"))
 			return TOPIC_HANDLED

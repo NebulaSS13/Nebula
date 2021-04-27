@@ -522,7 +522,7 @@ var/bomb_set
 					high_intensity = rand(3, 6)
 					low_intensity = rand(5, 8)
 					time_to_explosion = world.time + 5 SECONDS
-				var/turf/T = pick_area_and_turf(GLOB.is_station_but_not_space_or_shuttle_area)
+				var/turf/T = pick_area_and_turf(global.is_station_but_not_space_or_shuttle_area)
 				explosion(T, range, high_intensity, low_intensity)
 
 /obj/machinery/nuclearbomb/station/secure_device()

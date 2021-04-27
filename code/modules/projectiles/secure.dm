@@ -18,7 +18,7 @@
 	. = ..()
 
 /obj/item/gun/Destroy()
-	GLOB.registered_weapons -= src
+	global.registered_weapons -= src
 	. = ..()
 
 /obj/item/gun/examine(mob/user, distance)
@@ -31,7 +31,7 @@
 		user.visible_message("[user] swipes an ID through \the [src].", range = 3)
 		if(!registered_owner)
 			var/obj/item/card/id/id = W
-			GLOB.registered_weapons += src
+			global.registered_weapons += src
 			verbs += /obj/item/gun/proc/reset_registration
 			registered_owner = id.registered_name
 			to_chat(user, SPAN_NOTICE("\The [src] chimes quietly as it registers to \"[registered_owner]\"."))
@@ -46,7 +46,7 @@
 
 	if(is_secure_gun())
 		registered_owner = null
-		GLOB.registered_weapons -= src
+		global.registered_weapons -= src
 		verbs -= /obj/item/gun/proc/reset_registration
 		req_access.Cut()
 		to_chat(user, SPAN_NOTICE("\The [src]'s authorization chip fries, giving you full access."))
@@ -71,7 +71,7 @@
 
 	to_chat(usr, SPAN_NOTICE("\The [src] chimes quietly as its registration resets."))
 	registered_owner = null
-	GLOB.registered_weapons -= src
+	global.registered_weapons -= src
 	verbs -= /obj/item/gun/proc/reset_registration
 
 

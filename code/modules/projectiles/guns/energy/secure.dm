@@ -28,7 +28,7 @@
 		. = INITIALIZE_HINT_QDEL
 		CRASH("Invalid spawn location.")
 	registered_owner = borg.name
-	GLOB.registered_cyborg_weapons += src
+	global.registered_cyborg_weapons += src
 	. = ..()
 
 /obj/item/gun/energy/laser/secure

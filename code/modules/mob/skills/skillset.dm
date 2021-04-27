@@ -13,9 +13,12 @@
 
 	var/literacy_charges = 2 //used to limit the number of books a master literate mob can make
 
+var/list/all_skill_verbs
 /datum/skillset/New(mob/mob)
 	owner = mob
-	for(var/datum/skill_verb/SV in GLOB.skill_verbs)
+	if(!global.all_skill_verbs)
+		global.all_skill_verbs = init_subtypes(/datum/skill_verb)
+	for(var/datum/skill_verb/SV in global.all_skill_verbs)
 		if(SV.should_have_verb(src))
 			SV.give_to_skillset(src)
 	..()

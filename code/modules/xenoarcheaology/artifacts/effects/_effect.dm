@@ -19,7 +19,7 @@
 	trigger = new triggertype
 
 	//this will be replaced by the excavation code later, but it's here just in case
-	artifact_id = "[pick(GLOB.greek_letters)]-[rand(100,999)]"
+	artifact_id = "[pick(global.greek_letters)]-[rand(100,999)]"
 
 	//random charge time and distance
 	switch(pick(100;1, 50;2, 25;3))

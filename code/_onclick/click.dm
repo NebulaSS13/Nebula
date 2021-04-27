@@ -348,7 +348,11 @@
 			facing_dir = direction
 		facedir(direction)
 
-GLOBAL_LIST_INIT(click_catchers, create_click_catcher())
+var/list/click_catchers
+/proc/get_click_catchers()
+	if(!global.click_catchers)
+		global.click_catchers = create_click_catcher()
+	return global.click_catchers
 
 /obj/screen/click_catcher
 	icon = 'icons/mob/screen_gen.dmi'

@@ -1,5 +1,5 @@
-GLOBAL_LIST_INIT(registered_weapons, list())
-GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
+var/list/registered_weapons = list()
+var/list/registered_cyborg_weapons = list()
 
 /obj/item/gun/energy
 	name = "energy gun"

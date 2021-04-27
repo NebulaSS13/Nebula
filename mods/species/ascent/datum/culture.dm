@@ -9,7 +9,7 @@
 // - https://en.wikipedia.org/wiki/List_of_landforms
 // - https://en.wikipedia.org/wiki/Outline_of_classical_architecture
 
-GLOBAL_LIST_INIT(gyne_geoforms, list(
+var/list/gyne_geoforms = list(
 	"abime",         "abyss",         "ait",         "anabranch",    "arc",           "arch",          "archipelago",  "arete",
 	"arroyo",        "atoll",         "ayre",        "badlands",     "bar",           "barchan",       "barrier",      "basin",
 	"bay",           "bayou",         "beach",       "bight",        "blowhole",      "blowout",       "bluff",        "bornhardt",
@@ -37,7 +37,7 @@ GLOBAL_LIST_INIT(gyne_geoforms, list(
 	"waterfall",     "watershed"
 ))
 
-GLOBAL_LIST_INIT(gyne_architecture, list(
+var/list/gyne_architecture = list(
 	"barrel",        "annular",       "aynali",      "baroque",      "catalan",       "cavetto",       "catenary",     "cloister",
 	"corbel",        "cross",         "cycloidal",   "cylindrical",  "diamond",       "domical",       "fan",          "lierne",
 	"muqarnas",      "net",           "nubian",      "ogee",         "ogival",        "parabolic",     "hyperbolic",   "volute",

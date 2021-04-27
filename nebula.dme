@@ -99,7 +99,6 @@
 #include "code\_global_vars\lists\mapping.dm"
 #include "code\_global_vars\lists\names.dm"
 #include "code\_global_vars\lists\objects.dm"
-#include "code\_global_vars\lists\times.dm"
 #include "code\_helpers\_global_objects.dm"
 #include "code\_helpers\animations.dm"
 #include "code\_helpers\areas.dm"

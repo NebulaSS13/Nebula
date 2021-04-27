@@ -74,7 +74,7 @@
 		trader_currency = global.using_map.default_currency
 	if(name_language)
 		if(name_language == TRADER_DEFAULT_NAME)
-			name = capitalize(pick(GLOB.first_names_female + GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
+			name = capitalize(pick(global.first_names_female + global.first_names_male)) + " " + capitalize(pick(global.last_names))
 		else
 			var/decl/language/L = GET_DECL(name_language)
 			if(istype(L))

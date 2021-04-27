@@ -816,10 +816,10 @@
 
 /obj/item/radio/phone/medbay
 	frequency = MED_I_FREQ
-
+	
 /obj/item/radio/phone/medbay/Initialize()
 	. = ..()
-	internal_channels = GLOB.default_medbay_channels.Copy()
+	internal_channels = global.default_medbay_channels.Copy()
 
 /obj/item/radio/CouldUseTopic(var/mob/user)
 	..()

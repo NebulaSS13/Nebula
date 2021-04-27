@@ -250,7 +250,7 @@
 #define TOOL_INTERACTION_ALL         (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT | TOOL_INTERACTION_WIRING)
 
 //Inserts 'a' or 'an' before X in ways \a doesn't allow
-#define ADD_ARTICLE(X) "[(lowertext(X[1]) in GLOB.vowels) ? "an" : "a"] [X]"
+#define ADD_ARTICLE(X) "[(lowertext(X[1]) in global.vowels) ? "an" : "a"] [X]"
 
 #define SOULSTONE_CRACKED -1
 #define SOULSTONE_EMPTY 0
