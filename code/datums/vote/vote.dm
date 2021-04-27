@@ -63,7 +63,7 @@
 
 	log_vote(text)
 	to_world("<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=\ref[SSvote];vote_panel=1'>here</a> to place your votes.\nYou have [time_set/10] seconds to vote.</font>")
-	to_world(sound(pick(vote_start_sounds), repeat = 0, wait = 0, volume = 50, channel = GLOB.vote_sound_channel))
+	to_world(sound(pick(vote_start_sounds), repeat = 0, wait = 0, volume = 50, channel = sound_channels.vote_channel))
 
 /datum/vote/proc/get_start_text()
 	return "[capitalize(name)] vote started by [initiator]."

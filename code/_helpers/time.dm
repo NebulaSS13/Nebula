@@ -126,13 +126,13 @@ var/round_start_time = 0
 	roundstart_hour = rand(0, 23)
 	return TRUE
 
-GLOBAL_VAR_INIT(midnight_rollovers, 0)
-GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
+var/midnight_rollovers = 0
+var/rollovercheck_last_timeofday = 0
 /proc/update_midnight_rollover()
-	if (world.timeofday < GLOB.rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
-		GLOB.midnight_rollovers += 1
-	GLOB.rollovercheck_last_timeofday = world.timeofday
-	return GLOB.midnight_rollovers
+	if (world.timeofday < global.rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
+		global.midnight_rollovers += 1
+	global.rollovercheck_last_timeofday = world.timeofday
+	return global.midnight_rollovers
 
 //Increases delay as the server gets more overloaded,
 //as sleeps aren't cheap and sleeping only to wake up and sleep again is wasteful

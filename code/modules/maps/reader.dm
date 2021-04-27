@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////
 
 //global datum that will preload variables on atoms instanciation
-GLOBAL_VAR_INIT(use_preloader, FALSE)
+var/use_preloader = FALSE
 GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 /datum/map_load_metadata
@@ -511,7 +511,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	var/current_map_hash
 
 /dmm_suite/preloader/proc/setup(list/the_attributes, path)
-	GLOB.use_preloader = TRUE
+	global.use_preloader = TRUE
 	attributes = the_attributes
 	target_path = path
 
@@ -534,7 +534,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 				throw ex
 	if(current_map_hash)
 		what.modify_mapped_vars(current_map_hash)
-	GLOB.use_preloader = FALSE
+	global.use_preloader = FALSE
 
 /area/template_noop
 	name = "Area Passthrough"

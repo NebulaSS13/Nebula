@@ -54,7 +54,7 @@
 	if(length(sound_tokens))
 		return
 
-	GLOB.sound_channels.ReleaseChannel(channel)
+	global.sound_channels.ReleaseChannel(channel)
 	taken_channels -= sound_id
 	sound_tokens_by_sound_id -= sound_id
 
@@ -63,7 +63,7 @@
 
 	. = taken_channels[sound_id] // Does this sound_id already have an assigned channel?
 	if(!.) // If not, request a new one.
-		. = GLOB.sound_channels.RequestChannel(sound_id)
+		. = global.sound_channels.RequestChannel(sound_id)
 		if(!.) // Oh no, still no channel. Abort
 			return
 		taken_channels[sound_id] = .

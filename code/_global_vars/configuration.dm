@@ -1,6 +1,5 @@
 // Bomb cap!
-GLOBAL_VAR_INIT(max_explosion_range, 14)
-
+var/max_explosion_range = 14
 
 var/href_logfile        = null
 var/game_version        = "Nebula13"
@@ -23,5 +22,5 @@ var/fileaccess_timer = 0
 var/custom_event_msg = null
 
  // Used for admin shenanigans.
-GLOBAL_VAR_INIT(random_players, 0)
-GLOBAL_VAR_INIT(triai, 0)
+var/random_players = FALSE
+var/triai = FALSE

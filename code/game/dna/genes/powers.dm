@@ -9,7 +9,7 @@
 
 /datum/dna/gene/basic/nobreath/New()
 	..()
-	block=GLOB.NOBREATHBLOCK
+	block=global.NOBREATHBLOCK
 
 /datum/dna/gene/basic/remoteview
 	name="Remote Viewing"
@@ -18,7 +18,7 @@
 
 /datum/dna/gene/basic/remoteview/New()
 	..()
-	block=GLOB.REMOTEVIEWBLOCK
+	block=global.REMOTEVIEWBLOCK
 
 /datum/dna/gene/basic/remoteview/activate(var/mob/M, var/connected, var/flags)
 	..(M,connected,flags)
@@ -31,7 +31,7 @@
 
 /datum/dna/gene/basic/regenerate/New()
 	..()
-	block=GLOB.REGENERATEBLOCK
+	block=global.REGENERATEBLOCK
 
 /datum/dna/gene/basic/regenerate
 	name="Super Speed"
@@ -40,7 +40,7 @@
 
 /datum/dna/gene/basic/nobreath/New()
 	..()
-	block=GLOB.INCREASERUNBLOCK
+	block=global.INCREASERUNBLOCK
 
 /datum/dna/gene/basic/remotetalk
 	name="Telepathy"
@@ -49,7 +49,7 @@
 
 /datum/dna/gene/basic/remotetalk/New()
 	..()
-	block=GLOB.REMOTETALKBLOCK
+	block=global.REMOTETALKBLOCK
 
 /datum/dna/gene/basic/remotetalk/activate(var/mob/M, var/connected, var/flags)
 	..(M,connected,flags)
@@ -62,7 +62,7 @@
 
 /datum/dna/gene/basic/morph/New()
 	..()
-	block=GLOB.MORPHBLOCK
+	block=global.MORPHBLOCK
 
 /datum/dna/gene/basic/morph/activate(var/mob/M)
 	..(M)
@@ -75,7 +75,7 @@
 
 /datum/dna/gene/basic/cold_resist/New()
 	..()
-	block=GLOB.FIREBLOCK
+	block=global.FIREBLOCK
 
 /datum/dna/gene/basic/cold_resist/can_activate(var/mob/M,var/flags)
 	if(flags & MUTCHK_FORCED)
@@ -98,7 +98,7 @@
 
 /datum/dna/gene/basic/noprints/New()
 	..()
-	block=GLOB.NOPRINTSBLOCK
+	block=global.NOPRINTSBLOCK
 
 /datum/dna/gene/basic/noshock
 	name="Shock Immunity"
@@ -107,7 +107,7 @@
 
 /datum/dna/gene/basic/noshock/New()
 	..()
-	block=GLOB.SHOCKIMMUNITYBLOCK
+	block=global.SHOCKIMMUNITYBLOCK
 
 /datum/dna/gene/basic/midget
 	name="Midget"
@@ -116,7 +116,7 @@
 
 /datum/dna/gene/basic/midget/New()
 	..()
-	block=GLOB.SMALLSIZEBLOCK
+	block=global.SMALLSIZEBLOCK
 
 /datum/dna/gene/basic/midget/can_activate(var/mob/M,var/flags)
 	// Can't be big and small.
@@ -139,7 +139,7 @@
 
 /datum/dna/gene/basic/hulk/New()
 	..()
-	block=GLOB.HULKBLOCK
+	block=global.HULKBLOCK
 
 /datum/dna/gene/basic/hulk/can_activate(var/mob/M,var/flags)
 	// Can't be big and small.
@@ -169,4 +169,4 @@
 
 /datum/dna/gene/basic/xray/New()
 	..()
-	block=GLOB.XRAYBLOCK
+	block=global.XRAYBLOCK

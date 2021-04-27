@@ -14,7 +14,7 @@
 
 /obj/item/clothing/head/headphones/Initialize()
 	. = ..()
-	sound_channel = GLOB.sound_channels.RequestChannel(type)
+	sound_channel = global.sound_channels.RequestChannel(type)
 
 /obj/item/clothing/head/headphones/on_update_icon()
 	icon_state = get_world_inventory_state()

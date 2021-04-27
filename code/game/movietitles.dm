@@ -24,12 +24,12 @@ var/list/end_titles
 		mob.overlay_fullscreen("fadeout",/obj/screen/fullscreen/fadeout)
 
 		if(mob.get_preference_value(/datum/client_preference/play_lobby_music) == global.PREF_YES)
-			sound_to(mob, sound(null, channel = GLOB.lobby_sound_channel))
-			if(GLOB.end_credits_song == null)
+			sound_to(mob, sound(null, channel = sound_channels.lobby_channel))
+			if(global.end_credits_song == null)
 				if(global.using_map.credit_sound)
-					sound_to(mob, sound(pick(global.using_map.credit_sound), wait = 0, volume = 40, channel = GLOB.lobby_sound_channel))
+					sound_to(mob, sound(pick(global.using_map.credit_sound), wait = 0, volume = 40, channel = sound_channels.lobby_channel))
 			else if(get_preference_value(/datum/client_preference/play_admin_midis) == global.PREF_YES)
-				sound_to(mob, sound(GLOB.end_credits_song, wait = 0, volume = 40, channel = GLOB.lobby_sound_channel))
+				sound_to(mob, sound(global.end_credits_song, wait = 0, volume = 40, channel = sound_channels.lobby_channel))
 	sleep(50)
 	var/list/_credits = credits
 	verbs += /client/proc/ClearCredits
@@ -52,7 +52,7 @@ var/list/end_titles
 	QDEL_NULL_LIST(credits)
 	mob.clear_fullscreen("fishbed")
 	mob.clear_fullscreen("fadeout")
-	sound_to(mob, sound(null, channel = GLOB.lobby_sound_channel))
+	sound_to(mob, sound(null, channel = sound_channels.lobby_channel))
 
 /obj/screen/credit
 	icon_state = "blank"
