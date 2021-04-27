@@ -2,18 +2,23 @@ var/list/med_hud_users = list()          // List of all entities using a medical
 var/list/sec_hud_users = list()          // List of all entities using a security HUD.
 var/list/jani_hud_users = list()
 var/list/hud_icon_reference = list()
-
 var/list/listening_objects = list() // List of objects that need to be able to hear, used to avoid recursive searching through contents.
-
 var/list/global_mutations = list() // List of hidden mutation things.
-
 var/list/reg_dna = list()
-
 var/list/global_map = list()
 
 // Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it. Also headset, for things that should be affected by comms outages.
-var/obj/item/radio/announcer/announcer = new
-var/obj/item/radio/announcer/subspace/headset = new
+var/obj/item/radio/announcer/announcer
+/proc/get_global_announcer()
+	if(!global.announcer)
+		global.announcer = new
+	return global.announcer
+
+var/obj/item/radio/announcer/subspace/headset
+/proc/get_global_headset()
+	if(!global.headset)
+		global.headset = new
+	return global.headset
 
 var/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
 var/datum/sun/sun = new
