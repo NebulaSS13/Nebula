@@ -40,7 +40,8 @@
 	if(active && HasFuel() && !IsBroken())
 		var/volume = 10 + 15*power_output
 		if(!sound_token)
-			sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, working_sound, volume = volume)
+			
+			sound_token = play_looping_sound(src, sound_id, working_sound, volume = volume)
 		sound_token.SetVolume(volume)
 	else if(sound_token)
 		QDEL_NULL(sound_token)
