@@ -3,7 +3,11 @@
 	Uses the same visual objects for all players.
 */
 
-var/datum/global_hud/hud = new()
+var/datum/global_hud/hud
+/proc/get_global_hud()
+	if(!global.hud)
+		global.hud = new
+	return global.hud
 
 /datum/global_hud
 	var/obj/screen/nvg

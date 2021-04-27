@@ -326,7 +326,8 @@
 	..()
 
 /mob/living/carbon/human/proc/has_meson_effect()
-	return (global.hud.meson in equipment_overlays)
+	var/datum/global_hud/global_hud = get_global_hud()
+	return (global_hud.meson in equipment_overlays)
 
 /mob/living/carbon/human/proc/is_in_pocket(var/obj/item/I)
 	return I in list(l_store, r_store)
