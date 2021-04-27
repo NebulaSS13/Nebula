@@ -3,7 +3,7 @@
 #define CREDIT_ANIMATE_HEIGHT (14 * world.icon_size)
 #define CREDIT_EASE_DURATION 22
 
-GLOBAL_LIST(end_titles)
+var/list/end_titles
 
 /client
 	var/list/credits
@@ -14,8 +14,8 @@ GLOBAL_LIST(end_titles)
 	if(get_preference_value(/datum/client_preference/show_credits) != global.PREF_YES)
 		return
 
-	if(!GLOB.end_titles)
-		GLOB.end_titles = generate_titles()
+	if(!global.end_titles)
+		global.end_titles = generate_titles()
 
 	LAZYINITLIST(credits)
 
@@ -33,7 +33,7 @@ GLOBAL_LIST(end_titles)
 	sleep(50)
 	var/list/_credits = credits
 	verbs += /client/proc/ClearCredits
-	for(var/I in GLOB.end_titles)
+	for(var/I in global.end_titles)
 		if(!credits)
 			return
 		var/obj/screen/credit/T = new(null, I, src)
