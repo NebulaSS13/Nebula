@@ -11,7 +11,7 @@
 		var/mob/M = m
 		if(!M.client)
 			continue
-		if(M.client.holder && M.client.get_preference_value(/datum/client_preference/staff/show_chat_prayers) == GLOB.PREF_SHOW)
+		if(M.client.holder && M.client.get_preference_value(/datum/client_preference/staff/show_chat_prayers) == global.PREF_SHOW)
 			receive_communication(communicator, M, "\[<A HREF='?_src_=holder;adminspawnprayreward=\ref[communicator]'>SC</a>\] \[<A HREF='?_src_=holder;narrateto=\ref[communicator]'>DN</a>\]<span class='notice'>[html_icon(cross)] <b><font color=purple>PRAY: </font>[key_name(communicator, 1)]: </b>[message]</span>")
 		else if(communicator == M) //Give it to ourselves
 			receive_communication(communicator, M, "<span class='notice'>[html_icon(cross)] <b>You send the prayer, \"[message]\" out into the heavens.</b></span>")

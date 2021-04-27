@@ -558,7 +558,7 @@
 	set name = "Play Different Lobby Track"
 	set category = "OOC"
 
-	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_NO)
+	if(get_preference_value(/datum/client_preference/play_lobby_music) == global.PREF_NO)
 		return
 	var/decl/music_track/new_track = global.using_map.get_lobby_track(global.using_map.lobby_track.type)
 	if(new_track)

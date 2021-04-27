@@ -36,7 +36,7 @@
 		return FALSE
 	var/list/modifiers = params2list(params)
 	var/highlight_pref = get_preference_value(/datum/client_preference/show_mouseover_highlights)
-	if(highlight_pref != GLOB.PREF_SHOW && (highlight_pref != GLOB.PREF_SHOW_HOLD_SHIFT || !modifiers["shift"]))
+	if(highlight_pref != global.PREF_SHOW && (highlight_pref != global.PREF_SHOW_HOLD_SHIFT || !modifiers["shift"]))
 		return FALSE
 	var/atom/movable/AM = object
 	if(!AM.show_client_mouseover_highlight || get_dist(mob, object) > 1)

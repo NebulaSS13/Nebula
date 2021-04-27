@@ -126,7 +126,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 		if((R_ADMIN|R_MOD) & X.holder.rights)
 			if(X.is_afk())
 				admin_number_afk++
-			if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
+			if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == global.PREF_HEAR)
 				sound_to(X, 'sound/effects/adminhelp.ogg')
 			to_chat(X, msg)
 			window_flash(X)

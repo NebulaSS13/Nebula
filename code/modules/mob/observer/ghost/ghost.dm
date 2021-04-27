@@ -462,12 +462,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Toggle Anonymous Chat"
 	set desc = "Toggles showing your key in dead chat."
 
-	if(client.get_preference_value(/datum/client_preference/anon_say) == GLOB.PREF_NO)
+	if(client.get_preference_value(/datum/client_preference/anon_say) == global.PREF_NO)
 		to_chat(src, "<span class='info'>Your key won't be shown when you speak in dead chat.</span>")
-		client.set_preference(/datum/client_preference/anon_say, GLOB.PREF_YES)
+		client.set_preference(/datum/client_preference/anon_say, global.PREF_YES)
 	else
 		to_chat(src, "<span class='info'>Your key will be publicly visible again.</span>")
-		client.set_preference(/datum/client_preference/anon_say, GLOB.PREF_NO)
+		client.set_preference(/datum/client_preference/anon_say, global.PREF_NO)
 
 /mob/observer/ghost/canface()
 	return 1
