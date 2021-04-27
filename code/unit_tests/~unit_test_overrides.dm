@@ -50,12 +50,12 @@ var/list/unit_test_obj_random_weights_by_type = list()
 // If you adjust any of the values below, please also update /obj/structure/closet/proc/content_size(atom/movable/AM)
 /proc/unit_test_weight_of_path(var/path)
 	if(ispath(path, /obj/random))
-		var/weight = GLOB.unit_test_obj_random_weights_by_type[path]
+		var/weight = global.unit_test_obj_random_weights_by_type[path]
 		if(!weight)
 			var/obj/random/R = new path()
 			var/type = unit_test_select_heaviest(R.spawn_choices())
 			weight = unit_test_weight_of_path(type)
-			GLOB.unit_test_obj_random_weights_by_type[path] = weight
+			global.unit_test_obj_random_weights_by_type[path] = weight
 		return weight
 	// Would be nice to re-use how closets calculate size/weight but the difference between instances and paths prevents it.
 	if(ispath(path, /obj))

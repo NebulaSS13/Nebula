@@ -17,7 +17,7 @@ var/datum/topic_state/physical/physical_topic_state = new
 /mob/living/silicon/ai/check_physical_distance(var/src_object)
 	return max(STATUS_UPDATE, shared_living_nano_distance(src_object))
 
-var/datum/topic_state/physical/no_access/physical_no_access_state = new
+var/datum/topic_state/physical/no_access/physical_no_access_topic_state = new
 
 /datum/topic_state/physical/no_access
 	check_access = FALSE

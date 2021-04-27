@@ -12,8 +12,8 @@ var/list/reg_dna = list()
 var/list/global_map = list()
 
 // Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it. Also headset, for things that should be affected by comms outages.
-var/obj/item/radio/announcer/global_announcer = new
-var/obj/item/radio/announcer/subspace/global_headset = new
+var/obj/item/radio/announcer/announcer = new
+var/obj/item/radio/announcer/subspace/headset = new
 
 var/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
 var/datum/sun/sun = new

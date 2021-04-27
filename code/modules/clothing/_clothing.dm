@@ -187,7 +187,7 @@
 	var/mob/user = usr
 	if(istype(user))
 		var/turf/T = get_turf(src)
-		var/can_see = T.CanUseTopic(user, GLOB.view_state) != STATUS_CLOSE
+		var/can_see = T.CanUseTopic(user, global.view_topic_state) != STATUS_CLOSE
 		if(href_list["list_ungabunga"])
 			if(length(accessories) && can_see)
 				var/list/ties = list()

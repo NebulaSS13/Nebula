@@ -2,7 +2,7 @@
 	return dna?.lineage || create_gyne_name()
 
 /proc/create_gyne_name()
-	var/gynename = "[capitalize(pick(GLOB.gyne_architecture))] [capitalize(pick(GLOB.gyne_geoforms))]"
+	var/gynename = "[capitalize(pick(global.gyne_architecture))] [capitalize(pick(global.gyne_geoforms))]"
 	return gynename
 
 //Thanks to:
@@ -35,7 +35,7 @@ var/list/gyne_geoforms = list(
 	"thalweg",       "tidepool",      "tombolo",     "tor",          "towhead",       "tube",          "tunnel",       "turlough",
 	"tuya",          "uvala",         "vale",        "valley",       "vent",          "ventifact",     "volcano",      "wadi",
 	"waterfall",     "watershed"
-))
+)
 
 var/list/gyne_architecture = list(
 	"barrel",        "annular",       "aynali",      "baroque",      "catalan",       "cavetto",       "catenary",     "cloister",
@@ -60,7 +60,7 @@ var/list/gyne_architecture = list(
 	"ethical",       "micro",         "macro",       "genetic",      "intrinsic",     "extrinsic",     "academic",     "literary",
 	"artisan",       "absolute",      "absolutist",  "autonomous",   "collectivist",  "bicameral",     "colonialist",  "federal",
 	"imperial",      "independant",   "managed",     "multilateral", "neutral",       "nonaligned",    "parastatal"
-))
+)
 
 /decl/cultural_info/culture/ascent
 	name =             "The Ascent"

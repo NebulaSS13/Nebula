@@ -15,7 +15,7 @@ This is a quick and dirty set of agreed-upon standards for contributions to the 
 - Use constants instead of magic numbers or bare strings, when the values are being used in logic.
 - Do not comment out code, delete it, version control makes keeping it in the codebase pointless.
 - Macros/consts UPPERCASE, types and var names lowercase.
-- Use `global.foo` when referencing global variables (rather than just `foo`, or the now deprecated `GLOB.foo`), for the sake of readability.
+- Use `global.foo` when referencing global variables (rather than just `foo`), for the sake of readability.
 
 ---
 

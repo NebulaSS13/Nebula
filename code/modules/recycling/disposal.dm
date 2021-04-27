@@ -206,7 +206,7 @@ var/list/diversion_junctions = list()
 	return
 
 /obj/machinery/disposal/DefaultTopicState()
-	return GLOB.outside_state
+	return global.outside_topic_state
 
 // human interact with machine
 /obj/machinery/disposal/physical_attack_hand(mob/user)

@@ -502,4 +502,4 @@
 	return TRUE
 
 /obj/structure/closet/CanUseTopicPhysical(mob/user)
-	return CanUseTopic(user, GLOB.physical_no_access_state)
+	return CanUseTopic(user, global.physical_no_access_topic_state)

@@ -15,7 +15,6 @@
 #include "code\hub.dm"
 #include "code\stylesheet.dm"
 #include "code\world.dm"
-#include "code\__datastructures\globals.dm"
 #include "code\__datastructures\priority_queue.dm"
 #include "code\__datastructures\stack.dm"
 #include "code\__defines\_compile_helpers.dm"

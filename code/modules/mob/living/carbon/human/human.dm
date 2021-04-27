@@ -559,7 +559,7 @@
 			if(!(key in flavor_texts))
 				return
 			msg = sanitize(input(src,"Update the flavor text for your [key].","Flavor Text",html_decode(flavor_texts[key])) as message, extra = 0)
-	if(!CanInteract(src, GLOB.self_state))
+	if(!CanInteract(src, global.self_topic_state))
 		return
 	flavor_texts[key] = msg
 	set_flavor()

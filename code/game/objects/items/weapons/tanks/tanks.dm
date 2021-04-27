@@ -274,7 +274,7 @@ var/list/global/tank_gauge_cache = list()
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/item/tank/Topic(user, href_list, state = GLOB.inventory_state)
+/obj/item/tank/Topic(user, href_list, state = global.inventory_topic_state)
 	..()
 
 /obj/item/tank/OnTopic(user, href_list)

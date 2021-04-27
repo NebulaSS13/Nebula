@@ -1,7 +1,7 @@
 /*
 	This state checks that the src_object is in view of the user.
 */
-var/datum/topic_state/view/view_state = new
+var/datum/topic_state/view/view_topic_state = new
 
 /datum/topic_state/view/can_use_topic(src_object, mob/user)
 	return user.view_can_use_topic(src_object)

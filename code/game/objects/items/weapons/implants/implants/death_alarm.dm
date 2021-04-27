@@ -45,7 +45,7 @@
 	STOP_PROCESSING(SSobj, src)
 
 	for(var/channel in list("Security", "Medical", "Command"))
-		GLOB.global_headset.autosay(death_message, "[mobname]'s Death Alarm", channel)
+		global.headset.autosay(death_message, "[mobname]'s Death Alarm", channel)
 
 /obj/item/implant/death_alarm/disable()
 	. = ..()
