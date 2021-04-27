@@ -333,6 +333,8 @@
 #include "code\datums\extensions\scent\_scent.dm"
 #include "code\datums\extensions\scent\scent_candle.dm"
 #include "code\datums\extensions\scent\scent_misc.dm"
+#include "code\datums\extensions\tools\tool.dm"
+#include "code\datums\extensions\tools\tool_archetypes.dm"
 #include "code\datums\graph\graph.dm"
 #include "code\datums\graph\node.dm"
 #include "code\datums\helper_datums\dist_check.dm"
