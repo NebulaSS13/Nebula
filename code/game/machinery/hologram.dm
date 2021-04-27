@@ -217,7 +217,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 				ai_text = pick(SA.speak)
 			var/name_used = M.GetVoice()
 			//This communication is imperfect because the holopad "filters" voices and is only designed to connect to the master only.
-			var/short_links = master.get_preference_value(/datum/client_preference/ghost_follow_link_length) == GLOB.PREF_SHORT
+			var/short_links = master.get_preference_value(/datum/client_preference/ghost_follow_link_length) == global.PREF_SHORT
 			var/follow = short_links ? "\[F]" : "\[Follow]"
 			var/prefix = "<a href='byond://?src=\ref[master];trackname=[html_encode(name_used)];track=\ref[M]'>[follow]</a>"
 			master.show_message(get_hear_message(name_used, ai_text, verb, speaking, prefix), 2)

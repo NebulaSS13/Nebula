@@ -16,7 +16,7 @@ var/list/sounds_cache = list()
 	log_admin("[key_name(src)] played sound [S]")
 	message_admins("[key_name_admin(src)] played sound [S]", 1)
 	for(var/mob/M in GLOB.player_list)
-		if(M.get_preference_value(/datum/client_preference/play_admin_midis) == GLOB.PREF_YES)
+		if(M.get_preference_value(/datum/client_preference/play_admin_midis) == global.PREF_YES)
 			sound_to(M, uploaded_sound)
 
 	SSstatistics.add_field_details("admin_verb","PGS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

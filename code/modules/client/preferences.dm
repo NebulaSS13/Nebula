@@ -417,7 +417,7 @@ var/list/time_prefs_fixed = list()
 	set waitfor = 0
 	if(!client)
 		return
-	if(client.get_preference_value(/datum/client_preference/chat_position) == GLOB.PREF_YES)
+	if(client.get_preference_value(/datum/client_preference/chat_position) == global.PREF_YES)
 		client.update_chat_position(TRUE)
-	if(client.get_preference_value(/datum/client_preference/fullscreen_mode) != GLOB.PREF_OFF)
+	if(client.get_preference_value(/datum/client_preference/fullscreen_mode) != global.PREF_OFF)
 		client.toggle_fullscreen(client.get_preference_value(/datum/client_preference/fullscreen_mode))

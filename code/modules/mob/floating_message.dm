@@ -36,7 +36,7 @@ var/list/floating_chat_colors = list()
 	var/image/gibberish = language ? generate_floating_text(src, language.scramble(message), style, fontsize, duration, show_to) : understood
 
 	for(var/client/C in show_to)
-		if(!C.mob.is_deaf() && C.get_preference_value(/datum/client_preference/floating_messages) == GLOB.PREF_SHOW)
+		if(!C.mob.is_deaf() && C.get_preference_value(/datum/client_preference/floating_messages) == global.PREF_SHOW)
 			if(C.mob.say_understands(null, language))
 				C.images += understood
 			else

@@ -163,7 +163,7 @@
 	ASSERT(istype(M))
 
 	var/remote = ""
-	if(M.get_preference_value(/datum/client_preference/ghost_sight) == GLOB.PREF_ALL_EMOTES && !(src in view(M)))
+	if(M.get_preference_value(/datum/client_preference/ghost_sight) == global.PREF_ALL_EMOTES && !(src in view(M)))
 		remote = "\[R\]"
 
 	var/track = "([ghost_follow_link(src, M)])"
@@ -173,7 +173,7 @@
 
 /mob/proc/ghost_skip_message(var/mob/observer/ghost/M)
 	ASSERT(istype(M))
-	if(M.get_preference_value(/datum/client_preference/ghost_sight) == GLOB.PREF_ALL_EMOTES && !(src in view(M)))
+	if(M.get_preference_value(/datum/client_preference/ghost_sight) == global.PREF_ALL_EMOTES && !(src in view(M)))
 		if(!client)
 			return TRUE
 	return FALSE
@@ -323,7 +323,7 @@
 			for(var/mob/M in viewers(4, src))
 				if(M == src)
 					continue
-				if(M.client && M.client.get_preference_value(/datum/client_preference/examine_messages) == GLOB.PREF_SHOW)
+				if(M.client && M.client.get_preference_value(/datum/client_preference/examine_messages) == global.PREF_SHOW)
 					if(M.is_blind() || is_invisible_to(M))
 						continue
 					to_chat(M, "<span class='subtle'><b>\The [src]</b> looks [look_target].</span>")

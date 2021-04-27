@@ -353,7 +353,7 @@
 	return html_encode(copytext(html_decode(text), first, last))
 
 /proc/create_text_tag(var/tagname, var/tagdesc = tagname, var/client/C = null)
-	if(!(C && C.get_preference_value(/datum/client_preference/chat_tags) == GLOB.PREF_SHOW))
+	if(!(C && C.get_preference_value(/datum/client_preference/chat_tags) == global.PREF_SHOW))
 		return tagdesc
 	return "<IMG src='\ref['./icons/chattags.dmi']' class='text_tag' iconstate='[tagname]'" + (tagdesc ? " alt='[tagdesc]'" : "") + ">"
 
