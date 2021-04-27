@@ -25,7 +25,7 @@
 	var/stasis_power = 5 KILOWATTS
 	var/list/loaded_canisters
 	var/max_canister_capacity = 5
-	var/global/list/banned_chem_types = list(
+	var/static/list/banned_chem_types = list(
 		/decl/material/liquid/bromide,
 		/decl/material/liquid/mutagenics,
 		/decl/material/liquid/acid

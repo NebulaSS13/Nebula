@@ -66,7 +66,7 @@
 
 	global.status_marker_holders += src
 	for(var/client/C)
-		if(C.mob && C.get_preference_value(/datum/client_preference/show_status_markers) == global.PREF_SHOW)
+		if(C.mob && C.get_preference_value(/datum/client_preference/show_status_markers) == PREF_SHOW)
 			if(C.mob.status_markers == src)
 				C.images |= mob_image_personal
 			else

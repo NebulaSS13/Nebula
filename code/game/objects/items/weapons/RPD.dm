@@ -1,5 +1,5 @@
-var/list/rpd_pipe_selection = list()
-var/list/rpd_pipe_selection_skilled = list()
+var/global/list/rpd_pipe_selection = list()
+var/global/list/rpd_pipe_selection_skilled = list()
 
 /proc/init_rpd_lists()
 	global.rpd_pipe_selection = list(

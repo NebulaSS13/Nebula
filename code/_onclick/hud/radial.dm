@@ -1,7 +1,7 @@
 #define NEXT_PAGE_ID "__next__"
 #define DEFAULT_CHECK_DELAY 20
 
-var/list/radial_menus = list()
+var/global/list/radial_menus = list()
 
 /obj/screen/radial/Destroy()
 	parent = null

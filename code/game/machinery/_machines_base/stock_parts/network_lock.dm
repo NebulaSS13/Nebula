@@ -14,7 +14,7 @@
 	var/signal_strength = NETWORK_CONNECTION_WIRELESS	// How good the wireless capabilities are of this card.
 	var/interact_sounds = list("keyboard", "keystroke")
 	var/interact_sound_volume = 40
-	var/global/legacy_compatibility_mode = TRUE     // Makes legacy access on ids play well with mapped devices with network locks. Override if your server is fully using network-enabled ids or has no mapped access.
+	var/static/legacy_compatibility_mode = TRUE     // Makes legacy access on ids play well with mapped devices with network locks. Override if your server is fully using network-enabled ids or has no mapped access.
 
 /obj/item/stock_parts/network_receiver/network_lock/modify_mapped_vars(map_hash)
 	..()

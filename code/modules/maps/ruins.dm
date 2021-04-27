@@ -1,4 +1,4 @@
-var/list/banned_ruin_ids = list()
+var/global/list/banned_ruin_ids = list()
 
 /proc/seedRuins(list/z_levels = null, budget = 0, whitelist = /area/space, list/potentialRuins, var/maxx = world.maxx, var/maxy = world.maxy)
 	if(!z_levels || !z_levels.len)

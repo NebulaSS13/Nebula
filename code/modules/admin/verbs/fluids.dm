@@ -57,7 +57,7 @@
 	name = "open water"
 	flooded = TRUE
 
-var/list/submerged_levels = list()
+var/global/list/submerged_levels = list()
 /datum/admins/proc/submerge_map()
 	set category = "Admin"
 	set desc = "Submerge the map in an ocean."

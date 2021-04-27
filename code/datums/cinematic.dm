@@ -1,4 +1,4 @@
-var/datum/cinematic/cinematic = new
+var/global/datum/cinematic/cinematic = new
 //Was moved from the gameticker to here. Could use further improvement.
 
 /datum/cinematic

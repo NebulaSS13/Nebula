@@ -1,4 +1,4 @@
-var/const/HIGHEST_CONNECTABLE_ZLEVEL_INDEX = 0
+var/global/const/HIGHEST_CONNECTABLE_ZLEVEL_INDEX = 0
 
 proc/HasAbove(var/z)
 	return 0

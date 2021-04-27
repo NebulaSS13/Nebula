@@ -1,6 +1,6 @@
 // Init optimization.
 
-var/list/machine_path_to_circuit_type
+var/global/list/machine_path_to_circuit_type
 /proc/get_circuit_by_build_path(var/circuit)
 	if(!global.machine_path_to_circuit_type)
 		global.machine_path_to_circuit_type = cache_circuits_by_build_path()

@@ -1,7 +1,7 @@
 
 
 // subtypes of stuff in here will be avoided when randomizing interactions.
-var/list/random_chem_interaction_blacklist = list(
+var/global/list/random_chem_interaction_blacklist = list(
 	/decl/material/liquid/adminordrazine,
 	/decl/material/solid/tobacco,
 	/decl/material/liquid/drink,

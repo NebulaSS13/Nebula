@@ -1,5 +1,5 @@
-var/list/chat_blockers_in_use
-var/list/chat_modifiers_in_use
+var/global/list/chat_blockers_in_use
+var/global/list/chat_modifiers_in_use
 
 /hook/startup/proc/build_filter_lists()
 	global.chat_blockers_in_use = list()

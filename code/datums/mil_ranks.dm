@@ -10,7 +10,7 @@
  *  and each branch datum definition, respectively.
  */
 
-var/datum/mil_branches/mil_branches = new()
+var/global/datum/mil_branches/mil_branches = new()
 
 /**
  *  Global object for handling branches

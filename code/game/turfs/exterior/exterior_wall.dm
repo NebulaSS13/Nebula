@@ -1,8 +1,8 @@
 #define MAT_DROP_CHANCE 30
 
-var/list/default_strata_type_by_z = list()
-var/list/default_material_by_strata_and_z = list()
-var/list/natural_walls = list()
+var/global/list/default_strata_type_by_z = list()
+var/global/list/default_material_by_strata_and_z = list()
+var/global/list/natural_walls = list()
 
 /turf/exterior/wall
 	name = "wall"

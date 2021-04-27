@@ -1,6 +1,6 @@
-var/list/ckey_to_actions = list()
-var/list/ckey_to_act_time = list()
-var/list/ckey_punished_for_spam = list() // this round; to avoid redundant record-keeping.
+var/global/list/ckey_to_actions = list()
+var/global/list/ckey_to_act_time = list()
+var/global/list/ckey_punished_for_spam = list() // this round; to avoid redundant record-keeping.
 
 // Should be checked on all instant client verbs.
 /proc/user_acted(client/C)

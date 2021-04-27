@@ -1,4 +1,4 @@
-var/datum/musical_config/musical_config = new
+var/global/datum/musical_config/musical_config = new
 
 /datum/musical_config
 	var/highest_octave = 9

@@ -1,5 +1,5 @@
-var/list/all_conveyors = list()
-var/list/all_conveyor_switches = list()
+var/global/list/all_conveyors = list()
+var/global/list/all_conveyor_switches = list()
 
 //conveyor2 is pretty much like the original, except it supports corners, but not diverters.
 //note that corner pieces transfer stuff clockwise when running forward, and anti-clockwise backwards.

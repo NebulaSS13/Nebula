@@ -1,4 +1,4 @@
-var/list/skills = list()
+var/global/list/skills = list()
 
 /decl/hierarchy/skill
 	var/ID = "none"                        // ID of this skill. Needs to be unique.

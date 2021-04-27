@@ -1,4 +1,4 @@
-var/list/station_bookcases = list()
+var/global/list/station_bookcases = list()
 /obj/structure/bookcase
 	name = "bookcase"
 	icon = 'icons/obj/library.dmi'

@@ -33,14 +33,14 @@
 		receive_communication(C, t, received_message)
 
 	for(var/client/adm in global.admins)	//Now send to all admins that weren't in range.
-		if(!(adm in listening_clients) && adm.get_preference_value(/datum/client_preference/staff/show_rlooc) == global.PREF_SHOW)
+		if(!(adm in listening_clients) && adm.get_preference_value(/datum/client_preference/staff/show_rlooc) == PREF_SHOW)
 			var/received_message = adm.receive_looc(C, key, message, "R")
 			receive_communication(C, adm, received_message)
 
 /client/proc/receive_looc(var/client/C, var/commkey, var/message, var/prefix)
 	var/mob/M = C.mob
 	var/display_name
-	if(isghost(M) && C.get_preference_value(/datum/client_preference/anon_say) != global.PREF_YES)
+	if(isghost(M) && C.get_preference_value(/datum/client_preference/anon_say) != PREF_YES)
 		display_name = commkey
 	else
 		display_name = M.name

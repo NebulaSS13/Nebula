@@ -1,6 +1,6 @@
-var/total_runtimes = 0
-var/total_runtimes_skipped = 0
-var/regex/actual_error_file_line
+var/global/total_runtimes = 0
+var/global/total_runtimes_skipped = 0
+var/global/regex/actual_error_file_line
 
 #ifdef DEBUG
 /world/Error(exception/E)

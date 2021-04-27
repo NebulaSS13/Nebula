@@ -1,5 +1,5 @@
-var/end_credits_song
-var/end_credits_title
+var/global/end_credits_song
+var/global/end_credits_title
 
 /datum/admin_secret_item/fun_secret/change_credits_song
 	name = "Change End Credits Song"

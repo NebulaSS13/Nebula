@@ -530,7 +530,7 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/item/stack/cable_coil/on_update_icon()
 	cut_overlays()
 	if (!color)
-		var/list/possible_cable_colours = GetCableColors()
+		var/list/possible_cable_colours = get_global_cable_colors()
 		color = possible_cable_colours[pick(possible_cable_colours)]
 	if(amount == 1)
 		icon_state = "coil1"
@@ -549,7 +549,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	if(!selected_color)
 		return
 
-	var/list/possible_cable_colours = GetCableColors()
+	var/list/possible_cable_colours = get_global_cable_colors()
 	var/final_color = possible_cable_colours[selected_color]
 	if(!final_color)
 		selected_color = "Red"
@@ -596,7 +596,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	set name = "Change Colour"
 	set category = "Object"
 
-	var/selected_type = input("Pick new colour.", "Cable Colour", null, null) as null|anything in GetCableColors()
+	var/selected_type = input("Pick new colour.", "Cable Colour", null, null) as null|anything in get_global_cable_colors()
 	set_cable_color(selected_type, usr)
 
 // Items usable on a cable coil :
@@ -815,7 +815,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_SILVER
 
 /obj/item/stack/cable_coil/random/Initialize()
-	var/list/possible_cable_colours = GetCableColors()
+	var/list/possible_cable_colours = get_global_cable_colors()
 	color = possible_cable_colours[pick(possible_cable_colours)]
 	. = ..()
 

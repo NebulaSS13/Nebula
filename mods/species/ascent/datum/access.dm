@@ -1,4 +1,4 @@
-/var/const/access_ascent = "ACCESS_ASCENT"
+var/global/const/access_ascent = "ACCESS_ASCENT"
 /datum/access/ascent
 	id = access_ascent
 	desc = "Ascent Materiel"

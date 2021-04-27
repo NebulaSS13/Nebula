@@ -32,7 +32,7 @@
 	if (nref)
 		ref = nref
 	// If a client exists, but they have disabled fancy windowing, disable it!
-	if(user && user.client && user.client.get_preference_value(/datum/client_preference/browser_style) == global.PREF_PLAIN)
+	if(user && user.client && user.client.get_preference_value(/datum/client_preference/browser_style) == PREF_PLAIN)
 		return
 	add_stylesheet("common", 'html/browser/common.css') // this CSS sheet is common to all UIs
 

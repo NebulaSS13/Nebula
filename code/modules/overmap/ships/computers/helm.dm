@@ -1,4 +1,4 @@
-var/list/all_waypoints = list()
+var/global/list/all_waypoints = list()
 
 /datum/computer_file/data/waypoint
 	var/list/fields = list()
@@ -10,7 +10,7 @@ var/list/all_waypoints = list()
 	. = ..()
 	global.all_waypoints -= src
 
-var/list/overmap_helm_computers
+var/global/list/overmap_helm_computers
 /obj/machinery/computer/ship/helm
 	name = "helm control console"
 	icon_keyboard = "teleport_key"

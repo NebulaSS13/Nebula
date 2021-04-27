@@ -1,4 +1,4 @@
-var/datum/topic_state/default/default_topic_state = new
+var/global/datum/topic_state/default/default_topic_state = new
 
 /datum/topic_state/default/can_use_topic(var/src_object, var/mob/user)
 	return user.default_can_use_topic(src_object)

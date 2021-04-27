@@ -6,7 +6,7 @@
 	var/obj/item/stack/cable_coil/cable_coil = holder
 	. += "<b>Available Colors</b><br>"
 	. += "<table>"
-	var/list/possible_cable_colours = GetCableColors()
+	var/list/possible_cable_colours = get_global_cable_colors()
 	for(var/cable_color in possible_cable_colours)
 		. += "<tr>"
 		. += "<td>[cable_color]</td>"
@@ -19,7 +19,7 @@
 
 /datum/extension/interactive/multitool/items/cable/on_topic(href, href_list, user)
 	var/obj/item/stack/cable_coil/cable_coil = holder
-	if(href_list["select_color"] && (href_list["select_color"] in GetCableColors()))
+	if(href_list["select_color"] && (href_list["select_color"] in get_global_cable_colors()))
 		cable_coil.set_cable_color(href_list["select_color"], user)
 		return MT_REFRESH
 

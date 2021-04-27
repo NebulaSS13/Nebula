@@ -1,5 +1,5 @@
 // If you add a more comprehensive system, just untick this file.
-var/list/z_levels = list() // Each Z-level is associated with the relevant map data landmark
+var/global/list/z_levels = list() // Each Z-level is associated with the relevant map data landmark
 
 /proc/get_map_data(z)
 	return z > 0 && z_levels.len >= z ? z_levels[z] : null
@@ -46,7 +46,7 @@ var/list/z_levels = list() // Each Z-level is associated with the relevant map d
 	for(var/level = z, HasAbove(level), level++)
 		. |= level+1
 
-var/list/connected_z_cache = list()
+var/global/list/connected_z_cache = list()
 /proc/AreConnectedZLevels(var/zA, var/zB)
 	if (zA <= 0 || zB <= 0 || zA > world.maxz || zB > world.maxz)
 		return FALSE

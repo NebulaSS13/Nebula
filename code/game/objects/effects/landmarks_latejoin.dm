@@ -1,7 +1,7 @@
-var/list/latejoin_locations =         list()
-var/list/latejoin_cryo_locations =    list()
-var/list/latejoin_cyborg_locations =  list()
-var/list/latejoin_gateway_locations = list()
+var/global/list/latejoin_locations =         list()
+var/global/list/latejoin_cryo_locations =    list()
+var/global/list/latejoin_cyborg_locations =  list()
+var/global/list/latejoin_gateway_locations = list()
 
 /obj/effect/landmark/latejoin
 	delete_me = TRUE

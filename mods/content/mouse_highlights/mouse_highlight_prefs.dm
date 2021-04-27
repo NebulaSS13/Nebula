@@ -1,9 +1,9 @@
-var/const/PREF_SHOW_HOLD_SHIFT = "While Holding Shift"
+var/global/const/PREF_SHOW_HOLD_SHIFT = "While Holding Shift"
 
 /datum/client_preference/show_mouseover_highlights
 	description ="Mouseover Highlights"
 	key = "SHOW_MOUSEOVER_HIGHLIGHT"
-	options = list(global.PREF_SHOW_HOLD_SHIFT, global.PREF_HIDE, global.PREF_SHOW)
+	options = list(PREF_SHOW_HOLD_SHIFT, PREF_HIDE, PREF_SHOW)
 
 /datum/category_item/player_setup_item/player_global/ui/OnTopic(var/href,var/list/href_list, var/mob/user)
 	. = ..()

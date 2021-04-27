@@ -418,7 +418,7 @@
 /obj/item/organ/proc/get_mechanical_assisted_descriptor()
 	return "mechanically-assisted [name]"
 
-var/list/ailment_reference_cache = list()
+var/global/list/ailment_reference_cache = list()
 /proc/get_ailment_reference(var/ailment_type)
 	if(!ispath(ailment_type, /datum/ailment))
 		return

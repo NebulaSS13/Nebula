@@ -43,7 +43,7 @@
 
 	var/mob_transfer_message = "You are transported to ORIGIN." //What message gets sent to mobs that get sold.
 
-	var/global/list/blacklisted_types = list(
+	var/static/list/blacklisted_types = list(
 		/obj,
 		/obj/structure,
 		/obj/machinery,

@@ -1,12 +1,12 @@
-var/image/default_hardpoint_background = null
-var/image/hardpoint_error_icon = null
-var/image/hardpoint_bar_empty = null
+var/global/image/default_hardpoint_background = null
+var/global/image/hardpoint_error_icon = null
+var/global/image/hardpoint_bar_empty = null
 
-var/list/hardpoint_bar_cache =       list()
-var/list/mech_damage_overlay_cache = list()
-var/list/mech_image_cache =          list()
-var/list/mech_icon_cache =           list()
-var/list/mech_weapon_overlays =      icon_states('icons/mecha/mech_weapon_overlays.dmi')
+var/global/list/hardpoint_bar_cache =       list()
+var/global/list/mech_damage_overlay_cache = list()
+var/global/list/mech_image_cache =          list()
+var/global/list/mech_icon_cache =           list()
+var/global/list/mech_weapon_overlays =      icon_states('icons/mecha/mech_weapon_overlays.dmi')
 
 #define HARDPOINT_BACK "back"
 #define HARDPOINT_LEFT_HAND "left hand"

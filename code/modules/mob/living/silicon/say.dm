@@ -99,7 +99,7 @@
 
 
 			for(var/mob/M in global.player_list)
-				if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == global.PREF_ALL_SPEECH)
+				if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == PREF_ALL_SPEECH)
 					M.hear_say(message,verb,speaking,null,null, src)
 					continue
 				if(M.loc && (M.locs[1] in hearturfs))

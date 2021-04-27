@@ -1,8 +1,8 @@
-var/datum/map/using_map = new USING_MAP_DATUM
-var/list/all_maps = list()
+var/global/datum/map/using_map = new USING_MAP_DATUM
+var/global/list/all_maps = list()
 
-var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
-var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
+var/global/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
+var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /hook/startup/proc/initialise_map_list()
 	for(var/type in subtypesof(/datum/map))

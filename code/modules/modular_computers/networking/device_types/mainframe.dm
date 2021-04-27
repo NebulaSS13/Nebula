@@ -1,4 +1,4 @@
-var/list/all_mainframe_roles = list(
+var/global/list/all_mainframe_roles = list(
 	MF_ROLE_SOFTWARE,
 	MF_ROLE_FILESERVER, 
 	MF_ROLE_EMAIL_SERVER, 

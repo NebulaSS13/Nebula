@@ -29,7 +29,7 @@
 	var/last_light
 	var/image/gleam
 	var/image/web
-	var/global/species_immunity_list = list(
+	var/static/species_immunity_list = list(
 		SPECIES_MANTID_ALATE   = TRUE,
 		SPECIES_MANTID_GYNE    = TRUE,
 		SPECIES_SERPENTID      = TRUE

@@ -12,9 +12,9 @@
 #define RCS_MESSAUTH 7	// Authentication before sending
 #define RCS_ANNOUNCE 8	// Send announcement
 
-var/req_console_assistance = list()
-var/req_console_supplies = list()
-var/req_console_information = list()
+var/global/req_console_assistance = list()
+var/global/req_console_supplies = list()
+var/global/req_console_information = list()
 
 /obj/machinery/network/requests_console
 	name = "Requests Console"

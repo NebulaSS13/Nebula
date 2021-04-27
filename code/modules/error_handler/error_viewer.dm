@@ -8,10 +8,10 @@
 //   right here:
 
 #ifdef DEBUG
-var/datum/error_viewer/error_cache/error_cache = new
+var/global/datum/error_viewer/error_cache/error_cache = new
 #else
 // If debugging is disabled, there's nothing useful to log, so don't bother.
-var/datum/error_viewer/error_cache/error_cache
+var/global/datum/error_viewer/error_cache/error_cache
 #endif
 
 // - error_source datums exist for each line (of code) that generates an error,

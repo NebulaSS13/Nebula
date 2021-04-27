@@ -1,5 +1,5 @@
 #define WARNING_DELAY 80			//seconds between warnings.
-var/list/ship_inertial_dampers = list()
+var/global/list/ship_inertial_dampers = list()
 
 /datum/ship_inertial_damper
 	var/name = "ship inertial damper"

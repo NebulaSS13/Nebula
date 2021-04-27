@@ -1,4 +1,4 @@
-var/list/spawntypes
+var/global/list/spawntypes
 
 /proc/spawntypes()
 	if(!global.spawntypes)

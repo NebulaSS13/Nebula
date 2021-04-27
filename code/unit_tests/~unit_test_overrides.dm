@@ -21,7 +21,7 @@
 /obj/random
 	spawn_method = /obj/random/proc/unit_test_spawn_item
 
-var/atom/movable/unit_test_last_obj_random_creation 
+var/global/atom/movable/unit_test_last_obj_random_creation 
 /obj/random/proc/unit_test_spawn_item()
 	var/build_path = unit_test_select_heaviest(spawn_choices())
 	global.unit_test_last_obj_random_creation = new build_path()
@@ -45,7 +45,7 @@ var/atom/movable/unit_test_last_obj_random_creation
 
 	return heaviest_choice
 
-var/list/unit_test_obj_random_weights_by_type = list()
+var/global/list/unit_test_obj_random_weights_by_type = list()
 
 // If you adjust any of the values below, please also update /obj/structure/closet/proc/content_size(atom/movable/AM)
 /proc/unit_test_weight_of_path(var/path)

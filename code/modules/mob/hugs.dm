@@ -1,4 +1,4 @@
-var/list/_default_hug_messages = list(
+var/global/list/_default_hug_messages = list(
 	BP_HEAD = list(
 		"$USER$ pats $TARGET$ on the head.",
 		"You pat $TARGET$ on the head."

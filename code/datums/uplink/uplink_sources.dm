@@ -2,7 +2,7 @@
 
 #define SETUP_FAILED TRUE
 
-var/list/default_uplink_source_priority = list(
+var/global/list/default_uplink_source_priority = list(
 	/decl/uplink_source/pda,
 	/decl/uplink_source/radio,
 	/decl/uplink_source/unit

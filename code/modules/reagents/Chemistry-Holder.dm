@@ -1,4 +1,4 @@
-var/obj/temp_reagents_holder = new
+var/global/obj/temp_reagents_holder = new
 
 /datum/reagents
 	var/primary_reagent

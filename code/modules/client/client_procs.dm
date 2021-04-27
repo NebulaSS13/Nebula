@@ -1,4 +1,4 @@
-var/list/localhost_addresses = list(
+var/global/list/localhost_addresses = list(
 	"127.0.0.1" = TRUE,
 	"::1" = TRUE
 )
@@ -555,9 +555,9 @@ var/list/localhost_addresses = list(
 		winset(src, "mainwindow.mainvsplit", "size=[new_size]")
 
 /client/proc/toggle_fullscreen(new_value)
-	if((new_value == global.PREF_BASIC) || (new_value == global.PREF_FULL))
+	if((new_value == PREF_BASIC) || (new_value == PREF_FULL))
 		winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false")
-		if(new_value == global.PREF_FULL)
+		if(new_value == PREF_FULL)
 			winset(src, "mainwindow", "menu=null;statusbar=false")
 		winset(src, "mainwindow.mainvsplit", "pos=0x0")
 	else

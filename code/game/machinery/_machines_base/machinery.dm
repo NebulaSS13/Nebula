@@ -103,7 +103,7 @@ Class Procs:
 	var/list/maximum_component_parts = list(/obj/item/stock_parts = 10)         //null - no max. list(type part = number max).
 	var/uid
 	var/panel_open = 0
-	var/global/gl_uid = 1
+	var/static/gl_uid = 1
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 	var/clicksound			// sound played on succesful interface use by a carbon lifeform
 	var/clickvol = 40		// sound played on succesful interface use

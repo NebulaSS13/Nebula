@@ -1,4 +1,4 @@
-var/list/laser_wavelengths
+var/global/list/laser_wavelengths
 
 /decl/laser_wavelength
 	var/name

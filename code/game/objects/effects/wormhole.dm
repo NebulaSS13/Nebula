@@ -1,4 +1,4 @@
-var/list/all_wormholes = list()
+var/global/list/all_wormholes = list()
 
 /obj/effect/portal/wormhole
 	name = "wormhole"

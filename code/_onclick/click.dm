@@ -348,7 +348,7 @@
 			facing_dir = direction
 		facedir(direction)
 
-var/list/click_catchers
+var/global/list/click_catchers
 /proc/get_click_catchers()
 	if(!global.click_catchers)
 		global.click_catchers = create_click_catcher()

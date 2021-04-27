@@ -1,11 +1,11 @@
-var/list/all_crew_records =  list()
-var/list/blood_types =       list("A-", "A+", "B-", "B+", "AB-", "AB+", "O-", "O+")
-var/list/physical_statuses = list("Active", "Disabled", "SSD", "Deceased", "MIA")
-var/list/security_statuses = list("None", "Released", "Parolled", "Incarcerated", "Arrest")
+var/global/list/all_crew_records =  list()
+var/global/list/blood_types =       list("A-", "A+", "B-", "B+", "AB-", "AB+", "O-", "O+")
+var/global/list/physical_statuses = list("Active", "Disabled", "SSD", "Deceased", "MIA")
+var/global/list/security_statuses = list("None", "Released", "Parolled", "Incarcerated", "Arrest")
 
-var/default_physical_status = "Active"
-var/default_security_status = "None"
-var/arrest_security_status =  "Arrest"
+var/global/default_physical_status = "Active"
+var/global/default_security_status = "None"
+var/global/arrest_security_status =  "Arrest"
 
 /datum/computer_file/report/crew_record
 	filetype = "CDB"

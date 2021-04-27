@@ -1,4 +1,4 @@
-var/list/local_networks = list()
+var/global/list/local_networks = list()
 
 /datum/local_network
 	var/id_tag
@@ -58,7 +58,7 @@ var/list/local_networks = list()
 
 
 //Multilevel network
-var/list/multilevel_local_networks = list()
+var/global/list/multilevel_local_networks = list()
 
 /datum/local_network/multilevel/New(var/_id)
 	id_tag = _id

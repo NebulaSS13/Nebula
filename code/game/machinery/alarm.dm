@@ -813,7 +813,7 @@ FIRE ALARM
 	power_channel = ENVIRON
 	var/last_process = 0
 	var/seclevel
-	var/global/list/overlays_cache
+	var/static/list/overlays_cache
 
 	base_type = /obj/machinery/firealarm
 	frame_type = /obj/item/frame/fire_alarm

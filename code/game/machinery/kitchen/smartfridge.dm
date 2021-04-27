@@ -15,7 +15,7 @@
 	atmos_canpass = CANPASS_NEVER
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 
-	var/global/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000.
+	var/static/const/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000.
 	var/icon_base = "fridge_sci"
 	var/icon_contents = "chem"
 	var/list/item_records = list()

@@ -102,9 +102,9 @@
 		NEWSCASTER.newsAlert(annoncement)
 		NEWSCASTER.update_icon()
 
-var/datum/feed_network/news_network = new /datum/feed_network     //The global news-network, which is coincidentally a global list.
+var/global/datum/feed_network/news_network = new /datum/feed_network     //The global news-network, which is coincidentally a global list.
 
-var/list/obj/machinery/newscaster/allCasters = list() //Global list that will contain reference to all newscasters in existence.
+var/global/list/allCasters = list() //Global list that will contain reference to all newscasters in existence.
 
 
 /obj/machinery/newscaster

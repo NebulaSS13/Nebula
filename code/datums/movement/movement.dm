@@ -1,7 +1,7 @@
-var/const/MOVEMENT_HANDLED = BITFLAG(0) // If no further movement handling should occur after this
-var/const/MOVEMENT_REMOVE  = BITFLAG(1)
-var/const/MOVEMENT_PROCEED = BITFLAG(2)
-var/const/MOVEMENT_STOP    = BITFLAG(3)
+var/global/const/MOVEMENT_HANDLED = BITFLAG(0) // If no further movement handling should occur after this
+var/global/const/MOVEMENT_REMOVE  = BITFLAG(1)
+var/global/const/MOVEMENT_PROCEED = BITFLAG(2)
+var/global/const/MOVEMENT_STOP    = BITFLAG(3)
 
 #define INIT_MOVEMENT_HANDLERS \
 if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \

@@ -284,7 +284,7 @@
 	if(preference)
 		var/mob/M = listener
 		if(istype(M))
-			if((M.get_preference_value(preference) != global.PREF_YES))
+			if((M.get_preference_value(preference) != PREF_YES))
 				return FALSE
 	return TRUE
 

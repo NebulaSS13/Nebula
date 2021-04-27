@@ -9,7 +9,7 @@
 #define PRESSURE_TANK_VOLUME 150	//L
 #define PUMP_MAX_FLOW_RATE 90		//L/s - 4 m/s using a 15 cm by 15 cm inlet
 
-var/list/diversion_junctions = list()
+var/global/list/diversion_junctions = list()
 
 /obj/machinery/disposal
 	name = "disposal unit"

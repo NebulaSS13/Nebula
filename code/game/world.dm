@@ -1,4 +1,4 @@
-/var/game_id = null
+var/global/game_id = null
 
 /hook/global_init/proc/generate_gameid()
 	if(game_id != null)
@@ -99,8 +99,8 @@
 
 #undef RECOMMENDED_VERSION
 
-var/list/world_topic_throttle = list()
-var/world_topic_last = world.timeofday
+var/global/list/world_topic_throttle = list()
+var/global/world_topic_last = world.timeofday
 
 #define SET_THROTTLE(TIME, REASON) throttle[1] = base_throttle + (TIME); throttle[2] = (REASON);
 #define THROTTLE_MAX_BURST 15 SECONDS
@@ -584,7 +584,7 @@ var/world_topic_last = world.timeofday
 		log = runtime_log // runtimes and some other output is logged directly to world.log, which is redirected here.
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
-var/failed_db_connections = 0
+var/global/failed_db_connections = 0
 /hook/startup/proc/connectDB()
 	if(!setup_database_connection())
 		to_world_log("Your server failed to establish a connection with the SQL database.")

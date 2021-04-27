@@ -1,5 +1,5 @@
 //admin verb groups - They can overlap if you so wish. Only one of each verb will exist in the verbs list regardless
-var/list/admin_verbs_default = list(
+var/global/list/admin_verbs_default = list(
 	/datum/admins/proc/show_player_panel,	//shows an interface for individual players, with various links (links require additional flags,
 	/client/proc/secrets,
 	/client/proc/deadmin_self,			//destroys our own admin datum so we can play as a regular player,
@@ -10,7 +10,7 @@ var/list/admin_verbs_default = list(
 	/client/proc/debug_global_variables,//as above but for global variables,
 	/client/proc/cmd_check_new_players
 	)
-var/list/admin_verbs_admin = list(
+var/global/list/admin_verbs_admin = list(
 	/client/proc/list_players,		//shows an interface for all players, with links to various panels,
 	/client/proc/invisimin,				//allows our mob to go invisible/visible,
 	/datum/admins/proc/show_game_mode,  //Configuration window for the current game mode.,
@@ -92,17 +92,17 @@ var/list/admin_verbs_admin = list(
 	/client/proc/remove_trader,
 	/datum/admins/proc/sendFax,
 )
-var/list/admin_verbs_ban = list(
+var/global/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
 	/client/proc/jobbans
 	)
-var/list/admin_verbs_sounds = list(
+var/global/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
 	/client/proc/play_sound,
 	/client/proc/play_server_sound
 	)
 
-var/list/admin_verbs_fun = list(
+var/global/list/admin_verbs_fun = list(
 	/client/proc/object_talk,
 	/datum/admins/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
@@ -122,7 +122,7 @@ var/list/admin_verbs_fun = list(
 	/datum/admins/proc/ai_hologram_set
 	)
 
-var/list/admin_verbs_spawn = list(
+var/global/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_fruit,
 	/datum/admins/proc/spawn_fluid_verb,
 	/datum/admins/proc/spawn_custom_item,
@@ -134,7 +134,7 @@ var/list/admin_verbs_spawn = list(
 	/client/proc/spawn_chemdisp_cartridge,
 	/datum/admins/proc/mass_debug_closet_icons
 	)
-var/list/admin_verbs_server = list(
+var/global/list/admin_verbs_server = list(
 	/datum/admins/proc/capture_map_part,
 	/client/proc/set_holiday,
 	/datum/admins/proc/startnow,
@@ -159,7 +159,7 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/addbunkerbypass,
 	/datum/admins/proc/revokebunkerbypass
 	)
-var/list/admin_verbs_debug = list(
+var/global/list/admin_verbs_debug = list(
 	/datum/admins/proc/jump_to_fluid_source,
 	/datum/admins/proc/jump_to_fluid_active,
 	/client/proc/cmd_admin_list_open_jobs,
@@ -212,25 +212,25 @@ var/list/admin_verbs_debug = list(
 	/client/proc/spawn_exoplanet
 	)
 
-var/list/admin_verbs_paranoid_debug = list(
+var/global/list/admin_verbs_paranoid_debug = list(
 	/client/proc/callproc,
 	/client/proc/callproc_target,
 	/client/proc/debug_controller
 	)
 
-var/list/admin_verbs_possess = list(
+var/global/list/admin_verbs_possess = list(
 	/proc/possess,
 	/proc/release
 	)
-var/list/admin_verbs_permissions = list(
+var/global/list/admin_verbs_permissions = list(
 	/client/proc/edit_admin_permissions
 	)
-var/list/admin_verbs_rejuv = list(
+var/global/list/admin_verbs_rejuv = list(
 	/client/proc/respawn_character
 	)
 
 //verbs which can be hidden - needs work
-var/list/admin_verbs_hideable = list(
+var/global/list/admin_verbs_hideable = list(
 	/client/proc/deadmin_self,
 //	/client/proc/deadchat,
 	/datum/admins/proc/show_special_roles,
@@ -301,7 +301,7 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/spawn_quantum_mechanic,
 	/client/proc/respawn_as_self
 	)
-var/list/admin_verbs_mod = list(
+var/global/list/admin_verbs_mod = list(
 	/client/proc/cmd_admin_pm_context,	// right-click adminPM interface,
 	/client/proc/cmd_admin_pm_panel,	// admin-pm list,
 	/client/proc/debug_variables,		// allows us to -see- the variables of any instance in the game.,
