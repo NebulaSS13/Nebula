@@ -270,7 +270,7 @@
 	if(module && !override)
 		return
 
-	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	var/is_crisis_mode = crisis_override || (crisis && security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
 	var/list/robot_modules = SSrobots.get_available_modules(module_category, is_crisis_mode, override)
 

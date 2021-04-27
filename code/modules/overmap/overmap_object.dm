@@ -33,7 +33,7 @@
 /obj/effect/overmap/Initialize()
 	. = ..()
 
-	if(!GLOB.using_map.use_overmap)
+	if(!global.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
 
 	if(requires_contact)
@@ -58,7 +58,7 @@
 	var/nx = x
 	var/ny = y
 	var/low_edge = 1
-	var/high_edge = GLOB.using_map.overmap_size
+	var/high_edge = global.using_map.overmap_size
 
 	if((dir & WEST) && x == low_edge)
 		nx = high_edge - 1

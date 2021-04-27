@@ -6,7 +6,7 @@ GLOBAL_VAR(spawntypes)
 		for(var/type in typesof(/datum/spawnpoint)-/datum/spawnpoint)
 			var/datum/spawnpoint/S = type
 			var/display_name = initial(S.display_name)
-			if((display_name in GLOB.using_map.allowed_spawns) || initial(S.always_visible))
+			if((display_name in global.using_map.allowed_spawns) || initial(S.always_visible))
 				GLOB.spawntypes[display_name] = new S
 	return GLOB.spawntypes
 
@@ -83,7 +83,7 @@ GLOBAL_VAR(spawntypes)
 			C.set_occupant(victim, 1)
 			SET_STATUS_MAX(victim, STAT_ASLEEP, rand(1,3))
 			C.on_mob_spawn()
-			to_chat(victim,SPAN_NOTICE("You are slowly waking up from the cryostasis aboard [GLOB.using_map.full_name]. It might take a few seconds."))
+			to_chat(victim,SPAN_NOTICE("You are slowly waking up from the cryostasis aboard [global.using_map.full_name]. It might take a few seconds."))
 			return
 
 /datum/spawnpoint/cyborg

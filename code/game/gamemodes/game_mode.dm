@@ -250,7 +250,7 @@ var/list/additional_antag_types = list()
 		display_roundstart_logout_report()
 
 	spawn (rand(waittime_l, waittime_h))
-		GLOB.using_map.send_welcome()
+		global.using_map.send_welcome()
 		sleep(rand(100,150))
 		announce_ert_disabled()
 
@@ -374,7 +374,7 @@ var/list/additional_antag_types = list()
 				if(ishuman(M))
 					surviving_humans++
 				var/area/A = get_area(M)
-				if(A && is_type_in_list(A, GLOB.using_map.post_round_safe_areas))
+				if(A && is_type_in_list(A, global.using_map.post_round_safe_areas))
 					escaped_total++
 					if(ishuman(M))
 						escaped_humans++
@@ -582,7 +582,7 @@ var/list/additional_antag_types = list()
 	set name = "Check Round Info"
 	set category = "OOC"
 
-	GLOB.using_map.map_info(src)
+	global.using_map.map_info(src)
 
 	if(!SSticker.mode)
 		to_chat(usr, "Something is terribly wrong; there is no gametype.")

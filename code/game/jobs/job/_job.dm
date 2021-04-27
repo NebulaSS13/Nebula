@@ -128,7 +128,7 @@
 		culture_mod /= culture_count
 	. *= culture_mod
 	// Apply other mods.
-	. *= GLOB.using_map.salary_modifier
+	. *= global.using_map.salary_modifier
 	. *= 1 + 2 * H.get_skill_value(SKILL_FINANCE)/(SKILL_MAX - SKILL_MIN)
 	. = round(.)
 
@@ -154,7 +154,7 @@
 			var/datum/transaction/T = M.transaction_log[1]
 			remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.get_source_name()]<br>"
 		if(cash_on_hand > 0)
-			var/decl/currency/cur = GET_DECL(GLOB.using_map.default_currency)
+			var/decl/currency/cur = GET_DECL(global.using_map.default_currency)
 			remembered_info += "<b>Your cash on hand is:</b> [cur.format_value(cash_on_hand)]<br>"
 		H.StoreMemory(remembered_info, /decl/memory_options/system)
 		H.mind.initial_account = M
@@ -251,10 +251,10 @@
 	return active
 
 /datum/job/proc/is_species_allowed(var/decl/species/S)
-	if(GLOB.using_map.is_species_job_restricted(S, src))
+	if(global.using_map.is_species_job_restricted(S, src))
 		return FALSE
 	// We also make sure that there is at least one valid branch-rank combo for the species.
-	if(!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
+	if(!allowed_branches || !global.using_map || !(global.using_map.flags & MAP_HAS_BRANCH))
 		return TRUE
 	return LAZYLEN(get_branch_rank(S))
 
@@ -271,7 +271,7 @@
 	for(var/branch_type in allowed_branches)
 		var/datum/mil_branch/branch = mil_branches.get_branch_by_type(branch_type)
 		if(branch.name in spawn_branches)
-			if(!allowed_ranks || !(GLOB.using_map.flags & MAP_HAS_RANK))
+			if(!allowed_ranks || !(global.using_map.flags & MAP_HAS_RANK))
 				LAZYADD(., branch.name)
 				continue // Screw this rank stuff, we're good.
 			var/spawn_ranks = branch.spawn_ranks(S)
@@ -288,7 +288,7 @@
  *  branch_name - String key for the branch to check
  */
 /datum/job/proc/is_branch_allowed(var/branch_name)
-	if(!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
+	if(!allowed_branches || !global.using_map || !(global.using_map.flags & MAP_HAS_BRANCH))
 		return 1
 	if(branch_name == "None")
 		return 0
@@ -313,7 +313,7 @@
  *  rank_name - String key for the rank itself
  */
 /datum/job/proc/is_rank_allowed(var/branch_name, var/rank_name)
-	if(!allowed_ranks || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_RANK))
+	if(!allowed_ranks || !global.using_map || !(global.using_map.flags & MAP_HAS_RANK))
 		return 1
 	if(branch_name == "None" || rank_name == "None")
 		return 0
@@ -437,10 +437,10 @@
 		spawnpoint = forced_spawnpoint
 
 	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
-		spawnpoint = GLOB.using_map.default_spawn
+		spawnpoint = global.using_map.default_spawn
 
 	if(spawnpoint)
-		if(!(spawnpoint in GLOB.using_map.allowed_spawns))
+		if(!(spawnpoint in global.using_map.allowed_spawns))
 			if(H)
 				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead. To resolve this error head to your character's setup and choose a different spawn point.</span>")
 			spawnpos = null
@@ -454,7 +454,7 @@
 
 	if(!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
-		for(var/spawntype in GLOB.using_map.allowed_spawns)
+		for(var/spawntype in global.using_map.allowed_spawns)
 			var/datum/spawnpoint/candidate = spawntypes()[spawntype]
 			if(candidate.check_job_spawning(title))
 				spawnpos = candidate
@@ -463,7 +463,7 @@
 	if(!spawnpos)
 		// Pick at random from all the (wrong) spawnpoints, just so we have one
 		warning("Could not find an appropriate spawnpoint for job [title].")
-		spawnpos = spawntypes()[pick(GLOB.using_map.allowed_spawns)]
+		spawnpos = spawntypes()[pick(global.using_map.allowed_spawns)]
 
 	return spawnpos
 

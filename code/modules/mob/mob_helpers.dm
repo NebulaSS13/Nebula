@@ -535,7 +535,7 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		if(istype(belt, /obj/item/gun) || istype(belt, /obj/item/energy_blade) || istype(belt, /obj/item/baton))
 			threatcount += 2
 
-		if(species.name != GLOB.using_map.default_species)
+		if(species.name != global.using_map.default_species)
 			threatcount += 2
 
 	if(check_records || check_arrest)

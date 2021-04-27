@@ -37,7 +37,7 @@
 	title = "[command_name()] Update"
 	announcement_type = "[command_name()] Update"
 
-/datum/announcement/proc/Announce(var/message, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevels = GLOB.using_map.contact_levels)
+/datum/announcement/proc/Announce(var/message, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevels = global.using_map.contact_levels)
 	if(!message)
 		return
 	var/message_title = new_title ? new_title : title
@@ -49,7 +49,7 @@
 
 	var/msg = FormMessage(message, message_title)
 	for(var/mob/M in GLOB.player_list)
-		if((M.z in (zlevels | GLOB.using_map.admin_levels)) && !istype(M,/mob/new_player) && !isdeaf(M))
+		if((M.z in (zlevels | global.using_map.admin_levels)) && !istype(M,/mob/new_player) && !isdeaf(M))
 			to_chat(M, msg)
 			if(message_sound)
 				sound_to(M, message_sound)
@@ -124,7 +124,7 @@
 	return I.assignment ? "[I.registered_name] ([I.assignment])" : I.registered_name
 
 /proc/level_seven_announcement()
-	GLOB.using_map.level_x_biohazard_announcement(7)
+	global.using_map.level_x_biohazard_announcement(7)
 
 /proc/ion_storm_announcement(list/affecting_z)
 	command_announcement.Announce("It has come to our attention that the [station_name()] passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert", zlevels = affecting_z)
@@ -145,7 +145,7 @@
 
 /proc/get_announcement_frequency(var/datum/job/job)
 	// During red alert all jobs are announced on main frequency.
-	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
 		return "Common"
 	var/decl/department/dept = SSjobs.get_department_by_type(job.primary_department)

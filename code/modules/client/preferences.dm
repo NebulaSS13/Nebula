@@ -394,7 +394,7 @@ var/list/time_prefs_fixed = list()
 		dat += "<b>Select a character slot to load</b><hr>"
 		var/name
 		for(var/i=1, i<= config.character_slots, i++)
-			S.cd = GLOB.using_map.character_load_path(S, i)
+			S.cd = global.using_map.character_load_path(S, i)
 			S["real_name"] >> name
 			if(!name)	name = "Character[i]"
 			if(i==default_slot)

@@ -34,7 +34,7 @@
 		if(L.loc?.atom_flags & ATOM_FLAG_SHIELD_CONTENTS)
 			continue
 		var/turf/T = get_turf(L)
-		if(!T || !(T.z in GLOB.using_map.player_levels))
+		if(!T || !(T.z in global.using_map.player_levels))
 			continue
 
 		if(!istype(T.loc,/area/space) && !isspaceturf(T))	//Make sure you're in a space area or on a space turf

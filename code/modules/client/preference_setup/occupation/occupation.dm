@@ -120,7 +120,7 @@
 				var/branch_string = ""
 				var/rank_branch_string = ""
 				var/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : mil_branches.spawn_branches(S)
-				if(GLOB.using_map && (GLOB.using_map.flags & MAP_HAS_BRANCH) && LAZYLEN(branch_rank))
+				if(global.using_map && (global.using_map.flags & MAP_HAS_BRANCH) && LAZYLEN(branch_rank))
 					player_branch = mil_branches.get_branch(pref.branches[job.title])
 					if(player_branch)
 						if(LAZYLEN(branch_rank) > 1)
@@ -204,14 +204,14 @@
 				if(bad_message)
 					. += "<del>[title_link]</del>[help_link][skill_link]<td>[bad_message]</td></tr>"
 					continue
-				else if((GLOB.using_map.default_assistant_title in pref.job_low) && (title != GLOB.using_map.default_assistant_title))
+				else if((global.using_map.default_assistant_title in pref.job_low) && (title != global.using_map.default_assistant_title))
 					. += "<font color=grey>[title_link]</font>[help_link][skill_link]<td></td></tr>"
 					continue
 				else
 					. += "[title_link][help_link][skill_link]"
 
 				. += "<td>"
-				if(title == GLOB.using_map.default_assistant_title)//Assistant is special
+				if(title == global.using_map.default_assistant_title)//Assistant is special
 					var/yes_link = "Yes"
 					var/no_link = "No"
 					if(title in pref.job_low)
@@ -449,7 +449,7 @@
 	if(!job)
 		return 0
 
-	if(role == GLOB.using_map.default_assistant_title)
+	if(role == global.using_map.default_assistant_title)
 		if(level == JOB_LEVEL_NEVER)
 			pref.job_low -= job.title
 		else

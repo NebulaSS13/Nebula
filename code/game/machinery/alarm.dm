@@ -823,8 +823,8 @@ FIRE ALARM
 
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
-	if(loc.z in GLOB.using_map.contact_levels)
-		var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	if(loc.z in global.using_map.contact_levels)
+		var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/firealarm/proc/get_cached_overlay(key)
@@ -875,8 +875,8 @@ FIRE ALARM
 		if(!detecting)
 			overlays += get_cached_overlay("fire1")
 			set_light(2, 0.25, COLOR_RED)
-		else if(z in GLOB.using_map.contact_levels)
-			var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+		else if(z in global.using_map.contact_levels)
+			var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 			var/decl/security_level/sl = security_state.current_security_level
 
 			set_light(sl.light_power, sl.light_range, sl.light_color_alarm)
@@ -940,7 +940,7 @@ FIRE ALARM
 	var/d1
 	var/d2
 
-	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon))
 		A = A.loc
 

@@ -150,7 +150,7 @@
 		return TOPIC_REFRESH
 
 	if(href_list["newaccount"])
-		var/newdomain = sanitize(input(user,"Pick domain:", "Domain name") as null|anything in GLOB.using_map.usable_email_tlds)
+		var/newdomain = sanitize(input(user,"Pick domain:", "Domain name") as null|anything in global.using_map.usable_email_tlds)
 		if(!newdomain)
 			return TOPIC_HANDLED
 		var/newlogin = sanitize(input(user,"Pick account name (@[newdomain]):", "Account name"), 100)

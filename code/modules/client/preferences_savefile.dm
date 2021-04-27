@@ -46,11 +46,11 @@
 		S["default_slot"] << default_slot
 
 	if(slot != SAVE_RESET)
-		S.cd = GLOB.using_map.character_load_path(S, slot)
+		S.cd = global.using_map.character_load_path(S, slot)
 		player_setup.load_character(S)
 	else
 		player_setup.load_character(S)
-		S.cd = GLOB.using_map.character_load_path(S, default_slot)
+		S.cd = global.using_map.character_load_path(S, default_slot)
 
 	loaded_character = S
 	clear_character_previews() // Recalculate them on next show
@@ -61,7 +61,7 @@
 	if(!path)				return 0
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
-	S.cd = GLOB.using_map.character_save_path(default_slot)
+	S.cd = global.using_map.character_save_path(default_slot)
 
 	S["version"] << SAVEFILE_VERSION_MAX
 	player_setup.save_character(S)

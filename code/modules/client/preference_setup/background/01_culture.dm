@@ -54,7 +54,7 @@
 		var/list/_cultures
 		GET_ALLOWED_VALUES(_cultures, token)
 		if(!LAZYLEN(_cultures))
-			pref.cultural_info[token] = GLOB.using_map.default_cultural_info[token]
+			pref.cultural_info[token] = global.using_map.default_cultural_info[token]
 		else
 			var/current_value = pref.cultural_info[token]
 			if(!current_value || !_cultures[current_value])

@@ -156,7 +156,7 @@ SUBSYSTEM_DEF(supply)
 			var/info = list()
 			info +="<h3>[command_name()] Shipping Manifest</h3><hr><br>"
 			info +="Order #[SO.ordernum]<br>"
-			info +="Destination: [GLOB.using_map.station_name]<br>"
+			info +="Destination: [global.using_map.station_name]<br>"
 			info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
 			info +="CONTENTS:<br><ul>"
 

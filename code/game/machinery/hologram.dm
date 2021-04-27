@@ -107,7 +107,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 				var/list/holopadlist = list()
 				var/zlevels = GetConnectedZlevels(z)
 				var/zlevels_long = list()
-				if(GLOB.using_map.use_overmap && holopadType == HOLOPAD_LONG_RANGE)
+				if(global.using_map.use_overmap && holopadType == HOLOPAD_LONG_RANGE)
 					for(var/zlevel in map_sectors)
 						var/obj/effect/overmap/visitable/O = map_sectors["[zlevel]"]
 						if(!isnull(O))

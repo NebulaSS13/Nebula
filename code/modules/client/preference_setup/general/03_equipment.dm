@@ -98,7 +98,7 @@
 				tweak_metadata["[tweak]"] = tweak.validate_metadata(metadata)
 
 	if(!ispath(pref.starting_cash_choice, /decl/starting_cash_choice))
-		pref.starting_cash_choice = GLOB.using_map.default_starting_cash_choice
+		pref.starting_cash_choice = global.using_map.default_starting_cash_choice
 
 /datum/category_item/player_setup_item/physical/equipment/content()
 	. = list()

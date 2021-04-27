@@ -5,14 +5,14 @@
 /mob/living/silicon/Initialize()
 	. = ..()
 	if(!laws)
-		laws = GLOB.using_map.default_law_type
+		laws = global.using_map.default_law_type
 	if(ispath(laws))
 		laws = new laws()
 	laws_sanity_check()
 
 /mob/living/silicon/proc/laws_sanity_check()
 	if (!src.laws)
-		laws = new GLOB.using_map.default_law_type
+		laws = new global.using_map.default_law_type
 
 /mob/living/silicon/proc/has_zeroth_law()
 	return laws.zeroth_law != null

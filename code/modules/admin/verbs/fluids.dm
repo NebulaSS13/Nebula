@@ -109,13 +109,13 @@ GLOBAL_LIST_INIT(submerged_levels, new)
 			first_level = check_level
 	flooding_levels -= first_level
 	GLOB.submerged_levels["[first_level]"] = TRUE
-	GLOB.using_map.base_turf_by_z["[first_level]"] = /turf/exterior/seafloor
+	global.using_map.base_turf_by_z["[first_level]"] = /turf/exterior/seafloor
 	new /datum/random_map/noise/seafloor/replace_space(null, 1, 1, first_level, world.maxx, world.maxy)
 
 	// Generate open space for the remaining z-levels.
 	for(var/submerge_z in flooding_levels)
 		GLOB.submerged_levels["[submerge_z]"] = TRUE
-		GLOB.using_map.base_turf_by_z["[submerge_z]"] = /turf/simulated/open
+		global.using_map.base_turf_by_z["[submerge_z]"] = /turf/simulated/open
 		for(var/thing in block(locate(1, 1, submerge_z), locate(world.maxx, world.maxy, submerge_z)))
 			var/turf/T = thing
 			var/area/A = get_area(T)

@@ -1,7 +1,7 @@
 
 /proc/power_failure(var/announce = 1, var/severity = 2, var/list/affected_z_levels)
 	if(announce)
-		GLOB.using_map.grid_check_announcement()
+		global.using_map.grid_check_announcement()
 
 	for(var/obj/machinery/power/smes/buildable/S in SSmachines.machinery)
 		S.energy_fail(rand(15 * severity,30 * severity))
@@ -13,7 +13,7 @@
 
 /proc/power_restore(var/announce = 1)
 	if(announce)
-		GLOB.using_map.grid_restored_announcement()
+		global.using_map.grid_restored_announcement()
 	for(var/obj/machinery/power/apc/C in SSmachines.machinery)
 		C.failure_timer = 0
 		var/obj/item/cell/cell = C.get_cell()
@@ -28,7 +28,7 @@
 /proc/power_restore_quick(var/announce = 1)
 
 	if(announce)
-		command_announcement.Announce("All SMESs on the [station_name()] have been recharged. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = GLOB.using_map.grid_restored_sound)
+		command_announcement.Announce("All SMESs on the [station_name()] have been recharged. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = global.using_map.grid_restored_sound)
 	for(var/obj/machinery/power/smes/S in SSmachines.machinery)
 		S.failure_timer = 0
 		S.charge = S.capacity

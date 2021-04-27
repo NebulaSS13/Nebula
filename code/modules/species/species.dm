@@ -289,7 +289,7 @@
 			available_cultural_info[token] |= additional_available_cultural_info[token]
 
 		else if(!LAZYLEN(available_cultural_info[token]))
-			var/list/map_systems = GLOB.using_map.available_cultural_info[token]
+			var/list/map_systems = global.using_map.available_cultural_info[token]
 			available_cultural_info[token] = map_systems.Copy()
 
 		if(LAZYLEN(available_cultural_info[token]) && !default_cultural_info[token])
@@ -297,7 +297,7 @@
 			default_cultural_info[token] = avail_systems[1]
 
 		if(!default_cultural_info[token])
-			default_cultural_info[token] = GLOB.using_map.default_cultural_info[token]
+			default_cultural_info[token] = global.using_map.default_cultural_info[token]
 
 	if(hud_type)
 		hud = new hud_type()

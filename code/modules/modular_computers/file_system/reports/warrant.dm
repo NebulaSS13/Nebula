@@ -59,13 +59,13 @@
 			<HTML><HEAD><TITLE>Arrest Warramt: [get_name()]</TITLE></HEAD>
 			<BODY><center><h2>Warrant Tracker System</h2>
 			Issued in the jurisdiction of the</br>
-			[GLOB.using_map.boss_name] in [GLOB.using_map.system_name]</br>
+			[global.using_map.boss_name] in [global.using_map.system_name]</br>
 			</br>
 			<h1>ARREST WARRANT</h1></center>
 			</br>
 			This document serves as authorization and notice for the arrest of _<u>[get_name()]</u>____ for the crime(s) of:</br>[get_reason()]</br>
 			</br>
-			Vessel or habitat: _<u>[GLOB.using_map.station_name]</u>____</br>
+			Vessel or habitat: _<u>[global.using_map.station_name]</u>____</br>
 			</br>_<u>[get_auth()]</u>____</br>
 			<small>Person authorizing arrest</small></br>
 			</BODY></HTML>
@@ -98,7 +98,7 @@
 	<HTML><HEAD><TITLE>Search Warrant: [get_name()]</TITLE></HEAD>
 	<BODY><center><h2>Warrant Tracker System</h2>
 	Issued in the jurisdiction of the</br>
-	[GLOB.using_map.boss_name] in [GLOB.using_map.system_name]</br>
+	[global.using_map.boss_name] in [global.using_map.system_name]</br>
 	</br>
 	<h1>SEARCH WARRANT</h1></center>
 	</br>
@@ -108,7 +108,7 @@
 	</br>
 	<b>Warrant issued by: </b> [get_auth()]</br>
 	</br>
-	Vessel or habitat: _<u>[GLOB.using_map.station_name]</u>____</br>
+	Vessel or habitat: _<u>[global.using_map.station_name]</u>____</br>
 	</br>
 	<center><small><i>The Security Officer(s) bearing this Warrant are hereby authorized by the Issuer to conduct a one time lawful search of the Suspect's person/belongings/premises and/or Department for any items and materials that could be connected to the suspected criminal act described below, pending an investigation in progress.</br>
 	</br>

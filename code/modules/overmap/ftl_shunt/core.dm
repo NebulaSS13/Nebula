@@ -189,7 +189,7 @@
 		return
 
 	var/vessel_mass = ftl_computer.linked.get_vessel_mass()
-	var/shunt_turf = locate(shunt_x, shunt_y, GLOB.using_map.overmap_z)
+	var/shunt_turf = locate(shunt_x, shunt_y, global.using_map.overmap_z)
 
 	if(stat & BROKEN)
 		return FTL_START_FAILURE_BROKEN
@@ -256,7 +256,7 @@
 		do_sabotage()
 		return
 
-	var/destination = locate(shunt_x, shunt_y, GLOB.using_map.overmap_z)
+	var/destination = locate(shunt_x, shunt_y, global.using_map.overmap_z)
 	var/jumpdist = get_dist(get_turf(ftl_computer.linked), destination)
 	var/obj/effect/portal/wormhole/W = new(destination) //Generate a wormhole effect on overmap to give some indication that something is about to happen.
 	QDEL_IN(W, 6 SECONDS)

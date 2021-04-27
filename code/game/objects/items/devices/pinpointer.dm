@@ -199,7 +199,7 @@
 
 		if("Other Signature")
 
-			var/itemlist = GLOB.using_map.get_theft_targets() | GLOB.using_map.get_special_theft_targets()
+			var/itemlist = global.using_map.get_theft_targets() | global.using_map.get_special_theft_targets()
 			var/targetitem = input("Select item to search for.", "Item Mode Select","") as null|anything in itemlist
 			if(!targetitem)
 				return

@@ -311,7 +311,7 @@ var/bomb_set
 	timing = 1
 	log_and_message_admins("activated the detonation countdown of \the [src]")
 	bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
-	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	original_level = security_state.current_security_level
 	security_state.set_security_level(security_state.severe_security_level, TRUE)
 	update_icon()
@@ -322,7 +322,7 @@ var/bomb_set
 /obj/machinery/nuclearbomb/proc/secure_device()
 	if(timing <= 0)
 		return
-	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	security_state.set_security_level(original_level, TRUE)
 	bomb_set--
 	safety = TRUE
@@ -403,7 +403,7 @@ var/bomb_set
 
 /obj/item/storage/secure/briefcase/nukedisk/examine(mob/user)
 	. = ..()
-	to_chat(user,"On closer inspection, you see \a [GLOB.using_map.company_name] emblem is etched into the front of it.")
+	to_chat(user,"On closer inspection, you see \a [global.using_map.company_name] emblem is etched into the front of it.")
 
 /obj/item/folder/envelope/nuke_instructions
 	name = "instructions envelope"
@@ -412,7 +412,7 @@ var/bomb_set
 /obj/item/folder/envelope/nuke_instructions/Initialize()
 	. = ..()
 	var/obj/item/paper/R = new(src)
-	R.set_content("<center><b>Warning: Classified<br>[GLOB.using_map.station_name] Self-Destruct System - Instructions</b></center><br><br>\
+	R.set_content("<center><b>Warning: Classified<br>[global.using_map.station_name] Self-Destruct System - Instructions</b></center><br><br>\
 	In the event of a Delta-level emergency, this document will guide you through the activation of the vessel's \
 	on-board nuclear self-destruct system. Please read carefully.<br><br>\
 	1) (Optional) Announce the imminent activation to any surviving crew members, and begin evacuation procedures.<br>\

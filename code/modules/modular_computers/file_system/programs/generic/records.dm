@@ -28,7 +28,7 @@
 	else
 		var/list/all_records = list()
 
-		data["show_milrank"] = (GLOB.using_map.flags & MAP_HAS_BRANCH)
+		data["show_milrank"] = (global.using_map.flags & MAP_HAS_BRANCH)
 		for(var/datum/computer_file/report/crew_record/R in get_records())
 			all_records.Add(list(list(
 				"name" = R.get_name(),

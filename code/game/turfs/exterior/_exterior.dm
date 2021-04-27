@@ -56,7 +56,7 @@
 		gas = new
 		gas.copy_from(owner.atmosphere)
 	else
-		gas = GLOB.using_map.get_exterior_atmosphere()
+		gas = global.using_map.get_exterior_atmosphere()
 	var/initial_temperature = gas.temperature
 	for(var/thing in affecting_heat_sources)
 		if((gas.temperature - initial_temperature) >= 100)
@@ -165,7 +165,7 @@
 						I.pixel_x -= world.icon_size
 					add_overlay(I)
 
-	var/datum/gas_mixture/air = (owner ? owner.atmosphere : GLOB.using_map.exterior_atmosphere)
+	var/datum/gas_mixture/air = (owner ? owner.atmosphere : global.using_map.exterior_atmosphere)
 	if(length(air?.graphic))
 		vis_contents += air.graphic
 	else

@@ -230,13 +230,13 @@
 			break
 
 	var/list/possible_locations = list()
-	if(GLOB.using_map.use_overmap)
+	if(global.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
 		for(var/obj/effect/overmap/visitable/OO in range(O,2))
 			if((OO.sector_flags & OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/effect/overmap/visitable/sector/exoplanet))
 				possible_locations |= text2num(level)
 
-	var/newz = GLOB.using_map.get_empty_zlevel()
+	var/newz = global.using_map.get_empty_zlevel()
 	if(possible_locations.len && prob(10))
 		newz = pick(possible_locations)
 	var/turf/nloc = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),newz)

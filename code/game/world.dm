@@ -70,7 +70,7 @@
 /world/New()
 
 	//set window title
-	name = "[config.server_name] - [GLOB.using_map.full_name]"
+	name = "[config.server_name] - [global.using_map.full_name]"
 
 	//logs
 	SetupLogs()
@@ -154,7 +154,7 @@ var/world_topic_last = world.timeofday
 		s["players"] = 0
 		s["stationtime"] = stationtime2text()
 		s["roundduration"] = roundduration2text()
-		s["map"] = strip_improper(GLOB.using_map.full_name) //Done to remove the non-UTF-8 text macros
+		s["map"] = strip_improper(global.using_map.full_name) //Done to remove the non-UTF-8 text macros
 
 		var/active = 0
 		var/list/players = list()
@@ -436,8 +436,8 @@ var/world_topic_last = world.timeofday
 #undef SET_THROTTLE
 
 /world/Reboot(var/reason)
-	if(GLOB.using_map.reboot_sound)
-		sound_to(world, sound(pick(GLOB.using_map.reboot_sound)))// random end sounds!! - LastyBatsy
+	if(global.using_map.reboot_sound)
+		sound_to(world, sound(pick(global.using_map.reboot_sound)))// random end sounds!! - LastyBatsy
 
 	Master.Shutdown()
 

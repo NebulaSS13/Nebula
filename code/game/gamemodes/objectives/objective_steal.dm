@@ -6,7 +6,7 @@
 
 /datum/objective/steal/find_target()
 
-	var/list/possible_items = GLOB.using_map.get_theft_targets() | GLOB.using_map.get_special_theft_targets()
+	var/list/possible_items = global.using_map.get_theft_targets() | global.using_map.get_special_theft_targets()
 	if(!length(possible_items))
 		return
 	theft_name = pick(possible_items)

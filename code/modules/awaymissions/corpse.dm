@@ -35,7 +35,7 @@
 
 /obj/effect/landmark/corpse/Initialize()
 	..()
-	if(!species) species = GLOB.using_map.default_species
+	if(!species) species = global.using_map.default_species
 	var/species_choice = islist(species) ? pickweight(species) : species 
 	new /mob/living/carbon/human/corpse(loc, species_choice, src)
 	return INITIALIZE_HINT_QDEL

@@ -28,24 +28,24 @@
 		var/bad_msg = "--------------- [A.name]([A.type])"
 
 		var/exemptions = get_exemptions(A)
-		if(!A.apc && !(exemptions & GLOB.using_map.NO_APC))
+		if(!A.apc && !(exemptions & global.using_map.NO_APC))
 			log_bad("[bad_msg] lacks an APC.")
 			area_good = 0
-		else if(A.apc && (exemptions & GLOB.using_map.NO_APC))
+		else if(A.apc && (exemptions & global.using_map.NO_APC))
 			log_bad("[bad_msg] is not supposed to have an APC.")
 			area_good = 0
 
-		if(!A.air_scrub_names.len && !(exemptions & GLOB.using_map.NO_SCRUBBER))
+		if(!A.air_scrub_names.len && !(exemptions & global.using_map.NO_SCRUBBER))
 			log_bad("[bad_msg] lacks an air scrubber.")
 			area_good = 0
-		else if(A.air_scrub_names.len && (exemptions & GLOB.using_map.NO_SCRUBBER))
+		else if(A.air_scrub_names.len && (exemptions & global.using_map.NO_SCRUBBER))
 			log_bad("[bad_msg] is not supposed to have an air scrubber.")
 			area_good = 0
 
-		if(!A.air_vent_names.len && !(exemptions & GLOB.using_map.NO_VENT))
+		if(!A.air_vent_names.len && !(exemptions & global.using_map.NO_VENT))
 			log_bad("[bad_msg] lacks an air vent.[ascii_reset]")
 			area_good = 0
-		else if(A.air_vent_names.len && (exemptions & GLOB.using_map.NO_VENT))
+		else if(A.air_vent_names.len && (exemptions & global.using_map.NO_VENT))
 			log_bad("[bad_msg] is not supposed to have an air vent.")
 			area_good = 0
 
@@ -61,10 +61,10 @@
 
 /datum/unit_test/apc_area_test/proc/get_exemptions(var/area)
 	// We assume deeper types come last
-	for(var/i = GLOB.using_map.apc_test_exempt_areas.len; i>0; i--)
-		var/exempt_type = GLOB.using_map.apc_test_exempt_areas[i]
+	for(var/i = global.using_map.apc_test_exempt_areas.len; i>0; i--)
+		var/exempt_type = global.using_map.apc_test_exempt_areas[i]
 		if(istype(area, exempt_type))
-			return GLOB.using_map.apc_test_exempt_areas[exempt_type]
+			return global.using_map.apc_test_exempt_areas[exempt_type]
 
 /datum/unit_test/air_alarm_connectivity
 	name = "MAP: Air alarms shall receive updates."
@@ -245,12 +245,12 @@
 /datum/unit_test/map_image_map_test/start_test()
 	var/failed = FALSE
 
-	for(var/z in GLOB.using_map.map_levels)
+	for(var/z in global.using_map.map_levels)
 		var/file_name = map_image_file_name(z)
 		var/file_path = MAP_IMAGE_PATH + file_name
 		if(!fexists(file_path))
 			failed = TRUE
-			log_unit_test("[GLOB.using_map.path]-[z] is missing its map image [file_name].")
+			log_unit_test("[global.using_map.path]-[z] is missing its map image [file_name].")
 
 	if(failed)
 		fail("One or more map levels were missing a corresponding map image.")
@@ -267,7 +267,7 @@
 /datum/unit_test/correct_allowed_spawn_test/start_test()
 	var/failed = FALSE
 
-	for(var/spawn_name in GLOB.using_map.allowed_spawns)
+	for(var/spawn_name in global.using_map.allowed_spawns)
 		var/datum/spawnpoint/spawnpoint = spawntypes()[spawn_name]
 		if(!spawnpoint)
 			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] is null!")
@@ -281,7 +281,7 @@
 		for(var/spawnpoint in spawntypes())
 			log_unit_test("\t[spawnpoint] ([any2ref(spawnpoint)])")
 		log_unit_test("Following spawn points are allowed:")
-		for(var/spawnpoint in GLOB.using_map.allowed_spawns)
+		for(var/spawnpoint in global.using_map.allowed_spawns)
 			log_unit_test("\t[spawnpoint] ([any2ref(spawnpoint)])")
 		fail("Some of the entries in allowed_spawns have no spawnpoint turfs.")
 	else

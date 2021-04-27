@@ -110,7 +110,7 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 		pref.b_type = RANDOM_BLOOD_TYPE
 
 	if(!pref.species || !(pref.species in get_playable_species()))
-		pref.species = GLOB.using_map.default_species
+		pref.species = global.using_map.default_species
 
 	var/decl/species/mob_species = get_species_by_key(pref.species)
 

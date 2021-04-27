@@ -470,7 +470,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		new_character.mind.special_verbs = list()
 	else
 		new_character.mind_initialize()
-	if(!new_character.mind.assigned_role)	new_character.mind.assigned_role = GLOB.using_map.default_assistant_title//If they somehow got a null assigned role.
+	if(!new_character.mind.assigned_role)	new_character.mind.assigned_role = global.using_map.default_assistant_title//If they somehow got a null assigned role.
 
 	//DNA
 	new_character.dna.ready_dna(new_character)
@@ -575,9 +575,9 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	switch(alert("Should this be announced to the general population?",,"Yes","No"))
 		if("Yes")
-			command_announcement.Announce(input, customname, new_sound = GLOB.using_map.command_report_sound, msg_sanitized = 1);
+			command_announcement.Announce(input, customname, new_sound = global.using_map.command_report_sound, msg_sanitized = 1);
 		if("No")
-			minor_announcement.Announce(message = "New [GLOB.using_map.company_name] Update available at all communication consoles.")
+			minor_announcement.Announce(message = "New [global.using_map.company_name] Update available at all communication consoles.")
 
 	log_admin("[key_name(src)] has created a command report: [input]")
 	message_admins("[key_name_admin(src)] has created a command report", 1)
