@@ -58,7 +58,6 @@
 				. = "0" + .
 		i++
 
-
 /proc/text2numlist(text, delimiter="\n")
 	var/list/num_list = list()
 	for(var/x in splittext(text, delimiter))
@@ -66,8 +65,8 @@
 	return num_list
 
 // Splits the text of a file at seperator and returns them in a list.
-/proc/file2list(filename, seperator="\n")
-	return splittext(return_file_text(filename),seperator)
+/proc/file2list(filename, seperator = "\n")
+	return splittext(safe_file2text(filename), seperator)
 
 // Turns a direction into text
 /proc/num2dir(direction)
@@ -242,10 +241,6 @@
 /proc/atomtype2nameassoclist(var/atom_type)
 	return atomtypes2nameassoclist(typesof(atom_type))
 
-//Splits the text of a file at seperator and returns them in a list.
-/world/proc/file2list(filename, seperator="\n")
-	return splittext(file2text(filename), seperator)
-
 /proc/str2hex(str)
 	if(!istext(str)||!str)
 		return
@@ -269,3 +264,17 @@
 			return null
 		r += ascii2text(c)
 	return r
+
+//checks if a file exists and contains text
+//returns text as a string if these conditions are met
+/proc/safe_file2text(filename, error_on_invalid_return = TRUE)
+	try
+		if(fexists(filename))
+			. = file2text(filename)
+			if(!. && error_on_invalid_return)
+				error("File empty ([filename])")
+		else if(error_on_invalid_return)
+			error("File not found ([filename])")
+	catch(var/exception/E)
+		if(error_on_invalid_return)
+			error("Exception when loading file as string: [E]")

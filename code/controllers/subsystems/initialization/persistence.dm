@@ -17,11 +17,11 @@ SUBSYSTEM_DEF(persistence)
 		P.Initialize()
 
 	// Begin snowflake.
-	if(fexists(elevator_fall_path))
-		try
-			elevator_fall_shifts = text2num(file2text(elevator_fall_path))
-		catch()
-			elevator_fall_shifts = initial(elevator_fall_shifts)
+	var/elevator_file = safe_file2text(elevator_fall_path, FALSE)
+	if(elevator_file)
+		elevator_fall_shifts = text2num(elevator_file)
+	else
+		elevator_fall_shifts = initial(elevator_fall_shifts)
 	if(isnull(elevator_fall_shifts))
 		elevator_fall_shifts = initial(elevator_fall_shifts)
 	elevator_fall_shifts++

@@ -932,7 +932,6 @@ var/list/gamemode_cache = list()
 	return runnable_modes
 
 /datum/configuration/proc/load_event(filename)
-	var/event_info = file2text(filename)
-
-	if (event_info)
+	var/event_info = safe_file2text(filename, FALSE)
+	if(event_info)
 		custom_event_msg = event_info

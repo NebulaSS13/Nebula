@@ -466,7 +466,7 @@ var/world_topic_last = world.timeofday
 	if(!fexists("data/mode.txt"))
 		return
 
-	var/list/Lines = file2list("data/mode.txt")
+	var/list/Lines = file2list("data/mode.txt", FALSE)
 	if(Lines.len)
 		if(Lines[1])
 			SSticker.master_mode = Lines[1]
@@ -482,8 +482,7 @@ var/world_topic_last = world.timeofday
 	return 1
 
 /world/proc/load_motd()
-	join_motd = file2text("config/motd.txt")
-
+	join_motd = safe_file2text("config/motd.txt", FALSE)
 
 /proc/load_configuration()
 	config = new /datum/configuration()
@@ -498,7 +497,7 @@ var/world_topic_last = world.timeofday
 
 /world/proc/load_mods()
 	if(config.admin_legacy_system)
-		var/text = file2text("config/moderators.txt")
+		var/text = safe_file2text("config/moderators.txt", FALSE)
 		if (!text)
 			error("Failed to load config/mods.txt")
 		else
