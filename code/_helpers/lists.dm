@@ -637,7 +637,7 @@ proc/dd_sortedObjectList(list/incoming)
 		if(A.type == T)
 			return A
 
-var/list/json_cache = list()
+var/global/list/json_cache = list()
 /proc/cached_json_decode(var/json_to_decode)
 	if(!json_to_decode || !length(json_to_decode))
 		return list()

@@ -1,7 +1,7 @@
 #define SAVE_RESET -1
 
 /* PLACEHOLDER VERB UNTIL SAVE INIT (or whatever the issue is) IS FIXED */
-var/list/time_prefs_fixed = list()
+var/global/list/time_prefs_fixed = list()
 /client/verb/fix_preferences()
 	set name = "Reload Preferences"
 	set category = "OOC"
@@ -417,7 +417,7 @@ var/list/time_prefs_fixed = list()
 	set waitfor = 0
 	if(!client)
 		return
-	if(client.get_preference_value(/datum/client_preference/chat_position) == global.PREF_YES)
+	if(client.get_preference_value(/datum/client_preference/chat_position) == PREF_YES)
 		client.update_chat_position(TRUE)
-	if(client.get_preference_value(/datum/client_preference/fullscreen_mode) != global.PREF_OFF)
+	if(client.get_preference_value(/datum/client_preference/fullscreen_mode) != PREF_OFF)
 		client.toggle_fullscreen(client.get_preference_value(/datum/client_preference/fullscreen_mode))

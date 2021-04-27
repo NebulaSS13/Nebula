@@ -3,8 +3,8 @@
 //////////////////////////////////////////////////////////////
 
 //global datum that will preload variables on atoms instanciation
-var/use_preloader = FALSE
-var/dmm_suite/preloader/_preloader = new
+var/global/use_preloader = FALSE
+var/global/dmm_suite/preloader/_preloader = new
 
 /datum/map_load_metadata
 	var/bounds

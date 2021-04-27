@@ -10,7 +10,7 @@
 
 /obj/item/cable_painter/Initialize()
 	. = ..()
-	color_selection = pick(GetCableColors())
+	color_selection = pick(get_global_cable_colors())
 
 /obj/item/cable_painter/examine(mob/user, distance)
 	. = ..()
@@ -18,7 +18,7 @@
 		to_chat(user, "The color is currently set to [lowertext(color_selection)].")
 
 /obj/item/cable_painter/attack_self(mob/user)
-	var/new_color_selection = input("What color would you like to use?", "Choose a Color", color_selection) as null|anything in GetCableColors()
+	var/new_color_selection = input("What color would you like to use?", "Choose a Color", color_selection) as null|anything in get_global_cable_colors()
 	if(new_color_selection && !user.incapacitated() && (src in user))
 		color_selection = new_color_selection
 		to_chat(user, "<span class='notice'>You change the paint mode to [lowertext(color_selection)].</span>")
@@ -27,7 +27,7 @@
 	if(!proximity)
 		return ..()
 	if(istype(A, /obj/structure/cable))
-		var/list/possible_cable_colours = GetCableColors()
+		var/list/possible_cable_colours = get_global_cable_colors()
 		var/picked_color = possible_cable_colours[color_selection]
 		if(!picked_color || A.color == picked_color)
 			return

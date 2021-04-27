@@ -1,4 +1,4 @@
-var/default_gyne
+var/global/default_gyne
 
 /decl/ghosttrap/kharmaani_egg
 	name = "mantid nymph"

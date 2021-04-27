@@ -90,13 +90,13 @@
 				line += " - Playing"
 			if(C.is_stealthed())
 				line += " (Stealthed)"
-			if(C.get_preference_value(/datum/client_preference/show_ooc) == global.PREF_HIDE)
+			if(C.get_preference_value(/datum/client_preference/show_ooc) == PREF_HIDE)
 				line += " <font color='#002eb8'><b><s>(OOC)</s></b></font>"
-			if(C.get_preference_value(/datum/client_preference/show_looc) == global.PREF_HIDE)
+			if(C.get_preference_value(/datum/client_preference/show_looc) == PREF_HIDE)
 				line += " <font color='#3a9696'><b><s>(LOOC)</s></b></font>"
-			if(C.get_preference_value(/datum/client_preference/show_aooc) == global.PREF_HIDE)
+			if(C.get_preference_value(/datum/client_preference/show_aooc) == PREF_HIDE)
 				line += " <font color='#960018'><b><s>(AOOC)</s></b></font>"
-			if(C.get_preference_value(/datum/client_preference/show_dsay) == global.PREF_HIDE)
+			if(C.get_preference_value(/datum/client_preference/show_dsay) == PREF_HIDE)
 				line += " <font color='#530fad'><b><s>(DSAY)</s></b></font>"
 		line = jointext(line,null)
 		if(check_rights(R_ADMIN,0,C))

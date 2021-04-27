@@ -303,7 +303,7 @@
 
 // If all of these flags are present, it should come out at exactly 1. Yes, this
 // is horrible. TODO: unify coverage flags with limbs and use organ_rel_size.
-var/list/bodypart_coverage_cache = list()
+var/global/list/bodypart_coverage_cache = list()
 
 /proc/get_percentage_body_cover(var/checking_flags)
 	var/key = "[checking_flags]"

@@ -1,4 +1,4 @@
-var/repository/sound_channels/sound_channels = new
+var/global/repository/sound_channels/sound_channels = new
 
 /repository/sound_channels
 	var/datum/stack/available_channels

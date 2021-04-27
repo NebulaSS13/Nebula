@@ -1,4 +1,4 @@
-var/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
+var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship
 	name = "generic ship"

@@ -1,4 +1,4 @@
-var/list/trading_hub_names = list()
+var/global/list/trading_hub_names = list()
 
 /obj/effect/overmap/trade_hub
 	name = "trading post"

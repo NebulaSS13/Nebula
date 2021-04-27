@@ -13,7 +13,7 @@
 	applies_material_colour = TRUE
 	drop_sound = 'sound/foley/singletooldrop2.ogg'
 
-	var/global/valid_colours = list(COLOR_RED, COLOR_CYAN_BLUE, COLOR_PURPLE, COLOR_CHESTNUT, COLOR_ASSEMBLY_YELLOW, COLOR_BOTTLE_GREEN)
+	var/static/valid_colours = list(COLOR_RED, COLOR_CYAN_BLUE, COLOR_PURPLE, COLOR_CHESTNUT, COLOR_ASSEMBLY_YELLOW, COLOR_BOTTLE_GREEN)
 	var/handle_color
 
 /obj/item/screwdriver/Initialize()

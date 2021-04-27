@@ -1,1 +1,1 @@
-var/list/ruin_landmarks = list()
+var/global/list/ruin_landmarks = list()

@@ -1,4 +1,4 @@
-var/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
+var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 
 /datum/preferences
 	var/clientfps = 0

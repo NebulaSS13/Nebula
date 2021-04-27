@@ -1,4 +1,4 @@
-var/list/symbiote_starting_points = list()
+var/global/list/symbiote_starting_points = list()
 
 /decl/cultural_info/culture/symbiotic
 	name = "Symbiote Host"

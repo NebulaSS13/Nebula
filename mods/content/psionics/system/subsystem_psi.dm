@@ -1,4 +1,4 @@
-var/list/psychic_ranks_to_strings = list("Latent", "Operant", "Masterclass", "Grandmasterclass", "Paramount"))
+var/global/list/psychic_ranks_to_strings = list("Latent", "Operant", "Masterclass", "Grandmasterclass", "Paramount")
 
 PROCESSING_SUBSYSTEM_DEF(psi)
 	name = "Psychics"

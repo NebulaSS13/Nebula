@@ -314,7 +314,7 @@
 	icon = 'icons/obj/hydroponics/hydroponics_misc.dmi'
 	icon_state = ""
 
-var/list/fruit_icon_cache = list()
+var/global/list/fruit_icon_cache = list()
 
 /obj/item/chems/food/snacks/fruit_slice/Initialize(mapload, var/datum/seed/S)
 	. = ..(mapload)

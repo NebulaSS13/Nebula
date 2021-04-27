@@ -1,7 +1,7 @@
-var/list/allfaxes = list()
-var/list/alldepartments = list()
+var/global/list/allfaxes = list()
+var/global/list/alldepartments = list()
 
-var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
+var/global/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 /obj/machinery/photocopier/faxmachine
 	name = "fax machine"

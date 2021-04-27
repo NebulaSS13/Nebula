@@ -19,10 +19,10 @@ if(!click_handlers) { \
 		hattable.hat = null
 	. = ..()
 
-var/const/CLICK_HANDLER_NONE                 = BITFLAG(0)
-var/const/CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT = BITFLAG(1)
-var/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = BITFLAG(2)
-var/const/CLICK_HANDLER_ALL                  = (CLICK_HANDLER_NONE|CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT|CLICK_HANDLER_REMOVE_IF_NOT_TOP)
+var/global/const/CLICK_HANDLER_NONE                 = BITFLAG(0)
+var/global/const/CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT = BITFLAG(1)
+var/global/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = BITFLAG(2)
+var/global/const/CLICK_HANDLER_ALL                  = (CLICK_HANDLER_NONE|CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT|CLICK_HANDLER_REMOVE_IF_NOT_TOP)
 
 /datum/click_handler
 	var/mob/user

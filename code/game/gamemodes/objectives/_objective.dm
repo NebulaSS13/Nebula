@@ -1,4 +1,4 @@
-var/list/all_objectives = list()
+var/global/list/all_objectives = list()
 
 /datum/objective
 	var/datum/mind/owner             //Who owns the objective.

@@ -1,4 +1,4 @@
-var/list/all_warrants
+var/global/list/all_warrants
 
 /datum/computer_file/program/digitalwarrant
 	filename = "digitalwarrant"

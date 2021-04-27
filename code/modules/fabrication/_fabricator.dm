@@ -43,7 +43,7 @@
 	var/fab_status_flags = 0
 	var/mat_efficiency = 1.1
 	var/build_time_multiplier = 1
-	var/global/list/stored_substances_to_names = list()
+	var/static/list/stored_substances_to_names = list()
 
 	var/list/design_cache = list()
 	var/list/installed_designs

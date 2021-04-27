@@ -1,5 +1,5 @@
-var/list/registered_weapons = list()
-var/list/registered_cyborg_weapons = list()
+var/global/list/registered_weapons = list()
+var/global/list/registered_cyborg_weapons = list()
 
 /obj/item/gun/energy
 	name = "energy gun"

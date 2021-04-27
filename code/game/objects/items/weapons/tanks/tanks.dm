@@ -1,6 +1,6 @@
 #define TANK_IDEAL_PRESSURE 1015 //Arbitrary.
 
-var/tank_bomb_severity = 1
+var/global/tank_bomb_severity = 1
 #define TANK_BOMB_DVSTN_FACTOR (0.15 * global.tank_bomb_severity)
 #define TANK_BOMB_HEAVY_FACTOR (0.35 * global.tank_bomb_severity)
 #define TANK_BOMB_LIGHT_FACTOR (0.80 * global.tank_bomb_severity)
@@ -17,7 +17,7 @@ var/tank_bomb_severity = 1
 			global.tank_bomb_severity = Clamp(next_input, 0, MAX_TANK_BOMB_SEVERITY)
 			log_and_message_admins("[key_name_admin(mob)] has set the tank bomb severity value to [global.tank_bomb_severity].", mob)
 
-var/list/global/tank_gauge_cache = list()
+var/global/list/global/tank_gauge_cache = list()
 
 /obj/item/tank
 	name = "tank"

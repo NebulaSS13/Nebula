@@ -4,24 +4,24 @@
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
 var/global/list/landmarks_list = list()				//list of all landmarks created
 var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
-var/list/mannequins_
+var/global/list/mannequins_
 
 // Uplinks
-var/list/obj/item/uplink/world_uplinks = list()
+var/global/list/obj/item/uplink/world_uplinks = list()
 
 //Preferences stuff
 //Hairstyles
-var/list/hair_styles_list = list()        //stores /datum/sprite_accessory/hair indexed by name
-var/list/facial_hair_styles_list = list() //stores /datum/sprite_accessory/facial_hair indexed by name
+var/global/list/hair_styles_list = list()        //stores /datum/sprite_accessory/hair indexed by name
+var/global/list/facial_hair_styles_list = list() //stores /datum/sprite_accessory/facial_hair indexed by name
 
 var/global/list/skin_styles_female_list = list()		//unused
-var/list/body_marking_styles_list = list()		//stores /datum/sprite_accessory/marking indexed by name
+var/global/list/body_marking_styles_list = list()		//stores /datum/sprite_accessory/marking indexed by name
 
-var/datum/category_collection/underwear/underwear = new()
+var/global/datum/category_collection/underwear/underwear = new()
 
 // Visual nets
-var/list/datum/visualnet/visual_nets = list()
-var/datum/visualnet/camera/cameranet = new()
+var/global/list/datum/visualnet/visual_nets = list()
+var/global/datum/visualnet/camera/cameranet = new()
 
 // Runes
 var/global/list/rune_list = new()
@@ -94,8 +94,8 @@ var/global/list/string_slot_flags = list(
 	return 1
 
 // This is all placeholder procs for an eventual PR to change them to use decls.
-var/list/all_species = list()
-var/list/playable_species = list() // A list of ALL playable species, whitelisted, latejoin or otherwise.
+var/global/list/all_species = list()
+var/global/list/playable_species = list() // A list of ALL playable species, whitelisted, latejoin or otherwise.
 /proc/build_species_lists()
 	global.all_species.Cut()
 	global.playable_species.Cut()

@@ -4,7 +4,7 @@
 	if(!client)
 		return
 
-	if(speaker && !speaker.client && isghost(src) && get_preference_value(/datum/client_preference/ghost_ears) == global.PREF_ALL_SPEECH && !(speaker in view(src)))
+	if(speaker && !speaker.client && isghost(src) && get_preference_value(/datum/client_preference/ghost_ears) == PREF_ALL_SPEECH && !(speaker in view(src)))
 			//Does the speaker have a client?  It's either random stuff that observers won't care about (Experiment 97B says, 'EHEHEHEHEHEHEHE')
 			//Or someone snoring.  So we make it where they won't hear it.
 		return
@@ -61,7 +61,7 @@
 		if(speaker_name != speaker.real_name && speaker.real_name)
 			speaker_name = "[speaker.real_name] ([speaker_name])"
 		track = "([ghost_follow_link(speaker, src)]) "
-		if(get_preference_value(/datum/client_preference/ghost_ears) == global.PREF_ALL_SPEECH && (speaker in view(src)))
+		if(get_preference_value(/datum/client_preference/ghost_ears) == PREF_ALL_SPEECH && (speaker in view(src)))
 			message = "<b>[message]</b>"
 
 	if(is_deaf() || get_sound_volume_multiplier() < 0.2)
@@ -81,11 +81,11 @@
 					skip = L.default_language == language
 				if (!skip)
 					switch(src.get_preference_value(/datum/client_preference/language_display))
-						if(global.PREF_FULL) // Full language name
+						if(PREF_FULL) // Full language name
 							nverb = "[verb] in [language.name]"
-						if(global.PREF_SHORTHAND) //Shorthand codes
+						if(PREF_SHORTHAND) //Shorthand codes
 							nverb = "[verb] ([language.shorthand])"
-						if(global.PREF_OFF)//Regular output
+						if(PREF_OFF)//Regular output
 							nverb = verb
 			on_hear_say("<span class='game say'>[track]<span class='name'>[speaker_name]</span>[alt_name] [language.format_message(message, nverb)]</span>")
 		else
@@ -215,11 +215,11 @@
 				skip = L.default_language == language
 			if (!skip)
 				switch(src.get_preference_value(/datum/client_preference/language_display))
-					if (global.PREF_FULL)
+					if (PREF_FULL)
 						nverb = "[verb] in [language.name]"
-					if(global.PREF_SHORTHAND)
+					if(PREF_SHORTHAND)
 						nverb = "[verb] ([language.shorthand])"
-					if(global.PREF_OFF)
+					if(PREF_OFF)
 						nverb = verb
 		formatted = language.format_message_radio(message, nverb)
 	else
@@ -258,11 +258,11 @@
 	if(say_understands(speaker, language))
 		var/nverb = null
 		switch(src.get_preference_value(/datum/client_preference/language_display))
-			if(global.PREF_FULL) // Full language name
+			if(PREF_FULL) // Full language name
 				nverb = "[verb] in [language.name]"
-			if(global.PREF_SHORTHAND) //Shorthand codes
+			if(PREF_SHORTHAND) //Shorthand codes
 				nverb = "[verb] ([language.shorthand])"
-			if(global.PREF_OFF)//Regular output
+			if(PREF_OFF)//Regular output
 				nverb = verb
 		message = "<B>[speaker]</B> [nverb], \"[message]\""
 	else

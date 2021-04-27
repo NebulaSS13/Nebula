@@ -1,13 +1,13 @@
-var/list/combatlog = list()
-var/list/IClog     = list()
-var/list/OOClog    = list()
-var/list/adminlog  = list()
+var/global/list/combatlog = list()
+var/global/list/IClog     = list()
+var/global/list/OOClog    = list()
+var/global/list/adminlog  = list()
 
-var/datum/configuration/config = null
-var/list/jobMax = list()
+var/global/datum/configuration/config = null
+var/global/list/jobMax = list()
 
-var/diary = null
+var/global/diary = null
 
-var/log_directory
-var/world_qdel_log
-var/world_href_log
+var/global/log_directory
+var/global/world_qdel_log
+var/global/world_href_log

@@ -3,7 +3,7 @@
 #define CREDIT_ANIMATE_HEIGHT (14 * world.icon_size)
 #define CREDIT_EASE_DURATION 22
 
-var/list/end_titles
+var/global/list/end_titles
 
 /client
 	var/list/credits
@@ -11,7 +11,7 @@ var/list/end_titles
 /client/proc/RollCredits()
 	set waitfor = FALSE
 
-	if(get_preference_value(/datum/client_preference/show_credits) != global.PREF_YES)
+	if(get_preference_value(/datum/client_preference/show_credits) != PREF_YES)
 		return
 
 	if(!global.end_titles)
@@ -23,12 +23,12 @@ var/list/end_titles
 		mob.overlay_fullscreen("fishbed",/obj/screen/fullscreen/fishbed)
 		mob.overlay_fullscreen("fadeout",/obj/screen/fullscreen/fadeout)
 
-		if(mob.get_preference_value(/datum/client_preference/play_lobby_music) == global.PREF_YES)
+		if(mob.get_preference_value(/datum/client_preference/play_lobby_music) == PREF_YES)
 			sound_to(mob, sound(null, channel = sound_channels.lobby_channel))
 			if(global.end_credits_song == null)
 				if(global.using_map.credit_sound)
 					sound_to(mob, sound(pick(global.using_map.credit_sound), wait = 0, volume = 40, channel = sound_channels.lobby_channel))
-			else if(get_preference_value(/datum/client_preference/play_admin_midis) == global.PREF_YES)
+			else if(get_preference_value(/datum/client_preference/play_admin_midis) == PREF_YES)
 				sound_to(mob, sound(global.end_credits_song, wait = 0, volume = 40, channel = sound_channels.lobby_channel))
 	sleep(50)
 	var/list/_credits = credits
@@ -119,7 +119,7 @@ var/list/end_titles
 				used_name = "[rank.name_short] [used_name]"
 		var/showckey = 0
 		if(H.ckey && H.client)
-			if(H.client.get_preference_value(/datum/client_preference/show_ckey_credits) == global.PREF_SHOW)
+			if(H.client.get_preference_value(/datum/client_preference/show_ckey_credits) == PREF_SHOW)
 				showckey = 1
 		var/decl/cultural_info/actor_culture = GET_DECL(H.get_cultural_value(TAG_CULTURE))
 		if(!actor_culture || !(H.species.spawn_flags & SPECIES_CAN_JOIN) || prob(10))

@@ -1,4 +1,4 @@
-var/visibility_pref = FALSE
+var/global/visibility_pref = FALSE
 
 /world
 /* This page contains info for the hub. To allow your server to be visible on the hub, update the entry in the config.

@@ -43,7 +43,7 @@
 /decl/dsay_communication/proc/can_receive(var/client/C, var/mob/M)
 	if(istype(C) && C.mob == M)
 		return TRUE
-	if(M.get_preference_value(/datum/client_preference/show_dsay) == global.PREF_HIDE)
+	if(M.get_preference_value(/datum/client_preference/show_dsay) == PREF_HIDE)
 		return FALSE
 	if(istype(C) && M.is_key_ignored(C.key))
 		return FALSE
@@ -74,7 +74,7 @@
 
 	var/lname
 	var/mob/observer/ghost/DM
-	var/anon_say_pref = (C.get_preference_value(/datum/client_preference/anon_say) == global.PREF_YES)
+	var/anon_say_pref = (C.get_preference_value(/datum/client_preference/anon_say) == PREF_YES)
 	if(isghost(C.mob))
 		DM = C.mob
 	if(M.client.holder) 							// What admins see

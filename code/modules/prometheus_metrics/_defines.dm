@@ -1,4 +1,4 @@
-var/list/prometheus_metric_names = list("counter", "gauge")
+var/global/list/prometheus_metric_names = list("counter", "gauge")
 
 #define PROMETHEUS_METRIC_COUNTER 0
 #define PROMETHEUS_METRIC_GAUGE 1

@@ -1,5 +1,5 @@
 // Thanks to Burger from Burgerstation for the foundation for this
-var/list/floating_chat_colors = list()
+var/global/list/floating_chat_colors = list()
 
 /atom/movable
 	var/list/stored_chat_text
@@ -36,7 +36,7 @@ var/list/floating_chat_colors = list()
 	var/image/gibberish = language ? generate_floating_text(src, language.scramble(message), style, fontsize, duration, show_to) : understood
 
 	for(var/client/C in show_to)
-		if(!C.mob.is_deaf() && C.get_preference_value(/datum/client_preference/floating_messages) == global.PREF_SHOW)
+		if(!C.mob.is_deaf() && C.get_preference_value(/datum/client_preference/floating_messages) == PREF_SHOW)
 			if(C.mob.say_understands(null, language))
 				C.images += understood
 			else

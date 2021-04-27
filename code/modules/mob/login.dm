@@ -50,7 +50,7 @@
 /mob/proc/send_staffwarn(var/client/C, var/action, var/noise = 1)
 	if(check_rights((R_ADMIN|R_MOD),0,C))
 		to_chat(C,"<span class='staffwarn'>StaffWarn: [client.ckey] [action]</span><br><span class='notice'>[client.staffwarn]</span>")
-		if(noise && C.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == global.PREF_HEAR)
+		if(noise && C.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == PREF_HEAR)
 			sound_to(C, 'sound/effects/adminhelp.ogg')
 
 /mob
@@ -110,7 +110,7 @@
 				var/spell/S = screen.spell
 				mind.learned_spells |= S
 
-	if(get_preference_value(/datum/client_preference/show_status_markers) == global.PREF_SHOW)
+	if(get_preference_value(/datum/client_preference/show_status_markers) == PREF_SHOW)
 		if(status_markers)
 			client.images |= status_markers.mob_image_personal
 		for(var/datum/status_marker_holder/marker as anything in global.status_marker_holders)

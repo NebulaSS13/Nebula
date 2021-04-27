@@ -1,7 +1,7 @@
 /datum/ailment/fault/leaky
 	name = "leaky prosthetic"
 	diagnosis_string = "$USER_HIS$ $ORGAN$ is leaking some kind of chemical."
-	var/global/list/chemicals = list(
+	var/static/list/chemicals = list(
 		/decl/material/liquid/enzyme,
 		/decl/material/liquid/frostoil,
 		/decl/material/liquid/nanitefluid

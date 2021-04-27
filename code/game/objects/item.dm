@@ -413,7 +413,7 @@
 				addtimer(CALLBACK(src, .proc/pickup_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 
 //Defines which slots correspond to which slot flags
-var/list/slot_flags_enumeration = list(
+var/global/list/slot_flags_enumeration = list(
 	"[slot_wear_mask_str]" = SLOT_FACE,
 	"[slot_back_str]" = SLOT_BACK,
 	"[slot_wear_suit_str]" = SLOT_OVER_BODY,
@@ -695,7 +695,7 @@ var/list/slot_flags_enumeration = list(
 	add_coating(/decl/material/liquid/blood, amount, blood_data)
 	return 1 //we applied blood to the item
 
-var/list/blood_overlay_cache = list()
+var/global/list/blood_overlay_cache = list()
 
 /obj/item/proc/generate_blood_overlay(force = FALSE)
 	if(blood_overlay && !force)

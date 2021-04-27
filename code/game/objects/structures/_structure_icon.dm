@@ -1,5 +1,5 @@
-var/list/default_blend_objects = list(/obj/machinery/door, /turf/simulated/wall)
-var/list/default_noblend_objects = list(/obj/machinery/door/window, /obj/machinery/door/firedoor, /obj/machinery/door/blast)
+var/global/list/default_blend_objects = list(/obj/machinery/door, /turf/simulated/wall)
+var/global/list/default_noblend_objects = list(/obj/machinery/door/window, /obj/machinery/door/firedoor, /obj/machinery/door/blast)
 
 /obj/structure
 	var/handle_generic_blending

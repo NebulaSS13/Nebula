@@ -1,4 +1,4 @@
-var/datum/holiday/current_holiday
+var/global/datum/holiday/current_holiday
 
 /datum/holiday
 	var/name

@@ -1,4 +1,4 @@
-var/list/crashed_pod_areas = list()
+var/global/list/crashed_pod_areas = list()
 
 /datum/map_template/ruin/exoplanet/crashed_pod
 	name = "crashed survival pod"

@@ -1,4 +1,4 @@
-var/list/gamemode_cache = list()
+var/global/list/gamemode_cache = list()
 
 /datum/configuration
 	var/server_name = "Nebula 13"		// server name (for world name / status)

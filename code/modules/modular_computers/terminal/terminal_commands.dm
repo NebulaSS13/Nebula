@@ -1,5 +1,5 @@
 // To cut down on unneeded creation/deletion, these are global.
-var/list/terminal_commands
+var/global/list/terminal_commands
 /proc/get_terminal_commands()
 	if(!global.terminal_commands)
 		global.terminal_commands = init_subtypes(/datum/terminal_command)
@@ -16,7 +16,7 @@ var/list/terminal_commands
 	var/req_access = list()               // Stores access needed, if any
 	var/needs_network					  // If this command fails if computer running terminal isn't connected to a network
 
-	var/global/regex/nid_regex			  // Regex for getting network addres out of the line
+	var/static/regex/nid_regex			  // Regex for getting network addres out of the line
 
 /datum/terminal_command/New()
 	regex = new (pattern, regex_flags)

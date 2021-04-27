@@ -1,4 +1,4 @@
-var/repository/atom_info/atom_info_repository = new()
+var/global/repository/atom_info/atom_info_repository = new()
 
 /repository/atom_info
 	var/list/matter_cache =         list()

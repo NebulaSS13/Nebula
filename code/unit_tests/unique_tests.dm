@@ -6,7 +6,7 @@
 	var/list/colors = list()
 
 	var/index = 0
-	var/list/possible_cable_colours = GetCableColors()
+	var/list/possible_cable_colours = get_global_cable_colors()
 	for(var/color_name in possible_cable_colours)
 		group_by(names, color_name, index)
 		group_by(colors, possible_cable_colours[color_name], index)

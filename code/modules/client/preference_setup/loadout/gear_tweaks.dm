@@ -377,7 +377,7 @@
 * Custom name
 */
 
-var/datum/gear_tweak/custom_name/gear_tweak_free_name = new()
+var/global/datum/gear_tweak/custom_name/gear_tweak_free_name = new()
 
 /datum/gear_tweak/custom_name
 	var/list/valid_custom_names
@@ -405,7 +405,7 @@ var/datum/gear_tweak/custom_name/gear_tweak_free_name = new()
 * Custom description
 */
 
-var/datum/gear_tweak/custom_desc/gear_tweak_free_desc = new()
+var/global/datum/gear_tweak/custom_desc/gear_tweak_free_desc = new()
 
 /datum/gear_tweak/custom_desc
 	var/list/valid_custom_desc

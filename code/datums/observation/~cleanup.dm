@@ -1,6 +1,6 @@
-var/list/global_listen_count = list()
-var/list/event_sources_count = list()
-var/list/event_listen_count = list()
+var/global/list/global_listen_count = list()
+var/global/list/event_sources_count = list()
+var/global/list/event_listen_count = list()
 
 /proc/cleanup_events(var/source)
 	if(global.global_listen_count && global.global_listen_count[source])

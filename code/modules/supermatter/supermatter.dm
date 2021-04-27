@@ -26,7 +26,7 @@
 
 #define LIGHT_POWER_CALC (max(power / 50, 1))
 
-var/list/supermatter_final_thoughts = list(
+var/global/list/supermatter_final_thoughts = list(
 	"Oh, fuck.",
 	"That was not a wise decision."
 )

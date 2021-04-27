@@ -11,7 +11,7 @@
 
 /datum/nano_module/program/network_monitor
 	name = "Network Diagnostics and Monitoring"
-	var/global/list/all_network_features = list(
+	var/static/list/all_network_features = list(
 		"Software Download" = NETWORK_SOFTWAREDOWNLOAD,
 		"Communication Systems" = NETWORK_COMMUNICATION,
 		"Remote System Control" = NETWORK_SYSTEMCONTROL

@@ -11,7 +11,7 @@
 	action_button_desc = "Allows you to choose state for your monitor"
 
 	var/monitor_state_index = "blank"
-	var/global/list/monitor_states = list(
+	var/static/list/monitor_states = list(
 		"blank" =    "ipc_blank",
 		"pink" =     "ipc_pink",
 		"red" =      "ipc_red",

@@ -2,7 +2,7 @@
 // changes. In the long term this should be removed after 
 // all the `slot_l/r_hand-foo` states are renamed to just 
 // `l/r_hand-foo`. TODO: check if this is still here in 2025.
-var/list/bodypart_to_slot_lookup_table = list(
+var/global/list/bodypart_to_slot_lookup_table = list(
 	BP_L_HAND = "slot_l_hand",
 	BP_R_HAND = "slot_r_hand"
 )
@@ -22,7 +22,7 @@ var/list/bodypart_to_slot_lookup_table = list(
 // Cached cause asking icons is expensive. This is still expensive, so avoid using it if
 // you can reasonably expect the icon_state to exist beforehand, or if you can cache the
 // value somewhere (as done below with use_single_icon in /obj/item/Initialize()).
-var/list/icon_state_cache = list()
+var/global/list/icon_state_cache = list()
 /proc/check_state_in_icon(var/checkstate, var/checkicon, var/high_accuracy = FALSE)
 	// isicon() is apparently quite expensive so short-circuit out early if we can.
 	if(!istext(checkstate) || isnull(checkicon) || !(isfile(checkicon) || isicon(checkicon))) 

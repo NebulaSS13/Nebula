@@ -1,4 +1,4 @@
-var/list/known_overmap_sectors
+var/global/list/known_overmap_sectors
 
 //===================================================================================
 //Overmap object representing zlevel(s)

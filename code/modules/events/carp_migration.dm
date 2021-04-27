@@ -1,4 +1,4 @@
-var/list/carp_count = list() // a list of Z levels (string), associated with a list of all the carp spawned by carp events
+var/global/list/carp_count = list() // a list of Z levels (string), associated with a list of all the carp spawned by carp events
 
 /datum/event/carp_migration
 	announceWhen	= 45

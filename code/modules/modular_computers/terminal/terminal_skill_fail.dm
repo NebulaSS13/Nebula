@@ -1,4 +1,4 @@
-var/list/terminal_fails
+var/global/list/terminal_fails
 /proc/get_terminal_fails()
 	if(!global.terminal_fails)
 		global.terminal_fails = init_subtypes(/datum/terminal_skill_fail)

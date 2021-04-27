@@ -1,4 +1,4 @@
-var/list/mob_hat_cache = list()
+var/global/list/mob_hat_cache = list()
 	
 // Note that humans handle hats on their own without this extension.
 // This is primarily for diona nymphs and maintenance drones.

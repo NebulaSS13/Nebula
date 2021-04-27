@@ -1,7 +1,7 @@
-var/list/surgeries_in_progress = list()
+var/global/list/surgeries_in_progress = list()
 
 // A list of types that will not attempt to perform surgery if the user is on help intent.
-var/list/surgery_tool_exceptions = list(
+var/global/list/surgery_tool_exceptions = list(
 	/obj/item/auto_cpr,
 	/obj/item/scanner/health,
 	/obj/item/shockpaddles,
@@ -10,7 +10,7 @@ var/list/surgery_tool_exceptions = list(
 	/obj/item/chems/syringe,
 	/obj/item/chems/borghypo
 )
-var/list/surgery_tool_exception_cache = list()
+var/global/list/surgery_tool_exception_cache = list()
 
 /* SURGERY STEPS */
 /decl/surgery_step

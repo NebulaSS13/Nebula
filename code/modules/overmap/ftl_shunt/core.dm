@@ -478,7 +478,7 @@
 	desc = "A fuel port for an FTL shunt."
 	icon_state = "empty"
 
-	var/list/global/fuels = list(
+	var/static/list/fuels = list(
 		/decl/material/gas/hydrogen/tritium = 25000,
 		/decl/material/gas/hydrogen/deuterium = 25000,
 		/decl/material/gas/hydrogen = 25000,

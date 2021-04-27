@@ -4,7 +4,7 @@
 	endWhen = 60			// Set in start()
 	has_skybox_image = TRUE
 	var/list/valid_apcs		// Shuffled list of valid APCs.
-	var/global/lightning_color
+	var/static/lightning_color
 	var/last_bounce //track the last time we bounced around whatever overmap effect we're affecting.
 	var/bounce_delay = 10 SECONDS // this is divided by severity, so a intense storm means you're going *flying*.
 	var/static/lightning_sounds = list(
