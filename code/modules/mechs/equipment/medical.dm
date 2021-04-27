@@ -64,7 +64,7 @@
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/antitoxins())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/oxy_meds())
 
-/obj/machinery/sleeper/mounted/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.mech_state)
+/obj/machinery/sleeper/mounted/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.mech_topic_state)
 	. = ..()
 
 /obj/machinery/sleeper/mounted/nano_host()

@@ -12,7 +12,7 @@
 
 /obj/item/clothing/glasses/thermal/Initialize()
 	. = ..()
-	overlay = GLOB.global_hud.thermal
+	overlay = global.hud.thermal
 
 /obj/item/clothing/glasses/thermal/syndi	//These are now a traitor item, concealed as mesons.	-Pete
 	name = "optical meson scanner"

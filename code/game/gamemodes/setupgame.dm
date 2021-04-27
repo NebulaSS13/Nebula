@@ -39,27 +39,7 @@
 	global.XRAYBLOCK          = getAssignedBlock("XRAY",          numsToAssign, DNA_HARDER_BOUNDS)
 	global.CLUMSYBLOCK        = getAssignedBlock("CLUMSY",        numsToAssign)
 	global.FAKEBLOCK          = getAssignedBlock("FAKE",          numsToAssign)
-
-	// UNUSED!
-	//global.COUGHBLOCK         = getAssignedBlock("COUGH",         numsToAssign)
-	//global.GLASSESBLOCK       = getAssignedBlock("GLASSES",       numsToAssign)
-	//global.EPILEPSYBLOCK      = getAssignedBlock("EPILEPSY",      numsToAssign)
-	//global.TWITCHBLOCK        = getAssignedBlock("TWITCH",        numsToAssign)
-	//global.NERVOUSBLOCK       = getAssignedBlock("NERVOUS",       numsToAssign)
-
-	// Bay muts (UNUSED)
-	//global.HEADACHEBLOCK      = getAssignedBlock("HEADACHE",      numsToAssign)
-	//global.NOBREATHBLOCK      = getAssignedBlock("NOBREATH",      numsToAssign, DNA_HARD_BOUNDS)
-	//global.REMOTEVIEWBLOCK    = getAssignedBlock("REMOTEVIEW",    numsToAssign, DNA_HARDER_BOUNDS)
-	//global.REGENERATEBLOCK    = getAssignedBlock("REGENERATE",    numsToAssign, DNA_HARDER_BOUNDS)
-	//global.INCREASERUNBLOCK   = getAssignedBlock("INCREASERUN",   numsToAssign, DNA_HARDER_BOUNDS)
 	global.REMOTETALKBLOCK    = getAssignedBlock("REMOTETALK",    numsToAssign, DNA_HARDER_BOUNDS)
-	//global.MORPHBLOCK         = getAssignedBlock("MORPH",         numsToAssign, DNA_HARDER_BOUNDS)
-	//GLOB.COLDBLOCK          = getAssignedBlock("COLD",          numsToAssign)
-	//global.HALLUCINATIONBLOCK = getAssignedBlock("HALLUCINATION", numsToAssign)
-	//global.NOPRINTSBLOCK      = getAssignedBlock("NOPRINTS",      numsToAssign, DNA_HARD_BOUNDS)
-	//global.SHOCKIMMUNITYBLOCK = getAssignedBlock("SHOCKIMMUNITY", numsToAssign)
-	//global.SMALLSIZEBLOCK     = getAssignedBlock("SMALLSIZE",     numsToAssign, DNA_HARD_BOUNDS)
 
 	//
 	// Static Blocks

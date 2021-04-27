@@ -831,7 +831,7 @@ default behaviour is:
 			visible_message(SPAN_DANGER("\The [src]'s [isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"))
 
 /mob/living/CanUseTopicPhysical(mob/user)
-	. = CanUseTopic(user, GLOB.physical_no_access_state)
+	. = CanUseTopic(user, global.physical_no_access_topic_state)
 
 /mob/living/proc/is_telekinetic()
 	return FALSE

@@ -90,22 +90,22 @@
 			value = round(value * BAR_CAP)
 
 	// Draw background.
-	if(!GLOB.default_hardpoint_background)
-		GLOB.default_hardpoint_background = image(icon = 'icons/mecha/mech_hud.dmi', icon_state = "bar_bkg")
-		GLOB.default_hardpoint_background.pixel_x = 34
-	new_overlays += GLOB.default_hardpoint_background
+	if(!global.default_hardpoint_background)
+		global.default_hardpoint_background = image(icon = 'icons/mecha/mech_hud.dmi', icon_state = "bar_bkg")
+		global.default_hardpoint_background.pixel_x = 34
+	new_overlays += global.default_hardpoint_background
 
 	if(value == 0)
-		if(!GLOB.hardpoint_bar_empty)
-			GLOB.hardpoint_bar_empty = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar_flash")
-			GLOB.hardpoint_bar_empty.pixel_x = 24
-			GLOB.hardpoint_bar_empty.color = "#ff0000"
-		new_overlays += GLOB.hardpoint_bar_empty
+		if(!global.hardpoint_bar_empty)
+			global.hardpoint_bar_empty = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar_flash")
+			global.hardpoint_bar_empty.pixel_x = 24
+			global.hardpoint_bar_empty.color = "#ff0000"
+		new_overlays += global.hardpoint_bar_empty
 	else if(value < 0)
-		if(!GLOB.hardpoint_error_icon)
-			GLOB.hardpoint_error_icon = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar_error")
-			GLOB.hardpoint_error_icon.pixel_x = 34
-		new_overlays += GLOB.hardpoint_error_icon
+		if(!global.hardpoint_error_icon)
+			global.hardpoint_error_icon = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar_error")
+			global.hardpoint_error_icon.pixel_x = 34
+		new_overlays += global.hardpoint_error_icon
 	else
 		value = min(value, BAR_CAP)
 		// Draw statbar.

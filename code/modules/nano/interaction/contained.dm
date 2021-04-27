@@ -1,7 +1,7 @@
 /*
 	This state checks if user is somewhere within src_object, as well as the default NanoUI interaction.
 */
-var/datum/topic_state/contained_state/contained_state = new
+var/datum/topic_state/contained_state/contained_topic_state = new
 
 /datum/topic_state/contained_state/can_use_topic(var/atom/src_object, var/mob/user)
 	if(!src_object.contains(user))

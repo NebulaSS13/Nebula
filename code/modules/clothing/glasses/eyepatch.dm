@@ -95,7 +95,7 @@
 
 /obj/item/clothing/glasses/eyepatch/hud/meson/Initialize()
 	. = ..()
-	overlay = GLOB.global_hud.meson
+	overlay = global.hud.meson
 
 /obj/item/clothing/glasses/eyepatch/monocle
 	name = "monocle"

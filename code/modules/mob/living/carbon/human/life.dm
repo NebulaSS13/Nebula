@@ -1055,7 +1055,7 @@
 
 /mob/living/carbon/human/handle_vision()
 	if(client)
-		client.screen.Remove(GLOB.global_hud.nvg, GLOB.global_hud.thermal, GLOB.global_hud.meson, GLOB.global_hud.science)
+		client.screen.Remove(global.hud.nvg, global.hud.thermal, global.hud.meson, global.hud.science)
 	if(machine)
 		var/viewflags = machine.check_eye(src)
 		if(viewflags < 0)

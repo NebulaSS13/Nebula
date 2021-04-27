@@ -31,7 +31,7 @@
 
 	// This checks if src_object is powered, etc.
 	// The interactive state is otherwise simplistic and only returns STATUS_INTERACTIVE and never checks distances, etc.
-	. = src_object.CanUseTopic(user, GLOB.interactive_state)
+	. = src_object.CanUseTopic(user, global.interactive_topic_state)
 	if(. == STATUS_CLOSE)
 		return
 

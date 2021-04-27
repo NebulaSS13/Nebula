@@ -456,7 +456,7 @@
 	cell.use(cost * CELLRATE)
 	return 1
 
-/obj/item/rig/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/nano_state = GLOB.inventory_state)
+/obj/item/rig/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/nano_state = global.inventory_topic_state)
 	if(!user)
 		return
 

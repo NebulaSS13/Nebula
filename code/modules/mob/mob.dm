@@ -391,7 +391,7 @@
 
 /mob/proc/update_flavor_text(var/key)
 	var/msg = sanitize(input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null, extra = 0)
-	if(!CanInteract(usr, GLOB.self_state))
+	if(!CanInteract(usr, global.self_topic_state))
 		return
 	if(msg != null)
 		flavor_text = msg
@@ -445,7 +445,7 @@
 	reset_view(null)
 
 /mob/DefaultTopicState()
-	return GLOB.view_state
+	return global.view_topic_state
 
 // Use to field Topic calls for which usr == src is required, which will first be funneled into here.
 /mob/proc/OnSelfTopic(href_list)
@@ -468,7 +468,7 @@
 
 // You probably do not need to override this proc. Use one of the two above.
 /mob/Topic(href, href_list, datum/topic_state/state)
-	if(CanUseTopic(usr, GLOB.self_state, href_list) == STATUS_INTERACTIVE)
+	if(CanUseTopic(usr, global.self_topic_state, href_list) == STATUS_INTERACTIVE)
 		. = OnSelfTopic(href_list)
 		if(.)
 			return

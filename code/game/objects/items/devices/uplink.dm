@@ -114,7 +114,7 @@
 /*
 	NANO UI FOR UPLINK WOOP WOOP
 */
-/obj/item/uplink/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = GLOB.inventory_state)
+/obj/item/uplink/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = global.inventory_topic_state)
 	var/title = "Remote Uplink"
 	var/data[0]
 
@@ -236,5 +236,5 @@
 		hidden_uplink = new(src, user.mind, DEFAULT_TELECRYSTAL_AMOUNT)
 	. = ..()
 	
-/obj/item/uplink/contained/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = GLOB.contained_state)
+/obj/item/uplink/contained/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = global.contained_topic_state)
 	return ..()

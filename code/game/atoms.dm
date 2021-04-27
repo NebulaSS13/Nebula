@@ -613,7 +613,7 @@ its easier to just keep the beam vertical.
 	var/mob/user = usr
 	if(href_list["look_at_me"] && istype(user))
 		var/turf/T = get_turf(src)
-		if(T.CanUseTopic(user, GLOB.view_state) != STATUS_CLOSE)
+		if(T.CanUseTopic(user, global.view_topic_state) != STATUS_CLOSE)
 			user.examinate(src)
 			return TOPIC_HANDLED
 	. = ..()

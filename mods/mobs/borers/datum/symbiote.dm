@@ -85,8 +85,8 @@ var/list/symbiote_starting_points = list()
 		symbiote.host_brain.real_name = host.real_name
 	else
 		to_chat(symbiote, SPAN_DANGER("There are no longer any hosts available, so you are being placed in a safe area."))
-		if(length(GLOB.symbiote_starting_points))
-			symbiote.forceMove(pick(GLOB.symbiote_starting_points))
+		if(length(global.symbiote_starting_points))
+			symbiote.forceMove(pick(global.symbiote_starting_points))
 		else
 			symbiote.forceMove(pick(global.latejoin_locations))
 
@@ -126,5 +126,5 @@ var/list/symbiote_starting_points = list()
 	delete_me = TRUE
 
 /obj/effect/landmark/symbiote_start/Initialize()
-	GLOB.symbiote_starting_points |= get_turf(src)
+	global.symbiote_starting_points |= get_turf(src)
 	. = ..()

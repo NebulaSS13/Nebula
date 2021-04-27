@@ -73,7 +73,7 @@ var/global/universe_has_ended = 0
 	priority_announcement.Announce(end_message, "SUPERMATTER CASCADE DETECTED")
 
 /datum/universal_state/supermatter_cascade/proc/finalize_end_of_universe()
-	GLOB.cinematic.station_explosion_cinematic(0,null) // TODO: Custom cinematic
+	global.cinematic.station_explosion_cinematic(0,null) // TODO: Custom cinematic
 	universe_has_ended = TRUE
 
 /datum/universal_state/supermatter_cascade/proc/AreaSet()

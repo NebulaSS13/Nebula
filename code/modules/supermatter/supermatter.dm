@@ -359,10 +359,10 @@ var/list/supermatter_final_thoughts = list(
 	else
 		alert_msg = null
 	if(alert_msg)
-		GLOB.global_announcer.autosay(alert_msg, "Supermatter Monitor", "Engineering")
+		global.announcer.autosay(alert_msg, "Supermatter Monitor", "Engineering")
 		//Public alerts
 		if((damage > emergency_point) && !public_alert)
-			GLOB.global_announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
+			global.announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
 			public_alert = 1
 			global.using_map.unbolt_saferooms()
 			for(var/mob/M in global.player_list)
@@ -370,7 +370,7 @@ var/list/supermatter_final_thoughts = list(
 				if(T && (T.z in global.using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
 					sound_to(M, 'sound/ambience/matteralarm.ogg')
 		else if(safe_warned && public_alert)
-			GLOB.global_announcer.autosay(alert_msg, "Supermatter Monitor")
+			global.announcer.autosay(alert_msg, "Supermatter Monitor")
 			public_alert = 0
 
 

@@ -429,9 +429,9 @@ var/world_topic_last = world.timeofday
 		if(input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
-		if(!GLOB || !GLOB.prometheus_metrics)
+		if(!global.prometheus_metrics)
 			return "Metrics not ready"
-		return GLOB.prometheus_metrics.collect()
+		return global.prometheus_metrics.collect()
 
 #undef SET_THROTTLE
 

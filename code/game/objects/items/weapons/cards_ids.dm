@@ -202,7 +202,7 @@ var/const/NO_EMAG_ACT = -50
 	var/mob/user = usr
 	if(href_list["look_at_id"] && istype(user))
 		var/turf/T = get_turf(src)
-		if(T.CanUseTopic(user, GLOB.view_state) != STATUS_CLOSE)
+		if(T.CanUseTopic(user, global.view_topic_state) != STATUS_CLOSE)
 			user.examinate(src)
 			return TOPIC_HANDLED
 	. = ..()

@@ -12,7 +12,7 @@
 
 /obj/item/clothing/glasses/meson/Initialize()
 	. = ..()
-	overlay = GLOB.global_hud.meson
+	overlay = global.hud.meson
 
 /obj/item/clothing/glasses/meson/prescription
 	name = "prescription mesons"
@@ -35,7 +35,7 @@
 
 /obj/item/clothing/glasses/science/Initialize()
 	. = ..()
-	overlay = GLOB.global_hud.science
+	overlay = global.hud.science
 
 /obj/item/clothing/glasses/night
 	name = "night vision goggles"
@@ -50,7 +50,7 @@
 
 /obj/item/clothing/glasses/night/Initialize()
 	. = ..()
-	overlay = GLOB.global_hud.nvg
+	overlay = global.hud.nvg
 
 /obj/item/clothing/glasses/tacgoggles
 	name = "tactical goggles"

@@ -50,14 +50,14 @@
 
 	if(!global.using_map.use_overmap)
 		return
-	if(!CanInteract(usr, GLOB.conscious_state))
+	if(!CanInteract(usr, global.conscious_topic_state))
 		return
 
 	for(var/obj/effect/overmap/visitable/sector/exoplanet/E)
 		if(src in E.animals)
 			var/newname = input("What do you want to name this species?", "Species naming", E.get_random_species_name()) as text|null
 			newname = sanitizeName(newname, allow_numbers = TRUE, force_first_letter_uppercase = FALSE)
-			if(newname && CanInteract(usr, GLOB.conscious_state))
+			if(newname && CanInteract(usr, global.conscious_topic_state))
 				if(E.rename_species(type, newname))
 					to_chat(usr,"<span class='notice'>This species will be known from now on as '[newname]'.</span>")
 				else
