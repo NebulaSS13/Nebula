@@ -376,7 +376,7 @@
 				W.forceMove(src.loc)
 
 	//Update any existing objectives involving this mob.
-	for(var/datum/objective/O in GLOB.all_objectives)
+	for(var/datum/objective/O in global.all_objectives)
 		// We don't want revs to get objectives that aren't for heads of staff. Letting
 		// them win or lose based on cryo is silly so we remove the objective.
 		if(O.target == occupant.mind)

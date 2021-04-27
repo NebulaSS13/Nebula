@@ -243,6 +243,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 		Failsafe.defcon = 2
 
 // Main loop.
+#define RUNLEVEL_MAX 16
 /datum/controller/master/proc/Loop()
 	. = -1
 	//Prep the loop (most of this is because we want MC restarts to reset as much state as we can, and because
@@ -268,11 +269,11 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 
 		var/ss_runlevels = SS.runlevels
 		var/added_to_any = FALSE
-		for(var/I in 1 to GLOB.bitflags.len)
-			if(ss_runlevels & GLOB.bitflags[I])
-				while(runlevel_sorted_subsystems.len < I)
+		for(var/i in 1 to RUNLEVEL_MAX)
+			if(ss_runlevels & BITFLAG(i-1))
+				while(runlevel_sorted_subsystems.len < i)
 					runlevel_sorted_subsystems += list(list())
-				runlevel_sorted_subsystems[I] += SS
+				runlevel_sorted_subsystems[i] += SS
 				added_to_any = TRUE
 		if(!added_to_any)
 			WARNING("[SS.name] subsystem is not SS_NO_FIRE but also does not have any runlevels set!")
@@ -384,7 +385,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 		if (processing * sleep_delta <= world.tick_lag)
 			current_ticklimit -= (TICK_LIMIT_RUNNING * 0.25) //reserve the tail 1/4 of the next tick for the mc if we plan on running next tick
 		sleep(world.tick_lag * (processing * sleep_delta))
-
+#undef RUNLEVEL_MAX
 
 
 

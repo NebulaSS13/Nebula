@@ -73,7 +73,7 @@
 	if(!(user.get_inventory_slot(src) in list(slot_l_ear_str, slot_r_ear_str)))
 		return
 	if(current_track)
-		var/decl/music_track/track = GET_DECL(GLOB.music_tracks[current_track])
+		var/decl/music_track/track = GET_DECL(global.music_tracks[current_track])
 		sound_to(user, sound(null, channel = sound_channel))
 		sound_to(user, sound(track.song, repeat = 1, wait = 0, volume = music_volume, channel = sound_channel))
 
@@ -89,7 +89,7 @@
 	dat += "<A href='?src=\ref[src];toggle=1;'>Switch [headphones_on ? "off" : "on"]</a>"
 	dat += "Volume: [music_volume] <A href='?src=\ref[src];vol=-10;'>-</a><A href='?src=\ref[src];vol=10;'>+</a>"
 	dat += "Tracks:"
-	for(var/track in GLOB.music_tracks)
+	for(var/track in global.music_tracks)
 		if(track == current_track)
 			dat += "<span class='linkOn'>[track]</span>"
 		else

@@ -1,8 +1,9 @@
 var/list/all_crew_records = list()
-GLOBAL_LIST_INIT(blood_types, list("A-", "A+", "B-", "B+", "AB-", "AB+", "O-", "O+"))
-GLOBAL_LIST_INIT(physical_statuses, list("Active", "Disabled", "SSD", "Deceased", "MIA"))
+var/list/blood_types = list("A-", "A+", "B-", "B+", "AB-", "AB+", "O-", "O+")
+var/list/physical_statuses = list("Active", "Disabled", "SSD", "Deceased", "MIA")
+var/list/security_statuses = list("None", "Released", "Parolled", "Incarcerated", "Arrest")
+
 GLOBAL_VAR_INIT(default_physical_status, "Active")
-GLOBAL_LIST_INIT(security_statuses, list("None", "Released", "Parolled", "Incarcerated", "Arrest"))
 GLOBAL_VAR_INIT(default_security_status, "None")
 GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
@@ -259,7 +260,7 @@ FIELD_SHORT("Formal Name", formal_name, null, access_change_ids)
 FIELD_SHORT("Job", job, null, access_change_ids)
 FIELD_LIST("Sex", sex, record_genders(), null, access_change_ids)
 FIELD_NUM("Age", age, null, access_change_ids)
-FIELD_LIST_EDIT("Status", status, GLOB.physical_statuses, null, access_medical)
+FIELD_LIST_EDIT("Status", status, global.physical_statuses, null, access_medical)
 
 FIELD_SHORT("Species",species_name, null, access_change_ids)
 FIELD_LIST("Branch", branch, record_branches(), null, access_change_ids)
@@ -269,12 +270,12 @@ FIELD_SHORT("Religion", religion, access_chapel_office, access_change_ids)
 FIELD_LONG("General Notes (Public)", public_record, null, access_bridge)
 
 // MEDICAL RECORDS
-FIELD_LIST("Blood Type", bloodtype, GLOB.blood_types, access_medical, access_medical)
+FIELD_LIST("Blood Type", bloodtype, global.blood_types, access_medical, access_medical)
 FIELD_LONG("Medical Record", medRecord, access_medical, access_medical)
 FIELD_LONG("Known Implants", implants, access_medical, access_medical)
 
 // SECURITY RECORDS
-FIELD_LIST("Criminal Status", criminalStatus, GLOB.security_statuses, access_security, access_security)
+FIELD_LIST("Criminal Status", criminalStatus, global.security_statuses, access_security, access_security)
 FIELD_LONG("Security Record", secRecord, access_security, access_security)
 FIELD_SHORT("DNA", dna, access_security, access_security)
 FIELD_SHORT("Fingerprint", fingerprint, access_security, access_security)

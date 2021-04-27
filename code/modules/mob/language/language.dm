@@ -44,9 +44,9 @@
 /decl/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	if(!length(syllables))
 		if(gender==FEMALE)
-			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
+			return capitalize(pick(global.first_names_female)) + " " + capitalize(pick(global.last_names))
 		else
-			return capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
+			return capitalize(pick(global.first_names_male)) + " " + capitalize(pick(global.last_names))
 
 	var/possible_syllables = allow_repeated_syllables ? syllables : syllables.Copy()
 	for(var/i = 0;i<name_count;i++)

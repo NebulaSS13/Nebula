@@ -1,7 +1,5 @@
 //Skill-related mob verbs that require skill checks to be satisfied to be added.
 
-GLOBAL_LIST_INIT(skill_verbs, init_subtypes(/datum/skill_verb))
-
 /datum/skillset/proc/fetch_verb_datum(given_type)
 	for(var/datum/skill_verb/SV in skill_verbs)
 		if(SV.type == given_type)

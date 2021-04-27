@@ -51,7 +51,7 @@
 			var/decl/cultural_info/current_culture = GET_DECL(current_species.default_cultural_info[TAG_CULTURE])
 			if(current_culture)
 				return current_culture.get_random_name(null, gender)
-	return capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
+	return capitalize(pick(gender == FEMALE ? global.first_names_female : global.first_names_male)) + " " + capitalize(pick(global.last_names))
 
 /proc/random_skin_tone(var/decl/species/current_species)
 	var/species_tone = current_species ? 35 - current_species.max_skin_tone() : -185
@@ -303,11 +303,11 @@
 
 // If all of these flags are present, it should come out at exactly 1. Yes, this
 // is horrible. TODO: unify coverage flags with limbs and use organ_rel_size.
-GLOBAL_LIST_INIT(bodypart_coverage_cache, new)
+var/list/bodypart_coverage_cache = list()
 
 /proc/get_percentage_body_cover(var/checking_flags)
 	var/key = "[checking_flags]"
-	if(isnull(GLOB.bodypart_coverage_cache[key]))
+	if(isnull(global.bodypart_coverage_cache[key]))
 		var/coverage = 0
 		if(checking_flags & SLOT_FULL_BODY)
 			coverage = 1
@@ -338,8 +338,8 @@ GLOBAL_LIST_INIT(bodypart_coverage_cache, new)
 				coverage += 0.05
 			if(checking_flags & SLOT_HAND_RIGHT)
 				coverage += 0.05
-		GLOB.bodypart_coverage_cache[key] = coverage
-	. = GLOB.bodypart_coverage_cache[key]
+		global.bodypart_coverage_cache[key] = coverage
+	. = global.bodypart_coverage_cache[key]
 
 /proc/get_sorted_mob_list()
 	. = sortTim(SSmobs.mob_list.Copy(), /proc/cmp_name_asc)

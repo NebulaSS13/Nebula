@@ -442,7 +442,7 @@
 				return TOPIC_HANDLED
 			var/datum/computer_file/report/crew_record/R = network.get_crew_record_by_name(perpname)
 			if(R)
-				var/setcriminal = input(user, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) as null|anything in GLOB.security_statuses
+				var/setcriminal = input(user, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) as null|anything in global.security_statuses
 				if(hasHUD(usr, HUD_SECURITY) && setcriminal)
 					R.set_criminalStatus(setcriminal)
 					modified = 1
@@ -501,7 +501,7 @@
 				return TOPIC_HANDLED
 			var/datum/computer_file/report/crew_record/E = network.get_crew_record_by_name(perpname)
 			if(E)
-				var/setmedical = input(user, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) as null|anything in GLOB.physical_statuses
+				var/setmedical = input(user, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) as null|anything in global.physical_statuses
 				if(hasHUD(user, HUD_MEDICAL) && setmedical)
 					E.set_status(setmedical)
 					modified = 1

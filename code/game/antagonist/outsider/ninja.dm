@@ -85,8 +85,8 @@
 
 /decl/special_role/ninja/update_antag_mob(var/datum/mind/player)
 	..()
-	var/ninja_title = pick(GLOB.ninja_titles)
-	var/ninja_name = pick(GLOB.ninja_names)
+	var/ninja_title = pick(global.ninja_titles)
+	var/ninja_name = pick(global.ninja_names)
 	var/mob/living/carbon/human/H = player.current
 	if(istype(H))
 		H.real_name = "[ninja_title] [ninja_name]"

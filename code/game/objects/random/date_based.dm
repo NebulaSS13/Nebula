@@ -28,7 +28,7 @@
 	if(!month || month < 1 || month > 12)
 		CRASH("Invalid month: [month]")
 
-	var/days_in_month = GLOB.days_per_month[month]
+	var/days_in_month = acquire_days_per_month()
 	if(month == 2) // Always allow 29th of February, in case someone wants to do have leap-year things
 		days_in_month = 29
 

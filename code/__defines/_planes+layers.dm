@@ -221,7 +221,7 @@ What is the naming convention for planes or layers?
 	layer = OBSERVER_LAYER
 	plane = OBSERVER_PLANE
 
-GLOBAL_LIST_INIT(ghost_master, list(
+var/list/ghost_master = list(
 	new /obj/screen/plane_master/ghost_master(),
 	new /obj/screen/plane_master/ghost_dummy()
-))
+)

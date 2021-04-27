@@ -158,10 +158,13 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 
 #undef DELTA_CALC
 
+var/list/days_of_month
 /proc/acquire_days_per_month()
-	. = list(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
-	if(isLeap(text2num(time2text(world.realtime, "YYYY"))))
-		.[2] = 29
+	if(!global.days_of_month)
+		global.days_of_month = list(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+		if(isLeap(text2num(time2text(world.realtime, "YYYY"))))
+			global.days_of_month[2] = 29
+	return global.days_of_month
 
 /proc/current_month_and_day()
 	var/time_string = time2text(world.realtime, "MM-DD")

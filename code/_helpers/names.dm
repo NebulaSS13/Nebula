@@ -50,7 +50,7 @@ var/religion_name = null
 	return "[pick("Gilese","GSC", "Luyten", "GJ", "HD")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
 
 /proc/generate_planet_name()
-	return "[capitalize(pick(GLOB.last_names))]-[pick(GLOB.greek_letters)]"
+	return "[capitalize(pick(global.last_names))]-[pick(global.greek_letters)]"
 
 /proc/generate_planet_type()
 	return pick("terrestial planet", "ice planet", "dwarf planet", "desert planet", "ocean planet", "lava planet", "gas giant", "forest planet")
@@ -66,7 +66,7 @@ var/religion_name = null
 
 	//Rare: Pre-Prefix
 	if(prob(10))
-		name = pick(GLOB.station_prefixes)
+		name = pick(global.station_prefixes)
 		global.using_map.station_name = name + " "
 
 	var/holiday_prefix = length(global.current_holiday?.station_prefixes) && pick(global.current_holiday.station_prefixes)
@@ -75,7 +75,7 @@ var/religion_name = null
 		global.using_map.station_name = "[global.using_map.station_name][holiday_prefix] "
 
 	// Suffix
-	name = pick(GLOB.station_suffixes)
+	name = pick(global.station_suffixes)
 	global.using_map.station_name += name + " "
 
 	var/holiday_suffix = length(global.current_holiday?.station_suffixes) && pick(global.current_holiday.station_suffixes)
@@ -87,13 +87,13 @@ var/religion_name = null
 			if(1)
 				global.using_map.station_name += "[rand(1, 99)]"
 			if(2)
-				global.using_map.station_name += pick(GLOB.greek_letters)
+				global.using_map.station_name += pick(global.greek_letters)
 			if(3)
 				global.using_map.station_name += "\Roman[rand(1,99)]"
 			if(4)
-				global.using_map.station_name += pick(GLOB.phonetic_alphabet)
+				global.using_map.station_name += pick(global.phonetic_alphabet)
 			if(5)
-				global.using_map.station_name += pick(GLOB.numbers_as_words)
+				global.using_map.station_name += pick(global.numbers_as_words)
 
 	if (config && config.server_name)
 		world.name = "[config.server_name]: [name]"
@@ -189,9 +189,9 @@ var/syndicate_code_response//Code response for traitors.
 			if(1)//1 and 2 can only be selected once each to prevent more than two specific names/places/etc.
 				switch(rand(1,2))//Mainly to add more options later.
 					if(1)
-						code_phrase += pick(pick(GLOB.first_names_male,GLOB.first_names_female))
+						code_phrase += pick(pick(global.first_names_male,global.first_names_female))
 						code_phrase += " "
-						code_phrase += pick(GLOB.last_names)
+						code_phrase += pick(global.last_names)
 					if(2)
 						code_phrase += pick(SSjobs.titles_to_datums) //Returns a job.
 				safety -= 1
@@ -207,9 +207,9 @@ var/syndicate_code_response//Code response for traitors.
 					if(1)
 						code_phrase += pick(nouns)
 					if(2)
-						code_phrase += pick(GLOB.adjectives)
+						code_phrase += pick(global.adjectives)
 					if(3)
-						code_phrase += pick(GLOB.verbs)
+						code_phrase += pick(global.verbs)
 		if(words==1)
 			code_phrase += "."
 		else

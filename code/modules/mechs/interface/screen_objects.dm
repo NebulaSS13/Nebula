@@ -109,7 +109,7 @@
 	else
 		value = min(value, BAR_CAP)
 		// Draw statbar.
-		if(!LAZYLEN(GLOB.hardpoint_bar_cache))
+		if(!LAZYLEN(global.hardpoint_bar_cache))
 			for(var/i=0;i<BAR_CAP;i++)
 				var/image/bar = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar")
 				bar.pixel_x = 24+(i*2)
@@ -119,9 +119,9 @@
 					bar.color = "#ffff00"
 				else
 					bar.color = "#ff0000"
-				GLOB.hardpoint_bar_cache += bar
+				global.hardpoint_bar_cache += bar
 		for(var/i=1;i<=value;i++)
-			new_overlays += GLOB.hardpoint_bar_cache[i]
+			new_overlays += global.hardpoint_bar_cache[i]
 	overlays = new_overlays
 
 /obj/screen/exosuit/hardpoint/Initialize(mapload, var/newtag)

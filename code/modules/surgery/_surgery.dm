@@ -1,7 +1,7 @@
 var/list/surgeries_in_progress = list()
 
 // A list of types that will not attempt to perform surgery if the user is on help intent.
-GLOBAL_LIST_INIT(surgery_tool_exceptions, list(
+var/list/surgery_tool_exceptions = list(
 	/obj/item/auto_cpr,
 	/obj/item/scanner/health,
 	/obj/item/shockpaddles,
@@ -9,8 +9,8 @@ GLOBAL_LIST_INIT(surgery_tool_exceptions, list(
 	/obj/item/modular_computer,
 	/obj/item/chems/syringe,
 	/obj/item/chems/borghypo
-))
-GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
+)
+var/list/surgery_tool_exception_cache = list()
 
 /* SURGERY STEPS */
 /decl/surgery_step
@@ -226,11 +226,11 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 		// If we're on an optable, we are protected from some surgery fails. Bypass this for some items (like health analyzers).
 		if((locate(/obj/machinery/optable) in get_turf(M)) && user.a_intent == I_HELP)
 			// Keep track of which tools we know aren't appropriate for surgery on help intent.
-			if(GLOB.surgery_tool_exception_cache[type])
+			if(global.surgery_tool_exception_cache[type])
 				return FALSE
-			for(var/tool in GLOB.surgery_tool_exceptions)
+			for(var/tool in global.surgery_tool_exceptions)
 				if(istype(src, tool))
-					GLOB.surgery_tool_exception_cache[type] = TRUE
+					global.surgery_tool_exception_cache[type] = TRUE
 					return FALSE
 			to_chat(user, SPAN_WARNING("You aren't sure what you could do to \the [M] with \the [src]."))
 			return TRUE
