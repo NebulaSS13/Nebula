@@ -91,8 +91,9 @@ SUBSYSTEM_DEF(materials)
 
 /datum/controller/subsystem/materials/proc/build_fusion_reaction_list()
 	fusion_reactions = list()
-	for(var/rtype in subtypesof(/decl/fusion_reaction))
-		var/decl/fusion_reaction/cur_reaction = new rtype()
+	var/list/all_reactions = decls_repository.get_decls_of_subtype(/decl/fusion_reaction)
+	for(var/rtype in all_reactions)
+		var/decl/fusion_reaction/cur_reaction = all_reactions[rtype]
 		if(!fusion_reactions[cur_reaction.p_react])
 			fusion_reactions[cur_reaction.p_react] = list()
 		fusion_reactions[cur_reaction.p_react][cur_reaction.s_react] = cur_reaction
