@@ -32,11 +32,11 @@ var/const/CLICK_HANDLER_ALL                  = (CLICK_HANDLER_NONE|CLICK_HANDLER
 	..()
 	src.user = user
 	if(flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
-		GLOB.logged_out_event.register(user, src, /datum/click_handler/proc/OnMobLogout)
+		events_repository.register(/decl/observ/logged_out, user, src, /datum/click_handler/proc/OnMobLogout)
 
 /datum/click_handler/Destroy()
 	if(flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
-		GLOB.logged_out_event.unregister(user, src, /datum/click_handler/proc/OnMobLogout)
+		events_repository.unregister(/decl/observ/logged_out, user, src, /datum/click_handler/proc/OnMobLogout)
 	user = null
 	. = ..()
 

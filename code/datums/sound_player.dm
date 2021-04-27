@@ -128,7 +128,7 @@
 	listeners = list()
 	listener_status = list()
 
-	GLOB.destroyed_event.register(source, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/destroyed, source, src, /datum/proc/qdel_self)
 
 	if(ismovable(source))
 		proxy_listener = new(source, /datum/sound_token/proc/PrivAddListener, /datum/sound_token/proc/PrivLocateListeners, range, proc_owner = src)
@@ -169,7 +169,7 @@
 	listeners = null
 	listener_status = null
 
-	GLOB.destroyed_event.unregister(source, src, /datum/proc/qdel_self)
+	events_repository.unregister(/decl/observ/destroyed, source, src, /datum/proc/qdel_self)
 	QDEL_NULL(proxy_listener)
 	source = null
 
@@ -217,16 +217,16 @@
 
 	listeners += listener
 
-	GLOB.moved_event.register(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
-	GLOB.destroyed_event.register(listener, src, /datum/sound_token/proc/PrivRemoveListener)
+	events_repository.register(/decl/observ/moved, listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
+	events_repository.register(/decl/observ/destroyed, listener, src, /datum/sound_token/proc/PrivRemoveListener)
 
 	PrivUpdateListenerLoc(listener, FALSE)
 
 /datum/sound_token/proc/PrivRemoveListener(var/atom/listener, var/sound/null_sound)
 	null_sound = null_sound || new(channel = sound.channel)
 	sound_to(listener, null_sound)
-	GLOB.moved_event.unregister(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
-	GLOB.destroyed_event.unregister(listener, src, /datum/sound_token/proc/PrivRemoveListener)
+	events_repository.unregister(/decl/observ/moved, listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
+	events_repository.unregister(/decl/observ/destroyed, listener, src, /datum/sound_token/proc/PrivRemoveListener)
 	listeners -= listener
 
 /datum/sound_token/proc/PrivUpdateListenerLoc(var/atom/listener, var/update_sound = TRUE)

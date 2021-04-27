@@ -290,7 +290,7 @@
 
 	if(!istype(owner))
 		return
-	GLOB.dismembered_event.raise_event(owner, src)
+	events_repository.raise_event(/decl/observ/dismembered, owner, src)
 
 	action_button_name = null
 

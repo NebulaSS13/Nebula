@@ -49,15 +49,15 @@
 		return
 	if(feeding_on)
 		var/mob/feed_mob = feeding_on.resolve()
-		GLOB.moved_event.unregister(src, src)
-		GLOB.moved_event.unregister(feed_mob, src)
-		GLOB.destroyed_event.unregister(feed_mob, src)
+		events_repository.unregister(/decl/observ/moved, src, src)
+		events_repository.unregister(/decl/observ/moved, feed_mob, src)
+		events_repository.unregister(/decl/observ/destroyed, feed_mob, src)
 		feeding_on = null
 	if(victim)
 		feeding_on = weakref(victim)
-		GLOB.moved_event.register(src, src, /mob/living/slime/proc/check_feed_target_position)
-		GLOB.moved_event.register(victim, src, /mob/living/slime/proc/check_feed_target_position)
-		GLOB.destroyed_event.register(victim, src, /mob/living/slime/proc/check_feed_target_position)
+		events_repository.register(/decl/observ/moved, src, src, /mob/living/slime/proc/check_feed_target_position)
+		events_repository.register(/decl/observ/moved, victim, src, /mob/living/slime/proc/check_feed_target_position)
+		events_repository.register(/decl/observ/destroyed, victim, src, /mob/living/slime/proc/check_feed_target_position)
 	var/datum/ai/slime/slime_ai = ai
 	if(istype(slime_ai))
 		slime_ai.update_mood()

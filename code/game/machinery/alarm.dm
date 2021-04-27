@@ -130,7 +130,7 @@
 	. = ..()
 
 /obj/machinery/alarm/Destroy()
-	GLOB.name_set_event.unregister(src, get_area(src), .proc/change_area_name)
+	events_repository.unregister(/decl/observ/name_set, src, get_area(src), .proc/change_area_name)
 	unregister_radio(src, frequency)
 	return ..()
 
@@ -156,7 +156,7 @@
 		if(!env_info.important_gasses[g])
 			trace_gas += g
 
-	GLOB.name_set_event.register(alarm_area, src, .proc/change_area_name)
+	events_repository.register(/decl/observ/name_set, alarm_area, src, .proc/change_area_name)
 	set_frequency(frequency)
 	for(var/device_tag in alarm_area.air_scrub_names + alarm_area.air_vent_names)
 		send_signal(device_tag, list()) // ask for updates; they initialized before us and we didn't get the data

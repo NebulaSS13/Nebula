@@ -28,16 +28,16 @@
 		T.pixel_x = 0
 		T.pixel_y = 0
 		T.layer = ABOVE_OBJ_LAYER
-		GLOB.moved_event.register(T, src, /atom/movable/proc/move_to_turf)
-		GLOB.moved_event.register(src, T, /atom/movable/proc/move_to_turf)
+		events_repository.register(/decl/observ/moved, T, src, /atom/movable/proc/move_to_turf)
+		events_repository.register(/decl/observ/moved, src, T, /atom/movable/proc/move_to_turf)
 		T.stake = src
 		pinned_target = T
 	else
 		set_density(1)
 		pinned_target.set_density(0)
 		pinned_target.layer = OBJ_LAYER
-		GLOB.moved_event.unregister(pinned_target, src)
-		GLOB.moved_event.unregister(src, pinned_target)
+		events_repository.unregister(/decl/observ/moved, pinned_target, src)
+		events_repository.unregister(/decl/observ/moved, src, pinned_target)
 		pinned_target.stake = null
 		pinned_target = null
 

@@ -185,7 +185,7 @@
 		SetName("\improper [area.name] APC")
 	area.apc = src
 
-	GLOB.name_set_event.register(area, src, .proc/change_area_name)
+	events_repository.register(/decl/observ/name_set, area, src, .proc/change_area_name)
 
 	. = ..()
 
@@ -208,7 +208,7 @@
 		area.power_environ = 0
 		area.power_change()
 
-		GLOB.name_set_event.unregister(area, src, .proc/change_area_name)
+		events_repository.unregister(/decl/observ/name_set, area, src, .proc/change_area_name)
 
 	// Malf AI, removes the APC from AI's hacked APCs list.
 	if((hacker) && (hacker.hacked_apcs) && (src in hacker.hacked_apcs))

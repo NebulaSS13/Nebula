@@ -43,29 +43,29 @@
 	unlook_action.Grant(current_looker)
 
 	// Checks for removing the user from the eye outside of unlook actions.
-	GLOB.moved_event.register(holder, src, /datum/extension/eye/proc/unlook)
-	GLOB.moved_event.register(current_looker, src, /datum/extension/eye/proc/unlook)
+	events_repository.register(/decl/observ/moved, holder, src, /datum/extension/eye/proc/unlook)
+	events_repository.register(/decl/observ/moved, current_looker, src, /datum/extension/eye/proc/unlook)
 
-	GLOB.destroyed_event.register(current_looker, src, /datum/extension/eye/proc/unlook)
-	GLOB.destroyed_event.register(extension_eye, src, /datum/extension/eye/proc/unlook)
+	events_repository.register(/decl/observ/destroyed, current_looker, src, /datum/extension/eye/proc/unlook)
+	events_repository.register(/decl/observ/destroyed, extension_eye, src, /datum/extension/eye/proc/unlook)
 
 	if(isliving(current_looker))
-		GLOB.stat_set_event.register(current_looker, src, /datum/extension/eye/proc/unlook)
-	GLOB.logged_out_event.register(current_looker, src, /datum/extension/eye/proc/unlook)
+		events_repository.register(/decl/observ/stat_set, current_looker, src, /datum/extension/eye/proc/unlook)
+	events_repository.register(/decl/observ/logged_out, current_looker, src, /datum/extension/eye/proc/unlook)
 
 	return TRUE
 
 /datum/extension/eye/proc/unlook()
 
-	GLOB.moved_event.unregister(holder, src, /datum/extension/eye/proc/unlook)
-	GLOB.moved_event.unregister(current_looker, src, /datum/extension/eye/proc/unlook)
+	events_repository.unregister(/decl/observ/moved, holder, src, /datum/extension/eye/proc/unlook)
+	events_repository.unregister(/decl/observ/moved, current_looker, src, /datum/extension/eye/proc/unlook)
 	
-	GLOB.destroyed_event.unregister(current_looker, src, /datum/extension/eye/proc/unlook)
-	GLOB.destroyed_event.unregister(extension_eye, src, /datum/extension/eye/proc/unlook)
+	events_repository.unregister(/decl/observ/destroyed, current_looker, src, /datum/extension/eye/proc/unlook)
+	events_repository.unregister(/decl/observ/destroyed, extension_eye, src, /datum/extension/eye/proc/unlook)
 
 	if(isliving(current_looker))
-		GLOB.stat_set_event.unregister(current_looker, src, /datum/extension/eye/proc/unlook)
-	GLOB.logged_out_event.unregister(current_looker, src, /datum/extension/eye/proc/unlook)
+		events_repository.unregister(/decl/observ/stat_set, current_looker, src, /datum/extension/eye/proc/unlook)
+	events_repository.unregister(/decl/observ/logged_out, current_looker, src, /datum/extension/eye/proc/unlook)
 
 	QDEL_NULL(extension_eye)
 
