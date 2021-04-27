@@ -1,11 +1,11 @@
-var/list/all_crew_records = list()
-var/list/blood_types = list("A-", "A+", "B-", "B+", "AB-", "AB+", "O-", "O+")
+var/list/all_crew_records =  list()
+var/list/blood_types =       list("A-", "A+", "B-", "B+", "AB-", "AB+", "O-", "O+")
 var/list/physical_statuses = list("Active", "Disabled", "SSD", "Deceased", "MIA")
 var/list/security_statuses = list("None", "Released", "Parolled", "Incarcerated", "Arrest")
 
-GLOBAL_VAR_INIT(default_physical_status, "Active")
-GLOBAL_VAR_INIT(default_security_status, "None")
-GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
+var/default_physical_status = "Active"
+var/default_security_status = "None"
+var/arrest_security_status =  "Arrest"
 
 /datum/computer_file/report/crew_record
 	filetype = "CDB"
@@ -91,7 +91,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 			gender_term = G.formal_term
 	set_sex(gender_term)
 	set_age(H?.get_age() || 30)
-	set_status(GLOB.default_physical_status)
+	set_status(global.default_physical_status)
 	set_species_name(H ? H.get_species_name() : global.using_map.default_species)
 	set_branch(H ? (H.char_branch && H.char_branch.name) : "None")
 	set_rank(H ? (H.char_rank && H.char_rank.name) : "None")
@@ -117,7 +117,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 			set_implants(jointext(organ_data, "\[*\]"))
 
 	// Security record
-	set_criminalStatus(GLOB.default_security_status)
+	set_criminalStatus(global.default_security_status)
 	set_dna(H ? H.dna.unique_enzymes : "")
 	set_fingerprint(H ? md5(H.dna.uni_identity) : "")
 	set_secRecord(H && H.sec_record && !jobban_isbanned(H, "Records") ? html_decode(H.sec_record) : "No record supplied")
@@ -165,7 +165,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_name(S ? S.real_name : "Unset")
 	set_formal_name(S ? S.real_name : "Unset")
 	set_sex("Unset")
-	set_status(GLOB.default_physical_status)
+	set_status(global.default_physical_status)
 	var/silicon_type = "Synthetic Lifeform"
 	var/robojob = GetAssignment(S)
 	if(istype(S, /mob/living/silicon/robot))
@@ -182,7 +182,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_implants("Robotic body")
 
 	// Security record
-	set_criminalStatus(GLOB.default_security_status)
+	set_criminalStatus(global.default_security_status)
 
 // Global methods
 // Used by character creation to create a record for new arrivals.

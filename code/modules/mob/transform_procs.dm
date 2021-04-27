@@ -31,8 +31,8 @@
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	set_species(species.primitive_form)
-	dna.SetSEState(GLOB.MONKEYBLOCK,1)
-	dna.SetSEValueRange(GLOB.MONKEYBLOCK,0xDAC, 0xFFF)
+	dna.SetSEState(global.MONKEYBLOCK,1)
+	dna.SetSEValueRange(global.MONKEYBLOCK,0xDAC, 0xFFF)
 
 	to_chat(src, "<B>You are now [species.name]. </B>")
 	qdel(animation)
@@ -63,7 +63,7 @@
 
 /mob/proc/AIize(move=1)
 	if(client)
-		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// stop the jams for AIs
+		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = sound_channels.lobby_channel))// stop the jams for AIs
 
 
 	var/mob/living/silicon/ai/O = new (loc, global.using_map.default_law_type,,1)//No MMI but safety is in effect.

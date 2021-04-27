@@ -1,4 +1,4 @@
-GLOBAL_VAR_INIT(default_gyne, create_gyne_name())
+var/default_gyne
 
 /decl/ghosttrap/kharmaani_egg
 	name = "mantid nymph"
@@ -32,7 +32,9 @@ GLOBAL_VAR_INIT(default_gyne, create_gyne_name())
 /obj/structure/insectoid_egg/Initialize()
 	. = ..()
 	START_PROCESSING(SSprocessing, src)
-	lineage = GLOB.default_gyne
+	if(!global.default_gyne)
+		global.default_gyne = create_gyne_name()
+	lineage = global.default_gyne
 
 /obj/structure/insectoid_egg/Destroy()
 	STOP_PROCESSING(SSprocessing, src)

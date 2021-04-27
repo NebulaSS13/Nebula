@@ -1,14 +1,14 @@
-GLOBAL_VAR(spawntypes)
+var/list/spawntypes
 
 /proc/spawntypes()
-	if(!GLOB.spawntypes)
-		GLOB.spawntypes = list()
+	if(!global.spawntypes)
+		global.spawntypes = list()
 		for(var/type in typesof(/datum/spawnpoint)-/datum/spawnpoint)
 			var/datum/spawnpoint/S = type
 			var/display_name = initial(S.display_name)
 			if((display_name in global.using_map.allowed_spawns) || initial(S.always_visible))
-				GLOB.spawntypes[display_name] = new S
-	return GLOB.spawntypes
+				global.spawntypes[display_name] = new S
+	return global.spawntypes
 
 /datum/spawnpoint
 	var/msg		  //Message to display on the arrivals computer.

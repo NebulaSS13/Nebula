@@ -129,7 +129,7 @@
 			var/mob/observer/ghost/observer = new()
 
 			spawning = 1
-			sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo
+			sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = sound_channels.lobby_channel))// MAD JAMS cant last forever yo
 
 
 			observer.started_as_observer = 1
@@ -458,7 +458,7 @@
 
 	new_character.lastarea = get_area(spawn_turf)
 
-	if(GLOB.random_players)
+	if(global.random_players)
 		var/decl/species/current_species = get_species_by_key(client.prefs.species || global.using_map.default_species)
 		var/decl/pronouns/pronouns = pick(current_species.available_pronouns)
 		client.prefs.gender = pronouns.name
@@ -466,7 +466,7 @@
 		client.prefs.randomize_appearance_and_body_for(new_character)
 	client.prefs.copy_to(new_character)
 
-	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo
+	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = sound_channels.lobby_channel))// MAD JAMS cant last forever yo
 
 	if(mind)
 		mind.active = 0 //we wish to transfer the key manually
@@ -487,7 +487,7 @@
 	new_character.sync_organ_dna()
 	if(client.prefs.disabilities)
 		// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
-		new_character.dna.SetSEState(GLOB.GLASSESBLOCK,1,0)
+		new_character.dna.SetSEState(global.GLASSESBLOCK,1,0)
 		new_character.disabilities |= NEARSIGHTED
 
 	// Do the initial caching of the player's body icons.

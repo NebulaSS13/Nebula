@@ -324,7 +324,7 @@ SUBSYSTEM_DEF(jobs)
  *  This proc must not have any side effect besides of modifying "assigned_role".
  **/
 /datum/controller/subsystem/jobs/proc/divide_occupations(datum/game_mode/mode)
-	if(GLOB.triai)
+	if(global.triai)
 		for(var/datum/job/A in primary_job_datums)
 			if(A.title == "AI")
 				A.spawn_positions = 3

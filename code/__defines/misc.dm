@@ -111,10 +111,10 @@
 #define WALL_CAN_OPEN 1
 #define WALL_OPENING 2
 
-#define BOMBCAP_DVSTN_RADIUS (GLOB.max_explosion_range/4)
-#define BOMBCAP_HEAVY_RADIUS (GLOB.max_explosion_range/2)
-#define BOMBCAP_LIGHT_RADIUS GLOB.max_explosion_range
-#define BOMBCAP_FLASH_RADIUS (GLOB.max_explosion_range*1.5)
+#define BOMBCAP_DVSTN_RADIUS (global.max_explosion_range/4)
+#define BOMBCAP_HEAVY_RADIUS (global.max_explosion_range/2)
+#define BOMBCAP_LIGHT_RADIUS global.max_explosion_range
+#define BOMBCAP_FLASH_RADIUS (global.max_explosion_range*1.5)
 
 
 // Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
