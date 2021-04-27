@@ -100,3 +100,7 @@
 /obj/item/stock_parts/circuitboard/guestpass
 	name = "circuitboard (guest pass terminal)"
 	build_path = /obj/machinery/computer/guestpass
+
+/obj/item/stock_parts/circuitboard/comms
+	name = "circuitboard (comms control console)"
+	build_path = /obj/machinery/computer/ship/comms

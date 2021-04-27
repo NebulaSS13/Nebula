@@ -23,6 +23,11 @@
 	var/last_burn = 0                   // worldtime when ship last acceleated
 	var/burn_delay = 1 SECOND           // how often ship can do burns
 
+	var/list/comms_masers
+	var/list/comms_antennae
+	var/ident_transmitter = TRUE
+	var/can_switch_ident = TRUE
+
 //Overlay of how this object should look on other skyboxes
 /obj/effect/overmap/proc/get_skybox_representation()
 	return
