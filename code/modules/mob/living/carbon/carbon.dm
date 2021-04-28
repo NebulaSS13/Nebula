@@ -222,15 +222,18 @@
 /mob/proc/throw_item(atom/target)
 	return
 
-/mob/living/carbon/throw_item(atom/target)
+/mob/living/carbon/throw_item(atom/target, obj/item/item)
 	src.throw_mode_off()
 	if(src.stat || !target)
 		return
-	if(target.type == /obj/screen) return
+	if(target.type == /obj/screen) 
+		return
 
-	var/atom/movable/item = src.get_active_hand()
+	if(!item)
+		item = get_active_hand()
 
-	if(!item) return
+	if(!istype(item) || !(item in get_held_items()))
+		return
 
 	var/throw_range = item.throw_range
 	var/itemsize
@@ -259,7 +262,7 @@
 	if(!item || !isturf(item.loc))
 		return
 
-	var/message = "\The [src] has thrown \the [item]."
+	var/message = "\The [src] has thrown \the [item]!"
 	var/skill_mod = 0.2
 	if(!skill_check(SKILL_HAULING, min(round(itemsize - ITEM_SIZE_HUGE) + 2, SKILL_MAX)))
 		if(prob(30))

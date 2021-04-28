@@ -132,3 +132,5 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		power *= 2
 	return target.hit_with_weapon(src, user, power, hit_zone)
 
+/obj/item/proc/handle_reflexive_fire(var/mob/user, var/atom/aiming_at)
+	return istype(user) && istype(aiming_at)
