@@ -1,5 +1,0 @@
-author: eckff
-delete-after: true
-changes:
-  - rscadd: Adds diona nymph chirp as fun instrument for synthesizer. Available only
-      with dionaea modpack.

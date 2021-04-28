@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - rscadd: Admin paralyzed players now have notices to inform other players they're
-      paralyzed and being handled by staff, and to not interact until staff are done.
