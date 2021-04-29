@@ -199,8 +199,6 @@
 	else if (src.density)
 		flick(text("[]deny", src.base_state), src)
 
-	return
-
 /obj/machinery/door/window/holowindoor/shatter(var/display_message = 1)
 	src.set_density(0)
 	playsound(src, "shatter", 70, 1)
@@ -209,9 +207,8 @@
 	qdel(src)
 
 /obj/structure/bed/chair/holochair/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/wrench))
+	if(isWrench(W))
 		to_chat(user, ("<span class='notice'>It's a holochair, you can't dismantle it!</span>"))
-	return
 
 /obj/item/holo
 	damtype = PAIN

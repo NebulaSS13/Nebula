@@ -26,6 +26,10 @@
 	var/buffer_name
 	var/atom/buffer_object
 
+/obj/item/multitool/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_MULTITOOL = TOOL_QUALITY_DEFAULT))
+
 /obj/item/multitool/Destroy()
 	unregister_buffer(buffer_object)
 	return ..()

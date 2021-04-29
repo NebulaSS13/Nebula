@@ -7,6 +7,10 @@
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	var/armed = 0
 
+/obj/item/assembly/mousetrap/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_HEMOSTAT = TOOL_QUALITY_WORST))
+
 /obj/item/assembly/mousetrap/examine(mob/user)
 	. = ..()
 	if(armed)

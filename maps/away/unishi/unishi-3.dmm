@@ -590,7 +590,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/item/scalpel/laser1,
+/obj/item/scalpel/laser,
 /turf/simulated/floor/tiled/white,
 /area/unishi/med)
 "bS" = (

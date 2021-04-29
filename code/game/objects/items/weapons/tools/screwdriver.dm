@@ -17,9 +17,10 @@
 	var/handle_color
 
 /obj/item/screwdriver/Initialize()
-	if (prob(75))
-		src.pixel_y = rand(0, 16)
+	if(prob(75))
+		pixel_y = rand(0, 16)
 	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_SCREWDRIVER = TOOL_QUALITY_DEFAULT))
 
 /obj/item/screwdriver/on_update_icon()
 	..()

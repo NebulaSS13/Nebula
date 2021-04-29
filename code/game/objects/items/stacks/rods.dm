@@ -45,6 +45,7 @@
 	update_icon()
 	throwforce = round(0.25*material.get_edge_damage())
 	force = round(0.5*material.get_blunt_damage())
+	set_extension(src, /datum/extension/tool, list(TOOL_DRILL = TOOL_QUALITY_WORST))
 
 /obj/item/stack/material/on_update_icon()
 	if(material_flags & USE_MATERIAL_COLOR)

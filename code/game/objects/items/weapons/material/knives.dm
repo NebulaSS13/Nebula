@@ -22,6 +22,16 @@
 	var/handle_color
 	var/valid_handle_colors
 
+/obj/item/knife/Initialize(ml, material_key)
+	. = ..()
+	if(!has_extension(src, /datum/extension/tool))
+		set_extension(src, /datum/extension/tool, list( 
+			TOOL_SCALPEL =     TOOL_QUALITY_MEDIOCRE,
+			TOOL_SAW =         TOOL_QUALITY_BAD,
+			TOOL_RETRACTOR =   TOOL_QUALITY_BAD, 
+			TOOL_SCREWDRIVER = TOOL_QUALITY_BAD
+		))
+
 /obj/item/knife/on_update_icon()
 	..()
 	if(draw_handle)
