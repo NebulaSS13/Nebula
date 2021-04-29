@@ -8,8 +8,6 @@
 //			/atom/old_loc: The loc before the move.
 //			/atom/new_loc: The loc after the move.
 
-var/global/decl/observ/moved/moved_event = new
-
 /decl/observ/moved
 	name = "Moved"
 	expected_type = /atom/movable
