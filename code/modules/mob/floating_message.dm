@@ -50,14 +50,14 @@ var/global/list/floating_chat_colors = list()
 	I.maptext_width = 80
 	I.maptext_height = 64
 	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
-	I.pixel_x = -round(I.maptext_width/2) + 16
+	I.pixel_w = -round(I.maptext_width/2) + 16
 
 	style = "font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: [size]px; [style]"
 	I.maptext = "<center><span style=\"[style]\">[message]</span></center>"
-	animate(I, 1, alpha = 255, pixel_y = 16)
+	animate(I, 1, alpha = 255, pixel_z = 16)
 
 	for(var/image/old in holder.stored_chat_text)
-		animate(old, 2, pixel_y = old.pixel_y + 8)
+		animate(old, 2, pixel_z = old.pixel_z + 8)
 	LAZYADD(holder.stored_chat_text, I)
 
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/remove_floating_text, holder, I), duration)
@@ -66,5 +66,5 @@ var/global/list/floating_chat_colors = list()
 	return I
 
 /proc/remove_floating_text(atom/movable/holder, image/I)
-	animate(I, 2, pixel_y = I.pixel_y + 10, alpha = 0)
+	animate(I, 2, pixel_z = I.pixel_z + 10, alpha = 0)
 	LAZYREMOVE(holder.stored_chat_text, I)
