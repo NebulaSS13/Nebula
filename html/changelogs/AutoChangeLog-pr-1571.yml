@@ -1,4 +1,0 @@
-author: ghostsheet
-delete-after: true
-changes:
-  - bugfix: Camera shake has been refactored.
