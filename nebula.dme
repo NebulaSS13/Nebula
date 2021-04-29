@@ -2108,6 +2108,7 @@
 #include "code\modules\mining\drilling\drill_act.dm"
 #include "code\modules\mining\machinery\_material_processing.dm"
 #include "code\modules\mining\machinery\material_compressor.dm"
+#include "code\modules\mining\machinery\material_extractor.dm"
 #include "code\modules\mining\machinery\material_smelter.dm"
 #include "code\modules\mining\machinery\material_stacker.dm"
 #include "code\modules\mining\machinery\material_unloader.dm"
