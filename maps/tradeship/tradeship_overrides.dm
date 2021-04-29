@@ -11,8 +11,8 @@
 /obj/item/stack/tile/floor/five
 	amount = 5
 
-/obj/item/stack/cable_coil/yellow/single
-	amount = 1
+/obj/item/stack/cable_coil/single/yellow
+	color = COLOR_AMBER
 
 /obj/item/stack/cable_coil/random/three
 	amount = 3

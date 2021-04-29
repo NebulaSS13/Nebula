@@ -112,16 +112,9 @@
 /decl/hierarchy/supply_pack/supply/fueltank
 	name = "Liquid - Fuel tank"
 	contains = list(/obj/structure/reagent_dispensers/fueltank)
-	cost = 8
+	cost = 15
 	containertype = /obj/structure/largecrate
 	containername = "fuel tank crate"
-
-/decl/hierarchy/supply_pack/supply/watertank
-	name = "Liquid - Water tank"
-	contains = list(/obj/structure/reagent_dispensers/watertank)
-	cost = 8
-	containertype = /obj/structure/largecrate
-	containername = "water tank crate"
 
 //replacement vendors
 //Vending Machines
