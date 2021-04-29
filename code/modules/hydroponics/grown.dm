@@ -147,7 +147,7 @@
 	if(seed) 
 		seed.thrown_at(src,hit_atom)
 
-var/list/_wood_materials = list(
+var/global/list/_wood_materials = list(
 	/decl/material/solid/wood,
 	/decl/material/solid/wood/mahogany,
 	/decl/material/solid/wood/maple,
