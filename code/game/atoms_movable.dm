@@ -297,7 +297,7 @@
 	if(!z || (z in global.using_map.sealed_levels))
 		return
 
-	if(!GLOB.universe.OnTouchMapEdge(src))
+	if(!global.universe.OnTouchMapEdge(src))
 		return
 
 	if(global.using_map.use_overmap)

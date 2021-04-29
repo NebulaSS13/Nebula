@@ -149,7 +149,7 @@
 
 		last_bounce = world.time += (bounce_delay / severity)
 
-		for(var/mob/living/carbon/human/H in GLOB.living_mob_list_) //Affect mobs, skip synthetics.
+		for(var/mob/living/carbon/human/H in global.living_mob_list_) //Affect mobs, skip synthetics.
 
 			if(!(H.z in affecting_z))
 				continue

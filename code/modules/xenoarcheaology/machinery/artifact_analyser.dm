@@ -53,7 +53,7 @@
 	. = ..()
 
 /obj/machinery/artifact_analyser/DefaultTopicState()
-	return GLOB.physical_state
+	return global.physical_topic_state
 
 /obj/machinery/artifact_analyser/interface_interact(user)
 	ui_interact(user)

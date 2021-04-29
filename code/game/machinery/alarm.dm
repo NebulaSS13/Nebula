@@ -476,7 +476,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/data[0]
 	var/remote_connection = istype(state, /datum/topic_state/remote)  // Remote connection means we're non-adjacent/connecting from another computer
 	var/remote_access = remote_connection && CanInteract(user, state) // Remote access means we also have the privilege to alter the air alarm.

@@ -68,7 +68,7 @@
 	// Raise appropriate events.
 	W.post_change()
 	if(tell_universe)
-		GLOB.universe.OnTurfChange(W)
+		global.universe.OnTurfChange(W)
 
 	events_repository.raise_event(/decl/observ/turf_changed, W, old_density, W.density, old_opacity, W.opacity)
 	if(W.density != old_density)

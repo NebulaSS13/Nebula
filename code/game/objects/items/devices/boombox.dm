@@ -55,7 +55,7 @@
 	popup.open()
 
 /obj/item/boombox/DefaultTopicState()
-	return GLOB.physical_state
+	return global.physical_topic_state
 
 /obj/item/boombox/CouldUseTopic(var/mob/user)
 	..()

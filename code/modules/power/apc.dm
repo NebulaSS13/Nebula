@@ -483,7 +483,7 @@
 				return 1
 
 /obj/machinery/power/apc/CanUseTopicPhysical(var/mob/user)
-	return GLOB.physical_state.can_use_topic(nano_host(), user)
+	return global.physical_topic_state.can_use_topic(nano_host(), user)
 
 /obj/machinery/power/apc/physical_attack_hand(mob/user)
 	//Human mob special interaction goes here.
