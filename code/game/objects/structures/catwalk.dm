@@ -152,8 +152,8 @@
 	icon_state = "catwalk_plated"
 	density = 1
 	anchored = 1.0
-	var/activated = FALSE
 	layer = CATWALK_LAYER
+	var/activated = FALSE
 	var/plating_type = /decl/flooring/tiling/mono
 
 /obj/effect/catwalk_plated/Initialize(mapload)
@@ -179,7 +179,7 @@
 		warning("Frame Spawner: A catwalk already exists at [loc.x]-[loc.y]-[loc.z]")
 	else
 		var/obj/structure/catwalk/C = new /obj/structure/catwalk(loc)
-		C.plated_tile += new plating_type
+		C.plated_tile += GET_DECL(plating_type)
 		C.name = "plated catwalk"
 		C.update_icon()
 	activated = 1

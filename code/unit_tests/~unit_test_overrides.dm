@@ -85,7 +85,7 @@ var/global/list/unit_test_obj_random_weights_by_type = list()
 	map_templates[MT.name] = MT
 	. = MT
 
-var/list/seen_decls
+var/global/list/seen_decls
 /decl/New()
 	..()
 	// Some of this can be procced by globally scoped 
