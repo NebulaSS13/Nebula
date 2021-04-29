@@ -84,14 +84,14 @@
 	daddy = ndaddy
 	set_dir(daddy.dir)
 	appearance = daddy.appearance
-	GLOB.moved_event.register(daddy, src, /obj/effect/bluegoast/proc/mirror)
-	GLOB.dir_set_event.register(daddy, src, /obj/effect/bluegoast/proc/mirror_dir)
-	GLOB.destroyed_event.register(daddy, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/moved, daddy, src, /obj/effect/bluegoast/proc/mirror)
+	events_repository.register(/decl/observ/dir_set, daddy, src, /obj/effect/bluegoast/proc/mirror_dir)
+	events_repository.register(/decl/observ/destroyed, daddy, src, /datum/proc/qdel_self)
 
 /obj/effect/bluegoast/Destroy()
-	GLOB.destroyed_event.unregister(daddy, src)
-	GLOB.dir_set_event.unregister(daddy, src)
-	GLOB.moved_event.unregister(daddy, src)
+	events_repository.unregister(/decl/observ/destroyed, daddy, src)
+	events_repository.unregister(/decl/observ/dir_set, daddy, src)
+	events_repository.unregister(/decl/observ/moved, daddy, src)
 	daddy = null
 	. = ..()
 

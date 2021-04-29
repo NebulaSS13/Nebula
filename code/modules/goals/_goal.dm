@@ -7,14 +7,14 @@
 
 /datum/goal/New(var/_owner)
 	owner = _owner
-	GLOB.destroyed_event.register(owner, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/destroyed, owner, src, /datum/proc/qdel_self)
 	if(istype(owner, /datum/mind))
 		var/datum/mind/mind = owner
 		LAZYADD(mind.goals, src)
 	update_strings()
 
 /datum/goal/Destroy()
-	GLOB.destroyed_event.unregister(owner, src)
+	events_repository.unregister(/decl/observ/destroyed, owner, src)
 	if(owner)
 		if(istype(owner, /datum/mind))
 			var/datum/mind/mind = owner

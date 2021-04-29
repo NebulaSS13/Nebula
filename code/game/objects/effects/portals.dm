@@ -33,14 +33,14 @@
 			dangerous = 1
 	playsound(src, 'sound/effects/phasein.ogg', 25, 1)
 	target = end
-	GLOB.moved_event.register(src, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/moved, src, src, /datum/proc/qdel_self)
 
 	if(delete_after)
 		QDEL_IN(src, delete_after)
 
 /obj/effect/portal/Destroy()
 	target = null
-	GLOB.moved_event.unregister(src, src)
+	events_repository.unregister(/decl/observ/moved, src, src)
 	. = ..()
 
 /obj/effect/portal/proc/teleport(atom/movable/M)

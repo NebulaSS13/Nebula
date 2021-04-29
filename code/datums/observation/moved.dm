@@ -8,8 +8,6 @@
 //			/atom/old_loc: The loc before the move.
 //			/atom/new_loc: The loc after the move.
 
-GLOBAL_DATUM_INIT(moved_event, /decl/observ/moved, new)
-
 /decl/observ/moved
 	name = "Moved"
 	expected_type = /atom/movable
@@ -28,13 +26,14 @@ GLOBAL_DATUM_INIT(moved_event, /decl/observ/moved, new)
 
 /atom/Entered(var/atom/movable/am, var/atom/old_loc)
 	. = ..()
-	GLOB.moved_event.raise_event(am, old_loc, am.loc)
+	events_repository.raise_event(/decl/observ/moved, am, old_loc, am.loc)
 
 /atom/movable/Entered(var/atom/movable/am, atom/old_loc)
 	. = ..()
-	if(GLOB.moved_event.has_listeners(am))
-		GLOB.moved_event.register(src, am, /atom/movable/proc/recursive_move)
+	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
+	if(moved_event.has_listeners(am))
+		events_repository.register(/decl/observ/moved, src, am, /atom/movable/proc/recursive_move)
 
 /atom/movable/Exited(var/atom/movable/am, atom/new_loc)
 	. = ..()
-	GLOB.moved_event.unregister(src, am, /atom/movable/proc/recursive_move)
+	events_repository.unregister(/decl/observ/moved, src, am, /atom/movable/proc/recursive_move)

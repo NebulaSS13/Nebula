@@ -159,9 +159,9 @@
 		testing("Moving [A]")
 		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
 	var/obj/effect/shuttle_landmark/old_location = current_location
-	GLOB.shuttle_pre_move_event.raise_event(src, old_location, destination)
+	events_repository.raise_event(/decl/observ/shuttle_pre_move, src, old_location, destination)
 	shuttle_moved(destination, translation)
-	GLOB.shuttle_moved_event.raise_event(src, old_location, destination)
+	events_repository.raise_event(/decl/observ/shuttle_moved, src, old_location, destination)
 	if(istype(old_location))
 		old_location.shuttle_departed(src)
 	destination.shuttle_arrived(src)
@@ -185,9 +185,9 @@
 		testing("Moving [A]")
 		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
 	var/obj/effect/shuttle_landmark/old_location = current_location
-	GLOB.shuttle_pre_move_event.raise_event(src, old_location, destination)
+	events_repository.raise_event(/decl/observ/shuttle_pre_move, src, old_location, destination)
 	shuttle_moved(destination, translation)
-	GLOB.shuttle_moved_event.raise_event(src, old_location, destination)
+	events_repository.raise_event(/decl/observ/shuttle_moved, src, old_location, destination)
 	if(istype(old_location))
 		old_location.shuttle_departed(src)
 	destination.shuttle_arrived(src)

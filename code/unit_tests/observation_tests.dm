@@ -1,5 +1,6 @@
 /proc/is_listening_to_movement(var/atom/movable/listening_to, var/listener)
-	return GLOB.moved_event.is_listening(listening_to, listener)
+	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
+	return moved_event.is_listening(listening_to, listener)
 
 /datum/unit_test/observation
 	name = "OBSERVATION template"
@@ -18,12 +19,13 @@
 	received_moves.Cut()
 	received_name_set_events.Cut()
 
-	for(var/global_listener in GLOB.moved_event.global_listeners)
-		GLOB.moved_event.unregister_global(global_listener)
+	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
+	for(var/global_listener in moved_event.global_listeners)
+		events_repository.unregister_global(/decl/observ/moved, global_listener)
 
 	stored_global_listen_count = GLOB.global_listen_count.Copy()
 	stored_event_sources_count = GLOB.event_sources_count.Copy()
-	stored_event_listen_count = GLOB.event_listen_count.Copy()
+	stored_event_listen_count =  GLOB.event_listen_count.Copy()
 
 	sanity_check_events("Pre-Test")
 	. = conduct_test()
@@ -91,7 +93,7 @@
 	old_name = O.name
 	new_name = O.name + " (New)"
 
-	GLOB.name_set_event.register_global(src, /datum/unit_test/observation/proc/receive_name_change)
+	events_repository.register_global(/decl/observ/name_set, src, /datum/unit_test/observation/proc/receive_name_change)
 	O.SetName(new_name)
 
 	if(received_name_set_events.len != 1)
@@ -105,7 +107,7 @@
 	else
 		pass("Received the expected name set event.")
 
-	GLOB.name_set_event.unregister_global(src)
+	events_repository.unregister_global(/decl/observ/name_set, src)
 	qdel(O)
 	return 1
 
@@ -234,7 +236,7 @@
 
 	exosuit.occupant = holding_mob
 
-	GLOB.moved_event.register(held_item, src, /datum/unit_test/observation/proc/receive_move)
+	events_repository.register(/decl/observ/moved, held_item, src, /datum/unit_test/observation/proc/receive_move)
 	holding_mob.drop_from_inventory(held_item)
 
 	if(received_moves.len != 1)
@@ -250,7 +252,7 @@
 	else
 		pass("One one moved event with expected arguments raised.")
 
-	GLOB.moved_event.unregister(held_item, src)
+	events_repository.unregister(/decl/observ/moved, held_item, src)
 	qdel(exosuit)
 	qdel(held_item)
 	qdel(held_mob)
@@ -314,10 +316,11 @@
 	var/turf/T = get_safe_turf()
 	var/obj/O = get_named_instance(/obj, T)
 
-	GLOB.name_set_event.register_global(O, /atom/movable/proc/move_to_turf)
+	events_repository.register_global(/decl/observ/name_set, O, /atom/movable/proc/move_to_turf)
 	qdel(O)
 
-	if(null in GLOB.name_set_event.global_listeners)
+	var/decl/observ/name_set/name_set_event = GET_DECL(/decl/observ/name_set)
+	if(null in name_set_event.global_listeners)
 		fail("The global listener list contains a null entry.")
 	else
 		pass("The global listener list does not contain a null entry.")
@@ -332,10 +335,11 @@
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
 
-	GLOB.moved_event.register(event_source, listener, /atom/movable/proc/recursive_move)
+	events_repository.register(/decl/observ/moved, event_source, listener, /atom/movable/proc/recursive_move)
 	qdel(event_source)
 
-	if(null in GLOB.moved_event.event_sources)
+	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
+	if(null in moved_event.event_sources)
 		fail("The event source list contains a null entry.")
 	else
 		pass("The event source list does not contain a null entry.")
@@ -351,10 +355,11 @@
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
 
-	GLOB.moved_event.register(event_source, listener, /atom/movable/proc/recursive_move)
+	events_repository.register(/decl/observ/moved, event_source, listener, /atom/movable/proc/recursive_move)
 	qdel(listener)
 
-	var/listeners = GLOB.moved_event.event_sources[event_source]
+	var/decl/observ/moved/moved_event = GET_DECL(/decl/observ/moved)
+	var/listeners = moved_event.event_sources[event_source]
 	if(listeners && (null in listeners))
 		fail("The event source listener list contains a null entry.")
 	else

@@ -5,9 +5,9 @@
 /datum/admin_secret_item/fun_secret/waddle/do_execute(var/mob/user)
 	waddling = !waddling
 	if(waddling)
-		GLOB.moved_event.register_global(src, .proc/waddle)
+		events_repository.register_global(/decl/observ/moved, src, .proc/waddle)
 	else
-		GLOB.moved_event.unregister_global(src, .proc/waddle)
+		events_repository.unregister_global(/decl/observ/moved, src, .proc/waddle)
 
 /datum/admin_secret_item/fun_secret/waddle/proc/waddle(atom/movable/AM)
 	var/mob/living/L = AM
