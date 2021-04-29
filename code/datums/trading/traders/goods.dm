@@ -337,7 +337,7 @@ Sells devices, odds and ends, and medical stuff
 								  /obj/item/cautery = TRADER_THIS_TYPE,
 								  /obj/item/surgicaldrill = TRADER_THIS_TYPE,
 								  /obj/item/scalpel = TRADER_THIS_TYPE,
-								  /obj/item/scalpel/manager = TRADER_THIS_TYPE,
+								  /obj/item/incision_manager = TRADER_THIS_TYPE,
 								  /obj/item/circular_saw = TRADER_THIS_TYPE,
 								  /obj/item/bonegel = TRADER_THIS_TYPE,
 								  /obj/item/bonesetter = TRADER_THIS_TYPE,

@@ -18,88 +18,12 @@
 		. = ..()
 
 //////////////////////////////////////////////////////////////////
-//	laser scalpel surgery step
-//	acts as both cutting and bleeder clamping surgery steps
-//////////////////////////////////////////////////////////////////
-/decl/surgery_step/generic/cut_with_laser
-	name = "Make laser incision"
-	description = "This procedure uses a laser to quickly and cleanly make an incision."
-	allowed_tools = list(
-		/obj/item/scalpel/laser3 = 95,
-		/obj/item/scalpel/laser2 = 85,
-		/obj/item/scalpel/laser1 = 75,
-		/obj/item/energy_blade/sword = 5
-	)
-	min_duration = 90
-	max_duration = 110
-
-/decl/surgery_step/generic/cut_with_laser/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts the bloodless incision on [target]'s [affected.name] with \the [tool].", \
-	"You start the bloodless incision on [target]'s [affected.name] with \the [tool].")
-	target.custom_pain("You feel a horrible, searing pain in your [affected.name]!",50, affecting = affected)
-	..()
-
-/decl/surgery_step/generic/cut_with_laser/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='notice'>[user] has made a bloodless incision on [target]'s [affected.name] with \the [tool].</span>", \
-	"<span class='notice'>You have made a bloodless incision on [target]'s [affected.name] with \the [tool].</span>",)
-	affected.createwound(CUT, affected.min_broken_damage/2, 1)
-	affected.clamp_organ()
-	spread_germs_to_organ(affected, user)
-
-/decl/surgery_step/generic/cut_with_laser/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='warning'>[user]'s hand slips as the blade sputters, searing a long gash in [target]'s [affected.name] with \the [tool]!</span>", \
-	"<span class='warning'>Your hand slips as the blade sputters, searing a long gash in [target]'s [affected.name] with \the [tool]!</span>")
-	affected.take_external_damage(15, 5, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
-
-//////////////////////////////////////////////////////////////////
-//	laser scalpel surgery step
-//	acts as the cutting, bleeder clamping, and retractor surgery steps
-//////////////////////////////////////////////////////////////////
-/decl/surgery_step/generic/managed
-	name = "Make managed incision"
-	description = "This procedure uses a laser scalpel to construct a pre-clamped incision into a patient's body."
-	allowed_tools = list(
-		/obj/item/scalpel/manager = 100
-	)
-	min_duration = 80
-	max_duration = 120
-
-/decl/surgery_step/generic/managed/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts to construct a prepared incision on and within [target]'s [affected.name] with \the [tool].", \
-	"You start to construct a prepared incision on and within [target]'s [affected.name] with \the [tool].")
-	target.custom_pain("You feel a horrible, searing pain in your [affected.name] as it is pushed apart!",50, affecting = affected)
-	..()
-
-/decl/surgery_step/generic/managed/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='notice'>[user] has constructed a prepared incision on and within [target]'s [affected.name] with \the [tool].</span>", \
-	"<span class='notice'>You have constructed a prepared incision on and within [target]'s [affected.name] with \the [tool].</span>",)
-	affected.createwound(CUT, affected.min_broken_damage/2, 1) // incision
-	affected.clamp_organ() // clamp
-	affected.open_incision() // retract
-
-/decl/surgery_step/generic/managed/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='warning'>[user]'s hand jolts as the system sparks, ripping a gruesome hole in [target]'s [affected.name] with \the [tool]!</span>", \
-	"<span class='warning'>Your hand jolts as the system sparks, ripping a gruesome hole in [target]'s [affected.name] with \the [tool]!</span>")
-	affected.take_external_damage(20, 15, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
-
-//////////////////////////////////////////////////////////////////
 //	 scalpel surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/generic/cut_open
 	name = "Make incision"
 	description = "This procedure cuts a small wound that allows access to deeper tissue."
-	allowed_tools = list(
-		/obj/item/scalpel = 100,
-		/obj/item/knife = 75,
-		/obj/item/broken_bottle = 50,
-		/obj/item/shard = 50
-	)
+	allowed_tools = list(TOOL_SCALPEL = 100)
 	min_duration = 90
 	max_duration = 110
 	var/fail_string = "slicing open"
@@ -127,6 +51,8 @@
 	"<span class='notice'>You have made [access_string] on [target]'s [affected.name] with \the [tool].</span>",)
 	affected.createwound(CUT, affected.min_broken_damage/2, 1)
 	playsound(target.loc, 'sound/weapons/bladeslice.ogg', 15, 1)
+	if(tool.damtype == BURN)
+		affected.clamp_organ()
 
 /decl/surgery_step/generic/cut_open/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -148,9 +74,8 @@
 	name = "Clamp bleeders"
 	description = "This procedure clamps off veins within an incision, preventing it from bleeding excessively."
 	allowed_tools = list(
-		/obj/item/hemostat = 100,
-		/obj/item/stack/cable_coil = 75,
-		/obj/item/assembly/mousetrap = 20
+		TOOL_HEMOSTAT = 100,
+		TOOL_CABLECOIL = 75
 	)
 	min_duration = 40
 	max_duration = 60
@@ -190,10 +115,8 @@
 	name = "Widen incision"
 	description = "This procedure is used to widen an incision when it is too small to access the interior."
 	allowed_tools = list(
-		/obj/item/retractor = 100,
-		/obj/item/crowbar = 75,
-		/obj/item/knife = 50,
-		/obj/item/kitchen/utensil/fork = 50
+		TOOL_RETRACTOR = 100,
+		TOOL_CROWBAR = 75
 	)
 	min_duration = 30
 	max_duration = 40
@@ -236,10 +159,8 @@
 	name = "Cauterize incision"
 	description = "This procedure cauterizes and closes an incision."
 	allowed_tools = list(
-		/obj/item/cautery = 100,
-		/obj/item/clothing/mask/smokable/cigarette = 75,
-		/obj/item/flame/lighter = 50,
-		/obj/item/weldingtool = 25
+		TOOL_CAUTERY = 100,
+		TOOL_WELDER = 25
 	)
 	min_duration = 70
 	max_duration = 100
@@ -304,8 +225,8 @@
 	name = "Amputate limb"
 	description = "This procedure removes a limb, or the stump of a limb, from the body entirely."
 	allowed_tools = list(
-		/obj/item/circular_saw = 100,
-		/obj/item/hatchet = 75
+		TOOL_SAW = 100,
+		TOOL_HATCHET = 75
 	)
 	min_duration = 110
 	max_duration = 160
@@ -327,7 +248,7 @@
 /decl/surgery_step/generic/amputate/proc/is_clean(var/mob/user, var/obj/item/tool, var/mob/target)
 	. = (user.a_intent != I_HELP) ? FALSE : (can_operate(target) >= OPERATE_OKAY && istype(tool, /obj/item/circular_saw))
 
-/decl/surgery_step/generic/amputate/get_speed_modifier(var/mob/user, var/mob/target, var/obj/item/tool)
+/decl/surgery_step/generic/amputate/get_speed_modifier(var/mob/user, var/mob/target, var/obj/item/tool, var/tool_archetype)
 	. = ..()
 	if(!is_clean(user, tool, target))
 		. *= 0.5

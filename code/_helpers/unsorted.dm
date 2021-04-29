@@ -681,21 +681,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		loc = loc.loc
 	return null
 
-//Quick type checks for some tools
-var/global/list/common_tools = list(
-/obj/item/stack/cable_coil,
-/obj/item/wrench,
-/obj/item/weldingtool,
-/obj/item/screwdriver,
-/obj/item/wirecutters,
-/obj/item/multitool,
-/obj/item/crowbar)
-
-/proc/istool(O)
-	if(O && is_type_in_list(O, common_tools))
-		return 1
-	return 0
-
 //Whether or not the given item counts as sharp in terms of dealing damage
 /proc/is_sharp(obj/O)
 	if (!O) return 0

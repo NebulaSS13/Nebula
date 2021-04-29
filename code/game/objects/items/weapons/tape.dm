@@ -5,6 +5,13 @@
 	icon_state = "taperoll"
 	w_class = ITEM_SIZE_SMALL
 
+/obj/item/tape_roll/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(
+		TOOL_BONE_GEL = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SUTURES =  TOOL_QUALITY_BAD
+	))
+
 /obj/item/tape_roll/attack(var/mob/living/carbon/human/H, var/mob/user)
 	if(istype(H))
 		if(user.zone_sel.selecting == BP_EYES)

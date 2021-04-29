@@ -129,9 +129,9 @@
 /area/surgery)
 "at" = (
 /obj/structure/table/glass,
-/obj/item/scalpel/laser1,
-/obj/item/scalpel/laser2,
-/obj/item/scalpel/laser3,
+/obj/item/scalpel/laser,
+/obj/item/scalpel/laser/upgraded,
+/obj/item/scalpel/laser/advanced,
 /obj/item/robotanalyzer,
 /obj/item/scanner/health,
 /obj/item/storage/firstaid/adv,

@@ -26,6 +26,10 @@
 		/obj/machinery = 15
 		)
 
+/obj/item/crowbar/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_CROWBAR = TOOL_QUALITY_DEFAULT))
+
 /obj/item/crowbar/get_autopsy_descriptors()
 	. = ..()
 	. += "narrow"

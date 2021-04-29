@@ -30,10 +30,9 @@
 		tank = new tank
 		w_class = tank.size_in_use
 		force = tank.unlit_force
-
+	set_extension(src, /datum/extension/tool, list(TOOL_WELDER = TOOL_QUALITY_DEFAULT))
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	update_icon()
-
 	. = ..()
 
 /obj/item/weldingtool/dropped(mob/user)

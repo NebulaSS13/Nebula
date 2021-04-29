@@ -1,10 +1,7 @@
 /decl/surgery_step/suture_wounds
 	name = "Suture wound"
 	description = "This procedure reduces the size of a wound, allowing it to heal or close."
-	allowed_tools = list(
-		/obj/item/sutures = 100,
-		/obj/item/stack/cable_coil = 60
-	)
+	allowed_tools = list(TOOL_SUTURES = 100)
 
 	min_duration = 70
 	max_duration = 100

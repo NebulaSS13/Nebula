@@ -15,9 +15,9 @@ var/global/host = null //only here until check @ code\modules\ghosttrap\trap.dm:
 var/global/datum/sun/sun = new
 var/global/datum/universal_state/universe = new
 
-var/global/list/vowels = list("a","e","i","o","u")
+var/global/list/vowels =             list("a","e","i","o","u")
 var/global/list/alphabet_no_vowels = list("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","z")
-var/global/list/full_alphabet = list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
+var/global/list/full_alphabet =      list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
 
 var/global/list/meteor_list = list()
 

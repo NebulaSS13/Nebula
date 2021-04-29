@@ -32,13 +32,19 @@ var/global/list/surgery_tool_exception_cache = list()
 	var/expected_mob_type = /mob/living/carbon/human
 	var/surgery_step_category = /decl/surgery_step
 
+//returns how fast the tool is for this step
 /decl/surgery_step/proc/get_speed_modifier(var/mob/user, var/mob/target, var/obj/item/tool)
 	. = 1
+	for(var/T in allowed_tools)
+		if(ispath(T, /decl/tool_archetype))
+			. = min(., tool.get_tool_speed(T))
 
 //returns how well tool is suited for this step
 /decl/surgery_step/proc/tool_quality(obj/item/tool)
-	for (var/T in allowed_tools)
-		if (istype(tool,T))
+	for(var/T in allowed_tools)
+		if(ispath(T, /decl/tool_archetype))
+			return round(allowed_tools[T] * tool.get_tool_quality(T))
+		else if(istype(tool,T))
 			return allowed_tools[T]
 	return 0
 

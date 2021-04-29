@@ -10,9 +10,8 @@
 	name = "Saw through bone"
 	description = "This procedure splits open encasing bones such as the ribcage to allow access to the innards."
 	allowed_tools = list(
-		/obj/item/circular_saw = 100,
-		/obj/item/knife = 50,
-		/obj/item/hatchet = 75
+		TOOL_SAW =     100,
+		TOOL_HATCHET = 75
 	)
 	can_infect = 1
 	blood_level = 1

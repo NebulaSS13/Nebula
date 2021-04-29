@@ -78,6 +78,10 @@
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
+/obj/item/pickaxe/drill/Initialize(ml, material_key)
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_DRILL = TOOL_QUALITY_MEDIOCRE))
+
 /obj/item/pickaxe/jackhammer
 	name = "sonic jackhammer"
 	icon = 'icons/obj/items/tool/drills/jackhammer.dmi'

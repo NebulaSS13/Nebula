@@ -115,15 +115,16 @@ SUBSYSTEM_DEF(codex)
 		var/mob/showing_mob =   locate(href_list["show_to"])
 		if(!istype(showing_mob) || !showing_mob.can_use_codex())
 			return 
+
 		var/atom/showing_atom = locate(href_list["show_examined_info"])
 		var/entry
 		if(istype(showing_atom, /datum/codex_entry))
 			entry = showing_atom
+		else if(istype(showing_atom))
+			entry = get_codex_entry(showing_atom.get_codex_value())
 		else
-			if(istype(showing_atom))
-				entry = get_codex_entry(showing_atom.get_codex_value())
-			else
-				entry = get_codex_entry(showing_atom)
+			entry = get_codex_entry(href_list["show_examined_info"])
+
 		if(entry)
 			present_codex_entry(showing_mob, entry)
 			return TRUE
