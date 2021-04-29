@@ -60,3 +60,5 @@
 	material = /decl/material/solid/mineral/bauxite
 /obj/item/ore/rutile
 	material = /decl/material/solid/mineral/rutile
+/obj/item/ore/methane 
+	material = /decl/material/solid/ice/hydrate/methane
