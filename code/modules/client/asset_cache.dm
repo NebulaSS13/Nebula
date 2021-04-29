@@ -174,7 +174,7 @@ var/global/list/asset_datums = list()
 
 
 //DEFINITIONS FOR ASSET DATUMS START HERE.
-var/template_file_name = "all_templates.json"
+var/global/template_file_name = "all_templates.json"
 
 /datum/asset/nanoui
 	var/list/common = list()
