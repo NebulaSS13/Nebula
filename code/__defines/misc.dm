@@ -111,10 +111,10 @@
 #define WALL_CAN_OPEN 1
 #define WALL_OPENING 2
 
-#define BOMBCAP_DVSTN_RADIUS (GLOB.max_explosion_range/4)
-#define BOMBCAP_HEAVY_RADIUS (GLOB.max_explosion_range/2)
-#define BOMBCAP_LIGHT_RADIUS GLOB.max_explosion_range
-#define BOMBCAP_FLASH_RADIUS (GLOB.max_explosion_range*1.5)
+#define BOMBCAP_DVSTN_RADIUS (global.max_explosion_range/4)
+#define BOMBCAP_HEAVY_RADIUS (global.max_explosion_range/2)
+#define BOMBCAP_LIGHT_RADIUS global.max_explosion_range
+#define BOMBCAP_FLASH_RADIUS (global.max_explosion_range*1.5)
 
 
 // Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
@@ -176,8 +176,6 @@
 #define RAD_LEVEL_VERY_HIGH 100
 
 #define RADIATION_THRESHOLD_CUTOFF 0.1	// Radiation will not affect a tile when below this value.
-
-#define LEGACY_RECORD_STRUCTURE(X, Y) GLOBAL_LIST_EMPTY(##X);/datum/computer_file/data/##Y/var/list/fields[0];/datum/computer_file/data/##Y/New(){..();GLOB.##X.Add(src);}/datum/computer_file/data/##Y/Destroy(){. = ..();GLOB.##X.Remove(src);}
 
 #define SUPPLY_SECURITY_ELEVATED 1
 #define SUPPLY_SECURITY_HIGH 2
@@ -252,7 +250,7 @@
 #define TOOL_INTERACTION_ALL         (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT | TOOL_INTERACTION_WIRING)
 
 //Inserts 'a' or 'an' before X in ways \a doesn't allow
-#define ADD_ARTICLE(X) "[(lowertext(X[1]) in GLOB.vowels) ? "an" : "a"] [X]"
+#define ADD_ARTICLE(X) "[(lowertext(X[1]) in global.vowels) ? "an" : "a"] [X]"
 
 #define SOULSTONE_CRACKED -1
 #define SOULSTONE_EMPTY 0

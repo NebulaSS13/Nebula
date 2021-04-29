@@ -20,7 +20,7 @@
 	tag = null
 	weakref = null // Clear this reference to ensure it's kept for as brief duration as possible.
 
-	if(SSnano)
+	if(istype(SSnano))
 		SSnano.close_uis(src)
 
 	var/list/timers = active_timers

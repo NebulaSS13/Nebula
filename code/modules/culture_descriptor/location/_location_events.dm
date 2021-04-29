@@ -34,7 +34,7 @@
 
 /decl/location_event/alien_raiders/announce(var/decl/cultural_info/location)
 	if(prob(20))
-		. = "The Tiger Co-operative have raided [location.name] today, no doubt on orders from their enigmatic masters. Stealing wildlife, farm animals, medical research materials and kidnapping civilians. [GLOB.using_map.company_name] authorities are standing by to counter attempts at bio-terrorism."
+		. = "The Tiger Co-operative have raided [location.name] today, no doubt on orders from their enigmatic masters. Stealing wildlife, farm animals, medical research materials and kidnapping civilians. [global.using_map.company_name] authorities are standing by to counter attempts at bio-terrorism."
 	else
 		. = "[pick("The alien species designated \'United Exolitics\'","The alien species designated \'REDACTED\'","An unknown alien species")] have raided [location.name] today, stealing wildlife, farm animals, medical research materials and kidnapping civilians. It seems they desire to learn more about us, so the Navy will be standing by to accomodate them next time they try."
 
@@ -45,10 +45,10 @@
 	. = "[pick("The popular","The well-liked","The eminent","The well-known")] [pick("professor","entertainer","singer","researcher","public servant","administrator","ship captain","\'REDACTED\'")], [pick( random_name(pick(MALE,FEMALE)), 40; "\'REDACTED\'" )] has [pick("passed away","committed suicide","been murdered","died in a freakish accident")] on [location.name] today. The entire planet is in mourning, and prices have dropped for industrial goods as worker morale drops."
 
 /decl/location_event/cult_cell_revealed/announce(var/decl/cultural_info/location)
-	. = "A [pick("dastardly","blood-thirsty","villanous","crazed")] cult of [pick("The Elder Gods","Nar'sie","an apocalyptic sect","\'REDACTED\'")] has [pick("been discovered","been revealed","revealed themselves","gone public")] on [location.name] earlier today. Public morale has been shaken due to [pick("certain","several","one or two")] [pick("high-profile","well known","popular")] individuals [pick("performing \'REDACTED\' acts","claiming allegiance to the cult","swearing loyalty to the cult leader","promising to aid to the cult")] before those involved could be brought to justice. The editor reminds all personnel that supernatural myths will not be tolerated on [GLOB.using_map.company_name] facilities."
+	. = "A [pick("dastardly","blood-thirsty","villanous","crazed")] cult of [pick("The Elder Gods","Nar'sie","an apocalyptic sect","\'REDACTED\'")] has [pick("been discovered","been revealed","revealed themselves","gone public")] on [location.name] earlier today. Public morale has been shaken due to [pick("certain","several","one or two")] [pick("high-profile","well known","popular")] individuals [pick("performing \'REDACTED\' acts","claiming allegiance to the cult","swearing loyalty to the cult leader","promising to aid to the cult")] before those involved could be brought to justice. The editor reminds all personnel that supernatural myths will not be tolerated on [global.using_map.company_name] facilities."
 
 /decl/location_event/security_breach/announce(var/decl/cultural_info/location)
-	. = "There was [pick("a security breach in","an unauthorised access in","an attempted theft in","an anarchist attack in","violent sabotage of")] a [pick("high-security","restricted access","classified","\'REDACTED\'")] [pick("\'REDACTED\'","section","zone","area")] this morning. Security was tightened on [location.name] after the incident, and the editor reassures all [GLOB.using_map.company_name] personnel that such lapses are rare."
+	. = "There was [pick("a security breach in","an unauthorised access in","an attempted theft in","an anarchist attack in","violent sabotage of")] a [pick("high-security","restricted access","classified","\'REDACTED\'")] [pick("\'REDACTED\'","section","zone","area")] this morning. Security was tightened on [location.name] after the incident, and the editor reassures all [global.using_map.company_name] personnel that such lapses are rare."
 
 /decl/location_event/animal_rights_raid/announce(var/decl/cultural_info/location)
 	. = "[pick("Militant animal rights activists","Members of the terrorist group Animal Rights Consortium","Members of the terrorist group \'REDACTED\'")] have [pick("launched a campaign of terror","unleashed a swathe of destruction","raided farms and pastures","forced entry to \'REDACTED\'")] on [location.name] earlier today, freeing numerous [pick("farm animals","animals","\'REDACTED\'")]. Prices for tame and breeding animals have spiked as a result."
@@ -59,7 +59,7 @@
 /decl/location_event/research_breakthrough/announce(var/decl/cultural_info/location)
 	. = "A major breakthough in the field of [pick("exotic matter research","super-compressed materials","nano-augmentation","wormhole research","volatile power manipulation")] \
 		was announced [pick("yesterday","a few days ago","last week","earlier this month")] by a private firm on [location.name]. \
-		[GLOB.using_map.company_name] declined to comment as to whether this could impinge on profits."
+		[global.using_map.company_name] declined to comment as to whether this could impinge on profits."
 
 /decl/location_event/election/announce(var/decl/cultural_info/location)
 	. = "The pre-selection of an additional candidates was announced for the upcoming [pick("supervisors council","advisory board","governership","board of inquisitors")] \
@@ -69,7 +69,7 @@
 		"I will maintain my company's record profits","I believe in our future","We must return to our moral core","Just like... chill out dudes")]'."
 
 /decl/location_event/resignation/announce(var/decl/cultural_info/location)
-	. = "[GLOB.using_map.company_name] regretfully announces the resignation of [pick("Sector Admiral","Division Admiral","Ship Admiral","Vice Admiral")] [random_name(pick(MALE,FEMALE))]."
+	. = "[global.using_map.company_name] regretfully announces the resignation of [pick("Sector Admiral","Division Admiral","Ship Admiral","Vice Admiral")] [random_name(pick(MALE,FEMALE))]."
 	if(prob(25))
 		var/locstring = pick("Segunda","Salusa","Cepheus","Andromeda","Gruis","Corona","Aquila","Asellus") + " " + pick("I","II","III","IV","V","VI","VII","VIII")
 		. += " In a ceremony on [location.name] this afternoon, they will be awarded the \
@@ -130,9 +130,9 @@
 		. += "and their partner announced the birth of their [pick("first","second","third")] child on [location.name] early this morning. \
 			Doctors say the child is well, and the parents are considering "
 		if(prob(50))
-			. += capitalize(pick(GLOB.first_names_female))
+			. += capitalize(pick(global.first_names_female))
 		else
-			. += capitalize(pick(GLOB.first_names_male))
+			. += capitalize(pick(global.first_names_male))
 		. += " for the name."
 	else if(prob(50))
 		. += "announced their [pick("split","break up","marriage","engagement")] with [pick("TV host","webcast personality","superstar","model","actor","singer")] \

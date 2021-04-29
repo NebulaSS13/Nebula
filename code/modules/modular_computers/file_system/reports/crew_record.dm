@@ -1,10 +1,11 @@
-GLOBAL_LIST_EMPTY(all_crew_records)
-GLOBAL_LIST_INIT(blood_types, list("A-", "A+", "B-", "B+", "AB-", "AB+", "O-", "O+"))
-GLOBAL_LIST_INIT(physical_statuses, list("Active", "Disabled", "SSD", "Deceased", "MIA"))
-GLOBAL_VAR_INIT(default_physical_status, "Active")
-GLOBAL_LIST_INIT(security_statuses, list("None", "Released", "Parolled", "Incarcerated", "Arrest"))
-GLOBAL_VAR_INIT(default_security_status, "None")
-GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
+var/global/list/all_crew_records =  list()
+var/global/list/blood_types =       list("A-", "A+", "B-", "B+", "AB-", "AB+", "O-", "O+")
+var/global/list/physical_statuses = list("Active", "Disabled", "SSD", "Deceased", "MIA")
+var/global/list/security_statuses = list("None", "Released", "Parolled", "Incarcerated", "Arrest")
+
+var/global/default_physical_status = "Active"
+var/global/default_security_status = "None"
+var/global/arrest_security_status =  "Arrest"
 
 /datum/computer_file/report/crew_record
 	filetype = "CDB"
@@ -23,7 +24,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 /datum/computer_file/report/crew_record/Destroy()
 	. = ..()
-	GLOB.all_crew_records.Remove(src)
+	global.all_crew_records.Remove(src)
 
 /datum/computer_file/report/crew_record/proc/add_grant(var/datum/computer_file/data/grant_record/new_grant)
 	grants |= weakref(new_grant)
@@ -90,8 +91,8 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 			gender_term = G.formal_term
 	set_sex(gender_term)
 	set_age(H?.get_age() || 30)
-	set_status(GLOB.default_physical_status)
-	set_species_name(H ? H.get_species_name() : GLOB.using_map.default_species)
+	set_status(global.default_physical_status)
+	set_species_name(H ? H.get_species_name() : global.using_map.default_species)
 	set_branch(H ? (H.char_branch && H.char_branch.name) : "None")
 	set_rank(H ? (H.char_rank && H.char_rank.name) : "None")
 	set_public_record(H && H.public_record && !jobban_isbanned(H, "Records") ? html_decode(H.public_record) : "No record supplied")
@@ -116,7 +117,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 			set_implants(jointext(organ_data, "\[*\]"))
 
 	// Security record
-	set_criminalStatus(GLOB.default_security_status)
+	set_criminalStatus(global.default_security_status)
 	set_dna(H ? H.dna.unique_enzymes : "")
 	set_fingerprint(H ? md5(H.dna.uni_identity) : "")
 	set_secRecord(H && H.sec_record && !jobban_isbanned(H, "Records") ? html_decode(H.sec_record) : "No record supplied")
@@ -144,7 +145,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 	if(H)
 		var/skills = list()
-		for(var/decl/hierarchy/skill/S in GLOB.skills)
+		for(var/decl/hierarchy/skill/S in global.skills)
 			var/level = H.get_skill_value(S.type)
 			if(level > SKILL_NONE)
 				skills += "[S.name], [S.levels[level]]"
@@ -164,7 +165,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_name(S ? S.real_name : "Unset")
 	set_formal_name(S ? S.real_name : "Unset")
 	set_sex("Unset")
-	set_status(GLOB.default_physical_status)
+	set_status(global.default_physical_status)
 	var/silicon_type = "Synthetic Lifeform"
 	var/robojob = GetAssignment(S)
 	if(istype(S, /mob/living/silicon/robot))
@@ -181,13 +182,13 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_implants("Robotic body")
 
 	// Security record
-	set_criminalStatus(GLOB.default_security_status)
+	set_criminalStatus(global.default_security_status)
 
 // Global methods
 // Used by character creation to create a record for new arrivals.
 /proc/CreateModularRecord(var/mob/living/H, record_type = /datum/computer_file/report/crew_record)
 	var/datum/computer_file/report/crew_record/CR = new record_type()
-	GLOB.all_crew_records.Add(CR)
+	global.all_crew_records.Add(CR)
 	CR.load_from_mob(H)
 	var/datum/computer_network/network = get_local_network_at(get_turf(H))
 	if(network)
@@ -197,7 +198,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 // Gets crew records filtered by set of positions
 /proc/department_crew_manifest(var/list/filter_positions, var/blacklist = FALSE)
 	var/list/matches = list()
-	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+	for(var/datum/computer_file/report/crew_record/CR in global.all_crew_records)
 		var/rank = CR.get_job()
 		if(blacklist)
 			if(!(rank in filter_positions))
@@ -223,7 +224,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 //Should only be used for OOC stuff, for player-facing stuff you must go through the network.
 /proc/get_crewmember_record(var/name)
-	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+	for(var/datum/computer_file/report/crew_record/CR in global.all_crew_records)
 		if(CR.get_name() == name)
 			return CR
 	return null
@@ -259,7 +260,7 @@ FIELD_SHORT("Formal Name", formal_name, null, access_change_ids)
 FIELD_SHORT("Job", job, null, access_change_ids)
 FIELD_LIST("Sex", sex, record_genders(), null, access_change_ids)
 FIELD_NUM("Age", age, null, access_change_ids)
-FIELD_LIST_EDIT("Status", status, GLOB.physical_statuses, null, access_medical)
+FIELD_LIST_EDIT("Status", status, global.physical_statuses, null, access_medical)
 
 FIELD_SHORT("Species",species_name, null, access_change_ids)
 FIELD_LIST("Branch", branch, record_branches(), null, access_change_ids)
@@ -269,12 +270,12 @@ FIELD_SHORT("Religion", religion, access_chapel_office, access_change_ids)
 FIELD_LONG("General Notes (Public)", public_record, null, access_bridge)
 
 // MEDICAL RECORDS
-FIELD_LIST("Blood Type", bloodtype, GLOB.blood_types, access_medical, access_medical)
+FIELD_LIST("Blood Type", bloodtype, global.blood_types, access_medical, access_medical)
 FIELD_LONG("Medical Record", medRecord, access_medical, access_medical)
 FIELD_LONG("Known Implants", implants, access_medical, access_medical)
 
 // SECURITY RECORDS
-FIELD_LIST("Criminal Status", criminalStatus, GLOB.security_statuses, access_security, access_security)
+FIELD_LIST("Criminal Status", criminalStatus, global.security_statuses, access_security, access_security)
 FIELD_LONG("Security Record", secRecord, access_security, access_security)
 FIELD_SHORT("DNA", dna, access_security, access_security)
 FIELD_SHORT("Fingerprint", fingerprint, access_security, access_security)

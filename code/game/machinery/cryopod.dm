@@ -222,7 +222,7 @@
 
 /obj/machinery/cryopod/lifepod/proc/launch()
 	launched = 1
-	for(var/d in GLOB.cardinal)
+	for(var/d in global.cardinal)
 		var/turf/T = get_step(src,d)
 		var/obj/machinery/door/blast/B = locate() in T
 		if(B && B.density)
@@ -230,13 +230,13 @@
 			break
 
 	var/list/possible_locations = list()
-	if(GLOB.using_map.use_overmap)
+	if(global.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
 		for(var/obj/effect/overmap/visitable/OO in range(O,2))
 			if((OO.sector_flags & OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/effect/overmap/visitable/sector/exoplanet))
 				possible_locations |= text2num(level)
 
-	var/newz = GLOB.using_map.get_empty_zlevel()
+	var/newz = global.using_map.get_empty_zlevel()
 	if(possible_locations.len && prob(10))
 		newz = pick(possible_locations)
 	var/turf/nloc = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),newz)
@@ -376,7 +376,7 @@
 				W.forceMove(src.loc)
 
 	//Update any existing objectives involving this mob.
-	for(var/datum/objective/O in GLOB.all_objectives)
+	for(var/datum/objective/O in global.all_objectives)
 		// We don't want revs to get objectives that aren't for heads of staff. Letting
 		// them win or lose based on cryo is silly so we remove the objective.
 		if(O.target == occupant.mind)

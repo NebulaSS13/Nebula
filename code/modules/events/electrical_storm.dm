@@ -4,7 +4,7 @@
 	endWhen = 60			// Set in start()
 	has_skybox_image = TRUE
 	var/list/valid_apcs		// Shuffled list of valid APCs.
-	var/global/lightning_color
+	var/static/lightning_color
 	var/last_bounce //track the last time we bounced around whatever overmap effect we're affecting.
 	var/bounce_delay = 10 SECONDS // this is divided by severity, so a intense storm means you're going *flying*.
 	var/static/lightning_sounds = list(
@@ -34,9 +34,9 @@
 		if(EVENT_LEVEL_MUNDANE)
 			command_announcement.Announce("A minor electrical storm has been detected near the [location_name()]. Please watch out for possible electrical discharges.", "[location_name()] Sensor Array", zlevels = affecting_z)
 		if(EVENT_LEVEL_MODERATE)
-			command_announcement.Announce("The [location_name()] is about to pass through an electrical storm. Please secure sensitive electrical equipment until the storm passes.", "[location_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_moderate_sound, zlevels = affecting_z)
+			command_announcement.Announce("The [location_name()] is about to pass through an electrical storm. Please secure sensitive electrical equipment until the storm passes.", "[location_name()] Sensor Array", new_sound = global.using_map.electrical_storm_moderate_sound, zlevels = affecting_z)
 		if(EVENT_LEVEL_MAJOR)
-			command_announcement.Announce("Alert. A strong electrical storm has been detected in proximity of the [location_name()]. It is recommended to immediately secure sensitive electrical equipment until the storm passes.", "[location_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_major_sound, zlevels = affecting_z)
+			command_announcement.Announce("Alert. A strong electrical storm has been detected in proximity of the [location_name()]. It is recommended to immediately secure sensitive electrical equipment until the storm passes.", "[location_name()] Sensor Array", new_sound = global.using_map.electrical_storm_major_sound, zlevels = affecting_z)
 
 /datum/event/electrical_storm/start()
 	..()
@@ -149,7 +149,7 @@
 
 		last_bounce = world.time += (bounce_delay / severity)
 
-		for(var/mob/living/carbon/human/H in GLOB.living_mob_list_) //Affect mobs, skip synthetics.
+		for(var/mob/living/carbon/human/H in global.living_mob_list_) //Affect mobs, skip synthetics.
 
 			if(!(H.z in affecting_z))
 				continue

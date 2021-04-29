@@ -1,5 +1,5 @@
-var/list/all_conveyors = list()
-var/list/all_conveyor_switches = list()
+var/global/list/all_conveyors = list()
+var/global/list/all_conveyor_switches = list()
 
 //conveyor2 is pretty much like the original, except it supports corners, but not diverters.
 //note that corner pieces transfer stuff clockwise when running forward, and anti-clockwise backwards.
@@ -251,7 +251,7 @@ var/list/all_conveyor_switches = list()
 	if(!istype(area) || (area.area_flags & AREA_FLAG_SHUTTLE))
 		return FALSE
 	var/cdir = get_dir(A, user)
-	if(!(cdir in GLOB.cardinal) || A == user.loc)
+	if(!(cdir in global.cardinal) || A == user.loc)
 		return
 	for(var/obj/machinery/conveyor/CB in A)
 		if(CB.dir == cdir || CB.dir == turn(cdir,180))

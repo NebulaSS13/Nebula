@@ -23,7 +23,7 @@
 /obj/machinery/door/airlock/double/update_connections(var/propagate = 0)
 	var/dirs = 0
 
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		var/turf/T = get_step(src, direction)
 		var/success = 0
 

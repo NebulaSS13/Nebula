@@ -50,9 +50,9 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 				name = body.real_name
 			else
 				if(gender == MALE)
-					name = capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
+					name = capitalize(pick(global.first_names_male)) + " " + capitalize(pick(global.last_names))
 				else
-					name = capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
+					name = capitalize(pick(global.first_names_female)) + " " + capitalize(pick(global.last_names))
 
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
 	else
@@ -64,7 +64,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
-		name = capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
+		name = capitalize(pick(global.first_names_male)) + " " + capitalize(pick(global.last_names))
 	real_name = name
 
 	var/decl/special_role/cultist/cult = GET_DECL(/decl/special_role/cultist)
@@ -72,12 +72,12 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 	ghost_multitool = new(src)
 
-	GLOB.ghost_mob_list += src
+	global.ghost_mob_list += src
 
 	. = ..()
 
 /mob/observer/ghost/Destroy()
-	GLOB.ghost_mob_list -= src
+	global.ghost_mob_list -= src
 	stop_following()
 	qdel(ghost_multitool)
 	ghost_multitool = null
@@ -376,7 +376,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 
 	var/turf/T = get_turf(src)
-	if(!T || (T.z in GLOB.using_map.admin_levels))
+	if(!T || (T.z in global.using_map.admin_levels))
 		to_chat(src, "<span class='warning'>You may not spawn as a mouse on this Z-level.</span>")
 		return
 
@@ -462,12 +462,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Toggle Anonymous Chat"
 	set desc = "Toggles showing your key in dead chat."
 
-	if(client.get_preference_value(/datum/client_preference/anon_say) == GLOB.PREF_NO)
+	if(client.get_preference_value(/datum/client_preference/anon_say) == PREF_NO)
 		to_chat(src, "<span class='info'>Your key won't be shown when you speak in dead chat.</span>")
-		client.set_preference(/datum/client_preference/anon_say, GLOB.PREF_YES)
+		client.set_preference(/datum/client_preference/anon_say, PREF_YES)
 	else
 		to_chat(src, "<span class='info'>Your key will be publicly visible again.</span>")
-		client.set_preference(/datum/client_preference/anon_say, GLOB.PREF_NO)
+		client.set_preference(/datum/client_preference/anon_say, PREF_NO)
 
 /mob/observer/ghost/canface()
 	return 1

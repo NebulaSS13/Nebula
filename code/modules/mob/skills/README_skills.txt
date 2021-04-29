@@ -2,7 +2,7 @@ User's Guide to Skills
 
 1. How does the skill system work, and what are the relevant objects?
 	Every skill is defined via a /decl/hierarchy/skill/skill_category/skill_name in skill.dm.
-	These are initialized once and /decl/hierarchy/skill is stored in decls_repository. The actual skill instances are stored in GLOB.skills (this is a list).
+	These are initialized once and /decl/hierarchy/skill is stored in decls_repository. The actual skill instances are stored in global.skills (this is a list).
 	Every mob has a variable mob.skillset of type datum/skillset (or a subtype of that).
 	The skillset contains all of the skill information for that mob, along with various procs for obtaining or manipulating it.
 	Using those procs, you will be able to extract skill values from the mob. These should be positive integers between SKILL_MIN and SKILL_MAX.
@@ -18,7 +18,7 @@ User's Guide to Skills
 
 3. What do you do with skills?
 	The correct way of obtaining the value of a mob's skill is to use the get_skill_value proc on the mob. It takes a skill path, which should be called via a corresponding SKILL_ define.
-	Do not try to get the datum instance out of decls_repository; use the type path getter instead or else find it in GLOB.skills.
+	Do not try to get the datum instance out of decls_repository; use the type path getter instead or else find it in global.skills.
 	The values can be used directly to make skill checks.
 	Additional helper procs may be given to mobs to convert skill values into times, probabilities, or whatever in a reusable way.
 	Currently implemented examples:

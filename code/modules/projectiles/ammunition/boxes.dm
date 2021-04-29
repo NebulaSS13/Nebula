@@ -5,7 +5,7 @@
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
 	material = /decl/material/solid/metal/steel
 	max_ammo = 6
-	var/list/global/bullet_offsets = list(
+	var/static/list/bullet_offsets = list(
 		list("x" = 0, "y" = 0),
 		list("x" = -2, "y" = -3),
 		list("x" = -2, "y" = -7),

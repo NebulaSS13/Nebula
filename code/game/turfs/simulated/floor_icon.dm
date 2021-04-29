@@ -1,4 +1,4 @@
-var/list/flooring_cache = list()
+var/global/list/flooring_cache = list()
 
 /turf/simulated/floor/on_update_icon(var/update_neighbors)
 
@@ -27,7 +27,7 @@ var/list/flooring_cache = list()
 		// Apply edges, corners, and inner corners.
 		var/has_border = 0
 		//Check the cardinal turfs
-		for(var/step_dir in GLOB.cardinal)
+		for(var/step_dir in global.cardinal)
 			var/turf/simulated/floor/T = get_step(src, step_dir)
 			var/is_linked = flooring.symmetric_test_link(src, T)
 
@@ -45,14 +45,14 @@ var/list/flooring_cache = list()
 
 		//We can only have inner corners if we're smoothed with something
 		if (has_smooth && flooring.flags & TURF_HAS_INNER_CORNERS)
-			for(var/direction in GLOB.cornerdirs)
+			for(var/direction in global.cornerdirs)
 				if((has_smooth & direction) == direction)
 					if(!flooring.symmetric_test_link(src, get_step(src, direction)))
 						add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-corner-[direction]", "[flooring.icon_base]_corners", direction))
 
 		//Next up, outer corners
 		if (has_border && flooring.flags & TURF_HAS_CORNERS)
-			for(var/direction in GLOB.cornerdirs)
+			for(var/direction in global.cornerdirs)
 				if((has_border & direction) == direction)
 					if(!flooring.symmetric_test_link(src, get_step(src, direction)))
 						add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction,(flooring.flags & TURF_HAS_EDGES)))

@@ -1,4 +1,4 @@
-var/list/wall_blend_objects = list(
+var/global/list/wall_blend_objects = list(
 	/obj/machinery/door,
 	/obj/structure/wall_frame,
 	/obj/structure/grille,
@@ -8,7 +8,7 @@ var/list/wall_blend_objects = list(
 	/obj/structure/window/borosilicate/full,
 	/obj/structure/window/borosilicate_reinforced/full
 )
-var/list/wall_noblend_objects = list(
+var/global/list/wall_noblend_objects = list(
 	/obj/machinery/door/window
 )
 

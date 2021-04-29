@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(mapping)
 		marker.load_template()
 
 	preloadTemplates()
-	GLOB.using_map.build_away_sites()
+	global.using_map.build_away_sites()
 	. = ..()
 
 /datum/controller/subsystem/mapping/Recover()

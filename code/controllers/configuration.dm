@@ -1,4 +1,4 @@
-var/list/gamemode_cache = list()
+var/global/list/gamemode_cache = list()
 
 /datum/configuration
 	var/server_name = "Nebula 13"		// server name (for world name / status)
@@ -248,6 +248,15 @@ var/list/gamemode_cache = list()
 	var/lock_client_view_y
 	var/max_client_view_x
 	var/max_client_view_y
+
+	var/static/list/protected_vars = list(
+		"comms_password",
+		"ban_comms_password",
+		"login_export_addr"
+	)
+
+/datum/configuration/VV_hidden()
+	. = ..() | protected_vars
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode

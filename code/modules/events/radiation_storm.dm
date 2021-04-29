@@ -19,11 +19,11 @@
 		return res
 
 /datum/event/radiation_storm/announce()
-	GLOB.using_map.radiation_detected_announcement()
+	global.using_map.radiation_detected_announcement()
 
 /datum/event/radiation_storm/start()
 	..()
-	GLOB.using_map.make_maint_all_access(1)
+	global.using_map.make_maint_all_access(1)
 
 /datum/event/radiation_storm/tick()
 	if(activeFor == enterBelt)
@@ -45,7 +45,7 @@
 	for(var/z in affecting_z)
 		SSradiation.z_radiate(locate(1, 1, z), radiation_level, 1)
 
-	for(var/mob/living/carbon/C in GLOB.living_mob_list_)
+	for(var/mob/living/carbon/C in global.living_mob_list_)
 		var/area/A = get_area(C)
 		if(!A)
 			continue
@@ -62,7 +62,7 @@
 					domutcheck(H,null,MUTCHK_FORCED)
 
 /datum/event/radiation_storm/end()
-	GLOB.using_map.revoke_maint_all_access(1)
+	global.using_map.revoke_maint_all_access(1)
 
 /datum/event/radiation_storm/syndicate/radiate()
 	return

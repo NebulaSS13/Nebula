@@ -11,8 +11,8 @@
 			var/current_z = z + i - 1
 			new /datum/random_map/automata/cave_system(null, 1, 1, current_z, world.maxx, world.maxy)
 			new /datum/random_map/noise/ore(null, 1, 1, current_z, world.maxx, world.maxy)
-			GLOB.using_map.refresh_mining_turfs(current_z)
+			global.using_map.refresh_mining_turfs(current_z)
 	else if (isnum(generate_mining_by_z))
 		new /datum/random_map/automata/cave_system(null, 1, 1, z + generate_mining_by_z - 1, world.maxx, world.maxy)
 		new /datum/random_map/noise/ore(null, 1, 1, z + generate_mining_by_z - 1, world.maxx, world.maxy)
-		GLOB.using_map.refresh_mining_turfs(z + generate_mining_by_z - 1)
+		global.using_map.refresh_mining_turfs(z + generate_mining_by_z - 1)

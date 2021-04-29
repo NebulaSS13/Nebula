@@ -144,7 +144,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 //These datums are used to populate the asset cache, the proc "register()" does this.
 
 //all of our asset datums, used for referring to these later
-/var/global/list/asset_datums = list()
+var/global/list/asset_datums = list()
 
 //get a assetdatum or make a new one
 /proc/get_asset_datum(var/type)
@@ -222,7 +222,7 @@ var/template_file_name = "all_templates.json"
 	register_asset(global.template_file_name, fcopy_rsc(template_file))
 
 	var/list/mapnames = list()
-	for(var/z in GLOB.using_map.map_levels)
+	for(var/z in global.using_map.map_levels)
 		mapnames += map_image_file_name(z)
 
 	var/list/filenames = flist(MAP_IMAGE_PATH)
@@ -251,7 +251,7 @@ var/template_file_name = "all_templates.json"
 		var/datum/asset/A = new type()
 		A.register()
 
-	for(var/client/C in GLOB.clients) // This is also called in client/New, but as we haven't initialized the cache until now, and it's possible the client is already connected, we risk doing it twice.
+	for(var/client/C in global.clients) // This is also called in client/New, but as we haven't initialized the cache until now, and it's possible the client is already connected, we risk doing it twice.
 		// Doing this to a client too soon after they've connected can cause issues, also the proc we call sleeps.
 		spawn(10)
 			getFilesSlow(C, cache, FALSE)

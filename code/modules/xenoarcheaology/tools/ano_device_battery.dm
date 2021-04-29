@@ -135,7 +135,7 @@
 		inserted_battery.battery_effect.UpdateMove()
 
 /obj/item/anodevice/DefaultTopicState()
-	return GLOB.inventory_state
+	return global.inventory_topic_state
 
 /obj/item/anodevice/OnTopic(user, href_list)
 	if(..())

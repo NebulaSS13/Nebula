@@ -68,7 +68,7 @@
 	if (given_dna)
 		set_dna(given_dna)
 	if (!species)
-		species = get_species_by_key(GLOB.using_map.default_species)
+		species = get_species_by_key(global.using_map.default_species)
 
 	species.resize_organ(src)
 	bodytype = owner?.bodytype || species.default_bodytype
@@ -418,7 +418,7 @@
 /obj/item/organ/proc/get_mechanical_assisted_descriptor()
 	return "mechanically-assisted [name]"
 
-var/list/ailment_reference_cache = list()
+var/global/list/ailment_reference_cache = list()
 /proc/get_ailment_reference(var/ailment_type)
 	if(!ispath(ailment_type, /datum/ailment))
 		return

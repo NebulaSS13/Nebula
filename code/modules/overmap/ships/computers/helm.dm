@@ -1,6 +1,16 @@
-LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
+var/global/list/all_waypoints = list()
 
-var/list/overmap_helm_computers
+/datum/computer_file/data/waypoint
+	var/list/fields = list()
+
+/datum/computer_file/data/waypoint/New()
+	global.all_waypoints += src
+	
+/datum/computer_file/data/waypoint/Destroy()
+	. = ..()
+	global.all_waypoints -= src
+
+var/global/list/overmap_helm_computers
 /obj/machinery/computer/ship/helm
 	name = "helm control console"
 	icon_keyboard = "teleport_key"
@@ -34,7 +44,7 @@ var/list/overmap_helm_computers
 /obj/machinery/computer/ship/helm/Process()
 	..()
 	if (autopilot && dx && dy)
-		var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
+		var/turf/T = locate(dx,dy,global.using_map.overmap_z)
 		if(linked.loc == T)
 			if(linked.is_still())
 				autopilot = 0

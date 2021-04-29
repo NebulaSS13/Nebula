@@ -20,7 +20,7 @@
 
 /datum/event/minispasm/start()
 	var/list/victims = list()
-	for(var/obj/item/radio/radio in GLOB.listening_objects)
+	for(var/obj/item/radio/radio in global.listening_objects)
 		if(radio.on)
 			for(var/mob/living/victim in range(radio.canhear_range, radio.loc))
 				if(isnull(victims[victim]) && victim.stat == CONSCIOUS && !GET_STATUS(victim, STAT_DEAF))

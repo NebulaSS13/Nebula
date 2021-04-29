@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(lore)
 		credits_nouns |= uppertext(dept.name)
 
 /datum/controller/subsystem/lore/proc/get_end_credits_title(var/force)
-	if(!GLOB.end_credits_title || force)
+	if(!global.end_credits_title || force)
 		var/list/possible_titles = list()
 		refresh_credits_from_departments()
 		possible_titles += "THE [pick("DOWNFALL OF", "RISE OF", "TROUBLE WITH", "FINAL STAND OF", "DARK SIDE OF", "DESOLATION OF", "DESTRUCTION OF", "CRISIS OF")] [pick(credits_nouns)]"
@@ -67,10 +67,10 @@ SUBSYSTEM_DEF(lore)
 		possible_titles += "A VERY [pick(credits_adjectives)] [pick(credits_holidays)]"
 		possible_titles += "[pick(credits_adjectives)] [pick(credits_adventure_names)]"
 		possible_titles += "[pick(credits_topics)] [pick(credits_adventure_names)]"
-		possible_titles += "THE DAY [uppertext(GLOB.using_map.station_short)] STOOD STILL"
+		possible_titles += "THE DAY [uppertext(global.using_map.station_short)] STOOD STILL"
 		possible_titles |= credits_other
-		GLOB.end_credits_title = pick(possible_titles)
-	. = GLOB.end_credits_title
+		global.end_credits_title = pick(possible_titles)
+	. = global.end_credits_title
 
 /datum/controller/subsystem/lore/proc/get_language_by_name(var/language_name)
 	if(!languages_by_name)

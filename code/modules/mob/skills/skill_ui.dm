@@ -20,7 +20,7 @@
 	skillset = null
 	. = ..()
 
-/datum/nano_module/skill_ui/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.self_state)
+/datum/nano_module/skill_ui/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.self_topic_state)
 	if(!skillset)
 		return
 	var/list/data = skillset.get_nano_data(hide_unskilled)
@@ -142,7 +142,7 @@ The generic antag version.
 			return 1
 		var/level = text2num(href_list["add_skill"])
 		var/list/choices = list()
-		for(var/decl/hierarchy/skill/S in GLOB.skills)
+		for(var/decl/hierarchy/skill/S in global.skills)
 			if(can_select(S.type, level))
 				choices[S.name] = S.type
 		var/choice = input(usr, "Which skill would you like to add?", "Add Skill") as null|anything in choices
@@ -240,7 +240,7 @@ Admin version, with debugging options.
 /datum/nano_module/skill_ui/admin
 	template = "skill_ui_admin.tmpl"
 
-/datum/nano_module/skill_ui/admin/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.admin_state)
+/datum/nano_module/skill_ui/admin/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.admin_topic_state)
 	..() //Uses different default state.
 
 /datum/nano_module/skill_ui/admin/get_data()

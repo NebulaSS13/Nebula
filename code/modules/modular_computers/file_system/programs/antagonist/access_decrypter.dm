@@ -110,7 +110,7 @@
 /datum/nano_module/program/access_decrypter
 	name = "Access Database Decrypter"
 
-/datum/nano_module/program/access_decrypter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/access_decrypter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/datum/computer_file/program/access_decrypter/PRG = program
 	var/list/data = list()
 	if(!istype(PRG))

@@ -186,7 +186,7 @@
 /datum/nano_module/program/computer_chatclient
 	name = "Intranet Relay Chat Client"
 
-/datum/nano_module/program/computer_chatclient/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/computer_chatclient/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/datum/computer_network/network = program.computer.get_network()
 	if(!network || !network.chat_channels)
 		return

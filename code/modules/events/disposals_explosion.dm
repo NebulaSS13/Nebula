@@ -30,7 +30,7 @@
 	kill()
 
 /datum/event/disposals_explosion/setup()
-	var/list/area_predicates = GLOB.is_station_but_not_maint_area.Copy()
+	var/list/area_predicates = global.is_station_but_not_maint_area.Copy()
 	area_predicates += /proc/area_has_disposals_pipe
 
 	var/turf/containing_turf = pick_area_and_turf(area_predicates, list(/proc/has_disposals_pipe))

@@ -289,7 +289,7 @@
 			available_cultural_info[token] |= additional_available_cultural_info[token]
 
 		else if(!LAZYLEN(available_cultural_info[token]))
-			var/list/map_systems = GLOB.using_map.available_cultural_info[token]
+			var/list/map_systems = global.using_map.available_cultural_info[token]
 			available_cultural_info[token] = map_systems.Copy()
 
 		if(LAZYLEN(available_cultural_info[token]) && !default_cultural_info[token])
@@ -297,7 +297,7 @@
 			default_cultural_info[token] = avail_systems[1]
 
 		if(!default_cultural_info[token])
-			default_cultural_info[token] = GLOB.using_map.default_cultural_info[token]
+			default_cultural_info[token] = global.using_map.default_cultural_info[token]
 
 	if(hud_type)
 		hud = new hud_type()
@@ -662,8 +662,8 @@
 	if(!L)
 		L = list()
 		LAZYSET(hair_styles, type, L)
-		for(var/hairstyle in GLOB.hair_styles_list)
-			var/datum/sprite_accessory/S = GLOB.hair_styles_list[hairstyle]
+		for(var/hairstyle in global.hair_styles_list)
+			var/datum/sprite_accessory/S = global.hair_styles_list[hairstyle]
 			if(S.species_allowed && !(get_root_species_name() in S.species_allowed))
 				continue
 			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
@@ -683,8 +683,8 @@
 		facial_hair_style_by_gender = list()
 		LAZYSET(facial_hair_styles_by_species, gender, facial_hair_style_by_gender)
 
-		for(var/facialhairstyle in GLOB.facial_hair_styles_list)
-			var/datum/sprite_accessory/S = GLOB.facial_hair_styles_list[facialhairstyle]
+		for(var/facialhairstyle in global.facial_hair_styles_list)
+			var/datum/sprite_accessory/S = global.facial_hair_styles_list[facialhairstyle]
 			if(gender == MALE && S.gender == FEMALE)
 				continue
 			if(gender == FEMALE && S.gender == MALE)

@@ -1,4 +1,4 @@
-GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
+var/global/datum/cinematic/cinematic = new
 //Was moved from the gameticker to here. Could use further improvement.
 
 /datum/cinematic
@@ -31,7 +31,7 @@ GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
 
 	//Let's not discuss how this worked previously.
 	var/list/viewers = list()
-	for(var/mob/living/M in GLOB.living_mob_list_)
+	for(var/mob/living/M in global.living_mob_list_)
 		if(M.client)
 			M.client.screen += cinematic_screen //show every client the cinematic
 			viewers[M.client] = GET_STATUS(M, STAT_STUN)

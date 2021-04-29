@@ -21,10 +21,10 @@
 /obj/random
 	spawn_method = /obj/random/proc/unit_test_spawn_item
 
-GLOBAL_DATUM(unit_test_last_obj_random_creation, /atom/movable)
+var/global/atom/movable/unit_test_last_obj_random_creation 
 /obj/random/proc/unit_test_spawn_item()
 	var/build_path = unit_test_select_heaviest(spawn_choices())
-	GLOB.unit_test_last_obj_random_creation = new build_path()
+	global.unit_test_last_obj_random_creation = new build_path()
 
 
 /proc/unit_test_select_heaviest(var/list/choices)
@@ -45,17 +45,17 @@ GLOBAL_DATUM(unit_test_last_obj_random_creation, /atom/movable)
 
 	return heaviest_choice
 
-GLOBAL_LIST_EMPTY(unit_test_obj_random_weights_by_type)
+var/global/list/unit_test_obj_random_weights_by_type = list()
 
 // If you adjust any of the values below, please also update /obj/structure/closet/proc/content_size(atom/movable/AM)
 /proc/unit_test_weight_of_path(var/path)
 	if(ispath(path, /obj/random))
-		var/weight = GLOB.unit_test_obj_random_weights_by_type[path]
+		var/weight = global.unit_test_obj_random_weights_by_type[path]
 		if(!weight)
 			var/obj/random/R = new path()
 			var/type = unit_test_select_heaviest(R.spawn_choices())
 			weight = unit_test_weight_of_path(type)
-			GLOB.unit_test_obj_random_weights_by_type[path] = weight
+			global.unit_test_obj_random_weights_by_type[path] = weight
 		return weight
 	// Would be nice to re-use how closets calculate size/weight but the difference between instances and paths prevents it.
 	if(ispath(path, /obj))

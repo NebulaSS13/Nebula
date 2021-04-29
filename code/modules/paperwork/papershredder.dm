@@ -42,7 +42,7 @@
 				for(var/i=(paperamount-max_paper);i>0;i--)
 					var/obj/item/shreddedp/SP = get_shredded_paper()
 					SP.dropInto(loc)
-					SP.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),1,5)
+					SP.throw_at(get_edge_target_turf(src,pick(global.alldirs)),1,5)
 				paperamount = max_paper
 			update_icon()
 			return

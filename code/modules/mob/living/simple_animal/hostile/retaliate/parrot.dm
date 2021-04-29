@@ -143,7 +143,7 @@
 	return
 
 /mob/living/simple_animal/hostile/retaliate/parrot/DefaultTopicState()
-	return GLOB.physical_state
+	return global.physical_topic_state
 
 /mob/living/simple_animal/hostile/retaliate/parrot/OnTopic(mob/user, href_list)
 	//Is the user's mob type able to do this?
@@ -355,7 +355,7 @@
 		//Wander around aimlessly. This will help keep the loops from searches down
 		//and possibly move the mob into a new are in view of something they can use
 		if(prob(90))
-			SelfMove(pick(GLOB.cardinal))
+			SelfMove(pick(global.cardinal))
 			return
 
 		if(!held_item && !parrot_perch) //If we've got nothing to do.. look for something to do.

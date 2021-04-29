@@ -20,7 +20,7 @@
 	print_reference()
 
 	if(!ispath(currency, /decl/currency))
-		currency = GLOB.using_map.default_currency
+		currency = global.using_map.default_currency
 
 	//create a short manual as well
 	var/obj/item/paper/R = new(src.loc)

@@ -34,7 +34,7 @@
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, "100")
 	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[LIFE_HUD]	      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
-	hud_list[ID_HUD]          = new /image/hud_overlay(GLOB.using_map.id_hud_icons, src, "hudunknown")
+	hud_list[ID_HUD]          = new /image/hud_overlay(global.using_map.id_hud_icons, src, "hudunknown")
 	hud_list[WANTED_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPLOYAL_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPCHEM_HUD]     = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
@@ -42,7 +42,7 @@
 	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD_OOC]  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
 
-	GLOB.human_mob_list |= src
+	global.human_mob_list |= src
 	. = ..()
 
 	if(dna)
@@ -52,7 +52,7 @@
 	make_blood()
 
 /mob/living/carbon/human/Destroy()
-	GLOB.human_mob_list -= src
+	global.human_mob_list -= src
 	worn_underwear = null
 	QDEL_NULL(attack_selector)
 	LAZYCLEARLIST(smell_cooldown)
@@ -411,7 +411,7 @@
 /mob/living/carbon/human/CanUseTopic(mob/user, datum/topic_state/state, href_list)
 	. = ..()
 	if(href_list && (href_list["refresh"] || href_list["item"]))
-		return min(., ..(user, GLOB.physical_state, href_list))
+		return min(., ..(user, global.physical_topic_state, href_list))
 
 /mob/living/carbon/human/OnTopic(mob/user, href_list)
 	if (href_list["refresh"])
@@ -442,7 +442,7 @@
 				return TOPIC_HANDLED
 			var/datum/computer_file/report/crew_record/R = network.get_crew_record_by_name(perpname)
 			if(R)
-				var/setcriminal = input(user, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) as null|anything in GLOB.security_statuses
+				var/setcriminal = input(user, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) as null|anything in global.security_statuses
 				if(hasHUD(usr, HUD_SECURITY) && setcriminal)
 					R.set_criminalStatus(setcriminal)
 					modified = 1
@@ -501,7 +501,7 @@
 				return TOPIC_HANDLED
 			var/datum/computer_file/report/crew_record/E = network.get_crew_record_by_name(perpname)
 			if(E)
-				var/setmedical = input(user, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) as null|anything in GLOB.physical_statuses
+				var/setmedical = input(user, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) as null|anything in global.physical_statuses
 				if(hasHUD(user, HUD_MEDICAL) && setmedical)
 					E.set_status(setmedical)
 					modified = 1
@@ -559,7 +559,7 @@
 			if(!(key in flavor_texts))
 				return
 			msg = sanitize(input(src,"Update the flavor text for your [key].","Flavor Text",html_decode(flavor_texts[key])) as message, extra = 0)
-	if(!CanInteract(src, GLOB.self_state))
+	if(!CanInteract(src, global.self_topic_state))
 		return
 	flavor_texts[key] = msg
 	set_flavor()
@@ -1062,14 +1062,14 @@
 /mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour = 1)
 	if(!dna)
 		if(!new_species)
-			new_species = GLOB.using_map.default_species
+			new_species = global.using_map.default_species
 	else
 		if(!new_species)
 			new_species = dna.species
 
 	// No more invisible screaming wheelchairs because of set_species() typos.
 	if(!get_species_by_key(new_species))
-		new_species = GLOB.using_map.default_species
+		new_species = global.using_map.default_species
 	if(dna)
 		dna.species = new_species
 
@@ -1712,8 +1712,8 @@
 /mob/living/carbon/human/proc/get_cultural_value(var/token)
 	. = LAZYACCESS(cultural_info, token)
 	if(!istype(., /decl/cultural_info))
-		. = GLOB.using_map.default_cultural_info[token]
-		PRINT_STACK_TRACE("get_cultural_value() tried to return a non-instance value for token '[token]' - full culture list: [json_encode(cultural_info)] default species culture list: [json_encode(GLOB.using_map.default_cultural_info)]")
+		. = global.using_map.default_cultural_info[token]
+		PRINT_STACK_TRACE("get_cultural_value() tried to return a non-instance value for token '[token]' - full culture list: [json_encode(cultural_info)] default species culture list: [json_encode(global.using_map.default_cultural_info)]")
 
 /mob/living/carbon/human/needs_wheelchair()
 	var/stance_damage = 0

@@ -39,6 +39,6 @@ SUBSYSTEM_DEF(modpacks)
 			PRINT_STACK_TRACE("Modpack [(istype(manifest) && manifest.name) || "Unknown"] failed to post-initialize: [fail_msg]")
 
 	// Update compiled infolists.
-	default_submap_whitelisted_species |= GLOB.using_map.default_species
+	default_submap_whitelisted_species |= global.using_map.default_species
 
 	. = ..()

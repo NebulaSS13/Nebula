@@ -1,4 +1,4 @@
-var/list/shutoff_valves = list()
+var/global/list/shutoff_valves = list()
 
 /obj/machinery/atmospherics/valve/shutoff
 	icon = 'icons/atmos/clamp.dmi'

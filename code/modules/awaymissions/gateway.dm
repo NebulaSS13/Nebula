@@ -60,7 +60,7 @@
 	linked = list()	//clear the list
 	var/turf/T = loc
 
-	for(var/i in GLOB.alldirs)
+	for(var/i in global.alldirs)
 		T = get_step(loc, i)
 		var/obj/machinery/gateway/G = locate(/obj/machinery/gateway) in T
 		if(G)
@@ -156,7 +156,7 @@
 	linked = list()	//clear the list
 	var/turf/T = loc
 
-	for(var/i in GLOB.alldirs)
+	for(var/i in global.alldirs)
 		T = get_step(loc, i)
 		var/obj/machinery/gateway/G = locate(/obj/machinery/gateway) in T
 		if(G)

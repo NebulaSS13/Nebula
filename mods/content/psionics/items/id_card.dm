@@ -21,7 +21,7 @@
 		if(M.psi)
 			to_chat(user, SPAN_WARNING("There is a psionic compulsion surrounding \the [src], forcing anyone who reads it to perceive it as a legitimate document of authority. The actual text just reads 'I can do what I want.'"))
 		else
-			to_chat(user, SPAN_NOTICE("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe it implicitly."))
+			to_chat(user, SPAN_NOTICE("This is the real deal, stamped by [global.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe it implicitly."))
 
 /obj/item/card/id/foundation/attack_self(var/mob/user)
 	. = ..()
@@ -32,7 +32,7 @@
 				if(isliving(M))
 					var/mob/living/L = M
 					if(!L.psi)
-						to_chat(L, SPAN_NOTICE("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe \the [user] implicitly."))
+						to_chat(L, SPAN_NOTICE("This is the real deal, stamped by [global.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe \the [user] implicitly."))
 						continue
 				to_chat(M, SPAN_WARNING("There is a psionic compulsion surrounding \the [src] in a flicker of indescribable light."))
 

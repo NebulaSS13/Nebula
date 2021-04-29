@@ -2,7 +2,7 @@
 	MERCENARY ROUNDTYPE
 */
 
-var/list/nuke_disks = list()
+var/global/list/nuke_disks = list()
 
 /datum/game_mode/nuclear
 	name = "Mercenary"
@@ -36,7 +36,7 @@ var/list/nuke_disks = list()
 	var/disk_rescued = TRUE
 	for(var/obj/item/disk/nuclear/D in world)
 		var/disk_area = get_area(D)
-		if(!is_type_in_list(disk_area, GLOB.using_map.post_round_safe_areas))
+		if(!is_type_in_list(disk_area, global.using_map.post_round_safe_areas))
 			disk_rescued = FALSE
 			break
 	var/crew_evacuated = (SSevac.evacuation_controller.has_evacuated())

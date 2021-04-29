@@ -64,10 +64,10 @@
 	return ..()
 
 /turf/space/LateInitialize()
-	if(GLOB.using_map.base_floor_area)
-		var/area/new_area = locate(GLOB.using_map.base_floor_area) || new GLOB.using_map.base_floor_area
+	if(global.using_map.base_floor_area)
+		var/area/new_area = locate(global.using_map.base_floor_area) || new global.using_map.base_floor_area
 		ChangeArea(src, new_area)
-	ChangeTurf(GLOB.using_map.base_floor_type)
+	ChangeTurf(global.using_map.base_floor_type)
 
 // override for space turfs, since they should never hide anything
 /turf/space/levelupdate()
@@ -129,8 +129,8 @@
 		if(!cur_pos) return
 		cur_x = cur_pos["x"]
 		cur_y = cur_pos["y"]
-		next_x = (--cur_x||GLOB.global_map.len)
-		y_arr = GLOB.global_map[next_x]
+		next_x = (--cur_x||global.global_map.len)
+		y_arr = global.global_map[next_x]
 		target_z = y_arr[cur_y]
 /*
 		//debug
@@ -155,8 +155,8 @@
 		if(!cur_pos) return
 		cur_x = cur_pos["x"]
 		cur_y = cur_pos["y"]
-		next_x = (++cur_x > GLOB.global_map.len ? 1 : cur_x)
-		y_arr = GLOB.global_map[next_x]
+		next_x = (++cur_x > global.global_map.len ? 1 : cur_x)
+		y_arr = global.global_map[next_x]
 		target_z = y_arr[cur_y]
 /*
 		//debug
@@ -180,7 +180,7 @@
 		if(!cur_pos) return
 		cur_x = cur_pos["x"]
 		cur_y = cur_pos["y"]
-		y_arr = GLOB.global_map[cur_x]
+		y_arr = global.global_map[cur_x]
 		next_y = (--cur_y||y_arr.len)
 		target_z = y_arr[next_y]
 /*
@@ -206,7 +206,7 @@
 		if(!cur_pos) return
 		cur_x = cur_pos["x"]
 		cur_y = cur_pos["y"]
-		y_arr = GLOB.global_map[cur_x]
+		y_arr = global.global_map[cur_x]
 		next_y = (++cur_y > y_arr.len ? 1 : cur_y)
 		target_z = y_arr[next_y]
 /*

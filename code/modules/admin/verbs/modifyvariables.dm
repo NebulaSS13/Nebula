@@ -316,7 +316,7 @@
 	var/var_value
 
 	if(param_var_name)
-		if(!(param_var_name in O.get_variables()))
+		if(!(param_var_name in O.VV_get_variables()))
 			to_chat(src, "A variable with this name ([param_var_name]) doesn't exist in this atom ([O])")
 			return
 
