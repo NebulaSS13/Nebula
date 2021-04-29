@@ -26,7 +26,6 @@
 			cost += atom_info_repository.get_single_worth_for(containertype)
 		cost = cost * WORTH_TO_SUPPLY_POINTS_CONSTANT * SSsupply.price_markup
 		cost = max(1, CEILING(cost, WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT))
-
 	var/decl/supply_method/sm = GET_DECL(supply_method)
 	manifest = sm.setup_manifest(src)
 

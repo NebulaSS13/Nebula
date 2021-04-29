@@ -88,7 +88,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/solars)
 "aq" = (
-/obj/item/stack/cable_coil/yellow/single,
+/obj/item/stack/cable_coil/single/yellow,
 /turf/simulated/floor/airless,
 /area/space)
 "as" = (
