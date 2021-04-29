@@ -1,6 +1,6 @@
 // Essentially just a wrapper for /decl/observ to preserve init order/make sure they aren't new'd at runtime.
 
-var/repository/events/events_repository = new
+var/global/repository/events/events_repository = new
 
 /repository/events/proc/raise_event(var/event_type)
 	var/decl/observ/event = GET_DECL(event_type)
