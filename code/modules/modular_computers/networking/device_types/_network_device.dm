@@ -66,12 +66,17 @@
 		return "High Signal"
 
 /datum/extension/network_device/proc/get_nearby_networks()
-	var/list/networks = list()
+	var/list/wired_networks = list()
+	var/list/wireless_networks = list()
 	for(var/id in SSnetworking.networks)
 		var/datum/computer_network/net = SSnetworking.networks[id]
-		if(net.check_connection(src))
-			networks |= id
-	return networks
+		switch(net.check_connection(src))
+			if(WIRED_CONNECTION)
+				wired_networks |= id
+			if(WIRELESS_CONNECTION)
+				wireless_networks |= id
+	// We return it like this so that wired networks have their connections prioritized.
+	return wired_networks + wireless_networks
 
 /datum/extension/network_device/proc/is_banned()
 	var/datum/computer_network/net = get_network()
@@ -154,6 +159,16 @@
 		new_tag = network.get_unique_tag(new_tag)
 		network.update_device_tag(src, network_tag, new_tag)
 	network_tag = new_tag
+
+/datum/extension/network_device/proc/get_wired_connection()
+	var/obj/machinery/M = holder
+	if(!istype(M))
+		return
+	var/obj/item/stock_parts/computer/lan_port/port = M.get_component_of_type(/obj/item/stock_parts/computer/lan_port)
+	if(!port || !port.terminal)
+		return
+	var/obj/structure/network_cable/terminal/term = port.terminal
+	return term.get_graph()
 
 /datum/extension/network_device/nano_host()
 	return holder.nano_host()

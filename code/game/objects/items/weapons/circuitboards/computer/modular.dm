@@ -5,7 +5,7 @@
 		/obj/item/stock_parts/computer/processor_unit = 1
 	)
 	additional_spawn_components = list(
-		/obj/item/stock_parts/computer/network_card/wired = 1,
+		/obj/item/stock_parts/computer/network_card = 1,
 		/obj/item/stock_parts/computer/hard_drive/super = 1,
 		/obj/item/stock_parts/console_screen = 1,
 		/obj/item/stock_parts/keyboard = 1,
