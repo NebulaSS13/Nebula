@@ -1,7 +1,6 @@
 /datum/extension/network_device/broadcaster/relay
-	connection_type = NETWORK_CONNECTION_WIRED
+	connection_type = NETWORK_CONNECTION_STRONG_WIRELESS
 	expected_type = /obj/machinery
-	var/long_range  = 0 		// TRUE if relay can cross z-chunk boundaries.
 
 /datum/extension/network_device/broadcaster/relay/get_nearby_networks()
 	if(long_range)
@@ -23,3 +22,6 @@
 	if(!long_range && !(network_id in get_nearby_networks()))
 		return FALSE
 	return net.add_device(src)
+
+/datum/extension/network_device/broadcaster/relay/long_range
+	long_range = TRUE

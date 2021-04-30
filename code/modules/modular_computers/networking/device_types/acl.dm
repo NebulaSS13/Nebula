@@ -1,5 +1,5 @@
 /datum/extension/network_device/acl
-	connection_type = NETWORK_CONNECTION_WIRED
+	connection_type = NETWORK_CONNECTION_STRONG_WIRELESS
 	var/list/administrators = list()	// A list of numerical user IDs of users that are administrators on a network.
 
 	var/program_control = FALSE			// Whether the ACL controls program access or not.

@@ -2,9 +2,12 @@
 	name = "console"
 	maximum_component_parts = list(/obj/item/stock_parts = 14)	//There's a lot of stuff that goes in these
 	var/list/interact_sounds = list("keyboard", "keystroke")
+	var/wired_connection = FALSE // Whether or not this console will start with a wired connection beneath it.
 
 /obj/machinery/computer/modular/Initialize()
 	set_extension(src, /datum/extension/interactive/ntos/console)
+	if(wired_connection)
+		uncreated_component_parts += list(/obj/item/stock_parts/computer/lan_port)
 	. = ..()
 
 /obj/machinery/computer/modular/Process()

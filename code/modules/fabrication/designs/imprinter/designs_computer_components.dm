@@ -8,8 +8,8 @@
 /datum/fabricator_recipe/imprinter/comp_network/advanced
 	path = /obj/item/stock_parts/computer/network_card/advanced
 
-/datum/fabricator_recipe/imprinter/comp_network/wired
-	path = /obj/item/stock_parts/computer/network_card/wired
+/datum/fabricator_recipe/imprinter/comp_network/lan_port
+	path = /obj/item/stock_parts/computer/lan_port
 
 /datum/fabricator_recipe/imprinter/comp_data
 	category = "Portable Data Storage"
