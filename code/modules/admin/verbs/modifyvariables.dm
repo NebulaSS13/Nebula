@@ -529,14 +529,10 @@
 	to_world_log("### VarEdit by [src]: [O.type] [variable]=[html_encode("[new_value]")]")
 	log_and_message_admins("modified [original_name]'s [variable] from '[old_value]' to '[new_value]'")
 
-/client
-	var/static/vv_set_handlers
-
 /client/proc/special_set_vv_var(var/datum/O, variable, var_value, client)
-	if(!vv_set_handlers)
-		vv_set_handlers = init_subtypes(/decl/vv_set_handler)
+	var/list/vv_set_handlers = decls_repository.get_decls_of_subtype(/decl/vv_set_handler)
 	for(var/vv_handler in vv_set_handlers)
-		var/decl/vv_set_handler/sh = vv_handler
+		var/decl/vv_set_handler/sh = vv_set_handlers[vv_handler]
 		if(sh.can_handle_set_var(O, variable, var_value, client))
 			sh.handle_set_var(O, variable, var_value, client)
 			return TRUE
