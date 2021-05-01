@@ -169,9 +169,10 @@
 	forceMove(get_turf(target))
 	START_PROCESSING(SSobj, src)
 
-	aiming_at.aimed |= src
+	LAZYDISTINCTADD(aiming_at.aimed_at_by, src)
 	toggle_active(1)
 	locked = 0
+	
 	update_icon()
 	lock_time = world.time + 35
 	events_repository.register(/decl/observ/moved, owner, src, /obj/aiming_overlay/proc/update_aiming)
@@ -219,7 +220,7 @@
 	if(aiming_at)
 		events_repository.unregister(/decl/observ/moved, aiming_at, src)
 		events_repository.unregister(/decl/observ/destroyed, aiming_at, src)
-		aiming_at.aimed -= src
+		LAZYREMOVE(aiming_at.aimed_at_by, src)
 		aiming_at = null
 
 	aiming_with = null
