@@ -14,7 +14,7 @@
 	shuttle = SSshuttle.shuttles[shuttle_tag]
 	target_sector = sector
 	// Generates the overlay of the shuttle on turfs.
-	var/turf/origin = get_turf(src)
+	var/turf/origin = get_turf(shuttle.current_location)
 	for(var/area/A in shuttle.shuttle_area)
 		for(var/turf/T in A)
 			var/image/I = image('icons/effects/alphacolors.dmi', origin, "red")
