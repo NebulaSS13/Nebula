@@ -88,7 +88,6 @@
 		crust_strata = pick(possible_strata)
 
 /obj/effect/overmap/visitable/sector/exoplanet/Initialize(mapload, z_level)
-	name = "[generate_planet_name()], \a [name]"
 	if(global.using_map.use_overmap)
 		forceMove(locate(1, 1, z_level))
 	return ..()
@@ -101,7 +100,13 @@
 	x_size = maxx - 2 * (TRANSITIONEDGE + 1)
 	y_size = maxy - 2 * (TRANSITIONEDGE + 1)
 	landing_points_to_place = min(round(0.1 * (x_size * y_size) / (shuttle_size * shuttle_size)), 3)
+
+	var/planet_name = generate_planet_name()
+	SetName("[planet_name], \a [name]")
 	planetary_area = new planetary_area()
+	global.using_map.area_purity_test_exempt_areas += planetary_area.type
+	planetary_area.SetName("Surface of [planet_name]")
+
 	var/themes_num = min(length(possible_themes), rand(1, max_themes))
 	for(var/i = 1 to themes_num)
 		var/datum/exoplanet_theme/T = pickweight(possible_themes)
