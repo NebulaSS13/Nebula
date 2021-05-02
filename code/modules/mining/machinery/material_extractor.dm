@@ -10,6 +10,8 @@
 
 //TODO: Sprite work?
 
+GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
+
 /obj/machinery/atmospherics/unary/material/extractor
 	name = "Gas extractor"
 	desc = "A machine for extracting liquids and gases from ices and hydrates."
@@ -34,9 +36,6 @@
 	var/time_last_input = 0 //Time since an item was processed, used to wait a bit for reactions to happen
 	var/time_last_bark = 0 //time since the machine said anything last
 	var/obj/item/chems/output_container //#TODO: change this when plumbing is a thing
-	var/global/list/items_whitelist = list( //stuff that should be accepted
-		/obj/item/ore,
-	)
 
 /obj/machinery/atmospherics/unary/material/extractor/Initialize(mapload, d = 0, populate_parts = TRUE)
 	. = ..()
@@ -107,7 +106,7 @@
 	. = ..()
 	QUEUE_TEMPERATURE_ATOMS(src)
 
-/obj/machinery/atmospherics/unary/material/extractor/update_icon()
+/obj/machinery/atmospherics/unary/material/extractor/on_update_icon()
 	. = ..()
 	icon_state = initial(icon_state)
 	if(!use_power || inoperable())
@@ -136,7 +135,7 @@
 	return count_items_processing() > 0
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/can_process(var/obj/O)
-	if(istype(O) && is_type_in_list(O, items_whitelist) && (count_items_processing() < max_items))
+	if(istype(O) && is_type_in_list(O, GLOB.material_extractor_items_whitelist) && (count_items_processing() < max_items))
 		for(var/k in O.matter)
 			var/decl/material/M = GET_DECL(k)
 			ASSERT(istype(M))
