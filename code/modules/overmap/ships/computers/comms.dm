@@ -6,6 +6,7 @@
 	core_skill = SKILL_DEVICES
 	var/broadcasting_distress = FALSE //are we broadcasting a distress signal?
 	var/list/communications = list()
+	var/next_distress_ping = 0
 
 /datum/communication
 	var/source //ref to the source of the communication.
@@ -30,7 +31,7 @@
 	var/list/broadcasters = list()
 	var/list/receivers = list()
 
-	for(var/obj/machinery/shipcomms/comms in linked.comms_masers)
+	for(var/obj/machinery/shipcomms/comms as anything in linked.get_linked_machines_of_type(/obj/machinery/shipcomms))
 		var/functional = (comms.stat & (BROKEN|NOPOWER))
 		broadcasters += list(list(
 			"name" = comms.name,
@@ -56,7 +57,10 @@
 					"name" = entity.name,
 					"coords" = "[entity.x],[entity.y]",
 					"desc" = entity.desc,
-					"status" = ((has_broadcaster && has_receiver) ? "Responding to comms pings." : "Not responding to comms pings.")
+					"status" = ((has_broadcaster && has_receiver) ? "Responding to comms pings." : "Not responding to comms pings."),
+					"opened_comms" = has_opened_comms(entity),
+					"ref" = "\ref[entity]",
+					"is_real" = TRUE
 				))
 
 	for(var/obj/machinery/shipcomms/comms in linked.comms_antennae)
@@ -88,6 +92,7 @@
 
 	data["allow_ident_change"] = linked.can_switch_ident
 	data["ident_enabled"] =      linked.ident_transmitter
+	data["recent_distress_ping"] = next_distress_ping > world.time
 
 	data["entities"] =     entities
 	data["broadcasters"] = broadcasters
@@ -95,7 +100,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, "shipcomms.tmpl", "[linked.name] Communication Screen", 380, 530)
+		ui = new(user, src, ui_key, "shipcomms.tmpl", "[linked.name] Communication Screen", 600, 530)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -110,17 +115,22 @@
 			linked.ident_transmitter = !linked.ident_transmitter
 			. = TOPIC_REFRESH
 
+/obj/machinery/computer/ship/comms/proc/has_opened_comms(var/obj/effect/overmap/overmap_obj)
+	for(var/datum/communication/C in communications)
+		if(C.destination == overmap_obj)
+			. = TRUE
+
 /obj/machinery/computer/ship/comms/proc/is_destination_in_range(var/obj/effect/overmap/destination)
 	. = FALSE
-	for(var/obj/machinery/shipcomms/comms in destination.comms_masers)
+	for(var/obj/machinery/shipcomms/comms in linked.get_linked_machines_of_type(/obj/machinery/shipcomms/broadcaster))
 		var/functional = (comms.stat & (BROKEN|NOPOWER))
 		if(functional)
 			if(destination in comms.get_nearby_entitities())
 				. = TRUE
 
-/obj/machinery/computer/ship/comms/proc/has_antennae_functional(var/obj/effect/overmap/overmap_obj)
+/obj/machinery/computer/ship/comms/proc/has_antennae_functional(var/obj/effect/overmap/visitable/overmap_obj)
 	. = FALSE
-	for(var/obj/machinery/shipcomms/comms in overmap_obj.comms_antennae)
+	for(var/obj/machinery/shipcomms/comms in overmap_obj.get_linked_machines_of_type(/obj/machinery/shipcomms/receiver))
 		if((comms.stat & (BROKEN|NOPOWER)))
 			. = TRUE
 			break
@@ -147,8 +157,8 @@
 	comm_log.add_message_to_log(source, message)
 	ping("Message recieved from [source.ident_transmitter ? source.name : "Unknown"].")
 
-/obj/machinery/computer/ship/comms/proc/open_comms(var/destination)
-	if(has_antennae_functional(destination))
+/obj/machinery/computer/ship/comms/proc/open_comms(var/obj/effect/overmap/visitable/destination)
+	if(has_antennae_functional(destination) && is_destination_in_range(destination))
 		for(var/obj/machinery/computer/ship/comms/C in destination.associated_machinery)
 			C.new_comm(linked)
 
@@ -158,6 +168,25 @@
 	transmission.destination = linked
 	transmission.add_message_to_log(source, "Comms channel opened.")
 	ping("Comms channel opened.")
+
+/obj/machinery/computer/ship/comms/proc/send_distress_ping(var/user)
+	if(next_distress_ping > world.time)
+		to_chat(user, SPAN_WARNING("You can't send another distress ping again so soon."))
+		return
+	for(var/obj/effect/overmap/visitable/V in RANGE_TURFS(linked, 5)) //the distress ping doesn't require a tightbeam transmitter, it's generic and wide-band.
+		for(var/obj/machinery/computer/ship/comms/C in V.associated_machinery)
+			C.recieve_distress_ping(linked)
+	next_distress_ping = world.time + 5 MINUTES
+	ping("Distress ping broadcasted.")
+
+/obj/machinery/computer/ship/comms/proc/recieve_distress_ping(var/obj/effect/overmap/visitable/distress_source)
+	var/list/turfs_in_range = RANGE_TURFS(distress_source, 2) //precise enough to give a general location.
+	var/heading_turf = pick(turfs_in_range)
+	var/msg = "Distress ping recieved from heading [Get_Angle(linked, heading_turf)]."
+
+	playsound(src.loc, 'sound/machines/distress_ping.ogg', 50, 0)
+	state(msg)
+	GLOB.global_announcer.autosay(msg, "Communications Subsystem", "Command")
 
 /obj/machinery/shipcomms
 	density = TRUE
@@ -187,14 +216,17 @@
 /obj/machinery/shipcomms/Initialize()
 	..()
 	. = INITIALIZE_HINT_LATELOAD
+	refresh_overmap_registration()
 
-/obj/machinery/shipcomms/proc/register(var/obj/effect/overmap/O)
+/obj/machinery/shipcomms/proc/register(var/obj/effect/overmap/visitable/O)
+	O.register_machine(src, src.type)
 	return
 
-/obj/machinery/shipcomms/proc/unregister(var/obj/effect/overmap/O)
+/obj/machinery/shipcomms/proc/unregister(var/obj/effect/overmap/visitable/O)
+	O.unregister_machine(src, src.type)
 	return
 
-/obj/machinery/shipcomms/proc/get_nearby_entitities()
+/obj/machinery/shipcomms/proc/get_nearby_entitities(var/extra_range)
 	. = list()
 	var/obj/effect/overmap/O = map_sectors["[z]"]
 	if(!O)
