@@ -606,7 +606,7 @@
 		bling.adjust_worth(nv)
 		if(projectile_vomit)
 			for(var/j = 1, j <= rand(2, 4), j++)
-				step(bling, pick(GLOB.cardinal))
+				step(bling, pick(global.cardinal))
 
 	if(projectile_vomit)
 		vomit_onto.AdjustStunned(3)
@@ -614,7 +614,7 @@
 		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] blasts themselves full in the face with \the [src]!</span>")
 		playsound(T, "sound/weapons/gunshot/money_launcher_jackpot.ogg", 100, 1)
 	else
-		var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
+		var/decl/currency/cur = decls_repository.get_decl(global.using_map.default_currency)
 		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] ejects a few [cur.name] into their face.</span>")
 		playsound(T, 'sound/weapons/gunshot/money_launcher.ogg', 100, 1)
 
@@ -639,7 +639,7 @@
 	var/obj/item/cash/bling = new
 	bling.adjust_worth(receptacle_value)
 	user.put_in_hands(bling)
-	var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
+	var/decl/currency/cur = decls_repository.get_decl(global.using_map.default_currency)
 	to_chat(user, "<span class='notice'>You eject [receptacle_value] [cur.name_singular] from [src]'s receptacle.</span>")
 	receptacle_value = 0
 
@@ -675,7 +675,7 @@
 
 /obj/item/gun/hand/money/examine(mob/user)
 	. = ..(user)
-	var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
+	var/decl/currency/cur = decls_repository.get_decl(global.using_map.default_currency)
 	to_chat(user, "It is configured to dispense [dispensing] [cur.name_singular] at a time.")
 
 	if(receptacle_value >= 1)

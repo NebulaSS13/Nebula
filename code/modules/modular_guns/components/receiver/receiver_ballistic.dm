@@ -104,7 +104,7 @@
 	switch(handle_casings)
 		if(EJECT_CASINGS)
 			chambered.dropInto(get_turf(src))
-			chambered.throw_at(get_ranged_target_turf(get_turf(src), (holder ? turn(holder.dir,270) : pick(GLOB.alldirs)), 1), rand(0,1), 5)
+			chambered.throw_at(get_ranged_target_turf(get_turf(src), (holder ? turn(holder.dir,270) : pick(global.alldirs)), 1), rand(0,1), 5)
 			if(LAZYLEN(chambered.fall_sounds))
 				playsound(get_turf(src), pick(chambered.fall_sounds), 50, 1)
 		if(CYCLE_CASINGS)

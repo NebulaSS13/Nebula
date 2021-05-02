@@ -226,7 +226,7 @@
 
 
 /obj/item/gun/hand/money/attack_self(mob/user)
-	var/decl/currency/cur = decls_repository.get_decl(GLOB.using_map.default_currency)
+	var/decl/currency/cur = decls_repository.get_decl(global.using_map.default_currency)
 	var/disp_amount = min(input(user, "How many [cur.name_singular] do you want to dispense at a time? (0 to [src.receptacle_value])", "Money Cannon Settings", 20) as num, receptacle_value)
 	if (disp_amount < 1)
 		to_chat(user, "<span class='warning'>You have to dispense at least one [cur.name_singular] at a time!</span>")
@@ -370,7 +370,7 @@
 			return
 
 		var/decl/currency/cur = decls_repository.get_decl(bling.currency)
-		if(bling.currency != GLOB.using_map.default_currency)
+		if(bling.currency != global.using_map.default_currency)
 			to_chat(user, SPAN_WARNING("Due to local legislation and budget cuts, \the [holder || src] will only accept [cur.name]."))
 			return
 
@@ -583,7 +583,7 @@
 		return
 	to_chat(usr, SPAN_NOTICE("\The [src] chimes quietly as its registration resets."))
 	G.registered_owner = null
-	GLOB.registered_weapons -= G
+	global.registered_weapons -= G
 	verbs -= /obj/item/gun/proc/reset_registration
 
 /obj/item/gun/verb/toggle_safety_verb()

@@ -221,7 +221,7 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/gun/long/temperature/Topic(user, href_list, state = GLOB.inventory_state)
+/obj/item/gun/long/temperature/Topic(user, href_list, state = global.inventory_topic_state)
 	..()
 
 /obj/item/gun/long/temperature/OnTopic(user, href_list)

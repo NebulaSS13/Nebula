@@ -1,5 +1,5 @@
-GLOBAL_LIST_INIT(registered_weapons, list())
-GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
+var/global/list/registered_weapons = list()
+var/global/list/registered_cyborg_weapons = list()
 
 /obj/item/firearm_component/grip/secure
 	name = "secure pistol grip"
@@ -14,7 +14,7 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 /obj/item/firearm_component/grip/secure/holder_emag_act(var/charges, var/mob/user)
 	if(holder?.is_secure_gun())
 		registered_owner = null
-		GLOB.registered_weapons -= src
+		global.registered_weapons -= src
 		holder.verbs -= /obj/item/gun/proc/reset_registration
 		holder.req_access.Cut()
 		to_chat(user, SPAN_NOTICE("\The [holder || src]'s authorization chip fries, giving you full access."))
@@ -26,7 +26,7 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 		user.visible_message("\The [user] swipes an ID through \the [holder || src].", range = 3)
 		if(!registered_owner)
 			var/obj/item/card/id/id = W
-			GLOB.registered_weapons |= src
+			global.registered_weapons |= src
 			holder.verbs |= /obj/item/gun/proc/reset_registration
 			registered_owner = id.registered_name
 			to_chat(user, SPAN_NOTICE("\The [holder || src] chimes quietly as it registers to \"[registered_owner]\"."))
@@ -91,6 +91,6 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 		. = INITIALIZE_HINT_QDEL
 		CRASH("Invalid spawn location.")
 	registered_owner = borg.name
-	GLOB.registered_cyborg_weapons += src
+	global.registered_cyborg_weapons += src
 	. = ..()
 */
