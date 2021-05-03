@@ -456,7 +456,8 @@ Class Procs:
 		.+= lock.get_req_access()
 
 /obj/machinery/get_contained_external_atoms()
-	. = (contents - component_parts)
+	. = ..()
+	. -= component_parts
 
 /obj/machinery/proc/get_auto_access()
 	var/area/A = get_area(src)

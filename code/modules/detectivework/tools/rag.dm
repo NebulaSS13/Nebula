@@ -90,7 +90,7 @@
 		update_name()
 		if(do_after(user,30, progress = 1))
 			user.visible_message("\The [user] finishes wiping off the [A]!")
-			reagents.splash(A, FLUID_EVAPORATION_POINT)
+			reagents.splash(A, FLUID_QDEL_POINT)
 
 /obj/item/chems/glass/rag/attack(atom/target, mob/user , flag)
 	if(isliving(target))
