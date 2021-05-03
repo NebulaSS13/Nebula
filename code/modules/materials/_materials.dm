@@ -399,7 +399,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
 
-	if(REAGENT_VOLUME(holder, type) < FLUID_EVAPORATION_POINT)
+	if(REAGENT_VOLUME(holder, type) < FLUID_QDEL_POINT)
 		return
 
 	if(istype(T) && dirtiness <= DIRTINESS_CLEAN)

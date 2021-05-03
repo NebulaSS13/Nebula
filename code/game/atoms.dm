@@ -307,7 +307,9 @@ its easier to just keep the beam vertical.
 	return
 
 /atom/proc/get_contained_external_atoms()
-	. = contents
+	for(var/atom/movable/AM in contents)
+		if(!QDELETED(AM) && AM.simulated)
+			LAZYADD(., AM)
 
 /atom/proc/dump_contents()
 	for(var/thing in get_contained_external_atoms())

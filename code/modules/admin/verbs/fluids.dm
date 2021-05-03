@@ -17,10 +17,8 @@
 	if(!reagent_type || !user || !check_rights(R_SPAWN))
 		return
 	var/turf/flooding = get_turf(user)
-	for(var/thing in RANGE_TURFS(flooding, spawn_range))
-		var/obj/effect/fluid/F = locate() in thing
-		if(!F) F = new(thing)
-		F.reagents.add_reagent(reagent_type, reagent_amount)
+	for(var/turf/T as anything in RANGE_TURFS(flooding, spawn_range))
+		T.add_fluid(reagent_type, reagent_amount)
 
 /datum/admins/proc/jump_to_fluid_source()
 

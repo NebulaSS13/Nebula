@@ -150,7 +150,6 @@ Class Procs:
 
 	// Update fires.
 	if(air.temperature >= FLAMMABLE_GAS_FLASHPOINT && !(src in SSair.active_fire_zones) && air.check_combustibility() && contents.len)
-
 		var/turf/T = pick(contents)
 		if(istype(T))
 			T.create_fire(vsc.fire_firelevel_multiplier)
@@ -159,6 +158,7 @@ Class Procs:
 	if(air.check_tile_graphic(graphic_add, graphic_remove))
 		for(var/turf/simulated/T in contents)
 			T.update_graphic(graphic_add, graphic_remove)
+			CHECK_TICK
 		graphic_add.len = 0
 		graphic_remove.len = 0
 
@@ -166,6 +166,7 @@ Class Procs:
 	for(var/connection_edge/E in edges)
 		if(E.sleeping)
 			E.recheck()
+			CHECK_TICK
 
 	// Handle condensation from the air.
 	if(!condensing)
@@ -198,7 +199,7 @@ Class Procs:
 				var/obj/effect/fluid/F = locate() in flooding
 				if(!F) F = new(flooding)
 				F.reagents.add_reagent(g, condense_amt * REAGENT_UNITS_PER_GAS_MOLE)
-				CHECK_TICK
+		CHECK_TICK
 	condensing = FALSE
 
 /zone/proc/dbg_data(mob/M)
