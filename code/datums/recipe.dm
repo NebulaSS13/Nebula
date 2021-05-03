@@ -98,9 +98,12 @@
 //general version
 /datum/recipe/proc/make(var/obj/container)
 	var/obj/result_obj = new result(container)
-	for (var/obj/O in (container.get_contained_external_atoms()-result_obj))
-		O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
-		qdel(O)
+	var/list/contained_atoms = container.get_contained_external_atoms()
+	if(contained_atoms)
+		contained_atoms -= result_obj
+		for(var/obj/O in contained_atoms)
+			O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
+			qdel(O)
 	container.reagents.clear_reagents()
 	return result_obj
 

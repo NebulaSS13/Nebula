@@ -133,17 +133,6 @@ SUBSYSTEM_DEF(materials)
 		if(random.randomize_data(temperature))
 			return random.type
 
-// This is a fairly hacky way of preventing multiple on_reagent_change() calls being fired within the same tick.
-/datum/controller/subsystem/materials/proc/queue_reagent_change(var/atom/changing)
-	if(!pending_reagent_change[changing])
-		pending_reagent_change[changing] = TRUE
-		addtimer(CALLBACK(src, .proc/do_reagent_change, changing), 0)
-
-/datum/controller/subsystem/materials/proc/do_reagent_change(var/atom/changing)
-	pending_reagent_change -= changing
-	if(!QDELETED(changing))
-		changing.on_reagent_change()
-
 /datum/controller/subsystem/materials/proc/get_cocktails_by_primary_ingredient(var/primary)
 	. = cocktails_by_primary_ingredient[primary]
 

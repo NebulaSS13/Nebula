@@ -14,7 +14,7 @@
 	if(locate(/obj/effect/flood) in src)
 		return
 
-	if(get_fluid_depth() > FLUID_EVAPORATION_POINT)
+	if(get_fluid_depth() > FLUID_QDEL_POINT)
 		return
 
 	if(wet_val < wet && !overwrite)

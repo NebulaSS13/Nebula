@@ -338,3 +338,7 @@
 		M.make_grab(src)
 		return 0
 	. = ..()
+
+/atom/movable/proc/pushed(var/pushdir)
+	set waitfor = FALSE
+	step(src, pushdir)
