@@ -110,6 +110,10 @@ var/global/regex/actual_error_file_line
 	for(var/line in desclines)
 		error_write_log(line)
 
+	// Runtime must feed.
+	for(var/mob/runtime as anything in global.runtime_eaters)
+		runtime.set_scale(min(runtime.icon_scale_x + 0.1, 3))
+
 /proc/error_write_log(msg)
 	to_world_log(msg)
 #endif

@@ -207,6 +207,7 @@
 	return
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
+var/global/list/runtime_eaters = list()
 /mob/living/simple_animal/cat/fluff/runtime
 	name = "Runtime"
 	desc = "Her fur has the look and feel of velvet, and her tail quivers occasionally."
@@ -217,6 +218,19 @@
 	icon_dead = "cat_dead"
 	skin_material = /decl/material/solid/skin/fur/black
 	holder_type = /obj/item/holder/runtime
+
+/mob/living/simple_animal/cat/fluff/runtime/Initialize()
+	. = ..()
+	global.runtime_eaters += src
+
+/mob/living/simple_animal/cat/fluff/runtime/Destroy()
+	. = ..()
+	global.runtime_eaters -= src
+	
+/mob/living/simple_animal/cat/fluff/runtime/death(gibbed, deathmessage, show_dead_message)
+	. = ..()
+	set_scale(1)
+	global.runtime_eaters -= src
 
 /obj/item/holder/runtime
 	origin_tech = "{'programming':1,'biotech':1}"
