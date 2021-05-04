@@ -10,7 +10,7 @@
 	desc = "A staff capable of producing an almost harmless bolt of sunlight, capable of blinding anyone in the room, at least for a while."
 	base_cost = 200
 	category = DEITY_TREE_ARTIFACT
-	boon_path = /obj/item/gun/energy/staff/beacon
+	boon_path = /obj/item/gun/staff/beacon
 
 /datum/deity_item/boon/black_death
 	name = "Black Death"

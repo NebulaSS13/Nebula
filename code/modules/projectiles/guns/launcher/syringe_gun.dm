@@ -60,98 +60,26 @@
 	icon_state = initial(icon_state) //reset icon state
 	update_icon()
 
-/obj/item/gun/launcher/syringe
+/obj/item/gun/long/syringe
 	name = "syringe gun"
 	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
 	icon = 'icons/obj/guns/launcher/syringe.dmi'
-	icon_state = ICON_STATE_WORLD
-	w_class = ITEM_SIZE_LARGE
-	force = 7
 	material = /decl/material/solid/metal/steel
-	slot_flags = SLOT_LOWER_BODY
+	barrel = /obj/item/firearm_component/barrel/launcher/syringe
+	receiver = /obj/item/firearm_component/receiver/launcher/syringe
 
-	fire_sound = 'sound/weapons/empty.ogg'
-	fire_sound_text = "a metallic thunk"
-	screen_shake = 0
-	release_force = 10
-	throw_distance = 10
-
-	var/list/darts = list()
-	var/max_darts = 1
-	var/obj/item/syringe_cartridge/next
-
-/obj/item/gun/launcher/syringe/consume_next_projectile()
-	if(next)
-		next.prime()
-		return next
-	return null
-
-/obj/item/gun/launcher/syringe/handle_post_fire()
-	..()
-	darts -= next
-	next = null
-
-/obj/item/gun/launcher/syringe/attack_self(mob/user)
-	if(next)
-		user.visible_message("[user] unlatches and carefully relaxes the bolt on [src].", "<span class='warning'>You unlatch and carefully relax the bolt on [src], unloading the spring.</span>")
-		next = null
-	else if(darts.len)
-		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
-		user.visible_message("[user] draws back the bolt on [src], clicking it into place.", "<span class='warning'>You draw back the bolt on the [src], loading the spring!</span>")
-		next = darts[1]
-	add_fingerprint(user)
-
-/obj/item/gun/launcher/syringe/attack_hand(mob/user)
-	if(user.is_holding_offhand(src))
-		if(!darts.len)
-			to_chat(user, "<span class='warning'>[src] is empty.</span>")
-			return
-		if(next)
-			to_chat(user, "<span class='warning'>[src]'s cover is locked shut.</span>")
-			return
-		var/obj/item/syringe_cartridge/C = darts[1]
-		darts -= C
-		user.put_in_hands(C)
-		user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
-	else
-		..()
-
-/obj/item/gun/launcher/syringe/attackby(var/obj/item/A, mob/user)
-	if(istype(A, /obj/item/syringe_cartridge))
-		var/obj/item/syringe_cartridge/C = A
-		if(darts.len >= max_darts)
-			to_chat(user, "<span class='warning'>[src] is full!</span>")
-			return
-		if(!user.unEquip(C, src))
-			return
-		darts += C //add to the end
-		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
-	else
-		..()
-
-/obj/item/gun/launcher/syringe/rapid
+/obj/item/gun/long/syringe/rapid
 	name = "syringe gun revolver"
 	desc = "A modification of the syringe gun design, using a rotating cylinder to store up to five syringes. The spring still needs to be drawn between shots."
 	icon = 'icons/obj/guns/launcher/syringe_rapid.dmi'
-	max_darts = 5
+	receiver = /obj/item/firearm_component/receiver/launcher/syringe/large
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
-/obj/item/gun/launcher/syringe/disguised
+/obj/item/gun/hand/syringe_disguised
 	name = "deluxe electronic cigarette"
 	desc = "A premium model eGavana MK3 electronic cigarette, shaped like a cigar."
 	icon = 'icons/clothing/mask/smokables/cigarette_electronic_deluxe.dmi'
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
-	force = 3
-	throw_distance = 7
-	release_force = 10
-
-/obj/item/gun/launcher/syringe/disguised/on_update_icon()
-	cut_overlays()
-	add_overlay("[icon_state]-loaded")
-
-/obj/item/gun/launcher/syringe/disguised/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1)
-		to_chat(user, "The button is a little stiff.")
+	receiver = /obj/item/firearm_component/receiver/launcher/syringe/hidden

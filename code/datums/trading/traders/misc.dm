@@ -96,12 +96,12 @@
 								/obj/item/stamp/clown            = TRADER_THIS_TYPE,
 								/obj/item/storage/backpack/clown = TRADER_THIS_TYPE,
 								/obj/item/bananapeel             = TRADER_THIS_TYPE,
-								/obj/item/gun/launcher/money     = TRADER_THIS_TYPE,
+								/obj/item/gun/hand/money     = TRADER_THIS_TYPE,
 								/obj/item/chems/food/snacks/pie = TRADER_THIS_TYPE,
 								/obj/item/bikehorn               = TRADER_THIS_TYPE,
 								/obj/item/chems/spray/waterflower = TRADER_THIS_TYPE,
-								/obj/item/gun/launcher/pneumatic/small = TRADER_THIS_TYPE,
-								/obj/item/gun/projectile/revolver/capgun = TRADER_THIS_TYPE,
+								/obj/item/gun/hand/pneumatic = TRADER_THIS_TYPE,
+								/obj/item/gun/hand/revolver/capgun = TRADER_THIS_TYPE,
 								/obj/item/clothing/mask/fakemoustache   = TRADER_THIS_TYPE,
 								/obj/item/grenade/spawnergrenade/fake_carp = TRADER_THIS_TYPE)
 

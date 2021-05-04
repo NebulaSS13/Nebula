@@ -23,7 +23,7 @@
 		"switch mode" = IC_PINTYPE_PULSE_IN
 
 	)
-	var/obj/item/gun/energy/installed_gun = null
+	var/obj/item/gun/installed_gun
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_COMBAT
 	power_draw_per_use = 30
@@ -35,8 +35,8 @@
 	return ..()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/attackby(var/obj/O, var/mob/user)
-	if(istype(O, /obj/item/gun/energy))
-		var/obj/item/gun/energy/gun = O
+	if(istype(O, /obj/item/gun))
+		var/obj/item/gun/gun = O
 		if(installed_gun)
 			to_chat(user, "<span class='warning'>There's already a weapon installed.</span>")
 			return
@@ -45,19 +45,21 @@
 		installed_gun = gun
 		to_chat(user, "<span class='notice'>You slide \the [gun] into the firing mechanism.</span>")
 		playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
-		if(installed_gun.fire_delay)
-			cooldown_per_use = installed_gun.fire_delay * 10
+		if(installed_gun.receiver?.fire_delay)
+			cooldown_per_use = installed_gun.receiver.fire_delay * 10
 		if(cooldown_per_use < 30)
 			cooldown_per_use = 30 //If there's no defined fire delay let's put some
-		if(installed_gun.charge_cost)
-			power_draw_per_use = installed_gun.charge_cost
+		if(istype(installed_gun.barrel, /obj/item/firearm_component/receiver/energy))
+			var/obj/item/firearm_component/barrel/energy/bar = installed_gun.barrel
+			if(bar.charge_cost)
+				power_draw_per_use = bar.charge_cost
 		set_pin_data(IC_OUTPUT, 1, weakref(installed_gun))
-		if(installed_gun.firemodes.len)
-			var/datum/firemode/fm = installed_gun.firemodes[installed_gun.sel_mode]
+		if(length(installed_gun?.receiver?.firemodes))
+			var/datum/firemode/fm = installed_gun.receiver.firemodes[installed_gun.receiver.sel_mode]
 			set_pin_data(IC_OUTPUT, 2, fm.name)
 		push_data()
-	else
-		..()
+		return TRUE
+	. = ..()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/attack_self(var/mob/user)
 	if(installed_gun)
@@ -95,8 +97,8 @@
 				assembly.visible_message("<span class='danger'>[assembly] fires [installed_gun]!</span>")
 				shootAt(locate(target_x, target_y, T.z))
 		if(2)
-			var/datum/firemode/next_firemode = installed_gun.switch_firemodes()
-			set_pin_data(IC_OUTPUT, 2, next_firemode ? next_firemode.name : null)
+			var/datum/firemode/next_firemode = installed_gun.receiver?.switch_firemodes()
+			set_pin_data(IC_OUTPUT, 2, next_firemode?.name)
 			push_data()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/proc/shootAt(turf/target)

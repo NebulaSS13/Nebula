@@ -40,7 +40,7 @@
 	var/obj/O = get_pin_data_as_type(IC_INPUT, 1, /obj)
 	if(!O)
 		return FALSE
-	if(istype(O, /obj/item/gun/energy))
+	if(istype(O, /obj/item/gun))
 		return FALSE
 	if(!assembly)
 		return FALSE // Pointless to do everything else if there's no battery to draw from.

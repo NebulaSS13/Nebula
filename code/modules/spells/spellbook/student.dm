@@ -16,7 +16,7 @@
 	spells = list(/spell/aoe_turf/knock = 						1,
 				/spell/targeted/ethereal_jaunt = 				1,
 				/spell/targeted/projectile/magic_missile = 		1,
-				/obj/item/gun/energy/staff/focus = 		1,
+				/obj/item/gun/staff/focus = 		1,
 				/obj/item/contract/wizard/xray = 		1
 					)
 

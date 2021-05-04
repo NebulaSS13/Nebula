@@ -36,11 +36,13 @@
 	playsound(src.loc,'sound/effects/attackblob.ogg',100, 1)
 	qdel(src)
 
-//a slug sling basically launches a small egg that hatches (either on a person or on the floor), releasing a terrible blood thirsty monster.
+//a slug sling basically launches a small egg that hatches (either on a person or on the floor), releasing a terrible bloodthirsty monster.
 //Balanced due to the non-spammy nature of the gun, as well as the frailty of the creatures.
-/obj/item/gun/launcher/alien/slugsling
+/obj/item/gun/long/slugsling
 	name = "slug sling"
-	desc = "A bulbous looking rifle. It feels like holding a plastic bag full of meat."
+	desc = "A bulbous alien rifle. It feels like holding a plastic bag full of meat."
+
+/*
 	w_class = ITEM_SIZE_LARGE
 	icon = 'mods/species/vox/icons/gear/voxslug.dmi'
 	icon_state = ICON_STATE_WORLD
@@ -54,13 +56,9 @@
 	ammo_gen_time = 600
 	var/mode = "Impact"
 
-/obj/item/gun/launcher/alien/slugsling/consume_next_projectile()
+/obj/item/gun/long/slugsling/consume_next_projectile()
 	var/obj/item/slugegg/S = ..()
 	if(S)
 		S.break_on_impact = (mode == "Impact")
 	return S
-
-
-/obj/item/gun/launcher/alien/slugsling/attack_self(var/mob/user)
-	mode = mode == "Impact" ? "Sentry" : "Impact"
-	to_chat(user,"<span class='notice'>You switch \the [src]'s mode to \"[mode]\"</span>")
+*/

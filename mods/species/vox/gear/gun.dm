@@ -19,10 +19,11 @@
 /*
  * Vox Darkmatter Cannon
  */
-/obj/item/gun/energy/darkmatter
+/obj/item/gun/cannon/flux
 	name = "flux cannon"
 	desc = "A vicious beam weapon that crushes targets with dark-matter gravity pulses. Parts of it twitch and writhe, as if alive."
 	icon = 'mods/species/vox/icons/gear/darkcannon.dmi'
+/*
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_LARGE
 	projectile_type = /obj/item/projectile/beam/stun/darkmatter
@@ -34,17 +35,19 @@
 		list(mode_name="scatter burst", burst=8, fire_delay=null, move_delay=4, burst_accuracy=list(0, 0, 0, 0, 0, 0, 0, 0), dispersion=list(0, 1, 2, 2, 3, 3, 3, 3, 3), projectile_type=/obj/item/projectile/energy/darkmatter, charge_cost = 10),
 		)
 
-/obj/item/gun/energy/darkmatter/Initialize()
+/obj/item/gun/cannon/flux/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/voxform)
+*/
 
 /*
  * Vox Sonic Cannon
  */
-/obj/item/gun/energy/sonic
+/obj/item/gun/long/sonic
 	name = "soundcannon"
 	desc = "A vicious sonic weapon of alien manufacture. Parts of it quiver gelatinously, as though the insectile-looking thing is alive."
 	icon = 'mods/species/vox/icons/gear/noise.dmi'
+/*
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_LARGE
 	one_hand_penalty = 1
@@ -57,22 +60,27 @@
 		list(mode_name="overcharge", projectile_type=/obj/item/projectile/energy/plasmastun/sonic/strong, charge_cost = 200),
 		)
 
-/obj/item/gun/energy/sonic/Initialize()
+/obj/item/gun/long/sonic/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/voxform)
+*/
 
-/obj/item/gun/projectile/dartgun/vox
+/obj/item/gun/hand/dartgun/vox
 	name = "alien dart gun"
 	desc = "A small gas-powered dartgun, fitted for nonhuman hands."
+	receiver = /obj/item/firearm_component/receiver/ballistic/dart/vox
 
-/obj/item/gun/projectile/dartgun/vox/medical
+/obj/item/firearm_component/receiver/ballistic/dart/vox
 	starting_chems = list(
 		/decl/material/liquid/burn_meds,
 		/decl/material/liquid/brute_meds,
 		/decl/material/liquid/antitoxins
 	)
 
-/obj/item/gun/projectile/dartgun/vox/raider
+/obj/item/gun/hand/dartgun/vox/raider
+	receiver = /obj/item/firearm_component/receiver/ballistic/dart/vox/raider
+
+/obj/item/firearm_component/receiver/ballistic/dart/vox/raider
 	starting_chems = list(
 		/decl/material/liquid/hallucinogenics,
 		/decl/material/liquid/sedatives,

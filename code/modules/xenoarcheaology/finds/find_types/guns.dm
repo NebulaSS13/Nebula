@@ -3,7 +3,7 @@
 	item_type = "gun"
 	new_icon_state = ICON_STATE_WORLD
 	responsive_reagent = /decl/material/solid/metal/iron
-	possible_types = list(/obj/item/gun/projectile/revolver)
+	possible_types = list(/obj/item/gun/hand/revolver)
 	var/gun_icons = list(
 		'icons/obj/guns/xenoarch/gun_1.dmi',
 		'icons/obj/guns/xenoarch/gun_2.dmi',
@@ -12,22 +12,26 @@
 	)
 
 /decl/archaeological_find/gun/spawn_item(atom/loc)
-	var/obj/item/gun/projectile/revolver/new_gun = ..()
+	var/obj/item/gun/hand/revolver/new_gun = ..()
 
 	//33% chance to be able to reload the gun with human ammunition
 	if(prob(66))
-		new_gun.caliber = "999"
+		new_gun.set_caliber(CALIBER_ALIEN)
 	//33% chance to fill it with a random amount of bullets
-	new_gun.max_shells = rand(1,12)
-	new_gun.loaded.Cut()
-	if(prob(33))
-		var/num_bullets = rand(1, new_gun.max_shells)
-		for(var/i = 1 to num_bullets)
-			var/obj/item/ammo_casing/A = new new_gun.ammo_type(new_gun)
-			new_gun.loaded += A
-			if(A.caliber != new_gun.caliber)
-				A.caliber = new_gun.caliber
-				A.desc = "A bullet casing of unknown caliber."
+	var/obj/item/firearm_component/receiver/ballistic/proj_receiver = new_gun.receiver
+	if(istype(proj_receiver))
+		proj_receiver.max_shells = rand(1,12)
+		proj_receiver.loaded.Cut()
+		if(prob(33))
+			var/type_bullets = initial(proj_receiver.loaded)
+			var/num_bullets = rand(1, proj_receiver.max_shells)
+			for(var/i = 1 to num_bullets)
+				var/obj/item/ammo_casing/A = new type_bullets(proj_receiver)
+				proj_receiver.loaded += A
+				var/gun_caliber = new_gun.get_load_caliber()
+				if(A.caliber != gun_caliber)
+					A.caliber = gun_caliber
+					A.desc = "A bullet casing of unknown caliber."
 
 	return new_gun
 
@@ -44,10 +48,10 @@
 	modification_flags = XENOFIND_APPLY_DECOR | XENOFIND_REPLACE_ICON
 	responsive_reagent = /decl/material/solid/metal/iron
 	possible_types = list(
-		/obj/item/gun/energy/laser/practice,
-		/obj/item/gun/energy/laser,
-		/obj/item/gun/energy/xray,
-		/obj/item/gun/energy/captain
+		/obj/item/gun/long/laser/practice,
+		/obj/item/gun/long/laser,
+		/obj/item/gun/hand/xray,
+		/obj/item/gun/hand/antique
 	)
 	var/egun_icons = list(
 		'icons/obj/guns/xenoarch/egun_1.dmi',
@@ -59,7 +63,8 @@
 	)
 
 /decl/archaeological_find/laser/spawn_item(atom/loc)
-	var/obj/item/gun/energy/new_gun = ..()
+	var/obj/item/gun/new_gun = ..()
+/*
 	new_gun.charge_meter = 0
 
 	//10% chance to have an unchargeable cell
@@ -70,7 +75,7 @@
 		new_gun.power_supply.charge = rand(0, new_gun.power_supply.maxcharge)
 	else
 		new_gun.power_supply.charge = 0
-
+*/
 	return new_gun
 
 /decl/archaeological_find/laser/new_icon()

@@ -52,19 +52,21 @@
 	. = ..()
 	var/list/traits = list()
 
-	traits += "<br>Caliber: [caliber]"
+	var/obj/item/firearm_component/barrel/ballistic/proj_barrel = barrel
+	var/obj/item/firearm_component/receiver/ballistic/proj_receiver = receiver
+	traits += "<br>Caliber: [proj_barrel?.caliber || "custom"]"
 
-	var/list/loading_ways = list()
-	if(load_method & SINGLE_CASING)
-		loading_ways += "loose [caliber] rounds"
-	if(load_method & SPEEDLOADER)
-		loading_ways += "speedloaders"
-	if(load_method & MAGAZINE)
-		loading_ways += "magazines"
-	traits += "Can be loaded using [english_list(loading_ways)]"
-
-	if(load_method & (SINGLE_CASING|SPEEDLOADER))
-		traits += "It can hold [max_shells] rounds."
+	if(istype(proj_receiver))
+		var/list/loading_ways = list()
+		if(proj_receiver.load_method & SINGLE_CASING)
+			loading_ways += proj_barrel?.caliber ? "single [proj_barrel.caliber] rounds" : "single rounds"
+		if(proj_receiver.load_method & SPEEDLOADER)
+			loading_ways += "speedloaders"
+		if(proj_receiver.load_method & MAGAZINE)
+			loading_ways += "magazines"
+		traits += "Can be loaded using [english_list(loading_ways)]"
+		if(proj_receiver.load_method & (SINGLE_CASING|SPEEDLOADER))
+			traits += "It can hold [proj_receiver.max_shells] rounds."
 
 	if(jam_chance)
 		traits += "It's prone to jamming."
@@ -82,16 +84,16 @@
 
 	. += jointext(traits, "<br>")
 
-/obj/item/gun/projectile/shotgun/pump/get_mechanics_info()
+/obj/item/gun/long/shotgun/pump/get_mechanics_info()
 	. = ..()
 	. += "<br>To pump it, click it in hand.<br>"
 
-/obj/item/gun/energy/crossbow/get_antag_info()
+/obj/item/gun/hand/ecrossbow/get_antag_info()
 	. = ..()
 	. += "This is a stealthy weapon which fires poisoned bolts at your target. When it hits someone, they will suffer a stun effect, in \
 	addition to toxins. The energy crossbow recharges itself slowly, and can be concealed in your pocket or bag.<br>"
 
-/obj/item/gun/energy/chameleon/get_antag_info()
+/obj/item/gun/hand/chameleon/get_antag_info()
 	. = ..()
 	. += "This gun is actually a hologram projector that can alter its appearance to mimick other weapons. To change the appearance, use \
 	the appropriate verb in the chameleon items tab. Any beams or projectiles fired from this gun are actually holograms and useless for actual combat. \

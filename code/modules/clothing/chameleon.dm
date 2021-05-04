@@ -349,73 +349,11 @@
 //*****************
 //**Chameleon Gun**
 //*****************
-/obj/item/gun/energy/chameleon
+/obj/item/gun/hand/chameleon
 	name = "chameleon gun"
 	desc = "A hologram projector in the shape of a gun. There is a dial on the side to change the gun's disguise."
 	icon = 'icons/obj/guns/revolvers.dmi'
 	icon_state = "revolver"
-	w_class = ITEM_SIZE_SMALL
-	origin_tech = "{'combat':2,'materials':2,'esoteric':8}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
-	matter = list()
-
-	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
-	projectile_type = /obj/item/projectile/chameleon
-	charge_meter = 0
-	charge_cost = 20 //uses next to no power, since it's just holograms
-	max_shots = 50
-
-	var/obj/item/projectile/copy_projectile
-	var/static/list/gun_choices
-
-/obj/item/gun/energy/chameleon/Initialize()
-	. = ..()
-	if(!gun_choices)
-		gun_choices = generate_chameleon_choices(/obj/item/gun)
-
-/obj/item/gun/energy/chameleon/consume_next_projectile()
-	var/obj/item/projectile/P = ..()
-	if(P && ispath(copy_projectile))
-		P.SetName(initial(copy_projectile.name))
-		P.icon = initial(copy_projectile.icon)
-		P.icon_state = initial(copy_projectile.icon_state)
-		P.pass_flags = initial(copy_projectile.pass_flags)
-		P.hitscan = initial(copy_projectile.hitscan)
-		P.step_delay = initial(copy_projectile.step_delay)
-		P.muzzle_type = initial(copy_projectile.muzzle_type)
-		P.tracer_type = initial(copy_projectile.tracer_type)
-		P.impact_type = initial(copy_projectile.impact_type)
-	return P
-
-/obj/item/gun/energy/chameleon/OnDisguise(var/obj/item/gun/copy)
-	if(!istype(copy))
-		return
-
-	flags_inv = copy.flags_inv
-	fire_sound = copy.fire_sound
-	fire_sound_text = copy.fire_sound_text
-	icon = copy.icon
-
-	var/obj/item/gun/energy/E = copy
-	if(istype(E))
-		copy_projectile = E.projectile_type
-		//charge_meter = E.charge_meter //does not work very well with icon_state changes, ATM
-	else
-		copy_projectile = null
-		//charge_meter = 0
-
-/obj/item/gun/energy/chameleon/verb/change(picked in gun_choices)
-	set name = "Change Gun Appearance"
-	set category = "Chameleon Items"
-	set src in usr
-
-	if (!(usr.incapacitated()))
-		if(!ispath(gun_choices[picked]))
-			return
-
-		disguise(gun_choices[picked], usr)
-
-	//so our overlays update.
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_hands()
+	barrel = /obj/item/firearm_component/barrel/energy/chameleon
+	receiver = /obj/item/firearm_component/receiver/energy/chameleon
