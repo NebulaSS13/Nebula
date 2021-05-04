@@ -241,51 +241,52 @@ SUBSYSTEM_DEF(zcopy)
 			// Special case: these are merged into the shadower to reduce memory usage.
 			if (object.type == /atom/movable/lighting_overlay)
 				T.shadower.copy_lighting(object)
-			else	// TODO: Reduce indentation level here? Above block probably could be made an early continue.
-				if (!object.bound_overlay)	// Generate a new overlay if the atom doesn't already have one.
-					object.bound_overlay = new(T)
-					object.bound_overlay.associated_atom = object
+				continue
 
-				var/override_depth
-				var/original_type = object.type
-				var/original_z = object.z
-				switch (object.type)
-					if (/atom/movable/openspace/mimic)
-						var/atom/movable/openspace/mimic/OOO = object
-						original_type = OOO.mimiced_type
-						override_depth = OOO.override_depth
-						original_z = OOO.original_z
+			if (!object.bound_overlay)	// Generate a new overlay if the atom doesn't already have one.
+				object.bound_overlay = new(T)
+				object.bound_overlay.associated_atom = object
 
-					if (/atom/movable/openspace/turf_proxy, /atom/movable/openspace/turf_mimic)
-						// If we're a turf overlay (the mimic for a non-OVERWRITE turf), we need to make sure copies of us respect space parallax too
-						if (T.z_eventually_space)
-							// Yes, this is an awful hack; I don't want to add yet another override_* var.
-							override_depth = OPENTURF_MAX_PLANE - SPACE_PLANE
+			var/override_depth
+			var/original_type = object.type
+			var/original_z = object.z
+			switch (object.type)
+				if (/atom/movable/openspace/mimic)
+					var/atom/movable/openspace/mimic/OOO = object
+					original_type = OOO.mimiced_type
+					override_depth = OOO.override_depth
+					original_z = OOO.original_z
 
-				var/atom/movable/openspace/mimic/OO = object.bound_overlay
+				if (/atom/movable/openspace/turf_proxy, /atom/movable/openspace/turf_mimic)
+					// If we're a turf overlay (the mimic for a non-OVERWRITE turf), we need to make sure copies of us respect space parallax too
+					if (T.z_eventually_space)
+						// Yes, this is an awful hack; I don't want to add yet another override_* var.
+						override_depth = OPENTURF_MAX_PLANE - SPACE_PLANE
 
-				// If the OO was queued for destruction but was claimed by another OT, stop the destruction timer.
-				if (OO.destruction_timer)
-					deltimer(OO.destruction_timer)
-					OO.destruction_timer = null
+			var/atom/movable/openspace/mimic/OO = object.bound_overlay
 
-				OO.depth = override_depth || min(zlev_maximums[T.z] - original_z, OPENTURF_MAX_DEPTH)
+			// If the OO was queued for destruction but was claimed by another OT, stop the destruction timer.
+			if (OO.destruction_timer)
+				deltimer(OO.destruction_timer)
+				OO.destruction_timer = null
 
-				// These types need to be pushed a layer down for bigturfs to function correctly.
-				switch (original_type)
-					if (/atom/movable/openspace/multiplier, /atom/movable/openspace/turf_mimic, /atom/movable/openspace/turf_proxy)
-						if (OO.depth < OPENTURF_MAX_DEPTH)
-							OO.depth += 1
+			OO.depth = override_depth || min(zlev_maximums[T.z] - original_z, OPENTURF_MAX_DEPTH)
 
-				OO.mimiced_type = original_type
-				OO.override_depth = override_depth
-				OO.original_z = original_z
+			// These types need to be pushed a layer down for bigturfs to function correctly.
+			switch (original_type)
+				if (/atom/movable/openspace/multiplier, /atom/movable/openspace/turf_mimic, /atom/movable/openspace/turf_proxy)
+					if (OO.depth < OPENTURF_MAX_DEPTH)
+						OO.depth += 1
 
-				// Multi-queue to maintain ordering of updates to these
-				//   queueing it multiple times will result in only the most recent
-				//   actually processing.
-				OO.queued += 1
-				queued_overlays += OO
+			OO.mimiced_type = original_type
+			OO.override_depth = override_depth
+			OO.original_z = original_z
+
+			// Multi-queue to maintain ordering of updates to these
+			//   queueing it multiple times will result in only the most recent
+			//   actually processing.
+			OO.queued += 1
+			queued_overlays += OO
 
 		T.z_queued -= 1
 		if (T.above)
