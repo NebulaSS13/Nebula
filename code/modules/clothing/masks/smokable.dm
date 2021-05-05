@@ -201,6 +201,7 @@
 	. = ..()
 	for(var/R in filling)
 		reagents.add_reagent(R, filling[R])
+	set_extension(src, /datum/extension/tool, list(TOOL_CAUTERY = TOOL_QUALITY_MEDIOCRE))
 
 /obj/item/clothing/mask/smokable/cigarette/light(var/flavor_text = "[usr] lights the [name].")
 	..()

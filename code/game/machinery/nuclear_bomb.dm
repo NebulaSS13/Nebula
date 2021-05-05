@@ -71,7 +71,7 @@ var/global/bomb_set
 			flick("lock", src)
 		return
 
-	if(panel_open && isMultitool(O) || isWirecutter(O))
+	if(panel_open && (isMultitool(O) || isWirecutter(O)))
 		return attack_hand(user)
 
 	if(extended)

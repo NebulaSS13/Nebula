@@ -827,7 +827,7 @@
 /obj/item/bonesetter,
 /obj/item/circular_saw,
 /obj/item/hemostat,
-/obj/item/scalpel/laser1,
+/obj/item/scalpel/laser,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "bw" = (

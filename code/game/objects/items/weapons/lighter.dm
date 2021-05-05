@@ -37,6 +37,7 @@
 	if(random_colour)
 		color = pick(available_colors)
 	update_icon()
+	set_extension(src, /datum/extension/tool, list(TOOL_CAUTERY = TOOL_QUALITY_BAD))
 
 /obj/item/flame/lighter/proc/light(mob/user)
 	if(submerged())

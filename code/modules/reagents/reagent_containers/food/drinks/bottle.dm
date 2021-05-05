@@ -228,6 +228,10 @@
 	edge = 0
 	var/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
 
+/obj/item/broken_bottle/Initialize(ml, material_key)
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_SCALPEL = TOOL_QUALITY_BAD))
+
 /obj/item/broken_bottle/attack(mob/living/carbon/M, mob/living/carbon/user)
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 	return ..()
