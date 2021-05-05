@@ -1,0 +1,8 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - tweak: Examining an object will show you if it is usable as a tool.
+  - tweak: Ghetto surgery steps have been adjusted to use a shared tool flag system,
+      check the codex for updated tools for surgery steps.
+  - tweak: The incision manager no longer has a special surgery type, but counts as
+      several different surgical tools at once.
