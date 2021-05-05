@@ -67,6 +67,7 @@
 	if(check_valid_feed_target(M) == FEED_RESULT_VALID)
 		set_feeding_on(M)
 		forceMove(get_turf(M))
+		M.update_personal_goal(/datum/goal/achievement/dont_let_slime_snack_you, FALSE)
 
 /mob/living/slime/proc/check_feed_target_position()
 	var/mob/feed_mob = feeding_on?.resolve()

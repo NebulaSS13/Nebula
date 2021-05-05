@@ -1,6 +1,7 @@
 #ifndef CONTENT_PACK_XENOBIO
 #define CONTENT_PACK_XENOBIO
 #include "_xenobiology.dm"
+#include "achievement.dm"
 #include "circuit.dm"
 #include "emotes.dm"
 #include "food.dm"
