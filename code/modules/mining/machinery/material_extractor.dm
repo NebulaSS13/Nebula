@@ -88,12 +88,12 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 	if(output_container)
 		var/full_text
 		if(REAGENTS_FREE_SPACE(reagents) <= 0)
-			full_text = " And its idling because its internal tanks are full.."
+			full_text = " Currently idling because its internal tanks are full.."
 		to_chat(user, SPAN_NOTICE("Its currently processing [items_processing] items.[full_text]"))
 
 	if(output_container)
 		var/bucket_text
-		if(REAGENTS_FREE_SPACE(output_container.reagents) <= 0)
+		if(is_output_container_full())
 			bucket_text = " It looks full!"
 		to_chat(user, SPAN_NOTICE("It has a [output_container.name] in place to receive reagents.[bucket_text]"))
 	else 
@@ -110,6 +110,7 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 				return
 			output_container = I
 			user.visible_message(SPAN_NOTICE("\The [user] place \a [I] in \the [src]."), SPAN_NOTICE("You place \a [I] in \the [src]."))
+			update_icon()
 		return TRUE
 	return ..()
 
@@ -162,6 +163,15 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 /obj/machinery/atmospherics/unary/material/extractor/proc/has_content_to_process()
 	return count_items_processing() > 0
 
+/obj/machinery/atmospherics/unary/material/extractor/proc/output_container_free_volume()
+	return output_container? round(max(REAGENTS_FREE_SPACE(output_container.reagents), 0), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT) : 0
+
+/obj/machinery/atmospherics/unary/material/extractor/proc/is_output_container_full()
+	return output_container_free_volume() <= 0
+
+/obj/machinery/atmospherics/unary/material/extractor/proc/is_buffer_full()
+	return round(REAGENTS_FREE_SPACE(reagents), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT) <= 0
+
 /obj/machinery/atmospherics/unary/material/extractor/proc/can_process(var/obj/O)
 	if(istype(O) && is_type_in_list(O, GLOB.material_extractor_items_whitelist))
 		for(var/k in O.matter)
@@ -184,15 +194,12 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 	var/phase = M.phase_at_temperature(temperature)
 	return phase == MAT_PHASE_LIQUID || phase == MAT_PHASE_GAS
 
-//Add ore to processing queue
+//Add ore to contents for processing
 /obj/machinery/atmospherics/unary/material/extractor/proc/add_ore_to_queue(var/obj/O)
 	if(!can_process(O))
 		return FALSE
 	O.forceMove(src)
 	return TRUE
-
-/obj/machinery/atmospherics/unary/material/extractor/proc/is_buffer_full()
-	return round(REAGENTS_FREE_SPACE(reagents), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT) <= 0
 
 //Since the process_reaction proc isn't guaranteed to process reactions in time, we have to beat it with a stick
 /obj/machinery/atmospherics/unary/material/extractor/proc/force_process_reagents()
@@ -229,6 +236,10 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 			qdel(O)	//Clean up any ores empty of matter
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/dump_result()
+	//Only dump when everything in the tank is processed
+	if(SSmaterials.active_holders[reagents])
+		return
+
 	for(var/mat in reagents?.reagent_volumes)
 		var/decl/material/M = GET_DECL(mat)
 		var/available_volume = round(REAGENT_VOLUME(reagents, M.type), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
@@ -258,9 +269,9 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 	reagents.remove_reagent(M.type, removed_volume)
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/dump_liquid(var/decl/material/M, var/available_volume)
-	if(!output_container) //Added a check for ice types..
+	if(!output_container)
 		return
-	var/free_volume = round(max(REAGENTS_FREE_SPACE(output_container.reagents), 0), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
+	var/free_volume = output_container_free_volume()
 	if(free_volume <= 0)
 		log_debug("dump_liquid: No free volume in output container to dump liquid to. Free volume: [free_volume] units")
 		return
