@@ -1,7 +1,7 @@
 /decl/modpack/bigpharma
 	name = "Big Pharma Content"
 
-var/list/reagent_names_to_medication_names
+var/global/list/reagent_names_to_medication_names
 /proc/get_medication_name_from_reagent_name(var/reagent_name)
 	. = LAZYACCESS(global.reagent_names_to_medication_names, reagent_name)
 	if(!.)
@@ -9,14 +9,14 @@ var/list/reagent_names_to_medication_names
 		LAZYSET(global.reagent_names_to_medication_names, reagent_name, pharma.get_random_name())
 		. = global.reagent_names_to_medication_names[reagent_name]
 
-var/list/reagent_names_to_colours
+var/global/list/reagent_names_to_colours
 /proc/get_medication_colour_from_reagent_name(var/reagent_name)
 	. = LAZYACCESS(global.reagent_names_to_colours, reagent_name)
 	if(!.)
 		LAZYSET(global.reagent_names_to_colours, reagent_name, get_random_colour())
 		. = global.reagent_names_to_colours[reagent_name]
 
-var/list/reagent_names_to_icon_state
+var/global/list/reagent_names_to_icon_state
 /proc/get_medication_icon_state_from_reagent_name(var/reagent_name, var/base_state, var/min, var/max)
 	. = LAZYACCESS(global.reagent_names_to_icon_state, reagent_name)
 	if(!.)

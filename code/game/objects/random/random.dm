@@ -1081,7 +1081,7 @@ something, make sure it's not in one of the other lists.*/
 /*
 	Selects one spawn point out of a group of points with the same ID and asks it to generate its items
 */
-var/list/multi_point_spawns
+var/global/list/multi_point_spawns
 
 /obj/random_multi
 	name = "random object spawn point"
@@ -1134,8 +1134,8 @@ var/list/multi_point_spawns
 	id = "Captain's spare id"
 	item_path = /obj/item/card/id/captains_spare
 
-var/list/random_junk_
-var/list/random_useful_
+var/global/list/random_junk_
+var/global/list/random_useful_
 /proc/get_random_useful_type()
 	if(!random_useful_)
 		random_useful_ = list()

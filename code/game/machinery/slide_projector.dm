@@ -6,7 +6,7 @@
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = BASE_STORAGE_CAPACITY(ITEM_SIZE_SMALL)
 	use_sound = 'sound/effects/storage/toolbox.ogg'
-	var/list/global/projection_types = list(
+	var/static/list/projection_types = list(
 		/obj/item/photo = /obj/effect/projection/photo,
 		/obj/item/paper = /obj/effect/projection/paper,
 		/obj/item = /obj/effect/projection
@@ -56,7 +56,7 @@
 /obj/item/storage/slide_projector/proc/stop_projecting()
 	if(projection)
 		QDEL_NULL(projection)
-	GLOB.moved_event.unregister(src, src, .proc/check_projections)
+	events_repository.unregister(/decl/observ/moved, src, src, .proc/check_projections)
 	update_icon()
 	
 /obj/item/storage/slide_projector/proc/project_at(turf/target)
@@ -70,7 +70,7 @@
 			break
 	projection = new projection_type(target)
 	projection.set_source(current_slide)
-	GLOB.moved_event.register(src, src, .proc/check_projections)
+	events_repository.register(/decl/observ/moved, src, src, .proc/check_projections)
 	update_icon()
 
 /obj/item/storage/slide_projector/attack_self(mob/user)
@@ -124,7 +124,8 @@
 	anchored = TRUE
 	simulated = FALSE
 	blend_mode = BLEND_ADD
-	plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	layer = ABOVE_LIGHTING_LAYER
+	plane = ABOVE_LIGHTING_PLANE
 	alpha = 100
 	var/weakref/source
 

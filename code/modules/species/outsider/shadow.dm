@@ -11,7 +11,6 @@
 
 	unarmed_attacks = list(/decl/natural_attack/claws/strong, /decl/natural_attack/bite/sharp)
 	darksight_range = 8
-	darksight_tint = DARKTINT_GOOD
 	siemens_coefficient = 0
 
 	blood_color = COLOR_GRAY80

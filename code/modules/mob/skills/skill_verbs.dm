@@ -1,7 +1,5 @@
 //Skill-related mob verbs that require skill checks to be satisfied to be added.
 
-GLOBAL_LIST_INIT(skill_verbs, init_subtypes(/datum/skill_verb))
-
 /datum/skillset/proc/fetch_verb_datum(given_type)
 	for(var/datum/skill_verb/SV in skill_verbs)
 		if(SV.type == given_type)
@@ -70,7 +68,7 @@ Robots and antags can instruct.
 /datum/skill_verb/instruct/should_see_verb()
 	if(!..())
 		return
-	for(var/decl/hierarchy/skill/S in GLOB.skills)
+	for(var/decl/hierarchy/skill/S in global.skills)
 		if(skillset.owner.skill_check(S.type, SKILL_EXPERT))
 			return 1
 
@@ -96,7 +94,7 @@ Robots and antags can instruct.
 	if(!get_options)
 		. = TRUE
 	else
-		for(var/decl/hierarchy/skill/S in GLOB.skills)
+		for(var/decl/hierarchy/skill/S in global.skills)
 			if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
 				LAZYSET(., S.name, S)
 
@@ -176,7 +174,7 @@ The Appraise verb. Used on objects to estimate their value.
 			var/high = low + level
 			if(!low && multiple >= 2)
 				low = 10 ** (multiple - 1) //Adjusts the lowball estimate away from 0 if the item has a high upper estimate.
-			var/decl/currency/cur = GET_DECL(GLOB.using_map.default_currency)
+			var/decl/currency/cur = GET_DECL(global.using_map.default_currency)
 			message = "You appraise the item to be worth between [low] and [high] [cur.name]."
 	to_chat(src, message)
 

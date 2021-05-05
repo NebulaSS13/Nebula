@@ -248,10 +248,8 @@
 		pixel_x = 0
 		pixel_y = 0
 		icon_state = "base"
-		var/image/addon = image(icon = icon, icon_state = "glowbit")
+		var/image/addon = emissive_overlay(icon = icon, icon_state = "glowbit")
 		addon.color = light_color
-		addon.layer = ABOVE_LIGHTING_LAYER
-		addon.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlays += addon
 		set_light(2, 0.1) // Very dim so the rest of the thingie is barely visible - if the turf is completely dark, you can't see anything on it, no matter what
 	else

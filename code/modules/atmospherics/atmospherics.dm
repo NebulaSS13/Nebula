@@ -59,7 +59,7 @@ Pipelines + Other Objects -> Pipe network
 	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 		QDEL_NULL(nodes_to_networks[node])
 	nodes_to_networks = null
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		if(direction & initialize_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if((target.initialize_directions & get_dir(target,src)) && check_connect_types(target, src))
@@ -113,7 +113,7 @@ Pipelines + Other Objects -> Pipe network
 		else
 			add_underlay(T, node, node_dir, node.icon_connect_type)
 			visible_directions |= node_dir
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		if(disconnected_directions & direction)
 			add_underlay(T, null, direction) // adds a disconnected underlay there
 			visible_directions |= direction
@@ -191,7 +191,7 @@ Pipelines + Other Objects -> Pipe network
 	for(var/node in nodes_to_networks)
 		if(nodes_to_networks[node] == reference)
 			directions |= get_dir(src, node)
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		if(!(direction & directions))
 			continue
 		var/air = air_in_dir(direction)
@@ -217,7 +217,7 @@ Pipelines + Other Objects -> Pipe network
 /proc/base_pipe_initialize_directions(dir, connect_dir_type)
 	if(!dir)
 		return 0
-	if(!(dir in GLOB.cardinal))
+	if(!(dir in global.cardinal))
 		return dir // You're on your own. Used for bent pipes.
 	. = 0
 

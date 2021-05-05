@@ -3,7 +3,7 @@
 	..()
 	if(owner)
 		var/datum/mind/mind = owner
-		GLOB.moved_event.register(mind.current, src, .proc/owner_moved)
+		events_repository.register(/decl/observ/moved, mind.current, src, .proc/owner_moved)
 
 /datum/goal/movement/proc/owner_moved()
 	return
@@ -11,7 +11,7 @@
 /datum/goal/movement/Destroy()
 	if(owner)
 		var/datum/mind/mind = owner
-		GLOB.moved_event.unregister(mind.current, src)
+		events_repository.unregister(/decl/observ/moved, mind.current, src)
 	. = ..()
 
 /datum/goal/movement/walk
@@ -29,7 +29,7 @@
 		steps++
 		if(steps >= required_steps)
 			on_completion()
-			GLOB.moved_event.unregister(owner, src)
+			events_repository.unregister(/decl/observ/moved, owner, src)
 
 /datum/goal/movement/walk/get_summary_value()
 	return " ([steps]/[required_steps] step\s so far)"

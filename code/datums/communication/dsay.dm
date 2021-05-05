@@ -26,7 +26,7 @@
 
 	speech_method.adjust_channel(src)
 
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in global.player_list)
 		if(!speech_method.can_receive(communicator, M))
 			continue
 		var/sent_message = speech_method.get_message(communicator, M, message)
@@ -43,7 +43,7 @@
 /decl/dsay_communication/proc/can_receive(var/client/C, var/mob/M)
 	if(istype(C) && C.mob == M)
 		return TRUE
-	if(M.get_preference_value(/datum/client_preference/show_dsay) == GLOB.PREF_HIDE)
+	if(M.get_preference_value(/datum/client_preference/show_dsay) == PREF_HIDE)
 		return FALSE
 	if(istype(C) && M.is_key_ignored(C.key))
 		return FALSE
@@ -74,7 +74,7 @@
 
 	var/lname
 	var/mob/observer/ghost/DM
-	var/anon_say_pref = (C.get_preference_value(/datum/client_preference/anon_say) == GLOB.PREF_YES)
+	var/anon_say_pref = (C.get_preference_value(/datum/client_preference/anon_say) == PREF_YES)
 	if(isghost(C.mob))
 		DM = C.mob
 	if(M.client.holder) 							// What admins see

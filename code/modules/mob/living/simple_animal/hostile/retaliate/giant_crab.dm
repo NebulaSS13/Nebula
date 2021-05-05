@@ -82,7 +82,7 @@
 				return
 
 		if(!victim && can_perform_ability(H))
-			GLOB.destroyed_event.register(victim, src, .proc/release_grab)
+			events_repository.register(/decl/observ/destroyed, victim, src, .proc/release_grab)
 			victim = H
 			SET_STATUS_MAX(H, STAT_WEAK, grab_duration)
 			SET_STATUS_MAX(H, STAT_STUN, grab_duration)
@@ -107,7 +107,7 @@
 /mob/living/simple_animal/hostile/retaliate/giant_crab/proc/release_grab()
 	if(victim)
 		visible_message(SPAN_NOTICE("\The [src] releases its grip on \the [victim]!"))
-		GLOB.destroyed_event.unregister(victim)
+		events_repository.unregister(/decl/observ/destroyed, victim)
 		victim = null
 	cooldown_ability(ability_cooldown)
 	stop_automation = FALSE

@@ -61,7 +61,7 @@
 
 	// Wake up our neighbors.
 	if(!ignore_neighbors)
-		for(var/checkdir in GLOB.cardinal)
+		for(var/checkdir in global.cardinal)
 			var/turf/T = get_step(src, checkdir)
 			if(T) T.fluid_update(1)
 

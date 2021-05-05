@@ -1,7 +1,7 @@
 //DVIEW is a hack that uses a mob with darksight in order to find lists of viewable stuff while ignoring darkness
 // Defines for dview are elsewhere.
 
-var/mob/dview/dview_mob = new
+var/global/mob/dview/dview_mob = new
 
 /mob/dview
 	anchored = TRUE

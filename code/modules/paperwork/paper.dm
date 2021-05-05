@@ -102,7 +102,7 @@
 	var/n_name = sanitizeSafe(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text, MAX_NAME_LEN)
 
 	// We check loc one level up, so we can rename in clipboards and such. See also: /obj/item/photo/rename()
-	if(!n_name || !CanInteract(usr, GLOB.deep_inventory_state))
+	if(!n_name || !CanInteract(usr, global.deep_inventory_topic_state))
 		return
 	n_name = usr.handle_writing_literacy(usr, n_name)
 	if(n_name)

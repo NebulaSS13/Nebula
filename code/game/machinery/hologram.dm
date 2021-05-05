@@ -29,7 +29,7 @@ Possible to do for anyone motivated enough:
 #define RANGE_BASED 4
 #define AREA_BASED 6
 
-var/const/HOLOPAD_MODE = RANGE_BASED
+var/global/const/HOLOPAD_MODE = RANGE_BASED
 
 /obj/machinery/hologram/holopad
 	name = "\improper holopad"
@@ -91,7 +91,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 				last_request = world.time
 				to_chat(user, "<span class='notice'>You request an AI's presence.</span>")
 				var/area/area = get_area(src)
-				for(var/mob/living/silicon/ai/AI in GLOB.living_mob_list_)
+				for(var/mob/living/silicon/ai/AI in global.living_mob_list_)
 					if(!AI.client)	continue
 					if (holopadType != HOLOPAD_LONG_RANGE && !AreConnectedZLevels(AI.z, src.z))
 						continue
@@ -107,7 +107,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 				var/list/holopadlist = list()
 				var/zlevels = GetConnectedZlevels(z)
 				var/zlevels_long = list()
-				if(GLOB.using_map.use_overmap && holopadType == HOLOPAD_LONG_RANGE)
+				if(global.using_map.use_overmap && holopadType == HOLOPAD_LONG_RANGE)
 					for(var/zlevel in map_sectors)
 						var/obj/effect/overmap/visitable/O = map_sectors["[zlevel]"]
 						if(!isnull(O))
@@ -217,7 +217,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 				ai_text = pick(SA.speak)
 			var/name_used = M.GetVoice()
 			//This communication is imperfect because the holopad "filters" voices and is only designed to connect to the master only.
-			var/short_links = master.get_preference_value(/datum/client_preference/ghost_follow_link_length) == GLOB.PREF_SHORT
+			var/short_links = master.get_preference_value(/datum/client_preference/ghost_follow_link_length) == PREF_SHORT
 			var/follow = short_links ? "\[F]" : "\[Follow]"
 			var/prefix = "<a href='byond://?src=\ref[master];trackname=[html_encode(name_used)];track=\ref[M]'>[follow]</a>"
 			master.show_message(get_hear_message(name_used, ai_text, verb, speaking, prefix), 2)

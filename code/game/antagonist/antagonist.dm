@@ -102,12 +102,12 @@
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs |= protected_jobs
 	if(antaghud_indicator)
-		if(!GLOB.hud_icon_reference)
-			GLOB.hud_icon_reference = list()
+		if(!global.hud_icon_reference)
+			global.hud_icon_reference = list()
 		if(name) 
-			GLOB.hud_icon_reference[name] = antaghud_indicator
+			global.hud_icon_reference[name] = antaghud_indicator
 		if(faction_name) 
-			GLOB.hud_icon_reference[faction_name] = antaghud_indicator
+			global.hud_icon_reference[faction_name] = antaghud_indicator
 	. = TRUE
 
 /decl/special_role/proc/get_antag_text(mob/recipient)

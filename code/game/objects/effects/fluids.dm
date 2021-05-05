@@ -42,7 +42,7 @@
 		return INITIALIZE_HINT_QDEL
 	if(istype(T))
 		T.unwet_floor(FALSE)
-	for(var/checkdir in GLOB.cardinal)
+	for(var/checkdir in global.cardinal)
 		var/obj/effect/fluid/F = locate() in get_step(src, checkdir)
 		if(F)
 			LAZYSET(neighbors, F, TRUE)

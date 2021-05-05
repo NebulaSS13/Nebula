@@ -21,7 +21,7 @@
 	var/datum/seed/seed
 	var/harvest_time
 	var/min_explode_time = 1200
-	var/global/total_mushrooms = 0
+	var/static/total_mushrooms = 0
 
 /mob/living/simple_animal/mushroom/Initialize()
 	. = ..()

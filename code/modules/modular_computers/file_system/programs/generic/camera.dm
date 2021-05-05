@@ -2,7 +2,7 @@
 /proc/get_camera_access(var/network)
 	if(!network)
 		return 0
-	. = GLOB.using_map.get_network_access(network)
+	. = global.using_map.get_network_access(network)
 	if(.)
 		return
 
@@ -39,14 +39,14 @@
 	var/obj/machinery/camera/current_camera = null
 	var/current_network = null
 
-/datum/nano_module/program/camera_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
+/datum/nano_module/program/camera_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = global.default_topic_state)
 	var/list/data = host.initial_data()
 
 	data["current_camera"] = current_camera ? current_camera.nano_structure() : null
 	data["current_network"] = current_network
 
 	var/list/all_networks[0]
-	for(var/network in GLOB.using_map.station_networks)
+	for(var/network in global.using_map.station_networks)
 		all_networks.Add(list(list(
 							"tag" = network,
 							"has_access" = can_access_network(user, get_camera_access(network))
@@ -118,7 +118,7 @@
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return FALSE
-	if(get_z(C) in GLOB.using_map.admin_levels) // Thunderdome cameras etc
+	if(get_z(C) in global.using_map.admin_levels) // Thunderdome cameras etc
 		return TRUE
 	return ARE_Z_CONNECTED(get_z(C), network.get_router_z())
 

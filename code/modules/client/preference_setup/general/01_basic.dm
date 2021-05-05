@@ -25,7 +25,7 @@
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
 
-	var/decl/species/S  = get_species_by_key(pref.species) || get_species_by_key(GLOB.using_map.default_species)
+	var/decl/species/S  = get_species_by_key(pref.species) || get_species_by_key(global.using_map.default_species)
 	pref.spawnpoint     = sanitize_inlist(pref.spawnpoint, spawntypes(), initial(pref.spawnpoint))
 	pref.be_random_name = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
 

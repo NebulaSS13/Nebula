@@ -23,7 +23,7 @@
 		return 0
 
 	//block as long as they are not directly behind us
-	var/bad_arc = user.dir && GLOB.reverse_dir[user.dir] //arc of directions from which we cannot block
+	var/bad_arc = user.dir && global.reverse_dir[user.dir] //arc of directions from which we cannot block
 	if(!check_shield_arc(user, bad_arc, damage_source, attacker))
 		return 0
 
@@ -38,7 +38,7 @@
 		return 0
 
 	//block as long as they are not directly behind us
-	var/bad_arc = user.dir && GLOB.reverse_dir[user.dir] //arc of directions from which we cannot block
+	var/bad_arc = user.dir && global.reverse_dir[user.dir] //arc of directions from which we cannot block
 	if(check_shield_arc(user, bad_arc, damage_source, attacker))
 		if(prob(get_block_chance(user, damage, damage_source, attacker)))
 			user.visible_message("<span class='danger'>\The [user] blocks [attack_text] with \the [src]!</span>")

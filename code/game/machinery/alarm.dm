@@ -130,7 +130,7 @@
 	. = ..()
 
 /obj/machinery/alarm/Destroy()
-	GLOB.name_set_event.unregister(src, get_area(src), .proc/change_area_name)
+	events_repository.unregister(/decl/observ/name_set, src, get_area(src), .proc/change_area_name)
 	unregister_radio(src, frequency)
 	return ..()
 
@@ -156,7 +156,7 @@
 		if(!env_info.important_gasses[g])
 			trace_gas += g
 
-	GLOB.name_set_event.register(alarm_area, src, .proc/change_area_name)
+	events_repository.register(/decl/observ/name_set, alarm_area, src, .proc/change_area_name)
 	set_frequency(frequency)
 	for(var/device_tag in alarm_area.air_scrub_names + alarm_area.air_vent_names)
 		send_signal(device_tag, list()) // ask for updates; they initialized before us and we didn't get the data
@@ -476,7 +476,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/data[0]
 	var/remote_connection = istype(state, /datum/topic_state/remote)  // Remote connection means we're non-adjacent/connecting from another computer
 	var/remote_access = remote_connection && CanInteract(user, state) // Remote access means we also have the privilege to alter the air alarm.
@@ -813,7 +813,7 @@ FIRE ALARM
 	power_channel = ENVIRON
 	var/last_process = 0
 	var/seclevel
-	var/global/list/overlays_cache
+	var/static/list/overlays_cache
 
 	base_type = /obj/machinery/firealarm
 	frame_type = /obj/item/frame/fire_alarm
@@ -823,8 +823,8 @@ FIRE ALARM
 
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
-	if(loc.z in GLOB.using_map.contact_levels)
-		var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	if(loc.z in global.using_map.contact_levels)
+		var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/firealarm/proc/get_cached_overlay(key)
@@ -847,7 +847,7 @@ FIRE ALARM
 
 	pixel_x = 0
 	pixel_y = 0
-	var/walldir = (dir & (NORTH|SOUTH)) ? GLOB.reverse_dir[dir] : dir
+	var/walldir = (dir & (NORTH|SOUTH)) ? global.reverse_dir[dir] : dir
 	var/turf/T = get_step(get_turf(src), walldir)
 	if(istype(T) && T.density)
 		if(dir == SOUTH)
@@ -875,8 +875,8 @@ FIRE ALARM
 		if(!detecting)
 			overlays += get_cached_overlay("fire1")
 			set_light(2, 0.25, COLOR_RED)
-		else if(z in GLOB.using_map.contact_levels)
-			var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+		else if(z in global.using_map.contact_levels)
+			var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 			var/decl/security_level/sl = security_state.current_security_level
 
 			set_light(sl.light_power, sl.light_range, sl.light_color_alarm)
@@ -940,7 +940,7 @@ FIRE ALARM
 	var/d1
 	var/d2
 
-	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon))
 		A = A.loc
 
@@ -1017,7 +1017,7 @@ FIRE ALARM
 /obj/machinery/firealarm/Initialize(mapload, dir)
 	. = ..()
 	if(dir)
-		set_dir((dir & (NORTH|SOUTH)) ? dir : GLOB.reverse_dir[dir])
+		set_dir((dir & (NORTH|SOUTH)) ? dir : global.reverse_dir[dir])
 	queue_icon_update()
 
 /obj/machinery/partyalarm

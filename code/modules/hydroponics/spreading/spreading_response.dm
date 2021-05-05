@@ -79,7 +79,7 @@
 	victim.visible_message("<span class='danger'>Tendrils lash out from \the [src] and drag \the [victim] in!</span>", "<span class='danger'>Tendrils lash out from \the [src] and drag you in!</span>")
 	victim.forceMove(loc)
 	if(buckle_mob(victim))
-		victim.set_dir(pick(GLOB.cardinal))
+		victim.set_dir(pick(global.cardinal))
 		to_chat(victim, "<span class='danger'>The tendrils [pick("wind", "tangle", "tighten", "coil", "knot", "snag", "twist", "constrict", "squeeze", "clench", "tense")] around you!</span>")
 
 /obj/effect/vine/buckle_mob()

@@ -52,6 +52,7 @@
 	add_language(/decl/language/cult)
 	for(var/spell in construct_spells)
 		src.add_spell(new spell, "const_spell_ready")
+	set_light(1.5, -2, COLOR_WHITE)
 	update_icon()
 
 /mob/living/simple_animal/construct/death(gibbed, deathmessage, show_dead_message)
@@ -61,9 +62,8 @@
 	qdel(src)
 
 /mob/living/simple_animal/construct/on_update_icon()
-	overlays.Cut()
 	..()
-	add_glow()
+	set_overlays(emissive_overlay(icon,"glow-[icon_state]"))
 
 /mob/living/simple_animal/construct/attack_animal(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))
@@ -271,14 +271,6 @@
 	hitsound = 'sound/weapons/pierce.ogg'
 	sharp = TRUE
 	force = 25
-
-////////////////Glow//////////////////
-/mob/living/simple_animal/construct/proc/add_glow()
-	var/image/eye_glow = image(icon,"glow-[icon_state]")
-	eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-	eye_glow.layer = EYE_GLOW_LAYER
-	overlays += eye_glow
-	set_light(1.5, -2, "#ffffff")
 
 ////////////////HUD//////////////////////
 

@@ -289,7 +289,7 @@
 	icon = 'icons/obj/hydroponics/hydroponics_misc.dmi'
 	icon_state = ""
 
-var/list/fruit_icon_cache = list()
+var/global/list/fruit_icon_cache = list()
 
 /obj/item/chems/food/snacks/fruit_slice/Initialize(mapload, var/datum/seed/S)
 	. = ..(mapload)
@@ -313,3 +313,17 @@ var/list/fruit_icon_cache = list()
 		I.color = flesh_colour
 		fruit_icon_cache["slice-[rind_colour]"] = I
 	overlays |= fruit_icon_cache["slice-[rind_colour]"]
+
+/obj/item/chems/food/snacks/grown/afterattack(atom/target, mob/user, flag)
+	if(!flag && isliving(user))
+		var/mob/living/M = user
+		M.aim_at(target, src)
+		return
+	. = ..()
+
+/obj/item/chems/food/snacks/grown/handle_reflexive_fire(var/mob/user, var/atom/aiming_at)
+	. = ..()
+	if(.)
+		user.visible_message(SPAN_DANGER("\The [user] reflexively hurls \the [src] at \the [aiming_at]!"))
+		user.throw_item(get_turf(aiming_at), src)
+		user.trigger_aiming(TARGET_CAN_CLICK)

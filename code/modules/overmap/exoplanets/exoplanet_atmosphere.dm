@@ -4,7 +4,7 @@
 
 	//Make sure temperature can't damage people on casual planets
 	if(habitability_class <= HABITABILITY_OKAY)
-		var/decl/species/S = get_species_by_key(GLOB.using_map.default_species)
+		var/decl/species/S = get_species_by_key(global.using_map.default_species)
 		target_temp = Clamp(target_temp, S.cold_level_1 + rand(1,5), S.heat_level_1 - rand(1,5))
 
 	atmosphere.temperature = target_temp

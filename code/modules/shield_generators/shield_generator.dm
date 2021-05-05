@@ -57,7 +57,7 @@
 	for(var/st in subtypesof(/datum/shield_mode/))
 		var/datum/shield_mode/SM = new st()
 		mode_list.Add(SM)
-	GLOB.moved_event.register(src, src, .proc/update_overmap_shield_list)
+	events_repository.register(/decl/observ/moved, src, src, .proc/update_overmap_shield_list)
 	. = INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/power/shield_generator/LateInitialize()
@@ -69,7 +69,7 @@
 	field_segments = null
 	damaged_segments = null
 	mode_list = null
-	GLOB.moved_event.unregister(src, src)
+	events_repository.unregister(/decl/observ/moved, src, src)
 	. = ..()
 	update_overmap_shield_list()
 
@@ -128,10 +128,10 @@
 		shielded_turfs = fieldtype_square()
 
 	// Rotate shield's animation relative to located ship
-	if(GLOB.using_map.use_overmap)
+	if(global.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/ship/sector = get_owning_overmap_object()
 		if(istype(sector))
-			vessel_reverse_dir = GLOB.reverse_dir[sector.fore_dir]
+			vessel_reverse_dir = global.reverse_dir[sector.fore_dir]
 
 	for(var/turf/T in shielded_turfs)
 		var/obj/effect/shield/S = new(T)

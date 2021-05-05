@@ -6,7 +6,7 @@
 	density = 1
 	opacity = 1
 
-var/list/mining_floors = list()
+var/global/list/mining_floors = list()
 /**********************Asteroid**************************/
 // Setting icon/icon_state initially will use these values when the turf is built on/replaced.
 // This means you can put grass on the asteroid etc.

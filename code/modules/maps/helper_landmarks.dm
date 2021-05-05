@@ -71,11 +71,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/map_load_mark/non_template)
 
 /obj/effect/landmark/delete_on_shuttle/Initialize()
 	. = ..()
-	GLOB.shuttle_added.register_global(src, .proc/check_shuttle)
+	events_repository.register_global(/decl/observ/shuttle_added, src, .proc/check_shuttle)
 
 /obj/effect/landmark/delete_on_shuttle/proc/check_shuttle(var/shuttle)
 	if(SSshuttle.shuttles[shuttle_name] == shuttle)
-		GLOB.shuttle_moved_event.register(shuttle, src, .proc/delete_everything)
+		events_repository.register(/decl/observ/shuttle_moved, shuttle, src, .proc/delete_everything)
 		shuttle_datum = shuttle
 
 /obj/effect/landmark/delete_on_shuttle/proc/delete_everything()
@@ -85,7 +85,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/map_load_mark/non_template)
 	qdel(src)
 
 /obj/effect/landmark/delete_on_shuttle/Destroy()
-	GLOB.shuttle_added.unregister_global(src, .proc/check_shuttle)
+	events_repository.unregister_global(/decl/observ/shuttle_added, src, .proc/check_shuttle)
 	if(shuttle_datum)
-		GLOB.shuttle_moved_event.unregister(shuttle_datum, src, .proc/delete_everything)
+		events_repository.unregister(/decl/observ/shuttle_moved, shuttle_datum, src, .proc/delete_everything)
 	. = ..()

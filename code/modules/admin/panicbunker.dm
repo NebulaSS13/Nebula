@@ -1,4 +1,4 @@
-var/list/panic_bunker_bypass = list()
+var/global/list/panic_bunker_bypass = list()
 
 /datum/admins/proc/panicbunker()
 	set category = "Server"

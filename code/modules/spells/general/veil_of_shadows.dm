@@ -22,7 +22,7 @@
 	H.AddMovementHandler(/datum/movement_handler/mob/incorporeal)
 	if(H.add_cloaking_source(src))
 		H.visible_message("<span class='warning'>\The [H] shrinks from view!</span>")
-	GLOB.moved_event.register(H,src,.proc/check_light)
+	events_repository.register(/decl/observ/moved, H,src,.proc/check_light)
 	timer_id = addtimer(CALLBACK(src,.proc/cancel_veil),duration, TIMER_STOPPABLE)
 
 /spell/veil_of_shadows/proc/cancel_veil()
@@ -34,14 +34,14 @@
 	if(T.get_lumcount() > 0.1) //If we're somewhere somewhat shadowy we can stay invis as long as we stand still
 		drop_cloak()
 	else
-		GLOB.moved_event.unregister(H,src)
-		GLOB.moved_event.register(H,src,.proc/drop_cloak)
+		events_repository.unregister(/decl/observ/moved, H,src)
+		events_repository.register(/decl/observ/moved, H,src,.proc/drop_cloak)
 
 /spell/veil_of_shadows/proc/drop_cloak()
 	var/mob/living/carbon/human/H = holder
 	if(H.remove_cloaking_source(src))
 		H.visible_message("<span class='notice'>\The [H] appears from nowhere!</span>")
-	GLOB.moved_event.unregister(H,src)
+	events_repository.unregister(/decl/observ/moved, H,src)
 
 /spell/veil_of_shadows/proc/check_light()
 	if(light_steps)

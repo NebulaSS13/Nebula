@@ -27,7 +27,7 @@
 /obj/machinery/drone_fabricator/Initialize()
 	. = ..()
 	if(isnull(fabricator_tag))
-		fabricator_tag = GLOB.using_map.station_short
+		fabricator_tag = global.using_map.station_short
 
 /obj/machinery/drone_fabricator/derelict
 	name = "construction drone fabricator"

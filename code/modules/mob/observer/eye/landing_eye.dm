@@ -14,16 +14,16 @@
 	shuttle = SSshuttle.shuttles[shuttle_tag]
 	target_sector = sector
 	// Generates the overlay of the shuttle on turfs.
-	var/turf/origin = get_turf(src)
+	var/turf/origin = get_turf(shuttle.current_location)
 	for(var/area/A in shuttle.shuttle_area)
 		for(var/turf/T in A)
 			var/image/I = image('icons/effects/alphacolors.dmi', origin, "red")
 			// Record the offset of the turfs from the eye. The eye is where the shuttle landmark will be placed, so the resultant images will reflect actual landing.
 			var/x_off = T.x - origin.x
 			var/y_off = T.y - origin.y
-
 			I.loc = locate(origin.x + x_off, origin.y + y_off, origin.z)
 			I.plane = OBSERVER_PLANE
+			I.layer = OBSERVER_LAYER
 			landing_images[I] = list(x_off, y_off)
 	
 	// Find the docking beacons in the z-level(s) we're landing in.
@@ -35,7 +35,7 @@
 		
 	for(var/turf/T in docking_turfs)
 		var/image/I = image('icons/effects/alphacolors.dmi', T, "blue")
-
+		I.layer = OBSERVER_LAYER
 		I.plane = OBSERVER_PLANE
 		docking_images += I
 	

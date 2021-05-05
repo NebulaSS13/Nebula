@@ -1,7 +1,7 @@
 /datum/artifact_effect/goodfeeling
 	name = "good feeling"
 	origin_type = EFFECT_PSIONIC
-	var/global/list/messages = list("You feel good.",
+	var/static/list/messages = list("You feel good.",
 		"Everything seems to be going alright",
 		"You've got a good feeling about this",
 		"Your instincts tell you everything is going to be getting better.",
@@ -16,7 +16,7 @@
 		"Everything seems a little lighter.",
 		"The troubles of the world seem to fade away.")
 
-	var/global/list/drastic_messages = list("You want to hug everyone you meet!",
+	var/static/list/drastic_messages = list("You want to hug everyone you meet!",
 		"Everything is going so well!",
 		"You feel euphoric.",
 		"You feel giddy.",

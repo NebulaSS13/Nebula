@@ -32,7 +32,7 @@
 	var/missing_ages = 0
 	var/msg = ""
 
-	for(var/client/C in GLOB.clients)
+	for(var/client/C in global.clients)
 		if(C.player_age == "Requires database")
 			missing_ages = 1
 			continue
@@ -431,7 +431,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		return
 
 	var/mob/observer/ghost/G_found
-	for(var/mob/observer/ghost/G in GLOB.player_list)
+	for(var/mob/observer/ghost/G in global.player_list)
 		if(G.ckey == input)
 			G_found = G
 			break
@@ -460,9 +460,9 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	if(!new_character.real_name)
 		if(new_character.gender == MALE)
-			new_character.real_name = capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
+			new_character.real_name = capitalize(pick(global.first_names_male)) + " " + capitalize(pick(global.last_names))
 		else
-			new_character.real_name = capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
+			new_character.real_name = capitalize(pick(global.first_names_female)) + " " + capitalize(pick(global.last_names))
 	new_character.SetName(new_character.real_name)
 
 	if(G_found.mind && !G_found.mind.active)
@@ -470,7 +470,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		new_character.mind.special_verbs = list()
 	else
 		new_character.mind_initialize()
-	if(!new_character.mind.assigned_role)	new_character.mind.assigned_role = GLOB.using_map.default_assistant_title//If they somehow got a null assigned role.
+	if(!new_character.mind.assigned_role)	new_character.mind.assigned_role = global.using_map.default_assistant_title//If they somehow got a null assigned role.
 
 	//DNA
 	new_character.dna.ready_dna(new_character)
@@ -575,9 +575,9 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	switch(alert("Should this be announced to the general population?",,"Yes","No"))
 		if("Yes")
-			command_announcement.Announce(input, customname, new_sound = GLOB.using_map.command_report_sound, msg_sanitized = 1);
+			command_announcement.Announce(input, customname, new_sound = global.using_map.command_report_sound, msg_sanitized = 1);
 		if("No")
-			minor_announcement.Announce(message = "New [GLOB.using_map.company_name] Update available at all communication consoles.")
+			minor_announcement.Announce(message = "New [global.using_map.company_name] Update available at all communication consoles.")
 
 	log_admin("[key_name(src)] has created a command report: [input]")
 	message_admins("[key_name_admin(src)] has created a command report", 1)
@@ -799,8 +799,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		to_chat(usr, "Nope you can't do this, the game's already started. This only works before rounds!")
 		return
 
-	if(GLOB.random_players)
-		GLOB.random_players = 0
+	if(global.random_players)
+		global.random_players = 0
 		message_admins("Admin [key_name_admin(usr)] has disabled \"Everyone is Special\" mode.", 1)
 		to_chat(usr, "Disabled.")
 		return
@@ -817,7 +817,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		to_world("<span class='notice'><b>Admin [usr.key] has forced the players to have completely random identities!</b></span>")
 
 	to_chat(usr, "<i>Remember: you can always disable the randomness by using the verb again, assuming the round hasn't started yet</i>.")
-	GLOB.random_players = 1
+	global.random_players = 1
 	SSstatistics.add_field_details("admin_verb","MER") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 

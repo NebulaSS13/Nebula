@@ -31,7 +31,6 @@
 
 	primitive_form = "Stok"
 	darksight_range = 3
-	darksight_tint = DARKTINT_MODERATE
 	gluttonous = GLUT_TINY
 	strength = STR_HIGH
 	breath_pressure = 18

@@ -41,7 +41,7 @@
 	..()
 
 /datum/persistent/book/GetValidTurf(var/turf/T, var/list/tokens)
-	. = ..(T || get_turf(pick(GLOB.station_bookcases)), tokens)
+	. = ..(T || get_turf(pick(global.station_bookcases)), tokens)
 
 /datum/persistent/book/GetEntryAge(var/atom/entry)
 	. = -1

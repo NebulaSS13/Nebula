@@ -186,7 +186,7 @@
 			current_transfer = new(current_filesource, dst, F, FALSE)
 			ui_header = "downloader_running.gif"
 
-/datum/computer_file/program/filemanager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/computer_file/program/filemanager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	. = ..()
 	if(!.)
 		return

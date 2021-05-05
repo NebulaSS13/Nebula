@@ -1,7 +1,7 @@
 #define SAVE_RESET -1
 
 /* PLACEHOLDER VERB UNTIL SAVE INIT (or whatever the issue is) IS FIXED */
-var/list/time_prefs_fixed = list()
+var/global/list/time_prefs_fixed = list()
 /client/verb/fix_preferences()
 	set name = "Reload Preferences"
 	set category = "OOC"
@@ -65,7 +65,7 @@ var/list/time_prefs_fixed = list()
 	QDEL_LIST_ASSOC_VAL(char_render_holders)
 
 /datum/preferences/proc/setup()
-	if(!length(GLOB.skills))
+	if(!length(global.skills))
 		GET_DECL(/decl/hierarchy/skill)
 	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
@@ -154,7 +154,7 @@ var/list/time_prefs_fixed = list()
 	BG.icon_state = bgstate
 	BG.screen_loc = preview_screen_locs["BG"]
 
-	for(var/D in GLOB.cardinal)
+	for(var/D in global.cardinal)
 		var/obj/screen/setup_preview/O = LAZYACCESS(char_render_holders, "[D]")
 		if(!O)
 			O = new
@@ -245,9 +245,9 @@ var/list/time_prefs_fixed = list()
 		var/firstspace = findtext(real_name, " ")
 		var/name_length = length(real_name)
 		if(!firstspace)	//we need a surname
-			real_name += " [pick(GLOB.last_names)]"
+			real_name += " [pick(global.last_names)]"
 		else if(firstspace == name_length)
-			real_name += "[pick(GLOB.last_names)]"
+			real_name += "[pick(global.last_names)]"
 
 	character.fully_replace_character_name(real_name)
 
@@ -318,7 +318,7 @@ var/list/time_prefs_fixed = list()
 	character.worn_underwear = list()
 
 	for(var/underwear_category_name in all_underwear)
-		var/datum/category_group/underwear/underwear_category = GLOB.underwear.categories_by_name[underwear_category_name]
+		var/datum/category_group/underwear/underwear_category = global.underwear.categories_by_name[underwear_category_name]
 		if(underwear_category)
 			var/underwear_item_name = all_underwear[underwear_category_name]
 			var/datum/category_item/underwear/UWD = underwear_category.items_by_name[underwear_item_name]
@@ -336,7 +336,7 @@ var/list/time_prefs_fixed = list()
 		O.markings.Cut()
 
 	for(var/M in body_markings)
-		var/datum/sprite_accessory/marking/mark_datum = GLOB.body_marking_styles_list[M]
+		var/datum/sprite_accessory/marking/mark_datum = global.body_marking_styles_list[M]
 		var/mark_color = "[body_markings[M]]"
 
 		for(var/BP in mark_datum.body_parts)
@@ -394,7 +394,7 @@ var/list/time_prefs_fixed = list()
 		dat += "<b>Select a character slot to load</b><hr>"
 		var/name
 		for(var/i=1, i<= config.character_slots, i++)
-			S.cd = GLOB.using_map.character_load_path(S, i)
+			S.cd = global.using_map.character_load_path(S, i)
 			S["real_name"] >> name
 			if(!name)	name = "Character[i]"
 			if(i==default_slot)
@@ -417,7 +417,7 @@ var/list/time_prefs_fixed = list()
 	set waitfor = 0
 	if(!client)
 		return
-	if(client.get_preference_value(/datum/client_preference/chat_position) == GLOB.PREF_YES)
+	if(client.get_preference_value(/datum/client_preference/chat_position) == PREF_YES)
 		client.update_chat_position(TRUE)
-	if(client.get_preference_value(/datum/client_preference/fullscreen_mode) != GLOB.PREF_OFF)
+	if(client.get_preference_value(/datum/client_preference/fullscreen_mode) != PREF_OFF)
 		client.toggle_fullscreen(client.get_preference_value(/datum/client_preference/fullscreen_mode))

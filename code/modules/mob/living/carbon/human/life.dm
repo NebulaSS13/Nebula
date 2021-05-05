@@ -825,7 +825,7 @@
 	if(isturf(loc) && rand(1,1000) == 1)
 		var/turf/T = loc
 		if(T.get_lumcount() <= LIGHTING_SOFT_THRESHOLD)
-			playsound_local(src,pick(GLOB.scarySounds),50, 1, -1)
+			playsound_local(src,pick(global.scarySounds),50, 1, -1)
 
 	var/area/A = get_area(src)
 	if(client && world.time >= client.played + 600)
@@ -1001,8 +1001,8 @@
 		holder.icon_state = "hudblank"
 		if(mind && mind.assigned_special_role)
 			var/special_role = mind.get_special_role_name()
-			if(special_role && GLOB.hud_icon_reference[special_role])
-				holder.icon_state = GLOB.hud_icon_reference[special_role]
+			if(special_role && global.hud_icon_reference[special_role])
+				holder.icon_state = global.hud_icon_reference[special_role]
 			else
 				holder.icon_state = "hudsyndicate"
 			hud_list[SPECIALROLE_HUD] = holder
@@ -1055,7 +1055,8 @@
 
 /mob/living/carbon/human/handle_vision()
 	if(client)
-		client.screen.Remove(GLOB.global_hud.nvg, GLOB.global_hud.thermal, GLOB.global_hud.meson, GLOB.global_hud.science)
+		var/datum/global_hud/global_hud = get_global_hud()
+		client.screen.Remove(global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
 	if(machine)
 		var/viewflags = machine.check_eye(src)
 		if(viewflags < 0)

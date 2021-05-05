@@ -124,7 +124,7 @@
 	. = ..()
 	if(prob(40))
 		var/spacefacing = FALSE
-		for(var/direction in GLOB.cardinal)
+		for(var/direction in global.cardinal)
 			var/turf/T = get_step(src, direction)
 			var/area/A = get_area(T)
 			if(A && (A.area_flags & AREA_FLAG_EXTERNAL))

@@ -40,7 +40,7 @@
 	icon_state = "stamp-boss"
 
 /obj/item/stamp/boss/Initialize()
-	name = "[GLOB.using_map.boss_name]'s' rubber stamp"
+	name = "[global.using_map.boss_name]'s' rubber stamp"
 	. = ..()
 
 /obj/item/stamp/cargo
