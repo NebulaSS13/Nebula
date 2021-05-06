@@ -1,6 +1,5 @@
 # Branch Structure
-
-The repository has two main branches, `dev` and `stable`. Feature implementation, new assets, new maps, and other 'content' pull requests should be pointed at `dev`, while bugfixes for existing code, or fixes to broken assets like sprites or sounds, should be pointed at `stable`. `stable` will be merged back into `dev` periodically to keep the `dev` branch up to date with fixes, so duplicate pull requests are not necessary.
+The repository has two main branches, `dev` and `stable`, and one secondary branch, `staging`. Feature implementation, new assets, new maps, and other 'content' pull requests should be pointed at `dev`, while bugfixes for existing code, or fixes to broken assets like sprites or sounds, should be pointed at `stable`. `stable` will be merged back into `dev` periodically to keep the `dev` branch up to date with fixes, so duplicate pull requests are not necessary. `staging` is used for the period when `dev` is being tested and reviewed for promotion to `stable`, and should be targeted when writing fixes for issues encountered during `staging` testing, and otherwise should not be used.
 
 # Contribution Standards
 
