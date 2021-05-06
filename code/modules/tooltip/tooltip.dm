@@ -39,7 +39,7 @@ Notes:
 /datum/tooltip/New(client/C)
 	if(C)
 		owner = C
-		show_browser(owner, safe_file2text('code/modules/tooltip/tooltip.html'), "window=[control]")
+		show_browser(owner, file2text('code/modules/tooltip/tooltip.html'), "window=[control]")
 	..()
 
 /datum/tooltip/proc/show(atom/movable/thing, params = null, title = null, content = null, theme = "default", special = "none")
