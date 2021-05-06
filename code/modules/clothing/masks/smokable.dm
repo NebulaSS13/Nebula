@@ -212,9 +212,10 @@
 	..()
 	remove_extension(src, /datum/extension/scent)
 	if (type_butt)
-		var/obj/item/butt = new type_butt(get_turf(src))
+		var/obj/item/trash/cigbutt/butt = new type_butt(get_turf(src))
 		transfer_fingerprints_to(butt)
-		butt.color = color
+		if(istype(butt) && butt.use_color)
+			butt.color = color
 		if(brand)
 			butt.desc += " This one is a [brand]."
 		if(ismob(loc))
@@ -233,7 +234,7 @@
 	filling = list(/decl/material/solid/tobacco = 1, /decl/material/liquid/menthol = 1)
 
 /obj/item/trash/cigbutt/menthol
-	icon = 'icons/clothing/mask/smokables/cigarette_menthol.dmi'
+	icon = 'icons/clothing/mask/smokables/cigarette_menthol_butt.dmi'
 
 /obj/item/clothing/mask/smokable/cigarette/luckystars
 	brand = "\improper Lucky Star"
@@ -247,7 +248,7 @@
 	filling = list(/decl/material/solid/tobacco/bad = 1.5)
 
 /obj/item/trash/cigbutt/jerichos
-	icon = 'icons/clothing/mask/smokables/cigarette_jericho.dmi'
+	icon = 'icons/clothing/mask/smokables/cigarette_jericho_butt.dmi'
 
 /obj/item/clothing/mask/smokable/cigarette/carcinomas
 	name = "dark cigarette"
@@ -262,7 +263,7 @@
 	filling = list(/decl/material/solid/tobacco/bad = 1)
 
 /obj/item/trash/cigbutt/professionals
-	icon = 'icons/clothing/mask/smokables/cigarette_professional.dmi'
+	icon = 'icons/clothing/mask/smokables/cigarette_professional_butt.dmi'
 
 /obj/item/clothing/mask/smokable/cigarette/killthroat
 	brand = "\improper Acme Co. cigarette"
@@ -315,7 +316,7 @@
 
 /obj/item/trash/cigbutt/woodbutt
 	name = "wooden tip"
-	icon = 'icons/clothing/mask/smokables/cigar.dmi'
+	icon = 'icons/clothing/mask/smokables/cigar_butt.dmi'
 	desc = "A wooden mouthpiece from a cigar. Smells rather bad."
 	material = /decl/material/solid/wood
 
@@ -412,12 +413,13 @@
 /obj/item/trash/cigbutt
 	name = "cigarette butt"
 	desc = "A manky old cigarette butt."
-	icon = 'icons/clothing/mask/smokables/cigarette.dmi'
+	icon = 'icons/clothing/mask/smokables/cigarette_butt.dmi'
 	icon_state = "butt"
 	randpixel = 10
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	throwforce = 1
+	var/use_color = TRUE
 
 /obj/item/trash/cigbutt/Initialize()
 	. = ..()
