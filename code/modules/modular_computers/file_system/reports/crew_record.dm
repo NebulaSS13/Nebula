@@ -70,15 +70,7 @@ var/global/arrest_security_status =  "Arrest"
 		qdel(dummy)
 
 	// Load records from the client.
-	var/gen_record
-	var/security_record
-	var/public_record
-	var/medical_record
-	if(H?.client?.prefs)
-		security_record = H.client.prefs.sec_record
-		public_record =   H.client.prefs.public_record
-		medical_record =  H.client.prefs.med_record
-		gen_record =      H.client.prefs.gen_record
+	var/list/records = H?.client?.prefs?.records || list()
 
 	// Add honorifics, etc.
 	var/formal_name = "Unset"
@@ -108,11 +100,13 @@ var/global/arrest_security_status =  "Arrest"
 	set_branch(H ? (H.char_branch && H.char_branch.name) : "None")
 	set_rank(H ? (H.char_rank && H.char_rank.name) : "None")
 
-	set_public_record(H?.ckey, (public_record && !jobban_isbanned(H, "Records")) ? html_decode(public_record) : "No record supplied")
+	var/public_record = records[PREF_PUB_RECORD]
+	set_public_record((public_record && !jobban_isbanned(H, "Records")) ? html_decode(public_record) : "No record supplied")
 
 	// Medical record
 	set_bloodtype(H ? H.b_type : "Unset")
-	set_medical_record(H?.ckey, (medical_record && !jobban_isbanned(H, "Records")) ? html_decode(medical_record) : "No record supplied")
+	var/medical_record = records[PREF_MED_RECORD]
+	set_medical_record((medical_record && !jobban_isbanned(H, "Records")) ? html_decode(medical_record) : "No record supplied")
 
 	if(H)
 		if(H.isSynthetic())
@@ -134,11 +128,13 @@ var/global/arrest_security_status =  "Arrest"
 	set_dna(H ? H.dna.unique_enzymes : "")
 	set_fingerprint(H ? md5(H.dna.uni_identity) : "")
 
-	set_security_record(H?.ckey, (security_record && !jobban_isbanned(H, "Records")) ? html_decode(security_record) : "No record supplied")
+	var/security_record = records[PREF_SEC_RECORD]
+	set_security_record((security_record && !jobban_isbanned(H, "Records")) ? html_decode(security_record) : "No record supplied")
 
 	// Employment record
 	var/employment_record = "No record supplied"
 	if(H)
+		var/gen_record = records[PREF_GEN_RECORD]
 		if(gen_record && !jobban_isbanned(H, "Records"))
 			employment_record = html_decode(gen_record)
 		if(H.client && H.client.prefs)
@@ -150,7 +146,7 @@ var/global/arrest_security_status =  "Arrest"
 					LAZYADD(qualifications, extra_note)
 			if(LAZYLEN(qualifications))
 				employment_record = "[employment_record ? "[employment_record]\[br\]" : ""][jointext(qualifications, "\[br\]>")]"
-	set_employment_record(H?.ckey, employment_record)
+	set_employment_record(employment_record)
 
 	// Misc cultural info.
 	set_homeSystem(H ? html_decode(H.get_cultural_value(TAG_HOMEWORLD)) : "Unset")
@@ -169,7 +165,7 @@ var/global/arrest_security_status =  "Arrest"
 	// Antag record
 	if(H?.client?.prefs)
 		var/exploit_record =  H.client.prefs.exploit_record
-		set_antag_record(H?.ckey, (exploit_record && !jobban_isbanned(H, "Records")) ? html_decode(exploit_record) : "")
+		set_antag_record((exploit_record && !jobban_isbanned(H, "Records")) ? html_decode(exploit_record) : "")
 
 // Cut down version for silicons
 /datum/computer_file/report/crew_record/synth/load_from_mob(var/mob/living/silicon/S)

@@ -472,8 +472,9 @@
 	if(mind)
 		mind.active = 0 //we wish to transfer the key manually
 		mind.original = new_character
-		if(client.prefs.memory)
-			mind.StoreMemory(client.prefs.memory)
+		var/memory = client.prefs.records[PREF_MEM_RECORD]
+		if(memory)
+			mind.StoreMemory(memory)
 		if(client.prefs.relations.len)
 			for(var/T in client.prefs.relations)
 				var/TT = matchmaker.relation_types[T]
