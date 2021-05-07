@@ -315,3 +315,9 @@
 #define INJECTION_PORT_DELAY 3 SECONDS // used by injectors to apply delay due to searching for a port on the injectee's suit
 
 #define ADJUSTED_GLIDE_SIZE(DELAY) (CEILING((WORLD_ICON_SIZE / max((DELAY), world.tick_lag) * world.tick_lag) - world.tick_lag, 1) + (config.glide_size_delay))
+
+#define PREF_MEM_RECORD "memory"
+#define PREF_SEC_RECORD "sec_record"
+#define PREF_PUB_RECORD "public_record"
+#define PREF_MED_RECORD "med_record"
+#define PREF_GEN_RECORD "gen_record"
