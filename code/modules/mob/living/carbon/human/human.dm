@@ -478,7 +478,7 @@
 				if(hasHUD(user, HUD_SECURITY))
 					to_chat(user, "<b>Name:</b> [E.get_name()]")
 					to_chat(user, "<b>Criminal Status:</b> [E.get_criminalStatus()]")
-					to_chat(user, "<b>Details:</b> [E.get_secRecord()]")
+					to_chat(user, "<b>Details:</b> [E.get_security_record()]")
 					read = 1
 
 			if(!read)
@@ -539,7 +539,7 @@
 					to_chat(usr, "<b>Gender:</b> [E.get_sex()]")
 					to_chat(usr, "<b>Species:</b> [E.get_species_name()]")
 					to_chat(usr, "<b>Blood Type:</b> [E.get_bloodtype()]")
-					to_chat(usr, "<b>Details:</b> [E.get_medRecord()]")
+					to_chat(usr, "<b>Details:</b> [E.get_medical_record()]")
 					read = 1
 			if(!read)
 				to_chat(user, "<span class='warning'>Unable to locate a data core entry for this person.</span>")

@@ -59,6 +59,7 @@ var/global/arrest_security_status =  "Arrest"
 	return valid_grants
 
 /datum/computer_file/report/crew_record/proc/load_from_mob(var/mob/living/carbon/human/H)
+
 	if(istype(H))
 		photo_front = getFlatIcon(H, SOUTH, always_use_defdir = 1)
 		photo_side = getFlatIcon(H, WEST, always_use_defdir = 1)
@@ -67,6 +68,17 @@ var/global/arrest_security_status =  "Arrest"
 		photo_front = getFlatIcon(dummy, SOUTH, always_use_defdir = 1)
 		photo_side = getFlatIcon(dummy, WEST, always_use_defdir = 1)
 		qdel(dummy)
+
+	// Load records from the client.
+	var/gen_record
+	var/security_record
+	var/public_record
+	var/medical_record
+	if(H?.client?.prefs)
+		security_record = H.client.prefs.sec_record
+		public_record =   H.client.prefs.public_record
+		medical_record =  H.client.prefs.med_record
+		gen_record =      H.client.prefs.gen_record
 
 	// Add honorifics, etc.
 	var/formal_name = "Unset"
@@ -95,11 +107,12 @@ var/global/arrest_security_status =  "Arrest"
 	set_species_name(H ? H.get_species_name() : global.using_map.default_species)
 	set_branch(H ? (H.char_branch && H.char_branch.name) : "None")
 	set_rank(H ? (H.char_rank && H.char_rank.name) : "None")
-	set_public_record(H && H.public_record && !jobban_isbanned(H, "Records") ? html_decode(H.public_record) : "No record supplied")
+
+	set_public_record(H?.ckey, (public_record && !jobban_isbanned(H, "Records")) ? html_decode(public_record) : "No record supplied")
 
 	// Medical record
 	set_bloodtype(H ? H.b_type : "Unset")
-	set_medRecord((H && H.med_record && !jobban_isbanned(H, "Records") ? html_decode(H.med_record) : "No record supplied"))
+	set_medical_record(H?.ckey, (medical_record && !jobban_isbanned(H, "Records")) ? html_decode(medical_record) : "No record supplied")
 
 	if(H)
 		if(H.isSynthetic())
@@ -120,13 +133,14 @@ var/global/arrest_security_status =  "Arrest"
 	set_criminalStatus(global.default_security_status)
 	set_dna(H ? H.dna.unique_enzymes : "")
 	set_fingerprint(H ? md5(H.dna.uni_identity) : "")
-	set_secRecord(H && H.sec_record && !jobban_isbanned(H, "Records") ? html_decode(H.sec_record) : "No record supplied")
+
+	set_security_record(H?.ckey, (security_record && !jobban_isbanned(H, "Records")) ? html_decode(security_record) : "No record supplied")
 
 	// Employment record
 	var/employment_record = "No record supplied"
 	if(H)
-		if(H.gen_record && !jobban_isbanned(H, "Records"))
-			employment_record = html_decode(H.gen_record)
+		if(gen_record && !jobban_isbanned(H, "Records"))
+			employment_record = html_decode(gen_record)
 		if(H.client && H.client.prefs)
 			var/list/qualifications
 			for(var/culturetag in H.client.prefs.cultural_info)
@@ -136,12 +150,12 @@ var/global/arrest_security_status =  "Arrest"
 					LAZYADD(qualifications, extra_note)
 			if(LAZYLEN(qualifications))
 				employment_record = "[employment_record ? "[employment_record]\[br\]" : ""][jointext(qualifications, "\[br\]>")]"
-	set_emplRecord(employment_record)
+	set_employment_record(H?.ckey, employment_record)
 
 	// Misc cultural info.
 	set_homeSystem(H ? html_decode(H.get_cultural_value(TAG_HOMEWORLD)) : "Unset")
-	set_faction(H ? html_decode(H.get_cultural_value(TAG_FACTION)) : "Unset")
-	set_religion(H ? html_decode(H.get_cultural_value(TAG_RELIGION)) : "Unset")
+	set_faction(H ?    html_decode(H.get_cultural_value(TAG_FACTION)) :   "Unset")
+	set_religion(H ?   html_decode(H.get_cultural_value(TAG_RELIGION)) :  "Unset")
 
 	if(H)
 		var/skills = list()
@@ -153,7 +167,9 @@ var/global/arrest_security_status =  "Arrest"
 		set_skillset(jointext(skills,"\n"))
 
 	// Antag record
-	set_antagRecord(H && H.exploit_record && !jobban_isbanned(H, "Records") ? html_decode(H.exploit_record) : "")
+	if(H?.client?.prefs)
+		var/exploit_record =  H.client.prefs.exploit_record
+		set_antag_record(H?.ckey, (exploit_record && !jobban_isbanned(H, "Records")) ? html_decode(exploit_record) : "")
 
 // Cut down version for silicons
 /datum/computer_file/report/crew_record/synth/load_from_mob(var/mob/living/silicon/S)
@@ -271,23 +287,23 @@ FIELD_LONG("General Notes (Public)", public_record, null, access_bridge)
 
 // MEDICAL RECORDS
 FIELD_LIST("Blood Type", bloodtype, global.blood_types, access_medical, access_medical)
-FIELD_LONG("Medical Record", medRecord, access_medical, access_medical)
+FIELD_LONG("Medical Record", medical_record, access_medical, access_medical)
 FIELD_LONG("Known Implants", implants, access_medical, access_medical)
 
 // SECURITY RECORDS
 FIELD_LIST("Criminal Status", criminalStatus, global.security_statuses, access_security, access_security)
-FIELD_LONG("Security Record", secRecord, access_security, access_security)
+FIELD_LONG("Security Record", security_record, access_security, access_security)
 FIELD_SHORT("DNA", dna, access_security, access_security)
 FIELD_SHORT("Fingerprint", fingerprint, access_security, access_security)
 
 // EMPLOYMENT RECORDS
-FIELD_LONG("Employment Record", emplRecord, access_bridge, access_bridge)
+FIELD_LONG("Employment Record", employment_record, access_bridge, access_bridge)
 FIELD_SHORT("Home System", homeSystem, access_bridge, access_change_ids)
 FIELD_SHORT("Faction", faction, access_bridge, access_bridge)
 FIELD_LONG("Qualifications", skillset, access_bridge, access_bridge)
 
 // ANTAG RECORDS
-FIELD_LONG("Exploitable Information", antagRecord, access_syndicate, access_syndicate)
+FIELD_LONG("Exploitable Information", antag_record, access_syndicate, access_syndicate)
 
 //Options builderes
 /datum/report_field/options/crew_record/rank/proc/record_ranks()
