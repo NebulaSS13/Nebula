@@ -1,5 +1,0 @@
-author: MistakeNot4892
-delete-after: true
-changes:
-  - tweak: Some material stack items and messages around them may have changed due
-      to a backend refactor of materials.
