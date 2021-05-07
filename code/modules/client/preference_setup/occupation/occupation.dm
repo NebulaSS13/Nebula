@@ -204,14 +204,14 @@
 				if(bad_message)
 					. += "<del>[title_link]</del>[help_link][skill_link]<td>[bad_message]</td></tr>"
 					continue
-				else if((global.using_map.default_assistant_title in pref.job_low) && (title != global.using_map.default_assistant_title))
+				else if((global.using_map.default_job_title in pref.job_low) && (title != global.using_map.default_job_title))
 					. += "<font color=grey>[title_link]</font>[help_link][skill_link]<td></td></tr>"
 					continue
 				else
 					. += "[title_link][help_link][skill_link]"
 
 				. += "<td>"
-				if(title == global.using_map.default_assistant_title)//Assistant is special
+				if(title == global.using_map.default_job_title)//Assistant is special
 					var/yes_link = "Yes"
 					var/no_link = "No"
 					if(title in pref.job_low)
@@ -449,7 +449,7 @@
 	if(!job)
 		return 0
 
-	if(role == global.using_map.default_assistant_title)
+	if(role == global.using_map.default_job_title)
 		if(level == JOB_LEVEL_NEVER)
 			pref.job_low -= job.title
 		else

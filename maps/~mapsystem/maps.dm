@@ -155,16 +155,23 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/New()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
+
 	if(!allowed_jobs)
 		allowed_jobs = list()
 		for(var/jtype in subtypesof(/datum/job))
 			var/datum/job/job = jtype
 			if(initial(job.available_by_default))
 				allowed_jobs += jtype
+
 	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
+
 	current_lobby_screen = pick(lobby_screens)
 	game_year = (text2num(time2text(world.realtime, "YYYY")) + game_year)
+
+	if(ispath(default_job_type, /datum/job))
+		var/datum/job/J = default_job_type
+		default_job_title = initial(J.title)
 
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type

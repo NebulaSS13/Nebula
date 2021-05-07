@@ -73,8 +73,6 @@
 //General-purpose life speed define for plants.
 #define HYDRO_SPEED_MULTIPLIER 1
 
-#define DEFAULT_JOB_TYPE /datum/job/assistant
-
 //Area flags, possibly more to come
 #define AREA_FLAG_RAD_SHIELDED         BITFLAG(1)  // Shielded from radiation, clearly.
 #define AREA_FLAG_EXTERNAL             BITFLAG(2)  // External as in exposed to space, not outside in a nice, green, forest.

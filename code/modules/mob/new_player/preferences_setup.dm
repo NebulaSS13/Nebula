@@ -45,8 +45,8 @@
 	var/datum/job/previewJob
 	if(equip_preview_mob)
 		// Determine what job is marked as 'High' priority, and dress them up as such.
-		if(global.using_map.default_assistant_title in job_low)
-			previewJob = SSjobs.get_by_title(global.using_map.default_assistant_title)
+		if(global.using_map.default_job_title in job_low)
+			previewJob = SSjobs.get_by_title(global.using_map.default_job_title)
 		else
 			previewJob = SSjobs.get_by_title(job_high)
 	else

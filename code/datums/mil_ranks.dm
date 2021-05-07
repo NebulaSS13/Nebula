@@ -106,7 +106,7 @@ var/global/datum/mil_branches/mil_branches = new()
 	var/list/rank_types       // list of paths used to init the ranks list
 	var/list/spawn_rank_types // list of paths used to init the spawn_ranks list. Subset of rank_types
 
-	var/assistant_job = DEFAULT_JOB_TYPE
+	var/assistant_job
 
 	// Email addresses will be created under this domain name. Mostly for the looks.
 	var/email_domain = "freemail.net"
@@ -117,6 +117,9 @@ var/global/datum/mil_branches/mil_branches = new()
 	ranks = list()
 	spawn_ranks_ = list()
 	spawn_ranks_by_species_ = list()
+
+	if(isnull(assistant_job))
+		assistant_job = global.using_map.default_job_type
 
 	for(var/rank_path in rank_types)
 		if(!ispath(rank_path, /datum/mil_rank))

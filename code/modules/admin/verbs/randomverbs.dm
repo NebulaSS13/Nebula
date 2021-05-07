@@ -470,7 +470,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		new_character.mind.special_verbs = list()
 	else
 		new_character.mind_initialize()
-	if(!new_character.mind.assigned_role)	new_character.mind.assigned_role = global.using_map.default_assistant_title//If they somehow got a null assigned role.
+	if(!new_character.mind.assigned_role)
+		new_character.mind.assigned_role = global.using_map.default_job_title//If they somehow got a null assigned role.
 
 	//DNA
 	new_character.dna.ready_dna(new_character)
