@@ -29,6 +29,7 @@
 	closed_layer = ABOVE_WINDOW_LAYER
 	dir = NORTH
 	explosion_resistance = 25
+	atom_flags = ATOM_FLAG_ADJACENT_EXCEPTION
 
 	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways,
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
