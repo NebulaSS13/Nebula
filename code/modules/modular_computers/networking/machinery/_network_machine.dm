@@ -20,9 +20,12 @@
 
 /obj/machinery/network/Initialize()
 	set_extension(src, network_device_type, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
-	if(wired_connection)
-		uncreated_component_parts += list(/obj/item/stock_parts/computer/lan_port)
 	. = ..()
+
+/obj/machinery/network/populate_parts(full_populate)
+	. = ..()
+	if(full_populate && wired_connection)
+		install_component(/obj/item/stock_parts/computer/lan_port, FALSE)
 
 /obj/machinery/network/proc/is_overheated()
 	var/turf/simulated/L = loc

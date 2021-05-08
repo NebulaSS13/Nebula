@@ -97,7 +97,7 @@
 	desc = "Used for building wall-mounted network relays."
 	icon = 'icons/obj/machines/wall_router.dmi'
 	icon_state = "wall_router_o_off"
-	build_machine_type = /obj/machinery/network/router/wall_mounted
+	build_machine_type = /obj/machinery/network/relay/wall_mounted
 
 /obj/item/frame/wall_relay/kit
 	fully_construct = TRUE
