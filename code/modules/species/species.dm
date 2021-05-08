@@ -147,8 +147,8 @@
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
 	// Move intents. Earlier in list == default for that type of movement.
 	var/list/move_intents = list(
-		/decl/move_intent/walk, 
-		/decl/move_intent/run, 
+		/decl/move_intent/walk,
+		/decl/move_intent/run,
 		/decl/move_intent/creep
 	)
 
@@ -177,7 +177,7 @@
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
 
 	// An associative list of target zones (ex. BP_CHEST, BP_MOUTH) mapped to all possible keys associated
-	// with the zone. Used for species with body layouts that do not map directly to the standard humanoid 
+	// with the zone. Used for species with body layouts that do not map directly to the standard humanoid
 	// body, currently serpentids and mantids.
 	var/list/limb_mapping
 
@@ -339,16 +339,11 @@
 		organ_data["descriptor"] = initial(limb_path.name)
 
 /decl/species/proc/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
+	var/obj/item/storage/box/box = extendedtank ? /obj/item/storage/box/engineer : /obj/item/storage/box/survival
 	if(istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack))
-		if (extendedtank)
-			H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H.back), slot_in_backpack_str)
-		else
-			H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H.back), slot_in_backpack_str)
+		H.equip_to_slot_or_del(new box(H.back), slot_in_backpack_str)
 	else
-		if (extendedtank)
-			H.put_in_hands_or_del(new /obj/item/storage/box/engineer(H))
-		else
-			H.put_in_hands_or_del(new /obj/item/storage/box/survival(H))
+		H.put_in_hands_or_del(new box(H))
 
 /decl/species/proc/get_manual_dexterity(var/mob/living/carbon/human/H)
 	. = manual_dexterity
