@@ -19,6 +19,12 @@ var/global/list/ship_engines = list()
 	engine_type = e_type
 	ship_engines |= src
 
+/datum/extension/ship_engine/Destroy()
+	. = ..()
+	ship_engines -= src
+	for(var/obj/effect/overmap/visitable/ship/S in SSshuttle.ships)
+		S.engines -= src
+
 /datum/extension/ship_engine/proc/is_on()
 	var/obj/machinery/M = holder
 	if(M.use_power && M.operable())
@@ -95,3 +101,10 @@ var/global/list/ship_engines = list()
 			M.power_change()
 		if(is_on())//if everything is in working order, start booting!
 			next_on = world.time + boot_time
+
+/datum/extension/ship_engine/proc/sync_to_ship()
+	. = FALSE
+	for(var/obj/effect/overmap/visitable/ship/S in SSshuttle.ships)
+		if(S.check_ownership(holder))
+			S.engines |= src
+			return TRUE
