@@ -16,11 +16,11 @@
 
 /obj/item/stock_parts/computer/lan_port/Destroy()
 	. = ..()
-	qdel(terminal)
+	QDEL_NULL(terminal)
 
 /obj/item/stock_parts/computer/lan_port/on_uninstall(obj/machinery/machine, temporary)
 	. = ..()
-	qdel(terminal)
+	QDEL_NULL(terminal)
 
 /obj/item/stock_parts/computer/lan_port/proc/set_terminal()
 	if(terminal)
@@ -55,9 +55,7 @@
 	return TRUE
 
 /obj/item/stock_parts/computer/lan_port/proc/check_terminal_block(var/turf/T)
-	for(var/obj/structure/network_cable/C in T)
-		return TRUE
-	return FALSE
+	return locate(/obj/structure/network_cable) in T
 
 /obj/item/stock_parts/computer/lan_port/attackby(obj/item/I, mob/user)
 	var/obj/machinery/parent = loc
@@ -79,10 +77,10 @@
 			to_chat(user, SPAN_WARNING("You need five lengths of network cable for \the [parent]."))
 			return TRUE
 	
-		user.visible_message(SPAN_WARNING("\The [user] adds cables to the \the [parent]."), "You start adding cables to \the [parent] frame...")
+		user.visible_message(SPAN_NOTICE("\The [user] adds cables to the \the [parent]."), "You start adding cables to \the [parent] frame...")
 		if(do_after(user, 20, parent))
-			if(!terminal && (loc == parent) && parent.components_are_accessible(type) && !check_terminal_block(T))
-				user.visible_message(SPAN_WARNING("\The [user] has added cables to the \the [parent]!"), "You add cables to the \the [parent].")
+			if(!terminal && (loc == parent) && parent.components_are_accessible(type) && !check_terminal_block(T) && C.use(5))
+				user.visible_message(SPAN_NOTICE("\The [user] has added cables to the \the [parent]!"), "You add cables to the \the [parent].")
 				set_terminal()
 		return TRUE
 	if(isWirecutter(I) && terminal)

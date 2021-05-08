@@ -120,7 +120,6 @@
 		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT
 	)
 	item_state = "coil"
-	stacktype = /obj/item/stack/net_cable_coil
 
 /obj/item/stack/net_cable_coil/single
 	amount = 1

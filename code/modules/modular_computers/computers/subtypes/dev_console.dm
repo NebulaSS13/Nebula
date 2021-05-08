@@ -6,9 +6,12 @@
 
 /obj/machinery/computer/modular/Initialize()
 	set_extension(src, /datum/extension/interactive/ntos/console)
-	if(wired_connection)
-		uncreated_component_parts += list(/obj/item/stock_parts/computer/lan_port)
 	. = ..()
+
+/obj/machinery/computer/modular/populate_parts(full_populate)
+	. = ..()
+	if(full_populate && wired_connection)
+		install_component(/obj/item/stock_parts/computer/lan_port, FALSE)
 
 /obj/machinery/computer/modular/Process()
 	if(stat & NOPOWER)
