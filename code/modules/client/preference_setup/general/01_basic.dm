@@ -18,7 +18,6 @@
 
 /datum/category_item/player_setup_item/physical/basic/save_character(datum/pref_record_writer/W)
 	W.write("gender",                pref.gender)
-	W.write("age",                   pref.age)
 	W.write("bodytype",              pref.bodytype)
 	W.write("spawnpoint",            pref.spawnpoint)
 	W.write("real_name",             pref.real_name)

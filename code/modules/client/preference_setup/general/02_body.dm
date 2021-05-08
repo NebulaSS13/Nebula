@@ -48,11 +48,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
 	W.write("species",                pref.species)
-	W.write("skin_tone"],             pref.skin_tone)
-	W.write("hair_colour"],           pref.hair_colour)
-	W.write("facial_hair_colour"],    pref.facial_hair_colour)
-	W.write("skin_colour"],           pref.skin_colour)
-	W.write("eye_colour"],            pref.eye_colour)
+	W.write("skin_tone",              pref.skin_tone)
+	W.write("hair_colour",            pref.hair_colour)
+	W.write("facial_hair_colour",     pref.facial_hair_colour)
+	W.write("skin_colour",            pref.skin_colour)
+	W.write("eye_colour",             pref.eye_colour)
 	W.write("hair_style_name",        pref.h_style)
 	W.write("facial_style_name",      pref.f_style)
 	W.write("b_type",                 pref.b_type)
@@ -70,16 +70,16 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			rlimb_string_data[limb] = model_data.name
 	W.write("rlimb_data", rlimb_string_data)
 
-/datum/category_item/player_setup_item/physical/body/sanitize_character(var/savefile/S)
+/datum/category_item/player_setup_item/physical/body/sanitize_character()
 
 	pref.skin_colour =        pref.skin_colour        || COLOR_BLACK
 	pref.hair_colour =        pref.hair_colour        || COLOR_BLACK
 	pref.facial_hair_colour = pref.facial_hair_colour || COLOR_BLACK
 	pref.eye_colour  =        pref.eye_colour         || COLOR_BLACK
+	pref.h_style =            sanitize_inlist(pref.h_style, global.hair_styles_list, initial(pref.h_style))
+	pref.f_style =            sanitize_inlist(pref.f_style, global.facial_hair_styles_list, initial(pref.f_style))
+	pref.b_type =             sanitize_text(pref.b_type, initial(pref.b_type))
 
-	pref.h_style		= sanitize_inlist(pref.h_style, global.hair_styles_list, initial(pref.h_style))
-	pref.f_style		= sanitize_inlist(pref.f_style, global.facial_hair_styles_list, initial(pref.f_style))
-	pref.b_type			= sanitize_text(pref.b_type, initial(pref.b_type))
 	if(!pref.b_type || !(pref.b_type in global.valid_bloodtypes))
 		pref.b_type = RANDOM_BLOOD_TYPE
 
