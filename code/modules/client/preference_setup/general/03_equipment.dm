@@ -23,16 +23,13 @@
 			backpacks_by_name[backpack_outfit.name] = backpack_outfit
 
 /datum/category_item/player_setup_item/physical/equipment/load_character(datum/pref_record_reader/R)
-	var/load_backbag
-
-	pref.all_underwear = R.read("all_underwear")
+	pref.all_underwear =          R.read("all_underwear")
 	pref.all_underwear_metadata = R.read("all_underwear_metadata")
-	load_backbag = R.read("backpack")
-	pref.backpack_metadata = R.read("backpack_metadata")
-
+	pref.backpack_metadata =      R.read("backpack_metadata")
+	pref.starting_cash_choice =   R.read("starting_cash_choice")
+	var/load_backbag =            R.read("backpack")
 	pref.backpack = backpacks_by_name[load_backbag] || get_default_outfit_backpack()
 
-	from_file(S["starting_cash_choice"], pref.starting_cash_choice)
 	var/list/all_cash_choices = decls_repository.get_decls_of_type(/decl/starting_cash_choice)
 	for(var/ctype in all_cash_choices)
 		var/decl/starting_cash_choice/cash_choice = all_cash_choices[ctype]

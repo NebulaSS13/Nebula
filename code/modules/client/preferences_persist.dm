@@ -48,7 +48,7 @@
 	save_pref_record("preferences", W.data)
 
 /datum/preferences/proc/get_slot_key(slot)
-	return "character_[GLOB.using_map.preferences_key()]_[slot]"
+	return "character_[global.using_map.preferences_key()]_[slot]"
 
 /datum/preferences/proc/load_character(slot)
 	if(!slot)
@@ -69,6 +69,8 @@
 		if(!R)
 			R = new /datum/pref_record_reader/null(PREF_SER_VERSION)
 		player_setup.load_character(R)
+
+	update_preview_icon()
 
 /datum/preferences/proc/save_character(override_key=null)
 	var/datum/pref_record_writer/json_list/W = new(PREF_SER_VERSION)

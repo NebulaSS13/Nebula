@@ -18,6 +18,7 @@ var/global/list/time_prefs_fixed = list()
 
 /datum/preferences
 	//doohickeys for savefiles
+	var/is_guest = FALSE
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
 
 	// Cache, mapping slot record ids to character names
@@ -108,7 +109,7 @@ var/global/list/time_prefs_fixed = list()
 /datum/preferences/proc/migrate_legacy_preferences()
 	// We make some assumptions here:
 	// - all relevant savefiles were version 17, which covers anything saved from 2018+
-	// - legacy saves were only made on the "torch" map
+	// - legacy saves were only made on the current map
 	// - a maximum of 40 slots were used
 
 	var/legacy_pref_path = get_path(client.ckey, "preferences", "sav")
@@ -120,20 +121,20 @@ var/global/list/time_prefs_fixed = list()
 		return 0
 
 	// Legacy version 17 ~= new version 1
-	var/datum/pref_record_reader/savefile/savefile_reader = new(S, 1)
+	var/datum/pref_record_reader/dm_savefile/savefile_reader = new(S, 1)
 
 	player_setup.load_preferences(savefile_reader)
 	var/orig_slot = default_slot
 
-	S.cd = "/torch"
+	S.cd = "/[global.using_map.path]"
 	for(var/slot = 1 to 40)
 		if(!S.dir.Find("character[slot]"))
 			continue
-		S.cd = "/torch/character[slot]"
+		S.cd = "/[global.using_map.path]/character[slot]"
 		default_slot = slot
 		player_setup.load_character(savefile_reader)
-		save_character(override_key="character_torch_[slot]")
-		S.cd = "/torch"
+		save_character(override_key = "character_[global.using_map.path]_[slot]")
+		S.cd = "/[global.using_map.path]"
 	S.cd = "/"
 
 	default_slot = orig_slot

@@ -11,13 +11,13 @@
 
 /datum/category_item/player_setup_item/background/languages/load_character(datum/pref_record_reader/R)
 	pref.alternate_languages = list()
-	var/list/language_names =  R.read("language")
+	var/list/language_names = R.read("language")
 	for(var/lang in language_names)
 		var/decl/language/lang_decl = SSlore.get_language_by_name(lang)
 		if(istype(lang_decl))
 			pref.alternate_languages |= lang_decl.type
 
-/datum/category_item/player_setup_item/background/languages/save_character(var/savefile/S)
+/datum/category_item/player_setup_item/background/languages/save_character(datum/pref_record_writer/W)
 	var/list/language_names = list()
 	for(var/lang in pref.alternate_languages)
 		var/decl/language/lang_decl = GET_DECL(lang)

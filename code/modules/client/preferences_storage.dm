@@ -22,22 +22,21 @@
 	CRASH("abstract - must be overridden")
 
 
-// Preference reader for legacy savefiles
+// Preference reader for legacy DM savefiles
 // Version must be manually passed, as it's only present at the root
-/datum/pref_record_reader/savefile
+/datum/pref_record_reader/dm_savefile
 	var/savefile
 	var/version
 
-/datum/pref_record_reader/savefile/New(savefile, version)
+/datum/pref_record_reader/dm_savefile/New(savefile, version)
 	src.savefile = savefile
 	src.version = version
 
-/datum/pref_record_reader/savefile/get_version()
+/datum/pref_record_reader/dm_savefile/get_version()
 	return version
 
-/datum/pref_record_reader/savefile/read(key)
+/datum/pref_record_reader/dm_savefile/read(key)
 	return savefile[key]
-
 
 // Preference reader for assoc lists
 // Version should be in the "__VERSION" key

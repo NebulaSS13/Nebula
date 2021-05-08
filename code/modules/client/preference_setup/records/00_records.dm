@@ -20,10 +20,8 @@
 			pref.records[record_key] = new_record
 		return TOPIC_REFRESH
 
-/datum/category_item/player_setup_item/records/load_character(var/savefile/S)
-	var/load_val
-	from_file(S[record_key], load_val)
-	pref.records[record_key] = load_val
+/datum/category_item/player_setup_item/records/load_character(var/datum/pref_record_reader/R)
+	pref.records[record_key] = R.read(record_key)
 
-/datum/category_item/player_setup_item/records/save_character(var/savefile/S)
-	to_file(S[record_key], pref.records[record_key])
+/datum/category_item/player_setup_item/records/save_character(var/datum/pref_record_writer/P)
+	P.write(record_key, pref.records[record_key])
