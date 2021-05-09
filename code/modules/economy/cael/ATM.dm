@@ -287,7 +287,7 @@
 						if(D)
 							account_security_level = D.security_level
 
-					authenticated_account = attempt_account_access(tried_account_num, tried_pin, login_card && login_card.associated_account_number == tried_account_num ? 2 : 1)
+					authenticated_account = attempt_account_access(tried_account_num, tried_pin, (login_card?.associated_account_number == tried_account_num))
 
 					if(!authenticated_account)
 						number_incorrect_tries++
