@@ -4,10 +4,10 @@ var/global/list/floating_chat_colors = list()
 /atom/movable
 	var/list/stored_chat_text
 
-/atom/movable/proc/animate_chat(message, decl/language/language, small, list/show_to, duration)
+/atom/movable/proc/animate_chat(message, decl/language/language, small, list/show_to, duration = 5 SECONDS)
 	set waitfor = FALSE
 
-	// Get rid of any URL schemes that might cause BYOND to automatically wrap something in an anchor tag
+	/// Get rid of any URL schemes that might cause BYOND to automatically wrap something in an anchor tag
 	var/static/regex/url_scheme = new(@"[A-Za-z][A-Za-z0-9+-\.]*:\/\/", "g")
 	message = replacetext(message, url_scheme, "")
 
@@ -47,17 +47,17 @@ var/global/list/floating_chat_colors = list()
 	I.plane = HUD_PLANE
 	I.layer = HUD_ABOVE_ITEM_LAYER
 	I.alpha = 0
-	I.maptext_width = 80
+	I.maptext_width = 96
 	I.maptext_height = 64
-	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
+	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA | KEEP_APART
 	I.pixel_w = -round(I.maptext_width/2) + 16
 
 	style = "font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: [size]px; [style]"
 	I.maptext = "<center><span style=\"[style]\">[message]</span></center>"
-	animate(I, 1, alpha = 255, pixel_z = 16)
+	animate(I, 0.2 SECONDS, alpha = 255, pixel_z = 16)
 
 	for(var/image/old in holder.stored_chat_text)
-		animate(old, 2, pixel_z = old.pixel_z + 8)
+		animate(old, 0.2 SECONDS, pixel_z = old.pixel_z + 8)
 	LAZYADD(holder.stored_chat_text, I)
 
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/remove_floating_text, holder, I), duration)
@@ -66,5 +66,5 @@ var/global/list/floating_chat_colors = list()
 	return I
 
 /proc/remove_floating_text(atom/movable/holder, image/I)
-	animate(I, 2, pixel_z = I.pixel_z + 10, alpha = 0)
+	animate(I, 0.7 SECONDS, pixel_z = I.pixel_z + 10, alpha = 0, flags = ANIMATION_PARALLEL)
 	LAZYREMOVE(holder.stored_chat_text, I)
