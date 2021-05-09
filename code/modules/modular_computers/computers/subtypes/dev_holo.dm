@@ -31,8 +31,8 @@
 	var/preset_text   = "" //Will contain text file with this text, if not empty.
 	var/display_color = "#0a50ff"
 
-/obj/item/modular_computer/holotablet/LateInitialize()
-	. = ..()
+/obj/item/modular_computer/holotablet/install_default_programs()
+	..()
 	if(preset_text)
 		var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
 		var/obj/item/stock_parts/computer/hard_drive/D = assembly.get_component(/obj/item/stock_parts/computer/hard_drive)
