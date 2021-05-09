@@ -5,7 +5,7 @@
 	icon_state = "tablet"
 
 	w_class = ITEM_SIZE_SMALL
-	light_strength = 5 // same as PDAs
+	light_strength = 2 // same as PDAs
 
 	interact_sounds = list('sound/machines/pda_click.ogg')
 	interact_sound_volume = 20
