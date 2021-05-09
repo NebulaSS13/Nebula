@@ -70,10 +70,6 @@
 		overlays += I
 	update_lighting()
 
-/obj/machinery/vending/games/Initialize()
-	products[/obj/item/modular_computer/holotablet] = 5
-	. = ..()
-
 //Subtypes. It's not exactly.. well, presets, so i'll put it here for now.
 
 /obj/item/modular_computer/holotablet/round
