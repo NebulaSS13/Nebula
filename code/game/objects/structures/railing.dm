@@ -300,9 +300,5 @@
 		if(!anchored || material.is_brittle())
 			take_damage(maxhealth) // Fatboy
 
-	var/start_layer = user.layer
-	user.layer = VEHICLE_LOAD_LAYER
-	addtimer(CALLBACK(src, .proc/reset_layer, start_layer, user), 2)
-
-/obj/structure/railing/proc/reset_layer(start_layer, mob/living/user)
-	user.layer = start_layer
+	user.jump_layer_shift()
+	addtimer(CALLBACK(user, /mob/living/proc/jump_layer_shift_end), 2)

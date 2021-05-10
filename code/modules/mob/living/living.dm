@@ -672,7 +672,9 @@ default behaviour is:
 	return 1
 
 /mob/living/reset_layer()
-	if(hiding)
+	if (jumping)
+		layer = VEHICLE_LOAD_LAYER
+	else if (hiding)
 		layer = HIDING_MOB_LAYER
 	else
 		..()
@@ -897,3 +899,11 @@ default behaviour is:
 			target.IgniteMob()
 		else if(!on_fire && target.on_fire)
 			IgniteMob()
+
+/mob/living/proc/jump_layer_shift()
+	jumping = TRUE
+	reset_layer()
+
+/mob/living/proc/jump_layer_shift_end()
+	jumping = FALSE
+	reset_layer()
