@@ -159,5 +159,5 @@
 
 			entry.mechanics_text = jointext(material_info, null)
 			SScodex.add_entry_by_string(entry.display_name, entry)
-			items += entry.display_name
+			items |= entry.display_name
 	. = ..()

@@ -16,5 +16,5 @@
 		var/datum/codex_entry/entry = new(_display_name = lowertext(trim("[skill.name] (skill)")), _lore_text = skill.desc, _mechanics_text = jointext(skill_info, "<br>"))
 		SScodex.add_entry_by_string(entry.display_name, entry)
 		SScodex.add_entry_by_string(skill.name, entry)
-		items += skill.name
+		items |= skill.name
 	. = ..()
