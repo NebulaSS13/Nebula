@@ -17,7 +17,7 @@
 
 /obj/item/wrench/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/tool, list(TOOL_WRENCH = TOOL_QUALITY_DEFAULT))
+	set_extension(src, /datum/extension/tool, list(TOOL_WRENCH = TOOL_QUALITY_DEFAULT, TOOL_BONE_SETTER = TOOL_QUALITY_BAD))
 
 /obj/item/wrench/on_update_icon()
 	. = ..()
