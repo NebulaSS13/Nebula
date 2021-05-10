@@ -12,18 +12,14 @@
 		strength = max(2, strength * user.get_jump_distance())
 		if(reflexively)
 			strength *= reflexive_modifier
-		var/start_layer = user.layer
-		user.layer = VEHICLE_LOAD_LAYER
+		user.jump_layer_shift()
 		animate(user, pixel_z = 16, time = 3, easing = SINE_EASING | EASE_IN)
 		animate(pixel_z = user.default_pixel_z, time = 3, easing = SINE_EASING | EASE_OUT)
 		user.throw_at(get_turf(target), strength, 1, user, FALSE, CALLBACK(src, /decl/maneuver/leap/proc/end_leap, user, target, old_pass_flags))
-		addtimer(CALLBACK(src, .proc/reset_layer, start_layer, user), 4)
+		addtimer(CALLBACK(user, /mob/living/proc/jump_layer_shift_end), 4.5)
 
 /decl/maneuver/leap/proc/end_leap(var/mob/living/user, var/atom/target, var/pass_flag)
 	user.pass_flags = pass_flag
-
-/decl/maneuver/leap/proc/reset_layer(start_layer, mob/living/user)
-	user.layer = start_layer
 
 /decl/maneuver/leap/show_initial_message(var/mob/living/user, var/atom/target)
 	user.visible_message(SPAN_WARNING("\The [user] crouches, preparing for a leap!"))
