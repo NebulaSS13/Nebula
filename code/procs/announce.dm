@@ -51,7 +51,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 
 	var/msg = FormMessage(message, message_title)
 	for(var/mob/M in global.player_list)
-		if((M.z in (zlevels | global.using_map.admin_levels)) && !istype(M,/mob/new_player) && !isdeaf(M))
+		if((get_z(M) in (zlevels | global.using_map.admin_levels)) && !isnewplayer(M) && !isdeaf(M))
 			to_chat(M, msg)
 			if(message_sound)
 				sound_to(M, message_sound)
