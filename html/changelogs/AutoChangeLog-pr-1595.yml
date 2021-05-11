@@ -1,0 +1,6 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - tweak: Fluid interactions with atoms have been disabled until they can be optimized
+      to be less of a server killer. Mobs will still drown, you just won't melt in
+      acid. On the plus side, fluids are more performant now.
