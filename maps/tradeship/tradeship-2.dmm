@@ -503,6 +503,9 @@
 	opacity = 0
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 6
+	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/atmos)
 "aU" = (
@@ -557,7 +560,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
 	dir = 4
 	},
-/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/engine/aft)
 "aZ" = (
@@ -565,7 +567,6 @@
 	dir = 4;
 	id_tag = "scram"
 	},
-/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/engine/aft)
 "ba" = (
@@ -3457,7 +3458,6 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/engineering)
 "ib" = (
-/obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
@@ -3466,6 +3466,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
+/obj/machinery/atmospherics/pipe/simple/visible/red,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/atmos)
 "ic" = (
@@ -3880,11 +3881,15 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/atmos)
 "iK" = (
-/obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/effect/floor_decal/corner/white{
 	icon_state = "corner_white";
 	dir = 6
 	},
+/obj/machinery/atmospherics/pipe/manifold/visible/red{
+	icon_state = "map";
+	dir = 4
+	},
+/obj/machinery/meter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/atmos)
 "iL" = (
@@ -3975,9 +3980,6 @@
 "iW" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4
-	},
 /obj/machinery/door/blast/regular{
 	density = 0;
 	dir = 4;
@@ -3986,18 +3988,18 @@
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/turf/simulated/floor/plating,
-/area/ship/trade/maintenance/atmos)
-"iY" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
 	icon_state = "map";
 	dir = 4
 	},
+/turf/simulated/floor/plating,
+/area/ship/trade/maintenance/atmos)
+"iY" = (
 /obj/effect/floor_decal/corner/white{
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/machinery/meter,
+/obj/machinery/atmospherics/valve/open,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/atmos)
 "iZ" = (
@@ -4153,17 +4155,6 @@
 /obj/effect/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/power)
-"jo" = (
-/obj/machinery/atmospherics/portables_connector{
-	dir = 1
-	},
-/obj/machinery/portable_atmospherics/powered/scrubber,
-/obj/effect/floor_decal/corner/white{
-	icon_state = "corner_white";
-	dir = 6
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/ship/trade/maintenance/atmos)
 "jp" = (
 /obj/structure/window/reinforced{
 	dir = 8
@@ -4284,6 +4275,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
+/obj/machinery/atmospherics/pipe/simple/visible/red,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/atmos)
 "jE" = (
@@ -4435,6 +4427,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
+/obj/machinery/atmospherics/pipe/simple/visible/red,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/atmos)
 "jR" = (
@@ -4538,13 +4531,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/ship/trade/maintenance/atmos)
-"ke" = (
-/obj/machinery/light,
-/obj/effect/floor_decal/corner/red{
-	dir = 5
-	},
+/obj/machinery/atmospherics/pipe/simple/visible/red,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/atmos)
 "kf" = (
@@ -4586,11 +4573,13 @@
 "kk" = (
 /obj/machinery/atmospherics/unary/vent_pump/engine{
 	dir = 4;
-	external_pressure_bound = 4000;
-	external_pressure_bound_default = 4000;
+	external_pressure_bound = 0;
+	external_pressure_bound_default = 0;
 	icon_state = "map_vent";
+	id_tag = "tradeship_engine_vent";
+	controlled = 0;
 	pump_direction = 0;
-	use_power = 1
+	use_power = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
 	dir = 1
@@ -4801,6 +4790,13 @@
 /obj/structure/shuttle/engine/propulsion/burst/right,
 /turf/simulated/floor/airless,
 /area/ship/trade/shuttle/outgoing)
+"lC" = (
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/ship/trade/maintenance/atmos)
 "lZ" = (
 /obj/structure/sign/redcross{
 	pixel_w = 32
@@ -5685,6 +5681,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/hallway)
+"xI" = (
+/obj/machinery/light,
+/turf/simulated/floor/tiled/techfloor,
+/area/ship/trade/maintenance/atmos)
 "xL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 9
@@ -5806,6 +5806,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/ship/trade/command/captain)
+"zP" = (
+/obj/machinery/atmospherics/pipe/simple/visible/green,
+/obj/machinery/atmospherics/binary/pump{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/ship/trade/maintenance/atmos)
 "Ab" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 6
@@ -6421,6 +6428,7 @@
 	},
 /obj/machinery/light,
 /obj/structure/emergency_dispenser/west,
+/obj/machinery/meter,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/atmos)
 "Ic" = (
@@ -7178,6 +7186,11 @@
 	icon_state = "warning";
 	dir = 4
 	},
+/obj/machinery/button/toggle/engine{
+	name = "engine vent control button";
+	pixel_x = 24;
+	id_tag = "tradeship_engine_vent"
+	},
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/engine/aft)
 "QW" = (
@@ -7218,6 +7231,17 @@
 	},
 /turf/simulated/floor/wood/yew,
 /area/ship/trade/unused)
+"Rl" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
+	},
+/turf/simulated/floor/airless,
+/area/ship/trade/maintenance/atmos)
 "Rq" = (
 /obj/structure/cable{
 	icon_state = "4-9"
@@ -7662,10 +7686,6 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/garden)
 "Xc" = (
-/obj/machinery/atmospherics/binary/pump/on{
-	dir = 8;
-	target_pressure = 101.325
-	},
 /obj/machinery/light{
 	icon_state = "bulb1";
 	dir = 1
@@ -7673,12 +7693,33 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
 	},
+/obj/machinery/atmospherics/binary/pump/on{
+	dir = 8;
+	target_pressure = 101.325
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/maintenance/atmos)
 "Xz" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/trade/maintenance/hallway)
+"XG" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "scraplock";
+	name = "External Blast Doors";
+	opacity = 0
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	icon_state = "11";
+	dir = 5
+	},
+/turf/simulated/floor/plating,
+/area/ship/trade/maintenance/atmos)
 "XR" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -10025,8 +10066,8 @@ aa
 aa
 aa
 aa
+aa
 Lx
-jB
 jB
 jB
 kq
@@ -10105,10 +10146,10 @@ kR
 GF
 GF
 GF
-GF
+Rl
 iV
+Rl
 GF
-rx
 GF
 rx
 aa
@@ -10189,7 +10230,7 @@ hD
 hD
 aT
 iW
-aT
+XG
 hD
 hD
 GF
@@ -10269,9 +10310,9 @@ HR
 hD
 hD
 Cb
+zP
 iJ
 Gb
-iJ
 Ib
 hD
 hD
@@ -10353,12 +10394,12 @@ ib
 is
 iK
 iY
-jo
+iK
 jD
 jQ
 kd
+lC
 hD
-GF
 GF
 aa
 aa
@@ -10438,8 +10479,8 @@ iZ
 jp
 jE
 jR
-ke
-hD
+kf
+xI
 hD
 GF
 jB
