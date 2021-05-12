@@ -89,7 +89,6 @@
 		/decl/emote/audible/moan,
 		/decl/emote/audible/grunt,
 		/decl/emote/audible/slap,
-		/decl/emote/human,
 		/decl/emote/human/deathgasp,
 		/decl/emote/audible/giggle,
 		/decl/emote/audible/scream,
@@ -143,7 +142,8 @@
 		/decl/emote/visible/tfist,
 		/decl/emote/visible/tilt,
 		/decl/emote/visible/spin,
-		/decl/emote/visible/sidestep
+		/decl/emote/visible/sidestep,
+		/decl/emote/visible/vomit
 	)
 
 /mob/living/silicon/robot
