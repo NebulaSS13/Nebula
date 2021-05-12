@@ -34,19 +34,23 @@ var/global/list/surgery_tool_exception_cache = list()
 
 //returns how fast the tool is for this step
 /decl/surgery_step/proc/get_speed_modifier(var/mob/user, var/mob/target, var/obj/item/tool)
-	. = 1
 	for(var/T in allowed_tools)
-		if(ispath(T, /decl/tool_archetype))
-			. = min(., tool.get_tool_speed(T))
+		if(ispath(T, /decl/tool_archetype) && tool.get_tool_quality(T) > 0)
+			if(isnull(.))
+				. = tool.get_tool_speed(T)
+			else
+				. = min(. , tool.get_tool_speed(T))
+	if(isnull(.))
+		. = 1
 
 //returns how well tool is suited for this step
 /decl/surgery_step/proc/tool_quality(obj/item/tool)
+	. = 0
 	for(var/T in allowed_tools)
-		if(ispath(T, /decl/tool_archetype))
-			return round(allowed_tools[T] * tool.get_tool_quality(T))
-		else if(istype(tool,T))
+		if(istype(tool,T))
 			return allowed_tools[T]
-	return 0
+		if(ispath(T, /decl/tool_archetype))
+			. = max((. || 0), allowed_tools[T] * tool.get_tool_quality(T))
 
 /decl/surgery_step/proc/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	return TRUE
@@ -252,7 +256,7 @@ var/global/list/surgery_tool_exception_cache = list()
 				LAZYSET(global.surgeries_in_progress["\ref[M]"], zone, operation_data)
 				S.begin_step(user, M, zone, src)
 				var/skill_reqs = S.get_skill_reqs(user, M, src, zone)
-				var/duration = user.skill_delay_mult(skill_reqs[1]) * rand(S.min_duration, S.max_duration) * S.get_speed_modifier(user, M, src)
+				var/duration = max(1, round(user.skill_delay_mult(skill_reqs[1]) * rand(S.min_duration, S.max_duration) * S.get_speed_modifier(user, M, src)))
 				if(prob(S.success_chance(user, M, src, zone)) && do_mob(user, M, duration))
 					S.end_step(user, M, zone, src)
 					handle_post_surgery()
