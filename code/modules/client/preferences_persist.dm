@@ -39,7 +39,7 @@
 /datum/preferences/proc/load_preferences()
 	var/datum/pref_record_reader/R = load_pref_record("preferences")
 	if(!R)
-		R = new /datum/pref_record_reader/null(PREF_SER_VERSION)
+		R = new /datum/pref_record_reader/null_reader(PREF_SER_VERSION)
 	player_setup.load_preferences(R)
 
 /datum/preferences/proc/save_preferences()
@@ -62,12 +62,12 @@
 
 	if(slot == SAVE_RESET)
 		// If we're resetting, set everything to null. Sanitization will clean it up
-		var/datum/pref_record_reader/null/R = new(PREF_SER_VERSION)
+		var/datum/pref_record_reader/null_reader/R = new(PREF_SER_VERSION)
 		player_setup.load_character(R)
 	else
 		var/datum/pref_record_reader/R = load_pref_record(get_slot_key(slot))
 		if(!R)
-			R = new /datum/pref_record_reader/null(PREF_SER_VERSION)
+			R = new /datum/pref_record_reader/null_reader(PREF_SER_VERSION)
 		player_setup.load_character(R)
 
 	update_preview_icon()
