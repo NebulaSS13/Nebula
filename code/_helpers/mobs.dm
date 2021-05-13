@@ -47,7 +47,7 @@
 /proc/random_name(gender, species)
 	if(species)
 		var/decl/species/current_species = get_species_by_key(species)
-		if(current_species) 
+		if(current_species)
 			var/decl/cultural_info/current_culture = GET_DECL(current_species.default_cultural_info[TAG_CULTURE])
 			if(current_culture)
 				return current_culture.get_random_name(null, gender)
@@ -98,7 +98,7 @@
 /proc/get_exposed_defense_zone(var/atom/movable/target)
 	return pick(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_CHEST, BP_GROIN)
 
-/proc/do_mob(mob/user , mob/target, time = 30, target_zone = 0, uninterruptible = 0, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT)
+/proc/do_mob(mob/user , mob/target, time = 30, target_zone = 0, uninterruptible = 0, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT, theme = /datum/progress_bar/default)
 	if(!user || !target)
 		return 0
 	var/user_loc = user.loc
@@ -110,9 +110,9 @@
 	var/target_loc = target.loc
 
 	var/holding = user.get_active_hand()
-	var/datum/progressbar/progbar
+	var/datum/progress_bar/progbar
 	if (progress)
-		progbar = new(user, time, target)
+		progbar = create_progress_bar(user, time, target, theme)
 
 	var/endtime = world.time+time
 	var/starttime = world.time
@@ -148,9 +148,9 @@
 			break
 
 	if (progbar)
-		qdel(progbar)
+		progbar.stop()
 
-/proc/do_after(mob/user, delay, atom/target = null, needhand = 1, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT, var/same_direction = 0, var/can_move = 0)
+/proc/do_after(mob/user, delay, atom/target = null, needhand = 1, progress = 1, incapacitation_flags = INCAPACITATION_DEFAULT, same_direction = 0, can_move = 0, theme = /datum/progress_bar/default)
 	if(!user)
 		return 0
 	var/atom/target_loc = null
@@ -170,9 +170,9 @@
 
 	var/holding = user.get_active_hand()
 
-	var/datum/progressbar/progbar
+	var/datum/progress_bar/progbar
 	if (progress)
-		progbar = new(user, delay, target)
+		progbar = create_progress_bar(user, delay, target, theme)
 
 	var/endtime = world.time + delay
 	var/starttime = world.time
@@ -200,7 +200,7 @@
 				break
 
 	if (progbar)
-		qdel(progbar)
+		progbar.stop()
 
 /proc/able_mobs_in_oview(var/origin)
 	var/list/mobs = list()
