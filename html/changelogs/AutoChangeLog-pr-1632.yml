@@ -1,0 +1,5 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - tweak: Double-clicking to see turf contents is now a preference. You can choose
+      alt click (default), double click or nothing.
