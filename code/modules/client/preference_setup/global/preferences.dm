@@ -17,6 +17,7 @@ var/global/const/PREF_BASIC = "Basic"
 var/global/const/PREF_FULL = "Full"
 var/global/const/PREF_MIDDLE_CLICK = "Middle click"
 var/global/const/PREF_ALT_CLICK = "Alt click"
+var/global/const/PREF_DOUBLE_CLICK = "Double click"
 var/global/const/PREF_CTRL_CLICK = "Ctrl click"
 var/global/const/PREF_CTRL_SHIFT_CLICK = "Ctrl+shift click"
 var/global/const/PREF_HEAR = "Hear"
@@ -266,6 +267,11 @@ var/global/list/_client_preferences_by_type
 				preference_mob.client.images -= marker_image
 			else
 				preference_mob.client.images |= marker_image
+
+/datum/client_preference/show_turf_contents
+	description = "Show turf contents in side panel"
+	key = "TURF_CONTENTS"
+	options = list(PREF_ALT_CLICK, PREF_DOUBLE_CLICK, PREF_OFF)
 
 /********************
 * General Staff Preferences *
