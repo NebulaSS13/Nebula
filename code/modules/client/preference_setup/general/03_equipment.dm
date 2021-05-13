@@ -22,16 +22,14 @@
 			var/decl/backpack_outfit/backpack_outfit = bos[bo]
 			backpacks_by_name[backpack_outfit.name] = backpack_outfit
 
-/datum/category_item/player_setup_item/physical/equipment/load_character(var/savefile/S)
-	var/load_backbag
-
-	from_file(S["all_underwear"], pref.all_underwear)
-	from_file(S["all_underwear_metadata"], pref.all_underwear_metadata)
-	from_file(S["backpack"], load_backbag)
-	from_file(S["backpack_metadata"], pref.backpack_metadata)
+/datum/category_item/player_setup_item/physical/equipment/load_character(datum/pref_record_reader/R)
+	pref.all_underwear =          R.read("all_underwear")
+	pref.all_underwear_metadata = R.read("all_underwear_metadata")
+	pref.backpack_metadata =      R.read("backpack_metadata")
+	pref.starting_cash_choice =   R.read("starting_cash_choice")
+	var/load_backbag =            R.read("backpack")
 	pref.backpack = backpacks_by_name[load_backbag] || get_default_outfit_backpack()
 
-	from_file(S["starting_cash_choice"], pref.starting_cash_choice)
 	var/list/all_cash_choices = decls_repository.get_decls_of_type(/decl/starting_cash_choice)
 	for(var/ctype in all_cash_choices)
 		var/decl/starting_cash_choice/cash_choice = all_cash_choices[ctype]
@@ -39,14 +37,14 @@
 			pref.starting_cash_choice = ctype
 			break
 
-/datum/category_item/player_setup_item/physical/equipment/save_character(var/savefile/S)
-	to_file(S["all_underwear"], pref.all_underwear)
-	to_file(S["all_underwear_metadata"], pref.all_underwear_metadata)
-	to_file(S["backpack"], pref.backpack.name)
-	to_file(S["backpack_metadata"], pref.backpack_metadata)
-	
+/datum/category_item/player_setup_item/physical/equipment/save_character(datum/pref_record_writer/W)
+	W.write("all_underwear",          pref.all_underwear)
+	W.write("all_underwear_metadata", pref.all_underwear_metadata)
+	W.write("backpack",               pref.backpack.name)
+	W.write("backpack_metadata",      pref.backpack_metadata)
+
 	var/decl/starting_cash_choice/cash_choice = GET_DECL(pref.starting_cash_choice)
-	to_file(S["starting_cash_choice"], lowertext(cash_choice.name))
+	W.write("starting_cash_choice", lowertext(cash_choice.name))
 
 /datum/category_item/player_setup_item/physical/equipment/sanitize_character()
 	if(!istype(pref.all_underwear))
@@ -195,26 +193,3 @@
 		pref.starting_cash_choice = next_in_list(pref.starting_cash_choice, typesof(/decl/starting_cash_choice))
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	return ..()
-
-/datum/category_item/player_setup_item/physical/equipment/update_setup(var/savefile/preferences, var/savefile/character)
-	if(preferences["version"]  <= 16)
-		var/list/old_index_to_backpack_type = list(
-			/decl/backpack_outfit/nothing,
-			/decl/backpack_outfit/backpack,
-			/decl/backpack_outfit/satchel,
-			/decl/backpack_outfit/messenger_bag,
-			/decl/backpack_outfit/satchel,
-			/decl/backpack_outfit/satchel,
-			/decl/backpack_outfit/pocketbook
-		)
-
-		var/old_index
-		from_file(character["backbag"], old_index)
-
-		if(old_index > 0 && old_index <= old_index_to_backpack_type.len)
-			pref.backpack = GET_DECL(old_index_to_backpack_type[old_index])
-		else
-			pref.backpack = get_default_outfit_backpack()
-
-		to_file(character["backpack"], pref.backpack.name)
-		return 1
