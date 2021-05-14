@@ -22,29 +22,29 @@
 	sort_order = 1
 	var/datum/browser/panel
 
-/datum/category_item/player_setup_item/occupation/load_character(var/savefile/S)
-	from_file(S["alternate_option"], 	pref.alternate_option)
-	from_file(S["job_high"],			pref.job_high)
-	from_file(S["job_medium"],			pref.job_medium)
-	from_file(S["job_low"],				pref.job_low)
-	from_file(S["player_alt_titles"],	pref.player_alt_titles)
-	from_file(S["skills_saved"],		pref.skills_saved)
-	from_file(S["branches"],			pref.branches)
-	from_file(S["ranks"],				pref.ranks)
-	from_file(S["hiding_maps"],			pref.hiding_maps)
+/datum/category_item/player_setup_item/occupation/load_character(datum/pref_record_reader/R)
+	pref.alternate_option =  R.read("alternate_option")
+	pref.job_high =          R.read("job_high")
+	pref.job_medium =        R.read("job_medium")
+	pref.job_low =           R.read("job_low")
+	pref.player_alt_titles = R.read("player_alt_titles")
+	pref.skills_saved =      R.read("skills_saved")
+	pref.branches =          R.read("branches")
+	pref.ranks =             R.read("ranks")
+	pref.hiding_maps =       R.read("hiding_maps")
 	load_skills()
 
-/datum/category_item/player_setup_item/occupation/save_character(var/savefile/S)
+/datum/category_item/player_setup_item/occupation/save_character(datum/pref_record_writer/W)
 	save_skills()
-	to_file(S["alternate_option"],		pref.alternate_option)
-	to_file(S["job_high"],				pref.job_high)
-	to_file(S["job_medium"],			pref.job_medium)
-	to_file(S["job_low"],				pref.job_low)
-	to_file(S["player_alt_titles"],		pref.player_alt_titles)
-	to_file(S["skills_saved"],			pref.skills_saved)
-	to_file(S["branches"],				pref.branches)
-	to_file(S["ranks"],					pref.ranks)
-	to_file(S["hiding_maps"],			pref.hiding_maps)
+	W.write("alternate_option",  pref.alternate_option)
+	W.write("job_high",          pref.job_high)
+	W.write("job_medium",        pref.job_medium)
+	W.write("job_low",           pref.job_low)
+	W.write("player_alt_titles", pref.player_alt_titles)
+	W.write("skills_saved",      pref.skills_saved)
+	W.write("branches",          pref.branches)
+	W.write("ranks",             pref.ranks)
+	W.write("hiding_maps",       pref.hiding_maps)
 
 /datum/category_item/player_setup_item/occupation/sanitize_character()
 	if(!istype(pref.job_medium))		pref.job_medium = list()
@@ -204,14 +204,14 @@
 				if(bad_message)
 					. += "<del>[title_link]</del>[help_link][skill_link]<td>[bad_message]</td></tr>"
 					continue
-				else if((global.using_map.default_assistant_title in pref.job_low) && (title != global.using_map.default_assistant_title))
+				else if((global.using_map.default_job_title in pref.job_low) && (title != global.using_map.default_job_title))
 					. += "<font color=grey>[title_link]</font>[help_link][skill_link]<td></td></tr>"
 					continue
 				else
 					. += "[title_link][help_link][skill_link]"
 
 				. += "<td>"
-				if(title == global.using_map.default_assistant_title)//Assistant is special
+				if(title == global.using_map.default_job_title)//Assistant is special
 					var/yes_link = "Yes"
 					var/no_link = "No"
 					if(title in pref.job_low)
@@ -449,7 +449,7 @@
 	if(!job)
 		return 0
 
-	if(role == global.using_map.default_assistant_title)
+	if(role == global.using_map.default_job_title)
 		if(level == JOB_LEVEL_NEVER)
 			pref.job_low -= job.title
 		else

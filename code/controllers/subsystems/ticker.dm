@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(ticker)
 	name = "Ticker"
-	wait = 10
+	wait = 1 SECOND
 	priority = SS_PRIORITY_TICKER
 	init_order = SS_INIT_TICKER
 	flags = SS_NO_TICK_CHECK | SS_KEEP_TIMING

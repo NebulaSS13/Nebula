@@ -1,193 +1,232 @@
 SUBSYSTEM_DEF(fluids)
 	name = "Fluids"
-	wait = 10
+	wait = 1 SECOND
 	flags = SS_NO_INIT
 
-	var/next_fluid_act = 0
-	var/fluid_act_delay = 15 // A bit longer than machines.
-
-	var/list/active_fluids = list()
-	var/list/water_sources = list()
-	var/list/hygiene_props = list()
-
+	var/tmp/list/water_sources =       list()
+	var/tmp/fluid_sources_copied_yet = FALSE
 	var/tmp/list/processing_sources
+
+	var/tmp/list/pending_flows =       list()
+	var/tmp/flows_copied_yet =         FALSE
+	var/tmp/list/processing_flows
+
+	var/tmp/list/holders_to_update =   list()
+	var/tmp/holders_copied_yet =       FALSE
+	var/tmp/list/processing_holders
+
+	var/tmp/list/active_fluids =       list()
+	var/tmp/active_fluids_copied_yet = FALSE
 	var/tmp/list/processing_fluids
 
-	var/obj/equalizing_reagent_holder
-	var/tmp/active_fluids_copied_yet = FALSE
-	var/tmp/fluid_sources_copied_yet = FALSE
-	var/af_index = 1
-	var/fs_index = 1
-	var/list/fluid_images = list()
-
-	var/list/gurgles = list(
+	var/tmp/list/fluid_images =        list()
+	var/tmp/list/checked_targets =     list()
+	var/tmp/list/gurgles =             list(
 		'sound/effects/gurgle1.ogg',
 		'sound/effects/gurgle2.ogg',
 		'sound/effects/gurgle3.ogg',
 		'sound/effects/gurgle4.ogg'
-		)
-
-/datum/controller/subsystem/fluids/New(start_timeofday)
-	equalizing_reagent_holder = new
-	equalizing_reagent_holder.unacidable = TRUE
-	equalizing_reagent_holder.atom_flags |= (ATOM_FLAG_NO_TEMP_CHANGE|ATOM_FLAG_OPEN_CONTAINER|ATOM_FLAG_NO_REACT)
-	equalizing_reagent_holder.create_reagents(FLUID_MAX_DEPTH * 9 * 3)
-	..()
+	)
 
 /datum/controller/subsystem/fluids/stat_entry()
 	..("A:[active_fluids.len] S:[water_sources.len]")
 
 /datum/controller/subsystem/fluids/fire(resumed = 0)
 
-	if (!resumed)
+	// Predeclaring a bunch of vars for performance purposes.
+	var/obj/effect/fluid/other_fluid =   null
+	var/obj/effect/fluid/current_fluid = null
+	var/datum/reagents/reagent_holder =  null
+	var/list/candidates =                null
+	var/turf/below =                     null
+	var/turf/current_turf =              null
+	var/turf/neighbor =                  null
+	var/turf/lowest_neighbor =           null
+
+	var/removing =                       0
+	var/spread_dir =                     0
+	var/coming_from =                    0
+	var/flow_amount =                    0
+	var/current_depth =                  0
+	var/current_turf_depth =             0
+	var/neighbor_depth =                 0
+	var/lowest_neighbor_flow =           0
+	var/flooded_a_neighbor =             FALSE
+	var/lowest_neighbor_depth =          INFINITY
+
+	if(!resumed)
 		active_fluids_copied_yet = FALSE
+		holders_copied_yet =       FALSE
+		flows_copied_yet =         FALSE
 		fluid_sources_copied_yet = FALSE
-		af_index = 1
-		fs_index = 1
+		checked_targets.Cut()
 
 	if(!fluid_sources_copied_yet)
 		fluid_sources_copied_yet = TRUE
 		processing_sources = water_sources.Copy()
 
-	var/list/checked = list()
-	while(fs_index <= processing_sources.len)
+	while(processing_sources.len)
 
-		var/turf/T = processing_sources[fs_index++]
+		current_turf = processing_sources[processing_sources.len]
+		processing_sources.len--
 
-		var/flooded_a_neighbor
-		UPDATE_FLUID_BLOCKED_DIRS(T)
-		for(var/spread_dir in global.cardinal)
-			if(T.fluid_blocked_dirs & spread_dir) 
+		flooded_a_neighbor = FALSE
+		UPDATE_FLUID_BLOCKED_DIRS(current_turf)
+		for(spread_dir in global.cardinal)
+			if(current_turf.fluid_blocked_dirs & spread_dir) 
 				continue
-			var/turf/next = get_step(T, spread_dir)
-			if(!istype(next) || next.flooded) 
+			neighbor = get_step(current_turf, spread_dir)
+			if(!istype(neighbor) || neighbor.flooded) 
 				continue
-			UPDATE_FLUID_BLOCKED_DIRS(next)
-			if((next.fluid_blocked_dirs & global.reverse_dir[spread_dir]) || !next.CanFluidPass(spread_dir) || checked[next])
+			UPDATE_FLUID_BLOCKED_DIRS(neighbor)
+			if((neighbor.fluid_blocked_dirs & global.reverse_dir[spread_dir]) || !neighbor.CanFluidPass(spread_dir) || checked_targets[neighbor])
 				continue
-			checked[next] = TRUE
+			checked_targets[neighbor] = TRUE
 			flooded_a_neighbor = TRUE
-			var/obj/effect/fluid/F = locate() in next
-			if(!F)
-				F = new /obj/effect/fluid(next)
-			if(F.reagents.total_volume < FLUID_MAX_DEPTH)
-				F.reagents.add_reagent(/decl/material/liquid/water, FLUID_MAX_DEPTH - F.reagents.total_volume)
+			neighbor.add_fluid(/decl/material/liquid/water, FLUID_MAX_DEPTH)
 
 		if(!flooded_a_neighbor)
-			water_sources -= T
+			REMOVE_ACTIVE_FLUID_SOURCE(current_turf)
 
 		if (MC_TICK_CHECK)
 			return
 
-	if (!active_fluids_copied_yet)
+	if(!active_fluids_copied_yet)
 		active_fluids_copied_yet = TRUE
 		processing_fluids = active_fluids.Copy()
 
-	// We need to iterate through this list a few times, so we're using indexes instead of a while-truncate loop.
-	checked.Cut()
-	while (af_index <= processing_fluids.len)
+	while(processing_fluids.len)
 
-		var/obj/effect/fluid/F = processing_fluids[af_index++]
-		if(QDELETED(F))
-			processing_fluids -= F
+		current_fluid = processing_fluids[processing_fluids.len]
+		processing_fluids.len--
+
+		REMOVE_ACTIVE_FLUID(current_fluid) // This will be refreshed if our level changes at all in this iteration of the subsystem.
+
+		if(QDELETED(current_fluid))
 			continue
 
-		var/turf/T = F.loc
-		checked[T] = TRUE
-		if(!T.CanFluidPass() || F.reagents.total_volume <= FLUID_EVAPORATION_POINT)
-			qdel(F)
+		current_turf = current_fluid.loc
+		if(!current_turf.CanFluidPass())
+			qdel(current_fluid)
 			continue
 
-		if(T.density || isspaceturf(T) || istype(T, /turf/exterior))
-			var/removing = round(F.reagents.total_volume * 0.5)
+		reagent_holder = current_fluid.reagents
+		UPDATE_FLUID_BLOCKED_DIRS(current_turf)
+		current_depth = reagent_holder?.total_volume || 0
+
+		// How is this happening
+		if(current_depth == -1.#IND || current_depth == 1.#IND)
+			qdel(current_fluid)
+			continue
+
+		// Evaporation: todo, move liquid into current_turf.zone air contents if applicable.
+		if(current_depth <= FLUID_PUDDLE && prob(15))
+			current_turf.remove_fluids(min(current_depth, 1), defer_update = TRUE)
+		if(current_depth <= FLUID_QDEL_POINT)
+			qdel(current_fluid)
+			continue
+
+		if(isspaceturf(current_turf) || istype(current_turf, /turf/exterior))
+			removing = round(current_depth * 0.5)
 			if(removing > 0)
-				F.reagents.remove_any(removing)
+				current_turf.remove_fluids(removing, defer_update = TRUE)
 			else
-				F.reagents.clear_reagents()
-			if(F.reagents.total_volume <= FLUID_EVAPORATION_POINT)
-				qdel(F)
-			continue
+				reagent_holder.clear_reagents()
+			if(current_depth <= FLUID_QDEL_POINT)
+				qdel(current_fluid)
+				continue
 
-		REMOVE_ACTIVE_FLUID(F) // This will be refreshed if our level changes at all in this iteration of the subsystem.
-		UPDATE_FLUID_BLOCKED_DIRS(T)
-		if(!(T.fluid_blocked_dirs & DOWN) && T.is_open() && T.has_gravity())
-			var/turf/below = GetBelow(T)
+		if(!(current_turf.fluid_blocked_dirs & DOWN) && current_turf.CanFluidPass(DOWN) && current_turf.is_open() && current_turf.has_gravity())
+			below = GetBelow(current_turf)
 			if(below)
 				UPDATE_FLUID_BLOCKED_DIRS(below)
-				if(!(below.fluid_blocked_dirs & UP))
-					var/obj/effect/fluid/other = locate() in below
-					if(!other)
-						other = new(below)
-					if(other && other.reagents.total_volume < FLUID_MAX_DEPTH)
-						F.reagents.trans_to_holder(other.reagents, min(Floor(F.reagents.total_volume*0.5), FLUID_MAX_DEPTH - other.reagents.total_volume))
-						continue
-		
-		if(F.reagents.total_volume > FLUID_PUDDLE)
-			for(var/spread_dir in global.cardinal)
-				if(T.fluid_blocked_dirs & spread_dir)
-					continue
-				var/turf/neighbor_turf = get_step(T, spread_dir)
-				if(!istype(neighbor_turf) || neighbor_turf.flooded)
-					continue
-				var/coming_from = global.reverse_dir[spread_dir]
-				UPDATE_FLUID_BLOCKED_DIRS(neighbor_turf)
-				if((neighbor_turf.fluid_blocked_dirs & coming_from) || checked[neighbor_turf] || !neighbor_turf.CanFluidPass(coming_from))
-					continue
-				checked[neighbor_turf] = TRUE
-				var/obj/effect/fluid/other = locate() in neighbor_turf.contents
-				if(!other)
-					if(F.reagents.total_volume >= 2)
-						other = new /obj/effect/fluid(neighbor_turf)
-						F.reagents.trans_to_holder(other.reagents, 1)
-					else
-						qdel(F)
-						break
+				if(!(below.fluid_blocked_dirs & UP) && below.CanFluidPass(UP))
+					other_fluid = locate() in below
+					if(!other_fluid)
+						other_fluid = new(below)
+					if(!QDELETED(other_fluid) && other_fluid.reagents.total_volume < FLUID_MAX_DEPTH)
+						current_turf.transfer_fluids_to(below, min(Floor(current_depth*0.5), FLUID_MAX_DEPTH - other_fluid.reagents.total_volume), defer_update = TRUE)
+
+		if(current_depth <= FLUID_PUDDLE)
+			continue
+
+		// Flow into the lowest level neighbor.
+		lowest_neighbor_depth = INFINITY
+		lowest_neighbor_flow =  0
+		candidates = list()
+		current_turf_depth = current_depth + current_turf.get_physical_height()
+		for(spread_dir in global.cardinal)
+			if(current_turf.fluid_blocked_dirs & spread_dir)
+				continue
+			neighbor = get_step(current_turf, spread_dir)
+			if(!neighbor)
+				continue
+			UPDATE_FLUID_BLOCKED_DIRS(neighbor)
+			coming_from = global.reverse_dir[spread_dir]
+			if((neighbor.fluid_blocked_dirs & coming_from) || !neighbor.CanFluidPass(coming_from) || neighbor.is_flooded(absolute = TRUE) || !neighbor.CanFluidPass(global.reverse_dir[spread_dir]))
+				continue
+			other_fluid = locate() in neighbor
+
+			neighbor_depth = (other_fluid?.reagents?.total_volume || 0) + neighbor.get_physical_height()
+			flow_amount = round((current_turf_depth - neighbor_depth)*0.5)
+
+			if(flow_amount <= FLUID_PUDDLE)
+				continue
+			if(neighbor_depth < lowest_neighbor_depth)
+				candidates = list(neighbor)
+				lowest_neighbor_depth = neighbor_depth
+				lowest_neighbor_flow = flow_amount
+			else if(neighbor_depth == lowest_neighbor_depth)
+				candidates += neighbor
+
+		if(length(candidates))
+			lowest_neighbor = pick(candidates)
+			current_turf.transfer_fluids_to(lowest_neighbor, lowest_neighbor_flow, defer_update = TRUE)
+			pending_flows[current_fluid] = TRUE
+
+		if(lowest_neighbor_flow >= FLUID_PUSH_THRESHOLD)
+			current_fluid.last_flow_strength = lowest_neighbor_flow
+			current_fluid.last_flow_dir = get_dir(current_turf, lowest_neighbor)
+		else
+			current_fluid.last_flow_strength = 0
+			current_fluid.last_flow_dir = 0
 
 		if (MC_TICK_CHECK)
+			break 
+
+	if(!holders_copied_yet)
+		holders_copied_yet = TRUE
+		processing_holders = holders_to_update.Copy()
+
+	while(processing_holders.len)
+		reagent_holder = processing_holders[processing_holders.len]
+		processing_holders.len--
+		if(!QDELETED(reagent_holder))
+			reagent_holder.handle_update()
+		if(MC_TICK_CHECK)
 			return
 
-	af_index = 1
-	while (af_index <= processing_fluids.len)
+	if(!flows_copied_yet)
+		flows_copied_yet = TRUE
+		processing_flows = pending_flows.Copy()
 
-		var/obj/effect/fluid/F = processing_fluids[af_index++]
-		if (QDELETED(F))
-			processing_fluids -= F
+	while(processing_flows.len)
+		current_fluid = processing_flows[processing_flows.len]
+		processing_flows.len--
+		if(!istype(current_fluid) || QDELETED(current_fluid) || !isturf(current_fluid.loc))
 			continue
-
-		// Equalize across our neighbors. Hardcoded here for performance reasons.
-		if(!length(F.neighbors) || F.reagents.total_volume <= FLUID_PUDDLE)
-			continue
-
-		var/sufficient_delta = FALSE
-		for(var/thing in F.neighbors)
-			var/obj/effect/fluid/other = thing
-			if(abs(F.reagents.total_volume - other.reagents.total_volume) > FLUID_PUDDLE)
-				sufficient_delta = TRUE
-				break
-
-		F.last_flow_strength = 0
-		var/setting_dir = 0
-		if(sufficient_delta)
-			equalizing_reagent_holder.reagents.clear_reagents()
-			for(var/thing in F.neighbors)
-				var/obj/effect/fluid/other = thing
-				var/flow_amount = F.reagents.total_volume - other.reagents.total_volume
-				if(F.last_flow_strength < flow_amount && flow_amount >= FLUID_PUSH_THRESHOLD)
-					F.last_flow_strength = flow_amount
-					setting_dir = get_dir(F, other)
-				other.reagents.trans_to_holder(equalizing_reagent_holder.reagents, other.reagents.total_volume)
-			F.reagents.trans_to_holder(equalizing_reagent_holder.reagents, F.reagents.total_volume)
-			
-			var/equalize_amt = round(equalizing_reagent_holder.reagents.total_volume / (length(F.neighbors)+1))
-			for(var/thing in F.neighbors)
-				var/obj/effect/fluid/other = thing
-				equalizing_reagent_holder.reagents.trans_to_holder(other.reagents, equalize_amt)
-			equalizing_reagent_holder.reagents.trans_to_holder(F.reagents, equalizing_reagent_holder.reagents.total_volume)
-
-		F.set_dir(setting_dir)
-
-		if (MC_TICK_CHECK)
-			return 
+		reagent_holder = current_fluid.reagents
+		current_turf = current_fluid.loc
+		var/pushed_something = FALSE
+		if(reagent_holder.total_volume > FLUID_SHALLOW && current_fluid.last_flow_strength >= 10)
+			for(var/atom/movable/AM as anything in current_turf.get_contained_external_atoms())
+				if(AM.is_fluid_pushable(current_fluid.last_flow_strength))
+					AM.pushed(current_fluid.last_flow_dir)
+					pushed_something = TRUE
+		if(pushed_something && prob(1))
+			playsound(current_fluid.loc, 'sound/effects/slosh.ogg', 25, 1)
+		if(MC_TICK_CHECK)
+			return
 
 /datum/controller/subsystem/fluids/StartLoadingMap()
 	suspend()
