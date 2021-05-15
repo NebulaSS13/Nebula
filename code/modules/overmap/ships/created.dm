@@ -2,6 +2,7 @@
 	name = ship_name
 	shuttle = ship_name
 
-	if(ship_color) color = ship_color
+	if(ship_color)
+		color = ship_color
 	. = ..(mapload)
 	
