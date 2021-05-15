@@ -26,7 +26,7 @@
 	var/construction_mode = FALSE		 // Whether or not the docking beacon is constructing a ship.
 	var/ship_name = ""
 	var/ship_color = COLOR_WHITE
-	var/list/errors = list()
+	var/list/errors
 
 /obj/machinery/docking_beacon/Initialize()
 	. = ..()
@@ -160,7 +160,7 @@
 
 	if(href_list["toggle_construction"])
 		construction_mode = !construction_mode
-		errors.Cut()
+		LAZYCLEARLIST(errors)
 		return TOPIC_REFRESH
 
 	if(href_list["change_color"])
@@ -169,7 +169,7 @@
 			return TOPIC_NOACTION
 		if(new_color && new_color != ship_color)
 			ship_color = new_color
-			to_chat(user, SPAN_NOTICE("You set \the [src] to create a ship with <font color='[ship_color]'>this color</font>"))
+			to_chat(user, SPAN_NOTICE("You set \the [src] to create a ship with <font color='[ship_color]'>this color</font>."))
 			return TOPIC_HANDLED
 
 	if(href_list["change_ship_name"])
@@ -196,16 +196,14 @@
 		var/confirm = alert(user, "This will permanently finalize the ship, are you sure?", "Ship finalization", "Yes", "No")
 		if(!CanInteract(usr,state))
 			return TOPIC_NOACTION
-		if(confirm == "No")
-			return TOPIC_HANDLED
-		else
+		if(confirm == "Yes")
 			if(create_ship())
 				construction_mode = FALSE
 				ship_name = ""
-				errors.Cut()
+				LAZYCLEARLIST(errors)
 			else
 				to_chat(usr, SPAN_WARNING("Could not finalize the construction of the ship!"))
-			return TOPIC_REFRESH
+		return TOPIC_REFRESH
 
 /obj/machinery/docking_beacon/proc/allow_projection()
 	projecting = FALSE
@@ -244,38 +242,38 @@
 		. |= A
 
 /obj/machinery/docking_beacon/proc/check_ship_validity(var/list/target_areas)
-	errors.Cut()
+	LAZYCLEARLIST(errors)
 	. = TRUE
 	if(!ship_name || length(ship_name) < 5)
-		errors |= "The ship must have a name."
+		LAZYDISTINCTADD(errors, "The ship must have a name.")
 		. = FALSE
 	else
 		// Check if another ship/shuttle has an identical name.
 		for(var/shuttle_tag in SSshuttle.shuttles)
 			if(ship_name == shuttle_tag)
-				errors |= "A ship with an identical name has already been registered."
+				LAZYDISTINCTADD(errors, "A ship with an identical name has already been registered.")
 				. = FALSE
 				break
 	if(!length(target_areas))
-		errors |= "The ship must have defined areas in the construction zone."
+		LAZYDISTINCTADD(errors, "The ship must have defined areas in the construction zone.")
 		return FALSE
 	var/list/area_turfs = list()
 	for(var/area/A in target_areas)
 		for(var/turf/T in A)
 			area_turfs |= T
 			if(length(area_turfs) > MAX_SHIP_TILES)
-				errors |= "The ship is too large."
+				LAZYDISTINCTADD(errors, "The ship is too large.")
 				return FALSE // If the ship is too large, skip contiguity checks.
 			// Stops tearing up the ground with the shuttle, although the landmark should not allow a hole in a planet etc. regardless.
 			if(istype(T, /turf/space) || istype(T, /turf/exterior) || istype(T, /turf/simulated/floor/asteroid))
-				errors |= "The area [A] contains invalid turfs."
+				LAZYDISTINCTADD(errors, "The area [A] contains invalid turfs.")
 				. = FALSE
 				break
 
 	// Check to make sure all the ships areas are connected.
 	. = min(., check_contiguity(area_turfs))
 	if(.)
-		errors |= "The ship is valid for finalization."
+		LAZYDISTINCTADD(errors, "The ship is valid for finalization.")
 
 /obj/machinery/docking_beacon/proc/check_contiguity(var/list/area_turfs)
 	if(!area_turfs || !LAZYLEN(area_turfs))
