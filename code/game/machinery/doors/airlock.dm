@@ -160,10 +160,10 @@ About the new airlock wires panel:
 	return wires.IsIndexCut(wireIndex)
 
 /obj/machinery/door/airlock/proc/canAIControl()
-	return ((src.aiControlDisabled!=1) && (!src.isAllPowerLoss()));
+	return (!QDELETED(src) && (src.aiControlDisabled!=1) && (!src.isAllPowerLoss()))
 
 /obj/machinery/door/airlock/proc/canAIHack()
-	return ((src.aiControlDisabled==1) && (!hackProof) && (!src.isAllPowerLoss()));
+	return (!QDELETED(src) && (src.aiControlDisabled==1) && (!hackProof) && (!src.isAllPowerLoss()))
 
 /obj/machinery/door/airlock/proc/arePowerSystemsOn()
 	if (stat & (NOPOWER|BROKEN))
@@ -898,7 +898,7 @@ About the new airlock wires panel:
 	return ..()
 
 /obj/machinery/door/airlock/can_open(var/forced=0)
-	if(brace)
+	if(QDELETED(src) || brace)
 		return 0
 
 	if(!forced)
@@ -910,7 +910,7 @@ About the new airlock wires panel:
 	return ..()
 
 /obj/machinery/door/airlock/can_close(var/forced=0)
-	if(locked || welded)
+	if(QDELETED(src) || locked || welded)
 		return 0
 
 	if(!forced)

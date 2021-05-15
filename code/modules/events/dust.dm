@@ -49,4 +49,4 @@ The "dust" will damage the hull of the station causin minor hull breaches.
 	for(var/turf/T in starters)
 		for(var/i = 1 to rocks_per_tile)
 			var/obj/item/projectile/bullet/rock/R = new(T)
-			R.launch(targloc, null, startloc.x - T.x, startloc.y - T.y)
+			R.launch(locate(targloc.x + (T.x - startloc.x), targloc.y + (T.y - startloc.y), targloc.z)) // offset the target to match start offset so we fire in straight lines; this is adapted legacy code
