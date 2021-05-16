@@ -1,3 +1,6 @@
+#define RESTART_COUNTER_PATH "data/round_counter.txt"
+
+var/global/restart_counter = null
 var/global/game_id = null
 
 /hook/global_init/proc/generate_gameid()
@@ -72,10 +75,15 @@ var/global/game_id = null
 	//set window title
 	name = "[config.server_name] - [global.using_map.full_name]"
 
+	TgsNew(minimum_required_security_level = TGS_SECURITY_TRUSTED)
+
 	//logs
 	SetupLogs()
 
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
+	if(fexists(RESTART_COUNTER_PATH))
+		global.restart_counter = text2num(trim(file2text(RESTART_COUNTER_PATH)))
+		fdel(RESTART_COUNTER_PATH)
 
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~
@@ -98,6 +106,7 @@ var/global/game_id = null
 	Master.Initialize(10, FALSE)
 
 #undef RECOMMENDED_VERSION
+	TgsInitializationComplete()
 
 var/global/list/world_topic_throttle = list()
 var/global/world_topic_last = world.timeofday
@@ -106,6 +115,8 @@ var/global/world_topic_last = world.timeofday
 #define THROTTLE_MAX_BURST 15 SECONDS
 
 /world/Topic(T, addr, master, key)
+	TGS_TOPIC	//redirect to server tools if necessary
+
 	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]"
 
 	if (global.world_topic_last > world.timeofday)
@@ -441,6 +452,8 @@ var/global/world_topic_last = world.timeofday
 
 	Master.Shutdown()
 
+	TgsReboot()
+
 	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
 		for(var/client/C in global.clients)
 			to_chat(C, link("byond://[config.server]"))
@@ -449,6 +462,25 @@ var/global/world_topic_last = world.timeofday
 		text2file("foo", "reboot_called")
 		to_world("<span class=danger>World reboot waiting for external scripts. Please be patient.</span>")
 		return
+
+	if(TgsAvailable())
+		var/do_hard_reboot
+		// check the hard reboot counter
+		var/ruhr = config.rounds_until_hard_restart
+		switch(ruhr)
+			if(-1)
+				do_hard_reboot = FALSE
+			if(0)
+				do_hard_reboot = TRUE
+			else
+				if(global.restart_counter >= ruhr)
+					do_hard_reboot = TRUE
+				else
+					text2file("[++global.restart_counter]", RESTART_COUNTER_PATH)
+					do_hard_reboot = FALSE
+		if(do_hard_reboot)
+			log_world("World hard rebooted at [time_stamp()]")
+			TgsEndProcess()
 
 	game_log("World rebooted at [time_stamp()]")
 
@@ -483,6 +515,9 @@ var/global/world_topic_last = world.timeofday
 
 /world/proc/load_motd()
 	join_motd = safe_file2text("config/motd.txt", FALSE)
+	var/tm_info = revdata.GetTestMergeInfo()
+	if(join_motd || tm_info)
+		join_motd = join_motd ? "[join_motd]<br>[tm_info]" : tm_info
 
 /proc/load_configuration()
 	config = new /datum/configuration()

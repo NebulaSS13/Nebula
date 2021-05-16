@@ -12,12 +12,21 @@
 /proc/send2mainirc(var/msg)
 	if(config.main_irc)
 		send2irc(config.main_irc, msg)
+	else if(world.TgsAvailable())
+		send2tgs("Server", msg, FALSE)
 	return
 
 /proc/send2adminirc(var/msg)
 	if(config.admin_irc)
 		send2irc(config.admin_irc, msg)
+	else if(world.TgsAvailable())
+		send2tgs("Server", msg, TRUE)
 	return
+
+/proc/send2tgs(msg,msg2,admin)
+	msg = strip_improper(msg)
+	msg2 = strip_improper(msg2)
+	world.TgsTargetedChatBroadcast("[msg] | [msg2]", admin)
 
 /proc/adminmsg2adminirc(client/source, client/target, msg)
 	if(config.admin_irc)
@@ -40,6 +49,8 @@
 			params["trg_char"] = target.mob.real_name || target.mob.name
 
 		export2irc(params)
+		if(world.TgsAvailable())
+			send2tgs("[params["type"]] from [params["src_key"]] ([params["src_char"]]) [target ? "to [istext(target) ? "[params["target"]] ([params["rank"]])" : "[params["trg_key"]] ([params["trg_char"]])"]" : null]", msg, TRUE)
 
 /proc/get_world_url()
 	. = "byond://"

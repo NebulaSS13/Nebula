@@ -255,6 +255,9 @@ var/global/list/gamemode_cache = list()
 		"login_export_addr"
 	)
 
+	/// Rounds until TGS will hard restart DD
+	var/rounds_until_hard_restart
+
 /datum/configuration/VV_hidden()
 	. = ..() | protected_vars
 
@@ -785,6 +788,8 @@ var/global/list/gamemode_cache = list()
 					player_limit = text2num(value)
 				if("hub")
 					world.update_hub_visibility()
+				if("rounds_until_hard_restart")
+					rounds_until_hard_restart = text2num(value)
 
 				if ("allow_unsafe_narrates")
 					config.allow_unsafe_narrates = TRUE
