@@ -226,7 +226,7 @@
 	src.throw_mode_off()
 	if(src.stat || !target)
 		return
-	if(target.type == /obj/screen) 
+	if(target.type == /obj/screen)
 		return
 
 	if(!item)
@@ -257,9 +257,7 @@
 		var/obj/item/I = item
 		itemsize = I.w_class
 
-	if(!unEquip(item))
-		return
-	if(!item || !isturf(item.loc))
+	if(!item)
 		return
 
 	var/message = "\The [src] has thrown \the [item]!"
@@ -274,16 +272,46 @@
 	skill_mod += 0.8 * (get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)
 	throw_range *= skill_mod
 
+	var/multiz_throwing = FALSE
+	if((get_z(target) > get_z(src)))
+		var/turf/T = GetAbove(src)
+		if(!istype(T) || !T.is_open() || !T.CanZPass(item, UP))
+			return
+
+		if(!(item.w_class < ITEM_SIZE_GARGANTUAN))
+			to_chat(src, SPAN_WARNING("\The [item] is too huge to throw!"))
+			return
+
+		if(!do_after(src, 2 SECONDS))
+			to_chat(src, SPAN_WARNING("You were interrupted!"))
+			return
+		else
+			multiz_throwing = TRUE
+			throw_range -= 1
+
+	if(!unEquip(item))
+		return
+
+	if(!item || !isturf(item.loc))
+		return
+
 	//actually throw it!
 	src.visible_message("<span class='warning'>[message]</span>", range = min(itemsize*2,world.view))
 
 	if(!src.lastarea)
 		src.lastarea = get_area(src.loc)
+
 	if(!check_space_footing())
 		if(prob((itemsize * itemsize * 10) * MOB_SIZE_MEDIUM/src.mob_size))
 			var/direction = get_dir(target, src)
 			step(src,direction)
 			space_drift(direction)
+
+	if(multiz_throwing)
+		var/cached_obj_flags = item.obj_flags
+		item.obj_flags |= OBJ_FLAG_NOFALL
+		item.forceMove(get_turf(GetAbove(src)))
+		item.obj_flags = cached_obj_flags
 
 	item.throw_at(target, throw_range, item.throw_speed * skill_mod, src)
 
@@ -533,7 +561,7 @@
 					break
 			if(!is_poison)
 				valid_tank = TRUE
-			
+
 		if(valid_tank && (!selected_obj || selected_obj.air_contents.gas[breathes_gas] <  checking.air_contents.gas[breathes_gas]))
 			selected_obj =  checking
 			selected_slot = slot_name
