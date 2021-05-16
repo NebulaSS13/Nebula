@@ -559,9 +559,8 @@
 	text = replacetext(text, "&", "")
 	return text
 
-// Switch to use copytext_char() when 513 is in
 var/global/list/fullstop_alternatives = list(".", "!", "?")
-#define APPEND_FULLSTOP_IF_NEEDED(TXT) ((copytext(TXT, -1, 0) in global.fullstop_alternatives) ? TXT : "[TXT].")
+#define APPEND_FULLSTOP_IF_NEEDED(TXT) ((copytext_char(TXT, -1, 0) in global.fullstop_alternatives) ? TXT : "[TXT].")
 
 /proc/make_rainbow(var/msg)
 	for(var/i = 1 to length(msg))

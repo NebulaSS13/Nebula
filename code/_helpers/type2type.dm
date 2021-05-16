@@ -9,29 +9,6 @@
  *			worldtime2text
  */
 
-// Returns an integer given a hexadecimal number string as input.
-#if DM_VERSION < 513
-/proc/hex2num_inner(hex)
-	. = 0
-	var/place = 1
-	for(var/i in length(hex) to 1 step -1)
-		var/num = text2ascii(hex, i)
-		switch(num)
-			if(48 to 57)
-				num -= 48	//0-9
-			if(97 to 102)
-				num -= 87	//a-f
-			if(65 to 70)
-				num -= 55	//A-F
-			if(45)
-				return . * -1 // -
-			else
-				CRASH("Malformed hex number")
-
-		. += num * place
-		place *= 16
-#endif
-
 // Returns the hex value of a number given a value assumed to be a base-ten value
 /proc/num2hex(num, len=2)
 	if(!isnum(num))

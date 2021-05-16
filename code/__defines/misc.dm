@@ -262,11 +262,7 @@
 #define  ICON_STATE_WORLD  "world"
 #define  ICON_STATE_INV  "inventory"
 
-#if DM_VERSION < 513
-#define hex2num(X) hex2num_inner(X)
-#else
 #define hex2num(X) text2num(X, 16)
-#endif
 
 #define GET_DECL(D) (ispath(D, /decl) ? (decls_repository.fetched_decls[D] || decls_repository.get_decl(D)) : null)
 #define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))

@@ -308,9 +308,7 @@
 	to_chat(usr, SPAN_NOTICE("[owner.head.name] advanced sensor mode is [owner.head.active_sensors ? "now" : "no longer" ] active."))
 
 /obj/screen/exosuit/needle
-#if DM_VERSION >= 513
 	vis_flags = VIS_INHERIT_ID
-#endif
 	icon_state = "heatprobe_needle"
 
 /obj/screen/exosuit/heat
