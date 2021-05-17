@@ -6,7 +6,7 @@
 	name = "\improper Fore Starboard Maintenance - 2"
 	icon_state = "fsmaint"
 
-/area/surgery
+/area/fartgery
 	name = "\improper Operating Theatre"
 	icon_state = "surgery"
 	req_access = list(access_medical)

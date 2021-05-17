@@ -3,7 +3,7 @@
 	landmark_tag = "nav_example_station"
 	docking_controller = "lower_level_dock"
 	special_dock_targets = list(
-		/datum/shuttle/autodock/ferry/example = "STARBOARD"
+		/datum/shuttle/autodock/ferry/example = "STARFART"
 	)
 
 /obj/effect/shuttle_landmark/upper_level
@@ -11,7 +11,7 @@
 	landmark_tag = "nav_example_offsite"
 	docking_controller = "upper_level_dock"
 	special_dock_targets = list(
-		/datum/shuttle/autodock/ferry/example = "PORT"
+		/datum/shuttle/autodock/ferry/example = "FARTPORT"
 	)
 
 /datum/shuttle/autodock/ferry/example
