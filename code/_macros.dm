@@ -1,25 +1,5 @@
 #define any2ref(x) "\ref[x]"
 
-#if DM_VERSION < 513
-
-#define islist(A) istype(A, /list)
-
-#define ismovable(A) istype(A, /atom/movable)
-
-/proc/copytext_char(T, Start = 1, End = 0)
-	return copytext(T, Start, End)
-
-/proc/length_char(E)
-	return length(E)
-
-/proc/findtext_char(Haystack, Needle, Start = 1, End = 0)
-	return findtext(Haystack, Needle, Start, End)
-
-/proc/replacetextEx_char(Haystack, Needle, Replacement, Start = 1, End = 0)
-	return replacetextEx(Haystack, Needle, Replacement, Start, End)
-
-#endif
-
 #define PUBLIC_GAME_MODE SSticker.master_mode
 
 #define Clamp(value, low, high) (value <= low ? low : (value >= high ? high : value))
