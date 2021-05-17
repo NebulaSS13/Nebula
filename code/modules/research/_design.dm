@@ -3,4 +3,4 @@
 #define SYNC_PUSH_DISK    4
 #define SYNC_PULL_DISK    8
 
-var/list/design_databases = list()
+var/global/list/design_databases = list()

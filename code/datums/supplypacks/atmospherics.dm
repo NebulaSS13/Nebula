@@ -40,28 +40,28 @@
 /decl/hierarchy/supply_pack/atmospherics/canister_empty
 	name = "Equipment - Empty gas canister"
 	contains = list(/obj/machinery/portable_atmospherics/canister)
-	cost = 7
+	cost = 12
 	containername = "empty gas canister crate"
 	containertype = /obj/structure/largecrate
 
 /decl/hierarchy/supply_pack/atmospherics/canister_air
 	name = "Gas - Air canister"
 	contains = list(/obj/machinery/portable_atmospherics/canister/air)
-	cost = 10
+	cost = 15
 	containername = "air canister crate"
 	containertype = /obj/structure/largecrate
 
 /decl/hierarchy/supply_pack/atmospherics/canister_oxygen
 	name = "Gas - Oxygen canister"
 	contains = list(/obj/machinery/portable_atmospherics/canister/oxygen)
-	cost = 15
+	cost = 20
 	containername = "oxygen canister crate"
 	containertype = /obj/structure/largecrate
 
 /decl/hierarchy/supply_pack/atmospherics/canister_nitrogen
 	name = "Gas - Nitrogen canister"
 	contains = list(/obj/machinery/portable_atmospherics/canister/nitrogen)
-	cost = 10
+	cost = 15
 	containername = "nitrogen canister crate"
 	containertype = /obj/structure/largecrate
 

@@ -151,7 +151,7 @@
 	popup.open()
 
 /mob/living/bot/DefaultTopicState()
-	return GLOB.default_state
+	return global.default_topic_state
 
 /mob/living/bot/OnTopic(mob/user, href_list)
 	if(href_list["command"])
@@ -346,7 +346,7 @@
 	if(stat)
 		return 0
 	on = 1
-	set_light(0.5, 0.1, light_strength)
+	set_light(light_strength)
 	update_icons()
 	resetTarget()
 	patrol_path = list()
@@ -373,7 +373,7 @@
 
 	//	for(var/turf/simulated/t in oview(src,1))
 
-	for(var/d in GLOB.cardinal)
+	for(var/d in global.cardinal)
 		var/turf/simulated/T = get_step(src, d)
 		if(istype(T) && !T.density)
 			if(!LinkBlockedWithAccess(src, T, ID))

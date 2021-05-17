@@ -17,10 +17,11 @@
 	name = "glowing seaweed"
 	desc = "It shines with an eerie bioluminescent light."
 	icon_state = "glowweed1"
+	light_color = "#00fff4"
 
 /obj/structure/flora/seaweed/glow/Initialize()
 	. = ..()
-	set_light(0.6, 0.1, 4, 3, "#00fff4")
+	set_light(3, 0.6, l_color = light_color)
 	icon_state = "glowweed[rand(1,3)]"
 
 /obj/effect/decal/cleanable/lichen

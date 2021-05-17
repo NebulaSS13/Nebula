@@ -87,7 +87,7 @@
 
 	sleep(80)
 
-	if(H.psi) 
+	if(H.psi)
 		H.psi.reset()
 
 	to_chat(H, SPAN_NOTICE("\The [src] chimes quietly as it finishes removing the slave-minds from your brain."))
@@ -160,4 +160,4 @@
 	action_button_name = "Remove Psionic Amplifier"
 	H.update_action_buttons()
 
-	set_light(0.5, 0.1, 3, 2, l_color = "#880000")
+	set_light(3, 0.5, "#880000")

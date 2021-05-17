@@ -108,7 +108,7 @@
 /datum/nano_module/program/computer_appdownloader
 	name = "Software Downloader"
 
-/datum/nano_module/program/computer_appdownloader/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/computer_appdownloader/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = list()
 	var/datum/computer_file/program/appdownloader/prog = program
 	// For now limited to execution by the downloader program

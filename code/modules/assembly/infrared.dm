@@ -7,8 +7,8 @@
 	origin_tech = "{'magnets':2}"
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/slag = MATTER_AMOUNT_TRACE
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/copper = MATTER_AMOUNT_TRACE
 	)
 	wires = WIRE_PULSE
 	secured = 0
@@ -64,7 +64,7 @@
 /obj/item/assembly/infra/interact(mob/user)//TODO: change this this to the wire control panel
 	if(!secured)
 		return
-	if(!CanInteract(user, GLOB.physical_state))
+	if(!CanInteract(user, global.physical_topic_state))
 		return
 
 	user.set_machine(src)
@@ -75,7 +75,7 @@
 	show_browser(user, jointext(dat,null), "window=infra")
 	onclose(user, "infra")
 
-/obj/item/assembly/infra/Topic(href, href_list, state = GLOB.physical_state)
+/obj/item/assembly/infra/Topic(href, href_list, state = global.physical_topic_state)
 	if(..())
 		close_browser(usr, "window=infra")
 		onclose(usr, "infra")

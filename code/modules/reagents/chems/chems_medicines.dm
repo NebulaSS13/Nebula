@@ -104,7 +104,7 @@
 	if(remove_generic)
 		ADJ_STATUS(M, STAT_DROWSY, -6 * removed)
 		M.adjust_hallucination(-9 * removed)
-		M.add_up_to_chemical_effect(CE_ANTITOX, 1)
+		M.add_chemical_effect(CE_ANTITOX, 1)
 
 	var/removing = (4 * removed)
 	var/datum/reagents/ingested = M.get_ingested_reagents()

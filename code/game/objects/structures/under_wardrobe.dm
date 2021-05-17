@@ -27,7 +27,7 @@
 		var/number_of_underwear = LAZYACCESS(amount_of_underwear_by_id_card, id) - 1
 		if(number_of_underwear)
 			LAZYSET(amount_of_underwear_by_id_card, id, number_of_underwear)
-			GLOB.destroyed_event.register(id, src, /obj/structure/undies_wardrobe/proc/remove_id_card)
+			events_repository.register(/decl/observ/destroyed, id, src, /obj/structure/undies_wardrobe/proc/remove_id_card)
 		else
 			remove_id_card(id)
 
@@ -36,7 +36,7 @@
 
 /obj/structure/undies_wardrobe/proc/remove_id_card(var/id_card)
 	LAZYREMOVE(amount_of_underwear_by_id_card, id_card)
-	GLOB.destroyed_event.unregister(id_card, src, /obj/structure/undies_wardrobe/proc/remove_id_card)
+	events_repository.unregister(/decl/observ/destroyed, id_card, src, /obj/structure/undies_wardrobe/proc/remove_id_card)
 
 /obj/structure/undies_wardrobe/attack_hand(var/mob/user)
 	if(!human_who_can_use_underwear(user))
@@ -49,9 +49,9 @@
 
 	var/dat = list()
 	dat += "<b>Underwear</b><br><hr>"
-	dat += "You may claim [id ? length(GLOB.underwear.categories) - LAZYACCESS(amount_of_underwear_by_id_card, id) : 0] more article\s this shift.<br><br>"
+	dat += "You may claim [id ? length(global.underwear.categories) - LAZYACCESS(amount_of_underwear_by_id_card, id) : 0] more article\s this shift.<br><br>"
 	dat += "<b>Available Categories</b><br><hr>"
-	for(var/datum/category_group/underwear/UWC in GLOB.underwear.categories)
+	for(var/datum/category_group/underwear/UWC in global.underwear.categories)
 		dat += "[UWC.name] <a href='?src=\ref[src];select_underwear=[UWC.name]'>(Select)</a><br>"
 	dat = jointext(dat,null)
 	show_browser(H, dat, "window=wardrobe;size=400x250")
@@ -73,7 +73,7 @@
 
 	var/mob/living/carbon/human/H = usr
 	if(href_list["select_underwear"])
-		var/datum/category_group/underwear/UWC = GLOB.underwear.categories_by_name[href_list["select_underwear"]]
+		var/datum/category_group/underwear/UWC = global.underwear.categories_by_name[href_list["select_underwear"]]
 		if(!UWC)
 			return
 		var/datum/category_item/underwear/UWI = input("Select your desired underwear:", "Choose underwear") as null|anything in exlude_none(UWC.items)
@@ -97,7 +97,7 @@
 			return
 
 		var/current_quota = LAZYACCESS(amount_of_underwear_by_id_card, id)
-		if(current_quota >= length(GLOB.underwear.categories))
+		if(current_quota >= length(global.underwear.categories))
 			audible_message("You have already used up your underwear quota for this shift. Please return previously acquired items to increase it.", WARDROBE_BLIND_MESSAGE(H))
 			return
 		LAZYSET(amount_of_underwear_by_id_card, id, ++current_quota)

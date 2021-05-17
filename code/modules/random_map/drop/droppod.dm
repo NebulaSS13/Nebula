@@ -125,7 +125,7 @@
 
 /datum/random_map/droppod/proc/get_spawned_drop(var/turf/T)
 	var/obj/structure/bed/chair/C = new(T)
-	C.set_light(0.5, 0.1, 3, 2, l_color = "#cc0000")
+	C.set_light(3, 1, l_color = "#cc0000")
 	var/mob/living/drop
 	// This proc expects a list of mobs to be passed to the spawner.
 	// Use the supply pod if you don't want to drop mobs.
@@ -172,7 +172,7 @@
 			spawned_mobs |= M
 	else
 		var/list/candidates = list()
-		for(var/client/player in GLOB.clients)
+		for(var/client/player in global.clients)
 			if(player.mob && isghost(player.mob))
 				candidates |= player
 

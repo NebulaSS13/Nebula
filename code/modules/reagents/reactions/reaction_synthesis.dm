@@ -4,6 +4,29 @@
 	result_amount = 1
 	mix_message = "The solution hardens and begins to crystallize."
 
+/datum/chemical_reaction/synthesis/fiberglass
+	name = "Fiberglass"
+	mix_message = "The glass fibers are bound up in the polymer as it hardens."
+	minimum_temperature = T100C
+	maximum_temperature = INFINITY
+
+/datum/chemical_reaction/synthesis/fiberglass/New()
+	required_reagents = list(
+		/decl/material/solid/glass =   ceil(REAGENT_UNITS_PER_MATERIAL_SHEET/2),
+		/decl/material/solid/plastic = ceil(REAGENT_UNITS_PER_MATERIAL_SHEET/2)
+	)
+	..()
+
+/datum/chemical_reaction/synthesis/fiberglass/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
+	..()
+	created_volume = ceil(created_volume)
+	if(created_volume > 0)
+		var/decl/material/mat = GET_DECL(/decl/material/solid/fiberglass)
+		mat.create_object(get_turf(holder.my_atom), created_volume)
+
+/datum/chemical_reaction/synthesis/crystalization/can_happen(datum/reagents/holder)
+	. = ..() && length(holder.reagent_volumes) > 1
+
 /datum/chemical_reaction/synthesis/crystalization
 	name = "Crystalization"
 	required_reagents = list(/decl/material/liquid/crystal_agent = 1)
@@ -26,7 +49,7 @@
 		if(rtype != /decl/material/liquid/crystal_agent)
 			var/solidifying = Floor(REAGENT_VOLUME(holder, rtype) / REAGENT_UNITS_PER_MATERIAL_SHEET)
 			if(solidifying)
-				new /obj/item/stack/material/generic(get_turf(holder.my_atom), solidifying, rtype)
+				SSmaterials.create_object(rtype, get_turf(holder.my_atom), solidifying, /obj/item/stack/material/cubes)
 				removing_reagents[rtype] = solidifying * REAGENT_UNITS_PER_MATERIAL_SHEET
 	for(var/rtype in removing_reagents)
 		holder.remove_reagent(rtype, removing_reagents[rtype])
@@ -38,7 +61,7 @@
 
 /datum/chemical_reaction/synthesis/plastication/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	new /obj/item/stack/material/plastic(get_turf(holder.my_atom), created_volume)
+	SSmaterials.create_object(/decl/material/solid/plastic, get_turf(holder.my_atom), created_volume)
 
 /datum/chemical_reaction/synthesis/resin_pack
 	name = "Resin Globule"

@@ -36,7 +36,7 @@
 	var/turf/home
 	var/homeName
 
-	var/global/amount = 0
+	var/static/amount = 0
 
 /mob/living/bot/mulebot/Initialize()
 	. = ..()
@@ -230,9 +230,8 @@
 
 	var/turf/Tsec = get_turf(src)
 	new /obj/item/assembly/prox_sensor(Tsec)
-	new /obj/item/stack/material/rods(Tsec)
-	new /obj/item/stack/material/rods(Tsec)
 	new /obj/item/stack/cable_coil/cut(Tsec)
+	SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), 2, /obj/item/stack/material/rods)
 
 	spark_at(src, cardinal_only = TRUE)
 

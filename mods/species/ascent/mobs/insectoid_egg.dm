@@ -1,4 +1,4 @@
-GLOBAL_VAR_INIT(default_gyne, create_gyne_name())
+var/global/default_gyne
 
 /decl/ghosttrap/kharmaani_egg
 	name = "mantid nymph"
@@ -27,14 +27,14 @@ GLOBAL_VAR_INIT(default_gyne, create_gyne_name())
 	var/hatching = FALSE				// If we're in the process of hatching.
 	var/hatched = FALSE					// Whether or not this egg has already hatched.
 
-	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
-	)
-
+	material = /decl/material/solid/gemstone/crystal
+	
 /obj/structure/insectoid_egg/Initialize()
 	. = ..()
 	START_PROCESSING(SSprocessing, src)
-	lineage = GLOB.default_gyne
+	if(!global.default_gyne)
+		global.default_gyne = create_gyne_name()
+	lineage = global.default_gyne
 
 /obj/structure/insectoid_egg/Destroy()
 	STOP_PROCESSING(SSprocessing, src)

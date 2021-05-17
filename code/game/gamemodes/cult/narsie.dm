@@ -32,7 +32,7 @@ var/global/list/narsie_list = list()
 	// Pixel stuff centers Narsie.
 	pixel_x = -236
 	pixel_y = -256
-	light_outer_range = 1
+	light_range = 1
 	light_color = "#3e0000"
 
 	current_size = 6
@@ -101,7 +101,7 @@ var/global/list/narsie_list = list()
 	if(!move_self)
 		return 0
 
-	var/movement_dir = pick(GLOB.alldirs - last_failed_movement)
+	var/movement_dir = pick(global.alldirs - last_failed_movement)
 
 	if(force_move)
 		movement_dir = force_move
@@ -119,7 +119,7 @@ var/global/list/narsie_list = list()
 	if(!move_self)
 		return 0
 
-	var/movement_dir = pick(GLOB.alldirs - last_failed_movement)
+	var/movement_dir = pick(global.alldirs - last_failed_movement)
 
 	if(force_move)
 		movement_dir = force_move
@@ -129,13 +129,13 @@ var/global/list/narsie_list = list()
 	spawn(0)
 		step(src, movement_dir)
 		narsiefloor(get_turf(loc))
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M in global.player_list)
 			if(M.client)
 				M.see_narsie(src,movement_dir)
 	spawn(10)
 		step(src, movement_dir)
 		narsiefloor(get_turf(loc))
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M in global.player_list)
 			if(M.client)
 				M.see_narsie(src,movement_dir)
 	return 1
@@ -283,7 +283,7 @@ var/global/list/narsie_list = list()
 		acquire(pick(cultists))
 		return
 		//If there was living cultists, it picks one to follow.
-	for(var/mob/living/carbon/human/food in GLOB.living_mob_list_)
+	for(var/mob/living/carbon/human/food in global.living_mob_list_)
 		if(food.stat)
 			continue
 		var/turf/pos = get_turf(food)
@@ -296,7 +296,7 @@ var/global/list/narsie_list = list()
 		acquire(pick(cultists))
 		return
 		//no living cultists, pick a living human instead.
-	for(var/mob/observer/ghost/ghost in GLOB.player_list)
+	for(var/mob/observer/ghost/ghost in global.player_list)
 		if(!ghost.client)
 			continue
 		var/turf/pos = get_turf(ghost)

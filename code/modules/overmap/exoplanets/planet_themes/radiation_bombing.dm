@@ -15,12 +15,12 @@
 	for(var/i = 1 to num_craters)
 		var/turf/simulated/T = pick_area_turf(E.planetary_area, list(/proc/not_turf_contains_dense_objects))
 		if(!T) // ran out of space somehow
-			return 
+			return
 		new/obj/structure/rubble/war(T)
 		var/datum/radiation_source/S = new(T, radiation_power, FALSE)
 		S.range = 4
 		SSradiation.add_source(S)
-		T.set_light(0.4, 1, 2, l_color = PIPE_COLOR_GREEN)
+		T.set_light(2, 0.4, PIPE_COLOR_GREEN)
 		for(var/turf/exterior/crater in circlerangeturfs(T, 3))
 			if(prob(10))
 				new/obj/item/remains/xeno/charred(crater)

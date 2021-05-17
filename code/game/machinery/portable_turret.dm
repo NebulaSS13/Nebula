@@ -130,7 +130,7 @@
 			eshot_sound = 'sound/weapons/Laser.ogg'
 			egun = 1
 
-var/list/turret_icons
+var/global/list/turret_icons
 
 /obj/machinery/porta_turret/on_update_icon()
 	if(!turret_icons)
@@ -248,7 +248,17 @@ var/list/turret_icons
 			stat |= NOPOWER
 			queue_icon_update()
 
-
+/obj/machinery/porta_turret/physically_destroyed(skip_qdel)
+	if(installation)
+		var/obj/item/gun/energy/Gun = new installation(loc)
+		Gun.power_supply.charge = gun_charge
+		Gun.update_icon()
+	if(prob(50))
+		SSmaterials.create_object(/decl/material/solid/metal/steel, loc, rand(1,4))
+	if(prob(50))
+		new /obj/item/assembly/prox_sensor(loc)
+	. = ..()
+						
 /obj/machinery/porta_turret/attackby(obj/item/I, mob/user)
 	if(stat & BROKEN)
 		if(isCrowbar(I))
@@ -258,17 +268,9 @@ var/list/turret_icons
 			if(do_after(user, 20, src))
 				if(prob(70))
 					to_chat(user, "<span class='notice'>You remove the turret and salvage some components.</span>")
-					if(installation)
-						var/obj/item/gun/energy/Gun = new installation(loc)
-						Gun.power_supply.charge = gun_charge
-						Gun.update_icon()
-					if(prob(50))
-						new /obj/item/stack/material/steel(loc, rand(1,4))
-					if(prob(50))
-						new /obj/item/assembly/prox_sensor(loc)
+					physically_destroyed()
 				else
 					to_chat(user, "<span class='notice'>You remove the turret but did not manage to salvage anything.</span>")
-				qdel(src) // qdel
 
 	else if(isWrench(I))
 		if(enabled || raised)
@@ -657,8 +659,7 @@ var/list/turret_icons
 			else if(isCrowbar(I) && !anchored)
 				playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 				to_chat(user, "<span class='notice'>You dismantle the turret construction.</span>")
-				new /obj/item/stack/material/steel( loc, 5)
-				qdel(src)
+				dismantle()
 				return
 
 		if(1)
@@ -672,7 +673,7 @@ var/list/turret_icons
 					to_chat(user, "<span class='warning'>You need two sheets of metal to continue construction.</span>")
 				return
 
-			else if(istype(I, /obj/item/wrench))
+			else if(isWrench(I))
 				playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 				to_chat(user, "<span class='notice'>You unfasten the external bolts.</span>")
 				anchored = 0
@@ -681,7 +682,7 @@ var/list/turret_icons
 
 
 		if(2)
-			if(istype(I, /obj/item/wrench))
+			if(isWrench(I))
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 				to_chat(user, "<span class='notice'>You bolt the metal armor into place.</span>")
 				build_step = 3
@@ -700,7 +701,7 @@ var/list/turret_icons
 					if(!src || !WT.remove_fuel(5, user)) return
 					build_step = 1
 					to_chat(user, "You remove the turret's interior metal armor.")
-					new /obj/item/stack/material/steel( loc, 2)
+					SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 2)
 					return
 
 
@@ -722,7 +723,7 @@ var/list/turret_icons
 				qdel(I) //delete the gun :(
 				return
 
-			else if(istype(I, /obj/item/wrench))
+			else if(isWrench(I))
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 				to_chat(user, "<span class='notice'>You remove the turret's metal armor bolts.</span>")
 				build_step = 2
@@ -759,7 +760,7 @@ var/list/turret_icons
 					to_chat(user, "<span class='warning'>You need two sheets of metal to continue construction.</span>")
 				return
 
-			else if(istype(I, /obj/item/screwdriver))
+			else if(isScrewdriver(I))
 				playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
 				build_step = 5
 				to_chat(user, "<span class='notice'>You open the internal access hatch.</span>")
@@ -792,7 +793,7 @@ var/list/turret_icons
 			else if(isCrowbar(I))
 				playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 				to_chat(user, "<span class='notice'>You pry off the turret's exterior armor.</span>")
-				new /obj/item/stack/material/steel(loc, 2)
+				SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 2)
 				build_step = 6
 				return
 

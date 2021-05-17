@@ -9,9 +9,6 @@
 	)
 	var/build_time = 5 SECONDS
 	var/max_amount = 1 // How many instances can be queued at once
-	var/ignore_materials = list(
-		/decl/material/solid/slag = TRUE
-	)
 	var/list/required_technology
 	var/list/species_locked
 
@@ -54,8 +51,7 @@
 	resources = list()
 	var/list/building_cost = atom_info_repository.get_matter_for(path)
 	for(var/mat in building_cost)
-		if(!ignore_materials[mat])
-			resources[mat] = building_cost[mat] * FABRICATOR_EXTRA_COST_FACTOR
+		resources[mat] = building_cost[mat] * FABRICATOR_EXTRA_COST_FACTOR
 
 /obj/building_cost()
 	. = ..()

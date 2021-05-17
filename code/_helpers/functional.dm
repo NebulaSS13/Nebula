@@ -48,7 +48,7 @@ if(LAZYLEN(extra_arguments)) {\
 		to_chat(feedback_receiver, "<span class='warning'>Value must be a text.</span>")
 
 /proc/is_dir_predicate(var/value, var/feedback_receiver)
-	. = (value in GLOB.alldirs)
+	. = (value in global.alldirs)
 	if(!. && feedback_receiver)
 		to_chat(feedback_receiver, "<span class='warning'>Value must be a direction.</span>")
 

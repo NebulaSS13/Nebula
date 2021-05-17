@@ -10,7 +10,7 @@
 	var/maxdistance = (world.view + extrarange) * 2
 
  	// Looping through the player list has the added bonus of working for mobs inside containers
-	var/list/listeners = GLOB.player_list
+	var/list/listeners = global.player_list
 	if(!ignore_walls) //these sounds don't carry through walls
 		listeners = listeners & hearers(maxdistance, turf_source)
 
@@ -22,10 +22,10 @@
 		if(get_dist(M, turf_source) <= maxdistance)
 			var/turf/T = get_turf(M)
 
-			if(T && (T.z == turf_source.z || (zrange && AreConnectedZLevels(T.z, turf_source.z) && abs(T.z - turf_source.z) <= zrange)) && (!is_ambiance || M.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))
+			if(T && (T.z == turf_source.z || (zrange && AreConnectedZLevels(T.z, turf_source.z) && abs(T.z - turf_source.z) <= zrange)) && (!is_ambiance || M.get_preference_value(/datum/client_preference/play_ambiance) == PREF_YES))
 				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global, extrarange, override_env, envdry, envwet)
 
-var/const/FALLOFF_SOUNDS = 0.5
+var/global/const/FALLOFF_SOUNDS = 0.5
 
 //Applies mob-specific and environment specific adjustments to volume value given
 /proc/adjust_volume_for_hearer(var/volume, var/turf/turf_source, var/atom/listener)
@@ -108,7 +108,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 
 		if(istype(src,/mob/living/))
 			var/mob/living/carbon/M = src
-			if (istype(M) && M.hallucination_power > 50 && LAZYACCESS(M.chem_effects, CE_MIND) < 1)
+			if (istype(M) && M.hallucination_power > 50 && GET_CHEMICAL_EFFECT(M, CE_MIND) < 1)
 				S.environment = PSYCHOTIC
 			else if (HAS_STATUS(M, STAT_DRUGGY))
 				S.environment = DRUGGED
@@ -136,8 +136,8 @@ var/const/FALLOFF_SOUNDS = 0.5
 	sound_to(src, S)
 
 /client/proc/playtitlemusic()
-	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_YES && GLOB.using_map.lobby_track)
-		GLOB.using_map.lobby_track.play_to(src)
+	if(get_preference_value(/datum/client_preference/play_lobby_music) == PREF_YES && global.using_map.lobby_track)
+		global.using_map.lobby_track.play_to(src)
 
 /proc/get_rand_frequency()
 	return rand(32000, 55000) //Frequency stuff only works with 45kbps oggs.
@@ -145,22 +145,22 @@ var/const/FALLOFF_SOUNDS = 0.5
 /proc/get_sfx(soundin)
 	if(istext(soundin))
 		switch(soundin)
-			if ("shatter") soundin = pick(GLOB.shatter_sound)
-			if ("explosion") soundin = pick(GLOB.explosion_sound)
-			if ("sparks") soundin = pick(GLOB.spark_sound)
-			if ("rustle") soundin = pick(GLOB.rustle_sound)
-			if ("punch") soundin = pick(GLOB.punch_sound)
-			if ("light_strike") soundin = pick(GLOB.light_strike_sound)
-			if ("clownstep") soundin = pick(GLOB.clown_sound)
-			if ("swing_hit") soundin = pick(GLOB.swing_hit_sound)
-			if ("hiss") soundin = pick(GLOB.hiss_sound)
-			if ("pageturn") soundin = pick(GLOB.page_sound)
-			if ("fracture") soundin = pick(GLOB.fracture_sound)
-			if ("light_bic") soundin = pick(GLOB.lighter_sound)
-			if ("keyboard") soundin = pick(GLOB.keyboard_sound)
-			if ("keystroke") soundin = pick(GLOB.keystroke_sound)
-			if ("switch") soundin = pick(GLOB.switch_sound)
-			if ("button") soundin = pick(GLOB.button_sound)
-			if ("chop") soundin = pick(GLOB.chop_sound)
-			if ("glasscrack") soundin = pick(GLOB.glasscrack_sound)
+			if ("shatter") soundin = pick(global.shatter_sound)
+			if ("explosion") soundin = pick(global.explosion_sound)
+			if ("sparks") soundin = pick(global.spark_sound)
+			if ("rustle") soundin = pick(global.rustle_sound)
+			if ("punch") soundin = pick(global.punch_sound)
+			if ("light_strike") soundin = pick(global.light_strike_sound)
+			if ("clownstep") soundin = pick(global.clown_sound)
+			if ("swing_hit") soundin = pick(global.swing_hit_sound)
+			if ("hiss") soundin = pick(global.hiss_sound)
+			if ("pageturn") soundin = pick(global.page_sound)
+			if ("fracture") soundin = pick(global.fracture_sound)
+			if ("light_bic") soundin = pick(global.lighter_sound)
+			if ("keyboard") soundin = pick(global.keyboard_sound)
+			if ("keystroke") soundin = pick(global.keystroke_sound)
+			if ("switch") soundin = pick(global.switch_sound)
+			if ("button") soundin = pick(global.button_sound)
+			if ("chop") soundin = pick(global.chop_sound)
+			if ("glasscrack") soundin = pick(global.glasscrack_sound)
 	return soundin

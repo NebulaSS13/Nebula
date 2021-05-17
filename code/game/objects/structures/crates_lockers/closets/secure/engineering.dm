@@ -20,7 +20,8 @@
 		/obj/item/multitool,
 		/obj/item/flash,
 		/obj/item/taperoll/engineering,
-		/obj/item/crowbar/brace_jack
+		/obj/item/crowbar/brace_jack,
+		/obj/item/storage/belt/utility/full
 	)
 
 /obj/structure/closet/secure_closet/engineering_electrical
@@ -66,7 +67,8 @@
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/glasses/meson,
-		/obj/item/taperoll/engineering
+		/obj/item/taperoll/engineering,
+		/obj/item/storage/belt/utility/full
 	)
 
 /obj/structure/closet/secure_closet/atmos_personal
@@ -85,5 +87,6 @@
 		/obj/item/radio/headset/headset_eng,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
-		/obj/item/taperoll/atmos
+		/obj/item/taperoll/atmos,
+		/obj/item/storage/belt/utility/atmostech
 	)

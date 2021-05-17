@@ -9,9 +9,7 @@ Small, little HP, poisonous.
 	icon_living = "slug"
 	item_state = "slug"
 	icon_dead = "slug_dead"
-	response_help  = "pets"
-	response_disarm = "gently pushes aside"
-	response_harm   = "stamps on"
+	response_harm = "stomps on"
 	destroy_surroundings = 0
 	health = 15
 	maxHealth = 15

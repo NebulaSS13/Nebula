@@ -17,23 +17,15 @@
 
 	description = "A small mammalian carnivore. If you are reading this, you are probably a Tajaran."
 	hidden_from_codex = FALSE
-	bodytype = BODYTYPE_FELINE
-	sexybits_location = BP_GROIN
-	limb_blend = ICON_MULTIPLY
 
 	age_descriptor = /datum/appearance_descriptor/age/tajaran
+
+	available_bodytypes = list(/decl/bodytype/feline)
 
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
-	icobase = 'mods/species/tajaran/icons/body.dmi'
-	deform =  'mods/species/tajaran/icons/deformed_body.dmi'
-	bandages_icon = 'icons/mob/bandage.dmi'
 	preview_icon = 'mods/species/tajaran/icons/preview.dmi'
-	lip_icon = 'mods/species/tajaran/icons/lips.dmi'
-	tail_animation = 'mods/species/tajaran/icons/tail.dmi'
-	tail = "tajtail"
-	tail_blend = ICON_MULTIPLY
 	default_h_style = "Tajaran Ears"
 
 	flesh_color = "#afa59e"
@@ -42,13 +34,11 @@
 	organs_icon = 'mods/species/tajaran/icons/organs.dmi'
 
 	darksight_range = 7
-	darksight_tint = DARKTINT_GOOD
 	slowdown = -0.5
 	flash_mod = 2
 
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.5
 	gluttonous = GLUT_TINY
-	health_hud_intensity = 1.75
 
 	unarmed_attacks = list(
 		/decl/natural_attack/stomp, 
@@ -113,23 +103,6 @@
 		BP_APPENDIX = /obj/item/organ/internal/appendix,
 		BP_EYES =     /obj/item/organ/internal/eyes/taj
 	)
-
-/decl/species/tajaran/New()
-	equip_adjust = list(
-		BP_L_HAND =           list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
-		BP_R_HAND =           list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
-		slot_wear_id_str =    list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
-		slot_gloves_str =     list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
-		slot_wear_suit_str =  list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
-		slot_w_uniform_str =  list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
-		slot_tie_str =        list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
-		slot_back_str =       list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
-		slot_belt_str =       list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
-		slot_underpants_str = list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2)),
-		slot_undershirt_str = list("[NORTH]" = list("x" =  0, "y" = -2), "[EAST]" = list("x" = 0, "y" = -2), "[SOUTH]" = list("x" =  0, "y" = -2),  "[WEST]" = list("x" = 0, "y" = -2))
-	)
-	. = ..()
-	
 
 /obj/item/organ/internal/eyes/taj
 	eye_blend = ICON_MULTIPLY

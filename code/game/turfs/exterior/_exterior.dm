@@ -13,6 +13,22 @@
 	var/list/affecting_heat_sources
 	var/obj/effect/overmap/visitable/sector/exoplanet/owner
 
+/turf/exterior/Initialize(mapload, no_update_icon = FALSE)
+	. = ..(mapload)	// second param is our own, don't pass to children
+	if (no_update_icon)
+		return
+
+	if (mapload)	// If this is a mapload, then our neighbors will be updating their own icons too -- doing it for them is rude.
+		update_icon()
+	else
+		for (var/turf/T in RANGE_TURFS(src, 1))
+			if (T == src)
+				continue
+			if (TICK_CHECK)	// not CHECK_TICK -- only queue if the server is overloaded
+				T.queue_icon_update()
+			else
+				T.update_icon()
+
 /turf/exterior/ChangeTurf()
 	var/last_affecting_heat_sources = affecting_heat_sources
 	var/turf/exterior/ext = ..()
@@ -40,7 +56,7 @@
 		gas = new
 		gas.copy_from(owner.atmosphere)
 	else
-		gas = GLOB.using_map.get_exterior_atmosphere()
+		gas = global.using_map.get_exterior_atmosphere()
 	var/initial_temperature = gas.temperature
 	for(var/thing in affecting_heat_sources)
 		if((gas.temperature - initial_temperature) >= 100)
@@ -57,7 +73,7 @@
 		owner = null
 	else
 		//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
-		set_light(owner.lightlevel, 0.1, 2)
+		set_light(owner.lightlevel)
 		if(owner.planetary_area && istype(loc, world.area))
 			ChangeArea(src, owner.planetary_area)
 	. = ..()
@@ -102,7 +118,7 @@
 		return
 
 	var/neighbors = 0
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		var/turf/exterior/turf_to_check = get_step(src,direction)
 		if(!turf_to_check || turf_to_check.density)
 			continue
@@ -115,7 +131,7 @@
 			switch(direction)
 				if(NORTH)
 					I.pixel_y += world.icon_size
-				if(SOUTH) 
+				if(SOUTH)
 					I.pixel_y -= world.icon_size
 				if(EAST)
 					I.pixel_x += world.icon_size
@@ -124,7 +140,7 @@
 			add_overlay(I)
 
 	if(icon_has_corners)
-		for(var/direction in GLOB.cornerdirs)
+		for(var/direction in global.cornerdirs)
 			var/turf/exterior/turf_to_check = get_step(src,direction)
 			if(!isturf(turf_to_check) || turf_to_check.density || istype(turf_to_check, type))
 				continue
@@ -141,7 +157,7 @@
 					I.layer = layer + icon_edge_layer
 					if(direction & NORTH)
 						I.pixel_y += world.icon_size
-					else if(direction & SOUTH) 
+					else if(direction & SOUTH)
 						I.pixel_y -= world.icon_size
 					if(direction & EAST)
 						I.pixel_x += world.icon_size
@@ -149,7 +165,7 @@
 						I.pixel_x -= world.icon_size
 					add_overlay(I)
 
-	var/datum/gas_mixture/air = (owner ? owner.atmosphere : GLOB.using_map.exterior_atmosphere)
+	var/datum/gas_mixture/air = (owner ? owner.atmosphere : global.using_map.exterior_atmosphere)
 	if(length(air?.graphic))
 		vis_contents += air.graphic
 	else

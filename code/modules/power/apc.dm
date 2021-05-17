@@ -70,6 +70,20 @@
 		/obj/item/cell/hyper
 	)
 
+/obj/machinery/power/apc/derelict
+	lighting = 0
+	equipment = 0
+	environ = 0
+	locked = 0
+	uncreated_component_parts = list(
+		/obj/item/cell/crap/empty
+	)
+
+/obj/machinery/power/apc/derelict/full
+	uncreated_component_parts = list(
+		/obj/item/cell/crap
+	)
+
 // Main APC code
 /obj/machinery/power/apc
 	name = "area power controller"
@@ -112,15 +126,15 @@
 	var/update_overlay = -1
 	var/list/update_overlay_chan		// Used to determine if there is a change in channels
 	var/is_critical = 0
-	var/global/status_overlays = 0
+	var/static/status_overlays = 0
 	var/failure_timer = 0               // Cooldown thing for apc outage event
 	var/force_update = 0
 	var/emp_hardened = 0
-	var/global/list/status_overlays_lock
-	var/global/list/status_overlays_charging
-	var/global/list/status_overlays_equipment
-	var/global/list/status_overlays_lighting
-	var/global/list/status_overlays_environ
+	var/static/list/status_overlays_lock
+	var/static/list/status_overlays_charging
+	var/static/list/status_overlays_equipment
+	var/static/list/status_overlays_lighting
+	var/static/list/status_overlays_environ
 	var/remote_control = FALSE //is remote control enabled?
 	var/autoname = 1
 	var/cover_removed = FALSE           // Cover is gone; can't close it anymore.
@@ -171,7 +185,7 @@
 		SetName("\improper [area.name] APC")
 	area.apc = src
 
-	GLOB.name_set_event.register(area, src, .proc/change_area_name)
+	events_repository.register(/decl/observ/name_set, area, src, .proc/change_area_name)
 
 	. = ..()
 
@@ -194,7 +208,7 @@
 		area.power_environ = 0
 		area.power_change()
 
-		GLOB.name_set_event.unregister(area, src, .proc/change_area_name)
+		events_repository.unregister(/decl/observ/name_set, area, src, .proc/change_area_name)
 
 	// Malf AI, removes the APC from AI's hacked APCs list.
 	if((hacker) && (hacker.hacked_apcs) && (src in hacker.hacked_apcs))
@@ -332,7 +346,7 @@
 		if((update_state & (UPDATE_OPENED1|UPDATE_OPENED2|UPDATE_BROKE)) || (stat & NOSCREEN))
 			set_light(0)
 		else if(update_state & UPDATE_BLUESCREEN)
-			set_light(0.8, 0.1, 1, 2, "#00ecff")
+			set_light(l_range = 2, l_power = 0.5, l_color = "#00ecff")
 		else if(!(stat & (BROKEN|MAINT)) && update_state & UPDATE_ALLGOOD)
 			var/color
 			switch(charging)
@@ -342,7 +356,7 @@
 					color = "#a8b0f8"
 				if(2)
 					color = "#82ff4c"
-			set_light(0.8, 0.1, 1, l_color = color)
+			set_light(l_range = 2, l_power = 0.5, l_color = color)
 		else
 			set_light(0)
 
@@ -469,7 +483,7 @@
 				return 1
 
 /obj/machinery/power/apc/CanUseTopicPhysical(var/mob/user)
-	return GLOB.physical_state.can_use_topic(nano_host(), user)
+	return global.physical_topic_state.can_use_topic(nano_host(), user)
 
 /obj/machinery/power/apc/physical_attack_hand(mob/user)
 	//Human mob special interaction goes here.

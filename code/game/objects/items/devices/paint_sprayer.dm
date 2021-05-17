@@ -90,7 +90,7 @@
 /obj/item/paint_sprayer/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret)
-		var/bodytype = lowertext(user_mob?.get_bodytype())
+		var/bodytype = lowertext(user_mob?.get_bodytype_category())
 		var/image/overlay = overlay_image(ret.icon, "[bodytype]-slot_[slot]_color", paint_color)
 		ret.add_overlay(overlay)
 	return ret
@@ -248,7 +248,7 @@
 		choices |= AIRLOCK_REGION_STRIPE
 	if (D.paintable & AIRLOCK_WINDOW_PAINTABLE)
 		choices |= AIRLOCK_REGION_WINDOW
-	choice = input(user, input_text) as null|anything in sortList(choices)
+	choice = input(user, input_text) as null|anything in sortTim(choices, /proc/cmp_text_asc)
 	if (user.incapacitated() || !D || !user.Adjacent(D))
 		return FALSE
 	return choice

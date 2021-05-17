@@ -17,7 +17,7 @@
 	material = /decl/material/solid/metal/aluminium
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/glass = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
 
@@ -86,7 +86,7 @@
 	if(selected_io)
 		unselect_io(selected_io)
 	selected_io = io
-	GLOB.destroyed_event.register(selected_io, src, .proc/unselect_io)
+	events_repository.register(/decl/observ/destroyed, selected_io, src, .proc/unselect_io)
 	switch(mode)
 		if(UNWIRE)
 			mode = UNWIRING
@@ -96,7 +96,7 @@
 /obj/item/integrated_electronics/wirer/proc/unselect_io(datum/integrated_io/io)
 	if(selected_io != io)
 		return
-	GLOB.destroyed_event.unregister(selected_io, src)
+	events_repository.unregister(/decl/observ/destroyed, selected_io, src)
 	selected_io = null
 	switch(mode)
 		if(UNWIRING)

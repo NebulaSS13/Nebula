@@ -36,9 +36,10 @@
 	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is grabbing it.
 
 	//Interaction
-	var/response_help   = "tries to help"
-	var/response_disarm = "tries to disarm"
-	var/response_harm   = "tries to hurt"
+	var/response_help_1p = "You pet $TARGET$."
+	var/response_help_3p = "$USER$ pets $TARGET$."
+	var/response_disarm =  "pushes aside"
+	var/response_harm =    "kicks"
 	var/harm_intent_damage = 3
 	var/can_escape = FALSE // 'smart' simple animals such as human enemies, or things small, big, sharp or strong enough to power out of a net
 
@@ -161,7 +162,7 @@
 		if(isturf(src.loc) && !resting)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
 			turns_since_move++
 			if(turns_since_move >= turns_per_move && (!(stop_automated_movement_when_pulled) || !LAZYLEN(grabbed_by))) //Some animals don't move when pulled
-				SelfMove(pick(GLOB.cardinal))
+				SelfMove(pick(global.cardinal))
 				turns_since_move = 0
 
 	//Speaking
@@ -258,14 +259,16 @@
 	Proj.on_hit(src)
 	return 0
 
+/mob/living/simple_animal/get_hug_zone_messages(var/zone)
+	. = ..() || list(response_help_3p, response_help_1p)
+
 /mob/living/simple_animal/attack_hand(mob/user)
 	..()
 
 	switch(user.a_intent)
 
 		if(I_HELP)
-			if (health > 0)
-				user.visible_message(SPAN_NOTICE("\The [user] [response_help] \the [src]."))
+			if(health > 0 && user.attempt_hug(src))
 				user.update_personal_goal(/datum/goal/achievement/specific_object/pet, type)
 
 		if(I_DISARM)

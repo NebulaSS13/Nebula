@@ -7,7 +7,7 @@
 	var/icon/bgstate = DEFAULT_WALL_MATERIAL
 	var/list/bgstate_options = list("FFF", DEFAULT_WALL_MATERIAL, "white")
 
-/datum/category_item/player_setup_item/player_global/pai/load_preferences(var/savefile/S)
+/datum/category_item/player_setup_item/player_global/pai/load_preferences(datum/pref_record_reader/R)
 	if(!candidate)
 		candidate = new()
 
@@ -17,7 +17,7 @@
 	candidate.savefile_load(preference_mob())
 	update_pai_preview()
 
-/datum/category_item/player_setup_item/player_global/pai/save_preferences(var/savefile/S)
+/datum/category_item/player_setup_item/player_global/pai/save_preferences(datum/pref_record_writer/W)
 	if(!candidate)
 		return
 
@@ -67,12 +67,12 @@
 				if(!isnull(t) && CanUseTopic(user))
 					candidate.comments = sanitize(t)
 			if("chassis")
-				t = input(usr,"What would you like to use for your mobile chassis icon?") as null|anything in GLOB.possible_chassis
+				t = input(usr,"What would you like to use for your mobile chassis icon?") as null|anything in global.possible_chassis
 				if(!isnull(t) && CanUseTopic(user))
 					candidate.chassis = t
 				update_pai_preview(user)
 			if("say")
-				t = input(usr,"What theme would you like to use for your speech verbs?") as null|anything in GLOB.possible_say_verbs
+				t = input(usr,"What theme would you like to use for your speech verbs?") as null|anything in global.possible_say_verbs
 				if(!isnull(t) && CanUseTopic(user))
 					candidate.say_verb = t
 			if("cyclebg")
@@ -85,13 +85,13 @@
 
 /datum/category_item/player_setup_item/player_global/pai/proc/update_pai_preview(mob/user)
 	pai_preview = icon('icons/effects/128x48.dmi', bgstate)
-	var/icon/pai = icon('icons/mob/pai.dmi', GLOB.possible_chassis[candidate.chassis], NORTH)
+	var/icon/pai = icon('icons/mob/pai.dmi', global.possible_chassis[candidate.chassis], NORTH)
 	pai_preview.Scale(48+32, 16+32)
 
 	pai_preview.Blend(pai, ICON_OVERLAY, 25, 22)
-	pai = icon('icons/mob/pai.dmi', GLOB.possible_chassis[candidate.chassis], WEST)
+	pai = icon('icons/mob/pai.dmi', global.possible_chassis[candidate.chassis], WEST)
 	pai_preview.Blend(pai, ICON_OVERLAY, 1, 9)
-	pai = icon('icons/mob/pai.dmi', GLOB.possible_chassis[candidate.chassis], SOUTH)
+	pai = icon('icons/mob/pai.dmi', global.possible_chassis[candidate.chassis], SOUTH)
 	pai_preview.Blend(pai, ICON_OVERLAY, 49, 5)
 
 	pai_preview.Scale(pai_preview.Width() * 2, pai_preview.Height() * 2)

@@ -5,9 +5,8 @@ MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "pr
 /obj/item/light/tube/ascent
 	name = "mantid light filament"
 	color = COLOR_CYAN
-	b_colour = COLOR_CYAN
+	b_color = COLOR_CYAN
 	desc = "Some kind of strange alien lightbulb technology."
-	random_tone = FALSE
 
 /obj/item/multitool/mantid
 	name = "mantid multitool"

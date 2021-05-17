@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(statistics)
 	var/list/population_log = list()
 
 /datum/controller/subsystem/statistics/fire(resumed = FALSE)
-	population_log[time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")] = list("players" = LAZYLEN(GLOB.clients), "admin" = LAZYLEN(GLOB.admins))
+	population_log[time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")] = list("players" = LAZYLEN(global.clients), "admin" = LAZYLEN(global.admins))
 
 /datum/controller/subsystem/statistics/Shutdown()
 
@@ -161,7 +161,7 @@ SUBSYSTEM_DEF(statistics)
 		death.fireloss =  dead.getFireLoss()
 		death.brainloss = dead.getBrainLoss()
 		death.oxyloss =   dead.getOxyLoss()
-		death.using_map_name = GLOB.using_map.full_name
+		death.using_map_name = global.using_map.full_name
 		var/obj/effect/overmap/visitable/cell = map_sectors ? map_sectors["[dead.z]"] : null
 		death.overmap_location_name = cell ? cell.name : "Unknown"
 		LAZYADD(deaths, death)

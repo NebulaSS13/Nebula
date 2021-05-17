@@ -2,4 +2,5 @@
 #define MODPACK_TRITONIAN
 #include "_tritonian.dm"
 #include "datum/species.dm"
+#include "datum/species_bodytypes.dm"
 #endif

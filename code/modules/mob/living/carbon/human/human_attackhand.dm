@@ -190,7 +190,7 @@
 					else
 						var/decl/pronouns/G = get_pronouns()
 						attack_message = "\The [H] attempted to strike \the [src], but [G.he] rolled out of the way!"
-						src.set_dir(pick(GLOB.cardinal))
+						src.set_dir(pick(global.cardinal))
 					miss_type = 1
 
 			if(!miss_type && block)

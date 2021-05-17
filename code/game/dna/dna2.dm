@@ -80,7 +80,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 	// New stuff
 	var/species
-	var/skin_base = ""
 	var/list/body_markings = list()
 	var/lineage
 
@@ -92,9 +91,8 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.unique_enzymes=unique_enzymes
 	new_dna.b_type=b_type
 	new_dna.real_name=real_name
-	new_dna.species=species || GLOB.using_map.default_species
+	new_dna.species=species || global.using_map.default_species
 	new_dna.body_markings=body_markings.Copy()
-	new_dna.skin_base=skin_base
 	for(var/b=1;b<=DNA_SE_LENGTH;b++)
 		new_dna.SE[b]=SE[b]
 		if(b<=DNA_UI_LENGTH)
@@ -124,12 +122,12 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	// FIXME:  Species-specific defaults pls
 	if(!character.h_style)
 		character.h_style = "Skinhead"
-	var/hair = GLOB.hair_styles_list.Find(character.h_style)
+	var/hair = global.hair_styles_list.Find(character.h_style)
 
 	// Facial Hair
 	if(!character.f_style)
 		character.f_style = "Shaved"
-	var/beard	= GLOB.facial_hair_styles_list.Find(character.f_style)
+	var/beard	= global.facial_hair_styles_list.Find(character.f_style)
 
 	SetUIValueRange(DNA_UI_HAIR_R,  HEX_RED(character.hair_colour),   255, 1)
 	SetUIValueRange(DNA_UI_HAIR_G,  HEX_GREEN(character.hair_colour), 255, 1)
@@ -151,13 +149,11 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 	SetUIState(DNA_UI_GENDER, character.gender!=MALE, 1)
 
-	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair,  GLOB.hair_styles_list.len, 1)
-	SetUIValueRange(DNA_UI_BEARD_STYLE, beard, GLOB.facial_hair_styles_list.len,1)
+	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair,  global.hair_styles_list.len, 1)
+	SetUIValueRange(DNA_UI_BEARD_STYLE, beard, global.facial_hair_styles_list.len,1)
 
 	body_markings.Cut()
-	skin_base = character.skin_base
 	for(var/obj/item/organ/external/E in character.organs)
-		E.skin_base = skin_base
 		if(E.markings.len)
 			body_markings[E.organ_tag] = E.markings.Copy()
 
@@ -371,8 +367,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 //  Initial DNA setup.  I'm kind of wondering why the hell this doesn't just call the above.
 /datum/dna/proc/ready_dna(mob/living/carbon/human/character)
 	ResetUIFrom(character)
-
 	ResetSE()
-
 	unique_enzymes = md5(character.real_name)
-	GLOB.reg_dna[unique_enzymes] = character.real_name
+	global.reg_dna[unique_enzymes] = character.real_name

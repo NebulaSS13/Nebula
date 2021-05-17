@@ -55,7 +55,7 @@
 	popup.open()
 
 /obj/item/boombox/DefaultTopicState()
-	return GLOB.physical_state
+	return global.physical_topic_state
 
 /obj/item/boombox/CouldUseTopic(var/mob/user)
 	..()
@@ -172,7 +172,7 @@
 /obj/item/boombox/proc/start()
 	QDEL_NULL(sound_token)
 	var/datum/track/T = tracks[track_num]
-	sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, T.GetTrack(), volume = volume, frequency = frequency, range = 7, falloff = 4, prefer_mute = TRUE, preference = /datum/client_preference/play_game_music, streaming = TRUE)
+	sound_token = play_looping_sound(src, sound_id, T.GetTrack(), volume = volume, frequency = frequency, range = 7, falloff = 4, prefer_mute = TRUE, preference = /datum/client_preference/play_game_music, streaming = TRUE)
 	playing = 1
 	update_icon()
 	if(prob(break_chance))

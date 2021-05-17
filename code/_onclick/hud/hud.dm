@@ -313,7 +313,7 @@
 	update_action_buttons()
 
 /mob/proc/add_click_catcher()
-	client.screen |= GLOB.click_catchers
+	client.screen |= get_click_catchers()
 
 /mob/new_player/add_click_catcher()
 	return

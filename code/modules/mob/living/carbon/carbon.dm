@@ -194,17 +194,7 @@
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
 									"<span class='notice'>You shake [src] trying to wake [t_him] up!</span>")
 			else
-				var/mob/living/carbon/human/hugger = M
-				if(istype(hugger))
-					hugger.species.hug(hugger,src)
-				else
-					M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
-								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
-				if(M.fire_stacks >= (src.fire_stacks + 3))
-					src.fire_stacks += 1
-					M.fire_stacks -= 1
-				if(M.on_fire)
-					src.IgniteMob()
+				M.attempt_hug(src)
 
 			if(stat != DEAD)
 				ADJ_STATUS(src, STAT_PARA, -3)
@@ -232,15 +222,18 @@
 /mob/proc/throw_item(atom/target)
 	return
 
-/mob/living/carbon/throw_item(atom/target)
+/mob/living/carbon/throw_item(atom/target, obj/item/item)
 	src.throw_mode_off()
 	if(src.stat || !target)
 		return
-	if(target.type == /obj/screen) return
+	if(target.type == /obj/screen) 
+		return
 
-	var/atom/movable/item = src.get_active_hand()
+	if(!item)
+		item = get_active_hand()
 
-	if(!item) return
+	if(!istype(item) || !(item in get_held_items()))
+		return
 
 	var/throw_range = item.throw_range
 	var/itemsize
@@ -269,7 +262,7 @@
 	if(!item || !isturf(item.loc))
 		return
 
-	var/message = "\The [src] has thrown \the [item]."
+	var/message = "\The [src] has thrown \the [item]!"
 	var/skill_mod = 0.2
 	if(!skill_check(SKILL_HAULING, min(round(itemsize - ITEM_SIZE_HUGE) + 2, SKILL_MAX)))
 		if(prob(30))
@@ -551,6 +544,3 @@
 			set_internals(selected_obj, "\the [selected_obj] [selected_from] your [selected_slot]")
 		else
 			set_internals(selected_obj, "\the [selected_obj]")
-
-/mob/living/carbon/get_bodytype()
-	. = species && species.get_bodytype(src)

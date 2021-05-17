@@ -31,7 +31,7 @@
 	suit_overlay_inactive = "stealth_inactive"
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE,
@@ -112,7 +112,7 @@
 		to_chat(H, "<span class='warning'>You cannot teleport into solid walls.</span>")
 		return 0
 
-	if(T.z in GLOB.using_map.admin_levels)
+	if(T.z in global.using_map.admin_levels)
 		to_chat(H, "<span class='warning'>You cannot use your teleporter on this Z-level.</span>")
 		return 0
 
@@ -156,7 +156,7 @@
 	origin_tech = "{'materials':5,'powerstorage':6,'magnets':5,'esoteric':4,'engineering':6}"
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE,
 		/decl/material/solid/plastic = MATTER_AMOUNT_TRACE
 	)
@@ -233,7 +233,7 @@
 	holder.visible_message("<span class='danger'>\The [src.holder] emits a shrill tone!</span>","<span class='danger'> You hear a shrill tone!</span>")
 	sleep(blink_solid_time)
 	src.blink_mode = 0
-	src.holder.set_light(0, 0, 0, 2, "#000000")
+	src.holder.set_light(0)
 
 	explosion(get_turf(src), explosion_values[1], explosion_values[2], explosion_values[3], explosion_values[4])
 	if(holder && holder.wearer)
@@ -257,17 +257,17 @@
 		if(0)
 			return
 		if(1)
-			src.holder.set_light(1, 1, 8.5, 2, "#ff0a00")
+			src.holder.set_light(1.5, 8.5, "#ff0a00")
 			sleep(6)
-			src.holder.set_light(0, 0, 0, 2, "#000000")
+			src.holder.set_light(0)
 			spawn(6) .()
 		if(2)
-			src.holder.set_light(1, 1, 8.5, 2, "#ff0a00")
+			src.holder.set_light(1.5, 8.5, "#ff0a00")
 			sleep(2)
-			src.holder.set_light(0, 0, 0, 2, "#000000")
+			src.holder.set_light(0)
 			spawn(2) .()
 		if(3)
-			src.holder.set_light(1, 1, 8.5, 2, "#ff0a00")
+			src.holder.set_light(1.5, 8.5, "#ff0a00")
 
 /obj/item/rig_module/grenade_launcher/ninja
 	suit_overlay = null

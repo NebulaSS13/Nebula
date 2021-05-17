@@ -57,7 +57,7 @@
 	cut_overlays()
 	if(status)
 		add_overlay("[icon_state]-active")
-		set_light(0.4, 0.1, 1, 2, "#ff6a00")
+		set_light(1.5, 2, "#ff6a00")
 	else
 		if(!bcell)
 			add_overlay("[icon_state]-nocell")
@@ -171,7 +171,7 @@
 
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
-			H.forcesay(GLOB.hit_appends)
+			H.forcesay(global.hit_appends)
 
 	return 1
 
@@ -228,7 +228,7 @@
 /obj/item/baton/robot/electrified_arm/on_update_icon()
 	if(status)
 		icon_state = "electrified_arm_active"
-		set_light(0.4, 0.1, 1, 2, "#006aff")
+		set_light(1.5, 2, "#006aff")
 	else
 		icon_state = "electrified_arm"
 		set_light(0)

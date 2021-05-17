@@ -57,8 +57,8 @@
 
 /decl/special_role/borer/Initialize()
 	. = ..()
-	spawn_announcement = replacetext(GLOB.using_map.unidentified_lifesigns_message, "%STATION_NAME%", station_name())
-	spawn_announcement_sound = GLOB.using_map.lifesign_spawn_sound
+	spawn_announcement = replacetext(global.using_map.unidentified_lifesigns_message, "%STATION_NAME%", station_name())
+	spawn_announcement_sound = global.using_map.lifesign_spawn_sound
 
 /decl/special_role/borer/attempt_random_spawn()
 	if(config.aliens_allowed) ..()

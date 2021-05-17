@@ -6,7 +6,7 @@
 	hardware_size = 1
 	origin_tech = "{'programming':1,'engineering':1}"
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	var/max_capacity = 128
 	var/used_capacity = 0
 	var/list/stored_files = list()		// List of stored files on this drive. DO NOT MODIFY DIRECTLY!
@@ -20,7 +20,7 @@
 	icon_state = "hdd_advanced"
 	hardware_size = 2
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/computer/hard_drive/super
 	name = "super hard drive"
@@ -31,7 +31,7 @@
 	icon_state = "hdd_super"
 	hardware_size = 2
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/computer/hard_drive/cluster
 	name = "cluster hard drive"
@@ -42,7 +42,7 @@
 	icon_state = "hdd_cluster"
 	hardware_size = 3
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 // For tablets, etc. - highly power efficient.
 /obj/item/stock_parts/computer/hard_drive/small
@@ -54,7 +54,7 @@
 	icon_state = "hdd_small"
 	hardware_size = 1
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/computer/hard_drive/micro
 	name = "micro hard drive"
@@ -65,7 +65,7 @@
 	icon_state = "hdd_micro"
 	hardware_size = 1
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 /obj/item/stock_parts/computer/hard_drive/diagnostics()
 	. = ..()

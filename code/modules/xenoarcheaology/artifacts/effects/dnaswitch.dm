@@ -3,7 +3,7 @@
 	name = "dnaswitch"
 	origin_type = EFFECT_ORGANIC
 	var/severity
-	var/list/global/feels = list(
+	var/static/list/feels = list(
 		"You feel a little different.",
 		"You feel very strange.",
 		"Your stomach churns.",

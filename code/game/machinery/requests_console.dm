@@ -12,9 +12,9 @@
 #define RCS_MESSAUTH 7	// Authentication before sending
 #define RCS_ANNOUNCE 8	// Send announcement
 
-var/req_console_assistance = list()
-var/req_console_supplies = list()
-var/req_console_information = list()
+var/global/req_console_assistance = list()
+var/global/req_console_supplies = list()
+var/global/req_console_information = list()
 
 /obj/machinery/network/requests_console
 	name = "Requests Console"
@@ -41,7 +41,7 @@ var/req_console_information = list()
 	var/message = ""
 	var/recipient = "" //the department which will be receiving the message
 	var/priority = -1 //Priority of the message being sent
-	light_outer_range = 0
+	light_range = 0
 	var/datum/announcement/announcement = new
 
 	uncreated_component_parts = null

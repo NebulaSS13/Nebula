@@ -12,6 +12,7 @@
 #include "datum\emotes.dm"
 #include "datum\languages.dm"
 #include "datum\species.dm"
+#include "datum\species_bodytypes.dm"
 #include "effects\razorweb.dm"
 #include "items\cell.dm"
 #include "items\clothing.dm"

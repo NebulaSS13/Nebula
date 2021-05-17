@@ -185,8 +185,10 @@
 		update_icon()
 
 /obj/item/chems/syringe/proc/injectReagents(var/atom/target, var/mob/user)
+
 	if(ismob(target) && !user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
 		syringestab(target, user)
+		return
 
 	if(!reagents.total_volume)
 		to_chat(user, "<span class='notice'>The syringe is empty.</span>")

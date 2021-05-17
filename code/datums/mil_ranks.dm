@@ -6,11 +6,11 @@
  *  branch objects the map uses. Each branch definition specifies a list of
  *  /datum/mil_rank paths, which are ranks available to that branch.
  *
- *  Which branches and ranks can be selected for spawning is specifed in GLOB.using_map
+ *  Which branches and ranks can be selected for spawning is specifed in global.using_map
  *  and each branch datum definition, respectively.
  */
 
-var/datum/mil_branches/mil_branches = new()
+var/global/datum/mil_branches/mil_branches = new()
 
 /**
  *  Global object for handling branches
@@ -61,7 +61,7 @@ var/datum/mil_branches/mil_branches = new()
 		. = list()
 		LAZYSET(spawn_branches_by_species_, S, .)
 		for(var/spawn_branch in spawn_branches_)
-			if(!GLOB.using_map.is_species_branch_restricted(S, spawn_branches_[spawn_branch]))
+			if(!global.using_map.is_species_branch_restricted(S, spawn_branches_[spawn_branch]))
 				. += spawn_branch
 
 /**
@@ -106,7 +106,7 @@ var/datum/mil_branches/mil_branches = new()
 	var/list/rank_types       // list of paths used to init the ranks list
 	var/list/spawn_rank_types // list of paths used to init the spawn_ranks list. Subset of rank_types
 
-	var/assistant_job = DEFAULT_JOB_TYPE
+	var/assistant_job
 
 	// Email addresses will be created under this domain name. Mostly for the looks.
 	var/email_domain = "freemail.net"
@@ -117,6 +117,9 @@ var/datum/mil_branches/mil_branches = new()
 	ranks = list()
 	spawn_ranks_ = list()
 	spawn_ranks_by_species_ = list()
+
+	if(isnull(assistant_job))
+		assistant_job = global.using_map.default_job_type
 
 	for(var/rank_path in rank_types)
 		if(!ispath(rank_path, /datum/mil_rank))
@@ -136,15 +139,15 @@ var/datum/mil_branches/mil_branches = new()
 		. = list()
 		spawn_ranks_by_species_[S] = .
 		for(var/spawn_rank in spawn_ranks_)
-			if(!GLOB.using_map.is_species_rank_restricted(S, src, spawn_ranks_[spawn_rank]))
+			if(!global.using_map.is_species_rank_restricted(S, src, spawn_ranks_[spawn_rank]))
 				. += spawn_rank
 
 
 /**
- *  Populate the global branches list from GLOB.using_map
+ *  Populate the global branches list from global.using_map
  */
 /hook/startup/proc/populate_branches()
-	if(!(GLOB.using_map.flags & MAP_HAS_BRANCH) && !(GLOB.using_map.flags & MAP_HAS_RANK))
+	if(!(global.using_map.flags & MAP_HAS_BRANCH) && !(global.using_map.flags & MAP_HAS_RANK))
 		mil_branches.branches  = null
 		mil_branches.spawn_branches_ = null
 		mil_branches.spawn_branches_by_species_ = null
@@ -153,7 +156,7 @@ var/datum/mil_branches/mil_branches = new()
 	mil_branches.branches  = list()
 	mil_branches.spawn_branches_ = list()
 	mil_branches.spawn_branches_by_species_ = list()
-	for(var/branch_path in GLOB.using_map.branch_types)
+	for(var/branch_path in global.using_map.branch_types)
 		if(!ispath(branch_path, /datum/mil_branch))
 			PRINT_STACK_TRACE("populate_branches() attempted to instantiate object with path [branch_path], which is not a subtype of /datum/mil_branch.")
 			continue
@@ -161,7 +164,7 @@ var/datum/mil_branches/mil_branches = new()
 		var/datum/mil_branch/branch = new branch_path ()
 		mil_branches.branches[branch.name] = branch
 
-		if(branch_path in GLOB.using_map.spawn_branch_types)
+		if(branch_path in global.using_map.spawn_branch_types)
 			mil_branches.spawn_branches_[branch.name] = branch
 
 	return 1

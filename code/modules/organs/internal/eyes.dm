@@ -18,7 +18,6 @@
 	var/tmp/last_eye_cache_key
 	var/flash_mod
 	var/darksight_range
-	var/darksight_tint
 	var/eye_blend = ICON_ADD
 
 /obj/item/organ/internal/eyes/proc/get_eye_cache_key()
@@ -40,10 +39,7 @@
 	if(I)
 		var/cache_key = "[last_eye_cache_key]-glow"
 		if(!human_icon_cache[cache_key])
-			var/image/eye_glow = image(I)
-			eye_glow.layer = EYE_GLOW_LAYER
-			eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-			human_icon_cache[cache_key] = eye_glow
+			human_icon_cache[cache_key] = emissive_overlay(I, "")
 		return human_icon_cache[cache_key]
 
 /obj/item/organ/internal/eyes/replaced(var/mob/living/carbon/human/target)
@@ -81,7 +77,6 @@
 	. = ..()
 	flash_mod = species.flash_mod
 	darksight_range = species.darksight_range
-	darksight_tint = species.darksight_tint
 
 /obj/item/organ/internal/eyes/proc/get_total_protection(var/flash_protection = FLASH_PROTECTION_NONE)
 	return (flash_protection + innate_flash_protection)
@@ -121,7 +116,6 @@
 	update_colour()
 	flash_mod = 1
 	darksight_range = 2
-	darksight_tint = DARKTINT_NONE
 
 /obj/item/organ/internal/eyes/get_mechanical_assisted_descriptor()
 	return "retinal overlayed [name]"

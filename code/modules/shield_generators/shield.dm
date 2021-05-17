@@ -22,13 +22,13 @@
 
 	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
 		color = COLOR_VIOLET
-		set_light(1, 0.1, 2, l_color = "#ff9900")
 	else
 		color = COLOR_DEEP_SKY_BLUE
-		set_light(1, 0.1, 2, l_color = "#66ffff")
+
+	set_light(2, 1, color)
 
 	cut_overlays()
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		var/turf/T = get_step(src, direction)
 		if(!T)
 			continue
@@ -61,7 +61,7 @@
 	set_light(0)
 
 	var/turf/current_loc = get_turf(src)
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		var/turf/T = get_step(current_loc, direction)
 		if(T)
 			for(var/obj/effect/shield/F in T)
@@ -325,7 +325,7 @@
 		addtimer(CALLBACK(src, .proc/spread_impact_effect, i, affected_shields), 2)
 
 /obj/effect/shield/proc/spread_impact_effect(var/i, var/list/affected_shields = list())
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		var/turf/T = get_step(src, direction)
 		if(T) // Incase we somehow stepped off the map.
 			for(var/obj/effect/shield/F in T)

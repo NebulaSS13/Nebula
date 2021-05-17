@@ -9,8 +9,6 @@
 //
 //		This is called immediately, before the organ is actually moved or deleted.
 
-GLOBAL_DATUM_INIT(dismembered_event, /decl/observ/dismembered, new)
-
 /decl/observ/dismembered
 	name = "Dismembered"
 	expected_type = /mob/living

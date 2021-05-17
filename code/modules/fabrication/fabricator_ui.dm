@@ -68,7 +68,7 @@
 				var/list/material_components = list()
 				for(var/material in R.resources)
 					var/sheets = round(stored_material[material]/round(R.resources[material]*mat_efficiency))
-					if(isnull(max_sheets) || max_sheets > sheets)
+					if(isnull(max_sheets) || max_sheets < sheets)
 						max_sheets = sheets
 					if(stored_material[material] < round(R.resources[material]*mat_efficiency))
 						build_option["unavailable"] = 1
@@ -83,7 +83,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "fabricator.tmpl", "[capitalize(name)]", 480, 410, state = GLOB.physical_state)
+		ui = new(user, src, ui_key, "fabricator.tmpl", "[capitalize(name)]", 480, 410, state = global.physical_topic_state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

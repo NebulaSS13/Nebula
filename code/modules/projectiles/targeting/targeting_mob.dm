@@ -1,5 +1,6 @@
-/mob/living/var/obj/aiming_overlay/aiming
-/mob/living/var/list/aimed = list()
+/mob/living
+	var/obj/aiming_overlay/aiming
+	var/list/aimed_at_by
 
 /mob/verb/toggle_gun_mode()
 	set name = "Toggle Gun Mode"
@@ -22,11 +23,6 @@
 		return
 	aiming.cancel_aiming(no_message)
 
-/mob/living/death(gibbed, deathmessage="seizes up and falls limp...", show_dead_message)
-	. = ..(gibbed, deathmessage, show_dead_message)
-	if(.)
-		stop_aiming(no_message=1)
-
 /mob/living/UpdateLyingBuckledAndVerbStatus()
 	..()
 	if(lying)
@@ -36,6 +32,6 @@
 	if(aiming)
 		qdel(aiming)
 		aiming = null
-	aimed.Cut()
+	QDEL_NULL_LIST(aimed_at_by)
 	return ..()
 

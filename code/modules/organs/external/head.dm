@@ -15,7 +15,7 @@
 	artery_name = "cartoid artery"
 	cavity_name = "cranial"
 
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
 
 	var/draw_eyes = TRUE
 	var/glowing_eyes = FALSE
@@ -110,7 +110,7 @@
 			if(eye_glow) overlays |= eye_glow
 
 		if(owner.lip_style && !BP_IS_PROSTHETIC(src) && (species && (species.appearance_flags & HAS_LIPS)))
-			var/icon/lip_icon = new/icon(species?.lip_icon || 'icons/mob/human_races/species/lips.dmi', "lipstick_s")	
+			var/icon/lip_icon = new/icon(bodytype.get_lip_icon(owner) || 'icons/mob/human_races/species/lips.dmi', "lipstick_s")	
 			lip_icon.Blend(owner.lip_style, ICON_MULTIPLY)
 			overlays |= lip_icon
 			mob_icon.Blend(lip_icon, ICON_OVERLAY)
@@ -120,9 +120,9 @@
 	return mob_icon
 
 /obj/item/organ/external/head/proc/get_hair_icon()
-	var/image/res = image(species.icon_template,"")
+	var/image/res = image(bodytype.icon_template,"")
 	if(owner.f_style)
-		var/datum/sprite_accessory/facial_hair_style = GLOB.facial_hair_styles_list[owner.f_style]
+		var/datum/sprite_accessory/facial_hair_style = global.facial_hair_styles_list[owner.f_style]
 		if(facial_hair_style)
 			if(!facial_hair_style.species_allowed || (species.get_root_species_name(owner) in facial_hair_style.species_allowed))
 				if(!facial_hair_style.subspecies_allowed || (species.name in facial_hair_style.subspecies_allowed))
@@ -133,10 +133,10 @@
 
 	if(owner.h_style)
 		var/style = owner.h_style
-		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[style]
+		var/datum/sprite_accessory/hair/hair_style = global.hair_styles_list[style]
 		if(owner.head && (owner.head.flags_inv & BLOCKHEADHAIR))
 			if(!(hair_style.flags & VERY_SHORT))
-				hair_style = GLOB.hair_styles_list["Short Hair"]
+				hair_style = global.hair_styles_list["Short Hair"]
 		if(hair_style)
 			if(!hair_style.species_allowed || (species.get_root_species_name(owner) in hair_style.species_allowed))
 				if(!hair_style.subspecies_allowed || (species.name in hair_style.subspecies_allowed))
@@ -150,7 +150,7 @@
 		if (mark_style.draw_target == MARKING_TARGET_HAIR)
 			var/icon/mark_icon = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]")
 			if (!mark_style.do_colouration && owner.h_style)
-				var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[owner.h_style]
+				var/datum/sprite_accessory/hair/hair_style = global.hair_styles_list[owner.h_style]
 				if ((~hair_style.flags & HAIR_BALD) && hair_colour)
 					mark_icon.Blend(hair_colour, ICON_ADD)
 				else //only baseline human skin tones; others will need species vars for coloration

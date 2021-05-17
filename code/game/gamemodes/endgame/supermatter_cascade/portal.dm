@@ -22,7 +22,7 @@
 	overlays.Cut()
 
 /obj/singularity/narsie/large/exit/Process()
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in global.player_list)
 		if(M.client)
 			M.see_rift(src)
 	eat()

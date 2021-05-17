@@ -186,15 +186,20 @@
 	if (.)
 		// observ
 		if(!loc)
-			GLOB.moved_event.raise_event(src, old_loc, null)
+			events_repository.raise_event(/decl/observ/moved, src, old_loc, null)
 
 		// freelook
 		if(opacity)
 			updateVisibility(src)
 
 		// lighting
-		if (light_sources)	// Yes, I know you can for-null safely, but this is slightly faster. Hell knows why.
-			for (var/datum/light_source/L in light_sources)
+		if (light_source_solo)
+			light_source_solo.source_atom.update_light()
+		else if (light_source_multi)
+			var/datum/light_source/L
+			var/thing
+			for (thing in light_source_multi)
+				L = thing
 				L.source_atom.update_light()
 
 /atom/movable/Move(...)
@@ -202,15 +207,20 @@
 	. = ..()
 	if (.)
 		if(!loc)
-			GLOB.moved_event.raise_event(src, old_loc, null)
+			events_repository.raise_event(/decl/observ/moved, src, old_loc, null)
 
 		// freelook
 		if(opacity)
 			updateVisibility(src)
 
 		// lighting
-		if (light_sources)	// Yes, I know you can for-null safely, this is slightly faster. Hell knows why.
-			for (var/datum/light_source/L in light_sources)
+		if (light_source_solo)
+			light_source_solo.source_atom.update_light()
+		else if (light_source_multi)
+			var/datum/light_source/L
+			var/thing
+			for (thing in light_source_multi)
+				L = thing
 				L.source_atom.update_light()
 
 //called when src is thrown into hit_atom
@@ -253,11 +263,11 @@
 	set_dir(master.dir)
 
 	if(istype(master, /atom/movable))
-		GLOB.moved_event.register(master, src, follow_proc)
+		events_repository.register(/decl/observ/moved, master, src, follow_proc)
 		SetInitLoc()
 
-	GLOB.destroyed_event.register(master, src, /datum/proc/qdel_self)
-	GLOB.dir_set_event.register(master, src, /atom/proc/recursive_dir_set)
+	events_repository.register(/decl/observ/destroyed, master, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/dir_set, master, src, /atom/proc/recursive_dir_set)
 
 	. = ..()
 
@@ -266,9 +276,9 @@
 
 /atom/movable/overlay/Destroy()
 	if(istype(master, /atom/movable))
-		GLOB.moved_event.unregister(master, src)
-	GLOB.destroyed_event.unregister(master, src)
-	GLOB.dir_set_event.unregister(master, src)
+		events_repository.unregister(/decl/observ/moved, master, src)
+	events_repository.unregister(/decl/observ/destroyed, master, src)
+	events_repository.unregister(/decl/observ/dir_set, master, src)
 	master = null
 	. = ..()
 
@@ -284,19 +294,19 @@
 	if(!simulated)
 		return
 
-	if(!z || (z in GLOB.using_map.sealed_levels))
+	if(!z || (z in global.using_map.sealed_levels))
 		return
 
-	if(!GLOB.universe.OnTouchMapEdge(src))
+	if(!global.universe.OnTouchMapEdge(src))
 		return
 
-	if(GLOB.using_map.use_overmap)
+	if(global.using_map.use_overmap)
 		overmap_spacetravel(get_turf(src), src)
 		return
 
 	var/new_x
 	var/new_y
-	var/new_z = GLOB.using_map.get_transit_zlevel(z)
+	var/new_z = global.using_map.get_transit_zlevel(z)
 	if(new_z)
 		if(x <= TRANSITIONEDGE)
 			new_x = world.maxx - TRANSITIONEDGE - 2
@@ -328,3 +338,7 @@
 		M.make_grab(src)
 		return 0
 	. = ..()
+
+/atom/movable/proc/pushed(var/pushdir)
+	set waitfor = FALSE
+	step(src, pushdir)

@@ -155,10 +155,10 @@
 				oxygen_reserve = min(initial(oxygen_reserve), oxygen_reserve+1)
 			if(!oxygen_reserve) //(hardcrit)
 				SET_STATUS_MAX(owner, STAT_PARA, 3)
-			var/can_heal = damage && damage < max_damage && (damage % damage_threshold_value || LAZYACCESS(owner.chem_effects, CE_BRAIN_REGEN) || (!past_damage_threshold(3) && LAZYACCESS(owner.chem_effects, CE_STABLE)))
+			var/can_heal = damage && damage < max_damage && (damage % damage_threshold_value || GET_CHEMICAL_EFFECT(owner, CE_BRAIN_REGEN) || (!past_damage_threshold(3) && GET_CHEMICAL_EFFECT(owner, CE_STABLE)))
 			var/damprob
 			//Effects of bloodloss
-			var/stability_effect = LAZYACCESS(owner.chem_effects, CE_STABLE)
+			var/stability_effect = GET_CHEMICAL_EFFECT(owner, CE_STABLE)
 			switch(blood_volume)
 
 				if(BLOOD_VOLUME_SAFE to INFINITY)
@@ -209,8 +209,9 @@
 			addtimer(CALLBACK(src, .proc/brain_damage_callback, damage), rand(6, 20) SECONDS, TIMER_UNIQUE)
 
 /obj/item/organ/internal/brain/proc/brain_damage_callback(var/damage) //Confuse them as a somewhat uncommon aftershock. Side note: Only here so a spawn isn't used. Also, for the sake of a unique timer.
-	to_chat(owner, "<span class = 'notice' font size='10'><B>I can't remember which way is forward...</B></span>")
-	ADJ_STATUS(owner, STAT_CONFUSE, damage)
+	if(!QDELETED(owner))
+		to_chat(owner, SPAN_NOTICE("<font size='10'><B>I can't remember which way is forward...</B></font>"))
+		ADJ_STATUS(owner, STAT_CONFUSE, damage)
 
 /obj/item/organ/internal/brain/proc/handle_disabilities()
 	if(owner.stat)

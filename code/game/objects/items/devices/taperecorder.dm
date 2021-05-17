@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_SMALL
 
 	material = /decl/material/solid/metal/aluminium
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/emagged = 0.0
 	var/recording = 0.0
@@ -29,7 +29,7 @@
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	if(ispath(mytape))
 		mytape = new mytape(src)
-	GLOB.listening_objects += src
+	global.listening_objects += src
 	update_icon()
 
 /obj/item/taperecorder/empty
@@ -37,7 +37,7 @@
 
 /obj/item/taperecorder/Destroy()
 	QDEL_NULL(wires)
-	GLOB.listening_objects -= src
+	global.listening_objects -= src
 	if(mytape)
 		qdel(mytape)
 		mytape = null
@@ -389,7 +389,7 @@
 	material = /decl/material/solid/plastic
 	matter = list(
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE
 	)
 	force = 1
 	throwforce = 0

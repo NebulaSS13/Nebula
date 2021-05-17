@@ -14,7 +14,7 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 100
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'engineering':3,'materials':3}"
 
 	var/replace_sound = 'sound/items/rped.ogg'
@@ -43,7 +43,7 @@
 	remote_interaction = TRUE
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 	origin_tech = "{'engineering':3,'materials':3}"

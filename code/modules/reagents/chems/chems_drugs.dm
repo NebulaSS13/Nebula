@@ -96,13 +96,11 @@
 	value = 2
 	narcosis = 7
 	fruit_descriptor = "rich"
-
 	euphoriant = 15
-	euphoriant_max = 15
 
 /decl/material/liquid/psychoactives/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
-	ADJ_STATUS(M, STAT_DRUGGY, rand(15, 15))
+	SET_STATUS_MAX(M, STAT_DRUGGY, 15)
 	M.add_chemical_effect(CE_PULSE, -1)
 
 /decl/material/liquid/hallucinogenics
@@ -127,7 +125,6 @@
 	metabolism = REM * 0.5
 	value = 2
 	euphoriant = 30
-	euphoriant_max = 30
 	fruit_descriptor = "hallucinogenic"
 
 /decl/material/liquid/psychotropics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
@@ -135,23 +132,23 @@
 	var/dose = LAZYACCESS(M.chem_doses, type)
 	if(dose < 1 * threshold)
 		M.apply_effect(3, STUTTER)
-		ADJ_STATUS(M, STAT_DIZZY, 5)
+		ADJ_STATUS(M, STAT_DIZZY, 1)
 		if(prob(5))
 			M.emote(pick("twitch", "giggle"))
 	else if(dose < 2 * threshold)
 		M.apply_effect(3, STUTTER)
-		ADJ_STATUS(M, STAT_JITTER,  5)
-		ADJ_STATUS(M, STAT_DIZZY,   5)
-		ADJ_STATUS(M, STAT_DRUGGY, 35)
+		ADJ_STATUS(M, STAT_JITTER,  2)
+		ADJ_STATUS(M, STAT_DIZZY,   2)
+		SET_STATUS_MAX(M, STAT_DRUGGY, 35)
 
 		if(prob(10))
 			M.emote(pick("twitch", "giggle"))
 	else
 		M.add_chemical_effect(CE_MIND, -1)
 		M.apply_effect(3, STUTTER)
-		ADJ_STATUS(M, STAT_JITTER, 10)
-		ADJ_STATUS(M, STAT_DIZZY,  10)
-		ADJ_STATUS(M, STAT_DRUGGY, 40)
+		ADJ_STATUS(M, STAT_JITTER, 5)
+		ADJ_STATUS(M, STAT_DIZZY,  5)
+		SET_STATUS_MAX(M, STAT_DRUGGY, 40)
 		if(prob(15))
 			M.emote(pick("twitch", "giggle"))
 
@@ -164,7 +161,7 @@
 	overdose = 25
 
 	// M A X I M U M C H E E S E
-	var/global/list/dose_messages = list(
+	var/static/list/dose_messages = list(
 		"Your name is called. It is your time.",
 		"You are dissolving. Your hands are wax...",
 		"It all runs together. It all mixes.",
@@ -185,7 +182,7 @@
 		"Come back from there. Please."
 	)
 
-	var/global/list/overdose_messages = list(
+	var/static/list/overdose_messages = list(
 		"THE SIGNAL THE SIGNAL THE SIGNAL THE SIGNAL",
 		"IT CRIES IT CRIES IT WAITS IT CRIES",
 		"NOT YOURS NOT YOURS NOT YOURS NOT YOURS",

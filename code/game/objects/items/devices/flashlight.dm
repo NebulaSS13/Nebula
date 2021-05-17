@@ -15,12 +15,16 @@
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 
 	action_button_name = "Toggle Flashlight"
+
 	var/on = FALSE
 	var/activation_sound = 'sound/effects/flashlight.ogg'
-	var/flashlight_max_bright = 0.5 //brightness of light when on, must be no greater than 1.
-	var/flashlight_inner_range = 1 //inner range of light when on, can be negative
-	var/flashlight_outer_range = 3 //outer range of light when on, can be negative
+
+	var/flashlight_range = 4 // range of light when on, can be negative
+	var/flashlight_power     // brightness of light when on
 	var/flashlight_flags = 0 // FLASHLIGHT_ bitflags
+
+	light_wedge = LIGHT_WIDE
+	var/spawn_dir // a way for mappers to force which way a flashlight faces upon spawning
 
 /obj/item/flashlight/Initialize()
 	. = ..()
@@ -59,10 +63,32 @@
 	return 1
 
 /obj/item/flashlight/proc/set_flashlight()
+	if(light_wedge)
+		set_dir(pick(NORTH, SOUTH, EAST, WEST))
+		if(spawn_dir)
+			set_dir(spawn_dir)
 	if (on)
-		set_light(flashlight_max_bright, flashlight_inner_range, flashlight_outer_range, 2, light_color)
+		set_light(flashlight_range, flashlight_power, light_color)
 	else
 		set_light(0)
+
+/obj/item/flashlight/examine(mob/user, distance)
+	. = ..()
+	if(light_wedge && isturf(loc))
+		to_chat(user, FONT_SMALL(SPAN_NOTICE("\The [src] is facing [dir2text(dir)].")))
+
+/obj/item/flashlight/dropped(mob/user)
+	. = ..()
+	if(light_wedge)
+		set_dir(user.dir)
+		update_light()
+
+/obj/item/flashlight/throw_at()
+	. = ..()
+	if(light_wedge)
+		var/new_dir = pick(NORTH, SOUTH, EAST, WEST)
+		set_dir(new_dir)
+		update_light()
 
 /obj/item/flashlight/attack(mob/living/M, mob/living/user)
 	add_fingerprint(user)
@@ -137,8 +163,8 @@
 	desc = "An energy efficient flashlight."
 	icon_state = "biglight"
 	item_state = "biglight"
-	flashlight_max_bright = 0.75
-	flashlight_outer_range = 4
+	flashlight_range = 6
+	flashlight_power = 3
 
 /obj/item/flashlight/flashdark
 	name = "flashdark"
@@ -146,9 +172,8 @@
 	icon_state = "flashdark"
 	item_state = "flashdark"
 	w_class = ITEM_SIZE_NORMAL
-	flashlight_max_bright = -1
-	flashlight_outer_range = 4
-	flashlight_inner_range = 1
+	flashlight_range = 8
+	flashlight_power = -6
 
 /obj/item/flashlight/pen
 	name = "penlight"
@@ -158,9 +183,8 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_EARS
 	w_class = ITEM_SIZE_TINY
-	flashlight_max_bright = 0.25
-	flashlight_inner_range = 0.1
-	flashlight_outer_range = 2
+	flashlight_range = 2
+	light_wedge = LIGHT_OMNI
 
 /obj/item/flashlight/maglight
 	name = "maglight"
@@ -171,8 +195,7 @@
 	attack_verb = list ("smacked", "thwacked", "thunked")
 	material = /decl/material/solid/metal/aluminium
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
-	flashlight_max_bright = 0.5
-	flashlight_outer_range = 5
+	light_wedge = LIGHT_NARROW
 
 /******************************Lantern*******************************/
 /obj/item/flashlight/lantern
@@ -188,7 +211,9 @@
 	slot_flags = SLOT_LOWER_BODY
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
-	flashlight_outer_range = 5
+	flashlight_range = 2
+	light_wedge = LIGHT_OMNI
+	light_color = LIGHT_COLOR_FIRE
 
 /obj/item/flashlight/lantern/on_update_icon()
 	..()
@@ -206,9 +231,7 @@
 	item_state = ""
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_TINY
-	flashlight_max_bright = 0.25
-	flashlight_inner_range = 0.1
-	flashlight_outer_range = 2
+	flashlight_range = 2
 
 
 // the desk lamps are a bit special
@@ -219,10 +242,8 @@
 	item_state = "lamp"
 	w_class = ITEM_SIZE_LARGE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	flashlight_max_bright = 0.3
-	flashlight_inner_range = 2
-	flashlight_outer_range = 5
-
+	flashlight_range = 5
+	light_wedge = LIGHT_OMNI
 	on = 1
 
 // green-shaded desk lamp
@@ -231,6 +252,7 @@
 	icon_state = "lampgreen"
 	item_state = "lampgreen"
 	light_color = "#ffc58f"
+	flashlight_range = 4
 
 /obj/item/flashlight/lamp/verb/toggle_light()
 	set name = "Toggle light"
@@ -250,15 +272,16 @@
 	icon_state = "flare"
 	item_state = "flare"
 	action_button_name = null //just pull it manually, neckbeard.
-	var/fuel = 0
-	var/on_damage = 7
-	var/produce_heat = 1500
 	activation_sound = 'sound/effects/flare.ogg'
 	flashlight_flags = FLASHLIGHT_SINGLE_USE
 
-	flashlight_max_bright = 0.8
-	flashlight_inner_range = 0.1
-	flashlight_outer_range = 5
+	flashlight_range = 5
+	flashlight_power = 3
+	light_wedge = LIGHT_OMNI
+
+	var/fuel = 0
+	var/on_damage = 7
+	var/produce_heat = 1500
 
 /obj/item/flashlight/flare/Initialize()
 	. = ..()
@@ -331,9 +354,8 @@
 	produce_heat = 0
 	activation_sound = 'sound/effects/glowstick.ogg'
 
-	flashlight_max_bright = 0.6
-	flashlight_inner_range = 0.1
-	flashlight_outer_range = 3
+	flashlight_range = 3
+	flashlight_power = 2
 
 /obj/item/flashlight/flare/glowstick/Initialize()
 	. = ..()
@@ -397,9 +419,8 @@
 	on = TRUE //Bio-luminesence has one setting, on.
 	flashlight_flags = FLASHLIGHT_ALWAYS_ON
 
-	flashlight_max_bright = 1
-	flashlight_inner_range = 0.1
-	flashlight_outer_range = 5
+	flashlight_range = 5
+	light_wedge = LIGHT_OMNI
 
 //hand portable floodlights for emergencies. Less bulky than the large ones. But also less light. Unused green variant in the sheet.
 
@@ -413,9 +434,9 @@
 	w_class = ITEM_SIZE_LARGE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_ROTATABLE
 
-	flashlight_max_bright = 1
-	flashlight_inner_range = 3
-	flashlight_outer_range = 7
+	flashlight_power = 1
+	flashlight_range = 7
+	light_wedge = LIGHT_WIDE
 
 /obj/item/flashlight/lamp/floodlamp/green
 	icon_state = "greenfloodlamp"
@@ -428,7 +449,7 @@
 	icon_state = "lavalamp"
 	on = 0
 	action_button_name = "Toggle lamp"
-	flashlight_outer_range = 3 //range of light when on
+	flashlight_range = 3 //range of light when on
 	material = /decl/material/solid/metal/aluminium
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 

@@ -13,8 +13,8 @@
 	<br><br>---END OF TRANSMISSION---"
 
 /obj/effect/overmap/radio/proc/set_origin(obj/effect/overmap/origin)
-	GLOB.moved_event.register(origin, src, /obj/effect/overmap/radio/proc/follow)
-	GLOB.destroyed_event.register(origin, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/moved, origin, src, /obj/effect/overmap/radio/proc/follow)
+	events_repository.register(/decl/observ/destroyed, origin, src, /datum/proc/qdel_self)
 	forceMove(origin.loc)
 	source = origin
 	pixel_x = -(origin.bound_width - 6)
@@ -24,8 +24,8 @@
 	if(!QDELETED(src)) forceMove(new_loc)
 
 /obj/effect/overmap/radio/Destroy()
-	GLOB.destroyed_event.unregister(source, src)
-	GLOB.moved_event.unregister(source, src)
+	events_repository.unregister(/decl/observ/destroyed, source, src)
+	events_repository.unregister(/decl/observ/moved, source, src)
 	source = null
 	. = ..()
 

@@ -8,7 +8,7 @@
 	icon_state = "unknown1"
 	maxcharge = 5000
 	origin_tech = "{'powerstorage':7}"
-	var/global/base_icon
+	var/static/base_icon
 
 /obj/item/cell/alien/on_update_icon()
 	if(!base_icon)
@@ -58,14 +58,13 @@
 	base_state = "lbulb"
 	desc = "A simple alien device, perhaps some sort of light source."
 	color = COLOR_PURPLE
-	var/global/random_light_color
-	random_tone = FALSE
+	var/static/random_light_color
 
 /obj/item/light/alien/Initialize()
 	. = ..()
 	if(!random_light_color)
 		random_light_color = get_random_colour(FALSE, 100, 255)
-	b_colour = random_light_color
+	b_color = random_light_color
 	color = random_light_color
 
 //Airlock

@@ -76,7 +76,7 @@
 			else if(istype(W,/obj/item/stack/material))
 				var/obj/item/stack/material/M = W
 				if(M.material && (M.material.flags & MAT_FLAG_PADDING))
-					padding_type = "[M.material.type]"
+					padding_type = M.material.type
 			if(!padding_type)
 				to_chat(user, "You cannot pad \the [src] with that.")
 				return
@@ -120,7 +120,7 @@
 
 /obj/structure/bed/proc/remove_padding()
 	if(reinf_material)
-		reinf_material.place_sheet(get_turf(src))
+		reinf_material.create_object(get_turf(src))
 		reinf_material = null
 	update_icon()
 

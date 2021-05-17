@@ -24,7 +24,7 @@
 
 /obj/item/extinguisher/mini
 	name = "mini fire extinguisher"
-	desc = "A light and compact fibreglass-framed model fire extinguisher."
+	desc = "A light and compact fiberglass-framed model fire extinguisher."
 	icon_state = "miniFE0"
 	item_state = "miniFE"
 	hitsound = null
@@ -37,8 +37,8 @@
 	sprite_name = "miniFE"
 	material = /decl/material/solid/plastic
 	matter = list(
-		/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT,
-		/decl/material/solid/glass = MATTER_AMOUNT_TRACE
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT
 	)
 
 /obj/item/extinguisher/Initialize()

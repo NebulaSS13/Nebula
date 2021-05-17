@@ -1,6 +1,10 @@
 // Init optimization.
 
-GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
+var/global/list/machine_path_to_circuit_type
+/proc/get_circuit_by_build_path(var/circuit)
+	if(!global.machine_path_to_circuit_type)
+		global.machine_path_to_circuit_type = cache_circuits_by_build_path()
+	return global.machine_path_to_circuit_type[circuit]
 
 /proc/cache_circuits_by_build_path()
 	. = list()
@@ -18,7 +22,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /obj/machinery/proc/populate_parts(var/full_populate) // Full populate creates a circuitboard and all needed components automatically.
 	if(full_populate)
 		var/path_to_check = base_type || type
-		var/board_path = GLOB.machine_path_to_circuit_type[path_to_check]
+		var/board_path = get_circuit_by_build_path(path_to_check)
 		if(board_path)
 			var/obj/item/stock_parts/circuitboard/board = install_component(board_path, refresh_parts = FALSE)
 			var/list/req_components = board.spawn_components || board.req_components
@@ -146,7 +150,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	if(istype(part))
 		LAZYADD(component_parts, part)
 		part.on_install(src)
-		GLOB.destroyed_event.register(part, src, .proc/component_destroyed)
+		events_repository.register(/decl/observ/destroyed, part, src, .proc/component_destroyed)
 	else if(ispath(part))
 		LAZYINITLIST(uncreated_component_parts)
 		uncreated_component_parts[part] += 1
@@ -174,7 +178,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		if(QDELETED(part)) // unremovable stuff
 			return
 		part.dropInto(loc)
-		GLOB.destroyed_event.unregister(part, src)
+		events_repository.unregister(/decl/observ/destroyed, part, src)
 		return part
 
 /obj/machinery/proc/replace_part(mob/user, var/obj/item/storage/part_replacer/R, var/obj/item/stock_parts/old_part, var/obj/item/stock_parts/new_part)
@@ -189,7 +193,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	to_chat(user, "<span class='notice'>[old_part.name] replaced with [new_part.name].</span>")
 
 /obj/machinery/proc/component_destroyed(var/obj/item/component)
-	GLOB.destroyed_event.unregister(component, src)
+	events_repository.unregister(/decl/observ/destroyed, component, src)
 	LAZYREMOVE(component_parts, component)
 	LAZYREMOVE(processing_parts, component)
 	power_components -= component

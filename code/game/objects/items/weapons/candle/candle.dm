@@ -11,9 +11,8 @@
 	var/wax
 	var/last_lit
 	var/icon_set = "candle"
-	var/candle_max_bright = 0.3
-	var/candle_inner_range = 0.1
-	var/candle_outer_range = 4
+	var/candle_range = CANDLE_LUM
+	var/candle_power
 	var/candle_falloff = 2
 
 /obj/item/flame/candle/Initialize()
@@ -35,7 +34,7 @@
 		last_lit = lit
 		overlays.Cut()
 		if(lit)
-			overlays += overlay_image(icon, "[icon_state]_lit", flags=RESET_COLOR)
+			overlays += overlay_image(icon, "[icon_state]_lit", flags = RESET_COLOR)
 
 /obj/item/flame/candle/attackby(obj/item/W, mob/user)
 	..()
@@ -52,7 +51,7 @@
 	if(!lit)
 		lit = 1
 		visible_message("<span class='notice'>\The [user] lights the [name].</span>")
-		set_light(candle_max_bright, candle_inner_range, candle_outer_range, candle_falloff)
+		set_light(candle_range, candle_power)
 		START_PROCESSING(SSobj, src)
 
 /obj/item/flame/candle/Process()

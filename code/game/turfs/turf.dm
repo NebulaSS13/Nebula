@@ -38,39 +38,42 @@
 	var/prev_type // Previous type of the turf, prior to turf translation.
 
 /turf/Initialize(mapload, ...)
-	. = ..()
+	. = null && ..()	// This weird construct is to shut up the 'parent proc not called' warning without disabling the lint for child types. We explicitly return an init hint so this won't change behavior.
+
+	// atom/Initialize has been copied here for performance (or at least the bits of it that turfs use has been)
+	if(atom_flags & ATOM_FLAG_INITIALIZED)
+		PRINT_STACK_TRACE("Warning: [src]([type]) initialized multiple times!")
+	atom_flags |= ATOM_FLAG_INITIALIZED
+
+	if(light_power && light_range)
+		update_light()
+
 	if(dynamic_lighting)
 		luminosity = 0
 	else
 		luminosity = 1
-	RecalculateOpacity()
 
-	if(mapload)
-		if(!(turf_flags & TURF_FLAG_SKIP_AO_INIT))
-			queue_ao(TRUE)
-		if(!(turf_flags & TURF_FLAG_SKIP_ICON_INIT))
-			update_icon()
-	else
-		for(var/thing in RANGE_TURFS(src, 1))
-			var/turf/T = thing
-			if(!istype(T))
-				continue
-			if(!(T.turf_flags & TURF_FLAG_SKIP_ICON_INIT))
-				T.update_icon()
-			if(!(T.turf_flags & TURF_FLAG_SKIP_AO_INIT))
-				T.queue_ao(TRUE)
+	if (mapload && permit_ao)
+		queue_ao()
+
+	if (opacity)
+		has_opaque_atom = TRUE
+
+	if (!mapload)
 		SSair.mark_for_update(src)
 
 	updateVisibility(src, FALSE)
 
 	if (z_flags & ZM_MIMIC_BELOW)
 		setup_zmimic(mapload)
+
 	if(flooded && !density)
 		fluid_update(FALSE)
 
+	return INITIALIZE_HINT_NORMAL
+
 /turf/on_update_icon()
 	update_flood_overlay()
-	queue_ao(FALSE)
 
 /turf/proc/update_flood_overlay()
 	if(is_flooded(absolute = TRUE))
@@ -97,10 +100,10 @@
 	if (z_flags & ZM_MIMIC_BELOW)
 		cleanup_zmimic()
 
-	if (bound_overlay)
-		QDEL_NULL(bound_overlay)
+	if (mimic_proxy)
+		QDEL_NULL(mimic_proxy)
 
-	if(connections) 
+	if(connections)
 		connections.erase_all()
 
 	..()
@@ -200,7 +203,7 @@
 				return 0
 	return 1 //Nothing found to block so return success!
 
-var/const/enterloopsanity = 100
+var/global/const/enterloopsanity = 100
 /turf/Entered(var/atom/atom, var/atom/old_loc)
 
 	..()

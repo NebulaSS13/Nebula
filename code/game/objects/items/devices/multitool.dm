@@ -17,7 +17,7 @@
 
 	material = /decl/material/solid/plastic
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE
 	)
 
@@ -25,6 +25,10 @@
 
 	var/buffer_name
 	var/atom/buffer_object
+
+/obj/item/multitool/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_MULTITOOL = TOOL_QUALITY_DEFAULT))
 
 /obj/item/multitool/Destroy()
 	unregister_buffer(buffer_object)
@@ -51,13 +55,13 @@
 			unregister_buffer(buffer_object)
 			buffer_object = buffer
 			if(buffer_object)
-				GLOB.destroyed_event.register(buffer_object, src, /obj/item/multitool/proc/unregister_buffer)
+				events_repository.register(/decl/observ/destroyed, buffer_object, src, /obj/item/multitool/proc/unregister_buffer)
 
 /obj/item/multitool/proc/unregister_buffer(var/atom/buffer_to_unregister)
 	// Only remove the buffered object, don't reset the name
 	// This means one cannot know if the buffer has been destroyed until one attempts to use it.
 	if(buffer_to_unregister == buffer_object && buffer_object)
-		GLOB.destroyed_event.unregister(buffer_object, src)
+		events_repository.unregister(/decl/observ/destroyed, buffer_object, src)
 		buffer_object = null
 
 /obj/item/multitool/resolve_attackby(atom/A, mob/user)

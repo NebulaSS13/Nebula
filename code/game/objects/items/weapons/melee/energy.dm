@@ -53,7 +53,7 @@
 	if(user)
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
-	set_light(0.8, 1, 2, 4, lighting_color)
+	set_light(2, 0.8, lighting_color)
 
 /obj/item/energy_blade/proc/deactivate(mob/living/user)
 	if(!active)
@@ -158,7 +158,7 @@
 	if(!lighting_color)
 		var/color_hex = list("red" = COLOR_SABER_RED,  "blue" = COLOR_SABER_BLUE, "green" = COLOR_SABER_GREEN, "purple" = COLOR_SABER_PURPLE)
 		lighting_color = color_hex[blade_color]
-
+	set_extension(src, /datum/extension/tool, list(TOOL_SCALPEL = TOOL_QUALITY_WORST))
 	. = ..()
 
 /obj/item/energy_blade/sword/green

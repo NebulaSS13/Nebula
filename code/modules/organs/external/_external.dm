@@ -31,10 +31,8 @@
 	var/body_part = null               // Part flag
 	var/icon_position = 0              // Used in mob overlay layering calculations.
 	var/model                          // Used when caching robolimb icons.
-	var/force_icon                     // Used to force override of species-specific limb icons (for prosthetics).
 	var/icon/mob_icon                  // Cached icon for use in mob overlays.
 	var/skin_tone                      // Skin tone.
-	var/skin_base = ""                 // Skin base.
 	var/skin_colour                    // skin colour
 	var/skin_blend = ICON_ADD          // How the skin colour is applied.
 	var/hair_colour                    // hair colour
@@ -150,8 +148,7 @@
 
 /obj/item/organ/external/set_dna(var/datum/dna/new_dna)
 	..()
-	skin_blend = species.limb_blend
-	skin_base =  new_dna.skin_base
+	skin_blend = bodytype.limb_blend
 
 /obj/item/organ/external/proc/check_pain_disarm()
 	if(owner && prob((pain/max_damage)*100))
@@ -683,7 +680,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(max(istype(T) && T.dirt*10, 2*owner.germ_level) > W.germ_level && W.infection_check())
 			W.germ_level++
 
-	var/antibiotics = LAZYACCESS(owner.chem_effects, CE_ANTIBIOTIC)
+	var/antibiotics = GET_CHEMICAL_EFFECT(owner, CE_ANTIBIOTIC)
 	if (!antibiotics)
 		for(var/datum/wound/W in wounds)
 			//Infected wounds raise the organ's germ level
@@ -763,7 +760,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		// slow healing
 		var/heal_amt = 0
 		// if damage >= 50 AFTER treatment then it's probably too severe to heal within the timeframe of a round.
-		if (!LAZYACCESS(owner.chem_effects, CE_TOXIN) && W.can_autoheal() && W.wound_damage() && brute_ratio < 0.5 && burn_ratio < 0.5)
+		if (!GET_CHEMICAL_EFFECT(owner, CE_TOXIN) && W.can_autoheal() && W.wound_damage() && brute_ratio < 0.5 && burn_ratio < 0.5)
 			heal_amt += 0.5
 
 		//we only update wounds once in [wound_update_accuracy] ticks so have to emulate realtime
@@ -913,7 +910,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(!(limb_flags & ORGAN_FLAG_CAN_AMPUTATE) || !owner)
 		return
 
-	if(BP_IS_CRYSTAL(src) || (disintegrate == DISMEMBER_METHOD_EDGE && species.limbs_are_nonsolid))
+	disintegrate = bodytype.check_dismember_type_override(disintegrate)
+
+	if(BP_IS_CRYSTAL(src))
 		disintegrate = DISMEMBER_METHOD_BLUNT //splut
 
 	var/list/organ_msgs = get_droplimb_messages_for(disintegrate, clean)
@@ -968,7 +967,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(!clean)
 				// Throw limb around.
 				if(src && istype(loc,/turf))
-					throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
+					throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 				set_dir(SOUTH, TRUE)
 		if(DISMEMBER_METHOD_BURN, DISMEMBER_METHOD_ACID)
 			if(disintegrate == DISMEMBER_METHOD_BURN)
@@ -993,16 +992,16 @@ Note that amputating the affected organ does in fact remove the infection from t
 					G.basecolor =  use_blood_colour
 					G.update_icon()
 
-			gore.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
+			gore.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/organ/I in internal_organs)
 				I.removed()
 				if(!QDELETED(I) && isturf(loc))
-					I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
+					I.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/I in src)
 				I.dropInto(loc)
-				I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
+				I.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 
 			qdel(src)
 
@@ -1120,6 +1119,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	playsound(src.loc, "fracture", 100, 1, -2)
 	status |= ORGAN_BROKEN
+	stage = 0
 	broken_description = pick("broken","fracture","hairline fracture")
 
 	// Fractures have a chance of getting you out of restraints
@@ -1182,11 +1182,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 		company = /decl/prosthetics_manufacturer
 	
 	var/decl/prosthetics_manufacturer/R = GET_DECL(company)
-	if(!R.check_can_install(organ_tag, (owner?.get_bodytype() || GLOB.using_map.default_bodytype), (owner?.get_species_name() || GLOB.using_map.default_species)))
+	if(!R.check_can_install(organ_tag, (owner?.get_bodytype_category() || global.using_map.default_bodytype), (owner?.get_species_name() || global.using_map.default_species)))
 		R = GET_DECL(/decl/prosthetics_manufacturer)
 
 	model = company
-	force_icon = R.icon
 	name = "[R ? R.modifier_string : "robotic"] [initial(name)]"
 	desc = "[R.desc] It looks like it was produced by [R.name]."
 	origin_tech = R.limb_tech
@@ -1456,7 +1455,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	W.time_inflicted = world.time
 
 /obj/item/organ/external/proc/has_genitals()
-	return !BP_IS_PROSTHETIC(src) && species && species.sexybits_location == organ_tag
+	return !BP_IS_PROSTHETIC(src) && bodytype?.get_vulnerable_location() == organ_tag
 
 // Added to the mob's move delay tally if this organ is being used to move with.
 /obj/item/organ/external/proc/movement_delay(max_delay)

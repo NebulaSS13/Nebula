@@ -14,19 +14,13 @@
 /decl/species/lizard
 	name = SPECIES_LIZARD
 	name_plural = SPECIES_LIZARD
-
-	bodytype = BODYTYPE_HUMANOID
-
-	icobase = 'mods/species/lizard/icons/body.dmi'
-	deform =  'mods/species/lizard/icons/deformed_body.dmi'
-	bandages_icon = 'icons/mob/bandage.dmi'
-	husk_icon = 'mods/species/lizard/icons/husk.dmi'
 	preview_icon = 'mods/species/lizard/icons/preview.dmi'
-	tail_animation = 'mods/species/lizard/icons/tail.dmi'
-	tail = "sogtail"
-
 	skin_material = /decl/material/solid/skin/lizard
 
+	available_bodytypes = list(
+		/decl/bodytype/lizard,
+		/decl/bodytype/lizard/masculine
+	)
 	unarmed_attacks = list(
 		/decl/natural_attack/stomp,
 		/decl/natural_attack/tail,
@@ -37,7 +31,6 @@
 
 	primitive_form = "Stok"
 	darksight_range = 3
-	darksight_tint = DARKTINT_MODERATE
 	gluttonous = GLUT_TINY
 	strength = STR_HIGH
 	breath_pressure = 18
@@ -46,7 +39,6 @@
 	flash_mod = 1.2
 	blood_volume = 800
 
-	health_hud_intensity = 2
 	hunger_factor = DEFAULT_HUNGER_FACTOR * 2
 
 	age_descriptor = /datum/appearance_descriptor/age/lizard

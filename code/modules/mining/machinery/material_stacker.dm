@@ -13,7 +13,7 @@
 	if(href_list["release_sheets"] && output_turf)
 		var/decl/material/mat = locate(href_list["release_sheets"])
 		if(istype(mat) && stacked[mat.type] > 0)
-			mat.place_sheet(output_turf, stacked[mat.type])
+			mat.create_object(output_turf, stacked[mat.type])
 			stacked -= mat.type
 			. = TOPIC_REFRESH
 
@@ -52,6 +52,5 @@
 	if(output_turf)
 		for(var/sheet in stacked)
 			if(stacked[sheet] >= stack_max)
-				var/decl/material/stackmat = GET_DECL(sheet)
-				stackmat.place_sheet(output_turf, stack_max)
+				SSmaterials.create_object(sheet, output_turf, stack_max)
 				stacked[sheet] -= stack_max

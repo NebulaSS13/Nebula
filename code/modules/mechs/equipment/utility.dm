@@ -197,9 +197,8 @@
 	origin_tech = "{'materials':1,'engineering':1}"
 
 	var/on = 0
-	var/l_max_bright = 0.9
-	var/l_inner_range = 1
-	var/l_outer_range = 6
+	var/l_power = 0.9
+	var/l_range = 6
 
 /obj/item/mech_equipment/light/attack_self(var/mob/user)
 	. = ..()
@@ -212,7 +211,7 @@
 /obj/item/mech_equipment/light/on_update_icon()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
-		set_light(l_max_bright, l_inner_range, l_outer_range)
+		set_light(l_range, l_power)
 	else
 		icon_state = "[initial(icon_state)]"
 		set_light(0, 0)

@@ -3,9 +3,13 @@
 	desc = "A handy little spring-loaded trap for catching pesty rodents."
 	icon_state = "mousetrap"
 	origin_tech = "{'combat':1}"
-	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/slag = MATTER_AMOUNT_REINFORCEMENT)
+	material = /decl/material/solid/wood
+	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	var/armed = 0
+
+/obj/item/assembly/mousetrap/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_HEMOSTAT = TOOL_QUALITY_WORST))
 
 /obj/item/assembly/mousetrap/examine(mob/user)
 	. = ..()

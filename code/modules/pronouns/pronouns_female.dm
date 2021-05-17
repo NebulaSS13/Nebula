@@ -2,7 +2,6 @@
 	name = FEMALE
 	formal_term = "female"
 	informal_term = "lady"
-	icon_key = "_f"
 
 	He   = "She"
 	he   = "she"

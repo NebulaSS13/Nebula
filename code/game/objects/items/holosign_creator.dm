@@ -9,7 +9,7 @@
 	throw_speed = 3
 	throw_range = 7
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'engineering':5,'exoticmatter':4,'powerstorage':4}"
 
 	var/list/signs = list()

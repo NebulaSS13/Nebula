@@ -7,8 +7,8 @@
 	w_class = ITEM_SIZE_SMALL // Should fit into internal's box or maybe pocket
 	material = /decl/material/solid/metal/steel
 	light_color = "#e58775"
-	light_outer_range = 2
-	light_max_bright = 1
+	light_range = 2
+	light_power = 1
 	action_button_name = null
 
 	var/target_pressure = ONE_ATMOSPHERE

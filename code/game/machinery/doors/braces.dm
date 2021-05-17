@@ -19,7 +19,7 @@
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "brace_open"
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	material_health_multiplier = 0.6
 	origin_tech = "{'engineering':3,'materials':2}"
 

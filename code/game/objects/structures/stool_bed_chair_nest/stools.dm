@@ -67,7 +67,7 @@
 
 /obj/item/stool/proc/remove_padding()
 	if(padding_material)
-		padding_material.place_sheet(get_turf(src))
+		padding_material.create_object(get_turf(src))
 		padding_material = null
 	update_icon()
 
@@ -92,9 +92,9 @@
 
 /obj/item/stool/proc/dismantle()
 	if(material)
-		material.place_sheet(get_turf(src))
+		material.create_object(get_turf(src))
 	if(padding_material)
-		padding_material.place_sheet(get_turf(src))
+		padding_material.create_object(get_turf(src))
 	qdel(src)
 
 /obj/item/stool/attackby(obj/item/W, mob/user)
@@ -116,7 +116,7 @@
 		else if(istype(W,/obj/item/stack/material))
 			var/obj/item/stack/material/M = W
 			if(M.material && (M.material.flags & MAT_FLAG_PADDING))
-				padding_type = "[M.material.type]"
+				padding_type = M.material.type
 		if(!padding_type)
 			to_chat(user, "You cannot pad \the [src] with that.")
 			return

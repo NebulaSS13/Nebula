@@ -15,13 +15,13 @@
 
 	id = "[random_id(/obj/machinery/computer/teleporter, 1000, 9999)]"
 
-	for (var/dir in GLOB.cardinal)
+	for (var/dir in global.cardinal)
 		var/obj/machinery/teleport/station/found_station = locate() in get_step(src, dir)
 		if(found_station)
 			station = found_station
 			break
 	if(station)
-		for (var/dir in GLOB.cardinal)
+		for (var/dir in global.cardinal)
 			var/obj/machinery/teleport/hub/found_hub = locate() in get_step(station, dir)
 			if(found_hub)
 				hub = found_hub
@@ -111,7 +111,7 @@
 		var/turf/T = get_turf(R)
 		if (!T)
 			continue
-		if(!(T.z in GLOB.using_map.player_levels))
+		if(!(T.z in global.using_map.player_levels))
 			continue
 		var/tmpname = T.loc.name
 		if(areaindex[tmpname])
@@ -131,7 +131,7 @@
 			var/turf/T = get_turf(M)
 			if(!T)
 				continue
-			if(!(T.z in GLOB.using_map.player_levels))
+			if(!(T.z in global.using_map.player_levels))
 				continue
 			var/tmpname = M.real_name
 			if(areaindex[tmpname])
@@ -168,14 +168,14 @@
 
 /obj/machinery/computer/teleporter/proc/clear_target()
 	if(src.locked)
-		GLOB.destroyed_event.unregister(locked, src, .proc/target_lost)
+		events_repository.unregister(/decl/observ/destroyed, locked, src, .proc/target_lost)
 	src.locked = null
 	if(station && station.engaged)
 		station.disengage()
 
 /obj/machinery/computer/teleporter/proc/set_target(var/obj/O)
 	src.locked = O
-	GLOB.destroyed_event.register(locked, src, .proc/target_lost)
+	events_repository.register(/decl/observ/destroyed, locked, src, .proc/target_lost)
 
 /obj/machinery/computer/teleporter/Destroy()
 	clear_target()
@@ -219,18 +219,12 @@
 /obj/machinery/teleport/hub/on_update_icon()
 	cut_overlays()
 	if (com?.station?.engaged)
-		var/image/I = image(icon, src, "[initial(icon_state)]_active_overlay")
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.layer = ABOVE_LIGHTING_LAYER
-		add_overlay(I)
-		set_light(0.4, 1.2, 4, 10)
+		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_active_overlay"))
+		set_light(4, 0.4)
 	else
 		set_light(0)
-		if (operable())
-			var/image/I = image(icon, src, "[initial(icon_state)]_idle_overlay")
-			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-			I.layer = ABOVE_LIGHTING_LAYER
-			add_overlay(I)
+		if(operable())
+			add_overlay(emissive_overlay(icon, "[initial(icon_state)]_idle_overlay"))
 
 /obj/machinery/teleport/hub/Bumped(var/atom/movable/M)
 	if (com?.station?.engaged)
@@ -265,7 +259,7 @@
 
 /obj/machinery/teleport/station/Initialize()
 	. = ..()
-	for (var/target_dir in GLOB.cardinal)
+	for (var/target_dir in global.cardinal)
 		var/obj/machinery/teleport/hub/found_pad = locate() in get_step(src, target_dir)
 		if(found_pad)
 			set_dir(get_dir(src, found_pad))
@@ -276,15 +270,9 @@
 	. = ..()
 	cut_overlays()
 	if (engaged)
-		var/image/I = image(icon, src, "[initial(icon_state)]_active_overlay")
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.layer = ABOVE_LIGHTING_LAYER
-		add_overlay(I)
+		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_active_overlay"))
 	else if (operable())
-		var/image/I = image(icon, src, "[initial(icon_state)]_idle_overlay")
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.layer = ABOVE_LIGHTING_LAYER
-		add_overlay(I)
+		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_idle_overlay"))
 
 /obj/machinery/teleport/station/attackby(var/obj/item/W, var/mob/user)
 	attack_hand(user)

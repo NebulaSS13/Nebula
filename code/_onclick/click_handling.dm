@@ -11,6 +11,7 @@ if(!click_handlers) { \
 	var/list/click_handlers
 
 /mob/Destroy()
+	QDEL_NULL(status_markers)
 	QDEL_NULL_LIST(click_handlers)
 	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
 	if(hattable?.hat)
@@ -18,10 +19,10 @@ if(!click_handlers) { \
 		hattable.hat = null
 	. = ..()
 
-var/const/CLICK_HANDLER_NONE                 = BITFLAG(0)
-var/const/CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT = BITFLAG(1)
-var/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = BITFLAG(2)
-var/const/CLICK_HANDLER_ALL                  = (CLICK_HANDLER_NONE|CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT|CLICK_HANDLER_REMOVE_IF_NOT_TOP)
+var/global/const/CLICK_HANDLER_NONE                 = BITFLAG(0)
+var/global/const/CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT = BITFLAG(1)
+var/global/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = BITFLAG(2)
+var/global/const/CLICK_HANDLER_ALL                  = (CLICK_HANDLER_NONE|CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT|CLICK_HANDLER_REMOVE_IF_NOT_TOP)
 
 /datum/click_handler
 	var/mob/user
@@ -31,11 +32,11 @@ var/const/CLICK_HANDLER_ALL                  = (CLICK_HANDLER_NONE|CLICK_HANDLER
 	..()
 	src.user = user
 	if(flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
-		GLOB.logged_out_event.register(user, src, /datum/click_handler/proc/OnMobLogout)
+		events_repository.register(/decl/observ/logged_out, user, src, /datum/click_handler/proc/OnMobLogout)
 
 /datum/click_handler/Destroy()
 	if(flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
-		GLOB.logged_out_event.unregister(user, src, /datum/click_handler/proc/OnMobLogout)
+		events_repository.unregister(/decl/observ/logged_out, user, src, /datum/click_handler/proc/OnMobLogout)
 	user = null
 	. = ..()
 

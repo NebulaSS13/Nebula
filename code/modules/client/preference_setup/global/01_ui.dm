@@ -1,9 +1,9 @@
-var/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
+var/global/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 
 /datum/preferences
 	var/clientfps = 0
 	var/ooccolor = "#010000" //Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
-	var/icon_size = 48
+	var/icon_size = 64
 	var/UI_style = "Midnight"
 	var/UI_style_alpha =     255
 	var/UI_style_color =     COLOR_WHITE
@@ -16,25 +16,25 @@ var/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 	name = "UI"
 	sort_order = 1
 
-/datum/category_item/player_setup_item/player_global/ui/load_preferences(var/savefile/S)
-	from_file(S["icon_size"],          pref.icon_size)
-	from_file(S["UI_style"],           pref.UI_style)
-	from_file(S["UI_mouseover_color"], pref.UI_mouseover_color)
-	from_file(S["UI_style_alpha"],     pref.UI_style_alpha)
-	from_file(S["UI_mouseover_alpha"], pref.UI_mouseover_alpha)
-	from_file(S["UI_style_alpha"],     pref.UI_style_alpha)
-	from_file(S["ooccolor"],           pref.ooccolor)
-	from_file(S["clientfps"],          pref.clientfps)
+/datum/category_item/player_setup_item/player_global/ui/load_preferences(datum/pref_record_reader/R)
+	pref.icon_size =          R.read("icon_size")
+	pref.UI_style =           R.read("UI_style")
+	pref.UI_mouseover_color = R.read("UI_mouseover_color")
+	pref.UI_mouseover_alpha = R.read("UI_mouseover_alpha")
+	pref.UI_style_color =     R.read("UI_style_color")
+	pref.UI_style_alpha =     R.read("UI_style_alpha")
+	pref.ooccolor =           R.read("ooccolor")
+	pref.clientfps =          R.read("clientfps")
 
-/datum/category_item/player_setup_item/player_global/ui/save_preferences(var/savefile/S)
-	to_file(S["icon_size"],            pref.icon_size)
-	to_file(S["UI_style"],             pref.UI_style)
-	to_file(S["UI_mouseover_color"],   pref.UI_mouseover_color)
-	to_file(S["UI_mouseover_alpha"],   pref.UI_mouseover_alpha)
-	to_file(S["UI_style_color"],       pref.UI_style_color)
-	to_file(S["UI_style_alpha"],       pref.UI_style_alpha)
-	to_file(S["ooccolor"],             pref.ooccolor)
-	to_file(S["clientfps"],            pref.clientfps)
+/datum/category_item/player_setup_item/player_global/ui/save_preferences(datum/pref_record_writer/W)
+	W.write("icon_size",          pref.icon_size)
+	W.write("UI_style",           pref.UI_style)
+	W.write("UI_mouseover_color", pref.UI_mouseover_color)
+	W.write("UI_mouseover_alpha", pref.UI_mouseover_alpha)
+	W.write("UI_style_color",     pref.UI_style_color)
+	W.write("UI_style_alpha",     pref.UI_style_alpha)
+	W.write("ooccolor",           pref.ooccolor)
+	W.write("clientfps",          pref.clientfps)
 
 /datum/category_item/player_setup_item/player_global/ui/sanitize_preferences()
 	pref.UI_style		    = sanitize_inlist(pref.UI_style, all_ui_styles, initial(pref.UI_style))
@@ -45,7 +45,7 @@ var/list/valid_icon_sizes = list(32, 48, 64, 96, 128)
 	pref.ooccolor		    = sanitize_hexcolor(pref.ooccolor, initial(pref.ooccolor))
 	pref.clientfps	        = sanitize_integer(pref.clientfps, CLIENT_MIN_FPS, CLIENT_MAX_FPS, initial(pref.clientfps))
 
-	if(!isnum(pref.icon_size)) 
+	if(!isnum(pref.icon_size))
 		pref.icon_size = initial(pref.icon_size)
 	pref.client?.SetWindowIconSize(pref.icon_size)
 

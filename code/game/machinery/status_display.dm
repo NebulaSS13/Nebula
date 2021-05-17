@@ -141,7 +141,7 @@
 	if(mode != STATUS_DISPLAY_BLANK && mode != STATUS_DISPLAY_ALERT)
 		to_chat(user, "The display says:<br>\t[sanitize(message1)]<br>\t[sanitize(message2)]")
 	if(mode == STATUS_DISPLAY_ALERT)
-		var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+		var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/status_display/proc/set_message(m1, m2)
@@ -162,10 +162,10 @@
 /obj/machinery/status_display/proc/display_alert()
 	remove_display()
 
-	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	var/decl/security_level/sl = security_state.current_security_level
 
-	set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
+	set_light(sl.light_range, sl.light_power, sl.light_color_alarm)
 
 	if(sl.alarm_appearance.display_icon)
 		var/image/alert1 = image(sl.icon, sl.alarm_appearance.display_icon)
@@ -188,7 +188,7 @@
 		picture_state = state
 		picture = image('icons/obj/status_display.dmi', icon_state=picture_state)
 	overlays |= picture
-	set_light(0.5, 0.1, 1, 2, COLOR_WHITE)
+	set_light(2, 0.5, COLOR_WHITE)
 
 /obj/machinery/status_display/proc/update_display(line1, line2)
 	line1 = uppertext(line1)
@@ -196,7 +196,7 @@
 	var/new_text = {"<div style="font-size:[FONT_SIZE];color:[FONT_COLOR];font:'[FONT_STYLE]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
 	if(maptext != new_text)
 		maptext = new_text
-	set_light(0.5, 0.1, 1, 2, COLOR_WHITE)
+	set_light(2, 0.5, COLOR_WHITE)
 
 /obj/machinery/status_display/proc/get_shuttle_timer()
 	var/timeleft = SSevac.evacuation_controller.get_eta()

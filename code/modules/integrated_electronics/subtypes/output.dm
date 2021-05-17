@@ -75,6 +75,7 @@
 	var/light_brightness = 1
 	var/light_rgb = "#ffffff"
 	power_draw_idle = 0 // Adjusted based on brightness.
+	light_wedge = LIGHT_WIDE
 
 /obj/item/integrated_circuit/output/light/do_work()
 	light_toggled = !light_toggled
@@ -83,7 +84,7 @@
 /obj/item/integrated_circuit/output/light/proc/update_lighting()
 	if(light_toggled)
 		if(assembly)
-			assembly.set_light(light_brightness, 1, 4, 2, light_rgb)
+			assembly.set_light(4, light_brightness, light_rgb, light_wedge)
 	else
 		if(assembly)
 			assembly.set_light(0)

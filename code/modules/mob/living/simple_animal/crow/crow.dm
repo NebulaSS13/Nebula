@@ -24,9 +24,6 @@
 
 	natural_weapon = /obj/item/natural_weapon/crow_claws
 
-	response_help  = "pets"
-	response_disarm = "gently moves aside"
-	response_harm   = "swats"
 	stop_automated_movement = TRUE
 	universal_speak = TRUE
 	pass_flags = PASS_FLAG_TABLE
@@ -66,7 +63,7 @@
 	popup.open()
 
 /mob/living/simple_animal/crow/DefaultTopicState()
-	return GLOB.physical_state
+	return global.physical_topic_state
 
 /mob/living/simple_animal/crow/OnTopic(mob/user, href_list)
 	if(!ishuman(user))

@@ -184,7 +184,7 @@
 
 /mob/living/silicon/pai/proc/hackloop()
 	var/turf/T = get_turf(src)
-	for(var/mob/living/silicon/ai/AI in GLOB.player_list)
+	for(var/mob/living/silicon/ai/AI in global.player_list)
 		if(T.loc)
 			to_chat(AI, "<font color = red><b>Network Alert: Brute-force encryption crack in progress in [T.loc].</b></font>")
 		else

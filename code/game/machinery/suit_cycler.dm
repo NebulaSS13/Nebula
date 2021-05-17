@@ -82,10 +82,10 @@
 
 	if(irradiating)
 		LAZYADD(new_overlays, image(icon, "light_radiation"))
-		set_light(0.8, 1, 3, 2, COLOR_RED_LIGHT)
+		set_light(3, 0.8, COLOR_RED_LIGHT)
 	else if(active)
 		LAZYADD(new_overlays, image(icon, "light_active"))
-		set_light(0.8, 1, 3, 2, COLOR_YELLOW)
+		set_light(3, 0.8, COLOR_YELLOW)
 	else
 		set_light(0)
 

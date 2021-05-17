@@ -420,9 +420,9 @@
 					set_pin_data(IC_OUTPUT, 1, TRUE)
 					pulling = to_pull
 					acting_object.visible_message("\The [acting_object] starts pulling \the [to_pull] around.")
-					GLOB.moved_event.register(to_pull, src, .proc/check_pull) //Whenever the target moves, make sure we can still pull it!
-					GLOB.destroyed_event.register(to_pull, src, .proc/stop_pulling) //Stop pulling if it gets destroyed
-					GLOB.moved_event.register(acting_object, src, .proc/pull) //Make sure we actually pull it.
+					events_repository.register(/decl/observ/moved, to_pull, src, .proc/check_pull) //Whenever the target moves, make sure we can still pull it!
+					events_repository.register(/decl/observ/destroyed, to_pull, src, .proc/stop_pulling) //Stop pulling if it gets destroyed
+					events_repository.register(/decl/observ/moved, acting_object, src, .proc/pull) //Make sure we actually pull it.
 			push_data()
 		if(3)
 			if(pulling)
@@ -456,10 +456,10 @@
 
 /obj/item/integrated_circuit/manipulation/claw/proc/stop_pulling()
 	var/atom/movable/AM = get_object()
-	GLOB.moved_event.unregister(pulling, src)
-	GLOB.moved_event.unregister(AM, src)
+	events_repository.unregister(/decl/observ/moved, pulling, src)
+	events_repository.unregister(/decl/observ/moved, AM, src)
 	AM.visible_message("\The [AM] stops pulling \the [pulling]")
-	GLOB.destroyed_event.unregister(pulling, src)
+	events_repository.unregister(/decl/observ/destroyed, pulling, src)
 	pulling = null
 	set_pin_data(IC_OUTPUT, 1, FALSE)
 	activate_pin(3)
@@ -574,7 +574,7 @@
 		playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
 		return
 
-	if(isnum(step_dir) && (!step_dir || (step_dir in GLOB.cardinal)))
+	if(isnum(step_dir) && (!step_dir || (step_dir in global.cardinal)))
 		rift_location = get_step(rift_location, step_dir) || rift_location
 	else
 		var/obj/item/electronic_assembly/assembly = get_object()

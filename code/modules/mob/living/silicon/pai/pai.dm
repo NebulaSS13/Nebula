@@ -1,23 +1,23 @@
-GLOBAL_LIST_INIT(possible_chassis, list(
-		"Drone" = "drone",
-		"Cat" = "cat",
-		"Mouse" = "mouse",
-		"Monkey" = "monkey",
-		"Rabbit" = "rabbit",
-		"Mushroom" = "mushroom",
-		"Corgi" = "corgi",
-		"Crow" = "crow"
-		))
+var/global/list/possible_chassis = list(
+	"Drone" =    "drone",
+	"Cat" =      "cat",
+	"Mouse" =    "mouse",
+	"Monkey" =   "monkey",
+	"Rabbit" =   "rabbit",
+	"Mushroom" = "mushroom",
+	"Corgi" =    "corgi",
+	"Crow" =     "crow"
+)
 
-GLOBAL_LIST_INIT(possible_say_verbs, list(
-		"Robotic" = list("states","declares","queries"),
-		"Natural" = list("says","yells","asks"),
-		"Beep" = list("beeps","beeps loudly","boops"),
-		"Chirp" = list("chirps","chirrups","cheeps"),
-		"Feline" = list("purrs","yowls","meows"),
-		"Canine" = list("yaps", "barks", "woofs"),
-		"Corvid" = list("caws", "caws loudly", "whistles")
-		))
+var/global/list/possible_say_verbs = list(
+	"Robotic" = list("states","declares","queries"),
+	"Natural" = list("says","yells","asks"),
+	"Beep" =    list("beeps","beeps loudly","boops"),
+	"Chirp" =   list("chirps","chirrups","cheeps"),
+	"Feline" =  list("purrs","yowls","meows"),
+	"Canine" =  list("yaps", "barks", "woofs"),
+	"Corvid" =  list("caws", "caws loudly", "whistles")
+)
 
 /mob/living/silicon/pai
 	name = "pAI"
@@ -85,10 +85,11 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 	var/translator_on = 0 // keeps track of the translator module
 
-	var/flashlight_max_bright = 0.5 //brightness of light when on, must be no greater than 1.
-	var/flashlight_inner_range = 1 //inner range of light when on, can be negative
-	var/flashlight_outer_range = 3 //outer range of light when on, can be negative
+	var/flashlight_power = 0.5 //brightness of light when on, must be no greater than 1.
+	var/flashlight_range = 3 //outer range of light when on, can be negative
 	var/light_on = FALSE
+
+	light_wedge = 45
 
 /mob/living/silicon/pai/Initialize()
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
@@ -309,7 +310,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 /mob/living/silicon/pai/proc/toggle_integrated_light()
 	if(!light_on)
-		set_light(flashlight_max_bright, flashlight_inner_range, flashlight_outer_range, 2)
+		set_light(flashlight_range, flashlight_power, angle = light_wedge)
 		to_chat(src, SPAN_NOTICE("You enable your integrated light."))
 		light_on = TRUE
 	else

@@ -1,4 +1,4 @@
-var/datum/holiday/current_holiday
+var/global/datum/holiday/current_holiday
 
 /datum/holiday
 	var/name
@@ -29,6 +29,6 @@ var/datum/holiday/current_holiday
 		return
 	global.current_holiday = holiday_data
 	if(refresh_station_name)
-		GLOB.using_map.station_name = null
+		global.using_map.station_name = null
 		station_name()
 		world.update_status()

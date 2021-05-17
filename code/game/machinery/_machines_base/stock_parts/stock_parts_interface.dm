@@ -3,7 +3,7 @@
 	desc = "Used in the construction of computers and other devices with an interactive screen."
 	icon_state = "output"
 	origin_tech = "{'materials':1}"
-	material = /decl/material/solid/glass
+	material = /decl/material/solid/fiberglass
 	base_type = /obj/item/stock_parts/console_screen
 	part_flags = PART_FLAG_HAND_REMOVE
 	health = 20

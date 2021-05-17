@@ -4,7 +4,7 @@
 
 	icon = 'icons/clothing/head/hardhat/yellow.dmi'
 	action_button_name = "Toggle Headlamp"
-	brightness_on = 0.5 //luminosity when on
+	brightness_on = 4 //luminosity when on
 	light_overlay = "hardhat_light"
 	w_class = ITEM_SIZE_NORMAL
 	armor = list(
@@ -18,6 +18,7 @@
 	)
 	flags_inv = 0
 	siemens_coefficient = 0.9
+	light_wedge = LIGHT_WIDE
 	heat_protection = SLOT_HEAD
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE

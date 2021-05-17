@@ -9,8 +9,6 @@
 //			/atom/old_loc: The atom the enterer came from
 //
 
-GLOBAL_DATUM_INIT(entered_event, /decl/observ/entered, new)
-
 /decl/observ/entered
 	name = "Entered"
 	expected_type = /atom
@@ -21,4 +19,4 @@ GLOBAL_DATUM_INIT(entered_event, /decl/observ/entered, new)
 
 /atom/Entered(atom/movable/enterer, atom/old_loc)
 	..()
-	GLOB.entered_event.raise_event(src, enterer, old_loc)
+	events_repository.raise_event(/decl/observ/entered, src, enterer, old_loc)

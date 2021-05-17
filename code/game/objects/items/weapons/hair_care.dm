@@ -29,7 +29,7 @@
 /obj/item/haircomb/brush/attack_self(mob/user)
 	if(ishuman(user) && !user.incapacitated())
 		var/mob/living/carbon/human/H = user
-		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[H.h_style]
+		var/datum/sprite_accessory/hair/hair_style = global.hair_styles_list[H.h_style]
 		if(hair_style.flags & VERY_SHORT)
 			H.visible_message(SPAN_NOTICE("\The [H] just sort of runs \the [src] over their scalp."))
 		else

@@ -26,14 +26,14 @@
 /obj/item/organ/internal/stomach/vox
 	name = "gizzard"
 	color = "#0033cc"
-	var/global/list/gains_nutriment_from_inedible_reagents = list(
+	var/static/list/gains_nutriment_from_inedible_reagents = list(
 		/decl/material/solid/wood =           3,
 		/decl/material/liquid/cleaner =       1,
 		/decl/material/liquid/foaming_agent = 1,
 		/decl/material/liquid/surfactant =    1,
 		/decl/material/liquid/paint =         1
 	)
-	var/global/list/can_digest_matter = list(
+	var/static/list/can_digest_matter = list(
 		/decl/material/solid/wood =                   TRUE,
 		/decl/material/solid/wood/mahogany =          TRUE,
 		/decl/material/solid/wood/maple =             TRUE,
@@ -46,7 +46,7 @@
 		/decl/material/solid/slag =                   TRUE,
 		/decl/material/solid/mineral/sodiumchloride = TRUE
 	)
-	var/global/list/can_process_matter = list(
+	var/static/list/can_process_matter = list(
 		/decl/material/solid/glass =               TRUE,
 		/decl/material/solid/gemstone/diamond =    TRUE,
 		/decl/material/solid/stone/sandstone =     TRUE,
@@ -117,7 +117,7 @@
 		// Convert stored matter into sheets.
 		for(var/mat in check_materials)
 			var/decl/material/M = GET_DECL(mat)
-			if(M && M.stack_type && stored_matter[mat] >= SHEET_MATERIAL_AMOUNT)
+			if(M && stored_matter[mat] >= SHEET_MATERIAL_AMOUNT)
 
 				// Remove as many sheets as possible from the gizzard.
 				var/sheets = Floor(stored_matter[mat]/SHEET_MATERIAL_AMOUNT)
@@ -135,7 +135,7 @@
 						
 				// Create new stacks if needed.
 				if(sheets)
-					M.place_sheet(src, sheets)
+					M.create_object(src, sheets)
 					updated_stacks = TRUE
 
 		if(updated_stacks && prob(5))

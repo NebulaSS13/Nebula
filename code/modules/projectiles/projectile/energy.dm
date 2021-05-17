@@ -50,7 +50,7 @@
 
 /obj/item/projectile/energy/flash/flare/on_impact(var/atom/A)
 	light_flash_color = pick("#e58775", "#ffffff", "#faa159", "#e34e0e")
-	set_light(1, 1, 4, 2, light_flash_color)
+	set_light(4, 2, light_flash_color)
 	..() //initial flash
 
 	//residual illumination
@@ -60,7 +60,7 @@
 	var/area/AO = TO.loc
 	if(AO && (AO.area_flags & AREA_FLAG_EXTERNAL))
 		//Everyone saw that!
-		for(var/mob/living/mob in GLOB.living_mob_list_)
+		for(var/mob/living/mob in global.living_mob_list_)
 			var/turf/T = get_turf(mob)
 			var/area/A1 = T.loc
 			if(T && (T != TO) && (TO.z == T.z) && !mob.blinded)

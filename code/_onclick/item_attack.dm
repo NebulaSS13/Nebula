@@ -21,7 +21,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 // Called when the item is in the active hand, and clicked; alternately, there is an 'activate held object' verb or you can hit pagedown.
 /obj/item/proc/attack_self(mob/user)
-	return
+	var/datum/extension/tool/tool = get_extension(src, /datum/extension/tool)
+	return (tool?.handle_physical_manipulation(user)) || FALSE
 
 //I would prefer to rename this to attack(), but that would involve touching hundreds of files.
 /obj/item/proc/resolve_attackby(atom/A, mob/user, var/click_params)
@@ -132,3 +133,5 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		power *= 2
 	return target.hit_with_weapon(src, user, power, hit_zone)
 
+/obj/item/proc/handle_reflexive_fire(var/mob/user, var/atom/aiming_at)
+	return istype(user) && istype(aiming_at)

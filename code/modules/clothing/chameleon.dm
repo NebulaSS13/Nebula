@@ -40,7 +40,7 @@
 			if(name in .)
 				name += " \[[i++]\]"
 			.[name] = typepath
-	return sortAssoc(.)
+	return sortTim(., /proc/cmp_text_asc)
 
 //starts off as a jumpsuit
 /obj/item/clothing/under/chameleon
@@ -49,7 +49,7 @@
 	desc = "It's a plain jumpsuit. It seems to have a small dial on the wrist."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
-	var/global/list/clothing_choices
+	var/static/list/clothing_choices
 
 /obj/item/clothing/under/chameleon/Initialize()
 	. = ..()
@@ -79,7 +79,7 @@
 	origin_tech = "{'esoteric':3}"
 	body_parts_covered = 0
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
-	var/global/list/clothing_choices
+	var/static/list/clothing_choices
 
 /obj/item/clothing/head/chameleon/Initialize()
 	. = ..()
@@ -108,7 +108,7 @@
 	desc = "It appears to be a vest of standard armor, except this is embedded with a hidden holographic cloaker, allowing it to change it's appearance, but offering no protection.. It seems to have a small dial inside."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
-	var/global/list/clothing_choices
+	var/static/list/clothing_choices
 
 /obj/item/clothing/suit/chameleon/Initialize()
 	. = ..()
@@ -136,7 +136,7 @@
 	desc = "They're comfy black shoes, with clever cloaking technology built in. It seems to have a small dial on the back of each shoe."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
-	var/global/list/clothing_choices
+	var/static/list/clothing_choices
 
 /obj/item/clothing/shoes/chameleon/Initialize()
 	. = ..()
@@ -164,7 +164,7 @@
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 	icon = 'icons/obj/items/storage/backpack/backpack.dmi'
-	var/global/list/clothing_choices
+	var/static/list/clothing_choices
 
 /obj/item/storage/backpack/chameleon/Initialize()
 	. = ..()
@@ -199,7 +199,7 @@
 	desc = "It looks like a pair of gloves, but it seems to have a small dial inside."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
-	var/global/list/clothing_choices
+	var/static/list/clothing_choices
 
 /obj/item/clothing/gloves/chameleon/Initialize()
 	. = ..()
@@ -228,7 +228,7 @@
 	desc = "It looks like a plain gask mask, but on closer inspection, it seems to have a small dial inside."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
-	var/global/list/clothing_choices
+	var/static/list/clothing_choices
 
 /obj/item/clothing/mask/chameleon/Initialize()
 	. = ..()
@@ -257,7 +257,7 @@
 	desc = "It looks like a plain set of mesons, but on closer inspection, it seems to have a small dial inside."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
-	var/global/list/clothing_choices
+	var/static/list/clothing_choices
 
 /obj/item/clothing/glasses/chameleon/Initialize()
 	. = ..()
@@ -287,7 +287,7 @@
 	desc = "An updated, modular intercom that fits over the head. This one seems to have a small dial on it."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
-	var/list/global/clothing_choices
+	var/static/list/clothing_choices
 
 /obj/item/radio/headset/chameleon/Initialize()
 	. = ..()
@@ -318,7 +318,7 @@
 	desc = "A neosilk clip-on tie. It seems to have a small dial on its back."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
-	var/global/list/clothing_choices
+	var/static/list/clothing_choices
 
 /obj/item/clothing/accessory/chameleon/Initialize()
 	. = ..()
@@ -366,7 +366,7 @@
 	max_shots = 50
 
 	var/obj/item/projectile/copy_projectile
-	var/global/list/gun_choices
+	var/static/list/gun_choices
 
 /obj/item/gun/energy/chameleon/Initialize()
 	. = ..()

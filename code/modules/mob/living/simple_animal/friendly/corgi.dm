@@ -12,9 +12,7 @@
 	emote_see = list("shakes its head", "shivers")
 	speak_chance = 1
 	turns_per_move = 10
-	response_help  = "pets"
 	response_disarm = "bops"
-	response_harm   = "kicks"
 	see_in_dark = 5
 	mob_size = MOB_SIZE_SMALL
 	possession_candidate = 1
@@ -36,9 +34,6 @@
 	desc = "It's a corgi."
 	var/turns_since_scan = 0
 	var/obj/movement_target
-	response_help  = "pets"
-	response_disarm = "bops"
-	response_harm   = "kicks"
 
 /mob/living/simple_animal/corgi/Ian/do_delayed_life_action()
 	..()
@@ -155,9 +150,6 @@
 	icon_state = "lisa"
 	icon_living = "lisa"
 	icon_dead = "lisa_dead"
-	response_help  = "pets"
-	response_disarm = "bops"
-	response_harm   = "kicks"
 	var/turns_since_scan = 0
 	var/puppies = 0
 

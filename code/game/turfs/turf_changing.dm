@@ -31,7 +31,7 @@
 		if(istype(below) && !isspaceturf(below))
 			N = /turf/simulated/open
 
-	// Track a number of old values for the purposes of raising 
+	// Track a number of old values for the purposes of raising
 	// state change events after changing the turf to the new type.
 	var/old_air =              air
 	var/old_fire =             fire
@@ -40,8 +40,9 @@
 	var/old_density =          density
 	var/old_corners =          corners
 	var/old_prev_type =        prev_type
+	var/old_affecting_lights = affecting_lights
 	var/old_lighting_overlay = lighting_overlay
-	var/old_dynamic_lighting = dynamic_lighting
+	var/old_dynamic_lighting = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
 
 	changing_turf = TRUE
 
@@ -49,18 +50,11 @@
 	. = new N(src)
 
 	var/turf/W = .
-	W.above =            old_above     // Multiz ref tracking. 
+	W.above =            old_above     // Multiz ref tracking.
 	W.prev_type =        old_prev_type // Shuttle transition turf tracking.
 
-	// Copy over our precalculated lighting and update if needed.
-	W.corners =          old_corners
-	W.lighting_overlay = old_lighting_overlay
-	if(W.dynamic_lighting != old_dynamic_lighting)
-		if(TURF_IS_DYNAMICALLY_LIT_UNSAFE(W))
-			W.lighting_build_overlay()
-		else
-			W.lighting_clear_overlay()
-		W.reconsider_lights()
+	if (permit_ao)
+		regenerate_ao()
 
 	// Update ZAS, atmos and fire.
 	if(keep_air)
@@ -74,10 +68,31 @@
 	// Raise appropriate events.
 	W.post_change()
 	if(tell_universe)
-		GLOB.universe.OnTurfChange(W)
-	GLOB.turf_changed_event.raise_event(W, old_density, W.density, old_opacity, W.opacity)
+		global.universe.OnTurfChange(W)
+
+	events_repository.raise_event(/decl/observ/turf_changed, W, old_density, W.density, old_opacity, W.opacity)
 	if(W.density != old_density)
-		GLOB.density_set_event.raise_event(W, old_density, W.density)
+		events_repository.raise_event(/decl/observ/density_set, W, old_density, W.density)
+
+	// lighting stuff
+
+	affecting_lights = old_affecting_lights
+	corners = old_corners
+
+	lighting_overlay = old_lighting_overlay
+	recalc_atom_opacity()
+
+	var/tidlu = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
+	if ((old_opacity != opacity) || (tidlu != old_dynamic_lighting) || force_lighting_update)
+		reconsider_lights()
+
+	if (tidlu != old_dynamic_lighting)
+		if (tidlu)
+			lighting_build_overlay()
+		else
+			lighting_clear_overlay()
+
+	// end of lighting stuff
 
 /turf/proc/transport_properties_from(turf/other)
 	if(!istype(other, src.type))

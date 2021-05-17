@@ -30,7 +30,7 @@
 	var/image/I = image(icon, "fuel_assembly_bracket")
 	I.appearance_flags |= RESET_COLOR
 	overlays = list(I)
-	
+
 /obj/item/fuel_assembly/Process()
 	if(!radioactivity)
 		return PROCESS_KILL
@@ -48,7 +48,7 @@
 
 /obj/item/fuel_assembly/tritium
 	material = /decl/material/gas/hydrogen/tritium
-	
+
 /obj/item/fuel_assembly/supermatter
 	material = /decl/material/solid/exotic_matter
 

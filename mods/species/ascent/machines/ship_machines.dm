@@ -66,7 +66,7 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 
 /obj/machinery/sleeper/ascent/Initialize(mapload, d, populate_parts)
 	. = ..()
-	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/ascent/crystal()) 
+	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/ascent/crystal())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/ascent/bromide())
 
 /obj/machinery/fabricator/ascent
@@ -190,7 +190,7 @@ MANTIDIFY(/obj/item/chems/chem_disp_cartridge, "canister", "chemical storage")
 
 	if(on)
 		overlays |= field_image
-		set_light(0.8, 1, 6, l_color = COLOR_CYAN)
+		set_light(6, 0.8, COLOR_CYAN)
 		icon_state = "core1"
 	else
 		overlays -= field_image

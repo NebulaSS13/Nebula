@@ -5,7 +5,7 @@
 	slot_flags = SLOT_FACE
 	body_parts_covered = SLOT_FACE|SLOT_EYES
 	blood_overlay_type = "maskblood"
-	material = /decl/material/solid/glass
+	material = /decl/material/solid/fiberglass
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	origin_tech = "{'materials':1,'engineering':1}"
 

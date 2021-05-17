@@ -14,7 +14,7 @@
 * Call unregister_turfs() to stop listening. No argument is required.
 */
 
-var/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to monitor, excludes the turf the holder itself is currently in.
+var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to monitor, excludes the turf the holder itself is currently in.
 
 /datum/proximity_trigger
 	var/atom/holder
@@ -75,30 +75,30 @@ var/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to monitor, 
 
 /datum/proximity_trigger/proc/register_turfs()
 	if(ismovable(holder))
-		GLOB.moved_event.register(holder, src, /datum/proximity_trigger/proc/on_holder_moved)
-	GLOB.dir_set_event.register(holder, src, /datum/proximity_trigger/proc/register_turfs) // Changing direction might alter the relevant turfs
+		events_repository.register(/decl/observ/moved, holder, src, /datum/proximity_trigger/proc/on_holder_moved)
+	events_repository.register(/decl/observ/dir_set, holder, src, /datum/proximity_trigger/proc/register_turfs) // Changing direction might alter the relevant turfs
 
 	var/list/new_turfs = acquire_relevant_turfs()
 	if(listequal(turfs_in_range, new_turfs))
 		return
 
 	for(var/t in (turfs_in_range - new_turfs))
-		GLOB.opacity_set_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
+		events_repository.unregister(/decl/observ/opacity_set, t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
 	for(var/t in (new_turfs - turfs_in_range))
-		GLOB.opacity_set_event.register(t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
+		events_repository.register(/decl/observ/opacity_set, t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
 
 	turfs_in_range = new_turfs
 	on_turf_visibility_changed()
 
 /datum/proximity_trigger/proc/unregister_turfs()
 	if(ismovable(holder))
-		GLOB.moved_event.unregister(holder, src, /datum/proximity_trigger/proc/on_holder_moved)
-	GLOB.dir_set_event.unregister(holder, src, /datum/proximity_trigger/proc/register_turfs)
+		events_repository.unregister(/decl/observ/moved, holder, src, /datum/proximity_trigger/proc/on_holder_moved)
+	events_repository.unregister(/decl/observ/dir_set, holder, src, /datum/proximity_trigger/proc/register_turfs)
 
 	for(var/t in turfs_in_range)
-		GLOB.opacity_set_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
+		events_repository.unregister(/decl/observ/opacity_set, t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
 	for(var/t in seen_turfs_)
-		GLOB.entered_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_entered)
+		events_repository.unregister(/decl/observ/entered, t, src, /datum/proximity_trigger/proc/on_turf_entered)
 
 	call(proc_owner, on_turfs_changed)(seen_turfs_.Copy(), list())
 
@@ -113,9 +113,9 @@ var/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to monitor, 
 	call(proc_owner, on_turfs_changed)(seen_turfs_.Copy(), new_seen_turfs_.Copy())
 
 	for(var/t in (seen_turfs_ - new_seen_turfs_))
-		GLOB.entered_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_entered)
+		events_repository.unregister(/decl/observ/entered, t, src, /datum/proximity_trigger/proc/on_turf_entered)
 	for(var/t in (new_seen_turfs_ - seen_turfs_))
-		GLOB.entered_event.register(t, src, /datum/proximity_trigger/proc/on_turf_entered)
+		events_repository.register(/decl/observ/entered, t, src, /datum/proximity_trigger/proc/on_turf_entered)
 
 	seen_turfs_ = new_seen_turfs_
 
@@ -140,9 +140,10 @@ var/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to monitor, 
 	if(!center)
 		return
 
-	for(var/T in dview(range_, center))
-		if(T in turfs_in_range)
+	FOR_DVIEW(var/T, range_, center, 0)
+		if (T in turfs_in_range)	// This is awful, but I don't want to refactor this to be assoc.
 			. += T
+	END_FOR_DVIEW
 
 /datum/proximity_trigger/proc/acquire_relevant_turfs()
 	. = turf_selection.get_turfs(holder, range_)

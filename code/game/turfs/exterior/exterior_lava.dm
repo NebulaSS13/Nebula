@@ -8,7 +8,7 @@
 
 /turf/exterior/lava/Initialize()
 	. = ..()
-	set_light(0.95, 0.5, 2, l_color = COLOR_ORANGE)
+	set_light(2, l_color = LIGHT_COLOR_LAVA)
 
 /turf/exterior/lava/Destroy()
 	STOP_PROCESSING(SSobj, src)

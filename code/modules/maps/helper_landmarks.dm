@@ -3,6 +3,24 @@
 	name = "map loader landmark"
 	var/list/templates	//list of template types to pick from
 
+/obj/effect/landmark/map_load_mark/proc/get_template()
+	. = LAZYLEN(templates) && pick(templates)
+
+/obj/effect/landmark/map_load_mark/proc/load_template()
+	var/template = get_template()
+	var/turf/spawn_loc = get_turf(src)
+	qdel(src)
+	if(ispath(template, /datum/map_template) && istype(spawn_loc))
+		var/datum/map_template/M = new template
+		M.load(spawn_loc, TRUE)
+
+INITIALIZE_IMMEDIATE(/obj/effect/landmark/map_load_mark/non_template)
+/obj/effect/landmark/map_load_mark/non_template
+	name = "compile-time map loader landmark"
+/obj/effect/landmark/map_load_mark/non_template/Initialize()
+	. = ..()
+	LAZYADD(SSmapping.compile_time_map_markers, src)
+
 //Throw things in the area around randomly
 /obj/effect/landmark/carnage_mark
 	name = "carnage landmark"
@@ -53,11 +71,11 @@
 
 /obj/effect/landmark/delete_on_shuttle/Initialize()
 	. = ..()
-	GLOB.shuttle_added.register_global(src, .proc/check_shuttle)
+	events_repository.register_global(/decl/observ/shuttle_added, src, .proc/check_shuttle)
 
 /obj/effect/landmark/delete_on_shuttle/proc/check_shuttle(var/shuttle)
 	if(SSshuttle.shuttles[shuttle_name] == shuttle)
-		GLOB.shuttle_moved_event.register(shuttle, src, .proc/delete_everything)
+		events_repository.register(/decl/observ/shuttle_moved, shuttle, src, .proc/delete_everything)
 		shuttle_datum = shuttle
 
 /obj/effect/landmark/delete_on_shuttle/proc/delete_everything()
@@ -67,7 +85,7 @@
 	qdel(src)
 
 /obj/effect/landmark/delete_on_shuttle/Destroy()
-	GLOB.shuttle_added.unregister_global(src, .proc/check_shuttle)
+	events_repository.unregister_global(/decl/observ/shuttle_added, src, .proc/check_shuttle)
 	if(shuttle_datum)
-		GLOB.shuttle_moved_event.unregister(shuttle_datum, src, .proc/delete_everything)
+		events_repository.unregister(/decl/observ/shuttle_moved, shuttle_datum, src, .proc/delete_everything)
 	. = ..()

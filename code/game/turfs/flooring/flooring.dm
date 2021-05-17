@@ -24,6 +24,7 @@
 	var/apply_heat_capacity
 
 	var/build_type      // Unbuildable if not set. Must be /obj/item/stack.
+	var/build_material  // Unbuildable if object material var is not set to this.
 	var/build_cost = 1  // Stack units.
 	var/build_time = 0  // BYOND ticks.
 
@@ -46,6 +47,7 @@
 	//How we smooth with space and openspace tiles
 	var/space_smooth = SMOOTH_ALL
 	//There are no lists for spaces
+	var/z_flags //same z flags used for turfs, i.e ZMIMIC_DEFAULT etc
 
 /decl/flooring/proc/on_remove()
 	return
@@ -282,11 +284,11 @@
 
 /decl/flooring/reinforced
 	name = "reinforced floor"
-	desc = "Heavily reinforced with steel plating."
+	desc = "Heavily reinforced with a latticework on top of regular plating."
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_base = "reinforced"
 	flags = TURF_REMOVE_WRENCH | TURF_ACID_IMMUNE
-	build_type = /obj/item/stack/material/steel
+	build_type = /obj/item/stack/material/rods
 	build_cost = 1
 	build_time = 30
 	apply_thermal_conductivity = 0.025
@@ -360,6 +362,26 @@
 	build_type = null
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_CROWBAR
 	color = "#00ffe1"
+
+/decl/flooring/glass
+	name = "glass flooring"
+	desc = "A window to the world outside. Or the world beneath your feet, rather."
+	icon = 'icons/turf/flooring/glassfloor.dmi'
+	icon_base = "glassfloor"
+	build_type = /obj/item/stack/material/pane
+	build_material = /decl/material/solid/glass
+	damage_temperature = T100C
+	flags = TURF_REMOVE_CROWBAR | TURF_ACID_IMMUNE
+	can_engrave = FALSE
+	color = GLASS_COLOR
+	z_flags = ZM_MIMIC_BELOW
+
+/decl/flooring/glass/boro
+	name = "borosilicate glass flooring"
+	build_type = /obj/item/stack/material/pane
+	build_material = /decl/material/solid/glass/borosilicate
+	color = GLASS_COLOR_SILICATE
+	damage_temperature = T0C + 4000
 
 /decl/flooring/snow
 	name = "snow"

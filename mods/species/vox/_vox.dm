@@ -1,5 +1,5 @@
 #define SPECIES_VOX   "Vox"
-#define BODYTYPE_VOX  "Reptoavian Body"
+#define BODYTYPE_VOX  "reptoavian body"
 #define BP_HINDTONGUE "hindtongue"
 
 /decl/modpack/vox

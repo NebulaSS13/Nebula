@@ -1,7 +1,7 @@
-GLOBAL_LIST_EMPTY(allfaxes)
-GLOBAL_LIST_EMPTY(alldepartments)
+var/global/list/allfaxes = list()
+var/global/list/alldepartments = list()
 
-GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
+var/global/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 /obj/machinery/photocopier/faxmachine
 	name = "fax machine"
@@ -25,11 +25,12 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	. = ..()
 
 	if(!admin_departments)
-		admin_departments = list("[GLOB.using_map.boss_name]", "Sol Federal Police", "[GLOB.using_map.boss_short] Supply") + GLOB.using_map.map_admin_faxes
-	GLOB.allfaxes += src
-	if(!destination) destination = "[GLOB.using_map.boss_name]"
-	if( !(("[department]" in GLOB.alldepartments) || ("[department]" in admin_departments)))
-		GLOB.alldepartments |= department
+		admin_departments = list("[global.using_map.boss_name]", "Sol Federal Police", "[global.using_map.boss_short] Supply") + global.using_map.map_admin_faxes
+	global.allfaxes += src
+	if(!destination)
+		destination = "[global.using_map.boss_name]"
+	if( !(("[department]" in global.alldepartments) || ("[department]" in admin_departments)))
+		global.alldepartments |= department
 
 /obj/machinery/photocopier/faxmachine/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/card/id))
@@ -65,7 +66,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	dat += "<hr>"
 
 	if(authenticated)
-		dat += "<b>Logged in to:</b> [GLOB.using_map.boss_name] Quantum Entanglement Network<br><br>"
+		dat += "<b>Logged in to:</b> [global.using_map.boss_name] Quantum Entanglement Network<br><br>"
 
 		if(copyitem)
 			dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Item</a><br><br>"
@@ -128,7 +129,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		return TOPIC_REFRESH
 
 	if(href_list["dept"])
-		var/desired_destination = input(user, "Which department?", "Choose a department", "") as null|anything in (GLOB.alldepartments + admin_departments)
+		var/desired_destination = input(user, "Which department?", "Choose a department", "") as null|anything in (global.alldepartments + admin_departments)
 		if(desired_destination && CanInteract(user, state))
 			destination = desired_destination
 		return TOPIC_REFRESH
@@ -150,7 +151,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	use_power_oneoff(200)
 
 	var/success = 0
-	for(var/obj/machinery/photocopier/faxmachine/F in GLOB.allfaxes)
+	for(var/obj/machinery/photocopier/faxmachine/F in global.allfaxes)
 		if( F.department == destination )
 			success = F.recievefax(copyitem)
 
@@ -204,16 +205,16 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		return
 
 	rcvdcopy.forceMove(null) //hopefully this shouldn't cause trouble
-	GLOB.adminfaxes += rcvdcopy
+	global.adminfaxes += rcvdcopy
 
 	//message badmins that a fax has arrived
-	if (destination == GLOB.using_map.boss_name)
+	if (destination == global.using_map.boss_name)
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#006100")
 	else if (destination == "Sol Federal Police")
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#1f66a0")
-	else if (destination == "[GLOB.using_map.boss_short] Supply")
+	else if (destination == "[global.using_map.boss_short] Supply")
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#5f4519")
-	else if (destination in GLOB.using_map.map_admin_faxes)
+	else if (destination in global.using_map.map_admin_faxes)
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#510b74")
 	else
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, "UNKNOWN")
@@ -228,7 +229,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	msg += "(<A HREF='?_src_=holder;take_ic=\ref[sender]'>TAKE</a>) (<a href='?_src_=holder;FaxReply=\ref[sender];originfax=\ref[src];replyorigin=[reply_type]'>REPLY</a>)</b>: "
 	msg += "Receiving '[sent.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[sent]'>view message</a></span>"
 
-	for(var/client/C in GLOB.admins)
+	for(var/client/C in global.admins)
 		if(check_rights((R_ADMIN|R_MOD),0,C))
 			to_chat(C, msg)
 			sound_to(C, 'sound/machines/dotprinter.ogg')

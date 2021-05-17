@@ -18,7 +18,7 @@
 	src.whitelist = species_whitelist
 	src.blacklist = species_blacklist
 
-/datum/nano_module/appearance_changer/Topic(ref, href_list, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/appearance_changer/Topic(ref, href_list, var/datum/topic_state/state = global.default_topic_state)
 	if(..())
 		return 1
 
@@ -28,10 +28,20 @@
 				cut_and_generate_data()
 				return 1
 	if(href_list["gender"])
-		if(can_change(APPEARANCE_GENDER) && (href_list["gender"] in owner.species.genders))
-			if(owner.set_gender(href_list["gender"], TRUE))
-				cut_and_generate_data()
-				return 1
+		if(can_change(APPEARANCE_GENDER))
+			var/decl/pronouns/pronouns = get_pronouns_by_gender(href_list["gender"])
+			if(istype(pronouns) && (pronouns in owner.species.available_pronouns))
+				if(owner.set_gender(pronouns.name, TRUE))
+					cut_and_generate_data()
+					return 1
+	if(href_list["bodytype"])
+		if(can_change(APPEARANCE_BODY))
+			var/decl/species/species = owner.get_species()
+			var/decl/bodytype/B = species.get_bodytype_by_name(href_list["bodytype"])
+			if(istype(B) && (B in owner.species.available_bodytypes))
+				if(owner.set_bodytype(B, TRUE))
+					cut_and_generate_data()
+					return 1
 	if(href_list["skin_tone"])
 		if(can_change_skin_tone())
 			var/new_s_tone = input(usr, "Choose your character's skin-tone:\n1 (lighter) - [owner.species.max_skin_tone()] (darker)", "Skin Tone", -owner.skin_tone + 35) as num|null
@@ -72,10 +82,9 @@
 			if(new_eyes && can_still_topic(state) && owner.change_eye_color(new_eyes))
 				update_dna()
 				return TRUE
-
 	return 0
 
-/datum/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	if(!owner || !owner.species)
 		return
 
@@ -94,10 +103,18 @@
 	data["change_gender"] = can_change(APPEARANCE_GENDER)
 	if(data["change_gender"])
 		var/genders[0]
-		for(var/gender in owner.species.genders)
-			var/decl/pronouns/G = get_pronouns_by_gender(gender)
-			genders[++genders.len] =  list("gender_name" = capitalize(G.name), "gender_key" = gender)
+		for(var/decl/pronouns/G as anything in owner.species.available_pronouns)
+			genders[++genders.len] =  list("gender_name" = capitalize(G.name), "gender_key" = G.name)
 		data["genders"] = genders
+
+	data["bodytype"] = capitalize(owner.bodytype.name)
+	data["change_bodytype"] = can_change(APPEARANCE_BODY)
+	if(data["change_bodytype"])
+		var/bodytypes[0]
+		for(var/decl/bodytype/B as anything in owner.species.available_bodytypes)
+			bodytypes += capitalize(B.name)
+		data["bodytypes"] = bodytypes
+
 	data["change_skin_tone"] = can_change_skin_tone()
 	data["change_skin_color"] = can_change_skin_color()
 	data["change_eye_color"] = can_change(APPEARANCE_EYE_COLOR)

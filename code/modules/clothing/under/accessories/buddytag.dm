@@ -24,7 +24,7 @@
 	popup.open()
 
 /obj/item/clothing/accessory/buddytag/DefaultTopicState()
-	return GLOB.physical_state
+	return global.physical_topic_state
 
 /obj/item/clothing/accessory/buddytag/OnTopic(var/user, var/list/href_list, var/state)
 	if(href_list["toggle"])

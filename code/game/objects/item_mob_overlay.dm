@@ -2,7 +2,7 @@
 // changes. In the long term this should be removed after 
 // all the `slot_l/r_hand-foo` states are renamed to just 
 // `l/r_hand-foo`. TODO: check if this is still here in 2025.
-var/list/bodypart_to_slot_lookup_table = list(
+var/global/list/bodypart_to_slot_lookup_table = list(
 	BP_L_HAND = "slot_l_hand",
 	BP_R_HAND = "slot_r_hand"
 )
@@ -22,7 +22,7 @@ var/list/bodypart_to_slot_lookup_table = list(
 // Cached cause asking icons is expensive. This is still expensive, so avoid using it if
 // you can reasonably expect the icon_state to exist beforehand, or if you can cache the
 // value somewhere (as done below with use_single_icon in /obj/item/Initialize()).
-var/list/icon_state_cache = list()
+var/global/list/icon_state_cache = list()
 /proc/check_state_in_icon(var/checkstate, var/checkicon, var/high_accuracy = FALSE)
 	// isicon() is apparently quite expensive so short-circuit out early if we can.
 	if(!istext(checkstate) || isnull(checkicon) || !(isfile(checkicon) || isicon(checkicon))) 
@@ -53,6 +53,9 @@ var/list/icon_state_cache = list()
 	..()
 	update_world_inventory_state()
 
+/mob/proc/get_bodytype_category()
+	return
+
 /obj/item/reset_plane_and_layer()
 	..()
 	update_world_inventory_state()
@@ -64,11 +67,11 @@ var/list/icon_state_cache = list()
 		var/mob_icon = global.default_onmob_icons[slot]
 		if(ishuman(user_mob))
 			var/mob/living/carbon/human/user_human = user_mob
-			var/use_slot = (bodypart in user_human.species.equip_adjust) ? bodypart : slot
-			return user_human.species.get_offset_overlay_image(FALSE, mob_icon, mob_state, color, use_slot)
+			var/use_slot = (bodypart in user_human.bodytype.equip_adjust) ? bodypart : slot
+			return user_human.bodytype.get_offset_overlay_image(FALSE, mob_icon, mob_state, color, use_slot)
 		return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
-	var/bodytype = user_mob?.get_bodytype() || BODYTYPE_HUMANOID
+	var/bodytype = user_mob?.get_bodytype_category() || BODYTYPE_HUMANOID
 	var/useicon =  get_icon_for_bodytype(bodytype)
 	if(bodytype != BODYTYPE_HUMANOID && !check_state_in_icon("[bodytype]-[slot]", useicon))
 		var/fallback = get_fallback_slot(slot)
@@ -110,8 +113,8 @@ var/list/icon_state_cache = list()
 /obj/item/proc/apply_offsets(var/mob/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/H = user_mob
-		if(H.species.get_bodytype(H) != bodytype) 
-			overlay = H.species.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, bodypart || slot)
+		if(H.get_bodytype_category() != bodytype) 
+			overlay = H.bodytype.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, bodypart || slot)
 	. = overlay
 
 //Special proc belts use to compose their icon

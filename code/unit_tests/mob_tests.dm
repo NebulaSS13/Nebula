@@ -61,7 +61,7 @@
 
 // ============================================================================
 
-/var/default_mobloc = null
+var/global/default_mobloc = null
 
 /proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living/carbon/human)
 	var/list/test_result = list("result" = FAILURE, "msg"    = "", "mobref" = null)
@@ -295,64 +295,6 @@
 #undef IMMUNE
 #undef SUCCESS
 #undef FAILURE
-
-/datum/unit_test/species_base_skin
-	name = "MOB: Species base skin presence"
-//	async = 1
-	var/failcount = 0
-	var/list/gender_test
-
-/datum/unit_test/species_base_skin/start_test()
-
-	var/list/all_genders = decls_repository.get_decls_of_type(/decl/pronouns)
-	for(var/thing in all_genders)
-		var/decl/pronouns/G = all_genders[thing]
-		if(G.icon_key)
-			LAZYDISTINCTADD(gender_test, "[G.icon_key]")
-
-	for(var/species_name in get_all_species())
-		var/decl/species/S = get_species_by_key(species_name)
-		if(S.base_skin_colours)
-			if(!(S.appearance_flags & HAS_BASE_SKIN_COLOURS))
-				log_unit_test("[S.name] has a skin colour list but no HAS_BASE_SKIN_COLOURS flag.")
-				failcount++
-				continue
-			if(!(S.base_skin_colours.len >= 2))
-				log_unit_test("[S.name] needs at least two items in the base_skin_colour list.")
-				failcount++
-				continue
-			var/to_fail = FALSE
-			for(var/tag in S.has_limbs)
-				var/list/paths = S.has_limbs[tag]
-				var/obj/item/organ/external/E = paths["path"]
-				var/icon_name = initial(E.icon_name)
-				for(var/base in S.base_skin_colours)
-					if(initial(E.limb_flags) & ORGAN_FLAG_GENDERED_ICON)
-						for(var/gen in gender_test)
-							if(!check_state_in_icon("[icon_name][gen][S.base_skin_colours[base]]", S.icobase))
-								to_fail = TRUE
-								log_debug("[S.name] has missing gendered icon: [icon_name][gen][S.base_skin_colours[base]] for base [base] and limb tag [tag].")
-					else if(!check_state_in_icon("[icon_name][S.base_skin_colours[base]]", S.icobase))
-						to_fail = TRUE
-						log_debug("[S.name] has missing ungendered icon: [icon_name][S.base_skin_colours[base]] for base [base] and limb tag [tag].")
-
-			if(to_fail)
-				log_unit_test("[S.name] is missing one or more base icons.")
-				failcount++
-				continue
-
-		else if(S.appearance_flags & HAS_BASE_SKIN_COLOURS)
-			log_unit_test("[S.name] has a HAS_BASE_SKIN_COLOURS flag but no skin colour list.")
-			failcount++
-			continue
-
-	if(failcount)
-		fail("[failcount] species had bad base skin colour.")
-	else
-		pass("All species had correct skin colour setups.")
-
-	return 1	// return 1 to show we're done and don't want to recheck the result.
-
 
 /datum/unit_test/mob_nullspace
 	name = "MOB: Mob in nullspace shall not cause runtimes"

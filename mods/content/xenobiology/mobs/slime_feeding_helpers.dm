@@ -1,4 +1,4 @@
-var/list/slime_pain_messages = list(
+var/global/list/slime_pain_messages = list(
 	"You can feel your body becoming weak!",
 	"You feel like you're about to die!",
 	"You feel every part of your body screaming in agony!",

@@ -7,7 +7,7 @@
 	origin_tech = "{'magnets':2,'engineering':2,'wormholes':2}"
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_TRACE
 	)
 	w_class = ITEM_SIZE_SMALL
@@ -99,8 +99,9 @@
 
 	dat += "<hr>"
 	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</a><br>"
-	dat += "<A href='?src=\ref[src];close=1'>Close</a><br>"
-	show_browser(user, dat, "window=depth_scanner;size=300x500")
+	var/datum/browser/popup = new(user, "depth_scanner", "Results", 300, 500)
+	popup.set_content(dat)
+	popup.open()
 	onclose(user, "depth_scanner")
 
 /obj/item/depth_scanner/OnTopic(user, href_list)
@@ -108,7 +109,6 @@
 		var/index = text2num(href_list["select"])
 		if(index && index <= positive_locations.len)
 			current = positive_locations[index]
-		. = TOPIC_REFRESH
 	else if(href_list["clear"])
 		var/index = text2num(href_list["clear"])
 		if(index)
@@ -120,8 +120,5 @@
 			//GC will hopefully pick them up before too long
 			positive_locations = list()
 			QDEL_NULL(current)
-		. = TOPIC_REFRESH
-	else if(href_list["close"])
-		close_browser(user, "window=depth_scanner")
-	updateSelfDialog()
+	interact(user)
 

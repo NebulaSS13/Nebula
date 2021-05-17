@@ -28,7 +28,7 @@
 	item_desc = "It is a half-built crossbow with a steel backbone welded in place."
 
 /decl/crafting_stage/material/crossbow_plastic
-	completion_trigger_type = /obj/item/stack/material
+	completion_trigger_type = /obj/item/stack/material/panel
 	stack_consume_amount  = 3
 	item_icon_state = "crossbowframe4"
 	item_desc = "It is a half-built crossbow with a steel backbone and a cell mount installed."

@@ -19,6 +19,7 @@
 	var/mob/living/carbon/human/owner // Current mob owning the organ.
 	var/datum/dna/dna                 // Original DNA.
 	var/decl/species/species          // Original species.
+	var/decl/bodytype/bodytype        // Original bodytype.
 	var/list/ailments                 // Current active ailments if any.
 
 	// Damage vars.
@@ -67,8 +68,10 @@
 	if (given_dna)
 		set_dna(given_dna)
 	if (!species)
-		species = get_species_by_key(GLOB.using_map.default_species)
+		species = get_species_by_key(global.using_map.default_species)
+
 	species.resize_organ(src)
+	bodytype = owner?.bodytype || species.default_bodytype
 
 	create_reagents(5 * (w_class-1)**2)
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, reagents.maximum_volume)
@@ -83,6 +86,7 @@
 		blood_DNA.Cut()
 		blood_DNA[dna.unique_enzymes] = dna.b_type
 		species = get_species_by_key(dna.species)
+		bodytype = owner?.bodytype || species.default_bodytype
 		if (!species)
 			PRINT_STACK_TRACE("Invalid DNA species. Expected a valid species name as string, was: [log_info_line(dna.species)]")
 
@@ -244,7 +248,7 @@
 	if(!owner || !germ_level)
 		return
 
-	var/antibiotics = LAZYACCESS(owner.chem_effects, CE_ANTIBIOTIC)
+	var/antibiotics = GET_CHEMICAL_EFFECT(owner, CE_ANTIBIOTIC)
 	if (!antibiotics)
 		return
 
@@ -286,7 +290,7 @@
 
 	if(!istype(owner))
 		return
-	GLOB.dismembered_event.raise_event(owner, src)
+	events_repository.raise_event(/decl/observ/dismembered, owner, src)
 
 	action_button_name = null
 
@@ -414,7 +418,7 @@
 /obj/item/organ/proc/get_mechanical_assisted_descriptor()
 	return "mechanically-assisted [name]"
 
-var/list/ailment_reference_cache = list()
+var/global/list/ailment_reference_cache = list()
 /proc/get_ailment_reference(var/ailment_type)
 	if(!ispath(ailment_type, /datum/ailment))
 		return

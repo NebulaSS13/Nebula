@@ -40,8 +40,8 @@
 
 		if("hrefs")				//persistant logs and stuff
 			if(config && config.log_hrefs)
-				if(GLOB.world_href_log)
-					show_browser(src, GLOB.world_href_log, "window=investigate[subject];size=800x300")
+				if(global.world_href_log)
+					show_browser(src, global.world_href_log, "window=investigate[subject];size=800x300")
 				else
 					to_chat(src, "<span class='warning'>Error: admin_investigate: No href logfile found.</span>")
 					return

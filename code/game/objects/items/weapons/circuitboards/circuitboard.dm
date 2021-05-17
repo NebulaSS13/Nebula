@@ -12,7 +12,7 @@
 	throw_speed = 3
 	throw_range = 15
 	part_flags = 0
-	material = /decl/material/solid/glass
+	material = /decl/material/solid/fiberglass
 	var/build_path = null
 	var/board_type = "computer"
 	var/list/req_components = list(

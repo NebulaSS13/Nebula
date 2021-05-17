@@ -51,13 +51,14 @@
 		/obj/item/stack/tile/floor/cyborg,
 		/obj/item/stack/material/cyborg/glass,
 		/obj/item/stack/material/cyborg/glass/reinforced,
+		/obj/item/stack/material/cyborg/fiberglass,
 		/obj/item/stack/cable_coil/cyborg,
 		/obj/item/stack/material/cyborg/plasteel
 	)
 	synths = list(
-		/datum/matter_synth/metal =    60000,
-		/datum/matter_synth/glass =    40000,
-		/datum/matter_synth/plasteel = 20000,
+		/datum/matter_synth/metal =      60000,
+		/datum/matter_synth/glass =      40000,
+		/datum/matter_synth/plasteel =   20000,
 		/datum/matter_synth/wire
 	)
 	emag = /obj/item/baton/robot/electrified_arm
@@ -72,10 +73,10 @@
 
 /obj/item/robot_module/engineering/finalize_synths()
 
-	var/datum/matter_synth/metal/metal =       locate() in synths
-	var/datum/matter_synth/glass/glass =       locate() in synths
-	var/datum/matter_synth/plasteel/plasteel = locate() in synths
-	var/datum/matter_synth/wire/wire =         locate() in synths
+	var/datum/matter_synth/metal/metal =           locate() in synths
+	var/datum/matter_synth/glass/glass =           locate() in synths
+	var/datum/matter_synth/plasteel/plasteel =     locate() in synths
+	var/datum/matter_synth/wire/wire =             locate() in synths
 
 	var/obj/item/matter_decompiler/MD = locate() in equipment
 	MD.metal = metal
@@ -93,7 +94,8 @@
 
 	for(var/thing in list(
 		 /obj/item/stack/material/cyborg/glass/reinforced,
-		 /obj/item/stack/material/cyborg/glass
+		 /obj/item/stack/material/cyborg/glass,
+		 /obj/item/stack/material/cyborg/fiberglass
 		))
 		var/obj/item/stack/stack = locate(thing) in equipment
 		LAZYDISTINCTADD(stack.synths, glass)

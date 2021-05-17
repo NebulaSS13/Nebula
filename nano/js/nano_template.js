@@ -1,7 +1,8 @@
 
 var NanoTemplate = function () {
 
-    var _templateData = {};
+	var _templateData = {};
+	var _templateFileName = '';
 
     var _templates = {};
     var _compiledTemplates = {};
@@ -11,63 +12,46 @@ var NanoTemplate = function () {
     var init = function () {
         // We store templateData in the body tag, it's as good a place as any
 		_templateData = $('body').data('templateData');
+		_templateFileName = $('body').data('initialData')['config']['templateFileName'];
 
 		if (_templateData == null)
 		{
 			alert('Error: Template data did not load correctly.');
 		}
 
-		loadNextTemplate();
+		loadAllTemplates();
     };
 
-    var loadNextTemplate = function () {
-        // we count the number of templates for this ui so that we know when they've all been rendered
-        var templateCount = Object.size(_templateData);
+	var loadAllTemplates = function () {
+		$.when($.ajax({
+			url: _templateFileName,
+			cache: false,
+			dataType: 'json'
+		}))
+		.done(function(allTemplates) {
+			
+			for (var key in _templateData)
+			{
+				var templateMarkup = allTemplates[_templateData[key]];
+				templateMarkup += '<div class="clearBoth"></div>';
 
-        if (!templateCount)
-        {
-            $(document).trigger('templatesLoaded');
-            return;
-        }
-
-        // load markup for each template and register it
-        for (var key in _templateData)
-        {
-            if (!_templateData.hasOwnProperty(key))
-            {
-                continue;
-            }
-
-            $.when($.ajax({
-                    url: _templateData[key],
-                    cache: false,
-                    dataType: 'text'
-                }))
-                .done(function(templateMarkup) {
-
-                    templateMarkup += '<div class="clearBoth"></div>';
-
-                    try
-                    {
-                        NanoTemplate.addTemplate(key, templateMarkup);
-                    }
-                    catch(error)
-                    {
-                        alert('ERROR: An error occurred while loading the UI: ' + error.message);
-                        return;
-                    }
-
-                    delete _templateData[key];
-
-                    loadNextTemplate();
-                })
-                .fail(function () {
-                    alert('ERROR: Loading template ' + key + '(' + _templateData[key] + ') failed!');
-                });
-
-            return;
-        }
-    }
+				try
+				{
+					NanoTemplate.addTemplate(key, templateMarkup);
+				}
+				catch(error)
+				{
+					alert('ERROR: Loading template ' + key + '(' + _templateData[key] + ') failed with error: ' + error.message);
+					return;
+				}
+				delete _templateData[key];
+			}
+			$(document).trigger('templatesLoaded');
+		})
+		.fail(function () {
+			alert('ERROR: Failed to locate or parse templates file.');
+		});
+	};
 
     var compileTemplates = function () {
 

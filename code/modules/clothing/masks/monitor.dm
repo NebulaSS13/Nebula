@@ -11,7 +11,7 @@
 	action_button_desc = "Allows you to choose state for your monitor"
 
 	var/monitor_state_index = "blank"
-	var/global/list/monitor_states = list(
+	var/static/list/monitor_states = list(
 		"blank" =    "ipc_blank",
 		"pink" =     "ipc_pink",
 		"red" =      "ipc_red",
@@ -53,10 +53,7 @@
 			monitor_state_index = initial(monitor_state_index)
 		var/check_state = "[ret.icon_state]-[monitor_states[monitor_state_index]]"
 		if(check_state_in_icon(check_state, ret.icon))
-			var/image/I = image(ret.icon, check_state)
-			I.layer = ABOVE_LIGHTING_LAYER
-			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-			ret.overlays += I
+			ret.overlays += emissive_overlay(ret.icon, check_state)
 	return ret
 
 /obj/item/clothing/mask/monitor/set_dir()

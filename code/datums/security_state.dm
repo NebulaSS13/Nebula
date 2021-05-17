@@ -136,9 +136,8 @@
 	var/name
 
 	// These values are primarily for station alarms and status displays, and which light colors and overlays to use
-	var/light_max_bright = 0.5
-	var/light_inner_range = 0.1
-	var/light_outer_range = 1
+	var/light_range
+	var/light_power
 	var/light_color_alarm
 	var/light_color_status_display
 
@@ -195,16 +194,15 @@
 
 /decl/security_level/default/proc/notify_station()
 	for(var/obj/machinery/firealarm/FA in SSmachines.machinery)
-		if(FA.z in GLOB.using_map.contact_levels)
+		if(FA.z in global.using_map.contact_levels)
 			FA.update_icon()
 	post_status("alert")
 
 /decl/security_level/default/code_green
 	name = "code green"
 
-	light_max_bright = 0.25
-	light_inner_range = 0.1
-	light_outer_range = 1
+	light_range = 2
+	light_power = 1
 
 	light_color_alarm = COLOR_GREEN
 	light_color_status_display = COLOR_GREEN
@@ -219,9 +217,8 @@
 /decl/security_level/default/code_blue
 	name = "code blue"
 
-	light_max_bright = 0.5
-	light_inner_range = 0.1
-	light_outer_range = 2
+	light_range = 2
+	light_power = 1
 	light_color_alarm = COLOR_BLUE
 	light_color_status_display = COLOR_BLUE
 
@@ -236,9 +233,8 @@
 /decl/security_level/default/code_red
 	name = "code red"
 
-	light_max_bright = 0.5
-	light_inner_range = 0.1
-	light_outer_range = 2
+	light_range = 4
+	light_power = 2
 	light_color_alarm = COLOR_RED
 	light_color_status_display = COLOR_RED
 
@@ -253,9 +249,8 @@
 /decl/security_level/default/code_delta
 	name = "code delta"
 
-	light_max_bright = 0.75
-	light_inner_range = 0.1
-	light_outer_range = 3
+	light_range = 4
+	light_power = 2
 	light_color_alarm = COLOR_RED
 	light_color_status_display = COLOR_NAVY_BLUE
 

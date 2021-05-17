@@ -1,5 +1,5 @@
-GLOBAL_VAR_INIT(end_credits_song, null)
-GLOBAL_VAR_INIT(end_credits_title, null)
+var/global/end_credits_song
+var/global/end_credits_title
 
 /datum/admin_secret_item/fun_secret/change_credits_song
 	name = "Change End Credits Song"
@@ -13,14 +13,14 @@ GLOBAL_VAR_INIT(end_credits_title, null)
 
 	if(selected)
 		var/decl/music_track/track = GET_DECL(selected)
-		GLOB.end_credits_song = track.song
+		global.end_credits_song = track.song
 	
 	SSstatistics.add_field_details("admin_verb","CECS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admin_secret_item/fun_secret/change_credits_title/do_execute()
-	GLOB.end_credits_title = input(usr, "What title would you like for the end credits?") as null|text
+	global.end_credits_title = input(usr, "What title would you like for the end credits?") as null|text
 
-	if(!GLOB.end_credits_title)
+	if(!global.end_credits_title)
 		return
 
 	SSstatistics.add_field_details("admin_verb","CECT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

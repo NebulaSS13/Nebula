@@ -5,8 +5,8 @@ SUBSYSTEM_DEF(misc)
 
 /datum/controller/subsystem/misc/Initialize()
 	if(config.generate_map)
-		GLOB.using_map.perform_map_generation()
-	GLOB.using_map.build_exterior_atmosphere()
+		global.using_map.perform_map_generation()
+	global.using_map.build_exterior_atmosphere()
 
 	setupgenetics()
 

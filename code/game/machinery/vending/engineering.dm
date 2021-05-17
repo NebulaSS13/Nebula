@@ -115,18 +115,14 @@
 	vend_delay = 21
 	base_type = /obj/machinery/vending/materials
 	products = list(
-		/obj/item/stack/material/steel/fifty = 3,
-		/obj/item/stack/material/plastic/fifty = 4,
-		/obj/item/stack/material/aluminium/fifty = 3,
-		/obj/item/stack/material/plasteel/ten = 4,
-		/obj/item/stack/material/glass/fifty = 4
+		/obj/item/stack/material/sheet/mapped/steel/fifty =            3,
+		/obj/item/stack/material/panel/mapped/plastic/fifty =          4,
+		/obj/item/stack/material/shiny/mapped/aluminium/fifty =        3,
+		/obj/item/stack/material/reinforced/mapped/plasteel/ten =      4,
+		/obj/item/stack/material/ingot/mapped/copper/fifty =           4,
+		/obj/item/stack/material/pane/mapped/glass/fifty =             4,
+		/obj/item/stack/material/reinforced/mapped/fiberglass/fifty =  4
 	)
-	contraband = list(/obj/item/stack/material/ocp/ten = 3)
-
-/obj/machinery/vending/materials/build_inventory()
-	..()
-	for(var/datum/stored_items/vending_products/P in product_records)
-		if(ispath(P.item_path, /obj/item/stack/material))
-			var/obj/item/stack/material/S = P.item_path
-			var/decl/material/sheet_material = GET_DECL(initial(S.material))
-			P.item_name = "[sheet_material.solid_name] [sheet_material.sheet_plural_name] ([initial(S.amount)]x)"
+	contraband = list(
+		/obj/item/stack/material/reinforced/mapped/ocp/ten = 3
+	)

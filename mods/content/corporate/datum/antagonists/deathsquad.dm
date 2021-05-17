@@ -66,7 +66,7 @@
 	else
 		syndicate_commando_rank = pick("Lieutenant", "Captain", "Major")
 
-	var/syndicate_commando_name = pick(GLOB.last_names)
+	var/syndicate_commando_name = pick(global.last_names)
 
 	var/datum/preferences/A = new() //Randomize appearance for the commando.
 	A.randomize_appearance_and_body_for(player.current)
@@ -77,11 +77,10 @@
 
 	var/mob/living/carbon/human/H = player.current
 	if(istype(H))
-		H.set_gender(pick(H.species.genders))
+		var/decl/pronouns/pronouns = pick(H.species.available_pronouns)
+		H.set_gender(pronouns.name)
 		H.set_age(rand(25,45))
 		H.dna.ready_dna(H)
-
-	return
 
 /decl/special_role/deathsquad/create_antagonist()
 	if(..() && !deployed)

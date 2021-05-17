@@ -58,7 +58,7 @@
 	mutation=mHallucination
 
 /datum/dna/gene/disability/hallucinate/New()
-	block=GLOB.HALLUCINATIONBLOCK
+	block=global.HALLUCINATIONBLOCK
 
 /datum/dna/gene/disability/epilepsy
 	name="Epilepsy"
@@ -66,7 +66,7 @@
 	disability=EPILEPSY
 
 /datum/dna/gene/disability/epilepsy/New()
-	block=GLOB.HEADACHEBLOCK
+	block=global.HEADACHEBLOCK
 
 /datum/dna/gene/disability/cough
 	name="Coughing"
@@ -74,7 +74,7 @@
 	disability=COUGHING
 
 /datum/dna/gene/disability/cough/New()
-	block=GLOB.COUGHBLOCK
+	block=global.COUGHBLOCK
 
 /datum/dna/gene/disability/clumsy
 	name="Clumsiness"
@@ -82,7 +82,7 @@
 	mutation=MUTATION_CLUMSY
 
 /datum/dna/gene/disability/clumsy/New()
-	block=GLOB.CLUMSYBLOCK
+	block=global.CLUMSYBLOCK
 
 /datum/dna/gene/disability/tourettes
 	name="Tourettes"
@@ -90,7 +90,7 @@
 	disability=TOURETTES
 
 /datum/dna/gene/disability/tourettes/New()
-	block=GLOB.TWITCHBLOCK
+	block=global.TWITCHBLOCK
 
 /datum/dna/gene/disability/nervousness
 	name="Nervousness"
@@ -98,7 +98,7 @@
 	disability=NERVOUS
 
 /datum/dna/gene/disability/nervousness/New()
-	block=GLOB.NERVOUSBLOCK
+	block=global.NERVOUSBLOCK
 
 /datum/dna/gene/disability/blindness
 	name="Blindness"
@@ -106,7 +106,7 @@
 	sdisability=BLINDED
 
 /datum/dna/gene/disability/blindness/New()
-	block=GLOB.BLINDBLOCK
+	block=global.BLINDBLOCK
 
 /datum/dna/gene/disability/deaf
 	name="Deafness"
@@ -114,7 +114,7 @@
 	sdisability=DEAFENED
 
 /datum/dna/gene/disability/deaf/New()
-	block=GLOB.DEAFBLOCK
+	block=global.DEAFBLOCK
 
 /datum/dna/gene/disability/deaf/activate(var/mob/M, var/connected, var/flags)
 	..(M,connected,flags)
@@ -126,4 +126,4 @@
 	disability=NEARSIGHTED
 
 /datum/dna/gene/disability/nearsighted/New()
-	block=GLOB.GLASSESBLOCK
+	block=global.GLASSESBLOCK

@@ -46,7 +46,7 @@
 	docking_controller = SSshuttle.docking_registry[docking_tag]
 	if(!istype(docking_controller))
 		log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
-	if(GLOB.using_map.use_overmap)
+	if(global.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/location = map_sectors["[z]"]
 		if(location && location.docking_codes)
 			docking_controller.docking_codes = location.docking_codes
@@ -191,4 +191,4 @@
 /obj/item/spaceflare/on_update_icon()
 	if(active)
 		icon_state = "bluflare_on"
-		set_light(0.3, 0.1, 6, 2, "85d1ff")
+		set_light(6, 2, "#85d1ff")

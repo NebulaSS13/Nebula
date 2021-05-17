@@ -8,16 +8,19 @@
 	desc = "This heater is guaranteed not to set anything, or anyone, on fire."
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 
-	var/on = 0
-	var/set_temperature = T0C + 20	//K
-	var/active = 0
-	var/heating_power = 40 KILOWATTS
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	clicksound = "switch"
+
+	light_power = 0.5
 
 	construct_state = /decl/machine_construction/default/panel_closed
 	stat_immune = 0
 	uncreated_component_parts = null
+
+	var/on = 0
+	var/set_temperature = T0C + 20	//K
+	var/active = 0
+	var/heating_power = 40 KILOWATTS
 
 /obj/machinery/space_heater/on_update_icon(var/rebuild_overlay = 0)
 	if(!on)
@@ -25,10 +28,10 @@
 		set_light(0)
 	else if(active > 0)
 		icon_state = "sheater-heat"
-		set_light(0.7, 1, 2, 3, COLOR_SEDONA)
+		set_light(3, l_color = COLOR_SEDONA)
 	else if(active < 0)
 		icon_state = "sheater-cool"
-		set_light(0.7, 1, 2, 3, COLOR_DEEP_SKY_BLUE)
+		set_light(3, l_color = COLOR_DEEP_SKY_BLUE)
 	else
 		icon_state = "sheater-standby"
 		set_light(0)
@@ -89,7 +92,7 @@
 		update_icon()
 		return TRUE
 
-/obj/machinery/space_heater/Topic(href, href_list, state = GLOB.physical_state)
+/obj/machinery/space_heater/Topic(href, href_list, state = global.physical_topic_state)
 	if (..())
 		show_browser(usr, null, "window=spaceheater")
 		usr.unset_machine()

@@ -4,40 +4,11 @@
 /decl/species/proc/get_additional_examine_text(var/mob/living/carbon/human/H)
 	return
 
-/decl/species/proc/get_tail(var/mob/living/carbon/human/H)
-	return tail
-
-/decl/species/proc/get_tail_animation(var/mob/living/carbon/human/H)
-	return tail_animation
-
-/decl/species/proc/get_tail_hair(var/mob/living/carbon/human/H)
-	return tail_hair
-
-/decl/species/proc/get_blood_mask(var/mob/living/carbon/human/H)
-	return blood_mask
-
-/decl/species/proc/get_damage_overlays(var/mob/living/carbon/human/H)
-	return damage_overlays
-
-/decl/species/proc/get_damage_mask(var/mob/living/carbon/human/H)
-	return damage_mask
-
 /decl/species/proc/get_examine_name(var/mob/living/carbon/human/H)
 	return name
 
-/decl/species/proc/get_icobase(var/mob/living/carbon/human/H, var/get_deform)
-	return (get_deform ? deform : icobase)
-
 /decl/species/proc/get_station_variant()
 	return name
-
-/decl/species/proc/get_icon_cache_uid(var/mob/H)
-	if(!icon_cache_uid)
-		icon_cache_uid = "[sequential_id(/decl/species)]"
-	return icon_cache_uid
-
-/decl/species/proc/get_bodytype(var/mob/living/carbon/human/H)
-	return bodytype
 
 /decl/species/proc/get_knockout_message(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? "encounters a hardware fault and suddenly reboots!" : knockout_message)
@@ -79,9 +50,6 @@
 /decl/species/proc/get_vision_flags(var/mob/living/carbon/human/H)
 	return vision_flags
 
-/decl/species/proc/get_husk_icon(var/mob/living/carbon/human/H)
-	return husk_icon
-
 /decl/species/proc/get_sex(var/mob/living/carbon/H)
 	return H.gender
 
@@ -111,3 +79,18 @@
 
 /decl/species/proc/get_limb_from_zone(var/limb)
 	. = length(LAZYACCESS(limb_mapping, limb)) ? pick(limb_mapping[limb]) : limb
+
+/decl/species/proc/get_bodytype_by_name(var/bp)
+	if(!bp)
+		return
+	bp = lowertext(bp)
+	for(var/decl/bodytype/bodytype in available_bodytypes)
+		if(lowertext(bodytype.name) == bp)
+			return bodytype
+
+/decl/species/proc/get_bodytype_by_pronouns(var/decl/pronouns/pronouns)
+	if(istype(pronouns))
+		for(var/decl/bodytype/bodytype in available_bodytypes)
+			if(bodytype.associated_gender == pronouns.name)
+				return bodytype
+	return default_bodytype

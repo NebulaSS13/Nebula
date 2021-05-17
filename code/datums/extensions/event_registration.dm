@@ -11,13 +11,13 @@
 /datum/extension/event_registration/New(datum/holder, decl/observ/event, datum/target, callproc)
 	..()
 	event.register(target, src, .proc/trigger)
-	GLOB.destroyed_event.register(target, src, .proc/qdel_self)
+	events_repository.register(/decl/observ/destroyed, target, src, .proc/qdel_self)
 	src.event = event
 	src.target = target
 	src.callproc = callproc
 
 /datum/extension/event_registration/Destroy()
-	GLOB.destroyed_event.unregister(target, src)
+	events_repository.unregister(/decl/observ/destroyed, target, src)
 	event.unregister(target, src)
 	. = ..()
 
@@ -36,32 +36,32 @@
 	..()
 	src.given_area = given_area
 	register_shuttles()
-	GLOB.shuttle_added.register_global(src, .proc/shuttle_added)
+	events_repository.register_global(/decl/observ/shuttle_added, src, .proc/shuttle_added)
 
 /datum/extension/event_registration/shuttle_stationary/proc/register_shuttles()
 	if(given_area in SSshuttle.shuttle_areas)
 		for(var/shuttle_name in SSshuttle.shuttles)
 			var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle_name]
 			if(given_area in shuttle_datum.shuttle_area)
-				GLOB.shuttle_moved_event.register(shuttle_datum, src, .proc/shuttle_moved)
-				GLOB.shuttle_pre_move_event.register(shuttle_datum, src, .proc/shuttle_pre_move)
+				events_repository.register(/decl/observ/shuttle_moved, shuttle_datum, src, .proc/shuttle_moved)
+				events_repository.register(/decl/observ/shuttle_pre_move, shuttle_datum, src, .proc/shuttle_pre_move)
 				LAZYADD(shuttles_registered, shuttle_datum)
 
 /datum/extension/event_registration/shuttle_stationary/proc/unregister_shuttles()
 	for(var/datum/shuttle_datum in shuttles_registered)
-		GLOB.shuttle_moved_event.unregister(shuttle_datum, src)
-		GLOB.shuttle_pre_move_event.unregister(shuttle_datum, src)
+		events_repository.unregister(/decl/observ/shuttle_moved, shuttle_datum, src)
+		events_repository.unregister(/decl/observ/shuttle_pre_move, shuttle_datum, src)
 	shuttles_registered = null
 
 /datum/extension/event_registration/shuttle_stationary/proc/shuttle_added(datum/shuttle/shuttle)
 	if(given_area in shuttle.shuttle_area)
-		GLOB.shuttle_moved_event.register(shuttle, src, .proc/shuttle_moved)
-		GLOB.shuttle_pre_move_event.register(shuttle, src, .proc/shuttle_pre_move)
+		events_repository.register(/decl/observ/shuttle_moved, shuttle, src, .proc/shuttle_moved)
+		events_repository.register(/decl/observ/shuttle_pre_move, shuttle, src, .proc/shuttle_pre_move)
 		LAZYADD(shuttles_registered, shuttle)
 
 /datum/extension/event_registration/shuttle_stationary/Destroy()
 	unregister_shuttles()
-	GLOB.shuttle_added.unregister_global(src)
+	events_repository.unregister_global(/decl/observ/shuttle_added, src)
 	. = ..()
 
 /datum/extension/event_registration/shuttle_stationary/proc/shuttle_moved()

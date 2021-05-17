@@ -51,7 +51,7 @@
 			if(MS)
 				MS.send_rc_message("Engineering", my_department, rc_message, "", "", 2)
 				break
-		for(var/mob/living/silicon/ai/A in GLOB.player_list)
+		for(var/mob/living/silicon/ai/A in global.player_list)
 			to_chat(A, "<span class='danger'>Malicious program detected in the [english_list(areaName)] lighting and airlock control systems by [my_department].</span>")
 
 	else

@@ -8,7 +8,7 @@
 	anchored = 1
 	density = 1
 	layer = SINGULARITY_LAYER
-	light_outer_range = 6
+	light_range = 6
 	unacidable = 1 //Don't comment this out.
 
 	var/current_size = 1
@@ -287,7 +287,7 @@
 	if(!move_self)
 		return FALSE
 
-	var/movement_dir = pick(GLOB.alldirs - last_failed_movement)
+	var/movement_dir = pick(global.alldirs - last_failed_movement)
 
 	if(force_move_direction)
 		movement_dir = force_move_direction

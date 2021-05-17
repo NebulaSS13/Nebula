@@ -116,7 +116,7 @@
 	name = "locator device"
 	desc = "Used to scan and locate signals on a particular frequency."
 	material = /decl/material/solid/metal/aluminium
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	var/tracking_freq = PUB_FREQ
 
 /obj/item/pinpointer/radio/acquire_target()
@@ -199,7 +199,7 @@
 
 		if("Other Signature")
 
-			var/itemlist = GLOB.using_map.get_theft_targets() | GLOB.using_map.get_special_theft_targets()
+			var/itemlist = global.using_map.get_theft_targets() | global.using_map.get_special_theft_targets()
 			var/targetitem = input("Select item to search for.", "Item Mode Select","") as null|anything in itemlist
 			if(!targetitem)
 				return

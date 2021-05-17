@@ -82,7 +82,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 			fuel_objs -= fuel
 			if(remove_fire)
 				var/turf/T = fuel.loc
-				if(istype(T) && T.fire) 
+				if(istype(T) && T.fire)
 					qdel(T.fire)
 
 /turf/proc/create_fire(fl)
@@ -105,7 +105,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	zone.fire_tiles |= src
 	var/obj/effect/fluid/fuel = return_fluid()
-	if(fuel?.get_fuel_amount()) 
+	if(fuel?.get_fuel_amount())
 		zone.fuel_objs += fuel
 
 	return 0
@@ -139,13 +139,13 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	if(firelevel > 6)
 		icon_state = "3"
-		set_light(1, 2, 7)
+		set_light(7, 3, no_update = TRUE)
 	else if(firelevel > 2.5)
 		icon_state = "2"
-		set_light(0.7, 2, 5)
+		set_light(5, 2, no_update = TRUE)
 	else
 		icon_state = "1"
-		set_light(0.5, 1, 3)
+		set_light(3, 1, no_update = TRUE)
 
 	for(var/mob/living/L in loc)
 		L.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure())  //Burn the mobs!
@@ -155,7 +155,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		A.fire_act(air_contents, air_contents.temperature, air_contents.volume)
 
 	//spread
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		var/turf/simulated/enemy_tile = get_step(my_tile, direction)
 
 		if(istype(enemy_tile))
@@ -190,11 +190,11 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	if(!istype(loc, /turf))
 		return INITIALIZE_HINT_QDEL
 
-	set_dir(pick(GLOB.cardinal))
+	set_dir(pick(global.cardinal))
 
 	var/datum/gas_mixture/air_contents = loc.return_air()
 	color = fire_color(air_contents.temperature)
-	set_light(0.5, 1, 3, l_color = color)
+	set_light(3, 0.5, color)
 
 	firelevel = fl
 	SSair.active_hotspots.Add(src)

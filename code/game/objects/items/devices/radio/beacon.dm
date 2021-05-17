@@ -6,7 +6,7 @@
 	item_state = "signaler"
 	origin_tech = "{'wormholes':1}"
 	material = /decl/material/solid/metal/aluminium
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 
 	var/code = "electronic"
 	var/functioning = TRUE

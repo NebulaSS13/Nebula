@@ -45,7 +45,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 // will always spawn at the items location, even if it's moved.
 
 /* Example:
-var/datum/effect/system/steam_spread/steam = new /datum/effect/system/steam_spread() -- creates new system
+var/global/datum/effect/system/steam_spread/steam = new /datum/effect/system/steam_spread() -- creates new system
 steam.set_up(5, 0, mob.loc) -- sets up variables
 OPTIONAL: steam.attach(mob)
 steam.start() -- spawns the effect
@@ -78,9 +78,9 @@ steam.start() -- spawns the effect
 	var/obj/effect/effect/steam/steam = new /obj/effect/effect/steam(location)
 	var/direction
 	if(src.cardinals)
-		direction = pick(GLOB.cardinal)
+		direction = pick(global.cardinal)
 	else
-		direction = pick(GLOB.alldirs)
+		direction = pick(global.alldirs)
 	for(i=0, i<pick(1,2,3), i++)
 		sleep(5)
 		step(steam,direction)
@@ -152,9 +152,9 @@ steam.start() -- spawns the effect
 	var/obj/effect/sparks/sparks = new /obj/effect/sparks(location)
 	var/direction
 	if(src.cardinals)
-		direction = pick(GLOB.cardinal)
+		direction = pick(global.cardinal)
 	else
-		direction = pick(GLOB.alldirs)
+		direction = pick(global.alldirs)
 	for(i=0, i<pick(1,2,3), i++)
 		sleep(5)
 		step(sparks,direction)
@@ -213,7 +213,7 @@ steam.start() -- spawns the effect
 	icon_state = "sparks"
 
 /obj/effect/effect/smoke/illumination/Initialize(mapload, var/lifetime=10, var/range=null, var/power=null, var/color=null)
-	set_light(power, 0.1, range, 2, color)
+	set_light(range, power, color)
 	time_to_live=lifetime
 	. = ..()
 
@@ -335,7 +335,7 @@ steam.start() -- spawns the effect
 	src.total_smoke++
 	var/direction = src.direction
 	if(!direction)
-		direction = pick(src.cardinals ? GLOB.cardinal : GLOB.alldirs)
+		direction = pick(src.cardinals ? global.cardinal : global.alldirs)
 	for(i=0, i<pick(0,1,1,1,2,2,2,3), i++)
 		sleep(1 SECOND)
 		if(QDELETED(smoke))
@@ -477,7 +477,7 @@ steam.start() -- spawns the effect
 		var/light = -1
 		var/flash = -1
 
-		// Clamp all values to fractions of GLOB.max_explosion_range, following the same pattern as for tank transfer bombs
+		// Clamp all values to fractions of global.max_explosion_range, following the same pattern as for tank transfer bombs
 		if (round(amount/12) > 0)
 			devst = devst + amount/12
 

@@ -7,7 +7,7 @@
 	scan_sound = 'sound/effects/checkout.ogg'
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 	var/scanner_currency
@@ -15,7 +15,7 @@
 /obj/item/scanner/price/Initialize(ml, material_key)
 	. = ..()
 	if(!ispath(scanner_currency, /decl/currency))
-		scanner_currency = GLOB.using_map.default_currency
+		scanner_currency = global.using_map.default_currency
 
 /obj/item/scanner/price/is_valid_scan_target(atom/movable/target)
 	return istype(target) && target.get_combined_monetary_worth() > 0

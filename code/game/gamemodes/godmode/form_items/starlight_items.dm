@@ -76,7 +76,7 @@
 
 /obj/item/clothing/suit/armor/sunrobe/Initialize()
 	. = ..()
-	set_light(0.3, 0.1, 4, 2)
+	set_light(4, 0.3)
 
 /obj/item/clothing/suit/space/shadowsuit
 	name = "traitor's cloak"

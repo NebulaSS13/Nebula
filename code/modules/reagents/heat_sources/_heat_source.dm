@@ -118,7 +118,7 @@
 				glow_icon = image(icon, "[icon_state]-glow")
 			glow_icon.alpha = Clamp(temperature - MINIMUM_GLOW_TEMPERATURE, MINIMUM_GLOW_VALUE, MAXIMUM_GLOW_VALUE)
 			LAZYADD(adding_overlays, glow_icon)
-			set_light(0.2, 0.1, 1, l_color = COLOR_RED)
+			set_light(1, l_color = COLOR_RED)
 		else
 			set_light(0)
 	else
@@ -161,7 +161,7 @@
 
 /obj/machinery/reagent_temperature/CanUseTopic(var/mob/user, var/state, var/href_list)
 	if(href_list && href_list["remove_container"])
-		. = ..(user, GLOB.physical_state, href_list)
+		. = ..(user, global.physical_topic_state, href_list)
 		if(. == STATUS_CLOSE)
 			to_chat(user, SPAN_WARNING("You are too far away."))
 		return

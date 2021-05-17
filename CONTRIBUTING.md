@@ -1,3 +1,6 @@
+# Branch Structure
+The repository has two main branches, `dev` and `stable`, and one secondary branch, `staging`. Feature implementation, new assets, new maps, and other 'content' pull requests should be pointed at `dev`, while bugfixes for existing code, or fixes to broken assets like sprites or sounds, should be pointed at `stable`. `stable` will be merged back into `dev` periodically to keep the `dev` branch up to date with fixes, so duplicate pull requests are not necessary. `staging` is used for the period when `dev` is being tested and reviewed for promotion to `stable`, and should be targeted when writing fixes for issues encountered during `staging` testing, and otherwise should not be used.
+
 # Contribution Standards
 
 This is a quick and dirty set of agreed-upon standards for contributions to the codebase. It is fairly informal at the moment and should be considered liable to change.
@@ -12,7 +15,9 @@ This is a quick and dirty set of agreed-upon standards for contributions to the 
 - Use constants instead of magic numbers or bare strings, when the values are being used in logic.
 - Do not comment out code, delete it, version control makes keeping it in the codebase pointless.
 - Macros/consts UPPERCASE, types and var names lowercase.
-- Use `global.foo` when referencing global variables (rather than just `foo`, or the now deprecated `GLOB.foo`), for the sake of readability.
+- Use the `/global/` keyword when declaring a globally scoped variable (ie. `var/global/list/foo`).
+- Use the `/static/` keyword, rather than `/global/`, when declaring a static member variable that should be static (`/obj/var/static/foo`).
+- Use `global.foo` when referencing global variables (rather than just `foo`).
 
 ---
 

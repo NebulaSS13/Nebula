@@ -5,8 +5,7 @@ SUBSYSTEM_DEF(misc_late)
 	flags = SS_NO_FIRE
 
 /datum/controller/subsystem/misc_late/Initialize()
-	GLOB.using_map.build_exoplanets()
+	global.using_map.build_exoplanets()
 	var/decl/asset_cache/asset_cache = GET_DECL(/decl/asset_cache)
 	asset_cache.load()
 	. = ..()
-

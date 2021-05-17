@@ -52,288 +52,100 @@
 		-->
 		<div class="commit sansserif">
 
+			<h2 class="date">14 May 2021</h2>
+			<h3 class="author">MistakeNot4892 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Double-clicking to see turf contents is now a preference. You can choose alt click (default), double click or nothing.</li>
+			</ul>
+
+			<h2 class="date">12 May 2021</h2>
+			<h3 class="author">MistakeNot4892 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Fluid interactions with atoms have been disabled until they can be optimized to be less of a server killer. Mobs will still drown, you just won't melt in acid. On the plus side, fluids are more performant now.</li>
+				<li class="tweak">Records now have their own area in character preferences.</li>
+			</ul>
+
+			<h2 class="date">11 May 2021</h2>
+			<h3 class="author">Coltrane97 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Identification cards now properly get their account number; ATM third-level security will work.</li>
+			</ul>
+
+			<h2 class="date">08 May 2021</h2>
+			<h3 class="author">Coltrane97 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Radiation closet now contains radiation medpouch instead of toxin one</li>
+			</ul>
+
+			<h2 class="date">07 May 2021</h2>
+			<h3 class="author">MistakeNot4892 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Some material stack items and messages around them may have changed due to a backend refactor of materials.</li>
+			</ul>
+
+			<h2 class="date">06 May 2021</h2>
+			<h3 class="author">MistakeNot4892 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Examining an object will show you if it is usable as a tool.</li>
+				<li class="tweak">Ghetto surgery steps have been adjusted to use a shared tool flag system, check the codex for updated tools for surgery steps.</li>
+				<li class="tweak">The incision manager no longer has a special surgery type, but counts as several different surgical tools at once.</li>
+			</ul>
+
+			<h2 class="date">02 May 2021</h2>
+			<h3 class="author">MistakeNot4892 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">You can now aim at people with fruit, and will throw the fruit if they trigger reflex fire.</li>
+			</ul>
+
+			<h2 class="date">29 April 2021</h2>
+			<h3 class="author">ghostsheet updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Camera shake has been refactored.</li>
+			</ul>
+
+			<h2 class="date">28 April 2021</h2>
+			<h3 class="author">Koollan updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Changed a couple things about armor values of some of the new metals. Shinier metals are now semi-useful for laser protection. Also, Slag is now able to be dissolved into some reagents.</li>
+				<li class="rscadd">Added a new metal and more alloys.</li>
+				<li class="rscadd">I added some metals and mineral types in order to actually acquire the new metals. This is the first pass. Check the PR for full details.</li>
+			</ul>
+			<h3 class="author">MistakeNot4892 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">You can now target head/hands/arms on help intent to do some more specific hug actions (headpats and handshakes).</li>
+				<li class="tweak">You can now headpat simple animals and robots.</li>
+				<li class="tweak">Many objects previously made of glass are now made of fiberglass, which is stronger but less heat resistant.</li>
+				<li class="tweak">Cables are now made of copper rather than steel.</li>
+				<li class="tweak">Slag can now be processed via grinding and acid to recover some useful trace elements.</li>
+				<li class="rscadd">Fiberglass sheets can be made from glass and plastic at an autolathe or textiles fab, or by grinding glass and plastic then heating over 100C.</li>
+				<li class="tweak">Age is now a descriptor, and can be found alongside height and build in preferences.</li>
+				<li class="rscadd">Some status effects (sleeping, stunned, confusion, weakened) are visible in the form of markers over the victim's head. This can be disabled in preferences if you'd rather not see them.</li>
+				<li class="tweak">Your gender no longer determines your base character icon. Instead, there is a 'bodytype' option.</li>
+				<li class="tweak">Character gender pref has been renamed to pronouns.</li>
+				<li class="tweak">Species skin variants have been changed into body types.</li>
+			</ul>
+			<h3 class="author">MuckerMayhem (Ported by SierraKomodo) updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixed the skill panel losing focus when editing skills.</li>
+			</ul>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Admin paralyzed players now have notices to inform other players they're paralyzed and being handled by staff, and to not interact until staff are done.</li>
+				<li class="tweak">Cargo trolleys can now be hitched together regardless of what direction the trolley is facing.</li>
+				<li class="tweak">Cargo trolleys now tell you if and what they're linked to when you examine them.</li>
+				<li class="admin">Mech weapons now generate proper attack logs instead of admin logs, and only appear when targeting mobs.</li>
+			</ul>
+			<h3 class="author">eckff updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds diona nymph chirp as fun instrument for synthesizer. Available only with dionaea modpack.</li>
+				<li class="maptweak">Liberia: Added two ATM on Mule shuttle.</li>
+				<li class="maptweak">Liberia: Removed redundant firealarm from bar.</li>
+			</ul>
+
 			<h2 class="date">19 March 2021</h2>
 			<h3 class="author">afterthought2 updated:</h3>
 			<ul class="changes bgimages16">
 				<li class="tweak">Additional support has been instated for templates which are to be loaded multiple times. The main user-facing change is that when adding shuttle-restricted waypoints to an overmap object's initial_restricted_waypoints list, use the shuttle's type path, not its name. Templates that load ferry-type shuttles with waypoints not on the template will break with this system, but you can opt out by setting modify_tag_vars on the template datum to FALSE.</li>
-			</ul>
-
-			<h2 class="date">13 March 2021</h2>
-			<h3 class="author">Andrew-Fall updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Drastically increases large map loading speed</li>
-			</ul>
-
-			<h2 class="date">09 March 2021</h2>
-			<h3 class="author">eckff updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added prepared subtypes of suit cyclers which usually hold helmets/hardsuits/magboots on roundstart:</li>
-				<li class="rscadd">Jobs which have prepared suit cyclers: engineers, atmospheric engineers, security, medical and generic.</li>
-				<li class="rscadd">Generic is access-free suit cycler which contain simple space suit and space helmet.</li>
-				<li class="maptweak">Did some changes for merchant away submap Liberia:</li>
-				<li class="maptweak">Added more money in trading room. Initially there's should be 13k credits, but before this change there only 1k. It fixed now.</li>
-				<li class="maptweak">Added light switches in almost all rooms.</li>
-				<li class="maptweak">Removed a few spawnpoints in rooms.</li>
-				<li class="maptweak">Replaced bar keg in bar room with alcohol chemical dispenser.</li>
-				<li class="maptweak">Replaced some bubble lights in atmospherics with tube lights.</li>
-				<li class="maptweak">Replaced bookcases in library room with skillbook bookcases, since nobody really use manuals and skillbooks will be useful for merchants as a trading product.</li>
-				<li class="maptweak">Moved disposal bin in library a bit, so it will not interfere with the passage to the chairs.</li>
-			</ul>
-
-			<h2 class="date">08 March 2021</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">The status condition backend (paralyzed, asleep, etc) has been completely rewritten; please report any inconsistencies or bugs.</li>
-			</ul>
-
-			<h2 class="date">06 March 2021</h2>
-			<h3 class="author">comma updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Walls now take much less damage from melee strikes, depending on material.</li>
-			</ul>
-
-			<h2 class="date">03 March 2021</h2>
-			<h3 class="author">SierraKomodo & Pawn updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="imageadd">New sprites and lighting overlays for teleporters have been added.</li>
-			</ul>
-
-			<h2 class="date">02 March 2021</h2>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="admin">Supply beacons now generate attack logs when activated</li>
-				<li class="admin">Suicide by gun in the mouth now trigger attack logs instead of admin logs, including a new log when starting the suicide process</li>
-			</ul>
-
-			<h2 class="date">28 February 2021</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Webhook config now supports per-endpoint mention lists. Consult config/example/webhooks.json for the format. If you don't need individual pings, you don't need to update anything.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Codex entries for magnetic guns (Coilguns, railguns, etc) have been updated with a lore blurb and detailed information on specific mechanics.</li>
-			</ul>
-			<h3 class="author">comma updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Airlocks no longer spawn extra lock when constructed</li>
-				<li class="tweak">Wall emergency lockers renamed to emergency dispensers (since they're not lockers at all), and given new icon</li>
-				<li class="soundadd">Crypods, sleepers and bodyscanner pods now make sounds when someone enters/leaves</li>
-			</ul>
-
-			<h2 class="date">27 February 2021</h2>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="admin">Admin logs for turret setting changes now display the correct user instead of *INVALID* and a loc link.</li>
-				<li class="admin">Attack logs for cremation no longer has the attacker and victim reversed.</li>
-			</ul>
-
-			<h2 class="date">24 February 2021</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Poppy and other possums can now be picked up thanks to Pawn.</li>
-			</ul>
-
-			<h2 class="date">22 February 2021</h2>
-			<h3 class="author">comma updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Emagged airlocks can now be crowbarred close, after they're depowered.</li>
-				<li class="tweak">Airlocks now use access lock components to decide their access, instead of circuitboards. Locks now use same UI as airlock electronics did for access setup. Mapped airlocks should spawn these as needed to work same.</li>
-				<li class="tweak">Doors can now have their internal components damaged too like the rest of machinery. It won't happen until they're bashed down first though.</li>
-				<li class="tweak">Access locks with auto-set option will automatically set their access to the area's on installation into machine (like doors do)</li>
-				<li class="imageadd">Access lock components (and network lock) now have their own icons instead of reusing scanning module one.</li>
-			</ul>
-
-			<h2 class="date">20 February 2021</h2>
-			<h3 class="author">comma updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="imageadd">Radio receivers / transmitters (machine components) got new icons</li>
-			</ul>
-
-			<h2 class="date">17 February 2021</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Several changes of note only to administrators:</li>
-				<li class="tweak">Traitor panel has been renamed to Special Roles.</li>
-			</ul>
-			<h3 class="author">SolatK updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">now the tail will not stick out through the clothes where it is not necessary</li>
-			</ul>
-
-			<h2 class="date">16 February 2021</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">There is now a Mouseover Highlight preference that can be set to Show, Hide or Show While Shift Held. This will highlight the object you are currently mousing over. You can set colour and alpha for the highlight in your UI preferences.</li>
-			</ul>
-			<h3 class="author">silicons updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">projectiles use a better get angle function now</li>
-			</ul>
-
-			<h2 class="date">14 February 2021</h2>
-			<h3 class="author">comma updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Airlock tool interactions changed.</li>
-				<li class="tweak">Screwdriver on airlock will open wires panel, letting you access wires for hacking.</li>
-				<li class="tweak">Crowbarring a secured (welded/bolted/braced) airlock will open the hatch letting you access components for repairs and deconstruction.</li>
-				<li class="tweak">Hatch can only be opened if you have appropriate access to the door. Use ID on the door to toggle the lock.</li>
-			</ul>
-
-			<h2 class="date">13 February 2021</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Ailments and prosthetic faults now have codex pages.</li>
-				<li class="rscadd">You can diagnose some ailments and faults with grab-examine diagnosis.</li>
-				<li class="rscadd">Failing a skill check after prosthetics replacement surgery can add a fault to the prosthetic.</li>
-			</ul>
-
-			<h2 class="date">08 February 2021</h2>
-			<h3 class="author">eckff updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added a overmap-based merchant submap ship - Liberia.</li>
-			</ul>
-
-			<h2 class="date">05 February 2021</h2>
-			<h3 class="author">comma updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Need to be on same tile as rollerbed to buckle to it.</li>
-				<li class="tweak">Fires no longer destroy wiring under floor tiles.</li>
-				<li class="bugfix">Guns found in xenoarch now have icons again</li>
-				<li class="imageadd">Added inhands for xenoarch find blades</li>
-			</ul>
-			<h3 class="author">eckff updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added the panic bunker support from Hestia repository. By default, it turned off and can be toggled on in config or manually for a round.</li>
-				<li class="admin">Admins can control the panic bunker state and add/revoke bypass in Server section with R_SERVER flag.</li>
-			</ul>
-
-			<h2 class="date">04 February 2021</h2>
-			<h3 class="author">eckff updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Tweaked bucket world-icon state. It's little bit bigger now, but still tiny.</li>
-				<li class="rscadd">Added augmentation implanting support code if anyone would like to add implants or augmentations in loadout.</li>
-			</ul>
-
-			<h2 class="date">03 February 2021</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Amputating the second-to-last organ on a human mob (typically leaving the torso) will drop the last organ as a limb and destroy the mob -in other words you can now chop bodies up entirely instead of being left with a weird unwieldly torso.</li>
-				<li class="tweak">Amputation is faster but messier if you're doing it improperly (improvised tool or circumstances).</li>
-				<li class="tweak">Failing an amputation will now get the tool stuck in the person's limb.</li>
-			</ul>
-
-			<h2 class="date">02 February 2021</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Firearms now use pixel-precise projectile iteration, ported from Aurora.</li>
-			</ul>
-
-			<h2 class="date">31 January 2021</h2>
-			<h3 class="author">comma updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Credsticks are now tiny instead of normal sized</li>
-			</ul>
-
-			<h2 class="date">30 January 2021</h2>
-			<h3 class="author">eckff updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscdel">Removed the privacy poll.</li>
-			</ul>
-
-			<h2 class="date">28 January 2021</h2>
-			<h3 class="author">comma updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Ha ha ha I am abusing my GitHub maint powers to make chinsky commit a changelog via the bot workflow. Science!</li>
-			</ul>
-
-			<h2 class="date">27 January 2021</h2>
-			<h3 class="author">MistakeNot4892 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Will the bot generate the changelog now? Let's find out.</li>
-				<li class="tweak">Coat racks are now material-based and craftable.</li>
-				<li class="tweak">Coat rack backend has been rewritten to support hanging any hat or suit item.</li>
-				<li class="experiment">A bunch of structures have been rewritten to use some shared code. As a result, you can examine most structures to see some tips on how to interact with them, and you will find several construction/deconstruction steps have changed.</li>
-				<li class="tweak">Metal structures must be dismantled with a welding tool, while other materials use a crowbar.</li>
-				<li class="tweak">Girders are now 'supports', and are reinforced by using a material stack on them before anchoring. Using a screwdriver will remove the reinforcement, or toggle whether or not the support will produce a fake wall.</li>
-				<li class="experiment">This is going to be buggy, please report issues and problems.</li>
-			</ul>
-			<h3 class="author">N8-Toe updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added chemical saftey suits to code, protect against gas in the air but need to be used with a face covering mask, unimplemented at this time.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="admin">Disposal bin stuffing and flushing are now attack logs instead of admin logs.</li>
-				<li class="tweak">Cutting the ID Scan wire on doors will now disable ID scanning. If the door is 'secure', this blocks access entirely. For all other doors, this fully bypasses access requirements.</li>
-				<li class="bugfix">Windoors are now properly emag-able.</li>
-				<li class="tweak">Emagged windoors will now provide feedback that they are broken when you try to close them.</li>
-				<li class="tweak">You can now tell if a door's control board has been fried by examining the door with an IT skill of trained or higher.</li>
-				<li class="tweak">'Mild' labels in medical scans are now highlighted in yellow and bold to make them more noticeable.</li>
-				<li class="rscadd">Windows and airlock windows are now paintable.</li>
-				<li class="admin">Smothering people with a rag and hitting people with an ignited rag now generates attack logs.</li>
-				<li class="tweak">You now require a grab to smother people with a rag.</li>
-				<li class="tweak">Smothering people with a rag now has a timed progress bar - 3 seconds if your CQC skill is trained or above, 6 seconds for everyone else.</li>
-				<li class="rscadd">General station/ship lights now have randomized tones - The old default warm yellow, a cool blue, and pure white.</li>
-			</ul>
-			<h3 class="author">SierrqKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="admin">Banned player's mobs now have their ckey stripped so they display the permanent SSD message and instantly cryo.</li>
-			</ul>
-			<h3 class="author">SolatK updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Dropped mobs should not take the same direction with those who held them</li>
-				<li class="bugfix">CE rig now have a boots</li>
-			</ul>
-			<h3 class="author">SomeoneStoleMyNickname updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added a new digital pencode tag. [redacted] creates the string R E D A C E D in black lettes on black background to give the illusion of redacted contend in reports.</li>
-			</ul>
-			<h3 class="author">The Stalker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Finished up some unused void suits. So they have stats (finally)</li>
-				<li class="rscadd">Added new materials to vender and recipes. Will be doing a part two i gues. Will eventually look into finishing the cotton plant or make a mega edition pack of new weapons</li>
-			</ul>
-			<h3 class="author">Winter updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added textbooks. Textbooks are items that give skillbuffs while you are actively using them. Textbooks require basic literacy to use, and you must have the specific textbook for your skill level.</li>
-				<li class="rscadd">Added a book merchant who sells textbooks.</li>
-				<li class="tweak">Molluscs and Mollusc meat now have monetary value.</li>
-				<li class="maptweak">Tradeship now always starts the round with a book trader available.</li>
-				<li class="maptweak">Tradeship has four randomized textbooks in various locations at roundstart.</li>
-				<li class="experiment">Please report balance issues (and of course bugs) that may arrise from this feature.</li>
-				<li class="tweak">Bonus: Codex links now open new windows.</li>
-				<li class="rscadd">Those with Master Literacy can now make their own textbooks. Blank textbooks are acquired via an autobinder and then written using a pen.</li>
-				<li class="rscadd">Includes codex information on this process.</li>
-				<li class="tweak">Made textbooks in general to be one size smaller to allow being put in bags.</li>
-				<li class="tweak">Very basic support for fabricators to get colours from something else other than pipe_colors</li>
-				<li class="experiment">Unsure how this impacts skill balance, please report on that if there are issues.</li>
-			</ul>
-			<h3 class="author">comma updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Desert planets now have 'dry mud' turfs in the areas where quicksands can spawn.</li>
-				<li class="rscadd">Added new type of toolbox - electrician's. It holds all needed tools for machinery components interactions and several boxes of most common components. Can be found in supply (electrical maintenance pack) and electrical locker</li>
-				<li class="balance">Engineering vendomats now vend APC/air alarm kits instead of just circuitboards.</li>
-				<li class="balance">Most machinery components are now tiny rather than small</li>
-				<li class="bugfix">APCs can be fixed again after explosions</li>
-				<li class="tweak">APCs now don't draw screen overlay / glow if screen component is destroyed</li>
-				<li class="tweak">APCs now don't report cell power in UI etc if battery backup is destroyed</li>
-				<li class="tweak">APCs now show that external power is not coming in if terminal component is destroyed</li>
-				<li class="experiment">Machines can actually be destroyed fully by strong explosions again (not just component damage)</li>
-				<li class="tweak">Added categories to textile designs</li>
-				<li class="balance">Costs for armor items are adjusted, generally more expensive to produce</li>
-				<li class="tweak">Holsters now leave their fibers on things put inside.</li>
-				<li class="tweak">Crowbarring doors now leaves scuffing on them, visible when examined up close. Can be repaired as any other damage.</li>
-				<li class="tweak">Gas tanks will now dump their content into air when destroyed</li>
-			</ul>
-			<h3 class="author">eckff updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Backported Adherent species from Baystation12.</li>
-				<li class="rscadd">Backported Lizards species (previously Unathi).</li>
-				<li class="imageadd">Lizard people get new dark sprite.</li>
-				<li class="bugfix">Fixes monitor mask initial world icon.</li>
-				<li class="rscadd">Adds radial icon choice for monitors.</li>
-				<li class="tweak">Roundstart can now be any hour.</li>
 			</ul>
 </div>
 </td></tr></table>

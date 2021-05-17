@@ -6,7 +6,7 @@
 	desc = "A gun that changes temperatures. It has a small label on the side, 'More extreme temperatures will cost more charge!'"
 	material = /decl/material/solid/metal/steel
 	matter = list(
-		/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 	charge_cost = 10
@@ -46,7 +46,7 @@
 	show_browser(user, dat, "window=freezegun;size=450x300;can_resize=1;can_close=1;can_minimize=1")
 	onclose(user, "window=freezegun", src)
 
-/obj/item/gun/energy/temperature/Topic(user, href_list, state = GLOB.inventory_state)
+/obj/item/gun/energy/temperature/Topic(user, href_list, state = global.inventory_topic_state)
 	..()
 
 /obj/item/gun/energy/temperature/OnTopic(user, href_list)

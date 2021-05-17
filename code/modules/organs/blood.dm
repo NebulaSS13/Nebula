@@ -46,7 +46,7 @@
 /mob/living/carbon/human/proc/blood_squirt(var/amt, var/turf/sprayloc)
 	if(amt <= 0 || !istype(sprayloc))
 		return
-	var/spraydir = pick(GLOB.alldirs)
+	var/spraydir = pick(global.alldirs)
 	amt = ceil(amt/BLOOD_SPRAY_DISTANCE)
 	var/bled = 0
 	spawn(0)
@@ -295,7 +295,7 @@
 	blood_volume *= max(min_efficiency, (1-(heart.damage / heart.max_damage)))
 
 	if(!heart.open && has_chemical_effect(CE_BLOCKAGE, 1))
-		blood_volume *= max(0, 1-LAZYACCESS(chem_effects, CE_BLOCKAGE))
+		blood_volume *= max(0, 1-GET_CHEMICAL_EFFECT(src, CE_BLOCKAGE))
 
 	return min(blood_volume, 100)
 

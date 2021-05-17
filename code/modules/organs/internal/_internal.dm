@@ -172,7 +172,7 @@
 	handle_regeneration()
 
 /obj/item/organ/internal/proc/handle_regeneration()
-	if(!damage || BP_IS_PROSTHETIC(src) || !owner || LAZYACCESS(owner.chem_effects, CE_TOXIN) || owner.is_asystole())
+	if(!damage || BP_IS_PROSTHETIC(src) || !owner || GET_CHEMICAL_EFFECT(owner, CE_TOXIN) || owner.is_asystole())
 		return
 	if(damage < 0.1*max_damage)
 		heal_damage(0.1)

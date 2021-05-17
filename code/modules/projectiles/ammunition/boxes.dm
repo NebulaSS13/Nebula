@@ -5,7 +5,7 @@
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
 	material = /decl/material/solid/metal/steel
 	max_ammo = 6
-	var/list/global/bullet_offsets = list(
+	var/static/list/bullet_offsets = list(
 		list("x" = 0, "y" = 0),
 		list("x" = -2, "y" = -3),
 		list("x" = -2, "y" = -7),
@@ -86,14 +86,14 @@
 	name = "illumination shell holder"
 	ammo_type = /obj/item/ammo_casing/shotgun/flash
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	marking_color = COLOR_PALE_YELLOW
 
 /obj/item/ammo_magazine/shotholder/stun
 	name = "stun shell holder"
 	ammo_type = /obj/item/ammo_casing/shotgun/stunshell
 	material = /decl/material/solid/metal/steel
-	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
+	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	marking_color = COLOR_MUZZLE_FLASH
 
 /obj/item/ammo_magazine/shotholder/empty

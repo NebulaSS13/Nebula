@@ -5,8 +5,6 @@
 	name = "Lar Maria space station"
 	desc = "Sensors detect an orbital station with low energy profile and sporadic life signs."
 	icon_state = "object"
-	known = 0
-	
 
 /datum/map_template/ruin/away_site/lar_maria
 	name = "Lar Maria"
@@ -37,9 +35,6 @@
 	emote_hear = list("roars", "giggles", "breathes loudly", "mumbles", "yells something unintelligible")
 	emote_see = list("cries", "grins insanely", "itches fiercly", "scratches his face", "shakes his fists above his head")
 	turns_per_move = 5
-	response_help = "pokes"
-	response_disarm = "shoves"
-	response_harm = "hits"
 	speed = 8
 	can_escape = TRUE
 	stop_automated_movement_when_pulled = 0

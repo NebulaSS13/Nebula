@@ -92,3 +92,17 @@
 
 /datum/fabricator_recipe/plunger
 	path = /obj/item/plunger
+
+/datum/fabricator_recipe/fiberglass
+	path = /obj/item/stack/material/reinforced/mapped/fiberglass
+	category = "Textiles"
+	fabricator_types = list(
+		FABRICATOR_CLASS_GENERAL,
+		FABRICATOR_CLASS_TEXTILE
+	)
+
+/datum/fabricator_recipe/fiberglass/get_resources()
+	resources = list(
+		/decl/material/solid/glass =   ceil((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2),
+		/decl/material/solid/plastic = ceil((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2)
+	)

@@ -24,7 +24,7 @@
 	if(!(fab_status_flags & FAB_BUSY) && is_functioning())
 		fab_status_flags |= FAB_BUSY
 		update_use_power(POWER_USE_ACTIVE)
-		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, fabricator_sound, volume = 30)
+		sound_token = play_looping_sound(src, sound_id, fabricator_sound, volume = 30)
 
 /obj/machinery/fabricator/proc/stop_building()
 	if(fab_status_flags & FAB_BUSY)
@@ -48,7 +48,7 @@
 	if(!is_functioning() || !istype(recipe) || !(recipe in design_cache))
 		return
 	multiplier = sanitize_integer(multiplier, 1, 100, 1)
-	if(!ispath(recipe, /obj/item/stack) && multiplier > 1)
+	if(!ispath(recipe.path, /obj/item/stack) && multiplier > 1)
 		multiplier = 1
 
 	// Check if sufficient resources exist.

@@ -2,7 +2,6 @@
 	var/name = PLURAL
 	var/formal_term = "other"
 	var/informal_term = "hoopy frood"
-	var/icon_key
 
 	var/He   = "They"
 	var/he   = "they"

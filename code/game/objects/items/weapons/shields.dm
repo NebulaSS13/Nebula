@@ -23,7 +23,7 @@
 		return 0
 
 	//block as long as they are not directly behind us
-	var/bad_arc = user.dir && GLOB.reverse_dir[user.dir] //arc of directions from which we cannot block
+	var/bad_arc = user.dir && global.reverse_dir[user.dir] //arc of directions from which we cannot block
 	if(!check_shield_arc(user, bad_arc, damage_source, attacker))
 		return 0
 
@@ -38,7 +38,7 @@
 		return 0
 
 	//block as long as they are not directly behind us
-	var/bad_arc = user.dir && GLOB.reverse_dir[user.dir] //arc of directions from which we cannot block
+	var/bad_arc = user.dir && global.reverse_dir[user.dir] //arc of directions from which we cannot block
 	if(check_shield_arc(user, bad_arc, damage_source, attacker))
 		if(prob(get_block_chance(user, damage, damage_source, attacker)))
 			user.visible_message("<span class='danger'>\The [user] blocks [attack_text] with \the [src]!</span>")
@@ -61,7 +61,7 @@
 	throw_range = 4
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = "{'materials':2}"
-	material = /decl/material/solid/glass
+	material = /decl/material/solid/fiberglass
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_REINFORCEMENT)
 	attack_verb = list("shoved", "bashed")
 	var/cooldown = 0 //shield bash cooldown. based on world.time
@@ -198,6 +198,6 @@
 /obj/item/shield/energy/on_update_icon()
 	icon_state = "eshield[active]"
 	if(active)
-		set_light(0.4, 0.1, 1, 2, "#006aff")
+		set_light(1.5, 1.5, "#006aff")
 	else
 		set_light(0)

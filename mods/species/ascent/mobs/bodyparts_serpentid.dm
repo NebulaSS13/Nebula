@@ -78,7 +78,7 @@
 /obj/item/organ/internal/lungs/insectoid/serpentid/handle_failed_breath()
 	var/mob/living/carbon/human/H = owner
 
-	var/oxygenated = LAZYACCESS(owner.chem_effects, CE_OXYGENATED)
+	var/oxygenated = GET_CHEMICAL_EFFECT(owner, CE_OXYGENATED)
 	H.adjustOxyLoss(-(HUMAN_MAX_OXYLOSS * oxygenated))
 
 	if(breath_fail_ratio < 0.25 && oxygenated)
@@ -162,7 +162,6 @@
 /obj/item/organ/external/head/insectoid/serpentid
 	name = "head"
 	vital = 0
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/head/insectoid/serpentid/get_eye_overlay()
 	var/obj/item/organ/internal/eyes/eyes = owner.get_internal_organ(owner.species.vision_organ || BP_EYES)

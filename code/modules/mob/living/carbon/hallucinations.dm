@@ -27,7 +27,7 @@
 		hallucination_power = min(hallucination_power++, 50)
 	else if(has_chemical_effect(CE_MIND, 1))
 		hallucination_duration = max(0, hallucination_duration - 1)
-		hallucination_power = max(hallucination_power - LAZYACCESS(chem_effects, CE_MIND), 0)
+		hallucination_power = max(hallucination_power - GET_CHEMICAL_EFFECT(src, CE_MIND), 0)
 
 	//See if hallucination is gone
 	if(!hallucination_power)
@@ -39,7 +39,7 @@
 
 	if(!client || stat || world.time < next_hallucination)
 		return
-	if(has_chemical_effect(CE_MIND, 1) && prob(LAZYACCESS(chem_effects, CE_MIND)*40)) //antipsychotics help
+	if(has_chemical_effect(CE_MIND, 1) && prob(GET_CHEMICAL_EFFECT(src, CE_MIND)*40)) //antipsychotics help
 		return
 	var/hall_delay = rand(10,20) SECONDS
 
@@ -239,7 +239,7 @@
 	else
 		var/image/I = image('icons/obj/ammo.dmi', "s-casing-spent", layer = BELOW_TABLE_LAYER)
 		I.layer = BELOW_TABLE_LAYER
-		I.dir = pick(GLOB.alldirs)
+		I.dir = pick(global.alldirs)
 		I.pixel_x = rand(-10,10)
 		I.pixel_y = rand(-10,10)
 		return I

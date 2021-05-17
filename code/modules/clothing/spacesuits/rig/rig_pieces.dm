@@ -19,7 +19,8 @@
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	heat_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	cold_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
-	brightness_on = 0.5
+	brightness_on = 4
+	light_wedge = LIGHT_WIDE
 	bodytype_restricted = null
 
 /obj/item/clothing/head/helmet/space/rig/on_update_icon(mob/user)
@@ -27,7 +28,7 @@
 	icon_state = get_world_inventory_state()
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
-	
+
 /obj/item/clothing/head/helmet/space/rig/get_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/ret = ..()
 	if(ret && user_mob?.check_rig_status() && check_state_in_icon("[ret.icon_state]-sealed", ret.icon))
@@ -48,7 +49,7 @@
 	icon_state = get_world_inventory_state()
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
-	
+
 /obj/item/clothing/gloves/rig/get_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/ret = ..()
 	if(ret && user_mob?.check_rig_status() && check_state_in_icon("[ret.icon_state]-sealed", ret.icon))
@@ -69,7 +70,7 @@
 	icon_state = get_world_inventory_state()
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
-	
+
 /obj/item/clothing/shoes/magboots/rig/get_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/ret = ..()
 	if(ret && user_mob?.check_rig_status() && check_state_in_icon("[ret.icon_state]-sealed", ret.icon))
@@ -96,7 +97,7 @@
 	icon_state = get_world_inventory_state()
 	if(user?.check_rig_status() && check_state_in_icon("[icon_state]-sealed", icon))
 		icon_state = "[icon_state]-sealed"
-	
+
 /obj/item/clothing/suit/space/rig/get_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
 	var/image/ret = ..()
 	if(ret && user_mob?.check_rig_status() && check_state_in_icon("[ret.icon_state]-sealed", ret.icon))

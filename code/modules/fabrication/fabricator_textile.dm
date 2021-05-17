@@ -13,6 +13,7 @@
 		/decl/material/solid/metal/aluminium =  SHEET_MATERIAL_AMOUNT * 100,
 		/decl/material/solid/plastic =          SHEET_MATERIAL_AMOUNT * 100,
 		/decl/material/solid/glass =            SHEET_MATERIAL_AMOUNT * 100,
+		/decl/material/solid/fiberglass =       SHEET_MATERIAL_AMOUNT * 100,
 		/decl/material/solid/metal/gold =       SHEET_MATERIAL_AMOUNT * 100,
 		/decl/material/solid/metal/silver =     SHEET_MATERIAL_AMOUNT * 100,
 		/decl/material/solid/metal/uranium =    SHEET_MATERIAL_AMOUNT * 100,

@@ -105,7 +105,7 @@
 					playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
 					Console.audible_message("[html_icon(Console)]<span class='notice'>\The [Console] announces: 'Message received from [sender].'</span>", hearing_distance = 5)
 				Console.message_log += "<B>Message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
-			Console.set_light(0.3, 0.1, 2)
+			Console.set_light(2, 0.5)
 
 
 /obj/machinery/network/message_server/interface_interact(mob/user)
@@ -136,7 +136,7 @@
 /obj/machinery/network/message_server/proc/send_to_department(var/department, var/message, var/tone)
 	var/reached = 0
 
-	for(var/mob/living/carbon/human/H in GLOB.human_mob_list)
+	for(var/mob/living/carbon/human/H in global.human_mob_list)
 		var/obj/item/modular_computer/pda/pda = locate() in H
 		if(!pda)
 			continue

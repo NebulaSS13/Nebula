@@ -20,6 +20,10 @@
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 	var/has_handle
 
+/obj/item/shard/Initialize(ml, material_key)
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_SCALPEL = TOOL_QUALITY_BAD))
+
 /obj/item/shard/attack(mob/living/M, mob/living/user, var/target_zone)
 	. = ..()
 	if(. && !has_handle)
@@ -62,7 +66,7 @@
 	if(isWelder(W) && material.shard_can_repair)
 		var/obj/item/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
-			material.place_sheet(get_turf(src))
+			material.create_object(get_turf(src))
 			qdel(src)
 			return
 	if(istype(W, /obj/item/stack/cable_coil))

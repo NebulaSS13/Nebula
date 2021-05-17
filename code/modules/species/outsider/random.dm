@@ -1,18 +1,22 @@
+/decl/bodytype/alium
+	name =              "humanoid"
+	bodytype_category = BODYTYPE_HUMANOID
+	icon_base =         'icons/mob/human_races/species/humanoid/body.dmi'
+	bandages_icon =     'icons/mob/bandage.dmi'
+	limb_blend =        ICON_MULTIPLY
+
 /decl/species/alium
 	name = SPECIES_ALIEN
 	name_plural = "Humanoids"
 	description = "Some alien humanoid species, unknown to humanity. How exciting."
 	rarity_value = 5
-	bodytype = BODYTYPE_HUMANOID
 
 	species_flags = SPECIES_FLAG_NO_SCAN
 	spawn_flags = SPECIES_IS_RESTRICTED
 
-	icobase = 'icons/mob/human_races/species/humanoid/body.dmi'
-	deform = 'icons/mob/human_races/species/humanoid/body.dmi'
-	bandages_icon = 'icons/mob/bandage.dmi'
+	available_bodytypes = list(/decl/bodytype/alium)
+
 	appearance_flags = HAS_SKIN_COLOR
-	limb_blend = ICON_MULTIPLY
 
 	force_cultural_info = list(
 		TAG_CULTURE = /decl/cultural_info/culture/hidden/alium
@@ -82,9 +86,8 @@
 
 	//Misc traits
 	darksight_range = rand(1,8)
-	darksight_tint = pick(DARKTINT_NONE,DARKTINT_MODERATE,DARKTINT_GOOD)
 	if(prob(40))
-		genders = list(PLURAL)
+		available_pronouns = list(/decl/pronouns)
 	if(prob(10))
 		slowdown += pick(-1,1)
 	if(prob(10))

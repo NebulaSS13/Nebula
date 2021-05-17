@@ -1,23 +1,22 @@
-GLOBAL_DATUM_INIT(using_map, /datum/map, new USING_MAP_DATUM)
-GLOBAL_LIST_EMPTY(all_maps)
+var/global/datum/map/using_map = new USING_MAP_DATUM
+var/global/list/all_maps = list()
 
-var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
-var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
+var/global/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
+var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /hook/startup/proc/initialise_map_list()
 	for(var/type in subtypesof(/datum/map))
 		var/datum/map/M
-		if(type == GLOB.using_map.type)
-			M = GLOB.using_map
+		if(type == global.using_map.type)
+			M = global.using_map
 			M.setup_map()
 		else
 			M = new type
 		if(!M.path)
 			log_error("Map '[M]' ([type]) does not have a defined path, not adding to map list!")
 		else
-			GLOB.all_maps[M.path] = M
+			global.all_maps[M.path] = M
 	return 1
-
 
 /datum/map
 	var/name = "Unnamed Map"
@@ -90,6 +89,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
 	var/overmap_event_areas = 0 //How many event "clouds" will be generated
 	var/pray_reward_type = /obj/item/chems/food/snacks/cookie // What reward should be given by admin when a prayer is received?
+	var/list/map_markers_to_load
 
 	// The list of lobby screen images to pick() from.
 	var/list/lobby_screens = list('icons/default_lobby.png')
@@ -155,16 +155,23 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/New()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
+
 	if(!allowed_jobs)
 		allowed_jobs = list()
 		for(var/jtype in subtypesof(/datum/job))
 			var/datum/job/job = jtype
 			if(initial(job.available_by_default))
 				allowed_jobs += jtype
+
 	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
+
 	current_lobby_screen = pick(lobby_screens)
 	game_year = (text2num(time2text(world.realtime, "YYYY")) + game_year)
+
+	if(ispath(default_job_type, /datum/job))
+		var/datum/job/J = default_job_type
+		default_job_title = initial(J.title)
 
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
@@ -248,7 +255,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 // By default transition randomly to another zlevel
 /datum/map/proc/get_transit_zlevel(var/current_z_level)
-	var/list/candidates = GLOB.using_map.accessible_z_levels.Copy()
+	var/list/candidates = global.using_map.accessible_z_levels.Copy()
 	candidates.Remove(num2text(current_z_level))
 
 	if(!candidates.len)

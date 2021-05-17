@@ -25,7 +25,7 @@
 	var/stasis_power = 5 KILOWATTS
 	var/list/loaded_canisters
 	var/max_canister_capacity = 5
-	var/global/list/banned_chem_types = list(
+	var/static/list/banned_chem_types = list(
 		/decl/material/liquid/bromide,
 		/decl/material/liquid/mutagenics,
 		/decl/material/liquid/acid
@@ -140,13 +140,13 @@
 	overlays += I
 
 /obj/machinery/sleeper/DefaultTopicState()
-	return GLOB.outside_state
+	return global.outside_topic_state
 
 /obj/machinery/sleeper/interface_interact(var/mob/user)
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/sleeper/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.outside_state)
+/obj/machinery/sleeper/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.outside_topic_state)
 	var/data[0]
 
 	data["power"] = stat & (NOPOWER|BROKEN) ? 0 : 1
