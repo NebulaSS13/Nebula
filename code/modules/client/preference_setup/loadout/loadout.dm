@@ -355,6 +355,8 @@ var/list/gear_datums = list()
 	var/list/custom_setup_proc_arguments  //Special tweak in New
 	var/category
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
+	var/implanted = FALSE
+	var/organ_tag //Used by implant_into_mob if implanted is true.
 
 /datum/gear/New()
 	if(FLAGS_EQUALS(flags, GEAR_HAS_TYPE_SELECTION|GEAR_HAS_SUBTYPE_SELECTION))
@@ -424,12 +426,17 @@ var/list/gear_datums = list()
 	var/atom/placed_in = H.equip_to_storage(item)
 	if(placed_in)
 		to_chat(H, "<span class='notice'>Placing \the [item] in your [placed_in.name]!</span>")
+	else if(implanted)
+		implant_into_mob(H, item)
 	else if(H.equip_to_appropriate_slot(item))
 		to_chat(H, "<span class='notice'>Placing \the [item] in your inventory!</span>")
 	else if(H.put_in_hands(item))
 		to_chat(H, "<span class='notice'>Placing \the [item] in your hands!</span>")
 	else
 		to_chat(H, "<span class='danger'>Dropping \the [item] on the ground!</span>")
+
+/datum/gear/proc/implant_into_mob(var/mob/living/carbon/human/H, var/obj/item/I, var/organ_tag)
+	return
 
 /datum/gear/proc/spawn_and_validate_item(mob/living/carbon/human/H, metadata)
 	PRIVATE_PROC(TRUE)
