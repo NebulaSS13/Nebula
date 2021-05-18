@@ -44,7 +44,7 @@
 												/obj/structure/railing)
 
 /mob/living/simple_animal/hostile/proc/can_act()
-	if(stat || stop_automation || incapacitated())
+	if(QDELETED(src) || stat || stop_automation || incapacitated())
 		return FALSE
 	return TRUE
 
