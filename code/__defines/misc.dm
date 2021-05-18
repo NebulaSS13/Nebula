@@ -73,8 +73,6 @@
 //General-purpose life speed define for plants.
 #define HYDRO_SPEED_MULTIPLIER 1
 
-#define DEFAULT_JOB_TYPE /datum/job/assistant
-
 //Area flags, possibly more to come
 #define AREA_FLAG_RAD_SHIELDED         BITFLAG(1)  // Shielded from radiation, clearly.
 #define AREA_FLAG_EXTERNAL             BITFLAG(2)  // External as in exposed to space, not outside in a nice, green, forest.
@@ -243,12 +241,6 @@
 #define SURGERY_NEEDS_RETRACTED  32
 #define SURGERY_NEEDS_ENCASEMENT 64
 
-// Structure interaction flags
-#define TOOL_INTERACTION_ANCHOR      1
-#define TOOL_INTERACTION_DECONSTRUCT 2
-#define TOOL_INTERACTION_WIRING      4
-#define TOOL_INTERACTION_ALL         (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT | TOOL_INTERACTION_WIRING)
-
 //Inserts 'a' or 'an' before X in ways \a doesn't allow
 #define ADD_ARTICLE(X) "[(lowertext(X[1]) in global.vowels) ? "an" : "a"] [X]"
 
@@ -270,11 +262,7 @@
 #define  ICON_STATE_WORLD  "world"
 #define  ICON_STATE_INV  "inventory"
 
-#if DM_VERSION < 513
-#define hex2num(X) hex2num_inner(X)
-#else
 #define hex2num(X) text2num(X, 16)
-#endif
 
 #define GET_DECL(D) (ispath(D, /decl) ? (decls_repository.fetched_decls[D] || decls_repository.get_decl(D)) : null)
 #define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))

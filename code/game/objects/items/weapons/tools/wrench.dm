@@ -15,6 +15,10 @@
 	var/handle_color
 	var/static/valid_colours = list(COLOR_RED_GRAY, COLOR_MAROON, COLOR_DARK_BROWN, COLOR_GRAY20)
 
+/obj/item/wrench/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_WRENCH = TOOL_QUALITY_DEFAULT))
+
 /obj/item/wrench/on_update_icon()
 	. = ..()
 	if(!handle_color)

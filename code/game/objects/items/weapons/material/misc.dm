@@ -63,6 +63,10 @@
 	applies_material_name = TRUE
 	hitsound = "chop"
 
+/obj/item/hatchet/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_HATCHET = TOOL_QUALITY_DEFAULT))
+
 /obj/item/hatchet/unbreakable
 	unbreakable = TRUE
 

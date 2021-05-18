@@ -53,10 +53,10 @@ var/global/list/solars_list = list()
 /obj/machinery/power/solar/proc/Make(var/obj/item/solar_assembly/S)
 	if(!S)
 		S = new /obj/item/solar_assembly(src)
-		S.glass_type = /obj/item/stack/material/glass
+		S.glass_type = /decl/material/solid/glass
 		S.anchored = 1
 	S.forceMove(src)
-	if(S.glass_type == /obj/item/stack/material/glass/reinforced) //if the panel is in reinforced glass
+	if(S.glass_reinforced) //if the panel is in reinforced glass
 		health *= 2 								 //this need to be placed here, because panels already on the map don't have an assembly linked to
 	update_icon()
 
@@ -210,7 +210,8 @@ var/global/list/solars_list = list()
 	anchored = 0
 	material = /decl/material/solid/metal/steel
 	var/tracker = 0
-	var/glass_type = null
+	var/glass_type
+	var/glass_reinforced
 
 /obj/item/solar_assembly/attack_hand(var/mob/user)
 	if(!anchored && isturf(loc)) // You can't pick it up
@@ -219,10 +220,9 @@ var/global/list/solars_list = list()
 // Give back the glass type we were supplied with
 /obj/item/solar_assembly/proc/give_glass()
 	if(glass_type)
-		var/obj/item/stack/material/S = new glass_type(src.loc)
-		S.amount = 2
+		SSmaterials.create_object(glass_type, loc, 2, null, glass_reinforced)
 		glass_type = null
-
+		glass_reinforced = null
 
 /obj/item/solar_assembly/attackby(var/obj/item/W, var/mob/user)
 
@@ -245,7 +245,8 @@ var/global/list/solars_list = list()
 		if(istype(W, /obj/item/stack/material) && W.get_material_type() == /decl/material/solid/glass)
 			var/obj/item/stack/material/S = W
 			if(S.use(2))
-				glass_type = W.type
+				glass_type =       S.material.type
+				glass_reinforced = S.reinf_material?.type
 				playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 				user.visible_message("<span class='notice'>[user] places the glass on the solar assembly.</span>")
 				if(tracker)

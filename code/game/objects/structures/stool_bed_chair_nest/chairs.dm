@@ -266,7 +266,7 @@
 	var/chair_material = /decl/material/solid/wood
 
 /obj/structure/bed/chair/wood/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/stack) || istype(W, /obj/item/wirecutters))
+	if(istype(W,/obj/item/stack) || isWirecutter(W))
 		return
 	..()
 

@@ -35,7 +35,7 @@
 /obj/item/stock_parts/building_material/proc/remove_material(material_type, amount)
 	if(ispath(material_type, /obj/item/stack))
 		for(var/obj/item/stack/stack in materials)
-			if(stack.stacktype == material_type)
+			if(stack.stack_merge_type == material_type)
 				var/stack_amount = stack.get_amount()
 				if(stack_amount <= amount)
 					materials -= stack

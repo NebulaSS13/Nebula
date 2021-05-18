@@ -2594,8 +2594,8 @@
 	dir = 4
 	},
 /obj/structure/closet/crate/radiation,
-/obj/item/stack/material/tritium/ten,
-/obj/item/stack/material/tritium/ten,
+/obj/item/stack/material/aerogel/mapped/tritium/ten,
+/obj/item/stack/material/aerogel/mapped/tritium/ten,
 /turf/simulated/floor/plating,
 /area/errant_pisces/smes_room)
 "fO" = (
@@ -5814,7 +5814,7 @@
 /area/errant_pisces/aux_power)
 "oe" = (
 /obj/structure/closet/crate/radiation,
-/obj/item/stack/material/tritium/ten,
+/obj/item/stack/material/aerogel/mapped/tritium/ten,
 /obj/machinery/power/apc{
 	dir = 4;
 	name = "east bump";

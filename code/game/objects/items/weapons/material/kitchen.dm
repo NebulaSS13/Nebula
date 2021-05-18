@@ -25,6 +25,10 @@
 	if (prob(60))
 		src.pixel_y = rand(0, 4)
 	create_reagents(5)
+	set_extension(src, /datum/extension/tool, list(
+		TOOL_RETRACTOR = TOOL_QUALITY_BAD,
+		TOOL_HEMOSTAT =  TOOL_QUALITY_MEDIOCRE
+	))
 
 /obj/item/kitchen/utensil/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(!istype(M))

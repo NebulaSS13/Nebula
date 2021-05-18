@@ -426,12 +426,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/between(var/low, var/middle, var/high)
 	return max(min(middle, high), low)
 
-#if DM_VERSION < 513
-/proc/arctan(x)
-	var/y=arcsin(x/sqrt(1+x*x))
-	return y
-#endif
-
 //Will return the contents of an atom recursivly to a depth of 'searchDepth'
 /atom/proc/GetAllContents(searchDepth = 5)
 	var/list/toReturn = list()
@@ -680,21 +674,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			return loc
 		loc = loc.loc
 	return null
-
-//Quick type checks for some tools
-var/global/list/common_tools = list(
-/obj/item/stack/cable_coil,
-/obj/item/wrench,
-/obj/item/weldingtool,
-/obj/item/screwdriver,
-/obj/item/wirecutters,
-/obj/item/multitool,
-/obj/item/crowbar)
-
-/proc/istool(O)
-	if(O && is_type_in_list(O, common_tools))
-		return 1
-	return 0
 
 //Whether or not the given item counts as sharp in terms of dealing damage
 /proc/is_sharp(obj/O)

@@ -1175,38 +1175,14 @@
 /area/map_template/rescue_base/base)
 "cw" = (
 /obj/structure/table/rack,
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50;
-	pixel_x = 2;
-	pixel_y = 2
-	},
-/obj/item/stack/material/steel{
-	amount = 50;
-	pixel_x = 2;
-	pixel_y = 2
-	},
-/obj/item/stack/material/steel{
-	amount = 50;
-	pixel_x = 2;
-	pixel_y = 2
-	},
-/obj/item/stack/material/steel{
-	amount = 50;
-	pixel_x = 2;
-	pixel_y = 2
-	},
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -2287,86 +2263,42 @@
 /area/map_template/rescue_base/base)
 "eD" = (
 /obj/structure/table/reinforced,
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50;
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty{
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/stack/material/steel{
-	amount = 50;
+/obj/item/stack/material/sheet/mapped/steel/fifty{
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/stack/material/steel{
-	amount = 50;
+/obj/item/stack/material/sheet/mapped/steel/fifty{
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/stack/material/steel{
-	amount = 50;
+/obj/item/stack/material/sheet/mapped/steel/fifty{
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/stack/material/plasteel{
-	amount = 50
-	},
-/obj/item/stack/material/plasteel{
-	amount = 50
-	},
-/obj/item/stack/material/plasteel{
-	amount = 50
-	},
-/obj/item/stack/material/plasteel{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/item/stack/material/plastic{
-	amount = 50
-	},
-/obj/item/stack/material/plastic{
-	amount = 50
-	},
-/obj/item/stack/material/plastic{
-	amount = 50
-	},
-/obj/item/stack/material/plastic{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced_borosilicate{
-	amount = 20
-	},
-/obj/item/stack/material/glass/reinforced_borosilicate{
-	amount = 20
-	},
-/obj/item/stack/material/glass/reinforced_borosilicate{
-	amount = 20
-	},
-/obj/item/stack/material/glass/reinforced_borosilicate{
-	amount = 20
-	},
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/panel/mapped/plastic/fifty,
+/obj/item/stack/material/panel/mapped/plastic/fifty,
+/obj/item/stack/material/panel/mapped/plastic/fifty,
+/obj/item/stack/material/panel/mapped/plastic/fifty,
+/obj/item/stack/material/pane/mapped/rborosilicate/twenty,
+/obj/item/stack/material/pane/mapped/rborosilicate/twenty,
+/obj/item/stack/material/pane/mapped/rborosilicate/twenty,
+/obj/item/stack/material/pane/mapped/rborosilicate/twenty,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"

@@ -547,24 +547,24 @@
 
 /obj/random/material/spawn_choices()
 	return list(
-		/obj/item/stack/material/steel/ten,
-		/obj/item/stack/material/glass/ten,
-		/obj/item/stack/material/glass/reinforced/ten,
-		/obj/item/stack/material/plastic/ten,
-		/obj/item/stack/material/wood/ten,
-		/obj/item/stack/material/cardboard/ten,
+		/obj/item/stack/material/sheet/mapped/steel/ten,
+		/obj/item/stack/material/pane/mapped/glass/ten,
+		/obj/item/stack/material/pane/mapped/rglass/ten,
+		/obj/item/stack/material/panel/mapped/plastic/ten,
+		/obj/item/stack/material/plank/mapped/wood/ten,
+		/obj/item/stack/material/cardstock/mapped/cardboard/ten,
+		/obj/item/stack/material/reinforced/mapped/plasteel/ten,
+		/obj/item/stack/material/sheet/mapped/steel/fifty,
+		/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+		/obj/item/stack/material/ingot/mapped/copper/fifty,
+		/obj/item/stack/material/pane/mapped/glass/fifty,
+		/obj/item/stack/material/pane/mapped/rglass/fifty,
+		/obj/item/stack/material/panel/mapped/plastic/fifty,
+		/obj/item/stack/material/plank/mapped/wood/fifty,
+		/obj/item/stack/material/cardstock/mapped/cardboard/fifty,
+		/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
 		/obj/item/stack/material/rods/ten,
-		/obj/item/stack/material/plasteel/ten,
-		/obj/item/stack/material/steel/fifty,
-		/obj/item/stack/material/glass/fifty,
-		/obj/item/stack/material/glass/fiber/fifty,
-		/obj/item/stack/material/glass/reinforced/fifty,
-		/obj/item/stack/material/plastic/fifty,
-		/obj/item/stack/material/wood/fifty,
-		/obj/item/stack/material/cardboard/fifty,
-		/obj/item/stack/material/rods/fifty,
-		/obj/item/stack/material/plasteel/fifty,
-		/obj/item/stack/material/copper/fifty
+		/obj/item/stack/material/rods/fifty
 	)
 
 /obj/random/soap
@@ -981,17 +981,17 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/clothing/suit/armor/pcarrier/merc = 3,
 				/obj/item/clothing/suit/straight_jacket = 6,
 				/obj/item/clothing/head/helmet/merc = 3,
-				/obj/item/stack/material/diamond/ten = 7,
-				/obj/item/stack/material/glass/reinforced_borosilicate/ten = 7,
-				/obj/item/stack/material/marble/ten = 8,
-				/obj/item/stack/material/gold/ten = 7,
-				/obj/item/stack/material/silver/ten = 7,
-				/obj/item/stack/material/osmium/ten = 7,
-				/obj/item/stack/material/platinum/ten = 8,
-				/obj/item/stack/material/tritium/ten = 7,
-				/obj/item/stack/material/mhydrogen/ten = 6,
-				/obj/item/stack/material/plasteel/ten = 9,
-				/obj/item/stack/material/copper/ten = 8,
+				/obj/item/stack/material/gemstone/mapped/diamond/ten = 7,
+				/obj/item/stack/material/pane/mapped/rborosilicate/ten = 7,
+				/obj/item/stack/material/brick/mapped/marble/ten = 8,
+				/obj/item/stack/material/ingot/mapped/gold/ten = 7,
+				/obj/item/stack/material/ingot/mapped/silver/ten = 7,
+				/obj/item/stack/material/ingot/mapped/osmium/ten = 7,
+				/obj/item/stack/material/ingot/mapped/platinum/ten = 8,
+				/obj/item/stack/material/aerogel/mapped/tritium/ten = 7,
+				/obj/item/stack/material/segment/mapped/mhydrogen/ten = 6,
+				/obj/item/stack/material/reinforced/mapped/plasteel/ten = 9,
+				/obj/item/stack/material/ingot/mapped/copper/ten = 8,
 				/obj/item/storage/box/monkeycubes = 5,
 				/obj/item/storage/firstaid/surgery = 4,
 				/obj/item/cell/infinite = 1,
@@ -1145,7 +1145,7 @@ var/global/list/random_useful_
 		random_useful_ += /obj/item/pen/red
 		random_useful_ += /obj/item/pen/multi
 		random_useful_ += /obj/item/storage/box/matches
-		random_useful_ += /obj/item/stack/material/cardboard
+		random_useful_ += /obj/item/stack/material/cardstock/mapped/cardboard
 		random_useful_ += /obj/item/storage/fancy/cigarettes
 		random_useful_ += /obj/item/deck/cards
 	return pick(random_useful_)

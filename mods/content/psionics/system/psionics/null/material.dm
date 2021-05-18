@@ -8,10 +8,9 @@
 	is_psionic_nullifier = TRUE
 
 /decl/material/nullglass
-	
+	name = "nullglass"
 	color = COLOR_NULLGLASS
 	conductive = 1
-	stack_type = /obj/item/stack/material/nullglass
 	flags = MAT_FLAG_BRITTLE
 	opacity = 0.5
 	integrity = 30

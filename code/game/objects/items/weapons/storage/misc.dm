@@ -31,7 +31,7 @@
 	icon_state = "donutbox"
 	name = "donut box"
 	can_hold = list(/obj/item/chems/food/snacks/donut)
-	foldable = /obj/item/stack/material/cardboard
+	foldable = /obj/item/stack/material/cardstock
 
 	startswith = list(/obj/item/chems/food/snacks/donut/normal = 6)
 

@@ -1,3 +1,5 @@
+var/global/list/hygiene_props = list()
+
 //todo: toothbrushes, and some sort of "toilet-filthinator" for the hos
 /obj/structure/hygiene
 	var/next_gurgle = 0
@@ -8,11 +10,11 @@
 
 /obj/structure/hygiene/Initialize()
 	. = ..()
-	SSfluids.hygiene_props += src
+	global.hygiene_props += src
 	START_PROCESSING(SSobj, src)
 
 /obj/structure/hygiene/Destroy()
-	SSfluids.hygiene_props -= src
+	global.hygiene_props -= src
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 

@@ -33,11 +33,6 @@
 #define MAT_VALUE_HARD_DIY          2
 #define MAT_VALUE_VERY_HARD_DIY     3
 
-//Stack flags
-#define USE_MATERIAL_COLOR          BITFLAG(0)
-#define USE_MATERIAL_SINGULAR_NAME  BITFLAG(1)
-#define USE_MATERIAL_PLURAL_NAME    BITFLAG(2)
-
 //Arbitrary hardness thresholds
 #define MAT_VALUE_SOFT              10
 #define MAT_VALUE_FLEXIBLE          20

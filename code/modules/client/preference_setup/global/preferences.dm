@@ -17,6 +17,7 @@ var/global/const/PREF_BASIC = "Basic"
 var/global/const/PREF_FULL = "Full"
 var/global/const/PREF_MIDDLE_CLICK = "Middle click"
 var/global/const/PREF_ALT_CLICK = "Alt click"
+var/global/const/PREF_DOUBLE_CLICK = "Double click"
 var/global/const/PREF_CTRL_CLICK = "Ctrl click"
 var/global/const/PREF_CTRL_SHIFT_CLICK = "Ctrl+shift click"
 var/global/const/PREF_HEAR = "Hear"
@@ -120,7 +121,7 @@ var/global/list/_client_preferences_by_type
 	description ="Ghost ears"
 	key = "CHAT_GHOSTEARS"
 	options = list(
-		PREF_ALL_SPEECH, 
+		PREF_ALL_SPEECH,
 		PREF_NEARBY
 	)
 
@@ -128,7 +129,7 @@ var/global/list/_client_preferences_by_type
 	description ="Ghost sight"
 	key = "CHAT_GHOSTSIGHT"
 	options = list(
-		PREF_ALL_EMOTES, 
+		PREF_ALL_EMOTES,
 		PREF_NEARBY
 	)
 
@@ -136,7 +137,7 @@ var/global/list/_client_preferences_by_type
 	description ="Ghost radio"
 	key = "CHAT_GHOSTRADIO"
 	options = list(
-		PREF_ALL_CHATTER, 
+		PREF_ALL_CHATTER,
 		PREF_NEARBY
 	)
 
@@ -209,15 +210,6 @@ var/global/list/_client_preferences_by_type
 	if(preference_mob.client)
 		preference_mob.client.toggle_fullscreen(new_value)
 
-/datum/client_preference/chat_position
-	description = "Alternative Chat Position"
-	key = "CHAT_ALT"
-	default_value = PREF_NO
-
-/datum/client_preference/chat_position/changed(mob/preference_mob, new_value)
-	if(preference_mob.client)
-		preference_mob.client.update_chat_position(new_value == PREF_YES)
-
 /datum/client_preference/autohiss
 	description = "Autohiss"
 	key = "AUTOHISS"
@@ -275,6 +267,11 @@ var/global/list/_client_preferences_by_type
 				preference_mob.client.images -= marker_image
 			else
 				preference_mob.client.images |= marker_image
+
+/datum/client_preference/show_turf_contents
+	description = "Show turf contents in side panel"
+	key = "TURF_CONTENTS"
+	options = list(PREF_ALT_CLICK, PREF_DOUBLE_CLICK, PREF_OFF)
 
 /********************
 * General Staff Preferences *

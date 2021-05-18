@@ -5,7 +5,8 @@
 #define ZONE_BLOCKED 2
 #define BLOCKED 3
 
-#define ZONE_MIN_SIZE 14 //zones with less than this many turfs will always merge, even if the connection is not direct
+/// Zones with less than this many turfs will always merge, even if the connection is not direct.
+#define ZONE_MIN_SIZE 14
 
 #define CANPASS_ALWAYS 1
 #define CANPASS_DENSITY 2
@@ -57,7 +58,7 @@ var/global/list/gzn_check = list(NORTH, SOUTH, EAST, WEST, UP, DOWN)
 					} \
 				} \
 				if (CANPASS_PROC) { \
-					ret |= AM.c_airblock(B); \
+					ret |= (AIR_BLOCKED * !AM.CanPass(null, B, 0, 0)) | (ZONE_BLOCKED * !AM.CanPass(null, B, 1.5, 1)); \
 				} \
 				if (CANPASS_NEVER) { \
 					ret = BLOCKED; \
@@ -94,7 +95,7 @@ var/global/list/gzn_check = list(NORTH, SOUTH, EAST, WEST)
 					} \
 				} \
 				if (CANPASS_PROC) { \
-					ret |= AM.c_airblock(B); \
+					ret |= (AIR_BLOCKED * !AM.CanPass(null, B, 0, 0)) | (ZONE_BLOCKED * !AM.CanPass(null, B, 1.5, 1)); \
 				} \
 				if (CANPASS_NEVER) { \
 					ret = BLOCKED; \

@@ -133,17 +133,6 @@ SUBSYSTEM_DEF(materials)
 		if(random.randomize_data(temperature))
 			return random.type
 
-// This is a fairly hacky way of preventing multiple on_reagent_change() calls being fired within the same tick.
-/datum/controller/subsystem/materials/proc/queue_reagent_change(var/atom/changing)
-	if(!pending_reagent_change[changing])
-		pending_reagent_change[changing] = TRUE
-		addtimer(CALLBACK(src, .proc/do_reagent_change, changing), 0)
-
-/datum/controller/subsystem/materials/proc/do_reagent_change(var/atom/changing)
-	pending_reagent_change -= changing
-	if(!QDELETED(changing))
-		changing.on_reagent_change()
-
 /datum/controller/subsystem/materials/proc/get_cocktails_by_primary_ingredient(var/primary)
 	. = cocktails_by_primary_ingredient[primary]
 
@@ -169,3 +158,8 @@ SUBSYSTEM_DEF(materials)
 		if(length(strata.base_materials))
 			global.default_material_by_strata_and_z[skey] = pick(strata.base_materials)
 	return global.default_material_by_strata_and_z[skey]
+
+/datum/controller/subsystem/materials/proc/create_object(var/mat_type, var/atom/target, var/amount = 1, var/object_type, var/reinf_type)
+	var/decl/material/mat = GET_DECL(mat_type)
+	return mat?.create_object(target, amount, object_type, reinf_type)
+

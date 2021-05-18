@@ -77,8 +77,16 @@
 		var/list/surgery_info = list()
 		var/list/tool_names
 		for(var/thing in procedure.allowed_tools)
-			var/obj/tool = thing
-			LAZYADD(tool_names, "\a [initial(tool.name)]")
+			if(ispath(thing, /obj))
+				var/obj/tool = thing
+				LAZYADD(tool_names, "\a [initial(tool.name)]")
+			else if(ispath(thing, /decl/tool_archetype))
+				var/decl/tool_archetype/tool = GET_DECL(thing)
+				if(tool.article)
+					LAZYADD(tool_names, "\a [tool.name]")
+				else
+					LAZYADD(tool_names, tool.name)
+
 		if(LAZYLEN(tool_names))
 			surgery_info += "It can be performed with [english_list(tool_names, and_text = " or ")].<br>"
 		if(LAZYLEN(procedure.allowed_species))
@@ -106,5 +114,5 @@
 
 		var/datum/codex_entry/entry = new(_display_name = lowertext(trim("[lowertext(procedure.name)] (surgery)")), _lore_text = procedure.description, _mechanics_text = jointext(surgery_info, "<br>"))
 		SScodex.add_entry_by_string(entry.display_name, entry)
-		items += entry.display_name
+		items |= entry.display_name
 	. = ..()

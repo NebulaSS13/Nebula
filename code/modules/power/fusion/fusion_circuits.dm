@@ -8,12 +8,15 @@
 	build_path = /obj/machinery/kinetic_harvester
 	board_type = "machine"
 	origin_tech = "{'programming':4,'engineering':4,'materials':4}"
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1
+	)
 	req_components = list(
 		/obj/item/stock_parts/manipulator/pico = 2,
 		/obj/item/stock_parts/matter_bin/super = 1,
-		/obj/item/stock_parts/console_screen = 1,
 		/obj/item/stack/cable_coil = 5
-		)
+	)
 
 /obj/item/stock_parts/circuitboard/fusion_fuel_compressor
 	name = "circuitboard (fusion fuel compressor)"
@@ -21,11 +24,12 @@
 	board_type = "machine"
 	origin_tech = "{'powerstorage':3,'engineering':4,'materials':4}"
 	req_components = list(
-							/obj/item/stock_parts/manipulator/pico = 2,
-							/obj/item/stock_parts/matter_bin/super = 2,
-							/obj/item/stock_parts/console_screen = 1,
-							/obj/item/stack/cable_coil = 5
-							)
+		/obj/item/stock_parts/manipulator/pico = 2,
+		/obj/item/stock_parts/matter_bin/super = 2,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stack/cable_coil = 5
+	)
 
 /obj/item/stock_parts/circuitboard/fusion_fuel_control
 	name = "circuitboard (fusion fuel controller)"

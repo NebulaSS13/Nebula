@@ -66,7 +66,6 @@ var/global/game_id = null
 
 	return match
 
-#define RECOMMENDED_VERSION 513
 /world/New()
 
 	//set window title
@@ -81,8 +80,8 @@ var/global/game_id = null
 		// dumb and hardcoded but I don't care~
 		config.server_name += " #[(world.port % 1000) / 100]"
 
-	if(byond_version < RECOMMENDED_VERSION)
-		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
+	if(byond_version < REQUIRED_DM_VERSION)
+		to_world_log("Your server's BYOND version does not meet the minimum DM version for this server. Please update BYOND.")
 
 	callHook("startup")
 	//Emergency Fix
@@ -96,8 +95,6 @@ var/global/game_id = null
 	load_unit_test_changes()
 #endif
 	Master.Initialize(10, FALSE)
-
-#undef RECOMMENDED_VERSION
 
 var/global/list/world_topic_throttle = list()
 var/global/world_topic_last = world.timeofday

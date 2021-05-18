@@ -120,21 +120,3 @@
 /obj/effect/decompiler/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
-
-/obj/item/stack/material/cubes
-	name = "cube"
-	desc = "Some featureless cubes."
-	singular_name = "cube"
-	plural_name = "cubes"
-	icon_state = "cube"
-	plural_icon_state = "cube-mult"
-	max_icon_state = "cube-max"
-	max_amount = 100
-	attack_verb = list("cubed")
-	material_flags = USE_MATERIAL_COLOR | USE_MATERIAL_SINGULAR_NAME
-	stacktype = /obj/item/stack/material/cubes
-
-/obj/item/stack/material/cubes/update_strings()
-	. = ..()
-	singular_name = initial(singular_name)
-	plural_name = initial(plural_name)

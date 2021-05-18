@@ -6,13 +6,14 @@
 	use_power = POWER_USE_IDLE
 	icon = 'icons/obj/kinetic_harvester.dmi'
 	icon_state = "off"
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+
 	var/initial_id_tag
 	var/list/stored =     list()
 	var/list/harvesting = list()
 	var/obj/machinery/power/fusion_core/harvest_from
-	construct_state = /decl/machine_construction/default/panel_closed
-	uncreated_component_parts = null
-	stat_immune = 0
 
 /obj/machinery/kinetic_harvester/Initialize()
 	set_extension(src, /datum/extension/local_network_member)
@@ -65,9 +66,8 @@
 	data["materials"] = list()
 	for(var/mat in stored)
 		var/decl/material/material = GET_DECL(mat)
-		if(material)
-			var/sheets = Floor(stored[mat]/(SHEET_MATERIAL_AMOUNT * 1.5))
-			data["materials"] += list(list("material" = mat, "rawamount" = stored[mat], "amount" = sheets, "harvest" = harvesting[mat]))
+		var/sheets = Floor(stored[mat]/(SHEET_MATERIAL_AMOUNT * 1.5))
+		data["materials"] += list(list("name" = material.solid_name, "amount" = sheets, "harvest" = harvesting[mat], "mat_ref" = "\ref[material]"))
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -77,16 +77,17 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/kinetic_harvester/Process()
+
 	if(harvest_from && get_dist(src, harvest_from) > 10)
 		harvest_from = null
 
 	if(use_power >= POWER_USE_ACTIVE)
 		if(harvest_from && harvest_from.owned_field)
 			for(var/mat in harvest_from.owned_field.reactants)
-				if(SSmaterials.materials_by_name[mat] && !stored[mat])
+				if(!(mat in stored))
 					stored[mat] = 0
 			for(var/mat in harvesting)
-				if(!SSmaterials.materials_by_name[mat] || !harvest_from.owned_field.reactants[mat])
+				if(!harvest_from.owned_field.reactants[mat])
 					harvesting -= mat
 				else
 					var/harvest = min(harvest_from.owned_field.reactants[mat], rand(100,200))
@@ -106,17 +107,17 @@
 		icon_state = "off"
 
 /obj/machinery/kinetic_harvester/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
+
 	if(href_list["remove_mat"])
-		var/mat = href_list["remove_mat"]
-		var/decl/material/material = GET_DECL(mat)
-		if(material)
+		var/decl/material/material = locate(href_list["remove_mat"])
+		if(istype(material))
 			var/sheet_cost = (SHEET_MATERIAL_AMOUNT * 1.5)
-			var/sheets = Floor(stored[mat]/sheet_cost)
+			var/sheets = Floor(stored[material.type]/sheet_cost)
 			if(sheets > 0)
-				material.place_sheet(loc, sheets)
-				stored[mat] -= sheets * sheet_cost
-				if(stored[mat] <= 0)
-					stored -= mat
+				material.create_object(loc, sheets)
+				stored[material.type] -= (sheets * sheet_cost)
+				if(stored[material.type] <= 0)
+					stored -= material.type
 				return TOPIC_REFRESH
 
 	if(href_list["toggle_power"])
@@ -125,11 +126,12 @@
 		return TOPIC_REFRESH
 
 	if(href_list["toggle_harvest"])
-		var/mat = href_list["toggle_harvest"]
-		if(harvesting[mat])
-			harvesting -= mat
-		else
-			harvesting[mat] = TRUE
-			if(!(mat in stored))
-				stored[mat] = 0
+		var/decl/material/material = locate(href_list["toggle_harvest"])
+		if(istype(material))
+			if(harvesting[material.type])
+				harvesting -= material.type
+			else
+				harvesting[material.type] = TRUE
+				if(!(material.type in stored))
+					stored[material.type] = 0
 		return TOPIC_REFRESH
