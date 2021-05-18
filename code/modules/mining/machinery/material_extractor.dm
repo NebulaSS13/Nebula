@@ -7,13 +7,11 @@
 #define GAS_EXTRACTOR_OPERATING_TEMP T20C + 5 //Temperature the machine heat stuff to.. Has to be 20c + 5 because someone decided ice melted at 20c
 #define GAS_EXTRACTOR_LIQUID_EFFICIENCY 0.75 //% efficiency for liquids
 #define GAS_EXTRACTOR_MIN_REAGENT_AMOUNT 0.1 //Minimum amount of reagents units we tolerate in the machine to keep things clean
-
-#define GAS_EXTRACTOR_WAIT_TIME_DUMP 4 SECONDS //Wait at least that many seconds after inserting something for the machine to dump the result. So reactions happens
+#define GAS_EXTRACTOR_WAIT_TIME_DUMP 1 SECONDS //Wait at least that many seconds after inserting something for the machine to dump the result. So reactions happens
 #define GAS_EXTRACTOR_WAIT_TIME_EXTRACT 1 SECONDS 
 
-//TODO: Sprite work?
 
-GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
+var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 
 /obj/machinery/atmospherics/unary/material/extractor
 	name = "Gas extractor"
@@ -34,7 +32,23 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/default/panel_closed
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
-	maximum_component_parts = list(/obj/item/stock_parts = 10, /obj/item/chems = 1)
+	public_variables = list(
+		/decl/public_access/public_variable/use_power,
+		/decl/public_access/public_variable/gas,
+		/decl/public_access/public_variable/pressure,
+		/decl/public_access/public_variable/temperature,
+		/decl/public_access/public_variable/reagents,
+		/decl/public_access/public_variable/reagents/volumes,
+		/decl/public_access/public_variable/reagents/free_space,
+		/decl/public_access/public_variable/reagents/total_volume,
+		/decl/public_access/public_variable/reagents/maximum_volume,
+		/decl/public_access/public_variable/material_extractor/has_bucket,
+	)
+	public_methods = list(
+		/decl/public_access/public_method/toggle_power,
+		/decl/public_access/public_method/material_extractor/flush_gas,
+		/decl/public_access/public_method/material_extractor/flush_reagents,
+	)
 
 	var/const/max_items = 25 //Max amount of items it can process at the same time
 	var/time_last_input = 0 //Time since an item was processed, used to wait a bit for reactions to happen
@@ -49,8 +63,8 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 	air_contents.volume = GAS_EXTRACTOR_GAS_TANK
 	if(!reagents)
 		create_reagents(GAS_EXTRACTOR_REAGENTS_TANK)
-	verbs |= /obj/machinery/atmospherics/unary/material/verb/FlushReagents
-	verbs |= /obj/machinery/atmospherics/unary/material/verb/FlushGas
+	verbs |= /obj/machinery/atmospherics/unary/material/extractor/verb/FlushReagents
+	verbs |= /obj/machinery/atmospherics/unary/material/extractor/verb/FlushGas
 	// QUEUE_TEMPERATURE_ATOMS(src)
 
 /obj/machinery/atmospherics/unary/material/extractor/Bumped(var/obj/O)
@@ -59,7 +73,7 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 		return ..()
 	
 	//Sanity filter
-	if(O.pass_flags > PASS_FLAG_TABLE || O.anchored || count_items_processing() >= max_items) //Don't let items beyond capacity pass through
+	if(!O.checkpass(PASS_FLAG_TABLE) || O.anchored || count_items_processing() >= max_items) //Don't let items beyond capacity pass through
 		return ..()
 
 	//Only handles entities touching the machine from the input's direction only
@@ -84,12 +98,19 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 
 /obj/machinery/atmospherics/unary/material/extractor/examine(var/mob/user)
 	. = ..()
-	var/items_processing = count_items_processing()
-	if(output_container)
-		var/full_text
-		if(REAGENTS_FREE_SPACE(reagents) <= 0)
-			full_text = " Currently idling because its internal tanks are full.."
-		to_chat(user, SPAN_NOTICE("Its currently processing [items_processing] items.[full_text]"))
+	//Only display info if the screen is there
+	if(get_component_of_type(/obj/item/stock_parts/console_screen))
+		var/items_processing = count_items_processing()
+		if(output_container)
+			var/full_text
+			if(REAGENTS_FREE_SPACE(reagents) <= 0)
+				full_text = SPAN_WARNING(" Currently idling because one or more of its internal tanks are full..")
+			to_chat(user, SPAN_NOTICE("It currently has [items_processing] items waiting for processing.") + full_text)
+
+		if(reagents)
+			to_chat(user, SPAN_NOTICE("The internal processing tank gauge reads [round(reagents.total_volume)]/[reagents.maximum_volume]"))
+			if(is_buffer_full())
+				to_chat(user, SPAN_WARNING("It needs to evacuate liquids to resume operations!"))
 
 	if(output_container)
 		var/bucket_text
@@ -98,9 +119,6 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 		to_chat(user, SPAN_NOTICE("It has a [output_container.name] in place to receive reagents.[bucket_text]"))
 	else 
 		to_chat(user, SPAN_NOTICE("It has nothing to pour reagents into."))
-
-	if(reagents)
-		to_chat(user, SPAN_NOTICE("The internal liquid tank gauge reads [round(reagents.total_volume)]/[reagents.maximum_volume]"))
 
 /obj/machinery/atmospherics/unary/material/extractor/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/chems/glass))
@@ -129,11 +147,17 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 
 /obj/machinery/atmospherics/unary/material/extractor/on_update_icon()
 	. = ..()
-	icon_state = initial(icon_state)
+	cut_overlays()
+	
 	if(!use_power || inoperable())
 		icon_state = "[icon_state]-off"
-	//#TODO: add panel open state overlay
-	//#TODO: add reagent container overlay
+	else
+		icon_state = initial(icon_state)
+		
+	if(panel_open)
+		add_overlay("[icon_state]-open")
+	if(output_container)
+		add_overlay("[icon_state]-bucket")
 
 /obj/machinery/atmospherics/unary/material/extractor/Process()
 	..()
@@ -147,7 +171,6 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 		update_use_power(POWER_USE_IDLE)
 
 	if(reagents?.total_volume > 0 && (world.time >= (time_last_input + GAS_EXTRACTOR_WAIT_TIME_DUMP)))
-		force_process_reagents()
 		dump_result()
 
 //For some reasons that's not in the unary base class...
@@ -173,7 +196,7 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 	return round(REAGENTS_FREE_SPACE(reagents), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT) <= 0
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/can_process(var/obj/O)
-	if(istype(O) && is_type_in_list(O, GLOB.material_extractor_items_whitelist))
+	if(istype(O) && is_type_in_list(O, global.material_extractor_items_whitelist))
 		for(var/k in O.matter)
 			var/decl/material/M = GET_DECL(k)
 			ASSERT(istype(M))
@@ -202,10 +225,10 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 	return TRUE
 
 //Since the process_reaction proc isn't guaranteed to process reactions in time, we have to beat it with a stick
-/obj/machinery/atmospherics/unary/material/extractor/proc/force_process_reagents()
-	atom_flags &= ~(ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT)
-	. = reagents.process_reactions()
-	atom_flags |= ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
+// /obj/machinery/atmospherics/unary/material/extractor/proc/force_process_reagents()
+// 	atom_flags &= ~(ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT)
+// 	. = reagents.process_reactions()
+// 	atom_flags |= ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/extract(var/list/obj/L)
 	//No point processing anything if the processing buffer is full
@@ -227,7 +250,7 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 			reagents.add_reagent(k, reagent_units)
 			log_debug("EXTRACTING : added [reagent_units] units of [k] to internal tank with [free_volume] units of free space")
 
-			//Since we might have to extract over several ticks, if our internal tank is full. So we just subtract it from the matter list of the ore
+			//Since we might have to extract over several ticks, if our internal tank is full, we just subtract it from the matter list of the ore
 			O.matter[k] -= matter_units_removed
 			if(round(O.matter[k], 0.1) <= 0)
 				O.matter -= k
@@ -286,7 +309,6 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 //	the volume of liquid
 //	the density of the liquid
 //	the molar mass of the liquid
-//
 //Since we have none of those currently in the material datum, just assume everything is water
 // Density: 997.07 g/L 
 // Molar Mass: 18.02 g/mol
@@ -308,7 +330,11 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 /obj/machinery/atmospherics/unary/material/extractor/proc/get_input_dir()
 	return turn(dir, -90)
 
-/obj/machinery/atmospherics/unary/material/verb/FlushReagents()
+//
+// Verbs
+//
+
+/obj/machinery/atmospherics/unary/material/extractor/verb/FlushReagents()
 	set name = "Flush Reagents Tank"
 	set desc = "Empty the content of the internal reagent tank of the machine on the floor."
 	set category = "Object"
@@ -316,7 +342,7 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 	usr.visible_message(SPAN_NOTICE("[usr] empties the liquid tank of \the [src] onto \the [src.loc]!"), SPAN_NOTICE("You empty the liquid tank of the [src] onto \the [src.loc]!"))
 	src.reagents.trans_to(src.loc, reagents.total_volume)
 
-/obj/machinery/atmospherics/unary/material/verb/FlushGas()
+/obj/machinery/atmospherics/unary/material/extractor/verb/FlushGas()
 	set name = "Flush Gas Tank"
 	set desc = "Empty the content of the internal gas tank of the machine into the air."
 	set category = "Object"
@@ -326,6 +352,35 @@ GLOBAL_LIST_INIT(material_extractor_items_whitelist, list(/obj/item/ore))
 	environment.merge(src.air_contents)
 	//Reset air content
 	src.air_contents = new/datum/gas_mixture(GAS_EXTRACTOR_GAS_TANK, temperature)
+
+//
+// Public Vars
+//
+
+/decl/public_access/public_variable/material_extractor/has_bucket
+	expected_type = /obj/machinery/atmospherics/unary/material
+	name = "has bucket"
+	desc = "Whether or not the extractor has a bucket collecting reagents."
+	can_write = FALSE
+	has_updates = FALSE
+	var_type = IC_FORMAT_BOOLEAN
+
+/decl/public_access/public_variable/material_extractor/has_bucket/access_var(obj/machinery/atmospherics/unary/material/extractor/M)
+	return M.output_container != null
+
+//
+// Public Methods
+//
+
+/decl/public_access/public_method/material_extractor/flush_gas
+	name = "flush gas"
+	desc = "Empty the internal gas tank into the atmosphere."
+	call_proc = /obj/machinery/atmospherics/unary/material/extractor/verb/FlushGas
+
+/decl/public_access/public_method/material_extractor/flush_reagents
+	name = "flush reagents"
+	desc = "Empty the internal reagents tank on the floor."
+	call_proc = /obj/machinery/atmospherics/unary/material/extractor/verb/FlushReagents
 
 #undef GAS_EXTRACTOR_GAS_TANK 
 #undef GAS_EXTRACTOR_REAGENTS_TANK
