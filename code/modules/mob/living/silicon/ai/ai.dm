@@ -110,6 +110,7 @@ var/global/list/ai_verbs_default = list(
 
 	var/default_ai_icon = /datum/ai_icon/blue
 	var/static/list/custom_ai_icons_by_ckey_and_name
+	var/custom_color_tone //This is a hex, despite being converted to rgb by gethologramicon.
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default
@@ -139,7 +140,7 @@ var/global/list/ai_verbs_default = list(
 	anchored = 1
 	set_density(1)
 
-	holo_icon = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"))
+	holo_icon = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"), custom_color_tone)
 	holo_icon_longrange = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"), hologram_color = HOLOPAD_LONG_RANGE)
 
 	if(istype(L, /datum/ai_laws))
@@ -292,6 +293,17 @@ var/global/list/ai_verbs_default = list(
 		selected_sprite = new_sprite
 
 	update_icon()
+
+/mob/living/silicon/ai/proc/pick_color()
+	set category = "Silicon Commands"
+	set name = "Set AI Hologram Color"
+	if(stat || !has_power())
+		return
+
+	var/new_color = input("Select or enter a color!", "AI") as color
+	if(new_color)
+		custom_color_tone = new_color
+		to_chat(src, SPAN_NOTICE("You need to change your holopad icon in order for the color change to take effect!"))
 
 /mob/living/silicon/ai/proc/available_icons()
 	. = list()
@@ -541,7 +553,7 @@ var/global/list/ai_verbs_default = list(
 			if(character_icon)
 				qdel(holo_icon)//Clear old icon so we're not storing it in memory.
 				qdel(holo_icon_longrange)
-				holo_icon = getHologramIcon(icon(character_icon))
+				holo_icon = getHologramIcon(icon(character_icon), custom_tone = custom_color_tone)
 				holo_icon_longrange = getHologramIcon(icon(character_icon), hologram_color = HOLOPAD_LONG_RANGE)
 		else
 			alert("No suitable records found. Aborting.")
@@ -557,7 +569,7 @@ var/global/list/ai_verbs_default = list(
 		if(choice)
 			qdel(holo_icon)
 			qdel(holo_icon_longrange)
-			holo_icon = getHologramIcon(icon(choice.icon, choice.icon_state), noDecolor=choice.bypass_colorize)
+			holo_icon = getHologramIcon(icon(choice.icon, choice.icon_state), noDecolor=choice.bypass_colorize, custom_tone = custom_color_tone)
 			holo_icon_longrange = getHologramIcon(icon(choice.icon, choice.icon_state), noDecolor=choice.bypass_colorize, hologram_color = HOLOPAD_LONG_RANGE)
 			holo_icon_malf = choice.requires_malf
 	return
