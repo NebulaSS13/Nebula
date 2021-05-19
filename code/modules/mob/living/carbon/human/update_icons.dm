@@ -730,7 +730,7 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/set_dir()
 	. = ..()
-	if(. && bodytype.get_tail())
+	if(. && bodytype.get_tail(src))
 		update_tail_showing()
 
 
