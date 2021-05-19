@@ -8,6 +8,7 @@ Thumbs.db
 *.backup
 *.before
 data/
+dmdoc/
 cfg/
 build_log.txt
 use_map
@@ -22,6 +23,7 @@ sql/test_db
 
 # vscode
 .vscode/*
+*.code-workspace
 .history
 
 # swap
@@ -39,7 +41,6 @@ Session.vim
 
 # auto-generated tag files
 tags
-nebula.code-workspace
 
 # ignore built libs
 lib/*.dll
