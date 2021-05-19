@@ -83,6 +83,8 @@ var/global/list/time_prefs_fixed = list()
 			load_data()
 
 	sanitize_preferences()
+	update_preview_icon()
+	update_character_previews(usr)
 	if(client && istype(client.mob, /mob/new_player))
 		var/mob/new_player/np = client.mob
 		np.show_lobby_menu(TRUE)
@@ -219,6 +221,7 @@ var/global/list/time_prefs_fixed = list()
 		O.appearance = MA
 		O.dir = D
 		O.screen_loc = preview_screen_locs["[D]"]
+	update_setup_window(usr)
 
 /datum/preferences/proc/show_character_previews()
 	if(!client || !char_render_holders)
@@ -283,6 +286,8 @@ var/global/list/time_prefs_fixed = list()
 	else
 		return 0
 
+	update_preview_icon()
+	update_character_previews(usr)
 	update_setup_window(usr)
 	return 1
 
