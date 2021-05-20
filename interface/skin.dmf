@@ -1097,7 +1097,7 @@ window "rpane"
 		is-vert = false
 	elem "github"
 		type = BUTTON
-		pos = 476,0
+		pos = 520,0
 		size = 60x15
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -1106,7 +1106,7 @@ window "rpane"
 		command = "GitHub"
 	elem "BugReport"
 		type = BUTTON
-		pos = 536,0
+		pos = 580,0
 		size = 60x15
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -1115,7 +1115,7 @@ window "rpane"
 		command = "Bug-Report"
 	elem "rulesb"
 		type = BUTTON
-		pos = 120,0
+		pos = 205,0
 		size = 60x15
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -1125,7 +1125,7 @@ window "rpane"
 		group = "rpanemode"
 	elem "changelog"
 		type = BUTTON
-		pos = 416,0
+		pos = 460,0
 		size = 60x15
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -1135,7 +1135,7 @@ window "rpane"
 		group = "rpanemode"
 	elem "Lore"
 		type = BUTTON
-		pos = 208,0
+		pos = 265,0
 		size = 60x15
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -1145,7 +1145,7 @@ window "rpane"
 		group = "rpanemode"
 	elem "forumb"
 		type = BUTTON
-		pos = 328,0
+		pos = 385,0
 		size = 60x15
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -1155,7 +1155,7 @@ window "rpane"
 		group = "rpanemode"
 	elem "wikib"
 		type = BUTTON
-		pos = 268,0
+		pos = 325,0
 		size = 60x15
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -1188,6 +1188,16 @@ window "rpane"
 		command = ".winset \"rpanewindow.left=infowindow\""
 		group = "rpanemode"
 		button-type = pushbox
+	elem "button_codex"
+		type = BUTTON
+		pos = 133,0
+		size = 60x15
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		saved-params = "is-checked"
+		text = "Codex"
+		command = "Codex"
+		group = "rpanemode"
 
 window "preferences_window"
 	elem "preferences_window"
