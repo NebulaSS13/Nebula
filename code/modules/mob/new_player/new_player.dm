@@ -293,23 +293,7 @@
 	character = SSjobs.equip_rank(character, job.title, 1)					//equips the human
 	SScustomitems.equip_custom_items(character)
 
-	// AIs don't need a spawnpoint, they must spawn at an empty core
-	if(character.mind.assigned_role == "AI")
-
-		character = character.AIize(move=0) // AIize the character, but don't move them yet
-
-		// is_available for AI checks that there is an empty core available in this list
-		var/obj/structure/aicore/deactivated/C = empty_playable_ai_cores[1]
-		empty_playable_ai_cores -= C
-
-		character.forceMove(C.loc)
-		var/mob/living/silicon/ai/A = character
-		A.on_mob_init()
-
-		AnnounceCyborg(character, job.title, "has been downloaded to the empty core in \the [character.loc.loc]")
-		SSticker.mode.handle_latejoin(character)
-
-		qdel(C)
+	if(job.do_spawn_special(character)) //This replaces the AI spawn logic with a proc stub. Refer to silicon.dm for the spawn logic.
 		qdel(src)
 		return
 

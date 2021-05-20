@@ -486,3 +486,6 @@
 
 /datum/job/proc/check_special_blockers(var/datum/preferences/prefs)
 	return
+
+/datum/job/proc/do_spawn_special(var/mob/living/character)
+	return FALSE
