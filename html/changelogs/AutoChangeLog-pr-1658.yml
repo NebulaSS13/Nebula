@@ -1,5 +1,0 @@
-author: Andromeda-K22
-delete-after: true
-changes:
-  - tweak: AIs can now have a default holopad color tone set, and set their own color
-      tone for on-station/ship holopad rendering.
