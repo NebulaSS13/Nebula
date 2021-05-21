@@ -41,6 +41,23 @@
 
 	update_icon()
 
+/obj/item/ammo_casing/Crossed(atom/AM)
+	..()
+
+	if(isliving(AM))
+		var/mob/living/L = AM
+
+		if(L.buckled)
+			return
+
+		if(!MOVING_DELIBERATELY(L) && prob(10))
+			playsound(src, pick(fall_sounds), 50, 1)
+			var/turf/turf_current = get_turf(src)
+			var/turf/turf_destiinaton = get_step(turf_current, AM.dir)
+			if(turf_destiinaton.Adjacent(turf_current))
+				throw_at(turf_destiinaton, 2, 2, spin = FALSE)
+				animate(src, pixel_x = rand(-16, 16), pixel_y = rand(-16, 16), transform = turn(matrix(), rand(120, 300)), time = rand(3, 8))
+
 /obj/item/ammo_casing/proc/leave_residue()
 	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob/living/carbon/human)
 	var/obj/item/gun/G = get_holder_of_type(src, /obj/item/gun)
