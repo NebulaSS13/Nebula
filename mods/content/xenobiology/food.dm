@@ -1,25 +1,25 @@
-/datum/recipe/slimetoast
+/decl/recipe/slimetoast
 	reagents = list(/decl/material/liquid/slimejelly = 5)
 	items = list(
 		/obj/item/chems/food/snacks/slice/bread,
 	)
 	result = /obj/item/chems/food/snacks/jelliedtoast/slime
 
-/datum/recipe/jellydonut/slime
+/decl/recipe/jellydonut/slime
 	reagents = list(/decl/material/liquid/slimejelly = 5, /decl/material/liquid/nutriment/sugar = 5)
 	items = list(
 		/obj/item/chems/food/snacks/dough
 	)
 	result = /obj/item/chems/food/snacks/donut/slimejelly
 
-/datum/recipe/slimeburger
+/decl/recipe/slimeburger
 	reagents = list(/decl/material/liquid/slimejelly = 5)
 	items = list(
 		/obj/item/chems/food/snacks/bun
 	)
 	result = /obj/item/chems/food/snacks/jellyburger/slime
 
-/datum/recipe/slimesandwich
+/decl/recipe/slimesandwich
 	reagents = list(/decl/material/liquid/slimejelly = 5)
 	items = list(
 		/obj/item/chems/food/snacks/slice/bread,
@@ -27,7 +27,7 @@
 	)
 	result = /obj/item/chems/food/snacks/jellysandwich/slime
 
-/datum/recipe/slimesoup
+/decl/recipe/slimesoup
 	reagents = list(/decl/material/liquid/water = 10, /decl/material/liquid/slimejelly = 5)
 	items = list()
 	result = /obj/item/chems/food/snacks/slimesoup

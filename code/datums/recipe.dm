@@ -1,102 +1,87 @@
+// These vars are populated by /decl/recipe/Initialize(), which is called by the recipe codex
+// category during world setup and should in theory not need any additional init calls.
+
+var/global/microwave_maximum_item_storage =  0
+var/global/list/microwave_recipes =          list()
+var/global/list/microwave_accepts_reagents = list()
+var/global/list/microwave_accepts_items =    list(
+	/obj/item/holder,
+	/obj/item/chems/food/snacks/grown
+)
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * *
  * /datum/recipe by rastaf0            13 apr 2011 *
- * * * * * * * * * * * * * * * * * * * * * * * * * *
- * This is powerful and flexible recipe system.
- * It exists not only for food.
- * supports both reagents and objects as prerequisites.
- * In order to use this system you have to define a deriative from /datum/recipe
- * * reagents are reagents. Acid, milc, booze, etc.
- * * items are objects. Fruits, tools, circuit boards.
- * * result is type to create as new object
- * * time is optional parameter, you shall use in in your machine,
- * * default /datum/recipe/ procs does not rely on this parameter.
- *
- *  Functions you need:
- *  /datum/recipe/proc/make(var/obj/container)
- *    Creates result inside container,
- *    deletes prerequisite reagents,
- *    transfers reagents from prerequisite objects,
- *    deletes all prerequisite objects (even not needed for recipe at the moment).
- *
- *  /proc/select_recipe(list/datum/recipe/avaiable_recipes, obj/obj, exact = 1)
- *    Wonderful function that select suitable recipe for you.
- *    obj is a machine (or magik hat) with prerequisites,
- *    exact = 0 forces algorithm to ignore superfluous stuff.
- *
- *
- *  Functions you do not need to call directly but could:
- *  /datum/recipe/proc/check_reagents(var/datum/reagents/avail_reagents)
- *  /datum/recipe/proc/check_items(var/obj/container)
- *
- * */
+ * /decl/recipe by Neb                 21 may 2021 *
+ *                                                 *
+ * Happy tenth birthday you pile of spaghetti!     *
+ * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/datum/recipe
-	var/display_name
-	var/list/reagents // example: = list(/decl/material/liquid/drink/juice/berry = 5) // do not list same reagent twice
-	var/list/items    // example: = list(/obj/item/crowbar, /obj/item/welder) // place /foo/bar before /foo
-	var/list/fruit    // example: = list("fruit" = 3)
-	var/result        // example: = /obj/item/chems/food/snacks/donut/normal
-	var/time = 100    // 1/10 part of second
-	var/hidden_from_codex = FALSE
-	var/lore_text
-	var/mechanics_text
-	var/antag_text
+/decl/recipe
+	var/display_name      // Descriptive name of the recipe, should be unique to avoid codex pages being unsearchable.
+	var/list/reagents     // example: = list(/decl/material/liquid/drink/juice/berry = 5) // do not list same reagent twice
+	var/list/items        // example: = list(/obj/item/crowbar, /obj/item/welder) // place /foo/bar before /foo
+	var/list/fruit        // example: = list("fruit" = 3)
+	var/result            // example: = /obj/item/chems/food/snacks/donut/normal
+	var/time = 100        // Cooking time in deciseconds.
 
-/datum/recipe/proc/check_reagents(var/datum/reagents/avail_reagents)
-	. = 1
-	for (var/r_r in reagents)
-		var/aval_r_amnt = REAGENT_VOLUME(avail_reagents, r_r)
-		if (!(abs(aval_r_amnt - reagents[r_r])<0.5)) //if NOT equals
-			if (aval_r_amnt>reagents[r_r])
-				. = 0
-			else
-				return -1
-	if (length(reagents) < LAZYLEN(avail_reagents.reagent_volumes))
-		return 0
-	return .
+	// Codex entry values.
+	var/hidden_from_codex // If TRUE, codex page will not be generated for this recipe.
+	var/lore_text         // IC description of recipe/food.
+	var/mechanics_text    // Mechanical description of recipe/food.
+	var/antag_text        // Any antagonist-relevant stuff relating to this recipe.
 
-/datum/recipe/proc/check_fruit(var/obj/container)
-	. = 1
-	if(fruit && fruit.len)
-		var/list/checklist = list()
-		 // You should trust Copy().
-		checklist = fruit.Copy()
-		for(var/obj/item/chems/food/snacks/grown/G in container)
-			if(!G.seed || !G.seed.kitchen_tag || isnull(checklist[G.seed.kitchen_tag]))
-				continue
-			checklist[G.seed.kitchen_tag]--
-		for(var/ktag in checklist)
-			if(!isnull(checklist[ktag]))
-				if(checklist[ktag] < 0)
-					. = 0
-				else if(checklist[ktag] > 0)
-					. = -1
-					break
-	return .
+/decl/recipe/Initialize()
+	. = ..()
+	global.microwave_recipes += src
+	for(var/thing in reagents)
+		global.microwave_accepts_reagents |= thing
+	for(var/thing in items)
+		global.microwave_accepts_items |= thing
+	global.microwave_maximum_item_storage = max(global.microwave_maximum_item_storage, length(items))
 
-/datum/recipe/proc/check_items(var/obj/container)
-	. = 1
-	if (items && items.len)
-		var/list/checklist = list()
-		checklist = items.Copy() // You should really trust Copy
-		for(var/obj/O in container.get_contained_external_atoms())
-			if(istype(O,/obj/item/chems/food/snacks/grown))
-				continue // Fruit is handled in check_fruit().
-			var/found = 0
-			for(var/i = 1; i < checklist.len+1; i++)
-				var/item_type = checklist[i]
-				if (istype(O,item_type))
-					checklist.Cut(i, i+1)
-					found = 1
-					break
-			if (!found)
-				. = 0
-		if (checklist.len)
-			. = -1
-	return .
+/decl/recipe/proc/check_reagents(var/datum/reagents/avail_reagents)
+	if(length(avail_reagents?.reagent_volumes) < length(reagents))
+		return FALSE
+	for(var/rtype in reagents)
+		if(REAGENT_VOLUME(avail_reagents, rtype) < reagents[rtype])
+			return FALSE 
+	return TRUE
+
+/decl/recipe/proc/check_fruit(var/obj/container)
+	if(!length(fruit))
+		return TRUE
+	var/container_contents = container?.get_contained_external_atoms()
+	if(length(container_contents) < length(fruit))
+		return FALSE
+	var/list/needed_fruits = fruit.Copy()
+	for(var/obj/item/chems/food/snacks/grown/G in container_contents)
+		var/ktag = G.seed?.kitchen_tag
+		if(needed_fruits[ktag] > 0)
+			needed_fruits[ktag]--
+	for(var/ktag in needed_fruits)
+		if(needed_fruits[ktag] > 0)
+			return FALSE
+	return TRUE
+
+/decl/recipe/proc/check_items(var/obj/container)
+	if(!length(items))
+		return TRUE
+	var/container_contents = container?.get_contained_external_atoms()
+	if(length(container_contents) < length(items))
+		return FALSE
+	var/list/needed_items = items.Copy()
+	for(var/itype in needed_items)
+		for(var/thing in container_contents)
+			if(istype(thing, itype))
+				container_contents -= thing
+				needed_items -= itype
+				break
+		if(!length(container_contents))
+			break
+	return !length(needed_items)
 
 //general version
-/datum/recipe/proc/make(var/obj/container)
+/decl/recipe/proc/make(var/obj/container)
 	var/obj/result_obj = new result(container)
 	var/list/contained_atoms = container.get_contained_external_atoms()
 	if(contained_atoms)
@@ -108,12 +93,12 @@
 	return result_obj
 
 // food-related
-/datum/recipe/proc/make_food(var/obj/container)
+/decl/recipe/proc/make_food(var/obj/container)
 	if(!result)
 		log_error("<span class='danger'>Recipe [type] is defined without a result, please bug this.</span>")
 		return
 	var/obj/result_obj = new result(container)
-	container.reagents.clear_reagents()
+	container.reagents?.clear_reagents()
 	//Checked here in case LAZYCLEARLIST nulls and no more physical ingredients are added
 	var/list/container_contents = container.get_contained_external_atoms()
 	if(!container_contents)
@@ -128,24 +113,3 @@
 			H.destroy_all()
 		qdel(O)
 	return result_obj
-
-/proc/select_recipe(var/list/datum/recipe/avaiable_recipes, var/obj/obj, var/exact)
-	var/list/datum/recipe/possible_recipes = new
-	var/target = exact ? 0 : 1
-	for (var/datum/recipe/recipe in avaiable_recipes)
-		if((recipe.check_reagents(obj.reagents) < target) || (recipe.check_items(obj) < target) || (recipe.check_fruit(obj) < target))
-			continue
-		possible_recipes |= recipe
-	if (possible_recipes.len==0)
-		return null
-	else if (possible_recipes.len==1)
-		return possible_recipes[1]
-	else //okay, let's select the most complicated recipe
-		var/highest_count = 0
-		. = possible_recipes[1]
-		for (var/datum/recipe/recipe in possible_recipes)
-			var/count = ((recipe.items)?(recipe.items.len):0) + ((recipe.reagents)?(recipe.reagents.len):0) + ((recipe.fruit)?(recipe.fruit.len):0)
-			if (count >= highest_count)
-				highest_count = count
-				. = recipe
-		return .

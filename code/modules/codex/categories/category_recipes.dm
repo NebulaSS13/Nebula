@@ -67,17 +67,19 @@
 		if(food.minimum_temperature > 0)
 			mechanics_text += "<br>The recipe will not succeed if the temperature is below [food.minimum_temperature]K."
 
-		entries_to_register += new /datum/codex_entry(            \
+		entries_to_register += new /datum/codex_entry(                     \
 		 _display_name =       "[lowertext(food.name)] ([category_name])", \
-		 _associated_strings = list(                              \
-		 	lowertext(food.name),                                 \
-			lowertext(product_name)),                             \
-		 _lore_text =          lore_text,                         \
-		 _mechanics_text =     mechanics_text,                    \
+		 _associated_strings = list(                                       \
+		 	lowertext(food.name),                                          \
+			lowertext(product_name)),                                      \
+		 _lore_text =          lore_text,                                  \
+		 _mechanics_text =     mechanics_text,                             \
 		)
 
-	for(var/datum/recipe/recipe in SScuisine.microwave_recipes)
-		if(recipe.hidden_from_codex || !recipe.result)
+	var/list/all_recipes = decls_repository.get_decls_of_subtype(/decl/recipe)
+	for(var/rtype in all_recipes)
+		var/decl/recipe/recipe = all_recipes[rtype]
+		if(!istype(recipe) || recipe.hidden_from_codex || !recipe.result)
 			continue
 
 		var/mechanics_text = ""
