@@ -96,6 +96,39 @@
 		else
 			set_light(0)
 
+/obj/effect/fluid/proc/can_burn()
+	if(reagents?.total_volume && reagents.total_volume < FLUID_DEEP)
+		for(var/rtype in reagents.reagent_volumes)
+			var/decl/material/mat = GET_DECL(rtype)
+			if(mat.fuel_value)
+				return TRUE
+	return FALSE
+
+/obj/effect/fluid/proc/burn()
+
+	if(!reagents || !loc)
+		return 0
+
+	var/update_air = FALSE
+	var/update_reagents = FALSE
+	var/datum/gas_mixture/air_contents = loc.return_air()
+	for(var/rtype in reagents?.reagent_volumes)
+		var/decl/material/mat = GET_DECL(rtype)
+		var/fuel_amount = reagents.reagent_volumes[rtype] * FIRE_LIQUD_MIN_BURNRATE
+		if(fuel_amount)
+			. += fuel_amount * mat.fuel_value
+			reagents.remove_reagent(rtype, fuel_amount, defer_update = TRUE)
+			update_reagents = TRUE
+			if(mat.burn_product && air_contents)
+				air_contents.adjust_gas(mat.burn_product, (fuel_amount / REAGENT_UNITS_PER_GAS_MOLE), FALSE)
+				update_air = TRUE
+
+	if(update_reagents)
+		if(reagents)
+			reagents.handle_update()
+		if(air_contents && update_air)
+			air_contents.update_values()
+
 // Map helper.
 /obj/effect/fluid_mapped
 	name = "mapped flooded area"

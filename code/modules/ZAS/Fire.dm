@@ -25,18 +25,23 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 /turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	if(fire_protection > world.time-300)
-		return 0
+		return FALSE
 	if(locate(/obj/fire) in src)
-		return 1
+		return TRUE
 	var/datum/gas_mixture/air_contents = return_air()
 	if(!air_contents || exposed_temperature < FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
-		return 0
+		return FALSE
 
-	var/igniting = 0
 	if(air_contents.check_combustibility())
-		igniting = 1
 		create_fire(exposed_temperature)
-	return igniting
+		return TRUE
+
+	var/obj/effect/fluid/fluid = return_fluid()
+	if(fluid?.can_burn())
+		create_fire(exposed_temperature)
+		return TRUE
+
+	return FALSE
 
 /zone/proc/process_fire()
 	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, fire_tiles.len)
@@ -48,14 +53,13 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	if(firelevel)
 		for(var/turf/T in fire_tiles)
 			if(T.fire)
-				T.fire.firelevel = firelevel
+				T.fire.firelevel = max(T.fire.firelevel, firelevel)
 			else
 				fire_tiles -= T
 	else
 		for(var/turf/simulated/T in fire_tiles)
 			if(istype(T.fire))
-				qdel(T.fire)
-		fire_tiles.Cut()
+				T.fire.starve()
 
 	if(!fire_tiles.len)
 		SSair.active_fire_zones.Remove(src)
@@ -96,6 +100,11 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	var/firelevel = 1 //Calculated by gas_mixture.calculate_firelevel()
 
+/obj/fire/proc/starve()
+	var/obj/effect/fluid/fluid = locate() in loc
+	if(!fluid?.can_burn())
+		qdel(src)
+
 /obj/fire/Process()
 	. = 1
 
@@ -106,8 +115,11 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		qdel(src)
 		return PROCESS_KILL
 
-	var/datum/gas_mixture/air_contents = my_tile.return_air()
+	var/obj/effect/fluid/fluid = locate() in my_tile
+	if(fluid)
+		firelevel += fluid.burn()
 
+	var/datum/gas_mixture/air_contents = my_tile.return_air()
 	if(firelevel > 6)
 		icon_state = "3"
 		set_light(7, 3, no_update = TRUE)
