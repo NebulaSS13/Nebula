@@ -103,7 +103,7 @@ var/global/world_topic_last = world.timeofday
 #define THROTTLE_MAX_BURST 15 SECONDS
 
 /world/Topic(T, addr, master, key)
-	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]"
+	WRITE_FILE(diary, "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]")
 
 	if (global.world_topic_last > world.timeofday)
 		global.world_topic_throttle = list() //probably passed midnight

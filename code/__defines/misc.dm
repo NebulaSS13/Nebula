@@ -220,18 +220,6 @@
 #define HABITABILITY_OKAY  2
 #define HABITABILITY_BAD  3
 
-#ifndef WINDOWS_HTTP_POST_DLL_LOCATION
-#define WINDOWS_HTTP_POST_DLL_LOCATION "lib/byhttp.dll"
-#endif
-
-#ifndef UNIX_HTTP_POST_DLL_LOCATION
-#define UNIX_HTTP_POST_DLL_LOCATION "lib/libbyhttp.so"
-#endif
-
-#ifndef HTTP_POST_DLL_LOCATION
-#define HTTP_POST_DLL_LOCATION (world.system_type == MS_WINDOWS ? WINDOWS_HTTP_POST_DLL_LOCATION : UNIX_HTTP_POST_DLL_LOCATION)
-#endif
-
 // Surgery candidate flags.
 #define SURGERY_NO_ROBOTIC        1
 #define SURGERY_NO_CRYSTAL        2
