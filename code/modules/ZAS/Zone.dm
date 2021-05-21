@@ -45,7 +45,6 @@ Class Procs:
 	var/invalid = 0
 	var/list/contents = list()
 	var/list/fire_tiles = list()
-	var/list/fuel_objs = list()
 	var/needs_update = 0
 	var/list/edges = list()
 	var/datum/gas_mixture/air = new
@@ -74,9 +73,6 @@ Class Procs:
 	if(T.fire)
 		fire_tiles.Add(T)
 		SSair.active_fire_zones |= src
-		var/obj/effect/fluid/fuel = T.return_fluid()
-		if(fuel?.get_fuel_amount()) 
-			fuel_objs += fuel
 	T.update_graphic(air.graphic)
 
 /zone/proc/remove(turf/simulated/T)
@@ -88,8 +84,6 @@ Class Procs:
 #endif
 	contents.Remove(T)
 	fire_tiles.Remove(T)
-	if(T.fire)
-		fuel_objs -= T.return_fluid()
 	T.zone = null
 	T.update_graphic(graphic_remove = air.graphic)
 	if(contents.len)

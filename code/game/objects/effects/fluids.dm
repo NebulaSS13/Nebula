@@ -51,28 +51,8 @@
 	REMOVE_ACTIVE_FLUID(src)
 	SSfluids.pending_flows -= src
 	. = ..()
-	if(istype(T))
-		if(T.zone)
-			T.zone.fuel_objs -= src
-		if(reagents?.total_volume > 0)
-			T.wet_floor()
-
-/obj/effect/fluid/proc/remove_fuel(var/amt)
-	for(var/rtype in reagents.reagent_volumes)
-		var/decl/material/liquid/fuel = GET_DECL(rtype)
-		if(fuel.fuel_value)
-			var/removing = min(amt, reagents.reagent_volumes[rtype])
-			reagents.remove_reagent(rtype, removing)
-			amt -= removing
-		if(amt <= 0)
-			break
-
-/obj/effect/fluid/proc/get_fuel_amount()
-	. = 0
-	for(var/rtype in reagents?.reagent_volumes)
-		var/decl/material/liquid/fuel = GET_DECL(rtype)
-		if(fuel.fuel_value)
-			. += REAGENT_VOLUME(reagents, rtype) * fuel.fuel_value
+	if(istype(T) && reagents?.total_volume > 0)
+		T.wet_floor()
 
 /obj/effect/fluid/on_update_icon()
 
