@@ -8,8 +8,6 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 //#define FIREDBG
 
-/turf/var/obj/fire/fire = null
-
 //Some legacy definitions so fires can be started.
 /atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return null
@@ -43,47 +41,18 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	return FALSE
 
-/zone/proc/process_fire()
-	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, fire_tiles.len)
-
-	var/firelevel = burn_gas.react(src, fire_tiles, force_burn = 1, no_check = 1)
-
-	air.merge(burn_gas)
-
-	if(firelevel)
-		for(var/turf/T in fire_tiles)
-			if(T.fire)
-				T.fire.firelevel = max(T.fire.firelevel, firelevel)
-			else
-				fire_tiles -= T
-	else
-		for(var/turf/simulated/T in fire_tiles)
-			if(istype(T.fire))
-				T.fire.starve()
-
-	if(!fire_tiles.len)
-		SSair.active_fire_zones.Remove(src)
-
 /turf/proc/create_fire(fl)
 	return 0
 
 /turf/simulated/create_fire(fl)
-
 	if(submerged())
-		return 1
-
+		return FALSE
+	var/obj/fire/fire = locate() in src
 	if(fire)
 		fire.firelevel = max(fl, fire.firelevel)
-		return 1
-
-	if(!zone)
-		return 1
-
-	fire = new(src, fl)
-	SSair.active_fire_zones |= zone
-
-	zone.fire_tiles |= src
-	return 0
+		return TRUE
+	new /obj/fire(src, fl)
+	return FALSE
 
 /obj/fire
 	//Icon for fire on turfs.
@@ -98,37 +67,42 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	light_color = "#ed9200"
 	layer = FIRE_LAYER
 
-	var/firelevel = 1 //Calculated by gas_mixture.calculate_firelevel()
+	var/firelevel = 1
 
-/obj/fire/proc/starve()
-	var/obj/effect/fluid/fluid = locate() in loc
-	if(!fluid?.can_burn())
-		qdel(src)
+/turf/simulated/proc/fire_can_spread_here()
+	if(locate(/obj/fire) in src)
+		return FALSE
+	var/datum/gas_mixture/acs = return_air()
+	if(acs?.check_combustibility())
+		return TRUE
+	var/obj/effect/fluid/fluid = return_fluid()
+	if(fluid?.can_burn())
+		return TRUE
+	return FALSE
 
 /obj/fire/Process()
-	. = 1
 
 	var/turf/simulated/my_tile = loc
 	if(!istype(my_tile) || !my_tile.zone || my_tile.submerged())
-		if(my_tile && my_tile.fire == src)
-			my_tile.fire = null
 		qdel(src)
 		return PROCESS_KILL
 
-	var/obj/effect/fluid/fluid = locate() in my_tile
-	if(fluid)
-		firelevel += fluid.burn()
-
+	var/gas_firelevel
+	var/fluid_firelevel
 	var/datum/gas_mixture/air_contents = my_tile.return_air()
-	if(firelevel > 6)
-		icon_state = "3"
-		set_light(7, 3, no_update = TRUE)
-	else if(firelevel > 2.5)
-		icon_state = "2"
-		set_light(5, 2, no_update = TRUE)
-	else
-		icon_state = "1"
-		set_light(3, 1, no_update = TRUE)
+	var/datum/gas_mixture/burn_gas = air_contents?.remove_ratio(vsc.fire_consuption_rate, 1)
+	gas_firelevel = burn_gas?.react(src, TRUE, TRUE)
+	if(burn_gas)
+		air_contents.merge(burn_gas)
+
+	var/obj/effect/fluid/fluid = my_tile.return_fluid()
+	fluid_firelevel = fluid?.burn()
+	firelevel = max(gas_firelevel, fluid_firelevel)
+
+	if(firelevel <= 0)
+		qdel(src)
+		return
+	update_icon()
 
 	for(var/mob/living/L in loc)
 		L.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure())  //Burn the mobs!
@@ -143,12 +117,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 		if(istype(enemy_tile))
 			if(my_tile.open_directions & direction) //Grab all valid bordering tiles
-				if(!enemy_tile.zone || enemy_tile.fire)
-					continue
-
-				//if(!enemy_tile.zone.fire_tiles.len) TODO - optimize
-				var/datum/gas_mixture/acs = enemy_tile.return_air()
-				if(!acs || !acs.check_combustibility(enemy_tile.return_fluid()))
+				if(!enemy_tile.fire_can_spread_here())
 					continue
 
 				//If extinguisher mist passed over the turf it's trying to spread to, don't spread and
@@ -164,8 +133,22 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 			else
 				enemy_tile.adjacent_fire_act(loc, air_contents, air_contents.temperature, air_contents.volume)
 
+	if(firelevel > 6)
+		set_light(7, 3, no_update = TRUE)
+	else if(firelevel > 2.5)
+		set_light(5, 2, no_update = TRUE)
+	else
+		set_light(3, 1, no_update = TRUE)
 	animate(src, color = fire_color(air_contents.temperature), 5)
 	set_light(l_color = color)
+
+/obj/fire/on_update_icon()
+	if(firelevel > 6)
+		icon_state = "3"
+	else if(firelevel > 2.5)
+		icon_state = "2"
+	else
+		icon_state = "1"
 
 /obj/fire/Initialize(mapload, fl)
 	. = ..()
@@ -173,25 +156,23 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	if(!istype(loc, /turf))
 		return INITIALIZE_HINT_QDEL
 
+
+	START_PROCESSING(SSfires, src)
+
 	set_dir(pick(global.cardinal))
 
 	var/datum/gas_mixture/air_contents = loc.return_air()
 	color = fire_color(air_contents.temperature)
 	set_light(3, 0.5, color)
-
 	firelevel = fl
-	SSair.active_hotspots.Add(src)
 
 /obj/fire/proc/fire_color(var/env_temperature)
 	var/temperature = max(4000*sqrt(firelevel/vsc.fire_firelevel_multiplier), env_temperature)
 	return heat2color(temperature)
 
 /obj/fire/Destroy()
-	var/turf/T = loc
-	if (istype(T))
-		set_light(0)
-		T.fire = null
-	SSair.active_hotspots.Remove(src)
+	STOP_PROCESSING(SSfires, src)
+	set_light(0)
 	. = ..()
 
 /turf/simulated/var/fire_protection = 0 //Protects newly extinguished tiles from being overrun again.

@@ -116,7 +116,7 @@
 		var/decl/material/mat = GET_DECL(rtype)
 		var/fuel_amount = reagents.reagent_volumes[rtype] * FIRE_LIQUD_MIN_BURNRATE
 		if(fuel_amount)
-			. += fuel_amount * mat.fuel_value
+			. += fuel_amount * mat.fuel_value * FIRE_LIQUID_BURNRATE_MULT
 			reagents.remove_reagent(rtype, fuel_amount, defer_update = TRUE)
 			update_reagents = TRUE
 			if(mat.burn_product && air_contents)

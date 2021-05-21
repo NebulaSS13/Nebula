@@ -9,7 +9,6 @@ Class Vars:
 
 	tiles_to_update - Tiles scheduled to update next tick.
 	zones_to_update - Zones which have had their air changed and need air archival.
-	active_hotspots - All processing fire objects.
 
 	active_zones - The number of zones which were archived last tick. Used in debug verbs.
 	next_id - The next UID to be applied to a zone. Mostly useful for debugging purposes as zones do not need UIDs to function.
@@ -74,14 +73,10 @@ SUBSYSTEM_DEF(air)
 	//Geometry updates lists
 	var/list/tiles_to_update = list()
 	var/list/zones_to_update = list()
-	var/list/active_fire_zones = list()
-	var/list/active_hotspots = list()
 	var/list/active_edges = list()
 
 	var/tmp/list/deferred = list()
 	var/tmp/list/processing_edges
-	var/tmp/list/processing_fires
-	var/tmp/list/processing_hotspots
 	var/tmp/list/processing_zones
 
 	var/active_zones = 0
@@ -106,8 +101,6 @@ SUBSYSTEM_DEF(air)
 	edges.Cut()
 	tiles_to_update.Cut()
 	zones_to_update.Cut()
-	active_fire_zones.Cut()
-	active_hotspots.Cut()
 	active_edges.Cut()
 
 	// Re-run setup without air settling.
@@ -121,8 +114,6 @@ SUBSYSTEM_DEF(air)
 	var/list/out = list(
 		"TtU:[tiles_to_update.len] ",
 		"ZtU:[zones_to_update.len] ",
-		"AFZ:[active_fire_zones.len] ",
-		"AH:[active_hotspots.len] ",
 		"AE:[active_edges.len]"
 	)
 	..(out.Join())
@@ -161,14 +152,10 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 /datum/controller/subsystem/air/fire(resumed = FALSE, no_mc_tick = FALSE)
 	if (!resumed)
 		processing_edges = active_edges.Copy()
-		processing_fires = active_fire_zones.Copy()
-		processing_hotspots = active_hotspots.Copy()
 
 	var/list/curr_tiles = tiles_to_update
 	var/list/curr_defer = deferred
 	var/list/curr_edges = processing_edges
-	var/list/curr_fire = processing_fires
-	var/list/curr_hotspot = processing_hotspots
 	var/list/curr_zones = zones_to_update
 
 	while (curr_tiles.len)
@@ -236,28 +223,6 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			continue
 
 		edge.tick()
-
-		if (no_mc_tick)
-			CHECK_TICK
-		else if (MC_TICK_CHECK)
-			return
-
-	while (curr_fire.len)
-		var/zone/Z = curr_fire[curr_fire.len]
-		curr_fire.len--
-
-		Z.process_fire()
-
-		if (no_mc_tick)
-			CHECK_TICK
-		else if (MC_TICK_CHECK)
-			return
-
-	while (curr_hotspot.len)
-		var/obj/fire/F = curr_hotspot[curr_hotspot.len]
-		curr_hotspot.len--
-
-		F.Process()
 
 		if (no_mc_tick)
 			CHECK_TICK
