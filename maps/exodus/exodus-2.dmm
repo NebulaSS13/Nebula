@@ -14310,14 +14310,17 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/ai_monitored/storage/eva)
 "aBR" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/structure/bed/chair{
+	dir = 4
+	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
-/area/exodus/chapel/main)
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/secondary/exit)
 "aBS" = (
 /obj/machinery/power/terminal,
 /obj/machinery/light/small{
@@ -14695,9 +14698,12 @@
 /turf/simulated/floor/plating,
 /area/exodus/bridge)
 "aCI" = (
-/obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/plating,
-/area/exodus/chapel/main)
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/secondary/exit)
 "aCJ" = (
 /obj/machinery/computer/modular/preset/cardslot/command,
 /turf/simulated/floor/tiled/dark,
@@ -16159,6 +16165,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aFv" = (
@@ -16367,7 +16376,7 @@
 /obj/machinery/door/airlock/glass{
 	name = "Arrivals"
 	},
-/turf/simulated/floor/tiled/steel_grid,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/hallway/secondary/entry/port)
 "aFO" = (
 /obj/machinery/lapvend,
@@ -16382,14 +16391,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/white{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/blue,
 /obj/machinery/door/airlock/glass{
 	name = "Arrivals"
 	},
-/turf/simulated/floor/tiled/steel_grid,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/hallway/secondary/entry/port)
 "aFQ" = (
 /obj/structure/cable{
@@ -17072,6 +17077,15 @@
 	name = "interior access button";
 	pixel_x = 26;
 	pixel_y = -26
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
@@ -18787,15 +18801,10 @@
 /obj/machinery/alarm{
 	pixel_y = 25
 	},
-/obj/effect/floor_decal/corner/red{
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/white{
-	dir = 4
-	},
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aKv" = (
@@ -19378,7 +19387,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled/steel_grid,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/hallway/primary/port)
 "aLD" = (
 /obj/structure/cable{
@@ -20591,7 +20600,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/hallway/primary/port)
 "aNY" = (
 /obj/machinery/firealarm{
@@ -21895,9 +21904,7 @@
 /obj/structure/sign/warning/airlock{
 	pixel_x = 32
 	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4
-	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aQp" = (
@@ -22898,17 +22905,18 @@
 /area/exodus/chapel/main)
 "aSw" = (
 /obj/machinery/vending/cola,
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aSx" = (
 /obj/machinery/lapvend,
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aSy" = (
-/obj/structure/closet/emcloset,
-/obj/effect/floor_decal/industrial/warning{
-	dir = 5
-	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/table/standard,
+/obj/machinery/recharger,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aSz" = (
@@ -23262,10 +23270,13 @@
 	id_tag = "escape_dock";
 	pixel_y = -25
 	},
-/obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
 	},
+/obj/effect/floor_decal/corner/white{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/red,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aTh" = (
@@ -23734,10 +23745,8 @@
 /turf/simulated/floor/plating,
 /area/exodus/medical/medbay4)
 "aUh" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1
-	},
 /obj/machinery/computer/modular/preset/civilian,
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aUi" = (
@@ -24058,12 +24067,7 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -24
 	},
-/obj/effect/floor_decal/corner/red{
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/white/diagonal{
-	dir = 4
-	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aUU" = (
@@ -24077,12 +24081,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/exodus/crew_quarters/bar)
 "aUV" = (
-/obj/effect/floor_decal/corner/red{
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/white{
-	dir = 4
-	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aUW" = (
@@ -24414,7 +24413,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/hallway/primary/port)
 "aVJ" = (
 /obj/structure/disposalpipe/segment,
@@ -24783,41 +24782,15 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/exodus/chapel/main)
-"aWu" = (
-/obj/effect/floor_decal/corner/red{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/steel_grid,
-/area/exodus/hallway/secondary/exit)
 "aWv" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1"
-	},
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
-/obj/effect/floor_decal/corner/red{
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/white/diagonal{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/steel_grid,
-/area/exodus/hallway/secondary/exit)
-"aWw" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
+/obj/effect/floor_decal/industrial/warning{
+	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aWx" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
@@ -25523,35 +25496,31 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/chapel/main)
 "aXZ" = (
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/plating,
 /area/exodus/chapel/main)
 "aYa" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/cable{
-	d1 = 4;
+	d1 = 2;
 	d2 = 8;
-	icon_state = "4-8"
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aYb" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/white{
+/obj/effect/floor_decal/industrial/warning{
 	dir = 8
-	},
-/obj/effect/floor_decal/corner/red{
-	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
@@ -25561,15 +25530,6 @@
 /obj/structure/cable/cyan,
 /turf/simulated/floor/plating,
 /area/exodus/turret_protected/ai_upload)
-"aYd" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/turf/simulated/floor/tiled/steel_grid,
-/area/exodus/hallway/secondary/exit)
 "aYe" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{
@@ -26410,18 +26370,6 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/exodus/library)
-"aZJ" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/white{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/red{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/steel_grid,
-/area/exodus/hallway/secondary/exit)
 "aZK" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
@@ -26433,12 +26381,9 @@
 /turf/simulated/floor/wood/walnut,
 /area/exodus/crew_quarters/bar)
 "aZL" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/structure/bed/chair{
+	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "aZM" = (
@@ -26751,26 +26696,6 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/storage/tools)
-"bat" = (
-/obj/machinery/camera/network/exodus{
-	c_tag = "Departures West";
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/white{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/red{
-	dir = 1
-	},
-/obj/item/radio/intercom{
-	dir = 4;
-	pixel_x = -22
-	},
-/obj/structure/bed/chair{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/steel_grid,
-/area/exodus/hallway/secondary/exit)
 "bau" = (
 /obj/machinery/button/blast_door{
 	id_tag = "Disposal Exit";
@@ -27283,9 +27208,18 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/chapel/main)
 "bbq" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled/dark,
-/area/exodus/chapel/main)
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1"
+	},
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24
+	},
+/obj/structure/flora/pottedplant/minitree,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/secondary/exit)
 "bbr" = (
 /obj/effect/floor_decal/corner/brown/diagonal{
 	dir = 8
@@ -27327,9 +27261,8 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5
 	},
-/obj/structure/bed/chair{
-	dir = 8
-	},
+/obj/item/radio/beacon,
+/obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "bbw" = (
@@ -28148,13 +28081,13 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/chapel/main)
 "bcW" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
 	},
 /turf/simulated/floor/tiled/dark,
 /area/exodus/chapel/main)
@@ -28181,46 +28114,26 @@
 /turf/simulated/floor/grass,
 /area/exodus/hydroponics/garden)
 "bcZ" = (
-/obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/glass{
-	name = "Chapel"
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/exodus/chapel/main)
-"bda" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/exodus/chapel/main)
-"bdb" = (
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/effect/floor_decal/corner/white{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/red{
-	dir = 1
-	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
-"bdc" = (
-/obj/machinery/hologram/holopad,
-/turf/simulated/floor/tiled/steel_grid,
-/area/exodus/hallway/secondary/exit)
+"bda" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/glass{
+	name = "Chapel"
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/exodus/chapel/main)
 "bdd" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -28290,9 +28203,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/structure/bed/chair{
-	dir = 8
-	},
+/obj/machinery/hologram/holopad,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "bdi" = (
@@ -28757,20 +28668,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/exodus/chapel/main)
 "bel" = (
-/obj/structure/cable/green,
-/obj/effect/floor_decal/corner/white{
+/obj/effect/floor_decal/industrial/warning{
 	dir = 8
-	},
-/obj/effect/floor_decal/corner/red{
-	dir = 1
-	},
-/obj/machinery/power/apc/super/critical{
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
-	},
-/obj/structure/bed/chair{
-	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
@@ -28787,9 +28686,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
 	},
-/obj/structure/bed/chair{
-	dir = 8
-	},
+/obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "bep" = (
@@ -29402,14 +29299,8 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/effect/floor_decal/corner/white{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/red{
-	dir = 1
-	},
-/obj/structure/bed/chair{
-	dir = 4
+/obj/effect/floor_decal/industrial/warning{
+	dir = 10
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
@@ -30233,8 +30124,12 @@
 /obj/structure/sign/warning/airlock{
 	pixel_x = 32
 	},
+/obj/effect/floor_decal/corner/white{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/red,
 /obj/effect/floor_decal/industrial/warning{
-	dir = 6
+	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
@@ -30247,6 +30142,12 @@
 "bhp" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 8
+	},
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
@@ -31072,16 +30973,21 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/central_two)
 "biP" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+	dir = 9
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
@@ -31096,14 +31002,6 @@
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
-	},
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -42041,7 +41939,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/steel_grid,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/hallway/primary/port)
 "bDy" = (
 /obj/machinery/status_display,
@@ -65637,8 +65535,10 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/engi_shuttle)
 "cBH" = (
-/obj/machinery/oxygen_pump,
-/turf/simulated/wall/prepainted,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "cBI" = (
 /obj/machinery/oxygen_pump,
@@ -68247,14 +68147,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/red{
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/white{
-	dir = 8
-	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
+"dMz" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/exodus/chapel/main)
 "dNC" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/floor_decal/corner/lime{
@@ -68643,6 +68541,15 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/arrival/station)
+"ihN" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/secondary/exit)
 "iok" = (
 /obj/machinery/vending/robotics{
 	dir = 1
@@ -68749,6 +68656,15 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/quartermaster/miningdock)
+"jva" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/secondary/exit)
 "jFq" = (
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
@@ -68793,6 +68709,16 @@
 /mob/living/simple_animal/hostile/retaliate/parrot/Poly,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/crew_quarters/heads/chief)
+"kxa" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/secondary/exit)
 "kSt" = (
 /obj/machinery/vending/coffee{
 	dir = 1
@@ -68831,6 +68757,21 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/foyer)
+"lAZ" = (
+/obj/machinery/camera/network/exodus{
+	c_tag = "Departures West";
+	dir = 4
+	},
+/obj/item/radio/intercom{
+	dir = 4;
+	pixel_x = -22
+	},
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/secondary/exit)
 "lDi" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -68945,7 +68886,9 @@
 /turf/simulated/floor/plating,
 /area/ship/exodus_pod_research)
 "mYp" = (
-/obj/item/radio/beacon,
+/obj/structure/bed/chair{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/secondary/exit)
 "ngU" = (
@@ -69104,6 +69047,10 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/central_two)
+"poU" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/dark,
+/area/exodus/chapel/main)
 "pqS" = (
 /obj/structure/bed/chair{
 	dir = 4
@@ -69406,6 +69353,15 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/exodus/crew_quarters/kitchen)
+"sGZ" = (
+/obj/machinery/status_display{
+	pixel_x = 32
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/secondary/exit)
 "sNl" = (
 /obj/structure/closet/wardrobe/xenos,
 /obj/effect/floor_decal/corner/white{
@@ -69610,6 +69566,10 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/central_one)
+"vfH" = (
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/secondary/exit)
 "vme" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -69816,6 +69776,21 @@
 /obj/effect/landmark/latejoin,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/arrival/station)
+"xVT" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/secondary/exit)
 "xZr" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/floor_decal/corner/lime{
@@ -69823,6 +69798,11 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/central_three)
+"yce" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/secondary/exit)
 "yeJ" = (
 /obj/machinery/light,
 /obj/machinery/shieldwallgen,
@@ -69831,6 +69811,16 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/teleporter)
+"yjb" = (
+/obj/structure/cable/green,
+/obj/machinery/power/apc/super/critical{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/secondary/exit)
 
 (1,1,1) = {"
 cLU
@@ -117242,7 +117232,7 @@ aUR
 aHA
 aXX
 aHA
-aHA
+poU
 bcW
 aHA
 aEe
@@ -117496,12 +117486,12 @@ aQb
 aGG
 aSv
 aGG
-aHA
+aGG
 aXZ
-aHA
-bbq
+dMz
+aGG
 bda
-aHA
+aGG
 aZz
 dxK
 vme
@@ -117753,12 +117743,12 @@ aOJ
 aRA
 aSl
 aGG
-aGG
+bbq
 aBR
 aCI
-aGG
+lAZ
 bcZ
-aGG
+yjb
 aRZ
 bdW
 biN
@@ -118012,12 +118002,12 @@ aGG
 aGG
 aWv
 aYb
-aZJ
-bat
-bdb
+bel
+bel
+bel
 bel
 bfA
-aWu
+ihN
 dMn
 bfc
 bmc
@@ -118267,14 +118257,14 @@ cLU
 aRZ
 aSw
 aUT
-aWu
+aWx
 aYa
-aUY
-aUY
-aUY
-aUY
-aUY
-aUY
+jva
+jva
+jva
+jva
+kxa
+xVT
 biP
 bkh
 bmc
@@ -118525,13 +118515,13 @@ aRZ
 aSx
 aUV
 aWx
-aYd
 aZL
 aZL
 aZL
 aZL
 aZL
-aZL
+vfH
+ihN
 biR
 bkp
 bns
@@ -118781,14 +118771,14 @@ cLU
 aRZ
 aRZ
 aKu
-aWw
-aUY
+aWx
 mYp
-aUY
-bdc
-aUY
-aUY
-aUY
+mYp
+mYp
+mYp
+mYp
+vfH
+ihN
 biQ
 aSY
 aRZ
@@ -119037,14 +119027,14 @@ cLU
 cLU
 ayk
 aUh
-aUY
-aUY
+aUV
+aWx
 aYf
 aZN
 aZN
 aZN
 aZN
-aZN
+yce
 bhp
 aZN
 aTg
@@ -119295,17 +119285,17 @@ cLU
 ayk
 aSy
 aQo
-aWA
+cBH
 aFu
 aSF
 bbu
 aUY
 ben
-aSF
+sGZ
 aHe
 aWA
 bhn
-cBH
+aRZ
 bnM
 bnM
 bjl
