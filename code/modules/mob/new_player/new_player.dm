@@ -293,7 +293,7 @@
 	character = SSjobs.equip_rank(character, job.title, 1)					//equips the human
 	SScustomitems.equip_custom_items(character)
 
-	if(job.do_spawn_special(character, src)) //This replaces the AI spawn logic with a proc stub. Refer to silicon.dm for the spawn logic.
+	if(job.do_spawn_special(character, src, TRUE)) //This replaces the AI spawn logic with a proc stub. Refer to silicon.dm for the spawn logic.
 		qdel(src)
 		return
 
