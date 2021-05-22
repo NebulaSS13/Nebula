@@ -274,12 +274,10 @@ Helpers
 
 /datum/controller/subsystem/ticker/proc/create_characters()
 	for(var/mob/new_player/player in global.player_list)
-		if(player && player.ready && player.mind)
+		if(player.ready && player.mind)
 			if(!player.mind.assigned_role)
 				continue
 			var/mob/living/newplayer = player.create_character()
-			if(isnull(newplayer)) //This means create_character has failed, so, pass them over and continue.
-				continue
 			if(newplayer.mind.assigned_job.do_spawn_special(newplayer, player, FALSE))
 				qdel(player)
 				continue
