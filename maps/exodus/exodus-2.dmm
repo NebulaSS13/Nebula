@@ -19608,6 +19608,7 @@
 /obj/effect/floor_decal/corner/purple{
 	dir = 5
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research)
 "aMf" = (
@@ -30791,10 +30792,6 @@
 /turf/simulated/floor/wood/walnut,
 /area/exodus/crew_quarters/captain)
 "biH" = (
-/obj/structure/disposalpipe/segment{
-	dir = 8;
-	icon_state = "pipe-c"
-	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -30804,6 +30801,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/effect/floor_decal/corner/lime{
 	dir = 9
+	},
+/obj/structure/disposalpipe/junction{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/starboard)
@@ -30825,6 +30825,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/starboard)
@@ -34067,6 +34070,7 @@
 	name = "Research Division Access"
 	},
 /obj/machinery/door/firedoor,
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research)
 "boQ" = (
@@ -35151,6 +35155,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research)
 "bqP" = (
@@ -35986,6 +35991,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research)
 "bsv" = (
@@ -36963,6 +36969,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research)
 "bur" = (
@@ -37782,6 +37789,7 @@
 	name = "Research Division Blast Doors";
 	opacity = 0
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/research)
 "bvF" = (
@@ -39531,6 +39539,7 @@
 "bzh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research)
 "bzi" = (
@@ -40512,7 +40521,7 @@
 	dir = 8
 	},
 /obj/structure/disposalpipe/segment{
-	dir = 4;
+	dir = 1;
 	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled/white,
@@ -41186,7 +41195,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research)
 "bCj" = (
@@ -42212,7 +42220,6 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research)
 "bEd" = (
@@ -42955,8 +42962,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/obj/structure/disposalpipe/junction/yjunction{
-	dir = 8
+/obj/structure/disposalpipe/segment{
+	dir = 2;
+	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled/white,
 /area/exodus/research)
@@ -67974,6 +67982,18 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/central_two)
+"djd" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 2;
+	icon_state = "pipe-c"
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/primary/starboard)
 "dkO" = (
 /obj/machinery/computer/shuttle_control/explore/mining,
 /turf/simulated/floor/tiled/steel_grid,
@@ -68188,6 +68208,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/quartermaster/miningdock)
+"fpV" = (
+/obj/effect/floor_decal/corner/lime{
+	dir = 10
+	},
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/primary/starboard)
 "fyf" = (
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
@@ -68396,6 +68423,17 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/hallway/primary/port)
+"hPt" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/primary/starboard)
 "hWZ" = (
 /obj/structure/bed/chair,
 /obj/machinery/light{
@@ -69337,6 +69375,11 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/exodus_pod_mining)
+"tAY" = (
+/obj/effect/floor_decal/corner/purple/full,
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/tiled/steel_grid,
+/area/exodus/hallway/primary/starboard)
 "tCN" = (
 /obj/machinery/computer/ship/sensors{
 	dir = 4
@@ -112282,7 +112325,7 @@ bcQ
 bdV
 bdV
 bdV
-bii
+bKy
 rkN
 cte
 aFz
@@ -112796,7 +112839,7 @@ bdu
 aZz
 aZz
 bdJ
-bid
+hPt
 rkN
 blh
 aFz
@@ -113053,7 +113096,7 @@ bdd
 bey
 aZz
 bgV
-bid
+hPt
 rkN
 blg
 aFb
@@ -113310,7 +113353,7 @@ bde
 bbs
 aZz
 bgH
-bid
+hPt
 bkf
 blO
 brh
@@ -113567,7 +113610,7 @@ bdd
 beA
 aZz
 dxK
-bid
+hPt
 bjD
 blO
 bne
@@ -113824,7 +113867,7 @@ bdd
 aYt
 aZz
 bha
-bid
+hPt
 rkN
 blO
 bng
@@ -114081,7 +114124,7 @@ bdd
 bfy
 aZz
 dxK
-bid
+hPt
 bjv
 blO
 bnh
@@ -114338,7 +114381,7 @@ bdd
 bbE
 aZz
 bBV
-bid
+hPt
 rkN
 blO
 brh
@@ -114595,7 +114638,7 @@ bdd
 beD
 aZz
 dxK
-bid
+hPt
 rkN
 brU
 aGc
@@ -114852,7 +114895,7 @@ bdf
 bcm
 aZz
 bhi
-bid
+hPt
 rkN
 brU
 aGe
@@ -115109,7 +115152,7 @@ bdg
 hLX
 aZz
 bhe
-bid
+hPt
 rkN
 brU
 aGc
@@ -115366,7 +115409,7 @@ bcS
 aGG
 aZz
 bfK
-bid
+hPt
 rkN
 blk
 blO
@@ -115623,7 +115666,7 @@ bcR
 aHA
 aEe
 bhj
-bid
+hPt
 rkN
 brU
 brU
@@ -115880,10 +115923,10 @@ bcU
 bee
 aEe
 dxK
-bid
-rkN
-brU
-brU
+djd
+fpV
+tAY
+tAY
 boP
 bqO
 bsu
