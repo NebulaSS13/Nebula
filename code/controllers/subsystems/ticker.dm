@@ -278,11 +278,8 @@ Helpers
 			if(!player.mind.assigned_role)
 				continue
 			var/mob/living/newplayer = player.create_character()
-			if(newplayer.mind.assigned_job.do_spawn_special(newplayer, player, FALSE))
-				qdel(player)
-				continue
-			else
-				qdel(player)
+			newplayer.mind.assigned_job.do_spawn_special(newplayer, player, FALSE)
+			qdel(player)
 		else if(player && !player.ready)
 			player.show_lobby_menu()
 
