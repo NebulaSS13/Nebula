@@ -11,7 +11,12 @@
 
 
 /decl/ai_holo/proc/may_be_used_by_ai(var/mob/living/silicon/ai/AI)
-	return AI.is_traitor()
+	if(requires_malf)
+		if(AI.malfunctioning)
+			return TRUE
+		else	
+			return FALSE
+	return TRUE
 
 /decl/ai_holo/New()
 	..()
