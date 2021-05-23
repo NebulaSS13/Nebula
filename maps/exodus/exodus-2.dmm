@@ -36941,6 +36941,10 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
+/obj/machinery/light_switch{
+	pixel_x = -5;
+	pixel_y = -22
+	},
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/lab)
 "buv" = (
