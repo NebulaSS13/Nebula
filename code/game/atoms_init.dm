@@ -59,3 +59,29 @@
 	if(opacity)
 		updateVisibility(src)
 	. = ..()
+
+// Movable level stuff
+
+/atom/movable/Destroy()
+	. = ..()
+#ifdef DISABLE_DEBUG_CRASH
+	// meh do nothing. we know what we're doing. pro engineers.
+#else
+	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
+		PRINT_STACK_TRACE("Was deleted before initialization")
+#endif
+
+	for(var/A in src)
+		qdel(A)
+
+	forceMove(null)
+
+	if(LAZYLEN(movement_handlers) && !ispath(movement_handlers[1]))
+		QDEL_NULL_LIST(movement_handlers)
+
+	if (bound_overlay)
+		QDEL_NULL(bound_overlay)
+
+	if(virtual_mob && !ispath(virtual_mob))
+		qdel(virtual_mob)
+		virtual_mob = null
