@@ -531,6 +531,7 @@
 #include "code\datums\wires\wires.dm"
 #include "code\game\atoms.dm"
 #include "code\game\atoms_fluids.dm"
+#include "code\game\atoms_init.dm"
 #include "code\game\atoms_movable.dm"
 #include "code\game\atoms_movable_grabs.dm"
 #include "code\game\atoms_temperature.dm"
