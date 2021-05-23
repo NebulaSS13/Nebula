@@ -20,5 +20,3 @@ var/global/list/alphabet_no_vowels = list("b","c","d","f","g","h","j","k","l","m
 var/global/list/full_alphabet =      list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
 
 var/global/list/meteor_list = list()
-
-var/global/list/is_currently_exploding = list()

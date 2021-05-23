@@ -19,6 +19,8 @@
 	var/icon_rotation = 0 // And one for rotation as well.
 	var/transform_animate_time = 0 // If greater than zero, transform-based adjustments (scaling, rotating) will visually occur over this time.
 
+	var/tmp/currently_exploding = FALSE
+
 // This is called by the maploader prior to Initialize to perform static modifications to vars set on the map. Intended use case: adjust tag vars on duplicate templates.
 /atom/proc/modify_mapped_vars(map_hash)
 	SHOULD_CALL_PARENT(TRUE)
@@ -275,14 +277,14 @@ its easier to just keep the beam vertical.
 
 /atom/proc/explosion_act(var/severity)
 	SHOULD_CALL_PARENT(TRUE)
-	if(!global.is_currently_exploding[src])
-		global.is_currently_exploding[src] = TRUE
+	if(!currently_exploding)
+		currently_exploding = TRUE
 		. = (severity <= 3)
 		if(.)
 			for(var/atom/movable/AM in contents)
 				AM.explosion_act(severity++)
 			try_detonate_reagents(severity)
-		global.is_currently_exploding -= src
+		currently_exploding = FALSE
 
 /atom/proc/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
 	return NO_EMAG_ACT
