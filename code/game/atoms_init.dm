@@ -52,15 +52,29 @@
 	return
 
 /atom/Destroy()
-	overlays.Cut()
-	underlays.Cut()
-	QDEL_NULL(reagents)
-	QDEL_NULL(light)
+	if (reagents)
+		QDEL_NULL(reagents)
+
+	LAZYCLEARLIST(our_overlays)
+	LAZYCLEARLIST(priority_overlays)
+
+	if (light)
+		QDEL_NULL(light)
+
 	if(opacity)
 		updateVisibility(src)
+
 	. = ..()
 
 // Movable level stuff
+
+/atom/movable/Initialize(ml, ...)
+	. = ..()
+	if (!follow_repository.excluded_subtypes[type] && follow_repository.followed_subtypes_tcache[type])
+		follow_repository.add_subject(src)
+
+	if (virtual_mob && ispath(initial(virtual_mob)))
+		virtual_mob = new virtual_mob(get_turf(src), src)
 
 /atom/movable/Destroy()
 	. = ..()

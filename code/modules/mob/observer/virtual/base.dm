@@ -54,10 +54,8 @@ var/global/list/all_virtual_listeners = list()
 /atom/movable
 	var/mob/observer/virtual/virtual_mob
 
-/atom/movable/Initialize()
-	. = ..()
-	if(shall_have_virtual_mob())
-		virtual_mob = new virtual_mob(get_turf(src), src)
+// There is a hook in the common /atom/movable/Initialize() fn.
+// The below function was also inlined in that function, as nowhere else used it.
 
-/atom/movable/proc/shall_have_virtual_mob()
-	return ispath(initial(virtual_mob))
+// /atom/movable/proc/shall_have_virtual_mob()
+// 	return ispath(initial(virtual_mob))
