@@ -65,7 +65,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 		create_reagents(GAS_EXTRACTOR_REAGENTS_TANK)
 	verbs |= /obj/machinery/atmospherics/unary/material/extractor/verb/FlushReagents
 	verbs |= /obj/machinery/atmospherics/unary/material/extractor/verb/FlushGas
-	// QUEUE_TEMPERATURE_ATOMS(src)
+	QUEUE_TEMPERATURE_ATOMS(src)
 
 /obj/machinery/atmospherics/unary/material/extractor/Bumped(var/obj/O)
 	//Ignore if we can't function
@@ -141,23 +141,24 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 		return TRUE
 	return ..()
 
-// /obj/machinery/atmospherics/unary/material/extractor/power_change()
-// 	. = ..()
-// 	QUEUE_TEMPERATURE_ATOMS(src)
+/obj/machinery/atmospherics/unary/material/extractor/power_change()
+	. = ..()
+	QUEUE_TEMPERATURE_ATOMS(src)
 
 /obj/machinery/atmospherics/unary/material/extractor/on_update_icon()
-	. = ..()
 	cut_overlays()
 	
+	var/initial_state = initial(icon_state)
+
 	if(!use_power || inoperable())
-		icon_state = "[icon_state]-off"
-	else
-		icon_state = initial(icon_state)
-		
+		icon_state = "[initial_state]-off"
+	else 
+		icon_state = initial_state
+
 	if(panel_open)
-		add_overlay("[icon_state]-open")
+		add_overlay("[initial_state]-open")
 	if(output_container)
-		add_overlay("[icon_state]-bucket")
+		add_overlay("[initial_state]-bucket")
 
 /obj/machinery/atmospherics/unary/material/extractor/Process()
 	..()
@@ -176,6 +177,13 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 //For some reasons that's not in the unary base class...
 /obj/machinery/atmospherics/unary/material/extractor/return_air()
 	return air_contents
+
+/obj/machinery/atmospherics/unary/material/extractor/proc/get_output_loc()
+	return get_step(loc, get_output_dir())
+/obj/machinery/atmospherics/unary/material/extractor/proc/get_output_dir()
+	return turn(dir, 90)
+/obj/machinery/atmospherics/unary/material/extractor/proc/get_input_dir()
+	return turn(dir, -90)
 
 /obj/machinery/atmospherics/unary/material/extractor/get_contained_external_atoms()
 	return output_container? (..() - output_container) : ..() //This prevents the machine from eating the bucket....
@@ -288,7 +296,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 		return
 	var/expected_sheets = round(available_volume / REAGENT_UNITS_PER_MATERIAL_SHEET)
 	var/removed_volume = round(expected_sheets * REAGENT_UNITS_PER_MATERIAL_SHEET, GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
-	M.place_sheet(get_output_loc(), expected_sheets)
+	M.create_object(get_output_loc(), expected_sheets)
 	reagents.remove_reagent(M.type, removed_volume)
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/dump_liquid(var/decl/material/M, var/available_volume)
@@ -323,12 +331,6 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	air_contents.merge(produced)
 #undef MOLES_PER_MILILITER_FACTOR
 
-/obj/machinery/atmospherics/unary/material/extractor/proc/get_output_loc()
-	return get_step(loc, get_output_dir())
-/obj/machinery/atmospherics/unary/material/extractor/proc/get_output_dir()
-	return turn(dir, 90)
-/obj/machinery/atmospherics/unary/material/extractor/proc/get_input_dir()
-	return turn(dir, -90)
 
 //
 // Verbs
