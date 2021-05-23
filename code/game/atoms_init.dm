@@ -64,7 +64,7 @@
 	if(opacity)
 		updateVisibility(src)
 
-	. = ..()
+	return ..()
 
 // Movable level stuff
 
@@ -75,6 +75,10 @@
 
 	if (virtual_mob && ispath(initial(virtual_mob)))
 		virtual_mob = new virtual_mob(get_turf(src), src)
+
+	// Fire Entered events for freshly created movables.
+	if (!ml && loc)
+		loc.Entered(src, null)
 
 /atom/movable/Destroy()
 	. = ..()
