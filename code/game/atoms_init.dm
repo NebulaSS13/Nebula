@@ -52,14 +52,12 @@
 	return
 
 /atom/Destroy()
-	if (reagents)
-		QDEL_NULL(reagents)
+	QDEL_NULL(reagents)
 
 	LAZYCLEARLIST(our_overlays)
 	LAZYCLEARLIST(priority_overlays)
 
-	if (light)
-		QDEL_NULL(light)
+	QDEL_NULL(light)
 
 	if(opacity)
 		updateVisibility(src)
