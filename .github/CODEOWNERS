@@ -1,6 +1,0 @@
-# Require reviews from Core team for changes to CI or infra stuff
-.github/ @Nebula/Core
-Dockerfile @Nebula/Core
-flyway.conf @Nebula/Core
-sql/ @Nebula/Core
-LICENSE @Nebula/Core
