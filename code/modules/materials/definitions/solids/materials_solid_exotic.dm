@@ -37,6 +37,7 @@
 	luminescence = 3
 	value = 3
 	icon_base = 'icons/turf/walls/stone.dmi'
+	wall_paintable = 0
 	table_icon_base = "stone"
 	shard_type = SHARD_SHARD
 	hardness = MAT_VALUE_RIGID
