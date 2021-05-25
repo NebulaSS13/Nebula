@@ -13,22 +13,12 @@
 
 /decl/machine_construction/frame/unwrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
-		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 20, machine))
+		if(I.do_tool_interaction(TOOL_WRENCH, user, machine, 2 SECONDS, "secure", "securing"))
 			TRANSFER_STATE(/decl/machine_construction/frame/wrenched)
-			to_chat(user, "<span class='notice'>You wrench \the [machine] into place.</span>")
 			machine.anchored = TRUE
 	if(isWelder(I))
-		var/obj/item/weldingtool/WT = I
-		if(!WT.remove_fuel(0, user))
-			to_chat(user, "The welding tool must be on to complete this task.")
-			return TRUE
-		playsound(machine.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(do_after(user, 20, machine))
-			if(!WT.isOn())
-				return TRUE
+		if(I.do_tool_interaction(TOOL_WELDER, user, machine, 5 SECONDS, "dismantling", "dismantling"))
 			TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
-			to_chat(user, "<span class='notice'>You deconstruct \the [machine].</span>")
 			machine.dismantle()
 
 
@@ -50,22 +40,20 @@
 
 /decl/machine_construction/frame/wrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
-		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 20, machine))
+		if(I.do_tool_interaction(TOOL_WRENCH, user, machine, 2 SECONDS, "unfastening", "unfastening"))
 			TRANSFER_STATE(/decl/machine_construction/frame/unwrenched)
-			to_chat(user, "<span class='notice'>You unfasten \the [machine].</span>")
 			machine.anchored = FALSE
 			return
 	if(isCoil(I))
 		var/obj/item/stack/cable_coil/C = I
 		if(C.get_amount() < 5)
-			to_chat(user, "<span class='warning'>You need five lengths of cable to add them to \the [machine].</span>")
+			to_chat(user, SPAN_WARNING("You need five lengths of cable to add them to \the [machine]."))
 			return TRUE
 		playsound(machine.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>You start to add cables to the frame.</span>")
+		to_chat(user, SPAN_NOTICE("You start to add cables to the frame."))
 		if(do_after(user, 20, machine) && C.use(5))
 			TRANSFER_STATE(/decl/machine_construction/frame/awaiting_circuit)
-			to_chat(user, "<span class='notice'>You add cables to the frame.</span>")
+			to_chat(user, SPAN_NOTICE("You add cables to the frame."))
 		return TRUE
 
 
@@ -94,17 +82,16 @@
 			TRANSFER_STATE(/decl/machine_construction/frame/awaiting_parts)
 			user.unEquip(I, machine)
 			playsound(machine.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-			to_chat(user, "<span class='notice'>You add the circuit board to \the [machine].</span>")
+			to_chat(user, SPAN_NOTICE("You add the circuit board to \the [machine]."))
 			machine.circuit = I
 			return
 		else
-			to_chat(user, "<span class='warning'>This frame does not accept circuit boards of this type!</span>")
+			to_chat(user, SPAN_WARNING("This frame does not accept circuit boards of this type!"))
 			return TRUE
 	if(isWirecutter(I))
-		TRANSFER_STATE(/decl/machine_construction/frame/wrenched)
-		playsound(machine.loc, 'sound/items/Wirecutter.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>You remove the cables.</span>")
-		new /obj/item/stack/cable_coil(machine.loc, 5)
+		if(I.do_tool_interaction(TOOL_WIRECUTTERS, user, machine, 0, "removing cables", "removing cables"))
+			TRANSFER_STATE(/decl/machine_construction/frame/wrenched)
+			new /obj/item/stack/cable_coil(machine.loc, 5)
 
 /decl/machine_construction/frame/awaiting_circuit/mechanics_info()
 	. = list()
@@ -128,7 +115,7 @@
 		playsound(machine.loc, 'sound/items/Crowbar.ogg', 50, 1)
 		machine.circuit.dropInto(machine.loc)
 		machine.circuit = null
-		to_chat(user, "<span class='notice'>You remove the circuit board.</span>")
+		to_chat(user, SPAN_NOTICE("You remove the circuit board."))
 		return
 	if(isScrewdriver(I))
 		playsound(machine.loc, 'sound/items/Screwdriver.ogg', 50, 1)

@@ -109,44 +109,37 @@
 		return
 
 	if(isWelder(W) && (glass == 1 || !anchored))
-		var/obj/item/weldingtool/WT = W
-		if (WT.remove_fuel(0, user))
-			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-			if(glass == 1)
-				var/decl/material/glass_material_datum = GET_DECL(glass_material)
-				if(glass_material_datum)
-					var/mat_name = glass_material_datum.solid_name || glass_material_datum.name
-					user.visible_message("[user] welds the [mat_name] plating off the airlock assembly.", "You start to weld the [mat_name] plating off the airlock assembly.")
-					if(do_after(user, 40,src))
-						if(!WT.isOn())
-							return TRUE
-						to_chat(user, "<span class='notice'>You welded the [mat_name] plating off!</span>")
-						glass_material_datum.create_object(get_turf(src), 2)
-						glass = 0
-						update_icon()
-					return TRUE
-			if(!anchored)
-				user.visible_message("[user] dissassembles the airlock assembly.", "You start to dissassemble the airlock assembly.")
-				if(do_after(user, 40,src))
-					if(!WT.isOn())
-						return
-					to_chat(user, "<span class='notice'>You dissasembled the airlock assembly!</span>")
-					dismantle()
-					return TRUE
+		playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
+		if(glass == 1)
+			var/decl/material/glass_material_datum = GET_DECL(glass_material)
+			if(glass_material_datum)
+				var/mat_name = glass_material_datum.solid_name || glass_material_datum.name
+				user.visible_message("[user] welds the [mat_name] plating off the airlock assembly.", "You start to weld the [mat_name] plating off the airlock assembly.")
+				if(W.do_tool_interaction(TOOL_WELDER, user, src, 4 SECONDS, "welding the plating off", "welding the plating off", fuel_expenditure = 5))
+					to_chat(user, SPAN_NOTICE("You welded the [mat_name] plating off!"))
+					glass_material_datum.create_object(get_turf(src), 2)
+					glass = 0
+					update_icon()
+				return TRUE
+		if(!anchored)
+			user.visible_message("[user] dissassembles the airlock assembly.", "You start to dissassemble the airlock assembly.")
+			if(W.do_tool_interaction(TOOL_WELDER, user, src, 4 SECONDS, "disassembling", "disassembling", fuel_expenditure = 5))
+				to_chat(user, SPAN_NOTICE("You dissasembled the airlock assembly!"))
+				dismantle()
+				return TRUE
 		else
-			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")
+			to_chat(user, SPAN_NOTICE("You need more welding fuel."))
 			return TRUE
 
 	if(isWrench(W) && state == 0)
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
+
 		if(anchored)
 			user.visible_message("[user] begins unsecuring the airlock assembly from the floor.", "You begin unsecuring the airlock assembly from the floor.")
 		else
 			user.visible_message("[user] begins securing the airlock assembly to the floor.", "You begin securing the airlock assembly to the floor.")
-
-		if(do_after(user, 40,src))
+		if(W.do_tool_interaction(TOOL_WRENCH, user, src, 4 SECONDS, "securing", "securing"))
 			if(!src) return
-			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured the airlock assembly!</span>")
+			to_chat(user, SPAN_NOTICE("You [anchored? "un" : ""]secured the airlock assembly!"))
 			anchored = !anchored
 			update_icon()
 
@@ -154,22 +147,21 @@
 	else if(isCoil(W) && state == 0 && anchored)
 		var/obj/item/stack/cable_coil/C = W
 		if (C.get_amount() < 1)
-			to_chat(user, "<span class='warning'>You need one length of coil to wire the airlock assembly.</span>")
+			to_chat(user, SPAN_WARNING("You need one length of coil to wire the airlock assembly."))
 			return
 		user.visible_message("[user] wires the airlock assembly.", "You start to wire the airlock assembly.")
 		if(do_after(user, 40,src) && state == 0 && anchored)
 			if (C.use(1))
 				src.state = 1
-				to_chat(user, "<span class='notice'>You wire the airlock.</span>")
+				to_chat(user, SPAN_NOTICE("You wire the airlock."))
 				update_icon()
 
 	else if(isWirecutter(W) && state == 1 )
-		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		user.visible_message("[user] cuts the wires from the airlock assembly.", "You start to cut the wires from airlock assembly.")
 
-		if(do_after(user, 40,src))
+		if(W.do_tool_interaction(TOOL_WIRECUTTERS, user, src, 4 SECONDS, "cutting wires from", "cutting wires from"))
 			if(!src) return
-			to_chat(user, "<span class='notice'>You cut the airlock wires.!</span>")
+			to_chat(user, SPAN_NOTICE("You cut the airlock wires.!"))
 			new/obj/item/stack/cable_coil(src.loc, 1)
 			src.state = 0
 			update_icon()
@@ -185,7 +177,7 @@
 			if(!src) return
 			if(!user.unEquip(W, src))
 				return
-			to_chat(user, "<span class='notice'>You installed the airlock electronics!</span>")
+			to_chat(user, SPAN_NOTICE("You installed the airlock electronics!"))
 			src.state = 2
 			src.SetName("Near finished Airlock Assembly")
 			src.electronics = W
@@ -194,7 +186,7 @@
 	else if(isCrowbar(W) && state == 2 )
 		//This should never happen, but just in case I guess
 		if (!electronics)
-			to_chat(user, "<span class='notice'>There was nothing to remove.</span>")
+			to_chat(user, SPAN_NOTICE("There was nothing to remove."))
 			src.state = 1
 			update_icon()
 			return
@@ -202,9 +194,9 @@
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("\The [user] starts removing the electronics from the airlock assembly.", "You start removing the electronics from the airlock assembly.")
 
-		if(do_after(user, 40,src))
+		if(W.do_tool_interaction(TOOL_CROWBAR, user, src, 4 SECONDS, "removing the electronics", "removing the electronics"))
 			if(!src) return
-			to_chat(user, "<span class='notice'>You removed the airlock electronics!</span>")
+			to_chat(user, SPAN_NOTICE("You removed the airlock electronics!"))
 			src.state = 1
 			src.SetName("Wired Airlock Assembly")
 			electronics.dropInto(loc)
@@ -219,7 +211,7 @@
 			user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")
 			if(do_after(user, 40,src) && !glass)
 				if (S.use(2))
-					to_chat(user, "<span class='notice'>You installed reinforced glass windows into the airlock assembly.</span>")
+					to_chat(user, SPAN_NOTICE("You installed reinforced glass windows into the airlock assembly."))
 					glass = 1
 					glass_material = material_name
 					update_icon()
@@ -227,11 +219,11 @@
 
 	else if(isScrewdriver(W) && state == 2 )
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		to_chat(user, "<span class='notice'>Now finishing the airlock.</span>")
+		to_chat(user, SPAN_NOTICE("Now finishing the airlock."))
 
-		if(do_after(user, 40,src))
+		if(W.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 4 SECONDS, "finishing", "finishing"))
 			if(!src) return
-			to_chat(user, "<span class='notice'>You finish the airlock!</span>")
+			to_chat(user, SPAN_NOTICE("You finish the airlock!"))
 			var/obj/machinery/door/door = new airlock_type(get_turf(src), dir, FALSE, src)
 			door.construct_state.post_construct(door) // it eats the circuit inside Initialize
 			qdel(src)

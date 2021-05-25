@@ -99,7 +99,7 @@
 
 /obj/item/stool/attackby(obj/item/W, mob/user)
 	if(isWrench(W))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		W.do_tool_interaction(TOOL_WRENCH, user, src, 0)
 		dismantle()
 		qdel(src)
 	else if(istype(W,/obj/item/stack))
@@ -131,9 +131,9 @@
 		if(!padding_material)
 			to_chat(user, "\The [src] has no padding to remove.")
 			return
-		to_chat(user, "You remove the padding from \the [src].")
-		playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
-		remove_padding()
+		if(W.do_tool_interaction(TOOL_WIRECUTTERS, user, src, 0, "removing padding from", "removing padding from"))
+			to_chat(user, "You remove the padding from \the [src].")
+			remove_padding()
 	else
 		..()
 

@@ -19,10 +19,9 @@
 	if((. = ..()))
 		return
 	if(isScrewdriver(I))
-		TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open)
-		machine.panel_open = TRUE
-		to_chat(user, "You unfasten the bolts.")
-		playsound(machine.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		if(I.do_tool_interaction(TOOL_SCREWDRIVER, user, machine, 0, "unfastening the bolts", "unfastening the bolts"))
+			TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open)
+			machine.panel_open = TRUE
 
 /decl/machine_construction/tcomms/panel_closed/post_construct(obj/machinery/machine)
 	try_change_state(machine, /decl/machine_construction/tcomms/panel_open/no_cable)
@@ -51,15 +50,13 @@
 
 /decl/machine_construction/tcomms/panel_open/proc/state_interactions(obj/item/I, mob/user, obj/machinery/machine)
 	if(isScrewdriver(I))
-		TRANSFER_STATE(/decl/machine_construction/tcomms/panel_closed)
-		machine.panel_open = FALSE
-		to_chat(user, "You fasten the bolts.")
-		playsound(machine.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		if(I.do_tool_interaction(TOOL_SCREWDRIVER, user, machine, 0, "fastening the bolts of the", "fastening the bolts of the"))
+			TRANSFER_STATE(/decl/machine_construction/tcomms/panel_closed)
+			machine.panel_open = FALSE
 		return
 	if(isWrench(I))
-		TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open/unwrenched)
-		to_chat(user, "You dislodge the external plating.")
-		playsound(machine.loc, 'sound/items/Ratchet.ogg', 75, 1)
+		if(I.do_tool_interaction(TOOL_WRENCH, user, machine, 0, "dislodging the external plating of the", "dislodging the external plating of the"))
+			TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open/unwrenched)
 
 /decl/machine_construction/tcomms/panel_open/mechanics_info()
 	. = list()
@@ -68,17 +65,16 @@
 
 /decl/machine_construction/tcomms/panel_open/unwrenched/state_interactions(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
-		TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open)
-		to_chat(user, "You secure the external plating.")
-		playsound(machine.loc, 'sound/items/Ratchet.ogg', 75, 1)
-		return
+		if(I.do_tool_interaction(TOOL_WRENCH, user, machine, 0, "securing the external plating of the", "securing the external plating of the"))
+			TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open)
+			playsound(machine.loc, 'sound/items/Ratchet.ogg', 75, 1)
+			return
 	if(isWirecutter(I))
-		TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open/no_cable)
-		playsound(machine.loc, 'sound/items/Wirecutter.ogg', 50, 1)
-		to_chat(user, "You remove the cables.")
-		var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( user.loc )
-		A.amount = 5
-		machine.set_broken(TRUE, MACHINE_BROKEN_CONSTRUCT) // the machine's been borked!
+		if(I.do_tool_interaction(TOOL_WIRECUTTERS, user, machine, 0, "removing the cables from the", "removing the cables from the"))
+			TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open/no_cable)
+			var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( user.loc )
+			A.amount = 5
+			machine.set_broken(TRUE, MACHINE_BROKEN_CONSTRUCT) // the machine's been borked!
 
 /decl/machine_construction/tcomms/panel_open/unwrenched/mechanics_info()
 	. = list()
@@ -91,18 +87,17 @@
 		if (A.can_use(5))
 			TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open/unwrenched)
 			A.use(5)
-			to_chat(user, "<span class='notice'>You insert the cables.</span>")
+			to_chat(user, SPAN_NOTICE("You insert the cables."))
 			machine.set_broken(FALSE, MACHINE_BROKEN_CONSTRUCT) // the machine's not borked anymore!
 			return
 		else
-			to_chat(user, "<span class='warning'>You need five coils of wire for this.</span>")
+			to_chat(user, SPAN_WARNING("You need five coils of wire for this."))
 			return TRUE
 	if(isCrowbar(I))
-		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
-		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
-		machine.visible_message(SPAN_NOTICE("\The [user] deconstructs \the [machine]."))
-		machine.dismantle()
-		return
+		if(I.do_tool_interaction(TOOL_CROWBAR, user, machine, 0, "deconstructing", "deconstructing"))
+			TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
+			machine.dismantle()
+			return
 
 	if(istype(I, /obj/item/storage/part_replacer))
 		return machine.part_replacement(I, user)

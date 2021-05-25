@@ -9,7 +9,6 @@
 /decl/machine_construction/pipe/proc/deconstruct_transition(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
 		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
-		playsound(get_turf(machine), 'sound/items/Ratchet.ogg', 50, 1)
 		machine.visible_message(SPAN_NOTICE("\The [user] unfastens \the [machine]."))
 		machine.dismantle()
 
@@ -25,11 +24,6 @@
 // Same, but uses different tool.
 /decl/machine_construction/pipe/welder/deconstruct_transition(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWelder(I))
-		var/obj/item/weldingtool/WT = I
-		if(!WT.isOn())
-			return FALSE
-		if(!WT.remove_fuel(0,user))
-			return FALSE
 		var/fail = machine.cannot_transition_to(/decl/machine_construction/default/deconstructed, user)
 		if(istext(fail))
 			to_chat(user, fail)
@@ -38,11 +32,8 @@
 			return (fail == MCS_BLOCK)
 		to_chat(user, SPAN_NOTICE("You start welding \the [machine]."))
 		playsound(get_turf(machine), 'sound/items/Welder.ogg', 50, 1)
-		if(!do_after(user, 5 SECONDS, machine))
+		if(!I.do_tool_interaction(TOOL_WELDER, user, machine, 5 SECONDS, "welding", "welding", fuel_expenditure = 1))
 			return TRUE
-		if(!WT.isOn())
-			return TRUE
-		playsound(get_turf(machine), 'sound/items/Welder2.ogg', 50, 1)
 		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
 		machine.visible_message(SPAN_NOTICE("\The [user] unwelds \the [src]."))
 		machine.dismantle()

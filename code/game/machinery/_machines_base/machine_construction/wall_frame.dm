@@ -38,11 +38,10 @@
 
 /decl/machine_construction/wall_frame/panel_closed/proc/down_interaction(obj/item/I, mob/user, obj/machinery/machine)
 	if(isScrewdriver(I))
-		TRANSFER_STATE(open_state)
-		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
-		machine.panel_open = TRUE
-		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine], exposing the wiring."))
-		machine.queue_icon_update()
+		if(I.do_tool_interaction(TOOL_SCREWDRIVER, user, machine, 0, "opening the maintenance hatch", "opening the maintenance hatch"))
+			TRANSFER_STATE(open_state)
+			machine.panel_open = TRUE
+			machine.queue_icon_update()
 
 /decl/machine_construction/wall_frame/panel_closed/mechanics_info()
 	. = list()
@@ -72,13 +71,12 @@
 		return
 
 	if(isWirecutter(I))
-		TRANSFER_STATE(diconnected_state)
-		playsound(get_turf(machine), 'sound/items/Wirecutter.ogg', 50, 1)
-		user.visible_message(SPAN_WARNING("\The [user] has cut the wires inside \the [machine]!"), "You have cut the wires inside \the [machine].")
-		new /obj/item/stack/cable_coil(get_turf(machine), 5)
-		machine.set_broken(TRUE, MACHINE_BROKEN_CONSTRUCT)
-		machine.queue_icon_update()
-		return
+		if(I.do_tool_interaction(TOOL_WIRECUTTERS, user, machine, 0, "cutting the wires inside", "cutting the wires inside"))
+			TRANSFER_STATE(diconnected_state)
+			new /obj/item/stack/cable_coil(get_turf(machine), 5)
+			machine.set_broken(TRUE, MACHINE_BROKEN_CONSTRUCT)
+			machine.queue_icon_update()
+			return
 
 	if((. = up_interaction(I, user, machine)))
 		return
@@ -94,11 +92,10 @@
 
 /decl/machine_construction/wall_frame/panel_open/proc/up_interaction(obj/item/I, mob/user, obj/machinery/machine)
 	if(isScrewdriver(I))
-		TRANSFER_STATE(active_state)
-		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
-		machine.panel_open = FALSE
-		to_chat(user, SPAN_NOTICE("You close the maintenance hatch of \the [machine]."))
-		machine.queue_icon_update()
+		if(I.do_tool_interaction(TOOL_SCREWDRIVER, user, machine, 0, "closing the maintenance hatch", "closing the maintenance hatch"))
+			TRANSFER_STATE(active_state)
+			machine.panel_open = FALSE
+			machine.queue_icon_update()
 
 /decl/machine_construction/wall_frame/panel_open/mechanics_info()
 	. = list()
@@ -154,11 +151,10 @@
 
 /decl/machine_construction/wall_frame/no_wires/proc/down_interaction(obj/item/I, mob/user, obj/machinery/machine)
 	if(isCrowbar(I))
-		TRANSFER_STATE(bottom_state)
-		playsound(get_turf(machine), 'sound/items/Crowbar.ogg', 50, 1)
-		to_chat(user, "You pry out the circuit!")
-		machine.uninstall_component(/obj/item/stock_parts/circuitboard)
-		machine.queue_icon_update()
+		if(I.do_tool_interaction(TOOL_CROWBAR, user, machine, 0, "prying the circuit out of", "prying the circuit out of"))
+			TRANSFER_STATE(bottom_state)
+			machine.uninstall_component(/obj/item/stock_parts/circuitboard)
+			machine.queue_icon_update()
 
 /decl/machine_construction/wall_frame/no_wires/mechanics_info()
 	. = list()
@@ -202,11 +198,10 @@
 		return
 
 	if(isWrench(I))
-		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
-		playsound(get_turf(machine), 'sound/items/Ratchet.ogg', 50, 1)
-		machine.visible_message(SPAN_NOTICE("\The [user] deconstructs \the [machine]."))
-		machine.dismantle()
-		return
+		if(I.do_tool_interaction(TOOL_WRENCH, user, machine, 0, "deconstructing", "deconstructing"))
+			TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
+			machine.dismantle()
+			return
 
 /decl/machine_construction/wall_frame/no_circuit/mechanics_info()
 	. = list()

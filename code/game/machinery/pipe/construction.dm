@@ -97,12 +97,12 @@ Buildable meters
 	P.set_initial_level()
 	P.build(src)
 
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	user.visible_message( \
-		"[user] fastens the [src].", \
-		"<span class='notice'>You have fastened the [src].</span>", \
-		"You hear ratchet.")
-	qdel(src)	// remove the pipe item
+	if(W.do_tool_interaction(TOOL_WRENCH, user, src, 0, "fastening", "fastening"))
+		user.visible_message( \
+			"[user] fastens the [src].", \
+			"<span class='notice'>You have fastened the [src].</span>", \
+			"You hear ratchet.")
+		qdel(src)	// remove the pipe item
 
 /obj/item/machine_chassis
 	var/build_type
@@ -125,9 +125,9 @@ Buildable meters
 		stash.install_into(machine)
 	if(machine.construct_state)
 		machine.construct_state.post_construct(machine)
-	playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-	to_chat(user, "<span class='notice'>You have fastened the [src].</span>")
-	qdel(src)
+	if(W.do_tool_interaction(TOOL_WRENCH, user, src, 0, "fastening", "fastening"))
+		to_chat(user, "<span class='notice'>You have fastened the [src].</span>")
+		qdel(src)
 
 /obj/item/machine_chassis/air_sensor
 	name = "gas sensor"

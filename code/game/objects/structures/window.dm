@@ -195,28 +195,25 @@
 	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
 
 	if(isScrewdriver(W))
-		if(reinf_material && construction_state >= 1)
-			construction_state = 3 - construction_state
-			update_nearby_icons()
-			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (construction_state == 1 ? SPAN_NOTICE("You have unfastened the window from the frame.") : SPAN_NOTICE("You have fastened the window to the frame.")))
-		else if(reinf_material && construction_state == 0)
-			set_anchored(!anchored)
-			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the frame to the floor.") : SPAN_NOTICE("You have unfastened the frame from the floor.")))
-		else if(!reinf_material)
-			set_anchored(!anchored)
-			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the window to the floor.") : SPAN_NOTICE("You have unfastened the window.")))
+		if(W.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 0))
+			if(reinf_material && construction_state >= 1)
+				construction_state = 3 - construction_state
+				update_nearby_icons()
+				to_chat(user, (construction_state == 1 ? SPAN_NOTICE("You have unfastened the window from the frame.") : SPAN_NOTICE("You have fastened the window to the frame.")))
+			else if(reinf_material && construction_state == 0)
+				set_anchored(!anchored)
+				to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the frame to the floor.") : SPAN_NOTICE("You have unfastened the frame from the floor.")))
+			else if(!reinf_material)
+				set_anchored(!anchored)
+				to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the window to the floor.") : SPAN_NOTICE("You have unfastened the window.")))
 	else if(isCrowbar(W) && reinf_material && construction_state <= 1)
-		construction_state = 1 - construction_state
-		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
-		to_chat(user, (construction_state ? SPAN_NOTICE("You have pried the window into the frame.") : SPAN_NOTICE("You have pried the window out of the frame.")))
+		if(W.do_tool_interaction(TOOL_CROWBAR, user, src, 0))
+			construction_state = 1 - construction_state
+			to_chat(user, (construction_state ? SPAN_NOTICE("You have pried the window into the frame.") : SPAN_NOTICE("You have pried the window out of the frame.")))
 	else if(isWrench(W) && !anchored && (!construction_state || !reinf_material))
 		if(!material)
 			to_chat(user, SPAN_NOTICE("You're not sure how to dismantle \the [src] properly."))
-		else
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+		else if(W.do_tool_interaction(TOOL_WRENCH, user, src, 0, "dismantling", "dismantling"))
 			visible_message(SPAN_NOTICE("[user] dismantles \the [src]."))
 			dismantle()
 	else if(isCoil(W) && !polarized && is_fulltile())

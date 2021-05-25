@@ -157,15 +157,16 @@
 	if(panel_open && !arePowerSystemsOn())
 		if(isWrench(C))
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			user.visible_message(SPAN_WARNING("[user.name] starts frantically pumping the bolt override mechanism!"), SPAN_WARNING("You start frantically pumping the bolt override mechanism!"))
-			if(do_after(user, 160) && locked)
-				visible_message("\The [src] bolts disengage!")
-				locked = FALSE
-				return TRUE
-			else
-				visible_message("\The [src] bolts engage!")
-				locked = TRUE
-				return TRUE
+			user.visible_message(SPAN_WARNING("[user.name] starts frantically pumping the bolt override mechanism!"))
+			if(C.do_tool_interaction(TOOL_WRENCH, user, src, 16 SECONDS, "working the bolt over-ride mechanism of", "working the bolt over-ride mechanism of"))
+				if(locked)
+					visible_message("\The [src] bolts disengage!")
+					locked = FALSE
+					return TRUE
+				else
+					visible_message("\The [src] bolts engage!")
+					locked = TRUE
+					return TRUE
 	return ..()
 
 /obj/machinery/door/airlock/external/shuttle

@@ -14,20 +14,17 @@
 /obj/structure/hygiene/drain/attackby(var/obj/item/thing, var/mob/user)
 	..()
 	if(isWelder(thing))
-		var/obj/item/weldingtool/WT = thing
-		if(WT.isOn())
+		if(thing.do_tool_interaction(TOOL_WELDER, user, src, 0, "welding", "welding", fuel_expenditure = 5))
 			welded = !welded
 			to_chat(user, "<span class='notice'>You weld \the [src] [welded ? "closed" : "open"].</span>")
-		else
-			to_chat(user, "<span class='warning'>Turn \the [thing] on, first.</span>")
 		update_icon()
 		return
 	if(isWrench(thing))
-		new /obj/item/drain(src.loc)
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, "<span class='warning'>[user] unwrenches the [src].</span>")
-		qdel(src)
-		return
+		if(thing.do_tool_interaction(TOOL_WRENCH, user, src, 0, "unwrenching", "unwrenching"))
+			new /obj/item/drain(src.loc)
+			to_chat(user, "<span class='warning'>[user] unwrenches the [src].</span>")
+			qdel(src)
+			return
 	return ..()
 
 /obj/structure/hygiene/drain/on_update_icon()

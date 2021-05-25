@@ -35,30 +35,28 @@
 		if(0)
 			// State 0
 			if(isWrench(W) && isturf(src.loc))
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-				to_chat(user, "You wrench the assembly into place.")
-				anchored = 1
-				state = 1
-				update_icon()
-				auto_turn()
-				return
+				if(W.do_tool_interaction(TOOL_WRENCH, user, src, 0, "wrenching", "wrenching"))
+					to_chat(user, "You wrench the assembly into place.")
+					anchored = 1
+					state = 1
+					update_icon()
+					auto_turn()
+					return
 
 		if(1)
 			// State 1
 			if(isWelder(W))
-				if(weld(W, user))
-					to_chat(user, "You weld the assembly securely into place.")
+				if(W.do_tool_interaction(TOOL_WELDER, user, src, 0, "welding", "welding", fuel_expenditure = 1))
 					anchored = 1
 					state = 2
 				return
 
 			else if(isWrench(W))
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-				to_chat(user, "You unattach the assembly from its place.")
-				anchored = 0
-				update_icon()
-				state = 0
-				return
+				if(W.do_tool_interaction(TOOL_WRENCH, user, src, 0 ,"unattaching", "unattaching"))
+					anchored = 0
+					update_icon()
+					state = 0
+					return
 
 		if(2)
 			// State 2
@@ -73,7 +71,7 @@
 
 			else if(isWelder(W))
 
-				if(weld(W, user))
+				if(W.do_tool_interaction(TOOL_WELDER, user, src, "unwelding", "unwelding", fuel_expenditure = 1))
 					to_chat(user, "You unweld the assembly from its place.")
 					state = 1
 					anchored = 1
@@ -83,51 +81,51 @@
 		if(3)
 			// State 3
 			if(isScrewdriver(W))
-				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+				if(W.do_tool_interaction(TOOL_SCREWDRIVER, user, src, "configuring", "configuring"))
 
-				var/input = sanitize(input(usr, "Which networks would you like to connect this camera to? Separate networks with a comma. No Spaces!\nFor example: [NETWORK_PUBLIC],[NETWORK_SECURITY],[NETWORK_SECRET]", "Set Network", camera_network ? camera_network : NETWORK_PUBLIC))
-				if(!input)
-					to_chat(usr, "No input found please hang up and try your call again.")
+					var/input = sanitize(input(usr, "Which networks would you like to connect this camera to? Separate networks with a comma. No Spaces!\nFor example: [NETWORK_PUBLIC],[NETWORK_SECURITY],[NETWORK_SECRET]", "Set Network", camera_network ? camera_network : NETWORK_PUBLIC))
+					if(!input)
+						to_chat(usr, "No input found please hang up and try your call again.")
+						return
+
+					var/list/tempnetwork = splittext(input, ",")
+					if(tempnetwork.len < 1)
+						to_chat(usr, "No network found please hang up and try your call again.")
+						return
+
+					var/area/camera_area = get_area(src)
+					var/temptag = "[sanitize(camera_area.name)] ([rand(1, 999)])"
+					input = sanitizeSafe(input(usr, "How would you like to name the camera?", "Set Camera Name", camera_name ? camera_name : temptag), MAX_LNAME_LEN)
+
+					state = 4
+					var/obj/machinery/camera/C = new(src.loc)
+					src.forceMove(C)
+					C.assembly = src
+
+					C.auto_turn()
+
+					C.replace_networks(uniquelist(tempnetwork))
+
+					C.c_tag = input
+
+					for(var/i = 5; i >= 0; i -= 1)
+						var/direct = input(user, "Direction?", "Assembling Camera", null) in list("LEAVE IT", "NORTH", "EAST", "SOUTH", "WEST" )
+						if(direct != "LEAVE IT")
+							C.set_dir(text2dir(direct))
+						if(i != 0)
+							var/confirm = alert(user, "Is this what you want? Chances Remaining: [i]", "Confirmation", "Yes", "No")
+							if(confirm == "Yes")
+								C.update_icon()
+								break
 					return
-
-				var/list/tempnetwork = splittext(input, ",")
-				if(tempnetwork.len < 1)
-					to_chat(usr, "No network found please hang up and try your call again.")
-					return
-
-				var/area/camera_area = get_area(src)
-				var/temptag = "[sanitize(camera_area.name)] ([rand(1, 999)])"
-				input = sanitizeSafe(input(usr, "How would you like to name the camera?", "Set Camera Name", camera_name ? camera_name : temptag), MAX_LNAME_LEN)
-
-				state = 4
-				var/obj/machinery/camera/C = new(src.loc)
-				src.forceMove(C)
-				C.assembly = src
-
-				C.auto_turn()
-
-				C.replace_networks(uniquelist(tempnetwork))
-
-				C.c_tag = input
-
-				for(var/i = 5; i >= 0; i -= 1)
-					var/direct = input(user, "Direction?", "Assembling Camera", null) in list("LEAVE IT", "NORTH", "EAST", "SOUTH", "WEST" )
-					if(direct != "LEAVE IT")
-						C.set_dir(text2dir(direct))
-					if(i != 0)
-						var/confirm = alert(user, "Is this what you want? Chances Remaining: [i]", "Confirmation", "Yes", "No")
-						if(confirm == "Yes")
-							C.update_icon()
-							break
-				return
 
 			else if(isWirecutter(W))
-
-				new/obj/item/stack/cable_coil(get_turf(src), 2)
-				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
-				to_chat(user, "You cut the wires from the circuits.")
-				state = 2
-				return
+				if(W.do_tool_interaction(TOOL_WIRECUTTERS, user, src, "removing wires from", "removing wires from"))
+					new/obj/item/stack/cable_coil(get_turf(src), 2)
+					playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
+					to_chat(user, "You cut the wires from the circuits.")
+					state = 2
+					return
 
 	// Upgrades!
 	if(is_type_in_list(W, possible_upgrades) && !is_type_in_list(W, upgrades) && user.unEquip(W, src)) // Is a possible upgrade and isn't in the camera already.

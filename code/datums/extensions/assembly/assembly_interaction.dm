@@ -10,20 +10,9 @@
 		return TRUE
 
 	if(isWelder(W))
-		var/obj/item/weldingtool/WT = W
-		if(!WT.isOn())
-			to_chat(user, "\The [W] is off.")
-			return TRUE
-
-		if(!damage)
-			to_chat(user, "\The [holder] does not require repairs.")
-			return TRUE
-
-		to_chat(user, "You begin repairing damage to \the [holder]...")
-		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10))
-			damage = 0
+		if(W.do_tool_interaction(TOOL_WELDER, user, src, damage/10, "begin to repair", "finish repairing", fuel_expenditure = round(damage/75)))
 			to_chat(user, "You repair \the [holder].")
-		return TRUE
+			return TRUE
 
 	if(isScrewdriver(W))
 		if(!parts.len)

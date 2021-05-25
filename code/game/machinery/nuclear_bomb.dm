@@ -86,61 +86,38 @@ var/global/bomb_set
 		switch(removal_stage)
 			if(0)
 				if(isWelder(O))
-					var/obj/item/weldingtool/WT = O
-					if(!WT.isOn()) return
-					if(WT.get_fuel() < 5) // uses up 5 fuel.
-						to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
-						return
-
-					user.visible_message("[user] starts cutting loose the anchoring bolt covers on [src].", "You start cutting loose the anchoring bolt covers with [O]...")
-
-					if(do_after(user,40, src))
-						if(!src || !user || !WT.remove_fuel(5, user)) return
-						user.visible_message("\The [user] cuts through the bolt covers on \the [src].", "You cut through the bolt cover.")
+					if(O.do_tool_interaction(TOOL_WELDER, user, src, 4 SECONDS, "cutting through the bolt covers on", "cutting through the bolt covers on", fuel_expenditure = 5))
+						user.visible_message("\The [user] cuts through the bolt covers on \the [src].")
 						removal_stage = 1
 				return
 
 			if(1)
 				if(isCrowbar(O))
-					user.visible_message("[user] starts forcing open the bolt covers on [src].", "You start forcing open the anchoring bolt covers with [O]...")
-
-					if(do_after(user, 15, src))
-						if(!src || !user) return
-						user.visible_message("\The [user] forces open the bolt covers on \the [src].", "You force open the bolt covers.")
+					if(O.do_tool_interaction(TOOL_CROWBAR, user, src, 1.5 SECONDS, "force the bolt covers open on", "forcing the bolt covers open on"))
+						user.visible_message("\The [user] forces open the bolt covers on \the [src].")
 						removal_stage = 2
 				return
 
 			if(2)
 				if(isWelder(O))
-					var/obj/item/weldingtool/WT = O
-					if(!WT.isOn()) return
-					if (WT.get_fuel() < 5) // uses up 5 fuel.
-						to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
-						return
-
-					user.visible_message("[user] starts cutting apart the anchoring system sealant on [src].", "You start cutting apart the anchoring system's sealant with [O]...")
-
-					if(do_after(user, 40, src))
-						if(!src || !user || !WT.remove_fuel(5, user)) return
-						user.visible_message("\The [user] cuts apart the anchoring system sealant on \the [src].", "You cut apart the anchoring system's sealant.")
+					if(O.do_tool_interaction(TOOL_WELDER, user, src, 4 SECONDS, "cut apart the anchoring system sealant on", "cutting apart the anchoring system sealant on", fuel_expenditure = 5))
+						user.visible_message("\The [user] cuts apart the anchoring system sealant on \the [src].")
 						removal_stage = 3
 				return
 
 			if(3)
 				if(isWrench(O))
-					user.visible_message("[user] begins unwrenching the anchoring bolts on [src].", "You begin unwrenching the anchoring bolts...")
-					if(do_after(user, 50, src))
-						if(!src || !user) return
-						user.visible_message("[user] unwrenches the anchoring bolts on [src].", "You unwrench the anchoring bolts.")
+					user.visible_message("[user] begins unwrenching the anchoring bolts on [src].")
+					if(O.do_tool_interaction(TOOL_WRENCH, user, src, 5 SECONDS, "unwrench the anchoring bolts on", "unwrenching the anchoring bolts on"))
+						user.visible_message("[user] unwrenches the anchoring bolts on [src].")
 						removal_stage = 4
 				return
 
 			if(4)
 				if(isCrowbar(O))
 					user.visible_message("[user] begins lifting [src] off of the anchors.", "You begin lifting the device off the anchors...")
-					if(do_after(user, 80, src))
-						if(!src || !user) return
-						user.visible_message("\The [user] crowbars \the [src] off of the anchors. It can now be moved.", "You jam the crowbar under the nuclear device and lift it off its anchors. You can now move it!")
+					if(O.do_tool_interaction(TOOL_CROWBAR, user, src, 8 SECONDS, "lift", "lifting"))
+						user.visible_message("\The [user] crowbars \the [src] off of the anchors. It can now be moved.")
 						anchored = 0
 						removal_stage = 5
 				return
