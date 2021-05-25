@@ -47,6 +47,12 @@
 #define MAT_VALUE_VERY_SHINY        60
 #define MAT_VALUE_MIRRORED          80
 
+// Paint flags
+#define PAINT_PAINTABLE 1
+#define PAINT_STRIPABLE 2
+#define PAINT_DETAILABLE 4
+#define PAINT_WINDOW_PAINTABLE 8
+
 #define STRUCTURE_BRITTLE_MATERIAL_DAMAGE_MULTIPLIER 4 // Amount table damage is multiplied by if it is made of a brittle material (e.g. glass)
 
 #define ORE_SURFACE  "surface minerals"

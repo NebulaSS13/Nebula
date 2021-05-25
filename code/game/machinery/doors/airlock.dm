@@ -9,11 +9,6 @@
 #define AIRLOCK_DENY	5
 #define AIRLOCK_EMAG	6
 
-#define AIRLOCK_PAINTABLE 1
-#define AIRLOCK_STRIPABLE 2
-#define AIRLOCK_DETAILABLE 4
-#define AIRLOCK_WINDOW_PAINTABLE 8
-
 var/global/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock
@@ -70,7 +65,7 @@ var/global/list/airlock_overlays = list()
 	//The variables below determine what color the airlock and decorative stripes will be -Cakey
 	var/airlock_type = "Standard"
 	var/static/list/airlock_icon_cache = list()
-	var/paintable = AIRLOCK_PAINTABLE|AIRLOCK_STRIPABLE|AIRLOCK_WINDOW_PAINTABLE
+	var/paintable = PAINT_PAINTABLE|PAINT_STRIPABLE|PAINT_WINDOW_PAINTABLE
 	var/door_color = null
 	var/stripe_color = null
 	var/symbol_color = null
@@ -1007,7 +1002,7 @@ About the new airlock wires panel:
 		queue_icon_update()
 
 	if (glass)
-		paintable |= AIRLOCK_WINDOW_PAINTABLE
+		paintable |= PAINT_WINDOW_PAINTABLE
 		if (!window_color)
 			var/decl/material/window = get_window_material()
 			window_color = window.color

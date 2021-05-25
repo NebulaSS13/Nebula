@@ -11,6 +11,9 @@ var/global/list/wall_blend_objects = list(
 var/global/list/wall_noblend_objects = list(
 	/obj/machinery/door/window
 )
+var/global/list/wall_fullblend_objects = list(
+	/obj/structure/wall_frame
+)
 
 /turf/simulated/wall
 	name = "wall"

@@ -25,7 +25,7 @@
 		fail("[length(failed)] material lists have total makeup not equal to 1: [jointext(failed, "\n")].")
 	else
 		pass("[length(passed)] material lists had chemical makeup exactly equal to 1.")
-	return 1 
+	return 1
 
 /datum/unit_test/crafting_recipes_shall_not_have_inconsistent_materials
 	name = "MATERIALS: Crafting Recipes Shall Not Have Inconsistent Materials"
@@ -66,7 +66,7 @@
 		fail("[length(failed_designs)] crafting recipes had inconsistent output materials: [jointext(failed_designs, "\n")].")
 	else
 		pass("[length(passed_designs)] crafting recipes had consistent output materials.")
-	return 1 
+	return 1
 
 /datum/unit_test/material_wall_icons_shall_have_valid_states
 	name = "MATERIALS: Material Wall Icons Shall Have Valid States"
@@ -89,11 +89,12 @@
 				if(!check_state_in_icon("other[i]", mat.icon_base))
 					LAZYADD(failed, "[mat_type] - '[mat.icon_base]' - missing connective base icon state 'other[i]'")
 
-			if(mat.icon_stripe)
-				if(!check_state_in_icon("[i]", mat.icon_stripe))
-					LAZYADD(failed, "[mat_type] - '[mat.icon_stripe]' - missing directional stripe icon state '[i]'")
-				if(!check_state_in_icon("other[i]", mat.icon_stripe))
-					LAZYADD(failed, "[mat_type] - '[mat.icon_stripe]' - missing connective stripe icon state 'other[i]'")
+			if(mat.wall_paintable |= PAINT_PAINTABLE)
+				if(!check_state_in_icon("paint[i]", mat.icon_base))
+					LAZYADD(failed, "[mat_type] - '[mat.icon_base]' - missing directional paint icon state '[i]'")
+			if(mat.wall_paintable |= PAINT_STRIPABLE)
+				if(!check_state_in_icon("stripe[i]", mat.icon_base))
+					LAZYADD(failed, "[mat_type] - '[mat.icon_base]' - missing directional stripe icon state '[i]'")
 
 			if(mat.icon_base_natural)
 				if(!check_state_in_icon("[i]", mat.icon_base_natural))
@@ -114,4 +115,4 @@
 		fail("[length(failed)] material\s had invalid wall icon states: [jointext(failed, "\n")].")
 	else
 		pass("All materials had valid wall icon states.")
-	return 1 
+	return 1

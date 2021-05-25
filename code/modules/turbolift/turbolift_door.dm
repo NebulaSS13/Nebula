@@ -12,7 +12,7 @@
 	deny_file = 'icons/obj/doors/elevator/lights_deny.dmi'
 	lights_file = 'icons/obj/doors/elevator/lights_green.dmi'
 
-	paintable = AIRLOCK_WINDOW_PAINTABLE
+	paintable = PAINT_WINDOW_PAINTABLE
 
 	var/datum/turbolift/lift
 	var/datum/turbolift_floor/floor

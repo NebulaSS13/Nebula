@@ -91,9 +91,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	// Icons
 	var/icon_base = 'icons/turf/walls/solid.dmi'
-	var/icon_stripe = 'icons/turf/walls/stripes.dmi'
 	var/icon_base_natural = 'icons/turf/walls/natural.dmi'
 	var/icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
+	var/wall_paintable = 0 //PAINT_PAINTABLE|PAINT_STRIPABLE
 	var/use_reinf_state = "full"
 
 	var/door_icon_base = "metal"                         // Door base icon tag. See header.
@@ -586,10 +586,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	M.adjustToxLoss(REM)
 
 /decl/material/proc/initialize_data(var/newdata) // Called when the reagent is created.
-	if(newdata) 
+	if(newdata)
 		. = newdata
 
-/decl/material/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)	
+/decl/material/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
 	. = REAGENT_DATA(reagents, type)
 
 /decl/material/proc/explosion_act(obj/item/chems/holder, severity)
