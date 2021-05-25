@@ -12,12 +12,15 @@
 
 /turf/simulated/wall/r_wall/hull
 	name = "hull"
-	color = COLOR_HULL
+	paint_color = COLOR_HULL
+	stripe_color = COLOR_HULL
 
 /turf/simulated/wall/prepainted
 	paint_color = COLOR_WALL_GUNMETAL
+	stripe_color = COLOR_GUNMETAL
 /turf/simulated/wall/r_wall/prepainted
 	paint_color = COLOR_WALL_GUNMETAL
+	stripe_color = COLOR_GUNMETAL
 
 /turf/simulated/wall/r_wall/hull/Initialize()
 	. = ..()

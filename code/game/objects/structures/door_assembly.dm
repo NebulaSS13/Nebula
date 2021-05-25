@@ -15,7 +15,7 @@
 	var/panel_icon = 'icons/obj/doors/station/panel.dmi'
 	var/fill_icon = 'icons/obj/doors/station/fill_steel.dmi'
 	var/glass_icon = 'icons/obj/doors/station/fill_glass.dmi'
-	var/paintable = AIRLOCK_PAINTABLE|AIRLOCK_STRIPABLE
+	var/paintable = PAINT_PAINTABLE|PAINT_STRIPABLE
 	var/door_color = "none"
 	var/stripe_color = "none"
 	var/symbol_color = "none"
@@ -85,7 +85,7 @@
 	glass = -1
 	paintable = 0
 
-/obj/structure/door_assembly/blast/on_update_icon()	
+/obj/structure/door_assembly/blast/on_update_icon()
 
 /obj/structure/door_assembly/blast/morgue
 	name = "morgue door assembly"
@@ -213,7 +213,7 @@
 
 	else if(istype(W, /obj/item/stack/material) && !glass)
 		var/obj/item/stack/material/S = W
-		var/material_name = S.get_material_type()		
+		var/material_name = S.get_material_type()
 		if (S.get_amount() >= 2)
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")

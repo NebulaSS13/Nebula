@@ -56,7 +56,6 @@
 		to_chat(user, SPAN_DANGER("It's nearly falling to pieces."))
 
 /obj/structure/wall_frame/attackby(var/obj/item/W, var/mob/user)
-
 	. = ..()
 	if(!.)
 		//grille placing
@@ -98,9 +97,7 @@
 /obj/structure/wall_frame/on_update_icon()
 	overlays.Cut()
 	var/image/I
-
-	var/new_color = (paint_color ? paint_color : material.color)
-	color = new_color
+	var/new_color = stripe_color ? stripe_color : material.color
 
 	for(var/i = 1 to 4)
 		var/conn = connections ? connections[i] : "0"
@@ -108,17 +105,19 @@
 			I = image(icon, "frame_other[conn]", dir = 1<<(i-1))
 		else
 			I = image(icon, "frame[conn]", dir = 1<<(i-1))
+		I.color = new_color
 		overlays += I
 
-	if(stripe_color)
-		for(var/i = 1 to 4)
-			var/conn = connections ? connections[i] : "0"
-			if(other_connections && other_connections[i] != "0")
-				I = image(icon, "stripe_other[conn]", dir = 1<<(i-1))
-			else
-				I = image(icon, "stripe[conn]", dir = 1<<(i-1))
-			I.color = stripe_color
-			overlays += I
+
+/obj/structure/wall_frame/proc/paint_wall_frame(var/new_paint_color)
+	paint_color = new_paint_color
+	update_icon()
+
+
+/obj/structure/wall_frame/proc/stripe_wall_frame(var/new_paint_color)
+	stripe_color = new_paint_color
+	update_icon()
+
 
 /obj/structure/wall_frame/hull/Initialize()
 	. = ..()
@@ -164,9 +163,11 @@
 //Subtypes
 /obj/structure/wall_frame/standard
 	paint_color = COLOR_WALL_GUNMETAL
+	stripe_color = COLOR_GUNMETAL
 
 /obj/structure/wall_frame/titanium
 	material = /decl/material/solid/metal/titanium
 
 /obj/structure/wall_frame/hull
 	paint_color = COLOR_HULL
+	stripe_color = COLOR_HULL

@@ -1,6 +1,7 @@
 /decl/material/solid/metal/aliumium
 	name = "alien alloy"
 	icon_base = 'icons/turf/walls/metal.dmi'
+	wall_paintable = PAINT_PAINTABLE
 	door_icon_base = "metal"
 	icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
 	hitsound = 'sound/weapons/smash.ogg'
@@ -11,6 +12,7 @@
 
 /decl/material/solid/metal/aliumium/New()
 	icon_base = 'icons/turf/walls/metal.dmi'
+	wall_paintable = PAINT_PAINTABLE
 	color = rgb(rand(10,150),rand(10,150),rand(10,150))
 	explosion_resistance = rand(25,40)
 	brute_armor = rand(10,20)

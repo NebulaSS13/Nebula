@@ -48,6 +48,7 @@
 	integrity = 10
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	wall_paintable = PAINT_PAINTABLE|PAINT_STRIPABLE
 	use_reinf_state = null
 	color = "#aaaaaa"
 	hardness = MAT_VALUE_SOFT
