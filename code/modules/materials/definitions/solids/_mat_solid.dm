@@ -4,6 +4,7 @@
 	boiling_point = 30000
 	door_icon_base = "stone"
 	icon_base = 'icons/turf/walls/stone.dmi'
+	wall_paintable = 0
 	table_icon_base = "stone"
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
 	default_solid_form = /obj/item/stack/material/brick

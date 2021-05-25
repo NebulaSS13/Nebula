@@ -16,6 +16,7 @@
 	taste_description = "the inside of a reactor"
 	radioactivity = 12
 	icon_base = 'icons/turf/walls/stone.dmi'
+	wall_paintable = 0
 	table_icon_base = "stone"
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
 	color = "#007a00"
