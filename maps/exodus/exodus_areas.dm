@@ -498,6 +498,7 @@
 //Brig
 
 /area/exodus/security/brig
+	name = "\improper Security - Brig"
 	req_access = list(access_brig)
 
 /area/exodus/security/brig/processing
@@ -716,7 +717,7 @@
 	ambience = list('sound/ambience/ambimalf.ogg')
 
 /area/exodus/turret_protected/ai_upload_foyer
-	name = "\improper  AI Upload Access"
+	name = "\improper AI Upload Access"
 	icon_state = "ai_foyer"
 	ambience = list('sound/ambience/ambimalf.ogg')
 	sound_env = SMALL_ENCLOSED
