@@ -487,5 +487,5 @@
 /datum/job/proc/check_special_blockers(var/datum/preferences/prefs)
 	return
 
-/datum/job/proc/do_spawn_special(var/mob/living/character, var/mob/new_player/new_player_mob)
+/datum/job/proc/do_spawn_special(var/mob/living/character, var/mob/new_player/new_player_mob, var/latejoin = FALSE)
 	return FALSE
