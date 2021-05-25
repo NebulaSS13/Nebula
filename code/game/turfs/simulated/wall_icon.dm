@@ -137,7 +137,7 @@
 				I = image(icon, "[wall_connections[i]]", dir = 1<<(i-1))
 			I.color = paint_color
 			add_overlay(I)
-		if(stripe_color && "stripe0" in icon_states(icon))
+		if(stripe_color && ("stripe0" in icon_states(icon)))
 			I = image(icon, "stripe[wall_connections[i]]", dir = 1<<(i-1))
 			I.color = stripe_color
 			add_overlay(I)
