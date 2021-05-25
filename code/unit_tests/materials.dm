@@ -89,10 +89,10 @@
 				if(!check_state_in_icon("other[i]", mat.icon_base))
 					LAZYADD(failed, "[mat_type] - '[mat.icon_base]' - missing connective base icon state 'other[i]'")
 
-			if(mat.wall_paintable |= PAINT_PAINTABLE)
+			if(mat.wall_paintable & PAINT_PAINTABLE)
 				if(!check_state_in_icon("paint[i]", mat.icon_base))
 					LAZYADD(failed, "[mat_type] - '[mat.icon_base]' - missing directional paint icon state '[i]'")
-			if(mat.wall_paintable |= PAINT_STRIPABLE)
+			if(mat.wall_paintable & PAINT_STRIPABLE)
 				if(!check_state_in_icon("stripe[i]", mat.icon_base))
 					LAZYADD(failed, "[mat_type] - '[mat.icon_base]' - missing directional stripe icon state '[i]'")
 
