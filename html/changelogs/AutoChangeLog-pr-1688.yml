@@ -1,0 +1,5 @@
+author: comma
+delete-after: true
+changes:
+  - bugfix: Melee weapons now actually use their armor penetration values against
+      armor
