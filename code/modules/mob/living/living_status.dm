@@ -6,7 +6,7 @@
 /mob/living/set_status(var/condition, var/amount)
 	if(!ispath(condition, /decl/status_condition))
 		return FALSE
-	var/decl/status_condition/cond = decls_repository.get_decl(condition)
+	var/decl/status_condition/cond = GET_DECL(condition)
 	if(!cond.check_can_set(src))
 		return FALSE
 	amount = Clamp(amount, 0, 1000)
@@ -43,13 +43,13 @@
 		rebuild_status_markers()
 
 /mob/living/proc/status_change(var/condition, var/new_amount, var/last_amount)
-	var/decl/status_condition/status = decls_repository.get_decl(condition)
+	var/decl/status_condition/status = GET_DECL(condition)
 	status.handle_changed_amount(src, new_amount, last_amount)
 
 /mob/living/handle_status_effects()
 	. = ..()
 	for(var/condition in status_counters)
-		var/decl/status_condition/status = decls_repository.get_decl(condition)
+		var/decl/status_condition/status = GET_DECL(condition)
 		status.handle_status(src, status_counters[condition])
 		if(GET_STATUS(src, condition) <= 0)
 			status_counters -= condition
