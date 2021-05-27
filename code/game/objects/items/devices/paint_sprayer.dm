@@ -143,16 +143,16 @@
 
 
 /obj/item/paint_sprayer/proc/paint_wall(var/turf/simulated/wall/W, var/mob/user)
-	if(istype(W) && (!W.material || !W.material.wall_paintable))
+	if(istype(W) && (!W.material || !W.material.wall_flags))
 		to_chat(user, SPAN_WARNING("You can't paint this wall type."))
 		return
 	var/choice
-	if(W.material.wall_paintable == PAINT_PAINTABLE)
-		choice = PAINT_REGION_PAINT
-	else if(W.material.wall_paintable == PAINT_STRIPABLE)
-		choice = PAINT_REGION_STRIPE
-	else if(W.material.wall_paintable == PAINT_PAINTABLE|PAINT_STRIPABLE)
+	if(W.material.wall_flags & PAINT_PAINTABLE && W.material.wall_flags & PAINT_STRIPABLE)
 		choice = input(user, "What do you wish to paint?") as null|anything in list(PAINT_REGION_PAINT,PAINT_REGION_STRIPE)
+	else if(W.material.wall_flags & PAINT_PAINTABLE)
+		choice = PAINT_REGION_PAINT
+	else if(W.material.wall_flags & PAINT_STRIPABLE)
+		choice = PAINT_REGION_STRIPE
 	if (user.incapacitated() || !W || !user.Adjacent(W))
 		return FALSE
 	if(choice == PAINT_REGION_PAINT)
@@ -162,7 +162,7 @@
 
 
 /obj/item/paint_sprayer/proc/pick_color_from_wall(var/turf/simulated/wall/W, var/mob/user)
-	if (!W.material || !W.material.wall_paintable)
+	if (!W.material || !W.material.wall_flags)
 		return FALSE
 
 	switch (select_wall_region(W, user, "Where do you wish to select the color from?"))
@@ -176,9 +176,9 @@
 
 /obj/item/paint_sprayer/proc/select_wall_region(var/turf/simulated/wall/W, var/mob/user, var/input_text)
 	var/list/choices = list()
-	if (W.material.wall_paintable & PAINT_PAINTABLE)
+	if (W.material.wall_flags & PAINT_PAINTABLE)
 		choices |= PAINT_REGION_PAINT
-	if (W.material.wall_paintable & PAINT_STRIPABLE)
+	if (W.material.wall_flags & PAINT_STRIPABLE)
 		choices |= PAINT_REGION_STRIPE
 	var/choice = input(user, input_text) as null|anything in sortTim(choices, /proc/cmp_text_asc)
 	if (user.incapacitated() || !W || !user.Adjacent(W))

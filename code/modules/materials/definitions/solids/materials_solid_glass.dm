@@ -59,7 +59,7 @@
 	integrity = 120
 	icon_base = 'icons/turf/walls/plastic.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
-	wall_paintable = 0
+	wall_flags = 0
 	use_reinf_state = null
 	door_icon_base = "plastic"
 	hardness = MAT_VALUE_FLEXIBLE
