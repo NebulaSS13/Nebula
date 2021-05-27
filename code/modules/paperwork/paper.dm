@@ -52,7 +52,7 @@
 	set_content(text ? text : info, title)
 	metadata = md
 	if(!mapload)
-		SSpersistence.track_value(src, /datum/persistent/paper)
+		SSpersistence.track_value(src, /decl/persistence_handler/paper)
 
 /obj/item/paper/proc/set_content(text,title)
 	set waitfor = FALSE
