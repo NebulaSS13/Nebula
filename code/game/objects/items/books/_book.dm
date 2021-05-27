@@ -26,11 +26,11 @@
 
 /obj/item/book/Initialize(var/ml)
 	if(!ml && !unique)
-		SSpersistence.track_value(src, /datum/persistent/book)
+		SSpersistence.track_value(src, /decl/persistence_handler/book)
 	. = ..()
 
 /obj/item/book/Destroy()
-	if(dat && last_modified_ckey && SSpersistence.is_tracking(src, /datum/persistent/book))
+	if(dat && last_modified_ckey && SSpersistence.is_tracking(src, /decl/persistence_handler/book))
 		// Create a new book in nullspace that is tracked by persistence.
 		// This is so destroying a book does not get rid of someone's 
 		// content, as books with null coords will get spawned in a random
@@ -44,7 +44,7 @@
 		backup_book.forceMove(null)
 		backup_book.SetName(backup_book.title)
 
-	SSpersistence.forget_value(src, /datum/persistent/book)
+	SSpersistence.forget_value(src, /decl/persistence_handler/book)
 	. = ..()
 
 /obj/item/book/attack_self(var/mob/user)
