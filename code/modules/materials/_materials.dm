@@ -93,7 +93,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/icon_base = 'icons/turf/walls/solid.dmi'
 	var/icon_base_natural = 'icons/turf/walls/natural.dmi'
 	var/icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
-	var/wall_paintable = 0 //PAINT_PAINTABLE|PAINT_STRIPABLE
+	var/wall_paintable = 0
 	var/use_reinf_state = "full"
 
 	var/door_icon_base = "metal"                         // Door base icon tag. See header.
