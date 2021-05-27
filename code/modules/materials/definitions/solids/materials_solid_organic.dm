@@ -4,7 +4,7 @@
 	flags = MAT_FLAG_BRITTLE
 	icon_base = 'icons/turf/walls/plastic.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
-	wall_paintable = 0
+	wall_flags = 0
 	use_reinf_state = null
 	color = COLOR_EGGSHELL
 	door_icon_base = "plastic"
@@ -49,7 +49,7 @@
 	integrity = 10
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
-	wall_paintable = PAINT_PAINTABLE|PAINT_STRIPABLE
+	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 	use_reinf_state = null
 	color = "#aaaaaa"
 	hardness = MAT_VALUE_SOFT

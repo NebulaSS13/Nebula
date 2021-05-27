@@ -6,7 +6,7 @@
 	color = WOOD_COLOR_GENERIC
 	integrity = 75
 	icon_base = 'icons/turf/walls/wood.dmi'
-	wall_paintable = PAINT_PAINTABLE|PAINT_STRIPABLE
+	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 	table_icon_base = "wood"
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER

@@ -160,7 +160,7 @@
 					I.color = reinf_color
 					add_overlay(I)
 
-	if(check_state_in_icon("other0", icon))
+	if(material.wall_flags & WALL_HAS_EDGES)
 		for(var/i = 1 to 4)
 			I = image(material_icon_base, "other[other_connections[i]]", dir = 1<<(i-1))
 			I.color = stripe_color ? stripe_color : base_color
