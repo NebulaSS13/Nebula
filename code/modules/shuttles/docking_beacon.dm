@@ -193,7 +193,7 @@
 	if(href_list["finalize"])
 		if(!construction_mode)
 			return TOPIC_HANDLED
-		var/confirm = alert(user, "This will permanently finalize the ship, are you sure?", "Ship finalization", "Yes", "No")
+		var/confirm = alert(user, "This will permanently finalize the ship, are you sure?", "Ship finalization", "No", "Yes")
 		if(!CanInteract(usr,state))
 			return TOPIC_NOACTION
 		if(confirm == "Yes")
@@ -326,7 +326,7 @@
 	var/obj/effect/shuttle_landmark/temporary/construction/landmark = new(get_turf(src), base_area, get_base_turf(z))
 	new /datum/shuttle/autodock/overmap/created(null, landmark, shuttle_areas.Copy(), ship_name)
 
-	new /obj/effect/overmap/visitable/ship/landable/created(get_turf(src), ship_name, ship_color)
+	new /obj/effect/overmap/visitable/ship/landable/created(get_turf(src), ship_name, ship_color, global.reverse_dir[dir])
 	permitted_shuttles |= ship_name
 	return TRUE
 

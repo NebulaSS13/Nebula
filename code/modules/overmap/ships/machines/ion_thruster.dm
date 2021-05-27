@@ -43,14 +43,15 @@
 	var/generated_thrust = 2.5
 
 /obj/machinery/ion_thruster/attackby(obj/item/I, mob/user)
-	. = ..()
 	if(isMultitool(I) && !panel_open)
 		var/datum/extension/ship_engine/engine = get_extension(src, /datum/extension/ship_engine)
 		if(engine.sync_to_ship())
 			to_chat(user, SPAN_NOTICE("\The [src] emits a ping as it syncs its controls to a nearby ship."))
 		else
 			to_chat(user, SPAN_WARNING("\The [src] flashes an error!"))
-		return
+		return TRUE
+	
+	. = ..()
 
 /obj/machinery/ion_thruster/proc/burn(var/partial)
 	if(!use_power || !powered())
