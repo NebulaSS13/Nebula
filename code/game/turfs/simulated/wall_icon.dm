@@ -109,10 +109,13 @@
 					if(success)
 						wall_dirs += get_dir(src, T)
 						if(get_dir(src, T) in global.cardinal)
-							for(var/nb_type in global.wall_fullblend_objects)
-								if(istype(O, nb_type))
+							var/blendable = FALSE
+							for(var/fb_type in global.wall_fullblend_objects)
+								if(istype(O, fb_type))
+									blendable = TRUE
 									break
-							other_dirs += get_dir(src, T)
+							if(!blendable)
+								other_dirs += get_dir(src, T)
 						break
 		wall_connections = dirs_to_corner_states(wall_dirs)
 		other_connections = dirs_to_corner_states(other_dirs)
@@ -131,13 +134,10 @@
 		I.color = base_color
 		add_overlay(I)
 		if(paint_color)
-			if("paint0" in icon_states(icon))
-				I = image(icon, "paint[wall_connections[i]]", dir = 1<<(i-1))
-			else
-				I = image(icon, "[wall_connections[i]]", dir = 1<<(i-1))
+			I = image(icon, "paint[wall_connections[i]]", dir = 1<<(i-1))
 			I.color = paint_color
 			add_overlay(I)
-		if(stripe_color && ("stripe0" in icon_states(icon)))
+		if(stripe_color)
 			I = image(icon, "stripe[wall_connections[i]]", dir = 1<<(i-1))
 			I.color = stripe_color
 			add_overlay(I)
@@ -160,10 +160,11 @@
 					I.color = reinf_color
 					add_overlay(I)
 
-	for(var/i = 1 to 4)
-		I = image(material_icon_base, "other[other_connections[i]]", dir = 1<<(i-1))
-		I.color = stripe_color ? stripe_color : base_color
-		add_overlay(I)
+	if(check_state_in_icon("other0", icon))
+		for(var/i = 1 to 4)
+			I = image(material_icon_base, "other[other_connections[i]]", dir = 1<<(i-1))
+			I.color = stripe_color ? stripe_color : base_color
+			add_overlay(I)
 
 	var/image/texture = material.get_wall_texture()
 	if(texture)

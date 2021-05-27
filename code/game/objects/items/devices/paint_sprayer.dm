@@ -143,7 +143,7 @@
 
 
 /obj/item/paint_sprayer/proc/paint_wall(var/turf/simulated/wall/W, var/mob/user)
-	if(!W.material || !W.material.wall_paintable)
+	if(istype(W) && (!W.material || !W.material.wall_paintable))
 		to_chat(user, SPAN_WARNING("You can't paint this wall type."))
 		return
 	var/choice
