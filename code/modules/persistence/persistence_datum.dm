@@ -95,6 +95,9 @@
 	. = tokens
 
 /decl/persistence_handler/Initialize()
+
+	. = ..()
+
 	if(!fexists(filename))
 		return
 
