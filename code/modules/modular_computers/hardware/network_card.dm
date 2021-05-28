@@ -26,12 +26,10 @@
 		. += "OpenEth (Physical Connection) - Physical network connection port"
 
 /obj/item/stock_parts/computer/network_card/Initialize()
-	set_extension(src, /datum/extension/network_device)
-	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
+	set_extension(src, /datum/extension/network_device/stock_part)
+	var/datum/extension/network_device/stock_part/D = get_extension(src, /datum/extension/network_device)
 	if(long_range)
 		D.connection_type = NETWORK_CONNECTION_STRONG_WIRELESS
-	if(ethernet)
-		D.connection_type = NETWORK_CONNECTION_WIRED
 	. = ..()
 
 /obj/item/stock_parts/computer/network_card/advanced
@@ -42,15 +40,6 @@
 	power_usage = 100 // Better range but higher power usage.
 	icon_state = "netcard_advanced"
 	hardware_size = 1
-
-/obj/item/stock_parts/computer/network_card/wired
-	name = "wired network card"
-	desc = "An advanced network card for usage with standard network protocols. This one also supports wired connection."
-	ethernet = 1
-	origin_tech = "{'programming':5,'engineering':3}"
-	power_usage = 100 // Better range but higher power usage.
-	icon_state = "netcard_ethernet"
-	hardware_size = 3
 
 // Returns a string identifier of this network card
 /obj/item/stock_parts/computer/network_card/proc/get_network_tag()

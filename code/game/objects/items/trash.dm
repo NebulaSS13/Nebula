@@ -16,11 +16,11 @@
 
 /obj/item/trash/Initialize(var/ml)
 	if(!ml)
-		SSpersistence.track_value(src, /datum/persistent/filth/trash)
+		SSpersistence.track_value(src, /decl/persistence_handler/filth/trash)
 	. = ..()
 
 /obj/item/trash/Destroy()
-	SSpersistence.forget_value(src, /datum/persistent/filth/trash)
+	SSpersistence.forget_value(src, /decl/persistence_handler/filth/trash)
 	. = ..()
 
 /obj/item/trash/raisins

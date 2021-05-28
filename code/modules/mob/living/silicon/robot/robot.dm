@@ -143,6 +143,9 @@
 
 	add_robot_verbs()
 
+	// Disables lay down verb for robots due they're can't lay down and it cause some movement, vision issues.
+	verbs -= /mob/living/verb/lay_down
+
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealth100")
 	hud_list[LIFE_HUD]        = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealth100")

@@ -104,3 +104,9 @@
 
 /datum/fabricator_recipe/engineering/power_sensor
 	path = /obj/item/machine_chassis/power_sensor
+
+/datum/fabricator_recipe/engineering/wall_router
+	path = /obj/item/frame/wall_router
+
+/datum/fabricator_recipe/engineering/wall_relay
+	path = /obj/item/frame/wall_relay

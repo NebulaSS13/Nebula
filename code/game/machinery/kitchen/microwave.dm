@@ -83,8 +83,8 @@
 		else //Otherwise bad luck!!
 			to_chat(user, "<span class='warning'>It's dirty!</span>")
 			return 1
-	else if(is_type_in_list(O, SScuisine.microwave_accepts_items))
-		if (LAZYLEN(ingredients) >= SScuisine.microwave_maximum_item_storage)
+	else if(is_type_in_list(O, global.microwave_accepts_items))
+		if (LAZYLEN(ingredients) >= global.microwave_maximum_item_storage)
 			to_chat(user, "<span class='warning'>This [src] is full of ingredients, you cannot put more.</span>")
 			return 1
 		if(istype(O, /obj/item/stack)) // This is bad, but I can't think of how to change it
@@ -111,7 +111,7 @@
 		if (!O.reagents)
 			return 1
 		for (var/R in O.reagents.reagent_volumes)
-			if (!(R in SScuisine.microwave_accepts_reagents))
+			if (!(R in global.microwave_accepts_reagents))
 				to_chat(user, "<span class='warning'>Your [O] contains components unsuitable for cookery.</span>")
 				return 1
 		return
@@ -133,7 +133,7 @@
 		else
 			to_chat(user, "<span class='notice'>You decide not to do that.</span>")
 	else
-		to_chat(user, "<span class='warning'>You have no idea what you can cook with this [O].</span>")
+		to_chat(user, SPAN_WARNING("You have no idea what you can cook with \the [O]."))
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/components_are_accessible(path)
@@ -219,7 +219,7 @@
 		if (items_counts.len==0 && LAZYLEN(reagents?.reagent_volumes))
 			dat += "<B>The microwave is empty</B>"
 		else
-			dat += "<b>Ingredients:</b><br>[dat]"
+			dat += "<b>Ingredients:</b><br>[english_list(dat)]"
 		dat += "<HR><BR><A href='?src=\ref[src];action=cook'>Turn on!<BR><A href='?src=\ref[src];action=dispose'>Eject ingredients!"
 
 	show_browser(user, "<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[jointext(dat,"<br>")]</TT>", "window=microwave")
@@ -231,6 +231,23 @@
 /***********************************
 *   Microwave Menu Handling/Cooking
 ************************************/
+/obj/machinery/microwave/proc/select_recipe()
+
+	var/list/possible_recipes = list()
+	var/list/all_recipes = decls_repository.get_decls_of_subtype(/decl/recipe)
+	for(var/rtype in all_recipes)
+		var/decl/recipe/recipe = all_recipes[rtype]
+		if(istype(recipe) && recipe.check_reagents(reagents) && recipe.check_items(src) && recipe.check_fruit(src))
+			possible_recipes += recipe
+
+	//okay, let's select the most complicated recipe
+	if(length(possible_recipes))
+		var/highest_count = 0
+		for(var/decl/recipe/recipe in possible_recipes)
+			var/count = length(recipe.items) + length(recipe.reagents) + length(recipe.fruit)
+			if(count >= highest_count)
+				highest_count = count
+				. = recipe
 
 /obj/machinery/microwave/proc/cook()
 	if(stat & (NOPOWER|BROKEN))
@@ -243,7 +260,7 @@
 		stop()
 		return
 
-	var/datum/recipe/recipe = select_recipe(SScuisine.microwave_recipes, src)
+	var/decl/recipe/recipe = select_recipe()
 	var/obj/cooked
 	if (!recipe)
 		dirty += 1

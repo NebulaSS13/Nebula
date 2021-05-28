@@ -80,6 +80,30 @@
 	name = "air alarm kit"
 	desc = "An all-in-one air alarm kit, comes preassembled."
 
+/obj/item/frame/wall_router
+	name = "wall-mounted router frame"
+	desc = "Used for building wall-mounted network routers."
+	icon = 'icons/obj/machines/wall_router.dmi'
+	icon_state = "wall_router_o_off"
+	build_machine_type = /obj/machinery/network/router/wall_mounted
+
+/obj/item/frame/wall_router/kit
+	fully_construct = TRUE
+	name = "wall-mounted router kit"
+	desc = "An all-in-one wall-mounted router kit, comes preassembled."
+
+/obj/item/frame/wall_relay
+	name = "wall-mounted relay frame"
+	desc = "Used for building wall-mounted network relays."
+	icon = 'icons/obj/machines/wall_router.dmi'
+	icon_state = "wall_router_o_off"
+	build_machine_type = /obj/machinery/network/relay/wall_mounted
+
+/obj/item/frame/wall_relay/kit
+	fully_construct = TRUE
+	name = "wall-mounted relay kit"
+	desc = "An all-in-one wall-mounted relay kit, comes preassembled."
+
 /obj/item/frame/light
 	name = "light fixture frame"
 	desc = "Used for building lights."

@@ -28,6 +28,24 @@
 /datum/job/ai/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
 	return H
 
+/datum/job/ai/do_spawn_special(var/mob/living/character, var/mob/new_player/new_player_mob, var/latejoin)
+	character = character.AIize(move=0) // AIize the character, but don't move them yet
+
+	// is_available for AI checks that there is an empty core available in this list
+	var/obj/structure/aicore/deactivated/C = empty_playable_ai_cores[1]
+	empty_playable_ai_cores -= C
+
+	character.forceMove(C.loc)
+	var/mob/living/silicon/ai/A = character
+	A.on_mob_init()
+
+	if(latejoin)
+		new_player_mob.AnnounceCyborg(character, title, "has been downloaded to the empty core in \the [get_area(character)]")
+	SSticker.mode.handle_latejoin(character)
+
+	qdel(C)
+	return TRUE
+
 /datum/job/cyborg
 	title = "Robot"
 	event_categories = list("Robot")
