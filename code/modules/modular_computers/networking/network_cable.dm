@@ -26,15 +26,21 @@
 		var/turf/T = get_step(get_turf(src), dir)
 		for(var/obj/structure/network_cable/cable in T)
 			cable.update_icon()
+	if(HasBelow(z))
+		for(var/obj/structure/network_cable/cable in GetBelow(src))
+			cable.update_icon()
+	if(HasAbove(z))
+		for(var/obj/structure/network_cable/cable in GetAbove(src))
+			cable.update_icon()
 	. = ..()
 
 /obj/structure/network_cable/attackby(obj/item/O, mob/user)
 	. = ..()
 	if(isWirecutter(O))
 		var/turf/T = get_turf(src)
-		if(T && do_after(user, 15))
+		if(T && do_after(user, 15) && !QDELETED(src))
 			to_chat(user, SPAN_NOTICE("You cut \the [src]."))
-			new/obj/item/stack/net_cable_coil(T, 1)
+			new/obj/item/stack/net_cable_coil(T, istype(src,/obj/structure/network_cable/terminal) ? 5 : 1)
 			qdel(src)
 
 /obj/structure/network_cable/proc/update_network()
@@ -42,6 +48,18 @@
 	for(var/dir in global.cardinal)
 		var/turf/T = get_step(get_turf(src), dir)
 		for(var/obj/structure/network_cable/cable in T)
+			var/datum/graph/G = cable.network_node.graph
+			if(G)
+				LAZYADD(graphs[G], cable.network_node)
+			cable.update_icon()
+	if(HasBelow(z))
+		for(var/obj/structure/network_cable/cable in GetBelow(src))
+			var/datum/graph/G = cable.network_node.graph
+			if(G)
+				LAZYADD(graphs[G], cable.network_node)
+			cable.update_icon()
+	if(HasAbove(z))
+		for(var/obj/structure/network_cable/cable in GetAbove(src))
 			var/datum/graph/G = cable.network_node.graph
 			if(G)
 				LAZYADD(graphs[G], cable.network_node)
@@ -62,6 +80,13 @@
 		var/turf/T = get_step(get_turf(src), dir)
 		for(var/obj/structure/network_cable/cable in T)
 			adj_nodes |= cable.network_node
+	if(HasBelow(z))
+		for(var/obj/structure/network_cable/cable in GetBelow(src))
+			adj_nodes |= cable.network_node
+	if(HasAbove(z))
+		for(var/obj/structure/network_cable/cable in GetAbove(src))
+			adj_nodes |= cable.network_node
+
 	ex_neighbours = neighbours - adj_nodes
 	new_neighbours = adj_nodes - neighbours
 	if(length(ex_neighbours)) // Check length to ensure we don't accidentally completely disconnect the node from a graph.
@@ -94,6 +119,14 @@
 		for(var/obj/structure/network_cable/cable in T)
 			if(!QDELETED(cable))
 				cable_overlays |= image(icon, "cable[dir]")
+	if(HasBelow(z))
+		var/turf/T = GetBelow(src)
+		var/obj/structure/network_cable/cable = locate() in T
+		if(cable) cable_overlays |= image(icon, "cable-down")
+	if(HasAbove(z))
+		var/turf/T = GetAbove(src)
+		var/obj/structure/network_cable/cable = locate() in T
+		if(cable) cable_overlays |= image(icon, "cable-up")
 	set_overlays(cable_overlays)
 
 /obj/structure/network_cable/terminal
