@@ -26,11 +26,13 @@
 		var/turf/T = get_step(get_turf(src), dir)
 		for(var/obj/structure/network_cable/cable in T)
 			cable.update_icon()
-	if(HasBelow(z))
+	var/turf/T = get_turf(src)
+	if(T.is_open())
 		for(var/obj/structure/network_cable/cable in GetBelow(src))
 			cable.update_icon()
-	if(HasAbove(z))
-		for(var/obj/structure/network_cable/cable in GetAbove(src))
+	var/turf/U = GetAbove(src)
+	if(U?.is_open())
+		for(var/obj/structure/network_cable/cable in U)
 			cable.update_icon()
 	. = ..()
 
@@ -52,14 +54,16 @@
 			if(G)
 				LAZYADD(graphs[G], cable.network_node)
 			cable.update_icon()
-	if(HasBelow(z))
+	var/turf/T = get_turf(src)
+	if(T.is_open())
 		for(var/obj/structure/network_cable/cable in GetBelow(src))
 			var/datum/graph/G = cable.network_node.graph
 			if(G)
 				LAZYADD(graphs[G], cable.network_node)
 			cable.update_icon()
-	if(HasAbove(z))
-		for(var/obj/structure/network_cable/cable in GetAbove(src))
+	var/turf/U = GetAbove(src)
+	if(U?.is_open())
+		for(var/obj/structure/network_cable/cable in U)
 			var/datum/graph/G = cable.network_node.graph
 			if(G)
 				LAZYADD(graphs[G], cable.network_node)
@@ -80,11 +84,13 @@
 		var/turf/T = get_step(get_turf(src), dir)
 		for(var/obj/structure/network_cable/cable in T)
 			adj_nodes |= cable.network_node
-	if(HasBelow(z))
+	var/turf/T = get_turf(src)
+	if(T.is_open())
 		for(var/obj/structure/network_cable/cable in GetBelow(src))
 			adj_nodes |= cable.network_node
-	if(HasAbove(z))
-		for(var/obj/structure/network_cable/cable in GetAbove(src))
+	var/turf/U = GetAbove(src)
+	if(U?.is_open())
+		for(var/obj/structure/network_cable/cable in U)
 			adj_nodes |= cable.network_node
 
 	ex_neighbours = neighbours - adj_nodes
@@ -119,13 +125,14 @@
 		for(var/obj/structure/network_cable/cable in T)
 			if(!QDELETED(cable))
 				cable_overlays |= image(icon, "cable[dir]")
-	if(HasBelow(z))
-		var/turf/T = GetBelow(src)
-		var/obj/structure/network_cable/cable = locate() in T
+	var/turf/T = get_turf(src)
+	if(T.is_open())
+		var/turf/A = GetBelow(src)
+		var/obj/structure/network_cable/cable = locate() in A
 		if(cable) cable_overlays |= image(icon, "cable-down")
-	if(HasAbove(z))
-		var/turf/T = GetAbove(src)
-		var/obj/structure/network_cable/cable = locate() in T
+	var/turf/U = GetAbove(src)
+	if(U?.is_open())
+		var/obj/structure/network_cable/cable = locate() in U
 		if(cable) cable_overlays |= image(icon, "cable-up")
 	set_overlays(cable_overlays)
 
