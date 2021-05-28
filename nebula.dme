@@ -108,6 +108,7 @@
 #include "code\_helpers\auxtools.dm"
 #include "code\_helpers\builtin_proc_callers.dm"
 #include "code\_helpers\cmp.dm"
+#include "code\_helpers\dll_call.dm"
 #include "code\_helpers\emissive.dm"
 #include "code\_helpers\files.dm"
 #include "code\_helpers\functional.dm"
