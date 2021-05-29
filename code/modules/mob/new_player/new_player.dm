@@ -149,7 +149,6 @@
 			if(mannequin)
 				client.prefs.dress_preview_mob(mannequin)
 				observer.set_appearance(mannequin)
-				qdel(mannequin)
 
 			if(client.prefs.be_random_name)
 				client.prefs.real_name = client.prefs.get_random_name()
