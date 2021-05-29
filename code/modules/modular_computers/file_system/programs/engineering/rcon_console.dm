@@ -125,7 +125,7 @@
 	for(var/obj/machinery/power/smes/buildable/SMES in SSmachines.machinery)
 		if(can_connect_to(SMES))
 			known_SMESs.Add(SMES)
-	known_SMESs = sortTim(known_SMESs, /proc/cmp_rcon_tag_asc, TRUE)
+	known_SMESs = sortTim(known_SMESs, /proc/cmp_rcon_tag_asc)
 
 	known_breakers = new /list()
 	for(var/obj/machinery/power/breakerbox/breaker in SSmachines.machinery)
