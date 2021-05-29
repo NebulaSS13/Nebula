@@ -122,112 +122,112 @@
 
 /decl/hierarchy/supply_pack/supply/snackvendor
 	name = "Vendor - Getmoore Chocolate Co"
-	contains = list(/obj/machinery/vending/snack{anchored = 0})
+	contains = list(/obj/machinery/vending/snack)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/snixvendor
 	name = "Vendor - Snix Zakuson TCC"
-	contains = list(/obj/machinery/vending/snix{anchored = 0})
+	contains = list(/obj/machinery/vending/snix)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/solvendor
 	name = "Vendor - Mars Mart SCC"
-	contains = list(/obj/machinery/vending/sol{anchored = 0})
+	contains = list(/obj/machinery/vending/sol)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/sodavendor
 	name = "Vendor - Softdrinks Robust Industries LLC"
-	contains = list(/obj/machinery/vending/cola{anchored = 0})
+	contains = list(/obj/machinery/vending/cola)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/lavatoryvendor
 	name = "Vendor - Lavatory Essentials - Waffle Co"
-	contains = list(/obj/machinery/vending/lavatory{anchored = 0})
+	contains = list(/obj/machinery/vending/lavatory)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/boozevendor
 	name = "Vendor - Booze-o-mat - GrekkaTarg Boozeries"
-	contains = list(/obj/machinery/vending/boozeomat{anchored = 0})
+	contains = list(/obj/machinery/vending/boozeomat)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/gamevendor
 	name = "Vendor - Games - Honk Co"
-	contains = list(/obj/machinery/vending/games{anchored = 0})
+	contains = list(/obj/machinery/vending/games)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/fitnessvendor
 	name = "Vendor - Fitness - SwolMAX Bros"
-	contains = list(/obj/machinery/vending/fitness{anchored = 0})
+	contains = list(/obj/machinery/vending/fitness)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/cigarettevendor
 	name = "Vendor - Cigarettes - Gideon Asbestos Mining Conglomerate"
-	contains = list(/obj/machinery/vending/cigarette{anchored = 0})
+	contains = list(/obj/machinery/vending/cigarette)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/roboticsvendor
 	name = "Vendor - Robotics - Dandytronics LLT"
-	contains = list(/obj/machinery/vending/robotics{anchored = 0})
+	contains = list(/obj/machinery/vending/robotics)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/engineeringvendor
 	name = "Vendor - Engineering - Dandytronics LLT"
-	contains = list(/obj/machinery/vending/engineering{anchored = 0})
+	contains = list(/obj/machinery/vending/engineering)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/toolvendor
 	name = "Vendor - Tools - YouTool Co"
-	contains = list(/obj/machinery/vending/tool{anchored = 0})
+	contains = list(/obj/machinery/vending/tool)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/coffeevendor
 	name = "Vendor - Coffee - Hot Drinks LCD"
-	contains = list(/obj/machinery/vending/coffee{anchored = 0})
+	contains = list(/obj/machinery/vending/coffee)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/dinnerwarevendor
 	name = "Vendor - Dinnerwares - Plastic Tat Inc"
-	contains = list(/obj/machinery/vending/dinnerware{anchored = 0})
+	contains = list(/obj/machinery/vending/dinnerware)
 	cost = 150
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/bodavendor
 	name = "Vendor - BODA - Zakuson TCC"
-	contains = list(/obj/machinery/vending/sovietsoda{anchored = 0})
+	contains = list(/obj/machinery/vending/sovietsoda)
 	cost = 250
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
 
 /decl/hierarchy/supply_pack/supply/weebvendor
 	name = "Vendor - Nippon-tan - ArigatoRobotics LCD"
-	contains = list(/obj/machinery/vending/weeb{anchored = 0})
+	contains = list(/obj/machinery/vending/weeb)
 	cost = 50
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
