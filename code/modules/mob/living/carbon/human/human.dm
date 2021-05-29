@@ -883,12 +883,9 @@
 
 /mob/living/carbon/human/revive()
 
-	if(should_have_organ(BP_HEART))
-		vessel.add_reagent(species.blood_reagent, species.blood_volume-vessel.total_volume)
-		fixblood()
-
 	species.create_organs(src) // Reset our organs/limbs.
 	restore_all_organs()       // Reapply robotics/amputated status from preferences.
+	reset_blood()
 
 	if(!client || !key) //Don't boot out anyone already in the mob.
 		for (var/obj/item/organ/internal/brain/H in world)
@@ -1132,15 +1129,8 @@
 	bone_material = species.bone_material
 	bone_amount =   species.bone_amount
 
-	spawn(0)
-		regenerate_icons()
-		if(vessel.total_volume < species.blood_volume)
-			vessel.maximum_volume = species.blood_volume
-			vessel.add_reagent(species.blood_reagent, species.blood_volume - vessel.total_volume)
-		else if(vessel.total_volume > species.blood_volume)
-			vessel.remove_any(vessel.total_volume - species.blood_volume)
-			vessel.maximum_volume = species.blood_volume
-		fixblood()
+	regenerate_icons()
+	reset_blood()
 
 	// Rebuild the HUD and visual elements.
 	if(client)
