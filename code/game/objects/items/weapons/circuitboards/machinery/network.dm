@@ -61,6 +61,11 @@
 		/obj/item/stock_parts/keyboard = 1
 	)
 
+/obj/item/stock_parts/circuitboard/relay/wall_mounted
+	name = "circuitboard (wall-mounted relay)"
+	board_type = "wall"
+	build_path = /obj/machinery/network/relay/wall_mounted
+
 /obj/item/stock_parts/circuitboard/relay/long_range
 	name = "circuitboard (long-ranged relay)"
 	build_path = /obj/machinery/network/relay/long_range
