@@ -14,6 +14,7 @@
 	var/decl/security_level/security_level
 
 //Is run once on init for non-base-category supplypacks.
+var/global/list/cargoprices = list()
 /decl/hierarchy/supply_pack/proc/setup()
 	if(!num_contained)
 		for(var/entry in contains)
@@ -28,6 +29,18 @@
 		cost = max(1, CEILING(cost, WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT))
 	var/decl/supply_method/sm = GET_DECL(supply_method)
 	manifest = sm.setup_manifest(src)
+	cargoprices[name] = cost
+
+/client/proc/print_cargo_prices()
+	set name = "Print Cargo Prices"
+	set category = "Debug"
+
+	cargoprices = sortTim(cargoprices, /proc/cmp_numeric_asc, TRUE)
+	var/pad = 0
+	for(var/key in cargoprices)
+		pad = max(pad, length_char(key)+2)
+	for(var/key in cargoprices)
+		to_chat(mob, "[pad_right("[key]:", pad, " ")][global.cargoprices[key]]")
 
 /decl/hierarchy/supply_pack/proc/sec_available()
 	if(isnull(security_level))
