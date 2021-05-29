@@ -312,18 +312,6 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 	updatehealth()
 	BITSET(hud_updateflag, HEALTH_HUD)
 
-
-////////////////////////////////////////////
-
-/*
-This function restores the subjects blood to max.
-*/
-/mob/living/carbon/human/proc/restore_blood()
-	if(!should_have_organ(BP_HEART))
-		return
-	if(vessel.total_volume < species.blood_volume)
-		vessel.add_reagent(species.blood_reagent, species.blood_volume - vessel.total_volume)
-
 /*
 This function restores all organs.
 */
