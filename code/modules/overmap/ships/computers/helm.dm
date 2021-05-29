@@ -127,7 +127,7 @@ var/global/list/overmap_helm_computers
 
 		ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 		if (!ui)
-			ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 565, 545)
+			ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 565, 545, nref = src)
 			ui.set_initial_data(data)
 			ui.open()
 			ui.set_auto_update(1)
@@ -256,7 +256,7 @@ var/global/list/overmap_helm_computers
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "nav.tmpl", "[linked.name] Navigation Screen", 380, 530)
+		ui = new(user, src, ui_key, "nav.tmpl", "[linked.name] Navigation Screen", 380, 530, nref = src)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
