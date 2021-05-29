@@ -173,6 +173,9 @@ var/global/list/supermatter_final_thoughts = list(
 	. = ..()
 	uid = gl_uid++
 
+/obj/machinery/power/supermatter/get_matter_amount_modifier()
+	. = ..() * (1/HOLLOW_OBJECT_MATTER_MULTIPLIER) * 10 // Big solid chunk of matter.
+
 /obj/machinery/power/supermatter/proc/handle_admin_warnings()
 	if(disable_adminwarn)
 		return
