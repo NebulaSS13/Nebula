@@ -145,10 +145,11 @@
 			if(isnull(client.holder))
 				announce_ghost_joinleave(src)
 
-			var/mob/living/carbon/human/dummy/mannequin = new()
-			client.prefs.dress_preview_mob(mannequin)
-			observer.set_appearance(mannequin)
-			qdel(mannequin)
+			var/mob/living/carbon/human/dummy/mannequin = get_mannequin(client.ckey)
+			if(mannequin)
+				client.prefs.dress_preview_mob(mannequin)
+				observer.set_appearance(mannequin)
+				qdel(mannequin)
 
 			if(client.prefs.be_random_name)
 				client.prefs.real_name = client.prefs.get_random_name()

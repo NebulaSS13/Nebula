@@ -63,11 +63,13 @@ var/global/list/string_slot_flags = list(
 //////////////////////////
 
 /proc/get_mannequin(var/ckey)
+	if(SSatoms.atom_init_stage < INITIALIZATION_INNEW_REGULAR)
+		return
 	if(!mannequins_)
 		mannequins_ = new()
 	. = mannequins_[ckey]
 	if(!.)
-		. = new/mob/living/carbon/human/dummy/mannequin()
+		. = new /mob/living/carbon/human/dummy/mannequin()
 		mannequins_[ckey] = .
 
 /hook/global_init/proc/makeDatumRefLists()
