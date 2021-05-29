@@ -13,6 +13,7 @@
 		for(var/a in reagents.reagent_volumes)
 			var/decl/material/reg = GET_DECL(a)
 			. += reg.get_value() * REAGENT_VOLUME(reagents, a) * REAGENT_WORTH_MULTIPLIER
+	. = max(0, round(.))
 
 /atom/proc/get_contents_monetary_worth()
 	. = 0
@@ -20,4 +21,4 @@
 		. += thing.get_combined_monetary_worth()
 
 /atom/proc/get_combined_monetary_worth()
-	. = max(1, get_single_monetary_worth() + get_contents_monetary_worth())
+	. = max(0, round(get_single_monetary_worth() + get_contents_monetary_worth()))
