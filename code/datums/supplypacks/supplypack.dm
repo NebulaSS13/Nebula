@@ -47,7 +47,9 @@
 
 /decl/hierarchy/supply_pack/proc/spawn_contents(var/location)
 	var/decl/supply_method/sm = GET_DECL(supply_method)
-	return sm.spawn_contents(src, location)
+	. = sm.spawn_contents(src, location)
+	for(var/obj/O in .)
+		O.anchored = FALSE
 
 /*
 //SUPPLY PACKS
