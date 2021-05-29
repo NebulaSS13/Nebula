@@ -1,7 +1,13 @@
 /mob // Defined on /mob to avoid having to pass args to every single attack_foo() proc.
 	var/datum/status_marker_holder/status_markers
+	var/status_timer
 	var/list/status_counters
 	var/list/pending_status_counters
+
+/mob/Destroy()
+	. = ..()
+	if(status_timer)
+		deltimer(status_timer)
 
 /mob/living/set_status(var/condition, var/amount)
 	if(!ispath(condition, /decl/status_condition))
@@ -13,7 +19,7 @@
 	if(amount == PENDING_STATUS(src, condition))
 		return FALSE
 	LAZYSET(pending_status_counters, condition, amount)
-	addtimer(CALLBACK(src, .proc/apply_pending_status_changes), 0, TIMER_UNIQUE)
+	status_timer = addtimer(CALLBACK(src, .proc/apply_pending_status_changes), 0, (TIMER_STOPPABLE | TIMER_UNIQUE))
 	return TRUE
 
 /mob/living/proc/rebuild_status_markers()
