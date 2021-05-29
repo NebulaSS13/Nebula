@@ -84,7 +84,7 @@
 				M.client.screen -= W
 
 /datum/storage_ui/default/on_post_remove(var/mob/user)
-	if(user?.s_active)
+	if(user && user.s_active) // Using ?. here causes a runtime ('Cannot read 0.s_active'), it shouldn't but it does.
 		user.s_active.show_to(user)
 
 /datum/storage_ui/default/on_hand_attack(var/mob/user)
