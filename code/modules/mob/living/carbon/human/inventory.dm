@@ -76,6 +76,15 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else
 			return has_organ(slot)
 
+/mob/living/carbon/human/refresh_mask(var/obj/item/removed)
+	..()
+	if(istype(removed) && (removed.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR)))
+		update_hair(0)	//rebuild hair
+		update_inv_ears(0)
+	var/obj/item/clothing/mask/head = src.get_equipped_item(slot_head_str)
+	if(!(head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))
+		set_internals(null)
+
 /mob/living/carbon/human/u_equip(obj/W)
 	. = ..()
 	if(!.)
@@ -131,17 +140,6 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else if (W == belt)
 			belt = null
 			update_inv_belt()
-		else if (W == wear_mask)
-			wear_mask = null
-			if(istype(W, /obj/item))
-				var/obj/item/I = W
-				if(I.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR))
-					update_hair(0)	//rebuild hair
-					update_inv_ears(0)
-			var/obj/item/clothing/mask/head = src.get_equipped_item(slot_head_str)
-			if(!(head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))
-				set_internals(null)
-			update_inv_wear_mask()
 		else if (W == wear_id)
 			wear_id = null
 			update_inv_wear_id()
@@ -154,9 +152,6 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else if (W == s_store)
 			s_store = null
 			update_inv_s_store()
-		else if (W == back)
-			back = null
-			update_inv_back()
 		else if (W == handcuffed)
 			handcuffed = null
 			if(buckled && buckled.buckle_require_restraints)
