@@ -70,6 +70,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	LAZYDISTINCTADD(viewers, weakref(user))
 
 /obj/machinery/computer/ship/proc/unlook(var/mob/user)
+	world << "[type] unlook [user]"
 	user.reset_view()
 	if(user.client)
 		user.client.view = world.view
