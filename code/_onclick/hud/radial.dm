@@ -32,7 +32,7 @@ var/global/list/radial_menus = list()
 		closeToolTip(usr)
 
 /obj/screen/radial/slice/Click(location, control, params)
-	if(usr.client == parent.current_user)
+	if(parent && usr.client == parent.current_user)
 		if(next_page)
 			parent.next_page()
 		else

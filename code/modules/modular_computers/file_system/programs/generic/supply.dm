@@ -100,13 +100,15 @@
 
 		if(3)// Shuttle monitoring and control
 			var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
-			data["shuttle_name"] = shuttle.name
 			if(istype(shuttle))
-				data["shuttle_location"] = shuttle.at_station() ? global.using_map.name : "Remote location"
+				data["shuttle_name"] =        shuttle.name
+				data["shuttle_location"] =    shuttle.at_station() ? global.using_map.name : "Remote location"
+				data["shuttle_can_control"] = shuttle.can_launch()
 			else
-				data["shuttle_location"] = "No Connection"
+				data["shuttle_name"] =        "No Connection"
+				data["shuttle_location"] =    "No Connection"
+				data["shuttle_can_control"] = FALSE
 			data["shuttle_status"] = get_shuttle_status()
-			data["shuttle_can_control"] = shuttle.can_launch()
 
 		if(4)// Order processing
 			if(is_admin) // No bother sending all of this if the user can't see it.
