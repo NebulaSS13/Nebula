@@ -89,8 +89,11 @@ var/global/list/supermatter_final_thoughts = list(
 	density = 1
 	anchored = 0
 	light_range = 4
-
 	layer = ABOVE_OBJ_LAYER
+	matter = list(
+		/decl/material/solid/exotic_matter = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel =   MATTER_AMOUNT_REINFORCEMENT
+	)
 
 	var/nitrogen_retardation_factor = 0.15 // Higher == N2 slows reaction more
 	var/thermal_release_modifier = 10000   // Higher == more heat released during reaction
