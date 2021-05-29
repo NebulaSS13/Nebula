@@ -62,13 +62,6 @@
 	containername = "exotic Seeds crate"
 	access = access_xenobiology
 
-/decl/hierarchy/supply_pack/hydroponics/watertank
-	name = "Liquid - Water tank"
-	contains = list(/obj/structure/reagent_dispensers/watertank)
-	cost = 12
-	containertype = /obj/structure/largecrate
-	containername = "water tank crate"
-
 /decl/hierarchy/supply_pack/hydroponics/bee_keeper
 	name = "Equipment - Beekeeping"
 	contains = list(/obj/item/beehive_assembly,
