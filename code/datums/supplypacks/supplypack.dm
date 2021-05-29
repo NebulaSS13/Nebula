@@ -16,20 +16,21 @@
 //Is run once on init for non-base-category supplypacks.
 var/global/list/cargoprices = list()
 /decl/hierarchy/supply_pack/proc/setup()
+
 	if(!num_contained)
 		for(var/entry in contains)
 			num_contained += max(1, contains[entry])
-	if(isnull(cost))
-		cost = 0
-		for(var/entry in contains)
-			cost += atom_info_repository.get_combined_worth_for(entry) * max(1, contains[entry])
-		if(containertype)
-			cost += atom_info_repository.get_single_worth_for(containertype)
-		cost = cost * WORTH_TO_SUPPLY_POINTS_CONSTANT * SSsupply.price_markup
-		cost = max(1, CEILING(cost, WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT))
+
+	for(var/entry in contains)
+		cost += atom_info_repository.get_combined_worth_for(entry) * max(1, contains[entry])
+	if(containertype)
+		cost += atom_info_repository.get_single_worth_for(containertype)
+	cost = cost * WORTH_TO_SUPPLY_POINTS_CONSTANT * SSsupply.price_markup
+	cost = max(1, CEILING(cost, WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT))
+	cargoprices[name] = cost
+
 	var/decl/supply_method/sm = GET_DECL(supply_method)
 	manifest = sm.setup_manifest(src)
-	cargoprices[name] = cost
 
 /client/proc/print_cargo_prices()
 	set name = "Print Cargo Prices"
