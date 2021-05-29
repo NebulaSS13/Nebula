@@ -82,6 +82,9 @@ Class Procs:
 	layer = STRUCTURE_LAYER // Layer under items
 	throw_speed = 1
 	throw_range = 5
+	matter = list(
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_PRIMARY
+	)
 
 	var/stat = 0
 	var/waterproof = TRUE

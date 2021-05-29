@@ -6,11 +6,20 @@
 	icon_state = "pad_full"
 	item_state = "paper"
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/wood
 
 	var/papers = 50
 	var/written_text
 	var/written_by
 	var/paper_type = /obj/item/paper/sticky
+
+/obj/item/sticky_pad/proc/update_matter()
+	matter = list(
+		/decl/material/solid/wood = round((papers * SHEET_MATERIAL_AMOUNT) * 0.2)
+	)
+
+/obj/item/sticky_pad/create_matter()
+	update_matter()
 
 /obj/item/sticky_pad/on_update_icon()
 	if(papers <= 15)
@@ -66,6 +75,7 @@
 		if(papers <= 0)
 			qdel(src)
 		else
+			update_matter()
 			update_icon()
 
 /obj/item/sticky_pad/random/Initialize()
