@@ -7,6 +7,7 @@
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	item_flags = ITEM_FLAG_HOLLOW
 	amount_per_transfer_from_this = 5
 	volume = 50
 

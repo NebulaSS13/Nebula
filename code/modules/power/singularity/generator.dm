@@ -11,6 +11,9 @@
 	var/creation_type = /obj/singularity
 	var/is_activated = FALSE
 
+/obj/machinery/the_singularitygen/get_matter_amount_modifier()
+	. = ..() * (1/HOLLOW_OBJECT_MATTER_MULTIPLIER) * 10 // Big solid chunk of matter.
+
 /obj/machinery/the_singularitygen/Process()
 	var/turf/T = get_turf(src)
 	if(energy >= 200 && !is_activated)
