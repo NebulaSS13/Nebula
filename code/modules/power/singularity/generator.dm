@@ -7,6 +7,11 @@
 	anchored = 0
 	density = 1
 	use_power = POWER_USE_OFF
+	matter = list(
+		/decl/material/solid/exotic_matter = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
+	)
+
 	var/energy = 0
 	var/creation_type = /obj/singularity
 	var/is_activated = FALSE
