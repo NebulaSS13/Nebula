@@ -402,8 +402,12 @@
 		dat += "<p style='background-color: [job.selection_color]'><br><br><p>"
 		if(job.alt_titles)
 			dat += "<i><b>Alternative titles:</b> [english_list(job.alt_titles)].</i>"
-		send_rsc(user, job.get_job_icon(), "job[ckey(rank)].png")
-		dat += "<img src=job[ckey(rank)].png width=96 height=96 style='float:left;'>"
+
+		var/job_icon = job.get_job_icon()
+		if(job_icon)
+			send_rsc(user, job_icon, "job[ckey(rank)].png")
+			dat += "<img src=job[ckey(rank)].png width=96 height=96 style='float:left;'>"
+
 		if(LAZYLEN(job.department_types) && job.primary_department)
 			var/decl/department/dept = SSjobs.get_department_by_type(job.primary_department)
 			if(dept)
