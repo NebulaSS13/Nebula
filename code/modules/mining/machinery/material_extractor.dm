@@ -3,6 +3,7 @@
 // The general concept is that it heats up things up to 20c and grabs anything gaseous or liquid at that temp range, with a debuff on liquids, so it doesn't replace more specialized machines.
 #define GAS_EXTRACTOR_GAS_TANK 1000
 #define GAS_EXTRACTOR_REAGENTS_TANK 500
+#define GAS_EXTRACTOR_REAGENTS_INPUT_TANK 500
 #define GAS_EXTRACTOR_EXTRACTION_RATE 0.5 //units per tick
 #define GAS_EXTRACTOR_OPERATING_TEMP T20C + 5 //Temperature the machine heat stuff to.. Has to be 20c + 5 because someone decided ice melted at 20c
 #define GAS_EXTRACTOR_LIQUID_EFFICIENCY 0.75 //% efficiency for liquids
@@ -13,6 +14,18 @@
 
 var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 
+//
+// Holder for the reagents_holder. Since reagents_holder can't exist on its own for some reasons
+//
+/obj/input_holder
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT //We wanna disable those to trigger reactions on our own terms
+/obj/input_holder/New(var/parent)
+	..(parent)
+	create_reagents(GAS_EXTRACTOR_REAGENTS_INPUT_TANK)
+
+//
+// Actual machine
+//
 /obj/machinery/atmospherics/unary/material/extractor
 	name = "Gas extractor"
 	desc = "A machine for extracting liquids and gases from ices and hydrates."
@@ -24,7 +37,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT //We wanna disable those to trigger reactions on our own terms
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 	use_power = POWER_USE_OFF
-	idle_power_usage = 25
+	idle_power_usage = 25 //WATTS
 	power_rating = 1 KILOWATTS
 	power_channel = EQUIP
 	connect_types = CONNECT_TYPE_REGULAR
@@ -55,6 +68,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	var/time_last_extract = 0 //Time since we last extracted an item. Needed because otherwise the extraction code gets called a lot for small quantities of currently reacting reagents
 	var/time_last_bark = 0 //time since the machine said anything last
 	var/obj/item/chems/glass/output_container //#TODO: change this when plumbing is a thing
+	var/obj/input_holder/input_buffer //Since reagent_holder needs a parent object to exist on creation we gotta do this horrible hack
 
 /obj/machinery/atmospherics/unary/material/extractor/Initialize(mapload, d = 0, populate_parts = TRUE)
 	. = ..()
@@ -63,35 +77,39 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	air_contents.volume = GAS_EXTRACTOR_GAS_TANK
 	if(!reagents)
 		create_reagents(GAS_EXTRACTOR_REAGENTS_TANK)
+	if(!input_buffer)
+		input_buffer = new(src)
 	verbs |= /obj/machinery/atmospherics/unary/material/extractor/verb/FlushReagents
 	verbs |= /obj/machinery/atmospherics/unary/material/extractor/verb/FlushGas
 	QUEUE_TEMPERATURE_ATOMS(src)
 
 /obj/machinery/atmospherics/unary/material/extractor/Bumped(var/obj/O)
-	//Ignore if we can't function
-	if(inoperable())
-		return ..()
-	
-	//Sanity filter
-	if(!O.checkpass(PASS_FLAG_TABLE) || O.anchored || count_items_processing() >= max_items) //Don't let items beyond capacity pass through
+	if(QDELETED(O)) //Because we qdel object at the input if we can process them. And its possible this might happen with loads of items
+		return
+
+	//We only override for entities touching the machine from the input's direction only
+	if(get_dir(loc, O.loc) != get_input_dir())
 		return ..()
 
-	//Only handles entities touching the machine from the input's direction only
-	if(get_dir(loc, O.loc) == get_input_dir())
-		//try adding to the processing list
-		if(add_ore_to_queue(O))
-			time_last_input = world.time
-		else
-			//Reject stuff that we cannot process
-			O.dropInto(get_output_loc())
-			if(world.time > (time_last_bark + 4 SECONDS))
-				time_last_bark = world.time
-				state("\The [O.name] was rejected for processing!")
-	else
+	//Ignore if we can't function or if too big or anchored
+	if(inoperable() || !O.checkpass(PASS_FLAG_TABLE) || O.anchored)
 		return ..()
+	
+	//2 possible cases here. One we got something that we can turn into liquids or gas (with or without accompanying solid reagent at STP) 
+	// OR we get something that only contains matter that's solid at STP, which we should just pass along so whatever else is in the 
+	// conveyor line can process it.
+	if(can_process(O))
+		if(calc_resulting_reagents_total_vol(O) > REAGENTS_FREE_SPACE(input_buffer.reagents))
+			return //If we can process it, but there's no room currently in the input, just don't interact with it for now!
+		process_ore(O)
+	else
+		O.dropInto(get_output_loc())
+
 
 /obj/machinery/atmospherics/unary/material/extractor/ProcessAtomTemperature()
 	if(operable() && use_power)
+		//We process temp for the input reagent_holder too
+		input_buffer.temperature = GAS_EXTRACTOR_OPERATING_TEMP
 		temperature = GAS_EXTRACTOR_OPERATING_TEMP
 		return TRUE
 	return ..()
@@ -100,23 +118,20 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	. = ..()
 	//Only display info if the screen is there
 	if(get_component_of_type(/obj/item/stock_parts/console_screen))
-		var/items_processing = count_items_processing()
 		if(output_container)
 			var/full_text
 			if(REAGENTS_FREE_SPACE(reagents) <= 0)
 				full_text = SPAN_WARNING(" Currently idling because one or more of its internal tanks are full..")
-			to_chat(user, SPAN_NOTICE("It currently has [items_processing] items waiting for processing.") + full_text)
+			to_chat(user, full_text)
 
 		if(reagents)
 			to_chat(user, SPAN_NOTICE("The internal processing tank gauge reads [round(reagents.total_volume)]/[reagents.maximum_volume]"))
-			if(is_buffer_full())
+			if(is_internal_tank_full())
 				to_chat(user, SPAN_WARNING("It needs to evacuate liquids to resume operations!"))
 
 	if(output_container)
-		var/bucket_text
-		if(is_output_container_full())
-			bucket_text = " It looks full!"
-		to_chat(user, SPAN_NOTICE("It has a [output_container.name] in place to receive reagents.[bucket_text]"))
+		to_chat(user, SPAN_NOTICE("It has a [output_container.name] in place to receive reagents:"))
+		output_container.examine(user)
 	else 
 		to_chat(user, SPAN_NOTICE("It has nothing to pour reagents into."))
 
@@ -149,7 +164,6 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	cut_overlays()
 	
 	var/initial_state = initial(icon_state)
-
 	if(!use_power || inoperable())
 		icon_state = "[initial_state]-off"
 	else 
@@ -162,21 +176,26 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 
 /obj/machinery/atmospherics/unary/material/extractor/Process()
 	..()
-	if(has_content_to_process())
+	if(!input_tank_empty())
 		update_use_power(POWER_USE_ACTIVE)
-		//Process anything we accepted into our internal buffer
-		if(world.time >= time_last_extract + GAS_EXTRACTOR_WAIT_TIME_EXTRACT)
-			extract(get_contained_external_atoms())
-			time_last_extract = world.time
+
+		//Its crucial that all reactions happen ONLY in the input tank
+		force_react_input()
+		if(!SSmaterials.active_holders[input_buffer.reagents])
+			process_input_tank()
+			input_clear_reminder() //Keep the input tank tidy by removing very small amounts of reagents
 	else
 		update_use_power(POWER_USE_IDLE)
 
-	if(reagents?.total_volume > 0 && (world.time >= (time_last_input + GAS_EXTRACTOR_WAIT_TIME_DUMP)))
-		dump_result()
+	liquids_to_output()
+	// if(reagents?.total_volume > 0 && (world.time >= (time_last_input + GAS_EXTRACTOR_WAIT_TIME_DUMP)))
+	// 	dump_result()
 
 //For some reasons that's not in the unary base class...
 /obj/machinery/atmospherics/unary/material/extractor/return_air()
 	return air_contents
+// /obj/machinery/atmospherics/unary/material/extractor/get_contained_external_atoms()
+// 	return output_container? (..() - output_container) : ..()
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/get_output_loc()
 	return get_step(loc, get_output_dir())
@@ -185,14 +204,31 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 /obj/machinery/atmospherics/unary/material/extractor/proc/get_input_dir()
 	return turn(dir, -90)
 
-/obj/machinery/atmospherics/unary/material/extractor/get_contained_external_atoms()
-	return output_container? (..() - output_container) : ..() //This prevents the machine from eating the bucket....
 
-/obj/machinery/atmospherics/unary/material/extractor/proc/count_items_processing()
-	return length(get_contained_external_atoms())
+/obj/machinery/atmospherics/unary/material/extractor/proc/input_tank_empty()
+	return round(input_buffer.reagents.total_volume, GAS_EXTRACTOR_MIN_REAGENT_AMOUNT) == 0
 
-/obj/machinery/atmospherics/unary/material/extractor/proc/has_content_to_process()
-	return count_items_processing() > 0
+//Remove trace amounts of reagents from the input tank, to prevent that from causing problems
+/obj/machinery/atmospherics/unary/material/extractor/proc/input_clear_reminder()
+	if(input_buffer.reagents.total_volume >= GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
+		return
+	input_buffer.reagents.clear_reagents()
+
+//Calculate the amount of reagents we can get from this. Returns a list with each materials and the amount of expected reagents
+/obj/machinery/atmospherics/unary/material/extractor/proc/gather_resulting_reagents_vol(var/obj/O)
+	var/list/processable = list()
+	for(var/k in O.matter)
+		if(can_process_material_name(k))
+			processable[k] = O.matter[k] * REAGENT_UNITS_PER_MATERIAL_UNIT	
+			O.matter -= k
+	return processable
+
+/obj/machinery/atmospherics/unary/material/extractor/proc/calc_resulting_reagents_total_vol(var/obj/O)
+	var/total = 0
+	for(var/k in O.matter)
+		if(can_process_material_name(k))
+			total += O.matter[k] * REAGENT_UNITS_PER_MATERIAL_UNIT
+	return total
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/output_container_free_volume()
 	return output_container? round(max(REAGENTS_FREE_SPACE(output_container.reagents), 0), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT) : 0
@@ -200,17 +236,20 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 /obj/machinery/atmospherics/unary/material/extractor/proc/is_output_container_full()
 	return output_container_free_volume() <= 0
 
-/obj/machinery/atmospherics/unary/material/extractor/proc/is_buffer_full()
+/obj/machinery/atmospherics/unary/material/extractor/proc/is_internal_tank_full()
 	return round(REAGENTS_FREE_SPACE(reagents), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT) <= 0
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/can_process(var/obj/O)
 	if(istype(O) && is_type_in_list(O, global.material_extractor_items_whitelist))
 		for(var/k in O.matter)
-			var/decl/material/M = GET_DECL(k)
-			ASSERT(istype(M))
-			if(is_material_extractable(M) || has_extractable_heating_products(M))
+			if(can_process_material_name(k))
 				return TRUE
 	return FALSE
+
+/obj/machinery/atmospherics/unary/material/extractor/proc/can_process_material_name(var/name)
+	var/decl/material/M = GET_DECL(name)
+	ASSERT(istype(M))
+	return (is_material_extractable(M) || has_extractable_heating_products(M))
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/has_extractable_heating_products(var/decl/material/M)
 	for(var/k in M.heating_products)
@@ -226,11 +265,52 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	return phase == MAT_PHASE_LIQUID || phase == MAT_PHASE_GAS
 
 //Add ore to contents for processing
-/obj/machinery/atmospherics/unary/material/extractor/proc/add_ore_to_queue(var/obj/O)
-	if(!can_process(O))
-		return FALSE
-	O.forceMove(src)
-	return TRUE
+/obj/machinery/atmospherics/unary/material/extractor/proc/process_ore(var/obj/O)
+	var/list/extracted = gather_resulting_reagents_vol(O)
+
+	for(var/k in extracted)
+		input_buffer.reagents.add_reagent(k, extracted[k]) //Put everything we can in the input for further processing
+
+	//Spit out the stripped ore with whatever we can't process, or otherwise just delete it
+	if(length(O.matter))
+		O.dropInto(get_output_loc())
+	else
+		qdel(O)
+
+//Force the content of the input reagents_holder to react in one tick
+/obj/machinery/atmospherics/unary/material/extractor/proc/force_react_input()
+	input_buffer.atom_flags &= ~(ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT)
+	. = input_buffer.reagents.process_reactions()
+	input_buffer.atom_flags |= ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
+
+//Filters all the reagents in the input tank
+/obj/machinery/atmospherics/unary/material/extractor/proc/process_input_tank()
+	for(var/mat in input_buffer.reagents?.reagent_volumes)
+		var/decl/material/M = GET_DECL(mat)
+		var/available_volume = round(REAGENT_VOLUME(input_buffer.reagents, M.type), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
+		
+		//Don't bother if we got a really small quatity, and just get rid of it
+		if(available_volume < GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
+			input_buffer.reagents.clear_reagent(M.type)
+			continue
+
+		switch(M.phase_at_temperature(temperature))
+			if(MAT_PHASE_SOLID)
+				dump_solid(M, available_volume) //If for silly reasons anything turns solid while reacting in the input, dump that here
+			if(MAT_PHASE_LIQUID)
+				dump_liquid(M, available_volume)
+			if(MAT_PHASE_GAS)
+				dump_gas(M, available_volume)
+			if(MAT_PHASE_PLASMA)
+				dump_gas(M, available_volume)
+
+//Called each ticks, tries to fill the output with the content of the liquid tank
+/obj/machinery/atmospherics/unary/material/extractor/proc/liquids_to_output()
+	if(!output_container)
+		return
+	var/transferred = max(min(output_container_free_volume(), reagents.total_volume), 0)
+	if(transferred > 0)
+		input_buffer.reagents.trans_to(output_container, transferred)
 
 //Since the process_reaction proc isn't guaranteed to process reactions in time, we have to beat it with a stick
 // /obj/machinery/atmospherics/unary/material/extractor/proc/force_process_reagents()
@@ -238,57 +318,57 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 // 	. = reagents.process_reactions()
 // 	atom_flags |= ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 
-/obj/machinery/atmospherics/unary/material/extractor/proc/extract(var/list/obj/L)
-	//No point processing anything if the processing buffer is full
-	if(is_buffer_full())
-		log_debug("EXTRACTING : BUFFER FULL")
-		return 
+// /obj/machinery/atmospherics/unary/material/extractor/proc/extract(var/list/obj/L)
+// 	//No point processing anything if the processing buffer is full
+// 	if(is_internal_tank_full())
+// 		log_debug("EXTRACTING : BUFFER FULL")
+// 		return 
 
-	for(var/obj/O in L)
-		var/free_volume = round(REAGENTS_FREE_SPACE(reagents), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
-		if(free_volume <= 0)
-			break
-		for(var/k in O.matter)
-			free_volume = round(REAGENTS_FREE_SPACE(reagents), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
-			//Don't process over our internal buffer
-			if(free_volume <= 0)
-				break
-			var/matter_units_removed = round(min(O.matter[k], free_volume / REAGENT_UNITS_PER_MATERIAL_UNIT), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT) //Removed only what can be stored
-			var/reagent_units = round(matter_units_removed * REAGENT_UNITS_PER_MATERIAL_UNIT, GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
-			reagents.add_reagent(k, reagent_units)
-			log_debug("EXTRACTING : added [reagent_units] units of [k] to internal tank with [free_volume] units of free space")
+// 	for(var/obj/O in L)
+// 		var/free_volume = round(REAGENTS_FREE_SPACE(reagents), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
+// 		if(free_volume <= 0)
+// 			break
+// 		for(var/k in O.matter)
+// 			free_volume = round(REAGENTS_FREE_SPACE(reagents), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
+// 			//Don't process over our internal buffer
+// 			if(free_volume <= 0)
+// 				break
+// 			var/matter_units_removed = round(min(O.matter[k], free_volume / REAGENT_UNITS_PER_MATERIAL_UNIT), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT) //Removed only what can be stored
+// 			var/reagent_units = round(matter_units_removed * REAGENT_UNITS_PER_MATERIAL_UNIT, GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
+// 			reagents.add_reagent(k, reagent_units)
+// 			log_debug("EXTRACTING : added [reagent_units] units of [k] to internal tank with [free_volume] units of free space")
 
-			//Since we might have to extract over several ticks, if our internal tank is full, we just subtract it from the matter list of the ore
-			O.matter[k] -= matter_units_removed
-			if(round(O.matter[k], 0.1) <= 0)
-				O.matter -= k
+// 			//Since we might have to extract over several ticks, if our internal tank is full, we just subtract it from the matter list of the ore
+// 			O.matter[k] -= matter_units_removed
+// 			if(round(O.matter[k], 0.1) <= 0)
+// 				O.matter -= k
 
-		if(length(O.matter) < 1)
-			qdel(O)	//Clean up any ores empty of matter
+// 		if(length(O.matter) < 1)
+// 			qdel(O)	//Clean up any ores empty of matter
 
-/obj/machinery/atmospherics/unary/material/extractor/proc/dump_result()
-	//Only dump when everything in the tank is processed
-	if(SSmaterials.active_holders[reagents])
-		return
+// /obj/machinery/atmospherics/unary/material/extractor/proc/dump_result()
+// 	//Only dump when everything in the tank is processed
+// 	if(SSmaterials.active_holders[reagents])
+// 		return
 
-	for(var/mat in reagents?.reagent_volumes)
-		var/decl/material/M = GET_DECL(mat)
-		var/available_volume = round(REAGENT_VOLUME(reagents, M.type), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
+// 	for(var/mat in reagents?.reagent_volumes)
+// 		var/decl/material/M = GET_DECL(mat)
+// 		var/available_volume = round(REAGENT_VOLUME(reagents, M.type), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
 		
-		//Don't bother if we got a really small quatity, and just get rid of it
-		if(available_volume < GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
-			reagents.clear_reagent(M.type)
-			continue
+// 		//Don't bother if we got a really small quatity, and just get rid of it
+// 		if(available_volume < GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
+// 			reagents.clear_reagent(M.type)
+// 			continue
 
-		switch(M.phase_at_temperature(temperature))
-			if(MAT_PHASE_SOLID)
-				dump_solid(M, available_volume)
-			if(MAT_PHASE_LIQUID)
-				dump_liquid(M, available_volume)
-			if(MAT_PHASE_GAS)
-				dump_gas(M, available_volume)
-			if(MAT_PHASE_PLASMA)
-				dump_gas(M, available_volume)
+// 		switch(M.phase_at_temperature(temperature))
+// 			if(MAT_PHASE_SOLID)
+// 				dump_solid(M, available_volume)
+// 			if(MAT_PHASE_LIQUID)
+// 				dump_liquid(M, available_volume)
+// 			if(MAT_PHASE_GAS)
+// 				dump_gas(M, available_volume)
+// 			if(MAT_PHASE_PLASMA)
+// 				dump_gas(M, available_volume)
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/dump_solid(var/decl/material/M, var/available_volume)
 	//Check if we got enough to dump out a single sheet at least
@@ -297,19 +377,27 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	var/expected_sheets = round(available_volume / REAGENT_UNITS_PER_MATERIAL_SHEET)
 	var/removed_volume = round(expected_sheets * REAGENT_UNITS_PER_MATERIAL_SHEET, GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
 	M.create_object(get_output_loc(), expected_sheets)
-	reagents.remove_reagent(M.type, removed_volume)
+	input_buffer.reagents.remove_reagent(M.type, removed_volume)
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/dump_liquid(var/decl/material/M, var/available_volume)
+	var/internal_free_vol = REAGENTS_FREE_SPACE(reagents)
+	var/external_free_vol = 0
 	if(!output_container)
 		return
-	var/free_volume = output_container_free_volume()
-	if(free_volume <= 0)
-		log_debug("dump_liquid: No free volume in output container to dump liquid to. Free volume: [free_volume] units")
-		return
-	var/transferred = max(min(available_volume, free_volume), 0)
-	if(transferred > 0)
-		reagents.trans_to(output_container, transferred, GAS_EXTRACTOR_LIQUID_EFFICIENCY)
-		log_debug("dump_liquid : dumping [round(transferred * GAS_EXTRACTOR_LIQUID_EFFICIENCY)] units of [M.type] to container with [free_volume] units of free space")
+	external_free_vol = output_container_free_volume()
+
+	//Might as well dump directly into the output if there's one, it'll save some extra unneeded processing
+	if(external_free_vol > 0)
+		var/transferred = max(min(available_volume, external_free_vol), 0)
+		if(transferred > 0)
+			input_buffer.reagents.trans_to(output_container, transferred, GAS_EXTRACTOR_LIQUID_EFFICIENCY)
+			log_debug("dump_liquid : dumping [round(transferred * GAS_EXTRACTOR_LIQUID_EFFICIENCY)] units of [M.type] to container with [external_free_vol] units of free space")
+	else if(internal_free_vol > 0)
+		var/transferred = max(min(available_volume, internal_free_vol), 0)
+		if(transferred > 0)
+			input_buffer.reagents.trans_to(reagents, transferred, GAS_EXTRACTOR_LIQUID_EFFICIENCY)
+			log_debug("dump_liquid : dumping [round(transferred * GAS_EXTRACTOR_LIQUID_EFFICIENCY)] units of [M.type] to internal tank with [internal_free_vol] units of free space")
+
 
 //We want to convert a liquid to its gaseous state
 //So we want to convert liquid units to moles.
@@ -326,7 +414,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 /obj/machinery/atmospherics/unary/material/extractor/proc/dump_gas(var/decl/material/M, var/available_volume)
 	var/datum/gas_mixture/produced = new
 	var/moles = round(available_volume * MOLES_PER_MILILITER_FACTOR, GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
-	reagents.remove_reagent(M.type, available_volume)
+	input_buffer.reagents.remove_reagent(M.type, available_volume)
 	produced.adjust_gas(M.type, moles)
 	air_contents.merge(produced)
 #undef MOLES_PER_MILILITER_FACTOR
@@ -386,6 +474,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 
 #undef GAS_EXTRACTOR_GAS_TANK 
 #undef GAS_EXTRACTOR_REAGENTS_TANK
+#undef GAS_EXTRACTOR_REAGENTS_INPUT_TANK
 #undef GAS_EXTRACTOR_EXTRACTION_RATE
 #undef GAS_EXTRACTOR_OPERATING_TEMP
 #undef GAS_EXTRACTOR_LIQUID_EFFICIENCY
