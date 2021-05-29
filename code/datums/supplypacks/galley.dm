@@ -113,8 +113,11 @@
 // TODO; Add more premium drinks at a later date. Could be useful for diplomatic events or fancy parties.
 /decl/hierarchy/supply_pack/galley/premiumalcohol
 	name = "Bar - Premium drinks"
-	contains = list(/obj/item/chems/food/drinks/bottle/premiumwine = 1,
-					/obj/item/chems/food/drinks/bottle/premiumvodka = 1)
+	contains = list(
+		/obj/item/chems/food/drinks/bottle/premiumwine =  3,
+		/obj/item/chems/food/drinks/bottle/premiumvodka = 3,
+		/obj/item/chems/food/drinks/bottle/whiskey =      3
+	)
 	cost = 60
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "premium drinks crate"

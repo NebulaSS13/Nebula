@@ -22,7 +22,7 @@
 			. += largest_tech_val
 
 	if(force)
-		var/weapon_value = ((get_max_weapon_value() * 25) * (1 + max(sharp, edge)))
+		var/weapon_value = ((get_max_weapon_value() * 15) * (1 + max(sharp, edge)))
 		if(attack_cooldown <= FAST_WEAPON_COOLDOWN)
 			weapon_value *= 0.5
 		else if(attack_cooldown >= SLOW_WEAPON_COOLDOWN)
