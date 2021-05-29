@@ -36,14 +36,12 @@
 			cable.update_icon()
 	. = ..()
 
-/obj/structure/network_cable/attackby(obj/item/O, mob/user)
-	. = ..()
-	if(isWirecutter(O))
-		var/turf/T = get_turf(src)
-		if(T && do_after(user, 15) && !QDELETED(src))
-			to_chat(user, SPAN_NOTICE("You cut \the [src]."))
-			new/obj/item/stack/net_cable_coil(T, istype(src,/obj/structure/network_cable/terminal) ? 5 : 1)
-			qdel(src)
+/obj/structure/network_cable/handle_default_wirecutter_attackby(var/mob/user)
+	var/turf/T = get_turf(src)
+	if(T && do_after(user, 15) && !QDELETED(src))
+		to_chat(user, SPAN_NOTICE("You cut \the [src]."))
+		new/obj/item/stack/net_cable_coil(T, 1)
+		qdel(src)
 
 /obj/structure/network_cable/proc/update_network()
 	var/list/graphs = list() // Associative list of graphs->list of nodes to add as neighbors.
@@ -141,6 +139,13 @@
 	desc = "A network terminal directly connected to a network device."
 	icon_state = "terminal"
 	layer = WIRE_LAYER
+
+/obj/structure/network_cable/terminal/handle_default_wirecutter_attackby(var/mob/user)
+	var/turf/T = get_turf(src)
+	if(T && do_after(user, 30) && !QDELETED(src))
+		to_chat(user, SPAN_NOTICE("You pry off \the [src]."))
+		new/obj/item/stack/net_cable_coil(T, 5)
+		qdel(src)
 
 /obj/item/stack/net_cable_coil
 	name = "network cable coil"
