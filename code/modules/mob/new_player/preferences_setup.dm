@@ -39,6 +39,10 @@
 		copy_to(H)
 
 /datum/preferences/proc/dress_preview_mob(var/mob/living/carbon/human/mannequin)
+
+	if(!mannequin)
+		return
+
 	var/update_icon = FALSE
 	copy_to(mannequin, TRUE)
 
@@ -93,10 +97,10 @@
 
 /datum/preferences/proc/update_preview_icon()
 	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)
-	mannequin.delete_inventory(TRUE)
-	dress_preview_mob(mannequin)
-
-	update_character_previews(new /mutable_appearance(mannequin))
+	if(mannequin)
+		mannequin.delete_inventory(TRUE)
+		dress_preview_mob(mannequin)
+		update_character_previews(new /mutable_appearance(mannequin))
 
 /datum/preferences/proc/get_random_name()
 	var/decl/cultural_info/culture/check_culture = cultural_info[TAG_CULTURE]
