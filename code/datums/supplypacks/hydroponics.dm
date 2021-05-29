@@ -14,7 +14,6 @@
 					/obj/item/minihoe,
 					/obj/item/storage/box/botanydisk
 					)
-	cost = 15
 	containername = "hydroponics supply crate"
 	access = access_hydroponics
 
@@ -37,7 +36,6 @@
 					/obj/item/seeds/chantermycelium,
 					/obj/item/seeds/potatoseed,
 					/obj/item/seeds/sugarcaneseed)
-	cost = 10
 	containername = "seeds crate"
 	access = access_hydroponics
 
@@ -47,7 +45,6 @@
 					/obj/item/chems/spray/plantbgone = 4,
 					/obj/item/clothing/mask/gas = 2,
 					/obj/item/grenade/chem_grenade/antiweed = 2)
-	cost = 25
 	containername = "weed control crate"
 	access = access_hydroponics
 
@@ -57,7 +54,6 @@
 					/obj/item/seeds/reishimycelium,
 					/obj/item/seeds/random = 6,
 					/obj/item/seeds/kudzuseed)
-	cost = 15
 	containertype = /obj/structure/closet/crate/secure
 	containername = "exotic Seeds crate"
 	access = access_xenobiology
@@ -68,14 +64,12 @@
 					/obj/item/bee_smoker,
 					/obj/item/honey_frame = 5,
 					/obj/item/bee_pack)
-	cost = 40
 	containername = "beekeeping crate"
 	access = access_hydroponics
 
 /decl/hierarchy/supply_pack/hydroponics/hydrotray
 	name = "Equipment - Hydroponics tray"
 	contains = list(/obj/machinery/portable_atmospherics/hydroponics)
-	cost = 30
 	containertype = /obj/structure/closet/crate/large/hydroponics
 	containername = "hydroponics tray crate"
 	access = access_hydroponics
@@ -110,7 +104,6 @@
 					/obj/structure/flora/pottedplant/tropical,
 					/obj/structure/flora/pottedplant/dead,
 					/obj/structure/flora/pottedplant/decorative)
-	cost = 8
 	containertype = /obj/structure/closet/crate/large/hydroponics
 	containername = "potted plant crate"
 	supply_method = /decl/supply_method/randomized

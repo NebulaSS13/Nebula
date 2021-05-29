@@ -1,7 +1,6 @@
 /decl/hierarchy/supply_pack/materials
 	name = "Materials"
-	cost = null
-W
+
 // Material sheets (50 - full stack)
 /decl/hierarchy/supply_pack/materials/steel50
 	name = "50 steel sheets"
