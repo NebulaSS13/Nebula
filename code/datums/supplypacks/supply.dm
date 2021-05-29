@@ -116,6 +116,13 @@
 	containertype = /obj/structure/largecrate
 	containername = "fuel tank crate"
 
+/decl/hierarchy/supply_pack/supply/watertank
+	name = "Liquid - Water tank"
+	contains = list(/obj/structure/reagent_dispensers/watertank)
+	cost = 12
+	containertype = /obj/structure/largecrate
+	containername = "water tank crate"
+
 //replacement vendors
 //Vending Machines
 //I have decided against adding the adherent vendor because it is a modified machine as well as the security vendors, which should probably be under a bit more scrutiny than "whoever is deck tech at the time"
