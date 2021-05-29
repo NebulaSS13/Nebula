@@ -539,7 +539,7 @@
 	var/use
 	use = min(charges, user.species.blood_volume - user.vessel.total_volume)
 	if(use > 0)
-		user.vessel.add_reagent(user.species.blood_reagent, use)
+		user.adjust_blood(use)
 		charges -= use
 		statuses += "you regain lost blood"
 		if(!charges)

@@ -7,29 +7,51 @@
 
 //Initializes blood vessels
 /mob/living/carbon/human/proc/make_blood()
-
 	if(vessel)
 		return
-
 	vessel = new /datum/reagents(species.blood_volume, src)
-
 	if(!should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
 		return
+	reset_blood()
 
-	vessel.add_reagent(species.blood_reagent, species.blood_volume)
-	fixblood()
+//Modifies blood level
+/mob/living/carbon/human/proc/adjust_blood(var/amt, var/blood_data)
+	if(!vessel)
+		make_blood()
+
+	if(!should_have_organ(BP_HEART))
+		return
+
+	if(amt && species.blood_reagent)
+		if(amt > 0)
+			vessel.add_reagent(species.blood_reagent, amt, blood_data)
+		else
+			vessel.remove_any(abs(amt))
 
 //Resets blood data
-/mob/living/carbon/human/proc/fixblood()
-	var/list/blooddata = list(
-		"donor" = weakref(src),
-		"species" = species.name,
-		"blood_DNA" = dna.unique_enzymes,
+/mob/living/carbon/human/proc/reset_blood()
+	if(!vessel)
+		make_blood()
+
+	if(!should_have_organ(BP_HEART))
+		vessel.clear_reagents()
+		return
+
+	if(vessel.total_volume < species.blood_volume)
+		vessel.maximum_volume = species.blood_volume
+		adjust_blood(species.blood_volume - vessel.total_volume)
+	else if(vessel.total_volume > species.blood_volume)
+		vessel.remove_any(vessel.total_volume - species.blood_volume)
+		vessel.maximum_volume = species.blood_volume
+
+	LAZYSET(vessel.reagent_data, species.blood_reagent, list(
+		"donor" =        weakref(src),
+		"species" =      species.name,
+		"blood_DNA" =    dna?.unique_enzymes,
 		"blood_colour" = species.get_blood_colour(src),
-		"blood_type" = dna.b_type,
+		"blood_type" =   dna?.b_type,
 		"trace_chem" = null
-	)
-	LAZYSET(vessel.reagent_data, species.blood_reagent, blooddata)
+	))
 
 //Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/carbon/human/proc/drip(var/amt, var/tar = src, var/ddir)
@@ -123,6 +145,9 @@
 //For humans, blood does not appear from blue, it comes from vessels.
 /mob/living/carbon/human/take_blood(obj/item/chems/container, var/amount)
 
+	if(!vessel)
+		make_blood()
+
 	if(!should_have_organ(BP_HEART))
 		reagents.trans_to_obj(container, amount)
 		return 1
@@ -150,7 +175,7 @@
 	if(blood_incompatible(LAZYACCESS(injected_data, "blood_type"), LAZYACCESS(injected_data, "species")))
 		reagents.add_reagent(/decl/material/liquid/coagulated_blood, amount * 0.5)
 	else
-		vessel.add_reagent(species.blood_reagent, amount, injected_data)
+		adjust_blood(amount, injected_data)
 	..()
 
 /mob/living/carbon/human/proc/blood_incompatible(blood_type, blood_species)
@@ -179,7 +204,7 @@
 	var/blood_volume_raw = vessel.total_volume
 	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
 	if(amount)
-		vessel.add_reagent(species.blood_reagent, amount, get_blood_data())
+		adjust_blood(amount, get_blood_data())
 	return amount
 
 /mob/living/carbon/proc/get_blood_data()
