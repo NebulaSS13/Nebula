@@ -1,6 +1,0 @@
-author: Coltrane97
-delete-after: true
-changes:
-  - bugfix: Missing wall-mounted relay circuitboard
-  - bugfix: Network cables dupe
-  - rscadd: Network cables can now pass through z-levels
