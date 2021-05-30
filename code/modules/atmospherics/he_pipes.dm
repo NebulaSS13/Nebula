@@ -10,6 +10,7 @@
 	var/icon_temperature = T20C //stop small changes in temperature causing an icon refresh
 	build_icon_state = "he"
 	atom_flags = 0 // no painting
+	appearance_flags = KEEP_TOGETHER
 
 	minimum_temperature_difference = 20
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
@@ -24,6 +25,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/Initialize()
 	. = ..()
 	color = "#404040" //we don't make use of the fancy overlay system for colours, use this to set the default.
+	filters += filter(type="drop_shadow", x = 0, y = 0, offset = 0, size = 2)
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/set_dir(new_dir)
 	..()
@@ -84,6 +86,7 @@
 		//fancy radiation glowing
 		if(pipe_air.temperature && (icon_temperature > 500 || pipe_air.temperature > 500)) //start glowing at 500K
 			if(abs(pipe_air.temperature - icon_temperature) > 10)
+				var/scale
 				icon_temperature = pipe_air.temperature
 
 				var/h_r = heat2color_r(icon_temperature)
@@ -91,7 +94,7 @@
 				var/h_b = heat2color_b(icon_temperature)
 
 				if(icon_temperature < 2000) //scale up overlay until 2000K
-					var/scale = max((icon_temperature - 500) / 1500, 0)
+					scale = max((icon_temperature - 500) / 1500, 0)
 					h_r = 64 + (h_r - 64)*scale
 					h_g = 64 + (h_g - 64)*scale
 					h_b = 64 + (h_b - 64)*scale
@@ -100,6 +103,10 @@
 				for (var/thing in animate_targets)
 					var/atom/movable/AM = thing
 					animate(AM, color = rgb(h_r, h_g, h_b), time = 20, easing = SINE_EASING)
+				filters[1].color = rgb(h_r, h_g, h_b)
+				set_light(max(4, scale), max(4, scale), rgb(h_r, h_g, h_b))
+		else
+			set_light(0, 0)
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	icon = 'icons/atmos/junction.dmi'
