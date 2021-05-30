@@ -3,6 +3,7 @@
 	hidden_from_codex = TRUE
 	gas_symbol_html = "X"
 	gas_symbol = "X"
+	value = 0.6
 
 /decl/material/gas/alien/New()
 	var/num = rand(100,999)

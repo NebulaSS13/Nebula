@@ -8,6 +8,7 @@
 	gas_symbol_html = "O<sub>2</sub>"
 	gas_symbol = "O2"
 	gas_metabolically_inert = TRUE
+	value = 0.25
 
 /decl/material/gas/helium
 	name = "helium"
@@ -19,6 +20,7 @@
 	gas_symbol = "He"
 	taste_description = "nothing"
 	metabolism = 0.05
+	value = 0.3
 
 /decl/material/gas/helium/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -83,6 +85,7 @@
 	vapor_products = list(
 		/decl/material/gas/methyl_bromide = 1
 	)
+	value = 0.25
 
 /decl/material/gas/methyl_bromide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	. = ..()
@@ -110,6 +113,7 @@
 	gas_symbol_html = "N<sub>2</sub>O"
 	gas_symbol = "N2O"
 	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
+	value = 0.25
 
 /decl/material/gas/nitrous_oxide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/dosage = LAZYACCESS(M.chem_doses, type)
@@ -166,6 +170,7 @@
 	gas_molar_mass = 0.018
 	gas_symbol_html = "Ar"
 	gas_symbol = "Ar"
+	value = 0.25
 
 // If narcosis is ever simulated, krypton has a narcotic potency seven times greater than regular airmix.
 /decl/material/gas/krypton
@@ -174,6 +179,7 @@
 	gas_molar_mass = 0.036
 	gas_symbol_html = "Kr"
 	gas_symbol = "Kr"
+	value = 0.25
 
 /decl/material/gas/neon
 	name = "neon"
@@ -181,6 +187,7 @@
 	gas_molar_mass = 0.01
 	gas_symbol_html = "Ne"
 	gas_symbol = "Ne"
+	value = 0.25
 
 /decl/material/gas/ammonia
 	name = "ammonia"
@@ -202,6 +209,7 @@
 	gas_molar_mass = 0.054
 	gas_symbol_html = "Xe"
 	gas_symbol = "Xe"
+	value = 0.25
 
 /decl/material/gas/xenon/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/dosage = LAZYACCESS(M.chem_doses, type)
@@ -256,6 +264,7 @@
 	dissolves_into = list(
 		/decl/material/liquid/fuel/hydrazine = 1
 	)
+	value = 0.4
 
 /decl/material/gas/hydrogen/tritium
 	name = "tritium"
@@ -263,7 +272,7 @@
 	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
 	color = "#777777"
 	stack_origin_tech = "{'materials':5}"
-	value = 1.5
+	value = 0.45
 	gas_symbol_html = "T"
 	gas_symbol = "T"
 
@@ -275,3 +284,4 @@
 	stack_origin_tech = "{'materials':3}"
 	gas_symbol_html = "D"
 	gas_symbol = "D"
+	value = 0.5
