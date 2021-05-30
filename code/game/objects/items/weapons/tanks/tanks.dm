@@ -85,7 +85,7 @@ var/global/list/global/tank_gauge_cache = list()
 	. = ..()
 	for(var/gas in air_contents?.gas)
 		var/decl/material/gas_data = GET_DECL(gas)
-		. += air_contents.gas[gas] * gas_data.get_value() * REAGENT_UNITS_PER_GAS_MOLE * REAGENT_WORTH_MULTIPLIER
+		. += gas_data.get_value() * air_contents.gas[gas] * GAS_WORTH_MULTIPLIER
 	. = max(1, round(.))
 
 /obj/item/tank/examine(mob/user)
