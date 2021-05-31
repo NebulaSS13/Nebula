@@ -1037,7 +1037,7 @@
 			E.take_external_damage(burn = round(species_heat_mod * log(10, (burn_temperature + 10)), 0.1), used_weapon = "fire")
 
 /mob/living/carbon/human/rejuvenate()
-	restore_blood()
+	reset_blood()
 	full_prosthetic = null
 	shock_stage = 0
 	..()

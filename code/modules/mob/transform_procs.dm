@@ -273,7 +273,7 @@
 	log_admin("[key_name(src)] has transformed into a zombie!")
 	SET_STATUS_MAX(src, STAT_WEAK, 5)
 	if (should_have_organ(BP_HEART))
-		vessel.add_reagent(species.blood_reagent, species.blood_volume - vessel.total_volume)
+		adjust_blood(species.blood_volume - vessel.total_volume)
 	for (var/o in organs)
 		var/obj/item/organ/organ = o
 		organ.vital = 0

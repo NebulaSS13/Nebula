@@ -296,10 +296,11 @@
 
 /obj/structure/closet/receive_mouse_drop(atom/dropping, mob/user)
 	. = ..()
-	if(!. && opened && !istype(dropping, /obj/structure/closet) && (large || !ismob(dropping)))
-		step_towards(dropping, loc)
-		if(user != dropping)
-			user.show_viewers(SPAN_DANGER("\The [user] stuffs \the [dropping] into \the [src]!"))
+	var/atom/movable/AM = dropping
+	if(!. && istype(AM) && opened && !istype(AM, /obj/structure/closet) && AM.simulated && !AM.anchored && (large || !ismob(AM)))
+		step_towards(AM, loc)
+		if(user != AM)
+			user.show_viewers(SPAN_DANGER("\The [user] stuffs \the [AM] into \the [src]!"))
 		return TRUE
 
 /obj/structure/closet/attack_ai(mob/living/silicon/ai/user)
