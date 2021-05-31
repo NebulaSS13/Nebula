@@ -60,5 +60,21 @@
 	material = /decl/material/solid/mineral/bauxite
 /obj/item/ore/rutile
 	material = /decl/material/solid/mineral/rutile
-/obj/item/ore/methane 
+/obj/item/ore/hydrogen_hydrate
+	material = /decl/material/solid/ice/hydrate/hydrogen
+/obj/item/ore/methane
 	material = /decl/material/solid/ice/hydrate/methane
+/obj/item/ore/oxygen
+	material = /decl/material/solid/ice/hydrate/oxygen
+/obj/item/ore/nitrogen
+	material = /decl/material/solid/ice/hydrate/nitrogen
+/obj/item/ore/carbon_dioxide
+	material = /decl/material/solid/ice/hydrate/carbon_dioxide
+/obj/item/ore/argon
+	material = /decl/material/solid/ice/hydrate/argon
+/obj/item/ore/neon
+	material = /decl/material/solid/ice/hydrate/neon
+/obj/item/ore/krypton
+	material = /decl/material/solid/ice/hydrate/krypton
+/obj/item/ore/xenon
+	material = /decl/material/solid/ice/hydrate/xenon
