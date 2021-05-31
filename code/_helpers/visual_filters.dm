@@ -36,3 +36,22 @@
 		LAZYREMOVE(filter_data, filter_name)
 		filters -= thing
 		update_filters()
+
+/// Animate a given filter on this atom. All params after the first are passed to animate().
+/atom/movable/proc/animate_filter(filter_name, list/params)
+	if (!filter_data || !filter_data[filter_name])
+		return
+
+	var/list/monkeypatched_params = params.Copy()
+	monkeypatched_params.Insert(1, null)
+	var/index = filter_data.Find(filter_name)
+	
+	// First, animate ourselves.
+	monkeypatched_params[1] = filters[index]   
+	animate(arglist(monkeypatched_params))
+
+	// If we're being copied by Z-Mimic, update mimics too.
+	if (bound_overlay)
+		for (var/atom/movable/AM as anything in get_above_oo())
+			monkeypatched_params[1] = AM.filters[index]
+			animate(arglist(monkeypatched_params))
