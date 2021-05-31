@@ -11,18 +11,16 @@
 //Whitelist of items that can be processed by the machine
 var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 
-//
-// Holder for the reagents_holder. Since reagents_holder can't exist on its own for some reasons
-//
+////////////////////////////////////////////////////
+// Holder for the reagents_holder. 
+// Since reagents_holder can't exist on its own for some reasons
+////////////////////////////////////////////////////
 /obj/input_holder
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT //We wanna disable those to trigger reactions on our own terms
-/obj/input_holder/New(var/parent)
-	..(parent)
-	create_reagents(GAS_EXTRACTOR_REAGENTS_INPUT_TANK)
 
-//
+////////////////////////////////////////////////////
 // Actual machine
-//
+////////////////////////////////////////////////////
 /obj/machinery/atmospherics/unary/material/extractor
 	name = "Gas extractor"
 	desc = "A machine for extracting liquids and gases from ices and hydrates."
@@ -59,11 +57,6 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 		/decl/public_access/public_method/material_extractor/flush_gas,
 		/decl/public_access/public_method/material_extractor/flush_reagents,
 	)
-
-	var/const/max_items = 25 //Max amount of items it can process at the same time
-	var/time_last_input = 0 //Time since an item was processed, used to wait a bit for reactions to happen
-	var/time_last_extract = 0 //Time since we last extracted an item. Needed because otherwise the extraction code gets called a lot for small quantities of currently reacting reagents
-	var/time_last_bark = 0 //time since the machine said anything last
 	var/obj/item/chems/glass/output_container //#TODO: change this when plumbing is a thing
 	var/obj/input_holder/input_buffer //Since reagent_holder needs a parent object to exist on creation we gotta do this horrible hack
 
@@ -83,6 +76,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 		create_reagents(GAS_EXTRACTOR_REAGENTS_TANK)
 	if(!input_buffer)
 		input_buffer = new(src)
+		input_buffer.create_reagents(GAS_EXTRACTOR_REAGENTS_INPUT_TANK) //Did this here because reimplementing that in the new() proc failed a test for some reasons
 	verbs |= /obj/machinery/atmospherics/unary/material/extractor/verb/FlushReagents
 	verbs |= /obj/machinery/atmospherics/unary/material/extractor/verb/FlushGas
 	QUEUE_TEMPERATURE_ATOMS(src)
@@ -220,11 +214,12 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/input_tank_free_volume()
 	return round(max(REAGENTS_FREE_SPACE(input_buffer.reagents),0), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
+
 /obj/machinery/atmospherics/unary/material/extractor/proc/output_container_free_volume()
 	return output_container? round(max(REAGENTS_FREE_SPACE(output_container.reagents), 0), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT) : 0
+
 /obj/machinery/atmospherics/unary/material/extractor/proc/internal_tank_free_volume()
 	return round(max(REAGENTS_FREE_SPACE(reagents), 0), GAS_EXTRACTOR_MIN_REAGENT_AMOUNT)
-
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/is_output_container_full()
 	return output_container_free_volume() <= 0
@@ -356,10 +351,9 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 #undef MOLES_PER_MILILITER_FACTOR
 
 
-//
+////////////////////////////////////////////////////
 // Verbs
-//
-
+////////////////////////////////////////////////////
 /obj/machinery/atmospherics/unary/material/extractor/verb/FlushReagents()
 	set name = "Flush Reagents Tank"
 	set desc = "Empty the content of the internal reagent tank of the machine on the floor."
@@ -379,10 +373,9 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	//Reset air content
 	src.air_contents = new/datum/gas_mixture(GAS_EXTRACTOR_GAS_TANK, temperature)
 
-//
+////////////////////////////////////////////////////
 // Public Vars
-//
-
+////////////////////////////////////////////////////
 /decl/public_access/public_variable/material_extractor/has_bucket
 	expected_type = /obj/machinery/atmospherics/unary/material
 	name = "has bucket"
@@ -394,10 +387,9 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 /decl/public_access/public_variable/material_extractor/has_bucket/access_var(obj/machinery/atmospherics/unary/material/extractor/M)
 	return M.output_container != null
 
-//
+////////////////////////////////////////////////////
 // Public Methods
-//
-
+////////////////////////////////////////////////////
 /decl/public_access/public_method/material_extractor/flush_gas
 	name = "flush gas"
 	desc = "Empty the internal gas tank into the atmosphere."
