@@ -7,9 +7,8 @@
 	return TRUE
 
 /decl/machine_construction/pipe/proc/deconstruct_transition(obj/item/I, mob/user, obj/machinery/machine)
-	if(isWrench(I))
+	if(isWrench(I) && I.do_tool_interaction(TOOL_WRENCH, user, machine, 0, "unfastening", "unfastening"))
 		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
-		machine.visible_message(SPAN_NOTICE("\The [user] unfastens \the [machine]."))
 		machine.dismantle()
 
 /decl/machine_construction/pipe/attackby(obj/item/I, mob/user, obj/machinery/machine)
@@ -32,7 +31,7 @@
 			return (fail == MCS_BLOCK)
 		to_chat(user, SPAN_NOTICE("You start welding \the [machine]."))
 		playsound(get_turf(machine), 'sound/items/Welder.ogg', 50, 1)
-		if(!I.do_tool_interaction(TOOL_WELDER, user, machine, 5 SECONDS, "welding", "welding", fuel_expenditure = 1))
+		if(!I.do_tool_interaction(TOOL_WELDER, user, machine, 5 SECONDS, fuel_expenditure = 1))
 			return TRUE
 		TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
 		machine.visible_message(SPAN_NOTICE("\The [user] unwelds \the [src]."))

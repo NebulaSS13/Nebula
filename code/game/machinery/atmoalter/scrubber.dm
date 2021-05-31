@@ -188,7 +188,7 @@
 		if(use_power == POWER_USE_ACTIVE)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
 			return
-		if(I.do_tool_interaction(TOOL_WRENCH, user, src, 0, "[anchored ? "wrenching" : "unwrenching"]", "[anchored ? "wrenching" : "unwrenching"]"))
+		if(I.do_tool_interaction(TOOL_WRENCH, user, src, 0, "[anchored ? "unwrenching" : "wrenching"]", "[anchored ? "unwrenching" : "wrenching"]"))
 			anchored = !anchored
 		return
 	//doesn't hold tanks

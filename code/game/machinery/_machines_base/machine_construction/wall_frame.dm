@@ -38,7 +38,7 @@
 
 /decl/machine_construction/wall_frame/panel_closed/proc/down_interaction(obj/item/I, mob/user, obj/machinery/machine)
 	if(isScrewdriver(I))
-		if(I.do_tool_interaction(TOOL_SCREWDRIVER, user, machine, 0, "opening the maintenance hatch", "opening the maintenance hatch"))
+		if(I.do_tool_interaction(TOOL_SCREWDRIVER, user, machine, 0, "opening the maintenance hatch of", "opening the maintenance hatch of"))
 			TRANSFER_STATE(open_state)
 			machine.panel_open = TRUE
 			machine.queue_icon_update()
@@ -198,7 +198,7 @@
 		return
 
 	if(isWrench(I))
-		if(I.do_tool_interaction(TOOL_WRENCH, user, machine, 0, "deconstructing", "deconstructing"))
+		if(I.do_tool_interaction(TOOL_WRENCH, user, machine, 0, "dismantling", "dismantling"))
 			TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
 			machine.dismantle()
 			return

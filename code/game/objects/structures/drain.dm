@@ -14,7 +14,7 @@
 /obj/structure/hygiene/drain/attackby(var/obj/item/thing, var/mob/user)
 	..()
 	if(isWelder(thing))
-		if(thing.do_tool_interaction(TOOL_WELDER, user, src, 0, "welding", "welding", fuel_expenditure = 5))
+		if(thing.do_tool_interaction(TOOL_WELDER, user, src, 0, fuel_expenditure = 5))
 			welded = !welded
 			to_chat(user, "<span class='notice'>You weld \the [src] [welded ? "closed" : "open"].</span>")
 		update_icon()

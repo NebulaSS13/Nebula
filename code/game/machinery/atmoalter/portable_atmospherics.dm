@@ -124,7 +124,6 @@
 					to_chat(user, SPAN_NOTICE("\The [src] failed to connect to the port."))
 					return
 			else
-				to_chat(user, SPAN_NOTICE("Nothing happens."))
 				return ..()
 
 	else if (istype(W, /obj/item/scanner/gas))

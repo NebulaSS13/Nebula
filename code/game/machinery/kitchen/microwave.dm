@@ -35,16 +35,16 @@
 /obj/machinery/microwave/attackby(var/obj/item/O, var/mob/user)
 	if(src.broken > 0)
 		if(src.broken == 2 && isScrewdriver(O)) // If it's broken and they're using a screwdriver
-			if(O.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 2 SECONDS, "preparing to fix", "preparing to fix"))
+			if(O.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 2 SECONDS, "fixing part of", "fixing part of"))
 				src.broken = 1 // Fix it a bit
 		else if(src.broken == 1 && isWrench(O)) // If it's broken and they're doing the wrench
-			if(O.do_tool_interaction(TOOL_WRENCH, user, src, 2 SECONDS, "fixing", "fixing"))
+			if(O.do_tool_interaction(TOOL_WRENCH, user, src, 2 SECONDS, "fixing part of", "fixing"))
 				src.broken = 0 // Fix it!
 				src.dirty = 0 // just to be sure
 				src.update_icon()
 				src.atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 		else
-			to_chat(user, SPAN_WARNING("It's broken!"))
+			to_chat(user, SPAN_WARNING("\The [src] is broken!"))
 			return 1
 	else if((. = component_attackby(O, user)))
 		dispose()
@@ -59,11 +59,11 @@
 				src.update_icon()
 				src.atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 		else //Otherwise bad luck!!
-			to_chat(user, SPAN_WARNING("It's dirty!"))
+			to_chat(user, SPAN_WARNING("\The [src] is dirty!"))
 			return 1
 	else if(is_type_in_list(O, global.microwave_accepts_items))
 		if (LAZYLEN(ingredients) >= global.microwave_maximum_item_storage)
-			to_chat(user, SPAN_WARNING("This [src] is full of ingredients, you cannot put more."))
+			to_chat(user, SPAN_WARNING("[src] is full of ingredients, you cannot put more."))
 			return 1
 		if(istype(O, /obj/item/stack)) // This is bad, but I can't think of how to change it
 			var/obj/item/stack/S = O
@@ -86,7 +86,7 @@
 			return 1
 		for (var/R in O.reagents.reagent_volumes)
 			if (!(R in global.microwave_accepts_reagents))
-				to_chat(user, SPAN_WARNING("Your [O] contains components unsuitable for cookery."))
+				to_chat(user, SPAN_WARNING("Your [O.name] contains components unsuitable for cookery."))
 				return 1
 		return
 	else if(istype(O,/obj/item/grab))
@@ -94,10 +94,8 @@
 		to_chat(user, SPAN_WARNING("This is ridiculous. You can not fit \the [G.affecting] in this [src]."))
 		return 1
 	else if(isWrench(O))
-		user.visible_message(SPAN_NOTICE("You attempt to [src.anchored ? "secure" : "unsecure"] the microwave."))
-		if (do_after(user,20, src))
+		if (O.do_tool_interaction(TOOL_WRENCH, user, src, 2 SECONDS, "unwrenching the anchoring bolts on", "unwrenching the anchoring bolts on"))
 			src.anchored = !src.anchored
-			user.visible_message(SPAN_NOTICE("You [src.anchored ? "secure" : "unsecure"] the microwave."))
 		else
 			to_chat(user, SPAN_NOTICE("You decide not to do that."))
 	else

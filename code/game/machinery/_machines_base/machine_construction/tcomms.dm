@@ -19,7 +19,7 @@
 	if((. = ..()))
 		return
 	if(isScrewdriver(I))
-		if(I.do_tool_interaction(TOOL_SCREWDRIVER, user, machine, 0, "unfastening the bolts", "unfastening the bolts"))
+		if(I.do_tool_interaction(TOOL_SCREWDRIVER, user, machine, 0, "unfastening the bolts of", "unfastening the bolts of"))
 			TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open)
 			machine.panel_open = TRUE
 
@@ -55,7 +55,7 @@
 			machine.panel_open = FALSE
 		return
 	if(isWrench(I))
-		if(I.do_tool_interaction(TOOL_WRENCH, user, machine, 0, "dislodging the external plating of the", "dislodging the external plating of the"))
+		if(I.do_tool_interaction(TOOL_WRENCH, user, machine, 0, "dislodging the external plating of", "dislodging the external plating of"))
 			TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open/unwrenched)
 
 /decl/machine_construction/tcomms/panel_open/mechanics_info()
@@ -65,12 +65,12 @@
 
 /decl/machine_construction/tcomms/panel_open/unwrenched/state_interactions(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
-		if(I.do_tool_interaction(TOOL_WRENCH, user, machine, 0, "securing the external plating of the", "securing the external plating of the"))
+		if(I.do_tool_interaction(TOOL_WRENCH, user, machine, 0, "securing the external plating of", "securing the external plating of"))
 			TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open)
 			playsound(machine.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return
 	if(isWirecutter(I))
-		if(I.do_tool_interaction(TOOL_WIRECUTTERS, user, machine, 0, "removing the cables from the", "removing the cables from the"))
+		if(I.do_tool_interaction(TOOL_WIRECUTTERS, user, machine, 0, "removing the cables from", "removing the cables from"))
 			TRANSFER_STATE(/decl/machine_construction/tcomms/panel_open/no_cable)
 			var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( user.loc )
 			A.amount = 5
@@ -91,10 +91,10 @@
 			machine.set_broken(FALSE, MACHINE_BROKEN_CONSTRUCT) // the machine's not borked anymore!
 			return
 		else
-			to_chat(user, SPAN_WARNING("You need five coils of wire for this."))
+			to_chat(user, SPAN_WARNING("You need at least five coils of wire for this."))
 			return TRUE
 	if(isCrowbar(I))
-		if(I.do_tool_interaction(TOOL_CROWBAR, user, machine, 0, "deconstructing", "deconstructing"))
+		if(I.do_tool_interaction(TOOL_CROWBAR, user, machine, 0, "dismantling", "dismantling"))
 			TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
 			machine.dismantle()
 			return

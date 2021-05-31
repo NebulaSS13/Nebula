@@ -120,7 +120,7 @@
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		if(isWelder(W))
-			if(W.do_tool_interaction(TOOL_WELDER, user, src, 0, "burning fungus away", "burning fungus away", fuel_expenditure = 1))
+			if(W.do_tool_interaction(TOOL_WELDER, user, src, 0, "burning fungus off of", "burning fungus off of", fuel_expenditure = 1))
 				for(var/obj/effect/overlay/wallrot/WR in src)
 					qdel(WR)
 				return TRUE
@@ -155,10 +155,10 @@
 
 		if(isWelder(W) || isCrowbar(W))
 			if(isCrowbar(W))
-				if(W.do_tool_interaction(TOOL_CROWBAR, user, src, cut_delay, "removing the outer plating", "removing the outer plating"))
+				if(W.do_tool_interaction(TOOL_CROWBAR, user, src, cut_delay, "removing the outer plating of", "removing the outer plating of"))
 					dismantled = TRUE
 			if(isWelder(W))
-				if(W.do_tool_interaction(TOOL_WELDER, user, src, cut_delay, "removing the outer plating", "removing the outer plating", fuel_expenditure = 1))
+				if(W.do_tool_interaction(TOOL_WELDER, user, src, cut_delay, "removing the outer plating of", "removing the outer plating of", fuel_expenditure = 1))
 					dismantled = TRUE
 
 		if(istype(W,/obj/item/pickaxe))
@@ -200,7 +200,7 @@
 			if(5)
 				if(isScrewdriver(W))
 					. = TRUE
-					if(W.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 4 SECONDS, "removing the support lines", "removing the support lines"))
+					if(W.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 4 SECONDS, "removing the support lines of", "removing the support lines of"))
 						construction_stage = 4
 						update_icon()
 						return
@@ -214,21 +214,21 @@
 			if(4)
 				if(isWelder(W))
 					. = TRUE
-					if(W.do_tool_interaction(TOOL_WELDER, user, src, 6 SECONDS, "slicing through the metal cover", "firmly press on the cover, dislodging it from", fuel_expenditure = 5))
+					if(W.do_tool_interaction(TOOL_WELDER, user, src, 6 SECONDS, "slicing through the metal cover of", "dislodging the metal cover of", fuel_expenditure = 5))
 						construction_stage = 3
 						update_icon()
 						return
 			if(3)
 				if(isCrowbar(W))
 					. = TRUE
-					if(W.do_tool_interaction(TOOL_CROWBAR, user, src, 10 SECONDS, "struggling to pry the cover off", "struggling to pry the cover off"))
+					if(W.do_tool_interaction(TOOL_CROWBAR, user, src, 10 SECONDS, "struggling to pry the cover off of", "prying the cover off of"))
 						construction_stage = 2
 						update_icon()
 						return
 			if(2)
 				if(isWrench(W))
 					. = TRUE
-					if(W.do_tool_interaction(TOOL_WRENCH, user, src, 4 SECONDS, "loosening the anchoring bolts", "loosening the anchoring bolts"))
+					if(W.do_tool_interaction(TOOL_WRENCH, user, src, 4 SECONDS, "loosening the anchoring bolts of", "loosening the anchoring bolts of"))
 						construction_stage = 1
 						update_icon()
 						return
@@ -243,7 +243,7 @@
 			if(0)
 				if(isCrowbar(W))
 					. = TRUE
-					if(W.do_tool_interaction(TOOL_CROWBAR, user, src, 10 SECONDS, "struggling to pry the outer sheath off", "pry the outer sheathe off"))
+					if(W.do_tool_interaction(TOOL_CROWBAR, user, src, 10 SECONDS, "struggling to pry the outer sheath off", "prying the outer sheath off"))
 						dismantle_wall()
 					return
 

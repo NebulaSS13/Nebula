@@ -46,13 +46,13 @@
 		if(1)
 			// State 1
 			if(isWelder(W))
-				if(W.do_tool_interaction(TOOL_WELDER, user, src, 0, "welding", "welding", fuel_expenditure = 1))
+				if(W.do_tool_interaction(TOOL_WELDER, user, src, 0, fuel_expenditure = 1))
 					anchored = 1
 					state = 2
 				return
 
 			else if(isWrench(W))
-				if(W.do_tool_interaction(TOOL_WRENCH, user, src, 0 ,"unattaching", "unattaching"))
+				if(W.do_tool_interaction(TOOL_WRENCH, user, src, 0 ,"detaching", "detaching"))
 					anchored = 0
 					update_icon()
 					state = 0

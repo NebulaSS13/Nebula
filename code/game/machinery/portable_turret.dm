@@ -289,8 +289,8 @@ var/global/list/turret_icons
 			)
 
 		wrenching = 1
-		if(I.do_tool_interaction(TOOL_WRENCH, user, src, 5 SECONDS, "[anchored ? "un" : ""]anchoring","[anchored ? "un" : ""]anchoring"))
-			wrenching = 0
+		if(I.do_tool_interaction(TOOL_WRENCH, user, src, 5 SECONDS, "[anchored ? "un" : ""]securing","[anchored ? "un" : ""]securing"))
+			wrenching = TRUE
 			anchored = !anchored
 
 	else if(istype(I, /obj/item/card/id)||istype(I, /obj/item/modular_computer))
@@ -680,6 +680,7 @@ var/global/list/turret_icons
 			else if(isWelder(I))
 				if(I.do_tool_interaction(TOOL_WELDER, user, src, 2 SECONDS, "remove the interior armor", "removing the interior armor", fuel_expenditure = 5))
 					SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 2)
+					build_step = 1
 					return
 
 

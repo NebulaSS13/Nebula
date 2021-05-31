@@ -109,7 +109,6 @@
 		return
 
 	if(isWelder(W) && (glass == 1 || !anchored))
-		playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 		if(glass == 1)
 			var/decl/material/glass_material_datum = GET_DECL(glass_material)
 			if(glass_material_datum)
@@ -137,9 +136,8 @@
 			user.visible_message("[user] begins unsecuring the airlock assembly from the floor.", "You begin unsecuring the airlock assembly from the floor.")
 		else
 			user.visible_message("[user] begins securing the airlock assembly to the floor.", "You begin securing the airlock assembly to the floor.")
-		if(W.do_tool_interaction(TOOL_WRENCH, user, src, 4 SECONDS, "securing", "securing"))
+		if(W.do_tool_interaction(TOOL_WRENCH, user, src, 4 SECONDS, anchored ? "unsecuring" : "securing", anchored ? "unsecuring" : "securing"))
 			if(!src) return
-			to_chat(user, SPAN_NOTICE("You [anchored? "un" : ""]secured the airlock assembly!"))
 			anchored = !anchored
 			update_icon()
 
@@ -147,7 +145,7 @@
 	else if(isCoil(W) && state == 0 && anchored)
 		var/obj/item/stack/cable_coil/C = W
 		if (C.get_amount() < 1)
-			to_chat(user, SPAN_WARNING("You need one length of coil to wire the airlock assembly."))
+			to_chat(user, SPAN_WARNING("You need at least one length of coil to wire the airlock assembly."))
 			return
 		user.visible_message("[user] wires the airlock assembly.", "You start to wire the airlock assembly.")
 		if(do_after(user, 40,src) && state == 0 && anchored)
@@ -157,11 +155,9 @@
 				update_icon()
 
 	else if(isWirecutter(W) && state == 1 )
-		user.visible_message("[user] cuts the wires from the airlock assembly.", "You start to cut the wires from airlock assembly.")
 
 		if(W.do_tool_interaction(TOOL_WIRECUTTERS, user, src, 4 SECONDS, "cutting wires from", "cutting wires from"))
 			if(!src) return
-			to_chat(user, SPAN_NOTICE("You cut the airlock wires.!"))
 			new/obj/item/stack/cable_coil(src.loc, 1)
 			src.state = 0
 			update_icon()
@@ -186,7 +182,7 @@
 	else if(isCrowbar(W) && state == 2 )
 		//This should never happen, but just in case I guess
 		if (!electronics)
-			to_chat(user, SPAN_NOTICE("There was nothing to remove."))
+			to_chat(user, SPAN_NOTICE("There is nothing to remove."))
 			src.state = 1
 			update_icon()
 			return
@@ -194,9 +190,8 @@
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("\The [user] starts removing the electronics from the airlock assembly.", "You start removing the electronics from the airlock assembly.")
 
-		if(W.do_tool_interaction(TOOL_CROWBAR, user, src, 4 SECONDS, "removing the electronics", "removing the electronics"))
+		if(W.do_tool_interaction(TOOL_CROWBAR, user, src, 4 SECONDS, "removing the electronics from", "removing the electronics from"))
 			if(!src) return
-			to_chat(user, SPAN_NOTICE("You removed the airlock electronics!"))
 			src.state = 1
 			src.SetName("Wired Airlock Assembly")
 			electronics.dropInto(loc)
@@ -219,11 +214,9 @@
 
 	else if(isScrewdriver(W) && state == 2 )
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		to_chat(user, SPAN_NOTICE("Now finishing the airlock."))
 
-		if(W.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 4 SECONDS, "finishing", "finishing"))
+		if(W.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 4 SECONDS, "securing", "securing"))
 			if(!src) return
-			to_chat(user, SPAN_NOTICE("You finish the airlock!"))
 			var/obj/machinery/door/door = new airlock_type(get_turf(src), dir, FALSE, src)
 			door.construct_state.post_construct(door) // it eats the circuit inside Initialize
 			qdel(src)

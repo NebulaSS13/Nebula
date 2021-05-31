@@ -35,7 +35,7 @@
 			return
 		// Checks to make sure he's not in space doing it, and that the area got proper power.
 		if(!powered())
-			to_chat(user, SPAN_WARNING("The [name] blinks red as you try to insert the item!"))
+			to_chat(user, SPAN_WARNING("\The [src] blinks red as you try to insert \the [G]!"))
 			return
 		if (istype(G, /obj/item/gun/energy/))
 			var/obj/item/gun/energy/E = G

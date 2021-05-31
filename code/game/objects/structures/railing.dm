@@ -263,8 +263,7 @@
 			to_chat(user, "<span class='notice'>You need to wrench \the [src] from back into place first.</span>")
 			return
 		user.visible_message(anchored ? "<span class='notice'>\The [user] begins unscrew \the [src].</span>" : "<span class='notice'>\The [user] begins fasten \the [src].</span>" )
-		if(W.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 2 SECONDS, "unfastening", "unfastening"))
-			to_chat(user, (anchored ? "<span class='notice'>You have unfastened \the [src] from the floor.</span>" : "<span class='notice'>You have fastened \the [src] to the floor.</span>"))
+		if(W.do_tool_interaction(TOOL_SCREWDRIVER, user, src, 2 SECONDS, anchored ? "unfastening" : "fastening", anchored ? "unfastening" : "fastening"))
 			anchored = !anchored
 			update_icon()
 		return
