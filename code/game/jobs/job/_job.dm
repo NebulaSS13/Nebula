@@ -354,11 +354,12 @@
 /datum/job/proc/get_job_icon()
 	if(!SSjobs.job_icons[title])
 		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#job_icon")
-		dress_mannequin(mannequin)
-		mannequin.set_dir(SOUTH)
-		var/icon/preview_icon = getFlatIcon(mannequin)
-		preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.
-		SSjobs.job_icons[title] = preview_icon
+		if(mannequin)
+			dress_mannequin(mannequin)
+			mannequin.set_dir(SOUTH)
+			var/icon/preview_icon = getFlatIcon(mannequin)
+			preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.
+			SSjobs.job_icons[title] = preview_icon
 	return SSjobs.job_icons[title]
 
 /datum/job/proc/get_unavailable_reasons(var/client/caller)
@@ -389,8 +390,9 @@
 		. = reasons
 
 /datum/job/proc/dress_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
-	mannequin.delete_inventory(TRUE)
-	equip_preview(mannequin, additional_skips = OUTFIT_ADJUSTMENT_SKIP_BACKPACK)
+	if(mannequin)
+		mannequin.delete_inventory(TRUE)
+		equip_preview(mannequin, additional_skips = OUTFIT_ADJUSTMENT_SKIP_BACKPACK)
 
 /datum/job/proc/is_available(var/client/caller)
 	if(!is_position_available())
@@ -487,5 +489,5 @@
 /datum/job/proc/check_special_blockers(var/datum/preferences/prefs)
 	return
 
-/datum/job/proc/do_spawn_special(var/mob/living/character, var/mob/new_player/new_player_mob)
+/datum/job/proc/do_spawn_special(var/mob/living/character, var/mob/new_player/new_player_mob, var/latejoin = FALSE)
 	return FALSE

@@ -145,10 +145,10 @@
 			if(isnull(client.holder))
 				announce_ghost_joinleave(src)
 
-			var/mob/living/carbon/human/dummy/mannequin = new()
-			client.prefs.dress_preview_mob(mannequin)
-			observer.set_appearance(mannequin)
-			qdel(mannequin)
+			var/mob/living/carbon/human/dummy/mannequin = get_mannequin(client.ckey)
+			if(mannequin)
+				client.prefs.dress_preview_mob(mannequin)
+				observer.set_appearance(mannequin)
 
 			if(client.prefs.be_random_name)
 				client.prefs.real_name = client.prefs.get_random_name()
@@ -293,7 +293,7 @@
 	character = SSjobs.equip_rank(character, job.title, 1)					//equips the human
 	SScustomitems.equip_custom_items(character)
 
-	if(job.do_spawn_special(character, src)) //This replaces the AI spawn logic with a proc stub. Refer to silicon.dm for the spawn logic.
+	if(job.do_spawn_special(character, src, TRUE)) //This replaces the AI spawn logic with a proc stub. Refer to silicon.dm for the spawn logic.
 		qdel(src)
 		return
 

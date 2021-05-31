@@ -32,16 +32,17 @@
 /decl/hierarchy/outfit/masked_killer/post_equip(var/mob/living/carbon/human/H)
 	..()
 	var/victim = get_mannequin(H.ckey)
-	for(var/obj/item/carried_item in H.get_equipped_items(TRUE))
-		carried_item.add_blood(victim) //Oh yes, there will be blood.. just not blood from the killer because that's odd
+	if(victim)
+		for(var/obj/item/carried_item in H.get_equipped_items(TRUE))
+			carried_item.add_blood(victim) //Oh yes, there will be blood.. just not blood from the killer because that's odd
 
 /decl/hierarchy/outfit/reaper
 	name = "Reaper"
-	uniform = /obj/item/clothing/under/suit_jacket{ starting_accessories=list(/obj/item/clothing/accessory/wcoat/black) }
-	shoes = /obj/item/clothing/shoes/color/black
-	gloves = /obj/item/clothing/gloves/thick
-	l_ear = /obj/item/radio/headset
-	glasses = /obj/item/clothing/glasses/sunglasses
+	uniform =  /obj/item/clothing/under/suit_jacket/waistcoat
+	shoes =    /obj/item/clothing/shoes/color/black
+	gloves =   /obj/item/clothing/gloves/thick
+	l_ear =    /obj/item/radio/headset
+	glasses =  /obj/item/clothing/glasses/sunglasses
 	l_pocket = /obj/item/energy_blade/sword
 
 	id_slot = slot_wear_id_str

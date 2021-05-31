@@ -20,6 +20,7 @@
 #define ATOM_FLAG_SHOW_REAGENT_NAME       BITFLAG(8) // Reagent presentation name is attached to the atom name
 #define ATOM_FLAG_CAN_BE_PAINTED          BITFLAG(9) // Can be painted using a paint sprayer or similar.
 #define ATOM_FLAG_SHIELD_CONTENTS         BITFLAG(10)// Protects contents from some global effects (Solar storms)
+#define ATOM_FLAG_ADJACENT_EXCEPTION      BITFLAG(11)// Skips adjacent checks for atoms that should always be reachable in window tiles
 
 #define ATOM_IS_CONTAINER(A)              (A.atom_flags & ATOM_FLAG_CONTAINER)
 #define ATOM_IS_OPEN_CONTAINER(A)         (A.atom_flags & ATOM_FLAG_OPEN_CONTAINER)
@@ -49,6 +50,7 @@
 #define ITEM_FLAG_NOCUFFS                 BITFLAG(11) // Gloves that have this flag prevent cuffs being applied
 #define ITEM_FLAG_CAN_HIDE_IN_SHOES       BITFLAG(12) // Items that can be hidden in shoes that permit it
 #define ITEM_FLAG_PADDED                  BITFLAG(13) // When set on gloves, will act like pulling punches in unarmed combat.
+#define ITEM_FLAG_HOLLOW                  BITFLAG(14) // Modifies initial matter values to be lower than w_class normally sets.
 
 // Flags for pass_flags.
 #define PASS_FLAG_TABLE                   BITFLAG(0)

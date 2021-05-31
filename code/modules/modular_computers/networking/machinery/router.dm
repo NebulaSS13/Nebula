@@ -22,7 +22,17 @@
 	var/datum/computer_network/net = R.get_network()
 	if(net)
 		data["is_router"] = R.is_router()
+	data["wifi"] = R.allow_wifi
 	return data
+
+/obj/machinery/network/router/OnTopic(mob/user, href_list, datum/topic_state/state)
+	if(href_list["toggle_wifi"])
+		var/datum/extension/network_device/broadcaster/router/R = get_extension(src, /datum/extension/network_device)
+		if(R)
+			R.allow_wifi = !R.allow_wifi
+			return TOPIC_REFRESH
+	
+	. = ..()
 
 /obj/machinery/network/router/update_network_status()
 	..()

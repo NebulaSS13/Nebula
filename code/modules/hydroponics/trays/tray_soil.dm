@@ -7,6 +7,7 @@
 	stat_immune = NOINPUT | NOSCREEN | NOPOWER
 	mechanical = 0
 	tray_light = 0
+	matter = null
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O,/obj/item/tank))

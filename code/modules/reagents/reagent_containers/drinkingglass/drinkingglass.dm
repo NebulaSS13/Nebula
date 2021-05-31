@@ -30,6 +30,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	possible_transfer_amounts = @"[5,10,15,30]"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
 	temperature_coefficient = 4
+	item_flags = ITEM_FLAG_HOLLOW
 
 	var/custom_name
 	var/custom_desc

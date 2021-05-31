@@ -99,7 +99,7 @@
 	var/list/all_departments = decls_repository.get_decls_of_subtype(/decl/department)
 	for(var/dtype in all_departments)
 		var/decl/department/dept = GET_DECL(dtype)
-		. += list(list("[dept.name]" = filtered_nano_crew_manifest(SSjobs.titles_by_department(dtype))))
+		.[dept.name] = filtered_nano_crew_manifest(SSjobs.titles_by_department(dtype))
 
 /proc/flat_nano_crew_manifest()
 	. = list()

@@ -106,6 +106,9 @@
 	desc = "A black suit and red tie. Very formal."
 	icon = 'icons/clothing/under/suits/suit_black.dmi'
 
+/obj/item/clothing/under/suit_jacket/waistcoat
+	starting_accessories = list(/obj/item/clothing/accessory/wcoat/black)
+
 /obj/item/clothing/under/suit_jacket/really_black
 	name = "executive suit"
 	desc = "A formal black suit and red tie, intended for the galaxy's finest."

@@ -82,15 +82,18 @@ var/global/list/supermatter_final_thoughts = list(
 	SSradiation.radiate(source, rads)
 
 /obj/machinery/power/supermatter
-	name = "Supermatter"
+	name = "supermatter crystal"
 	desc = "A strangely translucent and iridescent crystal. <span class='danger'>You get headaches just from looking at it.</span>"
 	icon = 'icons/obj/engine.dmi'
 	icon_state = "darkmatter"
 	density = 1
 	anchored = 0
 	light_range = 4
-
 	layer = ABOVE_OBJ_LAYER
+	matter = list(
+		/decl/material/solid/exotic_matter = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel =   MATTER_AMOUNT_REINFORCEMENT
+	)
 
 	var/nitrogen_retardation_factor = 0.15 // Higher == N2 slows reaction more
 	var/thermal_release_modifier = 10000   // Higher == more heat released during reaction
@@ -172,6 +175,9 @@ var/global/list/supermatter_final_thoughts = list(
 /obj/machinery/power/supermatter/Initialize()
 	. = ..()
 	uid = gl_uid++
+
+/obj/machinery/power/supermatter/get_matter_amount_modifier()
+	. = ..() * (1/HOLLOW_OBJECT_MATTER_MULTIPLIER) * 10 // Big solid chunk of matter.
 
 /obj/machinery/power/supermatter/proc/handle_admin_warnings()
 	if(disable_adminwarn)
@@ -580,7 +586,7 @@ var/global/list/supermatter_final_thoughts = list(
 	return "Superdense crystalline structure - appears to have been shaped or hewn, lattice is approximately 20 times denser than should be possible."
 
 /obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
-	name = "Supermatter Shard"
+	name = "supermatter shard"
 	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. <span class='danger'>You get headaches just from looking at it.</span>"
 	icon_state = "darkmatter_shard"
 	base_icon_state = "darkmatter_shard"

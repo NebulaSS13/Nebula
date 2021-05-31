@@ -1,15 +1,23 @@
 /////SINGULARITY SPAWNER
-/obj/machinery/the_singularitygen/
-	name = "Gravitational Singularity Generator"
-	desc = "An Odd Device which produces a Gravitational Singularity when set up."
+/obj/machinery/the_singularitygen
+	name = "gravitational singularity generator"
+	desc = "An odd device which produces a gravitational singularity when set up."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "TheSingGen"
 	anchored = 0
 	density = 1
 	use_power = POWER_USE_OFF
+	matter = list(
+		/decl/material/solid/exotic_matter = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel = MATTER_AMOUNT_SECONDARY
+	)
+
 	var/energy = 0
 	var/creation_type = /obj/singularity
 	var/is_activated = FALSE
+
+/obj/machinery/the_singularitygen/get_matter_amount_modifier()
+	. = ..() * (1/HOLLOW_OBJECT_MATTER_MULTIPLIER) * 10 // Big solid chunk of matter.
 
 /obj/machinery/the_singularitygen/Process()
 	var/turf/T = get_turf(src)

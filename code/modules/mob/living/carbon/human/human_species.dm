@@ -7,7 +7,6 @@
 	. = ..()
 	STOP_PROCESSING(SSmobs, src)
 	global.human_mob_list -= src
-	delete_inventory()
 
 /mob/living/carbon/human/dummy/selfdress/Initialize()
 	. = ..()

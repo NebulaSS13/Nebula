@@ -1,6 +1,8 @@
 /datum/extension/network_device/broadcaster
 	expected_type = /obj/machinery
-	connection_type = NETWORK_CONNECTION_WIRED
+	connection_type = NETWORK_CONNECTION_STRONG_WIRELESS
+	var/allow_wifi = TRUE
+	var/long_range = FALSE 		// TRUE if broadcaster can cross z-chunk boundaries.
 
 /datum/extension/network_device/broadcaster/proc/get_broadcast_strength()
 	var/obj/item/stock_parts/computer/network_card/network_card = get_network_card()

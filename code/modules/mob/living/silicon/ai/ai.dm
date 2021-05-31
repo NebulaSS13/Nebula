@@ -716,7 +716,7 @@ var/global/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/on_update_icon()
 	if(!selected_sprite || !(selected_sprite in available_icons()))
-		// This should NOT be using the decl repository as default_ai_icon is a datum. TODO: rewrite AI icon handling.
+		// This should NOT be using the decl repository and cannot use GET_DECL() as default_ai_icon is a datum. TODO: rewrite AI icon handling.
 		selected_sprite = decls_repository.get_decl(default_ai_icon)
 
 	icon = selected_sprite.icon
