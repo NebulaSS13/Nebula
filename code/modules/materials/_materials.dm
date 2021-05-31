@@ -223,6 +223,19 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/scent_descriptor = SCENT_DESC_SMELL
 	var/scent_range = 1
 
+	var/list/neutron_interactions // Associative List of potential neutron interactions for the material to undergo, corresponding to the ideal
+								  // neutron energy for that reaction to occur.
+
+	var/neutron_cross_section	  // How broad the neutron interaction curve is, independent of temperature. Materials that are harder to react with will have lower values.
+	var/absorption_products		  // Transmutes into these reagents following neutron absorption and/or subsequent beta decay. Generally forms heavier reagents.
+	var/fission_products		  // Transmutes into these reagents following fission. Forms lighter reagents, and a lot of heat.
+	var/neutron_production		  // How many neutrons are created per unit per fission event.
+	var/neutron_absorption		  // How many neutrons are absorbed per unit per absorption event. 
+	var/fission_heat			  // How much thermal energy per unit per fission event this material releases.
+	var/fission_energy			  // Energy of neutrons released by fission.
+	var/moderation_target		  // The 'target' neutron energy value that the fission environment shifts towards after a moderation event.
+								  // Neutron moderators can only slow down neutrons.
+
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack)
 	if(!used_stack.can_use(1))
@@ -629,3 +642,18 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	if(prop.reagents.has_reagent(/decl/material/solid/ice))
 		. = "iced [.]"
+
+/decl/material/proc/neutron_interact(var/neutron_energy, var/total_interacted_units, var/total_units)
+	. = list() // Returns associative list of interaction -> interacted units
+	if(!length(neutron_interactions))
+		return
+	for(var/interaction in neutron_interactions)
+		var/ideal_energy = neutron_interactions[interaction]
+		var/interacted_units_ratio = (Clamp(-((((neutron_energy-ideal_energy)**2)/(neutron_cross_section*1000)) - 100), 0, 100))/100
+		var/interacted_units = round(interacted_units_ratio*total_interacted_units, 0.001)
+		
+		if(interacted_units > 0)
+			.[interaction] = interacted_units
+			total_interacted_units -= interacted_units
+		if(total_interacted_units <= 0)
+			return

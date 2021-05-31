@@ -5,11 +5,17 @@
 /datum/fabricator_recipe/imprinter/circuit/get_product_name()
 	. = "machine circuit design ([..()])"
 
+/datum/fabricator_recipe/imprinter/circuit/fission_core
+	path = /obj/item/stock_parts/circuitboard/unary_atmos/fission_core
+
+/datum/fabricator_recipe/imprinter/circuit/fission_core_control
+	path = /obj/item/stock_parts/circuitboard/fission_core_control
+
 /datum/fabricator_recipe/imprinter/circuit/fusion
 	path = /obj/item/stock_parts/circuitboard/fusion/core_control
 
-/datum/fabricator_recipe/imprinter/circuit/fusion_fuel_compressor
-	path = /obj/item/stock_parts/circuitboard/fusion_fuel_compressor
+/datum/fabricator_recipe/imprinter/circuit/fuel_compressor
+	path = /obj/item/stock_parts/circuitboard/fuel_compressor
 
 /datum/fabricator_recipe/imprinter/circuit/fusion_fuel_control
 	path = /obj/item/stock_parts/circuitboard/fusion_fuel_control
