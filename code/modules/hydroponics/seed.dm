@@ -70,6 +70,20 @@
 
 	uid = "[sequential_id(/datum/seed/)]"
 
+// TODO integrate other traits.
+/datum/seed/proc/get_monetary_value()
+	. = 1
+	// Positives!
+	. += 3 * set_trait(TRAIT_HARVEST_REPEAT)
+	. += 3 * set_trait(TRAIT_PRODUCES_POWER)
+	. += 5 * get_trait(TRAIT_CARNIVOROUS)
+	. += 5 * get_trait(TRAIT_PARASITE)
+	. += 5 * get_trait(TRAIT_TELEPORTING)
+	// Negatives!
+	. -= 2 * get_trait(TRAIT_STINGS)
+	. -= 2 * get_trait(TRAIT_EXPLOSIVE)
+	. = max(1, round(.))
+
 /datum/seed/proc/get_trait(var/trait)
 	return traits["[trait]"]
 
