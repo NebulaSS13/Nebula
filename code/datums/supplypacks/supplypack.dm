@@ -15,16 +15,19 @@
 
 //Is run once on init for non-base-category supplypacks.
 var/global/list/cargoprices = list()
+var/global/list/cargoreturns = list()
 /decl/hierarchy/supply_pack/proc/setup()
 	if(!num_contained)
 		for(var/entry in contains)
 			num_contained += max(1, contains[entry])
 	for(var/entry in contains)
 		cost += atom_info_repository.get_combined_worth_for(entry) * max(1, contains[entry])
-	if(containertype)
+	var/container_value = containertype ? atom_info_repository.get_single_worth_for(containertype) : 0
+	if(container_value)
 		cost += atom_info_repository.get_single_worth_for(containertype)
 	cost = max(1, CEILING((cost * WORTH_TO_SUPPLY_POINTS_CONSTANT * SSsupply.price_markup), WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT))
-	cargoprices[name] = cost
+	global.cargoprices[name] = cost
+	global.cargoreturns[name] = (cost * SSsupply.slip_return_rebate) + (container_value * WORTH_TO_SUPPLY_POINTS_CONSTANT * SSsupply.crate_return_rebate)
 
 	var/decl/supply_method/sm = GET_DECL(supply_method)
 	manifest = sm.setup_manifest(src)
@@ -33,12 +36,12 @@ var/global/list/cargoprices = list()
 	set name = "Print Cargo Prices"
 	set category = "Debug"
 
-	cargoprices = sortTim(cargoprices, /proc/cmp_numeric_asc, TRUE)
+	global.cargoprices = sortTim(global.cargoprices, /proc/cmp_numeric_asc, TRUE)
 	var/pad = 0
-	for(var/key in cargoprices)
+	for(var/key in global.cargoprices)
 		pad = max(pad, length_char(key)+2)
-	for(var/key in cargoprices)
-		to_chat(mob, "[pad_right("[key]:", pad, " ")][global.cargoprices[key]]")
+	for(var/key in global.cargoprices)
+		to_chat(mob, "[pad_right("[key]:", pad, " ")][global.cargoprices[key]] (sells for [global.cargoreturns[key]])")
 
 /decl/hierarchy/supply_pack/proc/sec_available()
 	if(isnull(security_level))
