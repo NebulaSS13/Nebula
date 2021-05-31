@@ -218,9 +218,12 @@ var/global/list/slot_equipment_priority = list( \
 		return TRUE
 	if(W == wear_mask)
 		wear_mask = null
-		update_inv_wear_mask(0)
+		refresh_mask(W)
 		return TRUE
 	return FALSE
+
+/mob/proc/refresh_mask(var/obj/item/removed)
+	update_inv_wear_mask(0)
 
 /mob/proc/isEquipped(obj/item/I)
 	if(!I)
