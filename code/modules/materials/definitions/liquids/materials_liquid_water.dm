@@ -83,7 +83,7 @@
 	..()
 	if(istype(O, /obj/item/chems/food/snacks/monkeycube))
 		var/obj/item/chems/food/snacks/monkeycube/cube = O
-		if(!cube.wrapped)
+		if(!cube.wrapper_type)
 			cube.Expand()
 
 /decl/material/liquid/water/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)

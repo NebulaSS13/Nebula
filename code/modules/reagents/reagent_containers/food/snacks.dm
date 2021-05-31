@@ -1366,22 +1366,27 @@
 	filling_color = "#adac7f"
 	center_of_mass = @"{'x':16,'y':14}"
 
-	var/wrapped = 0
-	var/growing = 0
+	var/growing = FALSE
 	var/monkey_type = /mob/living/carbon/human/monkey
+	var/wrapper_type
 
 /obj/item/chems/food/snacks/monkeycube/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
+/obj/item/chems/food/snacks/monkeycube/get_single_monetary_worth()
+	. = (monkey_type ? round(atom_info_repository.get_combined_worth_for(monkey_type) * 1.25) : 5)
+	if(wrapper_type)
+		. += atom_info_repository.get_combined_worth_for(wrapper_type)
+
 /obj/item/chems/food/snacks/monkeycube/attack_self(var/mob/user)
-	if(wrapped)
+	if(wrapper_type)
 		Unwrap(user)
 
 /obj/item/chems/food/snacks/monkeycube/proc/Expand()
 	if(!growing)
-		growing = 1
-		src.visible_message("<span class='notice'>\The [src] expands!</span>")
+		growing = TRUE
+		src.visible_message(SPAN_NOTICE("\The [src] expands!"))
 		var/mob/monkey = new monkey_type
 		monkey.dropInto(src.loc)
 		qdel(src)
@@ -1390,10 +1395,9 @@
 	icon_state = "monkeycube"
 	desc = "Just add water!"
 	to_chat(user, SPAN_NOTICE("You unwrap \the [src]."))
-	wrapped = 0
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
-	var/trash = new /obj/item/trash/cubewrapper(get_turf(user))
-	user.put_in_hands(trash)
+	user.put_in_hands(new wrapper_type(get_turf(user)))
+	wrapper_type = null
 
 /obj/item/chems/food/snacks/monkeycube/On_Consume(var/mob/M)
 	if(ishuman(M))
@@ -1412,7 +1416,7 @@
 	icon_state = "monkeycubewrap"
 	item_flags = 0
 	obj_flags = 0
-	wrapped = 1
+	wrapper_type = /obj/item/trash/cubewrapper
 
 //Spider cubes, all that's left of the cube PR
 /obj/item/chems/food/snacks/monkeycube/spidercube
@@ -1500,6 +1504,7 @@
 	nutriment_desc = list("salt" = 1, "chips" = 2, "fish" = 2)
 	nutriment_amt = 3
 	bitesize = 3
+
 /obj/item/chems/food/snacks/fishandchips/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
