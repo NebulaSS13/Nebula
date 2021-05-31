@@ -3,7 +3,7 @@
 	hierarchy_type = /decl/hierarchy/supply_pack
 	var/list/contains = list()
 	var/manifest = ""
-	var/cost = null
+	var/cost = 0
 	var/containertype = /obj/structure/closet/crate
 	var/containername = null
 	var/access = null
@@ -16,17 +16,14 @@
 //Is run once on init for non-base-category supplypacks.
 var/global/list/cargoprices = list()
 /decl/hierarchy/supply_pack/proc/setup()
-
 	if(!num_contained)
 		for(var/entry in contains)
 			num_contained += max(1, contains[entry])
-
 	for(var/entry in contains)
 		cost += atom_info_repository.get_combined_worth_for(entry) * max(1, contains[entry])
 	if(containertype)
 		cost += atom_info_repository.get_single_worth_for(containertype)
-	cost = cost * WORTH_TO_SUPPLY_POINTS_CONSTANT * SSsupply.price_markup
-	cost = max(1, CEILING(cost, WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT))
+	cost = max(1, CEILING((cost * WORTH_TO_SUPPLY_POINTS_CONSTANT * SSsupply.price_markup), WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT))
 	cargoprices[name] = cost
 
 	var/decl/supply_method/sm = GET_DECL(supply_method)

@@ -22,6 +22,9 @@
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 
+/obj/structure/bed/get_base_value()
+	. = round(..() * 2.5) // Utility structures should be worth more than their matter (wheelchairs, rollers, etc).
+
 /obj/structure/bed/update_material_name()
 	if(reinf_material)
 		SetName("[reinf_material.adjective_name] [initial(name)]")
@@ -270,6 +273,9 @@
 	w_class = ITEM_SIZE_LARGE
 	pickup_sound = 'sound/foley/pickup2.ogg'
 	var/structure_form_type = /obj/structure/bed/roller	//The deployed form path.
+
+/obj/item/roller/get_single_monetary_worth()
+	. = structure_form_type ? atom_info_repository.get_combined_worth_for(structure_form_type) : ..()
 
 /obj/item/roller/attack_self(mob/user)
 	var/obj/structure/bed/roller/R = new structure_form_type(user.loc)

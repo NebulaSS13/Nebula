@@ -76,9 +76,6 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/random
 	seed_type = null
 
-/obj/item/seeds/random/get_single_monetary_worth()
-	. = round(..() * 2.5)
-
 /obj/item/seeds/random/Initialize()
 	seed = SSplants.create_random_seed()
 	seed_type = seed.name

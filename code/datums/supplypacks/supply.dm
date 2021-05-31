@@ -23,12 +23,12 @@
 	containername = "wrapping paper"
 
 /decl/hierarchy/supply_pack/supply/tapes
-	name = "Medium - Blank Tapes (14)"
+	name = "Supplies - Blank Tapes (14)"
 	contains = list (/obj/item/storage/box/tapes)
 	containername = "blank tapes crate"
 
 /decl/hierarchy/supply_pack/supply/taperolls
-	name = "G.O.S.H - Barricade Tapes (mixed)"
+	name = "Supplies - Barricade Tapes (mixed)"
 	contains = list (/obj/item/storage/box/taperolls)
 	containername = "barricade tape crate"
 

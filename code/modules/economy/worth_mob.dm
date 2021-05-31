@@ -1,13 +1,18 @@
-/mob/get_base_value()
+/mob/get_single_monetary_worth()
 	. = 0.5 * mob_size
 	if(stat != DEAD)
 		. *= 1.5
 	. = max(round(.), mob_size)
 
-/mob/living/carbon/human/get_base_value()
-	. = round(..() * species.rarity_value)
+/mob/living/carbon/get_single_monetary_worth()
+	. = ..()
+	for(var/atom/movable/organ in (internal_organs|organs))
+		. += organ.get_combined_monetary_worth()
 
-/mob/living/get_base_value()
+/mob/living/carbon/get_value_multiplier()
+	. = species?.rarity_value || 1
+
+/mob/living/get_single_monetary_worth()
 	. = ..()
 	if(meat_type)
 		. += atom_info_repository.get_combined_worth_for(meat_type) * meat_amount

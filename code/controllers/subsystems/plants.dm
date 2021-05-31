@@ -82,6 +82,7 @@ PROCESSING_SUBSYSTEM_DEF(plants)
 	var/datum/seed/seed = new()
 	seed.randomize()
 	seed.name = "[seed.uid]"
+	seed.base_seed_value = rand(10, 15)
 	seeds[seed.name] = seed
 
 	if(survive_on_station)
