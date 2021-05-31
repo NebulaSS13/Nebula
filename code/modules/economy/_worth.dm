@@ -17,7 +17,7 @@
 
 /atom/proc/get_contents_monetary_worth()
 	. = 0
-	for(var/atom/movable/thing in contents)
+	for(var/atom/movable/thing in get_contained_external_atoms())
 		. += thing.get_combined_monetary_worth()
 
 /atom/proc/get_combined_monetary_worth()

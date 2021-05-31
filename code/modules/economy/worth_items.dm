@@ -69,3 +69,8 @@
 
 #undef MUNDANE_ARMOUR_VALUE
 #undef BASE_ARMOUR_WORTH
+
+/obj/item/organ/get_single_monetary_worth()
+	. = ..()
+	if(species)
+		. = round(. * species.rarity_value)

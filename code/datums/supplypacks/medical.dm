@@ -54,7 +54,7 @@
 	containername = "stability kit crate"
 
 /decl/hierarchy/supply_pack/medical/bloodpack
-	name = "Refills - Blood packs"
+	name = "Refills - Blood Bags (Empty)"
 	contains = list(/obj/item/storage/box/bloodpacks = 3)
 	containername = "blood pack crate"
 
