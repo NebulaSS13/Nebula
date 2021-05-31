@@ -142,3 +142,15 @@
 		/obj/item/stock_parts/keyboard = 1,
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
+
+/obj/item/stock_parts/circuitboard/fuel_compressor
+	name = "circuitboard (fuel compressor)"
+	build_path = /obj/machinery/fuel_compressor
+	board_type = "machine"
+	origin_tech = "{'powerstorage':2,'engineering':3,'materials':3}"
+	req_components = list(
+							/obj/item/stock_parts/manipulator = 2,
+							/obj/item/stock_parts/matter_bin/super = 2,
+							/obj/item/stock_parts/console_screen = 1,
+							/obj/item/stack/cable_coil = 5
+							)

@@ -1,0 +1,47 @@
+<div class="itemLabel">
+		Stored Material:
+</div>
+{{for data.stored_material}}
+	<div class="itemContent">
+		<table width = '90%'>
+			<th>Material</th>
+			<th>Amount</th>
+			<th>Rod Makeup</th>
+			<th>Eject Material</th>
+			{{for data.stored_material}}
+				<tr>
+					<td>{{:value.name}}</td>
+					<td>{{:value.amount}}</td>
+					<td>{{:helper.link('Adjust', null, {'change_makeup' : value.name})}}</td>
+					<td>{{:helper.link('Eject', null, {'eject_material': value.name})}}</td>
+				</tr>
+			{{/for}}
+		</table>
+	</div>
+{{empty}}
+	No materials available.
+{{/for}}
+<hr>
+<div class="item">
+	<div class="itemLabel">
+		Rod Makeup:
+	</div>
+	<div class="itemContent">
+		<table width = '90%'>
+			<th>Material</th>
+			<th>Amount</th>
+			{{for data.rod_makeup}}
+				<tr>
+					<td>{{:value.name}}</td>
+					<td>{{:value.amount}}</td>
+				</tr>
+			{{/for}}
+		</table>
+	</div>
+	<div class="itemContent">
+		{{:helper.link('Compress Rod', null, {'make_rod' : 1})}}
+	</div>
+	<div class="itemContent">
+		{{:helper.link('Clear Rod Makeup', null, {'clear_makeup' : 1})}}
+	</div>
+</div>

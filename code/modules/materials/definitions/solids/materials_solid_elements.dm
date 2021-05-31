@@ -1,7 +1,15 @@
 /decl/material/solid/boron
 	name = "boron"
 	lore_text = "Boron is a chemical element with the symbol B and atomic number 5."
-	flags = MAT_FLAG_FUSION_FUEL
+	flags = MAT_FLAG_FUSION_FUEL | MAT_FLAG_FISSIBLE
+
+	neutron_cross_section = 10
+	neutron_interactions = list(INTERACTION_ABSORPTION = 2500)
+	absorption_products = list(
+		/decl/material/solid/lithium = 0.5,
+		/decl/material/gas/helium = 0.5
+	)
+	neutron_absorption = 20
 
 /decl/material/solid/lithium
 	name = "lithium"

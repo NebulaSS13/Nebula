@@ -12,6 +12,7 @@
 #define MAT_FLAG_BRITTLE            BITFLAG(1)
 #define MAT_FLAG_PADDING            BITFLAG(2)
 #define MAT_FLAG_FUSION_FUEL        BITFLAG(3)
+#define MAT_FLAG_FISSIBLE           BITFLAG(4)	// This material has use in a fission reactor.
 
 #define SHARD_SHARD                 "shard"
 #define SHARD_SHRAPNEL              "shrapnel"
@@ -66,3 +67,9 @@
 #define MAT_PHASE_LIQUID    "liquid"
 #define MAT_PHASE_GAS       "gas"
 #define MAT_PHASE_PLASMA    "plasma"
+
+// Fission interactions.
+// For these, associated value is ideal neutron energy for reaction.
+#define INTERACTION_FISSION        "fission"
+#define INTERACTION_ABSORPTION     "absorption"
+#define INTERACTION_SCATTER        "scatter"
