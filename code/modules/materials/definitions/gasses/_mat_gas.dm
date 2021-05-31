@@ -5,7 +5,7 @@
 	color = COLOR_GRAY80
 	shard_type = SHARD_NONE
 	conductive = 0
-	value = 0
+	value = 0.15
 	burn_product = /decl/material/gas/carbon_dioxide
 	gas_specific_heat = 20    // J/(mol*K)
 	gas_molar_mass =    0.032 // kg/mol
