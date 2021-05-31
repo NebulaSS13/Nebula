@@ -11,15 +11,21 @@
 
 /obj/machinery/merchant_pad/proc/get_target()
 	var/turf/T = get_turf(src)
-	for(var/a in T)
+	for(var/atom/a in T)
 		if(a == src || (!istype(a,/obj) && !istype(a,/mob/living)) || istype(a,/obj/effect))
 			continue
+		if(istype(a,/obj))
+			var/obj/O = a
+			if(O.anchored) continue
 		return a
 
 /obj/machinery/merchant_pad/proc/get_targets()
 	. = list()
 	var/turf/T = get_turf(src)
-	for(var/a in T)
+	for(var/atom/a in T)
 		if(a == src || (!istype(a,/obj) && !istype(a,/mob/living)) || istype(a,/obj/effect))
 			continue
+		if(istype(a,/obj))
+			var/obj/O = a
+			if(O.anchored) continue
 		. += a

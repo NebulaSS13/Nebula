@@ -35,26 +35,25 @@
 
 /datum/trade_hub/proc/get_possible_post_roundstart_trader_types()
 	. = subtypesof(/datum/trader/ship)
-	if(prob(95))
-		. -= typesof(/datum/trader/ship/unique)
 
 /datum/trade_hub/proc/generate_trader(var/list/use_trader_list)
 	if(length(traders)+1 >= max_traders)
 		return FALSE
 	if(!use_trader_list)
 		use_trader_list = get_possible_post_roundstart_trader_types()
-	while(length(use_trader_list))
-		var/trader_type = pick_n_take(use_trader_list)
-		if(!(locate(trader_type) in traders))
-			add_trader(trader_type)
-			return TRUE
+	add_trader(pick(use_trader_list))
+	return TRUE
 
 /datum/trade_hub/proc/add_trader(var/trader_type)
 	traders += new trader_type(src)
 
 /datum/trade_hub/Process(var/resumed)
 	for(var/datum/trader/trader in traders)
-		trader.tick()
+		if(!trader.tick())
+			traders -= trader
+			qdel(trader)
+	if((traders.len < max_traders) && prob(100-round((traders.len/max_traders)*100)))
+		generate_trader()
 
 // Stub for legacy/non-overmap purposes.
 /datum/trade_hub/singleton
