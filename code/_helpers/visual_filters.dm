@@ -23,6 +23,7 @@
 		var/list/arguments = data.Copy()
 		arguments -= "priority"
 		filters += filter(arglist(arguments))
+	UPDATE_OO_IF_PRESENT
 
 /atom/movable/proc/get_filter(filter_name)
 	if(filter_data && filter_data[filter_name])
