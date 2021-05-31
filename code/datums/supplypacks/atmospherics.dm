@@ -9,13 +9,13 @@
 	containername = "internals crate"
 
 /decl/hierarchy/supply_pack/atmospherics/evacuation
-	name = "Emergency equipment"
+	name = "Gear - Emergency Suits"
 	contains = list(/obj/item/storage/toolbox/emergency = 2,
 					/obj/item/clothing/suit/storage/hazardvest = 2,
-					/obj/item/tank/emergency/oxygen/engi = 4,
-			 		/obj/item/clothing/suit/space/emergency = 4,
-					/obj/item/clothing/head/helmet/space/emergency = 4,
-					/obj/item/clothing/mask/gas = 4,
+					/obj/item/tank/emergency/oxygen/engi = 2,
+			 		/obj/item/clothing/suit/space/emergency = 2,
+					/obj/item/clothing/head/helmet/space/emergency = 2,
+					/obj/item/clothing/mask/gas = 2,
 					/obj/item/flashlight/flare/glowstick = 5)
 	containername = "emergency crate"
 

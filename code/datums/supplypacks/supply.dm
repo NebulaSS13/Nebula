@@ -165,6 +165,7 @@
 	contains = list(/obj/machinery/vending/cigarette)
 	containertype = /obj/structure/largecrate
 	containername = "\improper Vending Machine"
+	cost = 150
 
 /decl/hierarchy/supply_pack/supply/roboticsvendor
 	name = "Vendor - Robotics - Dandytronics LLT"

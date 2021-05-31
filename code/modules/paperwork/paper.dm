@@ -26,10 +26,10 @@
 	drop_sound = 'sound/foley/paperpickup1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
-	var/info		//What's actually written on the paper.
-	var/info_links	//A different version of the paper which includes html links at fields and EOF
-	var/stamps		//The (text for the) stamps on the paper.
-	var/fields		//Amount of user created fields
+	var/info		// What's actually written on the paper.
+	var/info_links	// A different version of the paper which includes html links at fields and EOF
+	var/stamps		// The (text for the) stamps on the paper.
+	var/fields		// Amount of user created fields
 	var/free_space = MAX_PAPER_MESSAGE_LEN
 	var/list/stamped
 	var/list/ico[0]      //Icons and
