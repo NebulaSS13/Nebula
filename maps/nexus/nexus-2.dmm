@@ -49,7 +49,7 @@
 "qy" = (/obj/item/stool/bar/padded,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/glass,/area/nexus/civilian/bar)
 "qW" = (/turf/simulated/wall,/area/nexus/civilian/bar)
 "qY" = (/obj/effect/floor_decal/corner/lightgrey/diagonal,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/turf/simulated/floor/tiled,/area/nexus/civilian/hygiene)
-"rm" = (/obj/effect/floor_decal/corner/yellow/diagonal,/obj/machinery/computer/fusion/nexus_control{dir = 1; initial_id_tag = "main"},/turf/simulated/floor/tiled,/area/nexus/engineering)
+"rm" = (/obj/effect/floor_decal/corner/yellow/diagonal,/obj/machinery/computer/fusion/core_control{dir = 1; initial_id_tag = "main"},/turf/simulated/floor/tiled,/area/nexus/engineering)
 "rp" = (/obj/structure/cable{icon_state = "4-8"},/obj/effect/floor_decal/corner/lightgrey/diagonal,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/light,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,/turf/simulated/floor/tiled,/area/nexus/civilian/dorm)
 "rw" = (/obj/machinery/alarm{dir = 4},/obj/structure/closet/cabinet,/turf/simulated/floor/carpet/blue2,/area/nexus/civilian/dorm)
 "rP" = (/obj/structure/railing/mapped{dir = 8},/obj/structure/flora/pottedplant/flower,/turf/simulated/floor/carpet/blue,/area/nexus/civilian/bar)
