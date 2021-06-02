@@ -19,7 +19,7 @@
 
 	if(. == TOOL_USE_SUCCESS)
 		var/decl/tool_archetype/tool_archetype = GET_DECL(archetype)
-		user.visible_message(SPAN_NOTICE("[user] finishes [success_message || tool_archetype.use_message] \the [target] with \the [src]."))
+		user.visible_message(SPAN_NOTICE("\the [user] finishes [success_message || tool_archetype.use_message] \the [target] with \the [src]."))
 		return TRUE
 
 	if(. == TOOL_USE_FAILURE_NOMESSAGE && failure_message)
