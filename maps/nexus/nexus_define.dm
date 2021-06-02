@@ -40,7 +40,7 @@
 
 /datum/map/nexus/get_map_info()
 	return "You're aboard the <b>[station_name],</b> a space complex positioned at the vast frontier of space. \
-    Whenever you take a bunk in the station staff or captain one of the many currently docked shuttles - it's a good thing this station is still operating."
+	Whenever you take a bunk in the station staff or captain one of the many currently docked shuttles - it's a good thing this station is still operating."
 
 /datum/map/nexus/create_trade_hubs()
 	new/datum/trade_hub/nexus()
