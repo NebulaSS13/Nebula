@@ -1,15 +1,15 @@
-/datum/map/core
-	name = "Core"
-	full_name = "ISC Core"
-	path = "core"
+/datum/map/nexus
+	name = "nexus"
+	full_name = "ISC Nexus"
+	path = "nexus"
 	ground_noun = "plated covering"
 
 	station_levels = list(1, 2)
 	contact_levels = list(1, 2)
 	player_levels  = list(1, 2)
 
-	station_name  = "Independent Space Complex \"Core\""
-	station_short = "Core"
+	station_name  = "Independent Space Complex \"Nexus\""
+	station_short = "Nexus"
 
 	dock_name     = "Communications HQ"
 	boss_name     = "Logistics Director"
@@ -17,7 +17,7 @@
 	company_name  = "Private Resupply Industries"
 	company_short = "PRI"
 
-	lobby_screens = list('maps/core/lobby/vapormoney.png')
+	lobby_screens = list('maps/nexus/lobby/vapormoney.png')
 	welcome_sound = 'sound/effects/alarm.ogg'
 
 	overmap_event_areas = 11
@@ -38,17 +38,17 @@
 	allowed_spawns = list("Cryogenic Storage")
 	default_spawn = "Cryogenic Storage"
 
-/datum/map/core/get_map_info()
+/datum/map/nexus/get_map_info()
 	return "You're aboard the <b>[station_name],</b> a space complex positioned at the vast frontier of space. \
     Whenever you take a bunk in the station staff or captain one of the many currently docked shuttles - it's a good thing this station is still operating."
 
-/datum/map/core/create_trade_hubs()
-	new/datum/trade_hub/core()
+/datum/map/nexus/create_trade_hubs()
+	new/datum/trade_hub/nexus()
 
-/datum/trade_hub/core
+/datum/trade_hub/nexus
 	name = "Long-Range Subspace Trade Uplink"
 
-/datum/trade_hub/core/get_initial_traders()
+/datum/trade_hub/nexus/get_initial_traders()
 	return list(
 		/datum/trader/medical,
 		/datum/trader/mining

@@ -11,16 +11,16 @@
 	#include "../../mods/species/tajaran/_tajaran.dme"
 	#include "../../mods/species/neoavians/_neoavians.dme"
 
-	#include "core_areas.dm"
-	#include "core_overmap.dm"
-	#include "core_unit_testing.dm"
-	#include "core-0.dmm"
-	#include "core-1.dmm"
+	#include "nexus_areas.dm"
+	#include "nexus_overmap.dm"
+	#include "nexus_unit_testing.dm"
+	#include "nexus-0.dmm"
+	#include "nexus-1.dmm"
 
-	#define USING_MAP_DATUM /datum/map/core
+	#define USING_MAP_DATUM /datum/map/nexus
 
 #elif !defined(MAP_OVERRIDE)
 
-	#warn A map has already been included, ignoring Core
+	#warn A map has already been included, ignoring Nexus
 
 #endif
