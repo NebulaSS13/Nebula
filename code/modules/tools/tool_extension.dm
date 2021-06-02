@@ -49,7 +49,7 @@
 	if(check_result != TOOL_USE_SUCCESS)
 		return check_result
 
-	user.visible_message(SPAN_NOTICE("[user] begins [start_message || tool_archetype.use_message] \the [target] with \the [holder]."))
+	user.visible_message(SPAN_NOTICE("\the [user] begins [start_message || tool_archetype.use_message] \the [target] with \the [holder]."))
 	var/use_sound = LAZYACCESS(tool_use_sounds, archetype)
 	if(islist(use_sound) && length(use_sound))
 		use_sound = pick(use_sound)
@@ -63,8 +63,7 @@
 	if(check_result != TOOL_USE_SUCCESS)
 		return check_result
 	
-	if(check_result == TOOL_USE_SUCCESS)
-		if(use_sound)
-			playsound(user.loc, use_sound, 100) //A lot of interactions played a sound when starting and ending the interaction. This was missed.
+	if(check_result == TOOL_USE_SUCCESS && use_sound)
+		playsound(user.loc, use_sound, 100) //A lot of interactions played a sound when starting and ending the interaction. This was missed.
 	
 	return TOOL_USE_SUCCESS
