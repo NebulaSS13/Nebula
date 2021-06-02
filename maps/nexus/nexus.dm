@@ -14,8 +14,8 @@
 	#include "nexus_areas.dm"
 	#include "nexus_overmap.dm"
 	#include "nexus_unit_testing.dm"
-	#include "nexus-0.dmm"
 	#include "nexus-1.dmm"
+	#include "nexus-2.dmm"
 
 	#define USING_MAP_DATUM /datum/map/nexus
 
