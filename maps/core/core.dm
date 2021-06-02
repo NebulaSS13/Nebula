@@ -13,6 +13,7 @@
 
 	#include "core_areas.dm"
 	#include "core_overmap.dm"
+	#include "core_unit_testing.dm"
 	#include "core-0.dmm"
 	#include "core-1.dmm"
 
