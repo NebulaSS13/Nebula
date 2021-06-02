@@ -24,9 +24,9 @@
 	if(force)
 		var/weapon_value = ((get_max_weapon_value() * 15) * (1 + max(sharp, edge)))
 		if(attack_cooldown <= FAST_WEAPON_COOLDOWN)
-			weapon_value *= 0.5
-		else if(attack_cooldown >= SLOW_WEAPON_COOLDOWN)
 			weapon_value *= 1.5
+		else if(attack_cooldown >= SLOW_WEAPON_COOLDOWN)
+			weapon_value *= 0.5
 		. += round(weapon_value)
 	. += (base_parry_chance * 5)
 	. += melee_accuracy_bonus * 2
