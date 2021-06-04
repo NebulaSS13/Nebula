@@ -474,6 +474,7 @@
 
 	if(additional_chems)
 		var/list/banned_chems = list(
+			/decl/material/placeholder,
 			/decl/material/liquid/adminordrazine,
 			/decl/material/liquid/nutriment,
 			/decl/material/liquid/weedkiller
