@@ -278,11 +278,11 @@
 	base_type = /obj/machinery/vending/sovietsoda
 	product_ads = "For Tsar and Country.;Have you fulfilled your nutrition quota today?;Very nice!;We are simple people, for this is all we eat.;If there is a person, there is a problem. If there is no person, then there is no problem."
 	products = list(
-		/obj/item/chems/food/drinks/cans/syndicola = 50,
-		/obj/item/chems/food/drinks/cans/syndicolax = 30,
-		/obj/item/chems/food/drinks/cans/artbru = 20,
-		/obj/item/chems/food/drinks/glass2/square/boda = 20,
-		/obj/item/chems/food/drinks/glass2/square/bodaplus = 20
+		/obj/item/chems/food/drinks/cans/syndicola =         8,
+		/obj/item/chems/food/drinks/cans/syndicolax =        8,
+		/obj/item/chems/food/drinks/cans/artbru =            8,
+		/obj/item/chems/food/drinks/glass2/square/boda =     8,
+		/obj/item/chems/food/drinks/glass2/square/bodaplus = 8
 	)
-	contraband = list(/obj/item/chems/food/drinks/bottle/space_up = 300) // TODO Russian cola can
-	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
+	contraband = list(/obj/item/chems/food/drinks/bottle/space_up = 8) // TODO Russian cola can
+	idle_power_usage = 211

@@ -9,7 +9,7 @@
 	var/custom = FALSE
 
 /obj/item/kit/get_single_monetary_worth()
-	. = max(round(..()), (custom ? 30 : 250) * uses) // Luxury good, value is entirely artificial.
+	. = max(round(..()), (custom ? 100 : 750) * uses) // Luxury good, value is entirely artificial.
 
 /obj/item/kit/examine(mob/user)
 	. = ..()
