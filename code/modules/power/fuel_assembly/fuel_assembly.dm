@@ -10,7 +10,7 @@
 	var/luminescence = 0
 	var/initial_amount
 
-/obj/item/fuel_assembly/Initialize(mapload, var/list/makeup, var/_material, var/_colour)
+/obj/item/fuel_assembly/Initialize(mapload, var/_material, var/list/makeup, var/_colour)
 	. = ..(mapload, _material)
 	LAZYINITLIST(matter)
 	

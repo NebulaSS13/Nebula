@@ -84,7 +84,7 @@
 			stored_material -= mat_p
 	
 	visible_message(SPAN_NOTICE("\The [src] compresses the material into a new fuel assembly."))
-	new /obj/item/fuel_assembly(get_turf(src), rod_makeup)
+	new /obj/item/fuel_assembly(get_turf(src), null, rod_makeup)
 	return TOPIC_REFRESH
 
 /obj/machinery/fuel_compressor/proc/change_makeup(var/mat_name, var/mob/user)
@@ -110,7 +110,7 @@
 /obj/machinery/fuel_compressor/receive_mouse_drop(var/atom/movable/dropping, var/mob/user)
 	if(user.incapacitated() || !user.Adjacent(src))
 		return
-	return add_material(dropping, user)
+	return !add_material(dropping, user)
 
 /obj/machinery/fuel_compressor/attackby(var/obj/item/thing, var/mob/user)
 	return add_material(thing, user) || ..()
@@ -125,13 +125,13 @@
 		to_chat(user, SPAN_NOTICE("You add the contents of \the [thing] to \the [src]'s material buffer."))
 		return TRUE
 
-	else if(istype(thing, /obj/machinery/power/supermatter/shard))
+	if(istype(thing, /obj/machinery/power/supermatter/shard))
 		stored_material[/decl/material/solid/exotic_matter] = 5 * SHEET_MATERIAL_AMOUNT
-		to_chat(user, SPAN_NOTICE("You add \the [thing] to \the [src]'s material buffer."))
+		to_chat(user, SPAN_NOTICE("You awkwardly cram \the [thing] into \the [src]'s material buffer."))
 		qdel(thing)
 		return TRUE
 
-	else if(istype(thing, /obj/item/stack/material))
+	if(istype(thing, /obj/item/stack/material))
 		var/obj/item/stack/material/M = thing
 		var/decl/material/mat = M.get_material()
 		
