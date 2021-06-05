@@ -2,7 +2,6 @@
 	name = "inflatable"
 	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/structures/inflatable.dmi'
-	atmos_canpass = CANPASS_DENSITY
 	var/deploy_path = null
 	var/inflatable_health
 
@@ -47,6 +46,7 @@
 	icon_state = "wall"
 	maxhealth = 20
 	hitsound = 'sound/effects/Glasshit.ogg'
+	atmos_canpass = CANPASS_DENSITY
 
 	var/undeploy_path = null
 	var/taped
