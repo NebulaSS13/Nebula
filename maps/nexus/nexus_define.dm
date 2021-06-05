@@ -17,7 +17,7 @@
 	company_name  = "Private Resupply Industries"
 	company_short = "PRI"
 
-	lobby_screens = list('maps/nexus/lobby/vapormoney.png')
+	lobby_screens = list('maps/nexus/lobby/nexus_lobby.png')
 	welcome_sound = 'sound/effects/alarm.ogg'
 
 	overmap_event_areas = 11
