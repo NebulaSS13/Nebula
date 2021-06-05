@@ -2052,6 +2052,7 @@
 #include "code\modules\materials\definitions\solids\materials_solid_alien.dm"
 #include "code\modules\materials\definitions\solids\materials_solid_elements.dm"
 #include "code\modules\materials\definitions\solids\materials_solid_exotic.dm"
+#include "code\modules\materials\definitions\solids\materials_solid_fission.dm"
 #include "code\modules\materials\definitions\solids\materials_solid_gemstones.dm"
 #include "code\modules\materials\definitions\solids\materials_solid_glass.dm"
 #include "code\modules\materials\definitions\solids\materials_solid_ice.dm"
