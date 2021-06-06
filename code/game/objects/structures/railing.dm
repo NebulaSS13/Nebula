@@ -55,7 +55,7 @@
 /obj/structure/railing/update_materials(keep_health)
 	. = ..()
 	color = material.color
-	alpha = 50 + (material.opacity * 255)
+	alpha = Clamp((50 + material.opacity * 255), 0, 255)
 
 /obj/structure/railing/Destroy()
 	anchored = FALSE
