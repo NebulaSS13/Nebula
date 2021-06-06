@@ -20,14 +20,6 @@
 	on_floor = 1
 	difficulty = 2
 
-/datum/stack_recipe/railing/spawn_result(mob/user, location, amount)
-	var/obj/structure/railing/product = ..()
-	for(var/mat in product.matter)
-		var/decl/material/material = GET_DECL(mat)
-		product.color = material.color
-		product.alpha = 100 + max(1, amount/25)*(material.opacity * 255)
-	return product
-
 /datum/stack_recipe/noticeboard
 	title = "noticeboard"
 	result_type = /obj/structure/noticeboard
