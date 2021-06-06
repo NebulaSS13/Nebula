@@ -1,4 +1,5 @@
 /datum/extension/ship_engine/ion_thruster
+	engine_type = "ion thruster"
 	expected_type = /obj/machinery/ion_thruster
 
 /datum/extension/ship_engine/ion_thruster/burn(var/partial = 1)
@@ -59,7 +60,7 @@
 
 /obj/machinery/ion_thruster/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/ship_engine/ion_thruster, "ion thruster")
+	set_extension(src, /datum/extension/ship_engine/ion_thruster)
 
 /obj/item/stock_parts/circuitboard/engine/ion
 	name = "circuitboard (ion thruster)"

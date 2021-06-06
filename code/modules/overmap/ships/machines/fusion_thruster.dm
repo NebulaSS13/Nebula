@@ -1,48 +1,23 @@
 /obj/machinery/atmospherics/unary/engine/fusion
-	name = "fusion nozzle"
-	desc = "Simple rocket nozzle, expelling gas at hypersonic velocities to propell the ship."
+	name = "direct fusion drive"
+	desc = "Advanced nuclear fusion drive, capable of generating magnetic fields strong enough to contain and utilize reacting nuclei power to accelerate spacecraft."
 
-	base_type = /obj/machinery/atmospherics/unary/engine
+	base_type = /obj/machinery/atmospherics/unary/engine/fusion
 	construct_state = /decl/machine_construction/default/panel_closed
-	maximum_component_parts = list(/obj/item/stock_parts = 8)//don't want too many, let upgraded component shine
+	maximum_component_parts = list(/obj/item/stock_parts = 16)
 	engine_extension = /datum/extension/ship_engine/gas/fusion
 
-	use_power = POWER_USE_OFF
-	power_channel = EQUIP
-	idle_power_usage = 13600
-	var/initial_id_tag
-	var/obj/machinery/power/fusion_core/harvest_from
+	idle_power_usage = 6000 //constant magnetic field generation, internal circuitry
 
-/obj/machinery/atmospherics/unary/engine/fusion/Initialize()
-	..()
-	set_extension(src, /datum/extension/local_network_member)
-	if(initial_id_tag)
-		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
-		lanm.set_tag(null, initial_id_tag)
-	return INITIALIZE_HINT_LATELOAD
+/obj/machinery/atmospherics/unary/engine/fusion/emp_act(severity)
+	. = ..()
+	if(!operable() || !use_power) return
+	var/datum/extension/ship_engine/gas/fusion/boom = get_extension(src,engine_extension)
+	var/datum/gas_mixture/mix = boom.get_propellant(sample_only = FALSE)
+	for(var/I in 1 to 4 - severity)
+		mix.merge(boom.get_propellant(sample_only = FALSE)) //Pull up some more of that tasty hydrogen w/e
+	if(mix.get_total_moles() != 0 && mix.temperature > 1000)
+		var/effective_boomrange = round(mix.temperature * mix.get_total_moles() * (1/10e5))
+		loc.assume_air(mix)
+		explosion(get_turf(src),1,effective_boomrange*0.1,effective_boomrange*0.3,6,TRUE)
 
-/obj/machinery/atmospherics/unary/engine/fusion/LateInitialize()
-	find_core()
-
-/obj/machinery/atmospherics/unary/engine/fusion/modify_mapped_vars(map_hash)
-	..()
-	ADJUST_TAG_VAR(initial_id_tag, map_hash)
-
-/obj/machinery/atmospherics/unary/engine/fusion/proc/find_core()
-	harvest_from = null
-	var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
-	var/datum/local_network/lan = lanm.get_local_network()
-
-	if(lan)	
-		var/list/fusion_cores = lan.get_devices(/obj/machinery/power/fusion_core)
-		if(fusion_cores && fusion_cores.len)
-			harvest_from = fusion_cores[1]
-	return harvest_from
-
-/obj/machinery/atmospherics/unary/engine/fusion/attackby(var/obj/item/thing, var/mob/user)
-	if(isMultitool(thing))
-		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
-		if(lanm.get_new_tag(user))
-			find_core()
-		return
-	return ..()

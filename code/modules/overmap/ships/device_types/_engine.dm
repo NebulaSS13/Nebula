@@ -14,9 +14,8 @@ var/global/list/ship_engines = list()
 	var/volume_per_burn = 40			// Amount in litres of propellant to use per burn.
 	var/charge_per_burn = 36000 		//10Wh for default 2 capacitor, chews through that battery power! Makes a trade off of fuel efficient vs energy efficient
 
-/datum/extension/ship_engine/New(holder, e_type)
+/datum/extension/ship_engine/New(holder)
 	..()
-	engine_type = e_type
 	ship_engines |= src
 
 /datum/extension/ship_engine/proc/is_on()

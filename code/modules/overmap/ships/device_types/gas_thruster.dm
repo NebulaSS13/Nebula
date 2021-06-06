@@ -2,6 +2,7 @@
 #define MAXIMUM_RATIO_SPECIFIC_HEAT 3.20
 
 /datum/extension/ship_engine/gas
+	engine_type = "propellant thruster"
 	expected_type = /obj/machinery/atmospherics/unary/engine
 
 /datum/extension/ship_engine/gas/burn(var/partial = 1)

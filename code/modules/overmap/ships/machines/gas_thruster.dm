@@ -18,7 +18,7 @@
 /obj/machinery/atmospherics/unary/engine/Initialize()
 	. = ..()
 	update_nearby_tiles(need_rebuild=1)
-	set_extension(src, engine_extension, "propellant thruster")
+	set_extension(src, engine_extension)
 
 /obj/machinery/atmospherics/unary/engine/on_update_icon()
 	cut_overlays()
