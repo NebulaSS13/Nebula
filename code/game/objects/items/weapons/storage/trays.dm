@@ -18,6 +18,7 @@
 	use_sound = null
 
 	var/cooldown = 0	//Cooldown for banging the tray with a rolling pin. based on world.time. very silly
+	var/no_drop = FALSE
 
 	material = /decl/material/solid/cardboard
 	applies_material_colour = TRUE
@@ -32,13 +33,6 @@
 /obj/item/storage/tray/gather_all(var/turf/T, var/mob/user)
 	..()
 	update_icon()
-
-/obj/item/storage/tray/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
-	. = ..()
-	if(!proximity_flag)
-		return
-	if(istype(target, /obj/structure/table))
-		dump_contents(user, get_turf(target))
 
 /obj/item/storage/tray/proc/scatter_contents(var/neatly = FALSE, target_loc = get_turf(src))
 	set waitfor = 0
@@ -64,14 +58,44 @@
 	if(.)
 		scatter_contents()
 
-/obj/item/storage/tray/attackby(obj/item/W, mob/user) // Keeping this from old trays because... i guess?
+/obj/item/storage/tray/attackby(obj/item/W, mob/user, click_params)
 	if(istype(W, /obj/item/kitchen/rollingpin))
 		if(cooldown < world.time - 25)
 			user.visible_message(SPAN_WARNING("\The [user] bashes \the [src] with \the [W]!"))
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)
 			cooldown = world.time
-	else
-		..()
+		return TRUE
+	. = ..()
+	if (.)
+		auto_align(W, click_params)
+
+//This proc handles alignment on trays, a la tables.
+/obj/item/storage/tray/proc/auto_align(obj/item/W, click_params)
+	if (!W.center_of_mass) // Clothing, material stacks, generally items with large sprites where exact placement would be unhandy.
+		W.pixel_x = rand(-W.randpixel, W.randpixel)
+		W.pixel_y = rand(-W.randpixel, W.randpixel)
+		W.pixel_z = 0
+		return
+
+	if (!click_params)
+		return
+
+	var/list/click_data = params2list(click_params)
+	if (!click_data["icon-x"] || !click_data["icon-y"])
+		return
+
+	// Calculation to apply new pixelshift.
+	var/mouse_x = text2num(click_data["icon-x"])-1 // Ranging from 0 to 31
+	var/mouse_y = text2num(click_data["icon-y"])-1
+
+	var/cell_x = Clamp(round(mouse_x/CELLSIZE), 0, CELLS-1) // Ranging from 0 to CELLS-1
+	var/cell_y = Clamp(round(mouse_y/CELLSIZE), 0, CELLS-1)
+
+	var/list/center = cached_json_decode(W.center_of_mass)
+
+	W.pixel_x = (CELLSIZE * (cell_x + 0.5)) - center["x"]
+	W.pixel_y = (CELLSIZE * (cell_y + 0.5)) - center["y"]
+	W.pixel_z = 0
 
 /obj/item/storage/tray/dump_contents(var/mob/user, turf/new_loc = loc)
 	if(!isturf(new_loc)) //to handle hand switching
@@ -81,22 +105,35 @@
 	if(!(locate(/obj/structure/table) in new_loc) && user && contents.len)
 		visible_message(SPAN_DANGER("Everything falls off the [name]! Good job, [user]."))
 		scatter_contents(FALSE, new_loc)
-	else
-		scatter_contents(TRUE, new_loc)
 	return TRUE
 
 /obj/item/storage/tray/dropped(mob/user)
 	. = ..()
-	dump_contents(user)
+	if(!no_drop)
+		dump_contents(user)
+
+/obj/item/storage/tray/throw_at(atom/target, range, speed, mob/thrower, spin, datum/callback/callback)
+	no_drop = TRUE
+	. = ..()
+
+/obj/item/storage/tray/throw_impact(atom/hit_atom, datum/thrownthing/TT)
+	. = ..()
+	no_drop = FALSE
+	scatter_contents(FALSE, get_turf(hit_atom))
 
 /obj/item/storage/tray/on_update_icon()
 	..()
-	overlays.Cut()
+	vis_contents.Cut()
 	for(var/obj/item/I in contents)
-		var/mutable_appearance/MA = new(I)
-		MA.layer = FLOAT_LAYER
-		MA.appearance_flags = RESET_COLOR
-		overlays += MA
+		I.vis_flags |= VIS_INHERIT_PLANE | VIS_INHERIT_LAYER
+		I.appearance_flags |= RESET_COLOR
+		vis_contents |= I
+
+/obj/item/storage/tray/remove_from_storage(obj/item/W, atom/new_location, var/NoUpdate = 0)
+	. = ..()
+	W.vis_flags = initial(W.vis_flags)
+	W.appearance_flags = initial(W.appearance_flags)
+	W.update_icon() // in case it updates vis_flags
 
 /obj/item/storage/tray/examine(mob/user) // So when you look at the tray you can see whats on it.
 	. = ..()
@@ -109,7 +146,7 @@
 		else
 			to_chat(user, "\The [src] is empty.")
 
-/* 
+/*
 -----------------------------------------------------------------
 TRAY TYPES GO HERE
 -----------------------------------------------------------------
