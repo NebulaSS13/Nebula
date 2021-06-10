@@ -22,8 +22,8 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 // Actual machine
 ////////////////////////////////////////////////////
 /obj/machinery/atmospherics/unary/material/extractor
-	name = "Gas extractor"
-	desc = "A machine for extracting liquids and gases from ices and hydrates."
+	name = "gas extractor"
+	desc = "A machine for extracting liquids and gases from ices and hydrates. Extracts liquids at a reduced efficiency."
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "extractor"
 	layer = MOB_LAYER+1 // Overhead
@@ -77,13 +77,15 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	if(!input_buffer)
 		input_buffer = new(src)
 		input_buffer.create_reagents(GAS_EXTRACTOR_REAGENTS_INPUT_TANK) //Did this here because reimplementing that in the new() proc failed a test for some reasons
-	verbs |= /obj/machinery/atmospherics/unary/material/extractor/verb/FlushReagents
-	verbs |= /obj/machinery/atmospherics/unary/material/extractor/verb/FlushGas
 	QUEUE_TEMPERATURE_ATOMS(src)
 
 /obj/machinery/atmospherics/unary/material/extractor/Destroy()
-	if(istype(input_buffer))
-		qdel(input_buffer)
+	QDEL_NULL(input_buffer)
+	QDEL_NULL(output_container)
+	. = ..()
+
+/obj/machinery/atmospherics/unary/material/extractor/dismantle()
+	output_container = null //it gets dropped out in parent proc. Null it to make sure it doesn't get deleted once destroy is called
 	. = ..()
 
 /obj/machinery/atmospherics/unary/material/extractor/Bumped(var/obj/O)
@@ -120,14 +122,14 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 		to_chat(user, SPAN_NOTICE("The internal gas tank pressure gauge reads [air_contents.return_pressure()] kPa"))
 
 		if(is_output_container_full() || is_internal_tank_full())
-			to_chat(user, SPAN_WARNING("Currently idling because one or more of its liquid tanks are full.."))
+			to_chat(user, SPAN_WARNING("It is currently idling because one or more of its liquid tanks are full.."))
 		else
 			to_chat(user, SPAN_NOTICE("Everything is working correctly."))
 
 	if(output_container)
-		var/output_desc = SPAN_NOTICE("It has a [output_container.name] in place to receive reagents.")
+		var/output_desc = SPAN_NOTICE("It has \a [output_container.name] in place to receive reagents.")
 		if(is_output_container_full())
-			output_desc = "[output_desc] [SPAN_WARNING("Its full!")]" 
+			output_desc = "[output_desc] [SPAN_WARNING("It's full!")]" 
 		to_chat(user, output_desc)
 	else 
 		to_chat(user, SPAN_NOTICE("It has nothing to pour reagents into."))
@@ -139,7 +141,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 			if(!user.unEquip(I, src))
 				return
 			output_container = I
-			user.visible_message(SPAN_NOTICE("\The [user] place \a [I] in \the [src]."), SPAN_NOTICE("You place \a [I] in \the [src]."))
+			user.visible_message(SPAN_NOTICE("\The [user] places \a [I] in \the [src]."), SPAN_NOTICE("You place \a [I] in \the [src]."))
 			update_icon()
 		return TRUE
 	return ..()
@@ -198,11 +200,13 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 
 //Calculate the amount of reagents we can get from this. Returns a list with each materials and the amount of expected reagents
 /obj/machinery/atmospherics/unary/material/extractor/proc/gather_resulting_reagents_vol(var/obj/O)
-	var/list/processable = list()
-	for(var/k in O.matter)
-		if(can_process_material_name(k))
-			processable[k] = MATERIAL_UNITS_TO_REAGENTS_UNITS(O.matter[k])
-			O.matter -= k
+	var/list/processable
+	if(length(O.matter) > 0)
+		processable = list()
+		for(var/k in O.matter)
+			if(can_process_material_name(k))
+				processable[k] = MATERIAL_UNITS_TO_REAGENTS_UNITS(O.matter[k])
+				O.matter -= k
 	return processable
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/calc_resulting_reagents_total_vol(var/obj/O)
@@ -231,7 +235,7 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	return internal_tank_free_volume() <= 0
 
 /obj/machinery/atmospherics/unary/material/extractor/proc/can_process_object(var/obj/O)
-	if(istype(O) && is_type_in_list(O, global.material_extractor_items_whitelist))
+	if(istype(O) && length(O.matter) && is_type_in_list(O, global.material_extractor_items_whitelist))
 		for(var/k in O.matter)
 			if(can_process_material_name(k))
 				return TRUE
@@ -322,12 +326,12 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 		var/transferred = max(min(available_volume, external_free_vol), 0)
 		if(transferred > 0)
 			input_buffer.reagents.trans_to(output_container, transferred, GAS_EXTRACTOR_LIQUID_EFFICIENCY)
-			log_debug("dump_liquid : dumping [round(transferred * GAS_EXTRACTOR_LIQUID_EFFICIENCY)] units of [M.type] to container with [external_free_vol] units of free space")
+			//log_debug("dump_liquid : dumping [round(transferred * GAS_EXTRACTOR_LIQUID_EFFICIENCY)] units of [M.type] to container with [external_free_vol] units of free space")
 	else if(internal_free_vol > 0)
 		var/transferred = max(min(available_volume, internal_free_vol), 0)
 		if(transferred > 0)
 			input_buffer.reagents.trans_to_holder(reagents, transferred, GAS_EXTRACTOR_LIQUID_EFFICIENCY)
-			log_debug("dump_liquid : dumping [round(transferred * GAS_EXTRACTOR_LIQUID_EFFICIENCY)] units of [M.type] to internal tank with [internal_free_vol] units of free space")
+			//log_debug("dump_liquid : dumping [round(transferred * GAS_EXTRACTOR_LIQUID_EFFICIENCY)] units of [M.type] to internal tank with [internal_free_vol] units of free space")
 
 
 //We want to convert a liquid to its gaseous state
