@@ -80,12 +80,8 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	QUEUE_TEMPERATURE_ATOMS(src)
 
 /obj/machinery/atmospherics/unary/material/extractor/Destroy()
+	output_container = null
 	QDEL_NULL(input_buffer)
-	QDEL_NULL(output_container)
-	. = ..()
-
-/obj/machinery/atmospherics/unary/material/extractor/dismantle()
-	output_container = null //it gets dropped out in parent proc. Null it to make sure it doesn't get deleted once destroy is called
 	. = ..()
 
 /obj/machinery/atmospherics/unary/material/extractor/Bumped(var/obj/O)
@@ -117,12 +113,12 @@ var/global/list/material_extractor_items_whitelist = list(/obj/item/ore)
 	. = ..()
 	//Only display info if the screen is there
 	if(get_component_of_type(/obj/item/stock_parts/console_screen))
-		to_chat(user, SPAN_NOTICE("The processing tank gauge reads [round(input_buffer.reagents.total_volume)]/[input_buffer.reagents.maximum_volume] units of liquid"))
-		to_chat(user, SPAN_NOTICE("The internal storage tank gauge reads [round(reagents.total_volume)]/[reagents.maximum_volume] units of liquid"))
-		to_chat(user, SPAN_NOTICE("The internal gas tank pressure gauge reads [air_contents.return_pressure()] kPa"))
+		to_chat(user, SPAN_NOTICE("The processing tank gauge reads [round(input_buffer.reagents.total_volume)]/[input_buffer.reagents.maximum_volume] units of liquid."))
+		to_chat(user, SPAN_NOTICE("The internal storage tank gauge reads [round(reagents.total_volume)]/[reagents.maximum_volume] units of liquid."))
+		to_chat(user, SPAN_NOTICE("The internal gas tank pressure gauge reads [air_contents.return_pressure()] kPa."))
 
 		if(is_output_container_full() || is_internal_tank_full())
-			to_chat(user, SPAN_WARNING("It is currently idling because one or more of its liquid tanks are full.."))
+			to_chat(user, SPAN_WARNING("It is currently idling because one or more of its liquid tanks are full."))
 		else
 			to_chat(user, SPAN_NOTICE("Everything is working correctly."))
 
