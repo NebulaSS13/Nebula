@@ -24,7 +24,7 @@ var/global/list/overmap_helm_computers
 	var/speedlimit = 1/(20 SECONDS) //top speed for autopilot, 5
 	var/accellimit = 1 //manual limiter for acceleration
 	/// The mob currently operating the helm - The last one to click one of the movement buttons and be on the overmap screen. Set to `null` for autopilot or when the mob isn't in range.
-	var/mob/current_operator
+	var/weakref/current_operator
 
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
@@ -46,11 +46,12 @@ var/global/list/overmap_helm_computers
 /obj/machinery/computer/ship/helm/Process()
 	..()
 
-	if (current_operator)
+	var/mob/current_operator_actual = current_operator?.resolve()
+	if (current_operator_actual)
 		if (!linked)
-			to_chat(current_operator, SPAN_DANGER("\The [src]'s controls lock up with an error flashing across the screen: Connection to vessel lost!"))
+			to_chat(current_operator_actual, SPAN_DANGER("\The [src]'s controls lock up with an error flashing across the screen: Connection to vessel lost!"))
 			set_operator(null, TRUE)
-		else if (!Adjacent(current_operator) || CanUseTopic(current_operator) != STATUS_INTERACTIVE || !viewing_overmap(current_operator))
+		else if (!Adjacent(current_operator_actual) || CanUseTopic(current_operator_actual) != STATUS_INTERACTIVE || !viewing_overmap(current_operator_actual))
 			set_operator(null)
 
 	if (autopilot && dx && dy)
@@ -77,8 +78,10 @@ var/global/list/overmap_helm_computers
 			else if (speed + acceleration <= speedlimit)
 				linked.accelerate(direction, accellimit)
 
-		if (current_operator)
-			to_chat(current_operator, SPAN_DANGER("\The [src]'s autopilot is active and wrests control from you!"))
+		// Re-resolve as the above set_operator() calls may have nullified or changed this.
+		current_operator_actual = current_operator?.resolve()
+		if (current_operator_actual)
+			to_chat(current_operator_actual, SPAN_DANGER("\The [src]'s autopilot is active and wrests control from you!"))
 			set_operator(null, TRUE, TRUE)
 
 		return
@@ -244,7 +247,7 @@ var/global/list/overmap_helm_computers
 
 /obj/machinery/computer/ship/helm/unlook(mob/user)
 	. = ..()
-	if (current_operator == user)
+	if (current_operator?.resolve() == user)
 		set_operator(null)
 
 
@@ -261,19 +264,21 @@ var/global/list/overmap_helm_computers
  * Skips ghosts and observers to prevent accidental external influencing of flight.
  */
 /obj/machinery/computer/ship/helm/proc/set_operator(mob/user, silent, autopilot)
-	if (isobserver(user) || user == current_operator)
+	var/mob/current_operator_actual = current_operator?.resolve()
+	if (isobserver(user) || user == current_operator_actual)
 		return
 
-	var/mob/old_operator = current_operator
-	current_operator = user
-	linked.update_operator_skill(current_operator)
+	var/mob/old_operator = current_operator_actual
+	current_operator_actual = user
+	current_operator = weakref(current_operator_actual)
+	linked.update_operator_skill(current_operator_actual)
 	if (!autopilot && old_operator && viewing_overmap(old_operator))
 		addtimer(CALLBACK(src, /obj/machinery/computer/ship/.proc/unlook, old_operator), 0) // Workaround for linter SHOULD_NOT_SLEEP checks.
 
-	log_debug("HELM CONTROL: [current_operator ? current_operator : "NO PILOT"] taking control of [src] from [old_operator ? old_operator : "NO PILOT"] in [get_area(src)]. [autopilot ? "(AUTOPILOT MODE)" : null]")
+	log_debug("HELM CONTROL: [current_operator_actual ? current_operator_actual : "NO PILOT"] taking control of [src] from [old_operator ? old_operator : "NO PILOT"] in [get_area(src)]. [autopilot ? "(AUTOPILOT MODE)" : null]")
 
 	if (!silent)
-		display_operator_change_message(old_operator, current_operator, autopilot)
+		display_operator_change_message(old_operator, current_operator_actual, autopilot)
 
 
 /**
