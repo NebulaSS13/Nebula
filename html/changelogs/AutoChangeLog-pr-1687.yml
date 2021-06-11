@@ -1,0 +1,15 @@
+author: CakeQ
+delete-after: true
+changes:
+  - rscadd: Added two new layers to walls, paint and striping. Walls will now maintain
+      their material coloring, and instead have paint colors applied as paint layers
+      on top. Standard walls can be painted two-tone with the main body and striping
+      (wooden walls too).
+  - rscadd: Wall paintability is now defined by their materials.
+  - rscdel: Removed legacy wall stripe system in favor of the new paint striping.
+  - tweak: Wall edge connections to things like windows and airlocks have been simplified,
+      fixing a few erroneous connections.
+  - tweak: The paint sprayer has finer control when interacting with walls and wall
+      frames.
+  - tweak: Renamed airlock paint flags to be generic. These are now also used for
+      defining wall paintability.
