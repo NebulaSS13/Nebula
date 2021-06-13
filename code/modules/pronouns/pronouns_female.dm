@@ -12,3 +12,5 @@
 	is   = "is"
 	does = "does"
 	self = "herself"
+	s    = "s"
+	es   = "es"

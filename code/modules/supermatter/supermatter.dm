@@ -42,18 +42,18 @@ var/global/list/supermatter_final_thoughts = list(
 		if(user)
 			var/hurls = (collided ? "hurls" : "pushes")
 			source.visible_message(
-				SPAN_DANGER("\The [user] [hurls] \the [victim] into \the [source], inducing a resonance! [victim_pronouns.He] starts to glow and catches aflame before flashing into ash."),\
+				SPAN_DANGER("\The [user] [hurls] \the [victim] into \the [source], inducing a resonance! [victim_pronouns.He] start[victim_pronouns.s] to glow and catches aflame before flashing into ash."),\
 				SPAN_DANGER("\The [user] [hurls] you into \the [source], and your ears are filled with unearthly ringing."), \
 				SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as a wave of heat washes over you."))
 		else
 			source.visible_message(
-				SPAN_DANGER("\The [victim] [collided ? "slams into" : "touches"] \the [source], inducing a resonance! [victim_pronouns.He] starts to glow and catches aflame before flashing into ash."), \
+				SPAN_DANGER("\The [victim] [collided ? "slams into" : "touches"] \the [source], inducing a resonance! [victim_pronouns.He] start[victim_pronouns.s] to glow and catches aflame before flashing into ash."), \
 				SPAN_DANGER("You [collided ? "slam into" : "touch"] \the [source], and your ears are filled with unearthly ringing. Your last thought is \"[pick(global.supermatter_final_thoughts)]\""), \
 				SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as a wave of heat washes over you."))
 	else
 		if(user)
 			source.visible_message( \
-				SPAN_DANGER("\The [user][collided ? "throws" : "touches"] \the [victim] [collided ? "into" : "to"] \the [source] and [victim_pronouns.he] instantly flashes away into ashes."), \
+				SPAN_DANGER("\The [user][collided ? "throws" : "touches"] \the [victim] [collided ? "into" : "to"] \the [source] and [victim_pronouns.he] instantly flash[victim_pronouns.es] away into ashes."), \
 				SPAN_WARNING("You hear a loud crack as you are washed with a wave of heat."))
 		else
 			source.visible_message( \

@@ -365,7 +365,7 @@
 				user.apply_damage(3, BURN, hand.organ_tag, used_weapon = src)
 				var/decl/pronouns/G = user.get_pronouns()
 				user.visible_message( \
-					SPAN_DANGER("\The [user]'s [hand.name] burns and sizzles as [G.he] touches the hot [get_fitting_name()]."), \
+					SPAN_DANGER("\The [user]'s [hand.name] burns and sizzles as [G.he] touch[G.es] the hot [get_fitting_name()]."), \
 					SPAN_DANGER("Your [hand.name] burns and sizzles as you remove the hot [get_fitting_name()]."))
 		else
 			to_chat(user, SPAN_WARNING("You try to remove the [get_fitting_name()], but it's too hot and you don't want to burn your hand."))

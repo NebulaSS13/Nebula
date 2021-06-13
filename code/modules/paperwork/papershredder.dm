@@ -120,7 +120,7 @@
 		to_chat(user, "<span class='warning'>\The [P] is not lit.</span>")
 		return
 	var/decl/pronouns/G = user.get_pronouns()
-	user.visible_message("<span class='warning'>\The [user] holds \the [P] up to \the [src]. It looks like [G.he]'s trying to burn it!</span>", \
+	user.visible_message("<span class='warning'>\The [user] holds \the [P] up to \the [src]. It looks like [G.he] [G.is] trying to burn it!</span>", \
 		"<span class='warning'>You hold \the [P] up to \the [src], burning it slowly.</span>")
 	if(!do_after(user,20, src))
 		to_chat(user, "<span class='warning'>You must hold \the [P] steady to burn \the [src].</span>")
