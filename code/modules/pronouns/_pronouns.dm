@@ -12,6 +12,8 @@
 	var/is   = "are"
 	var/does = "do"
 	var/self = "themselves"
+	var/s    = ""
+	var/es   = ""
 
 // I regret having to refactor this, but someone put it in unarmed attacks and here we are.
 /decl/pronouns/proc/get_message_for_being_kicked_in_the_dick()
