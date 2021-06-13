@@ -9,3 +9,5 @@
 	is   = "is"
 	does = "does"
 	self = "itself"
+	s    = "s"
+	es   = "es"
