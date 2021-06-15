@@ -265,6 +265,13 @@
 				wound_flavor_text[E.name] += "[G.His] [E.joint] is dislocated!<br>"
 			if(((E.status & ORGAN_BROKEN) && E.brute_dam > E.min_broken_damage) || (E.status & ORGAN_MUTATED))
 				wound_flavor_text[E.name] += "[G.His] [E.name] is dented and swollen!<br>"
+			if(E.status & ORGAN_DEAD)
+				if(BP_IS_PROSTHETIC(E) || BP_IS_CRYSTAL(E))
+					wound_flavor_text[E.name] += "[G.His] [E.name] is irrecoverably damaged!<br>"
+				else
+					wound_flavor_text[E.name] += "[G.His] [E.name] is grey and necrotic!<br>"
+			else if(E.damage >= E.max_damage && E.germ_level >= INFECTION_LEVEL_TWO)
+				wound_flavor_text[E.name] += "[G.His] [E.name] is likely beyond saving, and has begun to decay!<br>"
 
 		for(var/datum/wound/wound in E.wounds)
 			var/list/embedlist = wound.embedded_objects
