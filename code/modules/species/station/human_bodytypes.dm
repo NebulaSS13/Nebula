@@ -10,7 +10,7 @@
 	bandages_icon =       'icons/mob/bandage.dmi'
 	limb_icon_intensity = 0.7
 	associated_gender =   FEMALE
-	uniform_state_modifier = "_f"
+	uniform_state_modifier = "f"
 
 /decl/bodytype/human/masculine
 	name =                "masculine"
