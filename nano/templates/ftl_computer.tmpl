@@ -14,6 +14,19 @@
             {{/if}}
         </div>
     </div>
+	
+	<div class="item">
+        <div class="itemLabel">
+            Jump Solution Status:
+        </div>
+        <div class="itemContent">
+            {{if data.jump_unsafe == 1}}
+				<span class="bad"> !! JUMP SOLUTION UNSAFE !! </span>
+			{{else}}
+				<span class="good"> Jump solution OK. </span>
+			{{/if}}
+        </div>
+    </div>
 
     <div class="item">
         <div class="itemLabel">
@@ -32,13 +45,22 @@
             {{:data.jumpcost}} MJ
         </div>
     </div>
+	
+    <div class="item">
+        <div class="itemLabel">
+            Estimated Power Requirement:
+        </div>
+        <div class="itemContent">
+            {{:data.powercost}} MJ
+        </div>
+    </div>
 
     <div class="item">
         <div class="itemLabel">
             Estimated Charge Time:
         </div>
         <div class="itemContent">
-            {{:data.chargetime}} Minutes
+            {{:data.chargetime}} Seconds
         </div>
     </div>
 	
