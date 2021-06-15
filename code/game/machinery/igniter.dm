@@ -30,6 +30,8 @@
 /obj/machinery/igniter/Initialize()
 	. = ..()
 	update_icon()
+	if(!on)
+		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
 /obj/machinery/igniter/on_update_icon()
 	..()
