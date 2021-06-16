@@ -197,6 +197,8 @@
 		visible_message(SPAN_DANGER("[src] is pinned to the wall by [O]!"),SPAN_DANGER("You are pinned to the wall by [O]!"))
 		src.anchored = 1
 		src.pinned += O
+		if(!LAZYISIN(embedded,O))
+			embed(O)
 
 /mob/living/proc/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)
 	O.forceMove(src)
