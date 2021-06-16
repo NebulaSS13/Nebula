@@ -10,4 +10,3 @@
 		fore_dir = ship_dir
 
 	. = ..(mapload)
-	

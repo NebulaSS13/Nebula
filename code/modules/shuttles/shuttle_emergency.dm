@@ -4,7 +4,7 @@
 	flags = SHUTTLE_FLAGS_PROCESS | SHUTTLE_FLAGS_ZERO_G | SHUTTLE_FLAGS_NO_CODE
 	var/datum/evacuation_controller/shuttle/emergency_controller
 
-/datum/shuttle/autodock/ferry/emergency/New()
+/datum/shuttle/autodock/ferry/emergency/New(map_hash)
 	. = ..()
 	emergency_controller = SSevac.evacuation_controller
 	if(!istype(emergency_controller))
