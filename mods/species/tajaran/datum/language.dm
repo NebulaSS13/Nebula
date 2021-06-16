@@ -24,7 +24,7 @@
 //#803b56 is color
 
 /decl/language/tajaran/format_message(message, verb)
-	return "[verb], <span class='message'><span style='color: #803b56'>\"[capitalize(filter_modify_message(message))]\"</span></span>"
+	return "[verb], <span class='message'><span style='color: #803b56'>\"[capitalize(message)]\"</span></span>"
 
 /decl/language/tajaran/format_message_radio(message, verb)
-	return "[verb], <span style='color: #803b56'>\"[capitalize(filter_modify_message(message))]\"</span>"
+	return "[verb], <span style='color: #803b56'>\"[capitalize(message)]\"</span>"
