@@ -123,10 +123,13 @@ SUBSYSTEM_DEF(shuttle)
 			given_sector.add_landmark(landmark, shuttle_type)
 			. = 1
 
-/datum/controller/subsystem/shuttle/proc/initialize_shuttle(var/shuttle_type, var/map_hash)
+/datum/controller/subsystem/shuttle/proc/initialize_shuttle(var/shuttle_type, var/m_hash, var/list/add_args)
 	var/datum/shuttle/shuttle = shuttle_type
 	if(initial(shuttle.category) != shuttle_type)
-		shuttle = new shuttle(map_hash)
+		var/list/shuttle_args = list(map_hash = m_hash)
+		if(length(add_args))
+			shuttle_args += add_args
+		shuttle = new shuttle(arglist(shuttle_args))
 		shuttle_areas |= shuttle.shuttle_area
 		return shuttle
 
