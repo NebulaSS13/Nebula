@@ -516,7 +516,7 @@
 /obj/item/storage/box/tapes
 	name = "box of spare tapes"
 	desc = "A box full of blank tapes."
-	startswith = list(/obj/item/tape/random = 14)
+	startswith = list(/obj/item/magnetic_tape/random = 14)
 
 /obj/item/storage/box/taperolls
 	name = "box of spare taperolls"

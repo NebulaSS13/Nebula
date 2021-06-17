@@ -146,7 +146,7 @@
 		/obj/item/clipboard,
 		/obj/item/folder/cyan,
 		/obj/item/taperecorder,
-		/obj/item/tape/random = 3,
+		/obj/item/magnetic_tape/random = 3,
 		/obj/item/camera,
 		/obj/item/toy/therapy_blue,
 		/obj/item/storage/belt/general
