@@ -1,6 +1,6 @@
 #define CHARGE_TIME_PER_TON 0.1 //In deciseconds.
 #define JOULES_PER_TON 5000
-#define REQUIRED_CHARGE_DIVISOR 1000
+#define REQUIRED_CHARGE_MULTIPLIER 0.005
 
 #define FTL_START_FAILURE_FUEL 1 //Not enough fuel.
 #define FTL_START_FAILURE_POWER 2 //Not enough power.

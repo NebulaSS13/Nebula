@@ -28,7 +28,7 @@
 		return INFINITY
 	var/jump_dist = get_dist(linked, locate(linked_core.shunt_x, linked_core.shunt_y, global.using_map.overmap_z))
 	var/jump_cost = ((linked.vessel_mass * JOULES_PER_TON) / 1000) * jump_dist
-	var/jump_cost_power = jump_cost / REQUIRED_CHARGE_DIVISOR
+	var/jump_cost_power = jump_cost * REQUIRED_CHARGE_MULTIPLIER
 	return jump_cost_power
 
 /obj/machinery/computer/ship/ftl/proc/is_jump_unsafe()
@@ -36,7 +36,6 @@
 	var/dist = get_dist(locate(linked_core.shunt_x, linked_core.shunt_y, global.using_map.overmap_z), get_turf(linked))
 	if(dist > 3)
 		. = TRUE
-
 
 /obj/machinery/computer/ship/ftl/proc/find_core()
 	if(!linked)
@@ -76,6 +75,12 @@
 	data["chargepercent"] = linked_core.chargepercent
 	data["maxfuel"] = linked_core.get_fuel_maximum(linked_core.fuel_ports)
 	data["jump_unsafe"] = is_jump_unsafe()
+	data["power_input"] = linked_core.allowed_power_usage / 1000
+	data["max_power"] = linked_core.max_power_usage / 1000
+	data["max_charge"] = linked_core.max_charge / 1000
+	data["target_charge"] = linked_core.target_charge / 1000
+	data["charging"] = linked_core.charging
+
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -116,12 +121,13 @@
 			to_chat(user, SPAN_WARNING("You fumble the input because of your inexperience!"))
 		linked_core.shunt_x = input_x
 		linked_core.shunt_y = input_y
+		linked_core.calculate_jump_requirements()
 		return TOPIC_REFRESH
 
 	if(href_list["start_shunt"])
 		if(linked_core)
-			if(linked_core.charging)
-				to_chat(user, SPAN_NOTICE("Superluminal jump charge in progress. Please wait for completion of jump!"))
+			if(linked_core.jump_timer)
+				to_chat(user, SPAN_NOTICE("Superluminal jump warm-up in progress. Please wait for completion of jump!"))
 				return TOPIC_REFRESH
 			if(linked_core.get_status() != FTL_STATUS_GOOD)
 				to_chat(user, SPAN_WARNING("Superluminal shunt inoperable. Please try again later."))
@@ -162,4 +168,21 @@
 			else
 				return TOPIC_REFRESH
 		return TOPIC_REFRESH
+
+	if(href_list["adjust_power"])
+		var/input_power
+		input_power = input(user, "Enter allowed power input (in kilowatts)", "FTL Computer", (linked_core.allowed_power_usage / 1000)) as num|null
+		if(!input_power)
+			return
+
+		if(!CanInteract(user, state))
+			return TOPIC_NOACTION
+
+		input_power = input_power * 1000
+		linked_core.allowed_power_usage = clamp(input_power, 0, linked_core.max_power_usage)
+		return TOPIC_REFRESH
+
+	if(href_list["toggle_charge"])
+		linked_core.charging = !linked_core.charging
+
 

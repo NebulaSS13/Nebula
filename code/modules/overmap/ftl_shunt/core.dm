@@ -19,20 +19,25 @@
 	var/required_fuel_joules
 	var/required_charge //This is a function of the required fuel joules.
 	var/accumulated_charge
+	var/max_charge = 2000000
+	var/target_charge
 	var/cooldown_delay = 5 MINUTES
 	var/cooldown
 	var/max_jump_distance = 8 //How many overmap tiles can this move the ship?
 	var/sabotaged
 	var/sabotaged_amt = 0 //amount of crystals used to sabotage us.
-	var/max_power_usage = 2 MEGAWATTS //how much power can we POSSIBLY consume.
+	var/max_power_usage = 5 MEGAWATTS //how much power can we POSSIBLY consume.
 	var/allowed_power_usage = 150 KILOWATTS
+	var/last_power_drawn
+	var/jump_delay = 2 MINUTES
+	var/jump_timer //used to cancel the jump.
 
 	var/static/datum/announcement/priority/ftl_announcement = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice2.ogg'))
 
-	var/static/shunt_start_text = "Attention! All hands brace for faster-than-light transition! ETA: %%TIME%%"
+	var/static/shunt_start_text = "Attention! Superluminal shunt warm-up initiated! Spool-up ETA: %%TIME%%"
 	var/static/shunt_cancel_text = "Attention! Faster-than-light transition cancelled."
 	var/static/shunt_complete_text = "Attention! Faster-than-light transition completed."
-	var/static/shunt_spooling_text = "Attention! Superluminal shunt charge complete, spooling up."
+	var/static/shunt_spooling_text = "Attention! Superluminal shunt warm-up complete, spooling up."
 
 	var/static/shunt_sabotage_text_minor = "Warning! Electromagnetic flux beyond safety limits - aborting shunt!"
 	var/static/shunt_sabotage_text_major = "Warning! Critical electromagnetic flux in accelerator core! Dumping core and aborting shunt!"
@@ -55,6 +60,7 @@
 		local_network.set_tag(null, initial_id_tag)
 	find_ports()
 	set_light(2)
+	target_charge = max_charge * 0.25 //Target charge set to a quarter of our maximum charge, just for weirdness prevention
 
 /obj/machinery/power/ftl_shunt/core/modify_mapped_vars(map_hash)
 	..()
@@ -181,16 +187,12 @@
 
 //Starts the teleport process, returns 1-6, with 6 being the all-clear.
 /obj/machinery/power/ftl_shunt/core/proc/start_shunt()
-	var/shunt_distance
 
 	if(isnull(ftl_computer))
 		return
 
 	if(isnull(ftl_computer.linked))
 		return
-
-	var/vessel_mass = ftl_computer.linked.get_vessel_mass()
-	var/shunt_turf = locate(shunt_x, shunt_y, global.using_map.overmap_z)
 
 	if(stat & BROKEN)
 		return FTL_START_FAILURE_BROKEN
@@ -207,19 +209,15 @@
 		if(!length(fuel_ports))
 			return FTL_START_FAILURE_OTHER
 
-	shunt_distance = get_dist(get_turf(ftl_computer.linked), shunt_turf)
-	required_fuel_joules = (vessel_mass * JOULES_PER_TON) * shunt_distance
-	required_charge = max(1000000, required_fuel_joules / REQUIRED_CHARGE_DIVISOR)
+	calculate_jump_requirements()
+
+	if(accumulated_charge < required_charge)
+		return FTL_START_FAILURE_POWER
+	if(max_charge < required_charge)
+		return FTL_START_FAILURE_POWER
 
 	if(required_fuel_joules > get_fuel(fuel_ports))
 		return FTL_START_FAILURE_FUEL
-
-	//If we've gotten to this point then we're okay to start charging up.
-	charging = TRUE
-
-	var/eta = round((get_charge_time() / 600))
-
-	var/announcetxt = replacetext(shunt_start_text, "%%TIME%%", "[eta] minutes.")
 
 	if(sabotaged)
 		for(var/mob/living/carbon/human/H in global.living_mob_list_) //Give engineers a hint that something might be very, very wrong.
@@ -227,24 +225,36 @@
 				continue
 			if(H.skill_check(SKILL_ENGINES, SKILL_EXPERT))
 				to_chat(H, SPAN_DANGER("The deck vibrates with a harmonic that sets your teeth on edge and fills you with dread."))
-
+	
+	var/announcetxt = replacetext(shunt_start_text, "%%TIME%%", "[round(jump_delay/600)] minutes.")
+	
 	ftl_announcement.Announce(announcetxt, "FTL Shunt Management System", new_sound = sound('sound/misc/notice2.ogg'))
 	update_icon()
+
+	if(check_charge())
+		jump_timer = addtimer(CALLBACK(src, .proc/execute_shunt), jump_delay, TIMER_STOPPABLE)
 	return FTL_START_CONFIRMED
+
+/obj/machinery/power/ftl_shunt/core/proc/calculate_jump_requirements()
+	var/shunt_distance
+	var/vessel_mass = ftl_computer.linked.get_vessel_mass()
+	var/shunt_turf = locate(shunt_x, shunt_y, global.using_map.overmap_z)
+	shunt_distance = get_dist(get_turf(ftl_computer.linked), shunt_turf)
+	required_fuel_joules = (vessel_mass * JOULES_PER_TON) * shunt_distance
+	required_charge = required_fuel_joules * REQUIRED_CHARGE_MULTIPLIER
 
 //Cancels the in-progress shunt.
 /obj/machinery/power/ftl_shunt/core/proc/cancel_shunt(var/silent = FALSE)
-	if(!charging) //Not preparing for a jump.
+	if(!jump_timer)
 		return
-	charging = FALSE
+	deltimer(jump_timer)
 	charge_time = null
 	cooldown = null
 	required_fuel_joules = null
 	if(!silent)
 		ftl_announcement.Announce(shunt_cancel_text, "FTL Shunt Management System", new_sound = sound('sound/misc/notice2.ogg'))
-	chargepercent = 0
-	accumulated_charge = 0
 	update_icon()
+	jump_timer = null
 
 //Starts the shunt, and then hands off to do_shunt to finish it.
 /obj/machinery/power/ftl_shunt/core/proc/execute_shunt()
@@ -253,6 +263,11 @@
 		cancel_shunt(TRUE)
 		do_sabotage()
 		return
+
+	if(use_fuel(required_fuel_joules))
+		jump_timer = addtimer(CALLBACK(src, .proc/execute_shunt), jump_delay, TIMER_STOPPABLE)
+	else
+		return //If for some reason we don't have fuel now, just return.
 
 	var/destination = locate(shunt_x, shunt_y, global.using_map.overmap_z)
 	var/jumpdist = get_dist(get_turf(ftl_computer.linked), destination)
@@ -273,8 +288,8 @@
 	do_effects(jumpdist)
 	jumping = FALSE
 	update_use_power(POWER_USE_IDLE)
-	chargepercent = 0
-	accumulated_charge = 0
+	accumulated_charge -= required_charge
+	jump_timer = null
 
 //Handles all the effects of the jump.
 /obj/machinery/power/ftl_shunt/core/proc/do_effects(var/distance) //If we're jumping too far, have some !!FUN!! with people and ship systems.
@@ -457,7 +472,9 @@
 		return TRUE
 
 /obj/machinery/power/ftl_shunt/core/proc/get_charge_time()
-	return (required_charge / allowed_power_usage)
+	if(isnull(last_power_drawn))
+		return "UNKNOWN"
+	return "[clamp(round((target_charge-accumulated_charge)/((last_power_drawn*CELLRATE) * 1 SECOND / SSmachines.wait), 0.1),0, INFINITY)] Seconds"
 
 /obj/machinery/power/ftl_shunt/core/proc/check_charge()
 	if(accumulated_charge >= required_charge)
@@ -466,28 +483,24 @@
 /obj/machinery/power/ftl_shunt/core/proc/draw_charge(var/input)
 	if(!powernet)
 		return FALSE
-	var/time_factor = (1 SECOND)/SSmachines.wait
-	var/drawn_power = draw_power(input)
-	accumulated_charge += drawn_power * time_factor
+	var/drawn_charge = draw_power(input)
+	last_power_drawn = drawn_charge
+	accumulated_charge += drawn_charge * CELLRATE
+	
 	return TRUE
 
 /obj/machinery/power/ftl_shunt/core/Process()
-	if((stat & (BROKEN|NOPOWER)) && charging)
-		cancel_shunt()
-	if(!powernet && charging)
-		cancel_shunt()
+	if(stat & (BROKEN|NOPOWER))
+		return
+	if(!powernet)
+		return
 
 	if(charging)
-		if(!draw_charge(allowed_power_usage))
-			cancel_shunt()
-		chargepercent = round(100*(accumulated_charge/required_charge), 0.1)
-		if(check_charge()) //We've finished sucking up power.
-			charging = FALSE
-			if(use_fuel(required_fuel_joules))
-				execute_shunt()
-			else
-				cancel_shunt() //Not enough fuel for whatever reason. Cancel.
+		if(accumulated_charge < target_charge)
+			draw_charge(allowed_power_usage)
+			accumulated_charge = clamp(accumulated_charge, 0, max_charge)
 		SSradiation.radiate(src, (active_power_usage / 1000))
+	chargepercent = round(100*(accumulated_charge/max_charge), 0.1)
 
 /obj/machinery/power/ftl_shunt/fuel_port
 	name = "superluminal shunt fuel port"

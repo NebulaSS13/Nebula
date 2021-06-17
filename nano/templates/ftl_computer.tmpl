@@ -13,7 +13,98 @@
                 Online
             {{/if}}
         </div>
+	</div>
+	
+    <h2>CAPACITOR STATUS</h2>
+		
+	<div class="item">
+		<div class="itemLabel">
+				Charge Precentage:
+		</div>
+		
+		<div class="itemContent">
+			{{:helper.displayBar(data.chargepercent, 0, 100)}}
+		</div>
+	</div>
+	
+	<div class="item">
+		<div class="itemLabel">
+			Maximum Capacitor Charge:
+		</div>
+		
+		<div class="itemContent">
+			{{:data.max_charge}} MJ
+		</div>
+	</div>
+	
+	<div class="item">
+		<div class="itemLabel">
+			Target Charge Level:
+		</div>
+		
+		<div class="itemContent">
+			{{:data.target_charge}} MJ
+		</div>
+	</div>
+		
+	<div class="item">
+		<div class="itemLabel">
+			Estimated Charge Time:
+		</div>
+		
+		<div class="itemContent">
+			{{:data.chargetime}}
+		</div>
+	</div>
+		
+	<div class="item">
+		<div class="itemLabel">
+			Maximum Power Input:
+		</div>
+		<div class="itemContent">
+			{{:data.max_power}} Kw
+		</div>
+	</div>
+	
+	<div class="item">
+        <div class="itemLabel">
+            Current Power Input:
+        </div>
+        <div class="itemContent">
+            {{:helper.link(data.power_input, null, { 'adjust_power' : 1})}}  Kw
+        </div>
     </div>
+	
+	<div class="item">
+        <div class="itemLabel">
+            Charging Status:
+        </div>
+		
+	    <div class="itemContent">
+            {{if data.charging == 1}}
+                Charging
+            {{else data.charging == 0}}
+                Not Charging
+            {{/if}}
+        </div>
+    </div>
+	
+    <div class="item">
+		{{:helper.link("Toggle Capacitor Charging", null, { 'toggle_charge' : 1})}}
+    </div>
+	
+	<h2>FUEL SYSTEM STATUS</h2>
+	
+    <div class="item">
+        <div class="itemLabel">
+            Remaining Fuel:
+        </div>
+        <div class="itemContent">
+            {{:data.fuel_joules}} MJ/cm
+        </div>
+    </div>
+	
+	<h2>JUMP SOLUTION ESTIMATES</h2>
 	
 	<div class="item">
         <div class="itemLabel">
@@ -30,19 +121,10 @@
 
     <div class="item">
         <div class="itemLabel">
-            Remaining Fuel:
-        </div>
-        <div class="itemContent">
-            {{:data.fuel_joules}} MJ
-        </div>
-    </div>
-
-    <div class="item">
-        <div class="itemLabel">
             Estimated Fuel Cost:
         </div>
         <div class="itemContent">
-            {{:data.jumpcost}} MJ
+            {{:data.jumpcost}} MJ/cm
         </div>
     </div>
 	
@@ -52,24 +134,6 @@
         </div>
         <div class="itemContent">
             {{:data.powercost}} MJ
-        </div>
-    </div>
-
-    <div class="item">
-        <div class="itemLabel">
-            Estimated Charge Time:
-        </div>
-        <div class="itemContent">
-            {{:data.chargetime}} Seconds
-        </div>
-    </div>
-	
-    <div class="item">
-        <div class="itemLabel">
-            Charge Precentage:
-        </div>
-        <div class="itemContent">
-            {{:helper.displayBar(data.chargepercent, 0, 100)}}
         </div>
     </div>
 
@@ -90,6 +154,8 @@
             {{:helper.link(data.shunt_y, null, { 'set_shunt_y' : 1})}}
         </div>
     </div>
+	
+	<h2>JUMP CONTROLS</h2>
         
     <div class="item">    
         <div class="itemContent">
