@@ -75,7 +75,6 @@
 	. = istype(reinf_material)
 
 /turf/simulated/wall/on_update_icon()
-
 	. = ..()
 	cut_overlays()
 
@@ -93,6 +92,9 @@
 				switch(can_join_with(T))
 					if(0)
 						continue
+					if(2)
+						wall_dirs += get_dir(src, T)
+						other_dirs += get_dir(src, T)
 					if(1)
 						wall_dirs += get_dir(src, T)
 			if(handle_structure_blending)
@@ -177,6 +179,9 @@
 		add_overlay(SSmaterials.wall_damage_overlays[Clamp(round(damage / integrity * DAMAGE_OVERLAY_COUNT) + 1, 1, DAMAGE_OVERLAY_COUNT)])
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
-	if(material && istype(W.material) && get_wall_icon() == W.get_wall_icon())
-		return 1
+	if(material && istype(W.material))
+		if(W.get_wall_icon() in material.wall_blend_icons)
+			return 2
+		if(get_wall_icon() == W.get_wall_icon())
+			return 1
 	return 0
