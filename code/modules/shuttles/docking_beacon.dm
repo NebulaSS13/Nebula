@@ -324,7 +324,7 @@
 	if(!center_turf)
 		return FALSE
 	var/obj/effect/shuttle_landmark/temporary/construction/landmark = new(get_turf(src), base_area, get_base_turf(z))
-	var/list/shuttle_args = list(initial_location = landmark, initial_areas = shuttle_areas.Copy(), tag = ship_name)
+	var/list/shuttle_args = list(landmark, shuttle_areas.Copy(), ship_name)
 	SSshuttle.initialize_shuttle(/datum/shuttle/autodock/overmap/created, null, shuttle_args)
 
 	new /obj/effect/overmap/visitable/ship/landable/created(get_turf(src), ship_name, ship_color, global.reverse_dir[dir])
