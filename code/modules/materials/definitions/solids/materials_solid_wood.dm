@@ -7,6 +7,7 @@
 	integrity = 75
 	icon_base = 'icons/turf/walls/wood.dmi'
 	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
+	wall_blend_icons = list('icons/turf/walls/solid.dmi', 'icons/turf/walls/stone.dmi', 'icons/turf/walls/metal.dmi')
 	table_icon_base = "wood"
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER

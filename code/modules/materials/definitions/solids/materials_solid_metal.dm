@@ -7,6 +7,7 @@
 	weight = MAT_VALUE_HEAVY
 	hardness = MAT_VALUE_RIGID
 	wall_support_value = MAT_VALUE_HEAVY
+	wall_blend_icons = list('icons/turf/walls/wood.dmi', 'icons/turf/walls/stone.dmi')
 	default_solid_form = /obj/item/stack/material/ingot
 
 /decl/material/solid/metal/uranium
