@@ -24,6 +24,8 @@
 	var/cooldown_delay = 5 MINUTES
 	var/cooldown
 	var/max_jump_distance = 8 //How many overmap tiles can this move the ship?
+	var/moderate_jump_distance = 6
+	var/safe_jump_distance = 3
 	var/sabotaged
 	var/sabotaged_amt = 0 //amount of crystals used to sabotage us.
 	var/max_power_usage = 5 MEGAWATTS //how much power can we POSSIBLY consume.
@@ -262,11 +264,13 @@
 	if(sabotaged)
 		cancel_shunt(TRUE)
 		do_sabotage()
+		ftl_computer.jump_plotted = FALSE
 		return
 
 	if(use_fuel(required_fuel_joules))
 		jump_timer = addtimer(CALLBACK(src, .proc/execute_shunt), jump_delay, TIMER_STOPPABLE)
 	else
+		cancel_shunt()
 		return //If for some reason we don't have fuel now, just return.
 
 	var/destination = locate(shunt_x, shunt_y, global.using_map.overmap_z)
@@ -286,20 +290,22 @@
 	ftl_announcement.Announce(shunt_complete_text, "FTL Shunt Management System", new_sound = sound('sound/misc/notice2.ogg'))
 	cooldown = world.time + cooldown_delay
 	do_effects(jumpdist)
+	deltimer(jump_timer)
 	jumping = FALSE
 	update_use_power(POWER_USE_IDLE)
 	accumulated_charge -= required_charge
 	jump_timer = null
+	ftl_computer.jump_plotted = FALSE
 
 //Handles all the effects of the jump.
 /obj/machinery/power/ftl_shunt/core/proc/do_effects(var/distance) //If we're jumping too far, have some !!FUN!! with people and ship systems.
 	var/shunt_sev
 	switch(distance)
-		if(1 to 3)
+		if(1 to safe_jump_distance)
 			shunt_sev = SHUNT_SEVERITY_MINOR
-		if(4 to 5)
+		if(safe_jump_distance to moderate_jump_distance)
 			shunt_sev = SHUNT_SEVERITY_MAJOR
-		if(6 to INFINITY)
+		if(moderate_jump_distance to INFINITY)
 			shunt_sev = SHUNT_SEVERITY_CRITICAL
 
 	for(var/mob/living/carbon/human/H in global.living_mob_list_) //Affect mobs, skip synthetics.
@@ -426,6 +432,8 @@
 		return FTL_STATUS_OFFLINE
 	if(cooldown)
 		return FTL_STATUS_COOLDOWN
+	if(jump_timer)
+		return FTL_STATUS_SPOOLING_UP
 	else
 		return FTL_STATUS_GOOD
 
@@ -455,20 +463,48 @@
 		return FALSE
 
 	var/list/fueled_ports = list()
-	var/ports_used
+	var/total_joules
 	var/joules_per_port
+	var/joule_debt
 
-	for(var/obj/machinery/power/ftl_shunt/fuel_port/F in fuel_ports)
-		if(F.has_fuel())
-			fueled_ports += F
+	for(var/obj/machinery/power/ftl_shunt/fuel_port/F in fuel_ports) //Step one, loop through ports, sort them by those who are fully fueled and those that are not.
+		if(!F.has_fuel())
+			continue
+		fueled_ports += F
 
 	joules_per_port = (joules_req / length(fueled_ports))
 
-	for(var/obj/machinery/power/ftl_shunt/fuel_port/F in fueled_ports)
-		if(F.use_fuel_joules(joules_per_port))
-			ports_used++
+	for(var/obj/machinery/power/ftl_shunt/fuel_port/F in fueled_ports) //Loop through all our ports, use fuel from those that have enough and those that are partially empty.
+		if(F.get_fuel_joules() >= joules_per_port) //Enough fuel in this one!
+			if(F.use_fuel_joules(joules_per_port))
+				total_joules += joules_per_port
+				continue
+		else //Not enough fuel in this port to meet the per-port quota - take as much as we can and pick up the slack with others.
+			var/available_fuel = F.get_fuel_joules()
+			if(F.use_fuel_joules(available_fuel))
+				total_joules += available_fuel
+				joule_debt += joules_per_port - available_fuel
+				fueled_ports -= F //Remove this one from the pool of avaliable ports, since it's used up.
+				continue
 
-	if(ports_used == length(fueled_ports))
+	if(total_joules == joules_req)
+		return TRUE //All ports supplied enough fuel first go around, return early.
+
+	if(joule_debt) //We haven't rallied up enough energy for the jump, probably from ports that were only partially fueled.
+		var/fuel_debt_spread = joule_debt / length(fueled_ports)
+		for(var/obj/machinery/power/ftl_shunt/fuel_port/F in fueled_ports) //Loop through all our ports, use fuel from those that have enough and those that are partially empty.
+			if(F.get_fuel_joules() >= fuel_debt_spread) //Enough fuel in this one!
+				if(F.use_fuel_joules(fuel_debt_spread))
+					total_joules += fuel_debt_spread
+					continue
+			else //Not enough fuel in this port to meet the per-port quota - take as much as we can and pick up the slack with others.
+				var/available_fuel_debt = F.get_fuel_joules()
+				if(F.use_fuel_joules(available_fuel_debt))
+					total_joules += available_fuel_debt
+					joule_debt -= available_fuel_debt
+					continue
+
+	if(total_joules == joules_req && !joule_debt)
 		return TRUE
 
 /obj/machinery/power/ftl_shunt/core/proc/get_charge_time()
@@ -489,11 +525,19 @@
 	
 	return TRUE
 
+/obj/machinery/power/ftl_shunt/core/proc/get_total_fuel_conversion_rate()
+	var/rate
+	for(var/obj/machinery/power/ftl_shunt/fuel_port/F in fuel_ports)
+		rate += F.get_fuel_conversion_rate()
+	. = round((rate / length(fuel_ports)), 0.1)
+
+
 /obj/machinery/power/ftl_shunt/core/Process()
 	if(stat & (BROKEN|NOPOWER))
 		return
 	if(!powernet)
 		return
+	update_icon()
 
 	if(charging)
 		if(accumulated_charge < target_charge)
@@ -577,6 +621,12 @@
 		for(var/G in fuel.rod_quantities)
 			if(G in fuels)
 				. += (get_fuel_maximum ? 10000 : fuel.rod_quantities[G]) * fuels[G]
+
+/obj/machinery/power/ftl_shunt/fuel_port/proc/get_fuel_conversion_rate() //This is mostly a fluff proc, since internally everything is done in joules.
+	if(fuel)
+		for(var/G in fuel.rod_quantities)
+			if(G in fuels)
+				. = fuels[G]
 
 /obj/machinery/power/ftl_shunt/fuel_port/proc/use_fuel_joules(var/joules)
 	if(!fuel)
