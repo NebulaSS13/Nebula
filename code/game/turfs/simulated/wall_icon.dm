@@ -92,11 +92,11 @@
 				switch(can_join_with(T))
 					if(0)
 						continue
+					if(1)
+						wall_dirs += get_dir(src, T)
 					if(2)
 						wall_dirs += get_dir(src, T)
 						other_dirs += get_dir(src, T)
-					if(1)
-						wall_dirs += get_dir(src, T)
 			if(handle_structure_blending)
 				var/success = 0
 				for(var/O in T)
@@ -180,8 +180,9 @@
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
 	if(material && istype(W.material))
-		if(W.get_wall_icon() in material.wall_blend_icons)
+		var/other_wall_icon = W.get_wall_icon()
+		if(material.wall_blend_icons[other_wall_icon])
 			return 2
-		if(get_wall_icon() == W.get_wall_icon())
+		if(get_wall_icon() == other_wall_icon)
 			return 1
 	return 0
