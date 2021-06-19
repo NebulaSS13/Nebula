@@ -8,7 +8,11 @@
 	brute_armor = 3
 	conductive = 0
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
-	wall_blend_icons = list('icons/turf/walls/solid.dmi', 'icons/turf/walls/wood.dmi', 'icons/turf/walls/metal.dmi')
+	wall_blend_icons = list(
+		'icons/turf/walls/solid.dmi' = TRUE,
+		'icons/turf/walls/wood.dmi' = TRUE,
+		'icons/turf/walls/metal.dmi' = TRUE
+	)
 	dissolves_into = list(
 		/decl/material/solid/silicon = 1
 	)

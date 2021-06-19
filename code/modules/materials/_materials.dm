@@ -94,7 +94,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/icon_base_natural = 'icons/turf/walls/natural.dmi'
 	var/icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
 	var/wall_flags = 0
-	var/list/wall_blend_icons = null // Which wall icon types walls of this material type will consider blending with
+	var/list/wall_blend_icons = list() // Which wall icon types walls of this material type will consider blending with. Assoc list (icon path = TRUE/FALSE)
 	var/use_reinf_state = "full"
 
 	var/door_icon_base = "metal"                         // Door base icon tag. See header.
