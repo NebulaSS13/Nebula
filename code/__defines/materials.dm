@@ -60,3 +60,9 @@
 #define ORE_PRECIOUS "precious metals"
 #define ORE_NUCLEAR  "nuclear fuel"
 #define ORE_EXOTIC   "exotic matter"
+
+//Phase of matter placeholders
+#define MAT_PHASE_SOLID     "solid"
+#define MAT_PHASE_LIQUID    "liquid"
+#define MAT_PHASE_GAS       "gas"
+#define MAT_PHASE_PLASMA    "plasma"
