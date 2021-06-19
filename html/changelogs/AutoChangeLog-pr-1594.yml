@@ -1,0 +1,5 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - rscadd: Added Ice extractor.
+  - imageadd: Added a placeholder icon for the extractor.
