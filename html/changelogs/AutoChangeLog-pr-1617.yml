@@ -1,0 +1,5 @@
+author: NataKilar
+delete-after: true
+changes:
+  - rscadd: You can now build landable ships by toggling docking beacons to construction
+      mode.
