@@ -31,7 +31,7 @@
 	for(var/obj/machinery/docking_beacon/beacon in docking_beacons)
 		// If the beacon permits us, we'll generate the images for the area where we can land.
 		if(beacon.check_permission(shuttle.name, shuttle.docking_codes))
-			docking_turfs += beacon.get_area()
+			docking_turfs += beacon.get_turfs()
 		
 	for(var/turf/T in docking_turfs)
 		var/image/I = image('icons/effects/alphacolors.dmi', T, "blue")
