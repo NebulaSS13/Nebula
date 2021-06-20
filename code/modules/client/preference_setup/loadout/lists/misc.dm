@@ -1,74 +1,74 @@
-/datum/gear/cane
+/decl/loadout_option/cane
 	display_name = "cane"
 	path = /obj/item/cane
 
-/datum/gear/union_card
+/decl/loadout_option/union_card
 	display_name = "union membership"
 	path = /obj/item/card/union
 
-/datum/gear/union_card/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
+/decl/loadout_option/union_card/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
 	. = ..()
 	if(.)
 		var/obj/item/card/union/card = .
 		card.signed_by = H.real_name
 
-/datum/gear/dice
+/decl/loadout_option/dice
 	display_name = "dice pack"
 	path = /obj/item/storage/pill_bottle/dice
 
-/datum/gear/dice/nerd
+/decl/loadout_option/dice/nerd
 	display_name = "dice pack (gaming)"
 	path = /obj/item/storage/pill_bottle/dice_nerd
 
-/datum/gear/cards
+/decl/loadout_option/cards
 	display_name = "deck of cards"
 	path = /obj/item/deck/cards
 
-/datum/gear/tarot
+/decl/loadout_option/tarot
 	display_name = "deck of tarot cards"
 	path = /obj/item/deck/tarot
 
-/datum/gear/holder
+/decl/loadout_option/holder
 	display_name = "card holder"
 	path = /obj/item/deck/holder
 
-/datum/gear/cardemon_pack
+/decl/loadout_option/cardemon_pack
 	display_name = "Cardemon booster pack"
 	path = /obj/item/pack/cardemon
 
-/datum/gear/spaceball_pack
+/decl/loadout_option/spaceball_pack
 	display_name = "Spaceball booster pack"
 	path = /obj/item/pack/spaceball
 
-/datum/gear/flask
+/decl/loadout_option/flask
 	display_name = "flask"
 	path = /obj/item/chems/food/drinks/flask/barflask
 
-/datum/gear/flask/get_gear_tweak_options()
+/decl/loadout_option/flask/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/reagents])
 	.[/datum/gear_tweak/reagents] |= lunchables_ethanol_reagents()
 
-/datum/gear/vacflask
+/decl/loadout_option/vacflask
 	display_name = "vacuum-flask"
 	path = /obj/item/chems/food/drinks/flask/vacuumflask
 
-/datum/gear/vacflask/get_gear_tweak_options()
+/decl/loadout_option/vacflask/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/reagents])
 	.[/datum/gear_tweak/reagents] |= lunchables_drink_reagents()
 
-/datum/gear/coffeecup
+/decl/loadout_option/coffeecup
 	display_name = "coffee cup"
 	path = /obj/item/chems/food/drinks/glass2/coffeecup
 	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/knives
+/decl/loadout_option/knives
 	display_name = "knives selection"
 	description = "A selection of knives."
 	path = /obj/item/knife
 
-/datum/gear/knives/get_gear_tweak_options()
+/decl/loadout_option/knives/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
@@ -79,13 +79,13 @@
 		"lightweight utility knife" = /obj/item/knife/utility/lightweight
 	)
 
-/datum/gear/lunchbox
+/decl/loadout_option/lunchbox
 	display_name = "lunchbox"
 	description = "A little lunchbox."
 	cost = 2
 	path = /obj/item/storage/lunchbox
 
-/datum/gear/lunchbox/get_gear_tweak_options()
+/decl/loadout_option/lunchbox/get_gear_tweak_options()
 	. = ..()
 	var/list/lunchboxes = list()
 	for(var/lunchbox_type in typesof(/obj/item/storage/lunchbox))
@@ -95,22 +95,22 @@
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= lunchboxes
 
-/datum/gear/lunchbox/New()
-	..()
+/decl/loadout_option/lunchbox/Initialize()
+	. = ..()
 	// This one won't accept a list() without refactoring so just leaving the direct insertion alone.
 	gear_tweaks += new /datum/gear_tweak/contents(lunchables_lunches(), lunchables_snacks(), lunchables_drinks())
 
-/datum/gear/towel
+/decl/loadout_option/towel
 	display_name = "towel"
 	path = /obj/item/towel
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/plush_toy
+/decl/loadout_option/plush_toy
 	display_name = "plush toy"
 	description = "A plush toy."
 	path = /obj/item/toy/plushie
 
-/datum/gear/plush_toy/get_gear_tweak_options()
+/decl/loadout_option/plush_toy/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
@@ -120,49 +120,47 @@
 		"spider plush" = /obj/item/toy/plushie/spider
 	)
 
-/datum/gear/passport
+/decl/loadout_option/passport
 	display_name = "passport"
 	path = /obj/item/passport
 	custom_setup_proc = /obj/item/passport/proc/set_info
 
-/datum/gear/mirror
+/decl/loadout_option/mirror
 	display_name = "handheld mirror"
-	sort_category = "Cosmetics"
 	path = /obj/item/mirror
 
-/datum/gear/lipstick
+/decl/loadout_option/lipstick
 	display_name = "lipstick selection"
-	sort_category = "Cosmetics"
 	path = /obj/item/lipstick
 	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/comb
+/decl/loadout_option/comb
 	display_name = "plastic comb"
 	path = /obj/item/haircomb
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/mask
+/decl/loadout_option/mask
 	display_name = "sterile mask"
 	path = /obj/item/clothing/mask/surgical
 	cost = 2
 
-/datum/gear/smokingpipe
+/decl/loadout_option/smokingpipe
 	display_name = "pipe, smoking"
 	path = /obj/item/clothing/mask/smokable/pipe
 
-/datum/gear/cornpipe
+/decl/loadout_option/cornpipe
 	display_name = "pipe, corn"
 	path = /obj/item/clothing/mask/smokable/pipe/cobpipe
 
-/datum/gear/matchbook
+/decl/loadout_option/matchbook
 	display_name = "matchbook"
 	path = /obj/item/storage/box/matches
 
-/datum/gear/lighter
+/decl/loadout_option/lighter
 	display_name = "cheap lighter"
 	path = /obj/item/flame/lighter
 
-/datum/gear/lighter/get_gear_tweak_options()
+/decl/loadout_option/lighter/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
@@ -174,11 +172,11 @@
 		"pink" =   /obj/item/flame/lighter/pink
 	)
 
-/datum/gear/zippo
+/decl/loadout_option/zippo
 	display_name = "zippo"
 	path = /obj/item/flame/lighter/zippo
 
-/datum/gear/zippo/get_gear_tweak_options()
+/decl/loadout_option/zippo/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
@@ -190,20 +188,20 @@
 		"pink" =      /obj/item/flame/lighter/zippo/pink
 	)
 
-/datum/gear/ashtray
+/decl/loadout_option/ashtray
 	display_name = "ashtray, plastic"
 	path = /obj/item/ashtray/plastic
 
-/datum/gear/cigars
+/decl/loadout_option/cigars
 	display_name = "fancy cigar case"
 	path = /obj/item/storage/fancy/cigar
 	cost = 2
 
-/datum/gear/cigar
+/decl/loadout_option/cigar
 	display_name = "fancy cigar"
 	path = /obj/item/clothing/mask/smokable/cigarette/cigar
 
-/datum/gear/cigar/get_gear_tweak_options()
+/decl/loadout_option/cigar/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
@@ -211,21 +209,21 @@
 		"Cohiba Robusto" = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	)
 
-/datum/gear/ecig
+/decl/loadout_option/ecig
 	display_name = "electronic cigarette"
 	path = /obj/item/clothing/mask/smokable/ecig/util
 
-/datum/gear/ecig/deluxe
+/decl/loadout_option/ecig/deluxe
 	display_name = "electronic cigarette, deluxe"
 	path = /obj/item/clothing/mask/smokable/ecig/deluxe
 	cost = 2
 
-/datum/gear/bible
+/decl/loadout_option/bible
 	display_name = "holy book"
 	path = /obj/item/storage/bible
 	cost = 2
 
-/datum/gear/bible/get_gear_tweak_options()
+/decl/loadout_option/bible/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
@@ -237,19 +235,19 @@
 		"Kojiki" =             /obj/item/storage/bible/kojiki
 	)
 
-/datum/gear/swiss
+/decl/loadout_option/swiss
 	display_name = "multi-tool"
 	path = /obj/item/knife/folding/swiss
 	cost = 4
 	flags = GEAR_HAS_COLOR_SELECTION
 
 
-/datum/gear/cross
+/decl/loadout_option/cross
 	display_name = "cross"
 	path = /obj/item/cross
 	cost = 2
 
-/datum/gear/cross/get_gear_tweak_options()
+/decl/loadout_option/cross/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(

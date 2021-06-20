@@ -32,28 +32,26 @@
 	desc = "A high-visibility yellow smock with orange highlights light armour insets, worn by neo-avian engineering personnel."
 	icon = 'mods/species/neoavians/icons/clothing/smock_yellow.dmi'
 
-/datum/gear/uniform/avian
-	sort_category = "Xenowear"
-	category = /datum/gear/uniform/avian
+/decl/loadout_option/uniform/avian
 	whitelisted = list(SPECIES_AVIAN)
 
-/datum/gear/uniform/avian/smock
+/decl/loadout_option/uniform/avian/smock
 	display_name = "plain smock (Neo-Avian)"
 	path = /obj/item/clothing/under/avian_smock
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/uniform/avian/smock_worker
+/decl/loadout_option/uniform/avian/smock_worker
 	display_name = "worker's smock (Neo-Avian)"
 	path = /obj/item/clothing/under/avian_smock/worker
 
-/datum/gear/uniform/avian/smock_rainbow
+/decl/loadout_option/uniform/avian/smock_rainbow
 	display_name = "rainbow smock (Neo-Avian)"
 	path = /obj/item/clothing/under/avian_smock/rainbow
 
-/datum/gear/uniform/avian/smock_security
+/decl/loadout_option/uniform/avian/smock_security
 	display_name = "armoured smock (Neo-Avian)"
 	path = /obj/item/clothing/under/avian_smock/security
 
-/datum/gear/uniform/avian/smock_engineering
+/decl/loadout_option/uniform/avian/smock_engineering
 	display_name = "hazard smock (Neo-Avian)"
 	path = /obj/item/clothing/under/avian_smock/engineering
