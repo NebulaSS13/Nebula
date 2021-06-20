@@ -1,25 +1,27 @@
-// "Useful" items - I'm guessing things that might be used at work?
-/datum/gear/utility
-	sort_category = "Utility"
-	category = /datum/gear/utility
+/decl/loadout_category/utility
+	name = "Utility"
 
-/datum/gear/utility/briefcase
+// "Useful" items - I'm guessing things that might be used at work?
+/decl/loadout_option/utility
+	category = /decl/loadout_category/utility
+
+/decl/loadout_option/utility/briefcase
 	display_name = "briefcase"
 	path = /obj/item/storage/briefcase
 
-/datum/gear/utility/clipboard
+/decl/loadout_option/utility/clipboard
 	display_name = "clipboard"
 	path = /obj/item/clipboard
 
-/datum/gear/utility/folder
+/decl/loadout_option/utility/folder
 	display_name = "folders"
 	path = /obj/item/folder
 
-/datum/gear/utility/taperecorder
+/decl/loadout_option/utility/taperecorder
 	display_name = "tape recorder"
 	path = /obj/item/taperecorder
 
-/datum/gear/utility/folder/get_gear_tweak_options()
+/decl/loadout_option/utility/folder/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
@@ -30,38 +32,38 @@
 		"yellow folder" = /obj/item/folder/yellow
 	)
 
-/datum/gear/utility/paicard
+/decl/loadout_option/utility/paicard
 	display_name = "personal AI device"
 	path = /obj/item/paicard
 
-/datum/gear/utility/camera
+/decl/loadout_option/utility/camera
 	display_name = "camera"
 	path = /obj/item/camera
 
-/datum/gear/utility/photo_album
+/decl/loadout_option/utility/photo_album
 	display_name = "photo album"
 	path = /obj/item/storage/photo_album
 
-/datum/gear/utility/film_roll
+/decl/loadout_option/utility/film_roll
 	display_name = "film roll"
 	path = /obj/item/camera_film
 
-/datum/gear/accessory/stethoscope
+/decl/loadout_option/accessory/stethoscope
 	display_name = "stethoscope (medical)"
 	path = /obj/item/clothing/accessory/stethoscope
 	cost = 2
 
-/datum/gear/utility/pen
+/decl/loadout_option/utility/pen
 	display_name = "Multicolored Pen"
 	path = /obj/item/pen/multi
 	cost = 2
 
-/datum/gear/utility/fancy
+/decl/loadout_option/utility/fancy
 	display_name = "Fancy Pen"
 	path = /obj/item/pen/fancy
 	cost = 2
 
-/datum/gear/utility/hand_labeler
+/decl/loadout_option/utility/hand_labeler
 	display_name = "hand labeler"
 	path = /obj/item/hand_labeler
 	cost = 3
@@ -70,30 +72,30 @@
 modular computers
 ****************/
 
-/datum/gear/utility/cheaptablet
+/decl/loadout_option/utility/cheaptablet
 	display_name = "tablet computer, cheap"
 	path = /obj/item/modular_computer/tablet/preset/custom_loadout/cheap
 	cost = 3
 
-/datum/gear/utility/normaltablet
+/decl/loadout_option/utility/normaltablet
 	display_name = "tablet computer, advanced"
 	path = /obj/item/modular_computer/tablet/preset/custom_loadout/advanced
 	cost = 4
 
-/datum/gear/utility/customtablet
+/decl/loadout_option/utility/customtablet
 	display_name = "tablet computer, custom"
 	path = /obj/item/modular_computer/tablet
 	cost = 4
 
-/datum/gear/utility/customtablet/get_gear_tweak_options()
+/decl/loadout_option/utility/customtablet/get_gear_tweak_options()
 	. = ..() | /datum/gear_tweak/tablet
 
-/datum/gear/utility/cheaplaptop
+/decl/loadout_option/utility/cheaplaptop
 	display_name = "laptop computer, cheap"
 	path = /obj/item/modular_computer/laptop/preset/custom_loadout/cheap
 	cost = 5
 
-/datum/gear/utility/normallaptop
+/decl/loadout_option/utility/normallaptop
 	display_name = "laptop computer, advanced"
 	path = /obj/item/modular_computer/laptop/preset/custom_loadout/advanced
 	cost = 6

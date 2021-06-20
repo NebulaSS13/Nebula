@@ -1,20 +1,21 @@
+/decl/loadout_category/feet
+	name = "Footwear"
 
-/datum/gear/shoes
-	sort_category = "Shoes and Footwear"
+/decl/loadout_option/shoes
 	slot = slot_shoes_str
-	category = /datum/gear/shoes
+	category = /decl/loadout_category/feet
 
-/datum/gear/shoes/athletic
+/decl/loadout_option/shoes/athletic
 	display_name = "athletic shoes, colour select"
 	path = /obj/item/clothing/shoes/athletic
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/shoes/boots
+/decl/loadout_option/shoes/boots
 	display_name = "boot selection"
 	path = /obj/item/clothing/shoes
 	cost = 2
 
-/datum/gear/shoes/boots/get_gear_tweak_options()
+/decl/loadout_option/shoes/boots/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
@@ -25,11 +26,11 @@
 		/obj/item/clothing/shoes/jackboots/desertboots
 	)
 
-/datum/gear/shoes/color
+/decl/loadout_option/shoes/color
 	display_name = "shoe selection"
 	path = /obj/item/clothing/shoes
 
-/datum/gear/shoes/color/get_gear_tweak_options()
+/decl/loadout_option/shoes/color/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
@@ -48,21 +49,21 @@
 		/obj/item/clothing/shoes/color/yellow
 	)
 
-/datum/gear/shoes/flats
+/decl/loadout_option/shoes/flats
 	display_name = "flats, colour select"
 	path = /obj/item/clothing/shoes/flats
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/shoes/high
+/decl/loadout_option/shoes/high
 	display_name = "high tops selection"
 	path = /obj/item/clothing/shoes/color/hightops
 	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/shoes/sandal
+/decl/loadout_option/shoes/sandal
 	display_name = "wooden sandals"
 	path = /obj/item/clothing/shoes/sandal
 
-/datum/gear/shoes/heels
+/decl/loadout_option/shoes/heels
 	display_name = "high heels, colour select"
 	path = /obj/item/clothing/shoes/heels
 	flags = GEAR_HAS_COLOR_SELECTION
