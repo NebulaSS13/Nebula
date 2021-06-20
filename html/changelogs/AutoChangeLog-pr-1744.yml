@@ -1,5 +1,0 @@
-author: CakeQ
-delete-after: true
-changes:
-  - rscadd: Walls can now connect to walls of other types depending on their material
-      by comparing material wall icons
