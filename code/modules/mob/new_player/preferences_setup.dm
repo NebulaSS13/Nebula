@@ -88,7 +88,7 @@
 				if(!permitted)
 					continue
 
-				if(G.slot && G.slot != slot_tie_str && !(G.slot in loadout_taken_slots) && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.display_name]))
+				if(G.slot && G.slot != slot_tie_str && !(G.slot in loadout_taken_slots) && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.name]))
 					loadout_taken_slots.Add(G.slot)
 					update_icon = TRUE
 

@@ -1,5 +1,5 @@
 /decl/loadout_option/accessory/ntaward
-	display_name = "corporate award selection"
+	name = "corporate award selection"
 	description = "A medal or ribbon awarded to corporate personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory/medal
 	cost = 8
@@ -14,16 +14,16 @@
 	)
 
 /decl/loadout_option/accessory/armband_nt
-	display_name = "corporate armband"
+	name = "corporate armband"
 	path = /obj/item/clothing/accessory/armband/whitered
 
 /decl/loadout_option/suit/labcoat_corp
-	display_name = "labcoat, corporate colors"
+	name = "labcoat, corporate colors"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corporate
-	display_name = "corporate uniform selection"
+	namename = "corporate uniform selection"
 	path = /obj/item/clothing/under
 
 /decl/loadout_option/uniform/corporate/get_gear_tweak_options()
@@ -48,31 +48,31 @@
 	)
 
 /decl/loadout_option/uniform/corp_exec
-	display_name = "corporate colours, senior researcher"
+	name = "corporate colours, senior researcher"
 	path = /obj/item/clothing/under/executive
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corp_overalls
-	display_name = "corporate colours, coveralls"
+	name = "corporate colours, coveralls"
 	path = /obj/item/clothing/under/work
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corp_flight
-	display_name = "corporate colours, flight suit"
+	name = "corporate colours, flight suit"
 	path = /obj/item/clothing/under/pilot
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/corp_exec_jacket
-	display_name = "corporate colours, liason suit"
+	name = "corporate colours, liason suit"
 	path = /obj/item/clothing/under/suit_jacket/corp
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/suit/nanotrasen_poncho
-	display_name = "poncho, NanoTrasen"
+	name = "poncho, NanoTrasen"
 	path = /obj/item/clothing/suit/poncho/roles/science/nanotrasen
 
 /decl/loadout_option/suit/corp_jacket
-	display_name = "corporate jacket selection"
+	name = "corporate jacket selection"
 	path = /obj/item/clothing/suit
 
 /decl/loadout_option/suit/corp_jacket/get_gear_tweak_options()
@@ -84,15 +84,15 @@
 	)
 
 /decl/loadout_option/suit/science_poncho
-	display_name = "poncho, science"
+	name = "poncho, science"
 	path = /obj/item/clothing/suit/poncho/roles/science
 
 /decl/loadout_option/suit/hoodie_nt
-	display_name = "hoodie, NanoTrasen"
+	name = "hoodie, NanoTrasen"
 	path = /obj/item/clothing/suit/storage/toggle/hoodie/nt
 
 /decl/loadout_option/suit/wintercoat_dais
-	display_name = "winter coat, DAIS"
+	name = "winter coat, DAIS"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/dais
 
 /decl/loadout_option/suit/leather/get_gear_tweak_options()

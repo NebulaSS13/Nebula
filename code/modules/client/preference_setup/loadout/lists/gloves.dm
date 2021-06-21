@@ -7,17 +7,17 @@
 	category = /decl/loadout_category/hands
 
 /decl/loadout_option/gloves/colored
-	display_name = "gloves, colored"
+	name = "gloves, colored"
 	flags = GEAR_HAS_COLOR_SELECTION
 	path = /obj/item/clothing/gloves/color
 
 /decl/loadout_option/gloves/evening
-	display_name = "gloves, evening, colour select"
+	name = "gloves, evening, colour select"
 	path = /obj/item/clothing/gloves/color/evening
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/ring
-	display_name = "ring"
+	name = "ring"
 	path = /obj/item/clothing/ring
 	cost = 2
 

@@ -6,21 +6,21 @@
 	category = /decl/loadout_category/uniform
 
 /decl/loadout_option/uniform/jumpsuit
-	display_name = "jumpsuit, colour select"
+	name = "jumpsuit, colour select"
 	path = /obj/item/clothing/under/color
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/shortjumpskirt
-	display_name = "short jumpskirt, colour select"
+	name = "short jumpskirt, colour select"
 	path = /obj/item/clothing/under/shortjumpskirt
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/blackjumpshorts
-	display_name = "black jumpsuit shorts"
+	name = "black jumpsuit shorts"
 	path = /obj/item/clothing/under/color/blackjumpshorts
 
 /decl/loadout_option/uniform/suit
-	display_name = "clothes selection"
+	name = "clothes selection"
 	path = /obj/item/clothing/under
 
 /decl/loadout_option/uniform/suit/get_gear_tweak_options()
@@ -56,7 +56,7 @@
 	)
 
 /decl/loadout_option/uniform/dress
-	display_name = "dress selection"
+	name = "dress selection"
 	path = /obj/item/clothing/under
 
 /decl/loadout_option/uniform/dress/get_gear_tweak_options()
@@ -73,65 +73,65 @@
 	)
 
 /decl/loadout_option/uniform/cheongsam
-	display_name = "cheongsam, colour select"
+	name = "cheongsam, colour select"
 	path = /obj/item/clothing/under/cheongsam
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/abaya
-	display_name = "abaya, colour select"
+	name = "abaya, colour select"
 	path = /obj/item/clothing/under/abaya
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/skirt
-	display_name = "skirt selection"
+	name = "skirt selection"
 	path = /obj/item/clothing/under/skirt
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/skirt_c
-	display_name = "short skirt, colour select"
+	name = "short skirt, colour select"
 	path = /obj/item/clothing/under/skirt_c
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/skirt_c/dress
-	display_name = "simple dress, colour select"
+	name = "simple dress, colour select"
 	path = /obj/item/clothing/under/skirt_c/dress
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/casual_pants
-	display_name = "casual pants selection"
+	name = "casual pants selection"
 	path = /obj/item/clothing/pants/casual
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/formal_pants
-	display_name = "formal pants selection"
+	name = "formal pants selection"
 	path = /obj/item/clothing/pants/formal
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/formal_pants/baggycustom
-	display_name = "baggy suit pants, colour select"
+	name = "baggy suit pants, colour select"
 	path = /obj/item/clothing/pants/baggy
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/shorts
-	display_name = "shorts selection"
+	name = "shorts selection"
 	path = /obj/item/clothing/pants/shorts
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/uniform/shorts/custom
-	display_name = "athletic shorts, colour select"
+	name = "athletic shorts, colour select"
 	path = /obj/item/clothing/pants/shorts/athletic
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/turtleneck
-	display_name = "sweater, colour select"
+	name = "sweater, colour select"
 	path = /obj/item/clothing/under/psych/turtleneck/sweater
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/kimono
-	display_name = "kimono, colour select"
+	name = "kimono, colour select"
 	path = /obj/item/clothing/under/kimono
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/frontier
-	display_name = "frontier clothes"
+	name = "frontier clothes"
 	path = /obj/item/clothing/under/frontier 

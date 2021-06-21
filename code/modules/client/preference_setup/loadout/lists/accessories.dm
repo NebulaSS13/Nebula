@@ -6,7 +6,7 @@
 	slot = slot_tie_str
 
 /decl/loadout_option/accessory/tie
-	display_name = "tie selection"
+	name = "tie selection"
 	path = /obj/item/clothing/accessory
 
 /decl/loadout_option/accessory/tie/get_gear_tweak_options()
@@ -25,7 +25,7 @@
 	)
 
 /decl/loadout_option/accessory/tie_color
-	display_name = "colored tie"
+	name = "colored tie"
 	path = /obj/item/clothing/accessory
 	flags = GEAR_HAS_COLOR_SELECTION
 
@@ -38,25 +38,25 @@
 	)
 
 /decl/loadout_option/accessory/locket
-	display_name = "locket"
+	name = "locket"
 	path = /obj/item/clothing/accessory/locket
 
 /decl/loadout_option/accessory/necklace
-	display_name = "necklace, colour select"
+	name = "necklace, colour select"
 	path = /obj/item/clothing/accessory/necklace
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/accessory/bowtie
-	display_name = "bowtie, horrible"
+	name = "bowtie, horrible"
 	path = /obj/item/clothing/accessory/bowtie/ugly
 
 /decl/loadout_option/accessory/bowtie/color
-	display_name = "bowtie, colour select"
+	name = "bowtie, colour select"
 	path = /obj/item/clothing/accessory/bowtie/color
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/accessory/bracelet
-	display_name = "bracelet, color select"
+	name = "bracelet, color select"
 	path = /obj/item/clothing/accessory/bracelet
 	cost = 1
 	flags = GEAR_HAS_COLOR_SELECTION

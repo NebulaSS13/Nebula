@@ -6,19 +6,19 @@
 	category = /decl/loadout_category/utility
 
 /decl/loadout_option/utility/briefcase
-	display_name = "briefcase"
+	name = "briefcase"
 	path = /obj/item/storage/briefcase
 
 /decl/loadout_option/utility/clipboard
-	display_name = "clipboard"
+	name = "clipboard"
 	path = /obj/item/clipboard
 
 /decl/loadout_option/utility/folder
-	display_name = "folders"
+	name = "folders"
 	path = /obj/item/folder
 
 /decl/loadout_option/utility/taperecorder
-	display_name = "tape recorder"
+	name = "tape recorder"
 	path = /obj/item/taperecorder
 
 /decl/loadout_option/utility/folder/get_gear_tweak_options()
@@ -33,33 +33,33 @@
 	)
 
 /decl/loadout_option/utility/paicard
-	display_name = "personal AI device"
+	name = "personal AI device"
 	path = /obj/item/paicard
 
 /decl/loadout_option/utility/camera
-	display_name = "camera"
+	name = "camera"
 	path = /obj/item/camera
 
 /decl/loadout_option/utility/photo_album
-	display_name = "photo album"
+	name = "photo album"
 	path = /obj/item/storage/photo_album
 
 /decl/loadout_option/utility/film_roll
-	display_name = "film roll"
+	name = "film roll"
 	path = /obj/item/camera_film
 
 /decl/loadout_option/utility/pen
-	display_name = "multicolored pen"
+	name = "multicolored pen"
 	path = /obj/item/pen/multi
 	cost = 2
 
 /decl/loadout_option/utility/fancy
-	display_name = "fancy pen"
+	name = "fancy pen"
 	path = /obj/item/pen/fancy
 	cost = 2
 
 /decl/loadout_option/utility/knives
-	display_name = "utility knife selection"
+	name = "utility knife selection"
 	description = "A selection of knives."
 	path = /obj/item/knife
 

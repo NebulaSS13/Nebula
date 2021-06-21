@@ -6,12 +6,12 @@
 	category = /decl/loadout_category/feet
 
 /decl/loadout_option/shoes/athletic
-	display_name = "athletic shoes, colour select"
+	name = "athletic shoes, colour select"
 	path = /obj/item/clothing/shoes/athletic
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/shoes/boots
-	display_name = "boot selection"
+	name = "boot selection"
 	path = /obj/item/clothing/shoes
 	cost = 2
 
@@ -27,7 +27,7 @@
 	)
 
 /decl/loadout_option/shoes/color
-	display_name = "shoe selection"
+	name = "shoe selection"
 	path = /obj/item/clothing/shoes
 
 /decl/loadout_option/shoes/color/get_gear_tweak_options()
@@ -50,20 +50,20 @@
 	)
 
 /decl/loadout_option/shoes/flats
-	display_name = "flats, colour select"
+	name = "flats, colour select"
 	path = /obj/item/clothing/shoes/flats
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/shoes/high
-	display_name = "high tops selection"
+	name = "high tops selection"
 	path = /obj/item/clothing/shoes/color/hightops
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/shoes/sandal
-	display_name = "wooden sandals"
+	name = "wooden sandals"
 	path = /obj/item/clothing/shoes/sandal
 
 /decl/loadout_option/shoes/heels
-	display_name = "high heels, colour select"
+	name = "high heels, colour select"
 	path = /obj/item/clothing/shoes/heels
 	flags = GEAR_HAS_COLOR_SELECTION

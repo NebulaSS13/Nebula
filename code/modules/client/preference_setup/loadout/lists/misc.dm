@@ -1,37 +1,37 @@
 /decl/loadout_option/cane
-	display_name = "cane"
+	name = "cane"
 	path = /obj/item/cane
 
 /decl/loadout_option/dice
-	display_name = "dice pack"
+	name = "dice pack"
 	path = /obj/item/storage/pill_bottle/dice
 
 /decl/loadout_option/dice/nerd
-	display_name = "dice pack (gaming)"
+	name = "dice pack (gaming)"
 	path = /obj/item/storage/pill_bottle/dice_nerd
 
 /decl/loadout_option/cards
-	display_name = "deck of cards"
+	name = "deck of cards"
 	path = /obj/item/deck/cards
 
 /decl/loadout_option/tarot
-	display_name = "deck of tarot cards"
+	name = "deck of tarot cards"
 	path = /obj/item/deck/tarot
 
 /decl/loadout_option/holder
-	display_name = "card holder"
+	name = "card holder"
 	path = /obj/item/deck/holder
 
 /decl/loadout_option/cardemon_pack
-	display_name = "Cardemon booster pack"
+	name = "Cardemon booster pack"
 	path = /obj/item/pack/cardemon
 
 /decl/loadout_option/spaceball_pack
-	display_name = "Spaceball booster pack"
+	name = "Spaceball booster pack"
 	path = /obj/item/pack/spaceball
 
 /decl/loadout_option/flask
-	display_name = "flask"
+	name = "flask"
 	path = /obj/item/chems/food/drinks/flask/barflask
 
 /decl/loadout_option/flask/get_gear_tweak_options()
@@ -40,7 +40,7 @@
 	.[/datum/gear_tweak/reagents] |= lunchables_ethanol_reagents()
 
 /decl/loadout_option/vacflask
-	display_name = "vacuum-flask"
+	name = "vacuum-flask"
 	path = /obj/item/chems/food/drinks/flask/vacuumflask
 
 /decl/loadout_option/vacflask/get_gear_tweak_options()
@@ -49,17 +49,17 @@
 	.[/datum/gear_tweak/reagents] |= lunchables_drink_reagents()
 
 /decl/loadout_option/coffeecup
-	display_name = "coffee cup"
+	name = "coffee cup"
 	path = /obj/item/chems/food/drinks/glass2/coffeecup
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/towel
-	display_name = "towel"
+	name = "towel"
 	path = /obj/item/towel
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/plush_toy
-	display_name = "plush toy"
+	name = "plush toy"
 	description = "A plush toy."
 	path = /obj/item/toy/plushie
 
@@ -74,38 +74,38 @@
 	)
 
 /decl/loadout_option/mirror
-	display_name = "handheld mirror"
+	name = "handheld mirror"
 	path = /obj/item/mirror
 
 /decl/loadout_option/lipstick
-	display_name = "lipstick selection"
+	name = "lipstick selection"
 	path = /obj/item/lipstick
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/comb
-	display_name = "plastic comb"
+	name = "plastic comb"
 	path = /obj/item/haircomb
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/mask
-	display_name = "sterile mask"
+	name = "sterile mask"
 	path = /obj/item/clothing/mask/surgical
 	cost = 2
 
 /decl/loadout_option/smokingpipe
-	display_name = "pipe, smoking"
+	name = "pipe, smoking"
 	path = /obj/item/clothing/mask/smokable/pipe
 
 /decl/loadout_option/cornpipe
-	display_name = "pipe, corn"
+	name = "pipe, corn"
 	path = /obj/item/clothing/mask/smokable/pipe/cobpipe
 
 /decl/loadout_option/matchbook
-	display_name = "matchbook"
+	name = "matchbook"
 	path = /obj/item/storage/box/matches
 
 /decl/loadout_option/lighter
-	display_name = "cheap lighter"
+	name = "cheap lighter"
 	path = /obj/item/flame/lighter
 
 /decl/loadout_option/lighter/get_gear_tweak_options()
@@ -121,20 +121,20 @@
 	)
 
 /decl/loadout_option/ashtray
-	display_name = "ashtray, plastic"
+	name = "ashtray, plastic"
 	path = /obj/item/ashtray/plastic
 
 /decl/loadout_option/ecig
-	display_name = "electronic cigarette"
+	name = "electronic cigarette"
 	path = /obj/item/clothing/mask/smokable/ecig/util
 
 /decl/loadout_option/ecig/deluxe
-	display_name = "electronic cigarette, deluxe"
+	name = "electronic cigarette, deluxe"
 	path = /obj/item/clothing/mask/smokable/ecig/deluxe
 	cost = 2
 
 /decl/loadout_option/bible
-	display_name = "holy book"
+	name = "holy book"
 	path = /obj/item/storage/bible
 	cost = 2
 
@@ -151,7 +151,7 @@
 	)
 
 /decl/loadout_option/cross
-	display_name = "cross"
+	name = "cross"
 	path = /obj/item/cross
 	cost = 2
 
@@ -165,18 +165,18 @@
 	)
 
 /decl/loadout_option/wallet
-	display_name = "wallet, colour select"
+	name = "wallet, colour select"
 	path = /obj/item/storage/wallet
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/wallet_poly
-	display_name = "wallet, polychromic"
+	name = "wallet, polychromic"
 	path = /obj/item/storage/wallet/poly
 	cost = 2
 
 
 /decl/loadout_option/swiss
-	display_name = "multi-tool"
+	name = "multi-tool"
 	path = /obj/item/knife/folding/swiss
 	cost = 4
 	flags = GEAR_HAS_COLOR_SELECTION

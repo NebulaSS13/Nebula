@@ -6,13 +6,13 @@
 	category = /decl/loadout_category/head
 
 /decl/loadout_option/head/beret
-	display_name = "beret, colour select"
+	name = "beret, colour select"
 	path = /obj/item/clothing/head/beret/plaincolor
 	flags = GEAR_HAS_COLOR_SELECTION
 	description = "A simple, solid color beret. This one has no emblems or insignia on it."
 
 /decl/loadout_option/head/bandana
-	display_name = "bandana selection"
+	name = "bandana selection"
 	path = /obj/item/clothing
 
 /decl/loadout_option/head/bandana/get_gear_tweak_options()
@@ -21,22 +21,22 @@
 	.[/datum/gear_tweak/path/specified_types_list] |= typesof(/obj/item/clothing/mask/bandana) + typesof(/obj/item/clothing/head/bandana)
 
 /decl/loadout_option/head/beanie
-	display_name = "beanie, color select"
+	name = "beanie, color select"
 	path = /obj/item/clothing/head/beanie
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/bow
-	display_name = "hair bow, colour select"
+	name = "hair bow, colour select"
 	path = /obj/item/clothing/head/hairflower/bow
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/flat_cap
-	display_name = "flat cap, colour select"
+	name = "flat cap, colour select"
 	path = /obj/item/clothing/head/flatcap
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/cap
-	display_name = "cap selection"
+	name = "cap selection"
 	path = /obj/item/clothing/head
 
 /decl/loadout_option/head/cap/get_gear_tweak_options()
@@ -56,7 +56,7 @@
 	)
 
 /decl/loadout_option/head/hairflower
-	display_name = "hair flower pin"
+	name = "hair flower pin"
 	path = /obj/item/clothing/head/hairflower
 
 /decl/loadout_option/head/hairflower/get_gear_tweak_options()
@@ -70,7 +70,7 @@
 	)
 
 /decl/loadout_option/head/formalhat
-	display_name = "formal hat selection"
+	name = "formal hat selection"
 	path = /obj/item/clothing/head
 
 /decl/loadout_option/head/formalhat/get_gear_tweak_options()
@@ -88,7 +88,7 @@
 	)
 
 /decl/loadout_option/head/informalhat
-	display_name = "informal hat selection"
+	name = "informal hat selection"
 	path = /obj/item/clothing/head
 
 /decl/loadout_option/head/informalhat/get_gear_tweak_options()
@@ -100,37 +100,37 @@
 	)
 
 /decl/loadout_option/head/hijab
-	display_name = "hijab, colour select"
+	name = "hijab, colour select"
 	path = /obj/item/clothing/head/hijab
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/kippa
-	display_name = "kippa, colour select"
+	name = "kippa, colour select"
 	path = /obj/item/clothing/head/kippa
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/turban
-	display_name = "turban, colour select"
+	name = "turban, colour select"
 	path = /obj/item/clothing/head/turban
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/taqiyah
-	display_name = "taqiyah, colour select"
+	name = "taqiyah, colour select"
 	path = /obj/item/clothing/head/taqiyah
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/head/rastacap
-	display_name = "rastacap"
+	name = "rastacap"
 	path = /obj/item/clothing/head/rastacap
 
 /decl/loadout_option/head/tankccap
-	display_name = "padded cap"
+	name = "padded cap"
 	path = /obj/item/clothing/head/tank
 
 /decl/loadout_option/head/headphones
-	display_name = "headphones"
+	name = "headphones"
 	path = /obj/item/clothing/head/headphones
 
 /decl/loadout_option/balaclava
-	display_name = "balaclava"
+	name = "balaclava"
 	path = /obj/item/clothing/mask/balaclava
