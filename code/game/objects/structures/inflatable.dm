@@ -190,6 +190,7 @@
 
 	icon_state = "door_closed"
 	undeploy_path = /obj/item/inflatable/door
+	atmos_canpass = CANPASS_PROC
 
 	var/state = 0 //closed, 1 == open
 	var/isSwitchingStates = 0
