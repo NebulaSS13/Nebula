@@ -1,7 +1,16 @@
+var/global/list/decl/topic_command/topic_commands = list()
+
 /decl/topic_command
 	var/name = "topiccommand"
 	var/has_params = FALSE
 	var/base_type = /decl/topic_command
+
+/// Initialises the assoc list of topic commands by key.
+/hook/startup/proc/setup_api()
+	for (var/decl/topic_command/TC in decls_repository.get_decls_of_subtype(/decl/topic_command))
+		if(TC.base_type == type)
+			continue
+		global.topic_commands[TC.name] = TC
 
 /// Returns a truthy value if we CANNOT use this command.
 /decl/topic_command/proc/can_use(var/T, var/addr, var/master, var/key)
@@ -31,13 +40,12 @@
 /decl/topic_command/secure/try_use(var/T, var/addr, var/master, var/key)
 	if (!can_use(T, addr, master, key))
 		return FALSE
-	INIT_THROTTLE
 	var/list/params = params2list(T)
 	if (!config.comms_password)
-		SET_THROTTLE(10 SECONDS, "Comms Not Enabled")
+		set_throttle(addr, 10 SECONDS, "Comms Not Enabled")
 		return "Not Enabled"
 	if (params["key"] != config.comms_password)
-		SET_THROTTLE(30 SECONDS, "Bad Comms Key")
+		set_throttle(addr, 30 SECONDS, "Bad Comms Key")
 		return "Bad Key"
 	return use(params)
 
@@ -159,13 +167,12 @@
 /decl/topic_command/ban/try_use(var/T, var/addr, var/master, var/key)
 	if (!can_use(T, addr, master, key))
 		return FALSE
-	INIT_THROTTLE
 	var/list/params = params2list(T)
 	if(!config.ban_comms_password)
-		SET_THROTTLE(10 SECONDS, "Bans Not Enabled")
+		set_throttle(addr, 10 SECONDS, "Bans Not Enabled")
 		return "Not Enabled"
 	if(params["bankey"] != config.ban_comms_password)
-		SET_THROTTLE(30 SECONDS, "Bad Bans Key")
+		set_throttle(addr, 30 SECONDS, "Bad Bans Key")
 		return "Bad Key"
 	return use(params)
 
@@ -353,6 +360,3 @@
 	if(!global.prometheus_metrics)
 		return "Metrics not ready"
 	return global.prometheus_metrics.collect()
-
-#undef INIT_THROTTLE
-#undef SET_THROTTLE

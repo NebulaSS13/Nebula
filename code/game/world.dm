@@ -99,32 +99,32 @@ var/global/game_id = null
 var/global/list/world_topic_throttle = list()
 var/global/world_topic_last = world.timeofday
 
-#define INIT_THROTTLE\
- 	if (global.world_topic_last > world.timeofday) {\
-		global.world_topic_throttle = list();\
-	}\
-	global.world_topic_last = world.timeofday;\
-	var/list/throttle = global.world_topic_throttle[addr];\
-	if (!throttle){\
-		global.world_topic_throttle[addr] = throttle = list(0, null);\
-	} else if ((!config.throttle_immune_localhost || !global.localhost_addresses[addr]) && throttle[1] && throttle[1] > world.timeofday + THROTTLE_MAX_BURST){\
-		return throttle[2] ? "Throttled ([throttle[2]])" : "Throttled";\
-	}\
-	var/base_throttle = max(throttle[1], world.timeofday);
+/proc/set_throttle(var/addr, var/time, var/reason)
+	var/list/throttle = global.world_topic_throttle[addr]
+	if (!global.world_topic_throttle[addr])
+		global.world_topic_throttle[addr] = throttle = list(0, null)
+	else if ((!config.throttle_immune_localhost || !global.localhost_addresses[addr]) && throttle[1] && throttle[1] > world.timeofday + 15 SECONDS)
+		return throttle[2] ? "Throttled ([throttle[2]])" : "Throttled"
 
-#define SET_THROTTLE(TIME, REASON) throttle[1] = base_throttle + (TIME); throttle[2] = (REASON);
-#define THROTTLE_MAX_BURST 15 SECONDS
+	throttle[1] = max(throttle[1], world.timeofday) + time
+	throttle[2] = reason
 
 /world/Topic(T, addr, master, key)
 	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]"
 
-	INIT_THROTTLE
-	SET_THROTTLE(3 SECONDS, null)
+	if (global.world_topic_last > world.timeofday)
+		global.world_topic_throttle = list() //probably passed midnight
+	global.world_topic_last = world.timeofday
 
-	for(var/decl/topic_command/TC as anything in decls_repository.get_decls_of_subtype(/decl/topic_command))
-		. = TC.try_use(T, addr, master, key)
-		if (.)
-			return .
+	set_throttle(addr, 3 SECONDS, null)
+
+	var/list/params = params2list(T)
+	var/command_key = params[1]
+	if(!command_key || !global.topic_commands[command_key])
+		return "Unrecognised Command"
+
+	var/decl/topic_command/TC = global.topic_commands[command_key]
+	return TC.try_use(T, addr, master, key)
 
 /world/Reboot(var/reason)
 	if(global.using_map.reboot_sound)
