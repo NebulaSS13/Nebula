@@ -120,9 +120,11 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/loadout_blacklist	//list of types of loadout items that will not be pickable
 
 	//Economy stuff
-	var/starting_money = 75000		//Money in station account
-	var/department_money = 5000		//Money in department accounts
-	var/salary_modifier	= 1			//Multiplier to starting character money
+	var/starting_money = 75000		       // Money in station account
+	var/department_money = 5000		       // Money in department accounts
+	var/salary_modifier	= 1			       // Multiplier to starting character money
+	var/passport_type = /obj/item/passport // Item type to grant people on join.
+
 	var/list/station_departments = list()//Gets filled automatically depending on jobs allowed
 
 	var/default_species = SPECIES_HUMAN
@@ -352,3 +354,12 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/get_specops_area()
 	return
+
+/datum/map/proc/create_passport(var/mob/living/carbon/human/H)
+	if(!passport_type)
+		return
+	var/obj/item/passport/pass = new passport_type(get_turf(H))
+	if(istype(pass))
+		pass.set_info(H)
+	if(!H.equip_to_slot(pass, slot_in_backpack_str))
+		H.put_in_hands(pass)

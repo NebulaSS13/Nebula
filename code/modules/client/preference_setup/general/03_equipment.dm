@@ -5,6 +5,7 @@
 	var/list/backpack_metadata
 	var/survival_box_choice
 	var/starting_cash_choice
+	var/give_passport = TRUE
 
 /datum/category_item/player_setup_item/physical/equipment
 	name = "Clothing"
@@ -28,7 +29,11 @@
 	pref.starting_cash_choice =   R.read("starting_cash_choice")
 	pref.survival_box_choice =    R.read("survival_box")
 
-	var/load_backbag =            R.read("backpack")
+	pref.give_passport = R.read("passport")
+	if(isnull(pref.give_passport))
+		pref.give_passport = TRUE
+
+	var/load_backbag = R.read("backpack")
 	pref.backpack = backpacks_by_name[load_backbag] || get_default_outfit_backpack()
 
 	var/list/all_cash_choices = decls_repository.get_decls_of_type(/decl/starting_cash_choice)
@@ -44,6 +49,7 @@
 	W.write("backpack",               pref.backpack.name)
 	W.write("backpack_metadata",      pref.backpack_metadata)
 	W.write("survival_box",           pref.survival_box_choice)
+	W.write("passport",               pref.give_passport)
 
 	var/decl/starting_cash_choice/cash_choice = GET_DECL(pref.starting_cash_choice)
 	W.write("starting_cash_choice", lowertext(cash_choice.name))
@@ -117,12 +123,14 @@
 				. += " <a href='?src=\ref[src];underwear=[UWC.name];tweak=\ref[gt]'>[gt.get_contents(get_underwear_metadata(UWC.name, gt))]</a>"
 
 		. += "<br>"
-	. += "Backpack Type: <a href='?src=\ref[src];change_backpack=1'><b>[pref.backpack.name]</b></a>"
+	. += "<b>Backpack type:</b> <a href='?src=\ref[src];change_backpack=1'><b>[pref.backpack.name]</b></a>"
 	for(var/datum/backpack_tweak/bt in pref.backpack.tweaks)
 		. += " <a href='?src=\ref[src];backpack=[pref.backpack.name];tweak=\ref[bt]'>[bt.get_ui_content(get_backpack_metadata(pref.backpack, bt))]</a>"
 	. += "<br>"
 
-	. += "Survival Box Type: <a href='?src=\ref[src];change_survival_box=1'><b>[pref.survival_box_choice]</b></a><br>"
+	. += "<b>Survival box type:</b> <a href='?src=\ref[src];change_survival_box=1'><b>[pref.survival_box_choice]</b></a><br>"
+	if(global.using_map.passport_type)
+		. += "<b>Passport:</b> <a href='?src=\ref[src];toggle_passport=1'><b>[pref.give_passport ? "Yes" : "No"]</b></a><br>"
 
 	var/decl/starting_cash_choice/cash_choice = GET_DECL(pref.starting_cash_choice)
 	. += "<br><b>Personal finances:</b><br><a href='?src=\ref[src];change_cash_choice=1'>[capitalize(cash_choice.name)]</a><br>"
@@ -169,6 +177,9 @@
 		if(selected_underwear && CanUseTopic(user))
 			pref.all_underwear[UWC.name] = selected_underwear.name
 		return TOPIC_REFRESH_UPDATE_PREVIEW
+	else if(href_list["toggle_passport"])
+		pref.give_passport = !pref.give_passport
+		return TOPIC_REFRESH
 	else if(href_list["change_survival_box"])
 		pref.survival_box_choice = input(user, "Select a survival box alternative.", "Survival Box", pref.survival_box_choice) as null|anything in global.survival_box_choices
 		return TOPIC_REFRESH
