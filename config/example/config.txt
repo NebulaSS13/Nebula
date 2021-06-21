@@ -450,3 +450,7 @@ RADIATION_LOWER_LIMIT 0.15
 ## clients will still download from the server *too*. This will randomly select one URL if more than one is provided.
 ## Spaces are prohibited in each URL by spec, you must use encoded spaces.
 #RESOURCE_URLS URL URL2 URL3
+
+## Whether or not to make localhost immune to throttling.
+## Localhost will still be throttled internally; it just won't be affected by it.
+#THROTTLE_IMMUNE_LOCALHOST
