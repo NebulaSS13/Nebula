@@ -338,12 +338,11 @@
 		var/obj/item/organ/limb_path = organ_data["path"]
 		organ_data["descriptor"] = initial(limb_path.name)
 
-/decl/species/proc/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
-	var/obj/item/storage/box/box = extendedtank ? /obj/item/storage/box/engineer : /obj/item/storage/box/survival
+/decl/species/proc/equip_survival_gear(var/mob/living/carbon/human/H, var/box_type = /obj/item/storage/box/survival)
 	if(istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack))
-		H.equip_to_slot_or_del(new box(H.back), slot_in_backpack_str)
+		H.equip_to_slot_or_del(new box_type(H.back), slot_in_backpack_str)
 	else
-		H.put_in_hands_or_del(new box(H))
+		H.put_in_hands_or_del(new box_type(H))
 
 /decl/species/proc/get_manual_dexterity(var/mob/living/carbon/human/H)
 	. = manual_dexterity

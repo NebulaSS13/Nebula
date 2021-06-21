@@ -1,10 +1,9 @@
 /datum/preferences
 	var/list/all_underwear
 	var/list/all_underwear_metadata
-
 	var/decl/backpack_outfit/backpack
 	var/list/backpack_metadata
-
+	var/survival_box_choice
 	var/starting_cash_choice
 
 /datum/category_item/player_setup_item/physical/equipment
@@ -27,6 +26,8 @@
 	pref.all_underwear_metadata = R.read("all_underwear_metadata")
 	pref.backpack_metadata =      R.read("backpack_metadata")
 	pref.starting_cash_choice =   R.read("starting_cash_choice")
+	pref.survival_box_choice =    R.read("survival_box")
+
 	var/load_backbag =            R.read("backpack")
 	pref.backpack = backpacks_by_name[load_backbag] || get_default_outfit_backpack()
 
@@ -42,6 +43,7 @@
 	W.write("all_underwear_metadata", pref.all_underwear_metadata)
 	W.write("backpack",               pref.backpack.name)
 	W.write("backpack_metadata",      pref.backpack_metadata)
+	W.write("survival_box",           pref.survival_box_choice)
 
 	var/decl/starting_cash_choice/cash_choice = GET_DECL(pref.starting_cash_choice)
 	W.write("starting_cash_choice", lowertext(cash_choice.name))
@@ -98,6 +100,10 @@
 	if(!ispath(pref.starting_cash_choice, /decl/starting_cash_choice))
 		pref.starting_cash_choice = global.using_map.default_starting_cash_choice
 
+	decls_repository.get_decls_of_type(/decl/survival_box_option)
+	if(!global.survival_box_choices[pref.survival_box_choice])
+		pref.survival_box_choice = global.survival_box_choices[1]
+
 /datum/category_item/player_setup_item/physical/equipment/content()
 	. = list()
 	. += "<b>Equipment:</b><br>"
@@ -115,6 +121,8 @@
 	for(var/datum/backpack_tweak/bt in pref.backpack.tweaks)
 		. += " <a href='?src=\ref[src];backpack=[pref.backpack.name];tweak=\ref[bt]'>[bt.get_ui_content(get_backpack_metadata(pref.backpack, bt))]</a>"
 	. += "<br>"
+
+	. += "Survival Box Type: <a href='?src=\ref[src];change_survival_box=1'><b>[pref.survival_box_choice]</b></a><br>"
 
 	var/decl/starting_cash_choice/cash_choice = GET_DECL(pref.starting_cash_choice)
 	. += "<br><b>Personal finances:</b><br><a href='?src=\ref[src];change_cash_choice=1'>[capitalize(cash_choice.name)]</a><br>"
@@ -161,6 +169,9 @@
 		if(selected_underwear && CanUseTopic(user))
 			pref.all_underwear[UWC.name] = selected_underwear.name
 		return TOPIC_REFRESH_UPDATE_PREVIEW
+	else if(href_list["change_survival_box"])
+		pref.survival_box_choice = input(user, "Select a survival box alternative.", "Survival Box", pref.survival_box_choice) as null|anything in global.survival_box_choices
+		return TOPIC_REFRESH
 	else if(href_list["underwear"] && href_list["tweak"])
 		var/underwear = href_list["underwear"]
 		if(!(underwear in pref.all_underwear))
