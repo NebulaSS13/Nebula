@@ -19,12 +19,11 @@
 	sort_order = 1
 	var/list/hidden
 	var/list/expanded
-	var/list/tokens = ALL_CULTURAL_TAGS
 
 /datum/category_item/player_setup_item/background/culture/New()
 	hidden = list()
 	expanded = list()
-	for(var/token in tokens)
+	for(var/token in ALL_CULTURAL_TAGS)
 		hidden[token] = TRUE
 		expanded[token] = FALSE
 	..()
@@ -36,7 +35,7 @@
 
 	// Map any non-path tokens (ie. data that has been loaded from a file) to decls.
 	var/list/all_cultural_decls = decls_repository.get_decls_of_subtype(/decl/cultural_info)
-	for(var/token in tokens)
+	for(var/token in ALL_CULTURAL_TAGS)
 		var/entry = pref.cultural_info[token]
 		if(!entry || ispath(entry, /decl/cultural_info))
 			continue
@@ -50,7 +49,7 @@
 
 	// Sanitize and initialize our culture lists, taking data from our map
 	// or other defaults if we haven't got anything loaded for the various tokens.
-	for(var/token in tokens)
+	for(var/token in ALL_CULTURAL_TAGS)
 		var/list/_cultures
 		GET_ALLOWED_VALUES(_cultures, token)
 		if(!LAZYLEN(_cultures))
@@ -71,11 +70,11 @@
 				pref.real_name = check.get_random_name(preference_mob(), pref.gender)
 
 /datum/category_item/player_setup_item/background/culture/load_character(datum/pref_record_reader/R)
-	for(var/token in tokens)
+	for(var/token in ALL_CULTURAL_TAGS)
 		pref.cultural_info[token] = R.read(token)
 
 /datum/category_item/player_setup_item/background/culture/save_character(datum/pref_record_writer/W)
-	for(var/token in tokens)
+	for(var/token in ALL_CULTURAL_TAGS)
 		var/entry = pref.cultural_info[token]
 		if(entry)
 			if(ispath(entry, /decl/cultural_info))
@@ -85,7 +84,7 @@
 
 /datum/category_item/player_setup_item/background/culture/content()
 	. = list()
-	for(var/token in tokens)
+	for(var/token in ALL_CULTURAL_TAGS)
 
 		var/decl/cultural_info/culture = GET_DECL(pref.cultural_info[token])
 
@@ -118,7 +117,7 @@
 
 /datum/category_item/player_setup_item/background/culture/OnTopic(var/href,var/list/href_list, var/mob/user)
 
-	for(var/token in tokens)
+	for(var/token in ALL_CULTURAL_TAGS)
 
 		if(href_list["toggle_verbose_[token]"])
 			hidden[token] = !hidden[token]

@@ -6,7 +6,7 @@
 	for(var/gear_name in global.gear_datums)
 		var/decl/loadout_option/G = global.gear_datums[gear_name]
 
-		if(!G.display_name)
+		if(!G.name)
 			log_unit_test("[G]: Missing display name.")
 			failed = 1
 		else if(isnull(G.cost) || G.cost < 0)

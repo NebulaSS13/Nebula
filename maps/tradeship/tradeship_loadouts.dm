@@ -1,5 +1,5 @@
 /decl/loadout_option/utility/guns
-	display_name = "guns"
+	name = "guns"
 	cost = 4
 	path = /obj/item/gun/projectile
 

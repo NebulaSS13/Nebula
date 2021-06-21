@@ -36,22 +36,22 @@
 	whitelisted = list(SPECIES_AVIAN)
 
 /decl/loadout_option/uniform/avian/smock
-	display_name = "plain smock (Neo-Avian)"
+	name = "plain smock (Neo-Avian)"
 	path = /obj/item/clothing/under/avian_smock
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/avian/smock_worker
-	display_name = "worker's smock (Neo-Avian)"
+	name = "worker's smock (Neo-Avian)"
 	path = /obj/item/clothing/under/avian_smock/worker
 
 /decl/loadout_option/uniform/avian/smock_rainbow
-	display_name = "rainbow smock (Neo-Avian)"
+	name = "rainbow smock (Neo-Avian)"
 	path = /obj/item/clothing/under/avian_smock/rainbow
 
 /decl/loadout_option/uniform/avian/smock_security
-	display_name = "armoured smock (Neo-Avian)"
+	name = "armoured smock (Neo-Avian)"
 	path = /obj/item/clothing/under/avian_smock/security
 
 /decl/loadout_option/uniform/avian/smock_engineering
-	display_name = "hazard smock (Neo-Avian)"
+	name = "hazard smock (Neo-Avian)"
 	path = /obj/item/clothing/under/avian_smock/engineering

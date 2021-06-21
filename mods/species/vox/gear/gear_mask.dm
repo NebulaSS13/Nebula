@@ -1,5 +1,5 @@
 /decl/loadout_option/mask/gas/vox
-	display_name = "vox breathing mask"
+	name = "vox breathing mask"
 	path = /obj/item/clothing/mask/gas/vox
 	whitelisted = list(BODYTYPE_VOX)
 

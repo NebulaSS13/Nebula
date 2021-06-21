@@ -45,12 +45,12 @@ var/global/list/gear_datums = list()
 		return FALSE
 	return TRUE
 
-/decl/loadout_option/proc/can_be_taken_by(var/mob/user)
+/decl/loadout_option/proc/can_be_taken_by(var/mob/user, var/datum/preferences/pref)
 
 	if(!category)
 		return FALSE
 
-	if(!display_name || !(display_name in global.gear_datums))
+	if(!name || !(name in global.gear_datums))
 		return FALSE
 
 	if(whitelisted)
@@ -62,6 +62,15 @@ var/global/list/gear_datums = list()
 				found_species = TRUE
 				break
 		if(!found_species)
+			return FALSE
+
+	if(faction_restricted)
+		var/has_correct_faction = FALSE
+		for(var/token in ALL_CULTURAL_TAGS)
+			if(pref.cultural_info[token] in faction_restricted)
+				has_correct_faction = TRUE
+				break
+		if(!has_correct_faction)
 			return FALSE
 
 	return TRUE
@@ -142,10 +151,13 @@ var/global/list/gear_datums = list()
 		if(category == current_category_decl.type)
 			. += " <span class='linkOn'>[LC.name] - [category_cost]</span> "
 		else
+			var/category_selections
+			if(LC.max_selections < INFINITY)
+				category_selections = " - [LC.max_selections - pref.total_loadout_selections[category]] remaining"
 			if(category_cost)
-				. += " <a href='?src=\ref[src];select_category=[LC.name]'><font color = '#e67300'>[LC.name] - [category_cost]</font></a> "
+				. += " <a href='?src=\ref[src];select_category=[LC.name]'><font color = '#e67300'>[LC.name] - [category_cost][category_selections]</font></a> "
 			else
-				. += " <a href='?src=\ref[src];select_category=[LC.name]'>[LC.name] - 0</a> "
+				. += " <a href='?src=\ref[src];select_category=[LC.name]'>[LC.name] - 0[category_selections]</a> "
 
 	. += "</b></center></td></tr>"
 
@@ -158,12 +170,16 @@ var/global/list/gear_datums = list()
 		if(J)
 			dd_insertObjectList(jobs, J)
 
+	var/mob/user = preference_mob()
 	for(var/gear_name in current_category_decl.gear)
 
 		var/decl/loadout_option/G = current_category_decl.gear[gear_name]
-		var/ticked = (G.display_name in pref.gear_list[pref.gear_slot])
+		if(!G.can_be_taken_by(user, pref))
+			continue
+
+		var/ticked = (G.name in pref.gear_list[pref.gear_slot])
 		var/list/entry = list()
-		entry += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=\ref[G]'>[G.display_name]</a></td>"
+		entry += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=\ref[G]'>[G.name]</a></td>"
 		entry += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		entry += "<td><font size=2>[G.get_description(get_gear_metadata(G,1))]</font>"
 
@@ -240,11 +256,11 @@ var/global/list/gear_datums = list()
 
 /datum/category_item/player_setup_item/loadout/proc/get_gear_metadata(var/decl/loadout_option/G, var/readonly)
 	var/list/gear = pref.gear_list[pref.gear_slot]
-	. = gear[G.display_name]
+	. = gear[G.name]
 	if(!.)
 		. = list()
 		if(!readonly)
-			gear[G.display_name] = .
+			gear[G.name] = .
 
 /datum/category_item/player_setup_item/loadout/proc/get_tweak_metadata(var/decl/loadout_option/G, var/datum/gear_tweak/tweak)
 	var/list/metadata = get_gear_metadata(G)
@@ -260,18 +276,18 @@ var/global/list/gear_datums = list()
 /datum/category_item/player_setup_item/loadout/OnTopic(href, href_list, user)
 	if(href_list["toggle_gear"])
 		var/decl/loadout_option/TG = locate(href_list["toggle_gear"])
-		if(!istype(TG) || global.gear_datums[TG.display_name] != TG)
+		if(!istype(TG) || global.gear_datums[TG.name] != TG)
 			return TOPIC_REFRESH
-		if(TG.display_name in pref.gear_list[pref.gear_slot])
-			pref.gear_list[pref.gear_slot] -= TG.display_name
+		if(TG.name in pref.gear_list[pref.gear_slot])
+			pref.gear_list[pref.gear_slot] -= TG.name
 		else if(TG.can_afford(preference_mob(), pref))
-			pref.gear_list[pref.gear_slot] += TG.display_name
+			pref.gear_list[pref.gear_slot] += TG.name
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	if(href_list["gear"] && href_list["tweak"])
 		var/decl/loadout_option/gear = locate(href_list["gear"])
 		var/datum/gear_tweak/tweak = locate(href_list["tweak"])
-		if(!tweak || !istype(gear) || !(tweak in gear.gear_tweaks) || global.gear_datums[gear.display_name] != gear)
+		if(!tweak || !istype(gear) || !(tweak in gear.gear_tweaks) || global.gear_datums[gear.name] != gear)
 			return TOPIC_NOACTION
 		var/metadata = tweak.get_metadata(user, get_tweak_metadata(gear, tweak))
 		if(!metadata || !CanUseTopic(user))
@@ -313,29 +329,31 @@ var/global/list/gear_datums = list()
 	var/list/gear = list()
 
 /decl/loadout_option
-	var/display_name       //Name/index. Must be unique.
-	var/description        //Description of this gear. If left blank will default to the description of the pathed item.
-	var/path               //Path to item.
-	var/cost = 1           //Number of points used. Items in general cost 1 point, storage/armor/gloves/special use costs 2 points.
-	var/slot               //Slot to equip to.
-	var/list/allowed_roles //Roles that can spawn with this item.
-	var/list/allowed_branches //Service branches that can spawn with it.
-	var/list/allowed_skills //Skills required to spawn with this item.
-	var/whitelisted        //Term to check the whitelist for..
-	var/flags              //Special tweaks in new
-	var/custom_setup_proc                 //Special tweak in New
-	var/list/custom_setup_proc_arguments  //Special tweak in New
-	var/category = /decl/loadout_category
-	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
+	var/name                              // Name/index. Must be unique.
+	var/description                       // Description of this gear. If left blank will default to the description of the pathed item.
+	var/path                              // Path of item.
+	var/cost = 1                          // Number of points used. Items in general cost 1 point, storage/armor/gloves/special use costs 2 points.
+	var/slot                              // Slot to equip to.
+	var/list/allowed_roles                // Roles that can spawn with this item.
+	var/list/allowed_branches             // Service branches that can spawn with it.
+	var/list/allowed_skills               // Skills required to spawn with this item.
+	var/flags                             // Special tweaks in new
+	var/custom_setup_proc                 // Special tweak in New
+	var/list/custom_setup_proc_arguments  // Special tweak in New
+	var/category = /decl/loadout_category // Type to use for categorization and organization.
+	var/list/gear_tweaks = list()         // List of datums which will alter the item after it has been spawned.
+
+	var/list/faction_restricted // List of types of cultural datums that will allow this loadout option.
+	var/whitelisted             // Species name to check the whitelist for.
 
 /decl/loadout_option/Initialize()
 	. = ..()
 
-	if(display_name && (!global.using_map.loadout_blacklist || !(type in global.using_map.loadout_blacklist)))
-		global.gear_datums[display_name] = src
+	if(name && (!global.using_map.loadout_blacklist || !(type in global.using_map.loadout_blacklist)))
+		global.gear_datums[name] = src
 		var/decl/loadout_category/LC = GET_DECL(category)
-		LC.gear[display_name] = src
-		LC.gear = sortTim(LC.gear, /proc/cmp_text_asc)
+		ADD_SORTED(LC.gear, name, /proc/cmp_text_asc)
+		LC.gear[name] = src
 
 	if(FLAGS_EQUALS(flags, GEAR_HAS_TYPE_SELECTION|GEAR_HAS_SUBTYPE_SELECTION))
 		CRASH("May not have both type and subtype selection tweaks")

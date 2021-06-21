@@ -6,11 +6,11 @@
 	slot = slot_glasses_str
 
 /decl/loadout_option/eyes/eyepatch
-	display_name = "eyepatch"
+	name = "eyepatch"
 	path = /obj/item/clothing/glasses/eyepatch
 
 /decl/loadout_option/eyes/glasses
-	display_name = "glasses selection"
+	name = "glasses selection"
 	path = /obj/item/clothing/glasses
 
 /decl/loadout_option/eyes/glasses/get_gear_tweak_options()
@@ -24,7 +24,7 @@
 	)
 
 /decl/loadout_option/eyes/shades
-	display_name = "sunglasses selection"
+	name = "sunglasses selection"
 	path = /obj/item/clothing/glasses/sunglasses
 	cost = 3
 
@@ -37,6 +37,6 @@
 	)
 
 /decl/loadout_option/eyes/blindfold
-	display_name = "blindfold"
+	name = "blindfold"
 	path = /obj/item/clothing/glasses/blindfold
 	flags = GEAR_HAS_COLOR_SELECTION
