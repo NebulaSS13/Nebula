@@ -165,7 +165,13 @@ var/global/list/outfits_decls_by_type_
 				H.equip_to_slot_or_del(backpack, slot_back_str)
 
 	if(H.species && !(OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR & equip_adjustments))
-		H.species.equip_survival_gear(H, flags&OUTFIT_EXTENDED_SURVIVAL)
+		if(H.client?.prefs?.survival_box_choice && global.survival_box_choices[H.client.prefs.survival_box_choice])
+			var/decl/survival_box_option/box = global.survival_box_choices[H.client.prefs.survival_box_choice]
+			H.species.equip_survival_gear(H, box.box_type)
+		else if(flags & OUTFIT_EXTENDED_SURVIVAL)
+			H.species.equip_survival_gear(H, /obj/item/storage/box/engineer)
+		else
+			H.species.equip_survival_gear(H)
 
 /decl/hierarchy/outfit/proc/equip_id(var/mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
 	if(!id_slot || !id_type)
