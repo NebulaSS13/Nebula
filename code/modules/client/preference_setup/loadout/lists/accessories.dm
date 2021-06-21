@@ -55,34 +55,8 @@
 	path = /obj/item/clothing/accessory/bowtie/color
 	flags = GEAR_HAS_COLOR_SELECTION
 
-//have to break up armbands to restrict access
-/decl/loadout_option/accessory/armband_security
-	display_name = "security armband"
-	path = /obj/item/clothing/accessory/armband
-
-/decl/loadout_option/accessory/armband_cargo
-	display_name = "cargo armband"
-	path = /obj/item/clothing/accessory/armband/cargo
-
-/decl/loadout_option/accessory/armband_medical
-	display_name = "medical armband"
-	path = /obj/item/clothing/accessory/armband/med
-
-/decl/loadout_option/accessory/armband_engineering
-	display_name = "engineering armband"
-	path = /obj/item/clothing/accessory/armband/engine
-
-/decl/loadout_option/accessory/ftupin
-	display_name = "Free Trade Union pin"
-	path = /obj/item/clothing/accessory/ftupin
-
 /decl/loadout_option/accessory/bracelet
 	display_name = "bracelet, color select"
 	path = /obj/item/clothing/accessory/bracelet
 	cost = 1
 	flags = GEAR_HAS_COLOR_SELECTION
-
-/decl/loadout_option/accessory/tags
-	display_name = "dog tags"
-	path = /obj/item/clothing/accessory/badge/tags
-	custom_setup_proc = /obj/item/clothing/accessory/badge/tags/proc/loadout_setup

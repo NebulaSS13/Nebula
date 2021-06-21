@@ -11,22 +11,6 @@
 	cost = 1
 	flags = GEAR_HAS_TYPE_SELECTION
 
-/decl/loadout_option/suit/security_poncho
-	display_name = "poncho, security"
-	path = /obj/item/clothing/suit/poncho/roles/security
-
-/decl/loadout_option/suit/medical_poncho
-	display_name = "poncho, medical"
-	path = /obj/item/clothing/suit/poncho/roles/medical
-
-/decl/loadout_option/suit/engineering_poncho
-	display_name = "poncho, engineering"
-	path = /obj/item/clothing/suit/poncho/roles/engineering
-
-/decl/loadout_option/suit/cargo_poncho
-	display_name = "poncho, supply"
-	path = /obj/item/clothing/suit/poncho/roles/cargo
-
 /decl/loadout_option/suit/suit_jacket
 	display_name = "standard suit jackets"
 	path = /obj/item/clothing/suit/storage/toggle/suit
@@ -45,24 +29,10 @@
 	path = /obj/item/clothing/suit/storage/toggle/suit
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/decl/loadout_option/suit/hazard
-	display_name = "hazard vests"
-	path = /obj/item/clothing/suit/storage/hazardvest
-	flags = GEAR_HAS_TYPE_SELECTION
-
 /decl/loadout_option/suit/hoodie
 	display_name = "hoodie, colour select"
 	path = /obj/item/clothing/suit/storage/hooded/hoodie
 	flags = GEAR_HAS_COLOR_SELECTION
-
-/decl/loadout_option/suit/labcoat
-	display_name = "labcoat, colour select"
-	path = /obj/item/clothing/suit/storage/toggle/labcoat
-	flags = GEAR_HAS_COLOR_SELECTION
-
-/decl/loadout_option/suit/labcoat_blue
-	display_name = "blue trimmed labcoat"
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/blue
 
 /decl/loadout_option/suit/coat
 	display_name = "coat, colour select"
@@ -100,19 +70,6 @@
 	display_name = "apron, overalls"
 	path = /obj/item/clothing/suit/apron/overalls
 	cost = 1
-
-/decl/loadout_option/suit/medcoat
-	display_name = "medical suit selection"
-	path = /obj/item/clothing/suit
-
-/decl/loadout_option/suit/medcoat/get_gear_tweak_options()
-	. = ..()
-	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
-	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/suit/storage/toggle/fr_jacket, 
-		/obj/item/clothing/suit/storage/toggle/fr_jacket/ems, 
-		/obj/item/clothing/suit/surgicalapron
-	)
 
 /decl/loadout_option/suit/trenchcoat
 	display_name = "trenchcoat selection"

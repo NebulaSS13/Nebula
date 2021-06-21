@@ -48,54 +48,28 @@
 	display_name = "film roll"
 	path = /obj/item/camera_film
 
-/decl/loadout_option/accessory/stethoscope
-	display_name = "stethoscope (medical)"
-	path = /obj/item/clothing/accessory/stethoscope
-	cost = 2
-
 /decl/loadout_option/utility/pen
-	display_name = "Multicolored Pen"
+	display_name = "multicolored pen"
 	path = /obj/item/pen/multi
 	cost = 2
 
 /decl/loadout_option/utility/fancy
-	display_name = "Fancy Pen"
+	display_name = "fancy pen"
 	path = /obj/item/pen/fancy
 	cost = 2
 
-/decl/loadout_option/utility/hand_labeler
-	display_name = "hand labeler"
-	path = /obj/item/hand_labeler
-	cost = 3
+/decl/loadout_option/utility/knives
+	display_name = "utility knife selection"
+	description = "A selection of knives."
+	path = /obj/item/knife
 
-/****************
-modular computers
-****************/
-
-/decl/loadout_option/utility/cheaptablet
-	display_name = "tablet computer, cheap"
-	path = /obj/item/modular_computer/tablet/preset/custom_loadout/cheap
-	cost = 3
-
-/decl/loadout_option/utility/normaltablet
-	display_name = "tablet computer, advanced"
-	path = /obj/item/modular_computer/tablet/preset/custom_loadout/advanced
-	cost = 4
-
-/decl/loadout_option/utility/customtablet
-	display_name = "tablet computer, custom"
-	path = /obj/item/modular_computer/tablet
-	cost = 4
-
-/decl/loadout_option/utility/customtablet/get_gear_tweak_options()
-	. = ..() | /datum/gear_tweak/tablet
-
-/decl/loadout_option/utility/cheaplaptop
-	display_name = "laptop computer, cheap"
-	path = /obj/item/modular_computer/laptop/preset/custom_loadout/cheap
-	cost = 5
-
-/decl/loadout_option/utility/normallaptop
-	display_name = "laptop computer, advanced"
-	path = /obj/item/modular_computer/laptop/preset/custom_loadout/advanced
-	cost = 6
+/decl/loadout_option/utility/knives/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path])
+	.[/datum/gear_tweak/path] |= list(
+		"folding knife" =             /obj/item/knife/folding,
+		"peasant folding knife" =     /obj/item/knife/folding/wood,
+		"tactical folding knife" =    /obj/item/knife/folding/tacticool,
+		"utility knife" =             /obj/item/knife/utility,
+		"lightweight utility knife" = /obj/item/knife/utility/lightweight
+	)

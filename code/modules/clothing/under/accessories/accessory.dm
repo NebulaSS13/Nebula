@@ -119,9 +119,3 @@
 	name = "bracelet"
 	desc = "A simple bracelet with a clasp."
 	icon = 'icons/clothing/accessories/jewelry/bracelet.dmi'
-
-/obj/item/clothing/accessory/ftupin
-	name = "\improper Free Trade Union pin"
-	desc = "A pin denoting employment in the Free Trade Union, a trading company."
-	icon = 'icons/clothing/accessories/jewelry/ftupin.dmi'
-	high_visibility = 1
