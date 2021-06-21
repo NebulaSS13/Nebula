@@ -11,6 +11,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 		if(TC.base_type == type)
 			continue
 		global.topic_commands[TC.name] = TC
+	return TRUE
 
 /// Returns a truthy value if we CANNOT use this command.
 /decl/topic_command/proc/can_use(var/T, var/addr, var/master, var/key)
