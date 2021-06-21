@@ -19,10 +19,6 @@
 	display_name = "black jumpsuit shorts"
 	path = /obj/item/clothing/under/color/blackjumpshorts
 
-/decl/loadout_option/uniform/roboticist_skirt
-	display_name = "skirt, roboticist"
-	path = /obj/item/clothing/under/roboticist/skirt
-
 /decl/loadout_option/uniform/suit
 	display_name = "clothes selection"
 	path = /obj/item/clothing/under
@@ -58,15 +54,6 @@
 		/obj/item/clothing/under/det/black,
 		/obj/item/clothing/under/det/grey
 	)
-
-/decl/loadout_option/uniform/scrubs
-	display_name = "standard medical scrubs"
-	path = /obj/item/clothing/under/medical/scrubs
-	flags = GEAR_HAS_TYPE_SELECTION
-
-/decl/loadout_option/uniform/scrubs/custom
-	display_name = "scrubs, colour select"
-	flags = GEAR_HAS_COLOR_SELECTION
 
 /decl/loadout_option/uniform/dress
 	display_name = "dress selection"
@@ -144,14 +131,6 @@
 	display_name = "kimono, colour select"
 	path = /obj/item/clothing/under/kimono
 	flags = GEAR_HAS_COLOR_SELECTION
-
-/decl/loadout_option/uniform/sterile
-	display_name = "sterile jumpsuit"
-	path = /obj/item/clothing/under/sterile
-
-/decl/loadout_option/uniform/hazard
-	display_name = "hazard jumpsuit"
-	path = /obj/item/clothing/under/hazard
 
 /decl/loadout_option/uniform/frontier
 	display_name = "frontier clothes"

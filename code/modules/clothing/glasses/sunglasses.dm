@@ -3,7 +3,7 @@
 	desc = "Glasses with treated lenses to prevent glare. They provide some rudamentary protection from dazzling attacks."
 	icon = 'icons/clothing/eyes/sunglasses.dmi'
 	darkness_view = -1
-	flash_protection = FLASH_PROTECTION_MINOR
+	flash_protection = FLASH_PROTECTION_NONE
 
 /obj/item/clothing/glasses/sunglasses/prescription
 	name = "prescription sunglasses"
@@ -13,7 +13,6 @@
 	name = "thick sunglasses"
 	desc = "Glasses with treated lenses to prevent glare. The thick, wide lenses protect against a variety of flash attacks."
 	icon = 'icons/clothing/eyes/sunglasses_big.dmi'
-	flash_protection = FLASH_PROTECTION_MODERATE
 
 /obj/item/clothing/glasses/sunglasses/sechud
 	name = "HUD sunglasses"

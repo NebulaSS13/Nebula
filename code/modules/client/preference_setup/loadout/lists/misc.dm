@@ -2,16 +2,6 @@
 	display_name = "cane"
 	path = /obj/item/cane
 
-/decl/loadout_option/union_card
-	display_name = "union membership"
-	path = /obj/item/card/union
-
-/decl/loadout_option/union_card/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
-	. = ..()
-	if(.)
-		var/obj/item/card/union/card = .
-		card.signed_by = H.real_name
-
 /decl/loadout_option/dice
 	display_name = "dice pack"
 	path = /obj/item/storage/pill_bottle/dice
@@ -63,43 +53,6 @@
 	path = /obj/item/chems/food/drinks/glass2/coffeecup
 	flags = GEAR_HAS_TYPE_SELECTION
 
-/decl/loadout_option/knives
-	display_name = "knives selection"
-	description = "A selection of knives."
-	path = /obj/item/knife
-
-/decl/loadout_option/knives/get_gear_tweak_options()
-	. = ..()
-	LAZYINITLIST(.[/datum/gear_tweak/path])
-	.[/datum/gear_tweak/path] |= list(
-		"folding knife" =             /obj/item/knife/folding,
-		"peasant folding knife" =     /obj/item/knife/folding/wood,
-		"tactical folding knife" =    /obj/item/knife/folding/tacticool,
-		"utility knife" =             /obj/item/knife/utility,
-		"lightweight utility knife" = /obj/item/knife/utility/lightweight
-	)
-
-/decl/loadout_option/lunchbox
-	display_name = "lunchbox"
-	description = "A little lunchbox."
-	cost = 2
-	path = /obj/item/storage/lunchbox
-
-/decl/loadout_option/lunchbox/get_gear_tweak_options()
-	. = ..()
-	var/list/lunchboxes = list()
-	for(var/lunchbox_type in typesof(/obj/item/storage/lunchbox))
-		var/obj/item/storage/lunchbox/lunchbox = lunchbox_type
-		if(!initial(lunchbox.filled))
-			lunchboxes[initial(lunchbox.name)] = lunchbox_type
-	LAZYINITLIST(.[/datum/gear_tweak/path])
-	.[/datum/gear_tweak/path] |= lunchboxes
-
-/decl/loadout_option/lunchbox/Initialize()
-	. = ..()
-	// This one won't accept a list() without refactoring so just leaving the direct insertion alone.
-	gear_tweaks += new /datum/gear_tweak/contents(lunchables_lunches(), lunchables_snacks(), lunchables_drinks())
-
 /decl/loadout_option/towel
 	display_name = "towel"
 	path = /obj/item/towel
@@ -119,11 +72,6 @@
 		"lizard plush" = /obj/item/toy/plushie/lizard,
 		"spider plush" = /obj/item/toy/plushie/spider
 	)
-
-/decl/loadout_option/passport
-	display_name = "passport"
-	path = /obj/item/passport
-	custom_setup_proc = /obj/item/passport/proc/set_info
 
 /decl/loadout_option/mirror
 	display_name = "handheld mirror"
@@ -172,42 +120,9 @@
 		"pink" =   /obj/item/flame/lighter/pink
 	)
 
-/decl/loadout_option/zippo
-	display_name = "zippo"
-	path = /obj/item/flame/lighter/zippo
-
-/decl/loadout_option/zippo/get_gear_tweak_options()
-	. = ..()
-	LAZYINITLIST(.[/datum/gear_tweak/path])
-	.[/datum/gear_tweak/path] |= list(
-		"random" =    /obj/item/flame/lighter/zippo/random,
-		"silver" =    /obj/item/flame/lighter/zippo,
-		"blackened" = /obj/item/flame/lighter/zippo/black,
-		"gunmetal" =  /obj/item/flame/lighter/zippo/gunmetal,
-		"bronze" =    /obj/item/flame/lighter/zippo/bronze,
-		"pink" =      /obj/item/flame/lighter/zippo/pink
-	)
-
 /decl/loadout_option/ashtray
 	display_name = "ashtray, plastic"
 	path = /obj/item/ashtray/plastic
-
-/decl/loadout_option/cigars
-	display_name = "fancy cigar case"
-	path = /obj/item/storage/fancy/cigar
-	cost = 2
-
-/decl/loadout_option/cigar
-	display_name = "fancy cigar"
-	path = /obj/item/clothing/mask/smokable/cigarette/cigar
-
-/decl/loadout_option/cigar/get_gear_tweak_options()
-	. = ..()
-	LAZYINITLIST(.[/datum/gear_tweak/path])
-	.[/datum/gear_tweak/path] |= list(
-		"premium" =        /obj/item/clothing/mask/smokable/cigarette/cigar,
-		"Cohiba Robusto" = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
-	)
 
 /decl/loadout_option/ecig
 	display_name = "electronic cigarette"
@@ -235,13 +150,6 @@
 		"Kojiki" =             /obj/item/storage/bible/kojiki
 	)
 
-/decl/loadout_option/swiss
-	display_name = "multi-tool"
-	path = /obj/item/knife/folding/swiss
-	cost = 4
-	flags = GEAR_HAS_COLOR_SELECTION
-
-
 /decl/loadout_option/cross
 	display_name = "cross"
 	path = /obj/item/cross
@@ -255,3 +163,20 @@
 		"cross, silver" = /obj/item/cross/silver,
 		"cross, gold" =   /obj/item/cross/gold
 	)
+
+/decl/loadout_option/wallet
+	display_name = "wallet, colour select"
+	path = /obj/item/storage/wallet
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/decl/loadout_option/wallet_poly
+	display_name = "wallet, polychromic"
+	path = /obj/item/storage/wallet/poly
+	cost = 2
+
+
+/decl/loadout_option/swiss
+	display_name = "multi-tool"
+	path = /obj/item/knife/folding/swiss
+	cost = 4
+	flags = GEAR_HAS_COLOR_SELECTION
