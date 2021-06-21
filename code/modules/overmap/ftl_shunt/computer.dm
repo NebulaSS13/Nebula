@@ -3,7 +3,7 @@
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
 	light_color = "#77fff8"
-	var/obj/machinery/power/ftl_shunt/core/linked_core
+	var/obj/machinery/ftl_shunt/core/linked_core
 	var/cost = 0
 	var/plotting_jump = FALSE
 	var/jump_plot_timer
@@ -64,7 +64,7 @@
 		if(linked_core.moderate_jump_distance to INFINITY)
 			plot_delay_mult = 2
 
-	delay = (jump_dist * BASE_PLOT_TIME_PER_TILE) * plot_delay_mult
+	delay = clamp(((jump_dist * BASE_PLOT_TIME_PER_TILE) * plot_delay_mult),1, INFINITY)
 	jump_plot_timer = addtimer(CALLBACK(src, .proc/finish_plot, x, y), delay, TIMER_STOPPABLE)
 	plotting_jump = TRUE
 	jump_plotted = FALSE
@@ -87,7 +87,7 @@
 		linked_core.ftl_computer = null
 		linked_core = null
 
-	for(var/obj/machinery/power/ftl_shunt/core/C in SSmachines.machinery)
+	for(var/obj/machinery/ftl_shunt/core/C in SSmachines.machinery)
 		if(C.z in linked.map_z)
 			linked_core = C
 			C.ftl_computer = src
@@ -148,7 +148,7 @@
 			return TOPIC_NOACTION
 		if(plotting_jump)
 			to_chat(user, SPAN_WARNING("Unable to alter programmed coordinates: Plotting in progress."))
-			return TOPIC_NOACTION
+			return TOPIC_REFRESH
 
 		var/input_x = to_plot_x
 		var/input_y = to_plot_x
@@ -227,7 +227,7 @@
 		if(!CanInteract(user, state))
 			return TOPIC_NOACTION
 
-		input_power = input_power * 1000
+		input_power = input_power KILOWATTS
 		linked_core.allowed_power_usage = clamp(input_power, 0, linked_core.max_power_usage)
 		return TOPIC_REFRESH
 
@@ -240,7 +240,7 @@
 		if(!CanInteract(user, state))
 			return TOPIC_NOACTION
 
-		target_joules = target_joules * 1000
+		target_joules = target_joules KILOWATTS
 		linked_core.target_charge = clamp(target_joules, 0, linked_core.max_charge)
 		return TOPIC_REFRESH
 

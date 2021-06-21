@@ -127,7 +127,7 @@
 	if(!istype(sector))
 		return
 
-	for(var/obj/machinery/power/ftl_shunt/core/C in SSmachines.machinery)
+	for(var/obj/machinery/ftl_shunt/core/C in SSmachines.machinery)
 		if(C.z in sector.map_z)
 			if(C.get_status() != 2) //magic number because defines are lower than this file.
 				return TRUE
