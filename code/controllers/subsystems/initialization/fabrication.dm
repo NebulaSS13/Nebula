@@ -46,7 +46,6 @@ SUBSYSTEM_DEF(fabrication)
 	crafting_recipes_to_init.Cut()
 
 	post_recipe_init = TRUE
-	init_rpd_lists()
 
 	. = ..()
 
