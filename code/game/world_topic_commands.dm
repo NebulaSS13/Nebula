@@ -68,11 +68,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 	name = "players"
 
 /decl/topic_command/players/use()
-	var/n = 0
-	for(var/mob/M in global.player_list)
-		if(M.client)
-			n++
-	return n
+	return global.clients.len
 
 /decl/topic_command/status
 	name = "status"
