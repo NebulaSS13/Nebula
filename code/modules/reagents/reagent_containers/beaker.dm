@@ -48,6 +48,13 @@
 	if(!ATOM_IS_OPEN_CONTAINER(src))
 		overlays += mutable_appearance(icon, "[icon_state]_lid")
 
+/obj/item/chems/glass/beaker/throw_impact(atom/hit_atom)
+	. = ..()
+	if(ATOM_IS_OPEN_CONTAINER(src))
+		reagents.splash(hit_atom, rand(reagents.total_volume*0.25,reagents.total_volume), min_spill = 60, max_spill = 100)
+	health -= rand(4,8)
+	check_health()
+
 /obj/item/chems/glass/beaker/large
 	name = "large beaker"
 	desc = "A large beaker."
@@ -113,6 +120,10 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = @"[5,10,15,30]"
 	material_force_multiplier = 0.1
+
+/obj/item/chems/glass/beaker/vial/throw_impact(atom/hit_atom)
+	. = ..()
+	shatter()
 
 /obj/item/chems/glass/beaker/insulated
 	name = "insulated beaker"
