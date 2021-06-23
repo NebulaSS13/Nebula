@@ -12,6 +12,7 @@ var/global/const/PREF_FANCY = "Fancy"
 var/global/const/PREF_PLAIN = "Plain"
 var/global/const/PREF_PRIMARY = "Primary"
 var/global/const/PREF_ALL = "All"
+var/global/const/PREF_ON = "On"
 var/global/const/PREF_OFF = "Off"
 var/global/const/PREF_BASIC = "Basic"
 var/global/const/PREF_FULL = "Full"
@@ -272,6 +273,11 @@ var/global/list/_client_preferences_by_type
 	description = "Show turf contents in side panel"
 	key = "TURF_CONTENTS"
 	options = list(PREF_ALT_CLICK, PREF_DOUBLE_CLICK, PREF_OFF)
+
+/datum/client_preference/inquisitive_examine
+	description = "Show additional information in atom examine (codex, etc)"
+	key = "INQUISITIVE_EXAMINE"
+	options = list(PREF_ON, PREF_OFF)
 
 /********************
 * General Staff Preferences *
