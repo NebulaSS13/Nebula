@@ -17,6 +17,17 @@
 	min_duration = 150
 	max_duration = 170
 
+/decl/surgery_step/necrotic/tissue/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
+	. = ..()
+	if(.)
+		var/obj/item/organ/external/affected = .
+		if(affected.status & ORGAN_DEAD && affected.germ_level > INFECTION_LEVEL_ONE)
+			return TRUE
+		for(var/obj/item/organ/O in affected.internal_organs)
+			if(O.status & ORGAN_DEAD && O.germ_level > INFECTION_LEVEL_ONE)
+				return TRUE
+		return FALSE
+	
 /decl/surgery_step/necrotic/tissue/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/list/dead_organs
 	var/obj/item/organ/E = target.get_organ(target_zone)
@@ -82,6 +93,17 @@
 		/obj/item/chems/food/drinks/glass2 = 75,
 		/obj/item/chems/glass/bucket = 50
 	)
+
+/decl/surgery_step/necrotic/regeneration/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
+	. = ..()
+	if(.)
+		var/obj/item/organ/external/affected = .
+		if(affected.status & ORGAN_DEAD)
+			return TRUE
+		for(var/obj/item/organ/O in affected.internal_organs)
+			if(O.status & ORGAN_DEAD)
+				return TRUE
+		return FALSE
 
 /decl/surgery_step/necrotic/regeneration/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/chems/C = tool
