@@ -57,7 +57,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/proc/get_thrust_limit()
 	for(var/datum/extension/ship_engine/E in engines)
-		if(E.thrust_limit > 0 && E.thrust_limit < .)
+		if(E.thrust_limit > .)
 			. = E.thrust_limit
 
 
