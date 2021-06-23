@@ -70,7 +70,7 @@
 	name = "electrician toolbox"
 	desc = "A box full of boxes, with electrical machinery parts and tools needed to get them where they're needed."
 	icon_state = "yellow_striped"
-	item_state = "yellow"
+	item_state = "toolbox_yellow"
 	startswith = list(
 		/obj/item/stack/cable_coil,
 		/obj/item/screwdriver, 
