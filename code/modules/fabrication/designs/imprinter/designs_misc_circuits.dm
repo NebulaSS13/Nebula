@@ -239,6 +239,9 @@
 /datum/fabricator_recipe/imprinter/circuit/helms
 	path = /obj/item/stock_parts/circuitboard/helm
 
+/datum/fabricator_recipe/imprinter/circuit/ftl
+	path = /obj/item/stock_parts/circuitboard/ftl
+
 /datum/fabricator_recipe/imprinter/circuit/nav
 	path = /obj/item/stock_parts/circuitboard/nav
 
@@ -442,6 +445,9 @@
 
 /datum/fabricator_recipe/imprinter/circuit/relay
 	path = /obj/item/stock_parts/circuitboard/relay
+
+/datum/fabricator_recipe/imprinter/circuit/relay_wall_mounted
+	path = /obj/item/stock_parts/circuitboard/relay/wall_mounted
 
 /datum/fabricator_recipe/imprinter/circuit/inertial_damper
 	path = /obj/item/stock_parts/circuitboard/inertial_damper
