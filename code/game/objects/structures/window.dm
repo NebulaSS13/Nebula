@@ -110,6 +110,8 @@
 /obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
+	if(air_group && !anchored)
+		return 1
 	if(is_fulltile())
 		return 0	//full tile window, you can't move into it!
 	if(get_dir(loc, target) & dir)
