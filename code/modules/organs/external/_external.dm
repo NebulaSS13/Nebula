@@ -1477,7 +1477,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		owner.bad_external_organs |= src
 
 /obj/item/organ/external/die() //External organs dying on a dime causes some real issues in combat
-	if(!BP_IS_PROSTHETIC(src) || !BP_IS_CRYSTAL(src))
+	if(!BP_IS_PROSTHETIC(src) && !BP_IS_CRYSTAL(src))
 		var/decay_rate = damage/(max_damage*2)
 		germ_level += round(rand(decay_rate,decay_rate*1.5)) //So instead, we're going to say the damage is so severe its functions are slowly failing due to the extensive damage
 	else //TODO: more advanced system for synths
