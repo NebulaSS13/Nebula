@@ -18,12 +18,7 @@
 	var/neighbor_status = 0
 
 /obj/structure/railing/mapped
-	color = COLOR_GUNMETAL
 	anchored = TRUE
-
-/obj/structure/railing/mapped/Initialize()
-	. = ..()
-	color = COLOR_GUNMETAL // They're not painted!
 
 /obj/structure/railing/mapped/no_density
 	density = 0
@@ -56,6 +51,11 @@
 		desc = "A simple [material.solid_name] railing designed to protect against careless trespass."
 	else
 		..()
+
+/obj/structure/railing/update_materials(keep_health)
+	. = ..()
+	color = material.color
+	alpha = Clamp((50 + material.opacity * 255), 0, 255)
 
 /obj/structure/railing/Destroy()
 	anchored = FALSE
