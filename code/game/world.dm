@@ -119,6 +119,8 @@ var/global/world_topic_last = world.timeofday
 	set_throttle(addr, 3 SECONDS, null)
 
 	var/list/params = params2list(T)
+	if(!params)
+		return
 	var/command_key = params[1]
 	if(!command_key || !global.topic_commands[command_key])
 		return "Unrecognised Command"
