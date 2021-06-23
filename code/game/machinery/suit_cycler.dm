@@ -73,12 +73,12 @@
 		LAZYADD(new_overlays, helmet.get_mob_overlay(null, slot_head_str))
 	if(occupant)
 		LAZYADD(new_overlays, image(occupant))
-	LAZYADD(new_overlays, image(icon, "overbase"))
+	LAZYADD(new_overlays, image(icon, "overbase", layer = ABOVE_HUMAN_LAYER))
 
 	if(locked || active)
-		LAZYADD(new_overlays, image(icon, "closed"))
+		LAZYADD(new_overlays, image(icon, "closed", layer = ABOVE_HUMAN_LAYER))
 	else
-		LAZYADD(new_overlays, image(icon, "open"))
+		LAZYADD(new_overlays, image(icon, "open", layer = ABOVE_HUMAN_LAYER))
 
 	if(irradiating)
 		LAZYADD(new_overlays, image(icon, "light_radiation"))
@@ -115,7 +115,10 @@
 	update_icon()
 
 /obj/machinery/suit_cycler/Destroy()
-	DROP_NULL(occupant)
+	if(occupant)
+		occupant.dropInto(loc)
+		occupant.reset_view()
+		occupant = null
 	DROP_NULL(suit)
 	DROP_NULL(helmet)
 	DROP_NULL(boots)
@@ -142,12 +145,11 @@
 	if(do_after(user, 20, src))
 		if(!istype(target) || locked || suit || helmet || !target.Adjacent(user) || !user.Adjacent(src) || user.incapacitated())
 			return FALSE
-		if (target.client)
-			target.client.perspective = EYE_PERSPECTIVE
-			target.client.eye = src
+		target.reset_view(src)
 		target.forceMove(src)
 		occupant = target
 		add_fingerprint(user)
+		update_icon()
 		return TRUE
 	return FALSE
 
@@ -443,10 +445,11 @@
 	if (!occupant)
 		return
 
-	occupant.reset_view()
 	occupant.dropInto(loc)
+	occupant.reset_view()
 	occupant = null
 
+	update_icon()
 	add_fingerprint(user)
 	updateUsrDialog()
 
