@@ -64,9 +64,10 @@
 	find_ports()
 	set_light(2)
 	target_charge = max_charge * 0.25 //Target charge set to a quarter of our maximum charge, just for weirdness prevention
-	var/obj/item/stock_parts/power/terminal/term = get_component_of_type(/obj/item/stock_parts/power/terminal)
-	if(!term.terminal)
-		term.make_terminal(src)
+	if(populate_parts)
+		var/obj/item/stock_parts/power/terminal/term = get_component_of_type(/obj/item/stock_parts/power/terminal)
+		if(!term.terminal)
+			term.make_terminal(src)
 
 /obj/machinery/ftl_shunt/core/modify_mapped_vars(map_hash)
 	..()
@@ -522,7 +523,7 @@
 
 	var/obj/item/stock_parts/power/terminal/term = get_component_of_type(/obj/item/stock_parts/power/terminal)
 
-	var/drawn_charge = term.terminal.draw_power(input)
+	var/drawn_charge = use_power_oneoff(input)
 	last_power_drawn = drawn_charge
 	accumulated_charge += drawn_charge * CELLRATE
 	
