@@ -249,7 +249,7 @@ var/global/list/gamemode_cache = list()
 	var/max_client_view_x
 	var/max_client_view_y
 
-	var/throttle_immune_localhost
+	var/no_throttle_localhost
 
 	var/static/list/protected_vars = list(
 		"comms_password",
@@ -803,8 +803,8 @@ var/global/list/gamemode_cache = list()
 				if("panic_bunker_message")
 					config.panic_bunker_message = value
 
-				if("throttle_immune_localhost")
-					config.throttle_immune_localhost = TRUE
+				if("no_throttle_localhost")
+					config.no_throttle_localhost = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

@@ -103,7 +103,7 @@ var/global/world_topic_last = world.timeofday
 	var/list/throttle = global.world_topic_throttle[addr]
 	if (!global.world_topic_throttle[addr])
 		global.world_topic_throttle[addr] = throttle = list(0, null)
-	else if ((!config.throttle_immune_localhost || !global.localhost_addresses[addr]) && throttle[1] && throttle[1] > world.timeofday + 15 SECONDS)
+	else if ((!config.no_throttle_localhost || !global.localhost_addresses[addr]) && throttle[1] && throttle[1] > world.timeofday + 15 SECONDS)
 		return throttle[2] ? "Throttled ([throttle[2]])" : "Throttled"
 
 	throttle[1] = max(throttle[1], world.timeofday) + time
