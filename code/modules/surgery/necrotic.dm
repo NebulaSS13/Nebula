@@ -51,14 +51,17 @@
 
 /decl/surgery_step/necrotic/tissue/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] slowly starts removing necrotic tissue from [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].", \
-	"You slowly start removing necrotic tissue from [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].")
+	var/target_organ = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
+	user.visible_message("\The [user] slowly starts removing necrotic tissue from \the [target]'s [target_organ] with \the [tool].", \
+	"You slowly start removing necrotic tissue from \the [target]'s [target_organ)] with \the [tool].")
 	target.custom_pain("You feel sporadic spikes of pain from points around your [affected.name]!",20, affecting = affected)
 	..()
 
 /decl/surgery_step/necrotic/tissue/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	user.visible_message("<span class='notice'>[user] has excised the necrotic issue from [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>", \
-	"<span class='notice'>You have excised the necrotic issue from [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
+	var/target_organ = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] has excised the necrotic tissue from \the [target]'s [target_organ] with \the [tool]."), \
+		SPAN_NOTICE("You have excised the necrotic tissue from \the [target]'s [target_organ] with \the [tool]."))
 	playsound(target.loc, 'sound/weapons/bladeslice.ogg', 15, 1)
 
 	var/obj/item/organ/O = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
@@ -71,8 +74,9 @@
 
 /decl/surgery_step/necrotic/tissue/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='warning'>[user]'s hand slips, slicing into a healthy portion of \the [target]'s [affected.name] with \the [tool]!</span>", \
-	"<span class='warning'>Your hand slips, slicing into a healthy portion of [target]'s [affected.name] with \the [tool]!</span>")
+	user.visible_message(
+		SPAN_DANGER("\The [user]'s hand slips, slicing into a healthy portion of \the [target]'s [affected.name] with \the [tool]!"), \
+		SPAN_DANGER("Your hand slips, slicing into a healthy portion of [target]'s [affected.name] with \the [tool]!"))
 	affected.take_external_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
@@ -153,8 +157,10 @@
 	temp_reagents.trans_to_mob(target, temp_reagents.total_volume, CHEM_INJECT) //And if there was something else, toss it in
 
 	if (usable_amount > 1)
-		user.visible_message("<span class='notice'>[user] regenerates [target]'s [O] down with \the [tool]'s contents</span>.", \
-			"<span class='notice'>You regenerate [target]'s [O] down with \the [tool]'s contents.</span>")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] finishes applying \the [tool]'s contents to \the [target]'s [O.name]."), \
+			SPAN_NOTICE("You treat \the [target]'s [O.name] with \the [tool]'s contents."))
+
 		O &= ~ORGAN_DEAD
 		O.heal_damage(O.max_damage * (0.75 * (usable_amount / 5))) //Assuming they're using a dropper and completely pure chems, put the organ back to a working point
 	else
@@ -163,14 +169,11 @@
 	qdel(temp_holder)
 
 /decl/surgery_step/necrotic/regeneration/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/organ/affected = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)) || target.get_internal_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
-
-	if (!istype(tool, /obj/item/chems))
+	if(!istype(tool) || !tool.reagents)
 		return
-
 	var/obj/item/chems/container = tool
-
-	container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_INJECT)
-
-	user.visible_message("<span class='warning'>[user]'s hand slips, spilling \the [tool]'s contents over the [target]'s [affected]!</span>" , \
-	"<span class='warning'>Your hand slips, spilling \the [tool]'s contents over the [target]'s [affected]!</span>")
+	var/obj/item/organ/affected = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)) || target.get_internal_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
+	tool.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_INJECT)
+	user.visible_message(
+		SPAN_DANGER("\The [user]'s hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!") , \
+		SPAN_DANGER("Your hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!"))
