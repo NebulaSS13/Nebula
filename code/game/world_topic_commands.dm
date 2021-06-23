@@ -1,7 +1,7 @@
 var/global/list/decl/topic_command/topic_commands = list()
 
 /decl/topic_command
-	var/name = "topiccommand"
+	var/name
 	var/has_params = FALSE
 	var/base_type = /decl/topic_command
 
@@ -13,7 +13,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 		global.topic_commands[TC.name] = TC
 	return TRUE
 
-/// Returns a truthy value if we CANNOT use this command.
+/// Returns TRUE if we can use this command, and FALSE otherwise
 /decl/topic_command/proc/can_use(var/T, var/addr, var/master, var/key)
 	if(base_type == type) // this is an abstract type
 		return FALSE
@@ -82,7 +82,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 	s["enter"] = config.enter_allowed
 	s["vote"] = config.allow_vote_mode
 	s["ai"] = !!length(empty_playable_ai_cores)
-	s["host"] = host ? host : null
+	s["host"] = host || null
 
 	// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
 	s["players"] = 0
