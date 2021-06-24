@@ -1,0 +1,35 @@
+<script>
+	function getByondTime() {
+		return (new Date() - new Date("January 1 2000 0z"))/100; // time since 0z today, in deciseconds
+	}
+</script>
+{{if data.on}}
+	{{if getByondTime() > (data.start_time + data.cook_time/2)}}
+		{{if !ingredientsPresent()}}
+			<p>There's nothing inside. Microwave's working, though!</p>
+		{{else data.failed}}
+			<p>Something doesn't look right...</p>
+		{{else}}
+			<p>It's cooking nicely!</p>
+		{{/if}}
+	{{else}}
+		<p>It's starting to cook...</p>
+	{{/if}}
+	{{:helper.displayBar(getByondTime(), data.start_time, data.start_time + data.cook_time, 'good')}}
+	{{:helper.link("Abort!", 'cancel', {'abort': 1}, null, 'fixedLeftWiderRed')}}
+{{else}}
+	<h4>Ingredients</h4>
+	<ul>
+		{{if !(Object.keys(data.cookingobjs).length > 0 || Object.keys(data.cookingreas).length > 0)}}
+			<li>The microwave is empty!</li>
+		{{/if}}
+		{{for data.cookingobjs :amt:name}}
+			<li>{{:helper.link(name + ' • ' + amt, null, {'eject': name})}}</li>
+		{{/for}}
+		{{for data.cookingreas :amt:name}}
+			<li>{{:helper.link(name + ' • ' + amt + ' units', null, {'eject': name})}}</li>
+		{{/for}}
+	</ul>
+	{{:helper.link("Eject All", 'trash', {'eject_all': 1}, null, 'fixedLeftWiderRed')}}
+	{{:helper.link("Cook!", 'trash', {'cook': 1}, null, 'fixedLeftWider')}}
+{{/if}}

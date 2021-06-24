@@ -59,7 +59,7 @@
 		to_chat(C, SPAN_NOTICE("You take a bite of [src]."))
 	if (fullness > 350 && fullness <= 550)
 		to_chat(C, SPAN_NOTICE("You unwillingly chew a bit of [src]."))
-	
+
 /obj/item/chems/food/snacks/feed_sound(mob/user)
 	if(eat_sound)
 		playsound(user, pick(eat_sound), rand(10, 50), 1)
@@ -178,6 +178,17 @@
 
 /obj/item/chems/food/snacks/proc/is_sliceable()
 	return (slices_num && slice_path && slices_num > 0)
+
+/obj/item/chems/food/snacks/proc/on_dry(var/atom/newloc)
+	if(dried_type == type)
+		SetName("dried [name]")
+		color = "#a38463"
+		dry = TRUE
+		if(isloc(newloc))
+			forceMove(newloc)
+		return src
+	. = new dried_type(newloc || get_turf(src))
+	qdel(src)
 
 /obj/item/chems/food/snacks/Destroy()
 	if(contents)
@@ -522,8 +533,8 @@
 	desc = "The food of choice for the veteran. Do <b>NOT</b> overconsume."
 	filling_color = "#6d6d00"
 	heated_reagents = list(
-		/decl/material/liquid/regenerator = 5, 
-		/decl/material/liquid/amphetamines = 0.75, 
+		/decl/material/liquid/regenerator = 5,
+		/decl/material/liquid/amphetamines = 0.75,
 		/decl/material/liquid/stimulants = 0.25
 	)
 	var/has_been_heated = 0 // Unlike the warm var, this checks if the one-time self-heating operation has been used.
