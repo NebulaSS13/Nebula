@@ -12,18 +12,30 @@
 	var/above = FALSE
 	var/turf/target
 
-	var/turf/T = A
-	if(istype(T) && T.is_open())
+	var/turf/T = get_turf(A)
+	if(!istype(T) || T.contains_dense_objects())
+		return FALSE
+
+	if(T.is_open())
 		target = GetBelow(A)
-		if(!istype(target) || !target.is_open())
-			to_chat(user, SPAN_WARNING("There is nothing below you."))
+		if(!istype(target))
+			to_chat(user, SPAN_WARNING("There's nothing below you!"))
 			return FALSE
-	else if (istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor))
+		else if(target.contains_dense_objects())
+			to_chat(user, SPAN_WARNING("Objects below block \the [src] from deploying!"))
+			return FALSE
+		else if(target.is_open() && target.CanZPass(target,DOWN))
+			to_chat(user, SPAN_WARNING("You can't find anything to support \the [src] on below!"))
+			return FALSE
+	else if (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
 		target = GetAbove(A)
 		if(!istype(target) || !target.is_open())
-			to_chat(user, SPAN_WARNING("There is something above you. You can't deploy \the [src]!"))
+			to_chat(user, SPAN_WARNING("There is something above \the [T]. You can't deploy \the [src]!"))
 			return FALSE
 		above = TRUE
+	else
+		to_chat(user, SPAN_WARNING("You can't place \the [src] there."))
+		return FALSE
 
 	if(above)
 		user.visible_message(
@@ -41,7 +53,7 @@
 
 	var/obj/structure/ladder/mobile/ladder = new (target)
 	transfer_fingerprints_to(ladder)
-	ladder = new(get_turf(A))
+	ladder = new(T)
 	transfer_fingerprints_to(ladder)
 
 	user.drop_from_inventory(src,get_turf(src))
@@ -56,7 +68,7 @@
 /obj/item/mobile_ladder/proc/handle_action(atom/A, mob/user)
 	if (!do_after(user, 30, user))
 		return FALSE
-	if (!QDELETED(A) || QDELETED(src))
+	if (QDELETED(A) || QDELETED(src))
 		// Shit was deleted during delay, call is no longer valid.
 		return FALSE
 	return TRUE
