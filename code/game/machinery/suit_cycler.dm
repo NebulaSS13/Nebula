@@ -81,16 +81,16 @@
 		LAZYADD(new_overlays, image(icon, "open", layer = ABOVE_HUMAN_LAYER))
 
 	if(irradiating)
-		LAZYADD(new_overlays, image(icon, "light_radiation"))
+		LAZYADD(new_overlays, image(icon, "light_radiation", layer = ABOVE_HUMAN_LAYER))
 		set_light(3, 0.8, COLOR_RED_LIGHT)
 	else if(active)
-		LAZYADD(new_overlays, image(icon, "light_active"))
+		LAZYADD(new_overlays, image(icon, "light_active", layer = ABOVE_HUMAN_LAYER))
 		set_light(3, 0.8, COLOR_YELLOW)
 	else
 		set_light(0)
 
 	if(panel_open)
-		LAZYADD(new_overlays, image(icon, "panel"))
+		LAZYADD(new_overlays, image(icon, "panel", layer = ABOVE_HUMAN_LAYER))
 
 	overlays = new_overlays
 
