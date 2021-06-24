@@ -55,7 +55,7 @@
 
 //Base procs
 
-/obj/machinery/ftl_shunt/core/Initialize()
+/obj/machinery/ftl_shunt/core/Initialize(mapload, d, populate_parts)
 	. = ..()
 	set_extension(src, /datum/extension/local_network_member)
 	if(initial_id_tag)
@@ -520,8 +520,6 @@
 /obj/machinery/ftl_shunt/core/proc/draw_charge(var/input)
 	if(stat & NOPOWER)
 		return FALSE
-
-	var/obj/item/stock_parts/power/terminal/term = get_component_of_type(/obj/item/stock_parts/power/terminal)
 
 	var/drawn_charge = use_power_oneoff(input)
 	last_power_drawn = drawn_charge
