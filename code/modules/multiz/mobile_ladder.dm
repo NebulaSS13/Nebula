@@ -24,12 +24,12 @@
 		else if(target.contains_dense_objects())
 			to_chat(user, SPAN_WARNING("Objects below block \the [src] from deploying!"))
 			return FALSE
-		else if(target.is_open() && target.CanZPass(target,DOWN))
-			to_chat(user, SPAN_WARNING("You can't find anything to support \the [src] on below!"))
+		else if(T.CanZPass(T,DOWN) && target.CanZPass(target,DOWN))
+			to_chat(user, SPAN_WARNING("You can't find anything to support \the [src] on!"))
 			return FALSE
 	else if (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
 		target = GetAbove(A)
-		if(!istype(target) || !target.is_open())
+		if(!istype(target) || !target.is_open() || target.contains_dense_objects())
 			to_chat(user, SPAN_WARNING("There is something above \the [T]. You can't deploy \the [src]!"))
 			return FALSE
 		above = TRUE
@@ -74,10 +74,13 @@
 	return TRUE
 
 /obj/structure/ladder/mobile
+	name = "mobile ladder"
+	desc = "A lightweight deployable ladder, it can be folded back into its portable form."
 	base_icon = "mobile_ladder"
 	climb_time = 4 SECONDS
 	draw_shadow = FALSE
 	tool_interaction_flags = 0
+	material_alteration = 0
 
 /obj/structure/ladder/mobile/verb/fold_ladder()
 	set name = "Fold Ladder"
