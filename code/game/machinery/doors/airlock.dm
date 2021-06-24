@@ -813,6 +813,7 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/bash(obj/item/I, mob/user)
 			//if door is unbroken, hit with fire axe using harm intent
 	if (istype(I, /obj/item/twohanded/fireaxe) && !(stat & BROKEN) && user.a_intent == I_HURT)
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		var/obj/item/twohanded/fireaxe/F = I
 		if (F.wielded)
 			playsound(src, 'sound/weapons/smash.ogg', 100, 1)
