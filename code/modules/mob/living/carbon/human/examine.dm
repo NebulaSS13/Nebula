@@ -351,6 +351,14 @@
 	var/show_descs = show_descriptors_to(user)
 	if(show_descs)
 		msg += "<span class='notice'>[jointext(show_descs, "<br>")]</span>"
+
+	var/list/human_examines = decls_repository.get_decls_of_subtype(/decl/human_examination)
+	for(var/exam in human_examines)
+		var/decl/human_examination/HE = human_examines[exam]
+		var/adding_text = HE.do_examine(user, distance, src)
+		if(adding_text)
+			msg += adding_text
+
 	to_chat(user, jointext(msg, null))
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
