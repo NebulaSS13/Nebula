@@ -343,16 +343,15 @@
 	if(. && !can_speak(.))
 		. = null
 
-/mob/living/carbon/proc/get_any_good_language(set_default=FALSE)
-	var/decl/language/result = get_default_language()
-	if (!result)
+/mob/living/carbon/get_any_good_language(set_default=FALSE)
+	. = ..()
+	if(!.)
 		for (var/decl/language/L in languages)
-			if (can_speak(L))
-				result = L
+			if(can_speak(L))
+				. = L
 				if (set_default)
-					set_default_language(result)
+					set_default_language(.)
 				break
-	return result
 
 /mob/living/carbon/show_inv(mob/user)
 	user.set_machine(src)
