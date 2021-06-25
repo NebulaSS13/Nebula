@@ -1,7 +1,6 @@
 /obj/machinery/appliance/cooker/oven
 	name = "oven"
 	desc = "Cookies are ready, dear."
-	desc_info = "Control-click this to change its temperature. Alt-click to open or close the oven door."
 	icon_state = "ovenopen"
 	cook_type = "baked"
 	appliancetype = OVEN
@@ -16,7 +15,7 @@
 	optimal_power = 1.2
 	light_x = 2
 	max_contents = 5
-	stat = POWEROFF	//Starts turned off
+	use_power = POWER_USE_OFF	//Starts turned off
 	var/open = FALSE // Start closed so people don't heat up ovens with the door open
 
 	starts_with = list(
@@ -40,6 +39,9 @@
 	)
 
 
+/obj/machinery/appliance/cooker/oven/get_mechanics_info()
+	return "Control-click this to toggle its power; alt-click this to open/close the door."
+
 /obj/machinery/appliance/cooker/oven/update_icon()
 	if (!open)
 		if (!stat)
@@ -62,11 +64,23 @@
 	try_toggle_door(usr)
 
 /obj/machinery/appliance/cooker/oven/proc/try_toggle_door(mob/user)
-	if(use_check_and_message(user))
+	if (!isliving(user) || isAI(user))
 		return
-	open = !open
-	loss = (heating_power / resistance) * (0.5 + open)
-	//When the oven door is opened, oven slowly loses heat
+
+	if (!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return
+
+	if (!Adjacent(user))
+		to_chat(user, "You can't reach the [src] from there, get closer!")
+		return
+
+	if (open)
+		open = FALSE
+		temperature_coefficient = 1
+	else
+		open = TRUE
+		temperature_coefficient = 10
+		//When the oven door is opened, oven loses heat faster
 
 	playsound(src, 'sound/machines/hatch_open.ogg', 20, 1)
 	update_icon()

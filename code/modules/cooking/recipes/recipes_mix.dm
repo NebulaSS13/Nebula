@@ -102,7 +102,7 @@
 		/obj/item/chems/food/snacks/meat,
 		/obj/item/chems/food/snacks/meat
 	)
-	reagents = list(/decl/reagent/nutriment/protein/egg = 3)
+	reagents = list(/decl/material/liquid/nutriment/protein/egg = 3)
 	reagent_mix = RECIPE_REAGENT_REPLACE
 	result = /obj/item/chems/food/snacks/burger/bigbite
 
@@ -136,7 +136,7 @@
 
 /decl/recipe/candiedapple
 	fruit = list("apple" = 1)
-	reagents = list(/decl/reagent/water = 5, /decl/reagent/sugar = 5)
+	reagents = list(/decl/material/liquid/water = 5, /decl/reagent/sugar = 5)
 	result = /obj/item/chems/food/snacks/candiedapple
 
 /decl/recipe/slimeburger
@@ -147,7 +147,7 @@
 	result = /obj/item/chems/food/snacks/burger/jelly/slime
 
 /decl/recipe/jellyburger
-	reagents = list(/decl/reagent/nutriment/cherryjelly = 5)
+	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
 	items = list(
 		/obj/item/chems/food/snacks/bun
 	)
@@ -171,7 +171,7 @@
 	result = /obj/item/chems/food/snacks/jellysandwich/slime
 
 /decl/recipe/cherrysandwich
-	reagents = list(/decl/reagent/nutriment/cherryjelly = 5)
+	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
 	items = list(
 		/obj/item/chems/food/snacks/breadslice,
 		/obj/item/chems/food/snacks/breadslice
@@ -245,7 +245,7 @@
 	result = /obj/item/chems/food/snacks/donerkebab
 
 /decl/recipe/sashimi
-	reagents = list(/decl/reagent/nutriment/soysauce = 5)
+	reagents = list(/decl/material/liquid/nutriment/soysauce = 5)
 	items = list(
 		/obj/item/chems/food/snacks/fish
 	)
@@ -297,7 +297,7 @@
 	result = /obj/item/chems/food/snacks/mashedpotato
 
 /decl/recipe/icecreamsandwich
-	reagents = list(/decl/reagent/drink/milk = 5, /decl/reagent/drink/ice = 5)
+	reagents = list(/decl/material/liquid/drink/milk = 5, /decl/material/liquid/drink/ice = 5)
 	reagent_mix = RECIPE_REAGENT_REPLACE
 	items = list(
 		/obj/item/chems/food/snacks/icecream
@@ -306,7 +306,7 @@
 
 /decl/recipe/banana_split
 	fruit = list("banana" = 1)
-	reagents = list(/decl/reagent/drink/milk = 5, /decl/reagent/drink/ice = 5)
+	reagents = list(/decl/material/liquid/drink/milk = 5, /decl/material/liquid/drink/ice = 5)
 	reagent_mix = RECIPE_REAGENT_REPLACE
 	items = list(
 		/obj/item/chems/food/snacks/icecream

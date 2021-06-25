@@ -295,7 +295,7 @@ var/global/list/_wood_materials = list(
 	desc = "A slice of some tasty fruit."
 	icon = 'icons/obj/hydroponics/hydroponics_misc.dmi'
 	icon_state = ""
-	dried_type = /obj/item/reagent_containers/food/snacks/fruit_slice
+	dried_type = /obj/item/chems/food/snacks/fruit_slice
 	var/datum/seed/seed
 
 var/global/list/fruit_icon_cache = list()

@@ -71,7 +71,7 @@
 
 /decl/recipe/nugget
 	appliance = FRYER
-	reagents = list(/decl/reagent/nutriment/flour = 5)
+	reagents = list(/decl/material/liquid/nutriment/flour = 5)
 	items = list(
 		/obj/item/chems/food/snacks/meat/chicken
 	)

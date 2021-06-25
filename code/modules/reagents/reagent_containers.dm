@@ -55,6 +55,10 @@
 	return
 
 /obj/item/chems/attackby(obj/item/W, mob/user)
+	if(istype(W, /obj/item/chems/food/snacks))
+		var/obj/item/chems/food/snacks/dipped = W
+		dipped.attempt_apply_coating(src, user)
+		return
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/flashlight/pen))
 		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		if(length(tmp_label) > 10)

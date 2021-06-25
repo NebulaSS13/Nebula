@@ -109,7 +109,7 @@
 /decl/recipe/bananabread
 	appliance = OVEN
 	fruit = list("banana" = 1)
-	reagents = list(/decl/reagent/drink/milk = 5, /decl/reagent/sugar = 15)
+	reagents = list(/decl/material/liquid/drink/milk = 5, /decl/reagent/sugar = 15)
 	items = list(
 		/obj/item/chems/food/snacks/dough,
 		/obj/item/chems/food/snacks/dough,
@@ -119,7 +119,7 @@
 
 /decl/recipe/croissant
 	appliance = OVEN
-	reagents = list(/decl/reagent/sodiumchloride = 1, /decl/reagent/water = 5, /decl/reagent/drink/milk = 5)
+	reagents = list(/decl/reagent/sodiumchloride = 1, /decl/material/liquid/water = 5, /decl/material/liquid/drink/milk = 5)
 	reagent_mix = RECIPE_REAGENT_REPLACE
 	items = list(/obj/item/chems/food/snacks/dough)
 	result = /obj/item/chems/food/snacks/croissant
@@ -151,7 +151,7 @@
 
 /decl/recipe/jelliedtoast
 	appliance = SKILLET
-	reagents = list(/decl/reagent/nutriment/cherryjelly = 5)
+	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
 	items = list(
 		/obj/item/chems/food/snacks/breadslice
 	)

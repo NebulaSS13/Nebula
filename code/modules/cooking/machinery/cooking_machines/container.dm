@@ -5,20 +5,20 @@
 /obj/item/chems/cooking_container
 	icon = 'icons/obj/cooking_machines.dmi'
 	var/shortname
-	var/place_verb = "into"
 	var/max_space = 20//Maximum sum of w-classes of foods in this container at once
 	volume = 80//Maximum units of reagents
-	flags = OPENCONTAINER | NOREACT
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
 	var/list/insertable = list(
 		/obj/item/chems/food/snacks,
 		/obj/item/holder,
 		/obj/item/paper,
 		/obj/item/flame/candle,
-		/obj/item/stack/rods,
+		/obj/item/stack/material/rods,
 		/obj/item/organ/internal/brain
 		)
 	var/appliancetype // Bitfield, uses the same as appliances
-	w_class = ITEMSIZE_NORMAL
+	w_class = ITEM_SIZE_NORMAL
+	material = /decl/material/solid/metal/stainlesssteel
 
 /obj/item/chems/cooking_container/examine(var/mob/user)
 	. = ..()
@@ -26,6 +26,31 @@
 		to_chat(user, SPAN_NOTICE(get_content_info()))
 	if(reagents.total_volume)
 		to_chat(user, SPAN_NOTICE(get_reagent_info()))
+
+// So we can smack people with frying pans.
+/obj/item/chems/cooking_container/attack(var/mob/M, var/mob/user, var/def_zone)
+	if(can_operate(M) && do_surgery(M, user, src))
+		return
+	if(!reagents.total_volume && user.a_intent == I_HURT)
+		return ..()
+
+/obj/item/chems/cooking_container/afterattack(var/obj/target, var/mob/user, var/proximity)
+	if(!ATOM_IS_OPEN_CONTAINER(src) || !proximity) //Is the container open & are they next to whatever they're clicking?
+		return TRUE //If not, do nothing.
+	if(standard_dispenser_refill(user, target)) //Are they clicking a water tank/some dispenser?
+		return TRUE
+	if(standard_pour_into(user, target)) //Pouring into another beaker?
+		return TRUE
+	if(standard_feed_mob(user, target))
+		return TRUE
+	if(user.a_intent == I_HURT)
+		if(standard_splash_mob(user,target))
+			return TRUE
+		if(reagents?.total_volume)
+			to_chat(user, SPAN_NOTICE("You splash the contents of \the [src] onto [target].")) //They are on harm intent, aka wanting to spill it.
+			reagents.splash(target, reagents.total_volume)
+			return TRUE
+	. = ..()
 
 /obj/item/chems/cooking_container/proc/get_content_info()
 	var/string = "It contains:</br><ul><li>"
@@ -62,8 +87,9 @@
 		if(!user.unEquip(I))
 			return
 		I.forceMove(src)
-		to_chat(user, SPAN_NOTICE("You put [I] [place_verb] [src]."))
+		to_chat(user, SPAN_NOTICE("You put [I] into [src]."))
 		return
+	return ..()
 
 /obj/item/chems/cooking_container/verb/empty()
 	set src in oview(1)
@@ -74,7 +100,16 @@
 	do_empty(usr)
 
 /obj/item/chems/cooking_container/proc/do_empty(mob/user)
-	if (use_check_and_message(user))
+	if (!isliving(user))
+		//Here we only check for ghosts. Animals are intentionally allowed to remove things from oven trays so they can eat it
+		return
+
+	if (user.stat || user.restrained() || user.incapacitated())
+		to_chat(user, "<span class='notice'>You are in no fit state to do this.</span>")
+		return
+
+	if (!Adjacent(user))
+		to_chat(user, "You can't reach [src] from here.")
 		return
 
 	if (!length(contents))
@@ -119,8 +154,8 @@
 		var/obj/O = locate() in contents
 		return . + O.name //Just append the name of the first object
 	else if (reagents.total_volume > 0)
-		var/decl/reagent/R = reagents.get_primary_reagent_decl()
-		return . + R.name//Append name of most voluminous reagent
+		var/decl/material/M = reagents.get_primary_reagent_decl()
+		return . + M.name//Append name of most voluminous reagent
 	return . + "empty"
 
 
@@ -160,6 +195,7 @@
 	max_space = 30
 	volume = 120
 	appliancetype = OVEN
+	material = /decl/material/solid/stone/ceramic
 
 /obj/item/chems/cooking_container/skillet
 	name = "skillet"
@@ -169,17 +205,8 @@
 	volume = 30
 	force = 11
 	hitsound = 'sound/weapons/smash.ogg'
-	flags = OPENCONTAINER // Will still react
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER // Will still react
 	appliancetype = SKILLET
-
-/obj/item/chems/cooking_container/skillet/Initialize(var/mapload, var/mat_key)
-	. = ..(mapload)
-	var/material/material = SSmaterials.get_material_by_name(mat_key || MATERIAL_STEEL)
-	if(!material)
-		return
-	if(material.name != MATERIAL_STEEL)
-		color = material.icon_colour
-	name = "[material.display_name] [initial(name)]"
 
 /obj/item/chems/cooking_container/saucepan
 	name = "saucepan"
@@ -190,17 +217,8 @@
 	slot_flags = SLOT_HEAD
 	force = 8
 	hitsound = 'sound/weapons/smash.ogg'
-	flags = OPENCONTAINER // Will still react
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER // Will still react
 	appliancetype = SAUCEPAN
-
-/obj/item/chems/cooking_container/saucepan/Initialize(var/mapload, var/mat_key)
-	. = ..(mapload)
-	var/material/material = SSmaterials.get_material_by_name(mat_key || MATERIAL_STEEL)
-	if(!material)
-		return
-	if(material.name != MATERIAL_STEEL)
-		color = material.icon_colour
-	name = "[material.display_name] [initial(name)]"
 
 /obj/item/chems/cooking_container/pot
 	name = "cooking pot"
@@ -211,18 +229,9 @@
 	volume = 180
 	force = 8
 	hitsound = 'sound/weapons/smash.ogg'
-	flags = OPENCONTAINER // Will still react
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER // Will still react
 	appliancetype = POT
-	w_class = ITEMSIZE_LARGE
-
-/obj/item/chems/cooking_container/pot/Initialize(mapload, mat_key)
-	. = ..(mapload)
-	var/material/material = SSmaterials.get_material_by_name(mat_key || MATERIAL_STEEL)
-	if(!material)
-		return
-	if(mat_key && mat_key != MATERIAL_STEEL)
-		color = material.icon_colour
-	name = "[material.display_name] [initial(name)]"
+	w_class = ITEM_SIZE_LARGE
 
 /obj/item/chems/cooking_container/fryer
 	name = "fryer basket"
@@ -230,18 +239,6 @@
 	desc = "Put ingredients in this; designed for use with a deep fryer. Warranty void if used."
 	icon_state = "basket"
 	appliancetype = FRYER
-
-/obj/item/chems/cooking_container/grill_grate
-	name = "grill grate"
-	shortname = "grate"
-	place_verb = "onto"
-	desc = "Primarily used to grill meat, place this on a grill and grab a can of energy drink."
-	icon_state = "grill_grate"
-	appliancetype = GRILL
-	insertable = list(
-		/obj/item/chems/food/snacks/meat,
-		/obj/item/chems/food/snacks/xenomeat
-	)
 
 /obj/item/chems/cooking_container/grill_grate/can_fit()
 	if(length(contents) >= 3)
@@ -254,13 +251,18 @@
 	desc = "A plate. You plate foods on this plate."
 	icon_state = "plate"
 	appliancetype = MIX
-	flags = OPENCONTAINER // Will still react
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER // Will still react
 	volume = 15 // for things like jelly sandwiches etc
 	max_space = 25
+	material = /decl/material/solid/stone/ceramic
 
-/obj/item/chems/cooking_container/plate/MouseDrop(var/obj/over_obj)
-	if(over_obj != usr || use_check(usr))
-		return ..()
+/obj/item/chems/cooking_container/plate/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/kitchen/utensil))
+		user.visible_message("<b>\The [user]</b> stirs \the [src] with \the [I].", SPAN_NOTICE("You stir \the [src] with \the [I]."))
+		do_mix()
+	return ..()
+
+/obj/item/chems/cooking_container/plate/proc/do_mix()
 	if(!(length(contents) || reagents?.total_volume))
 		return ..()
 	var/decl/recipe/recipe = select_recipe(src, appliance = appliancetype)
@@ -297,6 +299,6 @@
 	center_of_mass = list("x" = 17,"y" = 7)
 	max_space = 30
 	matter = list(DEFAULT_WALL_MATERIAL = 300)
-	volume = 180
+	volume = 90
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(5,10,15,25,30,60,180)
+	possible_transfer_amounts = @"[5,10,15,25,30,60, 90]"

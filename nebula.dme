@@ -1724,7 +1724,6 @@
 #include "code\modules\cooking\machinery\cooking_machines\cereal.dm"
 #include "code\modules\cooking\machinery\cooking_machines\container.dm"
 #include "code\modules\cooking\machinery\cooking_machines\fryer.dm"
-#include "code\modules\cooking\machinery\cooking_machines\grill.dm"
 #include "code\modules\cooking\machinery\cooking_machines\oven.dm"
 #include "code\modules\cooking\machinery\cooking_machines\stove.dm"
 #include "code\modules\cooking\recipes\recipe.dm"

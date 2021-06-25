@@ -81,7 +81,7 @@
 /decl/recipe/soywafers
 	appliance = OVEN
 	fruit = list("soybeans" = 1)
-	reagents = list(/decl/reagent/nutriment/flour = 10)
+	reagents = list(/decl/material/liquid/nutriment/flour = 10)
 	reagent_mix = RECIPE_REAGENT_REPLACE
 	result = /obj/item/chems/food/snacks/soywafers
 
@@ -101,7 +101,7 @@
 
 /decl/recipe/ribplate //Putting this here for not seeing a roast section.
 	appliance = OVEN
-	reagents = list(/decl/reagent/nutriment/honey = 5, /decl/reagent/spacespice = 2, /decl/reagent/blackpepper = 1)
+	reagents = list(/decl/material/liquid/nutriment/honey = 5, /decl/material/solid/spacespice = 2, /decl/material/solid/blackpepper = 1)
 	items = list(/obj/item/chems/food/snacks/meat)
 	reagent_mix = RECIPE_REAGENT_REPLACE
 	result = /obj/item/chems/food/snacks/ribplate
@@ -136,12 +136,12 @@
 /decl/recipe/plumphelmetbiscuit
 	appliance = OVEN
 	fruit = list("plumphelmet" = 1)
-	reagents = list(/decl/reagent/water = 5, /decl/reagent/nutriment/flour = 5)
+	reagents = list(/decl/material/liquid/water = 5, /decl/material/liquid/nutriment/flour = 5)
 	result = /obj/item/chems/food/snacks/plumphelmetbiscuit
 
 /decl/recipe/spacylibertyduff
 	appliance = OVEN
-	reagents = list(/decl/reagent/water = 5, /decl/reagent/alcohol/vodka = 5, /decl/reagent/psilocybin = 5)
+	reagents = list(/decl/material/liquid/water = 5, /decl/material/solid/alcohol/vodka = 5, /decl/material/solid/psilocybin = 5)
 	result = /obj/item/chems/food/snacks/spacylibertyduff
 
 /decl/recipe/hotdiggitydonk //heated donk, in lieu of a microwave
@@ -153,7 +153,7 @@
 
 /decl/recipe/rofflewaffles
 	appliance = OVEN
-	reagents = list(/decl/reagent/psilocybin = 5, /decl/reagent/sugar = 10)
+	reagents = list(/decl/material/solid/psilocybin = 5, /decl/material/solid/sugar = 10)
 	items = list(
 		/obj/item/chems/food/snacks/dough,
 		/obj/item/chems/food/snacks/dough

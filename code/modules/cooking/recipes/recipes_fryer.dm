@@ -11,14 +11,14 @@
 /decl/recipe/jpoppers
 	appliance = FRYER
 	fruit = list("chili" = 1)
-	coating = /decl/reagent/nutriment/coating/batter
+	coating = /decl/material/liquid/nutriment/coating/batter
 	result = /obj/item/chems/food/snacks/jalapeno_poppers
 
 /decl/recipe/risottoballs
 	appliance = FRYER
 	reagents = list(/decl/reagent/sodiumchloride = 1, /decl/reagent/blackpepper = 1)
 	items = list(/obj/item/chems/food/snacks/risotto)
-	coating = /decl/reagent/nutriment/coating/batter
+	coating = /decl/material/liquid/nutriment/coating/batter
 	reagent_mix = RECIPE_REAGENT_REPLACE //Simplify end product
 	result = /obj/item/chems/food/snacks/risottoballs
 
@@ -33,7 +33,7 @@
 /decl/recipe/friedmushroom
 	appliance = FRYER
 	fruit = list("plumphelmet" = 1)
-	coating = /decl/reagent/nutriment/coating/beerbatter
+	coating = /decl/material/liquid/nutriment/coating/beerbatter
 	reagent_mix = RECIPE_REAGENT_REPLACE //Simplify end product
 	result = /obj/item/chems/food/snacks/friedmushroom
 
@@ -54,7 +54,7 @@
 		/obj/item/chems/food/snacks/sausage
 	)
 	result = /obj/item/chems/food/snacks/sausage/battered
-	coating = /decl/reagent/nutriment/coating/batter
+	coating = /decl/material/liquid/nutriment/coating/batter
 
 
 /decl/recipe/katsu
@@ -63,7 +63,7 @@
 		/obj/item/chems/food/snacks/meat/chicken
 	)
 	result = /obj/item/chems/food/snacks/chickenkatsu
-	coating = /decl/reagent/nutriment/coating/beerbatter
+	coating = /decl/material/liquid/nutriment/coating/beerbatter
 
 
 /decl/recipe/pizzacrunch_1
@@ -72,7 +72,7 @@
 		/obj/item/chems/food/snacks/sliceable/pizza
 	)
 	result = /obj/item/chems/food/snacks/sliceable/pizza/crunch
-	coating = /decl/reagent/nutriment/coating/batter
+	coating = /decl/material/liquid/nutriment/coating/batter
 
 //Alternate pizza crunch recipe for combination pizzas made in oven
 /decl/recipe/pizzacrunch_2
@@ -81,7 +81,7 @@
 		/obj/item/chems/food/snacks/variable/pizza
 	)
 	result = /obj/item/chems/food/snacks/sliceable/pizza/crunch
-	coating = /decl/reagent/nutriment/coating/batter
+	coating = /decl/material/liquid/nutriment/coating/batter
 
 //Fishy Recipes
 //==================
@@ -98,14 +98,14 @@
 	items = list(
 		/obj/item/chems/food/snacks/fish
 	)
-	coating = /decl/reagent/nutriment/coating/batter
+	coating = /decl/material/liquid/nutriment/coating/batter
 	result = /obj/item/chems/food/snacks/fishfingers
 
 //Sweet Recipes.
 //==================
 /decl/recipe/jellydonut
 	appliance = FRYER
-	reagents = list(/decl/reagent/drink/berryjuice = 10, /decl/reagent/sugar = 10)
+	reagents = list(/decl/material/liquid/drink/berryjuice = 10, /decl/reagent/sugar = 10)
 	items = list(
 		/obj/item/chems/food/snacks/dough
 	)
@@ -117,7 +117,7 @@
 	result = /obj/item/chems/food/snacks/donut/slimejelly
 
 /decl/recipe/jellydonut/cherry
-	reagents = list(/decl/reagent/nutriment/cherryjelly = 10, /decl/reagent/sugar = 10)
+	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 10, /decl/reagent/sugar = 10)
 	result = /obj/item/chems/food/snacks/donut/cherryjelly
 
 /decl/recipe/donut
@@ -131,7 +131,7 @@
 
 /decl/recipe/funnelcake
 	appliance = FRYER
-	reagents = list(/decl/reagent/sugar = 5, /decl/reagent/nutriment/coating/batter = 10)
+	reagents = list(/decl/reagent/sugar = 5, /decl/material/liquid/nutriment/coating/batter = 10)
 	result = /obj/item/chems/food/snacks/funnelcake
 
 /decl/recipe/pisanggoreng
@@ -139,7 +139,7 @@
 	fruit = list("banana" = 2)
 	reagent_mix = RECIPE_REAGENT_REPLACE //Simplify end product
 	result = /obj/item/chems/food/snacks/pisanggoreng
-	coating = /decl/reagent/nutriment/coating/batter
+	coating = /decl/material/liquid/nutriment/coating/batter
 
 /decl/recipe/corn_dog
 	appliance = FRYER
@@ -147,7 +147,7 @@
 		/obj/item/chems/food/snacks/sausage
 	)
 	fruit = list("corn" = 1)
-	coating = /decl/reagent/nutriment/coating/batter
+	coating = /decl/material/liquid/nutriment/coating/batter
 	result = /obj/item/chems/food/snacks/corn_dog
 
 /decl/recipe/sweet_and_sour
@@ -156,12 +156,12 @@
 		/obj/item/chems/food/snacks/bacon,
 		/obj/item/chems/food/snacks/cutlet
 	)
-	reagents = list(/decl/reagent/nutriment/soysauce = 5, /decl/reagent/nutriment/coating/batter = 10)
+	reagents = list(/decl/material/liquid/nutriment/soysauce = 5, /decl/material/liquid/nutriment/coating/batter = 10)
 	result = /obj/item/chems/food/snacks/sweet_and_sour
 
 /decl/recipe/wingfangchu
 	appliance = FRYER
-	reagents = list(/decl/reagent/nutriment/soysauce = 5)
+	reagents = list(/decl/material/liquid/nutriment/soysauce = 5)
 	items = list(
 		/obj/item/chems/food/snacks/xenomeat
 	)

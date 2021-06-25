@@ -34,7 +34,7 @@
 
 /decl/recipe
 	var/display_name
-	var/list/reagents // example: = list(/decl/reagent/drink/berryjuice = 5) // do not list same reagent twice
+	var/list/reagents // example: = list(/decl/material/liquid/drink/berryjuice = 5) // do not list same reagent twice
 	var/list/items    // example: = list(/obj/item/crowbar, /obj/item/welder) // place /foo/bar before /foo
 	var/list/fruit    // example: = list("fruit" = 3)
 	var/coating = null//Required coating on all items in the recipe. The default value of null explitly requires no coating
@@ -45,6 +45,12 @@
 	var/result        // example: = /obj/item/chems/food/snacks/donut/normal
 	var/result_quantity = 1 //number of instances of result that are created.
 	var/time = 100    // 1/10 part of second
+
+	var/hidden_from_codex = FALSE
+	var/lore_text
+	var/mechanics_text
+	var/antag_text
+	var/added_to_codex = FALSE //to prevent duplicates
 
 	#define RECIPE_REAGENT_REPLACE		0 //Reagents in the ingredients are discarded.
 	//Only the reagents present in the result at compiletime are used
@@ -148,7 +154,7 @@
 	if (coating == -1)
 		return TRUE //-1 value doesnt care
 
-	return !coating || (S.coating == coating)
+	return !coating || (S.batter_coating == coating)
 
 //general version
 /decl/recipe/proc/make(var/obj/container)

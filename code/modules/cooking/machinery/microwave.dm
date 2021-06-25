@@ -53,10 +53,6 @@
 	. = ..(mapload, 0)
 	create_reagents(100)
 	soundloop = new(list(src), FALSE)
-	if (mapload)
-		addtimer(CALLBACK(src, .proc/setup_recipes), 0)
-	else
-		setup_recipes()
 
 	RefreshParts()
 
@@ -204,7 +200,7 @@
 	var/list/data = list()
 	data["cookingobjs"] = list()
 	for(var/obj/O in ingredients)
-		data["cookingobjs"][C.name]++
+		data["cookingobjs"][O.name]++
 	data["cookingreas"] = list()
 	for(var/decl/material/M in reagents.reagent_volumes)
 		data["cookingreas"][M.name] = reagents.reagent_volumes[M]
@@ -239,7 +235,7 @@
 
 	recipe = select_recipe(src, appliance = appliancetype)
 
-	if (reagents.reagent_list.len && prob(50)) // 50% chance a liquid recipe gets messy
+	if (reagents.total_volume && prob(50)) // 50% chance a liquid recipe gets messy
 		dirty += Ceiling(reagents.total_volume / 10)
 
 	if (!recipe)
@@ -271,7 +267,7 @@
 	while(valid && recipe)
 		cooked_items += recipe.make_food(src)
 		valid = FALSE
-		recipe = select_recipe(RECIPE_LIST(appliancetype),src)
+		recipe = select_recipe(src, appliancetype)
 		if (recipe && (recipe.result == result))
 			sleep(2)
 			valid = TRUE
@@ -347,7 +343,7 @@
 		icon_state = "mwbloody" // Make it look dirty too
 	else if(cook_break)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(2, GLOB.alldirs, src)
+		s.set_up(2, global.alldirs, src)
 		icon_state = "mwb" // Make it look all busted up and shit
 		visible_message(SPAN_WARNING("The microwave sprays out a shower of sparks - it's broken!")) //Let them know they're stupid
 		broken = 2 // Make it broken so it can't be used until fixed
@@ -367,6 +363,7 @@
 	SSnano.update_uis(src)
 
 /obj/machinery/microwave/proc/fail()
+	var/obj/item/chems/food/snacks/badrecipe/ffuu = new(src)
 	var/amount = 0
 
 	// Kill + delete mobs in mob holders

@@ -8,20 +8,15 @@
 /obj/machinery/appliance
 	name = "cooker"
 	desc = "You shouldn't be seeing this!"
-	desc_info = "Control-click this to change its temperature."
 	icon = 'icons/obj/cooking_machines.dmi'
 	var/appliancetype = 0
 	density = 1
 	anchored = 1
+	construct_state = /decl/machine_construction/default
 
 	use_power = 0
 	idle_power_usage = 5			// Power used when turned on, but not processing anything
 	active_power_usage = 1000		// Power used when turned on and actively cooking something
-
-	component_types = list(
-							/obj/item/stock_parts/capacitor = 3,
-							/obj/item/stock_parts/scanning_module = 1,
-							/obj/item/stock_parts/matter_bin = 2)
 
 	var/cooking_power = 0			// Effectiveness/speed at cooking
 	var/cooking_coeff = 0			// Part-based cooking power multiplier
@@ -68,6 +63,9 @@
 		list_contents(user)
 		return TRUE
 
+/obj/machinery/appliance/get_mechanics_info()
+	return "Control-click this to toggle its power."
+
 /obj/machinery/appliance/proc/list_contents(var/mob/user)
 	if (!length(cooking_objs))
 		to_chat(user, SPAN_NOTICE("It is empty."))
@@ -94,7 +92,7 @@
 		if (0.75 to 1)
 			return SPAN_NOTICE("<b>It's almost ready!</b>")
 	if (progress < 1+half_overcook)
-		return SPAN_SOGHUN("<b>It is done!</b>")
+		return FONT_COLORED(COLOR_GREEN_GRAY, "<b>It is done!</b>")
 	if (progress < CI.overcook_mult)
 		return SPAN_WARNING("It looks overcooked, get it out!")
 	return SPAN_DANGER("It is burning!")
@@ -112,11 +110,20 @@
 		icon_state = off_icon
 
 /obj/machinery/appliance/proc/attempt_toggle_power(mob/user)
-	if (use_check_and_message(user, issilicon(user) ? USE_ALLOW_NON_ADJACENT : 0))
+	if (!isliving(user))
 		return
 
-	stat ^= POWEROFF // Toggles power
-	use_power = (stat & POWEROFF) ? 0 : 2 // If on, use active power, else use no power
+	if (!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return
+
+	if (user.stat || user.restrained() || user.incapacitated())
+		return
+
+	if (!Adjacent(user) && !issilicon(user))
+		to_chat(user, "You can't reach [src] from here.")
+		return
+
+	use_power = (use_power == POWER_USE_OFF) ? POWER_USE_IDLE : POWER_USE_OFF // If on, use active power, else use no power
 	if(user)
 		user.visible_message("[user] turns [src] [use_power ? "on" : "off"].", "You turn [use_power ? "on" : "off"] [src].")
 	playsound(src, 'sound/machines/click.ogg', 40, 1)
@@ -130,7 +137,17 @@
 	set name = "Choose output"
 	set category = "Object"
 
-	if (use_check_and_message(usr, issilicon(usr) ? USE_ALLOW_NON_ADJACENT : 0))
+	if (!isliving(usr))
+		return
+
+	if (!usr.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return
+
+	if (usr.stat || usr.restrained() || usr.incapacitated())
+		return
+
+	if (!Adjacent(usr) && !issilicon(usr))
+		to_chat(usr, "You can't adjust the [src] from this distance, get closer!")
 		return
 	if(!length(output_options))
 		return
@@ -142,7 +159,7 @@
 
 //Handles all validity checking and error messages for inserting things
 /obj/machinery/appliance/proc/can_insert(var/obj/item/I, var/mob/user)
-	if(!I.dropsafety())
+	if(!I.canremove || istype(I.loc, /mob/living/silicon) || istype(I.loc, /obj/item/rig_module))
 		return CANNOT_INSERT
 
 	// We are trying to cook a grabbed mob.
@@ -197,13 +214,7 @@
 
 	var/result = can_insert(I, user)
 	if(result == CANNOT_INSERT)
-		if(default_deconstruction_screwdriver(user, I))
-			return
-		else if(default_part_replacement(user, I))
-			return
-		else if(default_deconstruction_crowbar(user, I))
-			return
-		return
+		return component_attackby(I, user)
 
 	if(result == INSERT_GRABBED)
 		var/obj/item/grab/G = I
@@ -254,11 +265,11 @@
 		oilwork(J, CI)
 
 	for (var/_R in CI.container.reagents.reagent_volumes)
-		if (ispath(_R, /decl/reagent/nutriment))
+		if (ispath(_R, /decl/material/liquid/nutriment))
 			CI.max_cookwork += CI.container.reagents.reagent_volumes[_R] *2//Added reagents contribute less than those in food items due to granular form
 
 			//Nonfat reagents will soak oil
-			if (!ispath(_R, /decl/reagent/nutriment/triglyceride))
+			if (!ispath(_R, /decl/material/liquid/nutriment/triglyceride))
 				CI.max_oil += CI.container.reagents.reagent_volumes[_R] * 0.25
 		else
 			CI.max_cookwork += CI.container.reagents.reagent_volumes[_R]
@@ -274,11 +285,11 @@
 	var/work = 0
 	if (istype(S) && S.reagents)
 		for (var/_R in S.reagents.reagent_volumes)
-			if (ispath(_R, /decl/reagent/nutriment))
+			if (ispath(_R, /decl/material/liquid/nutriment))
 				work += S.reagents.reagent_volumes[_R] *3//Core nutrients contribute much more than peripheral chemicals
 
 				//Nonfat reagents will soak oil
-				if (!ispath(_R, /decl/reagent/nutriment/triglyceride))
+				if (!ispath(_R, /decl/material/liquid/nutriment/triglyceride))
 					CI.max_oil += S.reagents.reagent_volumes[_R] * 0.35
 			else
 				work += S.reagents.reagent_volumes[_R]
@@ -286,8 +297,7 @@
 
 
 	else if(istype(I, /obj/item/holder))
-		var/obj/item/holder/H = I
-		var/mob/living/contained = H.contained
+		var/mob/living/contained = locate() in I
 		if (contained)
 			work += (contained.mob_size * contained.mob_size * 2)+2
 
@@ -311,13 +321,12 @@
 
 	// Gotta hurt.
 	for(var/obj/item/holder/H in CI.container.contents)
-		var/mob/living/M = H.contained
-		if (M)
-			M.apply_damage(rand(1,3), mobdamagetype, BP_CHEST)
+		var/mob/living/M = locate() in H.contents
+		M.apply_damage(rand(1,3), mobdamagetype, BP_CHEST)
 
 	return TRUE
 
-/obj/machinery/appliance/machinery_process()
+/obj/machinery/appliance/Process()
 	if (cooking_power > 0 && cooking)
 		for (var/i in cooking_objs)
 			do_cooking_tick(i)
@@ -488,9 +497,9 @@
 	smoke.start()
 
 /obj/machinery/appliance/CtrlClick(var/mob/user)
-	if(use_check(user))
-		return
-	attempt_toggle_power(user, FALSE)
+	if(!anchored)
+		return ..()
+	attempt_toggle_power(user)
 
 /obj/machinery/appliance/attack_hand(var/mob/user)
 	if (!length(cooking_objs))
@@ -523,7 +532,10 @@
 	return TRUE
 
 /obj/machinery/appliance/proc/can_remove_items(var/mob/user)
-	return !use_check_and_message(user)
+	if (!Adjacent(user) || isanimal(user) || user.incapacitated())
+		return FALSE
+
+	return TRUE
 
 /obj/machinery/appliance/proc/eject(var/datum/cooking_item/CI, var/mob/user = null)
 	var/obj/item/thing
@@ -552,13 +564,13 @@
 
 
 /obj/machinery/appliance/proc/change_product_appearance(var/obj/item/chems/food/snacks/product, var/datum/cooking_item/CI)
-	if (!product.coating) //Coatings change colour through a new sprite
+	if (!product.batter_coating) //Coatings change colour through a new sprite
 		product.color = food_color
 	product.filling_color = food_color
 
 //This function creates a food item which represents a dead mob
 /obj/machinery/appliance/proc/create_mob_food(var/obj/item/holder/H, var/datum/cooking_item/CI)
-	var/mob/living/victim = H.contained
+	var/mob/living/victim = locate() in H.contents
 	if (!istype(H) || !victim)
 		qdel(H)
 		return null
@@ -570,7 +582,7 @@
 	var/reagent_amount = victim.mob_size ** 2 * 3
 	if(isanimal(victim))
 		var/mob/living/simple_animal/SA = victim
-		result.kitchen_tag = SA.kitchen_tag
+		result.kitchen_tag = initial(SA.name) // workaround for no kitchen_tag var
 		if (SA.meat_amount)
 			reagent_amount = SA.meat_amount*9 // at a rate of 9 protein per meat
 	var/digest_product_type = victim.get_digestion_product() // DOES NOT RETURN A DECL, RETURNS A PATH
@@ -579,7 +591,7 @@
 	if(ishuman(victim))
 		var/mob/living/carbon/human/CH = victim
 		meat_name = CH.species?.name || meat_name
-	if(ispath(digest_product_type, /decl/reagent/nutriment/protein))
+	if(ispath(digest_product_type, /decl/material/liquid/nutriment/protein))
 		data = list("[meat_name] meat" = reagent_amount)
 	result.reagents.add_reagent(digest_product_type, reagent_amount, data)
 
@@ -633,12 +645,9 @@
 	var/scan_rating = 0
 	var/cap_rating = 0
 
-	for(var/obj/item/stock_parts/P in component_parts)
-		if(iscapacitor(P))
-			cap_rating += P.rating - 1
-		if(isscanner(P))
-			scan_rating += P.rating - 1
+	scan_rating = total_component_rating_of_type(/obj/item/stock_parts/scanning_module) - number_of_components(/obj/item/stock_parts/scanning_module)
+	cap_rating = total_component_rating_of_type(/obj/item/stock_parts/capacitor) - number_of_components(/obj/item/stock_parts/capacitor)
 
-	active_power_usage = initial(active_power_usage) - scan_rating * 25 // 25W less per tier
-	heating_power = initial(heating_power) + cap_rating * 50 // + 50W per tier
-	cooking_coeff = (1 + (scan_rating + cap_rating) / 20) // +20% per tier
+	active_power_usage = initial(active_power_usage) - scan_rating * 25
+	heating_power = initial(heating_power) + cap_rating * 50
+	cooking_coeff = (1 + (scan_rating + cap_rating) / 20) // 100% eff. becomes 120%, 140%, 160% w/ better parts

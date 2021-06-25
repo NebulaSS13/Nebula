@@ -6,7 +6,7 @@
 // Jellies
 /decl/recipe/amanitajelly
 	appliance = SAUCEPAN
-	reagents = list(/decl/reagent/water = 5, /decl/reagent/alcohol/vodka = 5, /decl/reagent/toxin/amatoxin = 5)
+	reagents = list(/decl/material/liquid/water = 5, /decl/reagent/alcohol/vodka = 5, /decl/reagent/toxin/amatoxin = 5)
 	result = /obj/item/chems/food/snacks/amanitajelly
 	make_food(var/obj/container as obj)
 
@@ -23,7 +23,7 @@
 
 /decl/recipe/porkbowl
 	appliance = SAUCEPAN
-	reagents = list(/decl/reagent/water = 5, /decl/reagent/nutriment/rice = 10)
+	reagents = list(/decl/material/liquid/water = 5, /decl/material/liquid/nutriment/rice = 10)
 	reagent_mix = RECIPE_REAGENT_REPLACE
 	items = list(
 		/obj/item/chems/food/snacks/bacon
@@ -32,7 +32,7 @@
 
 /decl/recipe/crab_legs
 	appliance = SAUCEPAN | POT
-	reagents = list(/decl/reagent/water = 10, /decl/reagent/sodiumchloride = 1)
+	reagents = list(/decl/material/liquid/water = 10, /decl/reagent/sodiumchloride = 1)
 	items = list(
 		/obj/item/chems/food/snacks/crabmeat,
 		/obj/item/chems/food/snacks/spreads

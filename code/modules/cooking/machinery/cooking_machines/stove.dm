@@ -19,7 +19,7 @@
 
 	max_contents = 4
 
-	stat = POWEROFF	//Starts turned off
+	use_power = POWER_USE_OFF	//Starts turned off
 
 	starts_with = list(
 		/obj/item/chems/cooking_container/skillet,

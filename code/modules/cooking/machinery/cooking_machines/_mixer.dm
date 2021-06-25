@@ -11,7 +11,7 @@ fundamental differences
 
 /obj/machinery/appliance/mixer
 	max_contents = 1
-	stat = POWEROFF
+	use_power = POWER_USE_OFF
 	cooking_coeff = 0.75
 	active_power_usage = 3000
 	idle_power_usage = 50
@@ -34,7 +34,13 @@ fundamental differences
 	set name = "Choose output"
 	set category = "Object"
 
-	if (use_check_and_message(usr))
+	if (!isliving(usr))
+		return
+
+	if (usr.incapacitated(usr))
+		return
+
+	if (!usr.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
 		return
 
 	if(!length(output_options))
@@ -105,9 +111,8 @@ fundamental differences
 
 /obj/machinery/appliance/mixer/finish_cooking(var/datum/cooking_item/CI)
 	..()
-	stat |= POWEROFF
 	playsound(src, 'sound/machines/click.ogg', 40, 1)
-	use_power = 0
+	update_use_power(POWER_USE_OFF)
 	CI.reset()
 	update_icon()
 
@@ -118,7 +123,7 @@ fundamental differences
 		icon_state = off_icon
 
 
-/obj/machinery/appliance/mixer/machinery_process()
+/obj/machinery/appliance/mixer/Process()
 	if (!stat)
 		for (var/i in cooking_objs)
 			do_cooking_tick(i)

@@ -14,8 +14,7 @@
 	mobdamagetype = BURN
 	cooking_coeff = 0
 	cooking_power = 0
-	flags = null
-	var/temperature = T20C
+	atom_flags = null
 	var/starts_with = list()
 
 /obj/machinery/appliance/cooker/examine(var/mob/user)
@@ -33,7 +32,7 @@
 /obj/machinery/appliance/cooker/MouseEntered(location, control, params)
 	. = ..()
 	var/list/modifiers = params2list(params)
-	if(modifiers["shift"] && get_dist(usr, src) <= 2)
+	if(modifiers["shift"] && Adjacent(usr))
 		params = replacetext(params, "shift=1;", "") // tooltip doesn't appear unless this is stripped
 		var/description = ""
 		if(!length(cooking_objs))
@@ -77,7 +76,7 @@
 	. = ..()
 	var/interval = (optimal_temp - min_temp)/temp_settings
 	for(var/newtemp = min_temp - interval, newtemp<=optimal_temp, newtemp+=interval)
-		var/image/disp_image = image('icons/mob/screen/radial.dmi', "radial_temp")
+		var/image/disp_image = image('icons/screen/radial.dmi', "radial_temp")
 		var/hue = RotateHue(hsv(0, 255, 255), 120 * (1 - (newtemp-min_temp)/(optimal_temp-min_temp)))
 		disp_image.color = HSVtoRGB(hue)
 		temp_options["[newtemp - T0C]"] = disp_image
@@ -87,30 +86,38 @@
 	for(var/cctype in starts_with)
 		if (length(cooking_objs) >= max_contents)
 			break
-		var/obj/item/chems/cooking_container/CC = new cctype(src)
-		var/datum/cooking_item/CI = new /datum/cooking_item/(CC)
-		cooking_objs.Add(CI)
-	cooking = 0
+		if(isnum(starts_with[cctype]))
+			for(var/i = 0, i<starts_with[cctype], i++)
+				cooking_objs.Add(new /datum/cooking_item/(new cctype(src)))
+		else
+			cooking_objs.Add(new /datum/cooking_item/(new cctype(src)))
+	cooking = FALSE
 
 	queue_icon_update()
 
 /obj/machinery/appliance/cooker/attempt_toggle_power(mob/user)
-	var/wasoff = stat & POWEROFF
-	if (use_check_and_message(user, issilicon(user) ? USE_ALLOW_NON_ADJACENT : 0))
+	var/old_power = use_power
+	if (!isliving(user))
+		return
+	if (!user.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
+		return
+	if (user.stat || user.restrained() || user.incapacitated())
+		return
+	if (!Adjacent(user) && !issilicon(user))
+		to_chat(user, "You can't reach [src] from here.")
 		return
 
-	var/desired_temp = show_radial_menu(user, src, temp_options - (wasoff ? "OFF" : "[set_temp-T0C]"), require_near = TRUE, tooltips = TRUE, no_repeat_close = TRUE)
+	var/desired_temp = show_radial_menu(user, src, temp_options - (!old_power ? "OFF" : "[set_temp-T0C]"), require_near = TRUE, tooltips = TRUE, no_repeat_close = TRUE)
 	if(!desired_temp)
 		return
 
 	if(desired_temp == "OFF")
-		stat |= POWEROFF
+		update_use_power(POWER_USE_OFF)
 	else
 		set_temp = text2num(desired_temp) + T0C
 		to_chat(user, SPAN_NOTICE("You set [src] to [round(set_temp-T0C)]C."))
-		stat &= ~POWEROFF
-	use_power = !(stat & POWEROFF) // will be updated again after heat_up
-	if(wasoff != (stat & POWEROFF))
+		update_use_power(POWER_USE_IDLE) // will be updated later
+	if(old_power != use_power)
 		activation_message(user)
 	playsound(src, 'sound/machines/click.ogg', 40, 1)
 	update_icon()
@@ -129,19 +136,12 @@
 	light.pixel_y = light_y
 	overlays += light
 
-/obj/machinery/appliance/cooker/machinery_process()
-	var/datum/gas_mixture/loc_air = loc.return_air()
-	if (stat || (use_power != 2)) // if we're not actively heating
-		temperature -= min(loss, temperature - loc_air.temperature)
+/obj/machinery/appliance/cooker/Process()
+	if ((temperature >= set_temp) && (stat || use_power == 1))
+		QUEUE_TEMPERATURE_ATOMS(src) // cool every tick if we're not turned on or heating
 	if(!stat)
 		heat_up()
-		update_cooking_power() // update!
-	for(var/cooking_obj in cooking_objs)
-		var/datum/cooking_item/CI = cooking_obj
-		if((CI.container.flags && NOREACT) || !length(CI.container?.reagents.reagent_volumes))
-			continue
-		CI.container.reagents.set_temperature(min(temperature, CI.container.reagents.get_temperature() + 10*SIGN(temperature - CI.container.reagents.get_temperature()))) // max of 5C per second
-	return ..()
+	. = ..()
 
 /obj/machinery/appliance/cooker/power_change()
 	. = ..()
@@ -160,17 +160,29 @@
 
 /obj/machinery/appliance/cooker/proc/heat_up()
 	if (temperature < set_temp)
-		if (use_power == 1 && ((set_temp - temperature) > 5))
+		if (use_power == POWER_USE_IDLE && ((set_temp - temperature) > 5))
 			playsound(src, 'sound/machines/click.ogg', 20, 1)
-			use_power = 2 //If we're heating we use the active power
+			use_power = POWER_USE_ACTIVE //If we're heating we use the active power
 			update_icon()
-		temperature += heating_power / resistance
+		ADJUST_ATOM_TEMPERATURE(src, temperature + heating_power / resistance)
 		update_cooking_power()
-		return TRUE
-	if (use_power == 2)
-		use_power = 1
-		playsound(src, 'sound/machines/click.ogg', 20, 1)
-		update_icon()
+		return 1
+	else
+		if (use_power == POWER_USE_ACTIVE)
+			use_power = POWER_USE_IDLE
+			playsound(src, 'sound/machines/click.ogg', 20, 1)
+			update_icon()
+	QUEUE_TEMPERATURE_ATOMS(src)
+
+/obj/machinery/appliance/cooker/ProcessAtomTemperature()
+	if( use_power != POWER_USE_OFF && !(stat & NOPOWER) ) // must be powered and turned on, to keep heating items
+		update_cooking_power() // update!
+		if(!LAZYLEN(cooking_objs))
+			return TRUE
+		for(var/datum/cooking_item/CI in cooking_objs)
+			QUEUE_TEMPERATURE_ATOMS(CI.container)
+		return TRUE // Don't kill this processing loop unless we're not powered or we're cold.
+	. = ..()
 
 //Cookers do differently, they use containers
 /obj/machinery/appliance/cooker/has_space(var/obj/item/I)

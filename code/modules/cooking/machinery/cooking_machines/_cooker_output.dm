@@ -11,7 +11,7 @@
 	var/max_scale = 2
 	var/scale = 1
 
-	w_class = ITEMSIZE_SMALL
+	w_class = ITEM_SIZE_SMALL
 	var/prefix
 
 /obj/item/chems/food/snacks/variable/Initialize()
@@ -73,14 +73,14 @@
 	desc = "A personalized pan pizza meant for only one person."
 	icon_state = "personal_pizza"
 	size = 20
-	w_class = ITEMSIZE_NORMAL
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/chems/food/snacks/variable/bread
 	name = "bread"
 	desc = "Tasty bread."
 	icon_state = "breadcustom"
 	size = 40
-	w_class = ITEMSIZE_NORMAL
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/chems/food/snacks/variable/pie
 	name = "pie"
@@ -93,14 +93,14 @@
 	desc = "A popular band."
 	icon_state = "cakecustom"
 	size = 40
-	w_class = ITEMSIZE_NORMAL
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/chems/food/snacks/variable/pocket
 	name = "hot pocket"
 	desc = "You wanna put a bangin- oh, nevermind."
 	icon_state = "donk"
 	size = 8
-	w_class = ITEMSIZE_TINY
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/chems/food/snacks/variable/kebab
 	name = "kebab"
@@ -119,35 +119,35 @@
 	desc = "Sugar snap!"
 	icon_state = "cookie"
 	size = 6
-	w_class = ITEMSIZE_TINY
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/chems/food/snacks/variable/donut
 	name = "filled donut"
 	desc = "Donut eat this!" // kill me
 	icon_state = "donut"
 	size = 8
-	w_class = ITEMSIZE_TINY
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/chems/food/snacks/variable/jawbreaker
 	name = "flavored jawbreaker"
 	desc = "It's like cracking a molar on a rainbow."
 	icon_state = "jawbreaker"
 	size = 4
-	w_class = ITEMSIZE_TINY
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/chems/food/snacks/variable/candybar
 	name = "flavored chocolate bar"
 	desc = "Made in a factory downtown."
 	icon_state = "bar"
 	size = 6
-	w_class = ITEMSIZE_TINY
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/chems/food/snacks/variable/sucker
 	name = "flavored sucker"
 	desc = "Suck, suck, suck."
 	icon_state = "sucker"
 	size = 4
-	w_class = ITEMSIZE_TINY
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/chems/food/snacks/variable/jelly
 	name = "jelly"
@@ -160,7 +160,7 @@
 	desc = "Crispy and flaky"
 	icon_state = "cereal_box"
 	size = 30
-	w_class = ITEMSIZE_NORMAL
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/chems/food/snacks/variable/cereal/Initialize()
 	. =..()
@@ -169,6 +169,6 @@
 /obj/item/chems/food/snacks/variable/mob
 	desc = "Poor little thing."
 	size = 5
-	w_class = ITEMSIZE_TINY
+	w_class = ITEM_SIZE_TINY
 	var/kitchen_tag = "animal"
 

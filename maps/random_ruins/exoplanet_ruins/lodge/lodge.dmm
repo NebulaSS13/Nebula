@@ -75,7 +75,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)
 "n" = (
-/obj/machinery/cooker/oven,
+/obj/machinery/appliance/cooker/oven,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
