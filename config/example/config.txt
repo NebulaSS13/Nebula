@@ -454,3 +454,8 @@ RADIATION_LOWER_LIMIT 0.15
 ## Whether or not to make localhost immune to throttling.
 ## Localhost will still be throttled internally; it just won't be affected by it.
 #NO_THROTTLE_LOCALHOST
+
+## Uncomment this to toggle profiler on server and profiler controller.
+## This will make profiler controller collect profiler info and store it in log directory in json format.
+## Don't use it on live server, exept you need it for live tests.
+#ENABLE_AUTOMATIC_PROFILER

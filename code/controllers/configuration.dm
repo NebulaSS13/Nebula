@@ -251,6 +251,8 @@ var/global/list/gamemode_cache = list()
 
 	var/no_throttle_localhost
 
+	var/enable_automatic_profiler
+
 	var/static/list/protected_vars = list(
 		"comms_password",
 		"ban_comms_password",
@@ -805,6 +807,9 @@ var/global/list/gamemode_cache = list()
 
 				if("no_throttle_localhost")
 					config.no_throttle_localhost = TRUE
+
+				if("enable_automatic_profiler")
+					config.enable_automatic_profiler = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
