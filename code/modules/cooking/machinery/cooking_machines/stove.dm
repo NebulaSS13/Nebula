@@ -27,7 +27,7 @@
 		/obj/item/chems/cooking_container/saucepan
 	)
 
-/obj/machinery/appliance/cooker/stove/update_icon()
+/obj/machinery/appliance/cooker/stove/on_update_icon()
 	. = ..()
 	cut_overlays()
 	var/list/pans = list()

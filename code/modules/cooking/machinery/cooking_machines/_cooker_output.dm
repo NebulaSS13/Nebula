@@ -57,7 +57,7 @@
 		scale = min_scale
 	w_class = round(initial(w_class) * scale)
 
-/obj/item/chems/food/snacks/variable/update_icon(var/overwrite = FALSE)
+/obj/item/chems/food/snacks/variable/on_update_icon(var/overwrite = FALSE)
 	if(!scale || overwrite)
 		update_scale()
 

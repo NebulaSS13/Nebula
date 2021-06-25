@@ -103,7 +103,7 @@
 		if(CI.container == CC)
 			return CI
 
-/obj/machinery/appliance/update_icon()
+/obj/machinery/appliance/on_update_icon()
 	if (!stat && length(cooking_objs))
 		icon_state = on_icon
 	else

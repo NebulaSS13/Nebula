@@ -75,7 +75,7 @@
 
 	cooking_power *= oil_efficiency
 
-/obj/machinery/appliance/cooker/fryer/update_icon()
+/obj/machinery/appliance/cooker/fryer/on_update_icon()
 	if (cooking)
 		icon_state = on_icon
 		fry_loop.start()

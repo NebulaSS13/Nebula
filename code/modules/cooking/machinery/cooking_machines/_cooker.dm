@@ -125,7 +125,7 @@
 /obj/machinery/appliance/cooker/proc/activation_message(var/mob/user)
 	user.visible_message("<b>[user]</b> turns [use_power ? "on" : "off"] [src].", "You turn [use_power ? "on" : "off"] [src].")
 
-/obj/machinery/appliance/cooker/update_icon()
+/obj/machinery/appliance/cooker/on_update_icon()
 	overlays.Cut()
 	var/image/light
 	if (use_power == 2 && !stat)

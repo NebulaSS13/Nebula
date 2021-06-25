@@ -258,16 +258,17 @@
 
 /obj/item/chems/cooking_container/plate/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/kitchen/utensil))
-		user.visible_message("<b>\The [user]</b> stirs \the [src] with \the [I].", SPAN_NOTICE("You stir \the [src] with \the [I]."))
-		do_mix()
+		if(do_mix())
+			user.visible_message("<b>\The [user]</b> stirs \the [src] with \the [I].", SPAN_NOTICE("You stir \the [src] with \the [I]."))
+			return
 	return ..()
 
 /obj/item/chems/cooking_container/plate/proc/do_mix()
 	if(!(length(contents) || reagents?.total_volume))
-		return ..()
+		return FALSE
 	var/decl/recipe/recipe = select_recipe(src, appliance = appliancetype)
 	if(!recipe)
-		return
+		return FALSE
 	var/list/results = recipe.make_food(src)
 	var/obj/temp = new /obj(src) //To prevent infinite loops, all results will be moved into a temporary location so they're not considered as inputs for other recipes
 	for (var/result in results)
@@ -288,7 +289,7 @@
 		R.forceMove(src) //Move everything from the buffer back to the container
 
 	QDEL_NULL(temp) //delete buffer object
-	return ..()
+	return TRUE
 
 /obj/item/chems/cooking_container/plate/bowl
 	name = "serving bowl"
