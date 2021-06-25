@@ -251,7 +251,7 @@
 		if(jump_plot_timer)
 			return // already plotting a jump.
 		var/jd = plot_jump(to_plot_x, to_plot_y)
-		ping("Jump plotting initiated, ETA [jd/20] seconds.")
+		ping("Jump plotting initiated, ETA [jd/10] seconds.")
 
 	if(href_list["cancel_plot"])
 		if(jump_plot_timer)
