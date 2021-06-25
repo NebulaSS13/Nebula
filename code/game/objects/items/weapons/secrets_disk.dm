@@ -28,7 +28,7 @@
 	"that runs off of an exotic form of matter", "that runs off of hydrogen gas", "created by aliens", "that just looks really cool")
 
 /obj/item/disk/secret_project/examine(mob/user)
-	..()
+	. = ..()
 	if(!locked)
 		to_chat(user, "With the disk's classified contents unlocked, \
 		you peer into its preview screen and see <span class='notice'>[subject]</span>.")
