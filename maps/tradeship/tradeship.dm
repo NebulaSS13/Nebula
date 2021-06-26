@@ -27,6 +27,7 @@
 
 	#include "tradeship_antagonists.dm"
 	#include "tradeship_areas.dm"
+	#include "tradeship_departments.dm"
 	#include "tradeship_documents.dm"
 	#include "tradeship_jobs.dm"
 	#include "tradeship_loadouts.dm"

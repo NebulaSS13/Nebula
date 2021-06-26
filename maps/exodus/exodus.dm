@@ -60,6 +60,7 @@
 	#include "exodus_cameras.dm"
 	#include "exodus_areas.dm"
 	#include "exodus_elevator.dm"
+	#include "exodus_departments.dm"
 	#include "exodus_jobs.dm"
 	#include "exodus_loadout.dm"
 	#include "exodus_overmap.dm"

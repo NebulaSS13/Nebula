@@ -57,18 +57,3 @@
 		if(!MS)
 			return
 		MS.send_to_department(department,"Page to <b>[location]</b> was acknowledged.", "*ack*")
-
-/obj/machinery/network/pager/medical
-	department = /decl/department/medical
-
-/obj/machinery/network/pager/cargo 
-	department = /decl/department/supply
-
-/obj/machinery/network/pager/security 
-	department = /decl/department/security
-
-/obj/machinery/network/pager/science
-	department = /decl/department/science
-
-/obj/machinery/network/pager/engineering
-	department = /decl/department/engineering

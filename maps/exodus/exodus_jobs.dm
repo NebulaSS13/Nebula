@@ -1,3 +1,12 @@
+/datum/job/assistant
+	department_types = list(/decl/department/civilian)
+
+/datum/job/ai
+	department_types = list(/decl/department/miscellaneous)
+
+/datum/job/cyborg
+	department_types = list(/decl/department/miscellaneous)
+
 /datum/map/exodus
 	allowed_jobs = list(
 		/datum/job/captain,
