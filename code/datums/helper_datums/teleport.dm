@@ -19,18 +19,44 @@
 			var/atom/movable/buckled = L.buckled
 			buckled.forceMove(destination)
 
+/decl/teleport/proc/can_reach_z(var/oz, var/tz)
 
+	if(oz in global.using_map.admin_levels)
+		return (tz in global.using_map.admin_levels) || (tz in global.using_map.station_levels) || (tz in global.using_map.contact_levels)
+
+	var/list/accessible_z_levels = GetConnectedZlevels(oz)
+	var/obj/effect/overmap/sector = map_sectors["[oz]"]
+	if(sector)
+
+		var/list/neighbors_to_add = list()
+		for(var/obj/effect/overmap/visitable/neighbor in sector.loc)
+			neighbors_to_add |= neighbor
+
+		var/list/neighboring_sectors = list()
+		while(length(neighbors_to_add))
+			var/obj/effect/overmap/visitable/neighbor = neighbors_to_add[1]
+			neighbors_to_add -= neighbor
+			neighboring_sectors |= neighbor
+			for(var/obj/effect/overmap/visitable/subneighbor in neighbor)
+				if(!(subneighbor in neighboring_sectors))
+					neighbors_to_add |= subneighbor
+
+		for(var/obj/effect/overmap/visitable/neighbor in neighboring_sectors)
+			accessible_z_levels |= neighbor.map_z
+
+	return (tz in accessible_z_levels)
+	
 /decl/teleport/proc/can_teleport(var/atom/movable/target, var/atom/destination)
-	if(!destination || !target || !target.loc || destination.z > max_default_z_level())
-		return 0
-
+	if(!destination || !target?.loc)
+		return FALSE
+	if(!can_reach_z(target.z, destination.z))
+		return FALSE
 	if(is_type_in_list(target, teleport_blacklist))
-		return 0
-
-	for(var/type in teleport_blacklist)
-		if(!length(target.search_contents_for(type)))
-			return 0
-	return 1
+		return FALSE
+	for(var/thing in target)
+		if(is_type_in_list(thing, teleport_blacklist))
+			return FALSE
+	return TRUE
 
 /decl/teleport/sparks/proc/do_spark(var/atom/target)
 	if(!target.simulated)

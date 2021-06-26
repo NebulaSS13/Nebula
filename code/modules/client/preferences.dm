@@ -84,7 +84,6 @@ var/global/list/time_prefs_fixed = list()
 
 	sanitize_preferences()
 	update_preview_icon()
-	update_character_previews(usr)
 	if(client && istype(client.mob, /mob/new_player))
 		var/mob/new_player/np = client.mob
 		np.show_lobby_menu(TRUE)
@@ -287,7 +286,6 @@ var/global/list/time_prefs_fixed = list()
 		return 0
 
 	update_preview_icon()
-	update_character_previews(usr)
 	update_setup_window(usr)
 	return 1
 

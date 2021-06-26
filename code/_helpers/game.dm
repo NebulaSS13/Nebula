@@ -7,16 +7,6 @@
 		return 1
 	return 0
 
-/proc/max_default_z_level()
-	var/max_z = 0
-	for(var/z in global.using_map.station_levels)
-		max_z = max(z, max_z)
-	for(var/z in global.using_map.admin_levels)
-		max_z = max(z, max_z)
-	for(var/z in global.using_map.player_levels)
-		max_z = max(z, max_z)
-	return max_z
-
 /proc/living_observers_present(var/list/zlevels)
 	if(LAZYLEN(zlevels))
 		for(var/mob/M in global.player_list) //if a tree ticks on the empty zlevel does it really tick
