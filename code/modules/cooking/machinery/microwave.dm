@@ -43,7 +43,6 @@
 	var/start_time = 0
 	var/end_time = 0
 	var/cooking_power = 1
-	var/list/ingredients = list()
 
 /*******************
 *   Initialising
@@ -62,7 +61,6 @@
 
 /obj/machinery/microwave/proc/add_item(var/obj/item/W as obj, var/mob/user as mob)
 	user.drop_from_inventory(W, src)
-	LAZYADD(ingredients, W)
 	user.visible_message( \
 		SPAN_NOTICE("\The [user] has added one of [W] to \the [src]."), \
 		SPAN_NOTICE("You add one of [W] to \the [src]."))
@@ -141,7 +139,7 @@
 		else
 			to_chat(user, SPAN_NOTICE("You decide not to do that."))
 	else
-		if (length(ingredients)>=max_n_of_items)
+		if (length(get_contained_external_atoms())>=max_n_of_items)
 			to_chat(user, SPAN_WARNING("This [src] is full of ingredients, you can't fit any more!"))
 			return 1
 		if(istype(O, /obj/item/stack))
@@ -199,7 +197,7 @@
 /obj/machinery/microwave/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/list/data = list()
 	data["cooking_items"] = list()
-	for(var/obj/O in ingredients)
+	for(var/obj/O in get_contained_external_atoms())
 		data["cooking_items"][O.name]++
 	data["cooking_reagents"] = list()
 	for(var/decl/material/M in reagents.reagent_volumes)
@@ -208,7 +206,7 @@
 	data["failed"] = failed
 	data["start_time"] = start_time
 	data["cook_time"] = cook_time
-	data["past_half_time"] = REALTIMEOFDAY > (start_time + cook_time/2)
+	data["past_half_time"] = REALTIMEOFDAY >= (start_time + cook_time/2)
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -230,7 +228,7 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 
-	if (!reagents.total_volume && !(locate(/obj) in ingredients)) //dry run
+	if (!reagents.total_volume && !(locate(/obj) in get_contained_external_atoms())) //dry run
 		start()
 		return
 
@@ -303,7 +301,7 @@
 	SSnano.update_uis(src)
 
 /obj/machinery/microwave/proc/has_extra_item()
-	for (var/obj/O in ingredients)
+	for (var/obj/O in get_contained_external_atoms())
 		if ( \
 				!istype(O,/obj/item/chems/food) && \
 				!istype(O, /obj/item/grown) \
@@ -366,6 +364,8 @@
 	var/obj/item/chems/food/snacks/badrecipe/ffuu = new(src)
 	var/amount = 0
 
+	var/list/ingredients = get_contained_external_atoms()
+
 	// Kill + delete mobs in mob holders
 	for (var/obj/item/holder/H in ingredients)
 		for (var/mob/living/M in H.contents)
@@ -377,7 +377,6 @@
 		if (O.reagents && O.reagents.primary_reagent)
 			amount += REAGENT_VOLUME(O.reagents, O.reagents.primary_reagent)
 		qdel(O)
-	LAZYCLEARLIST(ingredients)
 	reagents.clear_reagents()
 	SSnano.update_uis(src)
 	ffuu.reagents.add_reagent(/decl/material/solid/carbon, amount)
@@ -411,7 +410,7 @@
 		cook()
 		return TOPIC_REFRESH
 	else if(href_list["eject_all"])
-		if(length(ingredients))
+		if(length(get_contained_external_atoms()))
 			eject(user, TRUE)
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED
@@ -422,7 +421,7 @@
 				eject_reagent(M, user)
 				return TOPIC_REFRESH
 	else if(href_list["ejecti"])
-		for (var/obj/O in ingredients)
+		for (var/obj/O in get_contained_external_atoms())
 			if(O.name == href_list["ejecti"])
 				eject(user, FALSE, O)
 				return TOPIC_REFRESH
@@ -447,11 +446,9 @@
 /obj/machinery/microwave/proc/eject(var/mob/user, var/message = TRUE, var/obj/EJ = null)
 	if (EJ)
 		EJ.forceMove(loc)
-		ingredients -= EJ
 	else
-		for (var/atom/movable/A in ingredients)
+		for (var/atom/movable/A in get_contained_external_atoms())
 			A.forceMove(loc)
-			ingredients -= A
 		if (reagents.total_volume)
 			dirty += round(reagents.total_volume / 10)
 			reagents.clear_reagents()
