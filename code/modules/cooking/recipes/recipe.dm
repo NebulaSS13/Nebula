@@ -210,7 +210,7 @@
 	if (LAZYLEN(reagents))
 		for (var/r in reagents)
 			//Doesnt matter whether or not there's enough, we assume that check is done before
-			container.reagents.trans_type_to(buffer, r, reagents[r])
+			container.reagents.trans_type_to_holder(buffer, r, reagents[r])
 
 	/*
 	Now we've removed all the ingredients that were used and we have the buffer containing the total of
@@ -250,7 +250,7 @@
 				var/bvol = REAGENT_VOLUME(buffer, _R)
 				if (rvol < bvol)
 					//Transfer the difference
-					buffer.trans_type_to(holder, _R, bvol-rvol)
+					buffer.trans_type_to_holder(holder, _R, bvol-rvol)
 
 		if (RECIPE_REAGENT_MIN)
 			//Min is slightly more complex. We want the result to have the lowest from each side
@@ -259,7 +259,7 @@
 				var/rvol = REAGENT_VOLUME(holder, _R)
 				var/bvol = REAGENT_VOLUME(buffer, _R)
 				if (rvol == 0) //If the target has zero of this reagent
-					buffer.trans_type_to(holder, _R, bvol)
+					buffer.trans_type_to_holder(holder, _R, bvol)
 					//Then transfer all of ours
 
 				else if (rvol > bvol)
