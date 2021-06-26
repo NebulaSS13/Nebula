@@ -26,7 +26,7 @@ SUBSYSTEM_DEF(jobs)
 
 /datum/controller/subsystem/jobs/proc/get_department_by_type(var/dept_ref)
 	if(!length(departments_by_type))
-		departments_by_type = sortTim(decls_repository.get_decls_of_subtype(/decl/department), /proc/cmp_departments_dsc, TRUE)
+		departments_by_type = sortTim(decls_repository.get_decls_of_type(/decl/department), /proc/cmp_departments_dsc, TRUE)
 	. = departments_by_type[dept_ref]
 
 /datum/controller/subsystem/jobs/Initialize(timeofday)

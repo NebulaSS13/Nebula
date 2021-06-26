@@ -3,7 +3,6 @@
 	supervisors = "the Head Engineer"
 	total_positions = 2
 	spawn_positions = 2
-	hud_icon = "hudengineer"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/engine
 	department_types = list(/decl/department/engineering)
 	total_positions = 8

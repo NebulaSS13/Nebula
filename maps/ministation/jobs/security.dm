@@ -4,7 +4,6 @@
 	supervisors = "the Lieutenant and the Captain"
 	spawn_positions = 1
 	total_positions = 2
-	hud_icon = "hudsecurityofficer"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/security
 	department_types = list(/decl/department/security)
 	selection_color = "#990000"
@@ -37,7 +36,6 @@
 	supervisors = "Justice... and the Trademaster"
 	spawn_positions = 1
 	total_positions = 1
-	hud_icon = "huddetective"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/detective
 	department_types = list(/decl/department/security)
 	selection_color = "#630000"

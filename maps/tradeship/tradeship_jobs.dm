@@ -2,6 +2,7 @@
 	default_job_type = /datum/job/tradeship_deckhand
 	default_department_type = /decl/department/civilian
 	default_law_type = /datum/ai_laws/corporate
+	id_hud_icons = 'maps/tradeship/hud.dmi'
 	allowed_jobs = list(
 		/datum/job/tradeship_deckhand,
 		/datum/job/tradeship_captain,

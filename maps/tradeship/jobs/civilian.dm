@@ -9,7 +9,6 @@
 		"Cook" = /decl/hierarchy/outfit/job/tradeship/hand/cook,
 		"Cargo Hand",
 		"Passenger")
-	hud_icon = "hudcargotechnician"
 	department_types = list(/decl/department/civilian)
 	economic_power = 1
 	access = list()

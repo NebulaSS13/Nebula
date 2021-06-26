@@ -3,7 +3,6 @@
 	supervisors = "the Lieutenant and the Captain"
 	total_positions = 2
 	spawn_positions = 2
-	hud_icon = "hudengineer"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/engineer
 	department_types = list(/decl/department/engineering)
 	selection_color = "#5b4d20"

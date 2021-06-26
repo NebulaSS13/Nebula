@@ -64,6 +64,12 @@
 
 /datum/job/New()
 
+	if(type == /datum/job && global.using_map.default_job_type == type)
+		title = "Debug Job"
+		hud_icon = "hudblank"
+		outfit_type = /decl/hierarchy/outfit/job/generic/scientist
+		autoset_department = TRUE
+
 	if(!length(department_types) && autoset_department)
 		department_types = list(global.using_map.default_department_type)
 

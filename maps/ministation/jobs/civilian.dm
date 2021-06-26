@@ -25,7 +25,6 @@
 	supervisors = "the Lieutenant and the Captain"
 	total_positions = 1
 	spawn_positions = 1
-	hud_icon = "hudbartender"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/bartender
 	department_types = list(/decl/department/service)
 	selection_color = "#3fbe4a"
@@ -57,7 +56,6 @@
 	supervisors = "the Lieutenant and the Captain"
 	total_positions = 2
 	spawn_positions = 1
-	hud_icon = "hudcargotechnician"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/cargo
 	department_types = list(/decl/department/service)
 	selection_color = "#8a7c00"
@@ -106,7 +104,6 @@
 	department_types = list(/decl/department/service)
 	total_positions = 1
 	spawn_positions = 1
-	hud_icon = "hudjanitor"
 	supervisors = "the Lieutenant and the Captain"
 	economic_power = 3
 	selection_color = "#940088"
@@ -142,7 +139,6 @@
 	department_types = list(/decl/department/service)
 	total_positions = 1
 	spawn_positions = 2
-	hud_icon = "hudlibrarian"
 	supervisors = "the Lieutenant, the Captain, and the smell of old paper"
 	economic_power = 5
 	selection_color = "#008800"
