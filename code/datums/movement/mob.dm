@@ -188,7 +188,7 @@
 			to_chat(mob, SPAN_WARNING("You're pinned down by \a [mob.pinned[1]]!"))
 		return MOVEMENT_STOP
 
-	for(var/obj/item/grab/G as anything in mob.grabbed_by)
+	for(var/obj/item/grab/G AS_ANYTHING in mob.grabbed_by)
 		if(G.assailant != mob && G.assailant != mover && (mob.restrained() || G.stop_move()))
 			if(mover == mob)
 				to_chat(mob, SPAN_WARNING("You're restrained and cannot move!"))
@@ -222,25 +222,25 @@
 
 	var/turf/new_loc = mob.loc
 	if(istype(new_loc))
-		for(var/atom/movable/AM as anything in mob.ret_grab())
+		for(var/atom/movable/AM AS_ANYTHING in mob.ret_grab())
 			if(AM != src && AM.loc != mob.loc && !AM.anchored && old_turf.Adjacent(AM))
 				AM.glide_size = mob.glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
 				AM.DoMove(get_dir(get_turf(AM), old_turf), mob, TRUE)
 
-		for(var/obj/item/grab/G as anything in mob.get_active_grabs())
+		for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
 			G.adjust_position()
 
-	for(var/obj/item/grab/G as anything in mob.get_active_grabs())
+	for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
 		if(G.assailant_reverse_facing())
 			mob.set_dir(global.reverse_dir[direction])
 		G.assailant_moved()
-	for(var/obj/item/grab/G as anything in mob.grabbed_by)
+	for(var/obj/item/grab/G AS_ANYTHING in mob.grabbed_by)
 		G.adjust_position()
 
 	if(direction & (UP|DOWN))
 		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
 		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
-		for(var/obj/item/grab/G as anything in mob.get_active_grabs())
+		for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
 			if(!G.affecting)
 				continue
 			var/turf/start = G.affecting.loc
