@@ -43,7 +43,7 @@ var/global/universe_has_ended = 0
 	for(var/mob/M in global.player_list)
 		M.flash_eyes()
 
-	if(SSevac.evacuation_controller.cancel_evacuation())
+	if(SSevac.evacuation_controller?.cancel_evacuation())
 		priority_announcement.Announce("The evacuation has been aborted due to severe distortion of local space-time.")
 
 	AreaSet()
