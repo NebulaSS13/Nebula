@@ -107,7 +107,7 @@
 	if(length(container_contents) < length(fruit))
 		return FALSE
 	var/list/needed_fruits = fruit.Copy()
-	for(var/obj/item/chems/food/snacks/S in container)
+	for(var/obj/item/chems/food/snacks/S in container_contents)
 		var/use_tag
 		if(istype(S, /obj/item/chems/food/snacks/grown))
 			var/obj/item/chems/food/snacks/grown/G = S
@@ -180,12 +180,12 @@
 //We will not touch things which are not required for this recipe. They will be left behind for the caller
 //to decide what to do. They may be used again to make another recipe or discarded, or merged into the results,
 //thats no longer the concern of this proc
-	var/datum/reagents/buffer = new /datum/reagents(1e12)//
-
+	var/datum/reagents/buffer = new /datum/reagents(1e12, global.temp_reagents_holder)//
+	var/list/container_contents = container.get_contained_external_atoms()
 	//Find items we need
 	if (LAZYLEN(items))
 		for (var/i in items)
-			var/obj/item/I = locate(i) in container
+			var/obj/item/I = locate(i) in container_contents
 			if (I && I.reagents)
 				I.reagents.trans_to_holder(buffer,I.reagents.total_volume)
 				qdel(I)
@@ -195,7 +195,7 @@
 		var/list/checklist = list()
 		checklist = fruit.Copy()
 
-		for(var/obj/item/chems/food/snacks/grown/G in container)
+		for(var/obj/item/chems/food/snacks/grown/G in container_contents)
 			if(!G.seed || !G.seed.kitchen_tag || isnull(checklist[G.seed.kitchen_tag]))
 				continue
 
@@ -219,7 +219,7 @@
 	If, as in the most common case, there is only a single result, then it will just be a reference to
 	the single-result's reagents
 	*/
-	var/datum/reagents/holder = new/datum/reagents(10000000000)
+	var/datum/reagents/holder = new/datum/reagents(1e12, global.temp_reagents_holder)
 	var/list/results = list()
 	for (var/_ in 1 to result_quantity)
 		var/obj/result_obj = new result(container)

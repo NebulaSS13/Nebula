@@ -262,3 +262,26 @@
 	var/obj/item/chems/food/snacks/amanitajelly/being_cooked = ..(container)
 	being_cooked.reagents.clear_reagent(/decl/material/liquid/amatoxin)
 	return being_cooked
+
+/decl/recipe/toastedsandwich
+	appliance = SKILLET
+	items = list(
+		/obj/item/chems/food/snacks/sandwich
+	)
+	result = /obj/item/chems/food/snacks/toastedsandwich
+
+/decl/recipe/grilledcheese
+	appliance = SKILLET
+	items = list(
+		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/snacks/cheesewedge,
+	)
+	result = /obj/item/chems/food/snacks/grilledcheese
+/decl/recipe/jelliedtoast
+	appliance = SKILLET
+	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
+	items = list(
+		/obj/item/chems/food/snacks/slice/bread,
+	)
+	result = /obj/item/chems/food/snacks/jelliedtoast/cherry

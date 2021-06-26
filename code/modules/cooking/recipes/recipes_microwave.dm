@@ -42,34 +42,10 @@
 	items = list(/obj/item/chems/food/snacks/meat/syntiflesh)
 	result = /obj/item/chems/food/snacks/meatsteak/synthetic
 
-/decl/recipe/toastedsandwich
-	appliance = SKILLET
-	items = list(
-		/obj/item/chems/food/snacks/sandwich
-	)
-	result = /obj/item/chems/food/snacks/toastedsandwich
-
-/decl/recipe/grilledcheese
-	appliance = SKILLET
-	items = list(
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/cheesewedge,
-	)
-	result = /obj/item/chems/food/snacks/grilledcheese
-
 /decl/recipe/rofflewaffles
 	appliance = MICROWAVE
 	reagents = list(/decl/material/liquid/psychotropics = 5, /decl/material/liquid/nutriment/batter/cakebatter = 20)
 	result = /obj/item/chems/food/snacks/rofflewaffles
-
-/decl/recipe/jelliedtoast
-	appliance = SKILLET
-	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
-	items = list(
-		/obj/item/chems/food/snacks/slice/bread,
-	)
-	result = /obj/item/chems/food/snacks/jelliedtoast/cherry
 
 /decl/recipe/boiledrice
 	appliance = MICROWAVE|SAUCEPAN|POT
