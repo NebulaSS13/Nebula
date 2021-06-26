@@ -127,7 +127,10 @@
 /decl/material/liquid/nutriment/batter
 	name = "batter"
 	lore_text = "A gooey mixture of eggs and flour, a base for turning wheat into food."
-	taste_description = "blandness"
+	var/icon_raw = "batter_raw"
+	var/icon_cooked = "batter_cooked"
+	var/coated_adj = "battered"
+	taste_description = "batter"
 	nutriment_factor = 3
 	color = "#ffd592"
 	slipperiness = -1
@@ -135,6 +138,45 @@
 /decl/material/liquid/nutriment/batter/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	..()
 	new /obj/effect/decal/cleanable/pie_smudge(T)
+
+/decl/material/liquid/nutriment/batter/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	//We'll assume that the batter isnt going to be regurgitated and eaten by someone else. Only show this once
+	var/list/data = REAGENT_DATA(holder, type)
+	if (!data["cooked"])
+		//Raw coatings will sometimes cause vomiting
+		if (prob(1))
+			to_chat(M, "This raw [name] tastes disgusting!")
+			if (ishuman(M))
+				var/mob/living/carbon/human/H = M
+				H.vomit()
+	..()
+
+/decl/material/liquid/nutriment/batter/initialize_data(var/newdata) // Called when the reagent is created.
+	. = ..()
+	if (!.)
+		. = list()
+	else
+		if (isnull(.["cooked"]))
+			.["cooked"] = FALSE
+		return .
+	.["cooked"] = FALSE
+
+/decl/material/liquid/nutriment/batter/mix_data(var/datum/reagents/reagents, var/newdata, var/newamount)
+	. = ..()
+	if(newamount > (REAGENT_VOLUME(reagents, type)/2)) // take whatever the majority is
+		.["cooked"] = newdata["cooked"]
+
+/decl/material/liquid/nutriment/batter/beerbatter
+	name = "beer batter mix"
+	color = "#f5f4e9"
+	icon_raw = "batter_raw"
+	icon_cooked = "batter_cooked"
+	coated_adj = "beer-battered"
+	taste_description = "beer batter"
+
+/decl/material/liquid/nutriment/batter/beerbatter/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
+	..()
+	M.add_chemical_effect(CE_ALCOHOL, removed*0.02) //Very slightly alcoholic
 
 /decl/material/liquid/nutriment/batter/cakebatter
 	name = "cake batter"
@@ -400,71 +442,6 @@
 	name = "Corn Oil"
 	lore_text = "An oil derived from corn."
 	taste_description = "corn oil"
-
-/*
-	Coatings are used in cooking. Dipping food items in a reagent container with a coating in it
-	allows it to be covered in that, which will add a masked overlay to the sprite.
-
-	Coatings have both a raw and a cooked image. Raw coating is generally unhealthy
-	Generally coatings are intended for deep frying foods
-*/
-
-/decl/material/liquid/nutriment/coating
-	nutriment_factor = 6 //Less dense than the food itself, but coatings still add extra calories
-	var/icon_raw
-	var/icon_cooked
-	var/coated_adj = "coated"
-	var/cooked_name = "coating"
-	taste_description = "some sort of frying coating"
-
-/decl/material/liquid/nutriment/coating/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed, var/datum/reagents/holder)
-	//We'll assume that the batter isnt going to be regurgitated and eaten by someone else. Only show this once
-	var/list/data = REAGENT_DATA(holder, type)
-	if (!data["cooked"])
-		//Raw coatings will sometimes cause vomiting
-		if (prob(1))
-			to_chat(M, "This raw [name] tastes disgusting!")
-			if (ishuman(M))
-				var/mob/living/carbon/human/H = M
-				H.vomit()
-	..()
-
-/decl/material/liquid/nutriment/coating/initialize_data(var/newdata) // Called when the reagent is created.
-	. = ..()
-	if (!.)
-		. = list()
-	else
-		if (isnull(.["cooked"]))
-			.["cooked"] = FALSE
-		return .
-	.["cooked"] = FALSE
-
-/decl/material/liquid/nutriment/coating/mix_data(var/datum/reagents/reagents, var/newdata, var/newamount)
-	. = ..()
-	if(newamount > (REAGENT_VOLUME(reagents, type)/2)) // take whatever the majority is
-		.["cooked"] = newdata["cooked"]
-
-/decl/material/liquid/nutriment/coating/batter
-	name = "batter mix"
-	cooked_name = "batter"
-	color = "#f5f4e9"
-	icon_raw = "batter_raw"
-	icon_cooked = "batter_cooked"
-	coated_adj = "battered"
-	taste_description = "batter"
-
-/decl/material/liquid/nutriment/coating/beerbatter
-	name = "beer batter mix"
-	cooked_name = "beer batter"
-	color = "#f5f4e9"
-	icon_raw = "batter_raw"
-	icon_cooked = "batter_cooked"
-	coated_adj = "beer-battered"
-	taste_description = "beer-batter"
-
-/decl/material/liquid/nutriment/coating/beerbatter/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	M.add_chemical_effect(CE_ALCOHOL, removed*0.02) //Very slightly alcoholic
 
 // From Synnono's Cooking Expansion on Aurora
 /decl/material/liquid/nutriment/browniemix

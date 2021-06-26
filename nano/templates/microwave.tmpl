@@ -1,7 +1,7 @@
 <div>
 {{if data.on}}
-	{{if helper.byondTimeOfDay() > (data.start_time + data.cook_time/2)}}
-		{{if jQuery.isEmptyObject(data.cookingobjs) && jQuery.isEmptyObject(data.cookingreas)}}
+	{{if data.past_half_time}}
+		{{if jQuery.isEmptyObject(data.cooking_items) && jQuery.isEmptyObject(data.cooking_reagents)}}
 			<p>There's nothing inside. Microwave's working, though!</p>
 		{{else data.failed}}
 			<p>Something doesn't look right...</p>
@@ -20,13 +20,13 @@
 {{else}}
 	<h4>Ingredients</h4>
 	<ul>
-		{{if jQuery.isEmptyObject(data.cookingobjs) && jQuery.isEmptyObject(data.cookingreas)}}
+		{{if jQuery.isEmptyObject(data.cooking_items) && jQuery.isEmptyObject(data.cooking_reagents)}}
 			<li>The microwave is empty!</li>
 		{{/if}}
-		{{props data.cookingobjs :amt:name}}
+		{{props data.cooking_items :amt:name}}
 			<li>{{:helper.link(name + ' • ' + amt, null, {'ejecti': name}, null, 'linkOn')}}</li>
 		{{/props}}
-		{{props data.cookingreas :amt:name}}
+		{{props data.cooking_reagents :amt:name}}
 			<li>{{:helper.link(name + ' • ' + amt + ' units', null, {'ejectr': name}, null, 'linkOn')}}</li>
 		{{/props}}
 	</ul>

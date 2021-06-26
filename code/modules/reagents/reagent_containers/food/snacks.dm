@@ -33,7 +33,7 @@
 		reagents.add_reagent(nutriment_type, nutriment_amt, nutriment_desc)
 	amount_per_transfer_from_this = bitesize
 	for(var/reagent_type in reagents.reagent_volumes)
-		if(ispath(reagent_type, /decl/material/liquid/nutriment/coating))
+		if(ispath(reagent_type, /decl/material/liquid/nutriment/batter))
 			LAZYINITLIST(reagents.reagent_data)
 			LAZYINITLIST(reagents.reagent_data[reagent_type])
 			reagents.reagent_data[reagent_type]["cooked"] = TRUE
@@ -220,7 +220,7 @@
 	if(!dip || !ATOM_IS_OPEN_CONTAINER(dip) || istype(dip, /obj/item/chems/food) || !Adjacent(user))
 		return
 	for (var/reagent_type in dip.reagents?.reagent_volumes)
-		if(!ispath(reagent_type, /decl/material/liquid/nutriment/coating))
+		if(!ispath(reagent_type, /decl/material/liquid/nutriment/batter))
 			continue
 		return apply_coating(dip.reagents, reagent_type, user)
 
@@ -231,7 +231,7 @@
 		to_chat(user, "[src] is already coated in [coating_reagent.name]!")
 		return FALSE
 
-	var/decl/material/liquid/nutriment/coating/applied_coating_reagent = decls_repository.get_decl(applied_coating)
+	var/decl/material/liquid/nutriment/batter/applied_coating_reagent = decls_repository.get_decl(applied_coating)
 
 	//Calculate the reagents of the coating needed
 	var/req = 0
@@ -281,7 +281,7 @@
 /obj/item/chems/food/snacks/proc/cook()
 	if (batter_coating)
 		cut_overlays()
-		var/decl/material/liquid/nutriment/coating/our_coating = decls_repository.get_decl(batter_coating)
+		var/decl/material/liquid/nutriment/batter/our_coating = decls_repository.get_decl(batter_coating)
 		var/icon/I = icon(icon, icon_state, dir)
 		color = "#FFFFFF" //Some fruits use the color var
 		I.Blend(new /icon('icons/obj/food_custom.dmi', rgb(255,255,255)),ICON_ADD)
@@ -294,7 +294,7 @@
 			SetName("[our_coating.coated_adj] [name]")
 
 	for (var/r in reagents.reagent_volumes)
-		if (ispath(r, /decl/material/liquid/nutriment/coating))
+		if (ispath(r, /decl/material/liquid/nutriment/batter))
 			LAZYINITLIST(reagents.reagent_data)
 			LAZYSET(reagents.reagent_data[r], "cooked", TRUE)
 

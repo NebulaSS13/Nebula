@@ -198,16 +198,17 @@
 
 /obj/machinery/microwave/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/list/data = list()
-	data["cookingobjs"] = list()
+	data["cooking_items"] = list()
 	for(var/obj/O in ingredients)
-		data["cookingobjs"][O.name]++
-	data["cookingreas"] = list()
+		data["cooking_items"][O.name]++
+	data["cooking_reagents"] = list()
 	for(var/decl/material/M in reagents.reagent_volumes)
-		data["cookingreas"][M.name] = reagents.reagent_volumes[M]
+		data["cooking_reagents"][M.name] = reagents.reagent_volumes[M]
 	data["on"] = !!operating
 	data["failed"] = failed
 	data["start_time"] = start_time
 	data["cook_time"] = cook_time
+	data["past_half_time"] = REALTIMEOFDAY > (start_time + cook_time/2)
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -298,6 +299,8 @@
 
 	if(failed)
 		visible_message(SPAN_WARNING("\The [src] begins to leak an acrid smoke..."))
+
+	SSnano.update_uis(src)
 
 /obj/machinery/microwave/proc/has_extra_item()
 	for (var/obj/O in ingredients)
