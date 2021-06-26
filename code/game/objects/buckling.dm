@@ -115,5 +115,7 @@
 				"<span class='notice'>\The [M.name] unbuckled themselves!</span>",\
 				"<span class='notice'>You unbuckle yourself from \the [src].</span>",\
 				"<span class='notice'>You hear metal clanking.</span>")
+		for(var/obj/item/grab/G in (M.grabbed_by|grabbed_by))
+			qdel(G)
 		add_fingerprint(user)
 	return M

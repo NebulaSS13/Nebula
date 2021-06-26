@@ -55,14 +55,14 @@
 	events_repository.register(/decl/observ/moved, affecting, src, .proc/on_affecting_move)
 	if(assailant.zone_sel)
 		events_repository.register(/decl/observ/zone_selected, assailant.zone_sel, src, .proc/on_target_change)
-	var/obj/item/organ/O = get_targeted_organ()
 
+	var/obj/item/organ/O = get_targeted_organ()
 	var/decl/pronouns/G = assailant.get_pronouns()
-	if(O)
-		SetName("[name] ([O.name])")
-		events_repository.register(/decl/observ/dismembered, affecting, src, .proc/on_organ_loss)
-		if(affecting != assailant)
-			visible_message(SPAN_DANGER("\The [assailant] has grabbed [affecting]'s [O.name]!"))
+	if(affecting_mob && O) // may have grabbed a buckled mob, so may be grabbing their holder
+		SetName("[name] (\the [affecting_mob]'s [O.name])")
+		events_repository.register(/decl/observ/dismembered, affecting_mob, src, .proc/on_organ_loss)
+		if(affecting_mob != assailant)
+			visible_message(SPAN_DANGER("\The [assailant] has grabbed [affecting_mob]'s [O.name]!"))
 		else
 			visible_message(SPAN_NOTICE("\The [assailant] has grabbed [G.his] [O.name]!"))
 	else
@@ -76,9 +76,10 @@
 
 /obj/item/grab/examine(mob/user)
 	. = ..()
+	var/mob/M = get_affecting_mob()
 	var/obj/item/O = get_targeted_organ()
-	if(O)
-		to_chat(user, "A grip on \the [affecting]'s [O.name].")
+	if(M && O)
+		to_chat(user, "A grip on \the [M]'s [O.name].")
 	else
 		to_chat(user, "A grip on \the [affecting].")
 
