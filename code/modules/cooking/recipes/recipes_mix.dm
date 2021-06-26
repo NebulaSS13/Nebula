@@ -1,323 +1,227 @@
-
-// see code/datums/recipe.dm
-/decl/recipe/hotdog
+/decl/recipe/superbiteburger
+	appliance = MIX|MICROWAVE
+	fruit = list("tomato" = 1)
+	reagents = list(/decl/material/solid/mineral/sodiumchloride = 5, /decl/material/solid/blackpepper = 5)
 	items = list(
-		/obj/item/chems/food/snacks/bun,
-		/obj/item/chems/food/snacks/sausage
+		/obj/item/chems/food/snacks/bigbiteburger,
+		/obj/item/chems/food/snacks/dough,
+		/obj/item/chems/food/snacks/meat,
+		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/snacks/boiledegg,
 	)
-	result = /obj/item/chems/food/snacks/hotdog
+	result = /obj/item/chems/food/snacks/superbiteburger
+
+/decl/recipe/jellyburger
+	appliance = MIX|MICROWAVE
+	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
+	items = list(
+		/obj/item/chems/food/snacks/bun
+	)
+	result = /obj/item/chems/food/snacks/jellyburger/cherry
+
+/decl/recipe/twobread
+	appliance = MIX|MICROWAVE // it's tradition, see
+	reagents = list(/decl/material/liquid/ethanol/wine = 5)
+	items = list(
+		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/snacks/slice/bread,
+	)
+	result = /obj/item/chems/food/snacks/twobread
+
+/decl/recipe/threebread
+	appliance = MIX|MICROWAVE
+	items = list(
+		/obj/item/chems/food/snacks/twobread,
+		/obj/item/chems/food/snacks/slice/bread,
+	)
+	result = /obj/item/chems/food/snacks/threebread
+
+/decl/recipe/cherrysandwich
+	appliance = MIX
+	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
+	items = list(
+		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/snacks/slice/bread,
+	)
+	result = /obj/item/chems/food/snacks/jellysandwich/cherry
+
+/decl/recipe/tossedsalad
+	appliance = MIX
+	fruit = list("cabbage" = 2, "tomato" = 1, "carrot" = 1, "apple" = 1)
+	result = /obj/item/chems/food/snacks/tossedsalad
+
+/decl/recipe/aesirsalad
+	appliance = MIX
+	fruit = list("goldapple" = 1, "biteleafdeus" = 1)
+	result = /obj/item/chems/food/snacks/aesirsalad
+
+/decl/recipe/validsalad
+	appliance = MIX
+	fruit = list("potato" = 1, "biteleaf" = 3)
+	items = list(/obj/item/chems/food/snacks/meatball)
+	result = /obj/item/chems/food/snacks/validsalad
 
 /decl/recipe/classichotdog
+	appliance = MIX|MICROWAVE
 	items = list(
 		/obj/item/chems/food/snacks/bun,
-		/obj/item/chems/food/snacks/meat/corgi
+		/obj/item/holder/corgi
 	)
 	result = /obj/item/chems/food/snacks/classichotdog
 
-/decl/recipe/humanburger
-	items = list(
-		/obj/item/chems/food/snacks/meat/human,
-		/obj/item/chems/food/snacks/bun
-	)
-	result = /obj/item/chems/food/snacks/human/burger
-
-/decl/recipe/mouseburger
+/decl/recipe/meatburger
+	appliance = MIX|MICROWAVE
 	items = list(
 		/obj/item/chems/food/snacks/bun,
-		/obj/item/chems/food/snacks/meat/rat
+		/obj/item/chems/food/snacks/cutlet
 	)
-	result = /obj/item/chems/food/snacks/burger/mouse
-
-/decl/recipe/plainburger
-	items = list(
-		/obj/item/chems/food/snacks/bun,
-		/obj/item/chems/food/snacks/meat //do not place this recipe before /decl/recipe/humanburger
-	)
-	result = /obj/item/chems/food/snacks/burger
+	result = /obj/item/chems/food/snacks/meatburger
 
 /decl/recipe/brainburger
+	appliance = MIX|MICROWAVE
 	items = list(
 		/obj/item/chems/food/snacks/bun,
 		/obj/item/organ/internal/brain
 	)
-	result = /obj/item/chems/food/snacks/burger/brain
+	result = /obj/item/chems/food/snacks/brainburger
+
+/decl/recipe/roburger
+	appliance = MIX|MICROWAVE
+	items = list(
+		/obj/item/chems/food/snacks/bun,
+		/obj/item/robot_parts/head
+	)
+	result = /obj/item/chems/food/snacks/roburger
 
 /decl/recipe/xenoburger
+	appliance = MIX|MICROWAVE
 	items = list(
 		/obj/item/chems/food/snacks/bun,
 		/obj/item/chems/food/snacks/xenomeat
 	)
-	result = /obj/item/chems/food/snacks/burger/xeno
+	result = /obj/item/chems/food/snacks/xenoburger
 
 /decl/recipe/fishburger
+	appliance = MIX|MICROWAVE
 	items = list(
 		/obj/item/chems/food/snacks/bun,
 		/obj/item/chems/food/snacks/fish
 	)
-	result = /obj/item/chems/food/snacks/burger/fish
+	result = /obj/item/chems/food/snacks/fishburger
 
 /decl/recipe/tofuburger
+	appliance = MIX|MICROWAVE
 	items = list(
 		/obj/item/chems/food/snacks/bun,
 		/obj/item/chems/food/snacks/tofu
 	)
-	result = /obj/item/chems/food/snacks/burger/tofu
+	result = /obj/item/chems/food/snacks/tofuburger
 
-/decl/recipe/humankabob
+/decl/recipe/ghostburger
+	appliance = MIX|MICROWAVE
 	items = list(
-		/obj/item/stack/rods,
-		/obj/item/chems/food/snacks/meat/human,
-		/obj/item/chems/food/snacks/meat/human
+		/obj/item/chems/food/snacks/bun,
+		/obj/item/ectoplasm //where do you even find this stuff
 	)
-	result = /obj/item/chems/food/snacks/human/kabob
+	result = /obj/item/chems/food/snacks/ghostburger
 
-/decl/recipe/monkeykabob
+/decl/recipe/clownburger
+	appliance = MIX|MICROWAVE
 	items = list(
-		/obj/item/stack/rods,
-		/obj/item/chems/food/snacks/meat,
-		/obj/item/chems/food/snacks/meat
+		/obj/item/chems/food/snacks/bun,
+		/obj/item/clothing/mask/gas/clown_hat
 	)
-	result = /obj/item/chems/food/snacks/monkeykabob
+	result = /obj/item/chems/food/snacks/clownburger
 
-/decl/recipe/syntikabob
+/decl/recipe/mimeburger
+	appliance = MIX|MICROWAVE
 	items = list(
-		/obj/item/stack/rods,
-		/obj/item/chems/food/snacks/meat/syntiflesh,
-		/obj/item/chems/food/snacks/meat/syntiflesh
+		/obj/item/chems/food/snacks/bun,
+		/obj/item/clothing/head/beret
 	)
-	result = /obj/item/chems/food/snacks/monkeykabob
-
-/decl/recipe/tofukabob
-	items = list(
-		/obj/item/stack/rods,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/tofu
-	)
-	result = /obj/item/chems/food/snacks/tofukabob
-
-/decl/recipe/bigbiteburger
-	items = list(
-		/obj/item/chems/food/snacks/burger,
-		/obj/item/chems/food/snacks/meat,
-		/obj/item/chems/food/snacks/meat,
-		/obj/item/chems/food/snacks/meat
-	)
-	reagents = list(/decl/material/liquid/nutriment/protein/egg = 3)
-	reagent_mix = RECIPE_REAGENT_REPLACE
-	result = /obj/item/chems/food/snacks/burger/bigbite
-
-/decl/recipe/sandwich
-	items = list(
-		/obj/item/chems/food/snacks/meatsteak,
-		/obj/item/chems/food/snacks/breadslice,
-		/obj/item/chems/food/snacks/breadslice,
-		/obj/item/chems/food/snacks/cheesewedge
-	)
-	result = /obj/item/chems/food/snacks/sandwich
+	result = /obj/item/chems/food/snacks/mimeburger
 
 /decl/recipe/bunbun
+	appliance = MIX|MICROWAVE
 	items = list(
 		/obj/item/chems/food/snacks/bun,
 		/obj/item/chems/food/snacks/bun
 	)
 	result = /obj/item/chems/food/snacks/bunbun
 
-/decl/recipe/superbiteburger
-	fruit = list("tomato" = 1)
-	reagents = list(/decl/reagent/sodiumchloride = 5, /decl/reagent/blackpepper = 5)
-	items = list(
-		/obj/item/chems/food/snacks/burger/bigbite,
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/meat,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/boiledegg
-	)
-	result = /obj/item/chems/food/snacks/burger/superbite
-
-/decl/recipe/candiedapple
-	fruit = list("apple" = 1)
-	reagents = list(/decl/material/liquid/water = 5, /decl/reagent/sugar = 5)
-	result = /obj/item/chems/food/snacks/candiedapple
-
-/decl/recipe/slimeburger
-	reagents = list(/decl/reagent/slimejelly = 5)
-	items = list(
-		/obj/item/chems/food/snacks/bun
-	)
-	result = /obj/item/chems/food/snacks/burger/jelly/slime
-
-/decl/recipe/jellyburger
-	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
-	items = list(
-		/obj/item/chems/food/snacks/bun
-	)
-	result = /obj/item/chems/food/snacks/burger/jelly/cherry
-
-/decl/recipe/twobread
-	appliance = SKILLET | MIX
-	reagents = list(/decl/reagent/alcohol/wine = 5)
-	items = list(
-		/obj/item/chems/food/snacks/breadslice,
-		/obj/item/chems/food/snacks/breadslice
-	)
-	result = /obj/item/chems/food/snacks/twobread
-
-/decl/recipe/slimesandwich
-	reagents = list(/decl/reagent/slimejelly = 5)
-	items = list(
-		/obj/item/chems/food/snacks/breadslice,
-		/obj/item/chems/food/snacks/breadslice
-	)
-	result = /obj/item/chems/food/snacks/jellysandwich/slime
-
-/decl/recipe/cherrysandwich
-	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
-	items = list(
-		/obj/item/chems/food/snacks/breadslice,
-		/obj/item/chems/food/snacks/breadslice
-	)
-	result = /obj/item/chems/food/snacks/jellysandwich/cherry
-
-/decl/recipe/tossedsalad
-	fruit = list("cabbage" = 2, "tomato" = 1, "carrot" = 1, "apple" = 1)
-	result = /obj/item/chems/food/snacks/salad/tossedsalad
-
-/decl/recipe/aesirsalad
-	fruit = list("goldapple" = 1, "ambrosiadeus" = 1)
-	result = /obj/item/chems/food/snacks/salad/aesirsalad
-
-/decl/recipe/validsalad
-	fruit = list("potato" = 1, "ambrosia" = 3)
-	items = list(/obj/item/chems/food/snacks/meatball)
-	result = /obj/item/chems/food/snacks/salad/validsalad
-	make_food(var/obj/container as obj)
-
-		. = ..(container)
-		for (var/obj/item/chems/food/snacks/salad/validsalad/being_cooked in .)
-			being_cooked.reagents.del_reagent(/decl/reagent/toxin)
-
-/*
-/decl/recipe/neuralbroke
-	items = list(/obj/item/organ/vaurca/neuralsocket)
-	result = /obj/item/neuralbroke
-*/
-
-/////////////////////////////////////////////////////////////
-//Synnono Meme Foods
-//
-//Most recipes replace reagents with RECIPE_REAGENT_REPLACE
-//to simplify the end product and balance the amount of reagents
-//in some foods. Many require the space spice reagent/condiment
-//to reduce the risk of future recipe conflicts.
-/////////////////////////////////////////////////////////////
-
-/decl/recipe/bearburger
+/decl/recipe/hotdog
+	appliance = MIX|MICROWAVE
 	items = list(
 		/obj/item/chems/food/snacks/bun,
-		/obj/item/chems/food/snacks/bearmeat
+		/obj/item/chems/food/snacks/sausage
 	)
-	result = /obj/item/chems/food/snacks/burger/bear
+	result = /obj/item/chems/food/snacks/hotdog
 
-/decl/recipe/chickenfillet //Also just combinable, like burgers and hot dogs.
+/decl/recipe/meatkabob
+	appliance = MIX|MICROWAVE
 	items = list(
-		/obj/item/chems/food/snacks/chickenkatsu,
-		/obj/item/chems/food/snacks/bun
+		/obj/item/stack/material/rods,
+		/obj/item/chems/food/snacks/cutlet,
+		/obj/item/chems/food/snacks/cutlet
 	)
-	result = /obj/item/chems/food/snacks/chickenfillet
+	result = /obj/item/chems/food/snacks/meatkabob
 
-/decl/recipe/chilicheesefries
-	appliance = SKILLET | SAUCEPAN | MIX // you can reheat it if you'd like
+/decl/recipe/tofukabob
+	appliance = MIX|MICROWAVE
 	items = list(
-		/obj/item/chems/food/snacks/fries,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/hotchili
+		/obj/item/stack/material/rods,
+		/obj/item/chems/food/snacks/tofu,
+		/obj/item/chems/food/snacks/tofu,
 	)
-	reagent_mix = RECIPE_REAGENT_REPLACE //Simplify end product
-	result = /obj/item/chems/food/snacks/chilicheesefries
+	result = /obj/item/chems/food/snacks/tofukabob
 
-/decl/recipe/donerkebab
-	fruit = list("tomato" = 1, "cabbage" = 1)
-	reagents = list(/decl/reagent/sodiumchloride = 1)
+/decl/recipe/spellburger
+	appliance = MIX|MICROWAVE
+	items = list(
+		/obj/item/chems/food/snacks/meatburger,
+		/obj/item/clothing/head/wizard,
+	)
+	result = /obj/item/chems/food/snacks/spellburger
+
+/decl/recipe/bigbiteburger
+	appliance = MIX|MICROWAVE
+	items = list(
+		/obj/item/chems/food/snacks/meatburger,
+		/obj/item/chems/food/snacks/meat,
+		/obj/item/chems/food/snacks/meat,
+		/obj/item/chems/food/snacks/egg,
+	)
+	result = /obj/item/chems/food/snacks/bigbiteburger
+
+/decl/recipe/sandwich
+	appliance = MICROWAVE|MIX
 	items = list(
 		/obj/item/chems/food/snacks/meatsteak,
-		/obj/item/chems/food/snacks/sliceable/flatdough
+		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/snacks/cheesewedge,
 	)
-	result = /obj/item/chems/food/snacks/donerkebab
+	result = /obj/item/chems/food/snacks/sandwich
 
-/decl/recipe/sashimi
-	reagents = list(/decl/material/liquid/nutriment/soysauce = 5)
+/decl/recipe/chazuke
+	appliance = MIX|MICROWAVE|SAUCEPAN|POT // just stir it in a bowl, or heat it
+	reagents = list(/decl/material/liquid/nutriment/rice/chazuke = 10)
+	result = /obj/item/chems/food/snacks/boiledrice/chazuke
+
+/decl/recipe/taco
+	appliance = MIX|MICROWAVE
 	items = list(
-		/obj/item/chems/food/snacks/fish
-	)
-	result = /obj/item/chems/food/snacks/sashimi
-
-
-// Chip update
-
-/decl/recipe/cheese_cracker
-	items = list(
-		/obj/item/chems/food/snacks/spreads,
-		/obj/item/chems/food/snacks/breadslice,
+		/obj/item/chems/food/snacks/doughslice,
+		/obj/item/chems/food/snacks/cutlet,
 		/obj/item/chems/food/snacks/cheesewedge
 	)
-	reagents = list(/decl/reagent/spacespice = 1)
-	result = /obj/item/chems/food/snacks/cheese_cracker
-	result_quantity = 4
+	result = /obj/item/chems/food/snacks/taco
 
-/decl/recipe/baconburger
+/decl/recipe/pelmen
+	appliance = MIX // uncooked
 	items = list(
-		/obj/item/chems/food/snacks/bun,
-		/obj/item/chems/food/snacks/meat,
-		/obj/item/chems/food/snacks/bacon,
-		/obj/item/chems/food/snacks/bacon
+		/obj/item/chems/food/snacks/doughslice,
+		/obj/item/chems/food/snacks/doughslice,
+		/obj/item/chems/food/snacks/rawmeatball
 	)
-	result = /obj/item/chems/food/snacks/burger/bacon
-
-/decl/recipe/blt
-	fruit = list("tomato" = 1, "cabbage" = 1)
-	items = list(
-		/obj/item/chems/food/snacks/breadslice,
-		/obj/item/chems/food/snacks/breadslice,
-		/obj/item/chems/food/snacks/bacon,
-		/obj/item/chems/food/snacks/bacon
-	)
-	result = /obj/item/chems/food/snacks/blt
-
-/decl/recipe/fish_taco
-	appliance = MIX | SKILLET
-	fruit = list("chili" = 1, "lemon" = 1)
-	items = list(
-		/obj/item/chems/food/snacks/fish,
-		/obj/item/chems/food/snacks/tortilla
-	)
-	result = /obj/item/chems/food/snacks/fish_taco
-
-/decl/recipe/mashedpotato
-	fruit = list("potato" = 1)
-	result = /obj/item/chems/food/snacks/mashedpotato
-
-/decl/recipe/icecreamsandwich
-	reagents = list(/decl/material/liquid/drink/milk = 5, /decl/material/liquid/drink/ice = 5)
-	reagent_mix = RECIPE_REAGENT_REPLACE
-	items = list(
-		/obj/item/chems/food/snacks/icecream
-	)
-	result = /obj/item/chems/food/snacks/icecreamsandwich
-
-/decl/recipe/banana_split
-	fruit = list("banana" = 1)
-	reagents = list(/decl/material/liquid/drink/milk = 5, /decl/material/liquid/drink/ice = 5)
-	reagent_mix = RECIPE_REAGENT_REPLACE
-	items = list(
-		/obj/item/chems/food/snacks/icecream
-	)
-	result = /obj/item/chems/food/snacks/banana_split
-
-/decl/recipe/lardwich
-	items = list(
-		/obj/item/chems/food/snacks/flatbread,
-		/obj/item/chems/food/snacks/flatbread,
-		/obj/item/chems/food/snacks/spreads/lard
-	)
-	result = /obj/item/chems/food/snacks/lardwich
-	reagent_mix = RECIPE_REAGENT_REPLACE
+	result = /obj/item/chems/food/snacks/pelmen
