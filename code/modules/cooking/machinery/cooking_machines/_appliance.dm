@@ -12,7 +12,7 @@
 	var/appliancetype = 0
 	density = 1
 	anchored = 1
-	construct_state = /decl/machine_construction/default
+	construct_state = /decl/machine_construction/default/panel_closed
 
 	use_power = 0
 	idle_power_usage = 5			// Power used when turned on, but not processing anything

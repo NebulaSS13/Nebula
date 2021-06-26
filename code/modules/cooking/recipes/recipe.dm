@@ -286,7 +286,9 @@
 		CRASH("Null appliance flag passed to select_recipe!")
 	var/highest_count = 0
 	var/count = 0
-	for (var/decl/recipe/recipe in decls_repository.get_decls_of_subtype(/decl/recipe))
+	var/available_recipes = decls_repository.get_decls_of_subtype(/decl/recipe)
+	for (var/rtype in available_recipes)
+		var/decl/recipe/recipe = available_recipes[rtype]
 		if(!(appliance & recipe.appliance))
 			continue
 		if(!recipe.check_reagents(obj.reagents) || !recipe.check_items(obj)  || !recipe.check_fruit(obj))

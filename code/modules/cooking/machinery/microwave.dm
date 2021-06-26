@@ -99,7 +99,7 @@
 			to_chat(user, SPAN_WARNING("It's broken!"))
 			return 1
 	else if((. = component_attackby(O, user)))
-		eject(FALSE)
+		eject(user, FALSE)
 		return
 	else if(dirty >= 100) // The microwave is all dirty so can't be used!
 		if(istype(O, /obj/item/chems/spray/cleaner) || istype(O, /obj/item/soap) || istype(O, /obj/item/chems/glass/rag)) // If they're trying to clean it then let them
@@ -141,7 +141,7 @@
 		else
 			to_chat(user, SPAN_NOTICE("You decide not to do that."))
 	else
-		if (ingredients.len>=max_n_of_items)
+		if (length(ingredients)>=max_n_of_items)
 			to_chat(user, SPAN_WARNING("This [src] is full of ingredients, you can't fit any more!"))
 			return 1
 		if(istype(O, /obj/item/stack))
@@ -216,7 +216,7 @@
 		ui = new(user, src, ui_key, "microwave.tmpl", capitalize(name), 300, 300)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
-	ui.open()
+		ui.open()
 
 /***********************************
 *   Microwave Menu Handling/Cooking
@@ -262,15 +262,12 @@
 	if(!recipe)
 		return
 	var/result = recipe.result
-	var/valid = TRUE
 	var/list/cooked_items = list()
-	while(valid && recipe)
+	while(recipe)
 		cooked_items += recipe.make_food(src)
-		valid = FALSE
 		recipe = select_recipe(src, appliancetype)
-		if (recipe && (recipe.result == result))
-			sleep(2)
-			valid = TRUE
+		if (!recipe || (recipe.result != result))
+			break
 
 	//Any leftover reagents are divided amongst the foods
 	var/total = reagents.total_volume
@@ -279,7 +276,7 @@
 		S.cook()
 		S.forceMove(loc) // since eject only ejects ingredients!
 
-	eject(0) //clear out anything left
+	eject(message = FALSE) //clear out anything left
 
 	return
 
@@ -290,7 +287,7 @@
 
 	use_power_oneoff(active_power_usage)
 
-	if(world.time > end_time)
+	if(REALTIMEOFDAY > end_time)
 		stop()
 
 /obj/machinery/microwave/proc/half_time_process()
@@ -312,7 +309,7 @@
 	return FALSE
 
 /obj/machinery/microwave/proc/start()
-	start_time = world.time
+	start_time = REALTIMEOFDAY
 	end_time = cook_time + start_time
 	operating = TRUE
 
@@ -340,7 +337,7 @@
 	if(cook_dirty)
 		visible_message(SPAN_WARNING("The insides of the microwave get covered in muck!"))
 		dirty = 100 // Make it dirty so it can't be used util cleaned
-		icon_state = "mwbloody" // Make it look dirty too
+		icon_state = "mwbloody0" // Make it look dirty too
 	else if(cook_break)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(2, global.alldirs, src)
@@ -392,45 +389,40 @@
 
 	return ffuu
 
-/obj/machinery/microwave/Topic(href, href_list)
-	SSnano.update_uis(src)
-	if(..())
-		return
-
+/obj/machinery/microwave/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 	if(dirty >= 100)
 		to_chat(usr, SPAN_WARNING("\The [name] is dirty! You'll need to clean it before using it."))
-		return
+		return TOPIC_NOACTION
 
 	if(broken > 0)
 		to_chat(usr, SPAN_WARNING("\The [name] is broken! You'll need to fix it before using it."))
-		return
-
-	usr.set_machine(src)
+		return TOPIC_NOACTION
 
 	if(operating)
 		if(href_list["abort"])
 			abort = TRUE
 			stop()
-		SSnano.update_uis(src)
-		return
+		return TOPIC_REFRESH
 
 	if(href_list["cook"])
 		cook()
-		SSnano.update_uis(src)
+		return TOPIC_REFRESH
 	else if(href_list["eject_all"])
-		eject()
-	else if(href_list["eject"])
+		if(length(ingredients))
+			eject(user, TRUE)
+			return TOPIC_REFRESH
+		return TOPIC_HANDLED
+	else if(href_list["ejectr"])
 		for (var/material_type in reagents.reagent_volumes)
 			var/decl/material/M = GET_DECL(material_type)
-			if(M.name == href_list["eject"])
-				eject_reagent(M, usr)
-				break
+			if(M.name == href_list["ejectr"])
+				eject_reagent(M, user)
+				return TOPIC_REFRESH
+	else if(href_list["ejecti"])
 		for (var/obj/O in ingredients)
-			if(O.name == href_list["eject"])
-				eject(0, O)
-				break
-
-	return
+			if(O.name == href_list["ejecti"])
+				eject(user, FALSE, O)
+				return TOPIC_REFRESH
 
 /obj/machinery/microwave/proc/eject_reagent(var/material_type, var/mob/user)
 	var/decl/material/M = GET_DECL(material_type)
@@ -449,7 +441,7 @@
 	reagents.trans_type_to(held_container, material_type, amount_to_move)
 	SSnano.update_uis(src)
 
-/obj/machinery/microwave/proc/eject(var/message = TRUE, var/obj/EJ = null)
+/obj/machinery/microwave/proc/eject(var/mob/user, var/message = TRUE, var/obj/EJ = null)
 	if (EJ)
 		EJ.forceMove(loc)
 		ingredients -= EJ
@@ -460,8 +452,8 @@
 		if (reagents.total_volume)
 			dirty += round(reagents.total_volume / 10)
 			reagents.clear_reagents()
-		if (message)
-			to_chat(usr, SPAN_NOTICE("You dispose of the microwave contents."))
+		if (user && message)
+			to_chat(user, SPAN_NOTICE("You dispose of the microwave contents."))
 	SSnano.update_uis(src)
 
 /obj/machinery/microwave/proc/after_finish_loop()

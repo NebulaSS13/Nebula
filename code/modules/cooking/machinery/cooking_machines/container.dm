@@ -19,6 +19,9 @@
 	var/appliancetype // Bitfield, uses the same as appliances
 	w_class = ITEM_SIZE_NORMAL
 	material = /decl/material/solid/metal/stainlesssteel
+	applies_material_colour = FALSE
+	applies_material_name = TRUE
+	randpixel = FALSE
 
 /obj/item/chems/cooking_container/examine(var/mob/user)
 	. = ..()
