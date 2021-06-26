@@ -27,7 +27,7 @@
 		if(grabbing_mob.buckled == grabbing_mob) // Are circular buckles like this even possible?
 			break
 		grabbing_mob = grabbing_mob.buckled
-	if(grabbing_mob)
+	if(grabbing_mob && grabbing_mob != original_target)
 		target = grabbing_mob
 		to_chat(src, SPAN_WARNING("As \the [original_target] is buckled to \the [target], you try to grab that instead!"))
 
