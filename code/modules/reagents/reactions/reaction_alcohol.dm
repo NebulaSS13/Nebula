@@ -114,10 +114,17 @@
 	result_amount = 2
 	mix_message = "The solution roils as it rapidly ferments into a red-brown liquid."
 
-/datum/chemical_reaction/recipe/applecider
+/datum/chemical_reaction/recipe/cider_apple
 	name = "Apple Cider"
-	result = /decl/material/liquid/ethanol/applecider
+	result = /decl/material/liquid/ethanol/cider_apple
 	required_reagents = list(/decl/material/liquid/drink/juice/apple = 2, /decl/material/liquid/nutriment/sugar = 1)
+	catalysts = list(/decl/material/liquid/nutriment = 5)
+	result_amount = 3
+
+/datum/chemical_reaction/recipe/cider_pear
+	name = "Pear Cider"
+	result = /decl/material/liquid/ethanol/cider_pear
+	required_reagents = list(/decl/material/liquid/drink/juice/pear = 2, /decl/material/liquid/nutriment/sugar = 1)
 	catalysts = list(/decl/material/liquid/nutriment = 5)
 	result_amount = 3
 
