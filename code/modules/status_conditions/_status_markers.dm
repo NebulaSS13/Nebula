@@ -1,15 +1,25 @@
 /obj/status_marker
+	name = ""
 	mouse_opacity = 0
 	simulated = FALSE
 	alpha = 0
 	plane = DEFAULT_PLANE
 	layer = POINTER_LAYER
+	vis_flags = VIS_INHERIT_ID
 
 /obj/status_marker/Initialize(var/ml, var/decl/status_condition/status)
+
 	. = ..()
-	name =       status.name
-	icon =       status.status_marker_icon
+
+	if(!istype(status))
+		return INITIALIZE_HINT_QDEL
+	icon = status.status_marker_icon
 	icon_state = status.status_marker_state
+
+	// Throwing these in here in the hopes of preventing the markers showing up in right click.
+	name = ""
+	mouse_opacity = 0
+	verbs.Cut()
 
 /datum/status_marker_holder
 	var/list/markers
