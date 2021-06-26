@@ -65,7 +65,7 @@ var/global/list/known_overmap_sectors
 		LAZYADD(global.known_overmap_sectors, src)
 		layer = ABOVE_LIGHTING_LAYER
 		plane = ABOVE_LIGHTING_PLANE
-		for(var/obj/machinery/computer/ship/helm/H as anything in global.overmap_helm_computers)
+		for(var/obj/machinery/computer/ship/helm/H AS_ANYTHING in global.overmap_helm_computers)
 			H.add_known_sector(src)
 
 	find_z_levels()     // This populates map_z and assigns z levels to the ship.

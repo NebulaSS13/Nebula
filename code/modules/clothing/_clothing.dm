@@ -96,11 +96,12 @@
 
 /obj/item/clothing/on_update_icon()
 	..()
+	var/base_state = get_world_inventory_state()
 	cut_overlays()
 	if(markings_icon && markings_color)
-		add_overlay(mutable_appearance(icon, "[get_world_inventory_state()][markings_icon]", markings_color))
+		add_overlay(mutable_appearance(icon, "[base_state][markings_icon]", markings_color))
 	for(var/obj/item/clothing/accessory/accessory in accessories)
-		var/image/I = accessory.get_attached_inventory_overlay()
+		var/image/I = accessory.get_attached_inventory_overlay(base_state)
 		if(I)
 			add_overlay(I)
 

@@ -483,7 +483,7 @@
 	trap = GET_DECL(trap)
 	trap.forced(mob)
 
-/client/proc/spawn_exoplanet(exoplanet_type as anything in subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
+/client/proc/spawn_exoplanet(exoplanet_type AS_ANYTHING in subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
 	set category = "Debug"
 	set name = "Create Exoplanet"
 
@@ -492,7 +492,7 @@
 	if (isnull(budget) || budget < 0)
 		budget = 5
 
-	var/theme = input("Choose a theme:", "Theme") as anything in typesof(/datum/exoplanet_theme/) | null
+	var/theme = input("Choose a theme:", "Theme") as null|anything in typesof(/datum/exoplanet_theme) | null
 
 	if (!theme)
 		theme = /datum/exoplanet_theme
