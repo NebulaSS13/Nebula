@@ -310,7 +310,7 @@
 			return SPAN_WARNING("You cannot unwrench \the [src], turn it off first.")
 		var/turf/T = src.loc
 		var/hidden_pipe_check = FALSE
-		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+		for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
 			if(node.level)
 				hidden_pipe_check = TRUE
 				break

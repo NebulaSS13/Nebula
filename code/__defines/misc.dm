@@ -259,10 +259,16 @@
 #define WORTH_TO_SUPPLY_POINTS_CONSTANT       0.03
 #define WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT 5
 
-#define  ICON_STATE_WORLD  "world"
-#define  ICON_STATE_INV  "inventory"
+#define ICON_STATE_WORLD "world"
+#define ICON_STATE_INV   "inventory"
 
 #define hex2num(X) text2num(X, 16)
 
 #define GET_DECL(D) (ispath(D, /decl) ? (decls_repository.fetched_decls[D] || decls_repository.get_decl(D)) : null)
 #define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))
+
+#if DM_BUILD < 1540
+#define AS_ANYTHING as()
+#else
+#define AS_ANYTHING as anything
+#endif
