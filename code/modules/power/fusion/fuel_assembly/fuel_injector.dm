@@ -48,8 +48,8 @@
 /obj/machinery/fusion_fuel_injector/attackby(obj/item/W, mob/user)
 
 	if(isMultitool(W))
-		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
-		lanm.set_tag(null, initial_id_tag)
+		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
+		fusion.get_new_tag(user)
 		return
 
 	if(istype(W, /obj/item/fuel_assembly))

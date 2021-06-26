@@ -13,7 +13,7 @@
 	var/recording = 0.0
 	var/playing = 0.0
 	var/playsleepseconds = 0.0
-	var/obj/item/tape/mytape = /obj/item/tape/random
+	var/obj/item/magnetic_tape/mytape = /obj/item/magnetic_tape/random
 	var/canprint = 1
 	var/datum/wires/taperecorder/wires = null // Wires datum
 	var/maintenance = 0
@@ -49,7 +49,7 @@
 		maintenance = !maintenance
 		to_chat(user, "<span class='notice'>You [maintenance ? "open" : "secure"] the lid.</span>")
 		return
-	if(istype(I, /obj/item/tape))
+	if(istype(I, /obj/item/magnetic_tape))
 		if(mytape)
 			to_chat(user, "<span class='notice'>There's already a tape inside.</span>")
 			return
@@ -379,7 +379,7 @@
 	else
 		icon_state = "[bis.base_icon_state]_idle"
 
-/obj/item/tape
+/obj/item/magnetic_tape
 	name = "tape"
 	desc = "A magnetic tape that can hold up to ten minutes of content."
 	icon = 'icons/obj/items/device/tape_casette.dmi'
@@ -401,44 +401,44 @@
 	var/doctored = 0
 
 
-/obj/item/tape/on_update_icon()
+/obj/item/magnetic_tape/on_update_icon()
 	overlays.Cut()
 	if(ruined && max_capacity)
 		overlays += "ribbonoverlay"
 
 
-/obj/item/tape/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/obj/item/magnetic_tape/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	ruin()
 
-/obj/item/tape/attack_self(mob/user)
+/obj/item/magnetic_tape/attack_self(mob/user)
 	if(!ruined)
 		to_chat(user, "<span class='notice'>You pull out all the tape!</span>")
 		get_loose_tape(user, storedinfo.len)
 		ruin()
 
 
-/obj/item/tape/proc/ruin()
+/obj/item/magnetic_tape/proc/ruin()
 	ruined = 1
 	update_icon()
 
 
-/obj/item/tape/proc/fix()
+/obj/item/magnetic_tape/proc/fix()
 	ruined = 0
 	update_icon()
 
 
-/obj/item/tape/proc/record_speech(text)
+/obj/item/magnetic_tape/proc/record_speech(text)
 	timestamp += used_capacity
 	storedinfo += "\[[time2text(used_capacity*10,"mm:ss")]\] [text]"
 
 
 //shows up on the printed transcript as (Unrecognized sound)
-/obj/item/tape/proc/record_noise(text)
+/obj/item/magnetic_tape/proc/record_noise(text)
 	timestamp += used_capacity
 	storedinfo += "*\[[time2text(used_capacity*10,"mm:ss")]\] [text]"
 
 
-/obj/item/tape/attackby(obj/item/I, mob/user, params)
+/obj/item/magnetic_tape/attackby(obj/item/I, mob/user, params)
 	if(user.incapacitated())
 		return
 	if(ruined && isScrewdriver(I))
@@ -464,11 +464,11 @@
 		return
 	else if(isWirecutter(I))
 		cut(user)
-	else if(istype(I, /obj/item/tape/loose))
+	else if(istype(I, /obj/item/magnetic_tape/loose))
 		join(user, I)
 	..()
 
-/obj/item/tape/proc/cut(mob/user)
+/obj/item/magnetic_tape/proc/cut(mob/user)
 	if(!LAZYLEN(timestamp))
 		to_chat(user, "<span class='notice'>There's nothing on this tape!</span>")
 		return
@@ -482,7 +482,7 @@
 	popup.set_content(jointext(output,null))
 	popup.open()
 
-/obj/item/tape/proc/join(mob/user, obj/item/tape/other)
+/obj/item/magnetic_tape/proc/join(mob/user, obj/item/magnetic_tape/other)
 	if(max_capacity + other.max_capacity > initial(max_capacity))
 		to_chat(user, "<span class='notice'>You can't fit this much tape in!</span>")
 		return
@@ -497,7 +497,7 @@
 		update_icon()
 		qdel(other)
 
-/obj/item/tape/OnTopic(var/mob/user, var/list/href_list)
+/obj/item/magnetic_tape/OnTopic(var/mob/user, var/list/href_list)
 	if(href_list["cut_after"])
 		var/index = text2num(href_list["cut_after"])
 		if(index >= timestamp.len)
@@ -509,8 +509,8 @@
 		return TOPIC_REFRESH
 
 //Spawns new loose tape item, with data starting from [index] entry
-/obj/item/tape/proc/get_loose_tape(var/mob/user, var/index)
-	var/obj/item/tape/loose/newtape = new()
+/obj/item/magnetic_tape/proc/get_loose_tape(var/mob/user, var/index)
+	var/obj/item/magnetic_tape/loose/newtape = new()
 	newtape.timestamp = timestamp.Copy(index+1)
 	newtape.storedinfo = storedinfo.Copy(index+1)
 	newtape.max_capacity = max_capacity - index
@@ -524,27 +524,27 @@
 	used_capacity = min(used_capacity,index)
 
 //Random colour tapes
-/obj/item/tape/random/Initialize()
+/obj/item/magnetic_tape/random/Initialize()
 	. = ..()
 	icon_state = "tape_[pick("white", "blue", "red", "yellow", "purple")]"
 
-/obj/item/tape/loose
+/obj/item/magnetic_tape/loose
 	name = "magnetic tape"
 	desc = "Quantum-enriched self-repairing nanotape, used for magnetic storage of information."
 	icon = 'icons/obj/items/device/tape_casette.dmi'
 	icon_state = "magtape"
 	ruined = 1
 
-/obj/item/tape/loose/fix()
+/obj/item/magnetic_tape/loose/fix()
 	return
 
-/obj/item/tape/loose/on_update_icon()
+/obj/item/magnetic_tape/loose/on_update_icon()
 	return
 
-/obj/item/tape/loose/get_loose_tape()
+/obj/item/magnetic_tape/loose/get_loose_tape()
 	return
 
-/obj/item/tape/loose/examine(mob/user, distance)
+/obj/item/magnetic_tape/loose/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
 		to_chat(user, "<span class='notice'>It looks long enough to hold [max_capacity] seconds worth of recording.</span>")

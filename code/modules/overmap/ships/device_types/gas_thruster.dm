@@ -8,7 +8,7 @@
 	var/obj/machinery/atmospherics/unary/engine/E = holder
 	if(!is_on())
 		return 0
-	if(!has_fuel() || (0 < E.use_power_oneoff(charge_per_burn)) || check_blockage())
+	if(!has_fuel() || (0 < E.use_power_oneoff(charge_per_burn * thrust_limit)) || check_blockage())
 		E.audible_message(src, SPAN_WARNING("[holder] coughs once and goes silent!"))
 		E.update_use_power(POWER_USE_OFF)
 		return 0

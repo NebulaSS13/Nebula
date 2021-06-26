@@ -207,6 +207,7 @@ var/global/list/channel_to_radio_key = new
 	message = trim_left(message)
 	message = handle_autohiss(message, speaking)
 	message = format_say_message(message)
+	message = filter_modify_message(message)
 
 	if(speaking && !speaking.can_be_spoken_properly_by(src))
 		message = speaking.muddle(message)
@@ -326,7 +327,6 @@ var/global/list/channel_to_radio_key = new
 	return 1
 
 /mob/living/proc/say_signlang(var/message, var/verb="gestures", var/decl/language/language)
-	message = filter_modify_message(message)
 	for (var/mob/O in viewers(src, null))
 		O.hear_signlang(message, verb, language, src)
 	return 1

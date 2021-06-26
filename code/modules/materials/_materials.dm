@@ -94,6 +94,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/icon_base_natural = 'icons/turf/walls/natural.dmi'
 	var/icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
 	var/wall_flags = 0
+	var/list/wall_blend_icons = list() // Which wall icon types walls of this material type will consider blending with. Assoc list (icon path = TRUE/FALSE)
 	var/use_reinf_state = "full"
 
 	var/door_icon_base = "metal"                         // Door base icon tag. See header.
@@ -305,6 +306,20 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 // Currently used for weapons and objects made of uranium to irradiate things.
 /decl/material/proc/products_need_process()
 	return (radioactivity>0) //todo
+
+// Returns the phase of the matterial at the given temperature and pressure
+// #FIXME: pressure is unused currently
+/decl/material/proc/phase_at_temperature(var/temperature, var/pressure = ONE_ATMOSPHERE)
+	//#TODO: implement plasma temperature and do pressure checks
+	if(temperature >= boiling_point)
+		return MAT_PHASE_GAS
+	else if(temperature >= heating_point)
+		return MAT_PHASE_LIQUID
+	return MAT_PHASE_SOLID
+
+// Returns the phase of matter this material is a standard temperature and pressure (20c at one atmosphere)
+/decl/material/proc/phase_at_stp()
+	return phase_at_temperature(T20C, ONE_ATMOSPHERE)
 
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder

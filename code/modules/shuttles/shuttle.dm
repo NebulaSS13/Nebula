@@ -42,18 +42,22 @@
 		ADJUST_TAG_VAR(motherdock, map_hash)
 
 	var/list/areas = list()
-	if(!islist(shuttle_area))
-		shuttle_area = list(shuttle_area)
-	for(var/T in shuttle_area)
-		var/area/A
-		if(map_hash && islist(SSshuttle.map_hash_to_areas[map_hash]))
-			A = SSshuttle.map_hash_to_areas[map_hash][T] // We try to find the correct area of the given type.
-		else
-			A = locate(T) // But if this is a mainmap shuttle, there is only one anyway so just find it.
-		if(!istype(A))
-			CRASH("Shuttle \"[name]\" couldn't locate area [T].")
-		areas += A
-	shuttle_area = areas
+	if(!isnull(shuttle_area))
+		if(!islist(shuttle_area))
+			shuttle_area = list(shuttle_area)
+		for(var/T in shuttle_area)
+			if(istype(T, /area)) // If the shuttle area is already a type, it does not need to be located. 
+				areas += T
+				continue
+			var/area/A
+			if(map_hash && islist(SSshuttle.map_hash_to_areas[map_hash]))
+				A = SSshuttle.map_hash_to_areas[map_hash][T] // We try to find the correct area of the given type.
+			else
+				A = locate(T) // But if this is a mainmap shuttle, there is only one anyway so just find it.
+			if(!istype(A))
+				CRASH("Shuttle \"[name]\" couldn't locate area [T].")
+			areas += A
+		shuttle_area = areas
 
 	if(initial_location)
 		current_location = initial_location
@@ -174,10 +178,7 @@
 	if(current_location == destination)
 		log_error("Error when attempting to force move a shuttle: Attempted to move [src] to its current location [destination].")
 		return FALSE
-	if(destination.shuttle_restricted != type)
-		log_error("Error when attempting to force move a shuttle: Destination location not restricted for [src]'s use.")
-		return FALSE
-	
+
 	testing("Force moving [src] to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
 

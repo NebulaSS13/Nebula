@@ -175,14 +175,16 @@
 	// Not enough to breathe
 	if(inhale_efficiency < 1)
 		if(prob(20) && active_breathing)
-			if(inhale_efficiency < 0.8)
+			if(inhale_efficiency < 0.6)
 				owner.emote("gasp")
 			else if(prob(20))
 				to_chat(owner, SPAN_WARNING("It's hard to breathe..."))
-		breath_fail_ratio = 1 - inhale_efficiency
+		breath_fail_ratio = Clamp(0,(1 - inhale_efficiency + breath_fail_ratio)/2,1)
 		failed_inhale = 1
 	else
-		breath_fail_ratio = 0
+		if(breath_fail_ratio && prob(20))
+			to_chat(owner, SPAN_NOTICE("It gets easier to breathe."))
+		breath_fail_ratio = Clamp(0,breath_fail_ratio-0.05,1)
 
 	owner.oxygen_alert = failed_inhale * 2
 

@@ -24,6 +24,9 @@
 		return
 	else ..()
 
+/obj/structure/sign/hide()
+	return //Signs should no longer hide in walls.
+
 /obj/item/sign
 	name = "sign"
 	desc = ""
