@@ -48,3 +48,8 @@
 	colour = "#800080"
 	display_priority = 3
 	display_color = "#ccccff"
+
+/decl/department/miscellaneous
+	name = "Misc"
+	display_priority = -1
+	display_color = "#ccffcc"

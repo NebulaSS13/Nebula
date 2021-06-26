@@ -61,3 +61,8 @@
 
 /obj/machinery/network/pager/security 
 	department = /decl/department/security
+
+/decl/department/miscellaneous
+	name = "Misc"
+	display_priority = -1
+	display_color = "#ccffcc"

@@ -1,3 +1,24 @@
+/datum/job/ministation/assistant
+	title = "Assistant"
+	total_positions = -1
+	spawn_positions = -1
+	supervisors = "absolutely everyone"
+	economic_power = 1
+	access = list()
+	minimal_access = list()
+	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant","Visitor")
+	outfit_type = /decl/hierarchy/outfit/job/ministation_assistant
+	department_types = list(/decl/department/civilian)
+
+/datum/job/ministation/assistant/get_access()
+	if(config.assistant_maint)
+		return list(access_maint_tunnels)
+	else
+		return list()
+
+/decl/hierarchy/outfit/job/ministation_assistant
+	name = OUTFIT_JOB_NAME("Ministation Assistant")
+
 /datum/job/ministation/bartender
 	title = "Bartender"
 	alt_titles = list("Cook","Barista")

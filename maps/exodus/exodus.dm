@@ -45,6 +45,7 @@
 	#include "jobs/medical.dm"
 	#include "jobs/science.dm"
 	#include "jobs/security.dm"
+	#include "jobs/synthetics.dm"
 
 	#include "outfits/_pda.dm"
 	#include "outfits/cargo.dm"
@@ -54,7 +55,6 @@
 	#include "outfits/medical.dm"
 	#include "outfits/science.dm"
 	#include "outfits/security.dm"
-	#include "outfits/synthetics.dm"
 
 	#include "exodus_announcements.dm"
 	#include "exodus_antagonism.dm"

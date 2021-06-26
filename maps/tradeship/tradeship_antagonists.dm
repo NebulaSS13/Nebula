@@ -45,6 +45,3 @@
 /decl/special_role/godcultist/Initialize()
 	. = ..()
 	LAZYDISTINCTADD(blacklisted_jobs, /datum/job/tradeship_robot)
-
-
-

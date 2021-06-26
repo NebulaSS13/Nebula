@@ -16,6 +16,7 @@
 	guestbanned = 1	
 	not_random_selectable = 1
 	skip_loadout_preview = TRUE
+	department_types = list(/decl/department/miscellaneous)
 
 /datum/job/ministation/robot/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
 	if(H)

@@ -1,7 +1,8 @@
 /datum/map/tradeship
+	default_job_type = /datum/job/tradeship_deckhand
 	default_law_type = /datum/ai_laws/corporate
 	allowed_jobs = list(
-		/datum/job/assistant,
+		/datum/job/tradeship_deckhand,
 		/datum/job/tradeship_captain,
 		/datum/job/tradeship_first_mate,
 		/datum/job/tradeship_doctor/head,

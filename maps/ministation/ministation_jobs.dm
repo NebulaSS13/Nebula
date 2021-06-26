@@ -1,6 +1,7 @@
 /datum/map/ministation
+	default_job_type = /datum/job/ministation/assistant
 	allowed_jobs = list(
-		/datum/job/assistant,
+		/datum/job/ministation/assistant,
 		/datum/job/ministation/bartender,
 		/datum/job/ministation/captain,
 		/datum/job/ministation/cargo,
