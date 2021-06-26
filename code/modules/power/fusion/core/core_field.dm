@@ -48,8 +48,6 @@
 /obj/effect/fusion_em_field/Initialize(mapload, var/obj/machinery/power/fusion_core/new_owned_core)
 	. = ..()
 
-	addtimer(CALLBACK(src, .proc/update_light_colors), 10 SECONDS, TIMER_LOOP)
-
 	set_light(light_min_range, light_min_power)
 	last_range = light_min_range
 	last_power = light_min_power
@@ -86,6 +84,8 @@
 		catcher.parent = src
 		catcher.SetSize((iter*2)+1)
 		particle_catchers.Add(catcher)
+
+	addtimer(CALLBACK(src, .proc/update_light_colors), 10 SECONDS, TIMER_LOOP)
 
 /obj/effect/fusion_em_field/proc/handle_tick()
 	//make sure the field generator is still intact
@@ -173,7 +173,7 @@
 
 	if (last_range != use_range || last_power != use_power || color != light_color)
 		color = light_color
-		set_light(use_range, use_power) //cap first arg at 1 to avoid breaking lighting stuff.
+		set_light(use_range, min(use_power, 1))
 		last_range = use_range
 		last_power = use_power
 
