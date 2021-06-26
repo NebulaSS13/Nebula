@@ -206,7 +206,6 @@
 	desc = "Chuck ingredients in this to fry something on the stove."
 	icon_state = "skillet"
 	volume = 30
-	force = 11
 	hitsound = 'sound/weapons/smash.ogg'
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER // Will still react
 	appliancetype = SKILLET
@@ -218,7 +217,6 @@
 	icon_state = "pan"
 	volume = 90
 	slot_flags = SLOT_HEAD
-	force = 8
 	hitsound = 'sound/weapons/smash.ogg'
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER // Will still react
 	appliancetype = SAUCEPAN
@@ -230,7 +228,6 @@
 	icon_state = "pot"
 	max_space = 50
 	volume = 180
-	force = 8
 	hitsound = 'sound/weapons/smash.ogg'
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER // Will still react
 	appliancetype = POT
