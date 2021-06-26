@@ -397,7 +397,7 @@
 	glass_name = "aged whiskey"
 	glass_desc = "A well-aged whiskey of high quality. Probably imported."
 
-/decl/material/liquid/ethanol/applecider
+/decl/material/liquid/ethanol/cider_apple
 	name = "apple cider"
 	lore_text = "A refreshing glass of apple cider."
 	taste_description = "cool apple cider"
@@ -406,6 +406,16 @@
 
 	glass_name = "apple cider"
 	glass_desc = "A refreshing glass of apple cider."
+
+/decl/material/liquid/ethanol/cider_pear
+	name = "pear cider"
+	lore_text = "A refreshing glass of pear cider."
+	taste_description = "cool pear cider"
+	color = "#cac089"
+	strength = 50
+
+	glass_name = "pear cider"
+	glass_desc = "A refreshing glass of pear cider."
 
 /decl/material/liquid/ethanol/champagne
 	name = "champagne"
