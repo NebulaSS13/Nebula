@@ -165,12 +165,16 @@
 	assailant.drop_from_inventory(src)
 
 /obj/item/grab/proc/get_affecting_mob()
-	. = isliving(affecting) && affecting
+	if(isobj(affecting))
+		var/obj/O = affecting
+		return O.buckled_mob
+	if(isliving(affecting))
+		return affecting
 
 // Returns the organ of the grabbed person that the grabber is targeting
 /obj/item/grab/proc/get_targeted_organ()
-	if(ishuman(affecting))
-		var/mob/living/carbon/human/affecting_mob = affecting
+	var/mob/affecting_mob = get_affecting_mob()
+	if(istype(affecting_mob))
 		. = affecting_mob.get_organ(target_zone)
 
 /obj/item/grab/proc/resolve_item_attack(var/mob/living/M, var/obj/item/I, var/target_zone)
