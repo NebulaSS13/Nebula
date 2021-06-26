@@ -24,9 +24,11 @@
 	blacklisted_jobs = list(/datum/job/submap)
 	skill_setter = /datum/antag_skill_setter/station
 	faction = "loyalist"
-	var/command_department_id = /decl/department/command
+	var/command_department_id
 
 /decl/special_role/loyalist/Initialize()
+	if(!command_department_id)
+		command_department_id = global.using_map.default_department_type
 	. = ..()
 	welcome_text = "You belong to the [global.using_map.company_name], body and soul. Preserve its interests against the conspirators amongst the crew."
 	faction_welcome = "Preserve [global.using_map.company_short]'s interests against the traitorous recidivists amongst the crew. Protect the heads of staff with your life."

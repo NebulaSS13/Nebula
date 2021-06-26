@@ -48,6 +48,10 @@
 	colour = "#800080"
 	display_priority = 3
 	display_color = "#ccccff"
+	goals = list(/datum/goal/department/paperwork/tradeship)
+
+/obj/machinery/network/pager
+	department = /decl/department/command
 
 /decl/department/miscellaneous
 	name = "Misc"

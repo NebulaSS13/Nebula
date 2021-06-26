@@ -27,7 +27,12 @@
 	faction = "revolutionary"
 
 	blacklisted_jobs = list(/datum/job/submap)
-	var/command_department_id = /decl/department/command
+	var/command_department_id
+
+/decl/special_role/revolutionary/Initialize()
+	if(!command_department_id)
+		command_department_id = global.using_map.default_department_type
+	. = ..()
 
 /decl/special_role/revolutionary/create_global_objectives()
 	if(!..())

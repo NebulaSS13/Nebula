@@ -33,10 +33,16 @@
 	LAZYDISTINCTADD(blacklisted_jobs, /datum/job/computer)
 	LAZYDISTINCTADD(blacklisted_jobs, /datum/job/robot)
 
+/decl/special_role/loyalist
+	command_department_id = /decl/department/command
+
 /decl/special_role/loyalist/Initialize()
 	. = ..()
 	LAZYDISTINCTADD(blacklisted_jobs, /datum/job/computer)
 	LAZYDISTINCTADD(blacklisted_jobs, /datum/job/robot)
+
+/decl/special_role/revolutionary
+	command_department_id = /decl/department/command
 
 /decl/special_role/revolutionary/Initialize()
 	. = ..()

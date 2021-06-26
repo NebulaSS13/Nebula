@@ -12,6 +12,7 @@
 	allowed_ranks = null
 	allowed_branches = null
 	skill_points = 25
+	autoset_department = FALSE
 	max_skill = list(
 		SKILL_LITERACY =     SKILL_MAX,
 		SKILL_FINANCE =      SKILL_MAX,

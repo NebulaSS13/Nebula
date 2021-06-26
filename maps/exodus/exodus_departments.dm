@@ -62,6 +62,9 @@
 	display_priority = 3
 	display_color = "#ccccff"
 
+/obj/machinery/network/pager
+	department = /decl/department/command
+
 /decl/department/miscellaneous
 	name = "Misc"
 	display_priority = -1

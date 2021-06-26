@@ -1,5 +1,6 @@
 /datum/map/exodus
 	default_job_type = /datum/job/assistant
+	default_department_type = /decl/department/civilian
 	allowed_jobs = list(
 		/datum/job/captain,
 		/datum/job/hop,

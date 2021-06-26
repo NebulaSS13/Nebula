@@ -40,7 +40,7 @@ SUBSYSTEM_DEF(jobs)
 		primary_job_datums += job
 
 	for(var/datum/job/job in primary_job_datums)
-		if(isnull(job.primary_department))
+		if(isnull(job.primary_department) && length(job.department_types))
 			job.primary_department = job.department_types[1]
 
 	// Create abstract submap archetype jobs for use in prefs, etc.

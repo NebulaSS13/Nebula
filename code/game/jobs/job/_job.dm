@@ -6,7 +6,8 @@
 	var/list/minimal_access = list()      // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
 	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
 	var/list/software_on_spawn = list()   // Defines the software files that spawn on tablets and labtops
-	var/list/department_types = list()	  // What deparements the job is in.
+	var/list/department_types = list()	  // What departments the job is in.
+	var/autoset_department = TRUE         // If department list is empty, use map default.
 	var/primary_department = null 		  // A jobs primary deparment, defualts to the first in the department refs list if not set. Important for heads, the department they are head of needs to be this one.
 	var/total_positions = 0               // How many players can be this job
 	var/spawn_positions = 0               // How many players can spawn in as this job
@@ -18,7 +19,6 @@
 	var/description						  // If set, returns a static description. To add dynamic text, overwrite this proc, call parent aka . = ..() and then . += "extra text" on the line after that.
 	var/list/event_categories
 	var/skip_loadout_preview = FALSE      // Whether or not the job should render loadout items in char preview.
-
 	var/supervisors = null                // Supervisors, who this person answers to directly
 	var/selection_color = "#515151"       // Selection screen color
 	var/list/alt_titles                   // List of alternate titles, if any and any potential alt. outfits as assoc values.
@@ -63,6 +63,9 @@
 	var/required_language
 
 /datum/job/New()
+
+	if(!length(department_types) && autoset_department)
+		department_types = list(global.using_map.default_department_type)
 
 	if(prob(100-availablity_chance))	//Close positions, blah blah.
 		total_positions = 0

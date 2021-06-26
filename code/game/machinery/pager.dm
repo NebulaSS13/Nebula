@@ -8,10 +8,12 @@
 	var/location
 	var/last_paged
 	var/acknowledged = FALSE
-	var/department = /decl/department/command
+	var/department
 
 /obj/machinery/network/pager/Initialize()
 	. = ..()
+	if(!department)
+		department = SSjobs.departments_by_type[1]
 	if(!location)
 		var/area/A = get_area(src)
 		location = A.name

@@ -1,5 +1,7 @@
 /datum/map/example
 	default_job_type = /datum/job/example
+	default_department_type = /decl/department/example
+	id_hud_icons = 'maps/example/hud.dmi'
 
 /datum/job/example
 	title = "Tourist"
