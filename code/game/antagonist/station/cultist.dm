@@ -22,7 +22,7 @@
 /decl/special_role/cultist
 	name = "Cultist"
 	name_plural = "Cultists"
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/submap)
+	blacklisted_jobs = list(/datum/job/submap)
 	feedback_tag = "cult_objective"
 	antag_indicator = "hudcultist"
 	welcome_text = "You have a tome in your possession; one that will help you start the cult. Use it well and remember - there are others."

@@ -42,11 +42,13 @@
 	#include "tradeship-3.dmm"
 
 	#include "jobs/_goals.dm"
-	#include "jobs/_jobs.dm"
+	#include "jobs/civilian.dm"
 	#include "jobs/command.dm"
 	#include "jobs/engineering.dm"
 	#include "jobs/medical.dm"
 	#include "jobs/science.dm"
+	#include "jobs/synthetics.dm"
+
 	#include "outfits/_outfits.dm"
 	#include "outfits/command.dm"
 	#include "outfits/engineering.dm"

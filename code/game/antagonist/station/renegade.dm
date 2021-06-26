@@ -1,7 +1,7 @@
 /decl/special_role/renegade
 	name = "Renegade"
 	name_plural = "Renegades"
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/submap)
+	blacklisted_jobs = list(/datum/job/submap)
 	restricted_jobs = list()
 	welcome_text = "Something's going to go wrong today, you can just feel it. You're paranoid, you've got a gun, and you're going to survive."
 	antag_text = "You are a <b>minor</b> antagonist! Within the rules, \

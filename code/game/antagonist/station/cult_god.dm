@@ -1,7 +1,7 @@
 /decl/special_role/godcultist
 	name = "God Cultist"
 	name_plural = "God Cultists"
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/submap)
+	blacklisted_jobs = list(/datum/job/submap)
 	feedback_tag = "godcult_objective"
 	antag_indicator = "hudcultist"
 	faction_verb = /mob/living/proc/dpray

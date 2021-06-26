@@ -23,13 +23,13 @@ Now poorly imported for Nebula!
 	#include "ministation_shuttles.dm"
 	#include "ministation_objects.dm"
 
-	#include "jobs/_jobs.dm"
 	#include "jobs/command.dm"
 	#include "jobs/civilian.dm"
 	#include "jobs/engineering.dm"
 	#include "jobs/medical.dm"
 	#include "jobs/security.dm"
 	#include "jobs/science.dm"
+	#include "jobs/synthetics.dm"
 
 	#include "outfits/_outfits.dm"
 	#include "outfits/command.dm"

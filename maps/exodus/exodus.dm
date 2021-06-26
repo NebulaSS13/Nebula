@@ -54,6 +54,7 @@
 	#include "outfits/medical.dm"
 	#include "outfits/science.dm"
 	#include "outfits/security.dm"
+	#include "outfits/synthetics.dm"
 
 	#include "exodus_announcements.dm"
 	#include "exodus_antagonism.dm"

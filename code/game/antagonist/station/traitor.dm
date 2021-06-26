@@ -3,7 +3,7 @@
 	name = "Traitor"
 	name_plural = "Traitors"
 	antaghud_indicator = "hud_traitor"
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/submap)
+	blacklisted_jobs = list(/datum/job/submap)
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
 	skill_setter = /datum/antag_skill_setter/station
 

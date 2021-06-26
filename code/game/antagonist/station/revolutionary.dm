@@ -26,7 +26,7 @@
 	faction_invisible = 1
 	faction = "revolutionary"
 
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg)
+	blacklisted_jobs = list(/datum/job/submap)
 	var/command_department_id = /decl/department/command
 
 /decl/special_role/revolutionary/create_global_objectives()

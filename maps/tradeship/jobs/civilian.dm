@@ -1,9 +1,3 @@
-/datum/job/cyborg
-	supervisors = "your laws and the Captain"
-	total_positions = 1
-	spawn_positions = 1
-	alt_titles = list()
-
 /datum/job/assistant
 	title = "Deck Hand"
 	event_categories = list("Janitor", "Gardener")

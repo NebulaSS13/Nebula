@@ -15,17 +15,41 @@
 	initial_spawn_req = 1
 	initial_spawn_target = 2
 
+/decl/special_role/cultist/Initialize()
+	. = ..()
+	LAZYDISTINCTADD(blacklisted_jobs, /datum/job/robot)
+
 /decl/special_role/renegade
 	initial_spawn_req = 1
 	initial_spawn_target = 2
+
+/decl/special_role/renegade/Initialize()
+	. = ..()
+	LAZYDISTINCTADD(blacklisted_jobs, /datum/job/computer)
 
 /decl/special_role/loyalist
 	initial_spawn_req = 1
 	initial_spawn_target = 2
 
+/decl/special_role/loyalist/Initialize()
+	. = ..()
+	LAZYDISTINCTADD(blacklisted_jobs, /datum/job/robot)
+	
 /decl/special_role/revolutionary
 	initial_spawn_req = 1
 	initial_spawn_target = 2
+
+/decl/special_role/revolutionary/Initialize()
+	. = ..()
+	LAZYDISTINCTADD(blacklisted_jobs, /datum/job/robot)
+
+/decl/special_role/changeling/Initialize()
+	. = ..()
+	LAZYDISTINCTADD(blacklisted_jobs, /datum/job/robot)
+
+/decl/special_role/godcultist/Initialize()
+	. = ..()
+	LAZYDISTINCTADD(blacklisted_jobs, /datum/job/robot)
 
 /datum/map/ministation/potential_theft_targets = list(
 		"an owl mask"                        = /obj/item/clothing/mask/gas/owl_mask,

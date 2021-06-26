@@ -17,6 +17,7 @@
 	var/not_random_selectable = 0		  // If set to 1 this job will not be selected when a player asks for a random job.
 	var/description						  // If set, returns a static description. To add dynamic text, overwrite this proc, call parent aka . = ..() and then . += "extra text" on the line after that.
 	var/list/event_categories
+	var/skip_loadout_preview = FALSE      // Whether or not the job should render loadout items in char preview.
 
 	var/supervisors = null                // Supervisors, who this person answers to directly
 	var/selection_color = "#515151"       // Selection screen color

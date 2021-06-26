@@ -4,7 +4,7 @@
 		/datum/job/ministation/bartender,
 		/datum/job/ministation/captain,
 		/datum/job/ministation/cargo,
-		/datum/job/cyborg,
+		/datum/job/ministation/robot,
 		/datum/job/ministation/detective,
 		/datum/job/ministation/doctor,
 		/datum/job/ministation/engineer,

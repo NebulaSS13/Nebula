@@ -10,7 +10,7 @@
 		/datum/job/tradeship_engineer,
 		/datum/job/tradeship_researcher/head,
 		/datum/job/tradeship_researcher,
-		/datum/job/cyborg
+		/datum/job/tradeship_robot
 	)
 
 /obj/machinery/suit_cycler/tradeship
