@@ -53,7 +53,7 @@
 			injector["id"] =       "#[i]"
 			injector["ref"] =       "\ref[I]"
 			injector["injecting"] =  I.injecting
-			injector["fueltype"] =  "[I.cur_assembly ? capitalize(I.cur_assembly.material.name) : "No Fuel Inserted"]"
+			injector["fueltype"] =  "[I.cur_assembly ? capitalize(I.cur_assembly.material_name) : "No Fuel Inserted"]"
 			injector["depletion"] = "[I.cur_assembly ? (I.cur_assembly.percent_depleted * 100) : 100]%"
 			injector["injection_rate"] = "[I.injection_rate * 100]%"
 			injectors += list(injector)

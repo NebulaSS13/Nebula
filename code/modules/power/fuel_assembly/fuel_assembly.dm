@@ -19,8 +19,10 @@
 			var/decl/material/mat = decls_repository.get_decl(makeup[1])
 			SetName("[mat.use_name] fuel rod assembly")
 			desc = "A fuel rod for nuclear power production. This one is made from [mat.use_name]."
+			material_name = mat.use_name
 		else
 			desc = "A fuel rod for nuclear power production, made up from various materials."
+			material_name = "Mixed material"
 
 		for(var/mat_p in makeup)
 			var/decl/material/mat = decls_repository.get_decl(mat_p)
@@ -33,6 +35,7 @@
 		matter[material.type] = initial_amount
 		SetName("[material.use_name] fuel rod assembly")
 		desc = "A fuel rod for nuclear power production. This one is made from [material.use_name]."
+		material_name = material.use_name
 		if(material.radioactivity)
 			radioactivity = material.radioactivity
 		if(material.luminescence)
@@ -46,16 +49,17 @@
 
 /obj/item/fuel_assembly/on_update_icon()
 	icon_state = "fuel_assembly"
-	if(material) color = material.color
+	if(material)
+		color = material.color
 	else if(length(matter))
 		var/list/colors = list()
 		for(var/mat_p in matter)
 			var/decl/material/mat = decls_repository.get_decl(mat_p)
 			colors += mat.color
-			color = MixColors(colors)
+		color = MixColors(colors)
 	var/image/I = image(icon, "fuel_assembly_bracket")
 	I.appearance_flags |= RESET_COLOR
-	overlays = list(I)
+	set_overlays(I)
 
 /obj/item/fuel_assembly/Process()
 	if(!radioactivity)

@@ -23,14 +23,14 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 
-	var/control_rod_depth = 1			   // 0-1, how deeply the control rods are inserted into the core, controlling neutron absorption.
-	var/neutron_flux = 0				   // The amount of neutrons in the core. Determines the ratio of fuel inside the core that is interacted with each tick.
-	var/neutron_energy = 0			  	   // The average energy of the neutrons in the core. Df
+	var/control_rod_depth = 1   // 0-1, how deeply the control rods are inserted into the core, controlling neutron absorption.
+	var/neutron_flux = 0        // The amount of neutrons in the core. Determines the ratio of fuel inside the core that is interacted with each tick.
+	var/neutron_energy = 0      // The average energy of the neutrons in the core. Df
 
-	var/list/fuel_rods = list()			   // Material inserted into the core, fuel, moderators etc.
+	var/list/fuel_rods = list() // Material inserted into the core, fuel, moderators etc.
 
-	var/max_temperature = 1000			   // Maximum temperature of the interior gas mixture before the core begins to take damage.
-	var/last_message					   // Time of the last damage warning message.
+	var/max_temperature = 1000  // Maximum temperature of the interior gas mixture before the core begins to take damage.
+	var/last_message            // Time of the last damage warning message.
 	var/damage = 0
 	var/melted_down = FALSE
 	
@@ -57,7 +57,7 @@
 	. = ..()
 
 /obj/machinery/atmospherics/unary/fission_core/Process()
-	. = ..()
+	..()
 
 	last_neutron_flux_increase = 0
 	last_neutron_flux_decrease = 0
@@ -69,7 +69,7 @@
 
 	if((!air_contents.get_total_moles() && check_active()) || (air_contents.temperature > max_temperature))
 		// Stopping the reaction is relatively easy, but removing the heat rapidly is not. Total meltdown takes some time.
-		damage += air_contents?.temperature ? min(3, round(air_contents.temperature/max_temperature)) : 3
+		damage += air_contents.temperature ? min(3, round(air_contents.temperature/max_temperature)) : 3
 
 		if(world.time >= last_message + 10 SECONDS)
 			if(damage > 75)
@@ -186,7 +186,7 @@
 			var/decl/material/mat = decls_repository.get_decl(mat_type)
 			total_radioactivity += mat.radioactivity*SHEET_MATERIAL_AMOUNT / rod.matter[mat_type]
 
-	visible_message(SPAN_DANGER("\The [src] explodes, blowing out its radioactive contents!"))
+	visible_message(SPAN_DANGER("\The [src] explodes, blowing out its stored material!"))
 	// The core contained radioactive material, so irradiate the surroundings.
 	SSradiation.radiate(src, total_radioactivity)
 

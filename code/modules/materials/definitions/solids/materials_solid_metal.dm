@@ -33,7 +33,11 @@
 	default_solid_form = /obj/item/stack/material/puck
 
 	neutron_cross_section = 10
-	neutron_interactions = list(INTERACTION_FISSION = 1500, INTERACTION_ABSORPTION = 4000, INTERACTION_SCATTER = 5000)
+	neutron_interactions = list(
+		INTERACTION_FISSION = 1500,
+		INTERACTION_ABSORPTION = 4000,
+		INTERACTION_SCATTER = 5000
+	)
 	fission_products = list(
 		/decl/material/solid/metal/depleted_uranium = 0.6,
 		/decl/material/solid/metal/fission_byproduct = 0.4

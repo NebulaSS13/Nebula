@@ -10,7 +10,10 @@
 	value = 1.5
 
 	neutron_cross_section = 5
-	neutron_interactions = list(INTERACTION_ABSORPTION = 2500, INTERACTION_FISSION = 4500)
+	neutron_interactions = list(
+		INTERACTION_ABSORPTION = 2500,
+		INTERACTION_FISSION = 4500
+	)
 	absorption_products = list(
 		/decl/material/solid/metal/plutonium = 0.8
 	)
@@ -36,7 +39,9 @@
 	value = 0.5
 
 	neutron_cross_section = 4 // Difficult to use as fuel.
-	neutron_interactions = list(INTERACTION_FISSION = 3000)
+	neutron_interactions = list(
+		INTERACTION_FISSION = 3000
+	)
 	fission_products = list(
 		/decl/material/solid/metal/fission_byproduct = 0.2
 	)
@@ -54,7 +59,9 @@
 	value = 3
 
 	neutron_cross_section = 10
-	neutron_interactions = list(INTERACTION_FISSION = 1000)
+	neutron_interactions = list(
+		INTERACTION_FISSION = 1000
+	)
 	fission_products = list(
 		/decl/material/solid/metal/fission_byproduct = 0.5
 	)

@@ -287,7 +287,9 @@
 	gas_symbol = "D"
 	value = 0.5
 
-	neutron_interactions = list(INTERACTION_ABSORPTION = 1250)
+	neutron_interactions = list(
+		INTERACTION_ABSORPTION = 1250
+	)
 	absorption_products = list(
 		/decl/material/gas/hydrogen/tritium = 1
 	)

@@ -4,7 +4,9 @@
 	flags = MAT_FLAG_FUSION_FUEL | MAT_FLAG_FISSIBLE
 
 	neutron_cross_section = 10
-	neutron_interactions = list(INTERACTION_ABSORPTION = 2500)
+	neutron_interactions = list(
+		INTERACTION_ABSORPTION = 2500
+	)
 	absorption_products = list(
 		/decl/material/solid/lithium = 0.5,
 		/decl/material/gas/helium = 0.5
