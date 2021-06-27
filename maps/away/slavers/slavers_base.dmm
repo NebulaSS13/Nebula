@@ -47,7 +47,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "am" = (
-/obj/structure/crematorium,
+/obj/structure/morgue,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "an" = (
