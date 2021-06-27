@@ -625,7 +625,7 @@
 
 /obj/machinery/ftl_shunt/fuel_port/proc/get_fuel_conversion_rate() //This is mostly a fluff proc, since internally everything is done in joules.
 	if(fuel)
-		for(var/G in fuel.rod_quantities)
+		for(var/G in fuel.matter)
 			if(G in fuels)
 				. = fuels[G]
 

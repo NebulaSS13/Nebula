@@ -12,18 +12,17 @@
 	var/diagnostics = FALSE // Whether or not the control computer displays advanced diagnostics.
 
 /obj/machinery/computer/fission/Initialize()
+	. = ..()
 	set_extension(src, /datum/extension/local_network_member)
 	if(initial_id_tag)
 		var/datum/extension/local_network_member/fission = get_extension(src, /datum/extension/local_network_member)
 		fission.set_tag(null, initial_id_tag)
-	
-	. = ..()
 
 /obj/machinery/computer/fission/attackby(var/obj/item/W, var/mob/user)
 	if(isMultitool(W))
 		var/datum/extension/local_network_member/fission = get_extension(src, /datum/extension/local_network_member)
 		fission.get_new_tag(user)
-		return
+		return TRUE
 
 	return ..()
 

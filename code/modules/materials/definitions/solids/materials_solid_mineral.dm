@@ -43,7 +43,9 @@
 	dirtiness = 15
 
 	neutron_cross_section = 30
-	neutron_interactions = list(INTERACTION_SCATTER = 2000)
+	neutron_interactions = list(
+		INTERACTION_SCATTER = 2000
+	)
 	moderation_target = 1500
 	dissolves_into = list(
 		/decl/material/solid/carbon = 0.6,
