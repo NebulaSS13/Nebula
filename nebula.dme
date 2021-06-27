@@ -1178,6 +1178,7 @@
 #include "code\game\objects\structures\catwalk.dm"
 #include "code\game\objects\structures\charge_pylon.dm"
 #include "code\game\objects\structures\coathanger.dm"
+#include "code\game\objects\structures\crematorium.dm"
 #include "code\game\objects\structures\curtains.dm"
 #include "code\game\objects\structures\defensive_barrier.dm"
 #include "code\game\objects\structures\displaycase.dm"
