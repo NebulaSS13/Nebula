@@ -10,7 +10,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 	var/list/commands = decls_repository.get_decls_of_subtype(/decl/topic_command)
 	for (var/command in commands)
 		var/decl/topic_command/TC = commands[command]
-		if(TC.base_type == TC.type)
+		if(TC.base_type == command)
 			continue
 		global.topic_commands[TC.name] = TC
 	return TRUE
@@ -355,7 +355,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 /decl/topic_command/secure/prometheus_metrics
 	name = "prometheus_metrics"
 
-/decl/topic_command/prometheus_metrics/use()
+/decl/topic_command/secure/prometheus_metrics/use()
 	if(!global.prometheus_metrics)
 		return "Metrics not ready"
 	return global.prometheus_metrics.collect()
