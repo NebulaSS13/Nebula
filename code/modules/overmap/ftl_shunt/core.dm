@@ -8,6 +8,7 @@
 	desc = "An immensely powerful transdimensional superluminal bridge initiator capable of forming a micro-wormhole and shunting an entire ship through it in a nanosecond."
 	base_type = /obj/machinery/ftl_shunt/core
 	uncreated_component_parts = list(/obj/item/stock_parts/ftl_core = 1)
+	construct_state = /decl/machine_construction/default/no_deconstruct
 
 	var/list/fuel_ports = list() //We mainly use fusion fuels.
 	var/charge_time //Actually, we do use power now. This is here for the console.
@@ -644,7 +645,8 @@
 // 
 
 /obj/item/stock_parts/circuitboard/ftl_shunt
-	name = "Circuit board (superluminal shunt)"
+	name = "circuit board (superluminal shunt)"
+	board_type = "machine"
 	build_path = /obj/machinery/ftl_shunt/core
 	origin_tech = "{'programming':3,'magnets':5,'materials':5,'wormholes':5}"
 	additional_spawn_components = list(/obj/item/stock_parts/power/terminal = 1)

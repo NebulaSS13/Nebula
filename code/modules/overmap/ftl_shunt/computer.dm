@@ -151,7 +151,7 @@
 			return TOPIC_REFRESH
 
 		var/input_x = to_plot_x
-		var/input_y = to_plot_x
+		var/input_y = to_plot_y
 		var/fumble = user.skill_check(SKILL_PILOT, SKILL_ADEPT) ? 0 : rand(-2, 2)
 
 		if(href_list["set_shunt_x"])
