@@ -10,7 +10,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 	var/list/commands = decls_repository.get_decls_of_subtype(/decl/topic_command)
 	for (var/command in commands)
 		var/decl/topic_command/TC = commands[command]
-		if(TC.base_type == command)
+		if(TC.base_type == TC.type)
 			continue
 		global.topic_commands[TC.name] = TC
 	return TRUE
