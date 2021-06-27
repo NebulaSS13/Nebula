@@ -7,8 +7,10 @@ var/global/list/decl/topic_command/topic_commands = list()
 
 /// Initialises the assoc list of topic commands by key.
 /hook/startup/proc/setup_api()
-	for (var/decl/topic_command/TC in decls_repository.get_decls_of_subtype(/decl/topic_command))
-		if(TC.base_type == type)
+	var/list/commands = decls_repository.get_decls_of_subtype(/decl/topic_command)
+	for (var/command in commands)
+		var/decl/topic_command/TC = commands[command]
+		if(TC.base_type == command)
 			continue
 		global.topic_commands[TC.name] = TC
 	return TRUE
