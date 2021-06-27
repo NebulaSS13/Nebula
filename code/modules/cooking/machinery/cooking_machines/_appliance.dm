@@ -40,14 +40,11 @@
 	var/finish_verb = "pings!"
 	var/combine_first = FALSE//If 1, this appliance will do combination cooking before checking recipes
 
+
 /obj/machinery/appliance/Initialize()
 	. = ..()
 	if(length(output_options))
 		verbs += /obj/machinery/appliance/proc/choose_output
-	if(powered())
-		stat &= ~NOPOWER
-	else
-		stat |= NOPOWER
 
 /obj/machinery/appliance/Destroy()
 	for (var/a in cooking_objs)
@@ -58,10 +55,9 @@
 	return ..()
 
 /obj/machinery/appliance/examine(var/mob/user)
-	..()
-	if(Adjacent(usr))
+	. = ..()
+	if(Adjacent(user))
 		list_contents(user)
-		return TRUE
 
 /obj/machinery/appliance/get_mechanics_info()
 	return "Control-click this to toggle its power."
@@ -123,7 +119,7 @@
 		to_chat(user, "You can't reach [src] from here.")
 		return
 
-	use_power = (use_power == POWER_USE_OFF) ? POWER_USE_IDLE : POWER_USE_OFF // If on, use active power, else use no power
+	update_use_power((use_power == POWER_USE_OFF) ? POWER_USE_IDLE : POWER_USE_OFF) // If on, use active power, else use no power
 	if(user)
 		user.visible_message("[user] turns [src] [use_power ? "on" : "off"].", "You turn [use_power ? "on" : "off"] [src].")
 	playsound(src, 'sound/machines/click.ogg', 40, 1)
@@ -214,7 +210,7 @@
 
 	var/result = can_insert(I, user)
 	if(result == CANNOT_INSERT)
-		return component_attackby(I, user)
+		return ..(I, user)
 
 	if(result == INSERT_GRABBED)
 		var/obj/item/grab/G = I
@@ -501,7 +497,7 @@
 		return ..()
 	attempt_toggle_power(user)
 
-/obj/machinery/appliance/attack_hand(var/mob/user)
+/obj/machinery/appliance/physical_attack_hand(var/mob/user)
 	if (!length(cooking_objs))
 		return
 	if (removal_menu(user))

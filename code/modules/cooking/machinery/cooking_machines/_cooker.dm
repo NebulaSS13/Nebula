@@ -143,10 +143,6 @@
 		heat_up()
 	. = ..()
 
-/obj/machinery/appliance/cooker/power_change()
-	. = ..()
-	queue_icon_update()
-
 /obj/machinery/appliance/cooker/update_cooking_power()
 	var/temp_scale = 0
 	if(temperature > min_temp)

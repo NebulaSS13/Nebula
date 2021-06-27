@@ -297,7 +297,7 @@
 	desc = "A bowl. You bowl foods... wait, what?"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mixingbowl"
-	center_of_mass = list("x" = 17,"y" = 7)
+	center_of_mass = @"{'x':17,'y':7}"
 	max_space = 30
 	matter = list(DEFAULT_WALL_MATERIAL = 300)
 	volume = 90

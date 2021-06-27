@@ -42,6 +42,8 @@ fundamental differences
 
 	if (!usr.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
 		return
+	if (!CanPhysicallyInteract(usr))
+		return
 
 	if(!length(output_options))
 		return
