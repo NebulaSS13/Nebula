@@ -43,7 +43,7 @@
 	playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 	var/turf/T = get_step(src, dir)
 	connected_tray.forceMove(T)
-	connected_tray.dir = dir
+	connected_tray.set_dir(dir)
 	for(var/atom/movable/A in src)
 		if(!ismob(A) && !isobj(A))
 			continue
@@ -77,9 +77,9 @@
 	else
 		open()
 
-	add_fingerprint(user)
+	return ..()
 
-/obj/structure/morgue/attack_robot(var/mob/user)
+/obj/structure/morgue/attack_robot(mob/user)
 	if(Adjacent(user))
 		return attack_hand(user)
 	else 
@@ -127,6 +127,11 @@
 /obj/structure/morgue_tray/attack_hand(mob/user)
 	if(Adjacent(user))
 		connected_morgue.attack_hand(user)
+	return ..()
+
+/obj/structure/morgue_tray/attack_robot(mob/user)
+	if(Adjacent(user))
+		attack_hand(user)
 
 /obj/structure/morgue_tray/receive_mouse_drop(atom/dropping, mob/user)
 	. = ..()
@@ -137,4 +142,3 @@
 			if(user != dropping)
 				user.visible_message(SPAN_NOTICE("\The [user] stuffs \the [dropping] onto \the [src]!"))
 			return TRUE
-
