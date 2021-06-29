@@ -242,6 +242,9 @@
 /datum/fabricator_recipe/imprinter/circuit/ftl
 	path = /obj/item/stock_parts/circuitboard/ftl
 
+/datum/fabricator_recipe/imprinter/circuit/ftl_shunt
+	path = /obj/item/stock_parts/circuitboard/ftl_shunt
+
 /datum/fabricator_recipe/imprinter/circuit/nav
 	path = /obj/item/stock_parts/circuitboard/nav
 
