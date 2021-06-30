@@ -79,13 +79,14 @@
 		if(!contact.requires_contact)	   // Only some effects require contact for visibility.
 			continue
 		objects_in_current_view[contact] = TRUE
-		if(!objects_in_view[contact])
-			if(contact.instant_contact)   // Instantly identify the object in range.
-				objects_in_view[contact] = 100
-			else
-				objects_in_view[contact] = 0
+		
+		if(contact.instant_contact)   // Instantly identify the object in range.
+			objects_in_view[contact] = 100
+		else if(!(contact in objects_in_view))
+			objects_in_view[contact] = 0
 
 	for(var/obj/effect/overmap/contact in objects_in_view) //Update everything.
+
 		// Are we already aware of this object?
 		var/datum/overmap_contact/record = contact_datums[contact]
 		
@@ -95,7 +96,7 @@
 				animate(record.marker, alpha=0, 2 SECOND, 1, LINEAR_EASING)
 				QDEL_IN(record, 2 SECOND) // Need to restart the search if you've lost contact with the object.
 				if(contact.scannable)	  // Scannable objects are the only ones that give off notifications to prevent spam
-					visible_message(SPAN_NOTICE("[src] states, 'Contact lost with [record.name]'"))
+					visible_message(SPAN_NOTICE("\The [src] states, \"Contact lost with [record.name].\""))
 					playsound(loc, "sound/machines/sensors/contact_lost.ogg", 30, 1)
 			objects_in_view -= contact
 			continue
