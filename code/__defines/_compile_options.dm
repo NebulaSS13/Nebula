@@ -7,3 +7,8 @@
 #if DM_VERSION < REQUIRED_DM_VERSION
 #warn Nebula is not tested on BYOND versions older than 513. The code may not compile, and if it does compile it may have severe problems.
 #endif
+
+// Log the full sendmaps profile on 514.1556+, any earlier and we get bugs or it not existing.
+#if DM_VERSION >= 514 && DM_BUILD >= 1556
+#define SENDMAPS_PROFILE
+#endif
