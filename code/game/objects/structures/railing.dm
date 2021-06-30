@@ -14,15 +14,17 @@
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	maxhealth = 100
 
+	var/painted_color
 	var/broken =    FALSE
 	var/neighbor_status = 0
 
 /obj/structure/railing/mapped
 	anchored = TRUE
+	color = COLOR_ORANGE
+	painted_color = COLOR_ORANGE
 
 /obj/structure/railing/mapped/no_density
-	density = 0
-
+	density = FALSE
 
 /obj/structure/railing/Process()
 	if(!material || !material.radioactivity)
@@ -52,10 +54,8 @@
 	else
 		..()
 
-/obj/structure/railing/update_materials(keep_health)
-	. = ..()
-	color = material.color
-	alpha = Clamp((50 + material.opacity * 255), 0, 255)
+/obj/structure/railing/update_material_colour(override_colour)
+	. = ..(painted_color || override_colour)
 
 /obj/structure/railing/Destroy()
 	anchored = FALSE
