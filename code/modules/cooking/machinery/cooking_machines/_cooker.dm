@@ -20,14 +20,14 @@
 /obj/machinery/appliance/cooker/examine(var/mob/user)
 	. = ..()
 	if (.)	//no need to duplicate adjacency check
-		if (!stat)
+		if (use_power == POWER_USE_OFF)
+			to_chat(user, SPAN_WARNING("It is switched off."))
+		else
 			if (temperature < min_temp)
 				to_chat(user, SPAN_WARNING("[src] is still heating up and is too cold to cook anything yet."))
 			else
 				to_chat(user, SPAN_NOTICE("It is running at [round(get_efficiency(), 0.1)]% efficiency!"))
 			to_chat(user, "Temperature: [round(temperature - T0C, 0.1)]C / [round(optimal_temp - T0C, 0.1)]C")
-		else
-			to_chat(user, SPAN_WARNING("It is switched off."))
 
 /obj/machinery/appliance/cooker/MouseEntered(location, control, params)
 	. = ..()
@@ -42,14 +42,14 @@
 			for(var/datum/cooking_item/CI in cooking_objs)
 				description += "<li>\a [CI.container.label(null, CI.combine_target)], [report_progress(CI)]</li>"
 			description += "</ul>"
-		if(!stat)
+		if(use_power == POWER_USE_OFF)
+			description += "It is switched off."
+		else
 			if(temperature < min_temp)
 				description += "[src] is still heating up and is too cold to cook anything yet."
 			else
 				description += "It is running at [round(get_efficiency(), 0.1)]% efficiency!"
 			description += "<br>Temperature: [round(temperature - T0C, 0.1)]C / [round(optimal_temp - T0C, 0.1)]C"
-		else
-			description += "It is switched off."
 		openToolTip(usr, src, params, name, description)
 
 /obj/machinery/appliance/cooker/MouseExited(location, control, params)
@@ -123,23 +123,23 @@
 	update_icon()
 
 /obj/machinery/appliance/cooker/proc/activation_message(var/mob/user)
-	user.visible_message("<b>[user]</b> turns [use_power ? "on" : "off"] [src].", "You turn [use_power ? "on" : "off"] [src].")
+	user.visible_message("<b>\The [user]</b> turns [use_power ? "on" : "off"] [src].", "You turn [use_power ? "on" : "off"] [src].")
 
 /obj/machinery/appliance/cooker/on_update_icon()
-	overlays.Cut()
+	cut_overlays()
 	var/image/light
-	if (use_power == 2 && !stat)
+	if (use_power == POWER_USE_ACTIVE) // the light is only on when actively heating
 		light = image(icon, "light_on")
 	else
 		light = image(icon, "light_off")
 	light.pixel_x = light_x
 	light.pixel_y = light_y
-	overlays += light
+	add_overlay(light)
 
 /obj/machinery/appliance/cooker/Process()
 	if ((temperature >= set_temp) && (stat || use_power == 1))
 		QUEUE_TEMPERATURE_ATOMS(src) // cool every tick if we're not turned on or heating
-	if(!stat)
+	if(!(stat & (BROKEN|NOPOWER))
 		heat_up()
 	. = ..()
 

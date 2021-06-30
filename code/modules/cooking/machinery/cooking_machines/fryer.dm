@@ -24,7 +24,7 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
 	var/optimal_oil = 9000//90 litres of cooking oil
-	var/datum/looping_sound/deep_fryer/fry_loop
+	var/datum/composite_sound/deep_fryer/fry_loop
 
 /obj/machinery/appliance/cooker/fryer/examine(var/mob/user)
 	. = ..()

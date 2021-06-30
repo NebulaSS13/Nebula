@@ -15,7 +15,7 @@
 	direct			(bool)					If true plays directly to provided atoms instead of from them
 */
 
-/datum/looping_sound
+/datum/composite_sound
 	var/list/atom/output_atoms
 	var/mid_sounds
 	var/mid_length
@@ -29,7 +29,7 @@
 
 	var/timerid
 
-/datum/looping_sound/New(list/_output_atoms=list(), start_immediately=FALSE, _direct=FALSE)
+/datum/composite_sound/New(list/_output_atoms=list(), start_immediately=FALSE, _direct=FALSE)
 	if(!mid_sounds)
 		WARNING("A looping sound datum was created without sounds to play.")
 		return
@@ -40,19 +40,19 @@
 	if(start_immediately)
 		start()
 
-/datum/looping_sound/Destroy()
+/datum/composite_sound/Destroy()
 	stop()
 	output_atoms = null
 	return ..()
 
-/datum/looping_sound/proc/start(atom/add_thing)
+/datum/composite_sound/proc/start(atom/add_thing)
 	if(add_thing)
 		output_atoms |= add_thing
 	if(timerid)
 		return
 	on_start()
 
-/datum/looping_sound/proc/stop(atom/remove_thing)
+/datum/composite_sound/proc/stop(atom/remove_thing)
 	if(remove_thing)
 		output_atoms -= remove_thing
 	if(!timerid)
@@ -61,7 +61,7 @@
 	deltimer(timerid)
 	timerid = null
 
-/datum/looping_sound/proc/sound_loop(starttime)
+/datum/composite_sound/proc/sound_loop(starttime)
 	if(max_loops && (world.time >= starttime + mid_length * max_loops))
 		stop()
 		return
@@ -70,25 +70,25 @@
 	if(!timerid)
 		timerid = addtimer(CALLBACK(src, .proc/sound_loop, world.time), mid_length, TIMER_CLIENT_TIME | TIMER_STOPPABLE | TIMER_LOOP)
 
-/datum/looping_sound/proc/play(soundfile)
+/datum/composite_sound/proc/play(soundfile)
 	var/list/atoms_cache = output_atoms
 	var/sound/S = sound(soundfile)
 	for(var/i in 1 to atoms_cache.len)
 		var/atom/thing = atoms_cache[i]
 		playsound(thing, S, volume)
 
-/datum/looping_sound/proc/get_sound(starttime, _mid_sounds)
+/datum/composite_sound/proc/get_sound(starttime, _mid_sounds)
 	. = _mid_sounds || mid_sounds
 	while(!isfile(.) && !isnull(.))
 		. = pickweight(.)
 
-/datum/looping_sound/proc/on_start()
+/datum/composite_sound/proc/on_start()
 	var/start_wait = 0
 	if(start_sound)
 		play(start_sound)
 		start_wait = start_length
 	addtimer(CALLBACK(src, .proc/sound_loop), start_wait, TIMER_CLIENT_TIME)
 
-/datum/looping_sound/proc/on_stop()
+/datum/composite_sound/proc/on_stop()
 	if(end_sound)
 		play(end_sound)

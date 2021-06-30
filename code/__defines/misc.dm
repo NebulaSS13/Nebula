@@ -268,20 +268,20 @@
 #define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))
 
 // Cooking appliances.
-#define MIX			BITFLAG(0)
-#define FRYER		BITFLAG(1)
-#define OVEN		BITFLAG(2)
-#define SKILLET		BITFLAG(3)
-#define SAUCEPAN	BITFLAG(4)
-#define POT			BITFLAG(5)
-#define GRILL		BITFLAG(6)
-#define MICROWAVE	BITFLAG(7)
+#define MIX         BITFLAG(0)
+#define FRYER       BITFLAG(1)
+#define OVEN        BITFLAG(2)
+#define SKILLET     BITFLAG(3)
+#define SAUCEPAN    BITFLAG(4)
+#define POT         BITFLAG(5)
+#define GRILL       BITFLAG(6)
+#define MICROWAVE   BITFLAG(7)
 // Cooking misc.
 // can_insert return values
-#define CANNOT_INSERT		0
-#define CAN_INSERT			1
-#define INSERT_GRABBED		2
+#define CANNOT_INSERT  0
+#define CAN_INSERT     1
+#define INSERT_GRABBED 2
 // check_contents return values
-#define CONTAINER_EMPTY		0
-#define CONTAINER_SINGLE	1
-#define CONTAINER_MANY		2
+#define CONTAINER_EMPTY  0
+#define CONTAINER_SINGLE 1
+#define CONTAINER_MANY   2

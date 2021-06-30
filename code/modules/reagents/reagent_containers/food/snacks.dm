@@ -283,7 +283,7 @@
 		cut_overlays()
 		var/decl/material/liquid/nutriment/batter/our_coating = decls_repository.get_decl(batter_coating)
 		var/icon/I = icon(icon, icon_state, dir)
-		color = "#FFFFFF" //Some fruits use the color var
+		color = COLOR_WHITE //Some fruits use the color var
 		I.Blend(new /icon('icons/obj/food_custom.dmi', rgb(255,255,255)),ICON_ADD)
 		I.Blend(new /icon('icons/obj/food_custom.dmi', our_coating.icon_cooked),ICON_MULTIPLY)
 		var/image/J = image(I)

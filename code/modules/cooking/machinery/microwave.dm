@@ -30,7 +30,7 @@
 		/obj/item/chems/food/condiment
 	)
 	var/appliancetype = MICROWAVE
-	var/tmp/datum/looping_sound/microwave/soundloop
+	var/tmp/datum/composite_sound/microwave/soundloop
 	var/decl/recipe/recipe
 
 	// These determine if the current cooking process failed, the vars above determine if the microwave is broken
@@ -60,7 +60,7 @@
 ********************/
 
 /obj/machinery/microwave/proc/add_item(var/obj/item/W as obj, var/mob/user as mob)
-	user.drop_from_inventory(W, src)
+	W.forceMove(src)
 	user.visible_message( \
 		SPAN_NOTICE("\The [user] has added one of [W] to \the [src]."), \
 		SPAN_NOTICE("You add one of [W] to \the [src]."))
@@ -95,11 +95,10 @@
 				atom_flags |= ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
 		else
 			to_chat(user, SPAN_WARNING("It's broken!"))
-			return 1
-	else if((. = component_attackby(O, user)))
-		eject(user, FALSE)
-		return
-	else if(dirty >= 100) // The microwave is all dirty so can't be used!
+			return TRUE
+	if(component_attackby(I, user))
+		return TRUE
+	if(dirty >= 100) // The microwave is all dirty so can't be used!
 		if(istype(O, /obj/item/chems/spray/cleaner) || istype(O, /obj/item/soap) || istype(O, /obj/item/chems/glass/rag)) // If they're trying to clean it then let them
 			user.visible_message( \
 				SPAN_NOTICE("\The [user] starts to clean the microwave."), \
@@ -116,31 +115,19 @@
 				atom_flags |= ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
 		else //Otherwise bad luck!!
 			to_chat(user, SPAN_WARNING("It's dirty!"))
-			return 1
+			return TRUE
+		return TRUE
 	else if(is_type_in_list(O, acceptable_containers))
 		if (!O.reagents)
-			return 1
+			return TRUE
 		return // Note to the future: reagents are added after this in the container's afterattack().
 	else if(istype(O,/obj/item/grab))
 		var/obj/item/grab/G = O
 		to_chat(user, SPAN_WARNING("This is ridiculous. You can not fit \the [G.affecting] in this [src]."))
 		return 1
-	else if(isCrowbar(O))
-		user.visible_message( \
-			SPAN_NOTICE("\The [user] begins [src.anchored ? "unsecuring" : "securing"] the microwave."), \
-			SPAN_NOTICE("You attempt to [src.anchored ? "unsecure" : "secure"] the microwave.")
-			)
-		if (do_after(user, 2 SECONDS))
-			user.visible_message( \
-			SPAN_NOTICE("\The [user] [src.anchored ? "unsecures" : "secures"] the microwave."), \
-			SPAN_NOTICE("You [src.anchored ? "unsecure" : "secure"] the microwave.")
-			)
-			src.anchored = !src.anchored
-		else
-			to_chat(user, SPAN_NOTICE("You decide not to do that."))
 	else
 		if (length(get_contained_external_atoms())>=max_n_of_items)
-			to_chat(user, SPAN_WARNING("This [src] is full of ingredients, you can't fit any more!"))
+			to_chat(user, SPAN_WARNING("[src] is full of ingredients, you can't fit any more!"))
 			return 1
 		if(istype(O, /obj/item/stack))
 			var/obj/item/stack/S = O
@@ -148,7 +135,7 @@
 				new O.type (src)
 				S.use(1)
 				user.visible_message( \
-					SPAN_NOTICE("\The [user] has added one of [O] to \the [src]."), \
+					SPAN_NOTICE("\The [user] adds \the [O] to \the [src]."), \
 					SPAN_NOTICE("You add one of [O] to \the [src]."))
 				SSnano.update_uis(src)
 				return
@@ -157,25 +144,21 @@
 		else
 			add_item(O, user)
 			return
-	SSnano.update_uis(src)
-	..()
+	. = ..()
 
 /obj/machinery/microwave/AltClick()
 	if(!operating)
 		cook()
 
-/obj/machinery/microwave/attack_ai(mob/user as mob)
-	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
-		attack_hand(user)
-
-/obj/machinery/microwave/attack_hand(mob/user as mob)
-	user.set_machine(src)
+/obj/machinery/microwave/interface_interact(mob/user)
+	if(dirty >= 100)
+		to_chat(user, SPAN_WARNING("[src] is dirty! You'll need to clean it before using it."))
+		return FALSE
 	if(broken > 0)
-		to_chat(user, SPAN_WARNING("\The [name] is broken! You'll need to fix it before using it."))
-	else if(dirty >= 100)
-		to_chat(user, SPAN_WARNING("\The [name] is dirty! You'll need to clean it before using it."))
-	else
-		ui_interact(user)
+		to_chat(user, SPAN_WARNING("[src] is broken! You'll need to fix it before using it."))
+		return FALSE
+	ui_interact(user)
+	return TRUE
 
 /obj/machinery/microwave/examine(var/mob/user)
 	. = ..()
@@ -254,7 +237,6 @@
 	start()
 
 /obj/machinery/microwave/proc/update_cook_time(var/ct = 200)
-	RefreshParts()
 	return (ct / cooking_power)
 
 /obj/machinery/microwave/proc/finish_cooking()

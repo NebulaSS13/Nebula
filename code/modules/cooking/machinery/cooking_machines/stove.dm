@@ -29,7 +29,6 @@
 
 /obj/machinery/appliance/cooker/stove/on_update_icon()
 	. = ..()
-	cut_overlays()
 	var/list/pans = list()
 	for(var/obj/item/chems/cooking_container/CC in contents)
 		var/image/pan_overlay

@@ -44,10 +44,10 @@
 
 /obj/machinery/appliance/cooker/oven/on_update_icon()
 	if (!open)
-		if (!stat)
-			icon_state = "ovenclosed_on"
-		else
+		if (use_power == POWER_USE_OFF)
 			icon_state = "ovenclosed_off"
+		else
+			icon_state = "ovenclosed_on"
 	else
 		icon_state = "ovenopen"
 	..()
@@ -85,13 +85,8 @@
 	playsound(src, 'sound/machines/hatch_open.ogg', 20, 1)
 	update_icon()
 
-/obj/machinery/appliance/cooker/oven/proc/manip(var/obj/item/I)
-	// check if someone's trying to manipulate the machine
-
-	return isCrowbar(I) || isScrewdriver(I) || istype(I, /obj/item/storage/part_replacer) || istype(I, /obj/item/stock_parts)
-
 /obj/machinery/appliance/cooker/oven/can_insert(var/obj/item/I, var/mob/user)
-	if (!open && !manip(I, user))
+	if (!open)
 		to_chat(user, SPAN_WARNING("You can't put anything in while the door is closed!"))
 		return FALSE
 

@@ -100,7 +100,7 @@
 			return CI
 
 /obj/machinery/appliance/on_update_icon()
-	if (!stat && length(cooking_objs))
+	if ((use_power != POWER_USE_OFF) && length(cooking_objs))
 		icon_state = on_icon
 	else
 		icon_state = off_icon
@@ -207,6 +207,9 @@
 	if(!cook_type || (stat & (BROKEN)))
 		to_chat(user, SPAN_WARNING("[src] is not working."))
 		return
+
+	if(component_attackby(I, user))
+		return TRUE
 
 	var/result = can_insert(I, user)
 	if(result == CANNOT_INSERT)

@@ -34,15 +34,10 @@ fundamental differences
 	set name = "Choose output"
 	set category = "Object"
 
-	if (!isliving(usr))
-		return
-
-	if (usr.incapacitated(usr))
+	if (!CanPhysicallyInteract(usr))
 		return
 
 	if (!usr.check_dexterity(DEXTERITY_SIMPLE_MACHINES))
-		return
-	if (!CanPhysicallyInteract(usr))
 		return
 
 	if(!length(output_options))
@@ -68,7 +63,7 @@ fundamental differences
 
 
 /obj/machinery/appliance/mixer/can_remove_items(var/mob/user)
-	if (stat)
+	if (use_power == POWER_USE_OFF)
 		return ..()
 	to_chat(user, SPAN_WARNING("You can't remove ingredients while [src] is turned on! Turn it off first or wait for it to finish."))
 	return FALSE
@@ -106,8 +101,8 @@ fundamental differences
 	get_cooking_work(cooking_objs[1])
 
 /obj/machinery/appliance/mixer/can_insert(var/obj/item/I, var/mob/user)
-	if (!stat)
-		to_chat(user, SPAN_WARNING("You can't add items while [src] is running. Wait for it to finish or turn the power off to abort"))
+	if (use_power != POWER_USE_OFF)
+		to_chat(user, SPAN_WARNING("You can't add items while [src] is running. Wait for it to finish or turn the power off to cancel operation."))
 		return FALSE
 	return ..()
 
@@ -119,13 +114,14 @@ fundamental differences
 	update_icon()
 
 /obj/machinery/appliance/mixer/on_update_icon()
-	if (!stat)
-		icon_state = on_icon
-	else
+	if (stat & (NOPOWER|BROKEN)
 		icon_state = off_icon
+	else
+		icon_state = on_icon
 
 
 /obj/machinery/appliance/mixer/Process()
-	if (!stat)
-		for (var/i in cooking_objs)
-			do_cooking_tick(i)
+	if (stat ^& (NOPOWER|BROKEN))
+		return
+	for (var/i in cooking_objs)
+		do_cooking_tick(i)
