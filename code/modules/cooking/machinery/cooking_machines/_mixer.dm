@@ -113,15 +113,8 @@ fundamental differences
 	CI.reset()
 	update_icon()
 
-/obj/machinery/appliance/mixer/on_update_icon()
-	if (stat & (NOPOWER|BROKEN)
-		icon_state = off_icon
-	else
-		icon_state = on_icon
-
-
 /obj/machinery/appliance/mixer/Process()
-	if (stat ^& (NOPOWER|BROKEN))
+	if (use_power == POWER_USE_OFF)
 		return
 	for (var/i in cooking_objs)
 		do_cooking_tick(i)

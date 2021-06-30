@@ -117,7 +117,7 @@
 		set_temp = text2num(desired_temp) + T0C
 		to_chat(user, SPAN_NOTICE("You set [src] to [round(set_temp-T0C)]C."))
 		update_use_power(POWER_USE_IDLE) // will be updated later
-	if(old_power != use_power)
+	if(!!old_power != !!use_power)
 		activation_message(user)
 	playsound(src, 'sound/machines/click.ogg', 40, 1)
 	update_icon()
@@ -139,7 +139,7 @@
 /obj/machinery/appliance/cooker/Process()
 	if ((temperature >= set_temp) && (stat || use_power == 1))
 		QUEUE_TEMPERATURE_ATOMS(src) // cool every tick if we're not turned on or heating
-	if(!(stat & (BROKEN|NOPOWER))
+	if(use_power != POWER_USE_OFF)
 		heat_up()
 	. = ..()
 

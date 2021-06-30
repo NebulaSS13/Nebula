@@ -43,6 +43,7 @@
 	return "Control-click this to toggle its power; alt-click this to open/close the door."
 
 /obj/machinery/appliance/cooker/oven/on_update_icon()
+	..()
 	if (!open)
 		if (use_power == POWER_USE_OFF)
 			icon_state = "ovenclosed_off"
@@ -50,7 +51,6 @@
 			icon_state = "ovenclosed_on"
 	else
 		icon_state = "ovenopen"
-	..()
 
 /obj/machinery/appliance/cooker/oven/AltClick(var/mob/user)
 	try_toggle_door(user)

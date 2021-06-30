@@ -76,13 +76,13 @@
 	cooking_power *= oil_efficiency
 
 /obj/machinery/appliance/cooker/fryer/on_update_icon()
+	..()
 	if (cooking)
 		icon_state = on_icon
 		fry_loop.start()
 	else
 		icon_state = off_icon
 		fry_loop.stop(src)
-	..()
 
 //Fryer gradually infuses any cooked food with oil. Moar calories
 //This causes a slow drop in oil levels, encouraging refill after extended use

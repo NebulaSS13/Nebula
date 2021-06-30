@@ -23,7 +23,7 @@
 		/obj/item/stack/material/rods,
 		/obj/item/organ/internal/brain
 		)
-	var/global/max_n_of_items = 20
+	var/max_n_of_items = 20
 	var/list/acceptable_containers = list(
 		/obj/item/chems/glass,
 		/obj/item/chems/food/drinks,
@@ -96,7 +96,7 @@
 		else
 			to_chat(user, SPAN_WARNING("It's broken!"))
 			return TRUE
-	if(component_attackby(I, user))
+	if(component_attackby(O, user))
 		return TRUE
 	if(dirty >= 100) // The microwave is all dirty so can't be used!
 		if(istype(O, /obj/item/chems/spray/cleaner) || istype(O, /obj/item/soap) || istype(O, /obj/item/chems/glass/rag)) // If they're trying to clean it then let them
