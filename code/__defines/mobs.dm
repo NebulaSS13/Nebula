@@ -297,8 +297,8 @@
 
 #define MOB_FLAG_HOLY_BAD BITFLAG(0)  // If this mob is allergic to holiness
 
-#define MARKING_TARGET_SKIN 0 // Draw a datum/sprite_accessory/marking to the mob's body, eg. tattoos
-#define MARKING_TARGET_HAIR 1 // Draw a datum/sprite_accessory/marking to the mob's hair, eg. ears & horns
+#define MARKING_TARGET_SKIN 0 // Draw a /decl/sprite_accessory/marking to the mob's body, eg. tattoos
+#define MARKING_TARGET_HAIR 1 // Draw a /decl/sprite_accessory/marking to the mob's hair, eg. ears & horns
 
 #define DEXTERITY_NONE            0
 #define DEXTERITY_SIMPLE_MACHINES 1

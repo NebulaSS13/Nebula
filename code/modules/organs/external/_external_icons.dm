@@ -61,7 +61,7 @@ var/global/list/limb_icon_cache = list()
 	..()
 	//Head markings, duplicated (sadly) below.
 	for(var/M in markings)
-		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
+		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
 		if (mark_style.draw_target == MARKING_TARGET_SKIN)
 			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
 			mark_s.Blend(markings[M]["color"], mark_style.blend)
@@ -95,7 +95,7 @@ var/global/list/limb_icon_cache = list()
 
 	//Body markings, does not include head, duplicated (sadly) above.
 	for(var/M in markings)
-		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
+		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)
 		if (mark_style.draw_target == MARKING_TARGET_SKIN)
 			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
 			mark_s.Blend(markings[M]["color"], mark_style.blend)

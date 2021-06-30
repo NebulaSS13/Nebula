@@ -10,13 +10,6 @@ var/global/list/mannequins_
 var/global/list/obj/item/uplink/world_uplinks = list()
 
 //Preferences stuff
-//Hairstyles
-var/global/list/hair_styles_list = list()        //stores /datum/sprite_accessory/hair indexed by name
-var/global/list/facial_hair_styles_list = list() //stores /datum/sprite_accessory/facial_hair indexed by name
-
-var/global/list/skin_styles_female_list = list()		//unused
-var/global/list/body_marking_styles_list = list()		//stores /datum/sprite_accessory/marking indexed by name
-
 var/global/datum/category_collection/underwear/underwear = new()
 
 // Visual nets
@@ -71,29 +64,6 @@ var/global/list/string_slot_flags = list(
 	if(!.)
 		. = new /mob/living/carbon/human/dummy/mannequin()
 		mannequins_[ckey] = .
-
-/hook/global_init/proc/makeDatumRefLists()
-	var/list/paths
-
-	//Hair - Initialise all /datum/sprite_accessory/hair into an list indexed by hair-style name
-	paths = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
-	for(var/path in paths)
-		var/datum/sprite_accessory/hair/H = new path()
-		global.hair_styles_list[H.name] = H
-
-	//Facial Hair - Initialise all /datum/sprite_accessory/facial_hair into an list indexed by facialhair-style name
-	paths = typesof(/datum/sprite_accessory/facial_hair) - /datum/sprite_accessory/facial_hair
-	for(var/path in paths)
-		var/datum/sprite_accessory/facial_hair/H = new path()
-		global.facial_hair_styles_list[H.name] = H
-
-	//Body markings - Initialise all /datum/sprite_accessory/marking into an list indexed by marking name
-	paths = typesof(/datum/sprite_accessory/marking) - /datum/sprite_accessory/marking
-	for(var/path in paths)
-		var/datum/sprite_accessory/marking/M = new path()
-		global.body_marking_styles_list[M.name] = M
-
-	return 1
 
 // This is all placeholder procs for an eventual PR to change them to use decls.
 var/global/list/all_species = list()
