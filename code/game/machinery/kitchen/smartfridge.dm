@@ -121,7 +121,7 @@
 /obj/machinery/smartfridge/drying_rack/accept_check(var/obj/item/O)
 	if(istype(O, /obj/item/chems/food/snacks/))
 		var/obj/item/chems/food/snacks/S = O
-		return S.dried_type
+		return !!S.dried_type
 	else if(istype(O, /obj/item/stack/material))
 		return istype(O.material, /decl/material/solid/skin)
 	return 0
@@ -156,17 +156,12 @@
 				var/obj/item/chems/food/snacks/S = thing
 				if(S.dry || !I.get_specific_product(get_turf(src), S))
 					continue
-				if(S.dried_type == S.type)
-					S.dry = 1
-					S.SetName("dried [S.name]")
-					S.color = "#a38463"
-					stock_item(S)
+				var/result = S.on_dry(get_turf(src))
+				if(result != S)
+					remove_thing = TRUE
+				else
 					I.instances -= thing
 					I.amount--
-				else
-					var/D = S.dried_type
-					new D(get_turf(src))
-					remove_thing = TRUE
 
 			else if(istype(thing, /obj/item/stack/material))
 				var/obj/item/stack/material/skin = thing

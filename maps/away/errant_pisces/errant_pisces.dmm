@@ -4021,7 +4021,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "jN" = (
-/obj/machinery/cooker/oven,
+/obj/machinery/appliance/cooker/oven,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "jO" = (

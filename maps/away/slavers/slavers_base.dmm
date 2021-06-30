@@ -3182,7 +3182,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "hW" = (
-/obj/machinery/cooker/oven,
+/obj/machinery/appliance/cooker/oven,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
