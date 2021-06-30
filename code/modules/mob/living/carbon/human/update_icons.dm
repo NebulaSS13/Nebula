@@ -345,7 +345,7 @@ var/global/list/damage_icon_parts = list()
 			icon_key += "0"
 			continue
 		for(var/M in part.markings)
-			icon_key += "[M][part.markings[M]["color"]]"
+			icon_key += "[M][part.markings[M]]"
 		if(part)
 			icon_key += "[part.bodytype.get_icon_cache_uid(part.owner)]"
 			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
@@ -354,7 +354,7 @@ var/global/list/damage_icon_parts = list()
 				icon_key += "[part.skin_colour]"
 				icon_key += "[part.skin_blend]"
 			for(var/M in part.markings)
-				icon_key += "[M][part.markings[M]["color"]]"
+				icon_key += "[M][part.markings[M]]"
 		if(BP_IS_PROSTHETIC(part))
 			icon_key += "2[part.model ? "-[part.model]": ""]"
 		else if(part.status & ORGAN_DEAD)

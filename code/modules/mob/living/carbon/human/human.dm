@@ -766,34 +766,30 @@
 	skin_tone = -skin_tone + 35
 
 	// hair
-	var/list/all_hairs = subtypesof(/datum/sprite_accessory/hair)
+	var/list/all_hairs = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
 	var/list/hairs = list()
 
 	// loop through potential hairs
 	for(var/x in all_hairs)
-		var/datum/sprite_accessory/hair/H = new x // create new hair datum based on type x
-		hairs.Add(H.name) // add hair name to hairs
-		qdel(H) // delete the hair after it's all done
+		hairs += all_hairs[x]
 
-	var/new_style = input("Please select hair style", "Character Generation",h_style)  as null|anything in hairs
+	var/decl/new_style = input("Please select hair style", "Character Generation",h_style)  as null|anything in hairs
 
 	// if new style selected (not cancel)
-	if (new_style)
-		h_style = new_style
+	if(new_style)
+		h_style = new_style.type
 
 	// facial hair
-	var/list/all_fhairs = subtypesof(/datum/sprite_accessory/facial_hair)
+	var/list/all_fhairs = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
 	var/list/fhairs = list()
 
 	for(var/x in all_fhairs)
-		var/datum/sprite_accessory/facial_hair/H = new x
-		fhairs.Add(H.name)
-		qdel(H)
+		fhairs += all_fhairs[x]
 
 	new_style = input("Please select facial style", "Character Generation",f_style)  as null|anything in fhairs
 
 	if(new_style)
-		f_style = new_style
+		f_style = new_style.type
 
 	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female", "Neutral")
 	if (new_gender)
@@ -1791,11 +1787,9 @@
 		. = TRUE
 	for(var/obj/item/organ/external/E in organs)
 		for(var/mark in E.markings)
-			var/list/marking_data = E.markings[mark]
-			var/datum/sprite_accessory/marking/mark_datum = marking_data["datum"]
+			var/decl/sprite_accessory/marking/mark_datum = GET_DECL(mark)
 			if(mark_datum.flags & HAIR_LOSS_VULNERABLE)
 				E.markings -= mark
-				marking_data.Cut()
 				. = TRUE
 	if(.)
 		update_body()
