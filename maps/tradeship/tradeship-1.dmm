@@ -3708,7 +3708,6 @@
 	icon_state = "corner_white";
 	dir = 5
 	},
-/obj/structure/emergency_dispenser/east,
 /obj/structure/emergency_dispenser/north,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
