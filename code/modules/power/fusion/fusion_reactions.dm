@@ -66,7 +66,7 @@
 	energy_consumption = 10 * FUSION_PROCESSING_TIME_MULT
 	instability =         5 * FUSION_PROCESSING_TIME_MULT
 	radiation =           5 * FUSION_PROCESSING_TIME_MULT
-	products = list(MAT_SILICON = 1)
+	products = list(/decl/material/solid/silicon = 1)
 
 /decl/fusion_reaction/iron_iron
 	p_react = /decl/material/solid/metal/iron
