@@ -680,9 +680,7 @@
 
 		for(var/facialhairstyle in global.facial_hair_styles_list)
 			var/datum/sprite_accessory/S = global.facial_hair_styles_list[facialhairstyle]
-			if(gender == MALE && S.gender == FEMALE)
-				continue
-			if(gender == FEMALE && S.gender == MALE)
+			if((S.gender && gender != S.gender))
 				continue
 			if(S.species_allowed && !(get_root_species_name() in S.species_allowed))
 				continue
