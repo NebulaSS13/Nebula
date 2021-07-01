@@ -35,11 +35,18 @@
 	ore_icon_overlay = "lump"
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
+	flags = MAT_FLAG_FISSIBLE
 	value = 0.8
 	sparse_material_weight = 35
 	rich_material_weight = 20
 	fuel_value = 0.8
 	dirtiness = 15
+
+	neutron_cross_section = 30
+	neutron_interactions = list(
+		INTERACTION_SCATTER = 2000
+	)
+	moderation_target = 1500
 	dissolves_into = list(
 		/decl/material/solid/carbon = 0.6,
 		/decl/material/liquid/plasticide = 0.2,
@@ -319,9 +326,6 @@
 		/decl/material/solid/metal/copper = 0.6,
 		/decl/material/solid/slag = 0.4
 	)
-	heating_point = GENERIC_SMELTING_HEAT_POINT
-	heating_sound = null
-	heating_message = null
 	ore_result_amount = 5
 	ore_spread_chance = 20
 	ore_scan_icon = "mineral_common"
@@ -538,3 +542,24 @@
 		/decl/material/solid/metal/chromium = 0.6,
 		/decl/material/solid/metal/lead = 0.4
 	)
+
+/decl/material/solid/mineral/borax
+	name = "borax"
+	color = "#a9aa81"
+	heating_products = list(
+		/decl/material/solid/boron = 0.8,
+		/decl/material/solid/slag = 0.2
+	)
+	ore_name = "borax"
+	ore_result_amount = 10
+	ore_spread_chance = 5
+	ore_scan_icon = "mineral_uncommon"
+	ore_icon_overlay = "lump"
+	ore_type_value = ORE_SURFACE
+	ore_data_value = 1
+	value = 0.5
+	sparse_material_weight = 4
+	rich_material_weight = 2
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null

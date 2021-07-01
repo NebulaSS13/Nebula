@@ -4590,7 +4590,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
 	},
-/obj/machinery/fusion_fuel_compressor,
+/obj/machinery/fuel_compressor,
 /obj/structure/window/borosilicate_reinforced{
 	icon_state = "rwindow";
 	dir = 8
