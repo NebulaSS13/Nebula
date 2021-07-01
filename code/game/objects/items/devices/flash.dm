@@ -201,8 +201,7 @@
 				if(safety < FLASH_PROTECTION_MODERATE)
 					SET_STATUS_MAX(M, STAT_WEAK, 10)
 					M.flash_eyes()
-					for(var/mob/O in viewers(M, null))
-						O.show_message("<span class='disarm'>[M] is blinded by the [name]!</span>")
+					M.visible_message("<span class='disarm'>\The [M] is blinded by \the [src]!</span>")
 	..()
 
 /obj/item/flash/synthetic //not for regular use, weaker effects
