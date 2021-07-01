@@ -106,6 +106,23 @@ Quick adjacency (to turf):
 	return ..()
 
 /*
+	Special case: This allows you to reach a door when it is visally on top of,
+	but technically behind, a fire door
+
+	You could try to rewrite this to be faster, but I'm not sure anything would be.
+	This can be safely removed if border firedoors are ever moved to be on top of doors
+	so they can be interacted with without opening the door.
+*/
+/obj/machinery/door/Adjacent(atom/neighbor)
+	var/obj/machinery/door/firedoor/border/BD = locate() in loc
+	if(BD)
+		BD.throwpass = 1 // allow click to pass
+		. = ..()
+		BD.throwpass = 0
+		return .
+	return ..()
+
+/*
 	This checks if you there is uninterrupted airspace between that turf and this one.
 	This is defined as any dense ATOM_FLAG_CHECKS_BORDER object, or any dense object without throwpass.
 	The border_only flag allows you to not objects (for source and destination squares)
