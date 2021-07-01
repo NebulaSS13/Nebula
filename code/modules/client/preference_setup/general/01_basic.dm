@@ -94,8 +94,6 @@
 		S = get_species_by_key(pref.species)
 		if(istype(new_gender) && CanUseTopic(user) && (new_gender in S.available_pronouns))
 			pref.gender = new_gender.name
-			if(!(pref.f_style in S.get_facial_hair_styles(pref.gender)))
-				ResetFacialHair()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["bodytype"])
@@ -105,6 +103,8 @@
 			pref.bodytype = new_body.name
 			if(new_body.associated_gender) // Set to default for male/female to avoid confusing people
 				pref.gender = new_body.associated_gender
+			if(!(pref.f_style in S.get_facial_hair_styles(new_body.associated_gender)))
+				ResetFacialHair()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["spawnpoint"])
