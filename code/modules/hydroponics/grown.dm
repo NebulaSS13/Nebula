@@ -144,7 +144,7 @@
 
 /obj/item/chems/food/snacks/grown/throw_impact(atom/hit_atom)
 	..()
-	if(seed) 
+	if(seed)
 		seed.thrown_at(src,hit_atom)
 
 /obj/item/chems/food/snacks/grown/attackby(var/obj/item/W, var/mob/user)
@@ -313,6 +313,8 @@
 	desc = "A slice of some tasty fruit."
 	icon = 'icons/obj/hydroponics/hydroponics_misc.dmi'
 	icon_state = ""
+	dried_type = /obj/item/chems/food/snacks/fruit_slice
+	var/datum/seed/seed
 
 var/global/list/fruit_icon_cache = list()
 
@@ -324,6 +326,7 @@ var/global/list/fruit_icon_cache = list()
 
 	name = "[S.seed_name] slice"
 	desc = "A slice of \a [S.seed_name]. Tasty, probably."
+	seed = S
 
 	var/rind_colour = S.get_trait(TRAIT_PRODUCT_COLOUR)
 	var/flesh_colour = S.get_trait(TRAIT_FLESH_COLOUR)
