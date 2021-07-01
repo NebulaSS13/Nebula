@@ -22,8 +22,7 @@
 /decl/recipe/slimesandwich
 	reagents = list(/decl/material/liquid/slimejelly = 5)
 	items = list(
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/snacks/slice/bread = 2,
 	)
 	result = /obj/item/chems/food/snacks/jellysandwich/slime
 
