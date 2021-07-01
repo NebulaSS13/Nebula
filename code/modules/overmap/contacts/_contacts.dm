@@ -53,12 +53,14 @@
 		images -= radar
 
 /datum/overmap_contact/proc/show()
-	var/list/showing = (owner ? (owner.linked?.navigation_viewers || owner.viewers) : null)
+	if(!owner)
+		return
+	var/list/showing = owner.linked?.navigation_viewers || owner.viewers
 	if(length(showing))
 		for(var/weakref/W in showing)
 			var/mob/M = W.resolve()
-			if(istype(M))
-				M.client?.images |= images
+			if(istype(M) && M.client)
+				M.client.images |= images
 
 /datum/overmap_contact/proc/check_effect_shield()
 	var/obj/effect/overmap/visitable/visitable_effect = effect
@@ -83,15 +85,16 @@
 	pinged = FALSE
 
 /datum/overmap_contact/Destroy()
-	var/list/showing = (owner ? (owner.linked?.navigation_viewers || owner.viewers) : null)
-	if(length(showing))
-		for(var/weakref/W in showing)
-			var/mob/M = W.resolve()
-			if(istype(M))
-				M.client?.images -= images
-		if(effect && owner)
+	if(owner)
+		var/list/showing = owner.linked?.navigation_viewers || owner.viewers
+		if(length(showing))
+			for(var/weakref/W in showing)
+				var/mob/M = W.resolve()
+				if(istype(M) && M.client)
+					M.client.images -= images
+		if(effect)
 			owner.contact_datums -= effect
-	owner = null
+		owner = null
 	effect = null
 	QDEL_NULL_LIST(images)
 	. = ..()
