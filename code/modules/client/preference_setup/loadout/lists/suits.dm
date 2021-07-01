@@ -1,35 +1,21 @@
-/datum/gear/suit
+/decl/loadout_category/suit
+	name = "Suits"
+	
+/decl/loadout_option/suit
 	slot = slot_wear_suit_str
-	sort_category = "Suits and Overwear"
-	category = /datum/gear/suit
+	category = /decl/loadout_category/suit
 
-/datum/gear/suit/poncho
-	display_name = "poncho selection"
+/decl/loadout_option/suit/poncho
+	name = "poncho selection"
 	path = /obj/item/clothing/suit/poncho/colored
 	cost = 1
 	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/suit/security_poncho
-	display_name = "poncho, security"
-	path = /obj/item/clothing/suit/poncho/roles/security
-
-/datum/gear/suit/medical_poncho
-	display_name = "poncho, medical"
-	path = /obj/item/clothing/suit/poncho/roles/medical
-
-/datum/gear/suit/engineering_poncho
-	display_name = "poncho, engineering"
-	path = /obj/item/clothing/suit/poncho/roles/engineering
-
-/datum/gear/suit/cargo_poncho
-	display_name = "poncho, supply"
-	path = /obj/item/clothing/suit/poncho/roles/cargo
-
-/datum/gear/suit/suit_jacket
-	display_name = "standard suit jackets"
+/decl/loadout_option/suit/suit_jacket
+	name = "standard suit jackets"
 	path = /obj/item/clothing/suit/storage/toggle/suit
 
-/datum/gear/suit/suit_jacket/get_gear_tweak_options()
+/decl/loadout_option/suit/suit_jacket/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
@@ -38,40 +24,26 @@
 		/obj/item/clothing/suit/storage/toggle/suit/purple
 	)
 
-/datum/gear/suit/custom_suit_jacket
-	display_name = "suit jacket, colour select"
+/decl/loadout_option/suit/custom_suit_jacket
+	name = "suit jacket, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/suit
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/suit/hazard
-	display_name = "hazard vests"
-	path = /obj/item/clothing/suit/storage/hazardvest
-	flags = GEAR_HAS_TYPE_SELECTION
-
-/datum/gear/suit/hoodie
-	display_name = "hoodie, colour select"
+/decl/loadout_option/suit/hoodie
+	name = "hoodie, colour select"
 	path = /obj/item/clothing/suit/storage/hooded/hoodie
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/suit/labcoat
-	display_name = "labcoat, colour select"
-	path = /obj/item/clothing/suit/storage/toggle/labcoat
-	flags = GEAR_HAS_COLOR_SELECTION
-
-/datum/gear/suit/labcoat_blue
-	display_name = "blue trimmed labcoat"
-	path = /obj/item/clothing/suit/storage/toggle/labcoat/blue
-
-/datum/gear/suit/coat
-	display_name = "coat, colour select"
+/decl/loadout_option/suit/coat
+	name = "coat, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/coat
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/suit/leather
-	display_name = "jacket selection"
+/decl/loadout_option/suit/leather
+	name = "jacket selection"
 	path = /obj/item/clothing/suit
 
-/datum/gear/suit/leather/get_gear_tweak_options()
+/decl/loadout_option/suit/leather/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
@@ -80,44 +52,31 @@
 		/obj/item/clothing/suit/storage/toggle/brown_jacket
 	)
 
-/datum/gear/suit/wintercoat
-	display_name = "winter coat"
+/decl/loadout_option/suit/wintercoat
+	name = "winter coat"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
 
-/datum/gear/suit/track
-	display_name = "track jacket selection"
+/decl/loadout_option/suit/track
+	name = "track jacket selection"
 	path = /obj/item/clothing/suit/storage/toggle/track
 	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/suit/blueapron
-	display_name = "apron, blue"
+/decl/loadout_option/suit/blueapron
+	name = "apron, blue"
 	path = /obj/item/clothing/suit/apron
 	cost = 1
 
-/datum/gear/suit/overalls
-	display_name = "apron, overalls"
+/decl/loadout_option/suit/overalls
+	name = "apron, overalls"
 	path = /obj/item/clothing/suit/apron/overalls
 	cost = 1
 
-/datum/gear/suit/medcoat
-	display_name = "medical suit selection"
-	path = /obj/item/clothing/suit
-
-/datum/gear/suit/medcoat/get_gear_tweak_options()
-	. = ..()
-	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
-	.[/datum/gear_tweak/path/specified_types_list] |= list(
-		/obj/item/clothing/suit/storage/toggle/fr_jacket, 
-		/obj/item/clothing/suit/storage/toggle/fr_jacket/ems, 
-		/obj/item/clothing/suit/surgicalapron
-	)
-
-/datum/gear/suit/trenchcoat
-	display_name = "trenchcoat selection"
+/decl/loadout_option/suit/trenchcoat
+	name = "trenchcoat selection"
 	path = /obj/item/clothing/suit
 	cost = 3
 
-/datum/gear/suit/trenchcoat/get_gear_tweak_options()
+/decl/loadout_option/suit/trenchcoat/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path/specified_types_list])
 	.[/datum/gear_tweak/path/specified_types_list] |= list(
@@ -126,14 +85,14 @@
 		/obj/item/clothing/suit/leathercoat
 	)
 
-/datum/gear/suit/letterman_custom
-	display_name = "letterman jacket, colour select"
+/decl/loadout_option/suit/letterman_custom
+	name = "letterman jacket, colour select"
 	path = /obj/item/clothing/suit/letterman
 	flags = GEAR_HAS_COLOR_SELECTION
 	cost = 1
 
-/datum/gear/suit/cloak
-	display_name = "plain cloak"
+/decl/loadout_option/suit/cloak
+	name = "plain cloak"
 	path = /obj/item/clothing/accessory/cloak
 	flags = GEAR_HAS_COLOR_SELECTION
 	cost = 3
