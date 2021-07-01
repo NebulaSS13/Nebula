@@ -19,7 +19,7 @@
 /obj/effect/landmark/corpse/lar_maria
 	eye_colors_per_species = list(SPECIES_HUMAN = list(COLOR_RED))//red eyes
 	skin_tones_per_species = list(SPECIES_HUMAN = list(-15))
-	facial_styles_per_species = list(SPECIES_HUMAN = list("Shaved"))
+	facial_styles_per_species = list(SPECIES_HUMAN = list(/decl/sprite_accessory/facial_hair/shaved))
 	genders_per_species = list(SPECIES_HUMAN = list(MALE))
 
 /mob/living/simple_animal/hostile/lar_maria
@@ -148,7 +148,7 @@
 /obj/effect/landmark/corpse/lar_maria/virologist_female
 	name = "dead virologist"
 	corpse_outfits = list(/decl/hierarchy/outfit/corpse/zhp_virologist_female)
-	hair_styles_per_species = list(SPECIES_HUMAN = list("Flaired Hair"))
+	hair_styles_per_species = list(SPECIES_HUMAN = list(/decl/sprite_accessory/hair/flair))
 	hair_colors_per_species = list(SPECIES_HUMAN = list("#ae7b48"))
 	genders_per_species = list(SPECIES_HUMAN = list(FEMALE))
 

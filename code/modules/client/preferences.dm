@@ -396,7 +396,7 @@ var/global/list/time_prefs_fixed = list()
 		O.markings.Cut()
 
 	for(var/M in body_markings)
-		var/datum/sprite_accessory/marking/mark_datum = global.body_marking_styles_list[M]
+		var/decl/sprite_accessory/marking/mark_datum = GET_DECL(M)
 		var/mark_color = "[body_markings[M]]"
 
 		for(var/BP in mark_datum.body_parts)

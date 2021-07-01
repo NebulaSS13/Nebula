@@ -25,19 +25,12 @@
 	return mobs
 
 /proc/random_hair_style(gender, species)
-	species = species || global.using_map.default_species
-	var/h_style = "Bald"
-
-	var/decl/species/mob_species = get_species_by_key(species)
-	var/list/valid_hairstyles = mob_species.get_hair_styles()
-	if(valid_hairstyles.len)
-		h_style = pick(valid_hairstyles)
-
-	return h_style
+	var/decl/species/mob_species = get_species_by_key(species || global.using_map.default_species)
+	return mob_species ? pick(mob_species.get_hair_style_types()) : /decl/sprite_accessory/hair/bald
 
 /proc/random_facial_hair_style(gender, var/species)
 	species = species || global.using_map.default_species
-	var/f_style = "Shaved"
+	var/f_style = /decl/sprite_accessory/facial_hair/shaved
 	var/decl/species/mob_species = get_species_by_key(species)
 	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)
 	if(valid_facialhairstyles.len)
