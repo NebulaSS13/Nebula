@@ -121,7 +121,7 @@ var/global/list/ai_verbs_default = list(
 	src.verbs -= ai_verbs_default
 	src.verbs += /mob/living/verb/ghost
 
-/mob/living/silicon/ai/Initialize(mapload, var/datum/ai_laws/L, var/obj/item/mmi/B, var/safety = 0)
+/mob/living/silicon/ai/Initialize(mapload, var/datum/ai_laws/L, var/obj/item/brain_interface/B, var/safety = 0)
 	announcement = new()
 	announcement.title = "A.I. Announcement"
 	announcement.announcement_type = "A.I. Announcement"
@@ -166,8 +166,8 @@ var/global/list/ai_verbs_default = list(
 			qdel(src)//Delete AI.
 			return
 		else
-			if (B.brainmob.mind)
-				B.brainmob.mind.transfer_to(src)
+			if(B.holding_brain?.brainmob?.mind)
+				B.holding_brain.brainmob.mind.transfer_to(src)
 
 	create_powersupply()
 

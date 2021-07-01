@@ -194,13 +194,8 @@
 			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
 		else
 			playsound(target.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	if(istype(O, /obj/item/organ/internal/mmi_holder))
-		var/obj/item/organ/internal/mmi_holder/brain = O
-		brain.transfer_and_delete()
-
-	// Just in case somehow the organ we're extracting from an organic is an MMI
-	if(istype(O, /obj/item/organ/internal/mmi_holder))
-		var/obj/item/organ/internal/mmi_holder/brain = O
+	if(istype(O, /obj/item/organ/internal/brain_holder))
+		var/obj/item/organ/internal/brain_holder/brain = O
 		brain.transfer_and_delete()
 
 /decl/surgery_step/internal/remove_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -248,10 +243,7 @@
 			CRASH("Target ([target]) of surgery [type] has no species!")
 		else
 			var/decl/pronouns/G = O.get_pronouns()
-			var/decl/species/species = target.get_species()
-			if(O.organ_tag == BP_POSIBRAIN && !species.has_organ[BP_POSIBRAIN])
-				to_chat(user, SPAN_WARNING("There's no place in [target] to fit \the [O.organ_tag]."))
-			else if(O.damage > (O.max_damage * 0.75))
+			if(O.damage > (O.max_damage * 0.75))
 				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] in no state to be transplanted."))
 			else if(O.w_class > affected.cavity_max_w_class)
 				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] too big for [affected.cavity_name] cavity!"))

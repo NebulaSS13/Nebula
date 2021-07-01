@@ -51,7 +51,7 @@
 	origin_tech = "{'programming':6,'materials':5,'engineering':6}"
 
 	var/mob/integrated_ai // Direct reference to the actual mob held in the suit.
-	var/obj/item/ai_card  // Reference to the MMI, posibrain, inteliCard or pAI card previously holding the AI.
+	var/obj/item/ai_card  // Reference to the object previously holding the AI.
 	var/obj/item/ai_verbs/verb_holder
 
 /mob
@@ -130,7 +130,7 @@
 		return 1
 
 	// Okay, it wasn't a terminal being touched, check for all the simple insertions.
-	if(input_device.type in list(/obj/item/paicard, /obj/item/mmi, /obj/item/organ/internal/posibrain))
+	if(input_device.type in list(/obj/item/paicard, /obj/item/brain_interface))
 		if(integrated_ai)
 			integrated_ai.attackby(input_device,user)
 			// If the transfer was successful, we can clear out our vars.

@@ -1,14 +1,17 @@
-/mob/living/carbon/brain/death(gibbed)
-	if(!gibbed && istype(container, /obj/item/mmi)) //If not gibbed but in a container.
-		container.icon_state = "mmi_dead"
-		return ..(gibbed,"beeps shrilly as the MMI flatlines!")
-	else
-		return ..(gibbed,"no message")
+/mob/living/brain/death(gibbed)
+	var/death_message = "no message"
+	var/obj/item/brain_interface/container = get_container()
+	if(!gibbed && istype(container))
+		death_message = "beeps shrilly as \the [container] flatlines!"
+	. = ..(gibbed, death_message)
+	if(istype(container))
+		container.update_icon()
 
-/mob/living/carbon/brain/gib()
-	if(istype(container, /obj/item/mmi))
-		qdel(container)//Gets rid of the MMI if there is one
-	if(loc)
-		if(istype(loc,/obj/item/organ/internal/brain))
-			qdel(loc)//Gets rid of the brain item
-	..(null,1)
+/mob/living/brain/gib()
+	var/obj/item/brain_interface/container = get_container()
+	var/obj/item/organ/internal/brain/sponge = loc
+	. = ..(null, 1)
+	if(container && !QDELETED(container))
+		qdel(container)
+	if(istype(sponge) && !QDELETED(sponge)) 
+		qdel(sponge)

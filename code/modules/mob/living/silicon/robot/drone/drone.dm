@@ -55,7 +55,7 @@
 
 	default_language = /decl/language/binary/drone
 	// NO BRAIN.
-	mmi = null
+	brain = null
 
 	//We need to screw with their HP a bit. They have around one fifth as much HP as a full borg.
 	for(var/V in components) if(V != "power cell")

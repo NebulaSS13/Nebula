@@ -121,6 +121,9 @@
 
 /obj/item/organ/external/head/proc/get_hair_icon()
 	var/image/res = image(bodytype.icon_template,"")
+	if(!owner)
+		return res
+
 	if(owner.f_style)
 		var/datum/sprite_accessory/facial_hair_style = global.facial_hair_styles_list[owner.f_style]
 		if(facial_hair_style)
@@ -145,7 +148,7 @@
 						hair_s.Blend(hair_colour, hair_style.blend)
 					res.overlays |= hair_s
 
-	for (var/M in markings)
+	for(var/M in markings)
 		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
 		if (mark_style.draw_target == MARKING_TARGET_HAIR)
 			var/icon/mark_icon = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]")

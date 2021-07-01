@@ -1,38 +1,13 @@
-//TODO: Convert this over for languages.
-/mob/living/carbon/brain/say(var/message)
-	if(HAS_STATUS(src, STAT_SILENCE))
+/mob/living/brain/say(var/message, var/decl/language/speaking, var/verb = "says", var/alt_name = "", whispering)
+	var/obj/item/brain_interface/container = get_container()
+	if(GET_STATUS(src, STAT_SILENCE) || !istype(container))
 		return
-
-	message = sanitize(message)
-
-	if(!(container && istype(container, /obj/item/mmi)))
-		return //No MMI, can't speak, bucko./N
-	else
-		var/decl/language/speaking = parse_language(message)
-		if(speaking)
-			message = copytext(message, 2+length(speaking.key))
-		var/verb = "says"
-		var/ending = copytext(message, length(message))
-		if (speaking)
-			verb = speaking.get_spoken_verb(ending)
-		else
-			if(ending=="!")
-				verb=pick("exclaims","shouts","yells")
-			if(ending=="?")
-				verb="asks"
-
-		if(prob(emp_damage*4))
-			if(prob(10))//10% chane to drop the message entirely
-				return
-			else
-				message = Gibberish(message, (emp_damage*6))//scrambles the message, gets worse when emp_damage is higher
-
-		if(speaking && speaking.flags & HIVEMIND)
-			speaking.broadcast(src,trim(message))
+	if(prob(container.emp_damage*4))
+		if(prob(10))
 			return
-
-		if(istype(container, /obj/item/mmi/radio_enabled))
-			var/obj/item/mmi/radio_enabled/R = container
-			if(R.radio)
-				spawn(0) R.radio.hear_talk(src, sanitize(message), verb, speaking)
-		..(trim(message), speaking, verb)
+		message = Gibberish(message, (container.emp_damage*6))
+	. = ..(message, speaking, verb, alt_name, whispering)
+	if(istype(container, /obj/item/brain_interface))
+		var/obj/item/radio/radio = locate() in container
+		if(radio)
+			radio.hear_talk(src, sanitize(message), verb, speaking)

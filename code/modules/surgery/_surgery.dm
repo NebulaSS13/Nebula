@@ -254,21 +254,24 @@ var/global/list/surgery_tool_exception_cache = list()
 			var/operation_data = S.pre_surgery_step(user, M, zone, src)
 			if(operation_data)
 				LAZYSET(global.surgeries_in_progress["\ref[M]"], zone, operation_data)
-				S.begin_step(user, M, zone, src)
-				var/skill_reqs = S.get_skill_reqs(user, M, src, zone)
-				var/duration = max(1, round(user.skill_delay_mult(skill_reqs[1]) * rand(S.min_duration, S.max_duration) * S.get_speed_modifier(user, M, src)))
-				if(prob(S.success_chance(user, M, src, zone)) && do_mob(user, M, duration))
-					S.end_step(user, M, zone, src)
-					handle_post_surgery()
-				else if ((src in user.contents) && user.Adjacent(M))
-					S.fail_step(user, M, zone, src)
-				else
-					to_chat(user, SPAN_WARNING("You must remain close to your patient to conduct surgery."))
-				if(!QDELETED(M))
-					LAZYREMOVE(global.surgeries_in_progress["\ref[M]"], zone) // Clear the in-progress flag.
-					if(ishuman(M))
-						var/mob/living/carbon/human/H = M
-						H.update_surgery()
+				try
+					S.begin_step(user, M, zone, src)
+					var/skill_reqs = S.get_skill_reqs(user, M, src, zone)
+					var/duration = user.skill_delay_mult(skill_reqs[1]) * rand(S.min_duration, S.max_duration) * S.get_speed_modifier(user, M, src)
+					if(prob(S.success_chance(user, M, src, zone)) && do_mob(user, M, duration))
+						S.end_step(user, M, zone, src)
+						handle_post_surgery()
+					else if ((src in user.contents) && user.Adjacent(M))
+						S.fail_step(user, M, zone, src)
+					else
+						to_chat(user, SPAN_WARNING("You must remain close to your patient to conduct surgery."))
+				catch(var/exception/E)
+					to_world_log("Exception during surgery: [E]")
+				if(!QDELETED(M) && ishuman(M))
+					var/mob/living/carbon/human/H = M
+					H.update_surgery()
+				LAZYREMOVE(global.surgeries_in_progress["\ref[M]"], zone) // Clear the in-progress flag.
+
 		return TRUE
 	return FALSE
 

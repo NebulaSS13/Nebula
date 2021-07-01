@@ -54,8 +54,8 @@
 		TAG_CULTURE = list(/decl/cultural_info/culture/synthetic)
 	)
 	has_organ = list(
-		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
-		BP_EYES = /obj/item/organ/internal/eyes/robot
+		BP_BRAIN = /obj/item/organ/internal/brain_holder/robotic,
+		BP_EYES =  /obj/item/organ/internal/eyes/robot
 	)
 
 	exertion_effect_chance = 10

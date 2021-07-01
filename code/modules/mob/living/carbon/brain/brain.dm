@@ -1,56 +1,69 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
-
-/mob/living/carbon/brain
-	var/obj/item/container = null
-	var/timeofhostdeath = 0
-	var/emp_damage = 0//Handles a type of MMI damage
-	var/alert = null
-	use_me = 0 //Can't use the me verb, it's a freaking immobile brain
+/mob/living/brain
+	use_me = FALSE
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "brain1"
-	mob_sort_value = 7
+	default_emotes = list(
+		/decl/emote/audible/alarm,
+		/decl/emote/audible/alert,
+		/decl/emote/audible/notice,
+		/decl/emote/audible/whistle,
+		/decl/emote/audible/synth,
+		/decl/emote/audible/boop,
+		/decl/emote/visible/blink,
+		/decl/emote/visible/flash
+	)
 
-/mob/living/carbon/brain/Initialize()
-	create_reagents(1000)
+/mob/living/brain/handle_regular_status_updates()
+	. = ..()
+	if(health <= 0)
+		var/obj/item/organ/holder = loc
+		if(istype(holder))
+			holder.die()
+		death() // slightly redundant due to above
+
+	var/obj/item/brain_interface/container = get_container()
+	var/sight_status = (stat == DEAD || !istype(container) || container.emp_damage)
+	set_status(STAT_BLIND,   sight_status)
+	set_status(STAT_DEAF,    sight_status)
+	set_status(STAT_SILENCE, sight_status)
+
+/mob/living/brain/Logout()
+	. = ..()
+	var/obj/item/brain_interface/container = get_container()
+	if(istype(container))
+		container.queue_icon_update()
+
+/mob/living/brain/Login()
+	. = ..()
+	var/obj/item/brain_interface/container = get_container()
+	if(istype(container))
+		container.queue_icon_update()
+
+/mob/living/brain/proc/get_container()
+	. = loc?.loc
+
+/mob/living/brain/can_emote()
+	return (istype(get_container(), /obj/item/brain_interface) && ..())
+
+/mob/living/brain/can_use_rig()
+	return istype(get_container(), /obj/item/brain_interface)
+
+/mob/living/brain/Destroy()
+	ghostize()
 	. = ..()
 
-/mob/living/carbon/brain/Destroy()
-	if(key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.
-		if(stat!=DEAD)	//If not dead.
-			death(1)	//Brains can die again. AND THEY SHOULD AHA HA HA HA HA HA
-		ghostize()		//Ghostize checks for key so nothing else is necessary.
-	. = ..()
+/mob/living/brain/say_understands(var/other)
+	. = ishuman(other) || (istype(get_container(), /obj/item/brain_interface) && issilicon(other)) || ..()
 
-/mob/living/carbon/brain/say_understands(var/other)//Goddamn is this hackish, but this say code is so odd
-	if (istype(other, /mob/living/silicon/ai))
-		if(!(container && istype(container, /obj/item/mmi)))
-			return 0
-		else
-			return 1
-	if (istype(other, /mob/living/silicon/pai))
-		if(!(container && istype(container, /obj/item/mmi)))
-			return 0
-		else
-			return 1
-	if (istype(other, /mob/living/silicon/robot))
-		if(!(container && istype(container, /obj/item/mmi)))
-			return 0
-		else
-			return 1
-	if (istype(other, /mob/living/carbon/human))
-		return 1
-	return ..()
-
-/mob/living/carbon/brain/UpdateLyingBuckledAndVerbStatus()
-	if(istype(loc, /obj/item/mmi))
+/mob/living/brain/UpdateLyingBuckledAndVerbStatus()
+	if(istype(loc, /obj/item/brain_interface))
 		use_me = 1
 
-/mob/living/carbon/brain/isSynthetic()
-	return istype(loc, /obj/item/mmi/digital)
+/mob/living/brain/isSynthetic()
+	return istype(get_container(), /obj/item/brain_interface/robotic)
 
-/mob/living/carbon/brain/binarycheck()
+/mob/living/brain/binarycheck()
 	return isSynthetic()
 
-/mob/living/carbon/brain/check_has_mouth()
-	return 0
-
+/mob/living/brain/check_has_mouth()
+	return FALSE

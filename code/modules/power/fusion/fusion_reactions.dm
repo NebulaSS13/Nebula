@@ -23,9 +23,9 @@
 	p_react = /decl/material/gas/hydrogen/deuterium
 	s_react = /decl/material/gas/hydrogen/deuterium
 	energy_consumption = 1 * FUSION_PROCESSING_TIME_MULT
-	energy_production = 1 * FUSION_PROCESSING_TIME_MULT
-	radiation = 1 * FUSION_PROCESSING_TIME_MULT
-	instability = 1 * FUSION_PROCESSING_TIME_MULT
+	energy_production =  1 * FUSION_PROCESSING_TIME_MULT
+	radiation =          1 * FUSION_PROCESSING_TIME_MULT
+	instability =        1 * FUSION_PROCESSING_TIME_MULT
 	products = list(/decl/material/gas/helium = 1)
 	priority = 3
 
@@ -33,9 +33,9 @@
 	p_react = /decl/material/gas/hydrogen/deuterium
 	s_react = /decl/material/gas/hydrogen/deuterium
 	energy_consumption = 1 * FUSION_PROCESSING_TIME_MULT
-	energy_production = 1 * FUSION_PROCESSING_TIME_MULT
-	radiation = 1 * FUSION_PROCESSING_TIME_MULT
-	instability = 1 * FUSION_PROCESSING_TIME_MULT
+	energy_production =  1 * FUSION_PROCESSING_TIME_MULT
+	radiation =          1 * FUSION_PROCESSING_TIME_MULT
+	instability =        1 * FUSION_PROCESSING_TIME_MULT
 	products = list(/decl/material/gas/hydrogen/tritium = 1)
 	priority = 3
 
@@ -44,8 +44,8 @@
 	s_react = /decl/material/gas/helium
 	energy_consumption = 1 * FUSION_PROCESSING_TIME_MULT
 	energy_production =  5 * FUSION_PROCESSING_TIME_MULT
-	radiation = 2 * FUSION_PROCESSING_TIME_MULT
-	instability = 2 * FUSION_PROCESSING_TIME_MULT
+	radiation =          2 * FUSION_PROCESSING_TIME_MULT
+	instability =        2 * FUSION_PROCESSING_TIME_MULT
 	priority = 4
 
 /decl/fusion_reaction/deuterium_tritium

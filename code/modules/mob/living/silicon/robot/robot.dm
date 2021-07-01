@@ -63,7 +63,7 @@
 	// Components are basically robot organs.
 	var/list/components = list()
 
-	var/obj/item/mmi/mmi = null
+	var/obj/item/brain_interface/brain
 
 	var/opened = 0
 	var/emagged = 0
@@ -209,21 +209,14 @@
 		return amount
 	return 0
 
-//If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
-//Improved /N
 /mob/living/silicon/robot/Destroy()
-	if(mmi)//Safety for when a cyborg gets dust()ed. Or there is no MMI inside.
-		if(mind)
-			mmi.dropInto(loc)
-			if(mmi.brainmob)
-				mind.transfer_to(mmi.brainmob)
-			else
-				to_chat(src, "<span class='danger'>Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug.</span>")
-				ghostize()
-				//ERROR("A borg has been destroyed, but its MMI lacked a brainmob, so the mind could not be transferred. Player: [ckey].")
-			mmi = null
+	if(brain)
+		brain.dropInto(loc)
+		if(mind && brain.holding_brain?.brainmob)
+			mind.transfer_to(brain.holding_brain.brainmob)
 		else
-			QDEL_NULL(mmi)
+			ghostize()
+		brain = null
 	if(connected_ai)
 		connected_ai.connected_robots -= src
 	connected_ai = null
@@ -313,12 +306,10 @@
 	if(prefix)
 		modtype = prefix
 
-	if(istype(mmi, /obj/item/organ/internal/posibrain))
-		braintype = "Robot"
-	else if(istype(mmi, /obj/item/mmi/digital/robot))
-		braintype = "Drone"
+	if(istype(brain))
+		braintype = brain.robot_brain_noun
 	else
-		braintype = "Cyborg"
+		braintype = "Robot"
 
 	var/changed_name = ""
 	if(custom_name)
@@ -554,17 +545,17 @@
 					update_icon()
 
 			else if(wiresexposed && wires.IsAllCut())
-				//Cell is out, wires are exposed, remove MMI, produce damaged chassis, baleet original mob.
-				if(!mmi)
+				//Cell is out, wires are exposed, remove brain, produce damaged chassis, baleet original mob.
+				if(!brain)
 					to_chat(user, "\The [src] has no brain to remove.")
 					return
 
-				user.visible_message("<span class='notice'>\The [user] begins ripping [mmi] from [src].</span>", "<span class='notice'>You jam the crowbar into the robot and begin levering [mmi].</span>")
+				user.visible_message("<span class='notice'>\The [user] begins ripping [brain] out of \the [src].</span>", "<span class='notice'>You jam the crowbar into the robot and begin levering out \the [brain].</span>")
 				if(do_after(user, 50, src))
 					dismantle(user)
 
 			else
-				// Okay we're not removing the cell or an MMI, but maybe something else?
+				// Okay we're not removing the cell or an brain, but maybe something else?
 				var/list/removable_components = list()
 				for(var/V in components)
 					if(V == "power cell") continue
@@ -1126,4 +1117,7 @@
 	return "Robot"
 
 /mob/living/silicon/robot/handle_pre_transformation()
-	QDEL_NULL(mmi)
+	clear_brain()
+
+/mob/living/silicon/robot/proc/clear_brain()
+	QDEL_NULL(brain)

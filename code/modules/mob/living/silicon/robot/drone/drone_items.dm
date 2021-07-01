@@ -76,12 +76,11 @@
 	can_hold = list(
 		/obj/item/cell,
 		/obj/item/stock_parts,
-		/obj/item/mmi,
+		/obj/item/brain_interface,
 		/obj/item/robot_parts,
 		/obj/item/borg/upgrade,
 		/obj/item/flash,
 		/obj/item/organ/internal/brain,
-		/obj/item/organ/internal/posibrain,
 		/obj/item/stack/cable_coil,
 		/obj/item/stock_parts/circuitboard,
 		/obj/item/chems/glass,

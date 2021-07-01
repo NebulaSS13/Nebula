@@ -1,4 +1,4 @@
-//Procedures in this file: Robotic surgery steps, organ removal, replacement. MMI insertion, synthetic organ repair.
+//Procedures in this file: Robotic surgery steps, organ removal, replacement. Brain insertion, synthetic organ repair.
 //////////////////////////////////////////////////////////////////
 //						ROBOTIC SURGERY							//
 //////////////////////////////////////////////////////////////////
@@ -476,23 +476,23 @@
 	"<span class='warning'>Your hand slips, disconnecting \the [tool].</span>")
 
 //////////////////////////////////////////////////////////////////
-//	mmi installation surgery step
+//	brain installation surgery step
 //////////////////////////////////////////////////////////////////
 /decl/surgery_step/robotics/install_mmi
-	name = "Install MMI"
-	description = "This procedure installs an MMI within a prosthetic organ."
+	name = "Install Neural Interface"
+	description = "This procedure installs a neural interface within a prosthetic organ."
 	allowed_tools = list(
-		/obj/item/mmi = 100
+		/obj/item/brain_interface = 100
 	)
 	min_duration = 60
 	max_duration = 80
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/robotics/install_mmi/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
-	var/obj/item/mmi/M = tool
+	var/obj/item/brain_interface/M = tool
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected && istype(M))
-		if(!M.brainmob || !M.brainmob.client || !M.brainmob.ckey || M.brainmob.stat >= DEAD)
+		if(!M.holding_brain.brainmob || !M.holding_brain.brainmob.client || !M.holding_brain.brainmob.ckey || M.holding_brain.brainmob.stat >= DEAD)
 			to_chat(user, SPAN_WARNING("That brain is not usable."))
 		else if(BP_IS_CRYSTAL(affected))
 			to_chat(user, SPAN_WARNING("The crystalline interior of \the [affected] is incompatible with \the [M]."))
@@ -525,16 +525,13 @@
 	user.visible_message("<span class='notice'>[user] has installed \the [tool] into [target]'s [affected.name].</span>", \
 	"<span class='notice'>You have installed \the [tool] into [target]'s [affected.name].</span>")
 
-	var/obj/item/mmi/M = tool
-	var/obj/item/organ/internal/mmi_holder/holder = new(target, 1)
+	var/obj/item/brain_interface/M = tool
+	var/obj/item/organ/internal/brain_holder/holder = new M.holder_type(target, TRUE, tool)
 	var/mob/living/carbon/human/H = target
 	H.internal_organs_by_name[BP_BRAIN] = holder
-	tool.forceMove(holder)
-	holder.stored_mmi = tool
-	holder.update_from_mmi()
 
-	if(M.brainmob && M.brainmob.mind)
-		M.brainmob.mind.transfer_to(target)
+	if(M.holding_brain?.brainmob?.mind)
+		M.holding_brain.brainmob.mind.transfer_to(target)
 
 /decl/surgery_step/robotics/install_mmi/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='warning'>[user]'s hand slips.</span>", \
@@ -554,8 +551,8 @@
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
 
 /decl/surgery_step/remove_mmi
-	name = "Remove MMI"
-	description = "This procedure removes an MMI from a prosthetic organ."
+	name = "Remove neural interface"
+	description = "This procedure removes a neural interface from a prosthetic organ."
 	min_duration = 60
 	max_duration = 80
 	allowed_tools = list(
@@ -570,7 +567,7 @@
 
 /decl/surgery_step/remove_mmi/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && (locate(/obj/item/mmi) in affected.implants))
+	if(affected && (locate(/obj/item/brain_interface) in affected.implants))
 		return affected
 
 /decl/surgery_step/remove_mmi/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
@@ -584,12 +581,12 @@
 /decl/surgery_step/remove_mmi/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected)
-		var/obj/item/mmi/mmi = locate() in affected.implants
-		if(affected && mmi)
+		var/obj/item/brain_interface/brain = locate() in affected.implants
+		if(affected && brain)
 			user.visible_message( \
-			SPAN_NOTICE("\The [user] removes \the [mmi] from \the [target]'s [affected.name] with \the [tool]."), \
-			SPAN_NOTICE("You  remove \the [mmi] from \the [target]'s [affected.name] with \the [tool]."))
-			target.remove_implant(mmi, TRUE, affected)
+			SPAN_NOTICE("\The [user] removes \the [brain] from \the [target]'s [affected.name] with \the [tool]."), \
+			SPAN_NOTICE("You  remove \the [brain] from \the [target]'s [affected.name] with \the [tool]."))
+			target.remove_implant(brain, TRUE, affected)
 		else
 			user.visible_message( \
 			SPAN_NOTICE("\The [user] could not find anything inside [target]'s [affected.name]."), \
