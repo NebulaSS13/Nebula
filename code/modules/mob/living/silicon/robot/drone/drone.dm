@@ -143,7 +143,7 @@
 
 /mob/living/silicon/robot/drone/on_update_icon()
 
-	cut_overlays()
+	..()
 	if(stat == 0)
 		if(controlling_ai)
 			add_overlay("eyes-[icon_state]-ai")

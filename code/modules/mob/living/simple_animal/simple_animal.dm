@@ -102,13 +102,12 @@
 		set_extension(src, /datum/extension/hattable/directional, hat_offsets)
 
 /mob/living/simple_animal/on_update_icon()
-	cut_overlays()
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	var/image/I = hattable?.get_hat_overlay(src)
-	world << "\the [src] hat???"
-	if(I)
-		world << "\the [src] hat'd"
-		add_overlay(I)
+	..()
+	if(icon_state == icon_living)
+		var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
+		var/image/I = hattable?.get_hat_overlay(src)
+		if(I)
+			add_overlay(I)
 
 /mob/living/simple_animal/Destroy()
 	if(istype(natural_weapon))

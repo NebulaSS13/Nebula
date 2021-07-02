@@ -37,12 +37,12 @@
 			to_chat(owner, "<span class='notice'>Nearly opaque lenses slide down to shield your eyes.</span>")
 			innate_flash_protection = FLASH_PROTECTION_MAJOR
 			owner.overlay_fullscreen("eyeshield", /obj/screen/fullscreen/blind)
-			owner.update_icons()
+			owner.update_icon()
 		else
 			to_chat(owner, "<span class='notice'>Your protective lenses retract out of the way.</span>")
 			innate_flash_protection = FLASH_PROTECTION_VULNERABLE
 			addtimer(CALLBACK(src, .proc/remove_shield), 1 SECONDS)
-			owner.update_icons()
+			owner.update_icon()
 		refresh_action_button()
 
 /obj/item/organ/internal/eyes/insectoid/serpentid/proc/remove_shield()

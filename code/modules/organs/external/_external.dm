@@ -457,7 +457,7 @@
 	switch(damage_type)
 		if(BRUTE) src.heal_damage(repair_amount, 0, 0, 1)
 		if(BURN)  src.heal_damage(0, repair_amount, 0, 1)
-	owner.regenerate_icons()
+	owner.refresh_visible_overlays()
 	if(user == src.owner)
 		var/decl/pronouns/G = user.get_pronouns()
 		user.visible_message(SPAN_NOTICE("\The [user] patches [damage_desc] on [G.his] [name] with \the [tool]."))
@@ -948,7 +948,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	spawn(1)
 		victim.updatehealth()
 		victim.UpdateDamageIcon()
-		victim.regenerate_icons()
+		victim.refresh_visible_overlays()
 		set_dir(SOUTH, TRUE)
 
 	switch(disintegrate)

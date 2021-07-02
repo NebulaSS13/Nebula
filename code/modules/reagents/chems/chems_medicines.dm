@@ -250,7 +250,7 @@
 		M.dna.ResetUI()
 		M.dna.ResetSE()
 		domutcheck(M, null, MUTCHK_FORCED)
-		M.update_icons()
+		M.update_icon()
 
 /decl/material/liquid/adrenaline
 	name = "adrenaline"

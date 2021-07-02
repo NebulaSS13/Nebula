@@ -61,7 +61,7 @@
 	var/datum/ai/slime/slime_ai = ai
 	if(istype(slime_ai))
 		slime_ai.update_mood()
-	regenerate_icons()
+	update_icon()
 
 /mob/living/slime/proc/slime_attach(var/mob/living/M)
 	if(check_valid_feed_target(M) == FEED_RESULT_VALID)

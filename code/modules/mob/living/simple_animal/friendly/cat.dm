@@ -28,10 +28,10 @@
 /mob/living/simple_animal/cat/Initialize()
 	if(isnull(hat_offsets))
 		hat_offsets = list(
-			"[NORTH]" = list( 1, -12),
+			"[NORTH]" = list( 1,  -9),
 			"[SOUTH]" = list( 1, -12),
-			"[EAST]" =  list( 6, -10),
-			"[WEST]" =  list(-6, -10)
+			"[EAST]" =  list( 7, -10),
+			"[WEST]" =  list(-7, -10)
 		)
 	. = ..()
 

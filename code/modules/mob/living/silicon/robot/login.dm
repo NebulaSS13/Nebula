@@ -1,6 +1,6 @@
 /mob/living/silicon/robot/Login()
 	..()
-	regenerate_icons()
+	update_icon()
 	update_hud()
 
 	show_laws(0)

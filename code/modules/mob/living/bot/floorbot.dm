@@ -27,7 +27,8 @@
 	src.underlays += B
 
 
-/mob/living/bot/floorbot/update_icons()
+/mob/living/bot/floorbot/on_update_icon()
+	..()
 	if(busy)
 		icon_state = "floorbot-c"
 	else if(amount > 0)
@@ -144,7 +145,7 @@
 	if(emagged && istype(A, /turf/simulated/floor))
 		var/turf/simulated/floor/F = A
 		busy = 1
-		update_icons()
+		update_icon()
 		if(F.flooring)
 			visible_message("<span class='warning'>[src] begins to tear the floor tile from the floor.</span>")
 			if(do_after(src, 50, F))
@@ -156,12 +157,12 @@
 				F.ReplaceWithLattice()
 				addTiles(1)
 		target = null
-		update_icons()
+		update_icon()
 	else if(istype(A, /turf/simulated/floor))
 		var/turf/simulated/floor/F = A
 		if(F.broken || F.burnt)
 			busy = 1
-			update_icons()
+			update_icon()
 			visible_message("<span class='notice'>[src] begins to remove the broken floor.</span>")
 			anchored = TRUE
 			if(do_after(src, 50, F))
@@ -170,10 +171,10 @@
 			anchored = FALSE
 			target = null
 			busy = 0
-			update_icons()
+			update_icon()
 		else if(!F.flooring && amount)
 			busy = 1
-			update_icons()
+			update_icon()
 			visible_message("<span class='notice'>[src] begins to improve the floor.</span>")
 			anchored = TRUE
 			if(do_after(src, 50, F))
@@ -182,12 +183,12 @@
 					addTiles(-1)
 			anchored = FALSE
 			target = null
-			update_icons()
+			update_icon()
 	else if(istype(A, /obj/item/stack/tile/floor) && amount < maxAmount)
 		var/obj/item/stack/tile/floor/T = A
 		visible_message("<span class='notice'>\The [src] begins to collect tiles.</span>")
 		busy = 1
-		update_icons()
+		update_icon()
 		anchored = TRUE
 		if(do_after(src, 20))
 			if(T)
@@ -196,14 +197,14 @@
 				addTiles(eaten)
 		anchored = FALSE
 		target = null
-		update_icons()
+		update_icon()
 	else if(istype(A, /obj/item/stack/material) && amount + 4 <= maxAmount)
 		var/obj/item/stack/material/M = A
 		if(M.get_material_type() == /decl/material/solid/metal/steel)
 			visible_message("<span class='notice'>\The [src] begins to make tiles.</span>")
 			busy = 1
 			anchored = TRUE
-			update_icons()
+			update_icon()
 			if(do_after(src, 50))
 				if(M)
 					M.use(1)

@@ -2212,7 +2212,6 @@
 #include "code\modules\mob\living\carbon\alien\death.dm"
 #include "code\modules\mob\living\carbon\alien\life.dm"
 #include "code\modules\mob\living\carbon\alien\say.dm"
-#include "code\modules\mob\living\carbon\alien\update_icons.dm"
 #include "code\modules\mob\living\carbon\brain\brain.dm"
 #include "code\modules\mob\living\carbon\brain\death.dm"
 #include "code\modules\mob\living\carbon\brain\life.dm"
