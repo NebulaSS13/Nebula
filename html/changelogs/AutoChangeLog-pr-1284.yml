@@ -1,5 +1,0 @@
-author: NataKilar
-delete-after: true
-changes:
-  - tweak: Fusion fuel compressor can now create fuel rods of mixed materials.
-  - rscadd: Added fission reactor to the game for isotope and power generation
