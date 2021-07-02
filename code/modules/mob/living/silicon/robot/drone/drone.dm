@@ -51,7 +51,7 @@
 	remove_language(/decl/language/binary)
 	add_language(/decl/language/binary, 0)
 	add_language(/decl/language/binary/drone, 1)
-	set_extension(src, /datum/extension/hattable, hat_x, hat_y)
+	set_extension(src, /datum/extension/hattable, list(hat_x, hat_y))
 
 	default_language = /decl/language/binary/drone
 	// NO BRAIN.

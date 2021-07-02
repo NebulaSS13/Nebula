@@ -73,7 +73,7 @@
 	add_language(/decl/language/diona)
 	add_language(/decl/language/human/common, 0)
 
-	set_extension(src, /datum/extension/hattable/diona_nymph, 0, -8)
+	set_extension(src, /datum/extension/hattable/diona_nymph, list(0, -8))
 
 	eyes = emissive_overlay(icon = icon, icon_state = "eyes_[icon_state]")
 

@@ -63,7 +63,7 @@
 
 /mob/living/simple_animal/construct/on_update_icon()
 	..()
-	set_overlays(emissive_overlay(icon,"glow-[icon_state]"))
+	add_overlay(emissive_overlay(icon,"glow-[icon_state]"))
 
 /mob/living/simple_animal/construct/attack_animal(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))
