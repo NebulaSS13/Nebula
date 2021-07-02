@@ -239,7 +239,14 @@
 	skin_amount = 3
 
 /mob/living/simple_animal/cat/kitten/Initialize()
-	. = ..()
+	if(isnull(hat_offsets))
+		hat_offsets = list(
+			"[NORTH]" = list( 1, -14),
+			"[SOUTH]" = list( 1, -14),
+			"[EAST]" =  list( 5, -14),
+			"[WEST]" =  list(-5, -14)
+		)
+	..()
 	gender = pick(MALE, FEMALE)
 
 /mob/living/simple_animal/cat/fluff/ran

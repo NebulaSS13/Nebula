@@ -36,7 +36,7 @@ exactly 1 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
 exactly 118 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 0 "incorrect indentations" '^( {4,})' -P
 exactly 19 "text2path uses" 'text2path'
-exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
+exactly 4 "update_icon() override" '/update_icon\((.*)\)'  -P
 exactly 1 "goto uses" 'goto '
 exactly 6 "atom/New uses" '^/(obj|atom|area|mob|turf).*/New\('
 exactly 0 "tag uses" '\stag = ' -P '**/*.dmm'

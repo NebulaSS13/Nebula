@@ -36,10 +36,6 @@
 		collect(A)
 		return
 
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	if(hattable?.wear_hat(src, A))
-		return
-
 	if(istype(A, /mob))
 		if(src != A && !gestalt_with(A))
 			visible_message("<span class='notice'>\The [src] butts its head into \the [A].</span>")

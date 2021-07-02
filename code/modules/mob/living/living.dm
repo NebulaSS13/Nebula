@@ -700,6 +700,7 @@ default behaviour is:
 
 /mob/living/on_update_icon()
 	SHOULD_CALL_PARENT(TRUE)
+	..()
 	cut_overlays()
 	if(auras)
 		for(var/aura in auras)

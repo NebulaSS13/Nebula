@@ -1,9 +1,6 @@
 //Most of these are defined at this level to reduce on checks elsewhere in the code.
 //Having them here also makes for a nice reference list of the various overlay-updating procs available
 
-/mob/proc/update_hud()
-	return
-
 /mob/proc/update_inv_handcuffed()
 	return
 
