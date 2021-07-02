@@ -49,9 +49,16 @@
 	screen_loc= "LEFT+1,BOTTOM+3"
 	layer = FLOAT_LAYER
 
-/obj/screen/text/message/simple
+/obj/screen/text/message/bare
 	icon = null
 	fade_delay = 0
+
+	text_style = "font-family: 'Fixedsys'; -dm-text-outline: 1 black; font-size: 11px;"
+	maptext_height = 64
+	maptext_width = 512
+	maptext_x = 0
+	maptext_y = 0
+	screen_loc = "LEFT+1,BOTTOM+2"
 
 /obj/screen/text/message/Initialize()
 	var/matrix/M = matrix()
