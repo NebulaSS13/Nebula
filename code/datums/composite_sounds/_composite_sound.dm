@@ -43,14 +43,14 @@
 
 /datum/composite_sound/proc/start(atom/add_thing)
 	if(add_thing)
-		output_atoms |= add_thing
+		LAZYDISTINCTADD(output_atoms, add_thing)
 	if(timerid)
 		return
 	on_start()
 
 /datum/composite_sound/proc/stop(atom/remove_thing)
 	if(remove_thing)
-		output_atoms -= remove_thing
+		LAZYREMOVE(output_atoms, remove_thing)
 	if(!timerid)
 		return
 	on_stop()
@@ -67,10 +67,9 @@
 		timerid = addtimer(CALLBACK(src, .proc/sound_loop, world.time), mid_length, TIMER_CLIENT_TIME | TIMER_STOPPABLE | TIMER_LOOP)
 
 /datum/composite_sound/proc/play(soundfile)
-	var/list/atoms_cache = output_atoms
 	var/sound/S = sound(soundfile)
-	for(var/i in 1 to atoms_cache.len)
-		var/atom/thing = atoms_cache[i]
+	for(var/i in 1 to output_atoms.len)
+		var/atom/thing = output_atoms[i]
 		playsound(thing, S, volume)
 
 /datum/composite_sound/proc/get_sound(starttime, _mid_sounds)
