@@ -16,8 +16,9 @@
 #define SS_PRIORITY_AIR            80  // ZAS processing.
 #define SS_PRIORITY_THROWING       75  // Throwing calculation and constant checks
 #define SS_PRIORITY_MATERIALS      60  // Multi-tick chemical reactions.
-#define SS_PRIORITY_LIGHTING       50	// Queued lighting engine updates.
-#define SS_PRIORITY_SPACEDRIFT     40  // Drifting things
+#define SS_PRIORITY_LIGHTING       50  // Queued lighting engine updates.
+#define SS_PRIORITY_SPACEDRIFT     40  // Drifting things.
+#define SS_PRIORITY_INPUT          20  // Input things.
 #define SS_PRIORITY_ICON_UPDATE    20  // Queued icon updates. Mostly used by APCs and tables.
 #define SS_PRIORITY_ALARM          20  // Alarm processing.
 #define SS_PRIORITY_EVENT          20  // Event processing and queue handling.

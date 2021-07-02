@@ -20,7 +20,7 @@ var/global/list/ckey_punished_for_spam = list() // this round; to avoid redundan
 
 	// Punitive action
 	. = FALSE
-	log_and_message_admins("Kicking due to possible spam abuse", C)
+	log_and_message_admins("Kicking due to possible spam abuse.", C)
 	to_chat(C, SPAN_DANGER("Possible spam abuse detected; you are being kicked from the server."))
 	if(global.ckey_punished_for_spam[ckey])
 		qdel(C)

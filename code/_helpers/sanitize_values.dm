@@ -24,12 +24,16 @@
 		return text
 	return default
 
+/proc/sanitize_islist(value, default)
+	if(islist(value) && length(value))
+		return value
+	if(default)
+		return default
+
 /proc/sanitize_inlist(value, list/List, default)
 	if(value in List)	return value
 	if(default)			return default
 	if(List && List.len)return List[1]
-
-
 
 //more specialised stuff
 /proc/sanitize_gender(gender,neuter=0,plural=0, default="male")

@@ -66,6 +66,8 @@ var/global/list/time_prefs_fixed = list()
 			setup()
 		else
 			SScharacter_setup.prefs_awaiting_setup += src
+	key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key) // give them default keybinds too
+	C?.set_macros()
 	..()
 
 /datum/preferences/Destroy()
@@ -444,7 +446,9 @@ var/global/list/time_prefs_fixed = list()
 
 /datum/preferences/proc/apply_post_login_preferences()
 	set waitfor = 0
+
 	if(!client)
 		return
+
 	if(client.get_preference_value(/datum/client_preference/fullscreen_mode) != PREF_OFF)
 		client.toggle_fullscreen(client.get_preference_value(/datum/client_preference/fullscreen_mode))

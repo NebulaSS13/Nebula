@@ -48,15 +48,21 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	sort_order = 8
 	category_item_type = /datum/category_item/player_setup_item/loadout
 
-/datum/category_group/player_setup_category/global_preferences
-	name = "Global"
-	sort_order = 9
-	category_item_type = /datum/category_item/player_setup_item/player_global
-
 /datum/category_group/player_setup_category/law_pref
 	name = "Laws"
-	sort_order = 10
+	sort_order = 9
 	category_item_type = /datum/category_item/player_setup_item/law_pref
+
+/datum/category_group/player_setup_category/controls
+	name = "Controls"
+	sort_order = 10
+	category_item_type = /datum/category_item/player_setup_item/controls
+
+/datum/category_group/player_setup_category/global_preferences
+	name = "Global"
+	sort_order = 11
+	category_item_type = /datum/category_item/player_setup_item/player_global
+
 
 /****************************
 * Category Collection Setup *

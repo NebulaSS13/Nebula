@@ -203,3 +203,7 @@
 #define CODEX_COLOR_ANTAG     "#e5a2a2"
 
 #define COLOR_WEBHOOK_DEFAULT 0x8bbbd5
+
+// Colors for input/hotkey panel.
+#define COLOR_INPUT_DISABLED "#f0f0f0"
+#define COLOR_INPUT_ENABLED "#d3b5b5"

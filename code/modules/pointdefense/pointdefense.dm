@@ -4,14 +4,15 @@
 	desc = "A specialized computer designed to synchronize a variety of weapon systems and a vessel's astronav data."
 	icon = 'icons/obj/artillery.dmi'
 	icon_state = "control"
-	var/ui_template = "pointdefense_control.tmpl"
-	var/initial_id_tag
 	density = TRUE
 	anchored = TRUE
 	base_type =       /obj/machinery/pointdefense_control
 	construct_state = /decl/machine_construction/default/panel_closed
-	var/list/targets = list()
 	atom_flags =  ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+
+	var/ui_template = "pointdefense_control.tmpl"
+	var/initial_id_tag
+	var/list/targets = list()
 
 /obj/machinery/pointdefense_control/Initialize()
 	. = ..()
@@ -110,6 +111,7 @@
 	base_type = /obj/machinery/pointdefense
 	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
 	uncreated_component_parts = null
+	appearance_flags = PIXEL_SCALE | LONG_GLIDE
 	var/active = TRUE
 	var/charge_cooldown = 1 SECOND  //time between it can fire at different targets
 	var/last_shot = 0
