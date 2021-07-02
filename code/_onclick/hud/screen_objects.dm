@@ -31,6 +31,34 @@
 	maptext_height = 480
 	maptext_width = 480
 
+//used by advanced_screen_text(...), make subtypes of this and then pass it to the proc
+/obj/screen/text/message
+	icon = 'icons/screen/message_box.dmi'
+
+	var/fade_delay = 0.7 SECOND //Delay for actual message box appear (speed of appear/dissappear)
+	var/text_delay = 1 //deciseconds between symbol drawing
+	var/text_duration = 4.5 SECONDS //seconds for this window to "persist doing nothing"
+	var/text_style = "font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 6px; line-height: 95%;"
+
+	var/list/queue = list() //Used to store queued messages for seamless display
+	var/matrix/start_transform
+	maptext_height = 59
+	maptext_width = 372
+	maptext_x = 8
+	maptext_y = 30
+	screen_loc= "LEFT+1,BOTTOM+3"
+	layer = FLOAT_LAYER
+
+/obj/screen/text/message/Initialize()
+	var/matrix/M = matrix()
+	M.Scale(x = 0, y = 1)
+	start_transform = M
+	transform = M
+	. = ..()
+
+/obj/screen/text/message/Destroy()
+	QDEL_LIST(queue)
+	. = ..()
 
 /obj/screen/inventory
 	var/slot_id	//The indentifier for the slot. It has nothing to do with ID cards.

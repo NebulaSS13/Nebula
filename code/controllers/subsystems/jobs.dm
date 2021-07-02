@@ -599,29 +599,8 @@ SUBSYSTEM_DEF(jobs)
 	if(istype(V))
 		location_name = V.name
 
-	var/style = "font-family: 'Fixedsys'; -dm-text-outline: 1 black; font-size: 11px;"
 	var/area/A = get_area(C.mob)
 	var/text = "[stationdate2text()], [stationtime2text()]\n[location_name], [A.name]"
 	text = uppertext(text)
 
-	var/obj/effect/overlay/T = new()
-	T.maptext_height = 64
-	T.maptext_width = 512
-	T.layer = FLOAT_LAYER
-	T.plane = HUD_PLANE
-	T.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
-	T.screen_loc = "LEFT+1,BOTTOM+2"
-
-	C.screen += T
-	animate(T, alpha = 255, time = 10)
-	for(var/i = 1 to length(text)+1)
-		T.maptext = "<span style=\"[style]\">[copytext(text,1,i)] </span>"
-		sleep(1)
-
-	addtimer(CALLBACK(GLOBAL_PROC, .proc/fade_location_blurb, C, T), duration)
-
-/proc/fade_location_blurb(client/C, obj/T)
-	animate(T, alpha = 0, time = 5)
-	sleep(5)
-	C.screen -= T
-	qdel(T)
+	advanced_screen_text(client = C, text = text)

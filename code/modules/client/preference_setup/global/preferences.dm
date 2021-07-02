@@ -254,6 +254,12 @@ var/global/list/_client_preferences_by_type
 	key = "FLOATING_CHAT"
 	options = list(PREF_SHOW, PREF_HIDE)
 
+/datum/client_preference/message_box
+	description = "Screen message box"
+	key = "MESSAGE_BOX"
+	options = list(PREF_SHOW, PREF_HIDE)
+	default_value = PREF_HIDE
+
 /datum/client_preference/show_status_markers
 	description ="Show overhead status markers"
 	key = "STATUS_MARKERS"
