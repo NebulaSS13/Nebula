@@ -58,21 +58,6 @@
 	path = /obj/item/towel
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/decl/loadout_option/plush_toy
-	name = "plush toy"
-	description = "A plush toy."
-	path = /obj/item/toy/plushie
-
-/decl/loadout_option/plush_toy/get_gear_tweak_options()
-	. = ..()
-	LAZYINITLIST(.[/datum/gear_tweak/path])
-	.[/datum/gear_tweak/path] |= list(
-		"mouse plush" =  /obj/item/toy/plushie/mouse,
-		"kitten plush" = /obj/item/toy/plushie/kitten,
-		"lizard plush" = /obj/item/toy/plushie/lizard,
-		"spider plush" = /obj/item/toy/plushie/spider
-	)
-
 /decl/loadout_option/mirror
 	name = "handheld mirror"
 	path = /obj/item/mirror
