@@ -703,8 +703,10 @@ default behaviour is:
 	..()
 	cut_overlays()
 	if(auras)
-		for(var/aura in auras)
-			add_overlay(auras)
+		for(var/obj/aura/aura AS_ANYTHING in auras)
+			var/image/A = new()
+			A.appearance = aura
+			add_overlay(A)
 	
 /mob/living/Destroy()
 	if(auras)

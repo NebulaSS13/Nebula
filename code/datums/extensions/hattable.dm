@@ -19,7 +19,7 @@
 	wearer.update_icon()
 	return TRUE
 
-/datum/extension/hattable/proc/get_hat_overlay(var/mob/wearer, var/apply_offsets)
+/datum/extension/hattable/proc/get_hat_overlay(var/mob/wearer, var/apply_offsets = TRUE)
 	var/image/I = hat?.get_mob_overlay(wearer, slot_head_str)
 	if(I && apply_offsets)
 		I.pixel_x += offsets[1]
@@ -61,5 +61,5 @@ var/global/list/mob_hat_cache = list()
 
 	return I
 
-/datum/extension/hattable/directional/get_hat_overlay(var/mob/wearer, var/apply_offsets)
+/datum/extension/hattable/directional/get_hat_overlay(var/mob/wearer, var/apply_offsets = TRUE)
 	return offset_image(..(wearer, FALSE))
