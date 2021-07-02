@@ -379,7 +379,7 @@
 		sleep(working.fade_delay)
 	if(!islist(additional_tags)) additional_tags = list("","")
 	for(var/i = 2 to length(text)+1) //2 is because we need something after <br> so there will be no twitchy text shift
-		working.maptext = html_decode("<span style=\"[working.text_style]\">[source_name ? "<p style=\"color: aqua; font-size: 160%;\"><b>[source_name]</b></p><br>" : null][additional_tags[1]][text[1]][copytext_char(text,2,i)][additional_tags[2]]</span>")
+		working.maptext = html_decode("<span style=\"[working.text_style]\">[source_name ? "<p style=\"color: aqua; font-size: 160%;\"><b>[source_name]</b></p>" : null]<br>[additional_tags[1]][text[1]][copytext_char(text,2,i)][additional_tags[2]]</span>")
 		sleep(working.text_delay) //would be fun to play sound as each symbol gets drawn, not sure about that
 
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/advanced_screen_text_fade, client, working), working.text_duration)
