@@ -8,6 +8,8 @@
 	dir = SOUTH
 	organ_tag = "limb"
 
+	appearance_flags = PIXEL_SCALE | LONG_GLIDE
+
 	var/slowdown = 0
 
 	// Strings

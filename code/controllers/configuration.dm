@@ -250,6 +250,8 @@ var/global/list/gamemode_cache = list()
 	var/max_client_view_x
 	var/max_client_view_y
 
+	var/allow_diagonal_movement = FALSE
+
 	var/no_throttle_localhost
 
 	var/static/list/protected_vars = list(
@@ -881,6 +883,9 @@ var/global/list/gamemode_cache = list()
 					config.max_client_view_x = text2num(value)
 				if("max_client_view_y")
 					config.max_client_view_y = text2num(value)
+
+				if("allow_diagonal_movement")
+					config.allow_diagonal_movement = TRUE
 
 				if("use_loyalty_implants")
 					config.use_loyalty_implants = 1
