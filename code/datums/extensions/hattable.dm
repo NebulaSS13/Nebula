@@ -27,27 +27,39 @@
 	return I
 
 /datum/extension/hattable/proc/drop_hat(var/mob/wearer)
-	wearer.remove_from_mob(hat)
+	if((hat in wearer) && !QDELETED(hat))
+		wearer.remove_from_mob(hat)
 	hat = null
 	wearer.update_icon()
 
-// Copied in large part from /decl/bodytype/proc/get_offset_overlay_image, almost certainly going to be 
-// wonky with composite or layered overlays but for something as niche as this I'm not sure it's worth the effort.
 var/global/list/mob_hat_cache = list()
-/datum/extension/hattable/directional/get_hat_overlay(var/mob/wearer, var/apply_offsets)
+/datum/extension/hattable/directional/proc/offset_image(var/image/I)
+
+	if(!istype(I))
+		return
+
 	var/mob/owner = holder
-	var/image/I = ..(wearer, FALSE)
-	if(I)
-		var/cache_key = "[I.icon]-[I.icon_state]-[json_encode(offsets)]-[owner.icon]"
-		if(!global.mob_hat_cache[cache_key])
-			var/icon/final = icon(owner.icon, "template") // whoever makes a mob hattable should also check it has a template state in its image
-			for(var/dir in offsets)
-				var/list/facing_list = offsets[dir]
-				var/icon/canvas = icon(owner.icon, "template")
-				var/use_dir = text2num(dir)
-				canvas.Blend(icon(I.icon, I.icon_state, dir = use_dir), ICON_OVERLAY, facing_list[1]+1, facing_list[2]+1)
-				final.Insert(canvas, dir = use_dir)
-			global.mob_hat_cache[cache_key] = final
-		I.icon = global.mob_hat_cache[cache_key]
-		I.icon_state = ""
+	if(!istype(owner))
+		return I
+
+	var/cache_key = "[I.icon]-[I.icon_state]-[json_encode(offsets)]-[owner.icon]"
+	if(!global.mob_hat_cache[cache_key])
+		var/icon/final = icon(owner.icon, "template") // whoever makes a mob hattable should also check it has a template state in its image
+		for(var/dir in offsets)
+			var/list/facing_list = offsets[dir]
+			var/icon/canvas = icon(owner.icon, "template")
+			var/use_dir = text2num(dir)
+			canvas.Blend(icon(I.icon, I.icon_state, dir = use_dir), ICON_OVERLAY, facing_list[1]+1, facing_list[2]+1)
+			final.Insert(canvas, dir = use_dir)
+		global.mob_hat_cache[cache_key] = final
+
+	I.icon = global.mob_hat_cache[cache_key]
+	I.icon_state = ""
+	for(var/thing in I.overlays)
+		I.overlays -= thing
+		I.overlays += offset_image(thing)
+
 	return I
+
+/datum/extension/hattable/directional/get_hat_overlay(var/mob/wearer, var/apply_offsets)
+	return offset_image(..(wearer, FALSE))

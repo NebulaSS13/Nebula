@@ -23,8 +23,15 @@
 	meat_amount = 3
 	skin_material = /decl/material/solid/skin/fur/orange
 
-	var/obj/item/inventory_head
-	var/obj/item/inventory_back
+/mob/living/simple_animal/corgi/Initialize()
+	if(isnull(hat_offsets))
+		hat_offsets = list(
+			"[NORTH]" = list( 1, -8),
+			"[SOUTH]" = list( 1, -8),
+			"[EAST]" =  list( 7, -8),
+			"[WEST]" =  list(-7, -8)
+		)
+	. = ..()
 
 //IAN! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Ian
@@ -112,6 +119,17 @@
 	meat_amount = 1
 	skin_amount = 3
 	bone_amount = 3
+
+/mob/living/simple_animal/corgi/puppy/Initialize()
+	if(isnull(hat_offsets))
+		hat_offsets = list(
+			"[NORTH]" = list( 0, -12),
+			"[SOUTH]" = list( 0, -12),
+			"[EAST]" =  list( 5, -14),
+			"[WEST]" =  list(-5, -14)
+		)
+	..()
+	gender = pick(MALE, FEMALE)
 
 //pupplies cannot wear anything.
 /mob/living/simple_animal/corgi/puppy/OnTopic(mob/user, href_list)

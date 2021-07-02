@@ -27,8 +27,10 @@
 	bone_material = null
 	bone_amount =   0
 
-	var/obj/item/inventory_head
-	var/obj/item/inventory_mask
+/mob/living/simple_animal/crab/Initialize()
+	if(isnull(hat_offsets))
+		hat_offsets = list("[SOUTH]" = list(-1, -10))
+	. = ..()
 
 /mob/living/simple_animal/crab/Life()
 	. = ..()

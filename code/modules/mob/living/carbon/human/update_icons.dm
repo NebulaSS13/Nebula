@@ -170,26 +170,21 @@ Please contact me on #coderbus IRC. ~Carn x
 	update_fire(0)
 	update_surgery(0)
 	UpdateDamageIcon()
-	update_hud() //TODO: remove the need for this
 	update_icon()
 
-//UPDATES OVERLAYS FROM OVERLAYS_LYING/OVERLAYS_STANDING
 /mob/living/carbon/human/on_update_icon()
 
 	..()
-	update_hud() //TODO: remove the need for this
 
-	if(icon_update)
-
-		var/list/visible_overlays
-		if(is_cloaked())
-			icon = 'icons/mob/human.dmi'
-			icon_state = "blank"
-			visible_overlays = overlays_standing[HO_INHAND_LAYER]
-		else
-			icon = stand_icon
-			icon_state = null
-			visible_overlays = overlays_standing
+	var/list/visible_overlays
+	if(is_cloaked())
+		icon = 'icons/mob/human.dmi'
+		icon_state = "blank"
+		visible_overlays = overlays_standing[HO_INHAND_LAYER]
+	else
+		icon = stand_icon
+		icon_state = null
+		visible_overlays = overlays_standing
 
 	var/matrix/M = matrix()
 	if(lying && (bodytype.prone_overlay_offset[1] || bodytype.prone_overlay_offset[2]))
@@ -201,17 +196,18 @@ Please contact me on #coderbus IRC. ~Carn x
 			var/image/overlay = entry
 			if(i != HO_DAMAGE_LAYER)
 				overlay.transform = M
-			overlays_to_apply += overlay
+			add_overlay(entry)
 		else if(istype(entry, /list))
 			for(var/image/overlay in entry)
 				if(i != HO_DAMAGE_LAYER)
 					overlay.transform = M
+				add_overlay(entry)
 
-		var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
-		if(istype(head) && !head.is_stump())
-			var/image/I = head.get_eye_overlay()
-			if(I) 
-				add_overlay(I)
+	var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
+	if(istype(head) && !head.is_stump())
+		var/image/I = head.get_eye_overlay()
+		if(I) 
+			add_overlay(I)
 
 /mob/living/carbon/human/proc/get_icon_scale_mult()
 	// If you want stuff like scaling based on species or something, here is a good spot to mix the numbers together.
@@ -656,16 +652,8 @@ var/global/list/damage_icon_parts = list()
 		overlays_standing[HO_BACK_LAYER] = back.get_mob_overlay(src,slot_back_str)
 	else
 		overlays_standing[HO_BACK_LAYER] = null
-
 	if(update_icons)
 		queue_icon_update()
-
-
-/mob/living/carbon/human/update_hud()	//TODO: do away with this if possible
-	if(client)
-		client.screen |= contents
-		if(hud_used)
-			hud_used.hidden_inventory_update() //Updates the screenloc of the items on the 'other' inventory bar
 
 /mob/living/carbon/human/update_inv_handcuffed(var/update_icons=1)
 	if(handcuffed)
