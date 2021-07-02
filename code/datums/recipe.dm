@@ -73,7 +73,7 @@ var/global/list/microwave_accepts_items =    list(
 	for(var/ktag in needed_fruits)
 		if(needed_fruits[ktag] > 0)
 			return FALSE
-	return .
+	return TRUE
 
 /decl/recipe/proc/check_items(var/obj/container)
 	if(!length(items))
