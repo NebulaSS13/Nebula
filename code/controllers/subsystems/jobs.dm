@@ -603,4 +603,4 @@ SUBSYSTEM_DEF(jobs)
 	var/text = "[stationdate2text()], [stationtime2text()]\n[location_name], [A.name]"
 	text = uppertext(text)
 
-	advanced_screen_text(client = C, text = text)
+	advanced_screen_text(client = C, text = text, box = /obj/screen/text/message/simple)

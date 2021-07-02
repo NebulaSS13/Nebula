@@ -38,16 +38,20 @@
 	var/fade_delay = 0.7 SECOND //Delay for actual message box appear (speed of appear/dissappear)
 	var/text_delay = 1 //deciseconds between symbol drawing
 	var/text_duration = 4.5 SECONDS //seconds for this window to "persist doing nothing"
-	var/text_style = "font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 6px; line-height: 95%;"
+	var/text_style = "font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 6px; line-height: 95%; vertical-align: top;"
 
 	var/list/queue = list() //Used to store queued messages for seamless display
 	var/matrix/start_transform
-	maptext_height = 59
-	maptext_width = 372
+	maptext_height = 112
+	maptext_width = 304 //cuz space for portrait
 	maptext_x = 8
-	maptext_y = 30
+	maptext_y = -16
 	screen_loc= "LEFT+1,BOTTOM+3"
 	layer = FLOAT_LAYER
+
+/obj/screen/text/message/simple
+	icon = null
+	fade_delay = 0
 
 /obj/screen/text/message/Initialize()
 	var/matrix/M = matrix()

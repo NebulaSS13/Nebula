@@ -370,6 +370,7 @@
 		working.queue = last.queue.Copy()
 		client.screen -= last
 		qdel(last) //there is almost zero cases including often window box change so too bad
+		working.transform = matrix() //open it instantly
 
 	client.screen |= working
 
