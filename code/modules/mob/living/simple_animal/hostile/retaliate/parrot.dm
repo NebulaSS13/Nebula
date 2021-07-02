@@ -121,6 +121,7 @@
 	stat("Held Item", held_item)
 
 /mob/living/simple_animal/hostile/retaliate/parrot/on_update_icon()
+	..()
 	icon_state = "[icon_set]_fly"
 	icon_living = "[icon_set]_fly"
 	icon_dead = "[icon_set]_dead"
