@@ -9,7 +9,7 @@
 			var/datum/codex_entry/entry = new(_display_name = "[species.name] (species)")
 			entry.lore_text = species.codex_description
 			entry.mechanics_text = species.ooc_codex_information
-			SScodex.add_entry_by_string(entry.display_name, entry)
+			SScodex.add_entry_by_string(entry.name, entry)
 			SScodex.add_entry_by_string(species.name, entry)
-			items |= entry.display_name
+			items |= entry.name
 	. = ..()
