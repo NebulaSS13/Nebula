@@ -41,7 +41,7 @@
 			if(turns_since_move >= turns_per_move)
 				Move(get_step(src,pick(4,8)))
 				turns_since_move = 0
-	regenerate_icons()
+	update_icon()
 
 //COFFEE! SQUEEEEEEEEE!
 /mob/living/simple_animal/crab/Coffee

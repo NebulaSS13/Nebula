@@ -18,7 +18,7 @@
 	instance_num = rand(1, 1000)
 	name = "[initial(name)] ([instance_num])"
 	real_name = name
-	regenerate_icons()
+	update_icon()
 
 	if(language)
 		add_language(language)

@@ -83,7 +83,7 @@
 		I.color = get_random_colour(1)
 		flower.overlays += I
 
-	update_icons()
+	update_icon()
 
 	. = ..(mapload)
 

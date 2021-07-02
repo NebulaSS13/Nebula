@@ -12,7 +12,7 @@
 	blinded = null
 
 	//Status updates, death etc.
-	update_icons()
+	update_icon()
 
 /mob/living/carbon/alien/handle_mutations_and_radiation()
 
@@ -73,7 +73,7 @@
 			ADJ_STATUS(src, STAT_BLIND, -1) 
 			blinded = 1
 
-		update_icons()
+		update_icon()
 
 	return 1
 

@@ -2,7 +2,7 @@
 	var/obj/item/organ/internal/eyes/eyes = get_internal_organ(species.vision_organ || BP_EYES)
 	if(eyes)
 		eyes.update_colour()
-		regenerate_icons()
+		refresh_visible_overlays()
 
 /mob/living/carbon/human/proc/get_bodypart_name(var/zone)
 	var/obj/item/organ/external/E = get_organ(zone)

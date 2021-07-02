@@ -157,7 +157,7 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 		H.adjustBrainLoss(amt_brain)
 		H.radiation += min(H.radiation, amt_radiation)
 
-	target.regenerate_icons()
+	target.update_icon()
 	//disabling
 	SET_STATUS_MAX(target, STAT_WEAK, amt_weakened)
 	SET_STATUS_MAX(target, STAT_PARA, amt_paralysis)

@@ -27,25 +27,29 @@
 	return all_images
 
 /mob/living/exosuit/on_update_icon()
-	var/list/new_overlays = get_mech_images(list(body, head), MECH_BASE_LAYER)
+
+	..()
+	for(var/overlay in get_mech_images(list(body, head), MECH_BASE_LAYER))
+		add_overlay(overlay)
+
 	if(body && !hatch_closed)
-		new_overlays += get_mech_image(body.decal, "[body.icon_state]_cockpit", body.on_mech_icon, COLOR_WHITE, MECH_INTERMEDIATE_LAYER)
+		add_overlay(get_mech_image(body.decal, "[body.icon_state]_cockpit", body.on_mech_icon, COLOR_WHITE, MECH_INTERMEDIATE_LAYER))
 	update_pilots(FALSE)
 	if(LAZYLEN(pilot_overlays))
-		new_overlays += pilot_overlays
+		for(var/overlay in pilot_overlays)
+			add_overlay(overlay)
 	if(body)
-		new_overlays += get_mech_image(body.decal, "[body.icon_state]_overlay[hatch_closed ? "" : "_open"]", body.on_mech_icon, body.color, MECH_COCKPIT_LAYER)
+		add_overlay(get_mech_image(body.decal, "[body.icon_state]_overlay[hatch_closed ? "" : "_open"]", body.on_mech_icon, body.color, MECH_COCKPIT_LAYER))
 	if(arms)
-		new_overlays += get_mech_image(arms.decal, arms.icon_state, arms.on_mech_icon, arms.color, MECH_ARM_LAYER)
+		add_overlay(get_mech_image(arms.decal, arms.icon_state, arms.on_mech_icon, arms.color, MECH_ARM_LAYER))
 	if(legs)
-		new_overlays += get_mech_image(legs.decal, legs.icon_state, legs.on_mech_icon, legs.color, MECH_LEG_LAYER)
+		add_overlay(get_mech_image(legs.decal, legs.icon_state, legs.on_mech_icon, legs.color, MECH_LEG_LAYER))
 	for(var/hardpoint in hardpoints)
 		var/obj/item/mech_equipment/hardpoint_object = hardpoints[hardpoint]
 		if(hardpoint_object)
 			var/use_icon_state = "[hardpoint_object.icon_state]_[hardpoint]"
 			if(use_icon_state in global.mech_weapon_overlays)
-				new_overlays += get_mech_image(null, use_icon_state, 'icons/mecha/mech_weapon_overlays.dmi', null, hardpoint_object.mech_layer )
-	overlays = new_overlays
+				add_overlay(get_mech_image(null, use_icon_state, 'icons/mecha/mech_weapon_overlays.dmi', null, hardpoint_object.mech_layer))
 
 /mob/living/exosuit/proc/update_pilots(var/update_overlays = TRUE)
 	if(update_overlays && LAZYLEN(pilot_overlays))
@@ -76,6 +80,3 @@
 			LAZYADD(pilot_overlays, draw_pilot)
 		if(update_overlays && LAZYLEN(pilot_overlays))
 			overlays += pilot_overlays
-
-/mob/living/exosuit/regenerate_icons()
-	return

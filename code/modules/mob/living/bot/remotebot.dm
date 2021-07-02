@@ -48,7 +48,8 @@
 		controller = B
 	return ..()
 
-/mob/living/bot/remotebot/update_icons()
+/mob/living/bot/remotebot/on_update_icon()
+	..()
 	icon_state = "fetchbot[on]"
 
 /mob/living/bot/remotebot/Destroy()

@@ -48,7 +48,7 @@
 
 /mob/living/bot/Initialize()
 	. = ..()
-	update_icons()
+	update_icon()
 
 	botcard = new /obj/item/card/id(src)
 	botcard.access = botcard_access?.Copy()
@@ -347,7 +347,7 @@
 		return 0
 	on = 1
 	set_light(light_strength)
-	update_icons()
+	update_icon()
 	resetTarget()
 	patrol_path = list()
 	ignore_list = list()
@@ -356,7 +356,7 @@
 /mob/living/bot/proc/turn_off()
 	on = 0
 	set_light(0)
-	update_icons()
+	update_icon()
 
 /mob/living/bot/proc/explode()
 	qdel(src)

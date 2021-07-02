@@ -526,14 +526,23 @@
 
 		log_admin("[key_name(usr)] resent the NanoUI resource files to [key_name(H)] ")
 
-	else if(href_list["regenerateicons"])
-		if(!check_rights(0))	return
-
-		var/mob/M = locate(href_list["regenerateicons"])
+	else if(href_list["updateicon"])
+		if(!check_rights(0))
+			return
+		var/mob/M = locate(href_list["updateicon"])
 		if(!ismob(M))
 			to_chat(usr, "This can only be done to instances of type /mob")
 			return
-		M.regenerate_icons()
+		M.update_icon()
+
+	else if(href_list["refreshoverlays"])
+		if(!check_rights(0))
+			return
+		var/mob/living/carbon/human/H = locate(href_list["refreshoverlays"])
+		if(!istype(H))
+			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
+			return
+		H.refresh_visible_overlays()
 
 	else if(href_list["adjustDamage"] && href_list["mobToDamage"])
 		if(!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return

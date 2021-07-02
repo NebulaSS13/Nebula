@@ -107,7 +107,7 @@
 	user.visible_message(
 		SPAN_NOTICE("\The [user] cuts \the [core] out of \the [target] with \the [tool]."),	\
 		SPAN_NOTICE("You cut \the [core] out of \the [target] with \the [tool]. It looks like there are [target.cores] core\s left."))
-	target.regenerate_icons()
+	target.update_icon()
 
 /decl/surgery_step/slime/saw_core/fail_step(mob/living/user, mob/living/slime/target, target_zone, obj/item/tool)
 	user.visible_message(

@@ -16,7 +16,7 @@
 	hat = new_hat
 	hat.forceMove(wearer)
 	hat.equipped(wearer)
-	wearer.update_icons()
+	wearer.update_icon()
 	return TRUE
 
 /datum/extension/hattable/proc/get_hat_overlay(var/mob/wearer, var/apply_offsets)
@@ -29,7 +29,7 @@
 /datum/extension/hattable/proc/drop_hat(var/mob/wearer)
 	wearer.remove_from_mob(hat)
 	hat = null
-	wearer.update_icons()
+	wearer.update_icon()
 
 // Copied in large part from /decl/bodytype/proc/get_offset_overlay_image, almost certainly going to be 
 // wonky with composite or layered overlays but for something as niche as this I'm not sure it's worth the effort.

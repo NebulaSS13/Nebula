@@ -24,7 +24,7 @@
 	var/datum/ai/slime/slime_ai = user.ai
 	if(istype(slime_ai))
 		slime_ai.mood = mood
-		user.regenerate_icons()
+		user.update_icon()
 
 /decl/emote/slime/check_user(var/atom/user)
 	return isslime(user)

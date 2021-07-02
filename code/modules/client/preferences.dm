@@ -410,7 +410,7 @@ var/global/list/time_prefs_fixed = list()
 	character.update_body(0)
 	character.update_underwear(0)
 	character.update_hair(0)
-	character.update_icons()
+	character.update_icon()
 	character.update_transform()
 
 	if(is_preview_copy)
