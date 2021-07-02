@@ -158,7 +158,7 @@
 
 //Canisters
 /datum/codex_entry/atmos_canister
-	display_name = "gas canister" // because otherwise it shows up as 'canister: [caution]'
+	name = "gas canister" // because otherwise it shows up as 'canister: [caution]'
 	associated_paths = list(/obj/machinery/portable_atmospherics/canister)
 	mechanics_text = "The canister can be connected to a connector port with a wrench.  Tanks of gas (the kind you can hold in your hand) \
 	can be filled by the canister, by using the tank on the canister, increasing the release pressure, then opening the valve until it is full, and then close it.  \

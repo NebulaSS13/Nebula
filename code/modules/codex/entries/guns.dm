@@ -109,7 +109,7 @@
 
 
 /datum/codex_entry/energy_weapons
-	display_name = "energy weapons"
+	name = "energy weapons"
 	mechanics_text = "This weapon is an energy weapon; they run on battery charge rather than traditional ammunition. You can recharge \
 		an energy weapon by placing it in a wall-mounted or table-mounted charger, such as those found in Security or around the \
 		place. Additionally, most energy weapons can go straight through windows and hit whatever is on the other side, and are \
@@ -117,7 +117,7 @@
 		<br><br>"
 
 /datum/codex_entry/ballistic_weapons
-	display_name = "ballistic weapons"
+	name = "ballistic weapons"
 	mechanics_text = "This weapon is a ballistic weapon; it fires solid shots using a magazine or loaded rounds of ammunition. You can \
 		unload it by holding it and clicking it with an empty hand, and reload it by clicking it with a magazine, or in the case of \
 		shotguns or some rifles, by opening the breech and clicking it with individual rounds. \
@@ -128,7 +128,7 @@
 		as a missed shot or careless use of automatic fire could rip open the hull or injure bystanders with ease."
 
 /datum/codex_entry/magnetic_weapons
-	display_name = "magnetic weapons"
+	name = "magnetic weapons"
 	mechanics_text = "<p>This weapon is a magnetic weapon; it fires solid projectiles using a capacitive charge and magnets.</p>\
 		<p>You can unload it by holding it and clicking it with an empty hand, and reload it by clicking it with any items the weapon accepts as ammunition.</p>\
 		<p>Each shot not only uses ammunition, but also drains the gun's capacitor. The capacitor recharges from the inserted power cell.</p>"

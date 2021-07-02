@@ -158,6 +158,6 @@
 			material_info += "</ul>"
 
 			entry.mechanics_text = jointext(material_info, null)
-			SScodex.add_entry_by_string(entry.display_name, entry)
-			items |= entry.display_name
+			SScodex.add_entry_by_string(entry.name, entry)
+			items |= entry.name
 	. = ..()

@@ -1,5 +1,5 @@
 /datum/codex_entry/cuchulain_foundation
-	display_name = "Cuchulain Foundation"
+	name = "Cuchulain Foundation"
 	associated_strings = list("Cuchulain", "Foundation")
 	associated_paths = list(
 		/obj/item/storage/briefcase/foundation, 
@@ -24,7 +24,7 @@
 	bodies are unclear."
 
 /datum/codex_entry/psionics
-	display_name = "Psionics"
+	name = "Psionics"
 	associated_strings = list("Psychic", "Psychic Powers", "Psi")
 	associated_paths = list(
 		/obj/item/book/manual/psionics,

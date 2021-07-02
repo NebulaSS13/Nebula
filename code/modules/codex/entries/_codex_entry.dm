@@ -1,5 +1,5 @@
 /datum/codex_entry
-	var/display_name
+	var/name
 	var/list/associated_strings
 	var/list/associated_paths
 	var/lore_text
@@ -7,11 +7,11 @@
 	var/antag_text
 
 /datum/codex_entry/dd_SortValue()
-	return display_name
+	return name
 
 /datum/codex_entry/New(var/_display_name, var/list/_associated_paths, var/list/_associated_strings, var/_lore_text, var/_mechanics_text, var/_antag_text)
 
-	if(_display_name)       display_name =       _display_name
+	if(_display_name)       name =               _display_name
 	if(_associated_paths)   associated_paths =   _associated_paths
 	if(_associated_strings) associated_strings = _associated_strings
 	if(_lore_text)          lore_text =          _lore_text
@@ -22,10 +22,10 @@
 		for(var/tpath in associated_paths)
 			var/atom/thing = tpath
 			LAZYADD(associated_strings, sanitize(lowertext(initial(thing.name))))
-	if(display_name)
-		LAZYADD(associated_strings, display_name)
+	if(name)
+		LAZYADD(associated_strings, name)
 	else if(associated_strings && associated_strings.len)
-		display_name = associated_strings[1]
+		name = associated_strings[1]
 	..()
 
 /datum/codex_entry/proc/get_header(var/mob/presenting_to)
@@ -34,7 +34,7 @@
 	dat += "<a href='?src=\ref[SScodex];show_examined_info=\ref[linked_entry];show_to=\ref[presenting_to]'>Home</a>"
 	dat += "<a href='?src=\ref[presenting_to.client];codex_search=1'>Search Codex</a>"
 	dat += "<a href='?src=\ref[presenting_to.client];codex_index=1'>List All Entries</a>"
-	dat += "<hr><h2>[display_name]</h2>"
+	dat += "<hr><h2>[name]</h2>"
 	return jointext(dat, null)
 
 /datum/codex_entry/proc/get_text(var/mob/presenting_to)

@@ -36,7 +36,7 @@
 		)
 
 	for(var/datum/codex_entry/entry in entries_to_register)
-		SScodex.add_entry_by_string(entry.display_name, entry)
-		items |= entry.display_name
+		SScodex.add_entry_by_string(entry.name, entry)
+		items |= entry.name
 
 	. = ..()
