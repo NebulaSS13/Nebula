@@ -153,26 +153,24 @@
 
 		if(href_list["toggle_aspect"])
 			var/decl/aspect/A = locate(href_list["toggle_aspect"])
-			if(istype(A))
-				if(A.type in pref.aspects)
-					var/total_aspect_cost = A.aspect_cost
-					var/list/remove_aspects = list(A.type)
-					var/list/aspects_to_remove = list()
+			if(!istype(A))
+				return TOPIC_NOACTION
+			// Disable aspect (and children).
+			if(A.type in pref.aspects)
+				var/list/aspects_to_remove = list(A)
+				while(aspects_to_remove.len)
+					A = aspects_to_remove[1]
+					aspects_to_remove -= A
+					if(!(A.type in pref.aspects))
+						continue
+					pref.aspects -= A.type
 					if(A.children)
-						aspects_to_remove = A.children.Copy()
-					while(aspects_to_remove.len)
-						A = aspects_to_remove[1]
-						aspects_to_remove -= A
-						if(!(A.name in pref.aspects))
-							continue
-						total_aspect_cost += A.aspect_cost
-						remove_aspects += A.name
-						if(A.children)
-							aspects_to_remove |= A.children
-					if(get_aspect_total() - total_aspect_cost <= config.max_character_aspects)
-						pref.aspects -= remove_aspects
-				else if(get_aspect_total() + A.aspect_cost <= config.max_character_aspects)
-					pref.aspects |= A.type
-					pref.prune_invalid_aspects()
+						aspects_to_remove |= A.children
+			// Enable aspect.
+			else if(get_aspect_total() + A.aspect_cost <= config.max_character_aspects)
+				pref.aspects |= A.type
+			// Tidy up in case we're in an incoherent state for whatever reason.
+			pref.prune_invalid_aspects()
 			return TOPIC_REFRESH_UPDATE_PREVIEW
+
 	return ..()
