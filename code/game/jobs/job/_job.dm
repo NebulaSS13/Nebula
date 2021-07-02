@@ -420,7 +420,7 @@
 		return locate("start*[title]") // use old stype
 
 /**
- *  Return appropriate /datum/spawnpoint for given client
+ *  Return appropriate /decl/spawnpoint for given client
  *
  *  Spawnpoint will be the one set in preferences for the client, unless the
  *  preference is not set, or the preference is not appropriate for the rank, in
@@ -432,41 +432,19 @@
 		CRASH("Null client passed to get_spawnpoint_for() proc!")
 
 	var/mob/H = C.mob
-	var/spawnpoint = C.prefs.spawnpoint
-	var/datum/spawnpoint/spawnpos
 
-	if(forced_spawnpoint)
-		spawnpoint = forced_spawnpoint
-
-	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
-		spawnpoint = global.using_map.default_spawn
-
-	if(spawnpoint)
-		if(!(spawnpoint in global.using_map.allowed_spawns))
-			if(H)
-				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead. To resolve this error head to your character's setup and choose a different spawn point.</span>")
-			spawnpos = null
-		else
-			spawnpos = spawntypes()[spawnpoint]
-
-	if(spawnpos && !spawnpos.check_job_spawning(title))
+	var/spawntype = forced_spawnpoint || C.prefs.spawnpoint || global.using_map.default_spawn
+	var/decl/spawnpoint/spawnpos = GET_DECL(spawntype)
+	if(spawnpos && !spawnpos.check_job_spawning(src))
 		if(H)
-			to_chat(H, "<span class='warning'>Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job ([title]). Spawning you at another spawn point instead.</span>")
+			to_chat(H, SPAN_WARNING("Your chosen spawnpoint ([spawnpos.name]) is unavailable for your chosen job ([title]). Spawning you at another spawn point instead."))
 		spawnpos = null
-
 	if(!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
-		for(var/spawntype in global.using_map.allowed_spawns)
-			var/datum/spawnpoint/candidate = spawntypes()[spawntype]
-			if(candidate.check_job_spawning(title))
+		for(var/decl/spawnpoint/candidate AS_ANYTHING in global.using_map.allowed_spawns)
+			if(candidate?.check_job_spawning(src))
 				spawnpos = candidate
 				break
-
-	if(!spawnpos)
-		// Pick at random from all the (wrong) spawnpoints, just so we have one
-		warning("Could not find an appropriate spawnpoint for job [title].")
-		spawnpos = spawntypes()[pick(global.using_map.allowed_spawns)]
-
 	return spawnpos
 
 /datum/job/proc/post_equip_rank(var/mob/person, var/alt_title)

@@ -35,8 +35,8 @@
 
 	radiation_detected_message = "High levels of radiation have been detected in proximity of the %STATION_NAME%. Please move to the closest saferoom available."
 
-	allowed_spawns = list("Cryogenic Storage")
-	default_spawn = "Cryogenic Storage"
+	allowed_spawns = list(/decl/spawnpoint/cryo)
+	default_spawn = /decl/spawnpoint/cryo
 
 /datum/map/nexus/get_map_info()
 	return "You're aboard the <b>[station_name],</b> a space complex positioned at the vast frontier of space. \
