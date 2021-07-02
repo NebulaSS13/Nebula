@@ -31,12 +31,16 @@
 
 	log_and_message_admins("## FUSION CORE SETUP - Setup initiated by [usr].")
 
-	for(var/obj/machinery/fusion_fuel_injector/mapped/injector in SSmachines.machinery)
-		injector.cur_assembly = new /obj/item/fuel_assembly/deuterium(injector)
-		injector.BeginInjecting()
-
 	var/obj/machinery/power/fusion_core/mapped/core = locate() in SSmachines.machinery
 	if(core.jumpstart(15000))
+
+		for(var/obj/machinery/fusion_fuel_injector/mapped/injector in SSmachines.machinery)
+			injector.cur_assembly = new /obj/item/fuel_assembly/deuterium(injector)
+			injector.BeginInjecting()
+
+		for(var/obj/machinery/power/emitter/gyrotron/gyro in SSmachines.machinery)
+			gyro.activate(usr)
+
 		var/list/delayed_objects = list()
 
 		// SETUP PHASE
