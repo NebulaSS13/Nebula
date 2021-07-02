@@ -2,7 +2,6 @@
 // of them at character generation and they will alter some interactions with the world. Very WIP.
 var/global/list/aspect_datums = list()     // Raw datums, no index.
 var/global/list/aspect_categories = list() // Containers for ease of printing data.
-var/global/list/aspect_icons = list()      // List of aspect icons for forwarding to the client.
 
 /datum/aspect_category
 	var/name
@@ -20,8 +19,6 @@ var/global/list/aspect_icons = list()      // List of aspect icons for forwardin
 /decl/aspect
 	var/name                                             // Name/unique index.
 	var/desc = "An aspect is a trait of your character." // Flavour text.
-	var/use_icon_state = ""                              // State to use for the above.
-	//var/icon/use_icon                                  // I REALLY HATE \icon A LOT. Causes a lot of lag.
 	var/aspect_cost = 1                                  // Number of points spent or gained by taking this aspect
 	var/category                                         // Header for root aspects in char prefs.
 	var/decl/aspect/parent                               // Parent/prerequisite for this aspect.
@@ -52,13 +49,10 @@ var/global/list/aspect_icons = list()      // List of aspect icons for forwardin
 		AC.aspects += src
 		if(AC.hide_from_chargen && available_at_chargen)
 			AC.hide_from_chargen = FALSE
-		//global.aspect_icons += use_icon
 
-	if(parent)
-		if(ispath(parent))
-			parent = GET_DECL(parent)
-		if(!istype(parent))
-			PRINT_STACK_TRACE("ASPECTS: [parent] is not a valid parent for [type].")
+	if(ispath(parent))
+		parent = GET_DECL(parent)
+	if(istype(parent))
 		LAZYDISTINCTADD(parent.children, src)
 
 /decl/aspect/proc/applies_to_organ(var/organ)
