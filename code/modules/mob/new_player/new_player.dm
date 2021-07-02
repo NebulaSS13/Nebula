@@ -266,7 +266,7 @@
 	if(job.is_restricted(client.prefs, src))
 		return
 
-	var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(client)
+	var/decl/spawnpoint/spawnpoint = job.get_spawnpoint(client)
 	if(!spawnpoint)
 		to_chat(src, alert("That spawnpoint is unavailable. Please try another."))
 		return 0
@@ -426,7 +426,7 @@
 		var/datum/job/job = SSjobs.get_by_title(mind.assigned_role)
 		if(!job)
 			job = SSjobs.get_by_title(global.using_map.default_job_title)
-		var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(client, client.prefs.ranks[job.title])
+		var/decl/spawnpoint/spawnpoint = job.get_spawnpoint(client, client.prefs.ranks[job.title])
 		spawn_turf = pick(spawnpoint.turfs)
 
 	if(chosen_species)

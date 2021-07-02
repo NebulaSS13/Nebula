@@ -80,8 +80,14 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
-	var/allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Robot Storage")
-	var/default_spawn = "Arrivals Shuttle"
+	var/allowed_spawns = list(
+		/decl/spawnpoint/arrivals,
+		/decl/spawnpoint/gateway,
+		/decl/spawnpoint/cryo,
+		/decl/spawnpoint/cyborg
+	)
+	var/default_spawn = /decl/spawnpoint/arrivals
+
 	var/flags = 0
 	var/evac_controller_type = /datum/evacuation_controller
 	var/use_overmap = 0		//If overmap should be used (including overmap space travel override)
@@ -155,6 +161,13 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	)
 
 /datum/map/New()
+
+	if(default_spawn && !(default_spawn in allowed_spawns))
+		PRINT_STACK_TRACE("Map datum [type] has default spawn point [default_spawn] not in the allowed spawn list.")
+	for(var/spawn_type in allowed_spawns)
+		allowed_spawns -= spawn_type
+		allowed_spawns += GET_DECL(spawn_type)
+
 	if(!map_levels)
 		map_levels = station_levels.Copy()
 

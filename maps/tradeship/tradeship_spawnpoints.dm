@@ -7,28 +7,33 @@ var/global/list/latejoin_cryo_captain = list()
 	global.latejoin_cryo_captain |= get_turf(src)
 
 /datum/map/tradeship
-	allowed_spawns = list("Port Cryogenic Storage", "Starboard Cryogenic Storage", "Robot Storage", "Captain Compartment")
-	default_spawn = "Port Cryogenic Storage"
+	allowed_spawns = list(
+		/decl/spawnpoint/cryo,
+		/decl/spawnpoint/cryo/two,
+		/decl/spawnpoint/cyborg,
+		/decl/spawnpoint/cryo/captain
+	)
+	default_spawn = /decl/spawnpoint/cryo
 
-/datum/spawnpoint/cryo
-	display_name = "Port Cryogenic Storage"
+/decl/spawnpoint/cryo
+	name = "Port Cryogenic Storage"
 	msg = "has completed revival in the port cryogenics bay"
-	disallow_job = list("Robot")
+	disallow_job = list(/datum/job/cyborg)
 
-/datum/spawnpoint/cryo/two
-	display_name = "Starboard Cryogenic Storage"
+/decl/spawnpoint/cryo/two
+	name = "Starboard Cryogenic Storage"
 	msg = "has completed revival in the starboard cryogenics bay"
-	disallow_job = list("Robot")
+	disallow_job = list(/datum/job/cyborg)
 
-/datum/spawnpoint/cryo/two/New()
+/decl/spawnpoint/cryo/two/New()
 	..()
 	turfs = global.latejoin_cryo_two
 
-/datum/spawnpoint/cryo/captain
-	display_name = "Captain Compartment"
+/decl/spawnpoint/cryo/captain
+	name = "Captain Compartment"
 	msg = "has completed revival in the captain compartment"
-	restrict_job = list("Captain")
+	restrict_job = list(/datum/job/tradeship_captain)
 
-/datum/spawnpoint/cryo/captain/New()
+/decl/spawnpoint/cryo/captain/New()
 	..()
 	turfs = global.latejoin_cryo_captain
