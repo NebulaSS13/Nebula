@@ -1,8 +1,3 @@
-/decl/loadout_option/mask/gas/vox
-	name = "vox breathing mask"
-	path = /obj/item/clothing/mask/gas/vox
-	whitelisted = list(BODYTYPE_VOX)
-
 /obj/item/clothing/mask/gas/vox
 	name = "vox breathing mask"
 	desc = "A small oxygen filter for use by Vox."
