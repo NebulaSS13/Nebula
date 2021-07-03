@@ -44,7 +44,7 @@ var/global/list/microwave_accepts_items =    list(
 		return FALSE
 	for(var/rtype in reagents)
 		if(REAGENT_VOLUME(avail_reagents, rtype) < reagents[rtype])
-			return FALSE 
+			return FALSE
 	return TRUE
 
 /decl/recipe/proc/check_fruit(var/obj/container)
@@ -54,10 +54,22 @@ var/global/list/microwave_accepts_items =    list(
 	if(length(container_contents) < length(fruit))
 		return FALSE
 	var/list/needed_fruits = fruit.Copy()
-	for(var/obj/item/chems/food/snacks/grown/G in container_contents)
-		var/ktag = G.seed?.kitchen_tag
-		if(needed_fruits[ktag] > 0)
-			needed_fruits[ktag]--
+	for(var/obj/item/chems/food/snacks/S in container_contents)
+		var/use_tag
+		if(istype(S, /obj/item/chems/food/snacks/grown))
+			var/obj/item/chems/food/snacks/grown/G = S
+			if(!G.seed || !G.seed.kitchen_tag)
+				continue
+			use_tag = G.dry ? "dried [G.seed.kitchen_tag]" : G.seed.kitchen_tag
+		else if(istype(S, /obj/item/chems/food/snacks/fruit_slice))
+			var/obj/item/chems/food/snacks/fruit_slice/FS = S
+			if(!FS.seed || !FS.seed.kitchen_tag)
+				continue
+			use_tag = "[FS.seed.kitchen_tag] slice"
+		use_tag = "[S.dry ? "dried " : ""][use_tag]"
+		if(isnull(needed_fruits[use_tag]))
+			continue
+		needed_fruits[use_tag]--
 	for(var/ktag in needed_fruits)
 		if(needed_fruits[ktag] > 0)
 			return FALSE
