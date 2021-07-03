@@ -95,22 +95,32 @@
 	set name = "Remove Accessory"
 	set category = "Object"
 	set src in usr
-	if(!istype(usr, /mob/living)) return
-	if(usr.stat) return
-	if(!accessories.len) return
+
+	if(!isliving(usr))
+		return
+
+	var/mob/living/M = usr
+
+	if(M.stat)
+		return
+
+	if(!LAZYLEN(accessories))
+		return
+	
 	var/obj/item/clothing/accessory/A
-	var/list/removables = list()
-	for(var/obj/item/clothing/accessory/ass in accessories)
-		if(ass.removable)
-			removables |= ass
-	if(accessories.len > 1)
-		A = input("Select an accessory to remove from [src]") as null|anything in removables
+	if(LAZYLEN(accessories) > 1)
+		var/list/options = list()
+		for(var/obj/item/clothing/accessory/i in accessories)
+			var/image/radial_button = image(icon = i.icon, icon_state = i.icon_state)
+			options[i] = radial_button
+		A = show_radial_menu(M, M, options, radius = 42, tooltips = TRUE)
 	else
 		A = accessories[1]
-	src.remove_accessory(usr,A)
-	removables -= A
-	if(!removables.len)
-		src.verbs -= /obj/item/clothing/proc/removetie_verb
+	
+	remove_accessory(usr, A)
+
+	if(!LAZYLEN(accessories))
+		verbs -= /obj/item/clothing/proc/removetie_verb
 
 /obj/item/clothing/emp_act(severity)
 	if(length(accessories))
