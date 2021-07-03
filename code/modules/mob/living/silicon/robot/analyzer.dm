@@ -23,13 +23,13 @@
 
 /obj/item/robotanalyzer/attack(mob/living/M, mob/living/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, text("<span class='warning'>You try to analyze the floor's vitals!</span>"))
-		for(var/mob/O in viewers(M, null))
-			O.show_message(text("<span class='warning'>[user] has analyzed the floor's vitals!</span>"), 1)
-		user.show_message(text("<span class='notice'>Analyzing Results for The floor:\n\t Overall Status: Healthy</span>"), 1)
-		user.show_message(text("<span class='notice'>\t Damage Specifics: [0]-[0]-[0]-[0]</span>"), 1)
-		user.show_message("<span class='notice'>Key: Suffocation/Toxin/Burns/Brute</span>", 1)
-		user.show_message("<span class='notice'>Body Temperature: ???</span>", 1)
+		user.visible_message(
+			SPAN_WARNING("\The [user] has analyzed the floor's vitals!"),
+			self_message = SPAN_WARNING("You try to analyze the floor's vitals!"))
+		user.show_message(SPAN_NOTICE("Analyzing Results for The floor:\n\t Overall Status: Healthy"))
+		user.show_message(SPAN_NOTICE("\t Damage Specifics: [0]-[0]-[0]-[0]"))
+		user.show_message(SPAN_NOTICE("Key: Suffocation/Toxin/Burns/Brute"))
+		user.show_message(SPAN_NOTICE("Body Temperature: ???"))
 		return
 
 	var/scan_type
