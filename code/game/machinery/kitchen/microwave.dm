@@ -15,6 +15,7 @@
 	var/dirty = 0 // = {0..100} Does it need cleaning?
 	var/broken = 0 // ={0,1,2} How broken is it???
 	var/max_n_of_items = 20 // default, adjusted by matter bins
+	var/datum/composite_sound/microwave/soundloop
 
 	// These determine if the current cooking process failed, the vars above determine if the microwave is broken
 	var/cook_break = FALSE
@@ -37,6 +38,7 @@
 /obj/machinery/microwave/Initialize()
 	. = ..()
 	create_reagents(100)
+	soundloop = new(list(src), FALSE)
 
 /*******************
 *   Item Adding
@@ -306,11 +308,13 @@
 		icon_state = "mw1"
 
 	set_light(1, 1.5)
+	soundloop.start()
 	update_icon()
 	SSnano.update_uis(src)
 
 /obj/machinery/microwave/proc/after_finish_loop()
 	set_light(0)
+	soundloop.stop()
 	update_icon()
 
 /obj/machinery/microwave/proc/stop(var/abort = FALSE)
