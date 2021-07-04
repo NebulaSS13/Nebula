@@ -446,12 +446,12 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	else if(href_list["facial_style"])
 		var/decl/bodytype/B = mob_species.get_bodytype_by_name(pref.bodytype)
-		var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(B.associated_gender)
+		var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(B?.associated_gender)
 
 		var/new_f_style = input(user, "Choose your character's facial-hair style:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.f_style)  as null|anything in valid_facialhairstyles
 
 		mob_species = get_species_by_key(pref.species)
-		if(new_f_style && CanUseTopic(user) && mob_species.get_facial_hair_styles(B.associated_gender))
+		if(new_f_style && CanUseTopic(user) && mob_species.get_facial_hair_styles(B?.associated_gender))
 			pref.f_style = new_f_style
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
@@ -658,7 +658,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 /datum/category_item/player_setup_item/proc/ResetFacialHair()
 	var/decl/species/mob_species = get_species_by_key(pref.species)
 	var/decl/bodytype/B = mob_species.get_bodytype_by_name(pref.bodytype)
-	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(B.associated_gender)
+	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(B?.associated_gender)
 
 	if(valid_facialhairstyles.len)
 		pref.f_style = pick(valid_facialhairstyles)
