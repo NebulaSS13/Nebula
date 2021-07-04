@@ -3,27 +3,27 @@ var/global/list/state_machines = list()
 
 /proc/get_state_machine(var/datum/holder, var/base_type)
 	if(istype(holder) && base_type)
-		var/list/machines = LAZYACCESS(global.state_machines, "\ref[holder]")
+		var/list/machines = global.state_machines["\ref[holder]"]
 		return islist(machines) && machines[base_type]
 
 /proc/add_state_machine(var/datum/holder, var/base_type, var/fsm_type)
 	if(istype(holder) && base_type)
 		var/holder_ref = "\ref[holder]"
-		var/list/machines = LAZYACCESS(global.state_machines, holder_ref)
+		var/list/machines = global.state_machines[holder_ref]
 		if(!islist(machines))
 			machines = list()
 			global.state_machines[holder_ref] = machines
-		if(!LAZYACCESS(machines, base_type))
+		if(!machines[base_type])
 			if(!fsm_type)
 				fsm_type = base_type
 			var/datum/state_machine/machine = new fsm_type(holder)
-			LAZYSET(machines, base_type, machine)
+			machines[base_type] = machine
 			return machine
 
 /proc/remove_state_machine(var/datum/holder, var/base_type)
 	if(istype(holder) && base_type)
 		var/holder_ref = "\ref[holder]"
-		var/list/machines = LAZYACCESS(global.state_machines, holder_ref)
+		var/list/machines = global.state_machines[holder_ref]
 		if(length(machines))
 			machines -= base_type
 			if(!length(machines))
