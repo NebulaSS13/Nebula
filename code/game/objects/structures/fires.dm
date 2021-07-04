@@ -40,9 +40,12 @@
 	if(lit == FIRE_LIT && fuel > 0)
 		light(TRUE)
 	update_icon()
+
+#if DM_VERSION < 514
 	steam = new(name)
 	steam.attach(get_turf(src))
 	steam.set_up(3, 0, get_turf(src))
+#endif
 
 /obj/structure/fire_source/Move()
 	. = ..()
@@ -115,6 +118,9 @@
 		refresh_affected_exterior_turfs()
 		visible_message(SPAN_DANGER("\The [src] goes out!"))
 		STOP_PROCESSING(SSobj, src)
+#if DM_VERSION >= 514
+		QDEL_NULL(particles)
+#endif
 		update_icon()
 
 /obj/structure/fire_source/proc/check_atmos()
@@ -134,6 +140,9 @@
 	lit = FIRE_LIT
 	refresh_affected_exterior_turfs()
 	visible_message(SPAN_DANGER("\The [src] catches alight!"))
+#if DM_VERSION >= 514
+	particles = new /particles/fire_source()
+#endif
 	START_PROCESSING(SSobj, src)
 	update_icon()
 	return TRUE
@@ -282,11 +291,17 @@
 	if(lit == FIRE_LIT)
 		if(fuel <= 0)
 			die()
+#if DM_VERSION >= 514
 		if(do_steam)
 			steam.start() // HISSSSSS!
+#endif
 
 /obj/structure/fire_source/Destroy()
+#if DM_VERSION >= 514
+	QDEL_NULL(particles)
+#else
 	QDEL_NULL(steam)
+#endif
 	STOP_PROCESSING(SSobj, src)
 	lit = FIRE_DEAD
 	refresh_affected_exterior_turfs()
@@ -350,6 +365,26 @@
 		to_chat(M, SPAN_DANGER("You are burned by \the [src]!"))
 		M.IgniteMob()
 		M.apply_damage(rand(5, 15), BURN)
+
+#if DM_VERSION >= 514
+/particles/fire_source
+	icon = 'icons/effects/particles/fire_source.dmi'
+	icon_state = "fire_source"
+	width = 100
+	height = 100
+	count = 1000
+	spawning = 4
+	lifespan = 0.7 SECONDS
+	fade = 1 SECONDS
+	grow = -0.01
+	velocity = list(0, 0)
+	position = generator("circle", 0, 16, NORMAL_RAND)
+	drift = generator("vector", list(0, -0.2), list(0, 0.2))
+	gravity = list(0, 0.95)
+	scale = generator("vector", list(0.3, 0.3), list(1,1), NORMAL_RAND)
+	rotation = 30
+	spin = generator("num", -20, 20)
+#endif
 
 #undef FUEL_CONSUMPTION_CONSTANT
 #undef FIRE_LIT
