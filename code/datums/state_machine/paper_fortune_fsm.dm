@@ -3,9 +3,9 @@
 	var/list/fortune_choices
 	var/icon_state = "closed"
 
-/decl/state/paper_fortune/entered_state(obj/item/paper_fortune_teller/P)
-	if(istype(P))
-		P.update_icon()
+/decl/state/paper_fortune/entered_state(datum/holder)
+	var/obj/item/paper_fortune_teller/P = holder
+	P.update_icon()
 
 // The starting point.
 /decl/state/paper_fortune/closed
@@ -18,10 +18,10 @@
 		"Yellow" = "#ffff88"
 	)
 
-/decl/state/paper_fortune/closed/entered_state(obj/item/paper_fortune_teller/P)
+/decl/state/paper_fortune/closed/entered_state(datum/holder)
 	..()
-	if(istype(P))
-		P.choice_counter = 0
+	var/obj/item/paper_fortune_teller/P = holder
+	P.choice_counter = 0
 
 // Alternates between this and the below state.
 /decl/state/paper_fortune/open_vertical
@@ -53,21 +53,22 @@
 
 /decl/state_transition/paper_fortune/open_to_closed/is_open(datum/holder)
 	var/obj/item/paper_fortune_teller/P = holder
-	return istype(P) && P.choice_counter >= 3
+	return P.choice_counter >= 3
 
 /decl/state_transition/paper_fortune/vertical_to_horizontal
 	target = /decl/state/paper_fortune/open_horizontal
 
 /decl/state_transition/paper_fortune/vertical_to_horizontal/is_open(datum/holder)
 	var/obj/item/paper_fortune_teller/P = holder
-	return istype(P) && P.choice_counter < 3
+	return P.choice_counter < 3
 
 /decl/state_transition/paper_fortune/horizontal_to_vertical
 	target = /decl/state/paper_fortune/open_vertical
 
 /decl/state_transition/paper_fortune/horizontal_to_vertical/is_open(datum/holder)
 	var/obj/item/paper_fortune_teller/P = holder
-	return istype(P) && P.choice_counter < 3
+	return P.choice_counter < 3
 
 /datum/state_machine/paper_fortune
 	current_state = /decl/state/paper_fortune/closed
+
