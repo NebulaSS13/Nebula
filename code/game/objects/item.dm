@@ -639,15 +639,14 @@ var/global/list/slot_flags_enumeration = list(
 		var/obj/item/organ/internal/eyes/eyes = H.get_internal_organ(BP_EYES)
 
 		if(H != user)
-			for(var/mob/O in (viewers(M) - user - M))
-				O.show_message(SPAN_DANGER("[M] has been stabbed in the eye with [src] by [user]."), 1)
-			to_chat(M, SPAN_DANGER("[user] stabs you in the eye with [src]!"))
-			to_chat(user, SPAN_DANGER("You stab [M] in the eye with [src]!"))
+
+			M.visible_message(
+				SPAN_DANGER("\The [M] has been stabbed in the eye with \the [src] by \the [user]!"),
+				self_message = SPAN_DANGER("You stab \the [M] in the eye with \the [src]!"))
 		else
-			user.visible_message( \
-				SPAN_DANGER("[user] has stabbed themself with [src]!"), \
-				SPAN_DANGER("You stab yourself in the eyes with [src]!") \
-			)
+			user.visible_message(
+				SPAN_DANGER("\The [user] has stabbed themself with \the [src]!"),
+				self_message = SPAN_DANGER("You stab yourself in the eyes with \the [src]!"))
 
 		eyes.damage += rand(3,4)
 		if(eyes.damage >= eyes.min_bruised_damage)

@@ -75,16 +75,15 @@
 			ret.icon_state = new_state
 	return ret
 
-/obj/item/clothing/accessory/proc/get_attached_inventory_overlay()
-	var/image/ret = new /image
-	ret.appearance = src
-	ret.plane = FLOAT_PLANE
-	ret.layer = FLOAT_LAYER
-	ret.pixel_x = 0
-	ret.pixel_y = 0
-	ret.pixel_w = 0
-	ret.pixel_z = 0
-	return ret
+/obj/item/clothing/accessory/proc/get_attached_overlay_state()
+	return "attached"
+
+/obj/item/clothing/accessory/proc/get_attached_inventory_overlay(var/base_state)
+	var/find_state = "[base_state]-[get_attached_overlay_state()]"
+	if(find_state && check_state_in_icon(find_state, icon))
+		var/image/ret = image(icon, find_state)
+		ret.color = color
+		return ret
 
 /obj/item/clothing/accessory/OnDisguise(obj/item/copy, mob/user)
 	. = ..()
@@ -120,9 +119,3 @@
 	name = "bracelet"
 	desc = "A simple bracelet with a clasp."
 	icon = 'icons/clothing/accessories/jewelry/bracelet.dmi'
-
-/obj/item/clothing/accessory/ftupin
-	name = "\improper Free Trade Union pin"
-	desc = "A pin denoting employment in the Free Trade Union, a trading company."
-	icon = 'icons/clothing/accessories/jewelry/ftupin.dmi'
-	high_visibility = 1

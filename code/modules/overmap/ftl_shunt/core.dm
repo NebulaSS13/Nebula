@@ -619,13 +619,13 @@
 
 /obj/machinery/ftl_shunt/fuel_port/proc/get_fuel_joules(var/get_fuel_maximum)
 	if(fuel)
-		for(var/G in fuel.rod_quantities)
+		for(var/G in fuel.matter)
 			if(G in fuels)
-				. += (get_fuel_maximum ? 10000 : fuel.rod_quantities[G]) * fuels[G]
+				. += (get_fuel_maximum ? 10000 : fuel.matter[G]) * fuels[G]
 
 /obj/machinery/ftl_shunt/fuel_port/proc/get_fuel_conversion_rate() //This is mostly a fluff proc, since internally everything is done in joules.
 	if(fuel)
-		for(var/G in fuel.rod_quantities)
+		for(var/G in fuel.matter)
 			if(G in fuels)
 				. = fuels[G]
 
@@ -633,10 +633,10 @@
 	if(!fuel)
 		return FALSE
 
-	for(var/G in fuel.rod_quantities)
+	for(var/G in fuel.matter)
 		if(G in fuels)
 			var/fuel_to_use = joules / fuels[G]
-			fuel.rod_quantities[G] -= fuel_to_use
+			fuel.matter[G] -= fuel_to_use
 
 	return TRUE
 

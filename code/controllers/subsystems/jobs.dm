@@ -417,37 +417,37 @@ SUBSYSTEM_DEF(jobs)
 	var/list/loadout_taken_slots = list()
 	if(H.client.prefs.Gear() && job.loadout_allowed)
 		for(var/thing in H.client.prefs.Gear())
-			var/datum/gear/G = gear_datums[thing]
+			var/decl/loadout_option/G = global.gear_datums[thing]
 			if(G)
-				var/permitted = 0
+				var/permitted = FALSE
 				if(G.allowed_branches)
 					if(H.char_branch && (H.char_branch.type in G.allowed_branches))
-						permitted = 1
+						permitted = TRUE
 				else
-					permitted = 1
+					permitted = TRUE
 
 				if(permitted)
 					if(G.allowed_roles)
 						if(job.type in G.allowed_roles)
-							permitted = 1
+							permitted = TRUE
 						else
-							permitted = 0
+							permitted = FALSE
 					else
-						permitted = 1
+						permitted = TRUE
 
 				if(permitted && G.allowed_skills)
 					for(var/required in G.allowed_skills)
 						if(!H.skill_check(required,G.allowed_skills[required]))
-							permitted = 0
+							permitted = FALSE
 
 				if(G.whitelisted && (!(H.species.name in G.whitelisted)))
-					permitted = 0
+					permitted = FALSE
 
 				if(!permitted)
-					to_chat(H, "<span class='warning'>Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!</span>")
+					to_chat(H, SPAN_WARNING("Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!"))
 					continue
 
-				if(!G.slot || G.slot == slot_tie_str || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.display_name]))
+				if(!G.slot || G.slot == slot_tie_str || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.name]))
 					spawn_in_storage.Add(G)
 				else
 					loadout_taken_slots.Add(G.slot)
@@ -542,8 +542,8 @@ SUBSYSTEM_DEF(jobs)
 		return other_mob
 
 	if(spawn_in_storage)
-		for(var/datum/gear/G in spawn_in_storage)
-			G.spawn_in_storage_or_drop(H, H.client.prefs.Gear()[G.display_name])
+		for(var/decl/loadout_option/G in spawn_in_storage)
+			G.spawn_in_storage_or_drop(H, H.client.prefs.Gear()[G.name])
 
 	to_chat(H, "<font size = 3><B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B></font>")
 

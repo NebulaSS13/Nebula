@@ -91,7 +91,7 @@
 					/obj/item/oxycandle = 1,
 					/obj/item/crowbar/cheap = 1)
 
-/obj/item/storage/box/engineer/
+/obj/item/storage/box/engineer
 	name = "engineer survival kit"
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and orange stripe indicate this one as the engineering variant."
 	icon_state = "survivaleng"

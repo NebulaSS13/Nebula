@@ -432,8 +432,7 @@
 	if (!message)
 		return
 
-	for(var/mob/O in hearers(src, null))
-		O.show_message("<span class='game say'><span class='name'>\The [src]</span> beeps, \"[message]\"</span>",2)
+	audible_message("<span class='game say'><span class='name'>\The [src]</span> beeps, \"[message]\"</span>")
 	return
 
 /obj/machinery/vending/powered()

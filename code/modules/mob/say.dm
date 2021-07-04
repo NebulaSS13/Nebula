@@ -104,6 +104,7 @@
 //parses the language code (e.g. :j) from text, such as that supplied to say.
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.
 /mob/proc/parse_language(var/message)
+
 	var/prefix = copytext_char(message,1,2)
 	if(length(message) >= 1 && prefix == get_prefix_key(/decl/prefix/audible_emote))
 		return GET_DECL(/decl/language/noise)
@@ -113,8 +114,6 @@
 		var/decl/language/L = SSlore.get_language_by_key(language_prefix)
 		if (can_speak(L))
 			return L
-
-	return null
 
 /mob/proc/is_silenced()
 	. = is_muzzled()

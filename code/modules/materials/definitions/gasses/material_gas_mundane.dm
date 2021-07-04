@@ -269,7 +269,7 @@
 /decl/material/gas/hydrogen/tritium
 	name = "tritium"
 	lore_text = "A radioactive isotope of hydrogen. Useful as a fusion reactor fuel material."
-	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
+	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by using a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
 	color = "#777777"
 	stack_origin_tech = "{'materials':5}"
 	value = 0.45
@@ -279,9 +279,20 @@
 /decl/material/gas/hydrogen/deuterium
 	name = "deuterium"
 	lore_text = "One of the two stable isotopes of hydrogen; also known as heavy hydrogen. Useful as a chemically synthesised fusion reactor fuel material."
-	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It is the most 'basic' fusion fuel."
+	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by using a fuel compressor. It is the most 'basic' fusion fuel."
+	flags = MAT_FLAG_FUSION_FUEL | MAT_FLAG_FISSIBLE
 	color = "#999999"
 	stack_origin_tech = "{'materials':3}"
 	gas_symbol_html = "D"
 	gas_symbol = "D"
 	value = 0.5
+
+	neutron_interactions = list(
+		INTERACTION_ABSORPTION = 1250
+	)
+	absorption_products = list(
+		/decl/material/gas/hydrogen/tritium = 1
+	)
+	neutron_absorption = 5
+	neutron_cross_section = 3
+

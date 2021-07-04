@@ -1,44 +1,30 @@
-/datum/gear/gloves
+/decl/loadout_category/hands
+	name = "Handwear"
+	
+/decl/loadout_option/gloves
 	cost = 2
 	slot = slot_gloves_str
-	sort_category = "Gloves and Handwear"
-	category = /datum/gear/gloves
+	category = /decl/loadout_category/hands
 
-/datum/gear/gloves/colored
-	display_name = "gloves, colored"
+/decl/loadout_option/gloves/colored
+	name = "gloves, colored"
 	flags = GEAR_HAS_COLOR_SELECTION
 	path = /obj/item/clothing/gloves/color
 
-/datum/gear/gloves/latex
-	display_name = "gloves, latex"
-	path = /obj/item/clothing/gloves/latex
-	cost = 3
-
-/datum/gear/gloves/nitrile
-	display_name = "gloves, nitrile"
-	path = /obj/item/clothing/gloves/latex/nitrile
-	cost = 3
-
-/datum/gear/gloves/rainbow
-	display_name = "gloves, rainbow"
-	path = /obj/item/clothing/gloves/rainbow
-
-/datum/gear/gloves/evening
-	display_name = "gloves, evening, colour select"
+/decl/loadout_option/gloves/evening
+	name = "gloves, evening, colour select"
 	path = /obj/item/clothing/gloves/color/evening
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/ring
-	display_name = "ring"
+/decl/loadout_option/ring
+	name = "ring"
 	path = /obj/item/clothing/ring
 	cost = 2
 
-/datum/gear/ring/get_gear_tweak_options()
+/decl/loadout_option/ring/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
-		"CTI ring" =                /obj/item/clothing/ring/cti,
-		"Mariner University ring" = /obj/item/clothing/ring/mariner,
 		"engagement ring" =         /obj/item/clothing/ring/engagement,
 		"signet ring" =             /obj/item/clothing/ring/seal/signet,
 		"masonic ring" =            /obj/item/clothing/ring/seal/mason,
@@ -51,8 +37,3 @@
 		"ring, wood" =              /obj/item/clothing/ring/material/wood,
 		"ring, plastic" =           /obj/item/clothing/ring/material/plastic
 	)
-
-/datum/gear/gloves/work
-	display_name = "gloves, work"
-	path = /obj/item/clothing/gloves/thick
-	cost = 3

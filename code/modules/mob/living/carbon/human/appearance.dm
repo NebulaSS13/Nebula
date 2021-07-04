@@ -156,7 +156,7 @@
 		.[hair_style] = S
 
 /mob/living/carbon/human/proc/generate_valid_facial_hairstyles()
-	return species.get_facial_hair_styles(gender)
+	return species.get_facial_hair_styles(bodytype.associated_gender)
 
 /mob/living/carbon/human/proc/force_update_limbs()
 	for(var/obj/item/organ/external/O in organs)

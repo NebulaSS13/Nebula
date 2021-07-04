@@ -17,22 +17,44 @@
 /decl/material/solid/metal/uranium
 	name = "uranium"
 	lore_text = "A silvery-white metallic chemical element in the actinide series, weakly radioactive. Commonly used as fuel in fission reactors."
-	mechanics_text = "Uranium ingots are used as fuel in some forms of portable generator."
+	mechanics_text = "Uranium can be used as fuel in fission reactors."
 	taste_description = "the inside of a reactor"
+	flags = MAT_FLAG_FISSIBLE
 	radioactivity = 12
 	icon_base = 'icons/turf/walls/stone.dmi'
 	wall_flags = 0
 	table_icon_base = "stone"
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
 	color = "#007a00"
+	weight = MAT_VALUE_VERY_HEAVY
 	stack_origin_tech = "{'materials':5}"
 	reflectiveness = MAT_VALUE_MATTE
 	value = 1.5
 	default_solid_form = /obj/item/stack/material/puck
 
+	neutron_cross_section = 10
+	neutron_interactions = list(
+		INTERACTION_FISSION = 1500,
+		INTERACTION_ABSORPTION = 4000,
+		INTERACTION_SCATTER = 5000
+	)
+	fission_products = list(
+		/decl/material/solid/metal/depleted_uranium = 0.6,
+		/decl/material/solid/metal/fission_byproduct = 0.4
+	)
+	absorption_products = list(
+		/decl/material/solid/metal/neptunium = 1
+	)
+	neutron_production = 10
+	neutron_absorption = 6
+	moderation_target = 3000
+	fission_heat = 35000
+	fission_energy = 4000
+
 /decl/material/solid/metal/radium
 	name = "radium"
 	lore_text = "Radium is an alkaline earth metal. It is extremely radioactive."
+	mechanics_text = "Radium can be used as a neutron source in fission reactors."
 	taste_description = "the color blue, and regret"
 	color = "#c7c7c7"
 	value = 0.5
@@ -414,6 +436,7 @@
 /decl/material/solid/metal/tungsten
 	name = "tungsten"
 	lore_text = "A chemical element, and a strong oxidising agent."
+	weight = MAT_VALUE_VERY_HEAVY
 	taste_mult = 0 //no taste
 	color = "#dcdcdc"
 	value = 0.5

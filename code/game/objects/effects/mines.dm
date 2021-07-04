@@ -21,8 +21,7 @@
 	if(triggered) return
 
 	if(istype(M, /mob/living/carbon/human))
-		for(var/mob/O in viewers(world.view, src.loc))
-			to_chat(O, "<span class='warning'>\The [M] triggered the [html_icon(src)] [src]</span>")
+		visible_message(SPAN_DANGER("\The [M] triggered \the [src]!"))
 		triggered = 1
 		call(src,triggerproc)(M)
 

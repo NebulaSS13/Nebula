@@ -1,11 +1,14 @@
+/decl/loadout_category/ears
+	name = "Earwear"
+	
 // Stuff worn on the ears. Items here go in the "ears" sort_category but they must not use
 // the slot_r_ear_str or slot_l_ear_str as the slot, or else players will spawn with no headset.
-/datum/gear/earrings
-	display_name = "earrings"
+/decl/loadout_option/earrings
+	name = "earrings"
+	category = /decl/loadout_category/ears
 	path = /obj/item/clothing/ears
-	sort_category = "Earwear"
 
-/datum/gear/earrings/get_gear_tweak_options()
+/decl/loadout_option/earrings/get_gear_tweak_options()
 	. = ..()
 	LAZYINITLIST(.[/datum/gear_tweak/path])
 	.[/datum/gear_tweak/path] |= list(
