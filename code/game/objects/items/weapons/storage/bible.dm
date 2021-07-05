@@ -108,7 +108,7 @@
 	set desc = "Click to rename your bible."
 
 	if(!renamed)
-		var/input = sanitizeSafe(input("What do you want to rename your bible to? You can only do this once.", ,""), MAX_NAME_LEN)
+		var/input = sanitize_safe(input("What do you want to rename your bible to? You can only do this once.", ,""), MAX_NAME_LEN)
 
 		var/mob/M = usr
 		if(src && input && !M.stat && in_range(M,src))

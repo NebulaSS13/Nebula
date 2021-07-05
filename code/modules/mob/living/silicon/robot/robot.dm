@@ -326,7 +326,7 @@
 
 	spawn(0)
 		var/newname
-		newname = sanitizeName(input(src,"You are a robot. Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN, allow_numbers = 1)
+		newname = sanitize_name(input(src,"You are a robot. Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN, allow_numbers = 1)
 		if (newname)
 			custom_name = newname
 

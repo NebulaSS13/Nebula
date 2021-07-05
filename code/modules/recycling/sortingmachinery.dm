@@ -44,7 +44,7 @@
 	else if(istype(W, /obj/item/pen))
 		switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
 			if("Title")
-				var/str = sanitizeSafe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
+				var/str = sanitize_safe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
 				if(!str || !length(str))
 					to_chat(usr, "<span class='warning'> Invalid text.</span>")
 					return
@@ -169,7 +169,7 @@
 	else if(istype(W, /obj/item/pen))
 		switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
 			if("Title")
-				var/str = sanitizeSafe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
+				var/str = sanitize_safe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
 				if(!str || !length(str))
 					to_chat(usr, "<span class='warning'> Invalid text.</span>")
 					return

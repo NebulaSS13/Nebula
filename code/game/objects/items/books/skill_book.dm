@@ -734,7 +734,7 @@ MEDICAL
 		return FALSE
 
 /obj/item/book/skill/custom/proc/edit_title(var/obj/item/pen, var/mob/user)
-	var/newtitle = reject_bad_text(sanitizeSafe(input(user, "Write a new title:")))
+	var/newtitle = reject_bad_text(sanitize_safe(input(user, "Write a new title:")))
 	if(!can_write(pen,user))
 		return
 	if(!newtitle)

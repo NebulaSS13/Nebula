@@ -103,7 +103,7 @@
 /obj/structure/door_assembly/attackby(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/pen))
-		var/t = sanitizeSafe(input(user, "Enter the name for the door.", src.name, src.created_name), MAX_NAME_LEN)
+		var/t = sanitize_safe(input(user, "Enter the name for the door.", src.name, src.created_name), MAX_NAME_LEN)
 		if(!t)	return
 		if(!in_range(src, usr) && src.loc != usr)	return
 		created_name = t

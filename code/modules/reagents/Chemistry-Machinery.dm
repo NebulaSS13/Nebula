@@ -167,7 +167,7 @@
 			var/amount_per_pill = reagents.total_volume/count
 			if (amount_per_pill > 30) amount_per_pill = 30
 
-			var/name = sanitizeSafe(input(usr,"Name:","Name your pill!","[reagents.get_primary_reagent_name()] ([amount_per_pill]u)"), MAX_NAME_LEN)
+			var/name = sanitize_safe(input(usr,"Name:","Name your pill!","[reagents.get_primary_reagent_name()] ([amount_per_pill]u)"), MAX_NAME_LEN)
 			if(!CanInteract(user, state))
 				return
 
@@ -226,7 +226,7 @@
 	. = JOINTEXT(.)
 
 /obj/machinery/chem_master/proc/create_bottle(mob/user)
-	var/name = sanitizeSafe(input(usr,"Name:","Name your bottle!",reagents.get_primary_reagent_name()), MAX_NAME_LEN)
+	var/name = sanitize_safe(input(usr,"Name:","Name your bottle!",reagents.get_primary_reagent_name()), MAX_NAME_LEN)
 	var/obj/item/chems/glass/bottle/P = new/obj/item/chems/glass/bottle(loc)
 	if(!name)
 		name = reagents.get_primary_reagent_name()

@@ -49,7 +49,7 @@
 			return
 		if (!in_range(src, user) && src.loc != user)
 			return
-		t = sanitizeSafe(t, MAX_NAME_LEN)
+		t = sanitize_safe(t, MAX_NAME_LEN)
 		if (t)
 			src.SetName("body bag - ")
 			src.name += t

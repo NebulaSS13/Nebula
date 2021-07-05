@@ -49,7 +49,7 @@
 	addtimer(CALLBACK(src, .proc/do_post_voxifying, vox), 1)
 
 /obj/item/storage/mirror/raider/proc/do_post_voxifying(var/mob/living/carbon/human/vox)
-	var/newname = sanitizeSafe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
+	var/newname = sanitize_safe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
 	if(!newname || newname == "")
 		var/decl/cultural_info/voxculture = GET_DECL(/decl/cultural_info/culture/vox/raider)
 		newname = voxculture.get_random_name()
