@@ -702,3 +702,9 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 /mob/proc/get_admin_job_string()
 	return "Unknown ([type])"
 
+/mob/proc/get_visual_colour_substitutions()
+	. = list()
+	for(var/thing in client_colors)
+		var/datum/client_color/col = thing
+		for(var/col_name in col.wire_colour_substitutions)
+			.[col_name] = col.wire_colour_substitutions[col_name]

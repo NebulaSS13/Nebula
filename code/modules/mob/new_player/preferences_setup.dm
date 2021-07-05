@@ -44,6 +44,7 @@
 		return
 
 	var/update_icon = FALSE
+	mannequin.rejuvenate()
 	copy_to(mannequin, TRUE)
 
 	var/datum/job/previewJob
