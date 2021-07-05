@@ -57,11 +57,20 @@
 		if("tie")
 			if(!istype(holder) || !holder.accessories.len)
 				return
-			var/obj/item/clothing/accessory/A = holder.accessories[1]
-			if(holder.accessories.len > 1)
-				A = input("Select an accessory to remove from [holder]") as null|anything in holder.accessories
+	
+			var/obj/item/clothing/accessory/A
+			if(LAZYLEN(holder.accessories) > 1)
+				var/list/options = list()
+				for(var/obj/item/clothing/accessory/i in holder.accessories)
+					var/image/radial_button = image(icon = i.icon, icon_state = i.icon_state)
+					options[i] = radial_button
+				A = show_radial_menu(user, user, options, radius = 42, tooltips = TRUE)
+			else
+				A = holder.accessories[1]
+			
 			if(!istype(A))
 				return
+			
 			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [A.name]!</span>")
 
 			if(!do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
