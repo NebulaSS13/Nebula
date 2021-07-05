@@ -1588,7 +1588,12 @@
 			if(org.status & ORGAN_BROKEN)
 				status += "hurts when touched"
 			if(org.status & ORGAN_DEAD)
-				status += "is grey and necrotic"
+				if(BP_IS_PROSTHETIC(org) || BP_IS_CRYSTAL(org))
+					status += "is irrecoverably damaged"
+				else
+					status += "is grey and necrotic"
+			else if(org.damage >= org.max_damage && org.germ_level >= INFECTION_LEVEL_TWO)
+				status += "is likely beyond saving, and has begun to decay"
 			if(!org.is_usable() || org.is_dislocated())
 				status += "dangling uselessly"
 			if(status.len)
