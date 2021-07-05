@@ -501,7 +501,7 @@ SUBSYSTEM_DEF(jobs)
 		if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 			H.forceMove(S.loc)
 		else
-			var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(H.client)
+			var/decl/spawnpoint/spawnpoint = job.get_spawnpoint(H.client)
 			H.forceMove(pick(spawnpoint.turfs))
 			spawnpoint.after_join(H)
 

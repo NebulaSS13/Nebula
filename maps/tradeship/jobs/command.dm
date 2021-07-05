@@ -27,7 +27,7 @@
 	guestbanned = 1
 	must_fill = 1
 	not_random_selectable = 1
-	forced_spawnpoint = "Captain Compartment"
+	forced_spawnpoint = /decl/spawnpoint/cryo/captain
 
 /datum/job/tradeship_captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
