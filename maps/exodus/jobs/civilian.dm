@@ -107,6 +107,7 @@
 		SKILL_BOTANY    = SKILL_BASIC,
 	    SKILL_CHEMISTRY = SKILL_BASIC
 	)
+	event_categories = list(ASSIGNMENT_GARDENER)
 
 //Cargo
 /datum/job/qm
@@ -256,6 +257,7 @@
 		SKILL_LITERACY = SKILL_ADEPT,
 		SKILL_HAULING  = SKILL_BASIC
 	)
+	event_categories = list(ASSIGNMENT_JANITOR)
 
 //More or less assistants
 /datum/job/librarian

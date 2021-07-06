@@ -9,6 +9,7 @@
 	loss_feedback_tag = "loss - heads killed"
 	antaghud_indicator = "hudloyalist"
 	flags = 0
+	blocked_job_event_categories = list(ASSIGNMENT_ROBOT, ASSIGNMENT_COMPUTER)
 
 	hard_cap = 2
 	hard_cap_round = 4

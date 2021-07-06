@@ -47,3 +47,4 @@
 	)
 	skill_points = 20
 	alt_titles = list("Atmospheric Technician")
+	event_categories = list(ASSIGNMENT_ENGINEER)

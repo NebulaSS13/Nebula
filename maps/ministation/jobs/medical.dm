@@ -37,3 +37,4 @@
 	)
 	outfit_type = /decl/hierarchy/outfit/job/ministation/doctor
 	minimal_player_age = 3
+	event_categories = list(ASSIGNMENT_MEDICAL)

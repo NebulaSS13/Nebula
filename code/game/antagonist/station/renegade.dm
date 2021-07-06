@@ -21,6 +21,7 @@
 	initial_spawn_target = 3
 	antaghud_indicator = "hud_renegade"
 	skill_setter = /datum/antag_skill_setter/station
+	blocked_job_event_categories = list(ASSIGNMENT_COMPUTER)
 
 	var/list/spawn_guns = list(
 		/obj/item/gun/projectile/revolver/lasvolver,

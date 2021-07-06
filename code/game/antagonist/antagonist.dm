@@ -1,9 +1,11 @@
 /decl/special_role
 
 	// Text shown when becoming this antagonist.
-	var/list/restricted_jobs = 		list()   // Jobs that cannot be this antagonist at roundstart (depending on config)
-	var/list/protected_jobs = 		list()   // As above.
-	var/list/blacklisted_jobs =		list(/datum/job/submap)   // Jobs that can NEVER be this antagonist
+	var/list/restricted_jobs = 		list() // Jobs that cannot be this antagonist at roundstart (depending on config)
+	var/list/protected_jobs = 		list() // As above.
+	var/list/blocked_job_event_categories  // Job event categories that blacklist a job from being this antagonist.
+	// Jobs that can NEVER be this antagonist
+	var/list/blacklisted_jobs =	(/datum/job/submap) 
 
 	// Strings.
 	var/welcome_text = "Cry havoc and let slip the dogs of war!"

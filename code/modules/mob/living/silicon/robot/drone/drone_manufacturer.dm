@@ -103,7 +103,7 @@
 		to_chat(user, "<span class='danger'>That verb is not currently permitted.</span>")
 		return
 
-	if(jobban_isbanned(user,"Robot"))
+	if(jobban_isbanned(user,ASSIGNMENT_ROBOT))
 		to_chat(user, "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>")
 		return
 

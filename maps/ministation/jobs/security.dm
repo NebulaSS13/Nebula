@@ -29,6 +29,7 @@
 		SKILL_WEAPONS	= SKILL_MAX
 	)
 	skill_points = 20
+	event_categories = list(ASSIGNMENT_SECURITY)
 
 /datum/job/ministation/detective
 	title = "Detective"

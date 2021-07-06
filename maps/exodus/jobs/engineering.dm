@@ -86,6 +86,7 @@
 		/datum/computer_file/program/shields_monitor,
 		/datum/computer_file/program/reports
 	)
+	event_categories = list(ASSIGNMENT_ENGINEER)
 
 /datum/job/engineer
 	title = "Engineer"
@@ -151,6 +152,7 @@
 		/datum/computer_file/program/camera_monitor,
 		/datum/computer_file/program/shields_monitor
 	)
+	event_categories = list(ASSIGNMENT_ENGINEER)
 
 /obj/item/card/id/engineering
 	name = "identification card"

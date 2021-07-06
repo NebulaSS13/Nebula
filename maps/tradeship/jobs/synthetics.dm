@@ -1,6 +1,6 @@
 /datum/job/tradeship_robot
 	title = "Robot"
-	event_categories = list("Robot")
+	event_categories = list(ASSIGNMENT_ROBOT)
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "your laws and the Captain"

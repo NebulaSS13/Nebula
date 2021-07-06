@@ -49,6 +49,7 @@
 	)
 	skill_points = 20
 	alt_titles = list()
+	event_categories = list(ASSIGNMENT_ENGINEER)
 
 /datum/job/tradeship_engineer/head
 	title = "Head Engineer"
@@ -124,3 +125,4 @@
 	)
 	skill_points = 30
 	alt_titles = list()
+	event_categories = list(ASSIGNMENT_ENGINEER)

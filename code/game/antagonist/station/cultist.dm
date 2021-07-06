@@ -38,6 +38,7 @@
 	antaghud_indicator = "hudcultist"
 	skill_setter = /datum/antag_skill_setter/station
 	faction = "cult"
+	blocked_job_event_categories = list(ASSIGNMENT_ROBOT, ASSIGNMENT_COMPUTER)
 
 	var/allow_narsie = 1
 	var/powerless = 0

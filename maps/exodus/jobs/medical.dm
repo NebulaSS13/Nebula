@@ -71,6 +71,7 @@
 		/datum/computer_file/program/camera_monitor,
 		/datum/computer_file/program/reports
 	)
+	event_categories = list(ASSIGNMENT_MEDICAL)
 
 /datum/job/doctor
 	title = "Medical Doctor"
@@ -124,6 +125,7 @@
 	)
 	skill_points = 22
 	title = "Paramedic"
+	event_categories = list(ASSIGNMENT_MEDICAL)
 
 /datum/job/chemist
 	title = "Pharmacist"

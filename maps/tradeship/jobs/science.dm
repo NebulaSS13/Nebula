@@ -37,8 +37,7 @@
 		access_xenobiology,
 		access_xenoarch
 	)
-
-
+	event_categories = list(ASSIGNMENT_SCIENTIST)
 
 /datum/job/tradeship_researcher/head
 	title = "Head Researcher"
@@ -117,3 +116,4 @@
 	guestbanned = 1	
 	must_fill = 1
 	not_random_selectable = 1
+	event_categories = list(ASSIGNMENT_SCIENTIST)

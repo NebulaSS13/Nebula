@@ -1121,7 +1121,7 @@
 		recalculate_synth_capacities()
 
 /mob/living/silicon/robot/get_admin_job_string()
-	return "Robot"
+	return ASSIGNMENT_ROBOT
 
 /mob/living/silicon/robot/handle_pre_transformation()
 	QDEL_NULL(mmi)

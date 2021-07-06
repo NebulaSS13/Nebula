@@ -301,7 +301,7 @@
 	global.universe.OnPlayerLatejoin(character)
 	spawnpoint.after_join(character)
 	if(job.create_record)
-		if(character.mind.assigned_role != "Robot")
+		if(!(ASSIGNMENT_ROBOT in job.event_categories))
 			CreateModularRecord(character)
 			SSticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 			AnnounceArrival(character, job, spawnpoint.msg)

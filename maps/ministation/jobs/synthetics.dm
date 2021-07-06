@@ -1,6 +1,6 @@
 /datum/job/ministation/robot
 	title = "Robot"
-	event_categories = list("Robot")
+	event_categories = list(ASSIGNMENT_ROBOT)
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "your laws, the Lieutenant, and the Captain"

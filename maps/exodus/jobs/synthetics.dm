@@ -1,6 +1,6 @@
 /datum/job/computer
 	title = "Computer"
-	event_categories = list("AI")
+	event_categories = list(ASSIGNMENT_COMPUTER)
 	total_positions = 0 // Not used for AI, see is_position_available below and modules/mob/living/silicon/ai/latejoin.dm
 	spawn_positions = 1
 	selection_color = "#3f823f"
@@ -49,7 +49,7 @@
 
 /datum/job/robot
 	title = "Robot"
-	event_categories = list("Robot")
+	event_categories = list(ASSIGNMENT_ROBOT)
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "your laws and the AI"

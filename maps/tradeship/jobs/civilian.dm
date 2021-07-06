@@ -13,6 +13,7 @@
 	economic_power = 1
 	access = list()
 	minimal_access = list()
+	event_categories = list(ASSIGNMENT_GARDENER, ASSIGNMENT_JANITOR)
 
 /datum/job/tradeship_deckhand/get_access()
 	if(config.assistant_maint)

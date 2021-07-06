@@ -72,6 +72,7 @@
 		SKILL_SCIENCE  = SKILL_MAX
 	)
 	skill_points = 30
+	event_categories = list(ASSIGNMENT_SCIENTIST)
 
 /datum/job/scientist
 	title = "Scientist"
@@ -119,6 +120,7 @@
 	    SKILL_SCIENCE  = SKILL_MAX
 	)
 	skill_points = 20
+	event_categories = list(ASSIGNMENT_SCIENTIST)
 
 /datum/job/roboticist
 	title = "Roboticist"

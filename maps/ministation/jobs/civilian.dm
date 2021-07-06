@@ -9,6 +9,7 @@
 	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant","Visitor")
 	outfit_type = /decl/hierarchy/outfit/job/ministation_assistant
 	department_types = list(/decl/department/civilian)
+	event_categories = list(ASSIGNMENT_GARDENER)
 
 /datum/job/ministation/assistant/get_access()
 	if(config.assistant_maint)
@@ -100,7 +101,7 @@
 
 /datum/job/ministation/janitor
 	title = "Janitor"
-	event_categories = list("Janitor")
+	event_categories = list(ASSIGNMENT_JANITOR)
 	department_types = list(/decl/department/service)
 	total_positions = 1
 	spawn_positions = 1
@@ -135,7 +136,6 @@
 
 /datum/job/ministation/librarian
 	title = "Librarian"
-	event_categories = list("Librarian")
 	department_types = list(/decl/department/service)
 	total_positions = 1
 	spawn_positions = 2

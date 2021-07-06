@@ -3,14 +3,31 @@
 	var/msg                      // Message to display on the arrivals computer.
 	var/list/turfs               // List of turfs to spawn on.
 	var/always_visible = FALSE   // Whether this spawn point is always visible in selection, ignoring map-specific settings.
+
 	var/list/restrict_job
+	var/list/restrict_job_event_categories
+
 	var/list/disallow_job
+	var/list/disallow_job_event_categories
 
 /decl/spawnpoint/proc/check_job_spawning(var/datum/job/job)
+
 	if(restrict_job && !(job.type in restrict_job) && !(job.title in restrict_job))
 		return FALSE
+
+	if(restrict_job_event_categories)
+		for(var/event_category in job.event_categories)
+			if(!(event_category in restrict_job_event_categories))
+				return FALSE
+
 	if(disallow_job && ((job.type in disallow_job) || (job.title in disallow_job)))
 		return FALSE
+
+	if(disallow_job_event_categories)
+		for(var/event_category in job.event_categories)
+			if(event_category in disallow_job_event_categories)
+				return FALSE
+
 	return TRUE
 
 //Called after mob is created, moved to a turf and equipped.
@@ -36,7 +53,7 @@
 /decl/spawnpoint/cryo
 	name = "Cryogenic Storage"
 	msg = "has completed cryogenic revival"
-	disallow_job = list(/datum/job/cyborg)
+	disallow_job_event_categories = list(ASSIGNMENT_ROBOT)
 
 /decl/spawnpoint/cryo/New()
 	..()
@@ -65,7 +82,7 @@
 /decl/spawnpoint/cyborg
 	name = "Robot Storage"
 	msg = "has been activated from storage"
-	restrict_job = list(/datum/job/cyborg)
+	restrict_job_event_categories = list(ASSIGNMENT_ROBOT)
 
 /decl/spawnpoint/cyborg/New()
 	..()

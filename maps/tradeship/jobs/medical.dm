@@ -39,6 +39,7 @@
 		access_virology
 	)
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/doc/junior
+	event_categories = list(ASSIGNMENT_MEDICAL)
 
 /datum/job/tradeship_doctor/head
 	title = "Head Doctor"
@@ -97,3 +98,4 @@
 	)
 	minimal_player_age = 14
 	ideal_character_age = 50
+	event_categories = list(ASSIGNMENT_MEDICAL)
