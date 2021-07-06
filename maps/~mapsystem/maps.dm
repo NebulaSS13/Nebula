@@ -181,7 +181,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
 
-	current_lobby_screen = pick(lobby_screens)
 	game_year = (text2num(time2text(world.realtime, "YYYY")) + game_year)
 
 	if(ispath(default_job_type, /datum/job))
@@ -200,6 +199,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/setup_map()
 	lobby_track = get_lobby_track()
+	update_titlescreen()
 	world.update_status()
 
 /datum/map/proc/setup_job_lists()
@@ -346,15 +346,29 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	)
 
 /datum/map/proc/show_titlescreen(client/C)
-	winset(C, "lobbybrowser", "is-disabled=false;is-visible=true")
+	set waitfor = FALSE
 
-	show_browser(C, current_lobby_screen, "file=titlescreen.png;display=0")
-	show_browser(C, file('html/lobby_titlescreen.html'), "window=lobbybrowser")
+	winset(C, "lobbybrowser", "is-disabled=false;is-visible=true")
+	
+	show_browser(C, current_lobby_screen, "file=titlescreen.gif;display=0")
+	
+	if(isnewplayer(C.mob))
+		var/mob/new_player/player = C.mob
+		show_browser(C, player.get_lobby_browser_html(), "window=lobbybrowser")
 
 /datum/map/proc/hide_titlescreen(client/C)
 	if(C.mob) // Check if the client is still connected to something
 		// Hide title screen, allowing player to see the map
 		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")
+
+/datum/map/proc/update_titlescreen(new_screen)
+	current_lobby_screen = new_screen || pick(lobby_screens)
+	refresh_lobby_browsers()
+
+/datum/map/proc/refresh_lobby_browsers()
+	for(var/mob/new_player/player in global.player_list)
+		show_titlescreen(player.client)
+		player.show_lobby_menu()
 
 /datum/map/proc/create_trade_hubs()
 	new /datum/trade_hub/singleton
