@@ -14,6 +14,10 @@
 	return (T && !T.flipped) 	//If we are moving from a table, check if it is flipped.
 								//If the table we are standing on is not flipped, then we can move freely to another table.
 
+/obj/structure/table/CanJPSPass(obj/item/card/id/ID, to_dir, atom/movable/caller)
+	. = !density
+	if(istype(caller))
+		. = . || (caller.checkpass(PASS_FLAG_TABLE))
 
 //checks if projectile 'P' from turf 'from' can hit whatever is behind the table. Returns 1 if it can, 0 if bullet stops.
 /obj/structure/table/proc/check_cover(obj/item/projectile/P, turf/from)

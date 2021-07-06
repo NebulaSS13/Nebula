@@ -122,6 +122,9 @@ About the new airlock wires panel:
 *		one wire for controlling door speed.  When active, dor closes at normal rate.  When cut, door does not close manually.  When pulsed, door attempts to close every tick.
 */
 
+/obj/machinery/door/airlock/CanJPSPass(obj/item/card/id/ID, to_dir, atom/movable/caller)
+	return !density || (check_access(ID) && !locked && arePowerSystemsOn())
+
 /obj/machinery/door/airlock/bumpopen(mob/living/user) //Airlocks now zap you when you 'bump' them open when they're electrified. --NeoFite
 	if(!issilicon(usr))
 		if(src.isElectrified())

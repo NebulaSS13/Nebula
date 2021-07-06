@@ -119,6 +119,15 @@
 	else
 		return 1
 
+/obj/structure/window/CanJPSPass(obj/item/card/id/ID, to_dir, atom/movable/caller)
+	if(!density)
+		return TRUE
+	
+	if(is_fulltile() || (dir == to_dir))
+		return FALSE
+
+	return TRUE
+
 /obj/structure/window/CheckExit(atom/movable/O, target)
 	if(istype(O) && O.checkpass(PASS_FLAG_GLASS))
 		return 1
