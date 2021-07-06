@@ -163,9 +163,9 @@ I said no!
 	being_cooked.heat()
 
 /decl/recipe/donkpocket/make_food(var/obj/container)
-	var/obj/item/chems/food/snacks/donkpocket/being_cooked = ..(container)
-	warm_up(being_cooked)
-	return being_cooked
+	. = ..(container)
+	for(var/obj/item/chems/food/snacks/donkpocket/being_cooked in .)
+		warm_up(being_cooked)
 
 /decl/recipe/donkpocket/rawmeatball
 	items = list(
@@ -180,41 +180,20 @@ I said no!
 	)
 	result = /obj/item/chems/food/snacks/donkpocket //SPECIAL
 
-/decl/recipe/donkpocket/warm/check_items(obj/container) // NO FUCKING INFINITE LOOPS
-	// I HATE THIS SO MUCH
-	// This is just the normal proc but it specifically excludes warm donk pockets.
-	// Please never make another recipe like this ever again.
-	if(!length(items))
-		return TRUE
-	var/list/container_contents = container?.get_contained_external_atoms()
-	if(length(container_contents) < length(items))
+/decl/recipe/donkpocket/warm/check_items(obj/container)
+	. = ..()
+	if(!.)
 		return FALSE
-	var/list/needed_items = items.Copy()
-	for(var/itype in needed_items)
-		for(var/thing in container_contents)
-			if(!istype(thing, itype))
-				continue
-			if(istype(thing, /obj/item/chems/food/snacks/donkpocket))
-				var/obj/item/chems/food/snacks/donkpocket/donk = thing
-				if(donk.warm)
-					continue
-			container_contents -= thing
-			if(isnum(needed_items[itype]))
-				--needed_items[itype]
-				if(needed_items[itype] <= 0)
-					needed_items -= itype
-			else
-				needed_items -= itype
-			break
-		if(!length(container_contents))
-			break
-	return !length(needed_items)
+	for(var/obj/item/chems/food/snacks/donkpocket/being_cooked in container.get_contained_external_atoms())
+		if(!being_cooked.warm)
+			return TRUE
+	return FALSE
 
 /decl/recipe/donkpocket/warm/make_food(var/obj/container)
-	var/obj/item/chems/food/snacks/donkpocket/being_cooked = locate() in container
-	if(being_cooked && !being_cooked.warm)
-		warm_up(being_cooked)
-	return being_cooked
+	for(var/obj/item/chems/food/snacks/donkpocket/being_cooked in container.get_contained_external_atoms())
+		if(!being_cooked.warm)
+			warm_up(being_cooked)
+			return list(being_cooked)
 
 /decl/recipe/meatbread
 	items = list(

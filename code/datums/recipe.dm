@@ -162,7 +162,7 @@
 	If, as in the most common case, there is only a single result, then it will just be a reference to
 	the single-result's reagents
 	*/
-	var/datum/reagents/holder = new/datum/reagents(1e12, global.temp_reagents_holder)
+	var/datum/reagents/holder = new/datum/reagents(INFINITY, global.temp_reagents_holder)
 	var/list/results = list()
 	for (var/_ in 1 to result_quantity)
 		var/obj/result_obj = new result(container)
