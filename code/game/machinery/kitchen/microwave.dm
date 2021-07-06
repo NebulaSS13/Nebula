@@ -223,7 +223,7 @@
 	if (reagents.total_volume && prob(50)) // 50% chance a liquid recipe gets messy
 		dirty += Ceiling(reagents.total_volume / 10)
 
-	var/decl/recipe/recipe = src.select_recipe()
+	var/decl/recipe/recipe = select_recipe()
 	if (!recipe)
 		failed = TRUE
 		cook_time = update_cook_time()
@@ -244,35 +244,30 @@
 	return (ct / cooking_power)
 
 /obj/machinery/microwave/proc/finish_cooking()
-	var/decl/recipe/recipe = src.select_recipe()
+	var/decl/recipe/recipe = select_recipe()
 	if(!recipe)
 		return
 	var/result = recipe.result
 	var/list/cooked_items = list()
 	while(recipe)
 		cooked_items += recipe.make_food(src)
-		recipe = src.select_recipe()
+		recipe = select_recipe()
 		if (!recipe || (recipe.result != result))
 			break
 
 	//Any leftover reagents are divided amongst the foods
 	var/total = reagents.total_volume
-	for (var/obj/item/chems/food/snacks/S in cooked_items)
-		reagents.trans_to_holder(S.reagents, total/cooked_items.len)
-		S.dropInto(loc) // since eject only ejects ingredients!
+	for (var/obj/item/I in cooked_items)
+		if(I.reagents)
+			reagents.trans_to_holder(I.reagents, total/cooked_items.len)
+			I.dropInto(loc) // since eject only ejects ingredients!
 
 	dispose(message = FALSE) //clear out anything left
 
 	return
 
 /obj/machinery/microwave/Process() // What you see here are the remains of proc/wzhzhzh, 2011 - 2021. RIP.
-	if (!operating || stat & (NOPOWER|BROKEN))
-		stop()
-		return
-
-	use_power_oneoff(active_power_usage)
-
-	if(REALTIMEOFDAY > end_time)
+	if (!operating || stat & (NOPOWER|BROKEN) || (REALTIMEOFDAY > end_time))
 		stop()
 
 /obj/machinery/microwave/proc/half_time_process()
@@ -296,6 +291,7 @@
 	start_time = REALTIMEOFDAY
 	end_time = cook_time + start_time
 	operating = TRUE
+	update_use_power(POWER_USE_ACTIVE)
 
 	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	addtimer(CALLBACK(src, .proc/half_time_process), cook_time / 2)
@@ -321,6 +317,7 @@
 	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	after_finish_loop()
 
+	update_use_power(POWER_USE_OFF)
 	operating = FALSE // Turn it off again aferwards
 	if(cook_dirty || cook_break)
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER //So you can't add condiments
@@ -463,6 +460,6 @@
 	cap_rating = total_component_rating_of_type(/obj/item/stock_parts/capacitor)
 	las_rating = total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
 
-	active_power_usage = initial(active_power_usage) - (cap_rating * 25)
+	change_power_consumption(initial(active_power_usage) - (cap_rating * 25), POWER_USE_ACTIVE)
 	max_n_of_items = initial(max_n_of_items) + Floor(bin_rating)
 	cooking_power = initial(cooking_power) + (las_rating / 3)
