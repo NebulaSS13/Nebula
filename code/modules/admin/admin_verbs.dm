@@ -212,6 +212,7 @@ var/global/list/admin_verbs_debug = list(
 	/client/proc/spawn_quantum_mechanic,
 	/client/proc/spawn_exoplanet,
 	/client/proc/print_cargo_prices,
+	/client/proc/show_network_coverage,
 	/client/proc/resend_nanoui_templates
 	)
 

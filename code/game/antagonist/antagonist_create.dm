@@ -40,18 +40,8 @@
 		player.equip_to_slot_or_del(W, slot_wear_id_str)
 	return W
 
-/decl/special_role/proc/create_radio(var/freq, var/mob/living/carbon/human/player)
-	var/obj/item/radio/R
-
-	switch(freq)
-		if(SYND_FREQ)
-			R = new/obj/item/radio/headset/syndicate(player)
-		if(RAID_FREQ)
-			R = new/obj/item/radio/headset/raider(player)
-		else
-			R = new/obj/item/radio/headset(player)
-			R.set_frequency(freq)
-
+/decl/special_role/proc/create_radio(var/radio_type = /obj/item/radio/headset, var/mob/living/carbon/human/player)
+	var/obj/item/radio/R = new radio_type
 	player.equip_to_slot_or_del(R, slot_l_ear_str)
 	return R
 

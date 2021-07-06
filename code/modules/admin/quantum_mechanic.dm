@@ -163,8 +163,10 @@
 /obj/item/radio/headset/ert/quantum
 	name = "quantum mechanic's headset"
 	desc = "A quantum mechanic's headset. The letter 'Ω' is stamped on the side."
-	translate_binary = TRUE
-	ks1type = /obj/item/encryptionkey/binary
+	encryption_keys = list(
+		/obj/item/encryptionkey/binary, 
+		/obj/item/encryptionkey/ert
+	)
 
 /obj/item/radio/headset/ert/quantum/attack_hand(mob/user)
 	if(!user)
@@ -175,11 +177,6 @@
 		return TRUE
 
 	return ..()
-
-// overload this so we can force translate flags without the required keys
-/obj/item/radio/headset/ert/quantum/recalculateChannels(setDescription = FALSE)
-	. = ..(setDescription)
-	translate_binary = TRUE
 
 // Clothes
 /obj/item/clothing/under/color/quantum

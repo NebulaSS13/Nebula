@@ -30,7 +30,6 @@
 	//give controlled drone access to AI radio
 	drone_silicon_radio = silicon_radio
 	silicon_radio = new /obj/item/radio/headset/heads/ai_integrated(src)
-	//silicon_radio.recalculateChannels()
 
 	add_language(/decl/language/binary/drone, 1)
 	add_language(/decl/language/binary, 1)

@@ -2984,7 +2984,6 @@
 /turf/simulated/floor/bluegrid,
 /area/exodus/maintenance/sub/relay_station)
 "hC" = (
-/obj/machinery/telecomms/server/presets/supply,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -3818,7 +3817,7 @@
 /obj/item/multitool{
 	pixel_x = 5
 	},
-/obj/item/radio/headset/headset_eng,
+/obj/item/radio/headset/corp_eng,
 /obj/item/paint_sprayer,
 /obj/machinery/network/requests_console{
 	department = "Atmospherics";
@@ -5791,7 +5790,6 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/port)
 "oz" = (
-/obj/machinery/telecomms/server/presets/supply,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/bluegrid,
 /area/exodus/maintenance/telecomms)
@@ -5814,13 +5812,7 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/exodus/maintenance/telecomms)
-"ps" = (
-/obj/machinery/telecomms/hub/preset,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
-/area/exodus/maintenance/telecomms)
 "qe" = (
-/obj/machinery/telecomms/broadcaster/preset_right,
 /obj/machinery/light{
 	dir = 8
 	},
@@ -5856,14 +5848,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exodus/maintenance/telecomms)
-"sf" = (
-/obj/machinery/telecomms/receiver/preset_right,
-/obj/machinery/light{
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
-/area/exodus/maintenance/telecomms)
 "sJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -5879,16 +5863,6 @@
 /obj/item/flashlight/lamp,
 /obj/random_multi/single_item/boombox,
 /turf/simulated/floor/lino,
-/area/exodus/maintenance/telecomms)
-"tq" = (
-/obj/machinery/telecomms/server/presets/service,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
-/area/exodus/maintenance/telecomms)
-"tE" = (
-/obj/machinery/telecomms/processor/preset_four,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
 /area/exodus/maintenance/telecomms)
 "tX" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -5916,11 +5890,6 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/exodus/maintenance/sub/aft)
-"uf" = (
-/obj/machinery/telecomms/bus/preset_two,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
-/area/exodus/maintenance/telecomms)
 "up" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -5930,16 +5899,6 @@
 	},
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
-/area/exodus/maintenance/telecomms)
-"ux" = (
-/obj/machinery/telecomms/server/presets/security,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
-/area/exodus/maintenance/telecomms)
-"vw" = (
-/obj/machinery/telecomms/server/presets/medical,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
 /area/exodus/maintenance/telecomms)
 "ww" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -5988,11 +5947,6 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exodus/maintenance/telecomms)
-"xK" = (
-/obj/machinery/telecomms/processor/preset_three,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
-/area/exodus/maintenance/telecomms)
 "xM" = (
 /obj/effect/landmark{
 	name = "xeno_spawn";
@@ -6014,11 +5968,6 @@
 	},
 /obj/structure/closet/toolcloset,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/exodus/maintenance/telecomms)
-"yV" = (
-/obj/machinery/telecomms/server/presets/unused,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
 /area/exodus/maintenance/telecomms)
 "zH" = (
 /obj/structure/cable{
@@ -6059,11 +6008,6 @@
 /obj/item/cell/high,
 /obj/item/cell/high,
 /turf/simulated/floor/tiled/dark,
-/area/exodus/maintenance/telecomms)
-"zR" = (
-/obj/machinery/telecomms/processor/preset_one,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
 /area/exodus/maintenance/telecomms)
 "Ad" = (
 /obj/machinery/light,
@@ -6111,13 +6055,6 @@
 	},
 /turf/simulated/floor/lino,
 /area/exodus/maintenance/telecomms)
-"AW" = (
-/obj/machinery/computer/telecomms/monitor{
-	dir = 4;
-	network = "tcommsat"
-	},
-/turf/simulated/floor/lino,
-/area/exodus/maintenance/telecomms)
 "Bb" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -6127,16 +6064,6 @@
 	dir = 8
 	},
 /turf/simulated/floor/lino,
-/area/exodus/maintenance/telecomms)
-"Bf" = (
-/obj/machinery/telecomms/bus/preset_three,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
-/area/exodus/maintenance/telecomms)
-"Bq" = (
-/obj/machinery/telecomms/bus/preset_one,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
 /area/exodus/maintenance/telecomms)
 "BO" = (
 /obj/structure/cable{
@@ -6242,12 +6169,6 @@
 /turf/simulated/floor/lino,
 /area/exodus/maintenance/telecomms)
 "GD" = (
-/obj/machinery/telecomms/server/presets/engineering,
-/turf/simulated/floor/bluegrid,
-/area/exodus/maintenance/telecomms)
-"GE" = (
-/obj/machinery/telecomms/bus/preset_four,
-/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/bluegrid,
 /area/exodus/maintenance/telecomms)
 "GS" = (
@@ -6285,13 +6206,9 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/exodus/maintenance/sub/aft)
 "IL" = (
-/obj/machinery/computer/design_console,
-/turf/simulated/floor/lino,
-/area/exodus/maintenance/telecomms)
-"IR" = (
-/obj/machinery/computer/telecomms/server{
+/obj/machinery/computer/design_console{
 	dir = 4;
-	network = "tcommsat"
+	id_tag = "science"
 	},
 /turf/simulated/floor/lino,
 /area/exodus/maintenance/telecomms)
@@ -6332,14 +6249,6 @@
 /obj/effect/shuttle_landmark/exodus_sub_aft,
 /turf/space,
 /area/space)
-"KJ" = (
-/turf/simulated/floor/bluegrid,
-/area/exodus/maintenance/telecomms)
-"Lu" = (
-/obj/machinery/telecomms/server/presets/common,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
-/area/exodus/maintenance/telecomms)
 "LF" = (
 /obj/item/radio/intercom{
 	dir = 4;
@@ -6433,11 +6342,6 @@
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/telecomms)
-"Nb" = (
-/obj/machinery/telecomms/server/presets/science,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
-/area/exodus/maintenance/telecomms)
 "Ni" = (
 /obj/effect/shuttle_landmark/exodus_sub_fore,
 /turf/space,
@@ -6500,21 +6404,8 @@
 /obj/structure/lattice,
 /turf/simulated/wall/prepainted,
 /area/exodus/maintenance/sub/aft)
-"Qm" = (
-/obj/machinery/telecomms/processor/preset_two,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
-/area/exodus/maintenance/telecomms)
 "Qs" = (
 /obj/structure/table/rack,
-/obj/item/stock_parts/circuitboard/telecomms/processor,
-/obj/item/stock_parts/circuitboard/telecomms/processor,
-/obj/item/stock_parts/circuitboard/telecomms/receiver,
-/obj/item/stock_parts/circuitboard/telecomms/server,
-/obj/item/stock_parts/circuitboard/telecomms/server,
-/obj/item/stock_parts/circuitboard/telecomms/bus,
-/obj/item/stock_parts/circuitboard/telecomms/bus,
-/obj/item/stock_parts/circuitboard/telecomms/broadcaster,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/maintenance/telecomms)
 "QB" = (
@@ -6531,6 +6422,11 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/maintenance/sub/aft)
+"RL" = (
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/network/telecomms_hub,
+/turf/simulated/floor/bluegrid,
+/area/exodus/maintenance/telecomms)
 "Se" = (
 /obj/machinery/newscaster{
 	pixel_y = -32
@@ -6570,11 +6466,6 @@
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/exodus/maintenance/telecomms)
-"TE" = (
-/obj/machinery/telecomms/server/presets/command,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/bluegrid,
 /area/exodus/maintenance/telecomms)
 "TI" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -34316,9 +34207,9 @@ Hz
 Hz
 qe
 mJ
-ps
+oz
 kp
-sf
+qe
 Hz
 Hz
 aa
@@ -34571,11 +34462,11 @@ Hz
 Hz
 Hz
 rj
-KJ
+GD
 UM
 JP
 Hq
-KJ
+GD
 xi
 Hz
 Hz
@@ -35082,17 +34973,17 @@ cv
 aa
 Hz
 Hz
-Qm
-Bq
+RL
+oz
 UC
-Nb
+oz
 GD
 sJ
-Lu
+oz
 HW
 UC
-GE
-xK
+oz
+oz
 Hz
 aa
 aa
@@ -35339,17 +35230,17 @@ cv
 cv
 Hz
 BR
-uf
-zR
+oz
+oz
 UC
 oz
-ux
+oz
 sJ
-TE
+oz
 Jv
 UC
-tE
-Bf
+oz
+oz
 Hz
 aa
 aa
@@ -35599,10 +35490,10 @@ AG
 oE
 DZ
 GS
-vw
-tq
+oz
+oz
 MC
-yV
+oz
 HW
 UC
 DZ
@@ -36117,8 +36008,8 @@ mN
 DZ
 UK
 Sq
-AW
-IR
+Ag
+Ag
 Ec
 IL
 Hz

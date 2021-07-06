@@ -212,3 +212,10 @@
 			return L
 
 	return null
+
+/mob/living/carbon/human/binarycheck()
+	for(var/obj/item/radio/dongle in list(l_ear, r_ear))
+		for(var/obj/item/encryptionkey/key in dongle.encryption_keys)
+			if(key.translate_binary)
+				return TRUE
+	. = ..()

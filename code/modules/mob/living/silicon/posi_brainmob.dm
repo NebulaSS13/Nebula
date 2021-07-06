@@ -68,16 +68,7 @@
 		R = owner.l_ear
 	else if(owner.r_ear && istype(owner.r_ear,/obj/item/radio))
 		R = owner.r_ear
-
 	if(!R)	return 0
-
-	var/list/new_channels = list()
-	new_channels["Common"] = ";"
-	for(var/i = 1 to R.channels.len)
-		var/channel = R.channels[i]
-		var/key = get_radio_key_from_channel(channel)
-		new_channels[channel] = key
-	owner_channels = new_channels
 	return 1
 
 /mob/living/silicon/sil_brainmob/statelaw(var/law, var/mob/living/L = src)

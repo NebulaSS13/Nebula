@@ -35,6 +35,7 @@
 // Essentially a bare platform that moves up and down.
 /obj/turbolift_map_holder/tradeship
 	name = "Tradeship cargo elevator placeholder"
+	icon = 'icons/obj/turbolift_preview_nowalls_4x4.dmi'
 	depth = 4
 	lift_size_x = 3
 	lift_size_y = 3

@@ -33,16 +33,15 @@
 	src.endWhen = src.releaseWhen+2
 
 /datum/event/prison_break/announce()
-	if(areas && areas.len > 0)
+	if(length(areas))
 		command_announcement.Announce("[pick("Gr3yT1d3 virus","Malignant trojan",)] detected in [location_name()] [(eventDept == "Security")? "imprisonment":"containment"] subroutines. Secure any compromised areas immediately. [location_name()] AI involvement is recommended.", "[location_name()] Anti-Virus Alert", zlevels = affecting_z)
-
 
 /datum/event/prison_break/start()
 	for(var/area/A in global.areas)
 		if(is_type_in_list(A,areaType) && !is_type_in_list(A,areaNotType))
 			areas += A
 
-	if(areas && areas.len > 0)
+	if(length(areas))
 		var/my_department = "[location_name()] Firewall Subroutines"
 		var/rc_message = "An unknown malicious program has been detected in the [english_list(areaName)] lighting and airlock control systems at [stationtime2text()]. Systems will be fully compromised within approximately three minutes. Direct intervention is required immediately.<br>"
 		var/obj/machinery/network/message_server/MS
@@ -53,11 +52,9 @@
 				break
 		for(var/mob/living/silicon/ai/A in global.player_list)
 			to_chat(A, "<span class='danger'>Malicious program detected in the [english_list(areaName)] lighting and airlock control systems by [my_department].</span>")
-
 	else
 		to_world_log("ERROR: Could not initate grey-tide. Unable to find suitable containment area.")
 		kill()
-
 
 /datum/event/prison_break/tick()
 	if(activeFor == releaseWhen)

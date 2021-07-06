@@ -365,8 +365,8 @@ var/global/list/supermatter_final_thoughts = list(
 	else
 		alert_msg = null
 	if(alert_msg)
-		var/obj/item/radio/announcer = get_global_announcer()
-		announcer.autosay(alert_msg, "Supermatter Monitor", "Engineering")
+		var/obj/item/radio/announcer = get_announcer(src)
+		announcer?.autosay(alert_msg, "Supermatter Monitor", "Engineering")
 		//Public alerts
 		if((damage > emergency_point) && !public_alert)
 			announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")

@@ -64,6 +64,10 @@
 	name = "circuitboard (helm control console)"
 	build_path = /obj/machinery/computer/ship/helm
 
+/obj/item/stock_parts/circuitboard/comms
+	name = "circuitboard (comms control console)"
+	build_path = /obj/machinery/computer/ship/comms
+
 /obj/item/stock_parts/circuitboard/ftl
 	name = "circuitboard (FTL control console)"
 	build_path = /obj/machinery/computer/ship/ftl

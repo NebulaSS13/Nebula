@@ -1,4 +1,3 @@
-
 /decl/hierarchy/outfit/job/generic
 	hierarchy_type = /decl/hierarchy/outfit/job/generic
 	id_type = /obj/item/card/id/civilian

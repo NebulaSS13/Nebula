@@ -282,8 +282,7 @@
 
 /obj/item/radio/headset/chameleon
 	name = "radio headset"
-	icon_state = "headset"
-	item_state = "headset"
+	icon = 'icons/obj/items/device/radio/headsets/headset.dmi'
 	desc = "An updated, modular intercom that fits over the head. This one seems to have a small dial on it."
 	origin_tech = "{'esoteric':3}"
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON

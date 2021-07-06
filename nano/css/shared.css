@@ -721,3 +721,10 @@ th.bot {
 	background-color: black;
 	color: black;
 }
+
+.rect {
+    display: inline;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000000;
+}
