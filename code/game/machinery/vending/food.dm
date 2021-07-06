@@ -38,7 +38,7 @@
 	icon_vend = "snix-vend"
 	icon_deny = "snix-deny"
 	products = list(/obj/item/chems/food/snacks/semki = 7,
-					/obj/item/chems/food/snacks/canned/caviar = 7,
+					/obj/item/chems/food/snacks/can/caviar = 7,
 					/obj/item/chems/food/snacks/squid = 7,
 					/obj/item/chems/food/snacks/croutons = 7,
 					/obj/item/chems/food/snacks/salo = 7,
@@ -46,7 +46,7 @@
 					/obj/item/chems/food/snacks/pistachios = 7,
 					)
 
-	contraband = list(/obj/item/chems/food/snacks/canned/caviar/true = 1)
+	contraband = list(/obj/item/chems/food/snacks/can/caviar/true = 1)
 
 /obj/machinery/vending/snix/on_update_icon()
 	..()

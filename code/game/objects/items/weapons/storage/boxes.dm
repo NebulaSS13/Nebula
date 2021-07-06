@@ -592,16 +592,16 @@
 /obj/item/storage/box/canned
 	name = "box of canned food"
 	desc = "A box full of canned foods."
-	startswith = list(/obj/item/chems/food/snacks/canned/spinach = 1)
+	startswith = list(/obj/item/chems/food/snacks/can/spinach = 1)
 
 /obj/item/storage/box/canned/beef
-	startswith = list(/obj/item/chems/food/snacks/canned/beef = 6)
+	startswith = list(/obj/item/chems/food/snacks/can/beef = 6)
 
 /obj/item/storage/box/canned/beans
-	startswith = list(/obj/item/chems/food/snacks/canned/beans = 6)
+	startswith = list(/obj/item/chems/food/snacks/can/beans = 6)
 
 /obj/item/storage/box/canned/tomato
-	startswith = list(/obj/item/chems/food/snacks/canned/tomato = 6)
+	startswith = list(/obj/item/chems/food/snacks/can/tomato = 6)
 
 // machinery stock parts
 /obj/item/storage/box/parts
