@@ -43,6 +43,7 @@ var/global/list/areas = list()
 	var/list/forced_ambience
 	var/sound_env = STANDARD_STATION
 	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
+	var/description //A text-based description of what this area is for.
 
 	var/static/global_uid = 0
 	var/uid
@@ -53,6 +54,7 @@ var/global/list/areas = list()
 	var/list/air_scrub_names = list()
 	var/list/air_vent_info = list()
 	var/list/air_scrub_info = list()
+	var/list/blurbed_stated_to = list() //This list of names is here to make sure we don't state our descriptive blurb to a person more than once.
 
 /area/New()
 	icon_state = ""
@@ -307,11 +309,23 @@ var/global/list/mob/living/forced_ambiance_list = new
 
 	play_ambience(L)
 	L.lastarea = newarea
+	do_area_blurb(L)
 
 /area/Exited(A)
 	if(isliving(A))
 		clear_ambience(A)
 	return ..()
+
+/area/proc/do_area_blurb(var/mob/living/L)
+	if(isnull(description))
+		return
+
+	if(!(L && L.client && L.get_preference_value(/datum/client_preference/area_info_blurb) == PREF_YES))
+		return 
+	
+	if(!(L.client in blurbed_stated_to))
+		blurbed_stated_to += L.client
+		to_chat(L, SPAN_NOTICE(FONT_SMALL("[description]")))
 
 /area/proc/play_ambience(var/mob/living/L)
 	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
