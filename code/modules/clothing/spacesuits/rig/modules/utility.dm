@@ -392,11 +392,11 @@
 	var/obj/item/tank/jetpack/rig/jets
 
 /obj/item/rig_module/maneuvering_jets/attackby(obj/item/W, mob/user)
-	. = ..()
 	if(W.do_tool_interaction(TOOL_WRENCH, user, src, 1, "removing the propellant tank", "removing the propellant tank"))
 		jets.forceMove(get_turf(user))
 		user.put_in_hands(jets)
 		jets = null
+		return TRUE
 	
 	if(istype(W, /obj/item/tank/jetpack/rig))
 		if(jets)
@@ -406,6 +406,8 @@
 			to_chat(user, SPAN_NOTICE("You insert \the [W] into [src]."))
 			W.forceMove(src)
 			jets = W
+			return TRUE
+	. = ..()
 
 /obj/item/rig_module/maneuvering_jets/engage()
 	if(!..())
@@ -454,8 +456,7 @@
 
 /obj/item/rig_module/maneuvering_jets/Destroy()
 	. = ..()
-	qdel(jets)
-	jets = null
+	QDEL_NULL(jets)
 
 /obj/item/rig_module/device/paperdispenser
 	name = "hardsuit paper dispenser"
