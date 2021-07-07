@@ -140,7 +140,7 @@
 	name = "energy combat shield"
 	desc = "A shield capable of stopping most projectile and melee attacks. It can be retracted, expanded, and stored anywhere."
 	icon = 'icons/obj/items/shield/e_shield.dmi'
-	icon_state = "eshield0" // eshield1 for expanded
+	icon_state = "eshield" // eshield1 for expanded
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 3.0
 	throwforce = 5.0
@@ -150,6 +150,11 @@
 	origin_tech = "{'materials':4,'magnets':3,'esoteric':4}"
 	attack_verb = list("shoved", "bashed")
 	var/active = 0
+	var/shield_light = "#006aff"
+
+/obj/item/shield/energy/Initialize()
+    icon_state = "[initial(icon_state)][active]"
+    . = ..()
 
 /obj/item/shield/energy/handle_shield(mob/user)
 	if(!active)
@@ -196,8 +201,8 @@
 	return
 
 /obj/item/shield/energy/on_update_icon()
-	icon_state = "eshield[active]"
+	icon_state = "[initial(icon_state)][active]"
 	if(active)
-		set_light(1.5, 1.5, "#006aff")
+		set_light(1.5, 1.5, shield_light)
 	else
 		set_light(0)
