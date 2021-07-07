@@ -12,7 +12,8 @@
 
 	var/coughedtime = null
 	var/ignore_rads = FALSE
-	var/cpr_time = 1.0
+	/// Whether the mob is performing cpr or not.
+	var/performing_cpr = FALSE
 	var/lastpuke = 0
 	var/nutrition = 400
 	var/hydration = 400
