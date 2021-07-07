@@ -320,11 +320,11 @@ var/global/list/mob/living/forced_ambiance_list = new
 	if(isnull(description))
 		return
 
-	if(!(L && L.client && L.get_preference_value(/datum/client_preference/area_info_blurb) == PREF_YES))
+	if(L?.get_preference_value(/datum/client_preference/area_info_blurb) != PREF_YES)
 		return 
 	
-	if(!(lowertext(L.ckey) in blurbed_stated_to))
-		blurbed_stated_to += lowertext(L.ckey)
+	if(!(L.ckey in blurbed_stated_to))
+		blurbed_stated_to += L.ckey
 		to_chat(L, SPAN_NOTICE(FONT_SMALL("[description]")))
 
 /area/proc/play_ambience(var/mob/living/L)
