@@ -150,11 +150,11 @@
 	origin_tech = "{'materials':4,'magnets':3,'esoteric':4}"
 	attack_verb = list("shoved", "bashed")
 	var/active = 0
-	var/shield_light = "#006aff"
+	var/shield_light_color = "#006aff"
 
 /obj/item/shield/energy/Initialize()
-    icon_state = "[initial(icon_state)][active]"
-    . = ..()
+	. = ..()
+	update_icon()
 
 /obj/item/shield/energy/handle_shield(mob/user)
 	if(!active)
@@ -203,6 +203,6 @@
 /obj/item/shield/energy/on_update_icon()
 	icon_state = "[initial(icon_state)][active]"
 	if(active)
-		set_light(1.5, 1.5, shield_light)
+		set_light(1.5, 1.5, shield_light_color)
 	else
 		set_light(0)
