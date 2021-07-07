@@ -104,6 +104,7 @@
 /obj/item/tank/jetpack/rig
 	name = "jetpack"
 	var/obj/item/rig/holder
+	var/obj/item/tank/prop_tank 
 
 /obj/item/tank/jetpack/rig/examine()
 	. = ..()
@@ -117,7 +118,10 @@
 	if(!istype(holder) || !holder.air_supply)
 		return 0
 
-	var/obj/item/tank/pressure_vessel = holder.air_supply
+	if(!prop_tank)
+		return 0
+		
+	var/obj/item/tank/pressure_vessel = prop_tank
 
 	if((num < 0.005 || pressure_vessel.air_contents.total_moles < num))
 		src.ion_trail.stop()

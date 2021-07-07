@@ -382,7 +382,7 @@
 	deactivate_string = "Deactivate Thrusters"
 
 	interface_name = "maneuvering jets"
-	interface_desc = "An inbuilt EVA maneuvering system that runs off the rig air supply."
+	interface_desc = "An inbuilt EVA maneuvering system that runs off a seperate gas supply."
 	origin_tech = "{'materials':6,'engineering':7}"
 	material = /decl/material/solid/metal/steel
 	matter = list(
@@ -390,6 +390,25 @@
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE
 	)
 	var/obj/item/tank/jetpack/rig/jets
+	var/obj/item/tank/propellant_tank
+
+/obj/item/rig_module/maneuvering_jets/attackby(obj/item/W, mob/user)
+	. = ..()
+	if(W.do_tool_interaction(TOOL_WRENCH, user, src, 1, "removing the propellant tank", "removing the propellant tank"))
+		propellant_tank.forceMove(get_turf(user))
+		user.put_in_hands(propellant_tank)
+		propellant_tank = null
+		jets.prop_tank = null
+	
+	if(istype(W, /obj/item/tank/))
+		if(propellant_tank)
+			to_chat(user, SPAN_WARNING("There's already a propellant tank inside of \the [src]!"))
+			return
+		if(user.unEquip(W))
+			to_chat(user, SPAN_NOTICE("You insert \the [W] into [src]."))
+			W.forceMove(src)
+			propellant_tank = W 
+			jets.prop_tank = W
 
 /obj/item/rig_module/maneuvering_jets/engage()
 	if(!..())
@@ -425,6 +444,8 @@
 /obj/item/rig_module/maneuvering_jets/Initialize()
 	. = ..()
 	jets = new(src)
+	propellant_tank = new(src)
+	jets.prop_tank = propellant_tank
 
 /obj/item/rig_module/maneuvering_jets/installed()
 	..()
@@ -435,6 +456,13 @@
 	..()
 	jets.holder = null
 	jets.ion_trail.set_up(jets)
+
+/obj/item/rig_module/maneuvering_jets/Destroy()
+	. = ..()
+	qdel(propellant_tank)
+	qdel(jets)
+	jets.prop_tank = null
+	propellant_tank = null
 
 /obj/item/rig_module/device/paperdispenser
 	name = "hardsuit paper dispenser"

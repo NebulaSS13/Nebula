@@ -284,6 +284,10 @@
 		else
 			air_tank = "NOT FOUND"
 		stat("Tank Pressure:", air_tank)
+		for(var/obj/item/rig_module/maneuvering_jets/M in R.installed_modules)
+			if(M.propellant_tank)
+				var/prop_tank_pressure = "[round(M.propellant_tank.air_contents.return_pressure())] kPa"
+				stat("Propellant Tank Pressure:", prop_tank_pressure)
 		for(var/obj/item/rig_module/module in R.installed_modules)
 			for(var/stat_rig_module/SRM in module.stat_modules)
 				if(SRM.CanUse())
