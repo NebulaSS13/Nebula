@@ -43,7 +43,6 @@
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 2,
 		/obj/item/chems/glass/beaker = 1,
-		/obj/item/weedkiller = 1,
 		/obj/item/pipe = 2)
 	additional_spawn_components = list(
 		/obj/item/stock_parts/console_screen = 1,
