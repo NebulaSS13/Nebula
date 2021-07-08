@@ -47,3 +47,15 @@
 		/obj/item/stock_parts/keyboard = 1,
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
+
+/obj/item/stock_parts/circuitboard/chemical_dispenser/bar_alc
+	name = "circuitboard (chemical dispenser)"
+	build_path = /obj/machinery/chemical_dispenser/bar_alc
+
+/obj/item/stock_parts/circuitboard/chemical_dispenser/bar_soft
+	name = "circuitboard (chemical dispenser)"
+	build_path = /obj/machinery/chemical_dispenser/bar_soft
+
+/obj/item/stock_parts/circuitboard/chemical_dispenser/bar_coffee
+	name = "circuitboard (chemical dispenser)"
+	build_path = /obj/machinery/chemical_dispenser/bar_coffee
