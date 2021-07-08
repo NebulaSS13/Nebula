@@ -84,12 +84,12 @@ var/global/list/supermatter_final_thoughts = list(
 /obj/machinery/power/supermatter
 	name = "supermatter crystal"
 	desc = "A strangely translucent and iridescent crystal. <span class='danger'>You get headaches just from looking at it.</span>"
-	icon = 'icons/obj/engine.dmi'
-	icon_state = "darkmatter"
+	icon = 'icons/obj/supermatter.dmi'
+	icon_state = "supermatter"
 	density = 1
 	anchored = 0
 	light_range = 4
-	layer = ABOVE_OBJ_LAYER
+	layer = ABOVE_HUMAN_LAYER
 	matter = list(
 		/decl/material/solid/exotic_matter = MATTER_AMOUNT_PRIMARY,
 		/decl/material/solid/metal/steel =   MATTER_AMOUNT_REINFORCEMENT
@@ -111,7 +111,7 @@ var/global/list/supermatter_final_thoughts = list(
 
 	var/gasefficency = 0.25
 
-	var/base_icon_state = "darkmatter"
+	var/base_icon_state = "supermatter"
 
 	var/last_power
 	var/damage = 0
@@ -588,8 +588,8 @@ var/global/list/supermatter_final_thoughts = list(
 /obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
 	name = "supermatter shard"
 	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. <span class='danger'>You get headaches just from looking at it.</span>"
-	icon_state = "darkmatter_shard"
-	base_icon_state = "darkmatter_shard"
+	icon_state = "supermatter_shard"
+	base_icon_state = "supermatter_shard"
 
 	warning_point = 50
 	emergency_point = 400
