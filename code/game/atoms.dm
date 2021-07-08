@@ -586,3 +586,9 @@ its easier to just keep the beam vertical.
 	M.Scale(icon_scale_x, icon_scale_y)
 	M.Turn(icon_rotation)
 	animate(src, transform = M, transform_animate_time)
+
+/atom/proc/do_radial_menu(mob/user)
+	return
+
+/atom/proc/do_radial_choice(choice, mob/user)
+	return

@@ -63,6 +63,12 @@
 		CtrlAltClickOn(A)
 		return 1
 	if(modifiers["middle"])
+		if(modifiers["shift"])
+			MiddleShiftClickOn(A)
+			return TRUE
+		if(modifiers["alt"])
+			MiddleAltClickOn(A)
+			return TRUE
 		MiddleClickOn(A)
 		return 1
 	if(modifiers["shift"])
@@ -218,6 +224,12 @@
 */
 /mob/proc/MiddleClickOn(var/atom/A)
 	swap_hand()
+
+/mob/proc/MiddleShiftClickOn(atom/A)
+	return
+
+/mob/proc/MiddleAltClickOn(atom/A)
+	A.do_radial_menu(src)
 
 // In case of use break glass
 /*

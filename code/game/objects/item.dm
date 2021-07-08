@@ -948,3 +948,26 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 // Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/proc/update_clothing_icon()
 	return
+
+/obj/item/do_radial_menu(mob/user)
+	var/list/options = list(
+		"Examine" = image('icons/screen/radial.dmi', "radial_examine2"),
+		"Pick up" = image('icons/screen/radial.dmi', "radial_pickup"),
+		"Pull" = image('icons/screen/radial.dmi', "radial_pull"),
+		"Point" = image('icons/screen/radial.dmi', "radial_point")
+	)
+
+	if(!Adjacent(user))
+		options -= "Pick up"
+		options -= "Pull"
+
+	return do_radial_choice(show_radial_menu(user, src, options, tooltips = TRUE), user)
+
+/obj/item/do_radial_choice(choice, mob/user)
+	if(..())
+		return TRUE
+	switch(choice)
+		if("Pick up")
+			user.put_in_active_hand(src)
+			return TRUE
+	return FALSE
