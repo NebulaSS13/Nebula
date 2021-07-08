@@ -64,7 +64,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 
 		switch(option)
 			if("name")
-				t = sanitizeSafe(input("Enter a name for your pAI", "pAI Name", candidate.name) as text, MAX_NAME_LEN)
+				t = sanitize_safe(input("Enter a name for your pAI", "pAI Name", candidate.name) as text, MAX_NAME_LEN)
 				if(t)
 					candidate.name = t
 			if("desc")
@@ -93,7 +93,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 				candidate.savefile_load(usr)
 				//In case people have saved unsanitized stuff.
 				if(candidate.name)
-					candidate.name = sanitizeSafe(candidate.name, MAX_NAME_LEN)
+					candidate.name = sanitize_safe(candidate.name, MAX_NAME_LEN)
 				if(candidate.description)
 					candidate.description = sanitize(candidate.description)
 				if(candidate.role)

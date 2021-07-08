@@ -89,7 +89,7 @@
 	if(!can_set_own_name)
 		return
 
-	var/newname = sanitizeSafe(input(target,"Enter a name, or leave blank for the default name.", "Name change",target.real_name) as text, MAX_NAME_LEN)
+	var/newname = sanitize_safe(input(target,"Enter a name, or leave blank for the default name.", "Name change",target.real_name) as text, MAX_NAME_LEN)
 	if (newname && newname != "")
 		target.real_name = newname
 		target.SetName(target.real_name)

@@ -153,7 +153,7 @@
 	update_ticket_panels()
 
 	if(establish_db_connection())
-		var/sql_text = "[src.ckey] -> [C.ckey]: [sanitizeSQL(msg)]\n"
+		var/sql_text = "[src.ckey] -> [C.ckey]: [sanitize_sql(msg)]\n"
 		var/DBQuery/ticket_text = dbcon.NewQuery("UPDATE `erro_admin_tickets` SET `text` = CONCAT(COALESCE(text,''), '[sql_text]') WHERE `round` = '[game_id]' AND `inround_id` = '[ticket.id]';")
 		ticket_text.Execute()
 

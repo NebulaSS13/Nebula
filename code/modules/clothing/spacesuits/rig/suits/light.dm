@@ -130,7 +130,7 @@
 	var/mob/M = usr
 	if(!M.mind) return 0
 	if(M.incapacitated()) return 0
-	var/input = sanitizeSafe(input("What do you want to name your suit?", "Rename suit"), MAX_NAME_LEN)
+	var/input = sanitize_safe(input("What do you want to name your suit?", "Rename suit"), MAX_NAME_LEN)
 	if(src && input && !M.incapacitated() && in_range(M,src))
 		if(!findtext(input, "the", 1, 4))
 			input = "\improper [input]"
@@ -147,7 +147,7 @@
 	var/mob/M = usr
 	if(!M.mind) return 0
 	if(M.incapacitated()) return 0
-	var/input = sanitizeSafe(input("Please describe your voidsuit in 128 letters or less.", "write description"), MAX_DESC_LEN)
+	var/input = sanitize_safe(input("Please describe your voidsuit in 128 letters or less.", "write description"), MAX_DESC_LEN)
 	if(src && input && !M.incapacitated() && in_range(M,src))
 		desc = input
 		to_chat(M, "Suit description succesful!")

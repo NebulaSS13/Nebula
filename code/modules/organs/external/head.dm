@@ -52,7 +52,7 @@
 		to_chat(penman, "<span class='notice'>There is no room left to write on [head_name]!</span>")
 		return
 
-	var/graffiti = sanitizeSafe(input(penman, "Enter a message to write on [head_name]:") as text|null, MAX_NAME_LEN)
+	var/graffiti = sanitize_safe(input(penman, "Enter a message to write on [head_name]:") as text|null, MAX_NAME_LEN)
 	if(graffiti)
 		if(!target.Adjacent(penman))
 			to_chat(penman, "<span class='notice'>[head_name] is too far away.</span>")

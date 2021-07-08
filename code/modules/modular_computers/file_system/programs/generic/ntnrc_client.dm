@@ -70,7 +70,7 @@
 	if(href_list["PRG_newchannel"])
 		. = 1
 		var/mob/living/user = usr
-		var/channel_title = sanitizeSafe(input(user,"Enter channel name or leave blank to cancel:"), 64)
+		var/channel_title = sanitize_safe(input(user,"Enter channel name or leave blank to cancel:"), 64)
 		if(!channel_title)
 			return
 		var/datum/chat_conversation/C = new/datum/chat_conversation(network)

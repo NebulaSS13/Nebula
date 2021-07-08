@@ -23,5 +23,5 @@
 		/decl/language/sign
 	)
 
-/decl/cultural_info/culture/synthetic/sanitize_name(new_name)
-	return sanitizeName(new_name, allow_numbers = TRUE)
+/decl/cultural_info/culture/synthetic/sanitize_cultural_name(new_name)
+	return sanitize_name(new_name, allow_numbers = TRUE)

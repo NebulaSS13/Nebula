@@ -46,7 +46,7 @@
 			return
 		if((!in_range(src, usr) && loc != user))
 			return
-		t = sanitizeSafe(t, MAX_NAME_LEN)
+		t = sanitize_safe(t, MAX_NAME_LEN)
 		if(t)
 			SetName("glass case - '[t]'")
 			desc = "A case containing \a [t] implant."

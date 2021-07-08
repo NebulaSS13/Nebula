@@ -19,7 +19,7 @@ var/global/list/ticket_panels = list()
 	id = tickets.len
 	opened_time = world.time
 	if(establish_db_connection())
-		var/sql_ckey = sanitizeSQL(owner.ckey)
+		var/sql_ckey = sanitize_sql(owner.ckey)
 		var/DBQuery/ticket_query = dbcon.NewQuery("INSERT INTO `erro_admin_tickets`(`ckey`, `round`, `inround_id`, `status`, `open_date`) VALUES ('[sql_ckey]', '[game_id]', [src.id], 'OPEN', NOW());")
 		ticket_query.Execute()
 	addtimer(CALLBACK(src, .proc/timeoutcheck), 5 MINUTES)

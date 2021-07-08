@@ -80,7 +80,7 @@
 			return
 		if ((!in_range(src, usr) && src.loc != user))
 			return
-		t = sanitizeSafe(t, MAX_NAME_LEN)
+		t = sanitize_safe(t, MAX_NAME_LEN)
 		if (t)
 			src.SetName(text("Morgue- '[]'", t))
 		else
@@ -220,7 +220,7 @@
 			return
 		if((!in_range(src, usr) > 1 && src.loc != user))
 			return
-		t = sanitizeSafe(t, MAX_NAME_LEN)
+		t = sanitize_safe(t, MAX_NAME_LEN)
 		if(t)
 			src.SetName(text("Crematorium- '[]'", t))
 		else

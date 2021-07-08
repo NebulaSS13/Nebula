@@ -206,7 +206,7 @@
 			if(computer && can_run(user, 1))
 				var/static/regex/hash_check = regex(@"^[0-9a-fA-F]{32}$")
 				if(href_list["name"])
-					var/temp_name = sanitizeName(input("Enter name.", "Name", id_card.registered_name),allow_numbers=TRUE)
+					var/temp_name = sanitize_name(input("Enter name.", "Name", id_card.registered_name),allow_numbers=TRUE)
 					if(temp_name && CanUseTopic(user))
 						id_card.registered_name = temp_name
 						id_card.formal_name_suffix = initial(id_card.formal_name_suffix)

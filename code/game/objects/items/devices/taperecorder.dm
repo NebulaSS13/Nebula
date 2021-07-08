@@ -454,7 +454,7 @@
 		if(loc == user)
 			var/new_name = input(user, "What would you like to label the tape?", "Tape labeling") as null|text
 			if(isnull(new_name)) return
-			new_name = sanitizeSafe(new_name)
+			new_name = sanitize_safe(new_name)
 			if(new_name)
 				SetName("tape - '[new_name]'")
 				to_chat(user, "<span class='notice'>You label the tape '[new_name]'.</span>")
