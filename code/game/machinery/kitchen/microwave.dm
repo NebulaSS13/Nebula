@@ -40,6 +40,11 @@
 	create_reagents(100)
 	soundloop = new(list(src), FALSE)
 
+/obj/machinery/microwave/Destroy()
+	dispose()
+	QDEL_NULL(soundloop)
+	return ..()
+
 /*******************
 *   Item Adding
 ********************/
