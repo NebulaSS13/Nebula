@@ -50,7 +50,7 @@
 /turf/simulated/floor/bluegrid/airless,
 /area/ship/scrap/command/bridge)
 "ai" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/toy/figure/captain,
 /obj/machinery/button/blast_door{
 	id_tag = "sensor";
@@ -69,7 +69,7 @@
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "ak" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/button/blast_door{
 	id_tag = "scraplock";
 	name = "External Lockdown"
@@ -1314,7 +1314,7 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/recharger,
 /obj/structure/sign/poster{
 	pixel_x = 32;
@@ -1414,7 +1414,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/saloon)
 "cK" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/smokes,
 /obj/item/ashtray/glass,
 /obj/structure/cable{
@@ -1966,7 +1966,7 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/medbay)
 "dE" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/reagentgrinder,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/sign/monkey_painting{
@@ -2117,7 +2117,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/crew/kitchen)
 "dT" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/chems/glass/beaker{
 	pixel_x = 5
@@ -2286,7 +2286,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/crew/kitchen)
 "ej" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/light/small{
 	icon_state = "bulb1";
 	dir = 8
@@ -2571,7 +2571,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/glass_extra/straw,
 /obj/item/toy/therapy_blue,
 /obj/item/chems/spray/cleaner,
@@ -2642,7 +2642,7 @@
 /turf/simulated/floor/usedup,
 /area/space)
 "eE" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/microwave,
 /obj/machinery/light/small{
 	icon_state = "bulb1";
@@ -2763,7 +2763,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/crew/hallway/starboard)
 "eO" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/cable,
 /obj/machinery/power/apc/derelict/full{
 	name = "Medical Bay APC"
@@ -2787,7 +2787,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "eQ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -3197,7 +3197,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 4
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
@@ -3411,7 +3411,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/wash)
 "fX" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/light/small,
 /obj/item/chems/spray/cleaner,
 /obj/item/storage/laundry_basket,
@@ -4221,7 +4221,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/chems/food/drinks/glass2/coffeecup/metal,
 /obj/item/chems/food/drinks/glass2/coffeecup/metal,
 /obj/item/chems/chem_disp_cartridge/coffee{
@@ -4242,7 +4242,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)
 "hu" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/cell_charger,
 /obj/item/storage/toolbox/electrical{
 	pixel_x = 7;
@@ -4261,7 +4261,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/power)
 "hv" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/cell_charger,
 /obj/item/defibrillator/compact/loaded,
 /obj/item/flashlight,
@@ -4627,7 +4627,7 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/button/ignition{
@@ -5381,7 +5381,7 @@
 /turf/space,
 /area/space)
 "jC" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/multitool{
 	pixel_x = 5
 	},
@@ -5774,7 +5774,7 @@
 /obj/structure/sign/warning/high_voltage{
 	pixel_x = 32
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/toy/prize/powerloader,
 /obj/item/ashtray/plastic,
 /obj/machinery/recharger,

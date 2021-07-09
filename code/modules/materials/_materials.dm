@@ -98,7 +98,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	var/door_icon_base = "metal"                         // Door base icon tag. See header.
 	var/table_icon_base = "metal"
-	var/table_reinf = "reinf_metal"
+	var/table_icon_reinforced = "reinf_metal"
+
 	var/list/stack_origin_tech = "{'materials':1}" // Research level for stacks.
 
 	// Attributes

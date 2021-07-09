@@ -608,7 +608,7 @@
 "bk" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paicard,
 /turf/simulated/floor,
 /area/ship/trade/disused)
@@ -1508,7 +1508,7 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/loading_bay)
 "rI" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/box/beakers,
 /obj/item/storage/box/syringes,
 /obj/item/scalpel,
@@ -1863,7 +1863,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ship/trade/fore_port_underside_maint)
 "Gp" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/coin/iron{
 	pixel_x = 3;
 	pixel_y = 3
@@ -2099,7 +2099,7 @@
 	icon_state = "pipe-c";
 	dir = 2
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/stack/material/puck/mapped/uranium/ten,
 /obj/item/storage/box/syringes,
 /turf/simulated/floor/tiled/white,
@@ -2379,7 +2379,7 @@
 /obj/item/chems/glass/bottle/eznutrient,
 /obj/item/seeds/tomatoseed,
 /obj/item/seeds/tomatoseed,
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor,
 /area/ship/trade/aft_port_underside_maint)
 "YW" = (
@@ -2405,7 +2405,7 @@
 	icon_state = "0-4";
 	d2 = 4
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/stack/material/puck/mapped/uranium,
 /obj/item/knife/table/plastic,
 /obj/item/clothing/accessory/bowtie/ugly,
