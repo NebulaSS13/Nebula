@@ -438,7 +438,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/dock)
 "aP" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/megaphone,
 /obj/machinery/cell_charger,
 /turf/simulated/floor/carpet,
@@ -1188,7 +1188,7 @@
 	icon_state = "0-4";
 	d2 = 4
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/deck/tarot,
 /obj/item/synthesized_instrument/guitar,
 /obj/random/drinkbottle,
@@ -1215,7 +1215,7 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
@@ -1272,7 +1272,7 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/recharger,
 /obj/structure/sign/poster{
 	pixel_x = 32;
@@ -1386,7 +1386,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay/chemistry)
 "ds" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/reagent_temperature,
 /obj/machinery/power/apc{
 	dir = 1
@@ -1663,7 +1663,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay/chemistry)
 "dJ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/chems/dropper,
 /obj/item/chems/glass/beaker/large,
 /obj/item/chems/glass/beaker/large,
@@ -2092,7 +2092,7 @@
 /turf/simulated/floor/reinforced/airless,
 /area/ship/trade/maintenance/engine/aft)
 "eP" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/light{
 	icon_state = "bulb1";
 	dir = 8
@@ -2333,7 +2333,7 @@
 /turf/simulated/floor/airless,
 /area/ship/trade/maintenance/engine/port)
 "fk" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/microwave,
 /obj/machinery/light{
 	icon_state = "bulb1";
@@ -2360,7 +2360,7 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/kitchen)
 "fo" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/glass_extra/straw,
 /obj/item/toy/therapy_blue,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -2418,7 +2418,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay)
 "fw" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -2679,7 +2679,7 @@
 /obj/machinery/fabricator/book,
 /obj/item/stack/material/panel/mapped/plastic/ten,
 /obj/item/stack/material/plank/mapped/wood/ten,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
@@ -2871,7 +2871,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
 "gC" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/light,
 /obj/item/chems/spray/cleaner,
 /obj/item/storage/laundry_basket,
@@ -3407,7 +3407,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/chems/food/drinks/glass2/coffeecup/metal,
 /obj/item/chems/food/drinks/glass2/coffeecup/metal,
 /obj/item/chems/chem_disp_cartridge/coffee{
@@ -3444,7 +3444,7 @@
 /obj/structure/sign/warning/high_voltage{
 	pixel_x = 32
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/toy/prize/powerloader,
 /obj/item/ashtray/plastic,
 /obj/machinery/recharger,
@@ -3800,7 +3800,7 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/button/blast_door{
 	id_tag = "engwindow";
 	name = "Engine Observation";
@@ -4837,7 +4837,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/hallway)
 "ml" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/toolbox/electrical{
 	pixel_x = 7;
 	pixel_y = 4
@@ -4937,7 +4937,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/dock)
 "nH" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/chems/glass/beaker{
 	pixel_x = 5
@@ -5347,7 +5347,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/chems/glass/bottle/eznutrient,
 /obj/item/plantspray/pests,
 /turf/simulated/floor/tiled,
@@ -5554,7 +5554,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/ship/trade/crew/wash)
 "vW" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/smokes,
 /obj/item/ashtray/glass,
 /obj/effect/landmark{
@@ -5832,7 +5832,7 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/saloon)
 "Ah" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/light{
 	icon_state = "tube1";
 	dir = 1
@@ -5926,7 +5926,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/command/hallway)
 "Bc" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/reagentgrinder/juicer,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/sign/monkey_painting{
@@ -5944,7 +5944,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ship/trade/maintenance/power)
 "BD" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/multitool{
 	pixel_x = 5
 	},
@@ -6015,7 +6015,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ship/trade/maintenance/atmos)
 "CG" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/toy/figure/captain,
 /obj/machinery/button/blast_door{
 	id_tag = "sensor";
@@ -6259,7 +6259,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/command/fmate)
 "FS" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/button/blast_door{
 	id_tag = "scraplock";
 	name = "External Lockdown"
@@ -6438,7 +6438,7 @@
 	pixel_y = 0
 	},
 /obj/item/storage/medical_lolli_jar,
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay)
 "Ig" = (
@@ -6446,7 +6446,7 @@
 /turf/simulated/floor/bluegrid,
 /area/ship/trade/command/bridge)
 "Im" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/chems/food/snacks/monkeycube/wrapped,
 /obj/structure/closet/medical_wall{
 	name = "pill cabinet";
@@ -6515,7 +6515,7 @@
 /turf/simulated/floor/airless,
 /area/ship/trade/command/captain)
 "Jb" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/cell_charger,
 /obj/item/storage/toolbox/electrical{
 	pixel_x = 7;
@@ -6638,7 +6638,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/atmos)
 "Kb" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/cell_charger,
 /obj/item/flashlight,
 /obj/structure/cable{
@@ -6676,7 +6676,7 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/cell_charger,
 /turf/simulated/floor/plating,
 /area/ship/trade/shieldbay)
@@ -7035,7 +7035,7 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/reagent_temperature/cooler,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay/chemistry)
@@ -7047,7 +7047,7 @@
 /obj/machinery/power/apc{
 	dir = 8
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/plating,
 /area/ship/trade/shieldbay)
 "Pb" = (
@@ -7164,7 +7164,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
 "QH" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/cable,
 /obj/machinery/power/apc{
 	name = "Medical Bay APC"

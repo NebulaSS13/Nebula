@@ -413,7 +413,7 @@
 /turf/simulated/floor/plating,
 /area/tanker)
 "Km" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/belt/utility/atmostech,
 /obj/item/wrench,
 /obj/item/twohanded/pipewrench,

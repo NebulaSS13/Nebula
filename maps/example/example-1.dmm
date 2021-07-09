@@ -40,7 +40,7 @@
 /turf/simulated/wall/r_wall,
 /area/space)
 "gO" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stack/material/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
@@ -87,7 +87,7 @@
 /turf/simulated/floor/plating,
 /area/shuttle/escape)
 "jB" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/automatic/assault_rifle,
 /obj/item/gun/projectile/automatic/assault_rifle,
 /obj/item/gun/projectile/automatic/assault_rifle,
@@ -149,7 +149,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "se" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/energy/laser,
 /obj/item/gun/energy/laser,
 /obj/item/gun/energy/laser,
@@ -176,7 +176,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "tq" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/revolver,
 /obj/item/gun/projectile/revolver,
 /obj/item/gun/projectile/revolver,
@@ -311,7 +311,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "Nu" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/shotgun/pump,
 /obj/item/gun/projectile/shotgun/pump,
 /obj/item/gun/projectile/shotgun/pump,

@@ -221,7 +221,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "aC" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
 /turf/simulated/floor/airless,
@@ -1572,7 +1572,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "ee" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
 /turf/simulated/floor/airless,
@@ -2875,7 +2875,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "hA" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
 /turf/simulated/floor/airless,
@@ -3488,14 +3488,14 @@
 /turf/space,
 /area/magshield/south)
 "jm" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/random/smokes,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jn" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/random/firstaid,
@@ -3530,7 +3530,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jt" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /turf/simulated/floor/tiled,
@@ -3545,7 +3545,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jv" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/trash/plate,
@@ -3662,7 +3662,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jL" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/random/plushie/large,
@@ -3670,7 +3670,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jM" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/machinery/light{
@@ -3709,21 +3709,21 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jS" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/trash/plate,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jT" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/knife/table,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jU" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/random/snack,
@@ -4130,21 +4130,21 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "lb" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/random/hat,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "lc" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/deck/cards,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "ld" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/kitchen/utensil/fork/plastic,
@@ -4198,7 +4198,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "lm" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/machinery/light,

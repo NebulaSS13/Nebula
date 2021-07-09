@@ -70,7 +70,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/djstation)
 "az" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /obj/random/tool,
 /turf/simulated/floor/airless,
@@ -176,20 +176,20 @@
 /turf/simulated/floor/airless,
 /area/djstation)
 "aZ" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /obj/random/maintenance,
 /obj/random/action_figure,
 /turf/simulated/floor/tiled/airless,
 /area/djstation)
 "ba" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/airless,
 /area/djstation)
 "bb" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/junk,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/airless,

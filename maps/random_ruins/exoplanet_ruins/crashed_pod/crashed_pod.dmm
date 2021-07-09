@@ -859,7 +859,7 @@
 /area/map_template/crashed_pod)
 "bS" = (
 /obj/effect/floor_decal/industrial/hatch/orange,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
@@ -904,7 +904,7 @@
 /area/map_template/crashed_pod)
 "bV" = (
 /obj/effect/floor_decal/industrial/hatch/orange,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
