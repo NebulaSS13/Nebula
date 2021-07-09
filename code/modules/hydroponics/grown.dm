@@ -164,7 +164,7 @@
 
 		if(W.sharp)
 			if(seed.kitchen_tag == "pumpkin") // Ugggh these checks are awful.
-				user.show_message(SPAN_NOTICE("You carve a face into \the [src]!", 1))
+				user.show_message(SPAN_NOTICE("You carve a face into \the [src]!"), 1)
 				new /obj/item/clothing/head/pumpkinhead (user.loc)
 				qdel(src)
 				return TRUE
@@ -211,20 +211,20 @@
 					qdel(src)
 					return TRUE
 
-	if(is_type_in_list(I, list(/obj/item/paper/cig/, /obj/item/paper, /obj/item/teleportation_scroll)))
+	if(is_type_in_list(W, list(/obj/item/paper/cig/, /obj/item/paper, /obj/item/teleportation_scroll)))
 
 		if(!dry)
 			to_chat(user, SPAN_WARNING("You need to dry \the [src] first!"))
 			return TRUE
 
-		if(user.unEquip(I))
+		if(user.unEquip(W))
 			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(get_turf(src))
 			R.chem_volume = reagents.total_volume
-			R.brand = "[src] handrolled in \the [I]."
+			R.brand = "[src] handrolled in \the [W]."
 			reagents.trans_to_holder(R.reagents, R.chem_volume)
-			to_chat(user, SPAN_NOTICE("You roll \the [src] into \the [I]."))
+			to_chat(user, SPAN_NOTICE("You roll \the [src] into \the [W]."))
 			user.put_in_active_hand(R)
-			qdel(I)
+			qdel(W)
 			qdel(src)
 			return TRUE
 
