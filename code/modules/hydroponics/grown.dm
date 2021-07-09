@@ -154,56 +154,81 @@
 			var/obj/item/stack/cable_coil/C = W
 			if(C.use(5))
 				//TODO: generalize this.
-				to_chat(user, "<span class='notice'>You add some cable to the [src.name] and slide it inside the battery casing.</span>")
+				to_chat(user, SPAN_NOTICE("You add some cable to \the [src] and slide it inside the battery casing."))
 				var/obj/item/cell/potato/pocell = new /obj/item/cell/potato(get_turf(user))
-				if(src.loc == user && user.get_empty_hand_slot() && istype(user,/mob/living/carbon/human))
-					user.put_in_hands(pocell)
+				qdel(src)
+				user.put_in_hands(pocell)
 				pocell.maxcharge = src.potency * 10
 				pocell.charge = pocell.maxcharge
-				qdel(src)
-				return
-		else if(W.sharp)
+				return TRUE
+
+		if(W.sharp)
 			if(seed.kitchen_tag == "pumpkin") // Ugggh these checks are awful.
-				user.show_message("<span class='notice'>You carve a face into [src]!</span>", 1)
+				user.show_message(SPAN_NOTICE("You carve a face into \the [src]!", 1))
 				new /obj/item/clothing/head/pumpkinhead (user.loc)
 				qdel(src)
-				return
-			else if(seed.chems)
+				return TRUE
+			
+			if(seed.chems)
 				if(isHatchet(W))
 					if(!isnull(seed.chems[/decl/material/solid/wood]))
-						user.visible_message("<span class='notice'>\The [user] makes planks out of \the [src].</span>")
-						new /obj/item/stack/material/wood(user.loc)
+						user.visible_message(SPAN_NOTICE("\The [user] makes planks out of \the [src]."))
+						var/obj/item/stack/material/wood/stack = new(user.loc)
+						stack.add_to_stacks(user, TRUE)
 						qdel(src)
 					else if(!isnull(seed.chems[/decl/material/solid/wood/bamboo]))
-						user.visible_message("<span class='notice'>\The [user] makes planks out of \the [src].</span>")
-						new /obj/item/stack/material/wood/bamboo(user.loc)
+						user.visible_message(SPAN_NOTICE("\The [user] makes planks out of \the [src]."))
+						var/obj/item/stack/material/wood/bamboo/stack = new(user.loc)
+						stack.add_to_stacks(user, TRUE)
 						qdel(src)
-					return
-				else if(!isnull(seed.chems[/decl/material/liquid/drink/juice/potato]))
-					to_chat(user, "You slice \the [src] into sticks.")
+					return TRUE
+				
+				if(!isnull(seed.chems[/decl/material/liquid/drink/juice/potato]))
+					to_chat(user, SPAN_NOTICE("You slice \the [src] into sticks."))
 					new /obj/item/chems/food/snacks/rawsticks(get_turf(src))
 					qdel(src)
-					return
-				else if(!isnull(seed.chems[/decl/material/liquid/drink/juice/carrot]))
-					to_chat(user, "You slice \the [src] into sticks.")
+					return TRUE
+
+				if(!isnull(seed.chems[/decl/material/liquid/drink/juice/carrot]))
+					to_chat(user, SPAN_NOTICE("You slice \the [src] into sticks."))
 					new /obj/item/chems/food/snacks/carrotfries(get_turf(src))
 					qdel(src)
-					return
-				else if(!isnull(seed.chems[/decl/material/liquid/drink/milk/soymilk]))
-					to_chat(user, "You roughly chop up \the [src].")
+					return TRUE
+
+				if(!isnull(seed.chems[/decl/material/liquid/drink/milk/soymilk]))
+					to_chat(user, SPAN_NOTICE("You roughly chop up \the [src]."))
 					new /obj/item/chems/food/snacks/soydope(get_turf(src))
 					qdel(src)
-					return
-				else if(seed.get_trait(TRAIT_FLESH_COLOUR))
-					to_chat(user, "You slice up \the [src].")
+					return TRUE
+
+				if(seed.get_trait(TRAIT_FLESH_COLOUR))
+					to_chat(user, SPAN_NOTICE("You slice up \the [src]."))
 					var/slices = rand(3,5)
 					var/reagents_to_transfer = round(reagents.total_volume/slices)
 					for(var/i in 1 to slices)
 						var/obj/item/chems/food/snacks/fruit_slice/F = new(get_turf(src),seed)
 						if(reagents_to_transfer) reagents.trans_to_obj(F,reagents_to_transfer)
 					qdel(src)
-					return
-	..()
+					return TRUE
+
+	if(is_type_in_list(I, list(/obj/item/paper/cig/, /obj/item/paper, /obj/item/teleportation_scroll)))
+
+		if(!dry)
+			to_chat(user, SPAN_WARNING("You need to dry \the [src] first!"))
+			return TRUE
+
+		if(user.unEquip(I))
+			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(get_turf(src))
+			R.chem_volume = reagents.total_volume
+			R.brand = "[src] handrolled in \the [I]."
+			reagents.trans_to_holder(R.reagents, R.chem_volume)
+			to_chat(user, SPAN_NOTICE("You roll \the [src] into \the [I]."))
+			user.put_in_active_hand(R)
+			qdel(I)
+			qdel(src)
+			return TRUE
+
+	. = ..()
 
 /obj/item/chems/food/snacks/grown/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()

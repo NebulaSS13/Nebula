@@ -42,6 +42,14 @@
 	if(!plural_name)
 		plural_name = "[singular_name]s"
 
+/obj/item/stack/dropInto(var/atom/destination)
+	var/oldloc = loc
+	. = ..()
+	if(isturf(loc) && ismob(oldloc))
+		merge_with_stacks_at_loc()
+
+/obj/item/stack/proc/merge_with_stacks_at_loc()
+
 /obj/item/stack/Destroy()
 	if(uses_charge)
 		return 1
