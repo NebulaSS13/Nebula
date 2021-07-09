@@ -332,8 +332,8 @@ var/global/list/meteors_cataclysm = list(\
 /obj/effect/meteor/supermatter
 	name = "supermatter shard"
 	desc = "Oh god, what will be next..?"
-	icon = 'icons/obj/supermatter.dmi'
-	icon_state = "darkmatter_meteor"
+	icon = 'icons/obj/supermatter_32.dmi'
+	icon_state = "supermatter"
 
 /obj/effect/meteor/supermatter/meteor_effect()
 	..()
