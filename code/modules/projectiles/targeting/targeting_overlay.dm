@@ -140,26 +140,27 @@
 		return
 
 	if(owner.incapacitated())
-		to_chat(owner, "<span class='warning'>You cannot aim a gun in your current state.</span>")
+		to_chat(owner, SPAN_WARNING("You cannot You cannot threaten \the [target] with \the [thing] in your current state."))
 		return
 	if(owner.lying)
-		to_chat(owner, "<span class='warning'>You cannot aim a gun while prone.</span>")
+		to_chat(owner, SPAN_WARNING("You cannot threaten \the [target] with \the [thing] while prone."))
 		return
 	if(owner.restrained())
-		to_chat(owner, "<span class='warning'>You cannot aim a gun while handcuffed.</span>")
+		to_chat(owner, SPAN_WARNING("You cannot threaten \the [target] with \the [thing] while handcuffed."))
 		return
 
 	if(aiming_at)
 		if(aiming_at == target)
 			return
 		cancel_aiming(1)
-		owner.visible_message("<span class='danger'>\The [owner] turns \the [thing] on \the [target]!</span>")
+		owner.visible_message(SPAN_DANGER("\The [owner] turns \the [thing] on \the [target]!"))
 	else
-		owner.visible_message("<span class='danger'>\The [owner] aims \the [thing] at \the [target]!</span>")
+		owner.visible_message(SPAN_DANGER("\The [owner] aims \the [thing] at \the [target]!"))
 
 	if(owner.client)
 		owner.client.add_gun_icons()
-	to_chat(target, "<span class='danger'>You now have a gun pointed at you. No sudden moves!</span>")
+	var/decl/pronouns/pronouns = owner.get_pronouns()
+	to_chat(target, FONT_LARGE(SPAN_DANGER("\The [owner] [pronouns.is] menacing you with \a [thing]. No sudden moves!")))
 	aiming_with = thing
 	aiming_at = target
 	if(istype(aiming_with, /obj/item/gun))
