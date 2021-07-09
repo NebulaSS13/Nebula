@@ -62,17 +62,14 @@
 /obj/item/storage/cigpaper/fancy
 	name = "\improper Trident cigarette paper"
 	desc = "A fancy brand of Trident cigarette paper, for rolling your own cigarettes. Like a person who appreciates the finer things in life."
-	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "fancycigpaperbook"
 	startswith = list(/obj/item/paper/cig/fancy = 10)
 
 /obj/item/storage/cigpaper/filters
 	name = "box of cigarette filters"
 	desc = "A box of generic cigarette filters for those who rolls their own but prefers others to inhale the fumes. Not endorsed by Late General Osmundsun."
-	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "filterbin"
 	startswith = list(/obj/item/paper/cig/filter = 10)
-
 /obj/item/storage/chewables
 	name = "box of chewing wads master"
 	desc = "A generic brands of Waffle Co Wads, unflavored chews. Why do these exist?"

@@ -23,9 +23,13 @@
 	icon_state = "cig_paper"
 	w_class = ITEM_SIZE_TINY
 
+/obj/item/paper/cig/on_update_icon()
+	. = ..()
+	icon_state = initial(icon_state)
+
 /obj/item/paper/cig/fancy
 	name = "\improper Trident rolling paper"
-	desc = "A thin piece of trident branded paper used to make fine smokeables."
+	desc = "A thin piece of Trident-branded paper used to make fine smokeables."
 	icon_state = "cig_paperf"
 
 /obj/item/paper/cig/filter
