@@ -166,4 +166,5 @@
 	var/old_lying = lying
 	. = ..()
 	if(lying && !old_lying && !resting && !buckled) // fell down
-		playsound(loc, species.bodyfall_sound, 50, TRUE, -1)
+		var/decl/bodytype/B = get_bodytype()
+		playsound(loc, pick(B.bodyfall_sounds), 50, TRUE, -1)
