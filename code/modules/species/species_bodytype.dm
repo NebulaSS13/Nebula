@@ -63,6 +63,10 @@
 		'sound/foley/meat2.ogg'
 	)
 
+	var/list/synthetic_bodyfall_sounds = list(
+		'sound/foley/metal1.ogg'
+	)
+
 /decl/bodytype/Initialize()
 	. = ..()
 	if(!icon_deformed)

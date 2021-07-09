@@ -4,10 +4,6 @@
 	bodytype_category = BODYTYPE_HUMANOID
 	limb_blend =        ICON_MULTIPLY
 
-	bodyfall_sounds = list(
-		'sound/foley/metal1.ogg'
-	)
-
 /decl/bodytype/utility_frame/Initialize()
 	equip_adjust = list(
 		"[slot_l_ear_str]" =  list(
