@@ -38,8 +38,6 @@
 	passive_temp_gain =     5  // stabilize at ~80 C in a 20 C environment.
 	heat_discomfort_level = 373.15
 
-	bodyfall_sound = "bodyfall_machine"
-
 	heat_discomfort_strings = list(
 		"You are dangerously close to overheating!"
 	)
