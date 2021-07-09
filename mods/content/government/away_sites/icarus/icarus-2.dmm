@@ -171,7 +171,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aM" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aN" = (
@@ -191,7 +191,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aQ" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/flashlight/flare,
 /obj/item/flashlight/flare,
 /obj/item/flashlight/flare,
@@ -247,7 +247,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aY" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/airlock_brace,
 /obj/item/airlock_brace,
 /obj/item/airlock_brace,
@@ -320,7 +320,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bi" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/box/teargas{
 	pixel_x = 3;
 	pixel_y = 2
@@ -333,7 +333,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/icarus/vessel)
 "bj" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/shotgun/pump,
 /obj/item/gun/projectile/shotgun/pump,
 /turf/simulated/floor/plating,
@@ -374,13 +374,13 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "bq" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/baton,
 /obj/item/baton,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "br" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/handcuffs,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
@@ -827,7 +827,7 @@
 /turf/simulated/floor/plating,
 /area/icarus/open)
 "cM" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tool,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
@@ -864,7 +864,7 @@
 /turf/simulated/open,
 /area/icarus/open)
 "cS" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tech_supply,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
@@ -916,14 +916,14 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/window/reinforced{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cZ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/reagentgrinder/juicer,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -931,12 +931,12 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/box/monkeycubes,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "db" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/box/beakers,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1060,7 +1060,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "ds" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tool,
 /obj/random/powercell,
 /turf/simulated/floor/tiled,
@@ -1152,7 +1152,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dH" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/flashlight/lamp,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1452,11 +1452,11 @@
 /turf/simulated/floor/shuttle/white,
 /area/icarus/vessel)
 "eD" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /turf/simulated/floor/shuttle/white,
 /area/icarus/vessel)
 "eE" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/mask/breath/emergency,
 /turf/simulated/floor/shuttle/white,
 /area/icarus/vessel)

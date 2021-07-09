@@ -823,7 +823,7 @@
 /area/map_template/merc_shuttle)
 "bt" = (
 /obj/item/storage/firstaid/surgery,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/stack/nanopaste,
 /obj/machinery/light{
 	dir = 8;
@@ -1961,7 +1961,7 @@
 /turf/space,
 /area/space)
 "hk" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/tank/jetpack/oxygen,
 /obj/item/tank/jetpack/oxygen,
 /obj/item/tank/jetpack/oxygen,
@@ -1986,7 +1986,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "hX" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/revolver,
 /obj/item/gun/projectile/revolver,
 /obj/item/ammo_magazine/speedloader,
@@ -2002,7 +2002,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "iB" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/pistol,
 /obj/item/gun/projectile/pistol,
 /obj/item/ammo_magazine/pistol,
@@ -2021,7 +2021,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "js" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/accessory/storage/vest/brown,
 /obj/item/clothing/accessory/storage/vest/brown,
 /obj/item/clothing/accessory/storage/vest,
@@ -2070,7 +2070,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "kf" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/energy/gun,
 /obj/item/gun/energy/gun,
 /obj/effect/landmark/delete_on_shuttle{
@@ -2079,7 +2079,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "km" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/pickaxe/diamonddrill,
 /obj/item/pickaxe/diamonddrill,
 /obj/structure/railing/mapped/no_density{
@@ -2126,7 +2126,7 @@
 /turf/space,
 /area/space)
 "lh" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/energy/gun/small,
 /obj/item/gun/energy/gun/small,
 /obj/effect/landmark/delete_on_shuttle{
@@ -2148,7 +2148,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "lQ" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/accessory/storage/drop_pouches/white,
 /obj/item/clothing/accessory/storage/drop_pouches/white,
 /obj/item/clothing/accessory/storage/drop_pouches/black,
@@ -2334,24 +2334,24 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "uV" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/effect/landmark{
 	name = "Nuclear-Code"
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "va" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/modular_computer/pda/syndicate,
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "vg" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/backpack/dufflebag/syndie/ammo,
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "vM" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/rcd,
 /obj/item/rcd,
 /obj/item/rcd_ammo/large,
@@ -2397,7 +2397,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "xi" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/rig/merc/empty,
 /obj/item/rig/merc/empty,
 /turf/simulated/floor/plating,
@@ -2419,7 +2419,7 @@
 /obj/item/storage/box/smokes,
 /obj/item/storage/box/teargas,
 /obj/item/storage/box/flashbangs,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/grenade/anti_photon,
 /obj/item/grenade/anti_photon,
 /obj/item/grenade/anti_photon,
@@ -2455,7 +2455,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "Fm" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/gloves/insulated,
 /obj/item/clothing/gloves/insulated,
 /obj/item/clothing/gloves/insulated,
@@ -2516,7 +2516,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "Hg" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/energy/plasmacutter,
 /obj/item/gun/energy/plasmacutter,
 /obj/structure/window/reinforced{
@@ -2574,7 +2574,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "IB" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/energy/ionrifle,
 /obj/effect/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
@@ -2603,7 +2603,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "Kz" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/rpd,
 /obj/item/rpd,
 /obj/structure/railing/mapped/no_density{
@@ -2620,7 +2620,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "LD" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/accessory/storage/bandolier,
 /obj/item/clothing/accessory/storage/bandolier,
 /obj/item/clothing/accessory/storage/bandolier,
@@ -2661,7 +2661,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "MO" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/suit/armor/pcarrier/merc,
 /obj/item/clothing/suit/armor/pcarrier/merc,
 /obj/item/clothing/suit/armor/pcarrier/merc,
@@ -2672,7 +2672,7 @@
 /area/map_template/merc_spawn)
 "MZ" = (
 /obj/effect/spawner/newbomb/timer/syndicate,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/effect/spawner/newbomb/timer/syndicate,
 /obj/item/assembly/signaler{
 	pixel_y = 2
@@ -2737,7 +2737,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "PE" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/glasses/night,
 /obj/item/clothing/glasses/night,
 /obj/item/clothing/glasses/night,
@@ -2783,14 +2783,14 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "QF" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/suit_cooling_unit,
 /obj/item/suit_cooling_unit,
 /obj/item/suit_cooling_unit,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "QJ" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/belt/utility/full,
 /obj/item/storage/belt/utility/full,
 /obj/item/storage/belt/utility/full,
@@ -2801,7 +2801,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "QX" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/rig/merc/heavy/empty,
 /obj/item/rig/merc/heavy/empty,
 /turf/simulated/floor/plating,
@@ -2833,7 +2833,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "Tf" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/shield/energy,
 /obj/item/shield/energy,
 /obj/item/shield/energy,
@@ -2921,7 +2921,7 @@
 /turf/simulated/wall/titanium,
 /area/map_template/merc_spawn)
 "Ya" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/structure/window/reinforced{
 	dir = 4
 	},

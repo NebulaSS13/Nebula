@@ -71,9 +71,12 @@
 /obj/structure/catwalk/create_dismantled_products(var/turf/T)
 	if(material)
 		material.create_object(get_turf(src), 2, /obj/item/stack/material/rods)
+		matter -= material.type
+		material = null
 	if(plated_tile)
 		var/plate_path = plated_tile.build_type
 		new plate_path(T)
+	. = ..()
 
 /obj/structure/catwalk/explosion_act(severity)
 	..()
