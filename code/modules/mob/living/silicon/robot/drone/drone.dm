@@ -27,7 +27,7 @@
 	mob_push_flags = SIMPLE_ANIMAL
 	mob_always_swap = 1
 
-	mob_size = MOB_SIZE_MEDIUM // Small mobs can't open doors, it's a huge pain for drones.
+	mob_size = MOB_SIZE_SMALL
 
 	laws = /datum/ai_laws/drone
 
