@@ -29,7 +29,7 @@
 	var/obj/item/assembly/igniter/igniter = null
 	var/obj/item/tank/tank = null
 
-/obj/item/flamethrower/Initialize(mapload, welder)
+/obj/item/flamethrower/Initialize(ml, material_key, welder)
 	. = ..()
 	if(welder)
 		welding_tool = welder
@@ -37,9 +37,9 @@
 
 	update_icon()
 
-/obj/item/flamethrower/examine(mob/user)
+/obj/item/flamethrower/examine(mob/user, distance)
 	. = ..()
-	if(Adjacent(user))
+	if(distance <= 1)
 		if(tank)
 			to_chat(user, SPAN_NOTICE("Release pressure is set to [throw_amount] kPa. The tank has about [round(tank.air_contents.return_pressure(), 10)] kPa left in it."))
 		else
@@ -118,15 +118,15 @@
 	if(isWrench(W) && !secured)//Taking this apart
 		var/turf/T = get_turf(src)
 		if(welding_tool)
-			welding_tool.forceMove(T)
+			welding_tool.dropInto(T)
 			welding_tool = null
 
 		if(igniter)
-			igniter.forceMove(T)
+			igniter.dropInto(T)
 			igniter = null
 
 		if(tank)
-			tank.forceMove(T)
+			tank.dropInto(T)
 			tank = null
 
 		SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), 1, /obj/item/stack/material/rods)

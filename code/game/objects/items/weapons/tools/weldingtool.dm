@@ -87,16 +87,12 @@
 
 /obj/item/weldingtool/attackby(obj/item/W, mob/user)
 	if(welding)
-		to_chat(user, SPAN_DANGER("Stop welding first!"))
+		to_chat(user, SPAN_WARNING("Stop welding first!"))
 		return
 
 	if(isScrewdriver(W))
 		if(isrobot(loc))
 			to_chat(user, SPAN_WARNING("You cannot modify your own welder!"))
-			return
-
-		if(welding)
-			to_chat(user, SPAN_DANGER("Stop welding first!"))
 			return
 
 		status = !status
@@ -109,12 +105,12 @@
 		add_fingerprint(user)
 		return
 
-	if(!status && (istype(W, /obj/item/stack/material/rods)))
+	if(!status && istype(W, /obj/item/stack/material/rods))
 		var/obj/item/stack/material/rods/R = W
 		R.use(1)
 		add_fingerprint(user)
 		user.drop_from_inventory(src)
-		var/obj/item/flamethrower/F = new /obj/item/flamethrower(get_turf(src), src)
+		var/obj/item/flamethrower/F = new(get_turf(src), src)
 		user.put_in_hands(F)
 		return
 
