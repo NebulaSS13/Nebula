@@ -1,0 +1,4 @@
+// CC BY-NC 3.0
+foley/meat1.ogg - Obtained from https://freesound.org/people/MWLANDI/sounds/85846
+foley/meat2.ogg - Obtained from https://freesound.org/people/MWLANDI/sounds/85845
+foley/metal1.ogg - Obtained from https://freesound.org/people/Debsound/sounds/168822
