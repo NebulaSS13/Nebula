@@ -162,7 +162,7 @@
 		/obj/item/seeds/shandseed = 15,
 		/obj/item/seeds/tobaccoseed = 15,
 		/obj/item/seeds/tomatoseed = 15,
-		/obj/item/seeds/corkwood = 15,
+		/obj/item/seeds/towercap = 15,
 		/obj/item/seeds/watermelonseed = 15,
 		/obj/item/seeds/wheatseed = 15,
 		/obj/item/seeds/whitebeetseed = 15,

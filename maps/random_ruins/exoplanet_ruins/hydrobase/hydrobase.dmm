@@ -2539,7 +2539,7 @@
 "fS" = (
 /obj/structure/catwalk,
 /obj/machinery/portable_atmospherics/hydroponics,
-/obj/item/seeds/corkwood,
+/obj/item/seeds/towercap,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growB)
 "fT" = (
@@ -2637,7 +2637,7 @@
 	pixel_y = 0
 	},
 /obj/machinery/portable_atmospherics/hydroponics,
-/obj/item/seeds/corkwood,
+/obj/item/seeds/towercap,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growB)
 "gd" = (
