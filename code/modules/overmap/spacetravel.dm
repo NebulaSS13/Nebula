@@ -20,6 +20,7 @@ var/global/list/cached_space = list()
 	for(var/num in map_z)
 		map_sectors["[num]"] = null
 	testing("Temporary sector at [x],[y] was deleted.")
+	global.cached_space -= src
 	return ..()
 
 /obj/effect/overmap/visitable/sector/temporary/proc/can_die(var/mob/observer)
@@ -34,13 +35,13 @@ var/global/list/cached_space = list()
 	var/obj/effect/overmap/visitable/sector/temporary/res = locate(x,y,global.using_map.overmap_z)
 	if(istype(res))
 		return res
-	else if(cached_space.len)
-		res = cached_space[cached_space.len]
-		cached_space -= res
-		res.forceMove(locate(x, y, global.using_map.overmap_z))
-		return res
-	else
-		return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, global.using_map.get_empty_zlevel())
+	else if(length(global.cached_space))
+		res = global.cached_space[length(global.cached_space)]
+		global.cached_space -= res
+		if(istype(res) && !QDELETED(res))
+			res.forceMove(locate(x, y, global.using_map.overmap_z))
+			return res
+	return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, global.using_map.get_empty_zlevel())
 
 /atom/movable/proc/lost_in_space()
 	for(var/atom/movable/AM in contents)
@@ -109,7 +110,8 @@ var/global/list/cached_space = list()
 
 	if(istype(M, /obj/effect/overmap/visitable/sector/temporary))
 		var/obj/effect/overmap/visitable/sector/temporary/source = M
-		if (source.can_die())
-			testing("Caching [M] for future use")
+		if(source.can_die())
 			source.forceMove(null)
-			cached_space += source
+			if(!QDELETED(source))
+				testing("Caching [M] for future use")
+				global.cached_space |= source
