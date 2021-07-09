@@ -118,3 +118,12 @@ var/global/list/tray_hit_sound = list(
 	'sound/items/trayhit1.ogg',
 	'sound/items/trayhit2.ogg'
 )
+
+var/global/list/bodyfall_sound = list(
+	'sound/foley/meat1.ogg',
+	'sound/foley/meat2.ogg'
+)
+
+var/global/list/bodyfall_sound_machine = list(
+	'sound/foley/metal1.ogg'
+)
