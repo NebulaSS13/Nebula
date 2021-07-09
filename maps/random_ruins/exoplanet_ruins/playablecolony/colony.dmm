@@ -6187,7 +6187,7 @@
 /area/map_template/colony/mineralprocessing)
 "kM" = (
 /obj/structure/crematorium{
-	id = 8
+	id_tag = "playablecolony_crematorium"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/decal/cleanable/dirt,
@@ -6195,7 +6195,7 @@
 /area/map_template/colony/mineralprocessing)
 "kN" = (
 /obj/machinery/button/crematorium{
-	id_tag = 8;
+	id_tag = "playablecolony_crematorium";
 	pixel_y = 25;
 	req_access = list()
 	},
