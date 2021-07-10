@@ -792,3 +792,34 @@ var/global/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/get_admin_job_string()
 	return "AI"
+
+/mob/living/silicon/ai/eastface()
+	set hidden = TRUE
+
+	if(holo)
+		holo.set_dir_hologram(client.client_dir(EAST), src)
+	return facedir(client.client_dir(EAST))
+
+
+/mob/living/silicon/ai/westface()
+	set hidden = TRUE
+
+	if(holo)
+		holo.set_dir_hologram(client.client_dir(WEST), src)
+	return facedir(client.client_dir(WEST))
+
+
+/mob/living/silicon/ai/northface()
+	set hidden = TRUE
+
+	if(holo)
+		holo.set_dir_hologram(client.client_dir(NORTH), src)
+	return facedir(client.client_dir(NORTH))
+
+
+/mob/living/silicon/ai/southface()
+	set hidden = TRUE
+
+	if(holo)
+		holo.set_dir_hologram(client.client_dir(SOUTH), src)
+	return facedir(client.client_dir(SOUTH))
