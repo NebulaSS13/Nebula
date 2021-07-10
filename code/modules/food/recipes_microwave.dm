@@ -24,13 +24,7 @@ I said no!
 	items = list(
 		/obj/item/chems/food/snacks/egg
 	)
-	result = /obj/item/chems/food/snacks/friedegg
-
-/decl/recipe/friedegg2
-	items = list(
-		/obj/item/chems/food/snacks/egg,
-		/obj/item/chems/food/snacks/egg,
-	)
+	reagent_mix = REAGENT_REPLACE // no raw egg
 	result = /obj/item/chems/food/snacks/friedegg
 
 /decl/recipe/boiledegg
@@ -38,6 +32,7 @@ I said no!
 	items = list(
 		/obj/item/chems/food/snacks/egg
 	)
+	reagent_mix = REAGENT_REPLACE // no raw egg or water
 	result = /obj/item/chems/food/snacks/boiledegg
 
 /decl/recipe/classichotdog
@@ -133,8 +128,7 @@ I said no!
 
 /decl/recipe/bunbun
 	items = list(
-		/obj/item/chems/food/snacks/bun,
-		/obj/item/chems/food/snacks/bun
+		/obj/item/chems/food/snacks/bun = 2
 	)
 	result = /obj/item/chems/food/snacks/bunbun
 
@@ -169,24 +163,15 @@ I said no!
 	being_cooked.heat()
 
 /decl/recipe/donkpocket/make_food(var/obj/container)
-	var/obj/item/chems/food/snacks/donkpocket/being_cooked = ..(container)
-	warm_up(being_cooked)
-	return being_cooked
+	. = ..(container)
+	for(var/obj/item/chems/food/snacks/donkpocket/being_cooked in .)
+		warm_up(being_cooked)
 
-/decl/recipe/donkpocket2
+/decl/recipe/donkpocket/rawmeatball
 	items = list(
 		/obj/item/chems/food/snacks/doughslice,
 		/obj/item/chems/food/snacks/rawmeatball
 	)
-	result = /obj/item/chems/food/snacks/donkpocket //SPECIAL
-
-/decl/recipe/donkpocket2/proc/warm_up(var/obj/item/chems/food/snacks/donkpocket/being_cooked)
-	being_cooked.heat()
-
-/decl/recipe/donkpocket2/make_food(var/obj/container)
-	var/obj/item/chems/food/snacks/donkpocket/being_cooked = ..(container)
-	warm_up(being_cooked)
-	return being_cooked
 
 /decl/recipe/donkpocket/warm
 	reagents = list() //This is necessary since this is a child object of the above recipe and we don't want donk pockets to need flour
@@ -195,31 +180,34 @@ I said no!
 	)
 	result = /obj/item/chems/food/snacks/donkpocket //SPECIAL
 
+/decl/recipe/donkpocket/warm/check_items(obj/container)
+	. = ..()
+	if(!.)
+		return FALSE
+	for(var/obj/item/chems/food/snacks/donkpocket/being_cooked in container.get_contained_external_atoms())
+		if(!being_cooked.warm)
+			return TRUE
+	return FALSE
+
 /decl/recipe/donkpocket/warm/make_food(var/obj/container)
-	var/obj/item/chems/food/snacks/donkpocket/being_cooked = locate() in container
-	if(being_cooked && !being_cooked.warm)
-		warm_up(being_cooked)
-	return being_cooked
+	for(var/obj/item/chems/food/snacks/donkpocket/being_cooked in container.get_contained_external_atoms())
+		if(!being_cooked.warm)
+			warm_up(being_cooked)
+			return list(being_cooked)
 
 /decl/recipe/meatbread
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/cutlet,
-		/obj/item/chems/food/snacks/cutlet,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/snacks/dough = 2,
+		/obj/item/chems/food/snacks/cutlet = 2,
+		/obj/item/chems/food/snacks/cheesewedge = 2,
 	)
 	result = /obj/item/chems/food/snacks/sliceable/meatbread
 
 /decl/recipe/xenomeatbread
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/xenomeat,
-		/obj/item/chems/food/snacks/xenomeat,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/snacks/dough = 2,
+		/obj/item/chems/food/snacks/xenomeat = 2,
+		/obj/item/chems/food/snacks/cheesewedge = 2,
 	)
 	result = /obj/item/chems/food/snacks/sliceable/xenomeatbread
 
@@ -227,17 +215,16 @@ I said no!
 	fruit = list("banana" = 2)
 	reagents = list(/decl/material/liquid/drink/milk = 5, /decl/material/liquid/nutriment/sugar = 5)
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
+		/obj/item/chems/food/snacks/dough = 2,
 	)
 	result = /obj/item/chems/food/snacks/sliceable/bananabread
 
 /decl/recipe/omelette
 	items = list(
-		/obj/item/chems/food/snacks/egg,
-		/obj/item/chems/food/snacks/egg,
+		/obj/item/chems/food/snacks/egg = 2,
 		/obj/item/chems/food/snacks/cheesewedge,
 	)
+	reagent_mix = REAGENT_REPLACE // no raw egg
 	result = /obj/item/chems/food/snacks/omelette
 
 /decl/recipe/muffin
@@ -247,22 +234,22 @@ I said no!
 /decl/recipe/eggplantparm
 	fruit = list("eggplant" = 1)
 	items = list(
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge
+		/obj/item/chems/food/snacks/cheesewedge = 2
 		)
 	result = /obj/item/chems/food/snacks/eggplantparm
 
 /decl/recipe/soylenviridians
 	fruit = list("soybeans" = 1)
 	reagents = list(/decl/material/liquid/nutriment/flour = 10)
+	reagent_mix = REAGENT_REPLACE // no raw flour
 	result = /obj/item/chems/food/snacks/soylenviridians
 
 /decl/recipe/soylentgreen
 	reagents = list(/decl/material/liquid/nutriment/flour = 10)
 	items = list(
-		/obj/item/chems/food/snacks/meat/human,
-		/obj/item/chems/food/snacks/meat/human
+		/obj/item/chems/food/snacks/meat/human = 2
 	)
+	reagent_mix = REAGENT_REPLACE // no raw flour
 	result = /obj/item/chems/food/snacks/soylentgreen
 
 /decl/recipe/meatpie
@@ -317,30 +304,22 @@ I said no!
 /decl/recipe/meatkabob
 	items = list(
 		/obj/item/stack/material/rods,
-		/obj/item/chems/food/snacks/cutlet,
-		/obj/item/chems/food/snacks/cutlet
+		/obj/item/chems/food/snacks/cutlet = 2
 	)
 	result = /obj/item/chems/food/snacks/meatkabob
 
 /decl/recipe/tofukabob
 	items = list(
 		/obj/item/stack/material/rods,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/tofu,
+		/obj/item/chems/food/snacks/tofu = 2,
 	)
 	result = /obj/item/chems/food/snacks/tofukabob
 
 /decl/recipe/tofubread
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/snacks/dough = 3,
+		/obj/item/chems/food/snacks/tofu = 3,
+		/obj/item/chems/food/snacks/cheesewedge = 3,
 	)
 	result = /obj/item/chems/food/snacks/sliceable/tofubread
 
@@ -371,7 +350,7 @@ I said no!
 
 /decl/recipe/cookie
 	reagents = list(/decl/material/liquid/nutriment/batter/cakebatter = 5, /decl/material/liquid/nutriment/coco = 5)
-
+	reagent_mix = REAGENT_REPLACE // no raw batter
 	result = /obj/item/chems/food/snacks/cookie
 
 /decl/recipe/fortunecookie
@@ -421,9 +400,7 @@ I said no!
 	fruit = list("tomato" = 1)
 	items = list(
 		/obj/item/chems/food/snacks/sliceable/flatdough,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/snacks/cheesewedge = 3,
 	)
 	result = /obj/item/chems/food/snacks/sliceable/pizza/margherita
 
@@ -431,8 +408,7 @@ I said no!
 	fruit = list("tomato" = 1)
 	items = list(
 		/obj/item/chems/food/snacks/sliceable/flatdough,
-		/obj/item/chems/food/snacks/cutlet,
-		/obj/item/chems/food/snacks/cutlet,
+		/obj/item/chems/food/snacks/cutlet = 2,
 		/obj/item/chems/food/snacks/cheesewedge
 	)
 	result = /obj/item/chems/food/snacks/sliceable/pizza/meatpizza
@@ -470,11 +446,13 @@ I said no!
 	fruit = list("carrot" = 1, "potato" = 1)
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(/obj/item/chems/food/snacks/meatball)
+	reagent_mix = REAGENT_REPLACE // Remove extra water
 	result = /obj/item/chems/food/snacks/meatballsoup
 
 /decl/recipe/vegetablesoup
 	fruit = list("carrot" = 1, "potato" = 1, "corn" = 1, "eggplant" = 1)
 	reagents = list(/decl/material/liquid/water = 10)
+	reagent_mix = REAGENT_REPLACE // Remove extra water
 	result = /obj/item/chems/food/snacks/vegetablesoup
 
 /decl/recipe/nettlesoup
@@ -483,10 +461,12 @@ I said no!
 	items = list(
 		/obj/item/chems/food/snacks/egg
 	)
+	reagent_mix = REAGENT_REPLACE // Remove extra water and egg
 	result = /obj/item/chems/food/snacks/nettlesoup
 
 /decl/recipe/wishsoup
 	reagents = list(/decl/material/liquid/water = 20)
+	reagent_mix = REAGENT_REPLACE // Remove extra water
 	result= /obj/item/chems/food/snacks/wishsoup
 
 /decl/recipe/hotchili
@@ -519,10 +499,10 @@ I said no!
 /decl/recipe/bigbiteburger
 	items = list(
 		/obj/item/chems/food/snacks/meatburger,
-		/obj/item/chems/food/snacks/meat,
-		/obj/item/chems/food/snacks/meat,
+		/obj/item/chems/food/snacks/meat = 2,
 		/obj/item/chems/food/snacks/egg,
 	)
+	reagent_mix = REAGENT_REPLACE // no raw egg
 	result = /obj/item/chems/food/snacks/bigbiteburger
 
 /decl/recipe/enchiladas
@@ -532,10 +512,8 @@ I said no!
 
 /decl/recipe/creamcheesebread
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge,
+		/obj/item/chems/food/snacks/dough = 2,
+		/obj/item/chems/food/snacks/cheesewedge = 2,
 	)
 	result = /obj/item/chems/food/snacks/sliceable/creamcheesebread
 
@@ -550,8 +528,7 @@ I said no!
 /decl/recipe/baguette
 	reagents = list(/decl/material/solid/mineral/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
+		/obj/item/chems/food/snacks/dough = 2,
 	)
 	result = /obj/item/chems/food/snacks/baguette
 
@@ -564,17 +541,16 @@ I said no!
 
 /decl/recipe/bread
 	items = list(
-		/obj/item/chems/food/snacks/dough,
-		/obj/item/chems/food/snacks/dough,
+		/obj/item/chems/food/snacks/dough = 2,
 		/obj/item/chems/food/snacks/egg
 	)
+	reagent_mix = REAGENT_REPLACE // no raw egg/flour
 	result = /obj/item/chems/food/snacks/sliceable/bread
 
 /decl/recipe/sandwich
 	items = list(
 		/obj/item/chems/food/snacks/meatsteak,
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/snacks/slice/bread = 2,
 		/obj/item/chems/food/snacks/cheesewedge,
 	)
 	result = /obj/item/chems/food/snacks/sandwich
@@ -587,8 +563,7 @@ I said no!
 
 /decl/recipe/grilledcheese
 	items = list(
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/snacks/slice/bread = 2,
 		/obj/item/chems/food/snacks/cheesewedge,
 	)
 	result = /obj/item/chems/food/snacks/grilledcheese
@@ -618,18 +593,15 @@ I said no!
 /decl/recipe/milosoup
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(
-		/obj/item/chems/food/snacks/soydope,
-		/obj/item/chems/food/snacks/soydope,
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/tofu,
+		/obj/item/chems/food/snacks/soydope = 2,
+		/obj/item/chems/food/snacks/tofu = 2,
 	)
 	result = /obj/item/chems/food/snacks/milosoup
 
 /decl/recipe/stewedsoymeat
 	fruit = list("carrot" = 1, "tomato" = 1)
 	items = list(
-		/obj/item/chems/food/snacks/soydope,
-		/obj/item/chems/food/snacks/soydope
+		/obj/item/chems/food/snacks/soydope = 2
 	)
 	result = /obj/item/chems/food/snacks/stewedsoymeat
 
@@ -675,8 +647,7 @@ I said no!
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(
 		/obj/item/chems/food/snacks/spagetti,
-		/obj/item/chems/food/snacks/meatball,
-		/obj/item/chems/food/snacks/meatball,
+		/obj/item/chems/food/snacks/meatball = 2,
 	)
 	result = /obj/item/chems/food/snacks/meatballspagetti
 
@@ -684,10 +655,7 @@ I said no!
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(
 		/obj/item/chems/food/snacks/spagetti,
-		/obj/item/chems/food/snacks/meatball,
-		/obj/item/chems/food/snacks/meatball,
-		/obj/item/chems/food/snacks/meatball,
-		/obj/item/chems/food/snacks/meatball,
+		/obj/item/chems/food/snacks/meatball = 4,
 	)
 	result = /obj/item/chems/food/snacks/spesslaw
 
@@ -731,8 +699,7 @@ I said no!
 /decl/recipe/twobread
 	reagents = list(/decl/material/liquid/ethanol/wine = 5)
 	items = list(
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/snacks/slice/bread = 2,
 	)
 	result = /obj/item/chems/food/snacks/twobread
 
@@ -746,8 +713,7 @@ I said no!
 /decl/recipe/cherrysandwich
 	reagents = list(/decl/material/liquid/nutriment/cherryjelly = 5)
 	items = list(
-		/obj/item/chems/food/snacks/slice/bread,
-		/obj/item/chems/food/snacks/slice/bread,
+		/obj/item/chems/food/snacks/slice/bread = 2,
 	)
 	result = /obj/item/chems/food/snacks/jellysandwich/cherry
 
@@ -760,6 +726,7 @@ I said no!
 		/obj/item/chems/food/snacks/egg,
 		/obj/item/chems/food/snacks/chocolatebar,
 	)
+	reagent_mix = REAGENT_REPLACE // no raw egg
 	result = /obj/item/chems/food/snacks/chocolateegg
 
 /decl/recipe/sausage
@@ -783,6 +750,7 @@ I said no!
 		/obj/item/chems/food/snacks/egg,
 		/obj/item/chems/food/snacks/fish
 	)
+	reagent_mix = REAGENT_REPLACE // no raw egg/fish
 	result = /obj/item/chems/food/snacks/fishfingers
 
 /decl/recipe/mysterysoup
@@ -793,12 +761,14 @@ I said no!
 		/obj/item/chems/food/snacks/egg,
 		/obj/item/chems/food/snacks/cheesewedge,
 	)
+	reagent_mix = REAGENT_REPLACE // Has its own special products
 	result = /obj/item/chems/food/snacks/mysterysoup
 
 /decl/recipe/pumpkinpie
 	fruit = list("pumpkin" = 1)
 	reagents = list(/decl/material/liquid/nutriment/sugar = 5)
 	items = list(/obj/item/chems/food/snacks/sliceable/flatdough)
+	reagent_mix = REAGENT_REPLACE // no raw flour
 	result = /obj/item/chems/food/snacks/sliceable/pumpkinpie
 
 /decl/recipe/plumphelmetbiscuit
@@ -814,15 +784,16 @@ I said no!
 /decl/recipe/mushroomsoup
 	fruit = list("mushroom" = 1)
 	reagents = list(/decl/material/liquid/drink/milk = 10)
+	reagent_mix = REAGENT_REPLACE // get that milk outta here
 	result = /obj/item/chems/food/snacks/mushroomsoup
 
 /decl/recipe/chawanmushi
 	fruit = list("mushroom" = 1)
 	reagents = list(/decl/material/liquid/water = 10, /decl/material/liquid/nutriment/soysauce = 5)
 	items = list(
-		/obj/item/chems/food/snacks/egg,
-		/obj/item/chems/food/snacks/egg
+		/obj/item/chems/food/snacks/egg = 2
 	)
+	reagent_mix = REAGENT_REPLACE // no raw egg
 	result = /obj/item/chems/food/snacks/chawanmushi
 
 /decl/recipe/beetsoup
@@ -833,6 +804,7 @@ I said no!
 /decl/recipe/appletart
 	fruit = list("goldapple" = 1)
 	items = list(/obj/item/chems/food/snacks/sliceable/flatdough)
+	reagent_mix = REAGENT_REPLACE // no raw flour
 	result = /obj/item/chems/food/snacks/appletart
 
 /decl/recipe/tossedsalad
@@ -864,8 +836,7 @@ I said no!
 
 /decl/recipe/tofurkey
 	items = list(
-		/obj/item/chems/food/snacks/tofu,
-		/obj/item/chems/food/snacks/tofu,
+		/obj/item/chems/food/snacks/tofu = 2,
 		/obj/item/chems/food/snacks/stuffing,
 	)
 	result = /obj/item/chems/food/snacks/tofurkey
@@ -924,6 +895,7 @@ I said no!
 // Cakes.
 /decl/recipe/cake
 	reagents = list(/decl/material/liquid/nutriment/batter/cakebatter = 60)
+	reagent_mix = REAGENT_REPLACE // no raw batter
 	result = /obj/item/chems/food/snacks/sliceable/plaincake
 
 /decl/recipe/cake/carrot
@@ -932,8 +904,7 @@ I said no!
 
 /decl/recipe/cake/cheese
 	items = list(
-		/obj/item/chems/food/snacks/cheesewedge,
-		/obj/item/chems/food/snacks/cheesewedge
+		/obj/item/chems/food/snacks/cheesewedge = 2
 	)
 	result = /obj/item/chems/food/snacks/sliceable/cheesecake
 
@@ -978,8 +949,7 @@ I said no!
 
 /decl/recipe/pelmen
 	items = list(
-		/obj/item/chems/food/snacks/doughslice,
-		/obj/item/chems/food/snacks/doughslice,
+		/obj/item/chems/food/snacks/doughslice = 2,
 		/obj/item/chems/food/snacks/rawmeatball
 	)
 	result = /obj/item/chems/food/snacks/pelmen
@@ -987,10 +957,6 @@ I said no!
 /decl/recipe/pelmeni_boiled
 	reagents = list(/decl/material/liquid/water = 10)
 	items = list(
-		/obj/item/chems/food/snacks/pelmen,
-		/obj/item/chems/food/snacks/pelmen,
-		/obj/item/chems/food/snacks/pelmen,
-		/obj/item/chems/food/snacks/pelmen,
-		/obj/item/chems/food/snacks/pelmen
+		/obj/item/chems/food/snacks/pelmen = 5
 	)
 	result = /obj/item/chems/food/snacks/pelmeni_boiled
