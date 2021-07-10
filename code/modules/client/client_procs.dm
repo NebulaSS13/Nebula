@@ -185,9 +185,10 @@ var/global/list/localhost_addresses = list(
 	prefs = SScharacter_setup.preferences_datums[ckey]
 	if(!prefs)
 		prefs = new /datum/preferences(src)
-	prefs.last_ip = address				//these are gonna be used for banning
-	prefs.last_id = computer_id			//these are gonna be used for banning
-	apply_fps(prefs.clientfps)
+
+	// these are gonna be used for banning
+	prefs.last_ip = address
+	prefs.last_id = computer_id
 
 	if(!isnull(config.lock_client_view_x) && !isnull(config.lock_client_view_y))
 		view = "[config.lock_client_view_x]x[config.lock_client_view_y]"
@@ -218,12 +219,6 @@ var/global/list/localhost_addresses = list(
 
 	send_resources()
 
-	if(prefs.lastchangelog != changelog_hash) //bolds the changelog button on the interface so we know there are updates.
-		to_chat(src, "<span class='info'>You have unread updates in the changelog.</span>")
-		winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold")
-		if(config.aggressive_changelog)
-			src.changes()
-
 	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
 		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
 
@@ -235,7 +230,6 @@ var/global/list/localhost_addresses = list(
 
 	if(prefs && !istype(mob, world.mob))
 		prefs.apply_post_login_preferences()
-
 	//////////////
 	//DISCONNECT//
 	//////////////

@@ -93,7 +93,7 @@ var/global/list/gear_datums = list()
 			for(var/gear_name in gears)
 				var/mob/user = preference_mob()
 				var/decl/loadout_option/LO = global.gear_datums[gear_name]
-				if(!LO.can_be_taken_by(user, pref) || !LO.can_afford(user, pref))
+				if(!LO || !LO.can_be_taken_by(user, pref) || !LO.can_afford(user, pref))
 					gears -= gear_name
 				else
 					pref.total_loadout_cost += LO.cost
