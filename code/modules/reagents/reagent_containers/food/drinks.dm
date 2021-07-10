@@ -254,6 +254,7 @@
 	amount_per_transfer_from_this = 10
 	volume = 120
 	center_of_mass = @"{'x':17,'y':7}"
+	material = /decl/material/solid/stone/ceramic
 
 /obj/item/chems/food/drinks/pitcher
 	name = "insulated pitcher"
@@ -264,6 +265,7 @@
 	center_of_mass = @"{'x':16,'y':9}"
 	filling_states = @"[15,30,50,70,85,100]"
 	base_icon = "pitcher"
+	material = /decl/material/solid/metal/stainlesssteel
 
 /obj/item/chems/food/drinks/flask
 	name = "\improper Captain's flask"
