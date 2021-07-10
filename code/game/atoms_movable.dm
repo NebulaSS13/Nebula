@@ -318,3 +318,29 @@
 /atom/movable/proc/pushed(var/pushdir)
 	set waitfor = FALSE
 	step(src, pushdir)
+
+/atom/movable/do_radial_menu(mob/user)
+	var/list/options = list(
+		"Examine" = image('icons/screen/radial.dmi', "radial_examine2"),
+		"Pull" = image('icons/screen/radial.dmi', "radial_pull"),
+		"Point" = image('icons/screen/radial.dmi', "radial_point")
+	)
+
+	if(!Adjacent(user))
+		options -= "Pull"
+
+	return do_radial_choice(show_radial_menu(user, src, options, tooltips = TRUE), user)
+
+/atom/movable/do_radial_choice(choice, mob/user)
+	switch(choice)
+		if("Examine")
+			examine(user)
+			return TRUE
+		if("Pull")
+			CtrlClick(user)
+			return TRUE
+		if("Point")
+			user.pointed(src)
+			return TRUE
+	return FALSE
+
