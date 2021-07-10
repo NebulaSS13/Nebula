@@ -376,3 +376,10 @@
 
 /turf/simulated/floor/glass/boro
 	initial_flooring = /decl/flooring/glass/boro
+
+//Water go splish
+/turf/simulated/floor/pool
+	name = "pool floor"
+	icon = 'icons/turf/flooring/pool.dmi'
+	icon_state = "pool"
+	initial_flooring = /decl/flooring/pool

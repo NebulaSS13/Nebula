@@ -51,6 +51,8 @@
 	//There are no lists for spaces
 	var/z_flags //same z flags used for turfs, i.e ZMIMIC_DEFAULT etc
 
+	var/height = 0
+
 /decl/flooring/proc/on_remove()
 	return
 
@@ -397,3 +399,16 @@
 	build_type = null
 	can_engrave = FALSE
 	footstep_type = /decl/footsteps/snow
+
+/decl/flooring/pool
+	name = "pool floor"
+	desc = "Sunken flooring designed to hold liquids."
+	icon = 'icons/turf/flooring/pool.dmi'
+	icon_base = "pool"
+	build_type = /obj/item/stack/tile/pool
+	flags = TURF_HAS_CORNERS | TURF_HAS_INNER_CORNERS | TURF_REMOVE_CROWBAR
+	footstep_type = /decl/footsteps/tiles
+	floor_smooth = SMOOTH_NONE
+	wall_smooth = SMOOTH_NONE
+	space_smooth = SMOOTH_NONE
+	height = -FLUID_OVER_MOB_HEAD * 2
