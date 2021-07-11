@@ -1,12 +1,12 @@
 #define MAX_INTAKE_ORE_PER_TICK 10
-#define MAX_ORE_REAGENT_CONTENTS 100000
 
 /obj/machinery/material_processing/smeltery
 	name = "electric smelter"
 	icon_state = "furnace"
 	use_ui_template = "material_processing_smeltery.tmpl"
+	var/show_all_materials = FALSE
 	var/list/casting
-	var/list/show_materials = list(
+	var/static/list/always_show_materials = list(
 		/decl/material/solid/metal/iron,
 		/decl/material/solid/metal/gold,
 		/decl/material/solid/metal/uranium,
@@ -15,12 +15,14 @@
 		/decl/material/solid/metal/steel,
 		/decl/material/solid/mineral/graphite
 	)
+	var/list/show_materials
 
 /obj/machinery/material_processing/smeltery/Initialize()
+	show_materials = always_show_materials.Copy()
 	. = ..()
 	atom_flags |= (ATOM_FLAG_OPEN_CONTAINER) //|ATOM_FLAG_NO_DISSOLVE|ATOM_FLAG_NO_PHASE_CHANGE)
 	atom_flags &= ~ATOM_FLAG_NO_TEMP_CHANGE
-	create_reagents(MAX_ORE_REAGENT_CONTENTS)
+	create_reagents(INFINITY)
 	QUEUE_TEMPERATURE_ATOMS(src)
 
 // Outgas anything that is in gas form. Check what you put into the smeltery, nerds.
@@ -48,6 +50,9 @@
 		if(environment)
 			environment.update_values()
 		reagents.update_total()
+
+	for(var/mtype in reagents.reagent_volumes)
+		show_materials |= mtype
 
 /obj/machinery/material_processing/smeltery/ProcessAtomTemperature()
 	if(use_power)
@@ -136,16 +141,12 @@
 	for(var/mtype in show_materials)
 		var/decl/material/mat = GET_DECL(mtype)
 		var/ramt = REAGENT_VOLUME(reagents, mtype) || 0
+		if(ramt <= 0 && !show_all_materials && !(mtype in always_show_materials))
+			continue
 		var/samt = Floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
 		var/obj/item/stack/material/sheet = mat.default_solid_form
 		materials += list(list("label" = "[mat.liquid_name]<br>[ramt]u ([samt] [samt == 1 ? initial(sheet.singular_name) : initial(sheet.plural_name)])", "casting" = (mtype in casting), "key" = "\ref[mat]"))
 		data["materials"] = materials
 	return data
 
-/obj/machinery/material_processing/smeltery/on_reagent_change()
-	. = ..()
-	for(var/mtype in reagents?.reagent_volumes)
-		show_materials |= mtype
-
 #undef MAX_INTAKE_ORE_PER_TICK
-#undef MAX_ORE_REAGENT_CONTENTS
