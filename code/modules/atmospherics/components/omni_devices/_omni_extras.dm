@@ -1,9 +1,9 @@
 //--------------------------------------------
 // Omni device port types
 //--------------------------------------------
-#define ATM_NONE	    0
-#define ATM_INPUT	   	1
-#define ATM_OUTPUT	    2
+#define ATM_NONE		0
+#define ATM_INPUT		1
+#define ATM_OUTPUT		2
 #define ATM_FILTER		3
 
 //--------------------------------------------
