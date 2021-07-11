@@ -105,4 +105,3 @@
 	if(istype(M) && (src in M.component_parts))
 		return
 	..()
-	

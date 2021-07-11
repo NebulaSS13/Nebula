@@ -111,7 +111,8 @@
 		var/decl/material/mat = GET_DECL(mtype)
 		var/ramt = REAGENT_VOLUME(reagents, mtype) || 0
 		var/samt = Floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
-		materials += list(list("label" = "[ramt]u [mat.solid_name] ([samt] ingot\s)", "casting" = (mtype in casting), "key" = "\ref[mat]"))
+		var/obj/item/stack/material/sheet = mat.default_solid_form
+		materials += list(list("label" = "[ramt]u [mat.solid_name] ([samt] [samt == 1 ? initial(sheet.singular_name) : initial(sheet.plural_name)])", "casting" = (mtype in casting), "key" = "\ref[mat]"))
 		data["materials"] = materials
 	return data
 
