@@ -143,9 +143,19 @@
 
 /obj/machinery/power/port_gen/pacman/examine(mob/user)
 	. = ..()
+	. = ..(user)
+	if(active)
+		to_chat(user, "\The [src] appears to be producing [power_gen*power_output] W.")
+	else
+		to_chat(user, "\The [src] is turned off.")
+	if(IsBroken())
+		to_chat(user, SPAN_WARNING("\The [src] seems to have broken down."))
+	if(overheating) 
+		to_chat(user, SPAN_DANGER("\The [src] is overheating!"))
 	if(sheet_path && sheet_material)
 		var/decl/material/mat = GET_DECL(sheet_material)
 		var/obj/item/stack/material/sheet = sheet_path
+		to_chat(user, "There [sheets == 1 ? "is" : "are"] [sheets] [sheets == 1 ? initial(sheet.singular_name) : initial(sheet.plural_name)] left in the hopper.")
 		to_chat(user, SPAN_SUBTLE("\The [src] uses [mat.solid_name] [initial(sheet.plural_name)] as fuel to produce power."))
 
 /obj/machinery/power/port_gen/pacman/Initialize()
@@ -173,11 +183,7 @@
 	..()
 
 /obj/machinery/power/port_gen/pacman/examine(mob/user)
-	. = ..(user)
-	to_chat(user, "\The [src] appears to be producing [power_gen*power_output] W.")
-	to_chat(user, "There [sheets == 1 ? "is" : "are"] [sheets] sheet\s left in the hopper.")
-	if(IsBroken()) to_chat(user, "<span class='warning'>\The [src] seems to have broken down.</span>")
-	if(overheating) to_chat(user, "<span class='danger'>\The [src] is overheating!</span>")
+
 
 /obj/machinery/power/port_gen/pacman/proc/process_exhaust()
 	var/decl/material/mat = GET_DECL(sheet_material)
