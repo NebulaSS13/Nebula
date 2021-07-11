@@ -80,6 +80,18 @@
 	sparse_material_weight = 20
 	rich_material_weight = 16
 
+/decl/material/solid/ice/hydrogen
+	name = "hydrogen"
+	heating_products = list(
+		/decl/material/gas/hydrogen = 0.2,
+		/decl/material/liquid/water = 0.65,
+		/decl/material/gas/hydrogen/deuterium = 0.1,
+		/decl/material/gas/hydrogen/tritium = 0.05
+	)
+	value = 0.3
+	sparse_material_weight = 20
+	rich_material_weight   = 20
+
 ////////////////////////////////////
 // Gas Hydrates/Clathrates
 ////////////////////////////////////
@@ -104,11 +116,6 @@
 //
 // Definitions
 //
-DECLARE_HYDRATE(hydrogen)
-	value = 0.3
-	sparse_material_weight = 20
-	rich_material_weight   = 20
-
 DECLARE_HYDRATE(methane)
 	value = 0.3
 	sparse_material_weight = 10

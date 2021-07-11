@@ -4,7 +4,10 @@
 	name = "metallic hydrogen"
 	color = "#e6c5de"
 	stack_origin_tech = "{'materials':6,'powerstorage':6,'magnets':5}"
-	heating_products = list(/decl/material/gas/hydrogen/tritium = 1)
+	heating_products = list(
+		/decl/material/gas/hydrogen/tritium =   0.7,
+		/decl/material/gas/hydrogen/deuterium = 0.3
+	)
 	heating_point = 990
 	ore_name = "raw hydrogen"
 	ore_scan_icon = "mineral_rare"
