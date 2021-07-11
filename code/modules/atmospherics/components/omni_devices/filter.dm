@@ -52,7 +52,7 @@
 					input = P
 				if(ATM_OUTPUT)
 					output = P
-				if(ATM_O2 to ATM_H2)
+				if(ATM_FILTER)
 					gas_filters += P
 
 /obj/machinery/atmospherics/omni/filter/error_check()
@@ -134,8 +134,8 @@
 			if(ATM_OUTPUT)
 				output = 1
 				is_filter = 0
-			if(ATM_O2 to ATM_H2)
-				f_type = mode_send_switch(P.mode)
+			if(ATM_FILTER)
+				f_type = mode_send_switch(P)
 
 		portData[++portData.len] = list("dir" = dir_name(P.direction, capitalize = 1), \
 										"input" = input, \
@@ -151,20 +151,10 @@
 
 	return data
 
-/obj/machinery/atmospherics/omni/filter/proc/mode_send_switch(var/mode = ATM_NONE)
-	switch(mode)
-		if(ATM_O2)
-			return "Oxygen"
-		if(ATM_N2)
-			return "Nitrogen"
-		if(ATM_CO2)
-			return "Carbon Dioxide"
-		if(ATM_N2O)
-			return "Nitrous Oxide"
-		if(ATM_H2)
-			return "Hydrogen"
-		else
-			return null
+/obj/machinery/atmospherics/omni/filter/proc/mode_send_switch(var/datum/omni_port/P)
+	if(P.filtering)
+		var/decl/material/gas/G = GET_DECL(P.filtering)
+		return G.gas_symbol
 
 /obj/machinery/atmospherics/omni/filter/Topic(href, href_list)
 	if(..()) return 1
@@ -188,44 +178,54 @@
 			if("switch_mode")
 				switch_mode(dir_flag(href_list["dir"]), mode_return_switch(href_list["mode"]))
 			if("switch_filter")
-				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in list("None", "Oxygen", "Nitrogen", "Carbon Dioxide", "Nitrous Oxide", "Hydrogen")
-				switch_filter(dir_flag(href_list["dir"]), mode_return_switch(new_filter))
+				var/list/gas_list = get_gas_names()
+				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in gas_list
+				switch_filter(dir_flag(href_list["dir"]), ATM_FILTER, get_decl_from_symbol(new_filter))
 
 	update_icon()
 	SSnano.update_uis(src)
 	return
 
+/obj/machinery/atmospherics/omni/filter/proc/get_gas_names()
+	var/list/output = list()
+	var/list/gases = decls_repository.get_decls_of_subtype(/decl/material/gas)
+	for(var/G in gases)
+		if(G == /decl/material/gas/alien)
+			continue
+		var/decl/material/gas/GE = gases[G]
+		output += GE.gas_symbol
+	return output
+
+/obj/machinery/atmospherics/omni/filter/proc/get_decl_from_symbol(var/sym)
+	var/list/gases = decls_repository.get_decls_of_subtype(/decl/material/gas)
+	for(var/G in gases)
+		var/decl/material/gas/GE = gases[G]
+		if(GE.gas_symbol == sym)
+			return G
+
 /obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(var/mode)
 	switch(mode)
-		if("Oxygen")
-			return ATM_O2
-		if("Nitrogen")
-			return ATM_N2
-		if("Carbon Dioxide")
-			return ATM_CO2
-		if("Nitrous Oxide")
-			return ATM_N2O
-		if("Hydrogen")
-			return ATM_H2
 		if("in")
 			return ATM_INPUT
 		if("out")
 			return ATM_OUTPUT
 		if("None")
 			return ATM_NONE
+		if("Filtering")
+			return ATM_FILTER
 		else
 			return null
 
-/obj/machinery/atmospherics/omni/filter/proc/switch_filter(var/dir, var/mode)
+/obj/machinery/atmospherics/omni/filter/proc/switch_filter(var/dir, var/mode, var/gas)
 	//check they aren't trying to disable the input or output ~this can only happen if they hack the cached tmpl file
 	for(var/datum/omni_port/P in ports)
 		if(P.direction == dir)
 			if(P.mode == ATM_INPUT || P.mode == ATM_OUTPUT)
 				return
 
-	switch_mode(dir, mode)
+	switch_mode(dir, mode, gas)
 
-/obj/machinery/atmospherics/omni/filter/proc/switch_mode(var/port, var/mode)
+/obj/machinery/atmospherics/omni/filter/proc/switch_mode(var/port, var/mode, var/gas)
 	if(mode == null || !port)
 		return
 	var/datum/omni_port/target_port = null
@@ -242,6 +242,11 @@
 		previous_mode = target_port.mode
 		target_port.mode = mode
 		if(target_port.mode != previous_mode)
+			handle_port_change(target_port)
+			rebuild_filtering_list()
+			target_port.filtering = null
+		if(target_port.filtering != gas && target_port.mode == ATM_FILTER)
+			target_port.filtering = gas
 			handle_port_change(target_port)
 			rebuild_filtering_list()
 		else
@@ -261,9 +266,7 @@
 /obj/machinery/atmospherics/omni/filter/proc/rebuild_filtering_list()
 	filtering_outputs.Cut()
 	for(var/datum/omni_port/P in ports)
-		var/gasid = mode_to_gasid(P.mode)
-		if(gasid)
-			filtering_outputs[gasid] = P.air
+		filtering_outputs[P.filtering] = P.air
 
 /obj/machinery/atmospherics/omni/filter/proc/handle_port_change(var/datum/omni_port/P)
 	switch(P.mode)
