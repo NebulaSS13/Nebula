@@ -112,7 +112,7 @@
 		var/ramt = REAGENT_VOLUME(reagents, mtype) || 0
 		var/samt = Floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
 		var/obj/item/stack/material/sheet = mat.default_solid_form
-		materials += list(list("label" = "[ramt]u [mat.liquid_name] ([samt] [samt == 1 ? initial(sheet.singular_name) : initial(sheet.plural_name)])", "casting" = (mtype in casting), "key" = "\ref[mat]"))
+		materials += list(list("label" = "[mat.liquid_name]<br>[ramt]u ([samt] [samt == 1 ? initial(sheet.singular_name) : initial(sheet.plural_name)])", "casting" = (mtype in casting), "key" = "\ref[mat]"))
 		data["materials"] = materials
 	return data
 
