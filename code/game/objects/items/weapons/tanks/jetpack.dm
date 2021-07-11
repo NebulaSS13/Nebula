@@ -102,5 +102,7 @@
 	starting_pressure = list(/decl/material/gas/carbon_dioxide = 6*ONE_ATMOSPHERE)
 
 /obj/item/tank/jetpack/rig
-	name = "jetpack"
+	name = "integrated manuvering module thrusterpack"
+	desc = "The 'manuvering' part of an Manuvering jets module for a hardsuit. You could ... probably use this standalone?"
 	var/obj/item/rig/holder
+	
