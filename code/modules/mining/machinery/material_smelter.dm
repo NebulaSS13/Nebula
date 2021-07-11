@@ -2,7 +2,7 @@
 #define MAX_ORE_REAGENT_CONTENTS 100000
 
 /obj/machinery/material_processing/smeltery
-	name = "material processor"
+	name = "electric smelter"
 	icon_state = "furnace"
 	use_ui_template = "material_processing_smeltery.tmpl"
 	var/list/casting
@@ -18,10 +18,36 @@
 
 /obj/machinery/material_processing/smeltery/Initialize()
 	. = ..()
-	atom_flags |= (ATOM_FLAG_OPEN_CONTAINER|ATOM_FLAG_NO_DISSOLVE|ATOM_FLAG_NO_PHASE_CHANGE)
+	atom_flags |= (ATOM_FLAG_OPEN_CONTAINER) //|ATOM_FLAG_NO_DISSOLVE|ATOM_FLAG_NO_PHASE_CHANGE)
 	atom_flags &= ~ATOM_FLAG_NO_TEMP_CHANGE
 	create_reagents(MAX_ORE_REAGENT_CONTENTS)
 	QUEUE_TEMPERATURE_ATOMS(src)
+
+// Outgas anything that is in gas form. Check what you put into the smeltery, nerds.
+/obj/machinery/material_processing/smeltery/on_reagent_change()
+	. = ..()
+
+	if(!reagents)
+		return
+
+	var/datum/gas_mixture/environment = loc?.return_air()
+	if(!environment)
+		return
+
+	var/adjusted_air = FALSE
+	for(var/mtype in reagents?.reagent_volumes)
+		var/decl/material/mat = GET_DECL(mtype)
+		if(mat.boiling_point && temperature >= mat.boiling_point)
+			adjusted_air = TRUE
+			var/removing = REAGENT_VOLUME(reagents, mtype)
+			reagents.remove_reagent(mtype, removing, defer_update = TRUE)
+			if(environment)
+				environment.adjust_gas_temp(mtype, (removing * 0.1), temperature, FALSE)
+
+	if(adjusted_air)
+		if(environment)
+			environment.update_values()
+		reagents.update_total()
 
 /obj/machinery/material_processing/smeltery/ProcessAtomTemperature()
 	if(use_power)
