@@ -14,6 +14,17 @@
 	var/last_flow_dir = 0
 	var/update_lighting = FALSE
 
+/obj/effect/fluid/Initialize()
+	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+	icon_state = ""
+	create_reagents(FLUID_MAX_DEPTH)
+	. = ..()
+	var/turf/simulated/T = get_turf(src)
+	if(!isturf(T) || !T.CanFluidPass())
+		return INITIALIZE_HINT_QDEL
+	if(istype(T))
+		T.unwet_floor(FALSE)
+
 /obj/effect/fluid/airlock_crush()
 	qdel(src)
 
@@ -30,17 +41,6 @@
 			ADD_ACTIVE_FLUID(F)
 	update_lighting = TRUE
 	update_icon()
-
-/obj/effect/fluid/Initialize()
-	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
-	icon_state = ""
-	create_reagents(FLUID_MAX_DEPTH)
-	. = ..()
-	var/turf/simulated/T = get_turf(src)
-	if(!isturf(T) || !T.CanFluidPass())
-		return INITIALIZE_HINT_QDEL
-	if(istype(T))
-		T.unwet_floor(FALSE)
 
 /obj/effect/fluid/Destroy()
 	var/turf/simulated/T = get_turf(src)

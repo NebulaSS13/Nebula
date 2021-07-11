@@ -162,7 +162,7 @@
 		/obj/item/seeds/shandseed = 15,
 		/obj/item/seeds/tobaccoseed = 15,
 		/obj/item/seeds/tomatoseed = 15,
-		/obj/item/seeds/corkwood = 15,
+		/obj/item/seeds/towercap = 15,
 		/obj/item/seeds/watermelonseed = 15,
 		/obj/item/seeds/wheatseed = 15,
 		/obj/item/seeds/whitebeetseed = 15,
@@ -318,11 +318,13 @@
 	updateUsrDialog()
 
 /obj/machinery/seed_storage/attackby(var/obj/item/O, var/mob/user)
-	if (istype(O, /obj/item/seeds))
+
+	if(istype(O, /obj/item/seeds))
 		add(O)
-		user.visible_message("[user] puts \the [O.name] into \the [src].", "You put \the [O] into \the [src].")
-		return
-	if (istype(O, /obj/item/storage/plants))
+		user.visible_message(SPAN_NOTICE("\The [user] puts \the [O] into \the [src]."))
+		return TRUE
+
+	if(istype(O, /obj/item/storage/plants))
 		var/obj/item/storage/P = O
 		var/loaded = 0
 		for(var/obj/item/seeds/G in P.contents)
@@ -331,10 +333,11 @@
 			add(G, 1)
 		P.finish_bulk_removal()
 		if (loaded)
-			user.visible_message("[user] puts the seeds from \the [O.name] into \the [src].", "You put the seeds from \the [O.name] into \the [src].")
+			user.visible_message(SPAN_NOTICE("\The [user] puts the seeds from \the [O] into \the [src]."))
 		else
-			to_chat(user, "<span class='notice'>There are no seeds in \the [O.name].</span>")
-		return
+			to_chat(user, SPAN_WARNING("There are no seeds in \the [O.name]."))
+		return TRUE
+
 	return ..()
 
 /obj/machinery/seed_storage/proc/add(var/obj/item/seeds/O, bypass_removal = 0)

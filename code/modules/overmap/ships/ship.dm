@@ -24,6 +24,8 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/vessel_size = SHIP_SIZE_LARGE	// arbitrary number, affects how likely are we to evade meteors
 
 
+	var/list/navigation_viewers // list of weakrefs to people viewing the overmap via this ship
+
 /obj/effect/overmap/visitable/ship/Initialize()
 	. = ..()
 	min_speed = round(min_speed, SHIP_MOVE_RESOLUTION)

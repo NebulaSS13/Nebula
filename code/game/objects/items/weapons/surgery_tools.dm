@@ -131,6 +131,7 @@
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
 	pickup_sound = 'sound/foley/pickup2.ogg'
 	tool_quality = TOOL_QUALITY_DECENT
+	origin_tech = "{'biotech':2,'materials':2,'magnets':2}"
 
 /obj/item/scalpel/laser/upgraded
 	name = "upgraded laser scalpel"
@@ -142,6 +143,7 @@
 		/decl/material/solid/metal/silver = MATTER_AMOUNT_TRACE
 	)
 	tool_quality = TOOL_QUALITY_GOOD
+	origin_tech = "{'biotech':3,'materials':4,'magnets':4}"
 
 /obj/item/scalpel/laser/advanced
 	name = "advanced laser scalpel"
@@ -154,6 +156,7 @@
 		/decl/material/solid/metal/gold = MATTER_AMOUNT_TRACE
 	)
 	tool_quality = TOOL_QUALITY_BEST
+	origin_tech = "{'biotech':4,'materials':6,'magnets':5}"
 
 /obj/item/incision_manager
 	name = "incision management system"
@@ -172,6 +175,7 @@
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
 	pickup_sound = 'sound/foley/pickup2.ogg'
+	origin_tech = "{'biotech':4,'materials':7,'magnets':5,'programming':4}"
 
 /obj/item/incision_manager/Initialize()
 	. = ..()

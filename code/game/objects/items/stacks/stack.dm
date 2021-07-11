@@ -39,6 +39,8 @@
 	. = ..(mapload, material)
 	if(!stack_merge_type)
 		stack_merge_type = type
+	if(!singular_name)
+		singular_name = "sheet"
 	if(!plural_name)
 		plural_name = "[singular_name]s"
 
