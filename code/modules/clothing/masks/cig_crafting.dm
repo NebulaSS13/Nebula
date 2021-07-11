@@ -23,9 +23,13 @@
 	icon_state = "cig_paper"
 	w_class = ITEM_SIZE_TINY
 
+/obj/item/paper/cig/on_update_icon()
+	. = ..()
+	icon_state = initial(icon_state)
+
 /obj/item/paper/cig/fancy
 	name = "\improper Trident rolling paper"
-	desc = "A thin piece of trident branded paper used to make fine smokeables."
+	desc = "A thin piece of Trident-branded paper used to make fine smokeables."
 	icon_state = "cig_paperf"
 
 /obj/item/paper/cig/filter
@@ -65,22 +69,5 @@
 			brand = "[brand] with a filter"
 			update_icon()
 			qdel(I)
-			return
-	..()
-
-/obj/item/chems/food/snacks/grown/attackby(obj/item/I, mob/user)
-	if(is_type_in_list(I, list(/obj/item/paper/cig/, /obj/item/paper/, /obj/item/teleportation_scroll)))
-		if(!dry)
-			to_chat(user, "<span class='warning'>You need to dry [src] first!</span>")
-			return
-		if(user.unEquip(I))
-			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(get_turf(src))
-			R.chem_volume = reagents.total_volume
-			R.brand = "[src] handrolled in \the [I]."
-			reagents.trans_to_holder(R.reagents, R.chem_volume)
-			to_chat(user, "<span class='notice'>You roll \the [src] into \the [I]</span>")
-			user.put_in_active_hand(R)
-			qdel(I)
-			qdel(src)
 			return
 	..()

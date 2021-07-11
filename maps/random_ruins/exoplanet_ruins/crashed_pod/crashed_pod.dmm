@@ -1071,7 +1071,7 @@
 /obj/item/plantspray/pests,
 /obj/item/plantspray/weeds,
 /obj/item/seeds/poppyseed,
-/obj/item/seeds/corkwood,
+/obj/item/seeds/towercap,
 /obj/item/seeds/glowbell,
 /obj/item/seeds/whitebeetseed,
 /obj/item/storage/plants,

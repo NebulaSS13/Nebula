@@ -53,6 +53,9 @@
 
 	atmos_canpass = CANPASS_PROC
 
+/obj/machinery/door/proc/can_operate(var/mob/user)
+	. = istype(user) && !user.restrained() && (!issmall(user) || ishuman(user) || issilicon(user) || istype(user, /mob/living/bot))
+
 /obj/machinery/door/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
 	if(environment_smash >= 1)
 		damage = max(damage, 10)
@@ -147,33 +150,30 @@
 		set_bounds()
 
 /obj/machinery/door/Bumped(atom/AM)
-	if(panel_open || operating) return
-	if(ismob(AM))
-		var/mob/M = AM
-		if(world.time - M.last_bumped <= 10) return	//Can bump-open one airlock per second. This is to prevent shock spam.
-		M.last_bumped = world.time
-		if(!M.restrained() && (!issmall(M) || ishuman(M) || issilicon(M)))
-			bumpopen(M)
+	if(panel_open || operating)
 		return
 
-	if(istype(AM, /mob/living/bot))
-		var/mob/living/bot/bot = AM
-		if(src.check_access(bot.botcard))
-			if(density)
-				open()
+	if(ismob(AM))
+		var/mob/M = AM
+		if(world.time - M.last_bumped <= 10)
+			return	//Can bump-open one airlock per second. This is to prevent shock spam.
+		M.last_bumped = world.time
+		bumpopen(M)
 
 /obj/machinery/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group) return !block_air_zones
+	if(air_group)
+		return !block_air_zones
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return !opacity
 	return !density
 
 /obj/machinery/door/proc/bumpopen(mob/user)
-	if(operating)	return
+	if(operating || !can_operate(user))
+		return
 	if(user.last_airflow > world.time - vsc.airflow_delay) //Fakkit
 		return
 	src.add_fingerprint(user)
-	if(density)
+	if(density && can_operate(user))
 		if(allowed(user))
 			open()
 		else
@@ -221,7 +221,7 @@
 	if(operating || !can_open_manually)
 		return FALSE
 
-	if(allowed(user))
+	if(allowed(user) && can_operate(user))
 		toggle()
 	else if(density)
 		do_animate("deny")
@@ -531,7 +531,7 @@
 			. |= lock.req_access
 
 /obj/machinery/door/do_simple_ranged_interaction(var/mob/user)
-	if((!requiresID() || allowed(null)) && can_open_manually)
+	if((!requiresID() || allowed(null)) && can_operate(user) && can_open_manually)
 		toggle()
 	return TRUE
 
