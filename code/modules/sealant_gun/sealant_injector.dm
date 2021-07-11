@@ -64,7 +64,7 @@
 		to_chat(user, SPAN_WARNING("There is no tank loaded."))
 		return TRUE
 
-	var/fill_space = Floor(loaded_tank.max_foam_charges - loaded_tank.foam_charges) / 5
+	var/fill_space = FLOOR(loaded_tank.max_foam_charges - loaded_tank.foam_charges) / 5
 	if(fill_space <= 0)
 		to_chat(user, SPAN_WARNING("\The [loaded_tank] is full."))
 		return TRUE

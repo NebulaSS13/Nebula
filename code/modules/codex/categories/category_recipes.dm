@@ -97,13 +97,13 @@
 			ingredients += "[recipe.fruit[thing]] [thing]\s"
 		mechanics_text += "<ul><li>[jointext(ingredients, "</li><li>")]</li></ul>"
 		var/atom/recipe_product = recipe.result
-		mechanics_text += "<br>This recipe takes [ceil(recipe.time/10)] second\s to cook in a microwave and creates \a [initial(recipe_product.name)]."
+		mechanics_text += "<br>This recipe takes [CEILING(recipe.time/10)] second\s to cook in a microwave and creates \a [initial(recipe_product.name)]."
 		var/lore_text = recipe.lore_text
 		if(!lore_text)
 			lore_text = initial(recipe_product.desc)
 
 		var/recipe_name = recipe.display_name || sanitize(initial(recipe_product.name))
-		guide_html += "<h3>[capitalize(recipe_name)]</h3>Place [english_list(ingredients)] into a microwave for [ceil(recipe.time/10)] second\s."
+		guide_html += "<h3>[capitalize(recipe_name)]</h3>Place [english_list(ingredients)] into a microwave for [CEILING(recipe.time/10)] second\s."
 
 		entries_to_register += new /datum/codex_entry(             \
 		 _display_name =       "[recipe_name] (microwave recipe)", \

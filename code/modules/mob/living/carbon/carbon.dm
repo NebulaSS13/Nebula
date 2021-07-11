@@ -335,7 +335,7 @@
 		return FALSE
 	to_chat(src, SPAN_WARNING("You slipped on [slipped_on]!"))
 	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
-	SET_STATUS_MAX(src, STAT_WEAK, Floor(stun_duration/2))
+	SET_STATUS_MAX(src, STAT_WEAK, FLOOR(stun_duration/2))
 	return TRUE
 
 /mob/living/carbon/get_default_language()

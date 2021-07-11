@@ -895,7 +895,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/fill_from_pressurized_fluid_source(obj/structure/source, mob/user)
 	if(!istype(source) || !source.is_pressurized_fluid_source())
 		return FALSE
-	var/free_space =  Floor(REAGENTS_FREE_SPACE(reagents))
+	var/free_space =  FLOOR(REAGENTS_FREE_SPACE(reagents))
 	if(free_space <= 0)
 		to_chat(user, SPAN_WARNING("\The [src] is full!"))
 		return TRUE

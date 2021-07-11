@@ -85,4 +85,4 @@
 	. = res
 
 /obj/item/dice/d100/convert_result(var/res)
-	. = Floor(res/10)
+	. = FLOOR(res/10)

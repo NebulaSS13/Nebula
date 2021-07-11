@@ -22,7 +22,7 @@
 			// divisor of these part values and make it a bit neater, please
 			// feel free to change this block to use it.
 			var/decl/material/mixer = GET_DECL(rtype) 
-			var/ingredient = "[cocktail.ratios[rtype] >= 0.1 ? "[ceil(cocktail.ratios[rtype] * 10)] part\s" : "a dash of"] [mixer.name]"
+			var/ingredient = "[cocktail.ratios[rtype] >= 0.1 ? "[CEILING(cocktail.ratios[rtype] * 10)] part\s" : "a dash of"] [mixer.name]"
 			ingredients += ingredient
 		
 		guide_html += "<h3>[capitalize(cocktail.name)]</h3>Mix [english_list(ingredients)] in a glass."

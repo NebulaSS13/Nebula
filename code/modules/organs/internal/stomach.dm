@@ -35,7 +35,7 @@
 	return !isnull(get_devour_time(food))
 
 /obj/item/organ/internal/stomach/proc/is_full(var/atom/movable/food)
-	var/total = Floor(ingested.total_volume / 10)
+	var/total = FLOOR(ingested.total_volume / 10)
 	for(var/a in contents + food)
 		if(ismob(a))
 			var/mob/M = a

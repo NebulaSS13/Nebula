@@ -99,7 +99,7 @@
 		return
 
 	if(tray.waterlevel < 100)
-		var/nutrition_cost = Floor((100-tray.nutrilevel)/10) * 5
+		var/nutrition_cost = FLOOR((100-tray.nutrilevel)/10) * 5
 		if(nutrition >= nutrition_cost)
 			visible_message("<span class='notice'><b>\The [src]</b> secretes a trickle of clear liquid, refilling [tray].</span>","<span class='notice'>You secrete some water into \the [tray].</span>")
 			tray.waterlevel = 100
