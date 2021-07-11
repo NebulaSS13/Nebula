@@ -52,6 +52,11 @@
     {{else}}
         {{:helper.link("Allow alloying", null, { 'toggle_alloying' : 1}, null, null)}}
     {{/if}}
+    {{if data.show_all_mats}}
+        {{:helper.link("Hide uncommon materials", null, { 'toggle_show_mats' : 1}, null, null)}}
+    {{else}}
+        {{:helper.link("Show uncommon materials", null, { 'toggle_show_mats' : 1}, null, null)}}
+    {{/if}}
 
     {{for data.materials}}
         <div class = 'item'>

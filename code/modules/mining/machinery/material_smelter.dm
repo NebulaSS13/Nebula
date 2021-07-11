@@ -118,6 +118,7 @@
 	
 /obj/machinery/material_processing/smeltery/Topic(var/user, var/list/href_list)
 	. = ..()
+
 	if(href_list["toggle_alloying"])
 		if(atom_flags & ATOM_FLAG_NO_REACT)
 			atom_flags &= ~ATOM_FLAG_NO_REACT
@@ -125,6 +126,11 @@
 		else
 			atom_flags |= ATOM_FLAG_NO_REACT
 		. = TOPIC_REFRESH
+
+	if(href_list["toggle_show_mats"])
+		show_all_materials = !show_all_materials
+		. = TOPIC_REFRESH
+
 	if(href_list["toggle_casting"])
 		var/decl/material/mat = locate(href_list["toggle_casting"])
 		if(istype(mat))
@@ -137,6 +143,7 @@
 /obj/machinery/material_processing/smeltery/get_ui_data()
 	var/list/data = ..()
 	data["is_alloying"] = !(atom_flags & ATOM_FLAG_NO_REACT)
+	data["show_all_mats"] = show_all_materials
 	var/list/materials = list()
 	for(var/mtype in show_materials)
 		var/decl/material/mat = GET_DECL(mtype)
