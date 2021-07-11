@@ -6,7 +6,7 @@
 		/obj/item/chems/glass/replenishing,
 		/obj/item/chems/glass/beaker = 2
 		)
-	new_icon_state = "bowl"
+	new_icon = 'icons/obj/items/chem/mixingbowl.dmi'
 
 /decl/archaeological_find/bowl/get_additional_description()
 	if(prob(20))
@@ -14,6 +14,7 @@
 
 /decl/archaeological_find/bowl/urn
 	item_type = "urn"
+	new_icon = 'icons/obj/items/urn.dmi'
 	new_icon_state = "urn"
 
 /decl/archaeological_find/bowl/urn/get_additional_description()
