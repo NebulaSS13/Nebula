@@ -138,6 +138,11 @@
 	result_type = /obj/item/modular_computer/tablet
 	difficulty = 2
 
+/datum/stack_recipe/computer/pda
+	title = "modular PDA frame"
+	result_type = /obj/item/modular_computer/pda
+	difficulty = 2
+
 /datum/stack_recipe/hazard_cone
 	title = "hazard cone"
 	result_type = /obj/item/caution/cone
