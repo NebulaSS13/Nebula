@@ -18,8 +18,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/statclick)
 	var/class
 
 /obj/effect/statclick/debug/Click()
-	if(!usr.client.holder || !target)
+	if(!check_rights(R_VAREDIT | R_DEBUG) || !target)
 		return
+
 	if(!class)
 		if(istype(target, /datum/controller/subsystem))
 			class = "subsystem"
