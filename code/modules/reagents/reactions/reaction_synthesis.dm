@@ -58,6 +58,10 @@
 /datum/chemical_reaction/synthesis/aerogel
 	name = "Aerogel"
 	mix_message = "The solution solidifies into a translucent suspension of gas within gel."
+	required_reagents = list(/decl/material/solid/silicon = 1)
+	inhibitors = list(
+		/decl/material/liquid/crystal_agent
+	) // Interferes with resin globules.
 
 /datum/chemical_reaction/synthesis/aerogel/can_happen(datum/reagents/holder)
 	. = ..() && length(holder.reagent_volumes) > 1

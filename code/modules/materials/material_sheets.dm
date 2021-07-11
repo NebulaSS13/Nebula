@@ -309,10 +309,17 @@
 	name = "lumps"
 	singular_name = "lump"
 	plural_name = "lumps"
+	icon_state = "lump"
+	plural_icon_state = "lump-mult"
+	max_icon_state = "lump-max"
 	stack_merge_type = /obj/item/stack/material/lump
 
 /obj/item/stack/material/slab
 	name = "slabs"
 	singular_name = "slab"
 	plural_name = "slabs"
+	icon_state = "puck"
+	plural_icon_state = "puck-mult"
+	max_icon_state = "puck-max"
 	stack_merge_type = /obj/item/stack/material/slab
+

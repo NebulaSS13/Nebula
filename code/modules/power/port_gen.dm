@@ -143,7 +143,6 @@
 
 /obj/machinery/power/port_gen/pacman/examine(mob/user)
 	. = ..()
-	. = ..(user)
 	if(active)
 		to_chat(user, "\The [src] appears to be producing [power_gen*power_output] W.")
 	else
@@ -181,9 +180,6 @@
 
 	power_gen = round(initial(power_gen) * Clamp(temp_rating, 0, 20) / 2)
 	..()
-
-/obj/machinery/power/port_gen/pacman/examine(mob/user)
-
 
 /obj/machinery/power/port_gen/pacman/proc/process_exhaust()
 	var/decl/material/mat = GET_DECL(sheet_material)
