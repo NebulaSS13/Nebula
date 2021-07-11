@@ -42,7 +42,7 @@
 			var/removing = REAGENT_VOLUME(reagents, mtype)
 			reagents.remove_reagent(mtype, removing, defer_update = TRUE)
 			if(environment)
-				environment.adjust_gas_temp(mtype, (removing * 0.1), temperature, FALSE)
+				environment.adjust_gas_temp(mtype, (removing * 0.2), temperature, FALSE) // Arbitrary conversion constant, TODO consistent one
 
 	if(adjusted_air)
 		if(environment)
