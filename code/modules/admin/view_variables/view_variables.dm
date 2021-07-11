@@ -8,7 +8,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 	set category = "Debug"
 	set name = "View Variables"
 
-	if(!check_rights(0))
+	if(!check_rights(R_VAREDIT | R_DEBUG))
 		return
 
 	if(!D)
