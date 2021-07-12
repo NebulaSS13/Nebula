@@ -9,6 +9,7 @@
 	gas_symbol = "O2"
 	gas_metabolically_inert = TRUE
 	value = 0.25
+	uid = "material_gas_oxygen"
 
 /decl/material/gas/helium
 	name = "helium"
@@ -21,6 +22,7 @@
 	taste_description = "nothing"
 	metabolism = 0.05
 	value = 0.3
+	uid = "material_gas_helium"
 
 /decl/material/gas/helium/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -33,6 +35,7 @@
 	gas_molar_mass = 0.044	
 	gas_symbol_html = "CO<sub>2</sub>"
 	gas_symbol = "CO2"
+	uid = "material_gas_carbon_dioxide"
 
 /decl/material/gas/carbon_monoxide
 	name = "carbon monoxide"
@@ -43,6 +46,7 @@
 	gas_symbol = "CO"
 	taste_description = "stale air"
 	metabolism = 0.05 // As with helium.
+	uid = "material_gas_carbon_monoxide"
 
 /decl/material/gas/carbon_monoxide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(!istype(M))
@@ -86,6 +90,7 @@
 		/decl/material/gas/methyl_bromide = 1
 	)
 	value = 0.25
+	uid = "gas_material_methyl_bromide"
 
 /decl/material/gas/methyl_bromide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	. = ..()
@@ -114,6 +119,7 @@
 	gas_symbol = "N2O"
 	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
 	value = 0.25
+	uid = "gas_material_nitrous_oxide"
 
 /decl/material/gas/nitrous_oxide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/dosage = LAZYACCESS(M.chem_doses, type)
@@ -137,6 +143,7 @@
 	gas_symbol_html = "N<sub>2</sub>"
 	gas_symbol = "N2"
 	gas_metabolically_inert = TRUE
+	uid = "gas_material_nitrogen"
 
 /decl/material/gas/nitrodioxide
 	name = "nitrogen dioxide"
@@ -146,6 +153,7 @@
 	gas_flags = XGM_GAS_OXIDIZER
 	gas_symbol_html = "NO<sub>2</sub>"
 	gas_symbol = "NO2"
+	uid = "gas_material_nitrogen_dioxide"
 
 /decl/material/gas/nitricoxide
 	name = "nitric oxide"
@@ -154,6 +162,7 @@
 	gas_flags = XGM_GAS_OXIDIZER
 	gas_symbol_html = "NO"
 	gas_symbol = "NO"
+	uid = "gas_material_nitric_oxide"
 
 /decl/material/gas/methane
 	name = "methane"
@@ -162,6 +171,7 @@
 	gas_flags = XGM_GAS_FUEL
 	gas_symbol_html = "CH<sub>4</sub>"
 	gas_symbol = "CH4"
+	uid = "gas_material_methane"
 
 /decl/material/gas/argon
 	name = "argon"
@@ -171,6 +181,7 @@
 	gas_symbol_html = "Ar"
 	gas_symbol = "Ar"
 	value = 0.25
+	uid = "gas_material_argon"
 
 // If narcosis is ever simulated, krypton has a narcotic potency seven times greater than regular airmix.
 /decl/material/gas/krypton
@@ -180,6 +191,7 @@
 	gas_symbol_html = "Kr"
 	gas_symbol = "Kr"
 	value = 0.25
+	uid = "gas_material_krypton"
 
 /decl/material/gas/neon
 	name = "neon"
@@ -188,6 +200,7 @@
 	gas_symbol_html = "Ne"
 	gas_symbol = "Ne"
 	value = 0.25
+	uid = "gas_material_neon"
 
 /decl/material/gas/ammonia
 	name = "ammonia"
@@ -202,6 +215,7 @@
 	color = "#404030"
 	metabolism = REM * 0.5
 	overdose = 5
+	uid = "gas_material_ammonia"
 
 /decl/material/gas/xenon
 	name = "xenon"
@@ -210,6 +224,7 @@
 	gas_symbol_html = "Xe"
 	gas_symbol = "Xe"
 	value = 0.25
+	uid = "gas_material_xenon"
 
 /decl/material/gas/xenon/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/dosage = LAZYACCESS(M.chem_doses, type)
@@ -237,6 +252,7 @@
 	heating_point = null
 	heating_products = null
 	toxicity = 15
+	uid = "gas_material_chlorine"
 
 /decl/material/gas/sulfur_dioxide
 	name = "sulfur dioxide"
@@ -248,6 +264,7 @@
 		/decl/material/solid/sulfur = 0.5,
 		/decl/material/gas/oxygen = 0.5
 	)
+	uid = "gas_material_sulfur_dioxide"
 
 /decl/material/gas/hydrogen
 	name = "hydrogen"
@@ -265,6 +282,7 @@
 		/decl/material/liquid/fuel/hydrazine = 1
 	)
 	value = 0.4
+	uid = "gas_material_hydrogen"
 
 /decl/material/gas/hydrogen/tritium
 	name = "tritium"
@@ -275,6 +293,7 @@
 	value = 0.45
 	gas_symbol_html = "T"
 	gas_symbol = "T"
+	uid = "gas_material_tritium"
 
 /decl/material/gas/hydrogen/deuterium
 	name = "deuterium"
@@ -286,6 +305,7 @@
 	gas_symbol_html = "D"
 	gas_symbol = "D"
 	value = 0.5
+	uid = "gas_material_deuterium"
 
 	neutron_interactions = list(
 		INTERACTION_ABSORPTION = 1250

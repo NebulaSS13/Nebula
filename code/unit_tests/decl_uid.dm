@@ -1,7 +1,5 @@
 /datum/unit_test/decl_uid
 	name = "DECLS - Shall Have Unique UID"
-	template = /datum/unit_test/decl_uid
-	async = 1
 
 /datum/unit_test/decl_uid/start_test()
 	var/list/decls_to_test = decls_repository.get_decls_of_subtype(/decl)
