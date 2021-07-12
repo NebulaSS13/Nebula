@@ -164,53 +164,78 @@ var/global/list/_wood_materials = list(
 			var/obj/item/stack/cable_coil/C = W
 			if(C.use(5))
 				//TODO: generalize this.
-				to_chat(user, "<span class='notice'>You add some cable to the [src.name] and slide it inside the battery casing.</span>")
+				to_chat(user, SPAN_NOTICE("You add some cable to \the [src] and slide it inside the battery casing."))
 				var/obj/item/cell/potato/pocell = new /obj/item/cell/potato(get_turf(user))
-				if(src.loc == user && user.get_empty_hand_slot() && istype(user,/mob/living/carbon/human))
-					user.put_in_hands(pocell)
+				qdel(src)
+				user.put_in_hands(pocell)
 				pocell.maxcharge = src.potency * 10
 				pocell.charge = pocell.maxcharge
-				qdel(src)
-				return
-		else if(W.sharp)
+				return TRUE
+
+		if(W.sharp)
 			if(seed.kitchen_tag == "pumpkin") // Ugggh these checks are awful.
-				user.show_message("<span class='notice'>You carve a face into [src]!</span>", 1)
+				user.show_message(SPAN_NOTICE("You carve a face into \the [src]!"), 1)
 				new /obj/item/clothing/head/pumpkinhead (user.loc)
 				qdel(src)
-				return
-			else if(seed.chems)
+				return TRUE
+			
+			if(seed.chems)
 				if(isHatchet(W))
 					for(var/wood_mat in global._wood_materials)
 						if(!isnull(seed.chems[wood_mat]))
 							user.visible_message("<span class='notice'>\The [user] makes planks out of \the [src].</span>")
-							SSmaterials.create_object(wood_mat, user.loc, rand(1,2))
+							var/obj/item/stack/material/stack = SSmaterials.create_object(wood_mat, user.loc, rand(1,2))
+							stack.add_to_stacks(user, TRUE)
 							qdel(src)
-							return
-				else if(!isnull(seed.chems[/decl/material/liquid/drink/juice/potato]))
-					to_chat(user, "You slice \the [src] into sticks.")
+							return TRUE
+
+				
+				if(!isnull(seed.chems[/decl/material/liquid/drink/juice/potato]))
+					to_chat(user, SPAN_NOTICE("You slice \the [src] into sticks."))
 					new /obj/item/chems/food/snacks/rawsticks(get_turf(src))
 					qdel(src)
-					return
-				else if(!isnull(seed.chems[/decl/material/liquid/drink/juice/carrot]))
-					to_chat(user, "You slice \the [src] into sticks.")
+					return TRUE
+
+				if(!isnull(seed.chems[/decl/material/liquid/drink/juice/carrot]))
+					to_chat(user, SPAN_NOTICE("You slice \the [src] into sticks."))
 					new /obj/item/chems/food/snacks/carrotfries(get_turf(src))
 					qdel(src)
-					return
-				else if(!isnull(seed.chems[/decl/material/liquid/drink/milk/soymilk]))
-					to_chat(user, "You roughly chop up \the [src].")
+					return TRUE
+
+				if(!isnull(seed.chems[/decl/material/liquid/drink/milk/soymilk]))
+					to_chat(user, SPAN_NOTICE("You roughly chop up \the [src]."))
 					new /obj/item/chems/food/snacks/soydope(get_turf(src))
 					qdel(src)
-					return
-				else if(seed.get_trait(TRAIT_FLESH_COLOUR))
-					to_chat(user, "You slice up \the [src].")
+					return TRUE
+
+				if(seed.get_trait(TRAIT_FLESH_COLOUR))
+					to_chat(user, SPAN_NOTICE("You slice up \the [src]."))
 					var/slices = rand(3,5)
 					var/reagents_to_transfer = round(reagents.total_volume/slices)
 					for(var/i in 1 to slices)
 						var/obj/item/chems/food/snacks/fruit_slice/F = new(get_turf(src),seed)
 						if(reagents_to_transfer) reagents.trans_to_obj(F,reagents_to_transfer)
 					qdel(src)
-					return
-	..()
+					return TRUE
+
+	if(is_type_in_list(W, list(/obj/item/paper/cig/, /obj/item/paper, /obj/item/teleportation_scroll)))
+
+		if(!dry)
+			to_chat(user, SPAN_WARNING("You need to dry \the [src] first!"))
+			return TRUE
+
+		if(user.unEquip(W))
+			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(get_turf(src))
+			R.chem_volume = reagents.total_volume
+			R.brand = "[src] handrolled in \the [W]."
+			reagents.trans_to_holder(R.reagents, R.chem_volume)
+			to_chat(user, SPAN_NOTICE("You roll \the [src] into \the [W]."))
+			user.put_in_active_hand(R)
+			qdel(W)
+			qdel(src)
+			return TRUE
+
+	. = ..()
 
 /obj/item/chems/food/snacks/grown/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
