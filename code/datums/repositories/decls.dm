@@ -67,20 +67,20 @@ var/global/repository/decls/decls_repository = new
 	if(!.)
 		for(var/decl in typesof(/decl))
 			var/decl/D = GET_DECL(decl)
-			if(D.UID == id)
+			if(D.uid == id)
 				return D
 
 /decl
-	var/UID //unique identifier. If this is not hardcoded, it is dynamically generated on runtime in Initialize() below.
+	var/uid //unique identifier. If this is not hardcoded, it is dynamically generated on runtime in Initialize() below.
 
 /decl/proc/Initialize()
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
-	if(!UID)
-		var/UID_pregen = replacetext("[type]", "/", "_")
-		UID_pregen = replacetext(UID_pregen, "_decl", "")
-		UID = "AUTOGEN[UID_pregen]"
-	decls_repository.decls_by_id[UID] = src
+	if(!uid)
+		var/uid_pregen = replacetext("[type]", "/", "_")
+		uid_pregen = replacetext(uid_pregen, "_decl", "")
+		uid = "AUTOGEN[uid_pregen]"
+	decls_repository.decls_by_id[uid] = src
 	return
 
 /decl/Destroy()
