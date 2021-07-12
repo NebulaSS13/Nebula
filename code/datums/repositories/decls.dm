@@ -77,7 +77,9 @@ var/global/repository/decls/decls_repository = new
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	if(!UID)
-		UID = "AUTOGEN_[sequential_id(/decl)]"
+		var/UID_pregen = replacetext("[type]", "/", "_")
+		UID_pregen = replacetext(UID_pregen, "_decl", "")
+		UID = "AUTOGEN[UID_pregen]"
 	decls_repository.decls_by_id[UID] = src
 	return
 
