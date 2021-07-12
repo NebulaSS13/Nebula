@@ -3,6 +3,7 @@
 	var/list/whitelisted_decls = list(
 		/decl/security_state,
 		/decl/trait/,
+		/decl/trait/malus,
 		/decl/special_role
 	)
 
