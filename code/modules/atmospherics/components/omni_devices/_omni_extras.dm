@@ -96,5 +96,3 @@
 		else
 			return 0
 
-/proc/mode_to_gasid(var/mode)
-	return null
