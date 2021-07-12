@@ -99,7 +99,7 @@
 				return
 			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ChangeTurf(/turf/simulated/floor/airless)
+			ChangeTurf(/turf/simulated/floor, keep_air = TRUE)
 		else
 			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
 		return TRUE
@@ -191,7 +191,7 @@
 				return
 			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ChangeTurf(/turf/simulated/floor/airless)
+			ChangeTurf(/turf/simulated/floor, keep_air = TRUE)
 		else
 			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
 		return TRUE
