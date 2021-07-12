@@ -15,6 +15,10 @@
 	var/tag_south = ATM_NONE
 	var/tag_east = ATM_NONE
 	var/tag_west = ATM_NONE
+	var/tag_filter_gas_north //These are GAS DECLS. /decl/material/gas.
+	var/tag_filter_gas_south
+	var/tag_filter_gas_east
+	var/tag_filter_gas_west
 
 	var/overlays_on[5]
 	var/overlays_off[5]
@@ -46,12 +50,20 @@
 		switch(d)
 			if(NORTH)
 				new_port.mode = tag_north
+				if(new_port.mode == ATM_FILTER)
+					new_port.filtering = tag_filter_gas_north
 			if(SOUTH)
 				new_port.mode = tag_south
+				if(new_port.mode == ATM_FILTER)
+					new_port.filtering = tag_filter_gas_south
 			if(EAST)
 				new_port.mode = tag_east
+				if(new_port.mode == ATM_FILTER)
+					new_port.filtering = tag_filter_gas_east
 			if(WEST)
 				new_port.mode = tag_west
+				if(new_port.mode == ATM_FILTER)
+					new_port.filtering = tag_filter_gas_west
 		ports += new_port
 
 	. = ..()
@@ -159,7 +171,7 @@
 			if(ATM_OUTPUT)
 				ic_on += "_out_glow"
 				ic_off += "_out"
-			if(ATM_O2 to ATM_H2)
+			if(ATM_FILTER)
 				ic_on += "_filter"
 				ic_off += "_out"
 
