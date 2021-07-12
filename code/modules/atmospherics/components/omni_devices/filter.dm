@@ -136,6 +136,8 @@
 				is_filter = 0
 			if(ATM_FILTER)
 				f_type = mode_send_switch(P)
+			if(ATM_NONE)
+				is_filter = 0
 
 		portData[++portData.len] = list("dir" = dir_name(P.direction, capitalize = 1), \
 										"input" = input, \
@@ -209,9 +211,9 @@
 			return ATM_INPUT
 		if("out")
 			return ATM_OUTPUT
-		if("None")
+		if("none")
 			return ATM_NONE
-		if("Filtering")
+		if("filtering")
 			return ATM_FILTER
 		else
 			return null
