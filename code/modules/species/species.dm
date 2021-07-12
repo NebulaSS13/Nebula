@@ -82,7 +82,6 @@
 	var/bone_amount =   3
 	var/remains_type =  /obj/item/remains/xeno
 	var/gibbed_anim =   "gibbed-h"
-	var/dusted_anim =   "dust-h"
 
 	var/death_sound
 	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."

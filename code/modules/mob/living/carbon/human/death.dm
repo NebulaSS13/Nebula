@@ -19,7 +19,7 @@
 
 /mob/living/carbon/human/dust()
 	if(species)
-		..(species.dusted_anim, species.remains_type)
+		..(species.remains_type)
 	else
 		..()
 

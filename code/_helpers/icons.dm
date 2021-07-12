@@ -828,6 +828,21 @@ The _flatIcons list is a cache for generated icon files.
 	flat_icon.AddAlphaMask(alpha_mask)//Finally, let's mix in a distortion effect.
 	return flat_icon
 
+/proc/build_disappear_icon(atom/A)
+	var/icon/disappear_icon = new(getFlatIcon(A))
+	var/W = disappear_icon.Width()
+	var/H = disappear_icon.Height()
+	var/icon/T = icon('icons/effects/effects.dmi', "disappear")
+
+	if(W != WORLD_ICON_SIZE || H != WORLD_ICON_SIZE)
+		T.Scale(W, H)
+
+	T.BecomeAlphaMask()
+	disappear_icon.MapColors(rgb(45, 45, 45), rgb(70, 70, 70), rgb(30, 30, 30), rgb(0 , 0, 0))
+	disappear_icon.AddAlphaMask(T)
+
+	return disappear_icon
+
 //For photo camera.
 /proc/build_composite_icon(atom/A)
 	var/icon/composite = icon(A.icon, A.icon_state, A.dir, 1)
