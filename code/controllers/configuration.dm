@@ -262,7 +262,7 @@ var/global/list/gamemode_cache = list()
 	. = ..() | protected_vars
 
 /datum/configuration/New()
-	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
+	var/list/L = subtypesof(/datum/game_mode)
 	for (var/T in L)
 		// I wish I didn't have to instance the game modes in order to look up
 		// their information, but it is the only way (at least that I know of).

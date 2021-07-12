@@ -1,6 +1,6 @@
 // READ: Don't use the apostrophe in name or desc. Causes script errors.
 
-var/global/list/powers = typesof(/datum/power/changeling) - /datum/power/changeling	//needed for the badmin verb for now
+var/global/list/powers = subtypesof(/datum/power/changeling)	//needed for the badmin verb for now
 var/global/list/datum/power/changeling/powerinstances = list()
 
 /datum/power			//Could be used by other antags too

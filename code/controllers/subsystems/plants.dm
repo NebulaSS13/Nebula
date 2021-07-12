@@ -41,7 +41,7 @@ PROCESSING_SUBSYSTEM_DEF(plants)
 			plant_product_sprites |= copytext(icostate,1,split)
 
 	// Populate the global seed datum list.
-	for(var/type in typesof(/datum/seed)-/datum/seed)
+	for(var/type in subtypesof(/datum/seed))
 		var/datum/seed/S = new type
 		S.update_growth_stages()
 		seeds[S.name] = S

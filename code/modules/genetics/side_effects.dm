@@ -18,7 +18,7 @@
 		addtimer(CALLBACK(src, .proc/do_side_effect, H), 0)
 
 /datum/genetics/side_effect/proc/do_side_effect(mob/living/carbon/human/H)
-	var/tp = pick(typesof(/datum/genetics/side_effect) - /datum/genetics/side_effect)
+	var/tp = pick(subtypesof(/datum/genetics/side_effect))
 	var/datum/genetics/side_effect/S = new tp
 
 	S.start(H)
