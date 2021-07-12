@@ -1,12 +1,13 @@
 #define PRINT_MULTIPLIER_DIVISOR 5
 
-/obj/machinery/fabricator/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, var/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
+/obj/machinery/fabricator/ui_interact(mob/user, ui_key = "fab", datum/nanoui/ui=null, force_open=1, var/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = list()
 
 	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
-	data["network"] = D.network_tag
+	data["network"] =    D.network_tag
 	data["category"] =   show_category
 	data["functional"] = is_functioning()
+	data["filtering"] =  filter_string || "No filter set."
 
 	if(is_functioning())	
 		data["color_selectable"] = color_selectable
@@ -54,6 +55,8 @@
 			if(R.hidden && !(fab_status_flags & FAB_HACKED))
 				continue
 			if(show_category != "All" && show_category != R.category)
+				continue
+			if(filter_string && !findtextEx_char(lowertext(R.name), lowertext(filter_string)))
 				continue
 			var/list/build_option = list()
 			var/max_sheets = 0
