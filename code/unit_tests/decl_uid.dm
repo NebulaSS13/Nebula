@@ -24,3 +24,4 @@
 		fail("[length(failures)] decl UIDs were not unique!")
 	else
 		pass("All decl UIDs were unique.")
+		return TRUE
