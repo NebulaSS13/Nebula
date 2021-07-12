@@ -149,9 +149,9 @@ var/global/list/wall_noblend_objects = list(
 			plant.pixel_x = 0
 			plant.pixel_y = 0
 
-/turf/simulated/wall/ChangeTurf(var/newtype)
+/turf/simulated/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
 	clear_plants()
-	return ..(newtype)
+	. = ..()
 
 //Appearance
 /turf/simulated/wall/examine(mob/user)

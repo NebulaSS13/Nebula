@@ -35,8 +35,8 @@
 		. = TOPIC_REFRESH
 
 	if(href_list["set_filter"])
-		var/new_filter_string = sanitize(input(usr, "Enter a new filter string.", "Fabricator Filter") as text|null)
-		if(CanInteract(usr, DefaultTopicState()))
+		var/new_filter_string = sanitize(input(user, "Enter a new filter string.", "Fabricator Filter") as text|null)
+		if(CanInteract(user, DefaultTopicState()))
 			filter_string = new_filter_string
 			. = TOPIC_REFRESH
 
