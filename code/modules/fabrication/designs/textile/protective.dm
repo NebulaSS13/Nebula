@@ -19,7 +19,7 @@
 	path = /obj/item/clothing/head/chem_hood
 
 // Masks
-/datum/fabricator_recipe/textiles/job/medical/surgicalmask
+/datum/fabricator_recipe/textiles/job/protective/surgicalmask
 	path = /obj/item/clothing/mask/surgical
 
 // Gas masks
