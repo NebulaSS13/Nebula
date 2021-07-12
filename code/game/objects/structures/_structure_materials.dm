@@ -15,7 +15,9 @@
 		update_material_name()
 	if(material_alteration & MAT_FLAG_ALTERATION_DESC)
 		update_material_desc()
-	if(material && material?.opacity < 0.5)
+	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
+		update_material_colour()
+	if((alpha / 255) < 0.5)
 		set_opacity(FALSE)
 	else
 		set_opacity(initial(opacity))
@@ -46,11 +48,12 @@
 		desc = base_desc
 
 /obj/structure/proc/update_material_colour(var/override_colour)
-	var/base_colour = override_colour || initial(color)
 	if(istype(material))
-		color = material.color
+		color = override_colour || material.color
+		alpha = Clamp((50 + material.opacity * 255), 0, 255)
 	else
-		color = base_colour
+		color = override_colour || initial(color)
+		alpha = initial(alpha)
 
 /obj/structure/proc/create_dismantled_products(var/turf/T)
 	if(parts_type)

@@ -14,6 +14,7 @@
 	var/currency
 	var/absolute_worth = 0
 	var/can_flip = TRUE // Cooldown tracker for single-coin flips.
+	var/static/overlay_cap = 50 // Max overlays to show in this pile.
 
 /obj/item/cash/Initialize(ml, material_key)
 	. = ..()
@@ -60,8 +61,9 @@
 /obj/item/cash/on_update_icon()
 	icon_state = ""
 	var/draw_worth = get_worth()
-	var/list/adding_notes
+	cut_overlays()
 	var/decl/currency/cur = GET_DECL(currency)
+	var/i = 0
 	for(var/datum/denomination/denomination in cur.denominations)
 		while(draw_worth >= denomination.marked_value)
 			draw_worth -= denomination.marked_value
@@ -74,8 +76,10 @@
 			if(denomination.rotate_icon)
 				M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
 			banknote.transform = M
-			LAZYADD(adding_notes, banknote)
-	overlays = adding_notes
+			add_overlay(banknote)
+			i++
+			if(i >= overlay_cap)
+				return
 
 /obj/item/cash/proc/update_from_worth()
 	var/decl/currency/cur = GET_DECL(currency)
@@ -100,7 +104,7 @@
 
 	// Handle coin flipping. Mostly copied from /obj/item/coin.
 	var/datum/denomination/denomination = cur.denominations_by_value["[current_worth]"]
-	if(denomination && length(denomination.faces) && alert("Do you wish to divide \the [src], or flip it?", "Flip or Split?", "Flip", "Split") == "Flip")
+	if(denomination && length(denomination.faces) && (cur.denominations_by_value[length(cur.denominations_by_value)] == "[current_worth]" || alert("Do you wish to divide \the [src], or flip it?", "Flip or Split?", "Flip", "Split") == "Flip"))
 		if(!can_flip)
 			to_chat(user, SPAN_WARNING("\The [src] is already being flipped!"))
 			return

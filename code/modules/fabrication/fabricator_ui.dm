@@ -1,6 +1,6 @@
 #define PRINT_MULTIPLIER_DIVISOR 5
 
-/obj/machinery/fabricator/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
+/obj/machinery/fabricator/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, var/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = list()
 
 	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
@@ -83,7 +83,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "fabricator.tmpl", "[capitalize(name)]", 480, 410, state = global.physical_topic_state)
+		ui = new(user, src, ui_key, "fabricator.tmpl", "[capitalize(name)]", 480, 410, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
