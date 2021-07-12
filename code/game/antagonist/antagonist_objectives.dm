@@ -41,25 +41,24 @@
 
 	if(!mind)
 		return
+
 	if(!is_special_character(mind))
-		to_chat(src, "<span class='warning'>While you may perhaps have goals, this verb's meant to only be visible \
-		to antagonists.  Please make a bug report!</span>")
+		to_chat(src, SPAN_WARNING("While you may perhaps have goals, this verb's meant to only be visible \
+		to antagonists. Please make a bug report!"))
 		return
 
-	var/datum/goal/ambition/goal = SSgoals.ambitions[mind]
-	var/new_goal = sanitize(input(src, "Write a short sentence of what your character hopes to accomplish \
-	today as an antagonist.  Remember that this is purely optional.  It will be shown at the end of the \
-	round for everybody else.", "Antagonist Goal", (goal ? html_decode(goal.description) : "")) as null|message)
+	var/datum/goal/ambition/goals = SSgoals.ambitions[mind]
+	var/new_goal = sanitize(input(src, "Write down what you want to achieve in this round as an antagonist \
+	- your goals. They will be visible to all players after the end of the round. \
+	remember you cannot rewrite them - only add new lines.", "Antagonist Goal") as null|message)
 	if(!isnull(new_goal))
-		if(!goal)
-			goal = new /datum/goal/ambition(mind)
-		goal.description = new_goal
-		to_chat(src, "<span class='notice'>You've set your goal to be <b>'[goal.description]'</b>. You can check your goals with the <b>Show Goals</b> verb.</span>")
-	else
-		to_chat(src, "<span class='notice'>You leave your ambitions behind.</span>")
-		if(goal)
-			qdel(goal)
-	log_and_message_admins("has set their ambitions to now be: [new_goal].")
+		if(!goals)
+			goals = new /datum/goal/ambition(mind)
+		goals.description += "<br>[roundduration2text()]: [new_goal]"
+		to_chat(src, SPAN_NOTICE("Your ambitions now look like this: <b>[goals.description]</b>."))
+		to_chat(src, SPAN_NOTICE("You can view your ambitions in the <b>Notes</b> panel, or with the <b>Show Goals</b> verb. If you wish to change your ambition, \
+		please contact to Administator."))
+		log_and_message_admins("has updated their ambitions. New one: [new_goal]")
 
 //some antagonist datums are not actually antagonists, so we might want to avoid
 //sending them the antagonist meet'n'greet messages.
