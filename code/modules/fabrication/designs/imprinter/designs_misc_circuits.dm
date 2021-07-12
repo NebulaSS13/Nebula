@@ -448,3 +448,6 @@
 
 /datum/fabricator_recipe/imprinter/circuit/docking_beacon
 	path = /obj/item/stock_parts/circuitboard/docking_beacon
+
+/datum/fabricator_recipe/imprinter/circuit/router_wall_mounted
+	path = /obj/item/stock_parts/circuitboard/router/wall_mounted

@@ -40,6 +40,10 @@
 		/obj/item/stock_parts/keyboard = 1
 	)
 
+/obj/item/stock_parts/circuitboard/router/wall_mounted
+	name = "circuitboard (wall-mounted router)"
+	build_path = /obj/machinery/network/router/wall_mounted
+
 /obj/item/stock_parts/circuitboard/relay
 	name = "circuitboard (relay)"
 	build_path = /obj/machinery/network/relay
