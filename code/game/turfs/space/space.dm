@@ -79,9 +79,9 @@
 			var/obj/item/stack/tile/floor/S = C
 			if (!S.use(1))
 				return
-			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ChangeTurf(/turf/simulated/floor/airless, keep_air = TRUE)
+			ChangeTurf(/turf/simulated/floor/airless)
+			qdel(L)
 		else
 			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
 		return TRUE
