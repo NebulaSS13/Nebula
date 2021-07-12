@@ -1906,6 +1906,7 @@
 #include "code\modules\fabrication\designs\textile\overwear.dm"
 #include "code\modules\fabrication\designs\textile\protective.dm"
 #include "code\modules\fabrication\designs\textile\space.dm"
+#include "code\modules\fabrication\designs\textile\storage.dm"
 #include "code\modules\flufftext\Dreaming.dm"
 #include "code\modules\flufftext\TextFilters.dm"
 #include "code\modules\food\recipes_microwave.dm"

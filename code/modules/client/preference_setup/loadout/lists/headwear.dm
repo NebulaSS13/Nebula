@@ -79,7 +79,7 @@
 		"blue hardhat" =                                      /obj/item/clothing/head/hardhat/dblue,
 		"orange hardhat" =                                    /obj/item/clothing/head/hardhat/orange,
 		"red hardhat" =                                       /obj/item/clothing/head/hardhat/red,
-		"light damage control helmet" =                       /obj/item/clothing/head/hardhat/EMS/DC_light
+		"light damage control helmet" =                       /obj/item/clothing/head/hardhat/ems/dc_light
 	)
 
 /datum/gear/head/formalhat

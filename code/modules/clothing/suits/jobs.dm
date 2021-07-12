@@ -200,7 +200,7 @@
 		/obj/item/radio,
 		/obj/item/tank/emergency,
 		/obj/item/chems/ivbag,
-		/obj/item/clothing/head/hardhat/EMS
+		/obj/item/clothing/head/hardhat/ems
 	)
 	body_parts_covered = SLOT_UPPER_BODY
 
