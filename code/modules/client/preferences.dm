@@ -21,15 +21,16 @@ var/global/list/time_prefs_fixed = list()
 /* END PLACEHOLDER VERB */
 
 /datum/preferences
-	//doohickeys for savefiles
+	// doohickeys for savefiles
 	var/is_guest = FALSE
-	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
+	// Holder so it doesn't default to slot 1, rather the last one used
+	var/default_slot = 1
 
 	// Cache, mapping slot record ids to character names
 	// Saves reading all the slot records when listing
 	var/list/slot_names = null
 
-	//non-preference stuff
+	// NON-PREFERENCE STUFF
 	var/warns = 0
 	var/muted = 0
 	var/last_ip
@@ -39,10 +40,12 @@ var/global/list/time_prefs_fixed = list()
 	var/load_failed = null
 
 	//game-preferences
-	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
+	//Saved changlog filesize to detect if there was a change
+	var/lastchangelog = ""
 
 	//Mob preview
-	var/list/char_render_holders		//Should only be a key-value list of north/south/east/west = obj/screen.
+	//Should only be a key-value list of north/south/east/west = obj/screen.
+	var/list/char_render_holders
 	var/static/list/preview_screen_locs = list(
 		"1" = "character_preview_map:1,5:-12",
 		"2" = "character_preview_map:1,3:15",
@@ -59,13 +62,12 @@ var/global/list/time_prefs_fixed = list()
 
 /datum/preferences/New(client/C)
 	if(istype(C))
+
 		client = C
 		client_ckey = C.ckey
-		SScharacter_setup.preferences_datums[C.ckey] = src
-		if(SScharacter_setup.initialized)
-			setup()
-		else
-			SScharacter_setup.prefs_awaiting_setup += src
+
+		setup_preferences()
+
 	..()
 
 /datum/preferences/Destroy()
@@ -88,9 +90,6 @@ var/global/list/time_prefs_fixed = list()
 
 	sanitize_preferences()
 	update_preview_icon()
-	if(client && istype(client.mob, /mob/new_player))
-		var/mob/new_player/np = client.mob
-		np.show_lobby_menu(TRUE)
 
 /datum/preferences/proc/load_data()
 	load_failed = null
@@ -131,16 +130,25 @@ var/global/list/time_prefs_fixed = list()
 	player_setup.load_preferences(savefile_reader)
 	var/orig_slot = default_slot
 
-	S.cd = "/[global.using_map.path]"
+	// searching for a legacy entry
 	for(var/slot = 1 to 40)
 		if(!S.dir.Find("character[slot]"))
 			continue
-		S.cd = "/[global.using_map.path]/character[slot]"
 		default_slot = slot
 		player_setup.load_character(savefile_reader)
-		save_character(override_key = "character_[global.using_map.path]_[slot]")
-		S.cd = "/[global.using_map.path]"
-	S.cd = "/"
+		save_character(override_key = "character_[slot]")
+
+	// searching in saved dirs
+	for(var/dir in S.dir)
+		S.cd = "/[dir]"
+		for(var/slot = 1 to 40)
+			if(!S.dir.Find("character[slot]"))
+				continue
+			default_slot = slot
+			player_setup.load_character(savefile_reader)
+			save_character(override_key = "character_[dir]_[slot]")
+			S.cd = "/[dir]"
+		S.cd = "/"
 
 	default_slot = orig_slot
 	save_preferences()
@@ -443,8 +451,27 @@ var/global/list/time_prefs_fixed = list()
 	close_browser(user, "window=saves")
 
 /datum/preferences/proc/apply_post_login_preferences()
-	set waitfor = 0
+	set waitfor = FALSE
+
 	if(!client)
 		return
+
+	client.apply_fps(clientfps)
+
 	if(client.get_preference_value(/datum/client_preference/fullscreen_mode) != PREF_OFF)
 		client.toggle_fullscreen(client.get_preference_value(/datum/client_preference/fullscreen_mode))
+
+
+/datum/preferences/proc/setup_preferences(initialization = FALSE)
+	// This proc will be called twice if SScharacter_setup is not initialized,
+	// so, don't create prefs again.
+
+	if(istype(client))
+
+		// Preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum).
+		SScharacter_setup.preferences_datums[client.ckey] = src
+
+		if(initialization || SScharacter_setup.initialized)
+			setup()
+		else
+			SScharacter_setup.queue_prefs(src)

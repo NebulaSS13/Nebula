@@ -6,8 +6,8 @@ SUBSYSTEM_DEF(character_setup)
 	wait = 1 SECOND
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
 
-	var/list/prefs_awaiting_setup = list()
 	var/list/preferences_datums = list()
+	var/list/prefs_awaiting_setup = list()
 	var/list/newplayers_requiring_init = list()
 
 	var/list/save_queue = list()
@@ -16,12 +16,21 @@ SUBSYSTEM_DEF(character_setup)
 	while(prefs_awaiting_setup.len)
 		var/datum/preferences/prefs = prefs_awaiting_setup[prefs_awaiting_setup.len]
 		prefs_awaiting_setup.len--
-		prefs.setup()
+		prefs.setup_preferences(TRUE)
+
 	while(newplayers_requiring_init.len)
 		var/mob/new_player/new_player = newplayers_requiring_init[newplayers_requiring_init.len]
 		newplayers_requiring_init.len--
 		new_player.deferred_login()
+
 	. = ..()
+
+/datum/controller/subsystem/character_setup/proc/queue_prefs(datum/preferences/prefs)
+	// Calling this after subsytem's initialization is pointless
+	// and the client's preferences will never be loaded.
+	ASSERT(!initialized)
+
+	prefs_awaiting_setup += prefs
 
 /datum/controller/subsystem/character_setup/fire(resumed = FALSE)
 	while(save_queue.len)
@@ -34,5 +43,5 @@ SUBSYSTEM_DEF(character_setup)
 		if(MC_TICK_CHECK)
 			return
 
-/datum/controller/subsystem/character_setup/proc/queue_preferences_save(var/datum/preferences/prefs)
+/datum/controller/subsystem/character_setup/proc/queue_preferences_save(datum/preferences/prefs)
 	save_queue |= prefs
