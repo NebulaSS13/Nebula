@@ -58,7 +58,6 @@
 		/obj/item/storage/box/syndie_kit/chameleon,
 		/obj/item/gun/energy/chameleon,
 		)
-	/obj/item/storage/backpack/chameleon/sydie_kit
 	material = /decl/material/solid/metal/gold
 	matter = list(
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
