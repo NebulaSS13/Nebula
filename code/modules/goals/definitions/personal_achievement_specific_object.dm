@@ -32,7 +32,7 @@
 	blacklisted_objects = blacklisted_objects || list()
 	blacklisted_objects |= typesof(/obj/item/chems/food/snacks/amanita_pie)
 	blacklisted_objects |= typesof(/obj/item/chems/food/snacks/amanitajelly)
-	blacklisted_objects |= typesof(/obj/item/chems/food/snacks/canned/caviar/true)
+	blacklisted_objects |= typesof(/obj/item/chems/food/snacks/can/caviar/true)
 	blacklisted_objects |= typesof(/obj/item/chems/food/snacks/old)
 	..()
 
