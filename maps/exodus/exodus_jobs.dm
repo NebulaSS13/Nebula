@@ -1,4 +1,7 @@
 /datum/map/exodus
+	default_job_type = /datum/job/assistant
+	default_department_type = /decl/department/civilian
+	id_hud_icons = 'maps/exodus/hud.dmi'
 	allowed_jobs = list(
 		/datum/job/captain,
 		/datum/job/hop,
@@ -25,14 +28,14 @@
 		/datum/job/detective,
 		/datum/job/warden,
 		/datum/job/officer,
-		/datum/job/cyborg,
-		/datum/job/ai
+		/datum/job/robot,
+		/datum/job/computer
 	)
 
 	species_to_job_whitelist = list(
 		/decl/species/adherent = list(
-			/datum/job/ai, 
-			/datum/job/cyborg, 
+			/datum/job/computer, 
+			/datum/job/robot, 
 			/datum/job/assistant, 
 			/datum/job/janitor, 
 			/datum/job/chef, 
@@ -45,8 +48,8 @@
 			/datum/job/mining
 		),
 		/decl/species/utility_frame = list(
-			/datum/job/ai, 
-			/datum/job/cyborg, 
+			/datum/job/computer, 
+			/datum/job/robot, 
 			/datum/job/assistant, 
 			/datum/job/janitor, 
 			/datum/job/chef, 
@@ -59,8 +62,8 @@
 			/datum/job/mining
 		),
 		/decl/species/serpentid = list(
-			/datum/job/ai, 
-			/datum/job/cyborg, 
+			/datum/job/computer, 
+			/datum/job/robot, 
 			/datum/job/assistant, 
 			/datum/job/janitor, 
 			/datum/job/chef, 

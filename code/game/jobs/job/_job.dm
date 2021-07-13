@@ -1,47 +1,44 @@
 /datum/job
+	var/title                                 // The name of the job	
+	var/list/software_on_spawn = list()       // Defines the software files that spawn on tablets and labtops
+	var/list/department_types = list()        // What departments the job is in.
+	var/autoset_department = TRUE             // If department list is empty, use map default.
+	var/primary_department                    // A jobs primary deparment, defualts to the first in the department refs list if not set. Important for heads, the department they are head of needs to be this one.
+	var/total_positions = 0                   // How many players can be this job
+	var/spawn_positions = 0                   // How many players can spawn in as this job
+	var/current_positions = 0                 // How many players have this job
+	var/availablity_chance = 100              // Percentage chance job is available each round
+	var/guestbanned = FALSE                   // If set to 1 this job will be unavalible to guests
+	var/must_fill = FALSE                     // If set to 1 this job will be have priority over other job preferences. Do not reccommend on jobs with more that one position.
+	var/not_random_selectable = FALSE         // If set to 1 this job will not be selected when a player asks for a random job.
+	var/description                           // If set, returns a static description. To add dynamic text, overwrite this proc, call parent aka . = ..() and then . += "extra text" on the line after that.
+	var/list/event_categories                 // A set of tags used to check jobs for suitability for things like random event selection.
+	var/skip_loadout_preview = FALSE          // Whether or not the job should render loadout items in char preview.
+	var/supervisors = null                    // Supervisors, who this person answers to directly
+	var/selection_color = "#515151"         // Selection screen color
+	var/list/alt_titles                       // List of alternate titles, if any and any potential alt. outfits as assoc values.
+	var/req_admin_notify                      // If this is set to 1, a text is printed to the player when jobs are assigned, telling him that he should let admins know that he has to disconnect.
+	var/minimal_player_age = 0                // If you have use_age_restriction_for_jobs config option enabled and the database set up, this option will add a requirement for players to be at least minimal_player_age days old. (meaning they first signed in at least that many days before.)
+	var/head_position = 0                     // Is this position Command?
+	var/minimum_character_age                 // List of species = age, if species is not here, it's auto-pass
+	var/ideal_character_age = 30              // Preferred character age when populate job at roundstart.
+	var/create_record = 1                     // Do we announce/make records for people who spawn on this job?
+	var/is_semi_antagonist = FALSE            // Whether or not this job is given semi-antagonist status.
+	var/account_allowed = 1                   // Does this job type come with a station account?
+	var/economic_power = 2                    // With how much does this job modify the initial account amount?
+	var/is_holy = FALSE                       // Can this role perform blessings?
+	var/outfit_type                           // The outfit the employee will be dressed in, if any
+	var/loadout_allowed = TRUE                // Whether or not loadout equipment is allowed and to be created when joining.
+	var/list/allowed_branches                 // For maps using branches and ranks, also expandable for other purposes
+	var/list/allowed_ranks                    // Ditto
+	var/announced = TRUE                      // If their arrival is announced on radio
+	var/latejoin_at_spawnpoints               // If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
+	var/forced_spawnpoint                     // If set to a spawnpoint name, will use that spawn point for joining as this job.
+	var/hud_icon						      // icon used for Sec HUD overlay
 
-	//The name of the job
-	var/title
 	//Job access. The use of minimal_access or access is determined by a config setting: config.jobs_have_minimal_access
-	var/list/minimal_access = list()      // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
-	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
-	var/list/software_on_spawn = list()   // Defines the software files that spawn on tablets and labtops
-	var/list/department_types = list()	  // What deparements the job is in.
-	var/primary_department = null 		  // A jobs primary deparment, defualts to the first in the department refs list if not set. Important for heads, the department they are head of needs to be this one.
-	var/total_positions = 0               // How many players can be this job
-	var/spawn_positions = 0               // How many players can spawn in as this job
-	var/current_positions = 0             // How many players have this job
-	var/availablity_chance = 100          // Percentage chance job is available each round
-	var/guestbanned = 0					  // If set to 1 this job will be unavalible to guests
-	var/must_fill = 0					  // If set to 1 this job will be have priority over other job preferences. Do not reccommend on jobs with more that one position.
-	var/not_random_selectable = 0		  // If set to 1 this job will not be selected when a player asks for a random job.
-	var/description						  // If set, returns a static description. To add dynamic text, overwrite this proc, call parent aka . = ..() and then . += "extra text" on the line after that.
-	var/list/event_categories
-
-	var/supervisors = null                // Supervisors, who this person answers to directly
-	var/selection_color = "#515151"       // Selection screen color
-	var/list/alt_titles                   // List of alternate titles, if any and any potential alt. outfits as assoc values.
-	var/req_admin_notify                  // If this is set to 1, a text is printed to the player when jobs are assigned, telling him that he should let admins know that he has to disconnect.
-	var/minimal_player_age = 0            // If you have use_age_restriction_for_jobs config option enabled and the database set up, this option will add a requirement for players to be at least minimal_player_age days old. (meaning they first signed in at least that many days before.)
-	var/head_position = 0                 // Is this position Command?
-	var/minimum_character_age			  // List of species = age, if species is not here, it's auto-pass
-	var/ideal_character_age = 30
-	var/create_record = 1                 // Do we announce/make records for people who spawn on this job?
-	var/is_semi_antagonist = FALSE        // Whether or not this job is given semi-antagonist status.
-	var/account_allowed = 1               // Does this job type come with a station account?
-	var/economic_power = 2                // With how much does this job modify the initial account amount?
-	var/is_holy = FALSE                   // Can this role perform blessings?
-	var/outfit_type                       // The outfit the employee will be dressed in, if any
-
-	var/loadout_allowed = TRUE            // Whether or not loadout equipment is allowed and to be created when joining.
-	var/list/allowed_branches             // For maps using branches and ranks, also expandable for other purposes
-	var/list/allowed_ranks                // Ditto
-
-	var/announced = TRUE                  //If their arrival is announced on radio
-	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
-	var/forced_spawnpoint                 //If set to a spawnpoint name, will use that spawn point for joining as this job.
-
-	var/hud_icon						  //icon used for Sec HUD overlay
+	var/list/minimal_access = list()          // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
+	var/list/access = list()                  // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
 
 	//Minimum skills allowed for the job. List should contain skill (as in /decl/hierarchy/skill path), with values which are numbers.
 	var/min_skill = list(
@@ -62,6 +59,15 @@
 	var/required_language
 
 /datum/job/New()
+
+	if(type == /datum/job && global.using_map.default_job_type == type)
+		title = "Debug Job"
+		hud_icon = "hudblank"
+		outfit_type = /decl/hierarchy/outfit/job/generic/scientist
+		autoset_department = TRUE
+
+	if(!length(department_types) && autoset_department)
+		department_types = list(global.using_map.default_department_type)
 
 	if(prob(100-availablity_chance))	//Close positions, blah blah.
 		total_positions = 0

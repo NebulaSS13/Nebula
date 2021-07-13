@@ -26,7 +26,7 @@ SUBSYSTEM_DEF(jobs)
 
 /datum/controller/subsystem/jobs/proc/get_department_by_type(var/dept_ref)
 	if(!length(departments_by_type))
-		departments_by_type = sortTim(decls_repository.get_decls_of_subtype(/decl/department), /proc/cmp_departments_dsc, TRUE)
+		departments_by_type = sortTim(decls_repository.get_decls_of_type(/decl/department), /proc/cmp_departments_dsc, TRUE)
 	. = departments_by_type[dept_ref]
 
 /datum/controller/subsystem/jobs/Initialize(timeofday)
@@ -40,7 +40,7 @@ SUBSYSTEM_DEF(jobs)
 		primary_job_datums += job
 
 	for(var/datum/job/job in primary_job_datums)
-		if(isnull(job.primary_department))
+		if(isnull(job.primary_department) && length(job.department_types))
 			job.primary_department = job.department_types[1]
 
 	// Create abstract submap archetype jobs for use in prefs, etc.
@@ -78,7 +78,7 @@ SUBSYSTEM_DEF(jobs)
 				if(J)
 					J.total_positions = text2num(value)
 					J.spawn_positions = text2num(value)
-					if(name == "AI" || name == "Robot")//I dont like this here but it will do for now
+					if((ASSIGNMENT_ROBOT in J.event_categories) || (ASSIGNMENT_COMPUTER in J.event_categories))
 						J.total_positions = 0
 
 	// Init skills.
@@ -510,7 +510,7 @@ SUBSYSTEM_DEF(jobs)
 			H.buckled.forceMove(H.loc)
 			H.buckled.set_dir(H.dir)
 
-	if(rank != "Robot" && rank != "AI")		//These guys get their emails later.
+	if(!(ASSIGNMENT_ROBOT in job.event_categories) && !(ASSIGNMENT_COMPUTER in job.event_categories)) //These guys get their emails later.
 		var/domain = "freemail.net"
 		if(H.char_branch?.email_domain)
 			domain = H.char_branch.email_domain

@@ -349,9 +349,9 @@ Helpers
 	if(mode.station_explosion_in_progress)
 		return 0
 	if(config.continous_rounds)
-		return SSevac.evacuation_controller.round_over() || mode.station_was_nuked
+		return SSevac.evacuation_controller?.round_over() || mode.station_was_nuked
 	else
-		return mode.check_finished() || (SSevac.evacuation_controller.round_over() && SSevac.evacuation_controller.emergency_evacuation) || universe_has_ended
+		return mode.check_finished() || (SSevac.evacuation_controller && SSevac.evacuation_controller.round_over() && SSevac.evacuation_controller.emergency_evacuation) || universe_has_ended
 
 /datum/controller/subsystem/ticker/proc/mode_finished()
 	if(config.continous_rounds)
@@ -382,26 +382,8 @@ Helpers
 			C.RollCredits()
 	for(var/mob/Player in global.player_list)
 		if(Player.mind && !isnewplayer(Player))
-			if(Player.stat != DEAD)
-				var/turf/playerTurf = get_turf(Player)
-				if(SSevac.evacuation_controller.round_over() && SSevac.evacuation_controller.emergency_evacuation)
-					if(isNotAdminLevel(playerTurf.z))
-						to_chat(Player, "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></font>")
-					else
-						to_chat(Player, "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>")
-				else if(isAdminLevel(playerTurf.z))
-					to_chat(Player, "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].</b></font>")
-				else if(issilicon(Player))
-					to_chat(Player, "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>")
-				else
-					to_chat(Player, "<font color='blue'><b>You got through just another workday on [station_name()] as [Player.real_name].</b></font>")
-			else
-				if(isghost(Player))
-					var/mob/observer/ghost/O = Player
-					if(!O.started_as_observer)
-						to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
-				else
-					to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
+			global.using_map.summarize_roundend_for(Player)
+
 	to_world("<br>")
 
 	for (var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)

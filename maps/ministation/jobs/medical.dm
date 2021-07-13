@@ -7,7 +7,6 @@
 	spawn_positions = 2
 	alt_titles = list("Surgeon","Chemist","Nurse")
 	skill_points = 24
-	hud_icon = "hudmedicaldoctor"
 	min_skill = list(
 		SKILL_LITERACY  = SKILL_ADEPT,
 		SKILL_MEDICAL   = SKILL_EXPERT,
@@ -38,3 +37,4 @@
 	)
 	outfit_type = /decl/hierarchy/outfit/job/ministation/doctor
 	minimal_player_age = 3
+	event_categories = list(ASSIGNMENT_MEDICAL)

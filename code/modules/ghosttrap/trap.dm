@@ -99,7 +99,7 @@
 ***********************************/
 /decl/ghosttrap/positronic_brain
 	name = "positronic brain"
-	ban_checks = list("AI","Robot")
+	ban_checks = list("AI",ASSIGNMENT_ROBOT)
 	pref_check = "ghost_posibrain"
 	ghost_trap_message = "They are occupying a positronic brain now."
 

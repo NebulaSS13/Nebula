@@ -301,7 +301,7 @@
 	global.universe.OnPlayerLatejoin(character)
 	spawnpoint.after_join(character)
 	if(job.create_record)
-		if(character.mind.assigned_role != "Robot")
+		if(!(ASSIGNMENT_ROBOT in job.event_categories))
 			CreateModularRecord(character)
 			SSticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 			AnnounceArrival(character, job, spawnpoint.msg)
@@ -328,13 +328,14 @@
 	header += "<b>Welcome, [name].<br></b>"
 	header += "Round Duration: [roundduration2text()]<br>"
 
-	if(SSevac.evacuation_controller.has_evacuated())
-		header += "<font color='red'><b>The [station_name()] has been evacuated.</b></font><br>"
-	else if(SSevac.evacuation_controller.is_evacuating())
-		if(SSevac.evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
-			header += "<font color='red'>The [station_name()] is currently undergoing evacuation procedures.</font><br>"
-		else                                           // Crew transfer initiated
-			header += "<font color='red'>The [station_name()] is currently undergoing crew transfer procedures.</font><br>"
+	if(SSevac.evacuation_controller)
+		if(SSevac.evacuation_controller.has_evacuated())
+			header += "<font color='red'><b>The [station_name()] has been evacuated.</b></font><br>"
+		else if(SSevac.evacuation_controller.is_evacuating())
+			if(SSevac.evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
+				header += "<font color='red'>The [station_name()] is currently undergoing evacuation procedures.</font><br>"
+			else                                           // Crew transfer initiated
+				header += "<font color='red'>The [station_name()] is currently undergoing crew transfer procedures.</font><br>"
 
 	var/list/dat = list()
 	dat += "Choose from the following open/valid positions:<br>"

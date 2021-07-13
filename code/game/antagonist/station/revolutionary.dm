@@ -11,6 +11,7 @@
 	flags = ANTAG_SUSPICIOUS | ANTAG_VOTABLE
 	antaghud_indicator = "hudrevolutionary"
 	skill_setter = /datum/antag_skill_setter/station
+	blocked_job_event_categories = list(ASSIGNMENT_ROBOT, ASSIGNMENT_COMPUTER)
 
 	hard_cap = 2
 	hard_cap_round = 4
@@ -26,8 +27,13 @@
 	faction_invisible = 1
 	faction = "revolutionary"
 
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg)
-	var/command_department_id = /decl/department/command
+	blacklisted_jobs = list(/datum/job/submap)
+	var/command_department_id
+
+/decl/special_role/revolutionary/Initialize()
+	if(!command_department_id)
+		command_department_id = global.using_map.default_department_type
+	. = ..()
 
 /decl/special_role/revolutionary/create_global_objectives()
 	if(!..())

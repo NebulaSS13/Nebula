@@ -1,7 +1,6 @@
-/datum/job/ai
-	title = "AI"
-	department_types = list(/decl/department/miscellaneous)
-	event_categories = list("AI")
+/datum/job/computer
+	title = "Computer"
+	event_categories = list(ASSIGNMENT_COMPUTER)
 	total_positions = 0 // Not used for AI, see is_position_available below and modules/mob/living/silicon/ai/latejoin.dm
 	spawn_positions = 1
 	selection_color = "#3f823f"
@@ -17,18 +16,20 @@
 	no_skill_buffs = TRUE
 	guestbanned = 1	
 	not_random_selectable = 1
+	skip_loadout_preview = TRUE
+	department_types = list(/decl/department/miscellaneous)
 
-/datum/job/ai/equip(var/mob/living/carbon/human/H)
+/datum/job/computer/equip(var/mob/living/carbon/human/H)
 	if(!H)	return 0
 	return 1
 
-/datum/job/ai/is_position_available()
+/datum/job/computer/is_position_available()
 	return (empty_playable_ai_cores.len != 0)
 
-/datum/job/ai/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+/datum/job/computer/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
 	return H
 
-/datum/job/ai/do_spawn_special(var/mob/living/character, var/mob/new_player/new_player_mob, var/latejoin)
+/datum/job/computer/do_spawn_special(var/mob/living/character, var/mob/new_player/new_player_mob, var/latejoin)
 	character = character.AIize(move=0) // AIize the character, but don't move them yet
 
 	// is_available for AI checks that there is an empty core available in this list
@@ -46,10 +47,9 @@
 	qdel(C)
 	return TRUE
 
-/datum/job/cyborg
+/datum/job/robot
 	title = "Robot"
-	event_categories = list("Robot")
-	department_types = list(/decl/department/miscellaneous)
+	event_categories = list(ASSIGNMENT_ROBOT)
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "your laws and the AI"
@@ -64,15 +64,17 @@
 	no_skill_buffs = TRUE
 	guestbanned = 1	
 	not_random_selectable = 1
+	skip_loadout_preview = TRUE
+	department_types = list(/decl/department/miscellaneous)
 
-/datum/job/cyborg/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
+/datum/job/robot/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
 	if(H)
 		return H.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))
 
-/datum/job/cyborg/equip(var/mob/living/carbon/human/H)
+/datum/job/robot/equip(var/mob/living/carbon/human/H)
 	return !!H
 
-/datum/job/cyborg/New()
+/datum/job/robot/New()
 	..()
 	alt_titles = SSrobots.robot_alt_titles.Copy()
 	alt_titles -= title // So the unit test doesn't flip out if a mob or mmi type is declared for our main title.

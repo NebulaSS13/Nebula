@@ -125,7 +125,7 @@
 		return 0 //don't need any more
 
 	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
-	if (!SSevac.evacuation_controller.emergency_evacuation && security_state.current_security_level_is_lower_than(security_state.high_security_level))
+	if((!SSevac.evacuation_controller || !SSevac.evacuation_controller.emergency_evacuation) && security_state.current_security_level_is_lower_than(security_state.high_security_level))
 		src.visible_message("\The [src] buzzes. It does not appear to be accepting any commands.")
 		return 0
 

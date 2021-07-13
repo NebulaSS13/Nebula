@@ -83,7 +83,7 @@
 			to_chat(user, SPAN_WARNING("Sticking an empty [W.name] into the frame would sort of defeat the purpose."))
 			return
 
-		if(jobban_isbanned(B, "Robot"))
+		if(jobban_isbanned(B, ASSIGNMENT_ROBOT))
 			to_chat(user, SPAN_WARNING("\The [W] does not seem to fit."))
 			return
 
@@ -120,7 +120,7 @@
 		if(O.mind && O.mind.assigned_role)
 			O.job = O.mind.assigned_role
 		else
-			O.job = "Robot"
+			O.job = ASSIGNMENT_ROBOT
 
 		var/obj/item/robot_parts/chest/chest = parts[BP_CHEST]
 		chest.cell.forceMove(O)

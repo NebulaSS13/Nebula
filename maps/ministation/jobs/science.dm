@@ -36,3 +36,4 @@
 	)
 	selection_color = "#633d63"
 	economic_power = 7
+	event_categories = list(ASSIGNMENT_SCIENTIST)

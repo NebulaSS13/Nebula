@@ -18,12 +18,11 @@ var/global/list/latejoin_cryo_captain = list()
 /decl/spawnpoint/cryo
 	name = "Port Cryogenic Storage"
 	msg = "has completed revival in the port cryogenics bay"
-	disallow_job = list(/datum/job/cyborg)
+	disallow_job = list(/datum/job/tradeship_robot)
 
 /decl/spawnpoint/cryo/two
 	name = "Starboard Cryogenic Storage"
 	msg = "has completed revival in the starboard cryogenics bay"
-	disallow_job = list(/datum/job/cyborg)
 
 /decl/spawnpoint/cryo/two/New()
 	..()
