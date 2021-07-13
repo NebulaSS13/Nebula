@@ -85,3 +85,6 @@ MAX_CLIENT_VIEW_Y 30
 
 ## Remove the # to define a different cap for aspect points in chargen.
 #MAX_CHARACTER_ASPECTS 5
+
+## Allow multiple input keys to be pressed for diagonal movement.
+#ALLOW_DIAGONAL_MOVEMENT

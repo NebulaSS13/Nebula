@@ -1,6 +1,6 @@
 /atom/movable
 	layer = OBJ_LAYER
-	appearance_flags = TILE_BOUND|PIXEL_SCALE
+	appearance_flags = TILE_BOUND | PIXEL_SCALE | LONG_GLIDE
 	glide_size = 8
 	var/movable_flags
 	var/last_move = null
@@ -318,3 +318,11 @@
 /atom/movable/proc/pushed(var/pushdir)
 	set waitfor = FALSE
 	step(src, pushdir)
+
+/**
+* A wrapper for setDir that should only be able to fail by living mobs.
+*
+* Called from [/atom/movable/proc/keyLoop], this exists to be overwritten by living mobs with a check to see if we're actually alive enough to change directions
+*/
+/atom/movable/proc/keybind_face_direction(direction)
+	return
