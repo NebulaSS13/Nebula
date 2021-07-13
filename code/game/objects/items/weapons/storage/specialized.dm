@@ -22,6 +22,7 @@
 	allow_quick_gather = 1
 	allow_quick_empty = 1
 	use_to_pickup = 1
+	material = /decl/material/solid/leather
 
 
 // -----------------------------
@@ -64,6 +65,7 @@
 	allow_quick_gather = 1
 	allow_quick_empty = 1
 	use_to_pickup = 1
+	material = /decl/material/solid/leather
 
 
 // -----------------------------

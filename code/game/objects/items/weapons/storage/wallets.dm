@@ -42,6 +42,7 @@
 		/obj/item/clothing/accessory/armor/tag,
 		)
 	slot_flags = SLOT_ID
+	material = /decl/material/solid/leather
 
 	var/obj/item/card/id/front_id = null
 	var/obj/item/charge_stick/front_stick = null

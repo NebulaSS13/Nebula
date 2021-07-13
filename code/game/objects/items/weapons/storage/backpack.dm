@@ -13,6 +13,7 @@
 	max_w_class = ITEM_SIZE_LARGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	open_sound = 'sound/effects/storage/unzip.ogg'
+	material = /decl/material/solid/leather/synth
 
 /obj/item/storage/backpack/equipped()
 	if(!has_extension(src, /datum/extension/appearance))
