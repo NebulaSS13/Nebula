@@ -7,7 +7,7 @@ var/global/datum/prometheus_metrics/prometheus_metrics = new
 
 /datum/prometheus_metrics/New()
 	metric_families = list()
-	for(var/T in typesof(/datum/metric_family) - /datum/metric_family)
+	for(var/T in subtypesof(/datum/metric_family))
 		var/datum/metric_family/mf = T
 		if(initial(mf.name) == null || initial(mf.metric_type) == null)
 			continue

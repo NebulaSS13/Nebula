@@ -158,7 +158,7 @@
 	var/mob/living/spawned_mob
 	var/list/spawned_mobs = list()
 
-	var/spawn_path = input("Select a mob type.", "Drop Pod Selection", null) as null|anything in typesof(/mob/living)-/mob/living
+	var/spawn_path = input("Select a mob type.", "Drop Pod Selection", null) as null|anything in subtypesof(/mob/living)
 	if(!spawn_path)
 		return
 
