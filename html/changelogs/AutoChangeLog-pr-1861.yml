@@ -1,5 +1,0 @@
-author: Geeves
-delete-after: true
-changes:
-  - rscdel: AI can now turn their holograms without moving by using the eastface,
-      westface, northface, and southface macros.
