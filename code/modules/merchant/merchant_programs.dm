@@ -7,7 +7,6 @@
 	nanomodule_path = /datum/nano_module/program/merchant
 	size = 12
 	usage_flags = PROGRAM_CONSOLE
-	required_access = list(access_merchant)
 	var/datum/trade_hub/current_hub
 	var/datum/trader/current_trader
 	var/obj/machinery/merchant_pad/pad = null
