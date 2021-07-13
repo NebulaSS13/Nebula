@@ -126,6 +126,7 @@
 		/obj/item/hand_labeler,
 		/obj/item/clothing/gloves
 		)
+	material = /decl/material/solid/leather
 
 /obj/item/storage/belt/utility/full/Initialize()
 	. = ..()
