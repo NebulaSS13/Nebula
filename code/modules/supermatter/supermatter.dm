@@ -84,12 +84,12 @@ var/global/list/supermatter_final_thoughts = list(
 /obj/machinery/power/supermatter
 	name = "supermatter crystal"
 	desc = "A strangely translucent and iridescent crystal. <span class='danger'>You get headaches just from looking at it.</span>"
-	icon = 'icons/obj/engine.dmi'
-	icon_state = "darkmatter"
+	icon = 'icons/obj/supermatter_48.dmi'
+	icon_state = "supermatter"
 	density = 1
 	anchored = 0
 	light_range = 4
-	layer = ABOVE_OBJ_LAYER
+	layer = ABOVE_HUMAN_LAYER
 	matter = list(
 		/decl/material/solid/exotic_matter = MATTER_AMOUNT_PRIMARY,
 		/decl/material/solid/metal/steel =   MATTER_AMOUNT_REINFORCEMENT
@@ -110,8 +110,6 @@ var/global/list/supermatter_final_thoughts = list(
 	var/damage_rate_limit = 4.5		//damage rate cap at power = 300, scales linearly with power
 
 	var/gasefficency = 0.25
-
-	var/base_icon_state = "darkmatter"
 
 	var/last_power
 	var/damage = 0
@@ -175,6 +173,12 @@ var/global/list/supermatter_final_thoughts = list(
 /obj/machinery/power/supermatter/Initialize()
 	. = ..()
 	uid = gl_uid++
+	update_icon()
+
+/obj/machinery/power/supermatter/on_update_icon()
+	. = ..()
+	underlays.Cut()
+	underlays += mutable_appearance(icon, "[icon_state]_underplate", flags = RESET_COLOR, plane = plane, layer = OBJ_LAYER)
 
 /obj/machinery/power/supermatter/get_matter_amount_modifier()
 	. = ..() * (1/HOLLOW_OBJECT_MATTER_MULTIPLIER) * 10 // Big solid chunk of matter.
@@ -437,11 +441,9 @@ var/global/list/supermatter_final_thoughts = list(
 		if (oxygen > 0.8)
 			//If chain reacting at oxygen == 1, we want the power at 800 K to stabilize at a power level of 400
 			equilibrium_power = 400
-			icon_state = "[base_icon_state]_glow"
 		else
 			//If chain reacting at oxygen == 1, we want the power at 800 K to stabilize at a power level of 250
 			equilibrium_power = 250
-			icon_state = base_icon_state
 
 		temp_factor = ( (equilibrium_power/decay_factor)**3 )/800
 		power = max( (removed.temperature * temp_factor) * oxygen + power, 0)
@@ -588,8 +590,8 @@ var/global/list/supermatter_final_thoughts = list(
 /obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
 	name = "supermatter shard"
 	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. <span class='danger'>You get headaches just from looking at it.</span>"
-	icon_state = "darkmatter_shard"
-	base_icon_state = "darkmatter_shard"
+	icon = 'icons/obj/supermatter_32.dmi'
+	icon_state = "supermatter_shard"
 
 	warning_point = 50
 	emergency_point = 400
@@ -599,6 +601,9 @@ var/global/list/supermatter_final_thoughts = list(
 
 	pull_time = 150
 	explosion_power = 3
+
+/obj/machinery/power/supermatter/medium
+	icon = 'icons/obj/supermatter_32.dmi'
 
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return
