@@ -16,10 +16,79 @@
 /datum/fabricator_recipe/textiles/job/overalls
 	path = /obj/item/clothing/suit/apron/overalls
 
-// Sterile gear
+// Medical (Science barely has enough for a category)
+/datum/fabricator_recipe/textiles/job/medical
+	category = "Medical & Science Clothing"
+	path = /obj/item/clothing/under/medical
 
-/datum/fabricator_recipe/textiles/job/medicalsurgeryapron
-	category = "Medical & Sterile"
+/datum/fabricator_recipe/textiles/job/medical/research_director
+	path = /obj/item/clothing/under/research_director
+
+/datum/fabricator_recipe/textiles/job/medical/rdalt
+	path = /obj/item/clothing/under/research_director/rdalt
+
+/datum/fabricator_recipe/textiles/job/medical/dress_rd
+	path = /obj/item/clothing/under/research_director/dress_rd
+
+/datum/fabricator_recipe/textiles/job/medical/chemist
+	path = /obj/item/clothing/under/chemist
+
+/datum/fabricator_recipe/textiles/job/medical/chief_medical_officer
+	path = /obj/item/clothing/under/chief_medical_officer
+
+/datum/fabricator_recipe/textiles/job/medical/geneticist
+	path = /obj/item/clothing/under/geneticist
+
+/datum/fabricator_recipe/textiles/job/medical/virologist
+	path = /obj/item/clothing/under/virologist
+
+/datum/fabricator_recipe/textiles/job/medical/nursesuit
+	path = /obj/item/clothing/under/nursesuit
+
+/datum/fabricator_recipe/textiles/job/medical/nurse
+	path = /obj/item/clothing/under/nurse
+
+/datum/fabricator_recipe/textiles/job/medical/medical
+	path = /obj/item/clothing/under/medical
+
+/datum/fabricator_recipe/textiles/job/medical/paramedic
+	path = /obj/item/clothing/under/medical/paramedic
+
+/datum/fabricator_recipe/textiles/job/medical/scrubs
+	path = /obj/item/clothing/under/medical/scrubs
+
+/datum/fabricator_recipe/textiles/job/medical/blue
+	path = /obj/item/clothing/under/medical/scrubs/blue
+
+/datum/fabricator_recipe/textiles/job/medical/green
+	path = /obj/item/clothing/under/medical/scrubs/green
+
+/datum/fabricator_recipe/textiles/job/medical/purple
+	path = /obj/item/clothing/under/medical/scrubs/purple
+
+/datum/fabricator_recipe/textiles/job/medical/black
+	path = /obj/item/clothing/under/medical/scrubs/black
+
+/datum/fabricator_recipe/textiles/job/medical/navyblue
+	path = /obj/item/clothing/under/medical/scrubs/navyblue
+
+/datum/fabricator_recipe/textiles/job/medical/lilac
+	path = /obj/item/clothing/under/medical/scrubs/lilac
+
+/datum/fabricator_recipe/textiles/job/medical/teal
+	path = /obj/item/clothing/under/medical/scrubs/teal
+
+/datum/fabricator_recipe/textiles/job/medical/heliodor
+	path = /obj/item/clothing/under/medical/scrubs/heliodor
+
+/datum/fabricator_recipe/textiles/job/medical/psych
+	path = /obj/item/clothing/under/psych
+
+/datum/fabricator_recipe/textiles/job/medical/turtleneck
+	path = /obj/item/clothing/under/psych/turtleneck
+
+// Suits
+/datum/fabricator_recipe/textiles/job/medical/surgicalapron
 	path = /obj/item/clothing/suit/surgicalapron
 
 /datum/fabricator_recipe/textiles/job/medical/genericlab
@@ -43,12 +112,6 @@
 /datum/fabricator_recipe/textiles/job/medical/labcoatrd
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd
 
-/datum/fabricator_recipe/textiles/job/medical/breath_medical
-	path = /obj/item/clothing/mask/breath/medical
-
-/datum/fabricator_recipe/textiles/job/medical/surgicalmask
-	path = /obj/item/clothing/mask/surgical
-
 /datum/fabricator_recipe/textiles/job/medical/suithospital
 	path = /obj/item/clothing/suit/hospital
 	
@@ -59,7 +122,7 @@
 	path = /obj/item/clothing/suit/storage/medical_chest_rig
 
 // Security
-/datum/fabricator_recipe/textiles/job/security/security
+/datum/fabricator_recipe/textiles/job/security
 	category = "Security Clothing"
 	path = /obj/item/clothing/under/security
 
@@ -94,16 +157,14 @@
 	path = /obj/item/clothing/under/head_of_security
 
 // Tacticool
-
-/datum/fabricator_recipe/textiles/job/tactical
-	category = "Tactical Wear"
+/datum/fabricator_recipe/textiles/job/security/tactical
 	path = /obj/item/clothing/under/syndicate
 
-/datum/fabricator_recipe/textiles/job/tactical/syndicatecombat
+/datum/fabricator_recipe/textiles/job/security/syndicatecombat
 	path = /obj/item/clothing/under/syndicate/combat
 
-/datum/fabricator_recipe/textiles/job/tactical/maskbalatact
+/datum/fabricator_recipe/textiles/job/security/maskbalatact
 	path = /obj/item/clothing/mask/balaclava/tactical
 
-/datum/fabricator_recipe/textiles/job/tactical/balabalagetdolla
+/datum/fabricator_recipe/textiles/job/security/balabalagetdolla
 	path = /obj/item/clothing/mask/balaclava
