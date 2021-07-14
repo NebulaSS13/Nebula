@@ -196,7 +196,7 @@
 	. = 0
 	if(istype(loc, /turf))
 		var/turf/T = loc
-		. += T.movement_delay
+		. += T.movement_delay()
 	if(HAS_STATUS(src, STAT_DROWSY))
 		. += 6
 	if(lying) //Crawling, it's slower

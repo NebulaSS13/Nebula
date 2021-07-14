@@ -34,6 +34,8 @@
 	var/can_paint
 	var/can_engrave = TRUE
 
+	var/movement_delay
+
 	//How we smooth with other flooring
 	var/decal_layer = DECAL_LAYER
 	var/floor_smooth = SMOOTH_ALL
