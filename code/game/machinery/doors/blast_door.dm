@@ -49,7 +49,7 @@
 		/decl/public_access/public_method/toggle_door_to
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/blast_door = 1)
-
+	construct_state = /decl/machine_construction/default/panel_closed/blast_door
 	frame_type = /obj/structure/door_assembly/blast
 	base_type = /obj/machinery/door/blast
 
