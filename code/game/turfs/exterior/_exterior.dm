@@ -29,7 +29,7 @@
 			else
 				T.update_icon()
 
-/turf/exterior/ChangeTurf()
+/turf/exterior/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
 	var/last_affecting_heat_sources = affecting_heat_sources
 	var/turf/exterior/ext = ..()
 	if(istype(ext))
