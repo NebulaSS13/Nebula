@@ -3,7 +3,8 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "doorbell"
 	desc = "A button used to request the presence of anyone in the department."
-	anchored = 1
+	anchored = TRUE
+	density = FALSE
 	idle_power_usage = 2
 	var/location
 	var/last_paged
