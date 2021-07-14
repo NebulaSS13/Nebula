@@ -64,15 +64,6 @@
 
 	implicit_material = GET_DECL(/decl/material/solid/metal/plasteel)
 
-/obj/machinery/door/blast/inherit_from_assembly(var/obj/structure/door_assembly/assembly)
-	//if assembly is given, create the new door from the assembly
-	if (assembly && istype(assembly))
-		frame_type = assembly.type
-
-		var/obj/item/stock_parts/circuitboard/electronics = assembly.electronics
-		install_component(electronics, FALSE) // will be refreshed in parent call; unsafe to refresh prior to calling ..() in Initialize
-		electronics.construct(src)
-
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()
 	if((stat & BROKEN))

@@ -1007,12 +1007,7 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/inherit_from_assembly(obj/structure/door_assembly/assembly)
 	//if assembly is given, create the new door from the assembly
-	if (assembly && istype(assembly))
-		frame_type = assembly.type
-
-		var/obj/item/stock_parts/circuitboard/electronics = assembly.electronics
-		install_component(electronics, FALSE) // will be refreshed in parent call; unsafe to refresh prior to calling ..() in Initialize
-		electronics.construct(src)
+	if (..(assembly))
 		var/decl/material/mat = GET_DECL(assembly.glass_material)
 
 		if(assembly.glass == 1) // supposed to use material in this case
@@ -1038,6 +1033,7 @@ About the new airlock wires panel:
 		stripe_color = assembly.stripe_color
 		symbol_color = assembly.symbol_color
 		queue_icon_update()
+		return TRUE
 
 /obj/machinery/door/airlock/Destroy()
 	if(brace)

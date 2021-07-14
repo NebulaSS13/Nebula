@@ -94,6 +94,13 @@
 #endif
 
 /obj/machinery/door/proc/inherit_from_assembly(var/obj/structure/door_assembly/assembly)
+	if (assembly && istype(assembly))
+		frame_type = assembly.type
+		if(assembly.electronics)
+			var/obj/item/stock_parts/circuitboard/electronics = assembly.electronics
+			install_component(electronics, FALSE) // will be refreshed in parent call; unsafe to refresh prior to calling ..() in Initialize
+			electronics.construct(src)
+		return TRUE
 
 /obj/machinery/door/LateInitialize(mapload, dir=0, populate_parts=TRUE)
 	..()
