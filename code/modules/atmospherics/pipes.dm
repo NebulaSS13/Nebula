@@ -165,7 +165,7 @@
 /obj/machinery/atmospherics/pipe/set_color(new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 		node.update_icon()
 
 /obj/machinery/atmospherics/pipe/proc/try_leak()
@@ -708,7 +708,7 @@
 /obj/machinery/atmospherics/proc/universal_underlays(var/direction)
 	var/turf/T = loc
 	var/connections = list("", "-supply", "-scrubbers")
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_in_dir(direction))
+	for(var/obj/machinery/atmospherics/node as anything in nodes_in_dir(direction))
 		if(node.icon_connect_type in connections)
 			connections[node.icon_connect_type] = node
 	for(var/suffix in connections)

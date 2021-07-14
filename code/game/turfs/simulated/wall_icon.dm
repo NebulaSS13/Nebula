@@ -19,7 +19,7 @@
 			W.wall_connections = null
 			W.other_connections = null
 			iterate_turfs += W
-		for(var/turf/simulated/wall/W AS_ANYTHING in iterate_turfs)
+		for(var/turf/simulated/wall/W as anything in iterate_turfs)
 			W.update_icon()
 	else
 		wall_connections = null

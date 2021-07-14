@@ -28,9 +28,9 @@
 	var/image/mob_image_personal
 
 /datum/status_marker_holder/proc/clear_markers()
-	for(var/marker AS_ANYTHING in markers)
+	for(var/marker as anything in markers)
 		animate(markers[marker], pixel_z = 12, alpha = 0, time = 3)
-	for(var/marker AS_ANYTHING in markers_personal)
+	for(var/marker as anything in markers_personal)
 		animate(markers_personal[marker], pixel_z = 12, alpha = 0, time = 3)
 
 /datum/status_marker_holder/New(var/mob/owner)
@@ -103,7 +103,7 @@
 
 /datum/status_marker_holder/proc/apply_offsets(var/mob/owner, var/list/markers_to_check, var/check_show_status = TRUE)
 	var/list/visible_markers
-	for(var/decl/status_condition/stat AS_ANYTHING in markers_to_check)
+	for(var/decl/status_condition/stat as anything in markers_to_check)
 		if(HAS_STATUS(owner, stat.type) && (!check_show_status || stat.show_status(owner)))
 			LAZYADD(visible_markers, markers_to_check[stat])
 		else

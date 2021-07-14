@@ -264,9 +264,3 @@
 
 #define GET_DECL(D) (ispath(D, /decl) ? (decls_repository.fetched_decls[D] || decls_repository.get_decl(D)) : null)
 #define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))
-
-#if DM_BUILD < 1540
-#define AS_ANYTHING as()
-#else
-#define AS_ANYTHING as anything
-#endif

@@ -33,7 +33,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
 	atmos_initalized = TRUE
-	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
 		QDEL_NULL(nodes_to_networks[node])
 	nodes_to_networks = null
 	for(var/direction in global.cardinal)
