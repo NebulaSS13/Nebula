@@ -326,7 +326,7 @@
 	maxhealth = 500
 	explosion_resistance = 10
 	pry_mod = 0.55
-	frame_type = /obj/structure/door_assembly/blast
+	frame_type = /obj/structure/door_assembly/blast/shutter
 
 /obj/machinery/door/blast/shutters/open
 	begins_closed = FALSE
