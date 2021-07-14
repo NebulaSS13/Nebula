@@ -6,6 +6,10 @@
 	clicksound = "button"
 	clickvol = 20
 
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+	base_type = /obj/machinery/chemical_dispenser
 	var/list/spawn_cartridges = null // Set to a list of types to spawn one of each on New()
 
 	var/list/cartridges = list() // Associative, label -> cartridge
@@ -35,6 +39,7 @@
 	to_chat(user, "It has [cartridges.len] cartridges installed, and has space for [DISPENSER_MAX_CARTRIDGES - cartridges.len] more.")
 
 /obj/machinery/chemical_dispenser/proc/add_cartridge(obj/item/chems/chem_disp_cartridge/C, mob/user)
+	. = FALSE
 	if(!istype(C))
 		if(user)
 			to_chat(user, "<span class='warning'>\The [C] will not fit in \the [src]!</span>")
@@ -58,13 +63,11 @@
 	if(user)
 		if(user.unEquip(C))
 			to_chat(user, "<span class='notice'>You add \the [C] to \the [src].</span>")
-		else
-			return
-
-	C.forceMove(src)
-	cartridges[C.label] = C
-	cartridges = sortAssoc(cartridges)
-	SSnano.update_uis(src)
+			C.forceMove(src)
+			cartridges[C.label] = C
+			cartridges = sortTim(cartridges, /proc/cmp_text_asc)
+			SSnano.update_uis(src)
+			return TRUE
 
 /obj/machinery/chemical_dispenser/proc/remove_cartridge(label)
 	. = cartridges[label]
@@ -74,16 +77,18 @@
 /obj/machinery/chemical_dispenser/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/chems/chem_disp_cartridge))
 		add_cartridge(W, user)
+		return TRUE
 
-	else if(isScrewdriver(W))
+	if(isCrowbar(W) && length(cartridges))
 		var/label = input(user, "Which cartridge would you like to remove?", "Chemical Dispenser") as null|anything in cartridges
 		if(!label) return
 		var/obj/item/chems/chem_disp_cartridge/C = remove_cartridge(label)
 		if(C)
 			to_chat(user, "<span class='notice'>You remove \the [C] from \the [src].</span>")
 			C.dropInto(loc)
+			return TRUE
 
-	else if(istype(W, /obj/item/chems/glass) || istype(W, /obj/item/chems/food))
+	if(istype(W, /obj/item/chems/glass) || istype(W, /obj/item/chems/food))
 		if(container)
 			to_chat(user, "<span class='warning'>There is already \a [container] on \the [src]!</span>")
 			return
@@ -103,10 +108,9 @@
 		update_icon()
 		to_chat(user, "<span class='notice'>You set \the [RC] on \the [src].</span>")
 		SSnano.update_uis(src) // update all UIs attached to src
-
-	else
-		..()
-	return
+		return TRUE
+	
+	return ..()
 
 /obj/machinery/chemical_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui
