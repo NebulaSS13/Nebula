@@ -148,44 +148,42 @@ Please contact me on #coderbus IRC. ~Carn x
 	overlays.Cut()
 
 	var/list/overlays_to_apply = list()
-	if (icon_update)
 
-		var/list/visible_overlays
-		if(is_cloaked())
-			icon = 'icons/mob/human.dmi'
-			icon_state = "blank"
-			visible_overlays = overlays_standing[HO_INHAND_LAYER]
-		else
-			icon = stand_icon
-			icon_state = null
-			visible_overlays = overlays_standing
+	var/list/visible_overlays
+	if(is_cloaked())
+		icon = 'icons/mob/human.dmi'
+		icon_state = "blank"
+		visible_overlays = overlays_standing[HO_INHAND_LAYER]
+	else
+		icon = stand_icon
+		icon_state = null
+		visible_overlays = overlays_standing
 
-		var/matrix/M = matrix()
-		if(lying && (bodytype.prone_overlay_offset[1] || bodytype.prone_overlay_offset[2]))
-			M.Translate(bodytype.prone_overlay_offset[1], bodytype.prone_overlay_offset[2])
+	var/matrix/M = matrix()
+	if(lying && (bodytype.prone_overlay_offset[1] || bodytype.prone_overlay_offset[2]))
+		M.Translate(bodytype.prone_overlay_offset[1], bodytype.prone_overlay_offset[2])
 
-		for(var/i = 1 to LAZYLEN(visible_overlays))
-			var/entry = visible_overlays[i]
-			if(istype(entry, /image))
-				var/image/overlay = entry
+	for(var/i = 1 to LAZYLEN(visible_overlays))
+		var/entry = visible_overlays[i]
+		if(istype(entry, /image))
+			var/image/overlay = entry
+			if(i != HO_DAMAGE_LAYER)
+				overlay.transform = M
+			overlays_to_apply += overlay
+		else if(istype(entry, /list))
+			for(var/image/overlay in entry)
 				if(i != HO_DAMAGE_LAYER)
 					overlay.transform = M
 				overlays_to_apply += overlay
-			else if(istype(entry, /list))
-				for(var/image/overlay in entry)
-					if(i != HO_DAMAGE_LAYER)
-						overlay.transform = M
-					overlays_to_apply += overlay
 
-		var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
-		if(istype(head) && !head.is_stump())
-			var/image/I = head.get_eye_overlay()
-			if(I) 
-				overlays_to_apply += I
+	var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
+	if(istype(head) && !head.is_stump())
+		var/image/I = head.get_eye_overlay()
+		if(I) 
+			overlays_to_apply += I
 
 	if(auras)
 		overlays_to_apply += auras
-
 	overlays = overlays_to_apply
 
 /mob/living/carbon/human/proc/get_icon_scale_mult()

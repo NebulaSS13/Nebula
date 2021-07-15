@@ -742,9 +742,17 @@ The _flatIcons list is a cache for generated icon files.
 					add = icon(I.icon, I.icon_state)
 		else // 'I' is an appearance object.
 			if(istype(A,/obj/machinery/atmospherics) && (I in A.underlays))
-				add = getFlatIcon(new /image(I), I.dir, curicon, curstate, curblend, 1)
+				add = getFlatIcon(new /image(I), I.dir, curicon, null, curblend, 1)
 			else
-				add = getFlatIcon(new/image(I), curdir, curicon, curstate, curblend, always_use_defdir)
+				/*
+				The state var is null so that it uses the appearance's state, not ours or the default
+				Falling back to our state if state is null would be incorrect overlay logic (overlay with null state does not inherit it from parent to which it is attached)
+
+				If icon is null on an overlay it will inherit the icon from the attached parent, so we _do_ pass curicon ...
+				but it does not do so if its icon_state is ""/null, so we check beforehand to exclude this
+				*/
+				var/icon_to_pass = (!I.icon_state && !I.icon) ? null : curicon
+				add = getFlatIcon(new/image(I), curdir, icon_to_pass, null, curblend, always_use_defdir)
 
 		// Find the new dimensions of the flat icon to fit the added overlay
 		addX1 = min(flatX1, I.pixel_x + 1)
