@@ -104,6 +104,7 @@ var/global/list/admin_verbs_sounds = list(
 	)
 
 var/global/list/admin_verbs_fun = list(
+	/client/proc/change_lobby_screen,
 	/client/proc/object_talk,
 	/datum/admins/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
@@ -898,3 +899,28 @@ var/global/list/admin_verbs_mod = list(
 	T.add_spell(new S)
 	SSstatistics.add_field_details("admin_verb","GS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_and_message_admins("gave [key_name(T)] the spell [S].")
+
+/client/proc/change_lobby_screen()
+	set name = "Lobby Screen: Change"
+	set category = "Fun"
+
+	if(!check_rights(R_FUN))
+		return
+
+	log_and_message_admins("is trying to change the title screen.")
+	SSstatistics.add_field_details("admin_verb", "LSC")
+
+	switch(alert(usr, "Select option", "Lobby Screen", "Upload custom", "Reset to default", "Cancel"))
+		if("Upload custom")
+			var/file = input(usr) as icon|null
+
+			if(!file) 
+				return
+
+			global.using_map.update_titlescreen(file)
+
+		if("Reset to default")
+			global.using_map.update_titlescreen()
+
+		if("Cancel")
+			return

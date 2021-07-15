@@ -280,8 +280,6 @@ Helpers
 			var/mob/living/newplayer = player.create_character()
 			newplayer.mind.assigned_job.do_spawn_special(newplayer, player, FALSE)
 			qdel(player)
-		else if(player && !player.ready)
-			player.show_lobby_menu()
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
 	for(var/mob/living/player in global.player_list)
