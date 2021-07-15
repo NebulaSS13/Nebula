@@ -35,6 +35,8 @@
 
 #define is_drone(A) istype(A, /mob/living/silicon/robot/drone)
 
+#define isbot(A) istype(A, /mob/living/bot)
+
 #define isEye(A) istype(A, /mob/observer/eye)
 
 #define ishuman(A) istype(A, /mob/living/carbon/human)

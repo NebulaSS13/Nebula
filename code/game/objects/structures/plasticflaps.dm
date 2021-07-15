@@ -17,6 +17,17 @@
 		)
 	var/airtight = FALSE
 
+/obj/structure/plasticflaps/CanJPSPass(obj/item/card/id/ID, to_dir, atom/movable/caller)
+	if(isliving(caller))
+		if(isbot(caller))
+			return TRUE
+
+		var/mob/living/M = caller
+		if(!M.lying)
+			return FALSE
+
+	return TRUE
+
 /obj/structure/plasticflaps/CanPass(atom/A, turf/T)
 	if(istype(A) && A.checkpass(PASS_FLAG_GLASS))
 		return prob(60)
