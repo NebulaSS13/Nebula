@@ -20,12 +20,14 @@ var/global/repository/decls/decls_repository = new
 	var/list/fetched_decls
 	var/list/fetched_decl_types
 	var/list/fetched_decl_subtypes
+	var/list/decls_by_id
 
 /repository/decls/New()
 	..()
 	fetched_decls = list()
 	fetched_decl_types = list()
 	fetched_decl_subtypes = list()
+	decls_by_id = list()
 
 /repository/decls/proc/get_decl(var/decl_type)
 	ASSERT(ispath(decl_type))
@@ -60,9 +62,25 @@ var/global/repository/decls/decls_repository = new
 		. = get_decls(subtypesof(decl_prototype))
 		fetched_decl_subtypes[decl_prototype] = .
 
+/repository/decls/proc/get_decl_by_id(var/id)
+	. = decls_by_id[id]
+	if(!.)
+		for(var/decl in typesof(/decl))
+			var/decl/D = GET_DECL(decl)
+			if(D.uid == id)
+				return D
+
+/decl
+	var/uid //unique identifier. If this is not hardcoded, it is dynamically generated on runtime in Initialize() below.
+
 /decl/proc/Initialize()
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
+	if(!uid)
+		var/uid_pregen = replacetext("[type]", "/", "_")
+		uid_pregen = replacetext(uid_pregen, "_decl", "")
+		uid = "AUTOGEN[uid_pregen]"
+	decls_repository.decls_by_id[uid] = src
 	return
 
 /decl/Destroy()
