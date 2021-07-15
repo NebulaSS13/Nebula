@@ -592,8 +592,8 @@
 		exceptions_by_turf[T] += exception[4]
 	exceptions = exceptions_by_turf
 
-	for(var/obj/structure/cable/C in world)
-		if(!all_ends_connected(C))
+	for(var/obj/structure/cable/C in global.cable_list)
+		if(!QDELETED(C) && !all_ends_connected(C))
 			failures++
 
 	if(failures)

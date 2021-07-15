@@ -107,23 +107,45 @@
 		src.update_icon()
 	return 1
 
+/turf/simulated/floor/transport_properties_from(turf/simulated/floor/other)
+	if(!..())
+		return FALSE
+	
+	broken = other.broken
+	burnt = other.burnt
+	if(broken || burnt)
+		queue_icon_update()
+	set_flooring(other.flooring)
+	return TRUE
+	
 //I would name this copy_from() but we remove the other turf from their air zone for some reason
 /turf/simulated/transport_properties_from(turf/simulated/other)
 	if(!..())
-		return 0
+		return FALSE
 
 	if(other.zone)
 		if(!src.air)
 			src.make_air()
 		src.air.copy_from(other.zone.air)
 		other.zone.remove(other)
-	return 1
+	return TRUE
 
 /turf/simulated/wall/transport_properties_from(turf/simulated/wall/other)
 	if(!..())
-		return 0
+		return FALSE
+
 	paint_color = other.paint_color
-	return 1
+	stripe_color = other.stripe_color
+
+	material = other.material
+	reinf_material = other.material
+	girder_material = other.girder_material
+
+	floor_type = other.floor_type
+	construction_stage = other.construction_stage
+
+	update_material()
+	return TRUE
 
 //No idea why resetting the base appearence from New() isn't enough, but without this it doesn't work
 /turf/simulated/shuttle/wall/corner/transport_properties_from(turf/simulated/other)

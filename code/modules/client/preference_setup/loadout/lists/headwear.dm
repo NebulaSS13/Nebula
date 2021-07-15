@@ -69,8 +69,23 @@
 		"yellow pin" = /obj/item/clothing/head/hairflower/yellow
 	)
 
+/decl/loadout_option/hardhat
+	display_name = "hardhat selection"
+	path = /obj/item/clothing/head/hardhat
+	cost = 2
+
+/decl/loadout_option/head/hardhat/get_gear_tweak_options()
+	. = ..()
+	LAZYINITLIST(.[/datum/gear_tweak/path])
+	.[/datum/gear_tweak/path] |= list(
+		"blue hardhat" =                                      /obj/item/clothing/head/hardhat/dblue,
+		"orange hardhat" =                                    /obj/item/clothing/head/hardhat/orange,
+		"red hardhat" =                                       /obj/item/clothing/head/hardhat/red,
+		"light damage control helmet" =                       /obj/item/clothing/head/hardhat/ems/dc_light
+	)
+
 /decl/loadout_option/head/formalhat
-	name = "formal hat selection"
+	display_name = "formal hat selection"
 	path = /obj/item/clothing/head
 
 /decl/loadout_option/head/formalhat/get_gear_tweak_options()
