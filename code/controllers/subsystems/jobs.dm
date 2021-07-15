@@ -564,7 +564,7 @@ SUBSYSTEM_DEF(jobs)
 
 	job.post_equip_rank(H, alt_title || rank)
 
-	INVOKE_ASYNC(GLOBAL_PROC, .proc/show_location_blurb, H.client, 30)
+	H.client.show_location_blurb(30)
 
 	return H
 
@@ -580,20 +580,17 @@ SUBSYSTEM_DEF(jobs)
 		empty_playable_ai_cores += new /obj/structure/aicore/deactivated(get_turf(S))
 	return 1
 
-/proc/show_location_blurb(client/C, duration)
-	set waitfor = 0
-
-	if(!C)
-		return
+/client/proc/show_location_blurb(duration)
+	set waitfor = FALSE
 
 	var/location_name = station_name()
 
-	var/obj/effect/overmap/visitable/V = C.mob.get_owning_overmap_object()
+	var/obj/effect/overmap/visitable/V = mob.get_owning_overmap_object()
 	if(istype(V))
 		location_name = V.name
 
 	var/style = "font-family: 'Fixedsys'; -dm-text-outline: 1 black; font-size: 11px;"
-	var/area/A = get_area(C.mob)
+	var/area/A = get_area(mob)
 	var/text = "[stationdate2text()], [stationtime2text()]\n[location_name], [A.name]"
 	text = uppertext(text)
 
@@ -605,13 +602,13 @@ SUBSYSTEM_DEF(jobs)
 	T.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 	T.screen_loc = "LEFT+1,BOTTOM+2"
 
-	C.screen += T
+	screen += T
 	animate(T, alpha = 255, time = 10)
-	for(var/i = 1 to length(text)+1)
-		T.maptext = "<span style=\"[style]\">[copytext(text,1,i)] </span>"
+	for(var/i = 1 to length_char(text) + 1)
+		T.maptext = "<span style=\"[style]\">[copytext_char(text, 1, i)] </span>"
 		sleep(1)
 
-	addtimer(CALLBACK(GLOBAL_PROC, .proc/fade_location_blurb, C, T), duration)
+	addtimer(CALLBACK(GLOBAL_PROC, .proc/fade_location_blurb, src, T), duration)
 
 /proc/fade_location_blurb(client/C, obj/T)
 	animate(T, alpha = 0, time = 5)
