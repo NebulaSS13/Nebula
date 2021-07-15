@@ -63,6 +63,7 @@
 	blend_objects = list(/obj/machinery/door/firedoor, /obj/structure/wall_frame, /turf/unsimulated/wall, /obj/structure/window) // Objects which to blend with
 
 	var/allow_multiple_instances_on_same_tile = FALSE
+	var/push_on_close = TRUE
 
 /obj/machinery/door/firedoor/autoset
 	autoset_access = TRUE	//subtype just to make mapping away sites with custom access usage
@@ -317,7 +318,13 @@
 
 /obj/machinery/door/firedoor/close()
 	latetoggle()
-	return ..()
+	..()
+
+	if(push_on_close)
+		for(var/mob/living/L in loc)
+			for(var/dir in global.cardinal)
+				if(L.Move(get_step(loc, dir)))
+					break
 
 /obj/machinery/door/firedoor/open(var/forced = 0)
 	if(panel_open)
@@ -419,6 +426,7 @@
 	allow_multiple_instances_on_same_tile = TRUE
 	air_properties_vary_with_direction = TRUE
 	set_dir_on_update = FALSE
+	push_on_close = FALSE
 	heat_proof = TRUE
 
 	//There is a glass window so you can see through the door
