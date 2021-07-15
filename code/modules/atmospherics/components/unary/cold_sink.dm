@@ -6,6 +6,7 @@
 	desc = "Cools gas when connected to a pipe network."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "freezer_0"
+	layer = STRUCTURE_LAYER
 	density = 1
 	anchored = 1
 	use_power = POWER_USE_OFF

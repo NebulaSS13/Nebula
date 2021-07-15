@@ -12,6 +12,7 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
+	layer = STRUCTURE_LAYER
 
 	var/target_pressure = 10*ONE_ATMOSPHERE
 	var/id = null
