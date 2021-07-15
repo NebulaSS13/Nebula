@@ -115,3 +115,35 @@
 	else
 		pass("All materials had valid wall icon states.")
 	return 1 
+
+/datum/unit_test/fusion_reactions_shall_have_valid_reactants
+	name = "MATERIALS: Fusion Reactions Shall Have Valid Reactants"
+
+/datum/unit_test/fusion_reactions_shall_have_valid_reactants/start_test()
+
+	var/list/failed_types = list()
+	var/list/failed = list()
+
+	var/list/all_reactions = decls_repository.get_decls_of_subtype(/decl/fusion_reaction)
+	for(var/reaction_type in all_reactions)
+		var/decl/fusion_reaction/reaction = all_reactions[reaction_type]
+		if(reaction.p_react && !ispath(reaction.p_react, /decl/material))
+			failed_types |= reaction.type
+			failed += "[reaction.type] has invalid primary reactant type [reaction.p_react]."
+		if(reaction.s_react && !ispath(reaction.s_react, /decl/material))
+			failed_types |= reaction.type
+			failed += "[reaction.type] has invalid secondary reactant type [reaction.s_react]."
+		for(var/product in reaction.products)
+			if(!ispath(product, /decl/material))
+				failed_types |= reaction.type
+				failed += "[reaction.type] has invalid product type [product]."
+			else if(reaction.products[product] <= 0)
+				failed_types |= reaction.type
+				failed += "[reaction.type] has invalid product amount for [product]."
+
+	if(length(failed_types))
+		fail("[length(failed_types)] reactions\s had invalid reactants or products: [jointext(failed, "\n")].")
+	else
+		pass("All reactions had valid reactants and products.")
+	return 1 
+

@@ -28,7 +28,7 @@
 	SET_STATUS_MAX(user, STAT_WEAK, 5)
 
 	if(user.unEquip(src))
-		throw_at(get_edge_target_turf(src, pick(GLOB.alldirs)), rand(1,3), throw_speed)
+		throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), throw_speed)
 
 	var/spooky = pick('sound/hallucinations/growl1.ogg', 'sound/hallucinations/growl2.ogg', 'sound/hallucinations/growl3.ogg', 'sound/hallucinations/wail.ogg')
 	playsound(loc, spooky, 50, 1)

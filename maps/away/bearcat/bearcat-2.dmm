@@ -4183,8 +4183,8 @@
 	},
 /obj/structure/closet/toolcloset,
 /obj/item/storage/backpack/dufflebag/eng,
-/obj/item/stack/material/glass/reinforced/fifty,
-/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)
 "hp" = (
@@ -4730,7 +4730,7 @@
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "ie" = (
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/atmos)
 "if" = (
@@ -4883,9 +4883,7 @@
 	pixel_y = 32
 	},
 /obj/machinery/atmospherics/portables_connector,
-/obj/item/stack/material/glass/reinforced_borosilicate{
-	amount = 5
-	},
+/obj/item/stack/material/pane/mapped/rborosilicate/five,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "iv" = (
@@ -5046,7 +5044,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "iN" = (
-/obj/item/stack/material/plasteel,
+/obj/item/stack/material/reinforced/mapped/plasteel,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "iO" = (
@@ -5055,12 +5053,12 @@
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "iP" = (
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /obj/item/stack/material/rods,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "iQ" = (
-/obj/item/stack/material/plasteel,
+/obj/item/stack/material/reinforced/mapped/plasteel,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/atmos)
 "iR" = (
@@ -5168,9 +5166,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
-/obj/item/stack/material/glass/reinforced_borosilicate{
-	amount = 20
-	},
+/obj/item/stack/material/pane/mapped/rborosilicate/twenty,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "iZ" = (
@@ -5288,14 +5284,14 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "jn" = (
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /turf/space,
 /area/ship/scrap/maintenance/power)
 "jo" = (
 /turf/space,
 /area/ship/scrap/maintenance/power)
 "jp" = (
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /turf/space,
 /area/space)
 "jr" = (
@@ -5461,7 +5457,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/engine/aft)
 "jN" = (
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /obj/item/stack/material/rods,
 /obj/structure/lattice,
 /turf/space,
@@ -5513,7 +5509,7 @@
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)
 "jU" = (
-/obj/item/stack/material/plasteel,
+/obj/item/stack/material/reinforced/mapped/plasteel,
 /obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)
@@ -5600,7 +5596,7 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/toilets)
 "lX" = (
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/power)
@@ -5657,7 +5653,7 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "uM" = (
-/obj/item/stack/material/steel,
+/obj/item/stack/material/sheet/mapped/steel,
 /obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)

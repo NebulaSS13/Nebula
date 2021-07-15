@@ -602,17 +602,9 @@
 /area/ministation/bridge)
 "by" = (
 /obj/structure/closet,
-/obj/item/stack/material/gold{
-	pixel_x = -1;
-	pixel_y = 5
-	},
-/obj/item/stack/material/gold{
-	pixel_y = 2
-	},
-/obj/item/stack/material/gold{
-	pixel_x = 1;
-	pixel_y = -2
-	},
+/obj/item/stack/material/ingot/mapped/gold,
+/obj/item/stack/material/ingot/mapped/gold,
+/obj/item/stack/material/ingot/mapped/gold,
 /obj/item/storage/belt/champion,
 /turf/simulated/floor/tiled,
 /area/ministation/bridge/vault)
@@ -908,9 +900,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
 "cd" = (
-/obj/item/stack/material/rods{
-	amount = 50
-	},
+/obj/item/stack/material/rods/fifty,
 /turf/simulated/floor/airless,
 /area/space)
 "ce" = (
@@ -2139,7 +2129,7 @@
 /obj/machinery/newscaster{
 	pixel_y = 32
 	},
-/obj/item/stack/material/cardboard/fifty,
+/obj/item/stack/material/cardstock/mapped/cardboard/fifty,
 /obj/item/storage/toolbox/mechanical{
 	pixel_x = -2;
 	pixel_y = -1
@@ -2758,7 +2748,7 @@
 /obj/structure/table/standard,
 /obj/machinery/light,
 /obj/item/storage/box/monkeycubes,
-/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -3161,14 +3151,8 @@
 	pixel_y = 24
 	},
 /obj/structure/table/standard,
-/obj/item/disk/tech_disk{
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/obj/item/disk/tech_disk{
-	pixel_x = 0;
-	pixel_y = 0
-	},
+/obj/item/disk/tech_disk,
+/obj/item/disk/tech_disk,
 /obj/item/disk/design_disk,
 /obj/item/disk/design_disk,
 /obj/effect/floor_decal/corner/purple{
@@ -3914,10 +3898,11 @@
 "ju" = (
 /obj/structure/table/standard,
 /obj/item/clothing/glasses/welding,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/machinery/camera/network/research{
 	icon_state = "camera";
 	dir = 1
@@ -5634,15 +5619,15 @@
 	dir = 1
 	},
 /obj/structure/closet/crate,
-/obj/item/stack/material/aluminium/fifty,
-/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
-/obj/item/stack/material/plasteel/fifty,
-/obj/item/stack/material/copper/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
-/obj/item/stack/material/glass/reinforced/fifty,
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/ingot/mapped/copper/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
 /turf/simulated/floor/tiled,
 /area/ministation/eva)
 "nQ" = (
@@ -6083,10 +6068,10 @@
 	dir = 8
 	},
 /obj/structure/table/woodentable,
-/obj/item/stack/material/plastic/ten,
-/obj/item/stack/material/wood/ten,
-/obj/item/stack/material/wood/ten,
-/obj/item/stack/material/plastic/ten,
+/obj/item/stack/material/panel/mapped/plastic/ten,
+/obj/item/stack/material/plank/mapped/wood/ten,
+/obj/item/stack/material/plank/mapped/wood/ten,
+/obj/item/stack/material/panel/mapped/plastic/ten,
 /turf/simulated/floor/wood/mahogany,
 /area/ministation/library)
 "oR" = (
@@ -8794,12 +8779,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/ministation/medical)
 "va" = (
-/obj/item/stack/material/rods{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
+/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
 /obj/structure/extinguisher_cabinet{
@@ -12847,7 +12828,7 @@
 "EO" = (
 /obj/structure/table/reinforced,
 /obj/item/chems/food/snacks/old/pizza,
-/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "EP" = (
@@ -14231,20 +14212,20 @@
 /area/ministation/engine)
 "HP" = (
 /obj/structure/table/standard,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
-/obj/item/stack/material/glass/reinforced,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/rglass,
+/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "HQ" = (
 /obj/structure/table/standard,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/shiny/mapped/aluminium/fifty,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "HR" = (
 /obj/structure/table/standard,
-/obj/item/stack/material/plasteel,
+/obj/item/stack/material/reinforced/mapped/plasteel,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "HS" = (
@@ -15623,9 +15604,7 @@
 /area/ministation/ai_sat)
 "LC" = (
 /obj/structure/table/standard,
-/obj/item/stack/material/glass{
-	amount = 50
-	},
+/obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/cable_coil/yellow,
 /turf/simulated/floor/tiled,
 /area/ministation/ai_sat)
@@ -15641,7 +15620,7 @@
 "LF" = (
 /obj/structure/table/standard,
 /obj/machinery/recharger,
-/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
 /turf/simulated/floor/tiled,
 /area/ministation/ai_sat)
 "LG" = (

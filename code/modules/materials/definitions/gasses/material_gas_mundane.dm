@@ -244,8 +244,6 @@
 /decl/material/gas/hydrogen
 	name = "hydrogen"
 	lore_text = "A colorless, flammable gas."
-	sheet_singular_name = "ingot"
-	sheet_plural_name = "ingots"
 	flags = MAT_FLAG_FUSION_FUEL
 	wall_name = "bulkhead"
 	construction_difficulty = MAT_VALUE_HARD_DIY
@@ -263,7 +261,6 @@
 	name = "tritium"
 	lore_text = "A radioactive isotope of hydrogen. Useful as a fusion reactor fuel material."
 	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
-	stack_type = /obj/item/stack/material/tritium
 	color = "#777777"
 	stack_origin_tech = "{'materials':5}"
 	value = 1.5
@@ -274,7 +271,6 @@
 	name = "deuterium"
 	lore_text = "One of the two stable isotopes of hydrogen; also known as heavy hydrogen. Useful as a chemically synthesised fusion reactor fuel material."
 	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It is the most 'basic' fusion fuel."
-	stack_type = /obj/item/stack/material/deuterium
 	color = "#999999"
 	stack_origin_tech = "{'materials':3}"
 	gas_symbol_html = "D"

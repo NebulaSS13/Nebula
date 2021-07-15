@@ -340,7 +340,7 @@
 
 	announce_ghost_joinleave(user.ghostize(1), 1, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade", "disturb", "disrupt", "infest", "taint", "spoil", "blight")] this place!")
 	var/mob/observer/ghost/soul
-	for(var/mob/observer/ghost/O in GLOB.ghost_mob_list)
+	for(var/mob/observer/ghost/O in global.ghost_mob_list)
 		if(O.key == tmpkey)
 			soul = O
 			break
@@ -539,7 +539,7 @@
 	var/use
 	use = min(charges, user.species.blood_volume - user.vessel.total_volume)
 	if(use > 0)
-		user.vessel.add_reagent(user.species.blood_reagent, use)
+		user.adjust_blood(use)
 		charges -= use
 		statuses += "you regain lost blood"
 		if(!charges)
@@ -648,14 +648,14 @@
 		to_chat(user, "<span class='warning'>This rune needs to be placed on the defiled ground.</span>")
 		return fizzle(user)
 
-	var/obj/item/stack/material/steel/target
-	for(var/obj/item/stack/material/steel/S in get_turf(src))
-		if(S.get_amount() >= 10)
+	var/obj/item/stack/material/target
+	for(var/obj/item/stack/material/S in get_turf(src))
+		if(S.material?.type == /decl/material/solid/metal/steel && S.get_amount() >= 10)
 			target = S
 			break
 
 	if(!target)
-		to_chat(user, "<span class='warning'>You need ten sheets of metal to fold them into a construct shell.</span>")
+		to_chat(user, "<span class='warning'>You need ten sheets of steel to fold them into a construct shell.</span>")
 		return fizzle(user)
 
 	speak_incantation(user, "Da A[pick("'","`")]ig Osk!")
@@ -813,7 +813,7 @@
 			return
 		speak_incantation(user, "Uhrast ka'hfa heldsagen ver[pick("'","`")]lot!")
 		to_chat(user, "<span class='warning'>In the last moment of your humble life, you feel an immense pain as fabric of reality mends... with your blood.</span>")
-		for(var/mob/M in GLOB.living_mob_list_)
+		for(var/mob/M in global.living_mob_list_)
 			if(iscultist(M))
 				var/decl/pronouns/G = user.get_pronouns()
 				to_chat(M, "You see a vision of \the [user] keeling over dead, his blood glowing blue as it escapes [G.his] body and dissipates into thin air; you hear an otherwordly scream and feel that a great disaster has just been averted.")

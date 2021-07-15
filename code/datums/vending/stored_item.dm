@@ -52,7 +52,8 @@
 		product = new item_path(storing_object)
 
 	amount--
-	product.forceMove(product_location)
+	if(!QDELETED(product)) // Some spawners will qdel after vending.
+		product.forceMove(product_location)
 	return product
 
 /datum/stored_items/proc/get_specific_product(var/product_location, var/atom/movable/product)

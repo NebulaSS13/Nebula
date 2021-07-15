@@ -2,14 +2,14 @@
 	return dna?.lineage || create_gyne_name()
 
 /proc/create_gyne_name()
-	var/gynename = "[capitalize(pick(GLOB.gyne_architecture))] [capitalize(pick(GLOB.gyne_geoforms))]"
+	var/gynename = "[capitalize(pick(global.gyne_architecture))] [capitalize(pick(global.gyne_geoforms))]"
 	return gynename
 
 //Thanks to:
 // - https://en.wikipedia.org/wiki/List_of_landforms
 // - https://en.wikipedia.org/wiki/Outline_of_classical_architecture
 
-GLOBAL_LIST_INIT(gyne_geoforms, list(
+var/global/list/gyne_geoforms = list(
 	"abime",         "abyss",         "ait",         "anabranch",    "arc",           "arch",          "archipelago",  "arete",
 	"arroyo",        "atoll",         "ayre",        "badlands",     "bar",           "barchan",       "barrier",      "basin",
 	"bay",           "bayou",         "beach",       "bight",        "blowhole",      "blowout",       "bluff",        "bornhardt",
@@ -35,9 +35,9 @@ GLOBAL_LIST_INIT(gyne_geoforms, list(
 	"thalweg",       "tidepool",      "tombolo",     "tor",          "towhead",       "tube",          "tunnel",       "turlough",
 	"tuya",          "uvala",         "vale",        "valley",       "vent",          "ventifact",     "volcano",      "wadi",
 	"waterfall",     "watershed"
-))
+)
 
-GLOBAL_LIST_INIT(gyne_architecture, list(
+var/global/list/gyne_architecture = list(
 	"barrel",        "annular",       "aynali",      "baroque",      "catalan",       "cavetto",       "catenary",     "cloister",
 	"corbel",        "cross",         "cycloidal",   "cylindrical",  "diamond",       "domical",       "fan",          "lierne",
 	"muqarnas",      "net",           "nubian",      "ogee",         "ogival",        "parabolic",     "hyperbolic",   "volute",
@@ -60,7 +60,7 @@ GLOBAL_LIST_INIT(gyne_architecture, list(
 	"ethical",       "micro",         "macro",       "genetic",      "intrinsic",     "extrinsic",     "academic",     "literary",
 	"artisan",       "absolute",      "absolutist",  "autonomous",   "collectivist",  "bicameral",     "colonialist",  "federal",
 	"imperial",      "independant",   "managed",     "multilateral", "neutral",       "nonaligned",    "parastatal"
-))
+)
 
 /decl/cultural_info/culture/ascent
 	name =             "The Ascent"

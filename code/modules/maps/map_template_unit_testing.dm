@@ -11,8 +11,8 @@
 
 /datum/map_template/New(var/list/paths = null, var/rename = null)
 	..()
-	GLOB.using_map.area_usage_test_exempted_areas |= area_usage_test_exempted_areas
-	GLOB.using_map.area_usage_test_exempted_root_areas |= area_usage_test_exempted_root_areas
-	GLOB.using_map.apc_test_exempt_areas |= apc_test_exempt_areas
-	GLOB.using_map.area_coherency_test_exempt_areas |= area_coherency_test_exempt_areas
-	GLOB.using_map.area_coherency_test_subarea_count |= area_coherency_test_subarea_count
+	global.using_map.area_usage_test_exempted_areas |= area_usage_test_exempted_areas
+	global.using_map.area_usage_test_exempted_root_areas |= area_usage_test_exempted_root_areas
+	global.using_map.apc_test_exempt_areas |= apc_test_exempt_areas
+	global.using_map.area_coherency_test_exempt_areas |= area_coherency_test_exempt_areas
+	global.using_map.area_coherency_test_subarea_count |= area_coherency_test_subarea_count

@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(all_objectives, new)
+var/global/list/all_objectives = list()
 
 /datum/objective
 	var/datum/mind/owner             //Who owns the objective.
@@ -7,13 +7,13 @@ GLOBAL_LIST_INIT(all_objectives, new)
 	var/target_amount = 0            //If they are focused on a particular number. Steal objectives have their own counter.
 
 /datum/objective/New(var/text)
-	GLOB.all_objectives |= src
+	global.all_objectives |= src
 	if(text)
 		explanation_text = text
 	..()
 
 /datum/objective/Destroy()
-	GLOB.all_objectives -= src
+	global.all_objectives -= src
 	. = ..()
 
 /datum/objective/proc/find_target()

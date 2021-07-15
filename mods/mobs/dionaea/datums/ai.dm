@@ -8,6 +8,6 @@
 	if(body.stat != CONSCIOUS)
 		return
 	if(prob(wander_prob) && !LAZYLEN(body.grabbed_by) && isturf(body.loc)) //won't move if being pulled
-		body.SelfMove(pick(GLOB.cardinal))
+		body.SelfMove(pick(global.cardinal))
 	if(prob(emote_prob))
 		body.emote(pick("scratch","jump","chirp","tail"))

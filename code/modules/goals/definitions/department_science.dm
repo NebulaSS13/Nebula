@@ -18,5 +18,4 @@
 	return (SSstatistics.extracted_slime_cores_amount >= min_cores)
 
 // Personal:
-	// xenobio: finish a round without being attacked by a slime
 	// explorer: name an alien species, plant a flag on an undiscovered world

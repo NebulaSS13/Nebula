@@ -56,7 +56,6 @@
 /obj/item/organ/internal/lungs/set_dna(var/datum/dna/new_dna)
 	..()
 	sync_breath_types()
-	max_pressure_diff = species.max_pressure_diff
 
 /obj/item/organ/internal/lungs/replaced()
 	..()
@@ -66,10 +65,18 @@
  *  Set these lungs' breath types based on the lungs' species
  */
 /obj/item/organ/internal/lungs/proc/sync_breath_types()
-	min_breath_pressure = species.breath_pressure
-	breath_type = species.breath_type ? species.breath_type : /decl/material/gas/oxygen
-	poison_types = species.poison_types ? species.poison_types : list(/decl/material/gas/chlorine = TRUE)
-	exhale_type = species.exhale_type ? species.exhale_type : /decl/material/gas/carbon_dioxide
+	if(species)
+		max_pressure_diff =   species.max_pressure_diff
+		min_breath_pressure = species.breath_pressure
+		breath_type =         species.breath_type  || /decl/material/gas/oxygen
+		poison_types =        species.poison_types || list(/decl/material/gas/chlorine = TRUE)
+		exhale_type =         species.exhale_type  || /decl/material/gas/carbon_dioxide
+	else
+		max_pressure_diff =   initial(max_pressure_diff)
+		min_breath_pressure = initial(min_breath_pressure)
+		breath_type =         /decl/material/gas/oxygen
+		poison_types =        list(/decl/material/gas/chlorine = TRUE)
+		exhale_type =         /decl/material/gas/carbon_dioxide
 
 /obj/item/organ/internal/lungs/Process()
 	..()

@@ -35,5 +35,5 @@
 		entry.associated_strings += L.name
 		entry.associated_strings += L.shorthand
 		SScodex.add_entry_by_string(entry.display_name, entry)
-		items += entry.display_name
+		items |= entry.display_name
 	. = ..()

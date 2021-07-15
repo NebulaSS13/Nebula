@@ -1,4 +1,4 @@
-/var/game_id = null
+var/global/game_id = null
 
 /hook/global_init/proc/generate_gameid()
 	if(game_id != null)
@@ -66,11 +66,10 @@
 
 	return match
 
-#define RECOMMENDED_VERSION 513
 /world/New()
 
 	//set window title
-	name = "[config.server_name] - [GLOB.using_map.full_name]"
+	name = "[config.server_name] - [global.using_map.full_name]"
 
 	//logs
 	SetupLogs()
@@ -81,8 +80,8 @@
 		// dumb and hardcoded but I don't care~
 		config.server_name += " #[(world.port % 1000) / 100]"
 
-	if(byond_version < RECOMMENDED_VERSION)
-		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
+	if(byond_version < REQUIRED_DM_VERSION)
+		to_world_log("Your server's BYOND version does not meet the minimum DM version for this server. Please update BYOND.")
 
 	callHook("startup")
 	//Emergency Fix
@@ -97,10 +96,8 @@
 #endif
 	Master.Initialize(10, FALSE)
 
-#undef RECOMMENDED_VERSION
-
-var/list/world_topic_throttle = list()
-var/world_topic_last = world.timeofday
+var/global/list/world_topic_throttle = list()
+var/global/world_topic_last = world.timeofday
 
 #define SET_THROTTLE(TIME, REASON) throttle[1] = base_throttle + (TIME); throttle[2] = (REASON);
 #define THROTTLE_MAX_BURST 15 SECONDS
@@ -134,7 +131,7 @@ var/world_topic_last = world.timeofday
 
 	else if(T == "players")
 		var/n = 0
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M in global.player_list)
 			if(M.client)
 				n++
 		return n
@@ -154,13 +151,13 @@ var/world_topic_last = world.timeofday
 		s["players"] = 0
 		s["stationtime"] = stationtime2text()
 		s["roundduration"] = roundduration2text()
-		s["map"] = strip_improper(GLOB.using_map.full_name) //Done to remove the non-UTF-8 text macros
+		s["map"] = strip_improper(global.using_map.full_name) //Done to remove the non-UTF-8 text macros
 
 		var/active = 0
 		var/list/players = list()
 		var/list/admins = list()
 		var/legacy = input["status"] != "2"
-		for(var/client/C in GLOB.clients)
+		for(var/client/C in global.clients)
 			if(C.holder)
 				if(C.is_stealthed())
 					continue	//so stealthmins aren't revealed by the hub
@@ -230,7 +227,7 @@ var/world_topic_last = world.timeofday
 		var/target = ckey(input["target"])
 
 		var/client/C
-		for(var/client/K in GLOB.clients)
+		for(var/client/K in global.clients)
 			if(K.ckey == target)
 				C = K
 				break
@@ -370,7 +367,7 @@ var/world_topic_last = world.timeofday
 		var/client/C
 		var/req_ckey = ckey(input["adminmsg"])
 
-		for(var/client/K in GLOB.clients)
+		for(var/client/K in global.clients)
 			if(K.ckey == req_ckey)
 				C = K
 				break
@@ -392,7 +389,7 @@ var/world_topic_last = world.timeofday
 		sound_to(C, 'sound/effects/adminhelp.ogg')
 		to_chat(C, message)
 
-		for(var/client/A in GLOB.admins)
+		for(var/client/A in global.admins)
 			if(A != C)
 				to_chat(A, amessage)
 		return "Message Successful"
@@ -429,20 +426,20 @@ var/world_topic_last = world.timeofday
 		if(input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
-		if(!GLOB || !GLOB.prometheus_metrics)
+		if(!global.prometheus_metrics)
 			return "Metrics not ready"
-		return GLOB.prometheus_metrics.collect()
+		return global.prometheus_metrics.collect()
 
 #undef SET_THROTTLE
 
 /world/Reboot(var/reason)
-	if(GLOB.using_map.reboot_sound)
-		sound_to(world, sound(pick(GLOB.using_map.reboot_sound)))// random end sounds!! - LastyBatsy
+	if(global.using_map.reboot_sound)
+		sound_to(world, sound(pick(global.using_map.reboot_sound)))// random end sounds!! - LastyBatsy
 
 	Master.Shutdown()
 
 	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
-		for(var/client/C in GLOB.clients)
+		for(var/client/C in global.clients)
 			to_chat(C, link("byond://[config.server]"))
 
 	if(config.wait_for_sigusr1_reboot && reason != 3)
@@ -466,7 +463,7 @@ var/world_topic_last = world.timeofday
 	if(!fexists("data/mode.txt"))
 		return
 
-	var/list/Lines = file2list("data/mode.txt")
+	var/list/Lines = file2list("data/mode.txt", FALSE)
 	if(Lines.len)
 		if(Lines[1])
 			SSticker.master_mode = Lines[1]
@@ -482,8 +479,7 @@ var/world_topic_last = world.timeofday
 	return 1
 
 /world/proc/load_motd()
-	join_motd = file2text("config/motd.txt")
-
+	join_motd = safe_file2text("config/motd.txt", FALSE)
 
 /proc/load_configuration()
 	config = new /datum/configuration()
@@ -498,7 +494,7 @@ var/world_topic_last = world.timeofday
 
 /world/proc/load_mods()
 	if(config.admin_legacy_system)
-		var/text = file2text("config/moderators.txt")
+		var/text = safe_file2text("config/moderators.txt", FALSE)
 		if (!text)
 			error("Failed to load config/mods.txt")
 		else
@@ -515,7 +511,7 @@ var/world_topic_last = world.timeofday
 
 				var/ckey = copytext(line, 1, length(line)+1)
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
-				D.associate(GLOB.ckey_directory[ckey])
+				D.associate(global.ckey_directory[ckey])
 
 /world/proc/update_status()
 	var/s = "<b>[station_name()]</b>"
@@ -545,7 +541,7 @@ var/world_topic_last = world.timeofday
 		features += "AI allowed"
 
 	var/n = 0
-	for (var/mob/M in GLOB.player_list)
+	for (var/mob/M in global.player_list)
 		if (M.client)
 			n++
 
@@ -566,26 +562,26 @@ var/world_topic_last = world.timeofday
 		src.status = s
 
 /world/proc/SetupLogs()
-	GLOB.log_directory = "data/logs/[time2text(world.realtime, "YYYY/MM/DD")]/round-"
+	global.log_directory = "data/logs/[time2text(world.realtime, "YYYY/MM/DD")]/round-"
 	if(game_id)
-		GLOB.log_directory += "[game_id]"
+		global.log_directory += "[game_id]"
 	else
-		GLOB.log_directory += "[replacetext(time_stamp(), ":", ".")]"
+		global.log_directory += "[replacetext(time_stamp(), ":", ".")]"
 
-	GLOB.world_qdel_log = file("[GLOB.log_directory]/qdel.log")
-	WRITE_FILE(GLOB.world_qdel_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
+	global.world_qdel_log = file("[global.log_directory]/qdel.log")
+	WRITE_FILE(global.world_qdel_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
 
-	GLOB.world_href_log = file("[GLOB.log_directory]/href.log") // Used for config-optional total href logging
-	diary = file("[GLOB.log_directory]/main.log") // This is the primary log, containing attack, admin, and game logs.
+	global.world_href_log = file("[global.log_directory]/href.log") // Used for config-optional total href logging
+	diary = file("[global.log_directory]/main.log") // This is the primary log, containing attack, admin, and game logs.
 	WRITE_FILE(diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]")
 
 	if(config && config.log_runtime)
-		var/runtime_log = file("[GLOB.log_directory]/runtime.log")
+		var/runtime_log = file("[global.log_directory]/runtime.log")
 		WRITE_FILE(runtime_log, "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]")
 		log = runtime_log // runtimes and some other output is logged directly to world.log, which is redirected here.
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
-var/failed_db_connections = 0
+var/global/failed_db_connections = 0
 /hook/startup/proc/connectDB()
 	if(!setup_database_connection())
 		to_world_log("Your server failed to establish a connection with the SQL database.")

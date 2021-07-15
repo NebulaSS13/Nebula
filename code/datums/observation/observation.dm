@@ -64,7 +64,7 @@
 	var/flags                           // See _defines.dm for available flags and what they do
 
 /decl/observ/New()
-	GLOB.all_observable_events += src
+	global.all_observable_events += src
 	..()
 
 /decl/observ/proc/is_listening(var/event_source, var/datum/listener, var/proc_call)

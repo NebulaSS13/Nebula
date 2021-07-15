@@ -70,7 +70,7 @@
 	queue_icon_update()
 
 /obj/machinery/power/smes/populate_parts()
-	for(var/d in GLOB.cardinal)
+	for(var/d in global.cardinal)
 		var/obj/item/stock_parts/power/terminal/part = install_component(/obj/item/stock_parts/power/terminal, refresh_parts = FALSE)
 		part.terminal_dir = d
 		var/turf/T = get_step(src, d)

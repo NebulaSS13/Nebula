@@ -128,6 +128,10 @@
 		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
 	)
 
+/obj/item/gun/energy/plasmacutter/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_SAW = TOOL_QUALITY_BAD))
+
 /obj/item/gun/energy/plasmacutter/get_heat()
 	. = max(..(), 3800)
 

@@ -10,11 +10,10 @@
 /decl/chat_filter/regexp/banned_words/New()
 	..()
 	disabled = TRUE
-	if(fexists(BANNED_WORD_LOCATION))
-		var/list/banned_words = cached_json_decode(file2text(BANNED_WORD_LOCATION))
-		if(length(banned_words))
-			disabled = FALSE
-			filter_regex = regex("\\b([jointext(banned_words, "|")])\\b", "i")
+	var/list/banned_words = cached_json_decode(safe_file2text(BANNED_WORD_LOCATION, FALSE))
+	if(length(banned_words))
+		disabled = FALSE
+		filter_regex = regex("\\b([jointext(banned_words, "|")])\\b", "i")
 
 /decl/chat_filter/regexp/banned_words/deny(var/mob/speaker, var/match)
 	log_and_message_admins("[key_name(speaker)] tried to use a banned word: '[filter_regex.match]'.", speaker, get_turf(speaker))

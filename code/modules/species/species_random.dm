@@ -68,9 +68,11 @@ SETUP_RANDOM_COLOR_SETTER(facial_hair_color, change_facial_hair_color)
 		change_skin_tone(new_tone)
 
 /mob/living/carbon/human/proc/randomize_hair_style()
-	change_hair(safepick(generate_valid_hairstyles()))
+	var/list/L = generate_valid_hairstyles()
+	change_hair(SAFEPICK(L))
 
 /mob/living/carbon/human/proc/randomize_facial_hair_style()
-	change_facial_hair(safepick(generate_valid_facial_hairstyles()))
+	var/list/L = generate_valid_facial_hairstyles()
+	change_facial_hair(SAFEPICK(L))
 
 #undef SETUP_RANDOM_COLOR_GETTER

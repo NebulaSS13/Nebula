@@ -19,11 +19,6 @@
 		/decl/material/gas/chlorine = 2, 
 		/decl/material/gas/carbon_dioxide = 5
 	)
-
-	response_help = "pets"
-	response_harm = "hits"
-	response_disarm = "pushes"
-
 	known_commands = list("stay", "stop", "attack", "follow", "dance", "boogie", "boogy")
 
 /mob/living/simple_animal/hostile/commanded/bear/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)

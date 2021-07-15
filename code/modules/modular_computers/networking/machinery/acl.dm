@@ -124,7 +124,7 @@
 
 	if(href_list["create_grant"])
 		var/new_grant_name = uppertext(sanitize(input(usr, "Enter the name of the new grant:", "Create Grant")))
-		if(!CanInteract(user, GLOB.default_state))
+		if(!CanInteract(user, global.default_topic_state))
 			return TOPIC_REFRESH
 		if(!new_grant_name)
 			return TOPIC_REFRESH

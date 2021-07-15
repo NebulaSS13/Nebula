@@ -6,8 +6,9 @@
 	material = /decl/material/solid/metal/steel
 	var/part_flags = PART_FLAG_LAZY_INIT | PART_FLAG_HAND_REMOVE
 	var/rating = 1
-	var/status = 0             // Flags using PART_STAT defines.
-	var/base_type              // Type representing parent of category for replacer usage.
+	var/status = 0               // Flags using PART_STAT defines.
+	var/base_type                // Type representing parent of category for replacer usage.
+	var/list/ignore_damage_types // Lazy list of damage types to ignore.
 
 /obj/item/stock_parts/attack_hand(mob/user)
 	if(istype(loc, /obj/machinery))
@@ -63,7 +64,7 @@
 /obj/item/stock_parts/proc/on_refresh(var/obj/machinery/machine)
 
 /obj/item/stock_parts/proc/take_damage(amount, damtype)
-	if(!is_functional())
+	if(!is_functional() || (damtype in ignore_damage_types))
 		return
 	var/taken = min(amount, health)
 	health -= taken
@@ -104,4 +105,3 @@
 	if(istype(M) && (src in M.component_parts))
 		return
 	..()
-	

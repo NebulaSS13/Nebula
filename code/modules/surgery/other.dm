@@ -10,9 +10,8 @@
 	name = "Repair tendon"
 	description = "This procedure repairs damage to a tendon."
 	allowed_tools = list(
-		/obj/item/sutures = 100,
-		/obj/item/stack/cable_coil = 75,
-		/obj/item/tape_roll = 50
+		TOOL_SUTURES =  100,
+		TOOL_CABLECOIL = 75
 	)
 	can_infect = 1
 	blood_level = 1
@@ -54,9 +53,8 @@
 	name = "Repair arterial bleeding"
 	description = "This procedure repairs damage to an artery."
 	allowed_tools = list(
-		/obj/item/sutures = 100,
-		/obj/item/stack/cable_coil = 75,
-		/obj/item/tape_roll = 50
+		TOOL_SUTURES =  100,
+		TOOL_CABLECOIL = 75
 	)
 	can_infect = 1
 	blood_level = 1
@@ -100,9 +98,8 @@
 	name = "Remove hardsuit"
 	description = "This procedure cuts through the bolts on a hardsuit, allowing it to be removed."
 	allowed_tools = list(
-		/obj/item/weldingtool = 80,
-		/obj/item/circular_saw = 60,
-		/obj/item/gun/energy/plasmacutter = 30
+		TOOL_WELDER = 80,
+		TOOL_SAW =    60
 	)
 	can_infect = 0
 	blood_level = 0

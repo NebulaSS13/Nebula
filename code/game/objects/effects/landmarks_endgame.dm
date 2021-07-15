@@ -1,5 +1,5 @@
-var/list/endgame_exits = list()
-var/list/endgame_safespawns = list()
+var/global/list/endgame_exits = list()
+var/global/list/endgame_safespawns = list()
 
 /obj/effect/landmark/endgame
 	delete_me = TRUE

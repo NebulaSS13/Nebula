@@ -1,4 +1,4 @@
-var/list/_trait_types
+var/global/list/_trait_types
 
 /proc/trait_types()
 	if(!_trait_types)

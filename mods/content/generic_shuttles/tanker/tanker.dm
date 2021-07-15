@@ -15,7 +15,7 @@
 	shuttle = "Tanker"
 	fore_dir = WEST
 	max_speed = 1/(10 SECOND)
-	known = 1
+	sector_flags = OVERMAP_SECTOR_KNOWN
 	use_mapped_z_levels = TRUE
 
 /datum/shuttle/autodock/overmap/tanker

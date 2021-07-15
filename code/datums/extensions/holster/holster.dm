@@ -53,14 +53,14 @@
 		user.visible_message("<span class='notice'>\The [user] holsters \the [holstered].</span>", "<span class='notice'>You holster \the [holstered].</span>")
 		atom_holder.SetName("occupied [initial(atom_holder.name)]")
 		atom_holder.update_icon()
-		GLOB.moved_event.register(holstered, src, .proc/check_holster)
-		GLOB.destroyed_event.register(holstered, src, .proc/clear_holster)
+		events_repository.register(/decl/observ/moved, holstered, src, .proc/check_holster)
+		events_repository.register(/decl/observ/destroyed, holstered, src, .proc/clear_holster)
 		return 1
 	return 0
 
 /datum/extension/holster/proc/clear_holster()
-	GLOB.moved_event.unregister(holstered, src, .proc/check_holster)
-	GLOB.destroyed_event.unregister(holstered, src, .proc/clear_holster)
+	events_repository.unregister(/decl/observ/moved, holstered, src, .proc/check_holster)
+	events_repository.unregister(/decl/observ/destroyed, holstered, src, .proc/clear_holster)
 	holstered = null
 	atom_holder.SetName(initial(atom_holder.name))
 
@@ -70,7 +70,7 @@
 	if(!user.get_empty_hand_slot())
 		to_chat(user, SPAN_WARNING("You need an empty hand to draw \the [holstered]!"))
 		return 1
-	var/using_intent_preference = user.client ? user.client.get_preference_value(/datum/client_preference/holster_on_intent) == GLOB.PREF_YES : FALSE
+	var/using_intent_preference = user.client ? user.client.get_preference_value(/datum/client_preference/holster_on_intent) == PREF_YES : FALSE
 	if(avoid_intent || (using_intent_preference && user.a_intent != I_HELP))
 		var/sound_vol = 25
 		if(user.a_intent == I_HURT)

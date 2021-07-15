@@ -19,7 +19,7 @@
 
 	if(!computer || !computer.on || !origin_computer || !origin_computer.on)
 		return FALSE
-	if(!CanInteractWith(user, origin_computer, GLOB.default_state))
+	if(!CanInteractWith(user, origin_computer, global.default_topic_state))
 		return FALSE
 
 	if(!origin_computer.get_network_status() || !computer.get_network_status())

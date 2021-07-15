@@ -150,7 +150,7 @@
 
 // need physical proximity for our interface.
 /obj/machinery/microwave/DefaultTopicState()
-	return GLOB.physical_state
+	return global.physical_topic_state
 
 /obj/machinery/microwave/interface_interact(mob/user)
 	interact(user)

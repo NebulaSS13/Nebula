@@ -88,8 +88,11 @@
 	usable = FALSE
 	selectable = TRUE
 
-/obj/item/rig_module/device/multitool/ismultitool()
-	return device && device.ismultitool()
+/obj/item/rig_module/device/multitool/get_tool_quality(archetype)
+	return device?.get_tool_quality(archetype)
+
+/obj/item/rig_module/device/multitool/get_tool_speed(archetype)
+	return device?.get_tool_speed(archetype)
 
 /obj/item/rig_module/device/cable_coil
 	name = "mantid cable extruder"
@@ -126,17 +129,11 @@
 	usable = TRUE
 	selectable = TRUE
 
-/obj/item/rig_module/device/clustertool/iswrench()
-	return device && device.iswrench()
+/obj/item/rig_module/device/clustertool/get_tool_quality(archetype)
+	return device?.get_tool_quality(archetype)
 
-/obj/item/rig_module/device/clustertool/iswirecutter()
-	return device && device.iswirecutter()
-
-/obj/item/rig_module/device/clustertool/isscrewdriver()
-	return device && device.isscrewdriver()
-
-/obj/item/rig_module/device/clustertool/iscrowbar()
-	return device && device.iscrowbar()
+/obj/item/rig_module/device/clustertool/get_tool_speed(archetype)
+	return device?.get_tool_speed(archetype)
 
 // Atmosphere/jetpack filler.
 /obj/item/tank/mantid

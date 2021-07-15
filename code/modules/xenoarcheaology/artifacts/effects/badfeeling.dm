@@ -1,7 +1,7 @@
 /datum/artifact_effect/badfeeling
 	name = "badfeeling"
 	origin_type = EFFECT_PSIONIC
-	var/global/list/messages = list("You feel worried.",
+	var/static/list/messages = list("You feel worried.",
 		"Something doesn't feel right.",
 		"You get a strange feeling in your gut.",
 		"Your instincts are trying to warn you about something.",
@@ -18,7 +18,7 @@
 		"The walls are getting closer.",
 		"Something is wrong")
 
-	var/global/list/drastic_messages = list("You've got to get out of here!",
+	var/static/list/drastic_messages = list("You've got to get out of here!",
 		"Someone's trying to kill you!",
 		"There's something out there!",
 		"What's happening to you?",

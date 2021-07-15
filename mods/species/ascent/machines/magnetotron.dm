@@ -52,7 +52,7 @@
 		playsound(src, 'sound/weapons/flashbang.ogg', 100)
 
 /obj/machinery/ascent_magnetotron/proc/get_total_gynes()
-	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_)
+	for(var/mob/living/carbon/human/H in global.living_mob_list_)
 		if(isspecies(H, SPECIES_MANTID_GYNE))
 			.+= 1
 

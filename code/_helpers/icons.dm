@@ -15,7 +15,7 @@ CHANGING ICONS
 Several new procs have been added to the /icon datum to simplify working with icons. To use them,
 remember you first need to setup an /icon var like so:
 
-var/icon/my_icon = new('iconfile.dmi')
+var/global/icon/my_icon = new('iconfile.dmi')
 
 icon/ChangeOpacity(amount = 1)
 	A very common operation in DM is to try to make an icon more or less transparent. Making an icon more
@@ -714,7 +714,7 @@ The _flatIcons list is a cache for generated icon files.
 	var/addY2
 
 	var/icon/add // Icon of overlay being added
-	for(var/image/I as anything in layers)
+	for(var/image/I AS_ANYTHING in layers)
 
 		if(I.alpha == 0)
 			continue
@@ -814,13 +814,15 @@ The _flatIcons list is a cache for generated icon files.
 #define HOLOPAD_SHORT_RANGE 1 //For determining the color of holopads based on whether they're short or long range.
 #define HOLOPAD_LONG_RANGE 2
 
-/proc/getHologramIcon(icon/A, safety=1, noDecolor=FALSE, var/hologram_color=HOLOPAD_SHORT_RANGE)//If safety is on, a new icon is not created.
+/proc/getHologramIcon(icon/A, safety=1, noDecolor=FALSE, var/hologram_color=HOLOPAD_SHORT_RANGE, var/custom_tone)//If safety is on, a new icon is not created.
 	var/icon/flat_icon = safety ? A : new(A)//Has to be a new icon to not constantly change the same icon.
 	if (noDecolor == FALSE)
 		if(hologram_color == HOLOPAD_LONG_RANGE)
 			flat_icon.ColorTone(rgb(225,223,125)) //Light yellow if it's a call to a long-range holopad.
-		else
+		else if(!custom_tone)
 			flat_icon.ColorTone(rgb(125,180,225))//Let's make it bluish.
+		else
+			flat_icon.ColorTone(rgb(HEX_RED(custom_tone), HEX_GREEN(custom_tone), HEX_BLUE(custom_tone)))
 	flat_icon.ChangeOpacity(0.5)//Make it half transparent.
 	var/icon/alpha_mask = new('icons/effects/effects.dmi', "scanline-[hologram_color]")//Scanline effect.
 	flat_icon.AddAlphaMask(alpha_mask)//Finally, let's mix in a distortion effect.

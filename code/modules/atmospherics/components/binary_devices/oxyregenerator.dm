@@ -79,8 +79,7 @@
 			carbon_stored += co2_intake * carbon_efficiency
 			while (carbon_stored >= carbon_moles_per_piece)
 				carbon_stored -= carbon_moles_per_piece
-				var/decl/material/M = GET_DECL(/decl/material/solid/mineral/graphite)
-				M.place_sheet(get_turf(src), 1, M.type)
+				SSmaterials.create_object(/decl/material/solid/mineral/graphite, get_turf(src), 1)
 			power_draw = power_rating * co2_intake
 			last_power_draw = power_draw
 			use_power_oneoff(power_draw)

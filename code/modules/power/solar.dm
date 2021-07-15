@@ -1,7 +1,7 @@
 #define SOLAR_MAX_DIST 40
 
-var/solar_gen_rate = 1500
-var/list/solars_list = list()
+var/global/solar_gen_rate = 1500
+var/global/list/solars_list = list()
 
 /obj/machinery/power/solar
 	name = "solar panel"
@@ -53,10 +53,10 @@ var/list/solars_list = list()
 /obj/machinery/power/solar/proc/Make(var/obj/item/solar_assembly/S)
 	if(!S)
 		S = new /obj/item/solar_assembly(src)
-		S.glass_type = /obj/item/stack/material/glass
+		S.glass_type = /decl/material/solid/glass
 		S.anchored = 1
 	S.forceMove(src)
-	if(S.glass_type == /obj/item/stack/material/glass/reinforced) //if the panel is in reinforced glass
+	if(S.glass_reinforced) //if the panel is in reinforced glass
 		health *= 2 								 //this need to be placed here, because panels already on the map don't have an assembly linked to
 	update_icon()
 
@@ -99,14 +99,14 @@ var/list/solars_list = list()
 
 //calculates the fraction of the sunlight that the panel recieves
 /obj/machinery/power/solar/proc/update_solar_exposure()
-	if(!GLOB.sun)
+	if(!global.sun)
 		return
 	if(obscured)
 		sunfrac = 0
 		return
 
 	//find the smaller angle between the direction the panel is facing and the direction of the sun (the sign is not important here)
-	var/p_angle = min(abs(adir - GLOB.sun.angle), 360 - abs(adir - GLOB.sun.angle))
+	var/p_angle = min(abs(adir - global.sun.angle), 360 - abs(adir - global.sun.angle))
 
 	if(p_angle > 90)			// if facing more than 90deg from sun, zero output
 		sunfrac = 0
@@ -118,7 +118,7 @@ var/list/solars_list = list()
 /obj/machinery/power/solar/Process()
 	if(stat & BROKEN)
 		return
-	if(!GLOB.sun || !control) //if there's no sun or the panel is not linked to a solar control computer, no need to proceed
+	if(!global.sun || !control) //if there's no sun or the panel is not linked to a solar control computer, no need to proceed
 		return
 
 	if(powernet)
@@ -174,14 +174,14 @@ var/list/solars_list = list()
 
 	// On planets, we take fewer steps because the light is mostly up
 	// Also, many planets barely have any spots with enough clear space around
-	if(GLOB.using_map.use_overmap)
+	if(global.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E))
 			steps = 5
 
 	for(var/i = 1 to steps)
-		ax += GLOB.sun.dx
-		ay += GLOB.sun.dy
+		ax += global.sun.dx
+		ay += global.sun.dy
 
 		T = locate( round(ax,0.5),round(ay,0.5),z)
 
@@ -210,7 +210,8 @@ var/list/solars_list = list()
 	anchored = 0
 	material = /decl/material/solid/metal/steel
 	var/tracker = 0
-	var/glass_type = null
+	var/glass_type
+	var/glass_reinforced
 
 /obj/item/solar_assembly/attack_hand(var/mob/user)
 	if(!anchored && isturf(loc)) // You can't pick it up
@@ -219,10 +220,9 @@ var/list/solars_list = list()
 // Give back the glass type we were supplied with
 /obj/item/solar_assembly/proc/give_glass()
 	if(glass_type)
-		var/obj/item/stack/material/S = new glass_type(src.loc)
-		S.amount = 2
+		SSmaterials.create_object(glass_type, loc, 2, null, glass_reinforced)
 		glass_type = null
-
+		glass_reinforced = null
 
 /obj/item/solar_assembly/attackby(var/obj/item/W, var/mob/user)
 
@@ -245,7 +245,8 @@ var/list/solars_list = list()
 		if(istype(W, /obj/item/stack/material) && W.get_material_type() == /decl/material/solid/glass)
 			var/obj/item/stack/material/S = W
 			if(S.use(2))
-				glass_type = W.type
+				glass_type =       S.material.type
+				glass_reinforced = S.reinf_material?.type
 				playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 				user.visible_message("<span class='notice'>[user] places the glass on the solar assembly.</span>")
 				if(tracker)
@@ -344,7 +345,7 @@ var/list/solars_list = list()
 				cdir = targetdir //...the current direction is the targetted one (and rotates panels to it)
 		if(2) // auto-tracking
 			if(connected_tracker)
-				connected_tracker.set_angle(GLOB.sun.angle)
+				connected_tracker.set_angle(global.sun.angle)
 
 	set_panels(cdir)
 	updateDialog()
@@ -370,7 +371,7 @@ var/list/solars_list = list()
 /obj/machinery/power/solar_control/interact(mob/user)
 
 	var/t = "<B><span class='highlight'>Generated power</span></B> : [round(lastgen)] W<BR>"
-	t += "<B><span class='highlight'>Star Orientation</span></B>: [GLOB.sun.angle]&deg ([angle2text(GLOB.sun.angle)])<BR>"
+	t += "<B><span class='highlight'>Star Orientation</span></B>: [global.sun.angle]&deg ([angle2text(global.sun.angle)])<BR>"
 	t += "<B><span class='highlight'>Array Orientation</span></B>: [rate_control(src,"cdir","[cdir]&deg",1,15)] ([angle2text(cdir)])<BR>"
 	t += "<B><span class='highlight'>Tracking:</span></B><div class='statusDisplay'>"
 	switch(track)
@@ -439,7 +440,7 @@ var/list/solars_list = list()
 		track = text2num(href_list["track"])
 		if(track == 2)
 			if(connected_tracker)
-				connected_tracker.set_angle(GLOB.sun.angle)
+				connected_tracker.set_angle(global.sun.angle)
 				set_panels(cdir)
 		else if (track == 1) //begin manual tracking
 			src.targetdir = src.cdir
@@ -449,7 +450,7 @@ var/list/solars_list = list()
 	if(href_list["search_connected"])
 		src.search_for_connected()
 		if(connected_tracker && track == 2)
-			connected_tracker.set_angle(GLOB.sun.angle)
+			connected_tracker.set_angle(global.sun.angle)
 		src.set_panels(cdir)
 
 	interact(usr)
@@ -478,7 +479,7 @@ var/list/solars_list = list()
 /obj/machinery/power/solar_control/autostart/Initialize()
 	search_for_connected()
 	if(connected_tracker && track == 2)
-		connected_tracker.set_angle(GLOB.sun.angle)
+		connected_tracker.set_angle(global.sun.angle)
 		set_panels(cdir)
 	. = ..()
 
@@ -488,7 +489,7 @@ var/list/solars_list = list()
 
 /obj/item/paper/solar
 	name = "paper- 'Going green! Setup your own solar array instructions.'"
-	info = "<h1>Welcome</h1><p>At greencorps we love the environment, and space. With this package you are able to help mother nature and produce energy without any usage of fossil fuels! Singularity energy is dangerous while solar energy is safe, which is why it's better. Now here is how you setup your own solar array.</p><p>You can make a solar panel by wrenching the solar assembly onto a cable node. Adding a glass panel, reinforced or regular glass will do, will finish the construction of your solar panel. It is that easy!</p><p>Now after setting up 19 more of these solar panels you will want to create a solar tracker to keep track of our mother nature's gift, the GLOB.sun. These are the same steps as before except you insert the tracker equipment circuit into the assembly before performing the final step of adding the glass. You now have a tracker! Now the last step is to add a computer to calculate the sun's movements and to send commands to the solar panels to change direction with the GLOB.sun. Setting up the solar computer is the same as setting up any computer, so you should have no trouble in doing that. You do need to put a wire node under the computer, and the wire needs to be connected to the tracker.</p><p>Congratulations, you should have a working solar array. If you are having trouble, here are some tips. Make sure all solar equipment are on a cable node, even the computer. You can always deconstruct your creations if you make a mistake.</p><p>That's all to it, be safe, be green!</p>"
+	info = "<h1>Welcome</h1><p>At greencorps we love the environment, and space. With this package you are able to help mother nature and produce energy without any usage of fossil fuels! Singularity energy is dangerous while solar energy is safe, which is why it's better. Now here is how you setup your own solar array.</p><p>You can make a solar panel by wrenching the solar assembly onto a cable node. Adding a glass panel, reinforced or regular glass will do, will finish the construction of your solar panel. It is that easy!</p><p>Now after setting up 19 more of these solar panels you will want to create a solar tracker to keep track of our mother nature's gift, the global.sun. These are the same steps as before except you insert the tracker equipment circuit into the assembly before performing the final step of adding the glass. You now have a tracker! Now the last step is to add a computer to calculate the sun's movements and to send commands to the solar panels to change direction with the global.sun. Setting up the solar computer is the same as setting up any computer, so you should have no trouble in doing that. You do need to put a wire node under the computer, and the wire needs to be connected to the tracker.</p><p>Congratulations, you should have a working solar array. If you are having trouble, here are some tips. Make sure all solar equipment are on a cable node, even the computer. You can always deconstruct your creations if you make a mistake.</p><p>That's all to it, be safe, be green!</p>"
 
 /proc/rate_control(var/S, var/V, var/C, var/Min=1, var/Max=5, var/Limit=null) //How not to name vars
 	var/href = "<A href='?src=\ref[S];rate control=1;[V]"

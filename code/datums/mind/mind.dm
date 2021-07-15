@@ -329,14 +329,8 @@
 				new_objective.owner = src
 
 			if ("steal")
-				if (!istype(objective, /datum/objective/steal))
-					new_objective = new /datum/objective/steal
-					new_objective.owner = src
-				else
-					new_objective = objective
-				var/datum/objective/steal/steal = new_objective
-				if (!steal.select_target())
-					return
+				new_objective = new /datum/objective/steal
+				new_objective.owner = src
 
 			if("download","capture","absorb")
 				var/def_num
@@ -521,7 +515,7 @@
 /mob/living/carbon/human/mind_initialize()
 	..()
 	if(!mind.assigned_role)
-		mind.assigned_role = GLOB.using_map.default_assistant_title
+		mind.assigned_role = global.using_map.default_job_title
 
 //AI
 /mob/living/silicon/ai/mind_initialize()

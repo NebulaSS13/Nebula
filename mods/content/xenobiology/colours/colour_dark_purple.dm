@@ -12,5 +12,5 @@
 	reaction_strings = list(/decl/material/solid/metal/uranium = "Synthesises some metallic hydrogen.")
 
 /decl/slime_colour/dark_purple/handle_uranium_reaction(var/datum/reagents/holder)
-	new /obj/item/stack/material/generic(get_turf(holder.my_atom), 10, /decl/material/solid/metallic_hydrogen)
+	SSmaterials.create_object(/decl/material/solid/metallic_hydrogen, get_turf(holder.my_atom), 10, /obj/item/stack/material/cubes)
 	return TRUE

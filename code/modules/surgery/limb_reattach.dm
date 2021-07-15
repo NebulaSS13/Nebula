@@ -124,9 +124,8 @@
 	name = "Connect limb"
 	description = "This procedure is used to reconnect a replaced severed limb."
 	allowed_tools = list(
-		/obj/item/hemostat = 100,
-		/obj/item/stack/cable_coil = 75,
-		/obj/item/assembly/mousetrap = 20
+		TOOL_HEMOSTAT = 100,
+		TOOL_CABLECOIL = 75
 	)
 	can_infect = 1
 	min_duration = 100

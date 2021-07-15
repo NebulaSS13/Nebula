@@ -37,7 +37,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/parrot/space/Initialize()
 	. = ..()
-	var/subspecies_type = safepick(subspecies)
+	var/subspecies_type = SAFEPICK(subspecies)
 	if(subspecies_type)
 		var/decl/parrot_subspecies/ps = GET_DECL(subspecies_type)
 		icon_set = ps.icon_set

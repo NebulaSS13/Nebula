@@ -9,29 +9,6 @@
  *			worldtime2text
  */
 
-// Returns an integer given a hexadecimal number string as input.
-#if DM_VERSION < 513
-/proc/hex2num_inner(hex)
-	. = 0
-	var/place = 1
-	for(var/i in length(hex) to 1 step -1)
-		var/num = text2ascii(hex, i)
-		switch(num)
-			if(48 to 57)
-				num -= 48	//0-9
-			if(97 to 102)
-				num -= 87	//a-f
-			if(65 to 70)
-				num -= 55	//A-F
-			if(45)
-				return . * -1 // -
-			else
-				CRASH("Malformed hex number")
-
-		. += num * place
-		place *= 16
-#endif
-
 // Returns the hex value of a number given a value assumed to be a base-ten value
 /proc/num2hex(num, len=2)
 	if(!isnum(num))
@@ -58,7 +35,6 @@
 				. = "0" + .
 		i++
 
-
 /proc/text2numlist(text, delimiter="\n")
 	var/list/num_list = list()
 	for(var/x in splittext(text, delimiter))
@@ -66,8 +42,8 @@
 	return num_list
 
 // Splits the text of a file at seperator and returns them in a list.
-/proc/file2list(filename, seperator="\n")
-	return splittext(return_file_text(filename),seperator)
+/proc/file2list(filename, seperator = "\n")
+	return splittext(safe_file2text(filename), seperator)
 
 // Turns a direction into text
 /proc/num2dir(direction)
@@ -237,14 +213,10 @@
 	for(var/atom_type in atom_types)
 		var/atom/A = atom_type
 		.[initial(A.name)] = atom_type
-	. = sortAssoc(.)
+	. = sortTim(., /proc/cmp_text_asc)
 
 /proc/atomtype2nameassoclist(var/atom_type)
 	return atomtypes2nameassoclist(typesof(atom_type))
-
-//Splits the text of a file at seperator and returns them in a list.
-/world/proc/file2list(filename, seperator="\n")
-	return splittext(file2text(filename), seperator)
 
 /proc/str2hex(str)
 	if(!istext(str)||!str)
@@ -269,3 +241,17 @@
 			return null
 		r += ascii2text(c)
 	return r
+
+//checks if a file exists and contains text
+//returns text as a string if these conditions are met
+/proc/safe_file2text(filename, error_on_invalid_return = TRUE)
+	try
+		if(fexists(filename))
+			. = file2text(filename)
+			if(!. && error_on_invalid_return)
+				error("File empty ([filename])")
+		else if(error_on_invalid_return)
+			error("File not found ([filename])")
+	catch(var/exception/E)
+		if(error_on_invalid_return)
+			error("Exception when loading file as string: [E]")

@@ -141,15 +141,14 @@
 	var/list/inherent_verbs 	  // Species-specific verbs.
 	var/siemens_coefficient = 1   // The lower, the thicker the skin and better the insulation.
 	var/darksight_range = 2       // Native darksight distance.
-	var/darksight_tint = DARKTINT_NONE // How shadows are tinted.
 	var/species_flags = 0         // Various specific features.
 	var/appearance_flags = 0      // Appearance/display related features.
 	var/spawn_flags = 0           // Flags that specify who can spawn as this species
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
 	// Move intents. Earlier in list == default for that type of movement.
 	var/list/move_intents = list(
-		/decl/move_intent/walk, 
-		/decl/move_intent/run, 
+		/decl/move_intent/walk,
+		/decl/move_intent/run,
 		/decl/move_intent/creep
 	)
 
@@ -178,7 +177,7 @@
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
 
 	// An associative list of target zones (ex. BP_CHEST, BP_MOUTH) mapped to all possible keys associated
-	// with the zone. Used for species with body layouts that do not map directly to the standard humanoid 
+	// with the zone. Used for species with body layouts that do not map directly to the standard humanoid
 	// body, currently serpentids and mantids.
 	var/list/limb_mapping
 
@@ -259,7 +258,6 @@
 
 	var/list/traits = list() // An associative list of /decl/traits and trait level - See individual traits for valid levels
 
-
 /decl/species/Initialize()
 	..()
 	if(!codex_description)
@@ -291,7 +289,7 @@
 			available_cultural_info[token] |= additional_available_cultural_info[token]
 
 		else if(!LAZYLEN(available_cultural_info[token]))
-			var/list/map_systems = GLOB.using_map.available_cultural_info[token]
+			var/list/map_systems = global.using_map.available_cultural_info[token]
 			available_cultural_info[token] = map_systems.Copy()
 
 		if(LAZYLEN(available_cultural_info[token]) && !default_cultural_info[token])
@@ -299,7 +297,7 @@
 			default_cultural_info[token] = avail_systems[1]
 
 		if(!default_cultural_info[token])
-			default_cultural_info[token] = GLOB.using_map.default_cultural_info[token]
+			default_cultural_info[token] = global.using_map.default_cultural_info[token]
 
 	if(hud_type)
 		hud = new hud_type()
@@ -341,16 +339,11 @@
 		organ_data["descriptor"] = initial(limb_path.name)
 
 /decl/species/proc/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
+	var/obj/item/storage/box/box = extendedtank ? /obj/item/storage/box/engineer : /obj/item/storage/box/survival
 	if(istype(H.get_equipped_item(slot_back_str), /obj/item/storage/backpack))
-		if (extendedtank)
-			H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H.back), slot_in_backpack_str)
-		else
-			H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H.back), slot_in_backpack_str)
+		H.equip_to_slot_or_del(new box(H.back), slot_in_backpack_str)
 	else
-		if (extendedtank)
-			H.put_in_hands_or_del(new /obj/item/storage/box/engineer(H))
-		else
-			H.put_in_hands_or_del(new /obj/item/storage/box/survival(H))
+		H.put_in_hands_or_del(new box(H))
 
 /decl/species/proc/get_manual_dexterity(var/mob/living/carbon/human/H)
 	. = manual_dexterity
@@ -396,14 +389,6 @@
 		post_organ_rejuvenate(O, H)
 
 	H.sync_organ_dna()
-
-/decl/species/proc/hug(var/mob/living/carbon/human/H,var/mob/living/target)
-	var/decl/pronouns/G = target.get_pronouns()
-	H.visible_message("<span class='notice'>[H] hugs [target] to make [G.him] feel better!</span>", \
-					"<span class='notice'>You hug [target] to make [G.him] feel better!</span>")
-	if(H != target)
-		H.update_personal_goal(/datum/goal/achievement/givehug, TRUE)
-		target.update_personal_goal(/datum/goal/achievement/gethug, TRUE)
 
 /decl/species/proc/add_base_auras(var/mob/living/carbon/human/H)
 	if(base_auras)
@@ -515,7 +500,7 @@
 		return 1
 
 	if(!HAS_STATUS(H, STAT_DRUGGY))
-		H.set_see_in_dark((H.sight == (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : min(H.getDarkvisionRange() + H.equipment_darkness_modifier, 8))
+		H.set_see_in_dark((H.sight == (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : min(H.get_darksight_range() + H.equipment_darkness_modifier, 8))
 		if(H.equipment_see_invis)
 			H.set_see_invisible(max(min(H.see_invisible, H.equipment_see_invis), vision[2]))
 
@@ -672,8 +657,8 @@
 	if(!L)
 		L = list()
 		LAZYSET(hair_styles, type, L)
-		for(var/hairstyle in GLOB.hair_styles_list)
-			var/datum/sprite_accessory/S = GLOB.hair_styles_list[hairstyle]
+		for(var/hairstyle in global.hair_styles_list)
+			var/datum/sprite_accessory/S = global.hair_styles_list[hairstyle]
 			if(S.species_allowed && !(get_root_species_name() in S.species_allowed))
 				continue
 			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
@@ -693,8 +678,8 @@
 		facial_hair_style_by_gender = list()
 		LAZYSET(facial_hair_styles_by_species, gender, facial_hair_style_by_gender)
 
-		for(var/facialhairstyle in GLOB.facial_hair_styles_list)
-			var/datum/sprite_accessory/S = GLOB.facial_hair_styles_list[facialhairstyle]
+		for(var/facialhairstyle in global.facial_hair_styles_list)
+			var/datum/sprite_accessory/S = global.facial_hair_styles_list[facialhairstyle]
 			if(gender == MALE && S.gender == FEMALE)
 				continue
 			if(gender == FEMALE && S.gender == MALE)

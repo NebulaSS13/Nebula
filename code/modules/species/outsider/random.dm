@@ -86,7 +86,6 @@
 
 	//Misc traits
 	darksight_range = rand(1,8)
-	darksight_tint = pick(DARKTINT_NONE,DARKTINT_MODERATE,DARKTINT_GOOD)
 	if(prob(40))
 		available_pronouns = list(/decl/pronouns)
 	if(prob(10))

@@ -8,4 +8,4 @@
 			var/decl/emote/emote_datum = GET_DECL(emote)
 			if(emote_datum.check_user(src))
 				usable_emotes[emote_datum.key] = emote_datum
-	usable_emotes = sortAssoc(usable_emotes)
+	usable_emotes = sortTim(usable_emotes, /proc/cmp_text_asc)

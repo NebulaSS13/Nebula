@@ -22,7 +22,7 @@
 /obj/structure/monolith/Initialize()
 	. = ..()
 	icon_state = "jaggy[rand(1,4)]"
-	if(GLOB.using_map.use_overmap)
+	if(global.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E))
 			desc += "\nThere are images on it: [E.get_engravings()]"
@@ -32,11 +32,9 @@
 	..()
 	overlays.Cut()
 	if(active)
-		var/image/I = image(icon,"[icon_state]decor")
+		var/image/I = emissive_overlay(icon,"[icon_state]decor")
 		I.appearance_flags = RESET_COLOR
 		I.color = get_random_colour(0, 150, 255)
-		I.layer = ABOVE_LIGHTING_LAYER
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlays += I
 		set_light(2, 0.3, I.color)
 
@@ -47,7 +45,7 @@
 
 /obj/structure/monolith/attack_hand(mob/user)
 	visible_message("[user] touches \the [src].")
-	if(GLOB.using_map.use_overmap && istype(user,/mob/living/carbon/human))
+	if(global.using_map.use_overmap && istype(user,/mob/living/carbon/human))
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E))
 			var/mob/living/carbon/human/H = user

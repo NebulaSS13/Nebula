@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/mining_processor
-	name = "circuitboard (material processor)"
+	name = "circuitboard (electric smelter)"
 	build_path = /obj/machinery/material_processing/smeltery
 	board_type = "machine"
 	origin_tech = "{'programming':2,'engineering':2}"

@@ -72,7 +72,7 @@
 /obj/item/integrated_circuit/input/numberpad/OnICTopic(href_list, user)
 	if(href_list["enter_number"])
 		var/new_input = input(user, "Enter a number, please.","Number pad") as null|num
-		if(isnum(new_input) && CanInteract(user, GLOB.physical_state))
+		if(isnum(new_input) && CanInteract(user, global.physical_topic_state))
 			set_pin_data(IC_OUTPUT, 1, new_input)
 			push_data()
 			activate_pin(1)
@@ -95,7 +95,7 @@
 /obj/item/integrated_circuit/input/textpad/OnICTopic(href_list, user)
 	if(href_list["enter_words"])
 		var/new_input = input(user, "Enter some words, please.","Number pad") as null|text
-		if(istext(new_input) && CanInteract(user, GLOB.physical_state))
+		if(istext(new_input) && CanInteract(user, global.physical_topic_state))
 			set_pin_data(IC_OUTPUT, 1, new_input)
 			push_data()
 			activate_pin(1)
@@ -827,10 +827,10 @@
 
 /obj/item/integrated_circuit/input/microphone/Initialize()
 	. = ..()
-	GLOB.listening_objects += src
+	global.listening_objects += src
 
 /obj/item/integrated_circuit/input/microphone/Destroy()
-	GLOB.listening_objects -= src
+	global.listening_objects -= src
 	. = ..()
 
 /obj/item/integrated_circuit/input/microphone/hear_talk(var/mob/living/M, text, verb, decl/language/speaking)

@@ -1,13 +1,13 @@
 
 
 // subtypes of stuff in here will be avoided when randomizing interactions.
-GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
+var/global/list/random_chem_interaction_blacklist = list(
 	/decl/material/liquid/adminordrazine,
 	/decl/material/solid/tobacco,
 	/decl/material/liquid/drink,
 	/decl/material/liquid/random,
 	/decl/material/liquid/ethanol // Includes alcoholic beverages
-))
+)
 
 #define FOR_ALL_EFFECTS \
 	var/list/all_effects = decls_repository.get_decls_unassociated(data);\
@@ -36,7 +36,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 		effect.prototype_process(src, temperature)
 	
 	var/whitelist = subtypesof(/decl/material)
-	for(var/bad_type in GLOB.random_chem_interaction_blacklist)
+	for(var/bad_type in global.random_chem_interaction_blacklist)
 		whitelist -= typesof(bad_type)
 
 	var/chill_num = pick(1,2,4)

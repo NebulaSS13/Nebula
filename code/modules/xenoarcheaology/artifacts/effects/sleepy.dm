@@ -1,7 +1,7 @@
 //todo
 /datum/artifact_effect/sleepy
 	name = "sleepy"
-	var/global/list/sleepy_messages = list(
+	var/static/list/sleepy_messages = list(
 		"You feel like taking a nap.",
 		"You feel a yawn coming on.",
 		"You feel a little tired."

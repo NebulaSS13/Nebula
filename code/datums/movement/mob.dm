@@ -188,7 +188,7 @@
 			to_chat(mob, SPAN_WARNING("You're pinned down by \a [mob.pinned[1]]!"))
 		return MOVEMENT_STOP
 
-	for(var/obj/item/grab/G as anything in mob.grabbed_by)
+	for(var/obj/item/grab/G AS_ANYTHING in mob.grabbed_by)
 		if(G.assailant != mob && G.assailant != mover && (mob.restrained() || G.stop_move()))
 			if(mover == mob)
 				to_chat(mob, SPAN_WARNING("You're restrained and cannot move!"))
@@ -214,34 +214,33 @@
 	var/turf/old_turf = get_turf(mob)
 	step(mob, direction)
 
+	if(!mob)
+		return // If the mob gets deleted on move (e.g. Entered, whatever), it wipes this reference on us in Destroy (and we should be aborting all action anyway).
 	if(mob.loc == old_turf) // Did not move for whatever reason.
 		mob.moving = FALSE
 		return
 
 	var/turf/new_loc = mob.loc
 	if(istype(new_loc))
-		for(var/atom/movable/AM as anything in mob.ret_grab())
+		for(var/atom/movable/AM AS_ANYTHING in mob.ret_grab())
 			if(AM != src && AM.loc != mob.loc && !AM.anchored && old_turf.Adjacent(AM))
 				AM.glide_size = mob.glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
 				AM.DoMove(get_dir(get_turf(AM), old_turf), mob, TRUE)
 
-		for(var/obj/item/grab/G as anything in mob.get_active_grabs())
+		for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
 			G.adjust_position()
 
-	if(QDELETED(mob)) // No idea why, but this was causing null check runtimes on live.
-		return
-
-	for(var/obj/item/grab/G as anything in mob.get_active_grabs())
+	for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
 		if(G.assailant_reverse_facing())
-			mob.set_dir(GLOB.reverse_dir[direction])
+			mob.set_dir(global.reverse_dir[direction])
 		G.assailant_moved()
-	for(var/obj/item/grab/G as anything in mob.grabbed_by)
+	for(var/obj/item/grab/G AS_ANYTHING in mob.grabbed_by)
 		G.adjust_position()
 
 	if(direction & (UP|DOWN))
 		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
 		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
-		for(var/obj/item/grab/G as anything in mob.get_active_grabs())
+		for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
 			if(!G.affecting)
 				continue
 			var/turf/start = G.affecting.loc
@@ -304,4 +303,4 @@
 	if(prob(stability))
 		return
 
-	return prob(50) ? GLOB.cw_dir[.] : GLOB.ccw_dir[.]
+	return prob(50) ? global.cw_dir[.] : global.ccw_dir[.]

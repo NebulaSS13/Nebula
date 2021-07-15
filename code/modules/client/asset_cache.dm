@@ -144,7 +144,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 //These datums are used to populate the asset cache, the proc "register()" does this.
 
 //all of our asset datums, used for referring to these later
-/var/global/list/asset_datums = list()
+var/global/list/asset_datums = list()
 
 //get a assetdatum or make a new one
 /proc/get_asset_datum(var/type)
@@ -174,6 +174,8 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 
 //DEFINITIONS FOR ASSET DATUMS START HERE.
+var/global/template_file_name = "all_templates.json"
+
 /datum/asset/nanoui
 	var/list/common = list()
 
@@ -185,9 +187,10 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		"nano/js/"
 	)
 	var/list/uncommon_dirs = list(
-		"nano/templates/",
 		"news_articles/images/"
 	)
+	var/template_dir = "nano/templates/"
+	var/template_temp_dir = "data/"
 
 /datum/asset/nanoui/register()
 	// Crawl the directories to find files.
@@ -205,8 +208,21 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 				if(fexists(path + filename))
 					register_asset(filename, fcopy_rsc(path + filename))
 
+	var/list/templates = flist(template_dir)
+	for(var/filename in templates)
+		if(copytext(filename, length(filename)) != "/")
+			templates[filename] = replacetext(replacetext(file2text(template_dir + filename), "\n", ""), "\t", "")
+		else
+			templates -= filename
+	var/full_file_name = template_temp_dir + global.template_file_name
+	if(fexists(full_file_name))
+		fdel(file(full_file_name))
+	var/template_file = file(full_file_name)
+	to_file(template_file, json_encode(templates))
+	register_asset(global.template_file_name, fcopy_rsc(template_file))
+
 	var/list/mapnames = list()
-	for(var/z in GLOB.using_map.map_levels)
+	for(var/z in global.using_map.map_levels)
 		mapnames += map_image_file_name(z)
 
 	var/list/filenames = flist(MAP_IMAGE_PATH)
@@ -235,7 +251,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		var/datum/asset/A = new type()
 		A.register()
 
-	for(var/client/C in GLOB.clients) // This is also called in client/New, but as we haven't initialized the cache until now, and it's possible the client is already connected, we risk doing it twice.
+	for(var/client/C in global.clients) // This is also called in client/New, but as we haven't initialized the cache until now, and it's possible the client is already connected, we risk doing it twice.
 		// Doing this to a client too soon after they've connected can cause issues, also the proc we call sleeps.
 		spawn(10)
 			getFilesSlow(C, cache, FALSE)

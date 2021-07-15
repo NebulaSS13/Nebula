@@ -6,8 +6,6 @@
 //		Arguments that the called proc should expect:
 //			/mob/dead: The mob that was added to the life_mob_list
 
-GLOBAL_DATUM_INIT(life_event, /decl/observ/life, new)
-
 /decl/observ/life
 	name = "Life"
 	expected_type = /mob
@@ -19,4 +17,4 @@ GLOBAL_DATUM_INIT(life_event, /decl/observ/life, new)
 /mob/add_to_living_mob_list()
 	. = ..()
 	if(.)
-		GLOB.life_event.raise_event(src)
+		events_repository.raise_event(/decl/observ/life, src)

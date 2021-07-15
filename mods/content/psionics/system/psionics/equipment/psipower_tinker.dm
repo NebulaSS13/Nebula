@@ -1,39 +1,47 @@
 /obj/item/psychic_power/tinker
-	name = "psychokinetic crowbar"
+	name = "psychokinetic tool"
 	icon_state = "tinker"
 	force = 1
-	var/emulating = "Crowbar"
 
-/obj/item/psychic_power/tinker/iscrowbar()
-	return emulating == "Crowbar"
+/obj/item/psychic_power/tinker/Initialize()
+	. = ..()
 
-/obj/item/psychic_power/tinker/iswrench()
-	return emulating == "Wrench"
+	var/use_tool_quality = TOOL_QUALITY_WORST
+	var/mob/living/owner = loc
+	if(istype(owner) && owner.psi)
+		switch(owner.psi.get_rank(PSI_PSYCHOKINESIS))
+			if(PSI_RANK_LATENT)
+				use_tool_quality = TOOL_QUALITY_BAD
+			if(PSI_RANK_OPERANT)
+				use_tool_quality = TOOL_QUALITY_MEDIOCRE
+			if(PSI_RANK_MASTER)
+				use_tool_quality = TOOL_QUALITY_DEFAULT
+			if(PSI_RANK_GRANDMASTER)
+				use_tool_quality = TOOL_QUALITY_GOOD
+			if(PSI_RANK_PARAMOUNT)
+				use_tool_quality = TOOL_QUALITY_BEST
 
-/obj/item/psychic_power/tinker/isscrewdriver()
-	return emulating == "Screwdriver"
+	set_extension(src, /datum/extension/tool/variable, 
+		list(
+			TOOL_CROWBAR =     use_tool_quality,
+			TOOL_SCREWDRIVER = use_tool_quality,
+			TOOL_WRENCH =      use_tool_quality,
+			TOOL_WIRECUTTERS = use_tool_quality
+		),
+		null,
+		list(
+			TOOL_CROWBAR =     'sound/effects/psi/power_fabrication.ogg',
+			TOOL_SCREWDRIVER = 'sound/effects/psi/power_fabrication.ogg',
+			TOOL_WRENCH =      'sound/effects/psi/power_fabrication.ogg',
+			TOOL_WIRECUTTERS = 'sound/effects/psi/power_fabrication.ogg'
+		)
+	)
 
-/obj/item/psychic_power/tinker/iswirecutter()
-	return emulating == "Wirecutters"
-
-/obj/item/psychic_power/tinker/attack_self()
-
-	if(!owner || loc != owner)
-		return
-
-	var/choice = input("Select a tool to emulate.","Power") as null|anything in list("Crowbar","Wrench","Screwdriver","Wirecutters","Dismiss")
-	if(!choice)
-		return
-
-	if(!owner || loc != owner)
-		return
-
-	if(choice == "Dismiss")
-		sound_to(owner, 'sound/effects/psi/power_fail.ogg')
-		owner.drop_from_inventory(src)
-		return
-
-	emulating = choice
-	name = "psychokinetic [lowertext(emulating)]"
-	to_chat(owner, "<span class='notice'>You begin emulating \a [lowertext(emulating)].</span>")
-	sound_to(owner, 'sound/effects/psi/power_fabrication.ogg')
+/obj/item/psychic_power/tinker/on_update_icon()
+	. = ..()
+	var/datum/extension/tool/variable/tool = get_extension(src, /datum/extension/tool)
+	if(istype(tool))
+		var/decl/tool_archetype/tool_archetype = GET_DECL(tool.current_tool)
+		name = "psychokinetic [lowertext(tool_archetype.name)]"
+	else
+		name = initial(name)

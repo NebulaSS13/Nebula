@@ -1,8 +1,7 @@
 // MySQL configuration
-GLOBAL_REAL_VAR(sqlenabled)   = FALSE
-
-GLOBAL_REAL_VAR(sqladdress)   = "localhost"
-GLOBAL_REAL_VAR(sqlport)      = "3306"
-GLOBAL_REAL_VAR(sqldb)        = "tgstation"
-GLOBAL_REAL_VAR(sqllogin)     = "root"
-GLOBAL_REAL_VAR(sqlpass)      = ""
+var/global/sqlenabled = FALSE
+GLOBAL_PROTECTED_UNTYPED(sqladdress, "localhost")
+GLOBAL_PROTECTED_UNTYPED(sqlport,    "3306")
+GLOBAL_PROTECTED_UNTYPED(sqldb,      "tgstation")
+GLOBAL_PROTECTED_UNTYPED(sqllogin,   "root")
+GLOBAL_PROTECTED_UNTYPED(sqlpass,    "")

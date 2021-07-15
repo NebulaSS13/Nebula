@@ -24,7 +24,7 @@
 	if(!(fab_status_flags & FAB_BUSY) && is_functioning())
 		fab_status_flags |= FAB_BUSY
 		update_use_power(POWER_USE_ACTIVE)
-		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, fabricator_sound, volume = 30)
+		sound_token = play_looping_sound(src, sound_id, fabricator_sound, volume = 30)
 
 /obj/machinery/fabricator/proc/stop_building()
 	if(fab_status_flags & FAB_BUSY)

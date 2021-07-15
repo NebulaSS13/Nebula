@@ -353,3 +353,16 @@
 		sleep(3)
 		animate(user, pixel_x = -5, time = 5)
 		animate(pixel_x = user.default_pixel_x, pixel_y = user.default_pixel_x, time = 2)
+
+/decl/emote/visible/vomit
+	key = "vomit"
+
+/decl/emote/visible/vomit/check_user(var/mob/living/carbon/human/user)
+	. = ..() && user.check_has_mouth() && !user.isSynthetic()
+
+/decl/emote/visible/vomit/do_emote(var/atom/user, var/extra_params)
+	var/mob/living/carbon/human/H = user
+	if(istype(H))
+		H.vomit(deliberate = TRUE)
+	else
+		to_chat(src, SPAN_WARNING("You are unable to vomit."))

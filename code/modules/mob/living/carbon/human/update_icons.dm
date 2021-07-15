@@ -290,12 +290,16 @@ var/global/list/damage_icon_parts = list()
 
 //BASE MOB SPRITE
 /mob/living/carbon/human/update_body(var/update_icons=1)
+
+	if(!length(organs))
+		return // Something is trying to update our body pre-init (probably loading a preview image during world startup).
+
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
 
-	var/husk = (MUTATION_HUSK in src.mutations)
-	var/fat = (MUTATION_FAT in src.mutations)
-	var/hulk = (MUTATION_HULK in src.mutations)
+	var/husk =     (MUTATION_HUSK in src.mutations)
+	var/fat =      (MUTATION_FAT in src.mutations)
+	var/hulk =     (MUTATION_HULK in src.mutations)
 	var/skeleton = (MUTATION_SKELETON in src.mutations)
 
 	//CACHING: Generate an index key from visible bodyparts.
@@ -730,7 +734,7 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/set_dir()
 	. = ..()
-	if(. && bodytype.get_tail())
+	if(. && bodytype.get_tail(src))
 		update_tail_showing()
 
 

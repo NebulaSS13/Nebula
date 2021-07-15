@@ -72,9 +72,23 @@
 	var/list/spawned_features
 
 	var/habitability_class	// if it's above bad, atmosphere will be adjusted to be better for humans (no extreme temps / oxygen to breathe)
+	var/crust_strata // Decl type for exterior walls to use for material and ore gen.
+
+/obj/effect/overmap/visitable/sector/exoplanet/proc/get_strata()
+	return crust_strata
+
+/obj/effect/overmap/visitable/sector/exoplanet/proc/select_strata()
+	var/list/all_strata = decls_repository.get_decls_of_subtype(/decl/strata)
+	var/list/possible_strata = list()
+	for(var/stype in all_strata)
+		var/decl/strata/strata = all_strata[stype]
+		if(strata.is_valid_exoplanet_strata(src))
+			possible_strata += stype
+	if(length(possible_strata))
+		crust_strata = pick(possible_strata)
 
 /obj/effect/overmap/visitable/sector/exoplanet/Initialize(mapload, z_level)
-	if(GLOB.using_map.use_overmap)
+	if(global.using_map.use_overmap)
 		forceMove(locate(1, 1, z_level))
 	return ..()
 
@@ -86,18 +100,24 @@
 	x_size = maxx - 2 * (TRANSITIONEDGE + 1)
 	y_size = maxy - 2 * (TRANSITIONEDGE + 1)
 	landing_points_to_place = min(round(0.1 * (x_size * y_size) / (shuttle_size * shuttle_size)), 3)
+
+	var/planet_name = generate_planet_name()
+	SetName("[planet_name], \a [name]")
 	planetary_area = new planetary_area()
+	global.using_map.area_purity_test_exempt_areas += planetary_area.type
+	planetary_area.SetName("Surface of [planet_name]")
+
 	var/themes_num = min(length(possible_themes), rand(1, max_themes))
 	for(var/i = 1 to themes_num)
 		var/datum/exoplanet_theme/T = pickweight(possible_themes)
 		themes += new T
 		possible_themes -= T
-	name = "[generate_planet_name()], \a [name]"
 
 	generate_habitability()
 	generate_atmosphere()
 	for(var/datum/exoplanet_theme/T in themes)
 		T.adjust_atmosphere(src)
+	select_strata()
 	generate_flora()
 	generate_map()
 	generate_landing(2)

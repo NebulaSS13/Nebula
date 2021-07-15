@@ -1,28 +1,25 @@
 // Bomb cap!
-GLOBAL_VAR_INIT(max_explosion_range, 14)
+var/global/max_explosion_range = 14
+var/global/href_logfile        = null
+var/global/game_version        = "Nebula13"
+var/global/changelog_hash      = ""
+var/global/join_motd = null
 
+var/global/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 
-var/href_logfile        = null
-var/game_version        = "Nebula13"
-var/changelog_hash      = ""
-var/join_motd = null
+var/global/Debug2 = 0
 
-var/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
-
-var/Debug2 = 0
-
-var/gravity_is_on = 1
+var/global/gravity_is_on = 1
 
 // Database connections. A connection is established on world creation.
 // Ideally, the connection dies when the server restarts (After feedback logging.).
-var/DBConnection/dbcon // General-purpose record database.
+var/global/DBConnection/dbcon // General-purpose record database.
 
 // For FTP requests. (i.e. downloading runtime logs.)
 // However it'd be ok to use for accessing attack logs and such too, which are even laggier.
-var/fileaccess_timer = 0
-var/custom_event_msg = null
+var/global/fileaccess_timer = 0
+var/global/custom_event_msg = null
 
-GLOBAL_VAR_INIT(visibility_pref, FALSE)
  // Used for admin shenanigans.
-GLOBAL_VAR_INIT(random_players, 0)
-GLOBAL_VAR_INIT(triai, 0)
+var/global/random_players = FALSE
+var/global/triai = FALSE

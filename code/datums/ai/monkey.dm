@@ -11,7 +11,7 @@
 		return
 
 	if(prob(33) && isturf(body.loc) && !LAZYLEN(body.grabbed_by)) //won't move if being pulled
-		body.SelfMove(pick(GLOB.cardinal))
+		body.SelfMove(pick(global.cardinal))
 
 	var/obj/held = body.get_active_hand()
 	if(held && prob(1))

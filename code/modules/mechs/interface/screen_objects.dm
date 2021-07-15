@@ -90,26 +90,26 @@
 			value = round(value * BAR_CAP)
 
 	// Draw background.
-	if(!GLOB.default_hardpoint_background)
-		GLOB.default_hardpoint_background = image(icon = 'icons/mecha/mech_hud.dmi', icon_state = "bar_bkg")
-		GLOB.default_hardpoint_background.pixel_x = 34
-	new_overlays += GLOB.default_hardpoint_background
+	if(!global.default_hardpoint_background)
+		global.default_hardpoint_background = image(icon = 'icons/mecha/mech_hud.dmi', icon_state = "bar_bkg")
+		global.default_hardpoint_background.pixel_x = 34
+	new_overlays += global.default_hardpoint_background
 
 	if(value == 0)
-		if(!GLOB.hardpoint_bar_empty)
-			GLOB.hardpoint_bar_empty = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar_flash")
-			GLOB.hardpoint_bar_empty.pixel_x = 24
-			GLOB.hardpoint_bar_empty.color = "#ff0000"
-		new_overlays += GLOB.hardpoint_bar_empty
+		if(!global.hardpoint_bar_empty)
+			global.hardpoint_bar_empty = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar_flash")
+			global.hardpoint_bar_empty.pixel_x = 24
+			global.hardpoint_bar_empty.color = "#ff0000"
+		new_overlays += global.hardpoint_bar_empty
 	else if(value < 0)
-		if(!GLOB.hardpoint_error_icon)
-			GLOB.hardpoint_error_icon = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar_error")
-			GLOB.hardpoint_error_icon.pixel_x = 34
-		new_overlays += GLOB.hardpoint_error_icon
+		if(!global.hardpoint_error_icon)
+			global.hardpoint_error_icon = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar_error")
+			global.hardpoint_error_icon.pixel_x = 34
+		new_overlays += global.hardpoint_error_icon
 	else
 		value = min(value, BAR_CAP)
 		// Draw statbar.
-		if(!LAZYLEN(GLOB.hardpoint_bar_cache))
+		if(!LAZYLEN(global.hardpoint_bar_cache))
 			for(var/i=0;i<BAR_CAP;i++)
 				var/image/bar = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar")
 				bar.pixel_x = 24+(i*2)
@@ -119,9 +119,9 @@
 					bar.color = "#ffff00"
 				else
 					bar.color = "#ff0000"
-				GLOB.hardpoint_bar_cache += bar
+				global.hardpoint_bar_cache += bar
 		for(var/i=1;i<=value;i++)
-			new_overlays += GLOB.hardpoint_bar_cache[i]
+			new_overlays += global.hardpoint_bar_cache[i]
 	overlays = new_overlays
 
 /obj/screen/exosuit/hardpoint/Initialize(mapload, var/newtag)
@@ -308,9 +308,7 @@
 	to_chat(usr, SPAN_NOTICE("[owner.head.name] advanced sensor mode is [owner.head.active_sensors ? "now" : "no longer" ] active."))
 
 /obj/screen/exosuit/needle
-#if DM_VERSION >= 513
 	vis_flags = VIS_INHERIT_ID
-#endif
 	icon_state = "heatprobe_needle"
 
 /obj/screen/exosuit/heat

@@ -1,5 +1,3 @@
-/var/decl/overmap_event_handler/overmap_event_handler = new()
-
 /decl/overmap_event_handler
 	var/list/hazard_by_turf
 	var/list/ship_events
@@ -124,13 +122,13 @@
 
 	if(!active_hazards.len)
 		hazard_by_turf -= T
-		GLOB.entered_event.unregister(T, src, /decl/overmap_event_handler/proc/on_turf_entered)
-		GLOB.exited_event.unregister(T, src, /decl/overmap_event_handler/proc/on_turf_exited)
+		events_repository.unregister(/decl/observ/entered, T, src, .proc/on_turf_entered)
+		events_repository.unregister(/decl/observ/exited,  T, src, .proc/on_turf_exited)
 	else
 		hazard_by_turf |= T
 		hazard_by_turf[T] = active_hazards
-		GLOB.entered_event.register(T, src,/decl/overmap_event_handler/proc/on_turf_entered)
-		GLOB.exited_event.register(T, src, /decl/overmap_event_handler/proc/on_turf_exited)
+		events_repository.register(/decl/observ/entered, T, src, .proc/on_turf_entered)
+		events_repository.register(/decl/observ/exited,  T, src, .proc/on_turf_exited)
 
 	for(var/obj/effect/overmap/visitable/ship/ship in T)
 		for(var/datum/event/E in ship_events[ship])
@@ -183,7 +181,7 @@
 /obj/effect/overmap/event/Initialize()
 	. = ..()
 	icon_state = pick(event_icon_states)
-	overmap_event_handler.update_hazards(loc)
+	SSmapping.overmap_event_handler.update_hazards(loc)
 	if(LAZYLEN(colors))
 		color = pick(colors)
 
@@ -191,20 +189,20 @@
 	var/turf/old_loc = loc
 	. = ..()
 	if(.)
-		overmap_event_handler.update_hazards(old_loc)
-		overmap_event_handler.update_hazards(loc)
+		SSmapping.overmap_event_handler.update_hazards(old_loc)
+		SSmapping.overmap_event_handler.update_hazards(loc)
 
 /obj/effect/overmap/event/forceMove(atom/destination)
 	var/old_loc = loc
 	. = ..()
 	if(.)
-		overmap_event_handler.update_hazards(old_loc)
-		overmap_event_handler.update_hazards(loc)
+		SSmapping.overmap_event_handler.update_hazards(old_loc)
+		SSmapping.overmap_event_handler.update_hazards(loc)
 
 /obj/effect/overmap/event/Destroy()//takes a look at this one as well, make sure everything is A-OK
 	var/turf/T = loc
 	. = ..()
-	overmap_event_handler.update_hazards(T)
+	SSmapping.overmap_event_handler.update_hazards(T)
 
 /obj/effect/overmap/event/meteor
 	name = "asteroid field"

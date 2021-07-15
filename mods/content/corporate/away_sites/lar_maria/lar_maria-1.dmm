@@ -2681,7 +2681,7 @@
 "gt" = (
 /obj/structure/closet/crate/radiation,
 /obj/item/stack/cable_coil/random,
-/obj/item/stack/material/tritium/ten,
+/obj/item/stack/material/aerogel/mapped/tritium/ten,
 /obj/item/wirecutters,
 /obj/item/wrench,
 /turf/simulated/floor/plating,

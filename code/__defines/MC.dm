@@ -120,15 +120,14 @@ if(Datum.is_processing) {\
 #define SS_INITSTATE_STARTED 1
 #define SS_INITSTATE_DONE 2
 
-
-#define SUBSYSTEM_DEF(X) GLOBAL_REAL(SS##X, /datum/controller/subsystem/##X);\
+#define SUBSYSTEM_DEF(X) var/global/datum/controller/subsystem/##X/SS##X;\
 /datum/controller/subsystem/##X/New(){\
 	NEW_SS_GLOBAL(SS##X);\
 	PreInit();\
 }\
 /datum/controller/subsystem/##X
 
-#define PROCESSING_SUBSYSTEM_DEF(X) GLOBAL_REAL(SS##X, /datum/controller/subsystem/processing/##X);\
+#define PROCESSING_SUBSYSTEM_DEF(X) var/global/datum/controller/subsystem/processing/##X/SS##X;\
 /datum/controller/subsystem/processing/##X/New(){\
 	NEW_SS_GLOBAL(SS##X);\
 	PreInit();\

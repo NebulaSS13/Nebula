@@ -91,7 +91,7 @@
 
 /obj/item/mech_equipment/mounted_system/proc/forget_holding()
 	if(holding) //It'd be strange for this to be called with this var unset
-		GLOB.destroyed_event.unregister(holding, src, .proc/forget_holding)
+		events_repository.unregister(/decl/observ/destroyed, holding, src, .proc/forget_holding)
 		holding = null
 		if(!QDELETED(src))
 			qdel(src)
@@ -100,7 +100,7 @@
 	. = ..()
 	if(holding_type)
 		holding = new holding_type(src)
-		GLOB.destroyed_event.register(holding, src, .proc/forget_holding)
+		events_repository.register(/decl/observ/destroyed, holding, src, .proc/forget_holding)
 	if(holding)
 		if(!icon_state)
 			icon = holding.icon

@@ -22,7 +22,7 @@
 	var/hide_SMES_details = 0
 	var/hide_breakers = 0
 
-/datum/nano_module/program/rcon/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/rcon/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, var/datum/topic_state/state = global.default_topic_state)
 	FindDevices() // Update our devices list
 	var/list/data = host.initial_data()
 
@@ -39,8 +39,7 @@
 		"output_load" = round(SMES.output_used/1000, 0.1),
 		"RCON_tag" = SMES.RCon_tag
 		)))
-
-	data["smes_info"] = sortByKey(smeslist, "RCON_tag")
+	data["smes_info"] = smeslist
 
 	// BREAKER DATA (simplified view)
 	var/list/breakerlist[0]
@@ -122,10 +121,11 @@
 // Parameters: None
 // Description: Refreshes local list of known devices.
 /datum/nano_module/program/rcon/proc/FindDevices()
-	known_SMESs = new /list()
+	known_SMESs = list()
 	for(var/obj/machinery/power/smes/buildable/SMES in SSmachines.machinery)
 		if(can_connect_to(SMES))
 			known_SMESs.Add(SMES)
+	known_SMESs = sortTim(known_SMESs, /proc/cmp_rcon_tag_asc)
 
 	known_breakers = new /list()
 	for(var/obj/machinery/power/breakerbox/breaker in SSmachines.machinery)

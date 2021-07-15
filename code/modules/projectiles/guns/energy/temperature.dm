@@ -46,7 +46,7 @@
 	show_browser(user, dat, "window=freezegun;size=450x300;can_resize=1;can_close=1;can_minimize=1")
 	onclose(user, "window=freezegun", src)
 
-/obj/item/gun/energy/temperature/Topic(user, href_list, state = GLOB.inventory_state)
+/obj/item/gun/energy/temperature/Topic(user, href_list, state = global.inventory_topic_state)
 	..()
 
 /obj/item/gun/energy/temperature/OnTopic(user, href_list)

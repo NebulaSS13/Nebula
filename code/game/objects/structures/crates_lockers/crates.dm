@@ -286,4 +286,4 @@
 	closet_appearance = /decl/closet_appearance/crate/radiation
 
 /obj/structure/closet/crate/uranium/WillContain()
-	return list(/obj/item/stack/material/uranium/ten = 5)
+	return list(/obj/item/stack/material/puck/mapped/uranium/ten = 5)

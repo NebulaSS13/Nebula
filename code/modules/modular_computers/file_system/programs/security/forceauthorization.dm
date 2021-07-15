@@ -21,12 +21,12 @@
 	var/datum/computer_network/gun_net = istype(S) ? S.get_computer_network() : G.get_network()
 	return our_net == gun_net
 
-/datum/nano_module/program/forceauthorization/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/forceauthorization/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
 	data["is_silicon_usr"] = issilicon(user)
 
 	data["guns"] = list()
-	for(var/obj/item/gun/G in GLOB.registered_weapons)
+	for(var/obj/item/gun/G in global.registered_weapons)
 		if(G.standby)
 			continue
 
@@ -48,7 +48,7 @@
 
 	if(!data["is_silicon_usr"]) // don't send data even though they won't be able to see it
 		data["cyborg_guns"] = list()
-		for(var/obj/item/gun/energy/gun/secure/mounted/G in GLOB.registered_cyborg_weapons)
+		for(var/obj/item/gun/energy/gun/secure/mounted/G in global.registered_cyborg_weapons)
 			if(!is_gun_connected(G))
 				continue
 			var/list/modes = list() // we don't get location, unlike inside of the last loop, because borg locations are reported elsewhere.
@@ -72,7 +72,7 @@
 		return 1
 
 	if(href_list["gun"] && ("authorize" in href_list) && href_list["mode"])
-		var/obj/item/gun/G = locate(href_list["gun"]) in GLOB.registered_weapons
+		var/obj/item/gun/G = locate(href_list["gun"]) in global.registered_weapons
 		if(!is_gun_connected(G))
 			return
 		var/do_authorize = text2num(href_list["authorize"])
@@ -80,7 +80,7 @@
 		return isnum(do_authorize) && isnum(mode) && G && G.authorize(mode, do_authorize, usr.name)
 
 	if(href_list["cyborg_gun"] && ("authorize" in href_list) && href_list["mode"])
-		var/obj/item/gun/energy/gun/secure/mounted/M = locate(href_list["cyborg_gun"]) in GLOB.registered_cyborg_weapons
+		var/obj/item/gun/energy/gun/secure/mounted/M = locate(href_list["cyborg_gun"]) in global.registered_cyborg_weapons
 		if(!is_gun_connected(M))
 			return
 		var/do_authorize = text2num(href_list["authorize"])

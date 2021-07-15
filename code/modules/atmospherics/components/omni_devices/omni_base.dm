@@ -41,7 +41,7 @@
 	icon_state = "base"
 
 	ports = new()
-	for(var/d in GLOB.cardinal)
+	for(var/d in global.cardinal)
 		var/datum/omni_port/new_port = new(src, d)
 		switch(d)
 			if(NORTH)
@@ -199,7 +199,7 @@
 		if((reference in P.nodes) && (new_network != P.network))
 			qdel(P.network)
 			P.network = new_network
-			for(var/obj/machinery/atmospherics/node as anything in P.nodes)
+			for(var/obj/machinery/atmospherics/node AS_ANYTHING in P.nodes)
 				if(node != reference)
 					node.network_expand(new_network, src)
 

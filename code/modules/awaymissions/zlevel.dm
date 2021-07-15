@@ -1,6 +1,6 @@
 /proc/generateMapList(filename)
 	var/list/potentialMaps = list()
-	var/list/Lines = world.file2list(filename)
+	var/list/Lines = file2list(filename, FALSE)
 
 	if(!Lines.len)
 		return

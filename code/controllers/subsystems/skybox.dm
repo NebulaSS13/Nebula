@@ -13,6 +13,11 @@ SUBSYSTEM_DEF(skybox)
 	var/star_state = "stars"
 	var/list/skybox_cache = list()
 
+	var/list/space_appearance_cache
+
+/datum/controller/subsystem/skybox/PreInit()
+	build_space_appearances()
+
 /datum/controller/subsystem/skybox/Initialize()
 	. = ..()
 	if(isnull(background_color))
@@ -22,10 +27,23 @@ SUBSYSTEM_DEF(skybox)
 	background_color = SSskybox.background_color
 	skybox_cache = SSskybox.skybox_cache
 
+/datum/controller/subsystem/skybox/proc/build_space_appearances()
+	space_appearance_cache = new(26)
+	for (var/i in 0 to 25)
+		var/mutable_appearance/dust = mutable_appearance('icons/turf/space_dust.dmi', "[i]")
+		dust.plane = DUST_PLANE
+		dust.alpha = 80
+		dust.blend_mode = BLEND_ADD
+
+		var/mutable_appearance/space = new /mutable_appearance(/turf/space)
+		space.icon_state = "white"
+		space.overlays += dust
+		space_appearance_cache[i + 1] = space.appearance
+
 /datum/controller/subsystem/skybox/proc/get_skybox(z)
 	if(!skybox_cache["[z]"])
 		skybox_cache["[z]"] = generate_skybox(z)
-		if(GLOB.using_map.use_overmap)
+		if(global.using_map.use_overmap)
 			var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
 			if(istype(O))
 				for(var/zlevel in O.map_z)
@@ -44,7 +62,7 @@ SUBSYSTEM_DEF(skybox)
 
 	res.overlays += base
 
-	if(GLOB.using_map.use_overmap && use_overmap_details)
+	if(global.using_map.use_overmap && use_overmap_details)
 		var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
 		if(istype(O))
 			var/image/overmap = image(skybox_icon)

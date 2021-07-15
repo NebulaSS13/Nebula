@@ -120,7 +120,7 @@
 	return TRUE
 
 /obj/machinery/reagentgrinder/DefaultTopicState()
-	return GLOB.physical_state
+	return global.physical_topic_state
 
 /obj/machinery/reagentgrinder/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/list/data = list()

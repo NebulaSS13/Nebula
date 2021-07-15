@@ -92,7 +92,7 @@
 			if(prob(50))
 				thrust.stabilization_on = 0
 			SetMoveCooldown(15)	//2 seconds of random rando panic drifting
-			step(src, pick(GLOB.alldirs))
+			step(src, pick(global.alldirs))
 			return 0
 
 	. = ..()
@@ -133,7 +133,7 @@
 		species.handle_exertion(src)
 
 		var/stamina_cost = 0
-		for(var/obj/item/grab/G as anything in get_active_grabs())
+		for(var/obj/item/grab/G AS_ANYTHING in get_active_grabs())
 			stamina_cost -= G.grab_slowdown()
 		stamina_cost = round(stamina_cost)
 		if(stamina_cost < 0)

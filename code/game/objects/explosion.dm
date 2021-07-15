@@ -36,7 +36,7 @@
 	far_dist += heavy_impact_range * 5
 	far_dist += devastation_range * 20
 	var/frequency = get_rand_frequency()
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in global.player_list)
 		if(M.z == epicenter.z)
 			var/turf/M_turf = get_turf(M)
 			var/dist = get_dist(M_turf, epicenter)
@@ -189,7 +189,7 @@
 
 	var/sound/explosion_sound = sound(get_sfx("explosion"))
 
-	for (var/thing in GLOB.player_list)
+	for (var/thing in global.player_list)
 		var/mob/M = thing
 		var/reception = EXPLFX_BOTH
 		var/turf/T = isturf(M.loc) ? M.loc : get_turf(M)

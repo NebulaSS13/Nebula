@@ -30,10 +30,9 @@
 		tank = new tank
 		w_class = tank.size_in_use
 		force = tank.unlit_force
-
+	set_extension(src, /datum/extension/tool, list(TOOL_WELDER = TOOL_QUALITY_DEFAULT))
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	update_icon()
-
 	. = ..()
 
 /obj/item/weldingtool/dropped(mob/user)
@@ -55,10 +54,7 @@
 /obj/item/weldingtool/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret && welding && check_state_in_icon("[ret.icon_state]-lit", ret.icon))
-		var/image/lit = image(ret.icon, "[ret.icon_state]-lit")
-		lit.layer = ABOVE_LIGHTING_LAYER
-		lit.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		ret.add_overlay(lit)
+		ret.add_overlay(emissive_overlay(ret.icon, "[ret.icon_state]-lit"))
 	return ret
 
 /obj/item/weldingtool/get_heat()
@@ -246,11 +242,10 @@
 	if(tank)
 		add_overlay("[icon_state]-[tank.icon_state]")
 	if(welding && check_state_in_icon("[icon_state]-lit", icon))
-		var/image/I = image(icon, "[icon_state]-lit")
-		if(plane != HUD_PLANE)
-			I.layer = ABOVE_LIGHTING_LAYER
-			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		add_overlay(I)
+		if(plane == HUD_PLANE)
+			add_overlay(image(icon, "[icon_state]-lit"))
+		else
+			add_overlay(emissive_overlay(icon, "[icon_state]-lit"))
 		set_light(2.5, 0.6, lit_colour)
 	else
 		set_light(0)

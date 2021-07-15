@@ -65,18 +65,12 @@
 
 	var/flash_protection = 0				// Total level of flash protection
 	var/equipment_tint_total = 0			// Total level of visualy impairing items
-	var/equipment_darkness_modifier			// Darkvision modifier from equipped items
+	var/equipment_darkness_modifier			// Darksight modifier from equipped items
 	var/equipment_vision_flags				// Extra vision flags from equipped items
 	var/equipment_see_invis					// Max see invibility level granted by equipped items
 	var/equipment_prescription				// Eye prescription granted by equipped items
 	var/equipment_light_protection
 	var/list/equipment_overlays = list()	// Extra overlays from equipped items
-
-	var/public_record = ""
-	var/med_record = ""
-	var/sec_record = ""
-	var/gen_record = ""
-	var/exploit_record = ""
 
 	var/datum/mil_branch/char_branch = null
 	var/datum/mil_rank/char_rank = null

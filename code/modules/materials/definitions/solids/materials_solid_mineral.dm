@@ -1,6 +1,3 @@
-/decl/material/solid/mineral
-	stack_type = /obj/item/stack/material/generic/brick
-
 /decl/material/solid/mineral/pitchblende
 	name = "pitchblende"
 	color = "#917d1a"
@@ -18,8 +15,6 @@
 	stack_origin_tech = "{'materials':5}"
 	xarch_source_mineral = /decl/material/solid/phosphorus
 	ore_icon_overlay = "nugget"
-	sheet_singular_name = "brick"
-	sheet_plural_name = "bricks"
 	value = 0.8
 	sparse_material_weight = 8
 	rich_material_weight = 10
@@ -40,6 +35,7 @@
 	ore_icon_overlay = "lump"
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
+	burn_product = /decl/material/gas/carbon_monoxide
 	value = 0.8
 	sparse_material_weight = 35
 	rich_material_weight = 20
@@ -197,7 +193,6 @@
 
 /decl/material/solid/mineral/sand
 	name = "sand"
-	stack_type = null
 	color = "#e2dbb5"
 	heating_products = list(/decl/material/solid/glass = 1)
 	heating_point = GENERIC_SMELTING_HEAT_POINT
@@ -213,10 +208,10 @@
 	dissolves_into = list(
 		/decl/material/solid/silicon = 1
 	)
+	default_solid_form = /obj/item/stack/material/lump
 
 /decl/material/solid/mineral/clay
 	name = "clay"
-	stack_type = null
 	color = COLOR_OFF_WHITE
 	ore_name = "clay"
 	ore_icon_overlay = "lump"
@@ -227,10 +222,10 @@
 	ore_compresses_to = null
 	ore_icon_overlay = "dust"
 	value = 0.8
+	default_solid_form = /obj/item/stack/material/lump
 
 /decl/material/solid/mineral/hematite
 	name = "hematite"
-	stack_type = null
 	color = "#aa6666"
 	heating_products = list(
 		/decl/material/solid/metal/iron = 0.8,
@@ -252,7 +247,6 @@
 
 /decl/material/solid/mineral/rutile
 	name = "rutile"
-	stack_type = null
 	color = "#d8ad97"
 	heating_products = list(
 		/decl/material/solid/metal/titanium = 0.8,
@@ -294,7 +288,6 @@
 
 /decl/material/solid/mineral/magnetite
 	name = "magnetite"
-	stack_type = null
 	color = "#aa6666"
 	heating_products = list(
 		/decl/material/solid/metal/iron = 0.8,
@@ -322,7 +315,6 @@
 
 /decl/material/solid/mineral/chalcopyrite
 	name = "chalcopyrite"
-	stack_type = null
 	color = "#9e9357"
 	heating_products = list(
 		/decl/material/solid/metal/copper = 0.6,
@@ -522,4 +514,28 @@
 	dissolves_into = list(
 		/decl/material/solid/metal/gold = 0.7,
 		/decl/material/solid/metal/silver = 0.3
+	)
+
+/decl/material/solid/mineral/crocoite
+	name = "crocoite"
+	color = "#fa672c"
+	heating_products = list(
+		/decl/material/solid/metal/chromium = 0.3,
+		/decl/material/solid/metal/lead = 0.4,
+		/decl/material/solid/slag = 0.3
+	)
+	ore_name = "crocoite"
+	ore_result_amount = 10
+	ore_spread_chance = 5
+	ore_scan_icon = "mineral_uncommon"
+	ore_icon_overlay = "lump"
+	ore_type_value = ORE_PRECIOUS
+	ore_data_value = 1
+	value = 0.9
+	sparse_material_weight = 5
+	rich_material_weight = 10
+	fuel_value = 0.8
+	dissolves_into = list(
+		/decl/material/solid/metal/chromium = 0.6,
+		/decl/material/solid/metal/lead = 0.4
 	)

@@ -3,7 +3,7 @@
 #define CREDIT_ANIMATE_HEIGHT (14 * world.icon_size)
 #define CREDIT_EASE_DURATION 22
 
-GLOBAL_LIST(end_titles)
+var/global/list/end_titles
 
 /client
 	var/list/credits
@@ -11,11 +11,11 @@ GLOBAL_LIST(end_titles)
 /client/proc/RollCredits()
 	set waitfor = FALSE
 
-	if(get_preference_value(/datum/client_preference/show_credits) != GLOB.PREF_YES)
+	if(get_preference_value(/datum/client_preference/show_credits) != PREF_YES)
 		return
 
-	if(!GLOB.end_titles)
-		GLOB.end_titles = generate_titles()
+	if(!global.end_titles)
+		global.end_titles = generate_titles()
 
 	LAZYINITLIST(credits)
 
@@ -23,17 +23,17 @@ GLOBAL_LIST(end_titles)
 		mob.overlay_fullscreen("fishbed",/obj/screen/fullscreen/fishbed)
 		mob.overlay_fullscreen("fadeout",/obj/screen/fullscreen/fadeout)
 
-		if(mob.get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_YES)
-			sound_to(mob, sound(null, channel = GLOB.lobby_sound_channel))
-			if(GLOB.end_credits_song == null)
-				if(GLOB.using_map.credit_sound)
-					sound_to(mob, sound(pick(GLOB.using_map.credit_sound), wait = 0, volume = 40, channel = GLOB.lobby_sound_channel))
-			else if(get_preference_value(/datum/client_preference/play_admin_midis) == GLOB.PREF_YES)
-				sound_to(mob, sound(GLOB.end_credits_song, wait = 0, volume = 40, channel = GLOB.lobby_sound_channel))
+		if(mob.get_preference_value(/datum/client_preference/play_lobby_music) == PREF_YES)
+			sound_to(mob, sound(null, channel = sound_channels.lobby_channel))
+			if(global.end_credits_song == null)
+				if(global.using_map.credit_sound)
+					sound_to(mob, sound(pick(global.using_map.credit_sound), wait = 0, volume = 40, channel = sound_channels.lobby_channel))
+			else if(get_preference_value(/datum/client_preference/play_admin_midis) == PREF_YES)
+				sound_to(mob, sound(global.end_credits_song, wait = 0, volume = 40, channel = sound_channels.lobby_channel))
 	sleep(50)
 	var/list/_credits = credits
 	verbs += /client/proc/ClearCredits
-	for(var/I in GLOB.end_titles)
+	for(var/I in global.end_titles)
 		if(!credits)
 			return
 		var/obj/screen/credit/T = new(null, I, src)
@@ -52,7 +52,7 @@ GLOBAL_LIST(end_titles)
 	QDEL_NULL_LIST(credits)
 	mob.clear_fullscreen("fishbed")
 	mob.clear_fullscreen("fadeout")
-	sound_to(mob, sound(null, channel = GLOB.lobby_sound_channel))
+	sound_to(mob, sound(null, channel = sound_channels.lobby_channel))
 
 /obj/screen/credit
 	icon_state = "blank"
@@ -99,7 +99,7 @@ GLOBAL_LIST(end_titles)
 	var/chunksize = 0
 	titles += "<center><h1>EPISODE [rand(1,1000)]<br>[SSlore.get_end_credits_title()]<h1></h1></h1></center>"
 
-	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_|GLOB.dead_mob_list_)
+	for(var/mob/living/carbon/human/H in global.living_mob_list_|global.dead_mob_list_)
 		if(findtext(H.real_name,"(mannequin)"))
 			continue
 		if(H.isMonkey() && findtext(H.real_name,"[lowertext(H.species.name)]")) //no monki
@@ -119,7 +119,7 @@ GLOBAL_LIST(end_titles)
 				used_name = "[rank.name_short] [used_name]"
 		var/showckey = 0
 		if(H.ckey && H.client)
-			if(H.client.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW)
+			if(H.client.get_preference_value(/datum/client_preference/show_ckey_credits) == PREF_SHOW)
 				showckey = 1
 		var/decl/cultural_info/actor_culture = GET_DECL(H.get_cultural_value(TAG_CULTURE))
 		if(!actor_culture || !(H.species.spawn_flags & SPECIES_CAN_JOIN) || prob(10))
@@ -144,7 +144,7 @@ GLOBAL_LIST(end_titles)
 
 	var/list/corpses = list()
 	var/list/monkies = list()
-	for(var/mob/living/carbon/human/H in GLOB.dead_mob_list_)
+	for(var/mob/living/carbon/human/H in global.dead_mob_list_)
 		if(H.timeofdeath < 5 MINUTES) //no prespawned corpses
 			continue
 		if(H.isMonkey() && findtext(H.real_name,"[lowertext(H.species.name)]"))
@@ -173,13 +173,13 @@ GLOBAL_LIST(end_titles)
 	if(goodboys.len)
 		titles += "<center>STAFF'S GOOD BOYS:<br>[english_list(goodboys)]</center><br>"
 
-	var/disclaimer = "<br>Sponsored by [GLOB.using_map.company_name].<br>All rights reserved.<br>\
+	var/disclaimer = "<br>Sponsored by [global.using_map.company_name].<br>All rights reserved.<br>\
 					 This motion picture is protected under the copyright laws of the Sol Central Government<br> and other nations throughout the galaxy.<br>\
 					 Colony of First Publication: [pick("Mars", "Luna", "Earth", "Venus", "Phobos", "Ceres", "Tiamat", "Ceti Epsilon", "Eos", "Pluto", "Ouere",\
 					 "Lordania", "Kingston", "Cinu", "Yuklid V", "Lorriman", "Tersten", "Gaia")].<br>"
 	disclaimer += pick("Use for parody prohibited. PROHIBITED.",
 					   "All stunts were performed by underpaid interns. Do NOT try at home.",
-					   "[GLOB.using_map.company_name] does not endorse behaviour depicted. Attempt at your own risk.",
+					   "[global.using_map.company_name] does not endorse behaviour depicted. Attempt at your own risk.",
 					   "Any unauthorized exhibition, distribution, or copying of this film or any part thereof (including soundtrack)<br>\
 						may result in an ERT being called to storm your home and take it back by force.",
 						"The story, all names, characters, and incidents portrayed in this production are fictitious. No identification with actual<br>\

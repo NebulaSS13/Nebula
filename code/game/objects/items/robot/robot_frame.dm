@@ -94,7 +94,7 @@
 		var/ghost_can_reenter = 0
 		if(B.mind)
 			if(!B.key)
-				for(var/mob/observer/ghost/G in GLOB.player_list)
+				for(var/mob/observer/ghost/G in global.player_list)
 					if(G.can_reenter_corpse && G.mind == B.mind)
 						ghost_can_reenter = 1
 						break

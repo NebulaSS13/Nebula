@@ -60,7 +60,7 @@
 
 //These procs convert to/from static save-data formats.
 /datum/category_item/player_setup_item/occupation/proc/load_skills()
-	if(!length(GLOB.skills))
+	if(!length(global.skills))
 		GET_DECL(/decl/hierarchy/skill)
 
 	pref.skills_allocated = list()
@@ -69,7 +69,7 @@
 		if("[job.type]" in pref.skills_saved)
 			var/S = pref.skills_saved["[job.type]"]
 			var/L = list()
-			for(var/decl/hierarchy/skill/skill in GLOB.skills)
+			for(var/decl/hierarchy/skill/skill in global.skills)
 				if("[skill.type]" in S)
 					L[skill] = S["[skill.type]"]
 			if(length(L))
@@ -98,7 +98,7 @@
 		var/L = list()
 		var/sum = 0
 
-		for(var/decl/hierarchy/skill/skill in GLOB.skills)
+		for(var/decl/hierarchy/skill/skill in global.skills)
 			if(skill in input_skills)
 				var/min = get_min_skill(job, skill)
 				var/max = get_max_skill(job, skill)

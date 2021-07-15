@@ -9,21 +9,6 @@
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	permit_ao = FALSE
 	z_eventually_space = TRUE
-	var/static/list/dust_cache
-
-/turf/space/proc/build_dust_cache()
-	LAZYINITLIST(dust_cache)
-	for (var/i in 0 to 25)
-		var/image/im = image('icons/turf/space_dust.dmi',"[i]")
-		im.plane = DUST_PLANE
-		im.alpha = 80
-		im.blend_mode = BLEND_ADD
-
-		var/image/I = new()
-		I.appearance = /turf/space
-		I.icon_state = "white"
-		I.overlays += im
-		dust_cache["[i]"] = I
 
 /turf/space/proc/update_starlight()
 	if(config.starlight && (locate(/turf/simulated) in RANGE_TURFS(src, 1)))
@@ -38,9 +23,7 @@
 
 	update_starlight()
 
-	if (!dust_cache)
-		build_dust_cache()
-	appearance = dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"]
+	appearance = SSskybox.space_appearance_cache[(((x + y) ^ ~(x * y) + z) % 25) + 1]
 
 	if(!HasBelow(z))
 		return INITIALIZE_HINT_NORMAL
@@ -64,10 +47,10 @@
 	return ..()
 
 /turf/space/LateInitialize()
-	if(GLOB.using_map.base_floor_area)
-		var/area/new_area = locate(GLOB.using_map.base_floor_area) || new GLOB.using_map.base_floor_area
+	if(global.using_map.base_floor_area)
+		var/area/new_area = locate(global.using_map.base_floor_area) || new global.using_map.base_floor_area
 		ChangeArea(src, new_area)
-	ChangeTurf(GLOB.using_map.base_floor_type)
+	ChangeTurf(global.using_map.base_floor_type)
 
 // override for space turfs, since they should never hide anything
 /turf/space/levelupdate()
@@ -96,9 +79,9 @@
 			var/obj/item/stack/tile/floor/S = C
 			if (!S.use(1))
 				return
-			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ChangeTurf(/turf/simulated/floor/airless, keep_air = TRUE)
+			ChangeTurf(/turf/simulated/floor/airless)
+			qdel(L)
 		else
 			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
 		return TRUE
@@ -129,8 +112,8 @@
 		if(!cur_pos) return
 		cur_x = cur_pos["x"]
 		cur_y = cur_pos["y"]
-		next_x = (--cur_x||GLOB.global_map.len)
-		y_arr = GLOB.global_map[next_x]
+		next_x = (--cur_x||global.global_map.len)
+		y_arr = global.global_map[next_x]
 		target_z = y_arr[cur_y]
 /*
 		//debug
@@ -155,8 +138,8 @@
 		if(!cur_pos) return
 		cur_x = cur_pos["x"]
 		cur_y = cur_pos["y"]
-		next_x = (++cur_x > GLOB.global_map.len ? 1 : cur_x)
-		y_arr = GLOB.global_map[next_x]
+		next_x = (++cur_x > global.global_map.len ? 1 : cur_x)
+		y_arr = global.global_map[next_x]
 		target_z = y_arr[cur_y]
 /*
 		//debug
@@ -180,7 +163,7 @@
 		if(!cur_pos) return
 		cur_x = cur_pos["x"]
 		cur_y = cur_pos["y"]
-		y_arr = GLOB.global_map[cur_x]
+		y_arr = global.global_map[cur_x]
 		next_y = (--cur_y||y_arr.len)
 		target_z = y_arr[next_y]
 /*
@@ -206,7 +189,7 @@
 		if(!cur_pos) return
 		cur_x = cur_pos["x"]
 		cur_y = cur_pos["y"]
-		y_arr = GLOB.global_map[cur_x]
+		y_arr = global.global_map[cur_x]
 		next_y = (++cur_y > y_arr.len ? 1 : cur_y)
 		target_z = y_arr[next_y]
 /*
@@ -225,7 +208,7 @@
 					A.loc.Entered(A)
 	return
 
-/turf/space/ChangeTurf(turf/N, tell_universe = TRUE, force_lighting_update = FALSE, keep_air = FALSE)
+/turf/space/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
 	return ..(N, tell_universe, TRUE, keep_air)
 
 /turf/space/is_open()

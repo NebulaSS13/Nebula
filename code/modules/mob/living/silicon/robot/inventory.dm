@@ -1,9 +1,9 @@
 //These procs handle putting s tuff in your hand. It's probably best to use these rather than setting stuff manually
 //as they handle all relevant stuff like adding it to the player's screen and such
 
-//Returns the thing in our active hand (whatever is in our active module-slot, in this case)
+//Returns the thing in our active hand (whatever is in our active module-slot, in this case) or any active grab
 /mob/living/silicon/robot/get_active_hand()
-	return module_active
+	return module_active || (locate(/obj/item/grab) in contents)
 
 /*-------TODOOOOOOOOOO--------*/
 

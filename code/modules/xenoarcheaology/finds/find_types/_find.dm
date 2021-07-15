@@ -1,4 +1,4 @@
-var/list/responsive_carriers = list(
+var/global/list/responsive_carriers = list(
 	/decl/material/solid/carbon          = "Trace organic cells",
 	/decl/material/solid/potassium       = "Long exposure particles",
 	/decl/material/liquid/fuel/hydrazine = "Trace water particles",

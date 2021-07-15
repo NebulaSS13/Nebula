@@ -17,7 +17,7 @@
 	ADJUST_TAG_VAR(shuttle, map_hash)
 
 /obj/effect/overmap/visitable/ship/landable/Destroy()
-	GLOB.shuttle_moved_event.unregister(SSshuttle.shuttles[shuttle], src)
+	events_repository.unregister(/decl/observ/shuttle_moved, SSshuttle.shuttles[shuttle], src)
 	return ..()
 
 /obj/effect/overmap/visitable/ship/landable/can_burn()
@@ -84,7 +84,7 @@
 
 	// Attempt to find a safe and random overmap turf to start on
 	var/list/candidates = list()
-	for(var/turf/T in block(locate(OVERMAP_EDGE, OVERMAP_EDGE, GLOB.using_map.overmap_z), locate(GLOB.using_map.overmap_size - OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE, GLOB.using_map.overmap_z)))
+	for(var/turf/T in block(locate(OVERMAP_EDGE, OVERMAP_EDGE, global.using_map.overmap_z), locate(global.using_map.overmap_size - OVERMAP_EDGE, global.using_map.overmap_size - OVERMAP_EDGE, global.using_map.overmap_z)))
 		if(locate(/obj/effect/overmap) in T)
 			continue
 		candidates += T
@@ -123,7 +123,7 @@
 		visitor_dir = turn(visitor_dir, 90)
 
 	// Configure shuttle datum
-	GLOB.shuttle_moved_event.register(shuttle_datum, src, .proc/on_shuttle_jump)
+	events_repository.register(/decl/observ/shuttle_moved, shuttle_datum, src, .proc/on_shuttle_jump)
 	on_landing(landmark, shuttle_datum.current_location) // We "land" at round start to properly place ourselves on the overmap.
 	if(landmark == shuttle_datum.current_location)
 		status = SHIP_STATUS_OVERMAP // we spawned on the overmap, so have to initialize our state properly.
@@ -162,11 +162,11 @@
 	core_landmark = master
 	SetName(_name)
 	landmark_tag = master.shuttle_name + _name
-	GLOB.destroyed_event.register(master, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/destroyed, master, src, /datum/proc/qdel_self)
 	. = ..()
 
 /obj/effect/shuttle_landmark/visiting_shuttle/Destroy()
-	GLOB.destroyed_event.unregister(core_landmark, src)
+	events_repository.unregister(/decl/observ/destroyed, core_landmark, src)
 	LAZYREMOVE(core_landmark.visitors, src)
 	core_landmark = null
 	. = ..()

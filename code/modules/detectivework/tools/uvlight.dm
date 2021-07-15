@@ -39,11 +39,10 @@
 /obj/item/uv_light/on_update_icon()
 	cut_overlays()
 	if(on)
-		var/image/I = image(icon, "[icon_state]-on")
-		if(plane != HUD_PLANE)
-			I.layer = ABOVE_LIGHTING_LAYER
-			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		add_overlay(I)
+		if(plane == HUD_PLANE)
+			add_overlay("[icon_state]-on")
+		else
+			add_overlay(emissive_overlay(icon, "[icon_state]-on"))
 
 /obj/item/uv_light/proc/clear_last_scan()
 	if(scanned.len)

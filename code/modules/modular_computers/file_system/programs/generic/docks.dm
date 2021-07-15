@@ -50,7 +50,7 @@
 	if(network)
 		docking_beacons |= network.get_tags_by_type(/obj/machinery/docking_beacon)
 	
-/datum/nano_module/program/docking/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
+/datum/nano_module/program/docking/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = global.default_topic_state)
 	var/list/data = host.initial_data()
 	var/list/docks = list()
 	var/list/beacons = list()

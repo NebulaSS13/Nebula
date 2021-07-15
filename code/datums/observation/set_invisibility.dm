@@ -8,8 +8,6 @@
 //			/old_invisibility: invisibility before the change
 //			/new_invisibility: invisibility after the change
 
-GLOBAL_DATUM_INIT(invisibility_set_event, /decl/observ/invisibility_set, new)
-
 /decl/observ/invisibility_set
 	name = "Invisibility Set"
 	expected_type = /atom
@@ -22,5 +20,5 @@ GLOBAL_DATUM_INIT(invisibility_set_event, /decl/observ/invisibility_set, new)
 	var/old_invisibility = invisibility
 	if(old_invisibility != new_invisibility)
 		invisibility = new_invisibility
-		GLOB.invisibility_set_event.raise_event(src, old_invisibility, new_invisibility)
+		events_repository.raise_event(/decl/observ/invisibility_set, src, old_invisibility, new_invisibility)
 		update_above()

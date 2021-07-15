@@ -42,7 +42,7 @@
 	if(cell)
 		return
 	cell = new_cell
-	GLOB.destroyed_event.register(cell, src, .proc/remove_cell)
+	events_repository.register(/decl/observ/destroyed, cell, src, .proc/remove_cell)
 	if(!machine)
 		machine = loc
 	if(istype(machine))
@@ -54,7 +54,7 @@
 
 /obj/item/stock_parts/power/battery/proc/remove_cell()
 	if(cell)
-		GLOB.destroyed_event.unregister(cell, src)
+		events_repository.unregister(/decl/observ/destroyed, cell, src)
 		. = cell
 		cell = null
 		var/obj/machinery/machine = loc

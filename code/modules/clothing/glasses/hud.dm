@@ -2,8 +2,14 @@
 	name = "\improper HUD"
 	desc = "A heads-up display that provides important info in (almost) real time."
 	origin_tech = "{'magnets':3,'biotech':2}"
-	electric = 1
+	electric = TRUE
 	gender = NEUTER
+	toggleable = TRUE
+	action_button_name = "Toggle HUD"
+	activation_sound = sound('sound/machines/boop1.ogg', volume = 10)
+	deactivation_sound = sound('sound/effects/compbeep1.ogg', volume = 30)
+	toggle_on_message = "$ITEM$ boots up, flashing with information."
+	toggle_off_message = "$ITEM$ powers down with a beep."
 	material = /decl/material/solid/metal/aluminium
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	bodytype_restricted = null
@@ -52,8 +58,8 @@
 	icon = 'icons/clothing/eyes/hud_security.dmi'
 	hud_type = HUD_SECURITY
 	body_parts_covered = 0
-	var/global/list/jobs[0]
-	
+	var/static/list/jobs[0]
+
 /obj/item/clothing/glasses/hud/security/prescription
 	name = "prescription security HUD"
 	desc = "A security HUD integrated with a set of prescription glasses."

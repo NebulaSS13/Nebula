@@ -15,7 +15,7 @@
 	var/is_centcom = 0
 	var/show_assignments = 0
 
-/datum/nano_module/program/card_mod/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/card_mod/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
 	var/obj/item/stock_parts/computer/card_slot/card_slot = program.computer.get_component(PART_CARD)
 
@@ -239,7 +239,7 @@
 					if(hash_check.Find(sug_dna_hash) && CanUseTopic(user))
 						id_card.dna_hash = sug_dna_hash
 				else if(href_list["blood_type"])
-					var/sug_blood_type = input("Select blood type.", "Blood type") as null|anything in GLOB.blood_types
+					var/sug_blood_type = input("Select blood type.", "Blood type") as null|anything in global.blood_types
 					if(!isnull(sug_blood_type) && CanUseTopic(user))
 						id_card.blood_type = sug_blood_type
 				else if(href_list["front_photo"])
@@ -252,7 +252,7 @@
 						id_card.side = photo
 				else if(href_list["load_data"])
 					var/list/ass_data = list()
-					for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+					for(var/datum/computer_file/report/crew_record/CR in global.all_crew_records)
 						ass_data.Add(list(CR.get_name() = CR))
 					var/selected_CR_name = input("Select crew record for write down to the card.", "Crew record selection") as null|anything in ass_data
 					var/datum/computer_file/report/crew_record/selected_CR = get_crewmember_record(selected_CR_name)
@@ -304,7 +304,7 @@
 				if(access_type in get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM))
 					for(var/access in user_id_card.access)
 						var/region_type = get_access_region_by_id(access_type)
-						if(access in GLOB.using_map.access_modify_region[region_type])
+						if(access in global.using_map.access_modify_region[region_type])
 							id_card.access -= access_type
 							if(!access_allowed)
 								id_card.access += access_type

@@ -234,7 +234,7 @@
 	P.update_icon()
 
 /obj/machinery/chem_master/DefaultTopicState()
-	return GLOB.physical_state
+	return global.physical_topic_state
 
 /obj/machinery/chem_master/interface_interact(mob/user)
 	interact(user)

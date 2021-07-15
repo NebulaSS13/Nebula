@@ -8,7 +8,11 @@
 	anchored = 1
 	maxhealth = 50
 
-	var/list/loot = list(/obj/item/cell,/obj/item/stack/material/iron,/obj/item/stack/material/rods)
+	var/list/loot = list(
+		/obj/item/cell,
+		/obj/item/stack/material/ingot/mapped/iron,
+		/obj/item/stack/material/rods
+	)
 	var/lootleft = 1
 	var/emptyprob = 95
 	var/is_rummaging = 0

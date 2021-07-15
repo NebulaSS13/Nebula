@@ -1,4 +1,4 @@
-var/auxtools_debug_server = world.GetConfig("env", "AUXTOOLS_DEBUG_DLL")
+var/global/auxtools_debug_server = world.GetConfig("env", "AUXTOOLS_DEBUG_DLL")
 
 /proc/enable_debugging(mode, port)
 	CRASH("auxtools not loaded")

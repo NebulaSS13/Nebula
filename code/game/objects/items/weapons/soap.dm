@@ -59,7 +59,7 @@
 			return
 		user.visible_message(SPAN_NOTICE("\The [user] starts scrubbing \the [T]."))
 		if(do_after(user, 8 SECONDS, T) && reagents?.total_volume)
-			reagents.splash(T, FLUID_EVAPORATION_POINT)
+			reagents.splash(T, FLUID_QDEL_POINT)
 			to_chat(user, SPAN_NOTICE("You scrub \the [target] clean."))
 			cleaned = TRUE
 

@@ -16,23 +16,22 @@
 	if(date_check.IsValid())
 		return spawn_item()
 
-
 /datum/is_date/proc/IsValid()
 	return FALSE
 
 /datum/is_date/proc/CurrentMonthAndDay()
 	return current_month_and_day()
 
+var/global/list/days_of_month
 /datum/is_date/proc/ValidateMonthAndDay(month, day)
 	. = FALSE
 	if(!month || month < 1 || month > 12)
 		CRASH("Invalid month: [month]")
-
-	var/days_in_month = GLOB.days_per_month[month]
-	if(month == 2) // Always allow 29th of February, in case someone wants to do have leap-year things
-		days_in_month = 29
-
-	if(!day || day < 1 || day > days_in_month)
+	if(!global.days_of_month)
+		global.days_of_month = list(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+		if(isLeap(text2num(time2text(world.realtime, "YYYY"))))
+			global.days_of_month[2] = 29
+	if(!day || day < 1 || day > global.days_of_month[month])
 		CRASH("Invalid day: [day]")
 	return TRUE
 

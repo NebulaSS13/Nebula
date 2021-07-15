@@ -11,5 +11,5 @@
 			entry.mechanics_text = species.ooc_codex_information
 			SScodex.add_entry_by_string(entry.display_name, entry)
 			SScodex.add_entry_by_string(species.name, entry)
-			items += entry.display_name
+			items |= entry.display_name
 	. = ..()

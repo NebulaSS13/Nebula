@@ -3,11 +3,12 @@
 
 /datum/unit_test/view_variables_special_vv_handlers_shall_be_valid/start_test()
 	var/list/faulty_handlers = list()
-	for(var/decl/vv_set_handler/sh in init_subtypes(/decl/vv_set_handler))
+	var/list/vv_set_handlers = decls_repository.get_decls_of_subtype(/decl/vv_set_handler)
+	for(var/vv_handler in vv_set_handlers)
+		var/decl/vv_set_handler/sh = vv_set_handlers[vv_handler]
 		if(!ispath(sh.handled_type))
 			log_bad("[sh] does not have a valid handled type. Expected a path, was [log_info_line(sh.handled_type)]")
 			faulty_handlers |= sh
-
 		if(!islist(sh.handled_vars))
 			log_bad("[sh] does not have a handled variables list. Expected a list, was [log_info_line(sh.handled_vars)]")
 			faulty_handlers |= sh
@@ -29,12 +30,14 @@
 	name = "VIEW VARIABLES: No Special VV Handlers Shall Have Overlapping Handling"
 
 /datum/unit_test/view_variables_no_special_vv_handlers_shall_have_overlapping_handling/start_test()
-	var/list/handlers = init_subtypes(/decl/vv_set_handler)
 	var/failed = 0
-
-	for(var/decl/vv_set_handler/sh1 in handlers)
-		handlers -= sh1
-		for(var/decl/vv_set_handler/sh2 in handlers)
+	var/list/vv_set_handlers = decls_repository.get_decls_of_subtype(/decl/vv_set_handler)
+	for(var/vv_handler in vv_set_handlers)
+		var/decl/vv_set_handler/sh1 = vv_set_handlers[vv_handler]
+		for(var/other_vv_handler in vv_set_handlers)
+			var/decl/vv_set_handler/sh2 = vv_set_handlers[other_vv_handler]
+			if(sh1 == sh2)
+				continue
 			if(!(ispath(sh1.handled_type, sh2.handled_type) || ispath(sh2.handled_type, sh1.handled_type)))
 				continue
 			var/list/intersected_vars = sh1.handled_vars & sh2.handled_vars

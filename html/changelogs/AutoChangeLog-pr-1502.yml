@@ -1,7 +1,0 @@
-author: MistakeNot4892
-delete-after: true
-changes:
-  - tweak: Your gender no longer determines your base character icon. Instead, there
-      is a 'bodytype' option.
-  - tweak: Character gender pref has been renamed to pronouns.
-  - tweak: Species skin variants have been changed into body types.

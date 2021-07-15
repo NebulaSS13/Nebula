@@ -6,10 +6,10 @@
 	var/handle_icon
 	var/ammo_offset
 	var/safety_offset
-	var/list/global/descriptor = list(
+	var/static/list/descriptor = list(
 		"Shining", "Power", "Instant", "Reliable", "Neo", "Super", "Boom", "Big", "Nitro", "Automatic"
 	)
-	var/list/global/noun = list(
+	var/static/list/noun = list(
 		"Justice", "Protection", "Defense", "Penetrator", "Compensator", "Police Special", "Combat", "Point & Shoot"
 	)
 

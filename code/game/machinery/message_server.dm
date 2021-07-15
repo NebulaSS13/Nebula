@@ -136,7 +136,7 @@
 /obj/machinery/network/message_server/proc/send_to_department(var/department, var/message, var/tone)
 	var/reached = 0
 
-	for(var/mob/living/carbon/human/H in GLOB.human_mob_list)
+	for(var/mob/living/carbon/human/H in global.human_mob_list)
 		var/obj/item/modular_computer/pda/pda = locate() in H
 		if(!pda)
 			continue

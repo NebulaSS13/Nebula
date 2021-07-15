@@ -37,7 +37,7 @@
 		if(!silent)
 			visible_message(SPAN_DANGER("\The [shedding] splits away from \the [src]!"))
 		if(forcefully) 
-			shedding.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),rand(3,5))
+			shedding.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),rand(3,5))
 		if(update_nymphs)
 			check_nymphs()
 

@@ -1,3 +1,5 @@
+var/global/list/hygiene_props = list()
+
 //todo: toothbrushes, and some sort of "toilet-filthinator" for the hos
 /obj/structure/hygiene
 	var/next_gurgle = 0
@@ -8,11 +10,11 @@
 
 /obj/structure/hygiene/Initialize()
 	. = ..()
-	SSfluids.hygiene_props += src
+	global.hygiene_props += src
 	START_PROCESSING(SSobj, src)
 
 /obj/structure/hygiene/Destroy()
-	SSfluids.hygiene_props -= src
+	global.hygiene_props -= src
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
@@ -264,7 +266,7 @@
 	playsound(src, on ? 'sound/effects/shower_start.ogg' : 'sound/effects/shower_end.ogg', 40)
 	QDEL_NULL(sound_token)
 	if(on)
-		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/effects/shower_mid3.ogg', volume = 20, range = 7, falloff = 4, prefer_mute = TRUE)
+		sound_token = play_looping_sound(src, sound_id, 'sound/effects/shower_mid3.ogg', volume = 20, range = 7, falloff = 4, prefer_mute = TRUE)
 
 /obj/effect/mist
 	name = "mist"

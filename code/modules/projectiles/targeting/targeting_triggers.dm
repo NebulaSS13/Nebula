@@ -3,29 +3,27 @@
 	return
 
 /mob/living/trigger_aiming(var/trigger_type)
-	if(!aimed.len)
-		return
-	for(var/obj/aiming_overlay/AO in aimed)
+	for(var/obj/aiming_overlay/AO AS_ANYTHING in aimed_at_by)
 		if(AO.aiming_at == src)
 			AO.update_aiming()
 			if(AO.aiming_at == src)
 				AO.trigger(trigger_type)
 				AO.update_aiming_deferred()
 
+/mob/living/proc/aim_at(var/atom/target, var/obj/item/with)
+	if(!ismob(target) || !istype(with) || incapacitated())
+		return FALSE
+	if(!aiming)
+		aiming = new(src)
+	face_atom(target)
+	aiming.aim_at(target, with)
+	return TRUE
+
 /obj/aiming_overlay/proc/trigger(var/perm)
 	if(!owner || !aiming_with || !aiming_at || !locked)
-		return
+		return FALSE
 	if(perm && (target_permissions & perm))
-		return
+		return FALSE
 	if(!owner.canClick())
-		return
-	if(prob(owner.skill_fail_chance(SKILL_WEAPONS, 30, SKILL_ADEPT, 3)))
-		to_chat(owner, "<span class='warning'>You fumble with the gun, throwing your aim off!</span>")
-		owner.stop_aiming(aiming_with)
-		return
-	owner.setClickCooldown(DEFAULT_QUICK_COOLDOWN) // Spam prevention, essentially.
-	owner.visible_message("<span class='danger'>\The [owner] pulls the trigger reflexively!</span>")
-	var/obj/item/gun/G = aiming_with
-	if(istype(G))
-		G.Fire(aiming_at, owner)
-	toggle_active(FALSE, TRUE)
+		return FALSE
+	return aiming_with.handle_reflexive_fire(owner, aiming_at)

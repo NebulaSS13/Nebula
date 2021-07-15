@@ -36,7 +36,7 @@
 		return FALSE
 	var/list/modifiers = params2list(params)
 	var/highlight_pref = get_preference_value(/datum/client_preference/show_mouseover_highlights)
-	if(highlight_pref != GLOB.PREF_SHOW && (highlight_pref != GLOB.PREF_SHOW_HOLD_SHIFT || !modifiers["shift"]))
+	if(highlight_pref != PREF_SHOW && (highlight_pref != PREF_SHOW_HOLD_SHIFT || !modifiers["shift"]))
 		return FALSE
 	var/atom/movable/AM = object
 	if(!AM.show_client_mouseover_highlight || get_dist(mob, object) > 1)
@@ -54,24 +54,27 @@
 	// client.images does not respect pixel offsets for images, but vis_contents does,
 	// and images have vis_contents - so we throw a null image into client.images, then
 	// throw a holder object with the appearance of the mouse-overed atom into its vis_contents. 
-	mouseover_highlight_dummy.appearance =        AM
-	mouseover_highlight_dummy.dir =               AM.dir
-	mouseover_highlight_dummy.transform =         AM.transform
+	mouseover_highlight_dummy.appearance = AM
+	mouseover_highlight_dummy.name = ""
+	mouseover_highlight_dummy.verbs.Cut()
+	mouseover_highlight_dummy.vis_flags |= VIS_INHERIT_ID
+	mouseover_highlight_dummy.dir = AM.dir
+	mouseover_highlight_dummy.transform = AM.transform
 
 	// For some reason you need to explicitly zero the pixel offsets of the holder object
 	// or anything with a pixel offset will not line up with the highlight. Thanks DM.
-	mouseover_highlight_dummy.pixel_x =           0
-	mouseover_highlight_dummy.pixel_y =           0
-	mouseover_highlight_dummy.pixel_w =           0
-	mouseover_highlight_dummy.pixel_z =           0
+	mouseover_highlight_dummy.pixel_x = 0
+	mouseover_highlight_dummy.pixel_y = 0
+	mouseover_highlight_dummy.pixel_w = 0
+	mouseover_highlight_dummy.pixel_z = 0
 
 	// Replane to be over the UI, make sure it can't block clicks, and set its outline.
-	mouseover_highlight_dummy.mouse_opacity =     0
-	mouseover_highlight_dummy.layer =             HUD_PLANE
-	mouseover_highlight_dummy.plane =             HUD_ABOVE_ITEM_LAYER
-	mouseover_highlight_dummy.alpha =             prefs?.UI_mouseover_alpha || 255
+	mouseover_highlight_dummy.mouse_opacity = 0
+	mouseover_highlight_dummy.layer = HUD_PLANE
+	mouseover_highlight_dummy.plane = HUD_ABOVE_ITEM_LAYER
+	mouseover_highlight_dummy.alpha = prefs?.UI_mouseover_alpha || 255
 	mouseover_highlight_dummy.appearance_flags |= (KEEP_TOGETHER|RESET_COLOR)
-	mouseover_highlight_dummy.filters =           filter(type="drop_shadow", color = (prefs?.UI_mouseover_color || COLOR_AMBER) + "F0", size = 1, offset = 1, x = 0, y = 0)
+	mouseover_highlight_dummy.filters = filter(type="drop_shadow", color = (prefs?.UI_mouseover_color || COLOR_AMBER) + "F0", size = 1, offset = 1, x = 0, y = 0)
 
 	// Replanes the overlays to avoid explicit plane/layer setting (such as 
 	// computer overlays) interfering with the ordering of the highlight.

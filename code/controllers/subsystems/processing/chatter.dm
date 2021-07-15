@@ -6,5 +6,5 @@ PROCESSING_SUBSYSTEM_DEF(radiochatter)
 
 /datum/controller/subsystem/processing/radiochatter/Initialize()
 	. = ..()
-	for(var/ctype in GLOB.using_map.get_radio_chatter_types())
+	for(var/ctype in global.using_map.get_radio_chatter_types())
 		decls_repository.get_decl(ctype) // Will start processing on us in New(); linter does not like START_PROCESSING(src, foo) for some reason

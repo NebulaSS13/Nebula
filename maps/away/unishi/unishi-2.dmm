@@ -1554,11 +1554,11 @@
 	pixel_y = -22;
 	req_access = newlist()
 	},
-/obj/item/stack/material/diamond/ten,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/silver/ten,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
+/obj/item/stack/material/gemstone/mapped/diamond/ten,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/ingot/mapped/silver/ten,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "eb" = (

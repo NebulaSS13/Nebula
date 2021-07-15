@@ -5,11 +5,7 @@
 	var/list/possible_materials = list(/decl/material/solid/metal/steel, /decl/material/solid/metal/plasteel, /decl/material/solid/metal/titanium, /decl/material/solid/glass)
 
 /decl/archaeological_find/material/spawn_item(atom/loc)
-	var/mat_to_spawn = pickweight(possible_materials)
-	var/decl/material/M = SSmaterials.materials_by_name[mat_to_spawn]
-	var/obj/item/stack/material/new_item = new M.stack_type(loc)
-	new_item.amount = rand(5,45)
-	return new_item
+	return SSmaterials.create_object(pick(possible_materials), loc, rand(5,45))
 
 /decl/archaeological_find/material/exotic
 	item_type = "rare material lump"

@@ -9,9 +9,6 @@
 	speak_emote = list("honks")
 	emote_hear = list("honks","flaps its wings","clacks")
 	emote_see = list("flaps its wings", "scratches the ground")
-	response_help =  "pets"
-	response_disarm = "gently pushes aside"
-	response_harm = "strikes"
 	natural_weapon = /obj/item/natural_weapon/goosefeet
 	health = 45
 	maxHealth = 45

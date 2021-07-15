@@ -15,7 +15,7 @@
 	atmos_canpass = CANPASS_NEVER
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
 
-	var/global/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000.
+	var/static/const/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000.
 	var/icon_base = "fridge_sci"
 	var/icon_contents = "chem"
 	var/list/item_records = list()
@@ -175,8 +175,9 @@
 				var/decl/material/solid/skin/skin_mat = skin.material
 				if(!skin_mat.tans_to)
 					continue
-				var/decl/material/leather_mat = GET_DECL(skin_mat.tans_to)
-				stock_item(new leather_mat.stack_type(get_turf(src), skin.amount, skin_mat.tans_to))
+				var/atom/item_to_stock = SSmaterials.create_object(skin_mat.tans_to, get_turf(src), skin.amount)
+				if(istype(item_to_stock))
+					stock_item(item_to_stock, skin.amount)
 				remove_thing = TRUE
 
 			if(remove_thing)
@@ -363,11 +364,10 @@
 
 	for(var/datum/stored_items/I in src.item_records)
 		throw_item = I.get_product(loc)
-		if (!throw_item)
-			continue
-		break
+		if(!QDELETED(throw_item))
+			break
 
-	if(!throw_item)
+	if(QDELETED(throw_item))
 		return 0
 	spawn(0)
 		throw_item.throw_at(target,16,3)

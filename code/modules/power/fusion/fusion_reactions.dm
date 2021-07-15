@@ -67,7 +67,7 @@
 	energy_consumption = 10 * FUSION_PROCESSING_TIME_MULT
 	instability =         5 * FUSION_PROCESSING_TIME_MULT
 	radiation =           5 * FUSION_PROCESSING_TIME_MULT
-	products = list(MAT_SILICON = 1)
+	products = list(/decl/material/solid/silicon = 1)
 
 /decl/fusion_reaction/iron_iron
 	p_react = /decl/material/solid/metal/iron
@@ -103,7 +103,7 @@
 	// Copied from the SM for proof of concept. //Not any more --Cirra //Use the whole z proc --Leshana
 	SSradiation.z_radiate(locate(1, 1, holder.z), radiation_level, 1)
 
-	for(var/mob/living/mob in GLOB.living_mob_list_)
+	for(var/mob/living/mob in global.living_mob_list_)
 		var/turf/T = get_turf(mob)
 		if(T && (holder.z == T.z))
 			if(istype(mob, /mob/living/carbon/human))

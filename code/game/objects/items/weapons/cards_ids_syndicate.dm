@@ -50,9 +50,9 @@
 	entries[++entries.len] = list("name" = "Suffix", 			"value" = formal_name_suffix)
 	entries[++entries.len] = list("name" = "Appearance",		"value" = "Set")
 	entries[++entries.len] = list("name" = "Assignment",		"value" = assignment)
-	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
+	if(global.using_map.flags & MAP_HAS_BRANCH)
 		entries[++entries.len] = list("name" = "Branch",		"value" = military_branch ? military_branch.name : "N/A")
-	if(military_branch && (GLOB.using_map.flags & MAP_HAS_RANK))
+	if(military_branch && (global.using_map.flags & MAP_HAS_RANK))
 		entries[++entries.len] = list("name" = "Rank",			"value" = military_rank ? military_rank.name : "N/A")
 	entries[++entries.len] = list("name" = "Blood Type",		"value" = blood_type)
 	entries[++entries.len] = list("name" = "DNA Hash", 			"value" = dna_hash)
@@ -76,13 +76,13 @@
 	unset_registered_user()
 	registered_user = user
 	user.set_id_info(src)
-	GLOB.destroyed_event.register(user, src, /obj/item/card/id/syndicate/proc/unset_registered_user)
+	events_repository.register(/decl/observ/destroyed, user, src, /obj/item/card/id/syndicate/proc/unset_registered_user)
 	return TRUE
 
 /obj/item/card/id/syndicate/proc/unset_registered_user(var/mob/user)
 	if(!registered_user || (user && user != registered_user))
 		return
-	GLOB.destroyed_event.unregister(registered_user, src)
+	events_repository.unregister(/decl/observ/destroyed, registered_user, src)
 	registered_user = null
 
 /obj/item/card/id/syndicate/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
@@ -226,7 +226,7 @@
 	// Always update the UI, or buttons will spin indefinitely
 	SSnano.update_uis(src)
 
-/var/global/list/id_card_states
+var/global/list/id_card_states
 /proc/id_card_states()
 	if(!id_card_states)
 		id_card_states = list()

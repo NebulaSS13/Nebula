@@ -63,7 +63,7 @@
 
 	log_vote(text)
 	to_world("<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=\ref[SSvote];vote_panel=1'>here</a> to place your votes.\nYou have [time_set/10] seconds to vote.</font>")
-	to_world(sound(pick(vote_start_sounds), repeat = 0, wait = 0, volume = 50, channel = GLOB.vote_sound_channel))
+	to_world(sound(pick(vote_start_sounds), repeat = 0, wait = 0, volume = 50, channel = sound_channels.vote_channel))
 
 /datum/vote/proc/get_start_text()
 	return "[capitalize(name)] vote started by [initiator]."
@@ -71,7 +71,7 @@
 //Modifies the vote totals based on non-voting mobs.
 /datum/vote/proc/handle_default_votes()
 	if(!config.vote_no_default)
-		return length(GLOB.clients) - length(voted) //Number of non-voters (might not be active, though; should be revisited if the config option is used. This is legacy code.)
+		return length(global.clients) - length(voted) //Number of non-voters (might not be active, though; should be revisited if the config option is used. This is legacy code.)
 
 /datum/vote/proc/tally_result()
 	handle_default_votes()

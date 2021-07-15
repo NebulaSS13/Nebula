@@ -60,7 +60,7 @@
 	var/area/AO = TO.loc
 	if(AO && (AO.area_flags & AREA_FLAG_EXTERNAL))
 		//Everyone saw that!
-		for(var/mob/living/mob in GLOB.living_mob_list_)
+		for(var/mob/living/mob in global.living_mob_list_)
 			var/turf/T = get_turf(mob)
 			var/area/A1 = T.loc
 			if(T && (T != TO) && (TO.z == T.z) && !mob.blinded)

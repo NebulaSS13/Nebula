@@ -1,4 +1,4 @@
-/var/repository/area/area_repository = new()
+var/global/repository/area/area_repository = new()
 
 /repository/area
 	var/list/by_name_coords_cache_data
@@ -29,11 +29,11 @@
 
 /repository/area/proc/priv_get_areas_by_proc(var/area_group_proc, var/list/area_predicates, var/naming_proc)
 	var/list/grouped_areas = call(area_group_proc)(area_predicates)
-	grouped_areas = sortAssoc(grouped_areas)
+	grouped_areas = sortTim(grouped_areas, /proc/cmp_text_asc)
 	. = list()
 	for(var/area_key in grouped_areas)
 		var/list/list_of_areas = grouped_areas[area_key]
-		list_of_areas = sortAtom(list_of_areas)
+		list_of_areas = sortTim(list_of_areas, /proc/cmp_name_asc)
 		for(var/area/A in list_of_areas)
 			if(A.has_turfs())
 				.[call(naming_proc)(A)] = A

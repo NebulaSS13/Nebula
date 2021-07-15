@@ -64,15 +64,15 @@
 /obj/item/trash/cigbutt/spitwad
 	name = "spit wad"
 	desc = "A disgusting spitwad."
-	icon = 'icons/clothing/mask/chewables/chew.dmi'
-	icon_state = "spit"
+	icon = 'icons/clothing/mask/chewables/chew_spit.dmi'
 
 /obj/item/clothing/mask/chewable/proc/extinguish(var/mob/user, var/no_message)
 	STOP_PROCESSING(SSobj, src)
-	if (type_butt)
-		var/obj/item/butt = new type_butt(get_turf(src))
+	if(type_butt)
+		var/obj/item/trash/cigbutt/butt = new type_butt(get_turf(src))
 		transfer_fingerprints_to(butt)
-		butt.color = color
+		if(istype(butt) && butt.use_color)
+			butt.color = color
 		if(brand)
 			butt.desc += " This one is \a [brand]."
 		if(ismob(loc))
@@ -129,13 +129,13 @@
 /obj/item/trash/cigbutt/spitgum
 	name = "old gum"
 	desc = "A disgusting chewed up wad of gum."
-	icon_state = "spit"
-	icon = 'icons/clothing/mask/chewables/gum.dmi'
+	icon = 'icons/clothing/mask/chewables/gum_spit.dmi'
 
 /obj/item/trash/cigbutt/lollibutt
 	name = "popsicle stick"
 	desc = "A popsicle stick devoid of pop."
-	icon = 'icons/clothing/mask/chewables/lollipop.dmi'
+	icon = 'icons/clothing/mask/chewables/lollipop_stick.dmi'
+	use_color = FALSE
 
 /obj/item/clothing/mask/chewable/candy/gum
 	name = "chewing gum"
@@ -163,6 +163,7 @@
 	initial_payload_amount = 10
 
 /obj/item/clothing/mask/chewable/candy/lolli/on_update_icon()
+	icon_state = get_world_inventory_state()
 	cut_overlays()
 	var/image/I = image(icon, "[icon_state]-stick")
 	I.appearance_flags |= RESET_COLOR

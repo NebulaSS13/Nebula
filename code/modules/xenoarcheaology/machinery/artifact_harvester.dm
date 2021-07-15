@@ -31,7 +31,7 @@
 	if(!owned_scanner)
 		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
 	if(owned_scanner)
-		GLOB.destroyed_event.register(owned_scanner, src, /obj/machinery/artifact_analyser/proc/clear_scanner)
+		events_repository.register(/decl/observ/destroyed, owned_scanner, src, /obj/machinery/artifact_analyser/proc/clear_scanner)
 
 /obj/machinery/artifact_harvester/Destroy()
 	clear_scanner()
@@ -40,20 +40,20 @@
 
 /obj/machinery/artifact_harvester/proc/clear_scanner()
 	if(owned_scanner)
-		GLOB.destroyed_event.unregister(owned_scanner, src)
+		events_repository.unregister(/decl/observ/destroyed, owned_scanner, src)
 		owned_scanner = null
 		clear_artifact() // It was probably on the scanner; if not deleted, still want to clear it.
 
 /obj/machinery/artifact_harvester/proc/clear_artifact()
 	if(cur_artifact)
-		GLOB.destroyed_event.unregister(cur_artifact, src)
+		events_repository.unregister(/decl/observ/destroyed, cur_artifact, src)
 		cur_artifact = null
 
 /obj/machinery/artifact_harvester/proc/set_artifact(var/obj/structure/artifact/new_artifact)
 	if(cur_artifact == new_artifact || !new_artifact)
 		return
 	clear_artifact()
-	GLOB.destroyed_event.register(new_artifact, src, /obj/machinery/artifact_harvester/proc/clear_artifact)
+	events_repository.register(/decl/observ/destroyed, new_artifact, src, /obj/machinery/artifact_harvester/proc/clear_artifact)
 	cur_artifact = new_artifact
 
 /obj/machinery/artifact_harvester/attackby(var/obj/I, var/mob/user)

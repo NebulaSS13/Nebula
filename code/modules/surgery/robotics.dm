@@ -36,11 +36,7 @@
 /decl/surgery_step/robotics/unscrew_hatch
 	name = "Unscrew maintenance hatch"
 	description = "This procedure unsecures the maintenance hatch of a robotic prosthetic."
-	allowed_tools = list(
-		/obj/item/screwdriver = 100,
-		/obj/item/coin = 50,
-		/obj/item/knife = 50
-	)
+	allowed_tools = list(TOOL_SCREWDRIVER = 100)
 	min_duration = 90
 	max_duration = 110
 
@@ -72,11 +68,7 @@
 /decl/surgery_step/robotics/screw_hatch
 	name = "Secure maintenance hatch"
 	description = "This procedure screws shut the maintenance hatch of a robotic prosthetic."
-	allowed_tools = list(
-		/obj/item/screwdriver = 100,
-		/obj/item/coin = 50,
-		/obj/item/knife = 50
-	)
+	allowed_tools = list(TOOL_SCREWDRIVER = 100)
 	min_duration = 90
 	max_duration = 110
 
@@ -109,11 +101,9 @@
 	name = "Open maintenance hatch"
 	description = "This procedure levers open the maintenance hatch of a robotic prosthetic."
 	allowed_tools = list(
-		/obj/item/retractor = 100,
-		/obj/item/crowbar = 100,
-		/obj/item/kitchen/utensil = 50
+		TOOL_RETRACTOR = 100,
+		TOOL_CROWBAR = 100
 	)
-
 	min_duration = 30
 	max_duration = 40
 
@@ -146,9 +136,8 @@
 	name = "Close maintenance hatch"
 	description = "This procedure closes the maintenance hatch of a robotic prosthetic."
 	allowed_tools = list(
-		/obj/item/retractor = 100,
-		/obj/item/crowbar = 100,
-		/obj/item/kitchen/utensil = 50
+		TOOL_RETRACTOR = 100,
+		TOOL_CROWBAR = 100
 	)
 
 	min_duration = 70
@@ -183,10 +172,7 @@
 /decl/surgery_step/robotics/repair_brute
 	name = "Repair damage to prosthetic"
 	description = "This procedure patches physical damage to a robotic prosthetic."
-	allowed_tools = list(
-		/obj/item/weldingtool = 100,
-		/obj/item/gun/energy/plasmacutter = 50
-	)
+	allowed_tools = list(TOOL_WELDER = 100)
 
 	min_duration = 50
 	max_duration = 60
@@ -284,9 +270,7 @@
 /decl/surgery_step/robotics/repair_burn
 	name = "Repair burns on prosthetic"
 	description = "This procedure repairs fire or electrical damage to a robotic prosthetic."
-	allowed_tools = list(
-		/obj/item/stack/cable_coil = 100
-	)
+	allowed_tools = list(TOOL_CABLECOIL = 100)
 	min_duration = 50
 	max_duration = 60
 
@@ -345,8 +329,8 @@
 	description = "This procedure repairs damage to a robotic internal organ."
 	allowed_tools = list(
 		/obj/item/stack/nanopaste = 100,
-		/obj/item/bonegel = 30,
-		/obj/item/screwdriver = 70,
+		TOOL_BONE_GEL =             30,
+		TOOL_SCREWDRIVER =          70
 	)
 	min_duration = 70
 	max_duration = 90
@@ -404,7 +388,7 @@
 	name = "Decouple prosthetic organ"
 	description = "This procedure decouples a robotic internal organ for removal."
 	allowed_tools = list(
-		/obj/item/multitool = 100
+		TOOL_MULTITOOL = 100
 	)
 	min_duration = 90
 	max_duration = 110
@@ -445,7 +429,7 @@
 	name = "Reattach prosthetic organ"
 	description = "This procedure reattaches a decoupled robotic internal organ."
 	allowed_tools = list(
-		/obj/item/screwdriver = 100,
+		TOOL_SCREWDRIVER = 100,
 	)
 	min_duration = 100
 	max_duration = 120
@@ -575,9 +559,8 @@
 	min_duration = 60
 	max_duration = 80
 	allowed_tools = list(
-		/obj/item/hemostat = 100,
-		/obj/item/wirecutters = 75,
-		/obj/item/kitchen/utensil/fork = 20
+		TOOL_HEMOSTAT = 100,
+		TOOL_WIRECUTTERS = 75,
 	)
 	can_infect = 0
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT

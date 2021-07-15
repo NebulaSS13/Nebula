@@ -9,7 +9,7 @@
 	speak_emote = list("clicks")
 	emote_hear = list("clicks its mandibles")
 	emote_see = list("shakes the sand off itself")
-	response_harm   = "strikes"
+	response_harm = "strikes"
 	faction = "antlions"
 	bleed_colour = COLOR_SKY_BLUE
 

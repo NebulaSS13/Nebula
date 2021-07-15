@@ -44,13 +44,13 @@
 	. = TRUE
 	for(var/target_url in urls)
 
-		var/url_message =  message.Copy()
-		var/list/url_mentions = jointext(get_mentions(target_url), ", ")
-		if(length(url_mentions))
+		var/url_message = message.Copy()
+		var/list/url_mentions = get_mentions(target_url)
+		if(islist(url_mentions) && length(url_mentions))
 			if(url_message["content"])
-				url_message["content"] = "[url_mentions]: [url_message["content"]]"
+				url_message["content"] = "[jointext(url_mentions, ", ")]: [url_message["content"]]"
 			else
-				url_message["content"] = "[url_mentions]"
+				url_message["content"] = "[jointext(url_mentions, ", ")]"
 
 		var/list/httpresponse = http_post(target_url, json_encode(url_message))
 		if(!islist(httpresponse))

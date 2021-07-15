@@ -26,8 +26,8 @@
 	if(!..())
 		return
 
-	player.current.show_message("You work for [GLOB.using_map.company_name], tasked with the production and broadcasting of entertainment to all of its assets.")
-	player.current.show_message("Entertain the crew! Try not to disrupt them from their work too much and remind them how great [GLOB.using_map.company_name] is!")
+	player.current.show_message("You work for [global.using_map.company_name], tasked with the production and broadcasting of entertainment to all of its assets.")
+	player.current.show_message("Entertain the crew! Try not to disrupt them from their work too much and remind them how great [global.using_map.company_name] is!")
 
 /client/verb/join_as_actor()
 	set category = "IC"

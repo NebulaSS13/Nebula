@@ -1,11 +1,11 @@
-var/list/sounds_cache = list()
+var/global/list/sounds_cache = list()
 
 /client/proc/play_sound(S as sound)
 	set category = "Fun"
 	set name = "Play Global Sound"
 	if(!check_rights(R_SOUNDS))	return
 
-	var/sound/uploaded_sound = sound(S, repeat = 0, wait = 1, channel = GLOB.admin_sound_channel)
+	var/sound/uploaded_sound = sound(S, repeat = 0, wait = 1, channel = sound_channels.admin_channel)
 	uploaded_sound.priority = 250
 
 	sounds_cache += S
@@ -15,8 +15,8 @@ var/list/sounds_cache = list()
 
 	log_admin("[key_name(src)] played sound [S]")
 	message_admins("[key_name_admin(src)] played sound [S]", 1)
-	for(var/mob/M in GLOB.player_list)
-		if(M.get_preference_value(/datum/client_preference/play_admin_midis) == GLOB.PREF_YES)
+	for(var/mob/M in global.player_list)
+		if(M.get_preference_value(/datum/client_preference/play_admin_midis) == PREF_YES)
 			sound_to(M, uploaded_sound)
 
 	SSstatistics.add_field_details("admin_verb","PGS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

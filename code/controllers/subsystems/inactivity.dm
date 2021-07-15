@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(inactivity)
 		suspend()
 		return
 	if (!resumed)
-		client_list = GLOB.clients.Copy()
+		client_list = global.clients.Copy()
 
 	while(client_list.len)
 		var/client/C = client_list[client_list.len]

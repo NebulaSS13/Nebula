@@ -158,7 +158,9 @@ SUBSYSTEM_DEF(throwing)
 	//done throwing, either because it hit something or it finished moving
 	if(QDELETED(thrownthing))
 		return
+
 	thrownthing.throwing = null
+
 	if (!hit)
 		for (var/thing in get_turf(thrownthing)) //looking for our target on the turf we land on.
 			var/atom/A = thing
@@ -166,7 +168,11 @@ SUBSYSTEM_DEF(throwing)
 				hit = TRUE
 				thrownthing.throw_impact(A, src)
 				break
-		if (!hit)
+		
+		if(QDELETED(thrownthing))
+			return
+		
+		if(!hit)
 			thrownthing.throw_impact(get_turf(thrownthing), src)  // we haven't hit something yet and we still must, let's hit the ground.
 			thrownthing.space_drift(init_dir)
 

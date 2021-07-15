@@ -4,7 +4,7 @@
 /datum/event/trivial_news/announce()
 	var/author = "Editor Mike Hammers"
 	var/channel = "The Gibson Gazette"
-	var/decl/cultural_info/location/affected_dest = GET_DECL(pick(GLOB.using_map.available_cultural_info[TAG_HOMEWORLD]))
+	var/decl/cultural_info/location/affected_dest = GET_DECL(pick(global.using_map.available_cultural_info[TAG_HOMEWORLD]))
 	if(!istype(affected_dest))
 		return
 	var/body = pick(
@@ -25,10 +25,10 @@
 		"World largest carp patty at display on [affected_dest.name].",\
 		"Man travels 7000 light years to retrieve lost hankie, 'It was my favourite'.",\
 		"New bowling lane that shoots mini-meteors at bowlers very popular.",\
-		"Spacer gets tattoo of Nyx on chest '[pick("[GLOB.using_map.boss_short]","star","starship","asteroid")] tickles most'.",\
+		"Spacer gets tattoo of Nyx on chest '[pick("[global.using_map.boss_short]","star","starship","asteroid")] tickles most'.",\
 		"Long haul pilot marries nav computer; wedding attended by 100 modems.",\
 		"Chef reports successfully using harmonica as cheese grater.",\
-		"[GLOB.using_map.company_name] invents handkerchief that says 'Bless you' after sneeze.",\
+		"[global.using_map.company_name] invents handkerchief that says 'Bless you' after sneeze.",\
 		"Clone accused of posing for other clones's school photo.",\
 		"Clone accused of stealing other clones's employee of the month award.",\
 		"Woman robs [station_name()] with hair dryer; crewmen love new style.",\

@@ -287,7 +287,7 @@
 						if(D)
 							account_security_level = D.security_level
 
-					authenticated_account = attempt_account_access(tried_account_num, tried_pin, login_card && login_card.associated_account_number == tried_account_num ? 2 : 1)
+					authenticated_account = attempt_account_access(tried_account_num, tried_pin, (login_card?.associated_account_number == tried_account_num))
 
 					if(!authenticated_account)
 						number_incorrect_tries++
@@ -327,7 +327,7 @@
 				if(amount <= 0)
 					alert("That is not a valid amount.")
 				else if(amount > initial(E.max_worth))
-					var/decl/currency/cur = GET_DECL(initial(E.currency) || GLOB.using_map.default_currency)
+					var/decl/currency/cur = GET_DECL(initial(E.currency) || global.using_map.default_currency)
 					alert("That amount exceeds the maximum amount holdable by charge sticks from this machine ([cur.format_value(initial(E.max_worth))]).")
 				else if(authenticated_account && amount > 0)
 					//create an entry in the account transaction log

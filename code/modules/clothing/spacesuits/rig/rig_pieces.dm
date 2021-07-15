@@ -19,7 +19,7 @@
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	heat_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
 	cold_protection =    SLOT_HEAD|SLOT_FACE|SLOT_EYES
-	brightness_on = 0.5
+	brightness_on = 4
 	light_wedge = LIGHT_WIDE
 	bodytype_restricted = null
 

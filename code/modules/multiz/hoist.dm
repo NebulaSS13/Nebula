@@ -62,7 +62,7 @@
 	if (get_turf(AM) != get_turf(source_hook))
 		AM.forceMove(get_turf(source_hook))
 
-	GLOB.destroyed_event.register(AM, src, .proc/release_hoistee)
+	events_repository.register(/decl/observ/destroyed, AM, src, .proc/release_hoistee)
 
 /obj/effect/hoist_hook/handle_mouse_drop(atom/over, mob/user)
 	if(source_hoist.hoistee && isturf(over) && !over.Adjacent(source_hoist.hoistee))
@@ -127,7 +127,7 @@
 		source_hook.unbuckle_mob(hoistee)
 	else
 		hoistee.anchored = FALSE
-	GLOB.destroyed_event.unregister(hoistee, src)
+	events_repository.unregister(/decl/observ/destroyed, hoistee, src)
 	hoistee = null
 	layer = initial(layer)
 

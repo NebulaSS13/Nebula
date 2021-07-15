@@ -43,6 +43,9 @@
 	var/last_resist = 0
 	var/admin_paralyzed = FALSE
 
+	/// For leaping and vaulting.
+	var/jumping = FALSE
+
 	var/list/chem_effects
 	var/list/chem_doses
 	var/last_pain_message

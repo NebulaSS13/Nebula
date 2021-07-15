@@ -17,12 +17,12 @@
 
 /obj/item/clothing/mask/gas/poltergeist/Initialize()
 	START_PROCESSING(SSobj, src)
-	GLOB.listening_objects += src
+	global.listening_objects += src
 	. = ..()
 
 /obj/item/clothing/mask/gas/poltergeist/Destroy()
 	STOP_PROCESSING(SSobj, src)
-	GLOB.listening_objects -= src
+	global.listening_objects -= src
 	return ..()
 
 /obj/item/clothing/mask/gas/poltergeist/Process()

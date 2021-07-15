@@ -1,4 +1,4 @@
-GLOBAL_LIST_EMPTY(bombers)
-GLOBAL_LIST_EMPTY(admin_log)
-GLOBAL_LIST_EMPTY(lastsignalers) // Keeps last 100 signals here in format: "[src] used \ref[src] @ location [src.loc]: [freq]/[code]"
-GLOBAL_LIST_EMPTY(lawchanges) // Stores who uploaded laws to which silicon-based lifeform, and what the law was.
+var/global/list/bombers =       list()
+var/global/list/admin_log =     list()
+var/global/list/lastsignalers = list() // Keeps last 100 signals here in format: "[src] used \ref[src] @ location [src.loc]: [freq]/[code]"
+var/global/list/lawchanges =    list() // Stores who uploaded laws to which silicon-based lifeform, and what the law was.

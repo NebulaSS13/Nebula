@@ -1,5 +1,3 @@
-GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
-
 /*
 	A sound player/manager for looping 3D sound effects.
 
@@ -12,6 +10,14 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	The line above is currently a lie. Will probably just have to enforce moderately short sound ranges.
 */
 
+/proc/play_looping_sound(var/atom/source, var/sound_id, var/sound, var/volume, var/range, var/falloff = 1, var/echo, var/frequency, var/prefer_mute, var/datum/client_preference/preference, var/streaming)
+	var/decl/sound_player/sound_player = GET_DECL(/decl/sound_player)
+	return sound_player.PlayLoopingSound(source, sound_id, sound, volume, range, falloff, echo, frequency, prefer_mute, preference, streaming)
+
+/proc/get_sound_channel(var/datum/sound_token/sound_token)
+	var/decl/sound_player/sound_player = GET_DECL(/decl/sound_player)
+	return sound_player.PrivGetChannel(sound_token)
+
 /decl/sound_player
 	var/list/taken_channels // taken_channels and source_id_uses can be merged into one but would then require a meta-object to store the different values I desire.
 	var/list/sound_tokens_by_sound_id
@@ -20,7 +26,6 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	..()
 	taken_channels = list()
 	sound_tokens_by_sound_id = list()
-
 
 //This can be called if either we're doing whole sound setup ourselves or it will be as part of from-file sound setup
 /decl/sound_player/proc/PlaySoundDatum(var/atom/source, var/sound_id, var/sound/sound, var/range, var/prefer_mute, var/datum/client_preference/preference, var/streaming)
@@ -49,7 +54,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	if(length(sound_tokens))
 		return
 
-	GLOB.sound_channels.ReleaseChannel(channel)
+	global.sound_channels.ReleaseChannel(channel)
 	taken_channels -= sound_id
 	sound_tokens_by_sound_id -= sound_id
 
@@ -58,7 +63,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 	. = taken_channels[sound_id] // Does this sound_id already have an assigned channel?
 	if(!.) // If not, request a new one.
-		. = GLOB.sound_channels.RequestChannel(sound_id)
+		. = global.sound_channels.RequestChannel(sound_id)
 		if(!.) // Oh no, still no channel. Abort
 			return
 		taken_channels[sound_id] = .
@@ -113,7 +118,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 		src.status |= SOUND_STREAM
 
 	if(sound.repeat) // Non-looping sounds may not reserve a sound channel due to the risk of not hearing when someone forgets to stop the token
-		var/channel = GLOB.sound_player.PrivGetChannel(src) //Attempt to find a channel
+		var/channel = get_sound_channel(src) //Attempt to find a channel
 		if(!isnum(channel))
 			CRASH("All available sound channels are in active use.")
 		sound.channel = channel
@@ -123,7 +128,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	listeners = list()
 	listener_status = list()
 
-	GLOB.destroyed_event.register(source, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/destroyed, source, src, /datum/proc/qdel_self)
 
 	if(ismovable(source))
 		proxy_listener = new(source, /datum/sound_token/proc/PrivAddListener, /datum/sound_token/proc/PrivLocateListeners, range, proc_owner = src)
@@ -164,11 +169,12 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	listeners = null
 	listener_status = null
 
-	GLOB.destroyed_event.unregister(source, src, /datum/proc/qdel_self)
+	events_repository.unregister(/decl/observ/destroyed, source, src, /datum/proc/qdel_self)
 	QDEL_NULL(proxy_listener)
 	source = null
 
-	GLOB.sound_player.PrivStopSound(src)
+	var/decl/sound_player/sound_player = GET_DECL(/decl/sound_player)
+	sound_player.PrivStopSound(src)
 
 /datum/sound_token/proc/PrivLocateListeners(var/list/prior_turfs, var/list/current_turfs)
 	if(status & SOUND_STOPPED)
@@ -211,16 +217,16 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 	listeners += listener
 
-	GLOB.moved_event.register(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
-	GLOB.destroyed_event.register(listener, src, /datum/sound_token/proc/PrivRemoveListener)
+	events_repository.register(/decl/observ/moved, listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
+	events_repository.register(/decl/observ/destroyed, listener, src, /datum/sound_token/proc/PrivRemoveListener)
 
 	PrivUpdateListenerLoc(listener, FALSE)
 
 /datum/sound_token/proc/PrivRemoveListener(var/atom/listener, var/sound/null_sound)
 	null_sound = null_sound || new(channel = sound.channel)
 	sound_to(listener, null_sound)
-	GLOB.moved_event.unregister(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
-	GLOB.destroyed_event.unregister(listener, src, /datum/sound_token/proc/PrivRemoveListener)
+	events_repository.unregister(/decl/observ/moved, listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
+	events_repository.unregister(/decl/observ/destroyed, listener, src, /datum/sound_token/proc/PrivRemoveListener)
 	listeners -= listener
 
 /datum/sound_token/proc/PrivUpdateListenerLoc(var/atom/listener, var/update_sound = TRUE)
@@ -278,7 +284,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	if(preference)
 		var/mob/M = listener
 		if(istype(M))
-			if((M.get_preference_value(preference) != GLOB.PREF_YES))
+			if((M.get_preference_value(preference) != PREF_YES))
 				return FALSE
 	return TRUE
 
@@ -290,4 +296,4 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 /obj/sound_test/Initialize()
 	. = ..()
-	GLOB.sound_player.PlayLoopingSound(src, /obj/sound_test, sound, 50, 3)
+	play_looping_sound(src, /obj/sound_test, sound, 50, 3)

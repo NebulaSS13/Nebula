@@ -1,4 +1,4 @@
-var/list/fishtank_cache = list()
+var/global/list/fishtank_cache = list()
 
 /obj/effect/glass_tank_overlay
 	name = ""
@@ -91,7 +91,7 @@ var/list/fishtank_cache = list()
 		if(!F) F = new(T)
 		reagents.trans_to_holder(F.reagents, reagents.total_volume)
 
-var/list/global/aquarium_states_and_layers = list(
+var/global/list/global/aquarium_states_and_layers = list(
 	"b" = FLY_LAYER - 0.02,
 	"w" = FLY_LAYER - 0.01,
 	"f" = FLY_LAYER,

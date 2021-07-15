@@ -1,16 +1,13 @@
 /decl/material/solid/metal/aliumium
 	name = "alien alloy"
-	stack_type = null
 	icon_base = 'icons/turf/walls/metal.dmi'
 	door_icon_base = "metal"
 	icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
 	hitsound = 'sound/weapons/smash.ogg'
-	sheet_singular_name = "chunk"
-	sheet_plural_name = "chunks"
-	stack_type = /obj/item/stack/material/aliumium
 	construction_difficulty = MAT_VALUE_VERY_HARD_DIY
 	hidden_from_codex = TRUE
 	value = 2.5
+	default_solid_form = /obj/item/stack/material/cubes
 
 /decl/material/solid/metal/aliumium/New()
 	icon_base = 'icons/turf/walls/metal.dmi'

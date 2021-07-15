@@ -1,6 +1,0 @@
-author: MistakeNot4892
-delete-after: true
-changes:
-  - rscadd: Some status effects (sleeping, stunned, confusion, weakened) are visible
-      in the form of markers over the victim's head. This can be disabled in preferences
-      if you'd rather not see them.

@@ -1,5 +1,12 @@
 /mob/living/simple_animal/hostile
 	faction = "hostile"
+	stop_automated_movement_when_pulled = 0
+	a_intent = I_HURT
+	response_help_3p = "$USER$ pokes $TARGET$."
+	response_help_1p = "You poke $TARGET$."
+	response_disarm =  "shoves"
+	response_harm =    "strikes"
+
 	var/stance = HOSTILE_STANCE_IDLE	//Used to determine behavior
 	var/mob/living/target_mob
 	var/attack_same = 0
@@ -16,9 +23,7 @@
 	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
 	var/list/friends = list()
 	var/break_stuff_probability = 10
-	stop_automated_movement_when_pulled = 0
 	var/destroy_surroundings = 1
-	a_intent = I_HURT
 
 	var/shuttletarget = null
 	var/enroute = 0
@@ -39,7 +44,7 @@
 												/obj/structure/railing)
 
 /mob/living/simple_animal/hostile/proc/can_act()
-	if(stat || stop_automation || incapacitated())
+	if(QDELETED(src) || stat || stop_automation || incapacitated())
 		return FALSE
 	return TRUE
 

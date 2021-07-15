@@ -239,7 +239,7 @@
 	else
 		var/image/I = image('icons/obj/ammo.dmi', "s-casing-spent", layer = BELOW_TABLE_LAYER)
 		I.layer = BELOW_TABLE_LAYER
-		I.dir = pick(GLOB.alldirs)
+		I.dir = pick(global.alldirs)
 		I.pixel_x = rand(-10,10)
 		I.pixel_y = rand(-10,10)
 		return I

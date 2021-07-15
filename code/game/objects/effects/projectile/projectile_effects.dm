@@ -2,7 +2,7 @@
 	name = "pew"
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "nothing"
-	plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	plane = ABOVE_LIGHTING_PLANE
 	layer = BEAM_PROJECTILE_LAYER //Muzzle flashes would be above the lighting plane anyways.
 	anchored = TRUE
 	unacidable = TRUE

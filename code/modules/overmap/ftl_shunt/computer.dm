@@ -19,7 +19,7 @@
 /obj/machinery/computer/ship/ftl/proc/recalc_cost()
 	if(!linked_core)
 		return INFINITY
-	var/jump_dist = get_dist(linked, locate(linked_core.shunt_x, linked_core.shunt_y, GLOB.using_map.overmap_z))
+	var/jump_dist = get_dist(linked, locate(linked_core.shunt_x, linked_core.shunt_y, global.using_map.overmap_z))
 	var/jump_cost = ((linked.vessel_mass * JOULES_PER_TON) / 1000) * jump_dist
 	return jump_cost
 
@@ -86,12 +86,12 @@
 		if(href_list["set_shunt_x"])
 			input_x = input(user, "Enter Destination X Coordinates", "FTL Computer", input_x) as num|null
 			input_x += fumble
-			input_x = Clamp(input_x, 1, GLOB.using_map.overmap_size - 1)
+			input_x = Clamp(input_x, 1, global.using_map.overmap_size - 1)
 
 		if(href_list["set_shunt_y"])
 			input_y = input(user, "Enter Destination Y Coordinates", "FTL Computer", input_y) as num|null
 			input_y += fumble
-			input_y = Clamp(input_y, 1, GLOB.using_map.overmap_size - 1)
+			input_y = Clamp(input_y, 1, global.using_map.overmap_size - 1)
 
 		if(!CanInteract(user, state))
 			return TOPIC_NOACTION
@@ -110,7 +110,7 @@
 				to_chat(user, SPAN_WARNING("Superluminal shunt inoperable. Please try again later."))
 				return TOPIC_REFRESH
 
-			var/dist = get_dist(locate(linked_core.shunt_x, linked_core.shunt_y, GLOB.using_map.overmap_z), get_turf(linked))
+			var/dist = get_dist(locate(linked_core.shunt_x, linked_core.shunt_y, global.using_map.overmap_z), get_turf(linked))
 			if(dist > 3) //We are above the safe jump distance, give them a warning.
 				var/warning = alert(user, "Current shunt distance is above safe distance! Do you wish to continue?","Jump Safety System", "Yes", "No")
 				if(warning == "No" || !CanInteract(user, state))

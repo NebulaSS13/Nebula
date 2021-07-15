@@ -15,7 +15,7 @@
 	var/datum/computer_file/report/crew_record/active_record
 	var/message = null
 
-/datum/nano_module/program/records/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
+/datum/nano_module/program/records/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = global.default_topic_state)
 	var/list/data = host.initial_data()
 	var/list/user_access = get_record_access(user)
 
@@ -28,7 +28,7 @@
 	else
 		var/list/all_records = list()
 
-		data["show_milrank"] = (GLOB.using_map.flags & MAP_HAS_BRANCH)
+		data["show_milrank"] = (global.using_map.flags & MAP_HAS_BRANCH)
 		for(var/datum/computer_file/report/crew_record/R in get_records())
 			all_records.Add(list(list(
 				"name" = R.get_name(),
@@ -97,7 +97,7 @@
 			to_chat(usr, "Access Denied.")
 			return
 		active_record = new/datum/computer_file/report/crew_record()
-		GLOB.all_crew_records.Add(active_record)
+		global.all_crew_records.Add(active_record)
 		network.store_file(active_record, MF_ROLE_CREW_RECORDS)
 		return 1
 	if(href_list["print_active"])

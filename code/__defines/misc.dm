@@ -73,8 +73,6 @@
 //General-purpose life speed define for plants.
 #define HYDRO_SPEED_MULTIPLIER 1
 
-#define DEFAULT_JOB_TYPE /datum/job/assistant
-
 //Area flags, possibly more to come
 #define AREA_FLAG_RAD_SHIELDED         BITFLAG(1)  // Shielded from radiation, clearly.
 #define AREA_FLAG_EXTERNAL             BITFLAG(2)  // External as in exposed to space, not outside in a nice, green, forest.
@@ -111,10 +109,10 @@
 #define WALL_CAN_OPEN 1
 #define WALL_OPENING 2
 
-#define BOMBCAP_DVSTN_RADIUS (GLOB.max_explosion_range/4)
-#define BOMBCAP_HEAVY_RADIUS (GLOB.max_explosion_range/2)
-#define BOMBCAP_LIGHT_RADIUS GLOB.max_explosion_range
-#define BOMBCAP_FLASH_RADIUS (GLOB.max_explosion_range*1.5)
+#define BOMBCAP_DVSTN_RADIUS (global.max_explosion_range/4)
+#define BOMBCAP_HEAVY_RADIUS (global.max_explosion_range/2)
+#define BOMBCAP_LIGHT_RADIUS global.max_explosion_range
+#define BOMBCAP_FLASH_RADIUS (global.max_explosion_range*1.5)
 
 
 // Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
@@ -176,8 +174,6 @@
 #define RAD_LEVEL_VERY_HIGH 100
 
 #define RADIATION_THRESHOLD_CUTOFF 0.1	// Radiation will not affect a tile when below this value.
-
-#define LEGACY_RECORD_STRUCTURE(X, Y) GLOBAL_LIST_EMPTY(##X);/datum/computer_file/data/##Y/var/list/fields[0];/datum/computer_file/data/##Y/New(){..();GLOB.##X.Add(src);}/datum/computer_file/data/##Y/Destroy(){. = ..();GLOB.##X.Remove(src);}
 
 #define SUPPLY_SECURITY_ELEVATED 1
 #define SUPPLY_SECURITY_HIGH 2
@@ -245,14 +241,8 @@
 #define SURGERY_NEEDS_RETRACTED  32
 #define SURGERY_NEEDS_ENCASEMENT 64
 
-// Structure interaction flags
-#define TOOL_INTERACTION_ANCHOR      1
-#define TOOL_INTERACTION_DECONSTRUCT 2
-#define TOOL_INTERACTION_WIRING      4
-#define TOOL_INTERACTION_ALL         (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT | TOOL_INTERACTION_WIRING)
-
 //Inserts 'a' or 'an' before X in ways \a doesn't allow
-#define ADD_ARTICLE(X) "[(lowertext(X[1]) in GLOB.vowels) ? "an" : "a"] [X]"
+#define ADD_ARTICLE(X) "[(lowertext(X[1]) in global.vowels) ? "an" : "a"] [X]"
 
 #define SOULSTONE_CRACKED -1
 #define SOULSTONE_EMPTY 0
@@ -269,14 +259,16 @@
 #define WORTH_TO_SUPPLY_POINTS_CONSTANT       0.03
 #define WORTH_TO_SUPPLY_POINTS_ROUND_CONSTANT 5
 
-#define  ICON_STATE_WORLD  "world"
-#define  ICON_STATE_INV  "inventory"
+#define ICON_STATE_WORLD "world"
+#define ICON_STATE_INV   "inventory"
 
-#if DM_VERSION < 513
-#define hex2num(X) hex2num_inner(X)
-#else
 #define hex2num(X) text2num(X, 16)
-#endif
 
 #define GET_DECL(D) (ispath(D, /decl) ? (decls_repository.fetched_decls[D] || decls_repository.get_decl(D)) : null)
 #define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))
+
+#if DM_BUILD < 1540
+#define AS_ANYTHING as()
+#else
+#define AS_ANYTHING as anything
+#endif

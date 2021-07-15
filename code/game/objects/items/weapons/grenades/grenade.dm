@@ -27,11 +27,10 @@
 	cut_overlays()
 	if(active)
 		if(check_state_in_icon("[icon_state]-active", icon))
-			var/image/I = image(icon, "[icon_state]-active")
-			if(plane != HUD_PLANE)
-				I.layer = ABOVE_LIGHTING_LAYER
-				I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-			add_overlay(I)
+			if(plane == HUD_PLANE)
+				add_overlay(image(icon, "[icon_state]-active"))
+			else
+				add_overlay(emissive_overlay(icon, "[icon_state]-active"))
 	else if(check_state_in_icon("[icon_state]-pin", icon))
 		add_overlay("[icon_state]-pin")
 

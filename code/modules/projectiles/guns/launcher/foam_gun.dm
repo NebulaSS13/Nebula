@@ -97,7 +97,7 @@
 /obj/item/foam_dart/proc/mix_up()
 	pixel_x = rand(-randpixel, randpixel)
 	pixel_y = rand(-randpixel, randpixel)
-	set_dir(pick(GLOB.alldirs))
+	set_dir(pick(global.alldirs))
 
 /obj/item/foam_dart/tampered
 	throwforce = 4

@@ -1,14 +1,14 @@
 /datum/report_field
-	var/datum/computer_file/report/owner //The report to which this field belongs.
-	var/name = "generic field"     //The name the field will be labeled with.
-	var/value                      //Only used internally.
-	var/can_edit = 1               //Whether the field gives the user the option to edit it.
-	var/required = 0               //Whether the field is required to submit the report.
-	var/ID                         //A unique (per report) id; don't set manually.
-	var/needs_big_box = 0          //Suggests that the output won't look good in-line. Useful in nanoui logic.
-	var/ignore_value = 0           //Suggests that the value should not be displayed.
-	var/list/access_edit = list(list())  //The access required to edit the field.
-	var/list/access = list(list())       //The access required to view the field.
+	var/datum/computer_file/report/owner // The report to which this field belongs.
+	var/name = "generic field"           // The name the field will be labeled with.
+	var/value                            // Only used internally.
+	var/can_edit = 1                     // Whether the field gives the user the option to edit it.
+	var/required = 0                     // Whether the field is required to submit the report.
+	var/ID                               // A unique (per report) id; don't set manually.
+	var/needs_big_box = 0                // Suggests that the output won't look good in-line. Useful in nanoui logic.
+	var/ignore_value = 0                 // Suggests that the value should not be displayed.
+	var/list/access_edit = list(list())  // The access required to edit the field.
+	var/list/access = list(list())       // The access required to view the field.
 
 /datum/report_field/New(datum/computer_file/report/report)
 	owner = report

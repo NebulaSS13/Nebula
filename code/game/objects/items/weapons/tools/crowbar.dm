@@ -14,17 +14,21 @@
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 	applies_material_colour = TRUE
 	drop_sound = 'sound/foley/bardrop1.ogg'
-	var/global/valid_colours = list(COLOR_RED_GRAY, COLOR_MAROON, COLOR_DARK_BROWN, COLOR_GRAY20)
+	var/static/valid_colours = list(COLOR_RED_GRAY, COLOR_MAROON, COLOR_DARK_BROWN, COLOR_GRAY20)
 	var/handle_color
 	var/shape_variations = 1
 	var/shape_type
 	//List of things crowbars made from brittle materials have high chance of breaking on.
-	var/global/list/break_chances = list(
+	var/static/list/break_chances = list(
 		/obj/machinery/door = 80,
 		/turf/simulated/floor/tiled = 25,
 		/mob/living = 15,
 		/obj/machinery = 15
 		)
+
+/obj/item/crowbar/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_CROWBAR = TOOL_QUALITY_DEFAULT))
 
 /obj/item/crowbar/get_autopsy_descriptors()
 	. = ..()

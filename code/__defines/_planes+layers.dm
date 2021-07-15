@@ -158,41 +158,37 @@ What is the naming convention for planes or layers?
 
 	//FLY_LAYER                          5
 	//OBSERVER
-	#define OBSERVER_LAYER              5.1
-
 	#define BASE_AREA_LAYER             999
 
-#define OBSERVER_PLANE             1
+#define OBSERVER_PLANE           1
+  #define OBSERVER_LAYER           1
 
-#define LIGHTING_PLANE             2 // For Lighting. - The highest plane (ignoring all other even higher planes)
-	#define LIGHTBULB_LAYER        0
-	#define LIGHTING_LAYER         1
-	#define ABOVE_LIGHTING_LAYER   2
+#define LIGHTING_PLANE           2 // For Lighting. - The highest plane (ignoring all other even higher planes)
+  #define LIGHTBULB_LAYER          1
+  #define LIGHTING_LAYER           2
 
-#define EFFECTS_ABOVE_LIGHTING_PLANE   3 // For glowy eyes, laser beams, etc. that shouldn't be affected by darkness
-	#define EYE_GLOW_LAYER         1
-	#define BEAM_PROJECTILE_LAYER  2
-	#define SUPERMATTER_WALL_LAYER 3
-	#define OBFUSCATION_LAYER      4
+#define EMISSIVE_PLANE           3 // For over-lighting overlays (ex. cigarette glows)
+  #define EMISSIVE_LAYER           1
 
-#define FULLSCREEN_PLANE                4 // for fullscreen overlays that do not cover the hud.
+#define ABOVE_LIGHTING_PLANE     4 // laser beams, etc. that shouldn't be affected by darkness
+  #define ABOVE_LIGHTING_LAYER     1
+  #define BEAM_PROJECTILE_LAYER    2
+  #define SUPERMATTER_WALL_LAYER   3
+  #define OBFUSCATION_LAYER        4
 
-	#define FULLSCREEN_LAYER    0
-	#define DAMAGE_LAYER        1
-	#define IMPAIRED_LAYER      2
-	#define BLIND_LAYER         3
-	#define CRIT_LAYER          4
+#define FULLSCREEN_PLANE         5 // for fullscreen overlays that do not cover the hud.
+  #define FULLSCREEN_LAYER         0
+  #define DAMAGE_LAYER             1
+  #define IMPAIRED_LAYER           2
+  #define BLIND_LAYER              3
+  #define CRIT_LAYER               4
 
-#define HUD_PLANE                    5
-	#define UNDER_HUD_LAYER              0
-	#define HUD_BASE_LAYER               2
-	#define HUD_ITEM_LAYER               3
-	#define HUD_ABOVE_ITEM_LAYER         4
-	#define HUD_ABOVE_HUD_LAYER          5
-
-
-//This is difference between planes used for atoms and effects
-#define PLANE_DIFFERENCE              3
+#define HUD_PLANE                6
+  #define UNDER_HUD_LAYER          0
+  #define HUD_BASE_LAYER           2
+  #define HUD_ITEM_LAYER           3
+  #define HUD_ABOVE_ITEM_LAYER     4
+  #define HUD_ABOVE_HUD_LAYER      5
 
 /atom
 	plane = DEFAULT_PLANE
@@ -204,26 +200,3 @@ What is the naming convention for planes or layers?
 /atom/proc/reset_plane_and_layer()
 	plane = initial(plane)
 	layer = initial(layer)
-
-/*
-  PLANE MASTERS
-*/
-
-/obj/screen/plane_master
-	appearance_flags = PLANE_MASTER
-	screen_loc = "CENTER,CENTER"
-	globalscreen = 1
-
-/obj/screen/plane_master/ghost_master
-	plane = OBSERVER_PLANE
-
-/obj/screen/plane_master/ghost_dummy
-	// this avoids a bug which means plane masters which have nothing to control get angry and mess with the other plane masters out of spite
-	alpha = 0
-	appearance_flags = 0
-	plane = OBSERVER_PLANE
-
-GLOBAL_LIST_INIT(ghost_master, list(
-	new /obj/screen/plane_master/ghost_master(),
-	new /obj/screen/plane_master/ghost_dummy()
-))

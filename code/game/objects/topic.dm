@@ -1,10 +1,10 @@
 /atom/proc/DefaultTopicState()
-	return GLOB.default_state
+	return global.default_topic_state
 
 /atom/Topic(var/href, var/href_list = list(), var/datum/topic_state/state)
 	if((. = ..()))
 		return
-	state = state || DefaultTopicState() || GLOB.default_state
+	state = state || DefaultTopicState() || global.default_topic_state
 	if(CanUseTopic(usr, state, href_list) == STATUS_INTERACTIVE)
 		CouldUseTopic(usr)
 		return OnTopic(usr, href_list, state)
@@ -15,10 +15,10 @@
 	return TOPIC_NOACTION
 
 // Override prescribes default state argument.
-/atom/CanUseTopic(var/mob/user, var/datum/topic_state/state = DefaultTopicState() || GLOB.default_state, var/href_list)
+/atom/CanUseTopic(var/mob/user, var/datum/topic_state/state = DefaultTopicState() || global.default_topic_state, var/href_list)
 	return ..()
 
-/obj/CanUseTopic(var/mob/user, var/datum/topic_state/state = DefaultTopicState() || GLOB.default_state, var/href_list)
+/obj/CanUseTopic(var/mob/user, var/datum/topic_state/state = DefaultTopicState() || global.default_topic_state, var/href_list)
 	return min(..(), user.CanUseObjTopic(src, state))
 
 /mob/living/CanUseObjTopic(var/obj/O, var/datum/topic_state/state)

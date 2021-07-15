@@ -1,7 +1,7 @@
-var/list/surgeries_in_progress = list()
+var/global/list/surgeries_in_progress = list()
 
 // A list of types that will not attempt to perform surgery if the user is on help intent.
-GLOBAL_LIST_INIT(surgery_tool_exceptions, list(
+var/global/list/surgery_tool_exceptions = list(
 	/obj/item/auto_cpr,
 	/obj/item/scanner/health,
 	/obj/item/shockpaddles,
@@ -9,8 +9,8 @@ GLOBAL_LIST_INIT(surgery_tool_exceptions, list(
 	/obj/item/modular_computer,
 	/obj/item/chems/syringe,
 	/obj/item/chems/borghypo
-))
-GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
+)
+var/global/list/surgery_tool_exception_cache = list()
 
 /* SURGERY STEPS */
 /decl/surgery_step
@@ -32,15 +32,25 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	var/expected_mob_type = /mob/living/carbon/human
 	var/surgery_step_category = /decl/surgery_step
 
+//returns how fast the tool is for this step
 /decl/surgery_step/proc/get_speed_modifier(var/mob/user, var/mob/target, var/obj/item/tool)
-	. = 1
+	for(var/T in allowed_tools)
+		if(ispath(T, /decl/tool_archetype) && tool.get_tool_quality(T) > 0)
+			if(isnull(.))
+				. = tool.get_tool_speed(T)
+			else
+				. = min(. , tool.get_tool_speed(T))
+	if(isnull(.))
+		. = 1
 
 //returns how well tool is suited for this step
 /decl/surgery_step/proc/tool_quality(obj/item/tool)
-	for (var/T in allowed_tools)
-		if (istype(tool,T))
+	. = 0
+	for(var/T in allowed_tools)
+		if(istype(tool,T))
 			return allowed_tools[T]
-	return 0
+		if(ispath(T, /decl/tool_archetype))
+			. = max((. || 0), allowed_tools[T] * tool.get_tool_quality(T))
 
 /decl/surgery_step/proc/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	return TRUE
@@ -226,11 +236,11 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 		// If we're on an optable, we are protected from some surgery fails. Bypass this for some items (like health analyzers).
 		if((locate(/obj/machinery/optable) in get_turf(M)) && user.a_intent == I_HELP)
 			// Keep track of which tools we know aren't appropriate for surgery on help intent.
-			if(GLOB.surgery_tool_exception_cache[type])
+			if(global.surgery_tool_exception_cache[type])
 				return FALSE
-			for(var/tool in GLOB.surgery_tool_exceptions)
+			for(var/tool in global.surgery_tool_exceptions)
 				if(istype(src, tool))
-					GLOB.surgery_tool_exception_cache[type] = TRUE
+					global.surgery_tool_exception_cache[type] = TRUE
 					return FALSE
 			to_chat(user, SPAN_WARNING("You aren't sure what you could do to \the [M] with \the [src]."))
 			return TRUE
@@ -246,7 +256,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 				LAZYSET(global.surgeries_in_progress["\ref[M]"], zone, operation_data)
 				S.begin_step(user, M, zone, src)
 				var/skill_reqs = S.get_skill_reqs(user, M, src, zone)
-				var/duration = user.skill_delay_mult(skill_reqs[1]) * rand(S.min_duration, S.max_duration) * S.get_speed_modifier(user, M, src)
+				var/duration = max(1, round(user.skill_delay_mult(skill_reqs[1]) * rand(S.min_duration, S.max_duration) * S.get_speed_modifier(user, M, src)))
 				if(prob(S.success_chance(user, M, src, zone)) && do_mob(user, M, duration))
 					S.end_step(user, M, zone, src)
 					handle_post_surgery()

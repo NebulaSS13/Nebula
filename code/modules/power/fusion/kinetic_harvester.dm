@@ -114,7 +114,7 @@
 			var/sheet_cost = (SHEET_MATERIAL_AMOUNT * 1.5)
 			var/sheets = Floor(stored[material.type]/sheet_cost)
 			if(sheets > 0)
-				material.place_sheet(loc, sheets)
+				material.create_object(loc, sheets)
 				stored[material.type] -= (sheets * sheet_cost)
 				if(stored[material.type] <= 0)
 					stored -= material.type

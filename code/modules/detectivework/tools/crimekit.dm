@@ -14,3 +14,5 @@
 		/obj/item/forensics/sample_kit/powder,
 		/obj/item/storage/csi_markers
 		)
+	material = /decl/material/solid/leather/synth
+	matter = list(/decl/material/solid/metal/stainlesssteel = MATTER_AMOUNT_REINFORCEMENT)

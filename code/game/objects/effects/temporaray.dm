@@ -24,7 +24,7 @@
 	var/splatter_type = "splatter"
 
 /obj/effect/temp_visual/bloodsplatter/Initialize(mapload, set_dir, _color)
-	if(set_dir in GLOB.cornerdirs)
+	if(set_dir in global.cornerdirs)
 		icon_state = "[splatter_type][pick(1, 2, 6)]"
 	else
 		icon_state = "[splatter_type][pick(3, 4, 5)]"

@@ -30,7 +30,7 @@
 		/obj/item/borg/sight/hud/med,
 		/obj/item/scanner/health,
 		/obj/item/chems/borghypo/surgeon,
-		/obj/item/scalpel/manager,
+		/obj/item/incision_manager,
 		/obj/item/hemostat,
 		/obj/item/retractor,
 		/obj/item/cautery,

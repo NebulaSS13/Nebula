@@ -3,19 +3,26 @@ SUBSYSTEM_DEF(mapping)
 	init_order = SS_INIT_MAPPING
 	flags = SS_NO_FIRE
 
-	var/list/map_templates = list()
-	var/list/space_ruins_templates = list()
+	var/list/map_templates =             list()
+	var/list/space_ruins_templates =     list()
 	var/list/exoplanet_ruins_templates = list()
-	var/list/away_sites_templates = list()
-	var/list/submaps = list()
-	var/list/submap_archetypes = list()
+	var/list/away_sites_templates =      list()
+	var/list/submaps =                   list()
+	var/list/compile_time_map_markers =  list()
+
+	var/decl/overmap_event_handler/overmap_event_handler
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
+
+	overmap_event_handler = GET_DECL(/decl/overmap_event_handler)
+
 	// Load templates and build away sites.
+	for(var/obj/effect/landmark/map_load_mark/marker AS_ANYTHING in compile_time_map_markers)
+		compile_time_map_markers -= marker
+		marker.load_template()
+
 	preloadTemplates()
-	for(var/atype in subtypesof(/decl/submap_archetype))
-		submap_archetypes[atype] = new atype
-	GLOB.using_map.build_away_sites()
+	global.using_map.build_away_sites()
 	. = ..()
 
 /datum/controller/subsystem/mapping/Recover()
@@ -54,7 +61,7 @@ SUBSYSTEM_DEF(mapping)
 
 	var/list/banned_maps = list() + banned_exoplanet_dmms + banned_space_dmms + banned_away_site_dmms
 
-	for(var/item in sortList(subtypesof(/datum/map_template), /proc/cmp_ruincost_priority))
+	for(var/item in sortTim(subtypesof(/datum/map_template), /proc/cmp_ruincost_priority))
 		var/datum/map_template/MT = includeTemplate(item, banned_maps)
 		if(!MT)
 			continue

@@ -43,10 +43,7 @@
 	natural_weapon = /obj/item/natural_weapon/beak
 	speak_chance = 1//1% (1 in 100) chance every tick; So about once per 150 seconds, assuming an average tick is 1.5s
 	turns_per_move = 5
-
-	response_help  = "pets"
-	response_disarm = "gently moves aside"
-	response_harm   = "swats"
+	response_harm = "swats"
 	stop_automated_movement = 1
 	universal_speak = TRUE
 
@@ -146,7 +143,7 @@
 	return
 
 /mob/living/simple_animal/hostile/retaliate/parrot/DefaultTopicState()
-	return GLOB.physical_state
+	return global.physical_topic_state
 
 /mob/living/simple_animal/hostile/retaliate/parrot/OnTopic(mob/user, href_list)
 	//Is the user's mob type able to do this?
@@ -197,7 +194,7 @@
 						src.ears = headset_to_add
 						to_chat(user, "You fit the headset onto [src].")
 
-						clearlist(available_channels)
+						available_channels = list()
 						for(var/ch in headset_to_add.channels)
 							switch(ch)
 								if("Engineering")
@@ -293,7 +290,7 @@
 			speak.Remove(pick(speak))
 
 		speak.Add(pick(speech_buffer))
-		clearlist(speech_buffer)
+		speech_buffer = list()
 
 
 //-----SLEEPING
@@ -358,7 +355,7 @@
 		//Wander around aimlessly. This will help keep the loops from searches down
 		//and possibly move the mob into a new are in view of something they can use
 		if(prob(90))
-			SelfMove(pick(GLOB.cardinal))
+			SelfMove(pick(global.cardinal))
 			return
 
 		if(!held_item && !parrot_perch) //If we've got nothing to do.. look for something to do.

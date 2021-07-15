@@ -63,7 +63,7 @@
 
 	C.forceMove(src)
 	cartridges[C.label] = C
-	cartridges = sortAssoc(cartridges)
+	cartridges = sortTim(cartridges, /proc/cmp_text_asc)
 	SSnano.update_uis(src)
 
 /obj/machinery/chemical_dispenser/proc/remove_cartridge(label)

@@ -1,5 +1,9 @@
 // To cut down on unneeded creation/deletion, these are global.
-GLOBAL_LIST_INIT(terminal_commands, init_subtypes(/datum/terminal_command))
+var/global/list/terminal_commands
+/proc/get_terminal_commands()
+	if(!global.terminal_commands)
+		global.terminal_commands = init_subtypes(/datum/terminal_command)
+	return global.terminal_commands
 
 /datum/terminal_command
 	var/name                              // Used for man
@@ -12,7 +16,7 @@ GLOBAL_LIST_INIT(terminal_commands, init_subtypes(/datum/terminal_command))
 	var/req_access = list()               // Stores access needed, if any
 	var/needs_network					  // If this command fails if computer running terminal isn't connected to a network
 
-	var/global/regex/nid_regex			  // Regex for getting network addres out of the line
+	var/static/regex/nid_regex			  // Regex for getting network addres out of the line
 
 /datum/terminal_command/New()
 	regex = new (pattern, regex_flags)
@@ -92,7 +96,7 @@ Subtypes
 		var/selected_page = (length(manargs)) ? text2num(manargs[1]) : 1
 		
 		var/list/valid_commands = list()
-		for(var/comm in GLOB.terminal_commands)
+		for(var/comm in get_terminal_commands())
 			var/datum/terminal_command/command_datum = comm
 			if(user.skill_check(command_datum.core_skill, command_datum.skill_needed))
 				valid_commands += command_datum.name

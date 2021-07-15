@@ -436,7 +436,7 @@
 		possibleverbs -= H.verbs
 		possibleverbs += "Cancel" 								// ...And one for the bottom
 
-		var/verb = input("Select a verb!", "Verbs",null) as anything in possibleverbs
+		var/verb = input("Select a verb!", "Verbs",null) as null|anything in possibleverbs
 		if(!H)
 			to_chat(usr, "Mob doesn't exist anymore")
 			return

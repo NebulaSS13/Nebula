@@ -82,7 +82,8 @@ Right Click       - List/Create Area
 			else
 				vision_colors[ref] = distinct_colors[used_colors]
 		I.color = vision_colors[ref]
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		I.plane = ABOVE_LIGHTING_PLANE
+		I.layer = ABOVE_LIGHTING_LAYER
 		I.appearance_flags = RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM|NO_CLIENT_COLOR|KEEP_APART
 		vision_images.Add(I)
 	user.client.images += vision_images
@@ -96,12 +97,12 @@ Right Click       - List/Create Area
 		return
 	UnselectArea()
 	selected_area = A
-	GLOB.destroyed_event.register(selected_area, src, .proc/UnselectArea)
+	events_repository.register(/decl/observ/destroyed, selected_area, src, .proc/UnselectArea)
 
 /datum/build_mode/areas/proc/UnselectArea()
 	if(!selected_area)
 		return
-	GLOB.destroyed_event.unregister(selected_area, src, .proc/UnselectArea)
+	events_repository.unregister(/decl/observ/destroyed, selected_area, src, .proc/UnselectArea)
 
 	var/has_turf = FALSE
 	for(var/turf/T in selected_area)

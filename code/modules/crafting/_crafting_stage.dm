@@ -60,7 +60,7 @@
 	consume_completion_trigger = FALSE
 
 /decl/crafting_stage/material
-	completion_trigger_type = /obj/item/stack/material
+	completion_trigger_type = /obj/item/stack/material/sheet
 	stack_consume_amount = 5
 	consume_completion_trigger = FALSE
 	var/stack_material = /decl/material/solid/metal/steel

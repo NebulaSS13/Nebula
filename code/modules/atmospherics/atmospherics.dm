@@ -48,7 +48,7 @@ Pipelines + Other Objects -> Pipe network
 	. = ..()
 
 /obj/machinery/atmospherics/Destroy()
-	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
 		QDEL_NULL(nodes_to_networks[node])
 		node.disconnect(src)
 	nodes_to_networks = null
@@ -56,10 +56,10 @@ Pipelines + Other Objects -> Pipe network
 
 /obj/machinery/atmospherics/proc/atmos_init()
 	atmos_initalized = TRUE
-	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
 		QDEL_NULL(nodes_to_networks[node])
 	nodes_to_networks = null
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		if(direction & initialize_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if((target.initialize_directions & get_dir(target,src)) && check_connect_types(target, src))
@@ -105,7 +105,7 @@ Pipelines + Other Objects -> Pipe network
 		return
 	var/disconnected_directions = initialize_directions
 	var/visible_directions = 0
-	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
 		var/node_dir = get_dir(src, node)
 		disconnected_directions &= ~node_dir
 		if(hide_hidden_pipes && !T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
@@ -113,7 +113,7 @@ Pipelines + Other Objects -> Pipe network
 		else
 			add_underlay(T, node, node_dir, node.icon_connect_type)
 			visible_directions |= node_dir
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		if(disconnected_directions & direction)
 			add_underlay(T, null, direction) // adds a disconnected underlay there
 			visible_directions |= direction
@@ -144,7 +144,7 @@ Pipelines + Other Objects -> Pipe network
 	// Note don't forget to have neighbors look as well!
 
 	// Default behavior is: one network for all nodes in a given dir
-	for(var/obj/machinery/atmospherics/node as anything in nodes_in_dir(get_dir(src, reference)))
+	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_in_dir(get_dir(src, reference)))
 		if(nodes_to_networks[node] != new_network)
 			qdel(nodes_to_networks[node])
 			nodes_to_networks[node] = new_network
@@ -191,7 +191,7 @@ Pipelines + Other Objects -> Pipe network
 	for(var/node in nodes_to_networks)
 		if(nodes_to_networks[node] == reference)
 			directions |= get_dir(src, node)
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		if(!(direction & directions))
 			continue
 		var/air = air_in_dir(direction)
@@ -217,7 +217,7 @@ Pipelines + Other Objects -> Pipe network
 /proc/base_pipe_initialize_directions(dir, connect_dir_type)
 	if(!dir)
 		return 0
-	if(!(dir in GLOB.cardinal))
+	if(!(dir in global.cardinal))
 		return dir // You're on your own. Used for bent pipes.
 	. = 0
 
@@ -260,8 +260,8 @@ Pipelines + Other Objects -> Pipe network
 // called after being built by hand, before the pipe item or circuit is deleted
 /obj/machinery/atmospherics/proc/build(obj/item/builder)
 	atmos_init()
-	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
 		node.atmos_init()
 	build_network()
-	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
 		node.build_network()

@@ -1,6 +1,6 @@
 /datum/event/ailments/start()
 	var/list/candidates = list()
-	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_)
+	for(var/mob/living/carbon/human/H in global.living_mob_list_)
 		if(H.client && !length(H.stasis_sources))
 			candidates += H
 	if(!length(candidates))

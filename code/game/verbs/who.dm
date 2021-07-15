@@ -8,7 +8,7 @@
 	var/list/Lines = list()
 
 	if(check_rights(R_INVESTIGATE, 0))
-		for(var/client/C in GLOB.clients)
+		for(var/client/C in global.clients)
 			var/entry = "\t[C.key]"
 			if(!C.mob) //If mob is null, print error and skip rest of info for client.
 				entry += " - <font color='red'><i>HAS NO MOB</i></font>"
@@ -49,11 +49,11 @@
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
 			Lines += entry
 	else
-		for(var/client/C in GLOB.clients)
+		for(var/client/C in global.clients)
 			if(!C.is_stealthed())
 				Lines += C.key
 
-	for(var/line in sortList(Lines))
+	for(var/line in sortTim(Lines, /proc/cmp_text_asc))
 		msg += "[line]\n"
 
 	msg += "<b>Total Players: [length(Lines)]</b>"
@@ -68,7 +68,7 @@
 	var/total_staff = 0
 	var/can_investigate = check_rights(R_INVESTIGATE, 0)
 
-	for(var/client/C in GLOB.admins)
+	for(var/client/C in global.admins)
 		var/line = list()
 		if(!can_investigate && C.is_stealthed())
 			continue
@@ -90,13 +90,13 @@
 				line += " - Playing"
 			if(C.is_stealthed())
 				line += " (Stealthed)"
-			if(C.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE)
+			if(C.get_preference_value(/datum/client_preference/show_ooc) == PREF_HIDE)
 				line += " <font color='#002eb8'><b><s>(OOC)</s></b></font>"
-			if(C.get_preference_value(/datum/client_preference/show_looc) == GLOB.PREF_HIDE)
+			if(C.get_preference_value(/datum/client_preference/show_looc) == PREF_HIDE)
 				line += " <font color='#3a9696'><b><s>(LOOC)</s></b></font>"
-			if(C.get_preference_value(/datum/client_preference/show_aooc) == GLOB.PREF_HIDE)
+			if(C.get_preference_value(/datum/client_preference/show_aooc) == PREF_HIDE)
 				line += " <font color='#960018'><b><s>(AOOC)</s></b></font>"
-			if(C.get_preference_value(/datum/client_preference/show_dsay) == GLOB.PREF_HIDE)
+			if(C.get_preference_value(/datum/client_preference/show_dsay) == PREF_HIDE)
 				line += " <font color='#530fad'><b><s>(DSAY)</s></b></font>"
 		line = jointext(line,null)
 		if(check_rights(R_ADMIN,0,C))

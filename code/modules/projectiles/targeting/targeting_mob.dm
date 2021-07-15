@@ -1,5 +1,6 @@
-/mob/living/var/obj/aiming_overlay/aiming
-/mob/living/var/list/aimed = list()
+/mob/living
+	var/obj/aiming_overlay/aiming
+	var/list/aimed_at_by
 
 /mob/verb/toggle_gun_mode()
 	set name = "Toggle Gun Mode"
@@ -31,6 +32,6 @@
 	if(aiming)
 		qdel(aiming)
 		aiming = null
-	aimed.Cut()
+	QDEL_NULL_LIST(aimed_at_by)
 	return ..()
 

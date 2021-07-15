@@ -27,7 +27,7 @@
 	if(!istype(M))
 		return data
 	var/list/roles[0]
-	for(var/role in GLOB.all_mainframe_roles)
+	for(var/role in global.all_mainframe_roles)
 		var/list/rdata[0]
 		rdata["name"] = role
 		rdata["enabled"] = !!(role in M.roles)

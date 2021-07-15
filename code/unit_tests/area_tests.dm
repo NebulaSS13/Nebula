@@ -6,16 +6,16 @@
 	for(var/area/A)
 		if(!A.contents.len)
 			continue
-		if(A.type in GLOB.using_map.area_coherency_test_exempt_areas)
+		if(A.type in global.using_map.area_coherency_test_exempt_areas)
 			continue
-		if(is_path_in_list(A.type, GLOB.using_map.area_coherency_test_exempted_root_areas))
+		if(is_path_in_list(A.type, global.using_map.area_coherency_test_exempted_root_areas))
 			continue
 		var/list/area_turfs = list()
 		for(var/turf/T in A)
 			area_turfs += T
 
 		var/list/sub_area_turfs = list()
-		var/expected_number_of_sub_areas = GLOB.using_map.area_coherency_test_subarea_count[A.type] || 1
+		var/expected_number_of_sub_areas = global.using_map.area_coherency_test_subarea_count[A.type] || 1
 		do
 			var/turf/T = area_turfs[1]
 			sub_area_turfs += T
@@ -44,7 +44,7 @@
 		var/turf/T = turfs_to_check.Pop()
 		. |= T
 		var/turf/neighbour
-		for(var/direction in GLOB.cardinal)
+		for(var/direction in global.cardinal)
 			neighbour = get_step(T, direction)
 			SHOULD_CHECK_TURF(neighbour)
 #ifdef MULTIZAS
@@ -64,7 +64,7 @@
 	for(var/area/A)
 		if(!A.contents.len)
 			continue
-		if(A.type in GLOB.using_map.area_purity_test_exempt_areas)
+		if(A.type in global.using_map.area_purity_test_exempt_areas)
 			continue
 		if(A.name != initial(A.name))
 			log_bad("[log_info_line(A)] has an edited name.")
@@ -83,9 +83,9 @@
 /datum/unit_test/areas_shall_be_used/start_test()
 	var/unused_areas = 0
 	for(var/area_type in subtypesof(/area))
-		if(area_type in GLOB.using_map.area_usage_test_exempted_areas)
+		if(area_type in global.using_map.area_usage_test_exempted_areas)
 			continue
-		if(is_path_in_list(area_type, GLOB.using_map.area_usage_test_exempted_root_areas))
+		if(is_path_in_list(area_type, global.using_map.area_usage_test_exempted_root_areas))
 			continue
 		var/area/located_area = locate(area_type)
 		if(located_area && !located_area.z)

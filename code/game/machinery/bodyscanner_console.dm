@@ -25,21 +25,21 @@
 		icon_state = initial(icon_state)
 
 /obj/machinery/body_scanconsole/proc/FindScanner()
-	for(var/D in GLOB.cardinal)
+	for(var/D in global.cardinal)
 		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, D))
 		if(src.connected)
 			break
-		GLOB.destroyed_event.register(connected, src, .proc/unlink_scanner)
+		events_repository.register(/decl/observ/destroyed, connected, src, .proc/unlink_scanner)
 
 /obj/machinery/body_scanconsole/proc/unlink_scanner(var/obj/machinery/bodyscanner/scanner)	
-	GLOB.destroyed_event.unregister(scanner, src, .proc/unlink_scanner)
+	events_repository.unregister(/decl/observ/destroyed, scanner, src, .proc/unlink_scanner)
 	connected = null
 
 /obj/machinery/body_scanconsole/proc/FindDisplays()
 	for(var/obj/machinery/body_scan_display/D in SSmachines.machinery)
 		if(D.tag in display_tags)
 			connected_displays += D
-			GLOB.destroyed_event.register(D, src, .proc/remove_display)
+			events_repository.register(/decl/observ/destroyed, D, src, .proc/remove_display)
 	return !!connected_displays.len
 
 /obj/machinery/body_scanconsole/attack_hand(mob/user)
@@ -136,7 +136,7 @@
 
 /obj/machinery/body_scanconsole/proc/remove_display(var/obj/machinery/body_scan_display/display)
 	connected_displays -= display
-	GLOB.destroyed_event.unregister(display, src, .proc/remove_display)
+	events_repository.unregister(/decl/observ/destroyed, display, src, .proc/remove_display)
 
 /obj/machinery/body_scanconsole/Destroy()
 	. = ..()

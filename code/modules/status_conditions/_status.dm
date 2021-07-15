@@ -1,4 +1,4 @@
-var/list/status_marker_holders = list()
+var/global/list/status_marker_holders = list()
 
 // Check code/modules/mob/mob_status.dm code/modules/mob/living/living_status.dm 
 // for the procs that check/set/process these status conditions. 

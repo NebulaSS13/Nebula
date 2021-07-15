@@ -65,7 +65,7 @@
 /decl/hierarchy/supply_pack/hydroponics/watertank
 	name = "Liquid - Water tank"
 	contains = list(/obj/structure/reagent_dispensers/watertank)
-	cost = 8
+	cost = 12
 	containertype = /obj/structure/largecrate
 	containername = "water tank crate"
 

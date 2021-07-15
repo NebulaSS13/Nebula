@@ -19,8 +19,7 @@
 /obj/item/frame/attackby(obj/item/W, mob/user)
 	if(isWrench(W))
 		for(var/key in matter)
-			var/decl/material/material = GET_DECL(key)
-			material.place_sheet(get_turf(src), matter[key]/SHEET_MATERIAL_AMOUNT)
+			SSmaterials.create_object(key, get_turf(src), round(matter[key]/SHEET_MATERIAL_AMOUNT))
 		qdel(src)
 		return TRUE
 	. = ..()
@@ -38,7 +37,7 @@
 	else
 		ndir = get_dir(on_wall,usr)
 
-	if (!(ndir in GLOB.cardinal))
+	if (!(ndir in global.cardinal))
 		return
 
 	var/turf/loc = get_turf(usr)

@@ -1,7 +1,7 @@
 #define NEXT_PAGE_ID "__next__"
 #define DEFAULT_CHECK_DELAY 20
 
-GLOBAL_LIST_EMPTY(radial_menus)
+var/global/list/radial_menus = list()
 
 /obj/screen/radial/Destroy()
 	parent = null
@@ -32,7 +32,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 		closeToolTip(usr)
 
 /obj/screen/radial/slice/Click(location, control, params)
-	if(usr.client == parent.current_user)
+	if(parent && usr.client == parent.current_user)
 		if(next_page)
 			parent.next_page()
 		else
@@ -314,14 +314,14 @@ GLOBAL_LIST_EMPTY(radial_menus)
 		for(var/atom/thing in check_locs)
 			check_locs[thing] = thing.loc
 
-	if(GLOB.radial_menus[uniqueid])
+	if(global.radial_menus[uniqueid])
 		if(!no_repeat_close)
-			var/datum/radial_menu/menu = GLOB.radial_menus[uniqueid]
+			var/datum/radial_menu/menu = global.radial_menus[uniqueid]
 			menu.finished = TRUE
 		return
 
 	var/datum/radial_menu/menu = new
-	GLOB.radial_menus[uniqueid] = menu
+	global.radial_menus[uniqueid] = menu
 	if(radius)
 		menu.radius = radius
 	if(istype(custom_check))
@@ -333,7 +333,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 	menu.wait(user, anchor, require_near, check_locs)
 	var/answer = menu.selected_choice
 	qdel(menu)
-	GLOB.radial_menus -= uniqueid
+	global.radial_menus -= uniqueid
 	return answer
 
 #define RADIAL_INPUT(user, choices) show_radial_menu(user, user, choices)

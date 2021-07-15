@@ -94,7 +94,7 @@
 	var/list/warbuds = ..()
 	var/list/branchmates = list()
 	var/mob/living/carbon/human/holdermob = holder.current
-	if(istype(holdermob) && GLOB.using_map && (GLOB.using_map.flags & MAP_HAS_BRANCH))
+	if(istype(holdermob) && global.using_map && (global.using_map.flags & MAP_HAS_BRANCH))
 		for(var/datum/relation/buddy in warbuds)
 			var/mob/living/carbon/human/buddymob = buddy.holder.current
 			if(!istype(buddymob))

@@ -49,7 +49,7 @@
 		_language = GET_DECL(language)
 	if(_language)
 		return _language.get_random_name(gender)
-	return capitalize(pick(gender==FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
+	return capitalize(pick(gender==FEMALE ? global.first_names_female : global.first_names_male)) + " " + capitalize(pick(global.last_names))
 
 /decl/cultural_info/proc/sanitize_name(var/new_name)
 	return sanitizeName(new_name)

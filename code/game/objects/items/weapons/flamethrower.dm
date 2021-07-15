@@ -74,7 +74,7 @@
 		if(tank)
 			tank.dropInto(loc)
 			tank = null
-		new /obj/item/stack/material/rods(get_turf(src))
+		SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), 1, /obj/item/stack/material/rods)
 		qdel(src)
 		return
 

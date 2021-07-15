@@ -17,7 +17,7 @@
 
 /obj/item/modkit/Initialize(ml, material_key)
 	if(!target_bodytype)
-		target_bodytype = GLOB.using_map.default_species
+		target_bodytype = global.using_map.default_species
 	. = ..()
 	
 /obj/item/modkit/afterattack(obj/O, mob/user, proximity)

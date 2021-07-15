@@ -18,7 +18,7 @@
 				var/atom/spawned = new spawner_type(T)
 				if(prob(50))
 					for(var/j = 1 to rand(1, 3))
-						step(spawned, pick(GLOB.cardinal))
+						step(spawned, pick(global.cardinal))
 		qdel(src)
 
 /obj/item/grenade/spawnergrenade/manhacks

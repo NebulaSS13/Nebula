@@ -32,11 +32,11 @@
 /obj/machinery/meter/proc/set_target(atom/new_target)
 	clear_target()
 	target = new_target
-	GLOB.destroyed_event.register(target, src, .proc/clear_target)
+	events_repository.register(/decl/observ/destroyed, target, src, .proc/clear_target)
 
 /obj/machinery/meter/proc/clear_target()
 	if(target)
-		GLOB.destroyed_event.unregister(target, src)
+		events_repository.unregister(/decl/observ/destroyed, target, src)
 		target = null	
 
 /obj/machinery/meter/return_air()

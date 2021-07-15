@@ -1,4 +1,4 @@
-var/list/lunchables_lunches_ = list(
+var/global/list/lunchables_lunches_ = list(
 									/obj/item/chems/food/snacks/sandwich,
 									/obj/item/chems/food/snacks/slice/meatbread/filled,
 									/obj/item/chems/food/snacks/slice/tofubread/filled,
@@ -13,7 +13,7 @@ var/list/lunchables_lunches_ = list(
 									/obj/item/chems/food/snacks/tossedsalad
 								  )
 
-var/list/lunchables_snacks_ = list(
+var/global/list/lunchables_snacks_ = list(
 									/obj/item/chems/food/snacks/donut/jelly,
 									/obj/item/chems/food/snacks/donut/cherryjelly,
 									/obj/item/chems/food/snacks/muffin,
@@ -42,7 +42,7 @@ var/list/lunchables_snacks_ = list(
 									/obj/item/chems/food/snacks/slice/pumpkinpie/filled
 								   )
 
-var/list/lunchables_drinks_ = list(
+var/global/list/lunchables_drinks_ = list(
 									/obj/item/chems/food/drinks/cans/cola,
 									/obj/item/chems/food/drinks/cans/waterbottle,
 									/obj/item/chems/food/drinks/cans/space_mountain_wind,
@@ -57,7 +57,7 @@ var/list/lunchables_drinks_ = list(
 								   )
 
 // This default list is a bit different, it contains items we don't want
-var/list/lunchables_drink_reagents_ = list(
+var/global/list/lunchables_drink_reagents_ = list(
 											/decl/material/liquid/drink/dry_ramen,
 											/decl/material/liquid/drink/hell_ramen,
 											/decl/material/liquid/drink/hot_ramen,
@@ -65,7 +65,7 @@ var/list/lunchables_drink_reagents_ = list(
 										)
 
 // This default list is a bit different, it contains items we don't want
-var/list/lunchables_ethanol_reagents_ = list(
+var/global/list/lunchables_ethanol_reagents_ = list(
 												/decl/material/liquid/ethanol/coffee,
 												/decl/material/liquid/ethanol/hooch,
 												/decl/material/liquid/ethanol/thirteenloko,
@@ -102,7 +102,7 @@ var/list/lunchables_ethanol_reagents_ = list(
 	for(var/lunch in lunches)
 		var/obj/O = lunch
 		.[initial(O.name)] = lunch
-	return sortAssoc(.)
+	return sortTim(., /proc/cmp_text_asc)
 
 /proc/init_lunchable_reagent_list(var/list/banned_reagents, var/reagent_types)
 	. = list()
@@ -111,4 +111,4 @@ var/list/lunchables_ethanol_reagents_ = list(
 			continue
 		var/decl/material/reagent = reagent_type
 		.[initial(reagent.name)] = reagent_type
-	return sortAssoc(.)
+	return sortTim(., /proc/cmp_text_asc)

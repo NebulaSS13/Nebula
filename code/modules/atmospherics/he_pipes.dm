@@ -31,10 +31,10 @@
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/atmos_init()
 	atmos_initalized = TRUE
-	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
 		QDEL_NULL(nodes_to_networks[node])
 	nodes_to_networks = null
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		if(direction & initialize_directions_he) // connect to HE pipes with HE ends in the HE directions
 			for(var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/target in get_step(src,direction))
 				if((target.initialize_directions_he & get_dir(target, src)) && check_connect_types(target, src))

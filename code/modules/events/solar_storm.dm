@@ -30,11 +30,11 @@
 
 /datum/event/solar_storm/proc/radiate()
 	// Note: Too complicated to be worth trying to use the radiation system for this.  Its only in space anyway, so we make an exception in this case.
-	for(var/mob/living/L in GLOB.living_mob_list_)
+	for(var/mob/living/L in global.living_mob_list_)
 		if(L.loc?.atom_flags & ATOM_FLAG_SHIELD_CONTENTS)
 			continue
 		var/turf/T = get_turf(L)
-		if(!T || !(T.z in GLOB.using_map.player_levels))
+		if(!T || !(T.z in global.using_map.player_levels))
 			continue
 
 		if(!istype(T.loc,/area/space) && !isspaceturf(T))	//Make sure you're in a space area or on a space turf

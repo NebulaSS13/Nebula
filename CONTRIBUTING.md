@@ -15,7 +15,9 @@ This is a quick and dirty set of agreed-upon standards for contributions to the 
 - Use constants instead of magic numbers or bare strings, when the values are being used in logic.
 - Do not comment out code, delete it, version control makes keeping it in the codebase pointless.
 - Macros/consts UPPERCASE, types and var names lowercase.
-- Use `global.foo` when referencing global variables (rather than just `foo`, or the now deprecated `GLOB.foo`), for the sake of readability.
+- Use the `/global/` keyword when declaring a globally scoped variable (ie. `var/global/list/foo`).
+- Use the `/static/` keyword, rather than `/global/`, when declaring a static member variable that should be static (`/obj/var/static/foo`).
+- Use `global.foo` when referencing global variables (rather than just `foo`).
 
 ---
 

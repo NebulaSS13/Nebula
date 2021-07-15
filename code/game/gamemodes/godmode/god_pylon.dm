@@ -31,14 +31,14 @@
 		return
 	to_chat(L, "<span class='notice'>You place your hands on \the [src], feeling yourself intune to its vibrations.</span>")
 	intuned += L
-	GLOB.destroyed_event.register(L,src,/obj/structure/deity/pylon/proc/remove_intuned)
+	events_repository.register(/decl/observ/destroyed, L,src,/obj/structure/deity/pylon/proc/remove_intuned)
 
 /obj/structure/deity/pylon/proc/remove_intuned(var/mob/living/L)
 	if(!(L in intuned))
 		return
 	to_chat(L, "<span class='warning'>You no longer feel intuned to \the [src].</span>")
 	intuned -= L
-	GLOB.destroyed_event.unregister(L, src)
+	events_repository.unregister(/decl/observ/destroyed, L, src)
 
 /obj/structure/deity/pylon/OnTopic(var/mob/living/carbon/human/user, var/href_list)
 	if(href_list["vision_jump"])

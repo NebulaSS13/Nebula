@@ -7,7 +7,7 @@
 	var/shift_frequency = 3
 	var/number_of_wormholes = 400
 
-/datum/event/wormholes/setup(affected_z_levels = GLOB.using_map.player_levels)
+/datum/event/wormholes/setup(affected_z_levels = global.using_map.player_levels)
 	if(affected_z_levels)
 		affecting_z = affected_z_levels
 	announceWhen = rand(0, 20)

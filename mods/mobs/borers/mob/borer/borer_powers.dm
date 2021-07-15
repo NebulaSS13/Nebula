@@ -89,8 +89,5 @@
 
 	verbs -= /mob/living/carbon/human/proc/jumpstart
 	visible_message(SPAN_DANGER("With a hideous, rattling moan, [src] shudders back to life!"))
-
 	rejuvenate()
-	restore_blood()
-	fixblood()
 	UpdateLyingBuckledAndVerbStatus()

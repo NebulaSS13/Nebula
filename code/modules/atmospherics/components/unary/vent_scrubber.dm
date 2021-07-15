@@ -67,7 +67,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/Destroy()
 	var/area/A = get_area(src)
 	if(A)
-		GLOB.name_set_event.unregister(A, src, .proc/change_area_name)
+		events_repository.unregister(/decl/observ/name_set, A, src, .proc/change_area_name)
 		A.air_scrub_info -= id_tag
 		A.air_scrub_names -= id_tag
 	. = ..()
@@ -95,7 +95,7 @@
 		var/new_name = "[A.name] Vent Scrubber #[A.air_scrub_names.len+1]"
 		A.air_scrub_names[id_tag] = new_name
 		SetName(new_name)
-		GLOB.name_set_event.register(A, src, .proc/change_area_name)
+		events_repository.register(/decl/observ/name_set, A, src, .proc/change_area_name)
 	. = ..()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
@@ -169,7 +169,7 @@
 			return SPAN_WARNING("You cannot take this [src] apart, turn it off first.")
 		var/turf/T = get_turf(src)
 		var/hidden_pipe_check = FALSE
-		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+		for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
 			if(node.level)
 				hidden_pipe_check = TRUE
 				break

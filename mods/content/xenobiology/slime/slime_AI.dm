@@ -121,7 +121,7 @@
 		if(leader)
 			step_to(body, get_dir(body, leader))
 		else if(prob(hunger ? 50 : 33))
-			body.SelfMove(pick(GLOB.cardinal))
+			body.SelfMove(pick(global.cardinal))
 
 /datum/ai/slime/proc/handle_core_logic()
 

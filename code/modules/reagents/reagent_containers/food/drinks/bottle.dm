@@ -205,7 +205,7 @@
 
 			stop_spin_bottle = TRUE
 			SpinAnimation(speed, loops, pick(0, 1)) //SpinAnimation(speed, loops, clockwise, segments)
-			transform = turn(matrix(), dir2angle(pick(GLOB.alldirs)))
+			transform = turn(matrix(), dir2angle(pick(global.alldirs)))
 			sleep(sleep_not_stacking) //Not stacking
 			stop_spin_bottle = FALSE
 
@@ -227,6 +227,10 @@
 	sharp = 1
 	edge = 0
 	var/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
+
+/obj/item/broken_bottle/Initialize(ml, material_key)
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_SCALPEL = TOOL_QUALITY_BAD))
 
 /obj/item/broken_bottle/attack(mob/living/carbon/M, mob/living/carbon/user)
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
@@ -508,7 +512,7 @@
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/wine/premium, 100)
 	var/namepick = pick("Calumont","Sciacchemont","Recioto","Torcalota")
-	var/agedyear = rand(GLOB.using_map.game_year - 150, GLOB.using_map.game_year)
+	var/agedyear = rand(global.using_map.game_year - 150, global.using_map.game_year)
 	name = "Chateau [namepick] De Blanc"
 	desc += " This bottle is marked as [agedyear] Vintage."
 

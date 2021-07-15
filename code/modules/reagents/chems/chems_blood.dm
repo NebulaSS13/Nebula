@@ -27,7 +27,7 @@
 /decl/material/liquid/blood/initialize_data(var/newdata)
 	. = ..() || list()
 	if(.)
-		.["species"] = .["species"] || GLOB.using_map.default_species
+		.["species"] = .["species"] || global.using_map.default_species
 
 /decl/material/liquid/blood/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)	
 	var/list/data = REAGENT_DATA(reagents, type)

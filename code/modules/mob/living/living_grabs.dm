@@ -19,9 +19,24 @@
 	return TRUE
 
 /mob/living/proc/make_grab(var/atom/movable/target, var/grab_tag = /decl/grab/simple)
+
+	// Resolve to the 'topmost' atom in the buckle chain, as grabbing someone buckled to something tends to prevent further interaction.
+	var/atom/movable/original_target = target
+	var/mob/grabbing_mob = target
+	while(istype(grabbing_mob) && grabbing_mob.buckled)
+		if(grabbing_mob.buckled == grabbing_mob) // Are circular buckles like this even possible?
+			break
+		grabbing_mob = grabbing_mob.buckled
+	if(grabbing_mob && grabbing_mob != original_target)
+		target = grabbing_mob
+		to_chat(src, SPAN_WARNING("As \the [original_target] is buckled to \the [target], you try to grab that instead!"))
+
+	if(!istype(target))
+		return
+
 	face_atom(target)
-	if(target != src && ismob(target))
-		to_chat(target, SPAN_WARNING("\The [src] tries to grab you!"))
+	if(original_target != src && ismob(original_target))
+		to_chat(original_target, SPAN_WARNING("\The [src] tries to grab you!"))
 		to_chat(src, SPAN_WARNING("You try to grab \the [target]!"))
 	if(ispath(grab_tag, /decl/grab) && can_grab(target, zone_sel?.selecting) && target.can_be_grabbed(src, zone_sel?.selecting))
 		var/obj/item/grab/grab = new(src, target, grab_tag)

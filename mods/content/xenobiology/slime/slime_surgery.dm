@@ -31,11 +31,7 @@
 /decl/surgery_step/slime/cut_flesh
 	name = "Make incision in slime"
 	description = "This procedure begins slime core removal surgery by cutting an incision open."
-	allowed_tools = list(
-		/obj/item/scalpel = 100,
-		/obj/item/knife = 75,
-		/obj/item/shard = 50
-	)
+	allowed_tools = list(TOOL_SCALPEL = 100)
 	min_duration = 5
 	max_duration = 2 SECONDS
 
@@ -61,11 +57,7 @@
 /decl/surgery_step/slime/cut_innards
 	name = "Dissect innards"
 	description = "This procedure disconnects slime cores from the innards."
-	allowed_tools = list(
-		/obj/item/scalpel = 100,
-		/obj/item/knife = 75,
-		/obj/item/shard = 50
-	)
+	allowed_tools = list(TOOL_SCALPEL = 100)
 	min_duration = 5
 	max_duration = 2 SECONDS
 
@@ -92,10 +84,8 @@
 	name = "Remove slime core"
 	description = "This procedure completely separates a slime cores and allows it to be removed."
 	allowed_tools = list(
-		/obj/item/scalpel/manager = 100,
-		/obj/item/circular_saw = 100,
-		/obj/item/knife = 75,
-		/obj/item/hatchet = 75
+		TOOL_SAW = 100,
+		TOOL_HATCHET = 75
 	)
 	min_duration = 1 SECOND
 	max_duration = 3 SECONDS

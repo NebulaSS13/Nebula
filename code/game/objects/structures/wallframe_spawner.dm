@@ -45,7 +45,7 @@
 		var/obj/structure/window/new_win = new win_path(loc)
 		handle_window_spawn(new_win)
 	else
-		for (var/dir in GLOB.cardinal)
+		for (var/dir in global.cardinal)
 			var/turf/T = get_step(src, dir)
 			var/obj/effect/wallframe_spawn/other = locate(type) in T
 			if(!other)
@@ -74,7 +74,7 @@
 		if(!other.activated) other.activate()
 
 /obj/effect/wallframe_spawn/proc/handle_frame_spawn(var/obj/structure/wall_frame/F)
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		var/turf/T = get_step(src, direction)
 		for(var/obj/O in T)
 			if( istype(O, /obj/machinery/door))

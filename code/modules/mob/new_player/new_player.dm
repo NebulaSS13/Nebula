@@ -28,7 +28,7 @@
 		return // Not ready yet.
 	var/output = list()
 	output += "<div align='center'>"
-	output += "<i>[GLOB.using_map.get_map_info()]</i>"
+	output += "<i>[global.using_map.get_map_info()]</i>"
 	output +="<hr>"
 	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A> "
 
@@ -66,7 +66,7 @@
 
 	output += "</div>"
 
-	panel = new(src, "Welcome","Welcome to [GLOB.using_map.full_name]", 560, 280, src)
+	panel = new(src, "Welcome","Welcome to [global.using_map.full_name]", 560, 280, src)
 	panel.set_window_options("can_close=0")
 	panel.set_content(JOINTEXT(output))
 	panel.open()
@@ -91,7 +91,7 @@
 			stat("Players: [totalPlayers]", "Players Ready: [totalPlayersReady]")
 			totalPlayers = 0
 			totalPlayersReady = 0
-			for(var/mob/new_player/player in GLOB.player_list)
+			for(var/mob/new_player/player in global.player_list)
 				var/highjob
 				if(player.client && player.client.prefs && player.client.prefs.job_high)
 					highjob = " as [player.client.prefs.job_high]"
@@ -129,7 +129,7 @@
 			var/mob/observer/ghost/observer = new()
 
 			spawning = 1
-			sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo
+			sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = sound_channels.lobby_channel))// MAD JAMS cant last forever yo
 
 
 			observer.started_as_observer = 1
@@ -145,10 +145,10 @@
 			if(isnull(client.holder))
 				announce_ghost_joinleave(src)
 
-			var/mob/living/carbon/human/dummy/mannequin = new()
-			client.prefs.dress_preview_mob(mannequin)
-			observer.set_appearance(mannequin)
-			qdel(mannequin)
+			var/mob/living/carbon/human/dummy/mannequin = get_mannequin(client.ckey)
+			if(mannequin)
+				client.prefs.dress_preview_mob(mannequin)
+				observer.set_appearance(mannequin)
 
 			if(client.prefs.be_random_name)
 				client.prefs.real_name = client.prefs.get_random_name()
@@ -314,7 +314,7 @@
 		return
 
 	SSticker.mode.handle_latejoin(character)
-	GLOB.universe.OnPlayerLatejoin(character)
+	global.universe.OnPlayerLatejoin(character)
 	spawnpoint.after_join(character)
 	if(job.create_record)
 		if(character.mind.assigned_role != "Robot")
@@ -334,7 +334,8 @@
 		if(character.mind.role_alt_title)
 			rank = character.mind.role_alt_title
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
-		GLOB.global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived"].", "Arrivals Announcement Computer")
+		var/obj/item/radio/announcer = get_global_announcer()
+		announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived"].", "Arrivals Announcement Computer")
 
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
@@ -355,7 +356,7 @@
 	dat += "Choose from the following open/valid positions:<br>"
 	dat += "<a href='byond://?src=\ref[src];invalid_jobs=1'>[show_invalid_jobs ? "Hide":"Show"] unavailable jobs</a><br>"
 	dat += "<table>"
-	dat += "<tr><td colspan = 3><b>[GLOB.using_map.station_name]:</b></td></tr>"
+	dat += "<tr><td colspan = 3><b>[global.using_map.station_name]:</b></td></tr>"
 
 	// MAIN MAP JOBS
 	var/list/job_summaries = list()
@@ -440,7 +441,7 @@
 	if(!spawn_turf)
 		var/datum/job/job = SSjobs.get_by_title(mind.assigned_role)
 		if(!job)
-			job = SSjobs.get_by_title(GLOB.using_map.default_assistant_title)
+			job = SSjobs.get_by_title(global.using_map.default_job_title)
 		var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(client, client.prefs.ranks[job.title])
 		spawn_turf = pick(spawnpoint.turfs)
 
@@ -458,21 +459,22 @@
 
 	new_character.lastarea = get_area(spawn_turf)
 
-	if(GLOB.random_players)
-		var/decl/species/current_species = get_species_by_key(client.prefs.species || GLOB.using_map.default_species)
+	if(global.random_players)
+		var/decl/species/current_species = get_species_by_key(client.prefs.species || global.using_map.default_species)
 		var/decl/pronouns/pronouns = pick(current_species.available_pronouns)
 		client.prefs.gender = pronouns.name
 		client.prefs.real_name = client.prefs.get_random_name()
 		client.prefs.randomize_appearance_and_body_for(new_character)
 	client.prefs.copy_to(new_character)
 
-	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo
+	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = sound_channels.lobby_channel))// MAD JAMS cant last forever yo
 
 	if(mind)
 		mind.active = 0 //we wish to transfer the key manually
 		mind.original = new_character
-		if(client.prefs.memory)
-			mind.StoreMemory(client.prefs.memory)
+		var/memory = client.prefs.records[PREF_MEM_RECORD]
+		if(memory)
+			mind.StoreMemory(memory)
 		if(client.prefs.relations.len)
 			for(var/T in client.prefs.relations)
 				var/TT = matchmaker.relation_types[T]
@@ -487,7 +489,7 @@
 	new_character.sync_organ_dna()
 	if(client.prefs.disabilities)
 		// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
-		new_character.dna.SetSEState(GLOB.GLASSESBLOCK,1,0)
+		new_character.dna.SetSEState(global.GLASSESBLOCK,1,0)
 		new_character.disabilities |= NEARSIGHTED
 
 	// Do the initial caching of the player's body icons.
@@ -530,7 +532,7 @@
 	if(client.prefs.species)
 		chosen_species = get_species_by_key(client.prefs.species)
 	if(!chosen_species || !check_species_allowed(chosen_species, 0))
-		return GLOB.using_map.default_species
+		return global.using_map.default_species
 	return chosen_species.name
 
 /mob/new_player/is_ready()
@@ -558,9 +560,9 @@
 	set name = "Play Different Lobby Track"
 	set category = "OOC"
 
-	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_NO)
+	if(get_preference_value(/datum/client_preference/play_lobby_music) == PREF_NO)
 		return
-	var/decl/music_track/new_track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
+	var/decl/music_track/new_track = global.using_map.get_lobby_track(global.using_map.lobby_track.type)
 	if(new_track)
 		new_track.play_to(src)
 

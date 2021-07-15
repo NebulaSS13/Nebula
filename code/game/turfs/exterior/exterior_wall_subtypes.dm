@@ -16,6 +16,8 @@
 		. = SSmaterials.weighted_minerals_rich
 
 /turf/exterior/wall/random/Initialize()
+	if(!strata)
+		strata = SSmaterials.get_strata(src)
 	if(isnull(reinf_material))
 		var/default_mineral_list = get_weighted_mineral_list()
 		if(LAZYLEN(default_mineral_list))

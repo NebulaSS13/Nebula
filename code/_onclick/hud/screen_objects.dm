@@ -367,5 +367,6 @@
 	mouse_over_pointer = MOUSE_HAND_POINTER
 
 /obj/screen/setup_preview/bg/Click(params)
-	pref?.bgstate = next_in_list(pref.bgstate, pref.bgstate_options)
-	pref?.update_preview_icon()
+	if(pref)
+		pref.bgstate = next_in_list(pref.bgstate, pref.bgstate_options)
+		pref.update_preview_icon()

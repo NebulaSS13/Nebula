@@ -1,6 +1,6 @@
 #define TANK_IDEAL_PRESSURE 1015 //Arbitrary.
 
-var/tank_bomb_severity = 1
+var/global/tank_bomb_severity = 1
 #define TANK_BOMB_DVSTN_FACTOR (0.15 * global.tank_bomb_severity)
 #define TANK_BOMB_HEAVY_FACTOR (0.35 * global.tank_bomb_severity)
 #define TANK_BOMB_LIGHT_FACTOR (0.80 * global.tank_bomb_severity)
@@ -17,7 +17,7 @@ var/tank_bomb_severity = 1
 			global.tank_bomb_severity = Clamp(next_input, 0, MAX_TANK_BOMB_SEVERITY)
 			log_and_message_admins("[key_name_admin(mob)] has set the tank bomb severity value to [global.tank_bomb_severity].", mob)
 
-var/list/global/tank_gauge_cache = list()
+var/global/list/global/tank_gauge_cache = list()
 
 /obj/item/tank
 	name = "tank"
@@ -172,7 +172,7 @@ var/list/global/tank_gauge_cache = list()
 			to_chat(user, "<span class='notice'>You begin attaching the assembly to \the [src].</span>")
 			if(do_after(user, 50, src))
 				to_chat(user, "<span class='notice'>You finish attaching the assembly to \the [src].</span>")
-				GLOB.bombers += "[key_name(user)] attached an assembly to a wired [src]. Temp: [air_contents.temperature-T0C]"
+				global.bombers += "[key_name(user)] attached an assembly to a wired [src]. Temp: [air_contents.temperature-T0C]"
 				log_and_message_admins("attached an assembly to a wired [src]. Temp: [air_contents.temperature-T0C]", user)
 				assemble_bomb(W,user)
 			else
@@ -190,7 +190,7 @@ var/list/global/tank_gauge_cache = list()
 					valve_welded = 1
 					leaking = 0
 				else
-					GLOB.bombers += "[key_name(user)] attempted to weld a [src]. [air_contents.temperature-T0C]"
+					global.bombers += "[key_name(user)] attempted to weld a [src]. [air_contents.temperature-T0C]"
 					log_and_message_admins("attempted to weld a [src]. [air_contents.temperature-T0C]", user)
 					if(WT.welding)
 						to_chat(user, "<span class='danger'>You accidentally rake \the [W] across \the [src]!</span>")
@@ -274,7 +274,7 @@ var/list/global/tank_gauge_cache = list()
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/item/tank/Topic(user, href_list, state = GLOB.inventory_state)
+/obj/item/tank/Topic(user, href_list, state = global.inventory_topic_state)
 	..()
 
 /obj/item/tank/OnTopic(user, href_list)

@@ -8,8 +8,6 @@
 //			/old_see_invisible: see_invisible before the change
 //			/new_see_invisible: see_invisible after the change
 
-GLOBAL_DATUM_INIT(see_invisible_set_event, /decl/observ/see_invisible_set, new)
-
 /decl/observ/see_invisible_set
 	name = "See Invisible Set"
 	expected_type = /mob
@@ -22,4 +20,4 @@ GLOBAL_DATUM_INIT(see_invisible_set_event, /decl/observ/see_invisible_set, new)
 	var/old_see_invisible = see_invisible
 	if(old_see_invisible != new_see_invisible)
 		see_invisible = new_see_invisible
-		GLOB.see_invisible_set_event.raise_event(src, old_see_invisible, new_see_invisible)
+		events_repository.raise_event(/decl/observ/see_invisible_set, src, old_see_invisible, new_see_invisible)

@@ -61,7 +61,7 @@
 /decl/special_role/wizard/update_antag_mob(var/datum/mind/wizard)
 	..()
 	wizard.StoreMemory("<B>Remember:</B> do not forget to prepare your spells.", /decl/memory_options/system)
-	wizard.current.real_name = "[pick(GLOB.wizard_first)] [pick(GLOB.wizard_second)]"
+	wizard.current.real_name = "[pick(global.wizard_first)] [pick(global.wizard_second)]"
 	wizard.current.SetName(wizard.current.real_name)
 
 /decl/special_role/wizard/equip(var/mob/living/carbon/human/wizard_mob)

@@ -32,7 +32,7 @@
 		if(passed[machine.type] || failed[machine.type])
 			continue
 		var/path = machine.base_type || machine.type
-		var/circuit_type = GLOB.machine_path_to_circuit_type[path]
+		var/circuit_type = get_circuit_by_build_path(path)
 		if(circuit_type && !machine.construct_state)
 			failed[machine.type] = TRUE
 			log_bad("[log_info_line(machine)] had an associated circuit of type [circuit_type] but no construction state.")

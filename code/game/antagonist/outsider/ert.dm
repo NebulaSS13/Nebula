@@ -30,13 +30,13 @@
 
 /decl/special_role/ert/Initialize()
 	. = ..()
-	leader_welcome_text = "As leader of the Emergency Response Team, you answer only to [GLOB.using_map.company_name], and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
-	welcome_text = "As member of the Emergency Response Team, you answer only to your leader and [GLOB.using_map.company_name] officials."
+	leader_welcome_text = "As leader of the Emergency Response Team, you answer only to [global.using_map.company_name], and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
+	welcome_text = "As member of the Emergency Response Team, you answer only to your leader and [global.using_map.company_name] officials."
 
 /decl/special_role/ert/greet(var/datum/mind/player)
 	if(!..())
 		return
-	to_chat(player.current, "The Emergency Response Team works for Asset Protection; your job is to protect [GLOB.using_map.company_name]'s ass-ets. There is a code red alert on [station_name()], you are tasked to go and fix the problem.")
+	to_chat(player.current, "The Emergency Response Team works for Asset Protection; your job is to protect [global.using_map.company_name]'s ass-ets. There is a code red alert on [station_name()], you are tasked to go and fix the problem.")
 	to_chat(player.current, "You should first gear up and discuss a plan with your team. More members may be joining, don't move out before you're ready.")
 
 //Equip proc has been moved to the map specific folders.

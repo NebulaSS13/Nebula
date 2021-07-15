@@ -193,3 +193,6 @@
 
 /mob/living/proc/handle_hud_icons_health()
 	return
+
+/mob/living/proc/get_any_good_language(set_default=FALSE)
+	return get_default_language()

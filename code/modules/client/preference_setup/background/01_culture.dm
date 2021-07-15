@@ -54,7 +54,7 @@
 		var/list/_cultures
 		GET_ALLOWED_VALUES(_cultures, token)
 		if(!LAZYLEN(_cultures))
-			pref.cultural_info[token] = GLOB.using_map.default_cultural_info[token]
+			pref.cultural_info[token] = global.using_map.default_cultural_info[token]
 		else
 			var/current_value = pref.cultural_info[token]
 			if(!current_value || !_cultures[current_value])
@@ -70,20 +70,18 @@
 			if(!pref.real_name)
 				pref.real_name = check.get_random_name(preference_mob(), pref.gender)
 
-/datum/category_item/player_setup_item/background/culture/load_character(var/savefile/S)
+/datum/category_item/player_setup_item/background/culture/load_character(datum/pref_record_reader/R)
 	for(var/token in tokens)
-		var/load_val
-		from_file(S[token], load_val)
-		pref.cultural_info[token] = load_val
+		pref.cultural_info[token] = R.read(token)
 
-/datum/category_item/player_setup_item/background/culture/save_character(var/savefile/S)
+/datum/category_item/player_setup_item/background/culture/save_character(datum/pref_record_writer/W)
 	for(var/token in tokens)
 		var/entry = pref.cultural_info[token]
 		if(entry)
 			if(ispath(entry, /decl/cultural_info))
 				var/decl/cultural_info/culture = GET_DECL(entry)
 				entry = culture.name
-		to_file(S[token], entry)
+		W.write(token, entry)
 
 /datum/category_item/player_setup_item/background/culture/content()
 	. = list()

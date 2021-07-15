@@ -22,16 +22,14 @@
 			var/decl/backpack_outfit/backpack_outfit = bos[bo]
 			backpacks_by_name[backpack_outfit.name] = backpack_outfit
 
-/datum/category_item/player_setup_item/physical/equipment/load_character(var/savefile/S)
-	var/load_backbag
-
-	from_file(S["all_underwear"], pref.all_underwear)
-	from_file(S["all_underwear_metadata"], pref.all_underwear_metadata)
-	from_file(S["backpack"], load_backbag)
-	from_file(S["backpack_metadata"], pref.backpack_metadata)
+/datum/category_item/player_setup_item/physical/equipment/load_character(datum/pref_record_reader/R)
+	pref.all_underwear =          R.read("all_underwear")
+	pref.all_underwear_metadata = R.read("all_underwear_metadata")
+	pref.backpack_metadata =      R.read("backpack_metadata")
+	pref.starting_cash_choice =   R.read("starting_cash_choice")
+	var/load_backbag =            R.read("backpack")
 	pref.backpack = backpacks_by_name[load_backbag] || get_default_outfit_backpack()
 
-	from_file(S["starting_cash_choice"], pref.starting_cash_choice)
 	var/list/all_cash_choices = decls_repository.get_decls_of_type(/decl/starting_cash_choice)
 	for(var/ctype in all_cash_choices)
 		var/decl/starting_cash_choice/cash_choice = all_cash_choices[ctype]
@@ -39,20 +37,20 @@
 			pref.starting_cash_choice = ctype
 			break
 
-/datum/category_item/player_setup_item/physical/equipment/save_character(var/savefile/S)
-	to_file(S["all_underwear"], pref.all_underwear)
-	to_file(S["all_underwear_metadata"], pref.all_underwear_metadata)
-	to_file(S["backpack"], pref.backpack.name)
-	to_file(S["backpack_metadata"], pref.backpack_metadata)
-	
+/datum/category_item/player_setup_item/physical/equipment/save_character(datum/pref_record_writer/W)
+	W.write("all_underwear",          pref.all_underwear)
+	W.write("all_underwear_metadata", pref.all_underwear_metadata)
+	W.write("backpack",               pref.backpack.name)
+	W.write("backpack_metadata",      pref.backpack_metadata)
+
 	var/decl/starting_cash_choice/cash_choice = GET_DECL(pref.starting_cash_choice)
-	to_file(S["starting_cash_choice"], lowertext(cash_choice.name))
+	W.write("starting_cash_choice", lowertext(cash_choice.name))
 
 /datum/category_item/player_setup_item/physical/equipment/sanitize_character()
 	if(!istype(pref.all_underwear))
 		pref.all_underwear = list()
 
-		for(var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
+		for(var/datum/category_group/underwear/WRC in global.underwear.categories)
 			for(var/datum/category_item/underwear/WRI in WRC.items)
 				if(WRI.is_default(pref.gender ? pref.gender : MALE))
 					pref.all_underwear[WRC.name] = WRI.name
@@ -66,7 +64,7 @@
 		pref.all_underwear_metadata = list()
 
 	for(var/underwear_category in pref.all_underwear)
-		var/datum/category_group/underwear/UWC = GLOB.underwear.categories_by_name[underwear_category]
+		var/datum/category_group/underwear/UWC = global.underwear.categories_by_name[underwear_category]
 		if(!UWC)
 			pref.all_underwear -= underwear_category
 		else
@@ -98,12 +96,12 @@
 				tweak_metadata["[tweak]"] = tweak.validate_metadata(metadata)
 
 	if(!ispath(pref.starting_cash_choice, /decl/starting_cash_choice))
-		pref.starting_cash_choice = GLOB.using_map.default_starting_cash_choice
+		pref.starting_cash_choice = global.using_map.default_starting_cash_choice
 
 /datum/category_item/player_setup_item/physical/equipment/content()
 	. = list()
 	. += "<b>Equipment:</b><br>"
-	for(var/datum/category_group/underwear/UWC in GLOB.underwear.categories)
+	for(var/datum/category_group/underwear/UWC in global.underwear.categories)
 		var/item_name = (pref.all_underwear && pref.all_underwear[UWC.name]) ? pref.all_underwear[UWC.name] : "None"
 		. += "[UWC.name]: <a href='?src=\ref[src];change_underwear=[UWC.name]'><b>[item_name]</b></a>"
 
@@ -156,7 +154,7 @@
 
 /datum/category_item/player_setup_item/physical/equipment/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["change_underwear"])
-		var/datum/category_group/underwear/UWC = GLOB.underwear.categories_by_name[href_list["change_underwear"]]
+		var/datum/category_group/underwear/UWC = global.underwear.categories_by_name[href_list["change_underwear"]]
 		if(!UWC)
 			return TOPIC_NOACTION
 		var/datum/category_item/underwear/selected_underwear = input(user, "Choose underwear:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.all_underwear[UWC.name]) as null|anything in UWC.items
@@ -195,26 +193,3 @@
 		pref.starting_cash_choice = next_in_list(pref.starting_cash_choice, typesof(/decl/starting_cash_choice))
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	return ..()
-
-/datum/category_item/player_setup_item/physical/equipment/update_setup(var/savefile/preferences, var/savefile/character)
-	if(preferences["version"]  <= 16)
-		var/list/old_index_to_backpack_type = list(
-			/decl/backpack_outfit/nothing,
-			/decl/backpack_outfit/backpack,
-			/decl/backpack_outfit/satchel,
-			/decl/backpack_outfit/messenger_bag,
-			/decl/backpack_outfit/satchel,
-			/decl/backpack_outfit/satchel,
-			/decl/backpack_outfit/pocketbook
-		)
-
-		var/old_index
-		from_file(character["backbag"], old_index)
-
-		if(old_index > 0 && old_index <= old_index_to_backpack_type.len)
-			pref.backpack = GET_DECL(old_index_to_backpack_type[old_index])
-		else
-			pref.backpack = get_default_outfit_backpack()
-
-		to_file(character["backpack"], pref.backpack.name)
-		return 1

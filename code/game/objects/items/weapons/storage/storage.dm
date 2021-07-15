@@ -30,7 +30,8 @@
 	var/open_sound = null
 
 /obj/item/storage/Destroy()
-	QDEL_NULL(storage_ui)
+	if(istype(storage_ui))
+		QDEL_NULL(storage_ui)
 	. = ..()
 
 /obj/item/storage/check_mousedrop_adjacency(var/atom/over, var/mob/user)

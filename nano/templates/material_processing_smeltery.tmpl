@@ -52,19 +52,24 @@
     {{else}}
         {{:helper.link("Allow alloying", null, { 'toggle_alloying' : 1}, null, null)}}
     {{/if}}
+    {{if data.show_all_mats}}
+        {{:helper.link("Hide uncommon materials", null, { 'toggle_show_mats' : 1}, null, null)}}
+    {{else}}
+        {{:helper.link("Show uncommon materials", null, { 'toggle_show_mats' : 1}, null, null)}}
+    {{/if}}
 
-    <div class = 'item'>
-        {{for data.materials}}
-        <div class = 'itemLabel'>
-            {{:value.label}}
+    {{for data.materials}}
+        <div class = 'item'>
+            <div class = 'itemLabel'>
+                {{:value.label}}
+            </div>
+            <div class = 'itemContent'>
+            {{if value.casting == 1}}
+                {{:helper.link("Stop casting", null, { 'toggle_casting' : value.key}, null, null)}}
+            {{else}}
+                {{:helper.link("Begin casting", null, { 'toggle_casting' : value.key}, null, null)}}
+            {{/if}}
+            </div>
         </div>
-        <div class = 'itemContent'>
-        {{if value.casting == 1}}
-            {{:helper.link("Stop casting", null, { 'toggle_casting' : value.key}, null, null)}}
-        {{else}}
-            {{:helper.link("Begin casting", null, { 'toggle_casting' : value.key}, null, null)}}
-        {{/if}}
-        </div>
-        {{/for}}
-    </div>
+    {{/for}}
 </div>

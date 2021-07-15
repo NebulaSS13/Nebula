@@ -221,3 +221,12 @@
 /decl/stock_part_preset/radio/basic_transmitter/button/atmosia
 	transmit_on_change = list("valve_toggle" = /decl/public_access/public_variable/button_active)
 	frequency = FUEL_FREQ
+
+// Vent control
+/obj/machinery/button/toggle/engine
+	name = "engine vent control"
+	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/button/engine = 1)
+
+/decl/stock_part_preset/radio/basic_transmitter/button/engine
+	transmit_on_change = list("power_toggle" = /decl/public_access/public_variable/button_active)
+	frequency = ATMOS_ENGINE_FREQ

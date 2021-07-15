@@ -1,26 +1,21 @@
-var/decl/appearance_manager/appearance_manager = new()
-
 /decl/appearance_manager
 	var/list/appearances_
-	var/list/appearance_handlers_
 
 /decl/appearance_manager/New()
 	..()
 	appearances_ = list()
-	appearance_handlers_ = list()
-	for(var/entry in subtypesof(/decl/appearance_handler))
-		appearance_handlers_[entry] += new entry()
 
 /decl/appearance_manager/proc/get_appearance_handler(var/handler_type)
-	return appearance_handlers_[handler_type]
+	var/list/appearance_handlers = decls_repository.get_decls_of_subtype(/decl/appearance_handler)
+	return appearance_handlers[handler_type]
 
 /decl/appearance_manager/proc/add_appearance(var/mob/viewer, var/datum/appearance_data/ad)
 	var/PriorityQueue/pq = appearances_[viewer]
 	if(!pq)
 		pq = new/PriorityQueue(/proc/cmp_appearance_data)
 		appearances_[viewer] = pq
-		GLOB.logged_in_event.register(viewer, src, /decl/appearance_manager/proc/apply_appearance_images)
-		GLOB.destroyed_event.register(viewer, src, /decl/appearance_manager/proc/remove_appearances)
+		events_repository.register(/decl/observ/logged_in, viewer, src, /decl/appearance_manager/proc/apply_appearance_images)
+		events_repository.register(/decl/observ/destroyed, viewer, src, /decl/appearance_manager/proc/remove_appearances)
 	pq.Enqueue(ad)
 	reset_appearance_images(viewer)
 
@@ -30,8 +25,8 @@ var/decl/appearance_manager/appearance_manager = new()
 	if(viewer.client)
 		viewer.client.images -= ad.images
 	if(!pq.Length())
-		GLOB.logged_in_event.unregister(viewer, src, /decl/appearance_manager/proc/apply_appearance_images)
-		GLOB.destroyed_event.register(viewer, src, /decl/appearance_manager/proc/remove_appearances)
+		events_repository.unregister(/decl/observ/logged_in, viewer, src, /decl/appearance_manager/proc/apply_appearance_images)
+		events_repository.register(/decl/observ/destroyed, viewer, src, /decl/appearance_manager/proc/remove_appearances)
 		appearances_ -= viewer
 
 /decl/appearance_manager/proc/remove_appearances(var/mob/viewer)

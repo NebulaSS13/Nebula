@@ -179,6 +179,11 @@
 		else
 			do_animate("deny")
 
+/obj/machinery/door/physically_destroyed(skip_qdel)
+	SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 2)
+	SSmaterials.create_object(/decl/material/solid/metal/steel, loc, 3, /obj/item/stack/material/rods)
+	. = ..()
+
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
 	..()
 
@@ -191,8 +196,7 @@
 			visible_message("<span class='danger'>\The [src.name] disintegrates!</span>")
 			switch (Proj.damage_type)
 				if(BRUTE)
-					new /obj/item/stack/material/steel(src.loc, 2)
-					new /obj/item/stack/material/rods(src.loc, 3)
+					physically_destroyed()
 				if(BURN)
 					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
 			qdel(src)
@@ -470,7 +474,7 @@
 /obj/machinery/door/proc/update_connections(var/propagate = 0)
 	var/dirs = 0
 
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		var/turf/T = get_step(src, direction)
 		var/success = 0
 
@@ -509,7 +513,7 @@
 
 /obj/machinery/door/get_auto_access()
 	var/area/fore = access_area_by_dir(dir)
-	var/area/aft = access_area_by_dir(GLOB.reverse_dir[dir])
+	var/area/aft = access_area_by_dir(global.reverse_dir[dir])
 	fore = fore || aft
 	aft = aft || fore
 
