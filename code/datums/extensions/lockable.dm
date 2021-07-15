@@ -60,8 +60,8 @@
 	if(href_list["key"] == "E")
 		if(!l_set && !l_setshort)
 			// We're in lock set mode.
-			if(length(code) < Floor(max_code_length * 0.5) || length(code) > max_code_length)
-				error = "Incorrect code length. Must be between [Floor(max_code_length * 0.5)] and [max_code_length] numbers long."
+			if(length(code) < FLOOR(max_code_length * 0.5) || length(code) > max_code_length)
+				error = "Incorrect code length. Must be between [FLOOR(max_code_length * 0.5)] and [max_code_length] numbers long."
 				return TOPIC_REFRESH
 			l_code = code
 			code = null

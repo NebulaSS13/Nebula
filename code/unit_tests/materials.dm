@@ -48,9 +48,9 @@
 					if(length(product.matter))
 						failed = "unsupplied material types"
 				else if(recipe.use_material && (product.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
-					failed = "excessive base material ([recipe.req_amount]/[ceil(product.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT)])"
+					failed = "excessive base material ([recipe.req_amount]/[CEILING(product.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT)])"
 				else if(recipe.use_reinf_material && (product.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
-					failed = "excessive reinf material ([recipe.req_amount]/[ceil(product.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT)])"
+					failed = "excessive reinf material ([recipe.req_amount]/[CEILING(product.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT)])"
 				else
 					for(var/mat in product.matter)
 						if(mat != recipe.use_material && mat != recipe.use_reinf_material)

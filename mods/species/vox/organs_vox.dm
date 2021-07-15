@@ -108,7 +108,7 @@
 
 				// Process it.
 				if(can_digest_matter[mat])
-					owner.adjust_nutrition(max(1, Floor(digested/100)))
+					owner.adjust_nutrition(max(1, FLOOR(digested/100)))
 					updated_stacks = TRUE
 				else if(can_process_matter[mat])
 					LAZYDISTINCTADD(check_materials, mat)
@@ -120,7 +120,7 @@
 			if(M && stored_matter[mat] >= SHEET_MATERIAL_AMOUNT)
 
 				// Remove as many sheets as possible from the gizzard.
-				var/sheets = Floor(stored_matter[mat]/SHEET_MATERIAL_AMOUNT)
+				var/sheets = FLOOR(stored_matter[mat]/SHEET_MATERIAL_AMOUNT)
 				stored_matter[mat] -= SHEET_MATERIAL_AMOUNT * sheets
 				if(stored_matter[mat] <= 0)
 					stored_matter -= mat

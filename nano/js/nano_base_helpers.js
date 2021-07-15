@@ -107,7 +107,7 @@ NanoBaseHelpers = function ()
 			},
 			// Round a number up to integer
 			ceil: function(number) {
-				return Math.ceil(number);
+				return Math.CEILING(number);
 			},
 			// Format a string (~string("Hello {0}, how are {1}?", 'Martin', 'you') becomes "Hello Martin, how are you?")
 			string: function() {

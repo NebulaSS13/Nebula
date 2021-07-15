@@ -281,7 +281,7 @@
 	return current_grab.force_danger
 
 /obj/item/grab/proc/grab_slowdown()
-	return max(ceil(affecting?.get_object_size() * current_grab.grab_slowdown), 1)
+	return max(CEILING(affecting?.get_object_size() * current_grab.grab_slowdown), 1)
 
 /obj/item/grab/proc/assailant_moved()
 	affecting.glide_size = assailant.glide_size // Note that this is called _after_ the Move() call resolves, so while it adjusts affecting's move animation, it won't adjust anything else depending on it.

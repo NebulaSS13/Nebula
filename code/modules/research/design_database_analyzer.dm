@@ -60,7 +60,7 @@
 
 	var/list/dump_matter
 	for(var/mat in cached_materials)
-		var/amt = Floor(cached_materials[mat]/SHEET_MATERIAL_AMOUNT)
+		var/amt = FLOOR(cached_materials[mat]/SHEET_MATERIAL_AMOUNT)
 		if(amt > 0)
 			LAZYSET(dump_matter, mat, amt)
 	if(length(dump_matter))

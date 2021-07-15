@@ -295,7 +295,7 @@
 
 /obj/item/storage/fancy/vials/on_update_icon()
 	var/key_count = count_by_type(contents, key_type)
-	src.icon_state = "[initial(icon_state)][Floor(key_count/2)]"
+	src.icon_state = "[initial(icon_state)][FLOOR(key_count/2)]"
 
 /*
  * Not actually a "fancy" storage...
@@ -318,7 +318,7 @@
 
 /obj/item/storage/lockbox/vials/on_update_icon()
 	var/total_contents = count_by_type(contents, /obj/item/chems/glass/beaker/vial)
-	src.icon_state = "vialbox[Floor(total_contents/2)]"
+	src.icon_state = "vialbox[FLOOR(total_contents/2)]"
 	src.overlays.Cut()
 	if (!broken)
 		overlays += image(icon, src, "led[locked]")

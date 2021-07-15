@@ -51,7 +51,7 @@
 	var/possible_syllables = allow_repeated_syllables ? syllables : syllables.Copy()
 	for(var/i = 0;i<name_count;i++)
 		var/new_name = ""
-		for(var/x = rand(Floor(syllable_count/syllable_divisor),syllable_count);x>0;x--)
+		for(var/x = rand(FLOOR(syllable_count/syllable_divisor),syllable_count);x>0;x--)
 			if(!length(possible_syllables))
 				break
 			new_name += allow_repeated_syllables ? pick(possible_syllables) : pick_n_take(possible_syllables)

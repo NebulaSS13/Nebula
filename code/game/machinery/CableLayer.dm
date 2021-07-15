@@ -80,7 +80,7 @@
 /obj/machinery/cablelayer/proc/reset()
 	last_piece = null
 
-/obj/machinery/cablelayer/proc/dismantleFloor(var/turf/new_turf)
+/obj/machinery/cablelayer/proc/dismantle_floor(var/turf/new_turf)
 	if(istype(new_turf, /turf/simulated/floor))
 		var/turf/simulated/floor/T = new_turf
 		if(!T.is_plating())
@@ -91,8 +91,8 @@
 	if(!on)
 		return reset()
 	else
-		dismantleFloor(new_turf)
-	if(!istype(new_turf) || !dismantleFloor(new_turf))
+		dismantle_floor(new_turf)
+	if(!istype(new_turf) || !dismantle_floor(new_turf))
 		return reset()
 	var/fdirn = turn(M_Dir,180)
 	for(var/obj/structure/cable/LC in new_turf)		// check to make sure there's not a cable there already

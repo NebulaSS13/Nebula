@@ -66,7 +66,7 @@
 	data["materials"] = list()
 	for(var/mat in stored)
 		var/decl/material/material = GET_DECL(mat)
-		var/sheets = Floor(stored[mat]/(SHEET_MATERIAL_AMOUNT * 1.5))
+		var/sheets = FLOOR(stored[mat]/(SHEET_MATERIAL_AMOUNT * 1.5))
 		data["materials"] += list(list("name" = material.solid_name, "amount" = sheets, "harvest" = harvesting[mat], "mat_ref" = "\ref[material]"))
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -112,7 +112,7 @@
 		var/decl/material/material = locate(href_list["remove_mat"])
 		if(istype(material))
 			var/sheet_cost = (SHEET_MATERIAL_AMOUNT * 1.5)
-			var/sheets = Floor(stored[material.type]/sheet_cost)
+			var/sheets = FLOOR(stored[material.type]/sheet_cost)
 			if(sheets > 0)
 				material.create_object(loc, sheets)
 				stored[material.type] -= (sheets * sheet_cost)

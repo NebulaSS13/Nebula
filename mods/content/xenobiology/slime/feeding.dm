@@ -103,7 +103,7 @@
 			ate_victim = TRUE
 		if(drained)
 			gain_nutrition(drained)
-			var/heal_amt = Floor(drained*0.5)
+			var/heal_amt = FLOOR(drained*0.5)
 			if(heal_amt > 0)
 				adjustOxyLoss(-heal_amt)
 				adjustBruteLoss(-heal_amt)

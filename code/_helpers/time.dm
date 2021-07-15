@@ -151,7 +151,7 @@ var/global/rollovercheck_last_timeofday = 0
 	. = 0
 	var/i = DS2TICKS(initial_delay)
 	do
-		. += CEILING(i*DELTA_CALC, 1)
+		. += NONUNIT_CEILING(i*DELTA_CALC, 1)
 		sleep(i*world.tick_lag*DELTA_CALC)
 		i *= 2
 	while (world.tick_usage > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))

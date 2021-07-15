@@ -55,7 +55,7 @@ var/global/list/terminal_commands
 // Prints data out, split by page number.
 /datum/terminal_command/proc/print_as_page(list/data, value_name, selected_page, pg_length)
 	. = list()
-	var/max_pages = Ceiling(length(data)/pg_length)
+	var/max_pages = CEILING(length(data)/pg_length)
 	var/pg = clamp(selected_page, 1, max_pages)
 
 	var/start_index = (pg - 1)*pg_length + 1

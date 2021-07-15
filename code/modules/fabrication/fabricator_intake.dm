@@ -41,7 +41,7 @@
 		if(!mat_colour)
 			mat_colour = material_def.color
 		stored_material[material_def.type] += taking_material
-		stacks_used = max(stacks_used, ceil(taking_material/SHEET_MATERIAL_AMOUNT))
+		stacks_used = max(stacks_used, CEILING(taking_material/SHEET_MATERIAL_AMOUNT))
 		if(storage_capacity[material_def.type] == stored_material[material_def.type])
 			. = SUBSTANCE_TAKEN_FULL
 		else if(. != SUBSTANCE_TAKEN_FULL)

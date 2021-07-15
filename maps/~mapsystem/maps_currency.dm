@@ -16,7 +16,7 @@
 	var/obj/item/charge_stick/credstick = new
 	credstick.creator = owner.real_name
 	credstick.currency = owner_account.currency
-	credstick.loaded_worth = min(credstick.max_worth, Floor(owner_account.money * transfer_mult))
+	credstick.loaded_worth = min(credstick.max_worth, FLOOR(owner_account.money * transfer_mult))
 	owner_account.money -= credstick.loaded_worth
 	return list(credstick)
 
@@ -30,7 +30,7 @@
 /decl/starting_cash_choice/cash/get_cash_objects(var/mob/living/carbon/human/owner, var/datum/money_account/owner_account)
 	var/obj/item/cash/cash = new
 	cash.set_currency(owner_account.currency)
-	cash.adjust_worth(Floor(owner_account.money * transfer_mult))
+	cash.adjust_worth(FLOOR(owner_account.money * transfer_mult))
 	owner_account.money -= cash.absolute_worth
 	return list(cash)	
 
@@ -46,12 +46,12 @@
 	. = list()
 	var/obj/item/cash/cash = new
 	cash.set_currency(owner_account.currency)
-	cash.adjust_worth(Floor(owner_account.money * transfer_mult))
+	cash.adjust_worth(FLOOR(owner_account.money * transfer_mult))
 	. += cash	
 	var/obj/item/charge_stick/credstick = new
 	credstick.creator = owner.real_name
 	credstick.currency = owner_account.currency
-	credstick.loaded_worth = min(credstick.max_worth, Floor(owner_account.money * transfer_mult))
+	credstick.loaded_worth = min(credstick.max_worth, FLOOR(owner_account.money * transfer_mult))
 	. += credstick
 	owner_account.money -= cash.absolute_worth
 	owner_account.money -= credstick.loaded_worth

@@ -190,7 +190,7 @@
 
 	slab_nutrition /= gib_products.len
 
-	var/drop_products = Floor(gib_products.len * 0.35)
+	var/drop_products = FLOOR(gib_products.len * 0.35)
 	for(var/atom/movable/thing in gib_products)
 		if(drop_products)
 			drop_products--

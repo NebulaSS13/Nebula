@@ -208,7 +208,7 @@
 			if(!material)
 				break
 
-			var/amount_to_take = max(0,min(stack.amount, Floor(remaining_volume / REAGENT_UNITS_PER_MATERIAL_SHEET)))
+			var/amount_to_take = max(0,min(stack.amount, FLOOR(remaining_volume / REAGENT_UNITS_PER_MATERIAL_SHEET)))
 			if(amount_to_take)
 				stack.use(amount_to_take)
 				if(QDELETED(stack))

@@ -149,7 +149,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	for(var/i = 1 to 2)
 		if(MOVING(speed[i], min_speed))
 			. = min(., ((speed[i] > 0 ? 1 : -1) - position[i]) / speed[i])
-	. = max(ceil(.),0)
+	. = max(CEILING(.),0)
 
 /obj/effect/overmap/visitable/ship/proc/halt()
 	adjust_speed(-speed[1], -speed[2])

@@ -56,7 +56,7 @@
 	if(use_sound)
 		playsound(user.loc, use_sound, 100)
 
-	if(!do_after(user, max(5, ceil(delay * get_tool_speed(archetype))), holder))
+	if(!do_after(user, max(5, CEILING(delay * get_tool_speed(archetype))), holder))
 		return TOOL_USE_FAILURE_NOMESSAGE
 
 	check_result = tool_archetype.handle_post_interaction(user, holder, fuel_expenditure)

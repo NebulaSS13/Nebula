@@ -339,7 +339,7 @@ public class DMI implements Comparator<IconState> {
         }
         
         // Write the dmi into the buffer
-        int sx = (int)Math.ceil(Math.sqrt(totalImages));
+        int sx = (int)Math.CEILING(Math.sqrt(totalImages));
         int sy = totalImages / sx;
         if(sx*sy < totalImages) {
             sy++;

@@ -115,9 +115,9 @@
 			if(MOVING(speed[i], min_speed))
 				position[i] += speed[i] * OVERMAP_SPEED_CONSTANT
 				if(position[i] < 0)
-					deltas[i] = ceil(position[i])
+					deltas[i] = CEILING(position[i])
 				else if(position[i] > 0)
-					deltas[i] = Floor(position[i])
+					deltas[i] = FLOOR(position[i])
 				if(deltas[i] != 0)
 					position[i] -= deltas[i]
 					position[i] += (deltas[i] > 0) ? -1 : 1

@@ -49,7 +49,7 @@
 	var/datum/firemode/current_mode = firemodes[sel_mode]
 	overlays = list(
 		image(icon, "[get_world_inventory_state()]-[istype(current_mode) ? current_mode.name : "lethal"]"),
-		image(icon, "[get_world_inventory_state()]-charge-[istype(power_supply) ? Floor(power_supply.percent()/20) : 0]")
+		image(icon, "[get_world_inventory_state()]-charge-[istype(power_supply) ? FLOOR(power_supply.percent()/20) : 0]")
 	)
 
 /obj/item/gun/magnetic/railgun/flechette/ascent
@@ -65,7 +65,7 @@
 
 /obj/item/gun/magnetic/railgun/flechette/ascent/show_ammo(var/mob/user)
 	var/obj/item/cell/cell = get_cell()
-	to_chat(user, "<span class='notice'>There are [cell ? Floor(cell.charge/charge_per_shot) : 0] shot\s remaining.</span>")
+	to_chat(user, "<span class='notice'>There are [cell ? FLOOR(cell.charge/charge_per_shot) : 0] shot\s remaining.</span>")
 
 /obj/item/gun/magnetic/railgun/flechette/ascent/check_ammo()
 	var/obj/item/cell/cell = get_cell()

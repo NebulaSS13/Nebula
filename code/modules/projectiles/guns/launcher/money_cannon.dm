@@ -19,7 +19,7 @@
 	emagged = 1
 
 /obj/item/gun/launcher/money/proc/vomit_cash(var/mob/living/vomit_onto, var/projectile_vomit)
-	var/bundle_worth = Floor(receptacle_value / 10)
+	var/bundle_worth = FLOOR(receptacle_value / 10)
 	var/turf/T = get_turf(vomit_onto)
 	for(var/i = 1 to 10)
 		var/nv = bundle_worth

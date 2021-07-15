@@ -54,7 +54,7 @@
 	if(dump_cubes)
 		visible_message(SPAN_DANGER("\The [src] collapses!"))
 		for(var/mat in decompiled_matter)
-			var/sheet_amount = Floor(decompiled_matter[mat]/SHEET_MATERIAL_AMOUNT)
+			var/sheet_amount = FLOOR(decompiled_matter[mat]/SHEET_MATERIAL_AMOUNT)
 			if(sheet_amount > 0)
 				while(sheet_amount > 100)
 					var/obj/item/stack/material/cubes/cubes = new (dump_cubes, 100, mat)

@@ -21,10 +21,10 @@ increment()
 
 return_angle()
 	Returns the direction (angle in degrees) the object is travelling in.
-	* North = 90°
-	* East  = 0°
-	* South = -90°
-	* West  = 180°
+	* North = 90Â°
+	* East  = 0Â°
+	* South = -90Â°
+	* West  = 180Â°
 
 return_hypotenuse()
 	Returns the distance of travel for each step of the vector, relative to each full step of movement. 1 is a full turf 
@@ -76,9 +76,9 @@ return_location()
 
 	// and some rounding to stop the increments jumping whole turfs - because byond favours certain angles
 	if(angle > -135 && angle < 45)
-		angle = Ceiling(angle)
+		angle = CEILING(angle)
 	else
-		angle = Floor(angle)
+		angle = FLOOR(angle)
 
 	// calculate the offset per increment step
 	if(abs(angle) in list(0, 45, 90, 135, 180))		// check if the angle is a cardinal

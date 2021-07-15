@@ -24,7 +24,7 @@
 		. = 0
 		for(var/mat in matter)
 			. += matter[mat]
-		. = Floor(. * REAGENT_UNITS_PER_MATERIAL_UNIT)
+		. = FLOOR(. * REAGENT_UNITS_PER_MATERIAL_UNIT)
 	else
 		. = Clamp(w_class, ITEM_SIZE_MIN, ITEM_SIZE_MAX)
 	. = max(1, round(.))

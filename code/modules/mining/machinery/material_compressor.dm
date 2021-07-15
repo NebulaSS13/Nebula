@@ -17,7 +17,7 @@
 			if(!O.simulated || O.anchored)
 				continue
 			for(var/mat in O.reagents?.reagent_volumes)
-				stored[mat] = stored[mat] + Floor((O.reagents.reagent_volumes[mat] / REAGENT_UNITS_PER_MATERIAL_UNIT) * 0.75) // liquid reagents, lossy
+				stored[mat] = stored[mat] + FLOOR((O.reagents.reagent_volumes[mat] / REAGENT_UNITS_PER_MATERIAL_UNIT) * 0.75) // liquid reagents, lossy
 			for(var/mat in O.matter)
 				stored[mat] = stored[mat] + O.matter[mat]
 			qdel(O)
@@ -40,13 +40,13 @@
 	if(output_turf)
 		var/produced = 0
 		for(var/mat in stored)
-			var/sheets = min(Floor((stored[mat] / SHEET_MATERIAL_AMOUNT) / 2), (MAX_COMPRESS_ORE_PER_TICK - produced))
+			var/sheets = min(FLOOR((stored[mat] / SHEET_MATERIAL_AMOUNT) / 2), (MAX_COMPRESS_ORE_PER_TICK - produced))
 			if(sheets <= 0)
 				continue
 			var/decl/material/source = GET_DECL(mat)
 			var/decl/material/product = source.ore_compresses_to ? GET_DECL(source.ore_compresses_to) : source
 			product.create_object(output_turf, sheets)
-			stored[mat] -= ceil(sheets * SHEET_MATERIAL_AMOUNT * 2)
+			stored[mat] -= CEILING(sheets * SHEET_MATERIAL_AMOUNT * 2)
 			if(stored[mat] <= 0)
 				stored -= mat
 			produced += sheets

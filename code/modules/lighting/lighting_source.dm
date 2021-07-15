@@ -348,7 +348,7 @@
 
 	var/should_do_wedge = light_angle && !facing_opaque
 
-	FOR_DVIEW(T, CEILING(actual_range, 1), source_turf, 0)
+	FOR_DVIEW(T, NONUNIT_CEILING(actual_range, 1), source_turf, 0)
 		check_t:
 
 		if (should_do_wedge)	// Directional lighting coordinate filter.

@@ -69,7 +69,7 @@
 
 	var/decl/material/main_reagent = reagents.get_primary_reagent_decl()
 	if(main_reagent) // TODO: weighted alpha from all reagents, not just primary
-		alpha = Clamp(ceil(255*(reagents.total_volume/FLUID_DEEP)) * main_reagent.opacity, main_reagent.min_fluid_opacity, main_reagent.max_fluid_opacity)
+		alpha = Clamp(CEILING(255*(reagents.total_volume/FLUID_DEEP)) * main_reagent.opacity, main_reagent.min_fluid_opacity, main_reagent.max_fluid_opacity)
 
 	if(reagents.total_volume <= FLUID_PUDDLE)
 		APPLY_FLUID_OVERLAY("puddle")

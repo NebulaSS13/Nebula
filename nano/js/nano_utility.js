@@ -73,7 +73,7 @@ if (!Array.prototype.indexOf)
 
         var from = Number(arguments[1]) || 0;
         from = (from < 0)
-            ? Math.ceil(from)
+            ? Math.CEILING(from)
             : Math.floor(from);
         if (from < 0)
             from += len;
