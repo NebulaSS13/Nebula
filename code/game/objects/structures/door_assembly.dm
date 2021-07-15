@@ -96,7 +96,7 @@
 /obj/structure/door_assembly/blast/shutter
 	name = "shutter assembly"
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'
-	icon_state = "pdoor1"
+	icon_state = "shutter1"
 	airlock_type = /obj/machinery/door/blast/shutters
 
 /obj/structure/door_assembly/attackby(obj/item/W, mob/user)

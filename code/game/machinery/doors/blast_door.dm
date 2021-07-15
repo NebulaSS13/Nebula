@@ -49,7 +49,7 @@
 		/decl/public_access/public_method/toggle_door_to
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/blast_door = 1)
-
+	construct_state = /decl/machine_construction/default/panel_closed/blast_door
 	frame_type = /obj/structure/door_assembly/blast
 	base_type = /obj/machinery/door/blast
 
@@ -144,16 +144,17 @@
 // This only works on broken doors or doors without power. Also allows repair with Plasteel.
 /obj/machinery/door/blast/attackby(obj/item/C, mob/user)
 	add_fingerprint(user, 0, C)
-	if(isCrowbar(C) || (istype(C, /obj/item/twohanded/fireaxe) && C:wielded == 1))
-		if(((stat & NOPOWER) || (stat & BROKEN)) && !( operating ))
-			to_chat(user, "<span class='notice'>You begin prying at \the [src]...</span>")
-			if(do_after(user, 2 SECONDS, src))
-				force_toggle()
+	if(!panel_open) //Do this here so the door won't change state while prying out the circuit
+		if(isCrowbar(C) || (istype(C, /obj/item/twohanded/fireaxe) && C:wielded == 1))
+			if(((stat & NOPOWER) || (stat & BROKEN)) && !( operating ))
+				to_chat(user, "<span class='notice'>You begin prying at \the [src]...</span>")
+				if(do_after(user, 2 SECONDS, src))
+					force_toggle()
+				else
+					to_chat(user, "<span class='warning'>You must remain still while working on \the [src].</span>")
 			else
-				to_chat(user, "<span class='warning'>You must remain still while working on \the [src].</span>")
-		else
-			to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
-		return
+				to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
+			return
 	if(istype(C, /obj/item/stack/material) && C.get_material_type() == /decl/material/solid/metal/plasteel)
 		var/amt = Ceiling((maxhealth - health)/150)
 		if(!amt)
@@ -325,7 +326,7 @@
 	maxhealth = 500
 	explosion_resistance = 10
 	pry_mod = 0.55
-	frame_type = /obj/structure/door_assembly/blast
+	frame_type = /obj/structure/door_assembly/blast/shutter
 
 /obj/machinery/door/blast/shutters/open
 	begins_closed = FALSE
