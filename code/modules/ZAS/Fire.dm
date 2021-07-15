@@ -243,7 +243,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 		//*** Remove fuel and oxidizer, add carbon dioxide and heat
 		//remove and add gasses as calculated
-		used_fuel = max(0.25, total_fuel)
+		used_fuel = min(used_fuel, total_fuel)
 		//remove_by_flag() and adjust_gas() handle the group_multiplier for us.
 		remove_by_flag(XGM_GAS_OXIDIZER, used_oxidizers)
 		var/datum/gas_mixture/burned_fuel = remove_by_flag(XGM_GAS_FUEL, used_fuel)
@@ -253,7 +253,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 				adjust_gas(mat.burn_product, burned_fuel.gas[g])
 
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
-		temperature = max(temperature, (starting_energy + vsc.fire_fuel_energy_release * used_fuel) / heat_capacity())
+		temperature = (starting_energy + vsc.fire_fuel_energy_release * used_fuel) / heat_capacity()
 		update_values()
 
 		#ifdef FIREDBG

@@ -5,16 +5,20 @@
 			return TOPIC_HANDLED
 		show_category = choice
 		. = TOPIC_REFRESH
-	else if(href_list["make"])
+	
+	if(href_list["make"])
 		try_queue_build(locate(href_list["make"]), text2num(href_list["multiplier"]))
 		. = TOPIC_REFRESH
-	else if(href_list["cancel"])
+	
+	if(href_list["cancel"])
 		try_cancel_build(locate(href_list["cancel"]))
 		. = TOPIC_REFRESH
-	else if(href_list["eject_mat"])
+	
+	if(href_list["eject_mat"])
 		try_dump_material(href_list["eject_mat"])
 		. = TOPIC_REFRESH
-	else if(href_list["settings"])
+	
+	if(href_list["settings"])
 		var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
 		D.ui_interact(user)
 		. = TOPIC_REFRESH
@@ -28,7 +32,13 @@
 		if(!choice)
 			return TOPIC_HANDLED
 		selected_color = choice
-		return TOPIC_REFRESH
+		. = TOPIC_REFRESH
+
+	if(href_list["set_filter"])
+		var/new_filter_string = sanitize(input(user, "Enter a new filter string.", "Fabricator Filter") as text|null)
+		if(CanInteract(user, DefaultTopicState()))
+			filter_string = new_filter_string
+			. = TOPIC_REFRESH
 
 /obj/machinery/fabricator/proc/try_cancel_build(var/datum/fabricator_build_order/order)
 	if(istype(order) && currently_building != order && is_functioning())

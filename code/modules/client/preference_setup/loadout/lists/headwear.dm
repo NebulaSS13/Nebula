@@ -70,7 +70,7 @@
 	)
 
 /decl/loadout_option/hardhat
-	display_name = "hardhat selection"
+	name = "hardhat selection"
 	path = /obj/item/clothing/head/hardhat
 	cost = 2
 
@@ -85,7 +85,7 @@
 	)
 
 /decl/loadout_option/head/formalhat
-	display_name = "formal hat selection"
+	name = "formal hat selection"
 	path = /obj/item/clothing/head
 
 /decl/loadout_option/head/formalhat/get_gear_tweak_options()
