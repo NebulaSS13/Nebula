@@ -8,6 +8,7 @@
 	icon_state = "circ-unassembled"
 	anchored = 0
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
+	layer = STRUCTURE_LAYER
 
 	var/kinetic_efficiency = 0.04 //combined kinetic and kinetic-to-electric efficiency
 	var/volume_ratio = 0.2
