@@ -56,25 +56,11 @@ var/global/list/moving_levels = list()
 	if(!zlevel)
 		return
 
-	var/gen_dir = null
-	if(direction & (NORTH|SOUTH))
-		gen_dir += "ns"
-	else if(direction & (EAST|WEST))
-		gen_dir += "ew"
-	if(!direction)
-		gen_dir = null
+	if (moving_levels["[zlevel]"] != direction)
+		moving_levels["[zlevel]"] = direction
 
-	if (moving_levels["[zlevel]"] != gen_dir)
-		moving_levels["[zlevel]"] = gen_dir
-
-		var/list/spaceturfs = block(locate(1, 1, zlevel), locate(world.maxx, world.maxy, zlevel))
-		for(var/turf/space/T in spaceturfs)
-			if(!gen_dir)
-				T.icon_state = "white"
-			else
-				T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
-				for(var/atom/movable/AM in T)
-					if (AM.simulated && !AM.anchored)
-						AM.throw_at(get_step(T, global.reverse_dir[direction]), 5, 1)
-						CHECK_TICK
+		var/list/space_turfs = block(locate(1, 1, zlevel), locate(world.maxx, world.maxy, zlevel))
+		for(var/turf/space/T in space_turfs)
+			T.toggle_transit(direction)
 			CHECK_TICK
+
