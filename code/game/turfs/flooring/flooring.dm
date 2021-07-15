@@ -368,19 +368,21 @@
 /decl/flooring/glass
 	name = "glass flooring"
 	desc = "A window to the world outside. Or the world beneath your feet, rather."
-	icon = 'icons/turf/flooring/glassfloor.dmi'
-	icon_base = "glassfloor"
+	icon = 'icons/turf/flooring/glass.dmi'
+	icon_base = "glass"
 	build_type = /obj/item/stack/material/pane
 	build_material = /decl/material/solid/glass
+	build_cost = 1
+	build_time = 30
 	damage_temperature = T100C
 	flags = TURF_REMOVE_CROWBAR | TURF_ACID_IMMUNE
 	can_engrave = FALSE
 	color = GLASS_COLOR
 	z_flags = ZM_MIMIC_BELOW
+	footstep_type = /decl/footsteps/plating
 
 /decl/flooring/glass/boro
 	name = "borosilicate glass flooring"
-	build_type = /obj/item/stack/material/pane
 	build_material = /decl/material/solid/glass/borosilicate
 	color = GLASS_COLOR_SILICATE
 	damage_temperature = T0C + 4000
