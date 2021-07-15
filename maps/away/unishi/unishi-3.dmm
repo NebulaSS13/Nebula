@@ -242,7 +242,7 @@
 /turf/simulated/floor,
 /area/unishi/bridge)
 "aW" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/energy/laser,
 /obj/item/gun/energy/laser,
 /obj/item/clothing/suit/armor/pcarrier/blue,
@@ -344,7 +344,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "bm" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/towel,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -653,7 +653,7 @@
 /turf/simulated/floor/tiled/white,
 /area/unishi/med)
 "cc" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/bodybag/cryobag,
 /obj/item/modular_computer/laptop/preset/custom_loadout/advanced,
 /obj/item/book/manual/medical_diagnostics_manual,
@@ -1205,7 +1205,7 @@
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dl" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/laundry_basket,
 /obj/item/chems/pill/detergent,
 /obj/item/chems/pill/detergent,

@@ -419,7 +419,7 @@
 /turf/simulated/floor,
 /area/smugglers/base)
 "aX" = (
-/obj/structure/table/rack{
+/obj/structure/rack{
 	dir = 8;
 	
 	},
@@ -472,7 +472,7 @@
 /turf/simulated/floor,
 /area/smugglers/base)
 "bf" = (
-/obj/structure/table/rack{
+/obj/structure/rack{
 	dir = 8;
 	
 	},
@@ -521,7 +521,7 @@
 /turf/simulated/floor,
 /area/smugglers/base)
 "bm" = (
-/obj/structure/table/rack{
+/obj/structure/rack{
 	dir = 8;
 	
 	},
@@ -784,17 +784,17 @@
 /turf/simulated/floor/tiled,
 /area/smugglers/office)
 "bR" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/tech_supply,
 /turf/simulated/floor,
 /area/smugglers/base)
 "bS" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/toolbox,
 /turf/simulated/floor,
 /area/smugglers/base)
 "bT" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/firstaid,
 /turf/simulated/floor,
 /area/smugglers/base)
@@ -819,7 +819,7 @@
 /turf/simulated/floor/tiled,
 /area/smugglers/office)
 "bY" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/head/cowboy_hat,
 /obj/item/clothing/suit/armor/hos/jensen,
 /turf/simulated/floor/tiled,
@@ -860,7 +860,7 @@
 	pixel_y = 30
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/microwave{
 	pixel_y = 10
 	},
@@ -944,7 +944,7 @@
 /turf/simulated/floor/tiled,
 /area/smugglers/dorms)
 "cs" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/paper/smug_3,
 /obj/item/flame/lighter,
@@ -952,7 +952,7 @@
 /turf/simulated/floor/tiled,
 /area/smugglers/dorms)
 "ct" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/cash/c10,
 /obj/random/smokes,

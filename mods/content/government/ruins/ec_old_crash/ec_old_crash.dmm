@@ -40,12 +40,12 @@
 /turf/template_noop,
 /area/template_noop)
 "ak" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/radio,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/cockpit)
 "al" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/button/blast_door{
 	id_tag = "scraplock";
 	name = "External Lockdown"
@@ -427,7 +427,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/cryo)
 "bd" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
 	icon_state = "corner_white_diagonal";
@@ -1854,7 +1854,7 @@
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "dE" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/button/ignition{
 	id_tag = "sev_engine";
 	pixel_x = -5

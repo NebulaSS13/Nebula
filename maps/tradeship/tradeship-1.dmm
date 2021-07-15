@@ -377,7 +377,7 @@
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/button/blast_door{
 	id_tag = "anomvent";
 	name = "emergency vent control"
@@ -680,7 +680,7 @@
 /turf/simulated/floor/lino,
 /area/ship/trade/crew/dorms1)
 "bD" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/masks,
 /obj/random_multi/single_item/captains_spare_id,
 /turf/simulated/floor/lino,
@@ -859,7 +859,7 @@
 	pixel_z = 23;
 	pixel_w = -1
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/integrated_circuit_printer,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science/fabricaton)
@@ -1053,7 +1053,7 @@
 /turf/simulated/floor/lino,
 /area/ship/trade/crew/dorms2)
 "cG" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/newspaper,
 /turf/simulated/floor/lino,
 /area/ship/trade/crew/dorms2)
@@ -1185,7 +1185,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science)
 "db" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/wirecutters/clippers,
 /obj/item/minihoe,
 /obj/item/chems/glass/bucket,
@@ -1421,7 +1421,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/drunk_tank)
 "dB" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/plushie,
 /obj/item/synthesized_instrument/violin,
 /obj/effect/decal/cleanable/dirt,
@@ -1695,7 +1695,7 @@
 	icon_state = "bulb1";
 	dir = 1
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/tank/jetpack/oxygen,
 /obj/item/clothing/mask/breath,
 /obj/item/tank/jetpack/oxygen,
@@ -2240,7 +2240,7 @@
 /obj/item/storage/toolbox/mechanical,
 /obj/item/clothing/head/welding,
 /obj/item/scanner/gas,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/inflatable_dispenser,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
@@ -2285,7 +2285,7 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/radio,
 /obj/random/clipboard,
 /obj/item/stamp/denied,
@@ -2437,7 +2437,7 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
 "ni" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stock_parts/circuitboard/pacman/super/potato,
 /obj/item/stack/material/pane/mapped/rborosilicate/ten,
 /obj/item/stack/material/reinforced/mapped/ocp/ten,
@@ -2805,7 +2805,7 @@
 /obj/item/stock_parts/circuitboard/pacman,
 /obj/item/stock_parts/circuitboard/recharge_station,
 /obj/item/stock_parts/circuitboard/shield_generator,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 5
@@ -3429,7 +3429,7 @@
 /obj/item/stock_parts/micro_laser,
 /obj/item/stock_parts/micro_laser,
 /obj/item/stock_parts/micro_laser/ultra,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/machinery/power/apc{
 	dir = 2;
 	name = "south bump";
@@ -3676,7 +3676,7 @@
 "Yb" = (
 /obj/item/stock_parts/circuitboard/helm,
 /obj/item/stock_parts/circuitboard/unary_atmos/cooler,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 5
@@ -3703,7 +3703,7 @@
 /obj/item/stock_parts/circuitboard/air_alarm,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 5

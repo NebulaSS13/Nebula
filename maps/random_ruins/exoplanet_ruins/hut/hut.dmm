@@ -85,7 +85,7 @@
 /turf/simulated/floor/carpet,
 /area/template_noop)
 "u" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/glasses/eyepatch/hud/medical,
 /obj/random/loot,
 /obj/random/loot,

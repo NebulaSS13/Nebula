@@ -247,23 +247,23 @@
 /turf/simulated/wall/r_wall,
 /area/unishi/common)
 "aH" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/stock_parts/circuitboard/solar_control,
 /obj/item/bot_kit,
 /turf/simulated/floor,
 /area/unishi/common)
 "aI" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/integrated_circuit/converter/text2num,
 /turf/simulated/floor,
 /area/unishi/common)
 "aJ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/stock_parts/circuitboard/helm,
 /turf/simulated/floor,
 /area/unishi/common)
 "aK" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/stock_parts/circuitboard/robotics,
 /obj/item/stock_parts/circuitboard/protolathe,
 /obj/item/stock_parts/circuitboard/helm,
@@ -280,7 +280,7 @@
 /obj/item/chems/chem_disp_cartridge/acetone,
 /obj/item/chems/chem_disp_cartridge/copper,
 /obj/item/chems/chem_disp_cartridge/eyedrops,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/chems/syringe/antitoxin,
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
@@ -681,7 +681,7 @@
 /turf/simulated/floor,
 /area/unishi/common)
 "bQ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -697,7 +697,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "bS" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -764,11 +764,11 @@
 /turf/simulated/floor,
 /area/unishi/common)
 "ca" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "cb" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/powercell,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
@@ -3035,7 +3035,7 @@
 /turf/space,
 /area/unishi/smresearch)
 "qW" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/reagent_temperature,
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
@@ -3044,7 +3044,7 @@
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "OW" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/reagent_temperature/cooler,
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)

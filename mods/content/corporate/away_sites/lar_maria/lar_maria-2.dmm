@@ -664,7 +664,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "bu" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/toolbox,
 /obj/random/material,
 /turf/simulated/floor/plating,
@@ -735,7 +735,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "bC" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/toolbox,
 /obj/random/smokes,
 /turf/simulated/floor/plating,
@@ -827,12 +827,12 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "bR" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tool,
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "bS" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tank,
 /obj/random/tool,
 /turf/simulated/floor/plating,
@@ -1057,7 +1057,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
@@ -1077,7 +1077,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper_bin,
 /obj/item/pen/red,
 /turf/simulated/floor/tiled,
@@ -1098,7 +1098,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/clothing/head/soft/zhp_cap,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
@@ -1109,7 +1109,7 @@
 /obj/structure/window/basic{
 	dir = 8
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper/lar_maria/note_2,
 /obj/item/paper/lar_maria/note_3,
 /turf/simulated/floor/tiled,
@@ -1322,13 +1322,13 @@
 /obj/structure/window/basic{
 	dir = 8
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/folder/blue,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "dz" = (
 /obj/structure/window/basic,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper_bin,
 /obj/item/pen/blue,
 /obj/item/paper,
@@ -1405,7 +1405,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "dM" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/photocopier/faxmachine,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/alarm{
@@ -1511,7 +1511,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "ea" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper_bin,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
@@ -1525,12 +1525,12 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "ec" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/pen/blue,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "ed" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/pen/crayon/orange,
 /obj/item/paper,
 /turf/simulated/floor/tiled,
@@ -1753,7 +1753,7 @@
 	icon_state = "tube1";
 	dir = 4
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/firstaid/surgery,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/office)
@@ -1891,16 +1891,16 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fp" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/folder/blue,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fq" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "fr" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/towel,
 /obj/random/soap,
 /turf/simulated/floor/tiled/white,
@@ -2006,12 +2006,12 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fD" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/pen/blue,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fE" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fF" = (
@@ -2054,7 +2054,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
 "fM" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/gloves,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
@@ -2099,13 +2099,13 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fS" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper_bin,
 /obj/item/paper,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fT" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper/lar_maria/note_9,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
@@ -2183,7 +2183,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
 "gg" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/firstaid,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
@@ -2257,7 +2257,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "gq" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/towel,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
@@ -2320,7 +2320,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/hallway)
 "gC" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/trash,
 /turf/simulated/floor/plating,
 /area/lar_maria/hallway)
@@ -2400,12 +2400,12 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "gN" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/snack,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "gO" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "gP" = (
@@ -2422,7 +2422,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "gR" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/trash/plate,
 /obj/item/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
@@ -2576,7 +2576,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
 "hr" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/soap,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/alarm{
@@ -2587,7 +2587,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
 "hs" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/towel,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/white,
@@ -2794,7 +2794,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
 "hO" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/towel,
 /obj/random/soap,
 /turf/simulated/floor/tiled/white,
@@ -3077,12 +3077,12 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "iA" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper/lar_maria/note_3,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "iB" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/trash/plate,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
@@ -3239,7 +3239,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "iW" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/clothing/head/soft/zhp_cap,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
@@ -3436,7 +3436,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "qb" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tank,
 /obj/random/tool,
 /obj/machinery/light/small{

@@ -493,7 +493,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "bs" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/toolbox,
 /turf/simulated/floor/plating,
 /area/errant_pisces/storage_port)
@@ -652,7 +652,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
 "bP" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/powercell,
 /obj/machinery/light/small{
 	dir = 8
@@ -764,7 +764,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "ce" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tool,
 /turf/simulated/floor/plating,
 /area/errant_pisces/storage_port)
@@ -826,13 +826,13 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "co" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tool,
 /obj/random/tech_supply,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "cp" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tool,
 /obj/random/tech_supply,
 /obj/item/clothing/gloves/thick/duty,
@@ -846,7 +846,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "cr" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/powercell,
 /obj/random/clothing,
 /turf/simulated/floor/plating,
@@ -916,12 +916,12 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "cD" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tech_supply,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "cE" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tool,
 /obj/random/tank,
 /turf/simulated/floor/plating,
@@ -1568,7 +1568,7 @@
 /turf/simulated/wall/r_wall,
 /area/errant_pisces/solar_starboard)
 "dS" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/hardsuit,
 /obj/random/shoes,
 /turf/simulated/floor/plating,
@@ -1615,7 +1615,7 @@
 /turf/simulated/wall/r_wall,
 /area/errant_pisces/head_m)
 "dZ" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tech_supply,
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
@@ -1732,7 +1732,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
 "ek" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/towel/random,
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_f)
@@ -1854,7 +1854,7 @@
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_m)
 "ez" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/towel/random,
 /obj/item/towel/random,
 /obj/item/towel/random,
@@ -3323,7 +3323,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/infirmary)
 "hH" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/firstaid,
 /obj/item/storage/box/bodybags,
 /turf/simulated/floor/plating,
@@ -3419,7 +3419,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "hZ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/firstaid,
 /obj/structure/window/basic{
 	dir = 4
@@ -3427,7 +3427,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "ia" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/glasses,
 /obj/structure/window/basic{
 	dir = 4
@@ -3471,7 +3471,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "ij" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "ik" = (
@@ -3587,7 +3587,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "iF" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/trash/plate,
 /obj/item/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
@@ -3756,12 +3756,12 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "jb" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper_bin,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "jc" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "jd" = (
@@ -3876,7 +3876,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/hallway)
 "js" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/kitchen/utensil/fork/plastic,
 /obj/random/snack,
 /turf/simulated/floor/tiled,
@@ -3931,12 +3931,12 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "jC" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/box/freezer,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "jD" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/firstaid,
 /obj/item/clothing/under/medical/paramedic,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -3945,7 +3945,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "jE" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/roller,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
@@ -4007,7 +4007,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "jK" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/kitchen/utensil/fork,
 /obj/machinery/light,
 /turf/simulated/floor/tiled,
@@ -4069,11 +4069,11 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "jU" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "jV" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper_bin,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -4420,18 +4420,18 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "kQ" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/knife/combat,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "kR" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/harpoon,
 /obj/random/tool,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "kS" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/box/survival,
 /obj/item/storage/box/survival,
 /obj/item/storage/box/survival,
@@ -4489,7 +4489,7 @@
 /area/errant_pisces/live_storage)
 "ld" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/harpoon,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -4499,7 +4499,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lf" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lg" = (
@@ -4584,27 +4584,27 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lu" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/box/freezer,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lv" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/toolbox/mechanical,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lw" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/toolbox/electrical,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lx" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/tape_roll,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "ly" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/box/gloves,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -4640,18 +4640,18 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/cryo)
 "lD" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/toolbox/mechanical,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "lE" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/ore,
 /obj/random/tool,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "lF" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/firstaid/empty,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
@@ -4730,7 +4730,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/book/manual/mass_spectrometry,
 /obj/item/scanner/spectrometer,
 /turf/simulated/floor/tiled,
@@ -4928,7 +4928,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "ms" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stack/net/thirty,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
@@ -4936,7 +4936,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stack/net,
 /obj/random/snack,
 /obj/random/tool,
@@ -4960,7 +4960,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "mx" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -5021,7 +5021,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/box/beakers,
 /obj/item/chems/dropper,
 /turf/simulated/floor/tiled,
@@ -5144,7 +5144,7 @@
 	dir = 4;
 	level = 2
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
 "mV" = (
@@ -5947,7 +5947,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/aux_power)
 "or" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/wrench,
 /obj/item/screwdriver,
 /obj/item/wirecutters,
@@ -6590,7 +6590,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/shotgun/pump,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
@@ -6608,7 +6608,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qn" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/mask/breath,
 /obj/item/storage/box/survival,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -6649,7 +6649,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qt" = (
@@ -6662,7 +6662,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qu" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/tank/oxygen,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
@@ -6687,7 +6687,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/fishing_wing)
 "qA" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qB" = (
@@ -6701,7 +6701,7 @@
 /turf/simulated/wall/r_wall,
 /area/errant_pisces/bridge)
 "qD" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/knife/combat,
 /obj/item/knife/combat,
 /obj/item/stack/net/thirty,
@@ -6716,7 +6716,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qF" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/box/survival,
 /obj/item/stack/net/thirty,
 /turf/simulated/floor/plating,
@@ -6737,7 +6737,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/harpoon,
 /obj/item/harpoon,
 /obj/item/harpoon,
@@ -6753,7 +6753,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qK" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/mask/breath,
 /obj/item/flashlight,
 /obj/item/stack/net/thirty,

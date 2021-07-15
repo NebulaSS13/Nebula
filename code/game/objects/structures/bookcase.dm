@@ -23,9 +23,9 @@ var/global/list/station_bookcases = list()
 	global.station_bookcases -= src
 	. = ..()
 
-/obj/structure/bookcase/create_dismantled_products(var/turf/T)
+/obj/structure/bookcase/physically_destroyed(skip_qdel)
 	for(var/obj/item/book/b in contents)
-		b.dropInto(T)
+		b.dropInto(loc)
 	. = ..()
 
 /obj/structure/bookcase/attackby(obj/O, mob/user)

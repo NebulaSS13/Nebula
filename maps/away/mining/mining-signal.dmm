@@ -9,13 +9,13 @@
 /turf/simulated/wall/titanium,
 /area/outpost/abandoned)
 "ag" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tech_supply,
 /obj/random/bomb_supply,
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/outpost/abandoned)
 "ah" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tech_supply,
 /obj/random/loot,
 /obj/random/loot,
@@ -30,13 +30,13 @@
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/outpost/abandoned)
 "ak" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/cell/hyper,
 /obj/item/cell/hyper,
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/outpost/abandoned)
 "am" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/energy,
 /obj/structure/window/reinforced{
 	dir = 8
@@ -276,12 +276,12 @@
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "bh" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/rig/hazmat,
 /turf/simulated/floor/tiled/freezer,
 /area/outpost/abandoned)
 "bi" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/loot,
 /turf/simulated/floor/tiled/freezer,
 /area/outpost/abandoned)
@@ -1691,7 +1691,7 @@
 	},
 /area/mine/explored)
 "fA" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
@@ -1702,13 +1702,13 @@
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "fB" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper_bin,
 /obj/machinery/door/window/northleft,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "fC" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
@@ -1842,7 +1842,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "fU" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/window/reinforced{
 	dir = 8
 	},
@@ -2370,7 +2370,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "ho" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/toolbox,
 /obj/effect/decal/cleanable/cobweb,
 /turf/simulated/floor/plating,
@@ -2489,7 +2489,7 @@
 /turf/unsimulated/mask,
 /area/outpost/abandoned)
 "hC" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tool,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
@@ -2506,7 +2506,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "hF" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/powercell,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)

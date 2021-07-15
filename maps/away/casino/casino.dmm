@@ -413,7 +413,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/casino/casino_maintenance)
 "bj" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/pistol{
 	pixel_x = 4;
 	pixel_y = 4
@@ -477,7 +477,7 @@
 /turf/space,
 /area/space)
 "bu" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/knife/combat,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
@@ -758,7 +758,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_hangar)
 "bU" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/shotgun/pump,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
@@ -807,14 +807,14 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "cg" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_security)
 "ch" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /turf/simulated/floor/plating,
 /area/casino/casino_security)
 "ci" = (
@@ -843,7 +843,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_hangar)
 "cn" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/tank/nitrogen,
 /obj/item/tank/nitrogen,
 /obj/item/tank/nitrogen,
@@ -1282,27 +1282,27 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "dA" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/shotgun/pump,
 /obj/item/gun/projectile/shotgun/pump,
 /obj/item/gun/projectile/shotgun/pump,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "dB" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/box/ammo/shotgunammo,
 /obj/item/storage/box/ammo/shotgunammo,
 /obj/item/storage/box/ammo/shotgunammo,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "dC" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/suit/armor/vest,
 /obj/item/clothing/suit/armor/vest,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "dD" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
 /obj/item/tank/air,
@@ -2229,7 +2229,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fS" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/kitchen/utensil/fork,
@@ -2239,35 +2239,35 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/trash/plate,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fU" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/random/snack,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fV" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/chems/food/drinks/milk/smallcarton,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fW" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/trash/cigbutt/professionals,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fX" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/trash/plate,
@@ -2279,7 +2279,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/random/snack,
@@ -2337,7 +2337,7 @@
 /turf/simulated/wall/r_wall,
 /area/casino/casino_solar_control)
 "gh" = (
-/obj/structure/table/rack{
+/obj/structure/rack{
 	dir = 8
 	},
 /obj/random/material,
@@ -2347,7 +2347,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "gi" = (
-/obj/structure/table/rack{
+/obj/structure/rack{
 	dir = 8
 	},
 /obj/random/tech_supply,
@@ -2528,7 +2528,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_solar_control)
 "gA" = (
-/obj/structure/table/rack{
+/obj/structure/rack{
 	dir = 8
 	},
 /obj/item/stack/cable_coil,
@@ -2540,7 +2540,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "gC" = (
-/obj/structure/table/rack{
+/obj/structure/rack{
 	dir = 8
 	},
 /obj/random/tech_supply,
@@ -2664,7 +2664,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_solar_control)
 "hd" = (
-/obj/structure/table/rack{
+/obj/structure/rack{
 	dir = 8
 	},
 /obj/random/tech_supply,
@@ -2837,7 +2837,7 @@
 /area/casino/casino_solar_control)
 "hH" = (
 /obj/random/trash,
-/obj/structure/table/rack{
+/obj/structure/rack{
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -3877,7 +3877,7 @@
 	icon_state = "warning";
 	dir = 4
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/wrench,
 /obj/item/clothing/head/welding,
 /obj/item/weldingtool,
@@ -3995,7 +3995,7 @@
 	icon_state = "warning";
 	dir = 4
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/mask/gas,
