@@ -35,6 +35,7 @@
 	ore_icon_overlay = "lump"
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
+	burn_product = /decl/material/gas/carbon_monoxide
 	value = 0.8
 	sparse_material_weight = 35
 	rich_material_weight = 20

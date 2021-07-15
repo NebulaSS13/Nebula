@@ -54,6 +54,39 @@
 	for(var/rtype in removing_reagents)
 		holder.remove_reagent(rtype, removing_reagents[rtype])
 
+// Turns gas into a "solid" form for use in PACMAN etc.
+/datum/chemical_reaction/synthesis/aerogel
+	name = "Aerogel"
+	mix_message = "The solution solidifies into a translucent suspension of gas within gel."
+	required_reagents = list(/decl/material/solid/silicon = 1)
+	inhibitors = list(
+		/decl/material/liquid/crystal_agent
+	) // Interferes with resin globules.
+
+/datum/chemical_reaction/synthesis/aerogel/can_happen(datum/reagents/holder)
+	. = ..() && length(holder.reagent_volumes) > 1
+	if(.)
+		. = FALSE
+		for(var/rtype in holder.reagent_volumes)
+			if(REAGENT_VOLUME(holder, rtype) < REAGENT_UNITS_PER_MATERIAL_SHEET)
+				continue
+			var/decl/material/mat = GET_DECL(rtype)
+			if(!mat || mat.default_solid_form != /obj/item/stack/material/aerogel)
+				continue
+			return TRUE
+
+/datum/chemical_reaction/synthesis/aerogel/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
+	var/list/removing_reagents = list()
+	for(var/rtype in holder.reagent_volumes)
+		var/decl/material/mat = GET_DECL(rtype)
+		if(mat.default_solid_form == /obj/item/stack/material/aerogel)
+			var/solidifying = Floor(REAGENT_VOLUME(holder, rtype) / REAGENT_UNITS_PER_MATERIAL_SHEET)
+			if(solidifying)
+				SSmaterials.create_object(rtype, get_turf(holder.my_atom), solidifying)
+				removing_reagents[rtype] = solidifying * REAGENT_UNITS_PER_MATERIAL_SHEET
+	for(var/rtype in removing_reagents)
+		holder.remove_reagent(rtype, removing_reagents[rtype])
+
 /datum/chemical_reaction/synthesis/plastication
 	name = "Plastic"
 	required_reagents = list(/decl/material/liquid/acid/polyacid = 1, /decl/material/liquid/plasticide = 2)

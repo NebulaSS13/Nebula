@@ -60,3 +60,23 @@
 	material = /decl/material/solid/mineral/bauxite
 /obj/item/ore/rutile
 	material = /decl/material/solid/mineral/rutile
+
+/client/proc/spawn_ore_pile()
+	set name = "Spawn Ore Pile"
+	set category = "Debug"
+	set src = usr
+
+	if(!check_rights(R_SPAWN)) 
+		return
+
+	var/turf/T = get_turf(usr)
+	if(!istype(T))
+		return
+
+	var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
+	for(var/mtype in all_materials)
+		var/decl/material/mat = all_materials[mtype]
+		if(mat.ore_result_amount)
+			for(var/n = 1 to 5)
+				for(var/i = 1 to mat.ore_result_amount)
+					new /obj/item/ore(T, mtype)

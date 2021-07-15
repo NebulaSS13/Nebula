@@ -9,18 +9,20 @@
 
 // Flags bitmasks.
 
-#define ATOM_FLAG_CHECKS_BORDER           BITFLAG(0) // If a dense atom (potentially) only blocks movements from a given direction, i.e. window panes
-#define ATOM_FLAG_CLIMBABLE               BITFLAG(1) // This object can be climbed on
-#define ATOM_FLAG_NO_BLOOD                BITFLAG(2) // Used for items if they don't want to get a blood overlay.
-#define ATOM_FLAG_NO_REACT                BITFLAG(3) // Reagents don't react inside this container.
-#define ATOM_FLAG_CONTAINER               BITFLAG(4) // Is a container for chemistry purposes.
-#define ATOM_FLAG_OPEN_CONTAINER          BITFLAG(5) // Is an open container for chemistry purposes.
-#define ATOM_FLAG_INITIALIZED             BITFLAG(6) // Has this atom been initialized
-#define ATOM_FLAG_NO_TEMP_CHANGE          BITFLAG(7) // Reagents do not cool or heat to ambient temperature in this container.
-#define ATOM_FLAG_SHOW_REAGENT_NAME       BITFLAG(8) // Reagent presentation name is attached to the atom name
-#define ATOM_FLAG_CAN_BE_PAINTED          BITFLAG(9) // Can be painted using a paint sprayer or similar.
-#define ATOM_FLAG_SHIELD_CONTENTS         BITFLAG(10)// Protects contents from some global effects (Solar storms)
-#define ATOM_FLAG_ADJACENT_EXCEPTION      BITFLAG(11)// Skips adjacent checks for atoms that should always be reachable in window tiles
+#define ATOM_FLAG_CHECKS_BORDER           BITFLAG(0)  // If a dense atom (potentially) only blocks movements from a given direction, i.e. window panes
+#define ATOM_FLAG_CLIMBABLE               BITFLAG(1)  // This object can be climbed on
+#define ATOM_FLAG_NO_BLOOD                BITFLAG(2)  // Used for items if they don't want to get a blood overlay.
+#define ATOM_FLAG_NO_REACT                BITFLAG(3)  // Reagents don't react inside this container.
+#define ATOM_FLAG_CONTAINER               BITFLAG(4)  // Is a container for chemistry purposes.
+#define ATOM_FLAG_OPEN_CONTAINER          BITFLAG(5)  // Is an open container for chemistry purposes.
+#define ATOM_FLAG_INITIALIZED             BITFLAG(6)  // Has this atom been initialized
+#define ATOM_FLAG_NO_TEMP_CHANGE          BITFLAG(7)  // Reagents do not cool or heat to ambient temperature in this container.
+#define ATOM_FLAG_SHOW_REAGENT_NAME       BITFLAG(8)  // Reagent presentation name is attached to the atom name
+#define ATOM_FLAG_CAN_BE_PAINTED          BITFLAG(9)  // Can be painted using a paint sprayer or similar.
+#define ATOM_FLAG_SHIELD_CONTENTS         BITFLAG(10) // Protects contents from some global effects (Solar storms)
+#define ATOM_FLAG_ADJACENT_EXCEPTION      BITFLAG(11) // Skips adjacent checks for atoms that should always be reachable in window tiles
+#define ATOM_FLAG_NO_DISSOLVE             BITFLAG(12) // Bypasses solvent reactions in the container.
+#define ATOM_FLAG_NO_PHASE_CHANGE         BITFLAG(13) // Bypasses heating and cooling product reactions in the container.
 
 #define ATOM_IS_CONTAINER(A)              (A.atom_flags & ATOM_FLAG_CONTAINER)
 #define ATOM_IS_OPEN_CONTAINER(A)         (A.atom_flags & ATOM_FLAG_OPEN_CONTAINER)
