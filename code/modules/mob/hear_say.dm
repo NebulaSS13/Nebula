@@ -90,6 +90,11 @@
 			on_hear_say("<span class='game say'>[track]<span class='name'>[speaker_name]</span>[alt_name] [language.format_message(message, nverb)]</span>")
 		else
 			on_hear_say("<span class='game say'>[track]<span class='name'>[speaker_name]</span>[alt_name] [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
+		if((get_preference_value(/datum/client_preference/message_box) == PREF_SHOW) && isliving(src))
+			if(findtext(speaker_name, " "))
+				var/splitup = splittext(speaker_name, " ")
+				speaker_name = splitup[1] //leave only firstname
+			advanced_screen_text(client, text = strip_html_properly(message), source_name = speaker_name, source = speaker, additional_tags = (italics ? list("<i>","</i>") : null))
 		if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
 			src.playsound_local(source, speech_sound, sound_vol, 1)
