@@ -149,7 +149,7 @@ SUBSYSTEM_DEF(zcopy)
 		// If this is ever true, that turf should always pass this condition, so don't bother cleaning up beyond the Destroy() hook.
 		if (!T.below)	// Z-turf on the bottom-most level, just fake-copy space.
 			if (T.z_flags & ZM_MIMIC_OVERWRITE)
-				T.appearance = SSskybox.space_appearance_cache[(((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25) + 1]
+				T.appearance = SSskybox.dust_cache["[((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25]"]
 				T.name = initial(T.name)
 				T.desc = initial(T.desc)
 				T.gender = initial(T.gender)
@@ -158,7 +158,7 @@ SUBSYSTEM_DEF(zcopy)
 				if (!T.mimic_underlay)
 					T.mimic_underlay = new(T)
 				var/atom/movable/openspace/turf_proxy/TO = T.mimic_underlay
-				TO.appearance = SSskybox.space_appearance_cache[(((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25) + 1]
+				TO.appearance = SSskybox.dust_cache["[((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25]"]
 				TO.name = T.name
 				TO.gender = T.gender	// Need to grab this too so PLURAL works properly in examine.
 				TO.mouse_opacity = initial(TO.mouse_opacity)
