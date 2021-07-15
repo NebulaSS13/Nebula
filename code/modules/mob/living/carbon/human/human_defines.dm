@@ -11,7 +11,6 @@
 	var/skin_tone = 0  //Skin tone
 
 	var/damage_multiplier = 1 //multiplies melee combat damage
-	var/icon_update = 1 //whether icon updating shall take place
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 
