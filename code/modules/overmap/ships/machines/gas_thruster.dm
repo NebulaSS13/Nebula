@@ -10,6 +10,8 @@
 	var/engine_extension = /datum/extension/ship_engine/gas
 	construct_state = /decl/machine_construction/default/panel_closed
 	maximum_component_parts = list(/obj/item/stock_parts = 8)//don't want too many, let upgraded component shine
+	uncreated_component_parts = null
+	base_type = /obj/machinery/atmospherics/unary/engine
 
 	use_power = POWER_USE_OFF
 	power_channel = EQUIP
@@ -81,6 +83,7 @@
 	set_dir(ndir)
 	QDEL_IN(src, 2 SECONDS)
 
+// This comes with an additional terminal component and tries to set it up on init (you should map a terminal beneath it). This is for mapping only.
 /obj/machinery/atmospherics/unary/engine/terminal
-	base_type = /obj/machinery/atmospherics/unary/engine
+	uncreated_component_parts = list(/obj/item/stock_parts/power/terminal/buildable)
 	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
