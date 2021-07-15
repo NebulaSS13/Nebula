@@ -181,7 +181,7 @@ var/global/list/decl/topic_command/topic_commands = list()
 		return "No client provided."
 
 	var/client/C
-	for(var/client/K as anything in global.clients)
+	for(var/client/K AS_ANYTHING in global.clients)
 		if(K.ckey == target)
 			C = K
 			break

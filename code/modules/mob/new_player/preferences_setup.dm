@@ -94,7 +94,7 @@
 					update_icon = TRUE
 
 	if(update_icon)
-		mannequin.update_icons()
+		mannequin.update_icon()
 
 /datum/preferences/proc/update_preview_icon()
 	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)

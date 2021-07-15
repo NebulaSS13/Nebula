@@ -137,7 +137,7 @@
 	if(new_eyes && do_after(owner, 10) && owner.change_eye_color(new_eyes))
 		update_colour()
 		// Finally, update the eye icon on the mob.
-		owner.regenerate_icons()
+		owner.refresh_visible_overlays()
 		owner.visible_message(SPAN_NOTICE("\The [owner] changes their eye color."),SPAN_NOTICE("You change your eye color."),)
 
 /obj/item/organ/internal/eyes/proc/toggle_eye_glow()
@@ -157,4 +157,4 @@
 	var/obj/item/organ/external/head/head = owner.get_organ(BP_HEAD)
 	if(istype(head))
 		head.glowing_eyes = !head.glowing_eyes
-		owner.regenerate_icons()
+		owner.refresh_visible_overlays()

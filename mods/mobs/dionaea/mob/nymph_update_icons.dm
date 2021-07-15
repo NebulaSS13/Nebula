@@ -1,5 +1,5 @@
-/mob/living/carbon/alien/diona/update_icons()
-	cut_overlays()
+/mob/living/carbon/alien/diona/on_update_icon()
+	..()
 	if(stat == DEAD)
 		icon_state = "[initial(icon_state)]_dead"
 	else if(incapacitated(INCAPACITATION_KNOCKOUT))

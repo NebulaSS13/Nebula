@@ -21,11 +21,11 @@
 		return INITIALIZE_HINT_QDEL
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 	SetName("pet [slime_data.name] slime")
-	regenerate_icons()
+	update_icon()
 
-/mob/living/simple_animal/slime/regenerate_icons()
+/mob/living/simple_animal/slime/on_update_icon()
+	..()
 	icon = get_slime_icon()
-	cut_overlays()
 	
 /mob/living/simple_animal/slime/proc/get_slime_icon()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
@@ -60,7 +60,7 @@
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 	return slime_data.adult_icon
 
-/mob/living/simple_animal/slime/adult/regenerate_icons()
+/mob/living/simple_animal/slime/adult/on_update_icon()
 	..()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)
 	add_overlay(image(slime_data.mood_icon, "aslime-:33"))

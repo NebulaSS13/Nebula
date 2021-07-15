@@ -20,7 +20,8 @@
 	var/shot_delay = 4
 	var/last_shot = 0
 
-/mob/living/bot/secbot/ed209/update_icons()
+/mob/living/bot/secbot/ed209/on_update_icon()
+	..()
 	icon_state = "ed2090"
 
 /mob/living/bot/secbot/ed209/explode()

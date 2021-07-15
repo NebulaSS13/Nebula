@@ -55,7 +55,7 @@
 
 	if(new_mood != mood)
 		mood = new_mood
-		body.regenerate_icons()
+		body.update_icon()
 
 /datum/ai/slime/do_process(time_elapsed)
 	. = ..()

@@ -47,7 +47,7 @@
 		<option value='?_src_=vars;direct_control=\ref[src]'>Assume Direct Control</option>
 		<option value='?_src_=vars;drop_everything=\ref[src]'>Drop Everything</option>
 
-		<option value='?_src_=vars;regenerateicons=\ref[src]'>Regenerate Icons</option>
+		<option value='?_src_=vars;updateicon=\ref[src]'>Update Icon</option>
 		<option value='?_src_=vars;addlanguage=\ref[src]'>Add Language</option>
 		<option value='?_src_=vars;remlanguage=\ref[src]'>Remove Language</option>
 		<option value='?_src_=vars;addorgan=\ref[src]'>Add Organ</option>
@@ -71,6 +71,7 @@
 
 /mob/living/carbon/human/get_view_variables_options()
 	return ..() + {"
+		<option value='?_src_=vars;refreshoverlays=\ref[src]'>Refresh Visible Overlays</option>
 		<option value='?_src_=vars;setspecies=\ref[src]'>Set Species</option>
 		<option value='?_src_=vars;addailment=\ref[src]'>Add Ailment</option>
 		<option value='?_src_=vars;remailment=\ref[src]'>Remove Ailment</option>

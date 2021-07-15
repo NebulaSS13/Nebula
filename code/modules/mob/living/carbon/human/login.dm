@@ -1,5 +1,9 @@
 /mob/living/carbon/human/Login()
 	..()
-	update_hud()
-	if(species) species.handle_login_special(src)
-	return
+	if(client)
+		client.screen |= get_equipped_items(TRUE)
+	if(hud_used)
+		hud_used.hidden_inventory_update()
+		hud_used.persistant_inventory_update()
+	if(species)
+		species.handle_login_special(src)

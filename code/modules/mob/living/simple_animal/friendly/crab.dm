@@ -27,8 +27,10 @@
 	bone_material = null
 	bone_amount =   0
 
-	var/obj/item/inventory_head
-	var/obj/item/inventory_mask
+/mob/living/simple_animal/crab/Initialize()
+	if(isnull(hat_offsets))
+		hat_offsets = list("[SOUTH]" = list(-1, -10))
+	. = ..()
 
 /mob/living/simple_animal/crab/Life()
 	. = ..()
@@ -41,7 +43,7 @@
 			if(turns_since_move >= turns_per_move)
 				Move(get_step(src,pick(4,8)))
 				turns_since_move = 0
-	regenerate_icons()
+	update_icon()
 
 //COFFEE! SQUEEEEEEEEE!
 /mob/living/simple_animal/crab/Coffee

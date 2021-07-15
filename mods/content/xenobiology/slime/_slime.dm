@@ -62,7 +62,7 @@
 
 	ingested = new /datum/reagents/metabolism(240, src, CHEM_TOUCH)
 	reagents = ingested
-	// See comment in /mob/living/slime/regenerate_icons() regarding alpha mask filters.
+	// See comment in /mob/living/slime/on_update_icon() regarding alpha mask filters.
 	//render_target = "slime_\ref[src]"
 
 	verbs += /mob/living/proc/ventcrawl
@@ -75,7 +75,7 @@
 	number = random_id(/mob/living/slime, 1, 1000)
 	mutation_chance = rand(25, 35)
 	update_name()
-	regenerate_icons()
+	update_icon()
 
 /mob/living/slime/proc/update_name()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)

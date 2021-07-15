@@ -803,7 +803,7 @@
 			gender = FEMALE
 		else
 			gender = NEUTER
-	regenerate_icons()
+	refresh_visible_overlays()
 	check_dna()
 
 	var/decl/pronouns/G = get_pronouns()
@@ -1129,7 +1129,7 @@
 	bone_material = species.bone_material
 	bone_amount =   species.bone_amount
 
-	regenerate_icons()
+	refresh_visible_overlays()
 	reset_blood()
 
 	// Rebuild the HUD and visual elements.

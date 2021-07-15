@@ -264,7 +264,7 @@
 
 	// We don't present the cloaking message if the human was already cloaked just before cleanup.
 	if(!has_uncloaked && LAZYLEN(cloaking_sources) == 1)
-		update_icons()
+		update_icon()
 		src.visible_message("<span class='warning'>\The [src] seems to disappear before your eyes!</span>", "<span class='notice'>You feel completely invisible.</span>")
 		return TRUE
 	return FALSE
@@ -279,7 +279,7 @@
 	LAZYREMOVE(cloaking_sources, weakref(cloaking_source))
 
 	if(was_cloaked && !LAZYLEN(cloaking_sources))
-		update_icons()
+		update_icon()
 		visible_message(CLOAK_APPEAR_OTHER, CLOAK_APPEAR_SELF)
 		return TRUE
 	return FALSE
@@ -290,7 +290,7 @@
 
 /mob/living/carbon/human/is_cloaked()
 	if(clean_cloaking_sources())
-		update_icons()
+		update_icon()
 		visible_message(CLOAK_APPEAR_OTHER, CLOAK_APPEAR_SELF)
 	return LAZYLEN(cloaking_sources)
 
