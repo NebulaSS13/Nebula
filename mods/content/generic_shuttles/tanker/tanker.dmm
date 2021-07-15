@@ -19,7 +19,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/tanker)
 "bC" = (
-/obj/machinery/atmospherics/unary/engine/terminal{
+/obj/machinery/atmospherics/unary/engine{
 	dir = 8
 	},
 /turf/simulated/floor/reinforced/airless,
