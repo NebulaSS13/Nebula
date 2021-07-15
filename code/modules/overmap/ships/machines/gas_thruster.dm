@@ -3,6 +3,7 @@
 	desc = "Simple rocket nozzle, expelling gas at hypersonic velocities to propell the ship."
 	icon = 'icons/obj/ship_engine.dmi'
 	icon_state = "nozzle"
+	layer = STRUCTURE_LAYER
 	opacity = 1
 	density = 1
 	atmos_canpass = CANPASS_NEVER
