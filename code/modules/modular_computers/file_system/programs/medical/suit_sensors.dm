@@ -61,7 +61,7 @@
 	if(network)
 		for(var/z_level in GetConnectedZlevels(network.get_router_z()))
 			crewmembers += crew_repository.health_data(z_level)
-		data["crewmembers"] = sortTim(crewmembers, /proc/cmp_list_name_key_asc, TRUE)
+		data["crewmembers"] = sortTim(crewmembers, /proc/cmp_list_name_key_asc)
 	else
 		data["crewmembers"] = list()
 

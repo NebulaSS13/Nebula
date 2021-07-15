@@ -27,6 +27,7 @@
 	var/datum/fabricator_build_order/currently_building
 
 	var/fabricator_class = FABRICATOR_CLASS_GENERAL
+	var/filter_string
 
 	var/list/stored_material
 	var/list/storage_capacity
@@ -148,6 +149,8 @@
 			if(!(ispath(species_variation, species_type)))
 				design_cache.Remove(R)
 				return
+
+	design_cache = sortTim(design_cache, /proc/cmp_name_asc)
 
 /obj/machinery/fabricator/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()
