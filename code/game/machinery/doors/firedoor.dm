@@ -318,7 +318,8 @@
 
 /obj/machinery/door/firedoor/close()
 	latetoggle()
-	..()
+
+	. = ..()
 
 	if(push_on_close)
 		for(var/mob/living/L in loc)
