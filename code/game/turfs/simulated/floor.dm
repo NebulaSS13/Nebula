@@ -80,7 +80,13 @@
 	if(flooring)
 		flooring.on_remove()
 		if(flooring.build_type && place_product)
-			new flooring.build_type(src)
+			// If build type uses material stack, check for it
+			// Because material stack uses different arguments
+			// And we need to use build material to spawn stack
+			if(ispath(flooring.build_type, /obj/item/stack/material))
+				new flooring.build_type(src, flooring.build_cost, flooring.build_material)
+			else
+				new flooring.build_type(src)
 		flooring = null
 
 	set_light(0)
