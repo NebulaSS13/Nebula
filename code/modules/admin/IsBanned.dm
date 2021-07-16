@@ -1,3 +1,7 @@
+#define STICKYBAN_MAX_MATCHES 20
+/// ie, users who were connected before the ban triggered
+#define STICKYBAN_MAX_EXISTING_USER_MATCHES 5
+
 //Blocks an attempt to connect before even creating our client datum thing.
 /world/IsBanned(key, address, computer_id, type)
 	var/static/key_cache = list()
@@ -13,6 +17,12 @@
 	if(admin_datums[ckeytext])
 		key_cache[key] = 0
 		return ..()
+
+	/// this cid causes stickybans to go haywire
+	if (text2num(computer_id) == 2147483647) 
+		log_access("Failed Login (invalid cid): [key] [address]-[computer_id]")
+		key_cache[key] = 0
+		return list("reason" = "invalid login data", "desc" = "Error: Could not check ban status, Please try again. Error message: Your computer provided an invalid Computer ID.")
 
 	//Guest Checking
 	if(!config.guests_allowed && IsGuestKey(key))
@@ -90,5 +100,69 @@
 			message_admins("[key] has logged in with a blank computer id in the ban check.")
 		if (failedip)
 			message_admins("[key] has logged in with a blank ip in the ban check.")
-		key_cache[key] = 0
-		return ..()	//default pager ban stuff
+
+	key_cache[key] = 0
+	/// default pager ban stuff
+	var/list/ban = ..()
+
+	var/ckey = ckey(key)
+	if (ban)
+		var/banned_ckey = "ERROR"
+		if (ban["ckey"])
+			banned_ckey = ban["ckey"]
+
+		var/newmatch = FALSE
+		var/cachedban = SSstickyban.cache[banned_ckey]
+
+		//rogue ban in the process of being reverted.
+		if (cachedban && cachedban["reverting"])
+			return null
+
+		if (cachedban && ckey != banned_ckey)
+			newmatch = TRUE
+			if (cachedban["keys"])
+				if (cachedban["keys"][ckey])
+					newmatch = FALSE
+			if (cachedban["matches_this_round"][ckey])
+				newmatch = FALSE
+
+		if (newmatch && cachedban)
+			var/list/newmatches = cachedban["matches_this_round"]
+			var/list/newmatches_connected = cachedban["existing_user_matches_this_round"]
+
+			newmatches[ckey] = ckey
+			if (C)
+				newmatches_connected[ckey] = ckey
+
+			if (\
+				newmatches.len > STICKYBAN_MAX_MATCHES || \
+				newmatches_connected.len > STICKYBAN_MAX_EXISTING_USER_MATCHES \
+				)
+				if (cachedban["reverting"])
+					return null
+				cachedban["reverting"] = TRUE
+
+				world.SetConfig("ban", banned_ckey, null)
+
+				log_game("Stickyban on [banned_ckey] detected as rogue, reverting to its roundstart state")
+				message_admins("Stickyban on [banned_ckey] detected as rogue, reverting to its roundstart state")
+				//do not convert to timer.
+				spawn (5)
+					world.SetConfig("ban", banned_ckey, null)
+					sleep(1)
+					world.SetConfig("ban", banned_ckey, null)
+					cachedban["matches_this_round"] = list()
+					cachedban["existing_user_matches_this_round"] = list()
+					cachedban["admin_matches_this_round"] = list()
+					cachedban -= "reverting"
+					world.SetConfig("ban", banned_ckey, list2stickyban(cachedban))
+				return null
+
+		if (C) //user is already connected!.
+			to_chat(C, "You are about to get disconnected for matching a sticky ban after you connected. If this turns out to be the ban evasion detection system going haywire, we will automatically detect this and revert the matches. if you feel that this is the case, please wait EXACTLY 6 seconds then reconnect using file -> reconnect to see if the match was reversed.")
+
+		var/desc = "\nReason: (STICKYBAN) You, or another user of this computer or connection ([banned_ckey]) is banned from playing here. The ban reason is:\n[ban["message"]]\nThis ban was applied by [ban["admin"]]"
+		. = list("reason" = "Stickyban", "desc" = desc)
+		log_access("Failed Login: [key] [computer_id] [address] - StickyBanned [ban["message"]] Target Username: [banned_ckey] Placed by [ban["admin"]]")
+
+	return .

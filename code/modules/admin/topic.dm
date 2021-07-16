@@ -1584,6 +1584,8 @@
 
 		show_player_panel(M)
 
+	if(href_list["stickyban"])
+		stickyban(href_list["stickyban"], href_list)
 
 /mob/living/proc/can_centcom_reply()
 	return 0
