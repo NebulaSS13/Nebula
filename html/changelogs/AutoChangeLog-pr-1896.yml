@@ -1,7 +1,0 @@
-author: PsyCommando
-delete-after: true
-changes:
-  - bugfix: Fixed shutters and blast doors deconstructed and panel_open state being
-      unreachable.
-  - bugfix: Fixed shutters assemblies having the wrong icon.
-  - bugfix: Fixed shutters deconstructing to blast door assemblies.
