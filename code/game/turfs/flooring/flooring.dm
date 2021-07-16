@@ -378,7 +378,7 @@
 	flags = TURF_REMOVE_CROWBAR | TURF_ACID_IMMUNE
 	can_engrave = FALSE
 	color = GLASS_COLOR
-	z_flags = ZM_MIMIC_BELOW
+	z_flags = ZM_MIMIC_DEFAULTS
 	footstep_type = /decl/footsteps/plating
 
 /decl/flooring/glass/boro
