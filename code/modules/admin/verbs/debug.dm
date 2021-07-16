@@ -516,3 +516,10 @@
 
 	new_planet.update_daynight()
 	new_planet.build_level()
+
+/client/proc/kaboom()
+	set name = "kaboom"
+	set category = "Debug"
+	var/power = input(src, "Input power num.", "Power?") as num
+	var/turf/T = get_turf(mob)
+	explosion_iter(T, power, UP | DOWN)
