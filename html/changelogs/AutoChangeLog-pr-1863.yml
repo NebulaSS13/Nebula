@@ -1,0 +1,5 @@
+author: CrimsonShrike and quardbreak
+delete-after: true
+changes:
+  - rscadd: Ported pool tiles and related to pool objects. You can build pool and
+      keep water inside it.
