@@ -378,3 +378,24 @@ var/global/const/enterloopsanity = 100
 
 /turf/proc/get_footstep_sound(var/mob/caller)
 	return
+
+/turf/Bumped(var/atom/movable/AM)
+	if(!istype(AM) || !HasAbove(z))
+		return ..()
+	
+	var/turf/exterior/wall/slope = AM.loc
+	if(!istype(slope) || !slope.sloped || get_dist(src, slope) != slope.sloped)
+		return ..()
+
+	var/turf/target = GetAbove(src)
+	var/turf/source = get_turf(AM)
+	var/turf/above =  GetAbove(AM)
+	if(istype(target) && istype(above) && above.CanZPass(source, UP) && target.Enter(AM, src))
+		AM.forceMove(target)
+		if(isliving(AM))
+			var/mob/living/L = AM
+			for(var/obj/item/grab/G in L.get_active_grabs())
+				G.affecting.forceMove(target)
+	else
+		to_chat(AM, SPAN_WARNING("Something blocks the path."))
+	return TRUE

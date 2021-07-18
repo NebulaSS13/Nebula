@@ -173,11 +173,13 @@
 		return species.can_fall(src)
 
 /atom/movable/proc/handle_fall(var/turf/landing)
-	forceMove(landing)
+	dropInto(landing)
 	if(locate(/obj/structure/stairs) in landing)
-		return 1
-	else
-		handle_fall_effect(landing)
+		return TRUE
+	var/turf/exterior/wall/T = landing
+	if(istype(T) && T.sloped)
+		return TRUE
+	handle_fall_effect(landing)
 
 /atom/movable/proc/handle_fall_effect(var/turf/landing)
 	if(istype(landing) && landing.is_open())
