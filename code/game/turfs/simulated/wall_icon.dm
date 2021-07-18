@@ -125,14 +125,26 @@
 
 	var/material_icon_base = get_wall_icon()
 	var/base_color = material.color
+
+	var/new_icon
+	var/new_icon_state
+	var/new_color
+
 	if(!density)
-		icon = material_icon_base
-		icon_state = "fwall_open"
-		color = base_color
+		new_icon = material_icon_base
+		new_icon_state = "fwall_open"
+		new_color = base_color
 	else
-		icon = get_combined_wall_icon(wall_connections, other_connections, material_icon_base, base_color, paint_color, stripe_color, (material.wall_flags & WALL_HAS_EDGES) && (stripe_color || base_color))
-		icon_state = ""
-		color = null
+		new_icon = get_combined_wall_icon(wall_connections, other_connections, material_icon_base, base_color, paint_color, stripe_color, (material.wall_flags & WALL_HAS_EDGES) && (stripe_color || base_color))
+		new_icon_state = ""
+		new_color = null
+
+	if(icon != new_icon)
+		icon = new_icon
+	if(icon_state != new_icon_state)
+		icon_state = new_icon_state
+	if(color != new_color)
+		color = new_color
 
 	if(apply_reinf_overlay())
 		var/image/I

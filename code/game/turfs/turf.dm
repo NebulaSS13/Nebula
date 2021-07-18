@@ -596,3 +596,24 @@
 
 /turf/proc/dig_pit()
 	return can_dig_pit() && new /obj/structure/pit(src)
+
+// Largely copied from stairs.
+/turf/Bumped(var/atom/movable/AM)
+	if(!istype(AM) || !HasAbove(z))
+		return ..()
+	var/turf/exterior/wall/slope = AM.loc
+	if(!istype(slope) || !slope.ramp_slope_direction || get_dir(src, slope) != slope.ramp_slope_direction)
+		return ..()
+	var/turf/target = GetAbove(src)
+	var/turf/source = get_turf(AM)
+	var/turf/above =  GetAbove(AM)
+	if(istype(target) && istype(above) && above.CanZPass(source, UP) && target.Enter(AM, src))
+		AM.forceMove(target)
+		if(isliving(AM))
+			var/mob/living/L = AM
+			for(var/obj/item/grab/G in L.get_active_grabs())
+				G.affecting.forceMove(target)
+	else
+		to_chat(AM, SPAN_WARNING("Something blocks the path."))
+	return TRUE
+

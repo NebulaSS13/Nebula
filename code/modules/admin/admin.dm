@@ -1144,7 +1144,9 @@ var/global/floorIsLava = 0
 	for(var/path in subtypesof(/atom))
 		var/atom/path_cast = path
 		if(TYPE_IS_SPAWNABLE(path_cast) && findtext(lowertext("[path]"), object))
-			matches += "[path]" // We need to use a string because input() checks invisibility on types for Reasons:tm:.
+			// We need to keep the type as a string because for some ungodly reason input() compares
+			// initial invisibility value to mob see_invisible.
+			matches += "[path]"
 
 	if(matches.len==0)
 		return
@@ -1153,11 +1155,11 @@ var/global/floorIsLava = 0
 	if(matches.len==1)
 		chosen = matches[1]
 	else
-		chosen = input("Select an atom type", "Spawn Atom", matches[1]) as null|anything in matches
+		chosen = input(usr, "Select an atom type", "Spawn Atom", matches[1]) as null|anything in matches
 		if(!chosen)
 			return
 
-	chosen = text2path(chosen)
+	chosen = text2path(chosen) // See comment above.
 	if(ispath(chosen,/turf))
 		var/turf/T = get_turf(usr.loc)
 		T.ChangeTurf(chosen)
