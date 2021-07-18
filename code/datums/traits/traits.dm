@@ -70,6 +70,7 @@ var/global/list/_trait_types
 
 /decl/trait
 	abstract_type = /decl/trait
+	crash_on_abstract_init = TRUE
 	var/name
 	var/description
 	var/list/levels = list(TRAIT_LEVEL_EXISTS) // Should either only contain TRAIT_LEVEL_EXISTS or a set of the other TRAIT_LEVEL_* levels

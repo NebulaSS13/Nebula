@@ -26,10 +26,9 @@ var/global/repository/decls/decls_repository = new
 	..()
 	for(var/decl_type in typesof(/decl))
 		var/decl/decl = decl_type
-		if(initial(decl.abstract_type) != decl_type)
-			var/decl_uid = initial(decl.uid)
-			if(decl_uid)
-				fetched_decl_ids[decl.uid] = decl_type
+		var/decl_uid = initial(decl.uid)
+		if(decl_uid)
+			fetched_decl_ids[decl_uid] = decl_type
 
 /repository/decls/proc/get_decl_by_id(var/decl_id)
 	. = get_decl(fetched_decl_ids[decl_id])
@@ -67,12 +66,13 @@ var/global/repository/decls/decls_repository = new
 /decl
 	var/uid
 	var/abstract_type = /decl
+	var/crash_on_abstract_init = FALSE
 
 /decl/proc/Initialize()
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
-	if(type == abstract_type)
-		PRINT_STACK_TRACE("Abstract /decl type instantiated: [type]")
+	if(type == abstract_type && crash_on_abstract_init)
+		PRINT_STACK_TRACE("Banned abstract /decl type instantiated: [type]")
 	else
 		decls_repository.fetched_decls[type] = src
 		if(uid)
@@ -80,5 +80,8 @@ var/global/repository/decls/decls_repository = new
 
 /decl/Destroy()
 	SHOULD_CALL_PARENT(FALSE)
-	PRINT_STACK_TRACE("Prevented attempt to delete a decl instance: [log_info_line(src)]")
+	PRINT_STACK_TRACE("Prevented attempt to delete a /decl instance: [log_info_line(src)]")
 	return QDEL_HINT_LETMELIVE
+
+/decl/proc/is_abstract()
+	return abstract_type == type
