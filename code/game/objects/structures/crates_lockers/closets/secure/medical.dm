@@ -127,6 +127,10 @@
 	wall_mounted = 1
 	storage_types = CLOSET_STORAGE_ITEMS
 	req_access = list(access_medical_equip)
+	
+/obj/structure/closet/secure_closet/medical_wall/Initialize()
+	. = ..()
+	tool_interaction_flags &= ~TOOL_INTERACTION_ANCHOR
 
 /obj/structure/closet/secure_closet/counselor
 	name = "counselor's locker"
