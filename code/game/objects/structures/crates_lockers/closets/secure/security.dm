@@ -230,6 +230,10 @@
 	//too small to put a man in
 	large = 0
 
+/obj/structure/closet/secure_closet/wall/Initialize()
+	. = ..()
+	tool_interaction_flags &= ~TOOL_INTERACTION_ANCHOR
+
 /obj/structure/closet/secure_closet/lawyer
 	name = "internal affairs secure closet"
 	req_access = list(access_lawyer)
