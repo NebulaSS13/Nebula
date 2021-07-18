@@ -5,6 +5,7 @@
 	icon_state = "base"
 	density = 1
 	maxhealth = 100
+	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
 
 	var/welded = 0
 	var/large = 1
@@ -229,7 +230,7 @@
 	if(user.a_intent == I_HURT && W.force)
 		return ..()
 
-	if(!opened && istype(W, /obj/item/stack/material))
+	if(!opened && (istype(W, /obj/item/stack/material) || isWrench(W)) )
 		return ..()
 
 	if(src.opened)
