@@ -5,8 +5,8 @@
 	pda_type = /obj/item/modular_computer/pda/medical
 	pda_slot = slot_l_store_str
 
-/decl/hierarchy/outfit/job/medical/New()
-	..()
+/decl/hierarchy/outfit/job/medical/Initialize()
+	. = ..()
 	BACKPACK_OVERRIDE_MEDICAL
 
 /decl/hierarchy/outfit/job/medical/cmo
@@ -43,8 +43,8 @@
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/virologist
 	mask = /obj/item/clothing/mask/surgical
 
-/decl/hierarchy/outfit/job/medical/doctor/virologist/New()
-	..()
+/decl/hierarchy/outfit/job/medical/doctor/virologist/Initialize()
+	. = ..()
 	BACKPACK_OVERRIDE_VIROLOGY
 
 /decl/hierarchy/outfit/job/medical/doctor/nurse
@@ -70,8 +70,8 @@
 	id_type = /obj/item/card/id/medical
 	pda_type = /obj/item/modular_computer/pda/medical
 
-/decl/hierarchy/outfit/job/medical/chemist/New()
-	..()
+/decl/hierarchy/outfit/job/medical/chemist/Initialize()
+	. = ..()
 	BACKPACK_OVERRIDE_VIROLOGY
 
 /decl/hierarchy/outfit/job/medical/psychiatrist

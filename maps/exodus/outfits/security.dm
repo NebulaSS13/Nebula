@@ -6,8 +6,8 @@
 	shoes = /obj/item/clothing/shoes/jackboots
 	backpack_contents = list(/obj/item/handcuffs = 1)
 
-/decl/hierarchy/outfit/job/security/New()
-	..()
+/decl/hierarchy/outfit/job/security/Initialize()
+	. = ..()
 	BACKPACK_OVERRIDE_SECURITY
 
 /decl/hierarchy/outfit/job/security/hos
@@ -37,8 +37,8 @@
 	pda_type = /obj/item/modular_computer/pda
 	backpack_contents = list(/obj/item/storage/box/evidence = 1)
 
-/decl/hierarchy/outfit/job/security/detective/New()
-	..()
+/decl/hierarchy/outfit/job/security/detective/Initialize()
+	. = ..()
 	backpack_overrides.Cut()
 
 /decl/hierarchy/outfit/job/security/detective/forensic

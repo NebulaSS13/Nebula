@@ -30,6 +30,6 @@
 	backpack_contents = list(/obj/item/crowbar = 1, /obj/item/storage/ore = 1)
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
-/decl/hierarchy/outfit/job/cargo/mining/New()
-	..()
+/decl/hierarchy/outfit/job/cargo/mining/Initialize()
+	. = ..()
 	BACKPACK_OVERRIDE_ENGINEERING

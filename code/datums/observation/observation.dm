@@ -63,9 +63,9 @@
 	var/list/global_listeners = list()  // Associative list of instances that listen to all events of this type (as opposed to events belonging to a specific source) and the proc to call.
 	var/flags                           // See _defines.dm for available flags and what they do
 
-/decl/observ/New()
+/decl/observ/Initialize()
+	. = ..()
 	global.all_observable_events += src
-	..()
 
 /decl/observ/proc/is_listening(var/event_source, var/datum/listener, var/proc_call)
 	// Return whether there are global listeners unless the event source is given.

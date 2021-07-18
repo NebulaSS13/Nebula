@@ -68,8 +68,8 @@
 	value = 0.9
 	var/image/texture
 
-/decl/material/solid/stone/concrete/New()
-	..()
+/decl/material/solid/stone/concrete/Initialize()
+	. = ..()
 	texture = image('icons/turf/wall_texture.dmi', "concrete")
 	texture.blend_mode = BLEND_MULTIPLY
 

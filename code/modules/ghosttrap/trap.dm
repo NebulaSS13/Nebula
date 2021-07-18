@@ -147,9 +147,9 @@
 	ghost_trap_message = "They are occupying a maintenance drone now."
 	can_set_own_name = FALSE
 
-/decl/ghosttrap/maintenance_drone/New()
+/decl/ghosttrap/maintenance_drone/Initialize()
+	. = ..()
 	minutes_since_death = DRONE_SPAWN_DELAY
-	..()
 
 /decl/ghosttrap/maintenance_drone/forced(var/mob/user)
 	request_player(new /mob/living/silicon/robot/drone(get_turf(user)), "Someone is attempting to reboot a maintenance drone.", 30 SECONDS)

@@ -38,6 +38,9 @@ var/global/repository/decls/decls_repository = new
 	. = fetched_decls[decl_type]
 	if(!.)
 		var/decl/decl = new decl_type()
+		if(decl.type == decl.abstract_type && decl.crash_on_abstract_init)
+			PRINT_STACK_TRACE("Banned abstract /decl type instantiated: [decl.type]")
+		fetched_decls[decl_type] = decl
 		decl.Initialize()
 		. = decl
 
@@ -71,12 +74,7 @@ var/global/repository/decls/decls_repository = new
 /decl/proc/Initialize()
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
-	if(type == abstract_type && crash_on_abstract_init)
-		PRINT_STACK_TRACE("Banned abstract /decl type instantiated: [type]")
-	else
-		decls_repository.fetched_decls[type] = src
-		if(uid)
-			decls_repository.fetched_decl_ids[uid] = src
+	return INITIALIZE_HINT_NORMAL
 
 /decl/Destroy()
 	SHOULD_CALL_PARENT(FALSE)

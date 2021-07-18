@@ -22,8 +22,8 @@
 	var/list/taken_channels // taken_channels and source_id_uses can be merged into one but would then require a meta-object to store the different values I desire.
 	var/list/sound_tokens_by_sound_id
 
-/decl/sound_player/New()
-	..()
+/decl/sound_player/Initialize()
+	. = ..()
 	taken_channels = list()
 	sound_tokens_by_sound_id = list()
 

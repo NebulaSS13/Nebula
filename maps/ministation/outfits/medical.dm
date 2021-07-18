@@ -9,8 +9,8 @@
 	r_pocket = /obj/item/flashlight/pen
 	id_type = /obj/item/card/id/ministation/doctor
 
-/decl/hierarchy/outfit/job/ministation/doctor/New()
-	..()
+/decl/hierarchy/outfit/job/ministation/doctor/Initialize()
+	. = ..()
 	BACKPACK_OVERRIDE_MEDICAL
 
 /obj/item/card/id/ministation/doctor

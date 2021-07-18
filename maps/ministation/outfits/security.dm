@@ -15,8 +15,8 @@
 	id_type = /obj/item/card/id/ministation/security
 	pda_type = /obj/item/modular_computer/pda/security
 
-/decl/hierarchy/outfit/job/ministation/security/New()
-	..()
+/decl/hierarchy/outfit/job/ministation/security/Initialize()
+	. = ..()
 	BACKPACK_OVERRIDE_SECURITY
 
 /obj/item/modular_computer/pda/forensics
@@ -42,8 +42,8 @@
 	backpack_contents = list(/obj/item/storage/box/evidence = 1)
 	gloves = /obj/item/clothing/gloves/thick
 
-/decl/hierarchy/outfit/job/ministation/detective/New()
-	..()
+/decl/hierarchy/outfit/job/ministation/detective/Initialize()
+	. = ..()
 	backpack_overrides.Cut()
 
 /obj/item/card/id/ministation/security

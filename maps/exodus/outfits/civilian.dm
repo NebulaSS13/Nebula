@@ -25,8 +25,8 @@
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
-/decl/hierarchy/outfit/job/service/gardener/New()
-	..()
+/decl/hierarchy/outfit/job/service/gardener/Initialize()
+	. = ..()
 	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/hydroponics
 	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/hyd
 	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/hyd

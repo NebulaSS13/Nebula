@@ -23,8 +23,8 @@
 	pda_slot = slot_l_store_str
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
-/decl/hierarchy/outfit/job/generic/engineer/New()
-	..()
+/decl/hierarchy/outfit/job/generic/engineer/Initialize()
+	. = ..()
 	BACKPACK_OVERRIDE_ENGINEERING
 
 /decl/hierarchy/outfit/job/generic/doctor
@@ -38,8 +38,8 @@
 	pda_type = /obj/item/modular_computer/pda/medical
 	pda_slot = slot_l_store_str
 
-/decl/hierarchy/outfit/job/generic/doctor/New()
-	..()
+/decl/hierarchy/outfit/job/generic/doctor/Initialize()
+	. = ..()
 	BACKPACK_OVERRIDE_MEDICAL
 
 /decl/hierarchy/outfit/job/generic/chef

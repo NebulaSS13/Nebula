@@ -1,10 +1,6 @@
 /decl/appearance_handler
 	var/priority = 15
-	var/list/appearance_sources
-
-/decl/appearance_handler/New()
-	..()
-	appearance_sources = list()
+	var/list/appearance_sources = list()
 
 /decl/appearance_handler/proc/AddAltAppearance(var/source, var/list/images, var/list/viewers = list())
 	if(source in appearance_sources)

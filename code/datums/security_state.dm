@@ -18,7 +18,10 @@
 	var/list/standard_security_levels               // List of all normally selectable security levels
 	var/list/comm_console_security_levels           // List of all selectable security levels for the command and communication console - basically standard_security_levels - 1
 
-/decl/security_state/New()
+/decl/security_state/Initialize()
+
+	. = ..()
+
 	// Setup the severe security level
 	if(!(severe_security_level in all_security_levels))
 		severe_security_level = all_security_levels[all_security_levels.len]
@@ -69,10 +72,8 @@
 	if(high_index > severe_index)
 		high_security_level = severe_security_level
 
-/decl/security_state/Initialize()
 	// Finally switch up to the default starting security level.
 	current_security_level.switching_up_to()
-	. = ..()
 
 /decl/security_state/proc/can_change_security_level()
 	return current_security_level in standard_security_levels
@@ -149,7 +150,7 @@
 
 	var/datum/alarm_appearance/alarm_appearance
 
-/decl/security_level/New()
+/decl/security_level/Initialize()
 	. = ..()
 	if(ispath(alarm_appearance, /datum/alarm_appearance))
 		alarm_appearance = new alarm_appearance

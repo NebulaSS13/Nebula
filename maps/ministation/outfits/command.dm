@@ -8,8 +8,8 @@
 	id_type = /obj/item/card/id/gold
 	pda_type = /obj/item/modular_computer/pda/heads/captain
 
-/decl/hierarchy/outfit/job/ministation/captain/New()
-	..()
+/decl/hierarchy/outfit/job/ministation/captain/Initialize()
+	. = ..()
 	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/captain
 	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/cap
 	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/com

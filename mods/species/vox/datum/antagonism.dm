@@ -1,4 +1,4 @@
-/decl/special_role/raider/New()
+/decl/special_role/raider/Initialize()
 	. = ..()
 	LAZYSET(outfits_per_species, SPECIES_VOX, /decl/hierarchy/outfit/vox_raider)
 	

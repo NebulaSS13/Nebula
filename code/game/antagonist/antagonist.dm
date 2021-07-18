@@ -88,12 +88,13 @@
 	// Map template that antag needs to load before spawning. Nulled after it's loaded.
 	var/datum/map_template/base_to_load
 
-/decl/special_role/New()
+/decl/special_role/Initialize()
+	. = ..()
 	if(!name)
 		PRINT_STACK_TRACE("Special role [type] created without name set.")
 	if(ispath(skill_setter))
 		skill_setter = new skill_setter
-	..()
+	. = ..()
 
 /decl/special_role/Initialize()
 	..()

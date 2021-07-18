@@ -5,7 +5,7 @@
 	var/list/armour_types = list()
 	var/list/powers = list()
 
-/decl/psionic_faculty/New()
-	..()
+/decl/psionic_faculty/Initialize()
+	. = ..()
 	for(var/atype in armour_types)
 		SSpsi.armour_faculty_by_type[atype] = id

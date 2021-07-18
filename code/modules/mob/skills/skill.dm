@@ -33,11 +33,10 @@ var/global/list/skills = list()
 
 /decl/hierarchy/skill/Initialize()
 	. = ..()
+	decls_repository.get_decl(/decl/hierarchy/skill) // Make sure the full skill decl list is populated.
 	if(is_abstract())
 		for(var/decl/hierarchy/skill/C in children)
 			global.skills |= C.get_descendents()
-	else if(!length(global.skills))
-		PRINT_STACK_TRACE("Non-abstract instance of [type] created prior to global skill list population!")
 
 /decl/hierarchy/skill/dd_SortValue()
 	return sort_priority
@@ -56,33 +55,33 @@ var/global/list/skills = list()
 	default_max = SKILL_MAX
 	abstract_type = /decl/hierarchy/skill/general
 
-/decl/hierarchy/skill/service
-	name = "Service"
-	sort_priority = 3
-	difficulty = SKILL_EASY
-	default_max = SKILL_MAX
-	abstract_type = /decl/hierarchy/skill/service
-
 /decl/hierarchy/skill/security
 	name = "Security"
-	sort_priority = 4
+	sort_priority = 3
 	abstract_type = /decl/hierarchy/skill/security
 
 /decl/hierarchy/skill/engineering
 	name = "Engineering"
-	sort_priority = 5
+	sort_priority = 4
 	abstract_type = /decl/hierarchy/skill/engineering
 
 /decl/hierarchy/skill/research
 	name = "Research"
-	sort_priority = 6
+	sort_priority = 5
 	abstract_type = /decl/hierarchy/skill/research
 
 /decl/hierarchy/skill/medical
 	name = "Medical"
-	sort_priority = 7
+	sort_priority = 6
 	abstract_type = /decl/hierarchy/skill/medical
 	difficulty = SKILL_HARD
+
+/decl/hierarchy/skill/service
+	name = "Service"
+	sort_priority = 7
+	difficulty = SKILL_EASY
+	default_max = SKILL_MAX
+	abstract_type = /decl/hierarchy/skill/service
 
 // ONLY SKILL DEFINITIONS BELOW THIS LINE
 // Category: Organizational

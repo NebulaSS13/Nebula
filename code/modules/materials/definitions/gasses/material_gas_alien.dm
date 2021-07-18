@@ -6,7 +6,7 @@
 	gas_symbol = "X"
 	value = 0.6
 
-/decl/material/gas/alien/New()
+/decl/material/gas/alien/Initialize()
 	var/num = rand(100,999)
 	name = "compound #[num]"
 	gas_specific_heat = rand(1, 400)	
@@ -24,3 +24,4 @@
 	if(prob(50))
 		color = RANDOM_RGB
 		gas_overlay_limit = 0.5
+	. = ..()

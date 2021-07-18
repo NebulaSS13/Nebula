@@ -5,9 +5,9 @@
 	opacity = 0.5
 	abstract_type = /decl/material/liquid
 
-/decl/material/liquid/New()
+/decl/material/liquid/Initialize()
 	if(!gas_name)
 		gas_name = "vaporized [name]"
 	if(!solid_name)
 		solid_name = "frozen [name]"
-	..()
+	. = ..()

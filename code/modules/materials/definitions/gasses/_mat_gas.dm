@@ -16,9 +16,9 @@
 	default_solid_form = /obj/item/stack/material/aerogel
 	abstract_type = /decl/material/gas
 
-/decl/material/gas/New()
+/decl/material/gas/Initialize()
 	if(!liquid_name)
 		liquid_name = "liquid [name]"
 	if(!solid_name)
 		solid_name = "frozen [name]"
-	..()
+	. = ..()

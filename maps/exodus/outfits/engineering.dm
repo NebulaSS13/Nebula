@@ -6,8 +6,8 @@
 	pda_slot = slot_l_store_str
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
-/decl/hierarchy/outfit/job/engineering/New()
-	..()
+/decl/hierarchy/outfit/job/engineering/Initialize()
+	. = ..()
 	BACKPACK_OVERRIDE_ENGINEERING
 
 /decl/hierarchy/outfit/job/engineering/chief_engineer

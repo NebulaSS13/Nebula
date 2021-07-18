@@ -29,6 +29,6 @@
 	pda_slot = slot_r_store_str
 	pda_type = /obj/item/modular_computer/pda/science
 
-/decl/hierarchy/outfit/job/science/roboticist/New()
-	..()
+/decl/hierarchy/outfit/job/science/roboticist/Initialize()
+	. = ..()
 	backpack_overrides.Cut()

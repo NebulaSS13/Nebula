@@ -2,8 +2,8 @@
 	var/list/hazard_by_turf
 	var/list/ship_events
 
-/decl/overmap_event_handler/New()
-	..()
+/decl/overmap_event_handler/Initialize()
+	. = ..()
 	hazard_by_turf = list()
 	ship_events = list()
 

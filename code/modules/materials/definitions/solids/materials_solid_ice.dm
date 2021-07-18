@@ -88,6 +88,7 @@
 
 /decl/material/solid/ice/hydrogen
 	name = "hydrogen"
+	uid = "solid_ice_hydrogen"
 	heating_products = list(
 		/decl/material/gas/hydrogen = 0.2,
 		/decl/material/liquid/water = 0.65,
