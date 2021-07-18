@@ -46,7 +46,7 @@
 	var/list/whitelisted_species = list()
 
 /decl/hierarchy/outfit/job/survivor
-	name = OUTFIT_JOB_NAME("Survivor")
+	name = "Job - Survivor"
 
 /datum/job/submap/New(var/datum/submap/_owner, var/abstract_job = FALSE)
 

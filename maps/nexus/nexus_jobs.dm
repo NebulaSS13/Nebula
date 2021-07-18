@@ -16,4 +16,4 @@
 	department_types = list(/decl/department/nexus_crew)
 
 /decl/hierarchy/outfit/job/nexus_crew
-	name = OUTFIT_JOB_NAME("Nexus Crewmember")
+	name = "Job - Nexus Crewmember"

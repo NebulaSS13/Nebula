@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/job/ministation/captain
-	name = MINISTATION_OUTFIT_JOB_NAME("Captain")
+	name = "Ministation - Job - Captain"
 	head = /obj/item/clothing/head/caphat
 	glasses = /obj/item/clothing/glasses/sunglasses
 	uniform = /obj/item/clothing/under/captain
@@ -28,7 +28,7 @@
 				qdel(medal)
 
 /decl/hierarchy/outfit/job/ministation/hop
-	name = MINISTATION_OUTFIT_JOB_NAME("Lieutenant")
+	name = "Ministation - Job - Lieutenant"
 	uniform = /obj/item/clothing/under/head_of_personnel
 	l_ear = /obj/item/radio/headset/heads/hop
 	shoes = /obj/item/clothing/shoes/color/brown

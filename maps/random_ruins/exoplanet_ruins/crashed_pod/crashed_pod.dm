@@ -26,7 +26,7 @@ var/global/list/crashed_pod_areas = list()
 	outfit_type = /decl/hierarchy/outfit/job/survivor
 
 /decl/hierarchy/outfit/job/survivor
-	name = OUTFIT_JOB_NAME("Survivor")
+	name = "Job - Survivor"
 	id_type = null
 	pda_type = null
 

@@ -3,7 +3,7 @@
 	abstract_type = /decl/hierarchy/outfit/job/cargo
 
 /decl/hierarchy/outfit/job/cargo/qm
-	name = OUTFIT_JOB_NAME("Cargo")
+	name = "Job - Cargo"
 	uniform = /obj/item/clothing/under/cargo
 	shoes = /obj/item/clothing/shoes/color/brown
 	glasses = /obj/item/clothing/glasses/sunglasses
@@ -17,13 +17,13 @@
 	extra_details = list("goldstripe")
 
 /decl/hierarchy/outfit/job/cargo/cargo_tech
-	name = OUTFIT_JOB_NAME("Cargo technician")
+	name = "Job - Cargo technician"
 	uniform = /obj/item/clothing/under/cargotech
 	id_type = /obj/item/card/id/cargo
 	pda_type = /obj/item/modular_computer/pda/cargo
 
 /decl/hierarchy/outfit/job/cargo/mining
-	name = OUTFIT_JOB_NAME("Shaft miner")
+	name = "Job - Shaft miner"
 	uniform = /obj/item/clothing/under/miner
 	id_type = /obj/item/card/id/cargo
 	pda_type = /obj/item/modular_computer/pda/science

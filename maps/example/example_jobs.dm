@@ -15,4 +15,4 @@
 	department_types = list(/decl/department/example)
 
 /decl/hierarchy/outfit/job/example_tourist
-	name = OUTFIT_JOB_NAME("Example Tourist")
+	name = "Job - Example Tourist"

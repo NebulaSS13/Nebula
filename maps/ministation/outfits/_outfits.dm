@@ -1,6 +1,4 @@
 // OUTFITS
-#define MINISTATION_OUTFIT_JOB_NAME(job_name) ("Ministation - Job - " + job_name)
-
 /decl/hierarchy/outfit/job/ministation
 	abstract_type = /decl/hierarchy/outfit/job/ministation
 	pda_type = /obj/item/modular_computer/pda

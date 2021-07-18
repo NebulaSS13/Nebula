@@ -4,7 +4,7 @@
 	id_type = /obj/item/card/id/civilian
 
 /decl/hierarchy/outfit/job/generic/scientist
-	name = OUTFIT_JOB_NAME("Default Scientist")
+	name = "Job - Default Scientist"
 	l_ear = /obj/item/radio/headset/headset_sci
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	shoes = /obj/item/clothing/shoes/color/white
@@ -12,7 +12,7 @@
 	uniform = /obj/item/clothing/under/color/white
 
 /decl/hierarchy/outfit/job/generic/engineer
-	name = OUTFIT_JOB_NAME("Default Engineer")
+	name = "Job - Default Engineer"
 	head = /obj/item/clothing/head/hardhat
 	uniform = /obj/item/clothing/under/engineer
 	r_pocket = /obj/item/t_scanner
@@ -28,7 +28,7 @@
 	BACKPACK_OVERRIDE_ENGINEERING
 
 /decl/hierarchy/outfit/job/generic/doctor
-	name = OUTFIT_JOB_NAME("Default Doctor")
+	name = "Job - Default Doctor"
 	uniform = /obj/item/clothing/under/medical
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	hands = list(/obj/item/storage/firstaid/adv)
@@ -43,7 +43,7 @@
 	BACKPACK_OVERRIDE_MEDICAL
 
 /decl/hierarchy/outfit/job/generic/chef
-	name = OUTFIT_JOB_NAME("Default Chef")
+	name = "Job - Default Chef"
 	l_ear = /obj/item/radio/headset/headset_service
 	uniform = /obj/item/clothing/under/chef
 	suit = /obj/item/clothing/suit/chef

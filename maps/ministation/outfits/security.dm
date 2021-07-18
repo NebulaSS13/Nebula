@@ -8,7 +8,7 @@
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/jackboots
 	backpack_contents = list(/obj/item/handcuffs = 1)
-	name = MINISTATION_OUTFIT_JOB_NAME("Security Officer")
+	name = "Ministation - Job - Security Officer"
 	uniform = /obj/item/clothing/under/security
 	l_pocket = /obj/item/flash
 	r_pocket = /obj/item/handcuffs
@@ -28,7 +28,7 @@
 	. = ..()
 
 /decl/hierarchy/outfit/job/ministation/detective
-	name = MINISTATION_OUTFIT_JOB_NAME("Detective")
+	name = "Ministation - Job - Detective"
 	head = /obj/item/clothing/head/det
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	l_ear = /obj/item/radio/headset/headset_sec

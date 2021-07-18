@@ -39,7 +39,7 @@
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
 /decl/hierarchy/outfit/job/merchant
-	name = OUTFIT_JOB_NAME("Merchant - Liberia")
+	name = "Job - Merchant - Liberia"
 	shoes = /obj/item/clothing/shoes/color/black
 	l_ear = /obj/item/radio/headset
 	uniform = /obj/item/clothing/under/syndicate/tacticool

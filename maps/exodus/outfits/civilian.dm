@@ -3,13 +3,13 @@
 	abstract_type = /decl/hierarchy/outfit/job/service
 
 /decl/hierarchy/outfit/job/service/bartender
-	name = OUTFIT_JOB_NAME("Bartender")
+	name = "Job - Bartender"
 	uniform = /obj/item/clothing/under/bartender
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/service/chef
-	name = OUTFIT_JOB_NAME("Chef")
+	name = "Job - Chef"
 	uniform = /obj/item/clothing/under/chef
 	suit = /obj/item/clothing/suit/chef
 	head = /obj/item/clothing/head/chefhat
@@ -17,7 +17,7 @@
 	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/service/gardener
-	name = OUTFIT_JOB_NAME("Gardener")
+	name = "Job - Gardener"
 	uniform = /obj/item/clothing/under/hydroponics
 	suit = /obj/item/clothing/suit/apron
 	gloves = /obj/item/clothing/gloves/thick/botany
@@ -32,19 +32,19 @@
 	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/hyd
 
 /decl/hierarchy/outfit/job/service/janitor
-	name = OUTFIT_JOB_NAME("Janitor")
+	name = "Job - Janitor"
 	uniform = /obj/item/clothing/under/janitor
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/librarian
-	name = OUTFIT_JOB_NAME("Librarian")
+	name = "Job - Librarian"
 	uniform = /obj/item/clothing/under/suit_jacket/red
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/internal_affairs_agent
-	name = OUTFIT_JOB_NAME("Internal affairs agent")
+	name = "Job - Internal affairs agent"
 	l_ear = /obj/item/radio/headset/ia
 	uniform = /obj/item/clothing/under/internalaffairs
 	suit = /obj/item/clothing/suit/storage/toggle/suit/black
@@ -55,7 +55,7 @@
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 
 /decl/hierarchy/outfit/job/chaplain
-	name = OUTFIT_JOB_NAME("Chaplain")
+	name = "Job - Chaplain"
 	uniform = /obj/item/clothing/under/chaplain
 	hands = list(/obj/item/storage/bible)
 	id_type = /obj/item/card/id/civilian
