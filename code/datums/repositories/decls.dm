@@ -35,14 +35,15 @@ var/global/repository/decls/decls_repository = new
 
 /repository/decls/proc/get_decl(var/decl_type)
 	ASSERT(ispath(decl_type))
-	. = fetched_decls[decl_type]
-	if(!.)
+	if(!fetched_decls[decl_type])
 		var/decl/decl = new decl_type()
-		if(decl.type == decl.abstract_type && decl.crash_on_abstract_init)
-			PRINT_STACK_TRACE("Banned abstract /decl type instantiated: [decl.type]")
+		if(decl_type == decl.abstract_type && decl.crash_on_abstract_init)
+			PRINT_STACK_TRACE("Banned abstract /decl type instantiated: [decl_type]")
 		fetched_decls[decl_type] = decl
-		decl.Initialize()
-		. = decl
+		var/init_result = decl.Initialize()
+		if(init_result != INITIALIZE_HINT_NORMAL)
+			PRINT_STACK_TRACE("Invalid return hint to [decl_type]/Initialize(): [init_result || "NULL"]")
+	. = fetched_decls[decl_type]
 
 /repository/decls/proc/get_decls(var/list/decl_types)
 	. = list()
