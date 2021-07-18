@@ -2,7 +2,7 @@
 #define TRADESHIP_OUTFIT_JOB_NAME(job_name) ("Tradeship - Job - " + job_name)
 
 /decl/hierarchy/outfit/job/tradeship
-	hierarchy_type = /decl/hierarchy/outfit/job/tradeship
+	abstract_type = /decl/hierarchy/outfit/job/tradeship
 	pda_type = /obj/item/modular_computer/pda
 	pda_slot = slot_l_store_str
 	l_ear = null

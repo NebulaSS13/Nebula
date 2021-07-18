@@ -1,6 +1,6 @@
 /decl/hierarchy/outfit/job/cargo
 	l_ear = /obj/item/radio/headset/headset_cargo
-	hierarchy_type = /decl/hierarchy/outfit/job/cargo
+	abstract_type = /decl/hierarchy/outfit/job/cargo
 
 /decl/hierarchy/outfit/job/cargo/qm
 	name = OUTFIT_JOB_NAME("Cargo")

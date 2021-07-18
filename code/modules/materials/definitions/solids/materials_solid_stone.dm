@@ -1,5 +1,6 @@
 /decl/material/solid/stone
 	name = null
+	abstract_type = /decl/material/solid/stone
 	color = "#d9c179"
 	shard_type = SHARD_STONE_PIECE
 	weight = MAT_VALUE_HEAVY
@@ -25,16 +26,19 @@
 
 /decl/material/solid/stone/sandstone
 	name = "sandstone"
+	uid = "solid_sandstone"
 	lore_text = "A clastic sedimentary rock. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
 	value = 1.5
 
 /decl/material/solid/stone/ceramic
 	name = "ceramic"
+	uid = "solid_ceramic"
 	lore_text = "A hard substance produced by firing clay in a kiln."
 	color = COLOR_OFF_WHITE
 
 /decl/material/solid/stone/marble
 	name = "marble"
+	uid = "solid_marble"
 	lore_text = "A metamorphic rock largely sourced from Earth. Prized for use in extremely expensive decorative surfaces."
 	color = "#aaaaaa"
 	weight = MAT_VALUE_VERY_HEAVY
@@ -47,6 +51,7 @@
 
 /decl/material/solid/stone/basalt
 	name = "basalt"
+	uid = "solid_basalt"
 	lore_text = "A ubiquitous volcanic stone."
 	color = COLOR_DARK_GRAY
 	weight = MAT_VALUE_VERY_HEAVY
@@ -57,6 +62,7 @@
 
 /decl/material/solid/stone/concrete
 	name = "concrete"
+	uid = "solid_concrete"
 	lore_text = "The most ubiquitous building material of old Earth, now in space. Consists of mineral aggregate bound with some sort of cementing solution."
 	color = COLOR_GRAY
 	value = 0.9
@@ -72,6 +78,7 @@
 
 /decl/material/solid/stone/cult
 	name = "disturbing stone"
+	uid = "solid_stone_cult"
 	icon_base = 'icons/turf/walls/cult.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced_cult.dmi'
 	color = "#402821"
@@ -86,3 +93,4 @@
 
 /decl/material/solid/stone/cult/reinforced
 	name = "runic inscriptions"
+	uid = "solid_runes_cult"

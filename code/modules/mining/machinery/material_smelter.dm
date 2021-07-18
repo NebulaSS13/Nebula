@@ -14,7 +14,7 @@
 		/decl/material/solid/metal/silver,
 		/decl/material/solid/metal/platinum,
 		/decl/material/solid/metal/steel,
-		/decl/material/solid/mineral/graphite
+		/decl/material/solid/graphite
 	)
 	var/list/show_materials
 

@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/job/engineering
-	hierarchy_type = /decl/hierarchy/outfit/job/engineering
+	abstract_type = /decl/hierarchy/outfit/job/engineering
 	belt = /obj/item/storage/belt/utility/full
 	l_ear = /obj/item/radio/headset/headset_eng
 	shoes = /obj/item/clothing/shoes/workboots

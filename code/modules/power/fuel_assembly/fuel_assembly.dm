@@ -92,7 +92,7 @@
 	material = /decl/material/solid/metal/plutonium
 
 /obj/item/fuel_assembly/graphite
-	material = /decl/material/solid/mineral/graphite
+	material = /decl/material/solid/graphite
 
 /obj/item/fuel_assembly/boron
 	material = /decl/material/solid/boron

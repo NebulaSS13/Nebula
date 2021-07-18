@@ -19,7 +19,7 @@
 #define BEARCAT_OUTFIT_JOB_NAME(job_name) ("Bearcat - Job - " + job_name)
 
 /decl/hierarchy/outfit/job/bearcat
-	hierarchy_type = /decl/hierarchy/outfit/job/bearcat
+	abstract_type = /decl/hierarchy/outfit/job/bearcat
 	pda_type = /obj/item/modular_computer/pda
 	pda_slot = slot_l_store_str
 	r_pocket = /obj/item/radio

@@ -17,26 +17,30 @@
 var/global/repository/decls/decls_repository = new
 
 /repository/decls
-	var/list/fetched_decls
-	var/list/fetched_decl_types
-	var/list/fetched_decl_subtypes
+	var/list/fetched_decls =         list()
+	var/list/fetched_decl_ids =      list()
+	var/list/fetched_decl_types =    list()
+	var/list/fetched_decl_subtypes = list()
 
 /repository/decls/New()
 	..()
-	fetched_decls = list()
-	fetched_decl_types = list()
-	fetched_decl_subtypes = list()
+	for(var/decl_type in typesof(/decl))
+		var/decl/decl = decl_type
+		if(initial(decl.abstract_type) != decl_type)
+			var/decl_uid = initial(decl.uid)
+			if(decl_uid)
+				fetched_decl_ids[decl.uid] = decl_type
+
+/repository/decls/proc/get_decl_by_id(var/decl_id)
+	. = get_decl(fetched_decl_ids[decl_id])
 
 /repository/decls/proc/get_decl(var/decl_type)
 	ASSERT(ispath(decl_type))
 	. = fetched_decls[decl_type]
 	if(!.)
-		. = new decl_type()
-		fetched_decls[decl_type] = .
-
-		var/decl/decl = .
-		if(istype(decl))
-			decl.Initialize()
+		var/decl/decl = new decl_type()
+		decl.Initialize()
+		. = decl
 
 /repository/decls/proc/get_decls(var/list/decl_types)
 	. = list()
@@ -60,10 +64,19 @@ var/global/repository/decls/decls_repository = new
 		. = get_decls(subtypesof(decl_prototype))
 		fetched_decl_subtypes[decl_prototype] = .
 
+/decl
+	var/uid
+	var/abstract_type = /decl
+
 /decl/proc/Initialize()
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
-	return
+	if(type == abstract_type)
+		PRINT_STACK_TRACE("Abstract /decl type instantiated: [type]")
+	else
+		decls_repository.fetched_decls[type] = src
+		if(uid)
+			decls_repository.fetched_decl_ids[uid] = src
 
 /decl/Destroy()
 	SHOULD_CALL_PARENT(FALSE)

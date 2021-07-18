@@ -3,14 +3,14 @@
 	base_materials = list(/decl/material/solid/stone/marble)
 	default_strata_candidate = TRUE
 	ores_rich = list(
-		/decl/material/solid/mineral/quartz,
-		/decl/material/solid/mineral/graphite,
-		/decl/material/solid/mineral/hematite,
-		/decl/material/solid/mineral/rutile,
-		/decl/material/solid/mineral/magnetite,
-		/decl/material/solid/mineral/chalcopyrite,
-		/decl/material/solid/mineral/sphalerite,
-		/decl/material/solid/mineral/galena,
-		/decl/material/solid/mineral/calaverite
+		/decl/material/solid/quartz,
+		/decl/material/solid/graphite,
+		/decl/material/solid/hematite,
+		/decl/material/solid/rutile,
+		/decl/material/solid/magnetite,
+		/decl/material/solid/chalcopyrite,
+		/decl/material/solid/sphalerite,
+		/decl/material/solid/galena,
+		/decl/material/solid/calaverite
 	)
 

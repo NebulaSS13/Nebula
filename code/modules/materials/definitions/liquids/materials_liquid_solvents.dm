@@ -1,5 +1,6 @@
 /decl/material/liquid/acid
 	name = "sulphuric acid"
+	uid = "liquid_sulphuric_acid"
 	lore_text = "A very corrosive mineral acid with the molecular formula H2SO4."
 	taste_description = "acid"
 	color = "#db5008"
@@ -11,6 +12,7 @@
 
 /decl/material/liquid/acid/hydrochloric //Like sulfuric, but less toxic and more acidic.
 	name = "hydrochloric acid"
+	uid = "liquid_hydrochloric_acid"
 	lore_text = "A very corrosive mineral acid with the molecular formula HCl."
 	taste_description = "stomach acid"
 	color = "#808080"
@@ -21,6 +23,7 @@
 
 /decl/material/liquid/acid/polyacid
 	name = "polytrinic acid"
+	uid = "liquid_polytrinic_acid"
 	lore_text = "Polytrinic acid is a an extremely corrosive chemical substance."
 	taste_description = "acid"
 	color = "#8e18a9"
@@ -31,6 +34,7 @@
 
 /decl/material/liquid/acid/stomach
 	name = "stomach acid"
+	uid = "liquid_stomach_acid"
 	taste_description = "coppery foulness"
 	solvent_power = MAT_SOLVENT_MODERATE
 	color = "#d8ff00"
@@ -39,6 +43,7 @@
 
 /decl/material/liquid/acetone
 	name = "acetone"
+	uid = "liquid_acetone"
 	lore_text = "A colorless liquid solvent used in chemical synthesis."
 	taste_description = "acid"
 	color = "#808080"

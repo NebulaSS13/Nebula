@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/job/security
-	hierarchy_type = /decl/hierarchy/outfit/job/security
+	abstract_type = /decl/hierarchy/outfit/job/security
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	l_ear = /obj/item/radio/headset/headset_sec
 	gloves = /obj/item/clothing/gloves/thick

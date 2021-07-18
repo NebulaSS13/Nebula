@@ -1,6 +1,6 @@
 /decl/hierarchy
+	abstract_type = /decl/hierarchy
 	var/name = "Hierarchy"
-	var/hierarchy_type
 	var/decl/hierarchy/parent
 	var/list/decl/hierarchy/children
 
@@ -14,10 +14,10 @@
 	return ..()
 
 /decl/hierarchy/proc/is_category()
-	return hierarchy_type == type || children.len
+	return abstract_type == type || children.len
 
 /decl/hierarchy/proc/is_hidden_category()
-	return hierarchy_type == type
+	return abstract_type == type
 
 /decl/hierarchy/proc/get_descendents()
 	if(!children)

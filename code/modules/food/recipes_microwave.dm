@@ -20,7 +20,7 @@ I said no!
 */
 
 /decl/recipe/friedegg
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
+	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
 	items = list(
 		/obj/item/chems/food/egg
 	)
@@ -344,7 +344,7 @@ I said no!
 	result = /obj/item/chems/food/cubancarp
 
 /decl/recipe/popcorn
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 5)
+	reagents = list(/decl/material/solid/sodiumchloride = 5)
 	fruit = list("corn" = 1)
 	result = /obj/item/chems/food/popcorn
 
@@ -381,7 +381,7 @@ I said no!
 	result = /obj/item/chems/food/plainsteak
 
 /decl/recipe/meatsteak
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
+	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
 	items = list(/obj/item/chems/food/cutlet)
 	result = /obj/item/chems/food/meatsteak
 
@@ -392,7 +392,7 @@ I said no!
 	result = /obj/item/chems/food/loadedsteak
 
 /decl/recipe/syntisteak
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
+	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
 	items = list(/obj/item/chems/food/meat/syntiflesh)
 	result = /obj/item/chems/food/meatsteak/synthetic
 
@@ -519,14 +519,14 @@ I said no!
 
 /decl/recipe/monkeysdelight
 	fruit = list("banana" = 1)
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 1, /decl/material/solid/blackpepper = 1, /decl/material/liquid/nutriment/flour = 10)
+	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1, /decl/material/liquid/nutriment/flour = 10)
 	items = list(
 		/obj/item/chems/food/monkeycube
 	)
 	result = /obj/item/chems/food/monkeysdelight
 
 /decl/recipe/baguette
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
+	reagents = list(/decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
 	items = list(
 		/obj/item/chems/food/dough = 2,
 	)
@@ -669,7 +669,7 @@ I said no!
 
 /decl/recipe/superbiteburger
 	fruit = list("tomato" = 1)
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 5, /decl/material/solid/blackpepper = 5)
+	reagents = list(/decl/material/solid/sodiumchloride = 5, /decl/material/solid/blackpepper = 5)
 	items = list(
 		/obj/item/chems/food/bigbiteburger,
 		/obj/item/chems/food/dough,
@@ -821,14 +821,14 @@ I said no!
 	result = /obj/item/chems/food/validsalad
 
 /decl/recipe/cracker
-	reagents = list(/decl/material/solid/mineral/sodiumchloride = 1)
+	reagents = list(/decl/material/solid/sodiumchloride = 1)
 	items = list(
 		/obj/item/chems/food/doughslice
 	)
 	result = /obj/item/chems/food/cracker
 
 /decl/recipe/stuffing
-	reagents = list(/decl/material/liquid/water = 10, /decl/material/solid/mineral/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
+	reagents = list(/decl/material/liquid/water = 10, /decl/material/solid/sodiumchloride = 1, /decl/material/solid/blackpepper = 1)
 	items = list(
 		/obj/item/chems/food/sliceable/bread,
 	)

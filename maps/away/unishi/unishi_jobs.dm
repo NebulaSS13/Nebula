@@ -20,7 +20,7 @@
 
 #define UNISHI_OUTFIT_JOB_NAME(job_name) ("CTI Research Vessel - Job - " + job_name)
 /decl/hierarchy/outfit/job/unishi
-	hierarchy_type = /decl/hierarchy/outfit/job/unishi
+	abstract_type = /decl/hierarchy/outfit/job/unishi
 	pda_type = /obj/item/modular_computer/pda
 	pda_slot = slot_l_store_str
 	l_ear = null

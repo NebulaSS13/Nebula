@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/job/medical
-	hierarchy_type = /decl/hierarchy/outfit/job/medical
+	abstract_type = /decl/hierarchy/outfit/job/medical
 	l_ear = /obj/item/radio/headset/headset_med
 	shoes = /obj/item/clothing/shoes/color/white
 	pda_type = /obj/item/modular_computer/pda/medical

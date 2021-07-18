@@ -1,6 +1,6 @@
 /decl/hierarchy/outfit/job/service
 	l_ear = /obj/item/radio/headset/headset_service
-	hierarchy_type = /decl/hierarchy/outfit/job/service
+	abstract_type = /decl/hierarchy/outfit/job/service
 
 /decl/hierarchy/outfit/job/service/bartender
 	name = OUTFIT_JOB_NAME("Bartender")

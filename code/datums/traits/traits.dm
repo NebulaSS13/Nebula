@@ -69,14 +69,10 @@ var/global/list/_trait_types
 	traits = traits || list() // But we do ensure that humans don't null their traits list, to avoid copying from species again
 
 /decl/trait
+	abstract_type = /decl/trait
 	var/name
 	var/description
 	var/list/levels = list(TRAIT_LEVEL_EXISTS) // Should either only contain TRAIT_LEVEL_EXISTS or a set of the other TRAIT_LEVEL_* levels
-	var/abstract_type = /decl/trait
-
-/decl/trait/New()
-	if(type == abstract_type)
-		CRASH("Invalid initialization")
 
 /decl/trait/proc/Validate(level)
 	SHOULD_NOT_OVERRIDE(TRUE)

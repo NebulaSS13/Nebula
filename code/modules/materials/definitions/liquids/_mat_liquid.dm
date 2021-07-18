@@ -3,6 +3,7 @@
 	melting_point = T0C
 	boiling_point = T100C
 	opacity = 0.5
+	abstract_type = /decl/material/liquid
 
 /decl/material/liquid/New()
 	if(!gas_name)

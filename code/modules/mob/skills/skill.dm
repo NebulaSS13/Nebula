@@ -3,7 +3,7 @@ var/global/list/skills = list()
 /decl/hierarchy/skill
 	var/ID = "none"                        // ID of this skill. Needs to be unique.
 	name = "None"                          // Name of the skill. This is what the player sees.
-	hierarchy_type = /decl/hierarchy/skill // Don't mess with this without changing how Initialize works.
+	abstract_type = /decl/hierarchy/skill // Don't mess with this without changing how Initialize works.
 	var/desc = "Placeholder skill"         // Generic description of this skill.
 
    	// Names for different skill values, in order from 1 up.

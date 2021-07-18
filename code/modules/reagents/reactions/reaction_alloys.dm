@@ -18,7 +18,7 @@
 	result = /decl/material/solid/metal/steel
 	required_reagents = list(
 		/decl/material/solid/metal/iron = 1, 
-		/decl/material/solid/mineral/graphite = 1
+		/decl/material/solid/graphite = 1
 	)
 	result_amount = 2
 

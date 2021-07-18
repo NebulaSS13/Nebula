@@ -1,5 +1,6 @@
 /decl/material/gas/alien
 	name = "alien gas"
+	uid = "gas_alien"
 	hidden_from_codex = TRUE
 	gas_symbol_html = "X"
 	gas_symbol = "X"

@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/pirate
-	hierarchy_type = /decl/hierarchy/outfit/pirate
+	abstract_type = /decl/hierarchy/outfit/pirate
 	name = "Pirate"
 	uniform = /obj/item/clothing/under/pirate
 	shoes = /obj/item/clothing/shoes/jackboots

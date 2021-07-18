@@ -7,6 +7,7 @@
 	table_icon_base = "stone"
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
 	default_solid_form = /obj/item/stack/material/brick
+	abstract_type = /decl/material/solid
 
 /decl/material/solid/New()
 	if(!liquid_name)

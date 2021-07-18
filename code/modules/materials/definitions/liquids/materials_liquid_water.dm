@@ -1,5 +1,6 @@
 /decl/material/liquid/water
 	name = "water"
+	uid = "liquid_water"
 	solid_name = "ice"
 	gas_name = "water vapour"
 	lore_text = "A ubiquitous chemical substance composed of hydrogen and oxygen."

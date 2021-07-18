@@ -62,6 +62,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 // Material definition and procs follow.
 /decl/material
+
+	abstract_type = /decl/material
+
 	var/name                      // Prettier name for display.
 	var/adjective_name
 	var/solid_name

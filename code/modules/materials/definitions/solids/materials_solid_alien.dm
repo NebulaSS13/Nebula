@@ -1,5 +1,6 @@
 /decl/material/solid/metal/aliumium
 	name = "alien alloy"
+	uid = "solid_alien"
 	icon_base = 'icons/turf/walls/metal.dmi'
 	wall_flags = PAINT_PAINTABLE
 	door_icon_base = "metal"
