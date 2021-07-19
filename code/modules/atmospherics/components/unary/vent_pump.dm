@@ -119,6 +119,10 @@
 	name = "large air vent"
 	power_channel = EQUIP
 	power_rating = 45000
+	base_type = /obj/machinery/atmospherics/unary/vent_pump/high_volume/buildable
+
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/Initialize()
 	. = ..()
