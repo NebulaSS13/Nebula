@@ -11,7 +11,7 @@
 		if(child.parent_type == type)
 			dd_insertObjectList(children, child)
 			child.parent = src
-	return ..()
+	. = ..()
 
 /decl/hierarchy/proc/is_category()
 	return is_abstract() || children.len
