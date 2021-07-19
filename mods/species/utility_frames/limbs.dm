@@ -7,4 +7,4 @@
 	limb_blend = ICON_MULTIPLY
 	modular_prosthetic_tier = MODULAR_BODYPART_CYBERNETIC
 
-DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/utility_frame, utility_frame, "Utility Frame")
+DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/utility_frame, utility_frame)

@@ -38,15 +38,17 @@ var/global/repository/decls/decls_repository = new
 	. = fetched_decls[decl_type]
 	if(!.)
 		var/decl/decl = new decl_type()
-		if(decl_type == decl.abstract_type && decl.crash_on_abstract_init)
+		if(decl.is_abstract() && decl.crash_on_abstract_init)
 			PRINT_STACK_TRACE("Banned abstract /decl type instantiated: [decl_type]")
+		fetched_decls[decl_type] = decl // This needs to be done prior to calling Initialize() to avoid circular get_decl() calls by dependencies/children.
 		// TODO: maybe implement handling for LATELOAD and QDEL init hints?
 		var/init_result = decl.Initialize()
 		switch(init_result)
 			if(INITIALIZE_HINT_NORMAL)
-				fetched_decls[decl_type] = decl
 				. = decl
 			else
+				if(fetched_decls[decl_type] == decl)
+					fetched_decls -= decl_type
 				PRINT_STACK_TRACE("Invalid return hint to [decl_type]/Initialize(): [init_result || "NULL"]")
 
 /repository/decls/proc/get_decls(var/list/decl_types)
