@@ -35,15 +35,19 @@ var/global/repository/decls/decls_repository = new
 
 /repository/decls/proc/get_decl(var/decl_type)
 	ASSERT(ispath(decl_type))
-	if(!fetched_decls[decl_type])
+	. = fetched_decls[decl_type]
+	if(!.)
 		var/decl/decl = new decl_type()
 		if(decl_type == decl.abstract_type && decl.crash_on_abstract_init)
 			PRINT_STACK_TRACE("Banned abstract /decl type instantiated: [decl_type]")
-		fetched_decls[decl_type] = decl
+		// TODO: maybe implement handling for LATELOAD and QDEL init hints?
 		var/init_result = decl.Initialize()
-		if(init_result != INITIALIZE_HINT_NORMAL)
-			PRINT_STACK_TRACE("Invalid return hint to [decl_type]/Initialize(): [init_result || "NULL"]")
-	. = fetched_decls[decl_type]
+		switch(init_result)
+			if(INITIALIZE_HINT_NORMAL)
+				fetched_decls[decl_type] = decl
+				. = decl
+			else
+				PRINT_STACK_TRACE("Invalid return hint to [decl_type]/Initialize(): [init_result || "NULL"]")
 
 /repository/decls/proc/get_decls(var/list/decl_types)
 	. = list()

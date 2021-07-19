@@ -96,7 +96,7 @@
 		if(!fuel_rods[fr]) // The fuel rod is not exposed.
 			continue
 		for(var/mat_type in fr.matter)
-			var/decl/material/mat = decls_repository.get_decl(mat_type)
+			var/decl/material/mat = GET_DECL(mat_type)
 			if(!(mat.flags & MAT_FLAG_FISSIBLE))
 				continue
 			var/total_interacted_units = interaction_ratio * fr.matter[mat_type]
@@ -183,7 +183,7 @@
 		if(total_radioactivity >= MAX_RADS)
 			break
 		for(var/mat_type in rod.matter)
-			var/decl/material/mat = decls_repository.get_decl(mat_type)
+			var/decl/material/mat = GET_DECL(mat_type)
 			total_radioactivity += mat.radioactivity*SHEET_MATERIAL_AMOUNT / rod.matter[mat_type]
 
 	visible_message(SPAN_DANGER("\The [src] explodes, blowing out its stored material!"))
@@ -270,7 +270,7 @@
 		var/obj/item/fuel_assembly/current_rod = fuel_rods[rod]
 		if(istype(current_rod))
 			for(var/mat_type in current_rod.matter)
-				var/decl/material/mat = decls_repository.get_decl(mat_type)
+				var/decl/material/mat = GET_DECL(mat_type)
 				rod_mats += list(list("name" = mat.name, "amount" = current_rod.matter[mat_type]))
 			.["rod_exposed"] = fuel_rods[current_rod]
 			.["rod_materials"] = rod_mats

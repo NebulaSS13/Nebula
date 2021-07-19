@@ -1,10 +1,13 @@
+// Defined here due to being used immediately below.
+#define GET_DECL(D) (ispath(D, /decl) ? (decls_repository.fetched_decls[D] || decls_repository.get_decl(D)) : null)
+
 // Defined here due to compile order; overrides in macros make the compiler complain.
 /decl/global_vars
 	var/static/list/protected_vars = list("protected_vars") // No editing the protected list!
 /decl/global_vars/proc/mark_protected_vars()
 	return
 /hook/startup/proc/mark_protected_vars()
-	var/decl/global_vars/global_vars = decls_repository.get_decl(/decl/global_vars)
+	var/decl/global_vars/global_vars = GET_DECL(/decl/global_vars)
 	global_vars.mark_protected_vars()
 	return TRUE
 

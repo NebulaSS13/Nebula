@@ -33,7 +33,7 @@ var/global/list/skills = list()
 
 /decl/hierarchy/skill/Initialize()
 	. = ..()
-	decls_repository.get_decl(/decl/hierarchy/skill) // Make sure the full skill decl list is populated.
+	GET_DECL(/decl/hierarchy/skill) // Make sure the full skill decl list is populated.
 	if(is_abstract())
 		for(var/decl/hierarchy/skill/C in children)
 			global.skills |= C.get_descendents()
