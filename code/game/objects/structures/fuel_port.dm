@@ -39,7 +39,7 @@
 	cut_overlays()
 
 	if(open)
-		add_overlay(image(icon, "[icon_state]_open"))
+		add_overlay("[icon_state]_open")
 		var/obj/item/tank/tank = locate_tank()
 		if(tank)
 			if(tank.color)
@@ -47,7 +47,7 @@
 			else
 				add_overlay("[icon_state]_tank_orange")
 	else
-		add_overlay(image(icon, "[icon_state]_closed"))
+		add_overlay("[icon_state]_closed")
 
 /obj/structure/fuel_port/attackby(obj/item/W, mob/user)
 	if(W.do_tool_interaction(TOOL_CROWBAR, user, src, 1 SECOND))
