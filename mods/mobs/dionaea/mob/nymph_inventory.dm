@@ -4,15 +4,9 @@
 		holding_item = null
 
 /mob/living/carbon/alien/diona/put_in_hands(var/obj/item/W) // No hands. Use mouth.
-
-	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-	if(hattable && istype(W, /obj/item/clothing/head) && hattable.wear_hat(src, W))
-		return TRUE
-
 	if(can_collect(W))
 		collect(W)
 		return TRUE
-
 	W.forceMove(get_turf(src))
 	return TRUE
 
