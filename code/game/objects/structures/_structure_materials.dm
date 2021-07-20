@@ -63,7 +63,7 @@
 			var/decl/material/M = GET_DECL(mat)
 			var/placing = Floor((matter[mat] / SHEET_MATERIAL_AMOUNT) * 0.75)
 			if(placing > 0)
-				M.place_dismantled_product(T, placing)
+				M.place_dismantled_product(T, amount = placing)
 	matter = null
 	material = null
 	reinf_material = null
