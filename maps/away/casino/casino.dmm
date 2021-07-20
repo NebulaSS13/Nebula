@@ -1231,7 +1231,7 @@
 	},
 /area/casino/casino_cutter)
 "dq" = (
-/obj/structure/fuel_port,
+/obj/structure/fuel_port/hydrogen,
 /turf/simulated/shuttle/wall{
 	dir = 8;
 	icon_state = "swall"

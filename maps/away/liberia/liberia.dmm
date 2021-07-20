@@ -1941,7 +1941,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/structure/fuel_port{
+/obj/structure/fuel_port/hydrogen{
 	pixel_x = 32;
 	pixel_y = -32
 	},

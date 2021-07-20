@@ -1681,7 +1681,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cH" = (
-/obj/structure/fuel_port{
+/obj/structure/fuel_port/hydrogen{
 	pixel_x = -32
 	},
 /obj/machinery/atmospherics/valve/shutoff{
@@ -1702,7 +1702,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cJ" = (
-/obj/structure/fuel_port{
+/obj/structure/fuel_port/hydrogen{
 	pixel_x = 32
 	},
 /obj/effect/floor_decal/industrial/warning{
