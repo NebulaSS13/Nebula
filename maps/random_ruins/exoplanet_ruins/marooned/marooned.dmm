@@ -273,7 +273,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/map_template/marooned)
 "aP" = (
-/obj/structure/fuel_port,
+/obj/structure/fuel_port/hydrogen,
 /obj/effect/paint/black,
 /turf/simulated/wall/ocp_wall,
 /area/map_template/marooned)
