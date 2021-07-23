@@ -4,7 +4,7 @@
 
 // Also contains unfried fried foods.
 
-/obj/item/chems/food/snacks/onionrings
+/obj/item/chems/food/onionrings
 	name = "onion rings"
 	desc = "Like circular fries but better."
 	icon_state = "onionrings"
@@ -15,7 +15,7 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/chems/food/snacks/fries
+/obj/item/chems/food/fries
 	name = "chips"
 	desc = "Frenched potato, fried."
 	icon_state = "fries"
@@ -26,7 +26,7 @@
 	nutriment_amt = 4
 	bitesize = 2
 
-/obj/item/chems/food/snacks/rawsticks
+/obj/item/chems/food/rawsticks
 	name = "raw potato sticks"
 	desc = "Uncooked potato stick, not very tasty."
 	icon = 'icons/obj/food_ingredients.dmi'
@@ -36,7 +36,7 @@
 	nutriment_desc = list("raw potato" = 3)
 	nutriment_amt = 3
 
-/obj/item/chems/food/snacks/cheesyfries
+/obj/item/chems/food/cheesyfries
 	name = "cheesy fries"
 	desc = "Fries. Covered in cheese. Duh."
 	icon_state = "cheesyfries"
@@ -46,6 +46,6 @@
 	nutriment_desc = list("fresh fries" = 3, "cheese" = 3)
 	nutriment_amt = 4
 	bitesize = 2
-/obj/item/chems/food/snacks/cheesyfries/Initialize()
+/obj/item/chems/food/cheesyfries/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)

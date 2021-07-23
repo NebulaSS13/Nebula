@@ -36,5 +36,5 @@
 		/obj/item/weldingtool/electric/mantid,
 		/obj/item/multitool/mantid,
 		/obj/item/stack/medical/resin,
-		/obj/item/chems/food/drinks/cans/waterbottle/ascent
+		/obj/item/chems/drinks/cans/waterbottle/ascent
 	)

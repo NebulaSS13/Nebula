@@ -37,19 +37,19 @@ MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "pr
 	icon_state = "xenobutch"
 
 
-/obj/item/chems/food/drinks/cans/waterbottle/ascent
+/obj/item/chems/drinks/cans/waterbottle/ascent
 	name = "hydration cylinder"
 	desc = "An alien portable long term storage device for potable water."
 	icon = 'mods/species/ascent/icons/ascent_doodads.dmi'
 
-/obj/item/chems/food/snacks/hydration
+/obj/item/chems/food/hydration
 	name = "hydration ration"
 	desc = "Approximately ten units of liquid hydration in a edible membrane. Unflavored."
 	icon = 'mods/species/ascent/icons/ascent_doodads.dmi'
 	icon_state = "h2o_ration"
 	bitesize = 10
 
-/obj/item/chems/food/snacks/hydration/Initialize()
+/obj/item/chems/food/hydration/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/water, 10)
 
@@ -58,4 +58,4 @@ MANTIDIFY(/obj/item/tank/jetpack/carbondioxide, "maneuvering pack",          "pr
 	desc = "A box full of bottled water."
 	icon = 'mods/species/ascent/icons/ascent_doodads.dmi'
 	icon_state = "box"
-	startswith = list(/obj/item/chems/food/drinks/cans/waterbottle/ascent = 7)
+	startswith = list(/obj/item/chems/drinks/cans/waterbottle/ascent = 7)

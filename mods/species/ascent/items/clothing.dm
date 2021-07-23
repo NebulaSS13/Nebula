@@ -101,5 +101,5 @@
 		allowed |= tool
 		new tool(pockets)
 	pockets.make_exact_fit()
-	allowed |= /obj/item/chems/food/drinks/cans/waterbottle/ascent
-	pockets.can_hold |= /obj/item/chems/food/drinks/cans/waterbottle/ascent
+	allowed |= /obj/item/chems/drinks/cans/waterbottle/ascent
+	pockets.can_hold |= /obj/item/chems/drinks/cans/waterbottle/ascent

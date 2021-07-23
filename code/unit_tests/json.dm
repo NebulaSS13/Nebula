@@ -32,7 +32,7 @@
 	name = "JSON: Atoms using JSON should have valid JSON values"
 
 /datum/unit_test/atoms_should_use_valid_json/start_test()
-	// Tried doing this with a list, but accessing initial vars is noodly 
+	// Tried doing this with a list, but accessing initial vars is noodly
 	// without an object instance so I'm being slack and hardcoding it.
 	var/list/failures
 	var/list/json_to_check
@@ -52,13 +52,13 @@
 		var/check_json = initial(test.possible_transfer_amounts)
 		if(!isnull(check_json))
 			LAZYSET(json_to_check, "[subtype].possible_transfer_amounts", check_json)
-	for(var/subtype in typesof(/obj/item/chems/food/drinks))
-		var/obj/item/chems/food/drinks/test = subtype
+	for(var/subtype in typesof(/obj/item/chems/drinks))
+		var/obj/item/chems/drinks/test = subtype
 		var/check_json = initial(test.filling_states)
 		if(!isnull(check_json))
 			LAZYSET(json_to_check, "[subtype].filling_states", check_json)
-	for(var/subtype in typesof(/obj/item/chems/food/drinks/glass2))
-		var/obj/item/chems/food/drinks/glass2/test = subtype
+	for(var/subtype in typesof(/obj/item/chems/drinks/glass2))
+		var/obj/item/chems/drinks/glass2/test = subtype
 		var/check_json = initial(test.rim_pos)
 		if(!isnull(check_json))
 			LAZYSET(json_to_check, "[subtype].rim_pos", check_json)

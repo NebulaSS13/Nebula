@@ -1956,7 +1956,7 @@
 /area/unishi/living)
 "fd" = (
 /obj/structure/table/reinforced,
-/obj/item/chems/food/drinks/bottle/premiumwine,
+/obj/item/chems/drinks/bottle/premiumwine,
 /obj/machinery/light{
 	dir = 1
 	},

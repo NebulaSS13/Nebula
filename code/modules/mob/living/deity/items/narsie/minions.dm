@@ -18,7 +18,7 @@
 	category = DEITY_TREE_DARK_MINION
 	requirements = list(DEITY_TREE_DARK_MINION = 1)
 	base_cost = 300
-	boon_path = /obj/item/chems/food/drinks/zombiedrink
+	boon_path = /obj/item/chems/drinks/zombiedrink
 
 /datum/deity_item/boon/tear_veil
 	name = "Tear Veil"

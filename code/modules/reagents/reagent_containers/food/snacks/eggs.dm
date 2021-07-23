@@ -2,7 +2,7 @@
 // Eggs //
 //////////
 
-/obj/item/chems/food/snacks/egg
+/obj/item/chems/food/egg
 	name = "egg"
 	desc = "An egg!"
 	icon_state = "egg"
@@ -12,7 +12,7 @@
 	nutriment_amt = 3
 	nutriment_type = /decl/material/liquid/nutriment/protein/egg
 
-/obj/item/chems/food/snacks/egg/afterattack(obj/O, mob/user, proximity)
+/obj/item/chems/food/egg/afterattack(obj/O, mob/user, proximity)
 	// Don't crack eggs into appliances if you're on help intent.
 	if(istype(O,/obj/machinery/microwave))
 		return ..()
@@ -22,7 +22,7 @@
 	reagents.trans_to(O, reagents.total_volume)
 	qdel(src)
 
-/obj/item/chems/food/snacks/egg/throw_impact(atom/hit_atom)
+/obj/item/chems/food/egg/throw_impact(atom/hit_atom)
 	..()
 	if(QDELETED(src))
 		return // Could potentially happen with unscupulous atoms on hitby() throwing again, etc.
@@ -31,7 +31,7 @@
 	visible_message("<span class='warning'>\The [src] has been squashed!</span>","<span class='warning'>You hear a smack.</span>")
 	qdel(src)
 
-/obj/item/chems/food/snacks/egg/attackby(obj/item/W, mob/user)
+/obj/item/chems/food/egg/attackby(obj/item/W, mob/user)
 	if(istype( W, /obj/item/pen/crayon ))
 		var/obj/item/pen/crayon/C = W
 		var/clr = C.colourName
@@ -45,37 +45,37 @@
 	else
 		..()
 
-/obj/item/chems/food/snacks/egg/blue
+/obj/item/chems/food/egg/blue
 	icon_state = "egg-blue"
 
-/obj/item/chems/food/snacks/egg/green
+/obj/item/chems/food/egg/green
 	icon_state = "egg-green"
 
-/obj/item/chems/food/snacks/egg/mime
+/obj/item/chems/food/egg/mime
 	icon_state = "egg-mime"
 
-/obj/item/chems/food/snacks/egg/orange
+/obj/item/chems/food/egg/orange
 	icon_state = "egg-orange"
 
-/obj/item/chems/food/snacks/egg/purple
+/obj/item/chems/food/egg/purple
 	icon_state = "egg-purple"
 
-/obj/item/chems/food/snacks/egg/rainbow
+/obj/item/chems/food/egg/rainbow
 	icon_state = "egg-rainbow"
 
-/obj/item/chems/food/snacks/egg/red
+/obj/item/chems/food/egg/red
 	icon_state = "egg-red"
 
-/obj/item/chems/food/snacks/egg/yellow
+/obj/item/chems/food/egg/yellow
 	icon_state = "egg-yellow"
 
-/obj/item/chems/food/snacks/egg/lizard/Initialize()
+/obj/item/chems/food/egg/lizard/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein/egg, 5)
 	if(prob(30))	//extra nutriment
 		reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 
-/obj/item/chems/food/snacks/friedegg
+/obj/item/chems/food/friedegg
 	name = "fried egg"
 	desc = "A fried egg, with a touch of salt and pepper."
 	icon_state = "friedegg"
@@ -83,22 +83,22 @@
 	center_of_mass = @"{'x':16,'y':14}"
 	bitesize = 1
 
-/obj/item/chems/food/snacks/friedegg/Initialize()
+/obj/item/chems/food/friedegg/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 	reagents.add_reagent(/decl/material/solid/mineral/sodiumchloride, 1)
 	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
 
-/obj/item/chems/food/snacks/boiledegg
+/obj/item/chems/food/boiledegg
 	name = "boiled egg"
 	desc = "A hard boiled egg."
 	icon_state = "egg"
 	filling_color = "#ffffff"
-/obj/item/chems/food/snacks/boiledegg/Initialize()
+/obj/item/chems/food/boiledegg/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
-/obj/item/chems/food/snacks/omelette
+/obj/item/chems/food/omelette
 	name = "cheese omelette"
 	desc = "Omelette with cheese!"
 	icon_state = "omelette"
@@ -106,11 +106,11 @@
 	filling_color = "#fff9a8"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 1
-/obj/item/chems/food/snacks/omelette/Initialize()
+/obj/item/chems/food/omelette/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 
-/obj/item/chems/food/snacks/chawanmushi
+/obj/item/chems/food/chawanmushi
 	name = "chawanmushi"
 	desc = "A legendary egg custard that makes friends out of enemies. Probably too hot for a cat to eat."
 	icon_state = "chawanmushi"
@@ -118,6 +118,6 @@
 	filling_color = "#f0f2e4"
 	center_of_mass = @"{'x':17,'y':10}"
 	bitesize = 1
-/obj/item/chems/food/snacks/chawanmushi/Initialize()
+/obj/item/chems/food/chawanmushi/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)

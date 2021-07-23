@@ -27,7 +27,7 @@
 			if(O.status & ORGAN_DEAD && O.germ_level > INFECTION_LEVEL_ONE)
 				return TRUE
 		return FALSE
-	
+
 /decl/surgery_step/necrotic/tissue/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/list/dead_organs
 	var/obj/item/organ/E = target.get_organ(target_zone)
@@ -91,10 +91,10 @@
 		/obj/item/chems/spray = 100,
 		/obj/item/chems/dropper = 100,
 		/obj/item/chems/glass/bottle = 90,
-		/obj/item/chems/food/drinks/flask = 90,
+		/obj/item/chems/drinks/flask = 90,
 		/obj/item/chems/glass/beaker = 75,
-		/obj/item/chems/food/drinks/bottle = 75,
-		/obj/item/chems/food/drinks/glass2 = 75,
+		/obj/item/chems/drinks/bottle = 75,
+		/obj/item/chems/drinks/glass2 = 75,
 		/obj/item/chems/glass/bucket = 50
 	)
 

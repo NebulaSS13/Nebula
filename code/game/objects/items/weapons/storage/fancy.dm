@@ -45,13 +45,13 @@
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL
 
-	key_type = /obj/item/chems/food/snacks/egg
+	key_type = /obj/item/chems/food/egg
 	can_hold = list(
-		/obj/item/chems/food/snacks/egg,
-		/obj/item/chems/food/snacks/boiledegg
+		/obj/item/chems/food/egg,
+		/obj/item/chems/food/boiledegg
 		)
 
-	startswith = list(/obj/item/chems/food/snacks/egg = 12)
+	startswith = list(/obj/item/chems/food/egg = 12)
 
 /obj/item/storage/fancy/egg_box/empty
 	startswith = null
@@ -67,9 +67,9 @@
 	storage_slots = 6
 	max_w_class = ITEM_SIZE_TINY
 	w_class = ITEM_SIZE_SMALL
-	key_type = /obj/item/chems/food/snacks/cracker
-	can_hold = list(/obj/item/chems/food/snacks/cracker)
-	startswith = list(/obj/item/chems/food/snacks/cracker = 6)
+	key_type = /obj/item/chems/food/cracker
+	can_hold = list(/obj/item/chems/food/cracker)
+	startswith = list(/obj/item/chems/food/cracker = 6)
 
 /*
  * Crayon Box

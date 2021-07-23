@@ -22,9 +22,9 @@
 	var/loot = rand(1, 100)
 	switch(loot)
 		if(1 to 5) // Common things go, 5%
-			new/obj/item/chems/food/drinks/bottle/rum(src)
-			new/obj/item/chems/food/drinks/bottle/whiskey(src)
-			new/obj/item/chems/food/snacks/grown/ambrosiadeus(src)
+			new/obj/item/chems/drinks/bottle/rum(src)
+			new/obj/item/chems/drinks/bottle/whiskey(src)
+			new/obj/item/chems/food/grown/ambrosiadeus(src)
 			new/obj/item/flame/lighter/zippo(src)
 		if(6 to 10)
 			new/obj/item/pickaxe/drill(src)

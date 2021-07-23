@@ -11,7 +11,7 @@
 					/obj/item/chems/hypospray/autoinjector/pouch_auto/stabilizer = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/flashlight/flare/glowstick = 1,
-					/obj/item/chems/food/snacks/candy/proteinbar = 1)
+					/obj/item/chems/food/candy/proteinbar = 1)
 
 /obj/item/tank/emergency/nitrogen
 	name = "emergency nitrogen tank"

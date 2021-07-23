@@ -2,7 +2,7 @@
 // Baked Goods //
 /////////////////
 
-/obj/item/chems/food/snacks/muffin
+/obj/item/chems/food/muffin
 	name = "muffin"
 	desc = "A delicious and spongy little cake."
 	icon_state = "muffin"
@@ -12,7 +12,7 @@
 	nutriment_amt = 6
 	bitesize = 2
 
-/obj/item/chems/food/snacks/bananapie
+/obj/item/chems/food/bananapie
 	name = "banana cream pie"
 	desc = "Just like back home, on clown planet! HONK!"
 	icon_state = "pie"
@@ -22,17 +22,17 @@
 	nutriment_desc = list("pie" = 3, "cream" = 2)
 	nutriment_amt = 4
 	bitesize = 3
-/obj/item/chems/food/snacks/pie/Initialize()
+/obj/item/chems/food/pie/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/banana_cream,5)
 
-/obj/item/chems/food/snacks/pie/throw_impact(atom/hit_atom)
+/obj/item/chems/food/pie/throw_impact(atom/hit_atom)
 	..()
 	new/obj/effect/decal/cleanable/pie_smudge(src.loc)
 	src.visible_message("<span class='danger'>\The [src.name] splats.</span>","<span class='danger'>You hear a splat.</span>")
 	qdel(src)
 
-/obj/item/chems/food/snacks/berryclafoutis
+/obj/item/chems/food/berryclafoutis
 	name = "berry clafoutis"
 	desc = "No black birds, this is a good sign."
 	icon_state = "berryclafoutis"
@@ -41,11 +41,11 @@
 	nutriment_desc = list("sweetness" = 2, "pie" = 3)
 	nutriment_amt = 4
 	bitesize = 3
-/obj/item/chems/food/snacks/berryclafoutis/Initialize()
+/obj/item/chems/food/berryclafoutis/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/berry, 5)
 
-/obj/item/chems/food/snacks/waffles
+/obj/item/chems/food/waffles
 	name = "waffles"
 	desc = "Mmm, waffles."
 	icon_state = "waffles"
@@ -56,7 +56,7 @@
 	nutriment_amt = 8
 	bitesize = 2
 
-/obj/item/chems/food/snacks/rofflewaffles
+/obj/item/chems/food/rofflewaffles
 	name = "waffles(?)"
 	desc = "There's something funny about these waffles."
 	icon_state = "rofflewaffles"
@@ -66,11 +66,11 @@
 	nutriment_desc = list("waffle" = 7, "sweetness" = 1)
 	nutriment_amt = 8
 	bitesize = 4
-/obj/item/chems/food/snacks/rofflewaffles/Initialize()
+/obj/item/chems/food/rofflewaffles/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 8)
 
-/obj/item/chems/food/snacks/pancakes
+/obj/item/chems/food/pancakes
 	name = "pancakes"
 	desc = "Pancakes without blueberries, still delicious."
 	icon_state = "pancakes"
@@ -80,7 +80,7 @@
 	nutriment_amt = 8
 	bitesize = 2
 
-/obj/item/chems/food/snacks/pancakesblu
+/obj/item/chems/food/pancakesblu
 	name = "blueberry pancakes"
 	desc = "Pancakes with blueberries, delicious."
 	icon_state = "pancakes"
@@ -90,7 +90,7 @@
 	nutriment_amt = 8
 	bitesize = 2
 
-/obj/item/chems/food/snacks/eggplantparm
+/obj/item/chems/food/eggplantparm
 	name = "eggplant parmigiana"
 	desc = "The only good recipe for eggplant."
 	icon_state = "eggplantparm"
@@ -101,7 +101,7 @@
 	nutriment_amt = 6
 	bitesize = 2
 
-/obj/item/chems/food/snacks/soylentgreen
+/obj/item/chems/food/soylentgreen
 	name = "\improper Soylent Green"
 	desc = "Not made of people. Honest."//Totally people.
 	icon_state = "soylent_green"
@@ -109,11 +109,11 @@
 	filling_color = "#b8e6b5"
 	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
-/obj/item/chems/food/snacks/soylentgreen/Initialize()
+/obj/item/chems/food/soylentgreen/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
-/obj/item/chems/food/snacks/soylenviridians
+/obj/item/chems/food/soylenviridians
 	name = "\improper Soylen Virdians"
 	desc = "Not made of people. Honest."//Actually honest for once.
 	icon_state = "soylent_yellow"
@@ -124,7 +124,7 @@
 	nutriment_amt = 10
 	bitesize = 2
 
-/obj/item/chems/food/snacks/meatpie
+/obj/item/chems/food/meatpie
 	name = "meat-pie"
 	icon_state = "meatpie"
 	desc = "An old barber recipe, very delicious!"
@@ -132,11 +132,11 @@
 	filling_color = "#948051"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 2
-/obj/item/chems/food/snacks/meatpie/Initialize()
+/obj/item/chems/food/meatpie/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
-/obj/item/chems/food/snacks/tofupie
+/obj/item/chems/food/tofupie
 	name = "tofu-pie"
 	icon_state = "meatpie"
 	desc = "A delicious tofu pie."
@@ -147,7 +147,7 @@
 	nutriment_amt = 10
 	bitesize = 2
 
-/obj/item/chems/food/snacks/amanita_pie
+/obj/item/chems/food/amanita_pie
 	name = "amanita pie"
 	desc = "Sweet and tasty poison pie."
 	icon_state = "amanita_pie"
@@ -156,12 +156,12 @@
 	nutriment_desc = list("sweetness" = 3, "mushroom" = 3, "pie" = 2)
 	nutriment_amt = 5
 	bitesize = 3
-/obj/item/chems/food/snacks/amanita_pie/Initialize()
+/obj/item/chems/food/amanita_pie/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/amatoxin, 3)
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 1)
 
-/obj/item/chems/food/snacks/plump_pie
+/obj/item/chems/food/plump_pie
 	name = "plump pie"
 	desc = "I bet you love stuff made out of plump helmets!"
 	icon_state = "plump_pie"
@@ -170,14 +170,14 @@
 	nutriment_desc = list("heartiness" = 2, "mushroom" = 3, "pie" = 3)
 	nutriment_amt = 8
 	bitesize = 2
-/obj/item/chems/food/snacks/plump_pie/Initialize()
+/obj/item/chems/food/plump_pie/Initialize()
 	.=..()
 	if(prob(10))
 		name = "exceptional plump pie"
 		desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump pie!"
 		reagents.add_reagent(/decl/material/liquid/regenerator, 5)
 
-/obj/item/chems/food/snacks/xemeatpie
+/obj/item/chems/food/xemeatpie
 	name = "xeno-pie"
 	icon_state = "xenomeatpie"
 	desc = "A delicious meatpie. Probably heretical."
@@ -185,11 +185,11 @@
 	filling_color = "#43de18"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 2
-/obj/item/chems/food/snacks/xemeatpie/Initialize()
+/obj/item/chems/food/xemeatpie/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
-/obj/item/chems/food/snacks/poppypretzel
+/obj/item/chems/food/poppypretzel
 	name = "poppy pretzel"
 	desc = "It's all twisted up!"
 	icon_state = "poppypretzel"
@@ -200,7 +200,7 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/chems/food/snacks/applepie
+/obj/item/chems/food/applepie
 	name = "apple pie"
 	desc = "A pie containing sweet sweet love... or apple."
 	icon_state = "applepie"
@@ -210,7 +210,7 @@
 	nutriment_amt = 4
 	bitesize = 3
 
-/obj/item/chems/food/snacks/cherrypie
+/obj/item/chems/food/cherrypie
 	name = "cherry pie"
 	desc = "Taste so good, make a grown man cry."
 	icon_state = "cherrypie"
@@ -220,7 +220,7 @@
 	nutriment_amt = 4
 	bitesize = 3
 
-/obj/item/chems/food/snacks/fortunecookie
+/obj/item/chems/food/fortunecookie
 	name = "fortune cookie"
 	desc = "A true prophecy in each cookie!"
 	icon_state = "fortune_cookie"

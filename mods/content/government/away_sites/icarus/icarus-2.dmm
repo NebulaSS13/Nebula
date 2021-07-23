@@ -474,8 +474,8 @@
 /area/icarus/vessel)
 "bG" = (
 /obj/structure/closet,
-/obj/item/chems/food/drinks/bottle/tequila,
-/obj/item/chems/food/drinks/bottle/wine,
+/obj/item/chems/drinks/bottle/tequila,
+/obj/item/chems/drinks/bottle/wine,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	level = 2
@@ -573,7 +573,7 @@
 /area/icarus/vessel)
 "bZ" = (
 /obj/structure/closet,
-/obj/item/chems/food/drinks/flask/shiny,
+/obj/item/chems/drinks/flask/shiny,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ca" = (
@@ -648,7 +648,7 @@
 /area/icarus/vessel)
 "ck" = (
 /obj/structure/closet,
-/obj/item/chems/food/drinks/golden_cup,
+/obj/item/chems/drinks/golden_cup,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cl" = (
@@ -760,7 +760,7 @@
 /area/icarus/vessel)
 "cA" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/drinks/bottle/whiskey,
+/obj/item/chems/drinks/bottle/whiskey,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cB" = (

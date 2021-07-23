@@ -3316,9 +3316,9 @@
 /obj/item/chems/ivbag/blood/OPlus,
 /obj/item/chems/ivbag/blood/OMinus,
 /obj/item/chems/ivbag/blood/OMinus,
-/obj/item/chems/food/snacks/candy/donor,
-/obj/item/chems/food/snacks/candy/donor,
-/obj/item/chems/food/snacks/candy/donor,
+/obj/item/chems/food/candy/donor,
+/obj/item/chems/food/candy/donor,
+/obj/item/chems/food/candy/donor,
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
@@ -4107,7 +4107,7 @@
 /obj/item/clothing/under/lawyer,
 /obj/item/clothing/under/suit_jacket/navy,
 /obj/random/handgun,
-/obj/item/chems/food/drinks/bottle/premiumwine,
+/obj/item/chems/drinks/bottle/premiumwine,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -4662,7 +4662,7 @@
 "hS" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/liberia/bar)
 "hT" = (

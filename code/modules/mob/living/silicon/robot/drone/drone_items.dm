@@ -85,7 +85,7 @@
 		/obj/item/stack/cable_coil,
 		/obj/item/stock_parts/circuitboard,
 		/obj/item/chems/glass,
-		/obj/item/chems/food/snacks/monkeycube,
+		/obj/item/chems/food/monkeycube,
 		/obj/item/stock_parts/computer,
 		/obj/item/transfer_valve,
 		/obj/item/assembly/signaler,
@@ -113,6 +113,8 @@
 	can_hold = list(
 		/obj/item/chems/glass,
 		/obj/item/chems/food,
+		/obj/item/chems/drinks,
+		/obj/item/chems/condiment,
 		/obj/item/seeds,
 		/obj/item/grown,
 		/obj/item/glass_extra
@@ -383,7 +385,7 @@
 		else if(istype(W,/obj/item/shard))
 			if(glass)
 				glass.add_charge(1000)
-		else if(istype(W,/obj/item/chems/food/snacks/grown))
+		else if(istype(W,/obj/item/chems/food/grown))
 			if(wood)
 				wood.add_charge(4000)
 		else if(istype(W,/obj/item/pipe))

@@ -2,7 +2,7 @@
 // Burgers //
 /////////////
 
-/obj/item/chems/food/snacks/brainburger
+/obj/item/chems/food/brainburger
 	name = "brainburger"
 	desc = "A strange looking burger. It looks almost sentient."
 	icon_state = "brainburger"
@@ -11,12 +11,12 @@
 	bitesize = 2
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/snacks/brainburger/Initialize()
+/obj/item/chems/food/brainburger/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 	reagents.add_reagent(/decl/material/liquid/neuroannealer, 6)
 
-/obj/item/chems/food/snacks/ghostburger
+/obj/item/chems/food/ghostburger
 	name = "ghost burger"
 	desc = "Spooky! It doesn't look very filling."
 	icon_state = "ghostburger"
@@ -26,34 +26,34 @@
 	nutriment_amt = 2
 	bitesize = 2
 
-/obj/item/chems/food/snacks/human
+/obj/item/chems/food/human
 	filling_color = "#d63c3c"
 	material = /decl/material/solid/meat
 	var/hname = ""
 	var/job = null
 
-/obj/item/chems/food/snacks/human/burger
+/obj/item/chems/food/human/burger
 	name = "-burger"
 	desc = "A bloody burger."
 	icon_state = "hburger"
 	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 2
-/obj/item/chems/food/snacks/human/burger/Initialize()
+/obj/item/chems/food/human/burger/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 
-/obj/item/chems/food/snacks/cheeseburger
+/obj/item/chems/food/cheeseburger
 	name = "cheeseburger"
 	desc = "The cheese adds a good flavor."
 	icon_state = "cheeseburger"
 	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("cheese" = 2, "bun" = 2)
 	nutriment_amt = 2
-/obj/item/chems/food/snacks/cheeseburger/Initialize()
+/obj/item/chems/food/cheeseburger/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
-/obj/item/chems/food/snacks/meatburger
+/obj/item/chems/food/meatburger
 	name = "burger"
 	desc = "The cornerstone of every nutritious breakfast."
 	icon_state = "hburger"
@@ -62,11 +62,11 @@
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
 	bitesize = 2
-/obj/item/chems/food/snacks/meatburger/Initialize()
+/obj/item/chems/food/meatburger/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
-/obj/item/chems/food/snacks/plainburger
+/obj/item/chems/food/plainburger
 	name = "burger"
 	desc = "The cornerstone of every nutritious breakfast."
 	icon = 'icons/obj/food_ingredients.dmi'
@@ -76,11 +76,11 @@
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
 	bitesize = 2
-/obj/item/chems/food/snacks/plainburger/Initialize()
+/obj/item/chems/food/plainburger/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
-/obj/item/chems/food/snacks/hamburger
+/obj/item/chems/food/hamburger
 	name = "hamburger"
 	desc = "The cornerstone of every nutritious breakfast, now with ham!"
 	icon = 'icons/obj/food_ingredients.dmi'
@@ -90,22 +90,22 @@
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
 	bitesize = 2
-/obj/item/chems/food/snacks/hamburger/Initialize()
+/obj/item/chems/food/hamburger/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 
-/obj/item/chems/food/snacks/fishburger
+/obj/item/chems/food/fishburger
 	name = "fish sandwich"
 	desc = "Almost like a carp is yelling somewhere... Give me back that fillet -o- carp, give me that carp."
 	icon_state = "fishburger"
 	filling_color = "#ffdefe"
 	center_of_mass = @"{'x':16,'y':10}"
 	bitesize = 3
-/obj/item/chems/food/snacks/fishburger/Initialize()
+/obj/item/chems/food/fishburger/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 
-/obj/item/chems/food/snacks/tofuburger
+/obj/item/chems/food/tofuburger
 	name = "tofu burger"
 	desc = "What.. is that meat?"
 	icon_state = "tofuburger"
@@ -115,7 +115,7 @@
 	nutriment_amt = 6
 	bitesize = 2
 
-/obj/item/chems/food/snacks/roburger
+/obj/item/chems/food/roburger
 	name = "roburger"
 	desc = "The lettuce is the only organic component. Beep."
 	icon_state = "roburger"
@@ -124,12 +124,12 @@
 	nutriment_desc = list("bun" = 2, "metal" = 3)
 	nutriment_amt = 2
 	bitesize = 2
-/obj/item/chems/food/snacks/roburger/Initialize()
+/obj/item/chems/food/roburger/Initialize()
 	.=..()
 	if(prob(5))
 		reagents.add_reagent(/decl/material/liquid/nanitefluid, 2)
 
-/obj/item/chems/food/snacks/roburgerbig
+/obj/item/chems/food/roburgerbig
 	name = "roburger"
 	desc = "This massive patty looks like poison. Beep."
 	icon_state = "roburger"
@@ -137,22 +137,22 @@
 	volume = 100
 	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 0.1
-/obj/item/chems/food/snacks/roburgerbig/Initialize()
+/obj/item/chems/food/roburgerbig/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nanitefluid, 100)
 
-/obj/item/chems/food/snacks/xenoburger
+/obj/item/chems/food/xenoburger
 	name = "xenoburger"
 	desc = "Smells caustic. Tastes like heresy."
 	icon_state = "xburger"
 	filling_color = "#43de18"
 	center_of_mass = @"{'x':16,'y':11}"
 	bitesize = 2
-/obj/item/chems/food/snacks/xenoburger/Initialize()
+/obj/item/chems/food/xenoburger/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 
-/obj/item/chems/food/snacks/clownburger
+/obj/item/chems/food/clownburger
 	name = "clown burger"
 	desc = "This tastes funny..."
 	icon_state = "clownburger"
@@ -162,7 +162,7 @@
 	nutriment_amt = 6
 	bitesize = 2
 
-/obj/item/chems/food/snacks/mimeburger
+/obj/item/chems/food/mimeburger
 	name = "mime burger"
 	desc = "Its taste defies language."
 	icon_state = "mimeburger"
@@ -172,7 +172,7 @@
 	nutriment_amt = 6
 	bitesize = 2
 
-/obj/item/chems/food/snacks/spellburger
+/obj/item/chems/food/spellburger
 	name = "spell burger"
 	desc = "This is absolutely magical."
 	icon_state = "spellburger"
@@ -181,7 +181,7 @@
 	nutriment_amt = 6
 	bitesize = 2
 
-/obj/item/chems/food/snacks/bigbiteburger
+/obj/item/chems/food/bigbiteburger
 	name = "big bite burger"
 	desc = "Forget the Luna Burger! THIS is the future!"
 	icon_state = "bigbiteburger"
@@ -190,11 +190,11 @@
 	nutriment_desc = list("buns" = 4)
 	nutriment_amt = 4
 	bitesize = 3
-/obj/item/chems/food/snacks/bigbiteburger/Initialize()
+/obj/item/chems/food/bigbiteburger/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
-/obj/item/chems/food/snacks/jellyburger
+/obj/item/chems/food/jellyburger
 	name = "jelly burger"
 	desc = "Culinary delight..?"
 	icon_state = "jellyburger"
@@ -204,11 +204,11 @@
 	nutriment_amt = 5
 	bitesize = 2
 
-/obj/item/chems/food/snacks/jellyburger/cherry/Initialize()
+/obj/item/chems/food/jellyburger/cherry/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 
-/obj/item/chems/food/snacks/superbiteburger
+/obj/item/chems/food/superbiteburger
 	name = "super bite burger"
 	desc = "This is a mountain of a burger. FOOD!"
 	icon_state = "superbiteburger"
@@ -217,12 +217,12 @@
 	nutriment_desc = list("buns" = 25)
 	nutriment_amt = 25
 	bitesize = 10
-/obj/item/chems/food/snacks/superbiteburger/Initialize()
+/obj/item/chems/food/superbiteburger/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 25)
 
 // I am not creating another file just for hot dogs.
-/obj/item/chems/food/snacks/hotdog
+/obj/item/chems/food/hotdog
 	name = "hotdog"
 	desc = "Unrelated to dogs, maybe."
 	icon_state = "hotdog"
@@ -231,11 +231,11 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/snacks/hotdog/Initialize()
+/obj/item/chems/food/hotdog/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 
-/obj/item/chems/food/snacks/classichotdog
+/obj/item/chems/food/classichotdog
 	name = "classic hotdog"
 	desc = "Going literal."
 	icon_state = "hotcorgi"
@@ -243,6 +243,6 @@
 	center_of_mass = @"{'x':16,'y':17}"
 	material = /decl/material/solid/meat
 
-/obj/item/chems/food/snacks/classichotdog/Initialize()
+/obj/item/chems/food/classichotdog/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 16)

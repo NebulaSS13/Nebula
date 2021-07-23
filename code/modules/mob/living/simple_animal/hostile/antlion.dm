@@ -21,7 +21,7 @@
 		)
 	ability_cooldown = 30 SECONDS
 
-	meat_type =     /obj/item/chems/food/snacks/xenomeat
+	meat_type =     /obj/item/chems/food/xenomeat
 	meat_amount =   5
 	skin_material = /decl/material/solid/skin/insect
 	skin_amount =   15

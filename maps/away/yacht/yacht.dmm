@@ -61,7 +61,7 @@
 /obj/item/folder/blue,
 /obj/item/form_printer,
 /obj/structure/table/woodentable,
-/obj/item/chems/food/drinks/glass2/coffeecup,
+/obj/item/chems/drinks/glass2/coffeecup,
 /obj/item/newspaper,
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/dirt,
@@ -367,7 +367,7 @@
 	},
 /obj/structure/table/marble,
 /obj/item/book/manual/chef_recipes,
-/obj/item/chems/food/drinks/pitcher,
+/obj/item/chems/drinks/pitcher,
 /obj/effect/decal/cleanable/dirt,
 /obj/random/drinkbottle,
 /turf/simulated/floor/wood/yew,
@@ -1161,7 +1161,7 @@
 /obj/machinery/meter,
 /obj/machinery/light/small{
 	dir = 8;
-	
+
 	},
 /turf/simulated/floor/plating,
 /area/yacht/engine)

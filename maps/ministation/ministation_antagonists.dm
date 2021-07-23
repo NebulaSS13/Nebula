@@ -39,7 +39,7 @@
 		"a pair of magboots"                 = /obj/item/clothing/shoes/magboots,
 		"the master blueprints"              = /obj/item/blueprints,
 		"a sample of slime extract"          = /obj/item/slime_extract,
-		"a piece of corgi meat"              = /obj/item/chems/food/snacks/meat/corgi,
+		"a piece of corgi meat"              = /obj/item/chems/food/meat/corgi,
 		"the hypospray"                      = /obj/item/chems/hypospray,
 		"the captain's pinpointer"           = /obj/item/pinpointer,
 		"the championship belt"              = /obj/item/storage/belt/champion,

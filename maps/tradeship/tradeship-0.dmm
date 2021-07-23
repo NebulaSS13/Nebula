@@ -619,7 +619,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table/gamblingtable,
-/obj/item/chems/food/snacks/fish/mollusc,
+/obj/item/chems/food/fish/mollusc,
 /obj/item/trash/mollusc_shell/clam,
 /turf/simulated/floor,
 /area/ship/trade/disused)

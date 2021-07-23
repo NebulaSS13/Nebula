@@ -8,7 +8,7 @@
 //	total for the item because you want to leave space for extra condiments. If you want an effect, add a reagent for
 //	it. Try to stick to existing reagents when possible (so if you want a stronger healing effect, just use regenerative serum).
 
-/obj/item/chems/food/snacks
+/obj/item/chems/food
 	name = "snack"
 	desc = "Yummy!"
 	icon = 'icons/obj/food.dmi'
@@ -23,17 +23,22 @@
 	var/nutriment_type = /decl/material/liquid/nutriment // Used to determine which base nutriment type is spawned for this item.
 	var/list/nutriment_desc = list("food" = 1)    // List of flavours and flavour strengths. The flavour strength text is determined by the ratio of flavour strengths in the snack.
 	var/list/eat_sound = 'sound/items/eatfood.ogg'
+	var/filling_color = "#ffffff" //Used by sandwiches.
+	var/trash = null
+	randpixel = 6
+	possible_transfer_amounts = null
+	volume = 50
 	center_of_mass = @"{'x':16,'y':16}"
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/chems/food/snacks/Initialize()
+/obj/item/chems/food/Initialize()
 	.=..()
 	if(nutriment_amt)
 		reagents.add_reagent(nutriment_type, nutriment_amt, nutriment_desc)
 	amount_per_transfer_from_this = bitesize
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
-/obj/item/chems/food/snacks/proc/On_Consume(var/mob/M)
+/obj/item/chems/food/proc/On_Consume(var/mob/M)
 	if(!reagents.total_volume)
 		M.visible_message("<span class='notice'>[M] finishes eating \the [src].</span>","<span class='notice'>You finish eating \the [src].</span>")
 		M.drop_item()
@@ -47,13 +52,13 @@
 		qdel(src)
 	return
 
-/obj/item/chems/food/snacks/attack_self(mob/user)
+/obj/item/chems/food/attack_self(mob/user)
 	attack(user, user)
 
-/obj/item/chems/food/snacks/dragged_onto(var/mob/user)
+/obj/item/chems/food/dragged_onto(var/mob/user)
 	attack(user, user)
 
-/obj/item/chems/food/snacks/self_feed_message(mob/user)
+/obj/item/chems/food/self_feed_message(mob/user)
 	if(!iscarbon(user))
 		return ..()
 	var/mob/living/carbon/C = user
@@ -67,17 +72,17 @@
 	if (fullness > 350 && fullness <= 550)
 		to_chat(C, SPAN_NOTICE("You unwillingly chew a bit of [src]."))
 
-/obj/item/chems/food/snacks/feed_sound(mob/user)
+/obj/item/chems/food/feed_sound(mob/user)
 	if(eat_sound)
 		playsound(user, pick(eat_sound), rand(10, 50), 1)
 
-/obj/item/chems/food/snacks/standard_feed_mob(mob/user, mob/target)
+/obj/item/chems/food/standard_feed_mob(mob/user, mob/target)
 	. = ..()
 	if(.)
 		bitecount++
 		On_Consume(target)
 
-/obj/item/chems/food/snacks/attack(mob/M, mob/user, def_zone)
+/obj/item/chems/food/attack(mob/M, mob/user, def_zone)
 	if(!reagents || !reagents.total_volume)
 		to_chat(user, "<span class='danger'>None of [src] left!</span>")
 		qdel(src)
@@ -97,7 +102,7 @@
 			return 1
 	return 0
 
-/obj/item/chems/food/snacks/examine(mob/user, distance)
+/obj/item/chems/food/examine(mob/user, distance)
 	. = ..()
 	if(distance > 1)
 		return
@@ -110,7 +115,7 @@
 	else
 		to_chat(user, "<span class='notice'>\The [src] was bitten multiple times!</span>")
 
-/obj/item/chems/food/snacks/attackby(obj/item/W, mob/user)
+/obj/item/chems/food/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/storage))
 		..()// -> item/attackby()
 		return
@@ -154,7 +159,7 @@
 		var/hide_item = !has_edge(W) || !can_slice_here
 
 		if (hide_item)
-			if (W.w_class >= src.w_class || is_robot_module(W) || istype(W,/obj/item/chems/food/condiment))
+			if (W.w_class >= src.w_class || is_robot_module(W) || istype(W,/obj/item/chems/condiment))
 				return
 			if(!user.unEquip(W, src))
 				return
@@ -183,10 +188,10 @@
 			qdel(src)
 			return
 
-/obj/item/chems/food/snacks/proc/is_sliceable()
+/obj/item/chems/food/proc/is_sliceable()
 	return (slices_num && slice_path && slices_num > 0)
 
-/obj/item/chems/food/snacks/proc/on_dry(var/atom/newloc)
+/obj/item/chems/food/proc/on_dry(var/atom/newloc)
 	if(dried_type == type)
 		SetName("dried [name]")
 		color = "#a38463"
@@ -197,13 +202,13 @@
 	. = new dried_type(newloc || get_turf(src))
 	qdel(src)
 
-/obj/item/chems/food/snacks/Destroy()
+/obj/item/chems/food/Destroy()
 	if(contents)
 		for(var/atom/movable/something in contents)
 			something.dropInto(loc)
 	. = ..()
 
-/obj/item/chems/food/snacks/attack_animal(var/mob/user)
+/obj/item/chems/food/attack_animal(var/mob/user)
 	if(!isanimal(user) && !isalien(user))
 		return
 	user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
@@ -216,7 +221,7 @@
 			qdel(src)
 	On_Consume(user)
 
-/obj/item/chems/food/snacks/proc/update_food_appearance_from(var/obj/item/donor, var/food_color, var/copy_donor_appearance = TRUE)
+/obj/item/chems/food/proc/update_food_appearance_from(var/obj/item/donor, var/food_color, var/copy_donor_appearance = TRUE)
 	filling_color = food_color
 	if(copy_donor_appearance)
 		appearance = donor
@@ -228,7 +233,7 @@
 			transform = M
 	update_icon()
 
-/obj/item/chems/food/snacks/on_update_icon()
+/obj/item/chems/food/on_update_icon()
 	cut_overlays()
 	if(check_state_in_icon("[icon_state]_filling", icon))
 		var/image/I = image(icon, "[icon_state]_filling")

@@ -1,5 +1,5 @@
 //Grown foods.
-/obj/item/chems/food/snacks/grown
+/obj/item/chems/food/grown
 	name = "fruit"
 	icon = 'icons/obj/hydroponics/hydroponics_products.dmi'
 	icon_state = "blank"
@@ -12,7 +12,7 @@
 	var/datum/seed/seed
 	var/potency = -1
 
-/obj/item/chems/food/snacks/grown/Initialize(mapload, planttype)
+/obj/item/chems/food/grown/Initialize(mapload, planttype)
 	. = ..(mapload)
 	if(planttype)
 		plantname = planttype
@@ -29,7 +29,7 @@
 	update_icon()
 
 
-/obj/item/chems/food/snacks/grown/proc/fill_reagents()
+/obj/item/chems/food/grown/proc/fill_reagents()
 	if(!seed)
 		return
 
@@ -55,7 +55,7 @@
 	if(reagents.total_volume > 0)
 		bitesize = 1+round(reagents.total_volume / 2, 1)
 
-/obj/item/chems/food/snacks/grown/proc/update_desc()
+/obj/item/chems/food/grown/proc/update_desc()
 	set waitfor = FALSE
 	if(!seed)
 		return
@@ -111,7 +111,7 @@
 		SSplants.product_descs["[seed.uid]"] = desc
 	desc += ". Delicious! Probably."
 
-/obj/item/chems/food/snacks/grown/on_update_icon()
+/obj/item/chems/food/grown/on_update_icon()
 	if(!seed)
 		return
 	overlays.Cut()
@@ -122,7 +122,7 @@
 		fruit_leaves.color = seed.get_trait(TRAIT_PLANT_COLOUR)
 		overlays |= fruit_leaves
 
-/obj/item/chems/food/snacks/grown/Crossed(var/mob/living/M)
+/obj/item/chems/food/grown/Crossed(var/mob/living/M)
 	set waitfor = FALSE
 	if(seed && seed.get_trait(TRAIT_JUICY) == 2)
 		if(istype(M))
@@ -142,7 +142,7 @@
 			seed.thrown_at(src,M)
 			QDEL_IN(src, 0)
 
-/obj/item/chems/food/snacks/grown/throw_impact(atom/hit_atom)
+/obj/item/chems/food/grown/throw_impact(atom/hit_atom)
 	..()
 	if(seed)
 		seed.thrown_at(src,hit_atom)
@@ -157,7 +157,7 @@ var/global/list/_wood_materials = list(
 	/decl/material/solid/wood/yew
 )
 
-/obj/item/chems/food/snacks/grown/attackby(var/obj/item/W, var/mob/user)
+/obj/item/chems/food/grown/attackby(var/obj/item/W, var/mob/user)
 
 	if(seed)
 		if(seed.get_trait(TRAIT_PRODUCES_POWER) && isCoil(W))
@@ -178,7 +178,7 @@ var/global/list/_wood_materials = list(
 				new /obj/item/clothing/head/pumpkinhead (user.loc)
 				qdel(src)
 				return TRUE
-			
+
 			if(seed.chems)
 				if(isHatchet(W))
 					for(var/wood_mat in global._wood_materials)
@@ -189,22 +189,22 @@ var/global/list/_wood_materials = list(
 							qdel(src)
 							return TRUE
 
-				
+
 				if(!isnull(seed.chems[/decl/material/liquid/drink/juice/potato]))
 					to_chat(user, SPAN_NOTICE("You slice \the [src] into sticks."))
-					new /obj/item/chems/food/snacks/rawsticks(get_turf(src))
+					new /obj/item/chems/food/rawsticks(get_turf(src))
 					qdel(src)
 					return TRUE
 
 				if(!isnull(seed.chems[/decl/material/liquid/drink/juice/carrot]))
 					to_chat(user, SPAN_NOTICE("You slice \the [src] into sticks."))
-					new /obj/item/chems/food/snacks/carrotfries(get_turf(src))
+					new /obj/item/chems/food/carrotfries(get_turf(src))
 					qdel(src)
 					return TRUE
 
 				if(!isnull(seed.chems[/decl/material/liquid/drink/milk/soymilk]))
 					to_chat(user, SPAN_NOTICE("You roughly chop up \the [src]."))
-					new /obj/item/chems/food/snacks/soydope(get_turf(src))
+					new /obj/item/chems/food/soydope(get_turf(src))
 					qdel(src)
 					return TRUE
 
@@ -213,7 +213,7 @@ var/global/list/_wood_materials = list(
 					var/slices = rand(3,5)
 					var/reagents_to_transfer = round(reagents.total_volume/slices)
 					for(var/i in 1 to slices)
-						var/obj/item/chems/food/snacks/fruit_slice/F = new(get_turf(src),seed)
+						var/obj/item/chems/food/fruit_slice/F = new(get_turf(src),seed)
 						if(reagents_to_transfer) reagents.trans_to_obj(F,reagents_to_transfer)
 					qdel(src)
 					return TRUE
@@ -237,7 +237,7 @@ var/global/list/_wood_materials = list(
 
 	. = ..()
 
-/obj/item/chems/food/snacks/grown/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+/obj/item/chems/food/grown/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
 
 	if(seed && seed.get_trait(TRAIT_STINGS))
@@ -253,7 +253,7 @@ var/global/list/_wood_materials = list(
 				to_chat(user, "<span class='danger'>\The [src] has fallen to bits.</span>")
 			qdel(src)
 
-/obj/item/chems/food/snacks/grown/attack_self(mob/user)
+/obj/item/chems/food/grown/attack_self(mob/user)
 
 	if(!seed)
 		return
@@ -291,7 +291,7 @@ var/global/list/_wood_materials = list(
 		qdel(src)
 		return
 
-/obj/item/chems/food/snacks/grown/pickup(mob/user)
+/obj/item/chems/food/grown/pickup(mob/user)
 	..()
 	if(!seed)
 		return
@@ -308,24 +308,24 @@ var/global/list/_wood_materials = list(
 
 // Predefined types for placing on the map.
 
-/obj/item/chems/food/snacks/grown/mushroom/libertycap
+/obj/item/chems/food/grown/mushroom/libertycap
 	plantname = "libertycap"
 
 
-/obj/item/chems/food/snacks/grown/ambrosiavulgaris
+/obj/item/chems/food/grown/ambrosiavulgaris
 	plantname = "biteleaf"
 
-/obj/item/chems/food/snacks/fruit_slice
+/obj/item/chems/food/fruit_slice
 	name = "fruit slice"
 	desc = "A slice of some tasty fruit."
 	icon = 'icons/obj/hydroponics/hydroponics_misc.dmi'
 	icon_state = ""
-	dried_type = /obj/item/chems/food/snacks/fruit_slice
+	dried_type = /obj/item/chems/food/fruit_slice
 	var/datum/seed/seed
 
 var/global/list/fruit_icon_cache = list()
 
-/obj/item/chems/food/snacks/fruit_slice/Initialize(mapload, var/datum/seed/S)
+/obj/item/chems/food/fruit_slice/Initialize(mapload, var/datum/seed/S)
 	. = ..(mapload)
 	// Need to go through and make a general image caching controller. Todo.
 	if(!istype(S))
@@ -349,14 +349,14 @@ var/global/list/fruit_icon_cache = list()
 		fruit_icon_cache["slice-[rind_colour]"] = I
 	overlays |= fruit_icon_cache["slice-[rind_colour]"]
 
-/obj/item/chems/food/snacks/grown/afterattack(atom/target, mob/user, flag)
+/obj/item/chems/food/grown/afterattack(atom/target, mob/user, flag)
 	if(!flag && isliving(user))
 		var/mob/living/M = user
 		M.aim_at(target, src)
 		return
 	. = ..()
 
-/obj/item/chems/food/snacks/grown/handle_reflexive_fire(var/mob/user, var/atom/aiming_at)
+/obj/item/chems/food/grown/handle_reflexive_fire(var/mob/user, var/atom/aiming_at)
 	. = ..()
 	if(.)
 		user.visible_message(SPAN_DANGER("\The [user] reflexively hurls \the [src] at \the [aiming_at]!"))

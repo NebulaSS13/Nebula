@@ -1846,7 +1846,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/chems/food/drinks/flask/vacuumflask,
+/obj/item/chems/drinks/flask/vacuumflask,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "fV" = (

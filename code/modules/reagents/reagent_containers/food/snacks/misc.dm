@@ -1,16 +1,16 @@
-/obj/item/chems/food/snacks/badrecipe
+/obj/item/chems/food/badrecipe
 	name = "burned mess"
 	desc = "Someone should be demoted from chef for this."
 	icon_state = "badrecipe"
 	filling_color = "#211f02"
 	center_of_mass = @"{'x':16,'y':12}"
 	bitesize = 2
-/obj/item/chems/food/snacks/badrecipe/Initialize()
+/obj/item/chems/food/badrecipe/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/bromide, 1)
 	reagents.add_reagent(/decl/material/solid/carbon, 3)
 
-/obj/item/chems/food/snacks/stuffing
+/obj/item/chems/food/stuffing
 	name = "stuffing"
 	desc = "Moist, peppery breadcrumbs for filling the body cavities of dead birds. Dig in!"
 	icon_state = "stuffing"
@@ -20,7 +20,7 @@
 	nutriment_desc = list("dryness" = 2, "bread" = 2)
 	bitesize = 1
 
-/obj/item/chems/food/snacks/popcorn
+/obj/item/chems/food/popcorn
 	name = "popcorn"
 	desc = "Now let's find some cinema."
 	icon_state = "popcorn"
@@ -31,7 +31,7 @@
 	nutriment_amt = 2
 	bitesize = 0.1
 
-/obj/item/chems/food/snacks/loadedbakedpotato
+/obj/item/chems/food/loadedbakedpotato
 	name = "loaded baked potato"
 	desc = "Totally baked."
 	icon_state = "loadedbakedpotato"
@@ -40,11 +40,11 @@
 	nutriment_desc = list("baked potato" = 3)
 	nutriment_amt = 3
 	bitesize = 2
-/obj/item/chems/food/snacks/loadedbakedpotato/Initialize()
+/obj/item/chems/food/loadedbakedpotato/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
-/obj/item/chems/food/snacks/spacylibertyduff
+/obj/item/chems/food/spacylibertyduff
 	name = "party jelly"
 	desc = "LoOk aT aLl tHe PrEtTy CoLoUrS"
 	icon_state = "spacylibertyduff"
@@ -54,11 +54,11 @@
 	nutriment_desc = list("mushroom" = 5, "rainbow" = 1)
 	nutriment_amt = 6
 	bitesize = 3
-/obj/item/chems/food/snacks/spacylibertyduff/Initialize()
+/obj/item/chems/food/spacylibertyduff/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 6)
 
-/obj/item/chems/food/snacks/amanitajelly
+/obj/item/chems/food/amanitajelly
 	name = "amanita jelly"
 	desc = "Looks curiously toxic."
 	icon_state = "amanitajelly"
@@ -68,12 +68,12 @@
 	nutriment_desc = list("jelly" = 3, "mushroom" = 3)
 	nutriment_amt = 6
 	bitesize = 3
-/obj/item/chems/food/snacks/amanitajelly/Initialize()
+/obj/item/chems/food/amanitajelly/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/amatoxin, 6)
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 3)
 
-/obj/item/chems/food/snacks/enchiladas
+/obj/item/chems/food/enchiladas
 	name = "enchiladas"
 	desc = "Not to be confused with an echidna, though I don't know how you would."
 	icon_state = "enchiladas"
@@ -83,12 +83,12 @@
 	nutriment_desc = list("tortilla" = 3, "corn" = 3)
 	nutriment_amt = 2
 	bitesize = 4
-/obj/item/chems/food/snacks/enchiladas/Initialize()
+/obj/item/chems/food/enchiladas/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 	reagents.add_reagent(/decl/material/liquid/capsaicin, 6)
 
-/obj/item/chems/food/snacks/monkeysdelight
+/obj/item/chems/food/monkeysdelight
 	name = "monkey's delight"
 	desc = "Eeee Eee!"
 	icon_state = "monkeysdelight"
@@ -96,14 +96,14 @@
 	filling_color = "#5c3c11"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 6
-/obj/item/chems/food/snacks/monkeysdelight/Initialize()
+/obj/item/chems/food/monkeysdelight/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 	reagents.add_reagent(/decl/material/liquid/drink/juice/banana, 5)
 	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
 	reagents.add_reagent(/decl/material/solid/mineral/sodiumchloride, 1)
 
-/obj/item/chems/food/snacks/candiedapple
+/obj/item/chems/food/candiedapple
 	name = "candied apple"
 	desc = "An apple coated in sugary sweetness."
 	icon_state = "candiedapple"
@@ -113,18 +113,18 @@
 	nutriment_amt = 3
 	bitesize = 3
 
-/obj/item/chems/food/snacks/mint
+/obj/item/chems/food/mint
 	name = "mint"
 	desc = "A tasty after-dinner mint. It is only wafer thin."
 	icon_state = "mint"
 	filling_color = "#f2f2f2"
 	center_of_mass = @"{'x':16,'y':14}"
 	bitesize = 1
-/obj/item/chems/food/snacks/mint/Initialize()
+/obj/item/chems/food/mint/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/drink/syrup/mint, 1)
 
-/obj/item/chems/food/snacks/plumphelmetbiscuit
+/obj/item/chems/food/plumphelmetbiscuit
 	name = "plump helmet biscuit"
 	desc = "This is a finely-prepared plump helmet biscuit. The ingredients are exceptionally minced plump helmet, and well-minced wheat flour."
 	icon_state = "phelmbiscuit"
@@ -133,7 +133,7 @@
 	nutriment_desc = list("mushroom" = 4)
 	nutriment_amt = 5
 	bitesize = 2
-/obj/item/chems/food/snacks/plumphelmetbiscuit/Initialize()
+/obj/item/chems/food/plumphelmetbiscuit/Initialize()
 	.=..()
 	if(prob(10))
 		name = "exceptional plump helmet biscuit"
@@ -141,7 +141,7 @@
 		reagents.add_reagent(/decl/material/liquid/nutriment, 3)
 		reagents.add_reagent(/decl/material/liquid/regenerator, 5)
 
-/obj/item/chems/food/snacks/appletart
+/obj/item/chems/food/appletart
 	name = "golden apple streusel tart"
 	desc = "A tasty dessert that won't make it through a metal detector."
 	icon_state = "gappletart"
@@ -151,11 +151,11 @@
 	nutriment_desc = list("apple" = 8)
 	nutriment_amt = 8
 	bitesize = 3
-/obj/item/chems/food/snacks/appletart/Initialize()
+/obj/item/chems/food/appletart/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/solid/metal/gold, 5)
 
-/obj/item/chems/food/snacks/cracker
+/obj/item/chems/food/cracker
 	name = "cracker"
 	desc = "It's a salted cracker."
 	icon_state = "cracker"
@@ -170,7 +170,7 @@
 // new old food stuff from bs12
 ///////////////////////////////////////////
 
-/obj/item/chems/food/snacks/taco
+/obj/item/chems/food/taco
 	name = "taco"
 	desc = "Take a bite!"
 	icon_state = "taco"
@@ -180,11 +180,11 @@
 	nutriment_amt = 4
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/snacks/taco/Initialize()
+/obj/item/chems/food/taco/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
-/obj/item/chems/food/snacks/pelmen
+/obj/item/chems/food/pelmen
 	name = "meat pelmen"
 	desc = "Raw meat appetizer."
 	icon_state = "pelmen"
@@ -192,11 +192,11 @@
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
 
-/obj/item/chems/food/snacks/pelmen/Initialize()
+/obj/item/chems/food/pelmen/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
 
-/obj/item/chems/food/snacks/pelmeni_boiled
+/obj/item/chems/food/pelmeni_boiled
 	name = "boiled pelmeni"
 	desc = "A dish consisting of boiled pieces of meat wrapped in dough. Delicious!"
 	icon_state = "pelmeni_boiled"
@@ -204,6 +204,6 @@
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 2
 
-/obj/item/chems/food/snacks/pelmeni_boiled/Initialize()
+/obj/item/chems/food/pelmeni_boiled/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 30)

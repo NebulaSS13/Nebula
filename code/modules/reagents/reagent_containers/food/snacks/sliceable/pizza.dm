@@ -2,15 +2,15 @@
 // PIZZA //
 ///////////
 
-/obj/item/chems/food/snacks/sliceable/pizza
+/obj/item/chems/food/sliceable/pizza
 	slices_num = 6
 	filling_color = "#baa14c"
 
-/obj/item/chems/food/snacks/sliceable/pizza/margherita
+/obj/item/chems/food/sliceable/pizza/margherita
 	name = "margherita"
 	desc = "The golden standard of pizzas."
 	icon_state = "pizzamargherita"
-	slice_path = /obj/item/chems/food/snacks/slice/margherita
+	slice_path = /obj/item/chems/food/slice/margherita
 	slices_num = 6
 	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 15)
@@ -18,28 +18,28 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/snacks/sliceable/pizza/margherita/Initialize()
+/obj/item/chems/food/sliceable/pizza/margherita/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 6)
 
-/obj/item/chems/food/snacks/slice/margherita
+/obj/item/chems/food/slice/margherita
 	name = "margherita slice"
 	desc = "A slice of the classic pizza."
 	icon_state = "pizzamargheritaslice"
 	filling_color = "#baa14c"
 	bitesize = 2
 	center_of_mass = @"{'x':18,'y':13}"
-	whole_path = /obj/item/chems/food/snacks/sliceable/pizza/margherita
+	whole_path = /obj/item/chems/food/sliceable/pizza/margherita
 
-/obj/item/chems/food/snacks/slice/margherita/filled
+/obj/item/chems/food/slice/margherita/filled
 	filled = TRUE
 
-/obj/item/chems/food/snacks/sliceable/pizza/meatpizza
+/obj/item/chems/food/sliceable/pizza/meatpizza
 	name = "meatpizza"
 	desc = "A pizza with meat topping."
 	icon_state = "meatpizza"
-	slice_path = /obj/item/chems/food/snacks/slice/meatpizza
+	slice_path = /obj/item/chems/food/slice/meatpizza
 	slices_num = 6
 	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 15)
@@ -47,28 +47,28 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/snacks/sliceable/pizza/meatpizza/Initialize()
+/obj/item/chems/food/sliceable/pizza/meatpizza/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 34)
 	reagents.add_reagent(/decl/material/liquid/nutriment/barbecue, 6)
 
-/obj/item/chems/food/snacks/slice/meatpizza
+/obj/item/chems/food/slice/meatpizza
 	name = "meatpizza slice"
 	desc = "A slice of a meaty pizza."
 	icon_state = "meatpizzaslice"
 	filling_color = "#baa14c"
 	bitesize = 2
 	center_of_mass = @"{'x':18,'y':13}"
-	whole_path = /obj/item/chems/food/snacks/sliceable/pizza/meatpizza
+	whole_path = /obj/item/chems/food/sliceable/pizza/meatpizza
 
-/obj/item/chems/food/snacks/slice/meatpizza/filled
+/obj/item/chems/food/slice/meatpizza/filled
 	filled = TRUE
 
-/obj/item/chems/food/snacks/sliceable/pizza/mushroompizza
+/obj/item/chems/food/sliceable/pizza/mushroompizza
 	name = "mushroompizza"
 	desc = "Very special pizza."
 	icon_state = "mushroompizza"
-	slice_path = /obj/item/chems/food/snacks/slice/mushroompizza
+	slice_path = /obj/item/chems/food/slice/mushroompizza
 	slices_num = 6
 	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 5, "mushroom" = 10)
@@ -76,27 +76,27 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/snacks/sliceable/pizza/mushroompizza/Initialize()
+/obj/item/chems/food/sliceable/pizza/mushroompizza/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 
-/obj/item/chems/food/snacks/slice/mushroompizza
+/obj/item/chems/food/slice/mushroompizza
 	name = "mushroompizza slice"
 	desc = "Maybe it is the last slice of pizza in your life."
 	icon_state = "mushroompizzaslice"
 	filling_color = "#baa14c"
 	bitesize = 2
 	center_of_mass = @"{'x':18,'y':13}"
-	whole_path = /obj/item/chems/food/snacks/sliceable/pizza/mushroompizza
+	whole_path = /obj/item/chems/food/sliceable/pizza/mushroompizza
 
-/obj/item/chems/food/snacks/slice/mushroompizza/filled
+/obj/item/chems/food/slice/mushroompizza/filled
 	filled = TRUE
 
-/obj/item/chems/food/snacks/sliceable/pizza/vegetablepizza
+/obj/item/chems/food/sliceable/pizza/vegetablepizza
 	name = "vegetable pizza"
 	desc = "Vegetarian pizza huh? What about all the plants that were slaughtered to make this huh?? Hypocrite."
 	icon_state = "vegetablepizza"
-	slice_path = /obj/item/chems/food/snacks/slice/vegetablepizza
+	slice_path = /obj/item/chems/food/slice/vegetablepizza
 	slices_num = 6
 	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 5, "eggplant" = 5, "carrot" = 5, "corn" = 5)
@@ -104,22 +104,22 @@
 	bitesize = 2
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
-/obj/item/chems/food/snacks/sliceable/pizza/vegetablepizza/Initialize()
+/obj/item/chems/food/sliceable/pizza/vegetablepizza/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 	reagents.add_reagent(/decl/material/liquid/nutriment/ketchup, 6)
 	reagents.add_reagent(/decl/material/liquid/eyedrops, 12)
 
-/obj/item/chems/food/snacks/slice/vegetablepizza
+/obj/item/chems/food/slice/vegetablepizza
 	name = "vegetable pizza slice"
 	desc = "A slice of the most green pizza of all pizzas not containing green ingredients."
 	icon_state = "vegetablepizzaslice"
 	filling_color = "#baa14c"
 	bitesize = 2
 	center_of_mass = @"{'x':18,'y':13}"
-	whole_path = /obj/item/chems/food/snacks/sliceable/pizza/vegetablepizza
+	whole_path = /obj/item/chems/food/sliceable/pizza/vegetablepizza
 
-/obj/item/chems/food/snacks/slice/vegetablepizza/filled
+/obj/item/chems/food/slice/vegetablepizza/filled
 	filled = TRUE
 
 /obj/item/pizzabox
@@ -130,7 +130,7 @@
 
 	var/open = 0 // Is the box open?
 	var/ismessy = 0 // Fancy mess on the lid
-	var/obj/item/chems/food/snacks/sliceable/pizza/pizza // content pizza
+	var/obj/item/chems/food/sliceable/pizza/pizza // content pizza
 	var/list/boxes = list()// If the boxes are stacked, they come here
 	var/boxtag = ""
 
@@ -250,7 +250,7 @@
 
 		return
 
-	if( istype(I, /obj/item/chems/food/snacks/sliceable/pizza/) )
+	if( istype(I, /obj/item/chems/food/sliceable/pizza/) )
 
 		if( src.open )
 			if(!user.unEquip(I, src))
@@ -283,20 +283,20 @@
 
 /obj/item/pizzabox/margherita/Initialize()
 	. = ..()
-	pizza = new /obj/item/chems/food/snacks/sliceable/pizza/margherita(src)
+	pizza = new /obj/item/chems/food/sliceable/pizza/margherita(src)
 	boxtag = "Margherita Deluxe"
 
 /obj/item/pizzabox/vegetable/Initialize()
 	. = ..()
-	pizza = new /obj/item/chems/food/snacks/sliceable/pizza/vegetablepizza(src)
+	pizza = new /obj/item/chems/food/sliceable/pizza/vegetablepizza(src)
 	boxtag = "Gourmet Vegatable"
 
 /obj/item/pizzabox/mushroom/Initialize()
 	. = ..()
-	pizza = new /obj/item/chems/food/snacks/sliceable/pizza/mushroompizza(src)
+	pizza = new /obj/item/chems/food/sliceable/pizza/mushroompizza(src)
 	boxtag = "Mushroom Special"
 
 /obj/item/pizzabox/meat/Initialize()
 	. = ..()
-	pizza = new /obj/item/chems/food/snacks/sliceable/pizza/meatpizza(src)
+	pizza = new /obj/item/chems/food/sliceable/pizza/meatpizza(src)
 	boxtag = "Meatlover's Supreme"

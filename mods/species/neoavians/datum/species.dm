@@ -20,7 +20,7 @@
 
 	age_descriptor = /datum/appearance_descriptor/age/neoavian
 
-	meat_type = /obj/item/chems/food/snacks/meat/chicken
+	meat_type = /obj/item/chems/food/meat/chicken
 
 	base_color = "#000616"
 	reagent_tag = IS_AVIAN
@@ -95,7 +95,7 @@
 /datum/sprite_accessory/hair/avian/mohawk
 	name = "Avian Mohawk"
 	icon_state = "avian_mohawk"
-	
+
 /datum/sprite_accessory/hair/avian/spiky
 	name = "Avian Spiky"
 	icon_state = "avian_spiky"

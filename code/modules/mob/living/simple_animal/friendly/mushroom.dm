@@ -12,10 +12,10 @@
 	harm_intent_damage = 5
 	pass_flags = PASS_FLAG_TABLE
 
-	meat_type = /obj/item/chems/food/snacks/hugemushroomslice
+	meat_type = /obj/item/chems/food/hugemushroomslice
 	bone_material = null
 	bone_amount =   0
-	skin_material = null 
+	skin_material = null
 	skin_amount =   null
 
 	var/datum/seed/seed
