@@ -1,0 +1,7 @@
+author: Nyxodile
+delete-after: true
+changes:
+  - bugfix: Backend fixes for mobile ladders.
+  - bugfix: Fixes toggling plated catwalks.
+  - bugfix: Fixes Wi-Fi bypass.
+  - bugfix: Minor fireaxe attack fix.
