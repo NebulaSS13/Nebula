@@ -27,7 +27,7 @@
 		update_icon()
 
 // Sort of a placeholder for proper tailoring.
-#define RAG_COUNT(X) ceil((LAZYACCESS(X.matter, /decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
+#define RAG_COUNT(X) CEILING((LAZYACCESS(X.matter, /decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
 
 /obj/item/clothing/attackby(obj/item/I, mob/user)
 	var/rags = RAG_COUNT(src)

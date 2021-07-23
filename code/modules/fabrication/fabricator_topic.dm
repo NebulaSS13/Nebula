@@ -53,7 +53,7 @@
 	mat_name = lowertext(mat_name)
 	for(var/mat_path in stored_substances_to_names)
 		if(stored_substances_to_names[mat_path] == mat_name && stored_material[mat_path] > SHEET_MATERIAL_AMOUNT)
-			var/sheet_count = Floor(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)
+			var/sheet_count = FLOOR(stored_material[mat_path]/SHEET_MATERIAL_AMOUNT)
 			stored_material[mat_path] -= sheet_count * SHEET_MATERIAL_AMOUNT
 			SSmaterials.create_object(mat_path, get_turf(src), sheet_count)
 			break

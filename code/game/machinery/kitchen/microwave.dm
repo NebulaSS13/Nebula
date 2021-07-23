@@ -226,7 +226,7 @@
 		return
 
 	if (reagents.total_volume && prob(50)) // 50% chance a liquid recipe gets messy
-		dirty += Ceiling(reagents.total_volume / 10)
+		dirty += CEILING(reagents.total_volume / 10)
 
 	var/decl/recipe/recipe = select_recipe()
 	if (!recipe)
@@ -466,5 +466,5 @@
 	las_rating = total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
 
 	change_power_consumption(initial(active_power_usage) - (cap_rating * 25), POWER_USE_ACTIVE)
-	max_n_of_items = initial(max_n_of_items) + Floor(bin_rating)
+	max_n_of_items = initial(max_n_of_items) + FLOOR(bin_rating)
 	cooking_power = initial(cooking_power) + (las_rating / 3)

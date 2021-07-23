@@ -25,7 +25,7 @@
 			reagents.remove_reagent(/decl/material/liquid/carpotoxin, toxin_amt)
 		user.visible_message("<span class='notice'>\The [user] slices \the [src] into thin strips.</span>")
 
-		var/transfer_amt = Floor(reagents.total_volume * 0.3)
+		var/transfer_amt = FLOOR(reagents.total_volume * 0.3)
 		for(var/i = 1 to 3)
 			var/obj/item/chems/food/snacks/sashimi/sashimi = new(get_turf(src), fish_type)
 			reagents.trans_to(sashimi, transfer_amt)

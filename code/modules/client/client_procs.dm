@@ -479,8 +479,8 @@ var/global/list/localhost_addresses = list(
 		last_view_y_dim = config.lock_client_view_y
 	else
 		var/winsize_string = winget(src, "mapwindow.map", "size")
-		last_view_x_dim = config.lock_client_view_x || Clamp(ceil(text2num(winsize_string) / divisor), 15, config.max_client_view_x || 41)
-		last_view_y_dim = config.lock_client_view_y || Clamp(ceil(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor), 15, config.max_client_view_y || 41)
+		last_view_x_dim = config.lock_client_view_x || Clamp(CEILING(text2num(winsize_string) / divisor), 15, config.max_client_view_x || 41)
+		last_view_y_dim = config.lock_client_view_y || Clamp(CEILING(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor), 15, config.max_client_view_y || 41)
 		if(last_view_x_dim % 2 == 0) last_view_x_dim++
 		if(last_view_y_dim % 2 == 0) last_view_y_dim++
 	for(var/check_icon_size in global.valid_icon_sizes)

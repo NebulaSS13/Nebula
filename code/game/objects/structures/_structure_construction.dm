@@ -104,7 +104,7 @@
 
 /obj/structure/proc/handle_repair(mob/user, obj/item/tool)
 	var/obj/item/stack/stack = tool
-	var/amount_needed = ceil((maxhealth - health)/DOOR_REPAIR_AMOUNT)
+	var/amount_needed = CEILING((maxhealth - health)/DOOR_REPAIR_AMOUNT)
 	var/used = min(amount_needed,stack.amount)
 	if(used)
 		to_chat(user, SPAN_NOTICE("You fit [used] [stack.singular_name]\s to damaged areas of \the [src]."))

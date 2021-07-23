@@ -59,7 +59,7 @@
 	..()
 
 /decl/currency/proc/format_value(var/amt)
-	. = "[name_prefix][Floor(amt / absolute_value)][name_suffix]"
+	. = "[name_prefix][FLOOR(amt / absolute_value)][name_suffix]"
 
 /decl/currency/proc/build_denominations()
 	for(var/datum/denomination/denomination in denominations)

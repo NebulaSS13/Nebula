@@ -422,7 +422,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
 /decl/material/proc/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
 	if(fuel_value && amount && istype(M))
-		M.fire_stacks += Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
+		M.fire_stacks += FLOOR((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
 #undef FLAMMABLE_LIQUID_DIVISOR
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
