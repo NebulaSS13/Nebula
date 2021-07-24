@@ -1325,6 +1325,7 @@
 #include "code\game\turfs\unsimulated\beach.dm"
 #include "code\game\turfs\unsimulated\floor.dm"
 #include "code\game\turfs\unsimulated\walls.dm"
+#include "code\game\verbs\byond_membership.dm"
 #include "code\game\verbs\ignore.dm"
 #include "code\game\verbs\ooc.dm"
 #include "code\game\verbs\who.dm"

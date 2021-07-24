@@ -3,6 +3,7 @@
 	#include "modpack_testing_lobby.dm"
 	#include "blank.dmm"
 
+	#include "../../mods/content/byond_membership/_byond_membership.dme"
 	#include "../../mods/content/mundane.dm"
 	#include "../../mods/content/bigpharma/_bigpharma.dme"
 	#include "../../mods/content/corporate/_corporate.dme"
