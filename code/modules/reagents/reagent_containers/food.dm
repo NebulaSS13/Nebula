@@ -30,6 +30,8 @@
 	volume = 50
 	center_of_mass = @"{'x':16,'y':16}"
 	w_class = ITEM_SIZE_SMALL
+	var/list/attack_products //Items you can craft together. Like bomb making, but with food and less screwdrivers.
+	// Uses format list(ingredient = result_type). The ingredient can be a typepath or a kitchen_tag string (used for mobs or plants)
 
 /obj/item/chems/food/Initialize()
 	.=..()
@@ -115,7 +117,9 @@
 	else
 		to_chat(user, "<span class='notice'>\The [src] was bitten multiple times!</span>")
 
-/obj/item/chems/food/attackby(obj/item/W, mob/user)
+/obj/item/chems/food/attackby(obj/item/W, mob/living/user)
+	if(!istype(user))
+		return
 	if(istype(W,/obj/item/storage))
 		..()// -> item/attackby()
 		return
@@ -187,6 +191,34 @@
 				reagents.trans_to_obj(slice, reagents_per_slice)
 			qdel(src)
 			return
+
+	var/create_type
+	for(var/key in attack_products)
+		if(ispath(key) && !istype(W, key))
+			continue
+		if(istext(key))
+			if(!istype(W, /obj/item/chems/food/grown))
+				continue
+			var/obj/item/chems/food/grown/G = W
+			if(G.seed.kitchen_tag && G.seed.kitchen_tag != key)
+				continue
+		create_type = attack_products[key]
+	if (!ispath(create_type))
+		return
+	if(!user.canUnEquip(src))
+		return
+
+	var/obj/item/chems/food/result = new create_type()
+	//If the snack was in your hands, the result will be too
+	if (src in user.held_item_slots)
+		user.drop_from_inventory(src)
+		user.put_in_hands(result)
+	else
+		result.dropInto(loc)
+
+	qdel(W)
+	qdel(src)
+	to_chat(user, SPAN_NOTICE("You make \the [result]!"))
 
 /obj/item/chems/food/proc/is_sliceable()
 	return (slices_num && slice_path && slices_num > 0)

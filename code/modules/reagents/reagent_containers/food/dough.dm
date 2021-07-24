@@ -12,7 +12,8 @@
 // Dough + rolling pin = flat dough
 /obj/item/chems/food/dough/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/kitchen/rollingpin))
-		new /obj/item/chems/food/sliceable/flatdough(src)
+		var/obj/item/chems/food/sliceable/flatdough/result = new()
+		result.dropInto(loc)
 		to_chat(user, "You flatten the dough.")
 		qdel(src)
 
@@ -54,84 +55,21 @@
 	nutriment_desc = list("bun" = 4)
 	nutriment_amt = 4
 	nutriment_type = /decl/material/liquid/nutriment/bread
+	attack_products = list(
+		/obj/item/chems/food/meatball = /obj/item/chems/food/plainburger,
+		/obj/item/chems/food/cutlet = /obj/item/chems/food/hamburger,
+		/obj/item/chems/food/sausage = /obj/item/chems/food/hotdog
+	)
 
-//Items you can craft together. Like bomb making, but with food and less screwdrivers.
-/obj/item/chems/food/bun/attackby(obj/item/W, mob/user)
-	// bun + meatball = burger
-	if(istype(W,/obj/item/chems/food/meatball))
-		new /obj/item/chems/food/plainburger(src)
-		to_chat(user, "You make a burger.")
-		qdel(W)
-		qdel(src)
-
-	// bun + cutlet = hamburger
-	else if(istype(W,/obj/item/chems/food/cutlet))
-		new /obj/item/chems/food/hamburger(src)
-		to_chat(user, "You make a hamburger.")
-		qdel(W)
-		qdel(src)
-
-	// bun + sausage = hotdog
-	else if(istype(W,/obj/item/chems/food/sausage))
-		new /obj/item/chems/food/hotdog(src)
-		to_chat(user, "You make a hotdog.")
-		qdel(W)
-		qdel(src)
-
-// burger + cheese wedge = cheeseburger
-/obj/item/chems/food/plainburger/attackby(var/obj/item/chems/food/cheesewedge/W, mob/user)
-	if(istype(W))// && !istype(src,/obj/item/chems/food/cheesewedge))
-		new /obj/item/chems/food/cheeseburger(src)
-		to_chat(user, "You make a cheeseburger.")
-		qdel(W)
-		qdel(src)
-		return
-	else
-		..()
-
-// Hamburger + cheese wedge = cheeseburger
-/obj/item/chems/food/hamburger/attackby(var/obj/item/chems/food/cheesewedge/W, mob/user)
-	if(istype(W))// && !istype(src,/obj/item/chems/food/cheesewedge))
-		new /obj/item/chems/food/cheeseburger(src)
-		to_chat(user, "You make a cheeseburger.")
-		qdel(W)
-		qdel(src)
-		return
-	else
-		..()
-
-// Human burger + cheese wedge = cheeseburger
-/obj/item/chems/food/human/burger/attackby(var/obj/item/chems/food/cheesewedge/W, mob/user)
-	if(istype(W))
-		new /obj/item/chems/food/cheeseburger(src)
-		to_chat(user, "You make a cheeseburger.")
-		qdel(W)
-		qdel(src)
-		return
-	else
-		..()
+/obj/item/chems/food/plainburger/attack_products = list(/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheeseburger)
+/obj/item/chems/food/hamburger/attack_products = list(/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheeseburger)
+/obj/item/chems/food/human/burger/attack_products = list(/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheeseburger)
 
 // Spaghetti + meatball = spaghetti with meatball(s)
-/obj/item/chems/food/boiledspagetti/attackby(var/obj/item/chems/food/meatball/W, mob/user)
-	if(istype(W))
-		new /obj/item/chems/food/meatballspagetti(src)
-		to_chat(user, "You add some meatballs to the spaghetti.")
-		qdel(W)
-		qdel(src)
-		return
-	else
-		..()
+/obj/item/chems/food/boiledspagetti/attack_products = list(/obj/item/chems/food/meatball = /obj/item/chems/food/meatballspagetti)
 
 // Spaghetti with meatballs + meatball = spaghetti with more meatball(s)
-/obj/item/chems/food/meatballspagetti/attackby(var/obj/item/chems/food/meatball/W, mob/user)
-	if(istype(W))
-		new /obj/item/chems/food/spesslaw(src)
-		to_chat(user, "You add some more meatballs to the spaghetti.")
-		qdel(W)
-		qdel(src)
-		return
-	else
-		..()
+/obj/item/chems/food/meatballspagetti/attack_products = list(/obj/item/chems/food/meatball = /obj/item/chems/food/spesslaw)
 
 /obj/item/chems/food/bunbun
 	name = "\improper Bun Bun"

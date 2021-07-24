@@ -1,7 +1,8 @@
 /obj/item/chems/food/slice/bread/attackby(obj/item/W, mob/user)
 
 	if(istype(W,/obj/item/shard) || istype(W,/obj/item/chems/food))
-		var/obj/item/chems/food/csandwich/S = new(get_turf(src))
+		var/obj/item/chems/food/csandwich/S = new()
+		S.dropInto(loc)
 		S.attackby(W,user)
 		qdel(src)
 	..()
