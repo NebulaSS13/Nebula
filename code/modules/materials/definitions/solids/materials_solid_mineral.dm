@@ -35,13 +35,14 @@
 	ore_icon_overlay = "lump"
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
-	flags = MAT_FLAG_FISSIBLE
+	burn_product = /decl/material/gas/carbon_monoxide
 	value = 0.8
 	sparse_material_weight = 35
 	rich_material_weight = 20
 	fuel_value = 0.8
 	dirtiness = 15
 
+	flags = MAT_FLAG_FISSIBLE
 	neutron_cross_section = 30
 	neutron_interactions = list(
 		INTERACTION_SCATTER = 2000

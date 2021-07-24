@@ -99,6 +99,7 @@
 	constructed_path = /obj/machinery/atmospherics/valve
 	pipe_class = PIPE_CLASS_BINARY
 	rotate_class = PIPE_ROTATE_TWODIR
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 
 /datum/fabricator_recipe/pipe/device/digitalvalve
 	name = "digital valve"
@@ -107,6 +108,7 @@
 	constructed_path = /obj/machinery/atmospherics/valve/digital
 	pipe_class = PIPE_CLASS_BINARY
 	rotate_class = PIPE_ROTATE_TWODIR
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 
 /datum/fabricator_recipe/pipe/device/autoshutoff
 	name = "automatic shutoff valve"
@@ -115,6 +117,7 @@
 	constructed_path = /obj/machinery/atmospherics/valve/shutoff
 	pipe_class = PIPE_CLASS_BINARY
 	rotate_class = PIPE_ROTATE_TWODIR
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 
 /datum/fabricator_recipe/pipe/device/mtvalve
 	name = "manual t-valve"
@@ -122,6 +125,7 @@
 	build_icon_state = "mtvalve"
 	constructed_path = /obj/machinery/atmospherics/tvalve
 	pipe_class = PIPE_CLASS_TRINARY
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 
 /datum/fabricator_recipe/pipe/device/mtvalvem
 	name = "manual t-valve (mirrored)"
@@ -129,6 +133,7 @@
 	build_icon_state = "mtvalvem"
 	constructed_path = /obj/machinery/atmospherics/tvalve/mirrored
 	pipe_class = PIPE_CLASS_TRINARY
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 
 /datum/fabricator_recipe/pipe/device/dtvalve
 	name = "digital t-valve"
@@ -137,6 +142,7 @@
 	build_icon_state = "map_tvalve0"
 	constructed_path = /obj/machinery/atmospherics/tvalve/digital
 	pipe_class = PIPE_CLASS_TRINARY
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 
 /datum/fabricator_recipe/pipe/device/dtvalvem
 	name = "digital t-valve (mirrored)"
@@ -145,6 +151,7 @@
 	build_icon_state = "map_tvalvem0"
 	constructed_path = /obj/machinery/atmospherics/tvalve/mirrored/digital
 	pipe_class = PIPE_CLASS_TRINARY
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 
 /datum/fabricator_recipe/pipe/device/air_sensor
 	name = "gas sensor"

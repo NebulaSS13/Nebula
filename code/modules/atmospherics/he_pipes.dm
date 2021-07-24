@@ -113,6 +113,7 @@
 	level = 2
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE|CONNECT_TYPE_FUEL
 	build_icon_state = "junction"
+	rotate_class = PIPE_ROTATE_STANDARD
 
 // Doubling up on initialize_directions is necessary to allow HE pipes to connect
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/set_dir(new_dir)

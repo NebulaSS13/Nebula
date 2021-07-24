@@ -101,22 +101,22 @@
 	access = access_ce
 
 /decl/hierarchy/supply_pack/engineering/pacman_parts
-	name = "Power - P.A.C.M.A.N. portable generator parts"
+	name = "Power - portable fusion generator parts"
 	contains = list(/obj/item/stock_parts/micro_laser,
 					/obj/item/stock_parts/capacitor,
 					/obj/item/stock_parts/matter_bin,
 					/obj/item/stock_parts/circuitboard/pacman)
-	containername = "\improper P.A.C.M.A.N. Portable Generator Construction Kit"
+	containername = "\improper Portable Fusion Generator Construction Kit"
 	containertype = /obj/structure/closet/crate/secure
 	access = access_tech_storage
 
 /decl/hierarchy/supply_pack/engineering/super_pacman_parts
-	name = "Power - Super P.A.C.M.A.N. portable generator parts"
+	name = "Power - portable fission generator parts"
 	contains = list(/obj/item/stock_parts/micro_laser,
 					/obj/item/stock_parts/capacitor,
 					/obj/item/stock_parts/matter_bin,
 					/obj/item/stock_parts/circuitboard/pacman/super)
-	containername = "\improper Super P.A.C.M.A.N. portable generator construction kit"
+	containername = "portable fission generator construction kit"
 	containertype = /obj/structure/closet/crate/secure
 	access = access_tech_storage
 
