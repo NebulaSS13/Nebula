@@ -24,11 +24,6 @@
 	},
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
-"ag" = (
-/obj/structure/table/woodentable,
-/obj/item/flashlight/lamp,
-/turf/simulated/floor/carpet/red,
-/area/unishi/library)
 "ah" = (
 /obj/structure/bed/chair/comfy/brown{
 	dir = 8
@@ -86,10 +81,6 @@
 /obj/machinery/fabricator/book,
 /turf/simulated/floor/carpet/red,
 /area/unishi/library)
-"aq" = (
-/obj/structure/bookcase,
-/turf/simulated/floor/carpet/red,
-/area/unishi/library)
 "ar" = (
 /obj/structure/bookcase/manuals/engineering,
 /turf/simulated/floor/carpet/red,
@@ -115,7 +106,6 @@
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -23;
-	pixel_y = 0;
 	req_access = newlist()
 	},
 /turf/simulated/floor/carpet/red,
@@ -158,7 +148,6 @@
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -23;
-	pixel_y = 0;
 	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
@@ -176,7 +165,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -193,8 +181,8 @@
 /area/unishi/chem)
 "aD" = (
 /obj/machinery/door/airlock/glass/research{
-	icon_state = "closed";
-	dir = 4
+	dir = 4;
+	icon_state = "closed"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -286,7 +274,6 @@
 /area/unishi/chem)
 "aO" = (
 /obj/structure/sign/chemistry{
-	icon_state = "chemistry";
 	dir = 4
 	},
 /turf/simulated/wall/r_wall,
@@ -313,12 +300,8 @@
 /obj/structure/closet/crate/secure/biohazard,
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
-/turf/simulated/floor,
-/area/unishi/common)
-"aS" = (
 /turf/simulated/floor,
 /area/unishi/common)
 "aT" = (
@@ -357,8 +340,8 @@
 /area/unishi/common)
 "aY" = (
 /obj/machinery/door/airlock/glass/research{
-	icon_state = "closed";
-	dir = 4
+	dir = 4;
+	icon_state = "closed"
 	},
 /turf/simulated/floor,
 /area/unishi/common)
@@ -378,15 +361,13 @@
 	},
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "bc" = (
 /obj/machinery/alarm{
 	dir = 8;
-	icon_state = "alarm0";
 	pixel_x = 24;
 	req_access = newlist()
 	},
@@ -480,7 +461,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24;
 	req_access = newlist()
 	},
@@ -592,8 +572,7 @@
 	icon_state = "2-8"
 	},
 /obj/machinery/light/small{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /turf/simulated/floor,
 /area/unishi/common)
@@ -634,18 +613,15 @@
 /obj/structure/closet/crate/bin,
 /obj/structure/sign/warning/nosmoking_1{
 	dir = 8;
-	icon_state = "nosmoking";
 	pixel_x = 32
 	},
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "bK" = (
 /obj/machinery/atmospherics/pipe/zpipe/up/scrubbers{
-	color = "#ff0000";
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/zpipe/up/supply{
-	color = "#0000ff";
 	dir = 1
 	},
 /obj/structure/cable/yellow{
@@ -658,16 +634,13 @@
 /area/unishi/common)
 "bL" = (
 /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers{
-	color = "#ff0000";
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/zpipe/down/supply{
-	color = "#0000ff";
 	dir = 1
 	},
 /obj/structure/cable/yellow{
 	d1 = 32;
-	d2 = 1;
 	icon_state = "32-1"
 	},
 /turf/simulated/open,
@@ -717,8 +690,8 @@
 /area/unishi/classroom)
 "bU" = (
 /obj/machinery/door/airlock/glass/research{
-	icon_state = "closed";
-	dir = 4
+	dir = 4;
+	icon_state = "closed"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -745,7 +718,6 @@
 "bW" = (
 /obj/machinery/alarm{
 	dir = 8;
-	icon_state = "alarm0";
 	pixel_x = 24;
 	req_access = newlist()
 	},
@@ -829,8 +801,8 @@
 /area/unishi/common)
 "cj" = (
 /obj/machinery/door/airlock/glass/research{
-	icon_state = "closed";
-	dir = 4
+	dir = 4;
+	icon_state = "closed"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -939,7 +911,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24;
 	req_access = newlist()
 	},
@@ -1014,7 +985,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24;
 	req_access = newlist()
 	},
@@ -1024,8 +994,7 @@
 	},
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/unishi/toxins)
@@ -1049,14 +1018,12 @@
 /area/unishi/toxins)
 "cK" = (
 /obj/machinery/door/blast/regular{
-	icon_state = "pdoor1";
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
 /area/unishi/toxins)
 "cL" = (
 /obj/machinery/door/blast/regular{
-	icon_state = "pdoor1";
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
@@ -1090,8 +1057,8 @@
 /area/unishi/meeting)
 "cR" = (
 /obj/machinery/door/airlock/glass/research{
-	icon_state = "closed";
-	dir = 4
+	dir = 4;
+	icon_state = "closed"
 	},
 /turf/simulated/floor,
 /area/unishi/meeting)
@@ -1118,7 +1085,6 @@
 /area/unishi/toxins)
 "cV" = (
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on{
-	icon_state = "map_vent_in";
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
@@ -1233,8 +1199,8 @@
 	id_tag = "prototype_chamber_blast"
 	},
 /obj/machinery/door/airlock/glass/research{
-	icon_state = "closed";
-	dir = 4
+	dir = 4;
+	icon_state = "closed"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -1275,8 +1241,7 @@
 "do" = (
 /obj/structure/sign/warning/fire{
 	dir = 8;
-	pixel_x = 32;
-	pixel_y = 0
+	pixel_x = 32
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/unishi/toxins)
@@ -1341,7 +1306,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24;
 	req_access = newlist()
 	},
@@ -1393,7 +1357,6 @@
 /area/unishi/toxins)
 "dH" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/green{
-	icon_state = "map";
 	dir = 1
 	},
 /turf/simulated/wall/r_wall,
@@ -1454,8 +1417,8 @@
 /area/unishi/rnd)
 "dP" = (
 /obj/machinery/door/airlock/glass/research{
-	icon_state = "closed";
-	dir = 4
+	dir = 4;
+	icon_state = "closed"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -1501,7 +1464,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24;
 	req_access = newlist()
 	},
@@ -1594,14 +1556,12 @@
 "eg" = (
 /obj/effect/vine,
 /obj/machinery/atmospherics/pipe/manifold/visible/green{
-	icon_state = "map";
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/hydro)
 "eh" = (
 /obj/machinery/atmospherics/valve{
-	icon_state = "map_valve0";
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -1609,7 +1569,6 @@
 "ei" = (
 /obj/effect/vine,
 /obj/machinery/atmospherics/pipe/manifold/visible/green{
-	icon_state = "map";
 	dir = 1
 	},
 /obj/item/seeds/quantumatoseed,
@@ -1618,7 +1577,6 @@
 "ej" = (
 /obj/effect/vine,
 /obj/machinery/atmospherics/pipe/manifold/visible/green{
-	icon_state = "map";
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -1655,7 +1613,6 @@
 /area/unishi/hydro)
 "eq" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/green{
-	icon_state = "map";
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -1666,8 +1623,8 @@
 "er" = (
 /obj/effect/vine,
 /obj/machinery/atmospherics/unary/freezer{
-	icon_state = "freezer";
-	dir = 8
+	dir = 8;
+	icon_state = "freezer"
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/hydro)
@@ -1711,7 +1668,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24;
 	req_access = newlist()
 	},
@@ -1742,7 +1698,6 @@
 /area/unishi/hydro)
 "eA" = (
 /obj/machinery/atmospherics/valve{
-	icon_state = "map_valve0";
 	dir = 8
 	},
 /obj/item/seeds/random,
@@ -1786,8 +1741,8 @@
 /area/unishi/common)
 "eH" = (
 /obj/machinery/door/airlock/glass/research{
-	icon_state = "closed";
-	dir = 4
+	dir = 4;
+	icon_state = "closed"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -1797,7 +1752,6 @@
 /area/unishi/hydro)
 "eI" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/green{
-	icon_state = "map";
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -1808,7 +1762,6 @@
 "eJ" = (
 /obj/effect/vine,
 /obj/machinery/atmospherics/unary/heater{
-	icon_state = "heater_0";
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -1843,7 +1796,6 @@
 "eP" = (
 /obj/effect/wingrille_spawn/reinforced,
 /obj/structure/sign/xenobio_1{
-	icon_state = "xenobio";
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
@@ -1924,8 +1876,8 @@
 /area/unishi/xenobio)
 "eZ" = (
 /obj/machinery/door/airlock/glass/research{
-	icon_state = "closed";
-	dir = 4
+	dir = 4;
+	icon_state = "closed"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -2009,14 +1961,12 @@
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -23;
-	pixel_y = 0;
 	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "fj" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	icon_state = "map-scrubbers";
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2040,7 +1990,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24;
 	req_access = newlist()
 	},
@@ -2048,7 +1997,6 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	icon_state = "map-scrubbers";
 	dir = 1
 	},
 /obj/structure/cable/yellow{
@@ -2077,7 +2025,6 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	icon_state = "map-scrubbers";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
@@ -2104,7 +2051,6 @@
 /area/unishi/common)
 "fr" = (
 /obj/structure/sign/warning/radioactive{
-	icon_state = "radiation";
 	dir = 4
 	},
 /turf/simulated/wall,
@@ -2250,7 +2196,6 @@
 /area/unishi/smresearch)
 "fO" = (
 /obj/structure/sign/warning/radioactive{
-	icon_state = "radiation";
 	dir = 4
 	},
 /turf/simulated/wall/ocp_wall,
@@ -2281,7 +2226,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24;
 	req_access = newlist()
 	},
@@ -2299,7 +2243,6 @@
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -23;
-	pixel_y = 0;
 	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark,
@@ -2493,7 +2436,6 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow,
 /obj/item/remains,
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 2;
 	level = 2
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2592,8 +2534,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	pixel_y = 0
+	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
@@ -2684,8 +2625,8 @@
 /obj/effect/decal/cleanable/blood,
 /obj/item/clothing/under/blazer,
 /obj/machinery/computer/modular/preset/engineering{
-	icon_state = "console";
-	dir = 4
+	dir = 4;
+	icon_state = "console"
 	},
 /obj/machinery/light/small{
 	dir = 8
@@ -2712,8 +2653,7 @@
 /obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	pixel_y = 0
+	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
@@ -2722,13 +2662,11 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /obj/machinery/computer/air_control/supermatter_core{
 	dir = 8;
-	frequency = 1438;
-	icon_state = "computer";
 	input_tag = "unishi_cooling_in";
 	name = "Supermatter Test Room Cooling Control";
 	output_tag = "unishi_cooling_out";
@@ -2756,7 +2694,6 @@
 "gS" = (
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow{
-	icon_state = "map";
 	dir = 4
 	},
 /turf/simulated/floor,
@@ -2813,8 +2750,8 @@
 /obj/item/book/manual/engineering_construction,
 /obj/machinery/atmospherics/pipe/simple/visible/yellow,
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
@@ -2892,8 +2829,8 @@
 	tag_west = 2
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
@@ -2913,8 +2850,6 @@
 	icon_state = "map_vent_in";
 	id_tag = "unishi_cooling_out";
 	initialize_directions = 1;
-	pressure_checks = 1;
-	pressure_checks_default = 1;
 	pump_direction = 0;
 	use_power = 1
 	},
@@ -2962,8 +2897,8 @@
 /area/unishi/smresearch)
 "ht" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
@@ -7760,7 +7695,7 @@ aa
 ac
 ae
 al
-aq
+av
 au
 av
 ay
@@ -7862,7 +7797,7 @@ aa
 ac
 af
 am
-aq
+av
 ao
 av
 ay
@@ -7962,7 +7897,7 @@ aa
 aa
 aa
 ac
-ag
+ai
 am
 ar
 ao
@@ -8270,13 +8205,13 @@ aa
 ac
 af
 ao
-aq
+av
 ao
-aq
+av
 ak
 aH
 aR
-aS
+cp
 bg
 aG
 bq
@@ -8372,13 +8307,13 @@ aa
 ac
 aj
 ap
-aq
+av
 ao
-aq
+av
 ak
 aI
-aS
-aS
+cp
+cp
 bh
 aG
 aG
@@ -8479,14 +8414,14 @@ ak
 ak
 ak
 aJ
-aS
+cp
 aZ
 bi
 bl
 br
 bB
 bK
-aS
+cp
 bl
 bY
 cf
@@ -8581,7 +8516,7 @@ ad
 ad
 ad
 aK
-aS
+cp
 ba
 ba
 bl

@@ -329,7 +329,6 @@
 	id_tag = "lp_east_airlock";
 	name = "interior access button";
 	pixel_x = 24;
-	pixel_y = 0;
 	req_access = null
 	},
 /turf/simulated/floor/tiled/airless,
@@ -339,7 +338,6 @@
 	id_tag = "lp_east_airlock";
 	name = "exterior access button";
 	pixel_x = -24;
-	pixel_y = 0;
 	req_access = null
 	},
 /turf/simulated/floor/asteroid,
@@ -356,7 +354,6 @@
 /obj/random/trash,
 /obj/machinery/airlock_sensor{
 	id_tag = "lp_east_sensor";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/airless,
@@ -365,7 +362,6 @@
 /obj/random/maintenance,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "lp_east_airlock";
-	pixel_x = 0;
 	pixel_y = 24;
 	tag_airpump = "lp_east_pump";
 	tag_chamber_sensor = "lp_east_sensor";

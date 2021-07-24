@@ -224,7 +224,6 @@
 	tag_interior_door = "solar_starboard_inner"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 2;
 	id_tag = "solar_starboard_pump"
 	},
 /obj/machinery/airlock_sensor{
@@ -286,13 +285,11 @@
 "aI" = (
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/airless,
@@ -310,8 +307,7 @@
 /area/lost_supply_base/solar)
 "aL" = (
 /obj/machinery/power/solar_control{
-	name = "Solar Control";
-	track = 0
+	name = "Solar Control"
 	},
 /obj/structure/cable/yellow{
 	d2 = 4;
@@ -327,8 +323,7 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
-	dir = 8;
-	icon_state = "map"
+	dir = 8
 	},
 /obj/machinery/button/access/interior{
 	id_tag = "solar_starboard_airlock";
@@ -413,7 +408,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/airless,
@@ -479,8 +473,8 @@
 /area/lost_supply_base)
 "bb" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 5
+	dir = 5;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
@@ -652,8 +646,8 @@
 /area/lost_supply_base/solar)
 "bA" = (
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/structure/cable{
 	d2 = 8;
@@ -682,10 +676,9 @@
 /area/lost_supply_base/solar)
 "bC" = (
 /obj/machinery/power/smes/buildable{
-	charge = 0;
+	RCon_tag = "Supply base MAIN";
 	input_level = 5000;
-	input_level_max = 20000;
-	RCon_tag = "Supply base MAIN"
+	input_level_max = 20000
 	},
 /obj/structure/cable{
 	d2 = 8;
@@ -696,8 +689,7 @@
 "bD" = (
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -752,8 +744,8 @@
 /area/lost_supply_base)
 "bL" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 6
+	dir = 6;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
@@ -900,8 +892,8 @@
 /area/lost_supply_base/common)
 "cl" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
@@ -913,8 +905,8 @@
 /area/lost_supply_base)
 "cn" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 5
+	dir = 5;
+	icon_state = "warning"
 	},
 /obj/random/trash,
 /turf/simulated/floor/airless,
@@ -943,13 +935,12 @@
 "cr" = (
 /obj/structure/cable,
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
@@ -995,7 +986,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/airless,
@@ -1237,8 +1227,7 @@
 "do" = (
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -1286,8 +1275,8 @@
 /area/lost_supply_base)
 "du" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 6
+	dir = 6;
+	icon_state = "warning"
 	},
 /obj/item/storage/backpack/dufflebag,
 /turf/simulated/floor/airless,
@@ -1334,8 +1323,8 @@
 "dC" = (
 /obj/random/trash,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
@@ -1356,20 +1345,19 @@
 /area/space)
 "dG" = (
 /turf/simulated/shuttle/wall{
-	icon_state = "swall_t";
-	dir = 1
+	dir = 1;
+	icon_state = "swall_t"
 	},
 /area/space)
 "dH" = (
 /turf/simulated/shuttle/wall{
-	icon_state = "swall_straight";
-	dir = 4
+	dir = 4;
+	icon_state = "swall_straight"
 	},
 /area/space)
 "dI" = (
 /turf/simulated/shuttle/wall{
-	icon_state = "swall_s";
-	dir = 2
+	icon_state = "swall_s"
 	},
 /area/space)
 "dJ" = (
@@ -1407,8 +1395,8 @@
 /area/lost_supply_base/common)
 "dR" = (
 /turf/simulated/shuttle/wall{
-	icon_state = "swall_straight";
-	dir = 1
+	dir = 1;
+	icon_state = "swall_straight"
 	},
 /area/space)
 "dS" = (
@@ -1451,8 +1439,8 @@
 /area/lost_supply_base)
 "dZ" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
@@ -1485,14 +1473,13 @@
 /area/lost_supply_base/common)
 "eg" = (
 /obj/structure/shuttle/engine/propulsion{
-	icon_state = "propulsion_r";
-	dir = 8
+	dir = 8;
+	icon_state = "propulsion_r"
 	},
 /turf/space,
 /area/space)
 "eh" = (
 /obj/structure/shuttle/engine/heater{
-	icon_state = "heater";
 	dir = 8
 	},
 /obj/structure/window/reinforced{
@@ -1502,8 +1489,8 @@
 /area/space)
 "ei" = (
 /turf/simulated/shuttle/wall{
-	icon_state = "swall";
-	dir = 1
+	dir = 1;
+	icon_state = "swall"
 	},
 /area/space)
 "ej" = (
@@ -1533,8 +1520,8 @@
 /area/lost_supply_base)
 "en" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/airless,
@@ -1569,8 +1556,8 @@
 /area/lost_supply_base/common)
 "et" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/airless{
 	icon_state = "steel_burned0"
@@ -1607,13 +1594,11 @@
 /area/lost_supply_base/common)
 "eB" = (
 /turf/simulated/shuttle/wall{
-	dir = 2;
 	icon_state = "swall"
 	},
 /area/space)
 "eD" = (
 /obj/machinery/atmospherics/unary/tank/hydrogen{
-	dir = 2;
 	volume = 3200
 	},
 /turf/simulated/floor/airless,
@@ -1677,14 +1662,14 @@
 /area/space)
 "eO" = (
 /turf/simulated/shuttle/wall{
-	icon_state = "swall_f";
-	dir = 4
+	dir = 4;
+	icon_state = "swall_f"
 	},
 /area/space)
 "eP" = (
 /turf/simulated/shuttle/wall{
-	icon_state = "swall_s";
-	dir = 8
+	dir = 8;
+	icon_state = "swall_s"
 	},
 /area/space)
 "eT" = (
@@ -1722,8 +1707,7 @@
 /area/space)
 "eX" = (
 /turf/simulated/shuttle/wall{
-	icon_state = "swall_t";
-	dir = 2
+	icon_state = "swall_t"
 	},
 /area/space)
 "eY" = (
@@ -1737,8 +1721,8 @@
 /area/lost_supply_base)
 "fa" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/airless,
@@ -1752,8 +1736,7 @@
 "fc" = (
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/random/obstruction,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1808,7 +1791,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/airless,
@@ -1842,8 +1824,8 @@
 /area/lost_supply_base)
 "fn" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 10
+	dir = 10;
+	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/airless,
@@ -1896,7 +1878,6 @@
 /area/lost_supply_base)
 "fx" = (
 /obj/machinery/atmospherics/unary/vent_scrubber{
-	icon_state = "map_scrubber_off";
 	dir = 1
 	},
 /turf/simulated/floor/airless,
@@ -2126,8 +2107,8 @@
 /area/lost_supply_base)
 "gd" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 6
+	dir = 6;
+	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -2201,10 +2182,10 @@
 	initialize_directions = 1;
 	internal_pressure_bound = 4000;
 	internal_pressure_bound_default = 4000;
-	use_power = 1;
 	pressure_checks = 2;
 	pressure_checks_default = 2;
-	pump_direction = 0
+	pump_direction = 0;
+	use_power = 1
 	},
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base)
@@ -2221,7 +2202,6 @@
 /area/lost_supply_base/supply)
 "gr" = (
 /obj/structure/hygiene/shower{
-	icon_state = "shower";
 	dir = 8
 	},
 /obj/random/soap,
@@ -2240,7 +2220,6 @@
 /area/mine/explored)
 "ib" = (
 /obj/structure/hygiene/sink{
-	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
 	pixel_y = 2
