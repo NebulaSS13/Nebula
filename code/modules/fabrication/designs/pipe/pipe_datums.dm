@@ -34,18 +34,23 @@
 	build_icon_state = "cap"
 	constructed_path = /obj/machinery/atmospherics/pipe/cap/hidden
 	pipe_class = PIPE_CLASS_UNARY
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/up
 	name = "upward pipe fitting"
 	desc = "an upward pipe."
 	build_icon_state = "up"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/up
+	rotate_class = PIPE_ROTATE_STANDARD
+
 
 /datum/fabricator_recipe/pipe/down
 	name = "downward pipe fitting"
 	desc = "a downward pipe."
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down
+	rotate_class = PIPE_ROTATE_STANDARD
+
 
 /datum/fabricator_recipe/pipe/supply
 	category = "Supply Pipes"
@@ -87,18 +92,21 @@
 	build_icon_state = "cap"
 	constructed_path = /obj/machinery/atmospherics/pipe/cap/hidden/supply
 	pipe_class = PIPE_CLASS_UNARY
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/supply/up
 	name = "upward supply pipe fitting"
 	desc = "an upward supply pipe segment."
 	build_icon_state = "up"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/up/supply
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/supply/down
 	name = "downward supply pipe fitting"
 	desc = "a downward supply pipe segment."
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/supply
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/scrubber
 	category = "Scrubber Pipes"
@@ -139,18 +147,22 @@
 	desc = "a pipe cap for a scrubber pipe."
 	build_icon_state = "cap"
 	constructed_path = /obj/machinery/atmospherics/pipe/cap/hidden/scrubbers
+	pipe_class = PIPE_CLASS_UNARY
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/scrubber/up
 	name = "upward scrubber pipe fitting"
 	desc = "an upward scrubber pipe segment."
 	build_icon_state = "up"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/up/scrubbers
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/scrubber/down
 	name = "downward scrubber pipe fitting"
 	desc = "a downward scrubber pipe segment."
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/fuel
 	category = "Fuel Pipes"
@@ -192,18 +204,21 @@
 	build_icon_state = "cap"
 	constructed_path = /obj/machinery/atmospherics/pipe/cap/hidden/fuel
 	pipe_class = PIPE_CLASS_UNARY
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/fuel/up
 	name = "upward fuel pipe fitting"
 	desc = "an upward fuel pipe segment."
 	build_icon_state = "up"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/up/fuel
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/fuel/down
 	name = "downward fuel pipe fitting"
 	desc = "a downward fuel pipe segment."
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/fuel
+	rotate_class = PIPE_ROTATE_STANDARD
 
 /datum/fabricator_recipe/pipe/he
 	category = "Heat Exchange Pipes"
@@ -229,7 +244,7 @@
 /datum/fabricator_recipe/pipe/he/junction
 	name = "heat exchanger junction"
 	desc = "a heat exchanger junction"
-	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE|CONNECT_TYPE_FUEL
 	build_icon_state = "junction"
 	constructed_path = /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	rotate_class = PIPE_ROTATE_STANDARD
