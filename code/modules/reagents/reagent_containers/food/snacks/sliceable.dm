@@ -27,7 +27,7 @@
  *  have performance implications.
  */
 /obj/item/chems/food/slice/Initialize()
-	.=..()
+	. = ..()
 	if(filled)
 		var/obj/item/chems/food/whole = new whole_path()
 		if(whole && whole.slices_num)

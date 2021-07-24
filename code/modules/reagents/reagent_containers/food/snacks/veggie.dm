@@ -12,8 +12,9 @@
 	nutriment_amt = 8
 	nutriment_desc = list("apples" = 3,"salad" = 4, "quintessence" = 2)
 	bitesize = 3
+
 /obj/item/chems/food/aesirsalad/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/regenerator, 8)
 
 /obj/item/chems/food/tossedsalad
@@ -37,8 +38,9 @@
 	nutriment_desc = list("100% real salad")
 	nutriment_amt = 6
 	bitesize = 3
+
 /obj/item/chems/food/validsalad/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/carrotfries
@@ -51,8 +53,9 @@
 	nutriment_desc = list("carrot" = 3, "salt" = 1)
 	nutriment_amt = 3
 	bitesize = 2
+
 /obj/item/chems/food/carrotfries/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/eyedrops, 3)
 
 /obj/item/chems/food/hugemushroomslice
@@ -64,6 +67,7 @@
 	nutriment_amt = 3
 	nutriment_desc = list("raw" = 2, "mushroom" = 2)
 	bitesize = 6
+
 /obj/item/chems/food/hugemushroomslice/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 3)

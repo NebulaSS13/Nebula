@@ -9,7 +9,7 @@
 	material = /decl/material/solid/meat
 
 /obj/item/chems/food/sosjerky/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/no_raisin
@@ -29,8 +29,9 @@
 	filling_color = "#ffe591"
 	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
+
 /obj/item/chems/food/spacetwinkie/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 4)
 
 /obj/item/chems/food/cheesiehonkers
@@ -56,7 +57,7 @@
 	bitesize = 3
 
 /obj/item/chems/food/syndicake/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/regenerator, 5)
 
 //terran delights
@@ -93,8 +94,9 @@
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 2
 	bitesize = 1
+
 /obj/item/chems/food/squid/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/croutons
@@ -119,8 +121,9 @@
 	nutriment_desc = list("fat" = 1, "salt" = 1)
 	nutriment_amt = 2
 	bitesize = 2
+
 /obj/item/chems/food/salo/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 
 /obj/item/chems/food/driedfish
@@ -133,8 +136,9 @@
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 2
 	bitesize = 1
+
 /obj/item/chems/food/driedfish/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/liquidfood
@@ -147,8 +151,9 @@
 	nutriment_desc = list("chalk" = 6)
 	nutriment_amt = 20
 	bitesize = 4
+
 /obj/item/chems/food/liquidfood/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/solid/metal/iron, 3)
 
 /obj/item/chems/food/meatcube
@@ -161,7 +166,7 @@
 	material = /decl/material/solid/meat
 
 /obj/item/chems/food/meatcube/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)
 
 /obj/item/chems/food/tastybread
@@ -186,8 +191,9 @@
 	nutriment_amt = 1
 	nutriment_desc = list("candy" = 1)
 	bitesize = 2
+
 /obj/item/chems/food/candy/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 3)
 
 /obj/item/chems/food/candy/proteinbar
@@ -196,8 +202,9 @@
 	icon_state = "proteinbar"
 	trash = /obj/item/trash/candy/proteinbar
 	bitesize = 6
+
 /obj/item/chems/food/candy/proteinbar/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment, 9)
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 4)
@@ -208,8 +215,9 @@
 	trash = /obj/item/trash/candy
 	nutriment_desc = list("candy" = 10)
 	bitesize = 5
+
 /obj/item/chems/food/candy/donor/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment, 10)
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 3)
 
@@ -222,8 +230,9 @@
 	nutriment_amt = 4
 	nutriment_desc = list("candy corn" = 4)
 	bitesize = 2
+
 /obj/item/chems/food/candy_corn/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment, 4)
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 2)
 
@@ -260,8 +269,9 @@
 	nutriment_amt = 2
 	nutriment_desc = list("chocolate" = 5)
 	bitesize = 2
+
 /obj/item/chems/food/chocolatebar/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 2)
 	reagents.add_reagent(/decl/material/liquid/nutriment/coco, 2)
 
@@ -276,7 +286,7 @@
 	bitesize = 2
 
 /obj/item/chems/food/chocolateegg/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sugar, 2)
 	reagents.add_reagent(/decl/material/liquid/nutriment/coco, 2)
 
@@ -299,7 +309,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/donut/normal/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
 
 	if(prob(30))
@@ -333,7 +343,7 @@
 	)
 
 /obj/item/chems/food/donut/chaos/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
 	reagents.add_reagent(pick(get_random_fillings()), 3)
 	if(prob(30))
@@ -353,7 +363,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/donut/jelly/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 	if(prob(30))
@@ -370,8 +380,9 @@
 	center_of_mass = @"{'x':16,'y':11}"
 	nutriment_amt = 3
 	bitesize = 5
+
 /obj/item/chems/food/donut/cherryjelly/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 1)
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 	if(prob(30))
@@ -478,7 +489,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
 /obj/item/chems/food/venus/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/capsaicin = 5)
 
 /obj/item/chems/food/oort
@@ -491,8 +502,9 @@
 	nutriment_desc = list("fizz" = 3, "sweet?" = 1, "shrapnel" = 1)
 	nutriment_amt = 5
 	bitesize = 2
+
 /obj/item/chems/food/oort/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/frostoil = 5)
 
 //weebo vend! So japanese it hurts
@@ -521,8 +533,9 @@
 	nutriment_desc = list("nuts" = 4, "spicy!" = 1)
 	nutriment_amt = 5
 	bitesize = 2
+
 /obj/item/chems/food/weebonuts/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/capsaicin = 1)
 
 /obj/item/chems/food/chocobanana
@@ -533,8 +546,9 @@
 	nutriment_desc = list("banana" = 3, "chocolate" = 1, "wax?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
+
 /obj/item/chems/food/chocobanana/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 10)
 
 /obj/item/chems/food/dango
@@ -584,7 +598,7 @@
 	var/list/heated_reagents = list(/decl/material/liquid/regenerator = 5)
 
 /obj/item/chems/food/donkpocket/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/donkpocket/proc/heat()

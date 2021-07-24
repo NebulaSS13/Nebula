@@ -5,8 +5,9 @@
 	filling_color = "#ffdefe"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 3
+
 /obj/item/chems/food/fishfingers/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/cubancarp
@@ -19,8 +20,9 @@
 	nutriment_desc = list("toasted bread" = 3)
 	nutriment_amt = 3
 	bitesize = 3
+
 /obj/item/chems/food/cubancarp/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 	reagents.add_reagent(/decl/material/liquid/capsaicin, 3)
 
@@ -35,5 +37,5 @@
 	bitesize = 3
 
 /obj/item/chems/food/fishandchips/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)

@@ -9,7 +9,7 @@
 	material = /decl/material/solid/meat
 
 /obj/item/chems/food/rawcutlet/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
 
 /obj/item/chems/food/cutlet
@@ -22,7 +22,7 @@
 	material = /decl/material/solid/meat
 
 /obj/item/chems/food/cutlet/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/rawmeatball
@@ -35,7 +35,7 @@
 	material = /decl/material/solid/meat
 
 /obj/item/chems/food/rawmeatball/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 
 /obj/item/chems/food/meatball
@@ -48,7 +48,7 @@
 	material = /decl/material/solid/meat
 
 /obj/item/chems/food/meatball/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/plainsteak
@@ -64,7 +64,7 @@
 	material = /decl/material/solid/meat
 
 /obj/item/chems/food/plainsteak/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/meatsteak
@@ -78,7 +78,7 @@
 	material = /decl/material/solid/meat
 
 /obj/item/chems/food/meatsteak/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 	reagents.add_reagent(/decl/material/solid/mineral/sodiumchloride, 1)
 	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
@@ -100,7 +100,7 @@
 	material = /decl/material/solid/meat
 
 /obj/item/chems/food/loadedsteak/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 2)
 	reagents.add_reagent(/decl/material/liquid/nutriment/garlicsauce, 2)
 
@@ -124,7 +124,7 @@
 	material = /decl/material/solid/meat
 
 /obj/item/chems/food/bearmeat/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 12)
 	reagents.add_reagent(/decl/material/liquid/amphetamines, 5)
 
@@ -157,7 +157,7 @@
 	material = /decl/material/solid/meat
 
 /obj/item/chems/food/xenomeat/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 	reagents.add_reagent(/decl/material/liquid/acid/polyacid,6)
 
@@ -172,7 +172,7 @@
 	material = /decl/material/solid/meat
 
 /obj/item/chems/food/sausage/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 
 /obj/item/chems/food/fatsausage
@@ -185,7 +185,7 @@
 	material = /decl/material/solid/meat
 
 /obj/item/chems/food/fatsausage/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)
 
 /obj/item/chems/food/organ
@@ -196,8 +196,9 @@
 	filling_color = "#e00d34"
 	center_of_mass = @"{'x':16,'y':16}"
 	bitesize = 3
+
 /obj/item/chems/food/organ/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, rand(3,5))
 	reagents.add_reagent(/decl/material/liquid/bromide, rand(1,3))
 
@@ -209,6 +210,7 @@
 	filling_color = "#a85340"
 	center_of_mass = @"{'x':17,'y':15}"
 	bitesize = 2
+
 /obj/item/chems/food/meatkabob/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 8)

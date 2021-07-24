@@ -8,8 +8,9 @@
 	nutriment_amt = 10
 	bitesize = 3
 	filling_color = "#336b42"
+
 /obj/item/chems/food/old/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(pick(list(
 				/decl/material/liquid/fuel,
 				/decl/material/liquid/amatoxin,

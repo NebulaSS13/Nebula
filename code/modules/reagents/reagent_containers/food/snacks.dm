@@ -1,6 +1,6 @@
-////////////
-// Snacks //
-////////////
+///////////
+// Foods //
+///////////
 //Subtypes of /obj/item/chems/food are food items that people consume whole. The key points are that they are created
 //	already filled with reagents and are destroyed when empty. Additionally, they make a "munching" noise when eaten.
 

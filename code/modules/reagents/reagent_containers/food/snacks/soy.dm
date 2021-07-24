@@ -9,7 +9,7 @@
 	bitesize = 3
 
 /obj/item/chems/food/tofu/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/plant_protein, 6)
 
 /obj/item/chems/food/soydope

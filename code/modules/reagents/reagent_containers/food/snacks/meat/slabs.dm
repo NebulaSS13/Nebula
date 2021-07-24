@@ -24,6 +24,7 @@
 // TODO: rewrite kitchen code to check a var on the meat item so we can remove
 // all these sybtypes.
 /obj/item/chems/food/meat/human
+
 /obj/item/chems/food/meat/monkey
 	//same as plain meat
 

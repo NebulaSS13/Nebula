@@ -22,8 +22,9 @@
 	nutriment_desc = list("pie" = 3, "cream" = 2)
 	nutriment_amt = 4
 	bitesize = 3
+
 /obj/item/chems/food/pie/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/banana_cream,5)
 
 /obj/item/chems/food/pie/throw_impact(atom/hit_atom)
@@ -41,8 +42,9 @@
 	nutriment_desc = list("sweetness" = 2, "pie" = 3)
 	nutriment_amt = 4
 	bitesize = 3
+
 /obj/item/chems/food/berryclafoutis/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/berry, 5)
 
 /obj/item/chems/food/waffles
@@ -66,8 +68,9 @@
 	nutriment_desc = list("waffle" = 7, "sweetness" = 1)
 	nutriment_amt = 8
 	bitesize = 4
+
 /obj/item/chems/food/rofflewaffles/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 8)
 
 /obj/item/chems/food/pancakes
@@ -109,8 +112,9 @@
 	filling_color = "#b8e6b5"
 	center_of_mass = @"{'x':15,'y':11}"
 	bitesize = 2
+
 /obj/item/chems/food/soylentgreen/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/soylenviridians
@@ -132,8 +136,9 @@
 	filling_color = "#948051"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 2
+
 /obj/item/chems/food/meatpie/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/tofupie
@@ -156,8 +161,9 @@
 	nutriment_desc = list("sweetness" = 3, "mushroom" = 3, "pie" = 2)
 	nutriment_amt = 5
 	bitesize = 3
+
 /obj/item/chems/food/amanita_pie/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/amatoxin, 3)
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 1)
 
@@ -170,8 +176,9 @@
 	nutriment_desc = list("heartiness" = 2, "mushroom" = 3, "pie" = 3)
 	nutriment_amt = 8
 	bitesize = 2
+
 /obj/item/chems/food/plump_pie/Initialize()
-	.=..()
+	. = ..()
 	if(prob(10))
 		name = "exceptional plump pie"
 		desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump pie!"
@@ -185,8 +192,9 @@
 	filling_color = "#43de18"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 2
+
 /obj/item/chems/food/xemeatpie/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 
 /obj/item/chems/food/poppypretzel

@@ -12,7 +12,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
 /obj/item/chems/food/sliceable/carrotcake/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/eyedrops, 10)
 
 /obj/item/chems/food/slice/carrotcake
@@ -42,7 +42,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
 /obj/item/chems/food/sliceable/braincake/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 25)
 	reagents.add_reagent(/decl/material/liquid/neuroannealer, 10)
 
@@ -72,7 +72,7 @@
 	bitesize = 2
 
 /obj/item/chems/food/sliceable/cheesecake/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 15)
 
 /obj/item/chems/food/slice/cheesecake
@@ -227,7 +227,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread/cake
 
 /obj/item/chems/food/sliceable/birthdaycake/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/sprinkles, 10)
 
 /obj/item/chems/food/slice/birthdaycake

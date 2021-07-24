@@ -15,7 +15,7 @@
 	bitesize = 2
 
 /obj/item/chems/food/sandwich/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/toastedsandwich
@@ -31,7 +31,7 @@
 	bitesize = 2
 
 /obj/item/chems/food/toastedsandwich/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 	reagents.add_reagent(/decl/material/solid/carbon, 2)
 
@@ -47,7 +47,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/grilledcheese/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
 
 /obj/item/chems/food/baguette
@@ -62,7 +62,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/baguette/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
 	reagents.add_reagent(/decl/material/solid/mineral/sodiumchloride, 1)
 
@@ -79,7 +79,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/jelliedtoast/cherry/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 
 /obj/item/chems/food/jellysandwich
@@ -95,7 +95,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/jellysandwich/cherry/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/cherryjelly, 5)
 
 /obj/item/chems/food/twobread

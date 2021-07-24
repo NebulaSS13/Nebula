@@ -27,7 +27,7 @@
 	center_of_mass = @"{'x':16,'y':16}"
 
 /obj/item/chems/food/sliceable/flatdough/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 1)
 	reagents.add_reagent(/decl/material/liquid/nutriment, 3)
 
@@ -56,7 +56,6 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 //Items you can craft together. Like bomb making, but with food and less screwdrivers.
-
 /obj/item/chems/food/bun/attackby(obj/item/W, mob/user)
 	// bun + meatball = burger
 	if(istype(W,/obj/item/chems/food/meatball))

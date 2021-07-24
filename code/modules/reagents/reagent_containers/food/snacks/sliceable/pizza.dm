@@ -19,7 +19,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/sliceable/pizza/margherita/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 6)
 
@@ -48,7 +48,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/sliceable/pizza/meatpizza/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 34)
 	reagents.add_reagent(/decl/material/liquid/nutriment/barbecue, 6)
 
@@ -77,7 +77,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/sliceable/pizza/mushroompizza/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 
 /obj/item/chems/food/slice/mushroompizza
@@ -105,7 +105,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/sliceable/pizza/vegetablepizza/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 	reagents.add_reagent(/decl/material/liquid/nutriment/ketchup, 6)
 	reagents.add_reagent(/decl/material/liquid/eyedrops, 12)

@@ -5,8 +5,9 @@
 	filling_color = "#211f02"
 	center_of_mass = @"{'x':16,'y':12}"
 	bitesize = 2
+
 /obj/item/chems/food/badrecipe/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/bromide, 1)
 	reagents.add_reagent(/decl/material/solid/carbon, 3)
 
@@ -40,8 +41,9 @@
 	nutriment_desc = list("baked potato" = 3)
 	nutriment_amt = 3
 	bitesize = 2
+
 /obj/item/chems/food/loadedbakedpotato/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/spacylibertyduff
@@ -54,8 +56,9 @@
 	nutriment_desc = list("mushroom" = 5, "rainbow" = 1)
 	nutriment_amt = 6
 	bitesize = 3
+
 /obj/item/chems/food/spacylibertyduff/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 6)
 
 /obj/item/chems/food/amanitajelly
@@ -68,8 +71,9 @@
 	nutriment_desc = list("jelly" = 3, "mushroom" = 3)
 	nutriment_amt = 6
 	bitesize = 3
+
 /obj/item/chems/food/amanitajelly/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/amatoxin, 6)
 	reagents.add_reagent(/decl/material/liquid/psychotropics, 3)
 
@@ -83,8 +87,9 @@
 	nutriment_desc = list("tortilla" = 3, "corn" = 3)
 	nutriment_amt = 2
 	bitesize = 4
+
 /obj/item/chems/food/enchiladas/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
 	reagents.add_reagent(/decl/material/liquid/capsaicin, 6)
 
@@ -96,8 +101,9 @@
 	filling_color = "#5c3c11"
 	center_of_mass = @"{'x':16,'y':13}"
 	bitesize = 6
+
 /obj/item/chems/food/monkeysdelight/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 	reagents.add_reagent(/decl/material/liquid/drink/juice/banana, 5)
 	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
@@ -120,8 +126,9 @@
 	filling_color = "#f2f2f2"
 	center_of_mass = @"{'x':16,'y':14}"
 	bitesize = 1
+
 /obj/item/chems/food/mint/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/syrup/mint, 1)
 
 /obj/item/chems/food/plumphelmetbiscuit
@@ -133,8 +140,9 @@
 	nutriment_desc = list("mushroom" = 4)
 	nutriment_amt = 5
 	bitesize = 2
+
 /obj/item/chems/food/plumphelmetbiscuit/Initialize()
-	.=..()
+	. = ..()
 	if(prob(10))
 		name = "exceptional plump helmet biscuit"
 		desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump helmet biscuit!"
@@ -151,8 +159,9 @@
 	nutriment_desc = list("apple" = 8)
 	nutriment_amt = 8
 	bitesize = 3
+
 /obj/item/chems/food/appletart/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/solid/metal/gold, 5)
 
 /obj/item/chems/food/cracker
@@ -181,7 +190,7 @@
 	nutriment_type = /decl/material/liquid/nutriment/bread
 
 /obj/item/chems/food/taco/Initialize()
-	.=..()
+	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 3)
 
 /obj/item/chems/food/pelmen
