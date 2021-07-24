@@ -74,6 +74,8 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 	global.ghost_mob_list += src
 
+	animate(src, pixel_y = 2, time = 10, loop = -1)
+
 	. = ..()
 
 /mob/observer/ghost/Destroy()
@@ -309,8 +311,21 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	events_repository.register(/decl/observ/dir_set, following, src, /atom/proc/recursive_dir_set)
 	events_repository.register(/decl/observ/destroyed, following, src, /mob/observer/ghost/proc/stop_following)
 
+	var/icon/I = icon(target.icon, target.icon_state, target.dir)
+	var/orbit_size = (I.Width() + I.Height()) * 0.5
+	orbit_size -= (orbit_size / WORLD_ICON_SIZE) * (WORLD_ICON_SIZE * 0.25)
+	orbit(target, orbit_size, TRUE, 20)
+
 	to_chat(src, "<span class='notice'>Now following \the [following].</span>")
 	move_to_turf(following, loc, following.loc)
+
+/mob/observer/ghost/stop_orbit()
+	. = ..()
+	//restart our floating animation after orbit is done.
+	pixel_y = 0
+	pixel_x = 0
+	transform = null
+	animate(src, pixel_y = 2, time = 10, loop = -1)
 
 /mob/observer/ghost/proc/stop_following()
 	if(following)
@@ -320,6 +335,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		events_repository.unregister(/decl/observ/destroyed, following, src)
 		following = null
 		verbs -= /mob/observer/ghost/proc/scan_target
+		stop_orbit()
 
 /mob/observer/ghost/move_to_turf(var/atom/movable/am, var/old_loc, var/new_loc)
 	var/turf/T = get_turf(new_loc)

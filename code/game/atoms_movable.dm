@@ -24,6 +24,8 @@
 	var/inertia_move_delay = 5
 	var/atom/movable/inertia_ignore
 
+	var/datum/orbit/orbiting = null
+
 //call this proc to start space drifting
 /atom/movable/proc/space_drift(direction)//move this down
 	if(!loc || direction & (UP|DOWN) || Process_Spacemove(0))
