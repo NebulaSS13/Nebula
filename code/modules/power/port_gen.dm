@@ -80,6 +80,7 @@
 		to_chat(usr, "<span class='notice'>The generator is on.</span>")
 	else
 		to_chat(usr, "<span class='notice'>The generator is off.</span>")
+
 /obj/machinery/power/port_gen/emp_act(severity)
 	if(!active)
 		return
@@ -109,8 +110,8 @@
 
 //A power generator that runs on solid plasma sheets.
 /obj/machinery/power/port_gen/pacman
-	name = "\improper P.A.C.M.A.N.-type Portable Generator"
-	desc = "A power generator that runs on solid deuterium sheets. Rated for 80 kW max safe output."
+	name = "portable generator"
+	desc = "A power generator that runs on solid graphite sheets. Rated for 80 kW max safe output."
 
 	/*
 		These values were chosen so that the generator can run safely up to 80 kW
@@ -124,8 +125,8 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 
-	var/sheet_path =     /obj/item/stack/material/aerogel     // Base object type that it will accept.
-	var/sheet_material = /decl/material/gas/hydrogen/deuterium // Material type that the fuel needs to match.
+	var/sheet_path                                             // Base object type that it will accept, set in Initialize() if null
+	var/sheet_material = /decl/material/solid/mineral/graphite // Material type that the fuel needs to match.
 
 	var/max_power_output = 5	//The maximum power setting without emagging.
 	var/max_safe_output = 4		// For UI use, maximal output that won't cause overheat.
@@ -140,8 +141,30 @@
 	var/overheating = 0		//if this gets high enough the generator explodes
 	var/max_overheat = 150
 
+/obj/machinery/power/port_gen/pacman/examine(mob/user)
+	. = ..()
+	if(active)
+		to_chat(user, "\The [src] appears to be producing [power_gen*power_output] W.")
+	else
+		to_chat(user, "\The [src] is turned off.")
+	if(IsBroken())
+		to_chat(user, SPAN_WARNING("\The [src] seems to have broken down."))
+	if(overheating) 
+		to_chat(user, SPAN_DANGER("\The [src] is overheating!"))
+	if(sheet_path && sheet_material)
+		var/decl/material/mat = GET_DECL(sheet_material)
+		var/obj/item/stack/material/sheet = sheet_path
+		to_chat(user, "There [sheets == 1 ? "is" : "are"] [sheets] [sheets == 1 ? initial(sheet.singular_name) : initial(sheet.plural_name)] left in the hopper.")
+		to_chat(user, SPAN_SUBTLE("\The [src] uses [mat.solid_name] [initial(sheet.plural_name)] as fuel to produce power."))
+
 /obj/machinery/power/port_gen/pacman/Initialize()
 	. = ..()
+
+	if(isnull(sheet_path))
+		var/decl/material/mat = GET_DECL(sheet_material)
+		if(mat)
+			sheet_path = mat.default_solid_form
+
 	if(anchored)
 		connect_to_network()
 
@@ -158,17 +181,12 @@
 	power_gen = round(initial(power_gen) * Clamp(temp_rating, 0, 20) / 2)
 	..()
 
-/obj/machinery/power/port_gen/pacman/examine(mob/user)
-	. = ..(user)
-	to_chat(user, "\The [src] appears to be producing [power_gen*power_output] W.")
-	to_chat(user, "There [sheets == 1 ? "is" : "are"] [sheets] sheet\s left in the hopper.")
-	if(IsBroken()) to_chat(user, "<span class='warning'>\The [src] seems to have broken down.</span>")
-	if(overheating) to_chat(user, "<span class='danger'>\The [src] is overheating!</span>")
-
 /obj/machinery/power/port_gen/pacman/proc/process_exhaust()
-	var/datum/gas_mixture/environment = loc.return_air()
-	if(environment)
-		environment.adjust_gas(/decl/material/gas/carbon_monoxide, 0.05*power_output)
+	var/decl/material/mat = GET_DECL(sheet_material)
+	if(mat && mat.burn_product)
+		var/datum/gas_mixture/environment = loc.return_air()
+		if(environment)
+			environment.adjust_gas(mat.burn_product, 0.05*power_output)
 
 /obj/machinery/power/port_gen/pacman/HasFuel()
 	var/needed_sheets = power_output / time_per_sheet
@@ -261,14 +279,13 @@
 		explode()
 
 /obj/machinery/power/port_gen/pacman/explode()
-	//Vapourize all the deuterium
-	//When ground up in a grinder, 1 sheet produces 20 u of deuterium -- Chemistry-Machinery.dm
-	//1 mol = 10 u? I dunno. 1 mol of carbon is definitely bigger than a pill
-	var/deuterium = (sheets+sheet_left)*20
+	// Vaporize all the fuel
+	// When ground up in a grinder, 1 sheet produces 20 u of material -- Chemistry-Machinery.dm
+	// 1 mol = 10 u? I dunno. 1 mol of carbon is definitely bigger than a pill
+	var/fuel_vapor = (sheets+sheet_left)*20
 	var/datum/gas_mixture/environment = loc.return_air()
-	if (environment)
-		environment.adjust_gas_temp(/decl/material/gas/hydrogen/deuterium, deuterium/10, operating_temperature + T0C)
-
+	if(environment)
+		environment.adjust_gas_temp(sheet_material, fuel_vapor * 0.1, operating_temperature + T0C)
 	sheets = 0
 	sheet_left = 0
 	..()
@@ -304,10 +321,10 @@
 	if(isWrench(O) && !active)
 		if(!anchored)
 			connect_to_network()
-			to_chat(user, "<span class='notice'>You secure the generator to the floor.</span>")
+			to_chat(user, "<span class='notice'>You secure \the [src] to the floor.</span>")
 		else
 			disconnect_from_network()
-			to_chat(user, "<span class='notice'>You unsecure the generator from the floor.</span>")
+			to_chat(user, "<span class='notice'>You unsecure \the [src] from the floor.</span>")
 
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		anchored = !anchored
@@ -392,8 +409,8 @@
 				power_output++
 
 /obj/machinery/power/port_gen/pacman/super
-	name = "S.U.P.E.R.P.A.C.M.A.N.-type Portable Generator"
-	desc = "A power generator that utilizes uranium sheets as fuel. Can run for much longer than the standard PACMAN type generators. Rated for 80 kW max safe output."
+	name = "portable fission generator"
+	desc = "A power generator that utilizes uranium sheets as fuel. Can run for much longer than the standard portabke generators. Rated for 80 kW max safe output."
 	icon_state = "portgen1"
 	sheet_path = /obj/item/stack/material/puck
 	sheet_material = /decl/material/solid/metal/uranium
@@ -487,8 +504,8 @@
 	..()
 
 /obj/machinery/power/port_gen/pacman/mrs
-	name = "M.R.S.P.A.C.M.A.N.-type Portable Generator"
-	desc = "An advanced power generator that runs on tritium. Rated for 200 kW maximum safe output!"
+	name = "portable fusion generator"
+	desc = "An advanced portable fusion generator that runs on tritium. Rated for 200 kW maximum safe output!"
 	icon_state = "portgen2"
 	sheet_material = /decl/material/gas/hydrogen/tritium
 

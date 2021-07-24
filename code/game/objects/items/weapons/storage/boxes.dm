@@ -27,7 +27,8 @@
 	item_state = "syringe_kit"
 	max_storage_space = DEFAULT_BOX_STORAGE
 	use_sound = 'sound/effects/storage/box.ogg'
-	var/foldable = /obj/item/stack/material/cardstock // BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
+	material = /decl/material/solid/cardboard
+	var/foldable = /obj/item/stack/material/cardstock	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
 
 /obj/item/storage/box/large
 	name = "large box"
@@ -48,31 +49,20 @@
 
 // BubbleWrap - A box can be folded up to make card
 /obj/item/storage/box/attack_self(mob/user)
-	if(..()) return
-
-	//try to fold it.
-	if ( contents.len )
+	. = ..()
+	if(. || length(contents) || !ispath(foldable) || !istype(material))
+		return
+	var/sheet_amount = FLOOR(LAZYACCESS(matter, material.type) / SHEET_MATERIAL_AMOUNT)
+	if(sheet_amount <= 0 || !user.unEquip(src))
 		return
 
-	if ( !ispath(src.foldable) )
-		return
-	var/found = 0
-	// Close any open UI windows first
-	for(var/mob/M in range(1))
-		if (M.s_active == src)
-			src.close(M)
-		if ( M == user )
-			found = 1
-	if ( !found )	// User is too far away
-		return
-	// Now make the cardboard
-	to_chat(user, "<span class='notice'>You fold [src] flat.</span>")
+	to_chat(user, SPAN_NOTICE("You fold \the [src] flat."))
 	if(ispath(foldable, /obj/item/stack))
-		var/stack_amt = max(2**(w_class - 3), 1)
-		new foldable(get_turf(src), stack_amt, /decl/material/solid/cardboard)
+		new foldable(get_turf(src), sheet_amount, material.type)
 	else
-		new foldable(get_turf(src), /decl/material/solid/cardboard)
+		new foldable(get_turf(src), material.type)
 	qdel(src)
+	return TRUE
 
 /obj/item/storage/box/make_exact_fit()
 	..()
