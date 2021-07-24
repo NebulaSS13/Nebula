@@ -5,9 +5,6 @@
 "b" = (
 /turf/simulated/wall/silver,
 /area/template_noop)
-"c" = (
-/turf/simulated/floor/tiled/dark,
-/area/template_noop)
 "d" = (
 /obj/random/trash,
 /obj/structure/inflatable/door,
@@ -125,8 +122,8 @@ b
 (3,1,1) = {"
 b
 o
-c
-c
+f
+f
 q
 l
 b
@@ -134,7 +131,7 @@ b
 (4,1,1) = {"
 b
 j
-c
+f
 r
 k
 m
@@ -153,7 +150,7 @@ b
 a
 d
 h
-c
+f
 g
 t
 b
