@@ -9,6 +9,8 @@
 	health = 300
 	mob_sort_value = 4
 
+	z_flags = ZMM_MANGLE_PLANES
+
 	mob_bump_flag = ROBOT
 	mob_swap_flags = ROBOT|MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = ~HEAVY //trundle trundle

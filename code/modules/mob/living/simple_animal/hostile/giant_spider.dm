@@ -157,11 +157,13 @@
 
 /mob/living/simple_animal/hostile/giant_spider/on_update_icon()
 	if(stat == DEAD)
+		z_flags &= ~ZMM_MANGLE_PLANES
 		var/image/I = image(icon = icon, icon_state = "[icon_dead]_eyes")
 		I.color = eye_colour
 		I.appearance_flags = RESET_COLOR
 		set_overlays(I)
 	else
+		z_flags |= ZMM_MANGLE_PLANES
 		var/image/I = emissive_overlay(icon = icon, icon_state = "[icon_state]_eyes")
 		I.color = eye_colour
 		I.appearance_flags = RESET_COLOR

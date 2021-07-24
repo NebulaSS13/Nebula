@@ -185,6 +185,7 @@
 	amount = 10
 	max_amount = 10
 	icon = 'icons/obj/items/marking_beacon.dmi'
+	z_flags = ZMM_MANGLE_PLANES
 
 	var/upright = 0
 	var/fringe = null
