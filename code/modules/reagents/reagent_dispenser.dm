@@ -167,10 +167,7 @@
 			if (istype(H.a_left,/obj/item/assembly/igniter) || istype(H.a_right,/obj/item/assembly/igniter))
 				log_and_message_admins("rigged a fuel tank for explosion at [loc.loc.name].")
 			rig = W
-			var/icon/test = getFlatIcon(W)
-			test.Shift(NORTH,1)
-			test.Shift(EAST,6)
-			overlays += test
+			update_icon()
 		return TRUE
 	if(W.isflamesource())
 		log_and_message_admins("triggered a fuel tank explosion with \the [W].")
@@ -178,6 +175,15 @@
 		try_detonate_reagents()
 		return TRUE
 	. = ..()
+
+/obj/structure/reagent_dispensers/fueltank/on_update_icon()
+	cut_overlays()
+	if(rig)
+		var/image/I = new
+		I.appearance = rig
+		I.pixel_x += 6
+		I.pixel_y += 1
+		add_overlay(I)
 
 /obj/structure/reagent_dispensers/fueltank/bullet_act(var/obj/item/projectile/Proj)
 	if(Proj.get_structure_damage())

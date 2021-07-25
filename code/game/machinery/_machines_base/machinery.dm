@@ -358,10 +358,14 @@ Class Procs:
 
 	var/list/expelled_components = list()
 	for(var/I in component_parts)
-		expelled_components += uninstall_component(I, refresh_parts = FALSE)
+		var/component = uninstall_component(I, refresh_parts = FALSE)
+		if(component)
+			expelled_components += component
 	while(LAZYLEN(uncreated_component_parts))
 		var/path = uncreated_component_parts[1]
-		expelled_components += uninstall_component(path, refresh_parts = FALSE)
+		var/component = uninstall_component(path, refresh_parts = FALSE)
+		if(component)
+			expelled_components += component
 	if(frame)
 		var/datum/extension/parts_stash/stash = get_extension(frame, /datum/extension/parts_stash)
 		if(stash)

@@ -159,7 +159,8 @@
 	var/gas_regen_cap = 30
 
 /obj/item/tank/jetpack/ascent/Initialize()
-	starting_pressure = list(refill_gas_type = 6 * ONE_ATMOSPHERE)
+	starting_pressure = list()
+	starting_pressure[refill_gas_type] = (6 * ONE_ATMOSPHERE)
 	. = ..()
 
 /obj/item/tank/jetpack/ascent/Process()
@@ -176,7 +177,8 @@
 	var/gas_regen_cap = 50
 
 /obj/item/tank/mantid/reactor/Initialize()
-	starting_pressure = list(refill_gas_type = 6 * ONE_ATMOSPHERE)
+	starting_pressure = list()
+	starting_pressure[refill_gas_type] = (6 * ONE_ATMOSPHERE)
 	. = ..()
 
 /obj/item/tank/mantid/reactor/oxygen

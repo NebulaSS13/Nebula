@@ -11,6 +11,8 @@
 	matter = null
 	pickup_sound = 'sound/foley/tooldrop3.ogg'
 	drop_sound = 'sound/foley/tooldrop2.ogg'
+	singular_name = "sheet"
+	plural_name = "sheets"
 	var/decl/material/reinf_material
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
@@ -149,8 +151,6 @@
 	icon_state = "sheet"
 	plural_icon_state = "sheet-mult"
 	max_icon_state = "sheet-max"
-	singular_name = "sheet"
-	plural_name = "sheets"
 	stack_merge_type = /obj/item/stack/material/sheet
 
 /obj/item/stack/material/panel
@@ -309,10 +309,17 @@
 	name = "lumps"
 	singular_name = "lump"
 	plural_name = "lumps"
+	icon_state = "lump"
+	plural_icon_state = "lump-mult"
+	max_icon_state = "lump-max"
 	stack_merge_type = /obj/item/stack/material/lump
 
 /obj/item/stack/material/slab
 	name = "slabs"
 	singular_name = "slab"
 	plural_name = "slabs"
+	icon_state = "puck"
+	plural_icon_state = "puck-mult"
+	max_icon_state = "puck-max"
 	stack_merge_type = /obj/item/stack/material/slab
+
