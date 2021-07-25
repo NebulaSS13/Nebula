@@ -41,6 +41,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/atmos)
 "ae" = (
+/obj/item/radio/intercom{
+	dir = 4;
+	pixel_x = -22
+	},
 /turf/simulated/floor/carpet/blue,
 /area/ship/trade/command/captain)
 "af" = (
@@ -5123,7 +5127,9 @@
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5
 	},
-/obj/structure/emergency_dispenser/north,
+/obj/machinery/keycard_auth{
+	pixel_y = 21
+	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
 "sb" = (
@@ -5324,10 +5330,10 @@
 /obj/item/storage/box/ammo/shotgunshells,
 /obj/item/handcuffs,
 /obj/item/boombox,
-/obj/item/radio/intercom{
-	pixel_y = 20
-	},
 /obj/item/taperoll/bureaucracy,
+/obj/machinery/keycard_auth{
+	pixel_y = 21
+	},
 /turf/simulated/floor/wood,
 /area/ship/trade/command/captain)
 "vS" = (
@@ -6338,6 +6344,12 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/dock)
+"JA" = (
+/obj/machinery/keycard_auth{
+	pixel_y = 21
+	},
+/turf/simulated/floor/carpet,
+/area/ship/trade/command/fmate)
 "JI" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
@@ -6877,6 +6889,9 @@
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
+	},
+/obj/machinery/keycard_auth{
+	pixel_y = 21
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
@@ -10417,7 +10432,7 @@ sM
 se
 se
 sM
-xS
+JA
 xS
 xS
 Jk
