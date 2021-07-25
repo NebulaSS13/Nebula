@@ -6,8 +6,8 @@
 /obj/structure/catwalk,
 /obj/machinery/power/terminal,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /obj/machinery/pointdefense{
 	initial_id_tag = "merc_pd"
@@ -34,7 +34,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/light/spot{
-	icon_state = "tube_map";
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -46,8 +45,8 @@
 "af" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/effect/paint/red,
 /obj/machinery/door/blast/regular/open{
@@ -60,8 +59,8 @@
 "ag" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /obj/structure/cable{
 	d1 = 2;
@@ -94,8 +93,8 @@
 	icon_state = "2-8"
 	},
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /obj/machinery/door/blast/regular/open{
 	density = 0;
@@ -129,7 +128,6 @@
 /area/map_template/merc_shuttle)
 "al" = (
 /obj/machinery/power/terminal{
-	icon_state = "term";
 	dir = 1
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals_central6,
@@ -151,8 +149,8 @@
 "ao" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -173,8 +171,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "merc_external";
@@ -208,8 +205,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/computer/ship/engines{
 	dir = 8;
@@ -247,8 +243,8 @@
 "at" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /obj/machinery/door/blast/regular/open{
 	density = 0;
@@ -307,8 +303,8 @@
 	icon_state = "1-4"
 	},
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/machinery/door/blast/regular/open{
 	density = 0;
@@ -383,11 +379,9 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/loading{
-	icon_state = "loadingarea";
 	dir = 8
 	},
 /obj/machinery/door/blast/regular/open{
@@ -429,7 +423,6 @@
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/machinery/light/spot{
-	icon_state = "tube_map";
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -452,8 +445,8 @@
 	icon_state = "2-4"
 	},
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -474,8 +467,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -487,8 +479,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -514,14 +505,13 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 8
+	dir = 8;
+	icon_state = "warningcorner"
 	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/computer/ship/navigation/telescreen{
 	pixel_y = -32
@@ -544,8 +534,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
@@ -590,8 +579,8 @@
 /area/map_template/merc_shuttle)
 "aV" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
@@ -648,8 +637,8 @@
 /area/map_template/merc_shuttle)
 "be" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -660,7 +649,6 @@
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/power/terminal{
-	icon_state = "term";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -687,7 +675,6 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "merc_shuttle_sensor";
-	pixel_x = 0;
 	pixel_y = 25
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -702,25 +689,22 @@
 	},
 /obj/effect/paint/red,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
-	dir = 4;
-	icon_state = "map"
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
 "bj" = (
 /obj/machinery/bodyscanner{
-	icon_state = "body_scanner_0";
 	dir = 4
 	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/merc_shuttle)
@@ -728,8 +712,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -746,8 +729,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -785,21 +767,18 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
 "bo" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "stripe";
 	dir = 1
 	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5
@@ -814,8 +793,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -830,8 +808,6 @@
 "bs" = (
 /obj/machinery/shield_diffuser,
 /obj/machinery/door/airlock/external{
-	density = 1;
-	dir = 2;
 	id_tag = "merc_shuttle_outer";
 	name = "Ship External Access"
 	},
@@ -841,8 +817,7 @@
 	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
-	dir = 4;
-	icon_state = "map"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
@@ -852,8 +827,7 @@
 /obj/item/stack/nanopaste,
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/item/storage/box/freezer,
 /obj/machinery/body_scanconsole,
@@ -897,8 +871,7 @@
 /obj/structure/table/steel,
 /obj/machinery/dummy_airlock_controller{
 	dir = 1;
-	id_tag = "merc_shuttle";
-	pixel_x = 0
+	id_tag = "merc_shuttle"
 	},
 /obj/item/crowbar,
 /obj/item/crowbar,
@@ -940,8 +913,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
@@ -953,15 +925,13 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bC" = (
 /obj/machinery/shield_diffuser,
 /obj/machinery/door/airlock/external{
-	density = 1;
 	dir = 4;
 	id_tag = "merc_shuttle_outer";
 	name = "Ship External Access"
@@ -1005,8 +975,8 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1028,14 +998,12 @@
 /area/map_template/merc_shuttle/rear)
 "bJ" = (
 /obj/structure/handrail{
-	icon_state = "handrail";
 	dir = 1
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	cycle_to_external_air = 1;
 	dir = 1;
 	id_tag = "merc_shuttle";
-	pixel_x = 0;
 	pixel_y = -25;
 	req_access = list("ACCESS_SYNDICATE")
 	},
@@ -1073,8 +1041,7 @@
 /area/map_template/merc_shuttle/rear)
 "bN" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
-	id_tag = "fuel_in";
-	use_power = 0
+	id_tag = "fuel_in"
 	},
 /obj/machinery/sparker{
 	id_tag = "merc_igniter";
@@ -1086,8 +1053,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/blue,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1104,11 +1070,10 @@
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /obj/structure/handrail{
-	icon_state = "handrail";
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1155,14 +1120,9 @@
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	controlled = 0;
-	dir = 2;
 	icon_state = "map_vent_in";
-	initialize_directions = 2;
-	internal_pressure_bound = 0;
-	internal_pressure_bound_default = 0;
 	pressure_checks = 2;
 	pressure_checks_default = 2;
-	pump_direction = 1;
 	use_power = 1
 	},
 /turf/simulated/floor/plating,
@@ -1194,7 +1154,6 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /obj/machinery/button/blast_door{
@@ -1221,7 +1180,6 @@
 "bZ" = (
 /obj/machinery/atmospherics/valve/open,
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -1253,8 +1211,8 @@
 "cc" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /obj/machinery/door/blast/regular/open{
 	density = 0;
@@ -1285,7 +1243,6 @@
 	dir = 5
 	},
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -1293,11 +1250,10 @@
 "ce" = (
 /obj/structure/catwalk,
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/machinery/power/terminal{
-	icon_state = "term";
 	dir = 4
 	},
 /obj/machinery/pointdefense{
@@ -1333,8 +1289,8 @@
 	dir = 10
 	},
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/structure/handrail,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1344,8 +1300,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -1357,8 +1312,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/structure/cable{
 	d1 = 2;
@@ -1381,8 +1335,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
@@ -1424,8 +1377,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
@@ -1470,8 +1422,8 @@
 /obj/structure/catwalk,
 /obj/machinery/power/terminal,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /obj/machinery/pointdefense{
 	initial_id_tag = "merc_pd"
@@ -1495,7 +1447,6 @@
 /area/map_template/merc_shuttle/rear)
 "cs" = (
 /obj/machinery/power/terminal{
-	icon_state = "term";
 	dir = 1
 	},
 /obj/structure/cable,
@@ -1512,8 +1463,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/structure/cable{
 	d1 = 2;
@@ -1528,7 +1478,6 @@
 	level = 2
 	},
 /obj/structure/handrail{
-	icon_state = "handrail";
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/shutoff,
@@ -1542,15 +1491,14 @@
 /obj/machinery/portable_atmospherics/canister/hydrogen,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/structure/railing/mapped{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cx" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -1586,7 +1534,6 @@
 /area/map_template/merc_shuttle/rear)
 "cA" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	icon_state = "map_scrubber_on";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1596,7 +1543,6 @@
 	dir = 4
 	},
 /obj/structure/handrail{
-	icon_state = "handrail";
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
@@ -1613,8 +1559,8 @@
 "cD" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/machinery/door/blast/regular/open{
 	density = 0;
@@ -1625,8 +1571,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/effect/paint/black,
 /turf/simulated/floor/plating,
@@ -1647,12 +1592,11 @@
 /area/map_template/merc_shuttle/rear)
 "cF" = (
 /obj/machinery/power/terminal{
-	icon_state = "term";
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /obj/structure/cable/yellow{
 	d2 = 2;
@@ -1664,12 +1608,10 @@
 /area/map_template/merc_shuttle/rear)
 "cG" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
 /obj/machinery/atmospherics/portables_connector{
-	icon_state = "map_connector";
 	dir = 4
 	},
 /obj/machinery/light/small{
@@ -1692,7 +1634,6 @@
 /area/map_template/merc_shuttle/rear)
 "cI" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/binary/pump/high_power/on{
@@ -1706,7 +1647,6 @@
 	pixel_x = 32
 	},
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /obj/machinery/meter,
@@ -1721,8 +1661,8 @@
 	},
 /obj/machinery/mech_recharger,
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1734,7 +1674,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	icon_state = "map_scrubber_on";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1777,7 +1716,6 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/constructable_frame/computerframe/deconstruct{
-	icon_state = "unwired";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -1837,7 +1775,6 @@
 	name = "Nuclear-Bomb"
 	},
 /obj/structure/railing/mapped{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1847,7 +1784,6 @@
 /area/map_template/merc_shuttle/rear)
 "cX" = (
 /obj/structure/handrail{
-	icon_state = "handrail";
 	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -1889,7 +1825,6 @@
 	name = "Syndicate-Spawn"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "stripe";
 	dir = 1
 	},
 /obj/structure/bed/chair/office,
@@ -1925,14 +1860,12 @@
 /area/map_template/merc_spawn)
 "fq" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "stripe";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/airless,
 /area/space)
 "ft" = (
 /obj/structure/railing{
-	icon_state = "railing0-1";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -1947,11 +1880,9 @@
 "fC" = (
 /obj/structure/ore_box,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -1959,11 +1890,9 @@
 "fV" = (
 /obj/machinery/mining/drill,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -1975,7 +1904,6 @@
 	},
 /obj/machinery/airlock_sensor{
 	id_tag = "merc_shuttle_exterior_sensor";
-	pixel_x = 0;
 	pixel_y = -28
 	},
 /obj/machinery/power/terminal{
@@ -2006,32 +1934,28 @@
 /area/map_template/merc_spawn)
 "gI" = (
 /obj/structure/railing{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "gW" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "stripe";
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "gZ" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "ha" = (
 /obj/structure/railing{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /turf/space,
@@ -2045,7 +1969,6 @@
 /obj/item/tank/jetpack/carbondioxide,
 /obj/item/tank/jetpack/carbondioxide,
 /obj/machinery/light/spot{
-	icon_state = "tube_map";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -2058,7 +1981,6 @@
 /area/space)
 "hV" = (
 /obj/structure/railing{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /turf/simulated/floor/airless,
@@ -2094,8 +2016,7 @@
 /area/map_template/merc_spawn)
 "iN" = (
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 2
+	icon_state = "warningcorner"
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
@@ -2108,11 +2029,9 @@
 /obj/item/clothing/accessory/storage/vest/black,
 /obj/item/clothing/accessory/storage/vest/black,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -2123,7 +2042,6 @@
 	},
 /obj/machinery/recharger/wallcharger{
 	dir = 8;
-	icon_state = "wrecharger0";
 	pixel_x = 23;
 	pixel_y = -3
 	},
@@ -2165,7 +2083,6 @@
 /obj/item/pickaxe/diamonddrill,
 /obj/item/pickaxe/diamonddrill,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -2175,8 +2092,8 @@
 	name = "Syndicate-Spawn"
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 8
+	dir = 8;
+	icon_state = "warningcorner"
 	},
 /obj/structure/bed/chair/office{
 	dir = 1
@@ -2197,11 +2114,9 @@
 /obj/item/storage/belt/medical,
 /obj/item/storage/belt/medical,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -2221,7 +2136,6 @@
 /area/map_template/merc_spawn)
 "lq" = (
 /obj/structure/railing{
-	icon_state = "railing0-1";
 	dir = 1
 	},
 /turf/simulated/floor/airless,
@@ -2229,7 +2143,6 @@
 "ls" = (
 /obj/machinery/mining/drill,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -2243,7 +2156,6 @@
 /obj/item/clothing/accessory/storage/drop_pouches/brown,
 /obj/item/clothing/accessory/storage/drop_pouches/brown,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -2267,22 +2179,20 @@
 /area/map_template/merc_spawn)
 "mR" = (
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "nd" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 5
+	dir = 5;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "nk" = (
 /obj/random/medical,
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled,
@@ -2295,7 +2205,6 @@
 "nN" = (
 /obj/machinery/power/port_gen/pacman,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /obj/structure/railing/mapped/no_density,
@@ -2309,7 +2218,6 @@
 "nR" = (
 /obj/structure/dispenser/oxygen,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -2317,7 +2225,6 @@
 "oW" = (
 /obj/structure/inflatable/door,
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "stripe";
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -2337,8 +2244,8 @@
 "pj" = (
 /obj/machinery/vending/cola{
 	dir = 1;
-	name = "hacked Robust Softdrinks";
-	markup = 0
+	markup = 0;
+	name = "hacked Robust Softdrinks"
 	},
 /obj/machinery/light/spot,
 /turf/simulated/floor/plating,
@@ -2359,7 +2266,6 @@
 /area/map_template/merc_spawn)
 "qA" = (
 /obj/machinery/constructable_frame/computerframe/deconstruct{
-	icon_state = "unwired";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/airless,
@@ -2371,7 +2277,6 @@
 /area/map_template/merc_spawn)
 "rf" = (
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /obj/structure/railing/mapped/no_density,
@@ -2380,7 +2285,6 @@
 "rB" = (
 /obj/structure/inflatable/wall,
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled,
@@ -2390,14 +2294,12 @@
 /area/map_template/merc_spawn)
 "sf" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "sl" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "stripe";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2427,7 +2329,6 @@
 "uG" = (
 /obj/machinery/power/port_gen/pacman,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -2456,7 +2357,6 @@
 /obj/item/rcd_ammo/large,
 /obj/item/rcd_ammo/large,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -2483,18 +2383,15 @@
 /area/map_template/merc_spawn)
 "wG" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "stripe";
 	dir = 1
 	},
 /obj/structure/railing{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /turf/simulated/floor/airless,
 /area/space)
 "xb" = (
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "stripecorner";
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -2528,23 +2425,21 @@
 /obj/item/grenade/anti_photon,
 /obj/item/storage/box/frags,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/merc_spawn)
 "zC" = (
 /obj/machinery/vending/cigarette{
 	dir = 8;
-	name = "hacked cigarette machine";
 	markup = 0;
+	name = "hacked cigarette machine";
 	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -2554,8 +2449,8 @@
 /area/space)
 "CL" = (
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 8
+	dir = 8;
+	icon_state = "warningcorner"
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
@@ -2565,7 +2460,6 @@
 /obj/item/clothing/gloves/insulated,
 /obj/item/clothing/gloves/insulated,
 /obj/machinery/light/spot{
-	icon_state = "tube_map";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -2573,7 +2467,6 @@
 "Fy" = (
 /obj/structure/closet/crate/secure/explosives,
 /obj/machinery/light/spot{
-	icon_state = "tube_map";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -2589,22 +2482,20 @@
 	markup = 0
 	},
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "FH" = (
 /obj/structure/railing{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /turf/simulated/floor/airless,
 /area/space)
 "FO" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
@@ -2620,7 +2511,6 @@
 /obj/item/bodybag/rescue,
 /obj/item/defibrillator/compact,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -2697,14 +2587,12 @@
 /area/space)
 "Kk" = (
 /obj/machinery/light/spot{
-	icon_state = "tube_map";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "Kl" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled,
@@ -2719,7 +2607,6 @@
 /obj/item/rpd,
 /obj/item/rpd,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /obj/structure/railing/mapped/no_density,
@@ -2727,8 +2614,8 @@
 /area/map_template/merc_spawn)
 "KP" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
@@ -2758,7 +2645,6 @@
 /obj/item/stack/material/pane/mapped/rborosilicate/ten,
 /obj/item/stack/material/pane/mapped/rborosilicate/ten,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -2770,7 +2656,6 @@
 "MD" = (
 /obj/structure/closet/wardrobe/red,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -2805,7 +2690,6 @@
 /area/map_template/merc_spawn)
 "Nd" = (
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -2815,7 +2699,6 @@
 /obj/item/mech_component/manipulators/powerloader,
 /obj/item/mech_equipment/drill,
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "stripe";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2826,7 +2709,6 @@
 /area/space)
 "NZ" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/airless,
@@ -2834,21 +2716,18 @@
 "Ok" = (
 /obj/machinery/mining/brace,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "Or" = (
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "OB" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /obj/random/medical/lite,
@@ -2877,7 +2756,6 @@
 "PH" = (
 /obj/machinery/floodlight,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -2888,7 +2766,6 @@
 /area/map_template/merc_spawn)
 "PZ" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/airless,
@@ -2901,7 +2778,6 @@
 	req_access = list()
 	},
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -2933,7 +2809,6 @@
 "Rh" = (
 /obj/structure/closet/wardrobe/medic_white,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -2943,7 +2818,6 @@
 	name = "Syndicate-Spawn"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	dir = 2;
 	icon_state = "warning"
 	},
 /obj/structure/bed/chair/office{
@@ -2953,8 +2827,8 @@
 /area/map_template/merc_spawn)
 "Sd" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
@@ -2967,7 +2841,6 @@
 /obj/item/shield/energy,
 /obj/item/shield/energy,
 /obj/machinery/light/spot{
-	icon_state = "tube_map";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -2998,7 +2871,6 @@
 "UP" = (
 /obj/machinery/vending/tool,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /obj/structure/railing/mapped/no_density,
@@ -3009,7 +2881,6 @@
 	name = "Syndicate-Spawn"
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "stripecorner";
 	dir = 1
 	},
 /obj/structure/bed/chair/office,
@@ -3033,11 +2904,9 @@
 "Xz" = (
 /obj/structure/closet/wardrobe/mixed,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 1
 	},
 /turf/simulated/floor/plating,
@@ -3077,7 +2946,6 @@
 /obj/item/stack/material/pane/mapped/glass/ten,
 /obj/item/stack/material/pane/mapped/glass/ten,
 /obj/structure/railing/mapped/no_density{
-	icon_state = "railing0-1";
 	dir = 8
 	},
 /obj/structure/railing/mapped/no_density,
@@ -3089,7 +2957,6 @@
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/machinery/light/spot{
-	icon_state = "tube_map";
 	dir = 4
 	},
 /turf/simulated/floor/plating,
