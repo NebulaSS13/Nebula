@@ -1,4 +1,4 @@
-/obj/item/chems/food/snacks/fish
+/obj/item/chems/food/fish
 	name = "fillet"
 	desc = "A fillet of fish."
 	icon_state = "fishfillet"
@@ -9,12 +9,12 @@
 	nutriment_type = /decl/material/liquid/nutriment/protein
 	var/fish_type = "fish"
 
-/obj/item/chems/food/snacks/fish/Initialize()
+/obj/item/chems/food/fish/Initialize()
 	. = ..()
 	name = "[fish_type] [initial(name)]"
 
 // This will remove carp poison etc. Deliberate, meant to be similar to preparing pufferfish.
-/obj/item/chems/food/snacks/fish/attackby(var/obj/item/W, var/mob/user)
+/obj/item/chems/food/fish/attackby(var/obj/item/W, var/mob/user)
 	if(is_sharp(W) && (locate(/obj/structure/table) in loc))
 		var/mob/M = loc
 		if(istype(M) && !M.unEquip(src))
@@ -27,39 +27,39 @@
 
 		var/transfer_amt = FLOOR(reagents.total_volume * 0.3)
 		for(var/i = 1 to 3)
-			var/obj/item/chems/food/snacks/sashimi/sashimi = new(get_turf(src), fish_type)
+			var/obj/item/chems/food/sashimi/sashimi = new(get_turf(src), fish_type)
 			reagents.trans_to(sashimi, transfer_amt)
 		qdel(src)
 
 	else
 		..()
 
-/obj/item/chems/food/snacks/fish/poison
+/obj/item/chems/food/fish/poison
 	fish_type = "space carp"
 
-/obj/item/chems/food/snacks/fish/poison/Initialize()
+/obj/item/chems/food/fish/poison/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/carpotoxin, 6)
 
-/obj/item/chems/food/snacks/fish/shark
+/obj/item/chems/food/fish/shark
 	fish_type = "shark"
 
-/obj/item/chems/food/snacks/fish/carp
+/obj/item/chems/food/fish/carp
 	fish_type = "carp"
 
-/obj/item/chems/food/snacks/fish/octopus
+/obj/item/chems/food/fish/octopus
 	fish_type = "tako"
 
-/obj/item/chems/food/snacks/fish/mollusc
+/obj/item/chems/food/fish/mollusc
 	name = "meat"
 	desc = "Some slimy meat from clams or molluscs."
 	fish_type = "mollusc"
 	nutriment_type = /decl/material/liquid/nutriment/slime_meat
 
-/obj/item/chems/food/snacks/fish/mollusc/clam
+/obj/item/chems/food/fish/mollusc/clam
 	fish_type = "clam"
 
-/obj/item/chems/food/snacks/fish/mollusc/barnacle
+/obj/item/chems/food/fish/mollusc/barnacle
 	fish_type = "barnacle"
 
 
@@ -85,21 +85,21 @@
 	icon = 'icons/obj/molluscs.dmi'
 	icon_state = "mollusc"
 	w_class = ITEM_SIZE_TINY
-	var/meat_type = /obj/item/chems/food/snacks/fish/mollusc
+	var/meat_type = /obj/item/chems/food/fish/mollusc
 	var/shell_type = /obj/item/trash/mollusc_shell
 
 /obj/item/mollusc/barnacle
 	name = "barnacle"
 	desc = "A hull barnacle, probably freshly scraped off a spaceship."
 	icon_state = "barnacle"
-	meat_type = /obj/item/chems/food/snacks/fish/mollusc/barnacle
+	meat_type = /obj/item/chems/food/fish/mollusc/barnacle
 	shell_type = /obj/item/trash/mollusc_shell/barnacle
 
 /obj/item/mollusc/clam
 	name = "clam"
 	desc = "A free-ranging space clam."
 	icon_state = "clam"
-	meat_type = /obj/item/chems/food/snacks/fish/mollusc/clam
+	meat_type = /obj/item/chems/food/fish/mollusc/clam
 	shell_type = /obj/item/trash/mollusc_shell/clam
 
 /obj/item/mollusc/proc/crack_shell(var/mob/user)

@@ -62,7 +62,7 @@
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL
 	can_hold = list(
-		/obj/item/chems/food/snacks/grown,
+		/obj/item/chems/food/grown,
 		/obj/item/seeds,
 		/obj/item/grown
 	)

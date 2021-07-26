@@ -101,8 +101,8 @@
 			to_chat(user, SPAN_WARNING("It's dirty!"))
 			return 1
 	else if(istype(O,/obj/item/chems/glass) || \
-	        istype(O,/obj/item/chems/food/drinks) || \
-	        istype(O,/obj/item/chems/food/condiment) \
+	        istype(O,/obj/item/chems/drinks) || \
+	        istype(O,/obj/item/chems/condiment) \
 		)
 		if (!O.reagents)
 			return 1
@@ -420,7 +420,7 @@
 		qdel(O)
 	reagents.clear_reagents()
 	SSnano.update_uis(src)
-	var/obj/item/chems/food/snacks/badrecipe/ffuu = new(src)
+	var/obj/item/chems/food/badrecipe/ffuu = new(src)
 	ffuu.reagents.add_reagent(/decl/material/solid/carbon, amount)
 	ffuu.reagents.add_reagent(/decl/material/liquid/bromide, amount/10)
 	return ffuu

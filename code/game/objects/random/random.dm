@@ -227,24 +227,24 @@
 				/obj/item/chems/syringe = 3,
 				/obj/item/chems/syringe/steroid = 2,
 				/obj/item/chems/syringe/drugs = 1,
-				/obj/item/chems/food/snacks/egg/lizard = 3)
+				/obj/item/chems/food/egg/lizard = 3)
 
 /obj/random/drinkingglass
-	name = "random drinking glass" 
+	name = "random drinking glass"
 	desc = "This is a random drinking glass."
 	icon = 'icons/obj/drink_glasses/square.dmi'
 	icon_state = "square"
 
 /obj/random/drinkingglass/spawn_choices()
 	return list(
-		/obj/item/chems/food/drinks/glass2/square,
-		/obj/item/chems/food/drinks/glass2/rocks,
-		/obj/item/chems/food/drinks/glass2/shake,
-		/obj/item/chems/food/drinks/glass2/cocktail,
-		/obj/item/chems/food/drinks/glass2/shot,
-		/obj/item/chems/food/drinks/glass2/pint,
-		/obj/item/chems/food/drinks/glass2/mug,
-		/obj/item/chems/food/drinks/glass2/wine
+		/obj/item/chems/drinks/glass2/square,
+		/obj/item/chems/drinks/glass2/rocks,
+		/obj/item/chems/drinks/glass2/shake,
+		/obj/item/chems/drinks/glass2/cocktail,
+		/obj/item/chems/drinks/glass2/shot,
+		/obj/item/chems/drinks/glass2/pint,
+		/obj/item/chems/drinks/glass2/mug,
+		/obj/item/chems/drinks/glass2/wine
 	)
 
 /obj/random/drinkbottle
@@ -254,16 +254,16 @@
 	icon_state = "whiskeybottle"
 
 /obj/random/drinkbottle/spawn_choices()
-	return list(/obj/item/chems/food/drinks/bottle/whiskey,
-				/obj/item/chems/food/drinks/bottle/gin,
-				/obj/item/chems/food/drinks/bottle/agedwhiskey,
-				/obj/item/chems/food/drinks/bottle/vodka,
-				/obj/item/chems/food/drinks/bottle/tequila,
-				/obj/item/chems/food/drinks/bottle/absinthe,
-				/obj/item/chems/food/drinks/bottle/wine,
-				/obj/item/chems/food/drinks/bottle/cognac,
-				/obj/item/chems/food/drinks/bottle/rum,
-				/obj/item/chems/food/drinks/bottle/patron)
+	return list(/obj/item/chems/drinks/bottle/whiskey,
+				/obj/item/chems/drinks/bottle/gin,
+				/obj/item/chems/drinks/bottle/agedwhiskey,
+				/obj/item/chems/drinks/bottle/vodka,
+				/obj/item/chems/drinks/bottle/tequila,
+				/obj/item/chems/drinks/bottle/absinthe,
+				/obj/item/chems/drinks/bottle/wine,
+				/obj/item/chems/drinks/bottle/cognac,
+				/obj/item/chems/drinks/bottle/rum,
+				/obj/item/chems/drinks/bottle/patron)
 
 
 /obj/random/energy
@@ -682,25 +682,25 @@
 	icon_state = "sosjerky"
 
 /obj/random/snack/spawn_choices()
-	return list(/obj/item/chems/food/snacks/liquidfood,
-				/obj/item/chems/food/snacks/candy,
-				/obj/item/chems/food/drinks/dry_ramen,
-				/obj/item/chems/food/snacks/chips,
-				/obj/item/chems/food/snacks/sosjerky,
-				/obj/item/chems/food/snacks/no_raisin,
-				/obj/item/chems/food/snacks/spacetwinkie,
-				/obj/item/chems/food/snacks/cheesiehonkers,
-				/obj/item/chems/food/snacks/tastybread,
-				/obj/item/chems/food/snacks/candy/proteinbar,
-				/obj/item/chems/food/snacks/syndicake,
-				/obj/item/chems/food/snacks/donut,
-				/obj/item/chems/food/snacks/donut/cherryjelly,
-				/obj/item/chems/food/snacks/donut/jelly,
+	return list(/obj/item/chems/food/liquidfood,
+				/obj/item/chems/food/candy,
+				/obj/item/chems/drinks/dry_ramen,
+				/obj/item/chems/food/chips,
+				/obj/item/chems/food/sosjerky,
+				/obj/item/chems/food/no_raisin,
+				/obj/item/chems/food/spacetwinkie,
+				/obj/item/chems/food/cheesiehonkers,
+				/obj/item/chems/food/tastybread,
+				/obj/item/chems/food/candy/proteinbar,
+				/obj/item/chems/food/syndicake,
+				/obj/item/chems/food/donut,
+				/obj/item/chems/food/donut/cherryjelly,
+				/obj/item/chems/food/donut/jelly,
 				/obj/item/pizzabox/meat,
 				/obj/item/pizzabox/vegetable,
 				/obj/item/pizzabox/margherita,
 				/obj/item/pizzabox/mushroom,
-				/obj/item/chems/food/snacks/plumphelmetbiscuit)
+				/obj/item/chems/food/plumphelmetbiscuit)
 
 
 /obj/random/storage
@@ -1241,13 +1241,13 @@ var/global/list/random_useful_
 	icon_state = "pouch_medium"
 
 /obj/random/mre/dessert/spawn_choices()
-	return list(/obj/item/chems/food/snacks/candy,
-				/obj/item/chems/food/snacks/candy/proteinbar,
-				/obj/item/chems/food/snacks/donut/normal,
-				/obj/item/chems/food/snacks/donut/cherryjelly,
-				/obj/item/chems/food/snacks/chocolatebar,
-				/obj/item/chems/food/snacks/cookie,
-				/obj/item/chems/food/snacks/poppypretzel,
+	return list(/obj/item/chems/food/candy,
+				/obj/item/chems/food/candy/proteinbar,
+				/obj/item/chems/food/donut/normal,
+				/obj/item/chems/food/donut/cherryjelly,
+				/obj/item/chems/food/chocolatebar,
+				/obj/item/chems/food/cookie,
+				/obj/item/chems/food/poppypretzel,
 				/obj/item/clothing/mask/chewable/candy/gum)
 
 /obj/random/mre/dessert/vegan
@@ -1255,10 +1255,10 @@ var/global/list/random_useful_
 	desc = "This is a random vegan dessert for MREs."
 
 /obj/random/mre/dessert/vegan/spawn_choices()
-	return list(/obj/item/chems/food/snacks/candy,
-				/obj/item/chems/food/snacks/chocolatebar,
-				/obj/item/chems/food/snacks/donut/cherryjelly,
-				/obj/item/chems/food/snacks/plumphelmetbiscuit)
+	return list(/obj/item/chems/food/candy,
+				/obj/item/chems/food/chocolatebar,
+				/obj/item/chems/food/donut/cherryjelly,
+				/obj/item/chems/food/plumphelmetbiscuit)
 
 /obj/random/mre/drink
 	name = "random MRE drink"
@@ -1266,13 +1266,13 @@ var/global/list/random_useful_
 	icon_state = "packet_small"
 
 /obj/random/mre/drink/spawn_choices()
-	return list(/obj/item/chems/food/condiment/small/packet/coffee,
-				/obj/item/chems/food/condiment/small/packet/tea,
-				/obj/item/chems/food/condiment/small/packet/cocoa,
-				/obj/item/chems/food/condiment/small/packet/grape,
-				/obj/item/chems/food/condiment/small/packet/orange,
-				/obj/item/chems/food/condiment/small/packet/watermelon,
-				/obj/item/chems/food/condiment/small/packet/apple)
+	return list(/obj/item/chems/condiment/small/packet/coffee,
+				/obj/item/chems/condiment/small/packet/tea,
+				/obj/item/chems/condiment/small/packet/cocoa,
+				/obj/item/chems/condiment/small/packet/grape,
+				/obj/item/chems/condiment/small/packet/orange,
+				/obj/item/chems/condiment/small/packet/watermelon,
+				/obj/item/chems/condiment/small/packet/apple)
 
 /obj/random/mre/spread
 	name = "random MRE spread"
@@ -1280,15 +1280,15 @@ var/global/list/random_useful_
 	icon_state = "packet_small"
 
 /obj/random/mre/spread/spawn_choices()
-	return list(/obj/item/chems/food/condiment/small/packet/jelly,
-				/obj/item/chems/food/condiment/small/packet/honey)
+	return list(/obj/item/chems/condiment/small/packet/jelly,
+				/obj/item/chems/condiment/small/packet/honey)
 
 /obj/random/mre/spread/vegan
 	name = "random vegan MRE spread"
 	desc = "This is a random vegan spread packet for MREs"
 
 /obj/random/mre/spread/vegan/spawn_choices()
-	return list(/obj/item/chems/food/condiment/small/packet/jelly)
+	return list(/obj/item/chems/condiment/small/packet/jelly)
 
 /obj/random/mre/sauce
 	name = "random MRE sauce"
@@ -1296,38 +1296,38 @@ var/global/list/random_useful_
 	icon_state = "packet_small"
 
 /obj/random/mre/sauce/spawn_choices()
-	return list(/obj/item/chems/food/condiment/small/packet/salt,
-				/obj/item/chems/food/condiment/small/packet/pepper,
-				/obj/item/chems/food/condiment/small/packet/sugar,
-				/obj/item/chems/food/condiment/small/packet/capsaicin,
-				/obj/item/chems/food/condiment/small/packet/ketchup,
-				/obj/item/chems/food/condiment/small/packet/mayo,
-				/obj/item/chems/food/condiment/small/packet/soy)
+	return list(/obj/item/chems/condiment/small/packet/salt,
+				/obj/item/chems/condiment/small/packet/pepper,
+				/obj/item/chems/condiment/small/packet/sugar,
+				/obj/item/chems/condiment/small/packet/capsaicin,
+				/obj/item/chems/condiment/small/packet/ketchup,
+				/obj/item/chems/condiment/small/packet/mayo,
+				/obj/item/chems/condiment/small/packet/soy)
 
 /obj/random/mre/sauce/vegan/spawn_choices()
-	return list(/obj/item/chems/food/condiment/small/packet/salt,
-				/obj/item/chems/food/condiment/small/packet/pepper,
-				/obj/item/chems/food/condiment/small/packet/sugar,
-				/obj/item/chems/food/condiment/small/packet/soy)
+	return list(/obj/item/chems/condiment/small/packet/salt,
+				/obj/item/chems/condiment/small/packet/pepper,
+				/obj/item/chems/condiment/small/packet/sugar,
+				/obj/item/chems/condiment/small/packet/soy)
 
 /obj/random/mre/sauce/sugarfree/spawn_choices()
-	return list(/obj/item/chems/food/condiment/small/packet/salt,
-				/obj/item/chems/food/condiment/small/packet/pepper,
-				/obj/item/chems/food/condiment/small/packet/capsaicin,
-				/obj/item/chems/food/condiment/small/packet/ketchup,
-				/obj/item/chems/food/condiment/small/packet/mayo,
-				/obj/item/chems/food/condiment/small/packet/soy)
+	return list(/obj/item/chems/condiment/small/packet/salt,
+				/obj/item/chems/condiment/small/packet/pepper,
+				/obj/item/chems/condiment/small/packet/capsaicin,
+				/obj/item/chems/condiment/small/packet/ketchup,
+				/obj/item/chems/condiment/small/packet/mayo,
+				/obj/item/chems/condiment/small/packet/soy)
 
 /obj/random/mre/sauce/crayon/spawn_choices()
-	return list(/obj/item/chems/food/condiment/small/packet/crayon,
-				/obj/item/chems/food/condiment/small/packet/crayon/red,
-				/obj/item/chems/food/condiment/small/packet/crayon/orange,
-				/obj/item/chems/food/condiment/small/packet/crayon/yellow,
-				/obj/item/chems/food/condiment/small/packet/crayon/green,
-				/obj/item/chems/food/condiment/small/packet/crayon/blue,
-				/obj/item/chems/food/condiment/small/packet/crayon/purple,
-				/obj/item/chems/food/condiment/small/packet/crayon/grey,
-				/obj/item/chems/food/condiment/small/packet/crayon/brown)
+	return list(/obj/item/chems/condiment/small/packet/crayon,
+				/obj/item/chems/condiment/small/packet/crayon/red,
+				/obj/item/chems/condiment/small/packet/crayon/orange,
+				/obj/item/chems/condiment/small/packet/crayon/yellow,
+				/obj/item/chems/condiment/small/packet/crayon/green,
+				/obj/item/chems/condiment/small/packet/crayon/blue,
+				/obj/item/chems/condiment/small/packet/crayon/purple,
+				/obj/item/chems/condiment/small/packet/crayon/grey,
+				/obj/item/chems/condiment/small/packet/crayon/brown)
 
 /obj/random/vendor
 	name = "random vending machine"
@@ -1357,7 +1357,7 @@ var/global/list/random_useful_
 	name = "randomly spawned cola"
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = "cola"
-	spawn_object = /obj/item/chems/food/drinks/cans/cola
+	spawn_object = /obj/item/chems/drinks/cans/cola
 
 //textbooks
 /obj/random/single/textbook

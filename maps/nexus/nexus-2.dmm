@@ -896,8 +896,8 @@
 /area/nexus/civilian/hygiene)
 "NT" = (
 /obj/structure/table/standard,
-/obj/item/chems/food/condiment/small/packet/salt,
-/obj/item/chems/food/condiment/small/packet/pepper,
+/obj/item/chems/condiment/small/packet/salt,
+/obj/item/chems/condiment/small/packet/pepper,
 /obj/random/drinkingglass,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/glass,
@@ -1184,7 +1184,7 @@
 /area/nexus/civilian/bar)
 "YN" = (
 /obj/structure/table/standard,
-/obj/item/chems/food/condiment/small/packet/salt,
+/obj/item/chems/condiment/small/packet/salt,
 /turf/simulated/floor/glass,
 /area/nexus/civilian/bar)
 "YS" = (

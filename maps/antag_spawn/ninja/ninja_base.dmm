@@ -681,7 +681,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bF" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/drinks/dry_ramen,
+/obj/item/chems/drinks/dry_ramen,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -789,7 +789,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bS" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/snacks/soylentgreen,
+/obj/item/chems/food/soylentgreen,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"

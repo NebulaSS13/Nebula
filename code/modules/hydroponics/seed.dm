@@ -22,7 +22,7 @@
 	var/kitchen_tag                // Used by the reagent grinder.
 	var/trash_type                 // Garbage item produced when eaten.
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
-	var/product_type = /obj/item/chems/food/snacks/grown
+	var/product_type = /obj/item/chems/food/grown
 	var/force_layer
 	var/req_CO2_moles    = 1.0// Moles of CO2 required for photosynthesis.
 	var/hydrotray_only
@@ -768,9 +768,9 @@
 
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
 				if(istype(product, /obj/item/chems/food))
-					var/obj/item/chems/food/food = product
-					food.color = get_trait(TRAIT_PRODUCT_COLOUR)
-					food.filling_color = get_trait(TRAIT_PRODUCT_COLOUR)
+					var/obj/item/chems/food/snack = product
+					snack.color = get_trait(TRAIT_PRODUCT_COLOUR)
+					snack.filling_color = get_trait(TRAIT_PRODUCT_COLOUR)
 
 			if(mysterious)
 				product.name += "?"

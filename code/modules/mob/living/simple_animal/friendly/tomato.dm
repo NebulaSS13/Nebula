@@ -14,8 +14,8 @@
 	natural_weapon = /obj/item/natural_weapon/bite
 	pass_flags = PASS_FLAG_TABLE
 
-	meat_type = /obj/item/chems/food/snacks/tomatomeat
+	meat_type = /obj/item/chems/food/tomatomeat
 	bone_material = null
 	bone_amount =   0
-	skin_material = null 
+	skin_material = null
 	skin_amount =   null

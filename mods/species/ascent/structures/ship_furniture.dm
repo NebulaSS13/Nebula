@@ -41,7 +41,7 @@ MANTIDIFY(/obj/structure/bed/chair/padded/purple, "mantid nest", "resting place"
 	desc = "An alien device housing liquid for alien purposes."
 	icon = 'mods/species/ascent/icons/ascent_doodads.dmi'
 	cups = 50
-	cup_type = /obj/item/chems/food/snacks/hydration
+	cup_type = /obj/item/chems/food/hydration
 
 /obj/structure/reagent_dispensers/water_cooler/ascent/DispenserMessages(var/mob/user)
 	return list("\The [user] grabs a hydration ration orb from \the [src].", "You grab a hydration ration orb from \the [src].")

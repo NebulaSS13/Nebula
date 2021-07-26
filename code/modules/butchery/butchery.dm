@@ -4,7 +4,7 @@
 #define CARCASS_JOINTED  "jointed"
 
 /mob/living
-	var/meat_type =         /obj/item/chems/food/snacks/meat
+	var/meat_type =         /obj/item/chems/food/meat
 	var/meat_amount =       3
 	var/skin_material =     /decl/material/solid/skin
 	var/skin_amount =       3
@@ -24,13 +24,13 @@
 	blood_splatter(get_turf(src), src, large = TRUE)
 	var/meat_count = 0
 	for(var/i=0;i<meat_amount;i++)
-		var/obj/item/chems/food/snacks/meat/slab = new effective_meat_type(get_turf(src))
+		var/obj/item/chems/food/meat/slab = new effective_meat_type(get_turf(src))
 		LAZYADD(., slab)
 		if(istype(slab))
 			meat_count++
 	if(reagents && meat_count > 0)
 		var/reagent_split = round(reagents.total_volume/meat_count,1)
-		for(var/obj/item/chems/food/snacks/meat/slab in .)
+		for(var/obj/item/chems/food/meat/slab in .)
 			reagents.trans_to_obj(slab, reagent_split)
 
 /mob/living/carbon/human/harvest_meat()
@@ -51,7 +51,7 @@
 	if(bone_material && bone_amount)
 		var/product = SSmaterials.create_object(bone_material, get_turf(src), bone_amount)
 		if(product)
-			LAZYADD(., product) 
+			LAZYADD(., product)
 		blood_splatter(T, src, large = TRUE)
 	if(skull_type)
 		LAZYADD(., new skull_type(T))

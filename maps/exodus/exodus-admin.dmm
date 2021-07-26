@@ -1753,7 +1753,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/amanita_pie,
+/obj/item/chems/food/amanita_pie,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1762,7 +1762,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/bigbiteburger,
+/obj/item/chems/food/bigbiteburger,
 /obj/machinery/camera/network/crescent{
 	c_tag = "Crescent Bar Center"
 	},
@@ -1795,7 +1795,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/stew,
+/obj/item/chems/food/stew,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1875,7 +1875,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/boiledrice,
+/obj/item/chems/food/boiledrice,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1884,7 +1884,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/beetsoup,
+/obj/item/chems/food/beetsoup,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1893,7 +1893,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/stuffing,
+/obj/item/chems/food/stuffing,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1902,7 +1902,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/soylenviridians,
+/obj/item/chems/food/soylenviridians,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2075,7 +2075,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/bloodsoup,
+/obj/item/chems/food/bloodsoup,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2084,7 +2084,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/tofukabob,
+/obj/item/chems/food/tofukabob,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2096,7 +2096,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/poppypretzel,
+/obj/item/chems/food/poppypretzel,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2205,7 +2205,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/spesslaw,
+/obj/item/chems/food/spesslaw,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2221,7 +2221,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/candiedapple,
+/obj/item/chems/food/candiedapple,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2230,7 +2230,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/mushroomsoup,
+/obj/item/chems/food/mushroomsoup,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2246,7 +2246,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/meatsteak,
+/obj/item/chems/food/meatsteak,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2680,9 +2680,9 @@
 /area/tdome/tdomeobserve)
 "iqx" = (
 /obj/structure/table/standard,
-/obj/item/chems/food/drinks/bottle/small/beer,
-/obj/item/chems/food/drinks/bottle/small/beer,
-/obj/item/chems/food/drinks/bottle/small/beer,
+/obj/item/chems/drinks/bottle/small/beer,
+/obj/item/chems/drinks/bottle/small/beer,
+/obj/item/chems/drinks/bottle/small/beer,
 /obj/item/flame/lighter/zippo/random,
 /obj/item/storage/fancy/cigarettes,
 /turf/unsimulated/floor{
@@ -2690,9 +2690,9 @@
 	},
 /area/tdome/tdomeobserve)
 "itR" = (
-/obj/item/chems/food/drinks/cans/cola,
-/obj/item/chems/food/drinks/cans/cola,
-/obj/item/chems/food/drinks/cans/cola,
+/obj/item/chems/drinks/cans/cola,
+/obj/item/chems/drinks/cans/cola,
+/obj/item/chems/drinks/cans/cola,
 /obj/structure/table/standard,
 /turf/unsimulated/floor{
 	icon_state = "lino"

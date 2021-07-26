@@ -1907,8 +1907,8 @@
 	dir = 1
 	},
 /obj/structure/closet/crate/plastic,
-/obj/item/chems/food/snacks/liquidfood,
-/obj/item/chems/food/snacks/liquidfood,
+/obj/item/chems/food/liquidfood,
+/obj/item/chems/food/liquidfood,
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
@@ -6105,7 +6105,7 @@
 	pixel_y = -7
 	},
 /obj/random/smokes,
-/obj/item/chems/food/drinks/glass2/coffeecup/dais{
+/obj/item/chems/drinks/glass2/coffeecup/dais{
 	pixel_x = -6;
 	pixel_y = 12
 	},

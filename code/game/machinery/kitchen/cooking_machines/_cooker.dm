@@ -1,7 +1,7 @@
 // This folder contains code that was originally ported from Apollo Station and then refactored/optimized/changed.
 
 // Tracks precooked food to stop deep fried baked grilled grilled grilled monkey cereal.
-/obj/item/chems/food/snacks/var/list/cooked
+/obj/item/chems/food/var/list/cooked
 
 // Root type for cooking machines. See following files for specific implementations.
 /obj/machinery/cooker
@@ -82,7 +82,7 @@
 		return
 
 	// We're trying to cook something else. Check if it's valid.
-	var/obj/item/chems/food/snacks/check = I
+	var/obj/item/chems/food/check = I
 	if(istype(check) && islist(check.cooked) && (cook_type in check.cooked))
 		to_chat(user, "<span class='warning'>\The [check] has already been [cook_type].</span>")
 		return 0
@@ -130,8 +130,8 @@
 	if(selected_option && output_options.len)
 		cook_path = output_options[selected_option]
 	if(!cook_path)
-		cook_path = /obj/item/chems/food/snacks/variable
-	var/obj/item/chems/food/snacks/result = new cook_path(src) //Holy typepaths, Batman.
+		cook_path = /obj/item/chems/food/variable
+	var/obj/item/chems/food/result = new cook_path(src) //Holy typepaths, Batman.
 
 	if(cooking_obj.reagents && cooking_obj.reagents.total_volume)
 		cooking_obj.reagents.trans_to(result, cooking_obj.reagents.total_volume)
@@ -143,7 +143,7 @@
 	change_product_strings(result)
 
 	// Set cooked data.
-	var/obj/item/chems/food/snacks/food_item = cooking_obj
+	var/obj/item/chems/food/food_item = cooking_obj
 	if(istype(food_item) && islist(food_item.cooked))
 		result.cooked = food_item.cooked.Copy()
 	else
@@ -172,7 +172,7 @@
 			else if(prob(burn_chance))
 				// You dun goofed.
 				qdel(cooking_obj)
-				cooking_obj = new /obj/item/chems/food/snacks/badrecipe(src)
+				cooking_obj = new /obj/item/chems/food/badrecipe(src)
 				// Produce nasty smoke.
 				visible_message("<span class='danger'>\The [src] vomits a gout of rancid smoke!</span>")
 				var/datum/effect/effect/system/smoke_spread/bad/smoke = new /datum/effect/effect/system/smoke_spread/bad()
@@ -221,16 +221,16 @@
 /obj/machinery/cooker/proc/cook_mob(var/mob/living/victim, var/mob/user)
 	return
 
-/obj/machinery/cooker/proc/change_product_strings(var/obj/item/chems/food/snacks/product)
-	if(product.type == /obj/item/chems/food/snacks/variable) // Base type, generic.
+/obj/machinery/cooker/proc/change_product_strings(var/obj/item/chems/food/product)
+	if(product.type == /obj/item/chems/food/variable) // Base type, generic.
 		product.SetName("[cook_type] [cooking_obj.name]")
 		product.desc = "[cooking_obj.desc] It has been [cook_type]."
 	else
 		product.SetName("[cooking_obj.name] [product.name]")
 
-/obj/machinery/cooker/proc/change_product_appearance(var/obj/item/chems/food/snacks/product)
+/obj/machinery/cooker/proc/change_product_appearance(var/obj/item/chems/food/product)
 	if(istype(product))
-		if(istype(cooking_obj, /obj/item/chems/food/snacks))
-			var/obj/item/chems/food/snacks/S = cooking_obj
+		if(istype(cooking_obj, /obj/item/chems/food))
+			var/obj/item/chems/food/S = cooking_obj
 			food_color = S.filling_color
 		product.update_food_appearance_from(cooking_obj, food_color)

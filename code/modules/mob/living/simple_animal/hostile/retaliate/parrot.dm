@@ -47,7 +47,7 @@
 	stop_automated_movement = 1
 	universal_speak = TRUE
 
-	meat_type = /obj/item/chems/food/snacks/meat/chicken/game
+	meat_type = /obj/item/chems/food/meat/chicken/game
 	meat_amount = 3
 	skin_material = /decl/material/solid/skin/feathers
 

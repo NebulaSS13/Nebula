@@ -225,7 +225,7 @@
 	initial_reagent_types = list(/decl/material/liquid/water = 1)
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	var/cups = 12
-	var/cup_type = /obj/item/chems/food/drinks/sillycup
+	var/cup_type = /obj/item/chems/drinks/sillycup
 
 /obj/structure/reagent_dispensers/water_cooler/attack_hand(var/mob/user)
 	if(cups > 0)

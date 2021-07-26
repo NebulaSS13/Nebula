@@ -180,7 +180,7 @@
 		/obj/item/taperoll/police,
 		/obj/item/gun/projectile/pistol,
 		/obj/item/clothing/accessory/storage/holster/armpit,
-		/obj/item/chems/food/drinks/flask/detflask,
+		/obj/item/chems/drinks/flask/detflask,
 		/obj/item/storage/briefcase/crimekit,
 		/obj/item/holowarrant
 	)

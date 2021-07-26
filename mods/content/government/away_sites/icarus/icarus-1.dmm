@@ -558,7 +558,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/item/chems/food/condiment/flour,
+/obj/item/chems/condiment/flour,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ce" = (
@@ -1071,7 +1071,7 @@
 /area/icarus/vessel)
 "dI" = (
 /obj/structure/table/standard,
-/obj/item/chems/food/drinks/cans/cola,
+/obj/item/chems/drinks/cans/cola,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dJ" = (
@@ -1602,7 +1602,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/chems/food/drinks/cans/waterbottle,
+/obj/item/chems/drinks/cans/waterbottle,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fi" = (

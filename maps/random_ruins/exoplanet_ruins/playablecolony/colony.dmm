@@ -2520,9 +2520,9 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
-/obj/item/chems/food/condiment/small/peppermill,
-/obj/item/chems/food/condiment/small/saltshaker,
-/obj/item/chems/food/condiment/small/sugar,
+/obj/item/chems/condiment/small/peppermill,
+/obj/item/chems/condiment/small/saltshaker,
+/obj/item/chems/condiment/small/sugar,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/colony/messhall)
 "ff" = (
@@ -2860,9 +2860,9 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
-/obj/item/chems/food/condiment/small/peppermill,
-/obj/item/chems/food/condiment/small/saltshaker,
-/obj/item/chems/food/condiment/small/sugar,
+/obj/item/chems/condiment/small/peppermill,
+/obj/item/chems/condiment/small/saltshaker,
+/obj/item/chems/condiment/small/sugar,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/colony/messhall)
 "fJ" = (
@@ -3145,7 +3145,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/obj/item/chems/food/drinks/pitcher,
+/obj/item/chems/drinks/pitcher,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/colony/messhall)
 "gc" = (
@@ -3196,11 +3196,11 @@
 /obj/item/storage/box/cola/spacewind,
 /obj/item/storage/box/cola/icedtea,
 /obj/item/storage/box/cola/drgibb,
-/obj/item/chems/food/drinks/shaker,
-/obj/item/chems/food/drinks/pitcher,
+/obj/item/chems/drinks/shaker,
+/obj/item/chems/drinks/pitcher,
 /obj/item/chems/glass/beaker/bowl,
-/obj/item/chems/food/condiment/salt,
-/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/condiment/salt,
+/obj/item/chems/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/messhall)
 "gf" = (
@@ -4494,7 +4494,7 @@
 "iw" = (
 /obj/structure/table/marble,
 /obj/machinery/reagent_temperature,
-/obj/item/chems/food/drinks/shaker,
+/obj/item/chems/drinks/shaker,
 /obj/machinery/vending/boozeomat{
 	density = 0;
 	pixel_y = -32;

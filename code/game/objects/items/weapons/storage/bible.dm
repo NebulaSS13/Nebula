@@ -24,7 +24,7 @@
 	icon_state ="bible"
 
 	startswith = list(
-		/obj/item/chems/food/drinks/bottle/small/beer,
+		/obj/item/chems/drinks/bottle/small/beer,
 		/obj/item/cash/c50,
 		/obj/item/cash/c50,
 	)

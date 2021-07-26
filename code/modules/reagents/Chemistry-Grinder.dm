@@ -49,8 +49,8 @@
 		return FALSE
 
 	if (istype(O,/obj/item/chems/glass) || \
-		istype(O,/obj/item/chems/food/drinks/glass2) || \
-		istype(O,/obj/item/chems/food/drinks/shaker))
+		istype(O,/obj/item/chems/drinks/glass2) || \
+		istype(O,/obj/item/chems/drinks/shaker))
 
 		if (beaker)
 			return TRUE

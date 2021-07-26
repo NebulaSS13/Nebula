@@ -28,8 +28,8 @@
 	move_to_delay = 3
 	speed = 1
 	max_gas = list(
-		/decl/material/gas/chlorine = 1, 
-		/decl/material/gas/carbon_dioxide = 5, 
+		/decl/material/gas/chlorine = 1,
+		/decl/material/gas/carbon_dioxide = 5,
 		/decl/material/gas/methyl_bromide = 1
 	)
 	bleed_colour = "#0d5a71"
@@ -37,7 +37,7 @@
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
 
-	meat_type = /obj/item/chems/food/snacks/spider
+	meat_type = /obj/item/chems/food/spider
 	meat_amount = 3
 	bone_material = null
 	bone_amount =   0
@@ -366,7 +366,7 @@ Nurse caste procs
 
 						if(O.anchored)
 							continue
-						
+
 						if(is_type_in_list(O, cocoon_blacklist))
 							continue
 
@@ -439,7 +439,7 @@ Hunter caste procs
 	. = ..()
 	if(!isnull(first_stop_automation))
 		stop_automation = first_stop_automation
-	
+
 /mob/living/simple_animal/hostile/giant_spider/hunter/throw_impact(atom/hit_atom)
 	..()
 	if(isliving(hit_atom))

@@ -77,7 +77,7 @@
 					/obj/item/chems/hypospray/autoinjector = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/flashlight/flare/glowstick = 1,
-					/obj/item/chems/food/snacks/candy/proteinbar = 1,
+					/obj/item/chems/food/candy/proteinbar = 1,
 					/obj/item/oxycandle = 1,
 					/obj/item/crowbar/cheap = 1)
 
@@ -91,7 +91,7 @@
 					/obj/item/chems/hypospray/autoinjector/antirad = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/flashlight/flare/glowstick = 1,
-					/obj/item/chems/food/snacks/candy/proteinbar = 1,
+					/obj/item/chems/food/candy/proteinbar = 1,
 					/obj/item/oxycandle = 1)
 
 /obj/item/storage/box/gloves
@@ -262,24 +262,24 @@
 /obj/item/storage/box/condimentbottles
 	name = "box of condiment bottles"
 	desc = "It has a large ketchup smear on it."
-	startswith = list(/obj/item/chems/food/condiment = 6)
+	startswith = list(/obj/item/chems/condiment = 6)
 
 /obj/item/storage/box/cups
 	name = "box of paper cups"
 	desc = "It has pictures of paper cups on the front."
-	startswith = list(/obj/item/chems/food/drinks/sillycup = 7)
+	startswith = list(/obj/item/chems/drinks/sillycup = 7)
 
 /obj/item/storage/box/donkpockets
 	name = "box of donk-pockets"
 	desc = "<B>Instructions:</B> <I>Heat in microwave. Product will cool if not eaten within seven minutes.</I>"
 	icon_state = "donk_kit"
-	startswith = list(/obj/item/chems/food/snacks/donkpocket = 6)
+	startswith = list(/obj/item/chems/food/donkpocket = 6)
 
 /obj/item/storage/box/sinpockets
 	name = "box of sin-pockets"
 	desc = "<B>Instructions:</B> <I>Crush bottom of package to initiate chemical heating. Wait for 20 seconds before consumption. Product will cool if not eaten within seven minutes.</I>"
 	icon_state = "donk_kit"
-	startswith = list(/obj/item/chems/food/snacks/donkpocket/sinpocket = 6)
+	startswith = list(/obj/item/chems/food/donkpocket/sinpocket = 6)
 
 //cubed animals
 
@@ -288,13 +288,13 @@
 	desc = "Drymate brand monkey cubes. Just add water!"
 	icon = 'icons/obj/food.dmi'
 	icon_state = "monkeycubebox"
-	can_hold = list(/obj/item/chems/food/snacks/monkeycube)
-	startswith = list(/obj/item/chems/food/snacks/monkeycube/wrapped = 5)
+	can_hold = list(/obj/item/chems/food/monkeycube)
+	startswith = list(/obj/item/chems/food/monkeycube/wrapped = 5)
 
 /obj/item/storage/box/monkeycubes/spidercubes
 	name = "spiderling cube box"
 	desc = "Drymate brand Instant spiders. WHY WOULD YOU ORDER THIS!?"
-	startswith = list(/obj/item/chems/food/snacks/monkeycube/wrapped/spidercube = 5)
+	startswith = list(/obj/item/chems/food/monkeycube/wrapped/spidercube = 5)
 
 /obj/item/storage/box/ids
 	name = "box of spare IDs"
@@ -427,7 +427,7 @@
 	foldable = null
 	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_LARGE
-	can_hold = list(/obj/item/organ, /obj/item/chems/food, /obj/item/chems/glass)
+	can_hold = list(/obj/item/organ, /obj/item/chems/food, /obj/item/chems/drinks, /obj/item/chems/condiment, /obj/item/chems/glass)
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
 	temperature = -16 CELSIUS
@@ -441,31 +441,31 @@
 	icon_state = "checkers"
 	max_storage_space = 24
 	foldable = null
-	can_hold = list(/obj/item/chems/food/snacks/checker)
-	startswith = list(/obj/item/chems/food/snacks/checker = 12,
-					/obj/item/chems/food/snacks/checker/red = 12)
+	can_hold = list(/obj/item/chems/food/checker)
+	startswith = list(/obj/item/chems/food/checker = 12,
+					/obj/item/chems/food/checker/red = 12)
 
 /obj/item/storage/box/checkers/chess
 	name = "black chess box"
 	desc = "This box holds all the pieces needed for the black side of the chess board."
 	icon_state = "chess_b"
-	startswith = list(/obj/item/chems/food/snacks/checker/pawn = 8,
-				/obj/item/chems/food/snacks/checker/knight = 2,
-				/obj/item/chems/food/snacks/checker/bishop = 2,
-				/obj/item/chems/food/snacks/checker/rook = 2,
-				/obj/item/chems/food/snacks/checker/queen = 1,
-				/obj/item/chems/food/snacks/checker/king = 1)
+	startswith = list(/obj/item/chems/food/checker/pawn = 8,
+				/obj/item/chems/food/checker/knight = 2,
+				/obj/item/chems/food/checker/bishop = 2,
+				/obj/item/chems/food/checker/rook = 2,
+				/obj/item/chems/food/checker/queen = 1,
+				/obj/item/chems/food/checker/king = 1)
 
 /obj/item/storage/box/checkers/chess/red
 	name = "red chess box"
 	desc = "This box holds all the pieces needed for the red side of the chess board."
 	icon_state = "chess_r"
-	startswith = list(/obj/item/chems/food/snacks/checker/pawn/red = 8,
-				/obj/item/chems/food/snacks/checker/knight/red = 2,
-				/obj/item/chems/food/snacks/checker/bishop/red = 2,
-				/obj/item/chems/food/snacks/checker/rook/red = 2,
-				/obj/item/chems/food/snacks/checker/queen/red = 1,
-				/obj/item/chems/food/snacks/checker/king/red = 1)
+	startswith = list(/obj/item/chems/food/checker/pawn/red = 8,
+				/obj/item/chems/food/checker/knight/red = 2,
+				/obj/item/chems/food/checker/bishop/red = 2,
+				/obj/item/chems/food/checker/rook/red = 2,
+				/obj/item/chems/food/checker/queen/red = 1,
+				/obj/item/chems/food/checker/king/red = 1)
 
 
 /obj/item/storage/box/headset
@@ -527,71 +527,71 @@
 /obj/item/storage/box/cola
 	name = "box of sodas"
 	desc = "A box full of soda cans."
-	startswith = list(/obj/item/chems/food/drinks/cans/cola = 7)
+	startswith = list(/obj/item/chems/drinks/cans/cola = 7)
 
 /obj/item/storage/box/water
 	name = "box of water bottles"
 	desc = "A box full of bottled water."
-	startswith = list(/obj/item/chems/food/drinks/cans/waterbottle = 7)
+	startswith = list(/obj/item/chems/drinks/cans/waterbottle = 7)
 
 /obj/item/storage/box/cola/spacewind
-	startswith = list(/obj/item/chems/food/drinks/cans/space_mountain_wind = 7)
+	startswith = list(/obj/item/chems/drinks/cans/space_mountain_wind = 7)
 
 /obj/item/storage/box/cola/drgibb
-	startswith = list(/obj/item/chems/food/drinks/cans/dr_gibb = 7)
+	startswith = list(/obj/item/chems/drinks/cans/dr_gibb = 7)
 
 /obj/item/storage/box/cola/starkist
-	startswith = list(/obj/item/chems/food/drinks/cans/starkist = 7)
+	startswith = list(/obj/item/chems/drinks/cans/starkist = 7)
 
 /obj/item/storage/box/cola/spaceup
-	startswith = list(/obj/item/chems/food/drinks/cans/space_up = 7)
+	startswith = list(/obj/item/chems/drinks/cans/space_up = 7)
 
 /obj/item/storage/box/cola/lemonlime
-	startswith = list(/obj/item/chems/food/drinks/cans/lemon_lime = 7)
+	startswith = list(/obj/item/chems/drinks/cans/lemon_lime = 7)
 
 /obj/item/storage/box/cola/icedtea
-	startswith = list(/obj/item/chems/food/drinks/cans/iced_tea = 7)
+	startswith = list(/obj/item/chems/drinks/cans/iced_tea = 7)
 
 /obj/item/storage/box/cola/grapejuice
-	startswith = list(/obj/item/chems/food/drinks/cans/grape_juice = 7)
+	startswith = list(/obj/item/chems/drinks/cans/grape_juice = 7)
 
 /obj/item/storage/box/cola/sodawater
-	startswith = list(/obj/item/chems/food/drinks/cans/sodawater = 7)
+	startswith = list(/obj/item/chems/drinks/cans/sodawater = 7)
 
 /obj/item/storage/box/snack
 	name = "box of snack food"
 	desc = "A box full of snack foods."
-	startswith = list(/obj/item/chems/food/snacks/sosjerky = 7)
+	startswith = list(/obj/item/chems/food/sosjerky = 7)
 
 /obj/item/storage/box/snack/noraisin
-	startswith = list(/obj/item/chems/food/snacks/no_raisin = 7)
+	startswith = list(/obj/item/chems/food/no_raisin = 7)
 
 /obj/item/storage/box/snack/cheesehonks
-	startswith = list(/obj/item/chems/food/snacks/cheesiehonkers = 7)
+	startswith = list(/obj/item/chems/food/cheesiehonkers = 7)
 
 /obj/item/storage/box/snack/tastybread
-	startswith = list(/obj/item/chems/food/snacks/tastybread = 7)
+	startswith = list(/obj/item/chems/food/tastybread = 7)
 
 /obj/item/storage/box/snack/candy
-	startswith = list(/obj/item/chems/food/snacks/candy = 7)
+	startswith = list(/obj/item/chems/food/candy = 7)
 
 /obj/item/storage/box/snack/chips
-	startswith = list(/obj/item/chems/food/snacks/chips = 7)
+	startswith = list(/obj/item/chems/food/chips = 7)
 
 //canned goods in cardboard
 /obj/item/storage/box/canned
 	name = "box of canned food"
 	desc = "A box full of canned foods."
-	startswith = list(/obj/item/chems/food/snacks/can/spinach = 1)
+	startswith = list(/obj/item/chems/food/can/spinach = 1)
 
 /obj/item/storage/box/canned/beef
-	startswith = list(/obj/item/chems/food/snacks/can/beef = 6)
+	startswith = list(/obj/item/chems/food/can/beef = 6)
 
 /obj/item/storage/box/canned/beans
-	startswith = list(/obj/item/chems/food/snacks/can/beans = 6)
+	startswith = list(/obj/item/chems/food/can/beans = 6)
 
 /obj/item/storage/box/canned/tomato
-	startswith = list(/obj/item/chems/food/snacks/can/tomato = 6)
+	startswith = list(/obj/item/chems/food/can/tomato = 6)
 
 // machinery stock parts
 /obj/item/storage/box/parts
@@ -624,7 +624,7 @@
 /obj/item/storage/box/parts_pack/manipulator
 	icon_state = "mainpulator"
 	startswith = list(/obj/item/stock_parts/manipulator = 7)
-	
+
 /obj/item/storage/box/parts_pack/laser
 	icon_state = "laser"
 	startswith = list(/obj/item/stock_parts/micro_laser = 7)

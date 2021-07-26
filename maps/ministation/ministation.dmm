@@ -2468,9 +2468,9 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 9
 	},
-/obj/item/chems/food/drinks/juicebox/random,
-/obj/item/chems/food/drinks/juicebox/random,
-/obj/item/chems/food/drinks/juicebox/sensible_random,
+/obj/item/chems/drinks/juicebox/random,
+/obj/item/chems/drinks/juicebox/random,
+/obj/item/chems/drinks/juicebox/sensible_random,
 /turf/simulated/floor/tiled,
 /area/ministation/hall/n)
 "gx" = (
@@ -8922,7 +8922,7 @@
 "wO" = (
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/chems/food/condiment/small/peppermill,
+/obj/item/chems/condiment/small/peppermill,
 /turf/simulated/floor/tiled,
 /area/ministation/cafe)
 "wP" = (
@@ -9119,8 +9119,8 @@
 "xn" = (
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/chems/food/condiment/small/sugar,
-/obj/item/chems/food/condiment/small/saltshaker,
+/obj/item/chems/condiment/small/sugar,
+/obj/item/chems/condiment/small/saltshaker,
 /turf/simulated/floor/tiled,
 /area/ministation/cafe)
 "xo" = (
@@ -9177,7 +9177,7 @@
 /turf/simulated/floor/carpet,
 /area/ministation/cafe)
 "xt" = (
-/obj/item/chems/food/drinks/shaker,
+/obj/item/chems/drinks/shaker,
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/dark,
 /area/ministation/cafe)
@@ -9404,7 +9404,7 @@
 	id_tag = "barshut";
 	name = "bar shutters"
 	},
-/obj/item/chems/food/condiment/ketchup,
+/obj/item/chems/condiment/ketchup,
 /turf/simulated/floor/carpet,
 /area/ministation/cafe)
 "xX" = (
@@ -10384,7 +10384,7 @@
 	dir = 1
 	},
 /obj/structure/table/woodentable,
-/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/condiment/enzyme,
 /turf/simulated/floor/wood,
 /area/ministation/cafe)
 "Ax" = (
@@ -12092,7 +12092,7 @@
 /area/ministation/engine)
 "EO" = (
 /obj/structure/table/reinforced,
-/obj/item/chems/food/snacks/old/pizza,
+/obj/item/chems/food/old/pizza,
 /obj/item/stack/material/puck/mapped/uranium/ten,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
@@ -12218,10 +12218,10 @@
 	icon_state = "4-8"
 	},
 /obj/structure/table/reinforced,
-/obj/item/chems/food/drinks/glass2/coffeecup/metal,
-/obj/item/chems/food/drinks/glass2/coffeecup/metal,
-/obj/item/chems/food/condiment/small/packet/coffee,
-/obj/item/chems/food/condiment/small/packet/coffee,
+/obj/item/chems/drinks/glass2/coffeecup/metal,
+/obj/item/chems/drinks/glass2/coffeecup/metal,
+/obj/item/chems/condiment/small/packet/coffee,
+/obj/item/chems/condiment/small/packet/coffee,
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "Ff" = (
