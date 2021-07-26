@@ -66,6 +66,7 @@
 
 	client.images = null				//remove the images such as AIs being unable to see runes
 	client.screen = list()				//remove hud items just in case
+	client.set_right_click_menu_mode(shift_to_open_context_menu)
 	InitializeHud()
 
 	next_move = 1
