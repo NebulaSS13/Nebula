@@ -10,6 +10,7 @@
 	idle_power_usage = 20
 	power_channel = LIGHT
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
+	z_flags = ZMM_MANGLE_PLANES
 
 	var/on = 0
 	var/area/connected_area = null

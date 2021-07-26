@@ -37,6 +37,7 @@
 	anchored = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	use_power = POWER_USE_IDLE
+	z_flags = ZMM_MANGLE_PLANES
 
 	var/thrust_limit = 1
 	var/burn_cost = 750
