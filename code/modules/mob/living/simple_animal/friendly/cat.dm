@@ -19,12 +19,21 @@
 	mob_size = MOB_SIZE_SMALL
 	possession_candidate = 1
 	pass_flags = PASS_FLAG_TABLE
-
 	skin_material = /decl/material/solid/skin/fur/orange
 
 	var/turns_since_scan = 0
 	var/mob/living/simple_animal/mouse/movement_target
 	var/mob/flee_target
+
+/mob/living/simple_animal/cat/Initialize()
+	if(isnull(hat_offsets))
+		hat_offsets = list(
+			"[NORTH]" = list( 1,  -9),
+			"[SOUTH]" = list( 1, -12),
+			"[EAST]" =  list( 7, -10),
+			"[WEST]" =  list(-7, -10)
+		)
+	. = ..()
 
 /mob/living/simple_animal/cat/do_delayed_life_action()
 	..()
@@ -39,14 +48,10 @@
 					stop_automated_movement = 0
 					break
 
-
-
 	for(var/mob/living/simple_animal/mouse/snack in oview(src,5))
 		if(snack.stat < DEAD && prob(15))
 			audible_emote(pick("hisses and spits!","mrowls fiercely!","eyes [snack] hungrily."))
 		break
-
-
 
 	turns_since_scan++
 	if (turns_since_scan > 5)
@@ -234,7 +239,14 @@
 	skin_amount = 3
 
 /mob/living/simple_animal/cat/kitten/Initialize()
-	. = ..()
+	if(isnull(hat_offsets))
+		hat_offsets = list(
+			"[NORTH]" = list( 1, -14),
+			"[SOUTH]" = list( 1, -14),
+			"[EAST]" =  list( 5, -14),
+			"[WEST]" =  list(-5, -14)
+		)
+	..()
 	gender = pick(MALE, FEMALE)
 
 /mob/living/simple_animal/cat/fluff/ran

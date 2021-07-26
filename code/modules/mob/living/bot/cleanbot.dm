@@ -67,7 +67,7 @@
 
 	busy = 1
 	visible_message("\The [src] begins to clean up \the [D]")
-	update_icons()
+	update_icon()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
 	if(do_after(src, cleantime, progress = 0))
 		if(istype(loc, /turf/simulated))
@@ -80,7 +80,7 @@
 			target = null
 	playsound(src, 'sound/machines/boop2.ogg', 30)
 	busy = 0
-	update_icons()
+	update_icon()
 
 /mob/living/bot/cleanbot/explode()
 	on = 0
@@ -96,7 +96,8 @@
 	qdel(src)
 	return
 
-/mob/living/bot/cleanbot/update_icons()
+/mob/living/bot/cleanbot/on_update_icon()
+	..()
 	if(busy)
 		icon_state = "cleanbot-c"
 	else

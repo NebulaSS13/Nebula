@@ -80,23 +80,23 @@ There are several things that need to be remembered:
 																			...eyes were merged into update_body)
 		update_targeted() // Updates the target overlay when someone points a gun at you
 
->	All of these procs update our overlays_lying and overlays_standing, and then call update_icons() by default.
+>	All of these procs update our overlays_lying and overlays_standing, and then call update_icon() by default.
 	If you wish to update several overlays at once, you can set the argument to 0 to disable the update and call
 	it manually:
 		e.g.
 		update_inv_head(0)
-		update_inv_hands()		//<---calls update_icons()
+		update_inv_hands()		//<---calls update_icon()
 
 	or equivillantly:
 		update_inv_head(0)
 		update_inv_hands(0)
-		update_icons()
+		update_icon()
 
->	If you need to update all overlays you can use regenerate_icons(). it works exactly like update_clothing used to.
+>	If you need to update all overlays you can use refresh_visible_overlays(). it works exactly like update_clothing used to.
 
 >	I reimplimented an old unused variable which was in the code called (coincidentally) var/update_icon
-	It can be used as another method of triggering regenerate_icons(). It's basically a flag that when set to non-zero
-	will call regenerate_icons() at the next life() call and then reset itself to 0.
+	It can be used as another method of triggering update_icon(). It's basically a flag that when set to non-zero
+	will call update_icon() at the next life() call and then reset itself to 0.
 	The idea behind it is icons are regenerated only once, even if multiple events requested it.
 
 This system is confusing and is still a WIP. It's primary goal is speeding up the controls of the game whilst
@@ -142,12 +142,39 @@ Please contact me on #coderbus IRC. ~Carn x
 	var/list/overlays_standing[TOTAL_LAYERS]
 	var/previous_damage_appearance // store what the body last looked like, so we only have to update it if something changed
 
-//UPDATES OVERLAYS FROM OVERLAYS_LYING/OVERLAYS_STANDING
-/mob/living/carbon/human/update_icons()
-	update_hud()		//TODO: remove the need for this
-	overlays.Cut()
+/mob/living/carbon/human/proc/refresh_visible_overlays()
 
-	var/list/overlays_to_apply = list()
+	if(HasMovementHandler(/datum/movement_handler/mob/transformation) || QDELETED(src))
+		return
+
+	update_mutations(0)
+	update_body(0)
+	update_skin(0)
+	update_underwear(0)
+	update_hair(0)
+	update_inv_w_uniform(0)
+	update_inv_wear_id(0)
+	update_inv_gloves(0)
+	update_inv_glasses(0)
+	update_inv_ears(0)
+	update_inv_shoes(0)
+	update_inv_s_store(0)
+	update_inv_wear_mask(0)
+	update_inv_head(0)
+	update_inv_belt(0)
+	update_inv_back(0)
+	update_inv_wear_suit(0)
+	update_inv_hands(0)
+	update_inv_handcuffed(0)
+	update_inv_pockets(0)
+	update_fire(0)
+	update_surgery(0)
+	UpdateDamageIcon()
+	update_icon()
+
+/mob/living/carbon/human/on_update_icon()
+
+	..()
 
 	var/list/visible_overlays
 	if(is_cloaked())
@@ -169,22 +196,18 @@ Please contact me on #coderbus IRC. ~Carn x
 			var/image/overlay = entry
 			if(i != HO_DAMAGE_LAYER)
 				overlay.transform = M
-			overlays_to_apply += overlay
+			add_overlay(entry)
 		else if(istype(entry, /list))
 			for(var/image/overlay in entry)
 				if(i != HO_DAMAGE_LAYER)
 					overlay.transform = M
-				overlays_to_apply += overlay
+				add_overlay(entry)
 
 	var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
 	if(istype(head) && !head.is_stump())
 		var/image/I = head.get_eye_overlay()
 		if(I) 
-			overlays_to_apply += I
-
-	if(auras)
-		overlays_to_apply += auras
-	overlays = overlays_to_apply
+			add_overlay(I)
 
 /mob/living/carbon/human/proc/get_icon_scale_mult()
 	// If you want stuff like scaling based on species or something, here is a good spot to mix the numbers together.
@@ -474,38 +497,6 @@ var/global/list/damage_icon_parts = list()
 		overlays_standing[HO_MUTATIONS_LAYER]	= null
 	if(update_icons)
 		queue_icon_update()
-/* --------------------------------------- */
-//For legacy support.
-/mob/living/carbon/human/regenerate_icons()
-	..()
-	if(HasMovementHandler(/datum/movement_handler/mob/transformation) || QDELETED(src))		return
-
-	update_mutations(0)
-	update_body(0)
-	update_skin(0)
-	update_underwear(0)
-	update_hair(0)
-	update_inv_w_uniform(0)
-	update_inv_wear_id(0)
-	update_inv_gloves(0)
-	update_inv_glasses(0)
-	update_inv_ears(0)
-	update_inv_shoes(0)
-	update_inv_s_store(0)
-	update_inv_wear_mask(0)
-	update_inv_head(0)
-	update_inv_belt(0)
-	update_inv_back(0)
-	update_inv_wear_suit(0)
-	update_inv_hands(0)
-	update_inv_handcuffed(0)
-	update_inv_pockets(0)
-	update_fire(0)
-	update_surgery(0)
-	UpdateDamageIcon()
-	queue_icon_update()
-	//Hud Stuff
-	update_hud()
 
 /* --------------------------------------- */
 //vvvvvv UPDATE_INV PROCS vvvvvv
@@ -661,16 +652,8 @@ var/global/list/damage_icon_parts = list()
 		overlays_standing[HO_BACK_LAYER] = back.get_mob_overlay(src,slot_back_str)
 	else
 		overlays_standing[HO_BACK_LAYER] = null
-
 	if(update_icons)
 		queue_icon_update()
-
-
-/mob/living/carbon/human/update_hud()	//TODO: do away with this if possible
-	if(client)
-		client.screen |= contents
-		if(hud_used)
-			hud_used.hidden_inventory_update() //Updates the screenloc of the items on the 'other' inventory bar
 
 /mob/living/carbon/human/update_inv_handcuffed(var/update_icons=1)
 	if(handcuffed)
@@ -710,7 +693,7 @@ var/global/list/damage_icon_parts = list()
 		animate_tail_reset(0)
 
 	if(update_icons)
-		update_icons()
+		update_icon()
 
 /mob/living/carbon/human/proc/get_tail_icon()
 	var/icon_key = "[bodytype.get_icon_cache_uid(src)][skin_colour][hair_colour]"

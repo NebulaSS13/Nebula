@@ -43,6 +43,7 @@
 		enrage(enrage_potency)
 
 /mob/living/simple_animal/hostile/retaliate/goose/on_update_icon()
+	..()
 	if(stat == DEAD)
 		icon_state = icon_dead
 	else if(loose)

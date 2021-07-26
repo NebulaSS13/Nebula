@@ -98,7 +98,7 @@ var/global/list/wrapped_species_by_ref = list()
 
 	wrapped_species_by_ref["\ref[src]"] = new_species
 	visible_message("<span class='notice'>\The [src] shifts and contorts, taking the form of \a ["\improper [new_species]"]!</span>")
-	regenerate_icons()
+	refresh_visible_overlays()
 
 /mob/living/carbon/human/proc/shapeshifter_select_colour()
 
@@ -127,4 +127,4 @@ var/global/list/wrapped_species_by_ref = list()
 	for(var/obj/item/organ/external/E in organs)
 		E.sync_colour_to_human(src)
 
-	regenerate_icons()
+	refresh_visible_overlays()

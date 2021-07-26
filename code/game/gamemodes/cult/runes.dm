@@ -429,7 +429,7 @@
 		var/obj/item/storage/backpack/cultpack/C = new /obj/item/storage/backpack/cultpack(user)
 		user.equip_to_slot_or_del(C, slot_back_str)
 
-	user.update_icons()
+	user.update_icon()
 
 	qdel(src)
 

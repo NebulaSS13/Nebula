@@ -62,7 +62,8 @@
 	..()
 	stun_baton.set_status(on, null)
 
-/mob/living/bot/secbot/update_icons()
+/mob/living/bot/secbot/on_update_icon()
+	..()
 	icon_state = "secbot[on]"
 
 /mob/living/bot/secbot/GetInteractTitle()

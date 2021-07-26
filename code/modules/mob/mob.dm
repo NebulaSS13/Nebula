@@ -618,7 +618,7 @@
 	//It just makes sense for now. ~Carn
 	if( update_icon )	//forces a full overlay update
 		update_icon = 0
-		regenerate_icons()
+		update_icon()
 	if( lying != last_lying )
 		update_transform()
 
@@ -779,11 +779,6 @@
 		var/mob/living/carbon/human/human_user = U
 		human_user.bloody_hands(src)
 	return 1
-
-// A mob should either use update_icon(), overriding this definition, or use update_icons(), not touching update_icon().
-// It should not use both.
-/mob/on_update_icon()
-	return update_icons()
 
 /mob/verb/face_direction()
 
