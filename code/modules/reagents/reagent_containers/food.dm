@@ -123,9 +123,6 @@
 	if(istype(W,/obj/item/storage))
 		..()// -> item/attackby()
 		return
-	if(!ATOM_IS_OPEN_CONTAINER(src))
-		to_chat(user, "<span class='notice'>\The [src] isn't open!</span>")
-		return 0
 	// Eating with forks
 	if(istype(W,/obj/item/kitchen/utensil))
 		var/obj/item/kitchen/utensil/U = W
