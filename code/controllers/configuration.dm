@@ -45,6 +45,7 @@ var/global/list/gamemode_cache = list()
 	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
 	var/allow_holidays = FALSE
 	var/fps = 20
+	var/clientfps = 20					// Default fps for clients with "0" in prefs. -1 for synced with server.
 	var/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT	//SSinitialization throttling
 	var/list/resource_urls = null
 	var/antag_hud_allowed = 0			// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
@@ -601,6 +602,9 @@ var/global/list/gamemode_cache = list()
 
 				if("fps")
 					fps = text2num(value)
+
+				if("clientfps")
+					clientfps = text2num(value)
 
 				if("tick_limit_mc_init")
 					tick_limit_mc_init = text2num(value)

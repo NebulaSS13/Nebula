@@ -230,6 +230,7 @@ var/global/list/localhost_addresses = list(
 
 	if(prefs && !istype(mob, world.mob))
 		prefs.apply_post_login_preferences()
+
 	//////////////
 	//DISCONNECT//
 	//////////////
