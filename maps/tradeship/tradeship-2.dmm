@@ -697,9 +697,9 @@
 /obj/random/drinkbottle,
 /obj/item/storage/fancy/egg_box,
 /obj/item/storage/fancy/egg_box,
-/obj/item/chems/food/condiment/flour,
-/obj/item/chems/food/condiment/flour,
-/obj/item/chems/food/condiment/flour,
+/obj/item/chems/condiment/flour,
+/obj/item/chems/condiment/flour,
+/obj/item/chems/condiment/flour,
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/kitchen)
 "bm" = (
@@ -1158,7 +1158,7 @@
 /obj/item/deck/tarot,
 /obj/item/synthesized_instrument/guitar,
 /obj/random/drinkbottle,
-/obj/item/chems/food/drinks/bottle/limejuice,
+/obj/item/chems/drinks/bottle/limejuice,
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/saloon)
 "cQ" = (
@@ -1186,8 +1186,8 @@
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
-/obj/item/chems/food/drinks/shaker,
-/obj/item/chems/food/drinks/bottle/orangejuice,
+/obj/item/chems/drinks/shaker,
+/obj/item/chems/drinks/bottle/orangejuice,
 /obj/random/drinkingglass,
 /obj/random/drinkingglass,
 /obj/random/drinkingglass,
@@ -2023,7 +2023,7 @@
 /obj/item/storage/box/donkpockets,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/kitchen/rollingpin,
-/obj/item/chems/food/condiment/small/saltshaker{
+/obj/item/chems/condiment/small/saltshaker{
 	pixel_x = -3
 	},
 /obj/structure/cable{
@@ -3288,8 +3288,8 @@
 	dir = 8
 	},
 /obj/structure/table/standard,
-/obj/item/chems/food/drinks/glass2/coffeecup/metal,
-/obj/item/chems/food/drinks/glass2/coffeecup/metal,
+/obj/item/chems/drinks/glass2/coffeecup/metal,
+/obj/item/chems/drinks/glass2/coffeecup/metal,
 /obj/item/chems/chem_disp_cartridge/coffee{
 	name = "coffee canister"
 	},
@@ -4744,10 +4744,10 @@
 /obj/item/chems/glass/beaker{
 	pixel_x = 5
 	},
-/obj/item/chems/food/condiment/small/peppermill{
+/obj/item/chems/condiment/small/peppermill{
 	pixel_x = 3
 	},
-/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/condiment/enzyme,
 /obj/item/chems/glass/rag,
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/kitchen)
@@ -4839,7 +4839,7 @@
 "oo" = (
 /obj/machinery/light,
 /obj/machinery/optable,
-/obj/item/chems/food/drinks/glass2/coffeecup/britcup,
+/obj/item/chems/drinks/glass2/coffeecup/britcup,
 /obj/item/chems/glass/rag,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay)
@@ -6935,7 +6935,7 @@
 	dir = 4;
 	name = "Captain's Quarters APC"
 	},
-/obj/item/chems/food/drinks/glass2/coffeecup/one,
+/obj/item/chems/drinks/glass2/coffeecup/one,
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -24
