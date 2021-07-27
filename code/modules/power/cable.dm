@@ -71,11 +71,11 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_SILVER
 
 /obj/structure/cable/Initialize(var/ml)
-	. = ..(ml)
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
 	var/dash = findtext(icon_state, "-")
 	d1 = text2num(copytext(icon_state, 1, dash))
 	d2 = text2num(copytext(icon_state, dash+1))
+	. = ..(ml)
 	var/turf/T = src.loc			// hide if turf is not intact
 	if(level==1 && T)
 		hide(!T.is_plating())
