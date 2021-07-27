@@ -23,7 +23,7 @@
 		else  return "[jointext(input, comma_text, 1, -1)][final_comma_text][and_text][input[input.len]]"
 
 //Returns a newline-separated list that counts equal-ish items, outputting count and item names, optionally with icons and specific determiners
-/proc/counting_english_list(list/input, output_icons = TRUE, determiners = DET_NONE, nothing_text = "nothing", line_prefix = "", first_item_prefix = "\n", last_item_suffix = "\n", and_text = "\n", comma_text = "\n", final_comma_text = ",")
+/proc/counting_english_list(list/input, output_icons = TRUE, determiners = DET_NONE, nothing_text = "nothing", line_prefix = "", first_item_prefix = "\n", last_item_suffix = "\n", and_text = "\n", comma_text = "\n", final_comma_text = "")
 	var/list/counts = list() // counted input items
 	var/list/items = list() // actual objects for later reference (for icons and formatting)
 
