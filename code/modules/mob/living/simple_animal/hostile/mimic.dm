@@ -24,7 +24,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 	icon_state = "crate"
 	icon_living = "crate"
 
-	meat_type = /obj/item/chems/food/snacks/fish
+	meat_type = /obj/item/chems/food/fish
 	speed = 4
 	maxHealth = 100
 	health = 100

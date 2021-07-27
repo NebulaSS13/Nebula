@@ -118,7 +118,7 @@
 
 /mob/living/bot/mulebot/attackby(var/obj/item/O, var/mob/user)
 	..()
-	update_icons()
+	update_icon()
 
 /mob/living/bot/mulebot/proc/obeyCommand(var/command)
 	switch(command)
@@ -149,7 +149,8 @@
 	playsound(loc, 'sound/effects/sparks1.ogg', 100, 0)
 	return 1
 
-/mob/living/bot/mulebot/update_icons()
+/mob/living/bot/mulebot/on_update_icon()
+	..()
 	if(open)
 		icon_state = "mulebot-hatch"
 		return
@@ -161,7 +162,7 @@
 /mob/living/bot/mulebot/handleRegular()
 	if(!safety && prob(1))
 		flick("mulebot-emagged", src)
-	update_icons()
+	update_icon()
 
 /mob/living/bot/mulebot/handleFrustrated()
 	custom_emote(2, "makes a sighing buzz.")

@@ -56,6 +56,16 @@ I IS TYPIN'!'
 	if(message)
 		say_verb(message)
 
+/mob/verb/whisper_wrapper()
+	set name = ".Whisper"
+	set hidden = 1
+
+	create_typing_indicator()
+	var/message = input(src, "", "whisper (text)") as text|null
+	remove_typing_indicator()
+	if(message)
+		whisper(message)
+
 /mob/verb/me_wrapper()
 	set name = ".Me"
 	set hidden = 1

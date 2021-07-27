@@ -19,7 +19,7 @@
 	maxHealth = 200
 	amount_grown = 0
 	update_name()
-	regenerate_icons()
+	update_icon()
 
 /mob/living/slime/verb/slime_split()
 	set name = "Fission"

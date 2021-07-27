@@ -16,7 +16,7 @@
 	health = 40
 	natural_weapon = /obj/item/natural_weapon/hooves
 
-	meat_type = /obj/item/chems/food/snacks/meat/goat
+	meat_type = /obj/item/chems/food/meat/goat
 	meat_amount = 4
 	bone_amount = 8
 	skin_material = /decl/material/solid/skin/goat
@@ -101,7 +101,7 @@
 	see_in_dark = 6
 	health = 50
 
-	meat_type = /obj/item/chems/food/snacks/meat/beef
+	meat_type = /obj/item/chems/food/meat/beef
 	meat_amount = 6
 	bone_amount = 10
 	skin_material = /decl/material/solid/skin/cow
@@ -165,7 +165,7 @@
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	mob_size = MOB_SIZE_MINISCULE
 
-	meat_type = /obj/item/chems/food/snacks/meat/chicken
+	meat_type = /obj/item/chems/food/meat/chicken
 	meat_amount = 1
 	bone_amount = 3
 	skin_amount = 3
@@ -206,7 +206,7 @@ var/global/chicken_count = 0
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SIZE_SMALL
 
-	meat_type = /obj/item/chems/food/snacks/meat/chicken
+	meat_type = /obj/item/chems/food/meat/chicken
 	meat_amount = 2
 	skin_material = /decl/material/solid/skin/feathers
 
@@ -229,8 +229,8 @@ var/global/chicken_count = 0
 	chicken_count -= 1
 
 /mob/living/simple_animal/chicken/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/chems/food/snacks/grown)) //feedin' dem chickens
-		var/obj/item/chems/food/snacks/grown/G = O
+	if(istype(O, /obj/item/chems/food/grown)) //feedin' dem chickens
+		var/obj/item/chems/food/grown/G = O
 		if(G.seed && G.seed.kitchen_tag == "wheat")
 			if(!stat && eggsleft < 8)
 				user.visible_message("<span class='notice'>[user] feeds [O] to [name]! It clucks happily.</span>","<span class='notice'>You feed [O] to [name]! It clucks happily.</span>")
@@ -250,22 +250,22 @@ var/global/chicken_count = 0
 	if(prob(3) && eggsleft > 0)
 		visible_message("[src] [pick("lays an egg.","squats down and croons.","begins making a huge racket.","begins clucking raucously.")]")
 		eggsleft--
-		var/obj/item/chems/food/snacks/egg/E = new(get_turf(src))
+		var/obj/item/chems/food/egg/E = new(get_turf(src))
 		E.pixel_x = rand(-6,6)
 		E.pixel_y = rand(-6,6)
 		if(chicken_count < MAX_CHICKENS && prob(10))
 			E.amount_grown = 1
 			START_PROCESSING(SSobj, E)
 
-/obj/item/chems/food/snacks/egg
+/obj/item/chems/food/egg
 	var/amount_grown = 0
 
-/obj/item/chems/food/snacks/egg/Destroy()
+/obj/item/chems/food/egg/Destroy()
 	if(amount_grown)
 		STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/chems/food/snacks/egg/Process()
+/obj/item/chems/food/egg/Process()
 	if(isturf(loc))
 		amount_grown += rand(1,2)
 		if(amount_grown >= 100)

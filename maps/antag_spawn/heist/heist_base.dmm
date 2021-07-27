@@ -857,8 +857,8 @@
 "cd" = (
 /obj/machinery/vending/cigarette{
 	markup = 0;
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2);
-	name = "hacked cigarette machine"
+	name = "hacked cigarette machine";
+	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -1512,8 +1512,8 @@
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/chems/food/snacks/tastybread,
-/obj/item/chems/food/snacks/tastybread,
+/obj/item/chems/food/tastybread,
+/obj/item/chems/food/tastybread,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"

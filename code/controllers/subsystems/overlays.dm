@@ -60,6 +60,15 @@ SUBSYSTEM_DEF(overlays)
 
 	overlay_queued = FALSE
 
+/atom/movable/compile_overlays()
+	..()
+	UPDATE_OO_IF_PRESENT
+
+/turf/compile_overlays()
+	..()
+	if (above)
+		update_above()
+
 /proc/iconstate2appearance(icon, iconstate)
 	var/static/image/stringbro = new()
 	var/list/icon_states_cache = SSoverlays.overlay_icon_state_caches

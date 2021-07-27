@@ -250,8 +250,7 @@
 /area/icarus/vessel)
 "be" = (
 /obj/machinery/light/small{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /obj/random/trash,
 /turf/simulated/floor/plating,
@@ -259,15 +258,14 @@
 "bf" = (
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bg" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -373,9 +371,6 @@
 "bA" = (
 /obj/machinery/alarm{
 	alarm_id = "xenobio4_alarm";
-	dir = 2;
-	icon_state = "alarm0";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/structure/bed/roller,
@@ -415,16 +410,13 @@
 /area/icarus/vessel)
 "bH" = (
 /obj/structure/hygiene/shower{
-	dir = 4;
-	icon_state = "shower";
-	pixel_x = 0
+	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "bI" = (
 /obj/structure/hygiene/shower{
-	icon_state = "shower";
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -527,16 +519,13 @@
 /area/icarus/vessel)
 "bY" = (
 /obj/machinery/light/small{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "bZ" = (
 /obj/structure/hygiene/shower{
-	dir = 4;
-	icon_state = "shower";
-	pixel_x = 0
+	dir = 4
 	},
 /obj/random/trash,
 /obj/effect/decal/cleanable/dirt,
@@ -569,7 +558,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/item/chems/food/condiment/flour,
+/obj/item/chems/condiment/flour,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ce" = (
@@ -641,8 +630,7 @@
 "cq" = (
 /obj/item/towel,
 /obj/machinery/light/small{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/white,
@@ -655,7 +643,6 @@
 	alarm_id = "petrov1";
 	dir = 4;
 	pixel_x = -25;
-	pixel_y = 0;
 	rcon_setting = 3
 	},
 /turf/simulated/floor/tiled/white,
@@ -824,24 +811,21 @@
 /obj/machinery/alarm{
 	alarm_id = "xenobio3_alarm";
 	dir = 8;
-	icon_state = "alarm0";
 	pixel_x = 24
 	},
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	pixel_y = 0
+	dir = 9
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cS" = (
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -917,7 +901,6 @@
 /obj/machinery/alarm{
 	alarm_id = "xenobio3_alarm";
 	dir = 8;
-	icon_state = "alarm0";
 	pixel_x = 24
 	},
 /turf/simulated/floor/tiled,
@@ -1045,8 +1028,8 @@
 /area/icarus/vessel)
 "dB" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
@@ -1088,7 +1071,7 @@
 /area/icarus/vessel)
 "dI" = (
 /obj/structure/table/standard,
-/obj/item/chems/food/drinks/cans/cola,
+/obj/item/chems/drinks/cans/cola,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dJ" = (
@@ -1619,7 +1602,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/chems/food/drinks/cans/waterbottle,
+/obj/item/chems/drinks/cans/waterbottle,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fi" = (
@@ -1849,7 +1832,6 @@
 /area/icarus/vessel)
 "fU" = (
 /obj/effect/floor_decal/industrial/loading{
-	icon_state = "loadingarea";
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -1875,16 +1857,16 @@
 /area/icarus/vessel)
 "fY" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /obj/structure/closet/crate/plastic,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "fZ" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
@@ -1896,8 +1878,8 @@
 /area/icarus/vessel)
 "gb" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
@@ -1976,7 +1958,6 @@
 /area/icarus/vessel)
 "gs" = (
 /obj/effect/floor_decal/industrial/loading{
-	icon_state = "loadingarea";
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -1999,8 +1980,8 @@
 /area/icarus/open)
 "gv" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/icarus/open)
@@ -2023,8 +2004,8 @@
 /area/icarus/vessel)
 "gA" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 10
+	dir = 10;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/icarus/open)
@@ -2049,8 +2030,8 @@
 /area/icarus/vessel)
 "gF" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 10
+	dir = 10;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
@@ -2200,7 +2181,6 @@
 /area/icarus/open)
 "hf" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/green{
-	icon_state = "map";
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -2301,11 +2281,9 @@
 	tag_east_con = null;
 	tag_north = 1;
 	tag_north_con = 0.79;
-	tag_south = 0;
 	tag_south_con = null;
 	tag_west = 1;
-	tag_west_con = 0.21;
-	use_power = 1
+	tag_west_con = 0.21
 	},
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
@@ -2323,8 +2301,7 @@
 /area/icarus/vessel)
 "hw" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	pixel_y = 0
+	dir = 9
 	},
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
@@ -2429,7 +2406,6 @@
 /area/icarus/vessel)
 "hL" = (
 /obj/structure/sign/warning/caution{
-	pixel_x = 0;
 	pixel_y = -30
 	},
 /turf/simulated/floor/plating,
@@ -2658,7 +2634,6 @@
 	pixel_y = 16
 	},
 /obj/item/storage/mirror{
-	pixel_x = 0;
 	pixel_y = 30
 	},
 /turf/simulated/floor/tiled/white,
@@ -2669,9 +2644,7 @@
 	},
 /obj/structure/hygiene/sink{
 	dir = 4;
-	icon_state = "sink";
-	pixel_x = 11;
-	pixel_y = 0
+	pixel_x = 11
 	},
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
@@ -2680,7 +2653,6 @@
 	pixel_x = -30
 	},
 /obj/structure/hygiene/sink{
-	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
 	pixel_y = 2

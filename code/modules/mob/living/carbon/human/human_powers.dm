@@ -38,7 +38,7 @@
 			return
 		else if(selected_string && h_style != selected_string)
 			h_style = selected_string
-			regenerate_icons()
+			refresh_visible_overlays()
 			visible_message("<span class='notice'>[src] pauses a moment to style their hair.</span>")
 		else
 			to_chat(src, "<span class ='notice'>You're already using that style.</span>")

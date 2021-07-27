@@ -198,8 +198,7 @@
 	pixel_x = 25
 	},
 /obj/machinery/airlock_sensor{
-	pixel_x = -25;
-	pixel_y = 0
+	pixel_x = -25
 	},
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
@@ -242,8 +241,8 @@
 "aF" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -412,7 +411,6 @@
 /area/magshield/engine)
 "bb" = (
 /obj/machinery/door/blast/regular/open{
-	dir = 1;
 	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
@@ -470,8 +468,8 @@
 /area/magshield/smes_storage)
 "bj" = (
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
@@ -493,8 +491,7 @@
 /obj/machinery/power/smes/buildable/outpost_substation,
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
@@ -518,22 +515,21 @@
 /area/magshield/engine)
 "bs" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 6
+	dir = 6;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "bt" = (
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "bu" = (
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/door/blast/regular/open{
-	dir = 1;
 	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
@@ -543,7 +539,6 @@
 "bv" = (
 /obj/effect/wingrille_spawn/reinforced_borosilicate/full,
 /obj/machinery/door/blast/regular/open{
-	dir = 1;
 	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
@@ -565,8 +560,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -579,8 +573,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
@@ -704,8 +697,8 @@
 "bV" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -731,8 +724,8 @@
 	dir = 8
 	},
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
@@ -873,8 +866,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/generator{
-	anchored = 1;
-	dir = 2
+	anchored = 1
 	},
 /turf/simulated/floor/plating,
 /area/magshield/engine)
@@ -882,8 +874,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
@@ -978,8 +969,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
@@ -1025,8 +1015,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/item/ore,
 /turf/simulated/floor/airless,
@@ -1049,8 +1038,7 @@
 	},
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
@@ -1061,8 +1049,8 @@
 /area/magshield/smes_storage)
 "cJ" = (
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /obj/random/junk,
 /turf/simulated/floor/airless,
@@ -1099,8 +1087,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -1112,8 +1099,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /obj/random/tool,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1128,8 +1114,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -1149,8 +1134,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -1164,8 +1148,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -1184,8 +1167,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
@@ -1199,8 +1181,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
@@ -1215,8 +1196,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -1230,8 +1210,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -1245,8 +1224,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /mob/living/simple_animal/hostile/carp,
 /turf/simulated/floor/airless,
@@ -1261,8 +1239,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -1272,9 +1249,7 @@
 	level = 2
 	},
 /obj/machinery/power/apc{
-	dir = 2;
 	name = "south bump";
-	operating = 1;
 	pixel_y = -24
 	},
 /obj/structure/cable{
@@ -1307,8 +1282,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock,
 /turf/simulated/floor/airless,
@@ -1321,8 +1295,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/random/obstruction,
 /turf/simulated/floor/airless,
@@ -1336,8 +1309,8 @@
 /area/magshield/north)
 "dk" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1383,8 +1356,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1481,9 +1453,9 @@
 	pixel_x = 24
 	},
 /obj/structure/cable{
+	d2 = 2;
 	icon_state = "0-2";
-	pixel_y = 1;
-	d2 = 2
+	pixel_y = 1
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1534,8 +1506,8 @@
 /area/magshield/north)
 "dX" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 6
+	dir = 6;
+	icon_state = "warning"
 	},
 /obj/random/toolbox,
 /turf/simulated/floor/airless,
@@ -1544,8 +1516,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1593,8 +1564,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1605,8 +1575,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1617,8 +1586,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1632,8 +1600,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1645,8 +1612,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1661,8 +1627,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1671,8 +1636,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -1692,8 +1656,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1705,8 +1668,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1720,8 +1682,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -1803,8 +1764,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1817,8 +1777,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1832,8 +1791,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/airless,
@@ -1846,17 +1804,15 @@
 	dir = 10
 	},
 /obj/structure/cable{
-	icon_state = "1-8";
-	dir = 4;
-	pixel_y = 0;
 	d1 = 16;
-	d2 = 0
+	d2 = 0;
+	dir = 4;
+	icon_state = "1-8"
 	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1868,28 +1824,24 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "eE" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 8;
+	dir = 8
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	pixel_x = 0;
 	pixel_y = 25
 	},
 /obj/machinery/airlock_sensor{
-	pixel_x = 0;
 	pixel_y = -25
 	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1898,8 +1850,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1911,20 +1862,10 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
-"eH" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
-	},
-/turf/simulated/floor/airless,
-/area/space)
 "eI" = (
 /obj/structure/magshield/maggen,
 /obj/structure/cable{
@@ -1941,8 +1882,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1953,8 +1893,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -2052,8 +1991,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -2073,8 +2011,7 @@
 	pixel_x = 25
 	},
 /obj/machinery/airlock_sensor{
-	pixel_x = -25;
-	pixel_y = 0
+	pixel_x = -25
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -2109,8 +2046,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -2141,7 +2077,6 @@
 /area/magshield/east)
 "fq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	icon_state = "map_universal";
 	dir = 4
 	},
 /turf/simulated/floor/airless,
@@ -2152,8 +2087,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -2177,8 +2111,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/magshield/west)
@@ -2203,10 +2136,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
-"fz" = (
-/obj/item/frame/light,
-/turf/simulated/floor/airless,
-/area/magshield/east)
 "fA" = (
 /turf/simulated/floor/tiled,
 /area/magshield/west)
@@ -2228,14 +2157,9 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/magshield/west)
-"fF" = (
-/obj/item/frame/light,
-/turf/simulated/floor/tiled,
 /area/magshield/west)
 "fG" = (
 /obj/structure/reagent_dispensers/water_cooler,
@@ -2266,8 +2190,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/magshield/west)
@@ -2275,8 +2198,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/computer/modular{
 	dir = 8
@@ -2293,8 +2215,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/magshield/west)
@@ -2327,8 +2248,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -2348,7 +2268,6 @@
 /area/magshield/east)
 "fV" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
-	icon_state = "map";
 	dir = 1
 	},
 /turf/simulated/floor/airless,
@@ -2411,8 +2330,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/magshield/west)
@@ -2430,8 +2348,8 @@
 /area/magshield/east)
 "gi" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 5
+	dir = 5;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -2455,15 +2373,14 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/item/frame/light,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "gn" = (
 /obj/structure/table/steel,
-/obj/item/chems/food/drinks/coffee,
+/obj/item/chems/drinks/coffee,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "go" = (
@@ -2542,8 +2459,8 @@
 /area/magshield/east)
 "gC" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 6
+	dir = 6;
+	icon_state = "warning"
 	},
 /obj/machinery/portable_atmospherics/canister,
 /turf/simulated/floor/airless,
@@ -2556,8 +2473,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -2629,8 +2545,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -2671,8 +2586,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/random/junk,
 /turf/simulated/floor/tiled/dark,
@@ -2684,8 +2598,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -2713,7 +2626,7 @@
 /area/magshield/west)
 "gZ" = (
 /obj/structure/table/steel,
-/obj/item/chems/food/drinks/coffee,
+/obj/item/chems/drinks/coffee,
 /obj/random/smokes,
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
@@ -2750,8 +2663,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -2764,11 +2676,9 @@
 /area/magshield/east)
 "hh" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	pixel_x = 0;
 	pixel_y = 25
 	},
 /obj/machinery/airlock_sensor{
-	pixel_x = 0;
 	pixel_y = -25
 	},
 /turf/simulated/floor/airless,
@@ -2806,8 +2716,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/magshield/west)
@@ -2917,11 +2826,10 @@
 	pixel_x = -24
 	},
 /obj/structure/cable{
-	icon_state = "0-2";
-	dir = 4;
-	pixel_y = 0;
 	d1 = 16;
-	d2 = 0
+	d2 = 0;
+	dir = 4;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -3168,10 +3076,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
-"io" = (
-/obj/item/frame/light,
-/turf/simulated/floor/tiled,
-/area/magshield/west)
 "ip" = (
 /turf/simulated/wall/r_wall,
 /area/magshield/south)
@@ -3200,8 +3104,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/magshield/west)
@@ -3214,7 +3117,6 @@
 /area/magshield/south)
 "iw" = (
 /obj/structure/hygiene/shower{
-	icon_state = "shower";
 	dir = 8
 	},
 /obj/machinery/light/small{
@@ -3254,16 +3156,16 @@
 /area/magshield/west)
 "iD" = (
 /obj/structure/table/steel,
-/obj/item/chems/food/drinks/cans/space_up,
-/obj/item/chems/food/drinks/cans/space_up{
+/obj/item/chems/drinks/cans/space_up,
+/obj/item/chems/drinks/cans/space_up{
 	pixel_x = 5;
 	pixel_y = 4
 	},
-/obj/item/chems/food/drinks/cans/space_up{
+/obj/item/chems/drinks/cans/space_up{
 	pixel_x = -8;
 	pixel_y = 5
 	},
-/obj/item/chems/food/drinks/cans/space_up{
+/obj/item/chems/drinks/cans/space_up{
 	pixel_x = -2;
 	pixel_y = -4
 	},
@@ -3284,14 +3186,12 @@
 "iH" = (
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iI" = (
 /obj/structure/hygiene/shower{
-	icon_state = "shower";
 	dir = 8
 	},
 /obj/random/trash,
@@ -3312,8 +3212,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/magshield/west)
@@ -3342,8 +3241,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/magshield/south)
@@ -3379,17 +3277,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
-"iV" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/item/frame/light,
-/turf/simulated/floor/tiled,
-/area/magshield/south)
 "iW" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
@@ -3415,17 +3302,6 @@
 "jb" = (
 /obj/machinery/door/airlock,
 /turf/simulated/floor/tiled/white/usedup,
-/area/magshield/south)
-"jc" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
-	},
-/turf/simulated/floor/tiled,
 /area/magshield/south)
 "jd" = (
 /turf/simulated/floor/tiled,
@@ -3549,7 +3425,7 @@
 	name = "plastic table frame"
 	},
 /obj/item/trash/plate,
-/obj/item/chems/food/snacks/flatbread,
+/obj/item/chems/food/flatbread,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jw" = (
@@ -3608,11 +3484,9 @@
 	id_tag = "merchant_station_vent"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	pixel_x = 0;
 	pixel_y = 25
 	},
 /obj/machinery/airlock_sensor{
-	pixel_x = 0;
 	pixel_y = -25
 	},
 /turf/simulated/floor/airless,
@@ -3637,15 +3511,13 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/structure/cable{
-	icon_state = "0-2";
-	dir = 4;
-	pixel_y = 0;
 	d1 = 16;
-	d2 = 0
+	d2 = 0;
+	dir = 4;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
 /area/magshield/south)
@@ -3741,17 +3613,14 @@
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "jY" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
-	icon_state = "sink";
-	pixel_x = 11;
-	pixel_y = 0
+	pixel_x = 11
 	},
 /obj/item/soap,
 /turf/simulated/floor/tiled/white,
@@ -3854,7 +3723,7 @@
 /area/magshield/south)
 "kp" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/chems/food/snacks/hotdog,
+/obj/item/chems/food/hotdog,
 /turf/simulated/floor/tiled/freezer,
 /area/magshield/south)
 "kq" = (
@@ -3873,9 +3742,7 @@
 "ks" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
-	icon_state = "sink";
-	pixel_x = 11;
-	pixel_y = 0
+	pixel_x = 11
 	},
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
@@ -3897,8 +3764,7 @@
 "kv" = (
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/magshield/south)
@@ -4015,7 +3881,7 @@
 /area/magshield/south)
 "kI" = (
 /obj/structure/table/marble,
-/obj/item/chems/food/snacks/chips,
+/obj/item/chems/food/chips,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "kJ" = (
@@ -4029,11 +3895,11 @@
 /area/magshield/south)
 "kL" = (
 /obj/structure/closet/secure_closet/freezer/meat,
-/obj/item/chems/food/snacks/meat,
-/obj/item/chems/food/snacks/meat,
-/obj/item/chems/food/snacks/meat,
-/obj/item/chems/food/snacks/meat,
-/obj/item/chems/food/snacks/meat,
+/obj/item/chems/food/meat,
+/obj/item/chems/food/meat,
+/obj/item/chems/food/meat,
+/obj/item/chems/food/meat,
+/obj/item/chems/food/meat,
 /turf/simulated/floor/tiled/freezer,
 /area/magshield/south)
 "kM" = (
@@ -4317,7 +4183,6 @@
 /area/magshield/west)
 "Eo" = (
 /obj/machinery/atmospherics/omni/filter{
-	tag_east = 0;
 	tag_north = 2;
 	tag_south = 1;
 	tag_west = 4
@@ -16936,7 +16801,7 @@ aa
 aa
 ab
 ap
-eH
+ke
 ap
 ab
 aa
@@ -17138,7 +17003,7 @@ aa
 aa
 ab
 aa
-eH
+ke
 aa
 ab
 aa
@@ -17340,7 +17205,7 @@ aa
 aa
 ab
 aa
-eH
+ke
 aa
 ab
 aa
@@ -17542,7 +17407,7 @@ aa
 aa
 ab
 aa
-eH
+ke
 aa
 ab
 aa
@@ -17744,7 +17609,7 @@ aa
 aa
 ab
 aa
-eH
+ke
 aa
 aa
 aa
@@ -17946,7 +17811,7 @@ aa
 aa
 ab
 aa
-eH
+ke
 aa
 aa
 aa
@@ -18148,7 +18013,7 @@ aa
 aa
 ab
 aa
-eH
+ke
 aa
 aa
 aa
@@ -18350,7 +18215,7 @@ aa
 de
 ef
 et
-eH
+ke
 aa
 aa
 aa
@@ -18775,7 +18640,7 @@ fA
 hW
 fA
 hF
-io
+iG
 fA
 fA
 hF
@@ -19791,8 +19656,8 @@ it
 it
 iK
 iO
-jc
-jc
+ix
+ix
 jK
 kg
 kw
@@ -20172,7 +20037,7 @@ eL
 dj
 dj
 fu
-fF
+iG
 fP
 gb
 fZ
@@ -20386,7 +20251,7 @@ fA
 ga
 ga
 ga
-fF
+iG
 ga
 ga
 ga
@@ -28476,7 +28341,7 @@ ix
 ix
 ix
 ix
-iV
+kt
 jg
 ix
 jZ
@@ -29261,12 +29126,12 @@ eE
 de
 fi
 fi
-fz
+gx
 fi
 fU
 fi
 fi
-fz
+gx
 fi
 fi
 fi
@@ -29863,7 +29728,7 @@ aa
 aa
 ab
 aa
-eH
+ke
 fc
 ab
 aa
@@ -30065,7 +29930,7 @@ aa
 aa
 ab
 aa
-eH
+ke
 aa
 ab
 aa
@@ -30267,7 +30132,7 @@ aa
 aa
 ab
 aa
-eH
+ke
 aa
 ab
 aa
@@ -30469,7 +30334,7 @@ aa
 aa
 ab
 aa
-eH
+ke
 aa
 ab
 aa
@@ -30671,7 +30536,7 @@ aa
 aa
 ab
 aa
-eH
+ke
 aa
 ab
 aa
@@ -30873,7 +30738,7 @@ aa
 aa
 ab
 aa
-eH
+ke
 aa
 ab
 aa
@@ -31075,7 +30940,7 @@ aa
 aa
 ab
 ap
-eH
+ke
 ap
 ab
 aa

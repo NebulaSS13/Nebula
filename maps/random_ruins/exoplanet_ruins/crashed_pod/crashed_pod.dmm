@@ -12,7 +12,6 @@
 /area/map_template/crashed_pod)
 "ad" = (
 /obj/structure/shuttle/engine/heater{
-	icon_state = "heater";
 	dir = 1
 	},
 /obj/structure/wall_frame,
@@ -23,7 +22,6 @@
 /area/map_template/crashed_pod)
 "ae" = (
 /obj/structure/shuttle/engine/heater{
-	icon_state = "heater";
 	dir = 1
 	},
 /obj/structure/wall_frame,
@@ -39,7 +37,6 @@
 /area/map_template/crashed_pod)
 "ag" = (
 /obj/structure/shuttle/engine/heater{
-	icon_state = "heater";
 	dir = 1
 	},
 /obj/structure/wall_frame,
@@ -54,8 +51,7 @@
 /obj/machinery/alarm{
 	dir = 4;
 	locked = 0;
-	pixel_x = -25;
-	pixel_y = 0
+	pixel_x = -25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/effect/decal/cleanable/dirt,
@@ -64,7 +60,7 @@
 "ai" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/trash/raisins,
-/obj/item/chems/food/drinks/glass2/fitnessflask,
+/obj/item/chems/drinks/glass2/fitnessflask,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "aj" = (
@@ -78,8 +74,8 @@
 	dir = 1
 	},
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -114,12 +110,11 @@
 /area/map_template/crashed_pod)
 "ao" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
-	icon_state = "map";
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/item/trash/tastybread,
-/obj/item/chems/food/drinks/cans/speer,
+/obj/item/chems/drinks/cans/speer,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "ap" = (
@@ -160,15 +155,13 @@
 "as" = (
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/machinery/power/apc{
-	dir = 2;
 	locked = 0;
 	name = "south bump";
-	operating = 1;
 	pixel_y = -28
 	},
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/filth,
@@ -190,7 +183,6 @@
 /area/map_template/crashed_pod)
 "au" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan{
-	icon_state = "map";
 	dir = 8
 	},
 /obj/structure/reagent_dispensers/fueltank,
@@ -204,7 +196,6 @@
 /area/map_template/crashed_pod)
 "aw" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
-	icon_state = "map";
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -241,7 +232,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/engineering,
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
-	icon_state = "map";
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -304,7 +294,7 @@
 /obj/item/bedsheet/orange,
 /obj/item/stock_parts/matter_bin/adv,
 /obj/item/stock_parts/micro_laser/ultra,
-/obj/item/chems/food/snacks/liquidfood,
+/obj/item/chems/food/liquidfood,
 /obj/item/stack/material/brick/mapped/sandstone/fifty,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
@@ -329,9 +319,7 @@
 /obj/structure/curtain/open/shower/engineering,
 /obj/structure/hygiene/shower{
 	dir = 8;
-	icon_state = "shower";
-	pixel_x = -6;
-	pixel_y = 0
+	pixel_x = -6
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -358,7 +346,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
-	icon_state = "map";
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -384,7 +371,6 @@
 /area/map_template/crashed_pod)
 "aO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	icon_state = "map_universal";
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -555,7 +541,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/recharger,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/chems/food/drinks/glass2/coffeecup/metal,
+/obj/item/chems/drinks/glass2/coffeecup/metal,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/crashed_pod)
 "bk" = (
@@ -622,12 +608,12 @@
 /area/map_template/crashed_pod)
 "bu" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/chems/food/condiment/small/saltshaker,
-/obj/item/chems/food/condiment/small/peppermill,
+/obj/item/chems/condiment/small/saltshaker,
+/obj/item/chems/condiment/small/peppermill,
 /obj/effect/decal/cleanable/flour,
 /obj/item/trash/candy/proteinbar,
 /obj/machinery/reagentgrinder,
-/obj/item/chems/food/condiment/small/sugar,
+/obj/item/chems/condiment/small/sugar,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
 "bv" = (
@@ -648,8 +634,7 @@
 /obj/machinery/alarm{
 	dir = 4;
 	locked = 0;
-	pixel_x = -25;
-	pixel_y = 0
+	pixel_x = -25
 	},
 /obj/structure/bed/chair{
 	dir = 1
@@ -810,7 +795,7 @@
 /obj/item/binoculars,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/trash/candy/proteinbar,
-/obj/item/chems/food/drinks/cans/speer,
+/obj/item/chems/drinks/cans/speer,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
@@ -970,23 +955,23 @@
 /obj/item/storage/fancy/egg_box,
 /obj/item/storage/fancy/egg_box,
 /obj/item/storage/fancy/egg_box,
-/obj/item/chems/food/condiment/enzyme,
-/obj/item/chems/food/drinks/milk,
-/obj/item/chems/food/drinks/milk,
+/obj/item/chems/condiment/enzyme,
+/obj/item/chems/drinks/milk,
+/obj/item/chems/drinks/milk,
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
 /obj/item/beartrap,
 /obj/item/knife/kitchen/cleaver,
-/obj/item/chems/food/snacks/liquidfood,
-/obj/item/chems/food/snacks/liquidfood,
-/obj/item/chems/food/snacks/liquidfood,
-/obj/item/chems/food/snacks/liquidfood,
-/obj/item/chems/food/snacks/liquidfood,
-/obj/item/chems/food/snacks/liquidfood,
-/obj/item/chems/food/snacks/liquidfood,
-/obj/item/chems/food/snacks/liquidfood,
+/obj/item/chems/food/liquidfood,
+/obj/item/chems/food/liquidfood,
+/obj/item/chems/food/liquidfood,
+/obj/item/chems/food/liquidfood,
+/obj/item/chems/food/liquidfood,
+/obj/item/chems/food/liquidfood,
+/obj/item/chems/food/liquidfood,
+/obj/item/chems/food/liquidfood,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "bZ" = (
@@ -1002,7 +987,7 @@
 /obj/item/storage/backpack/dufflebag/eng,
 /obj/item/ashtray,
 /obj/item/paper_bin,
-/obj/item/chems/food/drinks/cans/speer,
+/obj/item/chems/drinks/cans/speer,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/pen,
 /turf/simulated/floor/tiled/dark,
@@ -1042,12 +1027,12 @@
 /obj/item/cell/crap,
 /obj/item/storage/box/lights,
 /obj/item/scanner/gas,
-/obj/item/chems/food/drinks/cans/speer,
-/obj/item/chems/food/drinks/cans/speer,
-/obj/item/chems/food/drinks/cans/speer,
+/obj/item/chems/drinks/cans/speer,
+/obj/item/chems/drinks/cans/speer,
+/obj/item/chems/drinks/cans/speer,
 /obj/item/storage/box/monkeycubes,
-/obj/item/chems/food/drinks/bottle/vodka,
-/obj/item/chems/food/drinks/bottle/agedwhiskey,
+/obj/item/chems/drinks/bottle/vodka,
+/obj/item/chems/drinks/bottle/agedwhiskey,
 /obj/item/tracker_electronics,
 /obj/item/pen/blue,
 /obj/item/pen/green,

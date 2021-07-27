@@ -88,8 +88,8 @@
 /area/derelict/ship)
 "al" = (
 /obj/structure/shuttle/engine/propulsion{
-	icon_state = "burst_r";
-	dir = 4
+	dir = 4;
+	icon_state = "burst_r"
 	},
 /turf/space,
 /area/derelict/ship)
@@ -117,7 +117,6 @@
 /area/derelict/ship)
 "aq" = (
 /obj/structure/shuttle/engine/heater{
-	icon_state = "heater";
 	dir = 4
 	},
 /obj/structure/window/reinforced{
@@ -127,7 +126,6 @@
 /area/derelict/ship)
 "ar" = (
 /obj/structure/shuttle/engine/propulsion{
-	icon_state = "propulsion";
 	dir = 4
 	},
 /turf/space,
@@ -244,8 +242,8 @@
 /area/derelict/ship)
 "aI" = (
 /obj/structure/shuttle/engine/propulsion{
-	icon_state = "burst_l";
-	dir = 4
+	dir = 4;
+	icon_state = "burst_l"
 	},
 /turf/space,
 /area/derelict/ship)
@@ -342,8 +340,8 @@
 /area/derelict/ship)
 "aV" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
+	dir = 8;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
@@ -633,8 +631,8 @@
 /area/derelict/ship)
 "bX" = (
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/machinery/power/apc/high/inactive{
 	dir = 8;
@@ -761,8 +759,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/derelict/ship)
@@ -1246,9 +1243,6 @@
 	icon_state = "dmg2"
 	},
 /area/constructionsite/storage)
-"eh" = (
-/turf/simulated/floor/airless,
-/area/constructionsite/storage)
 "ei" = (
 /obj/structure/table,
 /obj/random/medical,
@@ -1257,11 +1251,9 @@
 "ej" = (
 /obj/machinery/shieldgen,
 /obj/structure/window/basic{
-	icon_state = "window";
 	dir = 8
 	},
 /obj/structure/window/basic{
-	icon_state = "window";
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1270,11 +1262,9 @@
 "ek" = (
 /obj/machinery/shieldgen,
 /obj/structure/window/basic{
-	icon_state = "window";
 	dir = 4
 	},
 /obj/structure/window/basic{
-	icon_state = "window";
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1283,11 +1273,9 @@
 "el" = (
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/structure/window/basic{
-	icon_state = "window";
 	dir = 8
 	},
 /obj/structure/window/basic{
-	icon_state = "window";
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1296,11 +1284,9 @@
 "em" = (
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/structure/window/basic{
-	icon_state = "window";
 	dir = 4
 	},
 /obj/structure/window/basic{
-	icon_state = "window";
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1309,8 +1295,8 @@
 "en" = (
 /obj/structure/table/reinforced,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
@@ -1324,14 +1310,6 @@
 "ep" = (
 /obj/structure/table/reinforced,
 /obj/item/stack/material/reinforced/mapped/plasteel/fifty,
-/obj/random/tech_supply,
-/obj/random/maintenance,
-/turf/simulated/floor/tiled/dark,
-/area/constructionsite/teleporter)
-"eq" = (
-/obj/structure/table/reinforced,
-/obj/random/powercell,
-/obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/dark,
@@ -1367,7 +1345,6 @@
 "ew" = (
 /obj/machinery/shieldgen,
 /obj/structure/window/basic{
-	icon_state = "window";
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1376,7 +1353,6 @@
 "ex" = (
 /obj/machinery/shieldgen,
 /obj/structure/window/basic{
-	icon_state = "window";
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1385,7 +1361,6 @@
 "ey" = (
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/structure/window/basic{
-	icon_state = "window";
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1394,7 +1369,6 @@
 "ez" = (
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/structure/window/basic{
-	icon_state = "window";
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1449,7 +1423,6 @@
 /obj/machinery/button/access/exterior{
 	id_tag = "constructionsite_airlock";
 	pixel_x = 20;
-	pixel_y = 0;
 	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark/airless,
@@ -1461,12 +1434,11 @@
 /obj/machinery/button/access/interior{
 	id_tag = "constructionsite_airlock";
 	pixel_x = -20;
-	pixel_y = 0;
 	req_access = newlist()
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 1
+	dir = 1;
+	icon_state = "warningcorner"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
@@ -1524,8 +1496,8 @@
 	id_tag = "constructionsite_vent"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 9
+	dir = 9;
+	icon_state = "warning"
 	},
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
@@ -1539,8 +1511,8 @@
 /area/constructionsite/teleporter)
 "eV" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite/teleporter)
@@ -1573,7 +1545,6 @@
 /obj/machinery/light/small,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	id_tag = "constructionsite_airlock";
-	pixel_x = 0;
 	pixel_y = -25;
 	req_access = newlist();
 	tag_airpump = "constructionsite_vent";
@@ -1582,8 +1553,8 @@
 	tag_interior_door = "constructionsite_inner"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 10
+	dir = 10;
+	icon_state = "warning"
 	},
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
@@ -1591,12 +1562,11 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/blue,
 /obj/machinery/airlock_sensor{
 	id_tag = "constructionsite_sensor";
-	pixel_x = 0;
 	pixel_y = -25
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 6
+	dir = 6;
+	icon_state = "warning"
 	},
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
@@ -1616,8 +1586,8 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite/teleporter)
@@ -1643,9 +1613,7 @@
 /turf/simulated/floor/tiled,
 /area/constructionsite/teleporter)
 "fh" = (
-/obj/machinery/power/smes/batteryrack{
-	should_be_mapped = 1
-	},
+/obj/machinery/power/smes/batteryrack,
 /obj/structure/cable/blue{
 	d2 = 2;
 	icon_state = "0-2"
@@ -1683,23 +1651,20 @@
 /area/constructionsite/storage)
 "fn" = (
 /obj/structure/window/basic{
-	icon_state = "window";
 	dir = 1
 	},
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/atmospherics/portables_connector{
-	icon_state = "map_connector";
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 4
+	dir = 4;
+	icon_state = "warningcorner"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fo" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/blue{
-	icon_state = "map";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -1751,7 +1716,6 @@
 /obj/structure/window/basic,
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/atmospherics/portables_connector{
-	icon_state = "map_connector";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -1766,11 +1730,9 @@
 /obj/structure/cable/blue,
 /obj/machinery/alarm{
 	dir = 8;
-	icon_state = "alarm0";
 	pixel_x = 24
 	},
 /obj/machinery/power/apc/high/inactive{
-	dir = 2;
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -1824,8 +1786,8 @@
 /area/constructionsite/teleporter)
 "fH" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 9
+	dir = 9;
+	icon_state = "warning"
 	},
 /obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/tiled/dark,
@@ -1833,16 +1795,16 @@
 "fI" = (
 /obj/machinery/teleport/station,
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fJ" = (
 /obj/machinery/teleport/hub,
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
@@ -1939,7 +1901,6 @@
 "gf" = (
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "door_closed";
-	locked = 0;
 	name = "AI Upload Access"
 	},
 /turf/simulated/floor/bluegrid/airless,
@@ -1972,7 +1933,6 @@
 "gn" = (
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "door_closed";
-	locked = 0;
 	name = "AI Upload"
 	},
 /turf/simulated/floor/bluegrid/airless,
@@ -2158,7 +2118,6 @@
 "gZ" = (
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "door_closed";
-	locked = 0;
 	name = "AI Upload Access"
 	},
 /turf/simulated/floor/bluegrid/airless,
@@ -2483,8 +2442,8 @@
 /area/constructionsite/medical)
 "ip" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
@@ -2531,8 +2490,8 @@
 	name = "Mixed Air Supply Control";
 	output_tag = "d_air_out";
 	pressure_setting = 2000;
-	sensor_tag = "d_air_sensor";
-	sensor_name = "Air Supply Tank"
+	sensor_name = "Air Supply Tank";
+	sensor_tag = "d_air_sensor"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
@@ -2561,15 +2520,15 @@
 /obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
-	external_pressure_bound_default = 0
+	external_pressure_bound_default = 0;
 	icon_state = "map_vent_in";
 	id_tag = "d_air_out";
 	internal_pressure_bound = 2000;
 	internal_pressure_bound_default = 2000;
-	use_power = 1;
 	pressure_checks = 2;
 	pressure_checks_default = 2;
-	pump_direction = 0
+	pump_direction = 0;
+	use_power = 1
 	},
 /turf/simulated/floor/reinforced/airmix,
 /area/constructionsite/atmospherics)
@@ -2626,7 +2585,6 @@
 /area/constructionsite/hallway/aft)
 "iK" = (
 /obj/effect/floor_decal/industrial/warning/dust{
-	icon_state = "warning_dust";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/airless,
@@ -2638,14 +2596,12 @@
 "iM" = (
 /obj/effect/floor_decal/plaque{
 	desc = "In memory of Earl Whitenmeinster. We'll never forget you.";
-	icon_state = "plaque";
 	name = "Whitenmeister Memorial Hall Plaque"
 	},
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/aft)
 "iN" = (
 /obj/effect/floor_decal/industrial/warning/dust{
-	icon_state = "warning_dust";
 	dir = 8
 	},
 /turf/simulated/floor/airless,
@@ -2655,8 +2611,8 @@
 	input_tag = "d_o2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d_o2_out";
-	sensor_tag = "d_o2_sensor";
-	sensor_name = "Oxygen Supply Tank"
+	sensor_name = "Oxygen Supply Tank";
+	sensor_tag = "d_o2_sensor"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
@@ -2673,10 +2629,10 @@
 	initialize_directions = 1;
 	internal_pressure_bound = 4000;
 	internal_pressure_bound_default = 4000;
-	use_power = 1;
 	pressure_checks = 2;
 	pressure_checks_default = 2;
-	pump_direction = 0
+	pump_direction = 0;
+	use_power = 1
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/constructionsite/atmospherics)
@@ -2753,8 +2709,8 @@
 	input_tag = "d_n2_in";
 	name = "Nitrogen Supply Control";
 	output_tag = "d_n2_out";
-	sensor_tag = "d_n2_sensor";
-	sensor_name = "N2 Supply Tank"
+	sensor_name = "N2 Supply Tank";
+	sensor_tag = "d_n2_sensor"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
@@ -2771,10 +2727,10 @@
 	initialize_directions = 1;
 	internal_pressure_bound = 4000;
 	internal_pressure_bound_default = 4000;
-	use_power = 1;
 	pressure_checks = 2;
 	pressure_checks_default = 2;
-	pump_direction = 0
+	pump_direction = 0;
+	use_power = 1
 	},
 /turf/simulated/floor/reinforced/nitrogen,
 /area/constructionsite/atmospherics)
@@ -2837,7 +2793,6 @@
 "jp" = (
 /obj/structure/cable/blue,
 /obj/machinery/power/apc/high/inactive{
-	dir = 2;
 	name = "south bump";
 	pixel_y = -24
 	},
@@ -3137,9 +3092,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
-"kB" = (
-/turf/simulated/floor/airless,
-/area/constructionsite/engineering)
 "kC" = (
 /obj/effect/shuttle_landmark/derelict/nav6,
 /turf/space,
@@ -3163,9 +3115,6 @@
 "kH" = (
 /obj/structure/sign/warning/compressed_gas,
 /turf/simulated/wall,
-/area/constructionsite/engineering)
-"kI" = (
-/turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "kJ" = (
 /turf/space,
@@ -3416,16 +3365,16 @@
 "lC" = (
 /obj/machinery/constructable_frame/computerframe,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lD" = (
 /obj/machinery/teleport/station,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
 /area/AIsattele)
@@ -3526,8 +3475,8 @@
 /area/AIsattele)
 "lW" = (
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /turf/simulated/floor/airless,
 /area/AIsattele)
@@ -3589,8 +3538,8 @@
 	id_tag = "constructionsite_vent"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 5
+	dir = 5;
+	icon_state = "warning"
 	},
 /obj/machinery/camera/motion{
 	c_tag = "Construction Site Teleporter Airlock"
@@ -20431,9 +20380,9 @@ dY
 er
 eD
 eL
-eh
+fB
 fj
-eh
+fB
 dY
 dY
 bo
@@ -20632,10 +20581,10 @@ dY
 ec
 es
 eD
-eh
-eh
+fB
+fB
 fk
-eh
+fB
 fx
 dY
 bo
@@ -20832,12 +20781,12 @@ dA
 bo
 dY
 ed
-eh
+fB
 eD
-eh
+fB
 eY
 fj
-eh
+fB
 eN
 dY
 bo
@@ -21037,9 +20986,9 @@ ee
 et
 eD
 eM
-eh
+fB
 eD
-eh
+fB
 fy
 dY
 bo
@@ -21236,12 +21185,12 @@ dz
 bo
 dY
 ef
-eh
+fB
 eE
-eh
-eh
+fB
+fB
 fl
-eh
+fB
 fz
 dY
 bo
@@ -21438,12 +21387,12 @@ dz
 bo
 dY
 eg
-eh
+fB
 eD
 eN
-eh
+fB
 fj
-eh
+fB
 fA
 dY
 bo
@@ -21554,10 +21503,10 @@ kz
 kz
 kz
 kZ
-kB
-kB
-kB
-kB
+lm
+lm
+lm
+lm
 kz
 kz
 kJ
@@ -21639,14 +21588,14 @@ cw
 dz
 bo
 dY
-eh
-eh
+fB
+fB
 eF
-eh
-eh
+fB
+fB
 fm
 es
-eh
+fB
 dY
 bu
 dz
@@ -21752,13 +21701,13 @@ kz
 kz
 kz
 kz
-kB
-kB
-kB
+lm
+lm
+lm
 kK
 kK
 kK
-kB
+lm
 kK
 kF
 kz
@@ -21841,14 +21790,14 @@ cN
 dz
 bo
 dZ
-eh
+fB
 es
 eD
-eh
-eh
+fB
+fB
 eF
 ft
-eh
+fB
 dY
 bo
 dz
@@ -21952,34 +21901,34 @@ iY
 ju
 kz
 kF
-kB
-kB
+lm
+lm
 kQ
-kB
+lm
 kK
-kB
+lm
 lb
 le
-kB
-kB
-kB
+lm
+lm
+lm
 kz
-kB
-kB
+lm
+lm
 kK
 le
 kz
-kB
-kB
-kB
-kB
+lm
+lm
+lm
+lm
 lk
-kB
-kB
-kB
-kB
-kB
-kB
+lm
+lm
+lm
+lm
+lm
+lm
 aa
 aa
 aa
@@ -22047,9 +21996,9 @@ ei
 eu
 eD
 eO
-eh
+fB
 eD
-eh
+fB
 fB
 dY
 bo
@@ -22154,12 +22103,12 @@ iY
 ju
 kz
 kz
-kB
+lm
 kK
 kK
-kB
-kB
-kB
+lm
+lm
+lm
 kK
 kK
 kK
@@ -22167,22 +22116,22 @@ kK
 kK
 lo
 kK
-kB
-kB
-kB
+lm
+lm
+lm
 kz
-kB
-kB
+lm
+lm
 lZ
-kB
-kB
-kB
-kB
-kB
-kB
-kB
+lm
+lm
+lm
+lm
+lm
+lm
+lm
 lZ
-kB
+lm
 aa
 aa
 aa
@@ -22355,17 +22304,17 @@ aa
 iY
 ju
 kz
-kB
+lm
 kK
 kK
-kB
+lm
 kK
-kB
+lm
 kK
-kB
+lm
 kK
 kK
-kB
+lm
 kV
 kM
 lr
@@ -22373,18 +22322,18 @@ kK
 lB
 lM
 kz
-kB
+lm
 aR
-kB
-aR
-aR
-aR
-kB
+lm
 aR
 aR
-kB
-kB
-kB
+aR
+lm
+aR
+aR
+lm
+lm
+lm
 aa
 aa
 aa
@@ -22450,8 +22399,8 @@ bo
 bo
 bo
 dY
-eh
-eh
+fB
+fB
 dY
 bo
 bu
@@ -22557,10 +22506,10 @@ aa
 iY
 ju
 kz
-kB
+lm
 kL
 kO
-kB
+lm
 kU
 kW
 kO
@@ -22568,25 +22517,25 @@ kO
 lf
 li
 kO
-kB
+lm
 kz
 kP
 kP
 kP
 kP
 kz
-kB
+lm
 aR
 ma
-kB
-kB
-kB
+lm
+lm
+lm
 ma
-kB
-kB
-kB
+lm
+lm
+lm
 ma
-kB
+lm
 aa
 aa
 aa
@@ -22652,7 +22601,7 @@ bo
 bu
 ev
 dY
-eh
+fB
 es
 dY
 bo
@@ -22779,16 +22728,16 @@ lN
 kz
 kz
 aR
-kB
+lm
 aR
 aR
 aR
-kB
+lm
 aR
 aR
 aR
-kB
-kB
+lm
+lm
 aa
 aa
 aa
@@ -22959,9 +22908,9 @@ gO
 gO
 aR
 kz
-kB
+lm
 kz
-kB
+lm
 kz
 kE
 kE
@@ -22973,24 +22922,24 @@ kE
 kE
 kE
 kz
-kB
+lm
 kK
 lw
 lG
-kB
-kB
+lm
+lm
 kz
-kB
-kB
+lm
+lm
 aR
 aa
 aR
-kB
+lm
 aR
 aa
 aR
-kB
-kB
+lm
+lm
 aa
 aa
 aa
@@ -23161,9 +23110,9 @@ ky
 kz
 kz
 kz
-kB
+lm
 kz
-kB
+lm
 kM
 kz
 kz
@@ -23175,24 +23124,24 @@ kz
 kz
 kz
 kz
-kB
-kB
+lm
+lm
 lx
 lz
 kK
-kB
+lm
 kP
 aR
-kB
+lm
 aR
 aR
 aR
-kB
+lm
 aR
 aR
 aR
-kB
-kB
+lm
+lm
 aa
 aa
 aa
@@ -23361,40 +23310,40 @@ gQ
 gP
 gQ
 kA
-kB
+lm
 kA
-kB
+lm
 kA
-kB
+lm
 kA
-kB
-kB
-kB
-kB
-kB
-kB
-kB
-kB
-kB
+lm
+lm
+lm
+lm
+lm
+lm
+lm
+lm
+lm
 kA
 lp
 ls
 ly
 lH
-kB
+lm
 kK
 kP
 aR
 ma
-kB
-kB
-kB
+lm
+lm
+lm
 mc
-kB
-kB
-kB
+lm
+lm
+lm
 ma
-kB
+lm
 aa
 aa
 aa
@@ -23565,9 +23514,9 @@ gQ
 kz
 kz
 kz
-kB
+lm
 kz
-kB
+lm
 kM
 kz
 kz
@@ -23583,20 +23532,20 @@ kK
 kK
 lz
 lx
-kB
+lm
 kK
 kP
 aR
-kB
+lm
 aR
 aR
 aR
-kB
+lm
 aR
 aR
 aR
-kB
-kB
+lm
+lm
 aa
 aa
 aa
@@ -23767,9 +23716,9 @@ gO
 gO
 aa
 kz
-kB
+lm
 kz
-kB
+lm
 kz
 kE
 kE
@@ -23785,20 +23734,20 @@ le
 kK
 lA
 lA
-kB
+lm
 lT
 kz
-kB
-kB
+lm
+lm
 aR
 aa
 aR
-kB
+lm
 aR
 aa
 aR
-kB
-kB
+lm
+lm
 aa
 aa
 aa
@@ -23991,16 +23940,16 @@ lN
 kz
 kz
 aR
-kB
+lm
 aR
 aR
 aR
-kB
+lm
 aR
 aR
 aR
-kB
-kB
+lm
+lm
 aa
 aa
 aa
@@ -24173,7 +24122,7 @@ aa
 iY
 ju
 kz
-kB
+lm
 kN
 kL
 kS
@@ -24191,18 +24140,18 @@ kP
 kP
 kR
 kz
-kB
+lm
 aR
 ma
-kB
-kB
-kB
+lm
+lm
+lm
 ma
-kB
-kB
-kB
+lm
+lm
+lm
 ma
-kB
+lm
 aa
 aa
 aa
@@ -24375,36 +24324,36 @@ aa
 iY
 ju
 kz
-kB
-kB
+lm
+lm
 kK
 kK
 kV
-kB
+lm
 kK
 kK
 kK
-kB
+lm
 lk
-kB
+lm
 kM
 lt
 lB
-kB
+lm
 kZ
 kz
-kB
+lm
 aR
-kB
-aR
-aR
-aR
-kB
+lm
 aR
 aR
-kB
-kB
-kB
+aR
+lm
+aR
+aR
+lm
+lm
+lm
 aa
 aa
 aa
@@ -24578,35 +24527,35 @@ iY
 ju
 kz
 kH
-kB
+lm
 kK
 kK
-kB
-kB
-kB
+lm
+lm
+lm
 ld
 kK
-kB
-kB
+lm
+lm
 kK
 lo
-kB
-kB
-kB
+lm
+lm
+lm
 kK
 kz
-kB
-kB
+lm
+lm
 mb
-kB
-kB
-kB
-kB
-kB
-kB
-kB
+lm
+lm
+lm
+lm
+lm
+lm
+lm
 mb
-kB
+lm
 aa
 aa
 aa
@@ -24779,35 +24728,35 @@ aa
 iY
 ju
 kz
-kI
+lm
 kK
-kB
-kB
+lm
+lm
 kK
 kK
 kK
 kV
-kB
-kB
+lm
+lm
 kV
 kK
 lq
 kK
 kK
-kB
-kB
+lm
+lm
 kz
-kB
-kB
-kB
-kB
-kB
-kB
-kB
-kB
-kB
-kB
-kB
+lm
+lm
+lm
+lm
+lm
+lm
+lm
+lm
+lm
+lm
+lm
 aa
 aa
 aa
@@ -24985,13 +24934,13 @@ kz
 kz
 kz
 kT
-kB
+lm
 kF
-kB
+lm
 kK
 lg
 kK
-kB
+lm
 lm
 kz
 kP
@@ -25189,11 +25138,11 @@ kz
 kz
 kz
 kz
-kB
+lm
 kK
 lh
-kB
-kI
+lm
+lm
 kz
 kz
 kJ
@@ -25881,7 +25830,7 @@ cN
 dz
 bo
 eb
-eq
+eC
 eB
 eA
 eJ

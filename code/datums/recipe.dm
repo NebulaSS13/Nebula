@@ -10,7 +10,7 @@
 	var/list/reagents             // example: = list(/decl/material/liquid/drink/juice/berry = 5) // do not list same reagent twice
 	var/list/items                // example: = list(/obj/item/crowbar, /obj/item/welder, /obj/item/screwdriver = 2) // place /foo/bar before /foo
 	var/list/fruit                // example: = list("fruit" = 3)
-	var/result                    // example: = /obj/item/chems/food/snacks/donut/normal
+	var/result                    // example: = /obj/item/chems/food/donut/normal
 	var/time = 100                // Cooking time in deciseconds.
 	var/result_quantity = 1       // How many items to create. Where possible, just use fewer ingredients instead.
 
@@ -55,15 +55,15 @@
 	if(length(container_contents) < length(fruit))
 		return FALSE
 	var/list/needed_fruits = fruit.Copy()
-	for(var/obj/item/chems/food/snacks/S in container_contents)
+	for(var/obj/item/chems/food/S in container_contents)
 		var/use_tag
-		if(istype(S, /obj/item/chems/food/snacks/grown))
-			var/obj/item/chems/food/snacks/grown/G = S
+		if(istype(S, /obj/item/chems/food/grown))
+			var/obj/item/chems/food/grown/G = S
 			if(!G.seed || !G.seed.kitchen_tag)
 				continue
 			use_tag = G.dry ? "dried [G.seed.kitchen_tag]" : G.seed.kitchen_tag
-		else if(istype(S, /obj/item/chems/food/snacks/fruit_slice))
-			var/obj/item/chems/food/snacks/fruit_slice/FS = S
+		else if(istype(S, /obj/item/chems/food/fruit_slice))
+			var/obj/item/chems/food/fruit_slice/FS = S
 			if(!FS.seed || !FS.seed.kitchen_tag)
 				continue
 			use_tag = "[FS.seed.kitchen_tag] slice"
@@ -138,7 +138,7 @@
 		var/list/checklist = list()
 		checklist = fruit.Copy()
 
-		for(var/obj/item/chems/food/snacks/grown/G in container_contents)
+		for(var/obj/item/chems/food/grown/G in container_contents)
 			if(!G.seed || !G.seed.kitchen_tag || isnull(checklist[G.seed.kitchen_tag]))
 				continue
 

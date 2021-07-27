@@ -8,7 +8,7 @@
 	icon_gib = "pine_1"
 	speak_chance = 0
 	turns_per_move = 5
-	meat_type = /obj/item/chems/food/snacks/fish
+	meat_type = /obj/item/chems/food/fish
 	speed = -1
 	maxHealth = 250
 	health = 250

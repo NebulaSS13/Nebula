@@ -73,7 +73,7 @@
 /area/exodus/security/detectives_office)
 "aae" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/drinks/flask/barflask{
+/obj/item/chems/drinks/flask/barflask{
 	pixel_x = -4;
 	pixel_y = 8
 	},
@@ -5930,7 +5930,7 @@
 /area/exodus/security/brig)
 "alw" = (
 /obj/structure/closet/secure_closet/detective,
-/obj/item/chems/food/drinks/flask/detflask,
+/obj/item/chems/drinks/flask/detflask,
 /turf/simulated/floor/lino,
 /area/exodus/security/detectives_office)
 "alx" = (
@@ -15370,7 +15370,7 @@
 "aEh" = (
 /obj/structure/table/woodentable,
 /obj/machinery/reagentgrinder,
-/obj/item/chems/food/drinks/shaker,
+/obj/item/chems/drinks/shaker,
 /obj/item/stack/package_wrap,
 /obj/machinery/camera/network/civilian_east{
 	c_tag = "Bar Backroom"
@@ -19072,7 +19072,7 @@
 "aLc" = (
 /obj/structure/table/woodentable,
 /obj/item/pen,
-/obj/item/chems/food/drinks/bottle/holywater,
+/obj/item/chems/drinks/bottle/holywater,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/lino,
 /area/exodus/chapel/office)
@@ -20619,11 +20619,11 @@
 /area/exodus/library)
 "aOg" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/snacks/chips,
+/obj/item/chems/food/chips,
 /obj/random/single{
 	icon_state = "cola";
 	name = "randomly spawned cola";
-	spawn_object = /obj/item/chems/food/drinks/cans/cola
+	spawn_object = /obj/item/chems/drinks/cans/cola
 	},
 /turf/simulated/floor/carpet,
 /area/exodus/hallway/secondary/entry/starboard)
@@ -20695,10 +20695,10 @@
 	dir = 8
 	},
 /obj/structure/table/marble,
-/obj/item/chems/food/condiment/small/peppermill{
+/obj/item/chems/condiment/small/peppermill{
 	pixel_x = 3
 	},
-/obj/item/chems/food/condiment/small/saltshaker{
+/obj/item/chems/condiment/small/saltshaker{
 	pixel_x = -3
 	},
 /turf/simulated/floor/tiled/white,
@@ -23865,7 +23865,7 @@
 	dir = 8
 	},
 /obj/structure/table/marble,
-/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/condiment/enzyme,
 /obj/item/chems/glass/beaker{
 	pixel_x = 5
 	},
@@ -24485,12 +24485,12 @@
 /turf/simulated/floor/wood/walnut,
 /area/exodus/crew_quarters/bar)
 "aWe" = (
-/obj/item/chems/food/condiment/small/peppermill{
+/obj/item/chems/condiment/small/peppermill{
 	pixel_x = 2;
 	pixel_y = 6
 	},
 /obj/structure/table/woodentable,
-/obj/item/chems/food/condiment/small/saltshaker{
+/obj/item/chems/condiment/small/saltshaker{
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -26989,11 +26989,11 @@
 /area/exodus/crew_quarters/locker)
 "bbd" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/condiment/small/peppermill{
+/obj/item/chems/condiment/small/peppermill{
 	pixel_x = 2;
 	pixel_y = 6
 	},
-/obj/item/chems/food/condiment/small/saltshaker{
+/obj/item/chems/condiment/small/saltshaker{
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -38326,7 +38326,7 @@
 /obj/structure/table/woodentable,
 /obj/item/storage/box/matches,
 /obj/item/clothing/mask/smokable/cigarette/cigar,
-/obj/item/chems/food/drinks/flask{
+/obj/item/chems/drinks/flask{
 	pixel_x = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -40574,7 +40574,7 @@
 /obj/structure/closet{
 	name = "Prisoner's Locker"
 	},
-/obj/item/chems/food/drinks/bottle/absinthe,
+/obj/item/chems/drinks/bottle/absinthe,
 /obj/item/clothing/suit/apron/overalls,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/security/prison/dorm)
@@ -51469,7 +51469,7 @@
 "bVr" = (
 /obj/structure/table/standard,
 /obj/item/storage/box/monkeycubes,
-/obj/item/chems/food/snacks/monkeycube/wrapped,
+/obj/item/chems/food/monkeycube/wrapped,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/xenobiology/xenoflora)
@@ -54072,7 +54072,7 @@
 /area/exodus/engineering/break_room)
 "cak" = (
 /obj/structure/table/woodentable,
-/obj/item/chems/food/snacks/chips,
+/obj/item/chems/food/chips,
 /turf/simulated/floor/carpet,
 /area/exodus/engineering/break_room)
 "cal" = (
@@ -64082,7 +64082,7 @@
 /obj/item/storage/box/monkeycubes,
 /obj/item/storage/box/monkeycubes,
 /obj/item/storage/box/monkeycubes,
-/obj/item/chems/food/snacks/monkeycube/wrapped,
+/obj/item/chems/food/monkeycube/wrapped,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/xenobiology)
 "cvt" = (

@@ -271,4 +271,9 @@
 #define AS_ANYTHING as anything
 #endif
 
+//NOTE: INTENT_HOTKEY_* defines are not actual intents!
+//they are here to support hotkeys
+#define INTENT_HOTKEY_LEFT  "left"
+#define INTENT_HOTKEY_RIGHT "right"
+
 #define EMOTE_SOUNDS_CONFIG_PATH "config/emote_sounds"

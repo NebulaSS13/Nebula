@@ -483,7 +483,7 @@
 	trap = GET_DECL(trap)
 	trap.forced(mob)
 
-/client/proc/spawn_exoplanet(exoplanet_type AS_ANYTHING in subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
+/client/proc/spawn_exoplanet(exoplanet_type as anything in subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
 	set category = "Debug"
 	set name = "Create Exoplanet"
 

@@ -12,7 +12,7 @@
 	reaction_strings = list(/decl/material/solid/metal/uranium = "Synthesises a large amount of food.")
 
 /decl/slime_colour/silver/handle_uranium_reaction(var/datum/reagents/holder)
-	var/list/borks = subtypesof(/obj/item/chems/food/snacks)
+	var/list/borks = subtypesof(/obj/item/chems/food)
 	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 	for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
 		if(M.eyecheck() < FLASH_PROTECTION_MODERATE)

@@ -10,7 +10,7 @@
 	break_stuff_probability = 15
 	faction = "sharks"
 
-	meat_type = /obj/item/chems/food/snacks/fish/shark
+	meat_type = /obj/item/chems/food/fish/shark
 	meat_amount = 5
 	bone_amount = 15
 	skin_amount = 15

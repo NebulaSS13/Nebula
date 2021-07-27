@@ -5,6 +5,7 @@
 	color = "#660000"
 	touch_met = 5
 	fuel_value = 1
+	burn_product = /decl/material/gas/carbon_monoxide
 
 	glass_name = "welder fuel"
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."

@@ -32,7 +32,7 @@
 
 /decl/loadout_option/flask
 	name = "flask"
-	path = /obj/item/chems/food/drinks/flask/barflask
+	path = /obj/item/chems/drinks/flask/barflask
 
 /decl/loadout_option/flask/get_gear_tweak_options()
 	. = ..()
@@ -41,7 +41,7 @@
 
 /decl/loadout_option/vacflask
 	name = "vacuum-flask"
-	path = /obj/item/chems/food/drinks/flask/vacuumflask
+	path = /obj/item/chems/drinks/flask/vacuumflask
 
 /decl/loadout_option/vacflask/get_gear_tweak_options()
 	. = ..()
@@ -50,7 +50,7 @@
 
 /decl/loadout_option/coffeecup
 	name = "coffee cup"
-	path = /obj/item/chems/food/drinks/glass2/coffeecup
+	path = /obj/item/chems/drinks/glass2/coffeecup
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/towel

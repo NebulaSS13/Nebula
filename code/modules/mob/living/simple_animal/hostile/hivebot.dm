@@ -189,21 +189,20 @@ The megabot
 		deactivate()
 
 /mob/living/simple_animal/hostile/hivebot/mega/on_update_icon()
+	..()
 	if(stat != DEAD)
 		if(deactivated)
 			icon_state = "megabot_standby"
 			icon_living = "megabot_standby"
 			return
-
-		overlays.Cut()
-		overlays += image(icon, "active_indicator")
+		add_overlay("active_indicator")
 		switch(attack_mode)
 			if(ATTACK_MODE_MELEE)
-				overlays += image(icon, "melee")
+				add_overlay("melee")
 			if(ATTACK_MODE_LASER)
-				overlays += image(icon, "laser")
+				add_overlay("laser")
 			if(ATTACK_MODE_ROCKET)
-				overlays += image(icon, "rocket")
+				add_overlay("rocket")
 
 /mob/living/simple_animal/hostile/hivebot/mega/proc/switch_mode(var/new_mode)
 	if(!new_mode || new_mode == attack_mode)

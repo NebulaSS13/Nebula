@@ -3,7 +3,7 @@
 	name = "alate support exosuit"
 	desc = "A powerful support exosuit with integrated power supply, weapon and atmosphere. It's closer to a mech than a rig."
 	icon = 'mods/species/ascent/icons/rig/rig.dmi'
-	
+
 	suit_type = "support exosuit"
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR,
@@ -159,7 +159,8 @@
 	var/gas_regen_cap = 30
 
 /obj/item/tank/jetpack/ascent/Initialize()
-	starting_pressure = list(refill_gas_type = 6 * ONE_ATMOSPHERE)
+	starting_pressure = list()
+	starting_pressure[refill_gas_type] = (6 * ONE_ATMOSPHERE)
 	. = ..()
 
 /obj/item/tank/jetpack/ascent/Process()
@@ -176,7 +177,8 @@
 	var/gas_regen_cap = 50
 
 /obj/item/tank/mantid/reactor/Initialize()
-	starting_pressure = list(refill_gas_type = 6 * ONE_ATMOSPHERE)
+	starting_pressure = list()
+	starting_pressure[refill_gas_type] = (6 * ONE_ATMOSPHERE)
 	. = ..()
 
 /obj/item/tank/mantid/reactor/oxygen
@@ -272,7 +274,7 @@
 		/obj/item/weldingtool/electric/mantid,
 		/obj/item/multitool/mantid,
 		/obj/item/stack/medical/resin,
-		/obj/item/chems/food/drinks/cans/waterbottle/ascent
+		/obj/item/chems/drinks/cans/waterbottle/ascent
 	)
 	sprite_sheets = list(
 		BODYTYPE_MANTID_LARGE = 'mods/species/ascent/icons/rig/rig_chest_gyne.dmi',

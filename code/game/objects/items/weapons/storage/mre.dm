@@ -92,8 +92,8 @@ MRE Stuff
 	icon_state = "meatmre"
 	main_meal = /obj/item/storage/mrebag/menu10
 	startswith = list(
-	/obj/item/chems/food/snacks/candy/proteinbar,
-	/obj/item/chems/food/condiment/small/packet/protein,
+	/obj/item/chems/food/candy/proteinbar,
+	/obj/item/chems/condiment/small/packet/protein,
 	/obj/random/mre/sauce/sugarfree,
 	/obj/item/kitchen/utensil/spoon/plastic
 	)
@@ -127,7 +127,7 @@ MRE Stuff
 	max_w_class = ITEM_SIZE_SMALL
 	opened = FALSE
 	open_sound = 'sound/effects/bubbles.ogg'
-	startswith = list(/obj/item/chems/food/snacks/slice/meatpizza/filled)
+	startswith = list(/obj/item/chems/food/slice/meatpizza/filled)
 
 /obj/item/storage/mrebag/Initialize()
 	. = ..()
@@ -146,31 +146,31 @@ MRE Stuff
 	. = ..()
 
 /obj/item/storage/mrebag/menu2
-	startswith = list(/obj/item/chems/food/snacks/slice/margherita/filled)
+	startswith = list(/obj/item/chems/food/slice/margherita/filled)
 
 /obj/item/storage/mrebag/menu3
-	startswith = list(/obj/item/chems/food/snacks/slice/vegetablepizza/filled)
+	startswith = list(/obj/item/chems/food/slice/vegetablepizza/filled)
 
 /obj/item/storage/mrebag/menu4
-	startswith = list(/obj/item/chems/food/snacks/hamburger)
+	startswith = list(/obj/item/chems/food/hamburger)
 
 /obj/item/storage/mrebag/menu5
-	startswith = list(/obj/item/chems/food/snacks/taco)
+	startswith = list(/obj/item/chems/food/taco)
 
 /obj/item/storage/mrebag/menu6
-	startswith = list(/obj/item/chems/food/snacks/slice/meatbread/filled)
+	startswith = list(/obj/item/chems/food/slice/meatbread/filled)
 
 /obj/item/storage/mrebag/menu7
-	startswith = list(/obj/item/chems/food/snacks/tossedsalad)
+	startswith = list(/obj/item/chems/food/tossedsalad)
 
 /obj/item/storage/mrebag/menu8
-	startswith = list(/obj/item/chems/food/snacks/hotchili)
+	startswith = list(/obj/item/chems/food/hotchili)
 
 /obj/item/storage/mrebag/menu9
-	startswith = list(/obj/item/chems/food/snacks/boiledrice)
+	startswith = list(/obj/item/chems/food/boiledrice)
 
 /obj/item/storage/mrebag/menu10
-	startswith = list(/obj/item/chems/food/snacks/meatcube)
+	startswith = list(/obj/item/chems/food/meatcube)
 
 /obj/item/storage/mrebag/dessert
 	name = "dessert"
@@ -180,7 +180,7 @@ MRE Stuff
 	startswith = list(/obj/random/mre/dessert)
 
 /obj/item/storage/mrebag/dessert/menu9
-	startswith = list(/obj/item/chems/food/snacks/plumphelmetbiscuit)
+	startswith = list(/obj/item/chems/food/plumphelmetbiscuit)
 
 /obj/item/storage/mrebag/dessert/menu11
 	startswith = list(/obj/item/pen/crayon/rainbow)

@@ -60,6 +60,7 @@ var/global/list/laser_wavelengths
 		/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_TRACE
 	)
+	z_flags = ZMM_MANGLE_PLANES
 
 	var/wiring_color = COLOR_CYAN_BLUE
 	var/max_capacitors = 2
