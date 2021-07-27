@@ -64,7 +64,7 @@
 /obj/item/chems/food/baguette/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
-	reagents.add_reagent(/decl/material/solid/mineral/sodiumchloride, 1)
+	reagents.add_reagent(/decl/material/solid/sodiumchloride, 1)
 
 /obj/item/chems/food/jelliedtoast
 	name = "jellied toast"

@@ -80,7 +80,7 @@
 /obj/item/chems/food/meatsteak/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 4)
-	reagents.add_reagent(/decl/material/solid/mineral/sodiumchloride, 1)
+	reagents.add_reagent(/decl/material/solid/sodiumchloride, 1)
 	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
 
 /obj/item/chems/food/meatsteak/synthetic
