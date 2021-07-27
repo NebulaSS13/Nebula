@@ -20,6 +20,12 @@
 		var/old_opacity = opacity
 		opacity = new_opacity
 		events_repository.raise_event(/decl/observ/opacity_set, src, old_opacity, new_opacity)
+		if (isturf(loc))
+			var/turf/T = loc
+			if (opacity)
+				T.has_opaque_atom = TRUE
+			else
+				T.has_opaque_atom = null
 		return TRUE
 	else
 		return FALSE

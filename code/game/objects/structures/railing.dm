@@ -240,10 +240,10 @@
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			if(density)
 				user.visible_message("<span class='notice'>\The [user] wrenches \the [src] open.</span>", "<span class='notice'>You wrench \the [src] open.</span>")
-				density = 0
+				set_density(FALSE)
 			else
 				user.visible_message("<span class='notice'>\The [user] wrenches \the [src] closed.</span>", "<span class='notice'>You wrench \the [src] closed.</span>")
-				density = 1
+				set_density(TRUE)
 			update_icon()
 			return
 	// Repair

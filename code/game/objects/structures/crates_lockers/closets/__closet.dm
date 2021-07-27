@@ -95,7 +95,7 @@
 		stored_units += store_mobs(stored_units)
 	if(storage_types & CLOSET_STORAGE_STRUCTURES)
 		stored_units += store_structures(stored_units)
-		
+
 /obj/structure/closet/proc/open()
 	if(src.opened)
 		return 0
@@ -107,7 +107,7 @@
 
 	src.opened = 1
 	playsound(src.loc, open_sound, 50, 1, -3)
-	density = 0
+	set_density(FALSE)
 	update_icon()
 	return 1
 
@@ -122,7 +122,7 @@
 
 	playsound(src.loc, close_sound, 50, 0, -3)
 	if(!wall_mounted)
-		density = 1
+		set_density(TRUE)
 
 	update_icon()
 
@@ -226,7 +226,7 @@
 		take_damage(proj_damage)
 
 /obj/structure/closet/attackby(obj/item/W, mob/user)
-	
+
 	if(user.a_intent == I_HURT && W.force)
 		return ..()
 

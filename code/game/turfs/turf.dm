@@ -38,6 +38,9 @@
 
 	var/prev_type // Previous type of the turf, prior to turf translation.
 
+	var/has_dense_atom
+	var/has_opaque_atom
+
 /turf/Initialize(mapload, ...)
 	. = null && ..()	// This weird construct is to shut up the 'parent proc not called' warning without disabling the lint for child types. We explicitly return an init hint so this won't change behavior.
 
@@ -366,3 +369,42 @@ var/global/const/enterloopsanity = 100
 
 /turf/proc/get_footstep_sound(var/mob/caller)
 	return
+
+/turf/proc/is_dense()
+	if (density)
+		return TRUE
+	if (isnull(has_dense_atom))
+		has_dense_atom = FALSE
+		if (contains_dense_objects())
+			has_dense_atom = TRUE
+	return has_dense_atom
+
+/turf/proc/is_opaque()
+	if (opacity)
+		return TRUE
+	if (isnull(has_opaque_atom))
+		has_opaque_atom = FALSE
+		for (var/atom/A in contents)
+			if (A.opacity)
+				has_opaque_atom = TRUE
+				break
+	return has_opaque_atom
+
+/turf/Entered(atom/movable/AM)
+	. = ..()
+	if (istype(AM))
+		if (AM.density)
+			has_dense_atom = TRUE
+		if (AM.opacity)
+			has_opaque_atom = TRUE
+
+/turf/Exited(atom/movable/AM, atom/newloc)
+	. = ..()
+	if (istype(AM))
+		if(AM.density)
+			has_dense_atom = null
+		if (AM.opacity)
+			has_opaque_atom = null
+	else
+		has_dense_atom = null
+		has_opaque_atom = null

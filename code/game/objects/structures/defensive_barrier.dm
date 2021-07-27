@@ -131,7 +131,7 @@
 		return TRUE
 
 	playsound(src, 'sound/effects/extout.ogg', 100, 1)
-	density = !density
+	set_density(!density)
 	to_chat(user, SPAN_NOTICE("You [density ? "raise" : "lower"] \the [src]."))
 	update_icon()
 	return TRUE

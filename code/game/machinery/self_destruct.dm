@@ -31,7 +31,7 @@
 		user.visible_message("[user] begins to carefully place [W] onto the Inserter.", "You begin to carefully place [W] onto the Inserter.")
 		if(do_after(user, 80, src) && user.unEquip(W, src))
 			cylinder = W
-			density = 1
+			set_density(1)
 			user.visible_message("[user] places [W] onto the Inserter.", "You place [W] onto the Inserter.")
 			update_icon()
 			return
@@ -55,13 +55,13 @@
 			if(do_after(user, 40, src))
 				user.visible_message("[user] extracts [cylinder].", "You extract [cylinder].")
 				armed = 0
-				density = 1
+				set_density(1)
 				flick("unloading", src)
 		else if(!damaged)
 			user.visible_message("[user] begins to arm [cylinder].", "You begin to arm [cylinder].")
 			if(do_after(user, 40, src))
 				armed = 1
-				density = 0
+				set_density(0)
 				user.visible_message("[user] arms [cylinder].", "You arm [cylinder].")
 				flick("loading", src)
 				playsound(src.loc,'sound/effects/caution.ogg',50,1,5)
@@ -82,7 +82,7 @@
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] picks up \the [cylinder]."), \
 			SPAN_NOTICE("You pick up \the [cylinder]."))
-		density = FALSE
+		set_density(FALSE)
 		cylinder = null
 		update_icon()
 		add_fingerprint(user)
