@@ -14,7 +14,8 @@
 	lawupdate = 0
 	density = 1
 	req_access = list(access_engine, access_robotics)
-	integrated_light_power = 0.5
+	integrated_light_power = 0.4
+	integrated_light_range = 3
 	local_transmit = 1
 	possession_candidate = 1
 	speed = -1
@@ -118,6 +119,8 @@
 	module_type = /obj/item/robot_module/drone/construction
 	can_pull_size = ITEM_SIZE_STRUCTURE
 	can_pull_mobs = MOB_PULL_SAME
+	integrated_light_power = 0.8
+	integrated_light_range = 5
 	hat_x = 1
 	hat_y = -12
 
