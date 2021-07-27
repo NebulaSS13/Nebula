@@ -1,6 +1,11 @@
 <!-- We recommend to check the contributing page before opening pull requests. -->
 <!-- https://github.com/NebulaSS13/Nebula/blob/dev/CONTRIBUTING.md -->
 
+<!-- !! PLEASE, READ THIS !! -->
+<!-- If you opening a pull request which changes A LOT icon/map files: -->
+<!-- Add [IDB IGNORE] (to ignore icon files diff) or [MDB IGNORE] (to ignore map files diff) in PR title. -->
+<!-- These tags created to prevent parsing a huge diffs and not overload IconDiffBot and MapDiffBot. -->
+
 ## Description of changes
 
 <!-- Describe The Pull Request. Please be sure every change is documented or this can delay review and even discourage maintainers from merging your PR! -->
