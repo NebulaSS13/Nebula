@@ -461,10 +461,12 @@ var/global/list/time_prefs_fixed = list()
 	if(client.get_preference_value(/datum/client_preference/fullscreen_mode) != PREF_OFF)
 		client.toggle_fullscreen(client.get_preference_value(/datum/client_preference/fullscreen_mode))
 
-
 /datum/preferences/proc/setup_preferences(initialization = FALSE)
 	// This proc will be called twice if SScharacter_setup is not initialized,
 	// so, don't create prefs again.
+
+	// give them default keybinds too
+	key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key)
 
 	if(istype(client))
 
