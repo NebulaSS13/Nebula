@@ -73,18 +73,6 @@
 		)
 	)
 
-	default_emotes = list(
-		/decl/emote/human/swish,
-		/decl/emote/human/wag,
-		/decl/emote/human/sway,
-		/decl/emote/human/qwag,
-		/decl/emote/human/fastsway,
-		/decl/emote/human/swag,
-		/decl/emote/human/stopsway,
-		/decl/emote/audible/purr,
-		/decl/emote/audible/purrlong
-	)
-
 	//Autohiss
 	autohiss_basic_map = list(
 		"r" = list("rr", "rrr", "rrrr"),
@@ -103,6 +91,7 @@
 		BP_APPENDIX = /obj/item/organ/internal/appendix,
 		BP_EYES =     /obj/item/organ/internal/eyes/taj
 	)
+	emote_sounds_type = /decl/emote_sounds/human/tajaran
 
 /obj/item/organ/internal/eyes/taj
 	eye_blend = ICON_MULTIPLY

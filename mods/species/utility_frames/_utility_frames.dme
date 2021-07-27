@@ -6,4 +6,5 @@
 #include "markings.dm"
 #include "limbs.dm"
 #include "aspects.dm"
+#include "datum/emotes.dm"
 #endif

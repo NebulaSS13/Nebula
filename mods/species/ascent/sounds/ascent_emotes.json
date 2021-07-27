@@ -1,0 +1,11 @@
+{
+	"purr":[
+		"mods/species/ascent/sounds/ascent1.ogg"
+	],
+	"hiss":[
+		"mods/species/ascent/sounds/razorweb.ogg"
+	],
+	"snarl":[
+		"mods/species/ascent/sounds/razorweb_hiss.ogg"
+	]
+}

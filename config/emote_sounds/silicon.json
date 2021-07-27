@@ -1,0 +1,23 @@
+{
+	"buzz":[
+		"sound/machines/buzz-sigh.ogg"
+	],
+	"beep":[
+		"sound/machines/twobeep.ogg"
+	],
+	"ping":[
+		"sound/machines/ping.ogg"
+	],
+	"confirm":[
+		"sound/machines/synth_yes.ogg"
+	],
+	"deny":[
+		"sound/machines/synth_no.ogg"
+	],
+	"law":[
+		"sound/voice/biamthelaw.ogg"
+	],
+	"halt":[
+		"sound/voice/halt.ogg"
+	]
+}

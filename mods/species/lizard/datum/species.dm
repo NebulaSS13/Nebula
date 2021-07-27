@@ -94,16 +94,6 @@
 		/datum/appearance_descriptor/build =  1.25
 		)
 
-	default_emotes = list(
-		/decl/emote/human/swish,
-		/decl/emote/human/wag,
-		/decl/emote/human/sway,
-		/decl/emote/human/qwag,
-		/decl/emote/human/fastsway,
-		/decl/emote/human/swag,
-		/decl/emote/human/stopsway
-	)
-
 	pain_emotes_with_pain_level = list(
 		list(/decl/emote/audible/wheeze, /decl/emote/audible/roar, /decl/emote/audible/bellow, /decl/emote/audible/howl) = 80,
 		list(/decl/emote/audible/grunt, /decl/emote/audible/groan, /decl/emote/audible/wheeze, /decl/emote/audible/hiss) = 50,
@@ -119,6 +109,7 @@
 		/decl/emote/exertion/biological/breath,
 		/decl/emote/exertion/biological/pant
 	)
+	emote_sounds_type = /decl/emote_sounds/human/lizard
 
 /decl/species/lizard/New()
 	..()

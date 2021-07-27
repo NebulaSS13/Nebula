@@ -1,3 +1,8 @@
+/decl/emote_sounds/human/ascent
+/decl/emote_sounds/human/ascent/sound_config_paths(var/list/paths_list = list())
+	paths_list |= "mods/species/ascent/sound/ascent_emotes.json"
+	return ..(paths_list)
+
 /decl/species/mantid
 	default_emotes = list(
 		/decl/emote/audible/ascent_purr,
@@ -21,17 +26,14 @@
 /decl/emote/audible/ascent_purr
 	key = "purr"
 	emote_message_3p = "USER purrs."
-	emote_sound = 'mods/species/ascent/sounds/ascent1.ogg'
 
 /decl/emote/audible/ascent_hiss
 	key ="hiss"
 	emote_message_3p = "USER hisses."
-	emote_sound = 'mods/species/ascent/sounds/razorweb.ogg'
 
 /decl/emote/audible/ascent_snarl
 	key = "snarl"
 	emote_message_3p = "USER snarls."
-	emote_sound = 'mods/species/ascent/sounds/razorweb_hiss.ogg'
 
 /decl/emote/visible/ascent_flicker
 	key = "flicker"

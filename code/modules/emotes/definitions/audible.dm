@@ -40,7 +40,6 @@
 /decl/emote/audible/multichirp
 	key = "mchirp"
 	emote_message_3p = "USER chirps a chorus of notes!"
-	emote_sound = 'sound/misc/multichirp.ogg'
 
 /decl/emote/audible/alarm
 	key = "alarm"
@@ -146,7 +145,6 @@
 	emote_message_1p = "You slap yourself across the face!"
 	emote_message_3p_target = "<span class='warning'>USER slaps TARGET across the face!</span>"
 	emote_message_3p = "USER slaps USER_SELF across the face!"
-	emote_sound = 'sound/effects/snap.ogg'
 	check_restraints = TRUE
 	check_range = 1
 
@@ -154,17 +152,14 @@
 	key ="hiss"
 	emote_message_3p_target = "USER hisses at TARGET."
 	emote_message_3p = "USER hisses."
-	emote_sound = 'sound/voice/BugHiss.ogg'
 
 /decl/emote/audible/bug_buzz
 	key ="buzz"
 	emote_message_3p = "USER buzzes its wings."
-	emote_sound = 'sound/voice/BugBuzz.ogg'
 
 /decl/emote/audible/bug_chitter
 	key ="chitter"
 	emote_message_3p = "USER chitters."
-	emote_sound = 'sound/voice/Bug.ogg'
 
 /decl/emote/audible/roar
 	key = "roar"

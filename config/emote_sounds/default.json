@@ -1,0 +1,17 @@
+{
+	"mchirp":[
+		"sound/misc/multichirp.ogg"
+	],
+	"slap":[
+		"sound/effects/snap.ogg"
+	],
+	"chitter":[
+		"sound/voice/Bug.ogg"
+	],
+	"buzz":[
+		"sound/voice/BugBuzz.ogg"
+	],
+	"hiss":[
+		"sound/voice/BugHiss.ogg"
+	]
+}

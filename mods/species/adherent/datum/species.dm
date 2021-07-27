@@ -107,6 +107,7 @@
 		)
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 	max_players = 3
+	emote_sounds_type = /decl/emote_sounds/human/adherent
 
 /decl/species/adherent/can_overcome_gravity(var/mob/living/carbon/human/H)
 	. = FALSE

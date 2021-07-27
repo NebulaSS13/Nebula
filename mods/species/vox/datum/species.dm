@@ -17,10 +17,6 @@
 	name = SPECIES_VOX
 	name_plural = SPECIES_VOX
 
-	default_emotes = list(
-		/decl/emote/audible/vox_shriek
-	)
-
 	unarmed_attacks = list(
 		/decl/natural_attack/stomp,
 		/decl/natural_attack/kick,
@@ -134,6 +130,7 @@
 		/decl/emote/exertion/synthetic,
 		/decl/emote/exertion/synthetic/creak
 	)
+	emote_sounds_type = /decl/emote_sounds/human/vox
 
 /decl/species/vox/equip_survival_gear(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(H), slot_wear_mask_str)
@@ -160,8 +157,3 @@
 	var/obj/item/organ/internal/voxstack/stack = H.get_organ(BP_STACK)
 	if (stack)
 		stack.do_backup()
-
-/decl/emote/audible/vox_shriek
-	key ="shriek"
-	emote_message_3p = "USER SHRIEKS!"
-	emote_sound = 'mods/species/vox/sounds/shriek1.ogg'

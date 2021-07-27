@@ -5,4 +5,5 @@
 #include "datum/language.dm"
 #include "datum/species.dm"
 #include "datum/species_bodytypes.dm"
+#include "datum/emotes.dm"
 #endif

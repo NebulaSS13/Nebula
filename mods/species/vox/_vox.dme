@@ -8,6 +8,7 @@
 #include "datum/aspects.dm"
 #include "datum/cultures_vox.dm"
 #include "datum/descriptors_vox.dm"
+#include "datum/emotes.dm"
 #include "datum/factions_vox.dm"
 #include "datum/language.dm"
 #include "datum/locations_vox.dm"

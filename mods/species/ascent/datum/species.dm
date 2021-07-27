@@ -143,6 +143,7 @@
 			list(/decl/emote/visible/ascent_glimmer, /decl/emote/visible/ascent_pulse) = 50,
 			list(/decl/emote/visible/ascent_flicker, /decl/emote/visible/ascent_glint) = 20,
 		)
+	emote_sounds_type = /decl/emote_sounds/human/ascent
 
 /decl/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
 	return

@@ -69,6 +69,7 @@
 			/decl/cultural_info/culture/other
 		)
 	)
+	emote_sounds_type = /decl/emote_sounds/human/neoavian
 
 /decl/species/neoavian/equip_default_fallback_uniform(var/mob/living/carbon/human/H)
 	if(istype(H))
