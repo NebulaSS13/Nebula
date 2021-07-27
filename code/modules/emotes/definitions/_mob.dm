@@ -143,7 +143,9 @@
 		/decl/emote/visible/tilt,
 		/decl/emote/visible/spin,
 		/decl/emote/visible/sidestep,
-		/decl/emote/visible/vomit
+		/decl/emote/visible/vomit,
+		/decl/emote/audible/burp,
+		/decl/emote/audible/whistle,
 	)
 
 /mob/living/silicon/robot

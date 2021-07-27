@@ -1,6 +1,4 @@
 /decl/emote/audible
-	key = "burp"
-	emote_message_3p = "USER burps."
 	message_type = AUDIBLE_MESSAGE
 
 /decl/emote/audible/Initialize()
@@ -8,6 +6,10 @@
 	if(!emote_message_radio)
 		// Snips the 'USER' from 3p emote messages for radio.
 		emote_message_radio = copytext(emote_message_3p, 6)
+
+/decl/emote/audible/burp
+	key = "burp"
+	emote_message_3p = "USER burps."
 
 /decl/emote/audible/deathgasp_alien
 	key = "deathgasp"
@@ -77,10 +79,6 @@
 	key = "snore"
 	emote_message_3p = "USER snores."
 	conscious = 0
-
-/decl/emote/audible/whimper
-	key = "whimper"
-	emote_message_3p = "USER whimpers."
 
 /decl/emote/audible/yawn
 	key = "yawn"
