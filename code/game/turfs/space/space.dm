@@ -10,6 +10,11 @@
 	permit_ao = FALSE
 	z_eventually_space = TRUE
 
+	/// If we're an edge.
+	var/edge = 0
+	/// Force this one to pretend it's an overedge turf.
+	var/forced_dirs = 0 
+
 /turf/space/proc/update_starlight()
 	if(config.starlight && (locate(/turf/simulated) in RANGE_TURFS(src, 1)))
 		set_light(config.starlight, 0.75, l_color = SSskybox.background_color)
@@ -23,7 +28,21 @@
 
 	update_starlight()
 
-	appearance = SSskybox.space_appearance_cache[(((x + y) ^ ~(x * y) + z) % 25) + 1]
+	//We might be an edge
+	if(y == world.maxy || forced_dirs & NORTH)
+		edge |= NORTH
+	else if(y == 1 || forced_dirs & SOUTH)
+		edge |= SOUTH
+
+	if(x == 1 || forced_dirs & WEST)
+		edge |= WEST
+	else if(x == world.maxx || forced_dirs & EAST)
+		edge |= EAST
+
+	if(edge) //Magic edges
+		appearance = SSskybox.mapedge_cache["[edge]"]
+	else //Dust
+		appearance = SSskybox.dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"]
 
 	if(!HasBelow(z))
 		return INITIALIZE_HINT_NORMAL
@@ -37,6 +56,29 @@
 		return INITIALIZE_HINT_NORMAL
 
 	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
+
+/turf/space/proc/toggle_transit(var/direction)
+	if(edge)
+		return
+
+	if(!direction) //Stopping our transit
+		appearance = SSskybox.dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"]
+	else if(direction & (NORTH|SOUTH)) //Starting transit vertically
+		var/x_shift = SSskybox.phase_shift_by_x[x % (SSskybox.phase_shift_by_x.len - 1) + 1]
+		var/transit_state = ((direction & SOUTH ? world.maxy - y : y) + x_shift) % 15
+		appearance = SSskybox.speedspace_cache["NS_[transit_state]"]
+	else if(direction & (EAST|WEST)) //Starting transit horizontally
+		var/y_shift = SSskybox.phase_shift_by_y[y % (SSskybox.phase_shift_by_y.len - 1) + 1]
+		var/transit_state = ((direction & WEST ? world.maxx - x : x) + y_shift) % 15
+		appearance = SSskybox.speedspace_cache["EW_[transit_state]"]
+
+	for(var/atom/movable/AM in src)
+		if (AM.simulated && !AM.anchored)
+			AM.throw_at(get_step(src, global.reverse_dir[direction]), 5, 1)
+			CHECK_TICK
+
+		if(istype(AM, /obj/effect/decal)) 
+			qdel(AM)
 
 /turf/space/Destroy()
 	// Cleanup cached z_eventually_space values above us.
@@ -91,7 +133,7 @@
 
 /turf/space/Entered(atom/movable/A)
 	..()
-	if(A && A.loc == src)
+	if(A && A.loc == src && !density) // !density so 'fake' space turfs don't fling ghosts everywhere
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE + 1))
 			A.touch_map_edge()
 
