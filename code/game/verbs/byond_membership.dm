@@ -4,7 +4,7 @@
 
 	if(get_byond_membership())
 		to_chat(src, SPAN_NOTICE("Congratulations! You are a BYOND member and (depends on features of this server) might have some exclusive features!"))
-		to_chat(src, SPAN_NOTICE("[get_byond_membership() == -1 ? "You have lifetime membership." : "Membership days left: [get_byond_membership()]"]"))
+		to_chat(src, SPAN_NOTICE("[get_byond_membership() == -1 ? "You have a lifetime membership." : "Membership days left: [get_byond_membership()]"]"))
 	else
 		to_chat(src, SPAN_NOTICE("Become a BYOND member to support the engine that makes this game possible. You also can get access to member-perks and features if this server has any. Only 10 bucks for 3 months! <a href=\"https://secure.byond.com/membership\">Click Here to find out more</a>."))
 
