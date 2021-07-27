@@ -122,11 +122,31 @@
 	return
 
 /decl/emote/proc/do_sound(var/atom/user)
+	var/sound_to_play
 	if(emote_sound)
-		var/sound_to_play = emote_sound
+		sound_to_play = emote_sound
 		if(islist(emote_sound))
 			sound_to_play = emote_sound[user.gender] || emote_sound
 			sound_to_play = pick(sound_to_play)
+	else
+		//otherwise use the soundbank
+		var/mob/M = user
+		if(istype(M))
+			var/emote_path = M.get_emote_sounds_path()
+			if(emote_path)
+				var/decl/emote_sounds/esounds = GET_DECL(emote_path)
+				if(istype(esounds))
+					var/sound_paths = esounds.get_sound(key, M.gender)
+					if(islist(sound_paths) && length(sound_paths))
+						sound_to_play = pick(sound_paths)
+					else if(istext(sound_paths) && length(sound_paths))
+						sound_to_play = sound_paths
+					else
+						log_debug("Couldn't get a sound to play from \the [esounds] for '[key]' with gender '[M.gender]'!")
+				else
+					log_error("Couldn't grab the decl/emote_sounds for \the [user]!")
+
+	if(sound_to_play)
 		return playsound(user.loc, sound_to_play, 50, 0)
 
 /decl/emote/proc/check_user(var/atom/user)

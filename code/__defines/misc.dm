@@ -270,3 +270,5 @@
 #else
 #define AS_ANYTHING as anything
 #endif
+
+#define EMOTE_SOUNDS_CONFIG_PATH "config/emote_sounds"

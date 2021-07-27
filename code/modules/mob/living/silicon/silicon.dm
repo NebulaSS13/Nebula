@@ -436,3 +436,6 @@
 
 /mob/living/silicon/get_telecomms_race_info()
 	return list("Artificial Life", TRUE)
+
+/mob/living/silicon/get_emote_sounds_path()
+	return /decl/emote_sounds/silicon

@@ -1836,3 +1836,6 @@
 		"right pocket" = list(r_store,                 "in"),
 		"rig" =          list(wearing_rig?.air_supply, "in")
 	)
+
+/mob/living/carbon/human/get_emote_sounds_path()
+	return species.emote_sounds_type

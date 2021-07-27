@@ -1028,3 +1028,7 @@
 
 /mob/proc/get_bodytype()
 	return
+
+//Returns the path to the /decl/emote_sounds  to use for this kind of mob's emotes
+/mob/proc/get_emote_sounds_path()
+	return

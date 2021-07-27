@@ -38,3 +38,6 @@
 
 /mob/living/carbon/alien/get_admin_job_string()
 	return "Alien"
+
+/mob/living/carbon/alien/get_emote_sounds_path()
+	return /decl/emote_sounds/alien

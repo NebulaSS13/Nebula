@@ -48,3 +48,4 @@
 	)
 
 	ai = /datum/ai/monkey
+	emote_sounds_type = /decl/emote_sounds/human/monkey

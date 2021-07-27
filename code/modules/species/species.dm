@@ -210,6 +210,7 @@
 
 	var/pass_flags = 0
 	var/breathing_sound = 'sound/voice/monkey.ogg'
+	var/emote_sounds_type = /decl/emote_sounds/human
 
 	var/list/base_auras
 
