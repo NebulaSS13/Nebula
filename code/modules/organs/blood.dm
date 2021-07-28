@@ -344,6 +344,10 @@
 	var/oxygenated_mult = 0
 	if(has_chemical_effect(CE_OXYGENATED, 1))
 		oxygenated_mult = 0.5
+	else if(has_chemical_effect(CE_OXYGENATED, 2))
+		oxygenated_mult = 0.7
+	else if(has_chemical_effect(CE_OXYGENATED, 3))
+		oxygenated_mult = 0.9
 	blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
 	blood_volume = blood_volume * blood_volume_mod
 	return min(blood_volume, 100)
