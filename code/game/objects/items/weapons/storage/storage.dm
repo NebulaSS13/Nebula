@@ -286,7 +286,8 @@
 	return
 
 /obj/item/storage/attack_ghost(mob/user)
-	if(user.client && user.client.holder)
+	var/mob/observer/ghost/G = user
+	if(G.client?.holder || G.antagHUD)
 		show_to(user)
 
 /obj/item/storage/proc/gather_all(var/turf/T, var/mob/user)

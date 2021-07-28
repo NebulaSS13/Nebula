@@ -75,7 +75,6 @@
 	for(var/atom/movable/AM in src)
 		if (AM.simulated && !AM.anchored)
 			AM.throw_at(get_step(src, global.reverse_dir[direction]), 5, 1)
-			CHECK_TICK
 
 		if(istype(AM, /obj/effect/decal)) 
 			qdel(AM)
