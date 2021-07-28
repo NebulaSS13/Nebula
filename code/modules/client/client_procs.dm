@@ -195,6 +195,7 @@ var/global/list/localhost_addresses = list(
 	// these are gonna be used for banning
 	prefs.last_ip = address
 	prefs.last_id = computer_id
+	apply_fps(prefs.clientfps)
 
 	if(!isnull(config.lock_client_view_x) && !isnull(config.lock_client_view_y))
 		view = "[config.lock_client_view_x]x[config.lock_client_view_y]"
@@ -236,6 +237,7 @@ var/global/list/localhost_addresses = list(
 
 	if(prefs && !istype(mob, world.mob))
 		prefs.apply_post_login_preferences()
+
 	if(SSinput.initialized)
 		set_macros()
 

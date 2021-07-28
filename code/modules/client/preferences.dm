@@ -456,8 +456,6 @@ var/global/list/time_prefs_fixed = list()
 	if(!client)
 		return
 
-	client.apply_fps(clientfps)
-
 	if(client.get_preference_value(/datum/client_preference/fullscreen_mode) != PREF_OFF)
 		client.toggle_fullscreen(client.get_preference_value(/datum/client_preference/fullscreen_mode))
 
