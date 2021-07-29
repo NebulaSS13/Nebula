@@ -5,6 +5,7 @@
 	icon_state = "base"
 	density = 1
 	maxhealth = 100
+	material = /decl/material/solid/metal/steel
 
 	var/welded = 0
 	var/large = 1

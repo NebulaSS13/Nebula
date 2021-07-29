@@ -1020,7 +1020,7 @@
 	},
 /obj/structure/catwalk,
 /obj/random/toolbox,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/zipgun,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
@@ -2267,7 +2267,7 @@
 /obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/ammo_casing/shotgun/emp,
 /obj/item/ammo_casing/shotgun/emp,
 /obj/item/gun/projectile/shotgun/doublebarrel,

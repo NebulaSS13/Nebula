@@ -293,7 +293,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "aJ" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
@@ -628,7 +628,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
@@ -748,7 +748,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "bM" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
@@ -973,7 +973,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "cx" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/cable{
 	d2 = 8;
 	icon_state = "0-8"
@@ -1158,7 +1158,7 @@
 	},
 /area/lost_supply_base/common)
 "dc" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/trash/tray{
 	pixel_x = 10
 	},
@@ -1166,16 +1166,16 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "dd" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "de" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/kitchen/utensil/fork,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "df" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/microwave,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
@@ -1299,14 +1299,14 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "dz" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/trash/plate,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "dA" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /turf/simulated/floor/tiled/airless,
@@ -1539,14 +1539,14 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "er" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/flame/lighter/random,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "es" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/item/chems/food/drinks/cans/waterbottle,
@@ -1639,7 +1639,7 @@
 /turf/simulated/floor/shuttle/blue,
 /area/space)
 "eL" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/tank/air,
 /obj/random/tech_supply,
 /obj/item/clothing/mask/breath,
@@ -1855,7 +1855,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/supply)
 "ft" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/smokes,
 /obj/item/radio,
 /turf/simulated/floor/tiled/airless,
@@ -1885,7 +1885,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/supply)
 "fA" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/briefcase,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/supply)

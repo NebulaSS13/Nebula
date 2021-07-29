@@ -3986,7 +3986,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "hB" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/ammo_magazine/pistol/small,
 /obj/item/ammo_magazine/pistol,
 /obj/item/ammo_magazine/pistol,
@@ -4338,7 +4338,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "ii" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/pistol/holdout,
 /obj/item/gun/projectile/pistol/holdout,
 /obj/item/gun/projectile/pistol,
@@ -4537,7 +4537,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
 "iA" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/shotgun/doublebarrel,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
@@ -4853,7 +4853,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/scanner/gas,
 /obj/item/scanner/gas,
 /obj/item/scanner/gas,
@@ -5645,7 +5645,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/map_template/colony/mineralprocessing)
 "kp" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/energy/gun,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
@@ -5670,7 +5670,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "kr" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/zipgun,
 /obj/item/gun/projectile/zipgun,
 /obj/item/gun/projectile/zipgun,
@@ -6340,7 +6340,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
 "lH" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/ammo_magazine/rifle,
 /obj/item/ammo_magazine/rifle,
 /obj/item/ammo_magazine/rifle,
@@ -6899,7 +6899,7 @@
 /turf/exterior/concrete,
 /area/map_template/colony/command)
 "mD" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/shoes/magboots,
 /obj/item/clothing/mask/gas/radical,
 /obj/item/tank/oxygen,
@@ -6977,7 +6977,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/hydroponics)
 "mI" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/automatic/assault_rifle,
 /obj/item/gun/projectile/automatic/assault_rifle,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -7265,7 +7265,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/shoes/magboots,
 /obj/item/clothing/mask/gas/radical,
 /obj/item/tank/oxygen,
@@ -7403,7 +7403,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/shoes/magboots,
 /obj/item/clothing/mask/gas/radical,
 /obj/item/tank/oxygen,
@@ -7858,7 +7858,7 @@
 "oi" = (
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/warning/dust,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
@@ -7894,7 +7894,7 @@
 "oj" = (
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/warning/dust,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/bolt_action{
 	desc = "A large, unwieldy bolt-action rifle in shoddy condition. Chambered in small caliber, looks far scarier than it is. Vamoos ya varmint!";
 	name = "anti-varmint rifle"
