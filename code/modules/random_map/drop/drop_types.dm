@@ -188,9 +188,9 @@ var/global/list/datum/supply_drop_loot/supply_drop
 /datum/supply_drop_loot/power/New()
 	..()
 	contents = list(
-		/obj/machinery/power/port_gen/pacman,
-		/obj/machinery/power/port_gen/pacman/super,
-		/obj/machinery/power/port_gen/pacman/mrs)
+		/obj/machinery/port_gen/pacman,
+		/obj/machinery/port_gen/pacman/super,
+		/obj/machinery/port_gen/pacman/mrs)
 
 /datum/supply_drop_loot/power/contents()
 	return list(pick(contents))

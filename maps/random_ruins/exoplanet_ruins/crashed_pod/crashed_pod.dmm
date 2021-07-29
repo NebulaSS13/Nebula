@@ -971,7 +971,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/crashed_pod)

@@ -26,7 +26,7 @@
 	var/fusion_reactant_cap
 	var/cohesion_regeneration = 1
 
-	var/obj/machinery/power/fusion_core/owned_core
+	var/obj/machinery/fusion_core/owned_core
 	var/list/reactants = list()
 	var/list/particle_catchers = list()
 
@@ -34,7 +34,8 @@
 		/obj/item/projectile,
 		/obj/effect,
 		/obj/structure/cable,
-		/obj/machinery/atmospherics
+		/obj/machinery/atmospherics,
+		/obj/machinery/power/terminal
 		)
 
 	var/light_min_range = 2
@@ -45,7 +46,7 @@
 	var/last_range
 	var/last_power
 
-/obj/effect/fusion_em_field/Initialize(mapload, var/obj/machinery/power/fusion_core/new_owned_core)
+/obj/effect/fusion_em_field/Initialize(mapload, var/obj/machinery/fusion_core/new_owned_core)
 	. = ..()
 
 	set_light(light_min_range, light_min_power)
@@ -111,7 +112,7 @@
 	React()
 
 	// Dump power to our powernet.
-	owned_core.add_avail(FUSION_ENERGY_PER_K * plasma_temperature)
+	owned_core.generate_power(FUSION_ENERGY_PER_K * plasma_temperature)
 
 	// Energy decay.
 	if(plasma_temperature >= 1)

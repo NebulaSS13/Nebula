@@ -216,7 +216,7 @@
 "aI" = (
 /obj/item/wirecutters,
 /obj/item/stack/cable_coil,
-/obj/machinery/power/port_gen/pacman/super,
+/obj/machinery/port_gen/pacman/super,
 /obj/structure/cable{
 	dir = 8;
 	icon_state = "0-5"

@@ -17,7 +17,7 @@
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
-	if(!(locate(/obj/machinery/power/fusion_core/mapped) in SSmachines.machinery))
+	if(!(locate(/obj/machinery/fusion_core/mapped) in SSmachines.machinery))
 		to_chat(usr, "This map is not appropriate for this verb.")
 		return
 
@@ -31,14 +31,14 @@
 
 	log_and_message_admins("## FUSION CORE SETUP - Setup initiated by [usr].")
 
-	var/obj/machinery/power/fusion_core/mapped/core = locate() in SSmachines.machinery
+	var/obj/machinery/fusion_core/mapped/core = locate() in SSmachines.machinery
 	if(core.jumpstart(15000))
 
 		for(var/obj/machinery/fusion_fuel_injector/mapped/injector in SSmachines.machinery)
 			injector.cur_assembly = new /obj/item/fuel_assembly/deuterium(injector)
 			injector.BeginInjecting()
 
-		for(var/obj/machinery/power/emitter/gyrotron/gyro in SSmachines.machinery)
+		for(var/obj/machinery/emitter/gyrotron/gyro in SSmachines.machinery)
 			gyro.activate(usr)
 
 		var/list/delayed_objects = list()

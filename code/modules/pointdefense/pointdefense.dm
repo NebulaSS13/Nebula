@@ -109,7 +109,7 @@
 	idle_power_usage = 0.1 KILOWATTS
 	construct_state = /decl/machine_construction/default/panel_closed
 	base_type = /obj/machinery/pointdefense
-	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
+	stock_part_presets = list(/decl/stock_part_preset/terminal_connect)
 	uncreated_component_parts = null
 	appearance_flags = PIXEL_SCALE | LONG_GLIDE
 	var/active = TRUE

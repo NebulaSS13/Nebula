@@ -1853,7 +1853,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/smes_room)
 "eQ" = (
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
@@ -1982,7 +1982,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/smes_room)
 "ff" = (
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
@@ -2137,7 +2137,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/smes_room)
 "fx" = (
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/structure/cable/yellow{
 	icon_state = "0-8"
 	},
@@ -4878,7 +4878,7 @@
 /turf/simulated/wall/r_wall,
 /area/errant_pisces/aux_power)
 "nl" = (
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/structure/cable/yellow{
 	icon_state = "0-4"
 	},
@@ -5183,7 +5183,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/aft_hallway)
 "nK" = (
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/port_gen/pacman/mrs,
 /obj/structure/cable/yellow{
 	icon_state = "0-2"
 	},
