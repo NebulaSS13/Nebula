@@ -1,0 +1,11 @@
+#ifndef MODPACK_EXTENDED_CRAFTING
+#define MODPACK_EXTENDED_CRAFTING
+#include "_extended_crafting.dm"
+#include "datum\recipes_hygiene.dm"
+#include "datum\recipes_misc.dm"
+#include "datum\recipes_carts.dm"
+#include "datum\recipes_equipment.dm"
+#include "datum\recipes_furnitures.dm"
+#include "datum\recipes_clothing.dm"
+#include "stack_recipes_overrides.dm"
+#endif

@@ -180,7 +180,7 @@
 	. += new/datum/stack_recipe/key(src)
 	. += new/datum/stack_recipe/furniture/table_frame(src)
 	. += new/datum/stack_recipe/furniture/rack(src)
-	. += new/datum/stack_recipe/furniture/closet(src)
+	. += new/datum/stack_recipe/furniture/closet/general(src)
 	. += new/datum/stack_recipe/furniture/canister(src)
 	. += new/datum/stack_recipe/furniture/tank(src)
 	. += new/datum/stack_recipe/cannon(src)
@@ -200,22 +200,12 @@
 	. += new/datum/stack_recipe_list("modular computer frames", create_recipe_list(/datum/stack_recipe/computer))
 	. += new/datum/stack_recipe/furniture/coffin(src)
 	. += new/datum/stack_recipe/butcher_hook(src)
-	. += new/datum/stack_recipe/furniture/weightlifter(src)
-	. += new/datum/stack_recipe/furniture/filling_cabinet(src)
-	. += new/datum/stack_recipe/furniture/filling_cabinet/wall(src)
-	. += new/datum/stack_recipe/furniture/filling_cabinet/chest_drawer(src)
 	. += new/datum/stack_recipe/furniture/wall/fireaxe_cabinet(src)
 	. += new/datum/stack_recipe/furniture/wall/extinguisher_cabinet(src)
 	. += new/datum/stack_recipe_list("closets", create_recipe_list(/datum/stack_recipe/furniture/closet))
 	. += new/datum/stack_recipe_list("crates", create_recipe_list(/datum/stack_recipe/furniture/crate))
 	. += new/datum/stack_recipe_list("large crates", create_recipe_list(/datum/stack_recipe/furniture/large_crate))
-	. += new/datum/stack_recipe/furniture/critter_crate(src)
-	. += new/datum/stack_recipe_list("carts", create_recipe_list(/datum/stack_recipe/cart))
-	. += new/datum/stack_recipe/furniture/roller_bed(src)
-	. += new/datum/stack_recipe/furniture/ironing_board(src)
-	. += new/datum/stack_recipe/furniture/morgue(src)
-	. += new/datum/stack_recipe/furniture/crematorium(src)
-	. += new/datum/stack_recipe/furniture/wheelchair(src)
+
 
 /decl/material/solid/metal/steel/holographic
 	name = "holographic steel"
@@ -301,7 +291,6 @@
 	. += new/datum/stack_recipe/furniture/crate/general(src)
 	. += new/datum/stack_recipe_list("secure closets", create_recipe_list(/datum/stack_recipe/furniture/secure_closet))
 	. += new/datum/stack_recipe_list("secure crates", create_recipe_list(/datum/stack_recipe/furniture/secure_crate))
-	. += new/datum/stack_recipe/stasis_cage(src)
 
 /decl/material/solid/metal/titanium
 	name = "titanium"

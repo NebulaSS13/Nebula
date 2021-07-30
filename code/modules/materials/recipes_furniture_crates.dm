@@ -1,4 +1,12 @@
 // crates
+/datum/stack_recipe/furniture/plastic_crate
+	title = "plastic crate"
+	result_type = /obj/structure/closet/crate/plastic
+	time = 5 SECONDS
+	difficulty = MAT_VALUE_NORMAL_DIY
+	apply_material_name = FALSE
+	req_amount = 6
+
 /datum/stack_recipe/furniture/crate
 	time = 5 SECONDS
 	difficulty = MAT_VALUE_NORMAL_DIY
@@ -9,9 +17,6 @@
 	title = "crate"
 	result_type = /obj/structure/closet/crate
 	apply_material_name = TRUE
-
-/datum/stack_recipe/furniture/crate/plastic
-	result_type = /obj/structure/closet/crate/plastic
 
 /datum/stack_recipe/furniture/crate/nedical
 	title = "medical crate"

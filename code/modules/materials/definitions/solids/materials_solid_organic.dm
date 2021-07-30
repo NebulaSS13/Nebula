@@ -26,7 +26,7 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe/furniture/crate/plastic(src)
+	. += new/datum/stack_recipe/furniture/plastic_crate(src)
 	. += new/datum/stack_recipe/bag(src)
 	. += new/datum/stack_recipe/ivbag(src)
 	. += create_recipe_list(/datum/stack_recipe/cartridge)
@@ -34,8 +34,6 @@
 	. += new/datum/stack_recipe/hazard_cone(src)
 	. += new/datum/stack_recipe/furniture/flaps(src)
 	. += create_recipe_list(/datum/stack_recipe/furniture/curtain/plastic)
-	. += new/datum/stack_recipe/furniture/punchingbag(src)
-	. += new/datum/stack_recipe/mop_bucket(src)
 
 /decl/material/solid/plastic/holographic
 	name = "holographic plastic"
@@ -102,15 +100,6 @@
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe_list("cloth curtains", create_recipe_list(/datum/stack_recipe/furniture/curtain/cloth))
-	. += new/datum/stack_recipe/furniture/mattress(src)
-	. += new/datum/stack_recipe/clothing/bandana(src)
-	. += new/datum/stack_recipe/clothing/bandana/green(src)
-	. += new/datum/stack_recipe_list("bandana masks", create_recipe_list(/datum/stack_recipe/clothing/bandana_mask))
-	. += new/datum/stack_recipe/clothing/turban(src)
-	. += new/datum/stack_recipe/clothing/hijab(src)
-	. += new/datum/stack_recipe/clothing/balaclava(src)
-	. += new/datum/stack_recipe_list("ponchos", create_recipe_list(/datum/stack_recipe/clothing/poncho))
-	. += new/datum/stack_recipe/clothing/roughspun_robe(src)
 	
 /decl/material/solid/cloth/yellow
 	name = "yellow"

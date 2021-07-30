@@ -69,7 +69,6 @@
 		. += new/datum/stack_recipe/rod(src)
 		. += new/datum/stack_recipe/furniture/wall_frame(src)
 		. += new/datum/stack_recipe/furniture/table_frame(src)
-		. += new/datum/stack_recipe_list("plumbing", create_recipe_list(/datum/stack_recipe/furniture/hygiene))
 
 	if(hardness > MAT_VALUE_RIGID + 10)
 		. += new/datum/stack_recipe/fork(src)

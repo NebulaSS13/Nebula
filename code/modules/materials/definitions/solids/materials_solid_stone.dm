@@ -22,7 +22,6 @@
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/furniture/planting_bed(src)
-	. += new/datum/stack_recipe/fountain(src)
 
 /decl/material/solid/stone/sandstone
 	name = "sandstone"

@@ -105,19 +105,19 @@
 	title = "security EOD closet"
 	result_type = /obj/structure/closet/bombclosetsecurity/empty
 
-/datum/stack_recipe/furniture/closet/wall/hydrant
+/datum/stack_recipe/furniture/closet/wall_hydrant
 	title = "wall-mounted fire-safety closet"
 	result_type = /obj/structure/closet/hydrant/empty
 
-/datum/stack_recipe/furniture/closet/wall/medical
+/datum/stack_recipe/furniture/closet/wall_medical
 	title = "wall-mounted first-aid closet"
 	result_type = /obj/structure/closet/medical_wall //default variant is empty
 
-/datum/stack_recipe/furniture/closet/wall/shipping
+/datum/stack_recipe/furniture/closet/wall_shipping
 	title = "wall-mounted shipping supplies closet"
 	result_type = /obj/structure/closet/shipping_wall //default variant is empty
 
-/datum/stack_recipe/furniture/closet/wall/locker
+/datum/stack_recipe/furniture/closet/wall_locker
 	title = "wall-mounted storage locker"
 	result_type = /obj/structure/closet/walllocker //default variant is empty
 

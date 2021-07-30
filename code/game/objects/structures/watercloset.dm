@@ -100,12 +100,13 @@ var/global/list/hygiene_props = list()
 	desc = "The HT-451, a torque rotation-based, waste disposal unit for small matter. This one seems remarkably clean."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "toilet00"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
-	var/open = 0			//if the lid is up
-	var/cistern = 0			//if the cistern bit is open
+	var/open = FALSE		//if the lid is up
+	var/cistern = FALSE		//if the cistern bit is open
 	var/w_items = 0			//the combined w_class of all the items in the cistern
 	var/mob/living/swirlie = null	//the mob being given a swirlie
 
@@ -198,8 +199,9 @@ var/global/list/hygiene_props = list()
 	desc = "The HU-452, an experimental urinal."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "urinal"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
+	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 
 /obj/structure/hygiene/urinal/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/grab))
@@ -381,6 +383,7 @@ var/global/list/hygiene_props = list()
 	icon_state = "sink"
 	desc = "A sink used for washing one's hands and face."
 	anchored = 1
+	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	var/busy = 0 	//Something's being washed at the moment
 
 /obj/structure/hygiene/sink/is_pressurized_fluid_source()
@@ -502,10 +505,18 @@ var/global/list/hygiene_props = list()
 	name = "kitchen sink"
 	icon_state = "sink_alt"
 
+/obj/structure/hygiene/sink/kitchen/Initialize()
+	material_alteration &= ~MAT_FLAG_ALTERATION_COLOR
+	. = ..()
+
 /obj/structure/hygiene/sink/puddle	//splishy splashy ^_^
 	name = "puddle"
 	icon_state = "puddle"
 	clogged = -1 // how do you clog a puddle
+
+/obj/structure/hygiene/sink/puddle/Initialize()
+	material_alteration &= ~MAT_FLAG_ALTERATION_COLOR
+	. = ..()
 
 /obj/structure/hygiene/sink/puddle/is_pressurized_fluid_source()
 	return FALSE
