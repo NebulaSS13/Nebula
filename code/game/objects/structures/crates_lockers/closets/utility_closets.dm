@@ -73,43 +73,36 @@
 	desc = "It's a storage unit for tools."
 	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools
 
-/obj/structure/closet/toolcloset/Initialize(ml, _mat, _reinf_mat, var/spawn_contents = TRUE)
-	. = ..()
-	if(spawn_contents)
-		if(prob(40))
-			new /obj/item/clothing/suit/storage/hazardvest(src)
-		if(prob(70))
-			new /obj/item/flashlight(src)
-		if(prob(70))
-			new /obj/item/screwdriver(src)
-		if(prob(70))
-			new /obj/item/wrench(src)
-		if(prob(70))
-			new /obj/item/weldingtool(src)
-		if(prob(70))
-			new /obj/item/crowbar(src)
-		if(prob(70))
-			new /obj/item/wirecutters(src)
-		if(prob(70))
-			new /obj/item/t_scanner(src)
-		if(prob(20))
-			new /obj/item/storage/belt/utility(src)
-		if(prob(30))
-			new /obj/item/stack/cable_coil/random(src)
-		if(prob(30))
-			new /obj/item/stack/cable_coil/random(src)
-		if(prob(30))
-			new /obj/item/stack/cable_coil/random(src)
-		if(prob(20))
-			new /obj/item/multitool(src)
-		if(prob(5))
-			new /obj/item/clothing/gloves/insulated(src)
-		if(prob(40))
-			new /obj/item/clothing/head/hardhat(src)
+/obj/structure/closet/toolcloset/WillContain()
+	. = list()
+	. += new/datum/atom_creator/simple(list(
+			/obj/item/clothing/suit/storage/hazardvest, 
+			/obj/item/clothing/head/hardhat
+		), 40)
+	. += new/datum/atom_creator/simple(list(
+			/obj/item/flashlight,
+			/obj/item/screwdriver,
+			/obj/item/wrench,
+			/obj/item/weldingtool,
+			/obj/item/crowbar,
+			/obj/item/wirecutters,
+			/obj/item/t_scanner
+		), 70)
+	. += new/datum/atom_creator/simple(list(
+			/obj/item/storage/belt/utility,
+			/obj/item/multitool
+		), 20)
+	. += new/datum/atom_creator/simple(list(
+			/obj/item/stack/cable_coil/random,
+			/obj/item/stack/cable_coil/random,
+			/obj/item/stack/cable_coil/random
+		), 30)
+	. += new/datum/atom_creator/simple(list(
+			/obj/item/clothing/gloves/insulated
+		), 5)
 
-/obj/structure/closet/toolcloset/empty/Initialize(ml, _mat, _reinf_mat)
-	. = ..(ml, _mat, _reinf_mat, FALSE)
-	
+/obj/structure/closet/toolcloset/empty/WillContain()
+	return
 
 /*
  * Radiation Closet

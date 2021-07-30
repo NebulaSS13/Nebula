@@ -18,9 +18,9 @@
  *
  *		For syndicate call-ins see uplink_kits.dm
  */
-#define DEFINE_EMPTY_BOX(TYPE)\
-##TYPE/empty\
-	startswith = null
+#define DEFINE_EMPTY_BOX(TYPE) \
+TYPE/empty \
+	startswith = null;
 
 /obj/item/storage/box
 	name = "box"
@@ -291,7 +291,7 @@ DEFINE_EMPTY_BOX(/obj/item/storage/box/rxglasses)
 	name = "box of donk-pockets"
 	desc = "<B>Instructions:</B> <I>Heat in microwave. Product will cool if not eaten within seven minutes.</I>"
 	icon_state = "donk_kit"
-	startswith = list((/obj/item/chems/food/donkpocket = 6)
+	startswith = list(/obj/item/chems/food/donkpocket = 6)
 
 DEFINE_EMPTY_BOX(/obj/item/storage/box/donkpockets)
 
@@ -667,16 +667,19 @@ DEFINE_EMPTY_BOX(/obj/item/storage/box/parts_pack/manipulator)
 /obj/item/storage/box/parts_pack/laser
 	icon_state = "laser"
 	startswith = list(/obj/item/stock_parts/micro_laser = 7)
+
 DEFINE_EMPTY_BOX(/obj/item/storage/box/parts_pack/laser)
 
 /obj/item/storage/box/parts_pack/capacitor
 	icon_state = "capacitor"
 	startswith = list(/obj/item/stock_parts/capacitor = 7)
+
 DEFINE_EMPTY_BOX(/obj/item/storage/box/parts_pack/capacitor)
 
 /obj/item/storage/box/parts_pack/keyboard
 	icon_state = "keyboard"
 	startswith = list(/obj/item/stock_parts/keyboard = 7)
+
 DEFINE_EMPTY_BOX(/obj/item/storage/box/parts_pack/keyboard)
 
 //Generic empty variants:

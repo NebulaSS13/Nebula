@@ -54,7 +54,6 @@
 	if(integrity >= 50 && hardness >= MAT_VALUE_FLEXIBLE + 10)
 		. += new/datum/stack_recipe/furniture/door(src)
 		. += new/datum/stack_recipe/furniture/barricade(src)
-		. += new/datum/stack_recipe/furniture/barricade/spikes(src)
 		. += new/datum/stack_recipe/furniture/stool(src)
 		. += new/datum/stack_recipe/furniture/bar_stool(src)
 		. += new/datum/stack_recipe/furniture/coatrack(src)

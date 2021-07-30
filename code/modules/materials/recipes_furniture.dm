@@ -123,10 +123,6 @@ ARMCHAIR(yellow)
 	result_type = /obj/structure/barricade
 	time = 50
 
-/datum/stack_recipe/furniture/barricade/spikes
-	title = "cheval spikes"
-	result_type = /obj/structure/barricade/spike
-
 /datum/stack_recipe/furniture/stool
 	title = "stool"
 	result_type = /obj/item/stool
@@ -380,17 +376,17 @@ ARMCHAIR(yellow)
 
 /datum/stack_recipe/furniture/filling_cabinet
 	title = "filling cabinet"
-	retsult_type = /obj/structure/filingcabinet
+	result_type = /obj/structure/filingcabinet
 	difficulty = MAT_VALUE_NORMAL_DIY
 	req_amount = 7
 
 /datum/stack_recipe/furniture/filling_cabinet/wall
 	title = "wall filling cabinet"
-	retsult_type = /obj/structure/filingcabinet/wallcabinet
+	result_type = /obj/structure/filingcabinet/wallcabinet
 
 /datum/stack_recipe/furniture/filling_cabinet/chest_drawer
 	title = "chest drawer"
-	retsult_type = /obj/structure/filingcabinet/chestdrawer
+	result_type = /obj/structure/filingcabinet/chestdrawer
 
 //Plumbing / hygiene
 /datum/stack_recipe/furniture/hygiene

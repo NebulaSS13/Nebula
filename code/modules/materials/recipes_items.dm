@@ -329,10 +329,11 @@
 	title = "black bandana mask"
 	result_type = /obj/item/clothing/mask/bandana
 
-#define DEFINE_BANDANA_MASK(COLOR)\
-/datum/stack_recipe/clothing/bandana_mask/##COLOR \
-	title = "[#COLOR] bandana mask";\
-	result_type = /obj/item/clothing/mask/bandana/##COLOR;
+#define DEFINE_BANDANA_MASK(COLOR) \
+/datum/stack_recipe/clothing/bandana_mask/##COLOR {\
+	title = #COLOR + " bandana mask"; \
+	result_type = /obj/item/clothing/mask/bandana/##COLOR; \
+}
 
 DEFINE_BANDANA_MASK(red)
 DEFINE_BANDANA_MASK(blue)
@@ -367,35 +368,35 @@ DEFINE_BANDANA_MASK(skull)
 	req_amount = 4
 
 /datum/stack_recipe/clothing/poncho/classic
-	name = "poncho"
+	title = "poncho"
 	result_type = /obj/item/clothing/suit/poncho/colored
 /datum/stack_recipe/clothing/poncho/green
-	name = "green poncho"
+	title = "green poncho"
 	result_type = /obj/item/clothing/suit/poncho/colored/green
 /datum/stack_recipe/clothing/poncho/red
-	name = "red poncho"
+	title = "red poncho"
 	result_type = /obj/item/clothing/suit/poncho/colored/red
 /datum/stack_recipe/clothing/poncho/purple
-	name = "purple poncho"
+	title = "purple poncho"
 	result_type = /obj/item/clothing/suit/poncho/colored/purple
 /datum/stack_recipe/clothing/poncho/blue
-	name = "blue poncho"
+	title = "blue poncho"
 	result_type = /obj/item/clothing/suit/poncho/colored/blue
 /datum/stack_recipe/clothing/poncho/security
-	name = "security poncho"
+	title = "security poncho"
 	result_type = /obj/item/clothing/suit/poncho/roles/security
 /datum/stack_recipe/clothing/poncho/medical
-	name = "medical poncho"
+	title = "medical poncho"
 	result_type = /obj/item/clothing/suit/poncho/roles/medical
 /datum/stack_recipe/clothing/poncho/engineering
-	name = "engineering poncho"
+	title = "engineering poncho"
 	result_type = /obj/item/clothing/suit/poncho/roles/engineering
 /datum/stack_recipe/clothing/poncho/cargo
-	name = "cargo poncho"
+	title = "cargo poncho"
 	result_type = /obj/item/clothing/suit/poncho/roles/cargo
 
 /datum/stack_recipe/clothing/roughspun_robe
-	name = "roughspun robes"
+	title = "roughspun robes"
 	result_type = /obj/item/clothing/suit/robe
 	difficulty = MAT_VALUE_EASY_DIY
 	req_amount = 4
