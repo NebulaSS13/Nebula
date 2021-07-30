@@ -3,6 +3,7 @@
 	icon = 'icons/obj/machines/pipe_dispenser.dmi'
 	icon_state = "pipe_d"
 	density = 1
+	interact_offline = TRUE
 	var/obj/structure/cable/last_piece
 	var/obj/item/stack/cable_coil/cable
 	var/max_cable = 100

@@ -11,6 +11,7 @@
 	var/obj/machinery/portable_atmospherics/connected_device
 	var/on = 0
 	use_power = POWER_USE_OFF
+	interact_offline = TRUE
 
 	uncreated_component_parts = null
 	frame_type = /obj/item/pipe

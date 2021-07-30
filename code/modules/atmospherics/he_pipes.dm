@@ -5,6 +5,7 @@
 	color = "#404040"
 	level = 2
 	connect_types = CONNECT_TYPE_HE
+	interact_offline = TRUE //Needs to be set so that pipes don't say they lack power in their description
 	var/initialize_directions_he
 	var/surface = 2	//surface area in m^2
 	var/icon_temperature = T20C //stop small changes in temperature causing an icon refresh
