@@ -1,3 +1,4 @@
+#define MATERIAL_DOOR_SOUND_VOLUME 25
 /obj/structure/door
 	name = "door"
 	icon = 'icons/obj/doors/material_doors.dmi'
@@ -59,7 +60,7 @@
 	if(!can_close())
 		return FALSE
 	flick("[icon_base]closing", src)
-	playsound(src.loc, material.dooropen_noise, 100, 1)
+	playsound(src.loc, material.doorclose_noise, MATERIAL_DOOR_SOUND_VOLUME, 1)
 
 	changing_state = TRUE
 	sleep(1 SECOND)
@@ -73,7 +74,7 @@
 	if(!can_open())
 		return FALSE
 	flick("[icon_base]opening", src)
-	playsound(src.loc, material.dooropen_noise, 100, 1)
+	playsound(src.loc, material.dooropen_noise, MATERIAL_DOOR_SOUND_VOLUME, 1)
 
 	changing_state = TRUE
 	sleep(1 SECOND)
@@ -211,3 +212,4 @@
 
 /obj/structure/door/shuttle
 	material = /decl/material/solid/metal/steel
+#undef MATERIAL_DOOR_SOUND_VOLUME 
