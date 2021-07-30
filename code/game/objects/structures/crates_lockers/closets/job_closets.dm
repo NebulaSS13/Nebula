@@ -28,6 +28,9 @@
 		/obj/item/clothing/shoes/color/black = 2
 	)
 
+/obj/structure/closet/gmcloset/empty/WillContain()
+	return null
+
 /*
  * Chef
  */
@@ -45,6 +48,9 @@
 		/obj/item/clothing/under/chef,
 		/obj/item/clothing/head/chefhat
 	)
+
+/obj/structure/closet/chefcloset/empty/WillContain()
+	return null
 
 /*
  * Janitor
@@ -70,6 +76,9 @@
 		/obj/item/storage/belt/janitor
 	)
 
+/obj/structure/closet/jcloset/empty/WillContain()
+	return null
+
 /*
  * Lawyer
  */
@@ -91,3 +100,6 @@
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/shoes/color/black
 	)
+
+/obj/structure/closet/lawcloset/empty/WillContain()
+	return null

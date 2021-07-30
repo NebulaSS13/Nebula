@@ -24,11 +24,13 @@
 		/obj/item/clothing/head/ushanka = 5,
 		/obj/item/clothing/under/soviet = 5)
 
+/obj/structure/closet/gimmick/russian/empty/WillContain()
+	return null
+
 /obj/structure/closet/gimmick/tacticool
 	name = "tacticool gear closet"
 	desc = "It's a storage unit for Tacticool gear."
 	closet_appearance = /decl/closet_appearance/tactical
-
 
 /obj/structure/closet/gimmick/tacticool/WillContain()
 	return list(
@@ -40,6 +42,9 @@
 		/obj/item/clothing/shoes/jackboots/swat = 2,
 		/obj/item/clothing/suit/space/void/swat = 2,
 		/obj/item/clothing/under/syndicate/tacticool = 2)
+
+/obj/structure/closet/gimmick/tacticool/empty/WillContain()
+	return null
 
 /obj/structure/closet/thunderdome
 	name = "\improper Thunderdome closet"

@@ -18,6 +18,9 @@
  *
  *		For syndicate call-ins see uplink_kits.dm
  */
+#define DEFINE_EMPTY_BOX(TYPE)\
+##TYPE/empty\
+	startswith = null
 
 /obj/item/storage/box
 	name = "box"
@@ -66,7 +69,7 @@
 	if ( !found )	// User is too far away
 		return
 	// Now make the cardboard
-	to_chat(user, "<span class='notice'>You fold [src] flat.</span>")
+	to_chat(user, SPAN_NOTICE("You fold [src] flat."))
 	if(ispath(foldable, /obj/item/stack))
 		var/stack_amt = max(2**(w_class - 3), 1)
 		new foldable(get_turf(src), stack_amt, /decl/material/solid/cardboard)
@@ -78,7 +81,7 @@
 	..()
 	foldable = null //special form fitted boxes should not be foldable.
 
-/obj/item/storage/box/survival/
+/obj/item/storage/box/survival
 	name = "crew survival kit"
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and white stripe indicate this one contains oxygen."
 	icon_state = "survival"
@@ -90,6 +93,7 @@
 					/obj/item/chems/food/snacks/candy/proteinbar = 1,
 					/obj/item/oxycandle = 1,
 					/obj/item/crowbar/cheap = 1)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/survival)
 
 /obj/item/storage/box/engineer
 	name = "engineer survival kit"
@@ -103,6 +107,7 @@
 					/obj/item/flashlight/flare/glowstick = 1,
 					/obj/item/chems/food/snacks/candy/proteinbar = 1,
 					/obj/item/oxycandle = 1)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/engineer)
 
 /obj/item/storage/box/gloves
 	name = "box of sterile gloves"
@@ -110,19 +115,21 @@
 	icon_state = "latex"
 	startswith = list(/obj/item/clothing/gloves/latex = 5,
 					/obj/item/clothing/gloves/latex/nitrile = 2)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/gloves)
 
 /obj/item/storage/box/masks
 	name = "box of sterile masks"
 	desc = "This box contains masks of sterility."
 	icon_state = "sterile"
 	startswith = list(/obj/item/clothing/mask/surgical = 7)
-
+DEFINE_EMPTY_BOX(/obj/item/storage/box/masks)
 
 /obj/item/storage/box/syringes
 	name = "box of syringes"
 	desc = "A box full of syringes."
 	icon_state = "syringe"
 	startswith = list(/obj/item/chems/syringe = 7)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/syringes)
 
 /obj/item/storage/box/syringegun
 	name = "box of syringe gun cartridges"
@@ -130,11 +137,11 @@
 	icon_state = "syringe"
 	startswith = list(/obj/item/syringe_cartridge = 7)
 
-
 /obj/item/storage/box/beakers
 	name = "box of beakers"
 	icon_state = "beaker"
 	startswith = list(/obj/item/chems/glass/beaker = 7)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/beakers)
 
 /obj/item/storage/box/beakers/insulated
 	name = "box of insulated beakers"
@@ -146,6 +153,7 @@
 	icon_state = "ammo"
 	desc = "A sturdy metal box with several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	use_sound = 'sound/effects/closet_open.ogg'
+DEFINE_EMPTY_BOX(/obj/item/storage/box/ammo)
 
 /obj/item/storage/box/ammo/blanks
 	name = "box of blank shells"
@@ -260,6 +268,7 @@
 	desc = "This box contains nerd glasses."
 	icon_state = "glasses"
 	startswith = list(/obj/item/clothing/glasses/prescription = 7)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/rxglasses)
 
 /obj/item/storage/box/cdeathalarm_kit
 	name = "death alarm kit"
@@ -284,6 +293,7 @@
 	desc = "<B>Instructions:</B> <I>Heat in microwave. Product will cool if not eaten within seven minutes.</I>"
 	icon_state = "donk_kit"
 	startswith = list(/obj/item/chems/food/snacks/donkpocket = 6)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/donkpockets)
 
 /obj/item/storage/box/sinpockets
 	name = "box of sin-pockets"
@@ -300,6 +310,7 @@
 	icon_state = "monkeycubebox"
 	can_hold = list(/obj/item/chems/food/snacks/monkeycube)
 	startswith = list(/obj/item/chems/food/snacks/monkeycube/wrapped = 5)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/monkeycubes)
 
 /obj/item/storage/box/monkeycubes/spidercubes
 	name = "spiderling cube box"
@@ -311,26 +322,27 @@
 	desc = "Has so many empty IDs."
 	icon_state = "id"
 	startswith = list(/obj/item/card/id = 7)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/ids)
 
 /obj/item/storage/box/large/ids
 	name = "box of spare IDs"
 	desc = "Has so, so many empty IDs."
 	icon_state = "id_large"
 	startswith = list(/obj/item/card/id = 14)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/large/ids)
 
 /obj/item/storage/box/handcuffs
 	name = "box of spare handcuffs"
 	desc = "A box full of handcuffs."
 	icon_state = "handcuff"
 	startswith = list(/obj/item/handcuffs = 7)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/handcuffs)
 
 /obj/item/storage/box/mousetraps
 	name = "box of Pest-B-Gon rat traps"
 	desc = "<B><FONT color='red'>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
 	startswith = list(/obj/item/assembly/mousetrap = 6)
-
-/obj/item/storage/box/mousetraps/empty
-	startswith = null
+DEFINE_EMPTY_BOX(/obj/item/storage/box/mousetraps)
 
 /obj/item/storage/box/pillbottles
 	name = "box of pill bottles"
@@ -344,6 +356,7 @@
 	icon_state = "spbox"
 	can_hold = list(/obj/item/toy/snappop)
 	startswith = list(/obj/item/toy/snappop = 8)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/snappops)
 
 /obj/item/storage/box/matches
 	name = "matchbox"
@@ -355,6 +368,7 @@
 	slot_flags = SLOT_LOWER_BODY
 	can_hold = list(/obj/item/flame/match)
 	startswith = list(/obj/item/flame/match = 10)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/matches)
 
 /obj/item/storage/box/matches/attackby(obj/item/flame/match/W, mob/user)
 	if(istype(W) && !W.lit && !W.burnt)
@@ -387,15 +401,14 @@
 
 /obj/item/storage/box/lights/bulbs
 	startswith = list(/obj/item/light/bulb = 21)
-
-/obj/item/storage/box/lights/bulbs/empty
-	startswith = null
+DEFINE_EMPTY_BOX(/obj/item/storage/box/lights/bulbs)
 
 /obj/item/storage/box/lights/tubes
 	name = "box of replacement tubes"
 	icon_state = "lighttube"
 	startswith = list(/obj/item/light/tube = 17,
 					/obj/item/light/tube/large = 4)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/lights/tubes)
 
 /obj/item/storage/box/lights/tubes/random
 	name = "box of replacement tubes -- party pack"
@@ -403,18 +416,13 @@
 	startswith = list(/obj/item/light/tube/party = 17,
 					/obj/item/light/tube/large/party = 4)
 
-/obj/item/storage/box/lights/tubes/empty
-	startswith = null
-
 /obj/item/storage/box/lights/mixed
 	name = "box of replacement lights"
 	icon_state = "lightmixed"
 	startswith = list(/obj/item/light/tube = 12,
 					/obj/item/light/tube/large = 4,
 					/obj/item/light/bulb = 5)
-
-/obj/item/storage/box/lights/mixed/empty
-	startswith = null
+DEFINE_EMPTY_BOX(/obj/item/storage/box/lights/mixed)
 
 /obj/item/storage/box/glowsticks
 	name = "box of mixed glowsticks"
@@ -454,6 +462,7 @@
 	can_hold = list(/obj/item/chems/food/snacks/checker)
 	startswith = list(/obj/item/chems/food/snacks/checker = 12,
 					/obj/item/chems/food/snacks/checker/red = 12)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/checkers)
 
 /obj/item/storage/box/checkers/chess
 	name = "black chess box"
@@ -465,6 +474,7 @@
 				/obj/item/chems/food/snacks/checker/rook = 2,
 				/obj/item/chems/food/snacks/checker/queen = 1,
 				/obj/item/chems/food/snacks/checker/king = 1)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/checkers/chess)
 
 /obj/item/storage/box/checkers/chess/red
 	name = "red chess box"
@@ -476,6 +486,7 @@
 				/obj/item/chems/food/snacks/checker/rook/red = 2,
 				/obj/item/chems/food/snacks/checker/queen/red = 1,
 				/obj/item/chems/food/snacks/checker/king/red = 1)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/checkers/chess/red)
 
 
 /obj/item/storage/box/headset
@@ -510,6 +521,7 @@
 	icon = 'icons/obj/items/storage/detergent.dmi'
 	icon_state = "detergent"
 	startswith = list(/obj/item/chems/pill/detergent = 10)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/detergent)
 
 //cargosia supply boxes - Primarily for restocking
 
@@ -616,6 +628,7 @@
 		/obj/item/stock_parts/console_screen = 2,
 		/obj/item/stock_parts/matter_bin = 2
 	)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/parts)
 
 /obj/item/storage/box/parts_pack
 	name = "parts pack"
@@ -624,6 +637,7 @@
 	icon_state = "part"
 	w_class = ITEM_SIZE_SMALL
 	max_storage_space = BASE_STORAGE_CAPACITY(ITEM_SIZE_SMALL)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/parts_pack)
 
 /obj/item/storage/box/parts_pack/Initialize()
 	if(length(startswith))
@@ -634,15 +648,35 @@
 /obj/item/storage/box/parts_pack/manipulator
 	icon_state = "mainpulator"
 	startswith = list(/obj/item/stock_parts/manipulator = 7)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/parts_pack/manipulator)
 	
 /obj/item/storage/box/parts_pack/laser
 	icon_state = "laser"
 	startswith = list(/obj/item/stock_parts/micro_laser = 7)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/parts_pack/laser)
 
 /obj/item/storage/box/parts_pack/capacitor
 	icon_state = "capacitor"
 	startswith = list(/obj/item/stock_parts/capacitor = 7)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/parts_pack/capacitor)
 
 /obj/item/storage/box/parts_pack/keyboard
 	icon_state = "keyboard"
 	startswith = list(/obj/item/stock_parts/keyboard = 7)
+DEFINE_EMPTY_BOX(/obj/item/storage/box/parts_pack/keyboard)
+
+//Generic empty variants:
+/obj/item/storage/box/implant/empty
+	name = "boxed implant kit"
+	icon_state = "implant"
+	
+/obj/item/storage/box/grenade/empty
+	name = "grenades box"
+	desc = "A box containing grenades."
+	icon_state = "flashbang"
+
+/obj/item/storage/box/rad_hazard/empty
+	name = "radiation hazard box"
+	icon_state = "radbox"
+
+#undef DEFINE_EMPTY_BOX

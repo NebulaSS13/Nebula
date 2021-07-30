@@ -15,6 +15,9 @@
 		/obj/item/clothing/head/soft
 	)
 
+/obj/structure/closet/secure_closet/cargotech/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/quartermaster
 	name = "quartermaster's locker"
 	req_access = list(access_qm)
@@ -34,3 +37,6 @@
 		/obj/item/clothing/glasses/meson,
 		/obj/item/clothing/head/soft,
 	)
+
+/obj/structure/closet/secure_closet/quartermaster/empty/WillContain()
+	return

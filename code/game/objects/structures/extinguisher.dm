@@ -8,9 +8,13 @@
 	var/obj/item/extinguisher/has_extinguisher
 	var/opened = 0
 
-/obj/structure/extinguisher_cabinet/Initialize()
+/obj/structure/extinguisher_cabinet/empty/Initialize(ml, _mat, _reinf_mat)
+	. = ..(ml, _mat, _reinf_mat, FALSE)
+	
+/obj/structure/extinguisher_cabinet/Initialize(ml, _mat, _reinf_mat, var/spawn_extinguisher = TRUE)
 	. = ..()
-	has_extinguisher = new/obj/item/extinguisher(src)
+	if(spawn_extinguisher)
+		has_extinguisher = new/obj/item/extinguisher(src)
 
 /obj/structure/extinguisher_cabinet/attackby(obj/item/O, mob/user)
 	if(isrobot(user))

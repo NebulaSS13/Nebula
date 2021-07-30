@@ -17,3 +17,6 @@
 		/obj/item/storage/belt/general,
 		/obj/item/urn
 	)
+
+/obj/structure/closet/secure_closet/chaplain/empty/WillContain()
+	return

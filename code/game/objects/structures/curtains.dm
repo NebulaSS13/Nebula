@@ -1,3 +1,71 @@
+//
+// Curtain types declaration
+//
+/decl/curtain_kind
+	var/const/name = "curtain"
+	var/const/color = "white"
+	var/const/alpha = 255
+	var/const/material_key = /decl/material/solid/plastic
+
+/decl/curtain_kind/proc/make_item(var/loc)
+	var/obj/item/curtain/C = new(loc, material_key, src)
+	C.alpha = alpha
+	C.set_color(color)
+	C.SetName("rolled [name]")
+	return C
+
+/decl/curtain_kind/proc/make_structure(var/loc, var/dir, var/opened = FALSE)
+	var/obj/structure/curtain/C = new(loc, dir, material_key, null, src)
+	C.alpha = alpha
+	C.set_color(color)
+	C.SetName(name)
+	C.set_opacity(opened)
+	return C
+
+//Cloth curtains
+/decl/curtain_kind/cloth
+	material_key = /decl/material/solid/cloth
+
+/decl/curtain_kind/cloth/bed
+	name = "bed curtain"
+	color = "#854636"
+
+/decl/curtain_kind/cloth/black
+	name = "black curtain"
+	color = "#222222"
+
+/decl/curtain_kind/cloth/bar
+	name = "bar curtain"
+	color = "#854636"
+
+//Plastic curtains
+/decl/curtain_kind/plastic
+	name = "plastic curtain"
+	color = "#b8f5e3"
+	material_key = /decl/material/solid/plastic
+
+/decl/curtain_kind/plastic/medical
+	alpha = 200
+
+/decl/curtain_kind/plastic/privacy
+	name = "privacy curtain"
+
+/decl/curtain_kind/plastic/shower
+	name = "shower curtain"
+	color = "#acd1e9"
+	alpha = 200
+
+/decl/curtain_kind/plastic/shower/engineering
+	color = "#ffa500"
+
+/decl/curtain_kind/plastic/shower/security
+	color = "#aa0000"
+
+/decl/curtain_kind/plastic/canteen
+	name = "privacy curtain"
+	color = COLOR_BLUE_GRAY
+
+
 /obj/item/curtain
 	name = "rolled curtain"
 	desc = "A rolled curtains."
@@ -6,11 +74,44 @@
 	force = 3 //just plastic
 	w_class = ITEM_SIZE_HUGE //curtains, yeap
 
-	var/obj/structure/curtain/holder = /obj/structure/curtain
+	var/curtain_kind_path = /decl/curtain_kind //path to decl containing the curtain's details
+
+/obj/item/curtain/bed
+	curtain_kind_path = /decl/curtain_kind/cloth/bed
+/obj/item/curtain/black
+	curtain_kind_path = /decl/curtain_kind/cloth/black
+/obj/item/curtain/bar
+	curtain_kind_path = /decl/curtain_kind/cloth/bar
+/obj/item/curtain/medical
+	curtain_kind_path = /decl/curtain_kind/plastic/medical
+/obj/item/curtain/privacy
+	curtain_kind_path = /decl/curtain_kind/plastic/privacy
+/obj/item/curtain/shower
+	curtain_kind_path = /decl/curtain_kind/plastic/shower
+/obj/item/curtain/shower/engineering
+	curtain_kind_path = /decl/curtain_kind/plastic/shower/engineering
+/obj/item/curtain/shower/security
+	curtain_kind_path = /decl/curtain_kind/plastic/shower/security
+/obj/item/curtain/canteen
+	curtain_kind_path = /decl/curtain_kind/plastic/canteen
+
+/obj/item/curtain/Initialize(ml, material_key, var/decl/curtain_kind/kind = null)
+	if(kind)
+		if(istype(kind))
+			curtain_kind_path = kind.type
+		else if(ispath(kind))
+			curtain_kind_path = kind
+	else
+		kind = GET_DECL(curtain_kind_path)
+	src.alpha = kind.alpha
+	src.set_color(kind.color)
+	src.SetName(kind.name)
+	material_key = kind.material_key
+	. = ..()
 
 /obj/item/curtain/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
-		if(!holder)
+		if(!curtain_kind_path)
 			return
 
 		if(!isturf(loc))
@@ -32,10 +133,9 @@
 		if(QDELETED(src))
 			return
 
-		var/obj/structure/curtain/C = new holder(loc)
+		var/decl/curtain_kind/kind = GET_DECL(curtain_kind_path)
+		var/obj/structure/curtain/C = kind.make_structure(loc, dir)
 		transfer_fingerprints_to(C)
-		C.SetName(replacetext(name, "rolled", ""))
-		C.color = color
 		qdel(src)
 	else
 		..()
@@ -48,16 +148,26 @@
 	opacity = TRUE
 	density = FALSE
 	anchored = TRUE
-
-	var/obj/item/curtain/holder = /obj/item/curtain
+	var/curtain_kind_path = /decl/curtain_kind
 
 /obj/structure/curtain/open
 	icon_state = "open"
 	layer = ABOVE_HUMAN_LAYER
 	opacity = FALSE
 
-/obj/structure/curtain/Initialize()
+/obj/structure/curtain/Initialize(ml, _mat, _reinf_mat, var/decl/curtain_kind/kind = null)
+	if(kind)
+		if(istype(kind))
+			curtain_kind_path = kind.type
+		else if(ispath(kind))
+			curtain_kind_path = kind
+	else
+		kind = GET_DECL(curtain_kind_path)
+	_mat = kind.material_key
 	. = ..()
+	src.SetName(kind.name)
+	src.alpha = kind.alpha
+	src.set_color(kind.color)
 	set_extension(src, /datum/extension/turf_hand)
 
 /obj/structure/curtain/bullet_act(obj/item/projectile/P, def_zone)
@@ -73,7 +183,7 @@
 
 /obj/structure/curtain/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
-		if(!holder)
+		if(!curtain_kind_path)
 			return
 
 		user.visible_message(
@@ -87,10 +197,9 @@
 		if(QDELETED(src))
 			return
 
-		var/obj/item/curtain/C = new holder(loc)
+		var/decl/curtain_kind/kind = GET_DECL(curtain_kind_path)
+		var/obj/item/curtain/C = kind.make_item(loc)
 		transfer_fingerprints_to(C)
-		C.SetName("rolled [name]")
-		C.color = color
 		qdel(src)
 	else
 		..()
@@ -111,68 +220,36 @@
 
 // Normal subtypes
 /obj/structure/curtain/bed
-	name = "bed curtain"
-	color = "#854636"
-
+	curtain_kind_path = /decl/curtain_kind/cloth/bed
 /obj/structure/curtain/black
-	name = "black curtain"
-	color = "#222222"
-
-/obj/structure/curtain/medical
-	name = "plastic curtain"
-	color = "#b8f5e3"
-	alpha = 200
-
+	curtain_kind_path = /decl/curtain_kind/cloth/black
 /obj/structure/curtain/bar
-	name = "bar curtain"
-	color = "#854636"
-
+	curtain_kind_path = /decl/curtain_kind/cloth/bar
+/obj/structure/curtain/medical
+	curtain_kind_path = /decl/curtain_kind/plastic/medical
 /obj/structure/curtain/privacy
-	name = "privacy curtain"
-	color = "#b8f5e3"
-
+	curtain_kind_path = /decl/curtain_kind/plastic/privacy
 /obj/structure/curtain/shower
-	name = "shower curtain"
-	color = "#acd1e9"
-	alpha = 200
-
+	curtain_kind_path = /decl/curtain_kind/plastic/shower
 /obj/structure/curtain/canteen
-	name = "privacy curtain"
-	color = COLOR_BLUE_GRAY
+	curtain_kind_path = /decl/curtain_kind/plastic/canteen
 
 // Open subtypes
 /obj/structure/curtain/open/bed
-	name = "bed curtain"
-	color = "#854636"
-
+	curtain_kind_path = /decl/curtain_kind/cloth/bed
 /obj/structure/curtain/open/black
-	name = "black curtain"
-	color = "#222222"
-
+	curtain_kind_path = /decl/curtain_kind/cloth/black
 /obj/structure/curtain/open/medical
-	name = "plastic curtain"
-	color = "#b8f5e3"
-	alpha = 200
-
+	curtain_kind_path = /decl/curtain_kind/plastic/medical
 /obj/structure/curtain/open/bar
-	name = "bar curtain"
-	color = "#854636"
-
+	curtain_kind_path = /decl/curtain_kind/cloth/bar
 /obj/structure/curtain/open/privacy
-	name = "privacy curtain"
-	color = "#b8f5e3"
-
+	curtain_kind_path = /decl/curtain_kind/plastic/privacy
 /obj/structure/curtain/open/shower
-	name = "shower curtain"
-	color = "#acd1e9"
-	alpha = 200
-
+	curtain_kind_path = /decl/curtain_kind/plastic/shower
 /obj/structure/curtain/open/canteen
-	name = "privacy curtain"
-	color = COLOR_BLUE_GRAY
-
+	curtain_kind_path = /decl/curtain_kind/plastic/canteen
 /obj/structure/curtain/open/shower/engineering
-	color = "#ffa500"
-
+	curtain_kind_path = /decl/curtain_kind/plastic/shower/engineering
 /obj/structure/curtain/open/shower/security
-	color = "#aa0000"
+	curtain_kind_path = /decl/curtain_kind/plastic/shower/security

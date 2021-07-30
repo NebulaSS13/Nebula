@@ -12,6 +12,10 @@
 	var/list/oxytanks = list()	//sorry for the similar var names
 	var/list/hydtanks = list()
 
+/obj/structure/dispenser/empty
+	oxygentanks = 0
+	hydrogentanks = 0
+
 /obj/structure/dispenser/oxygen
 	hydrogentanks = 0
 

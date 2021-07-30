@@ -26,6 +26,9 @@
 /obj/structure/closet/secure_closet/personal/cabinet/WillContain()
 	return list(/obj/item/storage/backpack/satchel/grey/withwallet, /obj/item/radio/headset)
 
+/obj/structure/closet/secure_closet/personal/cabinet/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/personal/CanToggleLock(var/mob/user, var/obj/item/card/id/id_card)
 	return ..() || (istype(id_card) && id_card.registered_name && (!registered_name || (registered_name == id_card.registered_name)))
 

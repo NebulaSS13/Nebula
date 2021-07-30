@@ -14,6 +14,9 @@
 		/obj/item/clothing/shoes/swimmingfins = 2,
 		/obj/item/towel = 2)
 
+/obj/structure/closet/athletic_mixed/empty/WillContain()
+	return null
+
 /obj/structure/closet/boxinggloves
 	name = "boxing gloves"
 	desc = "It's a storage unit for gloves for use in the boxing ring."
@@ -45,6 +48,9 @@
 		/obj/item/gun/energy/lasertag/red = 3,
 		/obj/item/clothing/suit/redtag = 3)
 
+/obj/structure/closet/lasertag/red/empty/WillContain()
+	return null
+
 /obj/structure/closet/lasertag/blue
 	name = "blue laser tag equipment"
 	desc = "It's a storage unit for laser tag equipment."
@@ -54,3 +60,6 @@
 	return list(
 		/obj/item/gun/energy/lasertag/blue = 3,
 		/obj/item/clothing/suit/bluetag = 3)
+
+/obj/structure/closet/lasertag/blue/empty/WillContain()
+	return null

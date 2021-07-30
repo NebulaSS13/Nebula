@@ -5,3 +5,6 @@
 
 /obj/structure/closet/secure_closet/bar/WillContain()
 	return list(/obj/item/chems/food/drinks/bottle/small/beer = 10)
+
+/obj/structure/closet/secure_closet/bar/empty/WillContain()
+	return

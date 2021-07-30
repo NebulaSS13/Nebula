@@ -78,6 +78,10 @@ COMFY_CHAIR(green)
 COMFY_CHAIR(yellow)
 #undef COMFY_CHAIR
 
+/datum/stack_recipe/furniture/chair/captain
+	title = "captain chair"
+	result_type = /obj/structure/bed/chair/comfy/captain
+
 /datum/stack_recipe/furniture/chair/arm
 	title = "armchair"
 
@@ -119,6 +123,10 @@ ARMCHAIR(yellow)
 	result_type = /obj/structure/barricade
 	time = 50
 
+/datum/stack_recipe/furniture/barricade/spikes
+	title = "cheval spikes"
+	result_type = /obj/structure/barricade/spike
+
 /datum/stack_recipe/furniture/stool
 	title = "stool"
 	result_type = /obj/item/stool
@@ -130,6 +138,10 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/bed
 	title = "bed"
 	result_type = /obj/structure/bed
+
+/datum/stack_recipe/furniture/bed/psych
+	title = "psychiatrist's couch"
+	result_type = /obj/structure/bed/psych
 
 /datum/stack_recipe/furniture/pew
 	title = "pew, right"
@@ -147,11 +159,6 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/rack
 	title = "rack"
 	result_type = /obj/structure/table/rack
-
-/datum/stack_recipe/furniture/closet
-	title = "closet"
-	result_type = /obj/structure/closet
-	time = 15
 
 /datum/stack_recipe/furniture/canister
 	title = "canister"
@@ -244,14 +251,6 @@ ARMCHAIR(yellow)
 	title = "morgue door assembly"
 	result_type = /obj/structure/door_assembly/blast/morgue
 
-/datum/stack_recipe/furniture/crate
-	title = "crate"
-	result_type = /obj/structure/closet/crate
-	time = 50
-
-/datum/stack_recipe/furniture/crate/plastic
-	result_type = /obj/structure/closet/crate/plastic
-
 /datum/stack_recipe/furniture/flaps
 	title = "flaps"
 	result_type = /obj/structure/plasticflaps
@@ -327,3 +326,210 @@ ARMCHAIR(yellow)
 
 /datum/stack_recipe/furniture/windoor/spawn_result(mob/user, location, amount)
 	return new result_type(user?.loc, use_material, use_reinf_material)
+
+//Misc furniture
+/datum/stack_recipe/furniture/morgue
+	title = "morgue"
+	result_type = /obj/structure/morgue
+	difficulty = MAT_VALUE_HARD_DIY
+	time = 5 SECONDS
+	req_amount = 10
+
+/datum/stack_recipe/furniture/crematorium
+	title = "crematorium"
+	result_type = /obj/structure/crematorium
+	difficulty = MAT_VALUE_HARD_DIY
+	time = 5 SECONDS
+	req_amount = 10
+
+/datum/stack_recipe/furniture/tank_dispenser
+	title = "tank storage unit"
+	result_type = /obj/structure/dispenser/empty
+
+/datum/stack_recipe/furniture/displaycase
+	title = "displaycase"
+	result_type = /obj/structure/displaycase
+	time = 15
+
+/datum/stack_recipe/furniture/dogbed
+	title = "dog bed"
+	result_type = /obj/structure/dogbed
+	req_amount = 4
+
+/datum/stack_recipe/furniture/mattress
+	title = "mattress"
+	result_type = /obj/structure/mattress
+	req_amount = 5
+
+/datum/stack_recipe/furniture/roller_bed
+	title = "roller bed"
+	result_type = /obj/item/roller
+	req_amount = 4
+
+/datum/stack_recipe/furniture/wheelchair
+	title = "wheelchair"
+	result_type = /obj/structure/bed/chair/wheelchair
+	req_amount = 10
+	difficulty = MAT_VALUE_HARD_DIY
+	time = 15 SECONDS
+
+/datum/stack_recipe/furniture/ironing_board
+	title = "ironing board"
+	result_type = /obj/structure/bed/roller/ironingboard
+	req_amount = 4
+
+/datum/stack_recipe/furniture/filling_cabinet
+	title = "filling cabinet"
+	retsult_type = /obj/structure/filingcabinet
+	difficulty = MAT_VALUE_NORMAL_DIY
+	req_amount = 7
+
+/datum/stack_recipe/furniture/filling_cabinet/wall
+	title = "wall filling cabinet"
+	retsult_type = /obj/structure/filingcabinet/wallcabinet
+
+/datum/stack_recipe/furniture/filling_cabinet/chest_drawer
+	title = "chest drawer"
+	retsult_type = /obj/structure/filingcabinet/chestdrawer
+
+//Plumbing / hygiene
+/datum/stack_recipe/furniture/hygiene
+	time = 10 SECONDS
+	apply_material_name = FALSE
+	on_floor = TRUE
+	req_amount = 5
+	difficulty = MAT_VALUE_HARD_DIY
+
+/datum/stack_recipe/furniture/hygiene/drain/bath
+	title = "bath drain"
+	result_type = /obj/structure/hygiene/drain/bath
+
+/datum/stack_recipe/furniture/hygiene/drain
+	title = "drain"
+	result_type = /obj/structure/hygiene/drain
+
+/datum/stack_recipe/furniture/hygiene/faucet
+	title = "faucet"
+	result_type = /obj/structure/hygiene/faucet
+
+/datum/stack_recipe/furniture/hygiene/shower
+	title = "shower"
+	result_type = /obj/structure/hygiene/shower
+
+/datum/stack_recipe/furniture/hygiene/sink/puddle
+	title = "puddle"
+	result_type = /obj/structure/hygiene/sink/puddle
+	difficulty = MAT_VALUE_EASY_DIY
+
+/datum/stack_recipe/furniture/hygiene/sink/kitchen
+	title = "kitchen sink"
+	result_type = /obj/structure/hygiene/sink/kitchen
+
+/datum/stack_recipe/furniture/hygiene/sink
+	title = "sink"
+	result_type = /obj/structure/hygiene/sink
+
+/datum/stack_recipe/furniture/hygiene/sink
+	title = "sink"
+	result_type = /obj/structure/hygiene/sink
+
+/datum/stack_recipe/furniture/hygiene/urinal
+	title = "urinal"
+	result_type = /obj/structure/hygiene/urinal
+
+/datum/stack_recipe/furniture/hygiene/toilet
+	title = "toilet"
+	result_type = /obj/structure/hygiene/toilet
+
+
+//Curtains
+/datum/stack_recipe/furniture/curtain
+	time = 1 SECOND
+	apply_material_name = FALSE //curtains are either cloth or plastic
+	one_per_turf = FALSE
+	req_amount = 2
+
+/datum/stack_recipe/furniture/curtain/cloth/bed
+	title = "cloth bed curtain"
+	result_type = /obj/item/curtain/bed
+
+/datum/stack_recipe/furniture/curtain/cloth/black
+	title = "black cloth curtain"
+	result_type = /obj/item/curtain/black
+
+/datum/stack_recipe/furniture/curtain/cloth/bar
+	title = "cloth bar curtain"
+	result_type = /obj/item/curtain/bar
+
+/datum/stack_recipe/furniture/curtain/plastic/medical
+	title = "plastic medical curtain"
+	result_type = /obj/item/curtain/medical
+
+/datum/stack_recipe/furniture/curtain/plastic/privacy
+	title = "plastic privacy curtain"
+	result_type = /obj/item/curtain/privacy
+
+/datum/stack_recipe/furniture/curtain/plastic/shower
+	title = "plastic shower curtain"
+	result_type = /obj/item/curtain/shower
+
+/datum/stack_recipe/furniture/curtain/plastic/shower/engineering
+	title = "plastic engineering shower curtain"
+	result_type = /obj/item/curtain/shower/engineering
+
+/datum/stack_recipe/furniture/curtain/plastic/shower/security
+	title = "plastic security shower curtain"
+	result_type = /obj/item/curtain/shower/security
+
+/datum/stack_recipe/furniture/curtain/plastic/canteen
+	title = "plastic canteen curtain"
+	result_type = /obj/item/curtain/canteen
+
+//fitness
+/datum/stack_recipe/furniture/weightlifter
+	title = "weight lifter"
+	result_type = /obj/structure/fitness/weightlifter
+	difficulty = MAT_VALUE_HARD_DIY
+	apply_material_name = FALSE
+	req_amount = 20
+
+/datum/stack_recipe/furniture/punchingbag
+	title = "punching bag"
+	result_type = /obj/structure/fitness/punchingbag
+	difficulty = MAT_VALUE_NORMAL_DIY
+	apply_material_name = FALSE
+	req_amount = 10
+
+//Wall Cabinets
+/datum/stack_recipe/furniture/wall/fireaxe_cabinet
+	title = "fireaxe cabinet"
+	apply_material_name = FALSE
+	result_type = /obj/structure/fireaxecabinet/empty //would be nice to have a mountable frame..
+	req_amount = 2
+
+/datum/stack_recipe/furniture/wall/extinguisher_cabinet
+	title = "extinguished cabinet"
+	apply_material_name = FALSE
+	result_type = /obj/structure/extinguisher_cabinet/empty
+	req_amount = 2
+
+//Misc crates
+/datum/stack_recipe/furniture/critter_crate
+	title = "critter crate"
+	time = 8 SECONDS
+	difficulty = MAT_VALUE_EASY_DIY
+	apply_material_name = FALSE
+	req_amount = 12
+	result_type = /obj/structure/closet/crate/critter
+
+/datum/stack_recipe/furniture/large_crate
+	title = "large wooden shipping crate"
+	time = 8 SECONDS
+	difficulty = MAT_VALUE_EASY_DIY
+	apply_material_name = FALSE
+	req_amount = 12
+	result_type = /obj/structure/largecrate
+
+/datum/stack_recipe/furniture/large_crate/ore_box
+	title = "large wooden ore box"
+	result_type = /obj/structure/ore_box

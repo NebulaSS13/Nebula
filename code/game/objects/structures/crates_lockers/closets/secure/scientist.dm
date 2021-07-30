@@ -13,6 +13,9 @@
 		/obj/item/clipboard
 	)
 
+/obj/structure/closet/secure_closet/scientist/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/xenobio
 	name = "xenobiologist's locker"
 	req_access = list(access_xenobiology)
@@ -29,6 +32,9 @@
 		/obj/item/clipboard,
 		/obj/item/storage/belt/general
 	)
+
+/obj/structure/closet/secure_closet/xenobio/empty/WillContain()
+	return
 
 /obj/structure/closet/secure_closet/RD
 	name = "chief science officer's locker"
@@ -48,6 +54,9 @@
 		/obj/item/clipboard,
 	)
 
+/obj/structure/closet/secure_closet/RD/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/animal
 	name = "animal control closet"
 	req_access = list(access_research)
@@ -60,3 +69,6 @@
 		/obj/item/storage/box/syringes,
 		/obj/item/chems/glass/bottle/sedatives
 	)
+
+/obj/structure/closet/secure_closet/animal/empty/WillContain()
+	return

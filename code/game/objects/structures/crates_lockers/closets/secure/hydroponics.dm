@@ -17,3 +17,6 @@
 		/obj/item/wirecutters/clippers,
 		/obj/item/chems/spray/plantbgone,
 	)
+
+/obj/structure/closet/secure_closet/hydroponics/empty/WillContain()
+	return

@@ -30,6 +30,9 @@
 		/obj/item/storage/box/gloves
 	)
 
+/obj/structure/closet/secure_closet/medical1/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/medical3
 	name = "medical doctor's locker"
 	req_access = list(access_medical_equip)
@@ -53,6 +56,9 @@
 		RANDOM_SCRUBS,
 		RANDOM_SCRUBS
 	)
+
+/obj/structure/closet/secure_closet/medical3/empty/WillContain()
+	return
 
 /obj/structure/closet/secure_closet/paramedic
 	name = "paramedic locker"
@@ -83,6 +89,9 @@
 	    /obj/item/clothing/accessory/storage/vest,
 	)
 
+/obj/structure/closet/secure_closet/paramedic/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/CMO
 	name = "chief medical officer's locker"
 	req_access = list(access_cmo)
@@ -106,6 +115,9 @@
 		RANDOM_SCRUBS
 	)
 
+/obj/structure/closet/secure_closet/CMO/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/chemical
 	name = "chemical closet"
 	desc = "Store dangerous chemicals in here."
@@ -117,6 +129,9 @@
 		/obj/item/storage/box/pillbottles = 2,
 		/obj/random/medical = 12
 	)
+
+/obj/structure/closet/secure_closet/chemical/empty/WillContain()
+	return
 
 /obj/structure/closet/secure_closet/medical_wall
 	name = "first aid closet"
@@ -156,6 +171,9 @@
 		/obj/item/storage/belt/general
 	)
 
+/obj/structure/closet/secure_closet/counselor/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/virology
 	name = "virologist's locker"
 	closet_appearance = /decl/closet_appearance/secure_closet/medical/virology
@@ -182,6 +200,9 @@
 		/obj/item/clothing/glasses/hud/health
 	)
 
+/obj/structure/closet/secure_closet/virology/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/psychiatry
 	name = "Psychiatrist's locker"
 	desc = "Everything you need to keep the lunatics at bay."
@@ -198,3 +219,6 @@
 		/obj/item/clothing/under/psych/turtleneck,
 		/obj/item/clothing/under/psych
 	)
+
+/obj/structure/closet/secure_closet/psychiatry/empty/WillContain()
+	return

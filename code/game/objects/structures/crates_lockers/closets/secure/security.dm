@@ -22,6 +22,9 @@
 		/obj/item/clothing/under/captainformal,
 	)
 
+/obj/structure/closet/secure_closet/captains/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/hop
 	name = "head of personnel's locker"
 	closet_appearance = /decl/closet_appearance/secure_closet/command/hop
@@ -35,6 +38,9 @@
 		/obj/item/storage/box/ids = 2,
 		/obj/item/flash
 	)
+
+/obj/structure/closet/secure_closet/hop/empty/WillContain()
+	return
 
 /obj/structure/closet/secure_closet/hop2
 	name = "head of personnel's attire"
@@ -85,6 +91,9 @@
 		/obj/item/holowarrant
 	)
 
+/obj/structure/closet/secure_closet/hos/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/warden
 	name = "warden's locker"
 	req_access = list(access_armory)
@@ -111,6 +120,9 @@
 		/obj/item/holowarrant
 	)
 
+/obj/structure/closet/secure_closet/warden/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/security
 	name = "security officer's locker"
 	req_access = list(access_brig)
@@ -134,6 +146,9 @@
 		/obj/item/gun/energy/taser,
 		/obj/item/holowarrant,
 	)
+
+/obj/structure/closet/secure_closet/security/empty/WillContain()
+	return
 
 /obj/structure/closet/secure_closet/security/cargo/WillContain()
 	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
@@ -184,6 +199,9 @@
 		/obj/item/storage/briefcase/crimekit,
 		/obj/item/holowarrant
 	)
+
+/obj/structure/closet/secure_closet/detective/empty/WillContain()
+	return
 
 /obj/structure/closet/secure_closet/injection
 	name = "lethal injections locker"
@@ -246,3 +264,6 @@
 		/obj/item/taperecorder = 2,
 		/obj/item/storage/secure/briefcase = 2,
 	)
+
+/obj/structure/closet/secure_closet/lawyer/empty/WillContain()
+	return

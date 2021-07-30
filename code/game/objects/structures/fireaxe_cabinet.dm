@@ -12,6 +12,9 @@
 	var/shattered
 	var/obj/item/twohanded/fireaxe/fireaxe
 
+/obj/structure/fireaxecabinet/empty/Initialize(ml, _mat, _reinf_mat)
+	. = ..(ml, _mat, _reinf_mat, FALSE)
+
 /obj/structure/fireaxecabinet/on_update_icon()
 	overlays.Cut()
 	if(fireaxe)
@@ -21,9 +24,10 @@
 	else if(!open)
 		overlays += image(icon, "fireaxe_window")
 
-/obj/structure/fireaxecabinet/Initialize()
+/obj/structure/fireaxecabinet/Initialize(ml, _mat, _reinf_mat, var/spawn_axe = TRUE)
 	. = ..()
-	fireaxe = new(src)
+	if(spawn_axe)
+		fireaxe = new(src)
 	update_icon()
 
 /obj/structure/fireaxecabinet/attack_ai(var/mob/user)

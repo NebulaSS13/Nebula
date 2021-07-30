@@ -2051,6 +2051,8 @@
 #include "code\modules\materials\material_synth.dm"
 #include "code\modules\materials\materials_ore.dm"
 #include "code\modules\materials\recipes_furniture.dm"
+#include "code\modules\materials\recipes_furniture_closets.dm"
+#include "code\modules\materials\recipes_furniture_crates.dm"
 #include "code\modules\materials\recipes_items.dm"
 #include "code\modules\materials\recipes_stacks.dm"
 #include "code\modules\materials\recipes_storage.dm"

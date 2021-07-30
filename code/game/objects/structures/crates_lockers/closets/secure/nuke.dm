@@ -14,3 +14,6 @@
 		/obj/item/nuclear_cylinder,
 		/obj/item/nuclear_cylinder
 	)
+
+/obj/structure/closet/secure_closet/nuke_wall/empty/WillContain()
+	return

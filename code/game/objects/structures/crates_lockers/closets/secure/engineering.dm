@@ -24,6 +24,9 @@
 		/obj/item/storage/belt/utility/full
 	)
 
+/obj/structure/closet/secure_closet/engineering_chief/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/engineering_electrical
 	name = "electrical supplies"
 	req_access = list(access_engine_equip)
@@ -38,6 +41,9 @@
 		/obj/item/multitool = 3
 	)
 
+/obj/structure/closet/secure_closet/engineering_electrical/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/engineering_welding
 	name = "welding supplies"
 	req_access = list(access_construction)
@@ -51,6 +57,9 @@
 		/obj/item/clothing/glasses/welding = 3,
 		/obj/item/welder_tank = 6
 	)
+
+/obj/structure/closet/secure_closet/engineering_welding/empty/WillContain()
+	return
 
 /obj/structure/closet/secure_closet/engineering_personal
 	name = "engineer's locker"
@@ -71,6 +80,9 @@
 		/obj/item/storage/belt/utility/full
 	)
 
+/obj/structure/closet/secure_closet/engineering_personal/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/atmos_personal
 	name = "technician's locker"
 	req_access = list(access_atmospherics)
@@ -90,3 +102,6 @@
 		/obj/item/taperoll/atmos,
 		/obj/item/storage/belt/utility/atmostech
 	)
+
+/obj/structure/closet/secure_closet/atmos_personal/empty/WillContain()
+	return

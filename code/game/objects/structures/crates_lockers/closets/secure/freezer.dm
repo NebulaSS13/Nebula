@@ -9,8 +9,14 @@
 		/obj/item/chems/food/condiment/sugar = 2
 	)
 
+/obj/structure/closet/secure_closet/freezer/kitchen/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/freezer/kitchen/mining
 	req_access = list()
+
+/obj/structure/closet/secure_closet/freezer/kitchen/mining/empty/WillContain()
+	return
 
 /obj/structure/closet/secure_closet/freezer/meat
 	name = "meat fridge"
@@ -23,6 +29,9 @@
 		/obj/item/chems/food/snacks/fish = 4
 	)
 
+/obj/structure/closet/secure_closet/freezer/meat/empty/WillContain()
+	return
+
 /obj/structure/closet/secure_closet/freezer/fridge
 	name = "refrigerator"
 	icon = 'icons/obj/closets/fridge.dmi'
@@ -34,6 +43,9 @@
 		/obj/item/chems/food/drinks/soymilk = 4,
 		/obj/item/storage/fancy/egg_box = 4
 	)
+
+/obj/structure/closet/secure_closet/freezer/fridge/empty/WillContain()
+	return
 
 /obj/structure/closet/secure_closet/freezer/money
 	name = "secure locker"

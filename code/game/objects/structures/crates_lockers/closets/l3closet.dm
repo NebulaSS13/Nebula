@@ -19,6 +19,8 @@
 		/obj/item/tank/emergency/oxygen/engi = 5
 	))
 
+/obj/structure/closet/l3closet/general/empty/WillContain()
+	return null
 
 /obj/structure/closet/l3closet/virology
 	closet_appearance = /decl/closet_appearance/bio/virology
@@ -31,6 +33,9 @@
 		/obj/item/tank/oxygen
 	)
 
+/obj/structure/closet/l3closet/virology/empty/WillContain()
+	return null
+
 /obj/structure/closet/l3closet/security
 	closet_appearance = /decl/closet_appearance/bio/security
 
@@ -42,6 +47,9 @@
 		/obj/item/tank/emergency/oxygen/engi
 	)
 
+/obj/structure/closet/l3closet/security/empty/WillContain()
+	return null
+
 /obj/structure/closet/l3closet/janitor
 	closet_appearance = /decl/closet_appearance/bio/janitor
 
@@ -52,6 +60,9 @@
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/tank/emergency/oxygen/engi
 	)
+
+/obj/structure/closet/l3closet/janitor/empty/WillContain()
+	return null
 
 /obj/structure/closet/l3closet/scientist
 	closet_appearance = /decl/closet_appearance/bio/science
@@ -73,6 +84,9 @@
 		/obj/item/tank/emergency/oxygen/double = 5,
 	))
 
+/obj/structure/closet/l3closet/scientist/empty/WillContain()
+	return null
+
 /obj/structure/closet/l3closet/command
 	closet_appearance = /decl/closet_appearance/bio/command
 
@@ -84,3 +98,6 @@
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/tank/emergency/oxygen/engi
 	)
+
+/obj/structure/closet/l3closet/command/empty/WillContain()
+	return null

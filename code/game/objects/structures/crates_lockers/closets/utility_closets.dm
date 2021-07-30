@@ -30,6 +30,9 @@
 	. += new/datum/atom_creator/simple(/obj/item/storage/firstaid/o2, 25)
 	. += new/datum/atom_creator/simple(list(/obj/item/clothing/suit/space/emergency,/obj/item/clothing/head/helmet/space/emergency), 25)
 
+/obj/structure/closet/emcloset/empty/WillContain()
+	return null
+
 /*
  * Fire Closet
  */
@@ -46,6 +49,9 @@
 		/obj/item/clothing/mask/gas,
 		/obj/item/flashlight
 		)
+
+/obj/structure/closet/firecloset/empty/WillContain()
+	return null
 
 /obj/structure/closet/firecloset/chief
 
@@ -67,39 +73,43 @@
 	desc = "It's a storage unit for tools."
 	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools
 
-/obj/structure/closet/toolcloset/Initialize()
+/obj/structure/closet/toolcloset/Initialize(ml, _mat, _reinf_mat, var/spawn_contents = TRUE)
 	. = ..()
-	if(prob(40))
-		new /obj/item/clothing/suit/storage/hazardvest(src)
-	if(prob(70))
-		new /obj/item/flashlight(src)
-	if(prob(70))
-		new /obj/item/screwdriver(src)
-	if(prob(70))
-		new /obj/item/wrench(src)
-	if(prob(70))
-		new /obj/item/weldingtool(src)
-	if(prob(70))
-		new /obj/item/crowbar(src)
-	if(prob(70))
-		new /obj/item/wirecutters(src)
-	if(prob(70))
-		new /obj/item/t_scanner(src)
-	if(prob(20))
-		new /obj/item/storage/belt/utility(src)
-	if(prob(30))
-		new /obj/item/stack/cable_coil/random(src)
-	if(prob(30))
-		new /obj/item/stack/cable_coil/random(src)
-	if(prob(30))
-		new /obj/item/stack/cable_coil/random(src)
-	if(prob(20))
-		new /obj/item/multitool(src)
-	if(prob(5))
-		new /obj/item/clothing/gloves/insulated(src)
-	if(prob(40))
-		new /obj/item/clothing/head/hardhat(src)
+	if(spawn_contents)
+		if(prob(40))
+			new /obj/item/clothing/suit/storage/hazardvest(src)
+		if(prob(70))
+			new /obj/item/flashlight(src)
+		if(prob(70))
+			new /obj/item/screwdriver(src)
+		if(prob(70))
+			new /obj/item/wrench(src)
+		if(prob(70))
+			new /obj/item/weldingtool(src)
+		if(prob(70))
+			new /obj/item/crowbar(src)
+		if(prob(70))
+			new /obj/item/wirecutters(src)
+		if(prob(70))
+			new /obj/item/t_scanner(src)
+		if(prob(20))
+			new /obj/item/storage/belt/utility(src)
+		if(prob(30))
+			new /obj/item/stack/cable_coil/random(src)
+		if(prob(30))
+			new /obj/item/stack/cable_coil/random(src)
+		if(prob(30))
+			new /obj/item/stack/cable_coil/random(src)
+		if(prob(20))
+			new /obj/item/multitool(src)
+		if(prob(5))
+			new /obj/item/clothing/gloves/insulated(src)
+		if(prob(40))
+			new /obj/item/clothing/head/hardhat(src)
 
+/obj/structure/closet/toolcloset/empty/Initialize(ml, _mat, _reinf_mat)
+	. = ..(ml, _mat, _reinf_mat, FALSE)
+	
 
 /*
  * Radiation Closet
@@ -118,6 +128,9 @@
 		/obj/item/clothing/head/radiation,
 		/obj/item/geiger = 2)
 
+/obj/structure/closet/radiation/empty/WillContain()
+	return null
+
 /*
  * Bombsuit closet
  */
@@ -133,6 +146,8 @@
 		/obj/item/clothing/shoes/color/black,
 		/obj/item/clothing/head/bomb_hood)
 
+/obj/structure/closet/bombcloset/empty/WillContain()
+	return null
 
 /obj/structure/closet/bombclosetsecurity
 	name = "\improper EOD closet"
@@ -145,6 +160,9 @@
 		/obj/item/clothing/under/security,
 		/obj/item/clothing/shoes/color/brown,
 		/obj/item/clothing/head/bomb_hood/security)
+
+/obj/structure/closet/bombclosetsecurity/empty/WillContain()
+	return null
 
 /*
  * Hydrant
@@ -170,6 +188,9 @@
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/storage/backpack/dufflebag/firefighter
 		)
+
+/obj/structure/closet/hydrant/empty/WillContain()
+	return null
 
 /*
  * First Aid
