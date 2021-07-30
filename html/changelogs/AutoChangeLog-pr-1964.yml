@@ -1,0 +1,5 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - bugfix: Made a few machines stop reporting they're not receiving power when they
+      do not need power at all.
