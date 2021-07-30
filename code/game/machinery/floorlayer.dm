@@ -4,6 +4,7 @@
 	icon = 'icons/obj/machines/pipe_dispenser.dmi'
 	icon_state = "pipe_d"
 	density = 1
+	interact_offline = TRUE
 	var/turf/old_turf
 	var/on = 0
 	var/obj/item/stack/tile/T
