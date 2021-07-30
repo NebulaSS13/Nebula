@@ -26,11 +26,11 @@
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	core_skill = SKILL_CHEMISTRY
 	var/can_contaminate = TRUE
+	var/buildable = TRUE
 
-/obj/machinery/chemical_dispenser/Initialize()
+/obj/machinery/chemical_dispenser/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
-
-	if(spawn_cartridges)
+	if(spawn_cartridges && populate_parts)
 		for(var/type in spawn_cartridges)
 			add_cartridge(new type(src))
 
@@ -63,11 +63,14 @@
 	if(user)
 		if(user.unEquip(C))
 			to_chat(user, "<span class='notice'>You add \the [C] to \the [src].</span>")
-			C.forceMove(src)
-			cartridges[C.label] = C
-			cartridges = sortTim(cartridges, /proc/cmp_text_asc)
-			SSnano.update_uis(src)
-			return TRUE
+		else
+			return
+
+	C.forceMove(src)
+	cartridges[C.label] = C
+	cartridges = sortTim(cartridges, /proc/cmp_text_asc)
+	SSnano.update_uis(src)
+	return TRUE
 
 /obj/machinery/chemical_dispenser/proc/remove_cartridge(label)
 	. = cartridges[label]
@@ -79,7 +82,7 @@
 		add_cartridge(W, user)
 		return TRUE
 
-	if(isCrowbar(W) && length(cartridges))
+	if(isCrowbar(W) && !panel_open && length(cartridges))
 		var/label = input(user, "Which cartridge would you like to remove?", "Chemical Dispenser") as null|anything in cartridges
 		if(!label) return
 		var/obj/item/chems/chem_disp_cartridge/C = remove_cartridge(label)
@@ -91,19 +94,19 @@
 	if(istype(W, /obj/item/chems/glass) || istype(W, /obj/item/chems/food))
 		if(container)
 			to_chat(user, "<span class='warning'>There is already \a [container] on \the [src]!</span>")
-			return
+			return TRUE
 
 		var/obj/item/chems/RC = W
 
 		if(!accept_drinking && istype(RC,/obj/item/chems/food))
 			to_chat(user, "<span class='warning'>This machine only accepts beakers!</span>")
-			return
+			return TRUE
 
 		if(!ATOM_IS_OPEN_CONTAINER(RC))
 			to_chat(user, "<span class='warning'>You don't see how \the [src] could dispense reagents into \the [RC].</span>")
-			return
+			return TRUE
 		if(!user.unEquip(RC, src))
-			return
+			return TRUE
 		container =  RC
 		update_icon()
 		to_chat(user, "<span class='notice'>You set \the [RC] on \the [src].</span>")

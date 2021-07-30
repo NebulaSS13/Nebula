@@ -23,6 +23,8 @@
 			/obj/item/chems/chem_disp_cartridge/tungsten
 		)
 
+	buildable = FALSE
+
 /obj/machinery/chemical_dispenser/ert
 	name = "medicine dispenser"
 	spawn_cartridges = list(
@@ -42,6 +44,9 @@
 			/obj/item/chems/chem_disp_cartridge/antibiotics,
 			/obj/item/chems/chem_disp_cartridge/sedatives
 		)
+	
+	buildable = FALSE
+
 
 /obj/machinery/chemical_dispenser/bar_soft
 	name = "soft drink dispenser"
@@ -51,6 +56,7 @@
 	accept_drinking = 1
 	core_skill = SKILL_COOKING
 	can_contaminate = FALSE //It's not a complex panel, and I'm fairly sure that most people don't haymaker the control panel on a soft drinks machine. -- Chaoko99
+	base_type = /obj/machinery/chemical_dispenser/bar_soft
 
 /obj/machinery/chemical_dispenser/bar_soft/full
 	spawn_cartridges = list(
@@ -76,6 +82,8 @@
 			/obj/item/chems/chem_disp_cartridge/watermelon
 		)
 
+	buildable = FALSE
+
 /obj/machinery/chemical_dispenser/bar_alc
 	name = "booze dispenser"
 	desc = "A beer machine. Like a soda machine, but more fun!"
@@ -84,6 +92,8 @@
 	accept_drinking = 1
 	core_skill = SKILL_COOKING
 	can_contaminate = FALSE //See above.
+	base_type = /obj/machinery/chemical_dispenser/bar_alc
+
 
 /obj/machinery/chemical_dispenser/bar_alc/full
 	spawn_cartridges = list(
@@ -106,6 +116,8 @@
 			/obj/item/chems/chem_disp_cartridge/ale,
 			/obj/item/chems/chem_disp_cartridge/mead
 		)
+	
+	buildable = FALSE
 
 /obj/machinery/chemical_dispenser/bar_coffee
 	name = "coffee dispenser"
@@ -115,6 +127,8 @@
 	accept_drinking = 1
 	core_skill = SKILL_COOKING
 	can_contaminate = FALSE //See above.
+	base_type = /obj/machinery/chemical_dispenser/bar_coffee
+
 
 /obj/machinery/chemical_dispenser/bar_coffee/full
 	spawn_cartridges = list(
@@ -133,3 +147,5 @@
 			/obj/item/chems/chem_disp_cartridge/syrup_vanilla,
 			/obj/item/chems/chem_disp_cartridge/syrup_pumpkin
 		)
+
+	buildable = FALSE
