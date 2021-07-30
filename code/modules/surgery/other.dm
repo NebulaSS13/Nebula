@@ -112,7 +112,7 @@
 	return TRUE
 
 /decl/surgery_step/hardsuit/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
-	return list(SKILL_EVA = SKILL_BASIC) 
+	return list(SKILL_EVA = SKILL_BASIC)
 
 /decl/surgery_step/hardsuit/can_use(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	if(!istype(target))
@@ -152,10 +152,10 @@
 		/obj/item/chems/spray = 100,
 		/obj/item/chems/dropper = 100,
 		/obj/item/chems/glass/bottle = 90,
-		/obj/item/chems/food/drinks/flask = 90,
+		/obj/item/chems/drinks/flask = 90,
 		/obj/item/chems/glass/beaker = 75,
-		/obj/item/chems/food/drinks/bottle = 75,
-		/obj/item/chems/food/drinks/glass2 = 75,
+		/obj/item/chems/drinks/bottle = 75,
+		/obj/item/chems/drinks/glass2 = 75,
 		/obj/item/chems/glass/bucket = 50
 	)
 	var/static/list/skip_open_container_checks = list(
@@ -173,7 +173,7 @@
 		return affected
 
 /decl/surgery_step/sterilize/get_skill_reqs(mob/living/user, mob/living/target, obj/item/tool)
-	return list(SKILL_MEDICAL = SKILL_BASIC) 
+	return list(SKILL_MEDICAL = SKILL_BASIC)
 
 /decl/surgery_step/sterilize/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

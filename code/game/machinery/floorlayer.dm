@@ -18,10 +18,10 @@
 
 	if(on)
 		if(mode["dismantle"])
-			dismantleFloor(old_turf)
+			dismantle_floor(old_turf)
 
 		if(mode["laying"])
-			layFloor(old_turf)
+			lay_floor(old_turf)
 
 		if(mode["collect"])
 			CollectTiles(old_turf)
@@ -77,7 +77,7 @@
 /obj/machinery/floorlayer/proc/reset()
 	on = 0
 
-/obj/machinery/floorlayer/proc/dismantleFloor(var/turf/new_turf)
+/obj/machinery/floorlayer/proc/dismantle_floor(var/turf/new_turf)
 	if(istype(new_turf, /turf/simulated/floor))
 		var/turf/simulated/floor/T = new_turf
 		if(!T.is_plating())
@@ -95,7 +95,7 @@
 		for(var/obj/item/stack/tile/tile2 in contents)
 			tile2.transfer_to(tile1)
 
-/obj/machinery/floorlayer/proc/layFloor(var/turf/w_turf)
+/obj/machinery/floorlayer/proc/lay_floor(var/turf/w_turf)
 	if(!T)
 		if(!TakeNewStack())
 			return 0

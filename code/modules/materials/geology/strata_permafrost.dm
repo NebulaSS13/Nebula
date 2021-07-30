@@ -1,13 +1,14 @@
 /decl/strata/permafrost
 	name = "permafrost"
 	base_materials = list(/decl/material/solid/ice)
+	// todo swap hydrogen ice to hydrate
 	ores_rich = list(
 		/decl/material/solid/ice/aspium,
 		/decl/material/solid/ice/lukrite,
 		/decl/material/solid/ice/rubenium,
 		/decl/material/solid/ice/trigarite,
 		/decl/material/solid/ice/ediroite,
-		/decl/material/solid/ice/hydrate/hydrogen,
+		/decl/material/solid/ice/hydrogen,
 		/decl/material/solid/ice/hydrate/methane,
 		/decl/material/solid/ice/hydrate/oxygen,
 		/decl/material/solid/ice/hydrate/nitrogen,

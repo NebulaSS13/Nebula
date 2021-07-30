@@ -352,3 +352,71 @@
 	else
 		pass("All machines had reciprocal node connections.")
 	return 1
+
+/datum/unit_test/atmos_machinery_construction_inheritance
+	name = "ATMOS MACHINERY: all atmos machines shall deconstruct and reconstruct themselves."
+
+/datum/unit_test/atmos_machinery_construction_inheritance/proc/check_machine(var/obj/machinery/atmospherics/machine, var/obj/item/pipe/pipe)
+	. = FALSE
+	if(!machine.construct_state)
+		return
+
+	var/pipe_class = machine.pipe_class
+	var/rotate_class = machine.rotate_class
+	var/connect_types = machine.connect_types
+	var/dir = machine.dir
+
+	if(pipe_class != pipe.pipe_class)
+		log_bad("Machine of type [machine.type] had pipe with class [pipe.pipe_class]; was expecting [pipe_class].")
+		. = TRUE
+	if(rotate_class != pipe.rotate_class)
+		log_bad("Machine of type [machine.type] had pipe with rotate class [pipe.rotate_class]; was expecting [rotate_class].")
+		. = TRUE
+	if(connect_types != pipe.connect_types)
+		log_bad("Machine of type [machine.type] had pipe with connect type [pipe.connect_types]; was expecting [connect_types].")
+		. = TRUE
+	if(dir != pipe.dir)
+		log_bad("Machine of type [machine.type] had pipe with dir [pipe.dir]; was expecting [dir].")
+		. = TRUE
+
+/datum/unit_test/atmos_machinery_construction_inheritance/start_test()
+	var/fail = FALSE
+
+	// make a place to test
+	INCREMENT_WORLD_Z_SIZE
+	for(var/turf/T in block(locate(1, 1, world.maxz), locate(3, 3, world.maxz)))
+		T.ChangeTurf(/turf/simulated/floor)
+	var/turf/T = locate(2, 2, world.maxz)
+
+	// first, every spawnable machine ("mapped" behavior)
+	for(var/type in subtypesof(/obj/machinery/atmospherics))
+		var/obj/machinery/atmospherics/machine = new type(T)
+		var/obj/item/pipe/pipe = machine.dismantle()
+		if(!istype(pipe))
+			qdel(pipe)
+			continue
+
+		fail |= check_machine(machine, pipe)
+		qdel(pipe)
+
+	if(!fail)
+		// then, pipes from machine datums are used to spawn machines ("player-built" behavior)
+		for(var/type in subtypesof(/datum/fabricator_recipe/pipe))
+			var/datum/fabricator_recipe/pipe/recipe = new type()
+			var/list/stuff = recipe.build(T)
+			var/obj/item/pipe/pipe = locate() in stuff
+			if(pipe)
+				stuff -= pipe
+				var/obj/machinery/atmospherics/machine = pipe.construct_pipe(T)
+				if(!istype(machine))
+					qdel(machine)
+				else
+					fail |= check_machine(machine, pipe) // compare to a newly built machine
+					qdel(machine)
+			QDEL_NULL_LIST(stuff) // clean up just in case
+
+	if(fail)
+		fail("Some atmos machines failed to rebuild themselves from pipes.")
+	else
+		pass("All atmos machines rebuilt themselves from pipes.")
+	return 1

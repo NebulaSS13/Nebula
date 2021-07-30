@@ -100,6 +100,11 @@ var/global/list/localhost_addresses = list(
 		debug_variables(locate(href_list["SDQL_select"]))
 		return
 
+	//byond bug ID:2694120
+	if(href_list["reset_macros"])
+		reset_macros(skip_alert = TRUE)
+		return
+
 	..()	//redirect to hsrc.Topic()
 
 //This stops files larger than UPLOAD_LIMIT being sent from client to server via input(), client.Import() etc.
@@ -166,6 +171,7 @@ var/global/list/localhost_addresses = list(
 		to_chat(src, "<span class='warning'>You are running an older version of BYOND than the server and may experience issues.</span>")
 		to_chat(src, "<span class='warning'>It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/.</span>")
 	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
+
 	global.clients += src
 	global.ckey_directory[ckey] = src
 
@@ -189,6 +195,7 @@ var/global/list/localhost_addresses = list(
 	// these are gonna be used for banning
 	prefs.last_ip = address
 	prefs.last_id = computer_id
+	apply_fps(prefs.clientfps)
 
 	if(!isnull(config.lock_client_view_x) && !isnull(config.lock_client_view_y))
 		view = "[config.lock_client_view_x]x[config.lock_client_view_y]"
@@ -230,6 +237,10 @@ var/global/list/localhost_addresses = list(
 
 	if(prefs && !istype(mob, world.mob))
 		prefs.apply_post_login_preferences()
+
+	if(SSinput.initialized)
+		set_macros()
+
 	//////////////
 	//DISCONNECT//
 	//////////////
@@ -419,7 +430,7 @@ var/global/list/localhost_addresses = list(
 
 /client/proc/apply_fps(var/client_fps)
 	if(world.byond_version >= 511 && byond_version >= 511 && client_fps >= CLIENT_MIN_FPS && client_fps <= CLIENT_MAX_FPS)
-		vars["fps"] = prefs.clientfps
+		vars["fps"] = client_fps
 
 /client/MouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
 	. = ..()
@@ -479,8 +490,8 @@ var/global/list/localhost_addresses = list(
 		last_view_y_dim = config.lock_client_view_y
 	else
 		var/winsize_string = winget(src, "mapwindow.map", "size")
-		last_view_x_dim = config.lock_client_view_x || Clamp(ceil(text2num(winsize_string) / divisor), 15, config.max_client_view_x || 41)
-		last_view_y_dim = config.lock_client_view_y || Clamp(ceil(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor), 15, config.max_client_view_y || 41)
+		last_view_x_dim = config.lock_client_view_x || Clamp(CEILING(text2num(winsize_string) / divisor), 15, config.max_client_view_x || 41)
+		last_view_y_dim = config.lock_client_view_y || Clamp(CEILING(text2num(copytext(winsize_string,findtext(winsize_string,"x")+1,0)) / divisor), 15, config.max_client_view_y || 41)
 		if(last_view_x_dim % 2 == 0) last_view_x_dim++
 		if(last_view_y_dim % 2 == 0) last_view_y_dim++
 	for(var/check_icon_size in global.valid_icon_sizes)
@@ -577,3 +588,68 @@ var/global/list/localhost_addresses = list(
 
 		pct += delta
 		winset(src, "mainwindow.split", "splitter=[pct]")
+
+/client/Click(atom/A)
+	if(!user_acted(src))
+		return
+
+	if(holder && holder.callproc && holder.callproc.waiting_for_click)
+		if(alert("Do you want to select \the [A] as the [holder.callproc.arguments.len+1]\th argument?",, "Yes", "No") == "Yes")
+			holder.callproc.arguments += A
+
+		holder.callproc.waiting_for_click = 0
+		verbs -= /client/proc/cancel_callproc_select
+		holder.callproc.do_args()
+		return
+
+	if (prefs.hotkeys)
+		// If hotkey mode is enabled, then clicking the map will automatically
+		// unfocus the text bar. This removes the red color from the text bar
+		// so that the visual focus indicator matches reality.
+		winset(src, null, "outputwindow.input.background-color=[COLOR_INPUT_DISABLED]")
+	else
+		winset(src, null, "outputwindow.input.focus=true input.background-color=[COLOR_INPUT_ENABLED]")
+
+	return ..()
+
+/**
+ * Updates the keybinds for special keys
+ *
+ * Handles adding macros for the keys that need it
+ * And adding movement keys to the clients movement_keys list
+ * At the time of writing this, communication(OOC, Say, IC) require macros
+ * Arguments:
+ * * direct_prefs - the preference we're going to get keybinds from
+ */
+/client/proc/update_special_keybinds(datum/preferences/direct_prefs)
+	var/datum/preferences/D = prefs || direct_prefs
+	if(!D?.key_bindings)
+		return
+	movement_keys = list()
+	var/list/communication_hotkeys = list()
+	for(var/key in D.key_bindings)
+		for(var/kb_name in D.key_bindings[key])
+			switch(kb_name)
+				if("North")
+					movement_keys[key] = NORTH
+				if("East")
+					movement_keys[key] = EAST
+				if("West")
+					movement_keys[key] = WEST
+				if("South")
+					movement_keys[key] = SOUTH
+				if("Say")
+					winset(src, "default-\ref[key]", "parent=default;name=[key];command=say")
+					communication_hotkeys += key
+				if("OOC")
+					winset(src, "default-\ref[key]", "parent=default;name=[key];command=ooc")
+					communication_hotkeys += key
+				if("Me")
+					winset(src, "default-\ref[key]", "parent=default;name=[key];command=me")
+					communication_hotkeys += key
+
+	// winget() does not work for F1 and F2
+	for(var/key in communication_hotkeys)
+		if(!(key in list("F1","F2")) && !winget(src, "default-\ref[key]", "command"))
+			to_chat(src, "You probably entered the game with a different keyboard layout.\n<a href='?src=\ref[src];reset_macros=1'>Please switch to the English layout and click here to fix the communication hotkeys.</a>")
+			break

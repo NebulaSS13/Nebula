@@ -59,13 +59,12 @@
 		/obj/item/chems,
 		/obj/item/chems/glass,
 		/obj/item/chems/food,
-		/obj/item/chems/food/snacks,
-		/obj/item/chems/food/snacks/old,
-		/obj/item/chems/food/snacks/grown,
-		/obj/item/chems/food/snacks/variable,
-		/obj/item/chems/food/condiment,
-		/obj/item/chems/food/drinks,
-		/obj/item/chems/food/drinks/bottle
+		/obj/item/chems/food/old,
+		/obj/item/chems/food/grown,
+		/obj/item/chems/food/variable,
+		/obj/item/chems/condiment,
+		/obj/item/chems/drinks,
+		/obj/item/chems/drinks/bottle
 	)
 
 /datum/trader/New()

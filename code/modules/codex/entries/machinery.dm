@@ -91,7 +91,7 @@
 
 /datum/codex_entry/pacman
 	associated_paths = list(/obj/machinery/power/port_gen/pacman)
-	mechanics_text = "Lends itself to being portable thanks to the small size and ease of use. Uses uranium as fuel and as such produces radiation. Ideally one should wear protective gear while interacting with an active P.A.C.M.A.N. While active it also produces heat and will eventually overheat and explode. While the power output can be increased, doing this causes it to heat up faster. Must be secured using a wrench before use."
+	mechanics_text = "Lends itself to being portable thanks to the small size and ease of use. Some versions use radioactive fuel and as such produces radiation, while others may produce dangerous byproducts as gasses. Ideally one should wear protective gear while interacting with an active generator. While active it also produces heat and will eventually overheat and explode. While the power output can be increased, doing this causes it to heat up faster. Must be secured using a wrench before use."
 	antag_text = "Can be used as a makeshift delayed explosive when power output is set to unsafe levels, though it may take some time to go off."
 
 /datum/codex_entry/replicator

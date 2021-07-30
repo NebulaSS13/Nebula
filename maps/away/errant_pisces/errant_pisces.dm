@@ -27,7 +27,7 @@
 	icon_dead = "shark_dead"
 	icon_gib = "shark_dead"
 	turns_per_move = 5
-	meat_type = /obj/item/chems/food/snacks/sharkmeat
+	meat_type = /obj/item/chems/food/sharkmeat
 	speed = 2
 	maxHealth = 100
 	health = 100
@@ -39,6 +39,7 @@
 	return
 
 /mob/living/simple_animal/hostile/carp/shark/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /mob/living/simple_animal/hostile/carp/shark/death()
@@ -67,14 +68,14 @@
 				L.forceMove(T)
 			visible_message("<span class='danger'>\The [src] releases [L].</span>")
 
-/obj/item/chems/food/snacks/sharkmeat
+/obj/item/chems/food/sharkmeat
 	name = "cosmoshark fillet"
 	desc = "A fillet of cosmoshark meat."
 	icon_state = "fishfillet"
 	filling_color = "#cecece"
 	center_of_mass = @"{'x':17,'y':13}"
 
-/obj/item/chems/food/snacks/sharkmeat/Initialize()
+/obj/item/chems/food/sharkmeat/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 5)
 	reagents.add_reagent(/decl/material/liquid/psychoactives, 1)

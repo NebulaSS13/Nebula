@@ -38,7 +38,6 @@
 /area/yacht/bridge)
 "aj" = (
 /obj/machinery/computer/ship/sensors{
-	icon_state = "computer";
 	dir = 4
 	},
 /turf/simulated/floor/wood/walnut,
@@ -52,7 +51,6 @@
 /area/yacht/bridge)
 "al" = (
 /obj/machinery/computer/ship/engines{
-	icon_state = "computer";
 	dir = 8
 	},
 /turf/simulated/floor/wood/walnut,
@@ -61,7 +59,7 @@
 /obj/item/folder/blue,
 /obj/item/form_printer,
 /obj/structure/table/woodentable,
-/obj/item/chems/food/drinks/glass2/coffeecup,
+/obj/item/chems/drinks/glass2/coffeecup,
 /obj/item/newspaper,
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/dirt,
@@ -104,7 +102,6 @@
 "ar" = (
 /obj/machinery/alarm{
 	dir = 1;
-	icon_state = "alarm0";
 	pixel_y = -22
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -127,9 +124,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/apc{
-	dir = 2;
 	name = "Yacht bridge";
-	pixel_x = 0;
 	pixel_y = -24
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -367,7 +362,7 @@
 	},
 /obj/structure/table/marble,
 /obj/item/book/manual/chef_recipes,
-/obj/item/chems/food/drinks/pitcher,
+/obj/item/chems/drinks/pitcher,
 /obj/effect/decal/cleanable/dirt,
 /obj/random/drinkbottle,
 /turf/simulated/floor/wood/yew,
@@ -655,8 +650,8 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /turf/simulated/floor/plating,
 /area/yacht/engine)
@@ -673,7 +668,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "Yacht engine";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -715,8 +709,7 @@
 "cc" = (
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/machinery/power/solar,
 /obj/effect/floor_decal/solarpanel,
@@ -806,7 +799,6 @@
 /area/yacht/engine)
 "cn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	icon_state = "map_universal";
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -822,11 +814,10 @@
 /area/yacht/engine)
 "cp" = (
 /obj/structure/cable{
-	icon_state = "0-2";
-	dir = 4;
-	pixel_y = 0;
 	d1 = 16;
-	d2 = 0
+	d2 = 0;
+	dir = 4;
+	icon_state = "0-2"
 	},
 /obj/effect/decal/cleanable/ash,
 /obj/effect/decal/cleanable/blood/oil/streak,
@@ -994,8 +985,7 @@
 	},
 /obj/machinery/alarm{
 	dir = 4;
-	pixel_x = -23;
-	pixel_y = 0
+	pixel_x = -23
 	},
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/effect/decal/cleanable/dirt,
@@ -1160,8 +1150,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/meter,
 /obj/machinery/light/small{
-	dir = 8;
-	
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/yacht/engine)
@@ -1194,8 +1183,7 @@
 /area/yacht/engine)
 "dz" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/black{
-	dir = 8;
-	icon_state = "map"
+	dir = 8
 	},
 /obj/structure/window/reinforced,
 /obj/effect/decal/cleanable/dirt,
@@ -1265,8 +1253,7 @@
 "gb" = (
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/constructable_frame/computerframe,
@@ -1278,13 +1265,11 @@
 /area/yacht/engine)
 "hb" = (
 /obj/machinery/power/terminal{
-	icon_state = "term";
 	dir = 1
 	},
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/item/storage/toolbox/electrical,
 /obj/effect/decal/cleanable/dirt,
@@ -1373,8 +1358,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/manifold/hidden{
-	dir = 1;
-	icon_state = "map"
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/yacht/engine)
@@ -1407,7 +1391,6 @@
 /obj/machinery/alarm{
 	alarm_id = "misc_research";
 	dir = 8;
-	icon_state = "alarm0";
 	pixel_x = 24
 	},
 /obj/effect/decal/cleanable/dirt,

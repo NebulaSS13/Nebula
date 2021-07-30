@@ -61,7 +61,6 @@
 /obj/item/knife/table,
 /obj/item/knife/table,
 /obj/effect/floor_decal/spline/fancy/wood{
-	icon_state = "spline_fancy";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -69,7 +68,6 @@
 "m" = (
 /obj/structure/closet/crate/freezer,
 /obj/effect/floor_decal/spline/fancy/wood{
-	icon_state = "spline_fancy";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -103,7 +101,6 @@
 /area/template_noop)
 "r" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	icon_state = "spline_fancy";
 	dir = 1
 	},
 /turf/simulated/floor/wood,

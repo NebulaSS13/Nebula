@@ -2,7 +2,7 @@
 //Functionally identical to regular drinks. The only difference is that the default bottle size is 100. - Darem
 //Bottles now weaken and break when smashed on people's heads. - Giacom
 
-/obj/item/chems/food/drinks/bottle
+/obj/item/chems/drinks/bottle
 	amount_per_transfer_from_this = 10
 	volume = 100
 	item_state = "broken_beer" //Generic held-item sprite until unique ones are made.
@@ -17,27 +17,27 @@
 	var/rag_underlay = "rag"
 	var/stop_spin_bottle = FALSE //Gotta stop the rotation.
 
-/obj/item/chems/food/drinks/bottle/Initialize()
+/obj/item/chems/drinks/bottle/Initialize()
 	. = ..()
 	if(isGlass)
 		unacidable = TRUE
 	else
 		verbs -= .verb/spin_bottle
 
-/obj/item/chems/food/drinks/bottle/Destroy()
+/obj/item/chems/drinks/bottle/Destroy()
 	if(!QDELETED(rag))
 		rag.dropInto(loc)
 	rag = null
 	return ..()
 
 //when thrown on impact, bottles smash and spill their contents
-/obj/item/chems/food/drinks/bottle/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
+/obj/item/chems/drinks/bottle/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
 	..()
 	if(isGlass && TT.thrower && TT.thrower.a_intent != I_HELP)
 		if(TT.speed > throw_speed || smash_check(TT.dist_travelled)) //not as reliable as smashing directly
 			smash(loc, hit_atom)
 
-/obj/item/chems/food/drinks/bottle/proc/smash_check(var/distance)
+/obj/item/chems/drinks/bottle/proc/smash_check(var/distance)
 	if(!isGlass)
 		return 0
 	if(rag && rag.on_fire) // Molotovs should be somewhat reliable, they're a pain to make.
@@ -50,7 +50,7 @@
 		return 0
 	return prob(chance_table[idx])
 
-/obj/item/chems/food/drinks/bottle/proc/smash(var/newloc, atom/against = null)
+/obj/item/chems/drinks/bottle/proc/smash(var/newloc, atom/against = null)
 
 	// Dump reagents onto the turf.
 	var/turf/T = against ? get_turf(against) : get_turf(newloc)
@@ -92,7 +92,7 @@
 	qdel(src)
 	return B
 
-/obj/item/chems/food/drinks/bottle/attackby(obj/item/W, mob/user)
+/obj/item/chems/drinks/bottle/attackby(obj/item/W, mob/user)
 	if(!rag && istype(W, /obj/item/chems/glass/rag))
 		insert_rag(W, user)
 		return
@@ -101,13 +101,13 @@
 		return
 	..()
 
-/obj/item/chems/food/drinks/bottle/attack_self(mob/user)
+/obj/item/chems/drinks/bottle/attack_self(mob/user)
 	if(rag)
 		remove_rag(user)
 	else
 		..()
 
-/obj/item/chems/food/drinks/bottle/proc/insert_rag(obj/item/chems/glass/rag/R, mob/user)
+/obj/item/chems/drinks/bottle/proc/insert_rag(obj/item/chems/glass/rag/R, mob/user)
 	if(!isGlass || rag) return
 
 	if(user.unEquip(R))
@@ -128,18 +128,18 @@
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
 		update_icon()
 
-/obj/item/chems/food/drinks/bottle/proc/remove_rag(mob/user)
+/obj/item/chems/drinks/bottle/proc/remove_rag(mob/user)
 	if(!rag) return
 	user.put_in_hands(rag)
 	rag = null
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	update_icon()
 
-/obj/item/chems/food/drinks/bottle/open(mob/user)
+/obj/item/chems/drinks/bottle/open(mob/user)
 	if(rag) return
 	..()
 
-/obj/item/chems/food/drinks/bottle/on_update_icon()
+/obj/item/chems/drinks/bottle/on_update_icon()
 	underlays.Cut()
 	if(rag)
 		var/underlay_image = image(icon='icons/obj/drinks.dmi', icon_state=rag.on_fire? "[rag_underlay]_lit" : rag_underlay)
@@ -148,7 +148,7 @@
 	else
 		set_light(0)
 
-/obj/item/chems/food/drinks/bottle/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+/obj/item/chems/drinks/bottle/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
 
 	if(user.a_intent != I_HURT)
@@ -179,7 +179,7 @@
 	var/obj/item/broken_bottle/B = smash(target.loc, target)
 	user.put_in_active_hand(B)
 
-/obj/item/chems/food/drinks/bottle/verb/spin_bottle()
+/obj/item/chems/drinks/bottle/verb/spin_bottle()
 	set name = "Spin Bottle"
 	set category = "Object"
 	set src in view(1)
@@ -209,7 +209,7 @@
 			sleep(sleep_not_stacking) //Not stacking
 			stop_spin_bottle = FALSE
 
-/obj/item/chems/food/drinks/bottle/pickup(mob/living/user)
+/obj/item/chems/drinks/bottle/pickup(mob/living/user)
 	animate(src, transform = null, time = 0) //Restore bottle to its original position
 
 //Keeping this here for now, I'll ask if I should keep it here.
@@ -236,279 +236,279 @@
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 	return ..()
 
-/obj/item/chems/food/drinks/bottle/gin
+/obj/item/chems/drinks/bottle/gin
 	name = "Griffeater Gin"
 	desc = "A bottle of high quality gin, produced in the New London Space Station."
 	icon_state = "ginbottle"
 	center_of_mass = @"{'x':16,'y':4}"
 
-/obj/item/chems/food/drinks/bottle/gin/Initialize()
+/obj/item/chems/drinks/bottle/gin/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/gin, 100)
 
-/obj/item/chems/food/drinks/bottle/whiskey
+/obj/item/chems/drinks/bottle/whiskey
 	name = "Uncle Git's Special Reserve"
 	desc = "A premium single-malt whiskey, gently matured inside the tunnels of a nuclear shelter. TUNNEL WHISKEY RULES."
 	icon_state = "whiskeybottle"
 	center_of_mass = @"{'x':16,'y':3}"
 
-/obj/item/chems/food/drinks/bottle/whiskey/Initialize()
+/obj/item/chems/drinks/bottle/whiskey/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/whiskey, 100)
 
-/obj/item/chems/food/drinks/bottle/agedwhiskey
+/obj/item/chems/drinks/bottle/agedwhiskey
 	name = "aged whiskey"
 	desc = "This rich, smooth, hideously expensive beverage was aged for decades."
 	icon_state = "whiskeybottle2"
 	center_of_mass = @"{'x':16,'y':3}"
 
-/obj/item/chems/food/drinks/bottle/agedwhiskey/Initialize()
+/obj/item/chems/drinks/bottle/agedwhiskey/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/aged_whiskey, 100)
 
-/obj/item/chems/food/drinks/bottle/vodka
+/obj/item/chems/drinks/bottle/vodka
 	name = "Tunguska Triple Distilled"
 	desc = "Aah, vodka. Prime choice of drink AND fuel by Indies around the galaxy."
 	icon_state = "vodkabottle"
 	center_of_mass = @"{'x':17,'y':3}"
 
-/obj/item/chems/food/drinks/bottle/vodka/Initialize()
+/obj/item/chems/drinks/bottle/vodka/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/vodka, 100)
 
-/obj/item/chems/food/drinks/bottle/tequila
+/obj/item/chems/drinks/bottle/tequila
 	name = "Caccavo Guaranteed Quality tequila"
 	desc = "Made from premium petroleum distillates, pure thalidomide and other fine quality ingredients!"
 	icon_state = "tequilabottle"
 	center_of_mass = @"{'x':16,'y':3}"
 
-/obj/item/chems/food/drinks/bottle/tequila/Initialize()
+/obj/item/chems/drinks/bottle/tequila/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/tequila, 100)
 
-/obj/item/chems/food/drinks/bottle/patron
+/obj/item/chems/drinks/bottle/patron
 	name = "Wrapp Artiste Patron"
 	desc = "Silver laced tequila, served in space night clubs across the galaxy."
 	icon_state = "patronbottle"
 	center_of_mass = @"{'x':16,'y':6}"
 
-/obj/item/chems/food/drinks/bottle/patron/Initialize()
+/obj/item/chems/drinks/bottle/patron/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/tequila, 95)
 	reagents.add_reagent(/decl/material/solid/metal/silver, 5)
 
-/obj/item/chems/food/drinks/bottle/rum
+/obj/item/chems/drinks/bottle/rum
 	name = "Captain Pete's Cuban Spiced Rum"
 	desc = "This isn't just rum, oh no. It's practically GRIFF in a bottle."
 	icon_state = "rumbottle"
 	center_of_mass = @"{'x':16,'y':8}"
 
-/obj/item/chems/food/drinks/bottle/rum/Initialize()
+/obj/item/chems/drinks/bottle/rum/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/rum, 100)
 
-/obj/item/chems/food/drinks/bottle/holywater
+/obj/item/chems/drinks/bottle/holywater
 	name = "Flask of Holy Water"
 	desc = "A flask of the chaplain's holy water."
 	icon_state = "holyflask"
 	center_of_mass = @"{'x':17,'y':10}"
 
-/obj/item/chems/food/drinks/bottle/holywater/Initialize()
+/obj/item/chems/drinks/bottle/holywater/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/water, 100, list("holy" = TRUE))
 
-/obj/item/chems/food/drinks/bottle/vermouth
+/obj/item/chems/drinks/bottle/vermouth
 	name = "Goldeneye Vermouth"
 	desc = "Sweet, sweet dryness~"
 	icon_state = "vermouthbottle"
 	center_of_mass = @"{'x':17,'y':3}"
 
-/obj/item/chems/food/drinks/bottle/vermouth/Initialize()
+/obj/item/chems/drinks/bottle/vermouth/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/vermouth, 100)
 
-/obj/item/chems/food/drinks/bottle/kahlua
+/obj/item/chems/drinks/bottle/kahlua
 	name = "Robert Robust's Coffee Liqueur"
 	desc = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936, HONK!"
 	icon_state = "kahluabottle"
 	center_of_mass = @"{'x':17,'y':3}"
 
-/obj/item/chems/food/drinks/bottle/kahlua/Initialize()
+/obj/item/chems/drinks/bottle/kahlua/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/coffee/kahlua, 100)
 
-/obj/item/chems/food/drinks/bottle/goldschlager
+/obj/item/chems/drinks/bottle/goldschlager
 	name = "College Girl Goldschlager"
 	desc = "Because they are the only ones who will drink 100 proof cinnamon schnapps."
 	icon_state = "goldschlagerbottle"
 	center_of_mass = @"{'x':15,'y':3}"
 
-/obj/item/chems/food/drinks/bottle/goldschlager/Initialize()
+/obj/item/chems/drinks/bottle/goldschlager/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/vodka, 95)
 	reagents.add_reagent(/decl/material/solid/metal/gold, 5)
 
-/obj/item/chems/food/drinks/bottle/cognac
+/obj/item/chems/drinks/bottle/cognac
 	name = "Chateau De Baton Premium Cognac"
 	desc = "A sweet and strongly alchoholic drink, made after numerous distillations and years of maturing. You might as well not scream 'SHITCURITY' this time."
 	icon_state = "cognacbottle"
 	center_of_mass = @"{'x':16,'y':6}"
 
-/obj/item/chems/food/drinks/bottle/cognac/Initialize()
+/obj/item/chems/drinks/bottle/cognac/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/cognac, 100)
 
-/obj/item/chems/food/drinks/bottle/wine
+/obj/item/chems/drinks/bottle/wine
 	name = "Doublebeard Bearded Special Wine"
 	desc = "A faint aura of unease and asspainery surrounds the bottle."
 	icon_state = "winebottle"
 	center_of_mass = @"{'x':16,'y':4}"
 
-/obj/item/chems/food/drinks/bottle/wine/Initialize()
+/obj/item/chems/drinks/bottle/wine/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/wine, 100)
 
-/obj/item/chems/food/drinks/bottle/absinthe
+/obj/item/chems/drinks/bottle/absinthe
 	name = "Jailbreaker Verte"
 	desc = "One sip of this and you just know you're gonna have a good time."
 	icon_state = "absinthebottle"
 	center_of_mass = @"{'x':16,'y':6}"
 
-/obj/item/chems/food/drinks/bottle/absinthe/Initialize()
+/obj/item/chems/drinks/bottle/absinthe/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/absinthe, 100)
 
-/obj/item/chems/food/drinks/bottle/melonliquor
+/obj/item/chems/drinks/bottle/melonliquor
 	name = "Emeraldine Melon Liquor"
 	desc = "A bottle of 46 proof Emeraldine Melon Liquor. Sweet and light."
 	icon_state = "alco-green" //Placeholder.
 	center_of_mass = @"{'x':16,'y':6}"
 
-/obj/item/chems/food/drinks/bottle/melonliquor/Initialize()
+/obj/item/chems/drinks/bottle/melonliquor/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/melonliquor, 100)
 
-/obj/item/chems/food/drinks/bottle/bluecuracao
+/obj/item/chems/drinks/bottle/bluecuracao
 	name = "Miss Blue Curacao"
 	desc = "A fruity, exceptionally azure drink. Does not allow the imbiber to use the fifth magic."
 	icon_state = "alco-blue" //Placeholder.
 	center_of_mass = @"{'x':16,'y':6}"
 
-/obj/item/chems/food/drinks/bottle/bluecuracao/Initialize()
+/obj/item/chems/drinks/bottle/bluecuracao/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/bluecuracao, 100)
 
-/obj/item/chems/food/drinks/bottle/herbal
+/obj/item/chems/drinks/bottle/herbal
 	name = "Liqueur d'Herbe"
 	desc = "A bottle of the seventh-finest herbal liquor sold under a generic name in the galaxy. The back label has a load of guff about the monks who traditionally made this particular variety."
 	icon_state = "herbal"
 	center_of_mass = @"{'x':16,'y':6}"
 
-/obj/item/chems/food/drinks/bottle/herbal/Initialize()
+/obj/item/chems/drinks/bottle/herbal/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/herbal, 100)
 
-/obj/item/chems/food/drinks/bottle/grenadine
+/obj/item/chems/drinks/bottle/grenadine
 	name = "Briar Rose Grenadine Syrup"
 	desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
 	icon_state = "grenadinebottle"
 	center_of_mass = @"{'x':16,'y':6}"
 
-/obj/item/chems/food/drinks/bottle/grenadine/Initialize()
+/obj/item/chems/drinks/bottle/grenadine/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/grenadine, 100)
 
-/obj/item/chems/food/drinks/bottle/cola
+/obj/item/chems/drinks/bottle/cola
 	name = "\improper Space Cola"
 	desc = "Cola. in space."
 	icon_state = "colabottle"
 	center_of_mass = @"{'x':16,'y':6}"
 
-/obj/item/chems/food/drinks/bottle/cola/Initialize()
+/obj/item/chems/drinks/bottle/cola/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/cola, 100)
 
-/obj/item/chems/food/drinks/bottle/space_up
+/obj/item/chems/drinks/bottle/space_up
 	name = "\improper Space-Up"
 	desc = "Tastes like a hull breach in your mouth."
 	icon_state = "space-up_bottle"
 	center_of_mass = @"{'x':16,'y':6}"
 
-/obj/item/chems/food/drinks/bottle/space_up/Initialize()
+/obj/item/chems/drinks/bottle/space_up/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/lemonade, 100)
 
-/obj/item/chems/food/drinks/bottle/space_mountain_wind
+/obj/item/chems/drinks/bottle/space_mountain_wind
 	name = "\improper Space Mountain Wind"
 	desc = "Blows right through you like a space wind."
 	icon_state = "space_mountain_wind_bottle"
 	center_of_mass = @"{'x':16,'y':6}"
 
-/obj/item/chems/food/drinks/bottle/space_mountain_wind/Initialize()
+/obj/item/chems/drinks/bottle/space_mountain_wind/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/citrussoda, 100)
 
-/obj/item/chems/food/drinks/bottle/pwine
+/obj/item/chems/drinks/bottle/pwine
 	name = "Warlock's Velvet"
 	desc = "What a delightful packaging for a surely high quality wine! The vintage must be amazing!"
 	icon_state = "pwinebottle"
 	center_of_mass = @"{'x':16,'y':4}"
 
-/obj/item/chems/food/drinks/bottle/pwine/Initialize()
+/obj/item/chems/drinks/bottle/pwine/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/pwine, 100)
 
-/obj/item/chems/food/drinks/bottle/sake
+/obj/item/chems/drinks/bottle/sake
 	name = "Takeo Sadow's Combined Sake"
 	desc = "A bottle of the highest-grade sake allowed for import."
 	icon_state = "sake"
 	center_of_mass = @"{'x':16,'y':4}"
 
-/obj/item/chems/food/drinks/bottle/sake/Initialize()
+/obj/item/chems/drinks/bottle/sake/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/sake, 100)
 
-/obj/item/chems/food/drinks/bottle/champagne
+/obj/item/chems/drinks/bottle/champagne
 	name = "Murcelano Vinyard's Premium Champagne"
 	desc = "The regal drink of celebrities and royalty."
 	icon_state = "champagne"
 	center_of_mass = @"{'x':16,'y':4}"
 
-/obj/item/chems/food/drinks/bottle/champagne/Initialize()
+/obj/item/chems/drinks/bottle/champagne/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/champagne, 100)
 
-/obj/item/chems/food/drinks/bottle/jagermeister
+/obj/item/chems/drinks/bottle/jagermeister
 	name = "Kaisermeister Deluxe"
 	desc = "Jagermeister. This drink just demands a party."
 	icon_state = "herbal"
 	center_of_mass = @"{'x':16,'y':6}"
 
-/obj/item/chems/food/drinks/bottle/jagermeister/Initialize()
+/obj/item/chems/drinks/bottle/jagermeister/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/jagermeister, 100)
 
 //////////////////////////PREMIUM ALCOHOL ///////////////////////
-/obj/item/chems/food/drinks/bottle/premiumvodka
+/obj/item/chems/drinks/bottle/premiumvodka
 	name = "Four Stripes Quadruple Distilled"
 	desc = "Premium distilled vodka imported directly from the Gilgamesh Colonial Confederation."
 	icon_state = "premiumvodka"
 	center_of_mass = @"{'x':17,'y':3}"
 
-/obj/item/chems/food/drinks/bottle/premiumvodka/Initialize()
+/obj/item/chems/drinks/bottle/premiumvodka/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/vodka/premium, 100)
 	var/namepick = pick("Four Stripes","Gilgamesh","Novaya Zemlya","Indie","STS-35")
 	var/typepick = pick("Absolut","Gold","Quadruple Distilled","Platinum","Standard")
 	name = "[namepick] [typepick]"
 
-/obj/item/chems/food/drinks/bottle/premiumwine
+/obj/item/chems/drinks/bottle/premiumwine
 	name = "Uve De Blanc"
 	desc = "You feel pretentious just looking at it."
 	icon_state = "premiumwine"
 	center_of_mass = @"{'x':16,'y':4}"
 
-/obj/item/chems/food/drinks/bottle/premiumwine/Initialize()
+/obj/item/chems/drinks/bottle/premiumwine/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/wine/premium, 100)
 	var/namepick = pick("Calumont","Sciacchemont","Recioto","Torcalota")
@@ -518,7 +518,7 @@
 
 //////////////////////////JUICES AND STUFF ///////////////////////
 
-/obj/item/chems/food/drinks/bottle/orangejuice
+/obj/item/chems/drinks/bottle/orangejuice
 	name = "Orange Juice"
 	desc = "Full of vitamins and deliciousness!"
 	icon_state = "orangejuice"
@@ -528,11 +528,11 @@
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
-/obj/item/chems/food/drinks/bottle/orangejuice/Initialize()
+/obj/item/chems/drinks/bottle/orangejuice/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/orange, 100)
 
-/obj/item/chems/food/drinks/bottle/cream
+/obj/item/chems/drinks/bottle/cream
 	name = "Milk Cream"
 	desc = "It's cream. Made from milk. What else did you think you'd find in there?"
 	icon_state = "cream"
@@ -542,11 +542,11 @@
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
-/obj/item/chems/food/drinks/bottle/cream/Initialize()
+/obj/item/chems/drinks/bottle/cream/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/milk/cream, 100)
 
-/obj/item/chems/food/drinks/bottle/tomatojuice
+/obj/item/chems/drinks/bottle/tomatojuice
 	name = "Tomato Juice"
 	desc = "Well, at least it LOOKS like tomato juice. You can't tell with all that redness."
 	icon_state = "tomatojuice"
@@ -556,11 +556,11 @@
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
-/obj/item/chems/food/drinks/bottle/tomatojuice/Initialize()
+/obj/item/chems/drinks/bottle/tomatojuice/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/tomato, 100)
 
-/obj/item/chems/food/drinks/bottle/limejuice
+/obj/item/chems/drinks/bottle/limejuice
 	name = "Lime Juice"
 	desc = "Sweet-sour goodness."
 	icon_state = "limejuice"
@@ -570,42 +570,42 @@
 	drop_sound = 'sound/foley/drop1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
-/obj/item/chems/food/drinks/bottle/limejuice/Initialize()
+/obj/item/chems/drinks/bottle/limejuice/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/drink/juice/lime, 100)
 
 //Small bottles
-/obj/item/chems/food/drinks/bottle/small
+/obj/item/chems/drinks/bottle/small
 	volume = 50
 	smash_duration = 1
 	atom_flags = 0 //starts closed
 	rag_underlay = "rag_small"
 
-/obj/item/chems/food/drinks/bottle/small/beer
+/obj/item/chems/drinks/bottle/small/beer
 	name = "space beer"
 	desc = "Contains only water, malt and hops."
 	icon_state = "beer"
 	center_of_mass = @"{'x':16,'y':12}"
-/obj/item/chems/food/drinks/bottle/small/beer/Initialize()
+/obj/item/chems/drinks/bottle/small/beer/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/beer, 30)
 
-/obj/item/chems/food/drinks/bottle/small/ale
+/obj/item/chems/drinks/bottle/small/ale
 	name = "\improper Magm-Ale"
 	desc = "A true dorf's drink of choice."
 	icon_state = "alebottle"
 	item_state = "beer"
 	center_of_mass = @"{'x':16,'y':10}"
-/obj/item/chems/food/drinks/bottle/small/ale/Initialize()
+/obj/item/chems/drinks/bottle/small/ale/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/ethanol/ale, 30)
 
-/obj/item/chems/food/drinks/bottle/small/gingerbeer
+/obj/item/chems/drinks/bottle/small/gingerbeer
 	name = "Ginger Beer"
 	desc = "A delicious non-alcoholic beverage enjoyed across Sol space."
 	icon_state = "gingerbeer"
 	center_of_mass = @"{'x':16,'y':12}"
 
-/obj/item/chems/food/drinks/bottle/small/gingerbeer/Initialize()
+/obj/item/chems/drinks/bottle/small/gingerbeer/Initialize()
 	.=..()
 	reagents.add_reagent(/decl/material/liquid/drink/gingerbeer, 50)

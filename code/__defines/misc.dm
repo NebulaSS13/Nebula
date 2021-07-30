@@ -270,3 +270,8 @@
 #else
 #define AS_ANYTHING as anything
 #endif
+
+//NOTE: INTENT_HOTKEY_* defines are not actual intents!
+//they are here to support hotkeys
+#define INTENT_HOTKEY_LEFT  "left"
+#define INTENT_HOTKEY_RIGHT "right"

@@ -11,11 +11,20 @@ SUBSYSTEM_DEF(skybox)
 	var/use_overmap_details = TRUE
 	var/star_path = 'icons/skybox/skybox.dmi'
 	var/star_state = "stars"
-	var/list/skybox_cache = list()
 
-	var/list/space_appearance_cache
+	var/static/list/skybox_cache = list()
+
+	var/static/mutable_appearance/normal_space
+	var/static/list/dust_cache = list()
+	var/static/list/speedspace_cache = list()
+	var/static/list/mapedge_cache = list()
+
+	var/static/list/phase_shift_by_x = list(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
+	var/static/list/phase_shift_by_y = list(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
 
 /datum/controller/subsystem/skybox/PreInit()
+	phase_shift_by_x = shuffle(phase_shift_by_x)
+	phase_shift_by_y = shuffle(phase_shift_by_y)
 	build_space_appearances()
 
 /datum/controller/subsystem/skybox/Initialize()
@@ -28,17 +37,69 @@ SUBSYSTEM_DEF(skybox)
 	skybox_cache = SSskybox.skybox_cache
 
 /datum/controller/subsystem/skybox/proc/build_space_appearances()
-	space_appearance_cache = new(26)
-	for (var/i in 0 to 25)
-		var/mutable_appearance/dust = mutable_appearance('icons/turf/space_dust.dmi', "[i]")
-		dust.plane = DUST_PLANE
-		dust.alpha = 80
-		dust.blend_mode = BLEND_ADD
+	//Create our 'normal' space appearance
+	normal_space = new /mutable_appearance(/turf/space)
+	normal_space.appearance_flags = TILE_BOUND|PIXEL_SCALE|KEEP_TOGETHER
+	normal_space.plane = SKYBOX_PLANE
+	normal_space.icon_state = "white"
 
-		var/mutable_appearance/space = new /mutable_appearance(/turf/space)
-		space.icon_state = "white"
-		space.overlays += dust
-		space_appearance_cache[i + 1] = space.appearance
+	//Static
+	for (var/i in 0 to 25)
+		var/mutable_appearance/MA = new(normal_space)
+		var/image/im = image('icons/turf/space_dust.dmi', "[i]")
+		im.plane = DUST_PLANE
+		im.alpha = 128
+		im.blend_mode = BLEND_ADD
+		
+		MA.overlays = list(im)
+
+		dust_cache["[i]"] = MA
+
+	//Moving
+	for (var/i in 0 to 14)
+		// NORTH/SOUTH
+		var/mutable_appearance/MA = new(normal_space)
+		var/image/im = image('icons/turf/space_dust_transit.dmi', "speedspace_ns_[i]")
+		im.plane = DUST_PLANE
+		im.blend_mode = BLEND_ADD
+
+		MA.overlays = list(im)
+	
+		speedspace_cache["NS_[i]"] = MA
+	
+		// EAST/WEST
+		MA = new(normal_space)
+		im = image('icons/turf/space_dust_transit.dmi', "speedspace_ew_[i]")
+		im.plane = DUST_PLANE
+		im.blend_mode = BLEND_ADD
+		
+		MA.overlays = list(im)
+		
+		speedspace_cache["EW_[i]"] = MA
+	
+		//Over-the-edge images
+	for (var/dir in global.alldirs)
+		var/mutable_appearance/MA = new(normal_space)
+		var/matrix/M = matrix()
+		var/horizontal = (dir & (WEST|EAST))
+		var/vertical = (dir & (NORTH|SOUTH))
+		M.Scale(horizontal ? 8 : 1, vertical ? 8 : 1)
+		MA.transform = M
+		MA.appearance_flags = KEEP_APART | TILE_BOUND
+		MA.plane = SPACE_PLANE
+		MA.layer = 0
+
+		if(dir & NORTH)
+			MA.pixel_y = 112
+		else if(dir & SOUTH)
+			MA.pixel_y = -112
+
+		if(dir & EAST)
+			MA.pixel_x = 112
+		else if(dir & WEST)
+			MA.pixel_x = -112
+
+		mapedge_cache["[dir]"] = MA
 
 /datum/controller/subsystem/skybox/proc/get_skybox(z)
 	if(!skybox_cache["[z]"])

@@ -17,6 +17,7 @@
 	anchored = 1
 	material = /decl/material/solid/metal/aliumium
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
+	z_flags = ZMM_MANGLE_PLANES
 	var/active = 0
 
 /obj/structure/monolith/Initialize()

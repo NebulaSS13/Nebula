@@ -75,7 +75,7 @@
 	var/obj/item/organ/internal/eyes/eyes = org
 	if(istype(eyes))
 		eyes.eye_icon = 'mods/species/utility_frames/icons/eyes.dmi'
-	H.regenerate_icons()
+	H.refresh_visible_overlays()
 
 /decl/species/utility_frame/handle_post_species_pref_set(var/datum/preferences/pref)
 	if(pref)

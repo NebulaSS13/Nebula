@@ -5,7 +5,7 @@
 		if (W==w_uniform) // will be torn
 			continue
 		drop_from_inventory(W)
-	regenerate_icons()
+	refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	set_status(STAT_STUN, 1)
 	icon = null
@@ -111,7 +111,7 @@
 	QDEL_NULL_LIST(worn_underwear)
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
-	regenerate_icons()
+	refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
@@ -148,7 +148,7 @@
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
-	regenerate_icons()
+	refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
@@ -177,7 +177,7 @@
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 
-	regenerate_icons()
+	refresh_visible_overlays()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
@@ -280,7 +280,7 @@
 		if (!BP_IS_PROSTHETIC(organ))
 			organ.rejuvenate(1)
 			organ.max_damage *= 3
-			organ.min_broken_damage = Floor(organ.max_damage * 0.75)
+			organ.min_broken_damage = FLOOR(organ.max_damage * 0.75)
 	verbs += /mob/living/proc/breath_death
 	verbs += /mob/living/proc/consume
 	playsound(get_turf(src), 'sound/hallucinations/wail.ogg', 20, 1)

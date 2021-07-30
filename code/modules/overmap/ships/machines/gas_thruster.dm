@@ -17,6 +17,7 @@
 	use_power = POWER_USE_OFF
 	power_channel = EQUIP
 	idle_power_usage = 11600
+	z_flags = ZMM_MANGLE_PLANES
 
 /obj/machinery/atmospherics/unary/engine/Initialize()
 	. = ..()

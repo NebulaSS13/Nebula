@@ -73,7 +73,7 @@
 	max_damage = 50
 	power_use = 5
 	has_hardpoints = list(HARDPOINT_BACK)
-	desc = "The Veymed Odysseus series cockpits combine ultralight materials and clear aluminum laminates to provide an optimized cockpit experience."
+	desc = "The Veymed Odysseus series cockpits combine ultralight materials and clear aluminium laminates to provide an optimized cockpit experience."
 	climb_time = 15
 	material = /decl/material/solid/metal/steel
 

@@ -613,10 +613,10 @@
 "bx" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/chems/food/condiment/small/saltshaker{
+/obj/item/chems/condiment/small/saltshaker{
 	pixel_x = -3
 	},
-/obj/item/chems/food/condiment/small/peppermill{
+/obj/item/chems/condiment/small/peppermill{
 	pixel_x = 3
 	},
 /turf/unsimulated/floor{
@@ -638,7 +638,7 @@
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/item/storage/box/sinpockets,
 /obj/structure/closet/secure_closet/freezer/kitchen,
-/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/condiment/enzyme,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -5896,7 +5896,7 @@ bB
 bA
 bB
 bB
-ac
+bB
 ac
 bA
 bB

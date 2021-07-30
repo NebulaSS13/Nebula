@@ -87,37 +87,45 @@
 
 /obj/item/weldingtool/attackby(obj/item/W, mob/user)
 	if(welding)
-		to_chat(user, SPAN_DANGER("Stop welding first!"))
+		to_chat(user, SPAN_WARNING("Stop welding first!"))
 		return
 
 	if(isScrewdriver(W))
+		if(isrobot(loc))
+			to_chat(user, SPAN_WARNING("You cannot modify your own welder!"))
+			return
+
 		status = !status
+		
 		if(status)
 			to_chat(user, SPAN_NOTICE("You secure the welder."))
 		else
 			to_chat(user, SPAN_NOTICE("The welder can now be attached and modified."))
-		src.add_fingerprint(user)
-		return
 
-	if((!status) && (istype(W,/obj/item/stack/material/rods)))
-		var/obj/item/stack/material/rods/R = W
-		R.use(1)
-		var/obj/item/flamethrower/F = new/obj/item/flamethrower(user.loc)
-		user.drop_from_inventory(src, F)
-		F.weldtool = src
-		master = F
 		add_fingerprint(user)
 		return
 
+	if(!status && istype(W, /obj/item/stack/material/rods))
+		var/obj/item/stack/material/rods/R = W
+		R.use(1)
+		add_fingerprint(user)
+		user.drop_from_inventory(src)
+		var/obj/item/flamethrower/F = new(get_turf(src), src)
+		user.put_in_hands(F)
+		return
+
 	if (istype(W, /obj/item/welder_tank))
-		if (tank)
+		if(tank)
 			to_chat(user, SPAN_WARNING("\The [src] already has a tank attached - remove it first."))
 			return
+
 		if(!(src in user.get_held_items()))
 			to_chat(user, SPAN_WARNING("You must hold the welder in your hands to attach a tank."))
 			return
-		if (!user.unEquip(W, src))
+		
+		if(!user.unEquip(W, src))
 			return
+
 		tank = W
 		user.visible_message("[user] slots \a [W] into \the [src].", "You slot \a [W] into \the [src].")
 		w_class = tank.size_in_use

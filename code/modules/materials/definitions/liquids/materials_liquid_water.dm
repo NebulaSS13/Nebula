@@ -51,7 +51,7 @@
 
 #define WATER_LATENT_HEAT 9500 // How much heat is removed when applied to a hot turf, in J/unit (9500 makes 120 u of water roughly equivalent to 2L
 /decl/material/liquid/water/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
-	
+
 	..()
 
 	if(!istype(T))
@@ -81,8 +81,8 @@
 
 /decl/material/liquid/water/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	..()
-	if(istype(O, /obj/item/chems/food/snacks/monkeycube))
-		var/obj/item/chems/food/snacks/monkeycube/cube = O
+	if(istype(O, /obj/item/chems/food/monkeycube))
+		var/obj/item/chems/food/monkeycube/cube = O
 		if(!cube.wrapper_type)
 			cube.Expand()
 

@@ -26,7 +26,7 @@
 	bleed_colour = "#5d0d71"
 	pass_flags = PASS_FLAG_TABLE
 
-	meat_type = /obj/item/chems/food/snacks/fish/poison
+	meat_type = /obj/item/chems/food/fish/poison
 	skin_material = /decl/material/solid/skin/fish/purple
 	bone_material = /decl/material/solid/bone/cartilage
 

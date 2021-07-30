@@ -314,7 +314,7 @@
 	return ..(reagent, "Condiment infos", 0)
 
 /obj/machinery/chem_master/condimaster/create_bottle(mob/user)
-	var/obj/item/chems/food/condiment/P = new/obj/item/chems/food/condiment(src.loc)
+	var/obj/item/chems/condiment/P = new/obj/item/chems/condiment(src.loc)
 	reagents.trans_to_obj(P,50)
 
 /obj/machinery/chem_master/condimaster/extra_options()

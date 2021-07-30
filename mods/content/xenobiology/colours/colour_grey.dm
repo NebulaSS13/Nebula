@@ -13,7 +13,7 @@
 
 /decl/slime_colour/grey/handle_blood_reaction(var/datum/reagents/holder)
 	for(var/i = 1, i <= 3, i++)
-		new /obj/item/chems/food/snacks/monkeycube(get_turf(holder.my_atom))
+		new /obj/item/chems/food/monkeycube(get_turf(holder.my_atom))
 	return TRUE
 
 /decl/slime_colour/grey/handle_uranium_reaction(var/datum/reagents/holder)

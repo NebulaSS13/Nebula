@@ -32,7 +32,7 @@
 	return ..()
 
 /obj/proc/get_matter_amount_modifier()
-	. = ceil(w_class * BASE_OBJECT_MATTER_MULTPLIER)
+	. = CEILING(w_class * BASE_OBJECT_MATTER_MULTPLIER)
 
 /obj/item/proc/is_used_on(obj/O, mob/user)
 	return

@@ -54,7 +54,7 @@
 		given_dna = null
 
 	if(max_damage)
-		min_broken_damage = Floor(max_damage / 2)
+		min_broken_damage = FLOOR(max_damage / 2)
 	else
 		max_damage = min_broken_damage * 2
 
@@ -337,7 +337,7 @@
 	if(!user.unEquip(src))
 		return
 
-	var/obj/item/chems/food/snacks/organ/O = new(get_turf(src))
+	var/obj/item/chems/food/organ/O = new(get_turf(src))
 	O.SetName(name)
 	O.appearance = src
 	if(reagents && reagents.total_volume)

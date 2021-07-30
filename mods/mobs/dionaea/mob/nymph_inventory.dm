@@ -6,9 +6,9 @@
 /mob/living/carbon/alien/diona/put_in_hands(var/obj/item/W) // No hands. Use mouth.
 	if(can_collect(W))
 		collect(W)
-	else
-		W.forceMove(get_turf(src))
-	return 1
+		return TRUE
+	W.forceMove(get_turf(src))
+	return TRUE
 
 /mob/living/carbon/alien/diona/proc/can_collect(var/obj/item/collecting)
 	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
@@ -24,7 +24,7 @@
 /mob/living/carbon/alien/diona/proc/collect(var/obj/item/collecting)
 	collecting.forceMove(src)
 	holding_item = collecting
-	visible_message("<span class='notice'>\The [src] engulfs \the [holding_item].</span>")
+	visible_message(SPAN_NOTICE("\The [src] engulfs \the [holding_item]."))
 
 	// This means dionaea can hoover up beakers as a kind of impromptu chem disposal
 	// technique, so long as they're okay with the reagents reacting inside them.
@@ -36,7 +36,8 @@
 	if(istype(holding_item, /obj/item/chems/food))
 		var/obj/item/chems/food/food = holding_item
 		holding_item = null
-		if(food.trash) holding_item = new food.trash(src)
+		if(food.trash)
+			holding_item = new food.trash(src)
 		qdel(food)
 
 	if(!QDELETED(holding_item))
@@ -51,7 +52,8 @@
 	drop_item()
 
 /mob/living/carbon/alien/diona/drop_item()
-	if(holding_item && unEquip(holding_item))
-		visible_message(SPAN_NOTICE("\The [src] regurgitates \the [holding_item]."))
+	var/item = holding_item
+	if(item && unEquip(item))
+		visible_message(SPAN_NOTICE("\The [src] regurgitates \the [item]."))
 		return TRUE
 	. = ..()

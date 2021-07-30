@@ -76,7 +76,10 @@ Buildable meters
 		return ..()
 	if (!isturf(loc))
 		return 1
+	construct_pipe(user)
+	return TRUE
 
+/obj/item/pipe/proc/construct_pipe(mob/user)
 	sanitize_dir()
 	var/obj/machinery/atmospherics/fake_machine = constructed_path
 	var/pipe_dir = base_pipe_initialize_directions(dir, initial(fake_machine.connect_dir_type))
@@ -84,7 +87,7 @@ Buildable meters
 	for(var/obj/machinery/atmospherics/M in loc)
 		if((M.initialize_directions & pipe_dir) && M.check_connect_types_construction(M,src))	// matches at least one direction on either type of pipe & same connection type
 			to_chat(user, "<span class='warning'>There is already a pipe of the same type at this location.</span>")
-			return 1
+			return
 	// no conflicts found
 
 	var/obj/machinery/atmospherics/P = new constructed_path(get_turf(src))
@@ -96,12 +99,14 @@ Buildable meters
 	P.set_dir(dir)
 	P.set_initial_level()
 	P.build(src)
+	. = P
 
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	user.visible_message( \
-		"[user] fastens the [src].", \
-		"<span class='notice'>You have fastened the [src].</span>", \
-		"You hear ratchet.")
+	playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+	if(user)
+		user.visible_message( \
+			"[user] fastens the [src].", \
+			"<span class='notice'>You have fastened the [src].</span>", \
+			"You hear ratchet.")
 	qdel(src)	// remove the pipe item
 
 /obj/item/machine_chassis

@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/pacman
-	name = "circuitboard (PACMAN-type generator)"
+	name = "circuitboard (portable generator)"
 	build_path = /obj/machinery/power/port_gen/pacman
 	board_type = "machine"
 	origin_tech = "{'programming':3,'powerstorage':3,'exoticmatter':3,'engineering':3}"
@@ -14,7 +14,7 @@
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
 /obj/item/stock_parts/circuitboard/pacman/super
-	name = "circuitboard (SUPERPACMAN-type generator)"
+	name = "circuitboard (portable fission generator)"
 	build_path = /obj/machinery/power/port_gen/pacman/super
 	origin_tech = "{'programming':3,'powerstorage':4,'engineering':4}"
 
@@ -24,6 +24,6 @@
 	origin_tech = "{'programming':3,'powerstorage':5,'engineering':4}"
 
 /obj/item/stock_parts/circuitboard/pacman/mrs
-	name = "circuitboard (MRSPACMAN-type generator)"
+	name = "circuitboard (portable fusion generator)"
 	build_path = /obj/machinery/power/port_gen/pacman/mrs
 	origin_tech = "{'programming':3,'powerstorage':5,'engineering':5}"

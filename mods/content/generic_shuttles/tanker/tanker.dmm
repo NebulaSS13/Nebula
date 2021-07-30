@@ -544,7 +544,7 @@
 /turf/simulated/floor/plating,
 /area/tanker)
 "Ze" = (
-/obj/structure/fuel_port,
+/obj/structure/fuel_port/hydrogen,
 /turf/simulated/wall/r_wall/hull,
 /area/tanker)
 "ZI" = (

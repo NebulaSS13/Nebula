@@ -19,12 +19,19 @@
 	holder_type = /obj/item/holder/corgi
 	pass_flags = PASS_FLAG_TABLE
 
-	meat_type = /obj/item/chems/food/snacks/meat/corgi
+	meat_type = /obj/item/chems/food/meat/corgi
 	meat_amount = 3
 	skin_material = /decl/material/solid/skin/fur/orange
 
-	var/obj/item/inventory_head
-	var/obj/item/inventory_back
+/mob/living/simple_animal/corgi/Initialize()
+	if(isnull(hat_offsets))
+		hat_offsets = list(
+			"[NORTH]" = list( 1, -8),
+			"[SOUTH]" = list( 1, -8),
+			"[EAST]" =  list( 7, -8),
+			"[WEST]" =  list(-7, -8)
+		)
+	. = ..()
 
 //IAN! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Ian
@@ -48,7 +55,7 @@
 			if( !movement_target || !(movement_target.loc in oview(src, 3)) )
 				movement_target = null
 				stop_automated_movement = 0
-				for(var/obj/item/chems/food/snacks/S in oview(src,3))
+				for(var/obj/item/chems/food/S in oview(src,3))
 					if(isturf(S.loc) || ishuman(S.loc))
 						movement_target = S
 						break
@@ -85,7 +92,7 @@
 				if(QDELETED(src) || client)
 					return
 
-/obj/item/chems/food/snacks/meat/corgi
+/obj/item/chems/food/meat/corgi
 	name = "Corgi meat"
 	desc = "Tastes like... well you know..."
 
@@ -102,27 +109,6 @@
 	else
 		..()
 
-/mob/living/simple_animal/corgi/regenerate_icons()
-	overlays = list()
-
-	if(inventory_head)
-		var/head_icon_state = inventory_head.icon_state
-		if(health <= 0)
-			head_icon_state += "2"
-
-		var/icon/head_icon = image('icons/mob/simple_animal/corgi_head.dmi',head_icon_state)
-		if(head_icon)
-			overlays += head_icon
-
-	if(inventory_back)
-		var/back_icon_state = inventory_back.icon_state
-		if(health <= 0)
-			back_icon_state += "2"
-
-		var/icon/back_icon = image('icons/mob/simple_animal/corgi_back.dmi',back_icon_state)
-		if(back_icon)
-			overlays += back_icon
-
 /mob/living/simple_animal/corgi/puppy
 	name = "\improper corgi puppy"
 	real_name = "corgi"
@@ -133,6 +119,17 @@
 	meat_amount = 1
 	skin_amount = 3
 	bone_amount = 3
+
+/mob/living/simple_animal/corgi/puppy/Initialize()
+	if(isnull(hat_offsets))
+		hat_offsets = list(
+			"[NORTH]" = list( 0, -12),
+			"[SOUTH]" = list( 0, -12),
+			"[EAST]" =  list( 5, -14),
+			"[WEST]" =  list(-5, -14)
+		)
+	..()
+	gender = pick(MALE, FEMALE)
 
 //pupplies cannot wear anything.
 /mob/living/simple_animal/corgi/puppy/OnTopic(mob/user, href_list)

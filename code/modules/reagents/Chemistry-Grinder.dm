@@ -49,8 +49,8 @@
 		return FALSE
 
 	if (istype(O,/obj/item/chems/glass) || \
-		istype(O,/obj/item/chems/food/drinks/glass2) || \
-		istype(O,/obj/item/chems/food/drinks/shaker))
+		istype(O,/obj/item/chems/drinks/glass2) || \
+		istype(O,/obj/item/chems/drinks/shaker))
 
 		if (beaker)
 			return TRUE
@@ -208,7 +208,7 @@
 			if(!material)
 				break
 
-			var/amount_to_take = max(0,min(stack.amount, Floor(remaining_volume / REAGENT_UNITS_PER_MATERIAL_SHEET)))
+			var/amount_to_take = max(0,min(stack.amount, FLOOR(remaining_volume / REAGENT_UNITS_PER_MATERIAL_SHEET)))
 			if(amount_to_take)
 				stack.use(amount_to_take)
 				if(QDELETED(stack))

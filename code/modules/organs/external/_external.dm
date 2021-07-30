@@ -8,6 +8,8 @@
 	dir = SOUTH
 	organ_tag = "limb"
 
+	appearance_flags = PIXEL_SCALE | LONG_GLIDE
+
 	var/slowdown = 0
 
 	// Strings
@@ -457,7 +459,7 @@
 	switch(damage_type)
 		if(BRUTE) src.heal_damage(repair_amount, 0, 0, 1)
 		if(BURN)  src.heal_damage(0, repair_amount, 0, 1)
-	owner.regenerate_icons()
+	owner.refresh_visible_overlays()
 	if(user == src.owner)
 		var/decl/pronouns/G = user.get_pronouns()
 		user.visible_message(SPAN_NOTICE("\The [user] patches [damage_desc] on [G.his] [name] with \the [tool]."))
@@ -531,7 +533,7 @@ This function completely restores a damaged organ to perfect condition.
 		var/internal_damage
 		if(prob(damage) && sever_artery())
 			internal_damage = TRUE
-		if(prob(ceil(damage/4)) && sever_tendon())
+		if(prob(CEILING(damage/4)) && sever_tendon())
 			internal_damage = TRUE
 		if(internal_damage)
 			owner.custom_pain("You feel something rip in your [name]!", 50, affecting = src)
@@ -948,7 +950,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	spawn(1)
 		victim.updatehealth()
 		victim.UpdateDamageIcon()
-		victim.regenerate_icons()
+		victim.refresh_visible_overlays()
 		set_dir(SOUTH, TRUE)
 
 	switch(disintegrate)

@@ -18,7 +18,7 @@
 	if(name)
 		filename = "data/persistent/[lowertext(global.using_map.name)]-[lowertext(name)].json"
 	if(!isnull(entries_decay_at) && !isnull(entries_expire_at))
-		entries_decay_at = Floor(entries_expire_at * entries_decay_at)
+		entries_decay_at = FLOOR(entries_expire_at * entries_decay_at)
 
 /decl/persistence_handler/proc/GetValidTurf(var/turf/T, var/list/tokens)
 	if(T && CheckTurfContents(T, tokens))

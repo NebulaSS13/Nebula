@@ -168,4 +168,4 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 	. = ..(aspect_type)
 	if(.)
 		update_body()
-		regenerate_icons()
+		update_icon()

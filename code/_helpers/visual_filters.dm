@@ -52,6 +52,6 @@
 
 	// If we're being copied by Z-Mimic, update mimics too.
 	if (bound_overlay)
-		for (var/atom/movable/AM as anything in get_above_oo())
+		for (var/atom/movable/AM AS_ANYTHING in get_above_oo())
 			monkeypatched_params[1] = AM.filters[index]
 			animate(arglist(monkeypatched_params))

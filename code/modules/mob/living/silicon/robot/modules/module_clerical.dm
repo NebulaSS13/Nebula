@@ -42,7 +42,7 @@
 		/obj/item/storage/tray/robotray,
 		/obj/item/chems/borghypo/service
 	)
-	emag = /obj/item/chems/food/drinks/bottle/small/beer
+	emag = /obj/item/chems/drinks/bottle/small/beer
 	skills = list(
 		SKILL_LITERACY            = SKILL_ADEPT,
 		SKILL_COMPUTER            = SKILL_EXPERT,
@@ -71,10 +71,10 @@
 
 /obj/item/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
-	var/obj/item/chems/food/condiment/enzyme/E = locate() in equipment
+	var/obj/item/chems/condiment/enzyme/E = locate() in equipment
 	E.reagents.add_reagent(/decl/material/liquid/enzyme, 2 * amount)
 	if(emag)
-		var/obj/item/chems/food/drinks/bottle/small/beer/B = emag
+		var/obj/item/chems/drinks/bottle/small/beer/B = emag
 		B.reagents.add_reagent(/decl/material/liquid/ethanol/beer, amount * 0.4)
 		B.reagents.add_reagent(/decl/material/solid/ice,         amount * 0.1)
 		B.reagents.add_reagent(/decl/material/liquid/paralytics,   amount * 0.2)
