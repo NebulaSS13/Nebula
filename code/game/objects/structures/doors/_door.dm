@@ -60,7 +60,7 @@
 	if(!can_close())
 		return FALSE
 	flick("[icon_base]closing", src)
-	playsound(src.loc, material.doorclose_noise, MATERIAL_DOOR_SOUND_VOLUME, 1)
+	playsound(src.loc, material.dooropen_noise, MATERIAL_DOOR_SOUND_VOLUME, 1)
 
 	changing_state = TRUE
 	sleep(1 SECOND)
