@@ -8,16 +8,14 @@
 	density = 1
 	atmos_canpass = CANPASS_NEVER
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
-	var/engine_extension = /datum/extension/ship_engine/gas
 	construct_state = /decl/machine_construction/default/panel_closed
 	maximum_component_parts = list(/obj/item/stock_parts = 8)//don't want too many, let upgraded component shine
 	uncreated_component_parts = null
 	base_type = /obj/machinery/atmospherics/unary/engine
-
 	use_power = POWER_USE_OFF
 	power_channel = EQUIP
 	idle_power_usage = 11600
-	z_flags = ZMM_MANGLE_PLANES
+	var/engine_extension = /datum/extension/ship_engine/gas
 
 /obj/machinery/atmospherics/unary/engine/Initialize()
 	. = ..()
@@ -27,9 +25,12 @@
 /obj/machinery/atmospherics/unary/engine/on_update_icon()
 	cut_overlays()
 	if(operable())
+		z_flags |= ZMM_MANGLE_PLANES
 		add_overlay(emissive_overlay(icon, "indicator_power"))
 		if(use_power)
 			add_overlay(emissive_overlay(icon, "nozzle_idle"))
+	else
+		z_flags &= ~ZMM_MANGLE_PLANES
 
 /obj/machinery/atmospherics/unary/engine/attackby(obj/item/I, mob/user)
 	if(isMultitool(I) && !panel_open)

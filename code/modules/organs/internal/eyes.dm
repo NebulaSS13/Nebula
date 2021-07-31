@@ -8,6 +8,7 @@
 	surface_accessible = TRUE
 	relative_size = 5
 	max_damage = 45
+	z_flags = ZMM_MANGLE_PLANES
 
 	var/contaminant_guard = 0
 	var/eye_colour = COLOR_BLACK

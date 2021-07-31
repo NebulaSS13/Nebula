@@ -186,8 +186,8 @@
 	icon_state = "pad"
 	idle_power_usage = 10
 	active_power_usage = 2000
-	var/obj/machinery/computer/teleporter/com
 	light_color = "#02d1c7"
+	var/obj/machinery/computer/teleporter/com
 
 /obj/machinery/teleport/hub/Initialize()
 	..()
@@ -201,11 +201,15 @@
 	cut_overlays()
 	if (com?.station?.engaged)
 		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_active_overlay"))
+		z_flags |= ZMM_MANGLE_PLANES
 		set_light(4, 0.4)
 	else
 		set_light(0)
 		if(operable())
 			add_overlay(emissive_overlay(icon, "[initial(icon_state)]_idle_overlay"))
+			z_flags |= ZMM_MANGLE_PLANES
+		else
+			z_flags &= ~ZMM_MANGLE_PLANES
 
 /obj/machinery/teleport/hub/Bumped(var/atom/movable/M)
 	if (com?.station?.engaged)
