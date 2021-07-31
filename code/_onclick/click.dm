@@ -56,6 +56,9 @@
 	next_click = world.time + 1
 
 	var/list/modifiers = params2list(params)
+	if(modifiers["right"])
+		RightClickOn(A)
+		return 1
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
 		return 1
@@ -239,6 +242,7 @@
 /mob/proc/ShiftClickOn(var/atom/A)
 	A.ShiftClick(src)
 	return
+
 /atom/proc/ShiftClick(var/mob/user)
 	if(user.client && user.client.eye == user)
 		user.examinate(src)
@@ -290,6 +294,13 @@
 	if(!isturf(loc) || !client)
 		return FALSE
 	return z == T.z && (get_dist(loc, T) <= get_effective_view(client))
+
+/mob/proc/RightClickOn(atom/A)
+	A.RightClick(src)
+	return
+
+/atom/proc/RightClick(mob/user)
+	return
 
 /*
 	Control+Shift click

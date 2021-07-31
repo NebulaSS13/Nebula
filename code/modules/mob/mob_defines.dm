@@ -25,6 +25,8 @@
 		/datum/movement_handler/mob/movement
 	)
 
+	var/shift_to_open_context_menu = FALSE
+
 	var/mob_flags
 	var/last_quick_move_time = 0
 	var/list/client_images = list() // List of images applied to/removed from the client on login/logout
