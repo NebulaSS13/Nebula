@@ -1,0 +1,4 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - bugfix: Fix reinforced floor being impossible to build due to a bug.
