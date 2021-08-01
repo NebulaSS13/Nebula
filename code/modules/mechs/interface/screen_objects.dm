@@ -286,7 +286,7 @@
 	if(owner.hatch_locked && owner.hatch_closed)
 		to_chat(usr, SPAN_WARNING("You cannot open the hatch while it is locked."))
 		return
-	owner.hatch_closed = ..()
+	owner.close_hatch(..())
 	to_chat(usr, SPAN_NOTICE("The [owner.body.hatch_descriptor] is now [owner.hatch_closed ? "closed" : "open" ]."))
 	owner.update_icon()
 

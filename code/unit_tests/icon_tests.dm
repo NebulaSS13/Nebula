@@ -2,7 +2,11 @@
 	name = "ICON STATE template"
 	template = /datum/unit_test/icon_test
 /datum/unit_test/icon_test/sprite_accessories_shall_have_existing_icon_states
-	name = "ICON STATE - Sprite accessories shall have existing icon states"
+	name = "Sprite accessories shall have existing icon states"
+	
+/datum/unit_test/icon_test/New()
+	..()
+	name = "ICON STATE - [name]"
 
 /datum/unit_test/icon_test/sprite_accessories_shall_have_existing_icon_states/start_test()
 	var/sprite_accessory_subtypes = list(
@@ -60,7 +64,7 @@
 	return 1
 
 /datum/unit_test/icon_test/posters_shall_have_icon_states
-	name = "ICON STATE - Posters Shall Have Icon States"
+	name = "Posters Shall Have Icon States"
 
 /datum/unit_test/icon_test/posters_shall_have_icon_states/start_test()
 	var/contraband_icons = icon_states('icons/obj/contraband.dmi')
@@ -78,7 +82,7 @@
 	return 1
 
 /datum/unit_test/icon_test/item_modifiers_shall_have_icon_states
-	name = "ICON STATE - Item Modifiers Shall Have Icon Sates"
+	name = "Item Modifiers Shall Have Icon Sates"
 	var/list/icon_states_by_type
 
 /datum/unit_test/icon_test/item_modifiers_shall_have_icon_states/start_test()
@@ -104,3 +108,21 @@
 	else
 		pass("All item modifiers have valid icon states.")
 	return 1
+
+
+/datum/unit_test/icon_test/areas_shall_have_valid_icon_states
+	name = "Areas shall have valid icon states"
+
+/datum/unit_test/icon_test/areas_shall_have_valid_icon_states/start_test()
+	var/list/missing_states = list()
+
+	for (var/area/area in global.areas)
+		if (!check_state_in_icon(area.icon_state, area.icon, TRUE))
+			missing_states += "[area.type] - [area.icon] - [area.icon_state]"
+
+	if(missing_states.len)
+		fail("Following areas are missing icon states: [JOINTEXT(missing_states)]")
+	else
+		pass("All area icon states exist")
+
+	return TRUE

@@ -269,7 +269,6 @@
 	if(user in pilots)
 		a_intent = I_HURT
 		LAZYREMOVE(pilots, user)
-		UNSETEMPTY(pilots)
 		update_pilots()
 	return 1
 
@@ -395,7 +394,7 @@
 				visible_message(SPAN_NOTICE("\The [user] forces \the [src]'s [body.hatch_descriptor] open using the \the [thing]."))
 				playsound(user.loc, 'sound/machines/bolts_up.ogg', 25, 1)
 				hatch_locked = FALSE
-				hatch_closed = FALSE
+				close_hatch(FALSE)
 				for(var/mob/pilot in pilots)
 					eject(pilot, silent = 1)
 				hud_open.queue_icon_update()
@@ -441,7 +440,7 @@
 	if(hatch_locked)
 		to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
 		return TRUE
-	hatch_closed = !hatch_closed
+	close_hatch(!hatch_closed)
 	to_chat(user, SPAN_NOTICE("You [hatch_closed ? "close" : "open"] the [body.hatch_descriptor]."))
 	hud_open.queue_icon_update()
 	queue_icon_update()
@@ -464,3 +463,21 @@
 		if(hardpoints[h] == I)
 			return h
 	return 0
+
+/mob/living/exosuit/proc/close_hatch(close)
+	if(!close && hatch_closed && hatch_locked)
+		return FALSE
+
+	hatch_closed = close
+	if (!hatch_closed && dropped_atoms)
+		for (var/obj/O in dropped_atoms)
+			O.dropInto(loc)
+		LAZYCLEARLIST(dropped_atoms)
+
+	return TRUE
+
+/mob/living/exosuit/onDropInto(atom/movable/AM)
+	if(hatch_closed)
+		LAZYADD(dropped_atoms, AM)
+		return null
+	return ..()

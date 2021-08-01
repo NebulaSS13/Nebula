@@ -60,7 +60,7 @@
 /area/test_area/general)
 "o" = (
 /turf/space,
-/area/test_area/general)
+/area/space)
 "p" = (
 /obj/effect/landmark/test/safe_turf,
 /turf/simulated/floor,
@@ -68,9 +68,28 @@
 "q" = (
 /obj/effect/landmark/test/space_turf,
 /turf/space,
-/area/test_area/general)
+/area/space)
+"r" = (
+/turf/unsimulated/wall,
+/area/test_area/west)
+"s" = (
+/turf/unsimulated/wall,
+/area/test_area/east)
+"t" = (
+/obj/effect/landmark/test/west,
+/turf/simulated/floor,
+/area/test_area/west)
+"u" = (
+/obj/effect/landmark/test/east,
+/turf/simulated/floor,
+/area/test_area/east)
+"U" = (
+/turf/unsimulated/wall,
+/area/space)
 
 (1,1,1) = {"
+a
+a
 a
 a
 a
@@ -125,8 +144,12 @@ a
 a
 a
 a
+a
+a
 "}
 (3,1,1) = {"
+a
+a
 a
 a
 a
@@ -181,8 +204,12 @@ a
 a
 a
 a
+a
+a
 "}
 (5,1,1) = {"
+a
+a
 a
 a
 a
@@ -237,8 +264,12 @@ a
 a
 a
 a
+a
+a
 "}
 (7,1,1) = {"
+a
+a
 a
 a
 a
@@ -274,6 +305,8 @@ a
 a
 a
 a
+a
+a
 m
 m
 m
@@ -295,6 +328,8 @@ a
 a
 "}
 (9,1,1) = {"
+a
+a
 a
 a
 a
@@ -330,6 +365,8 @@ a
 a
 a
 a
+a
+a
 m
 n
 n
@@ -351,6 +388,8 @@ a
 a
 "}
 (11,1,1) = {"
+a
+a
 a
 a
 a
@@ -386,6 +425,8 @@ a
 a
 a
 a
+a
+a
 m
 n
 n
@@ -414,6 +455,8 @@ a
 a
 a
 a
+r
+r
 m
 n
 n
@@ -442,6 +485,8 @@ a
 a
 a
 a
+r
+t
 m
 m
 m
@@ -470,12 +515,14 @@ a
 a
 a
 a
-m
-m
-m
-m
-m
-m
+s
+u
+U
+U
+U
+U
+U
+U
 c
 c
 c
@@ -498,7 +545,9 @@ a
 a
 a
 a
-m
+s
+s
+U
 o
 o
 o
@@ -526,7 +575,9 @@ a
 a
 a
 a
-m
+a
+a
+U
 o
 o
 o
@@ -554,7 +605,9 @@ a
 a
 a
 a
-m
+a
+a
+U
 o
 o
 q
@@ -582,7 +635,9 @@ a
 a
 a
 a
-m
+a
+a
+U
 o
 o
 o
@@ -610,7 +665,9 @@ a
 a
 a
 a
-m
+a
+a
+U
 o
 o
 o
@@ -638,12 +695,14 @@ a
 a
 a
 a
-m
-m
-m
-m
-m
-m
+a
+a
+U
+U
+U
+U
+U
+U
 c
 c
 c
@@ -659,6 +718,8 @@ a
 a
 "}
 (22,1,1) = {"
+a
+a
 a
 a
 a
@@ -713,8 +774,12 @@ a
 a
 a
 a
+a
+a
 "}
 (24,1,1) = {"
+a
+a
 a
 a
 a
@@ -769,8 +834,12 @@ a
 a
 a
 a
+a
+a
 "}
 (26,1,1) = {"
+a
+a
 a
 a
 a
@@ -825,8 +894,12 @@ a
 a
 a
 a
+a
+a
 "}
 (28,1,1) = {"
+a
+a
 a
 a
 a

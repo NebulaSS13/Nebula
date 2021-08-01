@@ -59,6 +59,15 @@
 		if(istype(T))
 			T.recalc_atom_opacity()
 
+	// Simulates the same behavior as forceMove
+	if (loc)
+		loc.Entered(src)
+		if (isturf(loc))
+			for (var/atom/movable/AM in loc.loc)
+				if(AM != src)
+					AM.Crossed(src)
+			loc.loc.Entered(src)
+
 	return INITIALIZE_HINT_NORMAL
 
 //called if Initialize returns INITIALIZE_HINT_LATELOAD

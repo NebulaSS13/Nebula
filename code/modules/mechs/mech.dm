@@ -69,6 +69,8 @@
 	var/obj/screen/exosuit/power/hud_power
 	var/obj/screen/exosuit/heat/hud_heat
 
+	var/list/dropped_atoms
+
 /mob/living/exosuit/is_flooded(lying_mob, absolute)
 	. = (body && body.pilot_coverage >= 100 && hatch_closed) ? FALSE : ..()
 
@@ -124,14 +126,12 @@
 /mob/living/exosuit/Destroy()
 
 	selected_system = null
+	QDEL_NULL_LIST(dropped_atoms)
 
-	for(var/thing in pilots)
-		var/mob/pilot = thing
-		if(pilot.client)
-			pilot.client.screen -= hud_elements
-			pilot.client.images -= hud_elements
-		pilot.forceMove(get_turf(src))
-	pilots = null
+	hatch_locked = FALSE
+	close_hatch(FALSE)
+	for(var/pilot in pilots)
+		eject(pilot, TRUE)
 
 	for(var/thing in hud_elements)
 		qdel(thing)

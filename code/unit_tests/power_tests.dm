@@ -72,6 +72,7 @@
 
 /datum/unit_test/area_power_tally_accuracy
 	name = "POWER: All areas must have accurate power use values."
+	disabled = TRUE
 
 /datum/unit_test/area_power_tally_accuracy/start_test()
 	var/failed = FALSE

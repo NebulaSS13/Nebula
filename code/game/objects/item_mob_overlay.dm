@@ -34,7 +34,12 @@ var/global/list/icon_state_cache = list()
 		for(var/istate in icon_states(checkicon))
 			check[istate] = TRUE
 		global.icon_state_cache[checkkey] = check
-	. = check[checkstate]
+
+	if (high_accuracy)
+		if (is_string_in_list(checkstate, check))
+			return TRUE
+	else
+		return check[checkstate]
 
 /obj/item/proc/update_world_inventory_state()
 	if(use_single_icon && has_inventory_icon)

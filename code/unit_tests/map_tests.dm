@@ -310,38 +310,78 @@
 		fail("[LAZYLEN(failed)] ladder\s are incorrectly setup: [english_list(failed)].")
 	else
 		pass("All ladders are correctly setup.")
-	return 1
+
+	return TRUE
 
 //=======================================================================================
 
-/datum/unit_test/landmark_check
-	name = "MAP: Landmark Check"
+/datum/unit_test/landmark_uniqueness_check
+	name = "MAP: Landmark Uniqueness Check"
 
-/datum/unit_test/landmark_check/start_test()
-	var/safe_landmarks = 0
-	var/space_landmarks = 0
+/datum/unit_test/landmark_uniqueness_check/start_test()
+	var/list/number_of_landmarks_by_type = list()
 
-	for(var/lm in landmarks_list)
-		var/obj/effect/landmark/landmark = lm
-		if(istype(landmark, /obj/effect/landmark/test/safe_turf))
-			log_debug("Safe landmark found: [log_info_line(landmark)]")
-			safe_landmarks++
-		else if(istype(landmark, /obj/effect/landmark/test/space_turf))
-			log_debug("Space landmark found: [log_info_line(landmark)]")
-			space_landmarks++
-		else if(istype(landmark, /obj/effect/landmark/test))
-			log_debug("Test landmark with unknown tag found: [log_info_line(landmark)]")
+	for (var/obj/effect/landmark/landmark as anything in landmarks_list)
+		if (landmark.flags & LANDMARK_IS_UNIQUE)
+			log_debug("Unique landmark found: [log_info_line(landmark)]")
+			number_of_landmarks_by_type[landmark.type] = number_of_landmarks_by_type[landmark.type] + 1
 
-	if(safe_landmarks != 1 || space_landmarks != 1)
-		if(safe_landmarks != 1)
-			log_bad("Found [safe_landmarks] safe landmarks. Expected 1.")
-		if(space_landmarks != 1)
-			log_bad("Found [space_landmarks] space landmarks. Expected 1.")
-		fail("Expected exactly one safe landmark, and one space landmark.")
+	for (var/landmark_type in number_of_landmarks_by_type)
+		if (number_of_landmarks_by_type[landmark_type] == 1)
+			number_of_landmarks_by_type -= landmark_type
+
+	if (number_of_landmarks_by_type.len)
+		fail("Duplicate unique landmark(s) found: [JOINTEXT(number_of_landmarks_by_type)]")
 	else
-		pass("Exactly one safe landmark, and exactly one space landmark found.")
+		pass("No unexpected duplicate landmarks found.")
 
-	return 1
+	return TRUE
+
+//=======================================================================================
+
+/datum/unit_test/landmark_mandatory_check
+	name = "MAP: Landmark Mandatory Check"
+
+/datum/unit_test/landmark_mandatory_check/start_test()
+	var/list/missing_landmark_types = list()
+
+	for (var/lt as anything in typesof(/obj/effect/landmark))
+		var/obj/effect/landmark/landmark_type = lt
+		if (initial(landmark_type.flags) & LANDMARK_IS_MANDATORY)
+			var/landmark_found = FALSE
+			for (var/obj/effect/landmark/landmark as anything in landmarks_list)
+				if (landmark.type == landmark_type)
+					landmark_found = TRUE
+					break
+			if (!landmark_found)
+				missing_landmark_types += landmark_type
+
+	if (missing_landmark_types.len)
+		fail("Missing mandatory landmark(s) found: [JOINTEXT(missing_landmark_types)]")
+	else
+		pass("All mandatory landmarks exist.")
+
+	return TRUE
+//=======================================================================================
+
+/datum/unit_test/landmark_area_check
+	name = "MAP: Landmark Area Check"
+
+/datum/unit_test/landmark_area_check/start_test()
+	var/list/landmarks_by_area = list()
+
+	for (var/obj/effect/landmark/landmark as anything in landmarks_list)
+		if (landmark.flags & LANDMARK_HAS_UNIQUE_AREA)
+			var/area/A = get_area(landmark)
+			group_by(landmarks_by_area, A.name, landmark)
+
+	var/number_of_issues = number_of_issues(landmarks_by_area, "Areas", /decl/noi_feedback/detailed)
+	if (number_of_issues)
+		fail("[number_of_issues] area\s contained landmarks that should have had unique areas")
+	else
+		pass("No landmarks with designated unique areas shared areas.")
+
+	return TRUE
 
 //=======================================================================================
 

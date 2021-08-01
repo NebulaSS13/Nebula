@@ -122,24 +122,6 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 		fail("Test did not cleanup after itself")
 #endif
 
-/datum/unit_test/proc/get_safe_turf()
-	check_cleanup = TRUE
-	if(!safe_landmark)
-		for(var/landmark in landmarks_list)
-			if(istype(landmark, /obj/effect/landmark/test/safe_turf))
-				safe_landmark = landmark
-				break
-	return get_turf(safe_landmark)
-
-/datum/unit_test/proc/get_space_turf()
-	check_cleanup = TRUE
-	if(!space_landmark)
-		for(var/landmark in landmarks_list)
-			if(istype(landmark, /obj/effect/landmark/test/space_turf))
-				space_landmark = landmark
-				break
-	return get_turf(space_landmark)
-
 // Async unit tests will be delayed until the subsystems in this list have fired at least once.
 /datum/unit_test/proc/subsystems_to_await()
 	return list()
@@ -216,11 +198,3 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 			sleep(20)
 	test.teardown_test()
 	unit_test_final_message()
-
-/obj/effect/landmark/test/safe_turf
-	name = "safe_turf" // At creation, landmark tags are set to: "landmark*[name]"
-	desc = "A safe turf should be an as large block as possible of livable, passable turfs, preferably at least 3x3 with the marked turf as the center"
-
-/obj/effect/landmark/test/space_turf
-	name = "space_turf"
-	desc = "A space turf should be an as large block as possible of space, preferably at least 3x3 with the marked turf as the center"

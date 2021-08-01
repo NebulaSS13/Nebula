@@ -114,7 +114,3 @@
 	QDEL_NULL(mob_one)
 	QDEL_NULL(mob_two)
 	QDEL_NULL(mob_three)
-
-/obj/effect/landmark/test/virtual_spawn/one
-/obj/effect/landmark/test/virtual_spawn/two
-/obj/effect/landmark/test/virtual_spawn/three

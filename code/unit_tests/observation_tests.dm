@@ -216,14 +216,12 @@
 
 	return 1
 
-// Should have updated this to work with the new mechs
-/*
 /datum/unit_test/observation/moved_shall_only_trigger_for_recursive_drop
 	name = "OBSERVATION: Moved - Shall Only Trigger Once For Recursive Drop"
 
 /datum/unit_test/observation/moved_shall_only_trigger_for_recursive_drop/conduct_test()
 	var/turf/T = get_safe_turf()
-	var/obj/exosuit/exosuit = get_named_instance(/obj/exosuit, T, "exosuit")
+	var/mob/living/exosuit/exosuit = get_named_instance(/mob/living/exosuit, T, "exosuit")
 	var/obj/item/wrench/held_item = get_named_instance(/obj/item/wrench, T, "Wrench")
 	var/mob/living/carbon/human/dummy/held_mob = get_named_instance(/mob/living/carbon/human/dummy, T, "Held Mob")
 	var/mob/living/carbon/human/dummy/holding_mob = get_named_instance(/mob/living/carbon/human/dummy, T, "Holding Mob")
@@ -232,9 +230,8 @@
 	held_mob.put_in_active_hand(held_item)
 	held_mob.get_scooped(holding_mob)
 
+	exosuit.close_hatch(TRUE)
 	holding_mob.forceMove(exosuit)
-
-	exosuit.occupant = holding_mob
 
 	events_repository.register(/decl/observ/moved, held_item, src, /datum/unit_test/observation/proc/receive_move)
 	holding_mob.drop_from_inventory(held_item)
@@ -247,8 +244,8 @@
 	var/list/event = received_moves[1]
 	if(event[1] != held_item || event[2] != held_mob || event[3] != exosuit)
 		fail("Unexpected move event received. Expected [held_item], was [event[1]]. Expected [held_mob], was [event[2]]. Expected [exosuit], was [event[3]]")
-	else if(!(held_item in exosuit.dropped_items))
-		fail("Expected \the [held_item] to be in the mechs' dropped item list")
+	else if(!(held_item in exosuit.dropped_atoms))
+		fail("Expected \the [held_item] to be in the mechs' dropped atoms list")
 	else
 		pass("One one moved event with expected arguments raised.")
 
@@ -258,8 +255,7 @@
 	qdel(held_mob)
 	qdel(holding_mob)
 
-	return 1
-*/
+	return TRUE
 
 /datum/unit_test/observation/moved_shall_not_unregister_recursively_one
 	name = "OBSERVATION: Moved - Shall Not Unregister Recursively - One"
@@ -367,3 +363,74 @@
 
 	qdel(event_source)
 	return 1
+
+
+/datum/unit_test/observation/area_entered_exited_events_shall_trigger_when_moving_between
+	name = "OBSERVATION: Area Entered/Exited events shall trigger when moving between"
+	var/list/entered_events = list()
+	var/list/exited_events = list()
+
+/datum/unit_test/observation/area_entered_exited_events_shall_trigger_when_moving_between/conduct_test()
+	var/turf/start = get_turf(locate(/obj/effect/landmark/test/west))
+	var/turf/end = get_turf(locate(/obj/effect/landmark/test/east))
+
+	var/obj/mover = get_named_instance(/obj, start, "Mover")
+
+	events_repository.register(/decl/observ/entered, start.loc, src, .proc/OnAreaEntered)
+	events_repository.register(/decl/observ/entered, end.loc, src, .proc/OnAreaEntered)
+	events_repository.register(/decl/observ/exited, start.loc, src, .proc/OnAreaExited)
+	events_repository.register(/decl/observ/exited, end.loc, src, .proc/OnAreaExited)
+
+	mover.forceMove(end)
+
+	events_repository.unregister(/decl/observ/entered, start.loc, src, .proc/OnAreaEntered)
+	events_repository.unregister(/decl/observ/entered, end.loc, src, .proc/OnAreaEntered)
+	events_repository.unregister(/decl/observ/exited, start.loc, src, .proc/OnAreaExited)
+	events_repository.unregister(/decl/observ/exited, end.loc, src, .proc/OnAreaExited)
+
+	qdel(mover)
+
+	if (!entered_events[start.loc] && entered_events[end.loc] == 1 && exited_events[start.loc] == 1 && !exited_events[end.loc])
+		pass("The expected number of events were fired")
+	else
+		fail("Unexpected number of events were fired -  entered: [log_info_line(entered_events)], Exited: [log_info_line(exited_events)]")
+
+	return TRUE
+
+/datum/unit_test/observation/area_entered_exited_events_shall_trigger_when_moving_between/proc/OnAreaEntered(area)
+	entered_events[area] = entered_events[area] + 1
+
+/datum/unit_test/observation/area_entered_exited_events_shall_trigger_when_moving_between/proc/OnAreaExited(area)
+	exited_events[area] = exited_events[area] + 1
+
+
+
+/datum/unit_test/observation/area_entered_exited_events_shall_trigger_when_created_deleted
+	name = "OBSERVATION: Area Entered/Exited events shall trigger when created/deleted"
+	var/list/entered_events = list()
+	var/list/exited_events = list()
+
+/datum/unit_test/observation/area_entered_exited_events_shall_trigger_when_created_deleted/conduct_test()
+	var/turf/start = get_safe_turf()
+
+	events_repository.register(/decl/observ/entered, start.loc, src, .proc/OnAreaEntered)
+	events_repository.register(/decl/observ/exited, start.loc, src, .proc/OnAreaExited)
+
+	var/obj/instance = get_named_instance(/obj, start, "Obj")
+	qdel(instance)
+
+	events_repository.unregister(/decl/observ/entered, start.loc, src, .proc/OnAreaEntered)
+	events_repository.unregister(/decl/observ/exited, start.loc, src, .proc/OnAreaExited)
+
+	if (entered_events[start.loc] == 1 && exited_events[start.loc] == 1)
+		pass("The expected number of events were fired")
+	else
+		fail("Unexpected number of events were fired -  entered: [log_info_line(entered_events)], Exited: [log_info_line(exited_events)]")
+
+	return TRUE
+
+/datum/unit_test/observation/area_entered_exited_events_shall_trigger_when_created_deleted/proc/OnAreaEntered(area)
+	entered_events[area] = entered_events[area] + 1
+
+/datum/unit_test/observation/area_entered_exited_events_shall_trigger_when_created_deleted/proc/OnAreaExited(area)
+	exited_events[area] = exited_events[area] + 1

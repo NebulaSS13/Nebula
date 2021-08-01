@@ -8,6 +8,7 @@
 //			/atom/movable/enterer: The instance that entered the atom
 //			/atom/old_loc: The atom the enterer came from
 //
+//	Also raised separately in /atom/Initialize(...) and /area/Entered(...)
 
 /decl/observ/entered
 	name = "Entered"

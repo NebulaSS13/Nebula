@@ -80,7 +80,7 @@ var/global/list/areas = list()
 /area/Del()
 	global.areas -= src
 	. = ..()
-	
+
 /area/Destroy()
 	global.areas -= src
 	..()
@@ -294,24 +294,25 @@ var/global/list/areas = list()
 
 var/global/list/mob/living/forced_ambiance_list = new
 
-/area/Entered(A)
-	if(!istype(A,/mob/living))	return
+/area/Entered(mob/living/L, old_loc)
+	if(istype(L))
+		if(!L.lastarea)
+			L.lastarea = get_area(L.loc)
+		var/area/newarea = get_area(L.loc)
+		var/area/oldarea = L.lastarea
+		if(oldarea.has_gravity != newarea.has_gravity)
+			if(newarea.has_gravity == 1 && !MOVING_DELIBERATELY(L)) // Being ready when you change areas allows you to avoid falling.
+				thunk(L)
+			L.update_floating()
 
-	var/mob/living/L = A
-	if(!L.ckey)	return
+		if(L.ckey)
+			play_ambience(L)
+			do_area_blurb(L)
 
-	if(!L.lastarea)
-		L.lastarea = get_area(L.loc)
-	var/area/newarea = get_area(L.loc)
-	var/area/oldarea = L.lastarea
-	if(oldarea.has_gravity != newarea.has_gravity)
-		if(newarea.has_gravity == 1 && !MOVING_DELIBERATELY(L)) // Being ready when you change areas allows you to avoid falling.
-			thunk(L)
-		L.update_floating()
+		L.lastarea = newarea
 
-	play_ambience(L)
-	L.lastarea = newarea
-	do_area_blurb(L)
+	//Could call ..() but there are concerns about unintended side-effects
+	events_repository.raise_event(/decl/observ/entered, src, L, old_loc)
 
 /area/Exited(A)
 	if(isliving(A))
@@ -323,8 +324,8 @@ var/global/list/mob/living/forced_ambiance_list = new
 		return
 
 	if(L?.get_preference_value(/datum/client_preference/area_info_blurb) != PREF_YES)
-		return 
-	
+		return
+
 	if(!(L.ckey in blurbed_stated_to))
 		blurbed_stated_to += L.ckey
 		to_chat(L, SPAN_NOTICE(FONT_SMALL("[description]")))
