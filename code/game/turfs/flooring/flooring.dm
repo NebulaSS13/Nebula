@@ -292,7 +292,8 @@
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_base = "reinforced"
 	flags = TURF_REMOVE_WRENCH | TURF_ACID_IMMUNE
-	build_type = /obj/item/stack/material/rods
+	build_type = /obj/item/stack/material/sheet
+	build_material = /decl/material/solid/metal/steel
 	build_cost = 1
 	build_time = 30
 	apply_thermal_conductivity = 0.025
