@@ -96,7 +96,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "av" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/random/contraband,
@@ -114,7 +114,7 @@
 /turf/simulated/floor/tiled/white,
 /area/template_noop)
 "ay" = (
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /turf/simulated/floor/tiled/white,
@@ -170,14 +170,14 @@
 /area/template_noop)
 "aK" = (
 /obj/effect/decal/cleanable/spiderling_remains,
-/obj/structure/table/standard{
+/obj/structure/table{
 	name = "plastic table frame"
 	},
 /obj/machinery/reagentgrinder,
 /turf/simulated/floor/carpet/blue2,
 /area/template_noop)
 "aL" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/firstaid,
 /obj/random/advdevice,
 /obj/random/advdevice,
@@ -265,7 +265,7 @@
 /turf/simulated/floor/carpet/blue2,
 /area/template_noop)
 "bb" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/powercell,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,

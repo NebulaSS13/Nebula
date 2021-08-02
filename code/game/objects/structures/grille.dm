@@ -283,3 +283,6 @@
 /obj/structure/grille/create_dismantled_products(var/turf/T)
 	if(material)
 		material.create_object(get_turf(src), (destroyed ? 1 : 2), /obj/item/stack/material/rods)
+		matter -= material.type
+		material = null
+	. = ..()

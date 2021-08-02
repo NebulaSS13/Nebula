@@ -70,8 +70,10 @@
 	update_nearby_tiles()
 	var/turf/location = loc
 	. = ..()
-	for(var/obj/structure/window/W in orange(location, 1))
-		W.update_icon()
+	if(istype(location) && location != loc)
+		for(var/obj/structure/S in orange(location, 1))
+			S.update_connections()
+			S.update_icon()
 
 /obj/structure/window/CanFluidPass(var/coming_from)
 	return (!is_fulltile() && coming_from != dir)
@@ -281,6 +283,7 @@
 	return
 
 /obj/structure/window/create_dismantled_products(turf/T)
+	SHOULD_CALL_PARENT(FALSE)
 	var/obj/item/stack/material/S = material.create_object(loc, is_fulltile() ? 4 : 2)
 	if(istype(S) && reinf_material)
 		S.reinf_material = reinf_material
@@ -328,6 +331,14 @@
 	set_dir(turn(dir, 90))
 	update_nearby_tiles(need_rebuild=1)
 
+/obj/structure/window/update_nearby_tiles(need_rebuild)
+	. = ..()
+	for(var/obj/structure/S in orange(loc, 1))
+		if(S == src)
+			continue
+		S.update_connections()
+		S.update_icon()
+	
 /obj/structure/window/Move()
 	var/ini_dir = dir
 	update_nearby_tiles(need_rebuild=1)

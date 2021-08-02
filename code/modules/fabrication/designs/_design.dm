@@ -14,8 +14,7 @@
 
 // Populate name and resources from the product type.
 /datum/fabricator_recipe/proc/get_product_name()
-	var/obj/O = path
-	. = initial(O.name)
+	. = atom_info_repository.get_name_for(path, amount = 1)
 
 /datum/fabricator_recipe/New()
 	..()

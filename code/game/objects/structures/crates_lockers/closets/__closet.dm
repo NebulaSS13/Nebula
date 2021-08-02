@@ -5,6 +5,7 @@
 	icon_state = "base"
 	density = 1
 	maxhealth = 100
+	material = /decl/material/solid/metal/steel
 	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
 
 	var/welded = 0

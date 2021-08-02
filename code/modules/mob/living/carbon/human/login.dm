@@ -8,3 +8,4 @@
 		hud_used.persistant_inventory_update()
 	if(species)
 		species.handle_login_special(src)
+
