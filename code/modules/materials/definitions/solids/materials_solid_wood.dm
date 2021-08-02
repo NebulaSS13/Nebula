@@ -54,7 +54,6 @@
 	. += new/datum/stack_recipe/coilgun(src)
 	. += new/datum/stack_recipe/stick(src)
 	. += new/datum/stack_recipe/noticeboard(src)
-	. += new/datum/stack_recipe/furniture/table_frame(src)
 	. += new/datum/stack_recipe/prosthetic/left_arm(src)
 	. += new/datum/stack_recipe/prosthetic/right_arm(src)
 	. += new/datum/stack_recipe/prosthetic/left_leg(src)

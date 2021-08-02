@@ -671,7 +671,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/nexus/engineering/engine)
 "gf" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/box/ids,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/nexus/command/port)
@@ -1048,7 +1048,7 @@
 /obj/machinery/light_switch{
 	pixel_y = 24
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/techfloor,
 /area/nexus/command/starboard)
 "jB" = (
@@ -1309,7 +1309,7 @@
 /turf/simulated/floor/plating,
 /area/nexus/hallway/port/fore)
 "mc" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/stamp/cargo{
 	pixel_x = -3
 	},
@@ -1434,7 +1434,7 @@
 /obj/machinery/light_switch{
 	pixel_y = 24
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/techfloor,
 /area/nexus/command/port)
 "mQ" = (
@@ -1531,7 +1531,7 @@
 /turf/simulated/wall,
 /area/nexus/engineering/engine)
 "oa" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/light{
 	dir = 8
 	},
@@ -1571,7 +1571,7 @@
 /area/nexus/engineering/engine)
 "on" = (
 /obj/effect/floor_decal/corner/lightgrey/diagonal,
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/port/aft)
 "oC" = (
@@ -1885,7 +1885,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/nexus/civilian)
 "rm" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/item/stack/material/sheet/mapped/steel/fifty,
@@ -1973,7 +1973,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/nexus/engineering/storage)
 "sd" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper_bin,
 /obj/item/pen,
 /obj/effect/floor_decal/corner/yellow/diagonal,
@@ -1990,7 +1990,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/engineering)
 "sx" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper_bin,
 /obj/item/pen,
 /turf/simulated/floor/tiled/techfloor,
@@ -2184,7 +2184,7 @@
 /area/nexus/hallway)
 "uR" = (
 /obj/effect/floor_decal/corner/lightgrey/diagonal,
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/starboard/aft)
 "uX" = (
@@ -2311,7 +2311,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/nexus/engineering/fabrication)
 "vO" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/effect/floor_decal/corner/yellow/diagonal,
 /obj/machinery/cell_charger,
 /obj/machinery/button/blast_door{
@@ -2486,7 +2486,7 @@
 "xg" = (
 /obj/item/inflatable_dispenser,
 /obj/item/inflatable_dispenser,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /turf/simulated/floor/plating,
 /area/nexus/engineering/life_support)
 "xh" = (
@@ -2965,7 +2965,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/pen,
 /obj/machinery/cell_charger,
 /turf/simulated/floor/plating,
@@ -3548,7 +3548,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/starboard/fore)
 "HV" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stack/material/panel/mapped/plastic/fifty,
 /obj/item/stack/material/shiny/mapped/aluminium/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
@@ -4336,7 +4336,7 @@
 /turf/simulated/wall,
 /area/nexus/engineering/fabrication)
 "Pv" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/item/stack/material/pane/mapped/rglass/fifty,
@@ -4348,7 +4348,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/nexus/engineering/fabrication)
 "Pw" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/box/ids,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/nexus/command/starboard)
@@ -4373,7 +4373,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/toolbox,
 /obj/random/toolbox,
 /obj/random/toolbox,
@@ -4848,7 +4848,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/civilian)
 "TS" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -5257,7 +5257,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/nexus/engineering/engine)
 "XC" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper_bin,
 /obj/item/pen,
 /turf/simulated/floor/tiled/techfloor,

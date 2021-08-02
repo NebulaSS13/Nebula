@@ -1,4 +1,4 @@
-
+var/global/list/all_apcs = list()
 
 // The Area Power Controller (APC)
 // Controls and provides power to most electronics in an area
@@ -173,6 +173,7 @@
 	return amount - use_power_oneoff(amount, LOCAL)
 
 /obj/machinery/power/apc/Initialize(mapload, var/ndir, var/populate_parts = TRUE)
+	global.all_apcs += src
 	if(areastring)
 		area = get_area_name(areastring)
 	else
@@ -200,6 +201,7 @@
 	power_change()
 
 /obj/machinery/power/apc/Destroy()
+	global.all_apcs -= src
 	if(area)
 		update()
 		area.apc = null

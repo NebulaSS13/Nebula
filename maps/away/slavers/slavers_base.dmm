@@ -55,17 +55,17 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "ao" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/wirecutters,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "ap" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/effect/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "aq" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper{
 	info = "If they'll keep having fun with cargo in such manner, we'll run out of freezers to keep what's left from it.";
 	name = "Note"
@@ -76,12 +76,12 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "ar" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/knife/table,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "as" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "at" = (
@@ -89,7 +89,7 @@
 /turf/simulated/floor/asteroid,
 /area/space)
 "au" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/wirecutters,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
@@ -114,7 +114,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "aA" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/hatchet,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
@@ -1251,13 +1251,13 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/secwing)
 "di" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/flashlight,
 /obj/random/medical/lite,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dj" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -1265,7 +1265,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dk" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/baton,
 /obj/item/baton,
 /obj/item/baton,
@@ -1273,13 +1273,13 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dl" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/flash,
 /obj/random/ammo,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dm" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/box/ammo/stunshells,
 /obj/item/gun/projectile/shotgun/pump,
 /turf/simulated/floor/tiled,
@@ -1922,7 +1922,7 @@
 /obj/structure/window/basic{
 	dir = 4
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/implanter,
 /obj/item/implantcase/tracking,
 /obj/item/surgicaldrill,
@@ -1940,20 +1940,20 @@
 /obj/structure/window/basic{
 	dir = 4
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/implantpad,
 /obj/item/chems/pill/antibiotics,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "eY" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/firstaid/empty,
 /obj/item/handcuffs,
 /obj/item/baton,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "eZ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/firstaid/o2,
 /obj/item/folder/cyan,
 /obj/item/paper{
@@ -1964,7 +1964,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "fa" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/firstaid/regular,
 /obj/item/hatchet,
 /turf/simulated/floor/tiled/airless,
@@ -1978,18 +1978,18 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "fd" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/box/handcuffs,
 /obj/item/storage/box/handcuffs,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/med)
 "fe" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/box/bodybags,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/med)
 "ff" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/med)
 "fg" = (
@@ -2568,7 +2568,7 @@
 /obj/machinery/vending/wallmed2{
 	pixel_y = 30
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/cash,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
@@ -2587,7 +2587,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
 "gx" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/coin,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
@@ -2603,7 +2603,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
 "gA" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
 "gB" = (
@@ -2612,7 +2612,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
 "gC" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/contraband,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
@@ -2872,7 +2872,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
 "hk" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
@@ -2890,12 +2890,12 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
 "hn" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/loot,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
 "ho" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/gloves,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
@@ -3164,21 +3164,21 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "hX" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/microwave,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "hY" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/snack,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "hZ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "ia" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -3428,7 +3428,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iO" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -3445,7 +3445,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iP" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/smokes,
 /obj/structure/cable{
 	d1 = 4;
@@ -3455,7 +3455,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iQ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/drinkbottle,
 /obj/structure/cable{
 	d1 = 4;
@@ -3465,7 +3465,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iR" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/trash/plate,
 /obj/item/kitchen/utensil/fork,
 /obj/structure/cable{
@@ -3476,7 +3476,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iS" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -3612,28 +3612,28 @@
 /turf/simulated/wall,
 /area/slavers_base/dorms)
 "jg" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/projectile,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "jh" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/drinkbottle,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "ji" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/trash/plate,
 /obj/random/snack,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "jj" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "jk" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/smokes,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
@@ -3674,7 +3674,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/dorms)
 "jq" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/radio,
 /obj/structure/cable{
 	d1 = 1;
@@ -3807,7 +3807,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/hallway)
 "jI" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -3816,31 +3816,31 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jJ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/megaphone,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jK" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/clothing/mask/smokable/cigarette,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jL" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jM" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/scanner/health,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jN" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/drinkbottle,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jO" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/pen,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
@@ -3898,7 +3898,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jW" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/clothing/mask/smokable/cigarette/professionals,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
@@ -4053,12 +4053,12 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "kv" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/box/glass_extras,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "kw" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/chemical_dispenser/bar_alc,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
@@ -4132,12 +4132,12 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "kM" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/radio,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "kN" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/handgun,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
@@ -4151,7 +4151,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "kQ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/junk,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
@@ -4166,7 +4166,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "kT" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/loot,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)

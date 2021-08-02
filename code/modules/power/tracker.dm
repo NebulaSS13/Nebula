@@ -76,7 +76,8 @@
 
 /obj/item/tracker_electronics
 
-	name = "tracker electronics"
+	name = "solar tracker electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"
 	w_class = ITEM_SIZE_SMALL
+	material = /decl/material/solid/fiberglass

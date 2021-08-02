@@ -136,7 +136,7 @@
 /area/nexus/civilian/dorm)
 "jg" = (
 /obj/effect/floor_decal/corner/lightgrey/diagonal,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/soap,
 /obj/random/soap,
 /obj/random/soap,
@@ -191,7 +191,7 @@
 /area/nexus/civilian/dorm)
 "kH" = (
 /obj/effect/floor_decal/corner/b_green/diagonal,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/alarm,
 /turf/simulated/floor/tiled,
 /area/nexus/civilian/bar)
@@ -398,7 +398,7 @@
 /turf/simulated/floor/lino,
 /area/nexus/civilian/bar)
 "vv" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/recharger,
 /turf/simulated/floor/glass,
 /area/nexus/civilian/bar)
@@ -408,7 +408,7 @@
 /turf/simulated/floor/glass,
 /area/nexus/engineering)
 "xf" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/junk,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/glass,
@@ -489,7 +489,7 @@
 /area/nexus/civilian/hygiene)
 "zo" = (
 /obj/effect/floor_decal/corner/b_green/diagonal,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/junk,
 /obj/machinery/status_display{
 	pixel_y = 32
@@ -501,7 +501,7 @@
 /area/nexus/engineering)
 "AC" = (
 /obj/effect/floor_decal/corner/lightgrey/diagonal,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/bedsheetbin,
 /turf/simulated/floor/tiled,
 /area/nexus/civilian/hygiene)
@@ -589,20 +589,20 @@
 /area/nexus/engineering)
 "Co" = (
 /obj/effect/floor_decal/corner/lightgrey/diagonal,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/box/detergent,
 /turf/simulated/floor/tiled,
 /area/nexus/civilian/hygiene)
 "Ct" = (
 /obj/effect/floor_decal/corner/b_green/diagonal,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/junk,
 /obj/random/junk,
 /obj/random/drinkbottle,
 /turf/simulated/floor/tiled,
 /area/nexus/civilian/bar)
 "CM" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/smokes,
 /turf/simulated/floor/carpet/blue3,
 /area/nexus/civilian/bar)
@@ -895,7 +895,7 @@
 /turf/simulated/floor/plating,
 /area/nexus/civilian/hygiene)
 "NT" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/chems/condiment/small/packet/salt,
 /obj/item/chems/condiment/small/packet/pepper,
 /obj/random/drinkingglass,
@@ -903,7 +903,7 @@
 /turf/simulated/floor/glass,
 /area/nexus/civilian/bar)
 "NU" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/carpet/blue3,
 /area/nexus/civilian/bar)
 "Ok" = (
@@ -1183,7 +1183,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/civilian/bar)
 "YN" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/chems/condiment/small/packet/salt,
 /turf/simulated/floor/glass,
 /area/nexus/civilian/bar)
@@ -1192,7 +1192,7 @@
 	pixel_y = 32
 	},
 /obj/machinery/fabricator/book/filled,
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/carpet/blue,
 /area/nexus/civilian/bar)
 "YZ" = (

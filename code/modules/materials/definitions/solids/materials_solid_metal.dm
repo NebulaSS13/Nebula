@@ -177,8 +177,6 @@
 	. += new/datum/stack_recipe_list("comfy chairs", create_recipe_list(/datum/stack_recipe/furniture/chair/comfy))
 	. += new/datum/stack_recipe_list("armchairs", create_recipe_list(/datum/stack_recipe/furniture/chair/arm))
 	. += new/datum/stack_recipe/key(src)
-	. += new/datum/stack_recipe/furniture/table_frame(src)
-	. += new/datum/stack_recipe/furniture/rack(src)
 	. += new/datum/stack_recipe/furniture/closet(src)
 	. += new/datum/stack_recipe/furniture/canister(src)
 	. += new/datum/stack_recipe/furniture/tank(src)
