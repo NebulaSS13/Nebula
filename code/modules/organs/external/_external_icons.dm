@@ -1,8 +1,5 @@
 var/list/limb_icon_cache = list()
 
-/obj/item/organ/external
-	var/tmp/icon_cache_key
-
 /obj/item/organ/external/set_dir(var/direction, var/forced)
 	SHOULD_CALL_PARENT(FALSE)
 	if(forced)

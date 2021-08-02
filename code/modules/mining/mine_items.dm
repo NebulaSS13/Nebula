@@ -33,7 +33,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	force = 15.0
-	throwforce = 4.0
+	throwforce = 4
 	w_class = ITEM_SIZE_HUGE
 	material = /decl/material/solid/metal/steel
 	origin_tech = "{'materials':1,'engineering':1}"
@@ -154,7 +154,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	force = 8.0
-	throwforce = 4.0
+	throwforce = 4
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = "{'materials':1,'engineering':1}"
 	material = /decl/material/solid/metal/steel
@@ -169,7 +169,7 @@
 	icon_state = "spade"
 	item_state = "spade"
 	force = 5.0
-	throwforce = 7.0
+	throwforce = 7
 	w_class = ITEM_SIZE_SMALL
 
 // Flags.

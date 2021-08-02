@@ -88,7 +88,7 @@
 	edge = 1
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	throwforce = 5.0
+	throwforce = 5
 	throw_speed = 3
 	throw_range = 5
 	origin_tech = "{'materials':1,'biotech':1}"
@@ -163,7 +163,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 15.0
 	w_class = ITEM_SIZE_NORMAL
-	throwforce = 9.0
+	throwforce = 9
 	throw_speed = 3
 	throw_range = 5
 	origin_tech = "{'materials':1,'biotech':1}"
@@ -185,7 +185,7 @@
 	icon_state = "bone-gel"
 	force = 0
 	w_class = ITEM_SIZE_SMALL
-	throwforce = 1.0
+	throwforce = 1
 
 /obj/item/sutures
 	name = "sutures"
@@ -193,7 +193,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "fixovein"
 	force = 0
-	throwforce = 1.0
+	throwforce = 1
 	origin_tech = "{'materials':1,'biotech':3}"
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/plastic
@@ -203,7 +203,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bone setter"
 	force = 8.0
-	throwforce = 9.0
+	throwforce = 9
 	throw_speed = 3
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL

@@ -304,6 +304,10 @@ var/const/enterloopsanity = 100
 			if(M.pinned)
 				return
 		addtimer(CALLBACK(src, /turf/proc/bounce_off, AM, TT.init_dir), 2)
+	else if(isobj(AM))
+		var/obj/structure/ladder/L = locate() in contents
+		if(L)
+			L.hitby(AM)
 
 /turf/proc/bounce_off(var/atom/movable/AM, var/direction)
 	step(AM, turn(direction, 180))

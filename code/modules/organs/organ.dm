@@ -6,6 +6,7 @@
 	default_action_type = /datum/action/item_action/organ
 	material = /decl/material/solid/meat
 	origin_tech = "{'materials':1,'biotech':1}"
+	throwforce = 2
 
 	// Strings.
 	var/organ_tag = "organ"           // Unique identifier.
