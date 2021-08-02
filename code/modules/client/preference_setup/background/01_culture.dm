@@ -106,7 +106,7 @@
 
 		var/list/culture_info = culture.get_description(!hidden[token])
 		. += "<tr><td width = '200px'>"
-		. += "<small>[culture_info["details"] || "No additionald details."]</small>"
+		. += "<small>[culture_info["details"] || "No additional details."]</small>"
 		. += "</td><td>"
 		. += "[culture_info["body"] || "No description."]"
 		. += "</td><td width = '50px'>"
