@@ -1,4 +1,0 @@
-author: MistakeNot4892
-delete-after: true
-changes:
-  - tweak: Supply beacons no longer need a wire under them to function.
