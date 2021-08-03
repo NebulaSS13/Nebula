@@ -33,6 +33,7 @@
 	action_button_name = "Toggle iPatch"
 	toggleable = TRUE
 	electric = TRUE
+	z_flags = ZMM_MANGLE_PLANES
 	var/eye_color = COLOR_WHITE
 
 /obj/item/clothing/glasses/eyepatch/hud/Initialize()

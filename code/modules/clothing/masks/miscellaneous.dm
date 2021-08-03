@@ -190,6 +190,7 @@
 	material = /decl/material/solid/cloth
 
 /obj/item/clothing/mask/bandana/equipped(var/mob/user, var/slot)
+	. = ..()
 	if(slot == slot_head_str)
 		flags_inv = 0
 		body_parts_covered = SLOT_HEAD

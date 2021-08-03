@@ -37,7 +37,6 @@
 	anchored = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	use_power = POWER_USE_IDLE
-	z_flags = ZMM_MANGLE_PLANES
 
 	var/thrust_limit = 1
 	var/burn_cost = 750
@@ -64,6 +63,9 @@
 	cut_overlays()
 	if(!(stat & (NOPOWER | BROKEN)))
 		add_overlay(emissive_overlay(icon, "ion_glow"))
+		z_flags |= ZMM_MANGLE_PLANES
+	else
+		z_flags &= ~ZMM_MANGLE_PLANES
 
 /obj/machinery/ion_thruster/power_change()
 	. = ..()
