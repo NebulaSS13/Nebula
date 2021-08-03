@@ -10,7 +10,7 @@
 	force = 5.0
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	throwforce = 5.0
+	throwforce = 5
 	throw_range = 15
 	throw_speed = 3
 
