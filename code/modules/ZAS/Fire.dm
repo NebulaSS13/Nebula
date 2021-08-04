@@ -38,28 +38,6 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		create_fire(exposed_temperature)
 	return igniting
 
-/zone/proc/process_fire()
-	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, fire_tiles.len)
-
-	var/firelevel = burn_gas.react(src, fire_tiles, force_burn = 1, no_check = 1)
-
-	air.merge(burn_gas)
-
-	if(firelevel)
-		for(var/turf/T in fire_tiles)
-			if(T.fire)
-				T.fire.firelevel = firelevel
-			else
-				fire_tiles -= T
-	else
-		for(var/turf/simulated/T in fire_tiles)
-			if(istype(T.fire))
-				qdel(T.fire)
-		fire_tiles.Cut()
-
-	if(!fire_tiles.len)
-		SSair.active_fire_zones.Remove(src)
-
 /turf/proc/create_fire(fl)
 	return 0
 
@@ -76,9 +54,6 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		return 1
 
 	fire = new(src, fl)
-	SSair.active_fire_zones |= zone
-
-	zone.fire_tiles |= src
 	return 0
 
 /obj/fire
@@ -134,7 +109,6 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 				if(!enemy_tile.zone || enemy_tile.fire)
 					continue
 
-				//if(!enemy_tile.zone.fire_tiles.len) TODO - optimize
 				var/datum/gas_mixture/acs = enemy_tile.return_air()
 				if(!acs || !acs.check_combustibility(enemy_tile.return_fluid()))
 					continue
@@ -168,7 +142,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	set_light(3, 0.5, color)
 
 	firelevel = fl
-	SSair.active_hotspots.Add(src)
+	START_PROCESSING(SSfires, src)
 
 /obj/fire/proc/fire_color(var/env_temperature)
 	var/temperature = max(4000*sqrt(firelevel/vsc.fire_firelevel_multiplier), env_temperature)
@@ -179,7 +153,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	if (istype(T))
 		set_light(0)
 		T.fire = null
-	SSair.active_hotspots.Remove(src)
+	STOP_PROCESSING(SSfires, src)
 	. = ..()
 
 /turf/simulated/var/fire_protection = 0 //Protects newly extinguished tiles from being overrun again.

@@ -44,7 +44,6 @@ Class Procs:
 	var/name
 	var/invalid = 0
 	var/list/contents = list()
-	var/list/fire_tiles = list()
 	var/needs_update = 0
 	var/list/edges = list()
 	var/datum/gas_mixture/air = new
@@ -70,9 +69,6 @@ Class Procs:
 	add_tile_air(turf_air)
 	T.zone = src
 	contents.Add(T)
-	if(T.fire)
-		fire_tiles.Add(T)
-		SSair.active_fire_zones |= src
 	T.update_graphic(air.graphic)
 
 /zone/proc/remove(turf/simulated/T)
@@ -83,7 +79,6 @@ Class Procs:
 	soft_assert(T in contents, "Lists are weird broseph")
 #endif
 	contents.Remove(T)
-	fire_tiles.Remove(T)
 	T.zone = null
 	T.update_graphic(graphic_remove = air.graphic)
 	if(contents.len)
@@ -143,7 +138,7 @@ Class Procs:
 /zone/proc/tick()
 
 	// Update fires.
-	if(air.temperature >= FLAMMABLE_GAS_FLASHPOINT && !(src in SSair.active_fire_zones) && air.check_combustibility() && contents.len)
+	if(air.temperature >= FLAMMABLE_GAS_FLASHPOINT && air.check_combustibility() && contents.len)
 		var/turf/T = pick(contents)
 		if(istype(T))
 			T.create_fire(vsc.fire_firelevel_multiplier)
