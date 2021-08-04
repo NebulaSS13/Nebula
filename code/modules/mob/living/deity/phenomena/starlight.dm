@@ -161,7 +161,7 @@
 	L.adjustFireLoss(10)
 	if(L.getFireLoss() > 60)
 		L.fire_stacks += 50
-		L.IgniteMob()
+		L.ignite()
 
 /datum/phenomena/divine_right
 	name = "Divine Right"

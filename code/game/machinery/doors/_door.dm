@@ -434,11 +434,8 @@
 	if(visible && !glass)
 		set_opacity(1)	//caaaaarn!
 	operating = 0
-
-	//I shall not add a check every x ticks if a door has closed over some fire.
-	var/obj/fire/fire = locate() in loc
-	if(fire)
-		qdel(fire)
+	if(loc)
+		loc.extinguish()
 
 /obj/machinery/door/proc/toggle(to_open = density)
 	if(to_open)

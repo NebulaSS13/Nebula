@@ -546,7 +546,7 @@ var/global/list/global/tank_gauge_cache = list()
 	var/obj/item/assembly_holder/assembly = null
 
 /obj/item/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
-	tank.ignite()	//boom (or not boom if you made shijwtty mix)
+	tank.ignite_tanks()	//boom (or not boom if you made shijwtty mix)
 
 /obj/item/tank/proc/assemble_bomb(W,user)	//Bomb assembly proc. This turns assembly+tank into a bomb
 	var/obj/item/assembly_holder/S = W
@@ -566,7 +566,7 @@ var/global/list/global/tank_gauge_cache = list()
 
 	update_icon(TRUE)
 
-/obj/item/tank/proc/ignite()	//This happens when a bomb is told to explode
+/obj/item/tank/proc/ignite_tanks()	//This happens when a bomb is told to explode
 	var/obj/item/assembly_holder/assy = proxyassembly.assembly
 	var/ign = assy.a_right
 	var/obj/item/other = assy.a_left

@@ -397,7 +397,7 @@ default behaviour is:
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
-	ExtinguishMob()
+	extinguish()
 	fire_stacks = 0
 
 /mob/living/proc/rejuvenate()
@@ -911,9 +911,9 @@ default behaviour is:
 			target.fire_stacks -= 1
 
 		if(on_fire && !target.on_fire)
-			target.IgniteMob()
+			target.ignite()
 		else if(!on_fire && target.on_fire)
-			IgniteMob()
+			ignite()
 
 /mob/living/proc/jump_layer_shift()
 	jumping = TRUE

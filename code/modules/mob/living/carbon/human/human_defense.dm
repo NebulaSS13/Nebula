@@ -439,7 +439,5 @@ meteor_act
 	return perm
 
 /mob/living/carbon/human/lava_act(datum/gas_mixture/air, temperature, pressure)
-	var/was_burned = FireBurn(0.4 * vsc.fire_firelevel_multiplier, temperature, pressure)
-	if (was_burned)
-		fire_act(air, temperature)
+	fire_act(air, temperature)
 	return FALSE

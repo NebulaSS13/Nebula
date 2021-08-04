@@ -97,7 +97,7 @@
 		return
 
 	if(lit)
-		M.IgniteMob()
+		M.ignite()
 
 		if(istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == BP_MOUTH)
 			var/obj/item/clothing/mask/smokable/cigarette/cig = M.wear_mask

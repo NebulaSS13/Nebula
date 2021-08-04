@@ -60,13 +60,7 @@
 	var/datum/gas_mixture/environment = T.return_air()
 	var/min_temperature = T20C + rand(0, 20) // Room temperature + some variance. An actual diminishing return would be better, but this is *like* that. In a way. . This has the potential for weird behavior, but I says fuck it. Water grenades for everyone.
 
-	var/hotspot = (locate(/obj/fire) in T)
-	if(hotspot && !isspaceturf(T))
-		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
-		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
-		lowertemp.react()
-		T.assume_air(lowertemp)
-		qdel(hotspot)
+	T.extinguish()
 
 	var/volume = REAGENT_VOLUME(holder, type)
 	if (environment && environment.temperature > min_temperature) // Abstracted as steam or something
@@ -92,7 +86,7 @@
 		var/needed = M.fire_stacks * 10
 		if(amount > needed)
 			M.fire_stacks = 0
-			M.ExtinguishMob()
+			M.extinguish()
 			holder.remove_reagent(type, needed)
 		else
 			M.adjust_fire_stacks(-(amount / 10))

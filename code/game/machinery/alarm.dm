@@ -929,7 +929,7 @@ FIRE ALARM
 		src.updateDialog()
 	last_process = world.timeofday
 
-	if(locate(/obj/fire) in loc)
+	if(loc.is_on_fire())
 		alarm()
 
 /obj/machinery/firealarm/interface_interact(mob/user)

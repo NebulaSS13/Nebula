@@ -30,4 +30,4 @@
 
 /obj/effect/fake_fire/sunwrath/Process() //Override, so we burn mobs only
 	for(var/mob/living/L in loc)
-		L.FireBurn(firelevel,last_temperature,pressure)
+		L.fire_act(firelevel, last_temperature, pressure)

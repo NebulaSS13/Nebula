@@ -51,7 +51,7 @@
 			location.hotspot_expose(1000,500,1)
 	return 1
 
-/obj/machinery/igniter/proc/ignite()
+/obj/machinery/igniter/proc/toggle_ignite()
 	use_power_oneoff(2000)
 	on = !on
 	if(on)
@@ -73,7 +73,7 @@
 /decl/public_access/public_method/igniter_toggle
 	name = "igniter toggle"
 	desc = "Toggle the igniter on or off."
-	call_proc = /obj/machinery/igniter/proc/ignite
+	call_proc = /obj/machinery/igniter/proc/toggle_ignite
 
 /decl/stock_part_preset/radio/receiver/igniter
 	frequency = BUTTON_FREQ
@@ -138,7 +138,7 @@
 	else
 		return
 
-/obj/machinery/sparker/proc/ignite()
+/obj/machinery/sparker/proc/toggle_ignite()
 	if (!powered())
 		return
 
@@ -165,7 +165,7 @@
 /decl/public_access/public_method/sparker_spark
 	name = "spark"
 	desc = "Creates sparks to ignite nearby gases."
-	call_proc = /obj/machinery/sparker/proc/ignite
+	call_proc = /obj/machinery/sparker/proc/toggle_ignite
 
 /decl/stock_part_preset/radio/receiver/sparker
 	frequency = BUTTON_FREQ

@@ -184,7 +184,7 @@
 		var/turf/location = get_turf(user)
 		if(isliving(O))
 			var/mob/living/L = O
-			L.IgniteMob()
+			L.ignite()
 		else if(istype(O))
 			O.HandleObjectHeating(src, user, 700)
 		if (istype(location, /turf))
@@ -230,7 +230,7 @@
 	if(in_mob)
 		amount = max(amount, 2)
 		tank.reagents.trans_type_to(in_mob, /decl/material/liquid/fuel, amount)
-		in_mob.IgniteMob()
+		in_mob.ignite()
 
 	else
 		tank.reagents.remove_reagent(/decl/material/liquid/fuel, amount)

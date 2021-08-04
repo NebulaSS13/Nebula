@@ -127,9 +127,9 @@
 		return
 	user.visible_message("<span class='danger'>\The [user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
 		"<span class='danger'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
-	FireBurn()
+	fire_act()
 
-/obj/item/shreddedp/proc/FireBurn()
+/obj/item/shreddedp/fire_act()
 	new /obj/effect/decal/cleanable/ash(get_turf(src))
 	qdel(src)
 

@@ -102,7 +102,7 @@
 			)
 			user.do_attack_animation(target)
 			admin_attack_log(user, M, "used \the [src] (ignited) to attack", "was attacked using \the [src] (ignited)", "attacked with \the [src] (ignited)")
-			M.IgniteMob()
+			M.ignite()
 		else if(reagents.total_volume)
 			if(user.zone_sel.selecting == BP_MOUTH)
 				if (!M.has_danger_grab(user))
@@ -176,7 +176,7 @@
 			total_fuel = REAGENT_VOLUME(reagents, rtype) * R.fuel_value
 	. = (total_fuel >= 2 && total_fuel >= total_volume*0.5)
 
-/obj/item/chems/glass/rag/proc/ignite()
+/obj/item/chems/glass/rag/ignite()
 	if(on_fire)
 		return
 	if(!can_ignite())
@@ -187,7 +187,7 @@
 	update_name()
 	update_icon()
 
-/obj/item/chems/glass/rag/proc/extinguish()
+/obj/item/chems/glass/rag/extinguish(var/mob/user, var/no_message)
 	STOP_PROCESSING(SSobj, src)
 	set_light(0)
 	on_fire = 0
@@ -209,7 +209,7 @@
 	//copied from matches
 	if(isliving(loc))
 		var/mob/living/M = loc
-		M.IgniteMob()
+		M.ignite()
 	var/turf/location = get_turf(src)
 	if(location)
 		location.hotspot_expose(700, 5)

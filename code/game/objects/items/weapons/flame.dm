@@ -9,7 +9,7 @@
 	if(proximity && lit && istype(O))
 		O.HandleObjectHeating(src, user, 700)
 
-/obj/item/flame/proc/extinguish(var/mob/user, var/no_message)
+/obj/item/flame/extinguish(var/mob/user, var/no_message)
 	lit = 0
 	damtype = "brute"
 	STOP_PROCESSING(SSobj, src)
@@ -44,7 +44,7 @@
 /obj/item/flame/match/Process()
 	if(isliving(loc))
 		var/mob/living/M = loc
-		M.IgniteMob()
+		M.ignite()
 	var/turf/location = get_turf(src)
 	smoketime--
 	if(submerged() || smoketime < 1)

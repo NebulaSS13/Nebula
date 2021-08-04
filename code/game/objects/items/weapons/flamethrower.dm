@@ -307,7 +307,7 @@
 	target.hotspot_expose((tank.air_contents.temperature * 2) + 400, 500)
 
 	for(var/mob/living/M in target)
-		M.IgniteMob(1)
+		M.ignite(1)
 
 // slightly weird looking initialize cuz it has to do some stuff first
 /obj/item/flamethrower/full/Initialize()

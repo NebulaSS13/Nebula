@@ -8,11 +8,6 @@
 
 	var/active_groups = SSair.active_zones
 	var/inactive_groups = SSair.zones.len - active_groups
-
-	var/hotspots = 0
-	for(var/obj/fire/hotspot in world)
-		hotspots++
-
 	var/active_on_main_station = 0
 	var/inactive_on_main_station = 0
 	for(var/zone/zone in SSair.zones)
@@ -32,9 +27,6 @@
 ---- <I>Active on station:</i> [active_on_main_station]<br>
 ---- <i>Inactive on station:</i> [inactive_on_main_station]<br>
 <BR>
-<B>Special Processing Data</B><BR>
-	Hotspot Processing: [hotspots]<BR>
-<br>
 <B>Geometry Processing Data</B><BR>
 	Tile Update: [SSair.tiles_to_update.len]<BR>
 "}

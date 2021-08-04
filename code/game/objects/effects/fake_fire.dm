@@ -17,8 +17,6 @@
 		QDEL_IN(src,lifetime)
 
 /obj/effect/fake_fire/Process()
-	for(var/mob/living/L in loc)
-		L.FireBurn(firelevel,last_temperature,pressure)
 	loc.fire_act(firelevel,last_temperature,pressure)
 	for(var/atom/A in loc)
 		A.fire_act(firelevel,last_temperature,pressure)

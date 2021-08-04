@@ -71,7 +71,7 @@
 			if(rag.on_fire)
 				T.hotspot_expose(700, 5)
 				for(var/mob/living/M in T.contents)
-					M.IgniteMob()
+					M.ignite()
 			if(!rag || QDELETED(src) || !HasBelow(T.z) || !T.is_open())
 				break
 			T = GetBelow(T)
@@ -173,7 +173,7 @@
 		user.visible_message(SPAN_NOTICE("The contents of \the [src] splash all over [target]!"))
 		reagents.splash(target, reagents.total_volume)
 		if(rag && rag.on_fire && istype(target))
-			target.IgniteMob()
+			target.ignite()
 
 	//Finally, smash the bottle. This kills (qdel) the bottle.
 	var/obj/item/broken_bottle/B = smash(target.loc, target)

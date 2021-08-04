@@ -34,7 +34,6 @@
 	// Track a number of old values for the purposes of raising
 	// state change events after changing the turf to the new type.
 	var/old_air =              air
-	var/old_fire =             fire
 	var/old_above =            above
 	var/old_opacity =          opacity
 	var/old_density =          density
@@ -49,21 +48,16 @@
 	qdel(src)
 	. = new N(src)
 
-	var/turf/W = .
-	W.above =            old_above     // Multiz ref tracking.
-	W.prev_type =        old_prev_type // Shuttle transition turf tracking.
+	var/turf/W =  .
+	W.above =     old_above     // Multiz ref tracking.
+	W.prev_type = old_prev_type // Shuttle transition turf tracking.
 
 	if (permit_ao)
 		regenerate_ao()
 
-	// Update ZAS, atmos and fire.
+	// Update atmos.
 	if(keep_air)
 		W.air = old_air
-	if(old_fire)
-		if(istype(W, /turf/simulated))
-			W.fire = old_fire
-		else if(old_fire)
-			qdel(old_fire)
 
 	// Raise appropriate events.
 	W.post_change()

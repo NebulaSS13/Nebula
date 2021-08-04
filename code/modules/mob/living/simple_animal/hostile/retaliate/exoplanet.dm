@@ -214,7 +214,7 @@
 		var/mob/living/L = target_mob
 		if(prob(10))
 			L.adjust_fire_stacks(1)
-			L.IgniteMob()
+			L.ignite()
 
 /mob/living/simple_animal/hostile/retaliate/beast/shantak/lava
 	desc = "A vaguely canine looking beast. It looks as though its fur is made of stone wool."
