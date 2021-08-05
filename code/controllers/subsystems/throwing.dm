@@ -196,9 +196,11 @@ SUBSYSTEM_DEF(throwing)
 		var/atom/movable/AM = thing
 		if (AM == thrownthing || (AM == thrower && !ismob(thrownthing)))
 			continue
-		if (!AM.density || AM.throwpass)//check if ATOM_FLAG_CHECKS_BORDER as an atom_flag is needed
+		if (!AM.density || AM.throwpass)
 			continue
-		if (!hit_thing || AM.layer > hit_thing.layer)
+		if((AM.atom_flags & ATOM_FLAG_CHECKS_BORDER) && !(get_dir(AM, thrownthing) & AM.dir))
+			continue
+		if(!hit_thing || AM.layer > hit_thing.layer)
 			hit_thing = AM
 
 	if(hit_thing)

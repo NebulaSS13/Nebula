@@ -30,8 +30,8 @@
 /turf/simulated/floor/plating,
 /area/template_noop)
 "i" = (
-/obj/structure/table/standard{
-	flipped = 1
+/obj/structure/table{
+	is_flipped = 1
 	},
 /obj/effect/spider/cocoon,
 /obj/random/energy,
@@ -39,8 +39,8 @@
 /turf/simulated/floor/lino,
 /area/template_noop)
 "j" = (
-/obj/structure/table/standard{
-	flipped = 1
+/obj/structure/table{
+	is_flipped = 1
 	},
 /obj/item/pen,
 /obj/random/junk,
@@ -70,8 +70,8 @@
 /turf/simulated/floor/lino,
 /area/template_noop)
 "o" = (
-/obj/structure/table/standard{
-	flipped = 1
+/obj/structure/table{
+	is_flipped = 1
 	},
 /obj/random/junk,
 /obj/random/loot,

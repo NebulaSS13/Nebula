@@ -24,7 +24,8 @@
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
-	var/integrated_light_power = 0.75
+	var/integrated_light_power = 0.6
+	var/integrated_light_range = 4
 	var/datum/wires/robot/wires
 	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
 	var/dismantle_type = /obj/item/robot_parts/robot_suit
@@ -435,9 +436,9 @@
 /mob/living/silicon/robot/proc/update_robot_light()
 	if(lights_on)
 		if(intenselight)
-			set_light(integrated_light_power * 2, integrated_light_power)
+			set_light(integrated_light_range, min(0.8, integrated_light_power * 2))
 		else
-			set_light(integrated_light_power)
+			set_light(integrated_light_range, integrated_light_power)
 	else
 		set_light(0)
 

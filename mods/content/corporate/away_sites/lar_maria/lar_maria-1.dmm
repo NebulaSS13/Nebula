@@ -1495,7 +1495,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/sec_wing)
 "ef" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/shield/riot,
 /obj/item/shield/riot,
 /obj/item/clothing/head/helmet/riot,
@@ -1733,7 +1733,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "eL" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/box/handcuffs,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -1887,14 +1887,14 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "fg" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/baton,
 /obj/item/baton,
 /obj/item/baton,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "fh" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/head/helmet/ballistic,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2012,13 +2012,13 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "fv" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/flamethrower/full,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "fw" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/box/glowsticks,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
@@ -2879,7 +2879,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
 "hi" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/towel,
 /obj/random/soap,
 /turf/simulated/floor/tiled,
@@ -3009,12 +3009,12 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "hD" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/energy/taser,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "hE" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/sign/warning/smoking{
 	pixel_x = -30
 	},
@@ -3200,7 +3200,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "hX" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
@@ -3211,7 +3211,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},

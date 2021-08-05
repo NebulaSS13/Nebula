@@ -14,6 +14,7 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 	simulated = FALSE
 	stat = DEAD
 	status_flags = GODMODE
+	shift_to_open_context_menu = FALSE
 	var/ghost_image_flag = GHOST_IMAGE_DARKNESS
 	var/image/ghost_image = null //this mobs ghost image, for deleting and stuff
 

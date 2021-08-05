@@ -137,11 +137,6 @@ var/global/list/natural_walls = list()
 		explosion_resistance = reinf_material.explosion_resistance
 	update_strings()
 	set_opacity(material.opacity >= 0.5)
-	if(update_neighbors)
-		for(var/turf/exterior/T in RANGE_TURFS(src, 1))
-			T.update_icon()
-	else
-		update_icon()
 	if(reinf_material?.ore_icon_overlay)
 		ore_overlay = image('icons/turf/mining_decals.dmi', "[reinf_material.ore_icon_overlay]")
 		ore_overlay.appearance_flags = RESET_COLOR
@@ -156,6 +151,11 @@ var/global/list/natural_walls = list()
 		ore_overlay.layer = DECAL_LAYER
 		if(M)
 			ore_overlay.transform = M
+	if(update_neighbors)
+		for(var/turf/exterior/T in RANGE_TURFS(src, 1))
+			T.update_icon()
+	else
+		update_icon()
 
 /turf/exterior/wall/on_update_icon()
 

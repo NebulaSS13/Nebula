@@ -31,6 +31,6 @@
 ********************/
 
 /obj/item/equipped(var/mob/user, var/slot)
-	UNLINT(. = ..())
+	. = ..()
 	events_repository.raise_event(/decl/observ/mob_equipped, user, src, slot)
 	events_repository.raise_event(/decl/observ/item_equipped, src, user, slot)

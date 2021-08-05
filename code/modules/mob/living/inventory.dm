@@ -61,8 +61,9 @@
 /mob/living/get_inactive_held_items()
 	for(var/bp in (held_item_slots - get_active_held_item_slot()))
 		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
-		if(inv_slot?.holding)
-			LAZYADD(., inv_slot.holding)
+		var/obj/item/thing = inv_slot?.holding
+		if(istype(thing))
+			LAZYADD(., thing)
 
 /mob/living/is_holding_offhand(var/thing)
 	. = (thing in get_inactive_held_items())

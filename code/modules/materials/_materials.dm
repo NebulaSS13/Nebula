@@ -99,7 +99,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	var/door_icon_base = "metal"                         // Door base icon tag. See header.
 	var/table_icon_base = "metal"
-	var/table_reinf = "reinf_metal"
+	var/table_icon_reinforced = "reinf_metal"
+
 	var/list/stack_origin_tech = "{'materials':1}" // Research level for stacks.
 
 	// Attributes
@@ -363,8 +364,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.
-/decl/material/proc/place_dismantled_product(var/turf/target,var/is_devastated)
-	return create_object(target, is_devastated ? 1 : 2)
+/decl/material/proc/place_dismantled_product(var/turf/target, var/is_devastated, var/amount = 2)
+	amount = is_devastated ? FLOOR(amount * 0.5) : amount
+	if(amount > 0)
+		return create_object(target, amount)
 
 // As above.
 /decl/material/proc/place_shard(var/turf/target)
