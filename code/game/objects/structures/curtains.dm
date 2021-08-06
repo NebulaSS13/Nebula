@@ -76,12 +76,6 @@
 
 	var/curtain_kind_path = /decl/curtain_kind //path to decl containing the curtain's details
 
-/obj/item/curtain/Initialize()
-  . = ..()
-  //Init matter content
-  var/decl/curtain_kind/curtain_decl = GET_DECL(curtain_kind_path)
-  matter = atom_info_repository.get_matter_for(/obj/structure/curtain, curtain_decl.material_key)
-
 /obj/item/curtain/bed
 	curtain_kind_path = /decl/curtain_kind/cloth/bed
 /obj/item/curtain/black
@@ -113,6 +107,7 @@
 	src.set_color(kind.color)
 	src.SetName(kind.name)
 	material_key = kind.material_key
+	matter = atom_info_repository.get_matter_for(/obj/item/curtain, kind.material_key)
 	. = ..()
 
 /obj/item/curtain/attackby(obj/item/W, mob/user)
@@ -170,6 +165,7 @@
 	else
 		kind = GET_DECL(curtain_kind_path)
 	_mat = kind.material_key
+	matter = atom_info_repository.get_matter_for(/obj/structure/curtain, kind.material_key)
 	. = ..()
 	src.SetName(kind.name)
 	src.alpha = kind.alpha
