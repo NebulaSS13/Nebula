@@ -1,7 +1,52 @@
 /decl/hierarchy/supply_pack/materials
 	name = "Materials"
 	cost = null
-W
+
+/decl/hierarchy/supply_pack/materials/yellow_cloth20
+	name = "20 yellow cloth"
+	contains = list(/obj/item/stack/material/cloth/yellow/twenty)
+	containername = "yellow cloth crate"
+
+/decl/hierarchy/supply_pack/materials/teal_cloth20
+	name = "20 teal cloth"
+	contains = list(/obj/item/stack/material/cloth/teal/twenty)
+	containername = "teal cloth crate"
+
+/decl/hierarchy/supply_pack/materials/black_cloth20
+	name = "20 black cloth"
+	contains = list(/obj/item/stack/material/cloth/black/twenty)
+	containername = "black cloth crate"
+
+/decl/hierarchy/supply_pack/materials/green_cloth20
+	name = "20 green cloth"
+	contains = list(/obj/item/stack/material/cloth/green/twenty)
+	containername = "green cloth crate"
+
+/decl/hierarchy/supply_pack/materials/purple_cloth20
+	name = "20 purple cloth"
+	contains = list(/obj/item/stack/material/cloth/purple/twenty)
+	containername = "purple cloth crate"
+
+/decl/hierarchy/supply_pack/materials/blue_cloth20
+	name = "20 blue cloth"
+	contains = list(/obj/item/stack/material/cloth/blue/twenty)
+	containername = "blue cloth crate"
+
+/decl/hierarchy/supply_pack/materials/beige_cloth20
+	name = "20 beige cloth"
+	contains = list(/obj/item/stack/material/cloth/beige/twenty)
+	containername = "beige cloth crate"
+
+/decl/hierarchy/supply_pack/materials/lime_cloth20
+	name = "20 lime cloth"
+	contains = list(/obj/item/stack/material/cloth/lime/twenty)
+	containername = "lime cloth crate"
+
+/decl/hierarchy/supply_pack/materials/red_cloth20
+	name = "20 red cloth"
+	contains = list(/obj/item/stack/material/cloth/red/twenty)
+	containername = "red cloth crate"
+
 // Material sheets (50 - full stack)
 /decl/hierarchy/supply_pack/materials/steel50
 	name = "50 steel sheets"

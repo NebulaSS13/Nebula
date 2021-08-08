@@ -655,3 +655,46 @@
 
 /obj/item/stack/material/glass/fiber/fifty
 	amount = 50
+
+/obj/item/stack/material/cloth
+	name = "cloth"
+	icon_state = "sheet"
+	plural_icon_state = "sheet-mult"
+	max_icon_state = "sheet-max"
+	material = /decl/material/solid/metal/bronze
+/obj/item/stack/material/cloth/yellow
+	material = /decl/material/solid/cloth/yellow
+/obj/item/stack/material/cloth/yellow/twenty
+	amount = 20
+/obj/item/stack/material/cloth/teal
+	material = /decl/material/solid/cloth/teal
+/obj/item/stack/material/cloth/teal/twenty
+	amount = 20
+/obj/item/stack/material/cloth/black
+	material = /decl/material/solid/cloth/black
+/obj/item/stack/material/cloth/black/twenty
+	amount = 20
+/obj/item/stack/material/cloth/green
+	material = /decl/material/solid/cloth/green
+/obj/item/stack/material/cloth/green/twenty
+	amount = 20
+/obj/item/stack/material/cloth/purple
+	material = /decl/material/solid/cloth/purple
+/obj/item/stack/material/cloth/purple/twenty
+	amount = 20
+/obj/item/stack/material/cloth/blue
+	material = /decl/material/solid/cloth/blue
+/obj/item/stack/material/cloth/blue/twenty
+	amount = 20
+/obj/item/stack/material/cloth/beige
+	material = /decl/material/solid/cloth/beige
+/obj/item/stack/material/cloth/beige/twenty
+	amount = 20
+/obj/item/stack/material/cloth/lime
+	material = /decl/material/solid/cloth/lime
+/obj/item/stack/material/cloth/lime/twenty
+	amount = 20
+/obj/item/stack/material/cloth/red
+	material = /decl/material/solid/cloth/red
+/obj/item/stack/material/cloth/red/twenty
+	amount = 20
