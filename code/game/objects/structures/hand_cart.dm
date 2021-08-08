@@ -25,11 +25,11 @@
 	I.color = BlendRGB(color, material.color, 0.5)
 	add_overlay(I)
 	if(carrying)
-			var/image/CA = image(carrying.icon, carrying.icon_state)
-			CA.pixel_y = pixel_y_offset
-			CA.pixel_x = pixel_x_offset
-			CA.plane = plane
-			CA.layer = layer + 0.01 //just above STRUCTURE_LAYER
+		var/image/CA = image(carrying.icon, carrying.icon_state)
+		CA.pixel_y = pixel_y_offset
+		CA.pixel_x = pixel_x_offset
+		CA.plane = plane
+		CA.layer = layer + 0.01 //just above STRUCTURE_LAYER
 
 /obj/structure/hand_cart/Destroy()
 	. = ..()
@@ -43,7 +43,7 @@
 			qdel(G)
 
 /obj/structure/hand_cart/attack_hand(mob/user)
-	if(C)
+	if(carrying)
 		unload_item(user)
 	. = ..()
 
@@ -65,6 +65,6 @@
 /obj/structure/hand_cart/proc/unload_item(var/user)
 	if(carrying)
 		carrying.forceMove(get_turf(user))
-		to_chat(user, SPAN_NOTICE("You unload \the [C] from \the [src]."))
+		to_chat(user, SPAN_NOTICE("You unload \the [carrying] from \the [src]."))
 		carrying = null
 		update_icon()
