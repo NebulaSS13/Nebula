@@ -1208,6 +1208,7 @@
 #include "code\game\objects\structures\fuel_port.dm"
 #include "code\game\objects\structures\girders.dm"
 #include "code\game\objects\structures\grille.dm"
+#include "code\game\objects\structures\hand_cart.dm"
 #include "code\game\objects\structures\handrail.dm"
 #include "code\game\objects\structures\holosigns.dm"
 #include "code\game\objects\structures\inflatable.dm"
