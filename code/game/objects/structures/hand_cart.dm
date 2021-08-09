@@ -18,8 +18,7 @@
 /obj/structure/hand_cart/on_update_icon()
 	underlays.Cut()
 	cut_overlays()
-	var/image/W = image(icon, "cart_wheel")
-	underlays += W
+	underlays += image(icon, "cart_wheel")
 	var/image/I = image(icon, "handcart_layer_north")
 	I.layer = STRUCTURE_LAYER + 0.02
 	I.color = BlendRGB(color, material.color, 0.5)
@@ -30,17 +29,20 @@
 		CA.pixel_x = pixel_x_offset
 		CA.plane = plane
 		CA.layer = layer + 0.01 //just above STRUCTURE_LAYER
+		add_overlay(CA)
 
 /obj/structure/hand_cart/Destroy()
 	. = ..()
 	if(carrying)
 		carrying.forceMove(get_turf(src))
+		carrying = null
 
 /obj/structure/hand_cart/grab_attack(var/obj/item/grab/G)
 	if(G.affecting && istype(G.affecting, /obj/))
 		to_chat(G.assailant, SPAN_NOTICE("You start loading \the [G.affecting] onto \the [src]."))
 		if(load_item(G.affecting, G.assailant))
 			qdel(G)
+		return ..()
 
 /obj/structure/hand_cart/attack_hand(mob/user)
 	if(carrying)
