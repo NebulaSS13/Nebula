@@ -1,5 +1,6 @@
 /decl/material/solid/metal/depleted_uranium
 	name = "depleted uranium"
+	uid = "solid_depleted_uranium"
 	lore_text = "Uranium that does not posess a significant amount of radioactive isotopes. Extremely dense, and can be enriched to produce more fission fuel."
 	mechanics_text = "Depleted uranium can be enriched in fission reactors for use as fuel."
 	taste_description = "the outside of a reactor"
@@ -27,6 +28,7 @@
 
 /decl/material/solid/metal/neptunium // Np-237.
 	name = "neptunium"
+	uid = "solid_neptunium"
 	lore_text = "A byproduct of uranium undergoing beta decay. Extremely radioactive, can be used as fission fuel, with difficulty."
 	mechanics_text = "Neptunium can be used as fuel in fission reactors at high neutron energies."
 	taste_description = "lemon juice and hot concrete."
@@ -48,6 +50,7 @@
 
 /decl/material/solid/metal/plutonium
 	name = "plutonium"
+	uid = "solid_plutonium"
 	lore_text = "A mundane silver-grey metal that is highly fissible. Often used as fuel in nuclear fission reactors and weapons."
 	mechanics_text = "Plutonium can be used as fuel in fission reactors."
 	taste_description = "nuclear fallout"
@@ -72,6 +75,7 @@
 // Catch-all for the nasty byproducts of fission reactions.
 /decl/material/solid/metal/fission_byproduct
 	name = "nuclear waste"
+	uid = "solid_nuclear_waste"
 	lore_text = "An unfortunate byproduct of nuclear fission. Extremely radioactive, can be recycled into various useful materials."
 	mechanics_text = "Nuclear waste can be processed into various exotic chemicals."
 	taste_description = "paprika"

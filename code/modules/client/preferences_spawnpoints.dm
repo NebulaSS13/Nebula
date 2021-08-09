@@ -38,16 +38,16 @@
 	name = "Arrivals"
 	msg = "has arrived on the station"
 
-/decl/spawnpoint/arrivals/New()
-	..()
+/decl/spawnpoint/arrivals/Initialize()
+	. = ..()
 	turfs = global.latejoin_locations
 
 /decl/spawnpoint/gateway
 	name = "Gateway"
 	msg = "has completed translation from offsite gateway"
 
-/decl/spawnpoint/gateway/New()
-	..()
+/decl/spawnpoint/gateway/Initialize()
+	. = ..()
 	turfs = global.latejoin_gateway_locations
 
 /decl/spawnpoint/cryo
@@ -55,8 +55,8 @@
 	msg = "has completed cryogenic revival"
 	disallow_job_event_categories = list(ASSIGNMENT_ROBOT)
 
-/decl/spawnpoint/cryo/New()
-	..()
+/decl/spawnpoint/cryo/Initialize()
+	. = ..()
 	turfs = global.latejoin_cryo_locations
 
 /decl/spawnpoint/cryo/after_join(mob/living/carbon/human/victim)
@@ -84,6 +84,6 @@
 	msg = "has been activated from storage"
 	restrict_job_event_categories = list(ASSIGNMENT_ROBOT)
 
-/decl/spawnpoint/cyborg/New()
-	..()
+/decl/spawnpoint/cyborg/Initialize()
+	. = ..()
 	turfs = global.latejoin_cyborg_locations

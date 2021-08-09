@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/job/tradeship/captain
-	name = TRADESHIP_OUTFIT_JOB_NAME("Tradehouse Captain")
+	name = "Tradeship - Job - Tradehouse Captain"
 	uniform = /obj/item/clothing/pants/baggy/casual/classicjeans
 	shoes = /obj/item/clothing/shoes/color/black
 	pda_type = /obj/item/modular_computer/pda/heads/captain
@@ -17,7 +17,7 @@
 			qdel(eyegore)
 
 /decl/hierarchy/outfit/job/tradeship/mate
-	name = TRADESHIP_OUTFIT_JOB_NAME("Tradehouse First Mate")
+	name = "Tradeship - Job - Tradehouse First Mate"
 	uniform = /obj/item/clothing/under/suit_jacket/checkered
 	shoes = /obj/item/clothing/shoes/dress
 	glasses = /obj/item/clothing/glasses/sunglasses/big

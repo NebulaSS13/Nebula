@@ -61,9 +61,9 @@
 	shorthand = "AL"
 	hidden_from_codex = TRUE
 
-/decl/language/alium/New()
+/decl/language/alium/Initialize()
+	. = ..()
 	speech_verb = pick("hisses","growls","whistles","blubbers","chirps","skreeches","rumbles","clicks")
-	..()
 
 /decl/language/alium/get_random_name()
 	var/new_name = ""

@@ -107,7 +107,7 @@
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 10)
 	reagents.add_reagent(/decl/material/liquid/drink/juice/banana, 5)
 	reagents.add_reagent(/decl/material/solid/blackpepper, 1)
-	reagents.add_reagent(/decl/material/solid/mineral/sodiumchloride, 1)
+	reagents.add_reagent(/decl/material/solid/sodiumchloride, 1)
 
 /obj/item/chems/food/candiedapple
 	name = "candied apple"

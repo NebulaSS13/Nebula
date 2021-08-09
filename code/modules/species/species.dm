@@ -259,7 +259,9 @@
 	var/list/traits = list() // An associative list of /decl/traits and trait level - See individual traits for valid levels
 
 /decl/species/Initialize()
-	..()
+
+	. = ..()
+
 	if(!codex_description)
 		codex_description = description
 

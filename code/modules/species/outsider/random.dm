@@ -32,7 +32,8 @@
 		/decl/emote/exertion/biological/pant
 	)
 
-/decl/species/alium/New()
+/decl/species/alium/Initialize()
+
 	//Coloring
 	blood_color = RANDOM_RGB
 	flesh_color = RANDOM_RGB
@@ -97,7 +98,7 @@
 	if(prob(5))
 		species_flags |= SPECIES_FLAG_NO_PAIN
 
-	..()
+	. = ..()
 
 /decl/species/alium/proc/adapt_to_atmosphere(var/datum/gas_mixture/atmosphere)
 	var/temp_comfort_shift = atmosphere.temperature - body_temperature

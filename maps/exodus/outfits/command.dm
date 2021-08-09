@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/job/captain
-	name = OUTFIT_JOB_NAME("Captain")
+	name = "Job - Captain"
 	head = /obj/item/clothing/head/caphat
 	glasses = /obj/item/clothing/glasses/sunglasses
 	uniform = /obj/item/clothing/under/captain
@@ -9,8 +9,8 @@
 	pda_type = /obj/item/modular_computer/pda/heads/captain
 	backpack_contents = list(/obj/item/storage/box/ids = 1)
 
-/decl/hierarchy/outfit/job/captain/New()
-	..()
+/decl/hierarchy/outfit/job/captain/Initialize()
+	. = ..()
 	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/captain
 	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/cap
 	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/com
@@ -29,7 +29,7 @@
 				qdel(medal)
 
 /decl/hierarchy/outfit/job/hop
-	name = OUTFIT_JOB_NAME("Head of Personnel")
+	name = "Job - Head of Personnel"
 	uniform = /obj/item/clothing/under/head_of_personnel
 	l_ear = /obj/item/radio/headset/heads/hop
 	shoes = /obj/item/clothing/shoes/color/brown

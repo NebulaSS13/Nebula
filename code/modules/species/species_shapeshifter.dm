@@ -14,10 +14,10 @@ var/global/list/wrapped_species_by_ref = list()
 	var/monochromatic
 	var/default_form
 
-/decl/species/shapeshifter/New()
+/decl/species/shapeshifter/Initialize()
 	default_form = global.using_map.default_species
 	valid_transform_species |= default_form
-	..()
+	. = ..()
 
 /decl/species/shapeshifter/get_valid_shapeshifter_forms(var/mob/living/carbon/human/H)
 	return valid_transform_species

@@ -15,8 +15,8 @@
 
 #define SKILL_LITERACY      /decl/hierarchy/skill/organizational/literacy
 #define SKILL_FINANCE       /decl/hierarchy/skill/organizational/finance
-#define SKILL_EVA           /decl/hierarchy/skill/general/EVA
-#define SKILL_MECH          /decl/hierarchy/skill/general/EVA/mech
+#define SKILL_EVA           /decl/hierarchy/skill/general/eva
+#define SKILL_MECH          /decl/hierarchy/skill/general/eva/mech
 #define SKILL_PILOT         /decl/hierarchy/skill/general/pilot
 #define SKILL_HAULING       /decl/hierarchy/skill/general/hauling
 #define SKILL_COMPUTER      /decl/hierarchy/skill/general/computer

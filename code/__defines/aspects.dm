@@ -11,58 +11,50 @@
 #define ASPECTS_PHYSICAL  BITFLAG(0)
 #define ASPECTS_MENTAL    BITFLAG(1)
 
-#define DEFINE_ROBOLIMB_MODEL_ASPECTS(MODEL_PATH, MODEL_ID, MODEL_NAME, COST) \
+#define DEFINE_ROBOLIMB_MODEL_ASPECTS(MODEL_PATH, MODEL_ID, COST) \
 /decl/aspect/prosthetic_limb/left_hand/##MODEL_ID {                           \
-	name = MODEL_NAME + " Left Hand";                                         \
 	model = MODEL_PATH;                                                       \
 	parent = /decl/aspect/prosthetic_limb/left_hand;                          \
 	aspect_cost = COST;                                                       \
 	base_type = /decl/aspect/prosthetic_limb/left_hand;                       \
 }                                                                             \
 /decl/aspect/prosthetic_limb/left_arm/##MODEL_ID {                            \
-	name = MODEL_NAME + " Left Arm";                                          \
 	model = MODEL_PATH;                                                       \
 	parent = /decl/aspect/prosthetic_limb/left_arm;                           \
 	aspect_cost = COST;                                                       \
 	base_type = /decl/aspect/prosthetic_limb/left_arm;                        \
 }                                                                             \
 /decl/aspect/prosthetic_limb/right_hand/##MODEL_ID {                          \
-	name = MODEL_NAME + " Right Hand";                                        \
 	model = MODEL_PATH;                                                       \
 	parent = /decl/aspect/prosthetic_limb/right_hand;                         \
 	aspect_cost = COST;                                                       \
 	base_type = /decl/aspect/prosthetic_limb/right_hand;                      \
 }                                                                             \
 /decl/aspect/prosthetic_limb/right_arm/##MODEL_ID {                           \
-	name = MODEL_NAME + " Right Arm";                                         \
 	model = MODEL_PATH;                                                       \
 	parent = /decl/aspect/prosthetic_limb/right_arm;                          \
 	aspect_cost = COST;                                                       \
 	base_type = /decl/aspect/prosthetic_limb/right_arm;                       \
 }                                                                             \
 /decl/aspect/prosthetic_limb/left_foot/##MODEL_ID {                           \
-	name = MODEL_NAME + " Left Foot";                                         \
 	model = MODEL_PATH;                                                       \
 	parent = /decl/aspect/prosthetic_limb/left_foot;                          \
 	aspect_cost = COST;                                                       \
 	base_type = /decl/aspect/prosthetic_limb/left_foot;                       \
 }                                                                             \
 /decl/aspect/prosthetic_limb/left_leg/##MODEL_ID {                            \
-	name = MODEL_NAME + " Left Leg";                                          \
 	model = MODEL_PATH;                                                       \
 	parent = /decl/aspect/prosthetic_limb/left_leg;                           \
 	base_type = /decl/aspect/prosthetic_limb/left_leg;                        \
 	aspect_cost = COST;                                                       \
 }                                                                             \
 /decl/aspect/prosthetic_limb/right_foot/##MODEL_ID {                          \
-	name = MODEL_NAME + " Right Foot";                                        \
 	model = MODEL_PATH;                                                       \
 	parent = /decl/aspect/prosthetic_limb/right_foot;                         \
 	base_type = /decl/aspect/prosthetic_limb/right_foot;                      \
 	aspect_cost = COST;                                                       \
 }                                                                             \
 /decl/aspect/prosthetic_limb/right_leg/##MODEL_ID {                           \
-	name = MODEL_NAME + " Right Leg";                                         \
 	model = MODEL_PATH;                                                       \
 	parent = /decl/aspect/prosthetic_limb/right_leg;                          \
 	base_type = /decl/aspect/prosthetic_limb/right_leg;                       \

@@ -26,8 +26,8 @@
 	name = "Satchel"
 	path = /obj/item/storage/backpack/satchel
 
-/decl/backpack_outfit/satchel/New()
-	..()
+/decl/backpack_outfit/satchel/Initialize()
+	. = ..()
 	tweaks += new/datum/backpack_tweak/selection/specified_types_as_list(typesof(/obj/item/storage/backpack/satchel/leather) + /obj/item/storage/backpack/satchel/grey)
 
 /decl/backpack_outfit/messenger_bag
@@ -47,7 +47,9 @@
 	var/is_default = FALSE
 	var/list/tweaks
 
-/decl/backpack_outfit/New()
+/decl/backpack_outfit/Initialize()
+	. = ..()
+
 	tweaks = tweaks || list()
 
 	if(FLAGS_EQUALS(flags, BACKPACK_HAS_TYPE_SELECTION|BACKPACK_HAS_SUBTYPE_SELECTION))

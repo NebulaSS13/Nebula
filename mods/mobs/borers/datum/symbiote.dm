@@ -27,7 +27,7 @@ var/global/list/symbiote_starting_points = list()
 	var/static/mob/living/simple_animal/borer/preview_slug
 
 /decl/hierarchy/outfit/job/symbiote_host
-	name = OUTFIT_JOB_NAME("Symbiote Host")
+	name = "Job - Symbiote Host"
 
 /datum/job/symbiote/post_equip_rank(var/mob/person, var/alt_title)
 

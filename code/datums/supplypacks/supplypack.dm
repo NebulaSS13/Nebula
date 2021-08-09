@@ -1,6 +1,6 @@
 /decl/hierarchy/supply_pack
 	name = "Supply Packs"
-	hierarchy_type = /decl/hierarchy/supply_pack
+	abstract_type = /decl/hierarchy/supply_pack
 	var/list/contains = list()
 	var/manifest = ""
 	var/cost

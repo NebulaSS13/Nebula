@@ -23,7 +23,7 @@
 		/decl/material/liquid/enzyme = /obj/item/chems/condiment/enzyme,
 		/decl/material/liquid/nutriment/soysauce = /obj/item/chems/condiment/soysauce,
 		/decl/material/liquid/frostoil = /obj/item/chems/condiment/frostoil,
-		/decl/material/solid/mineral/sodiumchloride = /obj/item/chems/condiment/small/saltshaker,
+		/decl/material/solid/sodiumchloride = /obj/item/chems/condiment/small/saltshaker,
 		/decl/material/solid/blackpepper = /obj/item/chems/condiment/small/peppermill,
 		/decl/material/liquid/nutriment/cornoil = /obj/item/chems/condiment/cornoil,
 		/decl/material/liquid/nutriment/sugar = /obj/item/chems/condiment/sugar,
@@ -177,7 +177,7 @@
 	desc = "Salt. From space oceans, presumably."
 	icon_state = "saltshakersmall"
 	center_of_mass = @"{'x':16,'y':9}"
-	starting_reagents = list(/decl/material/solid/mineral/sodiumchloride = 20)
+	starting_reagents = list(/decl/material/solid/sodiumchloride = 20)
 
 /obj/item/chems/condiment/small/peppermill
 	name = "pepper mill"
@@ -206,7 +206,7 @@
 	name = "salt packet"
 	desc = "Contains 5u of table salt."
 	icon_state = "packet_small_white"
-	starting_reagents = list(/decl/material/solid/mineral/sodiumchloride = 5)
+	starting_reagents = list(/decl/material/solid/sodiumchloride = 5)
 
 /obj/item/chems/condiment/small/packet/pepper
 	name = "pepper packet"
@@ -341,7 +341,7 @@
 	randpixel = 10
 	volume = 500
 	w_class = ITEM_SIZE_LARGE
-	starting_reagents = list(/decl/material/solid/mineral/sodiumchloride = 500)
+	starting_reagents = list(/decl/material/solid/sodiumchloride = 500)
 
 /obj/item/chems/condiment/salt/on_reagent_change()
 	return

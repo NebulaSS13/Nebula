@@ -13,9 +13,11 @@
 	. = ..()
 	if(model && model != /decl/prosthetics_manufacturer)
 		var/decl/prosthetics_manufacturer/model_manufacturer = GET_DECL(model)
-		desc = "You have been fitted with [ADD_ARTICLE(model_manufacturer.name)] [bodypart_name] prosthesis."
+		name = "[model_manufacturer.name] [bodypart_name]"
+		desc = "You have been fitted with [ADD_ARTICLE(model_manufacturer.name)] [lowertext(bodypart_name)] prosthesis."
 	else
-		desc = "You have been fitted with a basic [bodypart_name] prosthesis."
+		name = "Prosthetic [bodypart_name]"
+		desc = "You have been fitted with a basic [lowertext(bodypart_name)] prosthesis."
 	if(base_type)
 		LAZYINITLIST(incompatible_with)
 		incompatible_with |= typesof(base_type)
@@ -63,8 +65,7 @@
 			E.robotize(model)
 
 /decl/aspect/prosthetic_limb/left_hand
-	name = "Prosthetic Left Hand"
-	bodypart_name = "left hand"
+	bodypart_name = "Left Hand"
 	incompatible_with = list(
 		/decl/aspect/prosthetic_limb/left_arm,
 		/decl/aspect/amputation/left_hand,
@@ -73,8 +74,7 @@
 	apply_to_limb = BP_L_HAND
 
 /decl/aspect/prosthetic_limb/left_arm
-	name = "Prosthetic Left Arm"
-	bodypart_name = "left arm"
+	bodypart_name = "Left Arm"
 	aspect_cost = 2
 	apply_to_limb = BP_L_ARM
 	incompatible_with = list(
@@ -84,8 +84,7 @@
 	)
 
 /decl/aspect/prosthetic_limb/right_hand
-	name = "Prosthetic Right Hand"
-	bodypart_name = "right hand"
+	bodypart_name = "Right Hand"
 	apply_to_limb = BP_R_HAND
 	incompatible_with = list(
 		/decl/aspect/prosthetic_limb/right_arm,
@@ -94,8 +93,7 @@
 	)
 
 /decl/aspect/prosthetic_limb/right_arm
-	name = "Prosthetic Right Arm"
-	bodypart_name = "right arm"
+	bodypart_name = "Right Arm"
 	aspect_cost = 2
 	apply_to_limb = BP_R_ARM
 	incompatible_with = list(
@@ -105,8 +103,7 @@
 	)
 
 /decl/aspect/prosthetic_limb/left_foot
-	name = "Prosthetic Left Foot"
-	bodypart_name = "left foot"
+	bodypart_name = "Left Foot"
 	apply_to_limb = BP_L_FOOT
 	incompatible_with = list(
 		/decl/aspect/prosthetic_limb/left_leg,
@@ -115,8 +112,7 @@
 	)
 
 /decl/aspect/prosthetic_limb/left_leg
-	name = "Prosthetic Left Leg"
-	bodypart_name = "left leg"
+	bodypart_name = "Left Leg"
 	aspect_cost = 2
 	apply_to_limb = BP_L_LEG
 	incompatible_with = list(
@@ -126,8 +122,7 @@
 	)
 
 /decl/aspect/prosthetic_limb/right_foot
-	name = "Prosthetic Right Foot"
-	bodypart_name = "right foot"
+	bodypart_name = "Right Foot"
 	apply_to_limb = BP_R_FOOT
 	incompatible_with = list(
 		/decl/aspect/prosthetic_limb/right_leg,
@@ -136,8 +131,7 @@
 	)
 
 /decl/aspect/prosthetic_limb/right_leg
-	name = "Prosthetic Right Leg"
-	bodypart_name = "right leg"
+	bodypart_name = "Right Leg"
 	aspect_cost = 2
 	apply_to_limb = BP_R_LEG
 	incompatible_with = list(

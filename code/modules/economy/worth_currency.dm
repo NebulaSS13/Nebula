@@ -50,13 +50,13 @@
 	var/list/denominations = list()
 	var/list/denominations_by_value = list()
 
-/decl/currency/New()
+/decl/currency/Initialize()
+	. = ..()
 	if(!name_singular)
 		name_singular = name
 	if(!name_prefix && !name_suffix)
 		name_suffix = uppertext(copytext(name, 1, 1))
 	build_denominations()
-	..()
 
 /decl/currency/proc/format_value(var/amt)
 	. = "[name_prefix][FLOOR(amt / absolute_value)][name_suffix]"

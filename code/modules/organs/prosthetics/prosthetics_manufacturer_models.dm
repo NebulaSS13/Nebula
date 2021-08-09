@@ -9,4 +9,4 @@
 	is_robotic = FALSE
 	modular_prosthetic_tier = MODULAR_BODYPART_PROSTHETIC
 
-DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/wooden, pirate, "Wooden", 0)
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/wooden, pirate, 0)

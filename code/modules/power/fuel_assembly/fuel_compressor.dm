@@ -19,11 +19,11 @@
 /obj/machinery/fuel_compressor/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/list/data = list()
 	for(var/mat_type in stored_material)
-		var/decl/material/mat = decls_repository.get_decl(mat_type)
+		var/decl/material/mat = GET_DECL(mat_type)
 		data["stored_material"] += list(list("name" = mat.name, "amount" = stored_material[mat_type]))
 	
 	for(var/mat_type in rod_makeup)
-		var/decl/material/mat = decls_repository.get_decl(mat_type)
+		var/decl/material/mat = GET_DECL(mat_type)
 		data["rod_makeup"] += list(list("name" = mat.name, "amount" = rod_makeup[mat_type]))
 	
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -47,7 +47,7 @@
 /obj/machinery/fuel_compressor/proc/eject_material(var/mat_name)
 	var/mat_type
 	for(var/mat_p in stored_material)
-		var/decl/material/mat = decls_repository.get_decl(mat_p)
+		var/decl/material/mat = GET_DECL(mat_p)
 		if(mat.name == mat_name)
 			mat_type = mat.type
 			break
@@ -55,7 +55,7 @@
 	if(!mat_type)
 		return TOPIC_HANDLED
 
-	var/decl/material/mat = decls_repository.get_decl(mat_type)
+	var/decl/material/mat = GET_DECL(mat_type)
 	if(mat && stored_material[mat_type] >= SHEET_MATERIAL_AMOUNT)
 		var/sheet_count = FLOOR(stored_material[mat_type]/SHEET_MATERIAL_AMOUNT)
 		stored_material[mat_type] -= sheet_count * SHEET_MATERIAL_AMOUNT
@@ -90,7 +90,7 @@
 /obj/machinery/fuel_compressor/proc/change_makeup(var/mat_name, var/mob/user)
 	var/mat_type
 	for(var/mat_p in stored_material)
-		var/decl/material/mat = decls_repository.get_decl(mat_p)
+		var/decl/material/mat = GET_DECL(mat_p)
 		if(mat.name == mat_name)
 			mat_type = mat.type
 			break

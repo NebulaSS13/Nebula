@@ -39,10 +39,12 @@ exactly 19 "text2path uses" 'text2path'
 exactly 4 "update_icon() override" '/update_icon\((.*)\)'  -P
 exactly 1 "goto uses" 'goto '
 exactly 6 "atom/New uses" '^/(obj|atom|area|mob|turf).*/New\('
+exactly 1 "decl/New uses" '^/decl.*/New\('
 exactly 0 "tag uses" '\stag = ' -P '**/*.dmm'
 exactly 3 "unmarked globally scoped variables" -P '^(/|)var/(?!global)'
 exactly 0 "global-marked member variables" -P '\t(/|)var.*/global/.+'
 exactly 0 "static-marked globally scoped variables" -P '^(/|)var.*/static/.+'
+exactly 2 "direct usage of decls_repository.get_decl()" 'decls_repository\.get_decl\('
 
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 

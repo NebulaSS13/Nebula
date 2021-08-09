@@ -78,14 +78,14 @@
 	desc = "This limb is made from a cheap polymer."
 	icon = 'mods/content/corporate/icons/cyberlimbs/nanotrasen/nanotrasen_main.dmi'
 
-DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/shellguard, shellguard, "Shellguard")
-DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/nanotrasen, nanotrasen, "NanoTrasen")
-DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/xion, xion, "Xion")
-DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/economy, wardtakahashi, "Ward-Takahashi")
-DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/bishop, bishop, "Bishop")
+DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/shellguard, shellguard)
+DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/nanotrasen, nanotrasen)
+DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/xion, xion)
+DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/economy, wardtakahashi)
+DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer/bishop, bishop)
 
-DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/shellguard, shellguard,    "Shellguard",     0)
-DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/nanotrasen, nanotrasen,    "NanoTrasen",     0)
-DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/xion,       xion,          "Xion",           0)
-DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/economy,    wardtakahashi, "Ward-Takahashi", 0)
-DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/bishop,     bishop,        "Bishop",         0)
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/shellguard, shellguard,    0)
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/nanotrasen, nanotrasen,    0)
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/xion,       xion,          0)
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/economy,    wardtakahashi, 0)
+DEFINE_ROBOLIMB_MODEL_ASPECTS(/decl/prosthetics_manufacturer/bishop,     bishop,        0)

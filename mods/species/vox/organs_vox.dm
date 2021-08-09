@@ -44,7 +44,7 @@
 		/decl/material/solid/cardboard =              TRUE,
 		/decl/material/solid/cloth =                  TRUE,
 		/decl/material/solid/slag =                   TRUE,
-		/decl/material/solid/mineral/sodiumchloride = TRUE
+		/decl/material/solid/sodiumchloride = TRUE
 	)
 	var/static/list/can_process_matter = list(
 		/decl/material/solid/glass =               TRUE,
@@ -62,18 +62,18 @@
 		/decl/material/solid/metal/osmium =        TRUE,
 		/decl/material/solid/metal/copper =        TRUE,
 		/decl/material/solid/metal/aluminium =     TRUE,
-		/decl/material/solid/mineral/sand =        TRUE,
-		/decl/material/solid/mineral/graphite =    TRUE,
-		/decl/material/solid/mineral/pitchblende = TRUE,
-		/decl/material/solid/mineral/hematite =    TRUE,
-		/decl/material/solid/mineral/quartz =      TRUE,
-		/decl/material/solid/mineral/pyrite =      TRUE,
-		/decl/material/solid/mineral/spodumene =   TRUE,
-		/decl/material/solid/mineral/cinnabar =    TRUE,
-		/decl/material/solid/mineral/phosphorite = TRUE,
-		/decl/material/solid/mineral/potash =      TRUE,
-		/decl/material/solid/mineral/bauxite =     TRUE,
-		/decl/material/solid/mineral/rutile = 	   TRUE
+		/decl/material/solid/sand =        TRUE,
+		/decl/material/solid/graphite =    TRUE,
+		/decl/material/solid/pitchblende = TRUE,
+		/decl/material/solid/hematite =    TRUE,
+		/decl/material/solid/quartz =      TRUE,
+		/decl/material/solid/pyrite =      TRUE,
+		/decl/material/solid/spodumene =   TRUE,
+		/decl/material/solid/cinnabar =    TRUE,
+		/decl/material/solid/phosphorite = TRUE,
+		/decl/material/solid/potash =      TRUE,
+		/decl/material/solid/bauxite =     TRUE,
+		/decl/material/solid/rutile = 	   TRUE
 	)
 	var/list/stored_matter = list()
 

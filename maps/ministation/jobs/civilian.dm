@@ -18,7 +18,7 @@
 		return list()
 
 /decl/hierarchy/outfit/job/ministation_assistant
-	name = OUTFIT_JOB_NAME("Ministation Assistant")
+	name = "Job - Ministation Assistant"
 
 /datum/job/ministation/bartender
 	title = "Bartender"

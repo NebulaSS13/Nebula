@@ -24,8 +24,8 @@ var/global/list/latejoin_cryo_captain = list()
 	name = "Starboard Cryogenic Storage"
 	msg = "has completed revival in the starboard cryogenics bay"
 
-/decl/spawnpoint/cryo/two/New()
-	..()
+/decl/spawnpoint/cryo/two/Initialize()
+	. = ..()
 	turfs = global.latejoin_cryo_two
 
 /decl/spawnpoint/cryo/captain
@@ -33,6 +33,6 @@ var/global/list/latejoin_cryo_captain = list()
 	msg = "has completed revival in the captain compartment"
 	restrict_job = list(/datum/job/tradeship_captain)
 
-/decl/spawnpoint/cryo/captain/New()
-	..()
+/decl/spawnpoint/cryo/captain/Initialize()
+	. = ..()
 	turfs = global.latejoin_cryo_captain

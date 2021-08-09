@@ -57,10 +57,7 @@
 
 /decl/hierarchy/outfit/corpse
 	name = "Corpse Clothing"
-
-/decl/hierarchy/outfit/corpse/Initialize()
-	..()
-	hierarchy_type = type
+	abstract_type = /decl/hierarchy/outfit/corpse
 
 /decl/hierarchy/outfit/corpse/slavers_base
 	name = "Basic slaver output"
