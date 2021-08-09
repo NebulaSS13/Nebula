@@ -15,92 +15,23 @@
 	return modifiers ? jointext(modifiers + ..(), " ") : ..()
 
 /datum/stack_recipe/furniture/chair/padded
-
-#define PADDED_CHAIR(color) /datum/stack_recipe/furniture/chair/padded/##color{\
-	result_type = /obj/structure/bed/chair/padded/##color;\
-	modifiers = list("padded", #color)\
-	}
-PADDED_CHAIR(beige)
-PADDED_CHAIR(black)
-PADDED_CHAIR(brown)
-PADDED_CHAIR(lime)
-PADDED_CHAIR(teal)
-PADDED_CHAIR(red)
-PADDED_CHAIR(purple)
-PADDED_CHAIR(green)
-PADDED_CHAIR(yellow)
-#undef PADDED_CHAIR
+	result_type = /obj/structure/bed/chair/padded
 
 /datum/stack_recipe/furniture/chair/office
 	title = "office chair"
 
 /datum/stack_recipe/furniture/chair/office/display_name()
 	return modifiers ? jointext(modifiers + title, " ") : title // Bypass material
-
-/datum/stack_recipe/furniture/chair/office/light
-	result_type = /obj/structure/bed/chair/office/light
-	modifiers = list("light")
-
-/datum/stack_recipe/furniture/chair/office/dark
-	result_type = /obj/structure/bed/chair/office/dark
-	modifiers = list("dark")
-
-#define COMFY_OFFICE_CHAIR(color) /datum/stack_recipe/furniture/chair/office/comfy/##color{\
-	result_type = /obj/structure/bed/chair/office/comfy/##color;\
-	modifiers = list(#color, "comfy")\
-	}
-COMFY_OFFICE_CHAIR(beige)
-COMFY_OFFICE_CHAIR(black)
-COMFY_OFFICE_CHAIR(brown)
-COMFY_OFFICE_CHAIR(lime)
-COMFY_OFFICE_CHAIR(teal)
-COMFY_OFFICE_CHAIR(red)
-COMFY_OFFICE_CHAIR(purple)
-COMFY_OFFICE_CHAIR(green)
-COMFY_OFFICE_CHAIR(yellow)
-#undef COMFY_OFFICE_CHAIR
-
+/datum/stack_recipe/furniture/chair/office/comfy
+	result_type = /obj/structure/bed/chair/office/comfy
 /datum/stack_recipe/furniture/chair/comfy
-	title = "comfy chair"
-
-#define COMFY_CHAIR(color) /datum/stack_recipe/furniture/chair/comfy/##color{\
-	result_type = /obj/structure/bed/chair/comfy/##color;\
-	modifiers = list(#color)\
-	}
-COMFY_CHAIR(beige)
-COMFY_CHAIR(black)
-COMFY_CHAIR(brown)
-COMFY_CHAIR(lime)
-COMFY_CHAIR(teal)
-COMFY_CHAIR(red)
-COMFY_CHAIR(purple)
-COMFY_CHAIR(green)
-COMFY_CHAIR(yellow)
-#undef COMFY_CHAIR
-
+	result_type = /obj/structure/bed/chair/comfy
 /datum/stack_recipe/furniture/chair/arm
-	title = "armchair"
-
-#define ARMCHAIR(color) /datum/stack_recipe/furniture/chair/arm/##color{\
-	result_type = /obj/structure/bed/chair/armchair/##color;\
-	modifiers = list(#color)\
-	}
-ARMCHAIR(beige)
-ARMCHAIR(black)
-ARMCHAIR(brown)
-ARMCHAIR(lime)
-ARMCHAIR(teal)
-ARMCHAIR(red)
-ARMCHAIR(purple)
-ARMCHAIR(green)
-ARMCHAIR(yellow)
-#undef ARMCHAIR
+	result_type = /obj/structure/bed/chair/armchair
 
 /datum/stack_recipe/furniture/chair/wood
-
 /datum/stack_recipe/furniture/chair/wood/normal
 	result_type = /obj/structure/bed/chair/wood
-
 /datum/stack_recipe/furniture/chair/wood/fancy
 	result_type = /obj/structure/bed/chair/wood/wings
 	modifiers = list("fancy")
