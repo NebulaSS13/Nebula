@@ -182,7 +182,7 @@
 	icon_state = "net_roll"
 	w_class = ITEM_SIZE_LARGE
 	force = 3.0
-	throwforce = 5.0
+	throwforce = 5
 	throw_speed = 5
 	throw_range = 10
 	matter = list("cloth" = 1875, "plasteel" = 350)

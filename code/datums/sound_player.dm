@@ -243,14 +243,17 @@
 	else if(prefer_mute)
 		listener_status[listener] &= ~SOUND_MUTE
 
-	sound.volume = adjust_volume_for_hearer(base_volume, source_turf, listener)
-	sound.x = source_turf.x - listener_turf.x
-	sound.z = source_turf.y - listener_turf.y
-	sound.y = 1
-	// Far as I can tell from testing, sound priority just doesn't work.
-	// Sounds happily steal channels from each other no matter what.
-	sound.priority = Clamp(255 - distance, 0, 255)
-	PrivUpdateListener(listener, update_sound)
+	// Getting runtimes with these vars during supply pod generation, possibly
+	// hissing air pipes during changeturf? it's entirely unclear at the moment.
+	if(istype(source_turf) && istype(listener_turf))
+		sound.volume = adjust_volume_for_hearer(base_volume, source_turf, listener)
+		sound.x = source_turf.x - listener_turf.x
+		sound.z = source_turf.y - listener_turf.y
+		sound.y = 1
+		// Far as I can tell from testing, sound priority just doesn't work.
+		// Sounds happily steal channels from each other no matter what.
+		sound.priority = Clamp(255 - distance, 0, 255)
+		PrivUpdateListener(listener, update_sound)
 
 /datum/sound_token/proc/PrivUpdateListeners()
 	for(var/listener in listeners)
