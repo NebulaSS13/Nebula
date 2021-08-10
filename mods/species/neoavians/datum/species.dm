@@ -154,6 +154,6 @@
 	name = "Wing Feathers (Right)"
 	body_parts = list(BP_R_HAND)
 
-/decl/sprite_accessory/hair/bald/New()
-	..()
+/decl/sprite_accessory/hair/bald/Initialize()
+	. = ..()
 	LAZYADD(species_allowed, SPECIES_AVIAN)

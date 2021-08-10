@@ -434,17 +434,19 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/observer/ghost/proc/try_possession(var/mob/living/M)
 	if(!config.ghosts_can_possess_animals)
-		to_chat(src, "<span class='warning'>Ghosts are not permitted to possess animals.</span>")
-		return 0
+		to_chat(src, SPAN_WARNING("Ghosts are not permitted to possess animals."))
+		return FALSE
 	if(!M.can_be_possessed_by(src))
-		return 0
+		return FALSE
 	return M.do_possession(src)
 
 /mob/observer/ghost/pointed(atom/A as mob|obj|turf in view())
 	if(!..())
-		return 0
-	usr.visible_message("<span class='deadsay'><b>[src]</b> points to [A]</span>")
-	return 1
+		return FALSE
+	for(var/mob/M in viewers(7, get_turf(A)))
+		if(M.see_invisible >= invisibility)
+			to_chat(M, "<span class='deadsay'><b>[src]</b> points to [A]</span>")
+	return TRUE
 
 /mob/observer/ghost/proc/show_hud_icon(var/icon_state, var/make_visible)
 	if(!hud_images)

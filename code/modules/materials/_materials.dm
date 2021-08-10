@@ -241,24 +241,23 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 								  // Neutron moderators can only slow down neutrons.
 
 // Placeholders for light tiles and rglass.
-/decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack)
-	if(!used_stack.can_use(1))
-		to_chat(user, "<span class='warning'>You need need at least one [used_stack.singular_name] to reinforce [target_stack].</span>")
-		return
-
-	var/needed_sheets = 2 * used_stack.matter_multiplier
-	if(!target_stack.can_use(needed_sheets))
-		to_chat(user, "<span class='warning'>You need need at least [needed_sheets] [target_stack.plural_name] for reinforcement with [used_stack].</span>")
+/decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
+	if(!used_stack.can_use(use_sheets))
+		to_chat(user, SPAN_WARNING("You need need at least one [used_stack.singular_name] to reinforce [target_stack]."))
 		return
 
 	var/decl/material/reinf_mat = used_stack.material
 	if(reinf_mat.integrity <= integrity || reinf_mat.is_brittle())
-		to_chat(user, "<span class='warning'>The [reinf_mat.solid_name] is too structurally weak to reinforce the [name].</span>")
+		to_chat(user, SPAN_WARNING("The [reinf_mat.solid_name] is too structurally weak to reinforce the [name]."))
 		return
 
-	to_chat(user, "<span class='notice'>You reinforce the [target_stack] with the [reinf_mat.solid_name].</span>")
-	used_stack.use(1)
-	var/obj/item/stack/material/S = target_stack.split(needed_sheets)
+	if(!target_stack.can_use(use_sheets))
+		to_chat(user, SPAN_WARNING("You need need at least [use_sheets] [use_sheets == 1 ? target_stack.singular_name : target_stack.plural_name] for reinforcement with [used_stack]."))
+		return
+
+	to_chat(user, SPAN_NOTICE("You reinforce the [target_stack] with [reinf_mat.solid_name]."))
+	used_stack.use(use_sheets)
+	var/obj/item/stack/material/S = target_stack.split(1)
 	S.reinf_material = reinf_mat
 	S.update_strings()
 	S.update_icon()
@@ -267,7 +266,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	else if(user)
 		S.dropInto(get_turf(user))
 	else
-		S.dropInto(get_turf(used_stack))
+		S.dropInto(get_turf(used_stack)) 
+	S.add_to_stacks(user, TRUE)
 
 // Make sure we have a use name and shard icon even if they aren't explicitly set.
 /decl/material/Initialize()

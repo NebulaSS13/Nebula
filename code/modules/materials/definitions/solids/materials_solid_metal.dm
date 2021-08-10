@@ -180,13 +180,6 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe_list("office chairs",list(
-		new/datum/stack_recipe/furniture/chair/office/dark(src),
-		new/datum/stack_recipe/furniture/chair/office/light(src)
-		))
-	. += new/datum/stack_recipe_list("comfy office chairs", create_recipe_list(/datum/stack_recipe/furniture/chair/office/comfy))
-	. += new/datum/stack_recipe_list("comfy chairs", create_recipe_list(/datum/stack_recipe/furniture/chair/comfy))
-	. += new/datum/stack_recipe_list("armchairs", create_recipe_list(/datum/stack_recipe/furniture/chair/arm))
 	. += new/datum/stack_recipe/key(src)
 	. += new/datum/stack_recipe/furniture/closet(src)
 	. += new/datum/stack_recipe/furniture/canister(src)
@@ -206,8 +199,6 @@
 	. += new/datum/stack_recipe/air_alarm(src)
 	. += new/datum/stack_recipe/fire_alarm(src)
 	. += new/datum/stack_recipe_list("modular computer frames", create_recipe_list(/datum/stack_recipe/computer))
-	. += new/datum/stack_recipe/furniture/coffin(src)
-	. += new/datum/stack_recipe/butcher_hook(src)
 
 /decl/material/solid/metal/steel/holographic
 	name = "holographic steel"

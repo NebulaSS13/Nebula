@@ -5,6 +5,9 @@
 /datum/fabricator_recipe/device_component/keyboard
 	path = /obj/item/stock_parts/keyboard
 
+/datum/fabricator_recipe/device_component/pda
+	path = /obj/item/modular_computer/pda
+
 /datum/fabricator_recipe/device_component/tesla_component
 	path = /obj/item/stock_parts/power/apc/buildable
 

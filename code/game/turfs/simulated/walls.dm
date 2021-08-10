@@ -131,15 +131,14 @@ var/global/list/wall_fullblend_objects = list(
 	var/damage = min(proj_damage, 100)
 
 	take_damage(damage)
-	return
 
 /turf/simulated/wall/hitby(AM, var/datum/thrownthing/TT)
 	..()
-	if(!ismob(AM))
+	if(density && !ismob(AM))
 		var/obj/O = AM
 		var/tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-		playsound(src, hitsound, tforce >= 15? 60 : 25, TRUE)
-		if (tforce >= 15)
+		playsound(src, hitsound, tforce >= 15 ? 60 : 25, TRUE)
+		if(tforce > 0)
 			take_damage(tforce)
 
 /turf/simulated/wall/proc/clear_plants()

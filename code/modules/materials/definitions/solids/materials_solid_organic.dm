@@ -146,6 +146,11 @@
 	use_name = "lime cloth"
 	color = "#62e36c"
 
+/decl/material/solid/cloth/red
+	name = "red"
+	use_name = "red cloth"
+	color = "#9d2300"
+
 /decl/material/solid/carpet
 	name = "red"
 	uid = "solid_cotton_red"
