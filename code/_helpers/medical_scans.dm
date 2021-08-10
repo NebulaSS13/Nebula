@@ -58,31 +58,29 @@
 			scan["reagents"] += list(reagent)
 
 	scan["external_organs"] = list()
-
 	for(var/obj/item/organ/external/E in H.organs)
-		var/list/O = list()
-		O["name"] = E.name
-		O["is_stump"] = E.is_stump()
-		O["brute_ratio"] = E.brute_ratio
-		O["burn_ratio"] = E.burn_ratio
-		O["limb_flags"] = E.limb_flags
-		O["brute_dam"] = E.brute_dam
-		O["burn_dam"] = E.burn_dam
-		O["scan_results"] = E.get_scan_results(tag)
-		O["tumors"] = E.has_growths()
-
+		var/list/O =               list()
+		O["name"] =                E.name
+		O["is_stump"] =            E.is_stump()
+		O["brute_ratio"] =         E.brute_ratio
+		O["burn_ratio"] =          E.burn_ratio
+		O["limb_flags"] =          E.limb_flags
+		O["brute_dam"] =           E.brute_dam
+		O["burn_dam"] =            E.burn_dam
+		O["scan_results"] =        E.get_scan_results(tag)
+		O["tumors"] =              E.has_growths()
+		O["ailments"] =            E.has_diagnosable_ailments(scanner = TRUE)
 		scan["external_organs"] += list(O)
 
 	scan["internal_organs"] = list()
-
 	for(var/obj/item/organ/internal/I in H.internal_organs)
-		var/list/O = list()
-		O["name"] = I.name
-		O["is_broken"] = I.is_broken()
-		O["is_bruised"] = I.is_bruised()
-		O["is_damaged"] = I.is_damaged()
-		O["scan_results"] = I.get_scan_results(tag)
-
+		var/list/O =               list()
+		O["name"] =                I.name
+		O["is_broken"] =           I.is_broken()
+		O["is_bruised"] =          I.is_bruised()
+		O["is_damaged"] =          I.is_damaged()
+		O["scan_results"] =        I.get_scan_results(tag)
+		O["ailments"] =            I.has_diagnosable_ailments(scanner = TRUE)
 		scan["internal_organs"] += list(O)
 
 	scan["missing_organs"] = list()
@@ -266,10 +264,6 @@
 		row += "<tr><td>[E["name"]]</td>"
 		if(E["is_stump"])
 			row += "<td><span class='bad'>Missing</span></td>"
-			if(skill_level >= SKILL_ADEPT)
-				row += "<td><span class='bad'>[english_list(E["scan_results"], nothing_text = "&nbsp;")]</span></td>"
-			else
-				row += "<td>&nbsp;</td>"
 		else
 			row += "<td>"
 			var/rowdata = list()
@@ -285,21 +279,25 @@
 					rowdata += "<span class='bad'>[capitalize(get_wound_severity(E["brute_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] physical trauma</span>"
 				if(E["burn_dam"])
 					rowdata += "<span class='average'>[capitalize(get_wound_severity(E["burn_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] burns</span>"
-			if(E["tumors"])
-				rowdata += "<span class='bad'>Abnormal internal growth</span>"
-			row += "<td>[jointext(rowdata, "<br>")]</td>"
+			rowdata += "</td><td>[jointext(rowdata, "<br>")]</td>"
 
-			if(skill_level >= SKILL_ADEPT)
-				row += "<td>"
-				row += "<span class='bad'>[english_list(E["scan_results"], nothing_text="&nbsp;")]</span>"
-				row += "</td>"
-			else
-				row += "<td>&nbsp;</td>"
+		if(skill_level >= SKILL_ADEPT)
+			var/list/status = list()
+			if(E["scan_results"])
+				status += "<span class='bad'>[english_list(E["scan_results"], nothing_text = "&nbsp;")]</span>"
+			if(E["tumors"])
+				status += "<span class='bad'>Abnormal internal growth</span>"
+			if(E["ailments"])
+				status += "[jointext(E["ailments"], "<br>")]"
+			row += "<td>[status ? jointext(status, "<br>") : "Nominal."]</td>"
+		else
+			row += "<td>&nbsp;</td>"
+
 		row += "</tr>"
 		subdat += JOINTEXT(row)
+
 	dat += subdat
 	subdat = list()
-
 
 	//Internal Organs
 	if(skill_level >= SKILL_BASIC)
@@ -315,9 +313,18 @@
 				row += "<td><span class='mild'>Minor</span></td>"
 			else
 				row += "<td>None</td>"
-			row += "<td>"
-			row += "<span class='bad'>[english_list(I["scan_results"], nothing_text="&nbsp;")]</span>"
-			row += "</td></tr>"
+
+			if(skill_level >= SKILL_ADEPT)
+				var/list/status = list()
+				if(I["scan_results"])
+					status += "<span class='bad'>[english_list(I["scan_results"], nothing_text = "&nbsp;")]</span>"
+				if(I["ailments"])
+					status += "[jointext(I["ailments"], "<br>")]"
+				row += "<td>[status ? jointext(status, "<br>") : "Nominal."]</td>"
+			else
+				row += "<td>&nbsp;</td>"
+
+			row += "</tr>"
 			subdat += jointext(row, null)
 
 	if(skill_level <= SKILL_ADEPT)

@@ -115,12 +115,10 @@
 		return
 
 	user.visible_message("<span class='notice'>[user] starts inspecting [owner]'s [name] carefully.</span>")
-
-	for(var/datum/ailment/ailment in ailments)
-		if(ailment.diagnosis_string)
-			if(!do_mob(user, owner, 5))
-				return
-			to_chat(user, SPAN_NOTICE(ailment.replace_tokens(message = ailment.diagnosis_string, user = user)))
+	for(var/ailment in has_diagnosable_ailments(user, scanner = FALSE))
+		if(!do_mob(user, owner, 5))
+			return
+		to_chat(user, SPAN_NOTICE(ailment))
 
 	if(!do_mob(user, owner, 5))
 		return
