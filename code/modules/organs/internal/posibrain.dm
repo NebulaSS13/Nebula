@@ -8,7 +8,7 @@
 	vital = 0
 	force = 1.0
 	w_class = ITEM_SIZE_NORMAL
-	throwforce = 1.0
+	throwforce = 1
 	throw_speed = 3
 	throw_range = 5
 	origin_tech = "{'engineering':4,'materials':4,'wormholes':2,'programming':4}"

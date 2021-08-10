@@ -9,7 +9,7 @@
 	organ_tag = "limb"
 
 	var/slowdown = 0
-
+	var/tmp/icon_cache_key
 	// Strings
 	var/broken_description             // fracture string if any.
 	var/damage_state = "00"            // Modifier used for generating the on-mob damage overlay for this limb.
@@ -967,7 +967,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(!clean)
 				// Throw limb around.
 				if(src && istype(loc,/turf))
-					throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
+					throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 				set_dir(SOUTH, TRUE)
 		if(DISMEMBER_METHOD_BURN, DISMEMBER_METHOD_ACID)
 			if(disintegrate == DISMEMBER_METHOD_BURN)

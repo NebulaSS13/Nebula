@@ -111,13 +111,6 @@
 	if(!.)
 		climb(user, I)
 
-/turf/hitby(atom/movable/AM)
-	..()
-	if(isobj(AM))
-		var/obj/structure/ladder/L = locate() in contents
-		if(L)
-			L.hitby(AM)
-
 /obj/structure/ladder/hitby(obj/item/I)
 	..()
 	if(!target_down)
