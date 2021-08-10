@@ -69,7 +69,7 @@
         </div>
         <div class="itemContentWide">
             {{for data.hair_styles}}
-                {{:helper.link(value.hairstyle, null, { 'hair' : value.hairstyle}, null, data.hair_style == value.hairstyle ? 'selected' : null)}}
+                {{:helper.link(value.hairstyle, null, { 'hair' : value.ref}, null, data.hair_style == value.hairstyle ? 'selected' : null)}}
             {{/for}}
         </div>
     </div>
@@ -82,7 +82,7 @@
         </div>
         <div class="itemContentWide">
             {{for data.facial_hair_styles}}
-                {{:helper.link(value.facialhairstyle, null, { 'facial_hair' : value.facialhairstyle}, null, data.facial_hair_style == value.facialhairstyle ? 'selected' : null)}}
+                {{:helper.link(value.facialhairstyle, null, { 'facial_hair' : value.ref}, null, data.facial_hair_style == value.facialhairstyle ? 'selected' : null)}}
             {{/for}}
         </div>
     </div>

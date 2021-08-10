@@ -23,13 +23,13 @@
 	var/blood_oxy = 1
 	var/base_color                            // Used by changelings. Should also be used for icon previes..
 
-	var/list/hair_styles
-	var/list/facial_hair_styles
+	var/static/list/hair_styles
+	var/static/list/facial_hair_styles
 
 	var/organs_icon		//species specific internal organs icons
 
-	var/default_h_style = "Bald"
-	var/default_f_style = "Shaved"
+	var/default_h_style = /decl/sprite_accessory/hair/bald
+	var/default_f_style = /decl/sprite_accessory/facial_hair/shaved
 
 	var/icon_cache_uid                        // Used for mob icon cache string.
 
@@ -653,35 +653,50 @@
 		return 80
 	return 220
 
-/decl/species/proc/get_hair_styles()
-	var/list/L = LAZYACCESS(hair_styles, type)
-	if(!L)
-		L = list()
-		LAZYSET(hair_styles, type, L)
-		for(var/hairstyle in global.hair_styles_list)
-			var/datum/sprite_accessory/S = global.hair_styles_list[hairstyle]
+/decl/species/proc/get_hair_style_types(var/gender = NEUTER, var/check_gender = TRUE)
+	if(!check_gender)
+		gender = NEUTER
+	var/list/hair_styles_by_species = LAZYACCESS(hair_styles, type)
+	if(!hair_styles_by_species)
+		hair_styles_by_species = list()
+		LAZYSET(hair_styles, type, hair_styles_by_species)
+	var/list/hair_style_by_gender = hair_styles_by_species[gender]
+	if(!hair_style_by_gender)
+		hair_style_by_gender = list()
+		LAZYSET(hair_styles_by_species, gender, hair_style_by_gender)
+		var/list/all_hairstyles = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
+		for(var/hairstyle in all_hairstyles)
+			var/decl/sprite_accessory/S = all_hairstyles[hairstyle]
+			if(check_gender && S.gender && gender != S.gender)
+				continue
 			if(S.species_allowed && !(get_root_species_name() in S.species_allowed))
 				continue
 			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
 				continue
-			ADD_SORTED(L, hairstyle, /proc/cmp_text_asc)
-			L[hairstyle] = S
-	return L
+			ADD_SORTED(hair_style_by_gender, hairstyle, /proc/cmp_text_asc)
+			hair_style_by_gender[hairstyle] = S
+	return hair_style_by_gender
 
-/decl/species/proc/get_facial_hair_styles(var/gender)
+/decl/species/proc/get_hair_styles(var/gender = NEUTER, var/check_gender = TRUE)
+	. = list()
+	for(var/hair in get_hair_style_types(gender, check_gender))
+		. += GET_DECL(hair)
+
+/decl/species/proc/get_facial_hair_style_types(var/gender, var/check_gender = TRUE)
+	if(!check_gender)
+		gender = NEUTER
 	var/list/facial_hair_styles_by_species = LAZYACCESS(facial_hair_styles, type)
 	if(!facial_hair_styles_by_species)
 		facial_hair_styles_by_species = list()
 		LAZYSET(facial_hair_styles, type, facial_hair_styles_by_species)
-
 	var/list/facial_hair_style_by_gender = facial_hair_styles_by_species[gender]
 	if(!facial_hair_style_by_gender)
 		facial_hair_style_by_gender = list()
 		LAZYSET(facial_hair_styles_by_species, gender, facial_hair_style_by_gender)
-
-		for(var/facialhairstyle in global.facial_hair_styles_list)
-			var/datum/sprite_accessory/S = global.facial_hair_styles_list[facialhairstyle]
-			if((S.gender && gender != S.gender))
+		var/list/all_facial_styles = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/facial_hair)
+		for(var/facialhairstyle in all_facial_styles)
+			var/decl/sprite_accessory/S = all_facial_styles[facialhairstyle]
+			if(check_gender && S.gender && gender != S.gender)
 				continue
 			if(S.species_allowed && !(get_root_species_name() in S.species_allowed))
 				continue
@@ -689,8 +704,12 @@
 				continue
 			ADD_SORTED(facial_hair_style_by_gender, facialhairstyle, /proc/cmp_text_asc)
 			facial_hair_style_by_gender[facialhairstyle] = S
-
 	return facial_hair_style_by_gender
+
+/decl/species/proc/get_facial_hair_styles(var/gender, var/check_gender = TRUE)
+	. = list()
+	for(var/hair in get_facial_hair_style_types(gender, check_gender))
+		. += GET_DECL(hair)
 
 /decl/species/proc/get_description(var/header, var/append, var/verbose = TRUE, var/skip_detail, var/skip_photo)
 	var/list/damage_types = list(
