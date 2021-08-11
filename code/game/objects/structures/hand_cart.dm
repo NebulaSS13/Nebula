@@ -40,7 +40,8 @@
 		to_chat(G.assailant, SPAN_NOTICE("You start loading \the [G.affecting] onto \the [src]."))
 		if(load_item(G.affecting, G.assailant))
 			qdel(G)
-		return
+		return TRUE
+	..()
 
 /obj/structure/hand_cart/attack_hand(mob/user)
 	if(carrying)
