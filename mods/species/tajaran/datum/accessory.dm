@@ -1,11 +1,11 @@
 //Hairstyles
 
-/decl/sprite_accessory/facial_hair/shaved/New()
-	..()
+/decl/sprite_accessory/facial_hair/shaved/Initialize()
+	. = ..()
 	species_allowed |= SPECIES_TAJARA
 
-/decl/sprite_accessory/hair/shaved/New()
-	..()
+/decl/sprite_accessory/hair/shaved/Initialize()
+	. = ..()
 	species_allowed |= SPECIES_TAJARA
 
 /decl/sprite_accessory/hair/taj

@@ -1,10 +1,10 @@
-/decl/sprite_accessory/hair/bald/New()
+/decl/sprite_accessory/hair/bald/Initialize()
+	. = ..()
 	LAZYDISTINCTADD(species_allowed, SPECIES_VOX)
-	..()
 	
-/decl/sprite_accessory/facial_hair/shaved/New()
+/decl/sprite_accessory/facial_hair/shaved/Initialize()
+	. = ..()
 	LAZYDISTINCTADD(species_allowed, SPECIES_VOX)
-	..()
 
 /decl/sprite_accessory/hair/vox
 	name = "Long Vox Quills"

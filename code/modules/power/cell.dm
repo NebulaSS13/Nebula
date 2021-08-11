@@ -7,7 +7,7 @@
 	item_state = "cell"
 	origin_tech = "{'powerstorage':1}"
 	force = 5.0
-	throwforce = 5.0
+	throwforce = 5
 	throw_speed = 3
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL

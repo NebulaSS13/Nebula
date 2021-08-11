@@ -7,7 +7,7 @@
 	icon_state = "brain2"
 	force = 1.0
 	w_class = ITEM_SIZE_SMALL
-	throwforce = 1.0
+	throwforce = 1
 	throw_speed = 3
 	throw_range = 5
 	origin_tech = "{'biotech':3}"

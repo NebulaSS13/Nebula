@@ -109,19 +109,22 @@
 		update_icon()
 
 /obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
+
 	if(istype(W, /obj/item/stack/material))
 		if(is_same(W))
-			..()
-		else if(!reinf_material)
+			return ..()
+		if(!reinf_material)
 			material.reinforce(user, W, src)
-		return
-	else if(reinf_material && isWelder(W))
+		return TRUE
+
+	if(reinf_material && reinf_material.default_solid_form && isWelder(W))
 		var/obj/item/weldingtool/WT = W
 		if(WT.isOn() && WT.get_fuel() > 2 && use(2))
 			WT.remove_fuel(2, user)
-			to_chat(user,"<span class='notice'>You recover some [reinf_material.use_name] from the [src].</span>")
+			to_chat(user, SPAN_NOTICE("You recover some [reinf_material.use_name] from \the [src]."))
 			reinf_material.create_object(get_turf(user), 1)
-			return
+			return TRUE
+
 	return ..()
 
 /obj/item/stack/material/on_update_icon()

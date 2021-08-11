@@ -4,7 +4,7 @@
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "caution"
 	force = 1.0
-	throwforce = 3.0
+	throwforce = 3
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
