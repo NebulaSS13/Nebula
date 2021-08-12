@@ -98,8 +98,7 @@ var/list/icon_state_cache = list()
 	var/image/I = image(useicon, use_state)
 	I.color = color
 	I.appearance_flags = RESET_COLOR
-	. = apply_offsets(user_mob,  bodytype, I, slot, bodypart)
-	. = apply_overlays(user_mob, bodytype, ., slot)
+	. = adjust_mob_overlay(user_mob,  bodytype, I, slot, bodypart)
 
 /mob/living/carbon/human/get_bodytype_category()
 	. = bodytype.bodytype_category
@@ -110,14 +109,20 @@ var/list/icon_state_cache = list()
 /obj/item/proc/get_icon_for_bodytype(var/bodytype)
 	. = LAZYACCESS(sprite_sheets, bodytype) || icon
 
-/obj/item/proc/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
-	. = overlay
-
-/obj/item/proc/apply_offsets(var/mob/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/proc/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/H = user_mob
 		if(H.get_bodytype_category() != bodytype) 
-			overlay = H.bodytype.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, bodypart || slot)
+			var/list/overlays_to_offset = overlay.overlays
+			overlay = H.bodytype.get_offset_overlay_image(FALSE, overlay.icon, overlay.icon_state, color, (bodypart || slot))
+			for(var/thing in overlays_to_offset)
+				var/image/I = thing // Technically an appearance but don't think we can cast to those
+				var/image/adjusted_overlay = H.bodytype.get_offset_overlay_image(FALSE, I.icon, I.icon_state, I.color, (bodypart || slot))
+				adjusted_overlay.appearance_flags = I.appearance_flags
+				adjusted_overlay.plane =            I.plane
+				adjusted_overlay.layer =            I.layer
+				overlay.overlays += adjusted_overlay
+
 	. = overlay
 
 //Special proc belts use to compose their icon

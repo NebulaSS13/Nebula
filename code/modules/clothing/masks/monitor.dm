@@ -46,18 +46,17 @@
 	. = ..()
 	update_icon()
 
-/obj/item/clothing/mask/monitor/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret)
+/obj/item/clothing/mask/monitor/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay)
 		if(!(monitor_state_index in monitor_states))
 			monitor_state_index = initial(monitor_state_index)
-		var/check_state = "[ret.icon_state]-[monitor_states[monitor_state_index]]"
-		if(check_state_in_icon(check_state, ret.icon))
-			var/image/I = image(ret.icon, check_state)
+		var/check_state = "[overlay.icon_state]-[monitor_states[monitor_state_index]]"
+		if(check_state_in_icon(check_state, overlay.icon))
+			var/image/I = image(overlay.icon, check_state)
 			I.layer = ABOVE_LIGHTING_LAYER
 			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-			ret.overlays += I
-	return ret
+			overlay.overlays += I
+	. = ..()
 
 /obj/item/clothing/mask/monitor/set_dir()
 	SHOULD_CALL_PARENT(FALSE)

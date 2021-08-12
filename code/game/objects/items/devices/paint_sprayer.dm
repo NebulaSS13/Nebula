@@ -87,13 +87,10 @@
 		var/mob/M = loc
 		M.update_inv_hands()
 
-/obj/item/paint_sprayer/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret)
-		var/bodytype = lowertext(user_mob?.get_bodytype_category())
-		var/image/overlay = overlay_image(ret.icon, "[bodytype]-slot_[slot]_color", paint_color)
-		ret.add_overlay(overlay)
-	return ret
+/obj/item/paint_sprayer/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && check_state_in_icon("[overlay.icon_state]_color", overlay.icon))
+		overlay.overlays += overlay_image(overlay.icon, "[overlay.icon_state]_color", paint_color)
+	. = ..()
 
 /obj/item/paint_sprayer/afterattack(var/atom/A, var/mob/user, var/proximity, var/params)
 	if (!proximity)
