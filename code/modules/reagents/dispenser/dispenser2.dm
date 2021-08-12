@@ -91,7 +91,7 @@
 			C.dropInto(loc)
 			return TRUE
 
-	if(istype(W, /obj/item/chems/glass) || istype(W, /obj/item/chems/food))
+	if(istype(W, /obj/item/chems/glass) || istype(W, /obj/item/chems/condiment) || istype(W, /obj/item/chems/drinks)
 		if(container)
 			to_chat(user, "<span class='warning'>There is already \a [container] on \the [src]!</span>")
 			return TRUE
