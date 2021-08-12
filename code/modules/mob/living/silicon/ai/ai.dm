@@ -307,9 +307,8 @@ var/global/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/available_icons()
 	. = list()
-	var/all_ai_icons = decls_repository.get_decls_of_subtype(/datum/ai_icon)
-	for(var/ai_icon_type in all_ai_icons)
-		var/datum/ai_icon/ai_icon = all_ai_icons[ai_icon_type]
+	for(var/ai_icon_type in get_ai_icon_subtypes())
+		var/datum/ai_icon/ai_icon = global.ai_icon_subtypes[ai_icon_type]
 		if(ai_icon.may_used_by_ai(src))
 			dd_insertObjectList(., ai_icon)
 
@@ -715,8 +714,7 @@ var/global/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/on_update_icon()
 	if(!selected_sprite || !(selected_sprite in available_icons()))
-		// This should NOT be using the decl repository as default_ai_icon is a datum. TODO: rewrite AI icon handling.
-		selected_sprite = decls_repository.get_decl(default_ai_icon)
+		selected_sprite = get_ai_icon(default_ai_icon)
 
 	icon = selected_sprite.icon
 	if(stat == DEAD)
