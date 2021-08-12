@@ -6,6 +6,7 @@
 	var/color = "white"
 	var/alpha = 255
 	var/material_key = /decl/material/solid/plastic
+	var/material_cost = SHEET_MATERIAL_AMOUNT //Can't fetch material amount from repository
 
 /decl/curtain_kind/proc/make_item(var/loc)
 	var/obj/item/curtain/C = new(loc, material_key, src)
@@ -15,11 +16,13 @@
 	return C
 
 /decl/curtain_kind/proc/make_structure(var/loc, var/dir, var/opened = FALSE)
-	var/obj/structure/curtain/C = new(loc, dir, material_key, null, src)
+	var/obj/structure/curtain/C = new(loc, material_key, null, src)
 	C.alpha = alpha
 	C.set_color(color)
 	C.SetName(name)
 	C.set_opacity(opened)
+	C.set_dir(dir)
+	C.update_icon()
 	return C
 
 //Cloth curtains
@@ -65,7 +68,9 @@
 	name = "privacy curtain"
 	color = COLOR_BLUE_GRAY
 
-
+//
+// Curtain Item
+//
 /obj/item/curtain
 	name = "rolled curtain"
 	desc = "A rolled curtains."
@@ -103,11 +108,11 @@
 			curtain_kind_path = kind
 	else
 		kind = GET_DECL(curtain_kind_path)
-	src.alpha = kind.alpha
-	src.set_color(kind.color)
-	src.SetName(kind.name)
+
+	SetName(kind.name)
 	material_key = kind.material_key
-	matter = atom_info_repository.get_matter_for(/obj/item/curtain, kind.material_key)
+	LAZYINITLIST(matter)
+	matter[material_key] = kind.material_cost
 	. = ..()
 
 /obj/item/curtain/attackby(obj/item/W, mob/user)
@@ -141,6 +146,17 @@
 	else
 		..()
 
+/obj/item/curtain/on_update_icon()
+	. = ..()
+	var/decl/curtain_kind/kind = GET_DECL(curtain_kind_path)
+	if(!kind)
+		CRASH("Couldn't get curtain data for curtain kind path '[curtain_kind_path]'!")
+	alpha = kind.alpha
+	color = kind.color
+
+//
+// Curtain Structure
+//
 /obj/structure/curtain
 	name = "curtain"
 	icon = 'icons/obj/structures/curtain.dmi'
@@ -165,11 +181,9 @@
 	else
 		kind = GET_DECL(curtain_kind_path)
 	_mat = kind.material_key
-	matter = atom_info_repository.get_matter_for(/obj/structure/curtain, kind.material_key)
+	matter = atom_info_repository.get_matter_for(/obj/item/curtain, kind.material_key) //Fetch it from the item version
 	. = ..()
-	src.SetName(kind.name)
-	src.alpha = kind.alpha
-	src.set_color(kind.color)
+	SetName(kind.name)
 	set_extension(src, /datum/extension/turf_hand)
 
 /obj/structure/curtain/bullet_act(obj/item/projectile/P, def_zone)
@@ -217,8 +231,13 @@
 
 /obj/structure/curtain/on_update_icon()
 	. = ..()
+	var/decl/curtain_kind/kind = GET_DECL(curtain_kind_path)
 	icon_state = opacity ? "closed" : "open"
 	layer = opacity ? ABOVE_HUMAN_LAYER : ABOVE_WINDOW_LAYER
+	if(!kind)
+		CRASH("Couldn't get curtain data for curtain kind path '[curtain_kind_path]'!")
+	alpha = kind.alpha
+	color = kind.color
 
 // Normal subtypes
 /obj/structure/curtain/bed
