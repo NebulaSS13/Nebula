@@ -31,11 +31,10 @@
 	if(ispath(hud))
 		hud = new hud(src)
 
-/obj/item/clothing/glasses/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && active && check_state_in_icon("[ret.icon_state]-active", ret.icon))
-		ret.icon_state = "[ret.icon_state]-active"
-	return ret
+/obj/item/clothing/glasses/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && active && check_state_in_icon("[overlay.icon_state]-active", overlay.icon))
+		overlay.icon_state = "[overlay.icon_state]-active"
+	. = ..()
 
 /obj/item/clothing/glasses/Destroy()
 	qdel(hud)

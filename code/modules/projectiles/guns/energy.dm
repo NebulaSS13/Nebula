@@ -110,11 +110,10 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	if(charge_meter)
 		update_charge_meter()
 
-/obj/item/gun/energy/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && charge_meter)
-		ret = add_onmob_charge_meter(ret)
-	return ret
+/obj/item/gun/energy/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && charge_meter)
+		overlay = add_onmob_charge_meter(overlay)
+	. = ..()
 
 /obj/item/gun/energy/proc/add_onmob_charge_meter(image/I)
 	I.overlays += mutable_appearance(icon, "[I.icon_state][get_charge_ratio()]", indicator_color)

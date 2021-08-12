@@ -105,15 +105,14 @@
 		M.update_inv_wear_mask(0)
 		M.update_inv_hands()
 
-/obj/item/clothing/mask/smokable/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && lit && check_state_in_icon("[ret.icon_state]-on", ret.icon))
-		var/image/on_overlay = image(ret.icon, "[ret.icon_state]-on")
+/obj/item/clothing/mask/smokable/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && lit && check_state_in_icon("[overlay.icon_state]-on", overlay.icon))
+		var/image/on_overlay = image(overlay.icon, "[overlay.icon_state]-on")
 		on_overlay.appearance_flags |= RESET_COLOR
 		on_overlay.layer = ABOVE_LIGHTING_LAYER
 		on_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		ret.add_overlay(on_overlay)
-	return ret
+		overlay.add_overlay(on_overlay)
+	. = ..()
 
 /obj/item/clothing/mask/smokable/fluid_act(var/datum/reagents/fluids)
 	..()

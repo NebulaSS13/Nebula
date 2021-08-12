@@ -63,7 +63,7 @@
 	else
 		icon_state = "[initial(icon_state)]"
 
-/obj/item/clothing/suit/storage/hooded/apply_offsets(var/mob/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+/obj/item/clothing/suit/storage/hooded/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && suittoggled)
 		overlay.icon_state += "_t"
 	. = ..()

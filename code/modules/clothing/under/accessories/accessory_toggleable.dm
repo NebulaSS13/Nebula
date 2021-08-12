@@ -5,11 +5,10 @@
 	icon_state = ICON_STATE_WORLD
 	var/open = FALSE
 
-/obj/item/clothing/accessory/toggleable/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && open && check_state_in_icon("[ret.icon_state]-open", ret.icon))
-		ret.icon_state = "[ret.icon_state]-open"
-	return ret
+/obj/item/clothing/accessory/toggleable/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && open && check_state_in_icon("[overlay.icon_state]-open", overlay.icon))
+		overlay.icon_state = "[overlay.icon_state]-open"
+	. = ..()
 
 /obj/item/clothing/accessory/toggleable/on_attached(obj/item/clothing/under/S, mob/user)
 	..()
@@ -155,11 +154,10 @@
 		icon_state = "[icon_state]-tucked"
 	update_clothing_icon()
 
-/obj/item/clothing/accessory/toggleable/flannel/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret)
-		if(rolled && check_state_in_icon("[ret.icon_state]-rolled", ret.icon))
-			ret.icon_state = "[ret.icon_state]-rolled"
-		if(tucked && check_state_in_icon("[ret.icon_state]-tucked", ret.icon))
-			ret.icon_state = "[ret.icon_state]-tucked"
-	return ret
+/obj/item/clothing/accessory/toggleable/flannel/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay)
+		if(rolled && check_state_in_icon("[overlay.icon_state]-rolled", overlay.icon))
+			overlay.icon_state = "[overlay.icon_state]-rolled"
+		if(tucked && check_state_in_icon("[overlay.icon_state]-tucked", overlay.icon))
+			overlay.icon_state = "[overlay.icon_state]-tucked"
+	. = ..()

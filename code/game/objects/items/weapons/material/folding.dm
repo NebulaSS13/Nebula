@@ -53,9 +53,7 @@
 	..()
 
 /obj/item/knife/folding/get_mob_overlay(mob/user_mob, slot, bodypart)
-	if(open)
-		return ..()
-	return new /image
+	. = open ? ..() : new /image
 
 //Subtypes
 /obj/item/knife/folding/wood
