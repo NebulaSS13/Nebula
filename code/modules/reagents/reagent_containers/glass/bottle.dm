@@ -3,6 +3,7 @@
 
 /obj/item/chems/glass/bottle
 	name = "bottle"
+	base_name = "bottle"
 	desc = "A small bottle."
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = ICON_STATE_WORLD
@@ -16,6 +17,7 @@
 	volume = 60
 	material = /decl/material/solid/glass
 	applies_material_colour = TRUE
+
 	var/label_color
 	var/lid_color = COLOR_GRAY80
 	var/list/initial_reagents 	// reagents that should spawn in the bottle
