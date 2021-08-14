@@ -7,6 +7,7 @@
 
 /obj/item/chems/syringe
 	name = "syringe"
+	base_name = "syringe"
 	desc = "A syringe."
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "rg0"
