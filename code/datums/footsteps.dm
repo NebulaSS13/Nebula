@@ -86,3 +86,10 @@
 		'sound/effects/footstep/sand2.ogg',
 		'sound/effects/footstep/sand3.ogg',
 		'sound/effects/footstep/sand4.ogg')
+
+/decl/footsteps/mud
+	footstep_sounds = list(
+		'sound/effects/footstep/mud1.ogg',
+		'sound/effects/footstep/mud2.ogg',
+		'sound/effects/footstep/mud3.ogg',
+		'sound/effects/footstep/mud4.ogg')
