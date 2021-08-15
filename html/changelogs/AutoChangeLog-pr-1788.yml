@@ -1,5 +1,0 @@
-author: comma
-delete-after: true
-changes:
-  - tweak: Instead of selecting bottle sprite, you can now select lid and label color
-  - rscadd: Sprites for bottles and beakers were changed
