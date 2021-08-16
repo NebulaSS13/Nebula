@@ -172,9 +172,9 @@ var/global/list/time_prefs_fixed = list()
 
 	var/dat = list("<center>")
 	if(is_guest)
-		dat += "Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance."
+		dat += "Please <a href='https://secure.byond.com/Join'>create a BYOND account</a> to save your preferences. If you have an account and are seeing this, please adminhelp for assistance."
 	else if(load_failed)
-		dat += "Loading your savefile failed. Please adminhelp for assistance."
+		dat += "Loading your savefile failed. Please adminhelp for assistance.<br>Error for reference: '[load_failed]'"
 	else
 
 		dat += "<b>Slot</b> - "
