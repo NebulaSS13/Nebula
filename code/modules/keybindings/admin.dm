@@ -66,7 +66,7 @@
 	return TRUE
 
 /decl/keybinding/admin/deadmin
-	hotkey_keys = list("None")
+	hotkey_keys = list(KEYSTROKE_NONE)
 	uid = "keybind_deadmin"
 	name = "De-Admin"
 	description = "Shed your admin powers"
@@ -76,7 +76,7 @@
 	return TRUE
 
 /decl/keybinding/admin/readmin
-	hotkey_keys = list("None")
+	hotkey_keys = list(KEYSTROKE_NONE)
 	uid = "keybind_readmin"
 	name = "Re-Admin"
 	description = "Regain your admin powers"

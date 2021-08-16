@@ -1,5 +1,6 @@
 /decl/keybinding/robot
 	name = "Robot"
+	abstract_type = /decl/keybinding/robot
 
 /decl/keybinding/robot/can_use(client/user)
 	return isrobot(user.mob)

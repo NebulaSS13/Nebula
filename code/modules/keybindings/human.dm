@@ -57,7 +57,7 @@
 	return TRUE
 
 /decl/keybinding/human/give
-	hotkey_keys = list("None")
+	hotkey_keys = list(KEYSTROKE_NONE)
 	uid = "keybind_give_item"
 	name = "Give Item"
 	description = "Give the item you're currently holding"

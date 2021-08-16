@@ -1,5 +1,6 @@
 /decl/keybinding/movement
 	name = "Movement"
+	abstract_type = /decl/keybinding/movement
 
 /decl/keybinding/movement/north
 	hotkey_keys = list("W", "North")

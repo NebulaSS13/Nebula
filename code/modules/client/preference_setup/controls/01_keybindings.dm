@@ -11,7 +11,7 @@
 	// When loading from savefile key_binding can be null
 	// This happens when player had savefile created before new kb system, but hotkeys was not saved
 	if(!length(key_bindings))
-		key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key) // give them default keybinds too
+		key_bindings = deepCopyList(global.default_keybinds) // give them default keybinds too
 
 	var/list/user_binds = list()
 	for (var/key in key_bindings)
@@ -21,7 +21,7 @@
 	var/list/all_keybindings = decls_repository.get_decls_of_subtype(/decl/keybinding)
 	for(var/keybind_type in all_keybindings)
 		var/decl/keybinding/kb = all_keybindings[keybind_type]
-		if(length(user_binds[kb.uid]))
+		if(kb.is_abstract() || length(user_binds[kb.uid]))
 			continue // key is unbound and or bound to something
 		var/addedbind = FALSE
 		if(hotkeys)
@@ -45,7 +45,7 @@
 	for(var/item in notadded)
 		var/decl/keybinding/conflicted = item
 		var/decl/keybinding/category = GET_DECL(conflicted.abstract_type)
-		to_chat(client, SPAN_DANGER("[category.name]: [conflicted.uid] needs updating."))
+		to_chat(client, SPAN_DANGER("[category.name]: [conflicted.name] ([conflicted.type]) needs rebinding."))
 		LAZYADD(key_bindings["None"], conflicted.uid) // set it to unbound to prevent this from opening up again in the future
 
 /datum/category_item/player_setup_item/controls/keybindings
@@ -89,7 +89,7 @@
 		for (var/i in kb_categories[category_type])
 			var/decl/keybinding/kb = i
 			if(!length(user_binds[kb.uid]) || (user_binds[kb.uid][1] == "None" && length(user_binds[kb.uid]) == 1))
-				. += "<tr><td width='40%'>[kb.uid]</td><td width='15%'><a class='fluid' href ='?src=\ref[src];preference=keybindings_capture;keybinding=[kb.uid];old_key=["None"]'>None</a></td>"
+				. += "<tr><td width='40%'>[kb.name]</td><td width='15%'><a class='fluid' href ='?src=\ref[src];preference=keybindings_capture;keybinding=[kb.uid];old_key=["None"]'>None</a></td>"
 				var/list/default_keys = pref.hotkeys ? kb.hotkey_keys : kb.classic_keys
 				var/class
 				if(user_binds[kb.uid] ~= default_keys)
@@ -222,7 +222,7 @@
 			return TOPIC_REFRESH
 
 		if("keybindings_reset")
-			pref.key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key)
+			pref.key_bindings = deepCopyList(global.default_keybinds)
 			user.client.set_macros()
 			return TOPIC_REFRESH
 

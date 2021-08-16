@@ -13,7 +13,7 @@
 	return TRUE
 
 /decl/keybinding/client/screenshot
-	hotkey_keys = list("None")
+	hotkey_keys = list(KEYSTROKE_NONE)
 	uid = "keybind_screenshot"
 	name = "Screenshot"
 	description = "Take a screenshot"

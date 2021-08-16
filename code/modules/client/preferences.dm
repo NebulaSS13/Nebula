@@ -464,7 +464,7 @@ var/global/list/time_prefs_fixed = list()
 	// so, don't create prefs again.
 
 	// give them default keybinds too
-	key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key)
+	key_bindings = deepCopyList(global.default_keybinds)
 
 	if(istype(client))
 

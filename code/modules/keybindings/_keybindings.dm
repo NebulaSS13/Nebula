@@ -1,4 +1,5 @@
 /decl/keybinding
+	abstract_type = /decl/keybinding
 	var/name
 	var/description
 	var/list/hotkey_keys
@@ -10,9 +11,13 @@
 	if(LAZYLEN(hotkey_keys) && !LAZYLEN(classic_keys))
 		classic_keys = hotkey_keys.Copy()
 	if(!is_abstract() && length(hotkey_keys))
+		if(hotkey_keys[1] == KEYSTROKE_NONE)
+			return // No default needed, is unbound.
 		for(var/bound_key in hotkey_keys)
-			LAZYINITLIST(global.hotkey_keybinding_list_by_key[bound_key])
-			global.hotkey_keybinding_list_by_key[bound_key] += src
+			if(!(bound_key in global.default_keybinds))
+				global.default_keybinds[bound_key] = list(src)
+				return
+		PRINT_STACK_TRACE("Could not register default key for [type].")
 
 /decl/keybinding/proc/down(client/user)
 	return FALSE
