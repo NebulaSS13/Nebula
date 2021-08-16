@@ -135,7 +135,7 @@
 				if(H.shoes && H.shoes.item_flags & ITEM_FLAG_NOSLIP)
 					return
 
-			to_chat(M, "<span class='notice'>You slipped on the [name]!</span>")
+			to_chat(M, SPAN_DANGER("You slipped on \the [src]!"))
 			playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
 			SET_STATUS_MAX(M, STAT_STUN, 8)
 			SET_STATUS_MAX(M, STAT_WEAK, 5)

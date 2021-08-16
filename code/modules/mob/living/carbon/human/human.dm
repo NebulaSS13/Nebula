@@ -1347,7 +1347,7 @@
 	var/obj/item/organ/internal/eyes = get_internal_organ(BP_EYES)
 	. = istype(eyes) && eyes.is_usable()
 
-/mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
+/mob/living/carbon/human/slip(var/slipped_on, stun_duration = 8)
 	if((species.check_no_slip(src)) || (shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP)))
 		return 0
 	return !!(..(slipped_on,stun_duration))
