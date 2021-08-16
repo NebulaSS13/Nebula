@@ -65,19 +65,6 @@ var/global/list/string_slot_flags = list(
 		. = new /mob/living/carbon/human/dummy/mannequin()
 		mannequins_[ckey] = .
 
-/hook/global_init/proc/makeDatumRefLists()
-	// Keybindings
-	for(var/KB in subtypesof(/datum/keybinding))
-		var/datum/keybinding/keybinding = KB
-		if(!initial(keybinding.name))
-			continue
-		var/datum/keybinding/instance = new keybinding
-		global.keybindings_by_name[instance.name] = instance
-		if(length(instance.hotkey_keys))
-			for(var/bound_key in instance.hotkey_keys)
-				global.hotkey_keybinding_list_by_key[bound_key] += list(instance.name)
-	return 1
-
 // This is all placeholder procs for an eventual PR to change them to use decls.
 var/global/list/all_species = list()
 var/global/list/playable_species = list() // A list of ALL playable species, whitelisted, latejoin or otherwise.

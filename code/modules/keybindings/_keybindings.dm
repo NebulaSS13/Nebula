@@ -1,21 +1,25 @@
-/datum/keybinding
+/decl/keybinding
+	var/name
+	var/description
 	var/list/hotkey_keys
 	var/list/classic_keys
-	var/name
-	var/full_name
-	var/description = ""
-	var/category = CATEGORY_MISC
 
-/datum/keybinding/New()
+/decl/keybinding/Initialize()
+	. = ..()
 	// Default keys to the master "hotkey_keys"
 	if(LAZYLEN(hotkey_keys) && !LAZYLEN(classic_keys))
 		classic_keys = hotkey_keys.Copy()
+	if(!is_abstract() && length(hotkey_keys))
+		for(var/bound_key in hotkey_keys)
+			LAZYINITLIST(global.hotkey_keybinding_list_by_key[bound_key])
+			global.hotkey_keybinding_list_by_key[bound_key] += src
 
-/datum/keybinding/proc/down(client/user)
+/decl/keybinding/proc/down(client/user)
 	return FALSE
 
-/datum/keybinding/proc/up(client/user)
+/decl/keybinding/proc/up(client/user)
 	return FALSE
 
-/datum/keybinding/proc/can_use(client/user)
+/decl/keybinding/proc/can_use(client/user)
 	return TRUE
+

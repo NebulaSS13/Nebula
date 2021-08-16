@@ -2034,7 +2034,6 @@
 #include "code\modules\integrated_electronics\subtypes\time.dm"
 #include "code\modules\integrated_electronics\subtypes\trig.dm"
 #include "code\modules\item_worth\_helpers.dm"
-#include "code\modules\keybindings\_defines.dm"
 #include "code\modules\keybindings\_keybindings.dm"
 #include "code\modules\keybindings\admin.dm"
 #include "code\modules\keybindings\bindings_atom.dm"

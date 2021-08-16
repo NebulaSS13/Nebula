@@ -1,30 +1,31 @@
-/datum/keybinding/client/communication
-	category = CATEGORY_COMMUNICATION
+/decl/keybinding/client/communication
+	name = "Communication"
+	abstract_type = /decl/keybinding/client/communication
 
-/datum/keybinding/client/communication/say
+/decl/keybinding/client/communication/say
 	hotkey_keys = list("F3", "T")
-	name = "Say"
-	full_name = "IC Say"
+	uid = "keybind_Say"
+	name = "IC Say"
 
-/datum/keybinding/client/communication/ooc
+/decl/keybinding/client/communication/ooc
 	hotkey_keys = list("F2", "O")
-	name = "OOC"
-	full_name = "Out Of Character Say (OOC)"
+	uid = "keybind_OOC"
+	name = "Out Of Character Say (OOC)"
 
-/datum/keybinding/client/communication/looc
+/decl/keybinding/client/communication/looc
 	hotkey_keys = list("L")
-	name = "LOOC"
-	full_name = "Local Out Of Character Say (LOOC)"
+	uid = "keybind_LOOC"
+	name = "Local Out Of Character Say (LOOC)"
 
-/datum/keybinding/client/communication/looc/down(client/user)
+/decl/keybinding/client/communication/looc/down(client/user)
 	user.looc()
 	return TRUE
 
-/datum/keybinding/client/communication/me
+/decl/keybinding/client/communication/me
 	hotkey_keys = list("F4", "M")
-	name = "Me"
-	full_name = "Custom Emote (/Me)"
+	uid = "keybind_Me"
+	name = "Custom Emote (/Me)"
 
-/datum/keybinding/client/communication/me/down(client/user)
+/decl/keybinding/client/communication/me/down(client/user)
 	user.mob.me_wrapper()
 	return TRUE

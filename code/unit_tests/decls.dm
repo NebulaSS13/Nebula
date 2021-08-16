@@ -1,7 +1,8 @@
 /datum/unit_test/currency_validation
 	name = "DECL: UIDs shall be unique and valid"
 	var/static/list/mandatory_uid_types = list(
-		/decl/material
+		/decl/material,
+		/decl/keybinding
 	)
 
 /datum/unit_test/currency_validation/start_test()

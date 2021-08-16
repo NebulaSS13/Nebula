@@ -1,86 +1,87 @@
-/datum/keybinding/admin
-	category = CATEGORY_ADMIN
+/decl/keybinding/admin
+	name = "Admin"
+	abstract_type = /decl/keybinding/admin
 
-/datum/keybinding/admin/can_use(client/user)
+/decl/keybinding/admin/can_use(client/user)
 	return !!user.holder
 
-/datum/keybinding/admin/admin_say
+/decl/keybinding/admin/admin_say
 	hotkey_keys = list("F5")
-	name = "admin_say"
-	full_name = "Admin Say"
+	uid = "keybind_admin_say"
+	name = "Admin Say"
 	description = "Talk with other admins."
 
-/datum/keybinding/admin/admin_say/down(client/user)
+/decl/keybinding/admin/admin_say/down(client/user)
 	user.get_admin_say()
 	return TRUE
 
-/datum/keybinding/admin/admin_ghost
+/decl/keybinding/admin/admin_ghost
 	hotkey_keys = list("F6")
-	name = "admin_ghost"
-	full_name = "Aghost"
+	uid = "keybind_admin_ghost"
+	name = "Aghost"
 	description = "Go ghost"
 
-/datum/keybinding/admin/admin_ghost/down(client/user)
+/decl/keybinding/admin/admin_ghost/down(client/user)
 	user.admin_ghost()
 	return TRUE
 
-/datum/keybinding/admin/list_players
+/decl/keybinding/admin/list_players
 	hotkey_keys = list("F7")
-	name = "list_players"
-	full_name = "List Players"
+	uid = "keybind_list_players"
+	name = "List Players"
 	description = "Opens up the list players panel"
 
-/datum/keybinding/admin/list_players/down(client/user)
+/decl/keybinding/admin/list_players/down(client/user)
 	user.holder.list_players()
 	return TRUE
 
-/datum/keybinding/admin/admin_pm
+/decl/keybinding/admin/admin_pm
 	hotkey_keys = list("F8")
-	name = "admin_pm"
-	full_name = "Admin PM"
+	uid = "keybind_admin_pm"
+	name = "Admin PM"
 	description = "Sends Admin PM message"
 
-/datum/keybinding/admin/admin_pm/down(client/user)
+/decl/keybinding/admin/admin_pm/down(client/user)
 	user.cmd_admin_pm_panel()
 	return TRUE
 
-/datum/keybinding/admin/invisimin
+/decl/keybinding/admin/invisimin
 	hotkey_keys = list("F9")
-	name = "invisimin"
-	full_name = "Admin Invisibility"
+	uid = "keybind_invisimin"
+	name = "Admin Invisibility"
 	description = "Toggles ghost-like invisibility (Don't abuse this)"
 
-/datum/keybinding/admin/invisimin/down(client/user)
+/decl/keybinding/admin/invisimin/down(client/user)
 	user.invisimin()
 	return TRUE
 
-/datum/keybinding/admin/dead_say
+/decl/keybinding/admin/dead_say
 	hotkey_keys = list("F10")
-	name = "dead_say"
-	full_name = "Dead Say"
+	uid = "keybind_dead_say"
+	name = "Dead Say"
 	description = "Allows you to send a message to dead chat"
 
-/datum/keybinding/admin/dead_say/down(client/user)
+/decl/keybinding/admin/dead_say/down(client/user)
 	user.get_dead_say()
 	return TRUE
 
-/datum/keybinding/admin/deadmin
+/decl/keybinding/admin/deadmin
 	hotkey_keys = list("None")
-	name = "deadmin"
-	full_name = "De-Admin"
+	uid = "keybind_deadmin"
+	name = "De-Admin"
 	description = "Shed your admin powers"
 
-/datum/keybinding/admin/deadmin/down(client/user)
+/decl/keybinding/admin/deadmin/down(client/user)
 	user.deadmin_self()
 	return TRUE
 
-/datum/keybinding/admin/readmin
+/decl/keybinding/admin/readmin
 	hotkey_keys = list("None")
-	name = "readmin"
-	full_name = "Re-Admin"
+	uid = "keybind_readmin"
+	name = "Re-Admin"
 	description = "Regain your admin powers"
 
-/datum/keybinding/admin/readmin/down(client/user)
+/decl/keybinding/admin/readmin/down(client/user)
 	user.readmin_self()
 	return TRUE
 

@@ -1,38 +1,39 @@
-/datum/keybinding/living
-	category = CATEGORY_HUMAN
+/decl/keybinding/living
+	name = "Living"
+	abstract_type = /decl/keybinding/living
 
-/datum/keybinding/living/can_use(client/user)
+/decl/keybinding/living/can_use(client/user)
 	return isliving(user.mob)
 
-/datum/keybinding/living/rest
+/decl/keybinding/living/rest
 	hotkey_keys = list("ShiftB")
-	name = "rest"
-	full_name = "Rest"
+	uid = "keybind_rest"
+	name = "Rest"
 	description = "You lay down/get up"
 
-/datum/keybinding/living/rest/down(client/user)
+/decl/keybinding/living/rest/down(client/user)
 	var/mob/living/L = user.mob
 	L.lay_down()
 	return TRUE
 
-/datum/keybinding/living/resist
+/decl/keybinding/living/resist
 	hotkey_keys = list("B")
-	name = "resist"
-	full_name = "Resist"
+	uid = "keybind_resist"
+	name = "Resist"
 	description = "Break free of your current state. Handcuffed? On fire? Resist!"
 
-/datum/keybinding/living/resist/down(client/user)
+/decl/keybinding/living/resist/down(client/user)
 	var/mob/living/L = user.mob
 	L.resist()
 	return TRUE
 
-/datum/keybinding/living/drop_item
+/decl/keybinding/living/drop_item
 	hotkey_keys = list("Q", "Northwest") // HOME
-	name = "drop_item"
-	full_name = "Drop Item"
+	uid = "keybind_drop_item"
+	name = "Drop Item"
 	description = ""
 
-/datum/keybinding/living/drop_item/down(client/user)
+/decl/keybinding/living/drop_item/down(client/user)
 	var/mob/living/L = user.mob
 	L.drop_item()
 	return TRUE

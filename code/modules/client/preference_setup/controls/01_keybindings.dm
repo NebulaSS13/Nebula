@@ -18,35 +18,35 @@
 		for(var/kb_name in key_bindings[key])
 			user_binds[kb_name] += list(key)
 	var/list/notadded = list()
-	for (var/name in global.keybindings_by_name)
-		var/datum/keybinding/kb = global.keybindings_by_name[name]
-		if(length(user_binds[kb.name]))
+	var/list/all_keybindings = decls_repository.get_decls_of_subtype(/decl/keybinding)
+	for(var/keybind_type in all_keybindings)
+		var/decl/keybinding/kb = all_keybindings[keybind_type]
+		if(length(user_binds[kb.uid]))
 			continue // key is unbound and or bound to something
 		var/addedbind = FALSE
 		if(hotkeys)
 			for(var/hotkeytobind in kb.hotkey_keys)
 				if(!length(key_bindings[hotkeytobind]) || hotkeytobind == "Unbound") //Only bind to the key if nothing else is bound expect for Unbound
-					LAZYADD(key_bindings[hotkeytobind], kb.name)
+					LAZYADD(key_bindings[hotkeytobind], kb.uid)
 					addedbind = TRUE
 		else
 			for(var/classickeytobind in kb.classic_keys)
 				if(!length(key_bindings[classickeytobind]) || classickeytobind == "Unbound") //Only bind to the key if nothing else is bound expect for Unbound
-					LAZYADD(key_bindings[classickeytobind], kb.name)
+					LAZYADD(key_bindings[classickeytobind], kb.uid)
 					addedbind = TRUE
 		if(!addedbind)
 			notadded += kb
 
 	if(length(notadded))
-		addtimer(CALLBACK(src, .proc/announce_conflict, notadded), 5 SECONDS)
+		addtimer(CALLBACK(src, .proc/announce_keybind_conflict, notadded), 5 SECONDS)
 
-/datum/preferences/proc/announce_conflict(list/notadded)
-	to_chat(client, SPAN_DANGER("KEYBINDING CONFLICT.\n\
-	There are new keybindings that have defaults bound to keys you already set, They will default to Unbound. You can bind them in Setup Character or Game Preferences\n\
-	<a href='?src=\ref[src];preference=tab;tab=3'>Or you can click here to go straight to the keybindings page.</a>"))
+/datum/preferences/proc/announce_keybind_conflict(list/notadded)
+	to_chat(client, SPAN_DANGER("KEYBINDING CONFLICT!<br>There are new keybindings that have defaults bound to keys you have already set. They will be unbound. You can rebind them in Setup Character or Game Preferences, <a href='?src=\ref[src];preference=tab;tab=3'>or you can click here to go straight to the keybindings page</a>."))
 	for(var/item in notadded)
-		var/datum/keybinding/conflicted = item
-		to_chat(client, SPAN_DANGER("[conflicted.category]: [conflicted.full_name] needs updating."))
-		LAZYADD(key_bindings["None"], conflicted.name) // set it to unbound to prevent this from opening up again in the future
+		var/decl/keybinding/conflicted = item
+		var/decl/keybinding/category = GET_DECL(conflicted.abstract_type)
+		to_chat(client, SPAN_DANGER("[category.name]: [conflicted.uid] needs updating."))
+		LAZYADD(key_bindings["None"], conflicted.uid) // set it to unbound to prevent this from opening up again in the future
 
 /datum/category_item/player_setup_item/controls/keybindings
 	name = "Keybindings"
@@ -70,44 +70,49 @@
 		for(var/kb_name in pref.key_bindings[key])
 			user_binds[kb_name] += list(key)
 
-	var/list/kb_categories = list()
 	// Group keybinds by category
-	for (var/name in global.keybindings_by_name)
-		var/datum/keybinding/kb = global.keybindings_by_name[name]
-		kb_categories[kb.category] += list(kb)
+	var/list/kb_categories = list()
+	var/list/all_keybinds = decls_repository.get_decls_of_subtype(/decl/keybinding)
+	for(var/keybind_type in all_keybinds)
+		var/decl/keybinding/kb = all_keybinds[keybind_type]
+		if(!kb.is_abstract())
+			if(!(kb.abstract_type in kb_categories))
+				kb_categories[kb.abstract_type] = list()
+			kb_categories[kb.abstract_type] += kb
 
 	. += "<center>"
 	. += "<div class='statusDisplay'>"
-	for (var/category in kb_categories)
-		. += "<h3>[category]</h3>"
+	for(var/category_type in kb_categories)
+		var/decl/keybinding/category = GET_DECL(category_type)
+		. += "<h3>[category.name]</h3>"
 		. += "<table width='100%'>"
-		for (var/i in kb_categories[category])
-			var/datum/keybinding/kb = i
-			if(!length(user_binds[kb.name]) || (user_binds[kb.name][1] == "None" && length(user_binds[kb.name]) == 1))
-				. += "<tr><td width='40%'>[kb.full_name]</td><td width='15%'><a class='fluid' href ='?src=\ref[src];preference=keybindings_capture;keybinding=[kb.name];old_key=["None"]'>None</a></td>"
+		for (var/i in kb_categories[category_type])
+			var/decl/keybinding/kb = i
+			if(!length(user_binds[kb.uid]) || (user_binds[kb.uid][1] == "None" && length(user_binds[kb.uid]) == 1))
+				. += "<tr><td width='40%'>[kb.uid]</td><td width='15%'><a class='fluid' href ='?src=\ref[src];preference=keybindings_capture;keybinding=[kb.uid];old_key=["None"]'>None</a></td>"
 				var/list/default_keys = pref.hotkeys ? kb.hotkey_keys : kb.classic_keys
 				var/class
-				if(user_binds[kb.name] ~= default_keys)
+				if(user_binds[kb.uid] ~= default_keys)
 					class = "class='linkOff fluid'"
 				else
-					class = "class='fluid' href ='?src=\ref[src];preference=keybinding_reset;keybinding=[kb.name];old_keys=[jointext(user_binds[kb.name], ",")]"
+					class = "class='fluid' href ='?src=\ref[src];preference=keybinding_reset;keybinding=[kb.uid];old_keys=[jointext(user_binds[kb.uid], ",")]"
 
 				. += {"<td width='15%'></td><td width='15%'></td><td width='15%'><a [class]'>Reset</a></td>"}
 				. += "</tr>"
 			else
-				var/bound_key = user_binds[kb.name][1]
+				var/bound_key = user_binds[kb.uid][1]
 				var/normal_name = _kbMap_reverse[bound_key] ? _kbMap_reverse[bound_key] : bound_key
-				. += "<tr><td width='40%'>[kb.full_name]</td><td width='15%'><a class='fluid' href ='?src=\ref[src];preference=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[normal_name]</a></td>"
-				for(var/bound_key_index in 2 to length(user_binds[kb.name]))
-					bound_key = user_binds[kb.name][bound_key_index]
+				. += "<tr><td width='40%'>[kb.name]</td><td width='15%'><a class='fluid' href ='?src=\ref[src];preference=keybindings_capture;keybinding=[kb.uid];old_key=[bound_key]'>[normal_name]</a></td>"
+				for(var/bound_key_index in 2 to length(user_binds[kb.uid]))
+					bound_key = user_binds[kb.uid][bound_key_index]
 					normal_name = _kbMap_reverse[bound_key] ? _kbMap_reverse[bound_key] : bound_key
-					. += "<td width='15%'><a class='fluid' href ='?src=\ref[src];preference=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[normal_name]</a></td>"
-				if(length(user_binds[kb.name]) < MAX_KEYS_PER_KEYBIND)
-					. += "<td width='15%'><a class='fluid' href ='?src=\ref[src];preference=keybindings_capture;keybinding=[kb.name]'>None</a></td>"
-				for(var/j in 1 to MAX_KEYS_PER_KEYBIND - (length(user_binds[kb.name]) + 1))
+					. += "<td width='15%'><a class='fluid' href ='?src=\ref[src];preference=keybindings_capture;keybinding=[kb.uid];old_key=[bound_key]'>[normal_name]</a></td>"
+				if(length(user_binds[kb.uid]) < MAX_KEYS_PER_KEYBIND)
+					. += "<td width='15%'><a class='fluid' href ='?src=\ref[src];preference=keybindings_capture;keybinding=[kb.uid]'>None</a></td>"
+				for(var/j in 1 to MAX_KEYS_PER_KEYBIND - (length(user_binds[kb.uid]) + 1))
 					. += "<td width='15%'></td>"
 				var/list/default_keys = pref.hotkeys ? kb.hotkey_keys : kb.classic_keys
-				. += {"<td width='15%'><a [user_binds[kb.name] ~= default_keys ? "class='linkOff fluid'" : "class='fluid' href ='?src=\ref[src];preference=keybinding_reset;keybinding=[kb.name];old_keys=[jointext(user_binds[kb.name], ",")]"]'>Reset</a></td>"}
+				. += {"<td width='15%'><a [user_binds[kb.uid] ~= default_keys ? "class='linkOff fluid'" : "class='fluid' href ='?src=\ref[src];preference=keybinding_reset;keybinding=[kb.uid];old_keys=[jointext(user_binds[kb.uid], ",")]"]'>Reset</a></td>"}
 				. += "</tr>"
 		. += "</table>"
 
@@ -118,10 +123,10 @@
 
 	return jointext(., null)
 
-/datum/category_item/player_setup_item/controls/keybindings/proc/capture_keybinding(mob/user, datum/keybinding/kb, old_key)
+/datum/category_item/player_setup_item/controls/keybindings/proc/capture_keybinding(mob/user, decl/keybinding/kb, old_key)
 	var/HTML = {"
 	<div class='Section fill'id='focus' style="outline: 0; text-align:center;" tabindex=0>
-		Keybinding: [kb.full_name]<br>[kb.description]
+		Keybinding: [kb.name]<br>[kb.description]
 		<br><br>
 		<b>Press any key to change<br>Press ESC to clear</b>
 	</div>
@@ -141,7 +146,7 @@
 		else if (64 < e.keyCode && e.keyCode < 91) {
 			sanitizedKey = String.fromCharCode(e.keyCode);
 		}
-		var url = 'byond://?src=\ref[src];preference=keybindings_set;keybinding=[kb.name];old_key=[old_key];clear_key='+escPressed+';key='+sanitizedKey+';alt='+alt+';ctrl='+ctrl+';shift='+shift+';numpad='+numpad+';key_code='+e.keyCode;
+		var url = 'byond://?src=\ref[src];preference=keybindings_set;keybinding=[kb.uid];old_key=[old_key];clear_key='+escPressed+';key='+sanitizedKey+';alt='+alt+';ctrl='+ctrl+';shift='+shift+';numpad='+numpad+';key_code='+e.keyCode;
 		window.location=url;
 		deedDone = true;
 	}
@@ -156,7 +161,7 @@
 /datum/category_item/player_setup_item/controls/keybindings/OnTopic(href, list/href_list, mob/user)
 	switch(href_list["preference"])
 		if("keybindings_capture")
-			var/datum/keybinding/kb = global.keybindings_by_name[href_list["keybinding"]]
+			var/decl/keybinding/kb = decls_repository.get_decl_by_id(href_list["keybinding"])
 			var/old_key = href_list["old_key"]
 			capture_keybinding(user, kb, old_key)
 			return TOPIC_REFRESH
@@ -232,7 +237,7 @@
 				if(!length(pref.key_bindings[old_key]))
 					pref.key_bindings -= old_key
 
-			var/datum/keybinding/kb = global.keybindings_by_name[kb_name]
+			var/decl/keybinding/kb = decls_repository.get_decl_by_id(kb_name)
 			for(var/key in kb.hotkey_keys)
 				pref.key_bindings[key] += list(kb_name)
 				pref.key_bindings[key] = sortTim(pref.key_bindings[key], /proc/cmp_text_asc)
@@ -242,9 +247,9 @@
 	return ..()
 
 /proc/sanitize_keybindings(value)
+	decls_repository.get_decls_of_subtype(/decl/keybinding)
 	var/list/base_bindings = sanitize_islist(value,list())
 	for(var/key in base_bindings)
-		base_bindings[key] = base_bindings[key] & global.keybindings_by_name
-		if(!length(base_bindings[key]))
+		if(!decls_repository.get_decl_by_id(key))
 			base_bindings -= key
 	return base_bindings

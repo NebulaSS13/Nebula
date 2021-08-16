@@ -59,7 +59,7 @@
 	var/keycount = 0
 	for(var/kb_name in prefs.key_bindings[full_key])
 		keycount++
-		var/datum/keybinding/kb = global.keybindings_by_name[kb_name]
+		var/decl/keybinding/kb = decls_repository.get_decl_by_id(kb_name)
 		if(kb.can_use(src) && kb.down(src) && keycount >= MAX_COMMANDS_PER_KEY)
 			break
 
@@ -90,7 +90,7 @@
 	// We don't do full key for release, because for mod keys you
 	// can hold different keys and releasing any should be handled by the key binding specifically
 	for (var/kb_name in prefs.key_bindings[_key])
-		var/datum/keybinding/kb = global.keybindings_by_name[kb_name]
+		var/decl/keybinding/kb = decls_repository.get_decl_by_id(kb_name)
 		if(kb.can_use(src) && kb.up(src))
 			break
 	holder?.key_up(_key, src)
