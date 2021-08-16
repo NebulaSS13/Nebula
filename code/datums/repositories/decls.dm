@@ -31,7 +31,9 @@ var/global/repository/decls/decls_repository = new
 			fetched_decl_ids[decl_uid] = decl_type
 
 /repository/decls/proc/get_decl_by_id(var/decl_id)
-	. = get_decl(fetched_decl_ids[decl_id])
+	var/decl_type = fetched_decl_ids[decl_id]
+	if(ispath(decl_type, /decl))
+		. = get_decl(decl_type)
 
 /repository/decls/proc/get_decl(var/decl_type)
 	ASSERT(ispath(decl_type))
