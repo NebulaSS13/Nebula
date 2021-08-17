@@ -4,7 +4,7 @@
 		var/decl/footsteps/FS = GET_DECL(footstep_type)
 		. = pick(FS.footstep_sounds)
 
-/turf/simulated/get_footstep_sound(var/mob/caller)
+/turf/get_footstep_sound(var/mob/caller)
 	for(var/obj/structure/S in contents)
 		if(S.footstep_type)
 			return get_footstep(S.footstep_type, caller)
@@ -26,7 +26,7 @@
 		else
 			return get_footstep(flooring.footstep_type, caller)
 
-/turf/simulated/Entered(var/mob/living/carbon/human/H)
+/turf/Entered(var/mob/living/carbon/human/H)
 	..()
 	if(istype(H))
 		H.handle_footsteps()
