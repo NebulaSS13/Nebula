@@ -173,14 +173,14 @@
 
 // Is anything physically preventing movement?
 /datum/movement_handler/mob/physically_restrained/MayMove(var/mob/mover)
-	if(mob.anchored)
-		if(mover == mob)
-			to_chat(mob, SPAN_WARNING("You're anchored down!"))
-		return MOVEMENT_STOP
-
 	if(istype(mob.buckled) && !mob.buckled.buckle_movable)
 		if(mover == mob)
 			to_chat(mob, SPAN_WARNING("You're buckled to \the [mob.buckled]!"))
+		return MOVEMENT_STOP
+
+	if(mob.anchored)
+		if(mover == mob)
+			to_chat(mob, SPAN_WARNING("You're anchored down!"))
 		return MOVEMENT_STOP
 
 	if(LAZYLEN(mob.pinned))

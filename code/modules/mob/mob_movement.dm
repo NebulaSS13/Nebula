@@ -138,7 +138,7 @@
 		src.m_flag = 1
 		if ((A != src.loc && A && A.z == src.z))
 			src.last_move = get_dir(A, src.loc)
-	
+
 	if(!inertia_moving)
 		inertia_next_move = world.time + inertia_move_delay
 		space_drift(direct ? direct : last_move)
@@ -151,7 +151,7 @@
 		return // Moved here to avoid nullrefs below
 
 	var/datum/movement_handler/H = mob.GetMovementHandler(/datum/movement_handler/mob/delay)
-	if(H && H.MayMove() != MOVEMENT_PROCEED)
+	if(direction && H && H.MayMove() != MOVEMENT_PROCEED)
 		return
 	else
 		next_move_dir_add = 0
@@ -170,7 +170,7 @@
 			return backup
 		return -1
 
-/mob/proc/space_do_move(var/allow_move, var/direction)	
+/mob/proc/space_do_move(var/allow_move, var/direction)
 	if(ismovable(allow_move))//push off things in space
 		handle_space_pushoff(allow_move, direction)
 		allow_move = -1
