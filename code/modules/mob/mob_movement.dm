@@ -150,13 +150,6 @@
 	if(!mob)
 		return // Moved here to avoid nullrefs below
 
-	var/datum/movement_handler/H = mob.GetMovementHandler(/datum/movement_handler/mob/delay)
-	if(direction && H && H.MayMove() != MOVEMENT_PROCEED)
-		return
-	else
-		next_move_dir_add = 0
-		next_move_dir_sub = 0
-
 	return mob.SelfMove(direction)
 
 /mob/Process_Spacemove(var/allow_movement)
