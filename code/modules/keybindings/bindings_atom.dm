@@ -29,6 +29,6 @@
 			keybind_face_direction(movement_dir)
 		else
 			user.Move(get_step(src, movement_dir), movement_dir)
-	else
-		user.next_move_dir_add = 0
-		user.next_move_dir_sub = 0
+
+	user.next_move_dir_add = 0
+	user.next_move_dir_sub = 0
