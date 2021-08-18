@@ -17,24 +17,10 @@
 	light_overlay_image = null
 	..(user, slot)
 
-/obj/item/clothing/head/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret)
-		if(light_overlay_image)
-			ret.overlays -= light_overlay_image
-		if(on && slot == slot_head_str)
-			if(!light_overlay_image)
-				if(ishuman(user_mob))
-					var/mob/living/carbon/human/user_human = user_mob
-					var/use_icon = LAZYACCESS(sprite_sheets, user_human.get_bodytype_category(user_human))
-					if(use_icon)
-						light_overlay_image = user_human.bodytype.get_offset_overlay_image(TRUE, use_icon, "[light_overlay]", color, slot)
-					else
-						light_overlay_image = user_human.bodytype.get_offset_overlay_image(FALSE, 'icons/mob/light_overlays.dmi', "[light_overlay]", color, slot)
-				else
-					light_overlay_image = overlay_image('icons/mob/light_overlays.dmi', "[light_overlay]", null, RESET_COLOR)
-			ret.overlays |= light_overlay_image
-	return ret
+/obj/item/clothing/head/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && on && slot == slot_head_str)
+		overlay.overlays += overlay_image('icons/mob/light_overlays.dmi', "[light_overlay]", null, RESET_COLOR)
+	. = ..()
 
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
@@ -96,16 +82,15 @@
 		light_overlay_cache["[light_overlay]_icon"] = image("icon" = 'icons/obj/light_overlays.dmi', "icon_state" = "[light_overlay]")
 	overlays |= light_overlay_cache["[light_overlay]_icon"]
 
-/obj/item/clothing/head/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
-	var/image/ret = ..()
-	if(on && check_state_in_icon("[ret.icon_state]_light", ret.icon))
-		var/image/light_overlay = image(ret.icon, "[ret.icon_state]_light")
+/obj/item/clothing/head/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && on && check_state_in_icon("[overlay.icon_state]_light", overlay.icon))
+		var/image/light_overlay = image(overlay.icon, "[overlay.icon_state]_light")
 		if(ishuman(user_mob))
 			var/mob/living/carbon/human/H = user_mob
 			if(H.get_bodytype_category() != bodytype)
 				light_overlay = H.bodytype.get_offset_overlay_image(FALSE, light_overlay.icon, light_overlay.icon_state, null, slot)
-		ret.overlays += light_overlay
-	return ret
+		overlay.overlays += light_overlay
+	. = ..()
 
 /obj/item/clothing/head/update_clothing_icon()
 	if (ismob(src.loc))

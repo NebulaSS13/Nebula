@@ -41,11 +41,10 @@
 	if(on)
 		add_overlay("[icon_state]-on")
 
-/obj/item/tank/jetpack/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && slot == slot_back_str && on)
-		ret.icon_state = "[ret.icon_state]-on"
-	return ret
+/obj/item/tank/jetpack/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && slot == slot_back_str && on)
+		overlay.icon_state = "[overlay.icon_state]-on"
+	. = ..()
 
 /obj/item/tank/jetpack/verb/toggle()
 	set name = "Toggle Jetpack"

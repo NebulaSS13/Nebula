@@ -53,11 +53,10 @@
 	QDEL_NULL(tank)
 	return ..()
 
-/obj/item/weldingtool/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && welding && check_state_in_icon("[ret.icon_state]-lit", ret.icon))
-		ret.add_overlay(emissive_overlay(ret.icon, "[ret.icon_state]-lit"))
-	return ret
+/obj/item/weldingtool/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && welding && check_state_in_icon("[overlay.icon_state]-lit", overlay.icon))
+		overlay.add_overlay(emissive_overlay(overlay.icon, "[overlay.icon_state]-lit"))
+	. = ..()
 
 /obj/item/weldingtool/get_heat()
 	. = max(..(), isOn() ? 3800 : 0)

@@ -34,11 +34,10 @@
 		var/mob/M = src.loc
 		M.update_inv_wear_mask()
 
-/obj/item/clothing/mask/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && hanging && slot == slot_wear_mask_str && check_state_in_icon("[ret.icon_state]-down", ret.icon))
-		ret.icon_state = "[ret.icon_state]-down"
-	return ret
+/obj/item/clothing/mask/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && hanging && slot == slot_wear_mask_str && check_state_in_icon("[overlay.icon_state]-down", overlay.icon))
+		overlay.icon_state = "[overlay.icon_state]-down"
+	. = ..()
  
 /obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 	return

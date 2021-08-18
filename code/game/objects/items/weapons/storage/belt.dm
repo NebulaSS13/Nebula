@@ -36,12 +36,10 @@
 /obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	if(ret && slot == slot_belt_str && length(contents))
-		var/list/ret_overlays = list()
 		for(var/obj/item/I in contents)
-			var/image/overlay = I.get_mob_overlay(user_mob, slot, bodypart)
-			if(overlay)
-				ret_overlays += overlay
-		ret.overlays += ret_overlays
+			var/image/new_overlay = I.get_mob_overlay(user_mob, slot, bodypart)
+			if(new_overlay)
+				ret.overlays += new_overlay
 	return ret
 
 /obj/item/storage/belt/holster

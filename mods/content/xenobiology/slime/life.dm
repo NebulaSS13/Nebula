@@ -140,5 +140,5 @@
 /mob/living/slime/proc/get_starve_nutrition() // Below it we will eat before everything else
 	. = is_adult ? 300 : 200
 
-/mob/living/slime/slip() //Can't slip something without legs.
+/mob/living/slime/slip(var/slipped_on, stun_duration = 8) //Can't slip something without legs.
 	return FALSE

@@ -115,13 +115,12 @@
 	if(contents_count > 0 && check_state_in_icon("[icon_state]-[contents_count]", icon))
 		icon_state = "[icon_state]-[contents_count]"
 	
-/obj/item/clothing/accessory/storage/knifeharness/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret)
+/obj/item/clothing/accessory/storage/knifeharness/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay)
 		var/contents_count = min(length(contents), 2)
-		if(contents_count > 0 && check_state_in_icon("[ret.icon_state]-[contents_count]", ret.icon))
-			ret.icon_state = "[ret.icon_state]-[contents_count]"
-	return ret
+		if(contents_count > 0 && check_state_in_icon("[overlay.icon_state]-[contents_count]", overlay.icon))
+			overlay.icon_state = "[overlay.icon_state]-[contents_count]"
+	. = ..()
 
 /obj/item/clothing/accessory/storage/bandolier
 	name = "bandolier"
