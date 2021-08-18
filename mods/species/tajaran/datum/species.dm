@@ -26,7 +26,7 @@
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	preview_icon = 'mods/species/tajaran/icons/preview.dmi'
-	default_h_style = "Tajaran Ears"
+	default_h_style = /decl/sprite_accessory/hair/taj
 
 	flesh_color = "#afa59e"
 	base_color = "#333333"

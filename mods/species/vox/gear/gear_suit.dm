@@ -43,8 +43,26 @@
 
 /obj/item/clothing/suit/space/vox/carapace
 	name = "alien carapace armour"
+	color = "#456363"
 	icon = 'mods/species/vox/icons/clothing/carapace_suit.dmi'
 	desc = "An armoured, segmented carapace with glowing purple lights. It looks pretty run-down."
+	var/lights_color = COLOR_CYAN_BLUE
+
+/obj/item/clothing/suit/space/vox/carapace/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
+	if(overlay && lights_color && check_state_in_icon("[overlay.icon_state]-lights", overlay.icon))
+		var/image/I = emissive_overlay(overlay.icon, "[overlay.icon_state]-lights")
+		I.color = lights_color
+		I.appearance_flags |= RESET_COLOR
+		overlay.overlays += I
+	. = ..()
+
+/obj/item/clothing/suit/space/vox/carapace/on_update_icon()
+	cut_overlays()
+	if(lights_color && check_state_in_icon("[icon_state]-lights", icon))
+		var/image/I = emissive_overlay(icon, "[icon_state]-lights")
+		I.color = lights_color
+		I.appearance_flags |= RESET_COLOR
+		add_overlay(I)
 
 /obj/item/clothing/suit/space/vox/stealth
 	name = "alien stealth suit"

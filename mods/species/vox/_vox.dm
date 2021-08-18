@@ -9,7 +9,7 @@
 	credits_topics = list("VOX RITUAL DUELS", "NECK MARKINGS", "ANCIENT SUPERCOMPUTERS")
 
 /mob/living/carbon/human/vox/Initialize(mapload, new_species)
-	h_style = "Short Vox Quills"
+	h_style = /decl/sprite_accessory/hair/vox/short
 	hair_colour = COLOR_BEASTY_BROWN
 	. = ..(mapload, SPECIES_VOX)
 
