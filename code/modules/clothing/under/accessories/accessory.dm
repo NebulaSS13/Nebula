@@ -62,18 +62,17 @@
 		if(uniform.rolled_sleeves && hide_on_uniform_rollsleeves)
 			return FALSE
 
-/obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && istype(loc, /obj/item/clothing/under))
-		var/new_state = ret.icon_state
+/obj/item/clothing/accessory/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && istype(loc, /obj/item/clothing/under))
+		var/new_state = overlay.icon_state
 		var/obj/item/clothing/under/uniform = loc
 		if(uniform.rolled_down)
 			new_state = "[new_state]-rolled"
 		else if(uniform.rolled_sleeves)
 			new_state = "[new_state]-sleeves"
-		if(check_state_in_icon(ret.icon, new_state))
-			ret.icon_state = new_state
-	return ret
+		if(check_state_in_icon(overlay.icon, new_state))
+			overlay.icon_state = new_state
+	. = ..()
 
 /obj/item/clothing/accessory/proc/get_attached_overlay_state()
 	return "attached"

@@ -63,11 +63,10 @@
 	if(wielded)
 		. += wielded_parry_bonus
 
-/obj/item/twohanded/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && wielded && (slot in list(BP_L_HAND, BP_R_HAND)))
-		ret.icon_state = "[ret.icon_state]-wielded"
-	return ret
+/obj/item/twohanded/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && wielded && (slot in list(BP_L_HAND, BP_R_HAND)))
+		overlay.icon_state = "[overlay.icon_state]-wielded"
+	. = ..()
 
 /*
  * Fireaxe
@@ -136,14 +135,13 @@
 	overlays += get_shaft_overlay("shaft")
 	overlays += mutable_appearance(icon, "cable", cable_color)
 
-/obj/item/twohanded/spear/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret)
-		if(check_state_in_icon("[ret.icon_state]-shaft", ret.icon))
-			ret.overlays += get_shaft_overlay("[ret.icon_state]-shaft")
-		if(check_state_in_icon("[ret.icon_state]-cable", ret.icon))
-			ret.overlays += mutable_appearance(icon, "[ret.icon_state]-cable", cable_color)
-	return ret
+/obj/item/twohanded/spear/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay)
+		if(check_state_in_icon("[overlay.icon_state]-shaft", overlay.icon))
+			overlay.overlays += get_shaft_overlay("[overlay.icon_state]-shaft")
+		if(check_state_in_icon("[overlay.icon_state]-cable", overlay.icon))
+			overlay.overlays += mutable_appearance(icon, "[overlay.icon_state]-cable", cable_color)
+	. = ..()
 
 /obj/item/twohanded/spear/proc/get_shaft_overlay(var/base_state)
 	var/decl/material/M = GET_DECL(shaft_material)

@@ -94,11 +94,10 @@
 	if(sleeves_rolled && check_state_in_icon("[icon_state]-sleeves", icon))
 		icon_state = "[icon_state]-sleeves"
 
-/obj/item/clothing/accessory/tangzhuang/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && sleeves_rolled && check_state_in_icon("[ret.icon_state]-sleeves", ret.icon))
-		ret.icon_state = "[ret.icon_state]-sleeves"
-	return ret
+/obj/item/clothing/accessory/tangzhuang/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && sleeves_rolled && check_state_in_icon("[overlay.icon_state]-sleeves", overlay.icon))
+		overlay.icon_state = "[overlay.icon_state]-sleeves"
+	. = ..()
 
 /obj/item/clothing/accessory/fire_overpants
 	name = "fire overpants"
