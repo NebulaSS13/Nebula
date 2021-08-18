@@ -581,12 +581,16 @@
 
 		//Resting
 		if(resting)
-			ADJ_STATUS(src, STAT_DIZZY, -15)
-			ADJ_STATUS(src, STAT_JITTER, -15)
+			if(HAS_STATUS(src, STAT_DIZZY))
+				ADJ_STATUS(src, STAT_DIZZY, -15)
+			if(HAS_STATUS(src, STAT_JITTER))
+				ADJ_STATUS(src, STAT_JITTER, -15)
 			adjustHalLoss(-3)
 		else
-			ADJ_STATUS(src, STAT_DIZZY, -3)
-			ADJ_STATUS(src, STAT_JITTER, -3)
+			if(HAS_STATUS(src, STAT_DIZZY))
+				ADJ_STATUS(src, STAT_DIZZY, -3)
+			if(HAS_STATUS(src, STAT_JITTER))
+				ADJ_STATUS(src, STAT_JITTER, -3)
 			adjustHalLoss(-1)
 
 		if(HAS_STATUS(src, STAT_DROWSY))

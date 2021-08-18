@@ -8,25 +8,24 @@
 	color = COLOR_GUNMETAL
 	light_color = LIGHT_COLOR_GREEN
 
-/obj/item/modular_computer/pda/wrist/get_mob_overlay(var/mob/user_mob, var/slot, var/bodypart)
-	var/image/ret = ..()
-	if(ret)
+/obj/item/modular_computer/pda/wrist/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay)
 		var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 		var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
 		if(slot == slot_wear_id_str)
 			if(assembly?.enabled)
-				var/image/I = image(screen_icon, icon_state = "[ret.icon_state]-screen")
+				var/image/I = image(screen_icon, icon_state = "[overlay.icon_state]-screen")
 				I.appearance_flags |= RESET_COLOR
 				I.color = (assembly.bsod || os?.updating) ? "#0000ff" : "#00ff00"
-				ret.overlays.Add(I)
+				overlay.overlays += I
 			else
-				ret.overlays.Add(image(screen_icon, icon_state = "[ret.icon_state]-screen_off"))
+				overlay.overlays += image(screen_icon, icon_state = "[overlay.icon_state]-screen_off")
 			for(var/decal in decals)
-				var/image/I = image(icon = ret.icon, icon_state = "[ret.icon_state]-[decal]")
+				var/image/I = image(icon = overlay.icon, icon_state = "[overlay.icon_state]-[decal]")
 				I.appearance_flags |= RESET_COLOR
 				I.color = decals[decal]
-				ret.overlays.Add(I)
-	return ret
+				overlay.overlays += I
+	. = ..()
 
 /obj/item/modular_computer/pda/wrist/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user))

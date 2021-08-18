@@ -222,26 +222,25 @@ var/global/list/laser_wavelengths
 		var/mob/M = loc
 		M.update_inv_hands()
 
-/obj/item/gun/energy/capacitor/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
-	if(ret && (slot == BP_L_HAND || slot == BP_R_HAND || slot == slot_back_str))
-		var/image/I = image(icon, "[ret.icon_state]-wiring")
+/obj/item/gun/energy/capacitor/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && (slot == BP_L_HAND || slot == BP_R_HAND || slot == slot_back_str))
+		var/image/I = image(overlay.icon, "[overlay.icon_state]-wiring")
 		I.color = wiring_color
 		I.appearance_flags |= RESET_COLOR
-		ret.add_overlay(I)
+		overlay.add_overlay(I)
 		if(power_supply)
-			I = image(icon, "[ret.icon_state]-cell")
-			ret.add_overlay(I)
+			I = image(overlay.icon, "[overlay.icon_state]-cell")
+			overlay.add_overlay(I)
 		if(slot != slot_back_str)
 			for(var/i = 1 to length(capacitors))
 				var/obj/item/stock_parts/capacitor/capacitor = capacitors[i]
 				if(capacitor.charge > 0)
-					I = emissive_overlay(icon, "[ret.icon_state]-charging-[i]")
+					I = emissive_overlay(overlay.icon, "[overlay.icon_state]-charging-[i]")
 					I.alpha = Clamp(255 * (capacitor.charge/capacitor.max_charge), 0, 255)
 					I.color = selected_wavelength.color
 					I.appearance_flags |= RESET_COLOR
-					ret.add_overlay(I)
-	return ret
+					overlay.overlays += I
+	. = ..()
 
 /obj/item/gun/energy/capacitor/consume_next_projectile()
 

@@ -42,12 +42,11 @@
 		if(material.reflectiveness >= MAT_VALUE_SHINY && check_state_in_icon("[icon_state]_shine", icon))
 			add_overlay(mutable_appearance(icon, "[icon_state]_shine"), adjust_brightness(color, 20 + material.reflectiveness))
 
-/obj/item/sword/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
+/obj/item/sword/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	//Do not color scabbarded blades
-	if(ret && applies_material_colour && (slot == slot_back_str || slot == slot_belt_str))
-		ret.color = null
-	return ret
+	if(overlay && applies_material_colour && (slot == slot_back_str || slot == slot_belt_str))
+		overlay.color = null
+	. = ..()
 
 /obj/item/sword/wood
 	material = /decl/material/solid/wood

@@ -329,14 +329,11 @@
 	..()
 
 /mob/living/carbon/slip(slipped_on, stun_duration = 8)
-	if(!has_gravity())
-		return FALSE
-	if(buckled)
-		return FALSE
-	to_chat(src, SPAN_WARNING("You slipped on [slipped_on]!"))
-	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
-	SET_STATUS_MAX(src, STAT_WEAK, FLOOR(stun_duration/2))
-	return TRUE
+	if(has_gravity() && !buckled && !lying)
+		to_chat(src, SPAN_DANGER("You slipped on [slipped_on]!"))
+		playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
+		SET_STATUS_MAX(src, STAT_WEAK, stun_duration)
+		. = TRUE
 
 /mob/living/carbon/get_default_language()
 	. = ..()

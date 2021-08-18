@@ -64,11 +64,10 @@
 	else
 		icon_state = "[initial(icon_state)]"
 
-/obj/item/clothing/suit/storage/hooded/get_mob_overlay(mob/user_mob, slot, var/bodypart)
-	var/image/ret = ..()
-	if(ret && suittoggled)
-		ret.icon_state += "_t"
-	return ret
+/obj/item/clothing/suit/storage/hooded/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && suittoggled)
+		overlay.icon_state += "_t"
+	. = ..()
 
 /obj/item/clothing/suit/storage/hooded/wintercoat
 	name = "winter coat"

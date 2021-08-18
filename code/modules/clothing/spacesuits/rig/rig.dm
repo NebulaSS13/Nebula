@@ -567,13 +567,12 @@
 		wearer.update_inv_back()
 	return
 
-/obj/item/rig/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && slot == slot_back_str && !offline && equipment_overlay_icon && LAZYLEN(installed_modules))
+/obj/item/rig/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && slot == slot_back_str && !offline && equipment_overlay_icon && LAZYLEN(installed_modules))
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)
-				ret.overlays += image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]")
-	return ret
+				overlay.overlays += image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]")
+	. = ..()
 
 /obj/item/rig/get_req_access()
 	if(!security_check_enabled || !locked)

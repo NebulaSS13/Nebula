@@ -22,11 +22,10 @@
 		icon_state = "[icon_state]-on"
 	update_clothing_icon()
 
-/obj/item/clothing/head/headphones/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && headphones_on)
-		ret.icon_state = "[ret.icon_state]-on"
-	return ret
+/obj/item/clothing/head/headphones/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && headphones_on)
+		overlay.icon_state = "[overlay.icon_state]-on"
+	. = ..()
 
 /obj/item/clothing/head/headphones/verb/togglemusic()
 	set name = "Toggle Headphone Music"

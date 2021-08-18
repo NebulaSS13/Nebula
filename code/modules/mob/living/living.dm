@@ -614,10 +614,10 @@ default behaviour is:
 	return null
 
 /mob/living/proc/has_brain()
-	return 1
+	return TRUE
 
-/mob/living/proc/slip(var/slipped_on,stun_duration=8)
-	return 0
+/mob/living/proc/slip(var/slipped_on, stun_duration = 8)
+	return FALSE
 
 /mob/living/carbon/human/canUnEquip(obj/item/I)
 	if(!..())
