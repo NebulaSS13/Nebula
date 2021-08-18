@@ -16,7 +16,6 @@
 
 	if(!istype(kind))
 		CRASH("Invalid curtain kind supplied to set_curtain_kind on [type]: [kind || "NULL"]")
-		return
 
 	curtain_kind_path = kind.type
 	SetName("rolled [kind.name]")
@@ -90,7 +89,6 @@
 
 	if(!istype(kind))
 		CRASH("Invalid curtain kind supplied to set_curtain_kind on [type]: [kind || "NULL"]")
-		return
 
 	SetName(kind.name)
 	curtain_kind_path = kind.type
