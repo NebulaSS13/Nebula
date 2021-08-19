@@ -34,7 +34,7 @@
 	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	bodytype_restricted = list(BODYTYPE_VOX)
-	flags_inv = HIDEJUMPSUIT
+	flags_inv = (HIDEJUMPSUIT|HIDETAIL)
 
 /obj/item/clothing/suit/space/vox/Initialize()
 	. = ..()
@@ -43,10 +43,10 @@
 
 /obj/item/clothing/suit/space/vox/carapace
 	name = "alien carapace armour"
-	color = "#456363"
+	color = "#486e6e"
 	icon = 'mods/species/vox/icons/clothing/carapace_suit.dmi'
 	desc = "An armoured, segmented carapace with glowing purple lights. It looks pretty run-down."
-	var/lights_color = COLOR_CYAN_BLUE
+	var/lights_color = "#00ffff"
 
 /obj/item/clothing/suit/space/vox/carapace/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
 	if(overlay && lights_color && check_state_in_icon("[overlay.icon_state]-lights", overlay.icon))

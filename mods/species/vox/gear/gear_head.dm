@@ -34,8 +34,8 @@
 	name = "alien visor"
 	icon = 'mods/species/vox/icons/clothing/carapace_helmet.dmi'
 	desc = "A glowing visor. The light slowly pulses, and seems to follow you."
-	color = "#456363"
-	var/lights_color = COLOR_CYAN_BLUE
+	color = "#486e6e"
+	var/lights_color = "#00ffff"
 
 /obj/item/clothing/head/helmet/space/vox/carapace/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
 	if(overlay && lights_color && check_state_in_icon("[overlay.icon_state]-lights", overlay.icon))
