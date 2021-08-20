@@ -447,18 +447,24 @@ var/global/list/mob_icon_check_states = list(
 /datum/unit_test/mobs_icon_validation
 	name = "MOB ICONS template"
 	template = /datum/unit_test/mobs_icon_validation
+	var/success_text
+	var/failure_text
 
 /datum/unit_test/mobs_icon_validation/start_test()
-	return report_failures(get_failures())
-	
+	var/list/failures = get_failures()
+	if(length(failures))
+		fail("[failure_text]:\n[jointext(failures, "\n")]")
+	else
+		pass("[success_text]")
+	return 1
+
 /datum/unit_test/mobs_icon_validation/proc/get_failures()
 	. = list()
 
-/datum/unit_test/mobs_icon_validation/proc/report_failures(var/list/failures)
-	return 1
-
 /datum/unit_test/mobs_icon_validation/mobs_shall_have_appropriate_states
 	name = "MOB ICONS: Simple Animals Shall Have Appropriate States"
+	failure_text = "Some /mob/living subtypes had invalid or missing icon_states"
+	success_text = "All /mob/living subtypes had appropriate icon_states for their state flags."
 
 /datum/unit_test/mobs_icon_validation/mobs_shall_have_appropriate_states/get_failures()
 	. = ..()
@@ -467,38 +473,28 @@ var/global/list/mob_icon_check_states = list(
 		var/mobicon = initial(critter.icon)
 		if(!mobicon)
 			continue
-		var/list/failures_this_pass = mob_test_find_icon_failures(mobtype, mobicon, initial(critter.mob_icon_state_flags))
+		var/list/failures_this_pass = mob_test_find_icon_failures("[mobtype]", mobicon, initial(critter.mob_icon_state_flags))
 		if(length(failures_this_pass))
 			. += failures_this_pass
 
-/datum/unit_test/mobs_icon_validation/mobs_shall_have_appropriat/report_failures(var/list/failures)
-	if(length(failures))
-		fail("Some /mob/living subtypes had invalid or missing icon_states:\n[jointext(failures, "\n")].")
-	else
-		pass("All /mob/living subtypes had appropriate icon_states for their state flags.")
-	. = ..()
-
 /datum/unit_test/mobs_icon_validation/pai_icons_shall_have_appropriate_states
 	name = "MOB ICONS: PAI Icons Shall Have Appropriate States"
+	failure_text = "Some pAI icons had invalid or missing icon_states"
+	success_text = "All pAI icons had appropriate icon_states."
 
 /datum/unit_test/mobs_icon_validation/pai_icons_shall_have_appropriate_states/get_failures()
 	. = ..()
 	var/mob/living/silicon/pai/pai = /mob/living/silicon/pai
 	var/pai_flags = initial(pai.mob_icon_state_flags)
 	for(var/chassis in global.possible_chassis)
-		var/list/failures_this_pass = mob_test_find_icon_failures(pai, global.possible_chassis[chassis], pai_flags)
+		var/list/failures_this_pass = mob_test_find_icon_failures("[/mob/living/silicon/pai]", global.possible_chassis[chassis], pai_flags)
 		if(length(failures_this_pass))
 			. += failures_this_pass
 
-/datum/unit_test/mobs_icon_validation/pai_icons_shall_have_appropriate_states/report_failures(var/list/failures)
-	if(length(failures))
-		fail("Some pAI icons had invalid or missing icon_states:\n[jointext(failures, "\n")].")
-	else
-		pass("All pAI icons had appropriate icon_states.")
-	.  = ..()
-
 /datum/unit_test/mobs_icon_validation/robot_modules_shall_have_appropriate_states
 	name = "MOB ICONS: Robot Module Icons Shall Have Appropriate States"
+	failure_text = "Some robot modules had invalid or missing icon_states"
+	success_text = "All robot modules had appropriate icon_states."
 
 /datum/unit_test/mobs_icon_validation/robot_modules_shall_have_appropriate_states/get_failures()
 	. = ..()
@@ -510,10 +506,3 @@ var/global/list/mob_icon_check_states = list(
 			var/list/failures_this_pass = mob_test_find_icon_failures("[moduletype] ([sprite])", mod.module_sprites[sprite], bot_flags)
 			if(length(failures_this_pass))
 				. += failures_this_pass
-
-/datum/unit_test/mobs_icon_validation/robot_modules_shall_have_appropriate_states/report_failures(var/list/failures)
-	if(length(failures))
-		fail("Some robot modules had invalid or missing icon_states:\n[jointext(failures, "\n")].")
-	else
-		pass("All robot modules had appropriate icon_states.")
-	.  = ..()

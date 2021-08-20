@@ -13,9 +13,8 @@
 /mob/living/carbon/alien/diona
 	name = "diona nymph"
 	desc = "It's a little skittery critter. Chirp."
-	icon = 'mods/mobs/dionaea/icons/gestalt.dmi'
-	icon_state = "nymph"
-	item_state = "nymph"
+	icon = 'mods/mobs/dionaea/icons/nymph.dmi'
+	icon_state = ICON_STATE_WORLD
 	death_msg = "expires with a pitiful chirrup..."
 	health = 60
 	maxHealth = 60
@@ -42,15 +41,13 @@
 
 	z_flags = ZMM_MANGLE_PLANES
 
+	mob_icon_state_flags = (MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_REST_STATE)
+
 	var/obj/item/holding_item
 	var/mob/living/carbon/alien/diona/next_nymph
 	var/mob/living/carbon/alien/diona/previous_nymph
-	var/tmp/image/flower
-	var/tmp/image/eyes
+	var/tmp/flower_color
 	var/tmp/last_glow
-
-/mob/living/carbon/alien/diona/get_holder_icon()
-	return 'mods/mobs/dionaea/icons/nymph_holder.dmi'
 
 /mob/living/carbon/alien/diona/get_jump_distance()
 	return 3
@@ -77,17 +74,10 @@
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	add_language(/decl/language/diona)
 	add_language(/decl/language/human/common, 0)
-
 	set_extension(src, /datum/extension/hattable/diona_nymph, list(0, -8))
 
-	eyes = emissive_overlay(icon = icon, icon_state = "eyes_[icon_state]")
-
 	if(prob(flower_chance))
-		flower = image(icon = icon, icon_state = "flower_back")
-		var/image/I = image(icon = icon, icon_state = "flower_fore")
-		I.color = get_random_colour(1)
-		flower.overlays += I
-
+		flower_color = get_random_colour(1)
 	update_icon()
 
 	. = ..(mapload)
