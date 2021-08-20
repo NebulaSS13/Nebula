@@ -3,7 +3,7 @@
 	see_invisible = SEE_INVISIBLE_LIVING
 	transform_animate_time = ANIM_LYING_TIME
 
-	var/mob_icon_state_flags = (MOB_ICON_NO_LIVING_STATE | MOB_ICON_NO_DEAD_STATE | MOB_ICON_NO_REST_STATE | MOB_ICON_NO_SLEEP_STATE | MOB_ICON_NO_GIB_STATE | MOB_ICON_NO_EYES_STATE)
+	var/mob_icon_state_flags = MOB_ICON_SKIP_ALL
 
 	//Health and life related vars
 	var/maxHealth = 100 //Maximum health that should be possible.

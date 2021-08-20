@@ -19,6 +19,7 @@
 	bone_amount =   0
 	skin_material = null
 	skin_amount =   0
+	mob_icon_state_flags = (MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE|MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_EYES_STATE|MOB_ICON_NO_DEAD_STATE)
 
 /obj/item/natural_weapon/rotating_blade
 	name = "rotating blades"

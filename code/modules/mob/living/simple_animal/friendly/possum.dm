@@ -25,6 +25,7 @@
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 	holder_type = /obj/item/holder
+	mob_icon_state_flags = (MOB_ICON_NO_REST_STATE|MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_EYES_STATE)
 
 	var/is_angry = FALSE 
 

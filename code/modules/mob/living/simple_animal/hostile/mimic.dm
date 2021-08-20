@@ -22,6 +22,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 	icon =  'icons/obj/closets/bases/crate.dmi'
 	color = COLOR_STEEL
 	icon_state = "crate"
+	mob_icon_state_flags = MOB_ICON_SKIP_ALL
 
 	meat_type = /obj/item/chems/food/fish
 	speed = 4

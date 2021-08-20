@@ -25,7 +25,7 @@
 /mob/living/simple_animal/hostile/lar_maria
 	name = "Lar Maria hostile mob"
 	desc = "You shouldn't see me!"
-	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_test_subject.dmi'
+	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_guard_light.dmi'
 	unsuitable_atmos_damage = 15
 	environment_smash = 1
 	faction = "lar_maria"
@@ -58,6 +58,8 @@
 	maxHealth = 40
 	health = 40
 	corpse = /obj/effect/landmark/corpse/lar_maria/test_subject
+	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_test_subject.dmi'
+	mob_icon_state_flags = (MOB_ICON_NO_EYES_STATE | MOB_ICON_NO_REST_STATE | MOB_ICON_NO_SLEEP_STATE | MOB_ICON_NO_GIB_STATE)
 
 /obj/effect/landmark/corpse/lar_maria/test_subject
 	name = "dead test subject"
@@ -88,7 +90,6 @@
 /mob/living/simple_animal/hostile/lar_maria/guard//angry guards armed with batons and shotguns. Still bite
 	name = "security"
 	desc = "Guard dressed at Zeng-Hu Pharmaceuticals uniform."
-	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_guard_light.dmi'
 	maxHealth = 60
 	health = 60
 	natural_weapon = /obj/item/baton

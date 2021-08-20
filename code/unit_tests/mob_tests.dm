@@ -264,7 +264,7 @@ var/global/default_mobloc = null
 // ==============================================================================
 
 /datum/unit_test/robot_module_icons
-	name = "MOB: Robot module icon check"
+	name = "MOB: Robot Modules Shall Have UI Icons"
 	var/icon_file = 'icons/mob/screen1_robot.dmi'
 
 /datum/unit_test/robot_module_icons/start_test()
@@ -440,9 +440,9 @@ var/global/list/mob_icon_check_states = list(
 		var/should_not_have_state = (mobflags & global.mob_icon_check_states[mobstate])
 		var/has_state = check_state_in_icon(mobstate, mobicon)
 		if(has_state && should_not_have_state)
-			. += "[mobtype] - mob with skip flag for '[mobstate]' has state in icon '[mobicon]"
+			. += "[mobtype] - mob with skip flag for '[mobstate]' has state in icon '[mobicon]'"
 		else if(!has_state && !should_not_have_state)
-			. += "[mobtype] - mob without skip flag for '[mobstate]' has no state in icon '[mobicon]"
+			. += "[mobtype] - mob without skip flag for '[mobstate]' has no state in icon '[mobicon]'"
 
 /datum/unit_test/mobs_icon_validation
 	name = "MOB ICONS template"
