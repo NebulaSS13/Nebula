@@ -38,6 +38,8 @@
 	skin_amount =   0
 
 	z_flags = ZMM_MANGLE_PLANES
+	glowing_eyes = TRUE
+	mob_icon_state_flags = (MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE)
 
 	var/nullblock = 0
 	var/list/construct_spells = list()
@@ -61,10 +63,6 @@
 	..(null,"collapses in a shattered heap.","The bonds tying you to this mortal plane have been severed.")
 	ghostize()
 	qdel(src)
-
-/mob/living/simple_animal/construct/on_update_icon()
-	..()
-	add_overlay(emissive_overlay(icon,"glow-[icon_state]"))
 
 /mob/living/simple_animal/construct/attack_animal(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))

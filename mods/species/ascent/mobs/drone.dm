@@ -3,8 +3,8 @@
 	display_name = "Ascent"
 	upgrade_locked = TRUE
 	hide_on_manifest = TRUE
-	sprites = list(
-		"Drone" = "drone-ascent"
+	module_sprites = list(
+		"Drone" = 'mods/species/ascent/icons/drone.dmi'
 	)
 	// The duplicate clustertools in this list are so that they can set up to
 	// hack doors, windows etc. without having to constantly cycle through tools.

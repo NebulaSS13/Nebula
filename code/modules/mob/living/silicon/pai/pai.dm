@@ -22,7 +22,7 @@ var/global/list/possible_say_verbs = list(
 /mob/living/silicon/pai
 	name = "pAI"
 	icon = 'icons/mob/robots/pai/pai_drone.dmi'
-	icon_state = "drone"
+	icon_state = ICON_STATE_WORLD
 	mob_sort_value = 3
 	hud_type = /datum/hud/pai
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
@@ -41,6 +41,8 @@ var/global/list/possible_say_verbs = list(
 		/obj/item/stock_parts/computer/hard_drive/silicon,
 		/obj/item/stock_parts/computer/network_card
 	)
+
+	mob_icon_state_flags = (MOB_ICON_NO_EYES_STATE|MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE)
 
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null

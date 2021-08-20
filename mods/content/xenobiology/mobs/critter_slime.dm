@@ -8,7 +8,7 @@
 	response_harm = "stamps on"
 	emote_see = list("jiggles", "bounces in place")
 	gene_damage = -1
-	mob_icon_state_flags = (SA_NO_LIVING_STATE|SA_NO_DEAD_STATE|SA_NO_REST_STATE|SA_NO_SLEEP_STATE|SA_NO_GIB_STATE) // opt out of simple animal icons, we're a fake slime
+	mob_icon_state_flags = (MOB_ICON_NO_EYES_STATE|MOB_ICON_NO_REST_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_GIB_STATE)
 	var/slime_type = /decl/slime_colour/grey
 
 /mob/living/simple_animal/slime/Initialize(var/ml, var/_stype = /decl/slime_colour/grey)

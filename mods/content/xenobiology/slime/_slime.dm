@@ -22,7 +22,7 @@
 	bone_amount = 0
 	ai = /datum/ai/slime
 	hud_type = /datum/hud/slime
-	mob_icon_state_flags = (SA_NO_REST_STATE | SA_NO_SLEEP_STATE | SA_NO_GIB_STATE)
+	mob_icon_state_flags = (MOB_ICON_NO_EYES_STATE | MOB_ICON_NO_REST_STATE | MOB_ICON_NO_SLEEP_STATE | MOB_ICON_NO_GIB_STATE)
 
 	var/is_adult = FALSE
 	var/mutation_chance = 30 // Chance of mutating, should be between 25 and 35

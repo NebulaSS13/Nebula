@@ -15,7 +15,7 @@
 	mob_swap_flags = ROBOT|MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = ~HEAVY //trundle trundle
 	skillset = /datum/skillset/silicon/robot
-	mob_icon_state_flags = (SA_NO_DEAD_STATE | SA_NO_REST_STATE | SA_NO_SLEEP_STATE | SA_NO_GIB_STATE)
+	mob_icon_state_flags = (MOB_ICON_NO_DEAD_STATE | MOB_ICON_NO_REST_STATE | MOB_ICON_NO_SLEEP_STATE | MOB_ICON_NO_GIB_STATE)
 
 	var/panel_icon = 'icons/mob/robots/_panels.dmi'
 
@@ -706,7 +706,7 @@
 /mob/living/silicon/robot/get_req_access()
 	return req_access
 
-/mob/living/silicon/robot/proc/get_eye_overlay()
+/mob/living/silicon/robot/get_eye_overlay()
 	var/eye_icon_state = "[icon_state]-eyes"
 	if(check_state_in_icon(eye_icon_state, icon))
 		return emissive_overlay(icon, eye_icon_state)

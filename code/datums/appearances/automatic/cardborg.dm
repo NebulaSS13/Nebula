@@ -60,33 +60,39 @@
 	backpack_type = /obj/item/storage/backpack/satchel/grey
 
 /decl/cardborg_appearance/engineering
+	icon = 'icons/mob/robots/robot_engineer_old.dmi'
 	backpack_type = /obj/item/storage/backpack/industrial
 
 /decl/cardborg_appearance/engineering/satchel
 	backpack_type = /obj/item/storage/backpack/satchel/eng
 
 /decl/cardborg_appearance/medical
+	icon = 'icons/mob/robots/robot_medical_old.dmi'
 	backpack_type = /obj/item/storage/backpack/medic
 
 /decl/cardborg_appearance/medical/satchel
 	backpack_type = /obj/item/storage/backpack/satchel/med
 
 /decl/cardborg_appearance/science
+	icon = 'icons/mob/robots/robot_droid_science.dmi'
 	backpack_type = /obj/item/storage/backpack/toxins
 
 /decl/cardborg_appearance/security
+	icon = 'icons/mob/robots/robot_security_old.dmi'
 	backpack_type = /obj/item/storage/backpack/security
 
 /decl/cardborg_appearance/security/satchel
 	backpack_type = /obj/item/storage/backpack/satchel/sec
 
 /decl/cardborg_appearance/centcom
+	icon = 'icons/mob/robots/robot_centcomm.dmi'
 	backpack_type = /obj/item/storage/backpack/captain
 
 /decl/cardborg_appearance/centcom/satchel
 	backpack_type = /obj/item/storage/backpack/satchel/cap
 
 /decl/cardborg_appearance/syndicate
+	icon = 'icons/mob/robots/robot_combat.dmi'
 	backpack_type = /obj/item/storage/backpack/dufflebag/syndie
 
 /decl/cardborg_appearance/syndicate/med

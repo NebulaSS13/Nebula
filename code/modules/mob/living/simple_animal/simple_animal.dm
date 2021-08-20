@@ -18,6 +18,8 @@
 
 	icon_state = ICON_STATE_WORLD
 
+	mob_icon_state_flags = (MOB_ICON_NO_EYES_STATE|MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE)
+
 	var/gene_damage = 0 // Set to -1 to disable gene damage for the mob.
 	var/show_stat_health = 1	//does the percentage health show in the stat panel for the mob
 
@@ -88,6 +90,7 @@
 	var/return_damage_max
 
 	var/performing_delayed_life_action = FALSE
+	var/glowing_eyes = FALSE
 
 /mob/living/simple_animal/Initialize()
 	. = ..()
@@ -101,17 +104,32 @@
 	..()
 
 	icon_state = ICON_STATE_WORLD
-	if(stat == DEAD && !(mob_icon_state_flags & SA_NO_DEAD_STATE))
+	if(stat == DEAD && !(mob_icon_state_flags & MOB_ICON_NO_DEAD_STATE))
 		icon_state += "-dead"
-	else if(stat == UNCONSCIOUS && !(mob_icon_state_flags & SA_NO_SLEEP_STATE))
+	else if(stat == UNCONSCIOUS && !(mob_icon_state_flags & MOB_ICON_NO_SLEEP_STATE))
 		icon_state += "-sleeping"
-	else if(resting && !(mob_icon_state_flags & SA_NO_REST_STATE))
+	else if(resting && !(mob_icon_state_flags & MOB_ICON_NO_REST_STATE))
 		icon_state += "-resting"
+
+	z_flags &= ~ZMM_MANGLE_PLANES
+	if(stat == CONSCIOUS && !(mob_icon_state_flags & MOB_ICON_NO_EYES_STATE))
+		var/image/I = get_eye_overlay()
+		if(I)
+			if(glowing_eyes)
+				z_flags |= ZMM_MANGLE_PLANES
+			add_overlay(I)
 
 	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
 	var/image/I = hattable?.get_hat_overlay(src)
 	if(I)
 		add_overlay(I)
+
+/mob/living/simple_animal/get_eye_overlay()
+	var/eye_icon_state = "[icon_state]-eyes"
+	if(check_state_in_icon(eye_icon_state, icon))
+		var/image/I = (glowing_eyes ? emissive_overlay(icon, eye_icon_state) : image(icon, eye_icon_state))
+		I.appearance_flags = RESET_COLOR
+		return I
 
 /mob/living/simple_animal/Destroy()
 	if(istype(natural_weapon))
@@ -245,7 +263,7 @@
 		purge -= 1
 
 /mob/living/simple_animal/gib()
-	..(((mob_icon_state_flags & SA_NO_GIB_STATE) ? null : "world-gib"), TRUE)
+	..(((mob_icon_state_flags & MOB_ICON_NO_GIB_STATE) ? null : "world-gib"), TRUE)
 
 /mob/living/simple_animal/proc/visible_emote(var/act_desc)
 	custom_emote(1, act_desc)

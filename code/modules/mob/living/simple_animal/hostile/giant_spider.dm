@@ -41,6 +41,10 @@
 	skin_material = /decl/material/solid/skin/insect
 	skin_amount =   5
 
+	glowing_eyes = TRUE
+
+	mob_icon_state_flags = (MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE)
+
 	var/poison_per_bite = 6
 	var/poison_type = /decl/material/liquid/venom
 	var/busy = 0
@@ -54,7 +58,6 @@
 //guards - less venomous, tanky, slower, prioritises protecting nurses
 /mob/living/simple_animal/hostile/giant_spider/guard
 	desc = "A monstrously huge brown spider with shimmering eyes."
-	icon = 'icons/mob/simple_animal/spider.dmi'
 	meat_amount = 4
 	maxHealth = 200
 	health = 200
@@ -143,19 +146,6 @@
 	health = maxHealth
 	eye_colour = pick(allowed_eye_colours)
 	update_icon()
-
-/mob/living/simple_animal/hostile/giant_spider/on_update_icon()
-	..()
-	var/image/I
-	if(stat == DEAD)
-		z_flags &= ~ZMM_MANGLE_PLANES
-		I = image(icon, "[icon_state]-eyes")
-	else
-		z_flags |= ZMM_MANGLE_PLANES
-		I = emissive_overlay(icon, "[icon_state]-eyes")
-	I.color = eye_colour
-	I.appearance_flags = RESET_COLOR
-	add_overlay(I)
 
 /mob/living/simple_animal/hostile/giant_spider/FindTarget()
 	. = ..()
