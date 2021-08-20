@@ -52,6 +52,12 @@
 	var/allowed_eye_colours = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
 	var/hunt_chance = 1 //percentage chance the mob will run to a random nearby tile
 
+/mob/living/simple_animal/hostile/giant_spider/get_eye_overlay()
+	var/image/ret = ..()
+	if(ret && eye_colour)
+		ret.color = eye_colour
+	return ret
+
 /mob/living/simple_animal/hostile/giant_spider/can_do_maneuver(var/decl/maneuver/maneuver, var/silent = FALSE)
 	. = ..() && can_act()
 
