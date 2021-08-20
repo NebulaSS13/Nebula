@@ -41,7 +41,7 @@
 
 	z_flags = ZMM_MANGLE_PLANES
 
-	mob_icon_state_flags = (MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_REST_STATE)
+	mob_icon_state_flags = (MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_REST_STATE) 
 
 	var/obj/item/holding_item
 	var/mob/living/carbon/alien/diona/next_nymph

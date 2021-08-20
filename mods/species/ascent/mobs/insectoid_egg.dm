@@ -14,7 +14,7 @@ var/global/default_gyne
 	desc = "A semi-translucent alien egg."
 	health = 100
 	maxhealth = 100
-	icon = 'mods/species/ascent/icons/species/nymph.dmi'
+	icon = 'mods/species/ascent/icons/egg.dmi'
 	icon_state = "egg"
 
 	var/maturity_rate = 1 MINUTES		// How often to do a gestation tick.
