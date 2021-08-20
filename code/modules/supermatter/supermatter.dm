@@ -26,9 +26,31 @@
 
 #define LIGHT_POWER_CALC (max(power / 50, 1))
 
+// Keeps Accent sounds from layering, increase or decrease as preferred.
+#define SUPERMATTER_ACCENT_SOUND_COOLDOWN 2 SECONDS
+
 var/global/list/supermatter_final_thoughts = list(
 	"Oh, fuck.",
 	"That was not a wise decision."
+)
+
+var/global/list/supermatter_calm_accent_sounds = list(
+	'sound/machines/sm/accent/normal/1.ogg',
+	'sound/machines/sm/accent/normal/2.ogg',
+	'sound/machines/sm/accent/normal/3.ogg',
+	'sound/machines/sm/accent/normal/4.ogg',
+	'sound/machines/sm/accent/normal/5.ogg'
+
+)
+
+var/global/list/supermatter_delam_accent_sounds = list(
+	'sound/machines/sm/accent/delam/1.ogg',
+	'sound/machines/sm/accent/delam/2.ogg',
+	'sound/machines/sm/accent/delam/3.ogg',
+	'sound/machines/sm/accent/delam/4.ogg',
+	'sound/machines/sm/accent/delam/5.ogg',
+
+	
 )
 
 // Returns a truthy value that is also used for power generation by the supermatter core itself.
@@ -123,9 +145,10 @@ var/global/list/supermatter_final_thoughts = list(
 	var/emergency_alert = "CRYSTAL DELAMINATION IMMINENT."
 	var/explosion_point = 1000
 
-	light_color = "#8a8a00"
-	var/warning_color = "#b8b800"
-	var/emergency_color = "#d9d900"
+	light_color = "#927a10"
+	var/base_color = "#927a10"
+	var/warning_color = "#c78c20"
+	var/emergency_color = "#ffd04f"
 
 	var/grav_pulling = 0
 	// Time in ticks between delamination ('exploding') and exploding (as in the actual boom)
@@ -163,6 +186,10 @@ var/global/list/supermatter_final_thoughts = list(
 	var/aw_delam = FALSE
 	var/aw_EPR = FALSE
 
+	var/last_accent_sound = 0
+
+	var/datum/composite_sound/supermatter/soundloop
+
 	var/list/threshholds = list( // List of lists defining the amber/red labeling threshholds in readouts. Numbers are minminum red and amber and maximum amber and red, in that order
 		list("name" = SUPERMATTER_DATA_EER,         "min_h" = -1, "min_l" = -1,  "max_l" = 150,  "max_h" = 300),
 		list("name" = SUPERMATTER_DATA_TEMPERATURE, "min_h" = -1, "min_l" = -1,  "max_l" = 4000, "max_h" = 5000),
@@ -173,7 +200,12 @@ var/global/list/supermatter_final_thoughts = list(
 /obj/machinery/power/supermatter/Initialize()
 	. = ..()
 	uid = gl_uid++
+	soundloop = new(list(src), TRUE)
 	update_icon()
+
+/obj/machinery/power/supermatter/Destroy()
+	. = ..()
+	QDEL_NULL(soundloop)
 
 /obj/machinery/power/supermatter/on_update_icon()
 	. = ..()
@@ -406,9 +438,32 @@ var/global/list/supermatter_final_thoughts = list(
 		if(!isspaceturf(L) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && (L.z in global.using_map.station_levels))
 			announce_warning()
 	else
-		shift_light(4,initial(light_color))
+		shift_light(4,base_color)
 	if(grav_pulling)
 		supermatter_pull(src)
+
+	// Vary volume by power produced.
+	if(power)
+		// Volume will be 1 at no power, ~12.5 at ENERGY_NITROGEN, and 20+ at ENERGY_PHORON.
+		// Capped to 20 volume since higher volumes get annoying and it sounds worse.
+		// Formula previously was min(round(power/10)+1, 20)
+		soundloop.volume = clamp((50 + (power / 50)), 50, 100)
+
+	// Swap loops between calm and delamming.
+	if(damage >= 300)
+		soundloop.mid_sounds = list('sound/machines/sm/loops/delamming.ogg' = 1)
+	else
+		soundloop.mid_sounds = list('sound/machines/sm/loops/calm.ogg' = 1)
+	
+	// Play Delam/Neutral sounds at rate determined by power and damage.
+	if(last_accent_sound < world.time && prob(20))
+		var/aggression = min(((damage / 800) * (power / 2500)), 1.0) * 100
+		if(damage >= 300)
+			playsound(src, pick(supermatter_delam_accent_sounds), max(50, aggression), FALSE, 10)
+		else
+			playsound(src, pick(supermatter_calm_accent_sounds), max(50, aggression), FALSE, 10)
+		var/next_sound = round((100 - aggression) * 5)
+		last_accent_sound = world.time + max(SUPERMATTER_ACCENT_SOUND_COOLDOWN, next_sound)
 
 	//Ok, get the air from the turf
 	var/datum/gas_mixture/removed = null
@@ -476,6 +531,18 @@ var/global/list/supermatter_final_thoughts = list(
 			continue
 		var/effect = max(0, min(200, power * config_hallucination_power * sqrt( 1 / max(1,get_dist(subject, src)))) )
 		subject.adjust_hallucination(effect, 0.25 * effect)
+
+	color = color_contrast(Interpolate(0, 50, Clamp( (damage - emergency_point) / (explosion_point - emergency_point),0,1)))
+
+	if (damage >= emergency_point && !filters.len)
+		add_filter("rays",1,list(type="rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
+		animate_filter("rays", list(time = 10 SECONDS, offset = 10, loop=-1))
+		animate(time = 10 SECONDS, loop=-1)
+
+		animate_filter("rays",list(time = 2 SECONDS, size = 80, loop=-1, flags = ANIMATION_PARALLEL))
+		animate(time = 2 SECONDS, size = 10, loop=-1, flags = ANIMATION_PARALLEL)
+	else if (damage < emergency_point)
+		remove_filter("rays")
 
 
 	SSradiation.radiate(src, power * radiation_release_modifier) //Better close those shutters!

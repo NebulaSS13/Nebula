@@ -3177,6 +3177,7 @@
 #include "code\modules\submaps\submap_join.dm"
 #include "code\modules\submaps\submap_landmark.dm"
 #include "code\modules\supermatter\setup_supermatter.dm"
+#include "code\modules\supermatter\sm_looping_sound.dm"
 #include "code\modules\supermatter\supermatter.dm"
 #include "code\modules\surgery\__surgery_setup.dm"
 #include "code\modules\surgery\_surgery.dm"
