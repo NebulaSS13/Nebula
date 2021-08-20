@@ -15,7 +15,7 @@
 	var/tag_south = ATM_NONE
 	var/tag_east = ATM_NONE
 	var/tag_west = ATM_NONE
-	var/tag_filter_gas_north //These are GAS DECLS. /decl/material/gas.
+	var/tag_filter_gas_north //These are GAS DECLS IDs. /decl/material/gas.
 	var/tag_filter_gas_south
 	var/tag_filter_gas_east
 	var/tag_filter_gas_west
@@ -51,24 +51,49 @@
 			if(NORTH)
 				new_port.mode = tag_north
 				if(new_port.mode == ATM_FILTER)
-					new_port.filtering = tag_filter_gas_north
+					new_port.filtering = decls_repository.get_decl_by_id(tag_filter_gas_north)
+				if(tag_north >= 3 && tag_north < 8)
+					new_port.filtering = handle_legacy_gas_filtering(tag_north)
+					new_port.mode = ATM_FILTER
 			if(SOUTH)
 				new_port.mode = tag_south
 				if(new_port.mode == ATM_FILTER)
-					new_port.filtering = tag_filter_gas_south
+					new_port.filtering = decls_repository.get_decl_by_id(tag_filter_gas_south)
+				if(tag_south >= 3 && tag_south < 8)
+					new_port.filtering = handle_legacy_gas_filtering(tag_south)
+					new_port.mode = ATM_FILTER
 			if(EAST)
 				new_port.mode = tag_east
 				if(new_port.mode == ATM_FILTER)
-					new_port.filtering = tag_filter_gas_east
+					new_port.filtering = decls_repository.get_decl_by_id(tag_filter_gas_east)
+				if(tag_east >= 3 && tag_east < 8)
+					new_port.filtering = handle_legacy_gas_filtering(tag_east)
+					new_port.mode = ATM_FILTER
 			if(WEST)
 				new_port.mode = tag_west
 				if(new_port.mode == ATM_FILTER)
-					new_port.filtering = tag_filter_gas_west
+					new_port.filtering = decls_repository.get_decl_by_id(tag_filter_gas_west)
+				if(tag_west >= 3 && tag_west < 8)
+					new_port.filtering = handle_legacy_gas_filtering(tag_west)
+					new_port.mode = ATM_FILTER
 		ports += new_port
 
 	. = ..()
 
 	build_icons()
+
+/obj/machinery/atmospherics/omni/proc/handle_legacy_gas_filtering(var/input)
+	switch(input)
+		if(3)
+			. = /decl/material/gas/oxygen
+		if(4)
+			. = /decl/material/gas/nitrogen
+		if(5)
+			. = /decl/material/gas/carbon_dioxide
+		if(6)
+			. = /decl/material/gas/nitrous_oxide
+		if(7)
+			. = /decl/material/gas/hydrogen
 
 /obj/machinery/atmospherics/omni/get_initialize_directions()
 	. = 0

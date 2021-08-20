@@ -4,7 +4,7 @@
 #define ATM_NONE		0
 #define ATM_INPUT		1
 #define ATM_OUTPUT		2
-#define ATM_FILTER		3
+#define ATM_FILTER		8 //as to not interfer with legacy handling.
 
 //--------------------------------------------
 // Omni port datum
