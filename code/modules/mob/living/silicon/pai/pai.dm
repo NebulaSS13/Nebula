@@ -19,6 +19,15 @@ var/global/list/possible_say_verbs = list(
 	"Corvid" =  list("caws", "caws loudly", "whistles")
 )
 
+var/global/list/pai_holder_icons_by_chassis = list(
+	"drone"    = 'icons/clothing/holders/holder_pai_repairbot.dmi',
+	"cat"      = 'icons/clothing/holders/holder_pai_cat.dmi',
+	"mouse"    = 'icons/clothing/holders/holder_pai_mouse.dmi',
+	"monkey"   = 'icons/clothing/holders/holder_pai_monkey.dmi',
+	"rabbit"   = 'icons/clothing/holders/holder_pai_rabbit.dmi',
+	"crow"     = 'icons/clothing/holders/holder_pai_crow.dmi'
+)
+
 /mob/living/silicon/pai
 	name = "pAI"
 	icon = 'icons/mob/pai.dmi'
@@ -90,6 +99,9 @@ var/global/list/possible_say_verbs = list(
 	var/light_on = FALSE
 
 	light_wedge = 45
+
+/mob/living/silicon/pai/get_holder_icon()
+	return chassis ? global.pai_holder_icons_by_chassis[chassis] : null
 
 /mob/living/silicon/pai/Initialize()
 	set_extension(src, /datum/extension/base_icon_state, icon_state)

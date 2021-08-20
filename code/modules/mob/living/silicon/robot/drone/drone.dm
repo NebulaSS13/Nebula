@@ -68,6 +68,9 @@
 
 	events_repository.register(/decl/observ/moved, src, src, /mob/living/silicon/robot/drone/proc/on_moved)
 
+/mob/living/silicon/robot/drone/get_holder_icon()
+	return 'icons/clothing/holders/holder_repairbot.dmi'
+
 /mob/living/silicon/robot/drone/Destroy()
 	events_repository.unregister(/decl/observ/moved, src, src, /mob/living/silicon/robot/drone/proc/on_moved)
 	. = ..()
@@ -123,6 +126,9 @@
 	integrated_light_range = 5
 	hat_x = 1
 	hat_y = -12
+
+/mob/living/silicon/robot/drone/construction/get_holder_icon()
+	return 'icons/clothing/holders/holder_constructiondrone.dmi'
 
 /mob/living/silicon/robot/drone/init()
 	additional_law_channels["Drone"] = ":d"

@@ -19,6 +19,7 @@
 	of Hyperion. Neo-avian naming conventions tend to be a chosen name followed by the species of the person, followed by the location they were hatched."
 
 	age_descriptor = /datum/appearance_descriptor/age/neoavian
+	holder_icon = 'mods/species/neoavians/icons/holder.dmi'
 
 	meat_type = /obj/item/chems/food/meat/chicken
 
@@ -82,6 +83,9 @@
 	if(!pref.body_markings["Tailfeathers (Groin)"])
 		pref.body_markings["Tailfeathers (Groin)"] = "#252525"
 	pref.skin_colour = "#252525"
+
+/decl/species/neoavian/get_holder_color(var/mob/living/carbon/human/H)
+	return H.skin_colour
 
 /obj/item/organ/internal/eyes/avian
 	eye_icon = 'mods/species/neoavians/icons/eyes.dmi'

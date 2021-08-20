@@ -179,3 +179,5 @@
 	var/list/progressbars = null //for stacking do_after bars
 
 	var/datum/ai/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs.
+
+	var/holder_type

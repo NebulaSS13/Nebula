@@ -49,6 +49,9 @@
 	var/tmp/image/eyes
 	var/tmp/last_glow
 
+/mob/living/carbon/alien/diona/get_holder_icon()
+	return 'mods/mobs/dionaea/icons/nymph_holder.dmi'
+
 /mob/living/carbon/alien/diona/get_jump_distance()
 	return 3
 
