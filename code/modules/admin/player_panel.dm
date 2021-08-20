@@ -285,13 +285,15 @@
 		dat += "Current Game Mode: <B>[SSticker.mode.name]</B><BR>"
 		dat += "Round Duration: <B>[roundduration2text()]</B><BR>"
 		dat += "<B>Evacuation</B><BR>"
-		if (SSevac.evacuation_controller.is_idle())
-			dat += "<a href='?src=\ref[src];call_shuttle=1'>Call Evacuation</a><br>"
-		else
-			var/timeleft = SSevac.evacuation_controller.get_eta()
-			if (SSevac.evacuation_controller.waiting_to_leave())
-				dat += "ETA: [(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]<BR>"
-				dat += "<a href='?src=\ref[src];call_shuttle=2'>Send Back</a><br>"
+
+		if(SSevac.evacuation_controller)
+			if (SSevac.evacuation_controller.is_idle())
+				dat += "<a href='?src=\ref[src];call_shuttle=1'>Call Evacuation</a><br>"
+			else
+				var/timeleft = SSevac.evacuation_controller.get_eta()
+				if (SSevac.evacuation_controller.waiting_to_leave())
+					dat += "ETA: [(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]<BR>"
+					dat += "<a href='?src=\ref[src];call_shuttle=2'>Send Back</a><br>"
 
 		dat += "<a href='?src=\ref[src];delay_round_end=1'>[SSticker.delay_end ? "End Round Normally" : "Delay Round End"]</a><br>"
 		dat += "<hr>"

@@ -121,7 +121,7 @@
 	return ..()
 
 /obj/machinery/power/fusion_core/proc/jumpstart(var/field_temperature)
-	field_strength = 501 // Generally a good size.
+	field_strength = 200 // 3x3, generally a good size.
 	Startup()
 	if(!owned_field)
 		return FALSE

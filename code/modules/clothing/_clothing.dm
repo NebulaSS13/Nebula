@@ -27,7 +27,7 @@
 		update_icon()
 
 // Sort of a placeholder for proper tailoring.
-#define RAG_COUNT(X) ceil((LAZYACCESS(X.matter, /decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
+#define RAG_COUNT(X) CEILING((LAZYACCESS(X.matter, /decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
 
 /obj/item/clothing/attackby(obj/item/I, mob/user)
 	var/rags = RAG_COUNT(src)
@@ -63,36 +63,31 @@
 /obj/item/clothing/proc/needs_vision_update()
 	return flash_protection || tint
 
-/obj/item/clothing/get_mob_overlay(mob/living/user_mob, slot, bodypart)
-	var/image/ret = ..()
+/obj/item/clothing/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 
-	if(ret)
-		if(slot in user_mob?.held_item_slots)
-			return ret
+	if(overlay)
 
-		if(ishuman(user_mob))
-			var/mob/living/carbon/human/user_human = user_mob
-			if(blood_DNA)
-				var/blood_mask = user_human.bodytype.get_blood_mask(user_human)
-				if(blood_mask)
-					var/image/bloodsies = overlay_image(blood_mask, blood_overlay_type, blood_color, RESET_COLOR)
-					bloodsies.appearance_flags |= NO_CLIENT_COLOR
-					ret.overlays += bloodsies
-		if(markings_icon && markings_color)
-			ret.overlays += mutable_appearance(ret.icon, markings_icon, markings_color)
-	return ret
+		if(length(accessories))
+			for(var/obj/item/clothing/accessory/A in accessories)
+				if(A.should_overlay())
+					overlay.overlays += A.get_mob_overlay(user_mob, slot)
 
-/obj/item/clothing/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
-	var/image/ret = ..()
-	if(ret && length(accessories))
-		for(var/obj/item/clothing/accessory/A in accessories)
-			if(A.should_overlay())
-				ret.overlays += A.get_mob_overlay(user_mob, slot)
+		if(markings_icon && markings_color && check_state_in_icon("[overlay.icon_state][markings_icon]", overlay.icon))
+			overlay.overlays += mutable_appearance(overlay.icon, "[overlay.icon_state][markings_icon]", markings_color)
 
-	if(markings_icon && markings_color && check_state_in_icon("[ret.icon_state][markings_icon]", ret.icon))
-		ret.overlays += mutable_appearance(ret.icon, "[ret.icon_state][markings_icon]", markings_color)
-	
-	return ret
+		if(!(slot in user_mob?.held_item_slots))
+			if(ishuman(user_mob))
+				var/mob/living/carbon/human/user_human = user_mob
+				if(blood_DNA)
+					var/blood_mask = user_human.bodytype.get_blood_mask(user_human)
+					if(blood_mask)
+						var/image/bloodsies = overlay_image(blood_mask, blood_overlay_type, blood_color, RESET_COLOR)
+						bloodsies.appearance_flags |= NO_CLIENT_COLOR
+						overlay.overlays += bloodsies
+			if(markings_icon && markings_color)
+				overlay.overlays += mutable_appearance(overlay.icon, markings_icon, markings_color)
+
+	. = ..()
 
 /obj/item/clothing/on_update_icon()
 	..()
@@ -165,13 +160,15 @@
 	if(istype(armor_datum) && LAZYLEN(armor_datum.get_visible_damage()))
 		to_chat(user, SPAN_WARNING("It has some <a href='?src=\ref[src];list_armor_damage=1'>damage</a>."))
 
-	for(var/obj/item/clothing/accessory/A in accessories)
-		to_chat(user, "[html_icon(A)] \A [A] is attached to it.")
+	if(LAZYLEN(accessories))
+		to_chat(user, "It has the following attached: [counting_english_list(accessories)]")
+
 	switch(ironed_state)
 		if(WRINKLES_WRINKLY)
 			to_chat(user, "<span class='bad'>It's wrinkly.</span>")
 		if(WRINKLES_NONE)
 			to_chat(user, "<span class='notice'>It's completely wrinkle-free!</span>")
+
 	switch(smell_state)
 		if(SMELL_CLEAN)
 			to_chat(user, "<span class='notice'>It smells clean!</span>")

@@ -63,6 +63,9 @@
 	cut_overlays()
 	if(!(stat & (NOPOWER | BROKEN)))
 		add_overlay(emissive_overlay(icon, "ion_glow"))
+		z_flags |= ZMM_MANGLE_PLANES
+	else
+		z_flags &= ~ZMM_MANGLE_PLANES
 
 /obj/machinery/ion_thruster/power_change()
 	. = ..()

@@ -8,8 +8,10 @@
 	dir = SOUTH
 	organ_tag = "limb"
 
-	var/slowdown = 0
+	appearance_flags = PIXEL_SCALE | LONG_GLIDE
 
+	var/slowdown = 0
+	var/tmp/icon_cache_key
 	// Strings
 	var/broken_description             // fracture string if any.
 	var/damage_state = "00"            // Modifier used for generating the on-mob damage overlay for this limb.
@@ -457,7 +459,7 @@
 	switch(damage_type)
 		if(BRUTE) src.heal_damage(repair_amount, 0, 0, 1)
 		if(BURN)  src.heal_damage(0, repair_amount, 0, 1)
-	owner.regenerate_icons()
+	owner.refresh_visible_overlays()
 	if(user == src.owner)
 		var/decl/pronouns/G = user.get_pronouns()
 		user.visible_message(SPAN_NOTICE("\The [user] patches [damage_desc] on [G.his] [name] with \the [tool]."))
@@ -491,17 +493,10 @@ This function completely restores a damaged organ to perfect condition.
 			implanted_object.forceMove(get_turf(src))
 			implants -= implanted_object
 
-	if(owner && !ignore_prosthetic_prefs)
-		if(owner.client && owner.client.prefs && owner.client.prefs.real_name == owner.real_name)
-			var/status = owner.client.prefs.organ_data[organ_tag]
-			if(status == "amputated")
-				remove_rejuv()
-			else if(status == "cyborg")
-				var/robodata = owner.client.prefs.rlimb_data[organ_tag]
-				if(ispath(robodata, /decl/prosthetics_manufacturer))
-					robotize(robodata)
-				else
-					robotize()
+	if(ishuman(owner) && !ignore_prosthetic_prefs && owner.client?.prefs?.real_name == owner.real_name)
+		for(var/decl/aspect/aspect as anything in owner.personal_aspects)
+			if(aspect.applies_to_organ(organ_tag))
+				aspect.apply(owner)
 		owner.updatehealth()
 
 	if(!QDELETED(src) && species)
@@ -538,7 +533,7 @@ This function completely restores a damaged organ to perfect condition.
 		var/internal_damage
 		if(prob(damage) && sever_artery())
 			internal_damage = TRUE
-		if(prob(ceil(damage/4)) && sever_tendon())
+		if(prob(CEILING(damage/4)) && sever_tendon())
 			internal_damage = TRUE
 		if(internal_damage)
 			owner.custom_pain("You feel something rip in your [name]!", 50, affecting = src)
@@ -955,7 +950,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	spawn(1)
 		victim.updatehealth()
 		victim.UpdateDamageIcon()
-		victim.regenerate_icons()
+		victim.refresh_visible_overlays()
 		set_dir(SOUTH, TRUE)
 
 	switch(disintegrate)
@@ -967,7 +962,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(!clean)
 				// Throw limb around.
 				if(src && istype(loc,/turf))
-					throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
+					throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 				set_dir(SOUTH, TRUE)
 		if(DISMEMBER_METHOD_BURN, DISMEMBER_METHOD_ACID)
 			if(disintegrate == DISMEMBER_METHOD_BURN)
@@ -1482,3 +1477,16 @@ Note that amputating the affected organ does in fact remove the infection from t
 	. = ..()
 	if(. && owner)
 		owner.bad_external_organs |= src
+
+/obj/item/organ/external/die() //External organs dying on a dime causes some real issues in combat
+	if(!BP_IS_PROSTHETIC(src) && !BP_IS_CRYSTAL(src))
+		var/decay_rate = damage/(max_damage*2)
+		germ_level += round(rand(decay_rate,decay_rate*1.5)) //So instead, we're going to say the damage is so severe its functions are slowly failing due to the extensive damage
+	else //TODO: more advanced system for synths
+		if(istype(src,/obj/item/organ/external/chest) || istype(src,/obj/item/organ/external/groin))
+			return
+		status |= ORGAN_DEAD
+	if(status & ORGAN_DEAD) //The organic dying part is covered in germ handling
+		STOP_PROCESSING(SSobj, src)
+		QDEL_NULL_LIST(ailments)
+		death_time = world.time

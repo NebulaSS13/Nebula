@@ -21,11 +21,12 @@
 /obj/item/storage/pill_bottle/foil_pack/Initialize()
 	. = ..()
 	if(pill_type && pill_count)
-		var/atom/pill_path = pill_type
-		name = "[name] ([initial(pill_path.name)])"
-		pill_positions = list()
 		for(var/i = 1 to pill_count)
-			pill_positions[new pill_type(src)] = i
+			var/pill = new pill_type(src)
+			LAZYSET(pill_positions, pill, i)
+	if(length(pill_positions))
+		var/obj/item/chems/pill = pill_positions[1]
+		SetName("[initial(name)] ([pill.name])")
 	update_icon()
 
 /obj/item/storage/pill_bottle/foil_pack/pop_pill(var/mob/user)

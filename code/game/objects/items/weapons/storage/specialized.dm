@@ -19,9 +19,10 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_LARGE
 	can_hold = list(/obj/item/ore)
-	allow_quick_gather = 1
-	allow_quick_empty = 1
-	use_to_pickup = 1
+	allow_quick_gather = TRUE
+	allow_quick_empty = TRUE
+	use_to_pickup = TRUE
+	material = /decl/material/solid/leather
 
 
 // -----------------------------
@@ -43,9 +44,9 @@
 		/obj/item/paper,
 		/obj/item/paper_bundle
 	)
-	allow_quick_gather = 1
-	allow_quick_empty = 1
-	use_to_pickup = 1
+	allow_quick_gather = TRUE
+	allow_quick_empty = TRUE
+	use_to_pickup = TRUE
 
 // -----------------------------
 //          Plant bag
@@ -60,10 +61,15 @@
 	max_storage_space = 100
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL
-	can_hold = list(/obj/item/chems/food/snacks/grown,/obj/item/seeds,/obj/item/grown)
-	allow_quick_gather = 1
-	allow_quick_empty = 1
-	use_to_pickup = 1
+	can_hold = list(
+		/obj/item/chems/food/grown,
+		/obj/item/seeds,
+		/obj/item/grown
+	)
+	allow_quick_gather = TRUE
+	allow_quick_empty = TRUE
+	use_to_pickup = TRUE
+	material = /decl/material/solid/leather
 
 
 // -----------------------------
@@ -85,8 +91,8 @@
 	w_class = ITEM_SIZE_NORMAL
 	storage_slots = 7
 
-	allow_quick_empty = 1 // this function is superceded
-	use_to_pickup = 1
+	allow_quick_empty = TRUE // this function is superceded
+	use_to_pickup = TRUE
 
 /obj/item/storage/sheetsnatcher/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 	if(!istype(W,/obj/item/stack/material))

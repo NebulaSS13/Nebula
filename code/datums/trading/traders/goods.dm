@@ -318,7 +318,7 @@ Sells devices, odds and ends, and medical stuff
 				"insult_bad"        = "*muffled laughter* Sorry, was that you trying to talk shit? Adorable.",
 				)
 
-	possible_wanted_items = list(/obj/item/chems/food/drinks/bottle = TRADER_THIS_TYPE,
+	possible_wanted_items = list(/obj/item/chems/drinks/bottle = TRADER_THIS_TYPE,
 								/obj/item/organ/internal/liver = TRADER_THIS_TYPE,
 								/obj/item/organ/internal/kidneys = TRADER_THIS_TYPE,
 								/obj/item/organ/internal/lungs = TRADER_THIS_TYPE,

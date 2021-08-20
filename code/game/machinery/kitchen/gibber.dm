@@ -64,12 +64,12 @@
 	return 1
 
 /obj/machinery/gibber/components_are_accessible(path)
-	return !operating && ..()	
+	return !operating && ..()
 
 /obj/machinery/gibber/cannot_transition_to(state_path, mob/user)
 	if(operating)
 		return SPAN_NOTICE("You must wait for \the [src] to finish operating first!")
-	return ..()	
+	return ..()
 
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
 	if(!operating)
@@ -190,15 +190,15 @@
 
 	slab_nutrition /= gib_products.len
 
-	var/drop_products = Floor(gib_products.len * 0.35)
+	var/drop_products = FLOOR(gib_products.len * 0.35)
 	for(var/atom/movable/thing in gib_products)
 		if(drop_products)
 			drop_products--
 			qdel(thing)
 		else
 			thing.forceMove(src)
-			if(istype(thing, /obj/item/chems/food/snacks/meat))
-				var/obj/item/chems/food/snacks/meat/slab = thing
+			if(istype(thing, /obj/item/chems/food/meat))
+				var/obj/item/chems/food/meat/slab = thing
 				slab.SetName("[slab_name] [slab.name]")
 				slab.reagents.add_reagent(/decl/material/liquid/nutriment,slab_nutrition)
 

@@ -1,5 +1,5 @@
 /datum/codex_entry/ascent
-	display_name = "The Ascent"
+	name = "The Ascent"
 	associated_strings = list("ascent")
 	associated_paths = list(
 		/mob/living/silicon/robot/flying/ascent,

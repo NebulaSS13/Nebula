@@ -122,7 +122,7 @@ SUBSYSTEM_DEF(throwing)
 	last_move = world.time
 
 	//calculate how many tiles to move, making up for any missed ticks.
-	var/tilestomove = CEILING(min(((((world.time+world.tick_lag) - start_time + delayed_time) * speed) - (dist_travelled ? dist_travelled : -1)), speed*MAX_TICKS_TO_MAKE_UP) * (world.tick_lag * SSthrowing.wait), 1)
+	var/tilestomove = NONUNIT_CEILING(min(((((world.time+world.tick_lag) - start_time + delayed_time) * speed) - (dist_travelled ? dist_travelled : -1)), speed*MAX_TICKS_TO_MAKE_UP) * (world.tick_lag * SSthrowing.wait), 1)
 	while (tilestomove-- > 0)
 		if (dist_travelled >= maxrange || AM.loc == target_turf)
 			finalize()
@@ -196,9 +196,11 @@ SUBSYSTEM_DEF(throwing)
 		var/atom/movable/AM = thing
 		if (AM == thrownthing || (AM == thrower && !ismob(thrownthing)))
 			continue
-		if (!AM.density || AM.throwpass)//check if ATOM_FLAG_CHECKS_BORDER as an atom_flag is needed
+		if (!AM.density || AM.throwpass)
 			continue
-		if (!hit_thing || AM.layer > hit_thing.layer)
+		if((AM.atom_flags & ATOM_FLAG_CHECKS_BORDER) && !(get_dir(AM, thrownthing) & AM.dir))
+			continue
+		if(!hit_thing || AM.layer > hit_thing.layer)
 			hit_thing = AM
 
 	if(hit_thing)

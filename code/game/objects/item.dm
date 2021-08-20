@@ -86,6 +86,7 @@
 
 	var/tmp/has_inventory_icon	// do not set manually
 	var/tmp/use_single_icon
+	var/center_of_mass = @"{'x':16,'y':16}" //can be null for no exact placement behaviour
 
 // Foley sound callbacks
 /obj/item/proc/equipped_sound_callback()
@@ -367,6 +368,8 @@
 
 // apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user)
+	SHOULD_CALL_PARENT(TRUE)
+
 	if(randpixel)
 		pixel_z = randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character
 	update_twohanding()
@@ -374,6 +377,9 @@
 		thing.update_twohanding()
 	if(drop_sound && SSticker.mode)
 		addtimer(CALLBACK(src, .proc/dropped_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
+
+	if(user && (z_flags & ZMM_MANGLE_PLANES))
+		addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
@@ -397,6 +403,8 @@
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
+	SHOULD_CALL_PARENT(TRUE)
+
 	hud_layerise()
 	if(user.client)
 		user.client.screen |= src
@@ -413,6 +421,9 @@
 			var/mob/living/L = user
 			if(slot in L.held_item_slots)
 				addtimer(CALLBACK(src, .proc/pickup_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
+
+	if(user && (z_flags & ZMM_MANGLE_PLANES))
+		addtimer(CALLBACK(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
 
 //Defines which slots correspond to which slot flags
 var/global/list/slot_flags_enumeration = list(
@@ -895,7 +906,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/fill_from_pressurized_fluid_source(obj/structure/source, mob/user)
 	if(!istype(source) || !source.is_pressurized_fluid_source())
 		return FALSE
-	var/free_space =  Floor(REAGENTS_FREE_SPACE(reagents))
+	var/free_space =  FLOOR(REAGENTS_FREE_SPACE(reagents))
 	if(free_space <= 0)
 		to_chat(user, SPAN_WARNING("\The [src] is full!"))
 		return TRUE

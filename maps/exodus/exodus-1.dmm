@@ -344,7 +344,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/fore)
 "aW" = (
-/obj/structure/table/rack{
+/obj/structure/rack{
 	dir = 1
 	},
 /obj/item/clothing/suit/fire,
@@ -369,7 +369,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/fore)
 "aY" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /obj/random/maintenance,
 /obj/random/maintenance,
@@ -384,7 +384,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/fore)
 "ba" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/recharger,
 /obj/random/tech_supply,
 /turf/simulated/floor/plating,
@@ -671,22 +671,22 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/port)
 "cb" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/clothing/head/hardhat,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/fore)
 "cc" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/pen/red,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/fore)
 "cd" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/tech_supply,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/fore)
 "ce" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/flashlight,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/fore)
@@ -818,7 +818,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/starboard)
 "cA" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /obj/random/maintenance,
 /obj/random/maintenance,
@@ -1134,16 +1134,16 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/exodus/maintenance/sub/command)
 "ds" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/starboard)
 "dt" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/pen/blue,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/starboard)
 "du" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper_bin,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/starboard)
@@ -1716,7 +1716,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/central)
 "eK" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/flashlight/lamp/green,
 /obj/item/radio,
 /obj/machinery/alarm{
@@ -1732,7 +1732,7 @@
 /area/exodus/maintenance/sub/command)
 "eM" = (
 /obj/random/tech_supply,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/port)
 "eN" = (
@@ -1846,7 +1846,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/port)
 "eZ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/tech_supply,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/starboard)
@@ -1855,7 +1855,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/central)
 "fb" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper_bin,
 /obj/item/pen,
 /obj/machinery/light{
@@ -1907,8 +1907,8 @@
 	dir = 1
 	},
 /obj/structure/closet/crate/plastic,
-/obj/item/chems/food/snacks/liquidfood,
-/obj/item/chems/food/snacks/liquidfood,
+/obj/item/chems/food/liquidfood,
+/obj/item/chems/food/liquidfood,
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
@@ -2397,7 +2397,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/sub/starboard)
 "gg" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/junk,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/central)
@@ -2415,7 +2415,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/sub/central)
 "gj" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/central)
@@ -2588,7 +2588,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/central)
 "gw" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /obj/random/maintenance,
 /obj/random/maintenance,
@@ -2888,7 +2888,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/starboard)
 "hl" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/tech_supply,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/aft)
@@ -4208,7 +4208,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/maintenance/sub/aft)
 "ka" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/aft)
@@ -5763,7 +5763,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/fore)
 "of" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tech_supply,
 /turf/simulated/floor/plating,
 /area/exodus/maintenance/sub/fore)
@@ -5850,7 +5850,7 @@
 /obj/item/stock_parts/subspace/analyzer,
 /obj/item/stock_parts/subspace/analyzer,
 /obj/item/stock_parts/subspace/analyzer,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -6078,7 +6078,7 @@
 /obj/item/stock_parts/subspace/filter,
 /obj/item/stock_parts/subspace/filter,
 /obj/item/stock_parts/subspace/filter,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
@@ -6105,7 +6105,7 @@
 	pixel_y = -7
 	},
 /obj/random/smokes,
-/obj/item/chems/food/drinks/glass2/coffeecup/dais{
+/obj/item/chems/drinks/glass2/coffeecup/dais{
 	pixel_x = -6;
 	pixel_y = 12
 	},
@@ -6168,7 +6168,7 @@
 /obj/item/stock_parts/micro_laser/high,
 /obj/item/stock_parts/micro_laser/high,
 /obj/item/stock_parts/micro_laser/high,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = -21
@@ -6308,7 +6308,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exodus/maintenance/sub/aft)
 "Ja" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stock_parts/subspace/treatment,
 /obj/item/stock_parts/subspace/treatment,
 /obj/item/stock_parts/subspace/treatment,
@@ -6350,7 +6350,7 @@
 "LN" = (
 /obj/item/stock_parts/subspace/transmitter,
 /obj/item/stock_parts/subspace/transmitter,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stock_parts/computer/hard_drive/portable,
 /obj/item/stock_parts/computer/hard_drive/portable,
 /turf/simulated/floor/tiled/monotile,
@@ -6378,7 +6378,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/suit/storage/hooded/wintercoat/engineering,
 /obj/item/clothing/suit/storage/hooded/wintercoat/dais{
 	pixel_y = 12
@@ -6414,7 +6414,7 @@
 /obj/item/stock_parts/subspace/crystal,
 /obj/item/stock_parts/subspace/crystal,
 /obj/item/stock_parts/subspace/crystal,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
@@ -6506,7 +6506,7 @@
 /turf/simulated/floor/bluegrid,
 /area/exodus/maintenance/telecomms)
 "Qs" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stock_parts/circuitboard/telecomms/processor,
 /obj/item/stock_parts/circuitboard/telecomms/processor,
 /obj/item/stock_parts/circuitboard/telecomms/receiver,
@@ -6521,7 +6521,7 @@
 /obj/item/stock_parts/subspace/amplifier,
 /obj/item/stock_parts/subspace/amplifier,
 /obj/item/stock_parts/subspace/amplifier,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -6562,7 +6562,7 @@
 /obj/item/stock_parts/subspace/ansible,
 /obj/item/stock_parts/subspace/ansible,
 /obj/item/stock_parts/subspace/ansible,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},

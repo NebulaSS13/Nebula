@@ -1,5 +1,3 @@
-#define OUTFIT_JOB_NAME(job_name) ("Job - " + job_name)
-
 #define BACKPACK_OVERRIDE_CHEMISTRY \
 backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/chemistry; \
 backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/chem; \

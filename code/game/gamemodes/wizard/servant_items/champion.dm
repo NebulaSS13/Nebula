@@ -82,4 +82,5 @@
 	return 1
 
 /obj/item/sword/excalibur/dropped()
+	. = ..()
 	STOP_PROCESSING(SSobj, src)

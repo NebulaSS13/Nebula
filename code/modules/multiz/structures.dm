@@ -104,19 +104,16 @@
 			target_up.target_down = null
 			target_up.update_icon()
 		target_up = null
+	var/turf/T = get_turf(src)
+	if(T)
+		for(var/atom/movable/M in T.contents)
+			addtimer(CALLBACK(M, /atom/movable/proc/fall, T), 0)
 	return ..()
 
 /obj/structure/ladder/attackby(obj/item/I, mob/user)
 	. = ..()
 	if(!.)
 		climb(user, I)
-
-/turf/hitby(atom/movable/AM)
-	..()
-	if(isobj(AM))
-		var/obj/structure/ladder/L = locate() in contents
-		if(L)
-			L.hitby(AM)
 
 /obj/structure/ladder/hitby(obj/item/I)
 	..()

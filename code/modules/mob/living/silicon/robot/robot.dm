@@ -9,6 +9,8 @@
 	health = 300
 	mob_sort_value = 4
 
+	z_flags = ZMM_MANGLE_PLANES
+
 	mob_bump_flag = ROBOT
 	mob_swap_flags = ROBOT|MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = ~HEAVY //trundle trundle
@@ -22,7 +24,8 @@
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
-	var/integrated_light_power = 0.75
+	var/integrated_light_power = 0.6
+	var/integrated_light_range = 4
 	var/datum/wires/robot/wires
 	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
 	var/dismantle_type = /obj/item/robot_parts/robot_suit
@@ -433,9 +436,9 @@
 /mob/living/silicon/robot/proc/update_robot_light()
 	if(lights_on)
 		if(intenselight)
-			set_light(integrated_light_power * 2, integrated_light_power)
+			set_light(integrated_light_range, min(0.8, integrated_light_power * 2))
 		else
-			set_light(integrated_light_power)
+			set_light(integrated_light_range, integrated_light_power)
 	else
 		set_light(0)
 
@@ -720,13 +723,14 @@
 
 //Robots take half damage from basic attacks.
 /mob/living/silicon/robot/attack_generic(var/mob/user, var/damage, var/attack_message)
-	return ..(user,Floor(damage/2),attack_message)
+	return ..(user,FLOOR(damage/2),attack_message)
 
 /mob/living/silicon/robot/get_req_access()
 	return req_access
 
 /mob/living/silicon/robot/on_update_icon()
-	overlays.Cut()
+	..()
+
 	if(stat == CONSCIOUS)
 		var/eye_icon_state = "eyes-[module_sprites[icontype]]"
 		if(eye_icon_state in icon_states(icon))
@@ -736,19 +740,19 @@
 			if(!eye_overlay)
 				eye_overlay = emissive_overlay(icon, eye_icon_state)
 				eye_overlays[eye_icon_state] = eye_overlay
-			overlays += eye_overlay
+			add_overlay(eye_overlay)
 
 	if(opened)
 		var/panelprefix = custom_sprite ? src.ckey : "ov"
 		if(wiresexposed)
-			overlays += "[panelprefix]-openpanel +w"
+			add_overlay("[panelprefix]-openpanel +w")
 		else if(cell)
-			overlays += "[panelprefix]-openpanel +c"
+			add_overlay("[panelprefix]-openpanel +c")
 		else
-			overlays += "[panelprefix]-openpanel -c"
+			add_overlay("[panelprefix]-openpanel -c")
 
 	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
-		overlays += "[module_sprites[icontype]]-shield"
+		add_overlay("[module_sprites[icontype]]-shield")
 
 	if(modtype == "Combat")
 		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
@@ -1121,7 +1125,7 @@
 		recalculate_synth_capacities()
 
 /mob/living/silicon/robot/get_admin_job_string()
-	return "Robot"
+	return ASSIGNMENT_ROBOT
 
 /mob/living/silicon/robot/handle_pre_transformation()
 	QDEL_NULL(mmi)

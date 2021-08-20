@@ -68,6 +68,8 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if(isliving(user))
 		events_repository.register(/decl/observ/stat_set, user, src, /obj/machinery/computer/ship/proc/unlook)
 	LAZYDISTINCTADD(viewers, weakref(user))
+	if(linked)
+		LAZYDISTINCTADD(linked.navigation_viewers, weakref(user))
 
 /obj/machinery/computer/ship/proc/unlook(var/mob/user)
 	user.reset_view()
@@ -83,9 +85,11 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if(isliving(user))
 		events_repository.unregister(/decl/observ/stat_set, user, src, /obj/machinery/computer/ship/proc/unlook)
 	LAZYREMOVE(viewers, weakref(user))
+	if(linked)
+		LAZYREMOVE(linked.navigation_viewers, weakref(user))
 
 /obj/machinery/computer/ship/proc/viewing_overmap(mob/user)
-	return (weakref(user) in viewers)
+	return (weakref(user) in viewers) || (linked && (weakref(user) in linked.navigation_viewers))
 
 /obj/machinery/computer/ship/CouldNotUseTopic(mob/user)
 	. = ..()
@@ -110,4 +114,6 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 			var/M = W.resolve()
 			if(M)
 				unlook(M)
+				if(linked)
+					LAZYREMOVE(linked.navigation_viewers, W)
 	. = ..()

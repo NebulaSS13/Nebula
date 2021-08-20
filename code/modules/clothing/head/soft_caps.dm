@@ -13,11 +13,10 @@
 	if(flipped)
 		icon_state = "[get_world_inventory_state()]_flipped"
 
-/obj/item/clothing/head/soft/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
-	if(ret && flipped && check_state_in_icon("[ret.icon_state]_flipped", icon))
-		ret.icon_state = "[ret.icon_state]_flipped"
-	return ret	
+/obj/item/clothing/head/soft/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && flipped && check_state_in_icon("[overlay.icon_state]_flipped", overlay.icon))
+		overlay.icon_state = "[overlay.icon_state]_flipped"
+	. = ..()	
 
 /obj/item/clothing/head/soft/dropped()
 	src.flipped=0

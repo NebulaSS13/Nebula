@@ -135,9 +135,9 @@
 	name = "psychiatrist's couch"
 	desc = "For prime comfort during psychiatric evaluations."
 	icon_state = "psychbed"
-
-/obj/structure/bed/psych
 	material = /decl/material/solid/wood/walnut
+
+/obj/structure/bed/psych/leather
 	reinf_material = /decl/material/solid/leather
 
 /obj/structure/bed/padded

@@ -193,6 +193,7 @@
 	visible_message("<span class='cultannounce'>\The [src]' wounds close with a flash, and when he emerges, he's even larger than before!</span>")
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/on_update_icon()
+	..()
 	if(phase3)
 		icon_state = "king_goat3"
 		icon_living = "king_goat3"

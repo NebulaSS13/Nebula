@@ -1,5 +1,6 @@
 /decl/material/solid/glass
 	name = "glass"
+	uid = "solid_glass"
 	lore_text = "A brittle, transparent material made from molten silicates. It is generally not a liquid."
 	flags = MAT_FLAG_BRITTLE
 	color = GLASS_COLOR
@@ -31,6 +32,7 @@
 
 /decl/material/solid/glass/borosilicate
 	name = "borosilicate glass"
+	uid = "solid_borosilicate_glass"
 	lore_text = "An extremely heat-resistant form of glass."
 	flags = MAT_FLAG_BRITTLE
 	hardness = MAT_VALUE_HARD
@@ -46,6 +48,7 @@
 
 /decl/material/solid/fiberglass
 	name = "fiberglass"
+	uid = "solid_fiberglass"
 	lore_text = "A form of glass-reinforced plastic made from glass fibers and a polymer resin."
 	dissolves_into = list(
 		/decl/material/solid/glass = 0.7,

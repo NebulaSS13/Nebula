@@ -50,8 +50,8 @@
 
 /obj/machinery/power/supermatter/randomsample
 	name = "experimental supermatter sample"
-	icon_state = "darkmatter_shard"
-	base_icon_state = "darkmatter_shard"
+	icon = 'icons/obj/supermatter_32.dmi'
+	icon_state = "supermatter_shard"
 
 /obj/machinery/power/supermatter/randomsample/Initialize()
 	. = ..()
@@ -70,8 +70,8 @@
 
 /obj/machinery/power/supermatter/inert
 	name = "experimental supermatter sample"
-	icon_state = "darkmatter_shard"
-	base_icon_state = "darkmatter_shard"
+	icon = 'icons/obj/supermatter_32.dmi'
+	icon_state = "supermatter_shard"
 	thermal_release_modifier = 0 //Basically inert
 	product_release_modifier = 100000000000
 	oxygen_release_modifier = 100000000000

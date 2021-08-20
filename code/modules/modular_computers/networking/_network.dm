@@ -135,7 +135,7 @@
 	var/list/broadcasters = relays + router
 	var/best_signal = 0
 	for(var/datum/extension/network_device/broadcaster/B in broadcasters)
-		if(get_z(B.holder) != get_z(D.holder))	// Devices must be in the same z-level as the broadcaster to work.
+		if(!B.allow_wifi || get_z(B.holder) != get_z(D.holder))	// Devices must be in the same z-level as the broadcaster to work.
 			continue
 		var/broadcast_strength = B.get_broadcast_strength()
 		if(!ARE_Z_CONNECTED(get_z(router.holder), get_z(B.holder)))  // If the relay/secondary router is not in the same z-chunk as the main router, then the signal strength is halved.

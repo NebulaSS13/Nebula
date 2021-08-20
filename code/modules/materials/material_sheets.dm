@@ -11,6 +11,8 @@
 	matter = null
 	pickup_sound = 'sound/foley/tooldrop3.ogg'
 	drop_sound = 'sound/foley/tooldrop2.ogg'
+	singular_name = "sheet"
+	plural_name = "sheets"
 	var/decl/material/reinf_material
 
 /obj/item/stack/material/Initialize(mapload, var/amount, var/_material, var/_reinf_material)
@@ -107,19 +109,22 @@
 		update_icon()
 
 /obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
+
 	if(istype(W, /obj/item/stack/material))
 		if(is_same(W))
-			..()
-		else if(!reinf_material)
+			return ..()
+		if(!reinf_material)
 			material.reinforce(user, W, src)
-		return
-	else if(reinf_material && isWelder(W))
+		return TRUE
+
+	if(reinf_material && reinf_material.default_solid_form && isWelder(W))
 		var/obj/item/weldingtool/WT = W
 		if(WT.isOn() && WT.get_fuel() > 2 && use(2))
 			WT.remove_fuel(2, user)
-			to_chat(user,"<span class='notice'>You recover some [reinf_material.use_name] from the [src].</span>")
+			to_chat(user, SPAN_NOTICE("You recover some [reinf_material.use_name] from \the [src]."))
 			reinf_material.create_object(get_turf(user), 1)
-			return
+			return TRUE
+
 	return ..()
 
 /obj/item/stack/material/on_update_icon()
@@ -142,14 +147,14 @@
 	icon_state = "ingot"
 	plural_icon_state = "ingot-mult"
 	max_icon_state = "ingot-max"
+	stack_merge_type = /obj/item/stack/material/ingot
 
 /obj/item/stack/material/sheet
 	name = "sheets"
 	icon_state = "sheet"
 	plural_icon_state = "sheet-mult"
 	max_icon_state = "sheet-max"
-	singular_name = "sheet"
-	plural_name = "sheets"
+	stack_merge_type = /obj/item/stack/material/sheet
 
 /obj/item/stack/material/panel
 	name = "panels"
@@ -158,6 +163,7 @@
 	max_icon_state = "sheet-plastic-max"
 	singular_name = "panel"
 	plural_name = "panels"
+	stack_merge_type = /obj/item/stack/material/panel
 
 /obj/item/stack/material/skin
 	name = "skin"
@@ -166,16 +172,19 @@
 	max_icon_state = "skin-max"
 	singular_name = "length"
 	plural_name = "lengths"
+	stack_merge_type = /obj/item/stack/material/skin
 
 /obj/item/stack/material/skin/pelt
 	name = "pelts"
 	singular_name = "pelt"
 	plural_name = "pelts"
+	stack_merge_type = /obj/item/stack/material/skin/pelt
 
 /obj/item/stack/material/skin/feathers
 	name = "feathers"
 	singular_name = "feather"
 	plural_name = "feathers"
+	stack_merge_type = /obj/item/stack/material/skin/feathers
 
 /obj/item/stack/material/bone
 	name = "bones"
@@ -184,6 +193,7 @@
 	max_icon_state = "bone-max"
 	singular_name = "length"
 	plural_name = "lengths"
+	stack_merge_type = /obj/item/stack/material/bone
 
 /obj/item/stack/material/brick
 	name = "bricks"
@@ -192,12 +202,14 @@
 	icon_state = "brick"
 	plural_icon_state = "brick-mult"
 	max_icon_state = "brick-max"
+	stack_merge_type = /obj/item/stack/material/brick
 
 /obj/item/stack/material/bolt
 	name = "bolts"
 	icon_state = "sheet-cloth"
 	singular_name = "bolt"
 	plural_name = "bolts"
+	stack_merge_type = /obj/item/stack/material/bolt
 
 /obj/item/stack/material/pane
 	name = "panes"
@@ -206,6 +218,7 @@
 	icon_state = "sheet-clear"
 	plural_icon_state = "sheet-clear-mult"
 	max_icon_state = "sheet-clear-max"
+	stack_merge_type = /obj/item/stack/material/pane
 
 /obj/item/stack/material/pane/update_state_from_amount()
 	if(reinf_material) 
@@ -224,6 +237,7 @@
 	icon_state = "sheet-card"
 	plural_icon_state = "sheet-card-mult"
 	max_icon_state = "sheet-card-max"
+	stack_merge_type = /obj/item/stack/material/cardstock
 
 /obj/item/stack/material/gemstone
 	name = "gems"
@@ -232,6 +246,7 @@
 	icon_state = "diamond"
 	plural_icon_state = "diamond-mult"
 	max_icon_state = "diamond-max"
+	stack_merge_type = /obj/item/stack/material/gemstone
 
 /obj/item/stack/material/puck
 	name = "pucks"
@@ -240,6 +255,7 @@
 	icon_state = "puck"
 	plural_icon_state = "puck-mult"
 	max_icon_state = "puck-max"
+	stack_merge_type = /obj/item/stack/material/puck
 
 /obj/item/stack/material/aerogel
 	name = "aerogel"
@@ -249,6 +265,7 @@
 	plural_icon_state = "puck-mult"
 	max_icon_state = "puck-max"
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
+	stack_merge_type = /obj/item/stack/material/aerogel
 
 /obj/item/stack/material/plank
 	name = "planks"
@@ -257,24 +274,27 @@
 	icon_state = "sheet-wood"
 	plural_icon_state = "sheet-wood-mult"
 	max_icon_state = "sheet-wood-max"
+	stack_merge_type = /obj/item/stack/material/plank
 
 /obj/item/stack/material/segment
 	name = "segments"
 	singular_name = "segment"
 	plural_name = "segments"
 	icon_state = "sheet-mythril"
+	stack_merge_type = /obj/item/stack/material/segment
 
 /obj/item/stack/material/reinforced
 	icon_state = "sheet-reinf"
 	item_state = "sheet-metal"
 	plural_icon_state = "sheet-reinf-mult"
 	max_icon_state = "sheet-reinf-max"
-
+	stack_merge_type = /obj/item/stack/material/reinforced
 /obj/item/stack/material/shiny
 	icon_state = "sheet-sheen"
 	item_state = "sheet-shiny"
 	plural_icon_state = "sheet-sheen-mult"
 	max_icon_state = "sheet-sheen-max"
+	stack_merge_type = /obj/item/stack/material/shiny
 
 /obj/item/stack/material/cubes
 	name = "cube"
@@ -286,13 +306,23 @@
 	max_icon_state = "cube-max"
 	max_amount = 100
 	attack_verb = list("cubed")
+	stack_merge_type = /obj/item/stack/material/cubes
 
 /obj/item/stack/material/lump
 	name = "lumps"
 	singular_name = "lump"
 	plural_name = "lumps"
+	icon_state = "lump"
+	plural_icon_state = "lump-mult"
+	max_icon_state = "lump-max"
+	stack_merge_type = /obj/item/stack/material/lump
 
 /obj/item/stack/material/slab
 	name = "slabs"
 	singular_name = "slab"
 	plural_name = "slabs"
+	icon_state = "puck"
+	plural_icon_state = "puck-mult"
+	max_icon_state = "puck-max"
+	stack_merge_type = /obj/item/stack/material/slab
+

@@ -38,7 +38,7 @@
 /obj/item/clothing/head/hardhat/dblue
 	icon = 'icons/clothing/head/hardhat/blue.dmi'
 
-/obj/item/clothing/head/hardhat/EMS
+/obj/item/clothing/head/hardhat/ems
 	name = "\improper EMS helmet"
 	desc = "A polymer helmet worn by EMTs throughout human space to protect their head. This one comes with an attached flashlight and has 'Medic' written on its back in blue lettering."
 	icon = 'icons/clothing/head/hardhat/medic.dmi'
@@ -73,7 +73,7 @@
 	icon = 'icons/clothing/head/hardhat/damage_control.dmi'
 	flags_inv = HIDEEARS|BLOCKHAIR
 
-/obj/item/clothing/head/hardhat/EMS/DC_light
+/obj/item/clothing/head/hardhat/ems/dc_light
 	name = "light damage control helmet"
 	desc = "A lighter polymer helmet commonly used by engineers and first responders throughout the human space. It comes with a built-in flashlight and has 'Damage Control' written on its back in yellow lettering."
 	icon = 'icons/clothing/head/hardhat/damage_control_light.dmi'

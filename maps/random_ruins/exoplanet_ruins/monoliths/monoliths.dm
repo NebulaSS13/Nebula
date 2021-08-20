@@ -35,8 +35,11 @@
 		var/image/I = emissive_overlay(icon,"[icon_state]decor")
 		I.appearance_flags = RESET_COLOR
 		I.color = get_random_colour(0, 150, 255)
+		z_flags |= ZMM_MANGLE_PLANES
 		overlays += I
 		set_light(2, 0.3, I.color)
+	else
+		z_flags &= ~ZMM_MANGLE_PLANES
 
 	var/turf/exterior/T = get_turf(src)
 	if(istype(T))

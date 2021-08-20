@@ -63,9 +63,9 @@
 		/obj/item/clothing/accessory/storage/holster/hip
 		)
 
-/decl/hierarchy/outfit/raider/New()
+/decl/hierarchy/outfit/raider/Initialize()
 	randomize_clothing()
-	..()
+	. = ..()
 
 /decl/hierarchy/outfit/raider/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
 	randomize_clothing()

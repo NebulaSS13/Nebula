@@ -70,20 +70,20 @@ var/global/obj/temp_reagents_holder = new
 		var/list/replace_self_with
 		var/replace_message
 		var/replace_sound
-	
-		if(!isnull(R.chilling_point) && R.type != R.bypass_cooling_products_for_root_type && LAZYLEN(R.chilling_products) && temperature <= R.chilling_point)
-			replace_self_with = R.chilling_products
-			if(R.chilling_message)
-				replace_message = "\The [lowertext(R.name)] [R.chilling_message]"
-			replace_sound = R.chilling_sound
 
-		else if(!isnull(R.heating_point) && R.type != R.bypass_heating_products_for_root_type && LAZYLEN(R.heating_products) && temperature >= R.heating_point)
-			replace_self_with = R.heating_products
-			if(R.heating_message)
-				replace_message = "\The [lowertext(R.name)] [R.heating_message]"
-			replace_sound = R.heating_sound
+		if(!(my_atom.atom_flags & ATOM_FLAG_NO_PHASE_CHANGE))
+			if(!isnull(R.chilling_point) && R.type != R.bypass_cooling_products_for_root_type && LAZYLEN(R.chilling_products) && temperature <= R.chilling_point)
+				replace_self_with = R.chilling_products
+				if(R.chilling_message)
+					replace_message = "\The [lowertext(R.name)] [R.chilling_message]"
+				replace_sound = R.chilling_sound
+			else if(!isnull(R.heating_point) && R.type != R.bypass_heating_products_for_root_type && LAZYLEN(R.heating_products) && temperature >= R.heating_point)
+				replace_self_with = R.heating_products
+				if(R.heating_message)
+					replace_message = "\The [lowertext(R.name)] [R.heating_message]"
+				replace_sound = R.heating_sound
 
-		else if(!isnull(R.dissolves_in) && LAZYLEN(R.dissolves_into))
+		if(isnull(replace_self_with) && !isnull(R.dissolves_in) && !(my_atom.atom_flags & ATOM_FLAG_NO_DISSOLVE) && LAZYLEN(R.dissolves_into))
 			for(var/other in reagent_volumes)
 				if(other == thing)
 					continue
@@ -191,7 +191,7 @@ var/global/obj/temp_reagents_holder = new
 /datum/reagents/proc/remove_reagent(var/reagent_type, var/amount, var/safety = 0, var/defer_update = FALSE)
 	if(!isnum(amount) || REAGENT_VOLUME(src, reagent_type) <= 0)
 		return FALSE
-	
+
 	reagent_volumes[reagent_type] -= amount
 	if(reagent_volumes.len > 1 || reagent_volumes[reagent_type] <= 0)
 		cached_color = null
@@ -315,11 +315,18 @@ var/global/obj/temp_reagents_holder = new
 
 //Splashing reagents is messier than trans_to, the target's loc gets some of the reagents as well.
 /datum/reagents/proc/splash(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/min_spill=0, var/max_spill=60, var/defer_update = FALSE)
-	if(!isturf(target) && target.loc && min_spill && max_spill)
-		var/spill = amount*(rand(min_spill, max_spill)/100)
-		amount -= spill
-		splash(target.loc, spill, multiplier, copy, min_spill, max_spill, defer_update = defer_update)
-	trans_to(target, amount, multiplier, copy, defer_update = defer_update)
+	
+	if(isturf(target))
+		trans_to_turf(target, amount, multiplier, copy, defer_update = defer_update)
+		return
+
+	if(isturf(target.loc) && min_spill && max_spill)
+		var/spill = FLOOR(amount*(rand(min_spill, max_spill)/100))
+		if(spill)
+			amount -= spill
+			trans_to_turf(target.loc, spill, multiplier, copy, defer_update)
+	if(amount)
+		trans_to(target, amount, multiplier, copy, defer_update = defer_update)
 
 /datum/reagents/proc/trans_type_to(var/atom/target, var/type, var/amount = 1, var/multiplier = 1, var/defer_update = FALSE)
 	if (!target || !target.reagents || !target.simulated)
@@ -334,6 +341,21 @@ var/global/obj/temp_reagents_holder = new
 	F.add_reagent(type, amount, REAGENT_DATA(src, type))
 	remove_reagent(type, amount, defer_update = defer_update)
 	. = F.trans_to(target, amount, multiplier, defer_update = defer_update) // Let this proc check the atom's type
+	qdel(F)
+
+/datum/reagents/proc/trans_type_to_holder(var/datum/reagents/target, var/type, var/amount = 1, var/multiplier = 1, var/defer_update = FALSE)
+	if (!target)
+		return
+
+	amount = min(amount, REAGENT_VOLUME(src, type))
+
+	if(!amount)
+		return
+
+	var/datum/reagents/F = new(amount, global.temp_reagents_holder)
+	F.add_reagent(type, amount, REAGENT_DATA(src, type))
+	remove_reagent(type, amount, defer_update = defer_update)
+	. = F.trans_to_holder(target, amount, multiplier, defer_update = defer_update) // Let this proc check the atom's type
 	qdel(F)
 
 // When applying reagents to an atom externally, touch() is called to trigger any on-touch effects of the reagent.

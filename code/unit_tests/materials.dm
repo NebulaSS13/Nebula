@@ -31,11 +31,25 @@
 	name = "MATERIALS: Crafting Recipes Shall Not Have Inconsistent Materials"
 
 /datum/unit_test/crafting_recipes_shall_not_have_inconsistent_materials/start_test()
-	var/list/failed_designs = list()
-	var/list/passed_designs = list()
+
+	var/list/seen_design_types = list()
+	var/list/failed_designs =    list()
+	var/list/passed_designs =    list()
+	var/failed_count = 0
+
 	for(var/owner_mat in SSmaterials.materials_by_name)
 		var/decl/material/mat_datum = GET_DECL(owner_mat)
-		for(var/datum/stack_recipe/recipe in mat_datum.get_recipes())
+
+		var/list/recipes = list()
+		for(var/thing in mat_datum.get_recipes())
+			if(istype(thing, /datum/stack_recipe))
+				recipes += thing
+			else if(istype(thing, /datum/stack_recipe_list))
+				var/datum/stack_recipe_list/recipe_stack = thing
+				if(length(recipe_stack.recipes))
+					recipes |= recipe_stack.recipes
+
+		for(var/datum/stack_recipe/recipe as anything in recipes)
 			var/obj/product = recipe.spawn_result()
 			var/failed
 			if(!product)
@@ -48,22 +62,25 @@
 					if(length(product.matter))
 						failed = "unsupplied material types"
 				else if(recipe.use_material && (product.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
-					failed = "excessive base material ([recipe.req_amount]/[ceil(product.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT)])"
+					failed = "excessive base material ([recipe.req_amount]/[CEILING(product.matter[recipe.use_material]/SHEET_MATERIAL_AMOUNT)])"
 				else if(recipe.use_reinf_material && (product.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT) > recipe.req_amount)
-					failed = "excessive reinf material ([recipe.req_amount]/[ceil(product.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT)])"
+					failed = "excessive reinf material ([recipe.req_amount]/[CEILING(product.matter[recipe.use_reinf_material]/SHEET_MATERIAL_AMOUNT)])"
 				else
 					for(var/mat in product.matter)
 						if(mat != recipe.use_material && mat != recipe.use_reinf_material)
 							failed = "extra material type ([mat])"
-			if(failed)
-				failed_designs += "[owner_mat] - [recipe.type] - [failed]"
+			if(failed) // Try to prune out some duplicate error spam, we have too many materials now
+				if(!(recipe.type in seen_design_types))
+					failed_designs += "[owner_mat] - [recipe.type] - [failed]"
+					seen_design_types += recipe.type
+				failed_count++
 			else
 				passed_designs += recipe
 			if(!QDELETED(product))
 				qdel(product)
 
-	if(length(failed_designs))
-		fail("[length(failed_designs)] crafting recipes had inconsistent output materials: [jointext(failed_designs, "\n")].")
+	if(failed_count)
+		fail("[failed_count] crafting recipes had inconsistent output materials: [jointext(failed_designs, "\n")].")
 	else
 		pass("[length(passed_designs)] crafting recipes had consistent output materials.")
 	return 1
@@ -118,4 +135,36 @@
 		fail("[length(failed)] material\s had invalid wall icon states: [jointext(failed, "\n")].")
 	else
 		pass("All materials had valid wall icon states.")
-	return 1
+	return 1 
+
+/datum/unit_test/fusion_reactions_shall_have_valid_reactants
+	name = "MATERIALS: Fusion Reactions Shall Have Valid Reactants"
+
+/datum/unit_test/fusion_reactions_shall_have_valid_reactants/start_test()
+
+	var/list/failed_types = list()
+	var/list/failed = list()
+
+	var/list/all_reactions = decls_repository.get_decls_of_subtype(/decl/fusion_reaction)
+	for(var/reaction_type in all_reactions)
+		var/decl/fusion_reaction/reaction = all_reactions[reaction_type]
+		if(reaction.p_react && !ispath(reaction.p_react, /decl/material))
+			failed_types |= reaction.type
+			failed += "[reaction.type] has invalid primary reactant type [reaction.p_react]."
+		if(reaction.s_react && !ispath(reaction.s_react, /decl/material))
+			failed_types |= reaction.type
+			failed += "[reaction.type] has invalid secondary reactant type [reaction.s_react]."
+		for(var/product in reaction.products)
+			if(!ispath(product, /decl/material))
+				failed_types |= reaction.type
+				failed += "[reaction.type] has invalid product type [product]."
+			else if(reaction.products[product] <= 0)
+				failed_types |= reaction.type
+				failed += "[reaction.type] has invalid product amount for [product]."
+
+	if(length(failed_types))
+		fail("[length(failed_types)] reactions\s had invalid reactants or products: [jointext(failed, "\n")].")
+	else
+		pass("All reactions had valid reactants and products.")
+	return 1 
+

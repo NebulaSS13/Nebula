@@ -32,7 +32,7 @@
 
 /decl/loadout_option/flask
 	name = "flask"
-	path = /obj/item/chems/food/drinks/flask/barflask
+	path = /obj/item/chems/drinks/flask/barflask
 
 /decl/loadout_option/flask/get_gear_tweak_options()
 	. = ..()
@@ -41,7 +41,7 @@
 
 /decl/loadout_option/vacflask
 	name = "vacuum-flask"
-	path = /obj/item/chems/food/drinks/flask/vacuumflask
+	path = /obj/item/chems/drinks/flask/vacuumflask
 
 /decl/loadout_option/vacflask/get_gear_tweak_options()
 	. = ..()
@@ -50,28 +50,13 @@
 
 /decl/loadout_option/coffeecup
 	name = "coffee cup"
-	path = /obj/item/chems/food/drinks/glass2/coffeecup
+	path = /obj/item/chems/drinks/glass2/coffeecup
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /decl/loadout_option/towel
 	name = "towel"
 	path = /obj/item/towel
 	flags = GEAR_HAS_COLOR_SELECTION
-
-/decl/loadout_option/plush_toy
-	name = "plush toy"
-	description = "A plush toy."
-	path = /obj/item/toy/plushie
-
-/decl/loadout_option/plush_toy/get_gear_tweak_options()
-	. = ..()
-	LAZYINITLIST(.[/datum/gear_tweak/path])
-	.[/datum/gear_tweak/path] |= list(
-		"mouse plush" =  /obj/item/toy/plushie/mouse,
-		"kitten plush" = /obj/item/toy/plushie/kitten,
-		"lizard plush" = /obj/item/toy/plushie/lizard,
-		"spider plush" = /obj/item/toy/plushie/spider
-	)
 
 /decl/loadout_option/mirror
 	name = "handheld mirror"

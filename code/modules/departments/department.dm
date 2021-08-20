@@ -16,8 +16,8 @@
 
 /decl/department/Initialize()
 	. = ..()
-	if(LAZYLEN(goals) <= 0)
-		return
+	if(type == /decl/department && global.using_map.default_department_type == type)
+		name = "Debug Department"
 	var/list/possible_goals = goals.Copy()
 	goals.Cut()
 	var/goals_to_pick = min(LAZYLEN(possible_goals), rand(min_goals, max_goals))

@@ -5,6 +5,8 @@
 	icon_state = "base"
 	density = 1
 	maxhealth = 100
+	material = /decl/material/solid/metal/steel
+	tool_interaction_flags = TOOL_INTERACTION_ANCHOR
 
 	var/welded = 0
 	var/large = 1
@@ -54,7 +56,7 @@
 	. = ..()
 	if(distance <= 1 && !opened)
 		var/content_size = 0
-		for(var/atom/movable/AM in src.contents)
+		for(var/atom/movable/AM in contents)
 			if(!AM.anchored)
 				content_size += content_size(AM)
 		if(!content_size)
@@ -67,6 +69,10 @@
 			to_chat(user, "There is still some free space.")
 		else
 			to_chat(user, "It is full.")
+
+	var/mob/observer/ghost/G = user
+	if(isghost(G) && (G.client?.holder || G.antagHUD))
+		to_chat(user, "It contains: [counting_english_list(contents)]")
 
 /obj/structure/closet/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0 || wall_mounted)) return 1
@@ -229,7 +235,7 @@
 	if(user.a_intent == I_HURT && W.force)
 		return ..()
 
-	if(!opened && istype(W, /obj/item/stack/material))
+	if(!opened && (istype(W, /obj/item/stack/material) || isWrench(W)) )
 		return ..()
 
 	if(src.opened)

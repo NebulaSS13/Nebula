@@ -2,11 +2,11 @@
 	name = "Changeling"
 	name_plural = "Changelings"
 	feedback_tag = "changeling_objective"
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/submap)
+	blacklisted_jobs = list(/datum/job/submap)
 	welcome_text = "Use say \"%LANGUAGE_PREFIX%g message\" to communicate with your fellow changelings. Remember: you get all of their absorbed DNA if you absorb them."
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
 	antaghud_indicator = "hudchangeling"
-
+	blocked_job_event_categories = list(ASSIGNMENT_ROBOT, ASSIGNMENT_COMPUTER)
 	faction = "changeling"
 
 /decl/special_role/changeling/get_welcome_text(mob/recipient)
@@ -69,16 +69,19 @@
 			if(ishuman(player.current))
 				var/mob/living/carbon/human/H = player.current
 				if(H.isSynthetic())
-					return 0
+					return FALSE
 				if(H.species.species_flags & SPECIES_FLAG_NO_SCAN)
-					return 0
-				return 1
+					return FALSE
+				var/obj/item/organ/external/E = H.get_organ(BP_CHEST)
+				if(istype(E) && (BP_IS_PROSTHETIC(E) || BP_IS_CRYSTAL(E)))
+					return FALSE
+				return TRUE
 			else if(isnewplayer(player.current))
 				if(player.current.client && player.current.client.prefs)
 					var/decl/species/S = get_species_by_key(player.current.client.prefs.species)
 					if(S && (S.species_flags & SPECIES_FLAG_NO_SCAN))
-						return 0
-					if(player.current.client.prefs.organ_data[BP_CHEST] == "cyborg") // Full synthetic.
-						return 0
-					return 1
- 	return 0
+						return FALSE
+					return TRUE
+ 	return FALSE
+
+

@@ -14,10 +14,10 @@ var/global/list/wrapped_species_by_ref = list()
 	var/monochromatic
 	var/default_form
 
-/decl/species/shapeshifter/New()
+/decl/species/shapeshifter/Initialize()
 	default_form = global.using_map.default_species
 	valid_transform_species |= default_form
-	..()
+	. = ..()
 
 /decl/species/shapeshifter/get_valid_shapeshifter_forms(var/mob/living/carbon/human/H)
 	return valid_transform_species
@@ -58,12 +58,15 @@ var/global/list/wrapped_species_by_ref = list()
 	last_special = world.time + 10
 
 	visible_message("<span class='notice'>\The [src]'s form contorts subtly.</span>")
-	if(species.get_hair_styles())
-		var/new_hair = input("Select a hairstyle.", "Shapeshifter Hair") as null|anything in species.get_hair_styles()
-		change_hair(new_hair ? new_hair : "Bald")
-	if(species.get_facial_hair_styles(bodytype.associated_gender))
-		var/new_hair = input("Select a facial hair style.", "Shapeshifter Hair") as null|anything in species.get_facial_hair_styles(bodytype.associated_gender)
-		change_facial_hair(new_hair ? new_hair : "Shaved")
+	var/list/hairstyles = species.get_hair_styles(bodytype.associated_gender)
+	if(length(hairstyles))
+		var/decl/sprite_accessory/new_hair = input("Select a hairstyle.", "Shapeshifter Hair") as null|anything in hairstyles
+		change_hair(new_hair ? new_hair.type : /decl/sprite_accessory/hair/bald)
+
+	var/list/beardstyles = species.get_facial_hair_styles(bodytype.associated_gender)
+	if(length(beardstyles))
+		var/decl/sprite_accessory/new_hair = input("Select a facial hair style.", "Shapeshifter Hair") as null|anything in beardstyles
+		change_facial_hair(new_hair ? new_hair.type : /decl/sprite_accessory/facial_hair/shaved)
 
 /mob/living/carbon/human/proc/shapeshifter_select_gender()
 
@@ -98,7 +101,7 @@ var/global/list/wrapped_species_by_ref = list()
 
 	wrapped_species_by_ref["\ref[src]"] = new_species
 	visible_message("<span class='notice'>\The [src] shifts and contorts, taking the form of \a ["\improper [new_species]"]!</span>")
-	regenerate_icons()
+	refresh_visible_overlays()
 
 /mob/living/carbon/human/proc/shapeshifter_select_colour()
 
@@ -127,4 +130,4 @@ var/global/list/wrapped_species_by_ref = list()
 	for(var/obj/item/organ/external/E in organs)
 		E.sync_colour_to_human(src)
 
-	regenerate_icons()
+	refresh_visible_overlays()

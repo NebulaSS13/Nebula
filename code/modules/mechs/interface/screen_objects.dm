@@ -1,5 +1,5 @@
 // Screen objects hereon out.
-#define MECH_UI_STYLE(X) "<span style=\"font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 5px;\">" + X + "</span>"
+#define MECH_UI_STYLE(X) "<span style=\"font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 5px;\">[X]</span>"
 
 /obj/screen/exosuit
 	name = "hardpoint"
@@ -10,10 +10,13 @@
 
 /obj/screen/exosuit/radio
 	name = "radio"
-	maptext = MECH_UI_STYLE("RADIO")
 	maptext_x = 5
 	maptext_y = 12
 
+/obj/screen/exosuit/radio/Initialize()
+	maptext = MECH_UI_STYLE("RADIO")
+	. = ..()
+	
 /obj/screen/exosuit/radio/Click()
 	if(..())
 		if(owner.radio)
@@ -158,9 +161,12 @@
 
 /obj/screen/exosuit/eject
 	name = "eject"
-	maptext = MECH_UI_STYLE("EJECT")
 	maptext_x = 5
 	maptext_y = 12
+
+/obj/screen/exosuit/eject/Initialize()
+	maptext = MECH_UI_STYLE("EJECT")
+	. = ..()
 
 /obj/screen/exosuit/eject/Click()
 	if(..())
@@ -168,9 +174,12 @@
 
 /obj/screen/exosuit/rename
 	name = "rename"
-	maptext = MECH_UI_STYLE("RENAME")
 	maptext_x = 1
 	maptext_y = 12
+
+/obj/screen/exosuit/rename/Initialize()
+	maptext = MECH_UI_STYLE("RENAME")
+	. = ..()
 
 /obj/screen/exosuit/power
 	name = "power"
@@ -206,10 +215,13 @@
 /obj/screen/exosuit/toggle/air
 	name = "air"
 	icon_state = "small_important"
-	maptext = MECH_UI_STYLE("AIR")
 	maptext_x = 9
 	maptext_y = 13
 	height = 12
+
+/obj/screen/exosuit/toggle/air/Initialize()
+	maptext = MECH_UI_STYLE("AIR")
+	. = ..()
 
 /obj/screen/exosuit/toggle/air/toggled()
 	owner.use_air = ..()
@@ -218,10 +230,13 @@
 /obj/screen/exosuit/toggle/maint
 	name = "toggle maintenance protocol"
 	icon_state = "small"
-	maptext = MECH_UI_STYLE("MAINT")
 	maptext_x = 5
 	maptext_y = 13
 	height = 12
+
+/obj/screen/exosuit/toggle/maint/Initialize()
+	maptext = MECH_UI_STYLE("MAINT")
+	. = ..()
 
 /obj/screen/exosuit/toggle/maint/toggled()
 	owner.maintenance_protocols = ..()
@@ -229,9 +244,12 @@
 
 /obj/screen/exosuit/toggle/hardpoint
 	name = "toggle hardpoint lock"
-	maptext = MECH_UI_STYLE("GEAR")
 	maptext_x = 5
 	maptext_y = 12
+
+/obj/screen/exosuit/toggle/hardpoint/Initialize()
+	maptext = MECH_UI_STYLE("GEAR")
+	. = ..()
 
 /obj/screen/exosuit/toggle/hardpoint/toggled()
 	owner.hardpoints_locked = ..()
@@ -239,9 +257,12 @@
 
 /obj/screen/exosuit/toggle/hatch
 	name = "toggle hatch lock"
-	maptext = MECH_UI_STYLE("LOCK")
 	maptext_x = 5
 	maptext_y = 12
+
+/obj/screen/exosuit/toggle/hatch/Initialize()
+	maptext = MECH_UI_STYLE("LOCK")
+	. = ..()
 
 /obj/screen/exosuit/toggle/hatch/toggled()
 	if(!owner.hatch_locked && !owner.hatch_closed)
@@ -252,9 +273,12 @@
 
 /obj/screen/exosuit/toggle/hatch_open
 	name = "open or close hatch"
-	maptext = MECH_UI_STYLE("CLOSE")
 	maptext_x = 4
 	maptext_y = 12
+
+/obj/screen/exosuit/toggle/hatch_open/Initialize()
+	maptext = MECH_UI_STYLE("CLOSE")
+	. = ..()
 
 /obj/screen/exosuit/toggle/hatch_open/toggled()
 	if (!owner)
@@ -292,11 +316,14 @@
 /obj/screen/exosuit/toggle/camera
 	name = "toggle camera matrix"
 	icon_state = "small_important"
-	maptext = MECH_UI_STYLE("SENSOR")
 	maptext_x = 1
 	maptext_y = 13
 	height = 12
 
+/obj/screen/exosuit/toggle/camera/Initialize()
+	maptext = MECH_UI_STYLE("SENSOR")
+	. = ..()
+	
 /obj/screen/exosuit/toggle/camera/toggled()
 	if(!owner.head)
 		to_chat(usr, SPAN_WARNING("I/O Error: Camera systems not found."))

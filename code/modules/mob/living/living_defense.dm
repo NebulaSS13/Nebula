@@ -53,8 +53,7 @@
 		return TRUE
 	. = TRUE
 	var/list/newargs = args - args[1]
-	for(var/a in auras)
-		var/obj/aura/aura = a
+	for(var/obj/aura/aura AS_ANYTHING in auras)
 		var/result = 0
 		switch(type)
 			if(AURA_TYPE_WEAPON)

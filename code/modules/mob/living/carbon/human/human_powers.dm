@@ -17,31 +17,34 @@
 	set category = "IC"
 
 	if(incapacitated())
-		to_chat(src, "<span class='warning'>You can't mess with your hair right now!</span>")
+		to_chat(src, SPAN_WARNING("You can't mess with your hair right now!"))
 		return
 
 	if(h_style)
-		var/datum/sprite_accessory/hair/hair_style = global.hair_styles_list[h_style]
-		var/selected_string
+		var/decl/sprite_accessory/hair/hair_style = GET_DECL(h_style)
 		if(!(hair_style.flags & HAIR_TIEABLE))
-			to_chat(src, "<span class ='warning'>Your hair isn't long enough to tie.</span>")
+			to_chat(src, SPAN_WARNING("Your hair isn't long enough to tie."))
 			return
-		else
-			var/list/datum/sprite_accessory/hair/valid_hairstyles = list()
-			for(var/hair_string in global.hair_styles_list)
-				var/datum/sprite_accessory/hair/test = global.hair_styles_list[hair_string]
-				if(test.flags & HAIR_TIEABLE)
-					valid_hairstyles.Add(hair_string)
-			selected_string = input("Select a new hairstyle", "Your hairstyle", hair_style) as null|anything in valid_hairstyles
+
+		var/selected_type
+		var/list/valid_hairstyles = decls_repository.get_decls_of_subtype(/decl/sprite_accessory/hair)
+		var/list/hairstyle_instances = list()
+		for(var/hair_type in valid_hairstyles)
+			var/decl/sprite_accessory/hair/test = valid_hairstyles[hair_type]
+			if(test.flags & HAIR_TIEABLE)
+				hairstyle_instances += test
+		var/decl/selected_decl = input("Select a new hairstyle", "Your hairstyle", hair_style) as null|anything in hairstyle_instances
+		if(selected_decl)
+			selected_type = selected_decl.type
 		if(incapacitated())
-			to_chat(src, "<span class='warning'>You can't mess with your hair right now!</span>")
+			to_chat(src, SPAN_WARNING("You can't mess with your hair right now!"))
 			return
-		else if(selected_string && h_style != selected_string)
-			h_style = selected_string
-			regenerate_icons()
-			visible_message("<span class='notice'>[src] pauses a moment to style their hair.</span>")
+		if(selected_type && h_style != selected_type)
+			h_style = selected_type
+			refresh_visible_overlays()
+			visible_message(SPAN_NOTICE("\The [src] pauses a moment to style their hair."))
 		else
-			to_chat(src, "<span class ='notice'>You're already using that style.</span>")
+			to_chat(src, SPAN_NOTICE("You're already using that style."))
 
 /****************
  misc alien verbs

@@ -1,7 +1,7 @@
 /mob/living/carbon/human
 
-	var/h_style = "Bald"
-	var/f_style = "Shaved"
+	var/h_style = /decl/sprite_accessory/hair/bald
+	var/f_style = /decl/sprite_accessory/facial_hair/shaved
 
 	var/hair_colour =        COLOR_BLACK
 	var/facial_hair_colour = COLOR_BLACK
@@ -11,7 +11,6 @@
 	var/skin_tone = 0  //Skin tone
 
 	var/damage_multiplier = 1 //multiplies melee combat damage
-	var/icon_update = 1 //whether icon updating shall take place
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 

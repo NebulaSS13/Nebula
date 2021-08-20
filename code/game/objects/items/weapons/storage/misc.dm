@@ -30,15 +30,15 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "donutbox"
 	name = "donut box"
-	can_hold = list(/obj/item/chems/food/snacks/donut)
+	can_hold = list(/obj/item/chems/food/donut)
 	foldable = /obj/item/stack/material/cardstock
 
-	startswith = list(/obj/item/chems/food/snacks/donut/normal = 6)
+	startswith = list(/obj/item/chems/food/donut/normal = 6)
 
 /obj/item/storage/box/donut/on_update_icon()
 	overlays.Cut()
 	var/i = 0
-	for(var/obj/item/chems/food/snacks/donut/D in contents)
+	for(var/obj/item/chems/food/donut/D in contents)
 		overlays += image('icons/obj/food.dmi', "[i][D.overlay_state]")
 		i++
 
@@ -62,17 +62,14 @@
 /obj/item/storage/cigpaper/fancy
 	name = "\improper Trident cigarette paper"
 	desc = "A fancy brand of Trident cigarette paper, for rolling your own cigarettes. Like a person who appreciates the finer things in life."
-	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "fancycigpaperbook"
 	startswith = list(/obj/item/paper/cig/fancy = 10)
 
 /obj/item/storage/cigpaper/filters
 	name = "box of cigarette filters"
 	desc = "A box of generic cigarette filters for those who rolls their own but prefers others to inhale the fumes. Not endorsed by Late General Osmundsun."
-	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "filterbin"
 	startswith = list(/obj/item/paper/cig/filter = 10)
-
 /obj/item/storage/chewables
 	name = "box of chewing wads master"
 	desc = "A generic brands of Waffle Co Wads, unflavored chews. Why do these exist?"
@@ -94,19 +91,19 @@
 /obj/item/storage/chewables/rollable/bad
 	name = "bag of Men at Arms tobacco"
 	desc = "A bag of coarse gritty tobacco marketed towards leather-necks."
-	startswith = list(/obj/item/chems/food/snacks/grown/dried_tobacco/bad = 8)
+	startswith = list(/obj/item/chems/food/grown/dried_tobacco/bad = 8)
 	icon_state = "rollcoarse"
 
 /obj/item/storage/chewables/rollable/generic
 	name = "bag of BluSpace tobacco"
 	desc = "Decent quality tobacco for mid-income earners and long haul space sailors."
-	startswith = list(/obj/item/chems/food/snacks/grown/dried_tobacco = 8)
+	startswith = list(/obj/item/chems/food/grown/dried_tobacco = 8)
 	icon_state = "rollgeneric"
 
 /obj/item/storage/chewables/rollable/fine
 	name = "bag of Golden Sol tobacco"
 	desc = "A exclusive brand of overpriced tobacco, allegedly grown at a lagrange point station in Sol system."
-	startswith = list(/obj/item/chems/food/snacks/grown/dried_tobacco/fine = 8)
+	startswith = list(/obj/item/chems/food/grown/dried_tobacco/fine = 8)
 	icon_state = "rollfine"
 
 //chewing tobacco
@@ -136,7 +133,7 @@
 	desc = "A pack of delicious cookies, and possibly the only product in Getmores Chocolate Corp lineup that has any trace of chocolate in it."
 	icon_state = "cookiebag"
 	max_storage_space = 6
-	startswith = list(/obj/item/chems/food/snacks/cookie = 6)
+	startswith = list(/obj/item/chems/food/cookie = 6)
 
 /obj/item/storage/chewables/candy/gum
 	name = "pack of Rainbo-Gums"

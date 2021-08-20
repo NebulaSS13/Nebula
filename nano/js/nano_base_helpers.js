@@ -19,10 +19,10 @@ NanoBaseHelpers = function ()
 				$('linkOff').css("background", "#551414");
 				$('input').css("background", "#551414");
 				$('a:hover').css("color", "#551414");
-				$('a.white').css("color", "#551414"); 
-				$('a.white:link').css("color", "#551414"); 
-				$('a.white:visited').css("color", "#551414"); 
-				$('a.white:active').css("color", "#551414"); 
+				$('a.white').css("color", "#551414");
+				$('a.white:link').css("color", "#551414");
+				$('a.white:visited').css("color", "#551414");
+				$('a.white:active').css("color", "#551414");
 				$('a.white:hover').css("background", "#551414");
 				$('linkOn').css("background", "#771414");
 				$('a.linkOn:link').css("background", "#771414");
@@ -39,7 +39,7 @@ NanoBaseHelpers = function ()
 				$('itemLabelWide').css("color", "#ff0000");
 				$('itemLabelWider').css("color", "#ff0000");
 				$('itemLabelWidest').css("color", "#ff0000");
-				
+
 				$('link').css("border", "1px solid #ff0000");
 				$('linkOn').css("border", "1px solid #ff0000");
 				$('linkOff').css("border", "1px solid #ff0000");
@@ -141,7 +141,7 @@ NanoBaseHelpers = function ()
 				return string.charAt(0).toUpperCase() + string.slice(1);
 			},
 			// Display a bar. Used to show health, capacity, etc. Use difClass if the entire display bar class should be different
-			displayBar: function(value, rangeMin, rangeMax, styleClass, showText, difClass, direction) {
+			displayBar: function (value, rangeMin, rangeMax, styleClass, showText, difClass, direction, id) {
 
 				if (rangeMin < rangeMax)
                 {
@@ -175,12 +175,12 @@ NanoBaseHelpers = function ()
 				{
 					showText = '';
 				}
-				
+
 				if (typeof difClass == 'undefined' || !difClass)
 				{
 					difClass = ''
 				}
-				
+
 				if(typeof direction == 'undefined' || !direction)
 				{
 					direction = 'width'
@@ -189,10 +189,10 @@ NanoBaseHelpers = function ()
 				{
 					direction = 'height'
 				}
-				
+
 				var percentage = Math.round((value - rangeMin) / (rangeMax - rangeMin) * 100);
-				
-				return '<div class="displayBar' + difClass + ' ' + styleClass + '"><div class="displayBar' + difClass + 'Fill ' + styleClass + '" style="' + direction + ': ' + percentage + '%;"></div><div class="displayBar' + difClass + 'Text ' + styleClass + '">' + showText + '</div></div>';
+
+				return '<div id="displayBar'+id+'" class="displayBar' + difClass + ' ' + styleClass + '"><div id="displayBar'+id+'Fill" class="displayBar' + difClass + 'Fill ' + styleClass + '" style="' + direction + ': ' + percentage + '%;"></div><div id="displayBar'+id+'Text" class="displayBar' + difClass + 'Text ' + styleClass + '">' + showText + '</div></div>';
 			},
 			// Display DNA Blocks (for the DNA Modifier UI)
 			displayDNABlocks: function(dnaString, selectedBlock, selectedSubblock, blockSize, paramKey) {
@@ -247,9 +247,15 @@ NanoBaseHelpers = function ()
                 html += '</div>';
 
 				return html;
+			},
+			byondTimeOfDay: function _byondTimeOfDay() {
+				if(typeof _byondTimeOfDay.midnight == 'undefined') {
+					_byondTimeOfDay.midnight = new Date().setUTCHours(0, 0, 0, 0);
+				}
+				return (new Date() - _byondTimeOfDay.midnight)/100; // deciseconds since midnight
 			}
 		};
-		
+
 	return {
         addHelpers: function ()
 		{
@@ -263,11 +269,11 @@ NanoBaseHelpers = function ()
 				{
 					NanoTemplate.removeHelper(helperKey);
 				}
-			}            
+			}
         }
 	};
 } ();
- 
+
 
 
 

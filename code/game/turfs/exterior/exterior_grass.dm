@@ -22,7 +22,7 @@
 
 	var/datum/extension/buried_resources/resources = get_or_create_extension(src, /datum/extension/buried_resources)
 	if(prob(70))
-		LAZYSET(resources.resources, /decl/material/solid/mineral/graphite, rand(3,5))
+		LAZYSET(resources.resources, /decl/material/solid/graphite, rand(3,5))
 	if(prob(5))
 		LAZYSET(resources.resources, /decl/material/solid/metal/uranium, rand(1,3))
 	if(prob(2))

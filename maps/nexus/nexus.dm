@@ -12,6 +12,8 @@
 	#include "../../mods/species/neoavians/_neoavians.dme"
 
 	#include "nexus_areas.dm"
+	#include "nexus_departments.dm"
+	#include "nexus_jobs.dm"
 	#include "nexus_overmap.dm"
 	#include "nexus_unit_testing.dm"
 	#include "nexus-1.dmm"

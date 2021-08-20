@@ -45,7 +45,7 @@
 	I.appearance_flags |= RESET_COLOR
 	overlays = list(I)
 
-/obj/item/clothing/gloves/thick/botany/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
+/obj/item/clothing/gloves/thick/botany/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(slot == slot_gloves_str)
 		var/image/I = image(icon, "[bodytype]-botany_fingertips")
 		I.appearance_flags |= RESET_COLOR

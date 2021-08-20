@@ -14,6 +14,7 @@
 	var/currency
 	var/absolute_worth = 0
 	var/can_flip = TRUE // Cooldown tracker for single-coin flips.
+	var/static/overlay_cap = 50 // Max overlays to show in this pile.
 
 /obj/item/cash/Initialize(ml, material_key)
 	. = ..()
@@ -38,7 +39,7 @@
 
 /obj/item/cash/proc/get_worth()
 	var/decl/currency/cur = GET_DECL(currency)
-	. = Floor(absolute_worth / cur.absolute_value)
+	. = FLOOR(absolute_worth / cur.absolute_value)
 
 /obj/item/cash/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/cash))
@@ -60,8 +61,9 @@
 /obj/item/cash/on_update_icon()
 	icon_state = ""
 	var/draw_worth = get_worth()
-	var/list/adding_notes
+	cut_overlays()
 	var/decl/currency/cur = GET_DECL(currency)
+	var/i = 0
 	for(var/datum/denomination/denomination in cur.denominations)
 		while(draw_worth >= denomination.marked_value)
 			draw_worth -= denomination.marked_value
@@ -74,8 +76,10 @@
 			if(denomination.rotate_icon)
 				M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
 			banknote.transform = M
-			LAZYADD(adding_notes, banknote)
-	overlays = adding_notes
+			add_overlay(banknote)
+			i++
+			if(i >= overlay_cap)
+				return
 
 /obj/item/cash/proc/update_from_worth()
 	var/decl/currency/cur = GET_DECL(currency)
@@ -100,7 +104,7 @@
 
 	// Handle coin flipping. Mostly copied from /obj/item/coin.
 	var/datum/denomination/denomination = cur.denominations_by_value["[current_worth]"]
-	if(denomination && length(denomination.faces) && alert("Do you wish to divide \the [src], or flip it?", "Flip or Split?", "Flip", "Split") == "Flip")
+	if(denomination && length(denomination.faces) && (cur.denominations_by_value[length(cur.denominations_by_value)] == "[current_worth]" || alert("Do you wish to divide \the [src], or flip it?", "Flip or Split?", "Flip", "Split") == "Flip"))
 		if(!can_flip)
 			to_chat(user, SPAN_WARNING("\The [src] is already being flipped!"))
 			return
@@ -118,12 +122,12 @@
 		return TRUE
 
 	var/amount = input(usr, "How many [cur.name] do you want to take? (0 to [get_worth() - 1])", "Take Money", 20) as num
-	amount = round(Clamp(amount, 0, Floor(get_worth() - 1)))
+	amount = round(Clamp(amount, 0, FLOOR(get_worth() - 1)))
 
 	if(!amount || QDELETED(src) || get_worth() <= 1 || user.incapacitated() || loc != user)
 		return TRUE
 
-	amount = Floor(amount * cur.absolute_value)
+	amount = FLOOR(amount * cur.absolute_value)
 	adjust_worth(-(amount))
 	var/obj/item/cash/cash = new(get_turf(src))
 	cash.set_currency(currency)
@@ -210,7 +214,7 @@
 		else
 			to_chat(user, SPAN_NOTICE("<b>Id:</b> [id]."))
 			var/decl/currency/cur = GET_DECL(currency)
-			to_chat(user, SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [Floor(loaded_worth / cur.absolute_value)]."))
+			to_chat(user, SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [FLOOR(loaded_worth / cur.absolute_value)]."))
 
 /obj/item/charge_stick/get_base_value()
 	. = holographic ? 0 : loaded_worth
@@ -284,11 +288,11 @@
 		return
 
 	var/h_thou = loaded_worth / 100000
-	var/t_thou = (loaded_worth - (Floor(h_thou) * 100000)) / 10000
-	var/thou = (loaded_worth - (Floor(h_thou) * 100000) - (Floor(t_thou) * 10000)) / 1000
-	overlays += image(icon, "[Floor(h_thou)]__")
-	overlays += image(icon, "_[Floor(t_thou)]_")
-	overlays += image(icon, "__[Floor(thou)]")
+	var/t_thou = (loaded_worth - (FLOOR(h_thou) * 100000)) / 10000
+	var/thou = (loaded_worth - (FLOOR(h_thou) * 100000) - (FLOOR(t_thou) * 10000)) / 1000
+	overlays += image(icon, "[FLOOR(h_thou)]__")
+	overlays += image(icon, "_[FLOOR(t_thou)]_")
+	overlays += image(icon, "__[FLOOR(thou)]")
 
 /obj/item/charge_stick/copper
 	grade = "copper"

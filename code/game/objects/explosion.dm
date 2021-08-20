@@ -1,7 +1,7 @@
 //TODO: Flash range does nothing currently
 /proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN)
 	if(config.use_iterative_explosions)
-		. = explosion_iter(epicenter, (devastation_range * 2 + heavy_impact_range + light_impact_range))
+		. = explosion_iter(epicenter, (devastation_range * 2 + heavy_impact_range + light_impact_range), z_transfer)
 	else
 		. = explosion_basic(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog, z_transfer)
 

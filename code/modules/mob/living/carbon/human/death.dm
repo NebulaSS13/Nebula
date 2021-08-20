@@ -2,7 +2,7 @@
 	for(var/obj/item/organ/I in internal_organs)
 		I.removed()
 		if(!QDELETED(I) && isturf(loc))
-			I.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
+			I.throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 
 	for(var/obj/item/organ/external/E in src.organs)
 		E.dismember(0,DISMEMBER_METHOD_EDGE,1)
@@ -12,7 +12,7 @@
 	for(var/obj/item/I in src)
 		drop_from_inventory(I)
 		if(!QDELETED(I))
-			I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), round(30/I.w_class))
+			I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), round(THROWFORCE_GIBS/I.w_class))
 
 	..(species.gibbed_anim)
 	gibs(loc, dna, null, species.get_flesh_colour(src), species.get_blood_colour(src))
@@ -58,10 +58,8 @@
 /mob/living/carbon/human/proc/ChangeToHusk()
 	if(MUTATION_HUSK in mutations)	return
 
-	if(f_style)
-		f_style = "Shaved"		//we only change the icon_state of the hair datum, so it doesn't mess up their UI/UE
-	if(h_style)
-		h_style = "Bald"
+	f_style = /decl/sprite_accessory/facial_hair/shaved
+	h_style = /decl/sprite_accessory/hair/bald
 	update_hair(0)
 
 	mutations.Add(MUTATION_HUSK)
@@ -77,11 +75,8 @@
 
 /mob/living/carbon/human/proc/ChangeToSkeleton()
 	if(MUTATION_SKELETON in src.mutations)	return
-
-	if(f_style)
-		f_style = "Shaved"
-	if(h_style)
-		h_style = "Bald"
+	f_style = /decl/sprite_accessory/facial_hair/shaved
+	h_style = /decl/sprite_accessory/hair/bald
 	update_hair(0)
 
 	mutations.Add(MUTATION_SKELETON)

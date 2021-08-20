@@ -15,6 +15,7 @@
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	connect_dir_type = SOUTH | NORTH
 	rotate_class = PIPE_ROTATE_TWODIR
+	pipe_class = PIPE_CLASS_BINARY
 	build_icon_state = "mvalve"
 
 	uncreated_component_parts = list(
@@ -23,6 +24,7 @@
 	frame_type = /obj/item/pipe
 	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
 	base_type = /obj/machinery/atmospherics/valve/buildable
+	interact_offline = TRUE
 
 /obj/machinery/atmospherics/valve/buildable
 	uncreated_component_parts = null

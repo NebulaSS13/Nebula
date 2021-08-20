@@ -44,7 +44,7 @@
 /obj/item/t_scanner,
 /obj/item/gps,
 /obj/item/gps,
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/random/maintenance/clean,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light{
@@ -246,7 +246,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
@@ -269,7 +269,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/toolbox/electrical{
 	pixel_x = 7;
 	pixel_y = 4
@@ -364,7 +364,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 5
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/rcd,
 /obj/item/rcd_ammo/large,
 /obj/item/rcd_ammo/large,
@@ -576,7 +576,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/traidingroom)
 "bg" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/loot,
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
@@ -622,7 +622,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/traidingroom)
 "bl" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/bag/cash,
 /obj/effect/floor_decal/borderfloor{
 	dir = 5
@@ -839,14 +839,14 @@
 /obj/effect/floor_decal/corner/green{
 	dir = 5
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "by" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 5
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 2;
@@ -1304,7 +1304,7 @@
 "ck" = (
 /obj/random/loot,
 /obj/random/loot,
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
@@ -1422,7 +1422,7 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 10
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "ct" = (
@@ -1436,7 +1436,7 @@
 	dir = 10
 	},
 /obj/item/clothing/mask/gas,
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "cu" = (
@@ -1449,7 +1449,7 @@
 /obj/effect/floor_decal/corner/green{
 	dir = 5
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 2;
@@ -1467,7 +1467,7 @@
 /obj/effect/floor_decal/corner/green{
 	dir = 5
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "cw" = (
@@ -1941,7 +1941,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/structure/fuel_port{
+/obj/structure/fuel_port/hydrogen{
 	pixel_x = 32;
 	pixel_y = -32
 	},
@@ -1993,7 +1993,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/traidingroom)
 "dp" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
@@ -2613,7 +2613,7 @@
 	dir = 10
 	},
 /obj/item/binoculars,
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "eh" = (
@@ -2621,7 +2621,7 @@
 	dir = 10
 	},
 /obj/item/instrument/guitar,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 2;
@@ -2722,7 +2722,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/atmos)
 "et" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/card/id{
 	access = list("ACCESS_MERCHANT");
@@ -3316,9 +3316,9 @@
 /obj/item/chems/ivbag/blood/OPlus,
 /obj/item/chems/ivbag/blood/OMinus,
 /obj/item/chems/ivbag/blood/OMinus,
-/obj/item/chems/food/snacks/candy/donor,
-/obj/item/chems/food/snacks/candy/donor,
-/obj/item/chems/food/snacks/candy/donor,
+/obj/item/chems/food/candy/donor,
+/obj/item/chems/food/candy/donor,
+/obj/item/chems/food/candy/donor,
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
@@ -3335,7 +3335,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/effect/floor_decal/techfloor{
 	dir = 10
 	},
@@ -3352,7 +3352,7 @@
 /area/liberia/cryo)
 "fx" = (
 /obj/effect/floor_decal/techfloor,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/power/apc/liberia{
 	name = "south bump";
 	pixel_y = -24
@@ -3992,7 +3992,7 @@
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "gE" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/towel/random,
 /obj/machinery/power/apc/liberia{
 	dir = 8;
@@ -4107,7 +4107,7 @@
 /obj/item/clothing/under/lawyer,
 /obj/item/clothing/under/suit_jacket/navy,
 /obj/random/handgun,
-/obj/item/chems/food/drinks/bottle/premiumwine,
+/obj/item/chems/drinks/bottle/premiumwine,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -4619,7 +4619,7 @@
 /obj/item/stock_parts/computer/tesla_link,
 /obj/item/stock_parts/computer/tesla_link,
 /obj/item/stock_parts/computer/tesla_link,
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/alarm/liberia{
 	pixel_y = 24
@@ -4662,7 +4662,7 @@
 "hS" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/liberia/bar)
 "hT" = (
@@ -4727,7 +4727,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/flashlight,
 /obj/random/tool,
 /obj/structure/cable/blue{
@@ -4867,7 +4867,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringengines)
 "in" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/defibrillator/compact/loaded,
 /obj/item/flashlight,
 /obj/machinery/light_switch{
@@ -4877,7 +4877,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringreactor)
 "io" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/cell_charger,
 /obj/item/storage/toolbox/electrical{
 	pixel_x = 7;
@@ -4952,7 +4952,7 @@
 /obj/item/stack/nanopaste,
 /obj/item/robotanalyzer,
 /obj/item/stack/nanopaste,
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/random/maintenance/clean,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -5309,7 +5309,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "jw" = (
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/item/stack/tile/carpetred,
 /obj/item/stack/tile/carpetpurple,
 /obj/item/stack/tile/carpetorange,
@@ -5392,7 +5392,7 @@
 "jE" = (
 /obj/random/action_figure,
 /obj/random/plushie,
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
@@ -5547,7 +5547,7 @@
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
@@ -6335,7 +6335,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/atmos)
 "lo" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/defibrillator/loaded,
 /obj/machinery/light{
 	dir = 4
@@ -6397,7 +6397,7 @@
 /turf/simulated/floor/tiled/white,
 /area/liberia/medbay)
 "ls" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/firstaid/surgery{
 	pixel_y = 6
 	},
@@ -6721,7 +6721,7 @@
 "op" = (
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/item/stack/material/plank/mapped/bamboo/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
@@ -6732,7 +6732,7 @@
 /area/liberia/traidingroom)
 "oD" = (
 /obj/effect/floor_decal/techfloor,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/folder,
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/cryo)
@@ -7013,7 +7013,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "qR" = (
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/structure/railing/mapped{
 	dir = 1
 	},
@@ -7031,7 +7031,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/dockinghall)
 "rn" = (
-/obj/structure/table/rack{
+/obj/structure/rack{
 	dir = 8
 	},
 /obj/item/radio,
@@ -7284,7 +7284,7 @@
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "to" = (
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/random/loot,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -7508,7 +7508,7 @@
 /turf/space,
 /area/space)
 "xT" = (
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/structure/railing/mapped{
 	dir = 1
 	},
@@ -7551,7 +7551,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 6
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/cell_charger,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
@@ -7569,7 +7569,7 @@
 /turf/simulated/floor/tiled,
 /area/liberia/traidingroom)
 "yP" = (
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/structure/railing/mapped{
 	dir = 1
 	},
@@ -7767,7 +7767,7 @@
 /turf/simulated/wall/prepainted,
 /area/liberia/library)
 "BW" = (
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/stack/material/reinforced/mapped/plasteel/fifty,
@@ -7855,7 +7855,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringstorage)
 "Ep" = (
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/item/storage/box/gloves,
 /obj/item/storage/box/bloodpacks,
 /obj/item/storage/box/beakers,
@@ -7897,7 +7897,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/coin,
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringengines)
@@ -8748,7 +8748,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/engineeringlobby)
 "RF" = (
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -9073,7 +9073,7 @@
 /area/liberia/engineeringlobby)
 "WC" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/structure/railing/mapped,
 /obj/item/stack/material/plank/mapped/yew/twentyfive,
 /obj/item/stack/material/plank/mapped/walnut/twentyfive,
@@ -9165,7 +9165,7 @@
 /turf/simulated/floor/plating,
 /area/liberia/hallway)
 "Yt" = (
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/structure/railing/mapped{
 	dir = 1
 	},
@@ -9216,7 +9216,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/atmos)
 "Zg" = (
-/obj/structure/table/rack/dark,
+/obj/structure/rack/dark,
 /obj/random/loot,
 /obj/random/loot,
 /obj/effect/floor_decal/industrial/outline/grey,

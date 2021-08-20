@@ -126,6 +126,7 @@
 	matter = list(/decl/material/solid/metal/steel = MATTER_AMOUNT_TRACE)
 
 /obj/item/clothing/suit/straight_jacket/equipped(var/mob/user, var/slot)
+	. = ..()
 	if(slot == slot_wear_suit_str)
 		if(iscarbon(user))
 			var/mob/living/carbon/C = user
@@ -156,13 +157,12 @@
 			shine = material.reflectiveness
 		desc = "A long, thick [material.use_name] coat."
 
-/obj/item/clothing/suit/leathercoat/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
-	var/image/I = ..()
-	if(shine > 0 && slot == slot_wear_suit_str)
-		var/mutable_appearance/S = mutable_appearance(I.icon, "shine")
+/obj/item/clothing/suit/leathercoat/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && shine > 0 && slot == slot_wear_suit_str)
+		var/mutable_appearance/S = mutable_appearance(overlay.icon, "shine")
 		S.alpha = max(shine, artificial_shine)/100 * 255
-		I.overlays += S
-	return I
+		overlay.overlays += S
+	. = ..()
 
 /obj/item/clothing/suit/leathercoat/synth
 	material = /decl/material/solid/leather/synth

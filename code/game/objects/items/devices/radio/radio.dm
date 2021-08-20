@@ -343,11 +343,11 @@
 
 	// --- AI ---
 	else if (isAI(M))
-		jobname = "AI"
+		jobname = ASSIGNMENT_COMPUTER
 
 	// --- Cyborg ---
 	else if (isrobot(M))
-		jobname = "Robot"
+		jobname = ASSIGNMENT_ROBOT
 
 	// --- Personal AI (pAI) ---
 	else if (istype(M, /mob/living/silicon/pai))

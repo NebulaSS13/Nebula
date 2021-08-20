@@ -42,8 +42,8 @@
 
 /datum/unit_test/icon_test/sprite_accessories_shall_have_existing_icon_states/start_test()
 	var/sprite_accessory_subtypes = list(
-		/datum/sprite_accessory/hair,
-		/datum/sprite_accessory/facial_hair
+		/decl/sprite_accessory/hair,
+		/decl/sprite_accessory/facial_hair
 	)
 
 	var/list/failed_sprite_accessories = list()
@@ -54,8 +54,7 @@
 		var/sprite_accessories_by_name = list()
 		for(var/sprite_accessory_type in subtypesof(sprite_accessory_main_type))
 			var/failed = FALSE
-			var/datum/sprite_accessory/sat = sprite_accessory_type
-
+			var/decl/sprite_accessory/sat = sprite_accessory_type
 			var/sat_name = initial(sat.name)
 			if(sat_name)
 				group_by(sprite_accessories_by_name, sat_name, sat)

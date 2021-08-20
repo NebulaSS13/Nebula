@@ -51,8 +51,11 @@
 
 	radiation_detected_message = "High levels of radiation have been detected in proximity of the %STATION_NAME%. Station wide maintenance access has been granted. Please take shelter within the nearest maintenance tunnel."
 
-	allowed_spawns = list("Arrivals Shuttle","Cryogenic Storage")
-	default_spawn = "Arrivals Shuttle"
+	allowed_spawns = list(
+		/decl/spawnpoint/arrivals,
+		/decl/spawnpoint/cryo
+	)
+	default_spawn = /decl/spawnpoint/arrivals
 
 
 /datum/map/ministation/get_map_info()

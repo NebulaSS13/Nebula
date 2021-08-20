@@ -71,9 +71,12 @@
 /obj/structure/catwalk/create_dismantled_products(var/turf/T)
 	if(material)
 		material.create_object(get_turf(src), 2, /obj/item/stack/material/rods)
+		matter -= material.type
+		material = null
 	if(plated_tile)
 		var/plate_path = plated_tile.build_type
 		new plate_path(T)
+	. = ..()
 
 /obj/structure/catwalk/explosion_act(severity)
 	..()
@@ -99,16 +102,7 @@
 				return
 			dismantle(user)
 			return TRUE
-		if(isCrowbar(C) && plated_tile)
-			hatch_open = !hatch_open
-			if(hatch_open)
-				playsound(src, 'sound/items/Crowbar.ogg', 100, 2)
-				to_chat(user, "<span class='notice'>You pry open \the [src]'s maintenance hatch.</span>")
-			else
-				playsound(src, 'sound/items/Deconstruct.ogg', 100, 2)
-				to_chat(user, "<span class='notice'>You shut \the [src]'s maintenance hatch.</span>")
-			update_icon()
-			return TRUE
+
 		if(istype(C, /obj/item/stack/tile/mono) && !plated_tile)
 
 			var/ladder = (locate(/obj/structure/ladder) in loc)
@@ -136,6 +130,19 @@
 							plated_tile = F
 							break
 					update_icon()
+
+/obj/structure/catwalk/handle_default_crowbar_attackby(mob/user, obj/item/crowbar)
+	if(plated_tile)
+		hatch_open = !hatch_open
+		if(hatch_open)
+			playsound(src, 'sound/items/Crowbar.ogg', 100, 2)
+			to_chat(user, "<span class='notice'>You pry open \the [src]'s maintenance hatch.</span>")
+		else
+			playsound(src, 'sound/items/Deconstruct.ogg', 100, 2)
+			to_chat(user, "<span class='notice'>You shut \the [src]'s maintenance hatch.</span>")
+		update_icon()
+		return TRUE
+	. = ..()
 
 /obj/structure/catwalk/hoist_act(turf/dest)
 	for(var/A in loc)

@@ -14,7 +14,8 @@
 	lawupdate = 0
 	density = 1
 	req_access = list(access_engine, access_robotics)
-	integrated_light_power = 0.5
+	integrated_light_power = 0.4
+	integrated_light_range = 3
 	local_transmit = 1
 	possession_candidate = 1
 	speed = -1
@@ -27,7 +28,7 @@
 	mob_push_flags = SIMPLE_ANIMAL
 	mob_always_swap = 1
 
-	mob_size = MOB_SIZE_MEDIUM // Small mobs can't open doors, it's a huge pain for drones.
+	mob_size = MOB_SIZE_SMALL
 
 	laws = /datum/ai_laws/drone
 
@@ -51,7 +52,7 @@
 	remove_language(/decl/language/binary)
 	add_language(/decl/language/binary, 0)
 	add_language(/decl/language/binary/drone, 1)
-	set_extension(src, /datum/extension/hattable, hat_x, hat_y)
+	set_extension(src, /datum/extension/hattable, list(hat_x, hat_y))
 
 	default_language = /decl/language/binary/drone
 	// NO BRAIN.
@@ -92,7 +93,7 @@
 	if(too_many_active_drones())
 		to_chat(src, "<span class='danger'>The maximum number of active drones has been reached..</span>")
 		return 0
-	if(jobban_isbanned(possessor,"Robot"))
+	if(jobban_isbanned(possessor,ASSIGNMENT_ROBOT))
 		to_chat(usr, "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>")
 		return 0
 	if(!possessor.MayRespawn(1,DRONE_SPAWN_DELAY))
@@ -118,6 +119,8 @@
 	module_type = /obj/item/robot_module/drone/construction
 	can_pull_size = ITEM_SIZE_STRUCTURE
 	can_pull_mobs = MOB_PULL_SAME
+	integrated_light_power = 0.8
+	integrated_light_range = 5
 	hat_x = 1
 	hat_y = -12
 
@@ -143,7 +146,7 @@
 
 /mob/living/silicon/robot/drone/on_update_icon()
 
-	cut_overlays()
+	..()
 	if(stat == 0)
 		if(controlling_ai)
 			add_overlay("eyes-[icon_state]-ai")

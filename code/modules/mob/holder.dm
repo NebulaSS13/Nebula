@@ -218,7 +218,7 @@ var/global/list/holder_mob_icons = list(
 		user.put_in_hands(hattable.hat)
 		user.visible_message(SPAN_DANGER("\The [user] removes \the [src]'s [hattable.hat]!"))
 		hattable.hat = null
-		update_icons()
+		update_icon()
 		return TRUE
 
 	if(ishuman(user))

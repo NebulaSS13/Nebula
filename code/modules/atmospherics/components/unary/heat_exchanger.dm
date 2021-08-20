@@ -16,6 +16,7 @@
 	frame_type = /obj/item/pipe
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/pipe
+	interact_offline = TRUE
 
 /obj/machinery/atmospherics/unary/heat_exchanger/Destroy()
 	if(partner)

@@ -24,7 +24,7 @@
 	if(choice == "robot")
 		var/mob/living/silicon/robot/R = new(get_turf(M))
 		R.set_gender(M.gender)
-		R.job = "Robot"
+		R.job = ASSIGNMENT_ROBOT
 		R.mmi = new /obj/item/mmi(R)
 		R.mmi.transfer_identity(M)
 		return R

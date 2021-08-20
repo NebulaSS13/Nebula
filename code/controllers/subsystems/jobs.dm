@@ -26,7 +26,7 @@ SUBSYSTEM_DEF(jobs)
 
 /datum/controller/subsystem/jobs/proc/get_department_by_type(var/dept_ref)
 	if(!length(departments_by_type))
-		departments_by_type = sortTim(decls_repository.get_decls_of_subtype(/decl/department), /proc/cmp_departments_dsc, TRUE)
+		departments_by_type = sortTim(decls_repository.get_decls_of_type(/decl/department), /proc/cmp_departments_dsc, TRUE)
 	. = departments_by_type[dept_ref]
 
 /datum/controller/subsystem/jobs/Initialize(timeofday)
@@ -40,7 +40,7 @@ SUBSYSTEM_DEF(jobs)
 		primary_job_datums += job
 
 	for(var/datum/job/job in primary_job_datums)
-		if(isnull(job.primary_department))
+		if(isnull(job.primary_department) && length(job.department_types))
 			job.primary_department = job.department_types[1]
 
 	// Create abstract submap archetype jobs for use in prefs, etc.
@@ -78,7 +78,7 @@ SUBSYSTEM_DEF(jobs)
 				if(J)
 					J.total_positions = text2num(value)
 					J.spawn_positions = text2num(value)
-					if(name == "AI" || name == "Robot")//I dont like this here but it will do for now
+					if((ASSIGNMENT_ROBOT in J.event_categories) || (ASSIGNMENT_COMPUTER in J.event_categories))
 						J.total_positions = 0
 
 	// Init skills.
@@ -501,7 +501,7 @@ SUBSYSTEM_DEF(jobs)
 		if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 			H.forceMove(S.loc)
 		else
-			var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(H.client)
+			var/decl/spawnpoint/spawnpoint = job.get_spawnpoint(H.client)
 			H.forceMove(pick(spawnpoint.turfs))
 			spawnpoint.after_join(H)
 
@@ -510,7 +510,7 @@ SUBSYSTEM_DEF(jobs)
 			H.buckled.forceMove(H.loc)
 			H.buckled.set_dir(H.dir)
 
-	if(rank != "Robot" && rank != "AI")		//These guys get their emails later.
+	if(!(ASSIGNMENT_ROBOT in job.event_categories) && !(ASSIGNMENT_COMPUTER in job.event_categories)) //These guys get their emails later.
 		var/domain = "freemail.net"
 		if(H.char_branch?.email_domain)
 			domain = H.char_branch.email_domain
@@ -555,13 +555,6 @@ SUBSYSTEM_DEF(jobs)
 	if(job.req_admin_notify)
 		to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
 
-	//Gives glasses to the vision impaired
-	if(H.disabilities & NEARSIGHTED)
-		var/equipped = H.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(H), slot_glasses_str)
-		if(equipped)
-			var/obj/item/clothing/glasses/G = H.glasses
-			G.prescription = 7
-
 	if(H.needs_wheelchair())
 		equip_wheelchair(H)
 
@@ -571,7 +564,7 @@ SUBSYSTEM_DEF(jobs)
 
 	job.post_equip_rank(H, alt_title || rank)
 
-	INVOKE_ASYNC(GLOBAL_PROC, .proc/show_location_blurb, H.client, 30)
+	H.client.show_location_blurb(30)
 
 	return H
 
@@ -587,20 +580,17 @@ SUBSYSTEM_DEF(jobs)
 		empty_playable_ai_cores += new /obj/structure/aicore/deactivated(get_turf(S))
 	return 1
 
-/proc/show_location_blurb(client/C, duration)
-	set waitfor = 0
-
-	if(!C)
-		return
+/client/proc/show_location_blurb(duration)
+	set waitfor = FALSE
 
 	var/location_name = station_name()
 
-	var/obj/effect/overmap/visitable/V = C.mob.get_owning_overmap_object()
+	var/obj/effect/overmap/visitable/V = mob.get_owning_overmap_object()
 	if(istype(V))
 		location_name = V.name
 
 	var/style = "font-family: 'Fixedsys'; -dm-text-outline: 1 black; font-size: 11px;"
-	var/area/A = get_area(C.mob)
+	var/area/A = get_area(mob)
 	var/text = "[stationdate2text()], [stationtime2text()]\n[location_name], [A.name]"
 	text = uppertext(text)
 
@@ -612,13 +602,13 @@ SUBSYSTEM_DEF(jobs)
 	T.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 	T.screen_loc = "LEFT+1,BOTTOM+2"
 
-	C.screen += T
+	screen += T
 	animate(T, alpha = 255, time = 10)
-	for(var/i = 1 to length(text)+1)
-		T.maptext = "<span style=\"[style]\">[copytext(text,1,i)] </span>"
+	for(var/i = 1 to length_char(text) + 1)
+		T.maptext = "<span style=\"[style]\">[copytext_char(text, 1, i)] </span>"
 		sleep(1)
 
-	addtimer(CALLBACK(GLOBAL_PROC, .proc/fade_location_blurb, C, T), duration)
+	addtimer(CALLBACK(GLOBAL_PROC, .proc/fade_location_blurb, src, T), duration)
 
 /proc/fade_location_blurb(client/C, obj/T)
 	animate(T, alpha = 0, time = 5)

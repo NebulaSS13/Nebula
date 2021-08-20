@@ -26,7 +26,7 @@
 	max_gas = null
 	minbodytemp = 0
 
-	meat_type = /obj/item/chems/food/snacks/bearmeat
+	meat_type = /obj/item/chems/food/bearmeat
 	meat_amount = 10
 	bone_amount = 20
 	skin_amount = 20

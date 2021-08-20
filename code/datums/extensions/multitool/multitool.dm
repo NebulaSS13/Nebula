@@ -11,7 +11,6 @@
 	if(html)
 		var/datum/browser/popup = new(user, "multitool", "Multitool Menu", window_x, window_y)
 		popup.set_content(html)
-		popup.set_title_image(user.browse_rsc_icon(M.icon, M.icon_state))
 		popup.open()
 	else
 		close_window(usr)

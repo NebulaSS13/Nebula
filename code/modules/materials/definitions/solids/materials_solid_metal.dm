@@ -13,9 +13,11 @@
 	)
 	default_solid_form = /obj/item/stack/material/ingot
 	table_icon_base = "metal"
+	abstract_type = /decl/material/solid/metal
 
 /decl/material/solid/metal/uranium
 	name = "uranium"
+	uid = "solid_uranium"
 	lore_text = "A silvery-white metallic chemical element in the actinide series, weakly radioactive. Commonly used as fuel in fission reactors."
 	mechanics_text = "Uranium can be used as fuel in fission reactors."
 	taste_description = "the inside of a reactor"
@@ -53,6 +55,7 @@
 
 /decl/material/solid/metal/radium
 	name = "radium"
+	uid = "solid_radium"
 	lore_text = "Radium is an alkaline earth metal. It is extremely radioactive."
 	mechanics_text = "Radium can be used as a neutron source in fission reactors."
 	taste_description = "the color blue, and regret"
@@ -62,6 +65,7 @@
 
 /decl/material/solid/metal/gold
 	name = "gold"
+	uid = "solid_gold"
 	lore_text = "A heavy, soft, ductile metal. Once considered valuable enough to back entire currencies, now predominantly used in corrosion-resistant electronics."
 	color = COLOR_GOLD
 	hardness = MAT_VALUE_FLEXIBLE + 5
@@ -80,6 +84,7 @@
 
 /decl/material/solid/metal/bronze
 	name = "bronze"
+	uid = "solid_bronze"
 	lore_text = "An alloy of copper and tin. Once used in weapons and laboring tools."
 	color = "#ccbc63"
 	brute_armor = 3
@@ -93,6 +98,7 @@
 
 /decl/material/solid/metal/blackbronze
 	name = "black bronze"
+	uid = "solid_black_bronze"
 	lore_text = "An alloy of copper and silver. Used in ancient ceremonial gear."
 	color = "#3f352a"
 	brute_armor = 4
@@ -106,6 +112,7 @@
 
 /decl/material/solid/metal/redgold
 	name = "red gold"
+	uid = "solid_red_gold"
 	lore_text = "An alloy of copper and gold. A soft metal used for its ornamental properties."
 	color = "#ff7a59"
 	reflectiveness = MAT_VALUE_SHINY
@@ -113,6 +120,7 @@
 
 /decl/material/solid/metal/brass
 	name = "brass"
+	uid = "solid_brass"
 	lore_text = "An alloy of copper and zinc. Renowned for its golden color."
 	color = "#dab900"
 	reflectiveness = MAT_VALUE_VERY_SHINY
@@ -121,6 +129,7 @@
 
 /decl/material/solid/metal/copper
 	name = "copper"
+	uid = "solid_copper"
 	lore_text = "A metal used in some components and many alloys. Known for its color-shifting properties when oxidized."
 	color = COLOR_COPPER
 	weight = MAT_VALUE_NORMAL
@@ -129,6 +138,7 @@
 
 /decl/material/solid/metal/silver
 	name = "silver"
+	uid = "solid_silver"
 	lore_text = "A soft, white, lustrous transition metal. Has many and varied industrial uses in electronics, solar panels and mirrors."
 	color = "#d1e6e3"
 	hardness = MAT_VALUE_FLEXIBLE + 10
@@ -146,6 +156,7 @@
 
 /decl/material/solid/metal/steel
 	name = "steel"
+	uid = "solid_steel"
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	weight = MAT_VALUE_NORMAL
 	wall_support_value = MAT_VALUE_VERY_HEAVY // Ideal construction material.
@@ -169,16 +180,7 @@
 	. = ..()
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
-	. += new/datum/stack_recipe_list("office chairs",list(
-		new/datum/stack_recipe/furniture/chair/office/dark(src),
-		new/datum/stack_recipe/furniture/chair/office/light(src)
-		))
-	. += new/datum/stack_recipe_list("comfy office chairs", create_recipe_list(/datum/stack_recipe/furniture/chair/office/comfy))
-	. += new/datum/stack_recipe_list("comfy chairs", create_recipe_list(/datum/stack_recipe/furniture/chair/comfy))
-	. += new/datum/stack_recipe_list("armchairs", create_recipe_list(/datum/stack_recipe/furniture/chair/arm))
 	. += new/datum/stack_recipe/key(src)
-	. += new/datum/stack_recipe/furniture/table_frame(src)
-	. += new/datum/stack_recipe/furniture/rack(src)
 	. += new/datum/stack_recipe/furniture/closet(src)
 	. += new/datum/stack_recipe/furniture/canister(src)
 	. += new/datum/stack_recipe/furniture/tank(src)
@@ -197,11 +199,10 @@
 	. += new/datum/stack_recipe/air_alarm(src)
 	. += new/datum/stack_recipe/fire_alarm(src)
 	. += new/datum/stack_recipe_list("modular computer frames", create_recipe_list(/datum/stack_recipe/computer))
-	. += new/datum/stack_recipe/furniture/coffin(src)
-	. += new/datum/stack_recipe/butcher_hook(src)
 
 /decl/material/solid/metal/steel/holographic
 	name = "holographic steel"
+	uid = "solid_holographic_steel"
 	shard_type = SHARD_NONE
 	conductive = 0
 	hidden_from_codex = TRUE
@@ -212,6 +213,7 @@
 
 /decl/material/solid/metal/stainlesssteel
 	name = "stainless steel"
+	uid = "solid_stainless_steel"
 	lore_text = "A reflective alloy of steel and chromium. Used for its reflective and sturdy properties."
 	wall_support_value = MAT_VALUE_HEAVY
 	integrity = 175
@@ -228,6 +230,7 @@
 
 /decl/material/solid/metal/aluminium
 	name = "aluminium"
+	uid = "solid_aluminium"
 	lore_text = "A low-density ductile metal with a silvery-white sheen."
 	integrity = 125
 	weight = MAT_VALUE_LIGHT
@@ -248,6 +251,7 @@
 
 /decl/material/solid/metal/aluminium/holographic
 	name = "holoaluminium"
+	uid = "solid_holographic_aluminium"
 	shard_type = SHARD_NONE
 	conductive = 0
 	hidden_from_codex = TRUE
@@ -257,6 +261,7 @@
 
 /decl/material/solid/metal/plasteel
 	name = "plasteel"
+	uid = "solid_plasteel"
 	lore_text = "An alloy of steel and platinum. When regular high-tensile steel isn't tough enough to get the job done, the smart consumer turns to frankly absurd alloys of steel and platinum."
 	integrity = 400
 	melting_point = 6000
@@ -285,6 +290,7 @@
 
 /decl/material/solid/metal/titanium
 	name = "titanium"
+	uid = "solid_titanium"
 	lore_text = "A light, strong, corrosion-resistant metal. Perfect for cladding high-velocity ballistic supply pods."
 	brute_armor = 10
 	burn_armor = 8
@@ -315,6 +321,7 @@
 
 /decl/material/solid/metal/plasteel/ocp
 	name = "osmium-carbide plasteel"
+	uid = "solid_osmium_carbide_plasteel"
 	integrity = 200
 	melting_point = 12000
 	icon_base = 'icons/turf/walls/solid.dmi'
@@ -330,6 +337,7 @@
 
 /decl/material/solid/metal/osmium
 	name = "osmium"
+	uid = "solid_osmium"
 	lore_text = "An extremely hard form of platinum."
 	color = "#9999ff"
 	stack_origin_tech = "{'materials':5}"
@@ -338,6 +346,7 @@
 
 /decl/material/solid/metal/platinum
 	name = "platinum"
+	uid = "solid_platinum"
 	lore_text = "A very dense, unreactive, precious metal. Has many industrial uses, particularly as a catalyst."
 	color = "#deddff"
 	weight = MAT_VALUE_VERY_HEAVY
@@ -357,6 +366,7 @@
 
 /decl/material/solid/metal/iron
 	name = "iron"
+	uid = "solid_iron"
 	lore_text = "A ubiquitous, very common metal. The epitaph of stars and the primary ingredient in Earth's core."
 	color = "#5c5454"
 	hitsound = 'sound/weapons/smash.ogg'
@@ -372,6 +382,7 @@
 
 /decl/material/solid/metal/tin
 	name = "tin"
+	uid = "solid_tin"
 	lore_text = "A soft metal that can be cut without much force. Used in many alloys."
 	color = "#c5c5a8"
 	hardness = MAT_VALUE_SOFT + 10
@@ -380,6 +391,7 @@
 
 /decl/material/solid/metal/lead
 	name = "lead"
+	uid = "solid_lead"
 	lore_text = "A very soft, heavy and poisonous metal. You probably shouldn't lick it."
 	color = "#3f3f4d"
 	hardness = MAT_VALUE_SOFT
@@ -390,6 +402,7 @@
 
 /decl/material/solid/metal/zinc
 	name = "zinc"
+	uid = "solid_zinc"
 	lore_text = "A dull-looking metal with some use in alloying."
 	color = "#92aae4"
 	construction_difficulty = MAT_VALUE_NORMAL_DIY
@@ -397,6 +410,7 @@
 
 /decl/material/solid/metal/chromium
 	name = "chromium"
+	uid = "solid_chromium"
 	lore_text = "A heavy metal with near perfect reflectiveness. Used in stainless alloys."
 	color = "#dadada"
 	integrity = 200
@@ -415,6 +429,7 @@
 // Adminspawn only, do not let anyone get this.
 /decl/material/solid/metal/alienalloy
 	name = "dense alloy"
+	uid = "solid_alienalloy"
 	color = "#6c7364"
 	integrity = 1200
 	melting_point = 6000       // Hull plating.
@@ -429,12 +444,14 @@
 // Likewise.
 /decl/material/solid/metal/alienalloy/elevatorium
 	name = "elevator panelling"
+	uid = "solid_elevator"
 	color = "#666666"
 	hidden_from_codex = TRUE
 	default_solid_form = /obj/item/stack/material/sheet
 
 /decl/material/solid/metal/tungsten
 	name = "tungsten"
+	uid = "solid_tungsten"
 	lore_text = "A chemical element, and a strong oxidising agent."
 	weight = MAT_VALUE_VERY_HEAVY
 	taste_mult = 0 //no taste

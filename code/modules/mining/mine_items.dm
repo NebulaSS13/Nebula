@@ -33,7 +33,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	force = 15.0
-	throwforce = 4.0
+	throwforce = 4
 	w_class = ITEM_SIZE_HUGE
 	material = /decl/material/solid/metal/steel
 	origin_tech = "{'materials':1,'engineering':1}"
@@ -55,13 +55,12 @@
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
-/obj/item/pickaxe/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && build_from_parts && check_state_in_icon("[ret.icon_state]-handle", ret.icon))
-		var/image/handle = image(ret.icon, "[ret.icon_state]-handle")
+/obj/item/pickaxe/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && build_from_parts && check_state_in_icon("[overlay.icon_state]-handle", overlay.icon))
+		var/image/handle = image(overlay.icon, "[overlay.icon_state]-handle")
 		handle.appearance_flags |= RESET_COLOR
-		ret.add_overlay(handle)
-	return ret
+		overlay.overlays += handle
+	. = ..()
 
 /obj/item/pickaxe/hammer
 	name = "sledgehammer"
@@ -158,7 +157,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_LOWER_BODY
 	force = 8.0
-	throwforce = 4.0
+	throwforce = 4
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = "{'materials':1,'engineering':1}"
 	material = /decl/material/solid/metal/steel
@@ -173,7 +172,7 @@
 	icon_state = "spade"
 	item_state = "spade"
 	force = 5.0
-	throwforce = 7.0
+	throwforce = 7
 	w_class = ITEM_SIZE_SMALL
 
 // Flags.
@@ -185,6 +184,7 @@
 	amount = 10
 	max_amount = 10
 	icon = 'icons/obj/items/marking_beacon.dmi'
+	z_flags = ZMM_MANGLE_PLANES
 
 	var/upright = 0
 	var/fringe = null

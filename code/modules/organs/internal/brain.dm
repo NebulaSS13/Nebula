@@ -7,7 +7,7 @@
 	icon_state = "brain2"
 	force = 1.0
 	w_class = ITEM_SIZE_SMALL
-	throwforce = 1.0
+	throwforce = 1
 	throw_speed = 3
 	throw_range = 5
 	origin_tech = "{'biotech':3}"
@@ -252,7 +252,7 @@
 	var/blood_volume = owner.get_blood_oxygenation()
 	if(blood_volume < BLOOD_VOLUME_SURVIVE)
 		to_chat(user, "<span class='danger'>Parts of [src] didn't survive the procedure due to lack of air supply!</span>")
-		set_max_damage(Floor(max_damage - 0.25*damage))
+		set_max_damage(FLOOR(max_damage - 0.25*damage))
 	heal_damage(damage)
 
 /obj/item/organ/internal/brain/get_scarring_level()

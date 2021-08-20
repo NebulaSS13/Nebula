@@ -83,6 +83,7 @@
 		/datum/computer_file/program/camera_monitor,
 		/datum/computer_file/program/reports
 	)
+	event_categories = list(ASSIGNMENT_SECURITY)
 
 /datum/job/hos/equip(var/mob/living/carbon/human/H)
 	. = ..()
@@ -230,6 +231,7 @@
 		/datum/computer_file/program/digitalwarrant,
 		/datum/computer_file/program/camera_monitor
 	)
+	event_categories = list(ASSIGNMENT_SECURITY)
 
 /obj/item/card/id/security
 	name = "identification card"

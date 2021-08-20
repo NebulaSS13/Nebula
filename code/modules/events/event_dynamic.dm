@@ -27,33 +27,33 @@ var/global/list/event_last_fired = list()
 		possibleEvents[/datum/event/money_hacker] = max(min(25, global.player_list.len) * 4, 200)
 
 
-	possibleEvents[/datum/event/carp_migration] = 20 + 10 * active_with_role["Engineer"]
-	possibleEvents[/datum/event/brand_intelligence] = 10 + 10 * active_with_role["Janitor"]
+	possibleEvents[/datum/event/carp_migration] = 20 + 10 * active_with_role[ASSIGNMENT_ENGINEER]
+	possibleEvents[/datum/event/brand_intelligence] = 10 + 10 * active_with_role[ASSIGNMENT_JANITOR]
 
-	possibleEvents[/datum/event/rogue_drone] = 5 + 25 * active_with_role["Engineer"] + 25 * active_with_role["Security"]
-	possibleEvents[/datum/event/infestation] = 100 + 100 * active_with_role["Janitor"]
+	possibleEvents[/datum/event/rogue_drone] = 5 + 25 * active_with_role[ASSIGNMENT_ENGINEER] + 25 * active_with_role[ASSIGNMENT_SECURITY]
+	possibleEvents[/datum/event/infestation] = 100 + 100 * active_with_role[ASSIGNMENT_JANITOR]
 
-	possibleEvents[/datum/event/communications_blackout] = 50 + 25 * active_with_role["AI"] + active_with_role["Scientist"] * 25
-	possibleEvents[/datum/event/ionstorm] = active_with_role["AI"] * 25 + active_with_role["Robot"] * 25 + active_with_role["Engineer"] * 10 + active_with_role["Scientist"] * 5
-	possibleEvents[/datum/event/grid_check] = 25 + 10 * active_with_role["Engineer"]
-	possibleEvents[/datum/event/electrical_storm] = 15 * active_with_role["Janitor"] + 5 * active_with_role["Engineer"]
-	possibleEvents[/datum/event/wallrot] = 30 * active_with_role["Engineer"] + 50 * active_with_role["Gardener"]
+	possibleEvents[/datum/event/communications_blackout] = 50 + 25 * active_with_role[ASSIGNMENT_COMPUTER] + active_with_role[ASSIGNMENT_SCIENTIST] * 25
+	possibleEvents[/datum/event/ionstorm] = active_with_role[ASSIGNMENT_COMPUTER] * 25 + active_with_role[ASSIGNMENT_ROBOT] * 25 + active_with_role[ASSIGNMENT_ENGINEER] * 10 + active_with_role[ASSIGNMENT_SCIENTIST] * 5
+	possibleEvents[/datum/event/grid_check] = 25 + 10 * active_with_role[ASSIGNMENT_ENGINEER]
+	possibleEvents[/datum/event/electrical_storm] = 15 * active_with_role[ASSIGNMENT_JANITOR] + 5 * active_with_role[ASSIGNMENT_ENGINEER]
+	possibleEvents[/datum/event/wallrot] = 30 * active_with_role[ASSIGNMENT_ENGINEER] + 50 * active_with_role[ASSIGNMENT_GARDENER]
 
 	if(!spacevines_spawned)
-		possibleEvents[/datum/event/spacevine] = 10 + 5 * active_with_role["Engineer"]
+		possibleEvents[/datum/event/spacevine] = 10 + 5 * active_with_role[ASSIGNMENT_ENGINEER]
 	if(minutes_passed >= 30) // Give engineers time to set up engine
-		possibleEvents[/datum/event/meteor_wave] = 10 * active_with_role["Engineer"]
-		possibleEvents[/datum/event/blob] = 10 * active_with_role["Engineer"]
+		possibleEvents[/datum/event/meteor_wave] = 10 * active_with_role[ASSIGNMENT_ENGINEER]
+		possibleEvents[/datum/event/blob] = 10 * active_with_role[ASSIGNMENT_ENGINEER]
 
-	if(active_with_role["Medical"] > 0)
-		possibleEvents[/datum/event/radiation_storm] = active_with_role["Medical"] * 10
-		possibleEvents[/datum/event/spontaneous_appendicitis] = active_with_role["Medical"] * 10
+	if(active_with_role[ASSIGNMENT_MEDICAL] > 0)
+		possibleEvents[/datum/event/radiation_storm] = active_with_role[ASSIGNMENT_MEDICAL] * 10
+		possibleEvents[/datum/event/spontaneous_appendicitis] = active_with_role[ASSIGNMENT_MEDICAL] * 10
 
-	possibleEvents[/datum/event/prison_break] = active_with_role["Security"] * 50
-	if(active_with_role["Security"] > 0)
+	possibleEvents[/datum/event/prison_break] = active_with_role[ASSIGNMENT_SECURITY] * 50
+	if(active_with_role[ASSIGNMENT_SECURITY] > 0)
 		if(!sent_spiders_to_station)
-			possibleEvents[/datum/event/spider_infestation] = max(active_with_role["Security"], 5) + 5
-		possibleEvents[/datum/event/random_antag] = max(active_with_role["Security"], 5) + 2.5
+			possibleEvents[/datum/event/spider_infestation] = max(active_with_role[ASSIGNMENT_SECURITY], 5) + 5
+		possibleEvents[/datum/event/random_antag] = max(active_with_role[ASSIGNMENT_SECURITY], 5) + 2.5
 
 	for(var/event_type in event_last_fired) if(possibleEvents[event_type])
 		var/time_passed = world.time - event_last_fired[event_type]

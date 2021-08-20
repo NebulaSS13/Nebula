@@ -39,6 +39,8 @@
 	. = ..(mapload, material)
 	if(!stack_merge_type)
 		stack_merge_type = type
+	if(!singular_name)
+		singular_name = "sheet"
 	if(!plural_name)
 		plural_name = "[singular_name]s"
 
@@ -317,7 +319,7 @@
 /obj/item/stack/get_storage_cost()	//Scales storage cost to stack size
 	. = ..()
 	if (amount < max_amount)
-		. = ceil(. * amount / max_amount)
+		. = CEILING(. * amount / max_amount)
 
 /obj/item/stack/attack_hand(mob/user)
 	if(user.is_holding_offhand(src))

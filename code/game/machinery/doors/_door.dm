@@ -55,6 +55,9 @@
 
 	var/set_dir_on_update = TRUE
 
+/obj/machinery/door/proc/can_operate(var/mob/user)
+	. = istype(user) && !user.restrained() && (!issmall(user) || ishuman(user) || issilicon(user) || istype(user, /mob/living/bot))
+
 /obj/machinery/door/attack_generic(var/mob/user, var/damage, var/attack_verb, var/environment_smash)
 	if(environment_smash >= 1)
 		damage = max(damage, 10)
@@ -66,7 +69,9 @@
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	attack_animation(user)
 
-/obj/machinery/door/Initialize()
+/obj/machinery/door/Initialize(var/mapload, var/d, var/populate_parts = TRUE, var/obj/structure/door_assembly/assembly = null)
+	if(!populate_parts)
+		inherit_from_assembly(assembly)
 	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	..()
 	. = INITIALIZE_HINT_LATELOAD
@@ -87,6 +92,15 @@
 	if(autoset_access && length(req_access))
 		PRINT_STACK_TRACE("A door with mapped access restrictions was set to autoinitialize access.")
 #endif
+
+/obj/machinery/door/proc/inherit_from_assembly(var/obj/structure/door_assembly/assembly)
+	if (assembly && istype(assembly))
+		frame_type = assembly.type
+		if(assembly.electronics)
+			var/obj/item/stock_parts/circuitboard/electronics = assembly.electronics
+			install_component(electronics, FALSE) // will be refreshed in parent call; unsafe to refresh prior to calling ..() in Initialize
+			electronics.construct(src)
+		return TRUE
 
 /obj/machinery/door/LateInitialize(mapload, dir=0, populate_parts=TRUE)
 	..()
@@ -150,33 +164,30 @@
 		set_bounds()
 
 /obj/machinery/door/Bumped(atom/AM)
-	if(panel_open || operating) return
-	if(ismob(AM))
-		var/mob/M = AM
-		if(world.time - M.last_bumped <= 10) return	//Can bump-open one airlock per second. This is to prevent shock spam.
-		M.last_bumped = world.time
-		if(!M.restrained() && (!issmall(M) || ishuman(M) || issilicon(M)))
-			bumpopen(M)
+	if(panel_open || operating)
 		return
 
-	if(istype(AM, /mob/living/bot))
-		var/mob/living/bot/bot = AM
-		if(src.check_access(bot.botcard))
-			if(density)
-				open()
+	if(ismob(AM))
+		var/mob/M = AM
+		if(world.time - M.last_bumped <= 10)
+			return	//Can bump-open one airlock per second. This is to prevent shock spam.
+		M.last_bumped = world.time
+		bumpopen(M)
 
 /obj/machinery/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group) return !block_air_zones
+	if(air_group)
+		return !block_air_zones
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return !opacity
 	return !density
 
 /obj/machinery/door/proc/bumpopen(mob/user)
-	if(operating)	return
+	if(operating || !can_operate(user))
+		return
 	if(user.last_airflow > world.time - vsc.airflow_delay) //Fakkit
 		return
 	src.add_fingerprint(user)
-	if(density)
+	if(density && can_operate(user))
 		if(allowed(user))
 			open()
 		else
@@ -224,7 +235,7 @@
 	if(operating || !can_open_manually)
 		return FALSE
 
-	if(allowed(user))
+	if(allowed(user) && can_operate(user))
 		toggle()
 	else if(density)
 		do_animate("deny")
@@ -246,7 +257,7 @@
 
 		//figure out how much metal we need
 		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT
-		amount_needed = ceil(amount_needed)
+		amount_needed = CEILING(amount_needed)
 
 		var/obj/item/stack/stack = I
 		var/transfer
@@ -534,7 +545,7 @@
 			. |= lock.req_access
 
 /obj/machinery/door/do_simple_ranged_interaction(var/mob/user)
-	if((!requiresID() || allowed(null)) && can_open_manually)
+	if((!requiresID() || allowed(null)) && can_operate(user) && can_open_manually)
 		toggle()
 	return TRUE
 

@@ -111,9 +111,7 @@
 		overlays += overlay_image(icon, active_tool)
 
 /obj/item/knife/folding/swiss/get_mob_overlay(mob/user_mob, slot, bodypart)
-	if(active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE)
-		return ..()
-	return new /image
+	. = (active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE) ? ..() : new /image
 
 /obj/item/knife/folding/swiss/resolve_attackby(obj/target, mob/user)
 	if((istype(target, /obj/structure/window) || istype(target, /obj/structure/grille)) && active_tool == SWISSKNF_GBLADE)

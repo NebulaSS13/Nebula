@@ -69,7 +69,7 @@
 	if(amt <= 0 || !istype(sprayloc))
 		return
 	var/spraydir = pick(global.alldirs)
-	amt = ceil(amt/BLOOD_SPRAY_DISTANCE)
+	amt = CEILING(amt/BLOOD_SPRAY_DISTANCE)
 	var/bled = 0
 	spawn(0)
 		for(var/i = 1 to BLOOD_SPRAY_DISTANCE)
@@ -342,8 +342,13 @@
 
 	var/blood_volume_mod = max(0, 1 - getOxyLoss()/(species.total_health/2))
 	var/oxygenated_mult = 0
-	if(has_chemical_effect(CE_OXYGENATED, 1))
-		oxygenated_mult = 0.5
+	switch(GET_CHEMICAL_EFFECT(src, CE_OXYGENATED))
+		if(1)
+			oxygenated_mult = 0.5
+		if(2)
+			oxygenated_mult = 0.7
+		if(3)
+			oxygenated_mult = 0.9
 	blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
 	blood_volume = blood_volume * blood_volume_mod
 	return min(blood_volume, 100)

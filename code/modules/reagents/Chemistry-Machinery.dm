@@ -1,5 +1,3 @@
-#define BOTTLE_SPRITES list("bottle-1", "bottle-2", "bottle-3", "bottle-4") //list of available bottle sprites
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13,12 +11,15 @@
 	idle_power_usage = 20
 	clicksound = "button"
 	clickvol = 20
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+	base_type = /obj/machinery/chem_master
 	var/obj/item/chems/beaker = null
 	var/obj/item/storage/pill_bottle/loaded_pill_bottle = null
 	var/mode = 0
 	var/useramount = 30 // Last used amount
 	var/pillamount = 10
-	var/bottlesprite = "bottle-1" //yes, strings
 	var/pillsprite = "1"
 	var/client/has_sprites = list()
 	var/max_pill_count = 20
@@ -26,6 +27,8 @@
 	core_skill = SKILL_CHEMISTRY
 	var/sloppy = 1 //Whether reagents will not be fully purified (sloppy = 1) or there will be reagent loss (sloppy = 0) on reagent add.
 	var/reagent_limit = 120
+	var/bottle_label_color = COLOR_WHITE
+	var/bottle_lid_color = COLOR_OFF_WHITE
 
 /obj/machinery/chem_master/Initialize()
 	. = ..()
@@ -47,6 +50,7 @@
 		to_chat(user, "You add the beaker to the machine!")
 		src.updateUsrDialog()
 		icon_state = "mixer1"
+		return TRUE
 
 	else if(istype(B, /obj/item/storage/pill_bottle))
 
@@ -58,6 +62,9 @@
 		src.loaded_pill_bottle = B
 		to_chat(user, "You add the pill bottle into the dispenser slot!")
 		src.updateUsrDialog()
+		return TRUE
+	
+	return ..()
 
 /obj/machinery/chem_master/Topic(href, href_list, state)
 	if(..())
@@ -187,17 +194,12 @@
 			dat += "</table>"
 			show_browser(user, dat, "window=chem_master")
 			return
-		else if(href_list["change_bottle"])
-			var/dat = "<table>"
-			for(var/sprite in BOTTLE_SPRITES)
-				dat += "<tr><td><a href=\"?src=\ref[src]&bottle_sprite=[sprite]\"><img src=\"[sprite].png\" /></a></td></tr>"
-			dat += "</table>"
-			show_browser(user, dat, "window=chem_master")
-			return
 		else if(href_list["pill_sprite"])
 			pillsprite = href_list["pill_sprite"]
-		else if(href_list["bottle_sprite"])
-			bottlesprite = href_list["bottle_sprite"]
+		else if(href_list["label_color"])
+			bottle_label_color = input(usr, "Pick new bottle label color", "Label color", bottle_label_color) as color
+		else if(href_list["lid_color"])
+			bottle_lid_color = input(usr, "Pick new bottle lid color", "Lid color", bottle_lid_color) as color
 
 	updateUsrDialog()
 
@@ -228,8 +230,10 @@
 	var/obj/item/chems/glass/bottle/P = new/obj/item/chems/glass/bottle(loc)
 	if(!name)
 		name = reagents.get_primary_reagent_name()
-	P.SetName("[name] bottle")
-	P.icon_state = bottlesprite
+	P.label_text = name
+	P.update_name_label()
+	P.lid_color = bottle_lid_color
+	P.label_color = bottle_label_color
 	reagents.trans_to_obj(P,60)
 	P.update_icon()
 
@@ -247,8 +251,6 @@
 			has_sprites += user.client
 			for(var/i = 1 to MAX_PILL_SPRITE)
 				send_rsc(usr, icon('icons/obj/items/chem/pill.dmi', "pill" + num2text(i)), "pill[i].png")
-			for(var/sprite in BOTTLE_SPRITES)
-				send_rsc(usr, icon('icons/obj/items/chem/bottle.dmi', sprite), "[sprite].png")
 	var/dat = list()
 	dat += "<TITLE>[name]</TITLE>"
 	dat += "[name] Menu:"
@@ -303,7 +305,9 @@
 	. = list()
 	. += "<HR><BR><A href='?src=\ref[src];createpill=1'>Create pill (30 units max)</A><a href=\"?src=\ref[src]&change_pill=1\"><img src=\"pill[pillsprite].png\" /></a><BR>"
 	. += "<A href='?src=\ref[src];createpill_multiple=1'>Create multiple pills</A><BR>"
-	. += "<A href='?src=\ref[src];createbottle=1'>Create bottle (60 units max)<a href=\"?src=\ref[src]&change_bottle=1\"><img src=\"[bottlesprite].png\" /></A>"
+	. += "<A href='?src=\ref[src];createbottle=1'>Create bottle (60 units max)</A>"
+	. += "<BR><A href='?src=\ref[src];label_color=1'>Bottle Label Color:</a><span style='color:[bottle_label_color];border: 1px solid black;'>\t▉</span>"
+	. += "<BR><A href='?src=\ref[src];lid_color=1'>Bottle Lid Color:</a><span style='color:[bottle_lid_color];border: 1px solid black;'>\t▉</span>"
 	return JOINTEXT(.)
 
 /obj/machinery/chem_master/condimaster
@@ -314,7 +318,7 @@
 	return ..(reagent, "Condiment infos", 0)
 
 /obj/machinery/chem_master/condimaster/create_bottle(mob/user)
-	var/obj/item/chems/food/condiment/P = new/obj/item/chems/food/condiment(src.loc)
+	var/obj/item/chems/condiment/P = new/obj/item/chems/condiment(src.loc)
 	reagents.trans_to_obj(P,50)
 
 /obj/machinery/chem_master/condimaster/extra_options()

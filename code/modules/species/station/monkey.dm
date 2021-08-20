@@ -19,7 +19,7 @@
 	unarmed_attacks = list(/decl/natural_attack/bite, /decl/natural_attack/claws, /decl/natural_attack/punch)
 	inherent_verbs = list(/mob/living/proc/ventcrawl)
 	hud_type = /datum/hud_data/monkey
-	meat_type = /obj/item/chems/food/snacks/meat/monkey
+	meat_type = /obj/item/chems/food/meat/monkey
 
 	rarity_value = 0.1
 	total_health = 150

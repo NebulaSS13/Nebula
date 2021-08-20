@@ -13,6 +13,7 @@
 	max_w_class = ITEM_SIZE_LARGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	open_sound = 'sound/effects/storage/unzip.ogg'
+	material = /decl/material/solid/leather/synth
 
 /obj/item/storage/backpack/equipped()
 	if(!has_extension(src, /datum/extension/appearance))
@@ -373,14 +374,13 @@
 		I.appearance_flags |= RESET_COLOR
 		add_overlay(I)
 
-/obj/item/storage/backpack/ert/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && slot == slot_back_str && marking_state)
-		var/image/I = image(icon, "[ret.icon_state]-[marking_state]")
+/obj/item/storage/backpack/ert/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && slot == slot_back_str && marking_state)
+		var/image/I = image(overlay.icon, "[overlay.icon_state]-[marking_state]")
 		I.color = marking_colour
 		I.appearance_flags |= RESET_COLOR
-		ret.add_overlay(I)	
-	return ret
+		overlay.add_overlay(I)	
+	. = ..()
 
 /obj/item/storage/backpack/ert/commander
 	name = "emergency response team commander backpack"

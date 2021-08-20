@@ -250,7 +250,7 @@
 		M.dna.ResetUI()
 		M.dna.ResetSE()
 		domutcheck(M, null, MUTCHK_FORCED)
-		M.update_icons()
+		M.update_icon()
 
 /decl/material/liquid/adrenaline
 	name = "adrenaline"
@@ -329,6 +329,7 @@
 	name = "oxygel"
 	lore_text = "A biodegradable gel full of oxygen-laden synthetic molecules. Injected into suffocation victims to stave off the effects of oxygen deprivation."
 	taste_description = "tasteless slickness"
+	scannable = 1
 	color = COLOR_GRAY80
 
 /decl/material/liquid/oxy_meds/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)

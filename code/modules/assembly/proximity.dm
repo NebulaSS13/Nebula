@@ -82,11 +82,8 @@
 
 
 /obj/item/assembly/prox_sensor/dropped()
-	spawn(0)
-		sense()
-		return
-	return
-
+	. = ..()
+	addtimer(CALLBACK(src, .proc/sense), 0)
 
 /obj/item/assembly/prox_sensor/toggle_scan()
 	if(!secured)	return 0

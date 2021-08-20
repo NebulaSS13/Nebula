@@ -106,8 +106,8 @@
 	popup.open()
 
 /obj/machinery/icecream_vat/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/chems/food/snacks/icecream))
-		var/obj/item/chems/food/snacks/icecream/I = O
+	if(istype(O, /obj/item/chems/food/icecream))
+		var/obj/item/chems/food/icecream/I = O
 		if(!I.ice_creamed)
 			if(product_types[dispense_flavour] > 0)
 				src.visible_message("[html_icon(src)] <span class='info'>[user] scoops delicious [flavour_name] icecream into [I].</span>")
@@ -161,7 +161,7 @@
 		var/cone_name = get_flavour_name(dispense_cone)
 		if(product_types[dispense_cone] >= 1)
 			product_types[dispense_cone] -= 1
-			var/obj/item/chems/food/snacks/icecream/I = new(src.loc)
+			var/obj/item/chems/food/icecream/I = new(src.loc)
 			I.cone_type = cone_name
 			I.icon_state = "icecream_cone_[cone_name]"
 			I.desc = "Delicious [cone_name] cone, but no ice cream."
@@ -185,7 +185,7 @@
 	if(href_list["refresh"])
 		. = TOPIC_REFRESH
 
-/obj/item/chems/food/snacks/icecream
+/obj/item/chems/food/icecream
 	name = "ice cream cone"
 	desc = "Delicious waffle cone, but no ice cream."
 	icon = 'icons/obj/icecream.dmi'
@@ -196,17 +196,17 @@
 	var/ice_creamed
 	var/cone_type
 
-/obj/item/chems/food/snacks/icecream/Initialize()
+/obj/item/chems/food/icecream/Initialize()
 	. = ..()
 	reagents.add_reagent(/decl/material/liquid/nutriment, 5)
 	update_icon()
 
-/obj/item/chems/food/snacks/icecream/on_update_icon()
+/obj/item/chems/food/icecream/on_update_icon()
 	cut_overlays()
 	if(ice_creamed)
 		add_overlay("icecream_[ice_creamed]")
 
-/obj/item/chems/food/snacks/icecream/proc/add_ice_cream(var/flavour_name)
+/obj/item/chems/food/icecream/proc/add_ice_cream(var/flavour_name)
 	name = "[flavour_name] icecream"
 	desc = "Delicious [cone_type] cone with a dollop of [flavour_name] ice cream."
 	ice_creamed = flavour_name

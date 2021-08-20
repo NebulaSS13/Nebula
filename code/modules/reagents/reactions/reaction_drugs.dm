@@ -194,7 +194,7 @@
 
 /datum/chemical_reaction/sodiumchloride
 	name = "Sodium Chloride"
-	result = /decl/material/solid/mineral/sodiumchloride
+	result = /decl/material/solid/sodiumchloride
 	required_reagents = list(/decl/material/solid/sodium = 1, /decl/material/liquid/acid/hydrochloric = 1)
 	result_amount = 2
 

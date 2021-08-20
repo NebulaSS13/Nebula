@@ -265,28 +265,16 @@
 	name = "MAP: All allowed_spawns entries should have spawnpoints on map."
 
 /datum/unit_test/correct_allowed_spawn_test/start_test()
-	var/failed = FALSE
+	var/list/failed = list()
+	for(var/decl/spawnpoint/spawnpoint AS_ANYTHING in global.using_map.allowed_spawns)
+		if(!length(spawnpoint.turfs))
+			log_unit_test("Map allows spawning in [spawnpoint.name], but [spawnpoint.name] has no associated spawn turfs.")
+			failed += spawnpoint.type
 
-	for(var/spawn_name in global.using_map.allowed_spawns)
-		var/datum/spawnpoint/spawnpoint = spawntypes()[spawn_name]
-		if(!spawnpoint)
-			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] is null!")
-			failed = TRUE
-		else if(!length(spawnpoint.turfs))
-			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] has no associated spawn turfs.")
-			failed = TRUE
-
-	if(failed)
-		log_unit_test("Following spawn points exist:")
-		for(var/spawnpoint in spawntypes())
-			log_unit_test("\t[spawnpoint] ([any2ref(spawnpoint)])")
-		log_unit_test("Following spawn points are allowed:")
-		for(var/spawnpoint in global.using_map.allowed_spawns)
-			log_unit_test("\t[spawnpoint] ([any2ref(spawnpoint)])")
-		fail("Some of the entries in allowed_spawns have no spawnpoint turfs.")
+	if(length(failed))
+		fail("Some allowed spawnpoints have no spawnpoint turfs:\n[jointext(failed, "\n")]")
 	else
-		pass("All entries in allowed_spawns have spawnpoints.")
-
+		pass("All allowed spawnpoints have spawnpoint turfs.")
 	return 1
 
 //=======================================================================================
@@ -604,8 +592,8 @@
 		exceptions_by_turf[T] += exception[4]
 	exceptions = exceptions_by_turf
 
-	for(var/obj/structure/cable/C in world)
-		if(!all_ends_connected(C))
+	for(var/obj/structure/cable/C in global.cable_list)
+		if(!QDELETED(C) && !all_ends_connected(C))
 			failures++
 
 	if(failures)

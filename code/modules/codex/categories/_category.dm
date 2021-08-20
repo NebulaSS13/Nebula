@@ -20,7 +20,7 @@
 		for(var/item in items)
 			links+= "<l>[item]</l>"
 		entry.lore_text += jointext(links, "<br>")
-		SScodex.add_entry_by_string(lowertext(entry.display_name), entry)
+		SScodex.add_entry_by_string(lowertext(entry.name), entry)
 
 	if(guide_html)
 		if(guide_name)
@@ -30,4 +30,4 @@
 			_associated_strings = guide_strings \
 			)
 		entry.mechanics_text = guide_html
-		SScodex.add_entry_by_string(lowertext(entry.display_name), entry)
+		SScodex.add_entry_by_string(lowertext(entry.name), entry)

@@ -813,6 +813,7 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/bash(obj/item/I, mob/user)
 			//if door is unbroken, hit with fire axe using harm intent
 	if (istype(I, /obj/item/twohanded/fireaxe) && !(stat & BROKEN) && user.a_intent == I_HURT)
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		var/obj/item/twohanded/fireaxe/F = I
 		if (F.wielded)
 			playsound(src, 'sound/weapons/smash.ogg', 100, 1)
@@ -979,10 +980,8 @@ About the new airlock wires panel:
 		return 0
 	return ..(M)
 
-/obj/machinery/door/airlock/Initialize(var/mapload, var/d, var/populate_parts = TRUE, var/obj/structure/door_assembly/assembly = null)
-	if(!populate_parts)
-		inherit_from_assembly(assembly)
-
+/obj/machinery/door/airlock/Initialize(var/mapload, var/d, var/populate_parts = TRUE, obj/structure/door_assembly/assembly = null)
+	. = ..()
 	//wires
 	var/turf/T = get_turf(loc)
 	if(T && (T.z in global.using_map.admin_levels))
@@ -1007,16 +1006,9 @@ About the new airlock wires panel:
 			var/decl/material/window = get_window_material()
 			window_color = window.color
 
-	. = ..()
-
-/obj/machinery/door/airlock/proc/inherit_from_assembly(obj/structure/door_assembly/assembly)
+/obj/machinery/door/airlock/inherit_from_assembly(obj/structure/door_assembly/assembly)
 	//if assembly is given, create the new door from the assembly
-	if (assembly && istype(assembly))
-		frame_type = assembly.type
-
-		var/obj/item/stock_parts/circuitboard/electronics = assembly.electronics
-		install_component(electronics, FALSE) // will be refreshed in parent call; unsafe to refresh prior to calling ..() in Initialize
-		electronics.construct(src)
+	if (..(assembly))
 		var/decl/material/mat = GET_DECL(assembly.glass_material)
 
 		if(assembly.glass == 1) // supposed to use material in this case
@@ -1042,6 +1034,7 @@ About the new airlock wires panel:
 		stripe_color = assembly.stripe_color
 		symbol_color = assembly.symbol_color
 		queue_icon_update()
+		return TRUE
 
 /obj/machinery/door/airlock/Destroy()
 	if(brace)

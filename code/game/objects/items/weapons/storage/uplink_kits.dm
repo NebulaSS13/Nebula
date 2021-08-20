@@ -58,6 +58,13 @@
 		/obj/item/storage/box/syndie_kit/chameleon,
 		/obj/item/gun/energy/chameleon,
 		)
+	material = /decl/material/solid/metal/gold
+	matter = list(
+		/decl/material/solid/gemstone/diamond = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/metal/silver = MATTER_AMOUNT_REINFORCEMENT,
+		/decl/material/solid/fiberglass = MATTER_AMOUNT_TRACE,
+		/decl/material/solid/metal/uranium = MATTER_AMOUNT_TRACE
+	) 
 
 /obj/item/storage/box/syndie_kit/chameleon
 	startswith = list(

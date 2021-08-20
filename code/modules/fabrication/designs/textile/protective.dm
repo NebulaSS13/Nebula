@@ -18,8 +18,11 @@
 /datum/fabricator_recipe/textiles/protective/chem_hood
 	path = /obj/item/clothing/head/chem_hood
 
-// Gas masks
+// Masks
+/datum/fabricator_recipe/textiles/job/protective/surgicalmask
+	path = /obj/item/clothing/mask/surgical
 
+// Gas masks
 /datum/fabricator_recipe/textiles/protective/gasgas
 	path = /obj/item/clothing/mask/gas
 
@@ -50,14 +53,17 @@
 /datum/fabricator_recipe/textiles/protective/aquabreather
 	path = /obj/item/clothing/mask/gas/aquabreather
 
+// Breath masks
 /datum/fabricator_recipe/textiles/protective/emergencymask
 	path = /obj/item/clothing/mask/breath/emergency
+
+/datum/fabricator_recipe/textiles/protective/medicalmask
+	path = /obj/item/clothing/mask/breath/medical
 
 /datum/fabricator_recipe/textiles/protective/industryworker
 	path = /obj/item/clothing/mask/breath/scba
 
 // hard hats
-
 /datum/fabricator_recipe/textiles/protective/hardhatstandard
 	path = /obj/item/clothing/head/hardhat
 
@@ -73,8 +79,8 @@
 /datum/fabricator_recipe/textiles/protective/dbluehardhat
 	path = /obj/item/clothing/head/hardhat/dblue
 
-/datum/fabricator_recipe/textiles/protective/EMSHARDHAT
-	path = /obj/item/clothing/head/hardhat/EMS
+/datum/fabricator_recipe/textiles/protective/emshardhat
+	path = /obj/item/clothing/head/hardhat/ems
 
 /datum/fabricator_recipe/textiles/protective/firefighterhardhat
 	path = /obj/item/clothing/head/hardhat/firefighter
@@ -82,5 +88,5 @@
 /datum/fabricator_recipe/textiles/protective/damage_controlhardhat
 	path = /obj/item/clothing/head/hardhat/damage_control
 
-/datum/fabricator_recipe/textiles/protective/EMSDC
-	path = /obj/item/clothing/head/hardhat/EMS/DC_light
+/datum/fabricator_recipe/textiles/protective/emsdc
+	path = /obj/item/clothing/head/hardhat/ems/dc_light

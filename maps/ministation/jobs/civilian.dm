@@ -1,10 +1,31 @@
+/datum/job/ministation/assistant
+	title = "Assistant"
+	total_positions = -1
+	spawn_positions = -1
+	supervisors = "absolutely everyone"
+	economic_power = 1
+	access = list()
+	minimal_access = list()
+	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant","Visitor")
+	outfit_type = /decl/hierarchy/outfit/job/ministation_assistant
+	department_types = list(/decl/department/civilian)
+	event_categories = list(ASSIGNMENT_GARDENER)
+
+/datum/job/ministation/assistant/get_access()
+	if(config.assistant_maint)
+		return list(access_maint_tunnels)
+	else
+		return list()
+
+/decl/hierarchy/outfit/job/ministation_assistant
+	name = "Job - Ministation Assistant"
+
 /datum/job/ministation/bartender
 	title = "Bartender"
 	alt_titles = list("Cook","Barista")
 	supervisors = "the Lieutenant and the Captain"
 	total_positions = 1
 	spawn_positions = 1
-	hud_icon = "hudbartender"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/bartender
 	department_types = list(/decl/department/service)
 	selection_color = "#3fbe4a"
@@ -36,7 +57,6 @@
 	supervisors = "the Lieutenant and the Captain"
 	total_positions = 2
 	spawn_positions = 1
-	hud_icon = "hudcargotechnician"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/cargo
 	department_types = list(/decl/department/service)
 	selection_color = "#8a7c00"
@@ -81,11 +101,10 @@
 
 /datum/job/ministation/janitor
 	title = "Janitor"
-	event_categories = list("Janitor")
+	event_categories = list(ASSIGNMENT_JANITOR)
 	department_types = list(/decl/department/service)
 	total_positions = 1
 	spawn_positions = 1
-	hud_icon = "hudjanitor"
 	supervisors = "the Lieutenant and the Captain"
 	economic_power = 3
 	selection_color = "#940088"
@@ -117,11 +136,9 @@
 
 /datum/job/ministation/librarian
 	title = "Librarian"
-	event_categories = list("Librarian")
 	department_types = list(/decl/department/service)
 	total_positions = 1
 	spawn_positions = 2
-	hud_icon = "hudlibrarian"
 	supervisors = "the Lieutenant, the Captain, and the smell of old paper"
 	economic_power = 5
 	selection_color = "#008800"

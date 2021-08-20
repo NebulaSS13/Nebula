@@ -10,15 +10,15 @@
 	var/entry_decay_weight = 0.5 // A modifier for the rapidity of decay.
 	var/has_admin_data           // If set, shows up on the admin persistence panel.
 
-/decl/persistence_handler/New()
+/decl/persistence_handler/Initialize()
 	SetFilename()
-	..()
+	. = ..()
 
 /decl/persistence_handler/proc/SetFilename()
 	if(name)
 		filename = "data/persistent/[lowertext(global.using_map.name)]-[lowertext(name)].json"
 	if(!isnull(entries_decay_at) && !isnull(entries_expire_at))
-		entries_decay_at = Floor(entries_expire_at * entries_decay_at)
+		entries_decay_at = FLOOR(entries_expire_at * entries_decay_at)
 
 /decl/persistence_handler/proc/GetValidTurf(var/turf/T, var/list/tokens)
 	if(T && CheckTurfContents(T, tokens))

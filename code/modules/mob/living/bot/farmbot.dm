@@ -95,7 +95,8 @@
 		emagged = 2
 		return 1
 
-/mob/living/bot/farmbot/update_icons()
+/mob/living/bot/farmbot/on_update_icon()
+	..()
 	if(on && action)
 		icon_state = "farmbot_[action]"
 	else
@@ -155,7 +156,7 @@
 				return
 			if(FARMBOT_COLLECT)
 				action = "water" // Needs a better one
-				update_icons()
+				update_icon()
 				visible_message("<span class='notice'>[src] starts [T.dead? "removing the plant from" : "harvesting"] \the [A].</span>")
 				busy = 1
 				if(do_after(src, 30, A))
@@ -163,7 +164,7 @@
 					T.physical_attack_hand(src)
 			if(FARMBOT_WATER)
 				action = "water"
-				update_icons()
+				update_icon()
 				visible_message("<span class='notice'>[src] starts watering \the [A].</span>")
 				busy = 1
 				if(do_after(src, 30, A))
@@ -172,7 +173,7 @@
 					tank.reagents.trans_to(T, 100 - T.waterlevel)
 			if(FARMBOT_UPROOT)
 				action = "hoe"
-				update_icons()
+				update_icon()
 				visible_message("<span class='notice'>[src] starts uprooting the weeds in \the [A].</span>")
 				busy = 1
 				if(do_after(src, 30, A))
@@ -180,7 +181,7 @@
 					T.weedlevel = 0
 			if(FARMBOT_NUTRIMENT)
 				action = "fertile"
-				update_icons()
+				update_icon()
 				visible_message("<span class='notice'>[src] starts fertilizing \the [A].</span>")
 				busy = 1
 				if(do_after(src, 30, A))
@@ -188,13 +189,13 @@
 					T.reagents.add_reagent(/decl/material/gas/ammonia, 10)
 		busy = 0
 		action = ""
-		update_icons()
+		update_icon()
 		T.update_icon()
 	else if(istype(A, /obj/structure/hygiene/sink))
 		if(!tank || tank.reagents.total_volume >= tank.reagents.maximum_volume)
 			return
 		action = "water"
-		update_icons()
+		update_icon()
 		visible_message("<span class='notice'>[src] starts refilling its tank from \the [A].</span>")
 		busy = 1
 		while(do_after(src, 10) && tank.reagents.total_volume < tank.reagents.maximum_volume)
@@ -203,7 +204,7 @@
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		busy = 0
 		action = ""
-		update_icons()
+		update_icon()
 		visible_message("<span class='notice'>[src] finishes refilling its tank.</span>")
 	else if(emagged && ishuman(A))
 		var/action = pick("weed", "water")

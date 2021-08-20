@@ -16,11 +16,11 @@
 	var/max_storage_space = null //Total storage cost of items this can hold. Will be autoset based on storage_slots if left null.
 	var/storage_slots = null //The number of storage slots in this container.
 
-	var/use_to_pickup	//Set this to make it possible to use this item in an inverse way, so you can have the item in your hand and click items on the floor to pick them up.
-	var/allow_quick_empty	//Set this variable to allow the object to have the 'empty' verb, which dumps all the contents on the floor.
-	var/allow_quick_gather	//Set this variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
-	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
-	var/use_sound = "rustle"	//sound played when used. null for no sound.
+	var/use_to_pickup //Set this boolean variable to make it possible to use this item in an inverse way, so you can have the item in your hand and click items on the floor to pick them up.
+	var/allow_quick_empty //Set this boolean variable to allow the object to have the 'empty' verb, which dumps all the contents on the floor.
+	var/allow_quick_gather //Set this boolean variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
+	var/collection_mode = TRUE //FALSE = pick one at a time, TRUE = pick all on tile
+	var/use_sound = "rustle" //sound played when used. null for no sound.
 
 	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path,
 	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
@@ -286,7 +286,8 @@
 	return
 
 /obj/item/storage/attack_ghost(mob/user)
-	if(user.client && user.client.holder)
+	var/mob/observer/ghost/G = user
+	if(G.client?.holder || G.antagHUD)
 		show_to(user)
 
 /obj/item/storage/proc/gather_all(var/turf/T, var/mob/user)
@@ -314,9 +315,9 @@
 
 	collection_mode = !collection_mode
 	switch (collection_mode)
-		if(1)
+		if(TRUE)
 			to_chat(usr, "\The [src] now picks up all items in a tile at once.")
-		if(0)
+		if(FALSE)
 			to_chat(usr, "\The [src] now picks up one item at a time.")
 
 /obj/item/storage/verb/quick_empty()

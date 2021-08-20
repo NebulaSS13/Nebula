@@ -320,7 +320,7 @@
 	},
 /area/centcom)
 "avn" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/under/color/green,
 /obj/item/clothing/shoes/color/brown,
 /obj/item/clothing/suit/armor/tdome/green,
@@ -631,14 +631,14 @@
 	},
 /area/centcom)
 "aDR" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/escape_shuttle)
 "aEg" = (
 /obj/machinery/status_display{
 	pixel_y = 30
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/firstaid/toxin,
 /obj/machinery/camera/network/crescent{
 	c_tag = "Shuttle Bridge East"
@@ -699,7 +699,7 @@
 /turf/unsimulated/wall,
 /area/centcom)
 "aGC" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/firstaid/fire,
 /obj/item/extinguisher,
 /obj/machinery/camera/network/crescent{
@@ -711,7 +711,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/escape_shuttle)
 "aGD" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
@@ -751,7 +751,7 @@
 /turf/simulated/wall/titanium,
 /area/shuttle/escape_shuttle)
 "aGT" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/emergency_dispenser{
 	pixel_x = 28
 	},
@@ -1017,7 +1017,7 @@
 	},
 /area/centcom/holding)
 "aJW" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/firstaid/o2{
 	pixel_x = 4;
 	pixel_y = 6
@@ -1133,7 +1133,7 @@
 	},
 /area/centcom/holding)
 "aKV" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/firstaid/regular{
 	pixel_x = 2;
 	pixel_y = 6
@@ -1206,7 +1206,7 @@
 	},
 /area/centcom/holding)
 "aLb" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/box/gloves{
 	pixel_x = 3;
 	pixel_y = 4
@@ -1287,7 +1287,7 @@
 	},
 /area/centcom/holding)
 "aLo" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/roller,
 /obj/item/roller,
 /obj/item/roller,
@@ -1318,7 +1318,7 @@
 	},
 /area/centcom/holding)
 "aLu" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/clothing/glasses/hud/health,
 /obj/item/clothing/glasses/hud/health,
 /obj/item/chems/spray/cleaner,
@@ -1421,7 +1421,7 @@
 	},
 /area/centcom/holding)
 "aLL" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/firstaid/fire,
 /obj/item/storage/firstaid/regular{
 	pixel_x = 2;
@@ -1753,7 +1753,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/amanita_pie,
+/obj/item/chems/food/amanita_pie,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1762,7 +1762,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/bigbiteburger,
+/obj/item/chems/food/bigbiteburger,
 /obj/machinery/camera/network/crescent{
 	c_tag = "Crescent Bar Center"
 	},
@@ -1795,7 +1795,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/stew,
+/obj/item/chems/food/stew,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1875,7 +1875,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/boiledrice,
+/obj/item/chems/food/boiledrice,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1884,7 +1884,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/beetsoup,
+/obj/item/chems/food/beetsoup,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1893,7 +1893,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/stuffing,
+/obj/item/chems/food/stuffing,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1902,7 +1902,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/soylenviridians,
+/obj/item/chems/food/soylenviridians,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2075,7 +2075,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/bloodsoup,
+/obj/item/chems/food/bloodsoup,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2084,7 +2084,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/tofukabob,
+/obj/item/chems/food/tofukabob,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2096,7 +2096,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/poppypretzel,
+/obj/item/chems/food/poppypretzel,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2154,7 +2154,7 @@
 	},
 /area/centcom/holding)
 "blb" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/firstaid/regular{
 	pixel_x = -2;
 	pixel_y = 4
@@ -2165,7 +2165,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_shuttle)
 "bmb" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/firstaid/fire{
 	pixel_x = 2;
 	pixel_y = 3
@@ -2173,7 +2173,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_shuttle)
 "bnb" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/wrench,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_shuttle)
@@ -2205,7 +2205,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/spesslaw,
+/obj/item/chems/food/spesslaw,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2221,7 +2221,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/candiedapple,
+/obj/item/chems/food/candiedapple,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2230,13 +2230,13 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/mushroomsoup,
+/obj/item/chems/food/mushroomsoup,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
 /area/centcom/holding)
 "bDh" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/toolbox/electrical,
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -2246,7 +2246,7 @@
 /obj/structure/table/woodentable{
 	dir = 5
 	},
-/obj/item/chems/food/snacks/meatsteak,
+/obj/item/chems/food/meatsteak,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -2424,7 +2424,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_shuttle)
 "fis" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/under/color/green,
 /obj/item/clothing/shoes/color/brown,
 /obj/item/energy_blade/axe,
@@ -2484,7 +2484,7 @@
 	},
 /area/tdome)
 "fMq" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/unsimulated/floor{
 	dir = 5;
 	icon_state = "vault"
@@ -2593,7 +2593,7 @@
 	},
 /area/tdome)
 "hhT" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/escape_shuttle)
@@ -2679,10 +2679,10 @@
 	},
 /area/tdome/tdomeobserve)
 "iqx" = (
-/obj/structure/table/standard,
-/obj/item/chems/food/drinks/bottle/small/beer,
-/obj/item/chems/food/drinks/bottle/small/beer,
-/obj/item/chems/food/drinks/bottle/small/beer,
+/obj/structure/table,
+/obj/item/chems/drinks/bottle/small/beer,
+/obj/item/chems/drinks/bottle/small/beer,
+/obj/item/chems/drinks/bottle/small/beer,
 /obj/item/flame/lighter/zippo/random,
 /obj/item/storage/fancy/cigarettes,
 /turf/unsimulated/floor{
@@ -2690,10 +2690,10 @@
 	},
 /area/tdome/tdomeobserve)
 "itR" = (
-/obj/item/chems/food/drinks/cans/cola,
-/obj/item/chems/food/drinks/cans/cola,
-/obj/item/chems/food/drinks/cans/cola,
-/obj/structure/table/standard,
+/obj/item/chems/drinks/cans/cola,
+/obj/item/chems/drinks/cans/cola,
+/obj/item/chems/drinks/cans/cola,
+/obj/structure/table,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -2800,7 +2800,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/escape_shuttle)
 "kkN" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -2847,13 +2847,13 @@
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
 /area/tdome)
 "kXc" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/microwave,
 /turf/unsimulated/floor{
 	icon_state = "white"
@@ -2883,13 +2883,13 @@
 	id_tag = "thunderdomegen";
 	name = "Thunderdome General Supply"
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
 /area/tdome/tdomeadmin)
 "lPd" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/stack/medical/bruise_pack,
 /obj/item/stack/medical/bruise_pack,
 /obj/item/stack/medical/bruise_pack,
@@ -2914,7 +2914,7 @@
 	},
 /area/tdome/tdomeadmin)
 "lSf" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/under/color/red,
 /obj/item/clothing/shoes/color/brown,
 /obj/item/energy_blade/axe,
@@ -2967,7 +2967,7 @@
 /obj/item/grenade/chem_grenade/cleaner,
 /obj/item/grenade/chem_grenade/cleaner,
 /obj/item/grenade/chem_grenade/cleaner,
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -2982,7 +2982,7 @@
 /turf/space,
 /area/space)
 "nBg" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/under/color/red,
 /obj/item/clothing/shoes/color/brown,
 /obj/item/clothing/suit/armor/tdome/red,
@@ -3133,7 +3133,7 @@
 /obj/item/stack/medical/ointment,
 /obj/item/stack/medical/ointment,
 /obj/item/stack/medical/ointment,
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -3169,7 +3169,7 @@
 /turf/simulated/floor/tiled,
 /area/shuttle/escape_shuttle)
 "sfj" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/under/color/green,
 /obj/item/clothing/shoes/color/brown,
 /obj/item/clothing/suit/armor/vest,
@@ -3197,7 +3197,7 @@
 	},
 /area/tdome)
 "sDZ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/toolbox/mechanical,
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -3213,13 +3213,13 @@
 	id_tag = "thunderdome";
 	name = "Thunderdome Blast Door Control"
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
 /area/tdome/tdomeadmin)
 "sRb" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/storage/box/handcuffs,
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -3293,7 +3293,7 @@
 	id_tag = "thunderdomehea";
 	name = "Thunderdome Heavy Supply"
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -3350,7 +3350,7 @@
 /turf/simulated/floor/tiled,
 /area/shuttle/escape_shuttle)
 "xeT" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/under/color/red,
 /obj/item/clothing/shoes/color/brown,
 /obj/item/clothing/suit/armor/vest,
@@ -3413,7 +3413,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/escape_shuttle)
 "ylZ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/recharger{
 	pixel_y = 4
 	},

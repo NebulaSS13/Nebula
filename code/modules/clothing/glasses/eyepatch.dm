@@ -33,6 +33,7 @@
 	action_button_name = "Toggle iPatch"
 	toggleable = TRUE
 	electric = TRUE
+	z_flags = ZMM_MANGLE_PLANES
 	var/eye_color = COLOR_WHITE
 
 /obj/item/clothing/glasses/eyepatch/hud/Initialize()
@@ -59,14 +60,13 @@
 		eye.color = eye_color
 		add_overlay(eye)
 
-/obj/item/clothing/glasses/eyepatch/hud/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && active && check_state_in_icon("[ret.icon_state]-eye", ret.icon))
-		var/image/eye = emissive_overlay(ret.icon, "[ret.icon_state]-eye")
+/obj/item/clothing/glasses/eyepatch/hud/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && active && check_state_in_icon("[overlay.icon_state]-eye", overlay.icon))
+		var/image/eye = emissive_overlay(overlay.icon, "[overlay.icon_state]-eye")
 		eye.color = eye_color
 		eye.appearance_flags |= RESET_COLOR
-		ret.overlays += eye
-	return ret
+		overlay.overlays += eye
+	. = ..()
 
 /obj/item/clothing/glasses/eyepatch/hud/security
 	name = "HUDpatch"

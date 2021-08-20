@@ -16,7 +16,7 @@
 	conversion in savefile.dm
 */
 
-/datum/sprite_accessory
+/decl/sprite_accessory
 	var/name                                       // The preview name of the accessory
 	var/icon                                       // the icon file the accessory is located in
 	var/icon_state                                 // the icon_state of the accessory

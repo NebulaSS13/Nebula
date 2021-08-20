@@ -71,19 +71,20 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_SILVER
 
 /obj/structure/cable/Initialize(var/ml)
-	. = ..(ml)
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
 	var/dash = findtext(icon_state, "-")
 	d1 = text2num(copytext(icon_state, 1, dash))
 	d2 = text2num(copytext(icon_state, dash+1))
+	. = ..(ml)
 	var/turf/T = src.loc			// hide if turf is not intact
-	if(level==1 && T) hide(!T.is_plating())
-	cable_list += src //add it to the global cable list
+	if(level==1 && T)
+		hide(!T.is_plating())
+	global.cable_list += src //add it to the global cable list
 
 /obj/structure/cable/Destroy()     // called when a cable is deleted
 	if(powernet)
 		cut_cable_from_powernet()  // update the powernets
-	cable_list -= src              // remove it from global cable list
+	global.cable_list -= src              // remove it from global cable list
 	. = ..()                       // then go ahead and delete the cable
 
 // Ghost examining the cable -> tells him the power
@@ -214,6 +215,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	return 0
 
 /obj/structure/cable/create_dismantled_products(turf/T)
+	SHOULD_CALL_PARENT(FALSE)
 	new /obj/item/stack/cable_coil(loc, (d1 ? 2 : 1), color)
 
 //explosion handling
@@ -528,7 +530,7 @@ By design, d1 is the smallest direction and d2 is the highest
 			to_chat(user, "<span class='warning'>\The [H]'s [S.name] is hard and brittle - \the [src] cannot repair it.</span>")
 			return 1
 
-		var/use_amt = min(src.amount, ceil(S.burn_dam/3), 5)
+		var/use_amt = min(src.amount, CEILING(S.burn_dam/3), 5)
 		if(can_use(use_amt))
 			if(S.robo_repair(3*use_amt, BURN, "some damaged wiring", src, user))
 				src.use(use_amt)
@@ -849,8 +851,8 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/item/stack/cable_coil/fabricator/get_amount()
 	var/obj/item/cell/cell = get_cell()
-	. = (cell ? Floor(cell.charge / cost_per_cable) : 0)
+	. = (cell ? FLOOR(cell.charge / cost_per_cable) : 0)
 
 /obj/item/stack/cable_coil/fabricator/get_max_amount()
 	var/obj/item/cell/cell = get_cell()
-	. = (cell ? Floor(cell.maxcharge / cost_per_cable) : 0)
+	. = (cell ? FLOOR(cell.maxcharge / cost_per_cable) : 0)

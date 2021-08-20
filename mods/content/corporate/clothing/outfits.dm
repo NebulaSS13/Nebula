@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/nanotrasen
-	hierarchy_type = /decl/hierarchy/outfit/nanotrasen
+	abstract_type = /decl/hierarchy/outfit/nanotrasen
 	uniform = /obj/item/clothing/under/centcom
 	shoes = /obj/item/clothing/shoes/dress
 	gloves = /obj/item/clothing/gloves/color/white

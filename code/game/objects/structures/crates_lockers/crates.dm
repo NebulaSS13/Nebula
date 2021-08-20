@@ -152,7 +152,7 @@
 	desc = "A crate of emergency rations."
 
 /obj/structure/closet/crate/freezer/rations/WillContain()
-	return list(/obj/random/mre = 6, /obj/item/chems/food/drinks/cans/waterbottle = 12)
+	return list(/obj/random/mre = 6, /obj/item/chems/drinks/cans/waterbottle = 12)
 
 /obj/structure/closet/crate/freezer/meat
 	name = "meat crate"
@@ -160,9 +160,9 @@
 
 /obj/structure/closet/crate/freezer/meat/WillContain()
 	return list(
-		/obj/item/chems/food/snacks/meat/beef = 4,
-		/obj/item/chems/food/snacks/meat/syntiflesh = 4,
-		/obj/item/chems/food/snacks/fish = 4
+		/obj/item/chems/food/meat/beef = 4,
+		/obj/item/chems/food/meat/syntiflesh = 4,
+		/obj/item/chems/food/fish = 4
 	)
 
 /obj/structure/closet/crate/bin

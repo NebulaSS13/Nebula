@@ -16,7 +16,7 @@
 	
 	if(makeup)
 		if(length(makeup) == 1) // Rod is only made from one material.
-			var/decl/material/mat = decls_repository.get_decl(makeup[1])
+			var/decl/material/mat = GET_DECL(makeup[1])
 			SetName("[mat.use_name] fuel rod assembly")
 			desc = "A fuel rod for nuclear power production. This one is made from [mat.use_name]."
 			material_name = mat.use_name
@@ -25,7 +25,7 @@
 			material_name = "Mixed material"
 
 		for(var/mat_p in makeup)
-			var/decl/material/mat = decls_repository.get_decl(mat_p)
+			var/decl/material/mat = GET_DECL(mat_p)
 			matter[mat_p] = makeup[mat_p]
 			initial_amount += makeup[mat_p]
 			radioactivity = max(radioactivity, mat.radioactivity)
@@ -54,7 +54,7 @@
 	else if(length(matter))
 		var/list/colors = list()
 		for(var/mat_p in matter)
-			var/decl/material/mat = decls_repository.get_decl(mat_p)
+			var/decl/material/mat = GET_DECL(mat_p)
 			colors += mat.color
 		color = MixColors(colors)
 	var/image/I = image(icon, "fuel_assembly_bracket")
@@ -66,7 +66,7 @@
 		return PROCESS_KILL
 
 	if(istype(loc, /turf))
-		SSradiation.radiate(src, max(1,ceil(radioactivity/15)))
+		SSradiation.radiate(src, max(1,CEILING(radioactivity/15)))
 
 /obj/item/fuel_assembly/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -92,7 +92,7 @@
 	material = /decl/material/solid/metal/plutonium
 
 /obj/item/fuel_assembly/graphite
-	material = /decl/material/solid/mineral/graphite
+	material = /decl/material/solid/graphite
 
 /obj/item/fuel_assembly/boron
 	material = /decl/material/solid/boron

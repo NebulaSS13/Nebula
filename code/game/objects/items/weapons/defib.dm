@@ -46,7 +46,7 @@
 			else
 				add_overlay("[icon_state]-powered")
 	if(bcell)
-		var/ratio = Ceiling(bcell.percent()/25) * 25
+		var/ratio = CEILING(bcell.percent()/25) * 25
 		add_overlay("[icon_state]-charge[ratio]")
 	else
 		add_overlay("[icon_state]-nocell")
@@ -437,7 +437,7 @@
 	M.switch_from_dead_to_living_mob_list()
 	M.timeofdeath = 0
 	M.set_stat(UNCONSCIOUS) //Life() can bring them back to consciousness if it needs to.
-	M.regenerate_icons()
+	M.refresh_visible_overlays()
 	M.failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 	M.reload_fullscreen()
 

@@ -1,0 +1,55 @@
+<div>
+	{{if data.broken}}
+		<div class="item">
+			<p>The microwave is broken! You'll need to repair it before using it.</p>
+		</div>
+	{{else data.dirty}}
+		<div class="item">
+			<p>The microwave is dirty! You'll need to clean it before using it.</p>
+		</div>
+	{{else data.on}}
+		<div class="item">
+			{{if data.past_half_time}}
+				{{if jQuery.isEmptyObject(data.cooking_items) && jQuery.isEmptyObject(data.cooking_reagents)}}
+					<p>There's nothing inside. Microwave's working, though!</p>
+				{{else data.failed}}
+					<p>Something doesn't look right...</p>
+				{{else}}
+					<p>It's cooking nicely!</p>
+				{{/if}}
+			{{else}}
+				<p>It's starting to cook...</p>
+			{{/if}}
+		</div>
+		<div class="item">
+			{{:helper.displayBar(helper.byondTimeOfDay(), data.start_time, data.start_time + data.cook_time, 'good', null, null, null, "Cook")}}
+		</div>
+		{{window.cook_time = data.cook_time;}}
+		{{window.start_time = data.start_time;}}
+		{{window.curr_time = helper.byondTimeOfDay();}}
+		<script>jQuery('#displayBarCookFill').animate({width:"100%"}, (window.cook_time - (window.curr_time - window.start_time))*100, "linear");</script>
+		<div class="item">
+			{{:helper.link("Abort", 'cancel', {'action': 'abort'}, null, 'redButton')}}
+		</div>
+	{{else}}
+		<h4>Ingredients</h4>
+		<ul>
+			{{if jQuery.isEmptyObject(data.cooking_items) && jQuery.isEmptyObject(data.cooking_reagents)}}
+				<li>The microwave is empty!</li>
+			{{/if}}
+			{{props data.cooking_items :amt:name}}
+				<li>{{:helper.link(name + ' • ' + amt, null, {'action': 'ejectitem', 'target': name}, null, 'linkOn')}}</li>
+			{{/props}}
+			{{props data.cooking_reagents :amt:name}}
+				<li>{{:helper.link(name + ' • ' + amt + ' units', null, {'action': 'ejectreagent', 'target': name}, null, 'linkOn')}}</li>
+			{{/props}}
+		</ul>
+		<br>
+		<div class="item">
+			{{:helper.link("Eject All", 'trash', {'action' : 'dispose'}, null, 'redButton')}}
+		</div>
+		<div class="item">
+			{{:helper.link("Cook", null, {'action': 'cook'}, null, 'linkOn')}}
+		</div>
+	{{/if}}
+</div>

@@ -36,7 +36,7 @@
 
 	//Put entries with match in the name first
 	for(var/datum/codex_entry/entry in all_entries)
-		if(findtext(entry.display_name, searching))
+		if(findtext(entry.name, searching))
 			all_entries -= entry
 			all_entries.Insert(1, entry)
 
@@ -50,7 +50,7 @@
 			codex_data += "<table width = 100%>"
 			for(var/i = 1 to min(all_entries.len, max_codex_entries_shown))
 				var/datum/codex_entry/entry = all_entries[i]
-				codex_data += "<tr><td>[entry.display_name]</td><td><a href='?src=\ref[SScodex];show_examined_info=\ref[entry];show_to=\ref[mob]'>View</a></td></tr>"
+				codex_data += "<tr><td>[entry.name]</td><td><a href='?src=\ref[SScodex];show_examined_info=\ref[entry];show_to=\ref[mob]'>View</a></td></tr>"
 			codex_data += "</table>"
 			var/datum/browser/popup = new(mob, "codex-search", "Codex Search")
 			popup.set_content(jointext(codex_data, null))

@@ -1,3 +1,24 @@
+/datum/job/assistant
+	title = "Assistant"
+	total_positions = -1
+	spawn_positions = -1
+	supervisors = "absolutely everyone"
+	economic_power = 1
+	access = list()
+	minimal_access = list()
+	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant","Visitor")
+	outfit_type = /decl/hierarchy/outfit/job/assistant
+	department_types = list(/decl/department/civilian)
+
+/datum/job/assistant/get_access()
+	if(config.assistant_maint)
+		return list(access_maint_tunnels)
+	else
+		return list()
+
+/decl/hierarchy/outfit/job/assistant
+	name = "Job - Assistant"
+
 /datum/job/chaplain
 	title = "Chaplain"
 	department_types = list(/decl/department/civilian)
@@ -86,6 +107,7 @@
 		SKILL_BOTANY    = SKILL_BASIC,
 	    SKILL_CHEMISTRY = SKILL_BASIC
 	)
+	event_categories = list(ASSIGNMENT_GARDENER)
 
 //Cargo
 /datum/job/qm
@@ -235,6 +257,7 @@
 		SKILL_LITERACY = SKILL_ADEPT,
 		SKILL_HAULING  = SKILL_BASIC
 	)
+	event_categories = list(ASSIGNMENT_JANITOR)
 
 //More or less assistants
 /datum/job/librarian

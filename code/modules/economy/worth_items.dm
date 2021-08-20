@@ -41,7 +41,7 @@
 		var/shock_protection  = ((1-siemens_coefficient) * 20) * total_coverage
 		var/gas_leak_value = ((1-gas_transfer_coefficient) * 20) * total_coverage
 		var/permeability_value = ((1-permeability_coefficient) * 20) * total_coverage
-		var/pressure_protection = Floor(abs(max_pressure_protection - min_pressure_protection)/ONE_ATMOSPHERE)
+		var/pressure_protection = FLOOR(abs(max_pressure_protection - min_pressure_protection)/ONE_ATMOSPHERE)
 
 		additional_value += shock_protection + gas_leak_value + permeability_value + pressure_protection
 

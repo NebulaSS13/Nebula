@@ -7,7 +7,6 @@
 	spawn_positions = 2
 	alt_titles = list()
 	skill_points = 24
-	hud_icon = "hudmedicaldoctor"
 	min_skill = list(
 		SKILL_LITERACY  = SKILL_ADEPT,
 	    SKILL_MEDICAL   = SKILL_EXPERT,
@@ -40,6 +39,7 @@
 		access_virology
 	)
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/doc/junior
+	event_categories = list(ASSIGNMENT_MEDICAL)
 
 /datum/job/tradeship_doctor/head
 	title = "Head Doctor"
@@ -98,3 +98,4 @@
 	)
 	minimal_player_age = 14
 	ideal_character_age = 50
+	event_categories = list(ASSIGNMENT_MEDICAL)

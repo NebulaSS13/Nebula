@@ -53,14 +53,12 @@ var/global/list/outfits_decls_by_type_
 	var/list/backpack_overrides
 	var/flags = OUTFIT_RESET_EQUIPMENT
 
-/decl/hierarchy/outfit/New()
-	..()
+/decl/hierarchy/outfit/Initialize()
+	. = ..()
 	backpack_overrides = backpack_overrides || list()
-
-	if(is_hidden_category())
-		return
-	outfits_decls_by_type_[type] = src
-	dd_insertObjectList(outfits_decls_, src)
+	if(!is_abstract())
+		outfits_decls_by_type_[type] = src
+		dd_insertObjectList(outfits_decls_, src)
 
 /decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_RESET_EQUIPMENT)
@@ -92,7 +90,7 @@ var/global/list/outfits_decls_by_type_
 
 	if(!(OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP & equip_adjustments))
 		post_equip(H)
-	H.update_icons()
+	H.update_icon()
 	if(W) // We set ID info last to ensure the ID photo is as correct as possible.
 		H.set_id_info(W)
 	return 1

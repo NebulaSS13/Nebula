@@ -3,6 +3,7 @@
 	desc = "You're not sure what this is. You should probably ahelp it."
 	icon = 'icons/clothing/mask/smokables/cigarette.dmi'
 	body_parts_covered = 0
+	z_flags = ZMM_MANGLE_PLANES
 	var/lit = 0
 	var/waterproof = FALSE
 	var/type_butt = null
@@ -106,13 +107,12 @@
 		M.update_inv_wear_mask(0)
 		M.update_inv_hands()
 
-/obj/item/clothing/mask/smokable/get_mob_overlay(mob/user_mob, slot, bodypart)
-	var/image/ret = ..()
-	if(ret && lit && check_state_in_icon("[ret.icon_state]-on", ret.icon))
-		var/image/on_overlay = emissive_overlay(ret.icon, "[ret.icon_state]-on")
+/obj/item/clothing/mask/smokable/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && lit && check_state_in_icon("[overlay.icon_state]-on", overlay.icon))
+		var/image/on_overlay = emissive_overlay(overlay.icon, "[overlay.icon_state]-on")
 		on_overlay.appearance_flags |= RESET_COLOR
-		ret.add_overlay(on_overlay)
-	return ret
+		overlay.add_overlay(on_overlay)
+	. = ..()
 
 /obj/item/clothing/mask/smokable/fluid_act(var/datum/reagents/fluids)
 	..()
@@ -521,8 +521,8 @@
 
 	..()
 
-	if (istype(W, /obj/item/chems/food/snacks))
-		var/obj/item/chems/food/snacks/grown/G = W
+	if (istype(W, /obj/item/chems/food))
+		var/obj/item/chems/food/grown/G = W
 		if (!G.dry)
 			to_chat(user, "<span class='notice'>[G] must be dried before you stuff it into [src].</span>")
 			return

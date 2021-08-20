@@ -31,7 +31,9 @@ jobs:
       - name: Install Dreamchecker
         run:  scripts/install-spaceman-dmm.sh dreamchecker
       - name: Run Dreamchecker
-        run: ~/dreamchecker > ${GITHUB_WORKSPACE}/output-annotations.txt 2>&1
+        run: |
+          set -o pipefail
+          ~/dreamchecker 2>&1 | tee ${GITHUB_WORKSPACE}/output-annotations.txt
       - name: Annotate Lints
         uses: yogstation13/DreamAnnotate@34029606cd7c22a08a589e084f860c1cc287363c
         if: always()

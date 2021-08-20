@@ -27,7 +27,7 @@
 	guestbanned = 1
 	must_fill = 1
 	not_random_selectable = 1
-	forced_spawnpoint = "Captain Compartment"
+	forced_spawnpoint = /decl/spawnpoint/cryo/captain
 
 /datum/job/tradeship_captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
@@ -72,7 +72,6 @@
 	title = "First Mate"
 	supervisors = "the Captain"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/mate
-	hud_icon = "hudheadofpersonnel"
 	head_position = 1
 	department_types = list(
 		/decl/department/command,

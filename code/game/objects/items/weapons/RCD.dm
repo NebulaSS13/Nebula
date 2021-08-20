@@ -188,7 +188,7 @@
 
 
 /decl/hierarchy/rcd_mode
-	hierarchy_type = /decl/hierarchy/rcd_mode
+	abstract_type = /decl/hierarchy/rcd_mode
 	var/cost
 	var/delay
 	var/handles_type
@@ -224,7 +224,7 @@
 	var/result = get_work_result(target)
 	if(ispath(result,/turf))
 		var/turf/T = target
-		T.ChangeTurf(result)
+		T.ChangeTurf(result, keep_air = TRUE)
 	else if(result)
 		new result(target)
 	else
