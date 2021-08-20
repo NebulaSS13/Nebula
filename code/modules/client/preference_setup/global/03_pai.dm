@@ -85,13 +85,13 @@
 
 /datum/category_item/player_setup_item/player_global/pai/proc/update_pai_preview(mob/user)
 	pai_preview = icon('icons/effects/128x48.dmi', bgstate)
-	var/icon/pai = icon('icons/mob/pai.dmi', global.possible_chassis[candidate.chassis], NORTH)
+	var/icon/pai = icon(global.possible_chassis[candidate.chassis], ICON_STATE_WORLD, NORTH)
 	pai_preview.Scale(48+32, 16+32)
 
 	pai_preview.Blend(pai, ICON_OVERLAY, 25, 22)
-	pai = icon('icons/mob/pai.dmi', global.possible_chassis[candidate.chassis], WEST)
+	pai = icon(global.possible_chassis[candidate.chassis], ICON_STATE_WORLD, WEST)
 	pai_preview.Blend(pai, ICON_OVERLAY, 1, 9)
-	pai = icon('icons/mob/pai.dmi', global.possible_chassis[candidate.chassis], SOUTH)
+	pai = icon(global.possible_chassis[candidate.chassis], ICON_STATE_WORLD, SOUTH)
 	pai_preview.Blend(pai, ICON_OVERLAY, 49, 5)
 
 	pai_preview.Scale(pai_preview.Width() * 2, pai_preview.Height() * 2)

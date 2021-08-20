@@ -17,12 +17,12 @@
 /obj/item/robot_module/clerical/butler
 	name = "service robot module"
 	display_name = "Service"
-	sprites = list(
-		"Waitress" = "Service",
-		"Kent" = "toiletbot",
-		"Bro" = "Brobot",
-		"Rich" = "maximillion",
-		"Default" = "Service2"
+	module_sprites = list(
+		"Waitress" = 'icons/mob/robots/robot_service_old.dmi',
+		"Kent" =     'icons/mob/robots/robot_toiletbot.dmi',
+		"Bro" =      'icons/mob/robots/robot_service_bro.dmi',
+		"Rich" =     'icons/mob/robots/robot_maximillion.dmi',
+		"Default" =  'icons/mob/robots/robot_service.dmi'
 	)
 	equipment = list(
 		/obj/item/flash,
@@ -87,12 +87,12 @@
 		"Service" = TRUE,
 		"Supply" =  TRUE
 	)
-	sprites = list(
-		"Waitress" = "Service",
-		"Kent" =     "toiletbot",
-		"Bro" =      "Brobot",
-		"Rich" =     "maximillion",
-		"Default" =  "Service2"
+	module_sprites = list(
+		"Waitress" = 'icons/mob/robots/robot_service_old.dmi',
+		"Kent" =     'icons/mob/robots/robot_toiletbot.dmi',
+		"Bro" =      'icons/mob/robots/robot_service_bro.dmi',
+		"Rich" =     'icons/mob/robots/robot_maximillion.dmi',
+		"Default" =  'icons/mob/robots/robot_service.dmi'
 	)
 	equipment = list(
 		/obj/item/flash,

@@ -5,7 +5,7 @@
 		"Science" = TRUE,
 		"Service" = TRUE
 	)
-	sprites = list("Drone" = "drone-hydro")
+	module_sprites = list("Drone" = 'icons/mob/robots/flying/flying_hydro.dmi')
 
 	equipment = list(
 		/obj/item/storage/plants,

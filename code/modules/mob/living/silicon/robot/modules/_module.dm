@@ -14,7 +14,7 @@
 		/decl/language/legal = TRUE,
 		/decl/language/sign = FALSE
 		)
-	var/sprites = list()
+	var/list/module_sprites = list()
 	var/can_be_pushed = 1
 	var/no_slip = 0
 	var/obj/item/borg/upgrade/jetpack = null
@@ -67,8 +67,8 @@
 	finalize_emag(R)
 	finalize_synths(R)
 
-	R.set_module_sprites(sprites)
-	R.choose_icon(R.module_sprites)
+	if(R.client)
+		R.choose_icon(get_sprites_for(src))
 
 /obj/item/robot_module/proc/build_equipment()
 	var/list/created_equipment = list()
@@ -121,10 +121,12 @@
 	remove_subsystems(R)
 	remove_status_flags(R)
 	reset_skills(R)
-
 	if(R.silicon_radio)
 		R.silicon_radio.recalculateChannels()
-	R.choose_icon(R.set_module_sprites(list("Default" = initial(R.icon_state))))
+	R.choose_icon(list("Basic" = initial(R.icon)))
+
+/obj/item/robot_module/proc/get_sprites_for(var/mob/living/silicon/robot/R)
+	return module_sprites
 
 /obj/item/robot_module/Destroy()
 	QDEL_NULL_LIST(equipment)

@@ -1,12 +1,12 @@
 var/global/list/possible_chassis = list(
-	"Drone" =    "drone",
-	"Cat" =      "cat",
-	"Mouse" =    "mouse",
-	"Monkey" =   "monkey",
-	"Rabbit" =   "rabbit",
-	"Mushroom" = "mushroom",
-	"Corgi" =    "corgi",
-	"Crow" =     "crow"
+	"Drone" =    'icons/mob/robots/pai/pai_drone.dmi',
+	"Cat" =      'icons/mob/robots/pai/pai_cat.dmi',
+	"Mouse" =    'icons/mob/robots/pai/pai_mouse.dmi',
+	"Monkey" =   'icons/mob/robots/pai/pai_monkey.dmi',
+	"Rabbit" =   'icons/mob/robots/pai/pai_rabbit.dmi',
+	"Mushroom" = 'icons/mob/robots/pai/pai_mushroom.dmi',
+	"Corgi" =    'icons/mob/robots/pai/pai_corgi.dmi',
+	"Crow" =     'icons/mob/robots/pai/pai_crow.dmi'
 )
 
 var/global/list/possible_say_verbs = list(
@@ -19,18 +19,9 @@ var/global/list/possible_say_verbs = list(
 	"Corvid" =  list("caws", "caws loudly", "whistles")
 )
 
-var/global/list/pai_holder_icons_by_chassis = list(
-	"drone"    = 'icons/clothing/holders/holder_pai_repairbot.dmi',
-	"cat"      = 'icons/clothing/holders/holder_pai_cat.dmi',
-	"mouse"    = 'icons/clothing/holders/holder_pai_mouse.dmi',
-	"monkey"   = 'icons/clothing/holders/holder_pai_monkey.dmi',
-	"rabbit"   = 'icons/clothing/holders/holder_pai_rabbit.dmi',
-	"crow"     = 'icons/clothing/holders/holder_pai_crow.dmi'
-)
-
 /mob/living/silicon/pai
 	name = "pAI"
-	icon = 'icons/mob/pai.dmi'
+	icon = 'icons/mob/robots/pai/pai_drone.dmi'
 	icon_state = "drone"
 	mob_sort_value = 3
 	hud_type = /datum/hud/pai
@@ -60,7 +51,7 @@ var/global/list/pai_holder_icons_by_chassis = list(
 	var/obj/item/paicard/card	// The card we inhabit
 
 	var/is_in_card = TRUE
-	var/chassis = "drone"
+	var/chassis
 	var/obj/item/pai_cable/cable		// The cable we produce and use when door or camera jacking
 
 	var/master				// Name of the one who commands us
@@ -100,10 +91,10 @@ var/global/list/pai_holder_icons_by_chassis = list(
 
 	light_wedge = 45
 
-/mob/living/silicon/pai/get_holder_icon()
-	return chassis ? global.pai_holder_icons_by_chassis[chassis] : null
-
 /mob/living/silicon/pai/Initialize()
+
+	chassis = global.possible_chassis[1]
+
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	status_flags |= NO_ANTAG
 	card = loc

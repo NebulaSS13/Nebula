@@ -21,6 +21,7 @@ var/global/list/robot_custom_icons
 		robot_custom_icons[ckey] = real_name
 	return 1
 
+/*
 /mob/living/silicon/robot/proc/set_custom_sprite()
 	var/rname = robot_custom_icons[ckey]
 	if(rname && rname == real_name)
@@ -33,3 +34,4 @@ var/global/list/robot_custom_icons
 			else
 				to_chat(src, "<span class='warning'>Could not locate [ckey]-Standard sprite.</span>")
 				icon =  'icons/mob/robots.dmi'
+*/

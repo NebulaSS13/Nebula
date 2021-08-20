@@ -10,7 +10,6 @@
 	origin_tech = "{'biotech':1}"
 	use_single_icon = TRUE
 	item_state = null
-	var/ignore_vis_contents = FALSE
 	var/last_holder
 
 /obj/item/holder/Initialize()
@@ -20,10 +19,9 @@
 /obj/item/holder/on_update_icon()
 	SHOULD_CALL_PARENT(FALSE)
 	vis_contents.Cut()
-	if(!ignore_vis_contents)
-		for(var/atom/movable/AM in src)
-			AM.vis_flags |= (VIS_INHERIT_ID|VIS_INHERIT_LAYER|VIS_INHERIT_PLANE)
-			vis_contents += AM
+	for(var/atom/movable/AM in src)
+		AM.vis_flags |= (VIS_INHERIT_ID|VIS_INHERIT_LAYER|VIS_INHERIT_PLANE)
+		vis_contents += AM
 
 // Grab our inhands from the mob we're wrapping, if they have any.
 /obj/item/holder/get_mob_overlay(mob/user_mob, slot, bodypart)
@@ -125,31 +123,12 @@
 	..()
 
 /obj/item/holder/proc/sync(var/mob/living/M)
-
-	var/check_state
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		check_state = lowertext(H.species.name)
-	else if(istype(M))
-		var/datum/extension/base_icon_state/bis = get_extension(M, /datum/extension/base_icon_state)
-		check_state = bis?.base_icon_state || initial(M.icon_state) 
-	else
-		PRINT_STACK_TRACE("Invalid mob passed to [type]/sync(): [M || "NULL"]")
-		return
-
-	if(check_state && global.holder_mob_icons[check_state])
-		icon = global.holder_mob_icons[check_state]
-		icon_state = ICON_STATE_WORLD
-		ignore_vis_contents = TRUE
-
 	SetName(M.name)
 	desc = M.desc
-
 	var/mob/living/carbon/human/H = loc
 	if(istype(H))
 		last_holder = H
 		register_all_movement(H, M)
-
 	update_icon()
 	update_held_icon()
 

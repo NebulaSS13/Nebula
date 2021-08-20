@@ -1,10 +1,10 @@
 #define CYBORG_POWER_USAGE_MULTIPLIER 2.5 // Multiplier for amount of power cyborgs use.
 
 /mob/living/silicon/robot
-	name = "Cyborg"
-	real_name = "Cyborg"
-	icon = 'icons/mob/robots.dmi'
-	icon_state = "robot"
+	name = "robot"
+	real_name = "robot"
+	icon = 'icons/mob/robots/robot.dmi'
+	icon_state = ICON_STATE_WORLD
 	maxHealth = 300
 	health = 300
 	mob_sort_value = 4
@@ -16,12 +16,14 @@
 	mob_push_flags = ~HEAVY //trundle trundle
 	skillset = /datum/skillset/silicon/robot
 
+	var/panel_icon = 'icons/mob/robots/_panels.dmi'
+
 	var/lights_on = 0 // Is our integrated light on?
 	var/used_power_this_tick = 0
 	var/power_efficiency = 1
 	var/sight_mode = 0
 	var/custom_name = ""
-	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
+	//var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
 	var/integrated_light_power = 0.6
@@ -30,12 +32,7 @@
 	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
 	var/dismantle_type = /obj/item/robot_parts/robot_suit
 
-//Icon stuff
-
-	var/static/list/eye_overlays
-	var/icontype          //Persistent icontype tracking allows for cleaner icon updates
-	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
-	var/icon_selected = 1 //If icon selection has been completed yet
+	var/icon_selected = TRUE //If icon selection has been completed yet
 
 //Hud stuff
 
@@ -117,8 +114,7 @@
 	robot_modules_background = new()
 	robot_modules_background.icon_state = "block"
 	ident = random_id(/mob/living/silicon/robot, 1, 999)
-	module_sprites["Basic"] = "robot"
-	icontype = "Basic"
+
 	updatename(modtype)
 	update_icon()
 
@@ -234,27 +230,6 @@
 	QDEL_NULL(wires)
 	. = ..()
 
-/mob/living/silicon/robot/proc/set_module_sprites(var/list/new_sprites)
-	if(new_sprites && new_sprites.len)
-		module_sprites = new_sprites.Copy()
-		//Custom_sprite check and entry
-
-		if (custom_sprite == 1)
-			var/list/valid_states = icon_states(CUSTOM_ITEM_SYNTH)
-			if("[ckey]-[modtype]" in valid_states)
-				module_sprites["Custom"] = "[src.ckey]-[modtype]"
-				icon = CUSTOM_ITEM_SYNTH
-				icontype = "Custom"
-			else
-				icontype = module_sprites[1]
-				icon = 'icons/mob/robots.dmi'
-				to_chat(src, "<span class='warning'>Custom Sprite Sheet does not contain a valid icon_state for [ckey]-[modtype]</span>")
-		else
-			icontype = module_sprites[1]
-		icon_state = module_sprites[icontype]
-	update_icon()
-	return module_sprites
-
 /mob/living/silicon/robot/proc/reset_module(var/suppress_alert = null)
 	// Clear hands and module icon.
 	uneq_all()
@@ -340,8 +315,10 @@
 	if (camera)
 		camera.c_tag = changed_name
 
+	/*
 	if(!custom_sprite) //Check for custom sprite
 		set_custom_sprite()
+	*/
 
 	//Flavour text.
 	if(client)
@@ -728,38 +705,36 @@
 /mob/living/silicon/robot/get_req_access()
 	return req_access
 
+/mob/living/silicon/robot/proc/get_eye_overlay()
+	var/eye_icon_state = "[icon_state]-eyes"
+	if(check_state_in_icon(eye_icon_state, icon))
+		return emissive_overlay(icon, eye_icon_state)
+
 /mob/living/silicon/robot/on_update_icon()
+
 	..()
 
+	icon_state = ICON_STATE_WORLD
 	if(stat == CONSCIOUS)
-		var/eye_icon_state = "eyes-[module_sprites[icontype]]"
-		if(eye_icon_state in icon_states(icon))
-			if(!eye_overlays)
-				eye_overlays = list()
-			var/image/eye_overlay = eye_overlays[eye_icon_state]
-			if(!eye_overlay)
-				eye_overlay = emissive_overlay(icon, eye_icon_state)
-				eye_overlays[eye_icon_state] = eye_overlay
-			add_overlay(eye_overlay)
+		var/image/eyes = get_eye_overlay()
+		if(eyes)
+			add_overlay(eyes)
 
 	if(opened)
-		var/panelprefix = custom_sprite ? src.ckey : "ov"
 		if(wiresexposed)
-			add_overlay("[panelprefix]-openpanel +w")
+			add_overlay(image(panel_icon, "ov-openpanel +w"))
 		else if(cell)
-			add_overlay("[panelprefix]-openpanel +c")
+			add_overlay(image(panel_icon, "ov-openpanel +c"))
 		else
-			add_overlay("[panelprefix]-openpanel -c")
+			add_overlay(image(panel_icon, "ov-openpanel -c"))
 
-	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
-		add_overlay("[module_sprites[icontype]]-shield")
+	if(module_active && istype(module_active, /obj/item/borg/combat/shield))
+		add_overlay("[icon_state]-shield")
 
-	if(modtype == "Combat")
-		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
-			icon_state = "[module_sprites[icontype]]-roll"
-		else
-			icon_state = module_sprites[icontype]
-		return
+	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
+	var/image/hat = hattable?.get_hat_overlay(src)
+	if(hat)
+		add_overlay(hat)
 
 /mob/living/silicon/robot/proc/installed_modules()
 	if(weapon_lock)
@@ -955,31 +930,36 @@
 	return
 
 /mob/living/silicon/robot/proc/choose_icon(list/module_sprites)
-	set waitfor = 0
-	if(!LAZYLEN(module_sprites))
+
+	set waitfor = FALSE
+
+	if(!length(module_sprites))
 		to_chat(src, "Something is badly wrong with the sprite selection. Harass a coder.")
 		CRASH("Can't setup robot icon for [src] ([src.client]). Module: [module?.name]")
 
 	icon_selected = FALSE
-	if(module_sprites.len == 1 || !client)
-		if(!(icontype in module_sprites))
-			icontype = module_sprites[1]
+
+	var/selected_icon
+	if(length(module_sprites) == 1 || !client)
+		icon = module_sprites[module_sprites[1]]
 	else
 		var/list/options = list()
-		for(var/i in module_sprites)
-			var/image/radial_button = image(icon = src.icon, icon_state = module_sprites[i])
-			radial_button.overlays.Add(image(icon = src.icon, icon_state = "eyes-[module_sprites[i]]"))
-			radial_button.name = i
-			options[i] = radial_button
-		icontype = show_radial_menu(src, src, options, radius = 42, tooltips = TRUE)
+		for(var/sprite in module_sprites)
+			var/image/radial_button =  image(icon = module_sprites[sprite], icon_state = ICON_STATE_WORLD)
+			radial_button.overlays.Add(image(icon = module_sprites[sprite], icon_state = "[ICON_STATE_WORLD]-eyes"))
+			radial_button.name = sprite
+			options[sprite] = radial_button
+		var/chosen_icon = show_radial_menu(src, src, options, radius = 42, tooltips = TRUE)
+		if(!chosen_icon || icon_selected)
+			return
+		selected_icon = chosen_icon
 
-	if(!icontype)
+	if(!selected_icon)
 		return
 
-	icon_state = module_sprites[icontype]
-	update_icon()
-
+	icon = module_sprites[selected_icon]
 	icon_selected = TRUE
+	update_icon()
 	to_chat(src, "Your icon has been set. You now require a module reset to change it.")
 
 /mob/living/silicon/robot/proc/sensor_mode() //Medical/Security HUD controller for borgs

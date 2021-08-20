@@ -1,10 +1,10 @@
 /obj/item/robot_module/standard
 	name = "standard robot module"
 	display_name = "Standard"
-	sprites = list(
-		"Basic" = "robot_old",
-		"Android" = "droid",
-		"Default" = "robot"
+	module_sprites = list(
+		"Basic" =   'icons/mob/robots/robot_old.dmi',
+		"Android" = 'icons/mob/robots/robot_droid.dmi',
+		"Default" = 'icons/mob/robots/robot.dmi'
 	)
 	equipment = list(
 		/obj/item/flash,

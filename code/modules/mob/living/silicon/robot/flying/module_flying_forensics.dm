@@ -7,9 +7,9 @@
 		/datum/computer_file/program/suit_sensors,
 		/datum/computer_file/program/digitalwarrant
 	)
-	sprites = list(
-		"Drone" = "drone-sec",
-		"Eyebot" = "eyebot-security"
+	module_sprites = list(
+		"Drone" = 'icons/mob/robots/flying/flying_security.dmi',
+		"Eyebot" = 'icons/mob/robots/flying/eyebot_security.dmi'
 	)
 	equipment = list(
 		/obj/item/forensics/sample_kit/swabs,

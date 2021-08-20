@@ -1,7 +1,7 @@
 /datum/unit_test/icon_test
 	name = "ICON STATE template"
 	template = /datum/unit_test/icon_test
-
+/* TODO convert to check all sprite icons for world and world-eyes
 /datum/unit_test/icon_test/robots_shall_have_eyes_for_each_state
 	name = "ICON STATE - Robot shall have eyes for each icon state"
 	var/list/excepted_icon_states_ = list(
@@ -36,6 +36,7 @@
 	else
 		pass("All related eye icon states exists.")
 	return 1
+*/
 
 /datum/unit_test/icon_test/sprite_accessories_shall_have_existing_icon_states
 	name = "ICON STATE - Sprite accessories shall have existing icon states"
