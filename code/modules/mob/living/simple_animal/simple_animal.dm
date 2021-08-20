@@ -1,6 +1,5 @@
 /mob/living/simple_animal
 	name = "animal"
-	icon = 'icons/mob/simple_animal/animal.dmi'
 	health = 20
 	maxHealth = 20
 	universal_speak = FALSE
@@ -17,12 +16,12 @@
 	skin_material = /decl/material/solid/skin
 	skin_amount = 5
 
+	icon_state = ICON_STATE_WORLD
+
+	var/simple_animal_flags = (SA_NO_DEAD_STATE | SA_NO_REST_STATE | SA_NO_SLEEP_STATE | SA_NO_GIB_STATE)
+
 	var/gene_damage = 0 // Set to -1 to disable gene damage for the mob.
 	var/show_stat_health = 1	//does the percentage health show in the stat panel for the mob
-
-	var/icon_living = ""
-	var/icon_dead = ""
-	var/icon_gib = null	//We only try to show a gibbing animation if this exists.
 
 	var/list/speak = list("...")
 	var/speak_chance = 0
@@ -96,18 +95,25 @@
 	. = ..()
 	if(LAZYLEN(natural_armor))
 		set_extension(src, armor_type, natural_armor)
-	if(holder_type)
-		set_extension(src, /datum/extension/base_icon_state, icon_living || icon_state)
 	if(islist(hat_offsets))
 		set_extension(src, /datum/extension/hattable/directional, hat_offsets)
 
 /mob/living/simple_animal/on_update_icon()
+
 	..()
-	if(icon_state == icon_living)
-		var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
-		var/image/I = hattable?.get_hat_overlay(src)
-		if(I)
-			add_overlay(I)
+
+	icon_state = ICON_STATE_WORLD
+	if(stat == DEAD && !(simple_animal_flags & SA_NO_DEAD_STATE))
+		icon_state += "-dead"
+	else if(stat == UNCONSCIOUS && !(simple_animal_flags & SA_NO_SLEEP_STATE))
+		icon_state += "-sleeping"
+	else if(resting && !(simple_animal_flags & SA_NO_REST_STATE))
+		icon_state += "-resting"
+
+	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
+	var/image/I = hattable?.get_hat_overlay(src)
+	if(I)
+		add_overlay(I)
 
 /mob/living/simple_animal/Destroy()
 	if(istype(natural_weapon))
@@ -123,10 +129,10 @@
 	//Health
 	if(stat == DEAD)
 		if(health > 0)
-			icon_state = icon_living
 			switch_from_dead_to_living_mob_list()
 			set_stat(CONSCIOUS)
 			set_density(1)
+			update_icon()
 		return 0
 
 	handle_atmos()
@@ -234,14 +240,14 @@
 
 /mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
 	O.unbuckle_mob(M)
-	visible_message("<span class='danger'>\The [M] escapes from \the [O]!</span>")
+	visible_message(SPAN_DANGER("\The [M] escapes from \the [O]!"))
 
 /mob/living/simple_animal/proc/handle_supernatural()
 	if(purge)
 		purge -= 1
 
 /mob/living/simple_animal/gib()
-	..(icon_gib,1)
+	..(((simple_animal_flags & SA_NO_GIB_STATE) ? null : "world-gib"), TRUE)
 
 /mob/living/simple_animal/proc/visible_emote(var/act_desc)
 	custom_emote(1, act_desc)
@@ -393,12 +399,10 @@
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
 
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
-	icon_state = icon_dead
-	update_icon()
 	density = 0
 	adjustBruteLoss(maxHealth) //Make sure dey dead.
 	walk_to(src,0)
-	return ..(gibbed,deathmessage,show_dead_message)
+	. = ..(gibbed,deathmessage,show_dead_message)
 
 /mob/living/simple_animal/explosion_act(severity)
 	..()

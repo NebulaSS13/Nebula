@@ -423,3 +423,49 @@ var/global/default_mobloc = null
 	return TRUE
 
 // ============================================================================
+
+// Tests for valid use of the single icon system by mobs.
+/datum/unit_test/mobs_using_single_icons_shall_have_appropriate_states
+	name = "MOB: Simple Animals Shall Have Appropriate States"
+	var/static/list/check_states = list(
+		"world"          = SA_NO_LIVING_STATE,
+		"world-dead"     = SA_NO_DEAD_STATE,
+		"world-gib"      = SA_NO_GIB_STATE,
+		"world-sleeping" = SA_NO_SLEEP_STATE,
+		"world-rest"     = SA_NO_REST_STATE
+	)
+
+/datum/unit_test/mobs_using_single_icons_shall_have_appropriate_states/start_test()
+
+	var/total_types = 0
+	var/types_failed = 0
+	var/list/failures = list()
+
+	for(var/mobtype in subtypesof(/mob/living/simple_animal))
+
+		var/mob/living/simple_animal/critter = mobtype
+		total_types++
+
+		var/failed = FALSE
+		if(initial(critter.icon_state) != ICON_STATE_WORLD)
+			failures += "[mobtype] - invalid base icon_state '[initial(critter.icon_state)]'"
+			failed = TRUE
+
+		var/mobicon =  initial(critter.icon)
+		var/mobflags = initial(critter.simple_animal_flags)
+		for(var/mobstate in check_states)
+			var/should_not_have_state = (mobflags & check_states[mobstate])
+			var/has_state = check_state_in_icon(mobicon, mobstate)
+			if(has_state && should_not_have_state)
+				failures += "[mobtype] - mob with skip flag for '[mobstate]' has state in icon '[mobicon]"
+			else if(!has_state && !should_not_have_state)
+				failures += "[mobtype] - mob without skip flag for '[mobstate]' has no state in icon '[mobicon]"
+			failed = failed || (has_state == should_not_have_state)
+			
+		if(failed)
+			types_failed++
+
+	if(length(failures))
+		fail("[types_failed] /mob types had invalid or missing icon_states:\n[jointext(failures, "\n")].")
+	else
+		pass("[total_types] /mob type\s with single icons had appropriate icon_states.")

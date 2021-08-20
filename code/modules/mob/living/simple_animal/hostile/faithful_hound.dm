@@ -1,8 +1,7 @@
 /mob/living/simple_animal/faithful_hound
 	name = "spectral hound"
 	desc = "A spooky looking ghost dog. Does not look friendly."
-	icon = 'icons/mob/mob.dmi'
-	icon_state = "ghostian"
+	icon = 'icons/mob/simple_animal/corgi_ghost.dmi'
 	blend_mode = BLEND_SUBTRACT
 	health = 100
 	maxHealth = 100

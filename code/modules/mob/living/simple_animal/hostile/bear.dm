@@ -2,10 +2,7 @@
 /mob/living/simple_animal/hostile/bear
 	name = "space bear"
 	desc = "RawrRawr!!"
-	icon_state = "bear"
-	icon_living = "bear"
-	icon_dead = "bear_dead"
-	icon_gib = "bear_gib"
+	icon = 'icons/mob/simple_animal/bear_space.dmi'
 	speak = list("RAWR!","Rawr!","GRR!","Growl!")
 	speak_emote = list("growls", "roars")
 	emote_hear = list("rawrs","grumbles","grawls")
@@ -43,9 +40,7 @@
 /mob/living/simple_animal/hostile/bear/do_delayed_life_action()
 	..()
 	if(isspaceturf(loc))
-		icon_state = "bear"
-	else
-		icon_state = "bearfloor"
+		icon_state += "-space"
 
 	switch(stance)
 

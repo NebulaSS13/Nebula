@@ -22,10 +22,6 @@
 	name = "cosmoshark"
 	desc = "Enormous creature that resembles a shark with magenta glowing lines along its body and set of long deep-purple teeth."
 	icon = 'maps/away/errant_pisces/icons/cosmoshark.dmi'
-	icon_state = "shark"
-	icon_living = "shark"
-	icon_dead = "shark_dead"
-	icon_gib = "shark_dead"
 	turns_per_move = 5
 	meat_type = /obj/item/chems/food/sharkmeat
 	speed = 2

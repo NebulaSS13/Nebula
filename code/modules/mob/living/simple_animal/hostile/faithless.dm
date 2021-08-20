@@ -1,9 +1,7 @@
 /mob/living/simple_animal/hostile/faithless
 	name = "Faithless"
 	desc = "The Wish Granter's faith in humanity, incarnate"
-	icon_state = "faithless"
-	icon_living = "faithless"
-	icon_dead = "faithless_dead"
+	icon = 'icons/mob/simple_animal/faithless.dmi'
 	speak_chance = 0
 	turns_per_move = 5
 	response_help_1p = "You wave your hand through $TARGET."

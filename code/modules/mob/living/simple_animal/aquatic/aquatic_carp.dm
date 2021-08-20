@@ -1,9 +1,7 @@
 /mob/living/simple_animal/hostile/retaliate/aquatic/carp
 	name = "carp"
 	desc = "A ferocious fish. May be too hardcore."
-	icon_state = "carp"
-	icon_living = "carp"
-	icon_dead = "carp_dead"
+	icon = 'icons/mob/simple_animal/fish_carp.dmi'
 	faction = "fishes"
 	maxHealth = 20
 	health = 20

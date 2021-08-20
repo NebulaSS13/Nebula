@@ -8,9 +8,6 @@
 	name = "giant spider"
 	desc = "A monstrously huge green spider with shimmering eyes."
 	icon = 'icons/mob/simple_animal/spider.dmi'
-	icon_state = "green"
-	icon_living = "green"
-	icon_dead = "green_dead"
 	speak_emote = list("chitters")
 	emote_hear = list("chitters")
 	emote_see = list("rubs its forelegs together", "wipes its fangs", "stops suddenly")
@@ -57,9 +54,7 @@
 //guards - less venomous, tanky, slower, prioritises protecting nurses
 /mob/living/simple_animal/hostile/giant_spider/guard
 	desc = "A monstrously huge brown spider with shimmering eyes."
-	icon_state = "brown"
-	icon_living = "brown"
-	icon_dead = "brown_dead"
+	icon = 'icons/mob/simple_animal/spider.dmi'
 	meat_amount = 4
 	maxHealth = 200
 	health = 200
@@ -77,9 +72,7 @@
 //nursemaids - these create webs and eggs - the weakest and least threatening
 /mob/living/simple_animal/hostile/giant_spider/nurse
 	desc = "A monstrously huge beige spider with shimmering eyes."
-	icon_state = "beige"
-	icon_living = "beige"
-	icon_dead = "beige_dead"
+	icon = 'icons/mob/simple_animal/spider_beige.dmi'
 	maxHealth = 80
 	health = 80
 	harm_intent_damage = 6 //soft
@@ -102,9 +95,7 @@
 //hunters - the most damage, fast, average health and the only caste tenacious enough to break out of nets
 /mob/living/simple_animal/hostile/giant_spider/hunter
 	desc = "A monstrously huge black spider with shimmering eyes."
-	icon_state = "black"
-	icon_living = "black"
-	icon_dead = "black_dead"
+	icon = 'icons/mob/simple_animal/spider_black.dmi'
 	maxHealth = 150
 	health = 150
 	natural_weapon = /obj/item/natural_weapon/bite/strong
@@ -125,9 +116,7 @@
 //spitters - fast, comparatively weak, very venomous; projectile attacks but will resort to melee once out of ammo
 /mob/living/simple_animal/hostile/giant_spider/spitter
 	desc = "A monstrously huge iridescent spider with shimmering eyes."
-	icon_state = "purple"
-	icon_living = "purple"
-	icon_dead = "purple_dead"
+	icon = 'icons/mob/simple_animal/spider_purple.dmi'
 	maxHealth = 90
 	health = 90
 	poison_per_bite = 15
@@ -157,18 +146,16 @@
 
 /mob/living/simple_animal/hostile/giant_spider/on_update_icon()
 	..()
+	var/image/I
 	if(stat == DEAD)
 		z_flags &= ~ZMM_MANGLE_PLANES
-		var/image/I = image(icon = icon, icon_state = "[icon_dead]_eyes")
-		I.color = eye_colour
-		I.appearance_flags = RESET_COLOR
-		add_overlay(I)
+		I = image(icon, "[icon_state]-eyes")
 	else
 		z_flags |= ZMM_MANGLE_PLANES
-		var/image/I = emissive_overlay(icon = icon, icon_state = "[icon_state]_eyes")
-		I.color = eye_colour
-		I.appearance_flags = RESET_COLOR
-		add_overlay(I)
+		I = emissive_overlay(icon, "[icon_state]-eyes")
+	I.color = eye_colour
+	I.appearance_flags = RESET_COLOR
+	add_overlay(I)
 
 /mob/living/simple_animal/hostile/giant_spider/FindTarget()
 	. = ..()

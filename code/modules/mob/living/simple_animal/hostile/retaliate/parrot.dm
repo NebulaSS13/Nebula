@@ -29,9 +29,6 @@
 	name = "parrot"
 	desc = "A large, colourful tropical bird native to Earth, known for its strong beak and ability to mimic speech."
 	icon = 'icons/mob/simple_animal/parrot.dmi'
-	icon_state = "parrot_fly"
-	icon_living = "parrot_fly"
-	icon_dead = "parrot_dead"
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SIZE_SMALL
 
@@ -119,12 +116,6 @@
 /mob/living/simple_animal/hostile/retaliate/parrot/Stat()
 	. = ..()
 	stat("Held Item", held_item)
-
-/mob/living/simple_animal/hostile/retaliate/parrot/on_update_icon()
-	..()
-	icon_state = "[icon_set]_fly"
-	icon_living = "[icon_set]_fly"
-	icon_dead = "[icon_set]_dead"
 
 /*
  * Inventory
@@ -224,7 +215,6 @@
 /mob/living/simple_animal/hostile/retaliate/parrot/attack_hand(mob/user)
 	. = ..()
 	if(!client && !simple_parrot && !stat && user.a_intent == I_HURT)
-		icon_state = "[icon_set]_fly" //It is going to be flying regardless of whether it flees or attacks
 		if(parrot_state == PARROT_PERCH)
 			parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
 		parrot_interest = user
@@ -236,6 +226,7 @@
 				return
 		parrot_state |= PARROT_FLEE		//Otherwise, fly like a bat out of hell!
 		drop_held_item(0)
+		update_icon()
 
 //Mobs with objects
 /mob/living/simple_animal/hostile/retaliate/parrot/attackby(var/obj/item/O, var/mob/user)
@@ -244,12 +235,10 @@
 		if(O.force)
 			if(parrot_state == PARROT_PERCH)
 				parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
-
 			parrot_interest = user
 			parrot_state = PARROT_SWOOP | PARROT_FLEE
-			icon_state = "[icon_set]_fly"
 			drop_held_item(0)
-	return
+			update_icon()
 
 //Bullets
 /mob/living/simple_animal/hostile/retaliate/parrot/bullet_act(var/obj/item/projectile/Proj)
@@ -257,14 +246,11 @@
 	if(!stat && !client)
 		if(parrot_state == PARROT_PERCH)
 			parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
-
 		parrot_interest = null
 		parrot_state = PARROT_WANDER //OWFUCK, Been shot! RUN LIKE HELL!
 		parrot_been_shot += 5
-		icon_state = "[icon_set]_fly"
 		drop_held_item(0)
-	return
-
+		update_icon()
 
 /*
  * AI - Not really intelligent, but I'm calling it AI anyway.
@@ -299,12 +285,10 @@
 		if(parrot_perch && parrot_perch.loc != src.loc) //Make sure someone hasnt moved our perch on us
 			if(parrot_perch in view(src))
 				parrot_state = PARROT_SWOOP | PARROT_RETURN
-				icon_state = "[icon_set]_fly"
-				return
 			else
 				parrot_state = PARROT_WANDER
-				icon_state = "[icon_set]_fly"
-				return
+			update_icon()
+			return
 
 		if(--parrot_sleep_dur) //Zzz
 			return
@@ -344,8 +328,7 @@
 			if(parrot_interest)
 				visible_emote("looks in [parrot_interest]'s direction and takes flight")
 				parrot_state = PARROT_SWOOP | PARROT_STEAL
-				icon_state = "[icon_set]_fly"
-			return
+				update_icon()
 
 //-----WANDERING - This is basically a 'I dont know what to do yet' state
 	else if(parrot_state == PARROT_WANDER)
@@ -427,7 +410,7 @@
 			forceMove(parrot_perch.loc)
 			drop_held_item()
 			parrot_state = PARROT_PERCH
-			icon_state = "[icon_set]_sit"
+			update_icon()
 			return
 
 		walk_to(src, parrot_perch, 1, parrot_speed)
@@ -488,15 +471,6 @@
 		drop_held_item()
 		parrot_state = PARROT_WANDER
 		return
-
-/*
- * Procs
- */
-
-/mob/living/simple_animal/hostile/retaliate/parrot/movement_delay()
-	if(client && stat == CONSCIOUS && parrot_state != "parrot_fly")
-		icon_state = "[icon_set]_fly"
-	..()
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/search_for_item()
 	for(var/atom/movable/AM in view(src))
@@ -654,15 +628,13 @@
 	if(stat || !client)
 		return
 
-	if(icon_state == "[icon_set]_fly")
-		for(var/atom/movable/AM in view(src,1))
-			for(var/perch_path in desired_perches)
-				if(istype(AM, perch_path))
-					forceMove(AM.loc)
-					icon_state = "[icon_set]_sit"
-					return
-	to_chat(src, "<span class='warning'>There is no perch nearby to sit on.</span>")
-	return
+	for(var/atom/movable/AM in view(src,1))
+		for(var/perch_path in desired_perches)
+			if(istype(AM, perch_path))
+				forceMove(AM.loc)
+				update_icon()
+				return
+	to_chat(src, SPAN_WARNING("There is no perch nearby to sit on."))
 
 /*
  * Sub-types

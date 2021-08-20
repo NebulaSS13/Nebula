@@ -4,21 +4,19 @@
 /mob/living/simple_animal/hostile/commanded/nanomachine
 	name = "swarm"
 	desc = "a cloud of tiny, tiny robots."
-	icon = 'icons/mob/simple_animal/critter.dmi'
-	icon_state = "blobsquiggle_grey"
+	icon = 'icons/mob/simple_animal/nanomachines.dmi'
 	natural_weapon = /obj/item/natural_weapon/nanomachine
 	health = 10
 	maxHealth = 10
-	var/regen_time = 0
 	can_escape = TRUE
-	var/emergency_protocols = 0
 	known_commands = list("stay", "stop", "attack", "follow", "heal", "emergency protocol")
 	gene_damage = -1
-
 	response_help_1p = "You wave your hand through $TARGET."
 	response_help_3p = "$USER$ waves $USER_HIS$ hand through $TARGET."
 	response_harm =    "agitates"
 	response_disarm =  "fans at"
+	var/regen_time = 0
+	var/emergency_protocols = 0
 
 /obj/item/natural_weapon/nanomachine
 	name = "decompilers"

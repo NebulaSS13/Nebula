@@ -131,9 +131,6 @@
 	name = "abolition extremist"
 	desc = "Vigiliant fighter against slavery."
 	icon = 'maps/away/slavers/icons/abolitionist.dmi'
-	icon_state = "extremist"
-	icon_living = "extremist"
-	icon_dead = "extremist_dead"
 	speak_chance = 0
 	turns_per_move = 5
 	speed = 4

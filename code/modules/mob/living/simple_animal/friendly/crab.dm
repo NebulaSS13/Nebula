@@ -2,9 +2,7 @@
 /mob/living/simple_animal/crab
 	name = "crab"
 	desc = "A hard-shelled crustacean. Seems quite content to lounge around all the time."
-	icon_state = "crab"
-	icon_living = "crab"
-	icon_dead = "crab_dead"
+	icon = 'icons/mob/simple_animal/crab.dmi'
 	mob_size = MOB_SIZE_SMALL
 	speak_emote = list("clicks")
 	emote_hear = list("clicks")

@@ -1,20 +1,12 @@
 /mob/living/simple_animal/hostile/commanded/bear
 	name = "bear"
 	desc = "A large brown bear."
-
-	icon_state = "brownbear"
-	icon_living = "brownbear"
-	icon_dead = "brownbear_dead"
-	icon_gib = "brownbear_gib"
-
+	icon = 'icons/mob/simple_animal/bear_brown.dmi'
 	health = 75
 	maxHealth = 75
-
 	density = 1
-
 	natural_weapon = /obj/item/natural_weapon/claws
 	can_escape = TRUE
-
 	max_gas = list(
 		/decl/material/gas/chlorine = 2, 
 		/decl/material/gas/carbon_dioxide = 5

@@ -99,9 +99,6 @@
 	icon = 'maps/random_ruins/exoplanet_ruins/hydrobase/hydro.dmi'
 	speak = list("Initiating harvesting subrout-ine-ine.", "Connection timed out.", "Connection with master AI syst-tem-tem lost.", "Core systems override enab-...")
 	emote_see = list("beeps repeatedly", "whirrs violently", "flashes its indicator lights", "emits a ping sound")
-	icon_state = "farmbot"
-	icon_living = "farmbot"
-	icon_dead = "farmbot_dead"
 	faction = "farmbots"
 	health = 225
 	maxHealth = 225

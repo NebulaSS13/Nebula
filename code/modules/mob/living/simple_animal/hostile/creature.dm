@@ -1,11 +1,8 @@
 /mob/living/simple_animal/hostile/creature
 	name = "creature"
 	desc = "A sanity-destroying otherthing."
-	icon = 'icons/mob/simple_animal/critter.dmi'
+	icon = 'icons/mob/simple_animal/creature.dmi'
 	speak_emote = list("gibbers")
-	icon_state = "otherthing"
-	icon_living = "otherthing"
-	icon_dead = "otherthing-dead"
 	health = 100
 	maxHealth = 100
 	natural_weapon = /obj/item/natural_weapon/bite/strong

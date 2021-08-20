@@ -2,11 +2,7 @@
 /mob/living/simple_animal/hostile/vagrant
 	name = "creature"
 	desc = "You get the feeling you should run."
-	icon = 'icons/mob/mob.dmi'
-	icon_state = "vagrant"
-	icon_living = "vagrant"
-	icon_dead = "vagrant"
-	icon_gib = "vagrant"
+	icon = 'icons/mob/simple_animal/vagrant.dmi'
 	maxHealth = 60
 	health = 20
 	speed = 5
@@ -86,7 +82,7 @@
 		move_to_delay = initial(move_to_delay)
 	else //It's fight time
 		alpha = 255
-		icon_state = "vagrant_glowing"
+		icon_state += "-glowing"
 		set_light(3, 0.2)
 		move_to_delay = 2
 
