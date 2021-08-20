@@ -2,14 +2,13 @@
 	name = "pet slime"
 	desc = "A lovable, domesticated slime."
 	icon = 'mods/content/xenobiology/icons/slimes/slime_baby.dmi'
-	icon_state = "slime"
 	speak_emote = list("chirps")
 	health = 100
 	maxHealth = 100
 	response_harm = "stamps on"
 	emote_see = list("jiggles", "bounces in place")
 	gene_damage = -1
-	simple_animal_flags = (SA_NO_LIVING_STATE|SA_NO_DEAD_STATE|SA_NO_REST_STATE|SA_NO_SLEEP_STATE|SA_NO_GIB_STATE) // opt out of simple animal icons, we're a fake slime
+	mob_icon_state_flags = (SA_NO_LIVING_STATE|SA_NO_DEAD_STATE|SA_NO_REST_STATE|SA_NO_SLEEP_STATE|SA_NO_GIB_STATE) // opt out of simple animal icons, we're a fake slime
 	var/slime_type = /decl/slime_colour/grey
 
 /mob/living/simple_animal/slime/Initialize(var/ml, var/_stype = /decl/slime_colour/grey)

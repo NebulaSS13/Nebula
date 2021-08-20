@@ -5,7 +5,7 @@
 /mob/living/slime
 	name = "baby slime"
 	icon = 'mods/content/xenobiology/icons/slimes/slime_baby.dmi'
-	icon_state = "slime"
+	icon_state = ICON_STATE_WORLD
 	pass_flags = PASS_FLAG_TABLE
 	speak_emote = list("chirps")
 	maxHealth = 150
@@ -22,6 +22,7 @@
 	bone_amount = 0
 	ai = /datum/ai/slime
 	hud_type = /datum/hud/slime
+	mob_icon_state_flags = (SA_NO_REST_STATE | SA_NO_SLEEP_STATE | SA_NO_GIB_STATE)
 
 	var/is_adult = FALSE
 	var/mutation_chance = 30 // Chance of mutating, should be between 25 and 35

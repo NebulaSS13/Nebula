@@ -441,9 +441,9 @@ var/global/default_mobloc = null
 	var/types_failed = 0
 	var/list/failures = list()
 
-	for(var/mobtype in subtypesof(/mob/living/simple_animal))
+	for(var/mobtype in subtypesof(/mob/living))
 
-		var/mob/living/simple_animal/critter = mobtype
+		var/mob/living/critter = mobtype
 		total_types++
 
 		var/failed = FALSE
@@ -452,7 +452,7 @@ var/global/default_mobloc = null
 			failed = TRUE
 
 		var/mobicon =  initial(critter.icon)
-		var/mobflags = initial(critter.simple_animal_flags)
+		var/mobflags = initial(critter.mob_icon_state_flags)
 		for(var/mobstate in check_states)
 			var/should_not_have_state = (mobflags & check_states[mobstate])
 			var/has_state = check_state_in_icon(mobicon, mobstate)

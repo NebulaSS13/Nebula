@@ -18,8 +18,6 @@
 
 	icon_state = ICON_STATE_WORLD
 
-	var/simple_animal_flags = (SA_NO_DEAD_STATE | SA_NO_REST_STATE | SA_NO_SLEEP_STATE | SA_NO_GIB_STATE)
-
 	var/gene_damage = 0 // Set to -1 to disable gene damage for the mob.
 	var/show_stat_health = 1	//does the percentage health show in the stat panel for the mob
 
@@ -103,11 +101,11 @@
 	..()
 
 	icon_state = ICON_STATE_WORLD
-	if(stat == DEAD && !(simple_animal_flags & SA_NO_DEAD_STATE))
+	if(stat == DEAD && !(mob_icon_state_flags & SA_NO_DEAD_STATE))
 		icon_state += "-dead"
-	else if(stat == UNCONSCIOUS && !(simple_animal_flags & SA_NO_SLEEP_STATE))
+	else if(stat == UNCONSCIOUS && !(mob_icon_state_flags & SA_NO_SLEEP_STATE))
 		icon_state += "-sleeping"
-	else if(resting && !(simple_animal_flags & SA_NO_REST_STATE))
+	else if(resting && !(mob_icon_state_flags & SA_NO_REST_STATE))
 		icon_state += "-resting"
 
 	var/datum/extension/hattable/hattable = get_extension(src, /datum/extension/hattable)
@@ -247,7 +245,7 @@
 		purge -= 1
 
 /mob/living/simple_animal/gib()
-	..(((simple_animal_flags & SA_NO_GIB_STATE) ? null : "world-gib"), TRUE)
+	..(((mob_icon_state_flags & SA_NO_GIB_STATE) ? null : "world-gib"), TRUE)
 
 /mob/living/simple_animal/proc/visible_emote(var/act_desc)
 	custom_emote(1, act_desc)

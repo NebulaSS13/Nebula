@@ -39,7 +39,7 @@
 	can_escape = TRUE
 	stop_automated_movement_when_pulled = 0
 	natural_weapon = /obj/item/natural_weapon/punch
-	simple_animal_flags = SA_NO_DEAD_STATE | SA_NO_REST_STATE | SA_NO_SLEEP_STATE | SA_NO_GIB_STATE
+	mob_icon_state_flags = SA_NO_DEAD_STATE | SA_NO_REST_STATE | SA_NO_SLEEP_STATE | SA_NO_GIB_STATE
 	var/obj/effect/landmark/corpse/lar_maria/corpse = null
 	var/weapon = null
 
