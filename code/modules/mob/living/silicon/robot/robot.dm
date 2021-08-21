@@ -24,7 +24,6 @@
 	var/power_efficiency = 1
 	var/sight_mode = 0
 	var/custom_name = ""
-	//var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
 	var/integrated_light_power = 0.6
@@ -315,11 +314,6 @@
 	//We also need to update name of internal camera.
 	if (camera)
 		camera.c_tag = changed_name
-
-	/*
-	if(!custom_sprite) //Check for custom sprite
-		set_custom_sprite()
-	*/
 
 	//Flavour text.
 	if(client)

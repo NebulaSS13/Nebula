@@ -3,39 +3,66 @@ SUBSYSTEM_DEF(customitems)
 	flags = SS_NO_FIRE
 	init_order = SS_INIT_MISC_LATE
 	var/list/custom_items_by_ckey = list()
+	var/list/custom_icons_by_ckey = list()
 
-/datum/controller/subsystem/customitems/Initialize()
+/datum/controller/subsystem/customitems/proc/get_json_paths_from_directory(var/category, var/directory)
 
-	if(!fexists(CUSTOM_ITEM_CONFIG))
-		report_progress("Custom item directory [CUSTOM_ITEM_CONFIG] does not exist, no custom items will be loaded.")
+	. = list()
+
+	if(!fexists(directory))
+		report_progress("[capitalize(category)] directory [directory] does not exist, no [category] config will be loaded.")
 		return
 
 	var/dir_count = 0
 	var/item_count = 0
-	var/list/directories_to_check = list(CUSTOM_ITEM_CONFIG)
+	var/list/directories_to_check = list(directory)
 	while(length(directories_to_check))
+
 		var/checkdir = directories_to_check[1]
 		directories_to_check -= checkdir
-		if(checkdir == "[CUSTOM_ITEM_CONFIG]examples/")
+		if(checkdir == "[directory]examples/")
 			continue
+
 		for(var/checkfile in flist(checkdir))
+
 			checkfile = "[checkdir][checkfile]"
+
 			if(copytext(checkfile, -1) == "/")
 				directories_to_check += checkfile
 				dir_count++
-			else if(copytext(checkfile, -5) == ".json")
-				try
-					var/datum/custom_item/citem = new(cached_json_decode(safe_file2text(checkfile)))
-					var/result = citem.validate()
-					if(result)
-						PRINT_STACK_TRACE("Invalid custom item [checkfile]: [result]")
-					else
-						LAZYDISTINCTADD(custom_items_by_ckey[citem.character_ckey], citem)
-						item_count++
-				catch(var/exception/e)
-					PRINT_STACK_TRACE("Exception loading custom item [checkfile]: [e] on [e.file]:[e.line]")
 
-	report_progress("Loaded [item_count] custom item\s from [dir_count] director[dir_count == 1 ? "y" : "ies"].")
+			else if(copytext(checkfile, -5) == ".json")
+				if(checkfile in .)
+					PRINT_STACK_TRACE("Duplicate file load for [checkfile].")
+				else
+					try
+						.[checkfile] = safe_file2text(checkfile)
+						item_count++
+					catch(var/exception/e)
+						PRINT_STACK_TRACE("Exception loading [category] [checkfile]: [e] on [e.file]:[e.line]")
+
+	report_progress("Loaded [item_count] [category]\s from [dir_count] director[dir_count == 1 ? "y" : "ies"].")
+
+/datum/controller/subsystem/customitems/Initialize()
+
+	var/list/json_to_load = get_json_paths_from_directory("custom item", CUSTOM_ITEM_CONFIG)
+	for(var/key in json_to_load)
+		var/datum/custom_item/citem = new(cached_json_decode(json_to_load[key]))
+		var/result = citem.validate()
+		if(result)
+			PRINT_STACK_TRACE("Invalid custom item for '[key]': [result]")
+		else
+			LAZYDISTINCTADD(custom_items_by_ckey[citem.character_ckey], citem)
+
+	json_to_load = get_json_paths_from_directory("custom icon", CUSTOM_ICON_CONFIG)
+	for(var/key in json_to_load)
+		var/datum/custom_icon/cicon = new(cached_json_decode(json_to_load[key]))
+		var/result = cicon.validate()
+		if(result)
+			PRINT_STACK_TRACE("Invalid custom icon for '[key]': [result]")
+		else
+			LAZYDISTINCTADD(custom_icons_by_ckey[cicon.character_ckey], cicon)
+
 	. = ..()
 
 // Places the item on the target mob.
@@ -72,6 +99,33 @@ SUBSYSTEM_DEF(customitems)
 				return
 		place_custom_item(M,citem)
 
+/datum/custom_icon
+	var/character_ckey
+	var/character_name
+	var/category
+	var/list/ids_to_icons = list()
+
+/datum/custom_icon/New(var/list/data)
+	character_ckey = data["character_ckey"]
+	character_name = data["character_name"]
+	category =       data["icon_category"]
+	ids_to_icons =   data["icons"]
+
+/datum/custom_icon/proc/finalize_data()
+	character_ckey =       ckey(character_ckey)
+	character_name =       lowertext(character_name)
+	for(var/icon_id in ids_to_icons)
+		var/icon_loc = ids_to_icons[icon_id]
+		if(config.custom_icon_icon_location)
+			icon_loc = "[config.custom_icon_icon_location]/[icon_loc]"
+		ids_to_icons[icon_id] = file(icon_loc)
+
+/datum/custom_icon/proc/validate()
+	if(!length(ids_to_icons))
+		return SPAN_WARNING("Icon list is empty.")
+	for(var/icon_id in ids_to_icons)
+		if(!isfile(ids_to_icons[icon_id]) && !isicon(ids_to_icons[icon_id]))
+			return SPAN_WARNING("ID [icon_id] maps to non-file non-icon value [ids_to_icons[icon_id] || "NULL"]")
 /datum/custom_item
 	var/character_ckey
 	var/character_name

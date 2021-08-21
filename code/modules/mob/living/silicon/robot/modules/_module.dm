@@ -126,7 +126,12 @@
 	R.choose_icon(list("Basic" = initial(R.icon)))
 
 /obj/item/robot_module/proc/get_sprites_for(var/mob/living/silicon/robot/R)
-	return module_sprites
+	. = module_sprites
+	if(R.ckey)
+		for(var/datum/custom_icon/cicon AS_ANYTHING in SScustomitems.custom_icons_by_ckey[R.ckey])
+			if(cicon.category == display_name && lowertext(R.real_name) == cicon.character_name)
+				for(var/state in cicon.ids_to_icons)
+					.[state] = cicon.ids_to_icons[state]
 
 /obj/item/robot_module/Destroy()
 	QDEL_NULL_LIST(equipment)

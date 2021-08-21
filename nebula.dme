@@ -2346,7 +2346,6 @@
 #include "code\modules\mob\living\silicon\pai\software_modules.dm"
 #include "code\modules\mob\living\silicon\robot\analyzer.dm"
 #include "code\modules\mob\living\silicon\robot\component.dm"
-#include "code\modules\mob\living\silicon\robot\custom_sprites.dm"
 #include "code\modules\mob\living\silicon\robot\death.dm"
 #include "code\modules\mob\living\silicon\robot\examine.dm"
 #include "code\modules\mob\living\silicon\robot\inventory.dm"
