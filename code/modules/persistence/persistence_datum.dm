@@ -3,12 +3,14 @@
 // of persistent data like graffiti and round to round filth.
 
 /datum/persistent
-	var/name                     // Unique descriptive name. Used for generating filename.
-	var/filename                 // Set at runtime. Full path and .json extension for loading saved data.
-	var/entries_expire_at        // Entries are removed if they are older than this number of rounds.
-	var/entries_decay_at         // Entries begin to decay if they are older than this number of rounds (if applicable).
-	var/entry_decay_weight = 0.5 // A modifier for the rapidity of decay.
-	var/has_admin_data           // If set, shows up on the admin persistence panel.
+	var/name                       // Unique descriptive name. Used for generating filename.
+	var/filename                   // Set at runtime. Full path and .json extension for loading saved data.
+	var/entries_expire_at          // Entries are removed if they are older than this number of rounds.
+	var/entries_decay_at           // Entries begin to decay if they are older than this number of rounds (if applicable).
+	var/entry_decay_weight = 0.5   // A modifier for the rapidity of decay.
+	var/has_admin_data             // If set, shows up on the admin persistence panel.
+	var/ignore_area_flags = FALSE  // Set to TRUE to skip area flag checks such as nonpersistent areas.
+	var/ignore_invalid_loc = FALSE // Set to TRUE to skip checking for a non-null station turf for the entry.
 
 /datum/persistent/New()
 	SetFilename()
@@ -21,7 +23,7 @@
 		entries_decay_at = Floor(entries_expire_at * entries_decay_at)
 
 /datum/persistent/proc/GetValidTurf(var/turf/T, var/list/tokens)
-	if(T && CheckTurfContents(T, tokens))
+	if(T && (T.z in global.using_map.station_levels) && CheckTurfContents(T, tokens))
 		return T
 
 /datum/persistent/proc/CheckTurfContents(var/turf/T, var/list/tokens)
@@ -44,7 +46,7 @@
 
 	// If it's old enough we start to trim down any textual information and scramble strings.
 	if(tokens["message"] && !isnull(entries_decay_at) && !isnull(entry_decay_weight))
-		var/_n =       tokens["age"]
+		var/_n = tokens["age"]
 		var/_message = tokens["message"]
 		if(_n >= entries_decay_at)
 			var/decayed_message = ""
@@ -61,11 +63,9 @@
 		else
 			return
 
-	var/_z = tokens["z"]
-	if(_z in global.using_map.station_levels)
-		. = GetValidTurf(locate(tokens["x"], tokens["y"], _z), tokens)
-		if(.)
-			CreateEntryInstance(., tokens)
+	. = GetValidTurf(locate(tokens["x"], tokens["y"], tokens["z"]), tokens)
+	if(.)
+		CreateEntryInstance(., tokens)
 
 /datum/persistent/proc/IsValidEntry(var/atom/entry)
 	if(!istype(entry))
@@ -73,10 +73,10 @@
 	if(!isnull(entries_expire_at) && GetEntryAge(entry) >= entries_expire_at)
 		return FALSE
 	var/turf/T = get_turf(entry)
-	if(!T || !(T.z in global.using_map.station_levels) )
+	if(!ignore_invalid_loc && (!T || !(T.z in global.using_map.station_levels)))
 		return FALSE
 	var/area/A = get_area(T)
-	if(!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
+	if(!ignore_area_flags && (!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT)))
 		return FALSE
 	return TRUE
 
@@ -86,9 +86,9 @@
 /datum/persistent/proc/CompileEntry(var/atom/entry)
 	var/turf/T = get_turf(entry)
 	. = list()
-	.["x"] =   T.x
-	.["y"] =   T.y
-	.["z"] =   T.z
+	.["x"] =   T?.x || 0
+	.["y"] =   T?.y || 0
+	.["z"] =   T?.z || 0
 	.["age"] = GetEntryAge(entry)
 
 /datum/persistent/proc/FinalizeTokens(var/list/tokens)
