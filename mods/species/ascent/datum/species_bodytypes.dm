@@ -2,7 +2,6 @@
 	name =              "alate"
 	bodytype_category = BODYTYPE_MANTID_SMALL
 	icon_base =         'mods/species/ascent/icons/species/body/alate/body.dmi'
-	damage_overlays =   'mods/species/ascent/icons/species/body/alate/damage_mask.dmi'
 	blood_mask =        'mods/species/ascent/icons/species/body/alate/blood_mask.dmi'
 	associated_gender = MALE
 
