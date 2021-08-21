@@ -190,6 +190,8 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 	var/datum/composite_sound/supermatter/soundloop
 
+	var/damage_animation = FALSE //we we doing our damage animation?
+
 	var/list/threshholds = list( // List of lists defining the amber/red labeling threshholds in readouts. Numbers are minminum red and amber and maximum amber and red, in that order
 		list("name" = SUPERMATTER_DATA_EER,         "min_h" = -1, "min_l" = -1,  "max_l" = 150,  "max_h" = 300),
 		list("name" = SUPERMATTER_DATA_TEMPERATURE, "min_h" = -1, "min_l" = -1,  "max_l" = 4000, "max_h" = 5000),
@@ -202,6 +204,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	uid = gl_uid++
 	soundloop = new(list(src), TRUE)
 	update_icon()
+	add_filter("outline",1,list(type = "drop_shadow", size = 0, color = COLOR_WHITE, x = 0, y = 0))
 
 /obj/machinery/power/supermatter/Destroy()
 	. = ..()
@@ -450,7 +453,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		soundloop.volume = clamp((50 + (power / 50)), 50, 100)
 
 	// Swap loops between calm and delamming.
-	if(damage >= 300)
+	if(damage >= explosion_point * 0.25)
 		soundloop.mid_sounds = list('sound/machines/sm/loops/delamming.ogg' = 1)
 	else
 		soundloop.mid_sounds = list('sound/machines/sm/loops/calm.ogg' = 1)
@@ -458,7 +461,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	// Play Delam/Neutral sounds at rate determined by power and damage.
 	if(last_accent_sound < world.time && prob(20))
 		var/aggression = min(((damage / 800) * (power / 2500)), 1.0) * 100
-		if(damage >= 300)
+		if(damage >= explosion_point * 0.25)
 			playsound(src, pick(supermatter_delam_accent_sounds), max(50, aggression), FALSE, 10)
 		else
 			playsound(src, pick(supermatter_calm_accent_sounds), max(50, aggression), FALSE, 10)
@@ -532,10 +535,17 @@ var/global/list/supermatter_delam_accent_sounds = list(
 		var/effect = max(0, min(200, power * config_hallucination_power * sqrt( 1 / max(1,get_dist(subject, src)))) )
 		subject.adjust_hallucination(effect, 0.25 * effect)
 
+	if(power)
+		var/size_calc = max((power / 200), 1) //this needs to be a decently small value, but not TOO small.
+		animate_filter("outline", list(size = size_calc))
+	if(!power)
+		animate_filter("outline", list(size = 0))
+
 	color = color_contrast(Interpolate(0, 50, Clamp( (damage - emergency_point) / (explosion_point - emergency_point),0,1)))
 
-	if (damage >= emergency_point && !filters.len)
-		add_filter("rays",1,list(type="rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
+	if (damage >= emergency_point)
+		if(!get_filter("rays"))
+			add_filter("rays",1,list(type="rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
 		animate_filter("rays", list(time = 10 SECONDS, offset = 10, loop=-1))
 		animate(time = 10 SECONDS, loop=-1)
 
@@ -544,13 +554,11 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	else if (damage < emergency_point)
 		remove_filter("rays")
 
-
 	SSradiation.radiate(src, power * radiation_release_modifier) //Better close those shutters!
 	power -= (power/decay_factor)**3		//energy losses due to radiation
 	handle_admin_warnings()
 
-	return 1
-
+	return 1	
 
 /obj/machinery/power/supermatter/bullet_act(var/obj/item/projectile/Proj)
 	var/turf/L = loc
