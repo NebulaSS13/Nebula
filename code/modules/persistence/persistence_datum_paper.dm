@@ -25,7 +25,7 @@
 	var/obj/item/paper/paper = entry
 	return paper.age
 
-/datum/persistent/paper/CompileEntry(var/atom/entry, var/write_file)
+/datum/persistent/paper/CompileEntry(var/atom/entry)
 	. = ..()
 	var/obj/item/paper/paper = entry
 	.["author"] =  paper.last_modified_ckey || "unknown"
