@@ -244,13 +244,6 @@ var/global/list/damage_icon_parts = list()
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists
 /mob/living/carbon/human/UpdateDamageIcon(var/update_icons=1)
 
-	var/damage_overlays = bodytype.get_damage_overlays(src)
-	if(!damage_overlays)
-		return
-	var/damage_mask = bodytype.get_damage_mask(src)
-	if(!damage_mask)
-		return
-
 	// first check whether something actually changed about damage appearance
 	var/damage_appearance = ""
 	for(var/obj/item/organ/external/O in organs)
@@ -264,7 +257,7 @@ var/global/list/damage_icon_parts = list()
 
 	previous_damage_appearance = damage_appearance
 
-	var/image/standing_image = image(damage_overlays, icon_state = "00")
+	var/image/standing_image = image(bodytype.get_damage_overlays(src), icon_state = "00")
 
 	// blend the individual damage states with our icons
 	for(var/obj/item/organ/external/O in organs)
@@ -278,8 +271,8 @@ var/global/list/damage_icon_parts = list()
 		var/use_colour = (BP_IS_PROSTHETIC(O) ? SYNTH_BLOOD_COLOUR : O.species.get_blood_colour(src))
 		var/cache_index = "[O.damage_state]/[O.icon_name]/[use_colour]/[species.name]"
 		if(damage_icon_parts[cache_index] == null)
-			DI = new /icon(bodytype.get_damage_overlays(src), O.damage_state)			// the damage icon for whole human
-			DI.Blend(new /icon(bodytype.get_damage_mask(src), O.icon_name), ICON_MULTIPLY)	// mask with this organ's pixels
+			DI = new /icon(bodytype.get_damage_overlays(src), O.damage_state) // the damage icon for whole human
+			DI.Blend(new /icon(O.icon, O.icon_name), ICON_MULTIPLY)  // mask with this organ's pixels
 			DI.Blend(use_colour, ICON_MULTIPLY)
 			damage_icon_parts[cache_index] = DI
 		else

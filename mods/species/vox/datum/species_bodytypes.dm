@@ -4,7 +4,6 @@
 	icon_base =         'mods/species/vox/icons/body/body.dmi'
 	icon_deformed =     'mods/species/vox/icons/body/deformed_body.dmi'
 	husk_icon =         'mods/species/vox/icons/body/husk.dmi'
-	damage_overlays =   'mods/species/vox/icons/body/damage_overlay.dmi'
 	damage_mask =       'mods/species/vox/icons/body/damage_mask.dmi'
 	blood_mask =        'mods/species/vox/icons/body/blood_mask.dmi'
 

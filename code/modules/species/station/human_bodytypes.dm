@@ -4,7 +4,6 @@
 	icon_base =           'icons/mob/human_races/species/human/body_female.dmi'
 	icon_deformed =       'icons/mob/human_races/species/human/deformed_body_female.dmi'
 	lip_icon =            'icons/mob/human_races/species/human/lips.dmi'
-	damage_overlays =     'icons/mob/human_races/species/human/damage_overlay.dmi'
 	damage_mask =         'icons/mob/human_races/species/human/damage_mask.dmi'
 	blood_mask =          'icons/mob/human_races/species/human/blood_mask.dmi'
 	bandages_icon =       'icons/mob/bandage.dmi'
