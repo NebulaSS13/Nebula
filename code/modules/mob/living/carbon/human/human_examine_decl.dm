@@ -2,6 +2,3 @@
 
 /decl/human_examination/proc/do_examine(var/user, var/distance, var/source) //These can either return text, or should return nothing at all if you're doing to_chat()
 	return
-
-/decl/human_examination/proc/do_ssd_text(var/user, var/source)
-	return
