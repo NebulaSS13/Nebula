@@ -44,7 +44,7 @@
                 <div class="white" style="height: 26px">Filtering</div>
                 {{for data.ports}}
                     <div style="height: 26px">
-                        {{:helper.link(' ', null, {'command' : 'switch_mode', 'mode' : 'filtering', 'dir' : value.dir}, null, value.is_filter ? 'selected' : null)}}
+                        {{:helper.link(' ', null, {'command' : 'switch_mode', 'mode' : 'filtering', 'dir' : value.dir}, null, value.filter ? 'selected' : null)}}
                     </div>
                 {{/for}}
             </div>

@@ -12,6 +12,7 @@ SUBSYSTEM_DEF(materials)
 	var/list/fusion_reactions
 	var/list/weighted_minerals_sparse = list()
 	var/list/weighted_minerals_rich = list()
+	var/list/materials_by_gas_symbol = list()
 
 	// Chemistry vars.
 	var/list/active_holders =                  list()
@@ -69,6 +70,11 @@ SUBSYSTEM_DEF(materials)
 		LAZYADD(wall_damage_overlays, img)
 
 	strata = decls_repository.get_decls_of_subtype(/decl/strata) // for debug VV purposes
+
+	for(var/s in subtypesof(/decl/material/gas))
+		var/decl/material/gas/G = GET_DECL(s)
+		if(G.gas_symbol)
+			materials_by_gas_symbol[G.gas_symbol] = s
 
 	. = ..()
 

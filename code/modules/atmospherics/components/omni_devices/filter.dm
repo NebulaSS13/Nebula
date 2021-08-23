@@ -107,7 +107,7 @@
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
-		ui = new(user, src, ui_key, "omni_filter.tmpl", "Omni Filter Control", 330, 330)
+		ui = new(user, src, ui_key, "omni_filter.tmpl", "Omni Filter Control", 550, 550)
 		ui.set_initial_data(data)
 
 		ui.open()
@@ -125,17 +125,16 @@
 
 		var/input = 0
 		var/output = 0
-		var/is_filter = 1
+		var/is_filter = 0
 		var/f_type = null
 		switch(P.mode)
 			if(ATM_INPUT)
 				input = 1
-				is_filter = 0
 			if(ATM_OUTPUT)
 				output = 1
-				is_filter = 0
 			if(ATM_FILTER)
 				f_type = mode_send_switch(P)
+				is_filter = 1
 			if(ATM_NONE)
 				is_filter = 0
 
@@ -189,21 +188,10 @@
 	return
 
 /obj/machinery/atmospherics/omni/filter/proc/get_gas_names()
-	var/list/output = list()
-	var/list/gases = decls_repository.get_decls_of_subtype(/decl/material/gas)
-	for(var/G in gases)
-		if(G == /decl/material/gas/alien)
-			continue
-		var/decl/material/gas/GE = gases[G]
-		output += GE.gas_symbol
-	return output
+	return SSmaterials.materials_by_gas_symbol
 
 /obj/machinery/atmospherics/omni/filter/proc/get_decl_from_symbol(var/sym)
-	var/list/gases = decls_repository.get_decls_of_subtype(/decl/material/gas)
-	for(var/G in gases)
-		var/decl/material/gas/GE = gases[G]
-		if(GE.gas_symbol == sym)
-			return G
+	return SSmaterials.materials_by_gas_symbol[sym]
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(var/mode)
 	switch(mode)

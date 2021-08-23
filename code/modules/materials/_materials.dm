@@ -286,6 +286,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		shard_icon = shard_type
 	if(!burn_armor)
 		burn_armor = brute_armor
+	if(!gas_symbol)
+		gas_symbol = "#[sequential_id(/decl/material)]"
+	if(!gas_symbol_html)
+		gas_symbol_html = gas_symbol
 	generate_armor_values()
 
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
