@@ -656,6 +656,9 @@ var/global/list/localhost_addresses = list(
 			to_chat(src, "You probably entered the game with a different keyboard layout.\n<a href='?src=\ref[src];reset_macros=1'>Please switch to the English layout and click here to fix the communication hotkeys.</a>")
 			break
 
+/client/proc/get_byond_membership()
+	return prefs?.is_byond_member || IsByondMember()
+
 /client/proc/set_right_click_menu_mode(shift_only)
 	if(shift_only)
 		winset(src, "mapwindow.map", "right-click=true")

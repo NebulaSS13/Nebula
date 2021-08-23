@@ -9,6 +9,9 @@
 	var/mute_setting
 	var/show_preference_setting
 
+/decl/communication_channel/proc/get_emblem(client/C)
+	return
+
 /decl/communication_channel/proc/can_ignore(var/client/C)
 	if (!C)
 		return TRUE
