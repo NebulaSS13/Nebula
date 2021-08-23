@@ -188,10 +188,14 @@
 	return
 
 /obj/machinery/atmospherics/omni/filter/proc/get_gas_names()
-	return SSmaterials.materials_by_gas_symbol
+	var/list/output = list()
+	for(var/S in materials_by_gas_symbol)
+		if(materials_by_gas_symbol[S] in subtypesof(/decl/material/gas))
+			output[S] = materials_by_gas_symbol[S]
+	return output
 
 /obj/machinery/atmospherics/omni/filter/proc/get_decl_from_symbol(var/sym)
-	return SSmaterials.materials_by_gas_symbol[sym]
+	return materials_by_gas_symbol[sym]
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(var/mode)
 	switch(mode)

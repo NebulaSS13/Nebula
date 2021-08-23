@@ -1,3 +1,5 @@
+var/global/list/materials_by_gas_symbol = list()
+
 /obj/effect/gas_overlay
 	name = "gas"
 	desc = "You shouldn't be clicking this."
@@ -296,6 +298,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		gas_symbol = jointext(chem_symbol, null)
 	if(!gas_symbol_html)
 		gas_symbol_html = gas_symbol
+	materials_by_gas_symbol[gas_symbol] = type
 	generate_armor_values()
 
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
