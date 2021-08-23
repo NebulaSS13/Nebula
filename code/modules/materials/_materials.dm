@@ -292,7 +292,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		gas_symbol = "[name]_[sequential_id(abstract_type)]"
 	if(!gas_symbol_html)
 		gas_symbol_html = gas_symbol
-	materials_by_gas_symbol[gas_symbol] = type
+	global.materials_by_gas_symbol[gas_symbol] = type
 	generate_armor_values()
 
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
