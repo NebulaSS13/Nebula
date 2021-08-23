@@ -18,6 +18,7 @@
 	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_FILTER
 
 	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
+	var/list/gas_decls_by_symbol_cache = list()
 	build_icon_state = "omni_filter"
 	base_type = /obj/machinery/atmospherics/omni/filter/buildable
 
@@ -26,6 +27,9 @@
 
 /obj/machinery/atmospherics/omni/filter/Initialize()
 	. = ..()
+	for(var/S in global.materials_by_gas_symbol)
+		if(global.materials_by_gas_symbol[S] in subtypesof(/decl/material/gas))
+			gas_decls_by_symbol_cache[S] = global.materials_by_gas_symbol[S]
 	rebuild_filtering_list()
 	for(var/datum/omni_port/P in ports)
 		P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
@@ -188,14 +192,10 @@
 	return
 
 /obj/machinery/atmospherics/omni/filter/proc/get_gas_names()
-	var/list/output = list()
-	for(var/S in materials_by_gas_symbol)
-		if(materials_by_gas_symbol[S] in subtypesof(/decl/material/gas))
-			output[S] = materials_by_gas_symbol[S]
-	return output
+	return gas_decls_by_symbol_cache
 
 /obj/machinery/atmospherics/omni/filter/proc/get_decl_from_symbol(var/sym)
-	return materials_by_gas_symbol[sym]
+	return global.materials_by_gas_symbol[sym]
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(var/mode)
 	switch(mode)
