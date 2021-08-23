@@ -176,7 +176,7 @@
 			L.IgniteMob()
 		else if(istype(O))
 			O.HandleObjectHeating(src, user, 700)
-		if (istype(location, /turf))
+		if (isturf(location))
 			location.hotspot_expose(700, 50, 1)
 	return
 

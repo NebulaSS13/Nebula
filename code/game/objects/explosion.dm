@@ -102,7 +102,7 @@
 #define SEARCH_DIR(dir) \
 	search_direction = dir;\
 	search_turf = get_step(current_turf, search_direction);\
-	if (istype(search_turf, /turf)) {\
+	if (isturf(search_turf)) {\
 		turf_queue += search_turf;\
 		dir_queue += search_direction;\
 		power_queue += current_power;\

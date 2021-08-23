@@ -57,7 +57,7 @@
 
 	if(M.incapacitated())
 		return 0
-	if((src in M.contents) || (istype(loc, /turf) && in_range(src, M)))
+	if((src in M.contents) || (isturf(loc) && in_range(src, M)))
 		return 1
 	return 0
 

@@ -169,7 +169,7 @@
 		if(GET_CHEMICAL_EFFECT(owner, CE_STABLE))
 			blood_max *= 0.8
 
-		if(world.time >= next_blood_squirt && istype(owner.loc, /turf) && do_spray.len)
+		if(world.time >= next_blood_squirt && isturf(owner.loc) && do_spray.len)
 			var/spray_organ = pick(do_spray)
 			owner.visible_message(
 				SPAN_DANGER("Blood sprays out from \the [owner]'s [spray_organ]!"),

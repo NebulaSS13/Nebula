@@ -966,7 +966,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			forceMove(get_turf(src))
 			if(!clean)
 				// Throw limb around.
-				if(src && istype(loc,/turf))
+				if(src && isturf(loc))
 					throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 				set_dir(SOUTH, TRUE)
 		if(DISMEMBER_METHOD_BURN, DISMEMBER_METHOD_ACID)
