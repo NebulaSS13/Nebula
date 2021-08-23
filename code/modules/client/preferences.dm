@@ -21,9 +21,12 @@ var/global/list/time_prefs_fixed = list()
 /* END PLACEHOLDER VERB */
 
 /datum/preferences
-	// doohickeys for savefiles
+	/// doohickeys for savefiles
 	var/is_guest = FALSE
-	// Holder so it doesn't default to slot 1, rather the last one used
+	/// Cached varialbe for checking byond membership. Also handles days of membership left.
+	var/is_byond_member
+
+	/// Holder so it doesn't default to slot 1, rather the last one used
 	var/default_slot = 1
 
 	// Cache, mapping slot record ids to character names
@@ -87,6 +90,7 @@ var/global/list/time_prefs_fixed = list()
 			is_guest = TRUE
 		else
 			load_data()
+			is_byond_member = client.IsByondMember()
 
 	sanitize_preferences()
 	update_preview_icon()

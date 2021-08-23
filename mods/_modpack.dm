@@ -47,6 +47,9 @@
 	if(length(credits_nouns))
 		SSlore.credits_nouns |= credits_nouns
 
+/decl/modpack/proc/get_membership_perks()
+	return
+
 /client/verb/modpacks_list()
 	set name = "Modpacks List"
 	set category = "OOC"
