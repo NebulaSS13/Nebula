@@ -188,4 +188,5 @@
 		fail("[length(failures)] material\s had null or non-unique gas symbols:\n[jointext(failures, "\n")]")
 	else
 		pass("All materials had unique and non-null gas symbols.")
+	return 1
 

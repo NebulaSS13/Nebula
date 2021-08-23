@@ -287,7 +287,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(!burn_armor)
 		burn_armor = brute_armor
 	if(!gas_symbol)
-		gas_symbol = "#[sequential_id(/decl/material)]"
+		var/list/chem_symbol = list()
+		for(var/word in splittext(lowertext(name), " "))
+			if(length(word) < 2)
+				chem_symbol += uppertext(word)
+			else 
+				chem_symbol += capitalize(word, 1, 3)
+		gas_symbol = jointext(chem_symbol, null)
 	if(!gas_symbol_html)
 		gas_symbol_html = gas_symbol
 	generate_armor_values()
