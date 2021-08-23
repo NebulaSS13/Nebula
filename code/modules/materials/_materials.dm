@@ -289,13 +289,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(!burn_armor)
 		burn_armor = brute_armor
 	if(!gas_symbol)
-		var/list/chem_symbol = list()
-		for(var/word in splittext(lowertext(name), " "))
-			if(length(word) < 2)
-				chem_symbol += uppertext(word)
-			else 
-				chem_symbol += capitalize(word, 1, 3)
-		gas_symbol = jointext(chem_symbol, null)
+		gas_symbol = "[name]_[sequential_id(abstract_type)]"
 	if(!gas_symbol_html)
 		gas_symbol_html = gas_symbol
 	materials_by_gas_symbol[gas_symbol] = type
