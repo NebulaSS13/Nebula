@@ -1,0 +1,6 @@
+author: Andromeda-K22
+delete-after: true
+changes:
+  - rscadd: the supermatter now makes noises depending on damage.
+  - rscadd: the supermatter now glows if severely damaged, and changes contrast /
+      color
