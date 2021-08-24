@@ -18,7 +18,7 @@
 	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_FILTER
 
 	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
-	var/list/gas_decls_by_symbol_cache = list()
+	var/static/list/gas_decls_by_symbol_cache
 	build_icon_state = "omni_filter"
 	base_type = /obj/machinery/atmospherics/omni/filter/buildable
 
@@ -27,9 +27,15 @@
 
 /obj/machinery/atmospherics/omni/filter/Initialize()
 	. = ..()
-	for(var/S in global.materials_by_gas_symbol)
-		if(global.materials_by_gas_symbol[S] in subtypesof(/decl/material/gas))
-			gas_decls_by_symbol_cache[S] = global.materials_by_gas_symbol[S]
+
+	if(!gas_decls_by_symbol_cache)
+		gas_decls_by_symbol_cache = list()
+		var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
+		for(var/mat_type in all_materials)
+			var/decl/material/mat = all_materials[mat_type]
+			if(!mat.hidden_from_codex && !mat.is_abstract() && !isnull(mat.boiling_point) && mat.boiling_point < T20C)
+				gas_decls_by_symbol_cache[mat.gas_symbol] = mat.type
+
 	rebuild_filtering_list()
 	for(var/datum/omni_port/P in ports)
 		P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
@@ -183,19 +189,13 @@
 			if("switch_mode")
 				switch_mode(dir_flag(href_list["dir"]), mode_return_switch(href_list["mode"]))
 			if("switch_filter")
-				var/list/gas_list = get_gas_names()
-				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in gas_list
-				switch_filter(dir_flag(href_list["dir"]), ATM_FILTER, get_decl_from_symbol(new_filter))
+				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in gas_decls_by_symbol_cache
+				if(global.materials_by_gas_symbol[new_filter])
+					switch_filter(dir_flag(href_list["dir"]), ATM_FILTER, global.materials_by_gas_symbol[new_filter])
 
 	update_icon()
 	SSnano.update_uis(src)
 	return
-
-/obj/machinery/atmospherics/omni/filter/proc/get_gas_names()
-	return gas_decls_by_symbol_cache
-
-/obj/machinery/atmospherics/omni/filter/proc/get_decl_from_symbol(var/sym)
-	return global.materials_by_gas_symbol[sym]
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(var/mode)
 	switch(mode)
@@ -261,6 +261,9 @@
 	filtering_outputs.Cut()
 	for(var/datum/omni_port/P in ports)
 		filtering_outputs[P.filtering] = P.air
+		for(var/mat_type in P.air?.gas)
+			var/decl/material/mat = GET_DECL(mat_type)
+			gas_decls_by_symbol_cache[mat.gas_symbol] = mat.type
 
 /obj/machinery/atmospherics/omni/filter/proc/handle_port_change(var/datum/omni_port/P)
 	switch(P.mode)
