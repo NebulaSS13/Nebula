@@ -179,6 +179,7 @@
 	)
 	metabolism = REM * 0.25
 	defoliant = TRUE
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/tar
 	name = "tar"

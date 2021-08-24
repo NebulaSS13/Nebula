@@ -118,7 +118,7 @@
 	for(var/datum/exoplanet_theme/T in themes)
 		T.adjust_atmosphere(src)
 	select_strata()
-	generate_flora()
+	generate_flora(atmosphere?.temperature || T20C)
 	generate_map()
 	generate_landing(2)
 	generate_features()

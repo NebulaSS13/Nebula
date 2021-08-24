@@ -343,6 +343,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 /decl/material/placeholder
 	name = "placeholder"
 	hidden_from_codex = TRUE
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 // Generic material product (sheets, bricks, etc). Used ALL THE TIME.
 // May return an instance list, a single instance, or nothing if there is no instance produced.
