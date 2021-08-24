@@ -463,11 +463,11 @@
 	var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
 	for(var/mat_type in all_materials)
 		var/decl/material/mat = all_materials[mat_type]
-		if(mat.exoplanet_rarity >= MAT_RARITY_NOWHERE)
+		if(mat.exoplanet_rarity == MAT_RARITY_NOWHERE)
 			continue
 		if(skip_toxins && mat.toxicity)
 			continue
-		if(!isnull(mat.boiling_point) && mat.boiling_point <= temperature)
+		if(!isnull(mat.boiling_point) && mat.boiling_point <= temperature && (isnull(mat.gas_condensation_point) || mat.gas_condensation_point > temperature))
 			gasses[mat.type] = mat.exoplanet_rarity
 		else if(!isnull(mat.melting_point) && mat.melting_point <= temperature)
 			liquids[mat.type] = mat.exoplanet_rarity
