@@ -107,17 +107,18 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/list/stack_origin_tech = "{'materials':1}" // Research level for stacks.
 
 	// Attributes
-	var/cut_delay = 0            // Delay in ticks when cutting through this wall.
-	var/radioactivity            // Radiation var. Used in wall and object processing to irradiate surroundings.
-	var/ignition_point           // K, point at which the material catches on fire.
-	var/melting_point = 1800     // K, walls will take damage if they're next to a fire hotter than this
-	var/boiling_point = 3000     // K, point that material will become a gas.
-	var/brute_armor = 2	 		 // Brute damage to a wall is divided by this value if the wall is reinforced by this material.
-	var/burn_armor				 // Same as above, but for Burn damage type. If blank brute_armor's value is used.
-	var/integrity = 150          // General-use HP value for products.
-	var/opacity = 1              // Is the material transparent? 0.5< makes transparent walls/doors.
-	var/explosion_resistance = 5 // Only used by walls currently.
-	var/conductive = 1           // Objects with this var add CONDUCTS to flags on spawn.
+	var/exoplanet_rarity = MAT_RARITY_MUNDANE // How rare is this material generally? 
+	var/cut_delay = 0               // Delay in ticks when cutting through this wall.
+	var/radioactivity               // Radiation var. Used in wall and object processing to irradiate surroundings.
+	var/ignition_point              // K, point at which the material catches on fire.
+	var/melting_point = 1800        // K, walls will take damage if they're next to a fire hotter than this
+	var/boiling_point = 3000        // K, point that material will become a gas.
+	var/brute_armor = 2	 		    // Brute damage to a wall is divided by this value if the wall is reinforced by this material.
+	var/burn_armor				    // Same as above, but for Burn damage type. If blank brute_armor's value is used.
+	var/integrity = 150             // General-use HP value for products.
+	var/opacity = 1                 // Is the material transparent? 0.5< makes transparent walls/doors.
+	var/explosion_resistance = 5    // Only used by walls currently.
+	var/conductive = 1              // Objects with this var add CONDUCTS to flags on spawn.
 	var/luminescence
 	var/wall_support_value = 30
 	var/sparse_material_weight

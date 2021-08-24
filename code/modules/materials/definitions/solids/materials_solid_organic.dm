@@ -40,6 +40,7 @@
 	uid = "solid_holographic_plastic"
 	shard_type = SHARD_NONE
 	hidden_from_codex = TRUE
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/plastic/holographic/get_recipes(reinf_mat)
 	return list()
@@ -68,6 +69,7 @@
 	reflectiveness = MAT_VALUE_DULL
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/cardstock
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/cardboard/generate_recipes(var/reinforce_material)
 	. = ..()
@@ -97,6 +99,7 @@
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/bolt
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/cloth/yellow
 	name = "yellow"
@@ -167,6 +170,7 @@
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	hidden_from_codex = TRUE
 	default_solid_form = /obj/item/stack/material/bolt
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/plantmatter
 	name = "plant matter"
@@ -240,6 +244,7 @@
 	tans_to = /decl/material/solid/leather/lizard
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_VERY_LIGHT
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/skin/insect
 	name = "chitin"
@@ -350,12 +355,14 @@
 	uid = "solid_fishbone"
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_VERY_LIGHT
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/bone/cartilage
 	name = "cartilage"
 	uid = "solid_cartilage"
 	hardness = 0
 	weight = MAT_VALUE_EXTREMELY_LIGHT
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/leather
 	name = "leather"
@@ -374,6 +381,7 @@
 	reflectiveness = MAT_VALUE_MATTE
 	wall_support_value = MAT_VALUE_EXTREMELY_LIGHT
 	default_solid_form = /obj/item/stack/material/skin
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/leather/generate_recipes(var/reinforce_material)
 	. = ..()
