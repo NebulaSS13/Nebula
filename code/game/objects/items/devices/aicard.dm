@@ -117,7 +117,7 @@
 	return 1
 
 /obj/item/aicard/proc/clear()
-	if(carded_ai && istype(carded_ai.loc, /turf))
+	if(carded_ai && isturf(carded_ai.loc))
 		carded_ai.carded = 0
 	SetName(initial(name))
 	carded_ai.calculate_power_usage()

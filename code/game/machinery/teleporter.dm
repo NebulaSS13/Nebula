@@ -66,7 +66,7 @@
 		if(!L)
 			L = locate("landmark*[C.data]") // use old stype
 
-		if(istype(L, /obj/effect/landmark) && istype(L.loc, /turf) && user.unEquip(I))
+		if(istype(L, /obj/effect/landmark) && isturf(L.loc) && user.unEquip(I))
 			to_chat(usr, "You insert the coordinates into the machine.")
 			to_chat(usr, "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the [station_name()] at all times.")
 			qdel(I)
@@ -168,7 +168,7 @@
 /proc/find_loc(obj/R)
 	if (!R)	return null
 	var/turf/T = R.loc
-	while(!istype(T, /turf))
+	while(!isturf(T))
 		T = T.loc
 		if(!T || istype(T, /area))	return null
 	return T

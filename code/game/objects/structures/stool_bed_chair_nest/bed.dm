@@ -81,7 +81,7 @@
 				to_chat(user, "You cannot pad \the [src] with that.")
 				return
 			C.use(1)
-			if(!istype(src.loc, /turf))
+			if(!isturf(src.loc))
 				src.forceMove(get_turf(src))
 			to_chat(user, "You add padding to \the [src].")
 			add_padding(padding_type)

@@ -306,7 +306,7 @@
 	Radiate()
 
 /obj/effect/fusion_em_field/proc/Radiate()
-	if(istype(loc, /turf))
+	if(isturf(loc))
 		var/empsev = max(1, min(3, ceil(size/2)))
 		for(var/atom/movable/AM in range(max(1,Floor(size/2)), loc))
 

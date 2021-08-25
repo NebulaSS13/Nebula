@@ -121,7 +121,7 @@
 			to_chat(user, "You cannot pad \the [src] with that.")
 			return
 		C.use(1)
-		if(!istype(src.loc, /turf))
+		if(!isturf(src.loc))
 			user.drop_from_inventory(src)
 			src.dropInto(loc)
 		to_chat(user, "You add padding to \the [src].")

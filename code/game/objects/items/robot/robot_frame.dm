@@ -63,7 +63,7 @@
 	// Install an MMI/brain.
 	else if(istype(W, /obj/item/mmi) || istype(W, /obj/item/organ/internal/posibrain))
 
-		if(!istype(loc,/turf))
+		if(!isturf(loc))
 			to_chat(user, SPAN_WARNING("You can't put \the [W] in without the frame being on the ground."))
 			return
 

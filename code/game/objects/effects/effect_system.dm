@@ -106,19 +106,19 @@ steam.start() -- spawns the effect
 	QDEL_IN(src, 5 SECONDS)
 	playsound(src.loc, "sparks", 100, 1)
 	var/turf/T = src.loc
-	if (istype(T, /turf))
+	if (isturf(T))
 		T.hotspot_expose(1000,100)
 
 /obj/effect/sparks/Destroy()
 	var/turf/T = src.loc
-	if (istype(T, /turf))
+	if (isturf(T))
 		T.hotspot_expose(1000,100)
 	return ..()
 
 /obj/effect/sparks/Move()
 	..()
 	var/turf/T = src.loc
-	if (istype(T, /turf))
+	if (isturf(T))
 		T.hotspot_expose(1000,100)
 
 /proc/spark_at(turf/location, amount = 3, cardinal_only = FALSE, holder = null)
