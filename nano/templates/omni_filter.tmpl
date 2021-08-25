@@ -17,6 +17,14 @@
                 {{/for}}
             </div>
             <div style="float: left; margin-left: 10px">
+                <div class="white" style="height: 26px">None</div>
+                {{for data.ports}}
+                    <div style="height: 26px">
+                        {{:helper.link(' ', null, {'command' : 'switch_mode', 'mode' : 'none', 'dir' : value.dir}, null, value.output ? 'selected' : null)}}
+                    </div>
+                {{/for}}
+            </div>
+            <div style="float: left; margin-left: 10px">
                 <div class="white" style="height: 26px">Input</div>
                 {{for data.ports}}
                     <div style="height: 26px">
@@ -29,6 +37,14 @@
                 {{for data.ports}}
                     <div style="height: 26px">
                         {{:helper.link(' ', null, {'command' : 'switch_mode', 'mode' : 'out', 'dir' : value.dir}, null, value.output ? 'selected' : null)}}
+                    </div>
+                {{/for}}
+            </div>
+            <div style="float: left; margin-left: 10px">
+                <div class="white" style="height: 26px">Filtering</div>
+                {{for data.ports}}
+                    <div style="height: 26px">
+                        {{:helper.link(' ', null, {'command' : 'switch_mode', 'mode' : 'filtering', 'dir' : value.dir}, null, value.filter ? 'selected' : null)}}
                     </div>
                 {{/for}}
             </div>

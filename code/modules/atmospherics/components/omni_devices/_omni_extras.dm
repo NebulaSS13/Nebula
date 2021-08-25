@@ -1,15 +1,10 @@
 //--------------------------------------------
 // Omni device port types
 //--------------------------------------------
-#define ATM_NONE	0
-#define ATM_INPUT	1
-#define ATM_OUTPUT	2
-
-#define ATM_O2		3
-#define ATM_N2		4
-#define ATM_CO2		5
-#define ATM_N2O		6
-#define ATM_H2		7
+#define ATM_NONE		0
+#define ATM_INPUT		1
+#define ATM_OUTPUT		2
+#define ATM_FILTER		8 //as to not interfer with legacy handling.
 
 //--------------------------------------------
 // Omni port datum
@@ -28,6 +23,7 @@
 	var/datum/gas_mixture/air
 	var/list/nodes // lazy list of nodes
 	var/datum/pipe_network/network
+	var/decl/material/gas/filtering //Our filtering gas, if any.
 
 /datum/omni_port/New(var/obj/machinery/atmospherics/omni/M, var/direction = NORTH)
 	..()
@@ -100,17 +96,3 @@
 		else
 			return 0
 
-/proc/mode_to_gasid(var/mode)
-	switch(mode)
-		if(ATM_O2)
-			return /decl/material/gas/oxygen
-		if(ATM_N2)
-			return /decl/material/gas/nitrogen
-		if(ATM_CO2)
-			return /decl/material/gas/carbon_dioxide
-		if(ATM_N2O)
-			return /decl/material/gas/nitrous_oxide
-		if(ATM_H2)
-			return /decl/material/gas/hydrogen
-		else
-			return null

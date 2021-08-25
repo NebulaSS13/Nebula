@@ -23,8 +23,6 @@
 	gas_molar_mass = 0.002
 	gas_flags = XGM_GAS_FUEL
 	burn_product = /decl/material/liquid/water
-	gas_symbol_html = "H<sub>2</sub>"
-	gas_symbol = "H2"
 	ore_type_value = ORE_EXOTIC
 	ore_data_value = 4
 	dissolves_into = list(
