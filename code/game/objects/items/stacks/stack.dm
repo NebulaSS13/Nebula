@@ -22,7 +22,7 @@
 	var/list/initial_matter
 	var/matter_multiplier = 1
 	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
-	var/stacktype  //determines whether different stack types can merge
+	var/stack_merge_type  //determines whether different stack types can merge
 	var/build_type //used when directly applied to a turf
 	var/uses_charge
 	var/list/charge_costs
@@ -37,8 +37,8 @@
 	if (isnum(amount) && amount >= 1)
 		src.amount = amount
 	. = ..(mapload, material)
-	if (!stacktype)
-		stacktype = type
+	if(!stack_merge_type)
+		stack_merge_type = type
 	if(!singular_name)
 		singular_name = "sheet"
 	if(!plural_name)
@@ -235,10 +235,10 @@
 */
 
 //attempts to transfer amount to S, and returns the amount actually transferred
-/obj/item/stack/proc/transfer_to(obj/item/stack/S, var/tamount=null, var/type_verified)
-	if (!get_amount())
+/obj/item/stack/proc/transfer_to(obj/item/stack/S, var/tamount=null)
+	if (!get_amount() || !istype(S))
 		return 0
-	if ((stacktype != S.stacktype) && !type_verified)
+	if (stack_merge_type != S.stack_merge_type)
 		return 0
 	if (isnull(tamount))
 		tamount = src.get_amount()

@@ -50,7 +50,7 @@
 	var/list/obj/structure/cable/cables = list()
 
 	for(var/atom/A in atoms)
-		if(istype(A, /turf))
+		if(isturf(A))
 			turfs += A
 		if(istype(A, /obj/structure/cable))
 			cables += A
@@ -58,7 +58,7 @@
 			atmos_machines += A
 		if(istype(A, /obj/machinery))
 			machines += A
-		if(istype(A,/obj/effect/landmark/map_load_mark))
+		if(istype(A, /obj/effect/landmark/map_load_mark))
 			LAZYADD(subtemplates_to_spawn, A)
 
 	var/notsuspended
@@ -114,8 +114,8 @@
 	var/shuttle_state = pre_init_shuttles()
 
 	var/map_hash = modify_tag_vars && "[sequential_id("map_id")]"
-	ASSERT(isnull(GLOB._preloader.current_map_hash)) // Recursive maploading is possible, but not from this block: recursive loads should be triggered in Initialize, from init_atoms below.
-	GLOB._preloader.current_map_hash = map_hash
+	ASSERT(isnull(global._preloader.current_map_hash)) // Recursive maploading is possible, but not from this block: recursive loads should be triggered in Initialize, from init_atoms below.
+	global._preloader.current_map_hash = map_hash
 
 	var/initialized_areas_by_type = list()
 	for (var/mappath in mappaths)
@@ -126,14 +126,14 @@
 		else
 			return FALSE
 
-	GLOB._preloader.current_map_hash = null
+	global._preloader.current_map_hash = null
 
 	for (var/z_index = bounds[MAP_MINZ]; z_index <= bounds[MAP_MAXZ]; z_index++)
 		if (accessibility_weight)
-			GLOB.using_map.accessible_z_levels[num2text(z_index)] = accessibility_weight
+			global.using_map.accessible_z_levels[num2text(z_index)] = accessibility_weight
 		if (base_turf_for_zs)
-			GLOB.using_map.base_turf_by_z[num2text(z_index)] = base_turf_for_zs
-		GLOB.using_map.player_levels |= z_index
+			global.using_map.base_turf_by_z[num2text(z_index)] = base_turf_for_zs
+		global.using_map.player_levels |= z_index
 
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)
@@ -161,8 +161,8 @@
 	var/shuttle_state = pre_init_shuttles()
 
 	var/map_hash = modify_tag_vars && "[sequential_id("map_id")]"
-	ASSERT(isnull(GLOB._preloader.current_map_hash))
-	GLOB._preloader.current_map_hash = map_hash
+	ASSERT(isnull(global._preloader.current_map_hash))
+	global._preloader.current_map_hash = map_hash
 
 	var/initialized_areas_by_type = list()
 	for (var/mappath in mappaths)
@@ -172,7 +172,7 @@
 		else
 			return FALSE
 
-	GLOB._preloader.current_map_hash = null
+	global._preloader.current_map_hash = null
 
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)
@@ -187,14 +187,10 @@
 	return TRUE
 
 /datum/map_template/proc/after_load(z)
-	for(var/obj/effect/landmark/map_load_mark/mark in subtemplates_to_spawn)
+	for(var/obj/effect/landmark/map_load_mark/mark AS_ANYTHING in subtemplates_to_spawn)
 		subtemplates_to_spawn -= mark
-		if(LAZYLEN(mark.templates))
-			var/template = pick(mark.templates)
-			var/datum/map_template/M = new template()
-			M.load(get_turf(mark), TRUE)
-			qdel(mark)
-	LAZYCLEARLIST(subtemplates_to_spawn)
+		mark.load_template()
+	subtemplates_to_spawn = null
 
 /datum/map_template/proc/extend_bounds_if_needed(var/list/existing_bounds, var/list/new_bounds)
 	var/list/bounds_to_combine = existing_bounds.Copy()
@@ -203,7 +199,6 @@
 	for (var/max_bound in list(MAP_MAXX, MAP_MAXY, MAP_MAXZ))
 		bounds_to_combine[max_bound] = max(existing_bounds[max_bound], new_bounds[max_bound])
 	return bounds_to_combine
-
 
 /datum/map_template/proc/get_affected_turfs(turf/T, centered = FALSE)
 	var/turf/placement = T

@@ -1,4 +1,4 @@
-var/list/department_radio_keys = list(
+var/global/list/department_radio_keys = list(
 	  ":r" = "right ear",	".r" = "right ear",
 	  ":l" = "left ear",	".l" = "left ear",
 	  ":i" = "intercom",	".i" = "intercom",
@@ -53,7 +53,7 @@ var/list/department_radio_keys = list(
 )
 
 
-var/list/channel_to_radio_key = new
+var/global/list/channel_to_radio_key = new
 /proc/get_radio_key_from_channel(var/channel)
 	var/key = channel_to_radio_key[channel]
 	if(!key)
@@ -152,7 +152,7 @@ var/list/channel_to_radio_key = new
 
 	return html_encode(message)
 
-/mob/living/say(var/message, var/decl/language/speaking = null, var/verb="says", var/alt_name="", whispering)
+/mob/living/say(var/message, var/decl/language/speaking, var/verb = "says", var/alt_name = "", whispering)
 	set waitfor = FALSE
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
@@ -186,7 +186,11 @@ var/list/channel_to_radio_key = new
 		if(speaking)
 			message = copytext_char(message,2+length_char(speaking.key))
 		else
-			speaking = get_default_language()
+			speaking = get_any_good_language(set_default=TRUE)
+			if (!speaking)
+				to_chat(src, SPAN_WARNING("You don't know a language and cannot speak."))
+				emote("custom", AUDIBLE_MESSAGE, "[pick("grunts", "babbles", "gibbers", "jabbers", "burbles")] aimlessly.")
+				return
 
 	// This is broadcast to all mobs with the language,
 	// irrespective of distance or anything else.
@@ -315,9 +319,9 @@ var/list/channel_to_radio_key = new
 					O.hear_talk(src, stars(message), verb, speaking)
 
 	INVOKE_ASYNC(GLOBAL_PROC, .proc/animate_speech_bubble, speech_bubble, speech_bubble_recipients | eavesdroppers, 30)
-	INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, message, speaking, italics, speech_bubble_recipients, 30)
+	INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, message, speaking, italics, speech_bubble_recipients)
 	if(length(eavesdroppers))
-		INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, stars(message), speaking, italics, eavesdroppers, 30)
+		INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, stars(message), speaking, italics, eavesdroppers)
 
 	if(whispering)
 		log_whisper("[name]/[key] : [message]")

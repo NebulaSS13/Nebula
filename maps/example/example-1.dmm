@@ -37,19 +37,19 @@
 /turf/simulated/wall/r_wall,
 /area/space)
 "gO" = (
-/obj/structure/table/rack,
-/obj/item/stack/material/plasteel/fifty,
-/obj/item/stack/material/copper/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
-/obj/item/stack/material/gold/ten,
-/obj/item/stack/material/mhydrogen/ten,
-/obj/item/stack/material/silver/ten,
-/obj/item/stack/material/uranium/ten,
-/obj/item/stack/material/diamond/ten,
+/obj/structure/rack,
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/ingot/mapped/copper/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/ingot/mapped/gold/ten,
+/obj/item/stack/material/segment/mapped/mhydrogen/ten,
+/obj/item/stack/material/ingot/mapped/silver/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
+/obj/item/stack/material/gemstone/mapped/diamond/ten,
 /obj/item/storage/belt/utility/full,
-/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "hw" = (
@@ -84,7 +84,7 @@
 /turf/simulated/floor/plating,
 /area/shuttle/escape)
 "jB" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/automatic/assault_rifle,
 /obj/item/gun/projectile/automatic/assault_rifle,
 /obj/item/gun/projectile/automatic/assault_rifle,
@@ -143,7 +143,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "se" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/energy/laser,
 /obj/item/gun/energy/laser,
 /obj/item/gun/energy/laser,
@@ -170,7 +170,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "tq" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/revolver,
 /obj/item/gun/projectile/revolver,
 /obj/item/gun/projectile/revolver,
@@ -305,7 +305,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "Nu" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/shotgun/pump,
 /obj/item/gun/projectile/shotgun/pump,
 /obj/item/gun/projectile/shotgun/pump,

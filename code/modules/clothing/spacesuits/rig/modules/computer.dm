@@ -23,7 +23,7 @@
 		to_chat(usr, "Your module is not installed in a hardsuit.")
 		return
 
-	module.holder.ui_interact(usr, nano_state = GLOB.contained_state)
+	module.holder.ui_interact(usr, nano_state = global.contained_topic_state)
 
 /obj/item/rig_module/ai_container
 
@@ -153,7 +153,7 @@
 	if(!target)
 		if(ai_card)
 			if(istype(ai_card,/obj/item/aicard))
-				ai_card.ui_interact(H, state = GLOB.deep_inventory_state)
+				ai_card.ui_interact(H, state = global.deep_inventory_topic_state)
 			else
 				eject_ai(H)
 		update_verb_holder()

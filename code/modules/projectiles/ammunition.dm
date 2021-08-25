@@ -33,7 +33,7 @@
 /obj/item/ammo_casing/proc/expend()
 	. = BB
 	BB = null
-	set_dir(pick(GLOB.alldirs)) //spin spent casings
+	set_dir(pick(global.alldirs)) //spin spent casings
 
 	// Aurora forensics port, gunpowder residue.
 	if(leaves_residue)
@@ -172,7 +172,7 @@
 	to_chat(user, "<span class='notice'>You empty [src].</span>")
 	for(var/obj/item/ammo_casing/C in stored_ammo)
 		C.forceMove(user.loc)
-		C.set_dir(pick(GLOB.alldirs))
+		C.set_dir(pick(global.alldirs))
 	stored_ammo.Cut()
 	update_icon()
 
@@ -207,8 +207,8 @@
 	to_chat(user, "There [(stored_ammo.len == 1)? "is" : "are"] [stored_ammo.len] round\s left!")
 
 //magazine icon state caching
-/var/global/list/magazine_icondata_keys = list()
-/var/global/list/magazine_icondata_states = list()
+var/global/list/magazine_icondata_keys = list()
+var/global/list/magazine_icondata_states = list()
 
 /proc/initialize_magazine_icondata(var/obj/item/ammo_magazine/M)
 	var/typestr = "[M.type]"

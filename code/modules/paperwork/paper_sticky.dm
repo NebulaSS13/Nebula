@@ -82,7 +82,7 @@
 
 /obj/item/paper/sticky/Initialize()
 	. = ..()
-	GLOB.moved_event.register(src, src, /obj/item/paper/sticky/proc/reset_persistence_tracking)
+	events_repository.register(/decl/observ/moved, src, src, /obj/item/paper/sticky/proc/reset_persistence_tracking)
 
 /obj/item/paper/sticky/proc/reset_persistence_tracking()
 	SSpersistence.forget_value(src, /datum/persistent/paper/sticky)
@@ -91,7 +91,7 @@
 
 /obj/item/paper/sticky/Destroy()
 	reset_persistence_tracking()
-	GLOB.moved_event.unregister(src, src)
+	events_repository.unregister(/decl/observ/moved, src, src)
 	. = ..()
 
 /obj/item/paper/sticky/on_update_icon()
@@ -101,7 +101,7 @@
 // Copied from duct tape.
 /obj/item/paper/sticky/attack_hand()
 	. = ..()
-	if(!istype(loc, /turf))
+	if(!isturf(loc))
 		reset_persistence_tracking()
 
 /obj/item/paper/sticky/can_bundle()
@@ -118,7 +118,7 @@
 	var/dir_offset = 0
 	if(target_turf != source_turf)
 		dir_offset = get_dir(source_turf, target_turf)
-		if(!(dir_offset in GLOB.cardinal))
+		if(!(dir_offset in global.cardinal))
 			to_chat(user, SPAN_WARNING("You cannot reach that from here."))
 			return
 

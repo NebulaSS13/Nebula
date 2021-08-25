@@ -10,7 +10,7 @@ SUBSYSTEM_DEF(evac)
 /datum/controller/subsystem/evac/Initialize()
 	. = ..()
 	if(!evacuation_controller)
-		evacuation_controller = new GLOB.using_map.evac_controller_type ()
+		evacuation_controller = new global.using_map.evac_controller_type ()
 		evacuation_controller.set_up()
 
 /datum/controller/subsystem/evac/fire()

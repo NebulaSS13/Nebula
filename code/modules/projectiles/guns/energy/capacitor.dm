@@ -1,4 +1,4 @@
-var/list/laser_wavelengths
+var/global/list/laser_wavelengths
 
 /decl/laser_wavelength
 	var/name
@@ -198,18 +198,18 @@ var/list/laser_wavelengths
 		I = image(icon, "[icon_state]-capacitor-[i]")
 		add_overlay(I)
 		if(capacitor.charge > 0)
-			I = image(icon, "[icon_state]-charging-[i]")
+			if(icon_state == "world")
+				I = emissive_overlay(icon, "[icon_state]-charging-[i]")
+			else
+				I = image(icon, "[icon_state]-charging-[i]")
 			I.alpha = Clamp(255 * (capacitor.charge/capacitor.max_charge), 0, 255)
 			I.color = selected_wavelength.color
-			if(icon_state == "world")
-				I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-				I.layer = ABOVE_LIGHTING_LAYER
 			I.appearance_flags |= RESET_COLOR
 			add_overlay(I)
-			I = image(icon, "[icon_state]-charging-glow-[i]")
 			if(icon_state == "world")
-				I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-				I.layer = ABOVE_LIGHTING_LAYER
+				I = emissive_overlay(icon, "[icon_state]-charging-glow-[i]")
+			else
+				I = image(icon, "[icon_state]-charging-glow-[i]")
 			I.appearance_flags |= RESET_COLOR
 			add_overlay(I)
 
@@ -234,9 +234,7 @@ var/list/laser_wavelengths
 			for(var/i = 1 to length(capacitors))
 				var/obj/item/stock_parts/capacitor/capacitor = capacitors[i]
 				if(capacitor.charge > 0)
-					I = image(overlay.icon, "[overlay.icon_state]-charging-[i]")
-					I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-					I.layer = ABOVE_LIGHTING_LAYER
+					I = emissive_overlay(overlay.icon, "[overlay.icon_state]-charging-[i]")
 					I.alpha = Clamp(255 * (capacitor.charge/capacitor.max_charge), 0, 255)
 					I.color = selected_wavelength.color
 					I.appearance_flags |= RESET_COLOR

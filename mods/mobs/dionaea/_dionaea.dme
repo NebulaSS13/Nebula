@@ -4,6 +4,7 @@
 #include "dionaea.dm"
 #include "datums\ai.dm"
 #include "datums\ghosttrap.dm"
+#include "datums\instrument_data.dm"
 #include "datums\language.dm"
 #include "datums\loadout.dm"
 #include "datums\seed.dm"

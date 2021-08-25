@@ -14,7 +14,8 @@
 	lawupdate = 0
 	density = 1
 	req_access = list(access_engine, access_robotics)
-	integrated_light_power = 0.5
+	integrated_light_power = 0.4
+	integrated_light_range = 3
 	local_transmit = 1
 	possession_candidate = 1
 	speed = -1
@@ -65,10 +66,10 @@
 	verbs -= /mob/living/silicon/robot/verb/Namepick
 	update_icon()
 
-	GLOB.moved_event.register(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
+	events_repository.register(/decl/observ/moved, src, src, /mob/living/silicon/robot/drone/proc/on_moved)
 
 /mob/living/silicon/robot/drone/Destroy()
-	GLOB.moved_event.unregister(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
+	events_repository.unregister(/decl/observ/moved, src, src, /mob/living/silicon/robot/drone/proc/on_moved)
 	. = ..()
 
 /mob/living/silicon/robot/drone/proc/on_moved(var/atom/movable/am, var/turf/old_loc, var/turf/new_loc)
@@ -118,6 +119,8 @@
 	module_type = /obj/item/robot_module/drone/construction
 	can_pull_size = ITEM_SIZE_STRUCTURE
 	can_pull_mobs = MOB_PULL_SAME
+	integrated_light_power = 0.8
+	integrated_light_range = 5
 	hat_x = 1
 	hat_y = -12
 
@@ -125,7 +128,7 @@
 	additional_law_channels["Drone"] = ":d"
 	if(!module) module = new module_type(src)
 
-	flavor_text = "It's a tiny little repair drone. The casing is stamped with a logo and the subscript: '[GLOB.using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
+	flavor_text = "It's a tiny little repair drone. The casing is stamped with a logo and the subscript: '[global.using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
 //Redefining some robot procs...
@@ -227,7 +230,7 @@
 	log_and_message_admins("emagged drone [key_name_admin(src)].  Laws overridden.", user)
 	log_game("[key_name(user)] emagged drone [key_name(src)][controlling_ai ? " but AI [key_name(controlling_ai)] is in remote control" : " Laws overridden"].")
 	var/time = time2text(world.realtime,"hh:mm:ss")
-	GLOB.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
+	global.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
 
 	emagged = 1
 	lawupdate = 0
@@ -308,7 +311,7 @@
 	clear_inherent_laws(1)
 	clear_ion_laws(1)
 	QDEL_NULL(laws)
-	var/law_type = initial(laws) || GLOB.using_map.default_law_type
+	var/law_type = initial(laws) || global.using_map.default_law_type
 	laws = new law_type
 
 //Reboot procs.
@@ -355,7 +358,7 @@
 
 /proc/too_many_active_drones()
 	var/drones = 0
-	for(var/mob/living/silicon/robot/drone/D in GLOB.silicon_mob_list)
+	for(var/mob/living/silicon/robot/drone/D in global.silicon_mob_list)
 		if(D.key && D.client)
 			drones++
 	return drones >= config.max_maint_drones

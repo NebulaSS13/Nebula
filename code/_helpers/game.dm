@@ -3,23 +3,13 @@
 /proc/is_on_same_plane_or_station(var/z1, var/z2)
 	if(z1 == z2)
 		return 1
-	if((z1 in GLOB.using_map.station_levels) &&	(z2 in GLOB.using_map.station_levels))
+	if((z1 in global.using_map.station_levels) &&	(z2 in global.using_map.station_levels))
 		return 1
 	return 0
 
-/proc/max_default_z_level()
-	var/max_z = 0
-	for(var/z in GLOB.using_map.station_levels)
-		max_z = max(z, max_z)
-	for(var/z in GLOB.using_map.admin_levels)
-		max_z = max(z, max_z)
-	for(var/z in GLOB.using_map.player_levels)
-		max_z = max(z, max_z)
-	return max_z
-
 /proc/living_observers_present(var/list/zlevels)
 	if(LAZYLEN(zlevels))
-		for(var/mob/M in GLOB.player_list) //if a tree ticks on the empty zlevel does it really tick
+		for(var/mob/M in global.player_list) //if a tree ticks on the empty zlevel does it really tick
 			if(M.stat != DEAD) //(no it doesn't)
 				var/turf/T = get_turf(M)
 				if(T && (T.z in zlevels))
@@ -62,22 +52,22 @@
 	return heard
 
 /proc/isStationLevel(var/level)
-	return level in GLOB.using_map.station_levels
+	return level in global.using_map.station_levels
 
 /proc/isNotStationLevel(var/level)
 	return !isStationLevel(level)
 
 /proc/isPlayerLevel(var/level)
-	return level in GLOB.using_map.player_levels
+	return level in global.using_map.player_levels
 
 /proc/isAdminLevel(var/level)
-	return level in GLOB.using_map.admin_levels
+	return level in global.using_map.admin_levels
 
 /proc/isNotAdminLevel(var/level)
 	return !isAdminLevel(level)
 
 /proc/isContactLevel(var/level)
-	return level in GLOB.using_map.contact_levels
+	return level in global.using_map.contact_levels
 
 /proc/circlerange(center=usr,radius=3)
 
@@ -236,13 +226,13 @@
 
 
 	// Try to find all the players who can hear the message
-	for(var/i = 1; i <= GLOB.player_list.len; i++)
-		var/mob/M = GLOB.player_list[i]
+	for(var/i = 1; i <= global.player_list.len; i++)
+		var/mob/M = global.player_list[i]
 		if(M)
 			var/turf/ear = get_turf(M)
 			if(ear)
 				// Ghostship is magic: Ghosts can hear radio chatter from anywhere
-				if(speaker_coverage[ear] || (isghost(M) && M.get_preference_value(/datum/client_preference/ghost_radio) == GLOB.PREF_ALL_CHATTER))
+				if(speaker_coverage[ear] || (isghost(M) && M.get_preference_value(/datum/client_preference/ghost_radio) == PREF_ALL_CHATTER))
 					. |= M		// Since we're already looping through mobs, why bother using |= ? This only slows things down.
 	return .
 
@@ -259,13 +249,13 @@
 			objs += AM
 			hearturfs += get_turf(AM)
 
-	for(var/mob/M in GLOB.player_list)
-		if(checkghosts && M.stat == DEAD && M.get_preference_value(checkghosts) != GLOB.PREF_NEARBY)
+	for(var/mob/M in global.player_list)
+		if(checkghosts && M.stat == DEAD && M.get_preference_value(checkghosts) != PREF_NEARBY)
 			mobs |= M
 		else if(get_turf(M) in hearturfs)
 			mobs |= M
 
-	for(var/obj/O in GLOB.listening_objects)
+	for(var/obj/O in global.listening_objects)
 		if(get_turf(O) in hearturfs)
 			objs |= O
 
@@ -344,7 +334,7 @@
 	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
 	var/i = 0
 	while(candidates.len <= 0 && i < 5)
-		for(var/mob/observer/ghost/G in GLOB.player_list)
+		for(var/mob/observer/ghost/G in global.player_list)
 			if(((G.client.inactivity/10)/60) <= buffer + i) // the most active players are more likely to become an alien
 				if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
 					candidates += G.key
@@ -449,7 +439,7 @@
 /proc/getOPressureDifferential(var/turf/loc)
 	var/minp=16777216;
 	var/maxp=0;
-	for(var/dir in GLOB.cardinal)
+	for(var/dir in global.cardinal)
 		var/turf/simulated/T=get_turf(get_step(loc,dir))
 		var/cp=0
 		if(T && istype(T) && T.zone)
@@ -470,7 +460,7 @@
 
 /proc/getCardinalAirInfo(var/turf/loc, var/list/stats=list("temperature"))
 	var/list/temps = new/list(4)
-	for(var/dir in GLOB.cardinal)
+	for(var/dir in global.cardinal)
 		var/direction
 		switch(dir)
 			if(NORTH)
@@ -492,7 +482,7 @@
 					rstats[i] = environment.vars[stats[i]]
 		else if(istype(T, /turf/simulated))
 			rstats = null // Exclude zone (wall, door, etc).
-		else if(istype(T, /turf))
+		else if(isturf(T))
 			// Should still work.  (/turf/return_air())
 			var/datum/gas_mixture/environment = T.return_air()
 			for(var/i=1;i<=stats.len;i++)

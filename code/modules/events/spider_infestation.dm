@@ -1,4 +1,4 @@
-/var/global/sent_spiders_to_station = 0
+var/global/sent_spiders_to_station = 0
 
 /datum/event/spider_infestation
 	announceWhen	= 90
@@ -11,7 +11,7 @@
 	sent_spiders_to_station = 0
 
 /datum/event/spider_infestation/announce()
-	GLOB.using_map.unidentified_lifesigns_announcement()
+	global.using_map.unidentified_lifesigns_announcement()
 
 /datum/event/spider_infestation/start()
 	var/list/vents = list()

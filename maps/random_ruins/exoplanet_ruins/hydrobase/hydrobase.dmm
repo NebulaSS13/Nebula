@@ -1020,7 +1020,7 @@
 	},
 /obj/structure/catwalk,
 /obj/random/toolbox,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/zipgun,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
@@ -2248,9 +2248,9 @@
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/handgun,
-/obj/item/stack/material/diamond/ten,
-/obj/item/stack/material/gold/ten,
-/obj/item/stack/material/gold/ten,
+/obj/item/stack/material/gemstone/mapped/diamond/ten,
+/obj/item/stack/material/ingot/mapped/gold/ten,
+/obj/item/stack/material/ingot/mapped/gold/ten,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "fs" = (
@@ -2267,7 +2267,7 @@
 /obj/structure/window/borosilicate_reinforced{
 	dir = 8
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/ammo_casing/shotgun/emp,
 /obj/item/ammo_casing/shotgun/emp,
 /obj/item/gun/projectile/shotgun/doublebarrel,

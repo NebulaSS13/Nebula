@@ -34,7 +34,7 @@
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, "100")
 	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[LIFE_HUD]	      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
-	hud_list[ID_HUD]          = new /image/hud_overlay(GLOB.using_map.id_hud_icons, src, "hudunknown")
+	hud_list[ID_HUD]          = new /image/hud_overlay(global.using_map.id_hud_icons, src, "hudunknown")
 	hud_list[WANTED_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPLOYAL_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPCHEM_HUD]     = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
@@ -42,7 +42,7 @@
 	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD_OOC]  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
 
-	GLOB.human_mob_list |= src
+	global.human_mob_list |= src
 	. = ..()
 
 	if(dna)
@@ -52,7 +52,7 @@
 	make_blood()
 
 /mob/living/carbon/human/Destroy()
-	GLOB.human_mob_list -= src
+	global.human_mob_list -= src
 	worn_underwear = null
 	QDEL_NULL(attack_selector)
 	LAZYCLEARLIST(smell_cooldown)
@@ -230,9 +230,10 @@
 	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>"
 
-	show_browser(user, dat, text("window=mob[name];size=340x540"))
+	var/datum/browser/popup = new(user, "mob[name]", null, 340, 540)
+	popup.set_content(dat)
+	popup.open()
 	onclose(user, "mob[name]")
-	return
 
 // called when something steps onto a human
 // this handles mulebots and vehicles
@@ -410,7 +411,7 @@
 /mob/living/carbon/human/CanUseTopic(mob/user, datum/topic_state/state, href_list)
 	. = ..()
 	if(href_list && (href_list["refresh"] || href_list["item"]))
-		return min(., ..(user, GLOB.physical_state, href_list))
+		return min(., ..(user, global.physical_topic_state, href_list))
 
 /mob/living/carbon/human/OnTopic(mob/user, href_list)
 	if (href_list["refresh"])
@@ -441,7 +442,7 @@
 				return TOPIC_HANDLED
 			var/datum/computer_file/report/crew_record/R = network.get_crew_record_by_name(perpname)
 			if(R)
-				var/setcriminal = input(user, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) as null|anything in GLOB.security_statuses
+				var/setcriminal = input(user, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) as null|anything in global.security_statuses
 				if(hasHUD(usr, HUD_SECURITY) && setcriminal)
 					R.set_criminalStatus(setcriminal)
 					modified = 1
@@ -477,7 +478,7 @@
 				if(hasHUD(user, HUD_SECURITY))
 					to_chat(user, "<b>Name:</b> [E.get_name()]")
 					to_chat(user, "<b>Criminal Status:</b> [E.get_criminalStatus()]")
-					to_chat(user, "<b>Details:</b> [E.get_secRecord()]")
+					to_chat(user, "<b>Details:</b> [E.get_security_record()]")
 					read = 1
 
 			if(!read)
@@ -500,7 +501,7 @@
 				return TOPIC_HANDLED
 			var/datum/computer_file/report/crew_record/E = network.get_crew_record_by_name(perpname)
 			if(E)
-				var/setmedical = input(user, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) as null|anything in GLOB.physical_statuses
+				var/setmedical = input(user, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) as null|anything in global.physical_statuses
 				if(hasHUD(user, HUD_MEDICAL) && setmedical)
 					E.set_status(setmedical)
 					modified = 1
@@ -538,7 +539,7 @@
 					to_chat(usr, "<b>Gender:</b> [E.get_sex()]")
 					to_chat(usr, "<b>Species:</b> [E.get_species_name()]")
 					to_chat(usr, "<b>Blood Type:</b> [E.get_bloodtype()]")
-					to_chat(usr, "<b>Details:</b> [E.get_medRecord()]")
+					to_chat(usr, "<b>Details:</b> [E.get_medical_record()]")
 					read = 1
 			if(!read)
 				to_chat(user, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
@@ -558,7 +559,7 @@
 			if(!(key in flavor_texts))
 				return
 			msg = sanitize(input(src,"Update the flavor text for your [key].","Flavor Text",html_decode(flavor_texts[key])) as message, extra = 0)
-	if(!CanInteract(src, GLOB.self_state))
+	if(!CanInteract(src, global.self_topic_state))
 		return
 	flavor_texts[key] = msg
 	set_flavor()
@@ -590,19 +591,12 @@
 			return I.flash_mod
 	return species.flash_mod
 
-/mob/living/carbon/human/proc/getDarkvisionRange()
+/mob/living/carbon/human/proc/get_darksight_range()
 	if(species.vision_organ)
 		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
 		if(istype(I))
 			return I.darksight_range
 	return species.darksight_range
-
-/mob/living/carbon/human/proc/getDarkvisionTint()
-	if(species.vision_organ)
-		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
-		if(istype(I))
-			return I.darksight_tint
-	return species.darksight_tint
 
 //Used by various things that knock people out by applying blunt trauma to the head.
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
@@ -638,6 +632,12 @@
 	if(!species)
 		set_species()
 	. = ..()
+
+/mob/living/carbon/human/get_bodytype_category()
+	. = bodytype.bodytype_category
+
+/mob/living/carbon/human/get_bodytype()
+	return bodytype
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!xylophone)
@@ -883,12 +883,9 @@
 
 /mob/living/carbon/human/revive()
 
-	if(should_have_organ(BP_HEART))
-		vessel.add_reagent(species.blood_reagent, species.blood_volume-vessel.total_volume)
-		fixblood()
-
 	species.create_organs(src) // Reset our organs/limbs.
 	restore_all_organs()       // Reapply robotics/amputated status from preferences.
+	reset_blood()
 
 	if(!client || !key) //Don't boot out anyone already in the mob.
 		for (var/obj/item/organ/internal/brain/H in world)
@@ -1062,14 +1059,14 @@
 /mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour = 1)
 	if(!dna)
 		if(!new_species)
-			new_species = GLOB.using_map.default_species
+			new_species = global.using_map.default_species
 	else
 		if(!new_species)
 			new_species = dna.species
 
 	// No more invisible screaming wheelchairs because of set_species() typos.
 	if(!get_species_by_key(new_species))
-		new_species = GLOB.using_map.default_species
+		new_species = global.using_map.default_species
 	if(dna)
 		dna.species = new_species
 
@@ -1132,15 +1129,8 @@
 	bone_material = species.bone_material
 	bone_amount =   species.bone_amount
 
-	spawn(0)
-		regenerate_icons()
-		if(vessel.total_volume < species.blood_volume)
-			vessel.maximum_volume = species.blood_volume
-			vessel.add_reagent(species.blood_reagent, species.blood_volume - vessel.total_volume)
-		else if(vessel.total_volume > species.blood_volume)
-			vessel.remove_any(vessel.total_volume - species.blood_volume)
-			vessel.maximum_volume = species.blood_volume
-		fixblood()
+	regenerate_icons()
+	reset_blood()
 
 	// Rebuild the HUD and visual elements.
 	if(client)
@@ -1242,8 +1232,10 @@
 		to_chat(src, "<span class='warning'>You cannot reach the floor.</span>")
 		return
 
-	var/direction = input(src,"Which way?","Tile selection") as anything in list("Here","North","South","East","West")
-	if (direction != "Here")
+	var/direction = input(src,"Which way?","Tile selection") as null|anything in list("Here","North","South","East","West")
+	if(!direction)
+		return
+	if(direction != "Here")
 		T = get_step(T,text2dir(direction))
 	if (!istype(T))
 		to_chat(src, "<span class='warning'>You cannot doodle there.</span>")
@@ -1355,7 +1347,7 @@
 	var/obj/item/organ/internal/eyes = get_internal_organ(BP_EYES)
 	. = istype(eyes) && eyes.is_usable()
 
-/mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
+/mob/living/carbon/human/slip(var/slipped_on, stun_duration = 8)
 	if((species.check_no_slip(src)) || (shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP)))
 		return 0
 	return !!(..(slipped_on,stun_duration))
@@ -1712,8 +1704,8 @@
 /mob/living/carbon/human/proc/get_cultural_value(var/token)
 	. = LAZYACCESS(cultural_info, token)
 	if(!istype(., /decl/cultural_info))
-		. = GLOB.using_map.default_cultural_info[token]
-		PRINT_STACK_TRACE("get_cultural_value() tried to return a non-instance value for token '[token]' - full culture list: [json_encode(cultural_info)] default species culture list: [json_encode(GLOB.using_map.default_cultural_info)]")
+		. = global.using_map.default_cultural_info[token]
+		PRINT_STACK_TRACE("get_cultural_value() tried to return a non-instance value for token '[token]' - full culture list: [json_encode(cultural_info)] default species culture list: [json_encode(global.using_map.default_cultural_info)]")
 
 /mob/living/carbon/human/needs_wheelchair()
 	var/stance_damage = 0
@@ -1810,7 +1802,7 @@
 
 /mob/living/carbon/human/proc/get_hands_organs()
 	. = list()
-	for(var/bp in held_item_slots) 
+	for(var/bp in held_item_slots)
 		if(organs_by_name[bp])
 			. |= organs_by_name[bp]
 

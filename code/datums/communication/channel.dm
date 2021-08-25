@@ -16,7 +16,7 @@
 	if(!show_preference_setting)
 		return FALSE
 	// If you're trying to see the channel, you can't ignore it
-	if (C.get_preference_value(show_preference_setting) == GLOB.PREF_SHOW)
+	if (C.get_preference_value(show_preference_setting) == PREF_SHOW)
 		return FALSE
 	// I suppose the host is more equal than others
 	if (check_rights(R_HOST, 0, C))

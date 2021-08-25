@@ -8,9 +8,6 @@
 	icon_gib = "bat_dead"
 	speak_chance = 0
 	turns_per_move = 3
-	response_help = "pets the"
-	response_disarm = "gently pushes aside the"
-	response_harm = "hits the"
 	speed = 4
 	maxHealth = 20
 	health = 20

@@ -1,5 +1,0 @@
-author: MistakeNot4892
-delete-after: true
-changes:
-  - tweak: Age is now a descriptor, and can be found alongside height and build in
-      preferences.

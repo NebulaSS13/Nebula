@@ -5,7 +5,7 @@
 /decl/special_role/proc/update_antag_mob(var/datum/mind/player, var/preserve_appearance)
 
 	if(!valid_species)
-		valid_species = list(GLOB.using_map.default_species)
+		valid_species = list(global.using_map.default_species)
 
 	// Get the mob.
 	if((flags & ANTAG_OVERRIDE_MOB) && (!player.current || (mob_path && !istype(player.current, mob_path))))
@@ -17,7 +17,7 @@
 	if(!preserve_appearance && (flags & ANTAG_SET_APPEARANCE))
 		spawn(3)
 			var/mob/living/carbon/human/H = player.current
-			if(istype(H)) H.change_appearance(APPEARANCE_ALL, H.loc, H, valid_species, state = GLOB.z_state)
+			if(istype(H)) H.change_appearance(APPEARANCE_ALL, H.loc, H, valid_species, state = global.z_topic_state)
 	return player.current
 
 /decl/special_role/proc/update_access(var/mob/living/player)
@@ -89,7 +89,7 @@
 	if(mode.antag_scaling_coeff)
 
 		var/count = 0
-		for(var/mob/living/M in GLOB.player_list)
+		for(var/mob/living/M in global.player_list)
 			if(M.client)
 				count++
 

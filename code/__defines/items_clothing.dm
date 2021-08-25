@@ -54,7 +54,7 @@
 #define slot_l_store_str     "slot_l_store"
 #define slot_r_store_str     "slot_r_store"
 #define slot_s_store_str     "slot_s_store"
-#define slot_in_backpack_str "slot_s_store"
+#define slot_in_backpack_str "slot_in_backpack"
 
 // Defined here for consistency, not actually used for slots, just for species clothing offsets.
 #define slot_undershirt_str  "slot_undershirt"
@@ -187,15 +187,15 @@
 #define BP_CHEST        "chest"
 #define BP_GROIN        "groin"
 
-var/list/all_limb_tags = list(BP_CHEST, BP_GROIN, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
-var/list/all_limb_tags_by_depth = list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
+var/global/list/all_limb_tags = list(BP_CHEST, BP_GROIN, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
+var/global/list/all_limb_tags_by_depth = list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
 
-var/list/default_onmob_icons = list(
+var/global/list/default_onmob_icons = list(
 	BP_L_HAND =          'icons/mob/onmob/items/lefthand.dmi',
 	BP_R_HAND =          'icons/mob/onmob/items/righthand.dmi'
 )
 
-var/list/all_inventory_slots = list(
+var/global/list/all_inventory_slots = list(
 	slot_back_str,
 	BP_L_HAND,
 	BP_R_HAND,

@@ -10,12 +10,12 @@
 	if(form)
 		L.faction = form.faction
 	update_followers()
-	GLOB.destroyed_event.register(L,src, .proc/dead_follower)
-	GLOB.death_event.register(L,src, .proc/update_followers)
+	events_repository.register(/decl/observ/destroyed, L,src, .proc/dead_follower)
+	events_repository.register(/decl/observ/death, L,src, .proc/update_followers)
 
 /mob/living/deity/proc/dead_follower(var/mob/living/L)
-	GLOB.death_event.unregister(L,src)
-	GLOB.destroyed_event.unregister(L,src)
+	events_repository.unregister(/decl/observ/death, L,src)
+	events_repository.unregister(/decl/observ/destroyed, L,src)
 
 /mob/living/deity/proc/remove_follower_spells(var/datum/mind/M)
 	if(M.learned_spells)

@@ -1,4 +1,4 @@
-var/list/holder_mob_icon_cache = list()
+var/global/list/holder_mob_icon_cache = list()
 
 //Helper object for picking creatures up.
 /obj/item/holder
@@ -55,7 +55,7 @@ var/list/holder_mob_icon_cache = list()
 	if(QDELETED(src) || throwing)
 		return
 
-	if(istype(loc,/turf) || !contents.len)
+	if(isturf(loc) || !contents.len)
 		for(var/mob/M in contents)
 			var/atom/movable/mob_container = M
 			mob_container.dropInto(loc)
@@ -99,7 +99,7 @@ var/list/holder_mob_icon_cache = list()
 
 	..()
 
-var/list/holder_mob_icons = list(
+var/global/list/holder_mob_icons = list(
 	"repairbot" =         'icons/clothing/holders/holder_repairbot.dmi',
 	"constructiondrone" = 'icons/clothing/holders/holder_constructiondrone.dmi',
 	"mouse_brown" =       'icons/clothing/holders/holder_mouse_brown.dmi',

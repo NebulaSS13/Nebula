@@ -15,8 +15,6 @@
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
 	matter_multiplier = 0.3
-	material_flags = USE_MATERIAL_COLOR
-	stacktype = /obj/item/stack/material/rods
 	material = /decl/material/solid/metal/steel
 
 	pickup_sound = 'sound/foley/tooldrop3.ogg'
@@ -45,11 +43,9 @@
 	update_icon()
 	throwforce = round(0.25*material.get_edge_damage())
 	force = round(0.5*material.get_blunt_damage())
+	set_extension(src, /datum/extension/tool, list(TOOL_DRILL = TOOL_QUALITY_WORST))
 
-/obj/item/stack/material/on_update_icon()
-	if(material_flags & USE_MATERIAL_COLOR)
-		color = material.color
-		alpha = 100 + max(1, amount/25)*(material.opacity * 255)
+/obj/item/stack/material/rods/update_state_from_amount()
 	if(max_icon_state && amount > 0.5*max_amount)
 		icon_state = max_icon_state
 	else if(plural_icon_state && amount >= 2)
@@ -66,11 +62,12 @@
 			return
 
 		if(WT.remove_fuel(0,user))
-			var/obj/item/stack/material/steel/new_item = new(usr.loc)
-			new_item.add_to_stacks(usr)
-			visible_message(SPAN_NOTICE("\The [src] is shaped into metal by \the [user] with \the [WT]."), 3, SPAN_NOTICE("You hear welding."), 2)
-			if(user.is_holding_offhand(src))
-				user.put_in_hands(new_item)
+			var/obj/item/stack/material/new_item = SSmaterials.create_object((material?.type || /decl/material/solid/metal/steel), usr.loc, 1)
+			visible_message(SPAN_NOTICE("\The [src] is fused together by \the [user] with \the [WT]."), 3, SPAN_NOTICE("You hear welding."), 2)
+			if(new_item)
+				new_item.add_to_stacks(usr)
+				if(user.is_holding_offhand(src))
+					user.put_in_hands(new_item)
 			use(2)
 		return
 
@@ -88,5 +85,5 @@
 
 /obj/item/stack/material/rods/attack_self(mob/user)
 	add_fingerprint(user)
-	if(istype(user.loc, /turf))
+	if(isturf(user.loc))
 		place_grille(user, user.loc, src)

@@ -3,8 +3,8 @@
 //////////////////////////////////////////////////////////////
 
 //global datum that will preload variables on atoms instanciation
-GLOBAL_VAR_INIT(use_preloader, FALSE)
-GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
+var/global/use_preloader = FALSE
+var/global/dmm_suite/preloader/_preloader = new
 
 /datum/map_load_metadata
 	var/bounds
@@ -53,7 +53,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 /dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, initialized_areas_by_type)
 	var/tfile = dmm_file//the map file we're creating
 	if(isfile(tfile))
-		tfile = file2text(tfile)
+		tfile = safe_file2text(tfile, FALSE)
 
 	if(!x_offset)
 		x_offset = 1
@@ -334,7 +334,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		var/atype = members[index]
 		var/atom/instance = initialized_areas_by_type[atype]
 		if(!instance)
-			GLOB._preloader.setup(attr, atype)
+			global._preloader.setup(attr, atype)
 			instance = new atype(null)
 			initialized_areas_by_type[atype] = instance
 		if(crds)
@@ -391,7 +391,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 //Instance an atom at (x,y,z) and gives it the variables in attributes
 /dmm_suite/proc/instance_atom(path,list/attributes, turf/crds, no_changeturf)
-	GLOB._preloader.setup(attributes, path)
+	global._preloader.setup(attributes, path)
 
 	if(crds)
 		if(!no_changeturf && ispath(path, /turf))
@@ -511,7 +511,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	var/current_map_hash
 
 /dmm_suite/preloader/proc/setup(list/the_attributes, path)
-	GLOB.use_preloader = TRUE
+	global.use_preloader = TRUE
 	attributes = the_attributes
 	target_path = path
 
@@ -534,7 +534,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 				throw ex
 	if(current_map_hash)
 		what.modify_mapped_vars(current_map_hash)
-	GLOB.use_preloader = FALSE
+	global.use_preloader = FALSE
 
 /area/template_noop
 	name = "Area Passthrough"

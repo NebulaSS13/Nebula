@@ -113,7 +113,7 @@
 		to_chat(owner, SPAN_WARNING("You must keep hold of your weapon!"))
 	else if(GET_STATUS(owner, STAT_BLIND))
 		to_chat(owner, SPAN_WARNING("You are blind and cannot see your target!"))
-	else if(!aiming_at || !istype(aiming_at.loc, /turf))
+	else if(!aiming_at || !isturf(aiming_at.loc))
 		to_chat(owner, SPAN_WARNING("You have lost sight of your target!"))
 	else if(owner.incapacitated() || owner.lying || owner.restrained())
 		to_chat(owner, SPAN_WARNING("You must be conscious and standing to keep track of your target!"))
@@ -140,26 +140,27 @@
 		return
 
 	if(owner.incapacitated())
-		to_chat(owner, "<span class='warning'>You cannot aim a gun in your current state.</span>")
+		to_chat(owner, SPAN_WARNING("You cannot You cannot threaten \the [target] with \the [thing] in your current state."))
 		return
 	if(owner.lying)
-		to_chat(owner, "<span class='warning'>You cannot aim a gun while prone.</span>")
+		to_chat(owner, SPAN_WARNING("You cannot threaten \the [target] with \the [thing] while prone."))
 		return
 	if(owner.restrained())
-		to_chat(owner, "<span class='warning'>You cannot aim a gun while handcuffed.</span>")
+		to_chat(owner, SPAN_WARNING("You cannot threaten \the [target] with \the [thing] while handcuffed."))
 		return
 
 	if(aiming_at)
 		if(aiming_at == target)
 			return
 		cancel_aiming(1)
-		owner.visible_message("<span class='danger'>\The [owner] turns \the [thing] on \the [target]!</span>")
+		owner.visible_message(SPAN_DANGER("\The [owner] turns \the [thing] on \the [target]!"))
 	else
-		owner.visible_message("<span class='danger'>\The [owner] aims \the [thing] at \the [target]!</span>")
+		owner.visible_message(SPAN_DANGER("\The [owner] aims \the [thing] at \the [target]!"))
 
 	if(owner.client)
 		owner.client.add_gun_icons()
-	to_chat(target, "<span class='danger'>You now have a gun pointed at you. No sudden moves!</span>")
+	var/decl/pronouns/pronouns = owner.get_pronouns()
+	to_chat(target, FONT_LARGE(SPAN_DANGER("\The [owner] [pronouns.is] menacing you with \a [thing]. No sudden moves!")))
 	aiming_with = thing
 	aiming_at = target
 	if(istype(aiming_with, /obj/item/gun))
@@ -169,14 +170,15 @@
 	forceMove(get_turf(target))
 	START_PROCESSING(SSobj, src)
 
-	aiming_at.aimed |= src
+	LAZYDISTINCTADD(aiming_at.aimed_at_by, src)
 	toggle_active(1)
 	locked = 0
+	
 	update_icon()
 	lock_time = world.time + 35
-	GLOB.moved_event.register(owner, src, /obj/aiming_overlay/proc/update_aiming)
-	GLOB.moved_event.register(aiming_at, src, /obj/aiming_overlay/proc/target_moved)
-	GLOB.destroyed_event.register(aiming_at, src, /obj/aiming_overlay/proc/cancel_aiming)
+	events_repository.register(/decl/observ/moved, owner, src, /obj/aiming_overlay/proc/update_aiming)
+	events_repository.register(/decl/observ/moved, aiming_at, src, /obj/aiming_overlay/proc/target_moved)
+	events_repository.register(/decl/observ/destroyed, aiming_at, src, /obj/aiming_overlay/proc/cancel_aiming)
 
 /obj/aiming_overlay/on_update_icon()
 	if(locked)
@@ -215,11 +217,11 @@
 			sound_to(aiming_at, sound('sound/weapons/TargetOff.ogg'))
 			sound_to(owner, sound('sound/weapons/TargetOff.ogg'))
 
-	GLOB.moved_event.unregister(owner, src)
+	events_repository.unregister(/decl/observ/moved, owner, src)
 	if(aiming_at)
-		GLOB.moved_event.unregister(aiming_at, src)
-		GLOB.destroyed_event.unregister(aiming_at, src)
-		aiming_at.aimed -= src
+		events_repository.unregister(/decl/observ/moved, aiming_at, src)
+		events_repository.unregister(/decl/observ/destroyed, aiming_at, src)
+		LAZYREMOVE(aiming_at.aimed_at_by, src)
 		aiming_at = null
 
 	aiming_with = null

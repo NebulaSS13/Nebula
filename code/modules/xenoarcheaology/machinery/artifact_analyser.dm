@@ -29,22 +29,22 @@
 	if(!owned_scanner)
 		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
 	if(owned_scanner)
-		GLOB.destroyed_event.register(owned_scanner, src, /obj/machinery/artifact_analyser/proc/clear_scanner)
+		events_repository.register(/decl/observ/destroyed, owned_scanner, src, /obj/machinery/artifact_analyser/proc/clear_scanner)
 
 /obj/machinery/artifact_analyser/proc/clear_scanner()
 	if(owned_scanner)
-		GLOB.destroyed_event.unregister(owned_scanner, src)
+		events_repository.unregister(/decl/observ/destroyed, owned_scanner, src)
 		owned_scanner = null
 
 /obj/machinery/artifact_analyser/proc/set_object(var/obj/O)
 	if(O != scanned_object && O)
 		clear_object()
-		GLOB.destroyed_event.register(O, src, /obj/machinery/artifact_analyser/proc/clear_object)
+		events_repository.register(/decl/observ/destroyed, O, src, /obj/machinery/artifact_analyser/proc/clear_object)
 		scanned_object = O
 
 /obj/machinery/artifact_analyser/proc/clear_object()
 	if(scanned_object)
-		GLOB.destroyed_event.unregister(scanned_object, src)
+		events_repository.unregister(/decl/observ/destroyed, scanned_object, src)
 		scanned_object = null
 
 /obj/machinery/artifact_analyser/Destroy()
@@ -53,7 +53,7 @@
 	. = ..()
 
 /obj/machinery/artifact_analyser/DefaultTopicState()
-	return GLOB.physical_state
+	return global.physical_topic_state
 
 /obj/machinery/artifact_analyser/interface_interact(user)
 	ui_interact(user)

@@ -70,12 +70,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/use_name
 	var/wall_name = "wall"                // Name given to walls of this material
 	var/flags = 0                         // Various status modifiers.
-	var/sheet_singular_name = "sheet"
-	var/sheet_plural_name = "sheets"
 	var/hidden_from_codex
 	var/lore_text
 	var/mechanics_text
 	var/antag_text
+	var/default_solid_form = /obj/item/stack/material/sheet
 
 	var/affect_blood_on_ingest = TRUE
 
@@ -99,7 +98,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	var/door_icon_base = "metal"                         // Door base icon tag. See header.
 	var/table_icon_base = "metal"
-	var/table_reinf = "reinf_metal"
+	var/table_icon_reinforced = "reinf_metal"
+
 	var/list/stack_origin_tech = "{'materials':1}" // Research level for stacks.
 
 	// Attributes
@@ -133,8 +133,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/dooropen_noise = 'sound/effects/stonedoor_openclose.ogg'
 	// Noise made when you hit structure made of this material.
 	var/hitsound = 'sound/weapons/genhit.ogg'
-	// Path to resulting stack types. Todo remove need for this.
-	var/stack_type = /obj/item/stack/material/generic
 	// Wallrot crumble message.
 	var/rotting_touch_message = "crumbles under your touch"
 	// Modifies skill checks when constructing with this material.
@@ -314,23 +312,39 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	name = "placeholder"
 	hidden_from_codex = TRUE
 
+// Generic material product (sheets, bricks, etc). Used ALL THE TIME.
+// May return an instance list, a single instance, or nothing if there is no instance produced.
+/decl/material/proc/create_object(var/atom/target, var/amount = 1, var/object_type, var/reinf_type)
+	if(!object_type)
+		object_type = default_solid_form
+	if(object_type)
+		if(ispath(object_type, /obj/item/stack))
+			var/atom/movable/placed = new object_type(target, amount, type, reinf_type)
+			if(istype(target))
+				placed.dropInto(target)
+			return placed
+		for(var/i = 1 to amount)
+			var/atom/movable/placed = new object_type(target, type, reinf_type)
+			if(istype(placed))
+				LAZYADD(., placed)
+				if(istype(target))
+					placed.dropInto(target)
+
 // Places a girder object when a wall is dismantled, also applies reinforced material.
 /decl/material/proc/place_dismantled_girder(var/turf/target, var/decl/material/reinf_material)
-	new /obj/structure/girder(target, type, reinf_material && reinf_material.type)
+	return create_object(target, 1, /obj/structure/girder, ispath(reinf_material) ? reinf_material : reinf_material?.type)
 
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.
-/decl/material/proc/place_dismantled_product(var/turf/target,var/is_devastated)
-	place_sheet(target, is_devastated ? 1 : 2)
-
-// Debris product. Used ALL THE TIME.
-/decl/material/proc/place_sheet(var/turf/target, var/amount = 1)
-	return stack_type ? new stack_type(target, amount, type) : null
+/decl/material/proc/place_dismantled_product(var/turf/target, var/is_devastated, var/amount = 2)
+	amount = is_devastated ? Floor(amount * 0.5) : amount
+	if(amount > 0)
+		return create_object(target, amount)
 
 // As above.
 /decl/material/proc/place_shard(var/turf/target)
 	if(shard_type)
-		return new /obj/item/shard(target, type)
+		return create_object(target, 1, /obj/item/shard)
 
 // Used by walls and weapons to determine if they break or not.
 /decl/material/proc/is_brittle()
@@ -388,7 +402,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
 
-	if(REAGENT_VOLUME(holder, type) < FLUID_EVAPORATION_POINT)
+	if(REAGENT_VOLUME(holder, type) < FLUID_QDEL_POINT)
 		return
 
 	if(istype(T) && dirtiness <= DIRTINESS_CLEAN)
@@ -498,7 +512,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	if(narcosis)
 		if(prob(10))
-			M.SelfMove(pick(GLOB.cardinal))
+			M.SelfMove(pick(global.cardinal))
 		if(prob(narcosis))
 			M.emote(pick("twitch", "drool", "moan"))
 

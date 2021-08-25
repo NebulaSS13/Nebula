@@ -52,7 +52,7 @@
 	
 	if(href_list["select"])
 		var/list/active_warrants = list()
-		for(var/datum/computer_file/report/warrant/W in GLOB.all_warrants)
+		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
 			if(!W.archived)
 				active_warrants["[capitalize(W.get_category())] - [W.get_name()]"] = W
 		if(!length(active_warrants))
@@ -63,7 +63,7 @@
 		if(!selected_name)
 			return TOPIC_HANDLED
 		var/datum/computer_file/report/warrant/selected = active_warrants[selected_name]
-		if(selected.archived || !(selected in GLOB.all_warrants))
+		if(selected.archived || !(selected in global.all_warrants))
 			to_chat(user,SPAN_WARNING("Invalid selection, try again."))
 			return TOPIC_HANDLED
 		active = selected

@@ -20,16 +20,15 @@
 		else
 			to_chat(user, "<span class='notice'>You stop shoveling.</span>")
 		return
-	if (!open && istype(W,/obj/item/stack/material/wood))
+	if (!open && istype(W, /obj/item/stack/material) && W.material?.type == /decl/material/solid/wood)
 		if(locate(/obj/structure/gravemarker) in src.loc)
 			to_chat(user, "<span class='notice'>There's already a grave marker here.</span>")
 		else
+			var/obj/item/stack/material/plank = W
 			visible_message("<span class='notice'>\The [user] starts making a grave marker on top of \the [src]</span>")
-			if( do_after(user, 50) )
+			if(do_after(user, 50) && plank.use(1))
 				visible_message("<span class='notice'>\The [user] finishes the grave marker</span>")
-				var/obj/item/stack/material/wood/plank = W
-				plank.use(1)
-				new/obj/structure/gravemarker(src.loc)
+				new /obj/structure/gravemarker(src.loc)
 			else
 				to_chat(user, "<span class='notice'>You stop making a grave marker.</span>")
 		return
@@ -151,20 +150,22 @@
 
 	var/decl/cultural_info/S = GET_DECL(/decl/cultural_info/culture/human)
 	var/nam = S.get_random_name(null, pick(MALE,FEMALE))
-	var/cur_year = GLOB.using_map.game_year
+	var/cur_year = global.using_map.game_year
 	var/born = cur_year - rand(5,150)
 	var/died = max(cur_year - rand(0,70),born)
 
 	message = "Here lies [nam], [born] - [died]."
 
 /obj/structure/gravemarker/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/hatchet))
+	if(isHatchet(W))
 		visible_message("<span class = 'warning'>\The [user] starts hacking away at \the [src] with \the [W].</span>")
-		if(!do_after(user, 30))
+		if(do_after(user, 30))
 			visible_message("<span class = 'warning'>\The [user] hacks \the [src] apart.</span>")
-			new /obj/item/stack/material/wood(src)
-			qdel(src)
+			physically_destroyed(FALSE)
+		return TRUE
 	if(istype(W,/obj/item/pen))
 		var/msg = sanitize(input(user, "What should it say?", "Grave marker", message) as text|null)
 		if(msg)
 			message = msg
+		return TRUE
+	. = ..()

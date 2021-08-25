@@ -29,7 +29,7 @@
 	var/obj/effect/decal/writing/save_graffiti = entry
 	return save_graffiti.graffiti_age
 
-/datum/persistent/graffiti/CompileEntry(var/atom/entry, var/write_file)
+/datum/persistent/graffiti/CompileEntry(var/atom/entry)
 	. = ..()
 	var/obj/effect/decal/writing/save_graffiti = entry
 	.["author"] =  save_graffiti.author || "unknown"

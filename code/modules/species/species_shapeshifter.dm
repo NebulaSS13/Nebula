@@ -1,7 +1,7 @@
 // This is something of an intermediary species used for species that
 // need to emulate the appearance of another race. Currently it is only
 // used for slimes but it may be useful for changelings later.
-var/list/wrapped_species_by_ref = list()
+var/global/list/wrapped_species_by_ref = list()
 
 /decl/species/shapeshifter
 	available_bodytypes = list(/decl/bodytype/shapeshifter)
@@ -15,7 +15,7 @@ var/list/wrapped_species_by_ref = list()
 	var/default_form
 
 /decl/species/shapeshifter/New()
-	default_form = GLOB.using_map.default_species
+	default_form = global.using_map.default_species
 	valid_transform_species |= default_form
 	..()
 

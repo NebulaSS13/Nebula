@@ -23,7 +23,7 @@
 
 	switch(controller)
 		if("Sun")
-			debug_variables(GLOB.sun)
+			debug_variables(global.sun)
 			SSstatistics.add_field_details("admin_verb","DSun")
 		if("Radio")
 			debug_variables(radio_controller)
@@ -41,7 +41,7 @@
 			debug_variables(transfer_controller)
 			SSstatistics.add_field_details("admin_verb","DAutovoter")
 		if("Alt Appearance Manager")
-			debug_variables(appearance_manager)
+			debug_variables(GET_DECL(/decl/appearance_manager))
 			SSstatistics.add_field_details("admin_verb", "DAltAppearanceManager")
 		if("Military Branches")
 			debug_variables(mil_branches)

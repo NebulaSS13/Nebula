@@ -42,30 +42,30 @@
 	set name = "Rename Tradeship"
 	set category = "Captain's Powers"
 
-	var/ship = sanitize(input(src, "What is your ship called? Don't add the vessel prefix, 'Tradeship' will be attached automatically.", "Ship Name", GLOB.using_map.station_short), MAX_NAME_LEN)
+	var/ship = sanitize(input(src, "What is your ship called? Don't add the vessel prefix, 'Tradeship' will be attached automatically.", "Ship Name", global.using_map.station_short), MAX_NAME_LEN)
 	if(!ship)
 		return
-	GLOB.using_map.station_short = ship
-	GLOB.using_map.station_name = "Tradeship [ship]"
+	global.using_map.station_short = ship
+	global.using_map.station_name = "Tradeship [ship]"
 	var/obj/effect/overmap/visitable/ship/tradeship/B = locate() in world
 	if(B)
-		B.SetName(GLOB.using_map.station_name)
-	command_announcement.Announce("Attention all hands on [GLOB.using_map.station_name]! Thank you for your attention.", "Ship re-Christened")
+		B.SetName(global.using_map.station_name)
+	command_announcement.Announce("Attention all hands on [global.using_map.station_name]! Thank you for your attention.", "Ship re-Christened")
 	verbs -= /mob/proc/tradehouse_rename_ship
 
 /mob/proc/tradehouse_rename_company()
 	set name = "Rename Tradehouse"
 	set category = "Captain's Powers"
-	var/company = sanitize(input(src, "What should your enterprise be called?", "Company name", GLOB.using_map.company_name), MAX_NAME_LEN)
+	var/company = sanitize(input(src, "What should your enterprise be called?", "Company name", global.using_map.company_name), MAX_NAME_LEN)
 	if(!company)
 		return
-	var/company_s = sanitize(input(src, "What's the short name for it?", "Company name", GLOB.using_map.company_short), MAX_NAME_LEN)
-	if(company != GLOB.using_map.company_name)
+	var/company_s = sanitize(input(src, "What's the short name for it?", "Company name", global.using_map.company_short), MAX_NAME_LEN)
+	if(company != global.using_map.company_name)
 		if (company)
-			GLOB.using_map.company_name = company
+			global.using_map.company_name = company
 		if(company_s)
-			GLOB.using_map.company_short = company_s
-		command_announcement.Announce("Congratulations to all members of [capitalize(GLOB.using_map.company_name)] on the new name. Their rebranding has changed the [GLOB.using_map.company_short] market value by [0.01*rand(-10,10)]%.", "Tradehouse Name Change")
+			global.using_map.company_short = company_s
+		command_announcement.Announce("Congratulations to all members of [capitalize(global.using_map.company_name)] on the new name. Their rebranding has changed the [global.using_map.company_short] market value by [0.01*rand(-10,10)]%.", "Tradehouse Name Change")
 	verbs -= /mob/proc/tradehouse_rename_company
 
 /datum/job/tradeship_first_mate

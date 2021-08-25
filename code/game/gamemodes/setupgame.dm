@@ -20,9 +20,9 @@
 
 	if (prob(50))
 		// Currently unused.  Will revisit. - N3X
-		GLOB.BLOCKADD = rand(-300,300)
+		global.BLOCKADD = rand(-300,300)
 	if (prob(75))
-		GLOB.DIFFMUT = rand(0,20)
+		global.DIFFMUT = rand(0,20)
 
 	var/list/numsToAssign=new()
 	for(var/i=1;i<DNA_SE_LENGTH;i++)
@@ -31,42 +31,22 @@
 	//testing("Assigning DNA blocks:")
 
 	// Standard muts, imported from older code above.
-	GLOB.BLINDBLOCK         = getAssignedBlock("BLINDED",         numsToAssign)
-	GLOB.DEAFBLOCK          = getAssignedBlock("DEAFENED",          numsToAssign)
-	GLOB.HULKBLOCK          = getAssignedBlock("HULK",          numsToAssign, DNA_HARD_BOUNDS)
-	GLOB.TELEBLOCK          = getAssignedBlock("TELE",          numsToAssign, DNA_HARD_BOUNDS)
-	GLOB.FIREBLOCK          = getAssignedBlock("FIRE",          numsToAssign, DNA_HARDER_BOUNDS)
-	GLOB.XRAYBLOCK          = getAssignedBlock("XRAY",          numsToAssign, DNA_HARDER_BOUNDS)
-	GLOB.CLUMSYBLOCK        = getAssignedBlock("CLUMSY",        numsToAssign)
-	GLOB.FAKEBLOCK          = getAssignedBlock("FAKE",          numsToAssign)
-
-	// UNUSED!
-	//GLOB.COUGHBLOCK         = getAssignedBlock("COUGH",         numsToAssign)
-	//GLOB.GLASSESBLOCK       = getAssignedBlock("GLASSES",       numsToAssign)
-	//GLOB.EPILEPSYBLOCK      = getAssignedBlock("EPILEPSY",      numsToAssign)
-	//GLOB.TWITCHBLOCK        = getAssignedBlock("TWITCH",        numsToAssign)
-	//GLOB.NERVOUSBLOCK       = getAssignedBlock("NERVOUS",       numsToAssign)
-
-	// Bay muts (UNUSED)
-	//GLOB.HEADACHEBLOCK      = getAssignedBlock("HEADACHE",      numsToAssign)
-	//GLOB.NOBREATHBLOCK      = getAssignedBlock("NOBREATH",      numsToAssign, DNA_HARD_BOUNDS)
-	//GLOB.REMOTEVIEWBLOCK    = getAssignedBlock("REMOTEVIEW",    numsToAssign, DNA_HARDER_BOUNDS)
-	//GLOB.REGENERATEBLOCK    = getAssignedBlock("REGENERATE",    numsToAssign, DNA_HARDER_BOUNDS)
-	//GLOB.INCREASERUNBLOCK   = getAssignedBlock("INCREASERUN",   numsToAssign, DNA_HARDER_BOUNDS)
-	GLOB.REMOTETALKBLOCK    = getAssignedBlock("REMOTETALK",    numsToAssign, DNA_HARDER_BOUNDS)
-	//GLOB.MORPHBLOCK         = getAssignedBlock("MORPH",         numsToAssign, DNA_HARDER_BOUNDS)
-	//GLOB.COLDBLOCK          = getAssignedBlock("COLD",          numsToAssign)
-	//GLOB.HALLUCINATIONBLOCK = getAssignedBlock("HALLUCINATION", numsToAssign)
-	//GLOB.NOPRINTSBLOCK      = getAssignedBlock("NOPRINTS",      numsToAssign, DNA_HARD_BOUNDS)
-	//GLOB.SHOCKIMMUNITYBLOCK = getAssignedBlock("SHOCKIMMUNITY", numsToAssign)
-	//GLOB.SMALLSIZEBLOCK     = getAssignedBlock("SMALLSIZE",     numsToAssign, DNA_HARD_BOUNDS)
+	global.BLINDBLOCK         = getAssignedBlock("BLINDED",         numsToAssign)
+	global.DEAFBLOCK          = getAssignedBlock("DEAFENED",          numsToAssign)
+	global.HULKBLOCK          = getAssignedBlock("HULK",          numsToAssign, DNA_HARD_BOUNDS)
+	global.TELEBLOCK          = getAssignedBlock("TELE",          numsToAssign, DNA_HARD_BOUNDS)
+	global.FIREBLOCK          = getAssignedBlock("FIRE",          numsToAssign, DNA_HARDER_BOUNDS)
+	global.XRAYBLOCK          = getAssignedBlock("XRAY",          numsToAssign, DNA_HARDER_BOUNDS)
+	global.CLUMSYBLOCK        = getAssignedBlock("CLUMSY",        numsToAssign)
+	global.FAKEBLOCK          = getAssignedBlock("FAKE",          numsToAssign)
+	global.REMOTETALKBLOCK    = getAssignedBlock("REMOTETALK",    numsToAssign, DNA_HARDER_BOUNDS)
 
 	//
 	// Static Blocks
 	/////////////////////////////////////////////.
 
 	// Monkeyblock is always last.
-	GLOB.MONKEYBLOCK = DNA_SE_LENGTH
+	global.MONKEYBLOCK = DNA_SE_LENGTH
 
 	// And the genes that actually do the work. (domutcheck improvements)
 	var/list/blocks_assigned[DNA_SE_LENGTH]

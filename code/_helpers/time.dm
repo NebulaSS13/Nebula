@@ -48,9 +48,9 @@
 	return jointext(result, ", ")
 
 /proc/get_game_time()
-	var/global/time_offset = 0
-	var/global/last_time = 0
-	var/global/last_usage = 0
+	var/static/time_offset = 0
+	var/static/last_time = 0
+	var/static/last_usage = 0
 
 	var/wtime = world.time
 	var/wusage = world.tick_usage * 0.01
@@ -63,9 +63,9 @@
 
 	return wtime + (time_offset + wusage) * world.tick_lag
 
-var/roundstart_hour
-var/station_date = ""
-var/next_station_date_change = 1 DAY
+var/global/roundstart_hour
+var/global/station_date = ""
+var/global/next_station_date_change = 1 DAY
 
 /proc/stationtime2text()
 	return time2text(station_time_in_ticks, "hh:mm")
@@ -78,7 +78,7 @@ var/next_station_date_change = 1 DAY
 	if(!station_date || update_time)
 		var/extra_days = round(station_time_in_ticks / (1 DAY)) DAYS
 		var/timeofday = world.timeofday + extra_days
-		station_date = num2text(GLOB.using_map.game_year) + "-" + time2text(timeofday, "MM-DD")
+		station_date = num2text(global.using_map.game_year) + "-" + time2text(timeofday, "MM-DD")
 	return station_date
 
 /proc/time_stamp()
@@ -96,9 +96,9 @@ var/next_station_date_change = 1 DAY
 		//else
 			//return 1
 
-var/next_duration_update = 0
-var/last_round_duration = 0
-var/round_start_time = 0
+var/global/next_duration_update = 0
+var/global/last_round_duration = 0
+var/global/round_start_time = 0
 
 /hook/roundstart/proc/start_timer()
 	round_start_time = world.time
@@ -126,13 +126,13 @@ var/round_start_time = 0
 	roundstart_hour = rand(0, 23)
 	return TRUE
 
-GLOBAL_VAR_INIT(midnight_rollovers, 0)
-GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
+var/global/midnight_rollovers = 0
+var/global/rollovercheck_last_timeofday = 0
 /proc/update_midnight_rollover()
-	if (world.timeofday < GLOB.rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
-		GLOB.midnight_rollovers += 1
-	GLOB.rollovercheck_last_timeofday = world.timeofday
-	return GLOB.midnight_rollovers
+	if (world.timeofday < global.rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
+		global.midnight_rollovers += 1
+	global.rollovercheck_last_timeofday = world.timeofday
+	return global.midnight_rollovers
 
 //Increases delay as the server gets more overloaded,
 //as sleeps aren't cheap and sleeping only to wake up and sleep again is wasteful
@@ -157,11 +157,6 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 	while (world.tick_usage > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))
 
 #undef DELTA_CALC
-
-/proc/acquire_days_per_month()
-	. = list(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
-	if(isLeap(text2num(time2text(world.realtime, "YYYY"))))
-		.[2] = 29
 
 /proc/current_month_and_day()
 	var/time_string = time2text(world.realtime, "MM-DD")

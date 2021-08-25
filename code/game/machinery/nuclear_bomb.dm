@@ -1,4 +1,4 @@
-var/bomb_set
+var/global/bomb_set
 
 /obj/machinery/nuclearbomb
 	name = "\improper Nuclear Fission Explosive"
@@ -71,7 +71,7 @@ var/bomb_set
 			flick("lock", src)
 		return
 
-	if(panel_open && isMultitool(O) || isWirecutter(O))
+	if(panel_open && (isMultitool(O) || isWirecutter(O)))
 		return attack_hand(user)
 
 	if(extended)
@@ -311,7 +311,7 @@ var/bomb_set
 	timing = 1
 	log_and_message_admins("activated the detonation countdown of \the [src]")
 	bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
-	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	original_level = security_state.current_security_level
 	security_state.set_security_level(security_state.severe_security_level, TRUE)
 	update_icon()
@@ -322,7 +322,7 @@ var/bomb_set
 /obj/machinery/nuclearbomb/proc/secure_device()
 	if(timing <= 0)
 		return
-	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	security_state.set_security_level(original_level, TRUE)
 	bomb_set--
 	safety = TRUE
@@ -369,18 +369,18 @@ var/bomb_set
 	. = ..()
 	nuke_disks |= src
 	// Can never be quite sure that a game mode has been properly initiated or not at this point, so always register
-	GLOB.moved_event.register(src, src, /obj/item/disk/nuclear/proc/check_z_level)
+	events_repository.register(/decl/observ/moved, src, src, /obj/item/disk/nuclear/proc/check_z_level)
 
 /obj/item/disk/nuclear/proc/check_z_level()
 	if(!(istype(SSticker.mode, /datum/game_mode/nuclear)))
-		GLOB.moved_event.unregister(src, src, /obj/item/disk/nuclear/proc/check_z_level) // However, when we are certain unregister if necessary
+		events_repository.unregister(/decl/observ/moved, src, src, /obj/item/disk/nuclear/proc/check_z_level) // However, when we are certain unregister if necessary
 		return
 	var/turf/T = get_turf(src)
 	if(!T || isNotStationLevel(T.z))
 		qdel(src)
 
 /obj/item/disk/nuclear/Destroy()
-	GLOB.moved_event.unregister(src, src, /obj/item/disk/nuclear/proc/check_z_level)
+	events_repository.unregister(/decl/observ/moved, src, src, /obj/item/disk/nuclear/proc/check_z_level)
 	nuke_disks -= src
 	if(!nuke_disks.len)
 		var/turf/T = pick_area_turf_by_flag(AREA_FLAG_MAINTENANCE, list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
@@ -403,7 +403,7 @@ var/bomb_set
 
 /obj/item/storage/secure/briefcase/nukedisk/examine(mob/user)
 	. = ..()
-	to_chat(user,"On closer inspection, you see \a [GLOB.using_map.company_name] emblem is etched into the front of it.")
+	to_chat(user,"On closer inspection, you see \a [global.using_map.company_name] emblem is etched into the front of it.")
 
 /obj/item/folder/envelope/nuke_instructions
 	name = "instructions envelope"
@@ -412,7 +412,7 @@ var/bomb_set
 /obj/item/folder/envelope/nuke_instructions/Initialize()
 	. = ..()
 	var/obj/item/paper/R = new(src)
-	R.set_content("<center><b>Warning: Classified<br>[GLOB.using_map.station_name] Self-Destruct System - Instructions</b></center><br><br>\
+	R.set_content("<center><b>Warning: Classified<br>[global.using_map.station_name] Self-Destruct System - Instructions</b></center><br><br>\
 	In the event of a Delta-level emergency, this document will guide you through the activation of the vessel's \
 	on-board nuclear self-destruct system. Please read carefully.<br><br>\
 	1) (Optional) Announce the imminent activation to any surviving crew members, and begin evacuation procedures.<br>\
@@ -522,7 +522,7 @@ var/bomb_set
 					high_intensity = rand(3, 6)
 					low_intensity = rand(5, 8)
 					time_to_explosion = world.time + 5 SECONDS
-				var/turf/T = pick_area_and_turf(GLOB.is_station_but_not_space_or_shuttle_area)
+				var/turf/T = pick_area_and_turf(global.is_station_but_not_space_or_shuttle_area)
 				explosion(T, range, high_intensity, low_intensity)
 
 /obj/machinery/nuclearbomb/station/secure_device()

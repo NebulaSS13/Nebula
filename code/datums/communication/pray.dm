@@ -7,11 +7,11 @@
 
 /decl/communication_channel/pray/do_communicate(var/mob/communicator, var/message, var/speech_method_type)
 	var/image/cross = image('icons/obj/items/storage/bible.dmi',"bible")
-	for(var/m in GLOB.player_list)
+	for(var/m in global.player_list)
 		var/mob/M = m
 		if(!M.client)
 			continue
-		if(M.client.holder && M.client.get_preference_value(/datum/client_preference/staff/show_chat_prayers) == GLOB.PREF_SHOW)
+		if(M.client.holder && M.client.get_preference_value(/datum/client_preference/staff/show_chat_prayers) == PREF_SHOW)
 			receive_communication(communicator, M, "\[<A HREF='?_src_=holder;adminspawnprayreward=\ref[communicator]'>SC</a>\] \[<A HREF='?_src_=holder;narrateto=\ref[communicator]'>DN</a>\]<span class='notice'>[html_icon(cross)] <b><font color=purple>PRAY: </font>[key_name(communicator, 1)]: </b>[message]</span>")
 		else if(communicator == M) //Give it to ourselves
 			receive_communication(communicator, M, "<span class='notice'>[html_icon(cross)] <b>You send the prayer, \"[message]\" out into the heavens.</b></span>")

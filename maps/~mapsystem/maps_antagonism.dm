@@ -22,13 +22,13 @@
 	)
 
 	var/list/potential_special_theft_targets = list(
-		"nuclear gun"             = /obj/item/gun/energy/gun/nuclear,
-		"diamond drill"           = /obj/item/pickaxe/diamonddrill,
-		"bag of holding"          = /obj/item/storage/backpack/holding,
-		"hyper-capacity cell"     = /obj/item/cell/hyper,
-		"10 diamonds"             = /obj/item/stack/material/diamond,
-		"50 gold bars"            = /obj/item/stack/material/gold,
-		"25 refined uranium bars" = /obj/item/stack/material/uranium,
+		"nuclear gun"         = /obj/item/gun/energy/gun/nuclear,
+		"diamond drill"       = /obj/item/pickaxe/diamonddrill,
+		"bag of holding"      = /obj/item/storage/backpack/holding,
+		"hyper-capacity cell" = /obj/item/cell/hyper,
+		"10 diamonds"         = list(/obj/item/stack/material/gemstone, 10, /decl/material/solid/gemstone/diamond),
+		"50 gold ingots"      = list(/obj/item/stack/material/ingot,    50, /decl/material/solid/metal/gold),
+		"25 uranium pucks"    = list(/obj/item/stack/material/puck,     25, /decl/material/solid/metal/uranium),
 	)
 
 /datum/map/proc/get_theft_targets()

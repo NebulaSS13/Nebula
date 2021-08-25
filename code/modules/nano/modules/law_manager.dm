@@ -8,8 +8,8 @@
 
 	var/current_view = 0
 
-	var/global/list/datum/ai_laws/admin_laws
-	var/global/list/datum/ai_laws/player_laws
+	var/static/list/datum/ai_laws/admin_laws
+	var/static/list/datum/ai_laws/player_laws
 	var/mob/living/silicon/owner = null
 
 /datum/nano_module/law_manager/New(var/mob/living/silicon/S)
@@ -147,7 +147,7 @@
 
 	return 0
 
-/datum/nano_module/law_manager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/law_manager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/data[0]
 	owner.lawsync()
 

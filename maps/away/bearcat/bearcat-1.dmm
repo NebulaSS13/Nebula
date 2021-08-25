@@ -155,7 +155,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)
 "aw" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/flashlight/lamp,
 /obj/item/paper_bin,
 /obj/item/stamp/cargo,
@@ -718,7 +718,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/ship/scrap/crew/dorms1)
 "bz" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/dark/airless,
 /area/ship/scrap/crew/dorms1)
 "bA" = (
@@ -1255,7 +1255,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/ship/scrap/crew/dorms2)
 "cB" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/newspaper,
 /turf/simulated/floor/tiled/dark/airless,
 /area/ship/scrap/crew/dorms2)
@@ -1697,7 +1697,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/ship/scrap/crew/dorms3)
 "dv" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/plushie,
 /turf/simulated/floor/tiled/dark/airless,
 /area/ship/scrap/crew/dorms3)
@@ -1715,7 +1715,7 @@
 /area/ship/scrap/crew/dorms3)
 "dx" = (
 /obj/structure/mopbucket,
-/obj/structure/table/rack{
+/obj/structure/rack{
 	dir = 8
 	},
 /obj/item/storage/toolbox/mechanical,
@@ -2004,7 +2004,7 @@
 /obj/item/stock_parts/circuitboard/pacman,
 /obj/item/stock_parts/circuitboard/recharge_station,
 /obj/item/stock_parts/circuitboard/shield_generator,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5
 	},
@@ -2014,7 +2014,7 @@
 "ec" = (
 /obj/item/stock_parts/circuitboard/helm,
 /obj/item/stock_parts/circuitboard/unary_atmos/cooler,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5
 	},
@@ -2028,7 +2028,7 @@
 "ed" = (
 /obj/item/stock_parts/circuitboard/autolathe,
 /obj/item/stock_parts/circuitboard/unary_atmos/heater,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5
 	},
@@ -2056,7 +2056,7 @@
 /obj/item/stock_parts/circuitboard/air_alarm,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
 "ef" = (
@@ -2109,7 +2109,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/storage)
 "ej" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/tank/jetpack/oxygen,
 /obj/item/clothing/mask/breath,
 /turf/simulated/floor/usedup,
@@ -2120,7 +2120,7 @@
 	dir = 1;
 	icon_state = "bulb1"
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/tank/jetpack/oxygen,
 /obj/item/clothing/mask/breath,
 /turf/simulated/floor/usedup,
@@ -2386,7 +2386,7 @@
 /obj/item/stock_parts/scanning_module,
 /obj/item/stock_parts/scanning_module,
 /obj/item/stock_parts/scanning_module/adv,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 10
 	},
@@ -2400,7 +2400,7 @@
 /obj/item/stock_parts/micro_laser,
 /obj/item/stock_parts/micro_laser,
 /obj/item/stock_parts/micro_laser/ultra,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/machinery/power/apc/derelict{
 	name = "south bump";
 	pixel_y = -24
@@ -2413,10 +2413,10 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/techstorage)
 "eG" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stock_parts/circuitboard/pacman/super/potato,
-/obj/item/stack/material/glass/reinforced_borosilicate/ten,
-/obj/item/stack/material/ocp/ten,
+/obj/item/stack/material/pane/mapped/rborosilicate/ten,
+/obj/item/stack/material/reinforced/mapped/ocp/ten,
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
@@ -2433,7 +2433,7 @@
 /obj/effect/floor_decal/corner/yellow{
 	dir = 9
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 4;
@@ -2514,7 +2514,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/eva)
 "eQ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/flashlight,
 /obj/item/flashlight,
 /obj/item/storage/box/lights/bulbs,
@@ -2530,7 +2530,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
 "eR" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/inflatable_dispenser,
 /obj/item/radio,
 /obj/item/radio,
@@ -2542,24 +2542,24 @@
 /area/ship/scrap/maintenance/storage)
 "eS" = (
 /obj/item/tape_roll,
-/obj/item/stack/material/plasteel/fifty,
-/obj/item/stack/material/copper/fifty,
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/item/stack/material/rods/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/plastic/fifty,
-/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/panel/mapped/plastic/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/structure/closet/crate,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
-/obj/item/stack/material/glass/reinforced/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
 "eT" = (
 /obj/item/clothing/head/welding,
 /obj/item/radio,
 /obj/item/tape_roll,
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/radio/intercom{
 	pixel_y = -32
 	},

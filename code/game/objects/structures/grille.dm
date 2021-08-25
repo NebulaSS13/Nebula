@@ -158,7 +158,8 @@
 		qdel(src)
 	else
 		set_density(0)
-		new /obj/item/stack/material/rods(get_turf(src), 1, material.type)
+		if(material)
+			material.create_object(get_turf(src), 1,/obj/item/stack/material/rods)
 		destroyed = TRUE
 		update_icon()
 
@@ -280,4 +281,8 @@
 		F.add_fingerprint(user)
 
 /obj/structure/grille/create_dismantled_products(var/turf/T)
-	new /obj/item/stack/material/rods(get_turf(src), (destroyed ? 1 : 2), material.type)
+	if(material)
+		material.create_object(get_turf(src), (destroyed ? 1 : 2), /obj/item/stack/material/rods)
+		matter -= material.type
+		material = null
+	. = ..()

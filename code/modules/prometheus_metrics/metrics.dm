@@ -1,4 +1,4 @@
-GLOBAL_DATUM_INIT(prometheus_metrics, /datum/prometheus_metrics, new)
+var/global/datum/prometheus_metrics/prometheus_metrics = new
 
 // prometheus_metrics holds a list of metric_family datums and uses them to
 // create a json protobuf.

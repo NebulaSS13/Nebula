@@ -17,7 +17,7 @@
 	var/intrusion_detection_enabled
 	var/intrusion_detection_alarm
 	var/list/banned_nids = list()
-	var/global/list/all_software_categories
+	var/static/list/all_software_categories
 	var/list/chat_channels = list()
 
 /datum/computer_network/New(var/new_id)

@@ -141,7 +141,7 @@
 	icon = 'icons/clothing/head/pumpkin.dmi'
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = SLOT_HEAD|SLOT_FACE|SLOT_EYES
-	brightness_on = 0.2
+	brightness_on = 2
 	light_overlay = "helmet_light"
 	w_class = ITEM_SIZE_NORMAL
 

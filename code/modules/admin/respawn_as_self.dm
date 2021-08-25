@@ -6,8 +6,8 @@
 	if(!check_rights(R_SPAWN))
 		return
 
-	var/client/C = input(src, "Specify which client to respawn.", "Respawn As Self", usr.client) as null|anything in GLOB.clients
-	if(!C || !(C in GLOB.clients) || !C.prefs)
+	var/client/C = input(src, "Specify which client to respawn.", "Respawn As Self", usr.client) as null|anything in global.clients
+	if(!C || !(C in global.clients) || !C.prefs)
 		return
 
 	var/mob/oldmob = C.mob

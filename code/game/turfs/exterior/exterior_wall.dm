@@ -1,9 +1,8 @@
 #define MAT_DROP_CHANCE 30
 
-var/list/default_strata_type_by_z = list()
-var/list/default_material_by_strata_and_z = list()
-var/list/default_strata_types = list()
-var/list/natural_walls = list()
+var/global/list/default_strata_type_by_z = list()
+var/global/list/default_material_by_strata_and_z = list()
+var/global/list/natural_walls = list()
 
 /turf/exterior/wall
 	name = "wall"
@@ -26,26 +25,6 @@ var/list/natural_walls = list()
 	if(paint_color)
 		to_chat(user, SPAN_NOTICE("It has been <font color = '[paint_color]'>noticeably discoloured</font> by the elements."))
 
-/turf/exterior/wall/proc/set_strata_material()
-	if(material)
-		return
-	if(!strata)
-		if(!global.default_strata_type_by_z["[z]"])
-			if(!length(global.default_strata_types))
-				var/list/strata_types = decls_repository.get_decls_of_subtype(/decl/strata)
-				for(var/stype in strata_types)
-					var/decl/strata/check_strata = strata_types[stype]
-					if(check_strata.default_strata_candidate)
-						global.default_strata_types += stype
-			global.default_strata_type_by_z["[z]"] = pick(global.default_strata_types)
-		strata = global.default_strata_type_by_z["[z]"]
-	var/skey = "[strata]-[z]"
-	if(!global.default_material_by_strata_and_z[skey])
-		var/decl/strata/strata_info = GET_DECL(strata)
-		if(length(strata_info.base_materials))
-			global.default_material_by_strata_and_z[skey] = pick(strata_info.base_materials)
-	material = global.default_material_by_strata_and_z[skey]
-
 /turf/exterior/wall/Initialize(var/ml, var/materialtype, var/rmaterialtype)
 	..(ml, TRUE)	// We update our own icon, no point doing it twice.
 
@@ -55,8 +34,10 @@ var/list/natural_walls = list()
 	color = null
 
 	// Init materials.
-	set_strata_material()
+	material = SSmaterials.get_strata_material(src)
+
 	global.natural_walls += src
+
 	set_extension(src, /datum/extension/geological_data)
 	if(!ispath(material, /decl/material))
 		material = materialtype || get_default_material()
@@ -98,7 +79,7 @@ var/list/natural_walls = list()
 /turf/exterior/wall/proc/spread_deposit()
 	if(!istype(reinf_material) || reinf_material.ore_spread_chance <= 0)
 		return
-	for(var/trydir in GLOB.cardinal)
+	for(var/trydir in global.cardinal)
 		if(!prob(reinf_material.ore_spread_chance))
 			continue
 		var/turf/exterior/wall/target_turf = get_step(src, trydir)
@@ -184,7 +165,7 @@ var/list/natural_walls = list()
 		return
 
 	var/list/wall_connections = list()
-	for(var/stepdir in GLOB.alldirs)
+	for(var/stepdir in global.alldirs)
 		var/turf/exterior/wall/T = get_step(src, stepdir)
 		if(istype(T))
 			wall_connections += get_dir(src, T)

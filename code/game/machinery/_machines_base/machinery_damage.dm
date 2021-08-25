@@ -21,10 +21,10 @@
 		return
 
 	// If some damage got past, next it's generic (non-circuitboard) components
-	var/obj/item/stock_parts/victim = get_damageable_component()
+	var/obj/item/stock_parts/victim = get_damageable_component(damtype)
 	while(amount > 0 && victim)
 		amount -= victim.take_damage(amount, damtype)
-		victim = get_damageable_component()
+		victim = get_damageable_component(damtype)
 	if(amount <= 0)
 		return
 
@@ -33,12 +33,14 @@
 	if(victim)
 		victim.take_damage(amount, damtype)
 	
-/obj/machinery/proc/get_damageable_component()
+/obj/machinery/proc/get_damageable_component(var/damage_type)
 	var/list/victims = shuffle(component_parts)
 	if(LAZYLEN(victims))
 		for(var/obj/item/stock_parts/component in victims)
 			// Circuitboards are handled separately
 			if(istype(component, /obj/item/stock_parts/circuitboard))
+				continue
+			if(damage_type && (damage_type in component.ignore_damage_types))
 				continue
 			// Don't damage what can't be repaired
 			if(component.part_flags & PART_FLAG_NODAMAGE)

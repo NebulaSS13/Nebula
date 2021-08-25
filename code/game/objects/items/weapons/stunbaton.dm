@@ -171,7 +171,7 @@
 
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
-			H.forcesay(GLOB.hit_appends)
+			H.forcesay(global.hit_appends)
 
 	return 1
 

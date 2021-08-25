@@ -107,25 +107,25 @@
 	. = !is_maint_area(A)
 
 /proc/is_coherent_area(var/area/A)
-	return !is_type_in_list(A, GLOB.using_map.area_coherency_test_exempt_areas)
+	return !is_type_in_list(A, global.using_map.area_coherency_test_exempt_areas)
 
-GLOBAL_LIST_INIT(is_station_but_not_space_or_shuttle_area, list(/proc/is_station_area, /proc/is_not_space_area, /proc/is_not_shuttle_area))
+var/global/list/is_station_but_not_space_or_shuttle_area = list(/proc/is_station_area, /proc/is_not_space_area, /proc/is_not_shuttle_area)
 
-GLOBAL_LIST_INIT(is_contact_but_not_space_or_shuttle_area, list(/proc/is_contact_area, /proc/is_not_space_area, /proc/is_not_shuttle_area))
+var/global/list/is_contact_but_not_space_or_shuttle_area = list(/proc/is_contact_area, /proc/is_not_space_area, /proc/is_not_shuttle_area)
 
-GLOBAL_LIST_INIT(is_player_but_not_space_or_shuttle_area, list(/proc/is_player_area, /proc/is_not_space_area, /proc/is_not_shuttle_area))
+var/global/list/is_player_but_not_space_or_shuttle_area = list(/proc/is_player_area, /proc/is_not_space_area, /proc/is_not_shuttle_area)
 
-GLOBAL_LIST_INIT(is_station_area, list(/proc/is_station_area))
+var/global/list/is_station_area = list(/proc/is_station_area)
 
-GLOBAL_LIST_INIT(is_station_and_maint_area, list(/proc/is_station_area, /proc/is_maint_area))
+var/global/list/is_station_and_maint_area = list(/proc/is_station_area, /proc/is_maint_area)
 
-GLOBAL_LIST_INIT(is_station_but_not_maint_area, list(/proc/is_station_area, /proc/is_not_maint_area))
+var/global/list/is_station_but_not_maint_area = list(/proc/is_station_area, /proc/is_not_maint_area)
 
 /*
 	Misc Helpers
 */
-#define teleportlocs area_repository.get_areas_by_name_and_coords(GLOB.is_player_but_not_space_or_shuttle_area)
-#define stationlocs area_repository.get_areas_by_name(GLOB.is_player_but_not_space_or_shuttle_area)
-#define wizteleportlocs area_repository.get_areas_by_name(GLOB.is_station_area)
-#define maintlocs area_repository.get_areas_by_name(GLOB.is_station_and_maint_area)
-#define wizportallocs area_repository.get_areas_by_name(GLOB.is_station_but_not_space_or_shuttle_area)
+#define teleportlocs area_repository.get_areas_by_name_and_coords(global.is_player_but_not_space_or_shuttle_area)
+#define stationlocs area_repository.get_areas_by_name(global.is_player_but_not_space_or_shuttle_area)
+#define wizteleportlocs area_repository.get_areas_by_name(global.is_station_area)
+#define maintlocs area_repository.get_areas_by_name(global.is_station_and_maint_area)
+#define wizportallocs area_repository.get_areas_by_name(global.is_station_but_not_space_or_shuttle_area)

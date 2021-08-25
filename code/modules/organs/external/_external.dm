@@ -966,8 +966,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 			forceMove(get_turf(src))
 			if(!clean)
 				// Throw limb around.
-				if(src && istype(loc,/turf))
-					throw_at(get_edge_target_turf(src, pick(GLOB.alldirs)), rand(1,3), THROWFORCE_GIBS)
+				if(src && isturf(loc))
+					throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 				set_dir(SOUTH, TRUE)
 		if(DISMEMBER_METHOD_BURN, DISMEMBER_METHOD_ACID)
 			if(disintegrate == DISMEMBER_METHOD_BURN)
@@ -992,16 +992,16 @@ Note that amputating the affected organ does in fact remove the infection from t
 					G.basecolor =  use_blood_colour
 					G.update_icon()
 
-			gore.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
+			gore.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/organ/I in internal_organs)
 				I.removed()
 				if(!QDELETED(I) && isturf(loc))
-					I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
+					I.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/I in src)
 				I.dropInto(loc)
-				I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
+				I.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 
 			qdel(src)
 
@@ -1119,6 +1119,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	playsound(src.loc, "fracture", 100, 1, -2)
 	status |= ORGAN_BROKEN
+	stage = 0
 	broken_description = pick("broken","fracture","hairline fracture")
 
 	// Fractures have a chance of getting you out of restraints
@@ -1181,7 +1182,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		company = /decl/prosthetics_manufacturer
 	
 	var/decl/prosthetics_manufacturer/R = GET_DECL(company)
-	if(!R.check_can_install(organ_tag, (owner?.get_bodytype_category() || GLOB.using_map.default_bodytype), (owner?.get_species_name() || GLOB.using_map.default_species)))
+	if(!R.check_can_install(organ_tag, (owner?.get_bodytype_category() || global.using_map.default_bodytype), (owner?.get_species_name() || global.using_map.default_species)))
 		R = GET_DECL(/decl/prosthetics_manufacturer)
 
 	model = company

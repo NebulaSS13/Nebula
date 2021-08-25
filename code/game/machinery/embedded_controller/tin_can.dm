@@ -17,7 +17,7 @@
 	cycle_to_external_air = TRUE // Some kind of legacy var needed for proper init
 	base_type = /obj/machinery/embedded_controller/radio/airlock/tin_can
 
-/obj/machinery/embedded_controller/radio/airlock/tin_can/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.default_state)
+/obj/machinery/embedded_controller/radio/airlock/tin_can/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = global.default_topic_state)
 	var/list/data = list()
 	var/datum/computer/file/embedded_program/airlock/tin_can/our_program = program
 	data = list(

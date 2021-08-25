@@ -40,7 +40,7 @@ var/global/universe_has_ended = 0
 	to_world("<span class='sinister' style='font-size:22pt'>You are blinded by a brilliant flash of energy.</span>")
 	sound_to(world, sound('sound/effects/cascade.ogg'))
 
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in global.player_list)
 		M.flash_eyes()
 
 	if(SSevac.evacuation_controller.cancel_evacuation())
@@ -66,20 +66,20 @@ var/global/universe_has_ended = 0
 	addtimer(CALLBACK(src, /datum/universal_state/supermatter_cascade/proc/finalize_end_of_universe), 5 MINUTES)
 
 /datum/universal_state/supermatter_cascade/proc/announce_end_of_universe(var/exit_exists)
-	var/end_message = "Attn. [GLOB.using_map.station_name]: Severe gravitational anomalies of unheard of scope have been detected in the local volume. Size and intensity of anomalies are increasing exponentially. Within the hour, a newborn black hole will have consumed everything in this sector."
+	var/end_message = "Attn. [global.using_map.station_name]: Severe gravitational anomalies of unheard of scope have been detected in the local volume. Size and intensity of anomalies are increasing exponentially. Within the hour, a newborn black hole will have consumed everything in this sector."
 	if(exit_exists)
 		end_message += "\n\nCuriously, the distortion is predicted to form a traversable wormhole quite close to your current location in approximately five minutes. The terminus is unknown, but it must be better than behind a hungry singularity. Godspeed."
 	end_message += "\n\nAUTOMATED ALERT: Link to [command_name()] lost."
 	priority_announcement.Announce(end_message, "SUPERMATTER CASCADE DETECTED")
 
 /datum/universal_state/supermatter_cascade/proc/finalize_end_of_universe()
-	GLOB.cinematic.station_explosion_cinematic(0,null) // TODO: Custom cinematic
+	global.cinematic.station_explosion_cinematic(0,null) // TODO: Custom cinematic
 	universe_has_ended = TRUE
 
 /datum/universal_state/supermatter_cascade/proc/AreaSet()
-	for(var/area/A as anything in global.areas)
+	for(var/area/A AS_ANYTHING in global.areas)
 		var/invalid_area = FALSE
-		for(var/check_area in GLOB.using_map.get_universe_end_evac_areas())
+		for(var/check_area in global.using_map.get_universe_end_evac_areas())
 			if(istype(A, check_area))
 				invalid_area = TRUE
 				break
@@ -89,7 +89,7 @@ var/global/universe_has_ended = 0
 /datum/universal_state/supermatter_cascade/OverlayAndAmbientSet()
 	spawn(0)
 		for(var/datum/lighting_corner/L in world)
-			if(L.z in GLOB.using_map.admin_levels)
+			if(L.z in global.using_map.admin_levels)
 				L.update_lumcount(1,1,1)
 			else
 				L.update_lumcount(0.0, 0.4, 1)
@@ -113,7 +113,7 @@ var/global/universe_has_ended = 0
 			APC.queue_icon_update()
 
 /datum/universal_state/supermatter_cascade/proc/PlayerSet()
-	for(var/datum/mind/M in GLOB.player_list)
+	for(var/datum/mind/M in global.player_list)
 		if(!istype(M.current,/mob/living))
 			continue
 		if(M.current.stat!=2)

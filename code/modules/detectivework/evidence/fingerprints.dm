@@ -12,7 +12,7 @@
 		add_data(F)
 
 /datum/forensics/fingerprints/add_data(var/datum/fingerprint/newprint)
-	if(newprint.completeness <= 0)
+	if(!newprint || newprint.completeness <= 0)
 		return
 	for(var/datum/fingerprint/F in data)
 		if(F.merge(newprint))

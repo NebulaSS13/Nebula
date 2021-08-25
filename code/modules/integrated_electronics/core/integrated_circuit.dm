@@ -238,7 +238,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 	onclose(user, "assembly-\ref[src.assembly]")
 
-/obj/item/integrated_circuit/Topic(href, href_list, state = GLOB.physical_state)
+/obj/item/integrated_circuit/Topic(href, href_list, state = global.physical_topic_state)
 	if(..())
 		return 1
 
@@ -284,7 +284,8 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		. = IC_TOPIC_REFRESH
 
 	else if(href_list["remove"] && assembly)
-		if(istype(held_item, /obj/item/screwdriver))
+		var/obj/item/held_item_obj = held_item
+		if(isScrewdriver(held_item_obj))
 			disconnect_all()
 			dropInto(loc)
 			playsound(src, 'sound/items/Crowbar.ogg', 50, 1)

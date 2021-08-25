@@ -91,11 +91,12 @@
 
 /obj/item/clothing/on_update_icon()
 	..()
+	var/base_state = get_world_inventory_state()
 	cut_overlays()
 	if(markings_icon && markings_color)
-		add_overlay(mutable_appearance(icon, "[get_world_inventory_state()][markings_icon]", markings_color))
+		add_overlay(mutable_appearance(icon, "[base_state][markings_icon]", markings_color))
 	for(var/obj/item/clothing/accessory/accessory in accessories)
-		var/image/I = accessory.get_attached_inventory_overlay()
+		var/image/I = accessory.get_attached_inventory_overlay(base_state)
 		if(I)
 			add_overlay(I)
 
@@ -182,7 +183,7 @@
 	var/mob/user = usr
 	if(istype(user))
 		var/turf/T = get_turf(src)
-		var/can_see = T.CanUseTopic(user, GLOB.view_state) != STATUS_CLOSE
+		var/can_see = T.CanUseTopic(user, global.view_topic_state) != STATUS_CLOSE
 		if(href_list["list_ungabunga"])
 			if(length(accessories) && can_see)
 				var/list/ties = list()

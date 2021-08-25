@@ -67,15 +67,15 @@
 	START_PROCESSING(SSobj, src)
 	target = L
 	update_icon()
-	GLOB.destroyed_event.register(L,src,/obj/structure/deity/altar/proc/remove_target)
-	GLOB.moved_event.register(L, src, /obj/structure/deity/altar/proc/remove_target)
-	GLOB.death_event.register(L, src, /obj/structure/deity/altar/proc/remove_target)
+	events_repository.register(/decl/observ/destroyed, L,src,/obj/structure/deity/altar/proc/remove_target)
+	events_repository.register(/decl/observ/moved, L, src, /obj/structure/deity/altar/proc/remove_target)
+	events_repository.register(/decl/observ/death, L, src, /obj/structure/deity/altar/proc/remove_target)
 
 /obj/structure/deity/altar/proc/remove_target()
 	STOP_PROCESSING(SSobj, src)
-	GLOB.destroyed_event.unregister(target, src)
-	GLOB.moved_event.unregister(target, src)
-	GLOB.death_event.unregister(target, src)
+	events_repository.unregister(/decl/observ/destroyed, target, src)
+	events_repository.unregister(/decl/observ/moved, target, src)
+	events_repository.unregister(/decl/observ/death, target, src)
 	target = null
 	update_icon()
 

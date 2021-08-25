@@ -381,7 +381,7 @@
 					to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
 
 	if(screen_shake)
-		shake_camera(user, max(burst_delay*burst, fire_delay), screen_shake)
+		shake_camera(user, (burst > 1? burst_delay : fire_delay), screen_shake)
 
 	if(combustion)
 		var/turf/curloc = get_turf(src)
@@ -670,12 +670,26 @@
 	return (autofire_enabled && world.time >= next_fire_time)
 
 /obj/item/gun/proc/check_accidents(mob/living/user, message = "[user] fumbles with the [src] and it goes off!",skill_path = SKILL_WEAPONS, fail_chance = 20, no_more_fail = SKILL_EXPERT, factor = 2)
-	if(istype(user))
-		if(!safety() && user.skill_fail_prob(skill_path, fail_chance, no_more_fail, factor) && special_check(user))
-			user.visible_message(SPAN_WARNING(message))
-			var/list/targets = list(user)
-			var/turf/checking = get_turf(src)
-			targets += RANGE_TURFS(checking, 2)
-			var/picked = pick(targets)
-			afterattack(picked, user)
-			return 1
+	if(istype(user) && !safety() && user.skill_fail_prob(skill_path, fail_chance, no_more_fail, factor) && special_check(user))
+		user.visible_message(SPAN_WARNING(message))
+		var/list/targets = list(user)
+		var/turf/checking = get_turf(src)
+		targets += RANGE_TURFS(checking, 2)
+		var/picked = pick(targets)
+		afterattack(picked, user)
+		return TRUE
+	return FALSE
+
+/obj/item/gun/handle_reflexive_fire(var/mob/user, var/atom/aiming_at)
+	. = ..()
+	if(. && isliving(user))
+		var/mob/living/M = user
+		if(prob(M.skill_fail_chance(SKILL_WEAPONS, 30, SKILL_ADEPT, 3)))
+			to_chat(user, SPAN_WARNING("You fumble with \the [src], throwing off your aim!"))
+			M.stop_aiming(src)
+		else
+			M.setClickCooldown(DEFAULT_QUICK_COOLDOWN) // Spam prevention, essentially.
+			M.visible_message(SPAN_DANGER("\The [M] pulls the trigger reflexively!"))
+			Fire(aiming_at, M)
+			if(M.aiming)
+				M.aiming.toggle_active(FALSE, TRUE)

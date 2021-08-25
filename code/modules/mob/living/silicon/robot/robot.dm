@@ -22,7 +22,8 @@
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
-	var/integrated_light_power = 0.75
+	var/integrated_light_power = 0.6
+	var/integrated_light_range = 4
 	var/datum/wires/robot/wires
 	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
 	var/dismantle_type = /obj/item/robot_parts/robot_suit
@@ -270,7 +271,7 @@
 	if(module && !override)
 		return
 
-	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	var/is_crisis_mode = crisis_override || (crisis && security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
 	var/list/robot_modules = SSrobots.get_available_modules(module_category, is_crisis_mode, override)
 
@@ -430,9 +431,9 @@
 /mob/living/silicon/robot/proc/update_robot_light()
 	if(lights_on)
 		if(intenselight)
-			set_light(integrated_light_power * 2, integrated_light_power)
+			set_light(integrated_light_range, min(0.8, integrated_light_power * 2))
 		else
-			set_light(integrated_light_power)
+			set_light(integrated_light_range, integrated_light_power)
 	else
 		set_light(0)
 
@@ -629,7 +630,7 @@
 		to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"].")
 		update_icon()
 
-	else if(istype(W, /obj/item/screwdriver) && opened && cell)	// radio
+	else if(isScrewdriver(W) && opened && cell)	// radio
 		if(silicon_radio)
 			silicon_radio.attackby(W,user)//Push it to the radio to let it handle everything
 		else
@@ -690,11 +691,15 @@
 	if(istype(user,/mob/living/carbon/human))
 
 		var/mob/living/carbon/human/H = user
+		if(H.a_intent == I_HELP && H.attempt_hug(src))
+			return TRUE
+
 		if(H.a_intent == I_GRAB)
 			return ..()
-		if(H.species.can_shred(H))
+
+		if(H.a_intent == I_HURT && H.species.can_shred(H))
 			attack_generic(H, rand(30,50), "slashed")
-			return
+			return TRUE
 
 	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
 		var/datum/robot_component/cell_component = components["power cell"]
@@ -729,9 +734,7 @@
 				eye_overlays = list()
 			var/image/eye_overlay = eye_overlays[eye_icon_state]
 			if(!eye_overlay)
-				eye_overlay = image(icon, eye_icon_state)
-				eye_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-				eye_overlay.layer = EYE_GLOW_LAYER
+				eye_overlay = emissive_overlay(icon, eye_icon_state)
 				eye_overlays[eye_icon_state] = eye_overlay
 			overlays += eye_overlay
 
@@ -1066,7 +1069,7 @@
 				clear_inherent_laws()
 				laws = new /datum/ai_laws/syndicate_override
 				var/time = time2text(world.realtime,"hh:mm:ss")
-				GLOB.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
+				global.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
 				var/decl/pronouns/G = user.get_pronouns(ignore_coverings = TRUE)
 				set_zeroth_law("Only [user.real_name] and people [G.he] designates as being such are operatives.")
 				SetLockdown(0)

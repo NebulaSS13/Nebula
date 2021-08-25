@@ -13,9 +13,12 @@
 
 	var/literacy_charges = 2 //used to limit the number of books a master literate mob can make
 
+var/global/list/all_skill_verbs
 /datum/skillset/New(mob/mob)
 	owner = mob
-	for(var/datum/skill_verb/SV in GLOB.skill_verbs)
+	if(!global.all_skill_verbs)
+		global.all_skill_verbs = init_subtypes(/datum/skill_verb)
+	for(var/datum/skill_verb/SV in global.all_skill_verbs)
 		if(SV.should_have_verb(src))
 			SV.give_to_skillset(src)
 	..()
@@ -58,7 +61,7 @@
 /datum/skillset/proc/update_special_effects()
 	if(!owner)
 		return
-	for(var/decl/hierarchy/skill/skill in GLOB.skills)
+	for(var/decl/hierarchy/skill/skill in global.skills)
 		skill.update_special_effects(owner, get_value(skill.type))
 
 /datum/skillset/proc/obtain_from_client(datum/job/job, client/given_client, override = 0)
@@ -72,7 +75,7 @@
 	var/allocation = given_client.prefs.skills_allocated[job] || list()
 	skill_list = list()
 
-	for(var/decl/hierarchy/skill/S in GLOB.skills)
+	for(var/decl/hierarchy/skill/S in global.skills)
 		var/min = job ? given_client.prefs.get_min_skill(job, S) : SKILL_MIN
 		skill_list[S.type] = min + (allocation[S] || 0)
 	on_levels_change()

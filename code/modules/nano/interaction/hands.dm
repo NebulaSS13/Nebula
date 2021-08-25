@@ -1,7 +1,7 @@
 /*
 	This state only checks if user is conscious.
 */
-GLOBAL_DATUM_INIT(hands_state, /datum/topic_state/hands, new)
+var/global/datum/topic_state/hands/hands_topic_state = new
 
 /datum/topic_state/hands/can_use_topic(src_object, mob/user)
 	. = user.shared_nano_interaction(src_object)

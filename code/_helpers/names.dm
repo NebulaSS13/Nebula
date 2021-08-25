@@ -1,4 +1,4 @@
-var/church_name = null
+var/global/church_name = null
 /proc/church_name()
 	if (church_name)
 		return church_name
@@ -15,23 +15,18 @@ var/church_name = null
 
 	return name
 
-var/command_name = null
+var/global/command_name
 /proc/command_name()
-	if (command_name)
-		return command_name
-
-	var/name = "[GLOB.using_map.boss_name]"
-
-	command_name = name
-	return name
+	if (global.command_name)
+		return global.command_name
+	global.command_name = "[global.using_map.boss_name]"
+	return global.command_name
 
 /proc/change_command_name(var/name)
+	global.command_name = name
+	return global.command_name
 
-	command_name = name
-
-	return name
-
-var/religion_name = null
+var/global/religion_name = null
 /proc/religion_name()
 	if (religion_name)
 		return religion_name
@@ -44,66 +39,66 @@ var/religion_name = null
 	return capitalize(name)
 
 /proc/system_name()
-	return GLOB.using_map.system_name ? GLOB.using_map.system_name : generate_system_name()
+	return global.using_map.system_name ? global.using_map.system_name : generate_system_name()
 
 /proc/generate_system_name()
 	return "[pick("Gilese","GSC", "Luyten", "GJ", "HD")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
 
 /proc/generate_planet_name()
-	return "[capitalize(pick(GLOB.last_names))]-[pick(GLOB.greek_letters)]"
+	return "[capitalize(pick(global.last_names))]-[pick(global.greek_letters)]"
 
 /proc/generate_planet_type()
 	return pick("terrestial planet", "ice planet", "dwarf planet", "desert planet", "ocean planet", "lava planet", "gas giant", "forest planet")
 
 /proc/station_name()
-	if(!GLOB.using_map)
+	if(!global.using_map)
 		return config.server_name
-	if (GLOB.using_map.station_name)
-		return GLOB.using_map.station_name
+	if (global.using_map.station_name)
+		return global.using_map.station_name
 
 	var/random = rand(1,5)
 	var/name = ""
 
 	//Rare: Pre-Prefix
 	if(prob(10))
-		name = pick(GLOB.station_prefixes)
-		GLOB.using_map.station_name = name + " "
+		name = pick(global.station_prefixes)
+		global.using_map.station_name = name + " "
 
 	var/holiday_prefix = length(global.current_holiday?.station_prefixes) && pick(global.current_holiday.station_prefixes)
 	if(holiday_prefix)
 		name = holiday_prefix
-		GLOB.using_map.station_name = "[GLOB.using_map.station_name][holiday_prefix] "
+		global.using_map.station_name = "[global.using_map.station_name][holiday_prefix] "
 
 	// Suffix
-	name = pick(GLOB.station_suffixes)
-	GLOB.using_map.station_name += name + " "
+	name = pick(global.station_suffixes)
+	global.using_map.station_name += name + " "
 
 	var/holiday_suffix = length(global.current_holiday?.station_suffixes) && pick(global.current_holiday.station_suffixes)
 	if(holiday_suffix)
-		GLOB.using_map.station_name += holiday_suffix
+		global.using_map.station_name += holiday_suffix
 	else
 		// ID Number
 		switch(random)
 			if(1)
-				GLOB.using_map.station_name += "[rand(1, 99)]"
+				global.using_map.station_name += "[rand(1, 99)]"
 			if(2)
-				GLOB.using_map.station_name += pick(GLOB.greek_letters)
+				global.using_map.station_name += pick(global.greek_letters)
 			if(3)
-				GLOB.using_map.station_name += "\Roman[rand(1,99)]"
+				global.using_map.station_name += "\Roman[rand(1,99)]"
 			if(4)
-				GLOB.using_map.station_name += pick(GLOB.phonetic_alphabet)
+				global.using_map.station_name += pick(global.phonetic_alphabet)
 			if(5)
-				GLOB.using_map.station_name += pick(GLOB.numbers_as_words)
+				global.using_map.station_name += pick(global.numbers_as_words)
 
 	if (config && config.server_name)
 		world.name = "[config.server_name]: [name]"
 	else
-		world.name = GLOB.using_map.station_name
+		world.name = global.using_map.station_name
 
-	return GLOB.using_map.station_name
+	return global.using_map.station_name
 
 /proc/world_name(var/name)
-	GLOB.using_map.station_name = name
+	global.using_map.station_name = name
 
 	if (config && config.server_name)
 		world.name = "[config.server_name]: [name]"
@@ -112,7 +107,7 @@ var/religion_name = null
 
 	return name
 
-var/syndicate_name = null
+var/global/syndicate_name = null
 /proc/syndicate_name()
 	if (syndicate_name)
 		return syndicate_name
@@ -144,8 +139,8 @@ var/syndicate_name = null
 
 
 //Traitors and traitor silicons will get these. Revs will not.
-var/syndicate_code_phrase//Code phrase for traitors.
-var/syndicate_code_response//Code response for traitors.
+var/global/syndicate_code_phrase//Code phrase for traitors.
+var/global/syndicate_code_response//Code response for traitors.
 
 	/*
 	Should be expanded.
@@ -189,9 +184,9 @@ var/syndicate_code_response//Code response for traitors.
 			if(1)//1 and 2 can only be selected once each to prevent more than two specific names/places/etc.
 				switch(rand(1,2))//Mainly to add more options later.
 					if(1)
-						code_phrase += pick(pick(GLOB.first_names_male,GLOB.first_names_female))
+						code_phrase += pick(pick(global.first_names_male,global.first_names_female))
 						code_phrase += " "
-						code_phrase += pick(GLOB.last_names)
+						code_phrase += pick(global.last_names)
 					if(2)
 						code_phrase += pick(SSjobs.titles_to_datums) //Returns a job.
 				safety -= 1
@@ -207,9 +202,9 @@ var/syndicate_code_response//Code response for traitors.
 					if(1)
 						code_phrase += pick(nouns)
 					if(2)
-						code_phrase += pick(GLOB.adjectives)
+						code_phrase += pick(global.adjectives)
 					if(3)
-						code_phrase += pick(GLOB.verbs)
+						code_phrase += pick(global.verbs)
 		if(words==1)
 			code_phrase += "."
 		else

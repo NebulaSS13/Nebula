@@ -1,4 +1,4 @@
-GLOBAL_LIST_EMPTY(all_wormholes)
+var/global/list/all_wormholes = list()
 
 /obj/effect/portal/wormhole
 	name = "wormhole"
@@ -8,10 +8,10 @@ GLOBAL_LIST_EMPTY(all_wormholes)
 
 /obj/effect/portal/wormhole/Initialize()
 	. = ..()
-	GLOB.all_wormholes += src
+	global.all_wormholes += src
 
 /obj/effect/portal/wormhole/Destroy()
-	GLOB.all_wormholes -= src
+	global.all_wormholes -= src
 	return ..()
 
 /obj/effect/portal/wormhole/setup_portal()

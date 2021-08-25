@@ -32,8 +32,9 @@
 /decl/hierarchy/outfit/masked_killer/post_equip(var/mob/living/carbon/human/H)
 	..()
 	var/victim = get_mannequin(H.ckey)
-	for(var/obj/item/carried_item in H.get_equipped_items(TRUE))
-		carried_item.add_blood(victim) //Oh yes, there will be blood.. just not blood from the killer because that's odd
+	if(victim)
+		for(var/obj/item/carried_item in H.get_equipped_items(TRUE))
+			carried_item.add_blood(victim) //Oh yes, there will be blood.. just not blood from the killer because that's odd
 
 /decl/hierarchy/outfit/reaper
 	name = "Reaper"

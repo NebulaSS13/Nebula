@@ -9,14 +9,14 @@
 	. = ..()
 
 /obj/item/psychic_power/telekinesis/Process()
-	if(!focus || !istype(focus.loc, /turf) || get_dist(get_turf(focus), get_turf(owner)) > owner.psi.get_rank(PSI_PSYCHOKINESIS))
+	if(!focus || !isturf(focus.loc) || get_dist(get_turf(focus), get_turf(owner)) > owner.psi.get_rank(PSI_PSYCHOKINESIS))
 		owner.drop_from_inventory(src)
 		return
 	. = ..()
 
 /obj/item/psychic_power/telekinesis/proc/set_focus(var/atom/movable/_focus)
 
-	if(!_focus.simulated || !istype(_focus.loc, /turf))
+	if(!_focus.simulated || !isturf(_focus.loc))
 		return FALSE
 
 	var/check_paramount
@@ -77,7 +77,7 @@
 	else
 		user.visible_message(SPAN_DANGER("\The [user] gestures sharply!"))
 		sparkle()
-		if(!istype(target, /turf) && istype(focus,/obj/item) && target.Adjacent(focus))
+		if(!isturf(target) && istype(focus,/obj/item) && target.Adjacent(focus))
 			var/obj/item/I = focus
 			var/resolved = target.attackby(I, user, user:get_organ_target())
 			if(!resolved && target && I)
@@ -97,7 +97,7 @@
 		O.anchored = 1
 		O.density = 0
 		O.layer = FLY_LAYER
-		O.set_dir(pick(GLOB.cardinal))
+		O.set_dir(pick(global.cardinal))
 		O.icon = 'icons/effects/effects.dmi'
 		O.icon_state = "nothing"
 		flick("empdisable",O)

@@ -86,6 +86,7 @@
 
 	var/tmp/has_inventory_icon	// do not set manually
 	var/tmp/use_single_icon
+	var/center_of_mass = @"{'x':16,'y':16}" //can be null for no exact placement behaviour
 
 // Foley sound callbacks
 /obj/item/proc/equipped_sound_callback()
@@ -413,7 +414,7 @@
 				addtimer(CALLBACK(src, .proc/pickup_sound_callback), 0, (TIMER_OVERRIDE | TIMER_UNIQUE))
 
 //Defines which slots correspond to which slot flags
-var/list/slot_flags_enumeration = list(
+var/global/list/slot_flags_enumeration = list(
 	"[slot_wear_mask_str]" = SLOT_FACE,
 	"[slot_back_str]" = SLOT_BACK,
 	"[slot_wear_suit_str]" = SLOT_OVER_BODY,
@@ -695,20 +696,20 @@ var/list/slot_flags_enumeration = list(
 	add_coating(/decl/material/liquid/blood, amount, blood_data)
 	return 1 //we applied blood to the item
 
-GLOBAL_LIST_EMPTY(blood_overlay_cache)
+var/global/list/blood_overlay_cache = list()
 
 /obj/item/proc/generate_blood_overlay(force = FALSE)
 	if(blood_overlay && !force)
 		return
-	if(GLOB.blood_overlay_cache["[icon]" + icon_state])
-		blood_overlay = GLOB.blood_overlay_cache["[icon]" + icon_state]
+	if(global.blood_overlay_cache["[icon]" + icon_state])
+		blood_overlay = global.blood_overlay_cache["[icon]" + icon_state]
 		return
 	var/icon/I = new /icon(icon, icon_state)
 	I.Blend(new /icon('icons/effects/blood.dmi', rgb(255,255,255)),ICON_ADD) //fills the icon_state with white (except where it's transparent)
 	I.Blend(new /icon('icons/effects/blood.dmi', "itemblood"),ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
 	blood_overlay = image(I)
 	blood_overlay.appearance_flags |= NO_CLIENT_COLOR|RESET_COLOR
-	GLOB.blood_overlay_cache["[icon]" + icon_state] = blood_overlay
+	global.blood_overlay_cache["[icon]" + icon_state] = blood_overlay
 
 /obj/item/proc/showoff(mob/user)
 	for(var/mob/M in view(user))
@@ -770,12 +771,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	user.visible_message("\The [user] peers through [zoomdevicename ? "the [zoomdevicename] of [src]" : "[src]"].")
 
-	GLOB.destroyed_event.register(user, src, /obj/item/proc/unzoom)
-	GLOB.moved_event.register(user, src, /obj/item/proc/unzoom)
-	GLOB.dir_set_event.register(user, src, /obj/item/proc/unzoom)
-	GLOB.item_unequipped_event.register(src, src, /obj/item/proc/zoom_drop)
+	events_repository.register(/decl/observ/destroyed, user, src, /obj/item/proc/unzoom)
+	events_repository.register(/decl/observ/moved, user, src, /obj/item/proc/unzoom)
+	events_repository.register(/decl/observ/dir_set, user, src, /obj/item/proc/unzoom)
+	events_repository.register(/decl/observ/item_unequipped, src, src, /obj/item/proc/zoom_drop)
 	if(isliving(user))
-		GLOB.stat_set_event.register(user, src, /obj/item/proc/unzoom)
+		events_repository.register(/decl/observ/stat_set, user, src, /obj/item/proc/unzoom)
 
 /obj/item/proc/zoom_drop(var/obj/item/I, var/mob/user)
 	unzoom(user)
@@ -785,12 +786,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return
 	zoom = 0
 
-	GLOB.destroyed_event.unregister(user, src, /obj/item/proc/unzoom)
-	GLOB.moved_event.unregister(user, src, /obj/item/proc/unzoom)
-	GLOB.dir_set_event.unregister(user, src, /obj/item/proc/unzoom)
-	GLOB.item_unequipped_event.unregister(src, src, /obj/item/proc/zoom_drop)
+	events_repository.unregister(/decl/observ/destroyed, user, src, /obj/item/proc/unzoom)
+	events_repository.unregister(/decl/observ/moved, user, src, /obj/item/proc/unzoom)
+	events_repository.unregister(/decl/observ/dir_set, user, src, /obj/item/proc/unzoom)
+	events_repository.unregister(/decl/observ/item_unequipped, src, src, /obj/item/proc/zoom_drop)
 	if(isliving(user))
-		GLOB.stat_set_event.unregister(user, src, /obj/item/proc/unzoom)
+		events_repository.unregister(/decl/observ/stat_set, user, src, /obj/item/proc/unzoom)
 
 	if(!user.client)
 		return

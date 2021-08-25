@@ -23,7 +23,7 @@ The "dust" will damage the hull of the station causin minor hull breaches.
 /proc/dust_swarm(var/strength = EVENT_LEVEL_MUNDANE, var/list/zlevels)
 	var/numbers = rand(strength * 10, strength * 15)
 
-	var/start_dir = pick(GLOB.cardinal)
+	var/start_dir = pick(global.cardinal)
 	var/turf/startloc
 	var/turf/targloc
 	var/randomz = pick(zlevels)
@@ -49,4 +49,4 @@ The "dust" will damage the hull of the station causin minor hull breaches.
 	for(var/turf/T in starters)
 		for(var/i = 1 to rocks_per_tile)
 			var/obj/item/projectile/bullet/rock/R = new(T)
-			R.launch(targloc, null, startloc.x - T.x, startloc.y - T.y)
+			R.launch(locate(targloc.x + (T.x - startloc.x), targloc.y + (T.y - startloc.y), targloc.z)) // offset the target to match start offset so we fire in straight lines; this is adapted legacy code

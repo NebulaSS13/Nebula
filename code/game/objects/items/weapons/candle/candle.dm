@@ -64,7 +64,7 @@
 		qdel(src)
 		return
 	update_icon()
-	if(istype(loc, /turf)) //start a fire if possible
+	if(isturf(loc)) //start a fire if possible
 		var/turf/T = loc
 		T.hotspot_expose(700, 5)
 

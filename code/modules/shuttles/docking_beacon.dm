@@ -53,7 +53,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/docking_beacon/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, datum/topic_state/state = GLOB.default_state)
+/obj/machinery/docking_beacon/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, datum/topic_state/state = global.default_topic_state)
 	var/list/data = list()
 	data["size"] = "[docking_width] x [docking_height]"
 	data["locked"] = locked

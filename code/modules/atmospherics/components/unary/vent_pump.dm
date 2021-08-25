@@ -110,7 +110,7 @@
 	QDEL_NULL(sound_token)
 	var/area/A = get_area(src)
 	if(A)
-		GLOB.name_set_event.unregister(A, src, .proc/change_area_name)
+		events_repository.unregister(/decl/observ/name_set, A, src, .proc/change_area_name)
 		A.air_vent_info -= id_tag
 		A.air_vent_names -= id_tag
 	. = ..()
@@ -229,7 +229,7 @@
 			var/new_name = "[A.name] Vent Pump #[A.air_vent_names.len+1]"
 			A.air_vent_names[id_tag] = new_name
 			SetName(new_name)
-			GLOB.name_set_event.register(A, src, .proc/change_area_name)
+			events_repository.register(/decl/observ/name_set, A, src, .proc/change_area_name)
 	. = ..()
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/change_area_name(var/area/A, var/old_area_name, var/new_area_name)
@@ -314,7 +314,7 @@
 			return SPAN_WARNING("You cannot unwrench \the [src], turn it off first.")
 		var/turf/T = src.loc
 		var/hidden_pipe_check = FALSE
-		for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+		for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
 			if(node.level)
 				hidden_pipe_check = TRUE
 				break
@@ -552,7 +552,7 @@
 	if(!sound_id)
 		sound_id = "[sequential_id("vent_z[z]")]"
 	if(can_pump())
-		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/machines/vent_hum.ogg', 10, range = 7, falloff = 4)
+		sound_token = play_looping_sound(src, sound_id, 'sound/machines/vent_hum.ogg', 10, range = 7, falloff = 4)
 	else
 		QDEL_NULL(sound_token)
 

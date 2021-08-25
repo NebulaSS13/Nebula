@@ -5,6 +5,7 @@
 	icon_state = "base"
 	density = 1
 	maxhealth = 100
+	material = /decl/material/solid/metal/steel
 
 	var/welded = 0
 	var/large = 1
@@ -289,11 +290,10 @@
 		src.attack_hand(user)
 
 /obj/structure/closet/proc/slice_into_parts(obj/W, mob/user)
-	new /obj/item/stack/material/steel(src.loc, 2)
 	user.visible_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [W].</span>", \
 						 "<span class='notice'>You have cut \the [src] apart with \the [W].</span>", \
 						 "You hear welding.")
-	dismantle(src)
+	physically_destroyed()
 
 /obj/structure/closet/receive_mouse_drop(atom/dropping, mob/user)
 	. = ..()
@@ -502,4 +502,4 @@
 	return TRUE
 
 /obj/structure/closet/CanUseTopicPhysical(mob/user)
-	return CanUseTopic(user, GLOB.physical_no_access_state)
+	return CanUseTopic(user, global.physical_no_access_topic_state)

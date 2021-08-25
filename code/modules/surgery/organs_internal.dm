@@ -89,10 +89,7 @@
 /decl/surgery_step/internal/detatch_organ
 	name = "Detach organ"
 	description = "This procedure detaches an internal organ for removal."
-	allowed_tools = list(
-		/obj/item/scalpel = 100,
-		/obj/item/shard = 50
-	)
+	allowed_tools = list(TOOL_SCALPEL = 100)
 	min_duration = 90
 	max_duration = 110
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
@@ -139,10 +136,8 @@
 	name = "Remove internal organ"
 	description = "This procedure removes a detached internal organ."
 	allowed_tools = list(
-		/obj/item/hemostat = 100,
-		/obj/item/wirecutters = 75,
-		/obj/item/knife = 75,
-		/obj/item/kitchen/utensil/fork = 20
+		TOOL_HEMOSTAT = 100,
+		TOOL_WIRECUTTERS = 75
 	)
 	min_duration = 60
 	max_duration = 80
@@ -175,7 +170,7 @@
 			return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 	else
 		return ..()
-	
+
 /decl/surgery_step/internal/remove_organ/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("\The [user] starts removing [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].", \
@@ -258,7 +253,7 @@
 				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] in no state to be transplanted."))
 			else if(O.w_class > affected.cavity_max_w_class)
 				to_chat(user, SPAN_WARNING("\The [O.name] [G.is] too big for [affected.cavity_name] cavity!"))
-			else 
+			else
 				var/obj/item/organ/internal/I = target.get_internal_organ(O.organ_tag)
 				if(I && (I.parent_organ == affected.organ_tag))
 					to_chat(user, SPAN_WARNING("\The [target] already has \a [O.name]."))
@@ -300,9 +295,8 @@
 	name = "Attach internal organ"
 	description = "This procedure reattaches a replaced internal organ."
 	allowed_tools = list(
-		/obj/item/sutures = 100,
-		/obj/item/stack/cable_coil = 75,
-		/obj/item/tape_roll = 50
+		TOOL_SUTURES = 100,
+		TOOL_CABLECOIL = 75
 	)
 	min_duration = 100
 	max_duration = 120

@@ -53,13 +53,19 @@
 	initial_access = list(list(access_atmospherics, access_engine_equip))
 	clicksound = "button"
 	clickvol = 30
-
 	layer = ABOVE_WINDOW_LAYER
+
+	base_type = /obj/machinery/alarm
+	frame_type = /obj/item/frame/air_alarm
+	stat_immune = 0
+	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/wall_frame/panel_closed
+	wires = /datum/wires/alarm
+
 
 	var/alarm_id = null
 	var/breach_detection = 1 // Whether to use automatic breach detection or not
 	var/frequency = 1439
-	//var/skipprocess = 0 //Experimenting
 	var/alarm_frequency = 1437
 	var/remote_control = 0
 	var/rcon_setting = 2
@@ -68,8 +74,6 @@
 	var/locked = 1
 	var/aidisabled = 0
 	var/shorted = 0
-
-	wires = /datum/wires/alarm
 
 	var/mode = AALARM_MODE_SCRUBBING
 	var/screen = AALARM_SCREEN_MAIN
@@ -92,12 +96,6 @@
 	var/other_dangerlevel = 0
 	var/environment_type = /decl/environment_data
 	var/report_danger_level = 1
-
-	base_type = /obj/machinery/alarm
-	frame_type = /obj/item/frame/air_alarm
-	stat_immune = 0
-	uncreated_component_parts = null
-	construct_state = /decl/machine_construction/wall_frame/panel_closed
 
 /obj/machinery/alarm/cold
 	target_temperature = T0C+4
@@ -130,7 +128,7 @@
 	. = ..()
 
 /obj/machinery/alarm/Destroy()
-	GLOB.name_set_event.unregister(src, get_area(src), .proc/change_area_name)
+	events_repository.unregister(/decl/observ/name_set, src, get_area(src), .proc/change_area_name)
 	unregister_radio(src, frequency)
 	return ..()
 
@@ -146,8 +144,8 @@
 
 	// breathable air according to human/Life()
 	TLV[/decl/material/gas/oxygen] =			list(16, 19, 135, 140) // Partial pressure, kpa
-	TLV[/decl/material/gas/carbon_dioxide] = list(-1.0, -1.0, 5, 10) // Partial pressure, kpa
-	TLV["other"] =			list(-1.0, -1.0, 0.2, 0.5) // Partial pressure, kpa
+	TLV[/decl/material/gas/carbon_dioxide] = list(-1, -1, 5, 10) // Partial pressure, kpa
+	TLV["other"] =			list(-1, -1, 0.2, 0.5) // Partial pressure, kpa
 	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20) /* kpa */
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+40, T0C+66) // K
 
@@ -156,7 +154,7 @@
 		if(!env_info.important_gasses[g])
 			trace_gas += g
 
-	GLOB.name_set_event.register(alarm_area, src, .proc/change_area_name)
+	events_repository.register(/decl/observ/name_set, alarm_area, src, .proc/change_area_name)
 	set_frequency(frequency)
 	for(var/device_tag in alarm_area.air_scrub_names + alarm_area.air_vent_names)
 		send_signal(device_tag, list()) // ask for updates; they initialized before us and we didn't get the data
@@ -217,7 +215,7 @@
 /obj/machinery/alarm/proc/handle_heating_cooling(var/datum/gas_mixture/environment)
 	if (!regulating_temperature)
 		//check for when we should start adjusting temperature
-		if(!get_danger_level(target_temperature, TLV["temperature"]) && abs(environment.temperature - target_temperature) > 2.0)
+		if(!get_danger_level(target_temperature, TLV["temperature"]) && abs(environment.temperature - target_temperature) > 2)
 			update_use_power(POWER_USE_ACTIVE)
 			regulating_temperature = 1
 			visible_message("\The [src] clicks as it starts [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
@@ -476,7 +474,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/data[0]
 	var/remote_connection = istype(state, /datum/topic_state/remote)  // Remote connection means we're non-adjacent/connecting from another computer
 	var/remote_access = remote_connection && CanInteract(user, state) // Remote access means we also have the privilege to alter the air alarm.
@@ -705,7 +703,7 @@
 					if (isnull(newval) || !CanUseTopic(user, state))
 						return TOPIC_HANDLED
 					if (newval<0)
-						selected[threshold] = -1.0
+						selected[threshold] = -1
 					else if (env=="temperature" && newval>5000)
 						selected[threshold] = 5000
 					else if (env=="pressure" && newval>50*ONE_ATMOSPHERE)
@@ -802,18 +800,10 @@ FIRE ALARM
 	icon = 'icons/obj/firealarm.dmi'
 	icon_state = "casing"
 	required_interaction_dexterity = DEXTERITY_SIMPLE_MACHINES
-	var/detecting = 1.0
-	var/working = 1.0
-	var/time = 10.0
-	var/timing = 0.0
-	var/lockdownbyai = 0
-	anchored = 1.0
+	anchored = TRUE
 	idle_power_usage = 2
 	active_power_usage = 6
 	power_channel = ENVIRON
-	var/last_process = 0
-	var/seclevel
-	var/global/list/overlays_cache
 
 	base_type = /obj/machinery/firealarm
 	frame_type = /obj/item/frame/fire_alarm
@@ -821,10 +811,22 @@ FIRE ALARM
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/wall_frame/panel_closed
 
+	var/detecting =    TRUE
+	var/working =      TRUE
+	var/time =         1 SECOND
+	var/timing =       FALSE
+	var/lockdownbyai = FALSE
+	var/last_process = 0
+	var/seclevel
+	var/static/list/overlays_cache
+
+	var/sound_id
+	var/datum/sound_token/sound_token
+
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
-	if(loc.z in GLOB.using_map.contact_levels)
-		var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	if(loc.z in global.using_map.contact_levels)
+		var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/firealarm/proc/get_cached_overlay(key)
@@ -847,7 +849,7 @@ FIRE ALARM
 
 	pixel_x = 0
 	pixel_y = 0
-	var/walldir = (dir & (NORTH|SOUTH)) ? GLOB.reverse_dir[dir] : dir
+	var/walldir = (dir & (NORTH|SOUTH)) ? global.reverse_dir[dir] : dir
 	var/turf/T = get_step(get_turf(src), walldir)
 	if(istype(T) && T.density)
 		if(dir == SOUTH)
@@ -875,8 +877,8 @@ FIRE ALARM
 		if(!detecting)
 			overlays += get_cached_overlay("fire1")
 			set_light(2, 0.25, COLOR_RED)
-		else if(z in GLOB.using_map.contact_levels)
-			var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+		else if(z in global.using_map.contact_levels)
+			var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 			var/decl/security_level/sl = security_state.current_security_level
 
 			set_light(sl.light_power, sl.light_range, sl.light_color_alarm)
@@ -940,7 +942,7 @@ FIRE ALARM
 	var/d1
 	var/d2
 
-	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon))
 		A = A.loc
 
@@ -1002,6 +1004,7 @@ FIRE ALARM
 	for(var/obj/machinery/firealarm/FA in area)
 		fire_alarm.clearAlarm(loc, FA)
 	update_icon()
+	QDEL_NULL(sound_token)
 	return
 
 /obj/machinery/firealarm/proc/alarm(var/duration = 0)
@@ -1011,28 +1014,34 @@ FIRE ALARM
 	for(var/obj/machinery/firealarm/FA in area)
 		fire_alarm.triggerAlarm(loc, FA, duration)
 	update_icon()
-	playsound(src, 'sound/machines/fire_alarm.ogg', 75, 0)
+	if(!sound_token)
+		sound_token = play_looping_sound(src, sound_id, 'sound/machines/fire_alarm.ogg', 75)
 	return
 
+/obj/machinery/firealarm/Destroy()
+	QDEL_NULL(sound_token)
+	. = ..()
+	
 /obj/machinery/firealarm/Initialize(mapload, dir)
 	. = ..()
 	if(dir)
-		set_dir((dir & (NORTH|SOUTH)) ? dir : GLOB.reverse_dir[dir])
+		set_dir((dir & (NORTH|SOUTH)) ? dir : global.reverse_dir[dir])
 	queue_icon_update()
+	sound_id = "firealarm_\ref[src]"
 
 /obj/machinery/partyalarm
 	name = "\improper PARTY BUTTON"
 	desc = "Cuban Pete is in the house!"
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "fire0"
-	var/detecting = 1.0
-	var/working = 1.0
-	var/time = 10.0
-	var/timing = 0.0
-	var/lockdownbyai = 0
-	anchored = 1.0
+	anchored = TRUE
 	idle_power_usage = 2
 	active_power_usage = 6
+	var/time =         1 SECOND
+	var/timing =       FALSE
+	var/lockdownbyai = FALSE
+	var/detecting =    TRUE
+	var/working =      TRUE
 
 /obj/machinery/partyalarm/interface_interact(mob/user)
 	interact(user)

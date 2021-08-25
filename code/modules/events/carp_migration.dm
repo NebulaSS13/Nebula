@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated with a list of all the carp spawned by carp events
+var/global/list/carp_count = list() // a list of Z levels (string), associated with a list of all the carp spawned by carp events
 
 /datum/event/carp_migration
 	announceWhen	= 45
@@ -15,8 +15,8 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 /datum/event/carp_migration/proc/count_carps()
 	var/total_carps
 	var/local_carps
-	for(var/Z in GLOB.carp_count)
-		var/list/L = GLOB.carp_count[Z]
+	for(var/Z in global.carp_count)
+		var/list/L = global.carp_count[Z]
 		total_carps += L.len
 		if(text2num(Z) in affecting_z)
 			local_carps += L.len
@@ -48,7 +48,7 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 	var/Z = pick(affecting_z)
 
 	if(!direction)
-		direction = pick(GLOB.cardinal)
+		direction = pick(global.cardinal)
 
 	if(!speed)
 		speed = rand(1,3)
@@ -64,11 +64,11 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 			else
 				M = new /mob/living/simple_animal/hostile/carp/pike(T)
 				I += 3
-			GLOB.death_event.register(M,src,/datum/event/carp_migration/proc/reduce_carp_count)
-			GLOB.destroyed_event.register(M,src,/datum/event/carp_migration/proc/reduce_carp_count)
-			LAZYADD(GLOB.carp_count["[Z]"], M)
+			events_repository.register(/decl/observ/death, M,src,/datum/event/carp_migration/proc/reduce_carp_count)
+			events_repository.register(/decl/observ/destroyed, M,src,/datum/event/carp_migration/proc/reduce_carp_count)
+			LAZYADD(global.carp_count["[Z]"], M)
 			spawned_carp ++
-			M.throw_at(get_random_edge_turf(GLOB.reverse_dir[direction],TRANSITIONEDGE + 2, Z), 250, speed, callback = CALLBACK(src,/datum/event/carp_migration/proc/check_gib,M))
+			M.throw_at(get_random_edge_turf(global.reverse_dir[direction],TRANSITIONEDGE + 2, Z), 250, speed, callback = CALLBACK(src,/datum/event/carp_migration/proc/check_gib,M))
 		I++
 		if(no_show)
 			break
@@ -93,12 +93,12 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 
 /datum/event/carp_migration/proc/reduce_carp_count(var/mob/M)
 	for(var/Z in affecting_z)
-		var/list/L = GLOB.carp_count["[Z]"]
+		var/list/L = global.carp_count["[Z]"]
 		if(M in L)
 			LAZYREMOVE(L,M)
 			break
-	GLOB.death_event.unregister(M,src,/datum/event/carp_migration/proc/reduce_carp_count)
-	GLOB.destroyed_event.unregister(M,src,/datum/event/carp_migration/proc/reduce_carp_count)
+	events_repository.unregister(/decl/observ/death, M,src,/datum/event/carp_migration/proc/reduce_carp_count)
+	events_repository.unregister(/decl/observ/destroyed, M,src,/datum/event/carp_migration/proc/reduce_carp_count)
 
 /datum/event/carp_migration/end()
 	log_debug("Carp migration event spawned [spawned_carp] carp.")

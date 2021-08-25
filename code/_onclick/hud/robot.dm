@@ -1,4 +1,4 @@
-var/obj/screen/robot_inventory
+var/global/obj/screen/robot_inventory
 
 /obj/screen/robot_drop_grab
 	name = "drop grab"

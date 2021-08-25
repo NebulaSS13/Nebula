@@ -37,7 +37,7 @@
 	for (var/V in O.vars)
 		names += V
 
-	names = sortList(names)
+	names = sortTim(names, /proc/cmp_text_asc)
 
 	var/variable = ""
 
@@ -125,7 +125,7 @@
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
 
-				else if(istype(O, /turf))
+				else if(isturf(O))
 					for(var/turf/A in world)
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
@@ -141,7 +141,7 @@
 						if (A.type == O.type)
 							A.vars[variable] = O.vars[variable]
 
-				else if(istype(O, /turf))
+				else if(isturf(O))
 					for(var/turf/A in world)
 						if (A.type == O.type)
 							A.vars[variable] = O.vars[variable]
@@ -165,7 +165,7 @@
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
 
-				else if(istype(O, /turf))
+				else if(isturf(O))
 					for(var/turf/A in world)
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
@@ -180,7 +180,7 @@
 						if (A.type == O.type)
 							A.vars[variable] = O.vars[variable]
 
-				else if(istype(O, /turf))
+				else if(isturf(O))
 					for(var/turf/A in world)
 						if (A.type == O.type)
 							A.vars[variable] = O.vars[variable]
@@ -202,7 +202,7 @@
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
 
-				else if(istype(O, /turf))
+				else if(isturf(O))
 					for(var/turf/A in world)
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
@@ -218,7 +218,7 @@
 						if (A.type == O.type)
 							A.vars[variable] = O.vars[variable]
 
-				else if(istype(O, /turf))
+				else if(isturf(O))
 					for(var/turf/A in world)
 						if (A.type == O.type)
 							A.vars[variable] = O.vars[variable]
@@ -239,7 +239,7 @@
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
 
-				else if(istype(O, /turf))
+				else if(isturf(O))
 					for(var/turf/A in world)
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
@@ -254,7 +254,7 @@
 						if (A.type == O.type)
 							A.vars[variable] = O.vars[variable]
 
-				else if(istype(O, /turf))
+				else if(isturf(O))
 					for(var/turf/A in world)
 						if (A.type == O.type)
 							A.vars[variable] = O.vars[variable]
@@ -275,7 +275,7 @@
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
 
-				else if(istype(O.type, /turf))
+				else if(isturf(O.type))
 					for(var/turf/A in world)
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
@@ -290,7 +290,7 @@
 						if (A.type == O.type)
 							A.vars[variable] = O.vars[variable]
 
-				else if(istype(O.type, /turf))
+				else if(isturf(O.type))
 					for(var/turf/A in world)
 						if (A.type == O.type)
 							A.vars[variable] = O.vars[variable]
@@ -310,7 +310,7 @@
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
 
-				else if(istype(O, /turf))
+				else if(isturf(O))
 					for(var/turf/A in world)
 						if ( istype(A , O.type) )
 							A.vars[variable] = O.vars[variable]
@@ -326,7 +326,7 @@
 						if (A.type == O.type)
 							A.vars[variable] = O.vars[variable]
 
-				else if(istype(O, /turf))
+				else if(isturf(O))
 					for(var/turf/A in world)
 						if (A.type == O.type)
 							A.vars[variable] = O.vars[variable]

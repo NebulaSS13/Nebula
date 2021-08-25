@@ -14,7 +14,7 @@
 
 /obj/item/implant/translator/Initialize()
 	. = ..()
-	GLOB.listening_objects += src
+	global.listening_objects += src
 
 /obj/item/implant/translator/hear_talk(mob/M, msg, verb, decl/language/speaking)
 	if(!imp_in)
@@ -33,7 +33,7 @@
 
 /obj/item/implant/translator/Destroy()
 	removed()
-	GLOB.listening_objects -= src
+	global.listening_objects -= src
 	return ..()
 
 /obj/item/implanter/translator

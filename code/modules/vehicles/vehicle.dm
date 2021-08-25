@@ -133,7 +133,7 @@
 	pulse2.icon_state = "empdisable"
 	pulse2.SetName("emp sparks")
 	pulse2.anchored = 1
-	pulse2.set_dir(pick(GLOB.cardinal))
+	pulse2.set_dir(pick(global.cardinal))
 
 	spawn(10)
 		qdel(pulse2)
@@ -182,8 +182,7 @@
 	src.visible_message("<span class='danger'>\The [src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/stack/material/rods(Tsec)
-	new /obj/item/stack/material/rods(Tsec)
+	SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(src), 2, /obj/item/stack/material/rods)
 	new /obj/item/stack/cable_coil/cut(Tsec)
 
 	if(cell)
@@ -303,7 +302,7 @@
 	//if these all result in the same turf as the vehicle or nullspace, pick a new turf with open space
 	if(!dest || dest == get_turf(src))
 		var/list/options = new()
-		for(var/test_dir in GLOB.alldirs)
+		for(var/test_dir in global.alldirs)
 			var/new_dir = get_step_to(src, get_step(src, test_dir))
 			if(new_dir && load.Adjacent(new_dir))
 				options += new_dir

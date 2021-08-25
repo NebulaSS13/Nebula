@@ -36,7 +36,7 @@
 		deselect_shield()
 	return shields
 
-/datum/nano_module/program/shields_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/shields_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
 	if(!can_connect_to_shield(active))
 		deselect_shield()
@@ -103,14 +103,14 @@
 		var/obj/machinery/power/shield_generator/S = locate(href_list["ref"]) in shields
 		if(S)
 			deselect_shield()
-			GLOB.destroyed_event.register(S, src, /datum/nano_module/program/shields_monitor/proc/deselect_shield)
+			events_repository.register(/decl/observ/destroyed, S, src, /datum/nano_module/program/shields_monitor/proc/deselect_shield)
 			active = S
 		return 1
 
 /datum/nano_module/program/shields_monitor/proc/deselect_shield(var/source)
 	if(!active)
 		return
-	GLOB.destroyed_event.unregister(active, src)
+	events_repository.unregister(/decl/observ/destroyed, active, src)
 	active = null
 	if(source) // source is only set if called by the shield destroyed event, which is the only time we want to update the UI
 		SSnano.update_uis(src)

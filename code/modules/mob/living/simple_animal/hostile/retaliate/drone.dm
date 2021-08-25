@@ -10,9 +10,6 @@
 	rapid = 0
 	speak_chance = 5
 	turns_per_move = 3
-	response_help = "pokes"
-	response_disarm = "gently pushes aside"
-	response_harm = "hits"
 	speak = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
 	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
 	a_intent = I_HURT
@@ -54,6 +51,13 @@
 
 	var/has_loot = 1
 	faction = "malf_drone"
+
+	var/static/list/debris = list(
+		/decl/material/solid/glass =          /obj/item/shard,
+		/decl/material/solid/metal/steel =    /obj/item/stack/material/rods,
+		/decl/material/solid/metal/plasteel = null
+	)
+
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Initialize()
 	. = ..()
@@ -174,46 +178,15 @@
 	//some random debris left behind
 	if(has_loot)
 		spark_at(src, cardinal_only = TRUE)
-		var/obj/O
 
-		//shards
-		O = new /obj/item/shard(src.loc)
-		step_to(O, get_turf(pick(view(7, src))))
-		if(prob(75))
-			O = new /obj/item/shard(src.loc)
-			step_to(O, get_turf(pick(view(7, src))))
-		if(prob(50))
-			O = new /obj/item/shard(src.loc)
-			step_to(O, get_turf(pick(view(7, src))))
-		if(prob(25))
-			O = new /obj/item/shard(src.loc)
-			step_to(O, get_turf(pick(view(7, src))))
-
-		//rods
-		O = new /obj/item/stack/material/rods(loc)
-		step_to(O, get_turf(pick(view(7, src))))
-		if(prob(75))
-			O = new /obj/item/stack/material/rods(loc)
-			step_to(O, get_turf(pick(view(7, src))))
-		if(prob(50))
-			O = new /obj/item/stack/material/rods(loc)
-			step_to(O, get_turf(pick(view(7, src))))
-		if(prob(25))
-			O = new /obj/item/stack/material/rods(loc)
-			step_to(O, get_turf(pick(view(7, src))))
-
-		//plasteel
-		O = new /obj/item/stack/material/plasteel(src.loc)
-		step_to(O, get_turf(pick(view(7, src))))
-		if(prob(75))
-			O = new /obj/item/stack/material/plasteel(src.loc)
-			step_to(O, get_turf(pick(view(7, src))))
-		if(prob(50))
-			O = new /obj/item/stack/material/plasteel(src.loc)
-			step_to(O, get_turf(pick(view(7, src))))
-		if(prob(25))
-			O = new /obj/item/stack/material/plasteel(src.loc)
-			step_to(O, get_turf(pick(view(7, src))))
+		var/atom/movable/M
+		for(var/mat in debris)
+			for(var/chance in list(100, 75, 50, 25))
+				if(!prob(chance))
+					break
+				M = SSmaterials.create_object(mat, loc, 1, debris[mat])
+				if(istype(M))
+					step_to(M, get_turf(pick(view(7, src))))
 
 		//also drop dummy circuit boards deconstructable for research (loot)
 		var/obj/item/stock_parts/circuitboard/C

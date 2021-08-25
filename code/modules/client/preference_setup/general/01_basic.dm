@@ -9,23 +9,23 @@
 	name = "Basic"
 	sort_order = 1
 
-/datum/category_item/player_setup_item/physical/basic/load_character(var/savefile/S)
-	from_file(S["gender"],                pref.gender)
-	from_file(S["bodytype"],              pref.bodytype)
-	from_file(S["spawnpoint"],            pref.spawnpoint)
-	from_file(S["real_name"],             pref.real_name)
-	from_file(S["name_is_always_random"], pref.be_random_name)
+/datum/category_item/player_setup_item/physical/basic/load_character(datum/pref_record_reader/R)
+	pref.gender =         R.read("gender")
+	pref.bodytype =       R.read("bodytype")
+	pref.spawnpoint =     R.read("spawnpoint")
+	pref.real_name =      R.read("real_name")
+	pref.be_random_name = R.read("name_is_always_random")
 
-/datum/category_item/player_setup_item/physical/basic/save_character(var/savefile/S)
-	to_file(S["gender"],                  pref.gender)
-	to_file(S["bodytype"],                pref.bodytype)
-	to_file(S["spawnpoint"],              pref.spawnpoint)
-	to_file(S["real_name"],               pref.real_name)
-	to_file(S["name_is_always_random"],   pref.be_random_name)
+/datum/category_item/player_setup_item/physical/basic/save_character(datum/pref_record_writer/W)
+	W.write("gender",                pref.gender)
+	W.write("bodytype",              pref.bodytype)
+	W.write("spawnpoint",            pref.spawnpoint)
+	W.write("real_name",             pref.real_name)
+	W.write("name_is_always_random", pref.be_random_name)
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
 
-	var/decl/species/S  = get_species_by_key(pref.species) || get_species_by_key(GLOB.using_map.default_species)
+	var/decl/species/S  = get_species_by_key(pref.species) || get_species_by_key(global.using_map.default_species)
 	pref.spawnpoint     = sanitize_inlist(pref.spawnpoint, spawntypes(), initial(pref.spawnpoint))
 	pref.be_random_name = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
 

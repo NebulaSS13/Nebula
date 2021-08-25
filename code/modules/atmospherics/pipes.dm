@@ -57,7 +57,7 @@
 
 /obj/machinery/atmospherics/pipe/proc/update_sound(var/playing)
 	if(playing && !sound_token)
-		sound_token = GLOB.sound_player.PlayLoopingSound(src, SOUND_ID, "sound/machines/pipeleak.ogg", volume = 8, range = 3, falloff = 1, prefer_mute = TRUE)
+		sound_token = play_looping_sound(src, SOUND_ID, "sound/machines/pipeleak.ogg", volume = 8, range = 3, falloff = 1, prefer_mute = TRUE)
 	else if(!playing && sound_token)
 		QDEL_NULL(sound_token)
 
@@ -165,12 +165,12 @@
 /obj/machinery/atmospherics/pipe/set_color(new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
-	for(var/obj/machinery/atmospherics/node as anything in nodes_to_networks)
+	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_to_networks)
 		node.update_icon()
 
 /obj/machinery/atmospherics/pipe/proc/try_leak()
 	var/missing = FALSE
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		if((direction & initialize_directions) && !length(nodes_in_dir(direction)))
 			missing = TRUE
 			break
@@ -218,7 +218,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/check_pressure(pressure)
 	// Don't ask me, it happened somehow.
-	if (!istype(loc, /turf))
+	if (!isturf(loc))
 		return 1
 
 	var/datum/gas_mixture/environment = loc.return_air()
@@ -250,7 +250,7 @@
 		return
 
 	var/integrity_key = ""
-	for(var/direction in GLOB.cardinal) // go through initialize directions in flag order, add "1" if there's a node and "0" if not, that's the key
+	for(var/direction in global.cardinal) // go through initialize directions in flag order, add "1" if there's a node and "0" if not, that's the key
 		if(!(direction & initialize_directions))
 			continue
 		integrity_key += "[!!length(nodes_in_dir(direction))]"
@@ -380,7 +380,7 @@
 	add_overlay("clamps[icon_connect_type]")
 
 	underlays.Cut()
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		if(!(direction & initialize_directions))
 			continue
 		var/list/check_nodes = nodes_in_dir(direction)
@@ -504,7 +504,7 @@
 	add_overlay("clamps_4way[icon_connect_type]")
 
 	underlays.Cut()
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		if(!(direction & initialize_directions))
 			continue
 		var/list/check_nodes = nodes_in_dir(direction)
@@ -683,7 +683,7 @@
 	icon_state = "universal"
 
 	underlays.Cut()
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		if(direction & initialize_directions)
 			universal_underlays(direction)
 
@@ -701,14 +701,14 @@
 	icon_state = "universal"
 
 	underlays.Cut()
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		if(direction & initialize_directions)
 			universal_underlays(direction)
 
 /obj/machinery/atmospherics/proc/universal_underlays(var/direction)
 	var/turf/T = loc
 	var/connections = list("", "-supply", "-scrubbers")
-	for(var/obj/machinery/atmospherics/node as anything in nodes_in_dir(direction))
+	for(var/obj/machinery/atmospherics/node AS_ANYTHING in nodes_in_dir(direction))
 		if(node.icon_connect_type in connections)
 			connections[node.icon_connect_type] = node
 	for(var/suffix in connections)

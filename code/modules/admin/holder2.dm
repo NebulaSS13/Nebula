@@ -2,7 +2,7 @@
 #define STEALTH_MANUAL 1
 #define STEALTH_AUTO 2
 
-var/list/admin_datums = list()
+var/global/list/admin_datums = list()
 
 /datum/admins
 	var/rank         = "Temporary Admin"
@@ -26,7 +26,7 @@ var/list/admin_datums = list()
 		error("Admin datum created without a ckey argument. Datum has been deleted")
 		qdel(src)
 		return
-	admincaster_signature = "[GLOB.using_map.company_name] Officer #[rand(0,9)][rand(0,9)][rand(0,9)]"
+	admincaster_signature = "[global.using_map.company_name] Officer #[rand(0,9)][rand(0,9)][rand(0,9)]"
 	rank = initial_rank
 	rights = initial_rights
 	admin_datums[ckey] = src
@@ -40,18 +40,18 @@ var/list/admin_datums = list()
 		owner = C
 		owner.holder = src
 		owner.add_admin_verbs()	//TODO
-		GLOB.admins |= C
+		global.admins |= C
 
 /datum/admins/proc/disassociate()
 	if(owner)
-		GLOB.admins -= owner
+		global.admins -= owner
 		owner.remove_admin_verbs()
 		owner.deadmin_holder = owner.holder
 		owner.holder = null
 
 /datum/admins/proc/reassociate()
 	if(owner)
-		GLOB.admins += owner
+		global.admins += owner
 		owner.holder = src
 		owner.deadmin_holder = null
 		owner.add_admin_verbs()

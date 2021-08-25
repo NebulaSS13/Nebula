@@ -1,5 +1,0 @@
-author: Koollan
-delete-after: true
-changes:
-  - rscadd: I added some metals and mineral types in order to actually acquire the
-      new metals. This is the first pass. Check the PR for full details.

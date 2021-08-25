@@ -56,7 +56,7 @@
 		alarm_data_cache -= weakref(usr)
 		return TOPIC_REFRESH		
 
-/datum/nano_module/atmos_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/atmos_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
 	if(!length(monitored_alarms))
 		set_monitored_alarms()
@@ -88,9 +88,9 @@
 				alarms[++alarms.len] = list("name" = alarm_name, "ref"= "\ref[alarm]", "danger" = danger_level)
 
 		alarms_data = list()
-		alarms_data["alarms"] = sortByKey(alarms, "name")
-		alarms_data["alarmsAlert"] = sortByKey(alarmsAlert, "name")
-		alarms_data["alarmsDanger"] = sortByKey(alarmsDanger, "name")
+		alarms_data["alarms"] =       sortTim(alarms,       /proc/cmp_list_name_key_asc)
+		alarms_data["alarmsAlert"] =  sortTim(alarmsAlert,  /proc/cmp_list_name_key_asc)
+		alarms_data["alarmsDanger"] = sortTim(alarmsDanger, /proc/cmp_list_name_key_asc)
 		alarm_data_cache[weakref(user)] = alarms_data
 	
 	data += alarms_data

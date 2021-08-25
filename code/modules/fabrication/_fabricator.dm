@@ -27,6 +27,7 @@
 	var/datum/fabricator_build_order/currently_building
 
 	var/fabricator_class = FABRICATOR_CLASS_GENERAL
+	var/filter_string
 
 	var/list/stored_material
 	var/list/storage_capacity
@@ -43,7 +44,7 @@
 	var/fab_status_flags = 0
 	var/mat_efficiency = 1.1
 	var/build_time_multiplier = 1
-	var/global/list/stored_substances_to_names = list()
+	var/static/list/stored_substances_to_names = list()
 
 	var/list/design_cache = list()
 	var/list/installed_designs
@@ -149,6 +150,8 @@
 				design_cache.Remove(R)
 				return
 
+	design_cache = sortTim(design_cache, /proc/cmp_name_asc)
+
 /obj/machinery/fabricator/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
@@ -201,11 +204,8 @@
 
 /obj/machinery/fabricator/dismantle()
 	for(var/mat in stored_material)
-		if(ispath(mat, /decl/material))
-			var/mat_name = stored_substances_to_names[mat]
-			var/decl/material/M = GET_DECL(mat_name)
-			if(stored_material[mat] > SHEET_MATERIAL_AMOUNT)
-				M.place_sheet(get_turf(src), round(stored_material[mat] / SHEET_MATERIAL_AMOUNT), M.type)
+		if(stored_material[mat] > SHEET_MATERIAL_AMOUNT)
+			SSmaterials.create_object(mat, get_turf(src), round(stored_material[mat] / SHEET_MATERIAL_AMOUNT))
 	..()
 	return TRUE
 

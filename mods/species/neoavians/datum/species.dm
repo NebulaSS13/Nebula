@@ -34,7 +34,7 @@
 	holder_type = /obj/item/holder
 	gluttonous = GLUT_TINY
 	blood_volume = 320
-	hunger_factor = 0.1
+	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.6
 
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
@@ -48,6 +48,7 @@
 		)
 
 	has_organ = list(
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
 		BP_HEART =    /obj/item/organ/internal/heart,
 		BP_LUNGS =    /obj/item/organ/internal/lungs,
 		BP_LIVER =    /obj/item/organ/internal/liver,

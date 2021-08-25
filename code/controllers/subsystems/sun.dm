@@ -5,7 +5,7 @@ SUBSYSTEM_DEF(sun)
 	wait = 10 SECONDS
 
 /datum/controller/subsystem/sun/fire()
-	GLOB.sun.calc_position()
+	global.sun.calc_position()
 
 /datum/controller/subsystem/sun/stat_entry()
-	..("Angle:[GLOB.sun.angle]")
+	..("Angle:[global.sun.angle]")

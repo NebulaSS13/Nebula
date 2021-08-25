@@ -1,3 +1,2 @@
-GLOBAL_LIST_EMPTY(all_observable_events)
-
-GLOBAL_LIST_INIT(font_resources, list('fonts/Shage/Shage.ttf'))
+var/global/list/all_observable_events = list()
+var/global/list/font_resources = list('fonts/Shage/Shage.ttf') // Just defined so the font ends up in the RSC.

@@ -280,7 +280,6 @@
 	preview_icon = 'mods/species/ascent/icons/species/body/serpentid/preview.dmi'
 
 	darksight_range = 8
-	darksight_tint = DARKTINT_GOOD
 	slowdown = -0.5
 	rarity_value = 4
 	hud_type = /datum/hud_data/serpentid
@@ -447,7 +446,7 @@
 	else
 		target.turf_collision(T, target.throw_speed / 2)
 	if(prob(50))
-		target.set_dir(GLOB.reverse_dir[target.dir])
+		target.set_dir(global.reverse_dir[target.dir])
 
 /decl/species/serpentid/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)

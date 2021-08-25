@@ -10,6 +10,7 @@
 //Children should call ..() at the end after filling the items list
 /decl/codex_category/Initialize()
 	. = ..()
+
 	if(items.len)
 		var/datum/codex_entry/entry = new(_display_name = "[name] (category)")
 		entry.lore_text = desc + "<hr>"

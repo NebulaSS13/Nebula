@@ -272,7 +272,7 @@
 		var/obj/item/O = target
 		if (src.get_amount() >= 1)
 			var/obj/item/smallDelivery/P = new /obj/item/smallDelivery(get_turf(O.loc))	//Aaannd wrap it up!
-			if(!istype(O.loc, /turf))
+			if(!isturf(O.loc))
 				if(user.client)
 					user.client.screen -= O
 			P.wrapped = O
@@ -349,8 +349,8 @@
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"
 
 	dat += "<table style='width:100%; padding:4px;'><tr>"
-	for(var/i = 1, i <= GLOB.tagger_locations.len, i++)
-		dat += "<td><a href='?src=\ref[src];nextTag=[GLOB.tagger_locations[i]]'>[GLOB.tagger_locations[i]]</a></td>"
+	for(var/i = 1, i <= global.tagger_locations.len, i++)
+		dat += "<td><a href='?src=\ref[src];nextTag=[global.tagger_locations[i]]'>[global.tagger_locations[i]]</a></td>"
 
 		if (i%4==0)
 			dat += "</tr><tr>"
@@ -364,7 +364,7 @@
 	openwindow(user)
 
 /obj/item/destTagger/OnTopic(user, href_list, state)
-	if(href_list["nextTag"] && (href_list["nextTag"] in GLOB.tagger_locations))
+	if(href_list["nextTag"] && (href_list["nextTag"] in global.tagger_locations))
 		src.currTag = href_list["nextTag"]
 		to_chat(user, "<span class='notice'>You set [src] to <b>[src.currTag]</b>.</span>")
 		playsound(src.loc, 'sound/machines/chime.ogg', 50, 1)
@@ -511,4 +511,4 @@
 	matter = null
 	uses_charge = 1
 	charge_costs = list(1)
-	stacktype = /obj/item/stack/package_wrap
+	stack_merge_type = /obj/item/stack/package_wrap

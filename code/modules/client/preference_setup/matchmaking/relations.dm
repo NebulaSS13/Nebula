@@ -6,13 +6,13 @@
 	name = "Matchmaking"
 	sort_order = 1
 
-/datum/category_item/player_setup_item/relations/load_character(var/savefile/S)
-	S["relations"]	>> pref.relations
-	S["relations_info"]	>> pref.relations_info
+/datum/category_item/player_setup_item/relations/load_character(datum/pref_record_reader/R)
+	pref.relations =      R.read("relations")
+	pref.relations_info = R.read("relations_info")
 
-/datum/category_item/player_setup_item/relations/save_character(var/savefile/S)
-	S["relations"]	<< pref.relations
-	S["relations_info"]	<< pref.relations_info
+/datum/category_item/player_setup_item/relations/save_character(datum/pref_record_writer/W)
+	W.write("relations",      pref.relations)
+	W.write("relations_info", pref.relations_info)
 
 /datum/category_item/player_setup_item/relations/sanitize_character()
 	if(!pref.relations)

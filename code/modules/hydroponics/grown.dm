@@ -135,7 +135,7 @@
 				if(H.shoes && H.shoes.item_flags & ITEM_FLAG_NOSLIP)
 					return
 
-			to_chat(M, "<span class='notice'>You slipped on the [name]!</span>")
+			to_chat(M, SPAN_DANGER("You slipped on \the [src]!"))
 			playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
 			SET_STATUS_MAX(M, STAT_STUN, 8)
 			SET_STATUS_MAX(M, STAT_WEAK, 5)
@@ -146,6 +146,16 @@
 	..()
 	if(seed) 
 		seed.thrown_at(src,hit_atom)
+
+var/global/list/_wood_materials = list(
+	/decl/material/solid/wood,
+	/decl/material/solid/wood/mahogany,
+	/decl/material/solid/wood/maple,
+	/decl/material/solid/wood/ebony,
+	/decl/material/solid/wood/walnut,
+	/decl/material/solid/wood/bamboo,
+	/decl/material/solid/wood/yew
+)
 
 /obj/item/chems/food/snacks/grown/attackby(var/obj/item/W, var/mob/user)
 
@@ -171,17 +181,14 @@
 			
 			if(seed.chems)
 				if(isHatchet(W))
-					if(!isnull(seed.chems[/decl/material/solid/wood]))
-						user.visible_message(SPAN_NOTICE("\The [user] makes planks out of \the [src]."))
-						var/obj/item/stack/material/wood/stack = new(user.loc)
-						stack.add_to_stacks(user, TRUE)
-						qdel(src)
-					else if(!isnull(seed.chems[/decl/material/solid/wood/bamboo]))
-						user.visible_message(SPAN_NOTICE("\The [user] makes planks out of \the [src]."))
-						var/obj/item/stack/material/wood/bamboo/stack = new(user.loc)
-						stack.add_to_stacks(user, TRUE)
-						qdel(src)
-					return TRUE
+					for(var/wood_mat in global._wood_materials)
+						if(!isnull(seed.chems[wood_mat]))
+							user.visible_message("<span class='notice'>\The [user] makes planks out of \the [src].</span>")
+							var/obj/item/stack/material/stack = SSmaterials.create_object(wood_mat, user.loc, rand(1,2))
+							stack.add_to_stacks(user, TRUE)
+							qdel(src)
+							return TRUE
+
 				
 				if(!isnull(seed.chems[/decl/material/liquid/drink/juice/potato]))
 					to_chat(user, SPAN_NOTICE("You slice \the [src] into sticks."))
@@ -314,7 +321,7 @@
 	icon = 'icons/obj/hydroponics/hydroponics_misc.dmi'
 	icon_state = ""
 
-var/list/fruit_icon_cache = list()
+var/global/list/fruit_icon_cache = list()
 
 /obj/item/chems/food/snacks/fruit_slice/Initialize(mapload, var/datum/seed/S)
 	. = ..(mapload)
@@ -338,3 +345,17 @@ var/list/fruit_icon_cache = list()
 		I.color = flesh_colour
 		fruit_icon_cache["slice-[rind_colour]"] = I
 	overlays |= fruit_icon_cache["slice-[rind_colour]"]
+
+/obj/item/chems/food/snacks/grown/afterattack(atom/target, mob/user, flag)
+	if(!flag && isliving(user))
+		var/mob/living/M = user
+		M.aim_at(target, src)
+		return
+	. = ..()
+
+/obj/item/chems/food/snacks/grown/handle_reflexive_fire(var/mob/user, var/atom/aiming_at)
+	. = ..()
+	if(.)
+		user.visible_message(SPAN_DANGER("\The [user] reflexively hurls \the [src] at \the [aiming_at]!"))
+		user.throw_item(get_turf(aiming_at), src)
+		user.trigger_aiming(TARGET_CAN_CLICK)

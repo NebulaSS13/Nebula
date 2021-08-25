@@ -39,16 +39,16 @@
 /mob/proc/freetradeunion_rename_company()
 	set name = "Rename Free Trade Union"
 	set category = "Captain's Powers"
-	var/company = sanitize(input(src, "What should your enterprise be called?", "Company name", GLOB.using_map.company_name), MAX_NAME_LEN)
+	var/company = sanitize(input(src, "What should your enterprise be called?", "Company name", global.using_map.company_name), MAX_NAME_LEN)
 	if(!company)
 		return
-	var/company_s = sanitize(input(src, "What's the short name for it?", "Company name", GLOB.using_map.company_short), MAX_NAME_LEN)
-	if(company != GLOB.using_map.company_name)
+	var/company_s = sanitize(input(src, "What's the short name for it?", "Company name", global.using_map.company_short), MAX_NAME_LEN)
+	if(company != global.using_map.company_name)
 		if (company)
-			GLOB.using_map.company_name = company
+			global.using_map.company_name = company
 		if(company_s)
-			GLOB.using_map.company_short = company_s
-		command_announcement.Announce("Congratulations to all members of [capitalize(GLOB.using_map.company_name)] on the new name. Their rebranding has changed the [GLOB.using_map.company_short] market value by [0.01*rand(-10,10)]%.", "Trade Union Name Change")
+			global.using_map.company_short = company_s
+		command_announcement.Announce("Congratulations to all members of [capitalize(global.using_map.company_name)] on the new name. Their rebranding has changed the [global.using_map.company_short] market value by [0.01*rand(-10,10)]%.", "Trade Union Name Change")
 	verbs -= /mob/proc/freetradeunion_rename_company
 
 /datum/job/ministation/hop

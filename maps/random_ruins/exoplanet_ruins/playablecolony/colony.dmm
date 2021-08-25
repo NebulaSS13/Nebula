@@ -192,9 +192,9 @@
 /obj/random/contraband,
 /obj/random/contraband,
 /obj/random/contraband,
-/obj/item/stack/material/tritium/fifty,
-/obj/item/stack/material/deuterium/fifty,
-/obj/item/stack/material/deuterium/fifty,
+/obj/item/stack/material/aerogel/mapped/tritium/fifty,
+/obj/item/stack/material/aerogel/mapped/deuterium/fifty,
+/obj/item/stack/material/aerogel/mapped/deuterium/fifty,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/tcomms)
 "aF" = (
@@ -2266,8 +2266,8 @@
 /obj/item/stock_parts/smes_coil/super_io,
 /obj/item/stock_parts/smes_coil/weak,
 /obj/item/stock_parts/smes_coil/weak,
-/obj/item/stack/material/tritium/fifty,
-/obj/item/stack/material/tritium/fifty,
+/obj/item/stack/material/aerogel/mapped/tritium/fifty,
+/obj/item/stack/material/aerogel/mapped/tritium/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
 "eI" = (
@@ -2767,32 +2767,31 @@
 	dir = 6
 	},
 /obj/structure/closet/crate,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/wood/fifty,
-/obj/item/stack/material/wood/fifty,
-/obj/item/stack/material/wood/fifty,
-/obj/item/stack/material/wood/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/plank/mapped/wood/fifty,
+/obj/item/stack/material/plank/mapped/wood/fifty,
+/obj/item/stack/material/plank/mapped/wood/fifty,
+/obj/item/stack/material/plank/mapped/wood/fifty,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/engineering)
 "fB" = (
 /obj/structure/closet/crate,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
-/obj/item/stack/material/glass/reinforced_borosilicate/ten,
-/obj/item/stack/material/glass/reinforced_borosilicate/ten,
-/obj/item/stack/material/glass/reinforced/fifty,
-/obj/item/stack/material/glass/reinforced/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/rborosilicate/ten,
+/obj/item/stack/material/pane/mapped/rborosilicate/ten,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
+/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
 /obj/item/clothing/head/hardhat/orange,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/engineering)
@@ -3533,9 +3532,9 @@
 	},
 /obj/item/storage/belt/utility,
 /obj/item/storage/belt/utility,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
-/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
 /obj/item/geiger,
 /obj/item/geiger,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -3987,7 +3986,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "hB" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/ammo_magazine/pistol/small,
 /obj/item/ammo_magazine/pistol,
 /obj/item/ammo_magazine/pistol,
@@ -4339,7 +4338,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "ii" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/pistol/holdout,
 /obj/item/gun/projectile/pistol/holdout,
 /obj/item/gun/projectile/pistol,
@@ -4538,7 +4537,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
 "iA" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/shotgun/doublebarrel,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
@@ -4854,7 +4853,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/scanner/gas,
 /obj/item/scanner/gas,
 /obj/item/scanner/gas,
@@ -5646,7 +5645,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/map_template/colony/mineralprocessing)
 "kp" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/energy/gun,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
@@ -5671,7 +5670,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/airlock)
 "kr" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/zipgun,
 /obj/item/gun/projectile/zipgun,
 /obj/item/gun/projectile/zipgun,
@@ -6299,16 +6298,16 @@
 	dir = 8
 	},
 /obj/structure/closet/crate,
-/obj/item/stack/material/plasteel/ten,
-/obj/item/stack/material/plasteel/ten,
-/obj/item/stack/material/copper/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/uranium/ten,
-/obj/item/stack/material/uranium/ten,
-/obj/item/stack/material/platinum/ten,
-/obj/item/stack/material/diamond/ten,
-/obj/item/stack/material/gold/ten,
-/obj/item/stack/material/silver/ten,
+/obj/item/stack/material/reinforced/mapped/plasteel/ten,
+/obj/item/stack/material/reinforced/mapped/plasteel/ten,
+/obj/item/stack/material/ingot/mapped/copper/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/puck/mapped/uranium/ten,
+/obj/item/stack/material/puck/mapped/uranium/ten,
+/obj/item/stack/material/ingot/mapped/platinum/ten,
+/obj/item/stack/material/gemstone/mapped/diamond/ten,
+/obj/item/stack/material/ingot/mapped/gold/ten,
+/obj/item/stack/material/ingot/mapped/silver/ten,
 /obj/structure/catwalk,
 /obj/structure/cable{
 	d1 = 1;
@@ -6341,7 +6340,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/jail)
 "lH" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/ammo_magazine/rifle,
 /obj/item/ammo_magazine/rifle,
 /obj/item/ammo_magazine/rifle,
@@ -6900,7 +6899,7 @@
 /turf/exterior/concrete,
 /area/map_template/colony/command)
 "mD" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/shoes/magboots,
 /obj/item/clothing/mask/gas/radical,
 /obj/item/tank/oxygen,
@@ -6978,7 +6977,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/hydroponics)
 "mI" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/automatic/assault_rifle,
 /obj/item/gun/projectile/automatic/assault_rifle,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -7266,7 +7265,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/shoes/magboots,
 /obj/item/clothing/mask/gas/radical,
 /obj/item/tank/oxygen,
@@ -7404,7 +7403,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/shoes/magboots,
 /obj/item/clothing/mask/gas/radical,
 /obj/item/tank/oxygen,
@@ -7859,7 +7858,7 @@
 "oi" = (
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/warning/dust,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
@@ -7895,7 +7894,7 @@
 "oj" = (
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/warning/dust,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/bolt_action{
 	desc = "A large, unwieldy bolt-action rifle in shoddy condition. Chambered in small caliber, looks far scarier than it is. Vamoos ya varmint!";
 	name = "anti-varmint rifle"

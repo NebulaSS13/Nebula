@@ -159,9 +159,9 @@
 		testing("Moving [A]")
 		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
 	var/obj/effect/shuttle_landmark/old_location = current_location
-	GLOB.shuttle_pre_move_event.raise_event(src, old_location, destination)
+	events_repository.raise_event(/decl/observ/shuttle_pre_move, src, old_location, destination)
 	shuttle_moved(destination, translation)
-	GLOB.shuttle_moved_event.raise_event(src, old_location, destination)
+	events_repository.raise_event(/decl/observ/shuttle_moved, src, old_location, destination)
 	if(istype(old_location))
 		old_location.shuttle_departed(src)
 	destination.shuttle_arrived(src)
@@ -185,9 +185,9 @@
 		testing("Moving [A]")
 		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
 	var/obj/effect/shuttle_landmark/old_location = current_location
-	GLOB.shuttle_pre_move_event.raise_event(src, old_location, destination)
+	events_repository.raise_event(/decl/observ/shuttle_pre_move, src, old_location, destination)
 	shuttle_moved(destination, translation)
-	GLOB.shuttle_moved_event.raise_event(src, old_location, destination)
+	events_repository.raise_event(/decl/observ/shuttle_moved, src, old_location, destination)
 	if(istype(old_location))
 		old_location.shuttle_departed(src)
 	destination.shuttle_arrived(src)
@@ -274,7 +274,7 @@
 			pipes |= pipe
 			if(LAZYLEN(pipe.nodes_to_networks))
 				pipes |= pipe.nodes_to_networks // This gets all pipes that used to be adjacent to us
-		for(var/direction in GLOB.cardinal) // We do this so that if a shuttle lands in a way that should imply a new pipe/power connection, that actually happens
+		for(var/direction in global.cardinal) // We do this so that if a shuttle lands in a way that should imply a new pipe/power connection, that actually happens
 			var/turf/neighbor = get_step(T, direction)
 			if(neighbor)
 				for(var/obj/structure/cable/cable in neighbor)
@@ -290,9 +290,9 @@
 			var/datum/powernet/NewPN = new()
 			NewPN.add_cable(C)
 			propagate_network(C,C.powernet)
-	for(var/obj/machinery/atmospherics/pipe as anything in pipes)
+	for(var/obj/machinery/atmospherics/pipe AS_ANYTHING in pipes)
 		pipe.atmos_init() // this will clear pipenet/pipeline
-	for(var/obj/machinery/atmospherics/pipe as anything in pipes)
+	for(var/obj/machinery/atmospherics/pipe AS_ANYTHING in pipes)
 		pipe.build_network()
 
 //returns 1 if the shuttle has a valid arrive time

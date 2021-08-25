@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(station_bookcases, new)
+var/global/list/station_bookcases = list()
 /obj/structure/bookcase
 	name = "bookcase"
 	icon = 'icons/obj/library.dmi'
@@ -15,17 +15,17 @@ GLOBAL_LIST_INIT(station_bookcases, new)
 	for(var/obj/item/I in loc)
 		if(istype(I, /obj/item/book))
 			I.forceMove(src)
-	if(z in GLOB.using_map.station_levels)
-		GLOB.station_bookcases += src
+	if(z in global.using_map.station_levels)
+		global.station_bookcases += src
 	. = ..()
 
 /obj/structure/bookcase/Destroy()
-	GLOB.station_bookcases -= src
+	global.station_bookcases -= src
 	. = ..()
 
-/obj/structure/bookcase/create_dismantled_products(var/turf/T)
+/obj/structure/bookcase/physically_destroyed(skip_qdel)
 	for(var/obj/item/book/b in contents)
-		b.dropInto(T)
+		b.dropInto(loc)
 	. = ..()
 
 /obj/structure/bookcase/attackby(obj/O, mob/user)

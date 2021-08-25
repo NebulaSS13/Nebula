@@ -1,15 +1,25 @@
 /obj/status_marker
+	name = ""
 	mouse_opacity = 0
 	simulated = FALSE
 	alpha = 0
 	plane = DEFAULT_PLANE
 	layer = POINTER_LAYER
+	vis_flags = VIS_INHERIT_ID
 
 /obj/status_marker/Initialize(var/ml, var/decl/status_condition/status)
+
 	. = ..()
-	name =       status.name
-	icon =       status.status_marker_icon
+
+	if(!istype(status))
+		return INITIALIZE_HINT_QDEL
+	icon = status.status_marker_icon
 	icon_state = status.status_marker_state
+
+	// Throwing these in here in the hopes of preventing the markers showing up in right click.
+	name = ""
+	mouse_opacity = 0
+	verbs.Cut()
 
 /datum/status_marker_holder
 	var/list/markers
@@ -18,9 +28,9 @@
 	var/image/mob_image_personal
 
 /datum/status_marker_holder/proc/clear_markers()
-	for(var/marker as anything in markers)
+	for(var/marker AS_ANYTHING in markers)
 		animate(markers[marker], pixel_z = 12, alpha = 0, time = 3)
-	for(var/marker as anything in markers_personal)
+	for(var/marker AS_ANYTHING in markers_personal)
 		animate(markers_personal[marker], pixel_z = 12, alpha = 0, time = 3)
 
 /datum/status_marker_holder/New(var/mob/owner)
@@ -66,7 +76,7 @@
 
 	global.status_marker_holders += src
 	for(var/client/C)
-		if(C.mob && C.get_preference_value(/datum/client_preference/show_status_markers) == GLOB.PREF_SHOW)
+		if(C.mob && C.get_preference_value(/datum/client_preference/show_status_markers) == PREF_SHOW)
 			if(C.mob.status_markers == src)
 				C.images |= mob_image_personal
 			else
@@ -93,7 +103,7 @@
 
 /datum/status_marker_holder/proc/apply_offsets(var/mob/owner, var/list/markers_to_check, var/check_show_status = TRUE)
 	var/list/visible_markers
-	for(var/decl/status_condition/stat as anything in markers_to_check)
+	for(var/decl/status_condition/stat AS_ANYTHING in markers_to_check)
 		if(HAS_STATUS(owner, stat.type) && (!check_show_status || stat.show_status(owner)))
 			LAZYADD(visible_markers, markers_to_check[stat])
 		else

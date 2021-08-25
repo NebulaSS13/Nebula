@@ -189,7 +189,7 @@
 		return
 
 	var/vessel_mass = ftl_computer.linked.get_vessel_mass()
-	var/shunt_turf = locate(shunt_x, shunt_y, GLOB.using_map.overmap_z)
+	var/shunt_turf = locate(shunt_x, shunt_y, global.using_map.overmap_z)
 
 	if(stat & BROKEN)
 		return FTL_START_FAILURE_BROKEN
@@ -224,7 +224,7 @@
 		update_use_power(POWER_USE_ACTIVE)
 
 	if(sabotaged)
-		for(var/mob/living/carbon/human/H in GLOB.living_mob_list_) //Give engineers a hint that something might be very, very wrong.
+		for(var/mob/living/carbon/human/H in global.living_mob_list_) //Give engineers a hint that something might be very, very wrong.
 			if(!(H.z in ftl_computer.linked.map_z))
 				continue
 			if(H.skill_check(SKILL_ENGINES, SKILL_EXPERT))
@@ -256,14 +256,14 @@
 		do_sabotage()
 		return
 
-	var/destination = locate(shunt_x, shunt_y, GLOB.using_map.overmap_z)
+	var/destination = locate(shunt_x, shunt_y, global.using_map.overmap_z)
 	var/jumpdist = get_dist(get_turf(ftl_computer.linked), destination)
 	var/obj/effect/portal/wormhole/W = new(destination) //Generate a wormhole effect on overmap to give some indication that something is about to happen.
 	QDEL_IN(W, 6 SECONDS)
 	addtimer(CALLBACK(src, .proc/do_shunt, shunt_x, shunt_y, jumpdist, destination), 6 SECONDS)
 	jumping = TRUE
 	update_use_power(POWER_USE_IDLE)
-	for(var/mob/living/carbon/M in GLOB.living_mob_list_)
+	for(var/mob/living/carbon/M in global.living_mob_list_)
 		if(!(M.z in ftl_computer.linked.map_z))
 			continue
 		sound_to(M, 'sound/machines/hyperspace_begin.ogg')
@@ -289,7 +289,7 @@
 		if(6 to INFINITY)
 			shunt_sev = SHUNT_SEVERITY_CRITICAL
 
-	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_) //Affect mobs, skip synthetics.
+	for(var/mob/living/carbon/human/H in global.living_mob_list_) //Affect mobs, skip synthetics.
 		sound_to(H, 'sound/machines/hyperspace_end.ogg')
 
 		if(!(H.z in ftl_computer.linked.map_z))
@@ -478,7 +478,7 @@
 	desc = "A fuel port for an FTL shunt."
 	icon_state = "empty"
 
-	var/list/global/fuels = list(
+	var/static/list/fuels = list(
 		/decl/material/gas/hydrogen/tritium = 25000,
 		/decl/material/gas/hydrogen/deuterium = 25000,
 		/decl/material/gas/hydrogen = 25000,

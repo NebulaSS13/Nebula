@@ -30,10 +30,9 @@
 		tank = new tank
 		w_class = tank.size_in_use
 		force = tank.unlit_force
-
+	set_extension(src, /datum/extension/tool, list(TOOL_WELDER = TOOL_QUALITY_DEFAULT))
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	update_icon()
-
 	. = ..()
 
 /obj/item/weldingtool/dropped(mob/user)
@@ -54,10 +53,7 @@
 
 /obj/item/weldingtool/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && welding && check_state_in_icon("[overlay.icon_state]-lit", overlay.icon))
-		var/image/lit = image(overlay.icon, "[overlay.icon_state]-lit")
-		lit.layer = ABOVE_LIGHTING_LAYER
-		lit.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		overlay.add_overlay(lit)
+		overlay.add_overlay(emissive_overlay(overlay.icon, "[overlay.icon_state]-lit"))
 	. = ..()
 
 /obj/item/weldingtool/get_heat()
@@ -180,7 +176,7 @@
 			L.IgniteMob()
 		else if(istype(O))
 			O.HandleObjectHeating(src, user, 700)
-		if (istype(location, /turf))
+		if (isturf(location))
 			location.hotspot_expose(700, 50, 1)
 	return
 
@@ -245,11 +241,10 @@
 	if(tank)
 		add_overlay("[icon_state]-[tank.icon_state]")
 	if(welding && check_state_in_icon("[icon_state]-lit", icon))
-		var/image/I = image(icon, "[icon_state]-lit")
-		if(plane != HUD_PLANE)
-			I.layer = ABOVE_LIGHTING_LAYER
-			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		add_overlay(I)
+		if(plane == HUD_PLANE)
+			add_overlay(image(icon, "[icon_state]-lit"))
+		else
+			add_overlay(emissive_overlay(icon, "[icon_state]-lit"))
 		set_light(2.5, 0.6, lit_colour)
 	else
 		set_light(0)

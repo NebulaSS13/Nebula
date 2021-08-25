@@ -1,8 +1,8 @@
 /decl/department/command
 	goals = list(/datum/goal/department/paperwork/tradeship)
 
-var/list/tradeship_paperwork_spawn_turfs = list()
-var/list/tradeship_paperwork_end_areas = list()
+var/global/list/tradeship_paperwork_spawn_turfs = list()
+var/global/list/tradeship_paperwork_end_areas = list()
 
 /obj/effect/landmark/paperwork_spawn_tradeship
 	name = "Tradeship Paperwork Goal Spawn Point"

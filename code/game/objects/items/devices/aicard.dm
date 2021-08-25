@@ -15,7 +15,7 @@
 
 	ui_interact(user)
 
-/obj/item/aicard/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.inventory_state)
+/obj/item/aicard/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.inventory_topic_state)
 	var/data[0]
 	data["has_ai"] = carded_ai != null
 	if(carded_ai)
@@ -117,7 +117,7 @@
 	return 1
 
 /obj/item/aicard/proc/clear()
-	if(carded_ai && istype(carded_ai.loc, /turf))
+	if(carded_ai && isturf(carded_ai.loc))
 		carded_ai.carded = 0
 	SetName(initial(name))
 	carded_ai.calculate_power_usage()

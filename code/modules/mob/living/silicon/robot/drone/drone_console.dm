@@ -45,13 +45,13 @@
 		to_chat(usr, "<span class='danger'>Access denied.</span>")
 		return
 
-	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
+	if ((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 
 	if (href_list["setarea"])
 
 		//Probably should consider using another list, but this one will do.
-		var/t_area = input("Select the area to ping.", "Set Target Area", null) as null|anything in GLOB.tagger_locations
+		var/t_area = input("Select the area to ping.", "Set Target Area", null) as null|anything in global.tagger_locations
 
 		if(!t_area)
 			return

@@ -1,4 +1,4 @@
-var/list/localhost_addresses = list(
+var/global/list/localhost_addresses = list(
 	"127.0.0.1" = TRUE,
 	"::1" = TRUE
 )
@@ -84,8 +84,8 @@ var/list/localhost_addresses = list(
 		ticket.close(client_repository.get_lite_client(usr.client))
 
 	//Logs all hrefs
-	if(config && config.log_hrefs && GLOB.world_href_log)
-		WRITE_FILE(GLOB.world_href_log, "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>")
+	if(config && config.log_hrefs && global.world_href_log)
+		WRITE_FILE(global.world_href_log, "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>")
 
 	switch(href_list["_src_"])
 		if("holder")	hsrc = holder
@@ -151,7 +151,7 @@ var/list/localhost_addresses = list(
 			qdel(src)
 			return
 		if(config.player_limit != 0)
-			if((GLOB.clients.len >= config.player_limit) && !(ckey in admin_datums))
+			if((global.clients.len >= config.player_limit) && !(ckey in admin_datums))
 				alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
 				log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
 				qdel(src)
@@ -166,8 +166,8 @@ var/list/localhost_addresses = list(
 		to_chat(src, "<span class='warning'>You are running an older version of BYOND than the server and may experience issues.</span>")
 		to_chat(src, "<span class='warning'>It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/.</span>")
 	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
-	GLOB.clients += src
-	GLOB.ckey_directory[ckey] = src
+	global.clients += src
+	global.ckey_directory[ckey] = src
 
 	// Automatic admin rights for people connecting locally.
 	// Concept stolen from /tg/ with deepest gratitude.
@@ -177,7 +177,7 @@ var/list/localhost_addresses = list(
 	//Admin Authorisation
 	holder = admin_datums[ckey]
 	if(holder)
-		GLOB.admins += src
+		global.admins += src
 		holder.owner = src
 		handle_staff_login()
 
@@ -194,7 +194,7 @@ var/list/localhost_addresses = list(
 
 	. = ..()	//calls mob.Login()
 
-	GLOB.using_map.map_info(src)
+	global.using_map.map_info(src)
 
 	if(custom_event_msg && custom_event_msg != "")
 		to_chat(src, "<h1 class='alert'>Custom Event</h1>")
@@ -246,9 +246,9 @@ var/list/localhost_addresses = list(
 	if(holder)
 		handle_staff_logout()
 		holder.owner = null
-		GLOB.admins -= src
-	GLOB.ckey_directory -= ckey
-	GLOB.clients -= src
+		global.admins -= src
+	global.ckey_directory -= ckey
+	global.clients -= src
 	return ..()
 
 /client/Destroy()
@@ -324,7 +324,7 @@ var/list/localhost_addresses = list(
 	var/admin_rank = "Player"
 	if(src.holder)
 		admin_rank = src.holder.rank
-		for(var/client/C in GLOB.clients)
+		for(var/client/C in global.clients)
 			if(C.staffwarn)
 				C.mob.send_staffwarn(src, "is connected", 0)
 
@@ -364,11 +364,11 @@ var/list/localhost_addresses = list(
 /client/proc/handle_staff_logout()
 	if(admin_datums[ckey] && GAME_STATE == RUNLEVEL_GAME) //Only report this stuff if we are currently playing.
 		message_staff("\[[holder.rank]\] [key_name(src)] logged out.")
-		if(!GLOB.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
+		if(!global.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
 			send2adminirc("[key_name(src)] logged out - no more staff online.")
-			if(config.delist_when_no_admins && GLOB.visibility_pref)
+			if(config.delist_when_no_admins && global.visibility_pref)
 				world.update_hub_visibility()
-				send2adminirc("Toggled hub visibility. The server is now invisible ([GLOB.visibility_pref]).")
+				send2adminirc("Toggled hub visibility. The server is now invisible ([global.visibility_pref]).")
 
 //checks if a client is afk
 //3000 frames = 5 minutes
@@ -510,60 +510,16 @@ var/list/localhost_addresses = list(
 	if(mob)
 		mob.reload_fullscreen()
 
-/client/proc/update_chat_position(use_alternative)
-	var/input_height = 0
-	// Hell
-	if(use_alternative == TRUE)
-		input_height = winget(src, "input", "size")
-		input_height = text2num(splittext(input_height, "x")[2])
-
-		winset(src, "input_alt", "is-visible=true;is-disabled=false;is-default=true")
-		winset(src, "hotkey_toggle_alt", "is-visible=true;is-disabled=false;is-default=true")
-		winset(src, "saybutton_alt", "is-visible=true;is-disabled=false;is-default=true")
-
-		winset(src, "input", "is-visible=false;is-disabled=true;is-default=false")
-		winset(src, "hotkey_toggle", "is-visible=false;is-disabled=true;is-default=false")
-		winset(src, "saybutton", "is-visible=false;is-disabled=true;is-default=false")
-
-		var/current_size = splittext(winget(src, "outputwindow.output", "size"), "x")
-		var/new_size = "[current_size[1]]x[text2num(current_size[2]) - input_height]"
-		winset(src, "outputwindow.output", "size=[new_size]")
-		winset(src, "outputwindow.browseroutput", "size=[new_size]")
-
-		current_size = splittext(winget(src, "mainwindow.mainvsplit", "size"), "x")
-		new_size = "[current_size[1]]x[text2num(current_size[2]) + input_height]"
-		winset(src, "mainwindow.mainvsplit", "size=[new_size]")
-	else
-		input_height = winget(src, "input_alt", "size")
-		input_height = text2num(splittext(input_height, "x")[2])
-
-		winset(src, "input_alt", "is-visible=false;is-disabled=true;is-default=false")
-		winset(src, "hotkey_toggle_alt", "is-visible=false;is-disabled=true;is-default=false")
-		winset(src, "saybutton_alt", "is-visible=false;is-disabled=true;is-default=false")
-
-		winset(src, "input", "is-visible=true;is-disabled=false;is-default=true")
-		winset(src, "hotkey_toggle", "is-visible=true;is-disabled=false;is-default=true")
-		winset(src, "saybutton", "is-visible=true;is-disabled=false;is-default=true")
-
-		var/current_size = splittext(winget(src, "outputwindow.output", "size"), "x")
-		var/new_size = "[current_size[1]]x[text2num(current_size[2]) + input_height]"
-		winset(src, "outputwindow.output", "size=[new_size]")
-		winset(src, "outputwindow.browseroutput", "size=[new_size]")
-
-		current_size = splittext(winget(src, "mainwindow.mainvsplit", "size"), "x")
-		new_size = "[current_size[1]]x[text2num(current_size[2]) - input_height]"
-		winset(src, "mainwindow.mainvsplit", "size=[new_size]")
-
 /client/proc/toggle_fullscreen(new_value)
-	if((new_value == GLOB.PREF_BASIC) || (new_value == GLOB.PREF_FULL))
+	if((new_value == PREF_BASIC) || (new_value == PREF_FULL))
 		winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false")
-		if(new_value == GLOB.PREF_FULL)
+		if(new_value == PREF_FULL)
 			winset(src, "mainwindow", "menu=null;statusbar=false")
-		winset(src, "mainwindow.mainvsplit", "pos=0x0")
+		winset(src, "mainwindow.split", "pos=0x0")
 	else
 		winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true")
 		winset(src, "mainwindow", "menu=menu;statusbar=true")
-		winset(src, "mainwindow.mainvsplit", "pos=3x0")
+		winset(src, "mainwindow.split", "pos=3x0")
 	winset(src, "mainwindow", "is-maximized=true")
 
 /client/verb/fit_viewport()
@@ -576,7 +532,7 @@ var/list/localhost_addresses = list(
 	var/aspect_ratio = view_size[1] / view_size[2]
 
 	// Calculate desired pixel width using window size and aspect ratio
-	var/sizes = params2list(winget(src, "mainwindow.mainvsplit;mapwindow", "size"))
+	var/sizes = params2list(winget(src, "mainwindow.split;mapwindow", "size"))
 	var/map_size = splittext(sizes["mapwindow.size"], "x")
 	var/height = text2num(map_size[2])
 	var/desired_width = round(height * aspect_ratio)
@@ -584,13 +540,13 @@ var/list/localhost_addresses = list(
 		// Nothing to do
 		return
 
-	var/split_size = splittext(sizes["mainwindow.mainvsplit.size"], "x")
+	var/split_size = splittext(sizes["mainwindow.split.size"], "x")
 	var/split_width = text2num(split_size[1])
 
 	// Calculate and apply a best estimate
 	// +4 pixels are for the width of the splitter's handle
 	var/pct = 100 * (desired_width + 4) / split_width
-	winset(src, "mainwindow.mainvsplit", "splitter=[pct]")
+	winset(src, "mainwindow.split", "splitter=[pct]")
 
 	// Apply an ever-lowering offset until we finish or fail
 	var/delta
@@ -610,4 +566,4 @@ var/list/localhost_addresses = list(
 			delta = -delta/2
 
 		pct += delta
-		winset(src, "mainwindow.mainvsplit", "splitter=[pct]")
+		winset(src, "mainwindow.split", "splitter=[pct]")

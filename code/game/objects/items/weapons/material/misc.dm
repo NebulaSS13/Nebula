@@ -63,6 +63,10 @@
 	applies_material_name = TRUE
 	hitsound = "chop"
 
+/obj/item/hatchet/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_HATCHET = TOOL_QUALITY_DEFAULT))
+
 /obj/item/hatchet/unbreakable
 	unbreakable = TRUE
 
@@ -77,7 +81,7 @@
 	base_parry_chance = 50
 	max_force = 20
 	material_force_multiplier = 0.20 //20 with hardness 80 (titanium) or 15 with hardness 60 (steel)
-	var/global/list/standard_machete_icons = list(
+	var/static/list/standard_machete_icons = list(
 		'icons/obj/items/weapon/machetes/machete.dmi',
 		'icons/obj/items/weapon/machetes/machete_red.dmi',
 		'icons/obj/items/weapon/machetes/machete_blue.dmi',

@@ -337,7 +337,7 @@ Sells devices, odds and ends, and medical stuff
 								  /obj/item/cautery = TRADER_THIS_TYPE,
 								  /obj/item/surgicaldrill = TRADER_THIS_TYPE,
 								  /obj/item/scalpel = TRADER_THIS_TYPE,
-								  /obj/item/scalpel/manager = TRADER_THIS_TYPE,
+								  /obj/item/incision_manager = TRADER_THIS_TYPE,
 								  /obj/item/circular_saw = TRADER_THIS_TYPE,
 								  /obj/item/bonegel = TRADER_THIS_TYPE,
 								  /obj/item/bonesetter = TRADER_THIS_TYPE,
@@ -371,18 +371,20 @@ Sells devices, odds and ends, and medical stuff
 				"insult_bad"        = "This is not acceptable, please cease.",
 				)
 
-	possible_wanted_items = list(/obj/item/ore/ = TRADER_SUBTYPES_ONLY,
-								/obj/item/disk/survey = TRADER_THIS_TYPE,
-								/obj/item/ore/slag = TRADER_BLACKLIST)
+	possible_wanted_items = list(
+		/obj/item/ore/ =        TRADER_SUBTYPES_ONLY,
+		/obj/item/disk/survey = TRADER_THIS_TYPE,
+		/obj/item/ore/slag =    TRADER_BLACKLIST
+	)
 
-	possible_trading_items = list(/obj/machinery/mining/drill = TRADER_THIS_TYPE,
-								  /obj/machinery/mining/brace = TRADER_THIS_TYPE,
-								  /obj/machinery/floodlight = TRADER_THIS_TYPE,
-								  /obj/machinery/floodlight = TRADER_THIS_TYPE,
-								  /obj/item/storage/box/greenglowsticks = TRADER_THIS_TYPE,
-								  /obj/item/clothing/suit/space/void/engineering/salvage/prepared  = TRADER_THIS_TYPE,
-								  /obj/item/stack/material/uranium/ten = TRADER_THIS_TYPE,
-								  /obj/item/stack/material/copper/fifty = TRADER_THIS_TYPE,
-								  /obj/item/stack/material/plasteel/fifty = TRADER_THIS_TYPE,
-								  /obj/item/stack/material/steel/fifty = TRADER_THIS_TYPE
-								)
+	possible_trading_items = list(
+		/obj/machinery/mining/drill =                                     TRADER_THIS_TYPE,
+		/obj/machinery/mining/brace =                                     TRADER_THIS_TYPE,
+		/obj/machinery/floodlight =                                       TRADER_THIS_TYPE,
+		/obj/item/storage/box/greenglowsticks =                           TRADER_THIS_TYPE,
+		/obj/item/clothing/suit/space/void/engineering/salvage/prepared = TRADER_THIS_TYPE,
+		/obj/item/stack/material/puck/mapped/uranium/ten =                TRADER_THIS_TYPE,
+		/obj/item/stack/material/reinforced/mapped/plasteel/fifty =       TRADER_THIS_TYPE,
+		/obj/item/stack/material/sheet/mapped/steel/fifty =               TRADER_THIS_TYPE,
+		/obj/item/stack/material/ingot/mapped/copper/fifty =              TRADER_THIS_TYPE
+	)

@@ -31,22 +31,22 @@
 	dat += "Locked on<BR>"
 	dat += "<B>Charge progress: [reload]/180:</B><BR>"
 	dat += "<A href='byond://?src=\ref[src];fire=1'>Open Fire</A><BR>"
-	dat += "Deployment of weapon authorized by <br>[GLOB.using_map.company_name] Naval Command<br><br>Remember, friendly fire is grounds for termination of your contract and life.<HR>"
+	dat += "Deployment of weapon authorized by <br>[global.using_map.company_name] Naval Command<br><br>Remember, friendly fire is grounds for termination of your contract and life.<HR>"
 	show_browser(user, dat, "window=scroll")
 	onclose(user, "scroll")
 
-/obj/machinery/artillerycontrol/Topic(href, href_list, state = GLOB.physical_state)
+/obj/machinery/artillerycontrol/Topic(href, href_list, state = global.physical_topic_state)
 	if(..())
 		return 1
 
-	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
+	if ((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))) || (istype(usr, /mob/living/silicon)))
 		var/area/thearea = input("Area to jump bombard", "Open Fire") as null|anything in teleportlocs
 		thearea = thearea ? teleportlocs[thearea] : thearea
-		if (!thearea || CanUseTopic(usr, GLOB.physical_state) != STATUS_INTERACTIVE)
+		if (!thearea || CanUseTopic(usr, global.physical_topic_state) != STATUS_INTERACTIVE)
 			return
 		if (src.reload < 180)
 			return
-		if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
+		if ((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))) || (istype(usr, /mob/living/silicon)))
 			command_announcement.Announce("Wormhole artillery fire detected. Brace for impact.")
 			log_and_message_admins("has launched an artillery strike.", 1)
 			var/list/L = list()

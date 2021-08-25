@@ -20,7 +20,7 @@
 	print_reference()
 
 	if(!ispath(currency, /decl/currency))
-		currency = GLOB.using_map.default_currency
+		currency = global.using_map.default_currency
 
 	//create a short manual as well
 	var/obj/item/paper/R = new(src.loc)
@@ -156,7 +156,7 @@
 			if("link_account")
 				var/attempt_account_num = input("Enter account number to pay EFTPOS charges into", "New account number") as num
 				var/attempt_pin = input("Enter pin code", "Account pin") as num
-				linked_account = attempt_account_access(attempt_account_num, attempt_pin, 1)
+				linked_account = attempt_account_access(attempt_account_num, attempt_pin, FALSE)
 				if(linked_account)
 					if(linked_account.suspended)
 						linked_account = null
@@ -222,7 +222,7 @@
 					if(D && D.security_level)
 						attempt_pin = input("Enter pin code", "EFTPOS transaction") as num
 						D = null
-					D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
+					D = attempt_account_access(C.associated_account_number, attempt_pin, TRUE)
 					if(D)
 						//transfer the money
 						if(D.transfer(linked_account, transaction_amount, "[transaction_purpose] (via [eftpos_name]/[machine_id])"))

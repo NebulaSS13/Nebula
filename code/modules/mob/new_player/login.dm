@@ -10,10 +10,10 @@
 		mind.current = src
 
 	loc = null
-	GLOB.using_map.show_titlescreen(client)
+	global.using_map.show_titlescreen(client)
 	my_client = client
 	set_sight(sight|SEE_TURFS)
-	GLOB.player_list |= src
+	global.player_list |= src
 
 	show_lobby_menu()
 
@@ -31,7 +31,7 @@
 		client.prefs?.apply_post_login_preferences()
 		maybe_send_staffwarns("connected as new player")
 
-	var/decl/security_state/security_state = GET_DECL(GLOB.using_map.security_state)
+	var/decl/security_state/security_state = GET_DECL(global.using_map.security_state)
 	var/decl/security_level/SL = security_state.current_security_level
 	var/alert_desc = ""
 	if(SL.up_description)

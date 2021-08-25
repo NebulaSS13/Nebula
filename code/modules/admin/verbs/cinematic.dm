@@ -18,6 +18,6 @@
 			override = gamemode_cache[name]
 			if(!istype(override))
 				override = null
-			GLOB.cinematic.station_explosion_cinematic(parameter,override)
+			global.cinematic.station_explosion_cinematic(parameter,override)
 
 	log_and_message_admins("launched cinematic \"[cinematic]\"", src)

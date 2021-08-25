@@ -1,34 +1,35 @@
-GLOBAL_VAR_CONST(PREF_YES, "Yes")
-GLOBAL_VAR_CONST(PREF_NO, "No")
-GLOBAL_VAR_CONST(PREF_ALL_SPEECH, "All Speech")
-GLOBAL_VAR_CONST(PREF_NEARBY, "Nearby")
-GLOBAL_VAR_CONST(PREF_ALL_EMOTES, "All Emotes")
-GLOBAL_VAR_CONST(PREF_ALL_CHATTER, "All Chatter")
-GLOBAL_VAR_CONST(PREF_SHORT, "Short")
-GLOBAL_VAR_CONST(PREF_LONG, "Long")
-GLOBAL_VAR_CONST(PREF_SHOW, "Show")
-GLOBAL_VAR_CONST(PREF_HIDE, "Hide")
-GLOBAL_VAR_CONST(PREF_FANCY, "Fancy")
-GLOBAL_VAR_CONST(PREF_PLAIN, "Plain")
-GLOBAL_VAR_CONST(PREF_PRIMARY, "Primary")
-GLOBAL_VAR_CONST(PREF_ALL, "All")
-GLOBAL_VAR_CONST(PREF_OFF, "Off")
-GLOBAL_VAR_CONST(PREF_BASIC, "Basic")
-GLOBAL_VAR_CONST(PREF_FULL, "Full")
-GLOBAL_VAR_CONST(PREF_MIDDLE_CLICK, "Middle click")
-GLOBAL_VAR_CONST(PREF_ALT_CLICK, "Alt click")
-GLOBAL_VAR_CONST(PREF_CTRL_CLICK, "Ctrl click")
-GLOBAL_VAR_CONST(PREF_CTRL_SHIFT_CLICK, "Ctrl+shift click")
-GLOBAL_VAR_CONST(PREF_HEAR, "Hear")
-GLOBAL_VAR_CONST(PREF_SILENT, "Silent")
-GLOBAL_VAR_CONST(PREF_SHORTHAND, "Shorthand")
-GLOBAL_VAR_CONST(PREF_NEVER, "Never")
-GLOBAL_VAR_CONST(PREF_NON_ANTAG, "Non-Antag Only")
-GLOBAL_VAR_CONST(PREF_ALWAYS, "Always")
+var/global/const/PREF_YES = "Yes"
+var/global/const/PREF_NO = "No"
+var/global/const/PREF_ALL_SPEECH = "All Speech"
+var/global/const/PREF_NEARBY = "Nearby"
+var/global/const/PREF_ALL_EMOTES = "All Emotes"
+var/global/const/PREF_ALL_CHATTER = "All Chatter"
+var/global/const/PREF_SHORT = "Short"
+var/global/const/PREF_LONG = "Long"
+var/global/const/PREF_SHOW = "Show"
+var/global/const/PREF_HIDE = "Hide"
+var/global/const/PREF_FANCY = "Fancy"
+var/global/const/PREF_PLAIN = "Plain"
+var/global/const/PREF_PRIMARY = "Primary"
+var/global/const/PREF_ALL = "All"
+var/global/const/PREF_OFF = "Off"
+var/global/const/PREF_BASIC = "Basic"
+var/global/const/PREF_FULL = "Full"
+var/global/const/PREF_MIDDLE_CLICK = "Middle click"
+var/global/const/PREF_ALT_CLICK = "Alt click"
+var/global/const/PREF_DOUBLE_CLICK = "Double click"
+var/global/const/PREF_CTRL_CLICK = "Ctrl click"
+var/global/const/PREF_CTRL_SHIFT_CLICK = "Ctrl+shift click"
+var/global/const/PREF_HEAR = "Hear"
+var/global/const/PREF_SILENT = "Silent"
+var/global/const/PREF_SHORTHAND = "Shorthand"
+var/global/const/PREF_NEVER = "Never"
+var/global/const/PREF_NON_ANTAG = "Non-Antag Only"
+var/global/const/PREF_ALWAYS = "Always"
 
-var/list/_client_preferences
-var/list/_client_preferences_by_key
-var/list/_client_preferences_by_type
+var/global/list/_client_preferences
+var/global/list/_client_preferences_by_key
+var/global/list/_client_preferences_by_type
 
 /proc/get_client_preferences()
 	if(!_client_preferences)
@@ -65,7 +66,7 @@ var/list/_client_preferences_by_type
 /datum/client_preference
 	var/description
 	var/key
-	var/list/options = list(GLOB.PREF_YES, GLOB.PREF_NO)
+	var/list/options = list(PREF_YES, PREF_NO)
 	var/default_value
 
 /datum/client_preference/New()
@@ -93,11 +94,11 @@ var/list/_client_preferences_by_type
 	key = "SOUND_LOBBY"
 
 /datum/client_preference/play_lobby_music/changed(var/mob/preference_mob, var/new_value)
-	if(new_value == GLOB.PREF_YES)
+	if(new_value == PREF_YES)
 		if(isnewplayer(preference_mob))
-			GLOB.using_map.lobby_track.play_to(preference_mob)
+			global.using_map.lobby_track.play_to(preference_mob)
 	else
-		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))
+		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 85, channel = sound_channels.lobby_channel))
 
 /datum/client_preference/play_game_music
 	description = "Play in-game music"
@@ -112,112 +113,112 @@ var/list/_client_preferences_by_type
 	key = "SOUND_AMBIENCE"
 
 /datum/client_preference/play_ambiance/changed(var/mob/preference_mob, var/new_value)
-	if(new_value == GLOB.PREF_NO)
-		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = GLOB.lobby_sound_channel))
-		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = GLOB.ambience_sound_channel))
+	if(new_value == PREF_NO)
+		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = sound_channels.lobby_channel))
+		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = sound_channels.ambience_channel))
 
 /datum/client_preference/ghost_ears
 	description ="Ghost ears"
 	key = "CHAT_GHOSTEARS"
-	options = list(GLOB.PREF_ALL_SPEECH, GLOB.PREF_NEARBY)
+	options = list(
+		PREF_ALL_SPEECH,
+		PREF_NEARBY
+	)
 
 /datum/client_preference/ghost_sight
 	description ="Ghost sight"
 	key = "CHAT_GHOSTSIGHT"
-	options = list(GLOB.PREF_ALL_EMOTES, GLOB.PREF_NEARBY)
+	options = list(
+		PREF_ALL_EMOTES,
+		PREF_NEARBY
+	)
 
 /datum/client_preference/ghost_radio
 	description ="Ghost radio"
 	key = "CHAT_GHOSTRADIO"
-	options = list(GLOB.PREF_ALL_CHATTER, GLOB.PREF_NEARBY)
+	options = list(
+		PREF_ALL_CHATTER,
+		PREF_NEARBY
+	)
 
 /datum/client_preference/language_display
 	description = "Display Language Names"
 	key = "LANGUAGE_DISPLAY"
-	options = list(GLOB.PREF_SHORTHAND, GLOB.PREF_FULL, GLOB.PREF_OFF)
+	options = list(PREF_SHORTHAND, PREF_FULL, PREF_OFF)
 
 /datum/client_preference/ghost_follow_link_length
 	description ="Ghost Follow Links"
 	key = "CHAT_GHOSTFOLLOWLINKLENGTH"
-	options = list(GLOB.PREF_SHORT, GLOB.PREF_LONG)
+	options = list(PREF_SHORT, PREF_LONG)
 
 /datum/client_preference/chat_tags
 	description ="Chat tags"
 	key = "CHAT_SHOWICONS"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/show_typing_indicator
 	description ="Typing indicator"
 	key = "SHOW_TYPING"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/show_typing_indicator/changed(var/mob/preference_mob, var/new_value)
-	if(new_value == GLOB.PREF_HIDE)
+	if(new_value == PREF_HIDE)
 		preference_mob.remove_typing_indicator()
 
 /datum/client_preference/show_ooc
 	description ="OOC chat"
 	key = "CHAT_OOC"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/show_aooc
 	description ="AOOC chat"
 	key = "CHAT_AOOC"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/show_looc
 	description ="LOOC chat"
 	key = "CHAT_LOOC"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/show_dsay
 	description ="Dead chat"
 	key = "CHAT_DEAD"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/anon_say
 	description = "Anonymous Chat"
 	key = "CHAT_ANONSAY"
-	options = list(GLOB.PREF_NO, GLOB.PREF_YES)
+	options = list(PREF_NO, PREF_YES)
 
 /datum/client_preference/show_progress_bar
 	description ="Progress Bar"
 	key = "SHOW_PROGRESS"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/browser_style
 	description = "Fake NanoUI Browser Style"
 	key = "BROWSER_STYLED"
-	options = list(GLOB.PREF_FANCY, GLOB.PREF_PLAIN)
+	options = list(PREF_FANCY, PREF_PLAIN)
 
 /datum/client_preference/fullscreen_mode
 	description = "Fullscreen Mode"
 	key = "FULLSCREEN"
-	options = list(GLOB.PREF_BASIC, GLOB.PREF_FULL, GLOB.PREF_NO)
-	default_value = GLOB.PREF_NO
+	options = list(PREF_BASIC, PREF_FULL, PREF_NO)
+	default_value = PREF_NO
 
 /datum/client_preference/fullscreen_mode/changed(mob/preference_mob, new_value)
 	if(preference_mob.client)
 		preference_mob.client.toggle_fullscreen(new_value)
 
-/datum/client_preference/chat_position
-	description = "Alternative Chat Position"
-	key = "CHAT_ALT"
-	default_value = GLOB.PREF_NO
-
-/datum/client_preference/chat_position/changed(mob/preference_mob, new_value)
-	if(preference_mob.client)
-		preference_mob.client.update_chat_position(new_value == GLOB.PREF_YES)
-
 /datum/client_preference/autohiss
 	description = "Autohiss"
 	key = "AUTOHISS"
-	options = list(GLOB.PREF_OFF, GLOB.PREF_BASIC, GLOB.PREF_FULL)
+	options = list(PREF_OFF, PREF_BASIC, PREF_FULL)
 
 /datum/client_preference/hardsuit_activation
 	description = "Hardsuit Module Activation Key"
 	key = "HARDSUIT_ACTIVATION"
-	options = list(GLOB.PREF_MIDDLE_CLICK, GLOB.PREF_CTRL_CLICK, GLOB.PREF_ALT_CLICK, GLOB.PREF_CTRL_SHIFT_CLICK)
+	options = list(PREF_MIDDLE_CLICK, PREF_CTRL_CLICK, PREF_ALT_CLICK, PREF_CTRL_SHIFT_CLICK)
 
 /datum/client_preference/holster_on_intent
 	description = "Draw gun based on intent"
@@ -230,42 +231,47 @@ var/list/_client_preferences_by_type
 /datum/client_preference/show_ckey_credits
 	description = "Show Ckey in End Credits"
 	key = "SHOW_CKEY_CREDITS"
-	options = list(GLOB.PREF_HIDE, GLOB.PREF_SHOW)
+	options = list(PREF_HIDE, PREF_SHOW)
 
 /datum/client_preference/give_personal_goals
 	description = "Give Personal Goals"
 	key = "PERSONAL_GOALS"
-	options = list(GLOB.PREF_NEVER, GLOB.PREF_NON_ANTAG, GLOB.PREF_ALWAYS)
+	options = list(PREF_NEVER, PREF_NON_ANTAG, PREF_ALWAYS)
 
 /datum/client_preference/show_department_goals
 	description = "Show Departmental Goals"
 	key = "DEPT_GOALS"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/examine_messages
 	description = "Examining messages"
 	key = "EXAMINE_MESSAGES"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/floating_messages
 	description = "Floating chat messages"
 	key = "FLOATING_CHAT"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/show_status_markers
 	description ="Show overhead status markers"
 	key = "STATUS_MARKERS"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/show_status_markers/changed(mob/preference_mob, new_value)
 	. = ..()
 	if(preference_mob.client)
-		for(var/datum/status_marker_holder/marker as anything in global.status_marker_holders)
+		for(var/datum/status_marker_holder/marker AS_ANYTHING in global.status_marker_holders)
 			var/marker_image = (preference_mob.status_markers == marker) ? marker.mob_image_personal : marker.mob_image
-			if(new_value == GLOB.PREF_HIDE)
+			if(new_value == PREF_HIDE)
 				preference_mob.client.images -= marker_image
 			else
 				preference_mob.client.images |= marker_image
+
+/datum/client_preference/show_turf_contents
+	description = "Show turf contents in side panel"
+	key = "TURF_CONTENTS"
+	options = list(PREF_ALT_CLICK, PREF_DOUBLE_CLICK, PREF_OFF)
 
 /********************
 * General Staff Preferences *
@@ -288,17 +294,17 @@ var/list/_client_preferences_by_type
 /datum/client_preference/staff/show_chat_prayers
 	description = "Chat Prayers"
 	key = "CHAT_PRAYER"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/staff/play_adminhelp_ping
 	description = "Adminhelps"
 	key = "SOUND_ADMINHELP"
-	options = list(GLOB.PREF_HEAR, GLOB.PREF_SILENT)
+	options = list(PREF_HEAR, PREF_SILENT)
 
 /datum/client_preference/staff/show_rlooc
 	description ="Remote LOOC chat"
 	key = "CHAT_RLOOC"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 
 /********************
 * Admin Preferences *
@@ -307,9 +313,9 @@ var/list/_client_preferences_by_type
 /datum/client_preference/staff/show_attack_logs
 	description = "Attack Log Messages"
 	key = "CHAT_ATTACKLOGS"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	options = list(PREF_SHOW, PREF_HIDE)
 	flags = R_ADMIN
-	default_value = GLOB.PREF_HIDE
+	default_value = PREF_HIDE
 
 /********************
 * Debug Preferences *
@@ -318,6 +324,6 @@ var/list/_client_preferences_by_type
 /datum/client_preference/staff/show_debug_logs
 	description = "Debug Log Messages"
 	key = "CHAT_DEBUGLOGS"
-	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
-	default_value = GLOB.PREF_HIDE
+	options = list(PREF_SHOW, PREF_HIDE)
+	default_value = PREF_HIDE
 	flags = R_ADMIN|R_DEBUG

@@ -20,7 +20,7 @@
 		to_chat(user, SPAN_WARNING("This stack of blue paper means nothing to you."))
 		return
 
-	if(CanInteract(user, GLOB.default_state))
+	if(CanInteract(user, global.default_topic_state))
 		var/datum/extension/eye/blueprints = get_extension(src, /datum/extension/eye/)
 		if(!(user.z in valid_z_levels))
 			to_chat(user, SPAN_WARNING("The markings on this are entirely irrelevant to your whereabouts!"))
@@ -37,7 +37,7 @@
 		to_chat(user, SPAN_WARNING("The markings on this are useless!"))
 
 /obj/item/blueprints/proc/set_valid_z_levels()
-	if(GLOB.using_map.use_overmap)
+	if(global.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/sector/S = map_sectors["[get_z(src)]"]
 		if(!S) // The blueprints are useless now, but keep them around for fluff.
 			desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your wherabouts."
@@ -51,7 +51,7 @@
 
 	desc = "Blueprints of the [station_name()]. There is a \"Classified\" stamp and several coffee stains on it."
 	area_prefix = station_name()
-	valid_z_levels += GLOB.using_map.station_levels
+	valid_z_levels += global.using_map.station_levels
 	return TRUE
 
 //For use on exoplanets
@@ -65,7 +65,7 @@
 	. = ..()
 
 /obj/item/blueprints/outpost/set_valid_z_levels()
-	if(!GLOB.using_map.use_overmap)
+	if(!global.using_map.use_overmap)
 		desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your wherabouts."
 		return FALSE
 	

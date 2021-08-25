@@ -75,24 +75,24 @@ They sell generic supplies and ask for generic supplies.
 	origin = "Mining Beacon"
 
 	possible_trading_items = list(
-		/obj/item/ore                             = TRADER_SUBTYPES_ONLY,
-		/obj/item/stack/material/glass            = TRADER_ALL,
-		/obj/item/stack/material/glass/fifty      = TRADER_BLACKLIST,
-		/obj/item/stack/material/iron             = TRADER_THIS_TYPE,
-		/obj/item/stack/material/sandstone        = TRADER_THIS_TYPE,
-		/obj/item/stack/material/marble           = TRADER_THIS_TYPE,
-		/obj/item/stack/material/diamond          = TRADER_THIS_TYPE,
-		/obj/item/stack/material/uranium          = TRADER_THIS_TYPE,
-		/obj/item/stack/material/plastic          = TRADER_THIS_TYPE,
-		/obj/item/stack/material/gold             = TRADER_THIS_TYPE,
-		/obj/item/stack/material/silver           = TRADER_THIS_TYPE,
-		/obj/item/stack/material/platinum         = TRADER_THIS_TYPE,
-		/obj/item/stack/material/mhydrogen        = TRADER_THIS_TYPE,
-		/obj/item/stack/material/tritium          = TRADER_THIS_TYPE,
-		/obj/item/stack/material/osmium           = TRADER_THIS_TYPE,
-		/obj/item/stack/material/steel            = TRADER_THIS_TYPE,
-		/obj/item/stack/material/plasteel         = TRADER_THIS_TYPE,
-		/obj/machinery/mining                     = TRADER_SUBTYPES_ONLY
+		/obj/item/ore =                                       TRADER_SUBTYPES_ONLY,
+		/obj/item/stack/material/pane/mapped/glass =          TRADER_ALL,
+		/obj/item/stack/material/pane/mapped/glass/fifty =    TRADER_BLACKLIST,
+		/obj/item/stack/material/ingot/mapped/iron =          TRADER_THIS_TYPE,
+		/obj/item/stack/material/brick/mapped/sandstone =     TRADER_THIS_TYPE,
+		/obj/item/stack/material/brick/mapped/marble =        TRADER_THIS_TYPE,
+		/obj/item/stack/material/gemstone/mapped/diamond =    TRADER_THIS_TYPE,
+		/obj/item/stack/material/puck/mapped/uranium =        TRADER_THIS_TYPE,
+		/obj/item/stack/material/panel/mapped/plastic =       TRADER_THIS_TYPE,
+		/obj/item/stack/material/ingot/mapped/gold =          TRADER_THIS_TYPE,
+		/obj/item/stack/material/ingot/mapped/silver =        TRADER_THIS_TYPE,
+		/obj/item/stack/material/ingot/mapped/platinum =      TRADER_THIS_TYPE,
+		/obj/item/stack/material/segment/mapped/mhydrogen =      TRADER_THIS_TYPE,
+		/obj/item/stack/material/aerogel/mapped/tritium =        TRADER_THIS_TYPE,
+		/obj/item/stack/material/ingot/mapped/osmium =        TRADER_THIS_TYPE,
+		/obj/item/stack/material/sheet/mapped/steel =         TRADER_THIS_TYPE,
+		/obj/item/stack/material/reinforced/mapped/plasteel = TRADER_THIS_TYPE,
+		/obj/machinery/mining =                               TRADER_SUBTYPES_ONLY
 	)
 
 /datum/trader/trading_beacon/manufacturing

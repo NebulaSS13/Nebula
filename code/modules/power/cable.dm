@@ -71,11 +71,11 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_SILVER
 
 /obj/structure/cable/Initialize(var/ml)
-	. = ..(ml)
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
 	var/dash = findtext(icon_state, "-")
 	d1 = text2num(copytext(icon_state, 1, dash))
 	d2 = text2num(copytext(icon_state, dash+1))
+	. = ..(ml)
 	var/turf/T = src.loc			// hide if turf is not intact
 	if(level==1 && T)
 		hide(!T.is_plating())
@@ -111,7 +111,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 //If underfloor, hide the cable
 /obj/structure/cable/hide(var/i)
-	if(istype(loc, /turf))
+	if(isturf(loc))
 		set_invisibility(i ? 101 : 0)
 	update_icon()
 
@@ -215,6 +215,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	return 0
 
 /obj/structure/cable/create_dismantled_products(turf/T)
+	SHOULD_CALL_PARENT(FALSE)
 	new /obj/item/stack/cable_coil(loc, (d1 ? 2 : 1), color)
 
 //explosion handling
@@ -287,7 +288,7 @@ By design, d1 is the smallest direction and d2 is the highest
 // merge with the powernets of power objects in the given direction
 /obj/structure/cable/proc/mergeConnectedNetworks(var/direction)
 
-	var/fdir = direction ? GLOB.reverse_dir[direction] : 0 //flip the direction, to match with the source position on its turf
+	var/fdir = direction ? global.reverse_dir[direction] : 0 //flip the direction, to match with the source position on its turf
 
 	if(!(d1 == direction || d2 == direction)) //if the cable is not pointed in this direction, do nothing
 		return
@@ -368,7 +369,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	for(var/cable_dir in list(d1, d2))
 		if(cable_dir == 0)
 			continue
-		var/reverse = GLOB.reverse_dir[cable_dir]
+		var/reverse = global.reverse_dir[cable_dir]
 		T = get_zstep(src, cable_dir)
 		if(T)
 			for(var/obj/structure/cable/C in T)
@@ -482,7 +483,14 @@ By design, d1 is the smallest direction and d2 is the highest
 	slot_flags = SLOT_LOWER_BODY
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
-	stacktype = /obj/item/stack/cable_coil
+	stack_merge_type = /obj/item/stack/cable_coil
+
+/obj/item/stack/cable_coil/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(
+		TOOL_CABLECOIL = TOOL_QUALITY_DEFAULT,
+		TOOL_SUTURES =   TOOL_QUALITY_MEDIOCRE
+	))
 
 /obj/item/stack/cable_coil/single
 	amount = 1
@@ -531,7 +539,8 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/item/stack/cable_coil/on_update_icon()
 	cut_overlays()
 	if (!color)
-		color = GLOB.possible_cable_colours[pick(GLOB.possible_cable_colours)]
+		var/list/possible_cable_colours = get_global_cable_colors()
+		color = possible_cable_colours[pick(possible_cable_colours)]
 	if(amount == 1)
 		icon_state = "coil1"
 		SetName("cable piece")
@@ -549,10 +558,11 @@ By design, d1 is the smallest direction and d2 is the highest
 	if(!selected_color)
 		return
 
-	var/final_color = GLOB.possible_cable_colours[selected_color]
+	var/list/possible_cable_colours = get_global_cable_colors()
+	var/final_color = possible_cable_colours[selected_color]
 	if(!final_color)
 		selected_color = "Red"
-		final_color = GLOB.possible_cable_colours[selected_color]
+		final_color = possible_cable_colours[selected_color]
 	color = final_color
 	to_chat(user, "<span class='notice'>You change \the [src]'s color to [lowertext(selected_color)].</span>")
 
@@ -581,7 +591,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/mob/M = usr
 
 	if(ishuman(M) && !M.incapacitated())
-		if(!istype(usr.loc,/turf)) return
+		if(!isturf(usr.loc)) return
 		if(!src.use(15))
 			to_chat(usr, "<span class='warning'>You need at least 15 lengths to make restraints!</span>")
 			return
@@ -595,7 +605,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	set name = "Change Colour"
 	set category = "Object"
 
-	var/selected_type = input("Pick new colour.", "Cable Colour", null, null) as null|anything in GLOB.possible_cable_colours
+	var/selected_type = input("Pick new colour.", "Cable Colour", null, null) as null|anything in get_global_cable_colors()
 	set_cable_color(selected_type, usr)
 
 // Items usable on a cable coil :
@@ -814,7 +824,8 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_SILVER
 
 /obj/item/stack/cable_coil/random/Initialize()
-	color = GLOB.possible_cable_colours[pick(GLOB.possible_cable_colours)]
+	var/list/possible_cable_colours = get_global_cable_colors()
+	color = possible_cable_colours[pick(possible_cable_colours)]
 	. = ..()
 
 // Produces cable coil from a rig power cell.

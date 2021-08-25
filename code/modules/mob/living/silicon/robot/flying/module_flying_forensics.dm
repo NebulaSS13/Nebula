@@ -20,7 +20,7 @@
 		/obj/item/flash,
 		/obj/item/borg/sight/hud/sec,
 		/obj/item/taperoll/police,
-		/obj/item/scalpel/laser1,
+		/obj/item/scalpel/laser,
 		/obj/item/scanner/autopsy,
 		/obj/item/chems/spray/luminol,
 		/obj/item/uv_light,

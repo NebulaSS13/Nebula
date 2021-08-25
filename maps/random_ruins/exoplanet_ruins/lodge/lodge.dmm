@@ -189,17 +189,17 @@
 /turf/simulated/floor/wood,
 /area/template_noop)
 "I" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/gun/projectile/zipgun,
 /obj/item/storage/box/ammo/shotgunshells,
 /turf/simulated/floor/wood,
 /area/template_noop)
 "J" = (
 /obj/structure/closet,
-/obj/item/stack/material/steel/ten,
-/obj/item/stack/material/wood/fifty,
+/obj/item/stack/material/sheet/mapped/steel/ten,
+/obj/item/stack/material/plank/mapped/wood/fifty,
 /obj/item/stack/tile/carpetgreen/fifty,
-/obj/item/stack/material/glass/reinforced/ten,
+/obj/item/stack/material/pane/mapped/rglass/ten,
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 8
 	},

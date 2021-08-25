@@ -17,13 +17,13 @@
 	for(var/n in 1 to severity)
 		waves += rand(5,15)
 
-	start_side = pick(GLOB.cardinal)
+	start_side = pick(global.cardinal)
 	endWhen = worst_case_end()
 
 /datum/event/meteor_wave/announce()
 	switch(severity)
 		if(EVENT_LEVEL_MAJOR)
-			command_announcement.Announce(replacetext(GLOB.using_map.meteor_detected_message, "%STATION_NAME%", location_name()), "[location_name()] Sensor Array", new_sound = GLOB.using_map.meteor_detected_sound, zlevels = affecting_z)
+			command_announcement.Announce(replacetext(global.using_map.meteor_detected_message, "%STATION_NAME%", location_name()), "[location_name()] Sensor Array", new_sound = global.using_map.meteor_detected_sound, zlevels = affecting_z)
 		else
 			command_announcement.Announce("The [location_name()] is now in a meteor shower.", "[location_name()] Sensor Array", zlevels = affecting_z)
 
@@ -66,7 +66,7 @@
 		else
 			return meteors_minor
 
-/var/list/meteors_minor = list(
+var/global/list/meteors_minor = list(
 	/obj/effect/meteor/medium     = 80,
 	/obj/effect/meteor/dust       = 30,
 	/obj/effect/meteor/irradiated = 30,
@@ -76,7 +76,7 @@
 	/obj/effect/meteor/silver     = 10,
 )
 
-/var/list/meteors_moderate = list(
+var/global/list/meteors_moderate = list(
 	/obj/effect/meteor/medium     = 80,
 	/obj/effect/meteor/big        = 30,
 	/obj/effect/meteor/dust       = 30,
@@ -87,7 +87,7 @@
 	/obj/effect/meteor/emp        = 10,
 )
 
-/var/list/meteors_major = list(
+var/global/list/meteors_major = list(
 	/obj/effect/meteor/medium     = 80,
 	/obj/effect/meteor/big        = 30,
 	/obj/effect/meteor/dust       = 30,
@@ -111,9 +111,9 @@
 
 /datum/event/meteor_wave/overmap/tick()
 	if(victim && !victim.is_still()) //Meteors mostly fly in your face
-		start_side = prob(90) ? victim.fore_dir : pick(GLOB.cardinal)
+		start_side = prob(90) ? victim.fore_dir : pick(global.cardinal)
 	else //Unless you're standing
-		start_side = pick(GLOB.cardinal)
+		start_side = pick(global.cardinal)
 	..()
 
 /datum/event/meteor_wave/overmap/get_wave_size()

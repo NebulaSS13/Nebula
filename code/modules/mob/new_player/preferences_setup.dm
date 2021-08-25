@@ -1,7 +1,7 @@
 //The mob should have a gender you want before running this proc. Will run fine without H
 /datum/preferences/proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
 
-	var/decl/species/current_species = get_species_by_key(species || GLOB.using_map.default_species)
+	var/decl/species/current_species = get_species_by_key(species || global.using_map.default_species)
 	var/decl/pronouns/pronouns = pick(current_species.available_pronouns)
 	gender = pronouns.name
 
@@ -21,7 +21,7 @@
 	if(all_underwear)
 		all_underwear.Cut()
 	if(current_species.appearance_flags & HAS_UNDERWEAR)
-		for(var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
+		for(var/datum/category_group/underwear/WRC in global.underwear.categories)
 			var/datum/category_item/underwear/WRI = pick(WRC.items)
 			all_underwear[WRC.name] = WRI.name
 
@@ -39,14 +39,18 @@
 		copy_to(H)
 
 /datum/preferences/proc/dress_preview_mob(var/mob/living/carbon/human/mannequin)
+
+	if(!mannequin)
+		return
+
 	var/update_icon = FALSE
 	copy_to(mannequin, TRUE)
 
 	var/datum/job/previewJob
 	if(equip_preview_mob)
 		// Determine what job is marked as 'High' priority, and dress them up as such.
-		if(GLOB.using_map.default_assistant_title in job_low)
-			previewJob = SSjobs.get_by_title(GLOB.using_map.default_assistant_title)
+		if(global.using_map.default_job_title in job_low)
+			previewJob = SSjobs.get_by_title(global.using_map.default_job_title)
 		else
 			previewJob = SSjobs.get_by_title(job_high)
 	else
@@ -93,10 +97,10 @@
 
 /datum/preferences/proc/update_preview_icon()
 	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)
-	mannequin.delete_inventory(TRUE)
-	dress_preview_mob(mannequin)
-
-	update_character_previews(new /mutable_appearance(mannequin))
+	if(mannequin)
+		mannequin.delete_inventory(TRUE)
+		dress_preview_mob(mannequin)
+		update_character_previews(new /mutable_appearance(mannequin))
 
 /datum/preferences/proc/get_random_name()
 	var/decl/cultural_info/culture/check_culture = cultural_info[TAG_CULTURE]

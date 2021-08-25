@@ -74,9 +74,27 @@
 				</table>
 			</td>
 		</tr>
-		<tr>
-			<td><b>Selected Category</b></td><td> {{:helper.link(data.category, null, {'change_category' : 1})}}</td>
-		</tr>
+		<tr><td colspan = 2 align = 'center'>
+
+			<div class="item">
+				<div class="itemLabel">
+					Category
+				</div>
+				<div class="itemContent">
+					{{:helper.link(data.category, null, {'change_category' : 1})}}
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="itemLabel">
+					Filter
+				</div>
+				<div class="itemContent">
+					{{:helper.link(data.filtering, null, {'set_filter' : 1})}}
+				</div>
+			</div>
+
+		</td></tr>
 		<tr>
 			<td colspan = 2>
 				<table width = '100%' style = 'border:1px solid #333333;'>

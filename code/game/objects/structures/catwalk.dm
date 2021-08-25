@@ -48,7 +48,7 @@
 			AM.fall(oldloc)
 
 /obj/structure/catwalk/proc/redraw_nearby_catwalks()
-	for(var/direction in GLOB.alldirs)
+	for(var/direction in global.alldirs)
 		var/obj/structure/catwalk/L = locate() in get_step(src, direction)
 		if(L)
 			L.update_connections()
@@ -69,10 +69,14 @@
 		overlays += I
 
 /obj/structure/catwalk/create_dismantled_products(var/turf/T)
-	new /obj/item/stack/material/rods(T, 2, material.type)
+	if(material)
+		material.create_object(get_turf(src), 2, /obj/item/stack/material/rods)
+		matter -= material.type
+		material = null
 	if(plated_tile)
 		var/plate_path = plated_tile.build_type
 		new plate_path(T)
+	. = ..()
 
 /obj/structure/catwalk/explosion_act(severity)
 	..()
@@ -131,7 +135,7 @@
 						var/decl/flooring/F = decls[flooring_type]
 						if(!F.build_type)
 							continue
-						if(ispath(C.type, F.build_type))
+						if(istype(C, F.build_type) && (!F.build_material || C.material?.type == F.build_material))
 							plated_tile = F
 							break
 					update_icon()
@@ -152,8 +156,8 @@
 	icon_state = "catwalk_plated"
 	density = 1
 	anchored = 1.0
-	var/activated = FALSE
 	layer = CATWALK_LAYER
+	var/activated = FALSE
 	var/plating_type = /decl/flooring/tiling/mono
 
 /obj/effect/catwalk_plated/Initialize(mapload)
@@ -179,7 +183,7 @@
 		warning("Frame Spawner: A catwalk already exists at [loc.x]-[loc.y]-[loc.z]")
 	else
 		var/obj/structure/catwalk/C = new /obj/structure/catwalk(loc)
-		C.plated_tile += new plating_type
+		C.plated_tile += GET_DECL(plating_type)
 		C.name = "plated catwalk"
 		C.update_icon()
 	activated = 1

@@ -95,7 +95,7 @@
 		<option value='?_src_=vars;emp=\ref[src]'>Trigger EM pulse</option>
 		"}
 
-/datum/proc/get_variables()
+/datum/proc/VV_get_variables()
 	. = vars - VV_hidden()
 	if(!usr || !check_rights(R_ADMIN|R_DEBUG, FALSE))
 		. -= VV_secluded()
@@ -181,7 +181,7 @@
 /datum/proc/may_edit_var(var/user, var/var_to_edit)
 	if(!user)
 		return FALSE
-	if(!(var_to_edit in vars))
+	if(!(var_to_edit in VV_get_variables()))
 		to_chat(user, "<span class='warning'>\The [src] does not have a var '[var_to_edit]'</span>")
 		return FALSE
 	if(var_to_edit in VV_static())

@@ -1,8 +1,8 @@
 /mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
 	STOP_PROCESSING(SSmobs, src)
-	GLOB.dead_mob_list_ -= src
-	GLOB.living_mob_list_ -= src
-	GLOB.player_list -= src
+	global.dead_mob_list_ -= src
+	global.living_mob_list_ -= src
+	global.player_list -= src
 	unset_machine()
 	QDEL_NULL(hud_used)
 	if(istype(ability_master))
@@ -163,7 +163,7 @@
 	ASSERT(istype(M))
 
 	var/remote = ""
-	if(M.get_preference_value(/datum/client_preference/ghost_sight) == GLOB.PREF_ALL_EMOTES && !(src in view(M)))
+	if(M.get_preference_value(/datum/client_preference/ghost_sight) == PREF_ALL_EMOTES && !(src in view(M)))
 		remote = "\[R\]"
 
 	var/track = "([ghost_follow_link(src, M)])"
@@ -173,7 +173,7 @@
 
 /mob/proc/ghost_skip_message(var/mob/observer/ghost/M)
 	ASSERT(istype(M))
-	if(M.get_preference_value(/datum/client_preference/ghost_sight) == GLOB.PREF_ALL_EMOTES && !(src in view(M)))
+	if(M.get_preference_value(/datum/client_preference/ghost_sight) == PREF_ALL_EMOTES && !(src in view(M)))
 		if(!client)
 			return TRUE
 	return FALSE
@@ -194,7 +194,7 @@
 #define ENCUMBERANCE_MOVEMENT_MOD 0.35
 /mob/proc/movement_delay()
 	. = 0
-	if(istype(loc, /turf))
+	if(isturf(loc))
 		var/turf/T = loc
 		. += T.movement_delay
 	if(HAS_STATUS(src, STAT_DROWSY))
@@ -205,7 +205,7 @@
 #undef ENCUMBERANCE_MOVEMENT_MOD
 
 /mob/proc/encumbrance()
-	for(var/obj/item/grab/G as anything in get_active_grabs())
+	for(var/obj/item/grab/G AS_ANYTHING in get_active_grabs())
 		. = max(., G.grab_slowdown())
 	. *= (0.8 ** size_strength_mod())
 	. *= (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN))
@@ -279,7 +279,7 @@
 
 /mob/proc/reset_view(atom/A)
 	set waitfor = 0
-	while(shakecamera && client && !QDELETED(src))
+	while((shakecamera > world.time) && client && !QDELETED(src))
 		sleep(1)
 	if(!client || QDELETED(src))
 		return
@@ -306,6 +306,9 @@
 	set name = "Examine"
 	set category = "IC"
 
+	if(!usr || !usr.client)
+		return
+
 	if((is_blind(src) || usr.stat) && !isobserver(src))
 		to_chat(src, "<span class='notice'>Something is there but you can't see it.</span>")
 		return 1
@@ -323,7 +326,7 @@
 			for(var/mob/M in viewers(4, src))
 				if(M == src)
 					continue
-				if(M.client && M.client.get_preference_value(/datum/client_preference/examine_messages) == GLOB.PREF_SHOW)
+				if(M.client && M.client.get_preference_value(/datum/client_preference/examine_messages) == PREF_SHOW)
 					if(M.is_blind() || is_invisible_to(M))
 						continue
 					to_chat(M, "<span class='subtle'><b>\The [src]</b> looks [look_target].</span>")
@@ -391,7 +394,7 @@
 
 /mob/proc/update_flavor_text(var/key)
 	var/msg = sanitize(input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null, extra = 0)
-	if(!CanInteract(usr, GLOB.self_state))
+	if(!CanInteract(usr, global.self_topic_state))
 		return
 	if(msg != null)
 		flavor_text = msg
@@ -445,7 +448,7 @@
 	reset_view(null)
 
 /mob/DefaultTopicState()
-	return GLOB.view_state
+	return global.view_topic_state
 
 // Use to field Topic calls for which usr == src is required, which will first be funneled into here.
 /mob/proc/OnSelfTopic(href_list)
@@ -468,7 +471,7 @@
 
 // You probably do not need to override this proc. Use one of the two above.
 /mob/Topic(href, href_list, datum/topic_state/state)
-	if(CanUseTopic(usr, GLOB.self_state, href_list) == STATUS_INTERACTIVE)
+	if(CanUseTopic(usr, global.self_topic_state, href_list) == STATUS_INTERACTIVE)
 		. = OnSelfTopic(href_list)
 		if(.)
 			return

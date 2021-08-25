@@ -15,7 +15,7 @@
 	center_of_mass = @"{'x':16,'y':6}"
 	volume = 50
 	var/list/starting_reagents
-	var/global/list/special_bottles = list(
+	var/static/list/special_bottles = list(
 		/decl/material/liquid/nutriment/ketchup = /obj/item/chems/food/condiment/ketchup,
 		/decl/material/liquid/nutriment/barbecue = /obj/item/chems/food/condiment/barbecue,
 		/decl/material/liquid/capsaicin = /obj/item/chems/food/condiment/capsaicin,
@@ -45,7 +45,7 @@
 			else
 				to_chat(user, "<span class='notice'>You remove the label.</span>")
 				label_text = null
-				SSmaterials.queue_reagent_change(src)
+				on_reagent_change()
 		return
 
 

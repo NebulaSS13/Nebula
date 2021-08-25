@@ -1,17 +1,3 @@
-//checks if a file exists and contains text
-//returns text as a string if these conditions are met
-/proc/return_file_text(filename)
-	if(fexists(filename) == 0)
-		error("File not found ([filename])")
-		return
-
-	var/text = file2text(filename)
-	if(!text)
-		error("File empty ([filename])")
-		return
-
-	return text
-
 //Sends resource files to client cache
 /client/proc/getFiles()
 	for(var/file in args)
@@ -21,7 +7,7 @@
 	var/path = root
 
 	for(var/i=0, i<max_iterations, i++)
-		var/list/choices = sortList(flist(path))
+		var/list/choices = sortTim(flist(path), /proc/cmp_text_asc)
 		if(path != root)
 			choices.Insert(1,"/")
 

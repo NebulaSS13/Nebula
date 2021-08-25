@@ -1,5 +1,5 @@
 /obj/machinery/computer/teleporter
-	name = "Teleporter Control Console"
+	name = "teleporter control console"
 	desc = "Used to control a linked teleportation hub and station."
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
@@ -15,13 +15,13 @@
 
 	id = "[random_id(/obj/machinery/computer/teleporter, 1000, 9999)]"
 
-	for (var/dir in GLOB.cardinal)
+	for (var/dir in global.cardinal)
 		var/obj/machinery/teleport/station/found_station = locate() in get_step(src, dir)
 		if(found_station)
 			station = found_station
 			break
 	if(station)
-		for (var/dir in GLOB.cardinal)
+		for (var/dir in global.cardinal)
 			var/obj/machinery/teleport/hub/found_hub = locate() in get_step(station, dir)
 			if(found_hub)
 				hub = found_hub
@@ -46,11 +46,11 @@
 	. = ..()
 	if(locked)
 		var/turf/T = get_turf(locked)
-		to_chat(user, "<span class='notice'>The console is locked on to \[[T.loc.name]\].</span>")
+		to_chat(user, SPAN_NOTICE("The console is locked on to \[[T.loc.name]\]."))
 
 
 /obj/machinery/computer/teleporter/attackby(var/obj/I, var/mob/user)
-	if(istype(I, /obj/item/card/data/))
+	if(istype(I, /obj/item/card/data))
 		var/obj/item/card/data/C = I
 		if(stat & (NOPOWER|BROKEN) & (C.function != "teleporter"))
 			attack_hand(user)
@@ -66,31 +66,14 @@
 		if(!L)
 			L = locate("landmark*[C.data]") // use old stype
 
-
-		if(istype(L, /obj/effect/landmark/) && istype(L.loc, /turf))
-			if(!user.unEquip(I))
-				return
+		if(istype(L, /obj/effect/landmark) && isturf(L.loc) && user.unEquip(I))
 			to_chat(usr, "You insert the coordinates into the machine.")
 			to_chat(usr, "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the [station_name()] at all times.")
 			qdel(I)
-
-			if(C.data == "Clown Land")
-				//whoops
-				for(var/mob/O in hearers(src, null))
-					O.show_message("<span class='warning'>Incoming wormhole detected, unable to lock in.</span>", 2)
-
-				for(var/obj/machinery/teleport/hub/H in range(1))
-					var/amount = rand(2,5)
-					for(var/i=0;i<amount;i++)
-						new /mob/living/simple_animal/hostile/carp(get_turf(H))
-				//
-			else
-				for(var/mob/O in hearers(src, null))
-					O.show_message("<span class='notice'>Locked in.</span>", 2)
-				src.locked = L
-				one_time_use = 1
-
-			src.add_fingerprint(usr)
+			audible_message(SPAN_NOTICE("Locked in."))
+			src.locked = L
+			one_time_use = 1
+			add_fingerprint(usr)
 	else
 		..()
 
@@ -111,7 +94,7 @@
 		var/turf/T = get_turf(R)
 		if (!T)
 			continue
-		if(!(T.z in GLOB.using_map.player_levels))
+		if(!(T.z in global.using_map.player_levels))
 			continue
 		var/tmpname = T.loc.name
 		if(areaindex[tmpname])
@@ -131,7 +114,7 @@
 			var/turf/T = get_turf(M)
 			if(!T)
 				continue
-			if(!(T.z in GLOB.using_map.player_levels))
+			if(!(T.z in global.using_map.player_levels))
 				continue
 			var/tmpname = M.real_name
 			if(areaindex[tmpname])
@@ -146,8 +129,7 @@
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	set_target(L[desc])
-	for(var/mob/O in hearers(src, null))
-		O.show_message("<span class='notice'>Locked In</span>", 2)
+	audible_message(SPAN_NOTICE("Locked in."))
 	return
 
 /obj/machinery/computer/teleporter/verb/set_id(t as text)
@@ -163,19 +145,19 @@
 	return
 
 /obj/machinery/computer/teleporter/proc/target_lost()
-	audible_message("<span class='warning'>Connection with locked in coordinates has been lost.</span>")
+	audible_message(SPAN_WARNING("Connection with locked in coordinates has been lost."))
 	clear_target()
 
 /obj/machinery/computer/teleporter/proc/clear_target()
 	if(src.locked)
-		GLOB.destroyed_event.unregister(locked, src, .proc/target_lost)
+		events_repository.unregister(/decl/observ/destroyed, locked, src, .proc/target_lost)
 	src.locked = null
 	if(station && station.engaged)
 		station.disengage()
 
 /obj/machinery/computer/teleporter/proc/set_target(var/obj/O)
 	src.locked = O
-	GLOB.destroyed_event.register(locked, src, .proc/target_lost)
+	events_repository.register(/decl/observ/destroyed, locked, src, .proc/target_lost)
 
 /obj/machinery/computer/teleporter/Destroy()
 	clear_target()
@@ -186,7 +168,7 @@
 /proc/find_loc(obj/R)
 	if (!R)	return null
 	var/turf/T = R.loc
-	while(!istype(T, /turf))
+	while(!isturf(T))
 		T = T.loc
 		if(!T || istype(T, /area))	return null
 	return T
@@ -197,7 +179,6 @@
 	density = 1
 	anchored = 1.0
 	var/lockeddown = 0
-
 
 /obj/machinery/teleport/hub
 	name = "teleporter pad"
@@ -219,18 +200,12 @@
 /obj/machinery/teleport/hub/on_update_icon()
 	cut_overlays()
 	if (com?.station?.engaged)
-		var/image/I = image(icon, src, "[initial(icon_state)]_active_overlay")
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.layer = ABOVE_LIGHTING_LAYER
-		add_overlay(I)
+		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_active_overlay"))
 		set_light(4, 0.4)
 	else
 		set_light(0)
-		if (operable())
-			var/image/I = image(icon, src, "[initial(icon_state)]_idle_overlay")
-			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-			I.layer = ABOVE_LIGHTING_LAYER
-			add_overlay(I)
+		if(operable())
+			add_overlay(emissive_overlay(icon, "[initial(icon_state)]_idle_overlay"))
 
 /obj/machinery/teleport/hub/Bumped(var/atom/movable/M)
 	if (com?.station?.engaged)
@@ -265,7 +240,7 @@
 
 /obj/machinery/teleport/station/Initialize()
 	. = ..()
-	for (var/target_dir in GLOB.cardinal)
+	for (var/target_dir in global.cardinal)
 		var/obj/machinery/teleport/hub/found_pad = locate() in get_step(src, target_dir)
 		if(found_pad)
 			set_dir(get_dir(src, found_pad))
@@ -276,15 +251,9 @@
 	. = ..()
 	cut_overlays()
 	if (engaged)
-		var/image/I = image(icon, src, "[initial(icon_state)]_active_overlay")
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.layer = ABOVE_LIGHTING_LAYER
-		add_overlay(I)
+		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_active_overlay"))
 	else if (operable())
-		var/image/I = image(icon, src, "[initial(icon_state)]_idle_overlay")
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.layer = ABOVE_LIGHTING_LAYER
-		add_overlay(I)
+		add_overlay(emissive_overlay(icon, "[initial(icon_state)]_idle_overlay"))
 
 /obj/machinery/teleport/station/attackby(var/obj/item/W, var/mob/user)
 	attack_hand(user)

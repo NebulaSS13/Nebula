@@ -13,10 +13,10 @@
 
 /obj/effect/submap_landmark/joinable_submap/Initialize(var/mapload)
 	. = ..(mapload)
-	if(!SSmapping.submaps[name] && SSmapping.submap_archetypes[archetype])
+	if(!SSmapping.submaps[name] && ispath(archetype, /decl/submap_archetype))
 		var/datum/submap/submap = new submap_datum_type(z)
 		submap.name = name
-		submap.setup_submap(SSmapping.submap_archetypes[archetype])
+		submap.setup_submap(GET_DECL(archetype))
 	else
 		if(SSmapping.submaps[name])
 			to_world_log( "Submap error - mapped landmark is duplicate of existing.")

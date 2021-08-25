@@ -85,6 +85,10 @@
 	applies_material_colour = FALSE
 	applies_material_name = TRUE
 
+/obj/item/twohanded/fireaxe/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_HATCHET = TOOL_QUALITY_DEFAULT))
+
 /obj/item/twohanded/fireaxe/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
 	..()
@@ -97,9 +101,6 @@
 		else if(istype(A,/obj/effect/vine))
 			var/obj/effect/vine/P = A
 			P.die_off()
-
-/obj/item/twohanded/fireaxe/ishatchet()
-	return TRUE
 
 //spears, bay edition
 /obj/item/twohanded/spear
@@ -122,7 +123,7 @@
 
 /obj/item/twohanded/spear/shatter(var/consumed)
 	if(!consumed)
-		new /obj/item/stack/material/rods(get_turf(src), 1, shaft_material)
+		SSmaterials.create_object(shaft_material, get_turf(src), 1, /obj/item/stack/material/rods)
 		new /obj/item/stack/cable_coil(get_turf(src), 3, cable_color)
 	..()
 
@@ -208,8 +209,10 @@
 	applies_material_name = TRUE
 	w_class = ITEM_SIZE_NO_CONTAINER
 
-/obj/item/twohanded/pipewrench/iswrench()
-	return wielded
+/obj/item/twohanded/pipewrench/get_tool_quality(archetype)
+	if(wielded && archetype == TOOL_WRENCH)
+		return ..()
+	return 0
 
 /obj/item/twohanded/pipewrench/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) 

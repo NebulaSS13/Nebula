@@ -60,6 +60,15 @@ SUBSYSTEM_DEF(overlays)
 
 	overlay_queued = FALSE
 
+/atom/movable/compile_overlays()
+	..()
+	UPDATE_OO_IF_PRESENT
+
+/turf/compile_overlays()
+	..()
+	if (above)
+		update_above()
+
 /proc/iconstate2appearance(icon, iconstate)
 	var/static/image/stringbro = new()
 	var/list/icon_states_cache = SSoverlays.overlay_icon_state_caches
@@ -103,9 +112,10 @@ SUBSYSTEM_DEF(overlays)
 
 /atom/proc/build_appearance_list(atom/new_overlays)
 	var/static/image/appearance_bro = new
-	if (islist(new_overlays))
-		listclearnulls(new_overlays)
-		for (var/i in 1 to length(new_overlays))
+	if(islist(new_overlays))
+		if(null in new_overlays)
+			new_overlays -= new /list(length(new_overlays)) // Clears nulls from the list prior to appearancifying.
+		for(var/i in 1 to length(new_overlays))
 			var/image/cached_overlay = new_overlays[i]
 			APPEARANCEIFY(cached_overlay, new_overlays[i])
 		return new_overlays

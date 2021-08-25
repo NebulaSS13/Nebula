@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(customitems)
 				dir_count++
 			else if(copytext(checkfile, -5) == ".json")
 				try
-					var/datum/custom_item/citem = new(cached_json_decode(file2text(checkfile)))
+					var/datum/custom_item/citem = new(cached_json_decode(safe_file2text(checkfile)))
 					var/result = citem.validate()
 					if(result)
 						PRINT_STACK_TRACE("Invalid custom item [checkfile]: [result]")

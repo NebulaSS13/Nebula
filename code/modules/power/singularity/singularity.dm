@@ -287,7 +287,7 @@
 	if(!move_self)
 		return FALSE
 
-	var/movement_dir = pick(GLOB.alldirs - last_failed_movement)
+	var/movement_dir = pick(global.alldirs - last_failed_movement)
 
 	if(force_move_direction)
 		movement_dir = force_move_direction

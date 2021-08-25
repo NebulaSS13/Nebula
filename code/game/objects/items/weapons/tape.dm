@@ -5,6 +5,13 @@
 	icon_state = "taperoll"
 	w_class = ITEM_SIZE_SMALL
 
+/obj/item/tape_roll/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(
+		TOOL_BONE_GEL = TOOL_QUALITY_MEDIOCRE,
+		TOOL_SUTURES =  TOOL_QUALITY_BAD
+	))
+
 /obj/item/tape_roll/attack(var/mob/living/carbon/human/H, var/mob/user)
 	if(istype(H))
 		if(user.zone_sel.selecting == BP_EYES)
@@ -132,7 +139,7 @@
 	var/dir_offset = 0
 	if(target_turf != source_turf)
 		dir_offset = get_dir(source_turf, target_turf)
-		if(!(dir_offset in GLOB.cardinal))
+		if(!(dir_offset in global.cardinal))
 			to_chat(user, "You cannot reach that from here.")// can only place stuck papers in cardinal directions, to
 			return											// reduce papers around corners issue.
 

@@ -583,12 +583,16 @@
 
 		//Resting
 		if(resting)
-			ADJ_STATUS(src, STAT_DIZZY, -15)
-			ADJ_STATUS(src, STAT_JITTER, -15)
+			if(HAS_STATUS(src, STAT_DIZZY))
+				ADJ_STATUS(src, STAT_DIZZY, -15)
+			if(HAS_STATUS(src, STAT_JITTER))
+				ADJ_STATUS(src, STAT_JITTER, -15)
 			adjustHalLoss(-3)
 		else
-			ADJ_STATUS(src, STAT_DIZZY, -3)
-			ADJ_STATUS(src, STAT_JITTER, -3)
+			if(HAS_STATUS(src, STAT_DIZZY))
+				ADJ_STATUS(src, STAT_DIZZY, -3)
+			if(HAS_STATUS(src, STAT_JITTER))
+				ADJ_STATUS(src, STAT_JITTER, -3)
 			adjustHalLoss(-1)
 
 		if(HAS_STATUS(src, STAT_DROWSY))
@@ -825,7 +829,7 @@
 	if(isturf(loc) && rand(1,1000) == 1)
 		var/turf/T = loc
 		if(T.get_lumcount() <= LIGHTING_SOFT_THRESHOLD)
-			playsound_local(src,pick(GLOB.scarySounds),50, 1, -1)
+			playsound_local(src,pick(global.scarySounds),50, 1, -1)
 
 	var/area/A = get_area(src)
 	if(client && world.time >= client.played + 600)
@@ -1001,8 +1005,8 @@
 		holder.icon_state = "hudblank"
 		if(mind && mind.assigned_special_role)
 			var/special_role = mind.get_special_role_name()
-			if(special_role && GLOB.hud_icon_reference[special_role])
-				holder.icon_state = GLOB.hud_icon_reference[special_role]
+			if(special_role && global.hud_icon_reference[special_role])
+				holder.icon_state = global.hud_icon_reference[special_role]
 			else
 				holder.icon_state = "hudsyndicate"
 			hud_list[SPECIALROLE_HUD] = holder
@@ -1039,7 +1043,7 @@
 			E.take_external_damage(burn = round(species_heat_mod * log(10, (burn_temperature + 10)), 0.1), used_weapon = "fire")
 
 /mob/living/carbon/human/rejuvenate()
-	restore_blood()
+	reset_blood()
 	full_prosthetic = null
 	shock_stage = 0
 	..()
@@ -1055,7 +1059,8 @@
 
 /mob/living/carbon/human/handle_vision()
 	if(client)
-		client.screen.Remove(GLOB.global_hud.nvg, GLOB.global_hud.thermal, GLOB.global_hud.meson, GLOB.global_hud.science)
+		var/datum/global_hud/global_hud = get_global_hud()
+		client.screen.Remove(global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
 	if(machine)
 		var/viewflags = machine.check_eye(src)
 		if(viewflags < 0)

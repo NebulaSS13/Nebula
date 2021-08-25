@@ -86,7 +86,7 @@
 	return
 
 
-/obj/item/assembly/timer/Topic(href, href_list, state = GLOB.physical_state)
+/obj/item/assembly/timer/Topic(href, href_list, state = global.physical_topic_state)
 	if((. = ..()))
 		close_browser(usr, "window=timer")
 		onclose(usr, "timer")

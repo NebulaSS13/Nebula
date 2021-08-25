@@ -24,7 +24,8 @@
 	. = ..()
 
 	hud_overlay = new /image/hud_overlay('icons/effects/hud_tile.dmi', src, "caution")
-	hud_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	hud_overlay.plane = ABOVE_LIGHTING_PLANE
+	hud_overlay.layer = ABOVE_LIGHTING_LAYER
 	set_cleanable_scent()
 
 	if(isspaceturf(loc))

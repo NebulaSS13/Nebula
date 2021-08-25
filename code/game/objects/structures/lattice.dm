@@ -42,7 +42,7 @@
 			AM.fall(old_loc)
 
 /obj/structure/lattice/proc/update_neighbors(var/location = loc)
-	for (var/dir in GLOB.cardinal)
+	for (var/dir in global.cardinal)
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, get_step(location, dir))
 		if(L)
 			L.update_icon()
@@ -54,8 +54,7 @@
 
 /obj/structure/lattice/proc/deconstruct(var/mob/user)
 	to_chat(user, SPAN_NOTICE("Slicing lattice joints..."))
-	new /obj/item/stack/material/rods(loc, 1, material.type)
-	qdel(src)
+	physically_destroyed()
 
 /obj/structure/lattice/attackby(obj/item/C, mob/user)
 
@@ -95,7 +94,7 @@
 /obj/structure/lattice/on_update_icon()
 	..()
 	var/dir_sum = 0
-	for (var/direction in GLOB.cardinal)
+	for (var/direction in global.cardinal)
 		var/turf/T = get_step(src, direction)
 		if(locate(/obj/structure/lattice, T) || locate(/obj/structure/catwalk, T))
 			dir_sum += direction

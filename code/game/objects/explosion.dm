@@ -36,7 +36,7 @@
 	far_dist += heavy_impact_range * 5
 	far_dist += devastation_range * 20
 	var/frequency = get_rand_frequency()
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in global.player_list)
 		if(M.z == epicenter.z)
 			var/turf/M_turf = get_turf(M)
 			var/dist = get_dist(M_turf, epicenter)
@@ -102,7 +102,7 @@
 #define SEARCH_DIR(dir) \
 	search_direction = dir;\
 	search_turf = get_step(current_turf, search_direction);\
-	if (istype(search_turf, /turf/simulated)) {\
+	if (isturf(search_turf)) {\
 		turf_queue += search_turf;\
 		dir_queue += search_direction;\
 		power_queue += current_power;\
@@ -138,7 +138,7 @@
 	var/list/dir_queue = list(NORTH, SOUTH, EAST, WEST)
 	var/list/power_queue = list(power, power, power, power)
 
-	var/turf/simulated/current_turf
+	var/turf/current_turf
 	var/turf/search_turf
 	var/origin_direction
 	var/search_direction
@@ -189,7 +189,7 @@
 
 	var/sound/explosion_sound = sound(get_sfx("explosion"))
 
-	for (var/thing in GLOB.player_list)
+	for (var/thing in global.player_list)
 		var/mob/M = thing
 		var/reception = EXPLFX_BOTH
 		var/turf/T = isturf(M.loc) ? M.loc : get_turf(M)
@@ -205,7 +205,7 @@
 		if (T.type == /turf/space)	// Equality is faster than istype.
 			reception = EXPLFX_NONE
 
-			for (var/turf/simulated/THING in RANGE_TURFS(M, 1))
+			for (var/turf/THING in RANGE_TURFS(M, 1))
 				reception |= EXPLFX_SHAKE
 				break
 

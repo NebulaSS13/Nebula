@@ -1,24 +1,24 @@
 /proc/get_mech_image(var/decal, var/cache_key, var/cache_icon, var/image_colour, var/overlay_layer = FLOAT_LAYER)
 	var/use_key = "[cache_key]-[cache_icon]-[decal ? decal : "none"]-[image_colour ? image_colour : "none"]"
-	if(!GLOB.mech_image_cache[use_key])
+	if(!global.mech_image_cache[use_key])
 		var/image/I = image(icon = cache_icon, icon_state = cache_key)
 		if(image_colour)
 			I.color = image_colour
 		if(decal)
 			var/decal_key = "[decal]-[cache_key]"
-			if(!GLOB.mech_icon_cache[decal_key])
+			if(!global.mech_icon_cache[decal_key])
 				var/template_key = "template-[cache_key]"
-				if(!GLOB.mech_icon_cache[template_key])
-					GLOB.mech_icon_cache[template_key] = icon(cache_icon, "[cache_key]_mask")
+				if(!global.mech_icon_cache[template_key])
+					global.mech_icon_cache[template_key] = icon(cache_icon, "[cache_key]_mask")
 				var/icon/decal_icon = icon('icons/mecha/mech_decals.dmi',decal)
-				decal_icon.AddAlphaMask(GLOB.mech_icon_cache[template_key])
-				GLOB.mech_icon_cache[decal_key] = decal_icon
-			I.overlays += get_mech_image(null, decal_key, GLOB.mech_icon_cache[decal_key])
+				decal_icon.AddAlphaMask(global.mech_icon_cache[template_key])
+				global.mech_icon_cache[decal_key] = decal_icon
+			I.overlays += get_mech_image(null, decal_key, global.mech_icon_cache[decal_key])
 		I.appearance_flags |= RESET_COLOR
 		I.layer = overlay_layer
 		I.plane = FLOAT_PLANE
-		GLOB.mech_image_cache[use_key] = I
-	return GLOB.mech_image_cache[use_key]
+		global.mech_image_cache[use_key] = I
+	return global.mech_image_cache[use_key]
 
 /proc/get_mech_images(var/list/components = list(), var/overlay_layer = FLOAT_LAYER)
 	var/list/all_images = list()
@@ -43,7 +43,7 @@
 		var/obj/item/mech_equipment/hardpoint_object = hardpoints[hardpoint]
 		if(hardpoint_object)
 			var/use_icon_state = "[hardpoint_object.icon_state]_[hardpoint]"
-			if(use_icon_state in GLOB.mech_weapon_overlays)
+			if(use_icon_state in global.mech_weapon_overlays)
 				new_overlays += get_mech_image(null, use_icon_state, 'icons/mecha/mech_weapon_overlays.dmi', null, hardpoint_object.mech_layer )
 	overlays = new_overlays
 

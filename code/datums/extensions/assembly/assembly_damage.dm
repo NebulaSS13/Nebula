@@ -7,13 +7,12 @@
 /datum/extension/assembly/proc/break_apart()
 	var/atom/movable/H = holder
 	H.visible_message("\The [holder] breaks apart!")
-	var/turf/newloc = get_turf(holder)
-	new /obj/item/stack/material/steel(newloc, round(steel_sheet_cost/2))
 	for(var/obj/item/stock_parts/P in parts)
 		uninstall_component(null, P)
-		P.forceMove(newloc)
+		P.forceMove(H.loc)
 		if(prob(25))
 			P.take_damage(rand(10,30))
+	H.physically_destroyed()
 	qdel(src)
 
 /datum/extension/assembly/proc/take_damage(var/amount, var/component_probability, var/damage_casing = 1, var/randomize = 1)

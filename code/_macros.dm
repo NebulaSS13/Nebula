@@ -1,25 +1,5 @@
 #define any2ref(x) "\ref[x]"
 
-#if DM_VERSION < 513
-
-#define islist(A) istype(A, /list)
-
-#define ismovable(A) istype(A, /atom/movable)
-
-/proc/copytext_char(T, Start = 1, End = 0)
-	return copytext(T, Start, End)
-
-/proc/length_char(E)
-	return length(E)
-
-/proc/findtext_char(Haystack, Needle, Start = 1, End = 0)
-	return findtext(Haystack, Needle, Start, End)
-
-/proc/replacetextEx_char(Haystack, Needle, Replacement, Start = 1, End = 0)
-	return replacetextEx(Haystack, Needle, Replacement, Start, End)
-
-#endif
-
 #define PUBLIC_GAME_MODE SSticker.master_mode
 
 #define Clamp(value, low, high) (value <= low ? low : (value >= high ? high : value))
@@ -129,9 +109,9 @@
 /proc/html_icon(var/thing) // Proc instead of macro to avoid precompiler problems.
 	. = "\icon[thing]"
 
-#define MAP_IMAGE_PATH "nano/images/[GLOB.using_map.path]/"
+#define MAP_IMAGE_PATH "nano/images/[global.using_map.path]/"
 
-#define map_image_file_name(z_level) "[GLOB.using_map.path]-[z_level].png"
+#define map_image_file_name(z_level) "[global.using_map.path]-[z_level].png"
 
 #define RANDOM_BLOOD_TYPE pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 

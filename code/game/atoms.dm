@@ -21,8 +21,8 @@
 
 /atom/New(loc, ...)
 	//atom creation method that preloads variables at creation
-	if(GLOB.use_preloader && (src.type == GLOB._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
-		GLOB._preloader.load(src)
+	if(global.use_preloader && (src.type == global._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
+		global._preloader.load(src)
 
 	var/do_initialize = SSatoms.atom_init_stage
 	var/list/created = SSatoms.created_atoms
@@ -307,7 +307,9 @@ its easier to just keep the beam vertical.
 	return
 
 /atom/proc/get_contained_external_atoms()
-	. = contents
+	for(var/atom/movable/AM in contents)
+		if(!QDELETED(AM) && AM.simulated)
+			LAZYADD(., AM)
 
 /atom/proc/dump_contents()
 	for(var/thing in get_contained_external_atoms())
@@ -402,12 +404,12 @@ its easier to just keep the beam vertical.
 		return TRUE
 
 /atom/proc/get_global_map_pos()
-	if(!islist(GLOB.global_map) || isemptylist(GLOB.global_map)) return
+	if(!islist(global.global_map) || !length(global.global_map)) return
 	var/cur_x = null
 	var/cur_y = null
 	var/list/y_arr = null
-	for(cur_x=1,cur_x<=GLOB.global_map.len,cur_x++)
-		y_arr = GLOB.global_map[cur_x]
+	for(cur_x=1,cur_x<=global.global_map.len,cur_x++)
+		y_arr = global.global_map[cur_x]
 		cur_y = y_arr.Find(src.z)
 		if(cur_y)
 			break
@@ -613,7 +615,7 @@ its easier to just keep the beam vertical.
 	var/mob/user = usr
 	if(href_list["look_at_me"] && istype(user))
 		var/turf/T = get_turf(src)
-		if(T.CanUseTopic(user, GLOB.view_state) != STATUS_CLOSE)
+		if(T.CanUseTopic(user, global.view_topic_state) != STATUS_CLOSE)
 			user.examinate(src)
 			return TOPIC_HANDLED
 	. = ..()

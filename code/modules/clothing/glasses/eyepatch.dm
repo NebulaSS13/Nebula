@@ -50,19 +50,20 @@
 /obj/item/clothing/glasses/eyepatch/hud/on_update_icon()
 	cut_overlays()
 	if(active && check_state_in_icon("[icon_state]-eye", icon))
-		var/image/eye = overlay_image(icon, "[icon_state]-eye", flags=RESET_COLOR)
+		var/image/eye
+		if(plane == HUD_PLANE)
+			eye = overlay_image(icon, "[icon_state]-eye")
+		else
+			eye = emissive_overlay(icon, "[icon_state]-eye")
+		eye.appearance_flags |= RESET_COLOR
 		eye.color = eye_color
-		if(plane != HUD_PLANE)
-			eye.layer = ABOVE_LIGHTING_LAYER
-			eye.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		add_overlay(eye)
 
 /obj/item/clothing/glasses/eyepatch/hud/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 	if(overlay && active && check_state_in_icon("[overlay.icon_state]-eye", overlay.icon))
-		var/image/eye = overlay_image(overlay.icon, "[overlay.icon_state]-eye", flags = RESET_COLOR)
+		var/image/eye = emissive_overlay(overlay.icon, "[overlay.icon_state]-eye")
 		eye.color = eye_color
-		eye.layer = ABOVE_LIGHTING_LAYER
-		eye.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		eye.appearance_flags |= RESET_COLOR
 		overlay.overlays += eye
 	. = ..()
 
@@ -93,7 +94,8 @@
 
 /obj/item/clothing/glasses/eyepatch/hud/meson/Initialize()
 	. = ..()
-	overlay = GLOB.global_hud.meson
+	var/datum/global_hud/global_hud = get_global_hud()
+	overlay = global_hud.meson
 
 /obj/item/clothing/glasses/eyepatch/monocle
 	name = "monocle"

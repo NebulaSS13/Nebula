@@ -30,22 +30,9 @@
 	. = ..()
 
 /obj/item/book/Destroy()
-	if(dat && last_modified_ckey && SSpersistence.is_tracking(src, /datum/persistent/book))
-		// Create a new book in nullspace that is tracked by persistence.
-		// This is so destroying a book does not get rid of someone's 
-		// content, as books with null coords will get spawned in a random
-		// library bookcase.
-		var/obj/item/book/backup_book = new(src)
-		backup_book.dat =                dat
-		backup_book.author =             author
-		backup_book.title =              title
-		backup_book.last_modified_ckey = last_modified_ckey
-		backup_book.unique =             TRUE
-		backup_book.forceMove(null)
-		backup_book.SetName(backup_book.title)
-
-	SSpersistence.forget_value(src, /datum/persistent/book)
 	. = ..()
+	if(SSpersistence.is_tracking(src, /datum/persistent/book))
+		. = QDEL_HINT_LETMELIVE
 
 /obj/item/book/attack_self(var/mob/user)
 	if(carved)

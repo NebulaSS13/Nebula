@@ -33,7 +33,7 @@ SUBSYSTEM_DEF(jobs)
 
 	// Create main map jobs.
 	primary_job_datums.Cut()
-	for(var/jobtype in (list(DEFAULT_JOB_TYPE) | GLOB.using_map.allowed_jobs))
+	for(var/jobtype in (list(global.using_map.default_job_type) | global.using_map.allowed_jobs))
 		var/datum/job/job = get_by_path(jobtype)
 		if(!job)
 			job = new jobtype
@@ -45,8 +45,10 @@ SUBSYSTEM_DEF(jobs)
 
 	// Create abstract submap archetype jobs for use in prefs, etc.
 	archetype_job_datums.Cut()
-	for(var/atype in SSmapping.submap_archetypes)
-		var/decl/submap_archetype/arch = SSmapping.submap_archetypes[atype]
+
+	var/list/submap_archetypes = decls_repository.get_decls_of_subtype(/decl/submap_archetype)
+	for(var/atype in submap_archetypes)
+		var/decl/submap_archetype/arch = submap_archetypes[atype]
 		for(var/jobtype in arch.crew_jobs)
 			var/datum/job/job = get_by_path(jobtype)
 			if(!job && ispath(jobtype, /datum/job/submap))
@@ -80,18 +82,18 @@ SUBSYSTEM_DEF(jobs)
 						J.total_positions = 0
 
 	// Init skills.
-	if(!GLOB.skills.len)
+	if(!global.skills.len)
 		GET_DECL(/decl/hierarchy/skill)
-	if(!GLOB.skills.len)
+	if(!global.skills.len)
 		log_error("<span class='warning'>Error setting up job skill requirements, no skill datums found!</span>")
 
 	// Update title and path tracking, submap list, etc.
 	// Populate/set up map job lists.
-	job_lists_by_map_name = list("[GLOB.using_map.full_name]" = list("jobs" = primary_job_datums, "default_to_hidden" = FALSE))
+	job_lists_by_map_name = list("[global.using_map.full_name]" = list("jobs" = primary_job_datums, "default_to_hidden" = FALSE))
 
-	for(var/atype in SSmapping.submap_archetypes)
+	for(var/atype in submap_archetypes)
 		var/list/submap_job_datums
-		var/decl/submap_archetype/arch = SSmapping.submap_archetypes[atype]
+		var/decl/submap_archetype/arch = submap_archetypes[atype]
 		for(var/jobtype in arch.crew_jobs)
 			var/datum/job/job = get_by_path(jobtype)
 			if(job)
@@ -100,8 +102,8 @@ SUBSYSTEM_DEF(jobs)
 			job_lists_by_map_name[arch.descriptor] = list("jobs" = submap_job_datums, "default_to_hidden" = TRUE)
 
 	// Update global map blacklists and whitelists.
-	for(var/mappath in GLOB.all_maps)
-		var/datum/map/M = GLOB.all_maps[mappath]
+	for(var/mappath in global.all_maps)
+		var/datum/map/M = global.all_maps[mappath]
 		M.setup_job_lists()
 
 	// Update valid job titles.
@@ -141,7 +143,7 @@ SUBSYSTEM_DEF(jobs)
 
 
 /datum/controller/subsystem/jobs/proc/reset_occupations()
-	for(var/mob/new_player/player in GLOB.player_list)
+	for(var/mob/new_player/player in global.player_list)
 		if((player) && (player.mind))
 			player.mind.assigned_job = null
 			player.mind.assigned_role = null
@@ -255,7 +257,7 @@ SUBSYSTEM_DEF(jobs)
 			continue
 		if(job.minimum_character_age && (player.client.prefs.get_character_age() < job.minimum_character_age))
 			continue
-		if(istype(job, get_by_title(GLOB.using_map.default_assistant_title))) // We don't want to give him assistant, that's boring!
+		if(istype(job, get_by_title(global.using_map.default_job_title))) // We don't want to give him assistant, that's boring!
 			continue
 		if(job.is_restricted(player.client.prefs))
 			continue
@@ -322,23 +324,23 @@ SUBSYSTEM_DEF(jobs)
  *  This proc must not have any side effect besides of modifying "assigned_role".
  **/
 /datum/controller/subsystem/jobs/proc/divide_occupations(datum/game_mode/mode)
-	if(GLOB.triai)
+	if(global.triai)
 		for(var/datum/job/A in primary_job_datums)
 			if(A.title == "AI")
 				A.spawn_positions = 3
 				break
 	//Get the players who are ready
-	for(var/mob/new_player/player in GLOB.player_list)
+	for(var/mob/new_player/player in global.player_list)
 		if(player.ready && player.mind && !player.mind.assigned_role)
 			unassigned_roundstart += player
 	if(unassigned_roundstart.len == 0)	return 0
 	//Shuffle players and jobs
 	unassigned_roundstart = shuffle(unassigned_roundstart)
 	//People who wants to be assistants, sure, go on.
-	var/datum/job/assist = new DEFAULT_JOB_TYPE ()
+	var/datum/job/assist = new global.using_map.default_job_type ()
 	var/list/assistant_candidates = find_occupation_candidates(assist, 3)
 	for(var/mob/new_player/player in assistant_candidates)
-		assign_role(player, GLOB.using_map.default_assistant_title, mode = mode)
+		assign_role(player, global.using_map.default_job_title, mode = mode)
 		assistant_candidates -= player
 
 	//Select one head
@@ -383,8 +385,8 @@ SUBSYSTEM_DEF(jobs)
 	// For those who wanted to be assistant if their preferences were filled, here you go.
 	for(var/mob/new_player/player in unassigned_roundstart)
 		if(player.client.prefs.alternate_option == BE_ASSISTANT)
-			var/datum/job/ass = DEFAULT_JOB_TYPE
-			if((GLOB.using_map.flags & MAP_HAS_BRANCH) && player.client.prefs.branches[initial(ass.title)])
+			var/datum/job/ass = global.using_map.default_job_type
+			if((global.using_map.flags & MAP_HAS_BRANCH) && player.client.prefs.branches[initial(ass.title)])
 				var/datum/mil_branch/branch = mil_branches.get_branch(player.client.prefs.branches[initial(ass.title)])
 				ass = branch.assistant_job
 			assign_role(player, initial(ass.title), mode = mode)
@@ -475,19 +477,19 @@ SUBSYSTEM_DEF(jobs)
 
 	if(job)
 		if(H.client)
-			if(GLOB.using_map.flags & MAP_HAS_BRANCH)
+			if(global.using_map.flags & MAP_HAS_BRANCH)
 				H.char_branch = mil_branches.get_branch(H.client.prefs.branches[rank])
-			if(GLOB.using_map.flags & MAP_HAS_RANK)
+			if(global.using_map.flags & MAP_HAS_RANK)
 				H.char_rank = mil_branches.get_rank(H.client.prefs.branches[rank], H.client.prefs.ranks[rank])
 
 		// Transfers the skill settings for the job to the mob
 		H.skillset.obtain_from_client(job, H.client)
 
 		//Equip job items.
+		job.setup_account(H)
 		job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
 		job.apply_fingerprints(H)
 		spawn_in_storage = equip_custom_loadout(H, job)
-		job.setup_account(H)
 	else
 		to_chat(H, "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator.")
 
@@ -496,7 +498,7 @@ SUBSYSTEM_DEF(jobs)
 	if(!joined_late || job.latejoin_at_spawnpoints)
 		var/obj/S = job.get_roundstart_spawnpoint()
 
-		if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
+		if(istype(S, /obj/effect/landmark/start) && isturf(S.loc))
 			H.forceMove(S.loc)
 		else
 			var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(H.client)

@@ -11,7 +11,7 @@
 	var/obj/item/radio/radio
 
 /obj/item/camera/tvcamera/Destroy()
-	GLOB.listening_objects -= src
+	global.listening_objects -= src
 	QDEL_NULL(camera)
 	QDEL_NULL(radio)
 	. = ..()
@@ -24,7 +24,7 @@
 	radio.listening = FALSE
 	radio.set_frequency(ENT_FREQ)
 	radio.power_usage = 0
-	GLOB.listening_objects += src
+	global.listening_objects += src
 	. = ..()
 
 /obj/item/camera/tvcamera/examine(mob/user)
@@ -47,7 +47,7 @@
 	popup.set_content(jointext(dat,null))
 	popup.open()
 
-/obj/item/camera/tvcamera/Topic(bred, href_list, state = GLOB.physical_state)
+/obj/item/camera/tvcamera/Topic(bred, href_list, state = global.physical_topic_state)
 	if(..())
 		return 1
 	if (href_list["photo"])
@@ -144,9 +144,9 @@ Using robohead because of restricting to roboticist */
 				desc = "This TV camera assembly needs casing."
 				return
 		if(4)
-			if(istype(W, /obj/item/stack/material/steel))
-				var/obj/item/stack/material/steel/S = W
-				if(S.use(1))
+			if(istype(W, /obj/item/stack/material))
+				var/obj/item/stack/material/S = W
+				if(S.material?.type == /decl/material/solid/metal/steel && S.use(1))
 					buildstep++
 					to_chat(user, "<span class='notice'>You encase the assembly.</span>")
 					var/turf/T = get_turf(src)

@@ -109,7 +109,7 @@
 							/obj/item/card/id,
 						) //Should be enough of a selection for most purposes
 
-var/const/NO_EMAG_ACT = -50
+var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/emag/resolve_attackby(atom/A, mob/user)
 	var/used_uses = A.emag_act(uses, user, src)
 	if(used_uses == NO_EMAG_ACT)
@@ -201,7 +201,7 @@ var/const/NO_EMAG_ACT = -50
 	var/mob/user = usr
 	if(href_list["look_at_id"] && istype(user))
 		var/turf/T = get_turf(src)
-		if(T.CanUseTopic(user, GLOB.view_state) != STATUS_CLOSE)
+		if(T.CanUseTopic(user, global.view_topic_state) != STATUS_CLOSE)
 			user.examinate(src)
 			return TOPIC_HANDLED
 	. = ..()
@@ -267,9 +267,9 @@ var/const/NO_EMAG_ACT = -50
 /mob/living/carbon/human/set_id_info(var/obj/item/card/id/id_card)
 	..()
 	id_card.age = get_age()
-	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
+	if(global.using_map.flags & MAP_HAS_BRANCH)
 		id_card.military_branch = char_branch
-	if(GLOB.using_map.flags & MAP_HAS_RANK)
+	if(global.using_map.flags & MAP_HAS_RANK)
 		id_card.military_rank = char_rank
 
 /obj/item/card/id/proc/dat()
@@ -278,9 +278,9 @@ var/const/NO_EMAG_ACT = -50
 	dat += text("Sex: []</A><BR>\n", sex)
 	dat += text("Age: []</A><BR>\n", age)
 
-	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
+	if(global.using_map.flags & MAP_HAS_BRANCH)
 		dat += text("Branch: []</A><BR>\n", military_branch ? military_branch.name : "\[UNSET\]")
-	if(GLOB.using_map.flags & MAP_HAS_RANK)
+	if(global.using_map.flags & MAP_HAS_RANK)
 		dat += text("Rank: []</A><BR>\n", military_rank ? military_rank.name : "\[UNSET\]")
 
 	dat += text("Assignment: []</A><BR>\n", assignment)

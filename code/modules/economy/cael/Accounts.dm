@@ -15,7 +15,7 @@
 /datum/money_account/New(var/account_type)
 	account_type = account_type ? account_type : ACCOUNT_TYPE_PERSONAL
 	if(!ispath(currency, /decl/currency))
-		currency = GLOB.using_map.default_currency
+		currency = global.using_map.default_currency
 
 /datum/money_account/proc/format_value_by_currency(var/amt)
 	var/decl/currency/cur = GET_DECL(currency)
@@ -60,7 +60,7 @@
 	var/datum/transaction/singular/T = new(M, (source_db ? source_db.machine_id : "NTGalaxyNet Terminal #[rand(111,1111)]"), starting_funds, "Account creation")
 	if(!source_db)
 		//set a random date, time and location some time over the past few decades
-		T.date = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], [GLOB.using_map.game_year - rand(8,18)]"
+		T.date = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], [global.using_map.game_year - rand(8,18)]"
 		T.time = "[rand(0,24)]:[rand(11,59)]"
 
 		M.account_number = random_id("station_account_number", 111111, 999999)
@@ -98,9 +98,9 @@
 	return M
 
 //this returns the first account datum that matches the supplied accnum/pin combination, it returns null if the combination did not match any account
-/proc/attempt_account_access(var/attempt_account_number, var/attempt_pin_number, var/security_level_passed = 0)
+/proc/attempt_account_access(var/attempt_account_number, var/attempt_pin_number, var/valid_card)
 	var/datum/money_account/D = get_account(attempt_account_number)
-	if(D && D.security_level <= security_level_passed && (!D.security_level || D.remote_access_pin == attempt_pin_number) )
+	if(D && (D.security_level != 2 || valid_card) && (!D.security_level || D.remote_access_pin == attempt_pin_number) )
 		return D
 
 /proc/get_account(var/account_number)

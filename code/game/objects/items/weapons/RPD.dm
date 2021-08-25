@@ -1,8 +1,8 @@
-GLOBAL_LIST_EMPTY(rpd_pipe_selection)
-GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
+var/global/list/rpd_pipe_selection = list()
+var/global/list/rpd_pipe_selection_skilled = list()
 
 /proc/init_rpd_lists()
-	GLOB.rpd_pipe_selection = list(
+	global.rpd_pipe_selection = list(
 	"Regular Pipes" = list(
 		new /datum/fabricator_recipe/pipe(),
 		new /datum/fabricator_recipe/pipe/bent(),
@@ -23,7 +23,7 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 		new /datum/fabricator_recipe/pipe/scrubber/cap())
 	)
 
-	GLOB.rpd_pipe_selection_skilled = list(
+	global.rpd_pipe_selection_skilled = list(
 	"Regular Pipes" = list(
 		new /datum/fabricator_recipe/pipe(),
 		new /datum/fabricator_recipe/pipe/bent(),
@@ -85,10 +85,10 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 
 /obj/item/rpd/Initialize()
 	. = ..()
-	if(!length(GLOB.rpd_pipe_selection))
+	if(!length(global.rpd_pipe_selection))
 		return INITIALIZE_HINT_QDEL
 	spark_at(src, amount = 5, holder = src)
-	var/list/L = GLOB.rpd_pipe_selection[GLOB.rpd_pipe_selection[1]]
+	var/list/L = global.rpd_pipe_selection[global.rpd_pipe_selection[1]]
 	P = L[1]
 
 /obj/item/rpd/proc/get_console_data(var/list/pipe_categories, var/color_options = FALSE)
@@ -105,7 +105,7 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 
 /obj/item/rpd/interact(mob/user)
 	popup = new (user, "Pipe List", "[src] menu")
-	popup.set_content(get_console_data(user.skill_check(SKILL_ATMOS,SKILL_EXPERT) ? GLOB.rpd_pipe_selection_skilled : GLOB.rpd_pipe_selection, TRUE))
+	popup.set_content(get_console_data(user.skill_check(SKILL_ATMOS,SKILL_EXPERT) ? global.rpd_pipe_selection_skilled : global.rpd_pipe_selection, TRUE))
 	popup.open()
 
 /obj/item/rpd/OnTopic(var/user, var/list/href_list)
@@ -135,8 +135,8 @@ GLOBAL_LIST_EMPTY(rpd_pipe_selection_skilled)
 		recycle(A,user)
 	else
 		if(user.skill_fail_prob(SKILL_ATMOS, 80, SKILL_ADEPT))
-			var/C = pick(GLOB.rpd_pipe_selection)
-			P = pick(GLOB.rpd_pipe_selection[C])
+			var/C = pick(global.rpd_pipe_selection)
+			P = pick(global.rpd_pipe_selection[C])
 			user.visible_message(SPAN_WARNING("[user] cluelessly fumbles with \the [src]."))
 		var/turf/T = get_turf(A)
 		if(!T.Adjacent(src.loc)) return		//checks so it can't pipe through window and such

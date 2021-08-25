@@ -29,7 +29,7 @@
 			else
 				T.update_icon()
 
-/turf/exterior/ChangeTurf()
+/turf/exterior/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
 	var/last_affecting_heat_sources = affecting_heat_sources
 	var/turf/exterior/ext = ..()
 	if(istype(ext))
@@ -56,7 +56,7 @@
 		gas = new
 		gas.copy_from(owner.atmosphere)
 	else
-		gas = GLOB.using_map.get_exterior_atmosphere()
+		gas = global.using_map.get_exterior_atmosphere()
 	var/initial_temperature = gas.temperature
 	for(var/thing in affecting_heat_sources)
 		if((gas.temperature - initial_temperature) >= 100)
@@ -118,7 +118,7 @@
 		return
 
 	var/neighbors = 0
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in global.cardinal)
 		var/turf/exterior/turf_to_check = get_step(src,direction)
 		if(!turf_to_check || turf_to_check.density)
 			continue
@@ -140,7 +140,7 @@
 			add_overlay(I)
 
 	if(icon_has_corners)
-		for(var/direction in GLOB.cornerdirs)
+		for(var/direction in global.cornerdirs)
 			var/turf/exterior/turf_to_check = get_step(src,direction)
 			if(!isturf(turf_to_check) || turf_to_check.density || istype(turf_to_check, type))
 				continue
@@ -165,7 +165,7 @@
 						I.pixel_x -= world.icon_size
 					add_overlay(I)
 
-	var/datum/gas_mixture/air = (owner ? owner.atmosphere : GLOB.using_map.exterior_atmosphere)
+	var/datum/gas_mixture/air = (owner ? owner.atmosphere : global.using_map.exterior_atmosphere)
 	if(length(air?.graphic))
 		vis_contents += air.graphic
 	else

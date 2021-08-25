@@ -9,7 +9,7 @@
 	affected_levels = zlevels
 
 /datum/universal_state/jump/OnEnter()
-	var/space_zlevel = GLOB.using_map.get_empty_zlevel() //get a place for stragglers
+	var/space_zlevel = global.using_map.get_empty_zlevel() //get a place for stragglers
 	for(var/mob/living/M in SSmobs.mob_list)
 		if(M.z in affected_levels)
 			var/area/A = get_area(M)
@@ -19,13 +19,13 @@
 					M.forceMove(T)
 			else
 				create_duplicate(M)
-	for(var/mob/goast in GLOB.ghost_mob_list)
+	for(var/mob/goast in global.ghost_mob_list)
 		goast.mouse_opacity = 0	//can't let you click that Dave
 		goast.set_invisibility(SEE_INVISIBLE_LIVING)
 		goast.alpha = 255
-	old_accessible_z_levels = GLOB.using_map.accessible_z_levels.Copy()
+	old_accessible_z_levels = global.using_map.accessible_z_levels.Copy()
 	for(var/z in affected_levels)
-		GLOB.using_map.accessible_z_levels -= "[z]" //not accessible during the jump
+		global.using_map.accessible_z_levels -= "[z]" //not accessible during the jump
 
 /datum/universal_state/jump/OnExit()
 	for(var/mob/M in duplicated)
@@ -33,7 +33,7 @@
 			clear_duplicated(M)
 
 	duplicated.Cut()
-	GLOB.using_map.accessible_z_levels = old_accessible_z_levels
+	global.using_map.accessible_z_levels = old_accessible_z_levels
 	old_accessible_z_levels = null
 
 /datum/universal_state/jump/OnPlayerLatejoin(var/mob/living/M)
@@ -61,7 +61,7 @@
 		to_chat(M,"<span class='notice'>You feel rooted in material world again.</span>")
 		M.clear_fullscreen("wormhole")
 	M.set_status(STAT_CONFUSE, 0)
-	for(var/mob/goast in GLOB.ghost_mob_list)
+	for(var/mob/goast in global.ghost_mob_list)
 		goast.mouse_opacity = initial(goast.mouse_opacity)
 		goast.set_invisibility(initial(goast.invisibility))
 		goast.alpha = initial(goast.alpha)
@@ -84,14 +84,14 @@
 	daddy = ndaddy
 	set_dir(daddy.dir)
 	appearance = daddy.appearance
-	GLOB.moved_event.register(daddy, src, /obj/effect/bluegoast/proc/mirror)
-	GLOB.dir_set_event.register(daddy, src, /obj/effect/bluegoast/proc/mirror_dir)
-	GLOB.destroyed_event.register(daddy, src, /datum/proc/qdel_self)
+	events_repository.register(/decl/observ/moved, daddy, src, /obj/effect/bluegoast/proc/mirror)
+	events_repository.register(/decl/observ/dir_set, daddy, src, /obj/effect/bluegoast/proc/mirror_dir)
+	events_repository.register(/decl/observ/destroyed, daddy, src, /datum/proc/qdel_self)
 
 /obj/effect/bluegoast/Destroy()
-	GLOB.destroyed_event.unregister(daddy, src)
-	GLOB.dir_set_event.unregister(daddy, src)
-	GLOB.moved_event.unregister(daddy, src)
+	events_repository.unregister(/decl/observ/destroyed, daddy, src)
+	events_repository.unregister(/decl/observ/dir_set, daddy, src)
+	events_repository.unregister(/decl/observ/moved, daddy, src)
 	daddy = null
 	. = ..()
 
@@ -112,7 +112,7 @@
 			to_chat(daddy, SPAN_WARNING("You feel a bit less real. Which one of you two was original again...?"))
 
 /obj/effect/bluegoast/proc/mirror_dir(var/atom/movable/am, var/old_dir, var/new_dir)
-	set_dir(GLOB.reverse_dir[new_dir])
+	set_dir(global.reverse_dir[new_dir])
 
 /obj/effect/bluegoast/examine()
 	SHOULD_CALL_PARENT(FALSE)

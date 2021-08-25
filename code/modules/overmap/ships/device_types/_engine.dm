@@ -1,4 +1,4 @@
-var/list/ship_engines = list()
+var/global/list/ship_engines = list()
 /datum/extension/ship_engine
 	base_type = /datum/extension/ship_engine
 	expected_type = /obj/machinery
@@ -67,7 +67,7 @@ var/list/ship_engines = list()
 /datum/extension/ship_engine/proc/check_blockage()
 	var/obj/machinery/M = holder
 	blockage = FALSE
-	var/exhaust_dir = GLOB.reverse_dir[M.dir]
+	var/exhaust_dir = global.reverse_dir[M.dir]
 	var/turf/A = get_step(src, exhaust_dir)
 	var/turf/B = A
 	while(isturf(A) && !(isspaceturf(A) || A.is_open()))

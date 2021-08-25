@@ -94,7 +94,7 @@
 
 	var/mob/living/carbon/human/H = holder.wearer
 
-	if(!istype(H.loc, /turf))
+	if(!isturf(H.loc))
 		to_chat(H, "<span class='warning'>You cannot teleport out of your current location.</span>")
 		return 0
 
@@ -112,7 +112,7 @@
 		to_chat(H, "<span class='warning'>You cannot teleport into solid walls.</span>")
 		return 0
 
-	if(T.z in GLOB.using_map.admin_levels)
+	if(T.z in global.using_map.admin_levels)
 		to_chat(H, "<span class='warning'>You cannot use your teleporter on this Z-level.</span>")
 		return 0
 

@@ -51,16 +51,19 @@
 				AI.ai_actual_track(H)
 		return 1
 
-/datum/nano_module/program/crew_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
+/datum/nano_module/program/crew_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 
+	var/list/data = host.initial_data()
 	data["isAI"] = isAI(user)
-	data["crewmembers"] = list()
+
+	var/list/crewmembers = list()
 	var/datum/computer_network/network = get_network()
 	if(network)
 		for(var/z_level in GetConnectedZlevels(network.get_router_z()))
-			data["crewmembers"] += crew_repository.health_data(z_level)
-	data["crewmembers"] = sortByKey(data["crewmembers"], "name")
+			crewmembers += crew_repository.health_data(z_level)
+		data["crewmembers"] = sortTim(crewmembers, /proc/cmp_list_name_key_asc)
+	else
+		data["crewmembers"] = list()
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)

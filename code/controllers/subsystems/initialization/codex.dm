@@ -42,7 +42,7 @@ SUBSYSTEM_DEF(codex)
 	for(var/thing in SScodex.entries_by_string)
 		var/datum/codex_entry/entry = SScodex.entries_by_string[thing]
 		index_file[entry.display_name] = entry
-	index_file = sortAssoc(index_file)
+	index_file = sortTim(index_file, /proc/cmp_text_asc)
 	. = ..()
 
 /datum/controller/subsystem/codex/proc/parse_links(string, viewer)
@@ -115,15 +115,16 @@ SUBSYSTEM_DEF(codex)
 		var/mob/showing_mob =   locate(href_list["show_to"])
 		if(!istype(showing_mob) || !showing_mob.can_use_codex())
 			return 
+
 		var/atom/showing_atom = locate(href_list["show_examined_info"])
 		var/entry
 		if(istype(showing_atom, /datum/codex_entry))
 			entry = showing_atom
+		else if(istype(showing_atom))
+			entry = get_codex_entry(showing_atom.get_codex_value())
 		else
-			if(istype(showing_atom))
-				entry = get_codex_entry(showing_atom.get_codex_value())
-			else
-				entry = get_codex_entry(showing_atom)
+			entry = get_codex_entry(href_list["show_examined_info"])
+
 		if(entry)
 			present_codex_entry(showing_mob, entry)
 			return TRUE

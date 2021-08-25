@@ -1,7 +1,7 @@
 //Uncommenting ALLOW_HOLIDAYS in config.txt will enable this hook.
 /hook/startup/proc/updateHoliday()
-	if(config?.allow_holidays && fexists("config/holidays.json"))
-		var/list/holidays = cached_json_decode(file2text("config/holidays.json"))
+	if(config?.allow_holidays)
+		var/list/holidays = cached_json_decode(safe_file2text("config/holidays.json"), FALSE)
 		if(length(holidays))
 
 			var/c_year =    text2num(time2text(world.timeofday, "YY"))

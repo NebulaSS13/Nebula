@@ -1,17 +1,22 @@
-GLOBAL_DATUM_INIT(sound_channels, /repository/sound_channels, new)
-GLOBAL_VAR_INIT(lobby_sound_channel, GLOB.sound_channels.RequestChannel("LOBBY"))
-GLOBAL_VAR_INIT(vote_sound_channel, GLOB.sound_channels.RequestChannel("VOTE"))
-GLOBAL_VAR_INIT(ambience_sound_channel, GLOB.sound_channels.RequestChannel("AMBIENCE"))
-GLOBAL_VAR_INIT(admin_sound_channel, GLOB.sound_channels.RequestChannel("ADMIN_FUN"))
+var/global/repository/sound_channels/sound_channels = new
 
 /repository/sound_channels
 	var/datum/stack/available_channels
 	var/list/keys_by_channel           // So we know who to blame if we run out
 	var/channel_ceiling	= 1024         // Initial value is the current BYOND maximum number of channels
 
+	var/lobby_channel
+	var/vote_channel
+	var/ambience_channel
+	var/admin_channel
+
 /repository/sound_channels/New()
 	..()
 	available_channels = new()
+	lobby_channel =    RequestChannel("LOBBY")
+	vote_channel =     RequestChannel("VOTE")
+	ambience_channel = RequestChannel("AMBIENCE")
+	admin_channel =    RequestChannel("ADMIN_FUN")
 
 /repository/sound_channels/proc/RequestChannel(var/key)
 	. = RequestChannels(key, 1)

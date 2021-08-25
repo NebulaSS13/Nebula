@@ -16,7 +16,7 @@
 	var/list/possible_targets = list()
 	if(!possible_targets.len)
 		var/decl/special_role/cult = GET_DECL(/decl/special_role/cultist)
-		for(var/mob/living/carbon/human/player in GLOB.player_list)
+		for(var/mob/living/carbon/human/player in global.player_list)
 			if(player.mind && !(player.mind in cult.current_antagonists))
 				possible_targets += player.mind
 	if(possible_targets.len > 0)

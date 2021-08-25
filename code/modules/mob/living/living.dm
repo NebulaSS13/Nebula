@@ -609,10 +609,10 @@ default behaviour is:
 	return null
 
 /mob/living/proc/has_brain()
-	return 1
+	return TRUE
 
-/mob/living/proc/slip(var/slipped_on,stun_duration=8)
-	return 0
+/mob/living/proc/slip(var/slipped_on, stun_duration = 8)
+	return FALSE
 
 /mob/living/carbon/human/canUnEquip(obj/item/I)
 	if(!..())
@@ -624,7 +624,9 @@ default behaviour is:
 	return 1
 
 /mob/living/carbon/get_contained_external_atoms()
-	. = contents - (internal_organs|organs)
+	. = ..()
+	. -= internal_organs
+	. -= organs
 
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client
@@ -670,7 +672,9 @@ default behaviour is:
 	return 1
 
 /mob/living/reset_layer()
-	if(hiding)
+	if (jumping)
+		layer = VEHICLE_LOAD_LAYER
+	else if (hiding)
 		layer = HIDING_MOB_LAYER
 	else
 		..()
@@ -831,7 +835,7 @@ default behaviour is:
 			visible_message(SPAN_DANGER("\The [src]'s [isSynthetic() ? "state worsens": "wounds open more"] from being dragged!"))
 
 /mob/living/CanUseTopicPhysical(mob/user)
-	. = CanUseTopic(user, GLOB.physical_no_access_state)
+	. = CanUseTopic(user, global.physical_no_access_topic_state)
 
 /mob/living/proc/is_telekinetic()
 	return FALSE
@@ -879,3 +883,27 @@ default behaviour is:
 
 /mob/living/is_deaf()
 	. = ..() || GET_STATUS(src, STAT_DEAF)
+
+/mob/living/attempt_hug(mob/living/target, hug_3p, hug_1p)
+	. = ..()
+	if(.)
+
+		if(fire_stacks >= target.fire_stacks + 3)
+			target.fire_stacks += 1
+			fire_stacks -= 1
+		else if(target.fire_stacks >= fire_stacks + 3)
+			fire_stacks += 1
+			target.fire_stacks -= 1
+
+		if(on_fire && !target.on_fire)
+			target.IgniteMob()
+		else if(!on_fire && target.on_fire)
+			IgniteMob()
+
+/mob/living/proc/jump_layer_shift()
+	jumping = TRUE
+	reset_layer()
+
+/mob/living/proc/jump_layer_shift_end()
+	jumping = FALSE
+	reset_layer()

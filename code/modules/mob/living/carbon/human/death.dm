@@ -2,7 +2,7 @@
 	for(var/obj/item/organ/I in internal_organs)
 		I.removed()
 		if(!QDELETED(I) && isturf(loc))
-			I.throw_at(get_edge_target_turf(src, pick(GLOB.alldirs)), rand(1,3), THROWFORCE_GIBS)
+			I.throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 
 	for(var/obj/item/organ/external/E in src.organs)
 		E.dismember(0,DISMEMBER_METHOD_EDGE,1)
@@ -12,7 +12,7 @@
 	for(var/obj/item/I in src)
 		drop_from_inventory(I)
 		if(!QDELETED(I))
-			I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)), rand(1,3), round(THROWFORCE_GIBS/I.w_class))
+			I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), round(THROWFORCE_GIBS/I.w_class))
 
 	..(species.gibbed_anim)
 	gibs(loc, dna, null, species.get_flesh_colour(src), species.get_blood_colour(src))

@@ -349,10 +349,10 @@
 	dir = 8
 	},
 /obj/structure/closet/crate/plastic,
-/obj/item/stack/material/plastic/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/aluminium/fifty,
-/obj/item/stack/material/glass,
+/obj/item/stack/material/panel/mapped/plastic/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/shiny/mapped/aluminium/fifty,
+/obj/item/stack/material/pane/mapped/glass,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "aX" = (
@@ -365,7 +365,7 @@
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/button/blast_door{
 	id_tag = "anomvent";
 	name = "emergency vent control"
@@ -655,7 +655,7 @@
 /turf/simulated/floor/lino,
 /area/ship/trade/crew/dorms1)
 "bD" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/masks,
 /obj/random_multi/single_item/captains_spare_id,
 /turf/simulated/floor/lino,
@@ -825,7 +825,7 @@
 	pixel_w = -1;
 	pixel_z = 23
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/integrated_circuit_printer,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science/fabricaton)
@@ -1012,7 +1012,7 @@
 /turf/simulated/floor/lino,
 /area/ship/trade/crew/dorms2)
 "cG" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/newspaper,
 /turf/simulated/floor/lino,
 /area/ship/trade/crew/dorms2)
@@ -1136,7 +1136,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science)
 "db" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/wirecutters/clippers,
 /obj/item/minihoe,
 /obj/item/chems/glass/bucket,
@@ -1362,7 +1362,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/drunk_tank)
 "dB" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/plushie,
 /obj/item/synthesized_instrument/violin,
 /obj/effect/decal/cleanable/dirt,
@@ -1613,7 +1613,7 @@
 	dir = 1;
 	icon_state = "bulb1"
 	},
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/tank/jetpack/oxygen,
 /obj/item/clothing/mask/breath,
 /obj/item/tank/jetpack/oxygen,
@@ -2140,7 +2140,7 @@
 /obj/item/storage/toolbox/mechanical,
 /obj/item/clothing/head/welding,
 /obj/item/scanner/gas,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/inflatable_dispenser,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
@@ -2182,7 +2182,7 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 6
 	},
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/radio,
 /obj/random/clipboard,
 /obj/item/stamp/denied,
@@ -2326,10 +2326,10 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
 "ni" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/stock_parts/circuitboard/pacman/super/potato,
-/obj/item/stack/material/glass/reinforced_borosilicate/ten,
-/obj/item/stack/material/ocp/ten,
+/obj/item/stack/material/pane/mapped/rborosilicate/ten,
+/obj/item/stack/material/reinforced/mapped/ocp/ten,
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
@@ -2568,7 +2568,7 @@
 "un" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/fabricator/industrial,
-/obj/item/stack/material/osmium/ten,
+/obj/item/stack/material/ingot/mapped/osmium/ten,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
 /area/ship/trade/cargo/lower)
@@ -2674,7 +2674,7 @@
 /obj/item/stock_parts/circuitboard/pacman,
 /obj/item/stock_parts/circuitboard/recharge_station,
 /obj/item/stock_parts/circuitboard/shield_generator,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5
 	},
@@ -3231,7 +3231,7 @@
 /obj/effect/landmark/start{
 	name = "Head Engineer"
 	},
-/obj/item/stack/material/osmium/ten,
+/obj/item/stack/material/ingot/mapped/osmium/ten,
 /turf/simulated/floor/lino,
 /area/ship/trade/crew/dorms2)
 "Qb" = (
@@ -3264,7 +3264,7 @@
 /obj/item/stock_parts/micro_laser,
 /obj/item/stock_parts/micro_laser,
 /obj/item/stock_parts/micro_laser/ultra,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/machinery/power/apc{
 	name = "south bump";
 	pixel_y = -24
@@ -3440,19 +3440,19 @@
 /area/ship/trade/crew/dorms2)
 "Vm" = (
 /obj/item/tape_roll,
-/obj/item/stack/material/plasteel/fifty,
-/obj/item/stack/material/copper/fifty,
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
+/obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/item/stack/material/rods/fifty,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/plastic/fifty,
-/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/panel/mapped/plastic/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/structure/closet/crate,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fifty,
-/obj/item/stack/material/glass/fiber/fifty,
-/obj/item/stack/material/glass/reinforced/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/rglass/fifty,
+/obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
 /obj/item/clothing/head/welding,
-/obj/item/stack/material/cardboard/fifty,
+/obj/item/stack/material/cardstock/mapped/cardboard/fifty,
 /obj/item/tape_roll,
 /obj/item/taperoll/engineering,
 /turf/simulated/floor/tiled/techfloor,
@@ -3493,7 +3493,7 @@
 "Yb" = (
 /obj/item/stock_parts/circuitboard/helm,
 /obj/item/stock_parts/circuitboard/unary_atmos/cooler,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5
 	},
@@ -3519,11 +3519,10 @@
 /obj/item/stock_parts/circuitboard/air_alarm,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5
 	},
-/obj/structure/emergency_dispenser/east,
 /obj/structure/emergency_dispenser/north,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)

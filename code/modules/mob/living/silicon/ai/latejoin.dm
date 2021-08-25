@@ -21,7 +21,8 @@
 
 	// We warned you.
 	empty_playable_ai_cores += new /obj/structure/aicore/deactivated(loc)
-	GLOB.global_announcer.autosay("[src] has been moved to intelligence storage.", "Artificial Intelligence Oversight")
+	var/obj/item/radio/announcer = get_global_announcer()
+	announcer.autosay("[src] has been moved to intelligence storage.", "Artificial Intelligence Oversight")
 
 	//Handle job slot/tater cleanup.
 	clear_client()

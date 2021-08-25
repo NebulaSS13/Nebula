@@ -102,7 +102,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "ao" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/firstaid,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
@@ -196,7 +196,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "aB" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/cell,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
@@ -254,7 +254,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "aK" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
@@ -280,7 +280,7 @@
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "aN" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -349,12 +349,12 @@
 /turf/simulated/wall,
 /area/constructionsite/maintenance)
 "aX" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/handgun,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "aY" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "aZ" = (
@@ -378,7 +378,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "bb" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/tank/oxygen,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
@@ -426,7 +426,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/maintenance)
 "bj" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/scanner/gas,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
@@ -462,7 +462,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/maintenance)
 "br" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/loot,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
@@ -510,17 +510,17 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/maintenance)
 "bB" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/modular_computer/laptop,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "bC" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/drinkbottle,
 /turf/simulated/floor/airless,
 /area/constructionsite/bridge)
 "bD" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/airless,
 /area/constructionsite/bridge)
 "bE" = (
@@ -580,7 +580,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/bridge)
 "bP" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/paper{
 	info = "\\\[center]\\\[b]ATTN: Regarding Meteor Storms\\\[/b]\[/center]\\\[br]\\\[br]We've recently heard mutterings from the Atmospheric Technicians that the meteor showers in this sector are becoming too much. However, this should be disregarded.\\\[br]\\\[br] High Command has assured us that our shields can easily keep pace with any meteor storm and then some. Any uneasiness the crew may feel should be disspelled swiftly. Thank you.";
 	name = "ATTN: Regarding Meteor Storms"
@@ -608,7 +608,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "bU" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/tank/emergency/oxygen,
 /obj/item/tank/emergency/oxygen,
 /obj/item/tank/emergency/oxygen,
@@ -617,14 +617,14 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "bV" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/mask/breath,
 /obj/item/cell,
 /obj/random/hardsuit,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "bW" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/storage/toolbox/syndicate,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled,
@@ -847,14 +847,14 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/constructionsite/hallway/fore)
 "cJ" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/screwdriver,
 /obj/machinery/light,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "cK" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/item/radio/off,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
@@ -983,7 +983,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "df" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/loot,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
@@ -1001,7 +1001,7 @@
 	},
 /area/constructionsite/hallway/fore)
 "di" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "dj" = (
@@ -1033,12 +1033,12 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "dp" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tool,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "dq" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/hat,
 /obj/random/junk,
 /turf/simulated/floor/airless,
@@ -1048,18 +1048,18 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/constructionsite/hallway/fore)
 "ds" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "dt" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/toy,
 /turf/simulated/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/fore)
 "du" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "dv" = (
@@ -1192,7 +1192,7 @@
 /turf/space,
 /area/space)
 "dW" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
@@ -1226,11 +1226,11 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "ee" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "ef" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/material,
 /obj/random/material,
 /obj/random/coin,
@@ -1298,36 +1298,24 @@
 	dir = 1;
 	icon_state = "tube1"
 	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
+/obj/item/stack/material/sheet/mapped/steel/fifty,
 /obj/random/tech_supply,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ep" = (
 /obj/structure/table/reinforced,
-/obj/item/stack/material/plasteel{
-	amount = 50
-	},
+/obj/item/stack/material/reinforced/mapped/plasteel/fifty,
 /obj/random/tech_supply,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "er" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /obj/random/toolbox,
 /turf/simulated/floor/airless,
@@ -1905,7 +1893,7 @@
 /turf/space,
 /area/constructionsite/solar)
 "ge" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/plushie,
 /obj/random/loot,
 /turf/simulated/floor/airless,
@@ -1965,13 +1953,13 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/space)
 "gs" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /obj/random/maintenance,
 /turf/simulated/floor/airless,
 /area/constructionsite/maintenance)
 "gt" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /turf/simulated/floor/airless,
 /area/constructionsite/maintenance)
@@ -2135,7 +2123,7 @@
 /turf/simulated/floor/bluegrid/airless,
 /area/constructionsite/hallway/aft)
 "ha" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
@@ -2200,7 +2188,7 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hm" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/firstaid,
 /obj/random/firstaid,
 /obj/effect/floor_decal/corner/green{
@@ -2242,7 +2230,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "hw" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hx" = (
@@ -2302,7 +2290,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "hI" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/firstaid,
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
@@ -2764,7 +2752,7 @@
 /turf/space,
 /area/constructionsite)
 "jh" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/bedsheetbin,
 /turf/simulated/floor/airless,
 /area/constructionsite)
@@ -2773,18 +2761,18 @@
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "jj" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/hat,
 /obj/random/gloves,
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "jk" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/gloves,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite)
 "jl" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite)
@@ -2793,11 +2781,11 @@
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "jn" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "jo" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/structure/closet/body_bag/cryobag,
 /obj/structure/closet/body_bag/cryobag,
 /turf/simulated/floor/airless,
@@ -3007,7 +2995,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "kh" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/hardsuit,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite)
@@ -3026,7 +3014,7 @@
 	},
 /area/constructionsite)
 "kl" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/machinery/cell_charger,
 /obj/random/powercell,
 /turf/simulated/floor/airless,
@@ -3042,13 +3030,13 @@
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "ko" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tool,
 /obj/random/tool,
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "kp" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "kq" = (
@@ -3071,7 +3059,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "ku" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/toolbox,
 /obj/random/loot,
 /turf/simulated/floor/tiled/dark/airless,
@@ -3135,7 +3123,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "kL" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "kM" = (
@@ -3143,7 +3131,7 @@
 /turf/simulated/wall,
 /area/constructionsite/engineering)
 "kN" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/tool,
 /obj/random/maintenance,
 /obj/random/maintenance,
@@ -3170,7 +3158,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "kS" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "kT" = (
@@ -3178,7 +3166,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "kU" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/material,
 /obj/random/material,
 /obj/random/material,
@@ -3191,13 +3179,13 @@
 	},
 /area/constructionsite/engineering)
 "kW" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/toolbox,
 /obj/random/maintenance,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "kX" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/maintenance,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
@@ -3207,7 +3195,7 @@
 /turf/space,
 /area/constructionsite/engineering)
 "kZ" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/loot,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
@@ -3233,7 +3221,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "lf" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/tool,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
@@ -3246,14 +3234,14 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "li" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/tool,
 /obj/random/voidsuit,
 /obj/random/coin,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "lj" = (
-/obj/structure/table/standard,
+/obj/structure/table,
 /obj/random/toolbox,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
@@ -3290,7 +3278,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "lr" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/tool,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
@@ -3303,7 +3291,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "lt" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/toolbox,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
@@ -3370,7 +3358,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "lB" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
@@ -3439,12 +3427,12 @@
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lL" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/item/clothing/gloves/insulated,
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lM" = (
-/obj/structure/table/rack,
+/obj/structure/rack,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
@@ -3533,21 +3521,11 @@
 /area/space)
 "nb" = (
 /obj/structure/table/reinforced,
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
+/obj/item/stack/material/pane/mapped/glass/fifty,
 /obj/random/tech_supply,
 /obj/random/maintenance,
 /obj/machinery/camera/motion{

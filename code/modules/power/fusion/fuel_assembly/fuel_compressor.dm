@@ -48,7 +48,7 @@
 			to_chat(user, "<span class='warning'>It would be pointless to make a fuel rod out of [mat.use_name].</span>")
 			return
 		if(!M.use(5))
-			to_chat(user, "<span class='warning'>You need at least five [mat.sheet_plural_name] to make a fuel rod.</span>")
+			to_chat(user, "<span class='warning'>You need at least five sheets to make a fuel rod.</span>")
 			return
 		var/obj/item/fuel_assembly/F = new(get_turf(src), mat.type)
 		visible_message("<span class='notice'>\The [src] compresses the [mat.use_name] into a new fuel assembly.</span>")

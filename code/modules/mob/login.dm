@@ -7,7 +7,7 @@
 	log_access("Login: [key_name(src)] from [lastKnownIP ? lastKnownIP : "localhost"]-[computer_id] || BYOND v[client.byond_version]")
 	if(config.log_access)
 		var/is_multikeying = 0
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M in global.player_list)
 			if(M == src)	continue
 			if( M.key && (M.key != key) )
 				var/matches
@@ -44,13 +44,13 @@
 
 /mob/proc/maybe_send_staffwarns(var/action)
 	if(client.staffwarn)
-		for(var/client/C in GLOB.admins)
+		for(var/client/C in global.admins)
 			send_staffwarn(C, action)
 
 /mob/proc/send_staffwarn(var/client/C, var/action, var/noise = 1)
 	if(check_rights((R_ADMIN|R_MOD),0,C))
 		to_chat(C,"<span class='staffwarn'>StaffWarn: [client.ckey] [action]</span><br><span class='notice'>[client.staffwarn]</span>")
-		if(noise && C.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
+		if(noise && C.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == PREF_HEAR)
 			sound_to(C, 'sound/effects/adminhelp.ogg')
 
 /mob
@@ -58,7 +58,7 @@
 
 /mob/Login()
 
-	GLOB.player_list |= src
+	global.player_list |= src
 	update_Login_details()
 	world.update_status()
 
@@ -97,7 +97,7 @@
 	if(ability_master)
 		ability_master.update_abilities(1, src)
 		ability_master.toggle_open(1)
-	GLOB.logged_in_event.raise_event(src)
+	events_repository.raise_event(/decl/observ/logged_in, src)
 
 	//set macro to normal incase it was overriden (like cyborg currently does)
 	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5")
@@ -110,10 +110,10 @@
 				var/spell/S = screen.spell
 				mind.learned_spells |= S
 
-	if(get_preference_value(/datum/client_preference/show_status_markers) == GLOB.PREF_SHOW)
+	if(get_preference_value(/datum/client_preference/show_status_markers) == PREF_SHOW)
 		if(status_markers)
 			client.images |= status_markers.mob_image_personal
-		for(var/datum/status_marker_holder/marker as anything in global.status_marker_holders)
+		for(var/datum/status_marker_holder/marker AS_ANYTHING in global.status_marker_holders)
 			if(marker != status_markers)
 				client.images |= marker.mob_image
 

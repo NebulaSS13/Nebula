@@ -152,7 +152,7 @@
 		/obj/item/sutures,
 		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/stack/nanopaste
-		)
+	)
 
 	startswith = list(
 		/obj/item/bonesetter,
@@ -165,4 +165,26 @@
 		/obj/item/bonegel,
 		/obj/item/sutures,
 		/obj/item/stack/medical/advanced/bruise_pack,
-		)
+	)
+
+/obj/item/storage/firstaid/surgery/ghetto // Mostly just for debugging.
+	name = "shady surgery kit"
+	can_hold = list(
+		/obj/item/screwdriver,
+		/obj/item/wrench,
+		/obj/item/hatchet,
+		/obj/item/kitchen/utensil/fork,
+		/obj/item/shard,
+		/obj/item/flame/lighter,
+		/obj/item/stack/cable_coil
+	)
+
+	startswith = list(
+		/obj/item/screwdriver,
+		/obj/item/wrench,
+		/obj/item/hatchet,
+		/obj/item/kitchen/utensil/fork,
+		/obj/item/shard,
+		/obj/item/flame/lighter,
+		/obj/item/stack/cable_coil
+	)

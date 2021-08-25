@@ -245,7 +245,7 @@
 		choices |= AIRLOCK_REGION_STRIPE
 	if (D.paintable & AIRLOCK_WINDOW_PAINTABLE)
 		choices |= AIRLOCK_REGION_WINDOW
-	choice = input(user, input_text) as null|anything in sortList(choices)
+	choice = input(user, input_text) as null|anything in sortTim(choices, /proc/cmp_text_asc)
 	if (user.incapacitated() || !D || !user.Adjacent(D))
 		return FALSE
 	return choice

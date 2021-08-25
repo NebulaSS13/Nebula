@@ -38,7 +38,7 @@
 	if(input_turf)
 		overlay_dir = get_dir(src, input_turf)
 		if(overlay_dir != 0)
-			var/image/I = image('icons/obj/machines/mining_machine_overlays.dmi', "[GLOB.reverse_dir[overlay_dir]]")
+			var/image/I = image('icons/obj/machines/mining_machine_overlays.dmi', "[global.reverse_dir[overlay_dir]]")
 			I.layer = DECAL_LAYER
 			switch(overlay_dir)
 				if(NORTH) I.pixel_y += world.icon_size
@@ -78,7 +78,7 @@
 	var/list/data = get_ui_data()
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, use_ui_template, "[capitalize(name)]", 600, 800, state = GLOB.physical_state)
+		ui = new(user, src, ui_key, use_ui_template, "[capitalize(name)]", 600, 800, state = global.physical_topic_state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

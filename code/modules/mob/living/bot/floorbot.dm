@@ -115,8 +115,11 @@
 
 	if(istype(A, /obj/item/stack/tile/floor))
 		return (amount < maxAmount && eattiles)
-	if(istype(A, /obj/item/stack/material/steel))
-		return (amount < maxAmount && maketiles)
+
+	if(istype(A, /obj/item/stack/material))
+		var/obj/item/stack/material/S = A
+		if(S.material?.type == /decl/material/solid/metal/steel)
+			return (amount < maxAmount && maketiles)
 
 	if(A.loc.name == "Space")
 		return 0

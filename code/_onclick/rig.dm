@@ -1,23 +1,23 @@
 /mob/living/MiddleClickOn(atom/A)
-	if(get_preference_value(/datum/client_preference/hardsuit_activation) == GLOB.PREF_MIDDLE_CLICK)
+	if(get_preference_value(/datum/client_preference/hardsuit_activation) == PREF_MIDDLE_CLICK)
 		if(HardsuitClickOn(A))
 			return
 	..()
 
 /mob/living/AltClickOn(atom/A)
-	if(get_preference_value(/datum/client_preference/hardsuit_activation) == GLOB.PREF_ALT_CLICK)
+	if(get_preference_value(/datum/client_preference/hardsuit_activation) == PREF_ALT_CLICK)
 		if(HardsuitClickOn(A))
 			return
 	..()
 
 /mob/living/CtrlClickOn(atom/A)
-	if(get_preference_value(/datum/client_preference/hardsuit_activation) == GLOB.PREF_CTRL_CLICK)
+	if(get_preference_value(/datum/client_preference/hardsuit_activation) == PREF_CTRL_CLICK)
 		if(HardsuitClickOn(A))
 			return FALSE
 	. = ..()
 
 /mob/living/CtrlShiftClickOn(atom/A)
-	if(get_preference_value(/datum/client_preference/hardsuit_activation) == GLOB.PREF_CTRL_SHIFT_CLICK)
+	if(get_preference_value(/datum/client_preference/hardsuit_activation) == PREF_CTRL_SHIFT_CLICK)
 		if(HardsuitClickOn(A))
 			return
 	..()

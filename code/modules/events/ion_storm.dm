@@ -99,7 +99,7 @@
 								"All crewmembers will soon undergo a transformation into something better and more beautiful. Ensure that this process is not interrupted.",
 								"Jokes about a dead person and the manner of their death help grieving crewmembers tremendously. Especially if they were close with the deceased.",
 								"[pick("The crew", random_player)] is [pick("less","more")] intelligent than average. Point out every action and statement which supports this fact.",
-								"[GLOB.using_map.company_name] is displeased with the low work performance of the [location_name()]'s's crew. Therefore, you must increase productivity in ALL departments.",
+								"[global.using_map.company_name] is displeased with the low work performance of the [location_name()]'s's crew. Therefore, you must increase productivity in ALL departments.",
 								"[pick("The crew", random_player)] has a fatal, incurable disease. Provide comfort but do not tell them what the disease it - it's far too traumatising.",
 								"[get_random_species_name()] are the best species. Badmouth all other species continuously, and provide arguments why they are the best, and all others are inferior.",
 								"There will be a mandatory tea break every 30 minutes, with a duration of 5 minutes. Anyone caught working during a tea break must be sent a formal, but fairly polite, complaint about their actions, in writing.")
@@ -115,13 +115,13 @@
 			MS.spamfilter.Cut()
 			var/i
 			for (i = 1, i <= MS.spamfilter_limit, i++)
-				MS.spamfilter += pick("kitty","HONK","rev","malf","liberty","freedom","drugs", "[GLOB.using_map.station_short]", \
+				MS.spamfilter += pick("kitty","HONK","rev","malf","liberty","freedom","drugs", "[global.using_map.station_short]", \
 					"admin","ponies","heresy","meow","Pun Pun","monkey","Ian","moron","pizza","message","spam",\
 					"director", "Hello", "Hi!"," ","nuke","crate","dwarf","xeno")
 
 /datum/event/ionstorm/tick()
 	if(botEmagChance)
-		for(var/mob/living/bot/bot in GLOB.living_mob_list_)
+		for(var/mob/living/bot/bot in global.living_mob_list_)
 			if(!(bot.z in affecting_z))
 				continue
 			if(prob(botEmagChance))
@@ -134,7 +134,7 @@
 
 
 /datum/event/ionstorm/proc/get_random_humanoid_player_name(var/default_if_none)
-	for (var/mob/living/carbon/human/player in GLOB.player_list)
+	for (var/mob/living/carbon/human/player in global.player_list)
 		if(!player.mind || player_is_antag(player.mind, only_offstation_roles = 1) || !player.is_client_active(5))
 			continue
 		players += player.real_name

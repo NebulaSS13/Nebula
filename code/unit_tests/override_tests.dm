@@ -8,14 +8,14 @@
 	name = "OVERRIDE - obj/random shall spawn heaviest item"
 
 /datum/unit_test/override/obj_random_shall_spawn_heaviest_item/start_test()
-	GLOB.unit_test_last_obj_random_creation = null
+	global.unit_test_last_obj_random_creation = null
 	var/obj/random/unit_test/R = new()
 
-	if(GLOB.unit_test_last_obj_random_creation && GLOB.unit_test_last_obj_random_creation.type == /obj/unit_test_heavy)
+	if(global.unit_test_last_obj_random_creation && global.unit_test_last_obj_random_creation.type == /obj/unit_test_heavy)
 		pass("[log_info_line(R)] created an object of the expected type.")
 	else
-		if(GLOB.unit_test_last_obj_random_creation)
-			fail("[log_info_line(R)] did not create an object of the expected type. Expected /obj/unit_test_heavy, was [GLOB.unit_test_last_obj_random_creation.type]")
+		if(global.unit_test_last_obj_random_creation)
+			fail("[log_info_line(R)] did not create an object of the expected type. Expected /obj/unit_test_heavy, was [global.unit_test_last_obj_random_creation.type]")
 		else
 			fail("[log_info_line(R)] did not create an object")
 

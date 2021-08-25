@@ -1,4 +1,4 @@
-var/list/areas = list()
+var/global/list/areas = list()
 
 /area
 
@@ -44,7 +44,7 @@ var/list/areas = list()
 	var/sound_env = STANDARD_STATION
 	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
 
-	var/global/global_uid = 0
+	var/static/global_uid = 0
 	var/uid
 	var/area_flags = 0
 
@@ -288,7 +288,7 @@ var/list/areas = list()
 		M.set_emergency_lighting(enable)
 
 
-var/list/mob/living/forced_ambiance_list = new
+var/global/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(A)
 	if(!istype(A,/mob/living))	return
@@ -315,20 +315,20 @@ var/list/mob/living/forced_ambiance_list = new
 
 /area/proc/play_ambience(var/mob/living/L)
 	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
-	if(!(L && L.client && L.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))	return
+	if(!(L && L.client && L.get_preference_value(/datum/client_preference/play_ambiance) == PREF_YES))	return
 
 	var/turf/T = get_turf(L)
 
 	if(LAZYLEN(forced_ambience) && !(L in forced_ambiance_list))
 		forced_ambiance_list += L
-		L.playsound_local(T,sound(pick(forced_ambience), repeat = 1, wait = 0, volume = 25, channel = GLOB.lobby_sound_channel))
+		L.playsound_local(T,sound(pick(forced_ambience), repeat = 1, wait = 0, volume = 25, channel = sound_channels.lobby_channel))
 	if(ambience.len && prob(5) && (world.time >= L.client.played + 3 MINUTES))
-		L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 15, channel = GLOB.ambience_sound_channel))
+		L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 15, channel = sound_channels.ambience_channel))
 		L.client.played = world.time
 
 /area/proc/clear_ambience(var/mob/living/L)
 	if(L in forced_ambiance_list)
-		sound_to(L, sound(null, channel = GLOB.lobby_sound_channel))
+		sound_to(L, sound(null, channel = sound_channels.lobby_channel))
 		forced_ambiance_list -= L
 
 /area/proc/gravitychange(var/gravitystate = 0)

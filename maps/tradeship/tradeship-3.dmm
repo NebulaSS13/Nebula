@@ -87,10 +87,7 @@
 /turf/simulated/floor/plating,
 /area/ship/trade/maintenance/solars)
 "aq" = (
-/obj/item/stack/cable_coil/yellow{
-	amount = 1;
-	icon_state = "coil2"
-	},
+/obj/item/stack/cable_coil/single/yellow,
 /turf/simulated/floor/airless,
 /area/space)
 "as" = (
@@ -253,7 +250,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ship/trade/maintenance/solars)
 "bd" = (
-/obj/item/stack/material/glass/ten,
+/obj/item/stack/material/pane/mapped/glass/ten,
 /turf/simulated/floor/airless,
 /area/space)
 "bf" = (

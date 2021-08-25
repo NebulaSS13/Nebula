@@ -81,7 +81,7 @@
 				to_chat(user, "You cannot pad \the [src] with that.")
 				return
 			C.use(1)
-			if(!istype(src.loc, /turf))
+			if(!isturf(src.loc))
 				src.forceMove(get_turf(src))
 			to_chat(user, "You add padding to \the [src].")
 			add_padding(padding_type)
@@ -120,7 +120,7 @@
 
 /obj/structure/bed/proc/remove_padding()
 	if(reinf_material)
-		reinf_material.place_sheet(get_turf(src))
+		reinf_material.create_object(get_turf(src))
 		reinf_material = null
 	update_icon()
 

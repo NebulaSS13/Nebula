@@ -49,6 +49,12 @@
 /proc/cmp_text_dsc(a,b)
 	return sorttext(a, b)
 
+/proc/cmp_list_name_key_asc(var/list/a, var/list/b)
+	return sorttext(b["name"], a["name"])
+
+/proc/cmp_list_name_key_dsc(var/list/a, var/list/b)
+	return sorttext(a["name"], b["name"])
+
 /proc/cmp_qdel_item_time(datum/qdel_item/A, datum/qdel_item/B)
 	. = B.hard_delete_time - A.hard_delete_time
 	if (!.)
@@ -96,3 +102,6 @@
 
 /proc/cmp_mob_sortvalue_des(mob/a, mob/b)
 	. = b.mob_sort_value - a.mob_sort_value
+
+/proc/cmp_rcon_tag_asc(var/obj/machinery/power/smes/buildable/a, var/obj/machinery/power/smes/buildable/b)
+	return sorttext(b.RCon_tag, a.RCon_tag)

@@ -1,4 +1,4 @@
-var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
+var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
 
 /datum/preferences
 	var/species
@@ -29,64 +29,38 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	sort_order = 2
 	var/hide_species = TRUE
 
-/datum/category_item/player_setup_item/physical/body/load_character(var/savefile/S)
-	from_file(S["species"], pref.species)
-	from_file(S["hair_colour"], pref.hair_colour)
-	from_file(S["facial_hair_colour"], pref.facial_hair_colour)
-	from_file(S["skin_colour"], pref.skin_colour)
-	from_file(S["eye_colour"], pref.eye_colour)
-	from_file(S["skin_tone"], pref.skin_tone)
-	from_file(S["hair_style_name"], pref.h_style)
-	from_file(S["facial_style_name"], pref.f_style)
-	from_file(S["b_type"], pref.b_type)
-	from_file(S["disabilities"], pref.disabilities)
-	from_file(S["organ_data"], pref.organ_data)
-	from_file(S["rlimb_data"], pref.rlimb_data)
-	from_file(S["body_markings"], pref.body_markings)
-	from_file(S["appearance_descriptors"], pref.appearance_descriptors)
-	from_file(S["bgstate"], pref.bgstate)
+/datum/category_item/player_setup_item/physical/body/load_character(datum/pref_record_reader/R)
+	pref.species =                R.read("species")
+	pref.hair_colour =            R.read("hair_colour")
+	pref.facial_hair_colour =     R.read("facial_hair_colour")
+	pref.skin_colour =            R.read("skin_colour")
+	pref.eye_colour =             R.read("eye_colour")
+	pref.skin_tone =              R.read("skin_tone")
+	pref.h_style =                R.read("hair_style_name")
+	pref.f_style =                R.read("facial_style_name")
+	pref.b_type =                 R.read("b_type")
+	pref.disabilities =           R.read("disabilities")
+	pref.organ_data =             R.read("organ_data")
+	pref.rlimb_data =             R.read("rlimb_data")
+	pref.body_markings =          R.read("body_markings")
+	pref.appearance_descriptors = R.read("appearance_descriptors")
+	pref.bgstate =                R.read("bgstate")
 
-	// Grandfathering in older saves post colour rewrite.
-	var/r = 0
-	var/g = 0
-	var/b = 0
-	if(!pref.hair_colour || pref.hair_colour == COLOR_BLACK)
-		from_file(S["hair_red"],     r)
-		from_file(S["hair_green"],   g)
-		from_file(S["hair_blue"],    b)
-		pref.hair_colour = rgb(r, g, b)
-	if(!pref.facial_hair_colour || pref.facial_hair_colour == COLOR_BLACK)
-		from_file(S["facial_red"],   r)
-		from_file(S["facial_green"], g)
-		from_file(S["facial_blue"],  g)
-		pref.facial_hair_colour = rgb(r, g, b)
-	if(!pref.skin_colour || pref.skin_colour == COLOR_BLACK)
-		from_file(S["skin_red"],     r)
-		from_file(S["skin_green"],   g)
-		from_file(S["skin_blue"],    b)
-		pref.skin_colour = rgb(r, g, b)
-	if(!pref.eye_colour || pref.eye_colour == COLOR_BLACK)
-		from_file(S["eyes_red"],     r)
-		from_file(S["eyes_green"],   g)
-		from_file(S["eyes_blue"],    b)
-		pref.eye_colour = rgb(r, g, b)
-	// End grandfathering.
-
-/datum/category_item/player_setup_item/physical/body/save_character(var/savefile/S)
-	to_file(S["species"], pref.species)
-	to_file(S["skin_tone"], pref.skin_tone)
-	to_file(S["hair_colour"], pref.hair_colour)
-	to_file(S["facial_hair_colour"], pref.facial_hair_colour)
-	to_file(S["skin_colour"], pref.skin_colour)
-	to_file(S["eye_colour"], pref.eye_colour)
-	to_file(S["hair_style_name"],pref.h_style)
-	to_file(S["facial_style_name"],pref.f_style)
-	to_file(S["b_type"], pref.b_type)
-	to_file(S["disabilities"], pref.disabilities)
-	to_file(S["organ_data"], pref.organ_data)
-	to_file(S["body_markings"], pref.body_markings)
-	to_file(S["appearance_descriptors"], pref.appearance_descriptors)
-	to_file(S["bgstate"], pref.bgstate)
+/datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
+	W.write("species",                pref.species)
+	W.write("skin_tone",              pref.skin_tone)
+	W.write("hair_colour",            pref.hair_colour)
+	W.write("facial_hair_colour",     pref.facial_hair_colour)
+	W.write("skin_colour",            pref.skin_colour)
+	W.write("eye_colour",             pref.eye_colour)
+	W.write("hair_style_name",        pref.h_style)
+	W.write("facial_style_name",      pref.f_style)
+	W.write("b_type",                 pref.b_type)
+	W.write("disabilities",           pref.disabilities)
+	W.write("organ_data",             pref.organ_data)
+	W.write("body_markings",          pref.body_markings)
+	W.write("appearance_descriptors", pref.appearance_descriptors)
+	W.write("bgstate",                pref.bgstate)
 
 	var/list/rlimb_string_data = list()
 	for(var/limb in pref.rlimb_data)
@@ -94,23 +68,23 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 		if(ispath(model))
 			var/decl/prosthetics_manufacturer/model_data = GET_DECL(model)
 			rlimb_string_data[limb] = model_data.name
-	to_file(S["rlimb_data"], rlimb_string_data)
+	W.write("rlimb_data", rlimb_string_data)
 
-/datum/category_item/player_setup_item/physical/body/sanitize_character(var/savefile/S)
+/datum/category_item/player_setup_item/physical/body/sanitize_character()
 
 	pref.skin_colour =        pref.skin_colour        || COLOR_BLACK
 	pref.hair_colour =        pref.hair_colour        || COLOR_BLACK
 	pref.facial_hair_colour = pref.facial_hair_colour || COLOR_BLACK
 	pref.eye_colour  =        pref.eye_colour         || COLOR_BLACK
+	pref.h_style =            sanitize_inlist(pref.h_style, global.hair_styles_list, initial(pref.h_style))
+	pref.f_style =            sanitize_inlist(pref.f_style, global.facial_hair_styles_list, initial(pref.f_style))
+	pref.b_type =             sanitize_text(pref.b_type, initial(pref.b_type))
 
-	pref.h_style		= sanitize_inlist(pref.h_style, GLOB.hair_styles_list, initial(pref.h_style))
-	pref.f_style		= sanitize_inlist(pref.f_style, GLOB.facial_hair_styles_list, initial(pref.f_style))
-	pref.b_type			= sanitize_text(pref.b_type, initial(pref.b_type))
 	if(!pref.b_type || !(pref.b_type in global.valid_bloodtypes))
 		pref.b_type = RANDOM_BLOOD_TYPE
 
 	if(!pref.species || !(pref.species in get_playable_species()))
-		pref.species = GLOB.using_map.default_species
+		pref.species = global.using_map.default_species
 
 	var/decl/species/mob_species = get_species_by_key(pref.species)
 
@@ -143,7 +117,7 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	if(!istype(pref.body_markings))
 		pref.body_markings = list()
 	else
-		pref.body_markings &= GLOB.body_marking_styles_list
+		pref.body_markings &= global.body_marking_styles_list
 
 	sanitize_organs()
 
@@ -483,9 +457,9 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 	else if(href_list["marking_style"])
 		var/list/disallowed_markings = list()
 		for (var/M in pref.body_markings)
-			var/datum/sprite_accessory/marking/mark_style = GLOB.body_marking_styles_list[M]
+			var/datum/sprite_accessory/marking/mark_style = global.body_marking_styles_list[M]
 			disallowed_markings |= mark_style.disallows
-		var/list/usable_markings = pref.body_markings.Copy() ^ GLOB.body_marking_styles_list.Copy()
+		var/list/usable_markings = pref.body_markings.Copy() ^ global.body_marking_styles_list.Copy()
 		for(var/M in usable_markings)
 			var/datum/sprite_accessory/S = usable_markings[M]
 			if(is_type_in_list(S, disallowed_markings) || (S.species_allowed && !(mob_species.get_root_species_name() in S.species_allowed)) || (S.subspecies_allowed && !(mob_species.name in S.subspecies_allowed)))
@@ -678,7 +652,7 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 		pref.h_style = pick(valid_hairstyles)
 	else
 		//this shouldn't happen
-		pref.h_style = GLOB.hair_styles_list["Bald"]
+		pref.h_style = global.hair_styles_list["Bald"]
 
 /datum/category_item/player_setup_item/proc/ResetFacialHair()
 	var/decl/species/mob_species = get_species_by_key(pref.species)
@@ -688,7 +662,7 @@ var/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-
 		pref.f_style = pick(valid_facialhairstyles)
 	else
 		//this shouldn't happen
-		pref.f_style = GLOB.facial_hair_styles_list["Shaved"]
+		pref.f_style = global.facial_hair_styles_list["Shaved"]
 
 /datum/category_item/player_setup_item/physical/body/proc/sanitize_organs()
 	var/decl/species/mob_species = get_species_by_key(pref.species)

@@ -1,5 +1,16 @@
-LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
+var/global/list/all_waypoints = list()
 
+/datum/computer_file/data/waypoint
+	var/list/fields = list()
+
+/datum/computer_file/data/waypoint/New()
+	global.all_waypoints += src
+	
+/datum/computer_file/data/waypoint/Destroy()
+	. = ..()
+	global.all_waypoints -= src
+
+var/global/list/overmap_helm_computers
 /obj/machinery/computer/ship/helm
 	name = "helm control console"
 	icon_keyboard = "teleport_key"
@@ -15,22 +26,25 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
-	get_known_sectors()
+	LAZYADD(global.overmap_helm_computers, src)
+	for(var/obj/effect/overmap/visitable/sector AS_ANYTHING in global.known_overmap_sectors)
+		add_known_sector(sector)
 
-/obj/machinery/computer/ship/helm/proc/get_known_sectors()
-	var/area/overmap/map = locate() in world
-	for(var/obj/effect/overmap/visitable/sector/S in map)
-		if ((S.sector_flags & OVERMAP_SECTOR_KNOWN))
-			var/datum/computer_file/data/waypoint/R = new()
-			R.fields["name"] = S.name
-			R.fields["x"] = S.x
-			R.fields["y"] = S.y
-			known_sectors[S.name] = R
+/obj/machinery/computer/ship/helm/Destroy()
+	. = ..()
+	LAZYREMOVE(global.overmap_helm_computers, src)
+
+/obj/machinery/computer/ship/helm/proc/add_known_sector(var/obj/effect/overmap/visitable/sector)
+	var/datum/computer_file/data/waypoint/R = new
+	R.fields["name"] = sector.name
+	R.fields["x"] =    sector.x
+	R.fields["y"] =    sector.y
+	known_sectors[sector.name] = R
 
 /obj/machinery/computer/ship/helm/Process()
 	..()
 	if (autopilot && dx && dy)
-		var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
+		var/turf/T = locate(dx,dy,global.using_map.overmap_z)
 		if(linked.loc == T)
 			if(linked.is_still())
 				autopilot = 0
@@ -113,7 +127,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 		ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 		if (!ui)
-			ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 565, 545)
+			ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 565, 545, nref = src)
 			ui.set_initial_data(data)
 			ui.open()
 			ui.set_auto_update(1)
@@ -127,11 +141,11 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	if (href_list["add"])
 		var/datum/computer_file/data/waypoint/R = new()
-		var/sec_name = input("Input naviation entry name", "New navigation entry", "Sector #[known_sectors.len]") as text
+		var/sec_name = input("Input naviation entry name", "New navigation entry", "Sector #[length(known_sectors)]") as text
 		if(!CanInteract(user,state))
 			return TOPIC_NOACTION
 		if(!sec_name)
-			sec_name = "Sector #[known_sectors.len]"
+			sec_name = "Sector #[length(known_sectors)]"
 		R.fields["name"] = sec_name
 		if(sec_name in known_sectors)
 			to_chat(user, "<span class='warning'>Sector with that name already exists, please input a different name.</span>")
@@ -242,7 +256,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "nav.tmpl", "[linked.name] Navigation Screen", 380, 530)
+		ui = new(user, src, ui_key, "nav.tmpl", "[linked.name] Navigation Screen", 380, 530, nref = src)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

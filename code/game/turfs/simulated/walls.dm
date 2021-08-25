@@ -1,4 +1,4 @@
-var/list/wall_blend_objects = list(
+var/global/list/wall_blend_objects = list(
 	/obj/machinery/door,
 	/obj/structure/wall_frame,
 	/obj/structure/grille,
@@ -8,7 +8,7 @@ var/list/wall_blend_objects = list(
 	/obj/structure/window/borosilicate/full,
 	/obj/structure/window/borosilicate_reinforced/full
 )
-var/list/wall_noblend_objects = list(
+var/global/list/wall_noblend_objects = list(
 	/obj/machinery/door/window
 )
 
@@ -148,9 +148,9 @@ var/list/wall_noblend_objects = list(
 			plant.pixel_x = 0
 			plant.pixel_y = 0
 
-/turf/simulated/wall/ChangeTurf(var/newtype)
+/turf/simulated/wall/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
 	clear_plants()
-	return ..(newtype)
+	. = ..()
 
 //Appearance
 /turf/simulated/wall/examine(mob/user)

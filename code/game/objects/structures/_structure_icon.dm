@@ -1,5 +1,5 @@
-GLOBAL_LIST_INIT(default_blend_objects,   list(/obj/machinery/door, /turf/simulated/wall))
-GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window, /obj/machinery/door/firedoor, /obj/machinery/door/blast))
+var/global/list/default_blend_objects = list(/obj/machinery/door, /turf/simulated/wall)
+var/global/list/default_noblend_objects = list(/obj/machinery/door/window, /obj/machinery/door/firedoor, /obj/machinery/door/blast)
 
 /obj/structure
 	var/handle_generic_blending
@@ -27,7 +27,7 @@ GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window, /obj/
 		T.update_icon()
 
 /obj/structure/proc/find_blendable_obj_in_turf(var/turf/T, var/propagate)
-	if(is_type_in_list(T, GLOB.default_blend_objects))
+	if(is_type_in_list(T, global.default_blend_objects))
 		if(propagate && istype(T, /turf/simulated/wall))
 			for(var/turf/simulated/wall/W in RANGE_TURFS(T, 1))
 				W.wall_connections = null
@@ -35,9 +35,9 @@ GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window, /obj/
 				W.queue_icon_update()
 		return TRUE
 	for(var/obj/O in T)
-		if(!is_type_in_list(O, GLOB.default_blend_objects))
+		if(!is_type_in_list(O, global.default_blend_objects))
 			continue
-		if(is_type_in_list(O, GLOB.default_noblend_objects))
+		if(is_type_in_list(O, global.default_noblend_objects))
 			continue
 		return TRUE
 	return FALSE
@@ -50,7 +50,7 @@ GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window, /obj/
 
 	var/list/dirs
 	var/list/other_dirs
-	for(var/direction in GLOB.alldirs)
+	for(var/direction in global.alldirs)
 		var/turf/T = get_step(src, direction)
 		if(T)
 			for(var/obj/structure/S in T)
@@ -59,7 +59,7 @@ GLOBAL_LIST_INIT(default_noblend_objects, list(/obj/machinery/door/window, /obj/
 						S.update_connections()
 						S.update_icon()
 					LAZYADD(dirs, direction)
-			if((direction in GLOB.cardinal) && find_blendable_obj_in_turf(T, propagate))
+			if((direction in global.cardinal) && find_blendable_obj_in_turf(T, propagate))
 				LAZYDISTINCTADD(dirs, direction)
 				LAZYADD(other_dirs, direction)
 

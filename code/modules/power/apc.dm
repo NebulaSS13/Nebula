@@ -1,4 +1,4 @@
-
+var/global/list/all_apcs = list()
 
 // The Area Power Controller (APC)
 // Controls and provides power to most electronics in an area
@@ -126,15 +126,15 @@
 	var/update_overlay = -1
 	var/list/update_overlay_chan		// Used to determine if there is a change in channels
 	var/is_critical = 0
-	var/global/status_overlays = 0
+	var/static/status_overlays = 0
 	var/failure_timer = 0               // Cooldown thing for apc outage event
 	var/force_update = 0
 	var/emp_hardened = 0
-	var/global/list/status_overlays_lock
-	var/global/list/status_overlays_charging
-	var/global/list/status_overlays_equipment
-	var/global/list/status_overlays_lighting
-	var/global/list/status_overlays_environ
+	var/static/list/status_overlays_lock
+	var/static/list/status_overlays_charging
+	var/static/list/status_overlays_equipment
+	var/static/list/status_overlays_lighting
+	var/static/list/status_overlays_environ
 	var/remote_control = FALSE //is remote control enabled?
 	var/autoname = 1
 	var/cover_removed = FALSE           // Cover is gone; can't close it anymore.
@@ -173,6 +173,7 @@
 	return amount - use_power_oneoff(amount, LOCAL)
 
 /obj/machinery/power/apc/Initialize(mapload, var/ndir, var/populate_parts = TRUE)
+	global.all_apcs += src
 	if(areastring)
 		area = get_area_name(areastring)
 	else
@@ -185,7 +186,7 @@
 		SetName("\improper [area.name] APC")
 	area.apc = src
 
-	GLOB.name_set_event.register(area, src, .proc/change_area_name)
+	events_repository.register(/decl/observ/name_set, area, src, .proc/change_area_name)
 
 	. = ..()
 
@@ -200,6 +201,7 @@
 	power_change()
 
 /obj/machinery/power/apc/Destroy()
+	global.all_apcs -= src
 	if(area)
 		update()
 		area.apc = null
@@ -208,7 +210,7 @@
 		area.power_environ = 0
 		area.power_change()
 
-		GLOB.name_set_event.unregister(area, src, .proc/change_area_name)
+		events_repository.unregister(/decl/observ/name_set, area, src, .proc/change_area_name)
 
 	// Malf AI, removes the APC from AI's hacked APCs list.
 	if((hacker) && (hacker.hacked_apcs) && (src in hacker.hacked_apcs))
@@ -483,7 +485,7 @@
 				return 1
 
 /obj/machinery/power/apc/CanUseTopicPhysical(var/mob/user)
-	return GLOB.physical_state.can_use_topic(nano_host(), user)
+	return global.physical_topic_state.can_use_topic(nano_host(), user)
 
 /obj/machinery/power/apc/physical_attack_hand(mob/user)
 	//Human mob special interaction goes here.

@@ -1,4 +1,4 @@
-GLOBAL_LIST_EMPTY(banned_ruin_ids)
+var/global/list/banned_ruin_ids = list()
 
 /proc/seedRuins(list/z_levels = null, budget = 0, whitelist = /area/space, list/potentialRuins, var/maxx = world.maxx, var/maxy = world.maxy)
 	if(!z_levels || !z_levels.len)
@@ -14,7 +14,7 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 	var/list/ruins = potentialRuins.Copy()
 	for(var/R in potentialRuins)
 		var/datum/map_template/ruin/ruin = R
-		if(ruin.id in GLOB.banned_ruin_ids)
+		if(ruin.id in global.banned_ruin_ids)
 			ruins -= ruin //remove all prohibited ids from the candidate list; used to forbit global duplicates.
 	var/list/spawned_ruins = list()
 //Each iteration needs to either place a ruin or strictly decrease either the budget or ruins.len (or break).
@@ -67,7 +67,7 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 					var/datum/map_template/ruin/other_ruin = other_ruin_datum
 					if(ruin.id == other_ruin.id)
 						ruins -= ruin //Remove all ruins with the same id if we don't allow duplicates
-				GLOB.banned_ruin_ids += ruin.id //and ban them globally too
+				global.banned_ruin_ids += ruin.id //and ban them globally too
 			break
 	return spawned_ruins
 
