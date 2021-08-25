@@ -29,43 +29,4 @@
 
 /obj/structure/largecrate/mule
 	name = "MULE crate"
-
-/obj/structure/largecrate/animal
 	icon_state = "mulecrate"
-	var/held_count = 1
-	var/held_type
-
-/obj/structure/largecrate/animal/Initialize()
-	. = ..()
-	if(held_type)
-		for(var/i = 1;i<=held_count;i++)
-			new held_type(src)
-
-/obj/structure/largecrate/animal/mulebot
-	name = "Mulebot crate"
-	held_type = /mob/living/bot/mulebot
-
-/obj/structure/largecrate/animal/corgi
-	name = "corgi carrier"
-	held_type = /mob/living/simple_animal/corgi
-
-/obj/structure/largecrate/animal/cow
-	name = "cow crate"
-	held_type = /mob/living/simple_animal/cow
-
-/obj/structure/largecrate/animal/goat
-	name = "goat crate"
-	held_type = /mob/living/simple_animal/hostile/retaliate/goat
-
-/obj/structure/largecrate/animal/goose
-	name = "goose containment unit"
-	held_type = /mob/living/simple_animal/hostile/retaliate/goose
-
-/obj/structure/largecrate/animal/cat
-	name = "cat carrier"
-	held_type = /mob/living/simple_animal/cat
-
-/obj/structure/largecrate/animal/chick
-	name = "chicken crate"
-	held_count = 5
-	held_type = /mob/living/simple_animal/chick

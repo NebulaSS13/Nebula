@@ -1,9 +1,5 @@
 /decl/appearance_manager
-	var/list/appearances_
-
-/decl/appearance_manager/New()
-	..()
-	appearances_ = list()
+	var/list/appearances_ = list()
 
 /decl/appearance_manager/proc/get_appearance_handler(var/handler_type)
 	var/list/appearance_handlers = decls_repository.get_decls_of_subtype(/decl/appearance_handler)

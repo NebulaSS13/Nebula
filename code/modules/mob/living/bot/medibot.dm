@@ -137,7 +137,7 @@
 		var/area/location = get_area(src)
 		broadcast_medical_hud_message("[src] is treating <b>[H]</b> in <b>[location]</b>", src)
 	busy = 1
-	update_icons()
+	update_icon()
 	if(do_mob(src, H, 30))
 		if(t == 1)
 			reagent_glass.reagents.trans_to_mob(H, injection_amount, CHEM_INJECT)
@@ -145,12 +145,12 @@
 			H.reagents.add_reagent(t, injection_amount)
 		visible_message("<span class='warning'>[src] injects [H] with the syringe!</span>")
 	busy = 0
-	update_icons()
+	update_icon()
 
-/mob/living/bot/medbot/update_icons()
-	overlays.Cut()
+/mob/living/bot/medbot/on_update_icon()
+	..()
 	if(skin)
-		overlays += image('icons/mob/bot/medibot_skins.dmi', "medskin_[skin]")
+		add_overlay(image('icons/mob/bot/medibot_skins.dmi', "medskin_[skin]"))
 	if(busy)
 		icon_state = "medibots"
 	else
@@ -281,7 +281,7 @@
 		busy = 0
 		emagged = 1
 		on = 1
-		update_icons()
+		update_icon()
 		. = 1
 
 /mob/living/bot/medbot/explode()

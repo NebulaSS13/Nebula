@@ -312,7 +312,7 @@
 
 /obj/item/integrated_circuit/manipulation/seed_extractor/do_work()
 	..()
-	var/obj/item/chems/food/snacks/grown/O = get_pin_data_as_type(IC_INPUT, 1, /obj/item/chems/food/snacks/grown)
+	var/obj/item/chems/food/grown/O = get_pin_data_as_type(IC_INPUT, 1, /obj/item/chems/food/grown)
 	if(!check_target(O))
 		push_data()
 		activate_pin(2)

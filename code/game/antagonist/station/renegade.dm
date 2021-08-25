@@ -1,7 +1,7 @@
 /decl/special_role/renegade
 	name = "Renegade"
 	name_plural = "Renegades"
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/submap)
+	blacklisted_jobs = list(/datum/job/submap)
 	restricted_jobs = list()
 	welcome_text = "Something's going to go wrong today, you can just feel it. You're paranoid, you've got a gun, and you're going to survive."
 	antag_text = "You are a <b>minor</b> antagonist! Within the rules, \
@@ -21,6 +21,7 @@
 	initial_spawn_target = 3
 	antaghud_indicator = "hud_renegade"
 	skill_setter = /datum/antag_skill_setter/station
+	blocked_job_event_categories = list(ASSIGNMENT_COMPUTER)
 
 	var/list/spawn_guns = list(
 		/obj/item/gun/projectile/revolver/lasvolver,

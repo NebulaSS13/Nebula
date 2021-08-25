@@ -2990,6 +2990,8 @@
 /turf/simulated/floor/lino,
 /area/ship/trade/crew/dorms2)
 "Ic" = (
+/obj/structure/table,
+/obj/machinery/cell_charger,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/science/fabricaton)
 "IU" = (

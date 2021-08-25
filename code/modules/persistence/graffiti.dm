@@ -19,7 +19,7 @@
 		random_icon_states.Remove(W.icon_state)
 	if(random_icon_states.len)
 		icon_state = pick(random_icon_states)
-	SSpersistence.track_value(src, /datum/persistent/graffiti)
+	SSpersistence.track_value(src, /decl/persistence_handler/graffiti)
 	. = ..(mapload)
 	if(!isnull(_age))
 		graffiti_age = _age
@@ -28,7 +28,7 @@
 		author = _author
 
 /obj/effect/decal/writing/Destroy()
-	SSpersistence.forget_value(src, /datum/persistent/graffiti)
+	SSpersistence.forget_value(src, /decl/persistence_handler/graffiti)
 	. = ..()
 
 /obj/effect/decal/writing/examine(mob/user)

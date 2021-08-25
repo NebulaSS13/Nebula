@@ -1549,7 +1549,7 @@
 /obj/structure/table{
 	name = "plastic table frame"
 	},
-/obj/item/chems/food/drinks/cans/waterbottle,
+/obj/item/chems/drinks/cans/waterbottle,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "et" = (

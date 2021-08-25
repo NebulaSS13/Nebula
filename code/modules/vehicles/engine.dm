@@ -90,7 +90,7 @@
 
 /obj/item/engine/thermal/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I,/obj/item/chems) && ATOM_IS_OPEN_CONTAINER(I))
-		if(istype(I,/obj/item/chems/food/snacks) || istype(I,/obj/item/chems/pill))
+		if(istype(I,/obj/item/chems/food) || istype(I,/obj/item/chems/pill))
 			return 0
 		var/obj/item/chems/C = I
 		C.standard_pour_into(user,src)

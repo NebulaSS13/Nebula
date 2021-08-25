@@ -86,7 +86,7 @@ var/global/list/rpd_pipe_selection_skilled = list()
 /obj/item/rpd/Initialize()
 	. = ..()
 	if(!length(global.rpd_pipe_selection))
-		return INITIALIZE_HINT_QDEL
+		init_rpd_lists()
 	spark_at(src, amount = 5, holder = src)
 	var/list/L = global.rpd_pipe_selection[global.rpd_pipe_selection[1]]
 	P = L[1]

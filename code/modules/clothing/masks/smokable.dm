@@ -3,6 +3,7 @@
 	desc = "You're not sure what this is. You should probably ahelp it."
 	icon = 'icons/clothing/mask/smokables/cigarette.dmi'
 	body_parts_covered = 0
+	z_flags = ZMM_MANGLE_PLANES
 	var/lit = 0
 	var/waterproof = FALSE
 	var/type_butt = null
@@ -520,8 +521,8 @@
 
 	..()
 
-	if (istype(W, /obj/item/chems/food/snacks))
-		var/obj/item/chems/food/snacks/grown/G = W
+	if (istype(W, /obj/item/chems/food))
+		var/obj/item/chems/food/grown/G = W
 		if (!G.dry)
 			to_chat(user, "<span class='notice'>[G] must be dried before you stuff it into [src].</span>")
 			return

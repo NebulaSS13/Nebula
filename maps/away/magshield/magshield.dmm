@@ -2380,7 +2380,7 @@
 /area/magshield/west)
 "gn" = (
 /obj/structure/table/steel,
-/obj/item/chems/food/drinks/coffee,
+/obj/item/chems/drinks/coffee,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "go" = (
@@ -2626,7 +2626,7 @@
 /area/magshield/west)
 "gZ" = (
 /obj/structure/table/steel,
-/obj/item/chems/food/drinks/coffee,
+/obj/item/chems/drinks/coffee,
 /obj/random/smokes,
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
@@ -3156,16 +3156,16 @@
 /area/magshield/west)
 "iD" = (
 /obj/structure/table/steel,
-/obj/item/chems/food/drinks/cans/space_up,
-/obj/item/chems/food/drinks/cans/space_up{
+/obj/item/chems/drinks/cans/space_up,
+/obj/item/chems/drinks/cans/space_up{
 	pixel_x = 5;
 	pixel_y = 4
 	},
-/obj/item/chems/food/drinks/cans/space_up{
+/obj/item/chems/drinks/cans/space_up{
 	pixel_x = -8;
 	pixel_y = 5
 	},
-/obj/item/chems/food/drinks/cans/space_up{
+/obj/item/chems/drinks/cans/space_up{
 	pixel_x = -2;
 	pixel_y = -4
 	},
@@ -3425,7 +3425,7 @@
 	name = "plastic table frame"
 	},
 /obj/item/trash/plate,
-/obj/item/chems/food/snacks/flatbread,
+/obj/item/chems/food/flatbread,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jw" = (
@@ -3723,7 +3723,7 @@
 /area/magshield/south)
 "kp" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/chems/food/snacks/hotdog,
+/obj/item/chems/food/hotdog,
 /turf/simulated/floor/tiled/freezer,
 /area/magshield/south)
 "kq" = (
@@ -3881,7 +3881,7 @@
 /area/magshield/south)
 "kI" = (
 /obj/structure/table/marble,
-/obj/item/chems/food/snacks/chips,
+/obj/item/chems/food/chips,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "kJ" = (
@@ -3895,11 +3895,11 @@
 /area/magshield/south)
 "kL" = (
 /obj/structure/closet/secure_closet/freezer/meat,
-/obj/item/chems/food/snacks/meat,
-/obj/item/chems/food/snacks/meat,
-/obj/item/chems/food/snacks/meat,
-/obj/item/chems/food/snacks/meat,
-/obj/item/chems/food/snacks/meat,
+/obj/item/chems/food/meat,
+/obj/item/chems/food/meat,
+/obj/item/chems/food/meat,
+/obj/item/chems/food/meat,
+/obj/item/chems/food/meat,
 /turf/simulated/floor/tiled/freezer,
 /area/magshield/south)
 "kM" = (

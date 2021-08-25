@@ -169,6 +169,7 @@ var/global/list/asset_datums = list()
 /datum/asset/simple/register()
 	for(var/asset_name in assets)
 		register_asset(asset_name, assets[asset_name])
+
 /datum/asset/simple/send(client)
 	send_asset_list(client,assets,verify)
 
@@ -208,18 +209,7 @@ var/global/template_file_name = "all_templates.json"
 				if(fexists(path + filename))
 					register_asset(filename, fcopy_rsc(path + filename))
 
-	var/list/templates = flist(template_dir)
-	for(var/filename in templates)
-		if(copytext(filename, length(filename)) != "/")
-			templates[filename] = replacetext(replacetext(file2text(template_dir + filename), "\n", ""), "\t", "")
-		else
-			templates -= filename
-	var/full_file_name = template_temp_dir + global.template_file_name
-	if(fexists(full_file_name))
-		fdel(file(full_file_name))
-	var/template_file = file(full_file_name)
-	to_file(template_file, json_encode(templates))
-	register_asset(global.template_file_name, fcopy_rsc(template_file))
+	merge_and_register_templates()
 
 	var/list/mapnames = list()
 	for(var/z in global.using_map.map_levels)
@@ -233,12 +223,44 @@ var/global/template_file_name = "all_templates.json"
 				common[filename] = fcopy_rsc(file_path)
 				register_asset(filename, common[filename])
 
+/datum/asset/nanoui/proc/merge_and_register_templates()
+	var/list/templates = flist(template_dir)
+	for(var/filename in templates)
+		if(copytext(filename, length(filename)) != "/")
+			templates[filename] = replacetext(replacetext(file2text(template_dir + filename), "\n", ""), "\t", "")
+		else
+			templates -= filename
+	var/full_file_name = template_temp_dir + global.template_file_name
+	if(fexists(full_file_name))
+		fdel(file(full_file_name))
+	var/template_file = file(full_file_name)
+	to_file(template_file, json_encode(templates))
+	register_asset(global.template_file_name, fcopy_rsc(template_file))
+
 /datum/asset/nanoui/send(client, uncommon)
 	if(!islist(uncommon))
 		uncommon = list(uncommon)
 
 	send_asset_list(client, uncommon, FALSE)
 	send_asset_list(client, common, TRUE)
+	send_asset(client, global.template_file_name)
+
+// Note: this is intended for dev work, and is unsafe. Do not use outside of that.
+/datum/asset/nanoui/proc/recompute_and_resend_templates()
+	merge_and_register_templates()
+	for(var/client/C in clients)
+		if(C) // there are sleeps here, potentially
+			send_asset(C, global.template_file_name, FALSE, FALSE)
+			to_chat(C, SPAN_WARNING("Nanoui templates have been updated. Please close and reopen any browser windows."))
+
+/client/proc/resend_nanoui_templates()
+	set category = "Debug"
+	set name = "Resend Nanoui Templates"
+	if(!check_rights(R_DEBUG))
+		return
+	var/datum/asset/nanoui/nano_asset = get_asset_datum(/datum/asset/nanoui)
+	if(nano_asset)
+		nano_asset.recompute_and_resend_templates()
 
 /*
 	Asset cache

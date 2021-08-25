@@ -477,7 +477,7 @@
 
 	data["charge"] =       cell ? round(cell.charge,1) : 0
 	data["maxcharge"] =    cell ? cell.maxcharge : 0
-	data["chargestatus"] = cell ? Floor(cell.percent()/2) : 0
+	data["chargestatus"] = cell ? FLOOR(cell.percent()/2) : 0
 
 	data["emagged"] =       subverted
 	data["coverlock"] =     locked
@@ -575,7 +575,7 @@
 	. = ..()
 
 /obj/item/rig/get_req_access()
-	if(!security_check_enabled)
+	if(!security_check_enabled || !locked)
 		return list()
 	return ..()
 

@@ -191,7 +191,7 @@ var/global/obj/temp_reagents_holder = new
 /datum/reagents/proc/remove_reagent(var/reagent_type, var/amount, var/safety = 0, var/defer_update = FALSE)
 	if(!isnum(amount) || REAGENT_VOLUME(src, reagent_type) <= 0)
 		return FALSE
-	
+
 	reagent_volumes[reagent_type] -= amount
 	if(reagent_volumes.len > 1 || reagent_volumes[reagent_type] <= 0)
 		cached_color = null
@@ -321,7 +321,7 @@ var/global/obj/temp_reagents_holder = new
 		return
 
 	if(isturf(target.loc) && min_spill && max_spill)
-		var/spill = Floor(amount*(rand(min_spill, max_spill)/100))
+		var/spill = FLOOR(amount*(rand(min_spill, max_spill)/100))
 		if(spill)
 			amount -= spill
 			trans_to_turf(target.loc, spill, multiplier, copy, defer_update)
@@ -341,6 +341,21 @@ var/global/obj/temp_reagents_holder = new
 	F.add_reagent(type, amount, REAGENT_DATA(src, type))
 	remove_reagent(type, amount, defer_update = defer_update)
 	. = F.trans_to(target, amount, multiplier, defer_update = defer_update) // Let this proc check the atom's type
+	qdel(F)
+
+/datum/reagents/proc/trans_type_to_holder(var/datum/reagents/target, var/type, var/amount = 1, var/multiplier = 1, var/defer_update = FALSE)
+	if (!target)
+		return
+
+	amount = min(amount, REAGENT_VOLUME(src, type))
+
+	if(!amount)
+		return
+
+	var/datum/reagents/F = new(amount, global.temp_reagents_holder)
+	F.add_reagent(type, amount, REAGENT_DATA(src, type))
+	remove_reagent(type, amount, defer_update = defer_update)
+	. = F.trans_to_holder(target, amount, multiplier, defer_update = defer_update) // Let this proc check the atom's type
 	qdel(F)
 
 // When applying reagents to an atom externally, touch() is called to trigger any on-touch effects of the reagent.

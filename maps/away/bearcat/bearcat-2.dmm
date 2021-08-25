@@ -506,7 +506,7 @@
 	dir = 4;
 	name = "Captain's Quarters APC"
 	},
-/obj/item/chems/food/drinks/glass2/coffeecup/one,
+/obj/item/chems/drinks/glass2/coffeecup/one,
 /obj/item/tank/oxygen,
 /obj/item/clothing/mask/breath/emergency,
 /turf/simulated/floor/wood,
@@ -2065,10 +2065,10 @@
 	pixel_x = 5
 	},
 /obj/item/book/manual/chef_recipes,
-/obj/item/chems/food/condiment/small/peppermill{
+/obj/item/chems/condiment/small/peppermill{
 	pixel_x = 3
 	},
-/obj/item/chems/food/condiment/enzyme,
+/obj/item/chems/condiment/enzyme,
 /obj/item/chems/glass/rag,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/crew/kitchen)
@@ -2228,7 +2228,7 @@
 /obj/item/storage/box/donkpockets,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/item/kitchen/rollingpin,
-/obj/item/chems/food/condiment/small/saltshaker{
+/obj/item/chems/condiment/small/saltshaker{
 	pixel_x = -3
 	},
 /obj/structure/cable{
@@ -2698,7 +2698,7 @@
 "eP" = (
 /obj/machinery/light,
 /obj/machinery/optable,
-/obj/item/chems/food/drinks/glass2/coffeecup/britcup,
+/obj/item/chems/drinks/glass2/coffeecup/britcup,
 /obj/item/chems/glass/rag,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
@@ -4102,8 +4102,8 @@
 	dir = 8
 	},
 /obj/structure/table,
-/obj/item/chems/food/drinks/glass2/coffeecup/metal,
-/obj/item/chems/food/drinks/glass2/coffeecup/metal,
+/obj/item/chems/drinks/glass2/coffeecup/metal,
+/obj/item/chems/drinks/glass2/coffeecup/metal,
 /obj/item/chems/chem_disp_cartridge/coffee{
 	name = "coffee canister"
 	},

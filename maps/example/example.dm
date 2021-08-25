@@ -2,6 +2,8 @@
 
 	#include "example_areas.dm"
 	#include "example_shuttles.dm"
+	#include "example_departments.dm"
+	#include "example_jobs.dm"
 	#include "example_unit_testing.dm"
 
 	#include "example-1.dmm"

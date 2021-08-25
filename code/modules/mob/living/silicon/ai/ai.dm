@@ -32,7 +32,8 @@ var/global/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_power_override,
 	/mob/living/silicon/ai/proc/ai_shutdown,
 	/mob/living/silicon/ai/proc/ai_reset_radio_keys,
-	/mob/living/silicon/ai/proc/run_program
+	/mob/living/silicon/ai/proc/run_program,
+	/mob/living/silicon/ai/proc/pick_color
 )
 
 //Not sure why this is necessary...
@@ -715,6 +716,7 @@ var/global/list/ai_verbs_default = list(
 	to_chat(src, SPAN_NOTICE("Integrated radio encryption keys have been reset."))
 
 /mob/living/silicon/ai/on_update_icon()
+	..()
 	if(!selected_sprite || !(selected_sprite in available_icons()))
 		selected_sprite = get_ai_icon(default_ai_icon)
 
@@ -791,3 +793,23 @@ var/global/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/get_admin_job_string()
 	return "AI"
+
+/mob/living/silicon/ai/eastface()
+	if(holo)
+		holo.set_dir_hologram(client.client_dir(EAST), src)
+	return ..()
+
+/mob/living/silicon/ai/westface()
+	if(holo)
+		holo.set_dir_hologram(client.client_dir(WEST), src)
+	return ..()
+
+/mob/living/silicon/ai/northface()
+	if(holo)
+		holo.set_dir_hologram(client.client_dir(NORTH), src)
+	return ..()
+
+/mob/living/silicon/ai/southface()
+	if(holo)
+		holo.set_dir_hologram(client.client_dir(SOUTH), src)
+	return ..()

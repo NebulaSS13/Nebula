@@ -39,7 +39,7 @@
 	)
 
 /decl/hierarchy/outfit/job/colonist
-	name = OUTFIT_JOB_NAME("Colonist")
+	name = "Job - Colonist"
 	id_type = null
 	pda_type = null
 

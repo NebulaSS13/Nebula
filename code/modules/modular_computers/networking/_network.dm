@@ -1,3 +1,6 @@
+#define WIRELESS_CONNECTION 1
+#define WIRED_CONNECTION    2
+
 /datum/computer_network
 	var/network_id
 	var/network_key
@@ -114,20 +117,29 @@
 	if(specific_action && !(network_features_enabled & specific_action))
 		return FALSE
 	var/list/broadcasters = relays + router
-	for(var/datum/extension/network_device/R in broadcasters)
-		if(get_z(R.holder) == get_z(D.holder))
-			return TRUE
+	for(var/datum/extension/network_device/broadcaster/R in broadcasters)
+		var/wired_connection = R.get_wired_connection()
+		if(!isnull(wired_connection) && wired_connection == D.get_wired_connection())
+			return WIRED_CONNECTION
+		else if(R.allow_wifi && (R.long_range || (get_z(R.holder) == get_z(D.holder))))
+			. = WIRELESS_CONNECTION
 
 /datum/computer_network/proc/get_signal_strength(datum/extension/network_device/D)
-	if(!check_connection(D))
+	var/connection_status = check_connection(D)
+	if(!connection_status)
 		return 0
+	// There is a direct wired connection between a broadcaster on the network and the device.
+	if(connection_status == WIRED_CONNECTION)
+		return NETWORK_WIRED_CONNECTION_STRENGTH
 	var/receiver_strength = D.connection_type
 	var/list/broadcasters = relays + router
 	var/best_signal = 0
 	for(var/datum/extension/network_device/broadcaster/B in broadcasters)
-		if(get_z(B.holder) != get_z(D.holder))
+		if(!B.allow_wifi || get_z(B.holder) != get_z(D.holder))	// Devices must be in the same z-level as the broadcaster to work.
 			continue
 		var/broadcast_strength = B.get_broadcast_strength()
+		if(!ARE_Z_CONNECTED(get_z(router.holder), get_z(B.holder)))  // If the relay/secondary router is not in the same z-chunk as the main router, then the signal strength is halved.
+			broadcast_strength = round(broadcast_strength/2)
 		var/distance = get_dist(get_turf(B.holder), get_turf(D.holder))
 		best_signal = max(best_signal, (broadcast_strength * receiver_strength) - distance)
 	return best_signal
@@ -219,4 +231,3 @@
 		if(istype(device.holder, type))
 			results |= tag
 	return results
-

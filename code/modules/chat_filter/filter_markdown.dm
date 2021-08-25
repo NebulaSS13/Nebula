@@ -4,9 +4,9 @@
 	var/format_char
 	var/format_replace_proc
 
-/decl/chat_filter/regexp/markdown/New()
-	..()
-	filter_regex = regex("([format_char])(.+)([format_char])", "g")
+/decl/chat_filter/regexp/markdown/Initialize()
+	. = ..()
+	filter_regex = regex("([format_char])(.+?)([format_char])", "g")
 
 /decl/chat_filter/regexp/markdown/replace(var/message, var/match)
 	. = filter_regex.Replace(message, format_replace_proc)

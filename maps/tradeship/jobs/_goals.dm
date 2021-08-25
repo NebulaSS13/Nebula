@@ -1,6 +1,3 @@
-/decl/department/command
-	goals = list(/datum/goal/department/paperwork/tradeship)
-
 var/global/list/tradeship_paperwork_spawn_turfs = list()
 var/global/list/tradeship_paperwork_end_areas = list()
 

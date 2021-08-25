@@ -49,11 +49,12 @@
 		M.add_chemical_effect(CE_BLOCKAGE, (15 + REAGENT_VOLUME(holder, type))/100)
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/external/E in H.organs)
-			if(E.status & ORGAN_ARTERY_CUT && prob(2))
+			if(E.status & ORGAN_ARTERY_CUT && prob(2 + REAGENT_VOLUME(holder, type) / overdose))
 				E.status &= ~ORGAN_ARTERY_CUT
 
 /decl/material/liquid/brute_meds/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.heal_organ_damage(6 * removed, 0)
+	var/overkill_healing = 6/(1+200*2.71828**(-0.05*M.getBruteLoss())) //This is a logistic function that effectively doubles the healing rate as brute amounts get to around 200. Any injury below 60 is essentially unaffected and there's a scaling inbetween.
+	M.heal_organ_damage((6+overkill_healing) * removed, 0)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /decl/material/liquid/burn_meds
@@ -67,7 +68,8 @@
 	value = 1.5
 
 /decl/material/liquid/burn_meds/affect_blood(mob/living/M, alien, removed, var/datum/reagents/holder)
-	M.heal_organ_damage(0, 6 * removed)
+	var/overkill_healing = 6/(1+200*2.71828**(-0.05*M.getFireLoss()))	
+	M.heal_organ_damage(0, (6+overkill_healing) * removed)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /decl/material/liquid/adminordrazine //An OP chemical for admins
@@ -248,7 +250,7 @@
 		M.dna.ResetUI()
 		M.dna.ResetSE()
 		domutcheck(M, null, MUTCHK_FORCED)
-		M.update_icons()
+		M.update_icon()
 
 /decl/material/liquid/adrenaline
 	name = "adrenaline"
@@ -327,6 +329,7 @@
 	name = "oxygel"
 	lore_text = "A biodegradable gel full of oxygen-laden synthetic molecules. Injected into suffocation victims to stave off the effects of oxygen deprivation."
 	taste_description = "tasteless slickness"
+	scannable = 1
 	color = COLOR_GRAY80
 
 /decl/material/liquid/oxy_meds/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)

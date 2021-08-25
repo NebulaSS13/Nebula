@@ -11,7 +11,7 @@
 /obj/item/organ/external/proc/get_modular_limb_category()
 	. = MODULAR_BODYPART_INVALID
 	if(BP_IS_PROSTHETIC(src) && model)
-		var/decl/prosthetics_manufacturer/manufacturer = decls_repository.get_decl(model)
+		var/decl/prosthetics_manufacturer/manufacturer = GET_DECL(model)
 		if(!isnull(manufacturer?.modular_prosthetic_tier))
 			. = manufacturer.modular_prosthetic_tier
 
@@ -164,7 +164,7 @@
 	visible_message(
 		SPAN_NOTICE("\The [src] attaches \the [E] to [G.his] body!"),
 		SPAN_NOTICE("You attach \the [E] to your body!"))
-	regenerate_icons() // Not sure why this isn't called by removed(), but without it we don't update our limb appearance.
+	refresh_visible_overlays() // Not sure why this isn't called by removed(), but without it we don't update our limb appearance.
 	return TRUE
 
 /mob/living/carbon/human/proc/detach_limb_verb()

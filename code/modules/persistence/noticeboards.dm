@@ -69,7 +69,7 @@
 	if(istype(paper) && paper.loc == src)
 		paper.dropInto(loc)
 		LAZYREMOVE(notices, paper)
-		SSpersistence.forget_value(paper, /datum/persistent/paper)
+		SSpersistence.forget_value(paper, /decl/persistence_handler/paper)
 		if(!skip_icon_update)
 			update_icon()
 
@@ -120,7 +120,7 @@
 				add_fingerprint(user)
 				add_paper(thing)
 				to_chat(user, SPAN_NOTICE("You pin \the [thing] to \the [src]."))
-				SSpersistence.track_value(thing, /datum/persistent/paper)
+				SSpersistence.track_value(thing, /decl/persistence_handler/paper)
 			else
 				to_chat(user, SPAN_WARNING("You hesitate, certain \the [thing] will not be seen among the many others already attached to \the [src]."))
 			return TRUE

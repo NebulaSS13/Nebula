@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/tournament_gear
-	hierarchy_type = /decl/hierarchy/outfit/tournament_gear
+	abstract_type = /decl/hierarchy/outfit/tournament_gear
 	head = /obj/item/clothing/head/helmet/thunderdome
 	suit = /obj/item/clothing/suit/armor/vest
 	hands = list(

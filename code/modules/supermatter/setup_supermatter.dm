@@ -221,13 +221,13 @@
 	// Non-co2 coolant, adjust the filter's config first.
 	if(coolant != "CO2")
 		for(var/datum/omni_port/P in F.ports)
-			if(P.mode != ATM_CO2)
+			if(P.filtering != /decl/material/gas/carbon_dioxide)
 				continue
 			else if(coolant == "N2")
-				P.mode = ATM_N2
+				P.filtering = /decl/material/gas/nitrogen
 				break
 			else if(coolant == "H2")
-				P.mode = ATM_H2
+				P.filtering = /decl/material/gas/hydrogen
 				break
 			else
 				log_and_message_admins("## WARNING: Inapropriate filter coolant type set at [x] [y] [z]!")

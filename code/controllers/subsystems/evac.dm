@@ -6,12 +6,12 @@ SUBSYSTEM_DEF(evac)
 	wait = 2 SECONDS
 	var/datum/evacuation_controller/evacuation_controller
 
-
 /datum/controller/subsystem/evac/Initialize()
 	. = ..()
-	if(!evacuation_controller)
-		evacuation_controller = new global.using_map.evac_controller_type ()
+	if(!evacuation_controller && global.using_map.evac_controller_type)
+		evacuation_controller = new global.using_map.evac_controller_type()
 		evacuation_controller.set_up()
 
 /datum/controller/subsystem/evac/fire()
-	evacuation_controller.process()
+	if(evacuation_controller)
+		evacuation_controller.process()

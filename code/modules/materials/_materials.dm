@@ -1,3 +1,5 @@
+var/global/list/materials_by_gas_symbol = list()
+
 /obj/effect/gas_overlay
 	name = "gas"
 	desc = "You shouldn't be clicking this."
@@ -62,6 +64,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 // Material definition and procs follow.
 /decl/material
+
+	abstract_type = /decl/material
+
 	var/name                      // Prettier name for display.
 	var/adjective_name
 	var/solid_name
@@ -91,9 +96,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	// Icons
 	var/icon_base = 'icons/turf/walls/solid.dmi'
-	var/icon_stripe = 'icons/turf/walls/stripes.dmi'
 	var/icon_base_natural = 'icons/turf/walls/natural.dmi'
 	var/icon_reinf = 'icons/turf/walls/reinforced_metal.dmi'
+	var/wall_flags = 0
+	var/list/wall_blend_icons = list() // Which wall icon types walls of this material type will consider blending with. Assoc list (icon path = TRUE/FALSE)
 	var/use_reinf_state = "full"
 
 	var/door_icon_base = "metal"                         // Door base icon tag. See header.
@@ -223,6 +229,19 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/scent_descriptor = SCENT_DESC_SMELL
 	var/scent_range = 1
 
+	var/list/neutron_interactions // Associative List of potential neutron interactions for the material to undergo, corresponding to the ideal
+								  // neutron energy for that reaction to occur.
+
+	var/neutron_cross_section	  // How broad the neutron interaction curve is, independent of temperature. Materials that are harder to react with will have lower values.
+	var/absorption_products		  // Transmutes into these reagents following neutron absorption and/or subsequent beta decay. Generally forms heavier reagents.
+	var/fission_products		  // Transmutes into these reagents following fission. Forms lighter reagents, and a lot of heat.
+	var/neutron_production		  // How many neutrons are created per unit per fission event.
+	var/neutron_absorption		  // How many neutrons are absorbed per unit per absorption event. 
+	var/fission_heat			  // How much thermal energy per unit per fission event this material releases.
+	var/fission_energy			  // Energy of neutrons released by fission.
+	var/moderation_target		  // The 'target' neutron energy value that the fission environment shifts towards after a moderation event.
+								  // Neutron moderators can only slow down neutrons.
+
 // Placeholders for light tiles and rglass.
 /decl/material/proc/reinforce(var/mob/user, var/obj/item/stack/material/used_stack, var/obj/item/stack/material/target_stack, var/use_sheets = 1)
 	if(!used_stack.can_use(use_sheets))
@@ -269,6 +288,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		shard_icon = shard_type
 	if(!burn_armor)
 		burn_armor = brute_armor
+	if(!gas_symbol)
+		gas_symbol = "[name]_[sequential_id(abstract_type)]"
+	if(!gas_symbol_html)
+		gas_symbol_html = gas_symbol
+	global.materials_by_gas_symbol[gas_symbol] = type
 	generate_armor_values()
 
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
@@ -307,6 +331,20 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 /decl/material/proc/products_need_process()
 	return (radioactivity>0) //todo
 
+// Returns the phase of the matterial at the given temperature and pressure
+// #FIXME: pressure is unused currently
+/decl/material/proc/phase_at_temperature(var/temperature, var/pressure = ONE_ATMOSPHERE)
+	//#TODO: implement plasma temperature and do pressure checks
+	if(temperature >= boiling_point)
+		return MAT_PHASE_GAS
+	else if(temperature >= heating_point)
+		return MAT_PHASE_LIQUID
+	return MAT_PHASE_SOLID
+
+// Returns the phase of matter this material is a standard temperature and pressure (20c at one atmosphere)
+/decl/material/proc/phase_at_stp()
+	return phase_at_temperature(T20C, ONE_ATMOSPHERE)
+
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder
 	name = "placeholder"
@@ -337,7 +375,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.
 /decl/material/proc/place_dismantled_product(var/turf/target, var/is_devastated, var/amount = 2)
-	amount = is_devastated ? Floor(amount * 0.5) : amount
+	amount = is_devastated ? FLOOR(amount * 0.5) : amount
 	if(amount > 0)
 		return create_object(target, amount)
 
@@ -397,7 +435,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
 /decl/material/proc/touch_mob(var/mob/living/M, var/amount, var/datum/reagents/holder)
 	if(fuel_value && amount && istype(M))
-		M.fire_stacks += Floor((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
+		M.fire_stacks += FLOOR((amount * fuel_value)/FLAMMABLE_LIQUID_DIVISOR)
 #undef FLAMMABLE_LIQUID_DIVISOR
 
 /decl/material/proc/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder) // Cleaner cleaning, lube lubbing, etc, all go here
@@ -589,10 +627,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	M.adjustToxLoss(REM)
 
 /decl/material/proc/initialize_data(var/newdata) // Called when the reagent is created.
-	if(newdata) 
+	if(newdata)
 		. = newdata
 
-/decl/material/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)	
+/decl/material/proc/mix_data(var/datum/reagents/reagents, var/list/newdata, var/amount)
 	. = REAGENT_DATA(reagents, type)
 
 /decl/material/proc/explosion_act(obj/item/chems/holder, severity)
@@ -617,3 +655,18 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 	if(prop.reagents.has_reagent(/decl/material/solid/ice))
 		. = "iced [.]"
+
+/decl/material/proc/neutron_interact(var/neutron_energy, var/total_interacted_units, var/total_units)
+	. = list() // Returns associative list of interaction -> interacted units
+	if(!length(neutron_interactions))
+		return
+	for(var/interaction in neutron_interactions)
+		var/ideal_energy = neutron_interactions[interaction]
+		var/interacted_units_ratio = (Clamp(-((((neutron_energy-ideal_energy)**2)/(neutron_cross_section*1000)) - 100), 0, 100))/100
+		var/interacted_units = round(interacted_units_ratio*total_interacted_units, 0.001)
+		
+		if(interacted_units > 0)
+			.[interaction] = interacted_units
+			total_interacted_units -= interacted_units
+		if(total_interacted_units <= 0)
+			return

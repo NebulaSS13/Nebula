@@ -21,14 +21,15 @@
 	slot_flags = SLOT_HEAD
 	body_parts_covered = SLOT_HEAD
 	attack_verb = list("bapped")
+	material = /decl/material/solid/wood
 
 	drop_sound = 'sound/foley/paperpickup1.ogg'
 	pickup_sound = 'sound/foley/paperpickup2.ogg'
 
-	var/info		//What's actually written on the paper.
-	var/info_links	//A different version of the paper which includes html links at fields and EOF
-	var/stamps		//The (text for the) stamps on the paper.
-	var/fields		//Amount of user created fields
+	var/info		// What's actually written on the paper.
+	var/info_links	// A different version of the paper which includes html links at fields and EOF
+	var/stamps		// The (text for the) stamps on the paper.
+	var/fields		// Amount of user created fields
 	var/free_space = MAX_PAPER_MESSAGE_LEN
 	var/list/stamped
 	var/list/ico[0]      //Icons and
@@ -52,7 +53,10 @@
 	set_content(text ? text : info, title)
 	metadata = md
 	if(!mapload)
-		SSpersistence.track_value(src, /datum/persistent/paper)
+		SSpersistence.track_value(src, /decl/persistence_handler/paper)
+
+/obj/item/paper/create_matter()
+	matter = list(/decl/material/solid/wood = round(SHEET_MATERIAL_AMOUNT * 0.2))
 
 /obj/item/paper/proc/set_content(text,title)
 	set waitfor = FALSE
@@ -259,7 +263,7 @@
 			class = "rose"
 
 		var/decl/pronouns/G = user.get_pronouns()
-		user.visible_message("<span class='[class]'>[user] holds \the [P] up to \the [src], it looks like [G.he]'s trying to burn it!</span>", \
+		user.visible_message("<span class='[class]'>[user] holds \the [P] up to \the [src], it looks like [G.he] [G.is] trying to burn it!</span>", \
 		"<span class='[class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
 
 		spawn(20)

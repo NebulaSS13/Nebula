@@ -516,3 +516,35 @@
 
 	new_planet.update_daynight()
 	new_planet.build_level()
+
+/client/proc/display_del_log()
+	set category = "Debug"
+	set name = "Display del() Log"
+	set desc = "Display del's log of everything that's passed through it."
+
+	if(!check_rights(R_DEBUG))
+		return
+
+	. = list("<B>List of things that have gone through qdel this round</B><BR><BR><ol>")
+	sortTim(SSgarbage.items, cmp = /proc/cmp_qdel_item_time, associative = TRUE)
+	for(var/path in SSgarbage.items)
+		var/datum/qdel_item/I = SSgarbage.items[path]
+		. += "<li><u>[path]</u><ul>"
+		if(I.failures)
+			. += "<li>Failures: [I.failures]</li>"
+		. += "<li>qdel() Count: [I.qdels]</li>"
+		. += "<li>Destroy() Cost: [I.destroy_time]ms</li>"
+		if(I.hard_deletes)
+			. += "<li>Total Hard Deletes [I.hard_deletes]</li>"
+			. += "<li>Time Spent Hard Deleting: [I.hard_delete_time]ms</li>"
+		if(I.slept_destroy)
+			. += "<li>Sleeps: [I.slept_destroy]</li>"
+		if(I.no_respect_force)
+			. += "<li>Ignored force: [I.no_respect_force]</li>"
+		if(I.no_hint)
+			. += "<li>No hint: [I.no_hint]</li>"
+		. += "</ul></li>"
+
+	. += "</ol>"
+
+	show_browser(usr, JOINTEXT(.), "window=dellog")

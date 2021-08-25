@@ -91,14 +91,14 @@
 			C.dropInto(loc)
 			return TRUE
 
-	if(istype(W, /obj/item/chems/glass) || istype(W, /obj/item/chems/food))
+	if(istype(W, /obj/item/chems/glass) || istype(W, /obj/item/chems/condiment) || istype(W, /obj/item/chems/drinks))
 		if(container)
 			to_chat(user, "<span class='warning'>There is already \a [container] on \the [src]!</span>")
 			return TRUE
 
 		var/obj/item/chems/RC = W
 
-		if(!accept_drinking && istype(RC,/obj/item/chems/food))
+		if(!accept_drinking && (istype(RC,/obj/item/chems/condiment) || istype(RC,/obj/item/chems/drinks)))
 			to_chat(user, "<span class='warning'>This machine only accepts beakers!</span>")
 			return TRUE
 

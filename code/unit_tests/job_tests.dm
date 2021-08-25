@@ -52,10 +52,6 @@
 		log_bad("Sanity Check - Missing HUD icon: hudunknown")
 		failed_sanity_checks++
 
-	if(!("hudcentcom" in job_huds))
-		log_bad("Sanity Check - Missing HUD icon: hudcentcom")
-		failed_sanity_checks++
-
 	for(var/job_name in SSjobs.titles_to_datums)
 		var/datum/job/J = SSjobs.titles_to_datums[job_name]
 		var/hud_icon_state = J.hud_icon

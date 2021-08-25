@@ -13,6 +13,7 @@
 	uncreated_component_parts = null
 	frame_type = /obj/item/pipe
 	construct_state = /decl/machine_construction/pipe
+	interact_offline = TRUE
 
 /obj/machinery/atmospherics/unary/thermal_plate/on_update_icon()
 	if(LAZYLEN(nodes_to_networks))

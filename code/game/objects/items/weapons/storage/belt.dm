@@ -124,6 +124,7 @@
 		/obj/item/hand_labeler,
 		/obj/item/clothing/gloves
 		)
+	material = /decl/material/solid/leather
 
 /obj/item/storage/belt/utility/full/Initialize()
 	. = ..()
@@ -195,7 +196,7 @@
 		/obj/item/clothing/glasses,
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_magazine,
-		/obj/item/chems/food/snacks/donut/,
+		/obj/item/chems/food/donut/,
 		/obj/item/baton,
 		/obj/item/telebaton,
 		/obj/item/flame/lighter,
@@ -227,7 +228,7 @@
 		/obj/item/clothing/glasses,
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_magazine,
-		/obj/item/chems/food/snacks/donut/,
+		/obj/item/chems/food/donut/,
 		/obj/item/baton,
 		/obj/item/telebaton,
 		/obj/item/flame/lighter,

@@ -3,7 +3,6 @@
 	supervisors = "the Head Engineer"
 	total_positions = 2
 	spawn_positions = 2
-	hud_icon = "hudengineer"
 	outfit_type = /decl/hierarchy/outfit/job/tradeship/hand/engine
 	department_types = list(/decl/department/engineering)
 	total_positions = 8
@@ -50,6 +49,7 @@
 	)
 	skill_points = 20
 	alt_titles = list()
+	event_categories = list(ASSIGNMENT_ENGINEER)
 
 /datum/job/tradeship_engineer/head
 	title = "Head Engineer"
@@ -125,3 +125,4 @@
 	)
 	skill_points = 30
 	alt_titles = list()
+	event_categories = list(ASSIGNMENT_ENGINEER)

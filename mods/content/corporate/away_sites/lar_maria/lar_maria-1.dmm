@@ -857,7 +857,8 @@
 /area/lar_maria/cells)
 "cy" = (
 /obj/structure/crematorium{
-	dir = 4
+	dir = 4;
+	id_tag = "lar_maria_crematorium"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -866,6 +867,7 @@
 /area/lar_maria/morgue)
 "cz" = (
 /obj/machinery/button/crematorium{
+	id_tag = "lar_maria_crematorium";
 	pixel_y = -20
 	},
 /obj/effect/decal/cleanable/blood,

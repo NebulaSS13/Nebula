@@ -26,12 +26,12 @@
 
 /obj/item/book/Initialize(var/ml)
 	if(!ml && !unique)
-		SSpersistence.track_value(src, /datum/persistent/book)
+		SSpersistence.track_value(src, /decl/persistence_handler/book)
 	. = ..()
 
 /obj/item/book/Destroy()
 	. = ..()
-	if(SSpersistence.is_tracking(src, /datum/persistent/book))
+	if(SSpersistence.is_tracking(src, /decl/persistence_handler/book))
 		. = QDEL_HINT_LETMELIVE
 
 /obj/item/book/attack_self(var/mob/user)

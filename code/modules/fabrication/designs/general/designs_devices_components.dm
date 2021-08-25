@@ -5,6 +5,9 @@
 /datum/fabricator_recipe/device_component/keyboard
 	path = /obj/item/stock_parts/keyboard
 
+/datum/fabricator_recipe/device_component/pda
+	path = /obj/item/modular_computer/pda
+
 /datum/fabricator_recipe/device_component/tesla_component
 	path = /obj/item/stock_parts/power/apc/buildable
 
@@ -62,6 +65,9 @@
 
 /datum/fabricator_recipe/device_component/cable_coil
 	path = /obj/item/stack/cable_coil/single
+
+/datum/fabricator_recipe/device_component/net_cable_coil
+	path = /obj/item/stack/net_cable_coil/single
 
 /datum/fabricator_recipe/device_component/beartrap
 	path = /obj/item/beartrap

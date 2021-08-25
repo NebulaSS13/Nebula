@@ -34,6 +34,8 @@
 	var/can_paint
 	var/can_engrave = TRUE
 
+	var/movement_delay
+
 	//How we smooth with other flooring
 	var/decal_layer = DECAL_LAYER
 	var/floor_smooth = SMOOTH_ALL
@@ -48,6 +50,8 @@
 	var/space_smooth = SMOOTH_ALL
 	//There are no lists for spaces
 	var/z_flags //same z flags used for turfs, i.e ZMIMIC_DEFAULT etc
+
+	var/height = 0
 
 /decl/flooring/proc/on_remove()
 	return
@@ -288,7 +292,8 @@
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_base = "reinforced"
 	flags = TURF_REMOVE_WRENCH | TURF_ACID_IMMUNE
-	build_type = /obj/item/stack/material/rods
+	build_type = /obj/item/stack/material/sheet
+	build_material = /decl/material/solid/metal/steel
 	build_cost = 1
 	build_time = 30
 	apply_thermal_conductivity = 0.025
@@ -366,19 +371,21 @@
 /decl/flooring/glass
 	name = "glass flooring"
 	desc = "A window to the world outside. Or the world beneath your feet, rather."
-	icon = 'icons/turf/flooring/glassfloor.dmi'
-	icon_base = "glassfloor"
+	icon = 'icons/turf/flooring/glass.dmi'
+	icon_base = "glass"
 	build_type = /obj/item/stack/material/pane
 	build_material = /decl/material/solid/glass
+	build_cost = 1
+	build_time = 30
 	damage_temperature = T100C
 	flags = TURF_REMOVE_CROWBAR | TURF_ACID_IMMUNE
 	can_engrave = FALSE
 	color = GLASS_COLOR
-	z_flags = ZM_MIMIC_BELOW
+	z_flags = ZM_MIMIC_DEFAULTS
+	footstep_type = /decl/footsteps/plating
 
 /decl/flooring/glass/boro
 	name = "borosilicate glass flooring"
-	build_type = /obj/item/stack/material/pane
 	build_material = /decl/material/solid/glass/borosilicate
 	color = GLASS_COLOR_SILICATE
 	damage_temperature = T0C + 4000
@@ -393,3 +400,16 @@
 	build_type = null
 	can_engrave = FALSE
 	footstep_type = /decl/footsteps/snow
+
+/decl/flooring/pool
+	name = "pool floor"
+	desc = "Sunken flooring designed to hold liquids."
+	icon = 'icons/turf/flooring/pool.dmi'
+	icon_base = "pool"
+	build_type = /obj/item/stack/tile/pool
+	flags = TURF_HAS_CORNERS | TURF_HAS_INNER_CORNERS | TURF_REMOVE_CROWBAR
+	footstep_type = /decl/footsteps/tiles
+	floor_smooth = SMOOTH_NONE
+	wall_smooth = SMOOTH_NONE
+	space_smooth = SMOOTH_NONE
+	height = -FLUID_OVER_MOB_HEAD * 2

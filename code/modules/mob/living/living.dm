@@ -448,7 +448,7 @@ default behaviour is:
 	set_stat(CONSCIOUS)
 
 	// make the icons look correct
-	regenerate_icons()
+	update_icon()
 
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
@@ -469,7 +469,7 @@ default behaviour is:
 		timeofdeath = 0
 
 	stat = CONSCIOUS
-	regenerate_icons()
+	update_icon()
 
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
@@ -590,8 +590,13 @@ default behaviour is:
 	set name = "Rest"
 	set category = "IC"
 
-	resting = !resting
-	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
+	if(!incapacitated(INCAPACITATION_KNOCKOUT) && canClick())
+		setClickCooldown(3)
+		if(resting && !do_after(src, 2 SECONDS, src, incapacitation_flags = ~INCAPACITATION_FORCELYING))
+			return
+		resting = !resting
+		UpdateLyingBuckledAndVerbStatus()
+		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]."))
 
 //called when the mob receives a bright flash
 /mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
@@ -679,20 +684,30 @@ default behaviour is:
 	else
 		..()
 
-/mob/living/update_icons()
-	if(auras)
-		overlays |= auras
-
 /mob/living/proc/add_aura(var/obj/aura/aura)
 	LAZYDISTINCTADD(auras,aura)
-	update_icons()
+	update_icon()
 	return 1
 
 /mob/living/proc/remove_aura(var/obj/aura/aura)
 	LAZYREMOVE(auras,aura)
-	update_icons()
+	update_icon()
 	return 1
 
+/mob/living/update_icon()
+	..()
+	compile_overlays()
+
+/mob/living/on_update_icon()
+	SHOULD_CALL_PARENT(TRUE)
+	..()
+	cut_overlays()
+	if(auras)
+		for(var/obj/aura/aura AS_ANYTHING in auras)
+			var/image/A = new()
+			A.appearance = aura
+			add_overlay(A)
+	
 /mob/living/Destroy()
 	if(auras)
 		for(var/a in auras)

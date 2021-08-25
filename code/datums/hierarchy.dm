@@ -1,6 +1,6 @@
 /decl/hierarchy
+	abstract_type = /decl/hierarchy
 	var/name = "Hierarchy"
-	var/hierarchy_type
 	var/decl/hierarchy/parent
 	var/list/decl/hierarchy/children
 
@@ -11,13 +11,10 @@
 		if(child.parent_type == type)
 			dd_insertObjectList(children, child)
 			child.parent = src
-	return ..()
+	. = ..()
 
 /decl/hierarchy/proc/is_category()
-	return hierarchy_type == type || children.len
-
-/decl/hierarchy/proc/is_hidden_category()
-	return hierarchy_type == type
+	return is_abstract() || children.len
 
 /decl/hierarchy/proc/get_descendents()
 	if(!children)
@@ -25,7 +22,7 @@
 	. = children.Copy()
 	for(var/decl/hierarchy/child in children)
 		if(child.children)
-			. += child.get_descendents()
+			. |= child.get_descendents()
 
 /decl/hierarchy/dd_SortValue()
 	return name

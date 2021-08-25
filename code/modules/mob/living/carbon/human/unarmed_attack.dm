@@ -106,7 +106,7 @@ var/global/list/sparring_attack_cache = list()
 			if(BP_GROIN)
 				var/decl/pronouns/G = target.get_pronouns()
 				target.visible_message( \
-					SPAN_WARNING("\The [target] looks like [G.he] is in pain!"), \
+					SPAN_WARNING("\The [target] looks like [G.he] [G.is] in pain!"), \
 					SPAN_WARNING(G.get_message_for_being_kicked_in_the_dick()))
 				target.apply_effects(stutter = attack_damage * 2, agony = attack_damage* 3, blocked = armour)
 			if(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT)

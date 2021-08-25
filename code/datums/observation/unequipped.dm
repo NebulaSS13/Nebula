@@ -29,6 +29,6 @@
 **********************/
 
 /obj/item/dropped(var/mob/user)
-	UNLINT(..())
+	. = ..()
 	events_repository.raise_event(/decl/observ/mob_unequipped, user, src)
 	events_repository.raise_event(/decl/observ/item_unequipped, src, user)

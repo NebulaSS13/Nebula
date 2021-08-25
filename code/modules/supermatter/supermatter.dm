@@ -26,9 +26,31 @@
 
 #define LIGHT_POWER_CALC (max(power / 50, 1))
 
+// Keeps Accent sounds from layering, increase or decrease as preferred.
+#define SUPERMATTER_ACCENT_SOUND_COOLDOWN 2 SECONDS
+
 var/global/list/supermatter_final_thoughts = list(
 	"Oh, fuck.",
 	"That was not a wise decision."
+)
+
+var/global/list/supermatter_calm_accent_sounds = list(
+	'sound/machines/sm/accent/normal/1.ogg',
+	'sound/machines/sm/accent/normal/2.ogg',
+	'sound/machines/sm/accent/normal/3.ogg',
+	'sound/machines/sm/accent/normal/4.ogg',
+	'sound/machines/sm/accent/normal/5.ogg'
+
+)
+
+var/global/list/supermatter_delam_accent_sounds = list(
+	'sound/machines/sm/accent/delam/1.ogg',
+	'sound/machines/sm/accent/delam/2.ogg',
+	'sound/machines/sm/accent/delam/3.ogg',
+	'sound/machines/sm/accent/delam/4.ogg',
+	'sound/machines/sm/accent/delam/5.ogg',
+
+	
 )
 
 // Returns a truthy value that is also used for power generation by the supermatter core itself.
@@ -42,18 +64,18 @@ var/global/list/supermatter_final_thoughts = list(
 		if(user)
 			var/hurls = (collided ? "hurls" : "pushes")
 			source.visible_message(
-				SPAN_DANGER("\The [user] [hurls] \the [victim] into \the [source], inducing a resonance! [victim_pronouns.He] starts to glow and catches aflame before flashing into ash."),\
+				SPAN_DANGER("\The [user] [hurls] \the [victim] into \the [source], inducing a resonance! [victim_pronouns.He] start[victim_pronouns.s] to glow and catches aflame before flashing into ash."),\
 				SPAN_DANGER("\The [user] [hurls] you into \the [source], and your ears are filled with unearthly ringing."), \
 				SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as a wave of heat washes over you."))
 		else
 			source.visible_message(
-				SPAN_DANGER("\The [victim] [collided ? "slams into" : "touches"] \the [source], inducing a resonance! [victim_pronouns.He] starts to glow and catches aflame before flashing into ash."), \
+				SPAN_DANGER("\The [victim] [collided ? "slams into" : "touches"] \the [source], inducing a resonance! [victim_pronouns.He] start[victim_pronouns.s] to glow and catches aflame before flashing into ash."), \
 				SPAN_DANGER("You [collided ? "slam into" : "touch"] \the [source], and your ears are filled with unearthly ringing. Your last thought is \"[pick(global.supermatter_final_thoughts)]\""), \
 				SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as a wave of heat washes over you."))
 	else
 		if(user)
 			source.visible_message( \
-				SPAN_DANGER("\The [user][collided ? "throws" : "touches"] \the [victim] [collided ? "into" : "to"] \the [source] and [victim_pronouns.he] instantly flashes away into ashes."), \
+				SPAN_DANGER("\The [user][collided ? "throws" : "touches"] \the [victim] [collided ? "into" : "to"] \the [source] and [victim_pronouns.he] instantly flash[victim_pronouns.es] away into ashes."), \
 				SPAN_WARNING("You hear a loud crack as you are washed with a wave of heat."))
 		else
 			source.visible_message( \
@@ -82,15 +104,18 @@ var/global/list/supermatter_final_thoughts = list(
 	SSradiation.radiate(source, rads)
 
 /obj/machinery/power/supermatter
-	name = "Supermatter"
+	name = "supermatter crystal"
 	desc = "A strangely translucent and iridescent crystal. <span class='danger'>You get headaches just from looking at it.</span>"
-	icon = 'icons/obj/engine.dmi'
-	icon_state = "darkmatter"
+	icon = 'icons/obj/supermatter_48.dmi'
+	icon_state = "supermatter"
 	density = 1
 	anchored = 0
 	light_range = 4
-
-	layer = ABOVE_OBJ_LAYER
+	layer = ABOVE_HUMAN_LAYER
+	matter = list(
+		/decl/material/solid/exotic_matter = MATTER_AMOUNT_PRIMARY,
+		/decl/material/solid/metal/steel =   MATTER_AMOUNT_REINFORCEMENT
+	)
 
 	var/nitrogen_retardation_factor = 0.15 // Higher == N2 slows reaction more
 	var/thermal_release_modifier = 10000   // Higher == more heat released during reaction
@@ -108,8 +133,6 @@ var/global/list/supermatter_final_thoughts = list(
 
 	var/gasefficency = 0.25
 
-	var/base_icon_state = "darkmatter"
-
 	var/last_power
 	var/damage = 0
 	var/damage_archived = 0
@@ -122,9 +145,10 @@ var/global/list/supermatter_final_thoughts = list(
 	var/emergency_alert = "CRYSTAL DELAMINATION IMMINENT."
 	var/explosion_point = 1000
 
-	light_color = "#8a8a00"
-	var/warning_color = "#b8b800"
-	var/emergency_color = "#d9d900"
+	light_color = "#927a10"
+	var/base_color = "#927a10"
+	var/warning_color = "#c78c20"
+	var/emergency_color = "#ffd04f"
 
 	var/grav_pulling = 0
 	// Time in ticks between delamination ('exploding') and exploding (as in the actual boom)
@@ -162,6 +186,12 @@ var/global/list/supermatter_final_thoughts = list(
 	var/aw_delam = FALSE
 	var/aw_EPR = FALSE
 
+	var/last_accent_sound = 0
+
+	var/datum/composite_sound/supermatter/soundloop
+
+	var/damage_animation = FALSE //we we doing our damage animation?
+
 	var/list/threshholds = list( // List of lists defining the amber/red labeling threshholds in readouts. Numbers are minminum red and amber and maximum amber and red, in that order
 		list("name" = SUPERMATTER_DATA_EER,         "min_h" = -1, "min_l" = -1,  "max_l" = 150,  "max_h" = 300),
 		list("name" = SUPERMATTER_DATA_TEMPERATURE, "min_h" = -1, "min_l" = -1,  "max_l" = 4000, "max_h" = 5000),
@@ -172,6 +202,21 @@ var/global/list/supermatter_final_thoughts = list(
 /obj/machinery/power/supermatter/Initialize()
 	. = ..()
 	uid = gl_uid++
+	soundloop = new(list(src), TRUE)
+	update_icon()
+	add_filter("outline",1,list(type = "drop_shadow", size = 0, color = COLOR_WHITE, x = 0, y = 0))
+
+/obj/machinery/power/supermatter/Destroy()
+	. = ..()
+	QDEL_NULL(soundloop)
+
+/obj/machinery/power/supermatter/on_update_icon()
+	. = ..()
+	underlays.Cut()
+	underlays += mutable_appearance(icon, "[icon_state]_underplate", flags = RESET_COLOR, plane = plane, layer = OBJ_LAYER)
+
+/obj/machinery/power/supermatter/get_matter_amount_modifier()
+	. = ..() * (1/HOLLOW_OBJECT_MATTER_MULTIPLIER) * 10 // Big solid chunk of matter.
 
 /obj/machinery/power/supermatter/proc/handle_admin_warnings()
 	if(disable_adminwarn)
@@ -396,9 +441,32 @@ var/global/list/supermatter_final_thoughts = list(
 		if(!isspaceturf(L) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && (L.z in global.using_map.station_levels))
 			announce_warning()
 	else
-		shift_light(4,initial(light_color))
+		shift_light(4,base_color)
 	if(grav_pulling)
 		supermatter_pull(src)
+
+	// Vary volume by power produced.
+	if(power)
+		// Volume will be 1 at no power, ~12.5 at ENERGY_NITROGEN, and 20+ at ENERGY_PHORON.
+		// Capped to 20 volume since higher volumes get annoying and it sounds worse.
+		// Formula previously was min(round(power/10)+1, 20)
+		soundloop.volume = clamp((50 + (power / 50)), 50, 100)
+
+	// Swap loops between calm and delamming.
+	if(damage >= explosion_point * 0.25)
+		soundloop.mid_sounds = list('sound/machines/sm/loops/delamming.ogg' = 1)
+	else
+		soundloop.mid_sounds = list('sound/machines/sm/loops/calm.ogg' = 1)
+	
+	// Play Delam/Neutral sounds at rate determined by power and damage.
+	if(last_accent_sound < world.time && prob(20))
+		var/aggression = min(((damage / 800) * (power / 2500)), 1.0) * 100
+		if(damage >= explosion_point * 0.25)
+			playsound(src, pick(supermatter_delam_accent_sounds), max(50, aggression), FALSE, 10)
+		else
+			playsound(src, pick(supermatter_calm_accent_sounds), max(50, aggression), FALSE, 10)
+		var/next_sound = round((100 - aggression) * 5)
+		last_accent_sound = world.time + max(SUPERMATTER_ACCENT_SOUND_COOLDOWN, next_sound)
 
 	//Ok, get the air from the turf
 	var/datum/gas_mixture/removed = null
@@ -431,11 +499,9 @@ var/global/list/supermatter_final_thoughts = list(
 		if (oxygen > 0.8)
 			//If chain reacting at oxygen == 1, we want the power at 800 K to stabilize at a power level of 400
 			equilibrium_power = 400
-			icon_state = "[base_icon_state]_glow"
 		else
 			//If chain reacting at oxygen == 1, we want the power at 800 K to stabilize at a power level of 250
 			equilibrium_power = 250
-			icon_state = base_icon_state
 
 		temp_factor = ( (equilibrium_power/decay_factor)**3 )/800
 		power = max( (removed.temperature * temp_factor) * oxygen + power, 0)
@@ -469,13 +535,30 @@ var/global/list/supermatter_final_thoughts = list(
 		var/effect = max(0, min(200, power * config_hallucination_power * sqrt( 1 / max(1,get_dist(subject, src)))) )
 		subject.adjust_hallucination(effect, 0.25 * effect)
 
+	if(power)
+		var/size_calc = max((power / 200), 1) //this needs to be a decently small value, but not TOO small.
+		animate_filter("outline", list(size = size_calc))
+	if(!power)
+		animate_filter("outline", list(size = 0))
+
+	color = color_contrast(Interpolate(0, 50, Clamp( (damage - emergency_point) / (explosion_point - emergency_point),0,1)))
+
+	if (damage >= emergency_point)
+		if(!get_filter("rays"))
+			add_filter("rays",1,list(type="rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
+		animate_filter("rays", list(time = 10 SECONDS, offset = 10, loop=-1))
+		animate(time = 10 SECONDS, loop=-1)
+
+		animate_filter("rays",list(time = 2 SECONDS, size = 80, loop=-1, flags = ANIMATION_PARALLEL))
+		animate(time = 2 SECONDS, size = 10, loop=-1, flags = ANIMATION_PARALLEL)
+	else if (damage < emergency_point)
+		remove_filter("rays")
 
 	SSradiation.radiate(src, power * radiation_release_modifier) //Better close those shutters!
 	power -= (power/decay_factor)**3		//energy losses due to radiation
 	handle_admin_warnings()
 
-	return 1
-
+	return 1	
 
 /obj/machinery/power/supermatter/bullet_act(var/obj/item/projectile/Proj)
 	var/turf/L = loc
@@ -580,10 +663,10 @@ var/global/list/supermatter_final_thoughts = list(
 	return "Superdense crystalline structure - appears to have been shaped or hewn, lattice is approximately 20 times denser than should be possible."
 
 /obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
-	name = "Supermatter Shard"
+	name = "supermatter shard"
 	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. <span class='danger'>You get headaches just from looking at it.</span>"
-	icon_state = "darkmatter_shard"
-	base_icon_state = "darkmatter_shard"
+	icon = 'icons/obj/supermatter_32.dmi'
+	icon_state = "supermatter_shard"
 
 	warning_point = 50
 	emergency_point = 400
@@ -593,6 +676,9 @@ var/global/list/supermatter_final_thoughts = list(
 
 	pull_time = 150
 	explosion_power = 3
+
+/obj/machinery/power/supermatter/medium
+	icon = 'icons/obj/supermatter_32.dmi'
 
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return

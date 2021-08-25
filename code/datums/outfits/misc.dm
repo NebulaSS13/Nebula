@@ -37,6 +37,6 @@
 	l_pocket = /obj/item/bikehorn
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
 
-/decl/hierarchy/outfit/clown/New()
-	..()
+/decl/hierarchy/outfit/clown/Initialize()
+	. = ..()
 	backpack_overrides[/decl/backpack_outfit/backpack] = /obj/item/storage/backpack/clown

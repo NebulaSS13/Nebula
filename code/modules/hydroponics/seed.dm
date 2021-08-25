@@ -22,10 +22,11 @@
 	var/kitchen_tag                // Used by the reagent grinder.
 	var/trash_type                 // Garbage item produced when eaten.
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
-	var/product_type = /obj/item/chems/food/snacks/grown
+	var/product_type = /obj/item/chems/food/grown
 	var/force_layer
 	var/req_CO2_moles    = 1.0// Moles of CO2 required for photosynthesis.
 	var/hydrotray_only
+	var/base_seed_value = 5 // Used when generating price.
 
 /datum/seed/New()
 
@@ -69,6 +70,20 @@
 	update_growth_stages()
 
 	uid = "[sequential_id(/datum/seed/)]"
+
+// TODO integrate other traits.
+/datum/seed/proc/get_monetary_value()
+	. = 1
+	// Positives!
+	. += 3 * set_trait(TRAIT_HARVEST_REPEAT)
+	. += 3 * set_trait(TRAIT_PRODUCES_POWER)
+	. += 5 * get_trait(TRAIT_CARNIVOROUS)
+	. += 5 * get_trait(TRAIT_PARASITE)
+	. += 5 * get_trait(TRAIT_TELEPORTING)
+	// Negatives!
+	. -= 2 * get_trait(TRAIT_STINGS)
+	. -= 2 * get_trait(TRAIT_EXPLOSIVE)
+	. = max(1, round(. * base_seed_value))
 
 /datum/seed/proc/get_trait(var/trait)
 	return traits["[trait]"]
@@ -460,6 +475,7 @@
 
 	if(additional_chems)
 		var/list/banned_chems = list(
+			/decl/material/placeholder,
 			/decl/material/liquid/adminordrazine,
 			/decl/material/liquid/nutriment,
 			/decl/material/liquid/weedkiller
@@ -752,9 +768,9 @@
 
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
 				if(istype(product, /obj/item/chems/food))
-					var/obj/item/chems/food/food = product
-					food.color = get_trait(TRAIT_PRODUCT_COLOUR)
-					food.filling_color = get_trait(TRAIT_PRODUCT_COLOUR)
+					var/obj/item/chems/food/snack = product
+					snack.color = get_trait(TRAIT_PRODUCT_COLOUR)
+					snack.filling_color = get_trait(TRAIT_PRODUCT_COLOUR)
 
 			if(mysterious)
 				product.name += "?"

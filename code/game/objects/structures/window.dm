@@ -112,6 +112,8 @@
 /obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
+	if(air_group && !anchored)
+		return 1
 	if(is_fulltile())
 		return 0	//full tile window, you can't move into it!
 	if(get_dir(loc, target) & dir)
@@ -221,20 +223,40 @@
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			visible_message(SPAN_NOTICE("[user] dismantles \the [src]."))
 			dismantle()
-	else if(isCoil(W) && !polarized && is_fulltile())
+	else if(isCoil(W) && is_fulltile())
+		if (polarized)
+			to_chat(user, SPAN_WARNING("\The [src] is already polarized."))
+			return
 		var/obj/item/stack/cable_coil/C = W
 		if (C.use(1))
 			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
 			polarized = TRUE
-	else if(polarized && isMultitool(W))
-		var/t = sanitizeSafe(input(user, "Enter the ID for the window.", src.name, null), MAX_NAME_LEN)
-		if(user.incapacitated() || !user.Adjacent(src))
+			to_chat(user, SPAN_NOTICE("You wire and polarize \the [src]."))
+	else if (isWirecutter(W))
+		if (!polarized)
+			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
 			return
-		if (user.get_active_hand() != W)
+		new /obj/item/stack/cable_coil(get_turf(user), 1)
+		if (opacity)
+			toggle()
+		polarized = FALSE
+		id = null
+		playsound(loc, 'sound/items/Wirecutter.ogg', 75, 1)
+		to_chat(user, SPAN_NOTICE("You cut the wiring and remove the polarization from \the [src]."))
+	else if(isMultitool(W))
+		if (!polarized)
+			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
 			return
-		if (t)
-			src.id = t
-			to_chat(user, SPAN_NOTICE("The new ID of the window is [id]"))
+		if (anchored)
+			playsound(loc, 'sound/effects/pop.ogg', 75, 1)
+			to_chat(user, SPAN_NOTICE("You toggle \the [src]'s tinting."))
+			toggle()
+		else
+			var/response = input(user, "New Window ID:", name, id) as null | text
+			if (isnull(response) || user.incapacitated() || !user.Adjacent(src) || user.get_active_hand() != W)
+				return
+			id = sanitizeSafe(response, MAX_NAME_LEN)
+			to_chat(user, SPAN_NOTICE("The new ID of \the [src] is [id]."))
 		return
 	else if(istype(W, /obj/item/gun/energy/plasmacutter) && anchored)
 		var/obj/item/gun/energy/plasmacutter/cutter = W
@@ -334,9 +356,26 @@
 	. = ..(user)
 	if(reinf_material)
 		to_chat(user, SPAN_NOTICE("It is reinforced with the [reinf_material.solid_name] lattice."))
+	
+	if (reinf_material)
+		switch (construction_state)
+			if (0)
+				to_chat(user, SPAN_WARNING("The window is not in the frame."))
+			if (1)
+				to_chat(user, SPAN_WARNING("The window is pried into the frame but not yet fastened."))
+			if (2)
+				to_chat(user, SPAN_NOTICE("The window is fastened to the frame."))
+
+	if (anchored)
+		to_chat(user, SPAN_NOTICE("It is fastened to \the [get_turf(src)]."))
+	else
+		to_chat(user, SPAN_WARNING("It is not fastened to anything."))
 
 	if (paint_color)
 		to_chat(user, SPAN_NOTICE("The glass is stained with paint."))
+	
+	if (polarized)
+		to_chat(user, SPAN_NOTICE("It appears to be wired."))
 
 /obj/structure/window/get_color()
 	if (paint_color)

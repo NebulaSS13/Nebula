@@ -27,9 +27,9 @@
 	var/capacity = 10   //How many ingredients can we store?
 	var/list/products = list(
 		"Food" = list(
-			/obj/item/chems/food/drinks/milk/smallcarton = 30,
-			/obj/item/chems/food/drinks/milk = 50,
-			/obj/item/chems/food/snacks/meat/syntiflesh = 50,
+			/obj/item/chems/drinks/milk/smallcarton = 30,
+			/obj/item/chems/drinks/milk = 50,
+			/obj/item/chems/food/meat/syntiflesh = 50,
 			/obj/item/storage/fancy/egg_box = 300),
 		"Nutrients" = list(
 			/obj/item/chems/glass/bottle/eznutrient = 60,
@@ -99,7 +99,7 @@
 	else if(istype(O, /obj/item/storage/plants))
 		var/obj/item/storage/plants/P = O
 		var/hadPlants = 0
-		for(var/obj/item/chems/food/snacks/grown/G in P.contents)
+		for(var/obj/item/chems/food/grown/G in P.contents)
 			hadPlants = 1
 			P.remove_from_storage(G, src, 1) //No UI updates until we are all done.
 			ingredients++
@@ -113,7 +113,7 @@
 			to_chat(user, "<span class='notice'>You empty \the [P] into \the [src].</span>")
 
 
-	else if(!istype(O, /obj/item/chems/food/snacks/grown))
+	else if(!istype(O, /obj/item/chems/food/grown))
 		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")
 	else if(user.unEquip(O, src))
 		ingredients++
@@ -195,13 +195,13 @@
 		return
 
 	var/S = 0
-	for(var/obj/item/chems/food/snacks/grown/I in contents)
+	for(var/obj/item/chems/food/grown/I in contents)
 		S += 5
 		ingredients--
 		var/amt = REAGENT_VOLUME(I.reagents, /decl/material/liquid/nutriment)
 		if(amt < 0.1)
 			points += 1
-		else 
+		else
 			points += amt * 10 * eat_eff
 		qdel(I)
 	if(S)

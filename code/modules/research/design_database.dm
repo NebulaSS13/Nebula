@@ -88,7 +88,7 @@
 /obj/machinery/design_database/Initialize()
 	..()
 	design_databases += src
-	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_WIRED)
+	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
 	update_icon()
 	. = INITIALIZE_HINT_LATELOAD
 

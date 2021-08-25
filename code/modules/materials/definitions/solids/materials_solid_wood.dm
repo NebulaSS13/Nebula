@@ -1,11 +1,18 @@
 /decl/material/solid/wood
 	name = "wood"
+	uid = "solid_wood"
 	liquid_name = "wood pulp"
 	lore_text = "A fibrous structural material harvested from an indeterminable plant. Don't get a splinter."
 	adjective_name = "wooden"
 	color = WOOD_COLOR_GENERIC
 	integrity = 75
 	icon_base = 'icons/turf/walls/wood.dmi'
+	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
+	wall_blend_icons = list(
+		'icons/turf/walls/solid.dmi' = TRUE,
+		'icons/turf/walls/stone.dmi' = TRUE,
+		'icons/turf/walls/metal.dmi' = TRUE
+	)
 	table_icon_base = "wood"
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER
@@ -83,6 +90,7 @@
 	. += new/datum/stack_recipe/tile/walnut(src)
 
 /decl/material/solid/wood/holographic
+	uid = "solid_holographic_wood"
 	color = WOOD_COLOR_CHOCOLATE //the very concept of wood should be brown
 	shard_type = SHARD_NONE
 	value = 0
@@ -93,6 +101,7 @@
 
 /decl/material/solid/wood/mahogany
 	name = "mahogany"
+	uid = "solid_mahogany"
 	adjective_name = "mahogany"
 	lore_text = "Mahogany is prized for its beautiful grain and rich colour, and as such is typically used for fine furniture and cabinetry."
 	color = WOOD_COLOR_RICH
@@ -101,6 +110,7 @@
 
 /decl/material/solid/wood/maple
 	name = "maple"
+	uid = "solid_maple"
 	adjective_name = "maple"
 	lore_text = "Owing to its fast growth and ease of working, silver maple is a popular wood for flooring and furniture."
 	color = WOOD_COLOR_PALE
@@ -108,6 +118,7 @@
 
 /decl/material/solid/wood/ebony
 	name = "ebony"
+	uid = "solid_ebony"
 	adjective_name = "ebony"
 	lore_text = "Ebony is the name for a group of dark coloured, extremely dense, and fine grained hardwoods. \
 				Despite gene modification to produce larger source trees and ample land to plant them on, \
@@ -121,6 +132,7 @@
 
 /decl/material/solid/wood/walnut
 	name = "walnut"
+	uid = "solid_walnut"
 	adjective_name = "walnut"
 	lore_text = "Walnut is a dense hardwood that polishes to a very fine finish. \
 				Walnut is especially favoured for construction of figurines (where it contrasts with lighter coloured woods) and tables. \
@@ -131,6 +143,7 @@
 
 /decl/material/solid/wood/bamboo
 	name = "bamboo"
+	uid = "solid_bamboo"
 	liquid_name = "bamboo pulp"
 	adjective_name = "bamboo"
 	lore_text = "Bamboo is a fast-growing grass which can be used similar to wood after processing. Due to its swift growth \
@@ -141,6 +154,7 @@
 
 /decl/material/solid/wood/yew
 	name = "yew"
+	uid = "solid_yew"
 	adjective_name = "yew"
 	lore_text = "Although favoured in days past for the construction of bows, yew has a multitude of uses, including medicine. The yew \
 				tree can live for nearly a thousand years thanks to its natural disease resistance."

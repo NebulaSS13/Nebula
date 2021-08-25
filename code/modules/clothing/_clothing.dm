@@ -27,7 +27,7 @@
 		update_icon()
 
 // Sort of a placeholder for proper tailoring.
-#define RAG_COUNT(X) ceil((LAZYACCESS(X.matter, /decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
+#define RAG_COUNT(X) CEILING((LAZYACCESS(X.matter, /decl/material/solid/cloth) * 0.65) / SHEET_MATERIAL_AMOUNT)
 
 /obj/item/clothing/attackby(obj/item/I, mob/user)
 	var/rags = RAG_COUNT(src)
@@ -160,13 +160,15 @@
 	if(istype(armor_datum) && LAZYLEN(armor_datum.get_visible_damage()))
 		to_chat(user, SPAN_WARNING("It has some <a href='?src=\ref[src];list_armor_damage=1'>damage</a>."))
 
-	for(var/obj/item/clothing/accessory/A in accessories)
-		to_chat(user, "[html_icon(A)] \A [A] is attached to it.")
+	if(LAZYLEN(accessories))
+		to_chat(user, "It has the following attached: [counting_english_list(accessories)]")
+
 	switch(ironed_state)
 		if(WRINKLES_WRINKLY)
 			to_chat(user, "<span class='bad'>It's wrinkly.</span>")
 		if(WRINKLES_NONE)
 			to_chat(user, "<span class='notice'>It's completely wrinkle-free!</span>")
+
 	switch(smell_state)
 		if(SMELL_CLEAN)
 			to_chat(user, "<span class='notice'>It smells clean!</span>")

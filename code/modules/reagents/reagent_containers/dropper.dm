@@ -15,7 +15,7 @@
 
 /obj/item/chems/dropper/afterattack(var/obj/target, var/mob/user, var/proximity)
 
-	if(!target.reagents || !proximity) 
+	if(!target.reagents || !proximity)
 		return
 
 	if(reagents.total_volume)

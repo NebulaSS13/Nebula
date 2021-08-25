@@ -22,6 +22,7 @@
 	icon = 'mods/species/ascent/icons/razorweb.dmi'
 	icon_state = "razorweb"
 	anchored = TRUE
+	z_flags = ZMM_MANGLE_PLANES
 
 	var/mob/owner
 	var/decays = TRUE

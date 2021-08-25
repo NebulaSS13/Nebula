@@ -133,7 +133,7 @@
 		"methods" = methods,
 		"current_method" = "\ref[jammer_method]",
 		"current_cost" = jammer_method.energy_cost,
-		"total_cost" = "[ceil(JAMMER_POWER_CONSUMPTION(10))]"
+		"total_cost" = "[CEILING(JAMMER_POWER_CONSUMPTION(10))]"
 	)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)

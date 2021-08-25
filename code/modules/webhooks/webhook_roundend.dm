@@ -7,7 +7,7 @@
 	var/desc = "A round of **[SSticker.mode ? SSticker.mode.name : "Unknown"]** ([game_id]) has ended.\n\n"
 	if(data)
 		var/s_escaped =  "Escaped"
-		if(!SSevac.evacuation_controller.emergency_evacuation)
+		if(SSevac.evacuation_controller && !SSevac.evacuation_controller.emergency_evacuation)
 			s_escaped = "Transferred"
 		if(data["survivors"] > 0)
 			desc += "Survivors: **[data["survivors"]]**\n"

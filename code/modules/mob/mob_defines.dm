@@ -3,6 +3,7 @@
 	plane = DEFAULT_PLANE
 	layer = MOB_LAYER
 
+	appearance_flags = PIXEL_SCALE | LONG_GLIDE
 	animate_movement = 2
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 
@@ -23,6 +24,8 @@
 		/datum/movement_handler/mob/multiz,
 		/datum/movement_handler/mob/movement
 	)
+
+	var/shift_to_open_context_menu = FALSE
 
 	var/mob_flags
 	var/last_quick_move_time = 0
@@ -68,6 +71,9 @@
 	Changing this around would probably require a good look-over the pre-existing code.
 	*/
 	var/obj/screen/zone_sel/zone_sel = null
+
+	/// Cursor icon used when holding shift over things.
+	var/examine_cursor_icon = 'icons/effects/mouse_pointers/examine_pointer.dmi'
 
 	var/use_me = 1 //Allows all mobs to use the me verb by default, will have to manually specify they cannot
 	var/damageoverlaytemp = 0
@@ -142,7 +148,7 @@
 	
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 
-	var/update_icon = 1 //Set to 1 to trigger update_icons() at the next life() call
+	var/update_icon = 1 //Set to 1 to trigger update_icon() at the next life() call
 
 	var/status_flags = CANSTUN|CANWEAKEN|CANPARALYSE|CANPUSH	//bitflags defining which status effects can be inflicted (replaces canweaken, canstun, etc)
 

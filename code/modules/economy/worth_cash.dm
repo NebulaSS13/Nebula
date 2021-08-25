@@ -39,7 +39,7 @@
 
 /obj/item/cash/proc/get_worth()
 	var/decl/currency/cur = GET_DECL(currency)
-	. = Floor(absolute_worth / cur.absolute_value)
+	. = FLOOR(absolute_worth / cur.absolute_value)
 
 /obj/item/cash/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/cash))
@@ -122,12 +122,12 @@
 		return TRUE
 
 	var/amount = input(usr, "How many [cur.name] do you want to take? (0 to [get_worth() - 1])", "Take Money", 20) as num
-	amount = round(Clamp(amount, 0, Floor(get_worth() - 1)))
+	amount = round(Clamp(amount, 0, FLOOR(get_worth() - 1)))
 
 	if(!amount || QDELETED(src) || get_worth() <= 1 || user.incapacitated() || loc != user)
 		return TRUE
 
-	amount = Floor(amount * cur.absolute_value)
+	amount = FLOOR(amount * cur.absolute_value)
 	adjust_worth(-(amount))
 	var/obj/item/cash/cash = new(get_turf(src))
 	cash.set_currency(currency)
@@ -214,7 +214,7 @@
 		else
 			to_chat(user, SPAN_NOTICE("<b>Id:</b> [id]."))
 			var/decl/currency/cur = GET_DECL(currency)
-			to_chat(user, SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [Floor(loaded_worth / cur.absolute_value)]."))
+			to_chat(user, SPAN_NOTICE("<b>[capitalize(cur.name)]</b> remaining: [FLOOR(loaded_worth / cur.absolute_value)]."))
 
 /obj/item/charge_stick/get_base_value()
 	. = holographic ? 0 : loaded_worth
@@ -288,11 +288,11 @@
 		return
 
 	var/h_thou = loaded_worth / 100000
-	var/t_thou = (loaded_worth - (Floor(h_thou) * 100000)) / 10000
-	var/thou = (loaded_worth - (Floor(h_thou) * 100000) - (Floor(t_thou) * 10000)) / 1000
-	overlays += image(icon, "[Floor(h_thou)]__")
-	overlays += image(icon, "_[Floor(t_thou)]_")
-	overlays += image(icon, "__[Floor(thou)]")
+	var/t_thou = (loaded_worth - (FLOOR(h_thou) * 100000)) / 10000
+	var/thou = (loaded_worth - (FLOOR(h_thou) * 100000) - (FLOOR(t_thou) * 10000)) / 1000
+	overlays += image(icon, "[FLOOR(h_thou)]__")
+	overlays += image(icon, "_[FLOOR(t_thou)]_")
+	overlays += image(icon, "__[FLOOR(thou)]")
 
 /obj/item/charge_stick/copper
 	grade = "copper"

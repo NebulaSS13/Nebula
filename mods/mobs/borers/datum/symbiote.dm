@@ -11,10 +11,6 @@ var/global/list/symbiote_starting_points = list()
 
 /datum/job/symbiote
 	title = "Symbiote"
-	department_types = list(
-		/decl/department/civilian,
-		/decl/department/science
-	)
 	total_positions = -1
 	spawn_positions = -1
 	supervisors = "your host"
@@ -25,10 +21,13 @@ var/global/list/symbiote_starting_points = list()
 	economic_power = 0
 	defer_roundstart_spawn = TRUE
 	hud_icon = "hudblank"
-	outfit_type = /decl/hierarchy/outfit/job/assistant
+	outfit_type = /decl/hierarchy/outfit/job/symbiote_host
 	create_record = FALSE
 	var/check_whitelist // = "Symbiote"
 	var/static/mob/living/simple_animal/borer/preview_slug
+
+/decl/hierarchy/outfit/job/symbiote_host
+	name = "Job - Symbiote Host"
 
 /datum/job/symbiote/post_equip_rank(var/mob/person, var/alt_title)
 

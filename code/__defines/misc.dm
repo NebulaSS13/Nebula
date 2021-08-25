@@ -161,8 +161,6 @@
 
 #define PIXEL_MULTIPLIER WORLD_ICON_SIZE/32
 
-#define DEFAULT_SPAWNPOINT_ID "Default"
-
 #define MIDNIGHT_ROLLOVER		864000	//number of deciseconds in a day
 
 //Error handler defines
@@ -264,7 +262,6 @@
 
 #define hex2num(X) text2num(X, 16)
 
-#define GET_DECL(D) (ispath(D, /decl) ? (decls_repository.fetched_decls[D] || decls_repository.get_decl(D)) : null)
 #define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))
 
 #if DM_BUILD < 1540
@@ -272,3 +269,8 @@
 #else
 #define AS_ANYTHING as anything
 #endif
+
+//NOTE: INTENT_HOTKEY_* defines are not actual intents!
+//they are here to support hotkeys
+#define INTENT_HOTKEY_LEFT  "left"
+#define INTENT_HOTKEY_RIGHT "right"

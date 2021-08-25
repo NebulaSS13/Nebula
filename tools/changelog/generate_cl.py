@@ -50,6 +50,10 @@ if not pr_list.totalCount:
 
 pr = pr_list[0]
 
+if not pr.body:
+    print("No PR body, exiting")
+    exit(0) # Change to '1' if you want the action to fail when no PR description is provided
+
 pr_body = pr.body
 pr_number = pr.number
 pr_author = pr.user.login

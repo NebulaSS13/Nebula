@@ -1,9 +1,3 @@
-/datum/gear/mask/gas/vox
-	display_name = "vox breathing mask"
-	path = /obj/item/clothing/mask/gas/vox
-	sort_category = "Xenowear"
-	whitelisted = list(BODYTYPE_VOX)
-
 /obj/item/clothing/mask/gas/vox
 	name = "vox breathing mask"
 	desc = "A small oxygen filter for use by Vox."

@@ -25,24 +25,14 @@
 	return mobs
 
 /proc/random_hair_style(gender, species)
-	species = species || global.using_map.default_species
-	var/h_style = "Bald"
-
-	var/decl/species/mob_species = get_species_by_key(species)
-	var/list/valid_hairstyles = mob_species.get_hair_styles()
-	if(valid_hairstyles.len)
-		h_style = pick(valid_hairstyles)
-
-	return h_style
+	var/decl/species/mob_species = get_species_by_key(species || global.using_map.default_species)
+	var/list/valid_styles = mob_species?.get_hair_style_types(gender)
+	return length(valid_styles) ? pick(valid_styles) : /decl/sprite_accessory/hair/bald
 
 /proc/random_facial_hair_style(gender, var/species)
-	species = species || global.using_map.default_species
-	var/f_style = "Shaved"
-	var/decl/species/mob_species = get_species_by_key(species)
-	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)
-	if(valid_facialhairstyles.len)
-		f_style = pick(valid_facialhairstyles)
-		return f_style
+	var/decl/species/mob_species = get_species_by_key(species || global.using_map.default_species)
+	var/list/valid_styles = mob_species?.get_facial_hair_style_types(gender)
+	return length(valid_styles) ? pick(valid_styles) : /decl/sprite_accessory/facial_hair/shaved
 
 /proc/random_name(gender, species)
 	if(species)
@@ -298,7 +288,7 @@
 		return val
 	if(istext(val))
 		var/list/vals = splittext(val, "x")
-		return Floor(max(text2num(vals[1]), text2num(vals[2]))/2)
+		return FLOOR(max(text2num(vals[1]), text2num(vals[2]))/2)
 	return 0
 
 // If all of these flags are present, it should come out at exactly 1. Yes, this

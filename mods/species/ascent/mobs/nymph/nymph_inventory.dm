@@ -28,11 +28,11 @@
 
 /mob/living/carbon/alien/ascent_nymph/proc/contains_crystals(var/obj/item/W)
 	for(var/mat in W.matter)
-		if(mat == /decl/material/solid/mineral/sand)
+		if(mat == /decl/material/solid/sand)
 			. += W.matter[mat]
 		else if(mat == /decl/material/solid/gemstone/crystal)
 			. += W.matter[mat]
-		else if(mat == /decl/material/solid/mineral/quartz)
+		else if(mat == /decl/material/solid/quartz)
 			. += W.matter[mat]
 		else if(mat == /decl/material/solid/glass)
 			. += W.matter[mat]
@@ -76,7 +76,8 @@
 	drop_item()
 
 /mob/living/carbon/alien/ascent_nymph/drop_item()
-	if(holding_item && unEquip(holding_item))
-		visible_message(SPAN_NOTICE("\The [src] regurgitates \the [holding_item]."))
-	else
-		. = ..()
+	var/item = holding_item
+	if(item && unEquip(item))
+		visible_message(SPAN_NOTICE("\The [src] regurgitates \the [item]."))
+		return TRUE
+	. = ..()

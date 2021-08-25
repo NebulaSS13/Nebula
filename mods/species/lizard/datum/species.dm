@@ -120,8 +120,8 @@
 		/decl/emote/exertion/biological/pant
 	)
 
-/decl/species/lizard/New()
-	..()
+/decl/species/lizard/Initialize()
+	. = ..()
 	LAZYINITLIST(available_cultural_info)
 	LAZYDISTINCTADD(available_cultural_info[TAG_CULTURE], /decl/cultural_info/culture/lizard)
 	LAZYSET(default_cultural_info, TAG_CULTURE, /decl/cultural_info/culture/lizard)

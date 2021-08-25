@@ -3,17 +3,19 @@
 	desc = "Simple rocket nozzle, expelling gas at hypersonic velocities to propell the ship."
 	icon = 'icons/obj/ship_engine.dmi'
 	icon_state = "nozzle"
+	layer = STRUCTURE_LAYER
 	opacity = 1
 	density = 1
 	atmos_canpass = CANPASS_NEVER
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
-	var/engine_extension = /datum/extension/ship_engine/gas
 	construct_state = /decl/machine_construction/default/panel_closed
 	maximum_component_parts = list(/obj/item/stock_parts = 8)//don't want too many, let upgraded component shine
-
+	uncreated_component_parts = null
+	base_type = /obj/machinery/atmospherics/unary/engine
 	use_power = POWER_USE_OFF
 	power_channel = EQUIP
 	idle_power_usage = 11600
+	var/engine_extension = /datum/extension/ship_engine/gas
 
 /obj/machinery/atmospherics/unary/engine/Initialize()
 	. = ..()
@@ -23,9 +25,23 @@
 /obj/machinery/atmospherics/unary/engine/on_update_icon()
 	cut_overlays()
 	if(operable())
+		z_flags |= ZMM_MANGLE_PLANES
 		add_overlay(emissive_overlay(icon, "indicator_power"))
 		if(use_power)
 			add_overlay(emissive_overlay(icon, "nozzle_idle"))
+	else
+		z_flags &= ~ZMM_MANGLE_PLANES
+
+/obj/machinery/atmospherics/unary/engine/attackby(obj/item/I, mob/user)
+	if(isMultitool(I) && !panel_open)
+		var/datum/extension/ship_engine/engine = get_extension(src, /datum/extension/ship_engine)
+		if(engine.sync_to_ship())
+			to_chat(user, SPAN_NOTICE("\The [src] emits a ping as it syncs its controls to a nearby ship."))
+		else
+			to_chat(user, SPAN_WARNING("\The [src] flashes an error!"))
+		return TRUE
+	
+	. = ..()
 
 /obj/machinery/atmospherics/unary/engine/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0
@@ -70,6 +86,7 @@
 	set_dir(ndir)
 	QDEL_IN(src, 2 SECONDS)
 
+// This comes with an additional terminal component and tries to set it up on init (you should map a terminal beneath it). This is for mapping only.
 /obj/machinery/atmospherics/unary/engine/terminal
-	base_type = /obj/machinery/atmospherics/unary/engine
+	uncreated_component_parts = list(/obj/item/stock_parts/power/terminal/buildable)
 	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)

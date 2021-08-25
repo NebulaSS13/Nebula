@@ -1,9 +1,11 @@
 /decl/material/solid/plastic
 	name = "plastic"
+	uid = "solid_plastic"
 	lore_text = "A generic polymeric material. Probably the most flexible and useful substance ever created by human science; mostly used to make disposable cutlery."
 	flags = MAT_FLAG_BRITTLE
 	icon_base = 'icons/turf/walls/plastic.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	wall_flags = 0
 	use_reinf_state = null
 	color = COLOR_EGGSHELL
 	door_icon_base = "plastic"
@@ -35,6 +37,7 @@
 
 /decl/material/solid/plastic/holographic
 	name = "holographic plastic"
+	uid = "solid_holographic_plastic"
 	shard_type = SHARD_NONE
 	hidden_from_codex = TRUE
 
@@ -43,11 +46,13 @@
 
 /decl/material/solid/cardboard
 	name = "cardboard"
+	uid = "solid_cardboard"
 	lore_text = "What with the difficulties presented by growing plants in orbit, a stock of cardboard in space is probably more valuable than gold."
 	flags = MAT_FLAG_BRITTLE
 	integrity = 10
 	icon_base = 'icons/turf/walls/solid.dmi'
 	icon_reinf = 'icons/turf/walls/reinforced.dmi'
+	wall_flags = PAINT_PAINTABLE|PAINT_STRIPABLE|WALL_HAS_EDGES
 	use_reinf_state = null
 	color = "#aaaaaa"
 	hardness = MAT_VALUE_SOFT
@@ -75,6 +80,7 @@
 
 /decl/material/solid/cloth //todo
 	name = "cotton"
+	uid = "solid_cotton"
 	use_name = "cotton"
 	color = "#ffffff"
 	stack_origin_tech = "{'materials':2}"
@@ -94,41 +100,49 @@
 
 /decl/material/solid/cloth/yellow
 	name = "yellow"
+	uid = "solid_cotton_yellow"
 	use_name = "yellow cloth"
 	color = "#ffbf00"
 
 /decl/material/solid/cloth/teal
 	name = "teal"
+	uid = "solid_cotton_teal"
 	use_name = "teal cloth"
 	color = "#00e1ff"
 
 /decl/material/solid/cloth/black
 	name = "black"
+	uid = "solid_cotton_black"
 	use_name = "black cloth"
 	color = "#505050"
 
 /decl/material/solid/cloth/green
 	name = "green"
+	uid = "solid_cotton_green"
 	use_name = "green cloth"
 	color = "#b7f27d"
 
 /decl/material/solid/cloth/purple
 	name = "purple"
+	uid = "solid_cotton_purple"
 	use_name = "purple cloth"
 	color = "#9933ff"
 
 /decl/material/solid/cloth/blue
 	name = "blue"
+	uid = "solid_cotton_blue"
 	use_name = "blue cloth"
 	color = "#46698c"
 
 /decl/material/solid/cloth/beige
 	name = "beige"
+	uid = "solid_cotton_beige"
 	use_name = "beige cloth"
 	color = "#ceb689"
 
 /decl/material/solid/cloth/lime
 	name = "lime"
+	uid = "solid_cotton_lime"
 	use_name = "lime cloth"
 	color = "#62e36c"
 
@@ -139,6 +153,7 @@
 
 /decl/material/solid/carpet
 	name = "red"
+	uid = "solid_cotton_red"
 	use_name = "red upholstery"
 	color = "#9d2300"
 	flags = MAT_FLAG_PADDING
@@ -155,6 +170,7 @@
 
 /decl/material/solid/plantmatter
 	name = "plant matter"
+	uid = "solid_plantmatter"
 	color = COLOR_GREEN_GRAY
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
@@ -173,6 +189,7 @@
 
 /decl/material/solid/meat
 	name = "meat"
+	uid = "solid_meat"
 	color = COLOR_DARK_RED
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
@@ -191,6 +208,7 @@
 
 /decl/material/solid/skin
 	name = "skin"
+	uid = "solid_skin"
 	color = "#9e8c72"
 	flags = MAT_FLAG_PADDING
 	ignition_point = T0C+300
@@ -217,6 +235,7 @@
 
 /decl/material/solid/skin/lizard
 	name = "lizardskin"
+	uid = "solid_lizardskin"
 	color = "#626952"
 	tans_to = /decl/material/solid/leather/lizard
 	hardness = MAT_VALUE_FLEXIBLE
@@ -224,6 +243,7 @@
 
 /decl/material/solid/skin/insect
 	name = "chitin"
+	uid = "solid_chitin"
 	color = "#7a776d"
 	tans_to = /decl/material/solid/leather/chitin
 	integrity = 75
@@ -233,65 +253,84 @@
 
 /decl/material/solid/skin/fur
 	name = "fur"
+	uid = "solid_fur"
 	color = "#7a726d"
 	tans_to = /decl/material/solid/leather/fur
 	default_solid_form = /obj/item/stack/material/skin/pelt
 
 /decl/material/solid/skin/fur/gray
+	uid = "solid_fur_gray"
 
 /decl/material/solid/skin/fur/white
+	uid = "solid_fur_white"
 
 /decl/material/solid/skin/fur/orange
 	color = COLOR_ORANGE
+	uid = "solid_fur_orange"
 
 /decl/material/solid/skin/fur/black
 	color = COLOR_GRAY20
+	uid = "solid_fur_black"
 
 /decl/material/solid/skin/fur/heavy
 	color = COLOR_GUNMETAL
+	uid = "solid_fur_heavy"
 
 /decl/material/solid/skin/goat
 	color = COLOR_SILVER
+	uid = "solid_skin_goat"
 
 /decl/material/solid/skin/cow
 	color = COLOR_GRAY40
+	uid = "solid_skin_cow"
 
 /decl/material/solid/skin/shark
 	name = "sharkskin"
 	color = COLOR_PURPLE_GRAY
+	uid = "solid_skin_shark"
 
 /decl/material/solid/skin/fish
 	color = COLOR_BOTTLE_GREEN
 	name = "fishskin"
+	uid = "solid_skin_fish"
 
 /decl/material/solid/skin/fish/purple
 	color = COLOR_PALE_PURPLE_GRAY
+	uid = "solid_skin_carp"
 
 /decl/material/solid/skin/feathers
 	name = "feathers"
+	uid = "solid_feathers"
 	color = COLOR_SILVER
 	default_solid_form = /obj/item/stack/material/skin/feathers
 
 /decl/material/solid/skin/feathers/purple
 	color = COLOR_PALE_PURPLE_GRAY
+	uid = "solid_feathers_purple"
 
 /decl/material/solid/skin/feathers/blue
 	color = COLOR_SKY_BLUE
+	uid = "solid_feathers_blue"
 
 /decl/material/solid/skin/feathers/green
 	color = COLOR_BOTTLE_GREEN
+	uid = "solid_feathers_green"
 
 /decl/material/solid/skin/feathers/brown
 	color = COLOR_BEASTY_BROWN
+	uid = "solid_feathers_brown"
 
 /decl/material/solid/skin/feathers/red
 	color = COLOR_RED
+	uid = "solid_feathers_red"
 
 /decl/material/solid/skin/feathers/black
 	color = COLOR_GRAY15
+	uid = "solid_feathers_black"
 
 /decl/material/solid/bone
 	name = "bone"
+	uid = "solid_bone"
 	color = "#f0edc7"
 	ignition_point = T0C+1100
 	melting_point = T0C+1800
@@ -308,16 +347,19 @@
 
 /decl/material/solid/bone/fish
 	name = "fishbone"
+	uid = "solid_fishbone"
 	hardness = MAT_VALUE_FLEXIBLE
 	weight = MAT_VALUE_VERY_LIGHT
 
 /decl/material/solid/bone/cartilage
 	name = "cartilage"
+	uid = "solid_cartilage"
 	hardness = 0
 	weight = MAT_VALUE_EXTREMELY_LIGHT
 
 /decl/material/solid/leather
 	name = "leather"
+	uid = "solid_leather"
 	color = "#5c4831"
 	stack_origin_tech = "{'materials':2}"
 	flags = MAT_FLAG_PADDING
@@ -343,12 +385,14 @@
 
 /decl/material/solid/leather/synth
 	name = "synthleather"
+	uid = "solid_synthleather"
 	color = "#1f1f20"
 	ignition_point = T0C+150
 	melting_point = T0C+100
 
 /decl/material/solid/leather/lizard
 	name = "scaled hide"
+	uid = "solid_scaled_hide"
 	color = "#434b31"
 	integrity = 75
 	hardness = MAT_VALUE_RIGID
@@ -357,9 +401,11 @@
 
 /decl/material/solid/leather/fur
 	name = "tanned pelt"
+	uid = "solid_tanned_pelt"
 
 /decl/material/solid/leather/chitin
 	name = "treated chitin"
+	uid = "solid_treated_chitin"
 	integrity = 100
 	color = "#5c5a54"
 	hardness = MAT_VALUE_HARD

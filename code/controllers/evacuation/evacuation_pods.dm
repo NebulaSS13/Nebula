@@ -117,7 +117,7 @@
 	silicon_allowed = FALSE
 
 /datum/evacuation_option/cancel_abandon_ship/execute(mob/user)
-	if (SSevac.evacuation_controller && SSevac.evacuation_controller.cancel_evacuation())
+	if (SSevac.evacuation_controller?.cancel_evacuation())
 		log_and_message_admins("[key_name(user)] has cancelled abandonment of the spacecraft.")
 
 /datum/evacuation_option/cancel_jump
@@ -128,7 +128,7 @@
 	silicon_allowed = FALSE
 
 /datum/evacuation_option/cancel_jump/execute(mob/user)
-	if (SSevac.evacuation_controller && SSevac.evacuation_controller.cancel_evacuation())
+	if (SSevac.evacuation_controller?.cancel_evacuation())
 		log_and_message_admins("[key_name(user)] has cancelled the FTL jump.")
 
 /obj/screen/fullscreen/jump_overlay

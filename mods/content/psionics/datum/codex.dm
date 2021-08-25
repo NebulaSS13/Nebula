@@ -1,13 +1,13 @@
 /datum/codex_entry/cuchulain_foundation
-	display_name = "Cuchulain Foundation"
+	name = "Cuchulain Foundation"
 	associated_strings = list("Cuchulain", "Foundation")
 	associated_paths = list(
-		/obj/item/storage/briefcase/foundation, 
+		/obj/item/storage/briefcase/foundation,
 		/obj/item/gun/projectile/revolver/foundation,
 		/obj/item/card/id/foundation,
 		/obj/item/card/id/foundation_civilian,
 		/obj/item/clothing/suit/storage/toggle/labcoat/foundation,
-		/obj/item/chems/food/drinks/glass2/coffeecup/foundation
+		/obj/item/chems/drinks/glass2/coffeecup/foundation
 	)
 	lore_text = "The Cuchulain Foundation is a non-profit body based out of Neptune orbit. Their logo is \
 	an upward-facing radio telescope dish, usually printed in green. They perform niche research on behalf \
@@ -24,7 +24,7 @@
 	bodies are unclear."
 
 /datum/codex_entry/psionics
-	display_name = "Psionics"
+	name = "Psionics"
 	associated_strings = list("Psychic", "Psychic Powers", "Psi")
 	associated_paths = list(
 		/obj/item/book/manual/psionics,

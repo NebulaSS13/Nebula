@@ -52,7 +52,7 @@
 	remove_language(/decl/language/binary)
 	add_language(/decl/language/binary, 0)
 	add_language(/decl/language/binary/drone, 1)
-	set_extension(src, /datum/extension/hattable, hat_x, hat_y)
+	set_extension(src, /datum/extension/hattable, list(hat_x, hat_y))
 
 	default_language = /decl/language/binary/drone
 	// NO BRAIN.
@@ -93,7 +93,7 @@
 	if(too_many_active_drones())
 		to_chat(src, "<span class='danger'>The maximum number of active drones has been reached..</span>")
 		return 0
-	if(jobban_isbanned(possessor,"Robot"))
+	if(jobban_isbanned(possessor,ASSIGNMENT_ROBOT))
 		to_chat(usr, "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>")
 		return 0
 	if(!possessor.MayRespawn(1,DRONE_SPAWN_DELAY))
@@ -146,7 +146,7 @@
 
 /mob/living/silicon/robot/drone/on_update_icon()
 
-	cut_overlays()
+	..()
 	if(stat == 0)
 		if(controlling_ai)
 			add_overlay("eyes-[icon_state]-ai")

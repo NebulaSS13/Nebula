@@ -67,17 +67,19 @@
 		if(food.minimum_temperature > 0)
 			mechanics_text += "<br>The recipe will not succeed if the temperature is below [food.minimum_temperature]K."
 
-		entries_to_register += new /datum/codex_entry(            \
+		entries_to_register += new /datum/codex_entry(                     \
 		 _display_name =       "[lowertext(food.name)] ([category_name])", \
-		 _associated_strings = list(                              \
-		 	lowertext(food.name),                                 \
-			lowertext(product_name)),                             \
-		 _lore_text =          lore_text,                         \
-		 _mechanics_text =     mechanics_text,                    \
+		 _associated_strings = list(                                       \
+		 	lowertext(food.name),                                          \
+			lowertext(product_name)),                                      \
+		 _lore_text =          lore_text,                                  \
+		 _mechanics_text =     mechanics_text,                             \
 		)
 
-	for(var/datum/recipe/recipe in SScuisine.microwave_recipes)
-		if(recipe.hidden_from_codex || !recipe.result)
+	var/list/all_recipes = decls_repository.get_decls_of_subtype(/decl/recipe)
+	for(var/rtype in all_recipes)
+		var/decl/recipe/recipe = all_recipes[rtype]
+		if(!istype(recipe) || recipe.hidden_from_codex || !recipe.result)
 			continue
 
 		var/mechanics_text = ""
@@ -95,13 +97,13 @@
 			ingredients += "[recipe.fruit[thing]] [thing]\s"
 		mechanics_text += "<ul><li>[jointext(ingredients, "</li><li>")]</li></ul>"
 		var/atom/recipe_product = recipe.result
-		mechanics_text += "<br>This recipe takes [ceil(recipe.time/10)] second\s to cook in a microwave and creates \a [initial(recipe_product.name)]."
+		mechanics_text += "<br>This recipe takes [CEILING(recipe.time/10)] second\s to cook in a microwave and creates \a [initial(recipe_product.name)]."
 		var/lore_text = recipe.lore_text
 		if(!lore_text)
 			lore_text = initial(recipe_product.desc)
 
 		var/recipe_name = recipe.display_name || sanitize(initial(recipe_product.name))
-		guide_html += "<h3>[capitalize(recipe_name)]</h3>Place [english_list(ingredients)] into a microwave for [ceil(recipe.time/10)] second\s."
+		guide_html += "<h3>[capitalize(recipe_name)]</h3>Place [english_list(ingredients)] into a microwave for [CEILING(recipe.time/10)] second\s."
 
 		entries_to_register += new /datum/codex_entry(             \
 		 _display_name =       "[recipe_name] (microwave recipe)", \
@@ -112,7 +114,7 @@
 		)
 
 	for(var/datum/codex_entry/entry in entries_to_register)
-		SScodex.add_entry_by_string(entry.display_name, entry)
-		items |= entry.display_name
+		SScodex.add_entry_by_string(entry.name, entry)
+		items |= entry.name
 
 	. = ..()

@@ -14,7 +14,7 @@
 		/decl/material/solid/metal/silver,
 		/decl/material/solid/metal/platinum,
 		/decl/material/solid/metal/steel,
-		/decl/material/solid/mineral/graphite
+		/decl/material/solid/graphite
 	)
 	var/list/show_materials
 
@@ -89,9 +89,9 @@
 				continue
 			eaten++
 			if(eating.reagents?.total_volume)
-				eating.reagents.trans_to_obj(src, Floor(eating.reagents.total_volume * 0.75)) // liquid reagents, lossy
+				eating.reagents.trans_to_obj(src, FLOOR(eating.reagents.total_volume * 0.75)) // liquid reagents, lossy
 			for(var/mtype in eating.matter)
-				reagents.add_reagent(mtype, Floor(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
+				reagents.add_reagent(mtype, FLOOR(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
 			qdel(eating)
 			if(eaten >= MAX_INTAKE_ORE_PER_TICK)
 				break
@@ -102,7 +102,7 @@
 						continue
 					visible_message(SPAN_DANGER("\The [src] rips \the [H]'s [eating.name] clean off!"))
 					for(var/mtype in eating.matter)
-						reagents.add_reagent(mtype, Floor(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
+						reagents.add_reagent(mtype, FLOOR(eating.matter[mtype] * REAGENT_UNITS_PER_MATERIAL_UNIT))
 					eating.dismember(silent = TRUE)
 					qdel(eating)
 					break
@@ -110,7 +110,7 @@
 	if(output_turf)
 		for(var/mtype in casting)
 			var/ramt = REAGENT_VOLUME(reagents, mtype) || 0
-			var/samt = Floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
+			var/samt = FLOOR((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
 			if(samt > 0)
 				SSmaterials.create_object(mtype, output_turf, samt)
 				reagents.remove_reagent(mtype, ramt)
@@ -149,7 +149,7 @@
 		var/ramt = REAGENT_VOLUME(reagents, mtype) || 0
 		if(ramt <= 0 && !show_all_materials && !(mtype in always_show_materials))
 			continue
-		var/samt = Floor((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
+		var/samt = FLOOR((ramt / REAGENT_UNITS_PER_MATERIAL_UNIT) / SHEET_MATERIAL_AMOUNT)
 		var/obj/item/stack/material/sheet = mat.default_solid_form
 		materials += list(list("label" = "[mat.liquid_name]<br>[ramt]u ([samt] [samt == 1 ? initial(sheet.singular_name) : initial(sheet.plural_name)])", "casting" = (mtype in casting), "key" = "\ref[mat]"))
 		data["materials"] = materials

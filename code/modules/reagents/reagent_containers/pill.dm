@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/pill
 	name = "pill"
+	base_name = "pill"
 	desc = "A pill."
 	icon = 'icons/obj/items/chem/pill.dmi'
 	icon_state = null

@@ -55,7 +55,6 @@
 	title = "Lieutenant"
 	supervisors = "the Captain"
 	outfit_type = /decl/hierarchy/outfit/job/ministation/hop
-	hud_icon = "hudheadofpersonnel"
 	head_position = 1
 	department_types = list(
 		/decl/department/command,

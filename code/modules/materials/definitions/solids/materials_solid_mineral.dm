@@ -1,5 +1,6 @@
-/decl/material/solid/mineral/pitchblende
+/decl/material/solid/pitchblende
 	name = "pitchblende"
+	uid = "solid_pitchblende"
 	color = "#917d1a"
 	heating_products = list(
 		/decl/material/solid/metal/uranium = 0.8,
@@ -25,8 +26,9 @@
 	ore_type_value = ORE_NUCLEAR
 	ore_data_value = 3
 
-/decl/material/solid/mineral/graphite
+/decl/material/solid/graphite
 	name = "graphite"
+	uid = "solid_graphite"
 	color = "#444444"
 	ore_name = "graphite"
 	ore_result_amount = 5
@@ -41,14 +43,22 @@
 	rich_material_weight = 20
 	fuel_value = 0.8
 	dirtiness = 15
+
+	flags = MAT_FLAG_FISSIBLE
+	neutron_cross_section = 30
+	neutron_interactions = list(
+		INTERACTION_SCATTER = 2000
+	)
+	moderation_target = 1500
 	dissolves_into = list(
 		/decl/material/solid/carbon = 0.6,
 		/decl/material/liquid/plasticide = 0.2,
 		/decl/material/liquid/acetone = 0.2
 	)
 
-/decl/material/solid/mineral/quartz
+/decl/material/solid/quartz
 	name = "quartz"
+	uid = "solid_quartz"
 	ore_name = "quartz"
 	opacity = 0.5
 	ore_result_amount = 10
@@ -63,8 +73,9 @@
 		/decl/material/solid/silicon = 1
 	)
 
-/decl/material/solid/mineral/pyrite
+/decl/material/solid/pyrite
 	name = "pyrite"
+	uid = "solid_pyrite"
 	ore_name = "pyrite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -80,8 +91,9 @@
 		/decl/material/solid/metal/iron = 0.25		
 	)
 
-/decl/material/solid/mineral/spodumene
+/decl/material/solid/spodumene
 	name = "spodumene"
+	uid = "solid_spodumene"
 	ore_name = "spodumene"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -95,8 +107,9 @@
 		/decl/material/solid/lithium = 1
 	)
 
-/decl/material/solid/mineral/cinnabar
+/decl/material/solid/cinnabar
 	name = "cinnabar"
+	uid = "solid_cinnabar"
 	ore_name = "cinnabar"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -110,8 +123,9 @@
 		/decl/material/liquid/mercury = 1
 	)
 
-/decl/material/solid/mineral/phosphorite
+/decl/material/solid/phosphorite
 	name = "phosphorite"
+	uid = "solid_phosphorite"
 	ore_name = "phosphorite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -127,8 +141,9 @@
 	lore_text = "A chemical element, the backbone of biological energy carriers."
 	taste_description = "vinegar"
 
-/decl/material/solid/mineral/sodiumchloride
+/decl/material/solid/sodiumchloride
 	name = "sodium chloride"
+	uid = "solid_sodium_chloride"
 	lore_text = "A chemical element, readily reacts with water."
 	ore_name = "rock salt"
 	ore_result_amount = 10
@@ -145,8 +160,9 @@
 		/decl/material/solid/sodium = 1
 	)
 
-/decl/material/solid/mineral/potash
+/decl/material/solid/potash
 	name = "potash"
+	uid = "solid_potash"
 	lore_text = "A soft, low-melting solid that can easily be cut with a knife. Reacts violently with water."
 	ore_name = "potash"
 	ore_result_amount = 10
@@ -162,15 +178,16 @@
 		/decl/material/solid/potassium = 1
 	)
 
-/decl/material/solid/mineral/potassium/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
+/decl/material/solid/potassium/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
 	if(volume > 3)
 		M.add_chemical_effect(CE_PULSE, 1)
 	if(volume > 10)
 		M.add_chemical_effect(CE_PULSE, 1)
 
-/decl/material/solid/mineral/bauxite
+/decl/material/solid/bauxite
 	name = "bauxite"
+	uid = "solid_bauxite"
 	ore_name = "bauxite"
 	ore_result_amount = 10
 	ore_spread_chance = 10
@@ -191,8 +208,9 @@
 		/decl/material/solid/metal/aluminium = 1
 	)
 
-/decl/material/solid/mineral/sand
+/decl/material/solid/sand
 	name = "sand"
+	uid = "solid_sand"
 	color = "#e2dbb5"
 	heating_products = list(/decl/material/solid/glass = 1)
 	heating_point = GENERIC_SMELTING_HEAT_POINT
@@ -210,8 +228,9 @@
 	)
 	default_solid_form = /obj/item/stack/material/lump
 
-/decl/material/solid/mineral/clay
+/decl/material/solid/clay
 	name = "clay"
+	uid = "solid_clay"
 	color = COLOR_OFF_WHITE
 	ore_name = "clay"
 	ore_icon_overlay = "lump"
@@ -224,8 +243,9 @@
 	value = 0.8
 	default_solid_form = /obj/item/stack/material/lump
 
-/decl/material/solid/mineral/hematite
+/decl/material/solid/hematite
 	name = "hematite"
+	uid = "solid_hematite"
 	color = "#aa6666"
 	heating_products = list(
 		/decl/material/solid/metal/iron = 0.8,
@@ -245,8 +265,9 @@
 	ore_type_value = ORE_SURFACE
 	ore_data_value = 1
 
-/decl/material/solid/mineral/rutile
+/decl/material/solid/rutile
 	name = "rutile"
+	uid = "solid_rutile"
 	color = "#d8ad97"
 	heating_products = list(
 		/decl/material/solid/metal/titanium = 0.8,
@@ -266,8 +287,9 @@
 	sparse_material_weight = 3
 	rich_material_weight = 1
 
-/decl/material/solid/mineral/tetrahedrite
+/decl/material/solid/tetrahedrite
 	name = "tetrahedrite"
+	uid = "solid_tetrahedrite"
 	heating_products = list(
 		/decl/material/solid/metal/copper = 0.4,
 		/decl/material/solid/metal/silver = 0.4,
@@ -286,8 +308,9 @@
 		/decl/material/solid/metal/silver = 0.5
 	)
 
-/decl/material/solid/mineral/magnetite
+/decl/material/solid/magnetite
 	name = "magnetite"
+	uid = "solid_magnetite"
 	color = "#aa6666"
 	heating_products = list(
 		/decl/material/solid/metal/iron = 0.8,
@@ -313,16 +336,14 @@
 		/decl/material/solid/sulfur = 0.1
 	)
 
-/decl/material/solid/mineral/chalcopyrite
+/decl/material/solid/chalcopyrite
 	name = "chalcopyrite"
+	uid = "solid_chalcopyrite"
 	color = "#9e9357"
 	heating_products = list(
 		/decl/material/solid/metal/copper = 0.6,
 		/decl/material/solid/slag = 0.4
 	)
-	heating_point = GENERIC_SMELTING_HEAT_POINT
-	heating_sound = null
-	heating_message = null
 	ore_result_amount = 5
 	ore_spread_chance = 20
 	ore_scan_icon = "mineral_common"
@@ -339,8 +360,9 @@
 		/decl/material/solid/sulfur = 0.3
 	)
 
-/decl/material/solid/mineral/densegraphite
+/decl/material/solid/densegraphite
 	name = "dense graphite"
+	uid = "solid_dense_graphite"
 	color = "#2c2c2c"
 	heating_products = list(
 		/decl/material/solid/gemstone/diamond = 0.02,
@@ -365,8 +387,9 @@
 		/decl/material/solid/gemstone/diamond = 0.1
 	)
 
-/decl/material/solid/mineral/cassiterite
+/decl/material/solid/cassiterite
 	name = "cassiterite"
+	uid = "solid_cassiterite"
 	color = "#a1a4cf"
 	heating_products = list(
 		/decl/material/solid/metal/tin = 0.7,
@@ -389,8 +412,9 @@
 		/decl/material/solid/metal/tungsten = 0.2
 	)
 
-/decl/material/solid/mineral/wolframite
+/decl/material/solid/wolframite
 	name = "wolframite"
+	uid = "solid_wolframite"
 	color = "#8184ac"
 	heating_products = list(
 		/decl/material/solid/metal/tin = 0.1,
@@ -415,8 +439,9 @@
 		/decl/material/solid/metal/iron = 0.3
 	)
 
-/decl/material/solid/mineral/sperrylite
+/decl/material/solid/sperrylite
 	name = "sperrylite"
+	uid = "solid_sperrylite"
 	color = "#cfd0d8"
 	heating_products = list(
 		/decl/material/solid/metal/platinum = 0.5,
@@ -442,8 +467,9 @@
 		/decl/material/solid/metal/titanium = 0.1
 	)
 
-/decl/material/solid/mineral/sphalerite
+/decl/material/solid/sphalerite
 	name = "sphalerite"
+	uid = "solid_sphalerite"
 	color = "#aaaa9c"
 	heating_products = list(
 		/decl/material/solid/metal/zinc = 0.7,
@@ -467,8 +493,9 @@
 		/decl/material/solid/silicon = 0.1
 	)
 
-/decl/material/solid/mineral/galena
+/decl/material/solid/galena
 	name = "galena"
+	uid = "solid_galena"
 	color = "#aaaa9c"
 	heating_products = list(
 		/decl/material/solid/metal/lead = 0.6,
@@ -492,8 +519,9 @@
 		/decl/material/solid/metal/silver = 0.1
 	)
 
-/decl/material/solid/mineral/calaverite
+/decl/material/solid/calaverite
 	name = "calaverite"
+	uid = "solid_calaverite"
 	color = "#aaaa9c"
 	heating_products = list(
 		/decl/material/solid/metal/gold = 0.6,
@@ -516,8 +544,9 @@
 		/decl/material/solid/metal/silver = 0.3
 	)
 
-/decl/material/solid/mineral/crocoite
+/decl/material/solid/crocoite
 	name = "crocoite"
+	uid = "solid_crocoite"
 	color = "#fa672c"
 	heating_products = list(
 		/decl/material/solid/metal/chromium = 0.3,
@@ -539,3 +568,25 @@
 		/decl/material/solid/metal/chromium = 0.6,
 		/decl/material/solid/metal/lead = 0.4
 	)
+
+/decl/material/solid/borax
+	name = "borax"
+	uid = "solid_borax"
+	color = "#a9aa81"
+	heating_products = list(
+		/decl/material/solid/boron = 0.8,
+		/decl/material/solid/slag = 0.2
+	)
+	ore_name = "borax"
+	ore_result_amount = 10
+	ore_spread_chance = 5
+	ore_scan_icon = "mineral_uncommon"
+	ore_icon_overlay = "lump"
+	ore_type_value = ORE_SURFACE
+	ore_data_value = 1
+	value = 0.5
+	sparse_material_weight = 4
+	rich_material_weight = 2
+	heating_point = GENERIC_SMELTING_HEAT_POINT
+	heating_sound = null
+	heating_message = null

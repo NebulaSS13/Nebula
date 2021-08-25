@@ -7,6 +7,7 @@
 	stat_immune = NOINPUT | NOSCREEN | NOPOWER
 	mechanical = 0
 	tray_light = 0
+	matter = null
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O,/obj/item/tank))
@@ -51,6 +52,9 @@
 	connected_zlevels = GetConnectedZlevels(z)
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Process()
+	if(!seed)
+		qdel_self()
+		return
 	if(z in global.using_map.station_levels) //plants on station always tick
 		return ..()
 	if(living_observers_present(connected_zlevels))
@@ -67,12 +71,6 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/die()
 	qdel(src)
-
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Process()
-	if(!seed)
-		qdel(src)
-		return
-	..()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Destroy()
 	// Check if we're masking a decal that needs to be visible again.

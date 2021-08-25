@@ -46,61 +46,13 @@
 
 	switch(user.a_intent)
 		if(I_HELP)
-			if(H != src && istype(H) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !(H.zone_sel.selecting == BP_R_ARM || H.zone_sel.selecting == BP_L_ARM))
-				if (!cpr_time)
-					return TRUE
+			if(H != src && istype(H) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !on_fire && !(H.zone_sel.selecting == BP_R_ARM || H.zone_sel.selecting == BP_L_ARM))
+				if (performing_cpr)
+					performing_cpr = FALSE
+					return
 
-				var/pumping_skill = max(user.get_skill_value(SKILL_MEDICAL), user.get_skill_value(SKILL_ANATOMY))
-				var/cpr_delay = 15 * user.skill_delay_mult(SKILL_ANATOMY, 0.2)
-				cpr_time = 0
-
-				H.visible_message("<span class='notice'>\The [H] is trying to perform CPR on \the [src].</span>")
-
-				if(!do_after(H, cpr_delay, src))
-					cpr_time = 1
-					return TRUE
-				cpr_time = 1
-
-				H.visible_message("<span class='notice'>\The [H] performs CPR on \the [src]!</span>")
-
-				if(is_asystole())
-					if(prob(5 + 5 * (SKILL_EXPERT - pumping_skill)))
-						var/obj/item/organ/external/chest = get_organ(BP_CHEST)
-						if(chest)
-							chest.fracture()
-
-					var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
-					if(heart)
-						heart.external_pump = list(world.time, 0.4 + 0.1*pumping_skill + rand(-0.1,0.1))
-
-					if(stat != DEAD && prob(10 + 5 * pumping_skill))
-						resuscitate()
-
-				if(!H.check_has_mouth())
-					to_chat(H, "<span class='warning'>You don't have a mouth, you cannot do mouth-to-mouth resuscitation!</span>")
-					return TRUE
-				if(!check_has_mouth())
-					to_chat(H, "<span class='warning'>They don't have a mouth, you cannot do mouth-to-mouth resuscitation!</span>")
-					return TRUE
-				if((H.head && (H.head.body_parts_covered & SLOT_FACE)) || (H.wear_mask && (H.wear_mask.body_parts_covered & SLOT_FACE)))
-					to_chat(H, "<span class='warning'>You need to remove your mouth covering for mouth-to-mouth resuscitation!</span>")
-					return TRUE
-				if((head && (head.body_parts_covered & SLOT_FACE)) || (wear_mask && (wear_mask.body_parts_covered & SLOT_FACE)))
-					to_chat(H, "<span class='warning'>You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!</span>")
-					return TRUE
-				if (!H.get_internal_organ(H.species.breathing_organ))
-					to_chat(H, "<span class='danger'>You need lungs for mouth-to-mouth resuscitation!</span>")
-					return TRUE
-				if(!need_breathe())
-					return TRUE
-				var/obj/item/organ/internal/lungs/L = get_internal_organ(species.breathing_organ)
-				if(L)
-					var/datum/gas_mixture/breath = H.get_breath_from_environment()
-					var/fail = L.handle_breath(breath, 1)
-					if(!fail)
-						if (!L.is_bruised())
-							losebreath = 0
-						to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
+				performing_cpr = TRUE
+				start_compressions(H, TRUE)
 
 			else if(!(user == src && apply_pressure(user, user.zone_sel.selecting)))
 				help_shake_act(user)
@@ -230,6 +182,102 @@
 				return TRUE
 	. = ..()
 
+/mob/living/carbon/human/proc/start_compressions(mob/living/carbon/human/H, starting = FALSE, cpr_mode)
+	if(length(H.get_held_items()))
+		performing_cpr = FALSE
+		to_chat(H, SPAN_WARNING("You cannot perform CPR with anything in your hands."))
+		return
+
+	//Keeps doing CPR unless cancelled, or the target recovers
+	if(!(performing_cpr && H.Adjacent(src) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath)))
+		performing_cpr = FALSE
+		to_chat(H, SPAN_NOTICE("You stop performing CPR on \the [src]."))
+		return
+
+	else if (starting)
+		var/list/options = list(
+			"Compressions" = image('icons/screen/radial.dmi', "cpr"),
+			"Mouth-to-Mouth" = image('icons/screen/radial.dmi', "cpr_o2")
+		)
+		cpr_mode = show_radial_menu(H, src, options, require_near = TRUE, tooltips = TRUE, no_repeat_close = TRUE)
+		if(!cpr_mode)
+			performing_cpr = FALSE
+			return
+
+		if(length(H.get_held_items()))
+			performing_cpr = FALSE
+			to_chat(H, SPAN_WARNING("You cannot perform CPR with anything in your hands."))
+			return
+
+		H.visible_message(SPAN_NOTICE("\The [H] is trying to perform CPR on \the [src]."))
+
+	var/pumping_skill = max(H.get_skill_value(SKILL_MEDICAL), H.get_skill_value(SKILL_ANATOMY))
+	var/cpr_delay = 15 * H.skill_delay_mult(SKILL_ANATOMY, 0.2)
+
+	H.visible_message(SPAN_NOTICE("\The [H] performs CPR on \the [src]!"))
+
+	H.do_attack_animation(src, null)
+	var/starting_pixel_y = pixel_y
+	animate(src, pixel_y = starting_pixel_y + 4, time = 2)
+	animate(src, pixel_y = starting_pixel_y, time = 2)
+
+	if(is_asystole())
+		if(prob(5 + 5 * (SKILL_EXPERT - pumping_skill)))
+			var/obj/item/organ/external/chest = get_organ(BP_CHEST)
+			if(chest)
+				chest.fracture()
+
+		var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
+		if(heart)
+			heart.external_pump = list(world.time, 0.4 + 0.1*pumping_skill + rand(-0.1,0.1))
+
+		if(stat != DEAD && prob(10 + 5 * pumping_skill))
+			resuscitate()
+
+	if(!do_after(H, cpr_delay, FALSE)) //Chest compresssions are fast, need to wait for the loading bar to do mouth to mouth
+		to_chat(H, SPAN_NOTICE("You stop performing CPR on \the [src]."))
+		performing_cpr = FALSE //If it cancelled, cancel it. Simple.
+		return
+
+	if(cpr_mode == "Mouth-to-Mouth")
+		if(!H.check_has_mouth())
+			to_chat(H, SPAN_WARNING("You don't have a mouth, you cannot do mouth-to-mouth resuscitation!"))
+			return TRUE
+
+		if(!check_has_mouth())
+			to_chat(H, SPAN_WARNING("They don't have a mouth, you cannot do mouth-to-mouth resuscitation!"))
+			return TRUE
+
+		if((H.head && (H.head.body_parts_covered & SLOT_FACE)) || (H.wear_mask && (H.wear_mask.body_parts_covered & SLOT_FACE)))
+			to_chat(H, SPAN_WARNING("You need to remove your mouth covering for mouth-to-mouth resuscitation!"))
+			return TRUE
+
+		if((head && (head.body_parts_covered & SLOT_FACE)) || (wear_mask && (wear_mask.body_parts_covered & SLOT_FACE)))
+			to_chat(H, SPAN_WARNING("You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!"))
+			return TRUE
+
+		if(!H.get_internal_organ(H.species.breathing_organ))
+			to_chat(H, SPAN_WARNING("You need lungs for mouth-to-mouth resuscitation!"))
+			return TRUE
+
+		if(!need_breathe())
+			return TRUE
+
+		var/obj/item/organ/internal/lungs/L = get_internal_organ(species.breathing_organ)
+
+		if(!L)
+			return
+
+		var/datum/gas_mixture/breath = H.get_breath_from_environment()
+		var/fail = L.handle_breath(breath, 1)
+		if(!fail)
+			if(!L.is_bruised())
+				losebreath = 0
+			to_chat(src, SPAN_NOTICE("You feel a breath of fresh air enter your lungs. It feels good."))
+
+	// Again.
+	start_compressions(H, FALSE, cpr_mode)
+
 /mob/living/carbon/human/proc/afterattack(atom/target, mob/living/user, inrange, params)
 	return
 
@@ -252,7 +300,7 @@
 */
 /mob/living/carbon/human/proc/apply_pressure(mob/living/user, var/target_zone)
 	var/obj/item/organ/external/organ = get_organ(target_zone)
-	if(!organ || !(organ.status & ORGAN_BLEEDING) || BP_IS_PROSTHETIC(organ))
+	if(!organ || !(organ.status & (ORGAN_BLEEDING|ORGAN_ARTERY_CUT)) || BP_IS_PROSTHETIC(organ))
 		return 0
 
 	if(organ.applied_pressure)

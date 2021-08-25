@@ -29,10 +29,12 @@
 	var/turf/simulated/wall/W = get_turf(src)
 	if(istype(W))
 		W.paint_color = color
+		W.stripe_color = color
 		W.update_icon()
 	var/obj/structure/wall_frame/WF = locate() in loc
 	if(WF)
 		WF.paint_color = color
+		WF.stripe_color = color
 		WF.update_icon()
 	qdel(src)
 

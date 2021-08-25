@@ -160,7 +160,7 @@
 	overlays.Cut()
 	update_base_icon()
 	if(istype(M))
-		if(M.skill_check(SKILL_WEAPONS,SKILL_BASIC))
+		if(has_safety && M.skill_check(SKILL_WEAPONS,SKILL_BASIC))
 			overlays += image('icons/obj/guns/gui.dmi',"safety[safety()]")
 		if(src in M.get_held_items())
 			M.update_inv_hands()
@@ -621,6 +621,9 @@
 		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
 
 /obj/item/gun/proc/toggle_safety(var/mob/user)
+	if(!has_safety)
+		to_chat(user,SPAN_NOTICE("You can't find a safety on \the [src]!"))
+		return
 	safety_state = !safety_state
 	update_icon()
 	if(user)

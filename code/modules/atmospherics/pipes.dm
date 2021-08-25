@@ -7,6 +7,7 @@
 	var/volume = 0
 	var/leaking = 0		// Do not set directly, use set_leaking(TRUE/FALSE)
 	use_power = POWER_USE_OFF
+	interact_offline = TRUE //Needs to be set so that pipes don't say they lack power in their description
 
 	//minimum pressure before check_pressure(...) should be called
 	var/maximum_pressure = 210 * ONE_ATMOSPHERE

@@ -417,6 +417,7 @@
 	return
 
 /mob/living/simple_animal/hostile/carp/holodeck/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /mob/living/simple_animal/hostile/carp/holodeck/Initialize()

@@ -95,6 +95,49 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 	if(.)
 		machine.SetName(new_value)
 
+/decl/public_access/public_variable/reagents
+	expected_type = /obj/machinery
+	name = "reagents"
+	desc = "Obtain the list of reagents and their data in the machine."
+	can_write = FALSE
+	has_updates = TRUE
+	var_type = IC_FORMAT_LIST
+
+/decl/public_access/public_variable/reagents/access_var(obj/machinery/machine)
+	return machine?.reagents?.reagent_data
+
+/decl/public_access/public_variable/reagents/volumes
+	name = "reagents volumes"
+	desc = "Obtain the list of reagents and their volumes in the machine."
+	var_type = IC_FORMAT_LIST
+
+/decl/public_access/public_variable/reagents/volumes/access_var(obj/machinery/machine)
+	return machine?.reagents?.reagent_volumes
+
+/decl/public_access/public_variable/reagents/free_space
+	name = "reagents free space"
+	desc = "Obtain the volume of free space left for reagents in the machine."
+	var_type = IC_FORMAT_NUMBER
+
+/decl/public_access/public_variable/reagents/free_space/access_var(obj/machinery/machine)
+	return REAGENTS_FREE_SPACE(machine?.reagents)
+
+/decl/public_access/public_variable/reagents/total_volume
+	name = "reagents total volume"
+	desc = "Obtain the total volume of reagents in the machine."
+	var_type = IC_FORMAT_NUMBER
+
+/decl/public_access/public_variable/reagents/total_volume/access_var(obj/machinery/machine)
+	return machine?.reagents?.total_volume
+
+/decl/public_access/public_variable/reagents/maximum_volume
+	name = "reagents maximum volume"
+	desc = "Obtain the maximum volume of reagents that can fit in the machine."
+	var_type = IC_FORMAT_NUMBER
+
+/decl/public_access/public_variable/reagents/maximum_volume/access_var(obj/machinery/machine)
+	return machine?.reagents?.maximum_volume
+
 /decl/public_access/public_method/toggle_power
 	name = "toggle power"
 	desc = "Turns the machine on or off."

@@ -150,8 +150,14 @@
 	result_type = /obj/structure/door_assembly/door_assembly_ext
 
 /datum/stack_recipe/furniture/door_assembly/firedoor
-	title = "emergency shutter"
+	title = "emergency shutter assembly"
 	result_type = /obj/structure/firedoor_assembly
+
+/datum/stack_recipe/furniture/door_assembly/firedoor/border
+	title = "unidirectional emergency shutter assembly"
+	result_type = /obj/structure/firedoor_assembly/border
+	one_per_turf = FALSE
+	time = 10
 
 /datum/stack_recipe/furniture/door_assembly/double
 	title = "double airlock assembly"

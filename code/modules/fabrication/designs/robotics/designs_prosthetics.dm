@@ -1,6 +1,5 @@
-#define DEFINE_ROBOLIMB_DESIGNS(MODEL_PATH, MODEL_ID, MODEL_NAME)          \
+#define DEFINE_ROBOLIMB_DESIGNS(MODEL_PATH, MODEL_ID)                      \
 /datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID {            \
-	category = MODEL_NAME + " Prosthetics";                                \
 	model = MODEL_PATH;                                                    \
 }                                                                          \
 /datum/fabricator_recipe/robotics/prosthetic/model_##MODEL_ID/left_leg {   \
@@ -38,9 +37,16 @@
 	path = /obj/item/organ/external/chest;                                 \
 }                                                                          \
 */
-
 /datum/fabricator_recipe/robotics/prosthetic
 	var/model
+
+/datum/fabricator_recipe/robotics/prosthetic/New()
+	if(model && model != /decl/prosthetics_manufacturer)
+		var/decl/prosthetics_manufacturer/model_manufacturer = GET_DECL(model)
+		category = "[model_manufacturer.name] Prosthetics"
+	else
+		category = "Unbranded Prosthetics"
+	..()
 
 /datum/fabricator_recipe/robotics/prosthetic/get_resources()
 	. = ..()
@@ -66,4 +72,4 @@
 	for(var/obj/item/organ/external/E in .)
 		E.robotize(model)
 
-DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer, generic, "Unbranded")
+DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer, generic)

@@ -66,6 +66,7 @@
 
 	client.images = null				//remove the images such as AIs being unable to see runes
 	client.screen = list()				//remove hud items just in case
+	client.set_right_click_menu_mode(shift_to_open_context_menu)
 	InitializeHud()
 
 	next_move = 1
@@ -89,6 +90,7 @@
 	reload_fullscreen() // Reload any fullscreen overlays this mob has.
 	add_click_catcher()
 	update_action_buttons()
+	update_mouse_pointer()
 
 	if(machine)
 		machine.on_user_login(src)
@@ -98,9 +100,6 @@
 		ability_master.update_abilities(1, src)
 		ability_master.toggle_open(1)
 	events_repository.raise_event(/decl/observ/logged_in, src)
-
-	//set macro to normal incase it was overriden (like cyborg currently does)
-	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5")
 
 	if(mind)
 		if(!mind.learned_spells)

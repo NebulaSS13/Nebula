@@ -30,12 +30,14 @@
 	var/obj/structure/cable/attached		// the attached cable
 
 /obj/item/powersink/on_update_icon()
+	z_flags &= ~ZMM_MANGLE_PLANES
 	cut_overlays()
 	if(mode == OPERATING)
 		if(plane == HUD_PLANE)
 			add_overlay("[icon_state]-on")
 		else
 			add_overlay(emissive_overlay(icon, "[icon_state]-on"))
+			z_flags |= ~ZMM_MANGLE_PLANES
 
 /obj/item/powersink/proc/set_mode(value)
 	if(value == mode)

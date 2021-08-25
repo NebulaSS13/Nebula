@@ -6,6 +6,7 @@
 	body_parts_covered = SLOT_EYES
 	dir = SOUTH
 	icon = 'icons/clothing/mask/monitor.dmi'
+	z_flags = ZMM_MANGLE_PLANES
 
 	action_button_name = "Set Monitor State"
 	action_button_desc = "Allows you to choose state for your monitor"

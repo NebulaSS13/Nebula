@@ -1,5 +1,6 @@
 /decl/material/gas/oxygen
 	name = "oxygen"
+	uid = "gas_oxygen"
 	lore_text = "An ubiquitous oxidizing agent."
 	flags = MAT_FLAG_FUSION_FUEL
 	gas_specific_heat = 20	
@@ -8,9 +9,11 @@
 	gas_symbol_html = "O<sub>2</sub>"
 	gas_symbol = "O2"
 	gas_metabolically_inert = TRUE
+	value = 0.25
 
 /decl/material/gas/helium
 	name = "helium"
+	uid = "gas_helium"
 	lore_text = "A noble gas. It makes your voice squeaky."
 	flags = MAT_FLAG_FUSION_FUEL
 	gas_specific_heat = 80
@@ -19,6 +22,7 @@
 	gas_symbol = "He"
 	taste_description = "nothing"
 	metabolism = 0.05
+	value = 0.3
 
 /decl/material/gas/helium/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -26,6 +30,7 @@
 
 /decl/material/gas/carbon_dioxide
 	name = "carbon dioxide"
+	uid = "gas_carbon_dioxide"
 	lore_text = "A byproduct of respiration."
 	gas_specific_heat = 30	
 	gas_molar_mass = 0.044	
@@ -34,6 +39,7 @@
 
 /decl/material/gas/carbon_monoxide
 	name = "carbon monoxide"
+	uid = "gas_carbon_monoxide"
 	lore_text = "A highly poisonous gas."
 	gas_specific_heat = 30
 	gas_molar_mass = 0.028
@@ -74,6 +80,7 @@
 
 /decl/material/gas/methyl_bromide
 	name = "methyl bromide"
+	uid = "gas_methyl_bromide"
 	lore_text = "A once-popular fumigant and weedkiller."
 	gas_specific_heat = 42.59 
 	gas_molar_mass = 0.095	  
@@ -83,6 +90,7 @@
 	vapor_products = list(
 		/decl/material/gas/methyl_bromide = 1
 	)
+	value = 0.25
 
 /decl/material/gas/methyl_bromide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	. = ..()
@@ -101,6 +109,7 @@
 
 /decl/material/gas/nitrous_oxide
 	name = "sleeping agent"
+	uid = "gas_sleeping_agent"
 	lore_text = "A mild sedative. Also known as laughing gas."
 	gas_specific_heat = 40	
 	gas_molar_mass = 0.044	
@@ -110,6 +119,7 @@
 	gas_symbol_html = "N<sub>2</sub>O"
 	gas_symbol = "N2O"
 	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
+	value = 0.25
 
 /decl/material/gas/nitrous_oxide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/dosage = LAZYACCESS(M.chem_doses, type)
@@ -127,6 +137,7 @@
 
 /decl/material/gas/nitrogen
 	name = "nitrogen"
+	uid = "gas_nitrogen"
 	lore_text = "An ubiquitous noble gas."
 	gas_specific_heat = 20	
 	gas_molar_mass = 0.028	
@@ -136,6 +147,7 @@
 
 /decl/material/gas/nitrodioxide
 	name = "nitrogen dioxide"
+	uid = "gas_nitrogen_dioxide"
 	color = "#ca6409"
 	gas_specific_heat = 37
 	gas_molar_mass = 0.054
@@ -145,6 +157,7 @@
 
 /decl/material/gas/nitricoxide
 	name = "nitric oxide"
+	uid = "gas_nitric_oxide"
 	gas_specific_heat = 10
 	gas_molar_mass = 0.030
 	gas_flags = XGM_GAS_OXIDIZER
@@ -153,6 +166,7 @@
 
 /decl/material/gas/methane
 	name = "methane"
+	uid = "gas_methane"
 	gas_specific_heat = 30	
 	gas_molar_mass = 0.016	
 	gas_flags = XGM_GAS_FUEL
@@ -161,29 +175,36 @@
 
 /decl/material/gas/argon
 	name = "argon"
+	uid = "gas_argon"
 	lore_text = "Just when you need it, all of your supplies argon."
 	gas_specific_heat = 10
 	gas_molar_mass = 0.018
 	gas_symbol_html = "Ar"
 	gas_symbol = "Ar"
+	value = 0.25
 
 // If narcosis is ever simulated, krypton has a narcotic potency seven times greater than regular airmix.
 /decl/material/gas/krypton
 	name = "krypton"
+	uid = "gas_krypton"
 	gas_specific_heat = 5
 	gas_molar_mass = 0.036
 	gas_symbol_html = "Kr"
 	gas_symbol = "Kr"
+	value = 0.25
 
 /decl/material/gas/neon
 	name = "neon"
+	uid = "gas_neon"
 	gas_specific_heat = 20
 	gas_molar_mass = 0.01
 	gas_symbol_html = "Ne"
 	gas_symbol = "Ne"
+	value = 0.25
 
 /decl/material/gas/ammonia
 	name = "ammonia"
+	uid = "gas_ammonia"
 	gas_specific_heat = 20
 	gas_molar_mass = 0.017
 	gas_symbol_html = "NH<sub>3</sub>"
@@ -198,10 +219,12 @@
 
 /decl/material/gas/xenon
 	name = "xenon"
+	uid = "gas_xenon"
 	gas_specific_heat = 3
 	gas_molar_mass = 0.054
 	gas_symbol_html = "Xe"
 	gas_symbol = "Xe"
+	value = 0.25
 
 /decl/material/gas/xenon/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/dosage = LAZYACCESS(M.chem_doses, type)
@@ -217,6 +240,7 @@
 
 /decl/material/gas/chlorine
 	name = "chlorine"
+	uid = "gas_chlorine"
 	color = "#c5f72d"
 	gas_overlay_limit = 0.5
 	gas_specific_heat = 5
@@ -232,6 +256,7 @@
 
 /decl/material/gas/sulfur_dioxide
 	name = "sulfur dioxide"
+	uid = "gas_sulfur_dioxide"
 	gas_specific_heat = 30
 	gas_molar_mass = 0.044
 	gas_symbol_html = "SO<sub>2</sub>"
@@ -243,6 +268,7 @@
 
 /decl/material/gas/hydrogen
 	name = "hydrogen"
+	uid = "gas_hydrogen"
 	lore_text = "A colorless, flammable gas."
 	flags = MAT_FLAG_FUSION_FUEL
 	wall_name = "bulkhead"
@@ -256,22 +282,37 @@
 	dissolves_into = list(
 		/decl/material/liquid/fuel/hydrazine = 1
 	)
+	value = 0.4
 
 /decl/material/gas/hydrogen/tritium
 	name = "tritium"
+	uid = "gas_tritium"
 	lore_text = "A radioactive isotope of hydrogen. Useful as a fusion reactor fuel material."
-	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
+	mechanics_text = "Tritium is useable as a fuel in some forms of portable generator. It can also be converted into a fuel rod suitable for a R-UST fusion plant injector by using a fuel compressor. It fuses hotter than deuterium but is correspondingly more unstable."
 	color = "#777777"
 	stack_origin_tech = "{'materials':5}"
-	value = 1.5
+	value = 0.45
 	gas_symbol_html = "T"
 	gas_symbol = "T"
 
 /decl/material/gas/hydrogen/deuterium
 	name = "deuterium"
+	uid = "gas_deuterium"
 	lore_text = "One of the two stable isotopes of hydrogen; also known as heavy hydrogen. Useful as a chemically synthesised fusion reactor fuel material."
-	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by clicking a stack on a fuel compressor. It is the most 'basic' fusion fuel."
+	mechanics_text = "Deuterium can be converted into a fuel rod suitable for a R-UST fusion plant injector by using a fuel compressor. It is the most 'basic' fusion fuel."
+	flags = MAT_FLAG_FUSION_FUEL | MAT_FLAG_FISSIBLE
 	color = "#999999"
 	stack_origin_tech = "{'materials':3}"
 	gas_symbol_html = "D"
 	gas_symbol = "D"
+	value = 0.5
+
+	neutron_interactions = list(
+		INTERACTION_ABSORPTION = 1250
+	)
+	absorption_products = list(
+		/decl/material/gas/hydrogen/tritium = 1
+	)
+	neutron_absorption = 5
+	neutron_cross_section = 3
+

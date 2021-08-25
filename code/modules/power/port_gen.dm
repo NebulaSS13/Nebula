@@ -125,8 +125,8 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 
-	var/sheet_path                                             // Base object type that it will accept, set in Initialize() if null
-	var/sheet_material = /decl/material/solid/mineral/graphite // Material type that the fuel needs to match.
+	var/sheet_path                                     // Base object type that it will accept, set in Initialize() if null
+	var/sheet_material = /decl/material/solid/graphite // Material type that the fuel needs to match.
 
 	var/max_power_output = 5	//The maximum power setting without emagging.
 	var/max_safe_output = 4		// For UI use, maximal output that won't cause overheat.

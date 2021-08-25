@@ -134,7 +134,7 @@
 /obj/item/deck/examine(mob/user)
 	. = ..()
 	if(cards.len)
-		to_chat(user, "<br>There [cards.len == 1 ? "is" : "are"]still <b>[cards.len] card\s</b>.")
+		to_chat(user, "<br>There [cards.len == 1 ? "is" : "are"] still <b>[cards.len] card\s</b>.")
 	to_chat(user, SPAN_NOTICE("You can deal cards at a table by clicking on it with grab intent."))
 
 /obj/item/deck/attackby(obj/O, mob/user)
@@ -356,7 +356,7 @@
 		overlays += I
 		return
 
-	var/offset = Floor(20/cards.len)
+	var/offset = FLOOR(20/cards.len)
 
 	var/matrix/M = matrix()
 	if(direction)

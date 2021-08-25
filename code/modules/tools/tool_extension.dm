@@ -49,18 +49,21 @@
 	if(check_result != TOOL_USE_SUCCESS)
 		return check_result
 
-	to_chat(user, SPAN_NOTICE("You begin [start_message || tool_archetype.use_message] \the [target] with \the [holder]."))
+	user.visible_message(SPAN_NOTICE("\The [user] begins [start_message || tool_archetype.use_message] \the [target] with \the [holder]."), SPAN_NOTICE("You begin [start_message || tool_archetype.use_message] \the [target] with \the [holder]."))
 	var/use_sound = LAZYACCESS(tool_use_sounds, archetype)
 	if(islist(use_sound) && length(use_sound))
 		use_sound = pick(use_sound)
 	if(use_sound)
 		playsound(user.loc, use_sound, 100)
 
-	if(!do_after(user, max(5, ceil(delay * get_tool_speed(archetype))), holder))
+	if(!do_after(user, max(5, CEILING(delay * get_tool_speed(archetype))), holder))
 		return TOOL_USE_FAILURE_NOMESSAGE
 
 	check_result = tool_archetype.handle_post_interaction(user, holder, fuel_expenditure)
 	if(check_result != TOOL_USE_SUCCESS)
 		return check_result
-
+	
+	if(check_result == TOOL_USE_SUCCESS && use_sound)
+		playsound(user.loc, use_sound, 100) //A lot of interactions played a sound when starting and ending the interaction. This was missed.
+	
 	return TOOL_USE_SUCCESS

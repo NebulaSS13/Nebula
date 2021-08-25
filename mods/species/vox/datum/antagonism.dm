@@ -1,9 +1,9 @@
-/decl/special_role/raider/New()
+/decl/special_role/raider/Initialize()
 	. = ..()
 	LAZYSET(outfits_per_species, SPECIES_VOX, /decl/hierarchy/outfit/vox_raider)
 	
 /decl/hierarchy/outfit/vox_raider
-	name = OUTFIT_JOB_NAME("Vox Raider")
+	name = "Job - Vox Raider"
 	shoes =      /obj/item/clothing/shoes/magboots/vox
 	gloves =     /obj/item/clothing/gloves/vox
 	mask =       /obj/item/clothing/mask/gas/swat/vox

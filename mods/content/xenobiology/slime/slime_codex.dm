@@ -9,7 +9,7 @@
 	mechanics_text = "Slimes will happily feed on any human, humanoid or monkey that wanders into their sight. You can wrestle them off their victim or spray them with a fire extinguisher to neutralize them. If a slime is well-fed, it might grow into an adult, and then split into up to four baby slimes of various colours, depending on the colour of the parent.<br><br>Slime cores can have a variety of effects when injected with either blood or uranium powder. For more information on slime xenobiology, consult the <span codexlink='Guide to Slime Handling'>guide</span>."
 
 /datum/codex_entry/slime_handling
-	display_name = "Guide to Slime Handling"
+	name = "Guide to Slime Handling"
 	mechanics_text = {"
 		<h2>The Basics</h2>
 		<p>Slimes are strange creatures reared for their valuable extracts. They feed by engulfing their prey and degrading them at the cellular level, eventually dissolving them entirely. A hungry slime can  be fended off with water, usually from a fire extinguisher; don't bother trying to use weapons or firearms on a being made of semiliquid goo. You can wrestle a slime off its prey, including yourself, by clicking on it with disarm, harm or grab intent.</p>

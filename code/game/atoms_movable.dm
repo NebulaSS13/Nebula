@@ -1,6 +1,6 @@
 /atom/movable
 	layer = OBJ_LAYER
-	appearance_flags = TILE_BOUND|PIXEL_SCALE
+	appearance_flags = TILE_BOUND | PIXEL_SCALE | LONG_GLIDE
 	glide_size = 8
 	var/movable_flags
 	var/last_move = null
@@ -110,30 +110,6 @@
 
 /atom/movable/proc/get_mass()
 	return 1.5
-
-/atom/movable/Destroy()
-	. = ..()
-#ifdef DISABLE_DEBUG_CRASH
-	// meh do nothing. we know what we're doing. pro engineers.
-#else
-	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
-		PRINT_STACK_TRACE("Was deleted before initialization")
-#endif
-
-	for(var/A in src)
-		qdel(A)
-
-	forceMove(null)
-
-	if(LAZYLEN(movement_handlers) && !ispath(movement_handlers[1]))
-		QDEL_NULL_LIST(movement_handlers)
-
-	if (bound_overlay)
-		QDEL_NULL(bound_overlay)
-
-	if(virtual_mob && !ispath(virtual_mob))
-		qdel(virtual_mob)
-		virtual_mob = null
 
 /atom/movable/Bump(var/atom/A, yes)
 	if(!QDELETED(throwing))
@@ -342,3 +318,11 @@
 /atom/movable/proc/pushed(var/pushdir)
 	set waitfor = FALSE
 	step(src, pushdir)
+
+/**
+* A wrapper for setDir that should only be able to fail by living mobs.
+*
+* Called from [/atom/movable/proc/keyLoop], this exists to be overwritten by living mobs with a check to see if we're actually alive enough to change directions
+*/
+/atom/movable/proc/keybind_face_direction(direction)
+	return

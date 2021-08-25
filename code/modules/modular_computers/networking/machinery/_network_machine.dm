@@ -3,6 +3,7 @@
 	icon = 'icons/obj/machines/tcomms/bus.dmi'
 	icon_state = "bus"
 	density = 1
+	anchored = 1
 
 	var/main_template = "network_mainframe.tmpl"
 	var/network_device_type =  /datum/extension/network_device
@@ -10,6 +11,7 @@
 
 	var/initial_network_id
 	var/initial_network_key
+	var/wired_connection = FALSE	// Whether or not this machine will start with a local network connection.
 	var/produces_heat = TRUE		// If true, produces and is affected by heat.
 	var/inefficiency = 0.12			// How much power is waste heat.
 	var/heat_threshold = 90 CELSIUS	// At what temperature the machine will lock up.
@@ -17,8 +19,13 @@
 	var/runtimeload // Use this for calling an even later lateload.
 
 /obj/machinery/network/Initialize()
-	set_extension(src, network_device_type, initial_network_id, initial_network_key, NETWORK_CONNECTION_WIRED)
+	set_extension(src, network_device_type, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)
 	. = ..()
+
+/obj/machinery/network/populate_parts(full_populate)
+	. = ..()
+	if(full_populate && wired_connection)
+		install_component(/obj/item/stock_parts/computer/lan_port, FALSE)
 
 /obj/machinery/network/proc/is_overheated()
 	var/turf/simulated/L = loc

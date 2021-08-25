@@ -1,0 +1,5 @@
+author: Andromeda-K22
+delete-after: true
+changes:
+  - tweak: gas filters no longer use hardcoded modes (i.e ATM_N2), they now use gas
+      decls and a list that is dynamically generated.

@@ -15,9 +15,6 @@
 /decl/bodytype/proc/get_damage_overlays(var/mob/living/carbon/human/H)
 	return damage_overlays
 
-/decl/bodytype/proc/get_damage_mask(var/mob/living/carbon/human/H)
-	return damage_mask
-
 /decl/bodytype/proc/get_husk_icon(var/mob/living/carbon/human/H)
 	return husk_icon
 

@@ -7,12 +7,12 @@
 	icon_vend = "theater-vend"
 	icon_deny = "theater-deny"
 	products = list(
-		/obj/structure/flora/pottedplant = 2, 
-		/obj/item/flashlight/lamp = 2, 
-		/obj/item/flashlight/lamp/green = 2, 
-		/obj/item/chems/food/drinks/jar = 1,
-		/obj/item/nullrod = 1, 
-		/obj/item/sword/cult_toy = 4, 
+		/obj/structure/flora/pottedplant = 2,
+		/obj/item/flashlight/lamp = 2,
+		/obj/item/flashlight/lamp/green = 2,
+		/obj/item/chems/drinks/jar = 1,
+		/obj/item/nullrod = 1,
+		/obj/item/sword/cult_toy = 4,
 		/obj/item/sword/katana/toy = 2
 	)
 
@@ -28,7 +28,7 @@
 	icon_state = "robotics"
 	base_type = /obj/machinery/vending/containers
 	products = list(
-		/obj/structure/closet/crate/freezer = 2, 
-		/obj/structure/closet = 3, 
+		/obj/structure/closet/crate/freezer = 2,
+		/obj/structure/closet = 3,
 		/obj/structure/closet/crate = 3
 	)

@@ -51,7 +51,7 @@
 	var/possible_syllables = allow_repeated_syllables ? syllables : syllables.Copy()
 	for(var/i = 0;i<name_count;i++)
 		var/new_name = ""
-		for(var/x = rand(Floor(syllable_count/syllable_divisor),syllable_count);x>0;x--)
+		for(var/x = rand(FLOOR(syllable_count/syllable_divisor),syllable_count);x>0;x--)
 			if(!length(possible_syllables))
 				break
 			new_name += allow_repeated_syllables ? pick(possible_syllables) : pick_n_take(possible_syllables)
@@ -126,13 +126,13 @@
 	return scrambled_text
 
 /decl/language/proc/format_message(message, verb)
-	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(filter_modify_message(message))]\"</span></span>"
+	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(message)]\"</span></span>"
 
 /decl/language/proc/format_message_plain(message, verb)
-	return "[verb], \"[capitalize(filter_modify_message(message))]\""
+	return "[verb], \"[capitalize(message)]\""
 
 /decl/language/proc/format_message_radio(message, verb)
-	return "[verb], <span class='[colour]'>\"[capitalize(filter_modify_message(message))]\"</span>"
+	return "[verb], <span class='[colour]'>\"[capitalize(message)]\"</span>"
 
 /decl/language/proc/get_talkinto_msg_range(message)
 	// if you yell, you'll be heard from two tiles over instead of one

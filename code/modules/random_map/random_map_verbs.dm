@@ -36,7 +36,7 @@
 
 	if(!holder)	return
 
-	var/map_datum = input("Choose a map to create.") as null|anything in typesof(/datum/random_map)-/datum/random_map
+	var/map_datum = input("Choose a map to create.") as null|anything in subtypesof(/datum/random_map)
 	if(!map_datum)
 		return
 

@@ -12,6 +12,7 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
+	layer = STRUCTURE_LAYER
 
 	var/target_pressure = 10*ONE_ATMOSPHERE
 	var/id = null
@@ -79,7 +80,7 @@
 			carbon_stored += co2_intake * carbon_efficiency
 			while (carbon_stored >= carbon_moles_per_piece)
 				carbon_stored -= carbon_moles_per_piece
-				SSmaterials.create_object(/decl/material/solid/mineral/graphite, get_turf(src), 1)
+				SSmaterials.create_object(/decl/material/solid/graphite, get_turf(src), 1)
 			power_draw = power_rating * co2_intake
 			last_power_draw = power_draw
 			use_power_oneoff(power_draw)
