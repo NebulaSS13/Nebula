@@ -169,7 +169,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 /obj/fire/Initialize(mapload, fl)
 	. = ..()
 
-	if(!istype(loc, /turf))
+	if(!isturf(loc))
 		return INITIALIZE_HINT_QDEL
 
 	set_dir(pick(global.cardinal))

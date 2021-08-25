@@ -445,7 +445,7 @@
 
 /obj/item/integrated_circuit/manipulation/claw/proc/pull()
 	var/obj/acting_object = get_object()
-	if(istype(acting_object.loc, /turf))
+	if(isturf(acting_object.loc))
 		step_towards(pulling,src)
 	else
 		stop_pulling()

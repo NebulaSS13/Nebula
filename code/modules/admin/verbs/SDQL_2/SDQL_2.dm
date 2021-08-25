@@ -133,7 +133,7 @@
 								var/i = 0
 								for(var/v in sets)
 									if(++i == sets.len)
-										if(istype(temp, /turf) && (v == "x" || v == "y" || v == "z"))
+										if(isturf(temp) && (v == "x" || v == "y" || v == "z"))
 											break
 
 										temp.SDQL_update(v, SDQL_expression(d, set_list[sets]))

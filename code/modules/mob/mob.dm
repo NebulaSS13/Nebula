@@ -194,7 +194,7 @@
 #define ENCUMBERANCE_MOVEMENT_MOD 0.35
 /mob/proc/movement_delay()
 	. = 0
-	if(istype(loc, /turf))
+	if(isturf(loc))
 		var/turf/T = loc
 		. += T.movement_delay()
 	if(HAS_STATUS(src, STAT_DROWSY))

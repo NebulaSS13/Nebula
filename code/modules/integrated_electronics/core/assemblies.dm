@@ -412,7 +412,7 @@
 
 /obj/item/electronic_assembly/attackby(obj/item/I, mob/user)
 	if(isWrench(I))
-		if(istype(loc, /turf) && (IC_FLAG_ANCHORABLE & circuit_flags))
+		if(isturf(loc) && (IC_FLAG_ANCHORABLE & circuit_flags))
 			user.visible_message("\The [user] wrenches \the [src]'s anchoring bolts [anchored ? "back" : "into position"].")
 			playsound(get_turf(user), 'sound/items/Ratchet.ogg',50)
 			if(user.do_skilled(5 SECONDS, SKILL_CONSTRUCTION, src))

@@ -109,7 +109,7 @@ Transponder Codes:<UL>"}
 	..()
 	if (usr.stat)
 		return
-	if ((in_range(src, usr) && istype(src.loc, /turf)) || (istype(usr, /mob/living/silicon)))
+	if ((in_range(src, usr) && isturf(src.loc)) || (istype(usr, /mob/living/silicon)))
 		if(open && !locked)
 			usr.set_machine(src)
 
