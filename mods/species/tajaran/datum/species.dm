@@ -37,7 +37,7 @@
 	slowdown = -0.5
 	flash_mod = 2
 
-	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.5
+	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.2
 	gluttonous = GLUT_TINY
 
 	unarmed_attacks = list(

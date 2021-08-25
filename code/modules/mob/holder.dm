@@ -55,7 +55,7 @@ var/global/list/holder_mob_icon_cache = list()
 	if(QDELETED(src) || throwing)
 		return
 
-	if(istype(loc,/turf) || !contents.len)
+	if(isturf(loc) || !contents.len)
 		for(var/mob/M in contents)
 			var/atom/movable/mob_container = M
 			mob_container.dropInto(loc)

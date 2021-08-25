@@ -35,7 +35,7 @@
 	return ..()
 
 /mob/living/silicon/sil_brainmob/UpdateLyingBuckledAndVerbStatus()
-	if(container && istype(container, /obj/item/organ/internal/posibrain) && istype(container.loc, /turf))
+	if(container && istype(container, /obj/item/organ/internal/posibrain) && isturf(container.loc))
 		use_me = 1
 
 /mob/living/silicon/sil_brainmob/isSynthetic()

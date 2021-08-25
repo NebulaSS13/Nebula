@@ -102,7 +102,7 @@
 #define SEARCH_DIR(dir) \
 	search_direction = dir;\
 	search_turf = get_step(current_turf, search_direction);\
-	if (istype(search_turf, /turf/simulated)) {\
+	if (isturf(search_turf)) {\
 		turf_queue += search_turf;\
 		dir_queue += search_direction;\
 		power_queue += current_power;\
@@ -138,7 +138,7 @@
 	var/list/dir_queue = list(NORTH, SOUTH, EAST, WEST)
 	var/list/power_queue = list(power, power, power, power)
 
-	var/turf/simulated/current_turf
+	var/turf/current_turf
 	var/turf/search_turf
 	var/origin_direction
 	var/search_direction
@@ -205,7 +205,7 @@
 		if (T.type == /turf/space)	// Equality is faster than istype.
 			reception = EXPLFX_NONE
 
-			for (var/turf/simulated/THING in RANGE_TURFS(M, 1))
+			for (var/turf/THING in RANGE_TURFS(M, 1))
 				reception |= EXPLFX_SHAKE
 				break
 

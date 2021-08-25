@@ -1,7 +1,9 @@
 /decl/persistence_handler/book
 	name = "books"
-	has_admin_data = TRUE
-	
+	has_admin_data =     TRUE
+	ignore_area_flags =  TRUE
+	ignore_invalid_loc = TRUE
+
 /decl/persistence_handler/book/CreateEntryInstance(var/turf/creating, var/list/tokens)
 	var/obj/item/book/book = new(creating)
 	book.dat =                tokens["message"] 
@@ -23,14 +25,21 @@
 		var/obj/item/book/book = entry
 		. = istype(book) && book.dat && book.last_modified_ckey
 
-/decl/persistence_handler/book/CompileEntry(var/atom/entry, var/write_file)
+/decl/persistence_handler/book/CompileEntry(var/atom/entry)
 	. = ..()
+
 	var/obj/item/book/book = entry
 	.["author"] =     book.last_modified_ckey || ""
 	.["message"] =    book.dat                || "dat"
 	.["title"] =      book.title              || "Untitled"
 	.["writer"] =     book.author             || "unknown"
 	.["icon_state"] = book.icon_state         || "book"
+
+	var/turf/T = get_turf(entry)
+	if(!T || !(T.z in global.using_map.station_levels))
+		.["x"] = 0
+		.["y"] = 0
+		.["z"] = 0
 
 /decl/persistence_handler/book/RemoveValue(var/atom/movable/value)
 	var/obj/structure/bookcase/bookcase = value.loc
@@ -41,7 +50,19 @@
 	..()
 
 /decl/persistence_handler/book/GetValidTurf(var/turf/T, var/list/tokens)
-	. = ..(T || get_turf(pick(global.station_bookcases)), tokens)
+
+	if(T)
+		var/area/A = get_area(T)
+		if(!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
+			T = null
+
+	if(!T)
+		if(length(global.station_bookcases))
+			T = get_turf(pick(global.station_bookcases))
+		else
+			T = pick(global.latejoin_locations)
+
+	. = ..(T, tokens)
 
 /decl/persistence_handler/book/GetEntryAge(var/atom/entry)
 	. = -1

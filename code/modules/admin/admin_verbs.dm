@@ -571,12 +571,18 @@ var/global/list/admin_verbs_mod = list(
 			explosion(epicenter, 2, 3, 4, 4)
 		if("Big Bomb")
 			explosion(epicenter, 3, 5, 7, 5)
+
 		if("Custom Bomb")
-			var/devastation_range = input("Devastation range (in tiles):") as num
-			var/heavy_impact_range = input("Heavy impact range (in tiles):") as num
-			var/light_impact_range = input("Light impact range (in tiles):") as num
-			var/flash_range = input("Flash range (in tiles):") as num
-			explosion(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range)
+			if(config.use_iterative_explosions)
+				var/power = input(src, "Input power num.", "Power?") as num
+				explosion_iter(get_turf(mob), power, (UP|DOWN))
+			else
+				var/devastation_range = input("Devastation range (in tiles):") as num
+				var/heavy_impact_range = input("Heavy impact range (in tiles):") as num
+				var/light_impact_range = input("Light impact range (in tiles):") as num
+				var/flash_range = input("Flash range (in tiles):") as num
+				explosion(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range)
+
 	log_and_message_admins("created an admin explosion at [epicenter.loc].")
 	SSstatistics.add_field_details("admin_verb","DB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

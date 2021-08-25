@@ -814,7 +814,7 @@
 	for(var/obj/machinery/door/D in world)
 		if(QDELETED(D))
 			continue
-		if(!istype(D.loc, /turf))
+		if(!isturf(D.loc))
 			bad_doors++
 			log_bad("Invalid door turf: [log_info_line(D.loc)]]")
 		else
