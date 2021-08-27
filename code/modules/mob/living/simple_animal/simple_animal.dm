@@ -16,6 +16,10 @@
 	skin_amount = 5
 
 	icon_state = ICON_STATE_WORLD
+	buckle_pixel_shift = @"{'x':0,'y':0,'z':8}"
+
+	var/can_have_rider = TRUE
+	var/max_rider_size = MOB_SIZE_SMALL
 
 	var/gene_damage = 0 // Set to -1 to disable gene damage for the mob.
 	var/show_stat_health = 1	//does the percentage health show in the stat panel for the mob
@@ -633,3 +637,7 @@ var/global/list/simplemob_icon_bitflag_cache = list()
 
 /mob/living/simple_animal/check_has_mouth()
 	return TRUE
+
+/mob/living/simple_animal/can_buckle_mob(var/mob/living/dropping)
+	. = ..() && can_have_rider && (dropping.mob_size <= max_rider_size)
+

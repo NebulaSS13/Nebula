@@ -28,7 +28,7 @@
 		if(istype(C))
 			C.leave_evidence(grabber)
 
-/mob/living/carbon/human/make_grab(var/atom/movable/target, var/grab_tag = /decl/grab/simple)
+/mob/living/carbon/human/make_grab(atom/movable/target, grab_tag = /decl/grab/simple, defer_hand = FALSE, force_grab_tag = FALSE)
 	. = ..()
 	if(.)
 		remove_cloaking_source(species)

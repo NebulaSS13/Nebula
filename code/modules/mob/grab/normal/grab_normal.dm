@@ -1,10 +1,9 @@
 /decl/grab/normal
-	name = "grab"
-	icon = 'icons/mob/screen1.dmi'
-	help_action = "inspect"
-	disarm_action = "pin"
-	grab_action = "jointlock"
-	harm_action = "dislocate"
+	name              = "grab"
+	help_action       = "inspect"
+	disarm_action     = "pin"
+	grab_action       = "jointlock"
+	harm_action       = "dislocate"
 	var/drop_headbutt = 1
 
 /decl/grab/normal/on_hit_help(var/obj/item/grab/G, var/atom/A, var/proximity)

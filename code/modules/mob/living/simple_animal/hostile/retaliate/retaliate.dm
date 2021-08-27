@@ -1,5 +1,8 @@
 /mob/living/simple_animal/hostile/retaliate
-	var/list/enemies = list()
+	var/list/enemies = list()	
+
+/mob/living/simple_animal/hostile/can_direct_mount(mob/user)
+	return user?.faction == faction && ..()
 
 /mob/living/simple_animal/hostile/retaliate/Destroy()
 	LAZYCLEARLIST(enemies)
