@@ -90,3 +90,17 @@
  * Parameters: var/obj/structure/closet/crate/sold, var/area/shuttle
  */
 /hook/sell_crate
+
+/**
+ * Player latejoin hook.
+ * Called in new_player.dm when a player joins the round after it has started.
+ * Parameters: var/datum/job/job, var/mob/living/character
+ */
+/hook/player_latejoin
+
+/**
+ * Submap join hook.
+ * Called in submap_join.dm when a player joins a submap.
+ * Parameters: var/datum/submap/submap, var/datum/job/job, var/mob/living/character
+ */
+/hook/submap_join
