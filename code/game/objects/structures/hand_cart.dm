@@ -41,7 +41,7 @@
 		if(load_item(G.affecting, G.assailant))
 			qdel(G)
 		return TRUE
-	..()
+	. = ..()
 
 /obj/structure/hand_cart/attack_hand(mob/user)
 	if(carrying)
