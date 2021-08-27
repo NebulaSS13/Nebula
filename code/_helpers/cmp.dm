@@ -107,4 +107,4 @@
 	return sorttext(b.RCon_tag, a.RCon_tag)
 
 /proc/cmp_category_groups(var/datum/category_group/A, var/datum/category_group/B)
-	return B.sort_order - A.sort_order
+	return A.sort_order - B.sort_order
