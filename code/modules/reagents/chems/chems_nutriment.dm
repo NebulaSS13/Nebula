@@ -131,6 +131,7 @@
 	nutriment_factor = 3
 	color = "#ffd592"
 	slipperiness = -1
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/batter/touch_turf(var/turf/T, var/amount, var/datum/reagents/holder)
 	..()
@@ -158,6 +159,7 @@
 /decl/material/liquid/nutriment/coffee/instant
 	name = "instant coffee powder"
 	lore_text = "A bitter powder made by processing coffee beans."
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/tea
 	name = "tea powder"
@@ -184,30 +186,35 @@
 	lore_text = "Dehydrated, powdered juice of some kind."
 	taste_mult = 1.3
 	nutriment_factor = 1
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/instantjuice/grape
 	name = "grape concentrate"
 	lore_text = "Dehydrated, powdered grape juice."
 	taste_description = "dry grapes"
 	color = "#863333"
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/instantjuice/orange
 	name = "orange concentrate"
 	lore_text = "Dehydrated, powdered orange juice."
 	taste_description = "dry oranges"
 	color = "#e78108"
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/instantjuice/watermelon
 	name = "watermelon concentrate"
 	lore_text = "Dehydrated, powdered watermelon juice."
 	taste_description = "dry sweet watermelon"
 	color = "#b83333"
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/instantjuice/apple
 	name = "apple concentrate"
 	lore_text = "Dehydrated, powdered apple juice."
 	taste_description = "dry sweet apples"
 	color = "#c07c40"
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/soysauce
 	name = "soy sauce"
@@ -216,6 +223,7 @@
 	taste_mult = 1.1
 	nutriment_factor = 2
 	color = "#792300"
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/ketchup
 	name = "ketchup"
@@ -223,12 +231,14 @@
 	taste_description = "ketchup"
 	nutriment_factor = 5
 	color = "#731008"
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/banana_cream
 	name = "banana cream"
 	lore_text = "A creamy confection that tastes of banana."
 	taste_description = "banana"
 	color = "#f6dfaa"
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/barbecue
 	name = "barbecue sauce"
@@ -236,6 +246,7 @@
 	taste_description = "barbecue"
 	nutriment_factor = 5
 	color = "#4f330f"
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/garlicsauce
 	name = "garlic sauce"
@@ -243,6 +254,7 @@
 	taste_description = "garlic"
 	nutriment_factor = 4
 	color = "#d8c045"
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/rice
 	name = "rice"
@@ -259,6 +271,7 @@
 	taste_mult = 0.4
 	nutriment_factor = 1
 	color = "#f1ffdb"
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/cherryjelly
 	name = "cherry jelly"
@@ -284,6 +297,7 @@
 	taste_description = "childhood whimsy"
 	nutriment_factor = 1
 	color = "#ff00ff"
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nutriment/sugar
 	name = "sugar"
@@ -312,3 +326,4 @@
 	taste_description = "mayo"
 	color = "#efede8"
 	taste_mult = 2
+	exoplanet_rarity = MAT_RARITY_NOWHERE

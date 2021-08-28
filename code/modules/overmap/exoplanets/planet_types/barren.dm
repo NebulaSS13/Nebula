@@ -12,7 +12,7 @@
 	water_color = null
 	has_trees = FALSE
 
-/obj/effect/overmap/visitable/sector/exoplanet/barren/generate_flora()
+/obj/effect/overmap/visitable/sector/exoplanet/barren/generate_flora(var/temperature)
 	if(prob(10))
 		flora_diversity = 1
 	..()

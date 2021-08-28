@@ -78,6 +78,7 @@
 	taste_description = "100% abuse"
 	color = "#c8a5dc"
 	flags = AFFECTS_DEAD //This can even heal dead people.
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 	glass_name = "liquid gold"
 	glass_desc = "It's magic. We don't have to explain it."

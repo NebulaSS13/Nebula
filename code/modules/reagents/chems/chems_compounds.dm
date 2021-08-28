@@ -3,6 +3,7 @@
 	lore_text = "A compound that interacts with blood on the molecular level."
 	taste_description = "metal"
 	color = "#f2f3f4"
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/luminol/touch_obj(var/obj/O, var/amount, var/datum/reagents/holder)
 	O.reveal_blood()
@@ -245,6 +246,7 @@
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 	metabolism = REM*2
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/lactate/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -264,6 +266,7 @@
 	scannable = 1
 	overdose = 5
 	metabolism = 1
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/nanoblood/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/mob/living/carbon/human/H = M
@@ -318,6 +321,7 @@
 	scent_intensity = null
 	scent_descriptor = null
 	scent_range = null
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/menthol
 	name = "menthol"
@@ -335,7 +339,7 @@
 		to_chat(M, SPAN_NOTICE("You feel faintly sore in the throat."))
 
 /decl/material/liquid/nanitefluid
-	name = "Nanite Fluid"
+	name = "nanite fluid"
 	lore_text = "A solution of repair nanites used to repair robotic organs. Due to the nature of the small magnetic fields used to guide the nanites, it must be used in temperatures below 170K."
 	taste_description = "metallic sludge"
 	color = "#c2c2d6"
