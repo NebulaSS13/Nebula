@@ -236,7 +236,7 @@
 			AnnounceArrival(character, job, spawnpoint.msg)
 		else
 			AnnounceCyborg(character, job, spawnpoint.msg)
-		matchmaker.do_matchmaking()
+	callHook("player_latejoin", list(job, character))
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 
 	qdel(src)
@@ -389,13 +389,6 @@
 		var/memory = client.prefs.records[PREF_MEM_RECORD]
 		if(memory)
 			mind.StoreMemory(memory)
-		if(client.prefs.relations.len)
-			for(var/T in client.prefs.relations)
-				var/TT = matchmaker.relation_types[T]
-				var/datum/relation/R = new TT
-				R.holder = mind
-				R.info = client.prefs.relations_info[T]
-			mind.gen_relations_info = client.prefs.relations_info["general"]
 		mind.transfer_to(new_character)					//won't transfer key since the mind is not active
 
 	new_character.dna.ready_dna(new_character)

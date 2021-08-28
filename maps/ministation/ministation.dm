@@ -8,6 +8,7 @@ Now poorly imported for Nebula!
 
 	#include "../../mods/content/xenobiology/_xenobiology.dme"
 	#include "../../mods/content/corporate/_corporate.dme"
+	#include "../../mods/content/matchmaking/_matchmaking.dme"
 	#include "../../mods/species/ascent/_ascent.dme"
 
 	#define USING_MAP_DATUM /datum/map/ministation

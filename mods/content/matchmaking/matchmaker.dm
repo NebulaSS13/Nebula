@@ -4,6 +4,20 @@ var/global/datum/matchmaker/matchmaker = new()
 	matchmaker.do_matchmaking()
 	return TRUE
 
+/hook/player_latejoin/proc/matchmaking(var/datum/job/job, var/mob/living/character)
+	if(character.mind && character.client?.prefs.relations.len)
+		for(var/T in character.client.prefs.relations)
+			var/TT = matchmaker.relation_types[T]
+			var/datum/relation/R = new TT
+			R.holder = character.mind
+			R.info = character.client.prefs.relations_info[T]
+			character.mind.gen_relations_info = character.client.prefs.relations_info["general"]
+	if(!istype(character, /mob/living/carbon))
+		return TRUE
+	if(!job.create_record)
+		return TRUE
+	matchmaker.do_matchmaking()
+	return TRUE
 /datum/matchmaker
 	var/list/relation_types = list()
 	var/list/relations = list()
@@ -17,8 +31,9 @@ var/global/datum/matchmaker/matchmaker = new()
 /datum/matchmaker/proc/do_matchmaking()
 	var/list/to_warn = list()
 	for(var/datum/relation/R in relations)
-		if(!R.other)
-			R.find_match()
+		if(R.other)
+			continue // don't warn about already-matched relations, even if they aren't finalised
+		R.find_match()
 		if(R.other && !R.finalized)
 			to_warn |= R.holder.current
 	for(var/mob/M in to_warn)
@@ -35,6 +50,15 @@ var/global/datum/matchmaker/matchmaker = new()
 	for(var/datum/relation/R in relations)
 		if(R.holder == holder && R.other && R.other.holder == target && (R.finalized || !finalized_only))
 			. += R
+
+/decl/human_examination/matchmaking/do_examine(var/mob/living/user, var/distance, var/mob/living/source) //These can either return text, or should return nothing at all if you're doing to_chat()
+	if(!istype(source) || !istype(user))
+		return
+	if(!source.mind || !user.mind || source.name != source.real_name)
+		return
+	if(!length(matchmaker.get_relationships_between(user.mind, source.mind, TRUE)))
+		return
+	return "<br><span class='notice'>You know them. <a href='byond://?src=\ref[src];show_relations=1'>More...</a></span><br>"
 
 //Types of relations
 

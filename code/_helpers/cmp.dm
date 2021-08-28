@@ -105,3 +105,6 @@
 
 /proc/cmp_rcon_tag_asc(var/obj/machinery/power/smes/buildable/a, var/obj/machinery/power/smes/buildable/b)
 	return sorttext(b.RCon_tag, a.RCon_tag)
+
+/proc/cmp_category_groups(var/datum/category_group/A, var/datum/category_group/B)
+	return A.sort_order - B.sort_order
