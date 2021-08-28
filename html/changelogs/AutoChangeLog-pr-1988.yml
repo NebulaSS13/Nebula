@@ -1,0 +1,8 @@
+author: Andromeda-K22
+delete-after: true
+changes:
+  - rscadd: handcarts are now a thing. control-click a pullable atom, then click the
+      cart with them to load them on. Only works with ITEMS and OBJECTS, not PEOPLE.
+      Items have a minimum size to be loaded onto the cart.
+  - tweak: wheeled objects should now be given ATOM_FLAG_WHEELED and are easier and
+      less exhausting to move.
