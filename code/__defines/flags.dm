@@ -23,6 +23,7 @@
 #define ATOM_FLAG_ADJACENT_EXCEPTION      BITFLAG(11) // Skips adjacent checks for atoms that should always be reachable in window tiles
 #define ATOM_FLAG_NO_DISSOLVE             BITFLAG(12) // Bypasses solvent reactions in the container.
 #define ATOM_FLAG_NO_PHASE_CHANGE         BITFLAG(13) // Bypasses heating and cooling product reactions in the container.
+#define ATOM_FLAG_WHEELED                 BITFLAG(14) // Atom has wheels.
 
 #define ATOM_IS_CONTAINER(A)              (A.atom_flags & ATOM_FLAG_CONTAINER)
 #define ATOM_IS_OPEN_CONTAINER(A)         (A.atom_flags & ATOM_FLAG_OPEN_CONTAINER)
