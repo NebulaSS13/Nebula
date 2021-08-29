@@ -8,7 +8,6 @@
 	extended_desc = "This program allows remote access to the camera system. Some cameras may have additional access requirements."
 	size = 12
 	available_on_network = 1
-	requires_network = 1
 	category = PROG_MONITOR
 
 /datum/nano_module/program/camera_monitor
@@ -119,6 +118,7 @@
 		return FALSE
 	if(!camera_device.is_functional())
 		return FALSE
+	// Even if the camera itself does not need to be connected to the network, the program does in order to receive the signal.
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return FALSE
@@ -173,10 +173,10 @@
 	current_camera = null
 
 /datum/nano_module/program/camera_monitor/proc/get_cameras_by_channel()
+	var/list/cameras_by_channel = list()
 	var/datum/computer_network/network = get_network()
-	if(!network)
-		return
-	var/list/cameras_by_channel = network.cameras_by_channel.Copy()
+	if(network)
+		cameras_by_channel = network.cameras_by_channel.Copy()
 	// Cameras broadcasting on CHANNEL_TELEVISION are able to be received by all camera monitoring programs.
 	var/list/television_channels = camera_repository.devices_in_channel(CHANNEL_TELEVISION)
 	if(length(television_channels))
@@ -211,7 +211,6 @@
 	size = 14
 	nanomodule_path = /datum/nano_module/program/camera_monitor/ert
 	available_on_network = 0
-	requires_network = 0
 
 /datum/nano_module/program/camera_monitor/ert
 	name = "Advanced Camera Monitoring Program"

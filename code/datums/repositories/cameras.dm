@@ -9,7 +9,8 @@ var/global/repository/cameras/camera_repository = new()
 
 /repository/cameras/proc/devices_in_channel(var/channel)
 	var/list/device_list = devices_by_channel[channel]
-	return device_list.Copy()
+	if(device_list)
+		return device_list.Copy()
 
 /repository/cameras/proc/get_devices_by_channel()
 	return devices_by_channel.Copy()

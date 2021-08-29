@@ -106,7 +106,7 @@
 /obj/item/spy_monitor/proc/view_cameras(mob/user)
 	if(!cameras.len)
 		to_chat(user, SPAN_WARNING("No paired cameras detected!"))
-		to_chat(user, SPAN_WARNING("Bring a bug in contact with this device to pair the camera.</span>"))
+		to_chat(user, SPAN_WARNING("Bring a bug in contact with this device to pair the camera."))
 		return
 
 	if(selected_camera)
