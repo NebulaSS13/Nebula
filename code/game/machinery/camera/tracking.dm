@@ -14,9 +14,7 @@
 
 	var/list/T = list()
 	for (var/obj/machinery/camera/C in cameranet.cameras)
-		var/list/tempnetwork = C.network&src.network
-		if (tempnetwork.len)
-			T[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
+		T[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
 
 	track = new()
 	track.cameras = T
@@ -186,30 +184,12 @@
 /obj/machinery/camera/attack_ai(mob/living/silicon/ai/user)
 	if (!istype(user))
 		return
-	if (!src.can_use())
+	if (!can_use())
 		return
 	user.eyeobj.setLoc(get_turf(src))
 
-
 /mob/living/silicon/ai/attack_ai(var/mob/user)
 	ai_camera_list()
-
-/proc/camera_sort(list/L)
-	var/obj/machinery/camera/a
-	var/obj/machinery/camera/b
-
-	for (var/i = L.len, i > 0, i--)
-		for (var/j = 1 to i - 1)
-			a = L[j]
-			b = L[j + 1]
-			if (a.c_tag_order != b.c_tag_order)
-				if (a.c_tag_order > b.c_tag_order)
-					L.Swap(j, j + 1)
-			else
-				if (sorttext(a.c_tag, b.c_tag) < 0)
-					L.Swap(j, j + 1)
-	return L
-
 
 /mob/living/proc/near_camera()
 	if (!isturf(loc))
@@ -238,7 +218,8 @@
 /mob/living/silicon/robot/tracking_status()
 	. = ..()
 	if(. == TRACKING_NO_COVERAGE)
-		return camera && camera.can_use() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
+		var/datum/extension/network_device/camera/robot/D = get_extension(src, /datum/extension/network_device)
+		return D && D.is_functional() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
 
 /mob/living/carbon/human/tracking_status()
 	if(is_cloaked())

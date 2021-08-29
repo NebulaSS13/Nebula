@@ -2,8 +2,8 @@
 	channels = list(
 		"Security" = TRUE
 	)
-	networks = list(
-		NETWORK_SECURITY
+	camera_channels = list(
+		CHANNEL_SECURITY
 	)
 	software = list(
 		/datum/computer_file/program/suit_sensors,

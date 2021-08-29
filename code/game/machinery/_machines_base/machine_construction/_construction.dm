@@ -51,7 +51,7 @@
 	if(needs_board)
 		var/obj/item/stock_parts/circuitboard/board = machine.get_component_of_type(/obj/item/stock_parts/circuitboard)
 		if(board)
-			return board.req_components
+			return board.req_components + list(/obj/item/stock_parts/circuitboard = 1)
 		else
 			return list(/obj/item/stock_parts/circuitboard = 1)
 

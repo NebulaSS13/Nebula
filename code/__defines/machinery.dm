@@ -41,23 +41,23 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 
 #define AI_CAMERA_LUMINOSITY 6
 
-// Camera networks
-// Station networks
-#define NETWORK_PUBLIC "Public"
-#define NETWORK_ENGINEERING "Engineering"
-#define NETWORK_MEDICAL "Medical"
-#define NETWORK_RESEARCH "Research"
-#define NETWORK_SECURITY "Security"
+// Camera channels
+// Station channels
+#define CHANNEL_PUBLIC "Public"
+#define CHANNEL_ENGINEERING "Engineering"
+#define CHANNEL_MEDICAL "Medical"
+#define CHANNEL_RESEARCH "Research"
+#define CHANNEL_SECURITY "Security"
 
-#define NETWORK_ROBOTS "Robots"
-#define NETWORK_MINE "Mining"
-#define NETWORK_SECRET "Secret"
+#define CHANNEL_ROBOTS "Robots"
+#define CHANNEL_MINE "Mining"
+#define CHANNEL_SECRET "Secret"
 
-// Non-station networks
-#define NETWORK_CRESCENT "Crescent"
-#define NETWORK_ERT "ZeEmergencyResponseTeam"
-#define NETWORK_MERCENARY "MercurialNet"
-#define NETWORK_THUNDER "Thunderdome"
+// Non-station channels
+#define CHANNEL_CRESCENT "Crescent"
+#define CHANNEL_ERT "ZeEmergencyResponseTeam"
+#define CHANNEL_MERCENARY "MercurialNet"
+#define CHANNEL_TELEVISION "Television"
 
 // Alarm networks
 #define NETWORK_ALARM_ATMOS "Atmosphere Alarms"
@@ -65,10 +65,6 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NETWORK_ALARM_FIRE "Fire Alarms"
 #define NETWORK_ALARM_MOTION "Motion Alarms"
 #define NETWORK_ALARM_POWER "Power Alarms"
-
-// Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
-var/global/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWORK_CRESCENT, NETWORK_SECRET)
-
 
 //singularity defines
 #define STAGE_ONE 	1

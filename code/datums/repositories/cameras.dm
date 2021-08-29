@@ -1,35 +1,33 @@
 var/global/repository/cameras/camera_repository = new()
 
 /proc/invalidateCameraCache()
-	camera_repository.networks.Cut()
-	camera_repository.invalidated = 1
 	camera_repository.camera_cache_id = ++camera_repository.camera_cache_id
 
 /repository/cameras
-	var/list/networks
-	var/invalidated = 1
+	var/list/devices_by_channel = list()
 	var/camera_cache_id = 1
 
-/repository/cameras/New()
-	networks = list()
-	..()
+/repository/cameras/proc/devices_in_channel(var/channel)
+	var/list/device_list = devices_by_channel[channel]
+	return device_list.Copy()
 
-/repository/cameras/proc/cameras_in_network(var/network)
-	setup_cache()
-	var/list/network_list = networks[network]
-	return network_list
+/repository/cameras/proc/get_devices_by_channel()
+	return devices_by_channel.Copy()
 
-/repository/cameras/proc/setup_cache()
-	if(!invalidated)
-		return
-	invalidated = 0
+// TODO: Tie AI to a single computer network and replace.
+/repository/cameras/proc/add_camera_to_channels(var/datum/extension/network_device/camera/added, var/list/channels)
+	if(!islist(channels))
+		channels = list(channels)
+	for(var/channel in channels)
+		if(!devices_by_channel[channel])
+			ADD_SORTED(devices_by_channel, channel, /proc/cmp_text_asc)
+			devices_by_channel[channel] = list()
+		devices_by_channel[channel] |= added
 
-	for(var/sc in cameranet.cameras)
-		var/obj/machinery/camera/C = sc
-		var/cam = C.nano_structure()
-		for(var/network in C.network)
-			if(!networks[network])
-				ADD_SORTED(networks, network, /proc/cmp_text_asc)
-				networks[network] = list()
-			var/list/netlist = networks[network]
-			netlist[++netlist.len] = cam
+/repository/cameras/proc/remove_camera_from_channels(var/datum/extension/network_device/camera/removed, var/list/channels)
+	if(!islist(channels))
+		channels = list(channels)
+	for(var/channel in channels)
+		if(!devices_by_channel[channel])
+			continue
+		devices_by_channel[channel] -= removed

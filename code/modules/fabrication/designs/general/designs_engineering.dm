@@ -50,6 +50,9 @@
 /datum/fabricator_recipe/engineering/airlock_controller
 	path = /obj/item/stock_parts/circuitboard/airlock_controller
 
+/datum/fabricator_recipe/engineering/camera
+	path = /obj/item/stock_parts/circuitboard/camera
+
 /datum/fabricator_recipe/engineering/powermodule
 	path = /obj/item/stock_parts/circuitboard/apc
 
@@ -92,8 +95,11 @@
 /datum/fabricator_recipe/engineering/rcd_ammo_large
 	path = /obj/item/rcd_ammo/large
 
-/datum/fabricator_recipe/engineering/camera_assembly
-	path = /obj/item/camera_assembly
+/datum/fabricator_recipe/engineering/camera_frame
+	path = /obj/item/frame/camera
+
+/datum/fabricator_recipe/engineering/camera_frame/kit
+	path = /obj/item/frame/camera/kit
 
 /datum/fabricator_recipe/engineering/rcd
 	path = /obj/item/rcd

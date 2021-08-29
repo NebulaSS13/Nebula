@@ -15,7 +15,7 @@
 		/obj/item/tracker_electronics,
 		/obj/item/stock_parts,
 		/obj/item/frame,
-		/obj/item/camera_assembly,
+		/obj/item/frame/camera/kit,
 		/obj/item/tank,
 		/obj/item/stock_parts/circuitboard,
 		/obj/item/stock_parts/smes_coil,

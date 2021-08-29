@@ -8,7 +8,7 @@
 	var/associated_department
 	var/hide_on_manifest = 0
 	var/channels = list()
-	var/networks = list()
+	var/camera_channels = list()
 	var/languages = list(
 		/decl/language/human/common = TRUE,
 		/decl/language/legal = TRUE,
@@ -29,7 +29,7 @@
 
 	// Bookkeeping
 	var/list/original_languages = list()
-	var/list/added_networks = list()
+	var/list/added_channels = list()
 
 	// Gear lists/types.
 	var/obj/item/emag
@@ -51,7 +51,7 @@
 
 	grant_skills(R)
 	grant_software(R)
-	add_camera_networks(R)
+	add_camera_channels(R)
 	add_languages(R)
 	add_subsystems(R)
 	apply_status_flags(R)
@@ -116,7 +116,7 @@
 		emag = null
 
 /obj/item/robot_module/proc/Reset(var/mob/living/silicon/robot/R)
-	remove_camera_networks(R)
+	remove_camera_channels(R)
 	remove_languages(R)
 	remove_subsystems(R)
 	remove_status_flags(R)
@@ -187,17 +187,20 @@
 		R.add_language(language_datum.name, original_languages[original_language])
 	original_languages.Cut()
 
-/obj/item/robot_module/proc/add_camera_networks(var/mob/living/silicon/robot/R)
-	if(R.camera && (NETWORK_ROBOTS in R.camera.network))
-		for(var/network in networks)
-			if(!(network in R.camera.network))
-				R.camera.add_network(network)
-				added_networks |= network
+/obj/item/robot_module/proc/add_camera_channels(var/mob/living/silicon/robot/R)
+	var/datum/extension/network_device/camera/robot/D = get_extension(R, /datum/extension/network_device/camera)
+	if(D)
+		var/list/robot_channels = D.channels
+		if(CHANNEL_ROBOTS in robot_channels)
+			for(var/channel in camera_channels)
+				if(!(channel in robot_channels))
+					D.add_channels(channel)
+					added_channels |= channel
 
-/obj/item/robot_module/proc/remove_camera_networks(var/mob/living/silicon/robot/R)
-	if(R.camera)
-		R.camera.remove_networks(added_networks)
-	added_networks.Cut()
+/obj/item/robot_module/proc/remove_camera_channels(var/mob/living/silicon/robot/R)
+	var/datum/extension/network_device/camera/robot/D = get_extension(R, /datum/extension/network_device/camera)
+	D.remove_channels(added_channels)
+	added_channels.Cut()
 
 /obj/item/robot_module/proc/add_subsystems(var/mob/living/silicon/robot/R)
 	for(var/subsystem_type in subsystems)

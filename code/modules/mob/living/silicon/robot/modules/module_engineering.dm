@@ -4,8 +4,8 @@
 	channels = list(
 		"Engineering" = 1
 	)
-	networks = list(
-		NETWORK_ENGINEERING
+	camera_channels = list(
+		CHANNEL_ENGINEERING
 	)
 	software = list(
 		/datum/computer_file/program/power_monitor,

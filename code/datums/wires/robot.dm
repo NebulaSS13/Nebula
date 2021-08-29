@@ -20,9 +20,11 @@ var/global/const/BORG_WIRE_CAMERA = 16
 
 	. = ..()
 	var/mob/living/silicon/robot/R = holder
+	var/datum/extension/network_device/camera/D = get_extension(holder, /datum/extension/network_device/)
+
 	. += text("<br>\n[(R.lawupdate ? "The LawSync light is on." : "The LawSync light is off.")]")
 	. += text("<br>\n[(R.connected_ai ? "The AI link light is on." : "The AI link light is off.")]")
-	. += text("<br>\n[((!isnull(R.camera) && R.camera.status == 1) ? "The Camera light is on." : "The Camera light is off.")]")
+	. += text("<br>\n[(D.is_functional() ? "The Camera light is on." : "The Camera light is off.")]")
 	. += text("<br>\n[(R.lockcharge ? "The lockdown light is on." : "The lockdown light is off.")]")
 	return .
 
@@ -44,8 +46,7 @@ var/global/const/BORG_WIRE_CAMERA = 16
 				R.disconnect_from_ai()
 
 		if (BORG_WIRE_CAMERA)
-			if(!isnull(R.camera) && !R.scrambledcodes)
-				R.camera.status = mended
+			cameranet.update_visibility(src, FALSE)
 
 		if(BORG_WIRE_LOCKED_DOWN)
 			R.SetLockdown(!mended)
@@ -60,8 +61,9 @@ var/global/const/BORG_WIRE_CAMERA = 16
 				R.connect_to_ai(new_ai)
 
 		if (BORG_WIRE_CAMERA)
-			if(!isnull(R.camera) && R.camera.can_use() && !R.scrambledcodes)
-				R.visible_message("[R]'s camera lense focuses loudly.")
+			var/datum/extension/network_device/camera/robot/D = get_extension(src, /datum/extension/network_device)
+			if(D && D.is_functional())
+				R.visible_message("[R]'s camera lens focuses loudly.")
 				to_chat(R, "Your camera lense focuses loudly.")
 
 		if(BORG_WIRE_LOCKED_DOWN)

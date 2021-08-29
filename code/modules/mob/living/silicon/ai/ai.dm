@@ -11,7 +11,7 @@ var/global/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_goto_location,
 	/mob/living/silicon/ai/proc/ai_remove_location,
 	/mob/living/silicon/ai/proc/ai_hologram_change,
-	/mob/living/silicon/ai/proc/ai_network_change,
+	/mob/living/silicon/ai/proc/ai_channel_change,
 	/mob/living/silicon/ai/proc/ai_statuschange,
 	/mob/living/silicon/ai/proc/ai_store_location,
 	/mob/living/silicon/ai/proc/ai_checklaws,
@@ -58,7 +58,7 @@ var/global/list/ai_verbs_default = list(
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
 	maxHealth = 200
-	var/list/network = list(NETWORK_PUBLIC)
+	var/list/networks = list(CHANNEL_PUBLIC)
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
@@ -456,44 +456,38 @@ var/global/list/custom_ai_icons_by_ckey_and_name = list()
 	src.view_core()
 
 //Replaces /mob/living/silicon/ai/verb/change_network() in ai.dm & camera.dm
-//Adds in /mob/living/silicon/ai/proc/ai_network_change() instead
-//Addition by Mord_Sith to define AI's network change ability
-/mob/living/silicon/ai/proc/get_camera_network_list()
+//Adds in /mob/living/silicon/ai/proc/ai_channel_change() instead
+//Addition by Mord_Sith to define AI's channel change ability
+/mob/living/silicon/ai/proc/get_camera_channel_list()
 	if(check_unable())
 		return
 
-	var/list/cameralist = new()
-	for (var/obj/machinery/camera/C in cameranet.cameras)
-		if(!C.can_use())
-			continue
-		var/list/tempnetwork = difflist(C.network,restricted_camera_networks,1)
-		for(var/i in tempnetwork)
-			cameralist[i] = i
+	var/list/valid_channels = list()
+	var/list/devices_by_channel = camera_repository.get_devices_by_channel()
+	for(var/channel in devices_by_channel)
+		for(var/datum/extension/network_device/camera/D in devices_by_channel[channel])
+			if(D.cameranet_enabled && D.is_functional())
+				valid_channels += channel
+				break
+	return valid_channels
 
-	cameralist = sortTim(cameralist, /proc/cmp_text_asc)
-	return cameralist
-
-/mob/living/silicon/ai/proc/ai_network_change(var/network in get_camera_network_list())
+/mob/living/silicon/ai/proc/ai_channel_change(var/channel in get_camera_channel_list())
 	set category = "Silicon Commands"
-	set name = "Jump To Network"
+	set name = "Jump To Channel"
 	unset_machine()
 
-	if(!network)
+	if(!channel)
 		return
 
 	if(!eyeobj)
 		view_core()
 		return
 
-	src.network = network
-
-	for(var/obj/machinery/camera/C in cameranet.cameras)
-		if(!C.can_use())
-			continue
-		if(network in C.network)
-			eyeobj.setLoc(get_turf(C))
+	for(var/datum/extension/network_device/camera/D in camera_repository.devices_in_channel(channel))
+		if(D.cameranet_enabled && D.is_functional())
+			eyeobj.setLoc(get_turf(D.holder))
 			break
-	to_chat(src, "<span class='notice'>Switched to [network] camera network.</span>")
+	to_chat(src, "<span class='notice'>Switched to [channel] camera channel.</span>")
 //End of code by Mord_Sith
 
 /mob/living/silicon/ai/proc/ai_statuschange()

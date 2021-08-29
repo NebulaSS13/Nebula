@@ -21,13 +21,12 @@
 
 /obj/item/spy_bug/Initialize()
 	. = ..()
+	name = "bug #[random_id(/obj/item/spy_bug, 1000,9999)]"
 	radio = new(src)
-	camera = new(src)
 	global.listening_objects += src
 
 /obj/item/spy_bug/Destroy()
 	QDEL_NULL(radio)
-	QDEL_NULL(camera)
 	global.listening_objects -= src
 	return ..()
 
@@ -62,10 +61,9 @@
 
 	origin_tech = "{'programming':1,'engineering':1,'esoteric':3}"
 
-	var/operating = 0
 	var/obj/item/radio/spy/radio
-	var/obj/machinery/camera/spy/selected_camera
-	var/list/obj/machinery/camera/spy/cameras = new()
+	var/obj/item/spy_bug/selected_camera
+	var/list/obj/item/spy_bug/cameras = list()
 
 /obj/item/spy_monitor/Initialize()
 	. = ..()
@@ -74,6 +72,8 @@
 
 /obj/item/spy_monitor/Destroy()
 	global.listening_objects -= src
+	selected_camera = null
+	cameras.Cut()
 	return ..()
 
 /obj/item/spy_monitor/examine(mob/user, distance)
@@ -82,9 +82,6 @@
 		to_chat(user, "The time '12:00' is blinking in the corner of the screen and \the [src] looks very cheaply made.")
 
 /obj/item/spy_monitor/attack_self(mob/user)
-	if(operating)
-		return
-
 	radio.attack_self(user)
 	view_cameras(user)
 
@@ -95,68 +92,52 @@
 		return ..()
 
 /obj/item/spy_monitor/proc/pair(var/obj/item/spy_bug/SB, var/mob/living/user)
-	if(SB.camera in cameras)
-		to_chat(user, "<span class='notice'>\The [SB] has been unpaired from \the [src].</span>")
-		cameras -= SB.camera
-	else
-		to_chat(user, "<span class='notice'>\The [SB] has been paired with \the [src].</span>")
-		cameras += SB.camera
+	to_chat(user, SPAN_NOTICE("\The [SB] has been paired with \the [src]."))
+	events_repository.register(/decl/observ/destroyed, SB, src, .proc/unpair)
+	cameras += SB
+
+/obj/item/spy_monitor/proc/unpair(var/obj/item/spy_bug/SB, var/mob/living/user)
+	to_chat(user, SPAN_NOTICE("\The [SB] has been unpaired from \the [src]."))
+	events_repository.unregister(/decl/observ/destroyed, SB, src, .proc/unpair)
+	if(selected_camera == SB)
+		selected_camera = null
+	cameras -= SB
 
 /obj/item/spy_monitor/proc/view_cameras(mob/user)
-	if(!can_use_cam(user))
+	if(!cameras.len)
+		to_chat(user, SPAN_WARNING("No paired cameras detected!"))
+		to_chat(user, SPAN_WARNING("Bring a bug in contact with this device to pair the camera.</span>"))
 		return
 
-	selected_camera = cameras[1]
+	if(selected_camera)
+		selected_camera = null
+		user.reset_view()
+		user.unset_machine()
+		return
+	
+	selected_camera = input("Select camera bug to view.") as null|anything in cameras
 	view_camera(user)
 
-	operating = 1
-	while(selected_camera && Adjacent(user))
-		selected_camera = input("Select camera bug to view.") as null|anything in cameras
-	selected_camera = null
-	operating = 0
-
 /obj/item/spy_monitor/proc/view_camera(mob/user)
-	spawn(0)
-		while(selected_camera && Adjacent(user))
-			var/turf/T = get_turf(selected_camera)
-			if(!T || !is_on_same_plane_or_station(T.z, user.z) || !selected_camera.can_use())
-				user.unset_machine()
-				user.reset_view(null)
-				to_chat(user, "<span class='notice'>[selected_camera] unavailable.</span>")
-				sleep(90)
-			else
-				user.set_machine(selected_camera)
-				user.reset_view(selected_camera)
-			sleep(10)
+	user.machine = src
+	user.reset_view(selected_camera)
+
+/obj/item/spy_monitor/check_eye(mob/user)
+	if(!selected_camera || QDELETED(selected_camera))
 		user.unset_machine()
-		user.reset_view(null)
-
-/obj/item/spy_monitor/proc/can_use_cam(mob/user)
-	if(operating)
-		return
-
-	if(!cameras.len)
-		to_chat(user, "<span class='warning'>No paired cameras detected!</span>")
-		to_chat(user, "<span class='warning'>Bring a bug in contact with this device to pair the camera.</span>")
-		return
-
-	return 1
+		return -1
+	if(!CanUseTopicPhysical(user))
+		user.unset_machine()
+		return -1
+	var/turf/T = get_turf(selected_camera)
+	if(!T || !is_on_same_plane_or_station(T.z, user.z))
+		user.unset_machine()
+		selected_camera = null
+		return -1
+	return 0
 
 /obj/item/spy_monitor/hear_talk(mob/M, var/msg, verb, decl/language/speaking)
 	return radio.hear_talk(M, msg, speaking)
-
-
-/obj/machinery/camera/spy
-	// These cheap toys are accessible from the mercenary camera console as well
-	network = list(NETWORK_MERCENARY)
-
-/obj/machinery/camera/spy/Initialize()
-	. = ..()
-	name = "DV-136ZB #[random_id(/obj/machinery/camera/spy, 1000,9999)]"
-	c_tag = name
-
-/obj/machinery/camera/spy/check_eye(var/mob/user)
-	return 0
 
 /obj/item/radio/spy
 	listening = 0

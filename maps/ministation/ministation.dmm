@@ -10126,7 +10126,7 @@
 "Bq" = (
 /obj/machinery/camera/autoname{
 	dir = 4;
-	network = list("Exodus")
+	preset_channels = list("Exodus")
 	},
 /turf/simulated/floor/bluegrid{
 	name = "Mainframe Base";
@@ -10453,7 +10453,7 @@
 /area/ministation/telecomms)
 "Cl" = (
 /obj/machinery/camera/autoname{
-	network = list("Exodus")
+	preset_channels = list("Exodus")
 	},
 /obj/machinery/firealarm{
 	dir = 4;

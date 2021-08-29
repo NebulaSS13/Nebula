@@ -88,4 +88,15 @@
 		var/obj/machinery/embedded_controller/radio/controller = path
 		var/base_type = initial(controller.base_type) || path
 		. |= base_type
-	
+
+/obj/item/stock_parts/circuitboard/camera
+	name = "circuitboard (camera)"
+	build_path = /obj/machinery/camera
+	board_type = "wall"
+	origin_tech = "{'programming':1,'engineering':1}"
+	req_components = list()
+	additional_spawn_components = list(
+		/obj/item/stock_parts/power/apc/buildable = 1,
+		/obj/item/stock_parts/power/battery/buildable/stock = 1,
+		/obj/item/cell = 1
+	)

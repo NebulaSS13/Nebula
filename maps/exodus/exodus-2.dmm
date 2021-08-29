@@ -38782,10 +38782,10 @@
 /obj/structure/closet/crate{
 	name = "Camera Assembly Crate"
 	},
-/obj/item/camera_assembly,
-/obj/item/camera_assembly,
-/obj/item/camera_assembly,
-/obj/item/camera_assembly,
+/obj/item/frame/camera,
+/obj/item/frame/camera,
+/obj/item/frame/camera,
+/obj/item/frame/camera,
 /turf/simulated/floor/bluegrid,
 /area/exodus/turret_protected/ai_cyborg_station)
 "bDc" = (
@@ -39822,7 +39822,7 @@
 "bFf" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/table,
-/obj/item/camera_assembly,
+/obj/item/frame/camera,
 /turf/simulated/floor/plating,
 /area/exodus/medical/genetics/cloning)
 "bFg" = (
@@ -41173,7 +41173,7 @@
 "bHG" = (
 /obj/machinery/camera/network/research{
 	c_tag = "Research - Miscellaneous Test Chamber";
-	network = list("Research","Miscellaneous Reseach")
+	preset_channels = list("Research","Miscellaneous Reseach")
 	},
 /obj/item/radio/intercom{
 	pixel_y = 22
@@ -44051,7 +44051,7 @@
 	},
 /obj/machinery/camera/network/research{
 	c_tag = "Research - Toxins Test Chamber North";
-	network = list("Research","Toxins Test Area")
+	preset_channels = list("Research","Toxins Test Area")
 	},
 /turf/simulated/floor/tiled/airless,
 /area/exodus/research/test_area)
@@ -44322,7 +44322,7 @@
 /turf/simulated/wall/prepainted,
 /area/exodus/maintenance/engineering)
 "bNV" = (
-/obj/item/camera_assembly,
+/obj/item/frame/camera,
 /turf/simulated/floor/plating,
 /area/exodus/medical/genetics)
 "bNW" = (
@@ -48205,7 +48205,7 @@
 /obj/machinery/camera/network/research{
 	c_tag = "Research Toxins Test Chamber East";
 	dir = 8;
-	network = list("Research","Toxins Test Area")
+	preset_channels = list("Research","Toxins Test Area")
 	},
 /turf/simulated/floor/tiled/airless,
 /area/exodus/research/test_area)
@@ -52523,7 +52523,7 @@
 /obj/machinery/camera/network/research{
 	c_tag = "Research - Toxins Test Chamber South";
 	dir = 1;
-	network = list("Research","Toxins Test Area")
+	preset_channels = list("Research","Toxins Test Area")
 	},
 /turf/simulated/floor/tiled/airless,
 /area/exodus/research/test_area)

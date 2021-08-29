@@ -1,0 +1,61 @@
+{{if data.error}}
+	<h2>An error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	<div class="item">
+		{{:helper.link('Refresh', null, { "refresh" : 1 })}}
+	</div>
+{{else}}
+	<i>Welcome to the network configuration utility. Please consult your system administrator if you have any questions about your device.</i><hr>
+	<h2>Network Configuration</h2>
+	<div class="itemLabel">
+		Network Status:
+	</div>
+	<div class="itemContent">
+		{{:data.status}}
+	</div>
+	<div class="itemLabel">
+		Network ID:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.network_id, null, { "change_id" : 1 })}}
+	</div>
+	<div class="itemLabel">
+		Network KEY:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.network_key, null, { "change_key" : 1 })}}
+	</div>
+	<div class="itemLabel">
+		Network TAG:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.network_tag, null, { "change_net_tag" : 1 })}}
+	</div>
+	<hr>
+	{{if data.channels}}
+		<div class="item">
+			<div class="itemLabel">
+				Camera Channels:
+			</div>
+			<div class="itemContent">
+				<table>
+					<tr>
+						{{:helper.link("(+)", null, {"add_channel" : 1})}}
+					</tr>
+					<tr>
+						<th>(-)</th>
+						<th>Channel Name</th>
+					</tr>
+					{{for data.channels}}
+						<tr>
+							<td>{{:helper.link("(-)", null, {"remove_channel" : value})}}</td>
+							<td>{{:value}}</td>
+						</tr>
+					{{/for}}
+				</table>
+			</div>
+		</div>
+	{{/if}}
+	<i>EXONET Firmware v110.04.4h Copyright EXONETWORKS INC</i>
+{{/if}} 

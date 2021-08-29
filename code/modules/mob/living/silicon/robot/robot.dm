@@ -55,7 +55,6 @@
 
 	var/mob/living/silicon/ai/connected_ai = null
 	var/obj/item/cell/cell = /obj/item/cell/high
-	var/obj/machinery/camera/camera = null
 
 	var/cell_emp_mult = 2.5
 
@@ -117,12 +116,9 @@
 	updatename(modtype)
 	update_icon()
 
-	if(!scrambledcodes && !camera)
-		camera = new /obj/machinery/camera(src)
-		camera.c_tag = real_name
-		camera.replace_networks(list(NETWORK_PUBLIC,NETWORK_ROBOTS))
-		if(wires.IsIndexCut(BORG_WIRE_CAMERA))
-			camera.status = 0
+	if(!scrambledcodes)
+		set_extension(src, /datum/extension/network_device/camera/robot, null, null, null, TRUE, list(CHANNEL_ROBOTS), name)
+		verbs |= /mob/living/silicon/robot/proc/configure_camera
 	init()
 	initialize_components()
 
@@ -311,8 +307,9 @@
 		mind.name = changed_name
 
 	//We also need to update name of internal camera.
-	if (camera)
-		camera.c_tag = changed_name
+	var/datum/extension/network_device/camera/robot/D = get_extension(src, /datum/extension/network_device)
+	if(D)
+		D.display_name = changed_name
 
 	//Flavour text.
 	if(client)
@@ -342,6 +339,7 @@
 	if(!opened && has_power && do_after(usr, 60) && !opened && has_power)
 		to_chat(src, "You [locked ? "un" : ""]lock your panel.")
 		locked = !locked
+
 
 /mob/living/silicon/robot/proc/self_diagnosis()
 	if(!is_component_functioning("diagnosis unit"))
@@ -404,6 +402,19 @@
 	else
 		C.toggled = 1
 		to_chat(src, "<span class='warning'>You enable [C.name].</span>")
+
+/mob/living/silicon/robot/proc/configure_camera()
+	set category = "Silicon Commands"
+	set name = "Configure Camera"
+	set desc = "Configure your internal camera's network settings."
+
+	if(stat == DEAD)
+		return
+
+	var/datum/extension/network_device/camera/C = get_extension(src, /datum/extension/network_device/)
+	if(C)
+		C.ui_interact(src)
+
 /mob/living/silicon/robot/proc/update_robot_light()
 	if(lights_on)
 		if(intenselight)
@@ -883,9 +894,9 @@
 	lockcharge = 0
 	scrambledcodes = 1
 	//Disconnect it's camera so it's not so easily tracked.
-	if(src.camera)
-		src.camera.clear_all_networks()
-
+	var/datum/extension/network_device/camera/robot/D = get_extension(src, /datum/extension/network_device)
+	if(D)
+		D.remove_channels(D.channels)
 
 /mob/living/silicon/robot/proc/ResetSecurityCodes()
 	set category = "Silicon Commands"

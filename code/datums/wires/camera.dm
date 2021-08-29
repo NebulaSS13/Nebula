@@ -15,8 +15,9 @@
 
 	. = ..()
 	var/obj/machinery/camera/C = holder
-	. += "<br>\n[(C.view_range == initial(C.view_range) ? "The focus light is on." : "The focus light is off.")]"
-	. += "<br>\n[(C.can_use() ? "The power link light is on." : "The power link light is off.")]"
+	var/datum/extension/network_device/camera/D = get_extension(holder, /datum/extension/network_device/)
+	. += "<br>\n[(D.view_range == C.long_range ? "The focus light is on." : "The focus light is off.")]"
+	. += "<br>\n[(C.cut_power ? "The power link light is off." : "The power link light is on.")]"
 	. += "<br>\n[(C.light_disabled ? "The camera light is off." : "The camera light is on.")]"
 	. += "<br>\n[(C.alarm_on ? "The alarm light is on." : "The alarm light is off.")]"
 	return .
@@ -37,12 +38,17 @@ var/global/const/CAMERA_WIRE_NOTHING2 = 32
 
 	switch(index)
 		if(CAMERA_WIRE_FOCUS)
-			var/range = (mended ? initial(C.view_range) : C.short_range)
-			C.setViewRange(range)
+			var/datum/extension/network_device/camera/D = get_extension(holder, /datum/extension/network_device)
+			var/new_range = (mended ? C.long_range : C.short_range)
+			D.set_view_range(new_range)
 
 		if(CAMERA_WIRE_POWER)
-			if(C.status && !mended || !C.status && mended)
-				C.deactivate(usr, 1)
+			if(!mended)
+				C.cut_power = TRUE
+				C.set_status(FALSE, usr)
+			else
+				C.cut_power = FALSE
+				C.set_status(TRUE, usr)
 
 		if(CAMERA_WIRE_LIGHT)
 			C.light_disabled = !mended
@@ -60,8 +66,9 @@ var/global/const/CAMERA_WIRE_NOTHING2 = 32
 		return
 	switch(index)
 		if(CAMERA_WIRE_FOCUS)
-			var/new_range = (C.view_range == initial(C.view_range) ? C.short_range : initial(C.view_range))
-			C.setViewRange(new_range)
+			var/datum/extension/network_device/camera/D = get_extension(holder, /datum/extension/network_device)
+			var/new_range = (D.view_range == C.long_range ? C.short_range : C.long_range)
+			D.set_view_range(new_range)
 
 		if(CAMERA_WIRE_LIGHT)
 			C.light_disabled = !C.light_disabled
@@ -69,9 +76,3 @@ var/global/const/CAMERA_WIRE_NOTHING2 = 32
 		if(CAMERA_WIRE_ALARM)
 			C.visible_message("[html_icon(C)] *beep*", "[html_icon(C)] *beep*")
 	return
-
-/datum/wires/camera/proc/CanDeconstruct()
-	if(IsIndexCut(CAMERA_WIRE_POWER) && IsIndexCut(CAMERA_WIRE_FOCUS) && IsIndexCut(CAMERA_WIRE_LIGHT) && IsIndexCut(CAMERA_WIRE_NOTHING1) && IsIndexCut(CAMERA_WIRE_NOTHING2))
-		return 1
-	else
-		return 0

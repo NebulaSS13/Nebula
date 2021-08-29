@@ -3067,7 +3067,7 @@
 /obj/effect/landmark{
 	name = "tdome2"
 	},
-/obj/machinery/camera/network/thunder{
+/obj/machinery/camera/network/television{
 	c_tag = "Thunderdome - Red Team";
 	invisibility = 101
 	},
@@ -3105,7 +3105,7 @@
 /obj/effect/landmark{
 	name = "tdome1"
 	},
-/obj/machinery/camera/network/thunder{
+/obj/machinery/camera/network/television{
 	c_tag = "Green Team";
 	invisibility = 101
 	},
@@ -3121,7 +3121,7 @@
 	},
 /area/tdome)
 "pQZ" = (
-/obj/machinery/camera/network/thunder{
+/obj/machinery/camera/network/television{
 	c_tag = "Thunderdome Arena";
 	invisibility = 101
 	},

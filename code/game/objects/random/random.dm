@@ -626,7 +626,6 @@
 				/obj/item/destTagger,
 				/obj/item/beartrap,
 				/obj/item/handcuffs,
-				/obj/item/camera_assembly,
 				/obj/item/camera,
 				/obj/item/modular_computer/pda,
 				/obj/item/card/emag_broken,

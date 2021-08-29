@@ -235,7 +235,6 @@
 /obj/item/integrated_circuit/output/video_camera/Initialize()
 	. = ..()
 	camera = new(src)
-	camera.replace_networks(list(NETWORK_THUNDER))
 	on_data_written()
 
 /obj/item/integrated_circuit/output/video_camera/Destroy()
