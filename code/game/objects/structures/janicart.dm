@@ -177,6 +177,12 @@
 
 
 /obj/structure/bed/chair/janicart/Initialize()
+	buckle_pixel_shift = list(
+		"[NORTH]" = list("x" =   0, "y" = 4, "z" = 0),
+		"[SOUTH]" = list("x" =   0, "y" = 7, "z" = 0),
+		"[EAST]"  = list("x" = -13, "y" = 7, "z" = 0),
+		"[WEST]"  = list("x" =  13, "y" = 7, "z" = 0)
+	)
 	. = ..()
 	create_reagents(100)
 
@@ -218,64 +224,15 @@
 	if(user.incapacitated(INCAPACITATION_DISRUPTED))
 		unbuckle_mob()
 	if(locate(/obj/item/key) in user.get_held_items())
-		step(src, direction)
-		update_mob()
+		Move(get_step(src, direction))
 	else
 		to_chat(user, SPAN_WARNING("You'll need the keys in one of your hands to drive this [callme]."))
-
-/obj/structure/bed/chair/janicart/Move()
-	..()
-	if(buckled_mob && (buckled_mob.buckled == src))
-		buckled_mob.dropInto(loc)
-
-
-/obj/structure/bed/chair/janicart/post_buckle_mob(mob/living/M)
-	update_mob()
-	return ..()
-
-
-/obj/structure/bed/chair/janicart/unbuckle_mob()
-	var/mob/living/M = ..()
-	if(M)
-		M.pixel_x = 0
-		M.pixel_y = 0
-	return M
-
-
-/obj/structure/bed/chair/janicart/set_dir()
-	..()
-	if(buckled_mob)
-		if(buckled_mob.loc != loc)
-			buckled_mob.buckled = null //Temporary, so Move() succeeds.
-			buckled_mob.buckled = src //Restoring
-
-	update_mob()
-
-
-/obj/structure/bed/chair/janicart/proc/update_mob()
-	if(buckled_mob)
-		buckled_mob.set_dir(dir)
-		switch(dir)
-			if(SOUTH)
-				buckled_mob.pixel_x = 0
-				buckled_mob.pixel_y = 7
-			if(WEST)
-				buckled_mob.pixel_x = 13
-				buckled_mob.pixel_y = 7
-			if(NORTH)
-				buckled_mob.pixel_x = 0
-				buckled_mob.pixel_y = 4
-			if(EAST)
-				buckled_mob.pixel_x = -13
-				buckled_mob.pixel_y = 7
-
 
 /obj/structure/bed/chair/janicart/bullet_act(var/obj/item/projectile/Proj)
 	if(buckled_mob)
 		if(prob(85))
 			return buckled_mob.bullet_act(Proj)
 	visible_message("<span class='warning'>[Proj] ricochets off the [callme]!</span>")
-
 
 /obj/item/key
 	name = "key"

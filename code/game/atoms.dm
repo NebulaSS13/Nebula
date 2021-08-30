@@ -20,6 +20,9 @@
 	var/transform_animate_time = 0 // If greater than zero, transform-based adjustments (scaling, rotating) will visually occur over this time.
 
 	var/tmp/currently_exploding = FALSE
+	var/tmp/default_pixel_x = 0
+	var/tmp/default_pixel_y = 0
+	var/tmp/default_pixel_z = 0
 
 // This is called by the maploader prior to Initialize to perform static modifications to vars set on the map. Intended use case: adjust tag vars on duplicate templates.
 /atom/proc/modify_mapped_vars(map_hash)
@@ -586,3 +589,9 @@ its easier to just keep the beam vertical.
 	M.Scale(icon_scale_x, icon_scale_y)
 	M.Turn(icon_rotation)
 	animate(src, transform = M, transform_animate_time)
+
+/atom/proc/refresh_pixel_offsets(var/anim_time = 2)
+	reset_plane_and_layer()
+	pixel_x = default_pixel_x
+	pixel_y = default_pixel_y
+	pixel_z = default_pixel_z 

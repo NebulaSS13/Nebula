@@ -4,7 +4,7 @@
 	var/buckle_allow_rotation = 0
 	var/buckle_dir = 0
 	var/buckle_lying = -1 //bed-like behavior, forces mob.lying = buckle_lying if != -1
-	var/buckle_pixel_shift = @"{'x':0,'y':0,'z':0}" //where the buckled mob should be pixel shifted to, or null for no pixel shift control
+	var/list/buckle_pixel_shift //where the buckled mob should be pixel shifted to, or null for no pixel shift control. Can be associative for directional offsets
 	var/buckle_require_restraints = 0 //require people to be handcuffed before being able to buckle. eg: pipes
 	var/buckle_require_same_tile = FALSE
 	var/buckle_sound
@@ -61,12 +61,8 @@
 		post_buckle_mob(.)
 
 /obj/proc/post_buckle_mob(mob/living/M)
-	if(buckle_pixel_shift)
-		if(M == buckled_mob)
-			var/list/pixel_shift = cached_json_decode(buckle_pixel_shift)
-			animate(M, pixel_x = M.default_pixel_x + pixel_shift["x"], pixel_y = M.default_pixel_y + pixel_shift["y"], pixel_z = M.default_pixel_z + pixel_shift["z"], 4, 1, LINEAR_EASING)
-		else
-			animate(M, pixel_x = M.default_pixel_x, pixel_y = M.default_pixel_y, pixel_z = M.default_pixel_z, 4, 1, LINEAR_EASING)
+	refresh_pixel_offsets()
+	M.refresh_pixel_offsets()
 
 /mob/proc/can_be_buckled(var/mob/user)
 	. = user.Adjacent(src) && !istype(user, /mob/living/silicon/pai)
@@ -119,3 +115,20 @@
 			qdel(G)
 		add_fingerprint(user)
 	return M
+
+/obj/Move()
+	. = ..()
+	if(. && buckled_mob)
+		buckled_mob.glide_size = glide_size // Setting loc apparently does animate with glide size.
+		buckled_mob.forceMove(loc)
+		refresh_buckled_mob()
+
+/obj/set_dir()
+	. = ..()
+	if(.)
+		refresh_buckled_mob()
+
+/obj/proc/refresh_buckled_mob()
+	if(buckled_mob)
+		buckled_mob.set_dir(buckle_dir || dir)
+		buckled_mob.refresh_pixel_offsets(0)

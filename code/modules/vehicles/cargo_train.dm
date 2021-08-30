@@ -9,12 +9,11 @@
 
 	load_item_visible = 1
 	load_offset_x = 0
-	buckle_pixel_shift = @"{'x':0,'y':0,'z':7}"
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	charge_use = 1 KILOWATTS
 	active_engines = 1
-	var/obj/item/key/cargo_train/key
+	var/obj/item/key/cargo_train/key	
 
 /obj/item/key/cargo_train
 	name = "key"
@@ -34,12 +33,16 @@
 	load_item_visible = 1
 	load_offset_x = 0
 	load_offset_y = 4
-	buckle_pixel_shift = @"{'x':0,'y':0,'z':8}"
+
+/obj/vehicle/train/cargo/trolley/Initialize()
+	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 8)
+	. = ..()
 
 //-------------------------------------------
 // Standard procs
 //-------------------------------------------
 /obj/vehicle/train/cargo/engine/Initialize()
+	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 7)
 	. = ..()
 	cell = new /obj/item/cell/high(src)
 	key = new(src)

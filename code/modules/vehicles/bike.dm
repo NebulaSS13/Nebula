@@ -1,4 +1,4 @@
-/obj/vehicle/bike/
+/obj/vehicle/bike
 	name = "space-bike"
 	desc = "Space wheelies! Woo!"
 	icon = 'icons/obj/bike.dmi'
@@ -6,7 +6,6 @@
 	dir = SOUTH
 
 	load_item_visible = 1
-	buckle_pixel_shift = @"{'x':0,'y':0,'z':5}"
 	health = 100
 	maxhealth = 100
 
@@ -26,6 +25,7 @@
 	var/prefilled = 0
 
 /obj/vehicle/bike/Initialize()
+	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 5)
 	. = ..()
 	if(engine_type)
 		load_engine(new engine_type(src.loc))
