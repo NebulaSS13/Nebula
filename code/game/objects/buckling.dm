@@ -58,12 +58,18 @@
 		buckled_mob.UpdateLyingBuckledAndVerbStatus()
 		buckled_mob.update_floating()
 		buckled_mob = null
-
 		post_buckle_mob(.)
 
 /obj/proc/post_buckle_mob(mob/living/M)
-	refresh_pixel_offsets(0)
-	M.refresh_pixel_offsets(0)
+	SHOULD_CALL_PARENT(TRUE)
+	reset_plane_and_layer()
+	reset_offsets(5)
+	if(M)
+		M.reset_plane_and_layer()
+		M.reset_offsets(5)
+	if(buckled_mob && M != buckled_mob)
+		buckled_mob.reset_plane_and_layer()
+		buckled_mob.reset_offsets(5)
 
 /obj/proc/user_buckle_mob(mob/living/M, mob/user)
 	if(M != user && user.incapacitated())
@@ -129,4 +135,5 @@
 /obj/proc/refresh_buckled_mob()
 	if(buckled_mob)
 		buckled_mob.set_dir(buckle_dir || dir)
-		buckled_mob.refresh_pixel_offsets(0)
+		buckled_mob.reset_offsets(0)
+		buckled_mob.reset_plane_and_layer()

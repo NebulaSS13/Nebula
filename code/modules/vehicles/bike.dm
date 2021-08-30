@@ -6,12 +6,14 @@
 	dir = SOUTH
 
 	load_item_visible = 1
+	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 5)
 	health = 100
 	maxhealth = 100
 
 	locked = 0
 	fire_dam_coeff = 0.6
 	brute_dam_coeff = 0.5
+
 	var/protection_percent = 40 //0 is no protection, 100 is full protection (afforded to the pilot) from projectiles fired at this vehicle
 
 	var/land_speed = 10 //if 0 it can't go on turf
@@ -25,7 +27,6 @@
 	var/prefilled = 0
 
 /obj/vehicle/bike/Initialize()
-	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 5)
 	. = ..()
 	if(engine_type)
 		load_engine(new engine_type(src.loc))

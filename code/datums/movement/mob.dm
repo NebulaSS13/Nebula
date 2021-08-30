@@ -193,8 +193,11 @@
 		if(G.assailant_reverse_facing())
 			mob.set_dir(global.reverse_dir[direction])
 		G.assailant_moved()
-	
-	mob.refresh_pixel_offsets()
+		G.adjust_position()
+
+	if(length(mob.grabbed_by))
+		mob.reset_offsets()
+		mob.reset_plane_and_layer()
 
 	if(direction & (UP|DOWN))
 		var/txt_dir = (direction & UP) ? "upwards" : "downwards"

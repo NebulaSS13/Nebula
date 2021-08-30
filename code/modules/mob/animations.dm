@@ -76,7 +76,7 @@
 	animate(src, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff, transform = rotated_transform, time = 2, easing = BACK_EASING | EASE_IN)
 	animate(pixel_x = pixel_x, pixel_y = pixel_y, transform = initial_transform, time = 2, easing = BACK_EASING | EASE_IN)
 	sleep(4)
-	refresh_pixel_offsets()
+	reset_offsets()
 
 /mob/proc/clear_shown_overlays(var/list/show_to, var/image/I)
 	for(var/client/C in show_to)

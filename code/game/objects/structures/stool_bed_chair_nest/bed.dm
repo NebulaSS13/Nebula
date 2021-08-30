@@ -146,14 +146,11 @@
 	icon = 'icons/obj/structures/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0
+	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 6)
 	var/item_form_type = /obj/item/roller	//The folded-up object path.
 	var/obj/item/chems/beaker
 	var/iv_attached = 0
 	var/iv_stand = TRUE
-
-/obj/structure/bed/roller/Initialize(ml, _mat, _reinf_mat)
-	buckle_pixel_shift = list("x" = 0, "y" = 0, "z" = 6)
-	. = ..()
 
 /obj/structure/bed/roller/on_update_icon()
 	overlays.Cut()

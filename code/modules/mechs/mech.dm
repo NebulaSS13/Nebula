@@ -77,7 +77,7 @@
 
 	if(!access_card) access_card = new (src)
 
-	refresh_pixel_offsets(0)
+	reset_offsets(0)
 
 	// Grab all the supplied components.
 	if(source_frame)

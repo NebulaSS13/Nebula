@@ -130,7 +130,8 @@
 		assailant = null
 	. = ..()
 	if(old_affecting)
-		old_affecting.refresh_pixel_offsets(5)
+		old_affecting.reset_offsets(5)
+		old_affecting.reset_plane_and_layer()
 
 /*
 	This section is for newly defined useful procs.
@@ -250,7 +251,8 @@
 	if(current_grab.same_tile)
 		affecting.forceMove(get_turf(assailant))
 		affecting.set_dir(assailant.dir)
-	affecting.refresh_pixel_offsets(5)
+	affecting.reset_offsets(5)
+	affecting.reset_plane_and_layer()
 
 /*
 	This section is for the simple procs used to return things from current_grab.
