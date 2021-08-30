@@ -119,23 +119,23 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	// INITIALIZE!
 	ResetUI(1)
 
-	SetUIValueRange(DNA_UI_HAIR_R,  HEX_RED(character.hair_colour),   255, 1)
-	SetUIValueRange(DNA_UI_HAIR_G,  HEX_GREEN(character.hair_colour), 255, 1)
-	SetUIValueRange(DNA_UI_HAIR_B,  HEX_BLUE(character.hair_colour),  255, 1)
+	SetUIValueRange(DNA_UI_HAIR_R,  HEX_RED(character.hair_colour),          255, 1)
+	SetUIValueRange(DNA_UI_HAIR_G,  HEX_GREEN(character.hair_colour),        255, 1)
+	SetUIValueRange(DNA_UI_HAIR_B,  HEX_BLUE(character.hair_colour),         255, 1)
 
-	SetUIValueRange(DNA_UI_BEARD_R, HEX_RED(character.hair_colour),   255, 1)
-	SetUIValueRange(DNA_UI_BEARD_G, HEX_GREEN(character.hair_colour), 255, 1)
-	SetUIValueRange(DNA_UI_BEARD_B, HEX_BLUE(character.hair_colour),  255, 1)
+	SetUIValueRange(DNA_UI_BEARD_R, HEX_RED(character.facial_hair_colour),   255, 1)
+	SetUIValueRange(DNA_UI_BEARD_G, HEX_GREEN(character.facial_hair_colour), 255, 1)
+	SetUIValueRange(DNA_UI_BEARD_B, HEX_BLUE(character.facial_hair_colour),  255, 1)
 
-	SetUIValueRange(DNA_UI_EYES_R,  HEX_RED(character.eye_colour),    255, 1)
-	SetUIValueRange(DNA_UI_EYES_G,  HEX_GREEN(character.eye_colour),  255, 1)
-	SetUIValueRange(DNA_UI_EYES_B,  HEX_BLUE(character.eye_colour),   255, 1)
+	SetUIValueRange(DNA_UI_EYES_R,  HEX_RED(character.eye_colour),           255, 1)
+	SetUIValueRange(DNA_UI_EYES_G,  HEX_GREEN(character.eye_colour),         255, 1)
+	SetUIValueRange(DNA_UI_EYES_B,  HEX_BLUE(character.eye_colour),          255, 1)
 
-	SetUIValueRange(DNA_UI_SKIN_R,  HEX_RED(character.skin_colour),   255, 1)
-	SetUIValueRange(DNA_UI_SKIN_G,  HEX_GREEN(character.skin_colour), 255, 1)
-	SetUIValueRange(DNA_UI_SKIN_B,  HEX_BLUE(character.skin_colour),  255, 1)
+	SetUIValueRange(DNA_UI_SKIN_R,  HEX_RED(character.skin_colour),          255, 1)
+	SetUIValueRange(DNA_UI_SKIN_G,  HEX_GREEN(character.skin_colour),        255, 1)
+	SetUIValueRange(DNA_UI_SKIN_B,  HEX_BLUE(character.skin_colour),         255, 1)
 
-	SetUIValueRange(DNA_UI_SKIN_TONE, 35-character.skin_tone, 220,    1) // Value can be negative.
+	SetUIValueRange(DNA_UI_SKIN_TONE, 35-character.skin_tone, 220,           1) // Value can be negative.
 
 	SetUIState(DNA_UI_GENDER, character.gender!=MALE, 1)
 
