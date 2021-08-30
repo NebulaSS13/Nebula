@@ -11,6 +11,9 @@
 	rad_resistance_modifier = 0.1
 	color = COLOR_STEEL
 	material = /decl/material/solid/metal/steel
+	parts_type = /obj/item/stack/material/rods
+	parts_amount = 2
+
 	handle_generic_blending = TRUE
 	material_alteration = MAT_FLAG_ALTERATION_COLOR | MAT_FLAG_ALTERATION_NAME
 	maxhealth = 20
@@ -159,8 +162,9 @@
 	else
 		set_density(0)
 		if(material)
-			material.create_object(get_turf(src), 1,/obj/item/stack/material/rods)
+			material.create_object(get_turf(src), 1, parts_type)
 		destroyed = TRUE
+		parts_amount = 1
 		update_icon()
 
 /obj/structure/grille/attackby(obj/item/W, mob/user)
@@ -279,10 +283,3 @@
 		var/obj/structure/grille/F = new(loc, ST.material.type)
 		user.visible_message(SPAN_NOTICE("\The [user] finishes building \a [F]."))
 		F.add_fingerprint(user)
-
-/obj/structure/grille/create_dismantled_products(var/turf/T)
-	if(material)
-		material.create_object(get_turf(src), (destroyed ? 1 : 2), /obj/item/stack/material/rods)
-		matter -= material.type
-		material = null
-	. = ..()

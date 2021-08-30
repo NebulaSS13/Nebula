@@ -376,10 +376,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.
-/decl/material/proc/place_dismantled_product(var/turf/target, var/is_devastated, var/amount = 2)
+/decl/material/proc/place_dismantled_product(var/turf/target, var/is_devastated, var/amount = 2, var/drop_type)
 	amount = is_devastated ? FLOOR(amount * 0.5) : amount
 	if(amount > 0)
-		return create_object(target, amount)
+		return create_object(target, amount, object_type = drop_type)
 
 // As above.
 /decl/material/proc/place_shard(var/turf/target)

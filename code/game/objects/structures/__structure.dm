@@ -9,6 +9,7 @@
 	var/hitsound = 'sound/weapons/smash.ogg'
 	var/breakable
 	var/parts_type
+	var/parts_amount
 	var/footstep_type
 	var/mob_offset
 
