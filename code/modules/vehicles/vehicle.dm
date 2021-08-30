@@ -340,3 +340,10 @@
 //-------------------------------------------------------
 /obj/vehicle/proc/update_stats()
 	return
+
+/obj/vehicle/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
+	//drunk driving
+	if(HAS_STATUS(mob, STAT_CONFUSE) && prob(20)) //vehicles tend to keep moving in the same direction
+		direction = turn(direction, pick(90, -90))
+	relaymove(mob, direction)
+	return MOVEMENT_HANDLED

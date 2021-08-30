@@ -1,24 +1,3 @@
-// Movement relayed to self handling
-/datum/movement_handler/mob/relayed_movement
-	var/prevent_host_move = FALSE
-	var/list/allowed_movers
-
-/datum/movement_handler/mob/relayed_movement/MayMove(var/mob/mover, var/is_external)
-	if(is_external)
-		return MOVEMENT_PROCEED
-	if(mover == mob && !(prevent_host_move && LAZYLEN(allowed_movers) && !LAZYISIN(allowed_movers, mover)))
-		return MOVEMENT_PROCEED
-	if(LAZYISIN(allowed_movers, mover))
-		return MOVEMENT_PROCEED
-
-	return MOVEMENT_STOP
-
-/datum/movement_handler/mob/relayed_movement/proc/AddAllowedMover(var/mover)
-	LAZYDISTINCTADD(allowed_movers, mover)
-
-/datum/movement_handler/mob/relayed_movement/proc/RemoveAllowedMover(var/mover)
-	LAZYREMOVE(allowed_movers, mover)
-
 // Admin object possession
 /datum/movement_handler/mob/admin_possess/DoMove(var/direction)
 	if(QDELETED(mob.control_object))
@@ -102,24 +81,7 @@
 
 // Buckle movement
 /datum/movement_handler/mob/buckle_relay/DoMove(var/direction, var/mover)
-	// TODO: Datumlize buckle-handling
-	if(istype(mob.buckled, /obj/vehicle))
-		//drunk driving
-		if(HAS_STATUS(mob, STAT_CONFUSE) && prob(20)) //vehicles tend to keep moving in the same direction
-			direction = turn(direction, pick(90, -90))
-		mob.buckled.relaymove(mob, direction)
-		return MOVEMENT_HANDLED
-
-	if(mob.buckled) // Wheelchair driving!
-		if(isspaceturf(mob.loc))
-			return // No wheelchair driving in space
-		if(istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
-			. = MOVEMENT_HANDLED
-			if(!mob.has_held_item_slot())
-				return // No hands to drive your chair? Tough luck!
-			//drunk wheelchair driving
-			direction = mob.AdjustMovementDirection(direction)
-			mob.buckled.DoMove(direction, mob)
+	return mob?.buckled?.handle_buckled_relaymove(src, mob, direction, mover)
 
 /datum/movement_handler/mob/buckle_relay/MayMove(var/mover)
 	if(mob.buckled)
