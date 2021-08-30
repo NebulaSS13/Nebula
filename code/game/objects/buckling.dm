@@ -4,6 +4,7 @@
 	var/buckle_allow_rotation = 0
 	var/buckle_dir = 0
 	var/buckle_lying = -1 //bed-like behavior, forces mob.lying = buckle_lying if != -1
+	var/buckle_layer_above = FALSE // Set to true to layer the object over the buckled mob if they are facing SOUTH.
 	var/list/buckle_pixel_shift //where the buckled mob should be pixel shifted to, or null for no pixel shift control. Can be associative for directional offsets
 	var/buckle_require_restraints = 0 //require people to be handcuffed before being able to buckle. eg: pipes
 	var/buckle_require_same_tile = FALSE
@@ -61,11 +62,8 @@
 		post_buckle_mob(.)
 
 /obj/proc/post_buckle_mob(mob/living/M)
-	refresh_pixel_offsets()
-	M.refresh_pixel_offsets()
-
-/mob/proc/can_be_buckled(var/mob/user)
-	. = user.Adjacent(src) && !istype(user, /mob/living/silicon/pai)
+	refresh_pixel_offsets(0)
+	M.refresh_pixel_offsets(0)
 
 /obj/proc/user_buckle_mob(mob/living/M, mob/user)
 	if(M != user && user.incapacitated())
@@ -80,8 +78,8 @@
 
 	//can't buckle unless you share locs so try to move M to the obj if buckle_require_same_tile turned off.
 	if(M.loc != src.loc)
-		if(!buckle_require_same_tile)
-			step_towards(M, src)
+		if(!buckle_require_same_tile && M.Adjacent(src))
+			M.forceMove(loc)
 		else
 			return FALSE
 

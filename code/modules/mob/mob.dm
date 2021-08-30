@@ -624,6 +624,13 @@
 		update_transform()
 
 /mob/proc/reset_layer()
+	if(buckled && buckled.buckle_layer_above)
+		plane = buckled.plane
+		layer = buckled.layer + ((buckled.dir == SOUTH) ? -0.1 : 0.1)
+	else
+		reset_layer_to_default()
+
+/mob/proc/reset_layer_to_default()
 	if(lying)
 		plane = DEFAULT_PLANE
 		layer = LYING_MOB_LAYER
