@@ -676,7 +676,7 @@ default behaviour is:
 	to_chat(src, "<span class='notice'>Remember to stay in character for a mob of this type!</span>")
 	return 1
 
-/mob/living/reset_layer()
+/mob/living/reset_layer_to_default()
 	if (jumping)
 		layer = VEHICLE_LOAD_LAYER
 	else if (hiding)

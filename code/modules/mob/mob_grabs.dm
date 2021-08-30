@@ -52,13 +52,6 @@
 	return mob_size	
 
 /mob/refresh_pixel_offsets(var/anim_time = 2)
-	if(isnull(pixel_offset_anim_time))
-		pixel_offset_anim_time = anim_time
-	else
-		pixel_offset_anim_time = min(pixel_offset_anim_time, anim_time)
-	addtimer(CALLBACK(src, .proc/rebuild_pixel_offsets), 0, TIMER_UNIQUE) // Avoid doing this repeatedly in a single tick.
-
-/mob/proc/rebuild_pixel_offsets()
 
 	var/last_plane =   plane
 	var/last_layer =   layer
@@ -84,20 +77,22 @@
 			var/adjust_layer = FALSE
 			for(var/obj/item/grab/G AS_ANYTHING in grabbed_by)
 				var/grab_dir = get_dir(G.assailant, src)
-				if(grab_dir)
-					switch(grab_dir)
-						if(NORTH)
-							new_pixel_y = max(new_pixel_y-G.current_grab.shift, default_pixel_y-G.current_grab.shift)
-						if(WEST)
-							new_pixel_y = min(new_pixel_x+G.current_grab.shift, default_pixel_x+G.current_grab.shift)
-						if(EAST)
-							new_pixel_y = max(new_pixel_x-G.current_grab.shift, default_pixel_x-G.current_grab.shift)
-						if(SOUTH)
-							new_pixel_y = min(new_pixel_y+G.current_grab.shift, default_pixel_y+G.current_grab.shift)
-							draw_under = FALSE
-					if(G.current_grab.adjust_plane)
-						adjust_layer = TRUE
-						new_plane = G.assailant.plane
+				if(grab_dir && G.current_grab.shift > 0)
+
+					if(grab_dir & WEST)
+						new_pixel_x = min(new_pixel_x+G.current_grab.shift, default_pixel_x+G.current_grab.shift)
+					else if(grab_dir & EAST)
+						new_pixel_x = max(new_pixel_x-G.current_grab.shift, default_pixel_x-G.current_grab.shift)
+					if(grab_dir & NORTH)
+						new_pixel_y = max(new_pixel_y-G.current_grab.shift, default_pixel_y-G.current_grab.shift)
+					else if(grab_dir & SOUTH)
+						new_pixel_y = min(new_pixel_y+G.current_grab.shift, default_pixel_y+G.current_grab.shift)
+						draw_under = FALSE
+
+				if(G.current_grab.adjust_plane)
+					adjust_layer = TRUE
+					new_plane = G.assailant.plane
+
 			if(adjust_layer)
 				new_layer = layer + (draw_under ? -0.01 : 0.01)
 
@@ -108,20 +103,24 @@
 		new_pixel_z += structure_offset
 
 		// Update offsets from our buckled atom.
-		if(buckled && buckled.buckle_pixel_shift)
-			var/list/pixel_shift = buckled.buckle_pixel_shift
-			if(islist(pixel_shift))
-				var/list/directional_offset = LAZYACCESS(pixel_shift, "[dir]")
-				if(islist(directional_offset))
-					pixel_shift = directional_offset
-				new_pixel_x += pixel_shift["x"] || 0
-				new_pixel_y += pixel_shift["y"] || 0
-				new_pixel_z += pixel_shift["z"] || 0
+		if(buckled)
+			if(buckled.buckle_pixel_shift)
+				var/list/pixel_shift = buckled.buckle_pixel_shift
+				if(islist(pixel_shift))
+					var/list/directional_offset = LAZYACCESS(pixel_shift, "[dir]")
+					if(islist(directional_offset))
+						pixel_shift = directional_offset
+					new_pixel_x += pixel_shift["x"] || 0
+					new_pixel_y += pixel_shift["y"] || 0
+					new_pixel_z += pixel_shift["z"] || 0
+			if(buckled.buckle_layer_above)
+				new_plane = buckled.plane
+				new_layer = buckled.layer + ((buckled.dir == SOUTH) ? -0.1 : 0.1)
 
 	// Apply offsets.
 	if(last_pixel_x != new_pixel_x || last_pixel_y != new_pixel_y || last_pixel_z != new_pixel_z)
-		if(pixel_offset_anim_time > 0)
-			animate(src, pixel_x = new_pixel_x, pixel_y = new_pixel_y, pixel_z = new_pixel_z, pixel_offset_anim_time, 1, (LINEAR_EASING|EASE_IN))
+		if(anim_time > 0)
+			animate(src, pixel_x = new_pixel_x, pixel_y = new_pixel_y, pixel_z = new_pixel_z, anim_time, 1, (LINEAR_EASING|EASE_IN))
 		else
 			pixel_x = new_pixel_x
 			pixel_y = new_pixel_y
@@ -131,4 +130,3 @@
 		plane = new_plane
 	if(new_layer != last_layer)
 		layer = new_layer
-	pixel_offset_anim_time = null

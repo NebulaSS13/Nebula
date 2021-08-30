@@ -167,14 +167,21 @@
 	name = "janicart"
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "pussywagon"
-	anchored = 1
-	density = 1
+	anchored = FALSE
+	density =  TRUE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+	buckle_layer_above = TRUE
+	buckle_movable = TRUE
+	movement_handlers = list(
+		/datum/movement_handler/deny_multiz, 
+		/datum/movement_handler/delay = list(1), 
+		/datum/movement_handler/move_relay_self
+	)
+
 	//copypaste sorry
 	var/amount_per_transfer_from_this = 5 //shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
-	var/obj/item/storage/bag/trash/mybag	= null
+	var/obj/item/storage/bag/trash/mybag = null
 	var/callme = "pimpin' ride"	//how do people refer to it?
-
 
 /obj/structure/bed/chair/janicart/Initialize()
 	buckle_pixel_shift = list(
@@ -188,30 +195,34 @@
 
 /obj/structure/bed/chair/janicart/examine(mob/user, distance)
 	. = ..()
-	if(distance > 1)
-		return
-
-	to_chat(user, "[html_icon(src)] This [callme] contains [reagents.total_volume] unit\s of water!")
-	if(mybag)
-		to_chat(user, "\A [mybag] is hanging on the [callme].")
-
+	if(distance <= 1)
+		to_chat(user, "[html_icon(src)] This [callme] contains [reagents.total_volume] unit\s of water!")
+		if(mybag)
+			to_chat(user, "\A [mybag] is hanging on the [callme].")
 
 /obj/structure/bed/chair/janicart/attackby(obj/item/I, mob/user)
+
 	if(istype(I, /obj/item/mop))
 		if(reagents.total_volume > 1)
 			reagents.trans_to_obj(I, 2)
-			to_chat(user, "<span class='notice'>You wet [I] in the [callme].</span>")
+			to_chat(user, SPAN_NOTICE("You wet [I] in the [callme]."))
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		else
-			to_chat(user, "<span class='notice'>This [callme] is out of water!</span>")
-	else if(istype(I, /obj/item/key))
-		to_chat(user, "Hold [I] in one of your hands while you drive this [callme].")
-	else if(istype(I, /obj/item/storage/bag/trash))
+			to_chat(user, SPAN_NOTICE("This [callme] is out of water!"))
+		return TRUE
+
+	if(istype(I, /obj/item/janicart_key))
+		to_chat(user, SPAN_NOTICE("Hold \the [I] in one of your hands while you drive this [callme]."))
+		return TRUE
+
+	if(istype(I, /obj/item/storage/bag/trash))
 		if(!user.unEquip(I, src))
 			return
-		to_chat(user, "<span class='notice'>You hook the trashbag onto the [callme].</span>")
+		to_chat(user, SPAN_NOTICE("You hook \the [I] onto the [callme]."))
 		mybag = I
+		return TRUE
 
+	. = ..()
 
 /obj/structure/bed/chair/janicart/attack_hand(mob/user)
 	if(mybag)
@@ -223,8 +234,9 @@
 /obj/structure/bed/chair/janicart/relaymove(mob/user, direction)
 	if(user.incapacitated(INCAPACITATION_DISRUPTED))
 		unbuckle_mob()
-	if(locate(/obj/item/key) in user.get_held_items())
-		Move(get_step(src, direction))
+	if(locate(/obj/item/janicart_key) in user.get_held_items())
+		step(src, direction)
+		set_dir(direction)
 	else
 		to_chat(user, SPAN_WARNING("You'll need the keys in one of your hands to drive this [callme]."))
 
@@ -232,9 +244,9 @@
 	if(buckled_mob)
 		if(prob(85))
 			return buckled_mob.bullet_act(Proj)
-	visible_message("<span class='warning'>[Proj] ricochets off the [callme]!</span>")
+	visible_message(SPAN_WARNING("\The [Proj] ricochets off the [callme]!"))
 
-/obj/item/key
+/obj/item/janicart_key
 	name = "key"
 	desc = "A keyring with a small steel key, and a pink fob reading \"Pussy Wagon\"."
 	icon = 'icons/obj/vehicles.dmi'

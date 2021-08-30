@@ -176,5 +176,3 @@
 	var/list/progressbars = null //for stacking do_after bars
 
 	var/datum/ai/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs.
-
-	var/tmp/pixel_offset_anim_time // Cache var for animation time supplied to pixel offset refreshes, due to use of unique timer

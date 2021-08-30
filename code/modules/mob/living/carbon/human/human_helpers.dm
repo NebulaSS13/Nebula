@@ -206,7 +206,7 @@
 	if(!heard_something)
 		to_chat(src, "<span class='notice'>You hear no movement but your own.</span>")
 
-/mob/living/carbon/human/reset_layer()
+/mob/living/carbon/human/reset_layer_to_default()
 	if(hiding)
 		layer = HIDING_MOB_LAYER
 	else if(lying)
