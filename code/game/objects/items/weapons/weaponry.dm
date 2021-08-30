@@ -179,6 +179,7 @@
 	return 1
 
 /obj/effect/energy_net/post_buckle_mob(mob/living/M)
+	..()
 	if(buckled_mob)
 		layer = ABOVE_HUMAN_LAYER
 		visible_message("\The [M] was caught in [src]!")

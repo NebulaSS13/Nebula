@@ -184,6 +184,7 @@
 	var/callme = "pimpin' ride"	//how do people refer to it?
 
 /obj/structure/bed/chair/janicart/Initialize()
+	// Handled in init due to dirs needing to be stringified
 	buckle_pixel_shift = list(
 		"[NORTH]" = list("x" =   0, "y" = 4, "z" = 0),
 		"[SOUTH]" = list("x" =   0, "y" = 7, "z" = 0),

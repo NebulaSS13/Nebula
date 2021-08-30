@@ -589,9 +589,3 @@ its easier to just keep the beam vertical.
 	M.Scale(icon_scale_x, icon_scale_y)
 	M.Turn(icon_rotation)
 	animate(src, transform = M, transform_animate_time)
-
-/atom/proc/refresh_pixel_offsets(var/anim_time = 2)
-	reset_plane_and_layer()
-	pixel_x = default_pixel_x
-	pixel_y = default_pixel_y
-	pixel_z = default_pixel_z 
