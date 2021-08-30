@@ -730,7 +730,7 @@ var/global/list/all_apcs = list()
 		. += area.usage(ENVIRON)
 
 /obj/machinery/power/apc/Process()
-	if(!area.requires_power)
+	if(!area?.requires_power)
 		return PROCESS_KILL
 
 	if(stat & (BROKEN|MAINT))
