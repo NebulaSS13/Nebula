@@ -4,20 +4,18 @@
 	var/list/prey = list()
 
 /mob/living/simple_animal/hostile/retaliate/beast/ListTargets(var/dist = 7)
-	var/list/see = ..()
-	if(see.len)
-		return see
-	if(prey.len)
-		. = list()
-		for(var/weakref/W in prey)
-			var/mob/M = W.resolve()
-			if(M)
-				. += M
-		return
-	if(hunger > 500) //time to look for some food
-		for(var/mob/living/L in view(src, dist))
-			if(!attack_same && L.faction != faction)
-				prey |= weakref(L)
+	. = ..()
+	if(!length(.))
+		if(length(prey))
+			. = list()
+			for(var/weakref/W in prey)
+				var/mob/M = W.resolve()
+				if(M)
+					. |= M
+		else if(hunger > 500) //time to look for some food
+			for(var/mob/living/L in view(src, dist))
+				if(!attack_same && L.faction != faction)
+					prey |= weakref(L)
 
 /mob/living/simple_animal/hostile/retaliate/beast/Life()
 	. = ..()

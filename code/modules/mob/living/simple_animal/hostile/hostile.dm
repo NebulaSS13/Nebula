@@ -155,8 +155,7 @@
 	walk(src, 0)
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
-	var/list/L = hearers(src, dist)
-	return L
+	return hearers(src, dist)-src
 
 /mob/living/simple_animal/hostile/proc/get_accuracy()
 	return Clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)
