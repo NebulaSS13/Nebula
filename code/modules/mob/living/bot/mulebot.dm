@@ -321,3 +321,8 @@
 				M.client.perspective = MOB_PERSPECTIVE
 				M.client.eye = src
 	busy = 0
+
+/mob/living/bot/mulebot/get_mob()
+	if(load && istype(load, /mob/living))
+		return list(src, load)
+	return src
