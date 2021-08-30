@@ -23,6 +23,7 @@
 	cold_damage_per_tick = 10	//same as heat_damage_per_tick, only if the bodytemperature it's lower than minbodytemp
 	unsuitable_atmos_damage = 10
 	natural_weapon = /obj/item/natural_weapon/clown
+	faction = "circus"
 
 /obj/item/natural_weapon/clown
 	name = "bike horn"
