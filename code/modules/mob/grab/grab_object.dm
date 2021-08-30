@@ -48,7 +48,7 @@
 	LAZYADD(affecting.grabbed_by, src) // This is how we handle affecting being deleted.
 	adjust_position()
 	action_used()
-	assailant.do_attack_animation(affecting)
+	INVOKE_ASYNC(assailant, /atom/movable/proc/do_attack_animation, affecting)
 	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	update_icon()
 
@@ -117,10 +117,10 @@
 		return TRUE
 
 /obj/item/grab/Destroy()
+	var/atom/old_affecting = affecting
 	if(affecting)
 		events_repository.unregister(/decl/observ/dismembered, affecting, src)
 		events_repository.unregister(/decl/observ/moved, affecting, src)
-		reset_position()
 		LAZYREMOVE(affecting.grabbed_by, src)
 		affecting.reset_plane_and_layer()
 		affecting = null
@@ -128,7 +128,9 @@
 		if(assailant.zone_sel)
 			events_repository.unregister(/decl/observ/zone_selected, assailant.zone_sel, src)
 		assailant = null
-	return ..()
+	. = ..()
+	if(old_affecting)
+		old_affecting.refresh_pixel_offsets(5)
 
 /*
 	This section is for newly defined useful procs.
@@ -221,6 +223,7 @@
 	var/decl/grab/downgrab = current_grab.downgrade(src)
 	if(downgrab)
 		current_grab = downgrab
+		adjust_position()
 		update_icon()
 
 /obj/item/grab/on_update_icon()
@@ -247,10 +250,7 @@
 	if(current_grab.same_tile)
 		affecting.forceMove(get_turf(assailant))
 		affecting.set_dir(assailant.dir)
-	affecting.adjust_pixel_offsets_for_grab(src, adir)
-
-/obj/item/grab/proc/reset_position()
-	affecting.reset_pixel_offsets_for_grab(src)
+	affecting.refresh_pixel_offsets(5)
 
 /*
 	This section is for the simple procs used to return things from current_grab.

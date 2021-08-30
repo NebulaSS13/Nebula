@@ -10,11 +10,5 @@
 		return FALSE
 	return TRUE
 
-/atom/movable/proc/reset_pixel_offsets_for_grab(var/obj/item/grab/G)
-	reset_plane_and_layer()
-
-/atom/movable/proc/adjust_pixel_offsets_for_grab(var/obj/item/grab/G, var/grab_dir)
-	reset_plane_and_layer()
-
 /atom/movable/proc/get_object_size()
 	return ITEM_SIZE_NORMAL

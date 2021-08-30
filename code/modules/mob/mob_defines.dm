@@ -106,9 +106,6 @@
 	var/timeofdeath = 0
 
 	var/bodytemperature = 310.055	//98.7 F
-	var/default_pixel_x = 0
-	var/default_pixel_y = 0
-	var/default_pixel_z = 0
 
 	var/shakecamera = 0
 	var/a_intent = I_HELP//Living
@@ -179,3 +176,5 @@
 	var/list/progressbars = null //for stacking do_after bars
 
 	var/datum/ai/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs.
+
+	var/tmp/pixel_offset_anim_time // Cache var for animation time supplied to pixel offset refreshes, due to use of unique timer

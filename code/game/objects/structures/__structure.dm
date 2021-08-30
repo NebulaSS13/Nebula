@@ -145,25 +145,34 @@
 		take_damage(dmg)
 
 /obj/structure/Destroy()
-	reset_mobs_offset()
 	var/turf/T = get_turf(src)
 	if(T)
 		T.fluid_update()
 	. = ..()
+	if(T)
+		for(var/atom/movable/AM in T)
+			AM.refresh_pixel_offsets()
 
-/obj/structure/Crossed(mob/living/M)
-	if(istype(M))
-		M.on_structure_offset(mob_offset)
-	..()
+/obj/structure/Crossed(O)
+	. = ..()
+	if(ismob(O))
+		var/mob/M = O
+		M.refresh_pixel_offsets()
 
-/obj/structure/proc/reset_mobs_offset()
-	for(var/mob/living/M in loc)
-		M.on_structure_offset(0)
+/obj/structure/Uncrossed(O)
+	. = ..()
+	if(ismob(O))
+		var/mob/M = O
+		M.refresh_pixel_offsets()
 
 /obj/structure/Move()
+	var/turf/T = get_turf(src)
 	. = ..()
 	if(. && !CanFluidPass())
 		fluid_update()
+		if(T)
+			for(var/atom/movable/AM in T)
+				AM.refresh_pixel_offsets()	
 
 /obj/structure/attack_hand(mob/user)
 	..()

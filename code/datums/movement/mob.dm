@@ -189,15 +189,12 @@
 				AM.glide_size = mob.glide_size // This is adjusted by grabs again from events/some of the procs below, but doing it here makes it more likely to work with recursive movement.
 				AM.DoMove(get_dir(get_turf(AM), old_turf), mob, TRUE)
 
-		for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
-			G.adjust_position()
-
 	for(var/obj/item/grab/G AS_ANYTHING in mob.get_active_grabs())
 		if(G.assailant_reverse_facing())
 			mob.set_dir(global.reverse_dir[direction])
 		G.assailant_moved()
-	for(var/obj/item/grab/G AS_ANYTHING in mob.grabbed_by)
-		G.adjust_position()
+	
+	mob.refresh_pixel_offsets()
 
 	if(direction & (UP|DOWN))
 		var/txt_dir = (direction & UP) ? "upwards" : "downwards"
