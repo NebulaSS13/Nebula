@@ -80,7 +80,7 @@
 	. = ..()
 	update_icon()
 	if(!c_tag)
-		if(istype(loc, /turf)) // Don't increase the count for cameras in robots etc.
+		if(isturf(loc))
 			var/area/A = get_area(src)
 			if(A)
 				for(var/obj/machinery/camera/C in A)
@@ -88,7 +88,10 @@
 					if(C.number)
 						number = max(number, C.number+1)
 				c_tag = "[A.name][number == 1 ? "" : " #[number]"]"
-			invalidateCameraCache()
+		if(!c_tag)	// Add a default c_tag in case the camera has been placed in an invalid location or inside another object.
+			c_tag = "Security Camera - [random_id(/obj/machinery/camera, 100,999)]"
+
+		invalidateCameraCache()
 	set_extension(src, /datum/extension/network_device/camera, null, null, null, TRUE, preset_channels, c_tag, cameranet_enabled, requires_connection)
 
 /obj/machinery/camera/Destroy()
