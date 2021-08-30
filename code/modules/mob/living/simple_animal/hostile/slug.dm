@@ -29,11 +29,10 @@ Small, little HP, poisonous.
 	return FALSE
 
 /mob/living/simple_animal/hostile/slug/ListTargets(var/dist = 7)
-	var/list/L = list()
-	for(var/a in hearers(src, dist))
-		if(!check_friendly_species(a))
-			L += a
-	return L
+	. = ..()
+	for(var/a in .)
+		if(check_friendly_species(a))
+			. -= a
 
 /mob/living/simple_animal/hostile/slug/get_scooped(var/mob/living/carbon/grabber)
 	if(check_friendly_species(grabber))

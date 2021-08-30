@@ -56,11 +56,11 @@ var/global/list/protected_objects = list(/obj/machinery,
 	if(.)
 		audible_emote("growls at [.]")
 
-/mob/living/simple_animal/hostile/mimic/ListTargets()
+/mob/living/simple_animal/hostile/mimic/ListTargets(var/dist = 7)
 	// Return a list of targets that isn't the creator
 	. = ..()
 	if(creator)
-		return . - creator.resolve()
+		. -= creator.resolve()
 
 /mob/living/simple_animal/hostile/mimic/proc/CopyObject(var/obj/O, var/mob/living/creator)
 
@@ -137,10 +137,8 @@ var/global/list/protected_objects = list(/obj/machinery,
 
 	var/awake = 0
 
-/mob/living/simple_animal/hostile/mimic/sleeping/ListTargets()
-	if(!awake)
-		return null
-	return ..()
+/mob/living/simple_animal/hostile/mimic/sleeping/ListTargets(var/dist = 7)
+	. = awake && ..()
 
 /mob/living/simple_animal/hostile/mimic/sleeping/proc/trigger()
 	if(!awake)

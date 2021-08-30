@@ -78,17 +78,11 @@
 			src.visible_message("<span class='warning'>[html_icon(src)] [src] suddenly lights up, and additional targetting vanes slide into place.</span>")
 			hostile_drone = 1
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/ListTargets()
-	if(hostile_drone)
-		var/list/targets = list()
-		for(var/mob/M in view(src, hostile_range))
-			if(M == src || istype(M, type))
-				continue
-			targets |= M
-
-		return targets
-	else
-		return ..()
+/mob/living/simple_animal/hostile/retaliate/malf_drone/ListTargets(var/dist = 7)
+	. = ..(hostile_drone ? hostile_range : dist)
+	for(var/mob/M in .)
+		if(istype(M, type))
+			. -= M
 
 //self repair systems have a chance to bring the drone back to life
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Life()
