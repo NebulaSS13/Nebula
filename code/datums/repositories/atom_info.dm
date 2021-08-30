@@ -5,6 +5,7 @@ var/global/repository/atom_info/atom_info_repository = new()
 	var/list/combined_worth_cache = list()
 	var/list/single_worth_cache =   list()
 	var/list/name_cache =           list()
+	var/list/matter_mult_cache =    list()
 
 /repository/atom_info/proc/create_key_for(var/path, var/material, var/amount)
 	. = "[path]"
@@ -41,6 +42,9 @@ var/global/repository/atom_info/atom_info_repository = new()
 	if(!name_cache[key])
 		instance = instance || get_instance_of(path, material, amount)
 		name_cache[key] = instance.name
+	if(!matter_mult_cache[key] && ispath(path, /obj))
+		var/obj/obj_instance = instance || get_instance_of(path, material, amount)
+		matter_mult_cache[key] = obj_instance.get_matter_amount_modifier()
 	if(!QDELETED(instance))
 		qdel(instance)
 
@@ -63,3 +67,8 @@ var/global/repository/atom_info/atom_info_repository = new()
 	var/key = create_key_for(path, material, amount)
 	update_cached_info_for(path, material, amount, key)
 	. = name_cache[key]
+
+/repository/atom_info/proc/get_matter_multiplier_for(var/path, var/material, var/amount)
+	var/key = create_key_for(path, material, amount)
+	update_cached_info_for(path, material, amount, key)
+	. = matter_mult_cache[key]
