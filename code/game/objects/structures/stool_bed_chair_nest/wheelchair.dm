@@ -36,18 +36,6 @@
 		return
 	..()
 
-/obj/structure/bed/chair/wheelchair/relaymove(mob/user, direction)
-	// Redundant check?
-	if(user.incapacitated())
-		return
-	if(propelled)
-		return
-
-	step(src, direction)
-	set_dir(direction)
-	if(bloodiness)
-		create_track()
-
 /obj/structure/bed/chair/wheelchair/attack_hand(mob/user)
 	user_unbuckle_mob(user)
 

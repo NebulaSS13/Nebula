@@ -50,6 +50,9 @@
 		return LYING_HUMAN_LAYER
 	. = ..()
 
+// If you ever want to change how a mob offsets by default, you MUST add the offset 
+// changes to this proc and call it from your new feature code. This prevents conflicting 
+// animations and offsets from getting weird and ovewriting each other.
 /mob/reset_offsets(var/anim_time = 2)
 
 	var/last_pixel_x = pixel_x

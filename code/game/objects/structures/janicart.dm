@@ -232,6 +232,12 @@
 	else
 		..()
 
+/obj/structure/bed/chair/janicart/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
+	if(isspaceturf(loc))
+		return
+	. = MOVEMENT_HANDLED
+	DoMove(mob.AdjustMovementDirection(direction), mob)
+
 /obj/structure/bed/chair/janicart/relaymove(mob/user, direction)
 	if(user.incapacitated(INCAPACITATION_DISRUPTED))
 		unbuckle_mob()

@@ -21,7 +21,7 @@
 	. = ..()
 	default_pixel_x = rand(-12,12)
 	default_pixel_y = rand(-12,12)
-	reset_offsets()
+	reset_offsets(0)
 
 /mob/living/simple_animal/aquatic/Life()
 	if(!submerged())
