@@ -1,0 +1,5 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - bugfix: DNA now properly keep track of facial hair color independently from hair
+      color as it was intended.
