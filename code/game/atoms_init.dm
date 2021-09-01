@@ -32,9 +32,23 @@
 /atom/proc/Initialize(mapload, ...)
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
+
 	if(atom_flags & ATOM_FLAG_INITIALIZED)
 		PRINT_STACK_TRACE("Warning: [src]([type]) initialized multiple times!")
 	atom_flags |= ATOM_FLAG_INITIALIZED
+
+	if(isnull(default_pixel_x))
+		default_pixel_x = pixel_x
+	else
+		pixel_x = default_pixel_x
+	if(isnull(default_pixel_y))
+		default_pixel_y = pixel_y
+	else
+		pixel_y = default_pixel_y
+	if(isnull(default_pixel_z))
+		default_pixel_z = pixel_z
+	else
+		pixel_z = default_pixel_z
 
 	if(light_power && light_range)
 		update_light()

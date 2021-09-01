@@ -11,6 +11,7 @@
 	toxicity_targets_organ = null
 	toxicity = 0
 	hidden_from_codex = TRUE
+	exoplanet_rarity = MAT_RARITY_NOWHERE // It's useless, don't use it.
 
 /decl/material/liquid/plasticide
 	name = "plasticide"
@@ -21,6 +22,7 @@
 	toxicity = 5
 	taste_mult = 1.2
 	metabolism = REM * 0.25
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/amatoxin
 	name = "amatoxin"
@@ -36,6 +38,7 @@
 	heating_message = "becomes clear."
 	taste_mult = 1.2
 	metabolism = REM * 0.25
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/carpotoxin
 	name = "carpotoxin"
@@ -52,6 +55,7 @@
 	heating_message = "becomes clear."
 	taste_mult = 1.2
 	metabolism = REM * 0.25
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/venom
 	name = "spider venom"
@@ -68,6 +72,7 @@
 	heating_message = "becomes clear."
 	taste_mult = 1.2
 	metabolism = REM * 0.25
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/venom/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(prob(REAGENT_VOLUME(holder, type)*2))
@@ -83,6 +88,7 @@
 	toxicity = 20
 	metabolism = REM * 2
 	toxicity_targets_organ = BP_HEART
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/cyanide/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -99,6 +105,7 @@
 	metabolism = REM * 2
 	toxicity_targets_organ = BP_HEART
 	taste_mult = 1.2
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/heartstopper/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -131,6 +138,7 @@
 		/decl/material/solid/metal/copper = 0.4
 	)
 	taste_mult = 1.2
+	exoplanet_rarity = MAT_RARITY_EXOTIC
 
 /decl/material/liquid/zombiepowder/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -171,6 +179,7 @@
 	)
 	metabolism = REM * 0.25
 	defoliant = TRUE
+	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/liquid/tar
 	name = "tar"
@@ -217,6 +226,7 @@
 	metabolism = REM * 5
 	overdose = 30
 	hidden_from_codex = TRUE
+	exoplanet_rarity = MAT_RARITY_EXOTIC
 	var/amount_to_zombify = 5
 
 /decl/material/liquid/zombie/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)

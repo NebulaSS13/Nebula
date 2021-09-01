@@ -214,6 +214,7 @@ By design, d1 is the smallest direction and d2 is the highest
 			return 1
 	return 0
 
+// TODO: generalize to matter list and parts_type.
 /obj/structure/cable/create_dismantled_products(turf/T)
 	SHOULD_CALL_PARENT(FALSE)
 	new /obj/item/stack/cable_coil(loc, (d1 ? 2 : 1), color)

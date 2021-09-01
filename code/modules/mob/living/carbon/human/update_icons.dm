@@ -675,12 +675,11 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
-	overlays_standing[HO_TAIL_OVER_LAYER] = null
+
+	overlays_standing[HO_TAIL_OVER_LAYER] =  null
 	overlays_standing[HO_TAIL_UNDER_LAYER] = null
-
 	var/tail_state = bodytype.get_tail(src)
-
-	if(tail_state && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
+	if(tail_state && (!wear_suit || !(wear_suit.flags_inv & HIDETAIL)))
 		var/icon/tail_s = get_tail_icon()
 		overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER] = image(tail_s, icon_state = "[tail_state]_s")
 		animate_tail_reset(0)
@@ -695,7 +694,8 @@ var/global/list/damage_icon_parts = list()
 		//generate a new one
 		var/tail_anim = bodytype.get_tail_animation(src) || bodytype.tail_icon
 		tail_icon = new/icon(tail_anim)
-		tail_icon.Blend(skin_colour, bodytype.tail_blend)
+		if(species.species_flags & HAS_SKIN_COLOR)
+			tail_icon.Blend(skin_colour, bodytype.tail_blend)
 		// The following will not work with animated tails.
 		var/use_tail = bodytype.get_tail_hair(src)
 		if(use_tail)

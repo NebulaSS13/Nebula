@@ -326,3 +326,6 @@
 */
 /atom/movable/proc/keybind_face_direction(direction)
 	return
+
+/atom/movable/proc/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
+	return

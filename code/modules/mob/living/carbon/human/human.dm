@@ -1103,9 +1103,7 @@
 	default_pixel_x = initial(pixel_x) + bodytype.pixel_offset_x
 	default_pixel_y = initial(pixel_y) + bodytype.pixel_offset_y
 	default_pixel_z = initial(pixel_z) + bodytype.pixel_offset_z
-	pixel_x = default_pixel_x
-	pixel_y = default_pixel_y
-	pixel_z = default_pixel_z
+	reset_offsets()
 
 	appearance_descriptors = null
 	if(LAZYLEN(species.appearance_descriptors))

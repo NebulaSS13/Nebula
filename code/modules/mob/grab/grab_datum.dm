@@ -17,7 +17,8 @@
 	var/force_danger = 0						// If the grab is strong enough to be able to force someone to do something harmful to them.
 	var/restrains = 0							// If the grab acts like cuffs and prevents action from the victim.
 	var/grab_slowdown = 0.15                    // Multiplier for the object size (w_class or mob_size) of the grabbed atom, applied as slowdown.
-	var/shift = 0
+	var/shift = 0                               // Whether or not this grab causes atoms to adjust their pixel offsets according to grabber dir.
+	var/adjust_plane = TRUE                     // Whether or not this grab causes atoms to adjust their plane/layer according to grabber dir.
 	var/success_up =   "You get a better grip on rep_affecting."
 	var/success_down = "You adjust your grip on rep_affecting."
 	var/fail_up =      "You can't get a better grip on rep_affecting!"

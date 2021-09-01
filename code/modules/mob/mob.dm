@@ -48,7 +48,8 @@
 
 /mob/Initialize()
 	. = ..()
-	skillset = new skillset(src)
+	if(ispath(skillset))
+		skillset = new skillset(src)
 	if(!move_intent)
 		move_intent = move_intents[1]
 	if(ispath(move_intent))
@@ -611,6 +612,7 @@
 		drop_held_items()
 	else
 		set_density(initial(density))
+
 	reset_layer()
 
 	//Temporarily moved here from the various life() procs
@@ -621,13 +623,6 @@
 		update_icon()
 	if( lying != last_lying )
 		update_transform()
-
-/mob/proc/reset_layer()
-	if(lying)
-		plane = DEFAULT_PLANE
-		layer = LYING_MOB_LAYER
-	else
-		reset_plane_and_layer()
 
 /mob/proc/facedir(var/ndir)
 	if(!canface() || moving || (buckled && (!buckled.buckle_movable && !buckled.buckle_allow_rotation)))

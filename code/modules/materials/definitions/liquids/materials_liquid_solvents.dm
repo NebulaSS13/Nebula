@@ -31,6 +31,7 @@
 	solvent_melt_dose = 4
 	solvent_max_damage = 60
 	value = 1.8
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/acid/stomach
 	name = "stomach acid"
@@ -40,6 +41,7 @@
 	color = "#d8ff00"
 	hidden_from_codex = TRUE
 	value = 0
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/liquid/acetone
 	name = "acetone"

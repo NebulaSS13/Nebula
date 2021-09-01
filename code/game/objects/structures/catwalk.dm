@@ -11,6 +11,8 @@
 	handle_generic_blending = TRUE
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	material = /decl/material/solid/metal/steel
+	parts_type = /obj/item/stack/material/rods
+	parts_amount = 2
 
 	var/hatch_open = FALSE
 	var/decl/flooring/tiling/plated_tile
@@ -69,10 +71,6 @@
 		overlays += I
 
 /obj/structure/catwalk/create_dismantled_products(var/turf/T)
-	if(material)
-		material.create_object(get_turf(src), 2, /obj/item/stack/material/rods)
-		matter -= material.type
-		material = null
 	if(plated_tile)
 		var/plate_path = plated_tile.build_type
 		new plate_path(T)

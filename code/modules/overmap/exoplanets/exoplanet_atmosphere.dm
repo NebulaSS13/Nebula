@@ -33,7 +33,18 @@
 	if(habitability_class == HABITABILITY_OKAY)
 		badflag |= XGM_GAS_CONTAMINANT
 
-	var/list/newgases = subtypesof(/decl/material/gas)
+	var/list/newgases = list()
+	var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
+	for(var/mat_type in all_materials)
+		var/decl/material/mat = all_materials[mat_type]
+		if(mat.exoplanet_rarity == MAT_RARITY_NOWHERE)
+			continue
+		if(isnull(mat.boiling_point) || mat.boiling_point > target_temp)
+			continue
+		if(!isnull(mat.gas_condensation_point) && mat.gas_condensation_point <= target_temp)
+			continue
+		newgases[mat.type] = mat.exoplanet_rarity
+
 	if(prob(50)) //alium gas should be slightly less common than mundane shit
 		newgases -= /decl/material/gas/alien
 
@@ -42,35 +53,32 @@
 		var/decl/material/mat = GET_DECL(g)
 		if(mat.gas_flags & badflag)
 			newgases -= g
-		if(mat.gas_condensation_point && mat.gas_condensation_point <= atmosphere.temperature)
-			newgases -= g
-		if(mat.boiling_point && mat.boiling_point >= atmosphere.temperature)
-			newgases -= g
 
-	var/gasnum = rand(1,4)
-	var/i = 1
-	while(i <= gasnum && total_moles && newgases.len)
-		if(badflag)
-			for(var/g in newgases)
-				var/decl/material/mat = GET_DECL(g)
-				if(mat.gas_flags & badflag)
-					newgases -= g
-		var/ng = pick_n_take(newgases)	//pick a gas
+	if(length(newgases))
+		var/gasnum = rand(1,4)
+		var/i = 1
+		while(i <= gasnum && total_moles && newgases.len)
+			if(badflag)
+				for(var/g in newgases)
+					var/decl/material/mat = GET_DECL(g)
+					if(mat.gas_flags & badflag)
+						newgases -= g
+			var/ng = pickweight(newgases)	//pick a gas
+			newgases -= ng
 
+			// Make sure atmosphere is not flammable
+			var/decl/material/mat = GET_DECL(ng)
+			if(mat.gas_flags & XGM_GAS_OXIDIZER)
+				badflag |= XGM_GAS_FUEL
+			if(mat.gas_flags & XGM_GAS_FUEL)
+				badflag |= XGM_GAS_OXIDIZER
 
-		// Make sure atmosphere is not flammable
-		var/decl/material/mat = GET_DECL(ng)
-		if(mat.gas_flags & XGM_GAS_OXIDIZER)
-			badflag |= XGM_GAS_FUEL
-		if(mat.gas_flags & XGM_GAS_FUEL)
-			badflag |= XGM_GAS_OXIDIZER
-
-		var/part = total_moles * rand(20,80)/100 //allocate percentage to it
-		if(i == gasnum || !newgases.len) //if it's last gas, let it have all remaining moles
-			part = total_moles
-		gas_list[ng] += part
-		total_moles = max(total_moles - part, 0)
-		i++
+			var/part = total_moles * rand(20,80)/100 //allocate percentage to it
+			if(i == gasnum || !newgases.len) //if it's last gas, let it have all remaining moles
+				part = total_moles
+			gas_list[ng] += part
+			total_moles = max(total_moles - part, 0)
+			i++
 
 	// Add all gasses, adjusted for target temperature and pressure
 	var/target_pressure = get_target_pressure()

@@ -288,18 +288,19 @@ var/global/list/all_apcs = list()
 			channel++
 
 	if(update_state < 0)
-		pixel_x = 0
-		pixel_y = 0
+		default_pixel_x = 0
+		default_pixel_y = 0
 		var/turf/T = get_step(get_turf(src), dir)
 		if(istype(T) && T.density)
 			if(dir == SOUTH)
-				pixel_y = -22
+				default_pixel_y = -22
 			else if(dir == NORTH)
-				pixel_y = 22
+				default_pixel_y = 22
 			else if(dir == EAST)
-				pixel_x = 22
+				default_pixel_x = 22
 			else if(dir == WEST)
-				pixel_x = -22
+				default_pixel_x = -22
+		reset_offsets()
 
 	var/update = check_updates() 		//returns 0 if no need to update icons.
 						// 1 if we need to update the icon_state

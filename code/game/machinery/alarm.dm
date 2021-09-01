@@ -309,18 +309,19 @@
 
 /obj/machinery/alarm/on_update_icon()
 	// Set pixel offsets
-	pixel_x = 0
-	pixel_y = 0
+	default_pixel_x = 0
+	default_pixel_y = 0
 	var/turf/T = get_step(get_turf(src), turn(dir, 180))
 	if(istype(T) && T.density)
 		if(dir == NORTH)
-			pixel_y = -21
+			default_pixel_y = -21
 		else if(dir == SOUTH)
-			pixel_y = 21
+			default_pixel_y = 21
 		else if(dir == WEST)
-			pixel_x = 21
+			default_pixel_x = 21
 		else if(dir == EAST)
-			pixel_x = -21
+			default_pixel_x = -21
+	reset_offsets(0)
 
 	// Broken or deconstructed states
 	if(!istype(construct_state, /decl/machine_construction/wall_frame/panel_closed))
@@ -847,19 +848,20 @@ FIRE ALARM
 /obj/machinery/firealarm/on_update_icon()
 	overlays.Cut()
 
-	pixel_x = 0
-	pixel_y = 0
+	default_pixel_x = 0
+	default_pixel_y = 0
 	var/walldir = (dir & (NORTH|SOUTH)) ? global.reverse_dir[dir] : dir
 	var/turf/T = get_step(get_turf(src), walldir)
 	if(istype(T) && T.density)
 		if(dir == SOUTH)
-			pixel_y = 21
+			default_pixel_y = 21
 		else if(dir == NORTH)
-			pixel_y = -21
+			default_pixel_y = -21
 		else if(dir == EAST)
-			pixel_x = 21
+			default_pixel_x = 21
 		else if(dir == WEST)
-			pixel_x = -21
+			default_pixel_x = -21
+	reset_offsets(0)
 
 	icon_state = "casing"
 	if(construct_state && !istype(construct_state, /decl/machine_construction/wall_frame/panel_closed))

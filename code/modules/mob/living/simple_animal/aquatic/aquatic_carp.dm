@@ -19,5 +19,4 @@
 	. = ..()
 	default_pixel_x = rand(-8,8)
 	default_pixel_y = rand(-8,8)
-	pixel_x = default_pixel_x
-	pixel_y = default_pixel_y
+	reset_offsets(0)

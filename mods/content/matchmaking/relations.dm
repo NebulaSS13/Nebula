@@ -2,6 +2,11 @@
 	var/list/relations
 	var/list/relations_info
 
+/datum/category_group/player_setup_category/relations_preferences
+	name = "Matchmaking"
+	sort_order = 6.5 // someone should really redo how these work
+	category_item_type = /datum/category_item/player_setup_item/relations
+
 /datum/category_item/player_setup_item/relations
 	name = "Matchmaking"
 	sort_order = 1
