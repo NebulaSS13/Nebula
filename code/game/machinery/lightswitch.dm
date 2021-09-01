@@ -77,3 +77,10 @@
 		playsound(src, "switch", 30)
 		set_state(!on)
 		return TRUE
+
+/obj/machinery/light_switch/attackby(obj/item/I, mob/user)
+	. = ..()
+	if(!.)
+		to_chat(user, SPAN_NOTICE("You flick \the [src] with \the [I]."))
+		interface_interact(user)
+		return TRUE

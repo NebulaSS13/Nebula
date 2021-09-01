@@ -206,3 +206,6 @@
 
 /obj/get_object_size()
 	return w_class
+
+/obj/get_mob()
+	return buckled_mob

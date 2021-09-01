@@ -1041,3 +1041,6 @@
 			break
 	if(old_zflags != z_flags)
 		UPDATE_OO_IF_PRESENT
+
+/mob/get_mob()
+	return src
