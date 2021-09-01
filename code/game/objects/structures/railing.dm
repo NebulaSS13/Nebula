@@ -13,6 +13,8 @@
 	material = DEFAULT_FURNITURE_MATERIAL
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	maxhealth = 100
+	parts_amount = 2
+	parts_type = /obj/item/stack/material/strut
 
 	var/painted_color
 	var/broken =    FALSE

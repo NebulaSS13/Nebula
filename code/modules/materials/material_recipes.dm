@@ -92,3 +92,4 @@
 	. += new/datum/stack_recipe/furniture/rack(src)
 	. += new/datum/stack_recipe/butcher_hook(src)
 	. += new/datum/stack_recipe/furniture/bed(src)
+	. += new/datum/stack_recipe/furniture/machine(src)

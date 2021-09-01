@@ -106,3 +106,11 @@
 		/decl/material/solid/glass =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2),
 		/decl/material/solid/plastic = CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2)
 	)
+
+/datum/fabricator_recipe/struts
+	path = /obj/item/stack/material/strut/mapped/steel
+
+/datum/fabricator_recipe/fiberglass/get_resources()
+	resources = list(
+		/decl/material/solid/metal/steel =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2),
+	)

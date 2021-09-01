@@ -16,6 +16,8 @@
 	maxhealth = 10
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_DESC
+	parts_amount = 2
+	parts_type = /obj/item/stack/material/strut
 
 	var/can_flip = TRUE
 	var/is_flipped = FALSE

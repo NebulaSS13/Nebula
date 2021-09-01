@@ -21,6 +21,8 @@
 	material = DEFAULT_FURNITURE_MATERIAL
 	material_alteration = MAT_FLAG_ALTERATION_ALL
 	tool_interaction_flags = TOOL_INTERACTION_DECONSTRUCT
+	parts_amount = 2
+	parts_type = /obj/item/stack/material/strut
 
 /obj/structure/bed/get_base_value()
 	. = round(..() * 2.5) // Utility structures should be worth more than their matter (wheelchairs, rollers, etc).
