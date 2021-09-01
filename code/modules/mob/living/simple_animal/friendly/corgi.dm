@@ -31,6 +31,16 @@
 		)
 	. = ..()
 
+/mob/living/simple_animal/corgi/harvest_skin()
+	. = ..()
+	. += new/obj/item/corgi_hide(get_turf(src))
+
+/obj/item/corgi_hide
+	name = "corgi hide"
+	desc = "The by-product of corgi farming."
+	icon = 'icons/obj/items/sheet_hide.dmi'
+	icon_state = "sheet-corgi"
+
 //IAN! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Ian
 	name = "Ian"

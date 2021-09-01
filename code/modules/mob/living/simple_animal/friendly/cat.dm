@@ -127,6 +127,16 @@
 /mob/living/simple_animal/cat/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	. = ..()
 	set_flee_target(TT.thrower? TT.thrower : src.loc)
+	
+/mob/living/simple_animal/cat/harvest_skin()
+	. = ..()
+	. += new/obj/item/cat_hide(get_turf(src))
+
+/obj/item/cat_hide
+	name = "cat hide"
+	desc = "The by-product of cat farming."
+	icon = 'icons/obj/items/sheet_hide.dmi'
+	icon_state = "sheet-cat" 
 
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff
