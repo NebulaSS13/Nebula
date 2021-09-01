@@ -14,7 +14,7 @@
 		welcome_text += "Scan results show the following points of interest:<br />"
 
 		for(var/zlevel in map_sectors)
-			var/obj/effect/overmap/visitable/O = map_sectors[zlevel]
+			var/obj/effect/overmap/visitable/O = global.overmap_sectors[zlevel]
 			if(O.name == exodus.name)
 				continue
 			if(istype(O, /obj/effect/overmap/visitable/ship/landable)) //Don't show shuttles

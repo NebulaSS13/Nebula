@@ -16,7 +16,6 @@
 	boss_short    = "Admin"
 	company_name  = "Free Trade Union Residual Delta"
 	company_short = "RD"
-	overmap_event_areas = 11
 
 	default_law_type = /datum/ai_laws/nanotrasen
 

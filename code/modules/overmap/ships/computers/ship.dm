@@ -7,6 +7,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	var/obj/effect/overmap/visitable/ship/linked
 	var/list/viewers // Weakrefs to mobs in direct-view mode.
 	var/extra_view = 0 // how much the view is increased by when the mob is in overmap mode.
+	var/overmap_id = OVERMAP_ID_SPACE
 
 // A late init operation called in SSshuttle, used to attach the thing to the right ship.
 /obj/machinery/computer/ship/proc/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)

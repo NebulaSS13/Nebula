@@ -46,7 +46,7 @@
 	set category = "IC"
 	set src in view()
 
-	if(!global.using_map.use_overmap)
+	if(!global.overmaps_by_name[OVERMAP_ID_SPACE])
 		return
 	if(!CanInteract(usr, global.conscious_topic_state))
 		return

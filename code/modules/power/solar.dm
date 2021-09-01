@@ -20,6 +20,7 @@ var/global/list/solars_list = list()
 	var/ndir = SOUTH // target dir
 	var/turn_angle = 0
 	var/obj/machinery/power/solar_control/control = null
+	var/static/overmap_id = OVERMAP_ID_SPACE
 
 /obj/machinery/power/solar/improved
 	name = "improved solar panel"
@@ -174,8 +175,8 @@ var/global/list/solars_list = list()
 
 	// On planets, we take fewer steps because the light is mostly up
 	// Also, many planets barely have any spots with enough clear space around
-	if(global.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
+	if(isturf(loc))
+		var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[loc.z]"]
 		if(istype(E))
 			steps = 5
 

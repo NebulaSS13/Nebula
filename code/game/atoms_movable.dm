@@ -276,8 +276,9 @@
 	if(!global.universe.OnTouchMapEdge(src))
 		return
 
-	if(global.using_map.use_overmap)
-		overmap_spacetravel(get_turf(src), src)
+	var/datum/overmap/overmap = global.overmaps_by_name[OVERMAP_ID_SPACE]
+	if(overmap)
+		overmap.travel(get_turf(src), src)
 		return
 
 	var/new_x

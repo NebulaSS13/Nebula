@@ -88,10 +88,8 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/flags = 0
 	var/evac_controller_type = /datum/evacuation_controller
-	var/use_overmap = 0		//If overmap should be used (including overmap space travel override)
-	var/overmap_size = 20		//Dimensions of overmap zlevel if overmap is used.
-	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
-	var/overmap_event_areas = 0 //How many event "clouds" will be generated
+	var/list/overmap_ids // Assoc list of overmap ID to overmap type, leave empty to disable overmap.
+
 	var/pray_reward_type = /obj/item/chems/food/cookie // What reward should be given by admin when a prayer is received?
 	var/list/map_markers_to_load
 
@@ -162,6 +160,9 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	if(default_spawn && !(default_spawn in allowed_spawns))
 		PRINT_STACK_TRACE("Map datum [type] has default spawn point [default_spawn] not in the allowed spawn list.")
+
+	create_overmaps()
+
 	for(var/spawn_type in allowed_spawns)
 		allowed_spawns -= spawn_type
 		allowed_spawns += GET_DECL(spawn_type)
@@ -239,7 +240,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 #endif
 
 /datum/map/proc/build_exoplanets()
-	if(!use_overmap)
+	if(!length(overmap_ids))
 		return
 	if(LAZYLEN(planet_size))
 		if(world.maxx < planet_size[1])
@@ -287,7 +288,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		INCREMENT_WORLD_Z_SIZE
 		empty_levels = list(world.maxz)
 	return pick(empty_levels)
-
 
 /datum/map/proc/setup_economy()
 	news_network.CreateFeedChannel("News Daily", "Minister of Information", 1, 1)
@@ -420,3 +420,11 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(!H.equip_to_slot(pass, slot_in_backpack_str))
 		H.put_in_hands(pass)
 
+/datum/map/proc/create_overmaps()
+	for(var/overmap_id in overmap_ids)
+		var/overmap_type = overmap_ids[overmap_id] || /datum/overmap
+		new overmap_type(overmap_id)
+
+/datum/map/proc/populate_overmap_events()
+	for(var/overmap_id in global.overmaps_by_name)
+		SSmapping.overmap_event_handler.create_events(global.overmaps_by_name[overmap_id])

@@ -18,14 +18,15 @@
 	material = /decl/material/solid/metal/aliumium
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	var/active = 0
+	var/static/overmap_id = OVERMAP_ID_SPACE
 
 /obj/structure/monolith/Initialize()
 	. = ..()
 	icon_state = "jaggy[rand(1,4)]"
-	if(global.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
-		if(istype(E))
-			desc += "\nThere are images on it: [E.get_engravings()]"
+
+	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
+	if(istype(E))
+		desc += "\nThere are images on it: [E.get_engravings()]"
 	update_icon()
 
 /obj/structure/monolith/on_update_icon()
@@ -48,8 +49,8 @@
 
 /obj/structure/monolith/attack_hand(mob/user)
 	visible_message("[user] touches \the [src].")
-	if(global.using_map.use_overmap && istype(user,/mob/living/carbon/human))
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
+	if(overmap_id && istype(user, /mob/living/carbon/human))
+		var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
 		if(istype(E))
 			var/mob/living/carbon/human/H = user
 			if(!H.isSynthetic())

@@ -7,15 +7,22 @@
 	hazard_by_turf = list()
 	ship_events = list()
 
-/decl/overmap_event_handler/proc/create_events(var/z_level, var/overmap_size, var/number_of_events)
+/decl/overmap_event_handler/proc/create_events(var/datum/overmap/overmap)
+
+	if(!istype(overmap))
+		PRINT_STACK_TRACE("Invalid overmap passed to create_events(): [overmap || "NULL"]")
+
+	if(!length(overmap.valid_event_types))
+		return
+
 	// Acquire the list of not-yet utilized overmap turfs on this Z-level
-	var/list/candidate_turfs = block(locate(OVERMAP_EDGE, OVERMAP_EDGE, z_level),locate(overmap_size - OVERMAP_EDGE, overmap_size - OVERMAP_EDGE,z_level))
+	var/list/candidate_turfs = block(locate(OVERMAP_EDGE, OVERMAP_EDGE, overmap.assigned_z),locate(overmap.map_size_x - OVERMAP_EDGE, overmap.map_size_y - OVERMAP_EDGE, overmap.assigned_z))
 	candidate_turfs = where(candidate_turfs, /proc/can_not_locate, /obj/effect/overmap/visitable)
 
-	for(var/i = 1 to number_of_events)
+	for(var/i = 1 to overmap.event_areas)
 		if(!candidate_turfs.len)
 			break
-		var/overmap_event_type = pick(subtypesof(/datum/overmap_event))
+		var/overmap_event_type = pick(overmap.valid_event_types)
 		var/datum/overmap_event/datum_spawn = new overmap_event_type
 
 		var/list/event_turfs = acquire_event_turfs(datum_spawn.count, datum_spawn.radius, candidate_turfs, datum_spawn.continuous)
@@ -260,6 +267,7 @@
 	var/hazards
 	var/opacity = 1
 	var/continuous = TRUE //if it should form continous blob, or can have gaps
+	var/overmap_id = OVERMAP_ID_SPACE
 
 /datum/overmap_event/meteor
 	name = "asteroid field"

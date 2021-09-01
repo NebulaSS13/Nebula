@@ -17,8 +17,7 @@
 	player_levels =  list(1,2)
 	admin_levels =   list(3,4)
 
-	overmap_event_areas = 11
-	use_overmap = TRUE
+	overmap_ids = list(OVERMAP_ID_SPACE)
 	num_exoplanets = 1
 
 	lobby_screens = list(

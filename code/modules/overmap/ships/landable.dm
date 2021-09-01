@@ -52,7 +52,7 @@
 	if(!child_shuttle || !istype(child_shuttle))
 		return
 	if(child_shuttle.current_location.flags & SLANDMARK_FLAG_DISCONNECTED) // Keep an eye on the distance between the shuttle and the sector if we aren't fully docked.
-		var/obj/effect/overmap/visitable/ship/landable/encounter = map_sectors["[child_shuttle.current_location.z]"]
+		var/obj/effect/overmap/visitable/ship/landable/encounter = global.overmap_sectors["[child_shuttle.current_location.z]"]
 		if((get_dist(src, encounter) > min(child_shuttle.range, 1))) // Some leeway so 0 range shuttles are still able to chase.
 			child_shuttle.attempt_force_move(landmark)
 		if(istype(encounter))
@@ -82,9 +82,13 @@
 		..()
 		return // it actually doesn't matter what we do in this case
 
+	var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
+	if(!istype(overmap))
+		PRINT_STACK_TRACE("Landable overmap object failed to look up overmap [overmap_id].")
+
 	// Attempt to find a safe and random overmap turf to start on
 	var/list/candidates = list()
-	for(var/turf/T in block(locate(OVERMAP_EDGE, OVERMAP_EDGE, global.using_map.overmap_z), locate(global.using_map.overmap_size - OVERMAP_EDGE, global.using_map.overmap_size - OVERMAP_EDGE, global.using_map.overmap_z)))
+	for(var/turf/T in block(locate(OVERMAP_EDGE, OVERMAP_EDGE, overmap.assigned_z), locate(overmap.map_size_x - 1, overmap.map_size_y - 1, overmap.assigned_z)))
 		if(locate(/obj/effect/overmap) in T)
 			continue
 		candidates += T
@@ -142,7 +146,7 @@
 	. = ..()
 
 /obj/effect/shuttle_landmark/ship/Destroy()
-	var/obj/effect/overmap/visitable/ship/landable/ship = map_sectors["[z]"]
+	var/obj/effect/overmap/visitable/ship/landable/ship = global.overmap_sectors["[z]"]
 	if(istype(ship) && ship.landmark == src)
 		ship.landmark = null
 	. = ..()
@@ -206,7 +210,7 @@
 	on_landing(from, into)
 
 /obj/effect/overmap/visitable/ship/landable/proc/on_landing(obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
-	var/obj/effect/overmap/visitable/target = map_sectors["[into.z]"]
+	var/obj/effect/overmap/visitable/target = global.overmap_sectors["[into.z]"]
 	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
 	if(into.landmark_tag == shuttle_datum.motherdock) // If our motherdock is a landable ship, it won't be found properly here so we need to find it manually.
 		for(var/obj/effect/overmap/visitable/ship/landable/landable in SSshuttle.ships)
@@ -234,7 +238,7 @@
 			return "Docked with an unknown object."
 		if(SHIP_STATUS_ENCOUNTER)
 			var/datum/shuttle/autodock/overmap/child_shuttle = SSshuttle.shuttles[shuttle]
-			var/obj/effect/overmap/visitable/location = map_sectors["[child_shuttle.current_location.z]"]
+			var/obj/effect/overmap/visitable/location = global.overmap_sectors["[child_shuttle.current_location.z]"]
 			return "Maneuvering nearby \the [location.name]."
 		if(SHIP_STATUS_TRANSIT)
 			return "Maneuvering under secondary thrust."

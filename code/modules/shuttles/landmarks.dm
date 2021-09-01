@@ -21,6 +21,7 @@
 	var/turf/base_turf
 	//Type path of a shuttle to which this landmark is restricted, null for generic waypoint.
 	var/shuttle_restricted
+	var/overmap_id = OVERMAP_ID_SPACE
 	var/flags = 0
 
 /obj/effect/shuttle_landmark/Initialize()
@@ -46,8 +47,9 @@
 	docking_controller = SSshuttle.docking_registry[docking_tag]
 	if(!istype(docking_controller))
 		log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
-	if(global.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/location = map_sectors["[z]"]
+
+	if(overmap_id)
+		var/obj/effect/overmap/visitable/location = global.overmap_sectors["[z]"]
 		if(location && location.docking_codes)
 			docking_controller.docking_codes = location.docking_codes
 
@@ -58,9 +60,9 @@
 		ADJUST_TAG_VAR(docking_controller, map_hash)
 
 /obj/effect/shuttle_landmark/forceMove()
-	var/obj/effect/overmap/visitable/map_origin = map_sectors["[z]"]
+	var/obj/effect/overmap/visitable/map_origin = global.overmap_sectors["[z]"]
 	. = ..()
-	var/obj/effect/overmap/visitable/map_destination = map_sectors["[z]"]
+	var/obj/effect/overmap/visitable/map_destination = global.overmap_sectors["[z]"]
 	if(map_origin != map_destination)
 		if(map_origin)
 			map_origin.remove_landmark(src, shuttle_restricted)

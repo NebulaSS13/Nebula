@@ -37,8 +37,10 @@
 		to_chat(user, SPAN_WARNING("The markings on this are useless!"))
 
 /obj/item/blueprints/proc/set_valid_z_levels()
-	if(global.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/sector/S = map_sectors["[get_z(src)]"]
+
+	var/turf/T = get_turf(src)
+	if(istype(T) && length(global.using_map.overmap_ids))
+		var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors["[T.z]"]
 		if(!S) // The blueprints are useless now, but keep them around for fluff.
 			desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your wherabouts."
 			return FALSE
@@ -60,19 +62,21 @@
 	icon_state = "blueprints2"
 
 /obj/item/blueprints/outpost/attack_self(mob/user)
-	var/obj/effect/overmap/visitable/sector/S = map_sectors["[get_z(user)]"]
+	var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors["[get_z(user)]"]
 	area_prefix = S.name
 	. = ..()
 
 /obj/item/blueprints/outpost/set_valid_z_levels()
-	if(!global.using_map.use_overmap)
-		desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your wherabouts."
-		return FALSE
-	
-	desc = "Blueprints for the daring souls wanting to establish a planetary outpost. Has some sketchy looking stains and what appears to be bite holes."
-	var/area/overmap/map = locate() in world
-
-	for(var/obj/effect/overmap/visitable/sector/exoplanet/E in map)
-		valid_z_levels += E.map_z
-	
-	return TRUE
+	var/turf/T = get_turf(src)
+	if(istype(T) && length(global.using_map.overmap_ids))
+		var/datum/overmap/overmap = global.overmaps_by_name[OVERMAP_ID_SPACE]
+		if(istype(overmap))
+			T = locate(1, 1, overmap.assigned_z)
+			var/area/overmap/map = T && get_area(T)
+			if(istype(map))
+				desc = "Blueprints for the daring souls wanting to establish a planetary outpost. Has some sketchy looking stains and what appears to be bite holes."
+				for(var/obj/effect/overmap/visitable/sector/exoplanet/E in map)
+					valid_z_levels |= E.map_z
+				return TRUE
+	desc = "Some dusty old blueprints. The markings are old, and seem entirely irrelevant for your wherabouts."
+	return FALSE

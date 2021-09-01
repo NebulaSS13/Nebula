@@ -115,9 +115,9 @@
 /mob/living/exosuit/space_do_move()
 	return 1
 
-/mob/living/exosuit/lost_in_space()
+/mob/living/exosuit/overmap_can_discard()
 	for(var/atom/movable/AM in contents)
-		if(!AM.lost_in_space())
+		if(!AM.overmap_can_discard())
 			return FALSE
 	return !pilots.len
 
