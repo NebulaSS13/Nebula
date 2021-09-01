@@ -72,7 +72,6 @@
 	natural_weapon = /obj/item/natural_weapon/horror
 
 	wizardy_spells = list(/spell/targeted/torment)
-	mob_icon_state_flags = (MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE|MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_EYES_STATE|MOB_ICON_NO_DEAD_STATE)
 
 /obj/item/natural_weapon/horror
 	name = "foul touch"
@@ -105,7 +104,6 @@
 	name = "elderly mouse"
 	desc = "A small rodent. It looks very old."
 	icon = 'icons/mob/simple_animal/mouse_gray.dmi'
-	mob_icon_state_flags = (MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_REST_STATE|MOB_ICON_NO_EYES_STATE)
 
 	speak_emote = list("squeeks")
 	holder_type = /obj/item/holder/mouse
@@ -138,4 +136,3 @@
 	maxHealth = 25
 	natural_weapon = /obj/item/natural_weapon/claws/weak
 	wizardy_spells = list(/spell/targeted/subjugation)
-	mob_icon_state_flags = (MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_EYES_STATE)

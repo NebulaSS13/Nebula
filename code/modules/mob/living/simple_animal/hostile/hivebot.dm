@@ -24,7 +24,6 @@
 	bone_amount =   0
 	skin_material = null
 	skin_amount =   0
-	mob_icon_state_flags = (MOB_ICON_NO_DEAD_STATE|MOB_ICON_NO_EYES_STATE|MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE)
 
 /mob/living/simple_animal/hostile/hivebot/range
 	desc = "A junky looking robot with four spiky legs. It's equipped with some kind of small-bore gun."
@@ -65,7 +64,6 @@ Teleporter beacon, and its subtypes
 	status_flags = 0
 	anchored = 1
 	stop_automated_movement = 1
-	mob_icon_state_flags = MOB_ICON_SKIP_ALL
 
 	var/bot_type = /mob/living/simple_animal/hostile/hivebot
 	var/bot_amt = 10
@@ -155,7 +153,6 @@ The megabot
 
 	pixel_x = -32
 	default_pixel_x = -32
-	mob_icon_state_flags = (MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE|MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_EYES_STATE)
 
 	var/attack_mode = ATTACK_MODE_MELEE
 	var/num_shots

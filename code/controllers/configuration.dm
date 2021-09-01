@@ -336,9 +336,9 @@ var/global/list/gamemode_cache = list()
 					iterative_explosives_z_multiplier = text2num(value)
 
 				if ("custom_item_icon_location")
-					config.custom_icon_icon_location = value
+					config.custom_item_icon_location = value
 
-				if ("custom_item_icon_location")
+				if ("custom_icon_icon_location")
 					config.custom_icon_icon_location = value
 
 				if ("log_ooc")

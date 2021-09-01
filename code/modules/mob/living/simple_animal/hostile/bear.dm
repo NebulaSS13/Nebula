@@ -17,8 +17,6 @@
 	natural_weapon = /obj/item/natural_weapon/claws/strong
 	can_escape = TRUE
 	faction = "russian"
-	mob_icon_state_flags = (MOB_ICON_NO_REST_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_EYES_STATE)
-
 
 	//Space bears aren't affected by atmos.
 	min_gas = null

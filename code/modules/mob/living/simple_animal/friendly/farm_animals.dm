@@ -95,7 +95,6 @@
 	turns_per_move = 5
 	see_in_dark = 6
 	health = 50
-	mob_icon_state_flags = (MOB_ICON_NO_REST_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_EYES_STATE)
 
 	meat_type = /obj/item/chems/food/meat/beef
 	meat_amount = 6
@@ -157,7 +156,6 @@
 	health = 1
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	mob_size = MOB_SIZE_MINISCULE
-	mob_icon_state_flags = (MOB_ICON_NO_REST_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_EYES_STATE)
 
 	meat_type = /obj/item/chems/food/meat/chicken
 	meat_amount = 1

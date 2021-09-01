@@ -43,8 +43,6 @@
 
 	glowing_eyes = TRUE
 
-	mob_icon_state_flags = (MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE)
-
 	var/poison_per_bite = 6
 	var/poison_type = /decl/material/liquid/venom
 	var/busy = 0

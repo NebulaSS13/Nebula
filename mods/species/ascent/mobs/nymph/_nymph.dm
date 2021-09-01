@@ -32,7 +32,6 @@
 	possession_candidate = 1
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	hud_type = /datum/hud/ascent_nymph
-	mob_icon_state_flags = (MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_EYES_STATE|MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_REST_STATE)
 
 	var/obj/item/holding_item
 	var/crystal_reserve = 1000

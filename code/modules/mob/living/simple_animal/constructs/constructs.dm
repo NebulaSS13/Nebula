@@ -39,7 +39,6 @@
 
 	z_flags = ZMM_MANGLE_PLANES
 	glowing_eyes = TRUE
-	mob_icon_state_flags = (MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE)
 
 	var/nullblock = 0
 	var/list/construct_spells = list()

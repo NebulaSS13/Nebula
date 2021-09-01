@@ -408,7 +408,6 @@
 	alpha = 127
 	meat_amount = 0
 	meat_type = null
-	mob_icon_state_flags = (MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_DEAD_STATE|MOB_ICON_NO_REST_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_EYES_STATE)
 
 /mob/living/simple_animal/hostile/carp/holodeck/carp_randomify()
 	return

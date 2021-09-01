@@ -18,8 +18,6 @@
 
 	icon_state = ICON_STATE_WORLD
 
-	mob_icon_state_flags = (MOB_ICON_NO_EYES_STATE|MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE)
-
 	var/gene_damage = 0 // Set to -1 to disable gene damage for the mob.
 	var/show_stat_health = 1	//does the percentage health show in the stat panel for the mob
 
@@ -91,28 +89,43 @@
 
 	var/performing_delayed_life_action = FALSE
 	var/glowing_eyes = FALSE
+	var/mob_icon_state_flags = 0
 
 /mob/living/simple_animal/Initialize()
 	. = ..()
+	check_mob_icon_states()
 	if(LAZYLEN(natural_armor))
 		set_extension(src, armor_type, natural_armor)
 	if(islist(hat_offsets))
 		set_extension(src, /datum/extension/hattable/directional, hat_offsets)
+
+/mob/living/simple_animal/proc/check_mob_icon_states()
+	mob_icon_state_flags = 0
+	if(check_state_in_icon("world", icon))
+		mob_icon_state_flags |= MOB_ICON_HAS_LIVING_STATE
+	if(check_state_in_icon("world-dead", icon))
+		mob_icon_state_flags |= MOB_ICON_HAS_DEAD_STATE
+	if(check_state_in_icon("world-sleeping", icon))
+		mob_icon_state_flags |= MOB_ICON_HAS_SLEEP_STATE
+	if(check_state_in_icon("world-resting", icon))
+		mob_icon_state_flags |= MOB_ICON_HAS_REST_STATE
+	if(check_state_in_icon("world-gib", icon))
+		mob_icon_state_flags |= MOB_ICON_HAS_GIB_STATE
 
 /mob/living/simple_animal/on_update_icon()
 
 	..()
 
 	icon_state = ICON_STATE_WORLD
-	if(stat == DEAD && !(mob_icon_state_flags & MOB_ICON_NO_DEAD_STATE))
+	if(stat == DEAD && (mob_icon_state_flags & MOB_ICON_HAS_DEAD_STATE))
 		icon_state += "-dead"
-	else if(stat == UNCONSCIOUS && !(mob_icon_state_flags & MOB_ICON_NO_SLEEP_STATE))
+	else if(stat == UNCONSCIOUS && (mob_icon_state_flags & MOB_ICON_HAS_SLEEP_STATE))
 		icon_state += "-sleeping"
-	else if(resting && !(mob_icon_state_flags & MOB_ICON_NO_REST_STATE))
+	else if(resting && (mob_icon_state_flags & MOB_ICON_HAS_REST_STATE))
 		icon_state += "-resting"
 
 	z_flags &= ~ZMM_MANGLE_PLANES
-	if(stat == CONSCIOUS && !(mob_icon_state_flags & MOB_ICON_NO_EYES_STATE))
+	if(stat == CONSCIOUS)
 		var/image/I = get_eye_overlay()
 		if(I)
 			if(glowing_eyes)
@@ -263,7 +276,7 @@
 		purge -= 1
 
 /mob/living/simple_animal/gib()
-	..(((mob_icon_state_flags & MOB_ICON_NO_GIB_STATE) ? null : "world-gib"), TRUE)
+	..(((mob_icon_state_flags & MOB_ICON_HAS_GIB_STATE) ? "world-gib" : null), TRUE)
 
 /mob/living/simple_animal/proc/visible_emote(var/act_desc)
 	custom_emote(1, act_desc)

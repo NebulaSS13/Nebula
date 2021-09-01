@@ -424,85 +424,46 @@ var/global/default_mobloc = null
 
 // ============================================================================
 
-// Tests for valid use of the single icon system by mobs.
-var/global/list/mob_icon_check_states = list(
-	"world"          = MOB_ICON_NO_LIVING_STATE,
-	"world-dead"     = MOB_ICON_NO_DEAD_STATE,
-	"world-gib"      = MOB_ICON_NO_GIB_STATE,
-	"world-sleeping" = MOB_ICON_NO_SLEEP_STATE,
-	"world-rest"     = MOB_ICON_NO_REST_STATE,
-	"world-eyes"     = MOB_ICON_NO_EYES_STATE
-)
-
-/proc/mob_test_find_icon_failures(var/mobtype, var/mobicon, var/mobflags)
-	. = list()
-	for(var/mobstate in global.mob_icon_check_states)
-		var/should_not_have_state = (mobflags & global.mob_icon_check_states[mobstate])
-		var/has_state = check_state_in_icon(mobstate, mobicon)
-		if(has_state && should_not_have_state)
-			. += "[mobtype] - mob with skip flag for '[mobstate]' has state in icon '[mobicon]'"
-		else if(!has_state && !should_not_have_state)
-			. += "[mobtype] - mob without skip flag for '[mobstate]' has no state in icon '[mobicon]'"
-
-/datum/unit_test/mobs_icon_validation
-	name = "MOB ICONS template"
-	template = /datum/unit_test/mobs_icon_validation
-	var/success_text
-	var/failure_text
-
-/datum/unit_test/mobs_icon_validation/start_test()
-	var/list/failures = get_failures()
-	if(length(failures))
-		fail("[failure_text]:\n[jointext(failures, "\n")]")
-	else
-		pass("[success_text]")
-	return 1
-
-/datum/unit_test/mobs_icon_validation/proc/get_failures()
-	. = list()
-
-/datum/unit_test/mobs_icon_validation/mobs_shall_have_appropriate_states
-	name = "MOB ICONS: Simple Animals Shall Have Appropriate States"
-	failure_text = "Some /mob/living subtypes had invalid or missing icon_states"
-	success_text = "All /mob/living subtypes had appropriate icon_states for their state flags."
-
-/datum/unit_test/mobs_icon_validation/mobs_shall_have_appropriate_states/get_failures()
-	. = ..()
-	for(var/mobtype in subtypesof(/mob/living))
-		var/mob/living/critter = mobtype
-		var/mobicon = initial(critter.icon)
-		if(!mobicon)
-			continue
-		var/list/failures_this_pass = mob_test_find_icon_failures("[mobtype]", mobicon, initial(critter.mob_icon_state_flags))
-		if(length(failures_this_pass))
-			. += failures_this_pass
-
-/datum/unit_test/mobs_icon_validation/pai_icons_shall_have_appropriate_states
-	name = "MOB ICONS: PAI Icons Shall Have Appropriate States"
-	failure_text = "Some pAI icons had invalid or missing icon_states"
-	success_text = "All pAI icons had appropriate icon_states."
-
-/datum/unit_test/mobs_icon_validation/pai_icons_shall_have_appropriate_states/get_failures()
-	. = ..()
-	var/mob/living/silicon/pai/pai = /mob/living/silicon/pai
-	var/pai_flags = initial(pai.mob_icon_state_flags)
-	for(var/chassis in global.possible_chassis)
-		var/list/failures_this_pass = mob_test_find_icon_failures("[/mob/living/silicon/pai]", global.possible_chassis[chassis], pai_flags)
-		if(length(failures_this_pass))
-			. += failures_this_pass
-
-/datum/unit_test/mobs_icon_validation/robot_modules_shall_have_appropriate_states
+/datum/unit_test/robot_modules_shall_have_appropriate_states
 	name = "MOB ICONS: Robot Module Icons Shall Have Appropriate States"
-	failure_text = "Some robot modules had invalid or missing icon_states"
-	success_text = "All robot modules had appropriate icon_states."
 
-/datum/unit_test/mobs_icon_validation/robot_modules_shall_have_appropriate_states/get_failures()
-	. = ..()
-	var/mob/living/silicon/robot/robot = /mob/living/silicon/robot
-	var/bot_flags = initial(robot.mob_icon_state_flags)
+/datum/unit_test/robot_modules_shall_have_appropriate_states/start_test()
+
+	var/list/failures = list()
 	for(var/moduletype in typesof(/obj/item/robot_module))
 		var/obj/item/robot_module/mod = new
 		for(var/sprite in mod.module_sprites)
-			var/list/failures_this_pass = mob_test_find_icon_failures("[moduletype] ([sprite])", mod.module_sprites[sprite], bot_flags)
-			if(length(failures_this_pass))
-				. += failures_this_pass
+			var/check_icon = mod.module_sprites[sprite]
+			if(!check_state_in_icon("world", check_icon))
+				failures += "[moduletype] ([sprite]): [check_icon] missing world sprite"
+			if(!check_state_in_icon("world-eyes", check_icon))
+				failures += "[moduletype] ([sprite]): [check_icon] missing eyes sprite"
+
+	if(length(failures))
+		fail("Some robot modules had invalid or missing icon_states:\n[jointext(failures, "\n")]")
+	else
+		pass("All robot modules had appropriate icon_states.")
+	return 1
+
+// ============================================================================
+
+/datum/unit_test/pai_icons_shall_have_appropriate_states
+	name = "MOB ICONS: PAI Icons Shall Have Appropriate States"
+
+/datum/unit_test/pai_icons_shall_have_appropriate_states/start_test()
+	var/list/failures = list()
+	for(var/chassis in global.possible_chassis)
+		var/check_icon = global.possible_chassis[chassis]
+		if(!check_state_in_icon("world", check_icon))
+			failures += "[chassis]: [check_icon] missing world state"
+		if(!check_state_in_icon("world-rest", check_icon))
+			failures += "[chassis]: [check_icon] missing world-rest sprite"
+		if(!check_state_in_icon("world-dead", check_icon))
+			failures += "[chassis]: [check_icon] missing world-dead state"
+	if(length(failures))
+		fail("Some pAI icons had invalid or missing icon_states:\n[jointext(failures, "\n")]")
+	else
+		pass("All pAI icons had appropriate icon_states.")
+	return 1
+
+// ============================================================================

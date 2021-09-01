@@ -12,7 +12,6 @@
 		/decl/material/gas/carbon_dioxide = 5
 	)
 	known_commands = list("stay", "stop", "attack", "follow", "dance", "boogie", "boogy")
-	mob_icon_state_flags = (MOB_ICON_NO_REST_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_EYES_STATE)
 
 /mob/living/simple_animal/hostile/commanded/bear/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 	. = ..()

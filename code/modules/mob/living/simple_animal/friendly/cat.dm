@@ -17,7 +17,6 @@
 	possession_candidate = 1
 	pass_flags = PASS_FLAG_TABLE
 	skin_material = /decl/material/solid/skin/fur/orange
-	mob_icon_state_flags = (MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_EYES_STATE)
 
 	var/turns_since_scan = 0
 	var/mob/living/simple_animal/mouse/movement_target
@@ -229,7 +228,6 @@
 	meat_amount = 1
 	bone_amount = 3
 	skin_amount = 3
-	mob_icon_state_flags = (MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE|MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_EYES_STATE)
 
 /mob/living/simple_animal/cat/kitten/Initialize()
 	if(isnull(hat_offsets))

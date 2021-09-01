@@ -16,4 +16,3 @@
 	bone_amount = 1
 	skin_amount = 1
 	skin_material = /decl/material/solid/skin/lizard
-	mob_icon_state_flags = (MOB_ICON_NO_REST_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_EYES_STATE)

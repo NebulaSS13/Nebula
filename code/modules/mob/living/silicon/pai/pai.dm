@@ -42,8 +42,6 @@ var/global/list/possible_say_verbs = list(
 		/obj/item/stock_parts/computer/network_card
 	)
 
-	mob_icon_state_flags = (MOB_ICON_NO_EYES_STATE|MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_SLEEP_STATE)
-
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null
 

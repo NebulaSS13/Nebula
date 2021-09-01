@@ -33,7 +33,6 @@
 	bone_amount =   0
 	skin_material = null
 	skin_amount =   0
-	mob_icon_state_flags = (MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE)
 
 /obj/item/natural_weapon/shade
 	name = "foul touch"

@@ -39,7 +39,7 @@
 	can_escape = TRUE
 	stop_automated_movement_when_pulled = 0
 	natural_weapon = /obj/item/natural_weapon/punch
-	mob_icon_state_flags = (MOB_ICON_NO_EYES_STATE | MOB_ICON_NO_DEAD_STATE | MOB_ICON_NO_REST_STATE | MOB_ICON_NO_SLEEP_STATE | MOB_ICON_NO_GIB_STATE)
+
 	var/obj/effect/landmark/corpse/lar_maria/corpse = null
 	var/weapon = null
 
@@ -59,7 +59,6 @@
 	health = 40
 	corpse = /obj/effect/landmark/corpse/lar_maria/test_subject
 	icon = 'mods/content/corporate/away_sites/lar_maria/lar_maria_test_subject.dmi'
-	mob_icon_state_flags = (MOB_ICON_NO_EYES_STATE | MOB_ICON_NO_REST_STATE | MOB_ICON_NO_SLEEP_STATE | MOB_ICON_NO_GIB_STATE)
 
 /obj/effect/landmark/corpse/lar_maria/test_subject
 	name = "dead test subject"

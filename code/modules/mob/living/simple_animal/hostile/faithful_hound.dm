@@ -13,7 +13,7 @@
 	anchored = 1
 	faction = "cute ghost dogs"
 	supernatural = 1
-	mob_icon_state_flags = (MOB_ICON_NO_REST_STATE|MOB_ICON_NO_DEAD_STATE|MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_EYES_STATE)
+
 	var/password
 	var/list/allowed_mobs = list() //Who we allow past us
 	var/last_check = 0

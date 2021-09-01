@@ -18,7 +18,6 @@
 	max_gas = null
 	minbodytemp = 0
 	gene_damage = -1
-	mob_icon_state_flags = (MOB_ICON_NO_SLEEP_STATE|MOB_ICON_NO_REST_STATE|MOB_ICON_NO_GIB_STATE|MOB_ICON_NO_EYES_STATE|MOB_ICON_NO_DEAD_STATE)
 
 	var/cloaked = 0
 	var/mob/living/carbon/human/gripping = null
