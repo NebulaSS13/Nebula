@@ -39,6 +39,7 @@
 	var/skin_blend = ICON_ADD          // How the skin colour is applied.
 	var/hair_colour                    // hair colour
 	var/list/markings = list()         // Markings (body_markings) to apply to the icon
+	var/render_alpha = 255
 
 	// Wound and structural data.
 	var/wound_update_accuracy = 1      // how often wounds should be updated, a higher number means less often
@@ -107,7 +108,7 @@
 		replaced(owner)
 		sync_colour_to_human(owner)
 	get_icon()
-	slowdown = species.get_slowdown(owner)
+	slowdown = species.get_slowdown(owner) // TODO make this a getter so octopodes can override it based on flooding
 	if(species)
 		for(var/attack_type in species.unarmed_attacks)
 			var/decl/natural_attack/attack = GET_DECL(attack_type)

@@ -1,8 +1,10 @@
 /turf/proc/ReplaceWithLattice(var/material)
-	var base_turf = get_base_turf_by_area(src);
+	var/base_turf = open_turf_type
+	if(!base_turf || HasBelow(z))
+		base_turf = get_base_turf_by_area(src);
 	if(type != base_turf)
 		src.ChangeTurf(get_base_turf_by_area(src))
-	if(!locate(/obj/structure/lattice) in src)
+	if(!(locate(/obj/structure/lattice) in src))
 		new /obj/structure/lattice(src, material)
 
 // Removes all signs of lattice on the pos of the turf -Donkieyo
@@ -43,6 +45,7 @@
 	var/old_affecting_lights = affecting_lights
 	var/old_lighting_overlay = lighting_overlay
 	var/old_dynamic_lighting = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
+	var/old_flooded =          flooded
 
 	changing_turf = TRUE
 
@@ -64,6 +67,10 @@
 			W.fire = old_fire
 		else if(old_fire)
 			qdel(old_fire)
+
+	if(old_flooded != W.flooded)
+		W.flooded = old_flooded
+		W.fluid_update()
 
 	// Raise appropriate events.
 	W.post_change()

@@ -11,6 +11,7 @@
 	value = 2.5
 	opacity = 1
 	min_fluid_opacity = FLUID_MAX_ALPHA
+	max_fluid_opacity = 240
 
 	chilling_products = list(
 		/decl/material/liquid/coagulated_blood = 1
