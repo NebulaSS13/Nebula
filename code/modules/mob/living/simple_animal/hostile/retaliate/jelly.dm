@@ -2,9 +2,7 @@
 	name = "zeq"
 	desc = "It looks like a floating jellyfish. How does it do that?"
 	faction = "zeq"
-	icon_state = "jelly"
-	icon_living = "jelly"
-	icon_dead = "jelly_dead"
+	icon = 'icons/mob/simple_animal/jelly.dmi'
 	move_to_delay = 1
 	maxHealth = 75
 	health = 75
@@ -26,9 +24,7 @@
 		color = color_rotation(round(rand(0,360),20))
 
 /mob/living/simple_animal/hostile/retaliate/jelly/alt
-	icon_state = "jelly-alt"
-	icon_living = "jelly-alt"
-	icon_dead = "jelly-alt_dead"
+	icon = 'icons/mob/simple_animal/jelly_alt.dmi'
 
 //megajellyfish
 /mob/living/simple_animal/hostile/retaliate/jelly/mega

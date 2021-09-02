@@ -2,9 +2,6 @@
 	name = "space pike"
 	desc = "A bigger, angrier cousin of the space carp."
 	icon = 'icons/mob/simple_animal/spaceshark.dmi'
-	icon_state = "shark"
-	icon_living = "shark"
-	icon_dead = "shark_dead"
 	turns_per_move = 2
 	move_to_delay = 2
 	attack_same = 1

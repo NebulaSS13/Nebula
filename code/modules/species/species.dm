@@ -14,6 +14,7 @@
 	var/hidden_from_codex = TRUE
 	var/is_crystalline = FALSE
 
+	var/holder_icon
 	var/preview_icon = 'icons/mob/human_races/species/human/preview.dmi'
 	var/list/available_bodytypes = list()
 	var/decl/bodytype/default_bodytype
@@ -849,3 +850,6 @@
 
 /decl/species/proc/get_default_name()
 	return "[lowertext(name)] ([random_id(name, 100, 999)])"
+
+/decl/species/proc/get_holder_color(var/mob/living/carbon/human/H)
+	return

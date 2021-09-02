@@ -1,5 +1,5 @@
 /obj/screen/intent/diona_nymph
-	icon = 'mods/mobs/dionaea/icons/gestalt.dmi'
+	icon = 'mods/mobs/dionaea/icons/ui.dmi'
 	icon_state = "intent_devour"
 	screen_loc = DIONA_SCREEN_LOC_INTENT
 
@@ -12,7 +12,7 @@
 		icon_state = "intent_devour"
 
 /obj/screen/diona
-	icon = 'mods/mobs/dionaea/icons/gestalt.dmi'
+	icon = 'mods/mobs/dionaea/icons/ui.dmi'
 
 /obj/screen/diona/hat
 	name = "equipped hat"
@@ -51,7 +51,7 @@
 	adding += action_intent
 
 	mymob.healths = new /obj/screen()
-	mymob.healths.icon = 'mods/mobs/dionaea/icons/gestalt.dmi'
+	mymob.healths.icon = 'mods/mobs/dionaea/icons/ui.dmi'
 	mymob.healths.icon_state = "health0"
 	mymob.healths.SetName("health")
 	mymob.healths.screen_loc = DIONA_SCREEN_LOC_HEALTH

@@ -5,10 +5,6 @@
 /decl/modpack/neoavians
 	name = "Neo-Avian Content"
 
-/decl/modpack/neoavians/initialize()
-	. = ..()
-	LAZYSET(global.holder_mob_icons, lowertext(SPECIES_AVIAN), 'mods/species/neoavians/icons/holder.dmi')
-
 /decl/prosthetics_manufacturer/Initialize()
 	. = ..()
 	LAZYDISTINCTADD(bodytypes_cannot_use, BODYTYPE_AVIAN)

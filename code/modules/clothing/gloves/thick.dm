@@ -46,11 +46,11 @@
 	overlays = list(I)
 
 /obj/item/clothing/gloves/thick/botany/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
-	if(slot == slot_gloves_str)
-		var/image/I = image(icon, "[bodytype]-botany_fingertips")
-		I.appearance_flags |= RESET_COLOR
-		overlay.overlays = list(I)
 	. = ..()
+	if(overlay && slot == slot_gloves_str)
+		var/image/I = image(overlay.icon, "[overlay.icon_state]-botany_fingertips")
+		I.appearance_flags |= RESET_COLOR
+		overlay.overlays += I
 
 /obj/item/clothing/gloves/thick/duty
 	desc = "These brown duty gloves are made from a durable synthetic."

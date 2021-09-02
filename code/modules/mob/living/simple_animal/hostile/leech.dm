@@ -2,9 +2,6 @@
 	name = "megaleech"
 	desc = "A green leech the size of a common snake."
 	icon = 'icons/mob/simple_animal/megaleech.dmi'
-	icon_state = "leech"
-	icon_living = "leech"
-	icon_dead = "leech_dead"
 	health = 15
 	maxHealth = 15
 	harm_intent_damage = 5
@@ -44,7 +41,7 @@
 /obj/structure/leech_spawner
 	name = "reeds"
 	desc = "Some reeds with a few funnel-like structures growing alongside."
-	icon = 'icons/mob/simple_animal/megaleech.dmi'
+	icon = 'icons/obj/structures/reeds.dmi'
 	icon_state = "reeds"
 	anchored = TRUE
 	var/datum/proximity_trigger/proxy_listener

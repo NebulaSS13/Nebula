@@ -11,10 +11,10 @@
 	networks = list(
 		NETWORK_MINE
 	)
-	sprites = list(
-		"Basic" = "Miner_old",
-		"Advanced Droid" = "droid-miner",
-		"Treadhead" = "Miner"
+	module_sprites = list(
+		"Basic"          = 'icons/mob/robots/robot_miner_old.dmi',
+		"Advanced Droid" = 'icons/mob/robots/robot_droid_miner.dmi',
+		"Treadhead"      = 'icons/mob/robots/robot_miner.dmi'
 	)
 	supported_upgrades = list(
 		/obj/item/borg/upgrade/jetpack

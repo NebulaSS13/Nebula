@@ -625,7 +625,6 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bz" = (
-/obj/item/cat_hide,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},

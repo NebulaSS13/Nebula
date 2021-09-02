@@ -22,7 +22,6 @@ var/global/list/protected_objects = list(/obj/machinery,
 	icon =  'icons/obj/closets/bases/crate.dmi'
 	color = COLOR_STEEL
 	icon_state = "crate"
-	icon_living = "crate"
 
 	meat_type = /obj/item/chems/food/fish
 	speed = 4
@@ -69,7 +68,6 @@ var/global/list/protected_objects = list(/obj/machinery,
 		O.forceMove(src)
 		copy_of = weakref(O)
 		appearance = O
-		icon_living = icon_state
 		var/obj/item/W = get_natural_weapon()
 		if(istype(O, /obj/structure))
 			health = (anchored * 50) + 50

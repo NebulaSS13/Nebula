@@ -2,15 +2,13 @@
 	name = "pet slime"
 	desc = "A lovable, domesticated slime."
 	icon = 'mods/content/xenobiology/icons/slimes/slime_baby.dmi'
-	icon_state = "slime"
-	icon_living = "slime"
-	icon_dead = "slime_dead"
 	speak_emote = list("chirps")
 	health = 100
 	maxHealth = 100
 	response_harm = "stamps on"
 	emote_see = list("jiggles", "bounces in place")
 	gene_damage = -1
+
 	var/slime_type = /decl/slime_colour/grey
 
 /mob/living/simple_animal/slime/Initialize(var/ml, var/_stype = /decl/slime_colour/grey)
@@ -24,8 +22,9 @@
 	update_icon()
 
 /mob/living/simple_animal/slime/on_update_icon()
-	..()
+	SHOULD_CALL_PARENT(FALSE)
 	icon = get_slime_icon()
+	icon_state = (stat == DEAD ? "slime_dead" : "slime")
 	
 /mob/living/simple_animal/slime/proc/get_slime_icon()
 	var/decl/slime_colour/slime_data = GET_DECL(slime_type)

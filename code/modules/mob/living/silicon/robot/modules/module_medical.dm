@@ -18,12 +18,12 @@
 /obj/item/robot_module/medical/surgeon
 	name = "surgeon robot module"
 	display_name = "Surgeon"
-	sprites = list(
-		"Basic" = "Medbot",
-		"Standard" = "surgeon",
-		"Advanced Droid" = "droid-medical",
-		"Needles" = "medicalrobot"
-		)
+	module_sprites = list(
+		"Basic"          = 'icons/mob/robots/robot_medical_old_alt.dmi',
+		"Standard"       = 'icons/mob/robots/robot_surgeon.dmi',
+		"Advanced Droid" = 'icons/mob/robots/robot_droid_medical.dmi',
+		"Needles"        = 'icons/mob/robots/robot_medical_old.dmi'
+	)
 	equipment = list(
 		/obj/item/flash,
 		/obj/item/borg/sight/hud/med,
@@ -91,11 +91,11 @@
 /obj/item/robot_module/medical/crisis
 	name = "crisis robot module"
 	display_name = "Crisis"
-	sprites = list(
-		"Basic" = "Medbot",
-		"Standard" = "surgeon",
-		"Advanced Droid" = "droid-medical",
-		"Needles" = "medicalrobot"
+	module_sprites = list(
+		"Basic"          = 'icons/mob/robots/robot_medical_old_alt.dmi',
+		"Standard"       = 'icons/mob/robots/robot_surgeon.dmi',
+		"Advanced Droid" = 'icons/mob/robots/robot_droid_medical.dmi',
+		"Needles"        = 'icons/mob/robots/robot_medical_old.dmi'
 	)
 	equipment = list(
 		/obj/item/crowbar,

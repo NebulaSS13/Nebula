@@ -1,7 +1,7 @@
 /mob/living/silicon/robot/syndicate
 	lawupdate = 0
 	scrambledcodes = 1
-	icon_state = "securityrobot"
+	icon = 'icons/mob/robots/robot_security.dmi'
 	modtype = "Security"
 	lawchannel = "State"
 	laws = /datum/ai_laws/syndicate_override

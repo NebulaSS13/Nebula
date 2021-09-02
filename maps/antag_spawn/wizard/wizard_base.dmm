@@ -570,7 +570,6 @@
 /area/map_template/wizard_station)
 "by" = (
 /obj/structure/table/woodentable,
-/obj/item/cat_hide,
 /turf/unsimulated/floor{
 	icon_state = "cult";
 	name = "plating"

@@ -321,3 +321,10 @@
 #define PREF_PUB_RECORD "public_record"
 #define PREF_MED_RECORD "med_record"
 #define PREF_GEN_RECORD "gen_record"
+
+// Simple animal icon state flags.
+#define MOB_ICON_HAS_LIVING_STATE BITFLAG(0)
+#define MOB_ICON_HAS_DEAD_STATE   BITFLAG(1)
+#define MOB_ICON_HAS_REST_STATE   BITFLAG(2)
+#define MOB_ICON_HAS_SLEEP_STATE  BITFLAG(3)
+#define MOB_ICON_HAS_GIB_STATE    BITFLAG(4)

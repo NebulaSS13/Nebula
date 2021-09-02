@@ -14,11 +14,11 @@
 	supported_upgrades = list(
 		/obj/item/borg/upgrade/rcd
 	)
-	sprites = list(
-		"Basic" = "Engineering",
-		"Antique" = "engineerrobot",
-		"Landmate" = "landmate",
-		"Landmate - Treaded" = "engiborg+tread"
+	module_sprites = list(
+		"Basic"              = 'icons/mob/robots/robot_engineer_old.dmi',
+		"Antique"            = 'icons/mob/robots/robot_engineer_old_alt.dmi',
+		"Landmate"           = 'icons/mob/robots/robot_engineer.dmi',
+		"Landmate - Treaded" = 'icons/mob/robots/robot_engineer_treaded.dmi'
 	)
 	no_slip = 1
 	equipment = list(
