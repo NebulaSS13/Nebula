@@ -44,6 +44,13 @@ var/global/list/protected_objects = list(/obj/machinery,
 	var/knockdown_people = 0
 	pass_flags = PASS_FLAG_TABLE
 
+/mob/living/simple_animal/hostile/mimic/update_icon()
+	if(copy_of && copy_of.resolve())
+		appearance = copy_of.resolve()
+	else
+		icon = initial(icon)
+		icon_state = initial(icon_state)
+
 /mob/living/simple_animal/hostile/mimic/Initialize(mapload, var/obj/o, var/mob/living/creator)
 	. = ..()
 	if(o)
@@ -67,7 +74,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 	if((istype(O, /obj/item) || istype(O, /obj/structure)) && !is_type_in_list(O, protected_objects))
 		O.forceMove(src)
 		copy_of = weakref(O)
-		appearance = O
+
 		var/obj/item/W = get_natural_weapon()
 		if(istype(O, /obj/structure))
 			health = (anchored * 50) + 50
@@ -85,8 +92,10 @@ var/global/list/protected_objects = list(/obj/machinery,
 		if(creator)
 			src.creator = weakref(creator)
 			faction = "\ref[creator]" // very unique
-		return 1
-	return
+
+		update_icon()
+		return TRUE
+	return FALSE
 
 /mob/living/simple_animal/hostile/mimic/death()
 	if(!copy_of)
