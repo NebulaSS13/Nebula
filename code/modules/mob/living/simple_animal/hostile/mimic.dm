@@ -44,7 +44,8 @@ var/global/list/protected_objects = list(/obj/machinery,
 	var/knockdown_people = 0
 	pass_flags = PASS_FLAG_TABLE
 
-/mob/living/simple_animal/hostile/mimic/update_icon()
+/mob/living/simple_animal/hostile/mimic/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	if(copy_of && copy_of.resolve())
 		appearance = copy_of.resolve()
 	else
