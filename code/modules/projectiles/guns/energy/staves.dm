@@ -12,6 +12,7 @@
 	origin_tech = null
 	self_recharge = 1
 	charge_meter = 0
+	has_safety = FALSE
 	var/required_antag_type = /decl/special_role/wizard
 
 /obj/item/gun/energy/staff/special_check(var/mob/user)
