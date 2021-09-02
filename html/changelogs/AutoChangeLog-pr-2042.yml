@@ -1,0 +1,5 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - bugfix: Fix occasional runtime in mob/Destroy() when deleting an ai var that wasn't
+      initialized yet.
