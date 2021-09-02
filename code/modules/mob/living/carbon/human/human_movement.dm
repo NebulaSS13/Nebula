@@ -130,7 +130,6 @@
 /mob/living/carbon/human/Move()
 	. = ..()
 	if(.) //We moved
-		species.handle_exertion(src)
 
 		var/stamina_cost = 0
 		for(var/obj/item/grab/G AS_ANYTHING in get_active_grabs())
@@ -140,7 +139,7 @@
 			adjust_stamina(stamina_cost)
 
 		handle_leg_damage()
-
+		species.handle_post_move(src)
 		if(client)
 			var/turf/B = GetAbove(src)
 			up_hint.icon_state = "uphint[(B ? B.is_open() : 0)]"

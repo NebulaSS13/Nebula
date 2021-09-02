@@ -224,12 +224,7 @@
 	var/standing_jump_range = 2
 	var/list/maneuvers = list(/decl/maneuver/leap)
 
-	var/list/available_cultural_info = list(
-		TAG_CULTURE =   list(/decl/cultural_info/culture/other),
-		TAG_HOMEWORLD = list(/decl/cultural_info/location/stateless),
-		TAG_FACTION =   list(/decl/cultural_info/faction/other),
-		TAG_RELIGION =  list(/decl/cultural_info/religion/other)
-	)
+	var/list/available_cultural_info =            list()
 	var/list/force_cultural_info =                list()
 	var/list/default_cultural_info =              list()
 	var/list/additional_available_cultural_info = list()
@@ -823,6 +818,9 @@
 			// This assumes that if a pain-level has been defined it also has a list of emotes to go with it
 			var/decl/emote/E = GET_DECL(pick(pain_emotes))
 			return E.key
+
+/decl/species/proc/handle_post_move(var/mob/living/carbon/human/H)
+	handle_exertion(H)
 
 /decl/species/proc/handle_exertion(mob/living/carbon/human/H)
 	if (!exertion_effect_chance)

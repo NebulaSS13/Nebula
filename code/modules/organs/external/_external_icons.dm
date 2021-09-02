@@ -83,7 +83,7 @@ var/global/list/limb_icon_cache = list()
 /obj/item/organ/external/on_update_icon(var/regenerate = 0)
 
 	icon_state = "[icon_name]"
-	icon_cache_key = "[icon_state]_[species ? species.name : "unknown"]"
+	icon_cache_key = "[icon_state]_[species ? species.name : "unknown"][render_alpha]"
 	if(model)
 		icon_cache_key += "_model_[model]"
 
@@ -101,6 +101,10 @@ var/global/list/limb_icon_cache = list()
 			icon_cache_key += "[M][markings[M]]"
 
 	set_dir(EAST, TRUE)
+
+	if(render_alpha < 255)
+		mob_icon += rgb(,,,render_alpha)
+
 	icon = mob_icon
 
 /obj/item/organ/external/proc/get_icon()

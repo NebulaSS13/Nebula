@@ -29,11 +29,10 @@
 	var/movement_delay
 
 	var/fluid_can_pass
-	var/obj/effect/flood/flood_object
 	var/fluid_blocked_dirs = 0
 	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
 	var/footstep_type
-
+	var/open_turf_type
 	var/tmp/changing_turf
 
 	var/prev_type // Previous type of the turf, prior to turf translation.
@@ -77,11 +76,14 @@
 	update_flood_overlay()
 
 /turf/proc/update_flood_overlay()
-	if(is_flooded(absolute = TRUE))
-		if(!flood_object)
-			flood_object = new(src)
-	else if(flood_object)
-		QDEL_NULL(flood_object)
+	if(flooded)
+		if(!locate(/obj/effect/flood) in src)
+			new /obj/effect/flood(src)
+		for(var/obj/effect/fluid/fluid in src)
+			qdel(fluid)
+	else
+		for(var/obj/effect/flood/flood in src)
+			qdel(flood)
 
 /turf/Destroy()
 

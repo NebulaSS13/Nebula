@@ -43,7 +43,7 @@
 /atom/proc/get_pronouns(var/ignore_coverings)
 	. = get_pronouns_by_gender(gender)
 
-/atom/proc/set_gender(var/new_gender, var/update_body = FALSE)
+/atom/proc/set_gender(var/new_gender = NEUTER, var/update_body = FALSE)
 	if(gender != new_gender)
 		gender = new_gender
 		if(update_body)

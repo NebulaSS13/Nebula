@@ -17,7 +17,8 @@
 	flooded = TRUE
 
 /datum/random_map/noise/seafloor/get_appropriate_path(var/value)
-	switch(value)
+	var/val = min(9,max(0,round((value/cell_range)*10)))
+	switch(val)
 		if(6)
 			return /turf/exterior/mud/flooded
 		if(7 to 9)
