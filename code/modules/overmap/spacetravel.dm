@@ -1,5 +1,5 @@
 //list used to cache empty zlevels to avoid nedless map bloat
-var/global/list/cached_space = list()
+var/global/list/cached_temporary_sectors = list()
 
 //Space stragglers go here
 
@@ -17,10 +17,18 @@ var/global/list/cached_space = list()
 	. = ..()
 
 /obj/effect/overmap/visitable/sector/temporary/Destroy()
+
 	for(var/num in map_z)
 		global.overmap_sectors -= "[num]"
-	testing("Temporary sector at [x],[y] was deleted.")
-	global.cached_space -= src
+
+	var/datum/overmap/overmap = global.overmaps_by_z["[z]"]
+	if(istype(overmap) && (overmap.map_turf_type in global.cached_temporary_sectors))
+		global.cached_temporary_sectors[overmap.map_turf_type] -= src
+		if(!length(global.cached_temporary_sectors[overmap.map_turf_type]))
+			global.cached_temporary_sectors -= overmap.map_turf_type
+
+	testing("Temporary sector at [x],[y],[z] was deleted.")
+
 	return ..()
 
 /obj/effect/overmap/visitable/sector/temporary/proc/can_die(var/mob/observer)

@@ -453,7 +453,7 @@
 /mob/new_player/MayRespawn()
 	return 1
 
-/mob/new_player/touch_map_edge()
+/mob/new_player/touch_map_edge(var/overmap_id = OVERMAP_ID_SPACE)
 	return
 
 /mob/new_player/say(var/message)

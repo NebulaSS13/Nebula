@@ -18,7 +18,6 @@
 	material = /decl/material/solid/metal/aliumium
 	material_alteration = MAT_FLAG_ALTERATION_COLOR
 	var/active = 0
-	var/static/overmap_id = OVERMAP_ID_SPACE
 
 /obj/structure/monolith/Initialize()
 	. = ..()
@@ -48,8 +47,8 @@
 		overlays += I
 
 /obj/structure/monolith/attack_hand(mob/user)
-	visible_message("[user] touches \the [src].")
-	if(overmap_id && istype(user, /mob/living/carbon/human))
+	visible_message("\The [user] touches \the [src].")
+	if(istype(user, /mob/living/carbon/human))
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
 		if(istype(E))
 			var/mob/living/carbon/human/H = user

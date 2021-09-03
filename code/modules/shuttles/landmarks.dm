@@ -48,10 +48,9 @@
 	if(!istype(docking_controller))
 		log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
 
-	if(overmap_id)
-		var/obj/effect/overmap/visitable/location = global.overmap_sectors["[z]"]
-		if(location && location.docking_codes)
-			docking_controller.docking_codes = location.docking_codes
+	var/obj/effect/overmap/visitable/location = global.overmap_sectors["[z]"]
+	if(location && location.docking_codes)
+		docking_controller.docking_codes = location.docking_codes
 
 /obj/effect/shuttle_landmark/modify_mapped_vars(map_hash)
 	..()

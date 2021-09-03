@@ -82,11 +82,8 @@
 		..()
 		return // it actually doesn't matter what we do in this case
 
-	var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
-	if(!istype(overmap))
-		PRINT_STACK_TRACE("Landable overmap object failed to look up overmap [overmap_id].")
-
 	// Attempt to find a safe and random overmap turf to start on
+	var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
 	var/list/candidates = list()
 	for(var/turf/T in block(locate(OVERMAP_EDGE, OVERMAP_EDGE, overmap.assigned_z), locate(overmap.map_size_x - 1, overmap.map_size_y - 1, overmap.assigned_z)))
 		if(locate(/obj/effect/overmap) in T)

@@ -28,7 +28,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/contact_levels = list() // Z-levels that can be contacted from the station, for eg announcements
 	var/list/player_levels = list()  // Z-levels a character can typically reach
 	var/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
-	var/list/empty_levels = null     // Empty Z-levels that may be used for various things (currently used by FTL jump)
 
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 
@@ -156,7 +155,28 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		ACCESS_REGION_SUPPLY = list(access_change_ids)
 	)
 
-/datum/map/New()
+/datum/map/proc/get_lobby_track(var/exclude)
+	var/lobby_track_type
+	if(LAZYLEN(lobby_tracks) == 1)
+		lobby_track_type = lobby_tracks[1]
+	else if(LAZYLEN(lobby_tracks))
+		lobby_track_type = pickweight(lobby_tracks - exclude)
+	else
+		lobby_track_type = pick(subtypesof(/decl/music_track) - exclude)
+	return GET_DECL(lobby_track_type)
+
+/datum/map/proc/setup_map()
+
+	if(!allowed_jobs)
+		allowed_jobs = list()
+		for(var/jtype in subtypesof(/datum/job))
+			var/datum/job/job = jtype
+			if(initial(job.available_by_default))
+				allowed_jobs += jtype
+
+	if(ispath(default_job_type, /datum/job))
+		var/datum/job/J = default_job_type
+		default_job_title = initial(J.title)
 
 	if(default_spawn && !(default_spawn in allowed_spawns))
 		PRINT_STACK_TRACE("Map datum [type] has default spawn point [default_spawn] not in the allowed spawn list.")
@@ -170,33 +190,11 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(!map_levels)
 		map_levels = station_levels.Copy()
 
-	if(!allowed_jobs)
-		allowed_jobs = list()
-		for(var/jtype in subtypesof(/datum/job))
-			var/datum/job/job = jtype
-			if(initial(job.available_by_default))
-				allowed_jobs += jtype
-
 	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
 
 	game_year = (text2num(time2text(world.realtime, "YYYY")) + game_year)
 
-	if(ispath(default_job_type, /datum/job))
-		var/datum/job/J = default_job_type
-		default_job_title = initial(J.title)
-
-/datum/map/proc/get_lobby_track(var/exclude)
-	var/lobby_track_type
-	if(LAZYLEN(lobby_tracks) == 1)
-		lobby_track_type = lobby_tracks[1]
-	else if(LAZYLEN(lobby_tracks))
-		lobby_track_type = pickweight(lobby_tracks - exclude)
-	else
-		lobby_track_type = pick(subtypesof(/decl/music_track) - exclude)
-	return GET_DECL(lobby_track_type)
-
-/datum/map/proc/setup_map()
 	lobby_track = get_lobby_track()
 	update_titlescreen()
 	world.update_status()
@@ -282,12 +280,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(!candidates.len)
 		return current_z_level
 	return text2num(pickweight(candidates))
-
-/datum/map/proc/get_empty_zlevel()
-	if(empty_levels == null)
-		INCREMENT_WORLD_Z_SIZE
-		empty_levels = list(world.maxz)
-	return pick(empty_levels)
 
 /datum/map/proc/setup_economy()
 	news_network.CreateFeedChannel("News Daily", "Minister of Information", 1, 1)

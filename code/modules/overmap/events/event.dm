@@ -9,9 +9,6 @@
 
 /decl/overmap_event_handler/proc/create_events(var/datum/overmap/overmap)
 
-	if(!istype(overmap))
-		PRINT_STACK_TRACE("Invalid overmap passed to create_events(): [overmap || "NULL"]")
-
 	if(!length(overmap.valid_event_types))
 		return
 

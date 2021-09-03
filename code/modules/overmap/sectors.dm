@@ -96,9 +96,6 @@ var/global/list/known_overmap_sectors
 
 /obj/effect/overmap/visitable/proc/move_to_starting_location()
 	var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
-	if(!istype(overmap))
-		PRINT_STACK_TRACE("Overmap entity with nonpresent overmap ID moved to starting loc: [type] [overmap_id]")
-		return
 	start_x = start_x || rand(OVERMAP_EDGE, overmap.map_size_x - OVERMAP_EDGE)
 	start_y = start_y || rand(OVERMAP_EDGE, overmap.map_size_y - OVERMAP_EDGE)
 	forceMove(locate(start_x, start_y, overmap.assigned_z))
@@ -134,17 +131,21 @@ var/global/list/known_overmap_sectors
 // Returns the /obj/effect/overmap/visitable to which the atom belongs based on localtion, or null
 /atom/proc/get_owning_overmap_object()
 	var/z = get_z(src)
-	var/list/check_sectors = global.overmap_sectors["[z]"] ? list(global.overmap_sectors["[z]"]) : list()
-	var/list/checked_sectors = list()
+	var/initial_sector = global.overmap_sectors["[z]"]
+	if(!initial_sector)
+		return
+
+	var/list/check_sectors = list(initial_sector)
+	var/list/checked_sectors
 
 	while(length(check_sectors))
+
 		var/obj/effect/overmap/visitable/sector = check_sectors[1]
 		if(sector.check_ownership(src))
-			. = sector
-			break
+			return sector
 
 		check_sectors -= sector
-		checked_sectors += sector
+		LAZYADD(checked_sectors, sector)
 		for(var/obj/effect/overmap/visitable/next_sector in sector)
 			if(!(next_sector in checked_sectors))
 				check_sectors |= next_sector

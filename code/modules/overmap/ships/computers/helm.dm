@@ -47,10 +47,6 @@ var/global/list/overmap_helm_computers
 	..()
 
 	var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
-	if(!istype(overmap))
-		PRINT_STACK_TRACE("[type] could not find overmap [overmap_id].")
-		return
-
 	var/mob/current_operator_actual = current_operator?.resolve()
 	if (current_operator_actual)
 		if (!linked)

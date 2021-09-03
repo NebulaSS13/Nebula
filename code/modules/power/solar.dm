@@ -20,7 +20,6 @@ var/global/list/solars_list = list()
 	var/ndir = SOUTH // target dir
 	var/turn_angle = 0
 	var/obj/machinery/power/solar_control/control = null
-	var/static/overmap_id = OVERMAP_ID_SPACE
 
 /obj/machinery/power/solar/improved
 	name = "improved solar panel"

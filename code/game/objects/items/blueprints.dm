@@ -69,9 +69,9 @@
 /obj/item/blueprints/outpost/set_valid_z_levels()
 	var/turf/T = get_turf(src)
 	if(istype(T) && length(global.using_map.overmap_ids))
-		var/datum/overmap/overmap = global.overmaps_by_name[OVERMAP_ID_SPACE]
-		if(istype(overmap))
-			T = locate(1, 1, overmap.assigned_z)
+		var/obj/effect/overmap/visitable/sector/S = global.overmap_sectors["[T.z]"]
+		if(istype(S))
+			T = locate(1, 1, S.z)
 			var/area/overmap/map = T && get_area(T)
 			if(istype(map))
 				desc = "Blueprints for the daring souls wanting to establish a planetary outpost. Has some sketchy looking stains and what appears to be bite holes."

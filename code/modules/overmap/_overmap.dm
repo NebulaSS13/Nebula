@@ -1,21 +1,23 @@
-var/global/list/overmaps_by_name = list()
-var/global/list/overmaps_by_z = list()
-
 /datum/overmap
 	var/name
-	var/map_sectors
 	var/assigned_z
 
 	var/event_areas = 11
 	var/map_size_x = 20
 	var/map_size_y = 20
 
+	var/map_turf_type = /turf/space
 	var/map_area_type = /area/overmap
 	var/list/valid_event_types
+	var/empty_z_level_turf
 
 /datum/overmap/New(var/_name)
 
 	name = _name
+
+	if(!map_turf_type)
+		map_turf_type = world.turf
+
 	if(!name)
 		PRINT_STACK_TRACE("Unnamed overmap datum instantiated: [type]")
 
@@ -46,8 +48,6 @@ var/global/list/overmaps_by_z = list()
 	testing("Putting [name] on [assigned_z].")
 
 	var/area/overmap/A = new map_area_type
-	A.name = name
-
 	for(var/square in block(locate(1, 1, assigned_z), locate(map_size_x, map_size_y, assigned_z)))
 		var/turf/T = square
 		if(T.x == map_size_x || T.y == map_size_y)
@@ -119,16 +119,23 @@ var/global/list/overmaps_by_z = list()
 			source.forceMove(null)
 			if(!QDELETED(source))
 				testing("Caching [M] for future use")
-				global.cached_space |= source
+				if(!(map_turf_type in global.cached_temporary_sectors))
+					global.cached_temporary_sectors[map_turf_type] = list()
+				global.cached_temporary_sectors[map_turf_type] |= source
 
 /datum/overmap/proc/create_temporary_sector(x,y)
 	var/obj/effect/overmap/visitable/sector/temporary/res = locate(x, y, assigned_z)
 	if(istype(res))
 		return res
-	else if(length(global.cached_space))
-		res = global.cached_space[length(global.cached_space)]
-		global.cached_space -= res
+	else if(length(global.cached_temporary_sectors[map_turf_type]))
+		res = pick(global.cached_temporary_sectors[map_turf_type])
+		global.cached_temporary_sectors[map_turf_type] -= res
+		if(!length(global.cached_temporary_sectors[map_turf_type]))
+			global.cached_temporary_sectors -= map_turf_type
 		if(istype(res) && !QDELETED(res))
 			res.forceMove(locate(x, y, assigned_z))
 			return res
-	return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, global.using_map.get_empty_zlevel())
+	return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, create_empty_z_level())
+
+/datum/overmap/proc/create_empty_z_level()
+	. = get_empty_zlevel(map_turf_type)

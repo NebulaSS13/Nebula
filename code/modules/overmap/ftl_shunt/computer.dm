@@ -160,14 +160,12 @@
 		if(plotting_jump)
 			to_chat(user, SPAN_WARNING("Unable to alter programmed coordinates: Plotting in progress."))
 			return TOPIC_REFRESH
-		var/datum/overmap/overmap = global.overmaps_by_name[OVERMAP_ID_SPACE]
-		if(!istype(overmap))
-			return TOPIC_NOACTION
 
 		var/input_x = to_plot_x
 		var/input_y = to_plot_y
 		var/fumble = user.skill_check(SKILL_PILOT, SKILL_ADEPT) ? 0 : rand(-2, 2)
 
+		var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
 		if(href_list["set_shunt_x"])
 			input_x = input(user, "Enter Destination X Coordinates", "FTL Computer", to_plot_x) as num|null
 			input_x += fumble
