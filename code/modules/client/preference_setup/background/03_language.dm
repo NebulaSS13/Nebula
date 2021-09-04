@@ -131,11 +131,11 @@
 			var/decl/language/lang_instance = GET_DECL(lang)
 			if(free_languages[lang])
 				LAZYADD(., "- [lang_instance.name] (required).<br>")
-				LAZYADD(., "<i><b>[lang_instance.desc ? lang_instance.desc : "No information avaliable."]</b></i></br>")
+				LAZYADD(., "<i><b>[lang_instance.desc || "No information avaliable."]</b></i></br>")
 			else
 				LAZYADD(., "- [lang_instance.name] <a href='?src=\ref[src];remove_language=[i]'>Remove</a> <span style='color:#ff0000;font-style:italic;'>[lang_instance.warning]</span><br>")
 				if(lang in pref.alternate_languages)
-					LAZYADD(., "<i><b>[lang_instance.desc ? lang_instance.desc : "No information avaliable."]</b></i></br>")
+					LAZYADD(., "<i><b>[lang_instance.desc || "No information avaliable."]</b></i></br>")
 	if(pref.alternate_languages.len < MAX_LANGUAGES)
 		var/remaining_langs = MAX_LANGUAGES - pref.alternate_languages.len
 		LAZYADD(., "- <a href='?src=\ref[src];add_language=1'>add</a> ([remaining_langs] remaining)<br>")
