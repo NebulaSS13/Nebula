@@ -95,5 +95,7 @@ STACK_SUBTYPES(beige,          "beige cloth",                   solid/cloth/beig
 STACK_SUBTYPES(lime,           "lime cloth",                    solid/cloth/lime,           bolt,       null)
 STACK_SUBTYPES(red,            "red cloth",                     solid/cloth/red,            bolt,       null)
 STACK_SUBTYPES(steel,          "steel",                         solid/metal/steel,          strut,      null)
+STACK_SUBTYPES(aluminium,      "aluminium",                     solid/metal/aluminium,      strut,      null)
+STACK_SUBTYPES(titanium,       "titanium",                      solid/metal/titanium,       strut,      null)
 
 #undef STACK_SUBTYPES

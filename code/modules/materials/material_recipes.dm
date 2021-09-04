@@ -1,11 +1,11 @@
 /decl/material/proc/get_recipes(var/reinf_mat)
-	var/key = reinf_mat ? reinf_mat : "base"
+	var/key = reinf_mat || "base"
 	if(!LAZYACCESS(recipes,key))
 		LAZYSET(recipes,key,generate_recipes(reinf_mat))
 	return recipes[key]
 
 /decl/material/proc/get_strut_recipes(var/reinf_mat)
-	var/key = reinf_mat ? reinf_mat : "base"
+	var/key = reinf_mat || "base"
 	if(!LAZYACCESS(strut_recipes,key))
 		LAZYSET(strut_recipes,key,generate_strut_recipes(reinf_mat))
 	return strut_recipes[key]
