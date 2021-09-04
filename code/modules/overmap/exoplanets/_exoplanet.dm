@@ -74,6 +74,8 @@
 	var/habitability_class	// if it's above bad, atmosphere will be adjusted to be better for humans (no extreme temps / oxygen to breathe)
 	var/crust_strata // Decl type for exterior walls to use for material and ore gen.
 
+	var/spawn_weight = 100	// Decides how often this planet will be picked for generation
+
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_strata()
 	return crust_strata
 
