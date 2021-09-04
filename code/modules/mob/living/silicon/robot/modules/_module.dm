@@ -191,7 +191,7 @@
 	var/datum/extension/network_device/camera/robot/D = get_extension(R, /datum/extension/network_device/camera)
 	if(D)
 		var/list/robot_channels = D.channels
-		if(CHANNEL_ROBOTS in robot_channels)
+		if(CAMERA_CHANNEL_ROBOTS in robot_channels)
 			for(var/channel in camera_channels)
 				if(!(channel in robot_channels))
 					D.add_channels(channel)

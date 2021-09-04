@@ -2,7 +2,7 @@
 	name = "emergency response drone module"
 	display_name = "Emergency Response"
 	channels = list("Medical" = TRUE)
-	camera_channels = list(CHANNEL_MEDICAL)
+	camera_channels = list(CAMERA_CHANNEL_MEDICAL)
 	software = list(
 		/datum/computer_file/program/suit_sensors
 	)

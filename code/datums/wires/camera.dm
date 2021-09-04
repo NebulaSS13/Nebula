@@ -43,12 +43,8 @@ var/global/const/CAMERA_WIRE_NOTHING2 = 32
 			D.set_view_range(new_range)
 
 		if(CAMERA_WIRE_POWER)
-			if(!mended)
-				C.cut_power = TRUE
-				C.set_status(FALSE, usr)
-			else
-				C.cut_power = FALSE
-				C.set_status(TRUE, usr)
+			C.cut_power = !mended
+			C.set_status(mended, usr)
 
 		if(CAMERA_WIRE_LIGHT)
 			C.light_disabled = !mended

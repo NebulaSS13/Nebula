@@ -5,7 +5,7 @@
 		"Science" = TRUE
 	)
 	camera_channels = list(
-		CHANNEL_RESEARCH
+		CAMERA_CHANNEL_RESEARCH
 	)
 	module_sprites = list(
 		"Droid" = 'icons/mob/robots/robot_droid.dmi'

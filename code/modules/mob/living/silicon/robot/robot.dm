@@ -117,7 +117,7 @@
 	update_icon()
 
 	if(!scrambledcodes)
-		set_extension(src, /datum/extension/network_device/camera/robot, null, null, null, TRUE, list(CHANNEL_ROBOTS), name)
+		set_extension(src, /datum/extension/network_device/camera/robot, null, null, null, TRUE, list(CAMERA_CHANNEL_ROBOTS), name)
 		verbs |= /mob/living/silicon/robot/proc/configure_camera
 	init()
 	initialize_components()

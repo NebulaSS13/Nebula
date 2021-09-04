@@ -14,8 +14,6 @@ SUBSYSTEM_DEF(networking)
 	var/list/connection_queue = list()
 	var/list/tmp_queue = list()
 
-	var/datum/extension/network_device/last_failed_device
-
 /datum/controller/subsystem/networking/fire(resumed = FALSE)
 	if(!resumed)
 		tmp_queue = connection_queue.Copy()

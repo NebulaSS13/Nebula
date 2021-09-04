@@ -3,7 +3,7 @@
 		"Security" = TRUE
 	)
 	camera_channels = list(
-		CHANNEL_SECURITY
+		CAMERA_CHANNEL_SECURITY
 	)
 	software = list(
 		/datum/computer_file/program/suit_sensors,

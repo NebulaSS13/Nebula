@@ -43,21 +43,21 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 
 // Camera channels
 // Station channels
-#define CHANNEL_PUBLIC "Public"
-#define CHANNEL_ENGINEERING "Engineering"
-#define CHANNEL_MEDICAL "Medical"
-#define CHANNEL_RESEARCH "Research"
-#define CHANNEL_SECURITY "Security"
+#define CAMERA_CHANNEL_PUBLIC "Public"
+#define CAMERA_CAMERA_CHANNEL_ENGINEERING "Engineering"
+#define CAMERA_CHANNEL_MEDICAL "Medical"
+#define CAMERA_CHANNEL_RESEARCH "Research"
+#define CAMERA_CHANNEL_SECURITY "Security"
 
-#define CHANNEL_ROBOTS "Robots"
-#define CHANNEL_MINE "Mining"
-#define CHANNEL_SECRET "Secret"
+#define CAMERA_CHANNEL_ROBOTS "Robots"
+#define CAMERA_CHANNEL_MINE "Mining"
+#define CAMERA_CHANNEL_SECRET "Secret"	
 
 // Non-station channels
-#define CHANNEL_CRESCENT "Crescent"
-#define CHANNEL_ERT "ZeEmergencyResponseTeam"
-#define CHANNEL_MERCENARY "MercurialNet"
-#define CHANNEL_TELEVISION "Television"
+#define CAMERA_CHANNEL_CRESCENT "Crescent"
+#define CAMERA_CHANNEL_ERT "ZeEmergencyResponseTeam"
+#define CAMERA_CHANNEL_MERCENARY "MercurialNet"
+#define CAMERA_CHANNEL_TELEVISION "Television"
 
 // Alarm networks
 #define NETWORK_ALARM_ATMOS "Atmosphere Alarms"

@@ -4,7 +4,7 @@
 		"Medical" = TRUE
 	)
 	camera_channels = list(
-		CHANNEL_MEDICAL
+		CAMERA_CHANNEL_MEDICAL
 	)
 	software = list(
 		/datum/computer_file/program/crew_manifest

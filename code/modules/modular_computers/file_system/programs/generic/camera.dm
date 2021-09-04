@@ -177,12 +177,12 @@
 	var/datum/computer_network/network = get_network()
 	if(network)
 		cameras_by_channel = network.cameras_by_channel.Copy()
-	// Cameras broadcasting on CHANNEL_TELEVISION are able to be received by all camera monitoring programs.
-	var/list/television_channels = camera_repository.devices_in_channel(CHANNEL_TELEVISION)
+	// Cameras broadcasting on CAMERA_CHANNEL_TELEVISION are able to be received by all camera monitoring programs.
+	var/list/television_channels = camera_repository.devices_in_channel(CAMERA_CHANNEL_TELEVISION)
 	if(length(television_channels))
-		if(!cameras_by_channel[CHANNEL_TELEVISION])
-			cameras_by_channel[CHANNEL_TELEVISION] = list()
-		cameras_by_channel[CHANNEL_TELEVISION] |= television_channels
+		if(!cameras_by_channel[CAMERA_CHANNEL_TELEVISION])
+			cameras_by_channel[CAMERA_CHANNEL_TELEVISION] = list()
+		cameras_by_channel[CAMERA_CHANNEL_TELEVISION] |= television_channels
 	return cameras_by_channel
 
 /datum/nano_module/program/camera_monitor/check_eye(var/mob/user)

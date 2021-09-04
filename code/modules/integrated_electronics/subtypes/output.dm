@@ -233,7 +233,7 @@
 
 /obj/item/integrated_circuit/output/video_camera/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/network_device/camera/circuit, null, null, null, TRUE, list(CHANNEL_RESEARCH), camera_name, FALSE, TRUE)
+	set_extension(src, /datum/extension/network_device/camera/circuit, null, null, null, TRUE, list(CAMERA_CHANNEL_RESEARCH), camera_name, FALSE, TRUE)
 
 	on_data_written()
 

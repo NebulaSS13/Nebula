@@ -16,7 +16,7 @@
 	. = ..()
 
 /obj/item/camera/tvcamera/Initialize()
-	set_extension(src, /datum/extension/network_device/camera/television, null, null, null, TRUE, list(CHANNEL_TELEVISION), channel)
+	set_extension(src, /datum/extension/network_device/camera/television, null, null, null, TRUE, list(CAMERA_CHANNEL_TELEVISION), channel)
 	radio = new(src)
 	radio.listening = FALSE
 	radio.set_frequency(ENT_FREQ)

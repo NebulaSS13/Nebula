@@ -1,7 +1,7 @@
 #define MAX_CAMCHAN_TAG_LENGTH 20
 
 /datum/extension/network_device/camera
-	var/list/channels = list(CHANNEL_PUBLIC) // Camera channels for sorting cameras while looking via programs or as an AI. No longer connected to access.
+	var/list/channels = list(CAMERA_CHANNEL_PUBLIC) // Camera channels for sorting cameras while looking via programs or as an AI. No longer connected to access.
 	expected_type = /obj/machinery/camera
 
 	var/cameranet_enabled		 // Whether this camera will act as a source for AI cameranets
@@ -48,7 +48,7 @@
 	if(!can_interact(user))
 		return TOPIC_NOACTION
 	if(href_list["add_channel"])
-		var/cam_channel = sanitize(input(usr, "Enter the camera channel tag. Adding the channel \"[CHANNEL_TELEVISION]\" will enable broadband broadcast to all receivers in the local area:", "Enter camera channel tag") as text|null)
+		var/cam_channel = sanitize(input(usr, "Enter the camera channel tag. Adding the channel \"[CAMERA_CHANNEL_TELEVISION]\" will enable broadband broadcast to all receivers in the local area:", "Enter camera channel tag") as text|null)
 		if(length(cam_channel) && can_interact(user))
 			if(length(cam_channel) > MAX_CAMCHAN_TAG_LENGTH)
 				to_chat(user, SPAN_WARNING("Maximum camera channel tag length is 20 characters."))

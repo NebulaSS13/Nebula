@@ -15,7 +15,7 @@
 		"Entertainment" = TRUE
 	)
 	camera_channels = list(
-		CHANNEL_TELEVISION
+		CAMERA_CHANNEL_TELEVISION
 	)
 	equipment = list(
 		/obj/item/boombox,

@@ -2,7 +2,7 @@
 	name = "forensic drone module"
 	display_name = "Forensics"
 	channels = list("Security" = TRUE)
-	camera_channels = list(CHANNEL_SECURITY)
+	camera_channels = list(CAMERA_CHANNEL_SECURITY)
 	software = list(
 		/datum/computer_file/program/suit_sensors,
 		/datum/computer_file/program/digitalwarrant

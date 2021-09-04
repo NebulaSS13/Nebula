@@ -9,7 +9,7 @@
 		"Science" = TRUE
 	)
 	camera_channels = list(
-		CHANNEL_MINE
+		CAMERA_CHANNEL_MINE
 	)
 	module_sprites = list(
 		"Basic"          = 'icons/mob/robots/robot_miner_old.dmi',
