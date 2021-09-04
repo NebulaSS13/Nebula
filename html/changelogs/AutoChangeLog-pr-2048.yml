@@ -1,0 +1,6 @@
+author: comma
+delete-after: true
+changes:
+  - tweak: Planet types are now weighted, with some (barren and shrouded) spawning
+      less often than normal ones
+  - rscadd: Adds meat planets made of meat (rarer spawn)
