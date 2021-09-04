@@ -40,7 +40,7 @@
 			. += lang
 	else
 		. += "Your current species, faction or home system selection does not allow you to choose additional languages.<br>"
-	. += "<hr>"
+	. += "</center><hr>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/background/languages/OnTopic(var/href,var/list/href_list, var/mob/user)
