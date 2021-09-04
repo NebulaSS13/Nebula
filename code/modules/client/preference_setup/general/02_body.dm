@@ -149,9 +149,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			var/datum/appearance_descriptor/descriptor = mob_species.appearance_descriptors[entry]
 			. += "<tr><td><b>[capitalize(descriptor.chargen_label)]</b></td>"
 			if(descriptor.has_custom_value())
-				. += "<td align = 'center' width = '50px'><a href='?src=\ref[src];set_descriptor=\ref[descriptor];set_descriptor_custom=1'>[descriptor.get_value_text(pref.appearance_descriptors[entry])]</a></td><td align = 'center'>"
+				. += "<td align = 'left' width = '50px'><a href='?src=\ref[src];set_descriptor=\ref[descriptor];set_descriptor_custom=1'>[descriptor.get_value_text(pref.appearance_descriptors[entry])]</a></td><td align = 'left'>"
 			else
-				. += "<td align = 'center' colspan = 2>"
+				. += "<td align = 'left' colspan = 2>"
 			for(var/i = descriptor.chargen_min_index to descriptor.chargen_max_index)
 				var/use_string = descriptor.chargen_value_descriptors[i]
 				var/desc_index = descriptor.get_index_from_value(pref.appearance_descriptors[entry])

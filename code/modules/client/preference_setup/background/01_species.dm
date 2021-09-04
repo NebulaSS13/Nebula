@@ -1,5 +1,6 @@
 /datum/category_item/player_setup_item/background/species
-	sort_order = 3
+	name = "Species"
+	sort_order = 1
 	var/hide_species = TRUE
 
 /datum/category_item/player_setup_item/background/species/save_character(datum/pref_record_writer/W)
@@ -12,16 +13,34 @@
 	return mob_species && (mob_species.appearance_flags & flag)
 
 /datum/category_item/player_setup_item/background/species/content(var/mob/user)
-	. = list()
+	var/decl/species/current_species = get_species_by_key(pref.species)
+	var/list/prefilter = get_playable_species()
+	var/list/playables = list()
+	
+	for(var/s in prefilter)
+		if(!check_rights(R_ADMIN, 0) && config.usealienwhitelist)
+			var/decl/species/checking_species = get_species_by_key(s)
+			if(!(checking_species.spawn_flags & SPECIES_CAN_JOIN))
+				continue
+			else if((checking_species.spawn_flags & SPECIES_IS_WHITELISTED) && !is_alien_whitelisted(preference_mob(),checking_species))
+				continue
+		playables += s
 
-	var/decl/species/mob_species = get_species_by_key(pref.species)
-	var/title = "<b>Species<a href='?src=\ref[src];show_species=1'><small>?</small></a>:</b> <a href='?src=\ref[src];set_species=1'>[mob_species.name]</a>"
-	var/append_text = "<a href='?src=\ref[src];toggle_species_verbose=1'>[hide_species ? "Expand" : "Collapse"]</a>"
-	. += "<hr>"
-	. += mob_species.get_description(title, append_text, verbose = !hide_species, skip_detail = TRUE, skip_photo = TRUE)
-	. += "<table><tr style='vertical-align:top'><td><b>Body</b> "
-	. += "(<a href='?src=\ref[src];random=1'>&reg;</A>)"
-	. += "<br>"
+	. = list()
+	. += "<tr><td colspan=3><center><h3>Species: <a href='?src=\ref[src];show_species=1'>[pref.species]</small></a></h3></td></tr>"
+	. += "</center></td></tr>"
+	. += "<tr><td colspan=3><center>"
+	for(var/s in get_playable_species())
+		var/decl/species/list_species = get_species_by_key(s)
+		if(pref.species == list_species.name)
+			. += "<span class='linkOn'>[list_species.name]</span> "
+		else
+			. += "<a href='?src=\ref[src];set_species=[list_species.name]'>[list_species.name]</a> "
+	. += "</center><hr/></td></tr>"
+	. += "<tr><td width = '200px'>"
+	. += "<center>[current_species.get_description() || "No additional details."]</center>"
+	. += "</td>"
+	. += "</table><hr>"
 
 	. = jointext(.,null)
 
@@ -33,28 +52,12 @@
 		return TOPIC_REFRESH
 
 	else if(href_list["show_species"])
-		var/choice = input("Which species would you like to look at?") as null|anything in get_playable_species()
-		if(choice)
-			var/decl/species/current_species = get_species_by_key(choice)
-			show_browser(user, current_species.get_description(), "window=species;size=700x400")
-			return TOPIC_HANDLED
+		var/decl/species/current_species = get_species_by_key(pref.species)
+		show_browser(user, current_species.get_description(), "window=species;size=700x400")
+		return TOPIC_HANDLED
 
 	else if(href_list["set_species"])
-
-		var/list/species_to_pick = list()
-		for(var/species in get_playable_species())
-			if(!check_rights(R_ADMIN, 0) && config.usealienwhitelist)
-				var/decl/species/current_species = get_species_by_key(species)
-				if(!(current_species.spawn_flags & SPECIES_CAN_JOIN))
-					continue
-				else if((current_species.spawn_flags & SPECIES_IS_WHITELISTED) && !is_alien_whitelisted(preference_mob(),current_species))
-					continue
-			species_to_pick += species
-
-		var/choice = input("Select a species to play as.") as null|anything in species_to_pick
-		if(!choice || !(choice in get_all_species()))
-			return
-
+		var/choice = href_list["set_species"]
 		var/prev_species = pref.species
 		pref.species = choice
 		if(prev_species != pref.species)

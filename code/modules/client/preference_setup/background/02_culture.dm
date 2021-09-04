@@ -16,7 +16,7 @@
 
 /datum/category_item/player_setup_item/background/culture
 	name = "Culture"
-	sort_order = 1
+	sort_order = 2
 	var/list/hidden
 	var/list/expanded
 
