@@ -113,7 +113,7 @@
 
 /datum/fabricator_recipe/struts/get_resources()
 	resources = list(
-		/decl/material/solid/metal/steel =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2),
+		/decl/material/solid/metal/steel =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
 	)
 
 /datum/fabricator_recipe/struts/aluminium
@@ -123,7 +123,7 @@
 
 /datum/fabricator_recipe/struts/aluminium/get_resources()
 	resources = list(
-		/decl/material/solid/metal/aluminium =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2),
+		/decl/material/solid/metal/aluminium =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
 	)
 
 /datum/fabricator_recipe/struts/titanium
@@ -133,5 +133,5 @@
 
 /datum/fabricator_recipe/struts/titanium/get_resources()
 	resources = list(
-		/decl/material/solid/metal/titanium =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2),
+		/decl/material/solid/metal/titanium =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
 	)
