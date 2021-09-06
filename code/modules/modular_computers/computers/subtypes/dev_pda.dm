@@ -33,6 +33,7 @@
 
 /obj/item/modular_computer/pda/on_update_icon()
 	. = ..()
+	add_overlay(image(icon, "blank_screen"))
 	var/mob/living/carbon/human/H = loc
 	if(istype(H) && H.wear_id == src)
 		H.update_inv_wear_id()
