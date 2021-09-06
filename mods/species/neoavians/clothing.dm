@@ -32,7 +32,11 @@
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/suit/rad_suit.dmi')
 
-//material cloak
+//cloaks
+/obj/item/clothing/accessory/cloak/Initialize()
+	. = ..()
+	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/accessory/cloak.dmi')
+
 /obj/item/clothing/accessory/cloak/hide/Initialize()
 	. = ..()
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/accessory/cloak_hide.dmi')
@@ -84,7 +88,7 @@
 
 /obj/item/clothing/shoes/avian/footwraps
 	name = "cloth footwraps"
-	desc = "A roll of treated canvas used for wrapping paws"
+	desc = "A roll of treated canvas used for wrapping feet."
 	icon = 'mods/species/neoavians/icons/clothing/feet/footwraps.dmi'
 	force = 0
 	item_flags = ITEM_FLAG_SILENT
