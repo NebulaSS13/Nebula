@@ -119,6 +119,7 @@
 	fluid_initial = 10
 
 // Permaflood overlay.
+var/global/obj/effect/flood/flood_object = new
 /obj/effect/flood
 	name = ""
 	mouse_opacity = 0
@@ -131,6 +132,7 @@
 	density = 0
 	opacity = 0
 	anchored = 1
+	vis_flags = VIS_INHERIT_ID
 
 /obj/effect/flood/explosion_act()
 	SHOULD_CALL_PARENT(FALSE)

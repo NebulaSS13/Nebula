@@ -17,11 +17,17 @@
 /turf/return_fluid()
 	return (locate(/obj/effect/fluid) in contents)
 
-/turf/proc/make_flooded()
-	if(!flooded)
-		flooded = TRUE
-		update_icon()
+/turf/proc/make_unflooded(var/force)
+	if(force || flooded)
+		flooded = FALSE
 		fluid_update()
+		update_icon()
+
+/turf/proc/make_flooded(var/force)
+	if(force || !flooded)
+		flooded = TRUE
+		fluid_update()
+		update_icon()
 
 /turf/is_flooded(var/lying_mob, var/absolute)
 	return (flooded || (!absolute && check_fluid_depth(lying_mob ? FLUID_OVER_MOB_HEAD : FLUID_DEEP)))
@@ -41,14 +47,9 @@
 	return 0
 
 /turf/proc/show_bubbles()
-	set waitfor = 0
-
+	set waitfor = FALSE
 	if(flooded)
-		var/obj/effect/flood/flood = locate() in src
-		if(istype(flood))
-			flick("ocean-bubbles", flood)
 		return
-
 	var/obj/effect/fluid/F = locate() in src
 	if(istype(F))
 		flick("bubbles",F)

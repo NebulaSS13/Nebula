@@ -171,3 +171,5 @@
 		vis_contents += air.graphic
 	else
 		vis_contents.Cut()
+		if(flooded)
+			vis_contents |= global.flood_object
