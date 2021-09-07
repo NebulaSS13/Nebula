@@ -15,7 +15,20 @@
 	var/obj/effect/overmap/visitable/sector/exoplanet/owner
 
 /turf/exterior/Initialize(mapload, no_update_icon = FALSE)
+
+	if(possible_states > 0)
+		icon_state = "[rand(0, possible_states)]"
+	owner = LAZYACCESS(map_sectors, "[z]")
+	if(!istype(owner))
+		owner = null
+	else
+		//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
+		set_light(owner.lightlevel)
+		if(owner.planetary_area && istype(loc, world.area))
+			ChangeArea(src, owner.planetary_area)
+
 	. = ..(mapload)	// second param is our own, don't pass to children
+
 	if (no_update_icon)
 		return
 
@@ -65,19 +78,6 @@
 		var/obj/structure/fire_source/heat_source = thing
 		gas.temperature = gas.temperature + heat_source.exterior_temperature / max(1, get_dist(src, get_turf(heat_source)))
 	return gas
-
-/turf/exterior/Initialize(var/ml)
-	if(possible_states > 0)
-		icon_state = "[rand(0, possible_states)]"
-	owner = LAZYACCESS(map_sectors, "[z]")
-	if(!istype(owner))
-		owner = null
-	else
-		//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
-		set_light(owner.lightlevel)
-		if(owner.planetary_area && istype(loc, world.area))
-			ChangeArea(src, owner.planetary_area)
-	. = ..()
 
 /turf/exterior/levelupdate()
 	for(var/obj/O in src)
