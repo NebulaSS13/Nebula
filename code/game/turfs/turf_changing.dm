@@ -1,11 +1,9 @@
 /turf/proc/ReplaceWithLattice(var/material)
-	var/base_turf = open_turf_type
-	if(!base_turf || HasBelow(z))
-		base_turf = get_base_turf_by_area(src);
-	if(type != base_turf)
-		src.ChangeTurf(get_base_turf_by_area(src))
-	if(!(locate(/obj/structure/lattice) in src))
-		new /obj/structure/lattice(src, material)
+	var/base_turf = get_base_turf_by_area(src)
+	if(base_turf && type != base_turf)
+		. = ChangeTurf(base_turf)
+	if(!(locate(/obj/structure/lattice) in .))
+		new /obj/structure/lattice(., material)
 
 // Removes all signs of lattice on the pos of the turf -Donkieyo
 /turf/proc/RemoveLattice()
@@ -31,7 +29,8 @@
 	if(ispath(N, /turf/space))
 		var/turf/below = GetBelow(src)
 		if(istype(below) && !isspaceturf(below))
-			N = /turf/simulated/open
+			var/area/A = get_area(src)
+			N = A?.open_turf || open_turf_type || /turf/simulated/open
 
 	// Track a number of old values for the purposes of raising
 	// state change events after changing the turf to the new type.

@@ -32,7 +32,7 @@
 	var/fluid_blocked_dirs = 0
 	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
 	var/footstep_type
-	var/open_turf_type
+	var/open_turf_type // Which turf to use when this turf is destroyed or replaced in a multiz context. Overridden by area.
 	var/tmp/changing_turf
 
 	var/prev_type // Previous type of the turf, prior to turf translation.
