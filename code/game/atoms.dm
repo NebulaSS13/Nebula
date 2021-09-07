@@ -588,4 +588,8 @@ its easier to just keep the beam vertical.
 	var/matrix/M = matrix()
 	M.Scale(icon_scale_x, icon_scale_y)
 	M.Turn(icon_rotation)
-	animate(src, transform = M, transform_animate_time)
+	if(transform_animate_time)
+		animate(src, transform = M, transform_animate_time)
+	else
+		transform = M
+	return transform

@@ -236,7 +236,11 @@ Please contact me on #coderbus IRC. ~Carn x
 	else
 		M.Scale(desired_scale_x, desired_scale_y)
 		M.Translate(0, 16*(desired_scale_y-1))
-	animate(src, transform = M, time = transform_animate_time)
+	if(transform_animate_time)
+		animate(src, transform = M, time = transform_animate_time)
+	else
+		transform = M
+	return transform
 
 var/global/list/damage_icon_parts = list()
 
