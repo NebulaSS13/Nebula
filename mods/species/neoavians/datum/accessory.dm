@@ -34,9 +34,6 @@
 	name = "Avian Twies"
 	icon_state = "avian_twies"
 
-
-
-
 /decl/sprite_accessory/hair/avian/alt
 	name = "Avian Plumage Alt"
 	icon_state = "avian_default_alt"
@@ -108,19 +105,6 @@
 	name = "Raptor Ears (Head)"
 	icon_state = "ears"
 
-/decl/sprite_accessory/marking/avian/tail
-	name = "Tailfeathers (Groin)"
-	icon_state = "feathered_tail"
-	body_parts = list(BP_GROIN)
-
-/decl/sprite_accessory/marking/avian/tail/avian
-	name = "Raptor Tail (Groin)"
-	icon_state = "raptor_tail"
-
-/decl/sprite_accessory/marking/avian/tail/avian_feathers
-	name = "Raptor Tailfeathers (Groin)"
-	icon_state = "raptor_tail_feathers"
-
 /decl/sprite_accessory/marking/avian/wing_feathers
 	name = "Wing Feathers (Left)"
 	body_parts = list(BP_L_HAND)
@@ -129,6 +113,26 @@
 /decl/sprite_accessory/marking/avian/wing_feathers/right
 	name = "Wing Feathers (Right)"
 	body_parts = list(BP_R_HAND)
+
+/decl/sprite_accessory/marking/avian/additive
+	name = "Beak, Additive (Head)"
+	icon_state = "beak-add"
+	blend = ICON_ADD
+
+/decl/sprite_accessory/marking/avian/resomi/additive
+	name = "Raptor Ears, Additive (Head)"
+	icon_state = "ears-add"
+	blend = ICON_ADD
+
+/decl/sprite_accessory/marking/avian/wing_feathers/additive
+	name = "Wing Feathers, Additive (Left)"
+	icon_state = "wing_feathers-add"
+	blend = ICON_ADD
+
+/decl/sprite_accessory/marking/avian/wing_feathers/right/additive
+	name = "Wing Feathers, Additive (Right)"
+	icon_state = "wing_feathers-add"
+	blend = ICON_ADD
 
 /decl/sprite_accessory/hair/bald/Initialize()
 	. = ..()

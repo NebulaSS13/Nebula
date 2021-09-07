@@ -26,7 +26,12 @@
 	base_color = "#000616"
 	reagent_tag = IS_AVIAN
 
-	available_bodytypes = list(/decl/bodytype/avian)
+	available_bodytypes = list(
+		/decl/bodytype/avian,
+		/decl/bodytype/avian/additive,
+		/decl/bodytype/avian/raptor,
+		/decl/bodytype/avian/additive/raptor
+	)
 
 	total_health = 80
 	brute_mod = 1.35
