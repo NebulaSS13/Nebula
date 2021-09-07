@@ -694,7 +694,7 @@ var/global/list/damage_icon_parts = list()
 		//generate a new one
 		var/tail_anim = bodytype.get_tail_animation(src) || bodytype.tail_icon
 		tail_icon = new/icon(tail_anim)
-		if(species.species_flags & HAS_SKIN_COLOR)
+		if(species.appearance_flags & HAS_SKIN_COLOR)
 			tail_icon.Blend(skin_colour, bodytype.tail_blend)
 		// The following will not work with animated tails.
 		var/use_tail = bodytype.get_tail_hair(src)
