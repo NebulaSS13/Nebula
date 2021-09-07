@@ -18,7 +18,7 @@
 /datum/exoplanet_theme/ruined_city/before_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
 	E.ruin_tags_whitelist |= RUIN_ALIEN
 	for(var/zlevel in E.map_z)
-		new /datum/random_map/city(null,E.x_origin,E.y_origin,zlevel,E.x_size,E.y_size,0,1,1, E.planetary_area)
+		new /datum/random_map/city(E.x_origin, E.y_origin, zlevel, E.x_size, E.y_size, FALSE, TRUE, E.planetary_area)
 
 /datum/exoplanet_theme/ruined_city/after_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
 	var/area/A = E.planetary_area
@@ -158,7 +158,7 @@
 	preserve_map = 0
 	var/artifacts_to_spawn = 1
 
-/datum/random_map/maze/lab/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
+/datum/random_map/maze/lab/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
 	if(prob(10))
 		artifacts_to_spawn = rand(2,3)
 	..()

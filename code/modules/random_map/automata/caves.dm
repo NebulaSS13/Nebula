@@ -10,7 +10,7 @@
 	var/list/minerals_sparse
 	var/list/minerals_rich
 
-/datum/random_map/automata/cave_system/New()
+/datum/random_map/automata/cave_system/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
 	if(!minerals_sparse) 
 		minerals_sparse = SSmaterials.weighted_minerals_sparse
 	if(!minerals_rich)   
@@ -49,8 +49,7 @@
 	var/empty_count = 0
 	while((ore_count>0) && (ore_turfs.len>0))
 
-		if(!priority_process)
-			CHECK_TICK
+		CHECK_TICK
 
 		var/check_cell = pick(ore_turfs)
 		ore_turfs -= check_cell

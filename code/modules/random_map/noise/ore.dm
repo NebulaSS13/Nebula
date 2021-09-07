@@ -34,10 +34,10 @@
 		/decl/material/solid/graphite = list(3,5)
 	)
 
-/datum/random_map/noise/ore/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
+/datum/random_map/noise/ore/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
 	rare_val = cell_range * rare_val
 	deep_val = cell_range * deep_val
-	..(seed, tx, ty, tz, (tlx / chunk_size), (tly / chunk_size), do_not_apply, do_not_announce, never_be_priority)
+	..(tx, ty, tz, (tlx / chunk_size), (tly / chunk_size), do_not_apply, do_not_announce)
 
 /datum/random_map/noise/ore/check_map_sanity()
 
@@ -82,9 +82,7 @@
 
 			LAZYADD(., T)
 
-			if(!priority_process)
-				CHECK_TICK
-
+			CHECK_TICK
 			var/datum/extension/buried_resources/resources = get_or_create_extension(T, /datum/extension/buried_resources)
 			LAZYINITLIST(resources.resources)
 

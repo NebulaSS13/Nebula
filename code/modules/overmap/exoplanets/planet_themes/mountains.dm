@@ -5,7 +5,7 @@
 /datum/exoplanet_theme/mountains/before_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
 	rock_color = pick(E.rock_colors)
 	for(var/zlevel in E.map_z)
-		new /datum/random_map/automata/cave_system/mountains(null,E.x_origin,E.y_origin,zlevel,E.x_origin+E.x_size,E.x_origin+E.y_size,0,1,1, E.planetary_area, rock_color)
+		new /datum/random_map/automata/cave_system/mountains(E.x_origin, E.y_origin, zlevel, (E.x_origin + E.x_size), (E.x_origin + E.y_size), FALSE, TRUE, E.planetary_area, rock_color)
 
 /datum/exoplanet_theme/mountains/get_planet_image_extra()
 	var/image/res = image('icons/skybox/planet.dmi', "mountains")
@@ -21,7 +21,7 @@
 	floor_type = null
 	var/rock_color
 
-/datum/random_map/automata/cave_system/mountains/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0, var/used_area, var/_rock_color)
+/datum/random_map/automata/cave_system/mountains/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area, var/_rock_color)
 	if(_rock_color)
 		rock_color = _rock_color
 	if(target_turf_type == null)
