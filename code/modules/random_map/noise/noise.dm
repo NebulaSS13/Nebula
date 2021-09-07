@@ -12,7 +12,7 @@
 	var/smoothing_iterations = 0
 	var/smooth_single_tiles			// Single turfs of different value are not allowed
 
-/datum/random_map/noise/New()
+/datum/random_map/noise/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
 	initial_cell_range = cell_range/5
 	cell_base = cell_range/2
 	..()
@@ -108,8 +108,7 @@
 
  	// Recurse until size is too small to subdivide.
 	if(isize>3)
-		if(!priority_process) 
-			CHECK_TICK
+		CHECK_TICK
 		iteration++
 		subdivide(iteration, x,       y,       hsize)
 		subdivide(iteration, x+hsize, y,       hsize)

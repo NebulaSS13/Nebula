@@ -23,7 +23,7 @@
 	var/list/plantcolors = list("RANDOM")
 	var/list/grass_cache
 
-/datum/random_map/noise/exoplanet/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0, var/used_area, var/list/_plant_colors)
+/datum/random_map/noise/exoplanet/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area, var/list/_plant_colors)
 	if(target_turf_type == null)
 		target_turf_type = world.turf
 	water_level = rand(water_level_min,water_level_max)

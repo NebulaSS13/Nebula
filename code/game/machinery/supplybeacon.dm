@@ -115,4 +115,4 @@
 /obj/structure/supply_beacon/proc/drop_cargo(var/drop_x, var/drop_y, var/drop_z)
 	if(!QDELETED(src) && isturf(loc))
 		var/turf/T = loc
-		new /datum/random_map/droppod/supply(null, T.x-2, T.y-2, T.z, supplied_drop = drop_type) // Splat.
+		new /datum/random_map/droppod/supply(T.x-2, T.y-2, T.z, supplied_drop = drop_type) // Splat.

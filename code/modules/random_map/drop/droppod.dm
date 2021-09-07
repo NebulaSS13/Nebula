@@ -23,7 +23,7 @@
 	var/placement_explosion_light = 6
 	var/placement_explosion_flash = 4
 
-/datum/random_map/droppod/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/supplied_drop, var/list/supplied_drops, var/automated)
+/datum/random_map/droppod/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area, var/supplied_drop, var/list/supplied_drops, var/automated)
 
 	if(supplied_drop)
 		drop_type = supplied_drop
@@ -223,4 +223,4 @@
 	else
 		return
 
-	new /datum/random_map/droppod(null, usr.x-1, usr.y-1, usr.z, supplied_drops = spawned_mobs, automated = automatic_pod)
+	new /datum/random_map/droppod(usr.x-1, usr.y-1, usr.z, supplied_drops = spawned_mobs, automated = automatic_pod)
