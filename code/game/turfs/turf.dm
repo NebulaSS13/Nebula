@@ -70,7 +70,15 @@
 	if(flooded && !density)
 		fluid_update(FALSE)
 
+	initialize_ambient_light(mapload)
+
 	return INITIALIZE_HINT_NORMAL
+
+/turf/proc/initialize_ambient_light(var/mapload)
+	return
+
+/turf/proc/update_ambient_light(var/mapload)
+	return
 
 /turf/on_update_icon()
 	update_flood_overlay()

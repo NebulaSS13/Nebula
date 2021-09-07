@@ -37,6 +37,22 @@
 		ext.affecting_heat_sources = last_affecting_heat_sources
 	return ext
 
+/turf/exterior/initialize_ambient_light(var/mapload)
+	update_ambient_light(mapload)
+
+/turf/exterior/update_ambient_light(var/mapload)
+	if(owner) // Exoplanets do their own lighting shenanigans.
+		//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
+		set_light(owner.lightlevel)
+		return
+	if(config.starlight)
+		var/area/A = get_area(src)
+		if(A.show_starlight)
+			set_light(config.starlight, 0.75, l_color = SSskybox.background_color)
+			return
+	if(!mapload)
+		set_light(0)
+
 /turf/exterior/is_plating()
 	return !density
 
