@@ -180,9 +180,10 @@
 	if(GAME_STATE >= RUNLEVEL_GAME)
 		fluid_update()
 	. = ..()
-	if(!ml)
-		for(var/turf/space/space in RANGE_TURFS(src, 1))
-			space.update_starlight()
+
+/turf/simulated/initialize_ambient_light(var/mapload)
+	for(var/turf/T AS_ANYTHING in RANGE_TURFS(src, 1))
+		T.update_ambient_light(mapload)
 
 /turf/simulated/Destroy()
 	if (zone)
