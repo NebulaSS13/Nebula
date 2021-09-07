@@ -80,6 +80,8 @@
 			if(!istype(T))
 				continue
 
+			LAZYADD(., T)
+
 			if(!priority_process)
 				CHECK_TICK
 

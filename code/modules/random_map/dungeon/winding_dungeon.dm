@@ -142,16 +142,16 @@
 	monster_available = null //Get rid of all the references
 
 /datum/random_map/winding_dungeon/apply_to_turf(var/x, var/y)
-	. = ..()
-	var/turf/T = locate((origin_x-1)+x,(origin_y-1)+y,origin_z)
+	var/turf/T = ..()
 	if(T && !T.density)
 		var/can = 1
 		for(var/atom/movable/M in T)
-			if(istype(M,/mob/living) || M.density)
+			if(istype(M, /mob/living) || M.density)
 				can = 0
 				break
 		if(can)
 			monster_available += T
+	return T
 
 /datum/random_map/winding_dungeon/generate_map()
 	logging("Winding Dungeon Generation Start")
