@@ -12,7 +12,7 @@
 // This is not great.
 /turf/simulated/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
 
-	if(locate(/obj/effect/flood) in src)
+	if(is_flooded(absolute = TRUE))
 		return
 
 	if(get_fluid_depth() > FLUID_QDEL_POINT)

@@ -68,7 +68,7 @@
 		setup_zmimic(mapload)
 
 	if(flooded && !density)
-		fluid_update(FALSE)
+		make_flooded(TRUE)
 
 	initialize_ambient_light(mapload)
 
@@ -85,13 +85,11 @@
 
 /turf/proc/update_flood_overlay()
 	if(flooded)
-		if(!locate(/obj/effect/flood) in src)
-			new /obj/effect/flood(src)
+		vis_contents |= global.flood_object
 		for(var/obj/effect/fluid/fluid in src)
 			qdel(fluid)
 	else
-		for(var/obj/effect/flood/flood in src)
-			qdel(flood)
+		vis_contents -= global.flood_object
 
 /turf/Destroy()
 

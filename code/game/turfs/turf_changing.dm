@@ -68,9 +68,11 @@
 		else if(old_fire)
 			qdel(old_fire)
 
-	if(old_flooded != W.flooded)
-		W.flooded = old_flooded
-		W.fluid_update()
+	if(isnull(W.flooded) && old_flooded != W.flooded)
+		if(old_flooded && !W.density)
+			W.make_flooded()
+		else
+			W.make_unflooded()
 
 	// Raise appropriate events.
 	W.post_change()
