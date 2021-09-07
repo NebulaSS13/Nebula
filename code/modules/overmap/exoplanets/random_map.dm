@@ -2,7 +2,7 @@
 /datum/random_map/noise/exoplanet
 	descriptor = "exoplanet"
 	smoothing_iterations = 1
-	smooth_single_tiles = 1
+	smooth_single_tiles =  TRUE
 
 	var/water_level
 	var/water_level_min = 0
