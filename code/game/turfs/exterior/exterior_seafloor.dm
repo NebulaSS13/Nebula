@@ -2,12 +2,11 @@
 	name = "sea floor"
 	desc = "A thick layer of silt and debris from above."
 	icon = 'icons/turf/exterior/seafloor.dmi'
-	flooded = TRUE
 	icon_edge_layer = EXT_EDGE_SEAFLOOR
 	var/detail_decal
 
-/turf/exterior/seafloor/non_flooded
-	flooded = FALSE
+/turf/exterior/seafloor/flooded
+	flooded = TRUE
 
 /turf/exterior/seafloor/Initialize()
 	. = ..()

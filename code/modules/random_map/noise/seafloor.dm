@@ -1,14 +1,14 @@
 /datum/random_map/noise/seafloor
 	descriptor = "seafloor (roundstart)"
 	smoothing_iterations = 3
-	target_turf_type = /turf/exterior/seafloor
+	target_turf_type = /turf/exterior/seafloor/flooded
 
 /datum/random_map/noise/seafloor/replace_space
 	descriptor = "seafloor (replace space)"
 	target_turf_type = /turf/space
 
 /datum/random_map/noise/seafloor/replace_space/get_appropriate_path(var/value)
-	return /turf/exterior/seafloor
+	return /turf/exterior/seafloor/flooded
 
 /turf/exterior/mud/flooded
 	flooded = TRUE
