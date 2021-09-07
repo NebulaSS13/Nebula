@@ -5,7 +5,7 @@
 
 /datum/category_item/player_setup_item/background/languages
 	name = "Languages"
-	sort_order = 2
+	sort_order = 3
 	var/list/allowed_languages
 	var/list/free_languages
 
@@ -32,13 +32,15 @@
 
 /datum/category_item/player_setup_item/background/languages/content()
 	. = list()
-	. += "<b>Languages</b><br>"
+	. += "<tr><td colspan=3><center><h3>Languages:</h3></td></tr>"
+	. += "<hr>"
 	var/list/show_langs = get_language_text()
 	if(LAZYLEN(show_langs))
 		for(var/lang in show_langs)
 			. += lang
 	else
 		. += "Your current species, faction or home system selection does not allow you to choose additional languages.<br>"
+	. += "</center><hr>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/background/languages/OnTopic(var/href,var/list/href_list, var/mob/user)
@@ -129,8 +131,11 @@
 			var/decl/language/lang_instance = GET_DECL(lang)
 			if(free_languages[lang])
 				LAZYADD(., "- [lang_instance.name] (required).<br>")
+				LAZYADD(., "<i><b>[lang_instance.desc || "No information avaliable."]</b></i></br>")
 			else
 				LAZYADD(., "- [lang_instance.name] <a href='?src=\ref[src];remove_language=[i]'>Remove</a> <span style='color:#ff0000;font-style:italic;'>[lang_instance.warning]</span><br>")
+				if(lang in pref.alternate_languages)
+					LAZYADD(., "<i><b>[lang_instance.desc || "No information avaliable."]</b></i></br>")
 	if(pref.alternate_languages.len < MAX_LANGUAGES)
 		var/remaining_langs = MAX_LANGUAGES - pref.alternate_languages.len
 		LAZYADD(., "- <a href='?src=\ref[src];add_language=1'>add</a> ([remaining_langs] remaining)<br>")
