@@ -415,9 +415,6 @@
 		stasis_value += stasis_sources[source]
 	stasis_sources.Cut()
 
-/mob/living/carbon/get_sex()
-	return species.get_sex(src)
-
 /mob/living/carbon/proc/set_nutrition(var/amt)
 	nutrition = Clamp(amt, 0, initial(nutrition))
 
