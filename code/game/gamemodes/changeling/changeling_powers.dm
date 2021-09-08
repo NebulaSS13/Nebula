@@ -389,12 +389,10 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		C.drop_from_inventory(W)
 
 	var/mob/living/carbon/human/O = new(src)
-	/*
 	if (C.dna.GetUIState(DNA_UI_GENDER))
 		O.set_gender(FEMALE)
 	else
 		O.set_gender(MALE)
-	*/
 	O.dna = C.dna.Clone()
 	C.dna = null
 	O.real_name = chosen_dna.real_name

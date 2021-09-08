@@ -341,7 +341,6 @@ var/global/list/damage_icon_parts = list()
 			icon_key += "[M][part.markings[M]]"
 		if(part)
 			icon_key += "[part.bodytype.get_icon_cache_uid(part.owner)][part.render_alpha]"
-			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
 			icon_key += "[part.skin_tone]"
 			if(part.skin_colour)
 				icon_key += "[part.skin_colour]"
