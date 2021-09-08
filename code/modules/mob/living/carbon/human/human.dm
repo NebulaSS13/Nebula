@@ -1084,10 +1084,10 @@
 	if(species.holder_type)
 		holder_type = species.holder_type
 
-	var/decl/pronouns/pronouns = get_pronouns_by_gender(gender)
-	if(!istype(pronouns) || !(pronouns.type in species.available_pronouns))
-		pronouns = pick(species.available_pronouns)
-		set_gender(pronouns.name)
+	var/decl/pronouns/new_pronouns = get_pronouns_by_gender(get_sex())
+	if(!istype(new_pronouns) || !(new_pronouns in species.available_pronouns))
+		new_pronouns = pick(species.available_pronouns)
+		set_gender(new_pronouns.name)
 
 	icon_state = lowertext(species.name)
 	set_bodytype(pick(species.available_bodytypes))

@@ -43,9 +43,13 @@
 /atom/proc/get_pronouns(var/ignore_coverings)
 	. = get_pronouns_by_gender(gender)
 
+var/global/list/byond_genders = list(MALE, FEMALE, NEUTER, PLURAL)
 /atom/proc/set_gender(var/new_gender = NEUTER, var/update_body = FALSE)
 	if(gender != new_gender)
-		gender = new_gender
+		if(new_gender in global.byond_genders)
+			gender = new_gender
+		else
+			gender = NEUTER
 		if(update_body)
 			update_icon()
 		return TRUE
@@ -53,17 +57,23 @@
 
 // Living mob helpers.
 /mob/living
+	var/pronoun_gender
 	var/decl/pronouns/pronouns
 
-// TODO: separate body and gender.
+/mob/living/get_sex()
+	if(!pronoun_gender)
+		pronoun_gender = gender
+	return pronoun_gender
+
 /mob/living/set_gender(var/new_gender, var/update_body = FALSE)
 	. = ..()
 	if(.)
+		pronoun_gender = new_gender
 		pronouns = null
 
 /mob/living/get_pronouns(var/ignore_coverings)
 	if(!pronouns)
-		pronouns = get_pronouns_by_gender(gender)
+		pronouns = get_pronouns_by_gender(get_sex())
 	return pronouns || GET_DECL(/decl/pronouns)
 
 // Human concealment helper.
