@@ -75,6 +75,7 @@
 /decl/species/neoavian/equip_default_fallback_uniform(var/mob/living/carbon/human/H)
 	if(istype(H))
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/avian_smock/worker, slot_w_uniform_str)
+		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/avian, slot_shoes_str)
 
 /decl/species/neoavian/handle_post_species_pref_set(var/datum/preferences/pref)
 	pref.body_markings = pref.body_markings || list()
@@ -89,76 +90,3 @@
 
 /obj/item/organ/internal/eyes/avian
 	eye_icon = 'mods/species/neoavians/icons/eyes.dmi'
-
-/decl/sprite_accessory/hair/avian
-	name = "Avian Plumage"
-	icon_state = "avian_default"
-	icon = 'mods/species/neoavians/icons/hair.dmi'
-	species_allowed = list(SPECIES_AVIAN)
-	blend = ICON_MULTIPLY
-
-/decl/sprite_accessory/hair/avian/mohawk
-	name = "Avian Mohawk"
-	icon_state = "avian_mohawk"
-
-/decl/sprite_accessory/hair/avian/spiky
-	name = "Avian Spiky"
-	icon_state = "avian_spiky"
-
-/decl/sprite_accessory/hair/avian/crest
-	name = "Avian Crest"
-	icon_state = "avian_crest"
-
-/decl/sprite_accessory/hair/avian/mane
-	name = "Avian Mane"
-	icon_state = "avian_mane"
-
-/decl/sprite_accessory/hair/avian/upright
-	name = "Avian Upright"
-	icon_state = "avian_upright"
-
-/decl/sprite_accessory/hair/avian/fluffymohawk
-	name = "Avian Fluffy Mohawk"
-	icon_state = "avian_fluffymohawk"
-
-/decl/sprite_accessory/hair/avian/twies
-	name = "Avian Twies"
-	icon_state = "avian_twies"
-
-/decl/sprite_accessory/marking/avian
-	name = "Beak (Head)"
-	icon_state = "beak"
-	body_parts = list(BP_HEAD)
-	icon = 'mods/species/neoavians/icons/markings.dmi'
-	species_allowed = list(SPECIES_AVIAN)
-	blend = ICON_MULTIPLY
-
-/decl/sprite_accessory/marking/avian/resomi
-	name = "Raptor Ears (Head)"
-	icon_state = "ears"
-
-/decl/sprite_accessory/marking/avian/tail
-	name = "Tailfeathers (Groin)"
-	icon_state = "feathered_tail"
-	body_parts = list(BP_GROIN)
-
-/decl/sprite_accessory/marking/avian/tail/resomi
-	name = "Raptor Tail (Groin)"
-	icon_state = "raptor_tail"
-
-/decl/sprite_accessory/marking/avian/tail/resomi_feathers
-	name = "Raptor Tailfeathers (Groin)"
-	icon_state = "raptor_tail_feathers"
-
-/decl/sprite_accessory/marking/avian/wing_feathers
-	name = "Wing Feathers (Left)"
-	body_parts = list(BP_L_HAND)
-	icon_state = "wing_feathers"
-
-/decl/sprite_accessory/marking/avian/wing_feathers/right
-	name = "Wing Feathers (Right)"
-	body_parts = list(BP_R_HAND)
-
-/decl/sprite_accessory/hair/bald/Initialize()
-	. = ..()
-	LAZYADD(species_allowed, SPECIES_AVIAN)
