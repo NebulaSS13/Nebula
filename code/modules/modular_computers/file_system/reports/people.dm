@@ -23,7 +23,7 @@
 /datum/report_field/people/proc/get_used_network()
 	var/obj/item/stock_parts/computer/hard_drive/holder = owner.holder
 	if(holder)
-		var/datum/extension/interactive/ntos/os = get_extension(holder.loc, /datum/extension/interactive/ntos)
+		var/datum/extension/interactive/os/os = get_extension(holder.loc, /datum/extension/interactive/os)
 		return os?.get_network()
 
 /datum/report_field/people/proc/perform_send(subject, body, attach_report)

@@ -125,7 +125,7 @@
 				data["requests"] = requests
 				data["done"] = done
 				data["can_print"] = can_print()
-				data["is_NTOS"] = istype(nano_host(), /obj/item/modular_computer) // Can we even use notifications?
+				data["is_OS"] = istype(nano_host(), /obj/item/modular_computer) // Can we even use notifications?
 				data["notifications_enabled"] = notifications_enabled
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -384,7 +384,7 @@
 		))
 
 /datum/nano_module/supply/proc/can_print()
-	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(nano_host(), /datum/extension/interactive/os)
 	if(os)
 		return os.has_component(PART_PRINTER)
 	return 0

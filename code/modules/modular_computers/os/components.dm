@@ -1,32 +1,32 @@
-/datum/extension/interactive/ntos/proc/get_component(var/part_type)
+/datum/extension/interactive/os/proc/get_component(var/part_type)
 	return locate(part_type) in holder
 
-/datum/extension/interactive/ntos/proc/get_all_components()
+/datum/extension/interactive/os/proc/get_all_components()
 	. = list()
 	for(var/obj/item/stock_parts/P in holder)
 		. += P
 
-/datum/extension/interactive/ntos/proc/find_hardware_by_name(var/partname)
+/datum/extension/interactive/os/proc/find_hardware_by_name(var/partname)
 	for(var/obj/item/stock_parts/P in holder)
 		if(findtext(P.name, partname))
 			return P
 
-/datum/extension/interactive/ntos/proc/has_component(var/part_type)
+/datum/extension/interactive/os/proc/has_component(var/part_type)
 	return !!get_component(part_type)
 
-/datum/extension/interactive/ntos/proc/print_paper(content, title)
+/datum/extension/interactive/os/proc/print_paper(content, title)
 	var/obj/item/stock_parts/computer/nano_printer/printer = get_component(PART_PRINTER)
 	if(printer)
 		return printer.print_text(content, title)
 
-/datum/extension/interactive/ntos/proc/get_network_tag()
+/datum/extension/interactive/os/proc/get_network_tag()
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
 		return network_card.get_network_tag()
 	else
 		return "N/A"
 
-/datum/extension/interactive/ntos/proc/get_network_status(var/specific_action = 0)
+/datum/extension/interactive/os/proc/get_network_status(var/specific_action = 0)
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
 		var/signal_power_level = NETWORK_SPEED_BASE * network_card.get_signal(specific_action)
@@ -36,31 +36,31 @@
 	else
 		return 0
 
-/datum/extension/interactive/ntos/proc/get_inserted_id()
+/datum/extension/interactive/os/proc/get_inserted_id()
 	var/obj/item/stock_parts/computer/card_slot/card_slot = get_component(PART_CARD)
 	if(card_slot)
 		return card_slot.stored_card
 
-/datum/extension/interactive/ntos/proc/max_disk_capacity()
+/datum/extension/interactive/os/proc/max_disk_capacity()
 	var/obj/item/stock_parts/computer/hard_drive/hard_drive = get_component(PART_HDD)
 	if(hard_drive)
 		return hard_drive.max_capacity
 
-/datum/extension/interactive/ntos/proc/used_disk_capacity()
+/datum/extension/interactive/os/proc/used_disk_capacity()
 	var/obj/item/stock_parts/computer/hard_drive/hard_drive = get_component(PART_HDD)
 	if(hard_drive)
 		return hard_drive.used_capacity
 
-/datum/extension/interactive/ntos/proc/get_hardware_flag()
+/datum/extension/interactive/os/proc/get_hardware_flag()
 	return PROGRAM_ALL
 
 //Used to display in configurator program
-/datum/extension/interactive/ntos/proc/get_power_usage()
+/datum/extension/interactive/os/proc/get_power_usage()
 	return 0
 
-/datum/extension/interactive/ntos/proc/recalc_power_usage()
+/datum/extension/interactive/os/proc/recalc_power_usage()
 
-/datum/extension/interactive/ntos/proc/voltage_overload()
+/datum/extension/interactive/os/proc/voltage_overload()
 	var/atom/A = holder
 	if(istype(A))
 		spark_at(A, amount = 10, cardinal_only = TRUE, holder = A)

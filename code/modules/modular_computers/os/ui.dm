@@ -1,6 +1,6 @@
 
 // Operates NanoUI
-/datum/extension/interactive/ntos/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/datum/extension/interactive/os/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!on || !host_status())
 		if(ui)
 			ui.close()
@@ -41,13 +41,13 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "laptop_mainscreen.tmpl", "NTOS Main Menu ", 400, 500)
+		ui = new(user, src, ui_key, "laptop_mainscreen.tmpl", "GOOSE Main Menu ", 400, 500)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
-/datum/extension/interactive/ntos/extension_status(var/mob/user)
+/datum/extension/interactive/os/extension_status(var/mob/user)
 	. = ..()
 	if(!on || !host_status())
 		return STATUS_CLOSE
@@ -55,12 +55,12 @@
 	if(updating)
 		. = min(STATUS_UPDATE, .)
 
-/datum/extension/interactive/ntos/CanUseTopic(mob/user, state)
+/datum/extension/interactive/os/CanUseTopic(mob/user, state)
 	. = holder.CanUseTopic(user, state)
 	. = min(., extension_status(user))
 
 // Handles user's GUI input
-/datum/extension/interactive/ntos/extension_act(href, href_list, user)
+/datum/extension/interactive/os/extension_act(href, href_list, user)
 	if( href_list["PC_exit"] )
 		kill_program(active_program)
 		return TOPIC_HANDLED
@@ -119,7 +119,7 @@
 		open_terminal(usr)
 		return TOPIC_HANDLED
 
-/datum/extension/interactive/ntos/proc/regular_ui_update()
+/datum/extension/interactive/os/proc/regular_ui_update()
 	var/ui_update_needed = 0
 	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
 	if(battery_module)
@@ -154,14 +154,14 @@
 	if(ui_update_needed)
 		update_uis()
 
-/datum/extension/interactive/ntos/proc/update_uis()
+/datum/extension/interactive/os/proc/update_uis()
 	if(active_program) //Should we update program ui or computer ui?
 		SSnano.update_uis(active_program)
 		if(active_program.NM)
 			SSnano.update_uis(active_program.NM)
 
 // Function used by NanoUI's to obtain data for header. All relevant entries begin with "PC_"
-/datum/extension/interactive/ntos/proc/get_header_data()
+/datum/extension/interactive/os/proc/get_header_data()
 	var/list/data = list()
 	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
 	if(battery_module)
@@ -217,11 +217,11 @@
 	data["PC_showexitprogram"] = active_program ? 1 : 0 // Hides "Exit Program" button on mainscreen
 	return data
 
-/datum/extension/interactive/ntos/initial_data()
+/datum/extension/interactive/os/initial_data()
 	return get_header_data()
 
-/datum/extension/interactive/ntos/update_layout()
+/datum/extension/interactive/os/update_layout()
 	return TRUE
 
-/datum/extension/interactive/ntos/nano_host()
+/datum/extension/interactive/os/nano_host()
 	return holder.nano_host()

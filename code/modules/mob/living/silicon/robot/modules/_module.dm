@@ -230,7 +230,7 @@
 		buff.remove()
 
 /obj/item/robot_module/proc/grant_software(var/mob/living/silicon/robot/R)
-	var/datum/extension/interactive/ntos/os = get_extension(R, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(R, /datum/extension/interactive/os)
 	if(os && os.has_component(PART_HDD))
 		var/obj/item/stock_parts/computer/hard_drive/disk = os.get_component(PART_HDD)
 		for(var/T in software)

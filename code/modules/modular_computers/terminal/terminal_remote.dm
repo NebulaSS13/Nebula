@@ -1,9 +1,9 @@
 // The computer var is for the remote computer with these.
 /datum/terminal/remote
 	name = "Remote Terminal"
-	var/datum/extension/interactive/ntos/origin_computer
+	var/datum/extension/interactive/os/origin_computer
 
-/datum/terminal/remote/New(mob/user, datum/extension/interactive/ntos/computer, datum/extension/interactive/ntos/origin)
+/datum/terminal/remote/New(mob/user, datum/extension/interactive/os/computer, datum/extension/interactive/os/origin)
 	origin_computer = origin
 	..(user, computer)
 

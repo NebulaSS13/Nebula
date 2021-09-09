@@ -1,6 +1,6 @@
 /datum/computer_file/program/filemanager
 	filename = "filemanager"
-	filedesc = "NTOS File Manager"
+	filedesc = "OS File Manager"
 	extended_desc = "This program allows management of files."
 	program_icon_state = "generic"
 	program_key_state = "generic_key"
@@ -20,7 +20,7 @@
 	var/datum/file_storage/current_filesource = /datum/file_storage/disk
 	var/datum/file_transfer/current_transfer	//ongoing file transfer between filesources
 
-/datum/computer_file/program/filemanager/on_startup(var/mob/living/user, var/datum/extension/interactive/ntos/new_host)
+/datum/computer_file/program/filemanager/on_startup(var/mob/living/user, var/datum/extension/interactive/os/new_host)
 	..()
 	for(var/T in file_sources)
 		file_sources[T] = new T(new_host)
@@ -227,7 +227,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "file_manager.tmpl", "NTOS File Manager", 600, 700, state = state)
+		ui = new(user, src, ui_key, "file_manager.tmpl", "OS File Manager", 600, 700, state = state)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.set_auto_update(1)
