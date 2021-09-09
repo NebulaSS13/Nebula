@@ -334,7 +334,7 @@ var/global/list/damage_icon_parts = list()
 
 	for(var/organ_tag in species.has_limbs)
 		var/obj/item/organ/external/part = organs_by_name[organ_tag]
-		if(isnull(part) || part.is_stump())
+		if(isnull(part) || part.is_stump() || part.organ_tag == BP_TAIL)
 			icon_key += "0"
 			continue
 		for(var/M in part.markings)
@@ -692,7 +692,7 @@ var/global/list/damage_icon_parts = list()
 	var/icon/tail_icon = tail_icon_cache[icon_key]
 	if(!tail_icon)
 		//generate a new one
-		var/tail_anim = bodytype.get_tail_animation(src) || bodytype.tail_icon
+		var/tail_anim = bodytype.get_tail_animation(src) || bodytype.get_tail_icon(src)
 		tail_icon = new/icon(tail_anim)
 		if(species.appearance_flags & HAS_SKIN_COLOR)
 			tail_icon.Blend(skin_colour, bodytype.tail_blend)
