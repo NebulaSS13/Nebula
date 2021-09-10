@@ -4,6 +4,7 @@
 	var/icon_deformed
 	var/lip_icon
 	var/bandages_icon
+	var/bodytype_flag = BODY_FLAG_HUMANOID
 	var/bodytype_category = BODYTYPE_OTHER
 	var/limb_icon_intensity = 1.5
 	var/damage_mask

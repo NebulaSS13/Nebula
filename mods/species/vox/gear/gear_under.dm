@@ -1,9 +1,6 @@
 /obj/item/clothing/under/vox
 	has_sensor = 0
-
-/obj/item/clothing/under/vox/Initialize()
-	. = ..()
-	bodytype_restricted = list(BODYTYPE_VOX)
+	bodytype_equip_flags = BODY_FLAG_VOX
 
 /obj/item/clothing/under/vox/vox_casual
 	name = "alien clothing"

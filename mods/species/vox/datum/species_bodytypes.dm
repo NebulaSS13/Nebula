@@ -9,6 +9,7 @@
 	tail =              "voxtail"
 	tail_icon =         'mods/species/vox/icons/body/tail.dmi'
 	tail_blend =        ICON_OVERLAY
+	bodytype_flag =     BODY_FLAG_VOX
 
 /decl/bodytype/vox/Initialize()
 	equip_adjust = list(

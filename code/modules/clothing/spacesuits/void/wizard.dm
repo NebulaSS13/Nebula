@@ -49,7 +49,7 @@
 	body_parts_covered = SLOT_HANDS
 	cold_protection =    SLOT_HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	gender = PLURAL
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02

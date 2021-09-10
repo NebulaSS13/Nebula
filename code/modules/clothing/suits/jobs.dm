@@ -9,7 +9,7 @@
 	icon = 'icons/clothing/suit/apron.dmi'
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	allowed = list (/obj/item/chems/spray/plantbgone,/obj/item/scanner/plant,/obj/item/seeds,/obj/item/chems/glass/bottle,/obj/item/minihoe)
 
 //Captain
@@ -57,7 +57,7 @@
 	name = "classic chef's apron"
 	desc = "A basic, dull, white chef's apron."
 	icon = 'icons/clothing/suit/apron_chef.dmi'
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
 
@@ -118,7 +118,7 @@
 	desc = "A high-visibility vest used in work zones."
 	icon = 'icons/clothing/suit/hazard_vest/orange.dmi'
 	blood_overlay_type = "armor"
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	allowed = list (
 		/obj/item/scanner/gas,
 		/obj/item/flashlight,

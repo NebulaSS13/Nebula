@@ -11,7 +11,7 @@
 	slot_flags = SLOT_HANDS
 	attack_verb = list("challenged")
 	blood_overlay_type = "bloodyhands"
-	bodytype_restricted = list(BODYTYPE_HUMANOID)
+	bodytype_equip_flags = BODY_FLAG_HUMANOID
 	var/obj/item/clothing/ring/covering_ring
 
 /obj/item/clothing/gloves/update_clothing_icon()

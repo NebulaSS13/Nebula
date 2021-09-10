@@ -6,6 +6,7 @@
 	blood_mask =        'icons/mob/human_races/species/monkey/blood_mask.dmi'
 	health_hud_intensity = 1.75
 	tail = "chimptail"
+	bodytype_flag = BODY_FLAG_MONKEY
 
 /decl/bodytype/monkey/Initialize()
 	equip_adjust = list(
