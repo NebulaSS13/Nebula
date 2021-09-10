@@ -20,7 +20,7 @@
 
 /obj/item/organ/external/tail/set_dna(datum/dna/new_dna)
 	. = ..()
-	if(owner.bodytype)
+	if(owner.bodytype || !(tail_icon && tail_state && tail_hair && tail_animation))//no overriding if something there
 		tail_icon = owner.bodytype.tail_icon
 		tail_state = owner.bodytype.tail
 		tail_hair = owner.bodytype.tail_hair
