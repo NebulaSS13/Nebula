@@ -711,15 +711,19 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/set_dir()
 	. = ..()
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
-	if(. && tail_organ?.get_tail())
+	if(!tail_organ)
+		return
+	if(. && tail_organ.get_tail())
 		update_tail_showing()
 
 
 /mob/living/carbon/human/proc/set_tail_state(var/t_state)
 	var/image/tail_overlay = overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER]
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	if(!tail_organ)
+		return null
 
-	if(tail_overlay && tail_organ?.get_tail_animation())
+	if(tail_overlay && tail_organ.get_tail_animation())
 		tail_overlay.icon_state = t_state
 		return tail_overlay
 	return null
@@ -728,7 +732,9 @@ var/global/list/damage_icon_parts = list()
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
 /mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
-	var/t_state = "[tail_organ?.get_tail()]_once"
+	if(!tail_organ)
+		return
+	var/t_state = "[tail_organ.get_tail()]_once"
 
 	var/image/tail_overlay = overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER]
 	if(tail_overlay && tail_overlay.icon_state == t_state)
@@ -746,6 +752,8 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/proc/animate_tail_start(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	if(!tail_organ)
+		return
 	if(tail_organ.tail_states)
 		set_tail_state("[tail_organ.get_tail()]_slow[rand(1, tail_organ.tail_states)]")
 		if(update_icons)
@@ -753,6 +761,8 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/proc/animate_tail_fast(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	if(!tail_organ)
+		return
 	if(tail_organ.tail_states)
 		set_tail_state("[tail_organ.get_tail()]_loop[rand(1, tail_organ.tail_states)]")
 		if(update_icons)
@@ -760,6 +770,8 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/proc/animate_tail_reset(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	if(!tail_organ)
+		return
 	if(stat != DEAD && tail_organ.tail_states > 0)
 		set_tail_state("[tail_organ.get_tail()]_idle[rand(1,tail_organ.tail_states)]")
 	else
@@ -770,7 +782,9 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/proc/animate_tail_stop(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
-	set_tail_state("[tail_organ?.get_tail()]_static")
+	if(!tail_organ)
+		return
+	set_tail_state("[tail_organ.get_tail()]_static")
 
 	if(update_icons)
 		queue_icon_update()
