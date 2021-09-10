@@ -584,6 +584,9 @@
 	else
 		return move_trail
 
+/decl/species/proc/handle_trail(var/mob/living/carbon/human/H, var/turf/simulated/T)
+	return
+
 /decl/species/proc/update_skin(var/mob/living/carbon/human/H)
 	return
 

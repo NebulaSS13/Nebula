@@ -117,6 +117,7 @@
 			if(istype(stomper) && !stomper.is_stump() && stomper.coating && stomper.coating.total_volume > 1)
 				source = stomper
 	if(!source)
+		species.handle_trail(src, T)
 		return
 
 	var/list/bloodDNA
