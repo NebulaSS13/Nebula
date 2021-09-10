@@ -1,0 +1,4 @@
+author: SolatK
+delete-after: true
+changes:
+  - bugfix: Fixes accessory offsets for avians
