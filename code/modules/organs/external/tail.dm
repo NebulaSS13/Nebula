@@ -18,10 +18,10 @@
 	arterial_bleed_severity = 03
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK
 
-/obj/item/organ/external/tail/set_dna(datum/dna/new_dna)
-	. = ..()
+/obj/item/organ/external/tail/sync_colour_to_human(var/mob/living/carbon/human/human)
 	if(owner.bodytype || !(tail_icon && tail_state && tail_hair && tail_animation))//no overriding if something there
 		tail_icon = owner.bodytype.tail_icon
 		tail_state = owner.bodytype.tail
 		tail_hair = owner.bodytype.tail_hair
 		tail_animation = owner.bodytype.tail_animation
+	. = ..()
