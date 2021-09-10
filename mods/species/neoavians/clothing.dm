@@ -14,6 +14,8 @@
 
 /obj/item/clothing/gloves/Initialize()
 	. = ..()
+	if(length(bodytype_restricted) && !("exclude" in bodytype_restricted))
+		bodytype_restricted |= BODYTYPE_AVIAN
 	LAZYSET(sprite_sheets, BODYTYPE_AVIAN, 'mods/species/neoavians/icons/clothing/gloves.dmi')
 
 //Backpacks & tanks
