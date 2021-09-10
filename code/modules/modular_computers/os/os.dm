@@ -1,5 +1,5 @@
-/datum/extension/interactive/ntos
-	base_type = /datum/extension/interactive/ntos
+/datum/extension/interactive/os
+	base_type = /datum/extension/interactive/os
 	expected_type = /atom/movable
 	flags = EXTENSION_FLAG_IMMEDIATE
 	var/on = FALSE
@@ -24,11 +24,11 @@
 
 	var/list/terminals
 
-/datum/extension/interactive/ntos/Destroy()
+/datum/extension/interactive/os/Destroy()
 	system_shutdown()
 	. = ..()
 
-/datum/extension/interactive/ntos/Process()
+/datum/extension/interactive/os/Process()
 	if(on && !host_status())
 		system_shutdown()
 	if(!on)
@@ -43,15 +43,15 @@
 			P.process_tick()
 	regular_ui_update()
 
-/datum/extension/interactive/ntos/proc/host_status()
+/datum/extension/interactive/os/proc/host_status()
 	return TRUE
 
-/datum/extension/interactive/ntos/proc/get_network()
+/datum/extension/interactive/os/proc/get_network()
 	var/datum/extension/network_device/D = get_extension(get_component(PART_NETWORK), /datum/extension/network_device)
 	if(D)
 		return D.get_network()
 
-/datum/extension/interactive/ntos/proc/system_shutdown()
+/datum/extension/interactive/os/proc/system_shutdown()
 	on = FALSE
 	for(var/datum/computer_file/program/P in running_programs)
 		kill_program(P, 1)
@@ -75,7 +75,7 @@
 				hard_drive.take_damage(hard_drive.health)
 	update_host_icon()
 
-/datum/extension/interactive/ntos/proc/system_boot()
+/datum/extension/interactive/os/proc/system_boot()
 	on = TRUE
 	var/datum/computer_file/data/autorun = get_file("autorun")
 	if(istype(autorun))
@@ -86,7 +86,7 @@
 		D.connect()
 	update_host_icon()
 
-/datum/extension/interactive/ntos/proc/kill_program(var/datum/computer_file/program/P, var/forced = 0)
+/datum/extension/interactive/os/proc/kill_program(var/datum/computer_file/program/P, var/forced = 0)
 	if(!P)
 		return
 	P.on_shutdown(forced)
@@ -97,7 +97,7 @@
 			ui_interact(usr) // Re-open the UI on this computer. It should show the main screen now.
 	update_host_icon()
 
-/datum/extension/interactive/ntos/proc/run_program(filename)
+/datum/extension/interactive/os/proc/run_program(filename)
 	var/datum/computer_file/program/P = get_file(filename)
 
 	var/mob/user = usr
@@ -122,7 +122,7 @@
 	update_host_icon()
 	return 1
 
-/datum/extension/interactive/ntos/proc/minimize_program(mob/user)
+/datum/extension/interactive/os/proc/minimize_program(mob/user)
 	if(!active_program)
 		return
 	active_program.program_state = PROGRAM_STATE_BACKGROUND // Should close any existing UIs
@@ -132,34 +132,34 @@
 	if(istype(user))
 		ui_interact(user) // Re-open the UI on this computer. It should show the main screen now.
 
-/datum/extension/interactive/ntos/proc/set_autorun(program)
+/datum/extension/interactive/os/proc/set_autorun(program)
 	var/datum/computer_file/data/autorun = get_file("autorun")
 	if(istype(autorun))
 		autorun.stored_data = "[program]"
 	else
 		create_file("autorun", "[program]")
 
-/datum/extension/interactive/ntos/proc/add_log(var/text)
+/datum/extension/interactive/os/proc/add_log(var/text)
 	var/datum/extension/network_device/D = get_extension(get_component(PART_NETWORK), /datum/extension/network_device)
 	if(D)
 		D.add_log(text)
 
-/datum/extension/interactive/ntos/proc/get_physical_host()
+/datum/extension/interactive/os/proc/get_physical_host()
 	var/atom/A = holder
 	if(istype(A))
 		return A
 
-/datum/extension/interactive/ntos/proc/handle_updates(shutdown_after)
+/datum/extension/interactive/os/proc/handle_updates(shutdown_after)
 	updating = TRUE
 	update_progress = 0
 	update_postshutdown = shutdown_after
 
 // Used by camera monitor program
-/datum/extension/interactive/ntos/proc/check_eye(var/mob/user)
+/datum/extension/interactive/os/proc/check_eye(var/mob/user)
 	if(active_program)
 		return active_program.check_eye(user)
 
-/datum/extension/interactive/ntos/proc/process_updates()
+/datum/extension/interactive/os/proc/process_updates()
 	if(update_progress < updates)
 		update_progress += rand(0, 2500)
 		return
@@ -173,29 +173,29 @@
 	if(update_postshutdown)
 		system_shutdown()
 
-/datum/extension/interactive/ntos/proc/event_powerfailure()
+/datum/extension/interactive/os/proc/event_powerfailure()
 	for(var/datum/computer_file/program/P in running_programs)
 		P.event_powerfailure(P != active_program)
 
-/datum/extension/interactive/ntos/proc/event_idremoved()
+/datum/extension/interactive/os/proc/event_idremoved()
 	for(var/datum/computer_file/program/P in running_programs)
 		P.event_idremoved(P != active_program)
 
-/datum/extension/interactive/ntos/proc/has_terminal(mob/user)
+/datum/extension/interactive/os/proc/has_terminal(mob/user)
 	for(var/datum/terminal/terminal in terminals)
 		if(terminal.get_user() == user)
 			return terminal
 
-/datum/extension/interactive/ntos/proc/open_terminal(mob/user)
+/datum/extension/interactive/os/proc/open_terminal(mob/user)
 	if(!on)
 		return
 	if(has_terminal(user))
 		return
 	LAZYADD(terminals, new /datum/terminal/(user, src))
 
-/datum/extension/interactive/ntos/proc/emagged()
+/datum/extension/interactive/os/proc/emagged()
 	return FALSE
 
-/datum/extension/interactive/ntos/proc/get_processing_power()
+/datum/extension/interactive/os/proc/get_processing_power()
 	var/obj/item/stock_parts/computer/processor_unit/CPU = get_component(PART_CPU)
 	return CPU?.processing_power

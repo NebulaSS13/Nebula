@@ -50,11 +50,11 @@
 	return get_z(nano_host())
 
 /datum/nano_module/proc/print_text(var/text, var/mob/user)
-	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(nano_host(), /datum/extension/interactive/os)
 	if(os)
 		os.print_paper(text)
 	else
-		to_chat(user, "Error: Unable to detect compatible printer interface. Are you running NTOSv2 compatible system?")
+		to_chat(user, "Error: Unable to detect compatible printer interface. Are you running a GOOSEv2 compatible system?")
 
 /datum/proc/initial_data()
 	return list()

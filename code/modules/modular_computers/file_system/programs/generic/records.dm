@@ -53,7 +53,7 @@
 	var/list/user_access = using_access || user.GetAccess()
 
 	var/obj/PC = nano_host()
-	var/datum/extension/interactive/ntos/os = get_extension(PC, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(PC, /datum/extension/interactive/os)
 	if(os && os.emagged())
 		user_access = user_access ? user_access.Copy() : list()
 		user_access |= access_syndicate

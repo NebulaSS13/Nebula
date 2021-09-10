@@ -23,7 +23,7 @@
 	. = ..()
 
 	START_PROCESSING(SSobj, src)
-	set_extension(src, /datum/extension/interactive/ntos/device/implant)
+	set_extension(src, /datum/extension/interactive/os/device/implant)
 	set_extension(src, /datum/extension/assembly/modular_computer/cyberbrain)
 
 	update_icon()
@@ -42,7 +42,7 @@
 
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
 	if(assembly.enabled && assembly.screen_on)
-		var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+		var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 		if(os)
 			os.ui_interact(owner)
 	else if(!assembly.enabled && assembly.screen_on)
@@ -67,7 +67,7 @@
 		if(!assembly.enabled)
 			return
 
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		os.Process()
 
@@ -92,8 +92,8 @@
 	assembly_name = "cyberbrain"
 	force_synth = TRUE
 
-/datum/extension/interactive/ntos/device/implant
+/datum/extension/interactive/os/device/implant
 	expected_type = /obj/item/organ/internal/augment/active/cyberbrain
 
-/datum/extension/interactive/ntos/device/implant/emagged()
+/datum/extension/interactive/os/device/implant/emagged()
 	return FALSE

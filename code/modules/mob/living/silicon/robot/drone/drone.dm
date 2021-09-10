@@ -40,7 +40,7 @@
 	var/hat_y = -13
 
 	holder_type = /obj/item/holder/drone
-	ntos_type = null
+	os_type = null
 	starting_stock_parts = null
 
 /mob/living/silicon/robot/drone/Initialize()

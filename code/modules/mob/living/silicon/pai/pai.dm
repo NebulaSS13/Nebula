@@ -35,7 +35,7 @@ var/global/list/possible_say_verbs = list(
 	idcard = /obj/item/card/id
 	silicon_radio = null // pAIs get their radio from the card they belong to.
 
-	ntos_type =	/datum/extension/interactive/ntos/silicon/small
+	os_type =	/datum/extension/interactive/os/silicon/small
 	starting_stock_parts = list(
 		/obj/item/stock_parts/computer/processor_unit/small,
 		/obj/item/stock_parts/computer/hard_drive/silicon,

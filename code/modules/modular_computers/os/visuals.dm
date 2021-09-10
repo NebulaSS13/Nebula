@@ -1,10 +1,10 @@
 
-/datum/extension/interactive/ntos/proc/update_host_icon()
+/datum/extension/interactive/os/proc/update_host_icon()
 	var/atom/A = holder
 	if(istype(A))
 		A.update_icon()
 
-/datum/extension/interactive/ntos/proc/get_screen_icon_file()
+/datum/extension/interactive/os/proc/get_screen_icon_file()
 	if(istype(holder, /obj/item/modular_computer))
 		var/obj/item/modular_computer/MC = holder
 		return MC.screen_icon || MC.icon
@@ -12,7 +12,7 @@
 		var/atom/A = holder
 		return A.icon
 
-/datum/extension/interactive/ntos/proc/get_screen_overlay()
+/datum/extension/interactive/os/proc/get_screen_overlay()
 	if(!on)
 		return image(screen_icon_file, screensaver_icon)
 	if(!screen_icon_file)
@@ -27,7 +27,7 @@
 		return I
 	return image(null)
 
-/datum/extension/interactive/ntos/proc/get_keyboard_overlay()
+/datum/extension/interactive/os/proc/get_keyboard_overlay()
 	if(!on)
 		return
 	if(!screen_icon_file)
@@ -38,20 +38,20 @@
 		return I
 	return image(null)
 
-/datum/extension/interactive/ntos/proc/visible_error(message)
+/datum/extension/interactive/os/proc/visible_error(message)
 	var/atom/A = holder
 	if(istype(A))
 		A.visible_message("<span class='warning'>\The [A]'s screen displays an error: \"[message]\"</span>", range = 1)
 
-/datum/extension/interactive/ntos/proc/visible_notification(message)
+/datum/extension/interactive/os/proc/visible_notification(message)
 	var/atom/A = holder
 	if(istype(A))
 		A.visible_message("<span class='notice'>\The [A] screen displays a notification: \"[message]\"</span>", range = 1)
 
-/datum/extension/interactive/ntos/proc/audible_notification(notification)
+/datum/extension/interactive/os/proc/audible_notification(notification)
 	var/atom/A = holder
 	if(istype(A))
 		playsound(A, notification, 5, falloff = 1)
 
-/datum/extension/interactive/ntos/proc/show_error(user, message)
+/datum/extension/interactive/os/proc/show_error(user, message)
 	to_chat(user, "<span class='warning'>[message]</span>")
