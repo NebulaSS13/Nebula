@@ -710,14 +710,16 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/set_dir()
 	. = ..()
-	if(. && get_tail_organ().get_tail())
+	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	if(. && tail_organ?.get_tail())
 		update_tail_showing()
 
 
 /mob/living/carbon/human/proc/set_tail_state(var/t_state)
 	var/image/tail_overlay = overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER]
+	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
 
-	if(tail_overlay && get_tail_organ().get_tail_animation())
+	if(tail_overlay && tail_organ?.get_tail_animation())
 		tail_overlay.icon_state = t_state
 		return tail_overlay
 	return null
@@ -725,7 +727,8 @@ var/global/list/damage_icon_parts = list()
 //Not really once, since BYOND can't do that.
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
 /mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
-	var/t_state = "[get_tail_organ().get_tail()]_once"
+	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	var/t_state = "[tail_organ?.get_tail()]_once"
 
 	var/image/tail_overlay = overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER]
 	if(tail_overlay && tail_overlay.icon_state == t_state)
