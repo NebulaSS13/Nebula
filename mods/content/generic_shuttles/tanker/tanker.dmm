@@ -28,8 +28,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -45,8 +43,6 @@
 	tag_interior_door = "tanker_dock_interior_door"
 	},
 /obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -133,8 +129,6 @@
 /area/tanker)
 "ix" = (
 /obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/light{
@@ -167,8 +161,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 5;
 	icon_state = "2-5"
 	},
 /turf/simulated/floor/plating,
@@ -243,8 +235,6 @@
 /area/tanker)
 "wS" = (
 /obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -298,8 +288,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -356,7 +344,6 @@
 /area/tanker)
 "Gu" = (
 /obj/structure/cable/blue{
-	d2 = 10;
 	icon_state = "0-10"
 	},
 /obj/machinery/power/smes/buildable/preset{
@@ -381,8 +368,6 @@
 	dir = 6
 	},
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -406,8 +391,6 @@
 	id_tag = "tanker_dock_exterior_door"
 	},
 /obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -447,8 +430,6 @@
 /area/tanker)
 "Rq" = (
 /obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/wall,
@@ -533,7 +514,6 @@
 "YI" = (
 /obj/machinery/power/terminal,
 /obj/structure/cable/green{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,

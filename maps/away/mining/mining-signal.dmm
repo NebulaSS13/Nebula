@@ -1744,8 +1744,6 @@
 "fO" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable{
-	d1 = 16;
-	d2 = 0;
 	dir = 4;
 	icon_state = "0-2"
 	},
@@ -1759,8 +1757,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/small/emergency,
 /obj/structure/cable{
-	d1 = 16;
-	d2 = 0;
 	dir = 4;
 	icon_state = "1-8"
 	},
@@ -1808,34 +1804,24 @@
 /area/outpost/abandoned)
 "fX" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/wall/titanium,
 /area/outpost/abandoned)
 "fY" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/wall/titanium,
 /area/outpost/abandoned)
 "fZ" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/wall/titanium,
@@ -1978,8 +1964,6 @@
 	icon_state = "1-2"
 	},
 /obj/structure/cable/orange{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/random/trash,
@@ -2055,8 +2039,6 @@
 /area/outpost/abandoned)
 "gI" = (
 /obj/structure/cable/orange{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -2064,8 +2046,6 @@
 "gJ" = (
 /obj/machinery/door/airlock/hatch,
 /obj/structure/cable/orange{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -2074,8 +2054,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable/orange{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/airless,
@@ -2092,8 +2070,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/door/firedoor,
 /obj/structure/cable/orange{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/airless,
@@ -2123,8 +2099,6 @@
 "gR" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable/orange{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/airless,
@@ -2146,13 +2120,9 @@
 /area/outpost/abandoned)
 "gU" = (
 /obj/structure/cable/orange{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable/orange{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/plating,
@@ -2166,26 +2136,18 @@
 /area/outpost/abandoned)
 "gW" = (
 /obj/structure/cable/orange{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/asteroid,
 /area/outpost/abandoned)
 "gX" = (
 /obj/structure/cable/orange{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable/orange{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/cable/orange{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -2214,8 +2176,6 @@
 	stat = 1
 	},
 /obj/structure/cable/orange{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/airless,
@@ -2262,8 +2222,6 @@
 "hh" = (
 /obj/machinery/washing_machine,
 /obj/structure/cable/orange{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/airless,
@@ -2325,8 +2283,6 @@
 /area/outpost/abandoned)
 "hs" = (
 /obj/structure/cable/orange{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/random/loot,
@@ -2334,8 +2290,6 @@
 /area/outpost/abandoned)
 "ht" = (
 /obj/structure/cable/orange{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/airless,
@@ -2343,8 +2297,6 @@
 "hu" = (
 /obj/machinery/light/small/emergency,
 /obj/structure/cable/orange{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/airless,
@@ -2352,8 +2304,6 @@
 "hv" = (
 /obj/item/gun/energy/plasmacutter,
 /obj/structure/cable/orange{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/airless,
@@ -2363,8 +2313,6 @@
 	icon_state = "0-4"
 	},
 /obj/structure/cable/orange{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/power/solar_control/autostart{
@@ -2374,16 +2322,12 @@
 /area/outpost/abandoned)
 "hx" = (
 /obj/structure/cable/orange{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/wall/titanium,
 /area/outpost/abandoned)
 "hy" = (
 /obj/structure/cable/orange{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/unsimulated/mask,
@@ -2394,16 +2338,12 @@
 	icon_state = "1-4"
 	},
 /obj/structure/cable/orange{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/unsimulated/mask,
 /area/outpost/abandoned)
 "hA" = (
 /obj/structure/cable/orange{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/structure/cable/orange{
