@@ -7,9 +7,11 @@
 
 /turf/exterior/seafloor/flooded
 	flooded = TRUE
+	color = COLOR_OCEAN
 
 /turf/exterior/seafloor/Initialize()
 	. = ..()
+	color = null
 	if(isnull(detail_decal) && prob(20))
 		detail_decal = "asteroid[rand(0,9)]"
 		update_icon()

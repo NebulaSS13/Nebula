@@ -1383,3 +1383,14 @@ var/global/list/random_useful_
 				/obj/item/lipstick/orange,
 				/obj/item/lipstick/white,
 				/obj/item/lipstick/black)
+
+/obj/random/pottedplant
+	name = "random potted plant"
+	desc = "This is a random potted plant."
+	icon = 'icons/obj/structures/potted_plants.dmi'
+	icon_state = "plant-26"	
+	spawn_nothing_percentage = 0
+	var/static/list/blacklisted_plants = list(/obj/structure/flora/pottedplant/unusual)
+
+/obj/random/pottedplant/spawn_choices()
+	return subtypesof(/obj/structure/flora/pottedplant) - blacklisted_plants
