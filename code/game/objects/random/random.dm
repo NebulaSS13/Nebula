@@ -1384,6 +1384,20 @@ var/global/list/random_useful_
 				/obj/item/lipstick/white,
 				/obj/item/lipstick/black)
 
+/obj/random/seaweed
+	name = "random seaweed"
+	desc = "This is some random seaweed."
+	icon = 'icons/obj/structures/plants.dmi'
+	icon_state = "seaweed"
+
+/obj/random/seaweed/spawn_choices()
+	return list(
+		/obj/structure/flora/seaweed =       3,
+		/obj/structure/flora/seaweed/mid =   3,
+		/obj/structure/flora/seaweed/large = 2,
+		/obj/structure/flora/seaweed/glow =  1
+	)
+
 /obj/random/pottedplant
 	name = "random potted plant"
 	desc = "This is a random potted plant."
@@ -1394,3 +1408,4 @@ var/global/list/random_useful_
 
 /obj/random/pottedplant/spawn_choices()
 	return subtypesof(/obj/structure/flora/pottedplant) - blacklisted_plants
+
