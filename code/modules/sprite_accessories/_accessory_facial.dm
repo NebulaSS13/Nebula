@@ -13,7 +13,7 @@
 /datum/sprite_accessory/facial_hair/shaved
 	name = "Shaved"
 	icon_state = "bald"
-	gender = NEUTER
+	gender = null
 	species_allowed = list(SPECIES_HUMAN)
 
 /datum/sprite_accessory/facial_hair/watson
