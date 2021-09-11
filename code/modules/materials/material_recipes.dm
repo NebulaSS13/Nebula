@@ -1,8 +1,14 @@
 /decl/material/proc/get_recipes(var/reinf_mat)
-	var/key = reinf_mat ? reinf_mat : "base"
+	var/key = reinf_mat || "base"
 	if(!LAZYACCESS(recipes,key))
 		LAZYSET(recipes,key,generate_recipes(reinf_mat))
 	return recipes[key]
+
+/decl/material/proc/get_strut_recipes(var/reinf_mat)
+	var/key = reinf_mat || "base"
+	if(!LAZYACCESS(strut_recipes,key))
+		LAZYSET(strut_recipes,key,generate_strut_recipes(reinf_mat))
+	return strut_recipes[key]
 
 /decl/material/proc/create_recipe_list(base_type)
 	. = list()
@@ -47,10 +53,6 @@
 		if(length(coin_recipes))
 			. += new/datum/stack_recipe_list("antique coins", coin_recipes)
 
-	if(wall_support_value >= 10)
-		. += new/datum/stack_recipe/furniture/girder(src)
-		. += new/datum/stack_recipe/furniture/ladder(src)
-
 	if(integrity >= 50 && hardness >= MAT_VALUE_FLEXIBLE + 10)
 		. += new/datum/stack_recipe/furniture/door(src)
 		. += new/datum/stack_recipe/furniture/barricade(src)
@@ -60,10 +62,8 @@
 		. += new/datum/stack_recipe/furniture/bed(src)
 		. += new/datum/stack_recipe/furniture/pew(src)
 		. += new/datum/stack_recipe/furniture/pew_left(src)
-		. += new/datum/stack_recipe/furniture/rack(src)
 		. += new/datum/stack_recipe/furniture/closet(src)
 		. += new/datum/stack_recipe/furniture/coffin(src)
-		. += new/datum/stack_recipe/butcher_hook(src)
 		. += new/datum/stack_recipe/furniture/chair(src) //NOTE: the wood material has it's own special chair recipe
 		. += new/datum/stack_recipe/furniture/chair/padded(src)
 		. += new/datum/stack_recipe/furniture/chair/office/comfy(src)
@@ -71,11 +71,7 @@
 		. += new/datum/stack_recipe/furniture/chair/arm(src)
 		. += new/datum/stack_recipe/lock(src)
 		. += new/datum/stack_recipe/key(src)
-		. += new/datum/stack_recipe/railing(src)
 		. += new/datum/stack_recipe/rod(src)
-		. += new/datum/stack_recipe/furniture/wall_frame(src)
-		. += new/datum/stack_recipe/furniture/table_frame(src)
-		. += new/datum/stack_recipe/furniture/rack(src)
 
 	if(hardness > MAT_VALUE_RIGID + 10)
 		. += new/datum/stack_recipe/fork(src)
@@ -83,3 +79,17 @@
 		. += new/datum/stack_recipe/bell(src)
 		. += new/datum/stack_recipe/blade(src)
 		. += new/datum/stack_recipe/drill_head(src)
+
+/decl/material/proc/generate_strut_recipes(var/reinforce_material)
+	. = list()
+
+	if(wall_support_value >= 10)
+		. += new/datum/stack_recipe/furniture/girder(src)
+		. += new/datum/stack_recipe/furniture/ladder(src)
+	. += new/datum/stack_recipe/railing(src)
+	. += new/datum/stack_recipe/furniture/wall_frame(src)
+	. += new/datum/stack_recipe/furniture/table_frame(src)
+	. += new/datum/stack_recipe/furniture/rack(src)
+	. += new/datum/stack_recipe/butcher_hook(src)
+	. += new/datum/stack_recipe/furniture/bed(src)
+	. += new/datum/stack_recipe/furniture/machine(src)

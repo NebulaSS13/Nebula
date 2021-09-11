@@ -16,6 +16,8 @@
 	handle_generic_blending = TRUE
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
 	maxhealth = 40
+	parts_amount = 2
+	parts_type = /obj/item/stack/material/strut
 
 	var/paint_color
 	var/stripe_color

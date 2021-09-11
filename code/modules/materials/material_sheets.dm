@@ -326,3 +326,18 @@
 	max_icon_state = "puck-max"
 	stack_merge_type = /obj/item/stack/material/slab
 
+/obj/item/stack/material/strut
+	name = "struts"
+	singular_name = "strut"
+	plural_name = "struts"
+	icon_state = "sheet-strut"
+	plural_icon_state = "sheet-strut-mult"
+	max_icon_state = "sheet-strut-max"
+	stack_merge_type = /obj/item/stack/material/strut
+
+/obj/item/stack/material/strut/list_recipes(mob/user, recipes_sublist)
+	if(!material)
+		return
+	recipes = material.get_strut_recipes(reinf_material && reinf_material.type)
+	..() 
+
