@@ -3,6 +3,7 @@ var/global/list/cardinalz =   list(NORTH, SOUTH, EAST, WEST, UP, DOWN)
 var/global/list/cornerdirs =  list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
 var/global/list/cornerdirsz = list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST, NORTH|UP, EAST|UP, WEST|UP, SOUTH|UP, NORTH|DOWN, EAST|DOWN, WEST|DOWN, SOUTH|DOWN)
 var/global/list/alldirs =     list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
+var/global/list/cabledirs =   list(0, NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST, UP, DOWN)
 var/global/list/reverse_dir = list( // reverse_dir[dir] = reverse of dir
 	     2,  1,  3,  8, 10,  9, 11,  4,  6,  5,  7, 12, 14, 13, 15,
 	32, 34, 33, 35, 40, 42,	41, 43, 36, 38, 37, 39, 44, 46, 45, 47,

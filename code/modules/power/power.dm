@@ -90,19 +90,13 @@
 /obj/machinery/power/attackby(obj/item/W, mob/user)
 	if((. = ..()))
 		return
-
 	if(isCoil(W))
-
 		var/obj/item/stack/cable_coil/coil = W
-
 		var/turf/T = user.loc
-
-		if(!T.is_plating() || !istype(T, /turf/simulated/floor))
+		if(!istype(T) || T.density || !T.is_plating())
 			return
-
 		if(get_dist(src, user) > 1)
 			return
-
 		coil.turf_place(T, user)
 		return TRUE
 

@@ -16,6 +16,8 @@
 
 /turf/exterior/Initialize(mapload, no_update_icon = FALSE)
 
+	color = null
+
 	if(possible_states > 0)
 		icon_state = "[rand(0, possible_states)]"
 	owner = LAZYACCESS(map_sectors, "[z]")
