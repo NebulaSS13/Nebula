@@ -1,5 +1,0 @@
-author: Andromeda-K22
-delete-after: true
-changes:
-  - rscadd: adds the 'strut' material stack, used for a number of items.
-  - tweak: metal sheets are no longer used for many things, struts are used instead.
