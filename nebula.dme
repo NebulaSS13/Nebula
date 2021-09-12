@@ -1407,6 +1407,7 @@
 #include "code\modules\admin\secrets\fun_secrets\waddle.dm"
 #include "code\modules\admin\secrets\investigation\admin_pms.dm"
 #include "code\modules\admin\secrets\investigation\attack_logs.dm"
+#include "code\modules\admin\secrets\tools\player_panel.dm"
 #include "code\modules\admin\verbs\adminhelp.dm"
 #include "code\modules\admin\verbs\adminjump.dm"
 #include "code\modules\admin\verbs\adminpm.dm"

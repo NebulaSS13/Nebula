@@ -88,6 +88,9 @@ var/global/datum/admin_secrets/admin_secrets = new()
 /*************************
 * Pre-defined categories *
 *************************/
+/datum/admin_secret_category/admin_tools
+	name = "Admin Tools"
+
 /datum/admin_secret_category/admin_secrets
 	name = "Admin Secrets"
 
@@ -103,6 +106,11 @@ var/global/datum/admin_secrets/admin_secrets = new()
 /*************************
 * Pre-defined base items *
 *************************/
+/datum/admin_secret_item/admin_tools
+	category = /datum/admin_secret_category/admin_tools
+	log = 0
+	permissions = R_ADMIN
+
 /datum/admin_secret_item/admin_secret
 	category = /datum/admin_secret_category/admin_secrets
 	log = 0
