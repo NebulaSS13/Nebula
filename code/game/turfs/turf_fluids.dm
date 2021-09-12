@@ -20,14 +20,17 @@
 /turf/proc/make_unflooded(var/force)
 	if(force || flooded)
 		flooded = FALSE
-		fluid_update()
-		update_icon()
+		REMOVE_ACTIVE_FLUID_SOURCE(src)
+		vis_contents -= global.flood_object
+		fluid_update() // We are now floodable, so wake up our neighbors.
 
 /turf/proc/make_flooded(var/force)
 	if(force || !flooded)
 		flooded = TRUE
-		fluid_update()
-		update_icon()
+		for(var/obj/effect/fluid/fluid in src)
+			qdel(fluid)
+		ADD_ACTIVE_FLUID_SOURCE(src)
+		vis_contents |= global.flood_object
 
 /turf/is_flooded(var/lying_mob, var/absolute)
 	return (flooded || (!absolute && check_fluid_depth(lying_mob ? FLUID_OVER_MOB_HEAD : FLUID_DEEP)))
@@ -55,22 +58,15 @@
 		flick("bubbles",F)
 
 /turf/fluid_update(var/ignore_neighbors)
-
 	fluid_blocked_dirs = null
 	fluid_can_pass = null
-
-	// Wake up our neighbors.
 	if(!ignore_neighbors)
 		for(var/checkdir in global.cardinal)
 			var/turf/T = get_step(src, checkdir)
-			if(T) T.fluid_update(1)
-
-	// Wake up ourself!
+			if(T)
+				T.fluid_update(TRUE)
 	if(flooded)
 		ADD_ACTIVE_FLUID_SOURCE(src)
-	else
-		REMOVE_ACTIVE_FLUID_SOURCE(src)	
-	update_flood_overlay()
 
 /turf/proc/add_fluid(var/fluid_type, var/fluid_amount, var/defer_update)
 	var/obj/effect/fluid/F = locate() in src

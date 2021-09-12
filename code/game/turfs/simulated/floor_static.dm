@@ -15,7 +15,6 @@
 
 /turf/simulated/floor/fixed/on_update_icon()
 	queue_ao(FALSE)
-	update_flood_overlay()
 
 /turf/simulated/floor/fixed/is_plating()
 	return 0

@@ -36,7 +36,7 @@
 	. = ..()
 	update_materials()
 	if(!CanFluidPass())
-		fluid_update()
+		fluid_update(TRUE)
 
 /obj/structure/proc/show_examined_damage(mob/user, var/perc)
 	if(maxhealth == -1)
@@ -147,10 +147,9 @@
 
 /obj/structure/Destroy()
 	var/turf/T = get_turf(src)
-	if(T)
-		T.fluid_update()
 	. = ..()
 	if(T)
+		T.fluid_update()
 		for(var/atom/movable/AM in T)
 			AM.reset_offsets()
 			AM.reset_plane_and_layer()
@@ -175,6 +174,7 @@
 	if(. && !CanFluidPass())
 		fluid_update()
 		if(T)
+			T.fluid_update()
 			for(var/atom/movable/AM in T)
 				AM.reset_offsets()	
 				AM.reset_plane_and_layer()
