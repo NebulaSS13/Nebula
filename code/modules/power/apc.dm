@@ -576,7 +576,7 @@ var/global/list/all_apcs = list()
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
-		ui = new(user, src, ui_key, "apc.tmpl", "[area.name] - APC", 520, data["siliconUser"] ? 465 : 440)
+		ui = new(user, src, ui_key, "apc.tmpl", "[area? area.name : "ERROR"] - APC", 520, data["siliconUser"] ? 465 : 440)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
 		// open the new ui window
@@ -961,6 +961,15 @@ var/global/list/all_apcs = list()
 			environ = state
 	force_update_channels()
 
-
+/obj/machinery/power/apc/area_changed()
+	. = ..()
+	//Make sure to resume processing if our area changed to something else than null
+	if(QDELETED(src))
+		return
+	if(area)
+		if(is_processing && !(processing_flags & MACHINERY_PROCESS_SELF))
+			processing_flags |= MACHINERY_PROCESS_SELF //don't use START_PROCESSING_MACHINE here or it'll print a stack trace for being already in the processing list
+		else if(!is_processing)
+			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
 #undef APC_UPDATE_ICON_COOLDOWN
