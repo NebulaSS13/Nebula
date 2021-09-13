@@ -4,7 +4,7 @@
 	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle. They're large enough to be worn over other footwear."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/feet/magboots.dmi'
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	force = 3
 	can_fit_under_magboots = FALSE
 	action_button_name = "Toggle Magboots"

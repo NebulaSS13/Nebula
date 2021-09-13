@@ -17,7 +17,8 @@
 
 /obj/item/modkit/Initialize(ml, material_key)
 	if(!target_bodytype)
-		target_bodytype = global.using_map.default_species
+		var/decl/species/species = GET_DECL(global.using_map.default_species)
+		target_bodytype = species.default_bodytype.bodytype_flag
 	. = ..()
 	
 /obj/item/modkit/afterattack(obj/O, mob/user, proximity)
@@ -40,12 +41,6 @@
 	var/obj/item/clothing/I = O
 	if (!istype(I) || !allowed)
 		to_chat(user, "<span class='notice'>[src] is unable to modify that.</span>")
-		return
-
-	var/excluding = ("exclude" in I.bodytype_restricted)
-	var/in_list = (target_bodytype in I.bodytype_restricted)
-	if (excluding ^ in_list)
-		to_chat(user, "<span class='notice'>[I] is already modified.</span>")
 		return
 
 	if(!isturf(O.loc))

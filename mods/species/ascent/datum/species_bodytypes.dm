@@ -4,6 +4,7 @@
 	icon_base =         'mods/species/ascent/icons/species/body/alate/body.dmi'
 	blood_mask =        'mods/species/ascent/icons/species/body/alate/blood_mask.dmi'
 	associated_gender = MALE
+	bodytype_flag =     BODY_FLAG_ALATE
 
 /decl/bodytype/gyne
 	name =              "gyne"
@@ -16,6 +17,7 @@
 	antaghud_offset_y = 18
 	antaghud_offset_x = 4
 	associated_gender = FEMALE
+	bodytype_flag =     BODY_FLAG_GYNE
 
 /decl/bodytype/gyne/Initialize()
 	equip_adjust = list(
@@ -36,6 +38,7 @@
 	limb_blend = ICON_MULTIPLY
 	bodytype_category = BODYTYPE_SNAKE
 	antaghud_offset_y = 8
+	bodytype_flag =     BODY_FLAG_SNAKE
 
 /decl/bodytype/serpentid/Initialize()
 	equip_adjust = list(

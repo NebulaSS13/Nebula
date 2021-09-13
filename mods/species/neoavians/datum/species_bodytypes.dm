@@ -7,6 +7,7 @@
 	limb_blend =        ICON_MULTIPLY
 	tail_blend =        ICON_MULTIPLY
 	tail =              "tail_avian"
+	bodytype_flag =     BODY_FLAG_AVIAN
 
 /decl/bodytype/avian/raptor
 	name =              "raptor"

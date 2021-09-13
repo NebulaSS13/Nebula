@@ -12,7 +12,7 @@
 		laser = ARMOR_LASER_MINOR, 
 		energy = ARMOR_ENERGY_SMALL
 	)
-	bodytype_restricted = list(BODYTYPE_HUMANOID)
+	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
 /obj/item/clothing/under/familiargarb/Initialize()
 	. = ..()

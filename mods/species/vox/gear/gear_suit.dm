@@ -1,11 +1,7 @@
 /obj/item/clothing/suit/space/void/Initialize()
 	. = ..()
-	if("exclude" in bodytype_restricted)
-		LAZYDISTINCTADD(bodytype_restricted, BODYTYPE_VOX)
-	else if(length(bodytype_restricted))
-		LAZYREMOVE(bodytype_restricted, BODYTYPE_VOX)
-	else
-		bodytype_restricted = list("exclude", BODYTYPE_VOX)
+	if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
+		bodytype_equip_flags |= BODY_FLAG_VOX
 
 /obj/item/clothing/suit/space/vox
 	name = "alien pressure suit"
@@ -33,13 +29,12 @@
 	siemens_coefficient = 0.6
 	heat_protection = SLOT_UPPER_BODY|SLOT_LOWER_BODY|SLOT_LEGS|SLOT_FEET|SLOT_ARMS|SLOT_HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	bodytype_restricted = list(BODYTYPE_VOX)
+	bodytype_equip_flags = BODY_FLAG_VOX
 	flags_inv = (HIDEJUMPSUIT|HIDETAIL)
 
 /obj/item/clothing/suit/space/vox/Initialize()
 	. = ..()
 	LAZYSET(slowdown_per_slot, slot_wear_suit_str, 1)
-	bodytype_restricted = list(BODYTYPE_VOX)
 
 /obj/item/clothing/suit/space/vox/carapace
 	name = "alien carapace armour"
@@ -85,10 +80,5 @@
 		laser = ARMOR_LASER_MINOR,
 		bomb = ARMOR_BOMB_PADDED) //Higher melee armor versus lower everything else.
 	body_parts_covered = SLOT_UPPER_BODY|SLOT_ARMS|SLOT_LOWER_BODY|SLOT_LEGS
-	bodytype_restricted = list(BODYTYPE_VOX)
+	bodytype_equip_flags = BODY_FLAG_VOX
 	siemens_coefficient = 1 //Its literally metal
-
-/obj/item/clothing/suit/armor/vox_scrap/Initialize()
-	. = ..()
-	bodytype_restricted = list(BODYTYPE_VOX)
-	

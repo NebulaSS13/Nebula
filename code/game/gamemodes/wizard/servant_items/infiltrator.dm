@@ -11,7 +11,7 @@
 		laser = ARMOR_LASER_MINOR,
 		energy = ARMOR_ENERGY_MINOR
 		)
-	bodytype_restricted = list(BODYTYPE_HUMANOID)
+	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
 /obj/item/clothing/suit/infilsuit
 	name = "immaculate suit"
@@ -28,7 +28,7 @@
 	name = "formal outfit"
 	desc = "A white dress shirt and navy pants. Snazzy."
 	icon = 'icons/clothing/under/formal.dmi'
-	bodytype_restricted = list(BODYTYPE_HUMANOID)
+	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
 /obj/item/clothing/shoes/dress/infilshoes
 	name = "black leather shoes"

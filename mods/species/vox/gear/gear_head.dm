@@ -1,11 +1,7 @@
 /obj/item/clothing/head/helmet/space/void/Initialize()
 	. = ..()
-	if("exclude" in bodytype_restricted)
-		LAZYDISTINCTADD(bodytype_restricted, BODYTYPE_VOX)
-	else if(length(bodytype_restricted))
-		LAZYREMOVE(bodytype_restricted, BODYTYPE_VOX)
-	else
-		bodytype_restricted = list("exclude", BODYTYPE_VOX)
+	if(bodytype_equip_flags & BODY_FLAG_EXCLUDE)
+		bodytype_equip_flags |= BODY_FLAG_VOX
 
 /obj/item/clothing/head/helmet/space/vox
 	name = "alien helmet"
@@ -24,11 +20,7 @@
 	siemens_coefficient = 0.6
 	item_flags = 0
 	flags_inv = 0
-	bodytype_restricted = list(BODYTYPE_VOX)
-
-/obj/item/clothing/head/helmet/space/vox/Initialize()
-	. = ..()
-	bodytype_restricted = list(BODYTYPE_VOX)
+	bodytype_equip_flags = BODY_FLAG_VOX
 	
 /obj/item/clothing/head/helmet/space/vox/carapace
 	name = "alien visor"

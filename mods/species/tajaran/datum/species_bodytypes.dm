@@ -10,6 +10,7 @@
 	tail_animation = 'mods/species/tajaran/icons/tail.dmi'
 	tail = "tajtail"
 	tail_blend = ICON_MULTIPLY
+	bodytype_flag = BODY_FLAG_FELINE
 
 /decl/bodytype/feline/Initialize()
 	equip_adjust = list(
