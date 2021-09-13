@@ -16,7 +16,7 @@
 	joint = "tail"
 	amputation_point = "tail"
 	artery_name = "vein"
-	arterial_bleed_severity = 03
+	arterial_bleed_severity = 0.3
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/tail/sync_colour_to_human(var/mob/living/carbon/human/human)
