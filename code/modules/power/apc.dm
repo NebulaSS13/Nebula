@@ -966,10 +966,7 @@ var/global/list/all_apcs = list()
 	//Make sure to resume processing if our area changed to something else than null
 	if(QDELETED(src))
 		return
-	if(area)
-		if(is_processing && !(processing_flags & MACHINERY_PROCESS_SELF))
-			processing_flags |= MACHINERY_PROCESS_SELF //don't use START_PROCESSING_MACHINE here or it'll print a stack trace for being already in the processing list
-		else if(!is_processing)
-			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+	if(area && !(processing_flags & MACHINERY_PROCESS_SELF))
+		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
 #undef APC_UPDATE_ICON_COOLDOWN
