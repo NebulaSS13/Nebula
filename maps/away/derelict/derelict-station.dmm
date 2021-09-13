@@ -10,7 +10,6 @@
 	dir = 1
 	},
 /obj/structure/cable/yellow{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/power/solar,
@@ -21,11 +20,9 @@
 	dir = 1
 	},
 /obj/structure/cable/yellow{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/machinery/power/solar,
@@ -36,15 +33,12 @@
 	dir = 1
 	},
 /obj/structure/cable/yellow{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/structure/cable/yellow{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/power/solar,
@@ -55,7 +49,6 @@
 	dir = 1
 	},
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/machinery/power/solar,
@@ -80,8 +73,6 @@
 /area/derelict/ship)
 "ak" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -109,8 +100,6 @@
 "ap" = (
 /obj/machinery/door/airlock/glass,
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -183,8 +172,6 @@
 	dir = 8
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -213,8 +200,6 @@
 /area/derelict/ship)
 "aE" = (
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled,
@@ -222,16 +207,12 @@
 "aF" = (
 /obj/machinery/door/airlock/glass,
 /obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "aG" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/plating,
@@ -260,8 +241,6 @@
 /area/derelict/ship)
 "aL" = (
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -295,8 +274,6 @@
 	pixel_x = 27
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -332,8 +309,6 @@
 	dir = 4
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
@@ -631,7 +606,6 @@
 /area/derelict/ship)
 "bX" = (
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/power/apc/high/inactive{
@@ -643,8 +617,6 @@
 /area/derelict/ship)
 "bY" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/plating,
@@ -658,33 +630,24 @@
 /area/derelict/ship)
 "ca" = (
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "cb" = (
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "cc" = (
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/machinery/power/solar_control,
@@ -749,16 +712,12 @@
 /area/derelict/ship)
 "cp" = (
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "cq" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -766,7 +725,6 @@
 "cr" = (
 /obj/machinery/power/smes/batteryrack,
 /obj/structure/cable{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
@@ -838,10 +796,6 @@
 "cG" = (
 /turf/simulated/floor/tiled/white/airless,
 /area/constructionsite/hallway/fore)
-"cH" = (
-/obj/structure/table,
-/turf/simulated/floor/airless,
-/area/constructionsite/hallway/fore)
 "cI" = (
 /obj/structure/table,
 /turf/simulated/floor/tiled/white/airless,
@@ -898,7 +852,6 @@
 "cT" = (
 /obj/structure/window/reinforced,
 /obj/structure/cable/yellow{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/power/tracker,
@@ -907,11 +860,9 @@
 "cU" = (
 /obj/structure/window/reinforced,
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/structure/cable/yellow{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/machinery/power/solar,
@@ -920,11 +871,9 @@
 "cV" = (
 /obj/structure/window/reinforced,
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/structure/cable/yellow{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /obj/structure/cable/yellow,
@@ -934,7 +883,6 @@
 "cW" = (
 /obj/structure/window/reinforced,
 /obj/structure/cable/yellow{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /obj/machinery/power/solar,
@@ -971,10 +919,6 @@
 /obj/structure/table/marble,
 /obj/item/kitchen/rollingpin,
 /turf/simulated/floor/airless,
-/area/constructionsite/hallway/fore)
-"dd" = (
-/obj/structure/table,
-/turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "de" = (
 /obj/random/closet,
@@ -1447,7 +1391,6 @@
 /area/constructionsite/teleporter)
 "eK" = (
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/power/port_gen/pacman,
@@ -1599,15 +1542,12 @@
 /area/constructionsite/teleporter)
 "ff" = (
 /obj/structure/cable/blue{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite/teleporter)
 "fg" = (
 /obj/structure/cable/blue{
-	d1 = 2;
-	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled,
@@ -1615,7 +1555,6 @@
 "fh" = (
 /obj/machinery/power/smes/batteryrack,
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1671,37 +1610,27 @@
 /area/constructionsite/teleporter)
 "fp" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite/teleporter)
 "fq" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite/teleporter)
 "fr" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fs" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/machinery/fabricator,
@@ -1977,7 +1906,6 @@
 /area/constructionsite/ai)
 "gx" = (
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /obj/machinery/power/apc/high/inactive{
@@ -2028,8 +1956,6 @@
 /area/constructionsite/ai)
 "gF" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/bluegrid/airless,
@@ -2229,10 +2155,6 @@
 "hv" = (
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
-"hw" = (
-/obj/structure/table,
-/turf/simulated/floor/tiled/white/airless,
-/area/constructionsite/medical)
 "hx" = (
 /obj/random/junk,
 /obj/effect/floor_decal/corner/green{
@@ -2257,10 +2179,6 @@
 /obj/structure/girder,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
-"hB" = (
-/obj/structure/table,
-/turf/simulated/floor/airless,
-/area/constructionsite/medical)
 "hC" = (
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/airless,
@@ -2678,7 +2596,6 @@
 /area/constructionsite/medical)
 "iX" = (
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/dark/airless,
@@ -2698,8 +2615,6 @@
 /area/constructionsite)
 "jb" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/airless,
@@ -3137,10 +3052,6 @@
 /obj/random/maintenance,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
-"kO" = (
-/obj/structure/table,
-/turf/simulated/floor/airless,
-/area/constructionsite/engineering)
 "kP" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
@@ -3268,7 +3179,6 @@
 /area/constructionsite/engineering)
 "lp" = (
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
@@ -3284,8 +3194,6 @@
 /area/constructionsite/engineering)
 "ls" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/dark/airless,
@@ -3308,41 +3216,30 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/engineering)
 "lx" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "ly" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "lz" = (
 /obj/structure/cable/blue{
-	d1 = 4;
-	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark/airless,
@@ -3352,7 +3249,6 @@
 	dir = 4
 	},
 /obj/structure/cable/blue{
-	d2 = 8;
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/airless,
@@ -3365,7 +3261,6 @@
 "lC" = (
 /obj/machinery/constructable_frame/computerframe,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
@@ -3373,7 +3268,6 @@
 "lD" = (
 /obj/machinery/teleport/station,
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
@@ -3385,7 +3279,6 @@
 "lF" = (
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable/blue{
-	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
@@ -3395,20 +3288,15 @@
 	dir = 8
 	},
 /obj/structure/cable/blue{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "lH" = (
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/structure/cable/blue{
-	d1 = 1;
-	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/airless,
@@ -3475,7 +3363,6 @@
 /area/AIsattele)
 "lW" = (
 /obj/structure/cable{
-	d2 = 4;
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/airless,
@@ -20832,8 +20719,8 @@ gQ
 gQ
 gS
 hm
-hw
-hB
+hN
+jn
 hI
 hv
 hv
@@ -21580,7 +21467,7 @@ cO
 cx
 cA
 cw
-dd
+ds
 dD
 cN
 dQ
@@ -22508,15 +22395,15 @@ ju
 kz
 lm
 kL
-kO
+kS
 lm
 kU
 kW
-kO
-kO
+kS
+kS
 lf
 li
-kO
+kS
 lm
 kz
 kP
@@ -24126,12 +24013,12 @@ lm
 kN
 kL
 kS
-kO
+kS
 kX
 kK
 kX
-kO
-kO
+kS
+kS
 lj
 ll
 kz
@@ -25211,9 +25098,9 @@ bp
 aW
 bo
 aW
-cH
+du
 cy
-dd
+ds
 dn
 cw
 cG
@@ -25416,7 +25303,7 @@ aW
 cI
 cw
 db
-dd
+ds
 cG
 cG
 dM
