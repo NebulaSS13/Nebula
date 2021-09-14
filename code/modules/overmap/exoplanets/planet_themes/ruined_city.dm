@@ -93,7 +93,7 @@
 					if(building_y + building_size_y >= limit_y)
 						continue
 					var/building_type = pickweight(building_types)
-					var/datum/random_map/building = new building_type(null, origin_x + building_x, origin_y + building_y, origin_z, building_size_x, building_size_y, 1, 1, 1, use_area)
+					var/datum/random_map/building = new building_type(origin_x + building_x, origin_y + building_y, origin_z, building_size_x, building_size_y, TRUE, TRUE, use_area)
 					LAZYADD(building_maps, building) // They're applied later to let buildings handle their own shit
 	return 1
 
