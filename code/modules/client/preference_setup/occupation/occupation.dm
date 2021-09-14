@@ -126,7 +126,7 @@
 						if(LAZYLEN(branch_rank) > 1)
 							branch_string += "<td width='10%' align='left'><a href='?src=\ref[src];char_branch=1;checking_job=\ref[job]'>[player_branch.name_short || player_branch.name]</a></td>"
 						else
-							branch_string += "<td width='10%' align='left'>[player_branch.name_short || player_branch.name]</td>"
+							branch_string += "<td width='10%' align='left'><span class='linkOff'>[player_branch.name_short || player_branch.name]</span></td>"
 				if(!branch_string)
 					branch_string = "<td>-</td>"
 				if(player_branch)
@@ -137,7 +137,7 @@
 							if(LAZYLEN(ranks) > 1)
 								rank_branch_string += "<td width='10%' align='left'><a href='?src=\ref[src];char_rank=1;checking_job=\ref[job]'>[player_rank.name_short || player_rank.name]</a></td>"
 							else
-								rank_branch_string += "<td width='10%' align='left'>[player_rank.name_short || player_rank.name]</td>"
+								rank_branch_string += "<td width='10%' align='left'><span class='linkOff'>[player_rank.name_short || player_rank.name]</span></td>"
 				if(!rank_branch_string)
 					rank_branch_string = "<td>-</td>"
 				rank_branch_string = "[branch_string][rank_branch_string]"

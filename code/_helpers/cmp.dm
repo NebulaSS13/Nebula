@@ -108,3 +108,9 @@
 
 /proc/cmp_category_groups(var/datum/category_group/A, var/datum/category_group/B)
 	return A.sort_order - B.sort_order
+
+/proc/cmp_job_asc(var/datum/job/A, var/datum/job/B)
+	return A.get_occupations_tab_sort_score() - B.get_occupations_tab_sort_score()
+
+/proc/cmp_job_desc(var/datum/job/A, var/datum/job/B)
+	return B.get_occupations_tab_sort_score() - A.get_occupations_tab_sort_score()
