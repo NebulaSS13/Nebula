@@ -139,8 +139,9 @@
 				if(isnull(current)) return CANCEL
 
 			if("type")
-				current = input("Select type for [arguments.len+1]\th argument") as null|anything in typesof(/obj, /mob, /area, /turf)
+				current = input("Enter type path for [arguments.len+1]\th argument") as null|text
 				if(isnull(current)) return CANCEL
+				current = text2path(current)
 
 			if("obj reference")
 				current = input("Select object for [arguments.len+1]\th argument") as null|obj in world
