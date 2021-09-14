@@ -970,3 +970,4 @@ var/global/list/all_apcs = list()
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
 #undef APC_UPDATE_ICON_COOLDOWN
+ 
