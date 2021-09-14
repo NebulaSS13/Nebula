@@ -1,5 +1,0 @@
-author: Geevies
-delete-after: true
-changes:
-  - rscadd: Species now have special footprint handling when walking on simulated
-      turfs, though no core species has anything implemented yet.
