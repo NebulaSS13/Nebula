@@ -133,6 +133,14 @@
 	if(LAZYLEN(decals))
 		add_overlay(decals)
 
+	var/datum/gas_mixture/air = (owner ? owner.atmosphere : global.using_map.exterior_atmosphere)
+	if(length(air?.graphic))
+		vis_contents += air.graphic
+	else if(flooded)
+		vis_contents = list(global.flood_object)
+	else
+		vis_contents.Cut()
+
 	if(icon_edge_layer < 0)
 		return
 
@@ -183,11 +191,3 @@
 					else if(direction & WEST)
 						I.pixel_x -= world.icon_size
 					add_overlay(I)
-
-	var/datum/gas_mixture/air = (owner ? owner.atmosphere : global.using_map.exterior_atmosphere)
-	if(length(air?.graphic))
-		vis_contents += air.graphic
-	else
-		vis_contents.Cut()
-		if(flooded)
-			vis_contents |= global.flood_object

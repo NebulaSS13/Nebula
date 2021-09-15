@@ -178,8 +178,6 @@
 	var/area/A = loc
 	holy = istype(A) && (A.area_flags & AREA_FLAG_HOLY)
 	levelupdate()
-	if(GAME_STATE >= RUNLEVEL_GAME)
-		fluid_update()
 	. = ..()
 
 /turf/simulated/initialize_ambient_light(var/mapload)

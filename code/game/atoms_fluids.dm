@@ -43,10 +43,10 @@
 		depth = get_fluid_depth()
 	return depth >= FLUID_OVER_MOB_HEAD
 
-/atom/proc/fluid_update()
+/atom/proc/fluid_update(var/ignore_neighbors)
 	var/turf/T = get_turf(src)
 	if(istype(T))
-		T.fluid_update()
+		T.fluid_update(ignore_neighbors)
 
 /atom/movable/update_nearby_tiles(var/need_rebuild)
 	UNLINT(. = ..(need_rebuild))
