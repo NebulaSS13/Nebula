@@ -106,6 +106,22 @@
 				to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
 				src.attack_hand(user)
 				qdel(I)
+
+		if(istype(I,/obj/item/charge_stick))
+			var/obj/item/charge_stick/stick = I
+			var/datum/extension/lockable/lock = get_extension(I, /datum/extension/lockable)
+			if(lock.locked)
+				to_chat(user, SPAN_WARNING("Cannot transfer funds from a locked [stick]."))
+			else
+				if(authenticated_account.deposit(stick.loaded_worth, "Credit deposit", machine_id))
+					if(prob(50))
+						playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
+					else
+						playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
+
+					to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
+					src.attack_hand(user)
+					qdel(I)
 	else
 		..()
 
