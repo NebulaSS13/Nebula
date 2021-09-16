@@ -5,7 +5,6 @@
 	damage_mask =       'icons/mob/human_races/species/monkey/damage_mask.dmi'
 	blood_mask =        'icons/mob/human_races/species/monkey/blood_mask.dmi'
 	health_hud_intensity = 1.75
-	tail = "chimptail"
 	bodytype_flag = BODY_FLAG_MONKEY
 
 /decl/bodytype/monkey/Initialize()
@@ -17,3 +16,6 @@
 		slot_wear_mask_str = list("[NORTH]" = list("x" = 0, "y" = 0), "[EAST]" = list("x" = -1, "y" = 0), "[SOUTH]" = list("x" = 0, "y" = 0), "[WEST]" = list("x" = 1, "y" = 0))
 	)
 	. = ..()
+
+/obj/item/organ/external/tail/monkey
+	tail = "chimptail"
