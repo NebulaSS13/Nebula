@@ -104,6 +104,8 @@
 		BP_EYES =     /obj/item/organ/internal/eyes/taj
 	)
 
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail)
+
 /obj/item/organ/internal/eyes/taj
 	eye_blend = ICON_MULTIPLY
 	eye_icon = 'mods/species/tajaran/icons/eyes.dmi'

@@ -63,6 +63,8 @@
 		BP_EYES =     /obj/item/organ/internal/eyes/avian
 	)
 
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail)
+
 	unarmed_attacks = list(
 		/decl/natural_attack/bite/sharp,
 		/decl/natural_attack/claws,
