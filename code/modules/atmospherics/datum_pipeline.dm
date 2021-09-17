@@ -1,8 +1,18 @@
 #define REAGENT_UNITS_PER_PIPE 1200
 
+/datum/reagents/pipeline
+	var/datum/pipeline/pipeline
+
+/datum/reagents/pipeline/Destroy()
+	if(pipeline)
+		if(pipeline.liquid == src)
+			pipeline.liquid = null
+		pipeline = null
+	. = ..()
+
 /datum/pipeline
 	var/datum/gas_mixture/air
-	var/datum/reagents/abstract/liquid // Needs to be an atom for reagent holder to work.
+	var/datum/reagents/pipeline/liquid // Needs to be an atom for reagent holder to work.
 
 	var/list/obj/machinery/atmospherics/pipe/members
 	var/list/obj/machinery/atmospherics/pipe/edges //Used for building networks
@@ -77,7 +87,8 @@
 	else
 		air = new
 
-	liquid = new /datum/reagents/abstract
+	liquid = new
+	liquid.pipeline = src
 
 	if(base.leaking)
 		leaks |= base

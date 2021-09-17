@@ -6,16 +6,12 @@ var/global/obj/temp_reagents_holder = new
 	var/list/reagent_data
 	var/total_volume = 0
 	var/maximum_volume = 120
-	var/atom/_my_atom
+	var/atom/my_atom
 	var/cached_color
-	var/abstract = FALSE // Set to disable myatom-related checking.
 
-/datum/reagents/abstract
-	abstract = TRUE
-
-/datum/reagents/New(var/maximum_volume = 120, var/atom/_my_atom)
+/datum/reagents/New(var/maximum_volume = 120, var/atom/my_atom)
 	src.maximum_volume = maximum_volume
-	src._my_atom = _my_atom
+	src.my_atom = my_atom
 	..()
 
 /datum/reagents/Destroy()
@@ -23,10 +19,13 @@ var/global/obj/temp_reagents_holder = new
 	UNQUEUE_REACTIONS(src) // While marking for reactions should be avoided just before deleting if possible, the async nature means it might be impossible.
 	reagent_volumes = null
 	reagent_data = null
-	if(_my_atom)
-		if(_my_atom.reagents == src)
-			_my_atom.reagents = null
-		_my_atom = null
+	if(my_atom)
+		if(my_atom.reagents == src)
+			my_atom.reagents = null
+		my_atom = null
+
+/datum/reagents/proc/get_reaction_loc()
+	return my_atom
 
 /datum/reagents/proc/get_primary_reagent_name() // Returns the name of the reagent with the biggest volume.
 	var/decl/material/reagent = get_primary_reagent_decl()
@@ -54,7 +53,8 @@ var/global/obj/temp_reagents_holder = new
 
 /datum/reagents/proc/process_reactions()
 
-	var/check_flags = my_atom?.atom_flags || 0
+	var/atom/location = get_reaction_loc()
+	var/check_flags = location?.atom_flags || 0
 
 	if(check_flags & ATOM_FLAG_NO_REACT)
 		return 0
@@ -62,7 +62,7 @@ var/global/obj/temp_reagents_holder = new
 	var/reaction_occured = FALSE
 	var/list/eligible_reactions = list()
 
-	var/temperature = my_atom?.temperature || T20C
+	var/temperature = location?.temperature || T20C
 	for(var/thing in reagent_volumes)
 		var/decl/material/R = GET_DECL(thing)
 
@@ -103,11 +103,11 @@ var/global/obj/temp_reagents_holder = new
 				add_reagent(product, replace_self_with[product] * replace_amount)
 			reaction_occured = TRUE
 
-			if(_my_atom)
+			if(location)
 				if(replace_message)
-					_my_atom.visible_message("<span class='notice'>[html_icon(_my_atom)] [replace_message]</span>")
+					location.visible_message("<span class='notice'>[html_icon(location)] [replace_message]</span>")
 				if(replace_sound)
-					playsound(_my_atom, replace_sound, 80, 1)
+					playsound(location, replace_sound, 80, 1)
 
 		else // Otherwise, collect all possible reactions.
 			eligible_reactions |= SSmaterials.chemical_reactions_by_id[R.type]

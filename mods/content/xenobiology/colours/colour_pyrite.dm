@@ -6,5 +6,7 @@
 	reaction_strings = list(/decl/material/solid/metal/uranium = "Synthesises a random bucket of paint.")
 
 /decl/slime_colour/pyrite/handle_uranium_reaction(var/datum/reagents/holder)
-	new /obj/item/chems/glass/paint/random(get_turf(holder.my_atom))
+	var/turf/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		new /obj/item/chems/glass/paint/random(location)
 	return TRUE
