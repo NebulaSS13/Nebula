@@ -29,15 +29,16 @@ SUBSYSTEM_DEF(materials)
 /datum/controller/subsystem/materials/Initialize()
 
 	// Init reaction list.
-	//Chemical Reactions - Initialises all /datum/chemical_reaction into a list
+	// Chemical Reactions - Organizes /decl/chemical_reaction subtypes into a list
 	// It is filtered into multiple lists within a list.
 	// For example:
 	// chemical_reaction_list[/decl/material/foo] is a list of all reactions relating to Foo
 	// Note that entries in the list are NOT duplicated. So if a reaction pertains to
 	// more than one chemical it will still only appear in only one of the sublists.
 
-	for(var/path in subtypesof(/datum/chemical_reaction))
-		var/datum/chemical_reaction/D = new path()
+	var/list/all_reactions = decls_repository.get_decls_of_subtype(/decl/chemical_reaction)
+	for(var/path in all_reactions)
+		var/decl/chemical_reaction/D = all_reactions[path]
 		chemical_reactions[path] = D
 		if(!chemical_reactions_by_result[D.result])
 			chemical_reactions_by_result[D.result] = list()
