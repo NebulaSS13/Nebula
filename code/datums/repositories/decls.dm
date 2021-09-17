@@ -27,7 +27,7 @@ var/global/repository/decls/decls_repository = new
 	for(var/decl_type in typesof(/decl))
 		var/decl/decl = decl_type
 		var/decl_uid = initial(decl.uid)
-		if(decl_uid)
+		if(decl_uid && decl_type != initial(decl.abstract_type))
 			fetched_decl_ids[decl_uid] = decl_type
 
 /repository/decls/proc/get_decl_by_id(var/decl_id)

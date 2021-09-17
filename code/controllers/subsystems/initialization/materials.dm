@@ -15,7 +15,6 @@ SUBSYSTEM_DEF(materials)
 
 	// Chemistry vars.
 	var/list/active_holders =                  list()
-	var/list/chemical_reactions =              list()
 	var/list/chemical_reactions_by_type =      list()
 	var/list/chemical_reactions_by_id =        list()
 	var/list/chemical_reactions_by_result =    list()
@@ -39,7 +38,6 @@ SUBSYSTEM_DEF(materials)
 	var/list/all_reactions = decls_repository.get_decls_of_subtype(/decl/chemical_reaction)
 	for(var/path in all_reactions)
 		var/decl/chemical_reaction/D = all_reactions[path]
-		chemical_reactions[path] = D
 		if(!chemical_reactions_by_result[D.result])
 			chemical_reactions_by_result[D.result] = list()
 		chemical_reactions_by_result[D.result] += D
