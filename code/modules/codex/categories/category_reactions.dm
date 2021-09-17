@@ -23,8 +23,9 @@
 		<tr><td><b>Product name</b></td><td><b>Product amount</b></td><td><b>Required reagents</b></td><td><b>Catalysts</b></td><td><b>Inhibitors</b></td><td><b>Min temperature</b></td><td><b>Max temperature</b></td><td><b>Notes</b></td></tr>"}
 
 	var/list/entries_to_register = list()
-	for(var/reactiontype in SSmaterials.chemical_reactions)
-		var/decl/chemical_reaction/reaction = SSmaterials.chemical_reactions[reactiontype]
+	var/list/all_reactions = decls_repository.get_decls_of_subtype(/decl/chemical_reaction)
+	for(var/reactiontype in all_reactions)
+		var/decl/chemical_reaction/reaction = all_reactions[reactiontype]
 		if(!reaction || !reaction.name || reaction.hidden_from_codex || istype(reaction, /decl/chemical_reaction/recipe))
 			continue // Food recipes are handled in category_recipes.dm.
 		var/mechanics_text = "This reaction requires the following reagents:<br>"

@@ -21,8 +21,8 @@
 		</ul>"}
 
 	for(var/reactiontype in subtypesof(/decl/chemical_reaction/recipe))
-		var/decl/chemical_reaction/recipe/food = SSmaterials.chemical_reactions[reactiontype]
-		if(!food || !food.name || food.hidden_from_codex)
+		var/decl/chemical_reaction/recipe/food = GET_DECL(reactiontype)
+		if(!food || !food.name || food.hidden_from_codex || food.is_abstract())
 			continue
 
 		var/mechanics_text
