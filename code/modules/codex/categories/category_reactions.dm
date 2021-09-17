@@ -24,8 +24,8 @@
 
 	var/list/entries_to_register = list()
 	for(var/reactiontype in SSmaterials.chemical_reactions)
-		var/datum/chemical_reaction/reaction = SSmaterials.chemical_reactions[reactiontype]
-		if(!reaction || !reaction.name || reaction.hidden_from_codex || istype(reaction, /datum/chemical_reaction/recipe))
+		var/decl/chemical_reaction/reaction = SSmaterials.chemical_reactions[reactiontype]
+		if(!reaction || !reaction.name || reaction.hidden_from_codex || istype(reaction, /decl/chemical_reaction/recipe))
 			continue // Food recipes are handled in category_recipes.dm.
 		var/mechanics_text = "This reaction requires the following reagents:<br>"
 		if(reaction.mechanics_text)

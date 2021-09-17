@@ -1,10 +1,10 @@
-/datum/chemical_reaction/alloy
+/decl/chemical_reaction/alloy
 	minimum_temperature = GENERIC_SMELTING_HEAT_POINT
 	maximum_temperature = INFINITY
 	reaction_sound = null
 	mix_message = null
 
-/datum/chemical_reaction/alloy/borosilicate
+/decl/chemical_reaction/alloy/borosilicate
 	name = "Borosilicate Glass"
 	result = /decl/material/solid/glass/borosilicate
 	required_reagents = list(
@@ -13,7 +13,7 @@
 	)
 	result_amount = 3
 
-/datum/chemical_reaction/alloy/steel
+/decl/chemical_reaction/alloy/steel
 	name = "Steel"
 	result = /decl/material/solid/metal/steel
 	required_reagents = list(
@@ -22,7 +22,7 @@
 	)
 	result_amount = 2
 
-/datum/chemical_reaction/alloy/plasteel
+/decl/chemical_reaction/alloy/plasteel
 	name = "Plasteel"
 	result = /decl/material/solid/metal/plasteel
 	required_reagents = list(
@@ -31,7 +31,7 @@
 	)
 	result_amount = 3
 
-/datum/chemical_reaction/alloy/ocp
+/decl/chemical_reaction/alloy/ocp
 	name = "Osmium Carbide Plasteel"
 	result = /decl/material/solid/metal/plasteel/ocp
 	required_reagents = list(
@@ -40,7 +40,7 @@
 	)
 	result_amount = 3
 
-/datum/chemical_reaction/alloy/bronze
+/decl/chemical_reaction/alloy/bronze
 	name = "Bronze"
 	result = /decl/material/solid/metal/bronze
 	required_reagents = list(
@@ -49,7 +49,7 @@
 	)
 	result_amount = 5
 
-/datum/chemical_reaction/alloy/brass
+/decl/chemical_reaction/alloy/brass
 	name = "Brass"
 	result = /decl/material/solid/metal/brass
 	required_reagents = list(
@@ -58,7 +58,7 @@
 	)
 	result_amount = 3
 
-/datum/chemical_reaction/alloy/blackbronze
+/decl/chemical_reaction/alloy/blackbronze
 	name = "Black Bronze"
 	result = /decl/material/solid/metal/blackbronze
 	required_reagents = list(
@@ -67,7 +67,7 @@
 	)
 	result_amount = 3
 
-/datum/chemical_reaction/alloy/redgold
+/decl/chemical_reaction/alloy/redgold
 	name = "Red Gold"
 	result = /decl/material/solid/metal/redgold
 	required_reagents = list(
@@ -76,7 +76,7 @@
 	)
 	result_amount = 3
 
-/datum/chemical_reaction/alloy/stainlesssteel
+/decl/chemical_reaction/alloy/stainlesssteel
 	name = "Stainless Steel"
 	result = /decl/material/solid/metal/stainlesssteel
 	required_reagents = list(

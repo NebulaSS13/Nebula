@@ -114,14 +114,14 @@ var/global/obj/temp_reagents_holder = new
 
 	var/list/active_reactions = list()
 
-	for(var/datum/chemical_reaction/C in eligible_reactions)
+	for(var/decl/chemical_reaction/C in eligible_reactions)
 		if(C.can_happen(src))
 			active_reactions[C] = 1 // The number is going to be 1/(fraction of remaining reagents we are allowed to use), computed below
 			reaction_occured = 1
 
 	var/list/used_reagents = list()
 	// if two reactions share a reagent, each is allocated half of it, so we compute this here
-	for(var/datum/chemical_reaction/C in active_reactions)
+	for(var/decl/chemical_reaction/C in active_reactions)
 		var/list/adding = C.get_used_reagents()
 		for(var/R in adding)
 			LAZYADD(used_reagents[R], C)
@@ -130,7 +130,7 @@ var/global/obj/temp_reagents_holder = new
 		var/counter = length(used_reagents[R])
 		if(counter <= 1)
 			continue // Only used by one reaction, so nothing we need to do.
-		for(var/datum/chemical_reaction/C in used_reagents[R])
+		for(var/decl/chemical_reaction/C in used_reagents[R])
 			active_reactions[C] = max(counter, active_reactions[C])
 			counter-- //so the next reaction we execute uses more of the remaining reagents
 			// Note: this is not guaranteed to maximize the size of the reactions we do (if one reaction is limited by reagent A, we may be over-allocating reagent B to it)
@@ -138,11 +138,11 @@ var/global/obj/temp_reagents_holder = new
 			// Further reactions may occur on the next tick, when this runs again.
 
 	for(var/thing in active_reactions)
-		var/datum/chemical_reaction/C = thing
+		var/decl/chemical_reaction/C = thing
 		C.process(src, active_reactions[C])
 
 	for(var/thing in active_reactions)
-		var/datum/chemical_reaction/C = thing
+		var/decl/chemical_reaction/C = thing
 		C.post_reaction(src)
 
 	update_total()

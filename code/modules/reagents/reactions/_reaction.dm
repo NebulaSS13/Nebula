@@ -1,4 +1,4 @@
-/datum/chemical_reaction
+/decl/chemical_reaction
 	var/name = null
 	var/result = null
 	var/list/required_reagents = list()
@@ -15,7 +15,7 @@
 	var/lore_text
 	var/mechanics_text
 
-/datum/chemical_reaction/proc/can_happen(var/datum/reagents/holder)
+/decl/chemical_reaction/proc/can_happen(var/datum/reagents/holder)
 	//check that all the required reagents are present
 	if(!holder.has_all_reagents(required_reagents))
 		return 0
@@ -34,20 +34,20 @@
 
 	return 1
 
-/datum/chemical_reaction/proc/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
+/decl/chemical_reaction/proc/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	if(thermal_product && ATOM_IS_TEMPERATURE_SENSITIVE(holder.my_atom))
 		ADJUST_ATOM_TEMPERATURE(holder.my_atom, thermal_product)
 
 // This proc returns a list of all reagents it wants to use; if the holder has several reactions that use the same reagent, it will split the reagent evenly between them
-/datum/chemical_reaction/proc/get_used_reagents()
+/decl/chemical_reaction/proc/get_used_reagents()
 	. = list()
 	for(var/reagent in required_reagents)
 		. += reagent
 
-/datum/chemical_reaction/proc/get_reaction_flags(var/datum/reagents/holder)
+/decl/chemical_reaction/proc/get_reaction_flags(var/datum/reagents/holder)
 	return 0
 
-/datum/chemical_reaction/proc/process(var/datum/reagents/holder, var/limit)
+/decl/chemical_reaction/proc/process(var/datum/reagents/holder, var/limit)
 	var/data = send_data(holder)
 
 	var/reaction_volume = holder.maximum_volume
@@ -69,7 +69,7 @@
 	on_reaction(holder, amt_produced, reaction_flags)
 
 //called after processing reactions, if they occurred
-/datum/chemical_reaction/proc/post_reaction(var/datum/reagents/holder)
+/decl/chemical_reaction/proc/post_reaction(var/datum/reagents/holder)
 	var/atom/container = holder.my_atom
 	if(mix_message && container && !ismob(container))
 		var/turf/T = get_turf(container)
@@ -82,5 +82,5 @@
 
 //obtains any special data that will be provided to the reaction products
 //this is called just before reactants are removed.
-/datum/chemical_reaction/proc/send_data(var/datum/reagents/holder, var/reaction_limit)
+/decl/chemical_reaction/proc/send_data(var/datum/reagents/holder, var/reaction_limit)
 	return null
