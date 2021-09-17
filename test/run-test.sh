@@ -209,6 +209,7 @@ function run_code_tests {
     run_test "check punctuation" "python3 tools/PunctuationChecker/punctuation-checker.py ."
     run_test "check icon state limit (icons)" "python3 tools/check_icon_state_limit.py icons"
     run_test "check icon state limit (mods)" "python3 tools/check_icon_state_limit.py mods"
+    run_test "check icon state limit (maps)" "python3 tools/check_icon_state_limit.py maps"
     run_test_ci "check changelog builds" "python3 tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs"
 }
 
