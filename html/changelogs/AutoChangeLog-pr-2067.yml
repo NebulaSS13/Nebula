@@ -1,5 +1,0 @@
-author: SolatK
-delete-after: true
-changes:
-  - rscadd: The tail is now a separate limb. You can select it as target, and button
-      is shown when you look at somebody with a tail.
