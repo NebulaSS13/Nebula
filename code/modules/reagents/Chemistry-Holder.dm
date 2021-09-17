@@ -6,26 +6,27 @@ var/global/obj/temp_reagents_holder = new
 	var/list/reagent_data
 	var/total_volume = 0
 	var/maximum_volume = 120
-	var/atom/my_atom
+	var/atom/_my_atom
 	var/cached_color
+	var/abstract = FALSE // Set to disable myatom-related checking.
 
-/datum/reagents/New(var/maximum_volume = 120, var/atom/my_atom)
+/datum/reagents/abstract
+	abstract = TRUE
+
+/datum/reagents/New(var/maximum_volume = 120, var/atom/_my_atom)
 	src.maximum_volume = maximum_volume
-	if(!istype(my_atom))
-#ifdef DISABLE_DEBUG_CRASH
-		return ..()
-#else
-		CRASH("Invalid reagents holder: [log_info_line(my_atom)]")
-#endif
+	src._my_atom = _my_atom
 	..()
-	src.my_atom = my_atom
 
 /datum/reagents/Destroy()
 	. = ..()
 	UNQUEUE_REACTIONS(src) // While marking for reactions should be avoided just before deleting if possible, the async nature means it might be impossible.
 	reagent_volumes = null
 	reagent_data = null
-	my_atom = null
+	if(_my_atom)
+		if(_my_atom.reagents == src)
+			_my_atom.reagents = null
+		_my_atom = null
 
 /datum/reagents/proc/get_primary_reagent_name() // Returns the name of the reagent with the biggest volume.
 	var/decl/material/reagent = get_primary_reagent_decl()
@@ -53,16 +54,15 @@ var/global/obj/temp_reagents_holder = new
 
 /datum/reagents/proc/process_reactions()
 
-	if(!my_atom?.loc)
-		return 0
+	var/check_flags = my_atom?.atom_flags || 0
 
-	if(my_atom.atom_flags & ATOM_FLAG_NO_REACT)
+	if(check_flags & ATOM_FLAG_NO_REACT)
 		return 0
 
 	var/reaction_occured = FALSE
 	var/list/eligible_reactions = list()
 
-	var/temperature = my_atom ? my_atom.temperature : T20C
+	var/temperature = my_atom?.temperature || T20C
 	for(var/thing in reagent_volumes)
 		var/decl/material/R = GET_DECL(thing)
 
@@ -71,7 +71,7 @@ var/global/obj/temp_reagents_holder = new
 		var/replace_message
 		var/replace_sound
 
-		if(!(my_atom.atom_flags & ATOM_FLAG_NO_PHASE_CHANGE))
+		if(!(check_flags & ATOM_FLAG_NO_PHASE_CHANGE))
 			if(!isnull(R.chilling_point) && R.type != R.bypass_cooling_products_for_root_type && LAZYLEN(R.chilling_products) && temperature <= R.chilling_point)
 				replace_self_with = R.chilling_products
 				if(R.chilling_message)
@@ -83,7 +83,7 @@ var/global/obj/temp_reagents_holder = new
 					replace_message = "\The [lowertext(R.name)] [R.heating_message]"
 				replace_sound = R.heating_sound
 
-		if(isnull(replace_self_with) && !isnull(R.dissolves_in) && !(my_atom.atom_flags & ATOM_FLAG_NO_DISSOLVE) && LAZYLEN(R.dissolves_into))
+		if(isnull(replace_self_with) && !isnull(R.dissolves_in) && !(check_flags & ATOM_FLAG_NO_DISSOLVE) && LAZYLEN(R.dissolves_into))
 			for(var/other in reagent_volumes)
 				if(other == thing)
 					continue
@@ -103,11 +103,11 @@ var/global/obj/temp_reagents_holder = new
 				add_reagent(product, replace_self_with[product] * replace_amount)
 			reaction_occured = TRUE
 
-			if(my_atom)
+			if(_my_atom)
 				if(replace_message)
-					my_atom.visible_message("<span class='notice'>[html_icon(my_atom)] [replace_message]</span>")
+					_my_atom.visible_message("<span class='notice'>[html_icon(_my_atom)] [replace_message]</span>")
 				if(replace_sound)
-					playsound(my_atom, replace_sound, 80, 1)
+					playsound(_my_atom, replace_sound, 80, 1)
 
 		else // Otherwise, collect all possible reactions.
 			eligible_reactions |= SSmaterials.chemical_reactions_by_id[R.type]

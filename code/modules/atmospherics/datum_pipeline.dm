@@ -1,5 +1,8 @@
+#define REAGENT_UNITS_PER_PIPE 1200
+
 /datum/pipeline
 	var/datum/gas_mixture/air
+	var/datum/reagents/abstract/liquid // Needs to be an atom for reagent holder to work.
 
 	var/list/obj/machinery/atmospherics/pipe/members
 	var/list/obj/machinery/atmospherics/pipe/edges //Used for building networks
@@ -17,14 +20,18 @@
 	STOP_PROCESSING(SSprocessing, src)
 	QDEL_NULL(network)
 
-	if(air && air.volume)
-		temporarily_store_air()
+	if(air?.volume || liquid?.total_volume)
+		temporarily_store_fluids()
 		QDEL_NULL(air)
+		QDEL_NULL(liquid)
+
 	for(var/obj/machinery/atmospherics/pipe/P in members)
 		P.parent = null
+
 	leaks.Cut()
 	members.Cut()
 	edges.Cut()
+
 	. = ..()
 
 /datum/pipeline/Process()//This use to be called called from the pipe networks
@@ -36,19 +43,27 @@
 				members.Remove(member)
 				break //Only delete 1 pipe per process
 
-/datum/pipeline/proc/temporarily_store_air()
+/datum/pipeline/proc/temporarily_store_fluids()
 	//Update individual gas_mixtures by volume ratio
 
+	var/liquid_transfer_per_pipe = min(REAGENT_UNITS_PER_PIPE, (liquid && length(members)) ? (liquid.total_volume / length(members)) : 0)
+	if(!liquid_transfer_per_pipe && !liquid_transfer_per_pipe)
+		return
+
 	for(var/obj/machinery/atmospherics/pipe/member in members)
-		member.air_temporary = new
-		member.air_temporary.copy_from(air)
-		member.air_temporary.volume = member.volume
-		member.air_temporary.multiply(member.volume / air.volume)
+
+		if(air?.volume)
+			member.air_temporary = new
+			member.air_temporary.copy_from(air)
+			member.air_temporary.volume = member.volume
+			member.air_temporary.multiply(member.volume / air.volume)
+
+		if(liquid_transfer_per_pipe)
+			member.liquid_temporary = new(REAGENT_UNITS_PER_PIPE, src)
+			liquid.trans_to_holder(member.liquid_temporary, liquid_transfer_per_pipe)
 
 /datum/pipeline/proc/build_pipeline(obj/machinery/atmospherics/pipe/base)
-	air = new
 
-	var/list/possible_expansions = list(base)
 	members = list(base)
 	edges = list()
 
@@ -62,16 +77,19 @@
 	else
 		air = new
 
+	liquid = new /datum/reagents/abstract
+
 	if(base.leaking)
 		leaks |= base
 
-	while(possible_expansions.len>0)
+	var/list/possible_expansions = list(base)
+	while(possible_expansions.len)
 		for(var/obj/machinery/atmospherics/pipe/borderline in possible_expansions)
 
 			var/list/result = borderline.pipeline_expansion()
 			var/edge_check = result.len
 
-			if(result.len>0)
+			if(edge_check)
 				for(var/obj/machinery/atmospherics/pipe/item in result)
 					if(!members.Find(item))
 						members += item
@@ -84,18 +102,25 @@
 
 						if(item.air_temporary)
 							air.merge(item.air_temporary)
+							item.air_temporary = null
+
+						liquid.maximum_volume += REAGENT_UNITS_PER_PIPE
+						if(item.liquid_temporary)
+							item.liquid_temporary.trans_to_holder(liquid, item.liquid_temporary.total_volume)
+							item.liquid_temporary = null
 
 						if(item.leaking)
 							leaks |= item
 
 					edge_check--
 
-			if(edge_check>0)
+			if(edge_check > 0)
 				edges += borderline
 
 			possible_expansions -= borderline
 
 	air.volume = volume
+	liquid.maximum_volume = length(members) * REAGENT_UNITS_PER_PIPE
 
 /datum/pipeline/proc/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(new_network.line_members.Find(src))
@@ -127,6 +152,10 @@
 	return network
 
 /datum/pipeline/proc/mingle_with_turf(turf/simulated/target, mingle_volume)
+
+	if(!isturf(target))
+		return
+
 	var/datum/gas_mixture/air_sample = air.remove_ratio(mingle_volume/air.volume)
 	air_sample.volume = mingle_volume
 
@@ -150,6 +179,9 @@
 		equalize_gases(list(air_sample, turf_air))
 		air.merge(air_sample)
 		//turf_air already modified by equalize_gases()
+
+	if(liquid?.total_volume)
+		liquid.trans_to_turf(target, FLUID_PUDDLE)
 
 	if(network)
 		network.update = 1
@@ -240,3 +272,5 @@
 	// Only would happen if both sides (all 2 square meters of surface area) were exposed to sunlight.  We now assume it aligned edge on.
 	// It currently should stabilise at 129.6K or -143.6C
 	. -= surface * STEFAN_BOLTZMANN_CONSTANT * thermal_conductivity * (surface_temperature - COSMIC_RADIATION_TEMPERATURE) ** 4
+
+#undef REAGENT_UNITS_PER_PIPE
