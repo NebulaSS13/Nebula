@@ -186,6 +186,7 @@ function setup_python3 {
     pip3 install --upgrade pip -q
     pip3 install pyyaml==5.3 -q
     pip3 install beautifulsoup4==4.8.2 -q
+    pip3 install git+https://github.com/ComicIronic/ByondToolsv3.git@0.1.5#egg=ByondToolsv3 -q
 }
 
 function run_code_tests {
@@ -206,7 +207,8 @@ function run_code_tests {
     run_test "check tags" "python3 tools/TagMatcher/tag-matcher.py ."
     run_test "check color hex" "python3 tools/ColorHexChecker/color-hex-checker.py ."
     run_test "check punctuation" "python3 tools/PunctuationChecker/punctuation-checker.py ."
-    run_test "check icon state limit" "python3 tools/dmitool/check_icon_state_limit.py ."
+    run_test "check icon state limit (icons)" "python3 tools/check_icon_state_limit.py icons"
+    run_test "check icon state limit (mods)" "python3 tools/check_icon_state_limit.py mods"
     run_test_ci "check changelog builds" "python3 tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs"
 }
 
