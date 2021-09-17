@@ -244,13 +244,6 @@ var/global/list/damage_icon_parts = list()
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists
 /mob/living/carbon/human/UpdateDamageIcon(var/update_icons=1)
 
-	var/damage_overlays = bodytype.get_damage_overlays(src)
-	if(!damage_overlays)
-		return
-	var/damage_mask = bodytype.get_damage_mask(src)
-	if(!damage_mask)
-		return
-
 	// first check whether something actually changed about damage appearance
 	var/damage_appearance = ""
 	for(var/obj/item/organ/external/O in organs)
@@ -264,7 +257,7 @@ var/global/list/damage_icon_parts = list()
 
 	previous_damage_appearance = damage_appearance
 
-	var/image/standing_image = image(damage_overlays, icon_state = "00")
+	var/image/standing_image = image(bodytype.get_damage_overlays(src), icon_state = "00")
 
 	// blend the individual damage states with our icons
 	for(var/obj/item/organ/external/O in organs)
@@ -278,8 +271,8 @@ var/global/list/damage_icon_parts = list()
 		var/use_colour = (BP_IS_PROSTHETIC(O) ? SYNTH_BLOOD_COLOUR : O.species.get_blood_colour(src))
 		var/cache_index = "[O.damage_state]/[O.icon_name]/[use_colour]/[species.name]"
 		if(damage_icon_parts[cache_index] == null)
-			DI = new /icon(bodytype.get_damage_overlays(src), O.damage_state)			// the damage icon for whole human
-			DI.Blend(new /icon(bodytype.get_damage_mask(src), O.icon_name), ICON_MULTIPLY)	// mask with this organ's pixels
+			DI = new /icon(bodytype.get_damage_overlays(src), O.damage_state) // the damage icon for whole human
+			DI.Blend(new /icon(O.icon, O.icon_name), ICON_MULTIPLY)  // mask with this organ's pixels
 			DI.Blend(use_colour, ICON_MULTIPLY)
 			damage_icon_parts[cache_index] = DI
 		else
@@ -341,14 +334,13 @@ var/global/list/damage_icon_parts = list()
 
 	for(var/organ_tag in species.has_limbs)
 		var/obj/item/organ/external/part = organs_by_name[organ_tag]
-		if(isnull(part) || part.is_stump())
+		if(isnull(part) || part.is_stump() || part.organ_tag == BP_TAIL)
 			icon_key += "0"
 			continue
 		for(var/M in part.markings)
 			icon_key += "[M][part.markings[M]]"
 		if(part)
-			icon_key += "[part.bodytype.get_icon_cache_uid(part.owner)]"
-			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
+			icon_key += "[part.bodytype.get_icon_cache_uid(part.owner)][part.render_alpha]"
 			icon_key += "[part.skin_tone]"
 			if(part.skin_colour)
 				icon_key += "[part.skin_colour]"
@@ -682,31 +674,33 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
-	overlays_standing[HO_TAIL_OVER_LAYER] = null
+	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	if(!tail_organ)
+		return
+	overlays_standing[HO_TAIL_OVER_LAYER] =  null
 	overlays_standing[HO_TAIL_UNDER_LAYER] = null
-
-	var/tail_state = bodytype.get_tail(src)
-
-	if(tail_state && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
-		var/icon/tail_s = get_tail_icon()
+	var/tail_state = tail_organ.get_tail(tail_organ)
+	if(tail_state && (!wear_suit || !(wear_suit.flags_inv & HIDETAIL)))
+		var/icon/tail_s = get_tail_icon(tail_organ)
 		overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER] = image(tail_s, icon_state = "[tail_state]_s")
 		animate_tail_reset(0)
 
 	if(update_icons)
 		update_icon()
 
-/mob/living/carbon/human/proc/get_tail_icon()
+/mob/living/carbon/human/proc/get_tail_icon(var/obj/item/organ/external/tail/tail_organ)
 	var/icon_key = "[bodytype.get_icon_cache_uid(src)][skin_colour][hair_colour]"
 	var/icon/tail_icon = tail_icon_cache[icon_key]
 	if(!tail_icon)
 		//generate a new one
-		var/tail_anim = bodytype.get_tail_animation(src) || bodytype.tail_icon
+		var/tail_anim = tail_organ.get_tail_animation() || tail_organ.get_tail_icon()
 		tail_icon = new/icon(tail_anim)
-		tail_icon.Blend(skin_colour, bodytype.tail_blend)
+		if(species.appearance_flags & HAS_SKIN_COLOR)
+			tail_icon.Blend(skin_colour, bodytype.tail_blend)
 		// The following will not work with animated tails.
-		var/use_tail = bodytype.get_tail_hair(src)
+		var/use_tail = tail_organ.get_tail_hair()
 		if(use_tail)
-			var/icon/hair_icon = icon(bodytype.tail_icon, "[bodytype.get_tail(src)]_[use_tail]")
+			var/icon/hair_icon = icon(tail_organ.tail_icon, "[tail_organ.get_tail()]_[use_tail]")
 			hair_icon.Blend(hair_colour, bodytype.tail_hair_blend)
 			tail_icon.Blend(hair_icon, ICON_OVERLAY)
 		tail_icon_cache[icon_key] = tail_icon
@@ -715,14 +709,20 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/set_dir()
 	. = ..()
-	if(. && bodytype.get_tail(src))
+	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	if(!tail_organ)
+		return
+	if(. && tail_organ.get_tail())
 		update_tail_showing()
 
 
 /mob/living/carbon/human/proc/set_tail_state(var/t_state)
 	var/image/tail_overlay = overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER]
+	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	if(!tail_organ)
+		return null
 
-	if(tail_overlay && bodytype.get_tail_animation(src))
+	if(tail_overlay && tail_organ.get_tail_animation())
 		tail_overlay.icon_state = t_state
 		return tail_overlay
 	return null
@@ -730,7 +730,10 @@ var/global/list/damage_icon_parts = list()
 //Not really once, since BYOND can't do that.
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
 /mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
-	var/t_state = "[bodytype.get_tail(src)]_once"
+	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	if(!tail_organ)
+		return
+	var/t_state = "[tail_organ.get_tail()]_once"
 
 	var/image/tail_overlay = overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER]
 	if(tail_overlay && tail_overlay.icon_state == t_state)
@@ -747,28 +750,40 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/animate_tail_start(var/update_icons=1)
-	if(bodytype.tail_states)
-		set_tail_state("[bodytype.get_tail(src)]_slow[rand(1, bodytype.tail_states)]")
+	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	if(!tail_organ)
+		return
+	if(tail_organ.tail_states)
+		set_tail_state("[tail_organ.get_tail()]_slow[rand(1, tail_organ.tail_states)]")
 		if(update_icons)
 			queue_icon_update()
 
 /mob/living/carbon/human/proc/animate_tail_fast(var/update_icons=1)
-	if(bodytype.tail_states)
-		set_tail_state("[bodytype.get_tail(src)]_loop[rand(1, bodytype.tail_states)]")
+	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	if(!tail_organ)
+		return
+	if(tail_organ.tail_states)
+		set_tail_state("[tail_organ.get_tail()]_loop[rand(1, tail_organ.tail_states)]")
 		if(update_icons)
 			queue_icon_update()
 
 /mob/living/carbon/human/proc/animate_tail_reset(var/update_icons=1)
-	if(stat != DEAD && bodytype.tail_states > 0)
-		set_tail_state("[bodytype.get_tail(src)]_idle[rand(1,bodytype.tail_states)]")
+	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	if(!tail_organ)
+		return
+	if(stat != DEAD && tail_organ.tail_states > 0)
+		set_tail_state("[tail_organ.get_tail()]_idle[rand(1,tail_organ.tail_states)]")
 	else
-		set_tail_state("[bodytype.get_tail(src)]_static")
+		set_tail_state("[tail_organ.get_tail()]_static")
 
 	if(update_icons)
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/animate_tail_stop(var/update_icons=1)
-	set_tail_state("[bodytype.get_tail(src)]_static")
+	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+	if(!tail_organ)
+		return
+	set_tail_state("[tail_organ.get_tail()]_static")
 
 	if(update_icons)
 		queue_icon_update()

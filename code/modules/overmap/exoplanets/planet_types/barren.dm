@@ -11,8 +11,9 @@
 	surface_color = "#807d7a"
 	water_color = null
 	has_trees = FALSE
+	spawn_weight = 50	// These are pretty boring
 
-/obj/effect/overmap/visitable/sector/exoplanet/barren/generate_flora()
+/obj/effect/overmap/visitable/sector/exoplanet/barren/generate_flora(var/temperature)
 	if(prob(10))
 		flora_diversity = 1
 	..()

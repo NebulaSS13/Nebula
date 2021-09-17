@@ -2,7 +2,7 @@
 	name = "Engineering"
 	announce_channel = "Engineering"
 	colour = "#ffa500"
-	display_priority = 2
+	display_priority = 4
 	display_color = "#fff5cc"
 
 /obj/item/robot_module/engineering
@@ -15,7 +15,7 @@
 	name = "Security"
 	announce_channel = "Security"
 	colour = "#dd0000"
-	display_priority = 2
+	display_priority = 3
 	display_color = "#ffddf0"
 
 /obj/item/robot_module/security
@@ -59,7 +59,7 @@
 /decl/department/command
 	name = "Command"
 	colour = "#800080"
-	display_priority = 3
+	display_priority = 5
 	display_color = "#ccccff"
 
 /obj/machinery/network/pager

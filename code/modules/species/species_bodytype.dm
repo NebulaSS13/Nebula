@@ -4,17 +4,18 @@
 	var/icon_deformed
 	var/lip_icon
 	var/bandages_icon
+	var/bodytype_flag = BODY_FLAG_HUMANOID
 	var/bodytype_category = BODYTYPE_OTHER
 	var/limb_icon_intensity = 1.5
-	var/damage_overlays
 	var/damage_mask
 	var/blood_mask
 	var/vulnerable_location = BP_GROIN //organ tag that can be kicked for increased pain, previously `sexybits_location`.
 	var/limb_blend = ICON_ADD
-	var/husk_icon =     'icons/mob/human_races/species/default_husk.dmi'
-	var/skeletal_icon = 'icons/mob/human_races/species/human/skeleton.dmi'
-	var/icon_template = 'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.
-	var/ignited_icon = 'icons/mob/OnFire.dmi'
+	var/damage_overlays = 'icons/mob/human_races/species/default_damage_mask.dmi'
+	var/husk_icon =       'icons/mob/human_races/species/default_husk.dmi'
+	var/skeletal_icon =   'icons/mob/human_races/species/human/skeleton.dmi'
+	var/icon_template =   'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.
+	var/ignited_icon =    'icons/mob/OnFire.dmi'
 	var/associated_gender
 	var/icon_cache_uid
 

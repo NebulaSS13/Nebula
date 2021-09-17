@@ -1,17 +1,3 @@
-/atom/movable/proc/get_mob()
-	return
-
-/obj/vehicle/train/get_mob()
-	return buckled_mob
-
-/mob/get_mob()
-	return src
-
-/mob/living/bot/mulebot/get_mob()
-	if(load && istype(load, /mob/living))
-		return list(src, load)
-	return src
-
 //helper for inverting armor blocked values into a multiplier
 #define blocked_mult(blocked) max(1 - (blocked/100), 0)
 
@@ -20,7 +6,7 @@
 	for(var/atom/movable/AM in view(range, source))
 		var/M = AM.get_mob()
 		if(M)
-			mobs += M
+			mobs |= M
 
 	return mobs
 

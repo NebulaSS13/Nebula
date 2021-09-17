@@ -29,7 +29,12 @@
 
 	var/turf/NT = locate(nx, ny, z)
 	if(NT)
-		vis_contents = list(NT)
+		if(flooded)
+			vis_contents = list(NT, global.flood_object)
+		else
+			vis_contents = list(NT)
+	else if(flooded)
+		vis_contents = list(global.flood_object)
 
 	//Need to put a mouse-opaque overlay there to prevent people turning/shooting towards ACTUAL location of vis_content things
 	var/obj/effect/overlay/O = new(src)

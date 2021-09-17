@@ -3,7 +3,7 @@
 	desc = "A fancy red armband!"
 	icon = 'icons/clothing/accessories/armbands/armband_security.dmi'
 	slot = ACCESSORY_SLOT_ARMBAND
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	hide_on_uniform_rolldown = TRUE
 	hide_on_uniform_rollsleeves = TRUE
 

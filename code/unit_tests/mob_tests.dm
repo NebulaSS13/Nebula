@@ -264,7 +264,7 @@ var/global/default_mobloc = null
 // ==============================================================================
 
 /datum/unit_test/robot_module_icons
-	name = "MOB: Robot module icon check"
+	name = "MOB: Robot Modules Shall Have UI Icons"
 	var/icon_file = 'icons/mob/screen1_robot.dmi'
 
 /datum/unit_test/robot_module_icons/start_test()
@@ -421,5 +421,49 @@ var/global/default_mobloc = null
 	else
 		pass("All living mobs with butchery values produce valid products.")
 	return TRUE
+
+// ============================================================================
+
+/datum/unit_test/robot_modules_shall_have_appropriate_states
+	name = "MOB ICONS: Robot Module Icons Shall Have Appropriate States"
+
+/datum/unit_test/robot_modules_shall_have_appropriate_states/start_test()
+
+	var/list/failures = list()
+	for(var/moduletype in typesof(/obj/item/robot_module))
+		var/obj/item/robot_module/mod = new
+		for(var/sprite in mod.module_sprites)
+			var/check_icon = mod.module_sprites[sprite]
+			if(!check_state_in_icon("world", check_icon))
+				failures += "[moduletype] ([sprite]): [check_icon] missing world sprite"
+			if(!check_state_in_icon("world-eyes", check_icon))
+				failures += "[moduletype] ([sprite]): [check_icon] missing eyes sprite"
+
+	if(length(failures))
+		fail("Some robot modules had invalid or missing icon_states:\n[jointext(failures, "\n")]")
+	else
+		pass("All robot modules had appropriate icon_states.")
+	return 1
+
+// ============================================================================
+
+/datum/unit_test/pai_icons_shall_have_appropriate_states
+	name = "MOB ICONS: PAI Icons Shall Have Appropriate States"
+
+/datum/unit_test/pai_icons_shall_have_appropriate_states/start_test()
+	var/list/failures = list()
+	for(var/chassis in global.possible_chassis)
+		var/check_icon = global.possible_chassis[chassis]
+		if(!check_state_in_icon("world", check_icon))
+			failures += "[chassis]: [check_icon] missing world state"
+		if(!check_state_in_icon("world-rest", check_icon))
+			failures += "[chassis]: [check_icon] missing world-rest sprite"
+		if(!check_state_in_icon("world-dead", check_icon))
+			failures += "[chassis]: [check_icon] missing world-dead state"
+	if(length(failures))
+		fail("Some pAI icons had invalid or missing icon_states:\n[jointext(failures, "\n")]")
+	else
+		pass("All pAI icons had appropriate icon_states.")
+	return 1
 
 // ============================================================================

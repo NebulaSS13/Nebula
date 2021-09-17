@@ -27,7 +27,7 @@
 		return
 
 	var/moppable
-	if(istype(A, /turf))
+	if(isturf(A))
 		var/turf/T = A
 		var/obj/effect/fluid/F = locate() in T
 		if(F && F.reagents.total_volume > 0)

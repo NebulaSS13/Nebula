@@ -28,9 +28,14 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		return 0
 	if(locate(/obj/fire) in src)
 		return 1
+
 	var/datum/gas_mixture/air_contents = return_air()
 	if(!air_contents || exposed_temperature < FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
 		return 0
+
+	var/obj/effect/fluid/F = locate() in src
+	if(F)
+		F.vaporize_fuel(air_contents)
 
 	var/igniting = 0
 	if(air_contents.check_combustibility())
@@ -125,6 +130,12 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	for(var/atom/A in loc)
 		A.fire_act(air_contents, air_contents.temperature, air_contents.volume)
 
+	// prioritize nearby fuel overlays first
+	for(var/direction in global.cardinal)
+		var/turf/simulated/enemy_tile = get_step(my_tile, direction)
+		if(istype(enemy_tile) && (locate(/obj/effect/fluid) in enemy_tile))
+			enemy_tile.hotspot_expose(air_contents.temperature, air_contents.volume)
+
 	//spread
 	for(var/direction in global.cardinal)
 		var/turf/simulated/enemy_tile = get_step(my_tile, direction)
@@ -158,7 +169,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 /obj/fire/Initialize(mapload, fl)
 	. = ..()
 
-	if(!istype(loc, /turf))
+	if(!isturf(loc))
 		return INITIALIZE_HINT_QDEL
 
 	set_dir(pick(global.cardinal))

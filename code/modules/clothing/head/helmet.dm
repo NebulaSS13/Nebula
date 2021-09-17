@@ -86,11 +86,10 @@
 		icon_state = "[icon_state]_up"
 	update_clothing_icon()
 
-/obj/item/clothing/head/helmet/riot/get_mob_overlay()
-	var/image/ret = ..()
-	if(ret && up && check_state_in_icon("[ret.icon_state]_up", icon))
-		ret.icon_state = "[ret.icon_state]_up"
-	return ret
+/obj/item/clothing/head/helmet/riot/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay && up && check_state_in_icon("[overlay.icon_state]_up", overlay.icon))
+		overlay.icon_state = "[overlay.icon_state]_up"
+	. = ..()
 
 /obj/item/clothing/head/helmet/ablative
 	name = "ablative helmet"

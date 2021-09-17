@@ -11,7 +11,7 @@
 		paper.color =   tokens["color"]
 	return paper
 
-/decl/persistence_handler/paper/sticky/CompileEntry(var/atom/entry, var/write_file)
+/decl/persistence_handler/paper/sticky/CompileEntry(var/atom/entry)
 	. = ..()
 	var/obj/item/paper/sticky/paper = entry
 	.["offset_x"] = paper.pixel_x

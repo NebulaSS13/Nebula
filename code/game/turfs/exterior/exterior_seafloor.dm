@@ -2,15 +2,16 @@
 	name = "sea floor"
 	desc = "A thick layer of silt and debris from above."
 	icon = 'icons/turf/exterior/seafloor.dmi'
-	flooded = TRUE
 	icon_edge_layer = EXT_EDGE_SEAFLOOR
 	var/detail_decal
 
-/turf/exterior/seafloor/non_flooded
-	flooded = FALSE
+/turf/exterior/seafloor/flooded
+	flooded = TRUE
+	color = COLOR_OCEAN
 
 /turf/exterior/seafloor/Initialize()
 	. = ..()
+	color = null
 	if(isnull(detail_decal) && prob(20))
 		detail_decal = "asteroid[rand(0,9)]"
 		update_icon()

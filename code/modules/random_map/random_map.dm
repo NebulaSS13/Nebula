@@ -30,11 +30,7 @@ var/global/list/map_count = list()
 	// Storage for the final iteration of the map.
 	var/list/map = list()           // Actual map.
 
-	// If set, all sleep(-1) calls will be skipped.
-	// Test to see if rand_seed() can be used reliably.
-	var/priority_process
-
-/datum/random_map/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0, var/used_area)
+/datum/random_map/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
 
 	// Store this for debugging.
 	if(!map_count[descriptor])
@@ -62,19 +58,19 @@ var/global/list/map_count = list()
 	set_map_size()
 
 	var/start_time = world.timeofday
-	if(!do_not_announce) admin_notice("<span class='danger'>Generating [name].</span>", R_DEBUG)
-	CHECK_TICK
-
-	// Testing needed to see how reliable this is (asynchronous calls, called during worldgen), DM ref is not optimistic
-	if(seed)
-		rand_seed(seed)
-		priority_process = !never_be_priority
+	if(!do_not_announce)
+		admin_notice("<span class='danger'>Generating [name].</span>", R_DEBUG)
 
 	for(var/i = 0;i<max_attempts;i++)
 		if(generate())
-			if(!do_not_announce) admin_notice("<span class='danger'>[capitalize(name)] generation completed in [round(0.1*(world.timeofday-start_time),0.1)] seconds.</span>", R_DEBUG)
-			return
-	if(!do_not_announce) admin_notice("<span class='danger'>[capitalize(name)] failed to generate ([round(0.1*(world.timeofday-start_time),0.1)] seconds): could not produce sane map.</span>", R_DEBUG)
+			. = TRUE
+			break
+
+	if(!do_not_announce)
+		if(.)
+			admin_notice(SPAN_DANGER("[capitalize(name)] generation completed in [round(0.1*(world.timeofday-start_time),0.1)] seconds."), R_DEBUG)
+		else
+			admin_notice(SPAN_DANGER("[capitalize(name)] failed to generate ([round(0.1*(world.timeofday-start_time),0.1)] seconds): could not produce sane map."), R_DEBUG)
 
 /datum/random_map/proc/get_map_cell(var/x,var/y)
 	if(!map)
@@ -163,8 +159,7 @@ var/global/list/map_count = list()
 
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)
-			if(!priority_process)
-				CHECK_TICK
+			CHECK_TICK
 			apply_to_turf(x,y)
 
 /datum/random_map/proc/apply_to_turf(var/x,var/y)
@@ -175,12 +170,10 @@ var/global/list/map_count = list()
 	if(!T || (target_turf_type && !istype(T,target_turf_type)))
 		return 0
 	var/newpath = get_appropriate_path(map[current_cell])
-	if(newpath)
-		T.ChangeTurf(newpath)
-	get_additional_spawns(map[current_cell],T,get_spawn_dir(x, y))
+	. = (newpath && !istype(T, newpath)) ? T.ChangeTurf(newpath) : T
+	get_additional_spawns(map[current_cell], ., get_spawn_dir(x, y))
 	if(use_area)
-		ChangeArea(T, use_area)
-	return T
+		ChangeArea(., use_area)
 
 /datum/random_map/proc/get_spawn_dir()
 	return 0

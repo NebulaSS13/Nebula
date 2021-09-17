@@ -20,6 +20,9 @@
 	var/transform_animate_time = 0 // If greater than zero, transform-based adjustments (scaling, rotating) will visually occur over this time.
 
 	var/tmp/currently_exploding = FALSE
+	var/tmp/default_pixel_x
+	var/tmp/default_pixel_y
+	var/tmp/default_pixel_z
 
 // This is called by the maploader prior to Initialize to perform static modifications to vars set on the map. Intended use case: adjust tag vars on duplicate templates.
 /atom/proc/modify_mapped_vars(map_hash)

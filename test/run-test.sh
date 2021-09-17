@@ -196,6 +196,7 @@ function run_code_tests {
     shopt -s globstar
     run_test "check test workflow contains all maps" "scripts/validateTestingContainsAllMaps.sh"
     run_test_fail "maps contain no step_[xy]" "grep 'step_[xy]' maps/**/*.dmm"
+    run_test_fail "maps contain no cable dir setting" "grep 'd[12] = ' maps/**/*.dmm"
     run_test_fail "maps contain no layer adjustments" "grep 'layer = ' maps/**/*.dmm"
     run_test_fail "maps contain no plane adjustments" "grep 'plane = ' maps/**/*.dmm"
     run_test_fail "ensure nanoui templates unique" "find nano/templates/ -type f -exec md5sum {} + | sort | uniq -D -w 32 | grep nano"

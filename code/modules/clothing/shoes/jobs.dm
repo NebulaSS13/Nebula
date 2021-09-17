@@ -4,7 +4,7 @@
 	icon = 'icons/clothing/feet/galoshes.dmi'
 	permeability_coefficient = 0.05
 	item_flags = ITEM_FLAG_NOSLIP
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 
 /obj/item/clothing/shoes/galoshes/Initialize()
 	. = ..()

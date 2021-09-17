@@ -20,7 +20,7 @@
 	. = ..()
 
 /obj/item/stock_parts/computer/scanner/proc/do_after_install(user, atom/device)
-	var/datum/extension/interactive/ntos/os = get_extension(device, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(device, /datum/extension/interactive/os)
 	if(!driver_type || !device || !os)
 		return 0
 	if(!os.has_component(PART_HDD))

@@ -8,9 +8,6 @@
 	name = "giant spider"
 	desc = "A monstrously huge green spider with shimmering eyes."
 	icon = 'icons/mob/simple_animal/spider.dmi'
-	icon_state = "green"
-	icon_living = "green"
-	icon_dead = "green_dead"
 	speak_emote = list("chitters")
 	emote_hear = list("chitters")
 	emote_see = list("rubs its forelegs together", "wipes its fangs", "stops suddenly")
@@ -44,6 +41,8 @@
 	skin_material = /decl/material/solid/skin/insect
 	skin_amount =   5
 
+	glowing_eyes = TRUE
+
 	var/poison_per_bite = 6
 	var/poison_type = /decl/material/liquid/venom
 	var/busy = 0
@@ -51,15 +50,18 @@
 	var/allowed_eye_colours = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
 	var/hunt_chance = 1 //percentage chance the mob will run to a random nearby tile
 
+/mob/living/simple_animal/hostile/giant_spider/get_eye_overlay()
+	var/image/ret = ..()
+	if(ret && eye_colour)
+		ret.color = eye_colour
+	return ret
+
 /mob/living/simple_animal/hostile/giant_spider/can_do_maneuver(var/decl/maneuver/maneuver, var/silent = FALSE)
 	. = ..() && can_act()
 
 //guards - less venomous, tanky, slower, prioritises protecting nurses
 /mob/living/simple_animal/hostile/giant_spider/guard
 	desc = "A monstrously huge brown spider with shimmering eyes."
-	icon_state = "brown"
-	icon_living = "brown"
-	icon_dead = "brown_dead"
 	meat_amount = 4
 	maxHealth = 200
 	health = 200
@@ -77,9 +79,7 @@
 //nursemaids - these create webs and eggs - the weakest and least threatening
 /mob/living/simple_animal/hostile/giant_spider/nurse
 	desc = "A monstrously huge beige spider with shimmering eyes."
-	icon_state = "beige"
-	icon_living = "beige"
-	icon_dead = "beige_dead"
+	icon = 'icons/mob/simple_animal/spider_beige.dmi'
 	maxHealth = 80
 	health = 80
 	harm_intent_damage = 6 //soft
@@ -102,9 +102,7 @@
 //hunters - the most damage, fast, average health and the only caste tenacious enough to break out of nets
 /mob/living/simple_animal/hostile/giant_spider/hunter
 	desc = "A monstrously huge black spider with shimmering eyes."
-	icon_state = "black"
-	icon_living = "black"
-	icon_dead = "black_dead"
+	icon = 'icons/mob/simple_animal/spider_black.dmi'
 	maxHealth = 150
 	health = 150
 	natural_weapon = /obj/item/natural_weapon/bite/strong
@@ -125,9 +123,7 @@
 //spitters - fast, comparatively weak, very venomous; projectile attacks but will resort to melee once out of ammo
 /mob/living/simple_animal/hostile/giant_spider/spitter
 	desc = "A monstrously huge iridescent spider with shimmering eyes."
-	icon_state = "purple"
-	icon_living = "purple"
-	icon_dead = "purple_dead"
+	icon = 'icons/mob/simple_animal/spider_purple.dmi'
 	maxHealth = 90
 	health = 90
 	poison_per_bite = 15
@@ -154,21 +150,6 @@
 	health = maxHealth
 	eye_colour = pick(allowed_eye_colours)
 	update_icon()
-
-/mob/living/simple_animal/hostile/giant_spider/on_update_icon()
-	..()
-	if(stat == DEAD)
-		z_flags &= ~ZMM_MANGLE_PLANES
-		var/image/I = image(icon = icon, icon_state = "[icon_dead]_eyes")
-		I.color = eye_colour
-		I.appearance_flags = RESET_COLOR
-		add_overlay(I)
-	else
-		z_flags |= ZMM_MANGLE_PLANES
-		var/image/I = emissive_overlay(icon = icon, icon_state = "[icon_state]_eyes")
-		I.color = eye_colour
-		I.appearance_flags = RESET_COLOR
-		add_overlay(I)
 
 /mob/living/simple_animal/hostile/giant_spider/FindTarget()
 	. = ..()
@@ -389,7 +370,7 @@ Nurse caste procs
 				walk(src,0)
 				spawn(50)
 					if(busy == SPINNING_COCOON)
-						if(cocoon_target && istype(cocoon_target.loc, /turf) && get_dist(src,cocoon_target) <= 1)
+						if(cocoon_target && isturf(cocoon_target.loc) && get_dist(src,cocoon_target) <= 1)
 							var/obj/effect/spider/cocoon/C = new(cocoon_target.loc)
 							var/large_cocoon = 0
 							C.pixel_x = cocoon_target.pixel_x

@@ -56,7 +56,10 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 
 /proc/to_debug_listeners(text, prefix = "DEBUG")
 	for(var/client/C in global.admins)
-		if(C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == PREF_SHOW)
+		var/print_to_chat = TRUE
+		if(C.prefs?.preference_values)
+			print_to_chat = C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == PREF_SHOW
+		if(print_to_chat)
 			to_chat(C, "[prefix]: [text]")
 
 /proc/log_game(text)

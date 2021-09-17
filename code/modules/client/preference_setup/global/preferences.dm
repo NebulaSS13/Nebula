@@ -342,3 +342,11 @@ var/global/list/_client_preferences_by_type
 	description ="Show area information"
 	key = "AREA_INFO"
 	default_value = PREF_YES
+
+/datum/client_preference/byond_membership/may_set(client/given_client)
+	if(ismob(given_client))
+		var/mob/M = given_client
+		given_client = M.client
+	if(!given_client)
+		return FALSE
+	return given_client.get_byond_membership()

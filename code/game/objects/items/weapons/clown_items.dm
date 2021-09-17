@@ -10,7 +10,7 @@
 /obj/item/bananapeel/Crossed(var/atom/movable/AM)
 	if (istype(AM, /mob/living))
 		var/mob/living/M = AM
-		M.slip("the [src.name]",4)
+		M.slip("the [src.name]", 4)
 /*
  * Bike Horns
  */

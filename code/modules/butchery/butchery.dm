@@ -70,6 +70,8 @@
 		DEFAULT_FURNITURE_MATERIAL = MATTER_AMOUNT_PRIMARY
 	)
 	tool_interaction_flags = (TOOL_INTERACTION_ANCHOR | TOOL_INTERACTION_DECONSTRUCT)
+	parts_amount = 2
+	parts_type = /obj/item/stack/material/strut
 
 	var/mob/living/occupant
 	var/occupant_state =   CARCASS_EMPTY

@@ -54,7 +54,7 @@
 /datum/extension/assembly/modular_computer/power_failure(var/malfunction = 0)
 	var/atom/movable/H = holder
 	H.visible_message("<span class='danger'>\The [assembly_name]'s screen flickers briefly and then goes dark.</span>", range = 1)
-	var/datum/extension/interactive/ntos/os = get_extension(holder, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(holder, /datum/extension/interactive/os)
 	if(os)
 		os.event_powerfailure()
 	. = ..()
@@ -77,7 +77,7 @@
 			to_chat(user, SPAN_NOTICE("You send an activation signal to \the [assembly_name], turning it on."))
 		else
 			to_chat(user, SPAN_NOTICE("You press the power button and start up \the [assembly_name]."))
-		var/datum/extension/interactive/ntos/os = get_extension(holder, /datum/extension/interactive/ntos)
+		var/datum/extension/interactive/os/os = get_extension(holder, /datum/extension/interactive/os)
 		if(os)
 			os.system_boot()
 	else // Unpowered
@@ -89,6 +89,6 @@
 
 /datum/extension/assembly/modular_computer/shutdown_device()
 	. = ..()
-	var/datum/extension/interactive/ntos/os = get_extension(holder, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(holder, /datum/extension/interactive/os)
 	if(os)
 		os.system_shutdown()

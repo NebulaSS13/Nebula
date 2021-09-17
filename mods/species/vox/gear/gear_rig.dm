@@ -46,22 +46,14 @@
 
 /obj/item/clothing/head/helmet/space/rig/vox_rig
 	icon = 'mods/species/vox/icons/rig/helmet.dmi'
-/obj/item/clothing/head/helmet/space/rig/vox_rig/Initialize()
-	. = ..()
-	bodytype_restricted = list(BODYTYPE_VOX)
+	bodytype_equip_flags = BODY_FLAG_VOX
 /obj/item/clothing/suit/space/rig/vox_rig
 	icon = 'mods/species/vox/icons/rig/chest.dmi'
-/obj/item/clothing/suit/space/rig/vox_rig/Initialize()
-	. = ..()
-	bodytype_restricted = list(BODYTYPE_VOX)
+	bodytype_equip_flags = BODY_FLAG_VOX
 /obj/item/clothing/shoes/magboots/rig/vox_rig
 	icon = 'mods/species/vox/icons/rig/boots.dmi'
-/obj/item/clothing/shoes/magboots/rig/vox_rig/Initialize()
-	. = ..()
-	bodytype_restricted = list(BODYTYPE_VOX)
+	bodytype_equip_flags = BODY_FLAG_VOX
 /obj/item/clothing/gloves/rig/vox_rig
 	icon = 'mods/species/vox/icons/rig/gloves.dmi'
 	siemens_coefficient = 0
-/obj/item/clothing/gloves/rig/vox_rig/Initialize()
-	. = ..()
-	bodytype_restricted = list(BODYTYPE_VOX)
+	bodytype_equip_flags = BODY_FLAG_VOX

@@ -15,7 +15,7 @@
 	to_chat(user, "<span class='notice'>***********************************************************</span>")
 
 /datum/build_mode/basic/OnClick(var/atom/object, var/list/pa)
-	if(istype(object,/turf) && pa["left"] && !pa["alt"] && !pa["ctrl"] )
+	if(isturf(object) && pa["left"] && !pa["alt"] && !pa["ctrl"] )
 		if(isspaceturf(object))
 			var/turf/T = object
 			Log("Upgraded - [log_info_line(object)]")
@@ -51,10 +51,10 @@
 			Log("Deleted - [log_info_line(object)]")
 			qdel(object)
 			return
-	else if(istype(object,/turf) && pa["alt"] && pa["left"])
+	else if(isturf(object) && pa["alt"] && pa["left"])
 		var/airlock = new/obj/machinery/door/airlock(get_turf(object))
 		Log("Created - [log_info_line(airlock)]")
-	else if(istype(object,/turf) && pa["ctrl"] && pa["left"])
+	else if(isturf(object) && pa["ctrl"] && pa["left"])
 		var/obj/structure/window/reinforced/WIN = new/obj/structure/window/reinforced(get_turf(object))
 		Log("Created - [log_info_line(object)]")
 		WIN.set_dir(host.direction)

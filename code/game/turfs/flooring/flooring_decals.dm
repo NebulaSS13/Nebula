@@ -229,6 +229,41 @@ var/global/list/floor_decals = list()
 /obj/effect/floor_decal/corner/paleblue/bordercee
 	icon_state = "bordercolorcee"
 
+
+/obj/effect/floor_decal/corner/navyblue
+	name = "navy blue corner"
+	color = COLOR_NAVY_BLUE
+
+/obj/effect/floor_decal/corner/navyblue/diagonal
+	icon_state = "corner_white_diagonal"
+
+/obj/effect/floor_decal/corner/navyblue/three_quarters
+	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/navyblue/full
+	icon_state = "corner_white_full"
+
+/obj/effect/floor_decal/corner/navyblue/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/navyblue/half
+	icon_state = "bordercolorhalf"
+
+/obj/effect/floor_decal/corner/navyblue/mono
+	icon_state = "bordercolormonofull"
+
+/obj/effect/floor_decal/corner/navyblue/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/navyblue/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/navyblue/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/navyblue/bordercee
+	icon_state = "bordercolorcee"
+
 /obj/effect/floor_decal/corner/green
 	name = "green corner"
 	color = COLOR_GREEN_GRAY

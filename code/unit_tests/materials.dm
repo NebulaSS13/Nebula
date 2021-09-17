@@ -168,3 +168,27 @@
 		pass("All reactions had valid reactants and products.")
 	return 1 
 
+/datum/unit_test/material_gas_symbols_shall_be_unique
+	name = "MATERIALS: Gas Symbols Shall Be Unique"
+
+/datum/unit_test/material_gas_symbols_shall_be_unique/start_test()
+	var/list/seen = list()
+	var/list/failures = list()
+	var/list/all_materials = decls_repository.get_decls_of_type(/decl/material)
+	for(var/decl_type in all_materials)
+		var/decl/material/mat = all_materials[decl_type]
+		if(mat.is_abstract())
+			continue
+		if(!mat.gas_symbol)
+			failures += "[mat.type] - false or null gas_symbol"
+		else if(mat.gas_symbol in seen)
+			failures += "[mat.type] - duplicate gas_symbol ([mat.gas_symbol])"
+		else
+			seen += mat.gas_symbol
+
+	if(length(failures))
+		fail("[length(failures)] material\s had null or non-unique gas symbols:\n[jointext(failures, "\n")]")
+	else
+		pass("All materials had unique and non-null gas symbols.")
+	return 1
+

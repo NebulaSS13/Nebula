@@ -4,7 +4,7 @@
 	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle. They're large enough to be worn over other footwear."
 	icon_state = ICON_STATE_WORLD
 	icon = 'icons/clothing/feet/magboots.dmi'
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	force = 3
 	can_fit_under_magboots = FALSE
 	action_button_name = "Toggle Magboots"
@@ -51,15 +51,14 @@
 		icon_state = new_state
 	update_clothing_icon()
 	
-/obj/item/clothing/shoes/magboots/get_mob_overlay(var/mob/user_mob, var/slot)
-	var/image/ret = ..()
-	if(ret)
-		var/new_state = ret.icon_state
+/obj/item/clothing/shoes/magboots/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
+	if(overlay)
+		var/new_state = overlay.icon_state
 		if(magpulse)
 			new_state = "[new_state]-on"
-		if(check_state_in_icon(new_state, ret.icon))
-			ret.icon_state = new_state
-	return ret
+		if(check_state_in_icon(new_state, overlay.icon))
+			overlay.icon_state = new_state
+	. = ..()
 
 /obj/item/clothing/shoes/magboots/mob_can_equip(mob/M, slot, disable_warning = 0, force = 0)
 	var/obj/item/clothing/shoes/check_shoes

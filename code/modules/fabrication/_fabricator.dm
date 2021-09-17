@@ -47,7 +47,7 @@
 	var/static/list/stored_substances_to_names = list()
 
 	var/list/design_cache = list()
-	var/list/installed_designs
+	var/list/installed_designs = list()
 
 	var/sound_id
 	var/datum/sound_token/sound_token

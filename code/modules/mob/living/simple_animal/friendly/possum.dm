@@ -2,10 +2,6 @@
 	name = "opossum"
 	real_name = "opossum"
 	desc = "It's an opossum, a small scavenging marsupial."
-	icon_state = "possum"
-	item_state = "possum"
-	icon_living = "possum"
-	icon_dead = "possum_dead"
 	icon = 'icons/mob/simple_animal/possum.dmi'
 	speak = list("Hiss!","Aaa!","Aaa?")
 	speak_emote = list("hisses")
@@ -75,14 +71,11 @@
 
 /mob/living/simple_animal/opossum/on_update_icon()
 	..()
-	if(stat == DEAD || (resting && is_angry))
-		icon_state = icon_dead
-	else if(resting || stat == UNCONSCIOUS)
-		icon_state = "[icon_living]_sleep"
-	else if(is_angry)
-		icon_state = "[icon_living]_aaa"
-	else
-		icon_state = icon_living
+	if(stat == CONSCIOUS && is_angry)
+		if(resting)
+			icon_state = "world-dead"
+		else
+			icon_state = "world-aaa"
 
 /mob/living/simple_animal/opossum/Initialize()
 	. = ..()
@@ -92,10 +85,6 @@
 /mob/living/simple_animal/opossum/poppy
 	name = "Poppy the Safety Possum"
 	desc = "It's an opossum, a small scavenging marsupial. It's wearing appropriate personal protective equipment, though."
-	icon_state = "poppy"
-	item_state = "poppy"
-	icon_living = "poppy"
-	icon_dead = "poppy_dead"
 	icon = 'icons/mob/simple_animal/poppy_possum.dmi'
 	var/aaa_words = list("delaminat", "meteor", "fire", "breach")
 

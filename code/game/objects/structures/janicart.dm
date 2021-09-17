@@ -5,7 +5,7 @@
 	icon_state = "cart"
 	anchored = 0
 	density = 1
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_WHEELED
 	//copypaste sorry
 	var/amount_per_transfer_from_this = 5 //shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
 	var/obj/item/storage/bag/trash/mybag	= null
@@ -167,45 +167,63 @@
 	name = "janicart"
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "pussywagon"
-	anchored = 1
-	density = 1
+	anchored = FALSE
+	density =  TRUE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+	buckle_layer_above = TRUE
+	buckle_movable = TRUE
+	movement_handlers = list(
+		/datum/movement_handler/deny_multiz, 
+		/datum/movement_handler/delay = list(1), 
+		/datum/movement_handler/move_relay_self
+	)
+
 	//copypaste sorry
 	var/amount_per_transfer_from_this = 5 //shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
-	var/obj/item/storage/bag/trash/mybag	= null
+	var/obj/item/storage/bag/trash/mybag = null
 	var/callme = "pimpin' ride"	//how do people refer to it?
 
-
 /obj/structure/bed/chair/janicart/Initialize()
+	// Handled in init due to dirs needing to be stringified
+	buckle_pixel_shift = list(
+		"[NORTH]" = list("x" =   0, "y" = 4, "z" = 0),
+		"[SOUTH]" = list("x" =   0, "y" = 7, "z" = 0),
+		"[EAST]"  = list("x" = -13, "y" = 7, "z" = 0),
+		"[WEST]"  = list("x" =  13, "y" = 7, "z" = 0)
+	)
 	. = ..()
 	create_reagents(100)
 
 /obj/structure/bed/chair/janicart/examine(mob/user, distance)
 	. = ..()
-	if(distance > 1)
-		return
-
-	to_chat(user, "[html_icon(src)] This [callme] contains [reagents.total_volume] unit\s of water!")
-	if(mybag)
-		to_chat(user, "\A [mybag] is hanging on the [callme].")
-
+	if(distance <= 1)
+		to_chat(user, "[html_icon(src)] This [callme] contains [reagents.total_volume] unit\s of water!")
+		if(mybag)
+			to_chat(user, "\A [mybag] is hanging on the [callme].")
 
 /obj/structure/bed/chair/janicart/attackby(obj/item/I, mob/user)
+
 	if(istype(I, /obj/item/mop))
 		if(reagents.total_volume > 1)
 			reagents.trans_to_obj(I, 2)
-			to_chat(user, "<span class='notice'>You wet [I] in the [callme].</span>")
+			to_chat(user, SPAN_NOTICE("You wet [I] in the [callme]."))
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		else
-			to_chat(user, "<span class='notice'>This [callme] is out of water!</span>")
-	else if(istype(I, /obj/item/key))
-		to_chat(user, "Hold [I] in one of your hands while you drive this [callme].")
-	else if(istype(I, /obj/item/storage/bag/trash))
+			to_chat(user, SPAN_NOTICE("This [callme] is out of water!"))
+		return TRUE
+
+	if(istype(I, /obj/item/janicart_key))
+		to_chat(user, SPAN_NOTICE("Hold \the [I] in one of your hands while you drive this [callme]."))
+		return TRUE
+
+	if(istype(I, /obj/item/storage/bag/trash))
 		if(!user.unEquip(I, src))
 			return
-		to_chat(user, "<span class='notice'>You hook the trashbag onto the [callme].</span>")
+		to_chat(user, SPAN_NOTICE("You hook \the [I] onto the [callme]."))
 		mybag = I
+		return TRUE
 
+	. = ..()
 
 /obj/structure/bed/chair/janicart/attack_hand(mob/user)
 	if(mybag)
@@ -214,70 +232,28 @@
 	else
 		..()
 
+/obj/structure/bed/chair/janicart/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
+	if(isspaceturf(loc))
+		return
+	. = MOVEMENT_HANDLED
+	DoMove(mob.AdjustMovementDirection(direction), mob)
+
 /obj/structure/bed/chair/janicart/relaymove(mob/user, direction)
 	if(user.incapacitated(INCAPACITATION_DISRUPTED))
 		unbuckle_mob()
-	if(locate(/obj/item/key) in user.get_held_items())
+	if(locate(/obj/item/janicart_key) in user.get_held_items())
 		step(src, direction)
-		update_mob()
+		set_dir(direction)
 	else
 		to_chat(user, SPAN_WARNING("You'll need the keys in one of your hands to drive this [callme]."))
-
-/obj/structure/bed/chair/janicart/Move()
-	..()
-	if(buckled_mob && (buckled_mob.buckled == src))
-		buckled_mob.dropInto(loc)
-
-
-/obj/structure/bed/chair/janicart/post_buckle_mob(mob/living/M)
-	update_mob()
-	return ..()
-
-
-/obj/structure/bed/chair/janicart/unbuckle_mob()
-	var/mob/living/M = ..()
-	if(M)
-		M.pixel_x = 0
-		M.pixel_y = 0
-	return M
-
-
-/obj/structure/bed/chair/janicart/set_dir()
-	..()
-	if(buckled_mob)
-		if(buckled_mob.loc != loc)
-			buckled_mob.buckled = null //Temporary, so Move() succeeds.
-			buckled_mob.buckled = src //Restoring
-
-	update_mob()
-
-
-/obj/structure/bed/chair/janicart/proc/update_mob()
-	if(buckled_mob)
-		buckled_mob.set_dir(dir)
-		switch(dir)
-			if(SOUTH)
-				buckled_mob.pixel_x = 0
-				buckled_mob.pixel_y = 7
-			if(WEST)
-				buckled_mob.pixel_x = 13
-				buckled_mob.pixel_y = 7
-			if(NORTH)
-				buckled_mob.pixel_x = 0
-				buckled_mob.pixel_y = 4
-			if(EAST)
-				buckled_mob.pixel_x = -13
-				buckled_mob.pixel_y = 7
-
 
 /obj/structure/bed/chair/janicart/bullet_act(var/obj/item/projectile/Proj)
 	if(buckled_mob)
 		if(prob(85))
 			return buckled_mob.bullet_act(Proj)
-	visible_message("<span class='warning'>[Proj] ricochets off the [callme]!</span>")
+	visible_message(SPAN_WARNING("\The [Proj] ricochets off the [callme]!"))
 
-
-/obj/item/key
+/obj/item/janicart_key
 	name = "key"
 	desc = "A keyring with a small steel key, and a pink fob reading \"Pussy Wagon\"."
 	icon = 'icons/obj/vehicles.dmi'

@@ -119,6 +119,7 @@
 	fluid_initial = 10
 
 // Permaflood overlay.
+var/global/obj/effect/flood/flood_object = new
 /obj/effect/flood
 	name = ""
 	mouse_opacity = 0
@@ -139,3 +140,25 @@
 /obj/effect/flood/Initialize()
 	. = ..()
 	verbs.Cut()
+
+/obj/effect/fluid/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	. = ..()
+	if(exposed_temperature >= FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE)
+		vaporize_fuel(air)
+
+/obj/effect/fluid/proc/vaporize_fuel(datum/gas_mixture/air)
+	if(!length(reagents?.reagent_volumes) || !istype(air))
+		return
+	var/update_air = FALSE
+	for(var/rtype in reagents.reagent_volumes)
+		var/decl/material/mat = GET_DECL(rtype)
+		if(mat.gas_flags & XGM_GAS_FUEL)
+			var/moles = round(reagents.reagent_volumes[rtype] / REAGENT_UNITS_PER_GAS_MOLE)
+			if(moles > 0)
+				air.adjust_gas(rtype, moles, FALSE)
+				reagents.remove_reagent(round(moles * REAGENT_UNITS_PER_GAS_MOLE))
+				update_air = TRUE
+	if(update_air)
+		air.update_values()
+		return TRUE
+	return FALSE

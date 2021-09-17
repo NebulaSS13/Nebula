@@ -106,3 +106,32 @@
 		/decl/material/solid/glass =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2),
 		/decl/material/solid/plastic = CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)/2)
 	)
+
+/datum/fabricator_recipe/struts
+	name = "strut, steel"
+	path = /obj/item/stack/material/strut/mapped/steel
+
+/datum/fabricator_recipe/struts/get_resources()
+	resources = list(
+		/decl/material/solid/metal/steel =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
+	)
+
+/datum/fabricator_recipe/struts/aluminium
+	name = "strut, aluminium"
+	path = /obj/item/stack/material/strut/mapped/aluminium
+	fabricator_types = list(FABRICATOR_CLASS_INDUSTRIAL)
+
+/datum/fabricator_recipe/struts/aluminium/get_resources()
+	resources = list(
+		/decl/material/solid/metal/aluminium =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
+	)
+
+/datum/fabricator_recipe/struts/titanium
+	name = "strut, titanium"
+	path = /obj/item/stack/material/strut/mapped/titanium
+	fabricator_types = list(FABRICATOR_CLASS_INDUSTRIAL)
+
+/datum/fabricator_recipe/struts/titanium/get_resources()
+	resources = list(
+		/decl/material/solid/metal/titanium =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
+	)

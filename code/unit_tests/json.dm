@@ -37,11 +37,6 @@
 	var/list/failures
 	var/list/json_to_check
 
-	for(var/subtype in typesof(/obj))
-		var/obj/test = subtype
-		var/check_json = initial(test.buckle_pixel_shift)
-		if(!isnull(check_json))
-			LAZYSET(json_to_check, "[subtype].buckle_pixel_shift", check_json)
 	for(var/subtype in typesof(/obj/item))
 		var/obj/item/test = subtype
 		var/check_json = initial(test.center_of_mass)

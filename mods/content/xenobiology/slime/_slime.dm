@@ -5,7 +5,7 @@
 /mob/living/slime
 	name = "baby slime"
 	icon = 'mods/content/xenobiology/icons/slimes/slime_baby.dmi'
-	icon_state = "slime"
+	icon_state = ICON_STATE_WORLD
 	pass_flags = PASS_FLAG_TABLE
 	speak_emote = list("chirps")
 	maxHealth = 150

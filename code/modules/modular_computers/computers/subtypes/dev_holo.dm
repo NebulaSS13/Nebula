@@ -58,7 +58,7 @@
 // Visual.
 /obj/item/modular_computer/holotablet/on_update_icon()
 	cut_overlays()
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(src, /datum/extension/assembly)
 	if(assembly && assembly.enabled)
 		var/mutable_appearance/M = mutable_appearance(icon,"[icon_state]-on")

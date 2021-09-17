@@ -389,7 +389,7 @@
 	name = "gear harness"
 	desc = "How... minimalist."
 	icon = 'icons/clothing/under/harness.dmi'
-	bodytype_restricted = null
+	bodytype_equip_flags = null
 	body_parts_covered = 0
 
 /obj/item/clothing/under/frontier

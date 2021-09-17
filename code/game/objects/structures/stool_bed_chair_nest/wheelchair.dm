@@ -4,7 +4,11 @@
 	icon_state = "wheelchair"
 	anchored = FALSE
 	buckle_movable = TRUE
-	movement_handlers = list(/datum/movement_handler/deny_multiz, /datum/movement_handler/delay = list(5), /datum/movement_handler/move_relay_self)
+	movement_handlers = list(
+		/datum/movement_handler/deny_multiz, 
+		/datum/movement_handler/delay = list(5), 
+		/datum/movement_handler/move_relay_self
+	)
 
 	var/item_form_type = /obj/item/wheelchair_kit
 	var/bloodiness
@@ -31,18 +35,6 @@
 	if(isWrench(W) || istype(W,/obj/item/stack) || isWirecutter(W))
 		return
 	..()
-
-/obj/structure/bed/chair/wheelchair/relaymove(mob/user, direction)
-	// Redundant check?
-	if(user.incapacitated())
-		return
-	if(propelled)
-		return
-
-	step(src, direction)
-	set_dir(direction)
-	if(bloodiness)
-		create_track()
 
 /obj/structure/bed/chair/wheelchair/attack_hand(mob/user)
 	user_unbuckle_mob(user)
@@ -119,6 +111,16 @@
 		visible_message(SPAN_NOTICE("<b>[usr]</b> collapses \the [src.name]."))
 		K.add_fingerprint(usr)
 		qdel(src)
+
+/obj/structure/bed/chair/wheelchair/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
+	if(isspaceturf(loc))
+		return // No wheelchair driving in space
+	. = MOVEMENT_HANDLED
+	if(!mob.has_held_item_slot())
+		return // No hands to drive your chair? Tough luck!
+	//drunk wheelchair driving
+	direction = mob.AdjustMovementDirection(direction)
+	DoMove(direction, mob)
 
 /obj/item/wheelchair_kit
 	name = "compressed wheelchair kit"

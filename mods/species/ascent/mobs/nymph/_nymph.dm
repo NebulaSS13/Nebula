@@ -13,8 +13,7 @@
 	name = SPECIES_MANTID_NYMPH
 	desc = "It's a little alien skittery critter. Hiss."
 	icon = 'mods/species/ascent/icons/species/nymph.dmi'
-	icon_state = "larva"
-	item_state = "larva"
+	icon_state = ICON_STATE_WORLD
 	death_msg = "expires with a pitiful hiss..."
 	health = 60
 	maxHealth = 60
@@ -70,9 +69,6 @@
 
 /mob/living/carbon/alien/ascent_nymph/on_update_icon()
 	..()
-	if(stat == DEAD)
-		icon_state = "[initial(icon_state)]_dead"
-	else if(incapacitated(INCAPACITATION_KNOCKOUT))
-		icon_state = "[initial(icon_state)]_dead" // Maybe add sleep later?
-	else
-		icon_state = "[initial(icon_state)]"
+	icon_state = ICON_STATE_WORLD
+	if(stat != CONSCIOUS || lying)
+		icon_state += "-dead"

@@ -290,7 +290,7 @@
 
 	if(istype(target,/mob/living))
 		splatted = apply_special_effect(target,thrown)
-	else if(istype(target,/turf))
+	else if(isturf(target))
 		splatted = 1
 		for(var/mob/living/M in target.contents)
 			apply_special_effect(M)
@@ -424,7 +424,7 @@
 	display_name = "[name] plant"
 
 //Creates a random seed. MAKE SURE THE LINE HAS DIVERGED BEFORE THIS IS CALLED.
-/datum/seed/proc/randomize()
+/datum/seed/proc/randomize(var/temperature = T20C)
 
 	roundstart = 0
 	mysterious = 1
@@ -457,48 +457,40 @@
 	else if(prob(1))
 		set_trait(TRAIT_TELEPORTING,1)
 
-	if(prob(5))
-		consume_gasses = list()
-		var/gas = pick(subtypesof(/decl/material/gas))
-		consume_gasses[gas] = rand(3,9)
+	var/skip_toxins = prob(30)
+	var/list/gasses  = list()
+	var/list/liquids = list()
+	var/list/all_materials = decls_repository.get_decls_of_subtype(/decl/material)
+	for(var/mat_type in all_materials)
+		var/decl/material/mat = all_materials[mat_type]
+		if(mat.exoplanet_rarity == MAT_RARITY_NOWHERE)
+			continue
+		if(skip_toxins && mat.toxicity)
+			continue
+		if(!isnull(mat.boiling_point) && mat.boiling_point <= temperature && (isnull(mat.gas_condensation_point) || mat.gas_condensation_point > temperature))
+			gasses[mat.type] = mat.exoplanet_rarity
+		else if(!isnull(mat.melting_point) && mat.melting_point <= temperature)
+			liquids[mat.type] = mat.exoplanet_rarity
+	liquids -= /decl/material/liquid/nutriment
 
-	if(prob(5))
-		exude_gasses = list()
-		var/gas = pick(subtypesof(/decl/material/gas))
-		exude_gasses[gas] = rand(3,9)
+	if(length(gasses))
+		if(prob(5))
+			var/gas = pickweight(gasses)
+			gasses -= gas
+			LAZYSET(consume_gasses, gas, rand(3,9))
+		if(prob(5))
+			var/gas = pickweight(gasses)
+			gasses -= gas
+			LAZYSET(exude_gasses, gas, rand(3,9))
 
 	chems = list()
 	if(prob(80))
 		chems[/decl/material/liquid/nutriment] = list(rand(1,10),rand(10,20))
-
-	var/additional_chems = rand(0,5)
-
-	if(additional_chems)
-		var/list/banned_chems = list(
-			/decl/material/placeholder,
-			/decl/material/liquid/adminordrazine,
-			/decl/material/liquid/nutriment,
-			/decl/material/liquid/weedkiller
-			)
-		banned_chems += subtypesof(/decl/material/liquid/ethanol)
-		banned_chems += subtypesof(/decl/material/solid/tobacco)
-		banned_chems += typesof(/decl/material/liquid/drink)
-		banned_chems += typesof(/decl/material/liquid/nutriment)
-		banned_chems += typesof(/decl/material/liquid/fertilizer)
-
-		if(prob(30))
-			for(var/R in subtypesof(/decl/material))
-				var/decl/material/mat = GET_DECL(R)
-				if(mat.toxicity)
-					banned_chems |= R
-
-		for(var/x=1;x<=additional_chems;x++)
-			var/new_chem = pick(subtypesof(/decl/material))
-			if(new_chem in banned_chems)
-				x--
-				continue
-			banned_chems += new_chem
-			chems[new_chem] = list(rand(1,10),rand(10,20))
+	if(length(liquids))
+		for(var/x = 1 to rand(0, 5))
+			var/new_chem = pickweight(liquids)
+			liquids -= new_chem
+			chems[new_chem] = list(rand(1,10), rand(10,20))
 
 	if(prob(90))
 		set_trait(TRAIT_REQUIRES_NUTRIENTS,1)

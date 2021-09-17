@@ -4,20 +4,18 @@
 	var/list/prey = list()
 
 /mob/living/simple_animal/hostile/retaliate/beast/ListTargets(var/dist = 7)
-	var/list/see = ..()
-	if(see.len)
-		return see
-	if(prey.len)
-		. = list()
-		for(var/weakref/W in prey)
-			var/mob/M = W.resolve()
-			if(M)
-				. += M
-		return
-	if(hunger > 500) //time to look for some food
-		for(var/mob/living/L in view(src, dist))
-			if(!attack_same && L.faction != faction)
-				prey |= weakref(L)
+	. = ..()
+	if(!length(.))
+		if(length(prey))
+			. = list()
+			for(var/weakref/W in prey)
+				var/mob/M = W.resolve()
+				if(M)
+					. |= M
+		else if(hunger > 500) //time to look for some food
+			for(var/mob/living/L in view(src, dist))
+				if(!attack_same && L.faction != faction)
+					prey |= weakref(L)
 
 /mob/living/simple_animal/hostile/retaliate/beast/Life()
 	. = ..()
@@ -68,9 +66,7 @@
 	name = "samak"
 	desc = "A fast, armoured predator accustomed to hiding and ambushing in cold terrain."
 	faction = "samak"
-	icon_state = "samak"
-	icon_living = "samak"
-	icon_dead = "samak_dead"
+	icon = 'icons/mob/simple_animal/samak.dmi'
 	move_to_delay = 2
 	maxHealth = 125
 	health = 125
@@ -87,17 +83,13 @@
 
 /mob/living/simple_animal/hostile/retaliate/beast/samak/alt
 	desc = "A fast, armoured predator accustomed to hiding and ambushing."
-	icon_state = "samak-alt"
-	icon_living = "samak-alt"
-	icon_dead = "samak-alt_dead"
+	icon = 'icons/mob/simple_animal/samak_alt.dmi'
 
 /mob/living/simple_animal/hostile/retaliate/beast/diyaab
 	name = "diyaab"
 	desc = "A small pack animal. Although omnivorous, it will hunt meat on occasion."
 	faction = "diyaab"
-	icon_state = "diyaab"
-	icon_living = "diyaab"
-	icon_dead = "diyaab_dead"
+	icon = 'icons/mob/simple_animal/diyaab.dmi'
 	move_to_delay = 1
 	maxHealth = 25
 	health = 25
@@ -114,9 +106,7 @@
 	name = "shantak"
 	desc = "A piglike creature with a bright iridiscent mane that sparkles as though lit by an inner light. Don't be fooled by its beauty though."
 	faction = "shantak"
-	icon_state = "shantak"
-	icon_living = "shantak"
-	icon_dead = "shantak_dead"
+	icon = 'icons/mob/simple_animal/shantak.dmi'
 	move_to_delay = 1
 	maxHealth = 75
 	health = 75
@@ -129,33 +119,25 @@
 
 /mob/living/simple_animal/hostile/retaliate/beast/shantak/alt
 	desc = "A piglike creature with a long and graceful mane. Don't be fooled by its beauty."
-	icon_state = "shantak-alt"
-	icon_living = "shantak-alt"
-	icon_dead = "shantak-alt_dead"
+	icon = 'icons/mob/simple_animal/shantak_alt.dmi'
 	emote_see = list("scratches the ground","shakes out it's mane","rustles softly")
 
 /mob/living/simple_animal/yithian
 	name = "yithian"
 	desc = "A friendly creature vaguely resembling an oversized snail without a shell."
-	icon_state = "yithian"
-	icon_living = "yithian"
-	icon_dead = "yithian_dead"
+	icon = 'icons/mob/simple_animal/yithian.dmi'
 	mob_size = MOB_SIZE_TINY
 
 /mob/living/simple_animal/tindalos
 	name = "tindalos"
 	desc = "It looks like a large, flightless grasshopper."
-	icon_state = "tindalos"
-	icon_living = "tindalos"
-	icon_dead = "tindalos_dead"
+	icon = 'icons/mob/simple_animal/tindalos.dmi'
 	mob_size = MOB_SIZE_TINY
 
 /mob/living/simple_animal/thinbug
 	name = "taki"
 	desc = "It looks like a bunch of legs."
-	icon_state = "thinbug"
-	icon_living = "thinbug"
-	icon_dead = "thinbug_dead"
+	icon = 'icons/mob/simple_animal/bug.dmi'
 	speak_chance = 1
 	emote_hear = list("scratches the ground","chitters")
 	mob_size = MOB_SIZE_MINISCULE
@@ -164,9 +146,7 @@
 	name = "cragenoy"
 	desc = "It looks like a crustacean with an exceedingly hard carapace. Watch the pinchers!"
 	faction = "crab"
-	icon_state = "royalcrab"
-	icon_living = "royalcrab"
-	icon_dead = "royalcrab_dead"
+	icon = 'icons/mob/simple_animal/royalcrab.dmi'
 	move_to_delay = 3
 	maxHealth = 150
 	health = 150
@@ -181,9 +161,7 @@
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby
 	name = "charbaby"
 	desc = "A huge grubby creature."
-	icon_state = "char"
-	icon_living = "char"
-	icon_dead = "char_dead"
+	icon = 'icons/mob/simple_animal/char.dmi'
 	mob_size = MOB_SIZE_LARGE
 	health = 45
 	maxHealth = 45
@@ -218,7 +196,5 @@
 
 /mob/living/simple_animal/hostile/retaliate/beast/shantak/lava
 	desc = "A vaguely canine looking beast. It looks as though its fur is made of stone wool."
-	icon_state = "lavadog"
-	icon_living = "lavadog"
-	icon_dead = "lavadog_dead"
+	icon = 'icons/mob/simple_animal/lavadog.dmi'
 	speak = list("Karuph","Karump")

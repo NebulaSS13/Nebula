@@ -2,10 +2,7 @@
 	name = "Shade"
 	real_name = "Shade"
 	desc = "A bound spirit"
-	icon = 'icons/mob/mob.dmi'
-	icon_state = "shade"
-	icon_living = "shade"
-	icon_dead = "shade_dead"
+	icon = 'icons/mob/simple_animal/shade.dmi'
 	maxHealth = 50
 	health = 50
 	universal_speak = TRUE

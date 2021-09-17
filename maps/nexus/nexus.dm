@@ -3,6 +3,7 @@
 	//Content & etc
 
 	#include "../../mods/content/bigpharma/_bigpharma.dme"
+	#include "../../mods/content/matchmaking/_matchmaking.dme"
 	#include "../../mods/content/scaling_descriptors.dm"
 
 	//Species

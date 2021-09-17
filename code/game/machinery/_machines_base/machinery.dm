@@ -431,8 +431,11 @@ Class Procs:
 		explosion_act(3)
 
 /obj/machinery/Move()
+	var/atom/lastloc = loc
 	. = ..()
 	if(. && !CanFluidPass())
+		if(lastloc)
+			lastloc.fluid_update()
 		fluid_update()
 
 /obj/machinery/get_cell(var/functional_only = TRUE)

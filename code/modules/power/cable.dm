@@ -23,21 +23,17 @@ By design, d1 is the smallest direction and d2 is the highest
 */
 
 /obj/structure/cable
-	level = 1
-	anchored =1
-	var/datum/powernet/powernet
 	name = "power cable"
 	desc = "A flexible superconducting cable for heavy-duty power transfer."
 	icon = 'icons/obj/power_cond_white.dmi'
 	icon_state = "0-1"
-	var/d1 = 0
-	var/d2 = 1
-
-	layer = EXPOSED_WIRE_LAYER
-
-	color = COLOR_MAROON
+	layer =    EXPOSED_WIRE_LAYER
+	color =    COLOR_MAROON
+	anchored = TRUE
+	var/d1
+	var/d2
+	var/datum/powernet/powernet
 	var/obj/machinery/power/breakerbox/breaker_box
-
 
 /obj/structure/cable/drain_power(var/drain_check, var/surge, var/amount = 0)
 
@@ -72,9 +68,6 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/structure/cable/Initialize(var/ml)
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
-	var/dash = findtext(icon_state, "-")
-	d1 = text2num(copytext(icon_state, 1, dash))
-	d2 = text2num(copytext(icon_state, dash+1))
 	. = ..(ml)
 	var/turf/T = src.loc			// hide if turf is not intact
 	if(level==1 && T)
@@ -111,7 +104,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 //If underfloor, hide the cable
 /obj/structure/cable/hide(var/i)
-	if(istype(loc, /turf))
+	if(isturf(loc))
 		set_invisibility(i ? 101 : 0)
 	update_icon()
 
@@ -119,6 +112,19 @@ By design, d1 is the smallest direction and d2 is the highest
 	return 1
 
 /obj/structure/cable/on_update_icon()
+
+	// It is really gross to do this here but the order of icon updates to init seems
+	// unreliable and I have now had to spend hours across two PRs chasing down
+	// cable node weirdness due to the way this was handled previously. NO MORE.
+	if(isnull(d1) || isnull(d2))
+		var/dir_components = splittext(icon_state, "-")
+		if(length(dir_components) < 2)
+			CRASH("Cable segment updating dirs with invalid icon_state: [d1], [d2]")
+		d1 = text2num(dir_components[1])
+		d2 = text2num(dir_components[2])
+		if(!(d1 in global.cabledirs) || !(d2 in global.cabledirs))
+			CRASH("Cable segment updating dirs with invalid values: [d1], [d2]")
+
 	icon_state = "[d1]-[d2]"
 	alpha = invisibility ? 127 : 255
 
@@ -214,6 +220,7 @@ By design, d1 is the smallest direction and d2 is the highest
 			return 1
 	return 0
 
+// TODO: generalize to matter list and parts_type.
 /obj/structure/cable/create_dismantled_products(turf/T)
 	SHOULD_CALL_PARENT(FALSE)
 	new /obj/item/stack/cable_coil(loc, (d1 ? 2 : 1), color)
@@ -592,7 +599,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/mob/M = usr
 
 	if(ishuman(M) && !M.incapacitated())
-		if(!istype(usr.loc,/turf)) return
+		if(!isturf(usr.loc)) return
 		if(!src.use(15))
 			to_chat(usr, "<span class='warning'>You need at least 15 lengths to make restraints!</span>")
 			return
@@ -630,8 +637,8 @@ By design, d1 is the smallest direction and d2 is the highest
 // Cable laying procedures
 //////////////////////////////////////////////
 
-// called when cable_coil is clicked on a turf/simulated/floor
-/obj/item/stack/cable_coil/proc/turf_place(turf/simulated/F, mob/user)
+// called when cable_coil is clicked on a turf
+/obj/item/stack/cable_coil/proc/turf_place(turf/F, mob/user)
 	if(!isturf(user.loc))
 		return
 
@@ -759,7 +766,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		C.denode()// this call may have disconnected some cables that terminated on the centre of the turf, if so split the powernets.
 		return
 
-/obj/item/stack/cable_coil/proc/put_cable(turf/simulated/F, mob/user, d1, d2)
+/obj/item/stack/cable_coil/proc/put_cable(turf/F, mob/user, d1, d2)
 	if(!istype(F))
 		return
 

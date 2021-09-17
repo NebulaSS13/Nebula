@@ -29,11 +29,10 @@
 	var/movement_delay
 
 	var/fluid_can_pass
-	var/obj/effect/flood/flood_object
 	var/fluid_blocked_dirs = 0
 	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
 	var/footstep_type
-
+	var/open_turf_type // Which turf to use when this turf is destroyed or replaced in a multiz context. Overridden by area.
 	var/tmp/changing_turf
 
 	var/prev_type // Previous type of the turf, prior to turf translation.
@@ -69,19 +68,17 @@
 		setup_zmimic(mapload)
 
 	if(flooded && !density)
-		fluid_update(FALSE)
+		make_flooded(TRUE)
+
+	initialize_ambient_light(mapload)
 
 	return INITIALIZE_HINT_NORMAL
 
-/turf/on_update_icon()
-	update_flood_overlay()
+/turf/proc/initialize_ambient_light(var/mapload)
+	return
 
-/turf/proc/update_flood_overlay()
-	if(is_flooded(absolute = TRUE))
-		if(!flood_object)
-			flood_object = new(src)
-	else if(flood_object)
-		QDEL_NULL(flood_object)
+/turf/proc/update_ambient_light(var/mapload)
+	return
 
 /turf/Destroy()
 
@@ -91,7 +88,6 @@
 	changing_turf = FALSE
 
 	remove_cleanables()
-	fluid_update()
 	REMOVE_ACTIVE_FLUID_SOURCE(src)
 
 	if (ao_queued)

@@ -11,7 +11,7 @@
 		bomb = ARMOR_BOMB_RESISTANT,
 		bio = ARMOR_BIO_MINOR
 		)
-	bodytype_restricted = list(BODYTYPE_HUMANOID)
+	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
 /obj/item/clothing/suit/champarmor
 	name = "champion's armor"
@@ -37,7 +37,7 @@
 	armor = list(
 		melee = ARMOR_MELEE_MINOR
 	)
-	bodytype_restricted = list(BODYTYPE_HUMANOID)
+	bodytype_equip_flags = BODY_FLAG_HUMANOID
 
 /obj/item/clothing/shoes/jackboots/medievalboots
 	name = "leather boots"

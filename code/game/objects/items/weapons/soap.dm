@@ -36,7 +36,7 @@
 
 /obj/item/soap/Crossed(var/mob/living/AM)
 	if(istype(AM))
-		AM.slip("the [src.name]",3)
+		AM.slip("the [src.name]", 3)
 
 /obj/item/soap/afterattack(atom/target, mob/user, proximity)
 	if(!proximity) return
@@ -53,7 +53,7 @@
 		to_chat(user, "<span class='notice'>You scrub \the [target.name] out.</span>")
 		qdel(target)
 		cleaned = TRUE
-	else if(istype(target,/turf) || istype(target, /obj/structure/catwalk))
+	else if(isturf(target) || istype(target, /obj/structure/catwalk))
 		var/turf/T = get_turf(target)
 		if(!T)
 			return

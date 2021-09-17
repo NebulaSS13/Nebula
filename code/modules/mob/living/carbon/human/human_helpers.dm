@@ -206,14 +206,6 @@
 	if(!heard_something)
 		to_chat(src, "<span class='notice'>You hear no movement but your own.</span>")
 
-/mob/living/carbon/human/reset_layer()
-	if(hiding)
-		layer = HIDING_MOB_LAYER
-	else if(lying)
-		layer = LYING_HUMAN_LAYER
-	else
-		..()
-
 /mob/living/carbon/human/proc/has_headset_in_ears()
 	return istype(get_equipped_item(slot_l_ear_str), /obj/item/radio/headset) || istype(get_equipped_item(slot_r_ear_str), /obj/item/radio/headset)
 
@@ -331,3 +323,7 @@
 
 /mob/living/carbon/human/proc/is_in_pocket(var/obj/item/I)
 	return I in list(l_store, r_store)
+
+/mob/living/carbon/human/proc/get_tail_organ()
+	var/obj/item/organ/external/tail/tail_organ = organs_by_name[BP_TAIL]
+	return tail_organ

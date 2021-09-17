@@ -1,6 +1,7 @@
 /turf/simulated
 	name = "station"
 	initial_gas = list(/decl/material/gas/oxygen = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
+	open_turf_type = /turf/simulated/open
 	var/wet = 0
 	var/image/wet_overlay = null
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
@@ -11,7 +12,7 @@
 // This is not great.
 /turf/simulated/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
 
-	if(locate(/obj/effect/flood) in src)
+	if(is_flooded(absolute = TRUE))
 		return
 
 	if(get_fluid_depth() > FLUID_QDEL_POINT)
@@ -116,6 +117,7 @@
 			if(istype(stomper) && !stomper.is_stump() && stomper.coating && stomper.coating.total_volume > 1)
 				source = stomper
 	if(!source)
+		species.handle_trail(src, T)
 		return
 
 	var/list/bloodDNA
@@ -176,12 +178,11 @@
 	var/area/A = loc
 	holy = istype(A) && (A.area_flags & AREA_FLAG_HOLY)
 	levelupdate()
-	if(GAME_STATE >= RUNLEVEL_GAME)
-		fluid_update()
 	. = ..()
-	if(!ml)
-		for(var/turf/space/space in RANGE_TURFS(src, 1))
-			space.update_starlight()
+
+/turf/simulated/initialize_ambient_light(var/mapload)
+	for(var/turf/T AS_ANYTHING in RANGE_TURFS(src, 1))
+		T.update_ambient_light(mapload)
 
 /turf/simulated/Destroy()
 	if (zone)

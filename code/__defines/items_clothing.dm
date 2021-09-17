@@ -186,9 +186,10 @@
 #define BP_HEAD         "head"
 #define BP_CHEST        "chest"
 #define BP_GROIN        "groin"
+#define BP_TAIL         "tail"
 
-var/global/list/all_limb_tags = list(BP_CHEST, BP_GROIN, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
-var/global/list/all_limb_tags_by_depth = list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
+var/global/list/all_limb_tags = list(BP_CHEST, BP_GROIN,BP_TAIL, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
+var/global/list/all_limb_tags_by_depth = list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_TAIL, BP_CHEST)
 
 var/global/list/default_onmob_icons = list(
 	BP_L_HAND =          'icons/mob/onmob/items/lefthand.dmi',

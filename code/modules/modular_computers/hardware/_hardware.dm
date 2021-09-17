@@ -43,9 +43,9 @@
 
 // Called when component is disabled/enabled by the OS
 /obj/item/stock_parts/computer/proc/on_disable()
-/obj/item/stock_parts/computer/proc/on_enable(var/datum/extension/interactive/ntos/os)
+/obj/item/stock_parts/computer/proc/on_enable(var/datum/extension/interactive/os/os)
 
 /obj/item/stock_parts/computer/proc/update_power_usage()
-	var/datum/extension/interactive/ntos/os = get_extension(loc, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(loc, /datum/extension/interactive/os)
 	if(os)
 		os.recalc_power_usage()

@@ -99,11 +99,8 @@
 #ifndef CUSTOM_ITEM_CONFIG
 #define CUSTOM_ITEM_CONFIG "config/custom_items/"
 #endif
-#ifndef CUSTOM_ITEM_SYNTH_CONFIG
-#define CUSTOM_ITEM_SYNTH_CONFIG "config/custom_sprites.txt"
-#endif
-#ifndef CUSTOM_ITEM_SYNTH
-#define CUSTOM_ITEM_SYNTH 'icons/mob/custom_synthetic.dmi'
+#ifndef CUSTOM_ICON_CONFIG
+#define CUSTOM_ICON_CONFIG "config/custom_icons/"
 #endif
 
 #define WALL_CAN_OPEN 1

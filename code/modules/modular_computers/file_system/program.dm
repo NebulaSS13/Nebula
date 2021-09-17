@@ -8,7 +8,7 @@
 	var/datum/nano_module/NM = null					// If the program uses NanoModule, put it here and it will be automagically opened. Otherwise implement ui_interact.
 	var/nanomodule_path = null						// Path to nanomodule, make sure to set this if implementing new program.
 	var/program_state = PROGRAM_STATE_KILLED		// PROGRAM_STATE_KILLED or PROGRAM_STATE_BACKGROUND or PROGRAM_STATE_ACTIVE - specifies whether this program is running.
-	var/datum/extension/interactive/ntos/computer	// OS that runs this program.
+	var/datum/extension/interactive/os/computer	// OS that runs this program.
 	var/filedesc = "Unknown Program"				// User-friendly name of this program.
 	var/extended_desc = "N/A"						// Short description of this program's function.
 	var/category = PROG_MISC
@@ -127,7 +127,7 @@
 
 // This is performed on program startup. May be overriden to add extra logic. Remember to include ..() call.
 // When implementing new program based device, use this to run the program.
-/datum/computer_file/program/proc/on_startup(var/mob/living/user, var/datum/extension/interactive/ntos/new_host)
+/datum/computer_file/program/proc/on_startup(var/mob/living/user, var/datum/extension/interactive/os/new_host)
 	program_state = PROGRAM_STATE_ACTIVE
 	computer = new_host
 	if(nanomodule_path)

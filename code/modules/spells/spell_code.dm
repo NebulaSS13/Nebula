@@ -178,7 +178,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 			var/location
 			if(istype(target,/mob/living))
 				location = target.loc
-			else if(istype(target,/turf))
+			else if(isturf(target))
 				location = target
 			var/obj/effect/overlay/spell = new /obj/effect/overlay(location)
 			spell.icon = overlay_icon

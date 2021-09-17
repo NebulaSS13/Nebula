@@ -614,10 +614,10 @@ default behaviour is:
 	return null
 
 /mob/living/proc/has_brain()
-	return 1
+	return TRUE
 
-/mob/living/proc/slip(var/slipped_on,stun_duration=8)
-	return 0
+/mob/living/proc/slip(var/slipped_on, stun_duration = 8)
+	return FALSE
 
 /mob/living/carbon/human/canUnEquip(obj/item/I)
 	if(!..())
@@ -675,14 +675,6 @@ default behaviour is:
 	to_chat(src, "<b>You are now \the [src]!</b>")
 	to_chat(src, "<span class='notice'>Remember to stay in character for a mob of this type!</span>")
 	return 1
-
-/mob/living/reset_layer()
-	if (jumping)
-		layer = VEHICLE_LOAD_LAYER
-	else if (hiding)
-		layer = HIDING_MOB_LAYER
-	else
-		..()
 
 /mob/living/proc/add_aura(var/obj/aura/aura)
 	LAZYDISTINCTADD(auras,aura)
@@ -922,3 +914,6 @@ default behaviour is:
 /mob/living/proc/jump_layer_shift_end()
 	jumping = FALSE
 	reset_layer()
+
+/mob/living/proc/get_eye_overlay()
+	return

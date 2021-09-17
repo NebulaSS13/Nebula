@@ -39,10 +39,6 @@ SUBSYSTEM_DEF(jobs)
 			job = new jobtype
 		primary_job_datums += job
 
-	for(var/datum/job/job in primary_job_datums)
-		if(isnull(job.primary_department) && length(job.department_types))
-			job.primary_department = job.department_types[1]
-
 	// Create abstract submap archetype jobs for use in prefs, etc.
 	archetype_job_datums.Cut()
 
@@ -89,6 +85,7 @@ SUBSYSTEM_DEF(jobs)
 
 	// Update title and path tracking, submap list, etc.
 	// Populate/set up map job lists.
+	primary_job_datums = sortTim(primary_job_datums, /proc/cmp_job_desc)
 	job_lists_by_map_name = list("[global.using_map.full_name]" = list("jobs" = primary_job_datums, "default_to_hidden" = FALSE))
 
 	for(var/atype in submap_archetypes)
@@ -99,6 +96,7 @@ SUBSYSTEM_DEF(jobs)
 			if(job)
 				LAZYADD(submap_job_datums, job)
 		if(LAZYLEN(submap_job_datums))
+			submap_job_datums = sortTim(submap_job_datums, /proc/cmp_job_desc)
 			job_lists_by_map_name[arch.descriptor] = list("jobs" = submap_job_datums, "default_to_hidden" = TRUE)
 
 	// Update global map blacklists and whitelists.
@@ -498,7 +496,7 @@ SUBSYSTEM_DEF(jobs)
 	if(!joined_late || job.latejoin_at_spawnpoints)
 		var/obj/S = job.get_roundstart_spawnpoint()
 
-		if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
+		if(istype(S, /obj/effect/landmark/start) && isturf(S.loc))
 			H.forceMove(S.loc)
 		else
 			var/decl/spawnpoint/spawnpoint = job.get_spawnpoint(H.client)

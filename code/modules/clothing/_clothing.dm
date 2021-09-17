@@ -7,7 +7,9 @@
 	var/wizard_garb = 0
 	var/flash_protection = FLASH_PROTECTION_NONE	  // Sets the item's level of flash protection.
 	var/tint = TINT_NONE							  // Sets the item's level of visual impairment tint.
-	var/list/bodytype_restricted
+
+	var/bodytype_equip_flags    // Bitfields; if null, checking is skipped. Determine if a given mob can equip this item or not.
+
 	var/list/accessories = list()
 	var/list/valid_accessory_slots
 	var/list/restricted_accessory_slots
@@ -63,36 +65,31 @@
 /obj/item/clothing/proc/needs_vision_update()
 	return flash_protection || tint
 
-/obj/item/clothing/get_mob_overlay(mob/living/user_mob, slot, bodypart)
-	var/image/ret = ..()
+/obj/item/clothing/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
 
-	if(ret)
-		if(slot in user_mob?.held_item_slots)
-			return ret
+	if(overlay)
 
-		if(ishuman(user_mob))
-			var/mob/living/carbon/human/user_human = user_mob
-			if(blood_DNA)
-				var/blood_mask = user_human.bodytype.get_blood_mask(user_human)
-				if(blood_mask)
-					var/image/bloodsies = overlay_image(blood_mask, blood_overlay_type, blood_color, RESET_COLOR)
-					bloodsies.appearance_flags |= NO_CLIENT_COLOR
-					ret.overlays += bloodsies
-		if(markings_icon && markings_color)
-			ret.overlays += mutable_appearance(ret.icon, markings_icon, markings_color)
-	return ret
+		if(length(accessories))
+			for(var/obj/item/clothing/accessory/A in accessories)
+				if(A.should_overlay())
+					overlay.overlays += A.get_mob_overlay(user_mob, slot)
 
-/obj/item/clothing/apply_overlays(var/mob/user_mob, var/bodytype, var/image/overlay, var/slot)
-	var/image/ret = ..()
-	if(ret && length(accessories))
-		for(var/obj/item/clothing/accessory/A in accessories)
-			if(A.should_overlay())
-				ret.overlays += A.get_mob_overlay(user_mob, slot)
+		if(markings_icon && markings_color && check_state_in_icon("[overlay.icon_state][markings_icon]", overlay.icon))
+			overlay.overlays += mutable_appearance(overlay.icon, "[overlay.icon_state][markings_icon]", markings_color)
 
-	if(markings_icon && markings_color && check_state_in_icon("[ret.icon_state][markings_icon]", ret.icon))
-		ret.overlays += mutable_appearance(ret.icon, "[ret.icon_state][markings_icon]", markings_color)
-	
-	return ret
+		if(!(slot in user_mob?.held_item_slots))
+			if(ishuman(user_mob))
+				var/mob/living/carbon/human/user_human = user_mob
+				if(blood_DNA)
+					var/blood_mask = user_human.bodytype.get_blood_mask(user_human)
+					if(blood_mask)
+						var/image/bloodsies = overlay_image(blood_mask, blood_overlay_type, blood_color, RESET_COLOR)
+						bloodsies.appearance_flags |= NO_CLIENT_COLOR
+						overlay.overlays += bloodsies
+			if(markings_icon && markings_color)
+				overlay.overlays += mutable_appearance(overlay.icon, markings_icon, markings_color)
+
+	. = ..()
 
 /obj/item/clothing/on_update_icon()
 	..()
@@ -133,9 +130,9 @@
 
 /obj/item/clothing/mob_can_equip(mob/living/M, slot, disable_warning = 0)
 	. = ..()
-	if(. && length(bodytype_restricted) && ishuman(M) && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)) && !(slot in M.held_item_slots))
+	if(. && !isnull(bodytype_equip_flags) && ishuman(M) && !(slot in list(slot_l_store_str, slot_r_store_str, slot_s_store_str)) && !(slot in M.held_item_slots))
 		var/mob/living/carbon/human/H = M
-		. = ("exclude" in bodytype_restricted) ? !(H.get_bodytype_category() in bodytype_restricted) : (H.get_bodytype_category() in bodytype_restricted)
+		. = (bodytype_equip_flags & BODY_FLAG_EXCLUDE) ? !(bodytype_equip_flags & H.bodytype.bodytype_flag) : (bodytype_equip_flags & H.bodytype.bodytype_flag)
 		if(!. && !disable_warning)
 			to_chat(H, SPAN_WARNING("\The [src] [gender == PLURAL ? "do" : "does"] not fit you."))
 
@@ -145,8 +142,7 @@
 	return ..()
 
 /obj/item/clothing/proc/refit_for_bodytype(var/target_bodytype)
-	if(bodytype_restricted)
-		bodytype_restricted = list(target_bodytype)
+	bodytype_equip_flags = target_bodytype
 
 /obj/item/clothing/get_examine_line()
 	. = ..()

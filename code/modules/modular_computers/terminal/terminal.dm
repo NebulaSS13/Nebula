@@ -16,9 +16,9 @@
 	var/datum/file_storage/current_disk
 	var/datum/file_transfer/current_move
 
-	var/datum/extension/interactive/ntos/computer
+	var/datum/extension/interactive/os/computer
 
-/datum/terminal/New(mob/user, datum/extension/interactive/ntos/computer)
+/datum/terminal/New(mob/user, datum/extension/interactive/os/computer)
 	..()
 	src.computer = computer
 	if(user && can_use(user))

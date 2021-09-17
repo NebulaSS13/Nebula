@@ -19,7 +19,7 @@
 
 /decl/archaeological_find/remains/robot
 	item_type = "robotic debris"
-	new_icon = 'icons/mob/robots_gibs.dmi'
+	new_icon = 'icons/mob/robots/_gibs.dmi'
 	new_icon_state = "remainsrobot"
 	descs = list("Almost mistakeable for the remains of a modern cyborg.",\
 			"They are barely recognisable as anything other than a pile of waste metals.",\

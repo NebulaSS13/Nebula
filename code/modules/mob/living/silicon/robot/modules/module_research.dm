@@ -7,8 +7,8 @@
 	networks = list(
 		NETWORK_RESEARCH
 	)
-	sprites = list(
-		"Droid" = "droid-science"
+	module_sprites = list(
+		"Droid" = 'icons/mob/robots/robot_droid.dmi'
 	)
 	equipment = list(
 		/obj/item/flash,

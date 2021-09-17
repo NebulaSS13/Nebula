@@ -4,9 +4,12 @@
 #define SPECIES_MANTID_NYMPH   "Kharmaan Nymph"
 
 #define BODYTYPE_SNAKE "snakelike body"
-#define BODYTYPE_NYMPH	"small nymph body"
 #define BODYTYPE_MANTID_SMALL "small mantid body"
 #define BODYTYPE_MANTID_LARGE "large mantid body"
+
+#define BODY_FLAG_SNAKE BITFLAG(3)
+#define BODY_FLAG_ALATE BITFLAG(4)
+#define BODY_FLAG_GYNE  BITFLAG(5)
 
 #define IS_MANTID    "mantid"
 #define IS_SERPENTID "serpentid"

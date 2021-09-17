@@ -11,13 +11,14 @@
 
 /decl/aspect/prosthetic_limb/Initialize()
 	. = ..()
-	if(model && model != /decl/prosthetics_manufacturer)
-		var/decl/prosthetics_manufacturer/model_manufacturer = GET_DECL(model)
-		name = "[model_manufacturer.name] [bodypart_name]"
-		desc = "You have been fitted with [ADD_ARTICLE(model_manufacturer.name)] [lowertext(bodypart_name)] prosthesis."
-	else
-		name = "Prosthetic [bodypart_name]"
-		desc = "You have been fitted with a basic [lowertext(bodypart_name)] prosthesis."
+	if(bodypart_name)
+		if(model && model != /decl/prosthetics_manufacturer)
+			var/decl/prosthetics_manufacturer/model_manufacturer = GET_DECL(model)
+			name = "[model_manufacturer.name] [bodypart_name]"
+			desc = "You have been fitted with [ADD_ARTICLE(model_manufacturer.name)] [lowertext(bodypart_name)] prosthesis."
+		else
+			name = "Prosthetic [bodypart_name]"
+			desc = "You have been fitted with a basic [lowertext(bodypart_name)] prosthesis."
 	if(base_type)
 		LAZYINITLIST(incompatible_with)
 		incompatible_with |= typesof(base_type)

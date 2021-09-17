@@ -6,9 +6,9 @@
 	software = list(
 		/datum/computer_file/program/suit_sensors
 	)
-	sprites = list(
-		"Drone" = "drone-medical",
-		"Eyebot" = "eyebot-medical"
+	module_sprites = list(
+		"Drone" = 'icons/mob/robots/flying/flying_medical.dmi',
+		"Eyebot" = 'icons/mob/robots/flying/eyebot_medical.dmi'
 	)
 	equipment = list(
 		/obj/item/flash,

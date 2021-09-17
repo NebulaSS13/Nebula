@@ -60,7 +60,7 @@
 	limit_x = 50
 	limit_y = 50
 
-/datum/random_map/winding_dungeon/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/list/variable_list)
+/datum/random_map/winding_dungeon/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area, var/list/variable_list)
 	for(var/variable in variable_list)
 		if(variable in src.vars)
 			src.vars[variable] = variable_list[variable]
@@ -86,8 +86,7 @@
 /datum/random_map/winding_dungeon/apply_to_map()
 	logging("You have [rooms.len] # of rooms")
 	for(var/datum/room/R in rooms)
-		if(!priority_process)
-			sleep(-1)
+		CHECK_TICK
 		R.apply_to_map(origin_x,origin_y,origin_z,src)
 	..()
 	var/num_of_loot = round(limit_x * limit_y * loot_multiplier)
@@ -95,8 +94,7 @@
 	var/sanity = 0
 	if((loot_common && loot_common.len) || (loot_uncommon && loot_uncommon.len) || (loot_rare && loot_rare.len)) //no monsters no problem
 		while(rooms.len && num_of_loot > 0)
-			if(!priority_process)
-				sleep(-1)
+			CHECK_TICK
 			var/datum/room/R = pick(rooms)
 			var/list/loot_list = get_appropriate_list(loot_common, loot_uncommon, loot_rare, round(R.x+R.width/2), round(R.y+R.height/2))
 			if(!loot_list || !loot_list.len || R.add_loot(origin_x,origin_y,origin_z,pickweight(loot_list)))
@@ -120,8 +118,7 @@
 	logging("Attempting to add [num_of_monsters] # of monsters")
 
 	while(num_of_monsters > 0)
-		if(!priority_process)
-			sleep(-1)
+		CHECK_TICK
 		if(!monster_available || !monster_available.len)
 			logging("There are no available turfs left.")
 			num_of_monsters = 0
@@ -142,16 +139,16 @@
 	monster_available = null //Get rid of all the references
 
 /datum/random_map/winding_dungeon/apply_to_turf(var/x, var/y)
-	. = ..()
-	var/turf/T = locate((origin_x-1)+x,(origin_y-1)+y,origin_z)
+	var/turf/T = ..()
 	if(T && !T.density)
 		var/can = 1
 		for(var/atom/movable/M in T)
-			if(istype(M,/mob/living) || M.density)
+			if(istype(M, /mob/living) || M.density)
 				can = 0
 				break
 		if(can)
 			monster_available += T
+	return T
 
 /datum/random_map/winding_dungeon/generate_map()
 	logging("Winding Dungeon Generation Start")
@@ -170,9 +167,7 @@
 	logging("First room result: [result ? "Success" : "Failure"]")
 	var/sanity = 0
 	for(sanity = 0, sanity < 1000, sanity++)
-		if(!priority_process)
-			sleep(-1)
-
+		CHECK_TICK
 		if(currentFeatures == num_of_features)
 			break
 		/* WHAT THIS CODE IS DOING:

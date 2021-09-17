@@ -74,6 +74,8 @@
 	var/habitability_class	// if it's above bad, atmosphere will be adjusted to be better for humans (no extreme temps / oxygen to breathe)
 	var/crust_strata // Decl type for exterior walls to use for material and ore gen.
 
+	var/spawn_weight = 100	// Decides how often this planet will be picked for generation
+
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_strata()
 	return crust_strata
 
@@ -118,7 +120,7 @@
 	for(var/datum/exoplanet_theme/T in themes)
 		T.adjust_atmosphere(src)
 	select_strata()
-	generate_flora()
+	generate_flora(atmosphere?.temperature || T20C)
 	generate_map()
 	generate_landing(2)
 	generate_features()
@@ -185,9 +187,9 @@
 			T.ChangeTurf(/turf/exterior/planet_edge)
 		for(var/map_type in map_generators)
 			if(ispath(map_type, /datum/random_map/noise/exoplanet))
-				new map_type(null,x_origin,y_origin,zlevel,x_size,y_size,0,1,1,planetary_area, plant_colors)
+				new map_type(x_origin, y_origin, zlevel, x_size, y_size, FALSE, TRUE, planetary_area, plant_colors)
 			else
-				new map_type(null,x_origin,y_origin,zlevel,x_size,y_size,0,1,1,planetary_area)
+				new map_type(x_origin, y_origin, zlevel, x_size, y_size, FALSE, TRUE, planetary_area)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_features()
 	for(var/T in subtypesof(/datum/map_template/ruin/exoplanet))
@@ -279,3 +281,4 @@
 	ambience = list('sound/effects/wind/wind_2_1.ogg','sound/effects/wind/wind_2_2.ogg','sound/effects/wind/wind_3_1.ogg','sound/effects/wind/wind_4_1.ogg','sound/effects/wind/wind_4_2.ogg','sound/effects/wind/wind_5_1.ogg')
 	always_unpowered = 1
 	area_flags = AREA_FLAG_IS_BACKGROUND | AREA_FLAG_EXTERNAL
+	show_starlight = TRUE

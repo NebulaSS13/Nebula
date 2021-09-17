@@ -68,14 +68,14 @@
 	if(D)
 		D.disconnect()
 
-/obj/item/stock_parts/computer/network_card/on_enable(var/datum/extension/interactive/ntos/os)
+/obj/item/stock_parts/computer/network_card/on_enable(var/datum/extension/interactive/os/os)
 	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
 	if(D)
 		D.connect()
 
 /obj/item/stock_parts/computer/network_card/on_install(var/obj/machinery/machine)
 	..()
-	var/datum/extension/interactive/ntos/os = get_extension(machine, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(machine, /datum/extension/interactive/os)
 	if(os)
 		on_enable(os)
 

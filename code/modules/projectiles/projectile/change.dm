@@ -23,7 +23,7 @@
 
 	if(choice == "robot")
 		var/mob/living/silicon/robot/R = new(get_turf(M))
-		R.set_gender(M.gender)
+		R.set_gender(M.get_sex())
 		R.job = ASSIGNMENT_ROBOT
 		R.mmi = new /obj/item/mmi(R)
 		R.mmi.transfer_identity(M)
@@ -33,7 +33,7 @@
 		var/mob/living/carbon/human/H = M
 		if(!istype(H))
 			H = new(get_turf(M))
-			H.set_gender(M.gender)
+			H.set_gender(M.get_sex())
 		H.name = "unknown" // This will cause set_species() to randomize the mob name.
 		H.real_name = H.name
 		H.set_species(choice)

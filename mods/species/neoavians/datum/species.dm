@@ -19,13 +19,19 @@
 	of Hyperion. Neo-avian naming conventions tend to be a chosen name followed by the species of the person, followed by the location they were hatched."
 
 	age_descriptor = /datum/appearance_descriptor/age/neoavian
+	holder_icon = 'mods/species/neoavians/icons/holder.dmi'
 
 	meat_type = /obj/item/chems/food/meat/chicken
 
 	base_color = "#000616"
 	reagent_tag = IS_AVIAN
 
-	available_bodytypes = list(/decl/bodytype/avian)
+	available_bodytypes = list(
+		/decl/bodytype/avian,
+		/decl/bodytype/avian/additive,
+		/decl/bodytype/avian/raptor,
+		/decl/bodytype/avian/additive/raptor
+	)
 
 	total_health = 80
 	brute_mod = 1.35
@@ -34,7 +40,7 @@
 	holder_type = /obj/item/holder
 	gluttonous = GLUT_TINY
 	blood_volume = 320
-	hunger_factor = 0.1
+	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.6
 
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
@@ -48,6 +54,7 @@
 		)
 
 	has_organ = list(
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
 		BP_HEART =    /obj/item/organ/internal/heart,
 		BP_LUNGS =    /obj/item/organ/internal/lungs,
 		BP_LIVER =    /obj/item/organ/internal/liver,
@@ -55,6 +62,8 @@
 		BP_BRAIN =    /obj/item/organ/internal/brain,
 		BP_EYES =     /obj/item/organ/internal/eyes/avian
 	)
+
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail)
 
 	unarmed_attacks = list(
 		/decl/natural_attack/bite/sharp,
@@ -73,6 +82,7 @@
 /decl/species/neoavian/equip_default_fallback_uniform(var/mob/living/carbon/human/H)
 	if(istype(H))
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/avian_smock/worker, slot_w_uniform_str)
+		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/avian, slot_shoes_str)
 
 /decl/species/neoavian/handle_post_species_pref_set(var/datum/preferences/pref)
 	pref.body_markings = pref.body_markings || list()
@@ -82,78 +92,8 @@
 		pref.body_markings["Tailfeathers (Groin)"] = "#252525"
 	pref.skin_colour = "#252525"
 
+/decl/species/neoavian/get_holder_color(var/mob/living/carbon/human/H)
+	return H.skin_colour
+
 /obj/item/organ/internal/eyes/avian
 	eye_icon = 'mods/species/neoavians/icons/eyes.dmi'
-
-/decl/sprite_accessory/hair/avian
-	name = "Avian Plumage"
-	icon_state = "avian_default"
-	icon = 'mods/species/neoavians/icons/hair.dmi'
-	species_allowed = list(SPECIES_AVIAN)
-	blend = ICON_MULTIPLY
-
-/decl/sprite_accessory/hair/avian/mohawk
-	name = "Avian Mohawk"
-	icon_state = "avian_mohawk"
-
-/decl/sprite_accessory/hair/avian/spiky
-	name = "Avian Spiky"
-	icon_state = "avian_spiky"
-
-/decl/sprite_accessory/hair/avian/crest
-	name = "Avian Crest"
-	icon_state = "avian_crest"
-
-/decl/sprite_accessory/hair/avian/mane
-	name = "Avian Mane"
-	icon_state = "avian_mane"
-
-/decl/sprite_accessory/hair/avian/upright
-	name = "Avian Upright"
-	icon_state = "avian_upright"
-
-/decl/sprite_accessory/hair/avian/fluffymohawk
-	name = "Avian Fluffy Mohawk"
-	icon_state = "avian_fluffymohawk"
-
-/decl/sprite_accessory/hair/avian/twies
-	name = "Avian Twies"
-	icon_state = "avian_twies"
-
-/decl/sprite_accessory/marking/avian
-	name = "Beak (Head)"
-	icon_state = "beak"
-	body_parts = list(BP_HEAD)
-	icon = 'mods/species/neoavians/icons/markings.dmi'
-	species_allowed = list(SPECIES_AVIAN)
-	blend = ICON_MULTIPLY
-
-/decl/sprite_accessory/marking/avian/resomi
-	name = "Raptor Ears (Head)"
-	icon_state = "ears"
-
-/decl/sprite_accessory/marking/avian/tail
-	name = "Tailfeathers (Groin)"
-	icon_state = "feathered_tail"
-	body_parts = list(BP_GROIN)
-
-/decl/sprite_accessory/marking/avian/tail/resomi
-	name = "Raptor Tail (Groin)"
-	icon_state = "raptor_tail"
-
-/decl/sprite_accessory/marking/avian/tail/resomi_feathers
-	name = "Raptor Tailfeathers (Groin)"
-	icon_state = "raptor_tail_feathers"
-
-/decl/sprite_accessory/marking/avian/wing_feathers
-	name = "Wing Feathers (Left)"
-	body_parts = list(BP_L_HAND)
-	icon_state = "wing_feathers"
-
-/decl/sprite_accessory/marking/avian/wing_feathers/right
-	name = "Wing Feathers (Right)"
-	body_parts = list(BP_R_HAND)
-
-/decl/sprite_accessory/hair/bald/Initialize()
-	. = ..()
-	LAZYADD(species_allowed, SPECIES_AVIAN)

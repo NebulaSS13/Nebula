@@ -5,6 +5,7 @@
 	gas_symbol_html = "X"
 	gas_symbol = "X"
 	value = 0.6
+	exoplanet_rarity = MAT_RARITY_EXOTIC
 
 /decl/material/gas/alien/Initialize()
 	var/num = rand(100,999)

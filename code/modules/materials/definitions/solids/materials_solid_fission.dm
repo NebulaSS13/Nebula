@@ -9,6 +9,7 @@
 	table_icon_base = "stone"
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
 	value = 1.5
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 	neutron_cross_section = 5
 	neutron_interactions = list(
@@ -39,6 +40,7 @@
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
 	color = "#404c53"
 	value = 0.5
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 	neutron_cross_section = 4 // Difficult to use as fuel.
 	neutron_interactions = list(
@@ -60,6 +62,7 @@
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
 	color = "#b5c5a2"
 	value = 3
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 	neutron_cross_section = 10
 	neutron_interactions = list(
@@ -85,7 +88,8 @@
 	icon_reinf = 'icons/turf/walls/reinforced_stone.dmi'
 	color = "#98be30"
 	value = 0.5
-	
+	exoplanet_rarity = MAT_RARITY_NOWHERE // Don't spawn this in plants.
+
 	dissolves_into = list(
 		/decl/material/solid/metal/radium = 0.5,
 		/decl/material/solid/lithium = 0.5

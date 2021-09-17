@@ -111,7 +111,7 @@
 // Copied from duct tape.
 /obj/item/paper/sticky/attack_hand()
 	. = ..()
-	if(!istype(loc, /turf))
+	if(!isturf(loc))
 		reset_persistence_tracking()
 
 /obj/item/paper/sticky/can_bundle()

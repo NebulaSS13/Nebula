@@ -79,7 +79,7 @@
 		dropInto(loc)
 	stored_card = null
 
-	var/datum/extension/interactive/ntos/os = get_extension(loc, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(loc, /datum/extension/interactive/os)
 	if(os)
 		os.event_idremoved()
 	loc.verbs -= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id

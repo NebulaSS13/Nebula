@@ -31,6 +31,7 @@
 	rich_material_weight = 5
 	ore_type_value = ORE_PRECIOUS
 	ore_data_value = 2
+	exoplanet_rarity = MAT_RARITY_UNCOMMON
 
 /decl/material/solid/gemstone/crystal
 	name = "crystal"
@@ -39,3 +40,4 @@
 	reflectiveness = MAT_VALUE_VERY_SHINY
 	hidden_from_codex = TRUE
 	value = 2
+	exoplanet_rarity = MAT_RARITY_UNCOMMON

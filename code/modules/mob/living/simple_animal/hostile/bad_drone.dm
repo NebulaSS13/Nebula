@@ -1,8 +1,7 @@
 /mob/living/simple_animal/hostile/rogue_drone
 	name = "maintenance drone"
 	desc = "A small robot. It looks angry."
-	icon_state = "dron"
-	icon_dead = "dron_dead"
+	icon = 'icons/mob/simple_animal/drone.dmi'
 	speak = list("Removing organic waste.","Pest control in progress.","Seize the means of maintenance!", "You have nothing to lose but your laws!")
 	speak_emote = list("blares","buzzes","beeps")
 	speak_chance = 1

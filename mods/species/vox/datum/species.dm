@@ -90,6 +90,8 @@
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 		)
 
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail)
+
 	available_pronouns = list(/decl/pronouns/neuter)
 	available_bodytypes = list(/decl/bodytype/vox)
 

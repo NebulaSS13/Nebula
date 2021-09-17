@@ -18,7 +18,7 @@
 /datum/exoplanet_theme/ruined_city/before_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
 	E.ruin_tags_whitelist |= RUIN_ALIEN
 	for(var/zlevel in E.map_z)
-		new /datum/random_map/city(null,E.x_origin,E.y_origin,zlevel,E.x_size,E.y_size,0,1,1, E.planetary_area)
+		new /datum/random_map/city(E.x_origin, E.y_origin, zlevel, E.x_size, E.y_size, FALSE, TRUE, E.planetary_area)
 
 /datum/exoplanet_theme/ruined_city/after_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
 	var/area/A = E.planetary_area
@@ -93,7 +93,7 @@
 					if(building_y + building_size_y >= limit_y)
 						continue
 					var/building_type = pickweight(building_types)
-					var/datum/random_map/building = new building_type(null, origin_x + building_x, origin_y + building_y, origin_z, building_size_x, building_size_y, 1, 1, 1, use_area)
+					var/datum/random_map/building = new building_type(origin_x + building_x, origin_y + building_y, origin_z, building_size_x, building_size_y, TRUE, TRUE, use_area)
 					LAZYADD(building_maps, building) // They're applied later to let buildings handle their own shit
 	return 1
 
@@ -158,7 +158,7 @@
 	preserve_map = 0
 	var/artifacts_to_spawn = 1
 
-/datum/random_map/maze/lab/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
+/datum/random_map/maze/lab/New(var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/used_area)
 	if(prob(10))
 		artifacts_to_spawn = rand(2,3)
 	..()

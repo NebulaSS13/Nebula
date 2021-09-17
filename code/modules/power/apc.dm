@@ -288,18 +288,19 @@ var/global/list/all_apcs = list()
 			channel++
 
 	if(update_state < 0)
-		pixel_x = 0
-		pixel_y = 0
+		default_pixel_x = 0
+		default_pixel_y = 0
 		var/turf/T = get_step(get_turf(src), dir)
 		if(istype(T) && T.density)
 			if(dir == SOUTH)
-				pixel_y = -22
+				default_pixel_y = -22
 			else if(dir == NORTH)
-				pixel_y = 22
+				default_pixel_y = 22
 			else if(dir == EAST)
-				pixel_x = 22
+				default_pixel_x = 22
 			else if(dir == WEST)
-				pixel_x = -22
+				default_pixel_x = -22
+		reset_offsets()
 
 	var/update = check_updates() 		//returns 0 if no need to update icons.
 						// 1 if we need to update the icon_state
@@ -576,7 +577,7 @@ var/global/list/all_apcs = list()
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
-		ui = new(user, src, ui_key, "apc.tmpl", "[area.name] - APC", 520, data["siliconUser"] ? 465 : 440)
+		ui = new(user, src, ui_key, "apc.tmpl", "[area? area.name : "ERROR"] - APC", 520, data["siliconUser"] ? 465 : 440)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
 		// open the new ui window
@@ -730,7 +731,7 @@ var/global/list/all_apcs = list()
 		. += area.usage(ENVIRON)
 
 /obj/machinery/power/apc/Process()
-	if(!area.requires_power)
+	if(!area?.requires_power)
 		return PROCESS_KILL
 
 	if(stat & (BROKEN|MAINT))
@@ -961,6 +962,13 @@ var/global/list/all_apcs = list()
 			environ = state
 	force_update_channels()
 
-
+/obj/machinery/power/apc/area_changed()
+	. = ..()
+	//Make sure to resume processing if our area changed to something else than null
+	if(QDELETED(src))
+		return
+	if(area && !(processing_flags & MACHINERY_PROCESS_SELF))
+		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
 #undef APC_UPDATE_ICON_COOLDOWN
+ 

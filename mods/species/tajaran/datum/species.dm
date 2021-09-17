@@ -26,7 +26,7 @@
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	preview_icon = 'mods/species/tajaran/icons/preview.dmi'
-	default_h_style = "Tajaran Ears"
+	default_h_style = /decl/sprite_accessory/hair/taj
 
 	flesh_color = "#afa59e"
 	base_color = "#333333"
@@ -37,7 +37,7 @@
 	slowdown = -0.5
 	flash_mod = 2
 
-	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.5
+	hunger_factor = DEFAULT_HUNGER_FACTOR * 1.2
 	gluttonous = GLUT_TINY
 
 	unarmed_attacks = list(
@@ -103,6 +103,8 @@
 		BP_APPENDIX = /obj/item/organ/internal/appendix,
 		BP_EYES =     /obj/item/organ/internal/eyes/taj
 	)
+
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail)
 
 /obj/item/organ/internal/eyes/taj
 	eye_blend = ICON_MULTIPLY

@@ -282,6 +282,7 @@
 		..()
 	return
 
+// TODO: generalize to matter list and parts_type.
 /obj/structure/window/create_dismantled_products(turf/T)
 	SHOULD_CALL_PARENT(FALSE)
 	var/obj/item/stack/material/S = material.create_object(loc, is_fulltile() ? 4 : 2)

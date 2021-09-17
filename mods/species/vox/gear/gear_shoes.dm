@@ -3,10 +3,7 @@
 	desc = "A pair of heavy, jagged, armoured foot pieces, seemingly suitable for a velociraptor."
 	icon = 'mods/species/vox/icons/clothing/boots_vox.dmi'
 	action_button_name = "Toggle the magclaws"
-
-/obj/item/clothing/shoes/magboots/vox/Initialize()
-	. = ..()
-	bodytype_restricted = list(BODYTYPE_VOX)
+	bodytype_equip_flags = BODY_FLAG_VOX
 
 /obj/item/clothing/shoes/magboots/vox/attack_self(mob/user)
 	if(magpulse)

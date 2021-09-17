@@ -123,6 +123,10 @@
 /turf/simulated/open/is_plating()
 	return 1
 
+/turf/simulated/open/flooded
+	name = "open water"
+	flooded = TRUE
+
 // Whole lot of copypaste below sorry.
 /turf/exterior/open
 	name = "open space"
@@ -131,6 +135,10 @@
 	density = 0
 	pathweight = 100000
 	z_flags = ZM_MIMIC_DEFAULTS | ZM_MIMIC_OVERWRITE | ZM_MIMIC_NO_AO | ZM_ALLOW_ATMOS
+
+/turf/exterior/open/flooded
+	name = "open water"
+	flooded = TRUE
 
 /turf/exterior/open/CanZPass(atom/A, direction)
 	if(locate(/obj/structure/catwalk, src))

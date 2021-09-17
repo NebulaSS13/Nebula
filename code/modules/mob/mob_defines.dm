@@ -10,7 +10,6 @@
 	virtual_mob = /mob/observer/virtual/mob
 
 	movement_handlers = list(
-		/datum/movement_handler/mob/relayed_movement,
 		/datum/movement_handler/mob/death,
 		/datum/movement_handler/mob/conscious,
 		/datum/movement_handler/mob/eye,
@@ -107,9 +106,6 @@
 	var/timeofdeath = 0
 
 	var/bodytemperature = 310.055	//98.7 F
-	var/default_pixel_x = 0
-	var/default_pixel_y = 0
-	var/default_pixel_z = 0
 
 	var/shakecamera = 0
 	var/a_intent = I_HELP//Living
@@ -180,3 +176,5 @@
 	var/list/progressbars = null //for stacking do_after bars
 
 	var/datum/ai/ai						// Type abused. Define with path and will automagically create. Determines behaviour for clientless mobs.
+
+	var/holder_type

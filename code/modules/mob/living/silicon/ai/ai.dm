@@ -110,7 +110,6 @@ var/global/list/ai_verbs_default = list(
 	var/multitool_mode = 0
 
 	var/default_ai_icon = /datum/ai_icon/blue
-	var/static/list/custom_ai_icons_by_ckey_and_name
 	var/custom_color_tone //This is a hex, despite being converted to rgb by gethologramicon.
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
@@ -151,7 +150,7 @@ var/global/list/ai_verbs_default = list(
 
 	additional_law_channels["Holopad"] = ":h"
 
-	if (istype(loc, /turf))
+	if (isturf(loc))
 		add_ai_verbs(src)
 
 	//Languages
@@ -163,28 +162,30 @@ var/global/list/ai_verbs_default = list(
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
 			empty_playable_ai_cores += new/obj/structure/aicore/deactivated(loc)//New empty terminal.
-			qdel(src)//Delete AI.
-			return
-		else
-			if (B.brainmob.mind)
-				B.brainmob.mind.transfer_to(src)
+			. = INITIALIZE_HINT_QDEL
+		else if(B.brainmob.mind)
+			B.brainmob.mind.transfer_to(src)
+			hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+			hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+			hud_list[LIFE_HUD] 		  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+			hud_list[ID_HUD]          = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+			hud_list[WANTED_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+			hud_list[IMPLOYAL_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+			hud_list[IMPCHEM_HUD]     = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+			hud_list[IMPTRACK_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+			hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
+			ai_list += src
 
 	create_powersupply()
+	// Slightly wonky structures here due silicon init being a spaghetti
+	// mess and returning early causing Destroy() to qdel paths.
+	var/base_return_val = ..()
+	if(. == INITIALIZE_HINT_QDEL)
+		return
 
-	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[LIFE_HUD] 		  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[ID_HUD]          = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[WANTED_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPLOYAL_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPCHEM_HUD]     = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPTRACK_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-
-	ai_list += src
-	. = ..()
 	ai_radio = silicon_radio
 	ai_radio.myAi = src
+	return base_return_val
 
 /mob/living/silicon/ai/proc/on_mob_init()
 	to_chat(src, "<B>You are playing the [station_name()]'s AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>")
@@ -232,42 +233,17 @@ var/global/list/ai_verbs_default = list(
 
 	. = ..()
 
+var/global/list/custom_ai_icons_by_ckey_and_name = list()
 /mob/living/silicon/ai/proc/setup_icon()
-	if(LAZYACCESS(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]"))
-		return
-	var/list/custom_icons = list()
-	LAZYSET(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]", custom_icons)
-
-	var/file = safe_file2text(CUSTOM_ITEM_SYNTH_CONFIG)
-	var/lines = splittext(file, "\n")
-
-	var/custom_index = 1
-	var/custom_icon_states = icon_states(CUSTOM_ITEM_SYNTH)
-
-	for(var/line in lines)
-	// split & clean up
-		var/list/Entry = splittext(line, ":")
-		for(var/i = 1 to Entry.len)
-			Entry[i] = trim(Entry[i])
-
-		if(Entry.len < 2)
-			continue
-		if(Entry.len == 2) // This is to handle legacy entries
-			Entry[++Entry.len] = Entry[1]
-
-		if(Entry[1] == src.ckey && Entry[2] == src.real_name)
-			var/alive_icon_state = "[Entry[3]]-ai"
-			var/dead_icon_state = "[Entry[3]]-ai-crash"
-
-			if(!(alive_icon_state in custom_icon_states))
-				to_chat(src, "<span class='warning'>Custom display entry found but the icon state '[alive_icon_state]' is missing!</span>")
-				continue
-
-			if(!(dead_icon_state in custom_icon_states))
-				dead_icon_state = ""
-
-			selected_sprite = new/datum/ai_icon("Custom Icon [custom_index++]", alive_icon_state, dead_icon_state, COLOR_WHITE, CUSTOM_ITEM_SYNTH)
-			custom_icons += selected_sprite
+	if(ckey)
+		if(global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"])
+			selected_sprite = global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"]
+		else
+			for(var/datum/custom_icon/cicon AS_ANYTHING in SScustomitems.custom_icons_by_ckey[ckey])
+				if(cicon.category == "AI Icon" && lowertext(real_name) == cicon.character_name)
+					selected_sprite = new /datum/ai_icon("Custom Icon - [cicon.character_name]", cicon.ids_to_icons[1], cicon.ids_to_icons[2], COLOR_WHITE, cicon.ids_to_icons[cicon.ids_to_icons[1]])
+					global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"] = selected_sprite
+					break
 	update_icon()
 
 /mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
@@ -308,14 +284,13 @@ var/global/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/available_icons()
 	. = list()
-	var/all_ai_icons = decls_repository.get_decls_of_subtype(/datum/ai_icon)
-	for(var/ai_icon_type in all_ai_icons)
-		var/datum/ai_icon/ai_icon = all_ai_icons[ai_icon_type]
+	for(var/ai_icon_type in get_ai_icon_subtypes())
+		var/datum/ai_icon/ai_icon = global.ai_icon_subtypes[ai_icon_type]
 		if(ai_icon.may_used_by_ai(src))
 			dd_insertObjectList(., ai_icon)
 
 	// Placing custom icons first to have them be at the top
-	. = LAZYACCESS(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]") | .
+	. = global.custom_ai_icons_by_ckey_and_name["[ckey][real_name]"] | .
 
 /mob/living/silicon/ai/var/message_cooldown = 0
 /mob/living/silicon/ai/proc/ai_announcement()
@@ -698,7 +673,7 @@ var/global/list/ai_verbs_default = list(
 	return 0
 
 /mob/living/silicon/ai/proc/is_in_chassis()
-	return istype(loc, /turf)
+	return isturf(loc)
 
 /mob/living/silicon/ai/proc/multitool_mode()
 	set name = "Toggle Multitool Mode"
@@ -717,8 +692,7 @@ var/global/list/ai_verbs_default = list(
 /mob/living/silicon/ai/on_update_icon()
 	..()
 	if(!selected_sprite || !(selected_sprite in available_icons()))
-		// This should NOT be using the decl repository and cannot use GET_DECL() as default_ai_icon is a datum. TODO: rewrite AI icon handling.
-		selected_sprite = decls_repository.get_decl(default_ai_icon)
+		selected_sprite = get_ai_icon(default_ai_icon)
 
 	icon = selected_sprite.icon
 	if(stat == DEAD)
@@ -782,9 +756,9 @@ var/global/list/ai_verbs_default = list(
 	run_program("sensormonitor")
 
 /mob/living/silicon/ai/proc/run_program(var/filename)
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(!istype(os))
-		to_chat(src, SPAN_WARNING("You seem to be lacking an NTOS capable device!"))
+		to_chat(src, SPAN_WARNING("You seem to be lacking an OS capable device!"))
 		return
 	if(!os.on)
 		os.system_boot()

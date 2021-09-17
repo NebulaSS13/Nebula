@@ -179,10 +179,10 @@
 /datum/computer_network/proc/get_os_by_nid(nid)
 	for(var/datum/extension/network_device/D in devices)
 		if(D.address == uppertext(nid))
-			var/datum/extension/interactive/ntos/os = get_extension(D.holder, /datum/extension/interactive/ntos)
+			var/datum/extension/interactive/os/os = get_extension(D.holder, /datum/extension/interactive/os)
 			if(!os)
 				var/atom/A = D.holder
-				os = get_extension(A.loc, /datum/extension/interactive/ntos)
+				os = get_extension(A.loc, /datum/extension/interactive/os)
 			return os
 
 /datum/computer_network/proc/get_router_z()

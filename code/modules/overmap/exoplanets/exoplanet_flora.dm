@@ -1,8 +1,8 @@
 //Generates initial generic alien plants
-/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_flora()
+/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_flora(var/temperature)
 	for(var/i = 1 to flora_diversity)
 		var/datum/seed/S = new()
-		S.randomize()
+		S.randomize(temperature)
 		var/planticon = "alien[rand(1,4)]"
 		S.set_trait(TRAIT_PRODUCT_ICON,planticon)
 		S.set_trait(TRAIT_PLANT_ICON,planticon)
@@ -22,7 +22,7 @@
 		var/tree_diversity = max(1,flora_diversity/2)
 		for(var/i = 1 to tree_diversity)
 			var/datum/seed/S = new()
-			S.randomize()
+			S.randomize(temperature)
 			S.set_trait(TRAIT_PRODUCT_ICON,"alien[rand(1,5)]")
 			S.set_trait(TRAIT_PLANT_ICON,"tree")
 			S.set_trait(TRAIT_SPREAD,0)
