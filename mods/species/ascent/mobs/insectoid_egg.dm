@@ -97,7 +97,6 @@ var/global/default_gyne
 		return
 
 	var/mob/living/carbon/alien/ascent_nymph/new_nymph = new(src, SPECIES_MANTID_NYMPH) // Spawn in the egg.
-	new_nymph.loc = src
 	new_nymph.lastarea = get_area(src)
 	new_nymph.key = C.ckey
 	new_nymph.real_name = "[random_id(/decl/species/mantid, 10000, 99999)] [lineage]"
@@ -112,5 +111,5 @@ var/global/default_gyne
 	hatching = FALSE
 	update_icon()
 	for(var/mob/M in src)
-		M.loc = get_turf(src) // Pop!
+		M.forceMove(get_turf(src)) // Pop!
 		visible_message(SPAN_NOTICE("\icon[src] \The [M] hatches out of \the [src]."))

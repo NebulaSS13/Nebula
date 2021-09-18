@@ -363,9 +363,9 @@ I said no!
 
 /decl/recipe/fortunecookie/make_food(obj/container)
 	var/obj/item/paper/paper = locate() in container
-	paper.loc = null //prevent deletion
+	paper.forceMove(null) //prevent deletion
 	var/obj/item/chems/food/fortunecookie/being_cooked = ..(container)
-	paper.loc = being_cooked
+	paper.forceMove(being_cooked)
 	being_cooked.trash = paper //so the paper is left behind as trash without special-snowflake(TM Nodrak) code ~carn
 	return being_cooked
 

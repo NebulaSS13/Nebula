@@ -112,7 +112,7 @@
 	var/list/obj/item/pickaxe/xeno/picksToSort = list()
 	for(var/obj/item/pickaxe/xeno/P in src)
 		picksToSort += P
-		P.loc = null
+		P.forceMove(null)
 	while(picksToSort.len)
 		var/min = 200 // No pick is bigger than 200
 		var/selected = 0
@@ -122,6 +122,6 @@
 				selected = i
 				min = current.excavation_amount
 		var/obj/item/pickaxe/xeno/smallest = picksToSort[selected]
-		smallest.loc = src
+		smallest.forceMove(src)
 		picksToSort -= smallest
 	prepare_ui()
