@@ -62,6 +62,7 @@
 	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
 
 /datum/chemical_reaction/crystal_agent
+	name = "Crystallizing agent"
 	result = /decl/material/liquid/crystal_agent
 	required_reagents = list(/decl/material/solid/silicon = 1, /decl/material/solid/metal/tungsten = 1, /decl/material/liquid/acid/polyacid = 1)
 	minimum_temperature = 150 CELSIUS
