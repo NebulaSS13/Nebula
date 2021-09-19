@@ -27,7 +27,6 @@
 		pronouns = mob_species.available_pronouns[1]
 		pref.gender = pronouns.name
 
-	prune_occupation_prefs()
 	pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)
 	pref.cultural_info = mob_species.default_cultural_info.Copy()
 
@@ -82,16 +81,21 @@
 		return TOPIC_HANDLED
 
 	else if(href_list["set_species"])
+
 		var/choice = href_list["set_species"]
 		if(choice != pref.species)
+
 			pref.species = choice
 			sanitize_species()
+			prune_occupation_prefs()
+
 			//reset hair colour and skin colour
 			ResetAllHair()
 			pref.hair_colour = COLOR_BLACK
 			pref.skin_tone = 0
 			pref.body_markings.Cut() // Basically same as above.
 			mob_species.handle_post_species_pref_set(pref)
+
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	. = ..()
