@@ -30,11 +30,11 @@
 #define SS_INIT_SKYBOX           11
 #define SS_INIT_MAPPING          10
 #define SS_INIT_JOBS             9
-#define SS_INIT_CHAR_SETUP       8
-#define SS_INIT_CIRCUIT          7
-#define SS_INIT_GRAPH            6
-#define SS_INIT_OPEN_SPACE       5
-#define SS_INIT_ATOMS            4
+#define SS_INIT_CIRCUIT          8
+#define SS_INIT_GRAPH            7
+#define SS_INIT_OPEN_SPACE       6
+#define SS_INIT_ATOMS            5
+#define SS_INIT_CHAR_SETUP       4
 #define SS_INIT_MACHINES         3
 #define SS_INIT_ICON_UPDATE      2
 #define SS_INIT_OVERLAY          1
@@ -48,7 +48,6 @@
 #define SS_INIT_LIGHTING        -6
 #define SS_INIT_ZCOPY           -7
 #define SS_INIT_XENOARCH        -10
-#define SS_INIT_BAY_LEGACY      -12
 #define SS_INIT_TICKER          -20
 #define SS_INIT_UNIT_TESTS      -100
 

@@ -160,8 +160,7 @@ var/global/list/time_prefs_fixed = list()
 	return 1
 
 /datum/preferences/proc/get_content(mob/user)
-	if(!SScharacter_setup.initialized)
-		return
+
 	if(!user || !user.client)
 		return
 
@@ -199,6 +198,10 @@ var/global/list/time_prefs_fixed = list()
 	return JOINTEXT(dat)
 
 /datum/preferences/proc/open_setup_window(mob/user)
+
+	if(!SScharacter_setup.initialized)
+		return
+
 	winshow(user, "preferences_window", TRUE)
 	var/datum/browser/popup = new(user, "preferences_browser", "Character Setup", 800, 800)
 	var/content = {"
