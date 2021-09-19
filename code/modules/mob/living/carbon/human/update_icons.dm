@@ -197,11 +197,11 @@ Please contact me on #coderbus IRC. ~Carn x
 			if(i != HO_DAMAGE_LAYER)
 				overlay.transform = M
 			add_overlay(entry)
-		else if(istype(entry, /list))
+		else if(islist(entry))
 			for(var/image/overlay in entry)
 				if(i != HO_DAMAGE_LAYER)
 					overlay.transform = M
-				add_overlay(entry)
+				add_overlay(overlay)
 
 	var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
 	if(istype(head) && !head.is_stump())
