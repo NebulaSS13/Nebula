@@ -1090,7 +1090,7 @@
 		set_gender(new_pronouns.name)
 
 	icon_state = lowertext(species.name)
-	set_bodytype(pick(species.available_bodytypes))
+	set_bodytype(pick(species.available_bodytypes), TRUE)
 
 	species.create_organs(src)
 	species.handle_post_spawn(src)
