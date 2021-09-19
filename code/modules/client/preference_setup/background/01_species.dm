@@ -9,6 +9,31 @@
 /datum/category_item/player_setup_item/background/species/load_character(datum/pref_record_reader/R)
 	pref.species = R.read("species") 
 
+/datum/category_item/player_setup_item/background/species/sanitize_character()
+	. = ..()
+	sanitize_species()
+
+/datum/category_item/player_setup_item/background/species/proc/sanitize_species()
+
+	var/decl/species/mob_species
+	if(!pref.species)
+		mob_species = GET_DECL(global.using_map.default_species)
+		pref.species = mob_species.name
+	else
+		mob_species = get_species_by_key(pref.species)
+
+	var/decl/pronouns/pronouns = get_pronouns_by_gender(pref.gender)
+	if(!istype(pronouns) || !(pronouns in mob_species.available_pronouns))
+		pronouns = mob_species.available_pronouns[1]
+		pref.gender = pronouns.name
+
+	prune_occupation_prefs()
+	pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)
+	pref.cultural_info = mob_species.default_cultural_info.Copy()
+
+	if(!has_flag(get_species_by_key(pref.species), HAS_UNDERWEAR))
+		pref.all_underwear.Cut()
+
 /datum/category_item/player_setup_item/background/species/proc/has_flag(var/decl/species/mob_species, var/flag)
 	return mob_species && (mob_species.appearance_flags & flag)
 
@@ -58,31 +83,15 @@
 
 	else if(href_list["set_species"])
 		var/choice = href_list["set_species"]
-		var/prev_species = pref.species
-		pref.species = choice
-		if(prev_species != pref.species)
-			mob_species = get_species_by_key(pref.species)
-			var/decl/pronouns/pronouns = get_pronouns_by_gender(pref.gender)
-			if(!istype(pronouns) || !(pronouns in mob_species.available_pronouns))
-				pronouns = mob_species.available_pronouns[1]
-				pref.gender = pronouns.name
-
-			ResetAllHair()
-
+		if(choice != pref.species)
+			pref.species = choice
+			sanitize_species()
 			//reset hair colour and skin colour
+			ResetAllHair()
 			pref.hair_colour = COLOR_BLACK
 			pref.skin_tone = 0
 			pref.body_markings.Cut() // Basically same as above.
-
-			prune_occupation_prefs()
-			pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)
-
-			pref.cultural_info = mob_species.default_cultural_info.Copy()
-
 			mob_species.handle_post_species_pref_set(pref)
-
-			if(!has_flag(get_species_by_key(pref.species), HAS_UNDERWEAR))
-				pref.all_underwear.Cut()
-
 			return TOPIC_REFRESH_UPDATE_PREVIEW
+
 	. = ..()
