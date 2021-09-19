@@ -176,9 +176,9 @@ var/global/list/time_prefs_fixed = list()
 
 	var/dat = list("<center>")
 	if(is_guest)
-		dat += "Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance."
+		dat += SPAN_WARNING("Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance.")
 	else if(load_failed)
-		dat += "Loading your savefile failed. Please adminhelp for assistance."
+		dat += SPAN_DANGER("Loading your savefile failed: [load_failed]<br>Please adminhelp for assistance.")
 	else
 
 		dat += "<b>Slot</b> - "
