@@ -57,7 +57,7 @@
 		. += os.get_header_data()
 
 /obj/machinery/check_eye(user)
-	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/ntos)
+	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
 		return os.check_eye(user)
 	else
