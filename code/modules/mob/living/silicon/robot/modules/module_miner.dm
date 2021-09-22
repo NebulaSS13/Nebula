@@ -8,8 +8,8 @@
 		"Supply" = TRUE,
 		"Science" = TRUE
 	)
-	networks = list(
-		NETWORK_MINE
+	camera_channels = list(
+		CAMERA_CHANNEL_MINE
 	)
 	module_sprites = list(
 		"Basic"          = 'icons/mob/robots/robot_miner_old.dmi',

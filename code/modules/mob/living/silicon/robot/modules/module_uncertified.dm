@@ -14,8 +14,8 @@
 		"Service" = TRUE,
 		"Entertainment" = TRUE
 	)
-	networks = list(
-		NETWORK_THUNDER
+	camera_channels = list(
+		CAMERA_CHANNEL_TELEVISION
 	)
 	equipment = list(
 		/obj/item/boombox,

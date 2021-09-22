@@ -13,6 +13,8 @@
 
 	var/list/relays = list()
 
+	var/list/cameras_by_channel = list()
+
 	var/datum/extension/network_device/broadcaster/router/router
 	var/datum/extension/network_device/acl/access_controller
 
@@ -59,6 +61,9 @@
 		add_log("Relay ONLINE", D.network_tag)
 	else if(istype(D, /datum/extension/network_device/acl) && !access_controller)
 		set_access_controller(D)
+	else if(istype(D, /datum/extension/network_device/camera))
+		var/datum/extension/network_device/camera/C = D
+		add_camera_to_channels(C, C.channels)
 	return TRUE
 
 /datum/computer_network/proc/remove_device(datum/extension/network_device/D)
@@ -73,6 +78,10 @@
 	else if(D in relays)
 		relays -= D
 		add_log("Relay OFFLINE", D.network_tag)
+	else if(istype(D, /datum/extension/network_device/camera))
+		var/datum/extension/network_device/camera/C = D
+		remove_camera_from_channels(C, C.channels)
+	
 	if(D == router)
 		router = null
 		for(var/datum/extension/network_device/broadcaster/router/R in devices)
@@ -117,13 +126,16 @@
 	if(specific_action && !(network_features_enabled & specific_action))
 		return FALSE
 	var/list/broadcasters = relays + router
+	var/datum/graph/device_graph = D.get_wired_connection()
 	for(var/datum/extension/network_device/broadcaster/R in broadcasters)
-		var/wired_connection = R.get_wired_connection()
-		if(!isnull(wired_connection) && wired_connection == D.get_wired_connection())
-			return WIRED_CONNECTION
-		else if(R.allow_wifi && (R.long_range || (get_z(R.holder) == get_z(D.holder))))
+		if(device_graph)
+			var/wired_connection = R.get_wired_connection()
+			if(!isnull(wired_connection) && wired_connection == device_graph)
+				return WIRED_CONNECTION
+		else if(.) // If we're not checking for wired connections, return at the first found connection.
+			return
+		if(R.allow_wifi && (R.long_range || (get_z(R.holder) == get_z(D.holder))))
 			. = WIRELESS_CONNECTION
-
 /datum/computer_network/proc/get_signal_strength(datum/extension/network_device/D)
 	var/connection_status = check_connection(D)
 	if(!connection_status)
@@ -231,3 +243,19 @@
 		if(istype(device.holder, type))
 			results |= tag
 	return results
+
+/datum/computer_network/proc/add_camera_to_channels(var/datum/extension/network_device/camera/added, var/list/channels)
+	if(!islist(channels))
+		channels = list(channels)
+	for(var/channel in channels)
+		if(!cameras_by_channel[channel])
+			cameras_by_channel[channel] = list()
+		cameras_by_channel[channel] |= added
+
+/datum/computer_network/proc/remove_camera_from_channels(var/datum/extension/network_device/camera/removed, var/list/channels)
+	if(!islist(channels))
+		channels = list(channels)
+	for(var/channel in channels)
+		cameras_by_channel[channel] -= removed
+		if(!length(cameras_by_channel))
+			cameras_by_channel -= channel

@@ -1,63 +1,62 @@
-var/global/const/NETWORK_COMMAND = "Command"
-var/global/const/NETWORK_ENGINE  = "Engine"
-var/global/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
-
-/datum/map/proc/get_shared_network_access(var/network)
-	switch(network)
-		if(NETWORK_COMMAND)
-			return access_heads
-		if(NETWORK_ENGINE, NETWORK_ENGINEERING_OUTPOST)
-			return access_engine
-
+var/global/const/CAMERA_CHANNEL_COMMAND = "Command"
+var/global/const/CAMERA_CHANNEL_ENGINE  = "Engine"
+var/global/const/CAMERA_CHANNEL_ENGINEERING_OUTPOST = "Engineering Outpost"
 //
 // Cameras
 //
 
 // Networks
 /obj/machinery/camera/network/command
-	network = list(NETWORK_COMMAND)
+	preset_channels = list(CAMERA_CHANNEL_COMMAND)
+	initial_access = list(access_heads)
 
 /obj/machinery/camera/network/crescent
-	network = list(NETWORK_CRESCENT)
+	preset_channels = list(CAMERA_CHANNEL_CRESCENT)
 
 /obj/machinery/camera/network/engine
-	network = list(NETWORK_ENGINE)
+	preset_channels = list(CAMERA_CHANNEL_ENGINE)
+	initial_access = list(access_engine)
 
 /obj/machinery/camera/network/engineering_outpost
-	network = list(NETWORK_ENGINEERING_OUTPOST)
+	preset_channels = list(CAMERA_CHANNEL_ENGINEERING_OUTPOST)
+	initial_access = list(access_engine)
 
 // Motion
 /obj/machinery/camera/motion/engineering_outpost
-	network = list(NETWORK_ENGINEERING_OUTPOST)
+	preset_channels = list(CAMERA_CHANNEL_ENGINEERING_OUTPOST)
+	initial_access = list(access_engine)
 
 // All Upgrades
 /obj/machinery/camera/all/command
-	network = list(NETWORK_COMMAND)
+	preset_channels = list(CAMERA_CHANNEL_COMMAND)
+	initial_access = list(access_heads)
 
 // Compile stubs.
 /obj/machinery/camera/motion/command
-	network = list(NETWORK_COMMAND)
+	preset_channels = list(CAMERA_CHANNEL_COMMAND)
+	initial_access = list(access_heads)
 
 /obj/machinery/camera/network/maintenance
-	network = list(NETWORK_ENGINEERING)
+	preset_channels = list(CAMERA_CAMERA_CHANNEL_ENGINEERING)
+	initial_access = list(access_engine)
 
 /obj/machinery/camera/xray/security
-	network = list(NETWORK_SECURITY)
+	preset_channels = list(CAMERA_CHANNEL_SECURITY)
 
 /obj/machinery/camera/network/exodus
-	network = list(NETWORK_SECURITY)
+	preset_channels = list(CAMERA_CHANNEL_SECURITY)
 
 /obj/machinery/camera/network/civilian_east
-	network = list(NETWORK_SECURITY)
+	preset_channels = list(CAMERA_CHANNEL_SECURITY)
 
 /obj/machinery/camera/network/civilian_west
-	network = list(NETWORK_SECURITY)
+	preset_channels = list(CAMERA_CHANNEL_SECURITY)
 
 /obj/machinery/camera/network/prison
-	network = list(NETWORK_SECURITY)
+	preset_channels = list(CAMERA_CHANNEL_SECURITY)
 
 /obj/machinery/camera/xray/medbay
-	network = list(NETWORK_SECURITY)
+	preset_channels = list(CAMERA_CHANNEL_SECURITY)
 
 /obj/machinery/camera/xray/research
-	network = list(NETWORK_SECURITY)
+	preset_channels = list(CAMERA_CHANNEL_SECURITY)

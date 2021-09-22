@@ -7,6 +7,7 @@
 	var/address			// unique network address, cannot be set by user
 	var/network_tag		// human-readable network address, can be set by user. Networks enforce uniqueness, will change it if there's clash.
 	var/connection_type = NETWORK_CONNECTION_STRONG_WIRELESS  // affects signal strength
+	var/connection_attempts = 0
 
 	var/has_commands = FALSE  // Whether or not this device can be configured to receive commands to modify and call public variables and methods. 
 	var/list/command_and_call // alias -> public method to be called.

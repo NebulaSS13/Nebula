@@ -132,7 +132,7 @@
 #define ui_ai_announcement "LEFT+1:10,BOTTOM:5"
 #define ui_ai_cam_track "LEFT+2:12,BOTTOM:5"
 #define ui_ai_cam_light "LEFT+3:14,BOTTOM:5"
-#define ui_ai_cam_change_network "LEFT+4:16,BOTTOM:5"
+#define ui_ai_cam_change_channel "LEFT+4:16,BOTTOM:5"
 #define ui_ai_sensor "CENTER-2:18,BOTTOM:5"
 #define ui_ai_crew_manifest "CENTER-1:20,BOTTOM:5"
 #define ui_ai_take_image "CENTER:22,BOTTOM:5"

@@ -39,11 +39,11 @@
 			)
 
 	adding += new /obj/screen/ai_button(null,
-			ui_ai_cam_change_network,
-			"Jump to Network",
+			ui_ai_cam_change_channel,
+			"Jump to Camera Channel",
 			"camera",
-			/mob/living/silicon/ai/proc/ai_network_change,
-			list(/mob/living/silicon/ai/proc/get_camera_network_list = (AI_BUTTON_PROC_BELONGS_TO_CALLER|AI_BUTTON_INPUT_REQUIRES_SELECTION))
+			/mob/living/silicon/ai/proc/ai_channel_change,
+			list(/mob/living/silicon/ai/proc/get_camera_channel_list = (AI_BUTTON_PROC_BELONGS_TO_CALLER|AI_BUTTON_INPUT_REQUIRES_SELECTION))
 			)
 
 	adding += new /obj/screen/ai_button(null,

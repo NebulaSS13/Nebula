@@ -24,7 +24,7 @@ nanoui is used to open and update nano browser uis
 	// whether to use extra logic when window closes
 	var/on_close_logic = 1
 	// an extra ref to use when the window is closed, usually null
-	var/atom/ref = null
+	var/datum/ref = null
 	// options for modifying window behaviour
 	var/window_options = "focus=0;can_close=1;can_minimize=1;can_maximize=0;can_resize=1;titlebar=1;" // window option is set using window_id
 	// the list of stylesheets to apply to this ui
@@ -73,7 +73,7 @@ nanoui is used to open and update nano browser uis
   *
   * @return /nanoui new nanoui object
   */
-/datum/nanoui/New(nuser, nsrc_object, nui_key, ntemplate_filename, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
+/datum/nanoui/New(nuser, nsrc_object, nui_key, ntemplate_filename, ntitle = 0, nwidth = 0, nheight = 0, var/datum/nref = null, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = global.default_topic_state)
 	user = nuser
 	src_object = nsrc_object
 	ui_key = nui_key

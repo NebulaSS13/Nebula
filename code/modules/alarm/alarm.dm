@@ -86,7 +86,7 @@
 	if(camera_repository.camera_cache_id != cache_id)
 		cameras = null
 		cache_id = camera_repository.camera_cache_id
-	// If the alarm origin has changed area, for example a borg containing an alarming camera, reset the list of cameras
+	// If the alarm origin has changed area, reset the list of cameras
 	else if(cameras && (last_camera_area != alarm_area()))
 		cameras = null
 
@@ -141,15 +141,5 @@
 
 /area/get_alarm_cameras()
 	return get_cameras()
-
-/mob/living/silicon/robot/get_alarm_cameras()
-	var/list/cameras = ..()
-	if(camera)
-		cameras += camera
-
-	return cameras
-
-/mob/living/silicon/robot/syndicate/get_alarm_cameras()
-	return list()
 
 #undef ALARM_RESET_DELAY

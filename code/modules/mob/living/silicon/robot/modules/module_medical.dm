@@ -3,8 +3,8 @@
 	channels = list(
 		"Medical" = TRUE
 	)
-	networks = list(
-		NETWORK_MEDICAL
+	camera_channels = list(
+		CAMERA_CHANNEL_MEDICAL
 	)
 	software = list(
 		/datum/computer_file/program/crew_manifest

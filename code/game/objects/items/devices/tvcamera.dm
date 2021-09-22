@@ -7,19 +7,16 @@
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_LOWER_BODY
 	var/channel = "General News Feed"
-	var/obj/machinery/camera/network/thunder/camera
+	var/video_enabled = FALSE
 	var/obj/item/radio/radio
 
 /obj/item/camera/tvcamera/Destroy()
 	global.listening_objects -= src
-	QDEL_NULL(camera)
 	QDEL_NULL(radio)
 	. = ..()
 
 /obj/item/camera/tvcamera/Initialize()
-	camera = new(src)
-	camera.c_tag = channel
-	camera.status = FALSE
+	set_extension(src, /datum/extension/network_device/camera/television, null, null, null, TRUE, list(CAMERA_CHANNEL_TELEVISION), channel)
 	radio = new(src)
 	radio.listening = FALSE
 	radio.set_frequency(ENT_FREQ)
@@ -29,7 +26,7 @@
 
 /obj/item/camera/tvcamera/examine(mob/user)
 	. = ..()
-	to_chat(user, "Video feed is currently: [camera.status ? "Online" : "Offline"]")
+	to_chat(user, "Video feed is currently: [video_enabled ? "Online" : "Offline"]")
 	to_chat(user, "Audio feed is currently: [radio.broadcasting ? "Online" : "Offline"]")
 	to_chat(user, "Photography setting is currently: [on ? "On" : "Off"]")
 
@@ -40,9 +37,10 @@
 	dat += "Photography mode is currently: <a href='?src=\ref[src];photo=1'>[on ? "On" : "Off"]</a><br>"
 	dat += "Photography focus is currently: <a href='?src=\ref[src];focus=1'>[size]</a><br>"
 	dat += "Channel name is: <a href='?src=\ref[src];channel=1'>[channel ? channel : "unidentified broadcast"]</a><br>"
-	dat += "Video streaming is: <a href='?src=\ref[src];video=1'>[camera.status ? "Online" : "Offline"]</a><br>"
+	dat += "Video streaming is: <a href='?src=\ref[src];video=1'>[video_enabled ? "Online" : "Offline"]</a><br>"
 	dat += "Microphone is: <a href='?src=\ref[src];sound=1'>[radio.broadcasting ? "Online" : "Offline"]</a><br>"
 	dat += "Sound is being broadcasted on frequency: [format_frequency(radio.frequency)] ([get_frequency_default_name(radio.frequency)])<br>"
+	dat += "<a href='?src=\ref[src];net_options=1'>Network Options</a>"
 	var/datum/browser/written/popup = new(user, "Press Camera Drone", "EyeBuddy", 300, 390, src)
 	popup.set_content(jointext(dat,null))
 	popup.open()
@@ -58,11 +56,12 @@
 		var/nc = sanitize(input(usr, "Channel name", "Select new channel name", channel) as text|null)
 		if(nc)
 			channel = nc
-			camera.c_tag = channel
+			var/datum/extension/network_device/camera/television/D = get_extension(src, /datum/extension/network_device/camera)
+			D.display_name = channel
 			to_chat(usr, "<span class='notice'>New channel name: '[channel]' has been set.</span>")
 	if(href_list["video"])
-		camera.set_status(!camera.status)
-		if(camera.status)
+		video_enabled = !video_enabled
+		if(video_enabled)
 			to_chat(usr,"<span class='notice'>Video streaming: Activated. Broadcasting on channel: '[channel]'</span>")
 		else
 			to_chat(usr,"<span class='notice'>Video streaming: Deactivated.</span>")
@@ -73,17 +72,20 @@
 			to_chat(usr,"<span class='notice'>Audio streaming: Activated. Broadcasting on frequency: [format_frequency(radio.frequency)].</span>")
 		else
 			to_chat(usr,"<span class='notice'>Audio streaming: Deactivated.</span>")
+	if(href_list["net_options"])
+		var/datum/extension/network_device/camera/television/D = get_extension(src, /datum/extension/network_device/camera)
+		D.ui_interact(usr)
 	if(!href_list["close"])
 		attack_self(usr)
 
 /obj/item/camera/tvcamera/adjust_mob_overlay(var/mob/living/user_mob, var/bodytype,  var/image/overlay, var/slot, var/bodypart)
-	if(overlay && camera.status && check_state_in_icon("[overlay.icon_state]-on", overlay.icon))
+	if(overlay && video_enabled && check_state_in_icon("[overlay.icon_state]-on", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]-on"
 	. = ..()
 
 /obj/item/camera/tvcamera/on_update_icon()
 	cut_overlays()
-	if(camera.status)
+	if(video_enabled)
 		add_overlay("[icon_state]-on")
 	var/mob/living/carbon/human/H = loc
 	if(istype(H))
@@ -154,3 +156,12 @@ Using robohead because of restricting to roboticist */
 					qdel(src)
 					return
 	..()
+
+/datum/extension/network_device/camera/television
+	expected_type = /obj/item/camera/tvcamera
+	cameranet_enabled = FALSE
+	requires_connection = FALSE
+
+/datum/extension/network_device/camera/television/is_functional()
+	var/obj/item/camera/tvcamera/tv = holder
+	return tv.video_enabled
