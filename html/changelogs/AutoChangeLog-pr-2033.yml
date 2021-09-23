@@ -1,6 +1,0 @@
-author: NataKilar
-delete-after: true
-changes:
-  - tweak: Camera networks are now known as channels and are not tied to access.
-  - rscadd: Security cameras are now tied directly to computer networks, and can be
-      managed as with other network devices.
