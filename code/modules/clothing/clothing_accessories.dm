@@ -82,7 +82,7 @@
 	update_clothing_icon()
 
 /obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)
-	if(!(A in accessories))
+	if(!A || !(A in accessories))
 		return
 
 	A.on_removed(user)
@@ -106,7 +106,7 @@
 
 	if(!LAZYLEN(accessories))
 		return
-	
+
 	var/obj/item/clothing/accessory/A
 	if(LAZYLEN(accessories) > 1)
 		var/list/options = list()
@@ -116,7 +116,7 @@
 		A = show_radial_menu(M, M, options, radius = 42, tooltips = TRUE)
 	else
 		A = accessories[1]
-	
+
 	remove_accessory(usr, A)
 
 	if(!LAZYLEN(accessories))
