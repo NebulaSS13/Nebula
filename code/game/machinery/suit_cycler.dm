@@ -458,7 +458,6 @@
 /obj/machinery/suit_cycler/proc/apply_paintjob()
 	if(!target_bodytype || !target_modification)
 		return
-
 	var/target_flags = available_bodytypes[target_bodytype]
 	if(helmet) helmet.refit_for_bodytype(target_flags)
 	if(suit)   suit.refit_for_bodytype(target_flags)
