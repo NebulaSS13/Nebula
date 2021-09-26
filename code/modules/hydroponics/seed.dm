@@ -75,8 +75,8 @@
 /datum/seed/proc/get_monetary_value()
 	. = 1
 	// Positives!
-	. += 3 * set_trait(TRAIT_HARVEST_REPEAT)
-	. += 3 * set_trait(TRAIT_PRODUCES_POWER)
+	. += 3 * get_trait(TRAIT_HARVEST_REPEAT)
+	. += 3 * get_trait(TRAIT_PRODUCES_POWER)
 	. += 5 * get_trait(TRAIT_CARNIVOROUS)
 	. += 5 * get_trait(TRAIT_PARASITE)
 	. += 5 * get_trait(TRAIT_TELEPORTING)
