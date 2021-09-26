@@ -29,7 +29,7 @@
 	..()
 	if(holder)
 		var/datum/extension/assembly/modular_computer/assembly = get_extension(holder, /datum/extension/assembly)
-		if(assembly && assembly.enabled) 
+		if(assembly && assembly.enabled)
 			assembly.shutdown_device()
 
 /datum/extension/interactive/os/device/system_boot()
