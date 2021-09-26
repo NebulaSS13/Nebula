@@ -296,7 +296,7 @@
 
 // Simplified payment processing, returns 1 on success.
 /obj/machinery/lapvend/proc/process_payment(var/obj/item/charge_stick/I)
-	if(isnull(I))
+	if(!istype(I))
 		ping("Invalid payment format.")
 		return FALSE
 	visible_message(SPAN_INFO("\The [usr] inserts \the [I] into \the [src]."))
