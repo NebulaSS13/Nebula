@@ -441,5 +441,5 @@ var/global/list/gear_datums = list()
 
 	if(flags & GEAR_NO_EQUIP)
 		return
-	
+
 	return item
