@@ -292,3 +292,19 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "potato_cell"
 	maxcharge = 20
+
+
+//Generic battery cell for guns with rechargable batteries.
+/obj/item/cell/gun
+	name = "weapon energy cell"
+	desc = "A military grade high-density battery, expected to deplete after tens of thousands of complete charge cycles."
+	origin_tech = "{'combat':2,'materials':2,'powerstorage': 2}"
+	icon_state = "gunbattery"
+	maxcharge = 500
+	w_class = ITEM_SIZE_SMALL //Perhaps unwise.
+
+/obj/item/cell/gun/on_update_icon()
+	cut_overlays()
+	var/image/A = image('icons/obj/power.dmi', icon_state = "gunbattery_charge")
+	A.color = gradient("#fa6a0a", "#9cdb43", clamp(percent()/100, 0, 100) ) //Color the battery charging overlay against the percentage of the battery capacity. However the index of gradient() is set to 1, instead of 100, so we divide it by 100. Colors were chosen by the sprite artist.
+	add_overlay(A)

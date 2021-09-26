@@ -93,3 +93,9 @@
 	accuracy = 0 //mounted laser cannons don't need any help, thanks
 	one_hand_penalty = 0
 	has_safety = FALSE
+
+
+/obj/item/gun/energy/laser/reloadable //This behavior isn't actually part of this class.
+	name = "reloadable laser carbine"
+	desc = "A G40E carbine, designed to kill with concentrated energy blasts. Uses removable energy cells."
+	cell_type = /obj/item/cell/gun
