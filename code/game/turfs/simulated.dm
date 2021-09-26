@@ -189,4 +189,4 @@
 			zone.remove(src)
 		else
 			zone.rebuild()
-	. = ..() 
+	. = ..()
