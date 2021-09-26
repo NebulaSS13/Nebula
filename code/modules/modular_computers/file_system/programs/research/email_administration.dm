@@ -28,7 +28,7 @@
 		data["skill_fail"] = fake_data.update_and_return_data()
 	data["terminal"] = !!program
 
-	var/datum/computer_network/network = program.computer.get_network()
+	var/datum/computer_network/network = program?.computer.get_network()
 	if(!network)
 		error = "NETWORK FAILURE: Check connection to the network."
 
