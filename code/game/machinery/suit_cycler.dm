@@ -43,7 +43,7 @@
 	)
 
 	//Bodytypes that the suits can be configured to fit.
-	var/list/available_bodytypes = list(BODYTYPE_HUMANOID)
+	var/list/available_bodytypes = list(BODYTYPE_HUMANOID = BODY_FLAG_HUMANOID)
 
 	var/decl/item_modifier/target_modification
 	var/target_bodytype
@@ -458,10 +458,10 @@
 /obj/machinery/suit_cycler/proc/apply_paintjob()
 	if(!target_bodytype || !target_modification)
 		return
-
-	if(helmet) helmet.refit_for_bodytype(target_bodytype)
-	if(suit)   suit.refit_for_bodytype(target_bodytype)
-	if(boots)  boots.refit_for_bodytype(target_bodytype)
+	var/target_flags = available_bodytypes[target_bodytype]
+	if(helmet) helmet.refit_for_bodytype(target_flags)
+	if(suit)   suit.refit_for_bodytype(target_flags)
+	if(boots)  boots.refit_for_bodytype(target_flags)
 
 	target_modification.RefitItem(helmet)
 	target_modification.RefitItem(suit)
