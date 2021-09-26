@@ -81,7 +81,7 @@
 	var/pickup_sound = 'sound/foley/paperpickup2.ogg'
 	///Sound uses when dropping the item, or when its thrown.
 	var/drop_sound = 'sound/foley/drop1.ogg'
-	
+
 	var/datum/reagents/coating // reagent container for coating things like blood/oil, used for overlays and tracks
 
 	var/tmp/has_inventory_icon	// do not set manually
@@ -875,7 +875,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		icon = citem.item_icon
 	if(citem.item_state)
 		set_icon_state(citem.item_state)
-	
+
 /obj/item/proc/is_special_cutting_tool(var/high_power)
 	return FALSE
 
