@@ -71,9 +71,12 @@ var/global/list/registered_cyborg_weapons = list()
 	return 1
 
 /obj/item/gun/energy/consume_next_projectile()
-	if(!power_supply) return null
-	if(!ispath(projectile_type)) return null
-	if(!power_supply.checked_use(charge_cost)) return null
+	if(!power_supply)
+		return null
+	if(!ispath(projectile_type))
+		return null
+	if(!power_supply.checked_use(charge_cost))
+		return null
 	return new projectile_type(src)
 
 /obj/item/gun/energy/proc/get_external_power_supply()
@@ -128,3 +131,29 @@ var/global/list/registered_cyborg_weapons = list()
 			icon_state = "[modifystate][get_charge_ratio()]"
 		else
 			icon_state = "[initial(icon_state)][get_charge_ratio()]"
+
+
+//For removable cells.
+/obj/item/gun/energy/attack_hand(mob/user)
+	if(!user.is_holding_offhand(src)|| isnull(cell_type) || isnull(power_supply) )
+		return ..()
+	user.put_in_hands(power_supply)
+	power_supply = null
+	user.visible_message(SPAN_NOTICE("\The [user] unloads \the [src]."))
+	playsound(src,'sound/weapons/guns/interaction/smg_magout.ogg' , 50)
+	update_icon()
+
+/obj/item/gun/energy/attackby(var/obj/item/A, mob/user)
+	if(isnull(cell_type))
+		return
+	if(!user.is_holding_offhand(src))
+		to_chat(user, SPAN_NOTICE("Hold \the [src] in your hands to load it."))
+		return
+	if(istype(power_supply) )
+		to_chat(user, SPAN_NOTICE("There is already \a [power_supply] loaded."))
+
+	if(istype(A, cell_type) && do_after(user, 5, A, can_move = TRUE) && user.unEquip(A, src) )
+		power_supply = A
+		user.visible_message(SPAN_WARNING("\The [user] loads \the [A] into \the [src]!"))
+		playsound(src, 'sound/weapons/guns/interaction/energy_magin.ogg', 80)
+	update_icon()
