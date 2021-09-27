@@ -90,7 +90,6 @@ var/global/list/music_tracks = list(
 	"Marhaba" = /decl/music_track/marhaba,
 	"Space Oddity" = /decl/music_track/space_oddity,
 	"THUNDERDOME" = /decl/music_track/thunderdome,
-	"Torch: A Light in the Darkness" = /decl/music_track/torch,
 	"Treacherous Voyage" = /decl/music_track/treacherous_voyage,
 	"Wake" = /decl/music_track/wake,
 	"phoron will make us rich" = /decl/music_track/pwmur,
