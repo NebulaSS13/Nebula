@@ -142,11 +142,9 @@
 
 	if(istype(M))
 		for(var/obj/effect/decal/cleanable/blood/B in contents)
-			if(!B.blood_DNA)
-				B.blood_DNA = list()
-			if(!B.blood_DNA[M.dna.unique_enzymes])
-				B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-				B.blood_data[M.dna.unique_enzymes] = REAGENT_DATA(M.vessel, M.species.blood_reagent)
+			if(M.dna?.unique_enzymes && !LAZYACCESS(B.blood_DNA, M.dna.unique_enzymes))
+				LAZYSET(B.blood_DNA, M.dna.unique_enzymes, M.dna.b_type)
+				LAZYSET(B.blood_data, M.dna.unique_enzymes, REAGENT_DATA(M.vessel, M.species.blood_reagent))
 				var/datum/extension/forensic_evidence/forensics = get_or_create_extension(B, /datum/extension/forensic_evidence)
 				forensics.add_data(/datum/forensics/blood_dna, M.dna.unique_enzymes)
 			return 1 //we bloodied the floor
