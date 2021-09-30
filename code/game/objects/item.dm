@@ -128,11 +128,18 @@
 	reconsider_single_icon()
 
 /obj/item/Destroy()
+
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(hidden_uplink)
+
 	if(ismob(loc))
-		var/mob/m = loc
-		m.drop_from_inventory(src)
+		var/mob/M = loc
+		LAZYREMOVE(M.pinned, src)
+		LAZYREMOVE(M.embedded, src)
+		for(var/obj/item/organ/external/organ in M.get_organs())
+			organ.implants -= src
+		M.drop_from_inventory(src)
+
 	var/obj/item/storage/storage = loc
 	if(istype(storage))
 		// some ui cleanup needs to be done

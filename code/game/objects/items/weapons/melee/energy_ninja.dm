@@ -34,21 +34,23 @@
 /obj/item/energy_blade/ninja/attack_self(mob/user)
 	user.drop_from_inventory(src)
 
-/obj/item/energy_blade/ninja/dropped()
-	..()
-	QDEL_IN(src, 0)
+/obj/item/energy_blade/ninja/equipped(mob/user, slot)
+	. = ..()
+	check_loc()
 
-/obj/item/energy_blade/ninja/Process()
-	if(!creator || loc != creator || !(src in creator.get_held_items()))
-		// Tidy up a bit.
-		if(istype(loc,/mob/living))
-			var/mob/living/carbon/human/host = loc
-			if(istype(host))
-				for(var/obj/item/organ/external/organ in host.organs)
-					for(var/obj/item/O in organ.implants)
-						if(O == src)
-							organ.implants -= src
-			host.pinned -= src
-			host.embedded -= src
-			host.drop_from_inventory(src)
-		QDEL_IN(src, 0)
+/obj/item/energy_blade/ninja/dropped()
+	. = ..()
+	check_loc()
+
+/obj/item/energy_blade/ninja/pickup(mob/user)
+	. = ..()
+	check_loc()
+
+/obj/item/energy_blade/ninja/Move()
+	. = ..()
+	if(.)
+		check_loc()
+
+/obj/item/energy_blade/ninja/proc/check_loc()
+	if(!QDELETED(src) && (loc != creator || !(src in creator?.get_held_items())))
+		qdel(src)
