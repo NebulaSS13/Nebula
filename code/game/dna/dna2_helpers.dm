@@ -160,7 +160,10 @@
 			var/obj/item/organ/external/E = H.organs_by_name[tag]
 			if(E)
 				var/list/marklist = dna.body_markings[tag]
-				E.markings = marklist.Copy()
+				if(length(marklist))
+					E.markings = marklist.Copy()
+				else
+					LAZYCLEARLIST(E.markings)
 
 		//Base skin and blend
 		for(var/obj/item/organ/external/E in H.organs)

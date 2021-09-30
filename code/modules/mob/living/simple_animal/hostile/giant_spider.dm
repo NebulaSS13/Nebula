@@ -286,7 +286,7 @@ Nurse caste procs
 			var/obj/item/organ/external/O = pick(H.organs)
 			if(!BP_IS_PROSTHETIC(O) && !BP_IS_CRYSTAL(O) && (LAZYLEN(O.implants) < 2))
 				var/eggs = new /obj/effect/spider/eggcluster(O, src)
-				O.implants += eggs
+				LAZYADD(O.implants, eggs)
 				max_eggs--
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/proc/GiveUp(var/C)

@@ -92,7 +92,7 @@ var/global/list/default_uplink_source_priority = list(
 	U.imp_in = H
 	U.implanted = TRUE
 	U.part = head
-	head.implants += U
+	LAZYADD(head.implants, U)
 
 	U.implanted(H) // This proc handles the installation feedback
 

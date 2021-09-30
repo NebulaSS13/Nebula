@@ -141,7 +141,7 @@
 				if(BP_IS_PROSTHETIC(E))
 					for(var/obj/implanted_object in E.implants)
 						if(!istype(implanted_object,/obj/item/implant) && !istype(implanted_object,/obj/item/organ/internal/augment) && prob(25))	// We don't want to remove REAL implants. Just shrapnel etc.
-							E.implants -= implanted_object
+							LAZYREMOVE(E.implants, implanted_object)
 							to_chat(H, "<span class='notice'>The mineral-rich bath dissolves the [implanted_object.name].</span>")
 							qdel(implanted_object)
 					if(E.brute_dam || E.burn_dam)

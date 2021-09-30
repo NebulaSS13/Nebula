@@ -67,7 +67,7 @@
 	H.internal_organs += B
 
 	var/obj/item/organ/external/affecting = H.get_organ(BP_HEAD)
-	affecting.implants -= src
+	LAZYREMOVE(affecting.implants, src)
 
 	var/s2h_id = src.computer_id
 	var/s2h_ip= src.lastKnownIP

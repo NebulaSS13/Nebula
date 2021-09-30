@@ -61,10 +61,9 @@
 		fracture()
 
 	// High brute damage or sharp objects may damage internal organs
-	if(LAZYLEN(internal_organs))
-		if(damage_internal_organs(brute, burn, damage_flags))
-			brute /= 2
-			burn /= 2
+	if(LAZYLEN(internal_organs) && damage_internal_organs(brute, burn, damage_flags))
+		brute /= 2
+		burn  /= 2
 
 	if((status & ORGAN_BROKEN) && brute)
 		jostle_bone(brute)

@@ -137,7 +137,7 @@
 		LAZYREMOVE(M.pinned, src)
 		LAZYREMOVE(M.embedded, src)
 		for(var/obj/item/organ/external/organ in M.get_organs())
-			organ.implants -= src
+			LAZYREMOVE(organ.implants, src)
 		M.drop_from_inventory(src)
 
 	var/obj/item/storage/storage = loc

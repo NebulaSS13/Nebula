@@ -135,7 +135,7 @@
 	if (tool.w_class > affected.cavity_max_w_class/2 && prob(50) && !BP_IS_PROSTHETIC(affected) && affected.sever_artery())
 		to_chat(user, "<span class='warning'>You tear some blood vessels trying to fit such a big object in this cavity.</span>")
 		affected.owner.custom_pain("You feel something rip in your [affected.name]!", 1,affecting = affected)
-	affected.implants += tool
+	LAZYDISTINCTADD(affected.implants, tool)
 	affected.cavity = 0
 
 //////////////////////////////////////////////////////////////////
@@ -184,7 +184,7 @@
 				loot |= wound.embedded_objects
 			find_prob += 50
 
-	if (loot.len)
+	if(LAZYLEN(loot))
 
 		var/obj/item/obj = pick(loot)
 
