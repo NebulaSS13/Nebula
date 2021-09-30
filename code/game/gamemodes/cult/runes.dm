@@ -246,15 +246,15 @@
 /obj/effect/rune/wall/cast(var/mob/living/user)
 	var/t
 	if(wall)
-		if(wall.health >= wall.max_health)
+		t = wall.get_damage_value()
+		if(!t)
 			to_chat(user, "<span class='notice'>The wall doesn't need mending.</span>")
 			return
-		t = wall.max_health - wall.health
-		wall.health += t
+		wall.restore_health(t)
 	else
 		wall = new /obj/effect/cultwall(get_turf(src), bcolor)
 		wall.rune = src
-		t = wall.health
+		t = wall.get_current_health()
 	user.remove_blood_simple(t / 50)
 	speak_incantation(user, "Khari[pick("'","`")]d! Eske'te tannin!")
 	to_chat(user, "<span class='warning'>Your blood flows into the rune, and you feel that the very space over the rune thickens.</span>")
@@ -269,12 +269,10 @@
 	density = 1
 	unacidable = 1
 	var/obj/effect/rune/wall/rune
-	var/health
-	var/max_health = 200
+	health_max = 200
 
 /obj/effect/cultwall/Initialize(mapload, var/bcolor)
 	. = ..()
-	health = max_health
 	if(bcolor)
 		color = bcolor
 
@@ -284,15 +282,10 @@
 		rune = null
 	return ..()
 
-/obj/effect/cultwall/examine(mob/user)
+/obj/effect/cultwall/examine_damage_state(mob/user)
+	if (!iscultist(user))
+		return
 	. = ..()
-	if(iscultist(user))
-		if(health == max_health)
-			to_chat(user, "<span class='notice'>It is fully intact.</span>")
-		else if(health > max_health * 0.5)
-			to_chat(user, "<span class='warning'>It is damaged.</span>")
-		else
-			to_chat(user, "<span class='danger'>It is about to dissipate.</span>")
 
 /obj/effect/cultwall/attack_hand(var/mob/user)
 	if(iscultist(user))
@@ -307,19 +300,19 @@
 		qdel(src)
 	else if(I.force)
 		user.visible_message("<span class='notice'>\The [user] hits \the [src] with \the [I].</span>", "<span class='notice'>You hit \the [src] with \the [I].</span>")
-		take_damage(I.force)
+		damage_health(I.force, I.damtype)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 
 /obj/effect/cultwall/bullet_act(var/obj/item/projectile/Proj)
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
-	take_damage(Proj.damage)
+	damage_health(Proj.damage, Proj.damage_type)
 	..()
 
-/obj/effect/cultwall/proc/take_damage(var/amount)
-	health -= amount
-	if(health <= 0)
+/obj/effect/cultwall/handle_death_change(new_death_state)
+	. = ..()
+	if (new_death_state)
 		visible_message("<span class='warning'>\The [src] dissipates.</span>")
 		qdel(src)
 
