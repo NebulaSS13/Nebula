@@ -12,11 +12,13 @@
 
 	layer = BLOB_SHIELD_LAYER
 
-	var/maxHealth = 30
-	var/health
+	health_max = 30
+	health_resistances = list(
+		BRUTE = 4.3,
+		BURN  = 1.24
+	)
+
 	var/regen_rate = 5
-	var/brute_resist = 4.3
-	var/fire_resist = 0.8
 	var/laser_resist = 2	// Special resist for laser based weapons - Emitters or handheld energy weaponry. Damage is divided by this and THEN by fire_resist.
 	var/expandType = /obj/effect/blob
 	var/secondary_core_growth_chance = 5 //% chance to grow a secondary blob core instead of whatever was suposed to grown. Secondary cores are considerably weaker, but still nasty.
@@ -28,8 +30,6 @@
 
 /obj/effect/blob/Initialize()
 	. = ..()
-	health = maxHealth
-	update_icon()
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/blob/CanPass(var/atom/movable/mover, var/turf/target, var/height = 0, var/air_group = 0)
@@ -39,13 +39,15 @@
 
 /obj/effect/blob/explosion_act(var/severity)
 	SHOULD_CALL_PARENT(FALSE)
-	take_damage(rand(140 - (severity * 40), 140 - (severity * 20)) / brute_resist)
+	damage_health(rand(140 - (severity * 40), 140 - (severity * 20)), BRUTE)
 
 /obj/effect/blob/on_update_icon()
-	if(health > maxHealth / 2)
-		icon_state = "blob"
-	else
-		icon_state = "blob_damaged"
+	var/damage_percentage = get_damage_percentage()
+	switch (damage_percentage)
+		if (0.00 to 0.50)
+			icon_state = "blob"
+		else
+			icon_state = "blob_damaged"
 
 /obj/effect/blob/Process(wait, times_fired)
 	regen()
@@ -53,16 +55,18 @@
 		return
 	attempt_attack(global.alldirs)
 
-/obj/effect/blob/proc/take_damage(var/damage)
-	health -= damage
-	if(health < 0)
+/obj/effect/blob/post_health_change(health_mod, damage_type)
+	. = ..()
+	update_icon()
+
+/obj/effect/blob/handle_death_change(new_death_state)
+	. = ..()
+	if (new_death_state)
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 		qdel(src)
-	else
-		update_icon()
 
 /obj/effect/blob/proc/regen()
-	health = min(health + regen_rate, maxHealth)
+	restore_health(regen_rate)
 	update_icon()
 
 /obj/effect/blob/proc/expand(var/turf/T)
@@ -116,7 +120,7 @@
 	if(!(locate(/obj/effect/blob/core) in range(T, 2)) && prob(secondary_core_growth_chance))
 		new/obj/effect/blob/core/secondary(T)
 	else
-		new expandType(T, min(health, 30))
+		new expandType(T)
 
 /obj/effect/blob/proc/pulse(var/forceLeft, var/list/dirs)
 	set waitfor = FALSE
@@ -125,7 +129,7 @@
 	var/turf/T = get_step(src, pushDir)
 	var/obj/effect/blob/B = (locate() in T)
 	if(!B)
-		if(prob(health))
+		if(prob(get_current_health()))
 			expand(T)
 		return
 	if(forceLeft)
@@ -152,10 +156,10 @@
 		return
 
 	switch(Proj.damage_type)
-		if(BRUTE)
-			take_damage(Proj.damage / brute_resist)
-		if(BURN)
-			take_damage((Proj.damage / laser_resist) / fire_resist)
+		if (BURN)
+			damage_health((Proj.damage / laser_resist), BURN)
+		else
+			damage_health(Proj.damage, Proj.damage_type)
 	return 0
 
 /obj/effect/blob/attackby(var/obj/item/W, var/mob/user)
@@ -176,23 +180,17 @@
 				to_chat(user, SPAN_WARNING("\The [src] has already been pruned."))
 				return
 
-	var/damage = 0
-	switch(W.damtype)
-		if("fire")
-			damage = (W.force / fire_resist)
-			if(isWelder(W))
-				playsound(loc, 'sound/items/Welder.ogg', 100, 1)
-		if("brute")
-			damage = (W.force / brute_resist)
+	if (isWelder(W))
+		playsound(loc, 'sound/items/Welder.ogg', 100, 1)
 
-	take_damage(damage)
+	damage_health(W.force, W.damtype)
 	return
 
 /obj/effect/blob/core
 	name = "master nucleus"
 	desc = "A massive, fragile nucleus guarded by a shield of thick tendrils."
 	icon_state = "blob_core"
-	maxHealth = 450
+	health_max = 450
 	damage_min = 30
 	damage_max = 40
 	expandType = /obj/effect/blob/shield
@@ -206,39 +204,37 @@
 	var/reported_low_damage = FALSE
 	var/times_to_pulse = 0
 
-/obj/effect/blob/core/proc/get_health_percent()
-	return ((health / maxHealth) * 100)
-
 /*
 the master core becomes more vulnereable to damage as it weakens,
 but it also becomes more aggressive, and channels more of its energy into regenerating rather than spreading
 regen() will cover update_icon() for this proc
 */
 /obj/effect/blob/core/proc/process_core_health()
-	switch(get_health_percent())
-		if(75 to INFINITY)
-			brute_resist = 3.5
-			fire_resist = 2
+	var/damage_percentage = get_damage_percentage()
+	switch(damage_percentage)
+		if (0.00 to 0.25)
+			set_damage_resistance(BRUTE, 3.5)
+			set_damage_resistance(BURN, 2)
 			attack_freq = 5
 			regen_rate = 2
 			times_to_pulse = 4
 			if(reported_low_damage)
 				report_shield_status("high")
-		if(50 to 74)
-			brute_resist = 2.5
-			fire_resist = 1.5
+		if (0.26 to 0.50)
+			set_damage_resistance(BRUTE, 1.5)
+			set_damage_resistance(BURN, 1.5)
 			attack_freq = 4
 			regen_rate = 3
 			times_to_pulse = 3
-		if(34 to 49)
-			brute_resist = 1
-			fire_resist = 0.8
+		if (0.51 to 0.84)
+			set_damage_resistance(BRUTE, 1)
+			set_damage_resistance(BURN, 0.8)
 			attack_freq = 3
 			regen_rate = 4
 			times_to_pulse = 2
-		if(-INFINITY to 33)
-			brute_resist = 0.5
-			fire_resist = 0.3
+		else
+			set_damage_resistance(BRUTE, 0.5)
+			set_damage_resistance(BURN, 0.3)
 			regen_rate = 5
 			times_to_pulse = 1
 			if(!reported_low_damage)
@@ -254,12 +250,13 @@ regen() will cover update_icon() for this proc
 
 // Rough icon state changes that reflect the core's health
 /obj/effect/blob/core/on_update_icon()
-	switch(get_health_percent())
-		if(66 to INFINITY)
+	var/damage_percentage = get_damage_percentage()
+	switch (damage_percentage)
+		if(0.00 to 0.33)
 			icon_state = "blob_core"
-		if(33 to 66)
+		if (0.34 to 0.66)
 			icon_state = "blob_node"
-		if(-INFINITY to 33)
+		else
 			icon_state = "blob_factory"
 
 /obj/effect/blob/core/Process()
@@ -279,7 +276,7 @@ regen() will cover update_icon() for this proc
 	name = "auxiliary nucleus"
 	desc = "An interwoven mass of tendrils. A glowing nucleus pulses at its center."
 	icon_state = "blob_node"
-	maxHealth = 125
+	health_max = 125
 	regen_rate = 1
 	growth_range = 4
 	damage_min = 15
@@ -292,13 +289,18 @@ regen() will cover update_icon() for this proc
 	return
 
 /obj/effect/blob/core/secondary/on_update_icon()
-	icon_state = (health / maxHealth >= 0.5) ? "blob_node" : "blob_factory"
+	var/damage_percentage = get_damage_percentage()
+	switch (damage_percentage)
+		if (0.00 to 0.49)
+			icon_state = "blob_node"
+		else
+			icon_state = "blob_factory"
 
 /obj/effect/blob/shield
 	name = "shielding mass"
 	desc = "A pulsating mass of interwoven tendrils. These seem particularly robust, but not quite as active."
 	icon_state = "blob_idle"
-	maxHealth = 120
+	health_max = 120
 	damage_min = 13
 	damage_max = 25
 	attack_freq = 7
@@ -316,12 +318,14 @@ regen() will cover update_icon() for this proc
 	..()
 
 /obj/effect/blob/shield/on_update_icon()
-	if(health > maxHealth * 2 / 3)
-		icon_state = "blob_idle"
-	else if(health > maxHealth / 3)
-		icon_state = "blob"
-	else
-		icon_state = "blob_damaged"
+	var/damage_percentage = get_damage_percentage()
+	switch (damage_percentage)
+		if (0.00 to 0.33)
+			icon_state = "blob_idle"
+		if (0.34 to 0.66)
+			icon_state = "blob"
+		else
+			icon_state = "blob_damaged"
 
 /obj/effect/blob/shield/CanPass(var/atom/movable/mover, var/turf/target, var/height = 0, var/air_group = 0)
 	return !density
@@ -329,7 +333,7 @@ regen() will cover update_icon() for this proc
 /obj/effect/blob/ravaging
 	name = "ravaging mass"
 	desc = "A mass of interwoven tendrils. They thrash around haphazardly at anything in reach."
-	maxHealth = 20
+	health_max = 20
 	damage_min = 27
 	damage_max = 36
 	attack_freq = 3
