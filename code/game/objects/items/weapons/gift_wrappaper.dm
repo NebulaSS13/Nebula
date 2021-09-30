@@ -85,7 +85,7 @@
 		/obj/item/toy/prize/powerloader,
 		/obj/item/toy/prize/seraph,
 		/obj/item/toy/spinningtoy,
-		/obj/item/toy/sword,
+		/obj/item/energy_blade/sword/toy,
 		/obj/item/chems/food/grown/ambrosiadeus,
 		/obj/item/chems/food/grown/ambrosiavulgaris,
 		/obj/item/paicard,

@@ -1,0 +1,52 @@
+/obj/item/energy_blade/sword
+	name = "energy sword"
+	desc = "May the force be mass times acceleration."
+	icon = 'icons/obj/items/weapon/e_sword.dmi'
+	origin_tech = "{'magnets':3,'esoteric':4}"
+	active_parry_chance = 50
+
+	var/blade_color
+	var/static/list/blade_colors = list(
+		COLOR_RED =    COLOR_SABER_RED,
+		COLOR_CYAN =   COLOR_SABER_BLUE,
+		COLOR_LIME=    COLOR_SABER_GREEN,
+		COLOR_PURPLE = COLOR_SABER_PURPLE
+	)
+	
+/obj/item/energy_blade/sword/Initialize()
+	if(!blade_color)
+		blade_color = pick(blade_colors)
+	lighting_color = blade_colors[blade_color] || lighting_color
+	. = ..()
+
+/obj/item/energy_blade/sword/dropped(var/mob/user)
+	..()
+	if(!istype(loc, /mob) && active)
+		toggle_active()
+
+/obj/item/energy_blade/sword/on_update_icon()
+	. = ..()
+	if(active)
+		var/image/I = emissive_overlay(icon, "[icon_state]-extended-glow")
+		I.color = blade_color
+		add_overlay(I)
+
+/obj/item/energy_blade/sword/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
+	. = ..()
+	if(overlay && active && check_state_in_icon("[overlay.icon_state]-extended-glow", overlay.icon))
+		var/image/I = emissive_overlay(overlay.icon, "[overlay.icon_state]-extended-glow")
+		I.color = blade_color
+		overlay.overlays += I
+
+// Subtypes
+/obj/item/energy_blade/sword/green
+	blade_color = COLOR_LIME
+
+/obj/item/energy_blade/sword/red
+	blade_color = COLOR_RED
+
+/obj/item/energy_blade/sword/blue
+	blade_color = COLOR_BLUE
+
+/obj/item/energy_blade/sword/purple
+	blade_color = COLOR_PURPLE
