@@ -21,11 +21,6 @@
 	. = ..()
 	if(!ismob(loc))
 		return INITIALIZE_HINT_QDEL
-	START_PROCESSING(SSobj, src)
-
-/obj/item/energy_blade/ninja/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	. = ..()
 
 /obj/item/energy_blade/ninja/is_special_cutting_tool(var/high_power)
 	return active
