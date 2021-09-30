@@ -56,9 +56,9 @@
 	worn_underwear = null
 	QDEL_NULL(attack_selector)
 	LAZYCLEARLIST(smell_cooldown)
-	for(var/organ in organs)
-		qdel(organ)
-	return ..()
+	. = ..()
+	QDEL_NULL_LIST(organs)
+	QDEL_NULL_LIST(internal_organs)
 
 /mob/living/carbon/human/get_ingested_reagents()
 	if(should_have_organ(BP_STOMACH))

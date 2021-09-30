@@ -1,8 +1,12 @@
-/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
+/mob/Destroy() //This makes sure that mobs with clients/keys are not just deleted from the game.
 	STOP_PROCESSING(SSmobs, src)
 	global.dead_mob_list_ -= src
 	global.living_mob_list_ -= src
 	global.player_list -= src
+
+	QDEL_NULL_LIST(pinned)
+	QDEL_NULL_LIST(embedded)
+
 	unset_machine()
 	QDEL_NULL(hud_used)
 	if(istype(ability_master))
