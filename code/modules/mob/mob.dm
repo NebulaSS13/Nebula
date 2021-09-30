@@ -582,7 +582,7 @@
 						continue
 					if(A.invisibility > see_invisible)
 						continue
-					if(is_type_in_list(A, shouldnt_see))
+					if(LAZYLEN(shouldnt_see) && is_type_in_list(A, shouldnt_see))
 						continue
 					stat(A)
 
