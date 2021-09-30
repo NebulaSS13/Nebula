@@ -19,6 +19,8 @@
 
 /obj/item/energy_blade/ninja/Initialize()
 	. = ..()
+	if(!ismob(loc))
+		return INITIALIZE_HINT_QDEL
 	START_PROCESSING(SSobj, src)
 
 /obj/item/energy_blade/ninja/Destroy()
@@ -26,7 +28,7 @@
 	. = ..()
 
 /obj/item/energy_blade/ninja/is_special_cutting_tool(var/high_power)
-	return TRUE
+	return active
 
 /obj/item/energy_blade/ninja/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER

@@ -152,7 +152,7 @@
 	handle_click_empty(M)
 	return 0
 
-/obj/item/gun/energy/plasmacutter/is_special_cutting_tool()
+/obj/item/gun/energy/plasmacutter/is_special_cutting_tool(var/high_power)
 	return TRUE
 
 /obj/item/gun/energy/incendiary_laser
