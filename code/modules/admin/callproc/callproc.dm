@@ -143,7 +143,7 @@
 				if(isnull(current)) return CANCEL
 				current = text2path(current)
 				if(!ispath(current))
-					to_chat("Inputed a bad path: '[current]'")
+					to_chat(usr, "Inputed a bad path: '[current]'")
 					return CANCEL
 
 			if("obj reference")
