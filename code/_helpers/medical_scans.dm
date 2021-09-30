@@ -279,7 +279,7 @@
 					rowdata += "<span class='bad'>[capitalize(get_wound_severity(E["brute_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] physical trauma</span>"
 				if(E["burn_dam"])
 					rowdata += "<span class='average'>[capitalize(get_wound_severity(E["burn_ratio"], (E["limb_flags"] & ORGAN_FLAG_HEALS_OVERKILL)))] burns</span>"
-			rowdata += "</td><td>[jointext(rowdata, "<br>")]</td>"
+			row += "</td><td>[jointext(rowdata, "<br>")]</td>"
 
 		if(skill_level >= SKILL_ADEPT)
 			var/list/status = list()
