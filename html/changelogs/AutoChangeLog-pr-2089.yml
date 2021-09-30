@@ -1,0 +1,5 @@
+author: Andromeda-K22
+delete-after: true
+changes:
+  - admin: the player panel has been moved - can still be accessed by the usual verbs
+      and right-click context menu.
