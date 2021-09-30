@@ -10,6 +10,8 @@
 // See /mob/living/carbon/human for this one.
 /mob/proc/get_organ(var/zone)
 	return
+/mob/proc/get_organs()
+	return
 // End grab casting stubs.
 /mob/proc/get_internal_organ(var/organ_tag)
 	return
