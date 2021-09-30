@@ -131,13 +131,18 @@
 	desc = "A cheap, plastic replica of an energy sword. Realistic sounds! Ages 8 and up."
 	sharp = FALSE
 	edge =  FALSE
+	force = 1
+	throwforce = 1
+	attack_verb = list("hit")
+	material = /decl/material/solid/plastic
+
+	active_hitsound = 'sound/weapons/genhit.ogg'
 	active_descriptor = "extended"
-	active_force =      1
+	active_force = 1
 	active_throwforce = 1
-	force =             1
-	throwforce =        1
-	active_edge =       FALSE
-	active_sharp =      FALSE
+	active_attack_verb = list("hit")
+	active_edge = FALSE
+	active_sharp = FALSE
 
 /obj/item/sword/katana/toy
 	name = "toy katana"
