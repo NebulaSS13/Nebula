@@ -301,7 +301,7 @@ var/global/const/enterloopsanity = 100
 		if(isliving(AM))
 			var/mob/living/M = AM
 			M.turf_collision(src, TT.speed)
-			if(M.pinned)
+			if(LAZYLEN(M.pinned))
 				return
 		addtimer(CALLBACK(src, /turf/proc/bounce_off, AM, TT.init_dir), 2)
 	else if(isobj(AM))

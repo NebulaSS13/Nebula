@@ -92,8 +92,8 @@
 	var/radio_interrupt_cooldown = 0
 
 	var/unacidable = 0
-	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)
-	var/list/embedded = list()          // Embedded items, since simple mobs don't have organs.
+	var/list/pinned                     // Lazylist of things pinning this creature to walls (see living_defense.dm)
+	var/list/embedded                   // Embedded items, since simple mobs don't have organs.
 	var/list/languages = list()         // For speaking/listening.
 	var/species_language = null			// For species who want reset to use a specified default.
 	var/only_species_language  = 0		// For species who can only speak their default and no other languages. Does not effect understanding.

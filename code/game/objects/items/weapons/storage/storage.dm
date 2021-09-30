@@ -342,7 +342,7 @@
 	if(!istype(scooped))
 		return FALSE
 
-	if(!scooped.holder_type || scooped.buckled || scooped.pinned.len || scooped.mob_size > MOB_SIZE_SMALL || scooped != user || src.loc == scooped)
+	if(!scooped.holder_type || scooped.buckled || LAZYLEN(scooped.pinned) || scooped.mob_size > MOB_SIZE_SMALL || scooped != user || src.loc == scooped)
 		return FALSE
 
 	if(!do_after(user, 1 SECOND, src))
