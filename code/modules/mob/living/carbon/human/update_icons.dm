@@ -675,7 +675,7 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
-	if(!tail_organ)
+	if(!istype(tail_organ))
 		return
 	overlays_standing[HO_TAIL_OVER_LAYER] =  null
 	overlays_standing[HO_TAIL_UNDER_LAYER] = null
@@ -689,6 +689,8 @@ var/global/list/damage_icon_parts = list()
 		update_icon()
 
 /mob/living/carbon/human/proc/get_tail_icon(var/obj/item/organ/external/tail/tail_organ)
+	if(!istype(tail_organ))
+		return
 	var/icon_key = "[bodytype.get_icon_cache_uid(src)][skin_colour][hair_colour]"
 	var/icon/tail_icon = tail_icon_cache[icon_key]
 	if(!tail_icon)
@@ -710,28 +712,23 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/set_dir()
 	. = ..()
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
-	if(!tail_organ)
-		return
-	if(. && tail_organ.get_tail())
+	if(. && istype(tail_organ) && tail_organ.get_tail())
 		update_tail_showing()
 
 
 /mob/living/carbon/human/proc/set_tail_state(var/t_state)
 	var/image/tail_overlay = overlays_standing[(dir == NORTH) ? HO_TAIL_OVER_LAYER : HO_TAIL_UNDER_LAYER]
-	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
-	if(!tail_organ)
-		return null
-
-	if(tail_overlay && tail_organ.get_tail_animation())
-		tail_overlay.icon_state = t_state
+	if(tail_overlay)
+		var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
+		if(istype(tail_organ) && tail_organ.get_tail_animation())
+			tail_overlay.icon_state = t_state
 		return tail_overlay
-	return null
 
 //Not really once, since BYOND can't do that.
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
 /mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
-	if(!tail_organ)
+	if(!istype(tail_organ))
 		return
 	var/t_state = "[tail_organ.get_tail()]_once"
 
@@ -751,7 +748,7 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/proc/animate_tail_start(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
-	if(!tail_organ)
+	if(!istype(tail_organ))
 		return
 	if(tail_organ.tail_states)
 		set_tail_state("[tail_organ.get_tail()]_slow[rand(1, tail_organ.tail_states)]")
@@ -760,16 +757,14 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/proc/animate_tail_fast(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
-	if(!tail_organ)
-		return
-	if(tail_organ.tail_states)
+	if(istype(tail_organ) && tail_organ.tail_states)
 		set_tail_state("[tail_organ.get_tail()]_loop[rand(1, tail_organ.tail_states)]")
 		if(update_icons)
 			queue_icon_update()
 
 /mob/living/carbon/human/proc/animate_tail_reset(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
-	if(!tail_organ)
+	if(!istype(tail_organ))
 		return
 	if(stat != DEAD && tail_organ.tail_states > 0)
 		set_tail_state("[tail_organ.get_tail()]_idle[rand(1,tail_organ.tail_states)]")
@@ -781,12 +776,10 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/proc/animate_tail_stop(var/update_icons=1)
 	var/obj/item/organ/external/tail/tail_organ = get_tail_organ()
-	if(!tail_organ)
-		return
-	set_tail_state("[tail_organ.get_tail()]_static")
-
-	if(update_icons)
-		queue_icon_update()
+	if(istype(tail_organ))
+		set_tail_state("[tail_organ.get_tail()]_static")
+		if(update_icons)
+			queue_icon_update()
 
 //Adds a collar overlay above the helmet layer if the suit has one
 //	Suit needs an identically named sprite in icons/mob/collar.dmi
