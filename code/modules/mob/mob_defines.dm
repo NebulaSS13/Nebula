@@ -28,7 +28,7 @@
 
 	var/mob_flags
 	var/last_quick_move_time = 0
-	var/list/client_images = list() // List of images applied to/removed from the client on login/logout
+	var/list/client_images // Lazylist of images applied to/removed from the client on login/logout
 	var/datum/mind/mind
 
 	var/lastKnownIP = null
@@ -94,7 +94,7 @@
 	var/unacidable = 0
 	var/list/pinned                     // Lazylist of things pinning this creature to walls (see living_defense.dm)
 	var/list/embedded                   // Embedded items, since simple mobs don't have organs.
-	var/list/languages = list()         // For speaking/listening.
+	var/list/languages = list()         // TODO: lazylist this var. For speaking/listening.
 	var/species_language = null			// For species who want reset to use a specified default.
 	var/only_species_language  = 0		// For species who can only speak their default and no other languages. Does not effect understanding.
 	var/list/speak_emote = list("says") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
@@ -128,8 +128,8 @@
 	var/can_pull_mobs = MOB_PULL_SAME       // Whether or not the mob can pull other mobs.
 
 	var/datum/dna/dna = null//Carbon
-	var/list/active_genes=list()
-	var/list/mutations = list() //Carbon -- Doohl
+	var/list/active_genes
+	var/list/mutations = list() // TODO: Lazylist this var.
 	//see: setup.dm for list of mutations
 
 	var/radiation = 0.0//Carbon
@@ -162,8 +162,8 @@
 	//so don't treat them as being SSD even though their client var is null.
 	var/mob/teleop = null
 
-	var/turf/listed_turf = null  	//the current turf being examined in the stat panel
-	var/list/shouldnt_see = list()	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes
+	var/turf/listed_turf  //the current turf being examined in the stat panel
+	var/list/shouldnt_see // Lazylist of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes
 
 	var/mob_size = MOB_SIZE_MEDIUM
 
@@ -171,7 +171,7 @@
 
 	var/datum/skillset/skillset = /datum/skillset
 
-	var/list/additional_vision_handlers = list() //Basically a list of atoms from which additional vision data is retrieved
+	var/list/additional_vision_handlers // A lazylist of atoms from which additional vision data is retrieved
 
 	var/list/progressbars = null //for stacking do_after bars
 

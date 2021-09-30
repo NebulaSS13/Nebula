@@ -80,7 +80,6 @@
 /datum/dna/gene/basic/cold_resist/can_activate(var/mob/M,var/flags)
 	if(flags & MUTCHK_FORCED)
 		return 1
-	//	return !(/datum/dna/gene/basic/heat_resist in M.active_genes)
 	// Probability check
 	var/_prob=30
 	//if(mHeatres in M.mutations)
