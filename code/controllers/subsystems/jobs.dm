@@ -529,10 +529,11 @@ SUBSYSTEM_DEF(jobs)
 		H.StoreMemory(remembered_info, /decl/memory_options/system)
 
 	var/alt_title = null
-	if(H.mind)
-		H.mind.assigned_job = job
-		H.mind.assigned_role = rank
-		alt_title = H.mind.role_alt_title
+	if(!H.mind)
+		H.mind_initialize()
+	H.mind.assigned_job = job
+	H.mind.assigned_role = rank
+	alt_title = H.mind.role_alt_title
 
 	var/mob/other_mob = job.handle_variant_join(H, alt_title)
 	if(other_mob)
