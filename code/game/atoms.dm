@@ -212,6 +212,8 @@ its easier to just keep the beam vertical.
 
 	to_chat(user, "[html_icon(src)] That's [f_name] [suffix]")
 	to_chat(user, desc)
+	if (health_max)
+		examine_damage_state(user)
 	return TRUE
 
 // called by mobs when e.g. having the atom as their machine, loc (AKA mob being inside the atom) or buckled var set.

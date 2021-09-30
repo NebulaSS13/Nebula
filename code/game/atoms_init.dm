@@ -59,6 +59,10 @@
 		if(istype(T))
 			T.recalc_atom_opacity()
 
+	if (health_max)
+		health_current = health_max
+		update_icon()
+
 	return INITIALIZE_HINT_NORMAL
 
 //called if Initialize returns INITIALIZE_HINT_LATELOAD
