@@ -106,7 +106,7 @@
 /datum/extension/lockable/proc/attackby(var/obj/item/W, var/mob/user)
 	var/obj/item/A = holder
 	if(locked)
-		if (!is_digital_lock && istype(W, /obj/item/energy_blade/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [holder]"))
+		if (!is_digital_lock && istype(W, /obj/item/energy_blade/ninja) && emag_act(INFINITY, user, "You slice through the lock of \the [holder]"))
 			spark_at(A.loc, amount=5)
 			playsound(A.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			return TRUE

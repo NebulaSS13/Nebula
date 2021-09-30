@@ -5,11 +5,11 @@
 	icon_keyboard = null
 	icon_screen = "invaders"
 	var/random = TRUE
-	var/list/prizes = list(
+	var/static/list/prizes = list(
 		/obj/item/storage/box/snappops =                         200,
 		/obj/item/toy/blink =                                    200,
 		/obj/item/clothing/under/syndicate/tacticool =           200,
-		/obj/item/toy/sword =                                    200,
+		/obj/item/energy_blade/sword/toy =                       200,
 		/obj/item/gun/projectile/revolver/capgun =               200,
 		/obj/item/gun/launcher/foam/crossbow =                   200,
 		/obj/item/storage/fancy/crayons =                        200,
