@@ -12,7 +12,7 @@
 
 //Mob procs for scooping up
 /mob/living/proc/get_scooped(var/mob/living/carbon/human/grabber, var/self_grab)
-	if(!holder_type || buckled || pinned.len)
+	if(!holder_type || buckled || LAZYLEN(pinned))
 		return
 
 	if(self_grab)

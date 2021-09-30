@@ -258,7 +258,7 @@
 /mob/proc/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
 	if(status_flags & ENABLE_AI)
 		return TRUE
-	if((incapacitation_flags & INCAPACITATION_FORCELYING) && (resting || pinned.len))
+	if((incapacitation_flags & INCAPACITATION_FORCELYING) && (resting || LAZYLEN(pinned)))
 		return TRUE
 	if((incapacitation_flags & INCAPACITATION_RESTRAINED) && restrained())
 		return TRUE
@@ -678,15 +678,15 @@
 	return visible_implants
 
 /mob/proc/embedded_needs_process()
-	return (embedded.len > 0)
+	return !!LAZYLEN(embedded)
 
 /mob/proc/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	if(!LAZYLEN(get_visible_implants(0))) //Yanking out last object - removing verb.
 		verbs -= /mob/proc/yank_out_object
 	for(var/obj/item/O in pinned)
 		if(O == implant)
-			pinned -= O
-		if(!pinned.len)
+			LAZYREMOVE(pinned, O)
+		if(!LAZYLEN(pinned))
 			anchored = 0
 	implant.dropInto(loc)
 	implant.add_blood(src)
@@ -697,7 +697,7 @@
 	. = TRUE
 
 /mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
-	embedded -= implant
+	LAZYREMOVE(embedded, implant)
 	adjustBruteLoss(5)
 	adjustFireLoss(10)
 	. = ..()
