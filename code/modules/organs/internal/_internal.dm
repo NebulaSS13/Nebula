@@ -22,7 +22,7 @@
 			if(!E)
 				. = INITIALIZE_HINT_QDEL
 				CRASH("[src] spawned in [holder] without a parent organ: [parent_organ].")
-			E.internal_organs |= src
+			LAZYDISTINCTADD(E.internal_organs, src)
 			E.cavity_max_w_class = max(E.cavity_max_w_class, w_class)
 			E.update_internal_organs_cost()
 
@@ -30,10 +30,9 @@
 	if(owner)
 		owner.internal_organs -= src
 		owner.internal_organs_by_name -= organ_tag
-		while(null in owner.internal_organs)
-			owner.internal_organs -= null
 		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
-		if(istype(E)) E.internal_organs -= src
+		if(istype(E))
+			LAZYREMOVE(E.internal_organs, src)
 	return ..()
 
 /obj/item/organ/internal/set_dna(var/datum/dna/new_dna)
@@ -47,7 +46,7 @@
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(istype(parent)) //TODO ensure that we don't have to check this.
 		removed(user, 0)
-		parent.implants += src
+		LAZYADD(parent.implants, src)
 
 /obj/item/organ/internal/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
 	if(owner)
@@ -59,7 +58,7 @@
 		if(detach)
 			var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
 			if(affected)
-				affected.internal_organs -= src
+				LAZYREMOVE(affected.internal_organs, src)
 				status |= ORGAN_CUT_AWAY
 	..()
 
@@ -79,8 +78,8 @@
 
 	STOP_PROCESSING(SSobj, src)
 	target.internal_organs |= src
-	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src
+	LAZYDISTINCTADD(affected.internal_organs, src)
 	return 1
 
 /obj/item/organ/internal/die()
@@ -95,7 +94,8 @@
 		while(null in owner.internal_organs)
 			owner.internal_organs -= null
 		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
-		if(istype(E)) E.internal_organs -= src
+		if(istype(E))
+			LAZYREMOVE(E.internal_organs, src)
 	..()
 
 /obj/item/organ/internal/is_usable()

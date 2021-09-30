@@ -98,8 +98,6 @@
 		return
 	var/mob/living/carbon/human/H = M
 	for(var/obj/item/organ/external/E in H.organs)
-		if(!LAZYLEN(E.implants))
-			continue
 		for(var/obj/effect/spider/spider in E.implants)
 			if(prob(25))
 				E.implants -= spider

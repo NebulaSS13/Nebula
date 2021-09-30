@@ -33,7 +33,7 @@
 /obj/item/organ/external/proc/can_attach_modular_limb_here(var/mob/living/carbon/human/user)
 	var/list/limb_data = user?.species?.has_limbs[organ_tag]
 	if(islist(limb_data) && limb_data["has_children"] > 0)
-		. = (length(children) < limb_data["has_children"])
+		. = (LAZYLEN(children) < limb_data["has_children"])
 
 /obj/item/organ/external/proc/can_be_attached_modular_limb(var/mob/living/carbon/user)
 	var/bodypart_cat = get_modular_limb_category()

@@ -23,6 +23,6 @@
 			imp.implanted = TRUE
 			var/obj/item/organ/external/affected = H.get_organ(BP_HEAD)
 			if(affected)
-				affected.implants += imp
+				LAZYADD(affected.implants, imp)
 				imp.part = affected
 			to_chat(H, SPAN_DANGER("As a registered psionic, you are fitted with a psi-dampening control implant. Using psi-power while the implant is active will result in neural shocks and your violation being reported."))

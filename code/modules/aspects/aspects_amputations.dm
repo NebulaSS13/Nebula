@@ -29,12 +29,6 @@
 	if(. && apply_to_limb)
 		var/obj/item/organ/external/O = holder.organs_by_name[apply_to_limb]
 		if(istype(O))
-			holder.organs_by_name[apply_to_limb] = null
-			holder.organs -= O
-			if(O.children) // This might need to become recursive.
-				for(var/obj/item/organ/external/child in O.children)
-					holder.organs_by_name[child.organ_tag] = null
-					holder.organs -= child
 			qdel(O)
 
 /decl/aspect/amputation/left_arm

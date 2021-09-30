@@ -76,7 +76,7 @@ var/global/list/symbiote_starting_points = list()
 	if(host)
 		var/obj/item/organ/external/head = host.get_organ(BP_HEAD)
 		symbiote.host = host
-		head.implants += symbiote
+		LAZYADD(head.implants, symbiote)
 		symbiote.forceMove(head)
 		if(!symbiote.host_brain)
 			symbiote.host_brain = new(symbiote)

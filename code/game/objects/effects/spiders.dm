@@ -108,22 +108,26 @@
 	STOP_PROCESSING(SSobj, src)
 	if(istype(loc, /obj/item/organ/external))
 		var/obj/item/organ/external/O = loc
-		O.implants -= src
+		LAZYREMOVE(O.implants, src)
 	. = ..()
 
 /obj/effect/spider/eggcluster/Process()
+
+	if(!loc)
+		qdel(src)
+		return 
+
 	if(prob(80))
 		amount_grown += rand(0,2)
+
 	if(amount_grown >= 100)
 		var/num = rand(3,9)
-		var/obj/item/organ/external/O = null
 		if(istype(loc, /obj/item/organ/external))
-			O = loc
-
-		for(var/i=0, i<num, i++)
-			var/spiderling = new /obj/effect/spider/spiderling(loc, src)
-			if(O)
-				O.implants += spiderling
+			var/obj/item/organ/external/O = loc
+			for(var/i=0, i<num, i++)
+				LAZYADD(O.implants, new /obj/effect/spider/spiderling(O, src))
+		else
+			new /obj/effect/spider/spiderling(loc, src)
 		qdel(src)
 
 /obj/effect/spider/proc/disturbed()

@@ -92,7 +92,7 @@
 		. += "Bleeding"
 	if(status & ORGAN_BROKEN)
 		. += capitalize(broken_description)
-	if (implants.len)
+	if (LAZYLEN(implants))
 		var/unknown_body = 0
 		for(var/I in implants)
 			var/obj/item/implant/imp = I

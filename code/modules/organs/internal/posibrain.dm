@@ -351,7 +351,9 @@
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(istype(parent))
 		removed(user, 0)
-		parent.implants += transfer_and_delete()
+		var/brain = transfer_and_delete()
+		if(brain)
+			LAZYADD(parent.implants, brain)
 
 /obj/item/organ/internal/mmi_holder/removed()
 	if(owner && owner.mind)

@@ -157,7 +157,7 @@
 	L.imp_in = M
 	L.implanted = 1
 	var/obj/item/organ/external/affected = M.organs_by_name[BP_HEAD]
-	affected.implants += L
+	LAZYDISTINCTADD(affected.implants, L)
 	L.part = affected
 	L.implanted(src)
 
@@ -388,8 +388,10 @@
 	var/list/EMP = list()
 	for(var/obj/item/organ/external/limb in limbs)
 		EMP += limb
-		EMP += limb.internal_organs
-		EMP += limb.implants
+		if(LAZYLEN(limb.internal_organs))
+			EMP += limb.internal_organs
+		if(LAZYLEN(limb.implants))
+			EMP += limb.implants
 	for(var/atom/E in EMP)
 		E.emp_act(severity)
 
