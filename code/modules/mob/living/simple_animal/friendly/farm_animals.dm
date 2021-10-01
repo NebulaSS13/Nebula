@@ -103,6 +103,12 @@
 	skin_amount = 10
 
 	var/datum/reagents/udder = null
+	var/static/list/responses = list(
+		"looks at you imploringly",
+		"looks at you pleadingly",
+		"looks at you with a resigned expression",
+		"seems resigned to its fate"
+	)
 
 /mob/living/simple_animal/cow/Initialize()
 	. = ..()
@@ -127,21 +133,17 @@
 	if(udder && prob(5))
 		udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
 
-/mob/living/simple_animal/cow/attack_hand(mob/M)
-	if(!stat && M.a_intent == I_DISARM && stat != DEAD && !HAS_STATUS(src, STAT_WEAK))
-		M.visible_message("<span class='warning'>[M] tips over [src].</span>","<span class='notice'>You tip over [src].</span>")
+/mob/living/simple_animal/cow/attack_hand(mob/user)
+	if(!stat && user.a_intent == I_DISARM && stat != DEAD && !HAS_STATUS(src, STAT_WEAK))
+		user.visible_message(SPAN_NOTICE("\The [user] tips over \the [src]."))
 		SET_STATUS_MAX(src, STAT_WEAK, 30)
-		update_icon()
-		spawn(rand(20,50))
-			if(!stat && M)
-				update_icon()
-				var/list/responses = list(	"[src] looks at you imploringly.",
-											"[src] looks at you pleadingly",
-											"[src] looks at you with a resigned expression.",
-											"[src] seems resigned to its fate.")
-				to_chat(M, pick(responses))
-	else
-		..()
+		addtimer(CALLBACK(src, .proc/do_tip_response), rand(20, 50))
+		return TRUE
+	return ..()
+
+/mob/living/simple_animal/cow/proc/do_tip_response()
+	if(stat == CONSCIOUS)
+		visible_message("<b>\The [src]</b> [pick(responses)].")
 
 /mob/living/simple_animal/chick
 	name = "chick"
