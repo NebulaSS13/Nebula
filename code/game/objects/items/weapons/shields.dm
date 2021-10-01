@@ -106,6 +106,9 @@
 	can_block_lasers = TRUE
 	slowdown_general = 1.5
 
+/obj/item/shield/riot/metal/security //A cosmetic difference.
+	icon = 'icons/obj/items/shield/metal_security.dmi'
+
 /obj/item/shield/buckler
 	name = "buckler"
 	desc = "A wooden buckler used to block sharp things from entering your body back in the day.."
