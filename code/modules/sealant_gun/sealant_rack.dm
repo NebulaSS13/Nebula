@@ -2,6 +2,8 @@
 	name = "sealant tank rack"
 	icon = 'icons/obj/structures/sealant_props.dmi'
 	icon_state = "rack"
+	density = TRUE
+	anchored = TRUE
 	var/obj/item/gun/launcher/sealant/loaded_gun
 	var/list/tanks
 	var/max_tanks = 5

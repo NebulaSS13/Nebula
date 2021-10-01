@@ -9,6 +9,7 @@
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 	parts_amount = 2
 	parts_type = /obj/item/stack/material/strut
+	density = TRUE
 
 /obj/structure/rack/Initialize()
 	..()

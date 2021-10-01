@@ -7,6 +7,8 @@
 	name = "sealant tank injector"
 	icon = 'icons/obj/structures/sealant_props.dmi'
 	icon_state = "injector"
+	density = TRUE
+	anchored = TRUE
 
 	var/list/cartridges
 	var/obj/item/sealant_tank/loaded_tank
