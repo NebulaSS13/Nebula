@@ -116,6 +116,7 @@
 
 /obj/machinery/light/on_update_icon(var/trigger = 1)
 	atom_flags = atom_flags & ~ATOM_FLAG_CAN_BE_PAINTED
+	z_flags |= ZMM_MANGLE_PLANES
 	// Handle pixel offsets
 	default_pixel_y = 0
 	default_pixel_x = 0
@@ -158,7 +159,11 @@
 			on = 0
 
 	if(istype(lightbulb, /obj/item/light))
-		var/image/I = image(icon, _state)
+		var/image/I
+		if(on)
+			I = emissive_overlay(icon, _state)
+		else
+			I = image(icon, _state)
 		I.color = get_mode_color()
 		add_overlay(I)
 
