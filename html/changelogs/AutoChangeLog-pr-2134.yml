@@ -1,4 +1,0 @@
-author: MarinaGryphon
-delete-after: true
-changes:
-  - bugfix: fixes the emote keybind creating two windows
