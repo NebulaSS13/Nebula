@@ -1,0 +1,4 @@
+author: lolman360
+delete-after: true
+changes:
+  - bugfix: fixes charge pylon (electron reservoir) from shocking adherents
