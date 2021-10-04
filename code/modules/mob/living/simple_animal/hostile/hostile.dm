@@ -207,10 +207,10 @@
 		target_mob = user
 		MoveToTarget()
 
-/mob/living/simple_animal/hostile/attack_hand(mob/M)
+/mob/living/simple_animal/hostile/default_hurt_interaction(mob/user)
 	. = ..()
-	if(M.a_intent == I_HURT && !incapacitated(INCAPACITATION_KNOCKOUT))
-		target_mob = M
+	if(. && !incapacitated(INCAPACITATION_KNOCKOUT))
+		target_mob = user
 		MoveToTarget()
 
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)

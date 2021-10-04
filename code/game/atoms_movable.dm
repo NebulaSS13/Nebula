@@ -335,3 +335,5 @@
 /atom/movable/proc/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
 	return
 
+/atom/movable/proc/try_make_grab(var/mob/living/user)
+	return user.make_grab(src)

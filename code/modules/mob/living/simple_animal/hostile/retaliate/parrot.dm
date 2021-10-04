@@ -212,9 +212,9 @@
  * Attack responces
  */
 //Humans, monkeys, aliens
-/mob/living/simple_animal/hostile/retaliate/parrot/attack_hand(mob/user)
+/mob/living/simple_animal/hostile/retaliate/parrot/default_hurt_interaction(mob/user)
 	. = ..()
-	if(!client && !simple_parrot && !stat && user.a_intent == I_HURT)
+	if(!client && !simple_parrot && !stat)
 		if(parrot_state == PARROT_PERCH)
 			parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
 		parrot_interest = user
