@@ -139,11 +139,11 @@
 				if(isnull(current)) return CANCEL
 
 			if("type")
-				current = input("Enter type path for [arguments.len+1]\th argument") as null|text
-				if(isnull(current)) return CANCEL
-				current = text2path(current)
+				var/tpath = input("Enter type path for [arguments.len+1]\th argument") as null|text
+				if(isnull(tpath)) return CANCEL
+				current = text2path(tpath)
 				if(!ispath(current))
-					to_chat(usr, "Inputed a bad path: '[current]'")
+					to_chat(usr, SPAN_WARNING("Inputed a bad path: '[tpath]'"))
 					return CANCEL
 
 			if("obj reference")
