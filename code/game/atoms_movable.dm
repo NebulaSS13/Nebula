@@ -2,6 +2,19 @@
 	layer = OBJ_LAYER
 	appearance_flags = TILE_BOUND | PIXEL_SCALE | LONG_GLIDE
 	glide_size = 8
+
+	var/can_buckle = 0
+	var/buckle_movable = 0
+	var/buckle_allow_rotation = 0
+	var/buckle_layer_above = FALSE
+	var/buckle_dir = 0
+	var/buckle_lying = -1             // bed-like behavior, forces mob.lying = buckle_lying if != -1
+	var/buckle_pixel_shift            // ex. @"{'x':0,'y':0,'z':0}" //where the buckled mob should be pixel shifted to, or null for no pixel shift control
+	var/buckle_require_restraints = 0 // require people to be handcuffed before being able to buckle. eg: pipes
+	var/buckle_require_same_tile = FALSE
+	var/buckle_sound
+	var/mob/living/buckled_mob = null
+
 	var/movable_flags
 	var/last_move = null
 	var/anchored = 0
@@ -62,6 +75,13 @@
 		return -1
 
 	return 0
+
+/atom/movable/attack_hand(mob/user)
+	// Unbuckle anything buckled to us.
+	if(can_buckle && buckled_mob)
+		user_unbuckle_mob(user)
+		return TRUE
+	return ..()
 
 /atom/movable/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
 	..()
@@ -124,10 +144,13 @@
 	..()
 
 /atom/movable/proc/forceMove(atom/destination)
+
 	if(QDELETED(src) && !QDESTROYING(src) && !isnull(destination))
 		CRASH("Attempted to forceMove a QDELETED [src] out of nullspace!!!")
+
 	if(loc == destination)
-		return 0
+		return FALSE
+
 	var/is_origin_turf = isturf(loc)
 	var/is_destination_turf = isturf(destination)
 	// It is a new area if:
@@ -154,34 +177,61 @@
 					AM.Crossed(src)
 			if(is_new_area && is_destination_turf)
 				destination.loc.Entered(src, origin)
-	return 1
 
-/atom/movable/forceMove(atom/dest)
-	var/old_loc = loc
+	. = TRUE
+
+	// observ
+	if(!loc)
+		events_repository.raise_event(/decl/observ/moved, src, origin, null)
+
+	// freelook
+	if(opacity)
+		updateVisibility(src)
+
+	// lighting
+	if (light_source_solo)
+		light_source_solo.source_atom.update_light()
+	else if (light_source_multi)
+		var/datum/light_source/L
+		var/thing
+		for (thing in light_source_multi)
+			L = thing
+			L.source_atom.update_light()
+
+	if(buckled_mob)
+		if(isturf(loc))
+			buckled_mob.glide_size = glide_size // Setting loc apparently does animate with glide size.
+			buckled_mob.forceMove(loc)
+			refresh_buckled_mob()
+		else
+			unbuckle_mob()
+
+/atom/movable/set_dir(ndir)
 	. = ..()
-	if (.)
-		// observ
-		if(!loc)
-			events_repository.raise_event(/decl/observ/moved, src, old_loc, null)
+	if(.)
+		refresh_buckled_mob()
 
-		// freelook
-		if(opacity)
-			updateVisibility(src)
-
-		// lighting
-		if (light_source_solo)
-			light_source_solo.source_atom.update_light()
-		else if (light_source_multi)
-			var/datum/light_source/L
-			var/thing
-			for (thing in light_source_multi)
-				L = thing
-				L.source_atom.update_light()
+/atom/movable/proc/refresh_buckled_mob()
+	if(buckled_mob)
+		buckled_mob.set_dir(buckle_dir || dir)
+		buckled_mob.reset_plane_and_layer()
 
 /atom/movable/Move(...)
+
 	var/old_loc = loc
+
 	. = ..()
-	if (.)
+
+	if(.)
+
+		if(buckled_mob)
+			if(isturf(loc))
+				buckled_mob.glide_size = glide_size // Setting loc apparently does animate with glide size.
+				buckled_mob.forceMove(loc)
+				refresh_buckled_mob()
+			else
+				unbuckle_mob()
+
 		if(!loc)
 			events_repository.raise_event(/decl/observ/moved, src, old_loc, null)
 
@@ -310,6 +360,7 @@
 	return BULLET_IMPACT_NONE
 
 /atom/movable/handle_grab_interaction(var/mob/user)
+
 	// Anchored check so we can operate switches etc on grab intent without getting grab failure msgs.
 	// NOTE: /mob/living overrides this to return FALSE in favour of using default_grab_interaction
 	if(isliving(user) && user.a_intent == I_GRAB && !user.lying && !anchored)
@@ -330,6 +381,110 @@
 
 /atom/movable/proc/get_mob()
 	return
+/atom/movable/proc/can_buckle_mob(var/mob/living/dropping)
+	. = (can_buckle && istype(dropping) && !dropping.buckled && !dropping.buckled_mob && !buckled_mob)
+
+/atom/movable/receive_mouse_drop(atom/dropping, mob/living/user)
+	. = ..()
+	if(!. && can_buckle_mob(dropping))
+		user_buckle_mob(dropping, user)
+		return TRUE
+
+/atom/movable/proc/buckle_mob(mob/living/M)
+	if(buckled_mob) //unless buckled_mob becomes a list this can cause problems
+		return FALSE
+	if(!istype(M) || (M.loc != loc) || M.buckled || LAZYLEN(M.pinned) || (buckle_require_restraints && !M.restrained()))
+		return FALSE
+	if(ismob(src))
+		var/mob/living/carbon/C = src //Don't wanna forget the xenos.
+		if(M != src && C.incapacitated())
+			return FALSE
+
+	M.buckled = src
+	M.facing_dir = null
+	if(!buckle_allow_rotation)
+		M.set_dir(buckle_dir ? buckle_dir : dir)
+	M.UpdateLyingBuckledAndVerbStatus()
+	M.update_floating()
+	buckled_mob = M
+
+	if(buckle_sound)
+		playsound(src, buckle_sound, 20)
+
+	post_buckle_mob(M)
+	return TRUE
+
+/atom/movable/proc/unbuckle_mob()
+	if(buckled_mob && buckled_mob.buckled == src)
+		. = buckled_mob
+		buckled_mob.buckled = null
+		buckled_mob.anchored = initial(buckled_mob.anchored)
+		buckled_mob.UpdateLyingBuckledAndVerbStatus()
+		buckled_mob.update_floating()
+		buckled_mob = null
+		post_buckle_mob(.)
+
+/atom/movable/proc/post_buckle_mob(mob/living/M)
+	if(M)
+		M.reset_offsets(4)
+		M.reset_plane_and_layer()
+	if(buckled_mob && buckled_mob != M)
+		buckled_mob.reset_offsets(4)
+		buckled_mob.reset_plane_and_layer()
+
+/atom/movable/proc/user_buckle_mob(mob/living/M, mob/user)
+	if(M != user && user.incapacitated())
+		return FALSE
+	if(M == buckled_mob)
+		return FALSE
+	if(!M.can_be_buckled(user))
+		return FALSE
+
+	add_fingerprint(user)
+	unbuckle_mob()
+
+	//can't buckle unless you share locs so try to move M to the obj if buckle_require_same_tile turned off.
+	if(M.loc != src.loc)
+		if(buckle_require_same_tile)
+			return FALSE
+		M.dropInto(loc)
+
+	. = buckle_mob(M)
+	if(.)
+		show_buckle_message(M, user)
+
+/atom/movable/proc/show_buckle_message(var/mob/buckled, var/mob/buckling)
+	if(buckled == buckling)
+		visible_message(\
+			SPAN_NOTICE("\The [buckled] buckles themselves to \the [src]."),\
+			SPAN_NOTICE("You buckle yourself to \the [src]."),\
+			SPAN_NOTICE("You hear metal clanking."))
+	else
+		visible_message(\
+			SPAN_NOTICE("\The [buckled] is buckled to \the [src] by \the [buckling]!"),\
+			SPAN_NOTICE("You are buckled to \the [src] by \the [buckling]!"),\
+			SPAN_NOTICE("You hear metal clanking."))
+
+/atom/movable/proc/user_unbuckle_mob(mob/user)
+	var/mob/living/M = unbuckle_mob()
+	if(M)
+		show_unbuckle_message(M, user)
+		for(var/obj/item/grab/G AS_ANYTHING in (M.grabbed_by|grabbed_by))
+			qdel(G)
+		add_fingerprint(user)
+	return M
+
+/atom/movable/proc/show_unbuckle_message(var/mob/buckled, var/mob/buckling)
+	if(buckled == buckling)
+		visible_message(\
+			SPAN_NOTICE("\The [buckled] was unbuckled by \the [buckling]!"),\
+			SPAN_NOTICE("You were unbuckled from \the [src] by \the [buckling]."),\
+			SPAN_NOTICE("You hear metal clanking."))
+	else
+		visible_message(\
+			SPAN_NOTICE("\The [buckled] unbuckled themselves!"),\
+			SPAN_NOTICE("You unbuckle yourself from \the [src]."),\
+			SPAN_NOTICE("You hear metal clanking."))
 
 /atom/movable/proc/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
 	return

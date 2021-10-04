@@ -26,13 +26,16 @@
 	return FALSE
 
 /atom/proc/attack_hand(mob/user)
-	. = handle_grab_interaction(user)
-	if(!. && LAZYLEN(climbers) && !(user in climbers))
+
+	if(handle_grab_interaction(user))
+		return TRUE
+
+	if(LAZYLEN(climbers) && !(user in climbers))
 		user.visible_message(
 			SPAN_DANGER("\The [user] shakes \the [src]!"),
 			SPAN_DANGER("You shake \the [src]!"))
 		object_shaken()
-		. = TRUE
+		return TRUE
 
 /mob/proc/attack_empty_hand()
 	return
