@@ -27,7 +27,6 @@
 	var/uses_charge
 	var/list/charge_costs
 	var/list/datum/matter_synth/synths
-	var/list/datum/stack_recipe/recipes
 
 /obj/item/stack/Initialize(mapload, amount, material)
 
@@ -65,8 +64,12 @@
 /obj/item/stack/get_matter_amount_modifier()
 	. = amount * matter_multiplier
 
+/obj/item/stack/proc/get_recipes()
+	return
+
 /obj/item/stack/proc/list_recipes(mob/user, recipes_sublist)
-	if (!recipes)
+	var/list/recipes = get_recipes()
+	if(!islist(recipes) || !length(recipes))
 		return
 	if (!src || get_amount() <= 0)
 		close_browser(user, "window=stack")
@@ -160,7 +163,7 @@
 	if (href_list["make"])
 		if (src.get_amount() < 1) qdel(src) //Never should happen
 
-		var/list/recipes_list = recipes
+		var/list/recipes_list = get_recipes()
 		if (href_list["sublist"])
 			var/datum/stack_recipe_list/srl = recipes_list[text2num(href_list["sublist"])]
 			recipes_list = srl.recipes

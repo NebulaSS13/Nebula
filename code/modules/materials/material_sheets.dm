@@ -32,11 +32,8 @@
 		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 	update_strings()
 
-/obj/item/stack/material/list_recipes(mob/user, recipes_sublist)
-	if(!material)
-		return
-	recipes = material.get_recipes(reinf_material && reinf_material.type)
-	..() 
+/obj/item/stack/material/get_recipes()
+	return material.get_recipes(reinf_material && reinf_material.type)
 
 /obj/item/stack/material/get_codex_value()
 	return (material && !material.hidden_from_codex) ? "[lowertext(material.solid_name)] (material)" : ..()
@@ -335,9 +332,14 @@
 	max_icon_state = "sheet-strut-max"
 	stack_merge_type = /obj/item/stack/material/strut
 
-/obj/item/stack/material/strut/list_recipes(mob/user, recipes_sublist)
-	if(!material)
-		return
-	recipes = material.get_strut_recipes(reinf_material && reinf_material.type)
-	..() 
+/obj/item/stack/material/strut/cyborg
+	name = "metal strut synthesizer"
+	desc = "A device that makes metal strut."
+	gender = NEUTER
+	matter = null
+	uses_charge = 1
+	charge_costs = list(500)
+	material = /decl/material/solid/metal/steel
 
+/obj/item/stack/material/strut/get_recipes()
+	return material.get_strut_recipes(reinf_material && reinf_material.type)
