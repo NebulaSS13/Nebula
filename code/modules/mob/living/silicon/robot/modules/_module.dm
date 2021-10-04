@@ -68,7 +68,7 @@
 	finalize_synths(R)
 
 	if(R.client)
-		R.choose_icon(get_sprites_for(src))
+		R.choose_icon(get_sprites_for(R))
 
 /obj/item/robot_module/proc/build_equipment()
 	var/list/created_equipment = list()
