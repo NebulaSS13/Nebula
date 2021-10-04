@@ -1,19 +1,6 @@
 /mob/living/attack_hand(mob/user)
 	SHOULD_CALL_PARENT(TRUE)
-	if(!.)
-		. = ..()
-		if(!. && user)
-			switch(user.a_intent)
-				if(I_HURT)
-					. = default_hurt_interaction(user)
-				if(I_HELP)
-					. = default_help_interaction(user)
-				if(I_DISARM)
-					. = default_disarm_interaction(user)
-				if(I_GRAB)
-					. = default_grab_interaction(user)
-			if(!.)
-				. = default_interaction(user)
+	. = ..() || (user && default_interaction(user))
 
 /mob/living/proc/default_interaction(var/mob/user)
 
@@ -28,13 +15,15 @@
 		update_icon()
 		return TRUE
 
-	if(ishuman(user))
-		var/mob/living/carbon/H = user
-		if(H.a_intent == I_GRAB)
-			get_scooped(user, FALSE)
-			return TRUE
-
-	return FALSE
+	switch(user.a_intent)
+		if(I_HURT)
+			. = default_hurt_interaction(user)
+		if(I_HELP)
+			. = default_help_interaction(user)
+		if(I_DISARM)
+			. = default_disarm_interaction(user)
+		if(I_GRAB)
+			. = default_grab_interaction(user)
 
 /mob/living/proc/default_hurt_interaction(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
@@ -50,6 +39,9 @@
 
 /mob/living/proc/default_grab_interaction(var/mob/user)
 	SHOULD_CALL_PARENT(TRUE)
-	if(isliving(user) && CanPhysicallyInteract(user) && !user.lying)
-		return try_make_grab(user)
+	return (scoop_check(user) && get_scooped(user, user)) || try_make_grab(user)
+
+// This proc is where movable atoms handle being grabbed, but we handle it additionally in 
+// default_grab_interaction, so we override it here to return FALSE and avoid double-grabbing.
+/mob/living/handle_grab_interaction(var/mob/user)
 	return FALSE

@@ -124,6 +124,7 @@
 	. = ..()
 	if(!.)
 		Interact(user)
+		return TRUE
 
 /mob/living/bot/proc/Interact(var/mob/user)
 	add_fingerprint(user)

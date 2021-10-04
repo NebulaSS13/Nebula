@@ -309,13 +309,12 @@
 /atom/movable/proc/get_bullet_impact_effect_type()
 	return BULLET_IMPACT_NONE
 
-/atom/movable/attack_hand(mob/user)
+/atom/movable/handle_grab_interaction(var/mob/user)
 	// Anchored check so we can operate switches etc on grab intent without getting grab failure msgs.
-	if(isliving(user) && !user.lying && user.a_intent == I_GRAB && !anchored)
-		var/mob/living/M = user
-		M.make_grab(src)
-		return 0
-	. = ..()
+	// NOTE: /mob/living overrides this to return FALSE in favour of using default_grab_interaction
+	if(isliving(user) && user.a_intent == I_GRAB && !user.lying && !anchored)
+		return try_make_grab(user)
+	return ..()
 
 /atom/movable/proc/pushed(var/pushdir)
 	set waitfor = FALSE
@@ -336,4 +335,4 @@
 	return
 
 /atom/movable/proc/try_make_grab(var/mob/living/user)
-	return user.make_grab(src)
+	return istype(user) && CanPhysicallyInteract(user) && !user.lying && user.make_grab(src)

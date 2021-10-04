@@ -21,24 +21,19 @@ Small, little HP, poisonous.
 	holder_type = /obj/item/holder/slug
 	faction = "Hostile Fauna"
 
-/mob/living/simple_animal/hostile/slug/proc/check_friendly_species(var/mob/living/carbon/human/H)
-	if(isliving(H))
-		var/mob/living/M = H
-		if(M.faction == faction)
-			return TRUE
-	return FALSE
+/mob/living/simple_animal/hostile/slug/proc/check_friendly_species(var/mob/living/M)
+	return istype(M) && M.faction == faction
 
 /mob/living/simple_animal/hostile/slug/ListTargets(var/dist = 7)
 	. = ..()
-	for(var/a in .)
-		if(check_friendly_species(a))
-			. -= a
+	for(var/mob/living/M in .)
+		if(M.faction == faction)
+			. -= M
 
-/mob/living/simple_animal/hostile/slug/get_scooped(var/mob/living/carbon/grabber)
-	if(check_friendly_species(grabber))
-		..()
-	else
-		to_chat(grabber, "<span class='warning'>\The [src] wriggles out of your hands before you can pick it up!</span>")
+/mob/living/simple_animal/hostile/slug/get_scooped(var/mob/living/carbon/target, var/mob/living/initiator)
+	if(target == initiator || (istype(initiator) && initiator.faction == faction))
+		return ..()
+	to_chat(initiator, SPAN_WARNING("\The [src] wriggles out of your hands before you can pick it up!"))
 
 /mob/living/simple_animal/hostile/slug/proc/attach(var/mob/living/carbon/human/H)
 	var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)

@@ -230,7 +230,7 @@
 
 	held_mob.mob_size = MOB_SIZE_SMALL
 	held_mob.put_in_active_hand(held_item)
-	held_mob.get_scooped(holding_mob)
+	held_mob.get_scooped(holding_mob, holding_mob)
 
 	holding_mob.forceMove(exosuit)
 
