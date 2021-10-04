@@ -42,9 +42,9 @@
 	. = ..()
 	victim = null
 
-/mob/living/simple_animal/hostile/retaliate/giant_crab/attack_hand(mob/user)
+/mob/living/simple_animal/hostile/retaliate/giant_crab/default_hurt_interaction(mob/user)
 	. = ..()
-	if(ishuman(user))
+	if(. && ishuman(user))
 		reflect_unarmed_damage(user, BRUTE, "armoured carapace")
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/Life()

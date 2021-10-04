@@ -12,3 +12,6 @@
 
 /atom/movable/proc/get_object_size()
 	return ITEM_SIZE_NORMAL
+
+/atom/movable/proc/buckled_grab_check(var/mob/grabber)
+	return !grabber.buckled

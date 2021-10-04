@@ -669,24 +669,21 @@
 		else if (H.wrapped == W)
 			H.wrapped = null
 
-/mob/living/silicon/robot/attack_hand(mob/user)
+/mob/living/silicon/robot/default_help_interaction(mob/user)
+	if(ishuman(user))
+		user.attempt_hug(src)
+		return TRUE
+	. = ..()
 
-	add_fingerprint(user)
+/mob/living/silicon/robot/default_hurt_interaction(mob/user)
+	var/decl/species/user_species = user.get_species()
+	if(user_species?.can_shred(user))
+		attack_generic(user, rand(30,50), "slashed")
+		return TRUE
+	. = ..()
 
-	if(istype(user,/mob/living/carbon/human))
-
-		var/mob/living/carbon/human/H = user
-		if(H.a_intent == I_HELP && H.attempt_hug(src))
-			return TRUE
-
-		if(H.a_intent == I_GRAB)
-			return ..()
-
-		if(H.a_intent == I_HURT && H.species.can_shred(H))
-			attack_generic(H, rand(30,50), "slashed")
-			return TRUE
-
-	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
+/mob/living/silicon/robot/default_interaction(mob/user)
+	if(user.a_intent != I_GRAB && opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
 		var/datum/robot_component/cell_component = components["power cell"]
 		if(cell)
 			cell.update_icon()
@@ -702,6 +699,8 @@
 			var/obj/item/broken_device = cell_component.wrapped
 			to_chat(user, "You remove \the [broken_device].")
 			user.put_in_active_hand(broken_device)
+		return TRUE
+	. = ..()
 
 //Robots take half damage from basic attacks.
 /mob/living/silicon/robot/attack_generic(var/mob/user, var/damage, var/attack_message)

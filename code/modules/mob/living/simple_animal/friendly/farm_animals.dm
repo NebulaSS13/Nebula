@@ -117,14 +117,18 @@
 /mob/living/simple_animal/cow/attackby(var/obj/item/O, var/mob/user)
 	var/obj/item/chems/glass/G = O
 	if(stat == CONSCIOUS && istype(G) && ATOM_IS_OPEN_CONTAINER(G))
-		user.visible_message("<span class='notice'>[user] milks [src] using \the [O].</span>")
-		var/transfered = udder.trans_type_to(G, /decl/material/liquid/drink/milk, rand(5,10))
 		if(G.reagents.total_volume >= G.volume)
-			to_chat(user, "<span class='warning'>\The [O] is full.</span>")
-		if(!transfered)
-			to_chat(user, "<span class='warning'>The udder is dry. Wait a bit longer...</span>")
-	else
-		..()
+			to_chat(user, SPAN_WARNING("\The [O] is full."))
+			return TRUE
+		if(!udder.total_volume)
+			to_chat(user, SPAN_WARNING("The udder is dry. Wait a bit longer."))
+			return TRUE
+		user.visible_message(SPAN_NOTICE("\The [user] milks \the [src] using \the [O]."))
+		udder.trans_type_to(G, /decl/material/liquid/drink/milk, rand(5,10))
+		if(G.reagents.total_volume >= G.volume)
+			to_chat(user, SPAN_NOTICE("\The [O] is full."))
+		return TRUE
+	. = ..()
 
 /mob/living/simple_animal/cow/Life()
 	. = ..()
@@ -133,8 +137,8 @@
 	if(udder && prob(5))
 		udder.add_reagent(/decl/material/liquid/drink/milk, rand(5, 10))
 
-/mob/living/simple_animal/cow/attack_hand(mob/user)
-	if(!stat && user.a_intent == I_DISARM && stat != DEAD && !HAS_STATUS(src, STAT_WEAK))
+/mob/living/simple_animal/cow/default_disarm_interaction(mob/user)
+	if(stat != DEAD && !HAS_STATUS(src, STAT_WEAK))
 		user.visible_message(SPAN_NOTICE("\The [user] tips over \the [src]."))
 		SET_STATUS_MAX(src, STAT_WEAK, 30)
 		addtimer(CALLBACK(src, .proc/do_tip_response), rand(20, 50))

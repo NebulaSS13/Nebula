@@ -288,9 +288,12 @@ var/global/list/possible_say_verbs = list(
 		if(stat != 2) fold()
 	return
 
-/mob/living/silicon/pai/attack_hand(mob/user)
-	visible_message(SPAN_DANGER("[user] boops [src] on the head."))
-	fold()
+/mob/living/silicon/pai/default_interaction(mob/user)
+	. = ..()
+	if(!.)
+		visible_message(SPAN_NOTICE("\The [user] boops \the [src] on the head."))
+		fold()
+		return TRUE
 
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()

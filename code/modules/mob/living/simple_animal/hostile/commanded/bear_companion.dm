@@ -18,9 +18,9 @@
 	if(.)
 		src.emote("roars in rage!")
 
-/mob/living/simple_animal/hostile/commanded/bear/attack_hand(mob/M)
-	..()
-	if(M.a_intent == I_HURT)
+/mob/living/simple_animal/hostile/commanded/bear/default_hurt_interaction(mob/user)
+	. = ..()
+	if(.)
 		src.emote("roars in rage!")
 
 /mob/living/simple_animal/hostile/commanded/bear/listen()

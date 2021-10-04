@@ -171,7 +171,8 @@
 
 	if(A == src)
 		setClickCooldown(5)
-		return attack_self(user)
+		visible_message("\The [src] pokes itself.")
+		return TRUE
 	else if(adj)
 		setClickCooldown(arms ? arms.action_delay : 15)
 		admin_attack_log(user, A, "Attacked using \a [arms]", "Was attacked with \a [arms]", "used \a [arms] to attack")
@@ -424,9 +425,23 @@
 				return
 	return ..()
 
-/mob/living/exosuit/attack_hand(var/mob/user)
-	// Drag the pilot out if possible.
-	if(user.a_intent == I_HURT)
+/mob/living/exosuit/default_interaction(var/mob/user)
+	. = ..()
+	if(.)
+		// Toggle the hatch.
+		if(hatch_locked)
+			to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
+			return TRUE
+		hatch_closed = !hatch_closed
+		to_chat(user, SPAN_NOTICE("You [hatch_closed ? "close" : "open"] the [body.hatch_descriptor]."))
+		hud_open.queue_icon_update()
+		queue_icon_update()
+		return TRUE
+
+/mob/living/exosuit/default_hurt_interaction(var/mob/user)
+	. = ..()
+	if(.)
+		// Drag the pilot out if possible.
 		if(!LAZYLEN(pilots))
 			to_chat(user, SPAN_WARNING("There is nobody inside \the [src]."))
 		else if(!hatch_closed)
@@ -436,19 +451,6 @@
 				user.visible_message(SPAN_DANGER("\The [user] drags \the [pilot] out of \the [src]!"))
 				eject(pilot, silent=1)
 		return TRUE
-
-	// Otherwise toggle the hatch.
-	if(hatch_locked)
-		to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
-		return TRUE
-	hatch_closed = !hatch_closed
-	to_chat(user, SPAN_NOTICE("You [hatch_closed ? "close" : "open"] the [body.hatch_descriptor]."))
-	hud_open.queue_icon_update()
-	queue_icon_update()
-	return TRUE
-
-/mob/living/exosuit/proc/attack_self(var/mob/user)
-	return visible_message("\The [src] pokes itself.")
 
 /mob/living/exosuit/proc/rename(var/mob/user)
 	if(user != src && !(user in pilots))

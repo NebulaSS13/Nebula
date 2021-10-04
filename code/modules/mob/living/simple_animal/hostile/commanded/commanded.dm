@@ -178,12 +178,11 @@
 		if(weakref(user) in friends) //We were buds :'(
 			friends -= weakref(user)
 
-
-/mob/living/simple_animal/hostile/commanded/attack_hand(mob/M)
-	..()
-	if(M.a_intent == I_HURT && retribution) //assume he wants to hurt us.
-		target_mob = M
-		allowed_targets += M
+/mob/living/simple_animal/hostile/commanded/default_hurt_interaction(mob/user)
+	. = ..()
+	if(. && retribution) //assume he wants to hurt us.
+		target_mob = user
+		allowed_targets += user
 		stance = HOSTILE_STANCE_ATTACK
-		if(weakref(M) in friends)
-			friends -= weakref(M)
+		if(weakref(user) in friends)
+			friends -= weakref(user)
