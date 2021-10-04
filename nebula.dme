@@ -857,7 +857,6 @@
 #include "code\game\machinery\vending\security.dm"
 #include "code\game\machinery\vending\toxins.dm"
 #include "code\game\objects\alien_props.dm"
-#include "code\game\objects\buckling.dm"
 #include "code\game\objects\empulse.dm"
 #include "code\game\objects\explosion.dm"
 #include "code\game\objects\item.dm"
