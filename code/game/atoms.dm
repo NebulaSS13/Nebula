@@ -420,14 +420,6 @@ its easier to just keep the beam vertical.
 /atom/movable/onDropInto(var/atom/movable/AM)
 	return loc // If onDropInto returns something, then dropInto will attempt to drop AM there.
 
-//all things climbable
-/atom/attack_hand(mob/user)
-	..()
-	if(LAZYLEN(climbers) && !(user in climbers))
-		user.visible_message("<span class='warning'>[user.name] shakes \the [src].</span>", \
-					"<span class='notice'>You shake \the [src].</span>")
-		object_shaken()
-
 // Called when hitting the atom with a grab.
 // Will skip attackby() and afterattack() if returning TRUE.
 /atom/proc/grab_attack(var/obj/item/grab/G)

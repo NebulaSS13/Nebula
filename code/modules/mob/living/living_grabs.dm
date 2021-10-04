@@ -1,4 +1,7 @@
 /mob/living/proc/can_grab(var/atom/movable/target, var/target_zone)
+	if(!ismob(target) && target.anchored)
+		to_chat(src, SPAN_WARNING("\The [target] won't budge!"))
+		return FALSE
 	if(get_active_hand())
 		to_chat(src, SPAN_WARNING("Your hand is full!"))
 		return FALSE
@@ -39,8 +42,7 @@
 		to_chat(original_target, SPAN_WARNING("\The [src] tries to grab you!"))
 		to_chat(src, SPAN_WARNING("You try to grab \the [target]!"))
 	if(ispath(grab_tag, /decl/grab) && can_grab(target, zone_sel?.selecting) && target.can_be_grabbed(src, zone_sel?.selecting))
-		var/obj/item/grab/grab = new(src, target, grab_tag)
-		. = !QDELETED(grab)
+		return new /obj/item/grab(src, target, grab_tag)
 
 /mob/living/add_grab(var/obj/item/grab/grab)
 	for(var/obj/item/grab/other_grab in contents)
