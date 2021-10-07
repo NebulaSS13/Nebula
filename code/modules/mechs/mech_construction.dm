@@ -64,18 +64,6 @@
 	if(hardpoints_locked || hardpoints[system_hardpoint])
 		return FALSE
 
-	if(user)
-		var/delay = 30 * user.skill_delay_mult(SKILL_DEVICES)
-		if(delay > 0)
-			user.visible_message(SPAN_NOTICE("\The [user] begins trying to install \the [system] into \the [src]."))
-			if(!do_after(user, delay, src) || user.get_active_hand() != system)
-				return FALSE
-
-			if(user.unEquip(system))
-				to_chat(user, SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint]."))
-				playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-			else return FALSE
-
 	var/obj/item/mech_equipment/ME = system
 	if(istype(ME))
 		if(ME.restricted_hardpoints && !(system_hardpoint in ME.restricted_hardpoints))
@@ -90,13 +78,29 @@
 					break
 			if(!found)
 				return FALSE
-		ME.installed(src)
-		events_repository.register(/decl/observ/destroyed, system, src, .proc/forget_module)
+	else
+		return FALSE	
 
+	if(user)
+		var/delay = 30 * user.skill_delay_mult(SKILL_DEVICES)
+		if(delay > 0)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] begins trying to install \the [system] into \the [src]."),
+				SPAN_NOTICE("You begin trying to install \the [system] into \the [src].")
+			)
+			if(!do_after(user, delay, src) || user.get_active_hand() != system)
+				return FALSE
 
+			if(user.unEquip(system))
+				to_chat(user, SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint]."))
+				playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+			else return FALSE
+
+	events_repository.register(/decl/observ/destroyed, system, src, .proc/forget_module)
 
 	system.forceMove(src)
 	hardpoints[system_hardpoint] = system
+	ME.installed(src)
 
 	var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
 	H.holding = system
@@ -108,7 +112,7 @@
 	refresh_hud()
 	queue_icon_update()
 
-	return 1
+	return TRUE
 
 /mob/living/exosuit/proc/remove_system(var/system_hardpoint, var/mob/user, var/force)
 	set waitfor = FALSE
