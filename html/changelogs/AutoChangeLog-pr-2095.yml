@@ -1,0 +1,5 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - tweak: Makes changing a var type in VV take a type path string instead of having
+      the slow nearly useless listbox with all the atom types listed in.
