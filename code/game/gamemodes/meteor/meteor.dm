@@ -60,10 +60,14 @@
 	command_announcement.Announce(start_text, alert_title)
 	for(var/obj/machinery/shield_diffuser/SD in SSmachines.machinery)
 		SD.meteor_alarm(INFINITY)
-	if(global.using_map.use_overmap)
-		var/area/map = locate(/area/overmap)
-		for(var/turf/T in map)
-			T.add_overlay(image('icons/obj/overmap.dmi', "meteor[rand(1,4)]"))
+
+	var/datum/overmap/overmap = global.overmaps_by_name[OVERMAP_ID_SPACE]
+	if(overmap)
+		var/turf/overmap_turf = locate(1, 1, overmap.assigned_z)
+		var/area/map = overmap_turf && get_area(overmap_turf)
+		if(istype(map, /area/overmap))
+			for(var/turf/T in map)
+				T.add_overlay(image('icons/obj/overmap.dmi', "meteor[rand(1,4)]"))
 	next_wave = round_duration_in_ticks + meteor_wave_delay
 
 /datum/game_mode/meteor/process()

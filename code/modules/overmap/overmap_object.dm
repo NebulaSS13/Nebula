@@ -23,6 +23,8 @@
 	var/last_burn = 0                   // worldtime when ship last acceleated
 	var/burn_delay = 1 SECOND           // how often ship can do burns
 
+	var/overmap_id = OVERMAP_ID_SPACE
+
 //Overlay of how this object should look on other skyboxes
 /obj/effect/overmap/proc/get_skybox_representation()
 	return
@@ -33,7 +35,7 @@
 /obj/effect/overmap/Initialize()
 	. = ..()
 
-	if(!global.using_map.use_overmap)
+	if(!length(global.using_map.overmap_ids))
 		return INITIALIZE_HINT_QDEL
 
 	if(requires_contact)
@@ -55,23 +57,27 @@
 	filters = filter(type="drop_shadow", color = color + "F0", size = 2, offset = 1,x = 0, y = 0)
 
 /obj/effect/overmap/proc/handle_wraparound()
+
+	var/turf/T = get_turf(src)
+	if(!istype(T) || !global.overmaps_by_z["[T.z]"])
+		PRINT_STACK_TRACE("Overmap effect handling wraparound on a non-overmap z-level.")
+
+	var/datum/overmap/overmap = global.overmaps_by_z["[T.z]"]
 	var/nx = x
 	var/ny = y
-	var/low_edge = 1
-	var/high_edge = global.using_map.overmap_size
 
-	if((dir & WEST) && x == low_edge)
-		nx = high_edge - 1
-	else if((dir & EAST) && x == high_edge)
-		nx = low_edge + 1
-	if((dir & SOUTH)  && y == low_edge)
-		ny = high_edge - 1
-	else if((dir & NORTH) && y == high_edge)
-		ny = low_edge + 1
+	if((dir & WEST) && x == 1)
+		nx = overmap.map_size_y - 1
+	else if((dir & EAST) && x == overmap.map_size_y)
+		nx = 2
+	if((dir & SOUTH)  && y == 1)
+		ny = overmap.map_size_y - 1
+	else if((dir & NORTH) && y == overmap.map_size_y)
+		ny = 2
 	if((x == nx) && (y == ny))
 		return //we're not flying off anywhere
 
-	var/turf/T = locate(nx,ny,z)
+	T = locate(nx,ny,z)
 	if(T)
 		forceMove(T)
 

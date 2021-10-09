@@ -9,7 +9,7 @@
 	affected_levels = zlevels
 
 /datum/universal_state/jump/OnEnter()
-	var/space_zlevel = global.using_map.get_empty_zlevel() //get a place for stragglers
+	var/space_zlevel = get_empty_zlevel(/turf/space) //get a place for stragglers
 	for(var/mob/living/M in SSmobs.mob_list)
 		if(M.z in affected_levels)
 			var/area/A = get_area(M)

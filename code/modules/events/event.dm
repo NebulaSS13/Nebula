@@ -46,7 +46,7 @@
 	return ..() - (istype(SSticker.mode, /datum/game_mode/extended) ? penalty : 0)
 
 /datum/event_meta/no_overmap/get_weight() //these events have overmap equivalents, and shouldn't fire randomly if overmap is used
-	return global.using_map.use_overmap ? 0 : ..()
+	return length(global.using_map.overmap_ids) ? 0 : ..()
 
 /datum/event	//NOTE: Times are measured in master controller ticks!
 	var/startWhen		= 0	//When in the lifetime to call start().
@@ -163,8 +163,7 @@
 	..()
 
 /datum/event/proc/location_name()
-	if(!global.using_map.use_overmap)
+	if(!length(global.using_map.overmap_ids))
 		return station_name()
-
-	var/obj/effect/overmap/visitable/O = map_sectors["[pick(affecting_z)]"]
-	return O ? O.name : "Unknown Location"
+	var/obj/effect/overmap/visitable/O = global.overmap_sectors["[pick(affecting_z)]"]
+	return O?.name || "Unknown Location"

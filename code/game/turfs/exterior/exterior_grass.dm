@@ -15,10 +15,9 @@
 
 /turf/exterior/wildgrass/Initialize()
 	. = ..()
-	if(global.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
-		if(istype(E) && E.grass_color)
-			color = E.grass_color
+	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
+	if(istype(E) && E.grass_color)
+		color = E.grass_color
 
 	var/datum/extension/buried_resources/resources = get_or_create_extension(src, /datum/extension/buried_resources)
 	if(prob(70))

@@ -305,7 +305,7 @@
 		return FALSE
 	
 	var/area/base_area
-	var/obj/effect/overmap/visitable/sector/exoplanet/planet = map_sectors["[z]"]
+	var/obj/effect/overmap/visitable/sector/exoplanet/planet = global.overmap_sectors["[z]"]
 	if(istype(planet))
 		base_area = ispath(planet.planetary_area) ? planet.planetary_area : planet.planetary_area.type
 	else

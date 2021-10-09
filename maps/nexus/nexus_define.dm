@@ -20,8 +20,7 @@
 	lobby_screens = list('maps/nexus/lobby/nexus_lobby.png')
 	welcome_sound = 'sound/effects/alarm.ogg'
 
-	overmap_event_areas = 11
-	use_overmap = 1
+	overmap_ids = list(OVERMAP_ID_SPACE)
 	num_exoplanets = 1
 
 	emergency_shuttle_leaving_dock = "Attention all hands: the escape pods have been launched, maintaining burn for %ETA%."

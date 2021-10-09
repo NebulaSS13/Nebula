@@ -128,10 +128,9 @@
 		shielded_turfs = fieldtype_square()
 
 	// Rotate shield's animation relative to located ship
-	if(global.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/ship/sector = get_owning_overmap_object()
-		if(istype(sector))
-			vessel_reverse_dir = global.reverse_dir[sector.fore_dir]
+	var/obj/effect/overmap/visitable/ship/sector = get_owning_overmap_object()
+	if(istype(sector))
+		vessel_reverse_dir = global.reverse_dir[sector.fore_dir]
 
 	for(var/turf/T in shielded_turfs)
 		var/obj/effect/shield/S = new(T)

@@ -25,7 +25,7 @@
 		return (tz in global.using_map.admin_levels) || (tz in global.using_map.station_levels) || (tz in global.using_map.contact_levels)
 
 	var/list/accessible_z_levels = GetConnectedZlevels(oz)
-	var/obj/effect/overmap/sector = map_sectors["[oz]"]
+	var/obj/effect/overmap/sector = global.overmap_sectors["[oz]"]
 	if(sector)
 
 		var/list/neighbors_to_add = list()

@@ -27,3 +27,5 @@
 		{speed_var = round(SANITIZE_SPEED((speed_var + v_diff) / (1 + speed_var * v_diff / (max_speed ** 2))), SHIP_MOVE_RESOLUTION)}
 // Uses Lorentzian dynamics to avoid going too fast.
 #define SENSOR_COEFFICENT 1000
+
+#define OVERMAP_ID_SPACE "Deep Space"

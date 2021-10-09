@@ -266,7 +266,7 @@
 	if (master)
 		return master.attack_hand(user)
 
-/atom/movable/proc/touch_map_edge()
+/atom/movable/proc/touch_map_edge(var/overmap_id)
 	if(!simulated)
 		return
 
@@ -276,9 +276,11 @@
 	if(!global.universe.OnTouchMapEdge(src))
 		return
 
-	if(global.using_map.use_overmap)
-		overmap_spacetravel(get_turf(src), src)
-		return
+	if(overmap_id)
+		var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
+		if(overmap)
+			overmap.travel(get_turf(src), src)
+			return
 
 	var/new_x
 	var/new_y

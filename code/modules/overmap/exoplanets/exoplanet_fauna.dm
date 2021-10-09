@@ -84,7 +84,7 @@
 
 /obj/effect/landmark/exoplanet_spawn/LateInitialize()
 	. = ..()
-	var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
+	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
 	if(istype(E))
 		do_spawn(E)
 		

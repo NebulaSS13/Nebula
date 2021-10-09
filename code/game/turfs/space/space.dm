@@ -134,7 +134,7 @@
 	..()
 	if(A && A.loc == src && !density) // !density so 'fake' space turfs don't fling ghosts everywhere
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE + 1))
-			A.touch_map_edge()
+			A.touch_map_edge(OVERMAP_ID_SPACE)
 
 /turf/space/proc/Sandbox_Spacemove(atom/movable/A)
 	var/cur_x
