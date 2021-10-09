@@ -7,9 +7,11 @@
 	reaction_strings = list(/decl/material/solid/metal/uranium = "Randomly teleports everything around the core.")
 
 /decl/slime_colour/quantum/handle_uranium_reaction(var/datum/reagents/holder)
-	var/list/turfs = RANGE_TURFS(holder.my_atom, 6)
-	if(length(turfs))
-		for(var/atom/movable/AM in viewers(holder.my_atom, 2))
-			if(AM.simulated && !AM.anchored)
-				AM.dropInto(pick(turfs))
+	var/turf/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		var/list/turfs = RANGE_TURFS(location, 6)
+		if(length(turfs))
+			for(var/atom/movable/AM in viewers(location, 2))
+				if(AM.simulated && !AM.anchored)
+					AM.dropInto(pick(turfs))
 	return TRUE

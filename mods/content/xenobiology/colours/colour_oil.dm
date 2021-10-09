@@ -8,4 +8,6 @@
 /decl/slime_colour/oil/handle_uranium_reaction(var/datum/reagents/holder)
 	. = TRUE
 	sleep(5 SECONDS)
-	explosion(get_turf(holder.my_atom), 1, 3, 6)
+	var/location = holder.get_reaction_loc()
+	if(location)
+		explosion(location, 1, 3, 6)

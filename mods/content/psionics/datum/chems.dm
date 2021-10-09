@@ -21,7 +21,7 @@
 	. = (istype(donor) && (donor.psi || (donor.mind && wizards.is_antagonist(donor.mind))))
 
 /decl/chemical_reaction/synthesis/nullglass/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
-	var/location = get_turf(holder.my_atom)
+	var/location = get_turf(holder.get_reaction_loc())
 	if(reaction_flags)
 		for(var/i = 1, i <= created_volume, i++)
 			new /obj/item/soulstone(location)

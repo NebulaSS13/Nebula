@@ -12,6 +12,8 @@
 	reaction_strings = list(/decl/material/solid/metal/uranium = "Synthesises cubes of steel and plasteel.")
 
 /decl/slime_colour/metal/handle_uranium_reaction(var/datum/reagents/holder)
-	SSmaterials.create_object(/decl/material/solid/metal/steel, get_turf(holder.my_atom), 15, /obj/item/stack/material/cubes)
-	SSmaterials.create_object(/decl/material/solid/metal/plasteel, get_turf(holder.my_atom), 5, /obj/item/stack/material/cubes)
+	var/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		SSmaterials.create_object(/decl/material/solid/metal/steel, location, 15, /obj/item/stack/material/cubes)
+		SSmaterials.create_object(/decl/material/solid/metal/plasteel, location, 5, /obj/item/stack/material/cubes)
 	return TRUE
