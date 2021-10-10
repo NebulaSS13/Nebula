@@ -442,16 +442,14 @@
 
 /mob/living/exosuit/default_interaction(var/mob/user)
 	. = ..()
-	if(.)
+	if(!.)
 		// Toggle the hatch.
 		if(hatch_locked)
 			to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
 			return TRUE
-		hatch_closed = !hatch_closed
-		to_chat(user, SPAN_NOTICE("You [hatch_closed ? "close" : "open"] the [body.hatch_descriptor]."))
-		hud_open.queue_icon_update()
-		queue_icon_update()
-		return TRUE
+		if(hud_open)
+			hud_open.toggled()
+			return TRUE
 
 /mob/living/exosuit/default_hurt_interaction(var/mob/user)
 	. = ..()
@@ -465,20 +463,13 @@
 			if(do_after(user, 30) && user.Adjacent(src) && (pilot in pilots) && !hatch_closed)
 				user.visible_message(SPAN_DANGER("\The [user] drags \the [pilot] out of \the [src]!"))
 				eject(pilot, silent=1)
+				return TRUE
 		return
-
-	// Otherwise toggle the hatch.
-	if(hud_open)
-		hud_open.toggled()
-	return
 
 /mob/living/exosuit/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes into")
 	if(..())
 		playsound(loc, 'sound/effects/metal_close.ogg', 40, 1)
 		playsound(loc, 'sound/weapons/tablehit1.ogg', 40, 1)
-
-/mob/living/exosuit/proc/attack_self(var/mob/user)
-	return visible_message("\The [src] pokes itself.")
 
 /mob/living/exosuit/proc/rename(var/mob/user)
 	if(user != src && !(user in pilots))

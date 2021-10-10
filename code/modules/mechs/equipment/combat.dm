@@ -234,14 +234,14 @@
 	material_force_multiplier = 0.75 // Equals 20 AP with 25 force
 	unbreakable = TRUE //Else we need a whole system for replacement blades
 
-/obj/item/material/hatchet/machete/mech/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
+/obj/item/hatchet/machete/mech/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	. = ..()
 	if (.)
 		do_attack_effect(target, "smash")
 		if (target.mob_size < user.mob_size) //Damaging attacks overwhelm smaller mobs
 			target.throw_at(get_edge_target_turf(target,get_dir(user, target)),1, 1)
 
-/obj/item/material/hatchet/machete/mech/resolve_attackby(atom/A, mob/user, click_params)
+/obj/item/hatchet/machete/mech/resolve_attackby(atom/A, mob/user, click_params)
 	//Case 1: Default, you are hitting something that isn't a mob. Just do whatever, this isn't dangerous or op.
 	if (!istype(A, /mob/living))
 		return ..()
@@ -251,7 +251,7 @@
 		playsound(user, 'sound/mecha/mechmove03.ogg', 35, 1)
 		return ..()
 
-/obj/item/material/hatchet/machete/mech/attack_self(mob/living/user)
+/obj/item/hatchet/machete/mech/attack_self(mob/living/user)
 	. = ..()
 	if (user.a_intent != I_HURT)
 		return
@@ -271,7 +271,7 @@
 
 /obj/item/mech_equipment/mounted_system/melee/mechete
 	icon_state = "mech_blade"
-	holding_type = /obj/item/material/hatchet/machete/mech
+	holding_type = /obj/item/hatchet/machete/mech
 
 
 //Ballistic shield
