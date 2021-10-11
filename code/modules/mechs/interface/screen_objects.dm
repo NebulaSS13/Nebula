@@ -32,7 +32,7 @@
 	owner = newowner
 
 /obj/screen/exosuit/Click()
-	return (!usr.incapacitated() && usr.canClick() && (usr == owner || usr.loc == owner))
+	return (owner && (!usr.incapacitated() && usr.canClick() && (usr == owner || usr.loc == owner)))
 
 /obj/screen/exosuit/hardpoint
 	name = "hardpoint"

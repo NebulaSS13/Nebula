@@ -124,15 +124,9 @@
 
 // Space movement
 /datum/movement_handler/mob/space/exosuit/DoMove(var/direction, var/mob/mover)
-	if(!mob.has_gravity())
-		if(!allow_move)
-			return MOVEMENT_HANDLED
-		else if(allow_move == -1 && mob.handle_spaceslipping()) //Check to see if we slipped
-			return MOVEMENT_HANDLED
-		else
-			mob.inertia_dir = 0 //If not then we can reset inertia and move
-	else 
-		mob.inertia_dir = 0 //Reset inertia values as we are not going to be treated as floating
+	if(!mob.has_gravity() && (!allow_move || (allow_move == -1 && mob.handle_spaceslipping())))
+		return MOVEMENT_HANDLED
+	mob.inertia_dir = 0
 
 /datum/movement_handler/mob/space/exosuit/MayMove(var/mob/mover, var/is_external)
 	if((mover != host) && is_external)
@@ -155,9 +149,8 @@
 		return TRUE
 
 	var/obj/item/mech_equipment/ionjets/J = hardpoints[HARDPOINT_BACK]
-	if(istype(J))
-		if((allow_movement || J.stabilizers) && J.allowSpaceMove())
-			return TRUE
+	if(istype(J) && ((allow_movement || J.stabilizers) && J.allowSpaceMove()))
+		return TRUE
 
 	anchored = 0
 	return FALSE
@@ -173,7 +166,7 @@
 		if(emp_damage >= EMP_MOVE_DISRUPT && prob(25))
 			var/obj/item/mech_equipment/ionjets/J = hardpoints[HARDPOINT_BACK]
 			if(istype(J) && J.allowSpaceMove())
-				to_chat(src, SPAN_WARNING("\The [J] missfire, drifting \the [src] off course!"))
+				to_chat(src, SPAN_WARNING("\The [J] misfire, drifting \the [src] off course!"))
 				SetMoveCooldown(15)	//2 seconds of random rando panic drifting
 				step(src, pick(global.alldirs))
 			return 0

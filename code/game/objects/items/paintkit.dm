@@ -103,7 +103,7 @@
 
 /obj/item/kit/paint/camouflage
 	name = "\"Guerilla\" exosuit customisation kit"
-	desc = "The exact same pattern the 76th Armored Gauntlet used in the Gaia war, now available for general use."
+	desc = "An old military pattern for jungle warfare, now available for general use."
 	new_icon = "cammo1"
 
 /obj/item/kit/paint/camouflage/forest

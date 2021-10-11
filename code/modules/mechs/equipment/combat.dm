@@ -395,7 +395,7 @@
 /obj/aura/mech_ballistic/added_to(mob/living/target)
 	. = ..()
 	target.vis_contents += src
-	set_dir()
+	set_dir(target.dir)
 	global.events_repository.register(/decl/observ/dir_set, user, src, /obj/aura/mech_ballistic/proc/update_dir)
 
 /obj/aura/mech_ballistic/proc/update_dir(user, old_dir, dir)

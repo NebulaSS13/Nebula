@@ -80,10 +80,10 @@
 
 
 //Pixel projectiles need a client, so we need a way to pass who the last user was for view calcs
-/mob/living/proc/getEffectiveGunner()
+/mob/living/proc/get_effective_gunner()
 	return src
 
-/mob/living/exosuit/getEffectiveGunner()
+/mob/living/exosuit/get_effective_gunner()
 	return current_user
 
 /mob/living/exosuit/can_be_buckled(mob/user)

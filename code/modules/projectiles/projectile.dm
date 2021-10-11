@@ -426,7 +426,7 @@
 	var/list/calculated = list(null,null,null)
 	var/mob/living/S = source
 	if(istype(S))
-		S = S.getEffectiveGunner()
+		S = S.get_effective_gunner()
 	if(istype(S) && S.client && params)
 		calculated = calculate_projectile_Angle_and_pixel_offsets(S, params)
 		p_x = calculated[2]
