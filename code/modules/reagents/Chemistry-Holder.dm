@@ -260,6 +260,12 @@ var/global/obj/temp_reagents_holder = new
 			. += "[current.name] ([volume])"
 	return english_list(., "EMPTY", "", ", ", ", ")
 
+/datum/reagents/proc/get_dirtiness()
+	for(var/rtype in reagent_volumes)
+		var/decl/material/current = GET_DECL(rtype)
+		. += current.dirtiness
+	return . / length(reagent_volumes)
+
 /* Holder-to-holder and similar procs */
 /datum/reagents/proc/remove_any(var/amount = 1, var/defer_update = FALSE) // Removes up to [amount] of reagents from [src]. Returns actual amount removed.
 	. = min(amount, total_volume)
@@ -315,7 +321,7 @@ var/global/obj/temp_reagents_holder = new
 
 //Splashing reagents is messier than trans_to, the target's loc gets some of the reagents as well.
 /datum/reagents/proc/splash(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/min_spill=0, var/max_spill=60, var/defer_update = FALSE)
-	
+
 	if(isturf(target))
 		trans_to_turf(target, amount, multiplier, copy, defer_update = defer_update)
 		return
@@ -379,11 +385,35 @@ var/global/obj/temp_reagents_holder = new
 	update_total()
 
 /datum/reagents/proc/touch_turf(var/turf/target)
-	if(!target || !istype(target) || !target.simulated)
+	if(!istype(target) || !target.simulated)
 		return
 	for(var/rtype in reagent_volumes)
 		var/decl/material/current = GET_DECL(rtype)
 		current.touch_turf(target, REAGENT_VOLUME(src, rtype), src)
+	var/dirtiness = get_dirtiness()
+	if(dirtiness <= DIRTINESS_CLEAN)
+		target.clean_blood()
+		target.remove_cleanables()
+	if(dirtiness != DIRTINESS_NEUTRAL)
+		if(dirtiness > DIRTINESS_NEUTRAL)
+			var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate() in target
+			if (!dirtoverlay)
+				dirtoverlay = new /obj/effect/decal/cleanable/dirt(target)
+				dirtoverlay.alpha = total_volume * dirtiness
+			else
+				dirtoverlay.alpha = min(dirtoverlay.alpha + total_volume * dirtiness, 255)
+		else
+			if(dirtiness <= DIRTINESS_STERILE)
+				target.germ_level -= min(total_volume*20, target.germ_level)
+				for(var/obj/item/I in target.contents)
+					I.was_bloodied = null
+				for(var/obj/effect/decal/cleanable/blood/B in target)
+					qdel(B)
+			if(dirtiness <= DIRTINESS_CLEAN)
+				target.clean_blood()
+				if(istype(target, /turf/simulated))
+					var/turf/simulated/simulated_turf = target
+					simulated_turf.dirt = 0
 	update_total()
 
 /datum/reagents/proc/touch_obj(var/obj/target)
