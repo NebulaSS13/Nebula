@@ -3,7 +3,7 @@
 		return FALSE
 	if(!CanPhysicallyInteract(grabber))
 		return FALSE
-	if(grabber.anchored || buckled_grab_check(grabber))
+	if(grabber.anchored || !buckled_grab_check(grabber))
 		return FALSE
 	if(anchored)
 		to_chat(grabber, SPAN_WARNING("\The [src] won't budge!"))
