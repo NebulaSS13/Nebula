@@ -89,7 +89,7 @@
 		BP_BRAIN = /obj/item/organ/internal/brain/lizard
 	)
 
-	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail)
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/lizard)
 
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height = 1.25,
