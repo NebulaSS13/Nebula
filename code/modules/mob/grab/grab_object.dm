@@ -1,22 +1,21 @@
 /obj/item/grab
 	name = "grab"
-	canremove = 0
-	item_flags = ITEM_FLAG_NO_BLUDGEON
-	w_class = ITEM_SIZE_NO_CONTAINER
-
+	canremove =    FALSE
+	item_flags =   ITEM_FLAG_NO_BLUDGEON
+	w_class =      ITEM_SIZE_NO_CONTAINER
 	pickup_sound = null
 	drop_sound =   null
 	equip_sound =  null
 
-	var/atom/movable/affecting = null
-	var/mob/assailant = null
-	var/decl/grab/current_grab
-	var/last_action
-	var/last_upgrade
-	var/special_target_functional = 1
-	var/attacking = 0
-	var/target_zone
-	var/done_struggle = FALSE // Used by struggle grab datum to keep track of state.
+	var/atom/movable/affecting             // Atom being targeted by this grab.
+	var/mob/assailant                      // Mob that instantiated this grab.
+	var/decl/grab/current_grab             // Current grab archetype, used to handle actions/overrides/etc.
+	var/last_action                        // Tracks world.time of last action.
+	var/last_upgrade                       // Tracks world.time of last upgrade.
+	var/special_target_functional = TRUE   // Indicates if the current grab has special interactions applied to the target organ (eyes and mouth at time of writing)
+	var/is_currently_resolving_hit = FALSE // Used to avoid stacking interactions that sleep during /decl/grab/proc/on_hit_foo() (ie. do_after() is used)
+	var/target_zone                        // Records a specific bodypart that was targetted by this grab.
+	var/done_struggle = FALSE              // Used by struggle grab datum to keep track of state.
 
 /*
 	This section is for overrides of existing procs.
@@ -94,18 +93,21 @@
 			upgrade()
 
 /obj/item/grab/attack(mob/M, mob/living/user)
-	current_grab.hit_with_grab(src)
+	return FALSE
+
+/obj/item/grab/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	if(QDELETED(src) || !current_grab || !assailant || proximity_flag) // Close-range is handled in resolve_attackby().
+		return
+	if(current_grab.hit_with_grab(src, target, TRUE))
+		return
+	. = ..()
 
 /obj/item/grab/resolve_attackby(atom/A, mob/user, var/click_params)
-	if(QDELETED(src) || !assailant)
+	if(QDELETED(src) || !current_grab || !assailant)
 		return TRUE
-	assailant.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(!A.grab_attack(src))
-		return ..()
-	action_used()
-	if (current_grab.downgrade_on_action)
-		downgrade()
-	return TRUE
+	if(A.grab_attack(src) || current_grab.hit_with_grab(src, A))
+		return TRUE
+	. = ..()
 
 /obj/item/grab/dropped()
 	..()
