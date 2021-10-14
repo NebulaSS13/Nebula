@@ -180,16 +180,18 @@
 		handle_fall_effect(landing)
 
 /atom/movable/proc/handle_fall_effect(var/turf/landing)
+	SHOULD_CALL_PARENT(TRUE)
 	if(istype(landing) && landing.is_open())
 		visible_message("\The [src] falls through \the [landing]!", "You hear a whoosh of displaced air.")
 	else
 		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the [global.using_map.ground_noun].")
-		if(fall_damage())
+		var/fall_damage = fall_damage()
+		if(fall_damage > 0)
 			for(var/mob/living/M in landing.contents)
 				if(M == src)
 					continue
 				visible_message("\The [src] hits \the [M.name]!")
-				M.take_overall_damage(fall_damage())
+				M.take_overall_damage(fall_damage)
 
 /atom/movable/proc/fall_damage()
 	return 0
@@ -201,11 +203,9 @@
 		return 100
 	return BASE_STORAGE_COST(w_class)
 
-/mob/living/carbon/human/handle_fall_effect(var/turf/landing)
+/mob/living/carbon/human/apply_fall_damage(var/turf/landing)
 	if(species && species.handle_fall_special(src, landing))
 		return
-
-	..()
 	var/min_damage = 7
 	var/max_damage = 14
 	apply_damage(rand(min_damage, max_damage), BRUTE, BP_HEAD, armor_pen = 50)
@@ -228,13 +228,7 @@
 			var/obj/item/organ/external/victim = pick(victims)
 			victim.dislocate()
 			to_chat(src, "<span class='warning'>You feel a sickening pop as your [victim.joint] is wrenched out of the socket.</span>")
-
-	if(client)
-		var/area/A = get_area(landing)
-		if(A)
-			A.alert_on_fall(src)
 	updatehealth()
-
 
 /mob/living/carbon/human/proc/climb_up(atom/A)
 	if(!isturf(loc) || !bound_overlay || bound_overlay.destruction_timer || is_physically_disabled())	// This destruction_timer check ideally wouldn't be required, but I'm not awake enough to refactor this to not need it.
