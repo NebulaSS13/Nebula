@@ -51,8 +51,8 @@
 		playables += s
 
 	. = list()
-	. += "<tr><td colspan=3><center><h3>Species</h3></td></tr>"
-	. += "</center></td></tr>"
+	. += "<table width = '100%'>"
+	. += "<tr><td colspan=3><center><h3>Species</h3></center></td></tr>"
 	. += "<tr><td colspan=3><center>"
 	for(var/s in get_playable_species())
 		var/decl/species/list_species = get_species_by_key(s)
@@ -61,9 +61,22 @@
 		else
 			. += "<a href='?src=\ref[src];set_species=[list_species.name]'>[list_species.name]</a> "
 	. += "</center><hr/></td></tr>"
-	. += "<tr><td width = '200px'>"
-	. += "<center>[current_species.get_description() || "No additional details."]</center>"
-	. += "</td>"
+
+	. += "<tr>"
+	var/desc = current_species.description || "No additional details."
+	if(hide_species && length(desc) > 200)
+		desc = "[copytext(desc, 1, 194)] <small>\[...\]</small>"
+	. += "<td width = '200px'><center>[desc]</center></td>"
+	. += "<td width = '50px'><a href='?src=\ref[src];toggle_species_verbose=1'>[hide_species ? "Expand" : "Collapse"]</a></td>"
+
+	var/icon/use_preview_icon = current_species.get_preview_icon()
+	if(use_preview_icon)
+		send_rsc(user, use_preview_icon, current_species.preview_icon_path)		
+		. += "<td width = '[max(100, round(current_species.preview_icon_width*1.2))]px' align='center'><img src='[current_species.preview_icon_path]' width='[current_species.preview_icon_width]px' height='[current_species.preview_icon_height]px'></td>"
+	else
+		. += "<td width = '100px' align='center'>No preview available.</td>"
+	. += "</tr>"
+
 	. += "</table><hr>"
 
 	. = jointext(.,null)

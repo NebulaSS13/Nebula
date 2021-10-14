@@ -7,7 +7,7 @@ var/global/list/gear_datums = list()
 	var/list/total_loadout_selections = list()
 
 /datum/preferences/proc/Gear()
-	return gear_list[gear_slot]
+	return LAZYACCESS(gear_list, gear_slot)
 
 /datum/category_item/player_setup_item/loadout
 	name = "Loadout"
