@@ -24,8 +24,6 @@
 
 	rarity_value = 0.1
 	total_health = 150
-	brute_mod = 1.5
-	burn_mod = 1.5
 
 	spawn_flags = SPECIES_IS_RESTRICTED
 
