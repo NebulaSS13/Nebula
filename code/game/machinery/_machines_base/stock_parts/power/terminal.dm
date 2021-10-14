@@ -49,7 +49,7 @@
 
 //Is willing to provide power if the wired contribution is nonnegligible and there is enough total local power to run the machine.
 /obj/item/stock_parts/power/terminal/can_provide_power(var/obj/machinery/machine)
-	if(is_functional() && terminal && terminal.surplus() && machine.can_use_power_oneoff(machine.get_power_usage(), LOCAL) <= 0)
+	if(is_alive() && terminal && terminal.surplus() && machine.can_use_power_oneoff(machine.get_power_usage(), LOCAL) <= 0)
 		set_status(machine, PART_STAT_ACTIVE)
 		machine.update_power_channel(LOCAL)
 		return TRUE

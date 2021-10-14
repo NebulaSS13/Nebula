@@ -1070,7 +1070,7 @@ About the new airlock wires panel:
 // Braces can act as an extra layer of armor - they will take damage first.
 /obj/machinery/door/airlock/take_damage(var/amount, damtype=BRUTE)
 	if(brace)
-		brace.take_damage(amount)
+		brace.damage_health(amount, damtype)
 	else
 		..()
 	update_icon()
@@ -1083,7 +1083,7 @@ About the new airlock wires panel:
 		to_chat(user, "The door bolts have been cut.")
 	if(brace)
 		to_chat(user, "\The [brace] is installed on \the [src], preventing it from opening.")
-		to_chat(user, brace.examine_health())
+		to_chat(user, brace.examine_damage_state())
 
 /obj/machinery/door/airlock/autoname
 

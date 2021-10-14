@@ -11,11 +11,11 @@
 		uninstall_component(null, P)
 		P.forceMove(H.loc)
 		if(prob(25))
-			P.take_damage(rand(10,30))
+			P.damage_health(rand(10,30))
 	H.physically_destroyed()
 	qdel(src)
 
-/datum/extension/assembly/proc/take_damage(var/amount, var/component_probability, var/damage_casing = 1, var/randomize = 1)
+/datum/extension/assembly/proc/take_damage(var/amount, var/component_probability, var/damage_casing = 1, var/randomize = 1, damage_type = BRUTE)
 	//if(!modifiable)
 	//	return
 
@@ -30,7 +30,7 @@
 	if(component_probability)
 		for(var/obj/item/stock_parts/computer/H in get_all_components())
 			if(prob(component_probability))
-				H.take_damage(round(amount / 2))
+				H.damage_health(round(amount / 2), damage_type)
 
 	if(damage >= max_damage)
 		break_apart()
@@ -38,11 +38,11 @@
 // Stronger explosions cause serious damage to internal components
 // Minor explosions are mostly mitigitated by casing.
 /datum/extension/assembly/proc/ex_act(var/severity)
-	take_damage(rand(100,200) / severity, 30 / severity)
+	take_damage(rand(100,200) / severity, 30 / severity, damage_type = BRUTE)
 
 // EMPs are similar to explosions, but don't cause physical damage to the casing. Instead they screw up the components
 /datum/extension/assembly/proc/emp_act(var/severity)
-	take_damage(rand(100,200) / severity, 50 / severity, 0)
+	take_damage(rand(100,200) / severity, 50 / severity, 0, damage_type = BURN)
 
 // "Stun" weapons can cause minor damage to components (short-circuits?)
 // "Burn" damage is equally strong against internal components and exterior casing
@@ -50,8 +50,8 @@
 /datum/extension/assembly/proc/bullet_act(var/obj/item/projectile/Proj)
 	switch(Proj.damage_type)
 		if(BRUTE)
-			take_damage(Proj.damage, Proj.damage / 2)
+			take_damage(Proj.damage, Proj.damage / 2, damage_type = Proj.damage_type)
 		if(PAIN)
-			take_damage(Proj.damage, Proj.damage / 3, 0)
+			take_damage(Proj.damage, Proj.damage / 3, 0, damage_type = Proj.damage_type)
 		if(BURN)
-			take_damage(Proj.damage, Proj.damage / 1.5)
+			take_damage(Proj.damage, Proj.damage / 1.5, damage_type = Proj.damage_type)

@@ -18,13 +18,13 @@
 /obj/item/proc/check_shatter()
 	if(material && !unbreakable && prob(material.hardness))
 		if(material.is_brittle())
-			health = 0
-		else
-			health--
+			shatter()
+			return
+		damage_health(1, BRUTE, TRUE)
 		check_health()
 
 /obj/item/proc/check_health(var/consumed)
-	if(health<=0)
+	if(!is_alive())
 		shatter(consumed)
 
 /obj/item/proc/shatter(var/consumed)
@@ -69,8 +69,7 @@
 	if(new_material)
 		material = GET_DECL(new_material)
 	if(istype(material))
-		health = round(material_health_multiplier * material.integrity)
-		max_health = health
+		set_max_health(round(material_health_multiplier * material.integrity))
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)
 		if(material.conductive)

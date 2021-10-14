@@ -27,26 +27,6 @@
 	var/obj/item/stock_parts/circuitboard/airlock_electronics/brace/electronics
 
 
-/obj/item/airlock_brace/examine(mob/user)
-	. = ..()
-	to_chat(user, examine_health())
-
-
-// This is also called from airlock's examine, so it's a different proc to prevent code copypaste.
-/obj/item/airlock_brace/proc/examine_health()
-	switch(health_percentage())
-		if(-100 to 25)
-			return "<span class='danger'>\The [src] looks seriously damaged, and probably won't last much more.</span>"
-		if(25 to 50)
-			return "<span class='notice'>\The [src] looks damaged.</span>"
-		if(50 to 75)
-			return "\The [src] looks slightly damaged."
-		if(75 to 99)
-			return "\The [src] has few dents."
-		if(99 to INFINITY)
-			return "\The [src] is in excellent condition."
-
-
 /obj/item/airlock_brace/on_update_icon()
 	if(airlock)
 		icon_state = "brace_closed"
@@ -56,7 +36,6 @@
 
 /obj/item/airlock_brace/Initialize()
 	. = ..()
-	health = max_health
 	electronics = new (src)
 
 /obj/item/airlock_brace/Destroy()
@@ -101,21 +80,21 @@
 
 	if(isWelder(W))
 		var/obj/item/weldingtool/C = W
-		if(health == max_health)
+		if(!get_damage_value())
 			to_chat(user, "\The [src] does not require repairs.")
 			return
 		if(C.remove_fuel(0,user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			health = min(health + rand(20,30), max_health)
-			if(health == max_health)
+			restore_health(rand(20, 30))
+			if(!get_damage_value())
 				to_chat(user, "You repair some dents on \the [src]. It is in perfect condition now.")
 			else
 				to_chat(user, "You repair some dents on \the [src].")
 
 
-/obj/item/airlock_brace/proc/take_damage(var/amount)
-	health = between(0, health - amount, max_health)
-	if(!health)
+/obj/item/airlock_brace/handle_death_change(new_death_state)
+	. = ..()
+	if (new_death_state)
 		if(airlock)
 			airlock.visible_message("<span class='danger'>\The [src] breaks off of \the [airlock]!</span>")
 		unlock_brace(null)
@@ -134,9 +113,3 @@
 	airlock.update_icon()
 	airlock = null
 	update_icon()
-
-
-/obj/item/airlock_brace/proc/health_percentage()
-	if(!max_health)
-		return 0
-	return (health / max_health) * 100

@@ -27,7 +27,7 @@
 	var/static/next_assembly_id = 0
 	var/interact_page = 0
 	var/components_per_page = 5
-	health = 30
+	health_max = 30
 	pass_flags = 0
 	anchored = FALSE
 	var/detail_color = COLOR_ASSEMBLY_BLACK
@@ -56,22 +56,23 @@
 		to_chat(user, "<span class='notice'>The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
 	else
 		to_chat(user, "<span class='notice'>The maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
-	if(health != initial(health))
-		if(health <= initial(health)/2)
-			to_chat(user,"<span class='warning'>It looks pretty beat up.</span>")
-		else
-			to_chat(user, "<span class='warning'>Its got a few dents in it.</span>")
 
 	if((isobserver(user) && ckeys_allowed_to_scan[user.ckey]) || check_rights(R_ADMIN, 0, user))
 		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
 
 
-/obj/item/electronic_assembly/proc/take_damage(var/amnt)
-	health = health - amnt
-	if(health <= 0)
+/obj/item/electronic_assembly/handle_death_change(new_death_state)
+	. = ..()
+	if (new_death_state)
 		visible_message("<span class='danger'>\The [src] falls to pieces!</span>")
 		qdel(src)
-	else if(health < initial(health)*0.15 && prob(5))
+
+
+/obj/item/electronic_assembly/post_health_change(health_mod, damage_type)
+	. = ..()
+	if (health_mod >= 0)
+		return
+	if (get_damage_percentage() >= 0.85 && prob(5))
 		visible_message("<span class='danger'>\The [src] starts to break apart!</span>")
 
 
@@ -113,7 +114,7 @@
 		P.make_energy()
 
 	var/power_failure = FALSE
-	if(initial(health)/health < 0.5 && prob(5))
+	if(get_damage_percentage() >= 0.5 && prob(5))
 		visible_message("<span class='warning'>\The [src] shudders and sparks</span>")
 		power_failure = TRUE
 	// Now spend it.
@@ -477,13 +478,13 @@
 		update_icon()
 	else if(isCoil(I))
 		var/obj/item/stack/cable_coil/C = I
-		if(health != initial(health) && do_after(user, 10, src) && C.use(1))
+		if(get_damage_value() && do_after(user, 10, src) && C.use(1))
 			user.visible_message("\The [user] patches up \the [src]")
-			health = min(initial(health), health + 5)
+			restore_health(5)
 	else
 		if(user.a_intent == I_HURT) // Kill it
 			to_chat(user, "<span class='danger'>\The [user] hits \the [src] with \the [I]</span>")
-			take_damage(I.force)
+			damage_health(I.force, I.damtype)
 		else
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
 				S.attackby_react(I,user,user.a_intent)
@@ -492,7 +493,7 @@
 	interact(user)
 
 /obj/item/electronic_assembly/bullet_act(var/obj/item/projectile/P)
-	take_damage(P.damage)
+	damage_health(P.damage, P.damage_type)
 
 /obj/item/electronic_assembly/emp_act(severity)
 	. = ..()
@@ -567,7 +568,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-	health = 20
+	health_max = 20
 
 /obj/item/electronic_assembly/medium/default
 	name = "type-a electronic mechanism"
@@ -606,7 +607,7 @@
 	w_class = ITEM_SIZE_LARGE
 	max_components = IC_MAX_SIZE_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
-	health = 30
+	health_max = 30
 
 /obj/item/electronic_assembly/large/default
 	name = "type-a electronic machine"
@@ -645,7 +646,7 @@
 	max_complexity = IC_COMPLEXITY_BASE * 3
 	allowed_circuit_action_flags = IC_ACTION_MOVEMENT | IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE
 	circuit_flags = 0
-	health = 50
+	health_max = 50
 
 /obj/item/electronic_assembly/drone/can_move()
 	return TRUE
@@ -685,7 +686,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-	health = 10
+	health_max = 10
 
 /obj/item/electronic_assembly/wallmount/afterattack(var/atom/a, var/mob/user, var/proximity)
 	if(proximity && istype(a ,/turf) && a.density)

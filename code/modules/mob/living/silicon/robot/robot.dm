@@ -157,7 +157,7 @@
 		return
 	var/mult = 1
 	for(var/obj/item/stock_parts/matter_bin/storage in stock_parts)
-		if(storage.is_functional())
+		if(storage.is_alive())
 			mult += storage.rating
 	for(var/datum/matter_synth/M in module.synths)
 		M.set_multiplier(mult)

@@ -236,7 +236,7 @@ var/global/list/all_apcs = list()
 
 /obj/machinery/power/apc/proc/terminal(var/functional_only)
 	var/obj/item/stock_parts/power/terminal/term = get_component_of_type(/obj/item/stock_parts/power/terminal)
-	if(term && (!functional_only || term.is_functional()))
+	if(term && (!functional_only || term.is_alive()))
 		return term.terminal
 
 /obj/machinery/power/apc/examine(mob/user, distance)

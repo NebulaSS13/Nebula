@@ -19,7 +19,7 @@
 	. += "[name] status: [stored_card ? "Card Inserted" : "Card Not Present"]\n"
 	if(stored_card)
 		. += "Testing card read...\n"
-		if( !is_functional() )
+		if( !is_alive() )
 			. += "...FAILURE!\n"
 		else
 			var/read_string_stability

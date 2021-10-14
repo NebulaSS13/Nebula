@@ -29,7 +29,7 @@
 		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
 
 /obj/item/ashtray/attackby(obj/item/W, mob/user)
-	if (health <= 0)
+	if (!is_alive())
 		return
 	if (istype(W,/obj/item/trash/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/flame/match))
 		if (contents.len >= max_butts)
@@ -51,20 +51,20 @@
 			update_icon()
 	else
 		..()
-		health = max(0,health - W.force)
-		if (health < 1)
+		damage_health(W.force, W.damtype, TRUE)
+		if (!is_alive())
 			shatter()
 
 /obj/item/ashtray/throw_impact(atom/hit_atom)
 	..()
-	if(health > 0)
-		health = max(0,health - 3)
+	if(health_max)
+		damage_health(3, BRUTE, TRUE)
 		if(contents.len)
 			visible_message(SPAN_DANGER("\The [src] slams into [hit_atom], spilling its contents!"))
 			for(var/obj/O in contents)
 				O.dropInto(loc)
 			remove_extension(src, /datum/extension/scent)
-		if(health < 1)
+		if(!is_alive())
 			shatter()
 		else
 			update_icon()

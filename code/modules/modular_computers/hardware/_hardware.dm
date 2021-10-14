@@ -21,7 +21,7 @@
 
 // Called on multitool click, prints diagnostic information to the user.
 /obj/item/stock_parts/computer/proc/diagnostics()
-	return list("Hardware Integrity Test... (Corruption: [max_health ? round((max_health - health)/max_health * 100) : 0]%)")
+	return list("Hardware Integrity Test... (Corruption: [get_damage_percentage() * 100]%)")
 
 /obj/item/stock_parts/computer/Initialize()
 	. = ..()
@@ -39,7 +39,7 @@
 	// Turned off
 	if(!enabled)
 		return 0
-	return is_functional()
+	return is_alive()
 
 // Called when component is disabled/enabled by the OS
 /obj/item/stock_parts/computer/proc/on_disable()

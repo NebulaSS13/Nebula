@@ -395,9 +395,9 @@ Class Procs:
 	to_chat(user, "<span class='notice'>Following parts detected in the machine:</span>")
 	for(var/obj/item/C in component_parts)
 		var/line = "<span class='notice'>	[C.name]</span>"
-		if(!C.health)
+		if(!C.is_alive())
 			line = "<span class='warning'>	[C.name] (destroyed)</span>"
-		else if(C.health < 0.75 * C.max_health)
+		else if(C.get_damage_percentage() > 0.25)
 			line = "<span class='notice'>	[C.name] (damaged)</span>"
 		to_chat(user, line)
 	for(var/path in uncreated_component_parts)
@@ -440,7 +440,7 @@ Class Procs:
 
 /obj/machinery/get_cell(var/functional_only = TRUE)
 	var/obj/item/stock_parts/power/battery/battery = get_component_of_type(/obj/item/stock_parts/power/battery)
-	if(battery && (!functional_only || battery.is_functional()))
+	if(battery && (!functional_only || battery.is_alive()))
 		return battery.get_cell()
 
 /obj/machinery/building_cost()

@@ -63,7 +63,7 @@
 	. = ..()
 	if(ATOM_IS_OPEN_CONTAINER(src))
 		reagents.splash(hit_atom, rand(reagents.total_volume*0.25,reagents.total_volume), min_spill = 60, max_spill = 100)
-	health -= rand(4,8)
+	damage_health(rand(4,8), BRUTE, TRUE)
 	check_health()
 
 /obj/item/chems/glass/beaker/large

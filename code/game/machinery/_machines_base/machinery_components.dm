@@ -89,7 +89,7 @@ var/global/list/machine_path_to_circuit_type
 	. = list()
 	for(var/obj/item/stock_parts/component in component_parts)
 		if(istype(component, part_type))
-			if(!only_functional || component.is_functional())
+			if(!only_functional || component.is_alive())
 				.[component.type]++
 	for(var/path in uncreated_component_parts)
 		if(ispath(path, part_type))
@@ -203,7 +203,7 @@ var/global/list/machine_path_to_circuit_type
 	for(var/thing in component_parts)
 		if(istype(thing, part_type))
 			var/obj/item/stock_parts/part = thing
-			if(part.is_functional())
+			if(part.is_alive())
 				. += part.rating
 	for(var/path in uncreated_component_parts)
 		if(ispath(path, part_type))

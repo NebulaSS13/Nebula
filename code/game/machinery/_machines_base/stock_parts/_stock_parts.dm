@@ -63,13 +63,22 @@
 // RefreshParts has been called, likely meaning other componenets were added/removed.
 /obj/item/stock_parts/proc/on_refresh(var/obj/machinery/machine)
 
-/obj/item/stock_parts/proc/take_damage(amount, damtype)
-	if(!is_functional() || (damtype in ignore_damage_types))
+/obj/item/stock_parts/can_damage_health(damage, damage_type)
+	. = ..()
+	if (!.)
 		return
-	var/taken = min(amount, health)
-	health -= taken
-	. = taken
-	if(!is_functional())
+	if (damage_type in ignore_damage_types)
+		return FALSE
+
+/// Applies damage to the stock part. Separate from `damage_health()` as this one returns the amount of damage taken as a value for use in certain calling procs.
+/obj/item/stock_parts/proc/take_damage(amount, damtype)
+	var/taken = min(amount, get_current_health())
+	damage_health(taken, damtype)
+	return taken
+
+/obj/item/stock_parts/handle_death_change(new_death_state)
+	. = ..()
+	if (new_death_state)
 		var/obj/machinery/machine = loc
 		if(istype(machine))
 			on_fail(machine, damtype)
@@ -84,20 +93,6 @@
 			cause = "sparks"
 	visible_message(SPAN_WARNING("Something [cause] inside \the [machine]."), range = 2)
 	SetName("broken [name]")
-
-/obj/item/stock_parts/proc/is_functional()
-	return health > 0
-
-/obj/item/stock_parts/examine(mob/user)
-	. = ..()
-	if(!is_functional())
-		to_chat(user, SPAN_WARNING("It is completely broken."))
-	else if(health < 0.5 * max_health)
-		to_chat(user, SPAN_WARNING("It is heavily damaged."))
-	else if(health < 0.75 * max_health)
-		to_chat(user, SPAN_NOTICE("It is showing signs of damage."))
-	else if(health < max_health)
-		to_chat(user, SPAN_NOTICE("It is showing some wear and tear."))
 
 //Machines handle damaging for us, so don't do it twice
 /obj/item/stock_parts/explosion_act(severity)

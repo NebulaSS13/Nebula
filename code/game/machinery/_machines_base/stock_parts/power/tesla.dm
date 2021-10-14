@@ -6,7 +6,7 @@
 
 // Very simple; checks for area power and that's it.
 /obj/item/stock_parts/power/apc/can_provide_power(var/obj/machinery/machine)
-	return is_functional() && machine.powered()
+	return is_alive() && machine.powered()
 
 // Doesn't actually do it.
 /obj/item/stock_parts/power/apc/can_use_power_oneoff(var/obj/machinery/machine, var/amount, var/channel)

@@ -27,14 +27,14 @@
 		remove_cell()
 	..()
 
-/obj/item/stock_parts/power/battery/take_damage(amount, damtype)
-	. = ..()
-	switch(damtype)
+/obj/item/stock_parts/power/battery/post_health_change(health_mod, damage_type = null)
+	..()
+	switch(damage_type)
 		if(ELECTROCUTE)
-			if(prob(50) && cell && health < initial(health)/2)
+			if(prob(50) && cell && get_damage_percentage() >= 0.5)
 				cell.emp_act(3)
 		if(BRUTE)
-			if(prob(20) && cell && health < initial(health)/2)
+			if(prob(20) && cell && get_damage_percentage() >= 0.5)
 				cell.explosion_act(3)
 
 // None of these helpers actually change the cell's loc. They only manage internal references and state.
@@ -109,7 +109,7 @@
 	A.use_power_oneoff(give, charge_channel)
 
 /obj/item/stock_parts/power/battery/can_provide_power(var/obj/machinery/machine)
-	if(is_functional() && cell && cell.check_charge(CELLRATE * machine.get_power_usage()))
+	if(is_alive() && cell && cell.check_charge(CELLRATE * machine.get_power_usage()))
 		machine.update_power_channel(LOCAL)
 		set_status(machine, PART_STAT_ACTIVE)
 		return TRUE

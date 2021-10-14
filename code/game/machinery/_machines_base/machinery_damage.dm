@@ -31,7 +31,7 @@
 	// And lastly hit the circuitboard
 	victim = get_component_of_type(/obj/item/stock_parts/circuitboard)
 	if(victim)
-		victim.take_damage(amount, damtype)
+		victim.damage_health(amount, damtype)
 	
 /obj/machinery/proc/get_damageable_component(var/damage_type)
 	var/list/victims = shuffle(component_parts)
@@ -45,7 +45,7 @@
 			// Don't damage what can't be repaired
 			if(component.part_flags & PART_FLAG_NODAMAGE)
 				continue
-			if(component.is_functional())
+			if(component.is_alive())
 				return component
 	for(var/path in uncreated_component_parts)
 		if(uncreated_component_parts[path])
