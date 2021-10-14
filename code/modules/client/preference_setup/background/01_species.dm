@@ -82,6 +82,8 @@
 
 			pref.species = choice
 			sanitize_species()
+			mob_species = get_species_by_key(pref.species)
+
 			prune_occupation_prefs()
 
 			//reset hair colour and skin colour

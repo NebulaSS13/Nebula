@@ -38,7 +38,7 @@
 	if(H)
 		copy_to(H)
 
-/datum/preferences/proc/dress_preview_mob(var/mob/living/carbon/human/mannequin)
+/datum/preferences/proc/dress_preview_mob(var/mob/living/carbon/human/dummy/mannequin)
 
 	if(!mannequin)
 		return

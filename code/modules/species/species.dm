@@ -16,14 +16,19 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/is_crystalline = FALSE
 
 	var/holder_icon
-	var/preview_icon = 'icons/mob/human_races/species/human/preview.dmi'
+	var/preview_icon
 	var/list/available_bodytypes = list()
 	var/decl/bodytype/default_bodytype
 
 	var/blood_color = COLOR_BLOOD_HUMAN       // Red.
 	var/flesh_color = "#ffc896"             // Pink.
 	var/blood_oxy = 1
-	var/base_color                            // Used by changelings. Should also be used for icon previes..
+
+	// Used for initializing prefs/preview
+	var/base_color =      COLOR_BLACK
+	var/base_eye_color =  COLOR_BLACK
+	var/base_hair_color = COLOR_BLACK
+	var/list/base_markings
 
 	var/static/list/hair_styles
 	var/static/list/facial_hair_styles
@@ -734,10 +739,11 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	if(append)
 		dat += "<br>[append]"
 	dat += "</td>"
-	if((!skip_photo && preview_icon) || !skip_detail)
+	var/use_preview_icon = get_preview_icon()
+	if((!skip_photo && use_preview_icon) || !skip_detail)
 		dat += "<td width = 200 align='center'>"
-		if(!skip_photo && preview_icon)
-			send_rsc(usr, icon(icon = preview_icon, icon_state = ""), "species_preview_[name].png")
+		if(!skip_photo && use_preview_icon)
+			send_rsc(usr, use_preview_icon, "species_preview_[name].png")
 			dat += "<img src='species_preview_[name].png' width='64px' height='64px'><br/><br/>"
 		if(!skip_detail)
 			dat += "<small>"
@@ -857,3 +863,12 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/proc/get_holder_color(var/mob/living/carbon/human/H)
 	return
+
+/decl/species/proc/get_preview_icon()
+	if(!preview_icon)
+		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#species_[ckey(name)]")
+		if(mannequin)
+			mannequin.set_species(name)
+			customize_preview_mannequin(mannequin)
+			preview_icon = getFlatIcon(mannequin)
+	return preview_icon

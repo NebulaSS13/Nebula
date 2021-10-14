@@ -54,29 +54,36 @@
 	. = ..()
 
 /obj/item/organ/external/tail/avian/get_tail()
-	var/decl/bodytype/avian/bird_bod = owner?.bodytype
-	return bird_bod?.tail
+	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+		var/decl/bodytype/avian/bird_bod = owner.bodytype
+		return bird_bod.tail
 
 /obj/item/organ/external/tail/avian/get_tail_animation()
-	var/decl/bodytype/avian/bird_bod = owner?.bodytype
-	return bird_bod?.tail_animation
+	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+		var/decl/bodytype/avian/bird_bod = owner.bodytype
+		return bird_bod.tail_animation
 
 /obj/item/organ/external/tail/avian/get_tail_icon()
-	var/decl/bodytype/avian/bird_bod = owner?.bodytype
-	return bird_bod?.tail_icon
+	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+		var/decl/bodytype/avian/bird_bod = owner.bodytype
+		return bird_bod.tail_icon
 
 /obj/item/organ/external/tail/avian/get_tail_states()
-	var/decl/bodytype/avian/bird_bod = owner?.bodytype
-	return bird_bod?.tail_states
+	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+		var/decl/bodytype/avian/bird_bod = owner.bodytype
+		return bird_bod.tail_states
 
 /obj/item/organ/external/tail/avian/get_tail_blend()
-	var/decl/bodytype/avian/bird_bod = owner?.bodytype
-	return bird_bod?.tail_blend
+	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+		var/decl/bodytype/avian/bird_bod = owner.bodytype
+		return bird_bod.tail_blend
 
 /obj/item/organ/external/tail/avian/get_tail_hair()
-	var/decl/bodytype/avian/bird_bod = owner?.bodytype
-	return bird_bod?.tail_hair
+	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+		var/decl/bodytype/avian/bird_bod = owner.bodytype
+		return bird_bod.tail_hair
 
 /obj/item/organ/external/tail/avian/get_tail_hair_blend()
-	var/decl/bodytype/avian/bird_bod = owner?.bodytype
-	return bird_bod?.tail_hair_blend
+	if(istype(owner?.bodytype, /decl/bodytype/avian))		
+		var/decl/bodytype/avian/bird_bod = owner.bodytype
+		return bird_bod.tail_hair_blend
