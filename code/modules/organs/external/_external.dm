@@ -7,8 +7,8 @@
 	min_broken_damage = 30
 	dir = SOUTH
 	organ_tag = "limb"
-
 	appearance_flags = PIXEL_SCALE | LONG_GLIDE
+	scale_max_damage_to_species_health = TRUE
 
 	var/slowdown = 0
 	var/tmp/icon_cache_key

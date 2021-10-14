@@ -9,26 +9,27 @@
 	throwforce = 2
 
 	// Strings.
-	var/organ_tag = "organ"           // Unique identifier.
-	var/parent_organ = BP_CHEST       // Organ holding this object.
+	var/organ_tag = "organ"                // Unique identifier.
+	var/parent_organ = BP_CHEST            // Organ holding this object.
 
 	// Status tracking.
-	var/status = 0                    // Various status flags (such as robotic)
-	var/vital                         // Lose a vital limb, die immediately.
+	var/status = 0                         // Various status flags (such as robotic)
+	var/vital                              // Lose a vital limb, die immediately.
 
 	// Reference data.
-	var/mob/living/carbon/human/owner // Current mob owning the organ.
-	var/datum/dna/dna                 // Original DNA.
-	var/decl/species/species          // Original species.
-	var/decl/bodytype/bodytype        // Original bodytype.
-	var/list/ailments                 // Current active ailments if any.
+	var/mob/living/carbon/human/owner      // Current mob owning the organ.
+	var/datum/dna/dna                      // Original DNA.
+	var/decl/species/species               // Original species.
+	var/decl/bodytype/bodytype             // Original bodytype.
+	var/list/ailments                      // Current active ailments if any.
 
 	// Damage vars.
-	var/damage = 0                    // Current damage to the organ
-	var/min_broken_damage = 30        // Damage before becoming broken
-	var/max_damage = 30               // Damage cap
-	var/rejecting                     // Is this organ already being rejected?
-	var/death_time
+	var/damage = 0                         // Current damage to the organ
+	var/min_broken_damage = 30             // Damage before becoming broken
+	var/max_damage = 30                    // Damage cap
+	var/rejecting                          // Is this organ already being rejected?
+	var/death_time                         // world.time at moment of death.
+	var/scale_max_damage_to_species_health // Whether or not we should scale the damage values of this organ to the owner species.
 
 /obj/item/organ/Destroy()
 	owner = null
@@ -54,11 +55,6 @@
 	if(!istype(given_dna))
 		given_dna = null
 
-	if(max_damage)
-		min_broken_damage = FLOOR(max_damage / 2)
-	else
-		max_damage = min_broken_damage * 2
-
 	if(iscarbon(loc))
 		owner = loc
 		if(!given_dna && owner.dna)
@@ -70,6 +66,15 @@
 		set_dna(given_dna)
 	if (!species)
 		species = get_species_by_key(global.using_map.default_species)
+
+	// Adjust limb health proportinate to total species health.
+	var/total_health_coefficient = scale_max_damage_to_species_health ? (species.total_health / DEFAULT_SPECIES_HEALTH) : 1
+	if(max_damage)
+		max_damage = max(1, FLOOR(max_damage * total_health_coefficient))
+		min_broken_damage = max(1, FLOOR(max_damage * 0.5))
+	else
+		min_broken_damage = max(1, FLOOR(min_broken_damage * total_health_coefficient))
+		max_damage = max(1, FLOOR(min_broken_damage * 2))
 
 	species.resize_organ(src)
 	bodytype = owner?.bodytype || species.default_bodytype
