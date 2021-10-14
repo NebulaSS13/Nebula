@@ -18,14 +18,11 @@
 	name = "Culture"
 	sort_order = 2
 	var/list/hidden
-	var/list/expanded
 
 /datum/category_item/player_setup_item/background/culture/New()
 	hidden = list()
-	expanded = list()
 	for(var/token in ALL_CULTURAL_TAGS)
 		hidden[token] = TRUE
-		expanded[token] = FALSE
 	..()
 
 /datum/category_item/player_setup_item/background/culture/sanitize_character()
@@ -89,18 +86,17 @@
 		var/decl/cultural_info/culture = GET_DECL(pref.cultural_info[token])
 
 		. += "<table width = '100%'>"
-		. += "<tr><td colspan=3><center><h3>[culture.desc_type]: <a href='?src=\ref[src];expand_options_[token]=1'>[culture.name] <small>\[[expanded[token] ? "-" : "+"]\]</small></a></h3>"
-		if(expanded[token])
-			var/list/valid_values
-			GET_ALLOWED_VALUES(valid_values, token)
-			. += "</center></td></tr>"
-			. += "<tr><td colspan=3><center>"
-			for(var/culture_path in valid_values)
-				var/decl/cultural_info/culture_data = GET_DECL(culture_path)
-				if(pref.cultural_info[token] == culture_data.type)
-					. += "<span class='linkOn'>[culture_data.name]</span> "
-				else
-					. += "<a href='?src=\ref[src];set_token_entry_[token]=\ref[culture_data]'>[culture_data.name]</a> "
+		. += "<tr><td colspan=3><center><h3>[culture.desc_type]</h3>"
+		var/list/valid_values
+		GET_ALLOWED_VALUES(valid_values, token)
+		. += "</center></td></tr>"
+		. += "<tr><td colspan=3><center>"
+		for(var/culture_path in valid_values)
+			var/decl/cultural_info/culture_data = GET_DECL(culture_path)
+			if(pref.cultural_info[token] == culture_data.type)
+				. += "<span class='linkOn'>[culture_data.name]</span> "
+			else
+				. += "<a href='?src=\ref[src];set_token_entry_[token]=\ref[culture_data]'>[culture_data.name]</a> "
 		. += "</center><hr/></td></tr>"
 
 		var/list/culture_info = culture.get_description(!hidden[token])
@@ -123,10 +119,6 @@
 			hidden[token] = !hidden[token]
 			return TOPIC_REFRESH
 		
-		if(href_list["expand_options_[token]"])
-			expanded[token] = !expanded[token]
-			return TOPIC_REFRESH
-
 		var/decl/cultural_info/new_token = href_list["set_token_entry_[token]"]
 		if(!isnull(new_token))
 			new_token = locate(new_token)
