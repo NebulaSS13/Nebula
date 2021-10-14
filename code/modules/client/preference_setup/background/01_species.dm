@@ -51,7 +51,7 @@
 		playables += s
 
 	. = list()
-	. += "<tr><td colspan=3><center><h3>Species: <a href='?src=\ref[src];show_species=1'>[pref.species]</small></a></h3></td></tr>"
+	. += "<tr><td colspan=3><center><h3>Species</h3></td></tr>"
 	. += "</center></td></tr>"
 	. += "<tr><td colspan=3><center>"
 	for(var/s in get_playable_species())
@@ -74,11 +74,6 @@
 	if(href_list["toggle_species_verbose"])
 		hide_species = !hide_species
 		return TOPIC_REFRESH
-
-	else if(href_list["show_species"])
-		var/decl/species/current_species = get_species_by_key(pref.species)
-		show_browser(user, current_species.get_description(), "window=species;size=700x400")
-		return TOPIC_HANDLED
 
 	else if(href_list["set_species"])
 
