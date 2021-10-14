@@ -731,6 +731,9 @@ About the new airlock wires panel:
 			if(src.shock(user, 75))
 				return TRUE
 
+	if(bash(C, user))
+		return TRUE
+
 	if (!repairing && (reason_broken & MACHINE_BROKEN_GENERIC) && src.locked) //bolted and broken
 		. = cut_bolts(C, user)
 		if(!.)
