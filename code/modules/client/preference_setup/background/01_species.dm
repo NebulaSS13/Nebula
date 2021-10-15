@@ -15,13 +15,9 @@
 
 /datum/category_item/player_setup_item/background/species/proc/sanitize_species()
 
-	var/decl/species/mob_species
-	if(!pref.species)
-		mob_species = GET_DECL(global.using_map.default_species)
-		pref.species = mob_species.name
-	else
-		mob_species = get_species_by_key(pref.species)
-
+	if(!pref.species || !get_species_by_key(pref.species))
+		pref.species = global.using_map.default_species
+	var/decl/species/mob_species = get_species_by_key(pref.species)
 	var/decl/pronouns/pronouns = get_pronouns_by_gender(pref.gender)
 	if(!istype(pronouns) || !(pronouns in mob_species.available_pronouns))
 		pronouns = mob_species.available_pronouns[1]
