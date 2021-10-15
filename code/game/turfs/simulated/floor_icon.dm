@@ -36,7 +36,8 @@ var/global/list/flooring_cache = list()
 				has_border |= step_dir
 
 				//Now, if we don't, then lets add a border
-				add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[step_dir]", "[flooring.icon_base]_edges", step_dir, (flooring.flags & TURF_HAS_EDGES)))
+				if(check_state_in_icon("[flooring.icon_base]_edges", flooring.icon))
+					add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[step_dir]", "[flooring.icon_base]_edges", step_dir, (flooring.flags & TURF_HAS_EDGES)))
 
 		has_smooth = ~(has_border & (NORTH | SOUTH | EAST | WEST))
 
@@ -47,14 +48,14 @@ var/global/list/flooring_cache = list()
 		if (has_smooth && flooring.flags & TURF_HAS_INNER_CORNERS)
 			for(var/direction in global.cornerdirs)
 				if((has_smooth & direction) == direction)
-					if(!flooring.symmetric_test_link(src, get_step(src, direction)))
+					if(!flooring.symmetric_test_link(src, get_step(src, direction)) && check_state_in_icon("[flooring.icon_base]_corners", flooring.icon))
 						add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-corner-[direction]", "[flooring.icon_base]_corners", direction))
 
 		//Next up, outer corners
 		if (has_border && flooring.flags & TURF_HAS_CORNERS)
 			for(var/direction in global.cornerdirs)
 				if((has_border & direction) == direction)
-					if(!flooring.symmetric_test_link(src, get_step(src, direction)))
+					if(!flooring.symmetric_test_link(src, get_step(src, direction)) && check_state_in_icon("[flooring.icon_base]_edges", flooring.icon))
 						add_overlay(get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction,(flooring.flags & TURF_HAS_EDGES)))
 
 	if(decals && decals.len)
