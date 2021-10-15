@@ -47,7 +47,7 @@ Right Click       - List/Create Area
 	if (mode == "Pick")
 		var/area/path = select_subpath((selected_area?.type || /area/space), /area)
 		if (path)
-			for (var/area/R in world)
+			for (var/area/R in global.areas)
 				if (R.type == path)
 					SelectArea(R)
 					to_chat(user, "Picked area [selected_area.name]")

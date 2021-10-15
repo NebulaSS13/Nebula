@@ -17,10 +17,19 @@
 	else
 		return image(use_custom_front || deck_icon, "[card_icon]")
 
+var/global/list/card_decks = list()
 /obj/item/deck
 	w_class = ITEM_SIZE_SMALL
 	icon = 'icons/obj/items/playing_cards.dmi'
 	var/list/cards = list()
+
+/obj/item/deck/Initialize()
+	. = ..()
+	global.card_decks += src
+
+/obj/item/deck/Destroy()
+	. = ..()
+	global.card_decks -= src
 
 /obj/item/deck/inherit_custom_item_data(var/datum/custom_item/citem)
 	. = ..()
@@ -405,7 +414,7 @@
 /obj/item/hand/missing_card/Initialize()
 	. = ..()
 	var/list/deck_list = list()
-	for(var/obj/item/deck/D in world)
+	for(var/obj/item/deck/D in global.card_decks)
 		if(isturf(D.loc))		//Decks hiding in inventories are safe. Respect the sanctity of loadout items.
 			deck_list += D
 

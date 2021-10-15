@@ -14,7 +14,7 @@
 /obj/structure/flora/tree/pine/Initialize()
 	. = ..()
 	icon_state = "pine_[rand(1, 3)]"
-
+	
 /obj/structure/flora/tree/pine/xmas
 	name = "\improper Christmas tree"
 	desc = "O Christmas tree, O Christmas tree..."

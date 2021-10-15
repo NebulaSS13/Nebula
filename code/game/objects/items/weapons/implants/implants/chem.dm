@@ -1,3 +1,5 @@
+var/global/list/chem_implants = list()
+
 /obj/item/implant/chem
 	name = "chemical implant"
 	desc = "Injects things."
@@ -23,7 +25,12 @@
 
 /obj/item/implant/chem/Initialize()
 	. = ..()
+	global.chem_implants += src
 	create_reagents(50)
+
+/obj/item/implant/chem/Destroy()
+	. = ..()
+	global.chem_implants -= src
 
 /obj/item/implant/chem/activate(var/amount)
 	if(malfunction || (!iscarbon(imp_in)))	return 0
