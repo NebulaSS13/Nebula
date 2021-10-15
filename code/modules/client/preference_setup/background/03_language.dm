@@ -43,7 +43,8 @@
 
 	if(href_list["remove_language"])
 		var/index = text2num(href_list["remove_language"])
-		pref.alternate_languages.Cut(index, index+1)
+		if(length(pref.alternate_languages) >= index)
+			pref.alternate_languages.Cut(index, index+1)
 		return TOPIC_REFRESH
 
 	if(href_list["add_language"])
@@ -56,7 +57,6 @@
 			return TOPIC_REFRESH
 
 		sanitize_alt_languages()
-		var/list/available_languages = list()
 		if(lang.type in (allowed_languages - free_languages))
 			pref.alternate_languages |= lang.type
 			return TOPIC_REFRESH
@@ -130,9 +130,9 @@
 			var/lang = pref.alternate_languages[i]
 			var/decl/language/lang_instance = GET_DECL(lang)
 			if(free_languages[lang])
-				LAZYADD(., "<td><b>[lang_instance.name] <i>(required)</i></b></td>")
+				LAZYADD(., "<td width = '200px'><b>[lang_instance.name] <i>(required)</i></b></td>")
 			else
-				LAZYADD(., "<td><b>[lang_instance.name] <a href='?src=\ref[src];remove_language=[i]'>Remove</a></b></td>")
+				LAZYADD(., "<td width = '200px'><b>[lang_instance.name] <a href='?src=\ref[src];remove_language=[i]'>Remove</a></b></td>")
 			LAZYADD(., "<td>[lang_instance.desc || "No information avaliable."]</td>")
 			LAZYADD(., "</tr>")
 
@@ -146,15 +146,23 @@
 
 		LAZYADD(., "<tr>")	
 		if(length(available_languages))
+			colspan = " colspan = 2"
 			var/list/language_links = list()
+			var/i = 0
 			for(var/decl/language/lang in available_languages)
-				language_links += "<a href='?src=\ref[src];add_language=\ref[lang]'>[lang.name]</a>"
-			LAZYADD(., "<td[colspan]><b>Add language ([remaining_langs] remaining:</b> [jointext(language_links, null)]</td>")
+				i++
+				var/language_link = "<a href='?src=\ref[src];add_language=\ref[lang]'>[lang.name]</a>"
+				if(i == 5)
+					i = 0
+					language_link += "<br>"
+				language_links += language_link
+			LAZYADD(., "<td width = '200px'><b>Add language ([remaining_langs] remaining)</b></td>")
+			LAZYADD(., "<td>[jointext(language_links, null)]</td>")
 		else
 			LAZYADD(., "<td[colspan]>There are no additional languages available to select.</td>")
 		LAZYADD(., "</tr>")
 
 	if(!LAZYLEN(.))
-		LAZYADD(., "<tr><td>Your current species or background does not allow you to choose additional languages.</td></tr>")
+		LAZYADD(., "<tr><td[colspan]>Your current species or background does not allow you to choose additional languages.</td></tr>")
 
 #undef MAX_LANGUAGES

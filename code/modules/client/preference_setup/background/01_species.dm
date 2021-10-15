@@ -63,18 +63,20 @@
 	. += "</center><hr/></td></tr>"
 
 	. += "<tr>"
-	var/desc = current_species.description || "No additional details."
-	if(hide_species && length(desc) > 200)
-		desc = "[copytext(desc, 1, 194)] <small>\[...\]</small>"
-	. += "<td width = '200px'><center>[desc]</center></td>"
-	. += "<td width = '50px'><a href='?src=\ref[src];toggle_species_verbose=1'>[hide_species ? "Expand" : "Collapse"]</a></td>"
 
 	var/icon/use_preview_icon = current_species.get_preview_icon()
 	if(use_preview_icon)
 		send_rsc(user, use_preview_icon, current_species.preview_icon_path)		
-		. += "<td width = '[max(100, round(current_species.preview_icon_width*1.2))]px' align='center'><img src='[current_species.preview_icon_path]' width='[current_species.preview_icon_width]px' height='[current_species.preview_icon_height]px'></td>"
+		. += "<td width = '200px' align='center'><img src='[current_species.preview_icon_path]' width='[current_species.preview_icon_width]px' height='[current_species.preview_icon_height]px'></td>"
 	else
-		. += "<td width = '100px' align='center'>No preview available.</td>"
+		. += "<td width = '200px' align='center'>No preview available.</td>"
+		
+	var/desc = current_species.description || "No additional details."
+	if(hide_species && length(desc) > 200)
+		desc = "[copytext(desc, 1, 194)] <small>\[...\]</small>"
+	. += "<td width>[desc]</td>"
+	. += "<td width = '50px'><a href='?src=\ref[src];toggle_species_verbose=1'>[hide_species ? "Expand" : "Collapse"]</a></td>"
+
 	. += "</tr>"
 
 	. += "</table><hr>"
