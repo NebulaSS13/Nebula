@@ -674,11 +674,11 @@ var/global/list/damage_icon_parts = list()
 		queue_icon_update()
 
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
+	overlays_standing[HO_TAIL_OVER_LAYER] =  null
+	overlays_standing[HO_TAIL_UNDER_LAYER] = null
 	var/obj/item/organ/external/tail/tail_organ = get_organ(BP_TAIL)
 	if(!istype(tail_organ))
 		return
-	overlays_standing[HO_TAIL_OVER_LAYER] =  null
-	overlays_standing[HO_TAIL_UNDER_LAYER] = null
 	var/tail_state = tail_organ.get_tail(tail_organ)
 	if(tail_state && (!wear_suit || !(wear_suit.flags_inv & HIDETAIL)))
 		var/icon/tail_s = get_tail_icon(tail_organ)
