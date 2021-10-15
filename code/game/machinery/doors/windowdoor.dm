@@ -176,8 +176,11 @@
 
 /obj/machinery/door/window/attackby(obj/item/I, mob/user)
 	//If it's in the process of opening/closing, ignore the click
-	if (src.operating == 1)
+	if(operating)
 		return
+
+	if(bash(I, user))
+		return TRUE
 
 	. = ..()
 	if(.)

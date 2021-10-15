@@ -1,6 +1,7 @@
 /*
 	Datum-based species. Should make for much cleaner and easier to maintain race code.
 */
+var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species
 
@@ -53,7 +54,7 @@
 	var/list/speech_chance                    // The likelihood of a speech sound playing.
 
 	// Combat vars.
-	var/total_health = 200                   // Point at which the mob will enter crit.
+	var/total_health = DEFAULT_SPECIES_HEALTH  // Point at which the mob will enter crit.
 	var/list/unarmed_attacks = list(           // Possible unarmed attacks that the mob will use in combat,
 		/decl/natural_attack,
 		/decl/natural_attack/bite

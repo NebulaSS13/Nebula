@@ -1049,3 +1049,6 @@
 
 /mob/get_mob()
 	return src
+
+/mob/proc/set_glide_size(var/delay)
+	glide_size = ADJUSTED_GLIDE_SIZE(delay)

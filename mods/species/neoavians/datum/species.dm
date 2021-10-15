@@ -33,9 +33,7 @@
 		/decl/bodytype/avian/additive/raptor
 	)
 
-	total_health = 80
-	brute_mod = 1.35
-	burn_mod =  1.35
+	total_health = 120
 	mob_size = MOB_SIZE_SMALL
 	holder_type = /obj/item/holder
 	gluttonous = GLUT_TINY

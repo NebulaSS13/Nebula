@@ -159,10 +159,11 @@
 	. = ..()
 	owner?.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
 
+/obj/item/organ/external/hand/Destroy()
+	owner?.remove_held_item_slot(organ_tag)
+	. = ..()
+
 /obj/item/organ/external/hand/removed()
-	var/held = owner?.get_equipped_item(organ_tag)
-	if(held)
-		owner.drop_from_inventory(held)
 	owner?.remove_held_item_slot(organ_tag)
 	. = ..()
 
