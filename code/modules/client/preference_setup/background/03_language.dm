@@ -32,15 +32,11 @@
 
 /datum/category_item/player_setup_item/background/languages/content()
 	. = list()
-	. += "<tr><td colspan=3><center><h3>Languages:</h3></td></tr>"
+	. += "<tr><td colspan=3><center><h3>Languages</h3></td></tr>"
 	. += "<hr>"
-	var/list/show_langs = get_language_text()
-	if(LAZYLEN(show_langs))
-		for(var/lang in show_langs)
-			. += lang
-	else
-		. += "Your current species, faction or home system selection does not allow you to choose additional languages.<br>"
-	. += "</center><hr>"
+	. += "<table width = '100%'>"
+	. += jointext(get_language_text(), null)
+	. += "</table></center><hr>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/background/languages/OnTopic(var/href,var/list/href_list, var/mob/user)
@@ -50,24 +46,23 @@
 		pref.alternate_languages.Cut(index, index+1)
 		return TOPIC_REFRESH
 
-	else if(href_list["add_language"])
+	if(href_list["add_language"])
 
 		if(length(pref.alternate_languages) >= MAX_LANGUAGES)
-			alert(user, "You have already selected the maximum number of languages!")
-			return
+			return TOPIC_REFRESH
+
+		var/decl/language/lang = locate(href_list["add_language"])
+		if(!istype(lang) || (lang.type in pref.alternate_languages))
+			return TOPIC_REFRESH
 
 		sanitize_alt_languages()
 		var/list/available_languages = list()
-		for(var/lang in (allowed_languages - free_languages))
-			available_languages |= GET_DECL(lang)
+		if(lang.type in (allowed_languages - free_languages))
+			pref.alternate_languages |= lang.type
+			return TOPIC_REFRESH
 
-		if(!length(available_languages))
-			alert(user, "There are no additional languages available to select.")
-		else
-			var/decl/language/new_lang = input(user, "Select an additional language", "Character Generation", null) as null|anything in available_languages
-			if(new_lang)
-				pref.alternate_languages |= new_lang.type
-				return TOPIC_REFRESH
+		return TOPIC_NOACTION
+
 	. = ..()
 
 /datum/category_item/player_setup_item/background/languages/proc/rebuild_language_cache(var/mob/user)
@@ -124,20 +119,42 @@
 		pref.alternate_languages.Cut(MAX_LANGUAGES + 1)
 
 /datum/category_item/player_setup_item/background/languages/proc/get_language_text()
+
 	sanitize_alt_languages()
+
+	var/colspan
 	if(LAZYLEN(pref.alternate_languages))
+		colspan = " colspan = 2"
 		for(var/i = 1 to length(pref.alternate_languages))
+			LAZYADD(., "<tr>")
 			var/lang = pref.alternate_languages[i]
 			var/decl/language/lang_instance = GET_DECL(lang)
 			if(free_languages[lang])
-				LAZYADD(., "- [lang_instance.name] (required).<br>")
-				LAZYADD(., "<i><b>[lang_instance.desc || "No information avaliable."]</b></i></br>")
+				LAZYADD(., "<td><b>[lang_instance.name] <i>(required)</i></b></td>")
 			else
-				LAZYADD(., "- [lang_instance.name] <a href='?src=\ref[src];remove_language=[i]'>Remove</a> <span style='color:#ff0000;font-style:italic;'>[lang_instance.warning]</span><br>")
-				if(lang in pref.alternate_languages)
-					LAZYADD(., "<i><b>[lang_instance.desc || "No information avaliable."]</b></i></br>")
+				LAZYADD(., "<td><b>[lang_instance.name] <a href='?src=\ref[src];remove_language=[i]'>Remove</a></b></td>")
+			LAZYADD(., "<td>[lang_instance.desc || "No information avaliable."]</td>")
+			LAZYADD(., "</tr>")
+
 	if(pref.alternate_languages.len < MAX_LANGUAGES)
+
 		var/remaining_langs = MAX_LANGUAGES - pref.alternate_languages.len
-		LAZYADD(., "- <a href='?src=\ref[src];add_language=1'>add</a> ([remaining_langs] remaining)<br>")
+		var/list/available_languages = list()
+		for(var/lang in (allowed_languages - free_languages))
+			if(!(lang in pref.alternate_languages))
+				available_languages |= GET_DECL(lang)
+
+		LAZYADD(., "<tr>")	
+		if(length(available_languages))
+			var/list/language_links = list()
+			for(var/decl/language/lang in available_languages)
+				language_links += "<a href='?src=\ref[src];add_language=\ref[lang]'>[lang.name]</a>"
+			LAZYADD(., "<td[colspan]><b>Add language ([remaining_langs] remaining:</b> [jointext(language_links, null)]</td>")
+		else
+			LAZYADD(., "<td[colspan]>There are no additional languages available to select.</td>")
+		LAZYADD(., "</tr>")
+
+	if(!LAZYLEN(.))
+		LAZYADD(., "<tr><td>Your current species or background does not allow you to choose additional languages.</td></tr>")
 
 #undef MAX_LANGUAGES
