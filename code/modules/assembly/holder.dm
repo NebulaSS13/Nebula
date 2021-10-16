@@ -15,6 +15,17 @@
 	var/obj/item/assembly/a_right = null
 	var/obj/special_assembly = null
 
+/obj/item/assembly_holder/Initialize()
+	. = ..()
+	global.listening_objects += src
+
+/obj/item/assembly_holder/Destroy()
+	global.listening_objects -= src
+	a_left = null
+	a_right = null
+	special_assembly = null
+	return ..()
+
 /obj/item/assembly_holder/proc/attach(var/obj/item/D, var/obj/item/D2, var/mob/user)
 	return
 
@@ -181,16 +192,6 @@
 //		if(!special_assembly == D)
 //			special_assembly.dothings()
 	return 1
-
-
-/obj/item/assembly_holder/Initialize()
-	. = ..()
-	global.listening_objects += src
-
-/obj/item/assembly_holder/Destroy()
-	global.listening_objects -= src
-	return ..()
-
 
 /obj/item/assembly_holder/hear_talk(mob/living/M, msg, verb, decl/language/speaking)
 	if(a_right)
