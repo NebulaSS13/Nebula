@@ -630,8 +630,8 @@ default behaviour is:
 
 /mob/living/carbon/get_contained_external_atoms()
 	. = ..()
-	. -= internal_organs
-	. -= organs
+	LAZYREMOVE(., internal_organs)
+	LAZYREMOVE(., organs)
 
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client
