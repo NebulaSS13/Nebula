@@ -57,6 +57,10 @@
 
 	if(iscarbon(loc))
 		owner = loc
+		if(owner && QDELETED(owner))
+			owner = null
+			return INITIALIZE_HINT_QDEL
+
 		if(!given_dna && owner.dna)
 			given_dna = owner.dna
 		else
