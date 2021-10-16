@@ -1,3 +1,4 @@
+var/global/list/pai_cards = list()
 /obj/item/paicard
 	name = "personal AI device"
 	icon = 'icons/obj/items/device/pai.dmi'
@@ -23,8 +24,10 @@
 /obj/item/paicard/Initialize()
 	. = ..()
 	overlays += "pai-off"
+	global.pai_cards += src
 
 /obj/item/paicard/Destroy()
+	global.pai_cards -= src
 	//Will stop people throwing friend pAIs into the singularity so they can respawn
 	if(!isnull(pai))
 		pai.death(0)

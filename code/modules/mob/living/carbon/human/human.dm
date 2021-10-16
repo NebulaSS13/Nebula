@@ -858,7 +858,7 @@
 
 	var/list/mob/creatures = list()
 
-	for(var/mob/living/carbon/h in world)
+	for(var/mob/living/carbon/h in global.living_mob_list_)
 		var/turf/temp_turf = get_turf(h)
 		if((temp_turf.z != 1 && temp_turf.z != 5) || h.stat!=CONSCIOUS) //Not on mining or the station. Or dead
 			continue
@@ -886,13 +886,11 @@
 	reset_blood()
 
 	if(!client || !key) //Don't boot out anyone already in the mob.
-		for (var/obj/item/organ/internal/brain/H in world)
-			if(H.brainmob)
-				if(H.brainmob.real_name == src.real_name)
-					if(H.brainmob.mind)
-						H.brainmob.mind.transfer_to(src)
-						qdel(H)
-
+		for(var/mob/living/carbon/brain/brain in global.player_list) // This is really nasty, does it even work anymore?
+			if(brain.real_name == src.real_name && brain.mind)
+				brain.mind.transfer_to(src)
+				qdel(brain.loc)
+				break
 	losebreath = 0
 	UpdateAppearance()
 	..()

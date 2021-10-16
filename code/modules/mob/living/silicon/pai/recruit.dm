@@ -109,7 +109,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 			if("submit")
 				if(candidate)
 					candidate.ready = 1
-					for(var/obj/item/paicard/p in world)
+					for(var/obj/item/paicard/p in global.pai_cards)
 						if(p.looking_for_personality == 1)
 							p.alertUpdate()
 				close_browser(usr, "window=paiRecruit")

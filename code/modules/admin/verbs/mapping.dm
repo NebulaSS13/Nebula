@@ -114,11 +114,12 @@ var/global/intercom_range_display_status = 0
 		qdel(M)
 
 	if(intercom_range_display_status)
-		for(var/obj/item/radio/intercom/I in world)
+		for(var/obj/item/radio/intercom/I in SSmachines.machinery)
 			for(var/turf/T in orange(7,I))
 				var/obj/effect/debugging/marker/F = new/obj/effect/debugging/marker(T)
 				if (!(F in view(7,I.loc)))
 					qdel(F)
+
 	SSstatistics.add_field_details("admin_verb","mIRD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 var/global/list/debug_verbs = list (
