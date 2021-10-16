@@ -17,13 +17,15 @@
 	. = ..()
 	cameranet_enabled = camnet_enabled
 	requires_connection = req_connection
-	if(cameranet_enabled)
-		cameranet.add_source(holder)
 	camera_repository.add_camera_to_channels(src, channels)
 	display_name = camera_name
 
+/datum/extension/network_device/camera/post_construction()
+	if(cameranet_enabled)
+		cameranet.add_source(holder)
+
 /datum/extension/network_device/camera/Destroy()
-	camera_repository.add_camera_to_channels(src, channels)
+	camera_repository.remove_camera_from_channels(src, channels)
 	. = ..()
 
 /datum/extension/network_device/camera/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nanoui/master_ui, datum/topic_state/state)
