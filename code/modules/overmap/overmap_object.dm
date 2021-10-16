@@ -25,6 +25,9 @@
 
 	var/overmap_id = OVERMAP_ID_SPACE
 
+/obj/effect/overmap/touch_map_edge(var/overmap_id)
+	return
+
 //Overlay of how this object should look on other skyboxes
 /obj/effect/overmap/proc/get_skybox_representation()
 	return
