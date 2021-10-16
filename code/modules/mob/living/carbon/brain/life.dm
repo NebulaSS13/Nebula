@@ -67,12 +67,11 @@
 		//adjustFireLoss(2.5*discomfort)
 		adjustFireLoss(5.0*discomfort)
 
-/mob/living/carbon/brain/handle_chemicals_in_body()
+/mob/living/carbon/brain/apply_chemical_effects()
 	. = ..()
-	if(.)
-		if(resting)
-			ADJ_STATUS(src, STAT_DIZZY, -4)
-		updatehealth()
+	if(resting)
+		ADJ_STATUS(src, STAT_DIZZY, -4)
+		return TRUE
 
 /mob/living/carbon/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
 	updatehealth()

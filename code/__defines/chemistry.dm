@@ -38,6 +38,9 @@
 #define	CE_VOICELOSS     "whispers"     // Lowers the subject's voice to a whisper
 #define CE_GLOWINGEYES   "eyeglow"      // Causes eyes to glow.
 
+#define CE_REGEN_BRUTE   "bruteheal"    // Causes brute damage to regenerate.
+#define CE_REGEN_BURN    "burnheal"     // Causes burn damage to regenerate.
+
 #define GET_CHEMICAL_EFFECT(X, C) (LAZYACCESS(X.chem_effects, C) || 0)
 
 //reagent flags
