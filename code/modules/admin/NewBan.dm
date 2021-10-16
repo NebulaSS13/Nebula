@@ -114,14 +114,14 @@ var/global/savefile/Banlist
 	else
 		Banlist.dir.Add("[ckey][computerid]")
 		Banlist.cd = "/base/[ckey][computerid]"
-		Banlist["key"] << ckey
-		Banlist["id"] << computerid
-		Banlist["ip"] << address
-		Banlist["reason"] << reason
-		Banlist["bannedby"] << bannedby
-		Banlist["temp"] << temp
+		to_savefile(Banlist, "key",      ckey)
+		to_savefile(Banlist, "id",       computerid)
+		to_savefile(Banlist, "ip",       address)
+		to_savefile(Banlist, "reason",   reason)
+		to_savefile(Banlist, "bannedby", bannedby)
+		to_savefile(Banlist, "temp",     temp)
 		if (temp)
-			Banlist["minutes"] << bantimestamp
+			to_savefile(Banlist, "minutes", bantimestamp)
 	return 1
 
 /proc/RemoveBan(foldername)
@@ -129,8 +129,8 @@ var/global/savefile/Banlist
 	var/id
 
 	Banlist.cd = "/base/[foldername]"
-	Banlist["key"] >> key
-	Banlist["id"] >> id
+	from_savefile(Banlist, "key", key)
+	from_savefile(Banlist, "id", id)
 	Banlist.cd = "/base"
 
 	if (!Banlist.dir.Remove(foldername)) return 0
@@ -210,17 +210,19 @@ var/global/savefile/Banlist
 			Banlist.cd = "/base"
 			Banlist.dir.Add("trash[i]trashid[i]")
 			Banlist.cd = "/base/trash[i]trashid[i]"
-			Banlist["key"] << "trash[i]"
+			to_savefile(Banlist, "key", "trash[i]")
 		else
 			Banlist.cd = "/base"
 			Banlist.dir.Add("[last]trashid[i]")
 			Banlist.cd = "/base/[last]trashid[i]"
-			Banlist["key"] << last
-		Banlist["id"] << "trashid[i]"
-		Banlist["reason"] << "Trashban[i]."
-		Banlist["temp"] << a
-		Banlist["minutes"] << CMinutes + rand(1,2000)
-		Banlist["bannedby"] << "trashmin"
+			to_savefile(Banlist, "key", last)
+
+		to_savefile(Banlist, "id",        "trashid[i]")
+		to_savefile(Banlist, "reason",    "Trashban[i].")
+		to_savefile(Banlist, "temp",      a)
+		to_savefile(Banlist, "minutes",   CMinutes + rand(1,2000))
+		to_savefile(Banlist, "bannedby", "trashmin")
+
 		last = "trash[i]"
 
 	Banlist.cd = "/base"
