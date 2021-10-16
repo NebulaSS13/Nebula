@@ -1,5 +1,5 @@
 
-/datum/admins/proc/ai_hologram_set(mob/appear as mob in world)
+/datum/admins/proc/ai_hologram_set(mob/appear as mob in global.living_mob_list_)
 	set name = "Set AI Hologram"
 	set desc = "Set an AI's hologram to a mob. Use this verb on the mob you want the hologram to look like."
 	set category = "Fun"

@@ -1,3 +1,5 @@
+var/global/list/closets = list()
+
 /obj/structure/closet
 	name = "closet"
 	desc = "It's a basic storage unit."
@@ -26,9 +28,13 @@
 	var/opened = FALSE
 	var/locked = FALSE
 
+/obj/structure/closet/Destroy()
+	global.closets -= src
+	. = ..()
+
 /obj/structure/closet/Initialize()
 	..()
-
+	global.closets += src
 	if((setup & CLOSET_HAS_LOCK))
 		verbs += /obj/structure/closet/proc/togglelock_verb
 

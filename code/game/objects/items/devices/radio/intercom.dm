@@ -15,7 +15,7 @@
 	intercom = TRUE
 	var/number = 0
 	var/last_tick //used to delay the powercheck
-
+	
 /obj/item/radio/intercom/custom
 	name = "intercom (Custom)"
 	broadcasting = 0

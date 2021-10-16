@@ -1,3 +1,5 @@
+var/global/list/shuttle_landmarks = list()
+
 //making this separate from /obj/effect/landmark until that mess can be dealt with
 /obj/effect/shuttle_landmark
 	name = "Nav Point"
@@ -24,8 +26,13 @@
 	var/overmap_id = OVERMAP_ID_SPACE
 	var/flags = 0
 
+/obj/effect/shuttle_landmark/Destroy()
+	global.shuttle_landmarks -= src
+	. = ..()
+
 /obj/effect/shuttle_landmark/Initialize()
 	. = ..()
+	global.shuttle_landmarks += src
 	if(docking_controller)
 		. = INITIALIZE_HINT_LATELOAD
 
