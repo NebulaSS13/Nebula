@@ -7,7 +7,7 @@
 	if(!thruster.harvest_from || !thruster.harvest_from.owned_field)
 		return // No valid propellant.
 	var/datum/gas_mixture/propellant = ..()
-	propellant.temperature += log(100, (thruster.harvest_from.owned_field.plasma_temperature * efficiency))
+	propellant.temperature += log(100, (thruster.harvest_from.owned_field.temperature * efficiency))
 	return propellant
 
 /datum/extension/ship_engine/gas/fusion/has_fuel()

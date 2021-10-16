@@ -48,13 +48,13 @@
 			core["power"] =       "[C.field_strength/10.0] tesla"
 			core["size"] =        C.owned_field ? "[C.owned_field.size] meter\s" : "Field offline."
 			core["instability"] = C.owned_field ? "[C.owned_field.percent_unstable * 100]%" : "Field offline."
-			core["temperature"] = C.owned_field ? "[C.owned_field.plasma_temperature + 295]K" : "Field offline."
+			core["temperature"] = C.owned_field ? "[C.owned_field.temperature]K" : "Field offline."
 			core["powerstatus"] = "[C.avail()]/[C.active_power_usage] W"
 			var/fuel_string = "<table width = '100%'>"
-			if(C.owned_field && LAZYLEN(C.owned_field.reactants))
-				for(var/reactant in C.owned_field.reactants)
+			if(C.owned_field && LAZYLEN(C.owned_field.reagents.reagent_volumes))
+				for(var/reactant in C.owned_field.reagents.reagent_volumes)
 					var/decl/material/mat = GET_DECL(reactant)
-					fuel_string += "<tr><td>[capitalize(mat.gas_name)]</td><td>[C.owned_field.reactants[reactant]]</td></tr>"
+					fuel_string += "<tr><td>[capitalize(mat.gas_name)]</td><td>[C.owned_field.reagents.reagent_volumes[reactant]]</td></tr>"
 			else
 				fuel_string += "<tr><td colspan = 2>Nothing.</td></tr>"
 			fuel_string += "</table>"

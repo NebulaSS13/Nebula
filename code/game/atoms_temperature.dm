@@ -59,7 +59,10 @@
 		ADJUST_ATOM_TEMPERATURE(src, (diff_temp > 0) ? min(adjust_temp, altered_temp) : max(adjust_temp, altered_temp))
 	else
 		temperature = adjust_temp
-		return PROCESS_KILL
+		. = PROCESS_KILL
+
+	if(reagents)
+		HANDLE_REACTIONS(reagents)
 
 #undef MIN_TEMPERATURE_COEFFICIENT
 #undef MAX_TEMPERATURE_COEFFICIENT

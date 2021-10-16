@@ -137,13 +137,14 @@ var/global/obj/temp_reagents_holder = new
 			// However, we are guaranteed to fully use up the most profligate reagent if possible.
 			// Further reactions may occur on the next tick, when this runs again.
 
+	var/list/reacted_amounts = list()
 	for(var/thing in active_reactions)
 		var/decl/chemical_reaction/C = thing
-		C.process(src, active_reactions[C])
+		reacted_amounts[C] = C.process_reaction(src, active_reactions[C])
 
 	for(var/thing in active_reactions)
 		var/decl/chemical_reaction/C = thing
-		C.post_reaction(src)
+		C.post_reaction(src, reacted_amounts[C])
 
 	update_total()
 

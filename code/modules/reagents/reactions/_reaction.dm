@@ -14,6 +14,8 @@
 	var/log_is_important = 0 // If this reaction should be considered important for logging. Important recipes message admins when mixed, non-important ones just log to file.
 	var/lore_text
 	var/mechanics_text
+	var/codex_category = "reaction"
+	var/priority = 100
 
 /decl/chemical_reaction/proc/can_happen(var/datum/reagents/holder)
 	//check that all the required reagents are present
@@ -49,7 +51,7 @@
 /decl/chemical_reaction/proc/get_reaction_flags(var/datum/reagents/holder)
 	return 0
 
-/decl/chemical_reaction/proc/process(var/datum/reagents/holder, var/limit)
+/decl/chemical_reaction/proc/process_reaction(var/datum/reagents/holder, var/limit)
 	var/data = send_data(holder)
 
 	var/reaction_volume = holder.maximum_volume
@@ -69,9 +71,10 @@
 		holder.add_reagent(result, amt_produced, data, safety = 1)
 
 	on_reaction(holder, amt_produced, reaction_flags)
+	return reaction_volume
 
 //called after processing reactions, if they occurred
-/decl/chemical_reaction/proc/post_reaction(var/datum/reagents/holder)
+/decl/chemical_reaction/proc/post_reaction(var/datum/reagents/holder, var/reacted_amount)
 	var/atom/container = holder.get_reaction_loc()
 	if(mix_message && container && !ismob(container))
 		var/turf/T = get_turf(container)

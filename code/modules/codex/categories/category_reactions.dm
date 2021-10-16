@@ -26,7 +26,7 @@
 	var/list/all_reactions = decls_repository.get_decls_of_subtype(/decl/chemical_reaction)
 	for(var/reactiontype in all_reactions)
 		var/decl/chemical_reaction/reaction = all_reactions[reactiontype]
-		if(!reaction || !reaction.name || reaction.hidden_from_codex || istype(reaction, /decl/chemical_reaction/recipe))
+		if(!reaction || reaction.is_abstract() || reaction.hidden_from_codex || istype(reaction, /decl/chemical_reaction/recipe))
 			continue // Food recipes are handled in category_recipes.dm.
 		var/mechanics_text = "This reaction requires the following reagents:<br>"
 		if(reaction.mechanics_text)
@@ -64,7 +64,7 @@
 		if(reaction.minimum_temperature > 0)
 			mechanics_text += "<br>The reaction will not occur if the temperature is below [reaction.minimum_temperature]K."
 
-		var/reaction_name = produces || lowertext(reaction.name)
+		var/reaction_name = lowertext(reaction.name) || produces
 		if(produces)
 			guide_html += "<tr><td><span codexlink='[produces] (substance)'>[capitalize(reaction_name)]</span></td>"
 		else
@@ -97,8 +97,11 @@
 		guide_html += "</td></tr>"
 
 		entries_to_register += new /datum/codex_entry(                                   \
-		 _display_name =       "[reaction_name] (reaction)",                             \
-		 _associated_strings = list(lowertext(reaction.name), lowertext(reaction_name)), \
+		 _display_name =       "[reaction_name] ([reaction.codex_category])",            \
+		 _associated_strings = list(                                                     \
+			 lowertext(reaction_name),                                                   \
+			 lowertext( "[reaction_name] ([reaction.codex_category])")                   \
+		 ),                                                                              \
 		 _lore_text =          reaction.lore_text,                                       \
 		 _mechanics_text =     mechanics_text                                            \
 		)

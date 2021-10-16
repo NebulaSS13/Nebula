@@ -64,7 +64,7 @@
 /obj/machinery/power/fusion_core/proc/Shutdown(var/force_rupture)
 	if(owned_field)
 		icon_state = "core0"
-		if(force_rupture || owned_field.plasma_temperature > 1000)
+		if(force_rupture || owned_field.temperature > 1000)
 			owned_field.Rupture()
 		else
 			owned_field.RadiateAll()
@@ -125,7 +125,7 @@
 	Startup()
 	if(!owned_field)
 		return FALSE
-	owned_field.plasma_temperature = field_temperature
+	owned_field.temperature = field_temperature
 	return TRUE
 
 /obj/machinery/power/fusion_core/proc/check_core_status()

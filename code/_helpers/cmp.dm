@@ -76,10 +76,10 @@
 /proc/cmp_power_component_priority(obj/item/stock_parts/power/A, obj/item/stock_parts/power/B)
 	return B.priority - A.priority
 
-/proc/cmp_fusion_reaction_asc(var/decl/fusion_reaction/A, var/decl/fusion_reaction/B)
+/proc/cmp_reaction_asc(var/decl/chemical_reaction/A, var/decl/chemical_reaction/B)
 	return A.priority - B.priority
 
-/proc/cmp_fusion_reaction_des(var/decl/fusion_reaction/A, var/decl/fusion_reaction/B)
+/proc/cmp_reaction_des(var/decl/chemical_reaction/A, var/decl/chemical_reaction/B)
 	return B.priority - A.priority
 
 /proc/cmp_program(var/datum/computer_file/program/A, var/datum/computer_file/program/B)

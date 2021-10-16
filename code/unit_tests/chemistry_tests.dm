@@ -151,6 +151,8 @@
 	var/list/all_reactions = decls_repository.get_decls_of_subtype(/decl/chemical_reaction)
 	for(var/path in all_reactions)
 		var/decl/chemical_reaction/reaction = all_reactions[path]
+		if(reaction.is_abstract())
+			continue
 		for(var/reagent in reaction.required_reagents)
 			for(var/decl/chemical_reaction/other_reaction in SSmaterials.chemical_reactions_by_id[reagent])
 				// We check if their requirements to react are a subset of our reaction's requirements, i.e. (we can react) implies (they can react)

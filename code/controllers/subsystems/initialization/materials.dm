@@ -9,7 +9,6 @@ SUBSYSTEM_DEF(materials)
 	var/list/materials
 	var/list/strata
 	var/list/materials_by_name
-	var/list/fusion_reactions
 	var/list/weighted_minerals_sparse = list()
 	var/list/weighted_minerals_rich = list()
 
@@ -38,6 +37,8 @@ SUBSYSTEM_DEF(materials)
 	var/list/all_reactions = decls_repository.get_decls_of_subtype(/decl/chemical_reaction)
 	for(var/path in all_reactions)
 		var/decl/chemical_reaction/D = all_reactions[path]
+		if(D.is_abstract())
+			continue
 		if(!chemical_reactions_by_result[D.result])
 			chemical_reactions_by_result[D.result] = list()
 		chemical_reactions_by_result[D.result] += D
@@ -46,6 +47,9 @@ SUBSYSTEM_DEF(materials)
 			if(!chemical_reactions_by_id[reagent_id])
 				chemical_reactions_by_id[reagent_id] = list()
 			chemical_reactions_by_id[reagent_id] += D
+
+	for(var/reagent_id in chemical_reactions_by_id)
+		chemical_reactions_by_id[reagent_id] = sortTim(chemical_reactions_by_id[reagent_id], /proc/cmp_reaction_des)
 
 	var/list/cocktails = decls_repository.get_decls_of_subtype(/decl/cocktail)
 	for(var/ctype in cocktails)
@@ -58,7 +62,6 @@ SUBSYSTEM_DEF(materials)
 
 	// Various other material functions.
 	build_material_lists()       // Build core material lists.
-	build_fusion_reaction_list() // Build fusion reaction tree.
 
 	var/alpha_inc = 256 / DAMAGE_OVERLAY_COUNT
 	for(var/i = 1; i <= DAMAGE_OVERLAY_COUNT; i++)
@@ -87,21 +90,6 @@ SUBSYSTEM_DEF(materials)
 			weighted_minerals_sparse[new_mineral.type] = new_mineral.sparse_material_weight
 		if(new_mineral.rich_material_weight)
 			weighted_minerals_rich[new_mineral.type] = new_mineral.rich_material_weight
-
-/datum/controller/subsystem/materials/proc/build_fusion_reaction_list()
-	fusion_reactions = list()
-	var/list/all_reactions = decls_repository.get_decls_of_subtype(/decl/fusion_reaction)
-	for(var/rtype in all_reactions)
-		var/decl/fusion_reaction/cur_reaction = all_reactions[rtype]
-		if(!fusion_reactions[cur_reaction.p_react])
-			fusion_reactions[cur_reaction.p_react] = list()
-		fusion_reactions[cur_reaction.p_react][cur_reaction.s_react] = cur_reaction
-		if(!fusion_reactions[cur_reaction.s_react])
-			fusion_reactions[cur_reaction.s_react] = list()
-		fusion_reactions[cur_reaction.s_react][cur_reaction.p_react] = cur_reaction
-
-/datum/controller/subsystem/materials/proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
-	. = fusion_reactions[p_react] && fusion_reactions[p_react][s_react]
 
 /datum/controller/subsystem/materials/stat_entry()
 	..("AH:[active_holders.len]")
