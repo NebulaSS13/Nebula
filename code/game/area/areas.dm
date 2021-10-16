@@ -298,7 +298,6 @@ var/global/list/mob/living/forced_ambiance_list = new
 	if(!istype(A,/mob/living))	return
 
 	var/mob/living/L = A
-	if(!L.ckey)	return
 
 	if(!L.lastarea)
 		L.lastarea = get_area(L.loc)
@@ -309,9 +308,12 @@ var/global/list/mob/living/forced_ambiance_list = new
 			thunk(L)
 		L.update_floating()
 
-	play_ambience(L)
+	if(L.ckey)
+		play_ambience(L)
+		do_area_blurb(L)
+		
 	L.lastarea = newarea
-	do_area_blurb(L)
+	
 
 /area/Exited(A)
 	if(isliving(A))

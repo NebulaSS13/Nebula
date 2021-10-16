@@ -93,12 +93,20 @@
 	to_chat(user, "This kit will add a '[new_name]' decal to a exosuit'.")
 
 // exosuit kits.
-/obj/item/kit/paint/powerloader/flames_red
-	name = "\"Firestarter\" exosuit decal kit"
-	new_name = "red flames"
-	new_state = "flames_red"
+/obj/item/kit/paint/flames_red
+	name = "\"Firestarter\" exosuit customisation kit"
+	new_icon = "flames_red"
 
-/obj/item/kit/paint/powerloader/flames_blue
-	name = "\"Burning Chrome\" exosuit decal kit"
-	new_name = "blue flames"
-	new_state = "flames_blue"
+/obj/item/kit/paint/flames_blue
+	name = "\"Burning Chrome\" exosuit customisation kit"
+	new_icon = "flames_blue"
+
+/obj/item/kit/paint/camouflage
+	name = "\"Guerilla\" exosuit customisation kit"
+	desc = "An old military pattern for jungle warfare, now available for general use."
+	new_icon = "cammo1"
+
+/obj/item/kit/paint/camouflage/forest
+	name = "\"Alpine\" exosuit customisation kit"
+	new_icon = "cammo2"
+	desc = "A muted pattern for alpine environments. Don't miss the forest for the trees!"

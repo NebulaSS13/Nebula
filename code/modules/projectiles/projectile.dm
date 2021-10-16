@@ -424,8 +424,11 @@
 	original = target
 
 	var/list/calculated = list(null,null,null)
-	if(isliving(source) && params)
-		calculated = calculate_projectile_Angle_and_pixel_offsets(source, params)
+	var/mob/living/S = source
+	if(istype(S))
+		S = S.get_effective_gunner()
+	if(istype(S) && S.client && params)
+		calculated = calculate_projectile_Angle_and_pixel_offsets(S, params)
 		p_x = calculated[2]
 		p_y = calculated[3]
 		setAngle(calculated[1])
