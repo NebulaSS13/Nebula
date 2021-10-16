@@ -44,8 +44,7 @@ var/global/list/overmap_unknown_ids = list()
 		invisibility = INVISIBILITY_OVERMAP // Effects that require identification have their images cast to the client via sensors.
 
 	if(scannable)
-		while(!unknown_id || (unknown_id in global.overmap_unknown_ids))
-			unknown_id = "[prob(50) ? pick(global.phonetic_alphabet) : pick(global.greek_letters)] [pick(global.numbers_as_words)]"
+		unknown_id = "[pick(global.phonetic_alphabet)]-[random_id(/obj/effect/overmap, 100, 999)]"
 
 	update_icon()
 
