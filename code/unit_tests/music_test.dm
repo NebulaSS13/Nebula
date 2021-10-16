@@ -37,7 +37,7 @@
 
 /datum/unit_test/jukebox_track_validate/start_test()
 	var/list/bad_boxes = list()
-	for(var/obj/machinery/media/jukebox/jukebox in world)
+	for(var/obj/machinery/media/jukebox/jukebox in SSmachines.machinery)
 		for(var/entry in jukebox.tracks)
 			var/datum/track/track = entry
 			if(!track.title || !ispath(track.track, /decl/music_track))

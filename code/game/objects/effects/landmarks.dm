@@ -13,13 +13,13 @@
 	tag = "landmark*[name]"
 	if(delete_me)
 		return INITIALIZE_HINT_QDEL
-	landmarks_list |= src
+	global.landmarks_list += src
 
 /obj/effect/landmark/proc/delete()
 	delete_me = TRUE
 
 /obj/effect/landmark/Destroy()
-	landmarks_list -= src
+	global.landmarks_list -= src
 	return ..()
 
 /obj/effect/landmark/start
