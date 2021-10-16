@@ -267,7 +267,7 @@ var/global/list/time_prefs_fixed = list()
 
 	if(href_list["preference"] == "open_whitelist_forum")
 		if(config.forumurl)
-			user << link(config.forumurl)
+			direct_output(user, link(config.forumurl))
 		else
 			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return

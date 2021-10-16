@@ -34,7 +34,8 @@ exactly 8 "/turf text paths" '"/turf'
 exactly 1 "world<< uses" 'world<<|world[[:space:]]<<'
 exactly 90 "'in world' uses" 'in world'
 exactly 1 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
-exactly 118 "<< uses" '(?<!<)<<(?!<)' -P
+exactly 18 "<< uses" '(?<!<)<<(?!<)' -P
+exactly 10 ">> uses" '>>(?!>)' -P
 exactly 0 "incorrect indentations" '^( {4,})' -P
 exactly 20 "text2path uses" 'text2path'
 exactly 4 "update_icon() override" '/update_icon\((.*)\)'  -P

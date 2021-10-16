@@ -288,27 +288,27 @@
 		var/image/I
 		// Base frame shape.
 		for(var/i = 1 to 4)
-			I = image(icon, dir = 1<<(i-1), icon_state = connections ? connections[i] : "0")
+			I = image(icon, dir = BITFLAG(i-1), icon_state = connections ? connections[i] : "0")
 			I.color = material.color
 			I.alpha = 255 * material.opacity
 			add_overlay(I)
 		// Tabletop
 		if(reinf_material)
 			for(var/i = 1 to 4)
-				I = image(icon, "[reinf_material.table_icon_base]_[connections ? connections[i] : "0"]", dir = 1<<(i-1))
+				I = image(icon, "[reinf_material.table_icon_base]_[connections ? connections[i] : "0"]", dir = BITFLAG(i-1))
 				I.color = reinf_material.color
 				I.alpha = 255 * reinf_material.opacity
 				add_overlay(I)
 		if(additional_reinf_material)
 			for(var/i = 1 to 4)
-				I = image(icon, "[additional_reinf_material.table_icon_reinforced]_[connections ? connections[i] : "0"]", dir = 1<<(i-1))
+				I = image(icon, "[additional_reinf_material.table_icon_reinforced]_[connections ? connections[i] : "0"]", dir = BITFLAG(i-1))
 				I.color = additional_reinf_material.color
 				I.alpha = 255 * additional_reinf_material.opacity
 				add_overlay(I)
 
 		if(felted)
 			for(var/i = 1 to 4)
-				add_overlay(image(icon, "carpet_[connections ? connections[i] : "0"]", dir = 1<<(i-1)))
+				add_overlay(image(icon, "carpet_[connections ? connections[i] : "0"]", dir = BITFLAG(i-1)))
 	else
 
 		mob_offset = 0

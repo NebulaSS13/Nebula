@@ -46,7 +46,7 @@
 
 //	var/list/corner_states = dirs_to_unified_corner_states(directions)
 //	for(var/index = 1 to 4)
-//		var/image/I = image(icon, icon_state = corner_states[index], dir = 1 << (index - 1))
+//		var/image/I = image(icon, icon_state = corner_states[index], dir = BITFLAG(index - 1))
 //		[...]
 
 /proc/dirs_to_unified_corner_states(list/dirs)

@@ -85,7 +85,7 @@ var/global/list/localhost_addresses = list(
 
 	//Logs all hrefs
 	if(config && config.log_hrefs && global.world_href_log)
-		WRITE_FILE(global.world_href_log, "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>")
+		to_file(global.world_href_log, "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>")
 
 	switch(href_list["_src_"])
 		if("holder")	hsrc = holder

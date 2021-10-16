@@ -32,7 +32,7 @@
 	is_floating = 1
 
 	var/amplitude = 2 //maximum displacement from original position
-	var/period = 36 //time taken for the mob to go up >> down >> original position, in deciseconds. Should be multiple of 4
+	var/period = 36 //time taken for the mob to go up > down > original position, in deciseconds. Should be multiple of 4
 
 	var/top = default_pixel_z + amplitude
 	var/bottom = default_pixel_z - amplitude
