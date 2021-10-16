@@ -114,11 +114,13 @@
 					bearing_estimate += 360
 				// Give the player an idea of where the ship is in relation to the ship.
 				if(objects_in_view[contact] <= 0)
-					visible_message(SPAN_NOTICE("<b>\The [src]</b> states, \"Contact nearby, bearing [bearing_estimate], error +/- [bearing_variability].\""))
+					if(!muted)
+						visible_message(SPAN_NOTICE("<b>\The [src]</b> states, \"Unknown contact designation '[contact.unknown_id]' detected nearby, bearing [bearing_estimate], error +/- [bearing_variability]. Beginning trace.\""))
 					objects_in_view[contact] = round(sensors.sensor_strength**2)
 				else
 					objects_in_view[contact] += round(sensors.sensor_strength**2)
-					visible_message(SPAN_NOTICE("<b>\The [src]</b> states, \"[objects_in_view[contact]]% contact tracing complete, bearing [bearing_estimate], error +/- [bearing_variability].\""))
+					if(!muted)
+						visible_message(SPAN_NOTICE("<b>\The [src]</b> states, \"Contact '[contact.unknown_id]' tracing [objects_in_view[contact]]% complete, bearing [bearing_estimate], error +/- [bearing_variability].\""))
 				playsound(loc, "sound/machines/sensors/contactgeneric.ogg", 10, 1) //Let players know there's something nearby.
 			if(objects_in_view[contact] >= 100) // Identification complete.
 				record = new /datum/overmap_contact(src, contact)
