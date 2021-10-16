@@ -474,6 +474,12 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 	return FALSE
 
+//Used for swimming
+/decl/species/proc/can_float(var/mob/living/carbon/human/H)
+	if(!H.is_physically_disabled())
+		return TRUE //We could tie it to stamina
+	return FALSE
+
 // Called when using the shredding behavior.
 /decl/species/proc/can_shred(var/mob/living/carbon/human/H, var/ignore_intent, var/ignore_antag)
 
