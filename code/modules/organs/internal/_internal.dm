@@ -13,19 +13,15 @@
 	if(max_damage)
 		min_bruised_damage = FLOOR(max_damage / 4)
 	. = ..()
-	if(iscarbon(loc))
-		var/mob/living/carbon/holder = loc
-		holder.internal_organs |= src
-
-		var/mob/living/carbon/human/H = holder
-		if(istype(H))
-			var/obj/item/organ/external/E = H.get_organ(parent_organ)
-			if(!E)
-				. = INITIALIZE_HINT_QDEL
-				CRASH("[src] spawned in [holder] without a parent organ: [parent_organ].")
-			LAZYDISTINCTADD(E.internal_organs, src)
-			E.cavity_max_w_class = max(E.cavity_max_w_class, w_class)
-			E.update_internal_organs_cost()
+	if(. != INITIALIZE_HINT_QDEL && owner)
+		owner.internal_organs |= src
+		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
+		if(!E)
+			PRINT_STACK_TRACE("[src] spawned in [owner] without a parent organ: [parent_organ].")
+			return INITIALIZE_HINT_QDEL
+		LAZYDISTINCTADD(E.internal_organs, src)
+		E.cavity_max_w_class = max(E.cavity_max_w_class, w_class)
+		E.update_internal_organs_cost()
 
 /obj/item/organ/internal/Destroy()
 	if(owner)

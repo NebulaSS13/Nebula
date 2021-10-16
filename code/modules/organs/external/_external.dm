@@ -102,6 +102,8 @@
 
 /obj/item/organ/external/Initialize()
 	. = ..()
+	if(. == INITIALIZE_HINT_QDEL)
+		return
 	if(isnull(pain_disability_threshold))
 		pain_disability_threshold = (max_damage * 0.75)
 	if(owner)
