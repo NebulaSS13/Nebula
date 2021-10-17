@@ -64,7 +64,7 @@ var/global/list/ticket_panels = list()
 		closed_by_not_assigned = FALSE
 
 	if(establish_db_connection())
-		var/sql_text = "[closed_by_not_assigned ? "CLOSED" : "SOLVED"]: [closed_by.ckey]\n"
+		var/sql_text = "[closed_by_not_assigned ? "CLOSED (TIMEOUT)" : "SOLVED: [closed_by.ckey]"]\n"
 		var/DBQuery/ticket_text = dbcon.NewQuery("UPDATE `erro_admin_tickets` SET `text` = CONCAT(text, '[sql_text]') WHERE `round` = '[game_id]' AND `inround_id` = '[src.id]';")
 		var/DBQuery/ticket_close = dbcon.NewQuery("UPDATE `erro_admin_tickets` SET `status` = '[closed_by_not_assigned ? "CLOSED" : "SOLVED"]' WHERE `round` = '[game_id]' AND `inround_id` = '[src.id]';")
 		ticket_text.Execute()
