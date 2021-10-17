@@ -35,7 +35,7 @@
 	name = "ANFO"
 	result = /decl/material/liquid/anfo
 	required_reagents = list(
-		/decl/material/liquid/fertilizer = 20, 
+		/decl/material/liquid/fertilizer = 20,
 		/decl/material/liquid/fuel = 10
 	)
 	result_amount = 15
@@ -45,7 +45,7 @@
 	name = "Chemlab ANFO"
 	result = /decl/material/liquid/anfo
 	required_reagents = list(
-		/decl/material/gas/ammonia = 10, 
+		/decl/material/gas/ammonia = 10,
 		/decl/material/liquid/fuel = 5
 	)
 	result_amount = 15
@@ -55,7 +55,7 @@
 	name = "ANFO+"
 	result = /decl/material/liquid/anfo/plus
 	required_reagents = list(
-		/decl/material/liquid/anfo = 15, 
+		/decl/material/liquid/anfo = 15,
 		/decl/material/solid/metal/aluminium = 5
 	)
 	result_amount = 20
@@ -71,7 +71,7 @@
 
 /decl/chemical_reaction/paint
 	name = "Paint"
-	result = /decl/material/liquid/narcotics
+	result = /decl/material/liquid/paint
 	required_reagents = list(/decl/material/liquid/plasticide = 1, /decl/material/liquid/water = 3)
 	result_amount = 5
 	mix_message = "The solution thickens and takes on a glossy sheen."
