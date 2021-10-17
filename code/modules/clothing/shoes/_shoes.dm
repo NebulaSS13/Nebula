@@ -53,8 +53,9 @@
 	if (istype(I, /obj/item/handcuffs))
 		add_cuffs(I, user)
 		return TRUE
-	add_hidden(I, user)
-	return TRUE
+	. = add_hidden(I, user)
+	if(!.)
+		. = ..()
 
 /obj/item/clothing/shoes/proc/add_cuffs(var/obj/item/handcuffs/cuffs, var/mob/user)
 	if (!can_add_cuffs)
@@ -97,24 +98,24 @@
 		attached_cuffs = null
 
 /obj/item/clothing/shoes/proc/add_hidden(var/obj/item/I, var/mob/user)
+	if (!(I.item_flags & ITEM_FLAG_CAN_HIDE_IN_SHOES)) // fail silently
+		return FALSE
 	if (!can_add_hidden_item)
 		to_chat(user, SPAN_WARNING("\The [src] can't hold anything."))
-		return
+		return TRUE
 	if (hidden_item)
 		to_chat(user, SPAN_WARNING("\The [src] already holds \an [hidden_item]."))
-		return
-	if (!(I.item_flags & ITEM_FLAG_CAN_HIDE_IN_SHOES))
-		to_chat(user, SPAN_WARNING("\The [src] can't hold the [I]."))
-		return
+		return TRUE
 	if (I.w_class > hidden_item_max_w_class)
 		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in the [src]."))
-		return
+		return TRUE
 	if (do_after(user, 1 SECONDS))
 		if(!user.unEquip(I, src))
-			return
+			return TRUE
 		user.visible_message(SPAN_ITALIC("\The [user] shoves \the [I] into \the [src]."), range = 1)
 		verbs |= /obj/item/clothing/shoes/proc/remove_hidden
 		hidden_item = I
+		return TRUE
 
 /obj/item/clothing/shoes/proc/remove_hidden(var/mob/user)
 	set name = "Remove Shoe Item"
