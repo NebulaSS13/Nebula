@@ -93,7 +93,7 @@
 		ny = TRANSITIONEDGE + 2
 		nx = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
-	testing("[name]: [A] travelling from [M] ([M.x], [M.y]).")
+	testing("[name]: [A] ([A.z],[A.y],[A.z]) travelling from [M] ([M.x],[M.y]).")
 
 	var/turf/map = locate(M.x,M.y,assigned_z)
 	var/obj/effect/overmap/visitable/TM
@@ -124,17 +124,22 @@
 				global.cached_temporary_sectors[map_turf_type] |= source
 
 /datum/overmap/proc/create_temporary_sector(x,y)
+
 	var/obj/effect/overmap/visitable/sector/temporary/res = locate(x, y, assigned_z)
-	if(istype(res))
+	if(istype(res) && !QDELETED(res))
 		return res
-	else if(length(global.cached_temporary_sectors[map_turf_type]))
+
+	if(length(global.cached_temporary_sectors[map_turf_type]))
 		res = pick(global.cached_temporary_sectors[map_turf_type])
+
 		global.cached_temporary_sectors[map_turf_type] -= res
 		if(!length(global.cached_temporary_sectors[map_turf_type]))
 			global.cached_temporary_sectors -= map_turf_type
+
 		if(istype(res) && !QDELETED(res))
 			res.forceMove(locate(x, y, assigned_z))
 			return res
+
 	return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, create_empty_z_level())
 
 /datum/overmap/proc/create_empty_z_level()

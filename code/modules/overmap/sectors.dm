@@ -61,6 +61,12 @@ var/global/list/known_overmap_sectors
 	if(. == INITIALIZE_HINT_QDEL)
 		return
 
+	find_z_levels()             // This populates map_z and assigns z levels to the ship.
+	move_to_starting_location() // Moves us to the appropriate spot on the overmap level.
+	register_z_levels()         // This makes external calls to update global z level information.
+
+	docking_codes = "[ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))]"
+
 	if(sector_flags & OVERMAP_SECTOR_KNOWN)
 		LAZYADD(global.known_overmap_sectors, src)
 		layer = ABOVE_LIGHTING_LAYER
@@ -68,16 +74,10 @@ var/global/list/known_overmap_sectors
 		for(var/obj/machinery/computer/ship/helm/H AS_ANYTHING in global.overmap_helm_computers)
 			H.add_known_sector(src)
 
-	find_z_levels()     // This populates map_z and assigns z levels to the ship.
-	register_z_levels() // This makes external calls to update global z level information.
-	move_to_starting_location()
-
-	docking_codes = "[ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))]"
-
-	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
-
 	LAZYADD(SSshuttle.sectors_to_initialize, src) //Queued for further init. Will populate the waypoint lists; waypoints not spawned yet will be added in as they spawn.
 	SSshuttle.clear_init_queue()
+
+	testing("Located sector \"[name]\" at [x],[y],[z], containing Z [english_list(map_z)]")
 
 /obj/effect/overmap/visitable/modify_mapped_vars(map_hash)
 	..()

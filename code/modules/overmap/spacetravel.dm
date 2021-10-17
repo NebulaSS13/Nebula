@@ -2,19 +2,19 @@
 var/global/list/cached_temporary_sectors = list()
 
 //Space stragglers go here
-
 /obj/effect/overmap/visitable/sector/temporary
 	name = "Deep Space"
 	invisibility = 101
 	sector_flags = OVERMAP_SECTOR_IN_SPACE
 
 /obj/effect/overmap/visitable/sector/temporary/Initialize(mapload, var/nx, var/ny, var/nz)
-	var/start_loc = locate(1, 1, nz) // This will be moved to the overmap in ..(), but must start on this z level for init to function.
+	var/start_loc = locate(nx, ny, nz)
 	forceMove(start_loc)
 	start_x = nx // This is overmap position
 	start_y = ny
-	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [nz].")
 	. = ..()
+	if(. != INITIALIZE_HINT_QDEL)
+		testing("Temporary sector at [x],[y],[z] was created, corresponding zlevel is [nz].")
 
 /obj/effect/overmap/visitable/sector/temporary/Destroy()
 
