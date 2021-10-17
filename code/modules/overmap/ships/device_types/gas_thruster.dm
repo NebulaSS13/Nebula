@@ -40,8 +40,9 @@
 /datum/extension/ship_engine/gas/get_exhaust_velocity(var/datum/gas_mixture/propellant)
 	if(!is_on() || !has_fuel())
 		return 0
+	propellant = propellant || get_propellant()
 	if(!propellant)
-		propellant = get_propellant()
+		return 0
 
 	var/exit_pressure = get_nozzle_exit_pressure()
 	var/ratio_specific_heat = get_ratio_specific_heat(propellant)
@@ -68,9 +69,8 @@
 
 /datum/extension/ship_engine/gas/proc/get_ratio_specific_heat(var/datum/gas_mixture/propellant)
 	var/ratio_specific_heat = 0
-	if(!propellant)
-		propellant = get_propellant()
-	if(!length(propellant.gas) || !propellant.total_moles)
+	propellant = propellant || get_propellant()
+	if(!propellant || !length(propellant.gas) || !propellant.total_moles)
 		return 0.01 // Divide by zero protection.
 
 	for(var/mat in propellant.gas)
