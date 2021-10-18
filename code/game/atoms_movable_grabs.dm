@@ -14,4 +14,4 @@
 	return ITEM_SIZE_NORMAL
 
 /atom/movable/proc/buckled_grab_check(var/mob/grabber)
-	return !grabber.buckled
+	return !grabber.buckled || (grabber.buckled == src && buckled_mob == grabber)

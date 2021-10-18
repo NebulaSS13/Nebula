@@ -522,10 +522,11 @@ default behaviour is:
 			process_resist()
 
 /mob/living/proc/process_resist()
+
 	//Getting out of someone's inventory.
 	if(istype(src.loc, /obj/item/holder))
 		escape_inventory(src.loc)
-		return
+		return TRUE
 
 	//unbuckling yourself
 	if(buckled)
@@ -537,6 +538,11 @@ default behaviour is:
 		var/obj/structure/C = loc
 		if(C.mob_breakout(src))
 			return TRUE
+
+	// Get rid of someone riding around on you.
+	if(buckled_mob)
+		unbuckle_mob()
+		return TRUE
 
 /mob/living/proc/escape_inventory(obj/item/holder/H)
 	if(H != src.loc) return
