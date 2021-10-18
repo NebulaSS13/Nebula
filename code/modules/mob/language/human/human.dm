@@ -8,7 +8,7 @@
 	flags = WHITELISTED
 	shorthand = "???"
 	space_chance = 40
-	category = /decl/language/human
+	abstract_type = /decl/language/human
 
 /decl/language/human/get_spoken_verb(var/msg_end)
 	switch(msg_end)

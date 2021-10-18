@@ -14,7 +14,6 @@
 /decl/species/lizard
 	name = SPECIES_LIZARD
 	name_plural = SPECIES_LIZARD
-	preview_icon = 'mods/species/lizard/icons/preview.dmi'
 	skin_material = /decl/material/solid/skin/lizard
 
 	available_bodytypes = list(

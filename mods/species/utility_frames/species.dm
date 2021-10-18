@@ -13,7 +13,6 @@
 	name =                  SPECIES_FRAME
 	name_plural =           "Utility Frames"
 	description =           "Simple AI-driven robots are used for many menial or repetitive tasks in human space."
-	preview_icon =          'mods/species/utility_frames/icons/preview.dmi'
 	cyborg_noun = null
 
 	available_bodytypes = list(/decl/bodytype/utility_frame)
@@ -27,7 +26,6 @@
 	hazard_low_pressure =  -1
 	blood_color =           COLOR_GRAY15
 	flesh_color =           COLOR_GUNMETAL
-	base_color =            COLOR_GUNMETAL
 	cold_level_1 =          SYNTH_COLD_LEVEL_1
 	cold_level_2 =          SYNTH_COLD_LEVEL_2
 	cold_level_3 =          SYNTH_COLD_LEVEL_3
@@ -37,6 +35,14 @@
 	body_temperature =      null
 	passive_temp_gain =     5  // stabilize at ~80 C in a 20 C environment.
 	heat_discomfort_level = 373.15
+
+	base_color = "#333355"
+	base_eye_color = "#00ccff"
+	base_markings = list(
+		/decl/sprite_accessory/marking/frame/plating = "#8888cc",
+		/decl/sprite_accessory/marking/frame/plating/legs = "#8888cc",
+		/decl/sprite_accessory/marking/frame/plating/head = "#8888cc"
+	)
 
 	heat_discomfort_strings = list(
 		"You are dangerously close to overheating!"
@@ -76,15 +82,6 @@
 	if(istype(eyes))
 		eyes.eye_icon = 'mods/species/utility_frames/icons/eyes.dmi'
 	H.refresh_visible_overlays()
-
-/decl/species/utility_frame/handle_post_species_pref_set(var/datum/preferences/pref)
-	if(pref)
-		LAZYINITLIST(pref.body_markings)
-		for(var/marking in list("Frame Body Plating", "Frame Leg Plating", "Frame Head Plating"))
-			if(!pref.body_markings[marking])
-				pref.body_markings[marking] = "#8888cc"
-		pref.skin_colour = "#333355"
-		pref.eye_colour = "#00ccff"
 
 /decl/species/utility_frame/get_blood_name()
 	. = "coolant"

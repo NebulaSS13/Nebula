@@ -23,7 +23,10 @@
 
 	meat_type = /obj/item/chems/food/meat/chicken
 
-	base_color = "#000616"
+	base_color = "#252525"
+	base_eye_color = "#f5c842"
+	base_markings = list(/decl/sprite_accessory/marking/avian = "#454545")
+
 	reagent_tag = IS_AVIAN
 
 	available_bodytypes = list(
@@ -81,14 +84,6 @@
 	if(istype(H))
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/avian_smock/worker, slot_w_uniform_str)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/avian, slot_shoes_str)
-
-/decl/species/neoavian/handle_post_species_pref_set(var/datum/preferences/pref)
-	pref.body_markings = pref.body_markings || list()
-	if(!pref.body_markings["Beak (Head)"])
-		pref.body_markings["Beak (Head)"] = "#454545"
-	if(!pref.body_markings["Tailfeathers (Groin)"])
-		pref.body_markings["Tailfeathers (Groin)"] = "#252525"
-	pref.skin_colour = "#252525"
 
 /decl/species/neoavian/get_holder_color(var/mob/living/carbon/human/H)
 	return H.skin_colour

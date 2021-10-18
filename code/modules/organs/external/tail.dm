@@ -22,6 +22,17 @@
 	var/tail_icon = 'icons/effects/species.dmi'
 	var/tail_states = 1
 
+/obj/item/organ/external/tail/removed()
+	var/mob/living/carbon/human/H = owner
+	. = ..()
+	if(istype(H) && H != owner)
+		H.update_tail_showing()
+
+/obj/item/organ/external/tail/replaced()
+	. = ..()
+	if(owner)
+		owner.update_tail_showing()
+
 /obj/item/organ/external/tail/proc/get_tail()
 	return tail
 

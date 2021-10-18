@@ -320,6 +320,9 @@ var/global/list/time_prefs_fixed = list()
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
 
+	if(!player_setup)
+		return // WHY IS THIS EVEN HAPPENING.
+
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
 	character.personal_aspects = list()

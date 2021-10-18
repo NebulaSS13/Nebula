@@ -16,14 +16,18 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/is_crystalline = FALSE
 
 	var/holder_icon
-	var/preview_icon = 'icons/mob/human_races/species/human/preview.dmi'
 	var/list/available_bodytypes = list()
 	var/decl/bodytype/default_bodytype
 
 	var/blood_color = COLOR_BLOOD_HUMAN       // Red.
 	var/flesh_color = "#ffc896"             // Pink.
 	var/blood_oxy = 1
-	var/base_color                            // Used by changelings. Should also be used for icon previes..
+
+	// Used for initializing prefs/preview
+	var/base_color =      COLOR_BLACK
+	var/base_eye_color =  COLOR_BLACK
+	var/base_hair_color = COLOR_BLACK
+	var/list/base_markings
 
 	var/static/list/hair_styles
 	var/static/list/facial_hair_styles
@@ -255,12 +259,79 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	var/list/traits = list() // An associative list of /decl/traits and trait level - See individual traits for valid levels
 
+	// Preview icon gen/tracking vars.
+	var/icon/preview_icon
+	var/preview_icon_width = 64
+	var/preview_icon_height = 64
+	var/preview_icon_path	
+
 /decl/species/Initialize()
 
 	. = ..()
 
 	if(!codex_description)
 		codex_description = description
+
+	// Generate OOC info.
+	var/list/codex_traits = list()
+	if(spawn_flags & SPECIES_CAN_JOIN)
+		codex_traits += "<li>Often present among humans.</li>"
+	if(spawn_flags & SPECIES_IS_WHITELISTED)
+		codex_traits += "<li>Whitelist restricted.</li>"
+	if(!has_organ[BP_HEART])
+		codex_traits += "<li>Does not have blood.</li>"
+	if(!has_organ[breathing_organ])
+		codex_traits += "<li>Does not breathe.</li>"
+	if(species_flags & SPECIES_FLAG_NO_SCAN)
+		codex_traits += "<li>Does not have DNA.</li>"
+	if(species_flags & SPECIES_FLAG_NO_PAIN)
+		codex_traits += "<li>Does not feel pain.</li>"
+	if(species_flags & SPECIES_FLAG_NO_MINOR_CUT)
+		codex_traits += "<li>Has thick skin/scales.</li>"
+	if(species_flags & SPECIES_FLAG_NO_SLIP)
+		codex_traits += "<li>Has excellent traction.</li>"
+	if(species_flags & SPECIES_FLAG_NO_POISON)
+		codex_traits += "<li>Immune to most poisons.</li>"
+	if(appearance_flags & HAS_A_SKIN_TONE)
+		codex_traits += "<li>Has a variety of skin tones.</li>"
+	if(appearance_flags & HAS_SKIN_COLOR)
+		codex_traits += "<li>Has a variety of skin colours.</li>"
+	if(appearance_flags & HAS_EYE_COLOR)
+		codex_traits += "<li>Has a variety of eye colours.</li>"
+	if(species_flags & SPECIES_FLAG_IS_PLANT)
+		codex_traits += "<li>Has a plantlike physiology.</li>"
+	if(slowdown)
+		codex_traits += "<li>Moves [slowdown > 0 ? "slower" : "faster"] than most.</li>"
+
+	var/list/codex_damage_types = list(
+		"physical trauma" = brute_mod,
+		"burns" = burn_mod,
+		"lack of air" = oxy_mod,
+	)
+	for(var/kind in codex_damage_types)
+		if(codex_damage_types[kind] > 1)
+			codex_traits += "<li>Vulnerable to [kind].</li>"
+		else if(codex_damage_types[kind] < 1)
+			codex_traits += "<li>Resistant to [kind].</li>"
+	if(breath_type)
+		var/decl/material/mat = GET_DECL(breath_type)
+		codex_traits += "<li>They breathe [mat.gas_name].</li>"
+	if(exhale_type)
+		var/decl/material/mat = GET_DECL(exhale_type)
+		codex_traits += "<li>They exhale [mat.gas_name].</li>"
+	if(LAZYLEN(poison_types))
+		var/list/poison_names = list()
+		for(var/g in poison_types)
+			var/decl/material/mat = GET_DECL(exhale_type)
+			poison_names |= mat.gas_name
+		codex_traits += "<li>[capitalize(english_list(poison_names))] [LAZYLEN(poison_names) == 1 ? "is" : "are"] poisonous to them.</li>"
+
+	if(length(codex_traits))
+		var/trait_string = "They have the following notable traits:<br><ul>[jointext(codex_traits, null)]</ul>"
+		if(ooc_codex_information)
+			ooc_codex_information += "<br><br>[trait_string]"
+		else
+			ooc_codex_information = trait_string
 
 	for(var/bodytype in available_bodytypes)
 		available_bodytypes -= bodytype
@@ -713,92 +784,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	for(var/hair in get_facial_hair_style_types(gender, check_gender))
 		. += GET_DECL(hair)
 
-/decl/species/proc/get_description(var/header, var/append, var/verbose = TRUE, var/skip_detail, var/skip_photo)
-	var/list/damage_types = list(
-		"physical trauma" = brute_mod,
-		"burns" = burn_mod,
-		"lack of air" = oxy_mod,
-		"poison" = toxins_mod
-	)
-	if(!header)
-		header = "<center><h2>[name]</h2></center><hr/>"
-	var/dat = list()
-	dat += "[header]"
-	dat += "<table padding='8px'>"
-	dat += "<tr>"
-	dat += "<td width = 400>"
-	if(verbose || length(description) <= MAX_DESC_LEN)
-		dat += "[description]"
-	else
-		dat += "[copytext(description, 1, MAX_DESC_LEN)] \[...\]"
-	if(append)
-		dat += "<br>[append]"
-	dat += "</td>"
-	if((!skip_photo && preview_icon) || !skip_detail)
-		dat += "<td width = 200 align='center'>"
-		if(!skip_photo && preview_icon)
-			send_rsc(usr, icon(icon = preview_icon, icon_state = ""), "species_preview_[name].png")
-			dat += "<img src='species_preview_[name].png' width='64px' height='64px'><br/><br/>"
-		if(!skip_detail)
-			dat += "<small>"
-			if(spawn_flags & SPECIES_CAN_JOIN)
-				dat += "</br><b>Often present among humans.</b>"
-			if(spawn_flags & SPECIES_IS_WHITELISTED)
-				dat += "</br><b>Whitelist restricted.</b>"
-			if(!has_organ[BP_HEART])
-				dat += "</br><b>Does not have blood.</b>"
-			if(!has_organ[breathing_organ])
-				dat += "</br><b>Does not breathe.</b>"
-			if(species_flags & SPECIES_FLAG_NO_SCAN)
-				dat += "</br><b>Does not have DNA.</b>"
-			if(species_flags & SPECIES_FLAG_NO_PAIN)
-				dat += "</br><b>Does not feel pain.</b>"
-			if(species_flags & SPECIES_FLAG_NO_MINOR_CUT)
-				dat += "</br><b>Has thick skin/scales.</b>"
-			if(species_flags & SPECIES_FLAG_NO_SLIP)
-				dat += "</br><b>Has excellent traction.</b>"
-			if(species_flags & SPECIES_FLAG_NO_POISON)
-				dat += "</br><b>Immune to most poisons.</b>"
-			if(appearance_flags & HAS_A_SKIN_TONE)
-				dat += "</br><b>Has a variety of skin tones.</b>"
-			if(appearance_flags & HAS_SKIN_COLOR)
-				dat += "</br><b>Has a variety of skin colours.</b>"
-			if(appearance_flags & HAS_EYE_COLOR)
-				dat += "</br><b>Has a variety of eye colours.</b>"
-			if(species_flags & SPECIES_FLAG_IS_PLANT)
-				dat += "</br><b>Has a plantlike physiology.</b>"
-			if(slowdown)
-				dat += "</br><b>Moves [slowdown > 0 ? "slower" : "faster"] than most.</b>"
-			for(var/kind in damage_types)
-				if(damage_types[kind] > 1)
-					dat += "</br><b>Vulnerable to [kind].</b>"
-				else if(damage_types[kind] < 1)
-					dat += "</br><b>Resistant to [kind].</b>"
-			if(breath_type)
-				var/decl/material/mat = GET_DECL(breath_type)
-				dat += "</br><b>They breathe [mat.gas_name].</b>"
-			if(exhale_type)
-				var/decl/material/mat = GET_DECL(exhale_type)
-				dat += "</br><b>They exhale [mat.gas_name].</b>"
-			if(LAZYLEN(poison_types))
-				var/list/poison_names = list()
-				for(var/g in poison_types)
-					var/decl/material/mat = GET_DECL(exhale_type)
-					poison_names |= mat.gas_name
-				dat += "</br><b>[capitalize(english_list(poison_names))] [LAZYLEN(poison_names) == 1 ? "is" : "are"] poisonous to them.</b>"
-			dat += "</small>"
-		dat += "</td>"
-	dat += "</tr>"
-	dat += "</table><hr/>"
-	return jointext(dat, null)
-
-/mob/living/carbon/human/verb/check_species()
-	set name = "Check Species Information"
-	set category = "IC"
-	set src = usr
-
-	show_browser(src, species.get_description(), "window=species;size=700x400")
-
 /decl/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)
 		if(0 to 22) 	. = -4
@@ -857,3 +842,20 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 /decl/species/proc/get_holder_color(var/mob/living/carbon/human/H)
 	return
+
+/decl/species/proc/get_preview_icon()
+	if(!preview_icon)
+
+		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#species_[ckey(name)]")
+		if(mannequin)
+
+			mannequin.set_species(name)
+			customize_preview_mannequin(mannequin)
+
+			preview_icon = getFlatIcon(mannequin)
+			preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2)
+			preview_icon_width = preview_icon.Width()
+			preview_icon_height = preview_icon.Height()
+			preview_icon_path = "species_preview_[ckey(name)].png"
+
+	return preview_icon

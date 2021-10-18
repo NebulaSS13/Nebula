@@ -25,11 +25,14 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
-	preview_icon = 'mods/species/tajaran/icons/preview.dmi'
-	default_h_style = /decl/sprite_accessory/hair/taj
 
 	flesh_color = "#afa59e"
-	base_color = "#333333"
+	base_markings = list(/decl/sprite_accessory/marking/tajaran = "#888888")
+	base_hair_color = "#515151"
+	base_color = "#787878"
+	base_eye_color = "#00aa00"
+	default_h_style = /decl/sprite_accessory/hair/taj
+
 	blood_color = "#862a51"
 	organs_icon = 'mods/species/tajaran/icons/organs.dmi'
 
@@ -112,12 +115,3 @@
 
 /decl/species/tajaran/handle_additional_hair_loss(var/mob/living/carbon/human/H, var/defer_body_update = TRUE)
 	. = H && H.change_skin_color(189, 171, 143)
-
-/decl/species/tajaran/handle_post_species_pref_set(var/datum/preferences/pref)
-	pref.body_markings = pref.body_markings || list()
-	if(!pref.body_markings["Tajaran Wide Ears"])
-		pref.body_markings["Tajaran Wide Ears"] = "#888888"
-	pref.skin_colour = "#787878"
-	pref.hair_colour = "#515151"
-	pref.facial_hair_colour = "#515151"
-	pref.eye_colour = "#00aa00"

@@ -1,6 +1,3 @@
-#define TOPIC_UPDATE_PREVIEW 4
-#define TOPIC_REFRESH_UPDATE_PREVIEW (TOPIC_REFRESH|TOPIC_UPDATE_PREVIEW)
-
 var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 
 /datum/category_group/player_setup_category/physical_preferences
@@ -254,6 +251,13 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 		pref_mob.client.prefs.update_preview_icon()
 
 	// And again: above operation is slow/may sleep, clients disappear whenever.
+	pref_mob = preference_mob()
+	if(!pref_mob || !pref_mob.client)
+		return 1
+	if(. & TOPIC_HARD_REFRESH)
+		pref_mob.client.prefs.open_setup_window(usr)
+
+	// And again again: above operation is slow/may sleep, clients disappear whenever.
 	pref_mob = preference_mob()
 	if(!pref_mob || !pref_mob.client)
 		return 1
