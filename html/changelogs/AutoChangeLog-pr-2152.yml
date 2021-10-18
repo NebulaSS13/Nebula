@@ -1,0 +1,5 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - tweak: Species information is now found in the codex rather than primarily in
+      character preferences.
