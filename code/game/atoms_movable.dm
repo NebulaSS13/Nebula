@@ -214,6 +214,7 @@
 /atom/movable/proc/refresh_buckled_mob()
 	if(buckled_mob)
 		buckled_mob.set_dir(buckle_dir || dir)
+		buckled_mob.reset_offsets(4)
 		buckled_mob.reset_plane_and_layer()
 
 /atom/movable/Move(...)
@@ -430,8 +431,7 @@
 		M.reset_offsets(4)
 		M.reset_plane_and_layer()
 	if(buckled_mob && buckled_mob != M)
-		buckled_mob.reset_offsets(4)
-		buckled_mob.reset_plane_and_layer()
+		refresh_buckled_mob()
 
 /atom/movable/proc/user_buckle_mob(mob/living/M, mob/user)
 	if(M != user && user.incapacitated())

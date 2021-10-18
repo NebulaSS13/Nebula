@@ -98,14 +98,14 @@
 /obj/item/grab/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(QDELETED(src) || !current_grab || !assailant || proximity_flag) // Close-range is handled in resolve_attackby().
 		return
-	if(current_grab.hit_with_grab(src, target, TRUE))
+	if(current_grab.hit_with_grab(src, target, proximity_flag))
 		return
 	. = ..()
 
 /obj/item/grab/resolve_attackby(atom/A, mob/user, var/click_params)
 	if(QDELETED(src) || !current_grab || !assailant)
 		return TRUE
-	if(A.grab_attack(src) || current_grab.hit_with_grab(src, A))
+	if(A.grab_attack(src) || current_grab.hit_with_grab(src, A, get_dist(user, A) <= 1))
 		return TRUE
 	. = ..()
 
