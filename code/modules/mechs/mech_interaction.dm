@@ -46,8 +46,15 @@
 //UI distance checks
 /mob/living/exosuit/contents_nano_distance(src_object, mob/living/user)
 	. = ..()
+	if((user in pilots) && (src_object == src))
+		return STATUS_INTERACTIVE //Pilots can always interact with exosuit hosted uis
 	if(!hatch_closed)
 		return max(shared_living_nano_distance(src_object), .) //Either visible to mech(outside) or visible to user (inside)
+
+/mob/living/exosuit/exosuit/CanUseTopic(mob/user, datum/topic_state/state, href_list)
+	if(user in pilots)
+		return STATUS_INTERACTIVE
+	return ..()
 
 
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)

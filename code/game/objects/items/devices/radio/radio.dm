@@ -41,6 +41,8 @@
 
 	var/last_radio_sound = -INFINITY
 
+	var/intercom_handling = FALSE
+
 /obj/item/radio/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
@@ -839,6 +841,7 @@
 /obj/item/radio/exosuit
 	name = "exosuit radio"
 	cell = null
+	intercom_handling = TRUE
 
 /obj/item/radio/exosuit/get_cell()
 	. = ..()
