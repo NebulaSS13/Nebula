@@ -26,7 +26,7 @@
 	var/filling_color = "#ffffff" //Used by sandwiches.
 	var/trash = null
 	randpixel = 6
-	flags = ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	possible_transfer_amounts = null
 	volume = 50
 	center_of_mass = @"{'x':16,'y':16}"
