@@ -1052,3 +1052,12 @@
 
 /mob/proc/set_glide_size(var/delay)
 	glide_size = ADJUSTED_GLIDE_SIZE(delay)
+
+/mob/proc/get_weather_exposure()
+	return WEATHER_EXPOSED
+
+/mob/living/get_weather_exposure()
+	//for(var/obj/item/umbrella/brolly in get_held_items())
+	//	if(brolly.open)
+	//		return WEATHER_PROTECTED
+	return ..()

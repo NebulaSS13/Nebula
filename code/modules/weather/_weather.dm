@@ -6,7 +6,8 @@ var/global/list/weather_by_z = list()
 	plane =         DEFAULT_PLANE
 	layer =         ABOVE_PROJECTILE_LAYER
 	icon =          'icons/effects/weather.dmi'
-	icon_state =    "debug"
+	icon_state =    "blank"
+	alpha =          0
 	simulated =      FALSE
 	density =        FALSE
 	opacity =        FALSE
@@ -19,7 +20,7 @@ var/global/list/weather_by_z = list()
 	var/const/base_wind_delay = 1
 
 	var/list/affecting_zs
-	var/decl/weather/current_weather = /decl/weather/calm
+	var/decl/weather/current_weather
 
 /obj/weather_system/proc/get_movement_delay(var/travel_dir)
 
@@ -64,11 +65,11 @@ INITIALIZE_IMMEDIATE(/obj/weather_system)
 
 	// Initialize our state. TODO: FSM weather?
 	if(ispath(initial_weather, /decl/weather))
-		current_weather = GET_DECL(initial_weather)
+		set_current_weather(initial_weather)
 	else if(ispath(current_weather, /decl/weather))
-		current_weather = GET_DECL(current_weather)
+		set_current_weather(current_weather)
 	else
-		current_weather = GET_DECL(/decl/weather/calm)
+		set_current_weather(/decl/weather/calm)
 
 	// Track our affected z-levels.
 	affecting_zs = GetConnectedZlevels(target_z)
@@ -76,6 +77,14 @@ INITIALIZE_IMMEDIATE(/obj/weather_system)
 	// If we're post-init, init immediately.
 	if(SSweather.initialized)
 		addtimer(CALLBACK(src, .proc/init_weather), 0)
+
+/obj/weather_system/proc/set_current_weather(var/weather_type)
+	if(current_weather && current_weather.type == weather_type)
+		return
+	current_weather = GET_DECL(weather_type)
+	icon =       current_weather.icon
+	icon_state = current_weather.icon_state
+	alpha =      current_weather.alpha
 
 /obj/weather_system/Destroy()
 	SSweather.weather_systems -= src
@@ -102,11 +111,30 @@ INITIALIZE_IMMEDIATE(/obj/weather_system)
 		T.update_weather(src)
 		CHECK_TICK
 
+/obj/weather_system/proc/handle_mob(var/mob/M)
+	if(!istype(M))
+		return
+	var/exposure = M.get_weather_exposure()
+	if(exposure == WEATHER_IGNORE)
+		return
+	if(exposure == WEATHER_PROTECTED)
+		current_weather.handle_cosmetic_message(M)
+	else
+		current_weather.handle_exposure(M)	
+
 /client/verb/test_weather_system()
 
 	set name = "Test Weather System"
 	set category = "Debug"
 	set src = usr
 
-	to_chat(mob, "Creating weather system for z[mob.z].")
-	new /obj/weather_system(mob.z)
+	var/turf/T = get_turf(mob)
+	if(!T)
+		return
+	if(T.weather)
+		to_chat(mob, "Randomizing weather state for z[T.z].")
+		T.weather.set_current_weather(pick(subtypesof(/decl/weather)))
+	else
+		to_chat(mob, "Creating weather system for z[T.z].")
+		new /obj/weather_system(T.z)
+	to_chat(mob, "Done.")
