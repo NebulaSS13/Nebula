@@ -1,0 +1,5 @@
+author: NataKilar
+delete-after: true
+changes:
+  - bugfix: Robots now properly work as cameras for the purpose of AI vision
+  - bugfix: TV cameras can now have their network settings adjusted as intended.
