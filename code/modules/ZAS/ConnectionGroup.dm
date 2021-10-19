@@ -24,7 +24,7 @@ Class Vars:
 
 	connection_edge/unsimulated
 
-		B - This holds an unsimulated turf which has the gas values this edge is mimicing.
+		B - This holds an unsimulated turf which has the gas values this edge is mimicking.
 
 		air - Retrieved from B on creation and used as an argument for the legacy ShareSpace() proc.
 

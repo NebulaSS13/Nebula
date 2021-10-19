@@ -17,7 +17,7 @@ Public API:
 		- less cheap (pretty much just proc-call overhead)
 
 	Checking state:
-	- TURF_IS_MIMICING(turf or any)
+	- TURF_IS_MIMICKING(turf or any)
 		- value: bool - if the passed turf is z-mimic enabled
 
 	- movable/get_above_oo()
@@ -26,12 +26,12 @@ Public API:
 
 	Changing state:
 	- turf/enable_zmimic(extra_flags = 0)
-		- return: bool - FALSE if this turf was already mimicing, TRUE otherwise
+		- return: bool - FALSE if this turf was already mimicking, TRUE otherwise
 		- Enables z-mimic for this turf, potentially adding extra z_flags.
 		- This will automatically queue the turf for update.
 
 	- turf/disable_zmimic()
-		- return: bool - FALSE if this turf was not mimicing, TRUE otherwise
+		- return: bool - FALSE if this turf was not mimicking, TRUE otherwise
 		- Disables z-mimic for this turf.
 		- This will clean up associated mimic objects, but they may hang around for a few additional seconds.
 

@@ -24,7 +24,6 @@
 		pref.gender = pronouns.name
 
 	pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)
-	pref.cultural_info = mob_species.default_cultural_info.Copy()
 
 	if(!has_flag(get_species_by_key(pref.species), HAS_UNDERWEAR))
 		pref.all_underwear.Cut()

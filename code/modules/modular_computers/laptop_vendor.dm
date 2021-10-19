@@ -59,9 +59,10 @@
 /obj/machinery/lapvend/proc/fabricate_and_recalc_price(var/fabricate = 0)
 	total_price = 0
 	if(devtype == 1) 		// Laptop, generally cheaper to make it accessible for most station roles
+		var/datum/extension/assembly/modular_computer/assembly
 		if(fabricate)
 			fabricated_laptop = new(src)
-		var/datum/extension/assembly/modular_computer/assembly = get_extension(fabricated_laptop, /datum/extension/assembly)
+			assembly = get_extension(fabricated_laptop, /datum/extension/assembly)
 		total_price = 99
 		switch(dev_cpu)
 			if(1)
@@ -296,7 +297,7 @@
 
 // Simplified payment processing, returns 1 on success.
 /obj/machinery/lapvend/proc/process_payment(var/obj/item/charge_stick/I)
-	if(isnull(I))
+	if(!istype(I))
 		ping("Invalid payment format.")
 		return FALSE
 	visible_message(SPAN_INFO("\The [usr] inserts \the [I] into \the [src]."))

@@ -60,7 +60,7 @@ var/global/list/ticket_panels = list()
 	if(!closed_by)
 		closed_by_not_assigned = TRUE
 
-	if((closed_by.ckey in assigned_admin_ckeys()) || owner.ckey == closed_by.ckey)
+	else if((closed_by.ckey in assigned_admin_ckeys()) || owner.ckey == closed_by.ckey)
 		closed_by_not_assigned = FALSE
 
 	if(establish_db_connection())

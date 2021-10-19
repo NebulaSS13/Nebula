@@ -164,7 +164,7 @@
 	return 1
 
 /datum/nano_module/program/proc/get_records()
-	var/datum/computer_network/network = program.computer.get_network()
+	var/datum/computer_network/network = program?.computer?.get_network()
 	if(network)
 		return network.get_crew_records()
 

@@ -26,7 +26,7 @@
 		data["skill_fail"] = fake_data.update_and_return_data()
 	data["terminal"] = !!program
 
-	var/datum/computer_network/network = program.computer.get_network()
+	var/datum/computer_network/network = program?.computer?.get_network()
 	data["status"] = !!network
 	if(network)
 		data["network"] = network.network_id
@@ -84,7 +84,7 @@
 	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
 		return TOPIC_HANDLED
 
-	var/datum/computer_network/network = program.computer.get_network()
+	var/datum/computer_network/network = program?.computer?.get_network()
 
 	if(href_list["purgelogs"])
 		var/datum/extension/network_device/mainframe/M = locate(href_list["purgelogs"])

@@ -22,12 +22,12 @@
 
 /turf/Entered(atom/movable/thing, turf/oldLoc)
 	. = ..()
-	if (thing.bound_overlay || (thing.z_flags & ZMM_IGNORE) || !TURF_IS_MIMICING(above))
+	if (thing.bound_overlay || (thing.z_flags & ZMM_IGNORE) || !TURF_IS_MIMICKING(above))
 		return
 	above.update_mimic()
 
 /turf/update_above()
-	if (TURF_IS_MIMICING(above))
+	if (TURF_IS_MIMICKING(above))
 		above.update_mimic()
 
 /turf/proc/update_mimic()
