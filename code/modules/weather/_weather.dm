@@ -57,7 +57,7 @@ INITIALIZE_IMMEDIATE(/obj/weather_system)
 /obj/weather_system/Initialize(var/ml, var/target_z, var/initial_weather)
 	. = ..()
 
-	// Bookkeeping/vis_contents guards.
+	// Bookkeeping/rightclick guards.
 	verbs.Cut()
 	forceMove(null)
 	SSweather.weather_systems += src
@@ -84,7 +84,7 @@ INITIALIZE_IMMEDIATE(/obj/weather_system)
 			global.weather_by_z -= "[tz]" 
 		for(var/turf/T AS_ANYTHING in block(locate(1, 1, tz), locate(world.maxx, world.maxy, tz)))
 			if(T.weather == src)
-				T.vis_contents -= src
+				remove_vis_contents(T, src)
 				T.weather = null
 	. = ..()
 	

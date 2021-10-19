@@ -111,7 +111,7 @@
 		connections.erase_all()
 
 	if(weather)
-		vis_contents -= weather
+		remove_vis_contents(src, weather)
 		weather = null
 
 	..()
@@ -393,14 +393,14 @@ var/global/const/enterloopsanity = 100
 	if(istype(new_weather) && is_outside())
 		if(weather != new_weather)
 			if(weather)
-				vis_contents -= weather
+				remove_vis_contents(src, weather)
 			weather = new_weather
-			vis_contents += weather
+			add_vis_contents(src, weather)
 
 	// We are indoors or there is no local weather system, clear our vis contents.
 	else if(weather)
-		vis_contents -= weather
 		weather = null
+		remove_vis_contents(src, weather)
 
 	// Propagate our weather downwards if we permit it.
 	if(is_open() && old_weather != weather)
@@ -430,3 +430,12 @@ var/global/const/enterloopsanity = 100
 		update_weather()
 		return TRUE
 	return FALSE
+
+/turf/get_vis_contents_to_add()
+	var/datum/gas_mixture/air = return_air()
+	if(air && length(air.graphic))
+		LAZYADD(., air.graphic)
+	if(weather)
+		LAZYADD(., weather)
+	if(flooded)
+		LAZYADD(., global.flood_object)

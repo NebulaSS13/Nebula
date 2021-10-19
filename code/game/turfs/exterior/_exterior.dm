@@ -130,20 +130,12 @@
 	SHOULD_CALL_PARENT(FALSE)
 	if(!istype(src, get_base_turf_by_area(src)) && (severity == 1 || (severity == 2 && prob(40))))
 		ChangeTurf(get_base_turf_by_area(src))
-
+	
 /turf/exterior/on_update_icon()
 	. = ..() // Recalc AO and flooding overlay.
 	cut_overlays()
 	if(LAZYLEN(decals))
 		add_overlay(decals)
-
-	var/datum/gas_mixture/air = (owner ? owner.atmosphere : global.using_map.exterior_atmosphere)
-	if(length(air?.graphic))
-		vis_contents += air.graphic
-	else if(flooded)
-		vis_contents = list(global.flood_object)
-	else
-		vis_contents.Cut()
 
 	if(icon_edge_layer < 0)
 		return
