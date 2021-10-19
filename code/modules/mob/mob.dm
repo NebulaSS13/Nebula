@@ -1054,10 +1054,20 @@
 	glide_size = ADJUSTED_GLIDE_SIZE(delay)
 
 /mob/proc/get_weather_exposure()
-	return WEATHER_EXPOSED
+	. = WEATHER_EXPOSED
+	var/turf/T = loc
+	if(!istype(T))
+		return WEATHER_PROTECTED
+	if(T.is_outside())
+		return WEATHER_EXPOSED
+	T = GetAbove(T)
+	if(istype(T) && !T.is_open())
+		return WEATHER_ROOFED
+	return WEATHER_PROTECTED
 
 /mob/living/get_weather_exposure()
-	//for(var/obj/item/umbrella/brolly in get_held_items())
-	//	if(brolly.open)
-	//		return WEATHER_PROTECTED
-	return ..()
+	. = ..()
+	//if(. == WEATHER_EXPOSED)
+	//	for(var/obj/item/umbrella/brolly in get_held_items())
+	//		if(brolly.open)
+	//			return WEATHER_PROTECTED

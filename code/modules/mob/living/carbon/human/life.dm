@@ -310,12 +310,11 @@
 	return !failed_last_breath
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
+
+	..()
+
 	if(!environment || (MUTATION_SPACERES in mutations))
 		return
-
-	var/turf/T = loc
-	if(istype(T) && T.weather && T.weather.is_exposed(src))
-		T.weather.handle_mob(src)
 
 	//Stuff like water absorbtion happens here.
 	species.handle_environment_special(src)

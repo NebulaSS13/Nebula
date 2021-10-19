@@ -111,16 +111,11 @@ INITIALIZE_IMMEDIATE(/obj/weather_system)
 		T.update_weather(src)
 		CHECK_TICK
 
-/obj/weather_system/proc/handle_mob(var/mob/M)
-	if(!istype(M))
-		return
-	var/exposure = M.get_weather_exposure()
-	if(exposure == WEATHER_IGNORE)
-		return
-	if(exposure == WEATHER_PROTECTED)
-		current_weather.handle_cosmetic_message(M)
-	else
-		current_weather.handle_exposure(M)	
+/obj/weather_system/proc/handle_mob(var/mob/living/M)
+	if(istype(M))
+		var/turf/T = M.loc
+		if(istype(T))
+			current_weather.handle_exposure(M, M.get_weather_exposure())
 
 /client/verb/test_weather_system()
 
