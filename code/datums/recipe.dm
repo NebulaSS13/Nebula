@@ -214,7 +214,6 @@
 		//If we're here, then holder is a buffer containing the total reagents for all the results.
 		//So now we redistribute it among them
 		var/total = holder.total_volume
-		for (var/i in results)
-			var/atom/a = i //optimisation
+		for(var/atom/a AS_ANYTHING in results)
 			holder.trans_to(a, total / length(results))
 	return results

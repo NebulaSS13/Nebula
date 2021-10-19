@@ -52,7 +52,7 @@ SUBSYSTEM_DEF(zcopy)
 
 		else if (istype(A, /atom/movable/openspace/mimic))
 			var/turf/Tloc = A.loc
-			if (TURF_IS_MIMICING(Tloc))
+			if (TURF_IS_MIMICKING(Tloc))
 				Tloc.update_mimic()
 				num_amupd += 1
 			else

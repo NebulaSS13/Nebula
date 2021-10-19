@@ -142,7 +142,7 @@
 		species.handle_post_move(src)
 		if(client)
 			var/turf/B = GetAbove(src)
-			up_hint.icon_state = "uphint[(B ? B.is_open() : 0)]"
+			up_hint.icon_state = "uphint[!!(B && TURF_IS_MIMICKING(B))]"
 
 /mob/living/carbon/human/proc/handle_leg_damage()
 	if(!can_feel_pain())

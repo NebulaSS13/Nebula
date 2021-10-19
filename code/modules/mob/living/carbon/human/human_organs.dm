@@ -191,7 +191,7 @@
 			continue
 		if(E.is_robotic())
 			var/decl/pronouns/G = get_pronouns()
-			visible_message("<B>\The [src]</B> drops what [G.he] [G.is] holding, [G.his] [affected.name] malfunctioning!")
+			visible_message("<B>\The [src]</B> drops what [G.he] [G.is] holding, [G.his] [E.name] malfunctioning!")
 			spark_at(src, 5, holder=src)
 			continue
 

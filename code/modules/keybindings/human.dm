@@ -34,11 +34,10 @@
 				if(!H.get_active_hand())
 					to_chat(H, SPAN_WARNING("You're not holding anything to holster."))
 					return
-				E.holster(H.get_active_hand(), src)
-				return
+				E.holster(H.get_active_hand(), H)
 			else
 				E.unholster(H, TRUE)
-				return
+			return
 
 	if(istype(H.belt, /obj/item/storage/belt/holster))
 		var/obj/item/storage/belt/holster/B = H.belt
@@ -47,11 +46,10 @@
 			if(!H.get_active_hand())
 				to_chat(H, SPAN_WARNING("You're not holding anything to holster."))
 				return
-			E.holster(H.get_active_hand(), src)
-			return
+			E.holster(H.get_active_hand(), H)
 		else
 			E.unholster(H, TRUE)
-			return
+		return
 
 	return TRUE
 

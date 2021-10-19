@@ -19,17 +19,17 @@ var/global/list/all_warrants
 	var/datum/computer_file/report/warrant/active
 
 /datum/nano_module/program/proc/get_warrants()
-	var/datum/computer_network/network = program.computer.get_network()
+	var/datum/computer_network/network = program?.computer?.get_network()
 	if(network)
 		return network.get_all_files_of_type(/datum/computer_file/report/warrant)
 
 /datum/nano_module/program/proc/remove_warrant(datum/computer_file/report/warrant/W)
-	var/datum/computer_network/network = program.computer.get_network()
+	var/datum/computer_network/network = program?.computer?.get_network()
 	if(network)
 		return network.remove_file(W)
 
 /datum/nano_module/program/proc/save_warrant(datum/computer_file/report/warrant/W)
-	var/datum/computer_network/network = program.computer.get_network()
+	var/datum/computer_network/network = program?.computer?.get_network()
 	if(network)
 		return network.store_file(W)
 

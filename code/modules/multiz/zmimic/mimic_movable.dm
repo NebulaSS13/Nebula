@@ -33,13 +33,13 @@
 
 	var/turf/T = loc
 
-	if (TURF_IS_MIMICING(T.above))
+	if (TURF_IS_MIMICKING(T.above))
 		SSzcopy.queued_overlays += bound_overlay
 		bound_overlay.queued += 1
 	else
 		qdel(bound_overlay)
 
-// Grabs a list of every openspace object that's directly or indirectly mimicing this object. Returns an empty list if none found.
+// Grabs a list of every openspace object that's directly or indirectly mimicking this object. Returns an empty list if none found.
 /atom/movable/proc/get_above_oo()
 	. = list()
 	var/atom/movable/curr = src
@@ -166,7 +166,7 @@
 
 /atom/movable/openspace/mimic/forceMove(turf/dest)
 	. = ..()
-	if (TURF_IS_MIMICING(dest))
+	if (TURF_IS_MIMICKING(dest))
 		if (destruction_timer)
 			deltimer(destruction_timer)
 			destruction_timer = null

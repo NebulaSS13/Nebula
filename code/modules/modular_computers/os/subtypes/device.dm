@@ -52,9 +52,8 @@
 	if(os)
 		. += os.get_header_data()
 
-/obj/item/modular_computer/check_eye()
+/obj/item/modular_computer/check_eye(user)
 	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
-		return os.check_eye()
-	else
-		return ..()
+		return os.check_eye(user)
+	return ..()
