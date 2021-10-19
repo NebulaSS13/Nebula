@@ -272,6 +272,11 @@
 #define INTENT_HOTKEY_LEFT  "left"
 #define INTENT_HOTKEY_RIGHT "right"
 
+//Turf/area values for 'this space is outside' checks
+#define OUTSIDE_AREA null
+#define OUTSIDE_NO   FALSE
+#define OUTSIDE_YES  TRUE
+
 // Literacy check constants.
 #define WRITTEN_SKIP     0
 #define WRITTEN_PHYSICAL 1

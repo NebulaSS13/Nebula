@@ -166,7 +166,7 @@
 		else
 			step_to(body, current_target)
 
-	next_core_logic_run = world.time + max(body?.movement_delay(), 5) + added_delay
+	next_core_logic_run = world.time + max(body?.get_movement_delay(), 5) + added_delay
 
 /datum/ai/slime/proc/handle_speech_and_mood()
 

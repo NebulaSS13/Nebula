@@ -198,11 +198,11 @@
 	return 0
 
 #define ENCUMBERANCE_MOVEMENT_MOD 0.35
-/mob/proc/movement_delay()
+/mob/proc/get_movement_delay(var/travel_dir)
 	. = 0
 	if(isturf(loc))
 		var/turf/T = loc
-		. += T.movement_delay()
+		. += T.get_movement_delay(travel_dir)
 	if(HAS_STATUS(src, STAT_DROWSY))
 		. += 6
 	if(lying) //Crawling, it's slower
@@ -635,7 +635,7 @@
 	set_dir(ndir)
 	if(buckled && buckled.buckle_movable)
 		buckled.set_dir(ndir)
-	SetMoveCooldown(movement_delay())
+	SetMoveCooldown(get_movement_delay(ndir))
 	return 1
 
 

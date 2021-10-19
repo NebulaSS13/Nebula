@@ -76,6 +76,8 @@
 
 	var/spawn_weight = 100	// Decides how often this planet will be picked for generation
 
+	var/obj/weather_system/weather_system = /decl/weather/calm // Initial weather is passed to the system as its default state.
+
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_strata()
 	return crust_strata
 
@@ -95,6 +97,7 @@
 	return ..()
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/build_level(max_x, max_y)
+
 	maxx = max_x ? max_x : world.maxx
 	maxy = max_y ? max_y : world.maxy
 	x_origin = TRANSITIONEDGE + 1
@@ -115,6 +118,7 @@
 		themes += new T
 		possible_themes -= T
 
+	weather_system = new /obj/weather_system(null, map_z[1], weather_system)
 	generate_habitability()
 	generate_atmosphere()
 	for(var/datum/exoplanet_theme/T in themes)
@@ -282,3 +286,4 @@
 	always_unpowered = 1
 	area_flags = AREA_FLAG_IS_BACKGROUND | AREA_FLAG_EXTERNAL
 	show_starlight = TRUE
+	is_outside = OUTSIDE_YES

@@ -95,7 +95,7 @@
 
 /datum/movement_handler/mob/delay/DoMove(var/direction, var/mover, var/is_external)
 	if(!is_external)
-		var/delay = max(1, mob.movement_delay())
+		var/delay = max(1, mob.get_movement_delay(direction))
 		if(direction & (direction - 1)) //moved diagonally successfully
 			delay *= sqrt(2)
 		next_move = world.time + delay

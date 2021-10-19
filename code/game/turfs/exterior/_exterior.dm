@@ -45,7 +45,7 @@
 			else
 				T.update_icon()
 
-/turf/exterior/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+/turf/exterior/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_outside = FALSE)
 	var/last_affecting_heat_sources = affecting_heat_sources
 	var/turf/exterior/ext = ..()
 	if(istype(ext))
@@ -56,15 +56,16 @@
 	update_ambient_light(mapload)
 
 /turf/exterior/update_ambient_light(var/mapload)
-	if(owner) // Exoplanets do their own lighting shenanigans.
-		//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
-		set_light(owner.lightlevel)
-		return
-	if(config.starlight)
-		var/area/A = get_area(src)
-		if(A.show_starlight)
-			set_light(config.starlight, 0.75, l_color = SSskybox.background_color)
+	if(is_outside())
+		if(owner) // Exoplanets do their own lighting shenanigans.
+			//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
+			set_light(owner.lightlevel)
 			return
+		if(config.starlight)
+			var/area/A = get_area(src)
+			if(A.show_starlight)
+				set_light(config.starlight, 0.75, l_color = SSskybox.background_color)
+				return
 	if(!mapload)
 		set_light(0)
 
@@ -89,7 +90,10 @@
 		gas.copy_from(owner.atmosphere)
 	else
 		gas = global.using_map.get_exterior_atmosphere()
+
 	var/initial_temperature = gas.temperature
+	if(weather)
+		initial_temperature = weather.adjust_temperature(initial_temperature)
 	for(var/thing in affecting_heat_sources)
 		if((gas.temperature - initial_temperature) >= 100)
 			break

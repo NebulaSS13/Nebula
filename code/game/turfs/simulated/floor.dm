@@ -26,8 +26,8 @@
 /turf/simulated/floor/is_plating()
 	return !flooring
 
-/turf/simulated/floor/movement_delay()
-	return flooring?.movement_delay || movement_delay
+/turf/simulated/floor/get_base_movement_delay()
+	return flooring?.movement_delay || ..()
 
 /turf/simulated/floor/protects_atom(var/atom/A)
 	return (A.level <= 1 && !is_plating()) || ..()
