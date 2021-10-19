@@ -4,7 +4,7 @@
 	solid_name = "ice"
 	gas_name = "water vapour"
 	lore_text = "A ubiquitous chemical substance composed of hydrogen and oxygen."
-	color = COLOR_OCEAN
+	color = COLOR_LIQUID_WATER
 	gas_tile_overlay = "generic"
 	gas_overlay_limit = 0.5
 	gas_specific_heat = 30

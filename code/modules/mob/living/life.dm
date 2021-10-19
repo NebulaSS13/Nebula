@@ -104,9 +104,17 @@
 
 /mob/living/proc/handle_environment(var/datum/gas_mixture/environment)
 	SHOULD_CALL_PARENT(TRUE)
+	var/turf/my_turf = get_turf(src)
+	if(!istype(my_turf))
+		return
+
 	var/turf/T = loc
-	if(istype(T) && T.weather)
-		T.weather.handle_mob(src)
+	// If we're standing in the rain, use the turf weather.
+	var/obj/abstract/weather_system/weather = istype(T) && T.weather
+	if(!weather) // If we're under or inside shelter, use the z-level rain (for ambience)
+		weather = global.weather_by_z["[my_turf.z]"]
+	if(weather)
+		weather.handle_mob(src, get_weather_exposure(weather))
 
 //This updates the health and status of the mob (conscious, unconscious, dead)
 /mob/living/proc/handle_regular_status_updates()

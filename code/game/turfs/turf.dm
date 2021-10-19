@@ -33,10 +33,10 @@
 	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
 	var/footstep_type
 	var/open_turf_type // Which turf to use when this turf is destroyed or replaced in a multiz context. Overridden by area.
-	var/tmp/changing_turf
 
-	var/prev_type // Previous type of the turf, prior to turf translation.
-	var/tmp/obj/weather_system/weather
+	var/tmp/changing_turf
+	var/tmp/prev_type // Previous type of the turf, prior to turf translation.
+	var/tmp/obj/abstract/weather_system/weather
 	var/tmp/is_outside = OUTSIDE_AREA 
 
 /turf/Initialize(mapload, ...)
@@ -79,7 +79,7 @@
 /turf/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(user && weather)
-		to_chat(user, weather.current_weather.descriptor)
+		weather.examine(user)
 
 /turf/proc/initialize_ambient_light(var/mapload)
 	return
@@ -383,7 +383,7 @@ var/global/const/enterloopsanity = 100
 /turf/proc/get_footstep_sound(var/mob/caller)
 	return
 
-/turf/proc/update_weather(var/obj/weather_system/new_weather)
+/turf/proc/update_weather(var/obj/abstract/weather_system/new_weather)
 
 	if(isnull(new_weather))
 		new_weather = global.weather_by_z["[z]"]
@@ -399,8 +399,8 @@ var/global/const/enterloopsanity = 100
 
 	// We are indoors or there is no local weather system, clear our vis contents.
 	else if(weather)
-		weather = null
 		remove_vis_contents(src, weather)
+		weather = null
 
 	// Propagate our weather downwards if we permit it.
 	if(is_open() && old_weather != weather)

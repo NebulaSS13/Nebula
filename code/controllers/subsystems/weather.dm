@@ -13,7 +13,7 @@ SUBSYSTEM_DEF(weather)
 
 /datum/controller/subsystem/weather/Initialize(start_timeofday)
 	. = ..()
-	for(var/obj/weather_system/weather AS_ANYTHING in weather_systems)
+	for(var/obj/abstract/weather_system/weather AS_ANYTHING in weather_systems)
 		weather.init_weather()
 
 /datum/controller/subsystem/weather/fire(resumed)
@@ -21,7 +21,7 @@ SUBSYSTEM_DEF(weather)
 	if(!resumed)
 		processing_systems = weather_systems.Copy()
 
-	var/obj/weather_system/weather
+	var/obj/abstract/weather_system/weather
 	while(processing_systems.len)
 		weather = processing_systems[processing_systems.len]
 		processing_systems.len--

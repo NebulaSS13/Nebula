@@ -8,7 +8,7 @@
 	mouse_opacity = 0
 	layer = FLY_LAYER
 	alpha = 0
-	color = COLOR_OCEAN
+	color = COLOR_LIQUID_WATER
 
 	var/last_flow_strength = 0
 	var/last_flow_dir = 0
@@ -101,7 +101,7 @@
 	name = "mapped flooded area"
 	alpha = 125
 	icon_state = "shallow_still"
-	color = COLOR_OCEAN
+	color = COLOR_LIQUID_WATER
 
 	var/fluid_type = /decl/material/liquid/water
 	var/fluid_initial = FLUID_MAX_DEPTH
@@ -119,27 +119,13 @@
 	fluid_initial = 10
 
 // Permaflood overlay.
-var/global/obj/effect/flood/flood_object = new
-/obj/effect/flood
-	name = ""
-	mouse_opacity = 0
+var/global/obj/abstract/flood/flood_object = new
+/obj/abstract/flood
 	layer = DEEP_FLUID_LAYER
-	color = COLOR_OCEAN
+	color = COLOR_LIQUID_WATER
 	icon = 'icons/effects/liquids.dmi'
 	icon_state = "ocean"
 	alpha = FLUID_MAX_ALPHA
-	simulated = 0
-	density = 0
-	opacity = 0
-	anchored = 1
-
-/obj/effect/flood/explosion_act()
-	SHOULD_CALL_PARENT(FALSE)
-	return
-
-/obj/effect/flood/Initialize()
-	. = ..()
-	verbs.Cut()
 
 /obj/effect/fluid/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	. = ..()

@@ -9,7 +9,10 @@
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	features_budget = 6
 	surface_color = "#807d7a"
-	water_color = null
+	water_color =    null
+	water_material = null
+	ice_material =   null
+	weather_system = null
 	has_trees = FALSE
 	spawn_weight = 50	// These are pretty boring
 

@@ -1053,21 +1053,29 @@
 /mob/proc/set_glide_size(var/delay)
 	glide_size = ADJUSTED_GLIDE_SIZE(delay)
 
-/mob/proc/get_weather_exposure()
-	. = WEATHER_EXPOSED
+/mob/proc/get_weather_protection()
+	for(var/obj/item/brolly in get_held_items())
+		if(brolly.gives_weather_protection())
+			LAZYADD(., brolly)
+	
+/mob/proc/get_weather_exposure(var/obj/abstract/weather_system/weather)
 	var/turf/T = loc
-	if(!istype(T))
-		return WEATHER_PROTECTED
-	if(T.is_outside())
-		return WEATHER_EXPOSED
-	T = GetAbove(T)
-	if(istype(T) && !T.is_open())
-		return WEATHER_ROOFED
-	return WEATHER_PROTECTED
 
-/mob/living/get_weather_exposure()
-	. = ..()
-	//if(. == WEATHER_EXPOSED)
-	//	for(var/obj/item/umbrella/brolly in get_held_items())
-	//		if(brolly.open)
-	//			return WEATHER_PROTECTED
+	// We're inside something else.
+	if(!istype(T)) 
+		return WEATHER_PROTECTED
+	
+	// Either we're outside being rained on, or we're in turf-local weather being rained on.
+	if(T.is_outside() || T.weather == weather) 
+		var/list/weather_protection = get_weather_protection()
+		if(length(weather_protection))
+			return WEATHER_PROTECTED
+		return WEATHER_EXPOSED
+
+	// The z-level has weather, but we aren't standing in it, so it's probably above us.
+	T = GetAbove(T)
+	if(!T || !T.is_open())
+		return WEATHER_PROTECTED
+
+	// We're inside, and more than one z-level below the roof, so ignore it.
+	return WEATHER_IGNORE
