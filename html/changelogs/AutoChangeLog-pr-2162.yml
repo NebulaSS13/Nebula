@@ -1,5 +1,0 @@
-author: CrimsonShrike
-delete-after: true
-changes:
-  - bugfix: Exosuit radios work again.
-  - tweak: Intercom shortcut is not usable for exosuits too
