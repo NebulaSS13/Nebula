@@ -503,7 +503,7 @@
 	var/rigged = 0		// true if rigged to explode
 	var/broken_chance = 2
 
-	var/b_power = 0.9
+	var/b_power = 0.7
 	var/b_range = 5
 	var/b_color = LIGHT_COLOR_HALOGEN
 	var/list/lighting_modes = list()
@@ -525,7 +525,8 @@
 	material = /decl/material/solid/glass
 	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
 
-	b_range = 5
+	b_range = 8
+	b_power = 0.8
 	b_color = LIGHT_COLOR_HALOGEN
 	lighting_modes = list(
 		LIGHTMODE_EMERGENCY = list(l_range = 4, l_power = 1, l_color = LIGHT_COLOR_EMERGENCY),
@@ -539,8 +540,8 @@
 /obj/item/light/tube/large
 	w_class = ITEM_SIZE_SMALL
 	name = "large light tube"
-	b_power = 0.95
-	b_range = 8
+	b_power = 4
+	b_range = 12
 
 /obj/item/light/tube/large/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
 	. = ..()
@@ -554,9 +555,6 @@
 	item_state = "contvapour"
 	broken_chance = 3
 	material = /decl/material/solid/glass
-
-	b_power = 0.6
-	b_range = 4
 	b_color = LIGHT_COLOR_TUNGSTEN
 	lighting_modes = list(
 		LIGHTMODE_EMERGENCY = list(l_range = 3, l_power = 1, l_color = LIGHT_COLOR_EMERGENCY),
