@@ -4,7 +4,12 @@ SUBSYSTEM_DEF(skybox)
 	name = "Space skybox"
 	init_order = SS_INIT_SKYBOX
 	flags = SS_NO_FIRE
-	var/background_color
+
+	// Starlight
+	var/tmp/background_color_r
+	var/tmp/background_color_g
+	var/tmp/background_color_b
+
 	var/skybox_icon = 'icons/skybox/skybox.dmi' //Path to our background. Lets us use anything we damn well please. Skyboxes need to be 736x736
 	var/background_icon = "dyable"
 	var/use_stars = TRUE
@@ -29,11 +34,14 @@ SUBSYSTEM_DEF(skybox)
 
 /datum/controller/subsystem/skybox/Initialize()
 	. = ..()
-	if(isnull(background_color))
-		background_color = RANDOM_RGB
+	background_color_r = rand(0.2, 1)
+	background_color_g = rand(0.2, 1)
+	background_color_b = rand(0.2, 1)
 
 /datum/controller/subsystem/skybox/Recover()
-	background_color = SSskybox.background_color
+	background_color_r = SSskybox.background_color_r
+	background_color_g = SSskybox.background_color_g
+	background_color_b = SSskybox.background_color_b
 	skybox_cache = SSskybox.skybox_cache
 
 /datum/controller/subsystem/skybox/proc/build_space_appearances()
@@ -114,7 +122,7 @@ SUBSYSTEM_DEF(skybox)
 	var/image/res = image(skybox_icon)
 	res.appearance_flags = PIXEL_SCALE | KEEP_TOGETHER
 
-	var/image/base = overlay_image(skybox_icon, background_icon, background_color, PIXEL_SCALE)
+	var/image/base = overlay_image(skybox_icon, background_icon, rgb(round(background_color_r * 255), round(background_color_g * 255), round(background_color_b * 255)), PIXEL_SCALE)
 
 	if(use_stars)
 		var/image/stars = overlay_image(skybox_icon, star_state, flags = PIXEL_SCALE | RESET_COLOR)
@@ -147,14 +155,16 @@ SUBSYSTEM_DEF(skybox)
 		C.update_skybox(1)
 
 //Update skyboxes. Called by universes, for now.
-/datum/controller/subsystem/skybox/proc/change_skybox(new_state, new_color, new_use_stars, new_use_overmap_details)
+/datum/controller/subsystem/skybox/proc/change_skybox(new_state, new_color_r, new_color_g, new_color_b, new_use_stars, new_use_overmap_details)
 	var/need_rebuild = FALSE
 	if(new_state != background_icon)
 		background_icon = new_state
 		need_rebuild = TRUE
 
-	if(new_color != background_color)
-		background_color = new_color
+	if(background_color_r != new_color_r || background_color_g != new_color_g || background_color_b != new_color_b)
+		background_color_r = max(new_color_r, 0.2)
+		background_color_g = max(new_color_g, 0.2)
+		background_color_b = max(new_color_b, 0.2)
 		need_rebuild = TRUE
 
 	if(new_use_stars != use_stars)

@@ -16,10 +16,10 @@
 	var/forced_dirs = 0 
 
 /turf/space/update_ambient_light(var/mapload)
-	if(config.starlight && (locate(/turf/simulated) in RANGE_TURFS(src, 1)))
-		set_light(config.starlight, 0.75, l_color = SSskybox.background_color)
+	if((config.starlight_r || config.starlight_g || config.starlight_b) && (locate(/turf/simulated) in RANGE_TURFS(src, 1)))
+		set_inherent_light(config.starlight_r * SSskybox.background_color_r, config.starlight_g * SSskybox.background_color_g, config.starlight_b * SSskybox.background_color_b)
 	else
-		set_light(0)
+		set_inherent_light()
 
 /turf/space/Initialize(var/mapload)
 

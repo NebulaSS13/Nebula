@@ -7,7 +7,6 @@
 	plant_colors = list("#3c5434", "#2f6655", "#0e703f", "#495139", "#394c66", "#1a3b77", "#3e3166", "#52457c", "#402d56", "#580d6d")
 	map_generators = list(/datum/random_map/noise/exoplanet/shrouded, /datum/random_map/noise/ore/poor)
 	ruin_tags_blacklist = RUIN_HABITAT
-	lightlevel = -0.15
 	surface_color = "#3e3960"
 	water_color = "#2b2840"
 	flora_diversity = 3
@@ -18,6 +17,12 @@
 		/mob/living/simple_animal/hostile/leech
 	)
 	spawn_weight = 50
+
+/obj/effect/overmap/visitable/sector/exoplanet/shrouded/generate_map()
+	lightlevel_r = rand(0.1, 0.3)
+	lightlevel_g = rand(0.1, 0.3)
+	lightlevel_b = rand(0.1, 0.3)
+	..()
 
 /obj/effect/overmap/visitable/sector/exoplanet/shrouded/get_target_temperature()
 	return T20C - rand(10, 20)

@@ -23,11 +23,8 @@
 	owner = LAZYACCESS(global.overmap_sectors, "[z]")
 	if(!istype(owner))
 		owner = null
-	else
-		//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
-		set_light(owner.lightlevel)
-		if(owner.planetary_area && istype(loc, world.area))
-			ChangeArea(src, owner.planetary_area)
+	else if(owner.planetary_area && istype(loc, world.area))
+		ChangeArea(src, owner.planetary_area)
 
 	. = ..(mapload)	// second param is our own, don't pass to children
 
@@ -58,15 +55,14 @@
 /turf/exterior/update_ambient_light(var/mapload)
 	if(owner) // Exoplanets do their own lighting shenanigans.
 		//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
-		set_light(owner.lightlevel)
+		set_inherent_light(owner.lightlevel_r, owner.lightlevel_g, owner.lightlevel_b)
 		return
-	if(config.starlight)
+	if(config.starlight_r || config.starlight_g || config.starlight_b)
 		var/area/A = get_area(src)
 		if(A.show_starlight)
-			set_light(config.starlight, 0.75, l_color = SSskybox.background_color)
+			set_inherent_light(config.starlight_r, config.starlight_g, config.starlight_b)
 			return
-	if(!mapload)
-		set_light(0)
+	set_inherent_light()
 
 /turf/exterior/is_plating()
 	return !density

@@ -12,7 +12,9 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/generate_map()
 	if(prob(40))
-		lightlevel = rand(1,7)/10	//give a chance of twilight jungle
+		lightlevel_r = rand(0.3, 0.5)
+		lightlevel_g = rand(0.3, 0.5)
+		lightlevel_b = rand(0.3, 0.5)
 	..()
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/get_target_temperature()

@@ -206,7 +206,10 @@ var/global/list/gamemode_cache = list()
 	var/dsay_allowed = 1
 	var/aooc_allowed = 1
 
-	var/starlight = 0	// Whether space turfs have ambient light or not
+	// Default exterior lighting values for space turfs, planet turfs, etc.
+	var/starlight_r
+	var/starlight_g
+	var/starlight_b
 
 	var/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
 
@@ -737,7 +740,9 @@ var/global/list/gamemode_cache = list()
 
 				if("starlight")
 					value = text2num(value)
-					config.starlight = value >= 0 ? value : 0
+					config.starlight_r = value
+					config.starlight_g = value
+					config.starlight_b = value
 
 				if("law_zero")
 					law_zero = value

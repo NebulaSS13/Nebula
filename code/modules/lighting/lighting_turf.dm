@@ -9,6 +9,22 @@
 	var/tmp/list/datum/lighting_corner/corners
 	var/tmp/has_opaque_atom = FALSE // Not to be confused with opacity, this will be TRUE if there's any opaque atom on the tile.
 
+	// Any inherent sourceless lights, like starlight.
+	var/tmp/inherent_light_r
+	var/tmp/inherent_light_g
+	var/tmp/inherent_light_b
+
+/turf/proc/set_inherent_light(var/_r, var/_g, var/_b)
+	if(inherent_light_r == _r && inherent_light_g == _g  && inherent_light_b == _b)
+		return
+	inherent_light_r = _r
+	inherent_light_g = _g
+	inherent_light_b = _b
+	if(!lighting_corners_initialised)
+		generate_missing_corners()
+	for(var/datum/lighting_corner/L in corners)
+		L.update_lumcount(force = TRUE)
+
 // Causes any affecting light sources to be queued for a visibility update, for example a door got opened.
 /turf/proc/reconsider_lights()
 	var/datum/light_source/L

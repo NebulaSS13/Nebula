@@ -114,17 +114,18 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 #define GET_ABOVE(T) (HasAbove(T:z) ? get_step(T, UP) : null)
 
 // God that was a mess, now to do the rest of the corner code! Hooray!
-/datum/lighting_corner/proc/update_lumcount(delta_r, delta_g, delta_b, now = FALSE)
-	if (!(delta_r + delta_g + delta_b))
+/datum/lighting_corner/proc/update_lumcount(delta_r, delta_g, delta_b, now = FALSE, force = FALSE)
+	if (!force && !(delta_r + delta_g + delta_b))
 		return
 
 	self_r += delta_r
 	self_g += delta_g
 	self_b += delta_b
 
-	apparent_r = self_r + below_r
-	apparent_g = self_g + below_g
-	apparent_b = self_b + below_b
+	// We average our own lighting, the light below us, and any inherent light like starlight on our turf.
+	apparent_r = self_r + below_r + ((t1?.inherent_light_r + t2?.inherent_light_r + t3?.inherent_light_r + t4?.inherent_light_r) / 4)
+	apparent_g = self_g + below_g + ((t1?.inherent_light_g + t2?.inherent_light_g + t3?.inherent_light_g + t4?.inherent_light_g) / 4)
+	apparent_b = self_b + below_b + ((t1?.inherent_light_b + t2?.inherent_light_b + t3?.inherent_light_b + t4?.inherent_light_b) / 4)
 
 	var/turf/T
 	var/Ti
@@ -166,9 +167,10 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	below_g += delta_g
 	below_b += delta_b
 
-	apparent_r = self_r + below_r
-	apparent_g = self_g + below_g
-	apparent_b = self_b + below_b
+	// We average our own lighting, the light below us, and any inherent light like starlight on our turf.
+	apparent_r = self_r + below_r + ((t1?.inherent_light_r + t2?.inherent_light_r + t3?.inherent_light_r + t4?.inherent_light_r) / 4)
+	apparent_g = self_g + below_g + ((t1?.inherent_light_g + t2?.inherent_light_g + t3?.inherent_light_g + t4?.inherent_light_g) / 4)
+	apparent_b = self_b + below_b + ((t1?.inherent_light_b + t2?.inherent_light_b + t3?.inherent_light_b + t4?.inherent_light_b) / 4)
 
 	// This needs to be down here instead of the above if so the lum values are properly updated.
 	if (needs_update)

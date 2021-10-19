@@ -6,7 +6,11 @@
 	free_landing = TRUE
 	var/area/planetary_area
 
-	var/lightlevel = 0 		//This default makes turfs not generate light. Adjust to have exoplanents be lit.
+	// Exterior light components, 0-1. Adjust to have exoplanents be lit.
+	var/lightlevel_r = 0 		
+	var/lightlevel_g = 0 		
+	var/lightlevel_b = 0 		
+
 	var/night = TRUE
 	var/daycycle 			//How often do we change day and night
 	var/daycolumn = 0 		//Which column's light needs to be updated next?
@@ -160,11 +164,11 @@
 			update_daynight()
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/update_daynight()
-	var/light = 0.1
-	if(!night)
-		light = lightlevel
 	for(var/turf/exterior/T in block(locate(daycolumn,1,min(map_z)),locate(daycolumn,maxy,max(map_z))))
-		T.set_light(light)
+		if(night)
+			T.set_inherent_light(0.1, 0.1, 0.1)
+		else
+			T.set_inherent_light(lightlevel_r, lightlevel_g, lightlevel_b)
 	daycolumn++
 	if(daycolumn > maxx)
 		daycolumn = 0
@@ -202,7 +206,7 @@
 	spawned_features = seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_daycycle()
-	if(lightlevel)
+	if(lightlevel_r || lightlevel_g || lightlevel_b)
 		night = FALSE //we start with a day if we have light.
 
 		//When you set daycycle ensure that the minimum is larger than [maxx * daycycle_column_delay].
