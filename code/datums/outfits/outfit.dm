@@ -107,8 +107,8 @@ var/global/list/outfits_decls_by_type_
 			H.species.equip_default_fallback_uniform(H)
 	if(holster && H.w_uniform)
 		var/obj/item/clothing/accessory/equip_holster = new holster
-		H.w_uniform.attackby(H, equip_holster)
-		if(equip_holster.loc != H.w_uniform)
+		H.w_uniform.attackby(equip_holster, H)
+		if(equip_holster.loc != H.w_uniform && !QDELETED(equip_holster))
 			qdel(equip_holster)
 	if(suit)
 		H.equip_to_slot_or_del(new suit(H),slot_wear_suit_str)
