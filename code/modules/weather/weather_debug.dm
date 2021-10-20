@@ -1,7 +1,7 @@
 /client/verb/test_weather_system()
 
 	set name = "Test Weather System"
-	set category = "Debug"
+	set category = "Weather Debug"
 	set src = usr
 
 	var/turf/T = get_turf(mob)
@@ -18,8 +18,8 @@
 	to_chat(mob, "Done.")
 
 /client/verb/test_weather_lightning()
-	set name = "Test Weather System"
-	set category = "Debug"
+	set name = "Test Lightning Strike"
+	set category = "Weather Debug"
 	set src = usr
 
 	var/turf/T = get_turf(mob)

@@ -1,5 +1,28 @@
-var/global/list/weather_by_z = list()
+/*
+ * Notes on weather:
+ *
+ * - Weather is a single object that sits in the vis_contents of all outside turfs on 
+ *   its associated z-levels and is removed or added by /turf/proc/update_weather(), 
+ *   which is usually called from /turf/proc/set_outside().
+ *
+ * - Weather generally assumes any atom that cares about it will ask it directly and
+ *   mobs do this in /mob/living/proc/handle_environment().
+ *
+ * - For this system to be scalable, it should minimize the amount of list-based 
+ *   processing it does and be primarily passive, allowing mobs to ignore it or 
+ *   poll it on their own time.
+ *
+ * - The weather object is queued on SSweather and is polled every fifteen seconds at time
+ *   of writing. This is handled in /obj/abstract/weather_system/proc/tick().
+ *
+ * - When evaluating, weather will generally get more intense or more severe rather than 
+ *   jumping around randomly. Each state will set a minimum duration based on min/max time.
+ *
+ * - If polled between weather updates there is a chance of modifying wind speed and direction
+ *   instead.
+ */
 
+var/global/list/weather_by_z = list()
 /obj/abstract/weather_system
 	plane =            DEFAULT_PLANE
 	layer =            ABOVE_PROJECTILE_LAYER
@@ -8,38 +31,17 @@ var/global/list/weather_by_z = list()
 	invisibility =     0
 	appearance_flags = (RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM)
 
-	// Wind strength; modifies walk speed on turfs experiencing this 
-	// weather. Updated by /decl/state/weather in weather_system FSM.
-	var/tmp/wind_direction =    0
-	var/tmp/wind_strength =     1
-	var/const/base_wind_delay = 1
+	var/water_material = /decl/material/liquid/water     // Material to use for the properties of rain.
+	var/ice_material =   /decl/material/solid/ice        // Material to use for the properties of snow and hail.
 
-	var/water_material = /decl/material/liquid/water
-	var/ice_material =   /decl/material/solid/ice
+	var/list/affecting_zs                                // What z-levels are we affecting?
+	var/datum/state_machine/weather/weather_system       // What is our internal state and how do we decide what state to use?
+	var/next_weather_transition = 0                      // What world.time will we next evaluate our state?
 
-	var/list/affecting_zs
-	var/datum/state_machine/weather/weather_system
-	var/next_weather_transition = 0
-	var/obj/abstract/lightning_overlay/lightning_overlay
+	var/obj/abstract/lightning_overlay/lightning_overlay // A visible atom used for animated lighting effects.
+	var/tmp/list/vis_contents_additions                  // Holder for a list used to add required atoms to turf vis_contents.
 
-	var/list/mobs_on_cooldown =  list()
-	var/list/mob_shown_weather = list()
-	var/list/mob_shown_wind =    list()
-
-/obj/abstract/weather_system/proc/show_wind_to(var/mob/living/M)
-	return
-
-/obj/abstract/weather_system/proc/clear_cooldown(var/mobref)
-	mobs_on_cooldown -= mobref
-
-/obj/abstract/weather_system/proc/set_cooldown(var/mob/living/M, var/delay = 5 SECONDS)
-	var/mobref = weakref(M)
-	if(!(mobref in mobs_on_cooldown))
-		mobs_on_cooldown[mobref] = TRUE
-		addtimer(CALLBACK(src, .proc/clear_cooldown, mobref), delay)
-		return TRUE
-	return FALSE
-
+// Main heartbeat proc, called by SSweather.
 /obj/abstract/weather_system/proc/tick()
 
 	// Check if we should move to a new state.
@@ -54,49 +56,45 @@ var/global/list/weather_by_z = list()
 	if(istype(weather_state))
 		weather_state.tick(src)
 
-/obj/abstract/weather_system/proc/handle_wind()
-	if(prob(66))
-		return
-	if(prob(10))
-		wind_direction = turn(wind_direction, pick(45, -45))
-		mob_shown_wind.Cut()
-	if(prob(10))
-		var/old_strength = wind_strength
-		wind_strength = Clamp(wind_strength + rand(-1, 1), 5, -5)
-		if(old_strength != wind_strength)
-			mob_shown_wind.Cut()
 
 /obj/abstract/weather_system/Destroy()
 	SSweather.weather_systems -= src
+	// Clean ourselves out of the vis_contents of our affected turfs.
 	for(var/tz in affecting_zs)
 		if(global.weather_by_z["[tz]"] == src)
 			global.weather_by_z -= "[tz]" 
 		for(var/turf/T AS_ANYTHING in block(locate(1, 1, tz), locate(world.maxx, world.maxy, tz)))
 			if(T.weather == src)
-				remove_vis_contents(T, src)
+				remove_vis_contents(T, vis_contents_additions)
 				T.weather = null
+	vis_contents_additions.Cut()
+	QDEL_NULL(lightning_overlay)
 	. = ..()
 
+// Called by /turf/examine() to show current weather status.
 /obj/abstract/weather_system/examine(mob/user, distance)	
 	SHOULD_CALL_PARENT(FALSE)
 	var/decl/state/weather/weather_state = weather_system.current_state
 	if(istype(weather_state))
 		to_chat(user, weather_state.descriptor)
 
-/obj/abstract/weather_system/proc/supports_weather_state(var/target)
+// Called by /decl/state/weather to assess validity of a state in the weather FSM.
+/obj/abstract/weather_system/proc/supports_weather_state(var/decl/state/weather/next_state)
 	// Exoplanet stuff for the future:
 	// - TODO: track and check exoplanet temperature.
 	// - TODO: compare to a list of 'acceptable' states
-	var/decl/state/weather/next_state = GET_DECL(target)
-	if(next_state.is_liquid)
-		return !!water_material
-	if(next_state.is_ice)
-		return !!ice_material
-	return TRUE
+	if(istype(next_state))
+		if(next_state.is_liquid)
+			return !!water_material
+		if(next_state.is_ice)
+			return !!ice_material
+		return TRUE
+	return FALSE
 
+// Dummy object for lightning flash animation.
 /obj/abstract/lightning_overlay
 	layer = ABOVE_LIGHTING_LAYER
 	icon = 'icons/effects/weather.dmi'
 	icon_state = "full"
-	vis_flags = VIS_INHERIT_ID
 	alpha = 0
+	invisibility = 0

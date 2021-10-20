@@ -1,13 +1,15 @@
 INITIALIZE_IMMEDIATE(/obj/abstract/weather_system)
 /obj/abstract/weather_system/Initialize(var/ml, var/target_z, var/initial_weather)
+
+	SSweather.weather_systems += src
+
 	. = ..()
 
 	// Bookkeeping/rightclick guards.
 	verbs.Cut()
 	forceMove(null)
 	lightning_overlay = new
-	add_vis_contents(src, lightning_overlay)
-	SSweather.weather_systems += src
+	vis_contents_additions = list(src, lightning_overlay)
 
 	// Initialize our state machine.
 	weather_system = add_state_machine(src, /datum/state_machine/weather)

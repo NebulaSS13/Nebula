@@ -1057,7 +1057,18 @@
 	for(var/obj/item/brolly in get_held_items())
 		if(brolly.gives_weather_protection())
 			LAZYADD(., brolly)
-	
+	if(!LAZYLEN(.))
+		for(var/turf/T AS_ANYTHING in RANGE_TURFS(loc, 1))
+			for(var/obj/structure/flora/tree/tree in T)
+				if(tree.protects_against_weather)
+					LAZYADD(., tree)
+
+/mob/living/carbon/human/get_weather_protection()
+	. = ..()
+	var/obj/item/clothing/head/check_head = wear_suit
+	if(istype(check_head) && check_head.protects_against_weather)
+		LAZYADD(., check_head)
+
 /mob/proc/get_weather_exposure(var/obj/abstract/weather_system/weather)
 	var/turf/T = loc
 
@@ -1068,7 +1079,7 @@
 	// Either we're outside being rained on, or we're in turf-local weather being rained on.
 	if(T.is_outside() || T.weather == weather) 
 		var/list/weather_protection = get_weather_protection()
-		if(length(weather_protection))
+		if(LAZYLEN(weather_protection))
 			return WEATHER_PROTECTED
 		return WEATHER_EXPOSED
 

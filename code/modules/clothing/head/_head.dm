@@ -7,6 +7,7 @@
 	w_class = ITEM_SIZE_SMALL
 	blood_overlay_type = "helmetblood"
 
+	var/protects_against_weather = FALSE
 	var/image/light_overlay_image
 	var/light_overlay = "helmet_light"
 	var/light_applied

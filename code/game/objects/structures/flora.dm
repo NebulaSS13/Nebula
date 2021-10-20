@@ -5,11 +5,13 @@
 	density = 1
 	pixel_x = -16
 	layer = ABOVE_HUMAN_LAYER
+	var/protects_against_weather = FALSE
 
 /obj/structure/flora/tree/pine
 	name = "pine tree"
 	icon = 'icons/obj/flora/pinetrees.dmi'
 	icon_state = "pine_1"
+	protects_against_weather = TRUE
 
 /obj/structure/flora/tree/pine/Initialize()
 	. = ..()

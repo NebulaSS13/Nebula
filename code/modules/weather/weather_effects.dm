@@ -1,14 +1,3 @@
-/obj/abstract/weather_system/proc/handle_mob(var/mob/living/M, var/exposure)
-	if(istype(M))
-		if(M.client)
-			if(!(weakref(M) in mob_shown_weather))
-				show_weather(M)
-			else if(!(weakref(M) in mob_shown_wind))
-				show_wind(M)
-		var/decl/state/weather/current_weather = weather_system?.current_state
-		if(istype(current_weather))
-			current_weather.handle_exposure(M, exposure, src)
-
 /obj/abstract/weather_system/proc/get_movement_delay(var/travel_dir)
 
 	// It's quiet. Too quiet.
@@ -35,21 +24,18 @@
 	return initial_temperature
 
 /obj/abstract/weather_system/proc/show_weather(var/mob/M)
+	var/mob_ref = weakref(M)
+	if(mob_shown_weather[mob_ref])
+		return FALSE
 	var/decl/state/weather/current_weather = weather_system?.current_state
-	if(istype(current_weather))
-		mob_shown_weather[weakref(M)] = TRUE
-		current_weather.show_to(M, src)
-
-/obj/abstract/weather_system/proc/show_wind(var/mob/M)
-	mob_shown_wind[weakref(M)] = TRUE
-	var/absolute_strength = abs(wind_strength)
-	if(absolute_strength <= 0.5)
-		to_chat(M, SPAN_NOTICE("The wind is calm."))
-	else
-		to_chat(M, SPAN_NOTICE("The wind is blowing[absolute_strength > 2 ? " strongly" : ""] towards the [dir2text(wind_direction)]."))
+	if(!istype(current_weather))
+		return FALSE
+	mob_shown_weather[mob_ref] = TRUE
+	current_weather.show_to(M, src)
+	return TRUE
 
 /obj/abstract/weather_system/proc/lightning_strike()
 	set waitfor = FALSE
-	animate(lightning_overlay, alpha = 255, time = 3)
+	animate(lightning_overlay, alpha = 255, time = 2)
 	sleep(3)
-	animate(lightning_overlay, alpha = 0, time = 15)
+	animate(lightning_overlay, alpha = initial(lightning_overlay.alpha), time = 5 SECONDS)

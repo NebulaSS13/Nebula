@@ -111,7 +111,7 @@
 		connections.erase_all()
 
 	if(weather)
-		remove_vis_contents(src, weather)
+		remove_vis_contents(src, weather.vis_contents_additions)
 		weather = null
 
 	..()
@@ -393,13 +393,13 @@ var/global/const/enterloopsanity = 100
 	if(istype(new_weather) && is_outside())
 		if(weather != new_weather)
 			if(weather)
-				remove_vis_contents(src, weather)
+				remove_vis_contents(src, weather.vis_contents_additions)
 			weather = new_weather
-			add_vis_contents(src, weather)
+			add_vis_contents(src, weather.vis_contents_additions)
 
 	// We are indoors or there is no local weather system, clear our vis contents.
 	else if(weather)
-		remove_vis_contents(src, weather)
+		remove_vis_contents(src, weather.vis_contents_additions)
 		weather = null
 
 	// Propagate our weather downwards if we permit it.

@@ -5,6 +5,7 @@
 	icon_state = ICON_STATE_WORLD
 	w_class = ITEM_SIZE_SMALL
 	material = /decl/material/solid/plastic
+	matter = list(/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT)
 	var/is_open = FALSE
 
 /obj/item/umbrella/gives_weather_protection()
@@ -32,5 +33,6 @@
 
 /obj/item/umbrella/adjust_mob_overlay(mob/living/user_mob, bodytype, image/overlay, slot, bodypart)
 	. = ..()
-	if(overlay && is_open && check_state_in_icon(overlay.icon_state, "[overlay.icon_state]-open"))
+	if(overlay && is_open && check_state_in_icon("[overlay.icon_state]-open", overlay.icon))
 		overlay.icon_state = "[overlay.icon_state]-open"
+	return overlay

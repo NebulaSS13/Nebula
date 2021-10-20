@@ -5,7 +5,7 @@
 	var/name =         "Undefined"
 	var/descriptor =   "The weather is undefined."
 
-	var/cosmetic_message_chance = 35
+	var/cosmetic_message_chance = 5
 	var/list/cosmetic_messages
 	var/list/protected_messages
 	var/cosmetic_span_class = "notice"
@@ -19,13 +19,15 @@
 	var/is_liquid =    FALSE
 	var/is_ice =       FALSE
 
+	var/list/ambient_sounds
+	var/list/ambient_indoors_sounds
+
 /decl/state/weather/entered_state(datum/holder)
 	. = ..()
 
 	var/obj/abstract/weather_system/weather = holder
 	weather.next_weather_transition = world.time + rand(minimum_time, maximum_time)
 	weather.mob_shown_weather.Cut()
-
 	weather.icon = icon
 	weather.icon_state = icon_state
 	weather.alpha = alpha
@@ -56,10 +58,16 @@
 	handle_protected_effects(M, weather)
 
 /decl/state/weather/proc/handle_exposure(var/mob/living/M, var/exposure, var/obj/abstract/weather_system/weather)
+
+	// Send strings if we're outside.
+	if(M.is_outside())
+		if(!weather.show_weather(M))
+			weather.show_wind(M)
+
 	if(exposure != WEATHER_IGNORE && weather.set_cooldown(M))
 		if(exposure == WEATHER_PROTECTED)
 			var/list/protected_by = M.get_weather_protection()
-			if(length(protected_by))
+			if(LAZYLEN(protected_by))
 				handle_protected_effects(M, weather, pick(protected_by))
 			else
 				handle_roofed_effects(M, weather)
@@ -88,8 +96,9 @@
 		/decl/state_transition/weather/rain,
 		/decl/state_transition/weather/snow_medium
 	)
+	ambient_sounds =     list('sound/effects/weather/snow.ogg')
 	protected_messages = list("Snowflakes collect atop $ITEM$.")
-	cosmetic_messages = list(
+	cosmetic_messages =  list(
 		"Snowflakes fall slowly around you.",
 		"Flakes of snow drift gently past."
 	)
@@ -124,6 +133,8 @@
 		/decl/state_transition/weather/calm,
 		/decl/state_transition/weather/storm
 	)
+	ambient_sounds =         list('sound/effects/weather/rain.ogg')
+	ambient_indoors_sounds = list('sound/effects/weather/rain_indoors.ogg')
 	cosmetic_messages =      list("Raindrops patter against you.")
 	protected_messages =     list("Raindrops patter against $ITEM$.")
 	var/list/roof_messages = list("Rain patters against the roof.")
@@ -144,11 +155,20 @@
 	cosmetic_messages =  list("Torrential rain thunders down around you.")
 	protected_messages = list("Torrential rain thunders down as you shelter beneath $ITEM$.")
 	roof_messages =      list("Torrential rain thunders against the roof.")
+	ambient_sounds =     list('sound/effects/weather/rain_heavy.ogg')
 
 /decl/state/weather/rain/storm/tick(var/obj/abstract/weather_system/weather)
 	..()
-	if(prob(1))
-		weather.lightning_strike()
+	if(!prob(0.5))
+		return
+	weather.lightning_strike()
+	for(var/client/C)
+		if(!isliving(C.mob) || C.mob.get_preference_value(/datum/client_preference/play_ambiance) != PREF_YES)
+			continue
+		var/turf/T = get_turf(C.mob)
+		if(!(T.z in weather.affecting_zs))
+			continue
+		sound_to(C.mob, sound('sound/effects/weather/thunder.ogg', repeat = FALSE, wait = 0, volume = 100, channel = sound_channels.weather_channel))
 
 /decl/state/weather/rain/hail
 	name =  "Hail"
@@ -157,10 +177,12 @@
 	cosmetic_span_class = "danger"
 	is_liquid = FALSE
 	is_ice = TRUE
-	transitions =        list(/decl/state_transition/weather/storm)
-	cosmetic_messages =  list("Hail patters around you.")
-	protected_messages = list("Hail patters against $ITEM$.")
-	roof_messages =      list("Hail clatters on the roof.")
+	transitions =            list(/decl/state_transition/weather/storm)
+	cosmetic_messages =      list("Hail patters around you.")
+	protected_messages =     list("Hail patters against $ITEM$.")
+	roof_messages =          list("Hail clatters on the roof.")
+	ambient_sounds =         list('sound/effects/weather/rain.ogg')
+	ambient_indoors_sounds = list('sound/effects/weather/hail_indoors.ogg')
 
 /decl/state/weather/rain/hail/handle_exposure_effects(var/mob/living/M, var/obj/abstract/weather_system/weather)
 	to_chat(M, SPAN_DANGER("You are pelted by a shower of hail!"))
