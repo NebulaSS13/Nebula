@@ -25,10 +25,8 @@
 
 	// Resolve to the 'topmost' atom in the buckle chain, as grabbing someone buckled to something tends to prevent further interaction.
 	var/atom/movable/original_target = target
-	var/mob/grabbing_mob = target
+	var/mob/grabbing_mob = (ismob(target) && target)
 	while(istype(grabbing_mob) && grabbing_mob.buckled)
-		if(grabbing_mob.buckled == grabbing_mob) // Are circular buckles like this even possible?
-			break
 		grabbing_mob = grabbing_mob.buckled
 	if(grabbing_mob && grabbing_mob != original_target)
 		target = grabbing_mob
@@ -38,11 +36,15 @@
 		return
 
 	face_atom(target)
-	if(original_target != src && ismob(original_target))
-		to_chat(original_target, SPAN_WARNING("\The [src] tries to grab you!"))
-		to_chat(src, SPAN_WARNING("You try to grab \the [target]!"))
+	var/obj/item/grab/grab
 	if(ispath(grab_tag, /decl/grab) && can_grab(target, zone_sel?.selecting) && target.can_be_grabbed(src, zone_sel?.selecting))
-		return new /obj/item/grab(src, target, grab_tag)
+		grab = new /obj/item/grab(src, target, grab_tag)
+
+	if(QDELETED(grab))
+		if(original_target != src && ismob(original_target))
+			to_chat(original_target, SPAN_WARNING("\The [src] tries to grab you, but fails!"))
+		to_chat(src, SPAN_WARNING("You try to grab \the [target], but fail!"))
+	return grab
 
 /mob/living/add_grab(var/obj/item/grab/grab)
 	for(var/obj/item/grab/other_grab in contents)

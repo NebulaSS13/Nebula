@@ -85,16 +85,17 @@
 		new_pixel_z += structure_offset
 
 		// Update offsets from our buckled atom.
-		if(buckled)
-			if(buckled.buckle_pixel_shift)
-				var/list/pixel_shift = buckled.buckle_pixel_shift
-				if(islist(pixel_shift))
-					var/list/directional_offset = LAZYACCESS(pixel_shift, "[dir]")
-					if(islist(directional_offset))
-						pixel_shift = directional_offset
-					new_pixel_x += pixel_shift["x"] || 0
-					new_pixel_y += pixel_shift["y"] || 0
-					new_pixel_z += pixel_shift["z"] || 0
+		if(buckled && buckled.buckle_pixel_shift)
+			var/list/pixel_shift = buckled.buckle_pixel_shift
+			if(istext(pixel_shift))
+				pixel_shift = cached_json_decode(pixel_shift)
+			if(islist(pixel_shift))
+				var/list/directional_offset = LAZYACCESS(pixel_shift, "[dir]")
+				if(islist(directional_offset))
+					pixel_shift = directional_offset
+				new_pixel_x += pixel_shift["x"] || 0
+				new_pixel_y += pixel_shift["y"] || 0
+				new_pixel_z += pixel_shift["z"] || 0
 
 	if(last_pixel_x != new_pixel_x || last_pixel_y != new_pixel_y || last_pixel_z != new_pixel_z)
 		if(anim_time > 0)
