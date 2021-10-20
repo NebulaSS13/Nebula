@@ -4,10 +4,6 @@
 	path = "nexus"
 	ground_noun = "plated covering"
 
-	station_levels = list(1, 2)
-	contact_levels = list(1, 2)
-	player_levels  = list(1, 2)
-
 	station_name  = "Independent Space Complex \"Nexus\""
 	station_short = "Nexus"
 

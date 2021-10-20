@@ -11,9 +11,6 @@
 		/decl/music_track/absconditus
 	)
 
-	station_levels = list(1, 2, 3)
-	contact_levels = list(1, 2, 3)
-	player_levels = list(1, 2, 3)
 	allowed_spawns = list(/decl/spawnpoint/arrivals)
 
 	shuttle_docked_message = "The shuttle has docked."

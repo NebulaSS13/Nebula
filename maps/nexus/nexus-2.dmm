@@ -906,6 +906,10 @@
 /obj/structure/table,
 /turf/simulated/floor/carpet/blue3,
 /area/nexus/civilian/bar)
+"Oa" = (
+/obj/level_data/main_level,
+/turf/space,
+/area/space)
 "Ok" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1870,7 +1874,7 @@ IG
 IG
 IG
 IG
-IG
+Oa
 IG
 IG
 IG

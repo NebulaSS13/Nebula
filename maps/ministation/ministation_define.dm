@@ -4,10 +4,6 @@
 	path = "ministation"
 	ground_noun = "floor"
 
-	station_levels = list(1)
-	contact_levels = list(1)
-	player_levels = list(1)
-
 	station_name = "Space Station Zebra"
 	station_short = "Zebra"
 

@@ -2042,6 +2042,10 @@
 /obj/item/inflatable_dispenser,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
+"iS" = (
+/obj/level_data/main_level,
+/turf/space,
+/area/space)
 "iW" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -3782,7 +3786,7 @@ aa
 aa
 aa
 aa
-aa
+iS
 aa
 aa
 aa
