@@ -42,6 +42,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
 	fruit_descriptor = "medicinal"
+	var/effectiveness = 1
 
 /decl/material/liquid/brute_meds/affect_overdose(mob/living/M, alien, var/datum/reagents/holder)
 	..()
@@ -52,9 +53,11 @@
 			if(E.status & ORGAN_ARTERY_CUT && prob(2 + REAGENT_VOLUME(holder, type) / overdose))
 				E.status &= ~ORGAN_ARTERY_CUT
 
+//This is a logistic function that effectively doubles the healing rate as brute amounts get to around 200. Any injury below 60 is essentially unaffected and there's a scaling inbetween.
+#define ADJUSTED_REGEN_VAL(X) (6+(6/(1+200*2.71828**(-0.05*(X)))))
 /decl/material/liquid/brute_meds/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
-	var/overkill_healing = 6/(1+200*2.71828**(-0.05*M.getBruteLoss())) //This is a logistic function that effectively doubles the healing rate as brute amounts get to around 200. Any injury below 60 is essentially unaffected and there's a scaling inbetween.
-	M.heal_organ_damage((6+overkill_healing) * removed, 0)
+	..()
+	M.add_chemical_effect_max(CE_REGEN_BRUTE, round(effectiveness*ADJUSTED_REGEN_VAL(M.getBruteLoss())))
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /decl/material/liquid/burn_meds
@@ -66,11 +69,13 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	var/effectiveness = 1
 
 /decl/material/liquid/burn_meds/affect_blood(mob/living/M, alien, removed, var/datum/reagents/holder)
-	var/overkill_healing = 6/(1+200*2.71828**(-0.05*M.getFireLoss()))	
-	M.heal_organ_damage(0, (6+overkill_healing) * removed)
+	..()
+	M.add_chemical_effect_max(CE_REGEN_BURN, round(effectiveness*ADJUSTED_REGEN_VAL(M.getFireLoss())))
 	M.add_chemical_effect(CE_PAINKILLER, 10)
+#undef ADJUSTED_REGEN_VAL
 
 /decl/material/liquid/adminordrazine //An OP chemical for admins
 	name = "Adminordrazine"
@@ -305,7 +310,9 @@
 	value = 1.5
 
 /decl/material/liquid/regenerator/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
-	M.heal_organ_damage(3 * removed, 3 * removed)
+	..()
+	M.add_chemical_effect_max(CE_REGEN_BRUTE, 3 * removed)
+	M.add_chemical_effect_max(CE_REGEN_BURN, 3 * removed)
 
 /decl/material/liquid/neuroannealer
 	name = "neuroannealer"

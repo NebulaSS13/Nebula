@@ -70,7 +70,18 @@
 			LAZYSET(chem_doses, T, dose)
 			if(LAZYACCESS(chem_doses, T) <= 0)
 				LAZYREMOVE(chem_doses, T)
+
+	if(apply_chemical_effects())
+		updatehealth()
+
 	return TRUE
+
+/mob/living/proc/apply_chemical_effects()
+	var/burn_regen = GET_CHEMICAL_EFFECT(src, CE_REGEN_BURN)
+	var/brute_regen = GET_CHEMICAL_EFFECT(src, CE_REGEN_BURN)
+	if(burn_regen || brute_regen)
+		heal_organ_damage(brute_regen, burn_regen)
+		return TRUE
 
 /mob/living/proc/metabolize_touching_reagents()
 	var/datum/reagents/metabolism/touching_reagents = get_contact_reagents()

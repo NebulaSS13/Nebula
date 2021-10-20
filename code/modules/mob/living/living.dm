@@ -805,6 +805,16 @@ default behaviour is:
 	magnitude += GET_CHEMICAL_EFFECT(src, effect)
 	LAZYSET(chem_effects, effect, magnitude)
 
+/mob/living/proc/add_chemical_effect_max(var/effect, var/magnitude = 1)
+	magnitude = max(LAZYACCESS(chem_effects, effect), magnitude)
+	LAZYSET(chem_effects, effect, magnitude)
+
+/mob/living/proc/add_chemical_effect_min(var/effect, var/magnitude = 1)
+	var/old_magnitude = LAZYACCESS(chem_effects, effect)
+	if(!isnull(old_magnitude))
+		magnitude = min(old_magnitude, magnitude)
+	LAZYSET(chem_effects, effect, magnitude)
+
 /mob/living/proc/adjust_immunity(var/amt)
 	return
 
