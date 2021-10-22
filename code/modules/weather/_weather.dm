@@ -93,6 +93,7 @@ var/global/list/weather_by_z = list()
 
 // Dummy object for lightning flash animation.
 /obj/abstract/lightning_overlay
+	plane = EMISSIVE_PLANE
 	layer = ABOVE_LIGHTING_LAYER
 	icon = 'icons/effects/weather.dmi'
 	icon_state = "full"

@@ -159,16 +159,8 @@
 
 /decl/state/weather/rain/storm/tick(var/obj/abstract/weather_system/weather)
 	..()
-	if(!prob(0.5))
-		return
-	weather.lightning_strike()
-	for(var/client/C)
-		if(!isliving(C.mob) || C.mob.get_preference_value(/datum/client_preference/play_ambiance) != PREF_YES)
-			continue
-		var/turf/T = get_turf(C.mob)
-		if(!(T.z in weather.affecting_zs))
-			continue
-		sound_to(C.mob, sound('sound/effects/weather/thunder.ogg', repeat = FALSE, wait = 0, volume = 100, channel = sound_channels.weather_channel))
+	if(prob(0.5))
+		weather.lightning_strike()
 
 /decl/state/weather/rain/hail
 	name =  "Hail"

@@ -37,5 +37,12 @@
 /obj/abstract/weather_system/proc/lightning_strike()
 	set waitfor = FALSE
 	animate(lightning_overlay, alpha = 255, time = 2)
+	for(var/client/C)
+		if(!isliving(C.mob) || C.mob.get_preference_value(/datum/client_preference/play_ambiance) != PREF_YES)
+			continue
+		var/turf/T = get_turf(C.mob)
+		if(!(T.z in affecting_zs))
+			continue
+		sound_to(C.mob, sound('sound/effects/weather/thunder.ogg', repeat = FALSE, wait = 0, volume = 100))
 	sleep(3)
 	animate(lightning_overlay, alpha = initial(lightning_overlay.alpha), time = 5 SECONDS)

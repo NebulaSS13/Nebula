@@ -1065,9 +1065,15 @@
 
 /mob/living/carbon/human/get_weather_protection()
 	. = ..()
-	var/obj/item/clothing/head/check_head = wear_suit
-	if(istype(check_head) && check_head.protects_against_weather)
+	if(!LAZYLEN(.))
+		var/obj/item/clothing/head/check_head = head
+		if(!istype(check_head) || !check_head.protects_against_weather)
+			return
+		var/obj/item/clothing/suit/check_body = wear_suit
+		if(!istype(check_body) || !check_body.protects_against_weather)
+			return
 		LAZYADD(., check_head)
+		LAZYADD(., check_body)
 
 /mob/proc/get_weather_exposure(var/obj/abstract/weather_system/weather)
 	var/turf/T = loc
