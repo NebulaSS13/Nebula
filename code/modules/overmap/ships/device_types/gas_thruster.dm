@@ -46,7 +46,7 @@
 
 	var/exit_pressure = get_nozzle_exit_pressure()
 	var/ratio_specific_heat = get_ratio_specific_heat(propellant)
-	if(propellant.return_pressure() <= MINIMUM_PRESSURE_DIFFERENCE_TO_SUSPEND)
+	if((propellant.return_pressure() - exit_pressure) <= MINIMUM_PRESSURE_DIFFERENCE_TO_SUSPEND)
 		return 0
 	var/mm = propellant.specific_mass()
 	if(mm == 0)
