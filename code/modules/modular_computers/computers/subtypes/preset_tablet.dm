@@ -32,7 +32,7 @@
 	)
 //Map presets
 
-/obj/item/modular_computer/tablet/lease/preset/command/install_default_hardware()
+/obj/item/modular_computer/tablet/lease/preset/command
 	default_hardware = list(
 		/obj/item/stock_parts/computer/processor_unit/small,
 		/obj/item/stock_parts/computer/tesla_link,
