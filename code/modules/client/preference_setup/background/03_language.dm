@@ -88,7 +88,9 @@
 	var/list/language_types = decls_repository.get_decls_of_subtype(/decl/language)
 	for(var/thing in language_types)
 		var/decl/language/lang = language_types[thing]
-		if(user.has_admin_rights() || (!(lang.flags & RESTRICTED) && (lang.flags & WHITELISTED) && is_alien_whitelisted(user, lang)))
+		if(lang.is_abstract()) // these aren't supposed to be available to anyone, they're abstract types
+			continue
+		if(user.has_admin_rights() || (!(lang.flags & RESTRICTED) && is_alien_whitelisted(user, lang)))
 			allowed_languages[thing] = TRUE
 
 /datum/category_item/player_setup_item/background/languages/proc/is_allowed_language(var/mob/user, var/decl/language/lang)
@@ -96,7 +98,7 @@
 		lang = GET_DECL(lang)
 	if(isnull(allowed_languages) || isnull(free_languages))
 		rebuild_language_cache(user)
-	if(!user || ((lang.flags & RESTRICTED) && is_alien_whitelisted(user, lang)))
+	if(!user || is_alien_whitelisted(user, lang))
 		return TRUE
 	return allowed_languages[lang.type]
 
@@ -144,7 +146,7 @@
 			if(!(lang in pref.alternate_languages))
 				available_languages |= GET_DECL(lang)
 
-		LAZYADD(., "<tr>")	
+		LAZYADD(., "<tr>")
 		if(length(available_languages))
 			colspan = " colspan = 2"
 			var/list/language_links = list()
