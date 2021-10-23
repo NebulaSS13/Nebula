@@ -144,8 +144,10 @@ var/global/list/gear_datums = list()
 		var/decl/loadout_category/LC = all_loadout_categories[category]
 		var/category_cost = 0
 		for(var/gear in LC.gear)
+			var/decl/loadout_option/G = LC.gear[gear]
+			if(G.is_abstract())
+				continue
 			if(gear in pref.gear_list[pref.gear_slot])
-				var/decl/loadout_option/G = LC.gear[gear]
 				category_cost += G.cost
 
 		if(category == current_category_decl.type)
@@ -174,7 +176,7 @@ var/global/list/gear_datums = list()
 	for(var/gear_name in current_category_decl.gear)
 
 		var/decl/loadout_option/G = current_category_decl.gear[gear_name]
-		if(!G.can_be_taken_by(user, pref))
+		if(G.is_abstract() || !G.can_be_taken_by(user, pref))
 			continue
 
 		var/ticked = (G.name in pref.gear_list[pref.gear_slot])
@@ -348,6 +350,9 @@ var/global/list/gear_datums = list()
 
 /decl/loadout_option/Initialize()
 	. = ..()
+
+	if(is_abstract())
+		return .
 
 	if(name && (!global.using_map.loadout_blacklist || !(type in global.using_map.loadout_blacklist)))
 		global.gear_datums[name] = src
