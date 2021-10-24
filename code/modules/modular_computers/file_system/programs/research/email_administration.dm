@@ -31,8 +31,7 @@
 	var/datum/computer_network/network = program?.computer?.get_network()
 	if(!network)
 		error = "NETWORK FAILURE: Check connection to the network."
-
-	if(!length(network.get_mainframes_by_role(MF_ROLE_EMAIL_SERVER, user)))
+	else if(!length(network.get_mainframes_by_role(MF_ROLE_EMAIL_SERVER, user)))
 		error = "NETWORK FAILURE: No email servers detected."
 
 	if(error)
