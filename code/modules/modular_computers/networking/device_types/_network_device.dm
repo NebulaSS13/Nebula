@@ -9,7 +9,7 @@
 	var/connection_type = NETWORK_CONNECTION_STRONG_WIRELESS  // affects signal strength
 	var/connection_attempts = 0
 
-	var/has_commands = FALSE  // Whether or not this device can be configured to receive commands to modify and call public variables and methods. 
+	var/has_commands = FALSE  // Whether or not this device can be configured to receive commands to modify and call public variables and methods.
 	var/list/command_and_call // alias -> public method to be called.
 	var/list/command_and_write // alias -> public variable to be written to or read from.
 
@@ -26,7 +26,7 @@
 	network_tag = "[uppertext(replacetext(O.name, " ", "_"))]-[sequential_id(type)]"
 	if(autojoin)
 		SSnetworking.queue_connection(src)
-	
+
 	if(has_commands)
 		reload_commands()
 
@@ -53,7 +53,7 @@
 	if(!net.check_connection(src, specific_action) || !net.add_device(src))
 		return FALSE
 	return net.get_signal_strength(src)
-	
+
 /datum/extension/network_device/proc/get_signal_wordlevel()
 	var/datum/computer_network/network = get_network()
 	if(!network)
@@ -180,7 +180,7 @@
 	data["network_key"] = network_id ? "******" : "NOT SET"
 	data["network_tag"] = network_tag
 	data["status"] = get_signal_wordlevel()
-	
+
 	data["commands"] = has_commands
 	if(has_commands)
 		// For public methods.
@@ -195,7 +195,7 @@
 			var/decl/public_access/variable = command_and_write[thing]
 			var_list += list(list("alias" = thing, "reference" = "\ref[variable]", "reference_name" = "[variable.name]"))
 		data["variables"] = var_list
-				
+
 	return data
 
 /datum/extension/network_device/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nanoui/master_ui, datum/topic_state/state)
@@ -267,11 +267,11 @@
 /datum/extension/network_device/proc/change_command_alias(old_alias, new_alias)
 	new_alias = sanitize(new_alias)
 	new_alias = replacetext(new_alias, " ", "") // Strip spaces from the key.
-	
+
 	// Check if a command with the new alias already exists
 	if(LAZYACCESS(command_and_call, new_alias) || LAZYACCESS(command_and_write, new_alias))
 		return FALSE
-	
+
 	if(LAZYACCESS(command_and_call, old_alias))
 		LAZYSET(command_and_call, new_alias, LAZYACCESS(command_and_call, old_alias))
 		LAZYREMOVE(command_and_call, old_alias)
@@ -300,11 +300,11 @@
 		return "No valid target found for command '[command]'"
 	if(!has_access(user))
 		return "Access denied."
-	if(command_and_call[command])
+	if(LAZYACCESS(command_and_call, command))
 		var/decl/public_access/public_method/method = command_and_call[command]
 		method.perform(command_target, command_args)
 		return "Successfully called method '[command]' on [network_tag]."
-	if(command_and_write[command])
+	if(LAZYACCESS(command_and_write, command))
 		var/decl/public_access/public_variable/variable = command_and_write[command]
 		if(command_args) // Write to a var.
 			command_args = sanitize_command_args(command_args, variable.var_type)
@@ -357,8 +357,10 @@
 		return "Reinstancing command system, please try again in a few moments."
 	if(user && !has_access(user))
 		return "Access denied"
-	var/rand_alias = pick(command_and_call)
-	var/decl/public_access/public_method/rand_method = command_and_call[rand_alias]
+	var/rand_alias = SAFEPICK(command_and_call)
+	var/decl/public_access/public_method/rand_method = LAZYACCESS(command_and_call, rand_alias)
+	if(!istype(rand_method))
+		return "No commands found."
 	rand_method.perform(get_command_target())
 	last_rand_time = world.time
 	return "Encoding fault, incorrect command resolution likely"
@@ -379,14 +381,14 @@
 		var/decl/public_access/pub = pub_methods[path]
 		var/alias = pub.name
 		alias = replacetext(alias, " ", "_")
-		LAZYSET(command_and_call, alias, pub) 
+		LAZYSET(command_and_call, alias, pub)
 
 	for(var/path in pub_vars)
 		var/decl/public_access/pub = pub_vars[path]
 		var/alias = pub.name
 		alias = replacetext(alias, " ", "_")
-		LAZYSET(command_and_write, alias, pub) 
-	
+		LAZYSET(command_and_write, alias, pub)
+
 //Subtype for passive devices, doesn't init until asked for
 /datum/extension/network_device/lazy
 	base_type = /datum/extension/network_device
