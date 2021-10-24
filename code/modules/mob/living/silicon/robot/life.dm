@@ -24,6 +24,7 @@
 		process_killswitch()
 		process_locks()
 		process_queued_alarms()
+		process_os()
 	UpdateLyingBuckledAndVerbStatus()
 
 /mob/living/silicon/robot/proc/clamp_values()
