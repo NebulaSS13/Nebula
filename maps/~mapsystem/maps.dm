@@ -24,10 +24,10 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/path
 
 	var/list/station_levels = list() // Z-levels the station exists on
-	var/list/admin_levels = list()   // Z-levels for admin functionality (Centcom, shuttle transit, etc)
+	var/list/admin_levels =   list() // Z-levels for admin functionality (Centcom, shuttle transit, etc)
 	var/list/contact_levels = list() // Z-levels that can be contacted from the station, for eg announcements
-	var/list/player_levels = list()  // Z-levels a character can typically reach
-	var/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
+	var/list/player_levels =  list() // Z-levels a character can typically reach
+	var/list/sealed_levels =  list() // Z-levels that don't allow random transit at edge
 
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 

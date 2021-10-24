@@ -12,11 +12,6 @@
 	company_short = "NT"
 	system_name   = "Nyx"
 
-	station_levels = list(1,2)
-	contact_levels = list(1,2)
-	player_levels =  list(1,2)
-	admin_levels =   list(3,4)
-
 	overmap_ids = list(OVERMAP_ID_SPACE)
 	num_exoplanets = 1
 

@@ -63434,6 +63434,10 @@
 /obj/machinery/computer/shuttle_control/explore/mining,
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/exodus_pod_mining)
+"doN" = (
+/obj/level_data/main_level,
+/turf/space,
+/area/space)
 "drB" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /obj/effect/floor_decal/industrial/warning,
@@ -66401,7 +66405,7 @@ cLU
 cLU
 cLU
 cLU
-cLU
+doN
 cLU
 cLU
 cLU

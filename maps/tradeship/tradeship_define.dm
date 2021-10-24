@@ -4,10 +4,6 @@
 	path = "tradeship"
 	ground_noun = "deck"
 
-	station_levels = list(1, 2, 3, 4)
-	contact_levels = list(1, 2, 3, 4)
-	player_levels = list(1, 2, 3, 4)
-
 	station_name  = "Tradeship Ocelot Alpha"
 	station_short = "Ocelot"
 

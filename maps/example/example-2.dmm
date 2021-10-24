@@ -402,6 +402,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/surgery)
+"LO" = (
+/obj/level_data/main_level,
+/turf/space,
+/area/space)
 "Ry" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5
@@ -617,7 +621,7 @@ aa
 aa
 aa
 aa
-aa
+LO
 aa
 aa
 aa

@@ -126,6 +126,10 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/maintenance/fsmaint2)
+"w" = (
+/obj/level_data/main_level,
+/turf/space,
+/area/space)
 "x" = (
 /obj/machinery/light/spot,
 /obj/effect/floor_decal/corner/orange{
@@ -472,7 +476,7 @@ a
 a
 a
 a
-a
+w
 a
 a
 a
