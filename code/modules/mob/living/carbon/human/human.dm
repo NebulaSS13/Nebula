@@ -1086,11 +1086,11 @@
 
 	var/decl/pronouns/new_pronouns = get_pronouns_by_gender(get_sex())
 	if(!istype(new_pronouns) || !(new_pronouns in species.available_pronouns))
-		new_pronouns = pick(species.available_pronouns)
+		new_pronouns = species.default_pronouns
 		set_gender(new_pronouns.name)
 
 	icon_state = lowertext(species.name)
-	set_bodytype(pick(species.available_bodytypes), TRUE)
+	set_bodytype(species.default_bodytype, TRUE)
 
 	species.create_organs(src)
 	species.handle_post_spawn(src)

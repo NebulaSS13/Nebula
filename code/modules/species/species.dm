@@ -203,6 +203,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	var/list/override_limb_types // Used for species that only need to change one or two entries in has_limbs.
 
+	var/decl/pronouns/default_pronouns
 	var/list/available_pronouns = list(
 		/decl/pronouns,
 		/decl/pronouns/female,
@@ -345,6 +346,11 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	for(var/pronoun in available_pronouns)
 		available_pronouns -= pronoun
 		available_pronouns += GET_DECL(pronoun)
+
+	if(ispath(default_pronouns))
+		default_pronouns = GET_DECL(default_pronouns)
+	else if(length(available_pronouns) && !default_pronouns)
+		default_pronouns = available_pronouns[1]
 
 	for(var/token in ALL_CULTURAL_TAGS)
 
