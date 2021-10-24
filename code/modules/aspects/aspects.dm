@@ -131,7 +131,7 @@ var/global/list/aspect_categories = list() // Containers for ease of printing da
 		if(printed_cat)
 			dat += "<hr>"
 
-	var/datum/browser/written/popup = new((show_to || usr), "aspect_summary_\ref[src]", "Aspect Summary")
+	var/datum/browser/popup = new((show_to || usr), "aspect_summary_\ref[src]", "Aspect Summary")
 	popup.set_content(jointext(dat, null))
 	popup.open()
 

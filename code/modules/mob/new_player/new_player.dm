@@ -469,7 +469,7 @@
 	if(new_track)
 		new_track.play_to(src)
 
-/mob/new_player/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+/mob/new_player/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
 	. = text_content
 
 /mob/new_player/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)
