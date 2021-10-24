@@ -107,11 +107,23 @@ var/global/list/time_prefs_fixed = list()
 				// If there's no old save, there'll be nothing to load.
 				return
 
-		stage = "load"
+		stage = "load_preferences"
 		load_preferences()
-		load_character()
+		if(SScharacter_setup.initialized)
+			stage = "load_character"
+			load_character()
+		else
+			SScharacter_setup.queue_load_character(src)
 	catch(var/exception/E)
 		load_failed = "{[stage]} [E]"
+		throw E
+
+// separated out to avoid stalling SScharacter_setup's Initialize
+/datum/preferences/proc/lateload_character()
+	try
+		load_character()
+	catch(var/exception/E)
+		load_failed = "{lateload_character} [E]"
 		throw E
 
 /datum/preferences/proc/migrate_legacy_preferences()
@@ -470,19 +482,11 @@ var/global/list/time_prefs_fixed = list()
 	if(client.get_preference_value(/datum/client_preference/fullscreen_mode) != PREF_OFF)
 		client.toggle_fullscreen(client.get_preference_value(/datum/client_preference/fullscreen_mode))
 
-/datum/preferences/proc/setup_preferences(initialization = FALSE)
-	// This proc will be called twice if SScharacter_setup is not initialized,
-	// so, don't create prefs again.
-
-	// give them default keybinds too
+/datum/preferences/proc/setup_preferences()
+	// give them default keybinds
 	key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key)
 
 	if(istype(client))
-
 		// Preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum).
 		SScharacter_setup.preferences_datums[client.ckey] = src
-
-		if(initialization || SScharacter_setup.initialized)
-			setup()
-		else
-			SScharacter_setup.queue_prefs(src)
+		setup()

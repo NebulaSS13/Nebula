@@ -7,16 +7,16 @@ SUBSYSTEM_DEF(character_setup)
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
 
 	var/list/preferences_datums = list()
-	var/list/prefs_awaiting_setup = list()
+	var/list/chars_awaiting_load = list()
 	var/list/newplayers_requiring_init = list()
 
 	var/list/save_queue = list()
 
 /datum/controller/subsystem/character_setup/Initialize()
-	while(prefs_awaiting_setup.len)
-		var/datum/preferences/prefs = prefs_awaiting_setup[prefs_awaiting_setup.len]
-		prefs_awaiting_setup.len--
-		prefs.setup_preferences(TRUE)
+	while(chars_awaiting_load.len)
+		var/datum/preferences/prefs = chars_awaiting_load[chars_awaiting_load.len]
+		chars_awaiting_load.len--
+		prefs.lateload_character() // separated to avoid Initialize() crashing
 
 	while(newplayers_requiring_init.len)
 		var/mob/new_player/new_player = newplayers_requiring_init[newplayers_requiring_init.len]
@@ -25,12 +25,12 @@ SUBSYSTEM_DEF(character_setup)
 
 	. = ..()
 
-/datum/controller/subsystem/character_setup/proc/queue_prefs(datum/preferences/prefs)
+/datum/controller/subsystem/character_setup/proc/queue_load_character(datum/preferences/prefs)
 	// Calling this after subsytem's initialization is pointless
-	// and the client's preferences will never be loaded.
+	// and the client's characters will never be loaded.
 	ASSERT(!initialized)
 
-	prefs_awaiting_setup += prefs
+	chars_awaiting_load += prefs
 
 /datum/controller/subsystem/character_setup/fire(resumed = FALSE)
 	while(save_queue.len)
