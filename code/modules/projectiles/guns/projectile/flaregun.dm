@@ -28,9 +28,10 @@
 
 /obj/item/gun/projectile/flare/special_check()
 	if(loaded.len && !istype(loaded[1], /obj/item/ammo_casing/shotgun/flash))
-		var/damage = chambered.BB.get_structure_damage()
-		if(istype(chambered.BB, /obj/item/projectile/bullet/pellet))
-			var/obj/item/projectile/bullet/pellet/PP = chambered.BB
+		var/obj/item/ammo_casing/chambered_round = loaded[1]
+		var/damage = chambered_round.BB.get_structure_damage()
+		if(istype(chambered_round.BB, /obj/item/projectile/bullet/pellet))
+			var/obj/item/projectile/bullet/pellet/PP = chambered_round.BB
 			damage = PP.damage*PP.pellets
 		if(damage > 5)
 			var/mob/living/carbon/C = loc
