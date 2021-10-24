@@ -234,6 +234,33 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 #undef LOCATE_COORDS
 
+#define LOCATE_COORDS_SAFE(X, Y, Z) locate(between(TRANSITIONEDGE + 1, X, world.maxx - TRANSITIONEDGE), between(TRANSITIONEDGE + 1, Y, world.maxy - TRANSITIONEDGE), Z)
+/proc/getcirclesafe(turf/center, var/radius) //Uses a fast Bresenham rasterization algorithm to return the turfs in a thin circle.
+	if(!radius) return list(center)
+
+	var/x = 0
+	var/y = radius
+	var/p = 3 - 2 * radius
+
+	. = list()
+	while(y >= x) // only formulate 1/8 of circle
+
+		. += LOCATE_COORDS_SAFE(center.x - x, center.y - y, center.z) //upper left left
+		. += LOCATE_COORDS_SAFE(center.x - y, center.y - x, center.z) //upper upper left
+		. += LOCATE_COORDS_SAFE(center.x + y, center.y - x, center.z) //upper upper right
+		. += LOCATE_COORDS_SAFE(center.x + x, center.y - y, center.z) //upper right right
+		. += LOCATE_COORDS_SAFE(center.x - x, center.y + y, center.z) //lower left left
+		. += LOCATE_COORDS_SAFE(center.x - y, center.y + x, center.z) //lower lower left
+		. += LOCATE_COORDS_SAFE(center.x + y, center.y + x, center.z) //lower lower right
+		. += LOCATE_COORDS_SAFE(center.x + x, center.y + y, center.z) //lower right right
+
+		if(p < 0)
+			p += 4*x++ + 6;
+		else
+			p += 4*(x++ - y--) + 10;
+
+#undef LOCATE_COORDS_SAFE
+
 //Returns whether or not a player is a guest using their ckey as an input
 /proc/IsGuestKey(key)
 	if (findtext(key, "Guest-", 1, 7) != 1) //was findtextEx
