@@ -19,7 +19,7 @@
 
 /obj/structure/plasticflaps/CanJPSPass(obj/item/card/id/ID, to_dir, atom/movable/caller)
 	if(isliving(caller))
-		if(isbot(caller))
+		if(istype(caller, /mob/living/bot))
 			return TRUE
 
 		var/mob/living/M = caller

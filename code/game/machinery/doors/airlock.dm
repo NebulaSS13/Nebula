@@ -123,7 +123,7 @@ About the new airlock wires panel:
 */
 
 /obj/machinery/door/airlock/CanJPSPass(obj/item/card/id/ID, to_dir, atom/movable/caller)
-	return !density || (check_access(ID) && !locked && arePowerSystemsOn())
+	return !density || (!locked && check_access(ID) && arePowerSystemsOn())
 
 /obj/machinery/door/airlock/bumpopen(mob/living/user) //Airlocks now zap you when you 'bump' them open when they're electrified. --NeoFite
 	if(!issilicon(usr))

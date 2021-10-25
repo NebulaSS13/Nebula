@@ -136,10 +136,11 @@
  * return null, which [/proc/get_path_to] translates to an empty list (notable for simple bots, who need empty lists)
  */
 /datum/pathfind/proc/search()
+
 	start = get_turf(caller)
 	if(!start || !end)
-		PRINT_STACK_TRACE("Invalid A* start or destination")
-		return
+		CRASH("Invalid A* start or destination")
+
 	if(start.z != end.z || start == end ) //no pathfinding between z levels
 		return
 	if(max_distance && (max_distance < get_dist(start, end))) //if start turf is farther than max_distance from end turf, no need to do anything
@@ -208,9 +209,7 @@
 	var/turf/current_turf = original_turf
 	var/turf/lag_turf = original_turf
 
-	while(TRUE)
-		if(path)
-			return
+	while(!path)
 		lag_turf = current_turf
 		current_turf = get_step(current_turf, heading)
 		steps_taken++
@@ -269,9 +268,7 @@
 	var/turf/current_turf = original_turf
 	var/turf/lag_turf = original_turf
 
-	while(TRUE)
-		if(path)
-			return
+	while(!path)
 		lag_turf = current_turf
 		current_turf = get_step(current_turf, heading)
 		steps_taken++

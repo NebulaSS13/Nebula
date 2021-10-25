@@ -616,6 +616,11 @@
 		return TRUE
 	return FALSE
 
+/obj/structure/table/CanJPSPass(obj/item/card/id/ID, to_dir, atom/movable/caller)
+	. = !density
+	if(!. && istype(caller) && caller.checkpass(PASS_FLAG_TABLE))
+		. = TRUE
+
 /obj/structure/table/handle_default_wrench_attackby(var/mob/user, var/obj/item/wrench)
 	return !reinf_material && ..()
 

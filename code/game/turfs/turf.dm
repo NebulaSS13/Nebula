@@ -376,15 +376,11 @@ var/global/const/enterloopsanity = 100
  * * simulated_only: Do we only worry about turfs with simulated atmos, most notably things that aren't space?
 */
 /turf/proc/reachableAdjacentTurfs(caller, ID, simulated_only)
-	var/static/space_type_cache = typecacheof(/turf/space)
 	. = list()
-
 	for(var/iter_dir in global.cardinal)
 		var/turf/turf_to_check = get_step(src, iter_dir)
-		if(!turf_to_check || (simulated_only && space_type_cache[turf_to_check.type]))
+		if(!turf_to_check || (simulated_only && !istype(turf_to_check, /turf/simulated)))
 			continue
-
 		if(turf_to_check.density || LinkBlockedWithAccess(turf_to_check, caller, ID))
 			continue
-
 		. += turf_to_check
