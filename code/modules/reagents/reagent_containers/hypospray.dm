@@ -168,7 +168,7 @@
 
 /obj/item/chems/hypospray/autoinjector/on_update_icon()
 	overlays.Cut()
-	if(reagents.total_volume > 0)
+	if(reagents?.total_volume > 0)
 		icon_state = "[initial(icon_state)]1"
 	else
 		icon_state = "[initial(icon_state)]0"
