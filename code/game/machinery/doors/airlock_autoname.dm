@@ -3,7 +3,10 @@
 /obj/machinery/door/airlock/hatch/autoname/Initialize()
 	. = ..()
 	var/area/A = get_area(src)
-	SetName("hatch ([A.name])")
+	if(A)
+		SetName("hatch ([A.name])")
+	else
+		log_warning("\the [src] at ([x], [y], [z]) couldn't find an area to take its name from!")
 
 /obj/machinery/door/airlock/hatch/autoname/general
 	stripe_color = COLOR_CIVIE_GREEN
