@@ -148,7 +148,7 @@
 /obj/machinery/door/airlock/external/get_auto_access()
 	. = ..()
 	var/area/A = get_area(src)
-	if(A && is_station_area(A))
+	if(istype(A))
 		LAZYADD(., access_external_airlocks)
 
 /obj/machinery/door/airlock/external/escapepod
