@@ -2272,6 +2272,7 @@
 #include "code\modules\mob\living\carbon\human\human_skin.dm"
 #include "code\modules\mob\living\carbon\human\human_species.dm"
 #include "code\modules\mob\living\carbon\human\human_status.dm"
+#include "code\modules\mob\living\carbon\human\human_verbs.dm"
 #include "code\modules\mob\living\carbon\human\inventory.dm"
 #include "code\modules\mob\living\carbon\human\life.dm"
 #include "code\modules\mob\living\carbon\human\login.dm"

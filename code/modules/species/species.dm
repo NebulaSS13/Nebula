@@ -264,7 +264,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/icon/preview_icon
 	var/preview_icon_width = 64
 	var/preview_icon_height = 64
-	var/preview_icon_path	
+	var/preview_icon_path
 
 /decl/species/Initialize()
 
