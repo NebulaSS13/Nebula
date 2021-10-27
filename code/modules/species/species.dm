@@ -854,3 +854,15 @@
 
 /decl/species/proc/get_holder_color(var/mob/living/carbon/human/H)
 	return
+
+//Called after a mob's specie is set, organs were created, and we're about to update the icon, color, and etc of the mob being created.
+//Consider this might be called post-init
+/decl/species/proc/apply_appearence(var/mob/living/carbon/human/H)
+	H.icon_state = lowertext(src.name)
+	H.skin_colour = src.base_color
+	
+	H.appearance_descriptors = null
+	if(LAZYLEN(src.appearance_descriptors))
+		for(var/desctype in src.appearance_descriptors)
+			var/datum/appearance_descriptor/descriptor = src.appearance_descriptors[desctype]
+			LAZYSET(H.appearance_descriptors, descriptor.name, descriptor.default_value)

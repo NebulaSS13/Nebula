@@ -917,3 +917,6 @@ default behaviour is:
 
 /mob/living/proc/get_eye_overlay()
 	return
+
+/mob/living/proc/empty_stomach()
+	return

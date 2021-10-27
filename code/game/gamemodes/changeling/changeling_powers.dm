@@ -309,7 +309,8 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		var/newSpecies = chosen_dna.speciesName
-		H.set_species(newSpecies,1)
+		H.set_species(newSpecies)
+		H.apply_species_appearance()
 		H.b_type = chosen_dna.dna.b_type
 		H.sync_organ_dna()
 
