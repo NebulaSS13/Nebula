@@ -8,6 +8,7 @@
 	burn_product = /decl/material/gas/carbon_monoxide
 	gas_flags = XGM_GAS_FUEL
 	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	uid = "chem_fuel"
 
 	glass_name = "welder fuel"
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
@@ -44,3 +45,4 @@
 	touch_met = 5
 	value = 1.2
 	fuel_value = 1.2
+	uid = "chem_hydrazine"

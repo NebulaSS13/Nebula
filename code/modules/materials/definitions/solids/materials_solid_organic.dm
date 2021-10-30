@@ -151,12 +151,13 @@
 
 /decl/material/solid/cloth/red
 	name = "red"
+	uid = "solid_cotton_red"
 	use_name = "red cloth"
 	color = "#9d2300"
 
 /decl/material/solid/carpet
 	name = "red"
-	uid = "solid_cotton_red"
+	uid = "solid_carpet"
 	use_name = "red upholstery"
 	color = "#9d2300"
 	flags = MAT_FLAG_PADDING

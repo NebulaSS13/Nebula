@@ -7,6 +7,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	uid = "chem_eyedrops"
 
 /decl/material/liquid/eyedrops/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(ishuman(M))
@@ -27,6 +28,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	uid = "chem_antirads"
 
 /decl/material/liquid/antirads/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.radiation = max(M.radiation - 30 * removed, 0)
@@ -42,6 +44,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
 	fruit_descriptor = "medicinal"
+	uid = "chem_styptic"
 	var/effectiveness = 1
 
 /decl/material/liquid/brute_meds/affect_overdose(mob/living/M, alien, var/datum/reagents/holder)
@@ -69,6 +72,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	uid = "chem_synthskin"
 	var/effectiveness = 1
 
 /decl/material/liquid/burn_meds/affect_blood(mob/living/M, alien, removed, var/datum/reagents/holder)
@@ -84,6 +88,7 @@
 	color = "#c8a5dc"
 	flags = AFFECTS_DEAD //This can even heal dead people.
 	exoplanet_rarity = MAT_RARITY_NOWHERE
+	uid = "chem_adminorazine"
 
 	glass_name = "liquid gold"
 	glass_desc = "It's magic. We don't have to explain it."
@@ -103,6 +108,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
 	fruit_descriptor = "astringent"
+	uid = "chem_antitoxins"
 	var/remove_generic = 1
 	var/list/remove_toxins = list(
 		/decl/material/liquid/zombiepowder
@@ -137,6 +143,7 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 1.5
 	scannable = 1
+	uid = "chem_immunobooster"
 
 /decl/material/liquid/immunobooster/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(ishuman(M) && REAGENT_VOLUME(holder, type) < REAGENTS_OVERDOSE)
@@ -158,6 +165,7 @@
 	scannable = 1
 	metabolism = 0.01
 	value = 1.5
+	uid = "chem_stimulants"
 
 /decl/material/liquid/stimulants/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -181,6 +189,7 @@
 	scannable = 1
 	metabolism = 0.01
 	value = 1.5
+	uid = "chem_antidepressants"
 
 /decl/material/liquid/antidepressants/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -203,6 +212,7 @@
 	overdose = REAGENTS_OVERDOSE/2
 	scannable = 1
 	value = 1.5
+	uid = "chem_antibiotics"
 
 /decl/material/liquid/antibiotics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/mob/living/carbon/human/H = M
@@ -233,6 +243,7 @@
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 	value = 1.5
+	uid = "chem_retrovirals"
 
 /decl/material/liquid/retrovirals/affect_overdose(mob/living/M, alien, datum/reagents/holder)
 	. = ..()
@@ -267,6 +278,7 @@
 	overdose = 20
 	metabolism = 0.1
 	value = 1.5
+	uid = "chem_adrenaline"
 
 /decl/material/liquid/adrenaline/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -295,6 +307,7 @@
 	scannable = 1
 	metabolism = 0.5 * REM
 	value = 1.5
+	uid = "chem_stabilizer"
 
 /decl/material/liquid/stabilizer/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -308,6 +321,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	uid = "chem_regenerative_serum"
 
 /decl/material/liquid/regenerator/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	..()
@@ -324,6 +338,7 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 1.5
+	uid = "chem_neuroannealer"
 
 /decl/material/liquid/neuroannealer/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
@@ -339,6 +354,7 @@
 	taste_description = "tasteless slickness"
 	scannable = 1
 	color = COLOR_GRAY80
+	uid = "chem_oxygel"
 
 /decl/material/liquid/oxy_meds/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_OXYGENATED, 1)

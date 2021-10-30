@@ -350,6 +350,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder
 	name = "placeholder"
+	uid = "mat_placeholder"
 	hidden_from_codex = TRUE
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 

@@ -18,6 +18,7 @@ var/global/list/random_chem_interaction_blacklist = list(
 	lore_text = "A strange and exotic chemical substance."
 	taste_mult = 0 // Random taste not yet implemented
 	hidden_from_codex = TRUE
+	uid = "chem_random"
 	var/max_effect_number = 8
 	var/list/data = list()
 	var/initialized = FALSE
@@ -102,6 +103,9 @@ var/global/list/random_chem_interaction_blacklist = list(
 
 // Extra unique types for exoplanet spawns, etc.
 /decl/material/liquid/random/one
+	uid = "chem_random_one"
+
 /decl/material/liquid/random/two
+	uid = "chem_random_two"
 
 #undef FOR_ALL_EFFECTS

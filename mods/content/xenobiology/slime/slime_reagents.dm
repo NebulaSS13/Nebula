@@ -1,5 +1,6 @@
 /decl/material/liquid/slimejelly
 	name = "slime jelly"
+	uid = "chem_slime_jelly"
 	lore_text = "A gooey semi-liquid produced from one of the deadliest lifeforms in existence."
 	taste_description = "slime"
 	taste_mult = 1.3
