@@ -27,7 +27,7 @@
 
 // Used to install preset-specific programs
 /obj/item/modular_computer/proc/install_default_programs()
-	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob)
+	var/mob/living/carbon/human/H = get_recursive_loc_of_type(/mob)
 	var/list/job_programs = list()
 	if(H)
 		var/datum/job/jb = SSjobs.get_by_title(H.job)
