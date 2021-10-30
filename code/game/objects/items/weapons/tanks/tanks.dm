@@ -227,7 +227,7 @@ var/global/list/global/tank_gauge_cache = list()
 		proxyassembly.assembly.attack_self(user)
 
 /obj/item/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	var/mob/living/carbon/location = get(src, /mob/living/carbon)
+	var/mob/living/carbon/location = get_recursive_loc_of_type(/mob/living/carbon)
 
 	var/using_internal
 	if(istype(location))

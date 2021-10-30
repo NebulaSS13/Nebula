@@ -90,7 +90,7 @@
 		return net.get_email_addresses()
 
 /datum/nano_module/program/email_client/proc/mail_received(var/datum/computer_file/data/email_message/received_message)
-	var/mob/living/L = get_holder_of_type(host, /mob/living)
+	var/mob/living/L = host.get_recursive_loc_of_type(/mob/living)
 	if(L)
 		var/list/msg = list()
 		msg += "*--*\n"
