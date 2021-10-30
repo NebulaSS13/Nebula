@@ -9,7 +9,7 @@ This is /obj/machinery level code to properly manage power usage from the area.
 		if(A) A.power_use_change(old_power, new_power, power_channel)}
 
 // returns true if the area has power on given channel (or doesn't require power), defaults to power_channel.
-// May also optionally specify an area, otherwise defaults to src.loc.loc
+// May also optionally specify an area, otherwise defaults to get_area(src)
 /obj/machinery/proc/powered(var/chan = -1, var/area/check_area = null)
 
 	if(!src.loc)
@@ -21,7 +21,7 @@ This is /obj/machinery level code to properly manage power usage from the area.
 	//	return 1
 
 	if(!check_area)
-		check_area = src.loc.loc		// make sure it's in an area
+		check_area = get_area(src)		// make sure it's in an area
 	if(!check_area || !isarea(check_area))
 		return 0					// if not, then not powered
 	if(chan == -1)
