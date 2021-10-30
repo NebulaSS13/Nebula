@@ -248,7 +248,7 @@
 	impact_type = /obj/effect/projectile/impact/plasma_cutter
 
 /obj/item/projectile/beam/plasmacutter/on_impact(var/atom/A)
-	if(istype(A, /turf/exterior/wall)
+	if(istype(A, /turf/exterior/wall))
 		var/turf/exterior/wall/M = A
 		M.dismantle_wall()
 	. = ..()
