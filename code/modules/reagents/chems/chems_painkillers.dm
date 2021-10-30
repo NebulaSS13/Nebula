@@ -12,6 +12,7 @@
 	value = 1.8
 	var/pain_power = 80 //magnitide of painkilling effect
 	var/effective_dose = 0.5 //how many units it need to process to reach max power
+	var/additional_effect_threshold = 2 // cumulative dosage at which slowdown and drowsiness are applied
 
 /decl/material/liquid/painkillers/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 
@@ -25,15 +26,15 @@
 
 	M.add_chemical_effect(CE_PAINKILLER, (pain_power * effectiveness))
 
-	if(dose > 0.5 * overdose)
+	if(dose > 0.5 * additional_effect_threshold)
 		M.add_chemical_effect(CE_SLOWDOWN, 1)
 		if(prob(1))
 			SET_STATUS_MAX(M, STAT_SLUR, 10)
-	if(dose > 0.75 * overdose)
+	if(dose > 0.75 * additional_effect_threshold)
 		M.add_chemical_effect(CE_SLOWDOWN, 1)
 		if(prob(5))
 			SET_STATUS_MAX(M, STAT_SLUR, 20)
-	if(dose > overdose)
+	if(dose > additional_effect_threshold)
 		M.add_chemical_effect(CE_SLOWDOWN, 1)
 		SET_STATUS_MAX(M, STAT_SLUR, 30)
 		if(prob(1))
