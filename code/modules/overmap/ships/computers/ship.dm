@@ -32,7 +32,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	return linked
 
 /obj/machinery/computer/ship/proc/display_reconnect_dialog(var/mob/user, var/flavor)
-	var/datum/browser/written/popup = new (user, "[src]", "[src]")
+	var/datum/browser/written_digital/popup = new (user, "[src]", "[src]")
 	popup.set_content("<center><strong><font color = 'red'>Error</strong></font><br>Unable to connect to [flavor].<br><a href='?src=\ref[src];sync=1'>Reconnect</a></center>")
 	popup.open()
 

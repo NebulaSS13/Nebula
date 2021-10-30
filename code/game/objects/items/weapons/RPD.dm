@@ -81,7 +81,7 @@ var/global/list/rpd_pipe_selection_skilled = list()
 
 	var/datum/fabricator_recipe/pipe/P
 	var/pipe_color = "white"
-	var/datum/browser/written/popup
+	var/datum/browser/written_digital/popup
 
 /obj/item/rpd/Initialize()
 	. = ..()

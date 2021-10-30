@@ -84,7 +84,7 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 		throwing = null
 		to_chat(src, "<span class='notice'>You cannot move further in this direction.</span>")
 
-/mob/observer/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+/mob/observer/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
 	. = text_content
 
 /mob/observer/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)

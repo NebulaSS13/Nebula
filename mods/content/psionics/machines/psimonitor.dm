@@ -105,10 +105,9 @@
 	else
 		dat += "<h2>Psionic Control Violations <a href='?src=\ref[src];show_violations=1'>+</a></h2><hr>"
 
-	var/datum/browser/written/popup = new(user, "psi_monitor_\ref[src]", "Psi-Monitor")
+	var/datum/browser/written_digital/popup = new(user, "psi_monitor_\ref[src]", "Psi-Monitor")
 	popup.set_content(jointext(dat,null))
 	popup.open()
-
 
 /obj/machinery/psi_monitor/proc/report_failure(var/obj/item/implant/psi_control/implant)
 	psi_violations += "<font color='#FF0000'>Critical system failure - [implant.imp_in.name].</font>"
