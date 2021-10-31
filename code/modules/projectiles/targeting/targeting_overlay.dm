@@ -21,7 +21,7 @@
 /obj/aiming_overlay/Initialize()
 	. = ..()
 	owner = loc
-	loc = null
+	forceMove(null)
 	verbs.Cut()
 
 /obj/aiming_overlay/proc/toggle_permission(var/perm)
@@ -225,7 +225,7 @@
 		aiming_at = null
 
 	aiming_with = null
-	loc = null
+	forceMove(null)
 	STOP_PROCESSING(SSobj, src)
 
 /obj/aiming_overlay/proc/target_moved()
