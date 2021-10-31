@@ -23,7 +23,6 @@
 /proc/release(obj/O)
 	set name = "Release Obj"
 	set category = "Object"
-	//usr.loc = get_turf(usr)
 
 	if(usr.control_object && usr.name_archive) //if you have a name archived and if you are actually relassing an object
 		usr.RemoveMovementHandler(/datum/movement_handler/mob/admin_possess)

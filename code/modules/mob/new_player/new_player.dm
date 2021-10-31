@@ -23,6 +23,7 @@
 
 /mob/new_player/Initialize()
 	. = ..()
+	forceMove(null)
 	verbs += /mob/proc/toggle_antag_pool
 
 /mob/new_player/proc/show_lobby_menu(force = FALSE)
