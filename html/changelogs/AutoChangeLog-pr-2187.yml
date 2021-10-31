@@ -1,0 +1,5 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - tweak: Painkillers will now apply their additional effects at much lower cumulative
+      dosage.
