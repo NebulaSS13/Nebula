@@ -10,14 +10,14 @@
 	var/list/tech_levels = list(
 		TECH_MATERIAL =      1,
 		TECH_ENGINEERING =   1,
-		TECH_EXOTIC_MATTER = 0,
 		TECH_POWER =         1,
-		TECH_WORMHOLES =     0,
-		TECH_BIO =           0,
-		TECH_COMBAT =        0,
+		TECH_BIO =           1,
 		TECH_MAGNET =        1,
 		TECH_DATA =          1,
-		TECH_ESOTERIC =      0
+		TECH_ESOTERIC =      0,
+		TECH_EXOTIC_MATTER = 0,
+		TECH_WORMHOLES =     0,
+		TECH_COMBAT =        0
 	)
 
 	var/need_disk_operation = FALSE
