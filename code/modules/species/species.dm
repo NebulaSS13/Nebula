@@ -14,6 +14,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/ooc_codex_information
 	var/cyborg_noun = "Cyborg"
 	var/hidden_from_codex = TRUE
+	var/secret_codex_info
 
 	var/holder_icon
 	var/list/available_bodytypes = list()

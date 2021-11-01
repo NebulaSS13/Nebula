@@ -18,7 +18,7 @@ SUBSYSTEM_DEF(codex)
 	linkRegex = regex(@"<(span|l)(\s+codexlink='([^>]*)'|)>([^<]+)</(span|l)>","g")
 
 	// Create general hardcoded entries.
-	for(var/ctype in typesof(/datum/codex_entry))
+	for(var/ctype in subtypesof(/datum/codex_entry))
 		var/datum/codex_entry/centry = ctype
 		if(initial(centry.name) || initial(centry.associated_paths) || initial(centry.associated_strings))
 			centry = new centry()
@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(codex)
 			cat.Populate()
 
 	// Create the index file for later use.
-	for(var/thing in SScodex.all_entries)
+	for(var/thing in all_entries)
 		var/datum/codex_entry/entry = thing
 		index_file[entry.name] = entry
 	index_file = sortTim(index_file, /proc/cmp_text_asc)

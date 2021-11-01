@@ -5,6 +5,9 @@
 /datum/fabricator_recipe/device_component/keyboard
 	path = /obj/item/stock_parts/keyboard
 
+/datum/fabricator_recipe/device_component/cataloguer
+	path = /obj/item/cataloguer
+
 /datum/fabricator_recipe/device_component/pda
 	path = /obj/item/modular_computer/pda
 

@@ -29,7 +29,7 @@
 	
 	radar = image(loc = effect, icon = 'icons/obj/overmap.dmi', icon_state = "sensor_range")
 	radar.tag = "radar"
-	radar.filters = filter(type="blur", size = 1)
+	radar.add_filter("blur", 1, list("blur", size = 1))
 
 /datum/overmap_contact/proc/update_marker_icon(var/range = 0)
 	marker.icon_state = effect.icon_state
