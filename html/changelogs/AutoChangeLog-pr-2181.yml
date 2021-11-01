@@ -1,0 +1,5 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - bugfix: Fixed runtime on autosetting airlocks placed outside an area.
+  - bugfix: Fixed runtime on building an external airlock outside an area.
