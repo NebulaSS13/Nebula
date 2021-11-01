@@ -259,7 +259,7 @@
 	return FALSE
 
 /atom/movable/CtrlClick(var/mob/living/user)
-	return try_make_grab(user) || ..()
+	return try_make_grab(user, defer_hand = TRUE) || ..()
 
 /*
 	Alt click

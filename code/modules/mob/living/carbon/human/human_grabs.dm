@@ -1,7 +1,10 @@
-/mob/living/carbon/human/add_grab(var/obj/item/grab/grab)
-	. = put_in_active_hand(grab)
+/mob/living/carbon/human/add_grab(var/obj/item/grab/grab, var/defer_hand = FALSE)
+	if(defer_hand)
+		. = put_in_hands(grab)
+	else
+		. = put_in_active_hand(grab)
 
-/mob/living/carbon/human/can_be_grabbed(var/mob/grabber, var/target_zone)
+/mob/living/carbon/human/can_be_grabbed(var/mob/grabber, var/target_zone, var/defer_hand = FALSE)
 	. = ..()
 	if(.)
 		var/obj/item/organ/external/organ = get_organ(target_zone)
@@ -9,7 +12,7 @@
 			to_chat(grabber, SPAN_WARNING("\The [src] is missing that body part!"))
 			return FALSE
 		if(grabber == src)
-			var/using_slot = get_active_held_item_slot()
+			var/using_slot = defer_hand ? get_empty_hand_slot() : get_active_held_item_slot()
 			if(!using_slot)
 				to_chat(src, SPAN_WARNING("You cannot grab yourself without a usable hand!"))
 				return FALSE

@@ -1,8 +1,12 @@
-/mob/living/proc/can_grab(var/atom/movable/target, var/target_zone)
+/mob/living/proc/can_grab(var/atom/movable/target, var/target_zone, var/defer_hand = FALSE)
 	if(!ismob(target) && target.anchored)
 		to_chat(src, SPAN_WARNING("\The [target] won't budge!"))
 		return FALSE
-	if(get_active_hand())
+	if(defer_hand)
+		if(!get_empty_hand_slot())
+			to_chat(src, SPAN_WARNING("Your hands are full!"))
+			return FALSE
+	else if(get_active_hand())
 		to_chat(src, SPAN_WARNING("Your hand is full!"))
 		return FALSE
 	if(LAZYLEN(grabbed_by))
@@ -21,7 +25,7 @@
 				return FALSE
 	return TRUE
 
-/mob/living/proc/make_grab(var/atom/movable/target, var/grab_tag = /decl/grab/simple)
+/mob/living/proc/make_grab(var/atom/movable/target, var/grab_tag = /decl/grab/simple, var/defer_hand = FALSE)
 
 	// Resolve to the 'topmost' atom in the buckle chain, as grabbing someone buckled to something tends to prevent further interaction.
 	var/atom/movable/original_target = target
@@ -37,8 +41,8 @@
 
 	face_atom(target)
 	var/obj/item/grab/grab
-	if(ispath(grab_tag, /decl/grab) && can_grab(target, zone_sel?.selecting) && target.can_be_grabbed(src, zone_sel?.selecting))
-		grab = new /obj/item/grab(src, target, grab_tag)
+	if(ispath(grab_tag, /decl/grab) && can_grab(target, zone_sel?.selecting, defer_hand = defer_hand) && target.can_be_grabbed(src, zone_sel?.selecting, defer_hand))
+		grab = new /obj/item/grab(src, target, grab_tag, defer_hand)
 
 	if(QDELETED(grab))
 		if(original_target != src && ismob(original_target))
@@ -46,7 +50,7 @@
 		to_chat(src, SPAN_WARNING("You try to grab \the [target], but fail!"))
 	return grab
 
-/mob/living/add_grab(var/obj/item/grab/grab)
+/mob/living/add_grab(var/obj/item/grab/grab, var/defer_hand = FALSE)
 	for(var/obj/item/grab/other_grab in contents)
 		if(other_grab != grab)
 			return FALSE
