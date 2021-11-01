@@ -53,28 +53,28 @@
 // Weedkiller defines for hydroponics
 // *************************************
 
-//TODO: Remove those, they're completely unused
-/obj/item/weedkiller
+/obj/item/plantspray/weedkiller
 	name = "bottle of weedkiller"
 	icon = 'icons/obj/items/chem/bottle.dmi'
 	icon_state = "bottle16"
+	toxicity = 0
+	pest_kill_str = 0
+	weed_kill_str = 0
 	material = /decl/material/solid/plastic
-	var/toxicity = 0
-	var/weed_kill_str = 0
 
-/obj/item/weedkiller/triclopyr
+/obj/item/plantspray/weedkiller/triclopyr
 	name = "bottle of glyphosate"
 	icon_state = "bottle16"
 	toxicity = 4
 	weed_kill_str = 2
 
-/obj/item/weedkiller/lindane
+/obj/item/plantspray/weedkiller/lindane
 	name = "bottle of triclopyr"
 	icon_state = "bottle18"
 	toxicity = 6
 	weed_kill_str = 4
 
-/obj/item/weedkiller/D24
+/obj/item/plantspray/weedkiller/D24
 	name = "bottle of 2,4-D"
 	icon_state = "bottle15"
 	toxicity = 8

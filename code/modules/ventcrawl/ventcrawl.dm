@@ -18,7 +18,6 @@ var/global/list/ventcrawl_machinery = list(
 	)
 
 /mob/living/var/list/icon/pipes_shown = list()
-/mob/living/var/last_played_vent
 /mob/living/var/is_ventcrawling = 0
 /mob/var/next_play_vent = 0
 

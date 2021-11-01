@@ -257,7 +257,6 @@ var/global/list/id_card_states
 	var/item_state
 	var/color
 	var/detail_color
-	var/details
 	var/extra_details
 
 /datum/card_state/dd_SortValue()

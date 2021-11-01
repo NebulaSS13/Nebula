@@ -6,12 +6,9 @@
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
-	var/r_speed = 1.0
 	var/health = null
 	var/max_health
 	var/material_health_multiplier = 0.2
-	var/burn_point = null
-	var/burning = null
 	var/hitsound
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1

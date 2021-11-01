@@ -6,7 +6,6 @@ Buildable meters
 /obj/item/pipe
 	name = "pipe"
 	desc = "A pipe."
-	var/pipename
 	var/connect_types = CONNECT_TYPE_REGULAR
 	force = 7
 	icon = 'icons/obj/pipe-item.dmi'

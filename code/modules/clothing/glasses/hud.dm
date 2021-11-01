@@ -13,7 +13,6 @@
 	material = /decl/material/solid/metal/aluminium
 	matter = list(/decl/material/solid/glass = MATTER_AMOUNT_REINFORCEMENT)
 	bodytype_equip_flags = null
-	var/list/icon/current = list() //the current hud icons
 
 /obj/item/clothing/glasses/proc/process_hud(var/mob/M)
 	if(hud)
@@ -58,7 +57,6 @@
 	icon = 'icons/clothing/eyes/hud_security.dmi'
 	hud_type = HUD_SECURITY
 	body_parts_covered = 0
-	var/static/list/jobs[0]
 
 /obj/item/clothing/glasses/hud/security/prescription
 	name = "prescription security HUD"

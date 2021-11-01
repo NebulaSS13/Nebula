@@ -26,7 +26,6 @@
 
 	var/number = 1
 	var/c_tag = null
-	var/c_tag_order = 999
 	var/status = 1
 	var/cut_power = FALSE
 

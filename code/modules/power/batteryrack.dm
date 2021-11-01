@@ -22,7 +22,6 @@
 	var/mode = PSU_OFFLINE								// Current inputting/outputting mode
 	var/list/internal_cells = list()					// Cells stored in this PSU
 	var/max_cells = 3									// Maximal amount of stored cells at once. Capped at 9.
-	var/previous_charge = 0								// Charge previous tick.
 	var/equalise = 0									// If true try to equalise charge between cells
 	var/icon_update = 0									// Timer in ticks for icon update.
 	var/ui_tick = 0

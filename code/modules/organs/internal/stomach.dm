@@ -18,6 +18,8 @@
 	. = ..()
 	if(species.gluttonous)
 		verbs |= /obj/item/organ/internal/stomach/proc/throw_up
+	if(species && !stomach_capacity)
+		stomach_capacity = species.stomach_capacity
 
 /obj/item/organ/internal/stomach/setup_reagents()
 	. = ..()
@@ -51,7 +53,7 @@
 			total += I.get_storage_cost()
 		else
 			continue
-		if(total > species.stomach_capacity)
+		if(total > stomach_capacity)
 			return TRUE
 	return FALSE
 

@@ -40,7 +40,6 @@
 	var/max_patrol_dist = 250
 	var/RequiresAccessToToggle = 0 // If 1, will check access to be turned on/off
 
-	var/target_patience = 5
 	var/frustration = 0
 	var/max_frustration = 0
 

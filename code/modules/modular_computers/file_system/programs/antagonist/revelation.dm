@@ -7,7 +7,6 @@
 	extended_desc = "This virus can destroy hard drive of system it is executed on. It may be obfuscated to look like another non-malicious program. Once armed, it will destroy the system upon next execution."
 	size = 13
 	available_on_network = 0
-	available_on_syndinet = 1
 	nanomodule_path = /datum/nano_module/program/revelation/
 	var/armed = 0
 

@@ -160,7 +160,6 @@
 
 	age_descriptor = /datum/appearance_descriptor/age/kharmaani/gyne
 	blood_volume =         1200
-	spawns_with_stack =       0
 
 	bump_flag =               HEAVY
 	push_flags =              ALLMOBS

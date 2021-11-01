@@ -9,8 +9,6 @@ SUBSYSTEM_DEF(supply)
 	var/points = 50
 	var/points_per_process = 1
 	var/point_sources = list()
-	var/pointstotalsum = 0
-	var/pointstotal = 0
 
 	var/price_markup =        1.15
 	var/crate_return_rebate = 0.9
@@ -24,7 +22,7 @@ SUBSYSTEM_DEF(supply)
 	var/list/requestlist = list()
 	var/list/donelist = list()
 	var/list/master_supply_list = list()
-	
+
 	//shuttle movement
 	var/movetime = 1200
 	var/datum/shuttle/autodock/ferry/supply/shuttle
@@ -34,7 +32,7 @@ SUBSYSTEM_DEF(supply)
 		"manifest" = "From exported manifests",
 		"crate" = "From exported crates",
 		"data" =  "From uploaded survey data",
-		"total" = "Total" 
+		"total" = "Total"
 	)
 
 /datum/controller/subsystem/supply/Initialize()

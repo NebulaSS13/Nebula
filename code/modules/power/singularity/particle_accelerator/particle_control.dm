@@ -17,7 +17,6 @@
 	var/interface_control = 1
 	var/list/obj/structure/particle_accelerator/connected_parts
 	var/assembled = 0
-	var/parts = null
 	wires = /datum/wires/particle_acc/control_box
 
 /obj/machinery/particle_accelerator/control_box/Initialize()

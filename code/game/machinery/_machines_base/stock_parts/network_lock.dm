@@ -11,7 +11,7 @@
 	var/initial_network_id							// The address to the network
 	var/initial_network_key							// network KEY
 	var/selected_parent_group						// Current selected parent_group for access assignment.
-	
+
 	var/list/groups									// List of lists of groups. In order to access the device, users must have membership in at least one
 													// of the groups in each list.
 	var/selected_pattern							// Index of the group pattern selected.
@@ -122,7 +122,7 @@
 		pattern_index++
 		data["patterns"].Add(list(list(
 			"index" = "[pattern_index]",
-			"groups" = english_list(pattern, "No groups assigned!", and_text = " or ") 
+			"groups" = english_list(pattern, "No groups assigned!", and_text = " or ")
 			)))
 
 	var/list/group_dictionary = network.access_controller.get_group_dict()
@@ -187,7 +187,7 @@
 			return TOPIC_HANDLED
 		LAZYADD(groups, list(list()))
 		return TOPIC_REFRESH
-	
+
 	if(href_list["remove_pattern"])
 		var/pattern_index = text2num(href_list["remove_pattern"])
 		LAZYREMOVE(groups, list(LAZYACCESS(groups, pattern_index))) // We have to encapsulate the pattern in another list to actually delete it.
@@ -196,7 +196,7 @@
 		else if(selected_pattern > pattern_index)
 			selected_pattern--
 		return TOPIC_REFRESH
-	
+
 	if(href_list["select_pattern"])
 		var/pattern_index = text2num(href_list["select_pattern"])
 		if(pattern_index > LAZYLEN(groups))
@@ -207,7 +207,7 @@
 	if(href_list["select_parent_group"])
 		selected_parent_group = href_list["select_parent_group"]
 		return TOPIC_REFRESH
-	
+
 	if(href_list["info"])
 		switch(href_list["info"])
 			if("pattern")

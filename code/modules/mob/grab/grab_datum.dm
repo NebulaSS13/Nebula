@@ -1,7 +1,5 @@
 /decl/grab
-
 	var/name = "generic grab"
-	var/fancy_desc
 	var/decl/grab/upgrab						// The grab that this will upgrade to if it upgrades, null means no upgrade
 	var/decl/grab/downgrab						// The grab that this will downgrade to if it downgrades, null means break grab on downgrade
 	var/stop_move = 0							// Whether or not the grabbed person can move out of the grab

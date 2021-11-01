@@ -20,7 +20,6 @@
 	var/obj/item/chems/glass/beaker = null
 	var/points = 0
 	var/state = BG_READY
-	var/denied = 0
 	var/build_eff = 1
 	var/eat_eff = 1
 	var/ingredients = 0 //How many processable ingredients are stored inside.

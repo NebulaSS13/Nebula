@@ -1,6 +1,5 @@
 /decl/grab/normal/passive
 	name = "passive hold"
-	fancy_desc = "holding"
 	upgrab = /decl/grab/normal/struggle
 	shift = 8
 	stop_move = 0

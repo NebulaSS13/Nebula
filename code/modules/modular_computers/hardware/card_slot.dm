@@ -10,7 +10,7 @@
 	external_slot = TRUE
 	material = /decl/material/solid/metal/steel
 
-	var/can_write = TRUE
+	// TODO: reimplment RFID card write access and can_write
 	var/can_broadcast = FALSE
 	var/obj/item/card/id/stored_card = null
 
@@ -111,7 +111,6 @@
 /obj/item/stock_parts/computer/card_slot/broadcaster // read only
 	name = "RFID card broadcaster"
 	desc = "Reads and broadcasts the RFID signal of an inserted card."
-	can_write = FALSE
 	can_broadcast = TRUE
 
 	usage_flags = PROGRAM_PDA

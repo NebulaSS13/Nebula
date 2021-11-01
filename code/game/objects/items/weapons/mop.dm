@@ -13,8 +13,6 @@
 	matter = list(
 		/decl/material/solid/cloth = MATTER_AMOUNT_SECONDARY,
 	)
-	var/mopping = 0
-	var/mopcount = 0
 	var/mopspeed = 40
 	var/list/moppable_types = list(
 		/obj/effect/decal/cleanable,
