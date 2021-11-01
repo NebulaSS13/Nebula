@@ -490,5 +490,5 @@
 /atom/movable/proc/handle_buckled_relaymove(var/datum/movement_handler/mh, var/mob/mob, var/direction, var/mover)
 	return
 
-/atom/movable/proc/try_make_grab(var/mob/living/user)
+/atom/movable/proc/try_make_grab(var/mob/living/user, var/defer_hand = FALSE)
 	return istype(user) && CanPhysicallyInteract(user) && !user.lying && user.make_grab(src)

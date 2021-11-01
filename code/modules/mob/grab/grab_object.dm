@@ -20,7 +20,7 @@
 /*
 	This section is for overrides of existing procs.
 */
-/obj/item/grab/Initialize(mapload, atom/movable/target, var/use_grab_state)
+/obj/item/grab/Initialize(mapload, atom/movable/target, var/use_grab_state, var/defer_hand)
 	. = ..(mapload)
 	if(. == INITIALIZE_HINT_QDEL)
 		return
@@ -29,7 +29,7 @@
 	if(!istype(current_grab))
 		return INITIALIZE_HINT_QDEL
 	assailant = loc
-	if(!istype(assailant) || !assailant.add_grab(src))
+	if(!istype(assailant) || !assailant.add_grab(src, defer_hand = defer_hand))
 		return INITIALIZE_HINT_QDEL
 	affecting = target
 	if(!istype(affecting))
