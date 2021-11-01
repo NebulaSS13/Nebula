@@ -22,6 +22,8 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/proc/update_seed()
 	if(!seed && seed_type && !isnull(SSplants.seeds) && SSplants.seeds[seed_type])
 		seed = SSplants.seeds[seed_type]
+		if(seed.scannable_result)
+			set_extension(src, /datum/extension/scannable, seed.scannable_result)
 	update_appearance()
 
 //Updates strings and icon appropriately based on seed datum.

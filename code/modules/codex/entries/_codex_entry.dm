@@ -5,6 +5,7 @@
 	var/lore_text
 	var/mechanics_text
 	var/antag_text
+	var/hidden = FALSE
 
 /datum/codex_entry/dd_SortValue()
 	return name

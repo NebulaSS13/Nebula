@@ -1,3 +1,6 @@
+/datum/codex_entry/scannable/flora
+	category = /decl/codex_category/flora
+
 /datum/plantgene
 	var/genetype    // Label used when applying trait.
 	var/list/values // Values to copy into the target seed datum.
@@ -27,6 +30,7 @@
 	var/req_CO2_moles    = 1.0// Moles of CO2 required for photosynthesis.
 	var/hydrotray_only
 	var/base_seed_value = 5 // Used when generating price.
+	var/scannable_result
 
 /datum/seed/New()
 

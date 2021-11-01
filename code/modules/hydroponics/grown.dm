@@ -20,6 +20,9 @@
 	if(!seed)
 		return INITIALIZE_HINT_QDEL
 
+	if(seed.scannable_result)
+		set_extension(src, /datum/extension/scannable, seed.scannable_result)
+
 	SetName("[seed.seed_name]")
 	trash = seed.get_trash_type()
 	if(!dried_type)
