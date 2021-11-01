@@ -2,7 +2,7 @@
 	name =              "alate"
 	bodytype_category = BODYTYPE_MANTID_SMALL
 	icon_base =         'mods/species/ascent/icons/species/body/alate/body.dmi'
-	blood_mask =        'mods/species/ascent/icons/species/body/alate/blood_mask.dmi'
+	blood_overlays =    'mods/species/ascent/icons/species/body/alate/blood_overlays.dmi'
 	associated_gender = MALE
 	bodytype_flag =     BODY_FLAG_ALATE
 
@@ -11,8 +11,8 @@
 	bodytype_category = BODYTYPE_MANTID_LARGE
 	icon_base =         'mods/species/ascent/icons/species/body/gyne/body.dmi'
 	icon_template =     'mods/species/ascent/icons/species/body/gyne/template.dmi'
-	damage_overlays =   'mods/species/ascent/icons/species/body/gyne/damage_mask.dmi'
-	blood_mask =        'mods/species/ascent/icons/species/body/gyne/blood_mask.dmi'
+	damage_overlays =   'mods/species/ascent/icons/species/body/gyne/damage_overlays.dmi'
+	blood_overlays =    'mods/species/ascent/icons/species/body/gyne/blood_overlays.dmi'
 	pixel_offset_x =    -4
 	antaghud_offset_y = 18
 	antaghud_offset_x = 4
@@ -31,11 +31,11 @@
 	. = ..()
 
 /decl/bodytype/serpentid
-	name = "grey"
-	icon_template = 'icons/mob/human_races/species/template_tall.dmi'
-	icon_base =     'mods/species/ascent/icons/species/body/serpentid/body_grey.dmi'
-	blood_mask =    'mods/species/ascent/icons/species/body/serpentid/blood_mask.dmi'
-	limb_blend = ICON_MULTIPLY
+	name =              "grey"
+	icon_template =     'icons/mob/human_races/species/template_tall.dmi'
+	icon_base =         'mods/species/ascent/icons/species/body/serpentid/body_grey.dmi'
+	blood_overlays =    'mods/species/ascent/icons/species/body/serpentid/blood_overlays.dmi'
+	limb_blend =        ICON_MULTIPLY
 	bodytype_category = BODYTYPE_SNAKE
 	antaghud_offset_y = 8
 	bodytype_flag =     BODY_FLAG_SNAKE

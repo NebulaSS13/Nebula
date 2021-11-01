@@ -525,9 +525,9 @@ var/global/list/damage_icon_parts = list()
 
 		overlays_standing[HO_GLOVES_LAYER]	= null
 		if(blood_color)
-			var/blood_mask = bodytype.get_blood_mask(src)
-			if(blood_mask)
-				var/image/bloodsies	= overlay_image(blood_mask, "bloodyhands", blood_color, RESET_COLOR)
+			var/mob_blood_overlay = bodytype.get_blood_overlays(src)
+			if(mob_blood_overlay)
+				var/image/bloodsies	= overlay_image(mob_blood_overlay, "bloodyhands", blood_color, RESET_COLOR)
 				overlays_standing[HO_GLOVES_LAYER]	= bloodsies
 
 	if(update_icons)
@@ -576,9 +576,9 @@ var/global/list/damage_icon_parts = list()
 
 		overlays_standing[HO_SHOES_LAYER] = null
 		if(blood_color)
-			var/blood_mask = bodytype.get_blood_mask(src)
-			if(blood_mask)
-				var/image/bloodsies = overlay_image(blood_mask, "shoeblood", blood_color, RESET_COLOR)
+			var/mob_blood_overlay = bodytype.get_blood_overlays(src)
+			if(mob_blood_overlay)
+				var/image/bloodsies = overlay_image(mob_blood_overlay, "shoeblood", blood_color, RESET_COLOR)
 				overlays_standing[HO_SHOES_LAYER] = bloodsies
 		else
 	if(update_icons)

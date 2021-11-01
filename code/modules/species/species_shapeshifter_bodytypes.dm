@@ -18,10 +18,10 @@
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.default_bodytype.get_base_icon(H, get_deform)
 
-/decl/bodytype/shapeshifter/get_blood_mask(var/mob/living/carbon/human/H)
+/decl/bodytype/shapeshifter/get_blood_overlays(var/mob/living/carbon/human/H)
 	if(!H) return ..()
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
-	return S.default_bodytype.get_blood_mask(H)
+	return S.default_bodytype.get_blood_overlays(H)
 
 /decl/bodytype/shapeshifter/get_damage_overlays(var/mob/living/carbon/human/H)
 	if(!H) return ..()

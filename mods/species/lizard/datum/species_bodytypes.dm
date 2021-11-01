@@ -5,8 +5,7 @@
 	icon_base =              'mods/species/lizard/icons/body_female.dmi'
 	icon_deformed =          'mods/species/lizard/icons/deformed_body_female.dmi'
 	lip_icon =               'mods/species/lizard/icons/lips.dmi'
-	damage_mask =            'icons/mob/human_races/species/human/damage_mask.dmi'
-	blood_mask =             'icons/mob/human_races/species/human/blood_mask.dmi'
+	blood_overlays =         'icons/mob/human_races/species/human/blood_overlays.dmi'
 	bandages_icon =          'icons/mob/bandage.dmi'
 	limb_icon_intensity =    0.7
 	health_hud_intensity =   2
