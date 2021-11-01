@@ -1,0 +1,4 @@
+author: anconfuzedrock
+delete-after: true
+changes:
+  - tweak: graphite is now spawnable and orderable.
