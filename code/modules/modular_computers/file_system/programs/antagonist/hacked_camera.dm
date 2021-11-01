@@ -9,7 +9,6 @@
 	size = 20
 	requires_network_feature = 0
 	available_on_network = 0
-	available_on_syndinet = 1
 
 /datum/computer_file/program/camera_monitor/hacked/process_tick()
 	..()

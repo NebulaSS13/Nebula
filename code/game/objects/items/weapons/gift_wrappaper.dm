@@ -112,7 +112,6 @@
 	desc = "A wrapped item."
 	icon = 'icons/obj/items/gift_wrapped.dmi'
 	icon_state = "gift3"
-	var/size = 3.0
 	var/obj/item/gift = null
 	item_state = "gift"
 	w_class = ITEM_SIZE_HUGE

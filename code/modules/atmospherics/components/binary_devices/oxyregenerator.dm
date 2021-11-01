@@ -15,7 +15,6 @@
 	layer = STRUCTURE_LAYER
 
 	var/target_pressure = 10*ONE_ATMOSPHERE
-	var/id = null
 	var/power_setting = 1 //power consumption setting, 1 through five
 	var/carbon_stored = 0
 	var/carbon_efficiency = 0.5
@@ -23,7 +22,6 @@
 	var/const/carbon_moles_per_piece = 50 //One 12g per mole * 50 = 600 g chunk of coal
 	var/phase = "filling"//"filling", "processing", "releasing"
 	var/datum/gas_mixture/inner_tank = new
-	var/tank_volume = 400//Litres
 
 /obj/machinery/atmospherics/binary/oxyregenerator/RefreshParts()
 	carbon_efficiency = initial(carbon_efficiency)

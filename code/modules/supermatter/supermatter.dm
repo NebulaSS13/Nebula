@@ -155,8 +155,6 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	var/pull_time = 300
 	var/explosion_power = 9
 
-	var/emergency_issued = 0
-
 	// Time in 1/10th of seconds since the last sent warning
 	var/lastwarning = 0
 
@@ -190,7 +188,7 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 	var/datum/composite_sound/supermatter/soundloop
 
-	var/damage_animation = FALSE //we we doing our damage animation?
+	var/damage_animation = FALSE //are we doing our damage animation?
 
 	var/list/threshholds = list( // List of lists defining the amber/red labeling threshholds in readouts. Numbers are minminum red and amber and maximum amber and red, in that order
 		list("name" = SUPERMATTER_DATA_EER,         "min_h" = -1, "min_l" = -1,  "max_l" = 150,  "max_h" = 300),
@@ -543,14 +541,8 @@ var/global/list/supermatter_delam_accent_sounds = list(
 
 	color = color_contrast(Interpolate(0, 50, Clamp( (damage - emergency_point) / (explosion_point - emergency_point),0,1)))
 
-	if (damage >= emergency_point)
-		if(!get_filter("rays"))
-			add_filter("rays",1,list(type="rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
-		animate_filter("rays", list(time = 10 SECONDS, offset = 10, loop=-1))
-		animate(time = 10 SECONDS, loop=-1)
-
-		animate_filter("rays",list(time = 2 SECONDS, size = 80, loop=-1, flags = ANIMATION_PARALLEL))
-		animate(time = 2 SECONDS, size = 10, loop=-1, flags = ANIMATION_PARALLEL)
+	if (damage >= emergency_point && !damage_animation)
+		start_damage_animation()
 	else if (damage < emergency_point)
 		remove_filter("rays")
 
@@ -559,6 +551,21 @@ var/global/list/supermatter_delam_accent_sounds = list(
 	handle_admin_warnings()
 
 	return 1
+
+/obj/machinery/power/supermatter/proc/start_damage_animation()
+	if(damage_animation)
+		return
+	if(!get_filter("rays"))
+		add_filter("rays",1,list(type="rays", size = 64, color = emergency_color, factor = 0.6, density = 12))
+	animate_filter("rays", list(time = 10 SECONDS, offset = 10, loop=-1))
+	animate(time = 10 SECONDS, loop=-1)
+
+	animate_filter("rays",list(time = 2 SECONDS, size = 80, loop=-1, flags = ANIMATION_PARALLEL))
+	animate(time = 2 SECONDS, size = 10, loop=-1, flags = ANIMATION_PARALLEL)
+	addtimer(CALLBACK(src, .proc/finish_damage_animation), 12 SECONDS)
+
+/obj/machinery/power/supermatter/proc/finish_damage_animation()
+	damage_animation = FALSE
 
 /obj/machinery/power/supermatter/bullet_act(var/obj/item/projectile/Proj)
 	var/turf/L = loc

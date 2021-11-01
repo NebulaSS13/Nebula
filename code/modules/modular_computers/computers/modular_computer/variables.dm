@@ -19,5 +19,4 @@
 	var/interact_sound_volume = 40
 	var/list/default_hardware = list()
 	var/list/default_programs = list()
-	var/initial_hardware_flag = 0
 	var/computer_type = /datum/extension/assembly/modular_computer

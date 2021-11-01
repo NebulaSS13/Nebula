@@ -17,7 +17,6 @@
 	origin_tech = "{'programming':1,'engineering':1,'esoteric':3}"
 
 	var/obj/item/radio/spy/radio
-	var/obj/machinery/camera/spy/camera
 
 /obj/item/spy_bug/Initialize()
 	. = ..()
@@ -114,7 +113,7 @@
 		user.reset_view()
 		user.unset_machine()
 		return
-	
+
 	selected_camera = input("Select camera bug to view.") as null|anything in cameras
 	view_camera(user)
 

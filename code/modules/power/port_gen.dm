@@ -10,7 +10,6 @@
 
 	var/active = 0
 	var/power_gen = 5000
-	var/recent_fault = 0
 	var/power_output = 1
 	atom_flags = ATOM_FLAG_CLIMBABLE
 	var/datum/sound_token/sound_token
@@ -40,7 +39,7 @@
 	if(active && HasFuel() && !IsBroken())
 		var/volume = 10 + 15*power_output
 		if(!sound_token)
-			
+
 			sound_token = play_looping_sound(src, sound_id, working_sound, volume = volume)
 		sound_token.SetVolume(volume)
 	else if(sound_token)
@@ -148,7 +147,7 @@
 		to_chat(user, "\The [src] is turned off.")
 	if(IsBroken())
 		to_chat(user, SPAN_WARNING("\The [src] seems to have broken down."))
-	if(overheating) 
+	if(overheating)
 		to_chat(user, SPAN_DANGER("\The [src] is overheating!"))
 	if(sheet_path && sheet_material)
 		var/decl/material/mat = GET_DECL(sheet_material)
@@ -359,7 +358,7 @@
 	data["fuel_stored"] = round((sheets * 1000) + (sheet_left * 1000))
 	data["fuel_capacity"] = round(max_sheets * 1000, 0.1)
 	data["fuel_usage"] = active ? round((power_output / time_per_sheet) * 1000) : 0
-	
+
 	var/obj/item/stack/sheet_prototype = sheet_path
 	var/sheet_name = initial(sheet_prototype.plural_name) || "sheets"
 	if(sheet_material)

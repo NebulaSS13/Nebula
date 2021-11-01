@@ -30,13 +30,10 @@ var/global/list/wall_fullblend_objects = list(
 	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 
 	var/damage = 0
-	var/damage_overlay = 0
-	var/active
 	var/can_open = 0
 	var/decl/material/material
 	var/decl/material/reinf_material
 	var/decl/material/girder_material = /decl/material/solid/metal/steel
-	var/last_state
 	var/construction_stage
 	var/hitsound = 'sound/weapons/Genhit.ogg'
 	var/list/wall_connections

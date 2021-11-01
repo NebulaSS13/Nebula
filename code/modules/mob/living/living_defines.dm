@@ -18,10 +18,6 @@
 
 	var/last_special = 0 //Used by the resist verb, likely used to prevent players from bypassing next_move by logging in/out.
 
-	var/t_oxygen = null
-	var/t_sl_gas = null
-	var/t_n2 = null
-
 	var/now_pushing = null
 	var/mob_bump_flag = 0
 	var/mob_swap_flags = 0

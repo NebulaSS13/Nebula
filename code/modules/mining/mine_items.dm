@@ -190,8 +190,7 @@
 	icon = 'icons/obj/items/marking_beacon.dmi'
 	z_flags = ZMM_MANGLE_PLANES
 
-	var/upright = 0
-	var/fringe = null
+	var/upright = FALSE
 
 /obj/item/stack/flag/red
 	light_color = COLOR_RED

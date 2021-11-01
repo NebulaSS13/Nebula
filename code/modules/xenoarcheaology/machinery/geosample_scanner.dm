@@ -29,7 +29,6 @@
 	var/coolant_usage_rate = 0		//measured in u/microsec
 	var/fresh_coolant = 0
 	var/coolant_purity = 0
-	var/datum/reagents/coolant_reagents
 	var/used_coolant = 0
 	//
 	var/maser_wavelength = 0
@@ -287,7 +286,7 @@
 
 	if(!anom_found)
 		data += " - No anomalous data<br>"
-	
+
 	return data
 
 /obj/machinery/radiocarbon_spectrometer/OnTopic(user, href_list)

@@ -36,8 +36,6 @@
 	var/co2_alert = 0
 	var/fire_alert = 0
 	var/pressure_alert = 0
-	var/temperature_alert = 0
-	var/heartbeat = 0
 	var/stamina = 100
 
 /mob/living/carbon/human/Life()

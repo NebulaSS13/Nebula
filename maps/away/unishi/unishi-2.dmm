@@ -2062,7 +2062,7 @@
 /area/unishi/common)
 "fJ" = (
 /obj/machinery/portable_atmospherics/hydroponics,
-/obj/item/weedkiller,
+/obj/item/plantspray/weedkiller,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/common)
 "fK" = (

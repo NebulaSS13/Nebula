@@ -145,8 +145,6 @@ var/global/photo_count = 0
 	var/pictures_max = 10
 	var/pictures_left = 10
 	var/on = 1
-	var/icon_on = "camera"
-	var/icon_off = "camera_off"
 	var/size = 3
 
 /obj/item/camera/on_update_icon()

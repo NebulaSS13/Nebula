@@ -2,7 +2,6 @@
 	name = "piezoelectric"
 	desc = "A gleaming crystalline mass."
 	icon = 'mods/species/bayliens/adherent/icons/body_turquoise.dmi'
-	unavailable_at_chargen = TRUE
 	can_eat = FALSE
 	can_feel_pain = FALSE
 	allowed_bodytypes = list(BODYTYPE_ADHERENT)

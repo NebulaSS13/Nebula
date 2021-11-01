@@ -6,7 +6,6 @@
 	density = 1
 	obj_flags = OBJ_FLAG_MOVES_UNSUPPORTED
 	var/state = 0
-	var/base_icon_state = ""
 	var/base_name = "Airlock"
 	var/obj/item/stock_parts/circuitboard/airlock_electronics/electronics = null
 	var/airlock_type = /obj/machinery/door/airlock //the type path of the airlock once completed

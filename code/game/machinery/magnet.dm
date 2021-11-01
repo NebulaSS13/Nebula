@@ -183,8 +183,8 @@ var/global/list/magnetic_modules = list()
 	global.magnetic_modules -= src
 	return ..()
 
-/obj/machinery/magnetic_controller
-	name = "Magnetic Control Console"
+/obj/machinery/magnetic_controller // TODO: IMPLEMENT OR REMOVE
+	name = "magnetic control console"
 	icon = 'icons/obj/airlock_machines.dmi' // uses an airlock machine icon, THINK GREEN HELP THE ENVIRONMENT - RECYCLING!
 	icon_state = "airlock_control_standby"
 	density = 1
@@ -235,7 +235,7 @@ var/global/list/magnetic_modules = list()
 	if(stat & (BROKEN|NOPOWER))
 		return
 	user.set_machine(src)
-	var/dat = "<B>Magnetic Control Console</B><BR><BR>"
+	var/dat = "<B>[title]</B><BR><BR>"
 	if(!autolink)
 		dat += {"
 		Frequency: <a href='?src=\ref[src];operation=setfreq'>[frequency]</a><br>

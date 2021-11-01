@@ -54,7 +54,6 @@
 	var/possible_children = 20
 	var/spread_chance = 30
 	var/spread_distance = 4
-	var/evolve_chance = 2
 	var/mature_time		//minimum maturation time
 	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
 

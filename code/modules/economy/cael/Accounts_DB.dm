@@ -3,7 +3,6 @@
 	name = "accounts uplink terminal"
 	desc = "Access transaction logs, account data and all kinds of other financial records."
 	var/needed_access = list(list(access_hop, access_captain))
-	var/receipt_num
 	var/machine_id = ""
 	var/obj/item/card/id/held_card
 	var/datum/money_account/detailed_account_view

@@ -15,11 +15,9 @@ SUBSYSTEM_DEF(materials)
 
 	// Chemistry vars.
 	var/list/active_holders =                  list()
-	var/list/chemical_reactions_by_type =      list()
 	var/list/chemical_reactions_by_id =        list()
 	var/list/chemical_reactions_by_result =    list()
 	var/list/processing_holders =              list()
-	var/list/pending_reagent_change =          list()
 	var/list/cocktails_by_primary_ingredient = list()
 
 	// Overlay caches

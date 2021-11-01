@@ -2,8 +2,7 @@
 	name = "body scan display"
 	desc = "A wall-mounted display linked to a body scanner."
 	icon = 'icons/obj/modular_computers/modular_telescreen.dmi'
-	icon_state = "operating"
-	var/icon_state_unpowered = "telescreen"
+	icon_state = "telescreen"
 	anchored = TRUE
 	density = 0
 	idle_power_usage = 75
@@ -18,6 +17,12 @@
 /obj/machinery/body_scan_display/proc/add_new_scan(var/list/scan)
 	bodyscans += list(scan.Copy())
 	updateUsrDialog()
+
+/obj/machinery/body_scan_display/on_update_icon()
+	. = ..()
+	cut_overlays()
+	if(powered())
+		add_overlay("operating")
 
 /obj/machinery/body_scan_display/OnTopic(mob/user, href_list)
 	if(href_list["view"])

@@ -23,7 +23,6 @@
 	simulated = 0
 	var/burn_power = 0
 	var/burn_timer
-	var/obj/item/organ/external/hand/connected
 
 /obj/item/flame/hands/pickup(var/mob/user)
 	burn_power = 0

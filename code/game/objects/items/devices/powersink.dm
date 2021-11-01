@@ -16,12 +16,9 @@
 
 	origin_tech = "{'powerstorage':3,'esoteric':5}"
 	var/drain_rate = 1500000		// amount of power to drain per tick
-	var/apc_drain_rate = 5000 		// Max. amount drained from single APC. In Watts.
-	var/dissipation_rate = 20000	// Passive dissipation of drained power. In Watts.
 	var/power_drained = 0 			// Amount of power drained.
 	var/max_power = 5e9				// Detonation point.
 	var/mode = 0					// 0 = off, 1=clamped (off), 2=operating
-	var/datum/powernet/PN			// Our powernet
 
 	var/const/DISCONNECTED = 0
 	var/const/CLAMPED_OFF = 1

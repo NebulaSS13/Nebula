@@ -70,7 +70,6 @@
 	var/alarm_frequency = 1437
 	var/remote_control = 0
 	var/rcon_setting = 2
-	var/rcon_time = 0
 	var/rcon_remote_override_access = list(access_ce)
 	var/locked = 1
 	var/aidisabled = 0
@@ -820,9 +819,7 @@ FIRE ALARM
 	var/working =      TRUE
 	var/time =         1 SECOND
 	var/timing =       FALSE
-	var/lockdownbyai = FALSE
 	var/last_process = 0
-	var/seclevel
 	var/static/list/overlays_cache
 
 	var/sound_id
@@ -1045,8 +1042,6 @@ FIRE ALARM
 	active_power_usage = 6
 	var/time =         1 SECOND
 	var/timing =       FALSE
-	var/lockdownbyai = FALSE
-	var/detecting =    TRUE
 	var/working =      TRUE
 
 /obj/machinery/partyalarm/interface_interact(mob/user)
