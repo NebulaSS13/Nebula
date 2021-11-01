@@ -81,9 +81,9 @@
 			if(ishuman(user_mob))
 				var/mob/living/carbon/human/user_human = user_mob
 				if(blood_DNA)
-					var/blood_mask = user_human.bodytype.get_blood_mask(user_human)
-					if(blood_mask)
-						var/image/bloodsies = overlay_image(blood_mask, blood_overlay_type, blood_color, RESET_COLOR)
+					var/mob_blood_overlay = user_human.bodytype.get_blood_overlays(user_human)
+					if(mob_blood_overlay)
+						var/image/bloodsies = overlay_image(mob_blood_overlay, blood_overlay_type, blood_color, RESET_COLOR)
 						bloodsies.appearance_flags |= NO_CLIENT_COLOR
 						overlay.overlays += bloodsies
 			if(markings_icon && markings_color)

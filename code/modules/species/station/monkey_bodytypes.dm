@@ -2,8 +2,7 @@
 	name =              "humanoid"
 	bodytype_category = BODYTYPE_MONKEY
 	icon_base =         'icons/mob/human_races/species/monkey/monkey_body.dmi'
-	damage_mask =       'icons/mob/human_races/species/monkey/damage_mask.dmi'
-	blood_mask =        'icons/mob/human_races/species/monkey/blood_mask.dmi'
+	blood_overlays =    'icons/mob/human_races/species/monkey/blood_overlays.dmi'
 	health_hud_intensity = 1.75
 	bodytype_flag = BODY_FLAG_MONKEY
 
