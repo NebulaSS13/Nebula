@@ -5,7 +5,6 @@
 	light_color = "#77fff8"
 
 	var/obj/machinery/ftl_shunt/core/linked_core
-	var/cost = 0
 	var/plotting_jump = FALSE
 	var/jump_plot_timer
 	var/jump_plotted = FALSE
@@ -116,7 +115,6 @@
 		if(!linked_core)
 			to_chat(user, SPAN_WARNING("Unable to establish connection to superluminal shunt."))
 			return
-	recalc_cost()
 
 	data["ftlstatus"] = linked_core.get_status()
 	data["shunt_x"] = linked_core.shunt_x
@@ -193,7 +191,7 @@
 			if(linked_core.get_status() != FTL_STATUS_GOOD)
 				to_chat(user, SPAN_WARNING("Superluminal shunt inoperable. Please try again later."))
 				return TOPIC_REFRESH
-			
+
 			var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
 			var/dist = get_dist(locate(linked_core.shunt_x, linked_core.shunt_y, overmap.assigned_z), get_turf(linked))
 			if(is_jump_unsafe()) //We are above the safe jump distance, give them a warning.

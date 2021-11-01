@@ -8,10 +8,8 @@ var/global/list/ticket_panels = list()
 	var/list/msgs = list()
 	var/datum/client_lite/closed_by
 	var/id
-	var/sql_id
 	var/opened_time
 	var/timeout = FALSE
-	var/to_close
 
 /datum/ticket/New(var/datum/client_lite/owner)
 	src.owner = owner

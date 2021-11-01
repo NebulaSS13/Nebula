@@ -8,7 +8,6 @@
 	var/base_icon = "ano0"
 	var/datum/artifact_effect/my_effect
 	var/datum/artifact_effect/secondary_effect
-	var/being_used = 0
 
 /obj/structure/artifact/Initialize()
 	. = ..()

@@ -11,16 +11,15 @@
 	pry_time = 4 SECONDS
 	skull_type = /obj/item/whip/tail
 	bleed_colour = COLOR_VIOLET
-	melee_damage_flags = DAM_EDGE
 
 	health = 200
 	maxHealth = 200
 	natural_weapon = /obj/item/natural_weapon/claws/drake
 	var/obj/item/whip/tail/tailwhip
 	natural_armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		energy = ARMOR_ENERGY_SHIELDED, 
-		laser = ARMOR_LASER_HEAVY, 
+		melee = ARMOR_MELEE_RESISTANT,
+		energy = ARMOR_ENERGY_SHIELDED,
+		laser = ARMOR_LASER_HEAVY,
 		bomb = ARMOR_BOMB_SHIELDED
 	)
 	ability_cooldown = 80 SECONDS
@@ -52,7 +51,7 @@
 			tailwhip = new(src)
 		return tailwhip
 	. = ..()
-	
+
 /mob/living/simple_animal/hostile/drake/proc/empower()
 	visible_message(SPAN_MFAUNA("\The [src] thrashes its tail about!"))
 	empowered_attack = TRUE

@@ -7,12 +7,10 @@
 	det_time = null
 	unacidable = 1
 	var/stage = 0
-	var/state = 0
 	var/path = 0
 	var/obj/item/assembly_holder/detonator = null
 	var/list/beakers = new/list()
 	var/list/allowed_containers = list(/obj/item/chems/glass/beaker, /obj/item/chems/glass/bottle)
-	var/affected_area = 3
 
 /obj/item/grenade/chem_grenade/Initialize()
 	. = ..()
@@ -112,7 +110,7 @@
 	update_icon()
 
 /obj/item/grenade/chem_grenade/activate(mob/user)
-	if(active) 
+	if(active)
 		return
 	if(detonator)
 		if(!isigniter(detonator.a_left))
@@ -127,12 +125,12 @@
 
 /obj/item/grenade/chem_grenade/detonate()
 	set waitfor = 0
-	if(!stage || stage < 2) 
+	if(!stage || stage < 2)
 		return
 
 	var/has_reagents = 0
 	for(var/obj/item/chems/glass/G in beakers)
-		if(G.reagents.total_volume) 
+		if(G.reagents.total_volume)
 			has_reagents = TRUE
 			break
 
@@ -162,7 +160,7 @@
 	set_invisibility(INVISIBILITY_MAXIMUM)
 
 	// Visual effect to show the grenade going off.
-	if(reagents.total_volume) 
+	if(reagents.total_volume)
 		var/datum/effect/effect/system/steam_spread/steam = new
 		steam.set_up(10, 0, get_turf(src))
 		steam.attach(src)
@@ -192,7 +190,6 @@
 	icon = 'icons/obj/items/grenades/grenade_large.dmi'
 	allowed_containers = list(/obj/item/chems/glass)
 	origin_tech = "{'combat':3,'materials':3}"
-	affected_area = 4
 	material = /decl/material/solid/metal/steel
 
 /obj/item/grenade/chem_grenade/metalfoam

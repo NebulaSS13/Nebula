@@ -151,7 +151,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	// Mining behavior.
 	var/ore_name
 	var/ore_desc
-	var/ore_smelts_to
 	var/ore_compresses_to
 	var/ore_result_amount
 	var/ore_spread_chance

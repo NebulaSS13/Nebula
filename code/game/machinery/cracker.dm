@@ -13,7 +13,6 @@
 
 	var/tmp/fluid_consumption_per_tick = 100
 	var/tmp/gas_generated_per_tick = 1
-	var/tmp/max_reagents = 100
 
 /obj/machinery/portable_atmospherics/cracker/on_update_icon()
 	icon_state = (use_power == POWER_USE_ACTIVE) ? "cracker_on" : "cracker"

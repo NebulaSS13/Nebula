@@ -9,7 +9,6 @@
 	var/map_turf_type = /turf/space
 	var/map_area_type = /area/overmap
 	var/list/valid_event_types
-	var/empty_z_level_turf
 
 /datum/overmap/New(var/_name)
 

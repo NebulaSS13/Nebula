@@ -10,7 +10,7 @@
 
 	var/long_range = 0
 	var/ethernet = 0 // Hard-wired, therefore always on, ignores wireless checks.
-	var/proxy_id     // If set, uses the value to funnel connections through another network card.
+	// TODO: Reimplement proxy_id
 
 /obj/item/stock_parts/computer/network_card/diagnostics()
 	. = ..()

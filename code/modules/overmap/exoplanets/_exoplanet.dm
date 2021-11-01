@@ -21,7 +21,6 @@
 	var/x_size
 	var/y_size
 
-	var/landmark_type = /obj/effect/shuttle_landmark/automatic
 	var/shuttle_size = 20  		 //'diameter' of expected shuttle in turfs
 	var/landing_points_to_place  // number of landing points to place, calculated dynamically based on planet size
 

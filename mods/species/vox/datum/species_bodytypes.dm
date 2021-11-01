@@ -4,7 +4,7 @@
 	icon_base =         'mods/species/vox/icons/body/body.dmi'
 	icon_deformed =     'mods/species/vox/icons/body/deformed_body.dmi'
 	husk_icon =         'mods/species/vox/icons/body/husk.dmi'
-	blood_overlays =        'mods/species/vox/icons/body/blood_overlays.dmi'
+	blood_overlays =    'mods/species/vox/icons/body/blood_overlays.dmi'
 	bodytype_flag =     BODY_FLAG_VOX
 
 /decl/bodytype/vox/Initialize()

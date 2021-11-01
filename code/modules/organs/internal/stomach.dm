@@ -20,6 +20,8 @@
 		ingested.my_atom = src
 	if(species.gluttonous)
 		verbs |= /obj/item/organ/internal/stomach/proc/throw_up
+	if(species && !stomach_capacity)
+		stomach_capacity = species.stomach_capacity
 
 /obj/item/organ/internal/stomach/removed()
 	. = ..()
@@ -45,7 +47,7 @@
 			total += I.get_storage_cost()
 		else
 			continue
-		if(total > species.stomach_capacity)
+		if(total > stomach_capacity)
 			return TRUE
 	return FALSE
 
@@ -85,9 +87,9 @@
 /obj/item/organ/internal/stomach/proc/metabolize()
 	if(is_usable())
 		ingested.metabolize()
-	
+
 #define STOMACH_VOLUME 65
-	
+
 /obj/item/organ/internal/stomach/Process()
 	..()
 
@@ -115,14 +117,14 @@
 			owner.custom_pain("Your stomach cramps agonizingly!",1)
 
 		var/alcohol_volume = REAGENT_VOLUME(ingested, /decl/material/liquid/ethanol)
-		
+
 		var/alcohol_threshold_met = alcohol_volume > STOMACH_VOLUME / 2
 		if(alcohol_threshold_met && (owner.disabilities & EPILEPSY) && prob(20))
 			owner.seizure()
-		
+
 		// Alcohol counts as double volume for the purposes of vomit probability
 		var/effective_volume = ingested.total_volume + alcohol_volume
-		
+
 		// Just over the limit, the probability will be low. It rises a lot such that at double ingested it's 64% chance.
 		var/vomit_probability = (effective_volume / STOMACH_VOLUME) ** 6
 		if(prob(vomit_probability))

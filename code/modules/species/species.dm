@@ -37,8 +37,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/default_h_style = /decl/sprite_accessory/hair/bald
 	var/default_f_style = /decl/sprite_accessory/facial_hair/shaved
 
-	var/icon_cache_uid                        // Used for mob icon cache string.
-
 	var/mob_size = MOB_SIZE_MEDIUM
 	var/strength = STR_MEDIUM
 	var/show_ssd = "fast asleep"
@@ -99,7 +97,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/sniff_message_3p = "sniffs the air."
 	var/sniff_message_1p = "You sniff the air."
 
-	var/spawns_with_stack = 0
 	// Environment tolerance/life processes vars.
 	var/reagent_tag                                             // Used for metabolizing reagents.
 	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
@@ -159,7 +156,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	)
 
 	var/primitive_form            // Lesser form, if any (ie. monkey for humans)
-	var/greater_form              // Greater form, if any, ie. human for monkeys.
 	var/holder_type
 	var/gluttonous = 0            // Can eat some mobs. Values can be GLUT_TINY, GLUT_SMALLER, GLUT_ANYTHING, GLUT_ITEM_TINY, GLUT_ITEM_NORMAL, GLUT_ITEM_ANYTHING, GLUT_PROJECTILE_VOMIT
 	var/stomach_capacity = 5      // How much stuff they can stick in their stomach
@@ -264,7 +260,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/icon/preview_icon
 	var/preview_icon_width = 64
 	var/preview_icon_height = 64
-	var/preview_icon_path	
+	var/preview_icon_path
 
 /decl/species/Initialize()
 

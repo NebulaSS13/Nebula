@@ -201,7 +201,6 @@
 	light_color = BLOB_COLOR_CORE
 	layer = BLOB_CORE_LAYER
 
-	var/growth_range = 8 // Maximal distance for new blob pieces from this core.
 	var/blob_may_process = 1
 	var/reported_low_damage = FALSE
 	var/times_to_pulse = 0
@@ -281,7 +280,6 @@ regen() will cover update_icon() for this proc
 	icon_state = "blob_node"
 	maxHealth = 125
 	regen_rate = 1
-	growth_range = 4
 	damage_min = 15
 	damage_max = 20
 	layer = BLOB_NODE_LAYER

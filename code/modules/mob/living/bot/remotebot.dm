@@ -7,7 +7,6 @@
 	maxHealth = 15
 
 	var/working = 0
-	var/next_movement_time = 0
 	var/speed = 10 //lower = better
 	var/obj/item/holding = null
 	var/obj/item/bot_controller/controller = null

@@ -8,7 +8,7 @@
 	var/datum/nano_module/NM = null					// If the program uses NanoModule, put it here and it will be automagically opened. Otherwise implement ui_interact.
 	var/nanomodule_path = null						// Path to nanomodule, make sure to set this if implementing new program.
 	var/program_state = PROGRAM_STATE_KILLED		// PROGRAM_STATE_KILLED or PROGRAM_STATE_BACKGROUND or PROGRAM_STATE_ACTIVE - specifies whether this program is running.
-	var/datum/extension/interactive/os/computer	// OS that runs this program.
+	var/datum/extension/interactive/os/computer		// OS that runs this program.
 	var/filedesc = "Unknown Program"				// User-friendly name of this program.
 	var/extended_desc = "N/A"						// Short description of this program's function.
 	var/category = PROG_MISC
@@ -19,8 +19,7 @@
 	var/requires_network_feature = 0				// Optional, if above is set to 1 checks for specific function of network (currently NETWORK_SOFTWAREDOWNLOAD, NETWORK_PEERTOPEER, NETWORK_SYSTEMCONTROL and NETWORK_COMMUNICATION)
 	var/usage_flags = PROGRAM_ALL & ~PROGRAM_PDA	// Bitflags (PROGRAM_CONSOLE, PROGRAM_LAPTOP, PROGRAM_TABLET, PROGRAM_PDA combination) or PROGRAM_ALL
 	var/network_destination = null					// Optional string that describes what network server/system this program connects to. Used in default logging.
-	var/available_on_network = 1						// Whether the program can be downloaded from network. Set to 0 to disable.
-	var/available_on_syndinet = 0					// Whether the program can be downloaded from SyndiNet (accessible via emagging the computer). Set to 1 to enable.
+	var/available_on_network = TRUE					// Whether the program can be downloaded from network. Set to FALSE to disable.
 	var/computer_emagged = 0						// Set to 1 if computer that's running us was emagged. Computer updates this every Process() tick
 	var/ui_header = null							// Example: "something.gif" - a header image that will be rendered in computer's UI when this program is running at background. Images are taken from /nano/images/status_icons. Be careful not to use too large images!
 	var/operator_skill = SKILL_MIN                  // Holder for skill value of current/recent operator for programs that tick.
@@ -92,7 +91,7 @@
 			var/datum/extension/network_device/acl/access_controller = network.access_controller
 			if(access_controller && access_controller.program_control)
 				accesses_to_check = access_controller.get_program_access(filename)
-	
+
 	if(!length(accesses_to_check))
 		accesses_to_check = required_access
 

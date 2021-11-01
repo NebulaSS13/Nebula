@@ -18,7 +18,6 @@
 	var/ticks_left_timeout = 0
 	var/machine_id = ""
 	var/obj/item/card/id/held_card
-	var/editing_security_level = 0
 	var/view_screen = NO_SCREEN
 	var/account_security_level = 0
 	var/charge_stick_type = /obj/item/charge_stick

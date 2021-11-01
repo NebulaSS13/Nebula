@@ -90,7 +90,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/overmap_ids // Assoc list of overmap ID to overmap type, leave empty to disable overmap.
 
 	var/pray_reward_type = /obj/item/chems/food/cookie // What reward should be given by admin when a prayer is received?
-	var/list/map_markers_to_load
 
 	// The list of lobby screen images to pick() from.
 	var/list/lobby_screens = list('icons/default_lobby.png')

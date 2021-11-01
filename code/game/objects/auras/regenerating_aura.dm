@@ -16,7 +16,7 @@
 	var/regen_message = "<span class='warning'>Your body throbs as you feel your ORGAN regenerate.</span>"
 	var/grow_chance = 0
 	var/grow_threshold = 0
-	var/ignore_tag//organ tag to ignore
+	var/ignore_tag //organ tag to ignore
 	var/last_nutrition_warning = 0
 	var/innate_heal = TRUE // Whether the aura is on, basically.
 
@@ -57,7 +57,7 @@
 				else
 					low_nut_warning("head")
 
-		for(var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN))
+		for(var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN - ignore_tag))
 			var/obj/item/organ/internal/regen_organ = H.get_internal_organ(bpart)
 			if(BP_IS_PROSTHETIC(regen_organ))
 				continue
@@ -86,6 +86,7 @@
 				var/limb_path = organ_data["path"]
 				var/obj/item/organ/external/O = new limb_path(H)
 				external_regeneration_effect(O,H)
+				H.adjust_nutrition(-external_nutrition_mult)
 				organ_data["descriptor"] = O.name
 				H.update_body()
 				return

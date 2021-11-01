@@ -25,12 +25,11 @@
 
 	var/number = 1
 	var/c_tag = null
-	var/c_tag_order = 999
 	var/status = 1
 	var/cut_power = FALSE
 
 	var/toughness = 5 // Attack force or throw force required before damage is dealt.
-	
+
 	// WIRES
 	wires = /datum/wires/camera
 
@@ -104,12 +103,12 @@
 		cancelCameraAlarm()
 		update_icon()
 		update_coverage()
-	
+
 		if (detectTime > 0)
 			var/elapsed = world.time - detectTime
 			if (elapsed > alarm_delay)
 				triggerAlarm()
-	
+
 	if (stat & (EMPED))
 		return
 	if(!motion_sensor)
@@ -229,7 +228,7 @@
 
 		triggerCameraAlarm()
 		update_coverage()
-		
+
 		//sparks
 		spark_at(loc, amount=5)
 
@@ -239,7 +238,7 @@
 		// The only way for AI to reactivate cameras are malf abilities, this gives them different messages.
 		if(istype(user, /mob/living/silicon/ai))
 			user = null
-		
+
 		if(status)
 			if(user)
 				visible_message(SPAN_NOTICE("[user] has reactivated \the [src]!"))
@@ -300,7 +299,7 @@
 		power_mult++
 	else
 		motion_sensor = FALSE
-	
+
 	change_power_consumption(power_mult*initial(active_power_usage), POWER_USE_ACTIVE)
 
 /obj/machinery/camera/proc/triggerCameraAlarm(var/duration = 0)

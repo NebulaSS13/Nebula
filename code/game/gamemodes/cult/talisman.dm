@@ -1,6 +1,5 @@
 /obj/item/paper/talisman
 	icon_state = "paper_talisman"
-	var/imbue = null
 	info = "<center><img src='talisman.png'></center><br/><br/>"
 
 /obj/item/paper/talisman/attack_self(var/mob/user)

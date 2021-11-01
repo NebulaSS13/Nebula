@@ -259,7 +259,7 @@
 	desc = "Old is never too old to not be in fashion."
 	icon_state = "wooden_chair"
 	color = WOOD_COLOR_GENERIC
-	var/chair_material = /decl/material/solid/wood
+	material = /decl/material/solid/wood
 
 /obj/structure/bed/chair/wood/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/stack) || isWirecutter(W))

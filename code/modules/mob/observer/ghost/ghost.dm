@@ -15,9 +15,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	mob_flags = MOB_FLAG_HOLY_BAD
 	movement_handlers = list(/datum/movement_handler/mob/multiz_connected, /datum/movement_handler/mob/incorporeal)
 
-	var/next_visibility_toggle = 0
 	var/can_reenter_corpse
-	var/bootime = 0
 	var/started_as_observer //This variable is set to 1 when you enter the game as an observer.
 							//If you died in the game and are a ghost - this will remain as null.
 							//Note that this is not a reliable way to determine if admins started as observers, since they change mobs a lot.
@@ -64,7 +62,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		if(length(spawn_locs))
 			T = pick(spawn_locs)
 		else
-			T = locate(1, 1, 1) 
+			T = locate(1, 1, 1)
 	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
@@ -188,7 +186,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
 		announce_ghost_joinleave(ghost)
 
-/mob/observer/ghost/can_use_hands()	
+/mob/observer/ghost/can_use_hands()
 	return FALSE
 
 /mob/observer/ghost/is_active()

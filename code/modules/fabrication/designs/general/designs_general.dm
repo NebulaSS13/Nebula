@@ -34,8 +34,8 @@
 /datum/fabricator_recipe/taperecorder
 	path = /obj/item/taperecorder/empty
 
-/datum/fabricator_recipe/tape
-	path = /obj/item/tape
+/datum/fabricator_recipe/tape_roll
+	path = /obj/item/tape_roll
 
 /datum/fabricator_recipe/tube/large
 	path = /obj/item/light/tube/large

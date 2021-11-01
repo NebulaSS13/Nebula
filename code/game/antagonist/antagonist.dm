@@ -6,15 +6,11 @@
 	var/list/protected_jobs = 		list() // As above.
 	var/list/blocked_job_event_categories  // Job event categories that blacklist a job from being this antagonist.
 	// Jobs that can NEVER be this antagonist
-	var/list/blacklisted_jobs =	(/datum/job/submap) 
+	var/list/blacklisted_jobs =	(/datum/job/submap)
 
 	// Strings.
 	var/welcome_text = "Cry havoc and let slip the dogs of war!"
 	var/leader_welcome_text                 // Text shown to the leader, if any.
-	var/victory_text                        // World output at roundend for victory.
-	var/loss_text                           // As above for loss.
-	var/victory_feedback_tag                // Used by the database for end of round loss.
-	var/loss_feedback_tag                   // Used by the database for end of round loss.
 
 	// Role data.
 	var/name                                // special_role text (ex. "Traitor").
@@ -47,9 +43,7 @@
 	// Misc.
 	var/landmark_id                         // Spawn point identifier.
 	var/mob_path = /mob/living/carbon/human // Mobtype this antag will use if none is provided.
-	var/feedback_tag = "traitor_objective"  // End of round
 	var/minimum_player_age = 7            	// Players need to be at least minimum_player_age days old before they are eligable for auto-spawning
-	var/suspicion_chance = 50               // Prob of being on the initial Command report
 	var/flags = 0                           // Various runtime options.
 	var/show_objectives_on_creation = 1     // Whether or not objectives are shown when a player is added to this antag datum
 	var/datum/antag_skill_setter/skill_setter = /datum/antag_skill_setter/generic // Used to set up skills.
@@ -85,7 +79,7 @@
 		and before taking extreme actions, please try to also contact the administration! \
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
 		rules aside from those without explicit exceptions apply to antagonists.</b>"
-	
+
 	// Map template that antag needs to load before spawning. Nulled after it's loaded.
 	var/datum/map_template/base_to_load
 
@@ -104,9 +98,9 @@
 	if(antaghud_indicator)
 		if(!global.hud_icon_reference)
 			global.hud_icon_reference = list()
-		if(name) 
+		if(name)
 			global.hud_icon_reference[name] = antaghud_indicator
-		if(faction_name) 
+		if(faction_name)
 			global.hud_icon_reference[faction_name] = antaghud_indicator
 
 /decl/special_role/proc/get_antag_text(mob/recipient)

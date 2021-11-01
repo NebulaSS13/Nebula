@@ -10,7 +10,7 @@
 	anchored = 1 //There's a reason this is here, Mport. God fucking damn it -Agouri. Find&Fix by Pete. The reason this is here is to stop the curving of emitter shots.
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = 0
-	randpixel = 0	
+	randpixel = 0
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
 	var/mob/firer = null//Who shot it
@@ -22,7 +22,6 @@
 	var/atom/original = null // the target clicked (not necessarily where the projectile is headed). Should probably be renamed to 'target' or something.
 	var/turf/starting = null // the projectile's starting turf
 	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
-	var/list/segments = list() //For hitscan projectiles with tracers.
 
 	var/p_x = 16
 	var/p_y = 16 // the pixel location of the tile that the player clicked. Default is the center
@@ -35,7 +34,6 @@
 	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, ELECTROCUTE are the only things that should be in here, Try not to use PAIN as it doesn't go through stun_effect_act
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
 	var/damage_flags = DAM_BULLET
-	var/projectile_type = /obj/item/projectile
 	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
 	var/life_span = 50 //This will de-increment every process(). When 0, it will delete the projectile.
 		//Effects
@@ -74,7 +72,6 @@
 	var/original_Angle = 0		//Angle at firing
 	var/nondirectional_sprite = FALSE //Set TRUE to prevent projectiles from having their sprites rotated based on firing Angle
 	var/forcedodge = FALSE		//to pass through everything
-	var/ignore_source_check = FALSE
 
 	//Fired processing vars
 	var/fired = FALSE	//Have we been fired yet
@@ -294,7 +291,7 @@
 		penetrating--
 
 	//the bullet passes through a dense object!
-	if(passthrough)
+	if(passthrough || forcedodge)
 		//move ourselves onto A so we can continue on our way.
 		var/turf/T = get_turf(A)
 		if(T)
@@ -359,6 +356,10 @@
 	return list(name)
 
 /obj/item/projectile/Process_Spacemove()
+	//Deletes projectiles that aren't supposed to be in vacuum if they leave pressurised areas
+	if (is_below_sound_pressure(get_turf(src)) && !vacuum_traversal)
+		qdel(src)
+		return
 	return TRUE	//Bullets don't drift in space
 
 /obj/item/projectile/proc/old_style_target(atom/target, atom/source)

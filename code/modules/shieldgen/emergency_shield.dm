@@ -116,7 +116,7 @@
 	var/active = 0
 	var/malfunction = 0 //Malfunction causes parts of the shield to slowly dissapate
 	var/list/deployed_shields = list()
-	var/list/regenerating = list()
+	// var/list/regenerating = list() //TODO: Remove or add regeneration of destroyed shields
 	var/is_open = 0 //Whether or not the wires are exposed
 	var/locked = 0
 	var/check_delay = 60	//periodically recheck if we need to rebuild a shield

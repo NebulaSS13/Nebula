@@ -1,7 +1,5 @@
 /decl/grab
-
 	var/name = "generic grab"
-	var/fancy_desc
 	var/decl/grab/upgrab						// The grab that this will upgrade to if it upgrades, null means no upgrade
 	var/decl/grab/downgrab						// The grab that this will downgrade to if it downgrades, null means break grab on downgrade
 	var/stop_move = 0							// Whether or not the grabbed person can move out of the grab
@@ -55,21 +53,22 @@
 	if(!upgrab)
 		return
 
-	if(can_upgrade(G))
-		upgrade_effect(G)
-		admin_attack_log(G.assailant, G.affecting, "upgraded grab on their victim to [upgrab]", "was grabbed more tightly to [upgrab]", "upgraded grab to [upgrab] on")
-		return upgrab
-	else
+	if(!can_upgrade(G))
 		to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_up)]"))
 		return
+	to_chat(G.assailant, SPAN_WARNING("[string_process(G, success_up)]"))
+	upgrade_effect(G)
+	admin_attack_log(G.assailant, G.affecting, "upgraded grab on their victim to [upgrab]", "was grabbed more tightly to [upgrab]", "upgraded grab to [upgrab] on")
+	return upgrab
 
 /decl/grab/proc/downgrade(var/obj/item/grab/G)
 	// Starts the process of letting go if there's no downgrade grab
-	if(can_downgrade())
-		downgrade_effect(G)
-		return downgrab
-	else
+	if(!can_downgrade())
 		to_chat(G.assailant, SPAN_WARNING("[string_process(G, fail_down)]"))
+		return
+	to_chat(G.assailant, SPAN_WARNING("[string_process(G, success_down)]"))
+	downgrade_effect(G)
+	return downgrab
 
 /decl/grab/proc/let_go(var/obj/item/grab/G)
 	let_go_effect(G)
@@ -105,7 +104,7 @@
 		to_chat(G.assailant, SPAN_WARNING("You must wait before you can do that."))
 		return FALSE
 
-	G.is_currently_resolving_hit = TRUE 
+	G.is_currently_resolving_hit = TRUE
 	switch(G.assailant.a_intent)
 		if(I_HELP)
 			if(on_hit_help(G, A, P))

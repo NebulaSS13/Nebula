@@ -175,7 +175,7 @@ var/global/list/laser_wavelengths
 			if(charged)
 				. = TRUE
 				break
-			sleep(5)
+			sleep(charge_iteration_delay)
 		charging = FALSE
 
 /obj/item/gun/energy/capacitor/get_shots_remaining()

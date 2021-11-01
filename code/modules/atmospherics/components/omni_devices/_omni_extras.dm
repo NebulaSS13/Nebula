@@ -19,7 +19,6 @@
 	var/mode = 0
 	var/concentration = 0
 	var/con_lock = 0
-	var/transfer_moles = 0
 	var/datum/gas_mixture/air
 	var/list/nodes // lazy list of nodes
 	var/datum/pipe_network/network

@@ -14,7 +14,6 @@
 
 	var/suppressing = FALSE
 	var/mob/living/victim
-	var/strapped = 0.0
 	var/obj/machinery/computer/operating/computer = null
 
 /obj/machinery/optable/Initialize()

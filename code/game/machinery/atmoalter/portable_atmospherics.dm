@@ -10,7 +10,6 @@
 	var/volume = 0
 	var/destroyed = 0
 	var/start_pressure = ONE_ATMOSPHERE
-	var/maximum_pressure = 90 * ONE_ATMOSPHERE
 
 /obj/machinery/portable_atmospherics/get_single_monetary_worth()
 	. = ..()

@@ -21,14 +21,14 @@
 	slot_flags = SLOT_BACK
 	icon_state = ICON_STATE_WORLD
 
-	pickup_sound = 'sound/foley/scrape1.ogg' 
+	pickup_sound = 'sound/foley/scrape1.ogg'
 	drop_sound = 'sound/foley/tooldrop1.ogg'
 
 	var/wielded = 0
 	var/force_wielded = 0
 	var/force_unwielded
-	var/wieldsound = null
-	var/unwieldsound = null
+	var/wieldsound = 'sound/foley/scrape1.ogg'
+	var/unwieldsound = 'sound/foley/tooldrop1.ogg'
 	var/base_name
 	var/unwielded_material_force_multiplier = 0.25
 	var/wielded_parry_bonus = 15
@@ -39,10 +39,14 @@
 /obj/item/twohanded/update_twohanding()
 	var/mob/living/M = loc
 	if(istype(M) && M.can_wield_item(src) && is_held_twohanded(M))
-		wielded = 1
+		wielded = TRUE
+		if(wieldsound)
+			playsound(src, wieldsound, 50)
 		force = force_wielded
 	else
-		wielded = 0
+		wielded = FALSE
+		if(unwieldsound)
+			playsound(src, unwieldsound, 50)
 		force = force_unwielded
 	update_icon()
 	..()
@@ -215,7 +219,7 @@
 	return 0
 
 /obj/item/twohanded/pipewrench/afterattack(atom/A, mob/user, proximity)
-	if(!proximity) 
+	if(!proximity)
 		return
 	..()
 	if(istype(A,/obj/structure/window) && wielded)

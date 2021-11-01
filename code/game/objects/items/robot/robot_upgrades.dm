@@ -10,7 +10,6 @@
 	origin_tech = "{'materials':2,'engineering':3,'programming':3,'magnets':1}"
 	var/locked = 0
 	var/require_module = 0
-	var/installed = 0
 
 /obj/item/borg/upgrade/proc/action(var/mob/living/silicon/robot/R)
 	if(R.stat == DEAD)

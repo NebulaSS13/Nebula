@@ -20,7 +20,6 @@
 	var/obj/effect/step_trigger/mobius_rift/seamless_portal/dest
 	//NORTH or EAST cases
 	//var/obj/effect/step_trigger/mobius_rift/seamless_portal/dest2//SOUTH or WEST cases
-	var/directed//NS or WE
 	var/x_shift = 0
 	var/y_shift = 0
 

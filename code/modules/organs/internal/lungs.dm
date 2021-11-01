@@ -22,10 +22,7 @@
 	var/max_pressure_diff = 60
 
 	var/oxygen_deprivation = 0
-	var/safe_exhaled_max = 6
 	var/safe_toxins_max = 0.2
-	var/SA_para_min = 1
-	var/SA_sleep_min = 5
 	var/breathing = 0
 	var/last_successful_breath
 	var/breath_fail_ratio // How badly they failed a breath. Higher is worse.
@@ -162,7 +159,7 @@
 	var/breatheffect = GET_CHEMICAL_EFFECT(owner, CE_BREATHLOSS)
 	if(!forced && breatheffect && !GET_CHEMICAL_EFFECT(owner, CE_STABLE)) //opiates are bad mmkay
 		safe_pressure_min *= 1 + breatheffect
-	
+
 	if(owner.lying)
 		safe_pressure_min *= 0.8
 

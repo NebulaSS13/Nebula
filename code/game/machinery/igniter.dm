@@ -112,12 +112,12 @@
 /obj/machinery/sparker/on_update_icon()
 	..()
 	if(disable)
-		icon_state = "migniter-d"
+		icon_state = "[base_state]-d"
 	else if(powered())
-		icon_state = "migniter"
+		icon_state = base_state
 //		src.sd_SetLuminosity(2)
 	else
-		icon_state = "migniter-p"
+		icon_state = "[base_state]-p"
 //		src.sd_SetLuminosity(0)
 
 /obj/machinery/sparker/attackby(obj/item/W, mob/user)
@@ -146,7 +146,7 @@
 		return
 
 
-	flick("migniter-spark", src)
+	flick("[base_state]-spark", src)
 	spark_at(src, amount=2, cardinal_only = TRUE)
 	src.last_spark = world.time
 	use_power_oneoff(2000)

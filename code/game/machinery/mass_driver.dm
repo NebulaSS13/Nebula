@@ -10,7 +10,6 @@
 	active_power_usage = 50
 
 	var/power = 1.0
-	var/code = 1.0
 	var/drive_range = 50 //this is mostly irrelevant since current mass drivers throw into space, but you could make a lower-range mass driver for interstation transport or something I guess.
 
 	uncreated_component_parts = list(

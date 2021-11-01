@@ -1,7 +1,6 @@
 //Dummy object for holding items in vehicles.
 //Prevents items from being interacted with.
 /datum/vehicle_dummy_load
-	var/name = "dummy load"
 	var/actual_load
 
 /obj/vehicle

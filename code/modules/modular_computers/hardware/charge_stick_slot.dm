@@ -10,8 +10,8 @@
 	external_slot = TRUE
 	material = /decl/material/solid/metal/steel
 
-	var/can_write = TRUE
 	var/can_broadcast = FALSE
+	// TODO: reimplment charge stick write access and can_write
 	var/obj/item/charge_stick/stored_stick = null
 
 /obj/item/stock_parts/computer/charge_stick_slot/proc/get_currency_name()
@@ -91,7 +91,6 @@
 /obj/item/stock_parts/computer/charge_stick_slot/broadcaster // read only
 	name = "NFC charge-stick broadcaster"
 	desc = "Reads and broadcasts the NFC signal of an inserted charge-stick."
-	can_write = FALSE
 	can_broadcast = TRUE
 
 	usage_flags = PROGRAM_PDA

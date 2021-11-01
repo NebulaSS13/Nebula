@@ -183,7 +183,6 @@ var/global/list/debug_verbs = list (
 /client/var/list/testZAScolors_turfs = list()
 /client/var/list/testZAScolors_zones = list()
 /client/var/usedZAScolors = 0
-/client/var/list/image/ZAScolors = list()
 
 /client/proc/recurse_zone(var/zone/Z, var/recurse_level =1)
 	testZAScolors_zones += Z

@@ -18,10 +18,8 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 	density = 1
 	anchored = 1
 	idle_power_usage = 25
-	machinetype = 5
 	produces_heat = 0
 	delay = 7
-	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/broadcaster
 	base_type = /obj/machinery/telecomms/broadcaster
 	outage_probability = 10
 
@@ -120,15 +118,13 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 	anchored = 1
 	use_power = POWER_USE_OFF
 	idle_power_usage = 0
-	machinetype = 6
 	produces_heat = 0
-	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/allinone
 	construct_state = /decl/machine_construction/tcomms/panel_closed/cannot_print
 	var/listening_freqs
 	var/channel_color
 	var/channel_name
 	var/intercept = 0 // if nonzero, broadcasts all messages to syndicate channel
-	
+
 /obj/machinery/telecomms/allinone/Initialize()
 	if(!listening_freqs)
 		listening_freqs = ANTAG_FREQS	//Covers any updates to ANTAG_FREQS

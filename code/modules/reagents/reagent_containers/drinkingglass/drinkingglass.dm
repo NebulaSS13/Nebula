@@ -112,6 +112,20 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 
 	return 1
 
+/obj/item/chems/drinks/glass2/examine(mob/user, distance)
+	. = ..()
+	if(!istype(user) || distance > 1)
+		return
+	var/list/extra_text
+	for(var/extra in extras)
+		if(istype(extra, /obj/item/glass_extra))
+			var/obj/item/glass_extra/GE = extra
+			LAZYADD(extra_text, GE.glass_desc)
+		else if(istype(extra, /obj/item/chems/food/fruit_slice))
+			LAZYADD(extra_text, "There is \a [extra] on the rim.")
+	to_chat(user, SPAN_NOTICE(jointext(extra_text," ")))
+
+
 /obj/item/chems/drinks/glass2/proc/get_filling_overlay(amount, overlay)
 	var/image/I = new()
 	if(!filling_icons_cache["[base_icon][amount][overlay]"])

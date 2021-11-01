@@ -30,7 +30,6 @@
 	filling_color = "#d63c3c"
 	material = /decl/material/solid/meat
 	var/hname = ""
-	var/job = null
 
 /obj/item/chems/food/human/burger
 	name = "-burger"

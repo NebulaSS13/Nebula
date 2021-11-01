@@ -10,7 +10,6 @@
 	self_recharge = 1
 	w_class = ITEM_SIZE_HUGE
 	one_hand_penalty = 6
-	multi_aim = 1
 	burst_delay = 3
 	burst = 3
 	accuracy = -1

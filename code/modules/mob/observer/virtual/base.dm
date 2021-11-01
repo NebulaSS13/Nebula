@@ -13,7 +13,6 @@ var/global/list/all_virtual_listeners = list()
 	var/atom/movable/host
 	var/host_type = /atom/movable
 	var/abilities = VIRTUAL_ABILITY_HEAR|VIRTUAL_ABILITY_SEE
-	var/list/broadcast_methods
 
 	var/static/list/overlay_icons
 

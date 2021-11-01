@@ -23,7 +23,6 @@
 	light_power = 0.5
 	light_range = 13
 	light_color = "#3e0000"
-	var/obj/item/wepon = null
 
 /obj/structure/cult/pylon/attack_hand(mob/M)
 	attackpylon(M, 5)

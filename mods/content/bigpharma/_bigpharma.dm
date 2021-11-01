@@ -38,6 +38,8 @@ var/global/list/reagent_names_to_icon_state
 		remove_extension(thing, /datum/extension/obfuscated_medication)
 		return
 	// Okay, now apply the obfuscation.
+	if(meds.container_name)
+		thing.SetName(meds.container_name)
 	var/new_name = get_medication_name_from_reagent_name(meds.original_reagent)
 	if(new_name)
 		if(istype(thing, /obj/item/chems))
@@ -48,4 +50,4 @@ var/global/list/reagent_names_to_icon_state
 			thing.SetName(new_name)
 	if(meds.container_description)
 		thing.desc = meds.container_description
-	thing.update_icon()	
+	thing.update_icon()

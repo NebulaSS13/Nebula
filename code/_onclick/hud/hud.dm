@@ -21,7 +21,7 @@
 
 	var/hud_shown = 1			//Used for the HUD toggle (F12)
 	var/inventory_shown = 1		//the inventory
-	var/show_intent_icons = 0
+	var/show_intent_icons = 0	//TODO: Implement or remove
 	var/hotkey_ui_hidden = 0	//This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
 
 	var/obj/screen/lingchemdisplay

@@ -1809,9 +1809,7 @@
 /turf/simulated/floor/fixed/alium/airless,
 /area/template_noop)
 "eL" = (
-/obj/machinery/power/tracker{
-	id = "hydrosolar"
-	},
+/obj/machinery/power/tracker,
 /obj/structure/cable{
 	dir = 4
 	},
@@ -2100,7 +2098,7 @@
 	},
 /obj/item/grenade/chem_grenade/antiweed,
 /obj/item/grenade/chem_grenade/incendiary,
-/obj/item/weedkiller/D24,
+/obj/item/plantspray/weedkiller/D24,
 /obj/item/shard/borosilicate,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/processing)

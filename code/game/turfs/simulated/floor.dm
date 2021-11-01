@@ -20,7 +20,6 @@
 	var/flooring_override
 	var/initial_flooring
 	var/decl/flooring/flooring
-	var/mineral = DEFAULT_WALL_MATERIAL
 	var/lava = 0
 
 /turf/simulated/floor/is_plating()

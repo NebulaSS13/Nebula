@@ -138,11 +138,9 @@ var/global/default_mobloc = null
 /datum/unit_test/mob_damage
 	name = "MOB: Template for mob damage"
 	template = /datum/unit_test/mob_damage
-	var/mob/living/carbon/human/testmob = null
 	var/damagetype = BRUTE
 	var/mob_type = /mob/living/carbon/human
 	var/expected_vulnerability = STANDARD
-	var/check_health = 0
 	var/damage_location = BP_CHEST
 
 /datum/unit_test/mob_damage/start_test()
@@ -355,7 +353,7 @@ var/global/default_mobloc = null
 
 	for(var/mobtype in subtypesof(/mob/living))
 
-		// Humans use species for their products and are 
+		// Humans use species for their products and are
 		// difficult to properly unit test because of this.
 		if(ispath(mobtype, /mob/living/carbon/human))
 			continue

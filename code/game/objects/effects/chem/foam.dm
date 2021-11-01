@@ -12,7 +12,6 @@
 	mouse_opacity = 0
 	animate_movement = 0
 	var/amount = 3
-	var/expand = 1
 	var/metal = 0
 
 /obj/effect/effect/foam/Initialize(mapload, var/ismetal = 0)

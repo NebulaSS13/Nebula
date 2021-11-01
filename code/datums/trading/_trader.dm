@@ -4,8 +4,8 @@
 	var/list/possible_origins                                   //Possible names of the trader origin
 	var/disposition = 0                                         //The current disposition of them to us.
 	var/trade_flags = TRADER_MONEY                              //Flags
-	var/name_language                                                //If this is set to a language name this will generate a name from the language
-	var/icon/portrait                                           //The icon that shows up in the menu @TODO
+	var/name_language                                           //If this is set to a language name this will generate a name from the language
+	var/icon/portrait                                           //The icon that shows up in the menu TODO: IMPLEMENT OR REMOVE
 	var/trader_currency
 	var/datum/trade_hub/hub
 
