@@ -102,6 +102,8 @@
 	name = "LOADOUT: Custom setup tweaks shall have valid procs"
 
 /datum/unit_test/loadout_custom_setup_tweaks_shall_have_valid_procs/start_test()
+
+	var/list/failures = list()	
 	for(var/gear_name in global.gear_datums)
 		var/decl/loadout_option/G = global.gear_datums[gear_name]
 		var/datum/instance
@@ -109,14 +111,18 @@
 		for(var/datum/gear_tweak/custom_setup/cs in G.gear_tweaks)
 			instance = instance || new G.path()
 			user = user || new()
-			cs.tweak_item(user, instance)
+			var/res = cs.tweak_item(user, instance)
+			if(res != GEAR_TWEAK_SUCCESS && res != GEAR_TWEAK_SKIPPED)
+				failures += "[G.type] - [cs.type]"
 
 		QDEL_NULL(instance)
 		QDEL_NULL(user)
 
-	pass("Succesfully called all custom setup procs without runtimes")
+	if(length(failures))
+		fail("Some gear tweaks failed to return a value:\n[jointext(failures, "\n")]")
+	else
+		pass("Succesfully called all custom setup procs without runtimes")
 	return  1
-
 
 /datum/unit_test/loadout_custom_setup_tweak_shall_be_applied_as_expected
 	name = "LOADOUT: Custom setup tweak shall be applied as expected"
