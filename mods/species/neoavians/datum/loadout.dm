@@ -7,7 +7,7 @@
 
 /decl/loadout_option/avian/uniform_selection
 	name = "Neo-Avian uniform selection"
-	path = /obj/item/clothing/under/avian_smock/security
+	path = /obj/item/clothing/under/avian_smock
 	slot = slot_w_uniform_str
 
 /decl/loadout_option/avian/uniform_selection/get_gear_tweak_options()

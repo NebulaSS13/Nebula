@@ -1,5 +1,6 @@
 /decl/material/liquid/luminol
 	name = "luminol"
+	uid = "chem_luminol"
 	lore_text = "A compound that interacts with blood on the molecular level."
 	taste_description = "metal"
 	color = "#f2f3f4"
@@ -16,6 +17,7 @@
 	lore_text = "A popular party drug for adventurous types who want to BE the glowstick. Rumoured to be hallucinogenic in high doses."
 	overdose = 15
 	color = "#9eefff"
+	uid = "chem_glowsap"
 
 /decl/material/liquid/glowsap/affect_ingest(mob/living/M, alien, removed, var/datum/reagents/holder)
 	affect_blood(M, alien, removed, holder)
@@ -44,9 +46,11 @@
 	taste_description = "pepper"
 	color = "#000000"
 	value = 0.1
+	uid = "chem_blackpepper"
 
 /decl/material/liquid/enzyme
 	name = "universal enzyme"
+	uid = "chem_enzyme"
 	lore_text = "A universal enzyme used in the preperation of certain chemicals and foods."
 	taste_description = "sweetness"
 	taste_mult = 0.7
@@ -61,6 +65,7 @@
 	color = "#07aab2"
 	value = 2
 	fruit_descriptor = "numbing"
+	uid = "chem_frostoil"
 
 /decl/material/liquid/frostoil/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
@@ -75,6 +80,7 @@
 	taste_mult = 1.5
 	color = "#b31008"
 	fruit_descriptor = "spicy"
+	uid = "chem_caspaicin"
 
 	heating_point = T100C
 	heating_message = "darkens and thickens as it seperates from its water content"
@@ -124,6 +130,7 @@
 	discomfort_message = "<span class='danger'>You feel like your insides are burning!</span>"
 	slime_temp_adj = 15
 	value = 2
+	uid = "chem_capsaicin_condensed"
 
 /decl/material/liquid/capsaicin/condensed/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/eyes_covered = 0
@@ -209,6 +216,7 @@
 	taste_description = "slime"
 	taste_mult = 0.9
 	color = "#13bc5e"
+	uid = "chem_mutagenics"
 
 /decl/material/liquid/mutagenics/affect_touch(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(prob(33))
@@ -247,6 +255,7 @@
 	overdose = REAGENTS_OVERDOSE
 	metabolism = REM*2
 	exoplanet_rarity = MAT_RARITY_NOWHERE
+	uid = "chem_lactate"
 
 /decl/material/liquid/lactate/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/volume = REAGENT_VOLUME(holder, type)
@@ -267,6 +276,7 @@
 	overdose = 5
 	metabolism = 1
 	exoplanet_rarity = MAT_RARITY_NOWHERE
+	uid = "chem_nanoblood"
 
 /decl/material/liquid/nanoblood/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/mob/living/carbon/human/H = M
@@ -289,6 +299,7 @@
 	scent_descriptor = SCENT_DESC_ODOR
 	scent_range = 4
 	hidden_from_codex = TRUE
+	uid = "chem_tobacco"
 
 	var/nicotine = REM * 0.2
 
@@ -302,6 +313,7 @@
 	value = 1.5
 	scent = "fine tobacco smoke"
 	scent_descriptor = SCENT_DESC_FRAGRANCE
+	uid = "chem_tobacco_fine"
 
 /decl/material/solid/tobacco/bad
 	name = "terrible tobacco"
@@ -310,6 +322,7 @@
 	scent = "acrid tobacco smoke"
 	scent_intensity = /decl/scent_intensity/strong
 	scent_descriptor = SCENT_DESC_ODOR
+	uid = "chem_tobacco_terrible"
 
 /decl/material/solid/tobacco/liquid
 	name = "nicotine solution"
@@ -322,6 +335,7 @@
 	scent_descriptor = null
 	scent_range = null
 	exoplanet_rarity = MAT_RARITY_NOWHERE
+	uid = "chem_nicotinesolution"
 
 /decl/material/liquid/menthol
 	name = "menthol"
@@ -332,6 +346,7 @@
 	overdose = REAGENTS_OVERDOSE * 0.25
 	scannable = 1
 	hidden_from_codex = TRUE
+	uid = "chem_tobacco_menthol"
 
 /decl/material/liquid/menthol/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	if(world.time > REAGENT_DATA(holder, type) + 3 MINUTES)
@@ -345,6 +360,7 @@
 	color = "#c2c2d6"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	uid = "chem_nanite_fluid"
 
 /decl/material/liquid/nanitefluid/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.add_chemical_effect(CE_CRYO, 1)
@@ -363,11 +379,13 @@
 	color = "#c8a5dc"
 	touch_met = 5
 	dirtiness = DIRTINESS_STERILE
+	uid = "chem_antiseptic"
 
 /decl/material/liquid/crystal_agent
 	name = "crystallizing agent"
 	taste_description = "sharpness"
 	color = "#13bc5e"
+	uid = "chem_crystalizing_agent"
 
 /decl/material/liquid/crystal_agent/proc/do_material_check(var/mob/living/carbon/M)
 	. = /decl/material/solid/gemstone/crystal

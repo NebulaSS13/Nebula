@@ -4,6 +4,7 @@
 	taste_description = "fertilizer and fuel"
 	color = "#dbc3c3"
 	exoplanet_rarity = MAT_RARITY_UNCOMMON
+	uid = "chem_anfo"
 	var/boompower = 1
 
 /decl/material/liquid/anfo/explosion_act(obj/item/chems/holder, severity)
@@ -36,3 +37,4 @@
 	color = "#ffe8e8"
 	boompower = 2
 	exoplanet_rarity = MAT_RARITY_EXOTIC
+	uid = "chem_anfoplus"
