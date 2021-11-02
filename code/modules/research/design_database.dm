@@ -1,3 +1,13 @@
+var/global/list/default_initial_tech_levels
+/proc/get_default_initial_tech_levels()
+	if(!global.default_initial_tech_levels)
+		global.default_initial_tech_levels = list()
+		var/list/research_fields = decls_repository.get_decls_of_subtype(/decl/research_field)
+		for(var/field in research_fields)
+			var/decl/research_field/field_decl = research_fields[field]
+			global.default_initial_tech_levels[field_decl.id] = field_decl.initial_tech_level
+	return global.default_initial_tech_levels.Copy()
+
 /obj/machinery/design_database
 	name = "fabricator design database"
 	icon = 'icons/obj/machines/tcomms/blackbox.dmi'
@@ -7,19 +17,7 @@
 
 	var/initial_network_id
 	var/initial_network_key
-	var/list/tech_levels = list(
-		TECH_MATERIAL =      1,
-		TECH_ENGINEERING =   1,
-		TECH_EXOTIC_MATTER = 0,
-		TECH_POWER =         1,
-		TECH_WORMHOLES =     0,
-		TECH_BIO =           0,
-		TECH_COMBAT =        0,
-		TECH_MAGNET =        1,
-		TECH_DATA =          1,
-		TECH_ESOTERIC =      0
-	)
-
+	var/list/tech_levels
 	var/need_disk_operation = FALSE
 	var/obj/item/disk/tech_disk/disk
 	var/sync_policy = SYNC_PULL_NETWORK|SYNC_PUSH_NETWORK|SYNC_PULL_DISK
@@ -77,8 +75,7 @@
 			eject_disk(user)
 			return TOPIC_REFRESH
 		if(href_list["wipe_database"])
-			for(var/tech in tech_levels)
-				tech_levels[tech] = 0
+			tech_levels = get_default_initial_tech_levels()
 			return TOPIC_REFRESH
 		if(href_list["settings"])
 			var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
@@ -86,6 +83,8 @@
 			return TOPIC_REFRESH
 
 /obj/machinery/design_database/Initialize()
+	if(!tech_levels)
+		tech_levels = get_default_initial_tech_levels()
 	..()
 	design_databases += src
 	set_extension(src, /datum/extension/network_device, initial_network_id, initial_network_key, NETWORK_CONNECTION_STRONG_WIRELESS)

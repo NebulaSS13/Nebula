@@ -184,8 +184,8 @@ var/global/list/_wood_materials = list(
 					for(var/wood_mat in global._wood_materials)
 						if(!isnull(seed.chems[wood_mat]))
 							user.visible_message("<span class='notice'>\The [user] makes planks out of \the [src].</span>")
-							var/obj/item/stack/material/stack = SSmaterials.create_object(wood_mat, user.loc, rand(1,2))
-							stack.add_to_stacks(user, TRUE)
+							for(var/obj/item/stack/material/stack in SSmaterials.create_object(wood_mat, user.loc, rand(1,2)))
+								stack.add_to_stacks(user, TRUE)
 							qdel(src)
 							return TRUE
 

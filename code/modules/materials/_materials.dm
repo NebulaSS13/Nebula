@@ -357,20 +357,30 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 // Generic material product (sheets, bricks, etc). Used ALL THE TIME.
 // May return an instance list, a single instance, or nothing if there is no instance produced.
 /decl/material/proc/create_object(var/atom/target, var/amount = 1, var/object_type, var/reinf_type)
+
 	if(!object_type)
 		object_type = default_solid_form
-	if(object_type)
-		if(ispath(object_type, /obj/item/stack))
-			var/atom/movable/placed = new object_type(target, amount, type, reinf_type)
-			if(istype(target))
-				placed.dropInto(target)
-			return placed
+
+	if(!ispath(object_type, /atom/movable))
+		CRASH("Non-movable path '[object_type || "NULL"]' supplied to [type] create_object()")
+
+	if(ispath(object_type, /obj/item/stack))
+		var/obj/item/stack/stack_type = object_type
+		var/divisor = initial(stack_type.max_amount)
+		while(amount >= divisor)
+			LAZYADD(., new object_type(target, divisor, type, reinf_type))
+			amount -= divisor
+		if(amount >= 1)
+			LAZYADD(., new object_type(target, amount, type, reinf_type))
+	else
 		for(var/i = 1 to amount)
 			var/atom/movable/placed = new object_type(target, type, reinf_type)
 			if(istype(placed))
 				LAZYADD(., placed)
-				if(istype(target))
-					placed.dropInto(target)
+
+	if(istype(target) && LAZYLEN(.))
+		for(var/atom/movable/placed in .)
+			placed.dropInto(target)
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.
 /decl/material/proc/place_dismantled_girder(var/turf/target, var/decl/material/reinf_material)

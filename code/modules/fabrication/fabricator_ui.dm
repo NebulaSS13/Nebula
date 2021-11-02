@@ -4,7 +4,7 @@
 	var/list/data = list()
 
 	var/datum/extension/network_device/D = get_extension(src, /datum/extension/network_device)
-	data["network"] =    D.network_tag
+	data["network"] =    (D.network_id && D.network_tag)
 	data["category"] =   show_category
 	data["functional"] = is_functioning()
 	data["filtering"] =  filter_string || "No filter set."
