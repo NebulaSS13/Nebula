@@ -43,17 +43,17 @@
 
 	if(dose > 0.75 * additional_effect_threshold) //minor side effects may start here
 		M.add_chemical_effect(CE_SLOWDOWN, slowdown_severity)
-		if(prob(30))
+		if(prob(30) && slur_severity != 0 && slur_severity != null)
 			SET_STATUS_MAX(M, STAT_SLUR, (slur_severity * 20))
-		if(prob(30))
+		if(prob(30) && dizziness_severity != 0 && dizziness_severity != null)
 			SET_STATUS_MAX(M, STAT_DIZZY, (dizziness_severity * 20))
-		if(prob(30))
+		if(prob(30) && confusion_severity != 0 && confusion_severity != null)
 			SET_STATUS_MAX(M, STAT_CONFUSE, (confusion_severity * 20))
-		if(prob(75))
+		if(prob(75) && blurred_vision != 0 && blurred_vision != null)
 			SET_STATUS_MAX(M, STAT_BLURRY, (blurred_vision * 20))
-		if(prob(30))
+		if(prob(30) && stuttering_severity != 0 && stuttering_severity != null)
 			SET_STATUS_MAX(M, STAT_STUTTER, (stuttering_severity * 20))
-		if(prob(10))
+		if(prob(30) && weakness_severity != 0 && weakness_severity != null)
 			SET_STATUS_MAX(M, STAT_WEAK, (weakness_severity * 10))
 		if(sedation > 0)
 			if(prob(20))
@@ -65,15 +65,15 @@
 	if(dose > additional_effect_threshold) //not quite an overdose yet, but it's a lot of medicine to take at once.
 		M.add_chemical_effect(CE_SLOWDOWN, (slowdown_severity * 2))
 		SET_STATUS_MAX(M, STAT_BLURRY, (blurred_vision * 40))
-		if(prob(75))
+		if(prob(75) && slur_severity != 0 && slur_severity != null)
 			SET_STATUS_MAX(M, STAT_SLUR, (slur_severity * 40))
-		if(prob(75))
+		if(prob(75) && dizziness_severity != 0 && dizziness_severity != null)
 			SET_STATUS_MAX(M, STAT_DIZZY, (dizziness_severity * 40))
-		if(prob(75))
+		if(prob(75) && confusion_severity != 0 && confusion_severity != null)
 			SET_STATUS_MAX(M, STAT_CONFUSE, (confusion_severity * 40))
-		if(prob(75))
+		if(prob(75) && stuttering_severity != 0 && stuttering_severity != null)
 			SET_STATUS_MAX(M, STAT_STUTTER, (stuttering_severity * 40))
-		if(prob(50))
+		if(prob(75) && weakness_severity != 0 && weakness_severity != null)
 			SET_STATUS_MAX(M, STAT_WEAK, (weakness_severity * 20))
 		if(sedation > 0)
 			if(prob(50)) //fall asleep
@@ -87,7 +87,7 @@
 	var/boozed = isboozed(M)
 	if(boozed)
 		M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
-		M.add_chemical_effect(CE_BREATHLOSS, 1 * boozed) //drinking and opiating supreesses breathing.
+		M.add_chemical_effect(CE_BREATHLOSS, 1 * boozed) //drinking and opiating suppreesses breathing.
 
 /decl/material/liquid/painkillers/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
 	..()
@@ -98,7 +98,7 @@
 	M.add_chemical_effect(CE_PAINKILLER, pain_power*0.5) //extra painkilling for extra trouble
 	M.add_chemical_effect(CE_BREATHLOSS, breathloss_severity*2) //ODing on opiates can be deadly.
 	if(isboozed(M))
-		M.add_chemical_effect(CE_BREATHLOSS, 4) //Don't drink and OD on opiates folks
+		M.add_chemical_effect(CE_BREATHLOSS, breathloss_severity*4) //Don't drink and OD on opiates folks
 
 /decl/material/liquid/painkillers/proc/isboozed(var/mob/living/carbon/M)
 	. = 0

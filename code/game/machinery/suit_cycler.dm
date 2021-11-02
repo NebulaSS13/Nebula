@@ -286,7 +286,7 @@
 		dat += "<b>Target product:</b> <A href='?src=\ref[src];select_department=1'>[target_modification.name]</a>, <A href='?src=\ref[src];select_bodytype=1'>[target_bodytype]</a>."
 		dat += "<br><A href='?src=\ref[src];apply_paintjob=1'>Apply customisation routine</a><br><hr>"
 
-	var/datum/browser/written/popup = new(user, "suit_cycler", "Suit Cycler")
+	var/datum/browser/written_digital/popup = new(user, "suit_cycler", "Suit Cycler")
 	popup.set_content(JOINTEXT(dat))
 	popup.open()
 

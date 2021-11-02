@@ -106,14 +106,14 @@
 	if(prefilled)
 		fill_to_capacity()
 
+	refresh_design_cache()
+
 /obj/machinery/fabricator/modify_mapped_vars(map_hash)
 	..()
 	ADJUST_TAG_VAR(initial_network_id, map_hash)
 
 /obj/machinery/fabricator/handle_post_network_connection()
 	..()
-	var/list/base_designs = SSfabrication.get_initial_recipes(fabricator_class)
-	design_cache = islist(base_designs) ? base_designs.Copy() : list() // Don't want to mutate the subsystem cache.
 	refresh_design_cache()
 
 /obj/machinery/fabricator/proc/fill_to_capacity()
@@ -121,10 +121,15 @@
 		stored_material[mat] = storage_capacity[mat]
 
 /obj/machinery/fabricator/proc/refresh_design_cache(var/list/known_tech)
+
+	var/list/base_designs = SSfabrication.get_initial_recipes(fabricator_class)
+	design_cache = islist(base_designs) ? base_designs.Copy() : list() // Don't want to mutate the subsystem cache.
+
 	if(length(installed_designs))
 		design_cache |= installed_designs
+
 	if(!known_tech)
-		known_tech = list()
+		known_tech = get_default_initial_tech_levels()
 		var/datum/extension/network_device/device = get_extension(src, /datum/extension/network_device)
 		var/datum/computer_network/network = device.get_network()
 		if(network)

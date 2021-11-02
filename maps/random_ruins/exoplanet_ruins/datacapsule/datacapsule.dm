@@ -27,6 +27,7 @@
 
 /decl/material/liquid/zombie/science
 	name = "isolated corruption"
+	uid = "liquid_corruption_isolated"
 	lore_text = "An incredibly dark, oily substance. Moves very slightly."
 	taste_description = "decayed blood"
 	color = "#800000"

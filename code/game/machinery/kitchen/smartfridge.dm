@@ -170,9 +170,8 @@
 				var/decl/material/solid/skin/skin_mat = skin.material
 				if(!skin_mat.tans_to)
 					continue
-				var/atom/item_to_stock = SSmaterials.create_object(skin_mat.tans_to, get_turf(src), skin.amount)
-				if(istype(item_to_stock))
-					stock_item(item_to_stock, skin.amount)
+				for(var/atom/item_to_stock in SSmaterials.create_object(skin_mat.tans_to, get_turf(src), skin.amount))
+					stock_item(item_to_stock)
 				remove_thing = TRUE
 
 			if(remove_thing)

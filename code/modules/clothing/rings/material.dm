@@ -20,7 +20,7 @@
 /obj/item/clothing/ring/material/OnTopic(var/mob/user, var/list/href_list)
 	if(href_list["examine"])
 		if(istype(user))
-			var/mob/living/carbon/human/H = get_holder_of_type(src, /mob/living/carbon/human)
+			var/mob/living/carbon/human/H = get_recursive_loc_of_type(/mob/living/carbon/human)
 			if(H.Adjacent(user))
 				user.examinate(src)
 				return TOPIC_HANDLED

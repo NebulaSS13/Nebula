@@ -6,6 +6,7 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 1.5
+	uid = "chem_pigment_paralytics"
 
 /decl/material/liquid/paralytics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/threshold = 2
@@ -39,6 +40,7 @@
 		/decl/material/liquid/nutriment/sugar = 0.4
 	)
 	value = 1.5
+	uid = "chem_pigment_presyncopics"
 
 /decl/material/liquid/presyncopics/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	var/drug_strength = 4

@@ -1,3 +1,6 @@
+#define GEAR_TWEAK_SUCCESS 1
+#define GEAR_TWEAK_SKIPPED 2
+
 /datum/gear_tweak/proc/get_contents(var/metadata)
 	return
 
@@ -11,7 +14,7 @@
 	return
 
 /datum/gear_tweak/proc/tweak_item(var/user, var/obj/item/I, var/metadata)
-	return
+	return GEAR_TWEAK_SKIPPED
 
 /datum/gear_tweak/proc/tweak_description(var/description, var/metadata)
 	return description
@@ -40,8 +43,9 @@
 
 /datum/gear_tweak/color/tweak_item(var/user, var/obj/item/I, var/metadata)
 	if(valid_colors && !(metadata in valid_colors))
-		return
+		return GEAR_TWEAK_SKIPPED
 	I.color = sanitize_hexcolor(metadata, I.color)
+	return GEAR_TWEAK_SUCCESS
 
 /*
 * Path adjustment
@@ -132,7 +136,7 @@
 
 /datum/gear_tweak/contents/tweak_item(var/owner, var/obj/item/I, var/list/metadata)
 	if(length(metadata) != length(valid_contents))
-		return
+		return GEAR_TWEAK_SKIPPED
 	for(var/i = 1 to valid_contents.len)
 		var/path
 		var/list/contents = valid_contents[i]
@@ -147,6 +151,7 @@
 			new path(I)
 		else
 			log_debug("Failed to tweak item: Index [i] in [json_encode(metadata)] did not result in a valid path. Valid contents: [json_encode(valid_contents)]")
+	return GEAR_TWEAK_SUCCESS
 
 /*
 * Ragent adjustment
@@ -172,14 +177,15 @@
 
 /datum/gear_tweak/reagents/tweak_item(var/user, var/obj/item/I, var/list/metadata)
 	if(metadata == "None")
-		return
+		return GEAR_TWEAK_SKIPPED
 	var/reagent
 	if(metadata == "Random")
 		reagent = valid_reagents[pick(valid_reagents)]
 	else
 		reagent = valid_reagents[metadata]
 	if(reagent)
-		return I.reagents.add_reagent(reagent, REAGENTS_FREE_SPACE(I.reagents))
+		I.reagents.add_reagent(reagent, REAGENTS_FREE_SPACE(I.reagents))
+	return GEAR_TWEAK_SUCCESS
 
 /*
 * Custom Setup
@@ -201,6 +207,7 @@
 	if(length(additional_arguments))
 		arglist += additional_arguments
 	call(item, custom_setup_proc)(arglist(arglist))
+	return GEAR_TWEAK_SUCCESS
 
 /*
 * Tablet Stuff
@@ -353,7 +360,7 @@
 
 /datum/gear_tweak/tablet/tweak_item(var/user, var/obj/item/modular_computer/tablet/I, var/list/metadata)
 	if(length(metadata) < TWEAKABLE_COMPUTER_PART_SLOTS)
-		return
+		return GEAR_TWEAK_SKIPPED
 	var/datum/extension/assembly/modular_computer/assembly = get_extension(I, /datum/extension/assembly)
 	if(ValidProcessors[metadata[1]])
 		var/t = ValidProcessors[metadata[1]]
@@ -376,6 +383,7 @@
 	if(ValidTeslaLinks[metadata[7]])
 		var/t = ValidTeslaLinks[metadata[7]]
 		assembly.add_replace_component(null, PART_TESLA, new t(I))
+	return GEAR_TWEAK_SUCCESS
 
 /*
 * Custom name
@@ -404,6 +412,8 @@ var/global/datum/gear_tweak/custom_name/gear_tweak_free_name = new()
 /datum/gear_tweak/custom_name/tweak_item(obj/item/I, metadata)
 	if(metadata)
 		I.name = metadata
+		return GEAR_TWEAK_SUCCESS
+	return GEAR_TWEAK_SKIPPED
 
 /*
 * Custom description
@@ -432,3 +442,5 @@ var/global/datum/gear_tweak/custom_desc/gear_tweak_free_desc = new()
 /datum/gear_tweak/custom_desc/tweak_item(obj/item/I, metadata)
 	if(metadata)
 		I.desc = metadata
+		return GEAR_TWEAK_SUCCESS
+	return GEAR_TWEAK_SKIPPED

@@ -695,13 +695,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	else if (zone == BP_R_FOOT) return "right foot"
 	else return zone
 
-/proc/get(atom/loc, type)
-	while(loc)
-		if(istype(loc, type))
-			return loc
-		loc = loc.loc
-	return null
-
 //Whether or not the given item counts as sharp in terms of dealing damage
 /proc/is_sharp(obj/O)
 	if (!O) return 0
