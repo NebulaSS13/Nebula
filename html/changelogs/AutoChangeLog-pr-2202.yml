@@ -1,0 +1,5 @@
+author: NataKilar
+delete-after: true
+changes:
+  - bugfix: Fixes a bug with blueprint and shuttle landing vision causing mobs to
+      see blackness.
