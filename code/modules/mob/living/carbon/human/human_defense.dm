@@ -443,3 +443,102 @@ meteor_act
 	if (was_burned)
 		fire_act(air, temperature)
 	return FALSE
+
+//Removed the horrible safety parameter. It was only being used by ninja code anyways.
+//Now checks siemens_coefficient of the affected area by default
+/mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/base_siemens_coeff = 1.0, var/def_zone = null)
+
+	if(status_flags & GODMODE)	return 0	//godmode
+
+	if(species.siemens_coefficient == -1)
+		if(stored_shock_by_ref["\ref[src]"])
+			stored_shock_by_ref["\ref[src]"] += shock_damage
+		else
+			stored_shock_by_ref["\ref[src]"] = shock_damage
+		return
+
+	if (!def_zone)
+		def_zone = pick(BP_L_HAND, BP_R_HAND)
+
+	return ..(shock_damage, source, base_siemens_coeff, def_zone)
+
+/mob/living/carbon/human/explosion_act(severity)
+	..()
+	var/b_loss = null
+	var/f_loss = null
+	switch (severity)
+		if(1)
+			b_loss = 400
+			f_loss = 100
+			var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
+			throw_at(target, 200, 4)
+		if(2)
+			b_loss = 60
+			f_loss = 60
+			if (get_sound_volume_multiplier() >= 0.2)
+				SET_STATUS_MAX(src, STAT_TINNITUS, 30)
+				SET_STATUS_MAX(src, STAT_DEAF, 120)
+			if(prob(70))
+				SET_STATUS_MAX(src, STAT_PARA, 10)
+		if(3)
+			b_loss = 30
+			if (get_sound_volume_multiplier() >= 0.2)
+				SET_STATUS_MAX(src, STAT_TINNITUS, 15)
+				SET_STATUS_MAX(src, STAT_DEAF, 60)
+			if (prob(50))
+				SET_STATUS_MAX(src, STAT_PARA, 10)
+
+	// focus most of the blast on one organ
+	apply_damage(0.7 * b_loss, BRUTE, null, DAM_EXPLODE, used_weapon = "Explosive blast")
+	apply_damage(0.7 * f_loss, BURN, null, DAM_EXPLODE, used_weapon = "Explosive blast")
+
+	// distribute the remaining 30% on all limbs equally (including the one already dealt damage)
+	apply_damage(0.3 * b_loss, BRUTE, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+	apply_damage(0.3 * f_loss, BURN, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
+
+//Used by various things that knock people out by applying blunt trauma to the head.
+//Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
+/mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = BP_BRAIN)
+
+	var/obj/item/organ/affecting = get_internal_organ(brain_tag)
+
+	target_zone = check_zone(target_zone, src)
+	if(!affecting || affecting.parent_organ != target_zone)
+		return 0
+
+	//if the parent organ is significantly larger than the brain organ, then hitting it is not guaranteed
+	var/obj/item/organ/parent = get_organ(target_zone)
+	if(!parent)
+		return 0
+
+	if(parent.w_class > affecting.w_class + 1)
+		return prob(100 / 2**(parent.w_class - affecting.w_class - 1))
+
+	return 1
+
+///eyecheck()
+///Returns a number between -1 to 2
+/mob/living/carbon/human/eyecheck()
+	var/total_protection = flash_protection
+	if(species.has_organ[species.vision_organ])
+		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
+		if(!I?.is_usable())
+			return FLASH_PROTECTION_MAJOR
+		total_protection = I.get_total_protection(flash_protection)
+	else // They can't be flashed if they don't have eyes.
+		return FLASH_PROTECTION_MAJOR
+	return total_protection
+
+/mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	if(species.has_organ[species.vision_organ])
+		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
+		if(!isnull(I))
+			I.additional_flash_effects(intensity)
+	return ..()
+
+/mob/living/carbon/human/proc/getFlashMod()
+	if(species.vision_organ)
+		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
+		if(istype(I))
+			return I.flash_mod
+	return species.flash_mod

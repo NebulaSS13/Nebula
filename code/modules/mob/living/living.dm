@@ -705,7 +705,7 @@ default behaviour is:
 			var/image/A = new()
 			A.appearance = aura
 			add_overlay(A)
-	
+
 /mob/living/Destroy()
 	if(auras)
 		for(var/a in auras)
@@ -946,3 +946,75 @@ default behaviour is:
 
 /mob/living/proc/apply_fall_damage(var/turf/landing)
 	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))))
+
+/mob/living/proc/empty_stomach()
+	return
+
+/mob/living/proc/handle_actions()
+	//Pretty bad, i'd use picked/dropped instead but the parent calls in these are nonexistent
+	for(var/datum/action/A in actions)
+		if(A.CheckRemoval(src))
+			A.Remove(src)
+	for(var/obj/item/I in src)
+		if(I.action_button_name)
+			if(!I.action)
+				I.action = new I.default_action_type
+			I.action.name = I.action_button_name
+			I.action.desc = I.action_button_desc
+			I.action.SetTarget(I)
+			I.action.Grant(src)
+	return
+
+/mob/living/update_action_buttons()
+	if(!hud_used) return
+	if(!client) return
+
+	if(hud_used.hud_shown != 1)	//Hud toggled to minimal
+		return
+
+	client.screen -= hud_used.hide_actions_toggle
+	for(var/datum/action/A in actions)
+		if(A.button)
+			client.screen -= A.button
+
+	if(hud_used.action_buttons_hidden)
+		if(!hud_used.hide_actions_toggle)
+			hud_used.hide_actions_toggle = new(hud_used)
+			hud_used.hide_actions_toggle.UpdateIcon()
+
+		if(!hud_used.hide_actions_toggle.moved)
+			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(1)
+			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,1)
+
+		client.screen += hud_used.hide_actions_toggle
+		return
+
+	var/button_number = 0
+	for(var/datum/action/A in actions)
+		button_number++
+		if(A.button == null)
+			var/obj/screen/movable/action_button/N = new(hud_used)
+			N.owner = A
+			A.button = N
+
+		var/obj/screen/movable/action_button/B = A.button
+
+		B.UpdateIcon()
+
+		B.SetName(A.UpdateName())
+		B.desc = A.UpdateDesc()
+
+		client.screen += B
+
+		if(!B.moved)
+			B.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number)
+			//hud_used.SetButtonCoords(B,button_number)
+
+	if(button_number > 0)
+		if(!hud_used.hide_actions_toggle)
+			hud_used.hide_actions_toggle = new(hud_used)
+			hud_used.hide_actions_toggle.InitialiseIcon(src)
+		if(!hud_used.hide_actions_toggle.moved)
+			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
+			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,button_number+1)
+		client.screen += hud_used.hide_actions_toggle

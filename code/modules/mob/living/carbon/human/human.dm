@@ -116,40 +116,6 @@
 				stat("Chemical Storage", mind.changeling.chem_charges)
 				stat("Genetic Damage Time", mind.changeling.geneticdamage)
 
-/mob/living/carbon/human/explosion_act(severity)
-	..()
-	var/b_loss = null
-	var/f_loss = null
-	switch (severity)
-		if(1)
-			b_loss = 400
-			f_loss = 100
-			var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
-			throw_at(target, 200, 4)
-		if(2)
-			b_loss = 60
-			f_loss = 60
-			if (get_sound_volume_multiplier() >= 0.2)
-				SET_STATUS_MAX(src, STAT_TINNITUS, 30)
-				SET_STATUS_MAX(src, STAT_DEAF, 120)
-			if(prob(70))
-				SET_STATUS_MAX(src, STAT_PARA, 10)
-		if(3)
-			b_loss = 30
-			if (get_sound_volume_multiplier() >= 0.2)
-				SET_STATUS_MAX(src, STAT_TINNITUS, 15)
-				SET_STATUS_MAX(src, STAT_DEAF, 60)
-			if (prob(50))
-				SET_STATUS_MAX(src, STAT_PARA, 10)
-
-	// focus most of the blast on one organ
-	apply_damage(0.7 * b_loss, BRUTE, null, DAM_EXPLODE, used_weapon = "Explosive blast")
-	apply_damage(0.7 * f_loss, BURN, null, DAM_EXPLODE, used_weapon = "Explosive blast")
-
-	// distribute the remaining 30% on all limbs equally (including the one already dealt damage)
-	apply_damage(0.3 * b_loss, BRUTE, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
-	apply_damage(0.3 * f_loss, BURN, null, DAM_EXPLODE | DAM_DISPERSED, used_weapon = "Explosive blast")
-
 /mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
 
@@ -300,100 +266,6 @@
 	var/obj/item/card/id/I = GetIdCard(exceptions = list(/obj/item/holder))
 	if(istype(I))
 		return I.registered_name
-
-//Removed the horrible safety parameter. It was only being used by ninja code anyways.
-//Now checks siemens_coefficient of the affected area by default
-/mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/base_siemens_coeff = 1.0, var/def_zone = null)
-
-	if(status_flags & GODMODE)	return 0	//godmode
-
-	if(species.siemens_coefficient == -1)
-		if(stored_shock_by_ref["\ref[src]"])
-			stored_shock_by_ref["\ref[src]"] += shock_damage
-		else
-			stored_shock_by_ref["\ref[src]"] = shock_damage
-		return
-
-	if (!def_zone)
-		def_zone = pick(BP_L_HAND, BP_R_HAND)
-
-	return ..(shock_damage, source, base_siemens_coeff, def_zone)
-
-/mob/living/carbon/human/apply_shock(var/shock_damage, var/def_zone, var/base_siemens_coeff = 1.0)
-	var/obj/item/organ/external/initial_organ = get_organ(check_zone(def_zone, src))
-	if(!initial_organ)
-		initial_organ = pick(organs)
-
-	var/obj/item/organ/external/floor_organ
-
-	if(!lying)
-		var/list/obj/item/organ/external/standing = list()
-		for(var/limb_tag in list(BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/E = organs_by_name[limb_tag]
-			if(E && E.is_usable())
-				standing[E.organ_tag] = E
-		if((def_zone == BP_L_FOOT || def_zone == BP_L_LEG) && standing[BP_L_FOOT])
-			floor_organ = standing[BP_L_FOOT]
-		if((def_zone == BP_R_FOOT || def_zone == BP_R_LEG) && standing[BP_R_FOOT])
-			floor_organ = standing[BP_R_FOOT]
-		else
-			floor_organ = standing[pick(standing)]
-
-	if(!floor_organ)
-		floor_organ = pick(organs)
-
-	var/list/obj/item/organ/external/to_shock = trace_shock(initial_organ, floor_organ)
-
-	if(to_shock && to_shock.len)
-		shock_damage /= to_shock.len
-		shock_damage = round(shock_damage, 0.1)
-	else
-		return 0
-
-	var/total_damage = 0
-
-	for(var/obj/item/organ/external/E in to_shock)
-		total_damage += ..(shock_damage, E.organ_tag, base_siemens_coeff * get_siemens_coefficient_organ(E))
-
-	if(total_damage > 10)
-		local_emp(initial_organ, 3)
-
-	return total_damage
-
-/mob/living/carbon/human/proc/trace_shock(var/obj/item/organ/external/init, var/obj/item/organ/external/floor)
-	var/list/obj/item/organ/external/traced_organs = list(floor)
-
-	if(!init)
-		return
-
-	if(!floor || init == floor)
-		return list(init)
-
-	for(var/obj/item/organ/external/E in list(floor, init))
-		while(E && E.parent_organ)
-			var/candidate = organs_by_name[E.parent_organ]
-			if(!candidate || (candidate in traced_organs))
-				break // Organ parenthood is not guaranteed to be a tree
-			E = candidate
-			traced_organs += E
-			if(E == init)
-				return traced_organs
-
-	return traced_organs
-
-/mob/living/carbon/human/proc/local_emp(var/list/limbs, var/severity = 2)
-	if(!islist(limbs))
-		limbs = list(limbs)
-
-	var/list/EMP = list()
-	for(var/obj/item/organ/external/limb in limbs)
-		EMP += limb
-		if(LAZYLEN(limb.internal_organs))
-			EMP += limb.internal_organs
-		if(LAZYLEN(limb.implants))
-			EMP += limb.implants
-	for(var/atom/E in EMP)
-		E.emp_act(severity)
 
 /mob/living/carbon/human/OnSelfTopic(href_list)
 	if (href_list["lookitem"])
@@ -566,59 +438,12 @@
 	flavor_texts[key] = msg
 	set_flavor()
 
-///eyecheck()
-///Returns a number between -1 to 2
-/mob/living/carbon/human/eyecheck()
-	var/total_protection = flash_protection
-	if(species.has_organ[species.vision_organ])
-		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
-		if(!I?.is_usable())
-			return FLASH_PROTECTION_MAJOR
-		total_protection = I.get_total_protection(flash_protection)
-	else // They can't be flashed if they don't have eyes.
-		return FLASH_PROTECTION_MAJOR
-	return total_protection
-
-/mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
-	if(species.has_organ[species.vision_organ])
-		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
-		if(!isnull(I))
-			I.additional_flash_effects(intensity)
-	return ..()
-
-/mob/living/carbon/human/proc/getFlashMod()
-	if(species.vision_organ)
-		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
-		if(istype(I))
-			return I.flash_mod
-	return species.flash_mod
-
 /mob/living/carbon/human/proc/get_darksight_range()
 	if(species.vision_organ)
 		var/obj/item/organ/internal/eyes/I = get_internal_organ(species.vision_organ)
 		if(istype(I))
 			return I.darksight_range
 	return species.darksight_range
-
-//Used by various things that knock people out by applying blunt trauma to the head.
-//Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
-/mob/living/carbon/human/proc/headcheck(var/target_zone, var/brain_tag = BP_BRAIN)
-
-	var/obj/item/organ/affecting = get_internal_organ(brain_tag)
-
-	target_zone = check_zone(target_zone, src)
-	if(!affecting || affecting.parent_organ != target_zone)
-		return 0
-
-	//if the parent organ is significantly larger than the brain organ, then hitting it is not guaranteed
-	var/obj/item/organ/parent = get_organ(target_zone)
-	if(!parent)
-		return 0
-
-	if(parent.w_class > affecting.w_class + 1)
-		return prob(100 / 2**(parent.w_class - affecting.w_class - 1))
-
-	return 1
 
 /mob/living/carbon/human/abiotic(var/full_body = TRUE)
 	if(full_body)
@@ -629,11 +454,6 @@
 /mob/living/carbon/human/proc/check_dna()
 	dna.check_integrity(src)
 	return
-
-/mob/living/carbon/human/get_species_name()
-	if(!species)
-		set_species()
-	. = ..()
 
 /mob/living/carbon/human/get_bodytype_category()
 	. = bodytype.bodytype_category
@@ -894,15 +714,6 @@
 	losebreath = 0
 	UpdateAppearance()
 	..()
-
-/mob/living/carbon/human/proc/is_lung_ruptured()
-	var/obj/item/organ/internal/lungs/L = get_internal_organ(BP_LUNGS)
-	return L && L.is_bruised()
-
-/mob/living/carbon/human/proc/rupture_lung()
-	var/obj/item/organ/internal/lungs/L = get_internal_organ(BP_LUNGS)
-	if(L)
-		L.rupture()
 
 /mob/living/carbon/human/add_blood(mob/living/carbon/human/M, amount = 2, blood_data)
 	if (!..())
