@@ -231,3 +231,13 @@
 		if(!istype(heart) || !heart.is_working())
 			return TRUE
 	return FALSE
+
+/mob/living/carbon/human/proc/is_lung_ruptured()
+	var/obj/item/organ/internal/lungs/L = get_internal_organ(BP_LUNGS)
+	return L && L.is_bruised()
+
+/mob/living/carbon/human/proc/rupture_lung()
+	var/obj/item/organ/internal/lungs/L = get_internal_organ(BP_LUNGS)
+	if(L)
+		L.rupture()
+
