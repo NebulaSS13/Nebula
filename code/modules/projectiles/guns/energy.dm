@@ -144,16 +144,34 @@ var/global/list/registered_cyborg_weapons = list()
 	update_icon()
 
 /obj/item/gun/energy/attackby(var/obj/item/A, mob/user)
-	if(isnull(cell_type))
-		return
-	if(!user.is_holding_offhand(src))
-		to_chat(user, SPAN_NOTICE("Hold \the [src] in your hands to load it."))
-		return
-	if(istype(power_supply) )
-		to_chat(user, SPAN_NOTICE("There is already \a [power_supply] loaded."))
 
-	if(istype(A, cell_type) && do_after(user, 5, A, can_move = TRUE) && user.unEquip(A, src) )
-		power_supply = A
-		user.visible_message(SPAN_WARNING("\The [user] loads \the [A] into \the [src]!"))
-		playsound(src, 'sound/weapons/guns/interaction/energy_magin.ogg', 80)
-	update_icon()
+	if(istype(A, /obj/item/cell))
+
+		if(isnull(cell_type))
+			to_chat(user, SPAN_WARNING("\The [src] cannot accept a cell."))
+			return TRUE
+
+		if(!istype(A, cell_type))
+			var/obj/cell_dummy = cell_type
+			to_chat(user, SPAN_WARNING("\The [src]'s cell bracket can only accept \a [initial(cell_dummy.name)]."))
+			return TRUE
+
+		if(!user.is_holding_offhand(src))
+			to_chat(user, SPAN_WARNING("You must hold \the [src] in your hands to load it."))
+			return TRUE
+
+		if(istype(power_supply) )
+			to_chat(user, SPAN_NOTICE("\The [src] already has \a [power_supply] loaded."))
+			return TRUE
+
+		if(!do_after(user, 5, A, can_move = TRUE))
+			return TRUE
+			
+		if(user.unEquip(A, src))
+			power_supply = A
+			user.visible_message(SPAN_WARNING("\The [user] loads \the [A] into \the [src]!"))
+			playsound(src, 'sound/weapons/guns/interaction/energy_magin.ogg', 80)
+			update_icon()
+		return TRUE
+
+	return ..()
