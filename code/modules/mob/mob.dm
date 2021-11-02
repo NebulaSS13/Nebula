@@ -970,7 +970,7 @@
 /mob/proc/lose_hair()
 	return
 
-/mob/proc/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+/mob/proc/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
 	if(!skip_delays)
 		to_chat(src, SPAN_WARNING("You can't make heads or tails of the words."))
 	. = stars(text_content, 5)

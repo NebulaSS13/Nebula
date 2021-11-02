@@ -84,7 +84,7 @@
 	if(mode == sel_mode && !authorized)
 		switch_firemodes()
 
-	var/mob/user = get_holder_of_type(src, /mob)
+	var/mob/user = get_recursive_loc_of_type(/mob)
 	if(user)
 		to_chat(user, SPAN_NOTICE("Your [src.name] has been [authorized ? "granted" : "denied"] [firemodes[mode]] fire authorization by [by]."))
 

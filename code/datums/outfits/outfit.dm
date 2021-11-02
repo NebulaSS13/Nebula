@@ -21,6 +21,7 @@ var/global/list/outfits_decls_by_type_
 
 /decl/hierarchy/outfit
 	name = "Naked"
+	abstract_type = /decl/hierarchy/outfit
 
 	var/uniform = null
 	var/suit = null

@@ -6,3 +6,4 @@
 	touch_met = 50
 	value = 0.15 // shelf price of bug spray per ml, cleaner in general is too cheap
 	dirtiness = DIRTINESS_CLEAN
+	uid = "chem_cleaner"

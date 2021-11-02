@@ -206,7 +206,7 @@ By design, d1 is the smallest direction and d2 is the highest
 				if(c.d1 == UP || c.d2 == UP)
 					qdel(c)
 
-	investigate_log("was cut by [key_name(usr, usr.client)] in [user.loc.loc]","wires")
+	investigate_log("was cut by [key_name(usr, usr.client)] in [get_area(user)]","wires")
 
 	qdel(src)
 
@@ -492,7 +492,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stack_merge_type = /obj/item/stack/cable_coil
 	matter_multiplier = 0.15
-	
+
 /obj/item/stack/cable_coil/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/tool, list(

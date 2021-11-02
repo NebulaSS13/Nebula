@@ -581,3 +581,11 @@ its easier to just keep the beam vertical.
 	M.Scale(icon_scale_x, icon_scale_y)
 	M.Turn(icon_rotation)
 	animate(src, transform = M, transform_animate_time)
+
+// Walks up the loc tree until it finds a loc of the given loc_type
+/atom/get_recursive_loc_of_type(var/loc_type)
+	var/atom/check_loc = loc
+	while(check_loc)
+		if(istype(check_loc, loc_type))
+			return check_loc
+		check_loc = check_loc.loc

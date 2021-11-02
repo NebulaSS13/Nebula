@@ -91,7 +91,7 @@
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 /decl/material/solid/stone/cult/place_dismantled_girder(var/turf/target)
-	new /obj/structure/girder/cult(target)
+	return list(new /obj/structure/girder/cult(target))
 
 /decl/material/solid/stone/cult/reinforced
 	name = "runic inscriptions"

@@ -59,8 +59,7 @@
 
 	if(world.timeofday > next_event)
 		return
-
-	var/mob/living/holder = get_holder_of_type(computer, /mob/living/carbon/human)
+	var/mob/living/holder = computer.holder.get_recursive_loc_of_type(/mob/living/carbon/human)
 	if(!crashed)
 		if(holder)
 			switch(rand(1,3))

@@ -52,6 +52,10 @@
 	contains = list(/obj/item/stack/material/reinforced/mapped/ocp/fifty)
 	containername = "osmium carbide plasteel sheets crate"
 
+/decl/hierarchy/supply_pack/materials/graphite50
+	name = "50 graphite bricks"
+	contains = list(/obj/item/stack/material/brick/mapped/graphite/fifty)
+
 // Material sheets (10 - Smaller amounts, less cost efficient)
 /decl/hierarchy/supply_pack/materials/marble10
 	name = "10 slabs of marble"
@@ -92,6 +96,10 @@
 	name = "10 diamond sheets"
 	contains = list(/obj/item/stack/material/gemstone/mapped/diamond/ten)
 	containername = "diamond sheets crate"
+
+/decl/hierarchy/supply_pack/materials/graphite10
+	name = "10 graphite bricks"
+	contains = list(/obj/item/stack/material/brick/mapped/graphite/ten)
 
 //wood zone
 /decl/hierarchy/supply_pack/materials/wood50

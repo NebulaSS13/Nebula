@@ -40,10 +40,10 @@
 
 		//makes sure master_item is equipped before putting it in hand, so that we can't drag it into our hand from miles away.
 		//there's got to be a better way of doing this...
-		if (!(master_item.loc == user) || (master_item.loc && master_item.loc.loc == user))
+		if (!user.isEquipped(master_item))
 			return 0
 
-		if (!( user.restrained() ) && !( user.stat ))
+		if(!user.incapacitated())
 			var/obj/screen/inventory/inv = over_object
 			master_item.add_fingerprint(user)
 			if(user.unEquip(master_item))

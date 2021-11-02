@@ -55,7 +55,7 @@
 	if(istype(W, /obj/item/fossil/animal))
 		if(!user.canUnEquip(W))
 			return
-		var/mob/M = get_holder_of_type(src, /mob)
+		var/mob/M = get_recursive_loc_of_type(/mob)
 		if(M && !M.unEquip(src))
 			return
 		var/obj/o = new /obj/structure/skeleton(get_turf(src))

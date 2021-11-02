@@ -285,11 +285,12 @@
 // TODO: generalize to matter list and parts_type.
 /obj/structure/window/create_dismantled_products(turf/T)
 	SHOULD_CALL_PARENT(FALSE)
-	var/obj/item/stack/material/S = material.create_object(loc, is_fulltile() ? 4 : 2)
-	if(istype(S) && reinf_material)
-		S.reinf_material = reinf_material
-		S.update_strings()
-		S.update_icon()
+	var/list/products = material.create_object(loc, is_fulltile() ? 4 : 2)
+	if(reinf_material)
+		for(var/obj/item/stack/material/S in products)
+			S.reinf_material = reinf_material
+			S.update_strings()
+			S.update_icon()
 
 /obj/structure/window/grab_attack(var/obj/item/grab/G)
 	if (G.assailant.a_intent != I_HURT)
