@@ -10,20 +10,20 @@ var/global/list/registered_cyborg_weapons = list()
 	fire_sound_text = "laser blast"
 	accuracy = 1
 
-	var/obj/item/cell/power_supply //What type of power cell this uses
-	var/charge_cost = 20 //How much energy is needed to fire.
-	var/max_shots = 10 //Determines the capacity of the weapon's power cell. Specifying a cell_type overrides this value.
-	var/cell_type = null
-	var/projectile_type = /obj/item/projectile/beam/practice
-	var/modifystate
-	var/charge_meter = 1	//if set, the icon state will be chosen based on the current charge
-	var/indicator_color		// color used for overlay based charge meters
+	var/obj/item/cell/power_supply // What type of power cell this starts with. Uses accepts_cell_type or variable cell if unset.
+	var/charge_cost = 20           // How much energy is needed to fire.
+	var/max_shots = 10             // Determines the capacity of the weapon's power cell. Setting power_supply or accepts_cell_type will override this value.
+	var/modifystate                // Changes the icon_state used for the charge overlay.
+	var/charge_meter = 1           // If set, the icon state will be chosen based on the current charge
+	var/indicator_color            // Color used for overlay based charge meters
+	var/self_recharge = 0          // If set, the weapon will recharge itself
+	var/use_external_power = 0     // If set, the weapon will look for an external power source to draw from, otherwise it recharges magically
+	var/recharge_time = 4          // How many ticks between recharges.
+	var/charge_tick = 0            // Current charge tick tracker.
+	var/accepts_cell_type          // Specifies a cell type that can be loaded into this weapon. 
 
-	//self-recharging
-	var/self_recharge = 0	//if set, the weapon will recharge itself
-	var/use_external_power = 0 //if set, the weapon will look for an external power source to draw from, otherwise it recharges magically
-	var/recharge_time = 4
-	var/charge_tick = 0
+	// Which projectile type to create when firing.
+	var/projectile_type = /obj/item/projectile/beam/practice
 
 /obj/item/gun/energy/switch_firemodes()
 	. = ..()
@@ -35,11 +35,16 @@ var/global/list/registered_cyborg_weapons = list()
 	update_icon()
 
 /obj/item/gun/energy/Initialize()
-	. = ..()
-	if(cell_type)
-		power_supply = new cell_type(src)
+
+	if(ispath(power_supply))
+		power_supply = new power_supply(src)
+	else if(accepts_cell_type)
+		power_supply = new accepts_cell_type(src)
 	else
 		power_supply = new /obj/item/cell/device/variable(src, max_shots*charge_cost)
+
+	. = ..()
+
 	if(self_recharge)
 		START_PROCESSING(SSobj, src)
 	update_icon()
@@ -135,7 +140,7 @@ var/global/list/registered_cyborg_weapons = list()
 
 //For removable cells.
 /obj/item/gun/energy/attack_hand(mob/user)
-	if(!user.is_holding_offhand(src)|| isnull(cell_type) || isnull(power_supply) )
+	if(!user.is_holding_offhand(src)|| isnull(accepts_cell_type) || isnull(power_supply) )
 		return ..()
 	user.put_in_hands(power_supply)
 	power_supply = null
@@ -147,12 +152,12 @@ var/global/list/registered_cyborg_weapons = list()
 
 	if(istype(A, /obj/item/cell))
 
-		if(isnull(cell_type))
+		if(isnull(accepts_cell_type))
 			to_chat(user, SPAN_WARNING("\The [src] cannot accept a cell."))
 			return TRUE
 
-		if(!istype(A, cell_type))
-			var/obj/cell_dummy = cell_type
+		if(!istype(A, accepts_cell_type))
+			var/obj/cell_dummy = accepts_cell_type
 			to_chat(user, SPAN_WARNING("\The [src]'s cell bracket can only accept \a [initial(cell_dummy.name)]."))
 			return TRUE
 

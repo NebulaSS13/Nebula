@@ -293,7 +293,6 @@
 	icon_state = "potato_cell"
 	maxcharge = 20
 
-
 //Generic battery cell for guns with rechargable batteries.
 /obj/item/cell/gun
 	name = "weapon energy cell"
