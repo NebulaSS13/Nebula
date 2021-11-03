@@ -740,9 +740,8 @@
 	
 	reset_offsets()
 
-	// Rebuild the HUD and visual elements.
-	if(client)
-		Login() //#FIXME: It might be a bit dangerous to call the entirety of login just for that?
+	// Rebuild the HUD and visual elements only if we got a client.
+	hud_reset(TRUE)
 
 /mob/living/carbon/human/proc/update_languages()
 	if(!length(cultural_info))

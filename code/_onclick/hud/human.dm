@@ -264,7 +264,8 @@
 	if(length(hud_elements))
 		mymob.client.screen += hud_elements
 	mymob.client.screen += src.adding + src.hotkeybuttons
-	inventory_shown = 0
+
+	hide_inventory()
 
 /mob/living/carbon/human/verb/toggle_hotkey_verbs()
 	set category = "OOC"
