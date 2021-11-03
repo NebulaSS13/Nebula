@@ -5,7 +5,8 @@
 	cavity_name =             "core"
 	w_class =                 ITEM_SIZE_LARGE
 	body_part =               SLOT_LOWER_BODY
-	parent_organ =            BP_CHEST
+	organ_tag =               BP_CHEST
+	parent_organ =            null
 	dislocated =              -1
 	max_damage =              50
 	min_broken_damage =       25

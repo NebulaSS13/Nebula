@@ -82,6 +82,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	var/species
 	var/list/body_markings = list()
 	var/lineage
+	//#TODO: Keep track of bodytype!!!!!
 
 // Make a copy of this strand.
 // USE THIS WHEN COPYING STUFF OR YOU'LL GET CORRUPTION!
@@ -358,6 +359,8 @@ var/global/list/datum/dna/gene/dna_genes[0]
 		if(length(unique_enzymes) != 32)
 			unique_enzymes = md5(character.real_name)
 	else
+		if(!species)
+			species = using_map.default_species
 		if(length(uni_identity) != 3*DNA_UI_LENGTH)
 			uni_identity = "00600200A00E0110148FC01300B0095BD7FD3F4"
 		if(length(struc_enzymes)!= 3*DNA_SE_LENGTH)

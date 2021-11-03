@@ -26,13 +26,6 @@
 /obj/item/organ/external/chest/proc/get_current_skin()
 	return
 
-/obj/item/organ/external/chest/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
-	if(..())
-		// Give them a new cell.
-		var/obj/item/organ/internal/cell/C = owner.get_internal_organ(BP_CELL)
-		if(!istype(C))
-			owner.internal_organs_by_name[BP_CELL] = new /obj/item/organ/internal/cell(owner,1)
-
 /obj/item/organ/external/get_scan_results()
 	. = ..()
 	var/obj/item/organ/internal/lungs/L = locate() in src
