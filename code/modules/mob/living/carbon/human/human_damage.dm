@@ -413,6 +413,7 @@ This function restores all organs.
 	return max(0,traumatic_shock)
 
 //Electrical shock
+
 /mob/living/carbon/human/apply_shock(var/shock_damage, var/def_zone, var/base_siemens_coeff = 1.0)
 	var/obj/item/organ/external/initial_organ = get_organ(check_zone(def_zone, src))
 	if(!initial_organ)
@@ -482,7 +483,9 @@ This function restores all organs.
 	var/list/EMP = list()
 	for(var/obj/item/organ/external/limb in limbs)
 		EMP += limb
-		EMP += limb.internal_organs
-		EMP += limb.implants
+		if(LAZYLEN(limb.internal_organs))
+			EMP += limb.internal_organs
+		if(LAZYLEN(limb.implants))
+			EMP += limb.implants
 	for(var/atom/E in EMP)
 		E.emp_act(severity)
