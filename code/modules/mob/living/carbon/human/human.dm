@@ -1341,7 +1341,8 @@
 	species.handle_pre_spawn(src)
 	apply_species_cultural_info()
 	apply_species_appearance()
-	species.create_organs(src)		//syncs organ dna
+	if(!length(organs))
+		species.create_organs(src)		//syncs organ dna
 	species.handle_post_spawn(src)
 
 	UpdateAppearance() //Apply dna appearence to mob, causes DNA to change because filler values are regenerated
