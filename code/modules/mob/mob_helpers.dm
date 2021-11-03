@@ -22,7 +22,7 @@
 		for(var/obj/item/organ/external/E in organs)
 			if(BP_IS_PROSTHETIC(E))
 				robolimb_count++
-		full_prosthetic = (robolimb_count == organs.len)
+		full_prosthetic = robolimb_count > 0 && (robolimb_count == organs.len) //If no organs, no way to tell
 		update_emotes()
 	return full_prosthetic
 
