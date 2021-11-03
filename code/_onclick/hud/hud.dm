@@ -37,6 +37,18 @@
 	var/obj/screen/movable/action_button/hide_toggle/hide_actions_toggle
 	var/action_buttons_hidden = FALSE
 
+	var/static/list/hidden_inventory_slots = list(
+		slot_head_str,
+		slot_shoes_str,
+		slot_l_ear_str,
+		slot_r_ear_str,
+		slot_gloves_str,
+		slot_glasses_str,
+		slot_w_uniform_str,
+		slot_wear_suit_str,
+		slot_wear_mask_str
+	)
+
 /datum/hud/New(mob/owner)
 	mymob = owner
 	instantiate()

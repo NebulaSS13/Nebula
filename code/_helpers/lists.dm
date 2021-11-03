@@ -369,9 +369,9 @@ Checks if a list has the same entries and values as an element of big.
 		for(var/i=1, i<=max, i++)
 			if(bitfield & bit)
 				r += wordlist[i]
-			bit = bit << 1
+			bit = BITSHIFT_LEFT(bit, 1)
 	else
-		for(var/bit=1, bit<=65535, bit = bit << 1)
+		for(var/bit=1, bit<=65535, bit = BITSHIFT_LEFT(bit, 1))
 			if(bitfield & bit)
 				r += bit
 

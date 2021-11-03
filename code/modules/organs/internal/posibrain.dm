@@ -23,6 +23,7 @@
 	relative_size = 60
 	req_access = list(access_robotics)
 	status = ORGAN_PROSTHETIC //triggers robotization on init
+	scale_max_damage_to_species_health = FALSE
 
 	var/mob/living/silicon/sil_brainmob/brainmob = null
 	var/searching = 0
@@ -311,8 +312,9 @@
 	icon_state = "mmi-empty"
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
-	vital = 1
+	vital = TRUE
 	status = ORGAN_PROSTHETIC //triggers robotization on init
+	scale_max_damage_to_species_health = FALSE
 	var/obj/item/mmi/stored_mmi
 	var/datum/mind/persistantMind //Mind that the organ will hold on to after being removed, used for transfer_and_delete
 	var/ownerckey // used in the event the owner is out of body
@@ -357,7 +359,9 @@
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(istype(parent))
 		removed(user, 0)
-		parent.implants += transfer_and_delete()
+		var/brain = transfer_and_delete()
+		if(brain)
+			LAZYADD(parent.implants, brain)
 
 /obj/item/organ/internal/mmi_holder/removed()
 	if(owner && owner.mind)

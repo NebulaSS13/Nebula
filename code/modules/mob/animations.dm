@@ -32,7 +32,7 @@
 	is_floating = 1
 
 	var/amplitude = 2 //maximum displacement from original position
-	var/period = 36 //time taken for the mob to go up >> down >> original position, in deciseconds. Should be multiple of 4
+	var/period = 36 //time taken for the mob to go up > down > original position, in deciseconds. Should be multiple of 4
 
 	var/top = default_pixel_z + amplitude
 	var/bottom = default_pixel_z - amplitude
@@ -75,6 +75,10 @@
 
 	animate(src, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff, transform = rotated_transform, time = 2, easing = BACK_EASING | EASE_IN)
 	animate(pixel_x = pixel_x, pixel_y = pixel_y, transform = initial_transform, time = 2, easing = BACK_EASING | EASE_IN)
+
+	if(buckled_mob)
+		buckled_mob.do_attack_animation(A, weapon)
+
 	sleep(4)
 	reset_offsets()
 

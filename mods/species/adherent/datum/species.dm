@@ -18,7 +18,6 @@
 	They once served their creators faithfully, but were left orphaned by a stellar apocalypse."
 	hidden_from_codex = FALSE
 	silent_steps = TRUE
-	preview_icon = 'mods/species/adherent/icons/preview.dmi'
 
 	meat_type = null
 	bone_material = null

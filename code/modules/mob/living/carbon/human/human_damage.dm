@@ -331,6 +331,9 @@ This function restores all organs.
 		return 0
 	return
 
+/mob/living/carbon/human/get_organs()
+	return organs
+
 /mob/living/carbon/human/get_organ(var/zone)
 	return organs_by_name[check_zone(zone, src, base_zone_only = TRUE)]
 

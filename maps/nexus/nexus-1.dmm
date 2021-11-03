@@ -2360,10 +2360,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/starboard/fore)
 "we" = (
-/obj/structure/sealant_injector{
-	anchored = 1;
-	density = 1
-	},
+/obj/structure/sealant_injector,
 /obj/item/gun/launcher/sealant/mapped,
 /obj/effect/floor_decal/corner/yellow/diagonal,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -2557,6 +2554,10 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/nexus/command)
+"xX" = (
+/obj/level_data/main_level,
+/turf/space,
+/area/space)
 "yf" = (
 /obj/effect/floor_decal/corner/lightgrey/diagonal,
 /obj/structure/cable{
@@ -6205,7 +6206,7 @@ tS
 tS
 tS
 tS
-tS
+xX
 tS
 tS
 tS

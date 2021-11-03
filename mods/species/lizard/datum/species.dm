@@ -14,7 +14,6 @@
 /decl/species/lizard
 	name = SPECIES_LIZARD
 	name_plural = SPECIES_LIZARD
-	preview_icon = 'mods/species/lizard/icons/preview.dmi'
 	skin_material = /decl/material/solid/skin/lizard
 
 	available_bodytypes = list(
@@ -89,7 +88,7 @@
 		BP_BRAIN = /obj/item/organ/internal/brain/lizard
 	)
 
-	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail)
+	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/lizard)
 
 	appearance_descriptors = list(
 		/datum/appearance_descriptor/height = 1.25,

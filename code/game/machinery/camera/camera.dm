@@ -204,7 +204,7 @@
 
 /obj/machinery/camera/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/paper))
-		var/datum/extension/network_device/camera/D = get_extension(src, /datum/extension/network_device/camera)
+		var/datum/extension/network_device/camera/D = get_extension(src, /datum/extension/network_device)
 		D.show_paper(W, user)
 	return ..()
 

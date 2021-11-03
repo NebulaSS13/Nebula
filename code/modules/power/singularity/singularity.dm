@@ -1,6 +1,5 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
-
-/obj/singularity/
+var/global/list/singularities = list()
+/obj/singularity
 	name = "gravitational singularity"
 	desc = "A gravitational singularity."
 	icon = 'icons/obj/singularity.dmi'
@@ -35,7 +34,7 @@
 	//CARN: admin-alert for chuckle-fuckery.
 	admin_investigate_setup()
 	energy = starting_energy
-
+	global.singularities += src
 	if (temp)
 		QDEL_IN(src, temp)
 	START_PROCESSING(SSobj, src)
@@ -45,6 +44,7 @@
 			break
 
 /obj/singularity/Destroy()
+	global.singularities -= src
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 

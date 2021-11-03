@@ -142,7 +142,7 @@
 		species.handle_post_move(src)
 		if(client)
 			var/turf/B = GetAbove(src)
-			up_hint.icon_state = "uphint[(B ? B.is_open() : 0)]"
+			up_hint.icon_state = "uphint[!!(B && TURF_IS_MIMICKING(B))]"
 
 /mob/living/carbon/human/proc/handle_leg_damage()
 	if(!can_feel_pain())
@@ -165,5 +165,8 @@
 	var/old_lying = lying
 	. = ..()
 	if(lying && !old_lying && !resting && !buckled) // fell down
+		if(ismob(buckled))
+			var/mob/M = buckled
+			M.unbuckle_mob()
 		var/decl/bodytype/B = get_bodytype()
 		playsound(loc, isSynthetic() ? pick(B.synthetic_bodyfall_sounds) : pick(B.bodyfall_sounds), 50, TRUE, -1)

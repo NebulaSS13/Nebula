@@ -57,9 +57,9 @@
 
 		var/obj/L = null
 
-		for(var/obj/effect/landmark/sloc in landmarks_list)
-			if(sloc.name != C.data) continue
-			if(locate(/mob/living) in sloc.loc) continue
+		for(var/obj/effect/landmark/sloc in global.landmarks_list)
+			if(sloc.name != C.data || (locate(/mob/living) in sloc.loc))
+				continue
 			L = sloc
 			break
 
@@ -88,7 +88,7 @@
 	var/list/areaindex = list()
 
 	. = TRUE
-	for(var/obj/item/radio/beacon/R in world)
+	for(var/obj/item/radio/beacon/R in global.radio_beacons)
 		if(!R.functioning)
 			continue
 		var/turf/T = get_turf(R)
@@ -103,7 +103,7 @@
 			areaindex[tmpname] = 1
 		L[tmpname] = R
 
-	for (var/obj/item/implant/tracking/I in world)
+	for (var/obj/item/implant/tracking/I in global.tracking_implants)
 		if (!I.implanted || !ismob(I.loc))
 			continue
 		else

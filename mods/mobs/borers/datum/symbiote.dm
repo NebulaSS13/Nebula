@@ -40,7 +40,7 @@ var/global/list/symbiote_starting_points = list()
 
 	if(symbiote.host)
 		if(symbiote.host.mind)
-			var/a_the = (symbiote.host.mind.assigned_job && symbiote.host.mind.assigned_job.total_positions == 1) ? "the" : "a"
+			var/a_the = (symbiote.host.mind.assigned_job?.total_positions == 1) ? "the" : "a"
 			var/use_title = symbiote.host.mind.role_alt_title || symbiote.host.mind.assigned_role
 			to_chat(symbiote, SPAN_NOTICE("Your current host is <b>\the [symbiote.host.real_name]</b>, [a_the] <b>[use_title]</b>. Help them stay safe and happy, and assist them in achieving their goals. <b>Remember, your host's desires take precedence over everyone else's.</b>"))
 			to_chat(symbiote.host, SPAN_NOTICE("Your current symbiote, <b>[symbiote.name]</b>, has awakened. They will help you in whatever way they can. Treat them kindly."))
@@ -76,7 +76,7 @@ var/global/list/symbiote_starting_points = list()
 	if(host)
 		var/obj/item/organ/external/head = host.get_organ(BP_HEAD)
 		symbiote.host = host
-		head.implants += symbiote
+		LAZYADD(head.implants, symbiote)
 		symbiote.forceMove(head)
 		if(!symbiote.host_brain)
 			symbiote.host_brain = new(symbiote)

@@ -14352,6 +14352,10 @@
 /obj/effect/decal/cleanable/blood/oil,
 /turf/simulated/floor/plating,
 /area/ministation/maint/sw)
+"NO" = (
+/obj/level_data/main_level,
+/turf/space,
+/area/space)
 "NR" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
@@ -17862,7 +17866,7 @@ aa
 aa
 aa
 aa
-aa
+NO
 aa
 aa
 aa

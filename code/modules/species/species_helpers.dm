@@ -36,7 +36,42 @@ var/global/list/stored_shock_by_ref = list()
 	return /decl/material/liquid/nutriment
 
 /decl/species/proc/handle_post_species_pref_set(var/datum/preferences/pref)
-	return
+	if(!pref)
+		return
+	if(length(base_markings))
+		for(var/mark_type in base_markings)
+			if(!LAZYACCESS(pref.body_markings, mark_type))
+				LAZYSET(pref.body_markings, mark_type, base_markings[mark_type])
+	pref.skin_colour = base_color
+	pref.eye_colour = base_eye_color
+	pref.hair_colour = base_hair_color
+	pref.facial_hair_colour = base_hair_color
+
+/decl/species/proc/customize_preview_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
+
+	if(length(base_markings))
+		for(var/mark_type in base_markings)
+			var/decl/sprite_accessory/marking/mark_decl = GET_DECL(mark_type)
+			for(var/bp in mark_decl.body_parts)
+				var/obj/item/organ/external/O = mannequin.organs_by_name[bp]
+				if(O && !LAZYACCESS(O.markings, mark_type))
+					LAZYSET(O.markings, mark_type, base_markings[mark_type])
+
+	for(var/obj/item/organ/external/E in mannequin.organs)
+		E.skin_colour = base_color
+
+	mannequin.eye_colour = base_eye_color
+	mannequin.hair_colour = base_hair_color
+	mannequin.facial_hair_colour = base_hair_color
+	set_default_hair(mannequin)
+
+	mannequin.force_update_limbs()
+	mannequin.update_mutations(0)
+	mannequin.update_body(0)
+	mannequin.update_underwear(0)
+	mannequin.update_hair(0)
+	mannequin.update_icon()
+	mannequin.update_transform()
 
 /decl/species/proc/get_resized_organ_w_class(var/organ_w_class)
 	. = Clamp(organ_w_class + mob_size_difference(mob_size, MOB_SIZE_MEDIUM), ITEM_SIZE_TINY, ITEM_SIZE_GARGANTUAN)

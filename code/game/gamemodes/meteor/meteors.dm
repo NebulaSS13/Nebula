@@ -160,7 +160,7 @@ var/global/list/meteors_cataclysm = list(\
 	if(loc == dest)
 		qdel(src)
 
-/obj/effect/meteor/touch_map_edge()
+/obj/effect/meteor/touch_map_edge(var/overmap_id = OVERMAP_ID_SPACE)
 	if(move_count > TRANSITIONEDGE)
 		qdel(src)
 

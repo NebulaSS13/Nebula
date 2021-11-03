@@ -238,7 +238,7 @@
 				if(user?.mind?.initial_account)
 					t += "<i>You recall your personal account number is <b>#[user.mind.initial_account.account_number]</b> and your PIN is <b>[user.mind.initial_account.remote_access_pin]</b>.</i><br/>"
 
-		var/datum/browser/written/popup = new(user, "ATM", machine_id)
+		var/datum/browser/written_digital/popup = new(user, "ATM", machine_id)
 		popup.set_content(jointext(t,null))
 		popup.open()
 	else

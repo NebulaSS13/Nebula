@@ -1,10 +1,12 @@
-/datum/unit_test/currency_validation
+/datum/unit_test/decl_validation
 	name = "DECL: UIDs shall be unique and valid"
 	var/static/list/mandatory_uid_types = list(
 		/decl/material
 	)
 
-/datum/unit_test/currency_validation/start_test()
+// Handled manually to avoid initializing decls unnecessarily.
+#define DECL_TYPE_IS_ABSTRACT(DECL, DTYPE) (initial(DECL.abstract_type) == DTYPE)
+/datum/unit_test/decl_validation/start_test()
 
 	var/list/failures = list()
 
@@ -12,21 +14,27 @@
 	for(var/mandatory_type in mandatory_uid_types)
 		for(var/decl_type in typesof(mandatory_type))
 			var/decl/decl = decl_type
-			var/decl_uid = initial(decl.uid)
-			if(!istext(decl_uid) && initial(decl.abstract_type) != decl_type)
-				failures += "[decl_type] - non-text UID '[decl_uid || "NULL"]' on mandatory type"
+			if(DECL_TYPE_IS_ABSTRACT(decl, decl_type))
+				continue
+			decl = GET_DECL(decl_type)
+			if(!istext(decl.uid))
+				failures += "[decl_type] - non-text UID '[decl.uid || "NULL"]' on mandatory type"
 
 	// Check uid uniqueness.
 	var/list/seen_uids = list()
 	for(var/decl_type in typesof(/decl))
 		var/decl/decl = decl_type
-		if(initial(decl.abstract_type) == decl_type)
+		if(DECL_TYPE_IS_ABSTRACT(decl, decl_type))
 			continue
-		var/decl_uid = initial(decl.uid)
-		if(decl_uid && seen_uids[decl_uid])
-			failures += "[decl_type] - non-unique UID '[decl_uid || "NULL"]' (first seen on [seen_uids[decl_uid]])"
+		decl = GET_DECL(decl_type)
+		if(isnull(decl.uid))
+			continue
+		if(!istext(decl.uid))
+			failures += "[decl_type] - non-null non-text UID '[decl.uid]'"
+		else if(seen_uids[decl.uid])
+			failures += "[decl_type] - non-unique UID '[decl.uid || "NULL"]' (first seen on [seen_uids[decl.uid]])"
 		else
-			seen_uids[decl_uid] = decl_type
+			seen_uids[decl.uid] = decl_type
 
 	// Report failures.
 	if(length(failures))
@@ -34,3 +42,4 @@
 	else
 		pass("All /decl UIDs were validated successfully.")
 	return 1
+#undef DECL_TYPE_IS_ABSTRACT

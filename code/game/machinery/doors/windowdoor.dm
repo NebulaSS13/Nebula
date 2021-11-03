@@ -176,8 +176,11 @@
 
 /obj/machinery/door/window/attackby(obj/item/I, mob/user)
 	//If it's in the process of opening/closing, ignore the click
-	if (src.operating == 1)
+	if(operating)
 		return
+
+	if(bash(I, user))
+		return TRUE
 
 	. = ..()
 	if(.)
@@ -197,8 +200,9 @@
 
 /obj/machinery/door/window/bash(obj/item/I, mob/user)
 	//Emags and ninja swords? You may pass.
-	if (istype(I, /obj/item/energy_blade/blade))
-		if(emag_act(10, user))
+	if (istype(I, /obj/item/energy_blade))
+		var/obj/item/energy_blade/blade = I
+		if(blade.is_special_cutting_tool() && emag_act(10, user))
 			spark_at(src.loc, amount=5)
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			visible_message(SPAN_WARNING("The glass door was sliced open by [user]!"))

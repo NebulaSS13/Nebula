@@ -47,3 +47,22 @@
 	animate(transform = turn(A.transform, (mpx - mpy) * 4), time = 0.6, easing = EASE_OUT)
 	animate(pixel_x = ipx, pixel_y = ipy, time = 0.6, easing = EASE_IN)
 	animate(transform = M, time = 0.6, easing = EASE_IN)
+
+/proc/flick_overlay(image/I, list/show_to, duration)
+	for(var/client/C in show_to)
+		C.images += I
+	addtimer(CALLBACK(GLOBAL_PROC, .proc/remove_images_from_clients, I, show_to), duration)
+
+/atom/movable/proc/do_attack_effect(atom/A, effect) //Simple effects for telegraphing or marking attack locations
+	if (effect)
+		var/image/I = image('icons/effects/effects.dmi', A, effect, ABOVE_PROJECTILE_LAYER)
+
+		if (!I)
+			return
+
+		flick_overlay(I, global.clients, 10)
+
+		// And animate the attack!
+		animate(I, alpha = 175, transform = matrix() * 0.75, pixel_x = 0, pixel_y = 0, pixel_z = 0, time = 3)
+		animate(time = 1)
+		animate(alpha = 0, time = 3, easing = CIRCULAR_EASING|EASE_OUT)

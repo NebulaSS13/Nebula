@@ -90,7 +90,7 @@
 		crust_strata = pick(possible_strata)
 
 /obj/effect/overmap/visitable/sector/exoplanet/Initialize(mapload, z_level)
-	if(global.using_map.use_overmap)
+	if(global.overmaps_by_name[overmap_id])
 		forceMove(locate(1, 1, z_level))
 	return ..()
 

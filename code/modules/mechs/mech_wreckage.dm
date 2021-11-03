@@ -1,9 +1,9 @@
 /obj/structure/mech_wreckage
 	name = "wreckage"
 	desc = "It might have some salvagable parts."
-	density = 1
+	density = TRUE
 	opacity = 1
-	anchored = 1
+	anchored = TRUE
 	icon_state = "wreck"
 	icon = 'icons/mecha/mech_part_items.dmi'
 	var/prepared

@@ -133,7 +133,7 @@
 			global.using_map.accessible_z_levels[num2text(z_index)] = accessibility_weight
 		if (base_turf_for_zs)
 			global.using_map.base_turf_by_z[num2text(z_index)] = base_turf_for_zs
-		global.using_map.player_levels |= z_index
+		global.using_map.player_levels |= z_index // TODO: make maps handle this with /obj/level_data
 
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)

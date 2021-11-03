@@ -3,6 +3,7 @@
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
 	light_color = "#77fff8"
+
 	var/obj/machinery/ftl_shunt/core/linked_core
 	var/cost = 0
 	var/plotting_jump = FALSE
@@ -24,14 +25,22 @@
 /obj/machinery/computer/ship/ftl/proc/recalc_cost()
 	if(!linked_core)
 		return INFINITY
-	var/jump_dist = get_dist(linked, locate(linked_core.shunt_x, linked_core.shunt_y, global.using_map.overmap_z))
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors["[z]"]
+	if(!istype(sector))
+		return INFINITY
+	var/jump_dist = get_dist(linked, locate(linked_core.shunt_x, linked_core.shunt_y, sector.z))
 	var/jump_cost = ((linked.vessel_mass * JOULES_PER_TON) / 1000) * jump_dist
 	return jump_cost
 
 /obj/machinery/computer/ship/ftl/proc/recalc_cost_power()
 	if(!linked_core)
 		return INFINITY
-	var/jump_dist = get_dist(linked, locate(linked_core.shunt_x, linked_core.shunt_y, global.using_map.overmap_z))
+
+	var/obj/effect/overmap/visitable/sector = global.overmap_sectors["[z]"]
+	if(!istype(sector))
+		return INFINITY
+
+	var/jump_dist = get_dist(linked, locate(linked_core.shunt_x, linked_core.shunt_y, sector.z))
 	var/jump_cost = ((linked.vessel_mass * JOULES_PER_TON) / 1000) * jump_dist
 	var/jump_cost_power = jump_cost * REQUIRED_CHARGE_MULTIPLIER
 	return jump_cost_power
@@ -48,12 +57,14 @@
 
 /obj/machinery/computer/ship/ftl/proc/is_jump_unsafe()
 	. = FALSE
-	var/dist = get_dist(locate(linked_core.shunt_x, linked_core.shunt_y, global.using_map.overmap_z), get_turf(linked))
+	var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
+	var/dist = get_dist(locate(linked_core.shunt_x, linked_core.shunt_y, overmap.assigned_z), get_turf(linked))
 	if(dist > linked_core.safe_jump_distance)
 		. = TRUE
 
 /obj/machinery/computer/ship/ftl/proc/plot_jump(var/x, var/y)
-	var/jump_dist = get_dist(linked, locate(x, y, global.using_map.overmap_z))
+	var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
+	var/jump_dist = get_dist(linked, locate(x, y, overmap.assigned_z))
 	var/plot_delay_mult
 	var/delay
 	switch(jump_dist)
@@ -154,15 +165,16 @@
 		var/input_y = to_plot_y
 		var/fumble = user.skill_check(SKILL_PILOT, SKILL_ADEPT) ? 0 : rand(-2, 2)
 
+		var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
 		if(href_list["set_shunt_x"])
 			input_x = input(user, "Enter Destination X Coordinates", "FTL Computer", to_plot_x) as num|null
 			input_x += fumble
-			input_x = Clamp(input_x, 1, global.using_map.overmap_size - 1)
+			input_x = Clamp(input_x, 1, overmap.map_size_x - 1)
 
 		if(href_list["set_shunt_y"])
 			input_y = input(user, "Enter Destination Y Coordinates", "FTL Computer", to_plot_y) as num|null
 			input_y += fumble
-			input_y = Clamp(input_y, 1, global.using_map.overmap_size - 1)
+			input_y = Clamp(input_y, 1, overmap.map_size_y - 1)
 
 		if(!CanInteract(user, state))
 			return TOPIC_NOACTION
@@ -182,7 +194,8 @@
 				to_chat(user, SPAN_WARNING("Superluminal shunt inoperable. Please try again later."))
 				return TOPIC_REFRESH
 			
-			var/dist = get_dist(locate(linked_core.shunt_x, linked_core.shunt_y, global.using_map.overmap_z), get_turf(linked))
+			var/datum/overmap/overmap = global.overmaps_by_name[overmap_id]
+			var/dist = get_dist(locate(linked_core.shunt_x, linked_core.shunt_y, overmap.assigned_z), get_turf(linked))
 			if(is_jump_unsafe()) //We are above the safe jump distance, give them a warning.
 				var/warning = alert(user, "Current shunt distance is above safe distance! Do you wish to continue?","Jump Safety System", "Yes", "No")
 				if(warning == "No" || !CanInteract(user, state))

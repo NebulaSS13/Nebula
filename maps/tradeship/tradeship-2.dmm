@@ -5112,6 +5112,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/saloon)
+"xh" = (
+/obj/level_data/main_level,
+/turf/space,
+/area/space)
 "xn" = (
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -7555,7 +7559,7 @@ aa
 aa
 aa
 aa
-aa
+xh
 aa
 aa
 aa

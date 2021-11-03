@@ -20,15 +20,21 @@
 	LAZYSET(reaction_procs, /decl/material/liquid/water, /decl/slime_colour/yellow/proc/try_water_reaction)
 
 /decl/slime_colour/yellow/handle_blood_reaction(var/datum/reagents/holder)
-	empulse(get_turf(holder.my_atom), 3, 7)
+	var/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		empulse(location, 3, 7)
 	return TRUE
 
 /decl/slime_colour/yellow/handle_uranium_reaction(var/datum/reagents/holder)
-	new /obj/item/cell/slime(get_turf(holder.my_atom))
+	var/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		new /obj/item/cell/slime(location)
 	return TRUE
 
 /decl/slime_colour/yellow/proc/try_water_reaction(var/datum/reagents/holder)
 	return handle_water_reaction(holder)
 /decl/slime_colour/yellow/proc/handle_water_reaction(var/datum/reagents/holder)
-	new /obj/item/flashlight/slime(get_turf(holder.my_atom))
+	var/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		new /obj/item/flashlight/slime(location)
 	return TRUE

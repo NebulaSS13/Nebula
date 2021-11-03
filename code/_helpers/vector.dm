@@ -112,11 +112,11 @@ return_location()
 /datum/plot_vector/proc/return_location(var/datum/vector_loc/data)
 	if(!data)
 		data = new()
-	data.loc = locate(round(loc_x / world.icon_size, 1), round(loc_y / world.icon_size, 1), loc_z)
-	if(!data.loc)
+	data.turf = locate(round(loc_x / world.icon_size, 1), round(loc_y / world.icon_size, 1), loc_z)
+	if(!data.turf)
 		return
-	data.pixel_x = loc_x - (data.loc.x * world.icon_size)
-	data.pixel_y = loc_y - (data.loc.y * world.icon_size)
+	data.pixel_x = loc_x - (data.turf.x * world.icon_size)
+	data.pixel_y = loc_y - (data.turf.y * world.icon_size)
 	return data
 
 /* 
@@ -127,9 +127,9 @@ return_turf()
 	Returns the turf the object should be currently located in.
 */
 /datum/vector_loc
-	var/turf/loc
+	var/turf/turf
 	var/pixel_x
 	var/pixel_y
 
 /datum/vector_loc/proc/return_turf()
-	return loc
+	return turf

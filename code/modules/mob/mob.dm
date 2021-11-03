@@ -1,8 +1,12 @@
-/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
+/mob/Destroy() //This makes sure that mobs with clients/keys are not just deleted from the game.
 	STOP_PROCESSING(SSmobs, src)
 	global.dead_mob_list_ -= src
 	global.living_mob_list_ -= src
 	global.player_list -= src
+
+	QDEL_NULL_LIST(pinned)
+	QDEL_NULL_LIST(embedded)
+
 	unset_machine()
 	QDEL_NULL(hud_used)
 	if(istype(ability_master))
@@ -258,7 +262,7 @@
 /mob/proc/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
 	if(status_flags & ENABLE_AI)
 		return TRUE
-	if((incapacitation_flags & INCAPACITATION_FORCELYING) && (resting || pinned.len))
+	if((incapacitation_flags & INCAPACITATION_FORCELYING) && (resting || LAZYLEN(pinned)))
 		return TRUE
 	if((incapacitation_flags & INCAPACITATION_RESTRAINED) && restrained())
 		return TRUE
@@ -578,7 +582,7 @@
 						continue
 					if(A.invisibility > see_invisible)
 						continue
-					if(is_type_in_list(A, shouldnt_see))
+					if(LAZYLEN(shouldnt_see) && is_type_in_list(A, shouldnt_see))
 						continue
 					stat(A)
 
@@ -678,15 +682,15 @@
 	return visible_implants
 
 /mob/proc/embedded_needs_process()
-	return (embedded.len > 0)
+	return !!LAZYLEN(embedded)
 
 /mob/proc/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	if(!LAZYLEN(get_visible_implants(0))) //Yanking out last object - removing verb.
 		verbs -= /mob/proc/yank_out_object
 	for(var/obj/item/O in pinned)
 		if(O == implant)
-			pinned -= O
-		if(!pinned.len)
+			LAZYREMOVE(pinned, O)
+		if(!LAZYLEN(pinned))
 			anchored = 0
 	implant.dropInto(loc)
 	implant.add_blood(src)
@@ -697,7 +701,7 @@
 	. = TRUE
 
 /mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
-	embedded -= implant
+	LAZYREMOVE(embedded, implant)
 	adjustBruteLoss(5)
 	adjustFireLoss(10)
 	. = ..()
@@ -710,7 +714,7 @@
 					affected = organ
 					break
 	if(affected)
-		affected.implants -= implant
+		LAZYREMOVE(affected.implants, implant)
 		for(var/datum/wound/wound in affected.wounds)
 			LAZYREMOVE(wound.embedded_objects, implant)
 		if(!surgical_removal)
@@ -966,7 +970,7 @@
 /mob/proc/lose_hair()
 	return
 
-/mob/proc/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+/mob/proc/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
 	if(!skip_delays)
 		to_chat(src, SPAN_WARNING("You can't make heads or tails of the words."))
 	. = stars(text_content, 5)
@@ -1045,3 +1049,6 @@
 
 /mob/get_mob()
 	return src
+
+/mob/proc/set_glide_size(var/delay)
+	glide_size = ADJUSTED_GLIDE_SIZE(delay)

@@ -111,10 +111,10 @@
 	if(O.force)
 		set_flee_target(user? user : src.loc)
 
-/mob/living/simple_animal/cat/attack_hand(mob/M)
+/mob/living/simple_animal/cat/default_hurt_interaction(mob/user)
 	. = ..()
-	if(M.a_intent == I_HURT)
-		set_flee_target(M)
+	if(.)
+		set_flee_target(user)
 
 /mob/living/simple_animal/cat/explosion_act()
 	. = ..()

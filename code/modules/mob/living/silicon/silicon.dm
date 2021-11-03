@@ -96,7 +96,7 @@
 	switch(severity)
 		if(1)
 			src.take_organ_damage(0, 16, bypass_armour = TRUE)
-			if(prob(50)) 
+			if(prob(50))
 				SET_STATUS_MAX(src, STAT_STUN, rand(5,10))
 			else
 				ADJ_STATUS(src, STAT_CONFUSE, rand(2,40))
@@ -436,3 +436,8 @@
 
 /mob/living/silicon/get_telecomms_race_info()
 	return list("Artificial Life", TRUE)
+
+/mob/living/silicon/proc/process_os()
+	var/datum/extension/interactive/os = get_extension(src, /datum/extension/interactive/os)
+	if(os)
+		os.Process()

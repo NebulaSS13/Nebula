@@ -174,8 +174,8 @@ var/global/list/solars_list = list()
 
 	// On planets, we take fewer steps because the light is mostly up
 	// Also, many planets barely have any spots with enough clear space around
-	if(global.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
+	if(isturf(loc))
+		var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[loc.z]"]
 		if(istype(E))
 			steps = 5
 
@@ -392,7 +392,7 @@ var/global/list/solars_list = list()
 
 	t += "<A href='?src=\ref[src];close=1'>Close</A>"
 
-	var/datum/browser/written/popup = new(user, "solar", name)
+	var/datum/browser/written_digital/popup = new(user, "solar", name)
 	popup.set_content(t)
 	popup.open()
 

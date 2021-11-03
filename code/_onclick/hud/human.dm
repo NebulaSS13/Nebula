@@ -267,6 +267,9 @@
 
 	hide_inventory()
 
+	hidden_inventory_update()
+	persistant_inventory_update()
+
 /mob/living/carbon/human/verb/toggle_hotkey_verbs()
 	set category = "OOC"
 	set name = "Toggle hotkey buttons"

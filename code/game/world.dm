@@ -110,7 +110,7 @@ var/global/world_topic_last = world.timeofday
 	throttle[2] = reason
 
 /world/Topic(T, addr, master, key)
-	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]"
+	direct_output(diary, "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]")
 
 	if (global.world_topic_last > world.timeofday)
 		global.world_topic_throttle = list() //probably passed midnight
@@ -168,7 +168,7 @@ var/global/world_topic_last = world.timeofday
 /world/proc/save_mode(var/the_mode)
 	var/F = file("data/mode.txt")
 	fdel(F)
-	F << the_mode
+	direct_output(F, the_mode)
 
 /hook/startup/proc/loadMOTD()
 	world.load_motd()
@@ -265,15 +265,15 @@ var/global/world_topic_last = world.timeofday
 		global.log_directory += "[replacetext(time_stamp(), ":", ".")]"
 
 	global.world_qdel_log = file("[global.log_directory]/qdel.log")
-	WRITE_FILE(global.world_qdel_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
+	to_file(global.world_qdel_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
 
 	global.world_href_log = file("[global.log_directory]/href.log") // Used for config-optional total href logging
 	diary = file("[global.log_directory]/main.log") // This is the primary log, containing attack, admin, and game logs.
-	WRITE_FILE(diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]")
+	to_file(diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]")
 
 	if(config && config.log_runtime)
 		var/runtime_log = file("[global.log_directory]/runtime.log")
-		WRITE_FILE(runtime_log, "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]")
+		to_file(runtime_log, "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]")
 		log = runtime_log // runtimes and some other output is logged directly to world.log, which is redirected here.
 
 #define FAILED_DB_CONNECTION_CUTOFF 5

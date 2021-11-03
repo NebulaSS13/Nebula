@@ -28,15 +28,17 @@
 	if(holder.has_any_reagent(inhibitors))
 		return 0
 
-	var/temperature = holder.my_atom ? holder.my_atom.temperature : T20C
+	var/atom/location = holder.get_reaction_loc()
+	var/temperature = location?.temperature || T20C
 	if(temperature < minimum_temperature || temperature > maximum_temperature)
 		return 0
 
 	return 1
 
 /decl/chemical_reaction/proc/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
-	if(thermal_product && ATOM_IS_TEMPERATURE_SENSITIVE(holder.my_atom))
-		ADJUST_ATOM_TEMPERATURE(holder.my_atom, thermal_product)
+	var/atom/location = holder.get_reaction_loc()
+	if(thermal_product && location && ATOM_IS_TEMPERATURE_SENSITIVE(location))
+		ADJUST_ATOM_TEMPERATURE(location, thermal_product)
 
 // This proc returns a list of all reagents it wants to use; if the holder has several reactions that use the same reagent, it will split the reagent evenly between them
 /decl/chemical_reaction/proc/get_used_reagents()
@@ -70,7 +72,7 @@
 
 //called after processing reactions, if they occurred
 /decl/chemical_reaction/proc/post_reaction(var/datum/reagents/holder)
-	var/atom/container = holder.my_atom
+	var/atom/container = holder.get_reaction_loc()
 	if(mix_message && container && !ismob(container))
 		var/turf/T = get_turf(container)
 		if(istype(T))

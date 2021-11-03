@@ -8,6 +8,10 @@
 // decls_repository.get_decls_of_type() and decls_repository.get_decls_of_subtype()
 // can be used similarly to typesof() and subtypesof(), returning assoc instance lists.
 
+// decls_repository.get_decl_by_id() will retrieve a decl based on a string UID - at time
+// of writing this is only set for materials and is used by omni devices to populate their
+// mapped port settings.
+
 // The /decl commandments:
 //     I.   Thou shalt not create a /decl with new().
 //     II.  Thou shalt not del() or qdel() a /decl.
@@ -27,6 +31,7 @@ var/global/repository/decls/decls_repository = new
 	for(var/decl_type in typesof(/decl))
 		var/decl/decl = decl_type
 		var/decl_uid = initial(decl.uid)
+		// is_abstract() would require us to retrieve (and instantiate) the decl, so we do it manually.
 		if(decl_uid && decl_type != initial(decl.abstract_type))
 			fetched_decl_ids[decl_uid] = decl_type
 

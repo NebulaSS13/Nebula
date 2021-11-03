@@ -1262,7 +1262,7 @@
 /area/map_template/skipjack_station/start)
 "de" = (
 /obj/structure/rack,
-/obj/item/energy_blade/sword/pirate,
+/obj/item/energy_blade/cutlass,
 /obj/item/clothing/suit/armor/pirate,
 /obj/item/clothing/suit/armor/pirate,
 /obj/item/tank/oxygen,
@@ -1277,7 +1277,7 @@
 /area/map_template/skipjack_station/start)
 "df" = (
 /obj/structure/rack,
-/obj/item/energy_blade/sword/pirate,
+/obj/item/energy_blade/cutlass,
 /obj/item/clothing/suit/armor/pirate,
 /obj/item/clothing/suit/armor/pirate,
 /obj/item/tank/oxygen,

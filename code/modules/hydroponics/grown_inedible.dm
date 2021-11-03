@@ -10,9 +10,7 @@
 /obj/item/grown/Initialize(mapload,planttype)
 	. = ..(mapload)
 
-	var/datum/reagents/R = new/datum/reagents(50)
-	reagents = R
-	R.my_atom = src
+	create_reagents(50)
 
 	//Handle some post-spawn var stuff.
 	if(planttype)

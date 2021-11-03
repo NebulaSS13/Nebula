@@ -23,6 +23,7 @@
 
 /mob/new_player/Initialize()
 	. = ..()
+	forceMove(null)
 	verbs += /mob/proc/toggle_antag_pool
 
 /mob/new_player/proc/show_lobby_menu(force = FALSE)
@@ -453,7 +454,7 @@
 /mob/new_player/MayRespawn()
 	return 1
 
-/mob/new_player/touch_map_edge()
+/mob/new_player/touch_map_edge(var/overmap_id = OVERMAP_ID_SPACE)
 	return
 
 /mob/new_player/say(var/message)
@@ -469,7 +470,7 @@
 	if(new_track)
 		new_track.play_to(src)
 
-/mob/new_player/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays)
+/mob/new_player/handle_reading_literacy(var/mob/user, var/text_content, var/skip_delays, var/digital = FALSE)
 	. = text_content
 
 /mob/new_player/handle_writing_literacy(var/mob/user, var/text_content, var/skip_delays)

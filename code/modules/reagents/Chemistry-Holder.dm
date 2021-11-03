@@ -11,21 +11,21 @@ var/global/obj/temp_reagents_holder = new
 
 /datum/reagents/New(var/maximum_volume = 120, var/atom/my_atom)
 	src.maximum_volume = maximum_volume
-	if(!istype(my_atom))
-#ifdef DISABLE_DEBUG_CRASH
-		return ..()
-#else
-		CRASH("Invalid reagents holder: [log_info_line(my_atom)]")
-#endif
-	..()
 	src.my_atom = my_atom
+	..()
 
 /datum/reagents/Destroy()
 	. = ..()
 	UNQUEUE_REACTIONS(src) // While marking for reactions should be avoided just before deleting if possible, the async nature means it might be impossible.
 	reagent_volumes = null
 	reagent_data = null
-	my_atom = null
+	if(my_atom)
+		if(my_atom.reagents == src)
+			my_atom.reagents = null
+		my_atom = null
+
+/datum/reagents/proc/get_reaction_loc()
+	return my_atom
 
 /datum/reagents/proc/get_primary_reagent_name() // Returns the name of the reagent with the biggest volume.
 	var/decl/material/reagent = get_primary_reagent_decl()
@@ -53,16 +53,16 @@ var/global/obj/temp_reagents_holder = new
 
 /datum/reagents/proc/process_reactions()
 
-	if(!my_atom?.loc)
-		return 0
+	var/atom/location = get_reaction_loc()
+	var/check_flags = location?.atom_flags || 0
 
-	if(my_atom.atom_flags & ATOM_FLAG_NO_REACT)
+	if(check_flags & ATOM_FLAG_NO_REACT)
 		return 0
 
 	var/reaction_occured = FALSE
 	var/list/eligible_reactions = list()
 
-	var/temperature = my_atom ? my_atom.temperature : T20C
+	var/temperature = location?.temperature || T20C
 	for(var/thing in reagent_volumes)
 		var/decl/material/R = GET_DECL(thing)
 
@@ -71,7 +71,7 @@ var/global/obj/temp_reagents_holder = new
 		var/replace_message
 		var/replace_sound
 
-		if(!(my_atom.atom_flags & ATOM_FLAG_NO_PHASE_CHANGE))
+		if(!(check_flags & ATOM_FLAG_NO_PHASE_CHANGE))
 			if(!isnull(R.chilling_point) && R.type != R.bypass_cooling_products_for_root_type && LAZYLEN(R.chilling_products) && temperature <= R.chilling_point)
 				replace_self_with = R.chilling_products
 				if(R.chilling_message)
@@ -83,7 +83,7 @@ var/global/obj/temp_reagents_holder = new
 					replace_message = "\The [lowertext(R.name)] [R.heating_message]"
 				replace_sound = R.heating_sound
 
-		if(isnull(replace_self_with) && !isnull(R.dissolves_in) && !(my_atom.atom_flags & ATOM_FLAG_NO_DISSOLVE) && LAZYLEN(R.dissolves_into))
+		if(isnull(replace_self_with) && !isnull(R.dissolves_in) && !(check_flags & ATOM_FLAG_NO_DISSOLVE) && LAZYLEN(R.dissolves_into))
 			for(var/other in reagent_volumes)
 				if(other == thing)
 					continue
@@ -103,11 +103,11 @@ var/global/obj/temp_reagents_holder = new
 				add_reagent(product, replace_self_with[product] * replace_amount)
 			reaction_occured = TRUE
 
-			if(my_atom)
+			if(location)
 				if(replace_message)
-					my_atom.visible_message("<span class='notice'>[html_icon(my_atom)] [replace_message]</span>")
+					location.visible_message("<span class='notice'>[html_icon(location)] [replace_message]</span>")
 				if(replace_sound)
-					playsound(my_atom, replace_sound, 80, 1)
+					playsound(location, replace_sound, 80, 1)
 
 		else // Otherwise, collect all possible reactions.
 			eligible_reactions |= SSmaterials.chemical_reactions_by_id[R.type]
@@ -260,6 +260,12 @@ var/global/obj/temp_reagents_holder = new
 			. += "[current.name] ([volume])"
 	return english_list(., "EMPTY", "", ", ", ", ")
 
+/datum/reagents/proc/get_dirtiness()
+	for(var/rtype in reagent_volumes)
+		var/decl/material/current = GET_DECL(rtype)
+		. += current.dirtiness
+	return . / length(reagent_volumes)
+
 /* Holder-to-holder and similar procs */
 /datum/reagents/proc/remove_any(var/amount = 1, var/defer_update = FALSE) // Removes up to [amount] of reagents from [src]. Returns actual amount removed.
 	. = min(amount, total_volume)
@@ -315,7 +321,7 @@ var/global/obj/temp_reagents_holder = new
 
 //Splashing reagents is messier than trans_to, the target's loc gets some of the reagents as well.
 /datum/reagents/proc/splash(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0, var/min_spill=0, var/max_spill=60, var/defer_update = FALSE)
-	
+
 	if(isturf(target))
 		trans_to_turf(target, amount, multiplier, copy, defer_update = defer_update)
 		return
@@ -379,11 +385,35 @@ var/global/obj/temp_reagents_holder = new
 	update_total()
 
 /datum/reagents/proc/touch_turf(var/turf/target)
-	if(!target || !istype(target) || !target.simulated)
+	if(!istype(target) || !target.simulated)
 		return
 	for(var/rtype in reagent_volumes)
 		var/decl/material/current = GET_DECL(rtype)
 		current.touch_turf(target, REAGENT_VOLUME(src, rtype), src)
+	var/dirtiness = get_dirtiness()
+	if(dirtiness <= DIRTINESS_CLEAN)
+		target.clean_blood()
+		target.remove_cleanables()
+	if(dirtiness != DIRTINESS_NEUTRAL)
+		if(dirtiness > DIRTINESS_NEUTRAL)
+			var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate() in target
+			if (!dirtoverlay)
+				dirtoverlay = new /obj/effect/decal/cleanable/dirt(target)
+				dirtoverlay.alpha = total_volume * dirtiness
+			else
+				dirtoverlay.alpha = min(dirtoverlay.alpha + total_volume * dirtiness, 255)
+		else
+			if(dirtiness <= DIRTINESS_STERILE)
+				target.germ_level -= min(total_volume*20, target.germ_level)
+				for(var/obj/item/I in target.contents)
+					I.was_bloodied = null
+				for(var/obj/effect/decal/cleanable/blood/B in target)
+					qdel(B)
+			if(dirtiness <= DIRTINESS_CLEAN)
+				target.clean_blood()
+				if(istype(target, /turf/simulated))
+					var/turf/simulated/simulated_turf = target
+					simulated_turf.dirt = 0
 	update_total()
 
 /datum/reagents/proc/touch_obj(var/obj/target)

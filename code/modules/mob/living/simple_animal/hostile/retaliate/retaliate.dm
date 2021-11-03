@@ -41,3 +41,11 @@
 /mob/living/simple_animal/hostile/retaliate/adjustBruteLoss(var/damage)
 	..(damage)
 	Retaliate()
+
+/mob/living/simple_animal/hostile/retaliate/buckle_mob(mob/living/M)
+	. = ..()
+	Retaliate()
+
+/mob/living/simple_animal/hostile/retaliate/try_make_grab(mob/living/user)
+	. = ..()
+	Retaliate()

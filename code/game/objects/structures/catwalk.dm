@@ -63,7 +63,7 @@
 	var/image/I
 	if(!hatch_open)
 		for(var/i = 1 to 4)
-			I = image(icon, "catwalk[connections ? connections[i] : "0"]", dir = 1<<(i-1))
+			I = image(icon, "catwalk[connections ? connections[i] : "0"]", dir = BITFLAG(i-1))
 			overlays += I
 	if(plated_tile)
 		I = image(icon, "plated")

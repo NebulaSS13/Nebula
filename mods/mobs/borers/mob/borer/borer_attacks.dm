@@ -58,4 +58,4 @@
 		if(!I) // No brain organ, so the borer moves in and replaces it permanently.
 			replace_brain()
 		else if(E) // If they're in normally, implant removal can get them out.
-			E.implants += src
+			LAZYDISTINCTADD(E.implants, src)

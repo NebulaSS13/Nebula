@@ -15,20 +15,15 @@
 
 /datum/category_item/player_setup_item/background/species/proc/sanitize_species()
 
-	var/decl/species/mob_species
-	if(!pref.species)
-		mob_species = GET_DECL(global.using_map.default_species)
-		pref.species = mob_species.name
-	else
-		mob_species = get_species_by_key(pref.species)
-
+	if(!pref.species || !get_species_by_key(pref.species))
+		pref.species = global.using_map.default_species
+	var/decl/species/mob_species = get_species_by_key(pref.species)
 	var/decl/pronouns/pronouns = get_pronouns_by_gender(pref.gender)
 	if(!istype(pronouns) || !(pronouns in mob_species.available_pronouns))
 		pronouns = mob_species.available_pronouns[1]
 		pref.gender = pronouns.name
 
 	pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)
-	pref.cultural_info = mob_species.default_cultural_info.Copy()
 
 	if(!has_flag(get_species_by_key(pref.species), HAS_UNDERWEAR))
 		pref.all_underwear.Cut()
@@ -51,8 +46,8 @@
 		playables += s
 
 	. = list()
-	. += "<tr><td colspan=3><center><h3>Species: <a href='?src=\ref[src];show_species=1'>[pref.species]</small></a></h3></td></tr>"
-	. += "</center></td></tr>"
+	. += "<table width = '100%'>"
+	. += "<tr><td colspan=3><center><h3>Species</h3></center></td></tr>"
 	. += "<tr><td colspan=3><center>"
 	for(var/s in get_playable_species())
 		var/decl/species/list_species = get_species_by_key(s)
@@ -61,9 +56,24 @@
 		else
 			. += "<a href='?src=\ref[src];set_species=[list_species.name]'>[list_species.name]</a> "
 	. += "</center><hr/></td></tr>"
-	. += "<tr><td width = '200px'>"
-	. += "<center>[current_species.get_description() || "No additional details."]</center>"
-	. += "</td>"
+
+	. += "<tr>"
+
+	var/icon/use_preview_icon = current_species.get_preview_icon()
+	if(use_preview_icon)
+		send_rsc(user, use_preview_icon, current_species.preview_icon_path)		
+		. += "<td width = '200px' align='center'><img src='[current_species.preview_icon_path]' width='[current_species.preview_icon_width]px' height='[current_species.preview_icon_height]px'></td>"
+	else
+		. += "<td width = '200px' align='center'>No preview available.</td>"
+		
+	var/desc = current_species.description || "No additional details."
+	if(hide_species && length(desc) > 200)
+		desc = "[copytext(desc, 1, 194)] <small>\[...\]</small>"
+	. += "<td width>[desc]</td>"
+	. += "<td width = '50px'><a href='?src=\ref[src];toggle_species_verbose=1'>[hide_species ? "Expand" : "Collapse"]</a></td>"
+
+	. += "</tr>"
+
 	. += "</table><hr>"
 
 	. = jointext(.,null)
@@ -75,11 +85,6 @@
 		hide_species = !hide_species
 		return TOPIC_REFRESH
 
-	else if(href_list["show_species"])
-		var/decl/species/current_species = get_species_by_key(pref.species)
-		show_browser(user, current_species.get_description(), "window=species;size=700x400")
-		return TOPIC_HANDLED
-
 	else if(href_list["set_species"])
 
 		var/choice = href_list["set_species"]
@@ -87,6 +92,8 @@
 
 			pref.species = choice
 			sanitize_species()
+			mob_species = get_species_by_key(pref.species)
+
 			prune_occupation_prefs()
 
 			//reset hair colour and skin colour

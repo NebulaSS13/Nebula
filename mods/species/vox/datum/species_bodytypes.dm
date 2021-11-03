@@ -4,11 +4,7 @@
 	icon_base =         'mods/species/vox/icons/body/body.dmi'
 	icon_deformed =     'mods/species/vox/icons/body/deformed_body.dmi'
 	husk_icon =         'mods/species/vox/icons/body/husk.dmi'
-	damage_mask =       'mods/species/vox/icons/body/damage_mask.dmi'
-	blood_mask =        'mods/species/vox/icons/body/blood_mask.dmi'
-	tail =              "voxtail"
-	tail_icon =         'mods/species/vox/icons/body/tail.dmi'
-	tail_blend =        ICON_OVERLAY
+	blood_overlays =        'mods/species/vox/icons/body/blood_overlays.dmi'
 	bodytype_flag =     BODY_FLAG_VOX
 
 /decl/bodytype/vox/Initialize()
@@ -24,3 +20,8 @@
 		slot_back_str =       list("[NORTH]" = list("x" =  0, "y" =  0), "[EAST]" = list("x" = 3, "y" =  0), "[SOUTH]" = list("x" =  0, "y" =  0),  "[WEST]" = list("x" = -3, "y" =  0))
 	)
 	. = ..()
+
+/obj/item/organ/external/tail/vox
+	tail =              "voxtail"
+	tail_icon =         'mods/species/vox/icons/body/tail.dmi'
+	tail_blend =        ICON_OVERLAY

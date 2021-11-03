@@ -205,7 +205,11 @@
 			visible_message("<span class='warning'>\The [src] struggles against \the [buckled]!</span>")
 
 	//Movement
-	if(!stop_automated_movement && wander && !anchored)
+	if(lying)
+		if(!incapacitated())
+			lying = FALSE
+			update_icon()
+	else if(!stop_automated_movement && !buckled_mob && wander && !anchored)
 		if(isturf(src.loc) && !resting)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
 			turns_since_move++
 			if(turns_since_move >= turns_per_move && (!(stop_automated_movement_when_pulled) || !LAZYLEN(grabbed_by))) //Some animals don't move when pulled
@@ -309,35 +313,36 @@
 /mob/living/simple_animal/get_hug_zone_messages(var/zone)
 	. = ..() || list(response_help_3p, response_help_1p)
 
-/mob/living/simple_animal/attack_hand(mob/user)
-	..()
+/mob/living/simple_animal/default_help_interaction(mob/user)
+	if(health > 0 && user.attempt_hug(src))
+		user.update_personal_goal(/datum/goal/achievement/specific_object/pet, type)
+		return TRUE
+	. = ..()
 
-	switch(user.a_intent)
+/mob/living/simple_animal/default_disarm_interaction(mob/user)
+	. = ..()
+	if(!.)
+		user.visible_message(SPAN_NOTICE("\The [user] [response_disarm] \the [src]."))
+		user.do_attack_animation(src)
+		return TRUE
 
-		if(I_HELP)
-			if(health > 0 && user.attempt_hug(src))
-				user.update_personal_goal(/datum/goal/achievement/specific_object/pet, type)
-
-		if(I_DISARM)
-			user.visible_message(SPAN_NOTICE("\The [user] [response_disarm] \the [src]."))
-			user.do_attack_animation(src)
-			//TODO: Push the mob away or something
-
-		if(I_HURT)
-			var/dealt_damage = harm_intent_damage
-			var/harm_verb = response_harm
-			if(ishuman(user))
-				var/mob/living/carbon/human/H = user
-				var/decl/natural_attack/attack = H.get_unarmed_attack(src)
-				if(istype(attack))
-					dealt_damage = attack.damage <= dealt_damage ? dealt_damage : attack.damage
-					harm_verb = pick(attack.attack_verb)
-					if(attack.sharp || attack.edge)
-						adjustBleedTicks(dealt_damage)
-
-			adjustBruteLoss(dealt_damage)
-			user.visible_message(SPAN_DANGER("\The [user] [harm_verb] \the [src]!"))
-			user.do_attack_animation(src)
+/mob/living/simple_animal/default_hurt_interaction(mob/user)
+	. = ..()
+	if(!.)
+		var/dealt_damage = harm_intent_damage
+		var/harm_verb = response_harm
+		if(ishuman(user))
+			var/mob/living/carbon/human/H = user
+			var/decl/natural_attack/attack = H.get_unarmed_attack(src)
+			if(istype(attack))
+				dealt_damage = attack.damage <= dealt_damage ? dealt_damage : attack.damage
+				harm_verb = pick(attack.attack_verb)
+				if(attack.sharp || attack.edge)
+					adjustBleedTicks(dealt_damage)
+		adjustBruteLoss(dealt_damage)
+		user.visible_message(SPAN_DANGER("\The [user] [harm_verb] \the [src]!"))
+		user.do_attack_animation(src)
+		return TRUE
 
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/stack/medical))

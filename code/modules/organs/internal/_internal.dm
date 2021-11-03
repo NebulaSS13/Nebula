@@ -2,6 +2,7 @@
 				INTERNAL ORGANS DEFINES
 ****************************************************/
 /obj/item/organ/internal
+	scale_max_damage_to_species_health = TRUE
 	var/alive_icon //icon to use when the organ is alive
 	var/dead_icon // Icon to use when the organ has died.
 	var/prosthetic_icon //Icon to use when the organ is robotic
@@ -17,28 +18,23 @@
 	if(max_damage)
 		min_bruised_damage = FLOOR(max_damage / 4)
 	. = ..()
-	if(iscarbon(loc))
-		var/mob/living/carbon/holder = loc
-		holder.internal_organs |= src
-
-		var/mob/living/carbon/human/H = holder
-		if(istype(H))
-			var/obj/item/organ/external/E = H.get_organ(parent_organ)
-			if(!E)
-				. = INITIALIZE_HINT_QDEL
-				CRASH("[src] spawned in [holder] without a parent organ: [parent_organ].")
-			E.internal_organs |= src
-			E.cavity_max_w_class = max(E.cavity_max_w_class, w_class)
-			E.update_internal_organs_cost()
+	if(. != INITIALIZE_HINT_QDEL && owner)
+		owner.internal_organs |= src
+		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
+		if(!E)
+			PRINT_STACK_TRACE("[src] spawned in [owner] without a parent organ: [parent_organ].")
+			return INITIALIZE_HINT_QDEL
+		LAZYDISTINCTADD(E.internal_organs, src)
+		E.cavity_max_w_class = max(E.cavity_max_w_class, w_class)
+		E.update_internal_organs_cost()
 
 /obj/item/organ/internal/Destroy()
 	if(owner)
 		owner.internal_organs -= src
 		owner.internal_organs_by_name -= organ_tag
-		while(null in owner.internal_organs)
-			owner.internal_organs -= null
 		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
-		if(istype(E)) E.internal_organs -= src
+		if(istype(E))
+			LAZYREMOVE(E.internal_organs, src)
 	return ..()
 
 /obj/item/organ/internal/set_species(species_name)
@@ -51,7 +47,7 @@
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(istype(parent)) //TODO ensure that we don't have to check this.
 		removed(user, 0)
-		parent.implants += src
+		LAZYADD(parent.implants, src)
 
 /obj/item/organ/internal/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
 	if(owner)
@@ -63,7 +59,7 @@
 		if(detach)
 			var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
 			if(affected)
-				affected.internal_organs -= src
+				LAZYREMOVE(affected.internal_organs, src)
 				status |= ORGAN_CUT_AWAY
 	..()
 
@@ -83,8 +79,8 @@
 
 	STOP_PROCESSING(SSobj, src)
 	target.internal_organs |= src
-	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src
+	LAZYDISTINCTADD(affected.internal_organs, src)
 	return 1
 
 /obj/item/organ/internal/remove_rejuv()
@@ -94,7 +90,8 @@
 		while(null in owner.internal_organs)
 			owner.internal_organs -= null
 		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
-		if(istype(E)) E.internal_organs -= src
+		if(istype(E))
+			LAZYREMOVE(E.internal_organs, src)
 	..()
 
 /obj/item/organ/internal/is_usable()

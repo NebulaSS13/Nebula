@@ -49,6 +49,7 @@
 /datum/category_item/player_setup_item/player_global/pai/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["option"])
 		var/t
+		. = TOPIC_REFRESH
 		switch(href_list["option"])
 			if("name")
 				t = sanitizeName(input(user, "Enter a name for your pAI", "Global Preference", candidate.name) as text|null, MAX_NAME_LEN, 1)
@@ -71,6 +72,7 @@
 				if(!isnull(t) && CanUseTopic(user))
 					candidate.chassis = t
 				update_pai_preview(user)
+				. = TOPIC_HARD_REFRESH
 			if("say")
 				t = input(usr,"What theme would you like to use for your speech verbs?") as null|anything in global.possible_say_verbs
 				if(!isnull(t) && CanUseTopic(user))
@@ -78,8 +80,8 @@
 			if("cyclebg")
 				bgstate = next_in_list(bgstate, bgstate_options)
 				update_pai_preview(user)
-
-		return TOPIC_REFRESH
+				. = TOPIC_HARD_REFRESH
+		return 
 
 	return ..()
 

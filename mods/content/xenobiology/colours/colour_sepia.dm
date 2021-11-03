@@ -9,10 +9,14 @@
 	)
 
 /decl/slime_colour/sepia/handle_blood_reaction(var/datum/reagents/holder)
-	for(var/i in 1 to 5)
-		new /obj/item/camera_film(get_turf(holder.my_atom))
+	var/turf/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		for(var/i in 1 to 5)
+			new /obj/item/camera_film(location)
 	return TRUE
 
 /decl/slime_colour/sepia/handle_uranium_reaction(var/datum/reagents/holder)
-	new /obj/item/camera(get_turf(holder.my_atom))
+	var/turf/location = get_turf(holder.get_reaction_loc())
+	if(location)
+		new /obj/item/camera(location)
 	return TRUE

@@ -173,10 +173,9 @@
 	else
 		..()
 
-/mob/living/bot/medbot/attack_hand(var/mob/user)
-	var/mob/living/carbon/human/H = user
-	if(H.a_intent == I_DISARM && !is_tipped)
-		H.visible_message(SPAN_DANGER("[H] begins tipping over [src]."), SPAN_WARNING("You begin tipping over [src]..."))
+/mob/living/bot/medbot/default_disarm_interaction(mob/user)
+	if(!is_tipped)
+		user.visible_message(SPAN_DANGER("\The [user] begins tipping over [src]."), SPAN_WARNING("You begin tipping over [src]..."))
 
 		if(world.time > last_tipping_action_voice + 15 SECONDS && vocal)
 			last_tipping_action_voice = world.time // message for tipping happens when we start interacting, message for righting comes after finishing
@@ -184,16 +183,18 @@
 			var/message = pick(messagevoice)
 			say(message)
 			playsound(src, messagevoice[message], 70, FALSE)
+		if(do_after(user, 3 SECONDS, target=src))
+			tip_over(user)
+		return TRUE
+	. = ..()
 
-		if(do_after(H, 3 SECONDS, target=src))
-			tip_over(H)
-
-	else if(H.a_intent == I_HELP && is_tipped)
-		H.visible_message(SPAN_NOTICE("[H] begins righting [src]."), SPAN_NOTICE("You begin righting [src]..."))
-		if(do_after(H, 3 SECONDS, target=src))
-			set_right(H)
-	else
-		Interact(user)
+/mob/living/bot/medbot/default_help_interaction(mob/user)
+	if(is_tipped)
+		user.visible_message(SPAN_NOTICE("\The [user] begins righting [src]."), SPAN_NOTICE("You begin righting [src]..."))
+		if(do_after(user, 3 SECONDS, target=src))
+			set_right(user)
+		return TRUE
+	. = ..()
 
 /mob/living/bot/medbot/GetInteractTitle()
 	. = "<head><title>Medibot v1.0 controls</title></head>"

@@ -2,13 +2,10 @@
 #define blocked_mult(blocked) max(1 - (blocked/100), 0)
 
 /proc/mobs_in_view(var/range, var/source)
-	var/list/mobs = list()
 	for(var/atom/movable/AM in view(range, source))
 		var/M = AM.get_mob()
 		if(M)
-			mobs |= M
-
-	return mobs
+			LAZYDISTINCTADD(., M)
 
 /proc/random_hair_style(gender, species)
 	var/decl/species/mob_species = get_species_by_key(species || global.using_map.default_species)

@@ -5,9 +5,6 @@
 	return is_psionic_nullifier
 
 /decl/material/nullglass
-	is_psionic_nullifier = TRUE
-
-/decl/material/nullglass
 	name = "nullglass"
 	color = COLOR_NULLGLASS
 	conductive = 1
@@ -21,6 +18,8 @@
 	door_icon_base = "stone"
 	destruction_desc = "shatters"
 	hitsound = 'sound/effects/Glasshit.ogg'
+	is_psionic_nullifier = TRUE
+	uid = "solid_nullglass"
 
 /decl/material/nullglass/generate_recipes()
 	. = ..()

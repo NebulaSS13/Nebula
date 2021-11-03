@@ -113,6 +113,10 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
+"oy" = (
+/obj/level_data/main_level,
+/turf/space,
+/area/space)
 "oZ" = (
 /obj/structure/cable,
 /obj/machinery/power/debug_items/infinite_generator,
@@ -595,7 +599,7 @@ Hk
 Hk
 Hk
 Hk
-Hk
+oy
 Hk
 Hk
 Hk

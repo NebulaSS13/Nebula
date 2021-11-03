@@ -29,7 +29,7 @@
 	..()
 	if(holder)
 		var/datum/extension/assembly/modular_computer/assembly = get_extension(holder, /datum/extension/assembly)
-		if(assembly && assembly.enabled) 
+		if(assembly && assembly.enabled)
 			assembly.shutdown_device()
 
 /datum/extension/interactive/os/device/system_boot()
@@ -52,9 +52,8 @@
 	if(os)
 		. += os.get_header_data()
 
-/obj/item/modular_computer/check_eye()
+/obj/item/modular_computer/check_eye(user)
 	var/datum/extension/interactive/os/os = get_extension(src, /datum/extension/interactive/os)
 	if(os)
-		return os.check_eye()
-	else
-		return ..()
+		return os.check_eye(user)
+	return ..()

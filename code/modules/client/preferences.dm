@@ -107,11 +107,23 @@ var/global/list/time_prefs_fixed = list()
 				// If there's no old save, there'll be nothing to load.
 				return
 
-		stage = "load"
+		stage = "load_preferences"
 		load_preferences()
-		load_character()
+		if(SScharacter_setup.initialized)
+			stage = "load_character"
+			load_character()
+		else
+			SScharacter_setup.queue_load_character(src)
 	catch(var/exception/E)
 		load_failed = "{[stage]} [E]"
+		throw E
+
+// separated out to avoid stalling SScharacter_setup's Initialize
+/datum/preferences/proc/lateload_character()
+	try
+		load_character()
+	catch(var/exception/E)
+		load_failed = "{lateload_character} [E]"
 		throw E
 
 /datum/preferences/proc/migrate_legacy_preferences()
@@ -267,7 +279,7 @@ var/global/list/time_prefs_fixed = list()
 
 	if(href_list["preference"] == "open_whitelist_forum")
 		if(config.forumurl)
-			user << link(config.forumurl)
+			direct_output(user, link(config.forumurl))
 		else
 			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
@@ -319,6 +331,9 @@ var/global/list/time_prefs_fixed = list()
 	return 1
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
+
+	if(!player_setup)
+		return // WHY IS THIS EVEN HAPPENING.
 
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
@@ -378,7 +393,7 @@ var/global/list/time_prefs_fixed = list()
 
 	for(var/N in character.organs_by_name)
 		var/obj/item/organ/external/O = character.organs_by_name[N]
-		O.markings.Cut()
+		LAZYCLEARLIST(O.markings)
 
 	for(var/M in body_markings)
 		var/decl/sprite_accessory/marking/mark_datum = GET_DECL(M)
@@ -387,7 +402,7 @@ var/global/list/time_prefs_fixed = list()
 		for(var/BP in mark_datum.body_parts)
 			var/obj/item/organ/external/O = character.organs_by_name[BP]
 			if(O)
-				O.markings[M] = mark_color
+				LAZYSET(O.markings, M, mark_color)
 
 	if(LAZYLEN(appearance_descriptors))
 		character.appearance_descriptors = appearance_descriptors.Copy()
@@ -467,19 +482,11 @@ var/global/list/time_prefs_fixed = list()
 	if(client.get_preference_value(/datum/client_preference/fullscreen_mode) != PREF_OFF)
 		client.toggle_fullscreen(client.get_preference_value(/datum/client_preference/fullscreen_mode))
 
-/datum/preferences/proc/setup_preferences(initialization = FALSE)
-	// This proc will be called twice if SScharacter_setup is not initialized,
-	// so, don't create prefs again.
-
-	// give them default keybinds too
+/datum/preferences/proc/setup_preferences()
+	// give them default keybinds
 	key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key)
 
 	if(istype(client))
-
 		// Preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum).
 		SScharacter_setup.preferences_datums[client.ckey] = src
-
-		if(initialization || SScharacter_setup.initialized)
-			setup()
-		else
-			SScharacter_setup.queue_prefs(src)
+		setup()

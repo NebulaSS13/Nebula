@@ -1595,6 +1595,10 @@
 	},
 /turf/simulated/floor,
 /area/ship/trade/fore_port_underside_maint)
+"Dt" = (
+/obj/level_data/main_level,
+/turf/space,
+/area/space)
 "Dz" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4;
@@ -2566,7 +2570,7 @@ aa
 aa
 aa
 aa
-aa
+Dt
 aa
 aa
 aa

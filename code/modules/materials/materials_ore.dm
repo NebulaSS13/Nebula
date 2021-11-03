@@ -23,7 +23,7 @@
 	if(icon_state == "dust")
 		var/mob/living/carbon/human/H = hit_atom
 		if(istype(H) && H.check_has_eyes() && prob(85))
-			H << "<span class='danger'>Some of \the [src] gets in your eyes!</span>"
+			to_chat(H, SPAN_DANGER("Some of \the [src] gets in your eyes!"))
 			ADJ_STATUS(H, STAT_BLIND, 5)
 			ADJ_STATUS(H, STAT_BLURRY, 10)
 			QDEL_IN(src, 1)

@@ -19,7 +19,7 @@
 		if(damage_blocked)
 			var/new_armor = max(0, get_value(key) - armor_degradation_coef * damage_blocked)
 			set_value(key, new_armor)
-			var/mob/M = get_holder_of_type(holder, /mob)
+			var/mob/M = holder.get_recursive_loc_of_type(/mob)
 			if(istype(M))
 				var/list/visible = get_visible_damage()
 				for(var/k in visible)

@@ -136,7 +136,7 @@
 	dat += "</font>"
 	temp = ""
 	
-	var/datum/browser/written/popup = new(user, "tcommmachine", "Telecommunications Machine Configuration Panel", 520, 600)
+	var/datum/browser/written_digital/popup = new(user, "tcommmachine", "Telecommunications Machine Configuration Panel", 520, 600)
 	popup.set_content(JOINTEXT(dat))
 	popup.open()
 

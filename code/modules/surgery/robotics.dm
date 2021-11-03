@@ -467,7 +467,7 @@
 	for (var/obj/item/organ/I in affected.implants)
 		if (I.organ_tag == current_organ)
 			I.status &= ~ORGAN_CUT_AWAY
-			affected.implants -= I
+			LAZYREMOVE(affected.implants, I)
 			I.replaced(target, affected)
 			break
 

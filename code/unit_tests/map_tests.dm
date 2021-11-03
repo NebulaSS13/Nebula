@@ -147,7 +147,7 @@
 /datum/unit_test/wire_dir_and_icon_stat/start_test()
 	var/list/bad_cables = list()
 
-	for(var/obj/structure/cable/C in world)
+	for(var/obj/structure/cable/C in global.cable_list)
 		var/expected_icon_state = "[C.d1]-[C.d2]"
 		if(C.icon_state != expected_icon_state)
 			bad_cables |= C
@@ -171,7 +171,7 @@
 /datum/unit_test/closet_test/start_test()
 	var/bad_tests = 0
 
-	for(var/obj/structure/closet/C in world)
+	for(var/obj/structure/closet/C in global.closets)
 		if(!C.opened && isPlayerLevel(C.z))
 			var/total_content_size = 0
 			for(var/atom/movable/AM in C.contents)
@@ -196,7 +196,7 @@
 /datum/unit_test/closet_containment_test/start_test()
 	var/bad_tests = 0
 
-	for(var/obj/structure/closet/C in world)
+	for(var/obj/structure/closet/C in global.closets)
 		if(exceptions[C.type])
 			continue
 		if(!C.opened && isPlayerLevel(C.z))
@@ -321,7 +321,7 @@
 	var/safe_landmarks = 0
 	var/space_landmarks = 0
 
-	for(var/lm in landmarks_list)
+	for(var/lm in global.landmarks_list)
 		var/obj/effect/landmark/landmark = lm
 		if(istype(landmark, /obj/effect/landmark/test/safe_turf))
 			log_debug("Safe landmark found: [log_info_line(landmark)]")
@@ -376,7 +376,7 @@
 /datum/unit_test/camera_nil_c_tag_check/start_test()
 	var/pass = TRUE
 
-	for(var/obj/machinery/camera/C in world)
+	for(var/obj/machinery/camera/C in SSmachines.machinery)
 		if(!C.c_tag)
 			log_bad("Following camera does not have a c_tag set: [log_info_line(C)]")
 			pass = FALSE
@@ -397,7 +397,7 @@
 	var/cameras_by_ctag = list()
 	var/checked_cameras = 0
 
-	for(var/obj/machinery/camera/C in world)
+	for(var/obj/machinery/camera/C in SSmachines.machinery)
 		if(!C.c_tag)
 			continue
 		checked_cameras++
@@ -530,7 +530,7 @@
 
 /datum/unit_test/station_pipes_shall_not_leak/start_test()
 	var/failures = 0
-	for(var/obj/machinery/atmospherics/pipe/P in world)
+	for(var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
 		if(P.leaking && isStationLevel(P.z))
 			failures++
 			log_bad("Following pipe is leaking: [log_info_line(P)]")
@@ -811,7 +811,7 @@
 
 /datum/unit_test/doors_shall_be_on_appropriate_turfs/start_test()
 	var/bad_doors = 0
-	for(var/obj/machinery/door/D in world)
+	for(var/obj/machinery/door/D in SSmachines.machinery)
 		if(QDELETED(D))
 			continue
 		if(!isturf(D.loc))

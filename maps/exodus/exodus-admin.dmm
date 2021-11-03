@@ -3203,6 +3203,10 @@
 	icon_state = "lino"
 	},
 /area/tdome/tdomeadmin)
+"sKA" = (
+/obj/level_data/admin_level,
+/turf/space,
+/area/space)
 "sMD" = (
 /obj/effect/shuttle_landmark/escape_pod/out/pod4,
 /turf/space,
@@ -4426,7 +4430,7 @@ aab
 aab
 aab
 aab
-aab
+sKA
 aab
 aab
 aab

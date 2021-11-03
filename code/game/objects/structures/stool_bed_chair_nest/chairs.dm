@@ -153,6 +153,7 @@
 	icon_state = "officechair"
 	anchored = 0
 	buckle_movable = 1
+	atom_flags = ATOM_FLAG_WHEELED
 
 /obj/structure/bed/chair/office/Move()
 	. = ..()

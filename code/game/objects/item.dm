@@ -81,7 +81,7 @@
 	var/pickup_sound = 'sound/foley/paperpickup2.ogg'
 	///Sound uses when dropping the item, or when its thrown.
 	var/drop_sound = 'sound/foley/drop1.ogg'
-	
+
 	var/datum/reagents/coating // reagent container for coating things like blood/oil, used for overlays and tracks
 
 	var/tmp/has_inventory_icon	// do not set manually
@@ -128,11 +128,18 @@
 	reconsider_single_icon()
 
 /obj/item/Destroy()
+
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(hidden_uplink)
+
 	if(ismob(loc))
-		var/mob/m = loc
-		m.drop_from_inventory(src)
+		var/mob/M = loc
+		LAZYREMOVE(M.pinned, src)
+		LAZYREMOVE(M.embedded, src)
+		for(var/obj/item/organ/external/organ in M.get_organs())
+			LAZYREMOVE(organ.implants, src)
+		M.drop_from_inventory(src)
+
 	var/obj/item/storage/storage = loc
 	if(istype(storage))
 		// some ui cleanup needs to be done
@@ -368,8 +375,8 @@
 
 // apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user)
-	SHOULD_CALL_PARENT(TRUE)
 
+	SHOULD_CALL_PARENT(TRUE)
 	if(randpixel)
 		pixel_z = randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character
 	update_twohanding()
@@ -406,8 +413,8 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	hud_layerise()
-	if(user.client)
-		user.client.screen |= src
+	addtimer(CALLBACK(src, .proc/reconsider_client_screen_presence, user.client, slot), 0)
+
 	//Update two-handing status
 	var/mob/M = loc
 	if(istype(M))
@@ -701,9 +708,9 @@ var/global/list/slot_flags_enumeration = list(
 		return
 
 	if(!blood_data && istype(M))
-		blood_data = M.vessel.reagent_data[/decl/material/liquid/blood]		
+		blood_data = REAGENT_DATA(M.vessel, /decl/material/liquid/blood)
 	var/datum/extension/forensic_evidence/forensics = get_or_create_extension(src, /datum/extension/forensic_evidence)
-	forensics.add_data(/datum/forensics/blood_dna, blood_data["blood_DNA"])
+	forensics.add_data(/datum/forensics/blood_dna, LAZYACCESS(blood_data, "blood_DNA"))
 	add_coating(/decl/material/liquid/blood, amount, blood_data)
 	return 1 //we applied blood to the item
 
@@ -868,7 +875,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		icon = citem.item_icon
 	if(citem.item_state)
 		set_icon_state(citem.item_state)
-	
+
 /obj/item/proc/is_special_cutting_tool(var/high_power)
 	return FALSE
 
@@ -959,3 +966,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 // Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/proc/update_clothing_icon()
 	return
+
+/obj/item/proc/reconsider_client_screen_presence(var/client/client, var/slot)
+	if(!ismob(loc) || !client) // Storage handles screen loc updating/setting itself so should be fine
+		screen_loc = null
+	else if(client)
+		client.screen |= src
+		if(!client.mob || !client.mob.hud_used || !slot || (!client.mob.hud_used.inventory_shown && (slot in client.mob.hud_used.hidden_inventory_slots)))
+			screen_loc = null

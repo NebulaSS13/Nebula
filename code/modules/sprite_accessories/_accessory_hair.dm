@@ -12,7 +12,6 @@
 /decl/sprite_accessory/hair/bald
 	name = "Bald"
 	icon_state = "bald"
-	gender = MALE
 	species_allowed = list(SPECIES_HUMAN)
 	flags = VERY_SHORT | HAIR_BALD
 

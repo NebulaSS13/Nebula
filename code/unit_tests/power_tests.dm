@@ -21,8 +21,7 @@
 	var/failed = 0
 	var/list/found_cables = list()
 
-	//there is a cable list, but for testing purposes we search every cable in the world
-	for(var/obj/structure/cable/C in world)
+	for(var/obj/structure/cable/C in global.cable_list)
 		if(C in found_cables)
 			continue
 		var/list/to_search = list(C)

@@ -16,10 +16,13 @@
 	var/head_content = ""
 	var/content = ""
 	var/title_buttons = ""
-	var/written_text = FALSE
+	var/written_text = WRITTEN_SKIP
 
-/datum/browser/written
-	written_text = TRUE
+/datum/browser/written_physical
+	written_text = WRITTEN_PHYSICAL
+
+/datum/browser/written_digital
+	written_text = WRITTEN_DIGITAL
 
 /datum/browser/New(nuser, nwindow_id, ntitle, nwidth, nheight, atom/nref)
 
@@ -110,8 +113,8 @@
 	[content]
 	[get_footer()]
 	"}
-	if(written_text)
-		. = user.handle_reading_literacy(user, .)
+	if(written_text != WRITTEN_SKIP)
+		. = user.handle_reading_literacy(user, ., digital = (written_text == WRITTEN_DIGITAL))
 
 /datum/browser/proc/open(use_onclose = TRUE)
 	var/window_size = ""

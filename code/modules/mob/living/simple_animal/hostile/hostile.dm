@@ -133,6 +133,21 @@
 		return 1
 
 /mob/living/simple_animal/hostile/proc/AttackingTarget()
+
+	if(buckled_mob == target_mob && (!faction || buckled_mob.faction != faction))
+
+		visible_message(SPAN_DANGER("\The [src] attempts to unseat \the [buckled_mob]!"))
+		set_dir(pick(global.cardinal))
+		setClickCooldown(attack_delay)
+
+		if(prob(33))
+			unbuckle_mob()
+			if(buckled_mob != target_mob && !QDELETED(target_mob))
+				to_chat(target_mob, SPAN_DANGER("You are thrown off \the [src]!"))
+				SET_STATUS_MAX(target_mob, STAT_WEAK, 3)
+
+		return target_mob
+
 	face_atom(target_mob)
 	setClickCooldown(attack_delay)
 	if(!Adjacent(target_mob))
@@ -207,10 +222,10 @@
 		target_mob = user
 		MoveToTarget()
 
-/mob/living/simple_animal/hostile/attack_hand(mob/M)
+/mob/living/simple_animal/hostile/default_hurt_interaction(mob/user)
 	. = ..()
-	if(M.a_intent == I_HURT && !incapacitated(INCAPACITATION_KNOCKOUT))
-		target_mob = M
+	if(. && !incapacitated(INCAPACITATION_KNOCKOUT))
+		target_mob = user
 		MoveToTarget()
 
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)

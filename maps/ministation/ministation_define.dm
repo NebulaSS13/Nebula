@@ -4,10 +4,6 @@
 	path = "ministation"
 	ground_noun = "floor"
 
-	station_levels = list(1)
-	contact_levels = list(1)
-	player_levels = list(1)
-
 	station_name = "Space Station Zebra"
 	station_short = "Zebra"
 
@@ -16,7 +12,6 @@
 	boss_short    = "Admin"
 	company_name  = "Free Trade Union Residual Delta"
 	company_short = "RD"
-	overmap_event_areas = 11
 
 	default_law_type = /datum/ai_laws/nanotrasen
 

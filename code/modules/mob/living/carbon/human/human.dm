@@ -37,9 +37,9 @@
 	worn_underwear = null
 	QDEL_NULL(attack_selector)
 	LAZYCLEARLIST(smell_cooldown)
-	for(var/organ in organs)
-		qdel(organ)
-	return ..()
+	. = ..()
+	QDEL_NULL_LIST(organs)
+	QDEL_NULL_LIST(internal_organs)
 
 /mob/living/carbon/human/get_ingested_reagents()
 	if(should_have_organ(BP_STOMACH))
@@ -104,7 +104,7 @@
 	L.imp_in = M
 	L.implanted = 1
 	var/obj/item/organ/external/affected = M.organs_by_name[BP_HEAD]
-	affected.implants += L
+	LAZYDISTINCTADD(affected.implants, L)
 	L.part = affected
 	L.implanted(src)
 
@@ -544,13 +544,11 @@
 	reset_blood()
 
 	if(!client || !key) //Don't boot out anyone already in the mob.
-		for (var/obj/item/organ/internal/brain/H in world)
-			if(H.brainmob)
-				if(H.brainmob.real_name == src.real_name)
-					if(H.brainmob.mind)
-						H.brainmob.mind.transfer_to(src)
-						qdel(H)
-
+		for(var/mob/living/carbon/brain/brain in global.player_list) // This is really nasty, does it even work anymore?
+			if(brain.real_name == src.real_name && brain.mind)
+				brain.mind.transfer_to(src)
+				qdel(brain.loc)
+				break
 	losebreath = 0
 	UpdateAppearance()
 	..()
@@ -672,7 +670,7 @@
 
 	var/decl/pronouns/new_pronouns = get_pronouns_by_gender(get_sex())
 	if(!istype(new_pronouns) || !(new_pronouns in species.available_pronouns))
-		new_pronouns = pick(species.available_pronouns) //Might wanna wrap this into the species code instead of here?
+		new_pronouns = species.default_pronouns
 		set_gender(new_pronouns.name)
 
 	//Handle bodytype
@@ -730,14 +728,14 @@
 	if(!species)
 		icon_state = lowertext(SPECIES_HUMAN)
 		skin_colour = COLOR_BLACK
-	else 
+	else
 		species.apply_appearence(src)
 
 	force_update_limbs() //updates bodytype
 	default_pixel_x = initial(pixel_x) + bodytype.pixel_offset_x
 	default_pixel_y = initial(pixel_y) + bodytype.pixel_offset_y
 	default_pixel_z = initial(pixel_z) + bodytype.pixel_offset_z
-	
+
 	reset_offsets()
 
 	// Rebuild the HUD and visual elements only if we got a client.
@@ -1126,10 +1124,13 @@
 		return (!L || L.can_drown())
 	return FALSE
 
-/mob/living/carbon/human/get_breath_from_environment(var/volume_needed = STD_BREATH_VOLUME)
-	var/datum/gas_mixture/breath = ..(volume_needed)
+/mob/living/carbon/human/get_breath_from_environment(var/volume_needed = STD_BREATH_VOLUME, var/atom/location = src.loc)
+	var/datum/gas_mixture/breath = ..(volume_needed, location)
 	var/turf/T = get_turf(src)
 	if(istype(T) && T.is_flooded(lying) && should_have_organ(BP_LUNGS))
+		if(T == location) //Can we surface?
+			if(!lying && T.above && !T.above.is_flooded() && T.above.CanZPass(src, UP) && can_overcome_gravity())
+				return ..(volume_needed, T.above)
 		var/can_breathe_water = (istype(wear_mask) && wear_mask.filters_water()) ? TRUE : FALSE
 		if(!can_breathe_water)
 			var/obj/item/organ/internal/lungs/lungs = get_internal_organ(BP_LUNGS)
@@ -1298,7 +1299,7 @@
 	set_species(new_dna.species)
 	//Revive actually regen organs, reset their appearence and makes sure if the player is kicked out they get reinserted in
 	revive()
-	
+
 	species.handle_pre_spawn(src)
 	apply_species_appearance()
 	apply_species_cultural_info()

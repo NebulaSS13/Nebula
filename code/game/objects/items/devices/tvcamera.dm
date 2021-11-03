@@ -16,7 +16,7 @@
 	. = ..()
 
 /obj/item/camera/tvcamera/Initialize()
-	set_extension(src, /datum/extension/network_device/camera/television, null, null, null, TRUE, list(CAMERA_CHANNEL_TELEVISION), channel)
+	set_extension(src, /datum/extension/network_device/camera/television, null, null, null, TRUE, list(CAMERA_CHANNEL_TELEVISION), channel, FALSE)
 	radio = new(src)
 	radio.listening = FALSE
 	radio.set_frequency(ENT_FREQ)
@@ -41,7 +41,7 @@
 	dat += "Microphone is: <a href='?src=\ref[src];sound=1'>[radio.broadcasting ? "Online" : "Offline"]</a><br>"
 	dat += "Sound is being broadcasted on frequency: [format_frequency(radio.frequency)] ([get_frequency_default_name(radio.frequency)])<br>"
 	dat += "<a href='?src=\ref[src];net_options=1'>Network Options</a>"
-	var/datum/browser/written/popup = new(user, "Press Camera Drone", "EyeBuddy", 300, 390, src)
+	var/datum/browser/written_digital/popup = new(user, "Press Camera Drone", "EyeBuddy", 300, 390, src)
 	popup.set_content(jointext(dat,null))
 	popup.open()
 
@@ -56,7 +56,7 @@
 		var/nc = sanitize(input(usr, "Channel name", "Select new channel name", channel) as text|null)
 		if(nc)
 			channel = nc
-			var/datum/extension/network_device/camera/television/D = get_extension(src, /datum/extension/network_device/camera)
+			var/datum/extension/network_device/camera/television/D = get_extension(src, /datum/extension/network_device)
 			D.display_name = channel
 			to_chat(usr, "<span class='notice'>New channel name: '[channel]' has been set.</span>")
 	if(href_list["video"])
@@ -73,7 +73,7 @@
 		else
 			to_chat(usr,"<span class='notice'>Audio streaming: Deactivated.</span>")
 	if(href_list["net_options"])
-		var/datum/extension/network_device/camera/television/D = get_extension(src, /datum/extension/network_device/camera)
+		var/datum/extension/network_device/camera/television/D = get_extension(src, /datum/extension/network_device)
 		D.ui_interact(usr)
 	if(!href_list["close"])
 		attack_self(usr)
@@ -159,7 +159,6 @@ Using robohead because of restricting to roboticist */
 
 /datum/extension/network_device/camera/television
 	expected_type = /obj/item/camera/tvcamera
-	cameranet_enabled = FALSE
 	requires_connection = FALSE
 
 /datum/extension/network_device/camera/television/is_functional()

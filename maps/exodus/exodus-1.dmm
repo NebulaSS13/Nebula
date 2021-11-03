@@ -5676,6 +5676,10 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exodus/maintenance/telecomms)
+"AE" = (
+/obj/level_data/main_level,
+/turf/space,
+/area/space)
 "AG" = (
 /obj/structure/table/steel,
 /obj/item/paper_bin,
@@ -7517,7 +7521,7 @@ aa
 aa
 aa
 aa
-aa
+AE
 aa
 aa
 aa

@@ -110,7 +110,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/list/stack_origin_tech = "{'materials':1}" // Research level for stacks.
 
 	// Attributes
-	var/exoplanet_rarity = MAT_RARITY_MUNDANE // How rare is this material generally? 
+	var/exoplanet_rarity = MAT_RARITY_MUNDANE // How rare is this material generally?
 	var/cut_delay = 0                         // Delay in ticks when cutting through this wall.
 	var/radioactivity                         // Radiation var. Used in wall and object processing to irradiate surroundings.
 	var/ignition_point                        // K, point at which the material catches on fire.
@@ -124,7 +124,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/conductive = 1                        // Objects with this var add CONDUCTS to flags on spawn.
 	var/luminescence                          // Does this material glow?
 	var/wall_support_value = 30               // Used for checking if a material can function as a wall support.
-	var/sparse_material_weight                // Ore generation constant for rare materials. 
+	var/sparse_material_weight                // Ore generation constant for rare materials.
 	var/rich_material_weight                  // Ore generation constant for common materials.
 	var/min_fluid_opacity = FLUID_MIN_ALPHA   // How transparent can fluids be?
 	var/max_fluid_opacity = FLUID_MAX_ALPHA   // How opaque can fluids be?
@@ -238,7 +238,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/absorption_products		  // Transmutes into these reagents following neutron absorption and/or subsequent beta decay. Generally forms heavier reagents.
 	var/fission_products		  // Transmutes into these reagents following fission. Forms lighter reagents, and a lot of heat.
 	var/neutron_production		  // How many neutrons are created per unit per fission event.
-	var/neutron_absorption		  // How many neutrons are absorbed per unit per absorption event. 
+	var/neutron_absorption		  // How many neutrons are absorbed per unit per absorption event.
 	var/fission_heat			  // How much thermal energy per unit per fission event this material releases.
 	var/fission_energy			  // Energy of neutrons released by fission.
 	var/moderation_target		  // The 'target' neutron energy value that the fission environment shifts towards after a moderation event.
@@ -270,7 +270,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	else if(user)
 		S.dropInto(get_turf(user))
 	else
-		S.dropInto(get_turf(used_stack)) 
+		S.dropInto(get_turf(used_stack))
 	S.add_to_stacks(user, TRUE)
 
 // Make sure we have a use name and shard icon even if they aren't explicitly set.
@@ -350,26 +350,37 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 // Used by walls when qdel()ing to avoid neighbor merging.
 /decl/material/placeholder
 	name = "placeholder"
+	uid = "mat_placeholder"
 	hidden_from_codex = TRUE
 	exoplanet_rarity = MAT_RARITY_NOWHERE
 
 // Generic material product (sheets, bricks, etc). Used ALL THE TIME.
 // May return an instance list, a single instance, or nothing if there is no instance produced.
 /decl/material/proc/create_object(var/atom/target, var/amount = 1, var/object_type, var/reinf_type)
+
 	if(!object_type)
 		object_type = default_solid_form
-	if(object_type)
-		if(ispath(object_type, /obj/item/stack))
-			var/atom/movable/placed = new object_type(target, amount, type, reinf_type)
-			if(istype(target))
-				placed.dropInto(target)
-			return placed
+
+	if(!ispath(object_type, /atom/movable))
+		CRASH("Non-movable path '[object_type || "NULL"]' supplied to [type] create_object()")
+
+	if(ispath(object_type, /obj/item/stack))
+		var/obj/item/stack/stack_type = object_type
+		var/divisor = initial(stack_type.max_amount)
+		while(amount >= divisor)
+			LAZYADD(., new object_type(target, divisor, type, reinf_type))
+			amount -= divisor
+		if(amount >= 1)
+			LAZYADD(., new object_type(target, amount, type, reinf_type))
+	else
 		for(var/i = 1 to amount)
 			var/atom/movable/placed = new object_type(target, type, reinf_type)
 			if(istype(placed))
 				LAZYADD(., placed)
-				if(istype(target))
-					placed.dropInto(target)
+
+	if(istype(target) && LAZYLEN(.))
+		for(var/atom/movable/placed in .)
+			placed.dropInto(target)
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.
 /decl/material/proc/place_dismantled_girder(var/turf/target, var/decl/material/reinf_material)
@@ -446,10 +457,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	if(REAGENT_VOLUME(holder, type) < FLUID_QDEL_POINT)
 		return
 
-	if(istype(T) && dirtiness <= DIRTINESS_CLEAN)
-		T.clean_blood()
-		T.remove_cleanables()
-
 	if(istype(T, /turf/simulated))
 		var/turf/simulated/wall/W = T
 		if(defoliant)
@@ -461,26 +468,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 				W.unwet_floor(TRUE)
 			else
 				W.wet_floor(slipperiness)
-		if(dirtiness != DIRTINESS_NEUTRAL)
-			if(dirtiness > DIRTINESS_NEUTRAL)
-				var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate() in W
-				if (!dirtoverlay)
-					dirtoverlay = new /obj/effect/decal/cleanable/dirt(W)
-					dirtoverlay.alpha = REAGENT_VOLUME(holder, src) * dirtiness
-				else
-					dirtoverlay.alpha = min(dirtoverlay.alpha + REAGENT_VOLUME(holder, src) * dirtiness, 255)
-			else
-				if(dirtiness <= DIRTINESS_STERILE)
-					W.germ_level -= min(REAGENT_VOLUME(holder, type)*20, T.germ_level)
-					for(var/obj/item/I in W.contents)
-						I.was_bloodied = null
-					for(var/obj/effect/decal/cleanable/blood/B in W)
-						qdel(B)
-				if(dirtiness <= DIRTINESS_CLEAN)
-					W.dirt = 0
-					if(W.wet > 1 && slipperiness <= 0)
-						W.unwet_floor(FALSE)
-					W.clean_blood()
 
 	if(length(vapor_products))
 		var/volume = REAGENT_VOLUME(holder, type)
@@ -667,7 +654,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		var/ideal_energy = neutron_interactions[interaction]
 		var/interacted_units_ratio = (Clamp(-((((neutron_energy-ideal_energy)**2)/(neutron_cross_section*1000)) - 100), 0, 100))/100
 		var/interacted_units = round(interacted_units_ratio*total_interacted_units, 0.001)
-		
+
 		if(interacted_units > 0)
 			.[interaction] = interacted_units
 			total_interacted_units -= interacted_units

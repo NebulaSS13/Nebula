@@ -6,14 +6,14 @@
 	var/strength = 3
 
 /decl/chemical_reaction/soap_key/can_happen(var/datum/reagents/holder)
-	if(holder.my_atom && istype(holder.my_atom, /obj/item/soap))
+	if(istype(holder.get_reaction_loc(), /obj/item/soap))
 		return ..()
 	return 0
 
 /decl/chemical_reaction/soap_key/on_reaction(var/datum/reagents/holder)
-	var/obj/item/soap/S = holder.my_atom
-	if(S.key_data)
-		var/obj/item/key/soap/key = new(get_turf(holder.my_atom), S.key_data)
+	var/obj/item/soap/S = holder.get_reaction_loc()
+	if(istype(S) && S.key_data)
+		var/obj/item/key/soap/key = new(get_turf(S), S.key_data)
 		key.uses = strength
 	..()
 
@@ -35,7 +35,7 @@
 	name = "ANFO"
 	result = /decl/material/liquid/anfo
 	required_reagents = list(
-		/decl/material/liquid/fertilizer = 20, 
+		/decl/material/liquid/fertilizer = 20,
 		/decl/material/liquid/fuel = 10
 	)
 	result_amount = 15
@@ -45,7 +45,7 @@
 	name = "Chemlab ANFO"
 	result = /decl/material/liquid/anfo
 	required_reagents = list(
-		/decl/material/gas/ammonia = 10, 
+		/decl/material/gas/ammonia = 10,
 		/decl/material/liquid/fuel = 5
 	)
 	result_amount = 15
@@ -55,7 +55,7 @@
 	name = "ANFO+"
 	result = /decl/material/liquid/anfo/plus
 	required_reagents = list(
-		/decl/material/liquid/anfo = 15, 
+		/decl/material/liquid/anfo = 15,
 		/decl/material/solid/metal/aluminium = 5
 	)
 	result_amount = 20
@@ -71,7 +71,7 @@
 
 /decl/chemical_reaction/paint
 	name = "Paint"
-	result = /decl/material/liquid/narcotics
+	result = /decl/material/liquid/paint
 	required_reagents = list(/decl/material/liquid/plasticide = 1, /decl/material/liquid/water = 3)
 	result_amount = 5
 	mix_message = "The solution thickens and takes on a glossy sheen."

@@ -198,7 +198,7 @@ var/global/list/possible_say_verbs = list(
 			for(var/obj/item/organ/external/affecting in H.organs)
 				if(card in affecting.implants)
 					affecting.take_external_damage(rand(30,50))
-					affecting.implants -= card
+					LAZYREMOVE(affecting.implants, card)
 					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!</span>")
 					break
 		holder.drop_from_inventory(card)
@@ -288,9 +288,12 @@ var/global/list/possible_say_verbs = list(
 		if(stat != 2) fold()
 	return
 
-/mob/living/silicon/pai/attack_hand(mob/user)
-	visible_message(SPAN_DANGER("[user] boops [src] on the head."))
-	fold()
+/mob/living/silicon/pai/default_interaction(mob/user)
+	. = ..()
+	if(!.)
+		visible_message(SPAN_NOTICE("\The [user] boops \the [src] on the head."))
+		fold()
+		return TRUE
 
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()

@@ -46,7 +46,7 @@
 	set category = "IC"
 	set src in view()
 
-	if(!global.using_map.use_overmap)
+	if(!global.overmaps_by_name[OVERMAP_ID_SPACE])
 		return
 	if(!CanInteract(usr, global.conscious_topic_state))
 		return
@@ -181,9 +181,9 @@
 	force = 5
 	attack_verb = list("singed")
 
-/mob/living/simple_animal/hostile/retaliate/beast/charbaby/attack_hand(mob/user)
+/mob/living/simple_animal/hostile/retaliate/beast/charbaby/default_hurt_interaction(mob/user)
 	. = ..()
-	if(ishuman(user))
+	if(. && ishuman(user))
 		reflect_unarmed_damage(user, BURN, "amorphous mass")
 
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby/AttackingTarget()

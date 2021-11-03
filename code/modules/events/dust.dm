@@ -42,7 +42,7 @@ The "dust" will damage the hull of the station causin minor hull breaches.
 		if(WEST)
 			startloc = locate(1 + TRANSITIONEDGE, randomy, randomz)
 			targloc = locate(world.maxx - TRANSITIONEDGE, world.maxy - randomy, randomz)
-	var/list/starters = getcircle(startloc, 3)
+	var/list/starters = getcirclesafe(startloc, 3)
 	starters += startloc
 
 	var/rocks_per_tile = round(numbers/starters.len)

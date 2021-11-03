@@ -323,7 +323,3 @@
 
 /mob/living/carbon/human/proc/is_in_pocket(var/obj/item/I)
 	return I in list(l_store, r_store)
-
-/mob/living/carbon/human/proc/get_tail_organ()
-	var/obj/item/organ/external/tail/tail_organ = organs_by_name[BP_TAIL]
-	return tail_organ

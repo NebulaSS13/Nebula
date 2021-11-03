@@ -21,7 +21,7 @@
 	if(!istype(holder))
 		return
 
-	var/obj/item/slime_extract/core = holder.my_atom
+	var/obj/item/slime_extract/core = holder.get_reaction_loc()
 	if(!istype(core) || core.Uses <= 0)
 		return
 
@@ -34,9 +34,9 @@
 			. = TRUE
 			break
 
-	if(. && holder?.my_atom)
+	if(. && holder.get_reaction_loc())
 		if(reaction_sound)
-			playsound(holder.my_atom.loc, reaction_sound, 75, 1)
+			playsound(get_turf(holder.get_reaction_loc()), reaction_sound, 75, 1)
 		if(!QDELETED(core))
 			core.Uses--
 			if(core.Uses <= 0)

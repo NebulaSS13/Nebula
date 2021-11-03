@@ -5,7 +5,7 @@
 
 /decl/chemical_reaction/recipe/food/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	var/location = get_turf(holder.my_atom)
+	var/location = get_turf(holder.get_reaction_loc())
 	if(obj_result && isturf(location))
 		for(var/i = 1, i <= created_volume, i++)
 			new obj_result(location)

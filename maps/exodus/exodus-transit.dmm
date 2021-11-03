@@ -41,6 +41,10 @@
 /obj/effect/shuttle_landmark/escape_shuttle/transit,
 /turf/space,
 /area/space)
+"QP" = (
+/obj/level_data/admin_level,
+/turf/space,
+/area/space)
 
 (1,1,1) = {"
 aa
@@ -1321,7 +1325,7 @@ aa
 aa
 aa
 aa
-aa
+QP
 aa
 aa
 aa
