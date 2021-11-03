@@ -1,6 +1,6 @@
 /mob/living/carbon/human/Login()
 	..()
-	// Callback needed as SOMETHING in inventory code fucks with 
+	// Callback needed as SOMETHING in inventory code fucks with
 	// screen loc and screen presence after this proc runs.
 	addtimer(CALLBACK(src, .proc/refresh_inventory_ui), 0)
 	if(species)

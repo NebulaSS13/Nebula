@@ -19,10 +19,10 @@
 /datum/hud
 	var/mob/mymob
 
-	var/hud_shown = 1			//Used for the HUD toggle (F12)
-	var/inventory_shown = 1		//the inventory
-	var/show_intent_icons = 0
-	var/hotkey_ui_hidden = 0	//This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
+	var/hud_shown 			= 1			//Used for the HUD toggle (F12)
+	var/inventory_shown 	= TRUE		//the inventory
+	var/show_intent_icons 	= FALSE
+	var/hotkey_ui_hidden 	= FALSE		//This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
 
 	var/obj/screen/lingchemdisplay
 	var/list/hand_hud_objects
@@ -35,7 +35,7 @@
 	var/list/obj/screen/hotkeybuttons
 
 	var/obj/screen/movable/action_button/hide_toggle/hide_actions_toggle
-	var/action_buttons_hidden = 0
+	var/action_buttons_hidden = FALSE
 
 	var/static/list/hidden_inventory_slots = list(
 		slot_head_str,
@@ -73,6 +73,16 @@
 		if(stamina < 100)
 			stamina_bar.invisibility = 0
 			stamina_bar.icon_state = "prog_bar_[FLOOR(stamina/5)*5][(stamina >= 5) && (stamina <= 25) ? "_fail" : null]"
+
+/datum/hud/proc/hide_inventory()
+	inventory_shown = FALSE
+	hidden_inventory_update()
+	persistant_inventory_update()
+
+/datum/hud/proc/show_inventory()
+	inventory_shown = TRUE
+	hidden_inventory_update()
+	persistant_inventory_update()
 
 /datum/hud/proc/hidden_inventory_update()
 	if(!mymob) return
