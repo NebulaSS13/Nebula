@@ -95,7 +95,8 @@
 	has_safety = FALSE
 
 
-/obj/item/gun/energy/laser/reloadable //This behavior isn't actually part of this class.
+/obj/item/gun/energy/laser/reloadable
 	name = "reloadable laser carbine"
 	desc = "A G40E carbine, designed to kill with concentrated energy blasts. Uses removable energy cells."
-	cell_type = /obj/item/cell/gun
+	power_supply = null
+	accepts_cell_type = /obj/item/cell/gun
