@@ -1,6 +1,7 @@
 /obj/item/organ/internal/lungs
 	name = "lungs"
 	icon_state = "lungs"
+	prosthetic_icon = "lungs-prosthetic"
 	gender = PLURAL
 	organ_tag = BP_LUNGS
 	parent_organ = BP_CHEST
@@ -48,10 +49,6 @@
 	if(status & ORGAN_DEAD)
 		return 100
 	return round((oxygen_deprivation/species.total_health)*100)
-
-/obj/item/organ/internal/lungs/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
-	. = ..()
-	icon_state = "lungs-prosthetic"
 
 /obj/item/organ/internal/lungs/set_dna(var/datum/dna/new_dna)
 	..()

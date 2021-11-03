@@ -1,6 +1,7 @@
 /obj/item/organ/internal/kidneys
 	name = "kidneys"
 	icon_state = "kidneys"
+	prosthetic_icon = "kidneys-prosthetic"
 	gender = PLURAL
 	organ_tag = BP_KIDNEYS
 	parent_organ = BP_GROIN
@@ -8,10 +9,6 @@
 	min_broken_damage = 45
 	max_damage = 70
 	relative_size = 10
-
-/obj/item/organ/internal/kidneys/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
-	. = ..()
-	icon_state = "kidneys-prosthetic"
 
 /obj/item/organ/internal/kidneys/Process()
 	..()

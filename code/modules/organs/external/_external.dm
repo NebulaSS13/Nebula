@@ -100,21 +100,13 @@
 		F.completeness = rand(10,90)
 		forensics.add_data(/datum/forensics/fingerprints, F)
 
-/obj/item/organ/external/Initialize()
+/obj/item/organ/external/Initialize(mapload, datum/dna/given_dna)	
 	. = ..()
 	if(isnull(pain_disability_threshold))
 		pain_disability_threshold = (max_damage * 0.75)
 	if(owner)
 		replaced(owner)
-		sync_colour_to_human(owner)
-	get_icon()
-	slowdown = species.get_slowdown(owner) // TODO make this a getter so octopodes can override it based on flooding
-	if(species)
-		for(var/attack_type in species.unarmed_attacks)
-			var/decl/natural_attack/attack = GET_DECL(attack_type)
-			if(istype(attack) && (organ_tag in attack.usable_with_limbs))
-				LAZYADD(unarmed_attacks, attack_type)
-
+	
 /obj/item/organ/external/Destroy()
 
 	if(wounds)
@@ -149,9 +141,15 @@
 
 	return ..()
 
-/obj/item/organ/external/set_dna(var/datum/dna/new_dna)
-	..()
+/obj/item/organ/external/set_species(specie_name)
+	. = ..()
 	skin_blend = bodytype.limb_blend
+	slowdown = species.get_slowdown(owner) // TODO make this a getter so octopodes can override it based on flooding
+	for(var/attack_type in species.unarmed_attacks)
+		var/decl/natural_attack/attack = GET_DECL(attack_type)
+		if(istype(attack) && (organ_tag in attack.usable_with_limbs))
+			LAZYADD(unarmed_attacks, attack_type)
+	get_icon()
 
 /obj/item/organ/external/proc/check_pain_disarm()
 	if(owner && prob((pain/max_damage)*100))
@@ -1164,12 +1162,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(species)
 		return species.get_manual_dexterity(owner)
 
+//Completely override, so we can slap in the model
+/obj/item/organ/external/setup_as_prosthetic()
+	. = ..(model ? model : /decl/prosthetics_manufacturer)
+
 /obj/item/organ/external/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
-
-	if(BP_IS_PROSTHETIC(src))
-		return
-
-	..()
+	. = ..()
 
 	slowdown = 0
 
@@ -1490,4 +1488,4 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(status & ORGAN_DEAD) //The organic dying part is covered in germ handling
 		STOP_PROCESSING(SSobj, src)
 		QDEL_NULL_LIST(ailments)
-		death_time = world.time
+		death_time = REALTIMEOFDAY

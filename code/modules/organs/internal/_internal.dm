@@ -2,13 +2,18 @@
 				INTERNAL ORGANS DEFINES
 ****************************************************/
 /obj/item/organ/internal
+	var/alive_icon //icon to use when the organ is alive
 	var/dead_icon // Icon to use when the organ has died.
+	var/prosthetic_icon //Icon to use when the organ is robotic
+	var/prosthetic_dead_icon //Icon to use when the organ is robotic and dead
 	var/surface_accessible = FALSE
 	var/relative_size = 25   // Relative size of the organ. Roughly % of space they take in the target projection :D
 	var/min_bruised_damage = 10       // Damage before considered bruised
 	var/damage_reduction = 0.5     //modifier for internal organ injury
 
 /obj/item/organ/internal/Initialize(mapload, datum/dna/given_dna)
+	if(!alive_icon)
+		alive_icon = initial(icon_state)
 	if(max_damage)
 		min_bruised_damage = FLOOR(max_damage / 4)
 	. = ..()
@@ -36,10 +41,9 @@
 		if(istype(E)) E.internal_organs -= src
 	return ..()
 
-/obj/item/organ/internal/set_dna(var/datum/dna/new_dna)
-	..()
-	if(species && species.organs_icon)
-		icon = species.organs_icon
+/obj/item/organ/internal/set_species(species_name)
+	. = ..()
+	icon = species.organs_icon
 
 //disconnected the organ from it's owner but does not remove it, instead it becomes an implant that can be removed with implant surgery
 //TODO move this to organ/internal once the FPB port comes through
@@ -82,11 +86,6 @@
 	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src
 	return 1
-
-/obj/item/organ/internal/die()
-	..()
-	if((status & ORGAN_DEAD) && dead_icon)
-		icon_state = dead_icon
 
 /obj/item/organ/internal/remove_rejuv()
 	if(owner)
@@ -206,3 +205,10 @@
 			take_internal_damage(9)
 		if (3)
 			take_internal_damage(6.5)
+
+/obj/item/organ/internal/on_update_icon()
+	. = ..()
+	if(BP_IS_PROSTHETIC(src) && prosthetic_icon)
+		icon_state = ((status & ORGAN_DEAD) && prosthetic_dead_icon)? 	prosthetic_dead_icon : prosthetic_icon 
+	else
+		icon_state = ((status & ORGAN_DEAD) && dead_icon)? 				dead_icon : alive_icon

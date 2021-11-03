@@ -2,6 +2,8 @@
 /obj/item/organ/internal/eyes
 	name = "eyeballs"
 	icon_state = "eyes"
+	prosthetic_icon = "camera"
+	prosthetic_dead_icon = "camera_broken"
 	gender = PLURAL
 	organ_tag = BP_EYES
 	parent_organ = BP_HEAD
@@ -74,9 +76,9 @@
 	if(is_broken())
 		owner.set_status(STAT_BLIND, 20)
 
-/obj/item/organ/internal/eyes/Initialize()
+/obj/item/organ/internal/eyes/set_species(species_name)
 	. = ..()
-	flash_mod = species.flash_mod
+	flash_mod 		= species.flash_mod
 	darksight_range = species.darksight_range
 
 /obj/item/organ/internal/eyes/proc/get_total_protection(var/flash_protection = FLASH_PROTECTION_NONE)
@@ -87,10 +89,7 @@
 
 /obj/item/organ/internal/eyes/robot
 	name = "optical sensor"
-
-/obj/item/organ/internal/eyes/robot/Initialize()
-	. = ..()
-	robotize()
+	status = ORGAN_PROSTHETIC
 
 /obj/item/organ/internal/eyes/removed()
 	. = ..()
@@ -107,8 +106,6 @@
 	..()
 	name = "optical sensor"
 	icon = 'icons/obj/robot_component.dmi'
-	icon_state = "camera"
-	dead_icon = "camera_broken"
 
 	if(owner)
 		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color

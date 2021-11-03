@@ -365,11 +365,11 @@
 	for(var/limb_type in has_limbs)
 		var/list/organ_data = has_limbs[limb_type]
 		var/limb_path = organ_data["path"]
-		new limb_path(H)
+		new limb_path(H, H.dna) //explicitly specify the dna
 
 	for(var/organ_tag in has_organ)
 		var/organ_type = has_organ[organ_tag]
-		var/obj/item/organ/O = new organ_type(H)
+		var/obj/item/organ/O = new organ_type(H, H.dna) //explicitly specify the dna
 		if(organ_tag != O.organ_tag)
 			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
@@ -860,9 +860,20 @@
 /decl/species/proc/apply_appearence(var/mob/living/carbon/human/H)
 	H.icon_state = lowertext(src.name)
 	H.skin_colour = src.base_color
+	update_appearence_descriptors(H)
+
+/decl/species/proc/update_appearence_descriptors(var/mob/living/carbon/human/H)
+	if(!LAZYLEN(src.appearance_descriptors))
+		H.appearance_descriptors = null
+		return 
 	
-	H.appearance_descriptors = null
-	if(LAZYLEN(src.appearance_descriptors))
-		for(var/desctype in src.appearance_descriptors)
-			var/datum/appearance_descriptor/descriptor = src.appearance_descriptors[desctype]
-			LAZYSET(H.appearance_descriptors, descriptor.name, descriptor.default_value)
+	var/list/new_descriptors = list()
+	//Add missing descriptors, and sanitize any existing ones
+	for(var/desctype in src.appearance_descriptors)
+		var/datum/appearance_descriptor/descriptor = src.appearance_descriptors[desctype]
+		if(H.appearance_descriptors?[descriptor.name])
+			new_descriptors[descriptor.name] = descriptor.sanitize_value(H.appearance_descriptors[descriptor.name])
+		else
+			new_descriptors[descriptor.name] = descriptor.default_value
+	//Make sure only supported descriptors are left
+	H.appearance_descriptors = new_descriptors

@@ -51,54 +51,88 @@
 //Second argument may be a dna datum; if null will be set to holder's dna.
 /obj/item/organ/Initialize(mapload, var/datum/dna/given_dna)
 	. = ..(mapload)
-	if(!istype(given_dna))
-		given_dna = null
-
+	
 	if(max_damage)
 		min_broken_damage = FLOOR(max_damage / 2)
 	else
 		max_damage = min_broken_damage * 2
 
-	if(iscarbon(loc))
+	if(!owner && iscarbon(loc))
 		owner = loc
-		if(!given_dna && owner.dna)
-			given_dna = owner.dna
-		else
-			log_debug("[src] spawned in [owner] without a proper DNA.")
 
-	if (given_dna)
+	if(!BP_IS_PROSTHETIC(src))
+		if(!given_dna)
+			if(dna)
+				given_dna = dna
+			else if(owner)
+				if(owner.dna)
+					given_dna = owner.dna
+				else
+					log_debug("[src] spawned in [owner] without a proper DNA.")
+			else
+				given_dna = new/datum/dna()
+				given_dna.check_integrity() //Default everything
+		
 		set_dna(given_dna)
-	if (!species)
-		species = get_species_by_key(global.using_map.default_species)
+		setup_reagents()
+	else
+		setup_as_prosthetic()
+		
+	update_icon()
 
-	species.resize_organ(src)
-	bodytype = owner?.bodytype || species.default_bodytype
+//Allows specialization of roboticize() calls on initialization meant to be used when loading prosthetics from save downstream
+/obj/item/organ/proc/setup_as_prosthetic(var/forced_model = /decl/prosthetics_manufacturer)
+	if(!BP_IS_PROSTHETIC(src))
+		return
+	
+	if(!species)
+		if(owner?.species)
+			set_species(owner.species)
+		else
+			set_species(global.using_map.default_species)
 
+	if(material)
+		robotize(forced_model, apply_material = material.type)
+	else 
+		robotize(forced_model)
+	return TRUE
+
+/obj/item/organ/proc/setup_reagents()
+	if(reagents)
+		return
 	create_reagents(5 * (w_class-1)**2)
 	reagents.add_reagent(/decl/material/liquid/nutriment/protein, reagents.maximum_volume)
 
-	update_icon()
-
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
-	if(new_dna)
-		dna = new_dna.Clone()
-		if(!blood_DNA)
-			blood_DNA = list()
-		blood_DNA.Cut()
-		blood_DNA[dna.unique_enzymes] = dna.b_type
-		species = get_species_by_key(dna.species)
-		bodytype = owner?.bodytype || species.default_bodytype
-		if (!species)
-			PRINT_STACK_TRACE("Invalid DNA species. Expected a valid species name as string, was: [log_info_line(dna.species)]")
+	if(!new_dna)
+		return
+	dna = new_dna.Clone()
+	if(!blood_DNA)
+		blood_DNA = list()
+	blood_DNA.Cut()
+	blood_DNA[dna.unique_enzymes] = dna.b_type
+	set_species(dna.species)
+
+/obj/item/organ/proc/set_species(var/specie_name)
+	if(istext(specie_name))
+		species = get_species_by_key(specie_name)
+	else
+		species = specie_name 
+	if(!species)
+		PRINT_STACK_TRACE("Invalid species. Expected a valid species name as string, was: [log_info_line(specie_name)]")
+		species = get_species_by_key(global.using_map.default_species)
+	bodytype = owner?.bodytype || species.default_bodytype
+	species.resize_organ(src)
 
 /obj/item/organ/proc/die()
 	damage = max_damage
 	status |= ORGAN_DEAD
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL_LIST(ailments)
-	death_time = world.time
+	death_time = REALTIMEOFDAY
 	if(owner && vital)
 		owner.death()
+	update_icon()
 
 /obj/item/organ/Process()
 
@@ -270,6 +304,7 @@
 
 /obj/item/organ/proc/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
 	status = ORGAN_PROSTHETIC
+	QDEL_NULL(dna)
 	reagents?.clear_reagents()
 	material = GET_DECL(apply_material)
 	matter = null
@@ -318,8 +353,6 @@
 	owner = target
 	action_button_name = initial(action_button_name)
 	forceMove(owner) //just in case
-	if(BP_IS_PROSTHETIC(src))
-		set_dna(owner.dna)
 	for(var/datum/ailment/ailment in ailments)
 		ailment.begin_ailment_event()
 	return TRUE
@@ -355,7 +388,7 @@
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))
 
 /obj/item/organ/proc/can_recover()
-	return (max_damage > 0) && !(status & ORGAN_DEAD) || death_time >= world.time - ORGAN_RECOVERY_THRESHOLD
+	return (max_damage > 0) && !(status & ORGAN_DEAD) || death_time >= REALTIMEOFDAY - ORGAN_RECOVERY_THRESHOLD
 
 /obj/item/organ/proc/get_scan_results(var/tag = FALSE)
 	. = list()

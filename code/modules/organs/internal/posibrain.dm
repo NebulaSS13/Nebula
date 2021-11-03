@@ -22,6 +22,7 @@
 	)
 	relative_size = 60
 	req_access = list(access_robotics)
+	status = ORGAN_PROSTHETIC //triggers robotization on init
 
 	var/mob/living/silicon/sil_brainmob/brainmob = null
 	var/searching = 0
@@ -36,13 +37,11 @@
 	. = ..()
 	if(!brainmob && iscarbon(loc))
 		init(loc)
-	robotize()
-	unshackle()
-	update_icon()
 
 /obj/item/organ/internal/posibrain/proc/init(var/mob/living/carbon/H)
+	if(brainmob)
+		return
 	brainmob = new(src)
-
 	if(istype(H))
 		brainmob.SetName(H.real_name)
 		brainmob.real_name = H.real_name
@@ -52,6 +51,11 @@
 /obj/item/organ/internal/posibrain/Destroy()
 	QDEL_NULL(brainmob)
 	return ..()
+
+/obj/item/organ/internal/posibrain/setup_as_prosthetic()
+	. = ..()
+	unshackle()
+	update_icon()
 
 /obj/item/organ/internal/posibrain/attack_self(mob/user)
 	if(brainmob && !brainmob.key && searching == 0)
@@ -210,6 +214,7 @@
 	organ_tag = BP_CELL
 	parent_organ = BP_CHEST
 	vital = 1
+	status = ORGAN_PROSTHETIC //triggers robotization on init
 	var/open
 	var/obj/item/cell/cell = /obj/item/cell/hyper
 	//at 0.8 completely depleted after 60ish minutes of constant walking or 130 minutes of standing still
@@ -307,6 +312,7 @@
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
 	vital = 1
+	status = ORGAN_PROSTHETIC //triggers robotization on init
 	var/obj/item/mmi/stored_mmi
 	var/datum/mind/persistantMind //Mind that the organ will hold on to after being removed, used for transfer_and_delete
 	var/ownerckey // used in the event the owner is out of body

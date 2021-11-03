@@ -38,20 +38,12 @@
 		tmp_owner.internal_organs_by_name[organ_tag] = new replace_path(tmp_owner, 1)
 		tmp_owner = null
 
-/obj/item/organ/internal/brain/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
-	. = ..()
-	icon_state = "brain-prosthetic"
-
-/obj/item/organ/internal/brain/Initialize()
+/obj/item/organ/internal/brain/set_dna(datum/dna/new_dna)
 	. = ..()
 	if(species)
 		set_max_damage(species.total_health)
 	else
 		set_max_damage(200)
-
-	spawn(5)
-		if(brainmob && brainmob.client)
-			brainmob.client.screen.len = null //clear the hud
 
 /obj/item/organ/internal/brain/set_max_damage(var/ndamage)
 	..()
