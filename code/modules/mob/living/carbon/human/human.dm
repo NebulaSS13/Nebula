@@ -12,7 +12,7 @@
 	var/obj/item/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
 	var/step_count
 
-/mob/living/carbon/human/Initialize(mapload, var/species_name = null, var/datum/dna/dna = null)
+/mob/living/carbon/human/Initialize(mapload, var/species_name = null, var/datum/dna/new_dna = null)
 	setup_hud_overlays()
 	var/list/newargs = args.Copy(2)
 	setup(arglist(newargs))
@@ -643,6 +643,8 @@
 			update_body()
 
 //set_species should not handle the entirety of initing the mob, and should not trigger deep updates
+//It focuses on setting up specie related data, without force applying them uppon organs and the mob's appearence.
+// For transforming an existing mob, look at change_species()
 /mob/living/carbon/human/proc/set_species(var/new_species_name)
 	if(!new_species_name)
 		CRASH("set_species on mob '[src]' was passed a null species name '[new_species_name]'!")
@@ -696,6 +698,7 @@
 	update_emotes()
 	return TRUE
 
+//Syncs cultural tokens to the currently set specie, and may trigger a language update
 /mob/living/carbon/human/proc/apply_species_cultural_info()
 	var/update_lang
 	for(var/token in ALL_CULTURAL_TAGS)
@@ -709,6 +712,7 @@
 	if(update_lang)
 		update_languages()
 
+//Drop anything that cannot be worn by the current specie of the mob
 /mob/living/carbon/human/proc/apply_species_inventory_restrictions()
 	if(species)
 		if(!(species.appearance_flags & HAS_UNDERWEAR))
@@ -721,6 +725,7 @@
 			unEquip(C)
 
 //This handles actually updating our visual appearance
+// Triggers deep update of limbs and hud
 /mob/living/carbon/human/proc/apply_species_appearance()
 	if(!species)
 		icon_state = lowertext(SPECIES_HUMAN)
@@ -1284,14 +1289,14 @@
 
 //Set and force the mob to update according to the given DNA
 // Will reset the entire mob's state, regrow limbs/organ etc
-/mob/living/carbon/human/proc/apply_dna(var/datum/dna/dna)
-	if(!dna)
+/mob/living/carbon/human/proc/apply_dna(var/datum/dna/new_dna)
+	if(!new_dna)
 		CRASH("/mob/living/carbon/human/proc/apply_dna() : Got null dna")
-	src.dna = dna
+	src.dna = new_dna
 
 	//Set species and real name data
-	set_real_name(dna.real_name)
-	set_species(dna.species)
+	set_real_name(new_dna.real_name)
+	set_species(new_dna.species)
 	//Revive actually regen organs, reset their appearence and makes sure if the player is kicked out they get reinserted in
 	revive()
 	
@@ -1315,21 +1320,22 @@
 		mind.name = newname
 
 //#TODO: Find better name
-/mob/living/carbon/human/proc/setup(var/species_name = null, var/datum/dna/dna = null)
-	if(dna)
-		species_name = dna.species
-		src.dna = dna
+//Human mob specific init code. Meant to be used only on init.
+/mob/living/carbon/human/proc/setup(var/species_name = null, var/datum/dna/new_dna = null)
+	if(new_dna)
+		species_name = new_dna.species
+		src.dna = new_dna
 	else if(!species_name)
 		species_name = global.using_map.default_species
 
 	set_species(species_name)
 
-	if(dna)
-		set_real_name(dna.real_name)
+	if(new_dna)
+		set_real_name(new_dna.real_name)
 	else
 		try_generate_default_name()
 
-	if(!dna)
+	if(!new_dna)
 		src.dna.ready_dna(src) //regen dna filler only if we haven't forced the dna already
 
 	species.handle_pre_spawn(src)
@@ -1349,5 +1355,5 @@
 	else
 		SetName("unknown")
 
-/mob/living/carbon/human/proc/post_setup(var/species_name = null, var/datum/dna/dna = null)
+/mob/living/carbon/human/proc/post_setup(var/species_name = null, var/datum/dna/new_dna = null)
 	refresh_visible_overlays()
