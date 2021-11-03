@@ -871,7 +871,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	//Add missing descriptors, and sanitize any existing ones
 	for(var/desctype in src.appearance_descriptors)
 		var/datum/appearance_descriptor/descriptor = src.appearance_descriptors[desctype]
-		if(H.appearance_descriptors?[descriptor.name])
+		if(H.appearance_descriptors && H.appearance_descriptors[descriptor.name])
 			new_descriptors[descriptor.name] = descriptor.sanitize_value(H.appearance_descriptors[descriptor.name])
 		else
 			new_descriptors[descriptor.name] = descriptor.default_value
