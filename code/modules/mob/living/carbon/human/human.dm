@@ -662,7 +662,9 @@
 	species = new_species
 	if(dna)
 		dna.species = new_species_name
-	holder_type = species.holder_type?  species.holder_type : holder_type
+	holder_type = null
+	if(species.holder_type)
+		holder_type = species.holder_type
 	maxHealth = species.total_health
 	remove_extension(src, /datum/extension/armor)
 	if(species.natural_armour_values)
