@@ -80,7 +80,6 @@
 /decl/sprite_accessory/hair/ponytail2
 	name = "Ponytail 2"
 	icon_state = "hair_pa"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/ponytail3
@@ -91,25 +90,21 @@
 /decl/sprite_accessory/hair/ponytail4
 	name = "Ponytail 4"
 	icon_state = "hair_ponytail4"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/ponytail5
 	name = "Ponytail 5"
 	icon_state = "hair_ponytail5"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/ponytail6
 	name = "Ponytail 6"
 	icon_state = "hair_ponytail6"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/sideponytail
 	name = "Side Ponytail"
 	icon_state = "hair_stail"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/parted
@@ -119,7 +114,6 @@
 /decl/sprite_accessory/hair/pompadour
 	name = "Pompadour"
 	icon_state = "hair_pompadour"
-	gender = MALE
 
 /decl/sprite_accessory/hair/sleeze
 	name = "Sleeze"
@@ -129,7 +123,6 @@
 /decl/sprite_accessory/hair/quiff
 	name = "Quiff"
 	icon_state = "hair_quiff"
-	gender = MALE
 
 /decl/sprite_accessory/hair/bedhead
 	name = "Bedhead"
@@ -147,63 +140,52 @@
 /decl/sprite_accessory/hair/beehive
 	name = "Beehive"
 	icon_state = "hair_beehive"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/beehive2
 	name = "Beehive 2"
 	icon_state = "hair_beehive2"
-	gender = FEMALE
 
 /decl/sprite_accessory/hair/bobcurl
 	name = "Bobcurl"
 	icon_state = "hair_bobcurl"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/bob
 	name = "Bob"
 	icon_state = "hair_bobcut"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/bobcutalt
 	name = "Chin Length Bob"
 	icon_state = "hair_bobcutalt"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/bowl
 	name = "Bowl"
 	icon_state = "hair_bowlcut"
-	gender = MALE
 
 /decl/sprite_accessory/hair/buzz
 	name = "Buzzcut"
 	icon_state = "hair_buzzcut"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/crew
 	name = "Crewcut"
 	icon_state = "hair_crewcut"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/combover
 	name = "Combover"
 	icon_state = "hair_combover"
-	gender = MALE
 
 /decl/sprite_accessory/hair/father
 	name = "Father"
 	icon_state = "hair_father"
-	gender = MALE
 
 /decl/sprite_accessory/hair/reversemohawk
 	name = "Reverse Mohawk"
 	icon_state = "hair_reversemohawk"
-	gender = MALE
 
 /decl/sprite_accessory/hair/devillock
 	name = "Devil Lock"
@@ -229,7 +211,6 @@
 /decl/sprite_accessory/hair/afro_large
 	name = "Big Afro"
 	icon_state = "hair_bigafro"
-	gender = MALE
 
 /decl/sprite_accessory/hair/rows
 	name = "Rows"
@@ -244,7 +225,6 @@
 /decl/sprite_accessory/hair/sargeant
 	name = "Flat Top"
 	icon_state = "hair_sargeant"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/emo
@@ -258,7 +238,6 @@
 /decl/sprite_accessory/hair/longemo
 	name = "Long Emo"
 	icon_state = "hair_emolong"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/shortovereye
@@ -283,7 +262,6 @@
 /decl/sprite_accessory/hair/hitop
 	name = "Hitop"
 	icon_state = "hair_hitop"
-	gender = MALE
 
 /decl/sprite_accessory/hair/mohawk
 	name = "Mohawk"
@@ -292,17 +270,14 @@
 /decl/sprite_accessory/hair/jensen
 	name = "Adam Jensen Hair"
 	icon_state = "hair_jensen"
-	gender = MALE
 
 /decl/sprite_accessory/hair/gelled
 	name = "Gelled Back"
 	icon_state = "hair_gelled"
-	gender = FEMALE
 
 /decl/sprite_accessory/hair/gentle
 	name = "Gentle"
 	icon_state = "hair_gentle"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/spiky
@@ -316,55 +291,46 @@
 /decl/sprite_accessory/hair/kagami
 	name = "Pigtails"
 	icon_state = "hair_kagami"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/himecut
 	name = "Hime Cut"
 	icon_state = "hair_himecut"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/shorthime
 	name = "Short Hime Cut"
 	icon_state = "hair_shorthime"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/grandebraid
 	name = "Grande Braid"
 	icon_state = "hair_grande"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/mbraid
 	name = "Medium Braid"
 	icon_state = "hair_shortbraid"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/braid2
 	name = "Long Braid"
 	icon_state = "hair_hbraid"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/odango
 	name = "Odango"
 	icon_state = "hair_odango"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/ombre
 	name = "Ombre"
 	icon_state = "hair_ombre"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/updo
 	name = "Updo"
 	icon_state = "hair_updo"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/skinhead
@@ -375,72 +341,59 @@
 /decl/sprite_accessory/hair/balding
 	name = "Balding Hair"
 	icon_state = "hair_e"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/familyman
 	name = "The Family Man"
 	icon_state = "hair_thefamilyman"
-	gender = MALE
 
 /decl/sprite_accessory/hair/mahdrills
 	name = "Drillruru"
 	icon_state = "hair_drillruru"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/fringetail
 	name = "Fringetail"
 	icon_state = "hair_fringetail"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/dandypomp
 	name = "Dandy Pompadour"
 	icon_state = "hair_dandypompadour"
-	gender = MALE
 
 /decl/sprite_accessory/hair/poofy
 	name = "Poofy"
 	icon_state = "hair_poofy"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/crono
 	name = "Chrono"
 	icon_state = "hair_toriyama"
-	gender = MALE
 
 /decl/sprite_accessory/hair/vegeta
 	name = "Vegeta"
 	icon_state = "hair_toriyama2"
-	gender = MALE
 
 /decl/sprite_accessory/hair/cia
 	name = "CIA"
 	icon_state = "hair_cia"
-	gender = MALE
 
 /decl/sprite_accessory/hair/mulder
 	name = "Mulder"
 	icon_state = "hair_mulder"
-	gender = MALE
 
 /decl/sprite_accessory/hair/scully
 	name = "Scully"
 	icon_state = "hair_scully"
-	gender = FEMALE
 
 /decl/sprite_accessory/hair/nitori
 	name = "Nitori"
 	icon_state = "hair_nitori"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/joestar
 	name = "Joestar"
 	icon_state = "hair_joestar"
-	gender = MALE
 
 /decl/sprite_accessory/hair/volaju
 	name = "Volaju"
@@ -494,7 +447,6 @@
 /decl/sprite_accessory/hair/lowfade
 	name = "Low Fade"
 	icon_state = "hair_lowfade"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/medfade
@@ -505,132 +457,110 @@
 /decl/sprite_accessory/hair/highfade
 	name = "High Fade"
 	icon_state = "hair_highfade"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/baldfade
 	name = "Balding Fade"
 	icon_state = "hair_baldfade"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/nofade
 	name = "Regulation Cut"
 	icon_state = "hair_nofade"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/trimflat
 	name = "Trimmed Flat Top"
 	icon_state = "hair_trimflat"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/shaved
 	name = "Shaved"
 	icon_state = "hair_shaved"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/trimmed
 	name = "Trimmed"
 	icon_state = "hair_trimmed"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/tightbun
 	name = "Tight Bun"
 	icon_state = "hair_tightbun"
-	gender = FEMALE
 	flags = VERY_SHORT | HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/coffeehouse
 	name = "Coffee House Cut"
 	icon_state = "hair_coffeehouse"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/undercut
 	name = "Undercut"
 	icon_state = "hair_undercut"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/partfade
 	name = "Parted Fade"
 	icon_state = "hair_shavedpart"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/hightight
 	name = "High and Tight"
 	icon_state = "hair_hightight"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/rowbun
 	name = "Row Bun"
 	icon_state = "hair_rowbun"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/rowdualbraid
 	name = "Row Dual Braid"
 	icon_state = "hair_rowdualtail"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/rowbraid
 	name = "Row Braid"
 	icon_state = "hair_rowbraid"
-	gender = FEMALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/regulationmohawk
 	name = "Regulation Mohawk"
 	icon_state = "hair_shavedmohawk"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/topknot
 	name = "Topknot"
 	icon_state = "hair_topknot"
-	gender = MALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/ronin
 	name = "Ronin"
 	icon_state = "hair_ronin"
-	gender = MALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/bowlcut2
 	name = "Bowl2"
 	icon_state = "hair_bowlcut2"
-	gender = MALE
 
 /decl/sprite_accessory/hair/thinning
 	name = "Thinning"
 	icon_state = "hair_thinning"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/thinningfront
 	name = "Thinning Front"
 	icon_state = "hair_thinningfront"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/thinningback
 	name = "Thinning Back"
 	icon_state = "hair_thinningrear"
-	gender = MALE
 	flags = VERY_SHORT
 
 /decl/sprite_accessory/hair/manbun
 	name = "Manbun"
 	icon_state = "hair_manbun"
-	gender = MALE
 	flags = HAIR_TIEABLE
 
 /decl/sprite_accessory/hair/leftsidecut
