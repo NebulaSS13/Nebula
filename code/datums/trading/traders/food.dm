@@ -102,7 +102,6 @@
 							/obj/item/chems/food/fruit_slice                = TRADER_BLACKLIST,
 							/obj/item/chems/food/slice                      = TRADER_BLACKLIST_ALL,
 							/obj/item/chems/food/grown                      = TRADER_BLACKLIST_ALL,
-							/obj/item/chems/food/human                      = TRADER_BLACKLIST_ALL,
 							/obj/item/chems/food/sliceable/braincake        = TRADER_BLACKLIST,
 							/obj/item/chems/food/meat/human                 = TRADER_BLACKLIST,
 							/obj/item/chems/food/variable                   = TRADER_BLACKLIST_ALL

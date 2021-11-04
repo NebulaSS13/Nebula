@@ -63,7 +63,6 @@
 
 /obj/item/chems/food/plainburger/attack_products = list(/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheeseburger)
 /obj/item/chems/food/hamburger/attack_products = list(/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheeseburger)
-/obj/item/chems/food/human/burger/attack_products = list(/obj/item/chems/food/cheesewedge = /obj/item/chems/food/cheeseburger)
 
 // Spaghetti + meatball = spaghetti with meatball(s)
 /obj/item/chems/food/boiledspagetti/attack_products = list(/obj/item/chems/food/meatball = /obj/item/chems/food/meatballspagetti)

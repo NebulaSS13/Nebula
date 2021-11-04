@@ -6,7 +6,7 @@
 	volume = 60
 	var/reagent
 
-/obj/item/chems/glass/bottle/robot/stabilizer/Initialize()
+/obj/item/chems/glass/bottle/robot/Initialize()
 	. = ..()
 	if(reagent)
 		reagents.add_reagent(reagent, volume)

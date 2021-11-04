@@ -26,22 +26,6 @@
 	nutriment_amt = 2
 	bitesize = 2
 
-/obj/item/chems/food/human
-	filling_color = "#d63c3c"
-	material = /decl/material/solid/meat
-	var/hname = ""
-
-/obj/item/chems/food/human/burger
-	name = "-burger"
-	desc = "A bloody burger."
-	icon_state = "hburger"
-	center_of_mass = @"{'x':16,'y':11}"
-	bitesize = 2
-
-/obj/item/chems/food/human/burger/Initialize()
-	. = ..()
-	reagents.add_reagent(/decl/material/liquid/nutriment/protein, 6)
-
 /obj/item/chems/food/cheeseburger
 	name = "cheeseburger"
 	desc = "The cheese adds a good flavor."
