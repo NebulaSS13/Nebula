@@ -2,7 +2,7 @@
 /// Droppers.
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/chems/dropper
-	name = "Dropper"
+	name = "dropper"
 	desc = "A small glass tube with a bulbous rubber blister on one end. Used to drop very precise amounts of reagents between vessels."
 	icon = 'icons/obj/items/chem/dropper.dmi'
 	icon_state = "dropper0"

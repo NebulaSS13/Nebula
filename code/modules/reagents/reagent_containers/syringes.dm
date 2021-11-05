@@ -313,7 +313,7 @@
 	update_icon()
 
 /obj/item/chems/syringe/ld50_syringe
-	name = "Lethal Injection Syringe"
+	name = "lethal injection syringe"
 	desc = "A syringe used for lethal injections."
 	amount_per_transfer_from_this = 60
 	volume = 60
@@ -341,7 +341,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /obj/item/chems/syringe/stabilizer
-	name = "Syringe (stabilizer)"
+	name = "syringe (stabilizer)"
 	desc = "Contains stabilizer - for patients in danger of brain damage."
 
 /obj/item/chems/syringe/stabilizer/Initialize()
@@ -351,7 +351,7 @@
 	update_icon()
 
 /obj/item/chems/syringe/antitoxin
-	name = "Syringe (anti-toxin)"
+	name = "syringe (anti-toxin)"
 	desc = "Contains anti-toxins."
 
 /obj/item/chems/syringe/antitoxin/Initialize()
@@ -361,7 +361,7 @@
 	update_icon()
 
 /obj/item/chems/syringe/antibiotic
-	name = "Syringe (antibiotics)"
+	name = "syringe (antibiotics)"
 	desc = "Contains antibiotic agents."
 
 /obj/item/chems/syringe/antibiotic/Initialize()
@@ -371,7 +371,7 @@
 	update_icon()
 
 /obj/item/chems/syringe/drugs
-	name = "Syringe (drugs)"
+	name = "syringe (drugs)"
 	desc = "Contains aggressive drugs meant for torture."
 
 /obj/item/chems/syringe/drugs/Initialize()
@@ -383,7 +383,7 @@
 	update_icon()
 
 /obj/item/chems/syringe/steroid
-	name = "Syringe (anabolic steroids)"
+	name = "syringe (anabolic steroids)"
 	desc = "Contains drugs for muscle growth."
 
 /obj/item/chems/syringe/steroid/Initialize()
