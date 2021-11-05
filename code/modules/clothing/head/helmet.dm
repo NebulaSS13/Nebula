@@ -171,7 +171,7 @@
 	siemens_coefficient = 1
 
 /obj/item/clothing/head/helmet/augment
-	name = "Augment Array"
+	name = "augment array"
 	desc = "A helmet with optical and cranial augments coupled to it."
 	icon = 'icons/clothing/head/armor/augment.dmi'
 	valid_accessory_slots = null
