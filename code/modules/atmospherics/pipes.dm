@@ -274,7 +274,7 @@
 	level = 2
 
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers
-	name = "Scrubbers pipe"
+	name = "scrubbers pipe"
 	desc = "A one meter section of scrubbers pipe."
 	icon_state = "11-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
@@ -282,7 +282,7 @@
 	color = PIPE_COLOR_RED
 
 /obj/machinery/atmospherics/pipe/simple/visible/supply
-	name = "Air supply pipe"
+	name = "air supply pipe"
 	desc = "A one meter section of supply pipe."
 	icon_state = "11-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
@@ -308,7 +308,7 @@
 	color = PIPE_COLOR_BLUE
 
 /obj/machinery/atmospherics/pipe/simple/visible/fuel
-	name = "Fuel pipe"
+	name = "fuel pipe"
 	color = PIPE_COLOR_ORANGE
 	maximum_pressure = 420*ONE_ATMOSPHERE
 	fatigue_pressure = 350*ONE_ATMOSPHERE
@@ -320,7 +320,7 @@
 	alpha = 128		//set for the benefit of mapping - this is reset to opaque when the pipe is spawned in game
 
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers
-	name = "Scrubbers pipe"
+	name = "scrubbers pipe"
 	desc = "A one meter section of scrubbers pipe."
 	icon_state = "11-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
@@ -328,7 +328,7 @@
 	color = PIPE_COLOR_RED
 
 /obj/machinery/atmospherics/pipe/simple/hidden/supply
-	name = "Air supply pipe"
+	name = "air supply pipe"
 	desc = "A one meter section of supply pipe."
 	icon_state = "11-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
@@ -354,7 +354,7 @@
 	color = PIPE_COLOR_BLUE
 
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel
-	name = "Fuel pipe"
+	name = "fuel pipe"
 	color = PIPE_COLOR_ORANGE
 	maximum_pressure = 420*ONE_ATMOSPHERE
 	fatigue_pressure = 350*ONE_ATMOSPHERE
@@ -436,7 +436,7 @@
 	color = PIPE_COLOR_BLUE
 
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel
-	name = "Fuel pipe manifold"
+	name = "fuel pipe manifold"
 	color = PIPE_COLOR_ORANGE
 	connect_types = CONNECT_TYPE_FUEL
 
@@ -480,7 +480,7 @@
 	color = PIPE_COLOR_BLUE
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel
-	name = "Fuel pipe manifold"
+	name = "fuel pipe manifold"
 	color = PIPE_COLOR_ORANGE
 	connect_types = CONNECT_TYPE_FUEL
 
