@@ -1293,7 +1293,7 @@
 // Will reset the entire mob's state, regrow limbs/organ etc
 /mob/living/carbon/human/proc/apply_dna(var/datum/dna/new_dna)
 	if(!new_dna)
-		CRASH("/mob/living/carbon/human/proc/apply_dna() : Got null dna")
+		CRASH("mob/living/carbon/human/proc/apply_dna() : Got null dna")
 	src.dna = new_dna
 
 	//Set species and real name data
