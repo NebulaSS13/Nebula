@@ -1,0 +1,4 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - rscadd: Added behavior for reloadable energy weapons.
