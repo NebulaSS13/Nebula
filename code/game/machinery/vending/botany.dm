@@ -43,9 +43,9 @@
 		/obj/item/seeds/carrotseed = 3,
 		/obj/item/seeds/chantermycelium = 3,
 		/obj/item/seeds/chiliseed = 3,
-		/obj/item/seeds/cornseed = 3, 
-		/obj/item/seeds/eggplantseed = 3, 
-		/obj/item/seeds/potatoseed = 3, 
+		/obj/item/seeds/cornseed = 3,
+		/obj/item/seeds/eggplantseed = 3,
+		/obj/item/seeds/potatoseed = 3,
 		/obj/item/seeds/soyaseed = 3,
 		/obj/item/seeds/sunflowerseed = 3,
 		/obj/item/seeds/tomatoseed = 3,
@@ -92,6 +92,3 @@
 	icon_state = "seeds_generic"
 	icon_vend = "seeds_generic-vend"
 	icon_deny = "seeds_generic-deny"
-
-/obj/machinery/vending/hydroseeds/get_product_name(var/entry)
-	. = atom_info_repository.get_name_for(entry)
