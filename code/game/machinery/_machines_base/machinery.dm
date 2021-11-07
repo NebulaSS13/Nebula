@@ -279,14 +279,6 @@ Class Procs:
 		return FALSE // The interactions below all assume physical access to the machine. If this is not the case, we let the machine take further action.
 	if(!user.check_dexterity(required_interaction_dexterity))
 		return TRUE
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.getBrainLoss() >= 55)
-			visible_message("<span class='warning'>[H] stares cluelessly at \the [src].</span>")
-			return 1
-		else if(prob(H.getBrainLoss()))
-			to_chat(user, "<span class='warning'>You momentarily forget how to use \the [src].</span>")
-			return 1
 	if((. = component_attack_hand(user)))
 		return
 	if(wires && (. = wires.Interact(user)))
