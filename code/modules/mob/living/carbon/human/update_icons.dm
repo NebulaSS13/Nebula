@@ -206,7 +206,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
 	if(istype(head) && !head.is_stump())
 		var/image/I = head.get_eye_overlay()
-		if(I) 
+		if(I)
 			add_overlay(I)
 
 /mob/living/carbon/human/proc/get_icon_scale_mult()
@@ -220,9 +220,10 @@ Please contact me on #coderbus IRC. ~Carn x
 	var/desired_scale_x = icon_scale_values[1]
 	var/desired_scale_y = icon_scale_values[2]
 
-	// Apply KEEP_TOGETHER so all the component overlays don't ignore PIXEL_SCALE 
-	// when scaling, or remove it if we aren't doing any scaling (due to cost).
-	if(desired_scale_x == 1 && desired_scale_y == 1)
+	// Apply KEEP_TOGETHER so all the component overlays move properly when
+	// applying a transform, or remove it if we aren't doing any transforms
+	// (due to cost).
+	if(!lying && desired_scale_x == 1 && desired_scale_y == 1)
 		appearance_flags &= ~KEEP_TOGETHER
 	else
 		appearance_flags |= KEEP_TOGETHER
