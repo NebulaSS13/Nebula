@@ -88,3 +88,6 @@ MAX_CLIENT_VIEW_Y 30
 
 ## Allow multiple input keys to be pressed for diagonal movement.
 #ALLOW_DIAGONAL_MOVEMENT
+
+## Threshold of where brain damage begins to affect dexterity (70 brainloss above this means zero dexterity). Default is 30.
+#DEXTERITY_MALUS_BRAINLOSS_THRESHOLD 30
