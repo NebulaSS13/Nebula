@@ -1769,7 +1769,7 @@
 	var/obj/item/organ/external/active_hand = organs_by_name[force_active_hand]
 	var/dex_malus = 0
 	if(getBrainLoss() && getBrainLoss() > config.dex_malus_brainloss_threshold) ///brainloss shouldn't instantly cripple you, so the effects only start once past the threshold and escalate from there.
-		dex_malus = round(clamp(round(getBrainLoss()-config.dex_malus_brainloss_threshold)/10, 0, 7))
+		dex_malus = round(clamp(round(getBrainLoss()-config.dex_malus_brainloss_threshold)/10, DEXTERITY_NONE, DEXTERITY_FULL))
 	if(!active_hand)
 		if(!silent)
 			to_chat(src, SPAN_WARNING("Your hand is missing!"))
