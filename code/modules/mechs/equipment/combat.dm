@@ -154,7 +154,7 @@
 
 /obj/aura/mechshield/added_to(var/mob/living/target)
 	. = ..()
-	target.vis_contents += src
+	add_vis_contents(target, src)
 	set_dir(target.dir)
 	events_repository.register(/decl/observ/dir_set, user, src, /obj/aura/mechshield/proc/update_dir)
 
@@ -170,7 +170,7 @@
 /obj/aura/mechshield/Destroy()
 	if(user)
 		events_repository.unregister(/decl/observ/dir_set, user, src, /obj/aura/mechshield/proc/update_dir)
-		user.vis_contents -= src
+		remove_vis_contents(user, src)
 	shields = null
 	. = ..()
 
@@ -394,7 +394,7 @@
 		
 /obj/aura/mech_ballistic/added_to(mob/living/target)
 	. = ..()
-	target.vis_contents += src
+	add_vis_contents(target, src)
 	set_dir(target.dir)
 	global.events_repository.register(/decl/observ/dir_set, user, src, /obj/aura/mech_ballistic/proc/update_dir)
 
@@ -404,7 +404,7 @@
 /obj/aura/mech_ballistic/Destroy()
 	if (user)
 		global.events_repository.unregister(/decl/observ/dir_set, user, src, /obj/aura/mech_ballistic/proc/update_dir)
-		user.vis_contents -= src
+		remove_vis_contents(user, src)
 	shield = null
 	. = ..() 
 	

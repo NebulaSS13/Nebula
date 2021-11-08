@@ -9,32 +9,26 @@
 	icon = null
 	icon_state = null
 	permit_ao = FALSE
+	var/mimicx
+	var/mimicy
 
 /turf/exterior/planet_edge/Initialize()
 	. = ..()
 	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
 	if(!istype(E))
 		return
-	var/nx = x
+	mimicx = x
 	if (x <= TRANSITIONEDGE)
-		nx = x + (E.maxx - 2*TRANSITIONEDGE) - 1
+		mimicx = x + (E.maxx - 2*TRANSITIONEDGE) - 1
 	else if (x >= (E.maxx - TRANSITIONEDGE))
-		nx = x - (E.maxx  - 2*TRANSITIONEDGE) + 1
+		mimicx = x - (E.maxx  - 2*TRANSITIONEDGE) + 1
 
-	var/ny = y
+	mimicy = y
 	if(y <= TRANSITIONEDGE)
-		ny = y + (E.maxy - 2*TRANSITIONEDGE) - 1
+		mimicy = y + (E.maxy - 2*TRANSITIONEDGE) - 1
 	else if (y >= (E.maxy - TRANSITIONEDGE))
-		ny = y - (E.maxy - 2*TRANSITIONEDGE) + 1
-
-	var/turf/NT = locate(nx, ny, z)
-	if(NT)
-		if(flooded)
-			vis_contents = list(NT, global.flood_object)
-		else
-			vis_contents = list(NT)
-	else if(flooded)
-		vis_contents = list(global.flood_object)
+		mimicy = y - (E.maxy - 2*TRANSITIONEDGE) + 1
+	refresh_vis_contents()
 
 	//Need to put a mouse-opaque overlay there to prevent people turning/shooting towards ACTUAL location of vis_content things
 	var/obj/effect/overlay/O = new(src)
@@ -70,3 +64,9 @@
 
 /turf/exterior/planet_edge/on_update_icon()
 	return
+
+/turf/exterior/planet_edge/get_vis_contents_to_add()
+	. = ..()
+	var/turf/NT = mimicx && mimicy && locate(mimicx, mimicy, z)
+	if(NT)
+		LAZYADD(., NT)

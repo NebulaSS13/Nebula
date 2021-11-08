@@ -9,7 +9,10 @@
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	features_budget = 6
 	surface_color = "#807d7a"
-	water_color = null
+	water_color =    null
+	water_material = null
+	ice_material =   null
+	weather_system = null
 	has_trees = FALSE
 	spawn_weight = 50	// These are pretty boring
 
@@ -36,3 +39,4 @@
 	name = "\improper Planetary surface"
 	ambience = list('sound/effects/wind/wind_2_1.ogg','sound/effects/wind/wind_2_2.ogg','sound/effects/wind/wind_3_1.ogg','sound/effects/wind/wind_4_1.ogg','sound/effects/wind/wind_4_2.ogg','sound/effects/wind/wind_5_1.ogg')
 	base_turf = /turf/exterior/barren
+	is_outside = OUTSIDE_YES

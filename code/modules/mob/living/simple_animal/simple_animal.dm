@@ -415,7 +415,7 @@
 
 	return 1
 
-/mob/living/simple_animal/movement_delay()
+/mob/living/simple_animal/get_movement_delay(var/travel_dir)
 	var/tally = ..() //Incase I need to add stuff other than "speed" later
 
 	tally += speed

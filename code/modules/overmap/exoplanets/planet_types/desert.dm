@@ -7,7 +7,10 @@
 	plant_colors = list("#efdd6f","#7b4a12","#e49135","#ba6222","#5c755e","#701732")
 	map_generators = list(/datum/random_map/noise/exoplanet/desert, /datum/random_map/noise/ore/rich)
 	surface_color = "#d6cca4"
-	water_color = null
+	water_color =    null
+	water_material = null
+	ice_material =   null
+	weather_system = null
 	has_trees = FALSE
 	flora_diversity = 4
 	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/slug, /mob/living/simple_animal/hostile/antlion)

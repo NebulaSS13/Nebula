@@ -135,3 +135,6 @@
 	resources = list(
 		/decl/material/solid/metal/titanium =   CEILING((SHEET_MATERIAL_AMOUNT * FABRICATOR_EXTRA_COST_FACTOR)),
 	)
+
+/datum/fabricator_recipe/umbrella
+	path = /obj/item/umbrella

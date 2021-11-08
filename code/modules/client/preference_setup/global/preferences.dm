@@ -117,6 +117,7 @@ var/global/list/_client_preferences_by_type
 	if(new_value == PREF_NO)
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = sound_channels.lobby_channel))
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = sound_channels.ambience_channel))
+		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = sound_channels.weather_channel))
 
 /datum/client_preference/ghost_ears
 	description ="Ghost ears"

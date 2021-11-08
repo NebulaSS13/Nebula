@@ -7,7 +7,7 @@
 
 /turf/exterior/seafloor/flooded
 	flooded = TRUE
-	color = COLOR_OCEAN
+	color = COLOR_LIQUID_WATER
 
 /turf/exterior/seafloor/Initialize()
 	. = ..()

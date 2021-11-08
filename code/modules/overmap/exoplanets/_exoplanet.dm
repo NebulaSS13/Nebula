@@ -30,6 +30,8 @@
 	var/grass_color
 	var/surface_color = COLOR_ASTEROID_ROCK
 	var/water_color = "#436499"
+	var/water_material = /decl/material/liquid/water
+	var/ice_material =   /decl/material/solid/ice
 	var/image/skybox_image
 
 	var/list/actors = list() 	//things that appear in engravings on xenoarch finds.
@@ -76,6 +78,8 @@
 
 	var/spawn_weight = 100	// Decides how often this planet will be picked for generation
 
+	var/obj/abstract/weather_system/weather_system = /decl/state/weather/calm // Initial weather is passed to the system as its default state.
+
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_strata()
 	return crust_strata
 
@@ -95,6 +99,7 @@
 	return ..()
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/build_level(max_x, max_y)
+
 	maxx = max_x ? max_x : world.maxx
 	maxy = max_y ? max_y : world.maxy
 	x_origin = TRANSITIONEDGE + 1
@@ -114,6 +119,11 @@
 		var/datum/exoplanet_theme/T = pickweight(possible_themes)
 		themes += new T
 		possible_themes -= T
+
+	if(ispath(weather_system, /decl/state/weather))
+		weather_system = new /obj/abstract/weather_system(null, map_z[1], weather_system)
+		weather_system.water_material = water_material
+		weather_system.ice_material = ice_material
 
 	generate_habitability()
 	generate_atmosphere()
@@ -282,3 +292,4 @@
 	always_unpowered = 1
 	area_flags = AREA_FLAG_IS_BACKGROUND | AREA_FLAG_EXTERNAL
 	show_starlight = TRUE
+	is_outside = OUTSIDE_YES

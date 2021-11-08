@@ -20,7 +20,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	. = TRUE
 
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE, var/keep_outside = FALSE)
 
 	if (!N)
 		return
@@ -45,6 +45,7 @@
 	var/old_lighting_overlay = lighting_overlay
 	var/old_dynamic_lighting = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
 	var/old_flooded =          flooded
+	var/old_outside =          is_outside
 
 	changing_turf = TRUE
 
@@ -101,6 +102,11 @@
 			lighting_clear_overlay()
 
 	// end of lighting stuff
+
+	// Outside/weather stuff. set_outside() updates weather already 
+	// so only call it again if it doesn't already handle it.
+	if(!keep_outside || !W.set_outside(old_outside))
+		W.update_weather()
 
 /turf/proc/transport_properties_from(turf/other)
 	if(!istype(other, src.type))

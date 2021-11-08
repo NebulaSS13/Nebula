@@ -137,6 +137,7 @@
 		/decl/material/solid/metal/aluminium = MATTER_AMOUNT_REINFORCEMENT,
 		/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT
 	)
+	protects_against_weather = TRUE
 
 /obj/item/clothing/suit/space/Initialize()
 	. = ..()
