@@ -1,0 +1,7 @@
+author: Andromeda-K22
+delete-after: true
+changes:
+  - tweak: machines no longer directly check brainloss, but instead rely fully on
+      dexterity checks.
+  - balance: dexterity is influenced by brain damage, starting at 30 brainloss (configurable).
+      Dexterity loss is on a sliding scale.
