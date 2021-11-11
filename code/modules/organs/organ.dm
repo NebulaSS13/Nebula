@@ -49,9 +49,9 @@
 /obj/item/organ/proc/is_broken()
 	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
 
-//Second argument may be a dna datum; if null will be set to holder's dna.
-/obj/item/organ/Initialize(mapload, var/datum/dna/given_dna)
-	. = ..(mapload)
+//Third rgument may be a dna datum; if null will be set to holder's dna.
+/obj/item/organ/Initialize(mapload, material_key, var/datum/dna/given_dna)
+	. = ..(mapload, material_key)
 	
 	if(max_damage)
 		min_broken_damage = FLOOR(max_damage / 2)

@@ -12,7 +12,7 @@
 	var/min_bruised_damage = 10       // Damage before considered bruised
 	var/damage_reduction = 0.5     //modifier for internal organ injury
 
-/obj/item/organ/internal/Initialize(mapload, datum/dna/given_dna)
+/obj/item/organ/internal/Initialize(mapload, material_key, datum/dna/given_dna)
 	if(!alive_icon)
 		alive_icon = initial(icon_state)
 	if(max_damage)

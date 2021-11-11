@@ -100,7 +100,7 @@
 		F.completeness = rand(10,90)
 		forensics.add_data(/datum/forensics/fingerprints, F)
 
-/obj/item/organ/external/Initialize(mapload, datum/dna/given_dna)	
+/obj/item/organ/external/Initialize(mapload, material_key, datum/dna/given_dna)	
 	. = ..()
 	if(. == INITIALIZE_HINT_QDEL)
 		return
