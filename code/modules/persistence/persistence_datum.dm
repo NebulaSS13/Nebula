@@ -127,17 +127,6 @@
 		if(IsValidEntry(thing))
 			entries += list(CompileEntry(thing))
 
-#if DM_VERSION < 513 || (DM_VERSION == 513 && DM_BUILD < 1540)
-	for(var/list/entry in entries)
-		for(var/i in 1 to entry.len)
-			var/item = entry[i]
-			var/encoded_value = (istext(entry[item]) ? url_encode(entry[item]) : entry[item])
-			var/encoded_key = url_encode(item)
-			entry[i] = encoded_key
-			entry[encoded_key] = encoded_value
-	entries.Insert(1, list(list("url_encoded" = TRUE)))
-#endif
-
 	if(fexists(filename))
 		fdel(filename)
 	to_file(file(filename), json_encode(entries))
