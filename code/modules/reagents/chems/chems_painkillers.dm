@@ -1,6 +1,6 @@
 /decl/material/liquid/painkillers
 	name = "painkillers"
-	uid = "chem_foo"
+	uid = "chem_painkillers"
 	lore_text = "A highly effective opioid painkiller. Do not mix with alcohol."
 	taste_description = "sourness"
 	color = "#cb68fc"
@@ -12,15 +12,15 @@
 	value = 1.8
 	var/pain_power = 80 //magnitude of painkilling effect
 	var/effective_dose = 0.5 //how many units it need to process to reach max power
-	var/additional_effect_threshold = 15 // cumulative dosage at which slowdown and drowsiness are applied
+	var/additional_effect_threshold = 20 // cumulative dosage at which slowdown and drowsiness are applied
 	var/sedation = 0 //how strong is this chemical as a sedative
-	var/breathloss_severity = 0.5 //how strong will breathloss related effects be
-	var/slowdown_severity = 1
+	var/breathloss_severity = 1 //how strong will breathloss related effects be
+	var/slowdown_severity = 1.2
 	var/blurred_vision = 0.5
-	var/stuttering_severity = 0
-	var/slur_severity = 1
-	var/confusion_severity = 0.5 //confusion randomizes your movement
-	var/weakness_severity = 0.5 //weakness makes you remain floored
+	var/stuttering_severity = 0.5
+	var/slur_severity = 0
+	var/confusion_severity = 0.2 //confusion randomizes your movement
+	var/weakness_severity = 0 //weakness makes you remain floored
 	var/dizziness_severity = 1
 	var/narcotic = TRUE
 
@@ -38,12 +38,14 @@
 	if(!narcotic)
 		return
 	if(dose > 0.5 * additional_effect_threshold)
-		M.add_chemical_effect(CE_SLOWDOWN, slowdown_severity)
+		if(slowdown_severity)
+			M.add_chemical_effect(CE_SLOWDOWN, slowdown_severity)
 		if(prob(15) && slur_severity)
 			SET_STATUS_MAX(M, STAT_SLUR, (slur_severity * 10))
 
 	if(dose > 0.75 * additional_effect_threshold) //minor side effects may start here
-		M.add_chemical_effect(CE_SLOWDOWN, slowdown_severity)
+		if(slowdown_severity)
+			M.add_chemical_effect(CE_SLOWDOWN, slowdown_severity)
 		if(prob(30) && slur_severity)
 			SET_STATUS_MAX(M, STAT_SLUR, (slur_severity * 20))
 		if(prob(30) && dizziness_severity)
@@ -64,7 +66,8 @@
 				SET_STATUS_MAX(M, STAT_DROWSY, (sedation * 20))
 
 	if(dose > additional_effect_threshold) //not quite an overdose yet, but it's a lot of medicine to take at once.
-		M.add_chemical_effect(CE_SLOWDOWN, (slowdown_severity * 2))
+		if(slowdown_severity)
+			M.add_chemical_effect(CE_SLOWDOWN, (slowdown_severity * 2))
 		SET_STATUS_MAX(M, STAT_BLURRY, (blurred_vision * 40))
 		if(prob(75) && slur_severity)
 			SET_STATUS_MAX(M, STAT_SLUR, (slur_severity * 40))
@@ -88,7 +91,7 @@
 	var/boozed = isboozed(M)
 	if(boozed)
 		M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
-		M.add_chemical_effect(CE_BREATHLOSS, 1 * boozed) //drinking and opiating suppreesses breathing.
+		M.add_chemical_effect(CE_BREATHLOSS, 1 * boozed) //drinking and opiating suppresses breathing.
 
 /decl/material/liquid/painkillers/affect_overdose(var/mob/living/M, var/alien, var/datum/reagents/holder)
 	..()
