@@ -63,18 +63,3 @@
 	weather.weather_system.set_state(use_state)
 	var/decl/state/weather/weather_state = GET_DECL(use_state)
 	to_chat(usr, SPAN_NOTICE("Set weather for z[T.z] to [weather_state.name]."))
-
-/client/verb/test_weather_lightning()
-	set name = "Test Lightning Strike"
-	set category = "Weather Debug"
-	set src = usr
-
-	var/turf/T = get_turf(mob)
-	if(!T)
-		return
-	to_chat(mob, "Testing lightning strike.")
-	var/obj/abstract/weather_system/weather = T.weather || global.weather_by_z["[T.z]"]
-	if(!weather)
-		weather = new /obj/abstract/weather_system(null, T.z)
-	weather.lightning_strike()
-	to_chat(mob, "Done.")
