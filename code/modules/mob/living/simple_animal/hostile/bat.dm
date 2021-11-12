@@ -25,6 +25,10 @@
 	if(istype(L))
 		owner = L
 
+/mob/living/simple_animal/hostile/scarybat/Destroy()
+	owner = null
+	return ..()
+
 /mob/living/simple_animal/hostile/scarybat/FindTarget()
 	. = ..()
 	if(.)
