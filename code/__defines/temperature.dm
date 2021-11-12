@@ -3,11 +3,13 @@
 #define ATOM_TEMPERATURE_EQUILIBRIUM_CONSTANT 0.25
 
 #define ADJUST_ATOM_TEMPERATURE(_atom, _temp) \
-	_atom.temperature = _temp; \
-	if(_atom.reagents) { \
-		HANDLE_REACTIONS(_atom.reagents); \
-	} \
-	QUEUE_TEMPERATURE_ATOMS(_atom);
+	if(!QDELETED(_atom)) { \
+		_atom.temperature = _temp; \
+		if(!QDELETED(_atom.reagents)) { \
+			HANDLE_REACTIONS(_atom.reagents); \
+		} \
+		QUEUE_TEMPERATURE_ATOMS(_atom);\
+	}
 
 #define QUEUE_TEMPERATURE_ATOMS(_atoms) \
 	if(islist(_atoms)) { \
