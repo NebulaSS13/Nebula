@@ -95,7 +95,17 @@
 		loc.Entered(src, null)
 
 /atom/movable/Destroy()
-	. = ..()
+	// These must be done before event cleanup in the parent call
+	if(LAZYLEN(movement_handlers) && !ispath(movement_handlers[1]))
+		QDEL_NULL_LIST(movement_handlers)
+
+	if (bound_overlay)
+		QDEL_NULL(bound_overlay)
+
+	if(virtual_mob && !ispath(virtual_mob))
+		qdel(virtual_mob)
+		virtual_mob = null
+
 #ifdef DISABLE_DEBUG_CRASH
 	// meh do nothing. we know what we're doing. pro engineers.
 #else
@@ -108,12 +118,7 @@
 
 	forceMove(null)
 
-	if(LAZYLEN(movement_handlers) && !ispath(movement_handlers[1]))
-		QDEL_NULL_LIST(movement_handlers)
+	vis_locs = null //clears this atom out of all vis_contents
+	vis_contents.Cut()
 
-	if (bound_overlay)
-		QDEL_NULL(bound_overlay)
-
-	if(virtual_mob && !ispath(virtual_mob))
-		qdel(virtual_mob)
-		virtual_mob = null
+	. = ..() // called last so that events are unregistered before the parent call
