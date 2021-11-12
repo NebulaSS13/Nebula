@@ -397,7 +397,7 @@ SUBSYSTEM_DEF(garbage)
 			return
 
 		if(!skip_alert)
-			if(alert("Running this will lock everything up for about 5 minutes.  Would you like to begin the search?", "Find References", "Yes", "No") == "No")
+			if(UNLINT(alert("Running this will lock everything up for about 5 minutes.  Would you like to begin the search?", "Find References", "Yes", "No")) == "No")
 				running_find_references = null
 				return
 
@@ -410,8 +410,8 @@ SUBSYSTEM_DEF(garbage)
 	testing("Beginning search for references to a [type].")
 	last_find_references = world.time
 
-	DoSearchVar(global.vars) //globals
-	for(var/datum/thing in world) //atoms (don't believe its lies)
+	DoSearchVar(global.vars, "(global) -> ") //globals
+	for(var/atom/thing) //atoms
 		DoSearchVar(thing, "World -> [thing]")
 
 	for (var/datum/thing) //datums
@@ -452,7 +452,7 @@ SUBSYSTEM_DEF(garbage)
 #define GET_TYPEID(ref) ( ( (length(ref) <= 10) ? "TYPEID_NULL" : copytext(ref, 4, length(ref)-6) ) )
 #define IS_NORMAL_LIST(L) (GET_TYPEID("\ref[L]") == TYPEID_NORMAL_LIST)
 
-/datum/proc/DoSearchVar(X, Xname, recursive_limit = 64)
+/datum/proc/DoSearchVar(X, Xname, recursive_limit = 8)
 	if(usr && usr.client && !usr.client.running_find_references)
 		return
 	if (!recursive_limit)
@@ -475,7 +475,7 @@ SUBSYSTEM_DEF(garbage)
 				testing("Found [src.type] \ref[src] in [D.type]'s [varname] var. [Xname]")
 
 			else if(islist(variable))
-				DoSearchVar(variable, "[Xname] -> list", recursive_limit-1)
+				DoSearchVar(variable, "[Xname] -> [varname] (list)", recursive_limit-1)
 
 	else if(islist(X))
 		var/normal = IS_NORMAL_LIST(X)
@@ -483,11 +483,15 @@ SUBSYSTEM_DEF(garbage)
 			if (I == src)
 				testing("Found [src.type] \ref[src] in list [Xname].")
 
-			else if (I && !isnum(I) && normal && X[I] == src)
-				testing("Found [src.type] \ref[src] in list [Xname]\[[I]\]")
+			else if (I && !isnum(I) && normal)
+				if(X[I] == src)
+					testing("Found [src.type] \ref[src] in list [Xname]\[[I]\]")
+				else if(islist(X[I]))
+					DoSearchVar(X[I], "[Xname]\[[I]\]", recursive_limit-1)
 
 			else if (islist(I))
-				DoSearchVar(I, "[Xname] -> list", recursive_limit-1)
+				var/list/Xlist = X
+				DoSearchVar(I, "[Xname]\[[Xlist.Find(I)]\] -> list", recursive_limit-1)
 
 #ifndef FIND_REF_NO_CHECK_TICK
 	CHECK_TICK
