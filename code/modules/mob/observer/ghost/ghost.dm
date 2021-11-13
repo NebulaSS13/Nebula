@@ -64,7 +64,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		if(length(spawn_locs))
 			T = pick(spawn_locs)
 		else
-			T = locate(1, 1, 1) 
+			T = locate(1, 1, 1)
 	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
@@ -188,7 +188,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
 		announce_ghost_joinleave(ghost)
 
-/mob/observer/ghost/can_use_hands()	
+/mob/observer/ghost/can_use_hands()
 	return FALSE
 
 /mob/observer/ghost/is_active()
@@ -205,7 +205,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set category = "Ghost"
 	set name = "Re-enter Corpse"
 	if(!client)	return
-	if(!(mind && mind.current && can_reenter_corpse))
+	if(QDELETED(mind) || QDELETED(mind.current) || !can_reenter_corpse)
 		to_chat(src, "<span class='warning'>You have no body.</span>")
 		return
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
