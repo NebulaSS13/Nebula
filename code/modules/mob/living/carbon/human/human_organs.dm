@@ -8,7 +8,7 @@
 	var/obj/item/organ/external/E = get_organ(zone)
 	if(E) . = E.name
 
-/mob/living/carbon/human/proc/recheck_bad_external_organs()
+/mob/living/carbon/human/proc/should_recheck_bad_external_organs()
 	var/damage_this_tick = getToxLoss()
 	for(var/obj/item/organ/external/O in get_external_organs())
 		damage_this_tick += O.burn_dam + O.brute_dam
@@ -17,13 +17,23 @@
 		. = TRUE
 	last_dam = damage_this_tick
 
+/mob/living/carbon/human/proc/recheck_bad_external_organs()
+	bad_external_organs.Cut()
+	for(var/obj/item/organ/external/E in organs)
+		if(!E || !E.need_process())
+			continue
+		bad_external_organs |= E
+
 // Takes care of organ related updates, such as broken and missing limbs
 /mob/living/carbon/human/proc/handle_organs()
+	//processing internal organs is pretty cheap, do that first.
+	for(var/obj/item/organ/I in internal_organs)
+		I.Process()
 
-	var/force_process = recheck_bad_external_organs()
+	var/force_process = should_recheck_bad_external_organs()
 
 	if(force_process)
-		bad_external_organs.Cut()
+		recheck_bad_external_organs()
 		for(var/obj/item/organ/external/Ex in get_external_organs())
 			bad_external_organs |= Ex
 

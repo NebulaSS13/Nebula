@@ -120,6 +120,9 @@
 	LAZYCLEARLIST(internal_organs)
 	LAZYCLEARLIST(implants)
 
+	if(owner)
+		owner.bad_external_organs -= src
+
 /obj/item/organ/external/set_species(specie_name)
 	. = ..()
 	skin_blend = bodytype.limb_blend

@@ -88,7 +88,7 @@ var/global/list/end_titles
 	var/client/P = parent
 	if(parent)
 		P.screen -= src
-	LAZYREMOVE(P.credits, src)
+	LAZYREMOVE(P?.credits, src)
 	parent = null
 	return ..()
 
