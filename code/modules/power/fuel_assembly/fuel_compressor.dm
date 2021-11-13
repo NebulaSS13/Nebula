@@ -78,6 +78,10 @@
 			visible_message(SPAN_WARNING("\The [src] flashes an 'Insufficient Materials' error!"))
 			return TOPIC_HANDLED
 	
+	if(!LAZYLEN(rod_makeup) || !total_matter)
+		visible_message(SPAN_WARNING("\The [src] flashes a 'No Recipe' error!"))
+		return TOPIC_HANDLED
+
 	for(var/mat_p in rod_makeup)
 		stored_material[mat_p] -= rod_makeup[mat_p]
 		if(stored_material[mat_p] == 0)
