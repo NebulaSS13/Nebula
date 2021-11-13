@@ -58,7 +58,6 @@
 	var/obj/screen/gun/item/item_use_icon = null
 	var/obj/screen/gun/radio/radio_use_icon = null
 	var/obj/screen/gun/move/gun_move_icon = null
-	var/obj/screen/gun/run/gun_run_icon = null
 	var/obj/screen/gun/mode/gun_setting_icon = null
 
 	var/obj/screen/movable/ability_master/ability_master = null
@@ -136,8 +135,8 @@
 	var/blinded = null
 
 	//The last mob/living/carbon to push/drag/grab this mob (mostly used by slimes friend recognition)
-	var/weakref/last_handled_by_mob 
-	
+	var/weakref/last_handled_by_mob
+
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 
 	var/update_icon = 1 //Set to 1 to trigger update_icon() at the next life() call
