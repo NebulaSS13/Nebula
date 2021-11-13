@@ -19,11 +19,11 @@
 	clear_fullscreen()
 	if(istype(ai))
 		QDEL_NULL(ai)
+	remove_screen_obj_references()
 	if(client)
-		remove_screen_obj_references()
 		for(var/atom/movable/AM in client.screen)
 			var/obj/screen/screenobj = AM
-			if(!istype(screenobj) || !screenobj.globalscreen)
+			if(istype(screenobj) && !screenobj.globalscreen)
 				qdel(screenobj)
 		client.screen = list()
 	if(mind)
@@ -45,9 +45,12 @@
 	healths = null
 	throw_icon = null
 	nutrition_icon = null
+	hydration_icon = null
 	pressure = null
 	pain = null
+	up_hint = null
 	item_use_icon = null
+	radio_use_icon = null
 	gun_move_icon = null
 	gun_setting_icon = null
 	ability_master = null
