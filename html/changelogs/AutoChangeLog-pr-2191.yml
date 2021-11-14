@@ -1,5 +1,0 @@
-author: Kaksisilma
-delete-after: true
-changes:
-  - tweak: painkillers now have a number of modular vars for use in the creation of
-      subtypes.
