@@ -8,6 +8,7 @@
 	obj_flags = OBJ_FLAG_ROTATABLE
 
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
+	var/has_special_overlay = FALSE
 
 /obj/structure/bed/chair/do_simple_ranged_interaction(var/mob/user)
 	if(!buckled_mob && user)
@@ -46,7 +47,14 @@
 			I.appearance_flags |= RESET_COLOR
 			I.color = reinf_material.color
 		LAZYADD(new_overlays, I)
-	overlays += new_overlays
+	if(has_special_overlay && buckled_mob)
+		I = image(icon, "[icon_state]_special")
+		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
+		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
+			I.appearance_flags |= RESET_COLOR
+			I.color = material.color
+		LAZYADD(new_overlays, I)
+	add_overlay(new_overlays)
 
 /obj/structure/bed/chair/rotate(mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -111,16 +119,7 @@
 	buckle_movable = 1
 	material = /decl/material/solid/metal/steel
 	reinf_material = /decl/material/solid/cloth/blue
-
-/obj/structure/bed/chair/comfy/captain/on_update_icon()
-	..()
-	if(buckled_mob)
-		var/image/I = image(icon, "[icon_state]_special")
-		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
-		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-			I.appearance_flags |= RESET_COLOR
-			I.color = material.color
-		overlays |= I
+	has_special_overlay = TRUE
 
 /obj/structure/bed/chair/armchair
 	name = "armchair"
@@ -229,6 +228,7 @@
 	icon_state = "shuttle_chair"
 	buckle_sound = 'sound/effects/metal_close.ogg'
 	material = /decl/material/solid/metal/steel
+	has_special_overlay = TRUE
 
 /obj/structure/bed/chair/shuttle/post_buckle_mob()
 	if(buckled_mob)
@@ -236,16 +236,6 @@
 	else
 		icon_state = "shuttle_chair"
 	..()
-
-/obj/structure/bed/chair/shuttle/on_update_icon()
-	..()
-	if(buckled_mob)
-		var/image/I = image(icon, "[icon_state]_special")
-		I.layer = buckled_mob ? ABOVE_HUMAN_LAYER : FLOAT_LAYER
-		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
-			I.appearance_flags |= RESET_COLOR
-			I.color = material.color
-		overlays |= I
 
 /obj/structure/bed/chair/shuttle/blue
 	reinf_material = /decl/material/solid/cloth/blue

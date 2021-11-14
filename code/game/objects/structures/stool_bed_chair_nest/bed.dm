@@ -44,6 +44,7 @@
 // Reuse the cache/code from stools, todo maybe unify.
 /obj/structure/bed/on_update_icon()
 	..()
+	cut_overlays()
 	var/new_overlays
 	if(istype(reinf_material))
 		var/image/I = image(icon, "[icon_state]_padding")
@@ -51,7 +52,7 @@
 			I.appearance_flags |= RESET_COLOR
 			I.color = reinf_material.color
 		LAZYADD(new_overlays, I)
-	overlays = new_overlays
+	set_overlays(new_overlays)
 
 /obj/structure/bed/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
