@@ -729,20 +729,21 @@
 		var/matrix/M = matrix()
 		switch(ndir)
 			if(NORTH)
-				pixel_y = -32
-				pixel_x = 0
+				default_pixel_y = -32
+				default_pixel_x = 0
 				M.Turn(180)
 			if(SOUTH)
-				pixel_y = 21
-				pixel_x = 0
+				default_pixel_y = 21
+				default_pixel_x = 0
 			if(EAST)
-				pixel_x = -27
-				pixel_y = 0
+				default_pixel_x = -27
+				default_pixel_y = 0
 				M.Turn(270)
 			if(WEST)
-				pixel_x = 27
-				pixel_y = 0
+				default_pixel_x = 27
+				default_pixel_y = 0
 				M.Turn(90)
+		reset_offsets(0)
 		transform = M
 
 #undef IC_MAX_SIZE_BASE

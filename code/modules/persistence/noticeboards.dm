@@ -44,17 +44,18 @@
 
 		switch(placing)
 			if(NORTH)
-				pixel_x = 0
-				pixel_y = 32
+				default_pixel_x = 0
+				default_pixel_y = 32
 			if(SOUTH)
-				pixel_x = 0
-				pixel_y = -32
+				default_pixel_x = 0
+				default_pixel_y = -32
 			if(EAST)
-				pixel_x = 32
-				pixel_y = 0
+				default_pixel_x = 32
+				default_pixel_y = 0
 			if(WEST)
-				pixel_x = -32
-				pixel_y = 0
+				default_pixel_x = -32
+				default_pixel_y = 0
+		reset_offsets(0)
 
 	update_icon()
 
@@ -98,19 +99,18 @@
 			var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
 			if(choice && Adjacent(user) && thing.loc == user && !user.incapacitated())
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+				default_pixel_x = 0
+				default_pixel_y = 0
 				switch(choice)
 					if("North")
-						pixel_x = 0
-						pixel_y = 32
+						default_pixel_y = 32
 					if("South")
-						pixel_x = 0
-						pixel_y = -32
+						default_pixel_y = -32
 					if("East")
-						pixel_x = 32
-						pixel_y = 0
+						default_pixel_x = 32
 					if("West")
-						pixel_x = -32
-						pixel_y = 0
+						default_pixel_x = -32
+				reset_offsets(0)
 			return TRUE
 
 		if(!istype(thing, /obj/item/paper/sticky) && (istype(thing, /obj/item/paper) || istype(thing, /obj/item/photo)))
