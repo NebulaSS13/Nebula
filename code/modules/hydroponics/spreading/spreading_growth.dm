@@ -143,6 +143,8 @@
 		if(!istype(check_turf))
 			continue
 		for(var/obj/effect/vine/neighbor in check_turf.contents)
+			if(QDELETED(neighbor))
+				continue
 			START_PROCESSING(SSvines, neighbor)
 
 /obj/effect/vine/proc/targets_in_range()
@@ -151,6 +153,8 @@
 		if(!istype(check_turf))
 			continue
 		for(var/mob/living/M in check_turf.contents)
+			if(QDELETED(M))
+				continue
 			if(prob(5) || !M.skill_check(SKILL_BOTANY, SKILL_PROF))
 				targets |= M
 	if(targets.len)
