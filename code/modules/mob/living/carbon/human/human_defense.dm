@@ -12,7 +12,9 @@ meteor_act
 	def_zone = check_zone(def_zone, src)
 	if(!has_organ(def_zone))
 		return PROJECTILE_FORCE_MISS //if they don't have the organ in question then the projectile just passes by.
-
+	if(P.damage_type == BRUTE) //Потому что лазеры не пробивают кости
+		if(def_zone == BP_HEAD)
+			adjustBrainLoss(P.force * 20)
 	//Shields
 	var/shield_check = check_shields(P.damage, P, null, def_zone, "the [P.name]")
 	if(shield_check)
