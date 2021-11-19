@@ -95,6 +95,11 @@
 	else
 		..()
 
+/obj/item/baton/throw_impact(atom/hit_atom, datum/thrownthing/TT)
+	. = ..()
+	if(ishuman(hit_atom))
+		apply_hit_effect(hit_atom, TT.thrower, TT.target_zone, thrown = TRUE)
+
 /obj/item/baton/attack_self(mob/user)
 	set_status(!status, user)
 	add_fingerprint(user)
@@ -128,12 +133,15 @@
 		return
 	return ..()
 
-/obj/item/baton/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+/obj/item/baton/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone, var/thrown = FALSE)
 	if(isrobot(target))
 		return ..()
 
 	var/agony = agonyforce
 	var/stun = stunforce
+	var/throwfail = 0
+	if(thrown)
+		throwfail = user.skill_fail_prob(SKILL_COMBAT, 15, no_more_fail = SKILL_EXPERT)
 	var/obj/item/organ/external/affecting = null
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
@@ -151,20 +159,27 @@
 		else
 			agony = 0	//Shouldn't really stun if it's off, should it?
 		//we can't really extract the actual hit zone from ..(), unfortunately. Just act like they attacked the area they intended to.
-	else if(!status)
-		if(affecting)
-			target.visible_message("<span class='warning'>[target] has been prodded in the [affecting.name] with [src][abuser]. Luckily it was off.</span>")
+	if(!thrown)
+		if(!status)
+			if(affecting)
+				target.visible_message("<span class='warning'>[target] has been prodded in the [affecting.name] with [src][abuser]. Luckily it was off.</span>")
+			else
+				target.visible_message("<span class='warning'>[target] has been prodded with [src][abuser]. Luckily it was off.</span>")
 		else
-			target.visible_message("<span class='warning'>[target] has been prodded with [src][abuser]. Luckily it was off.</span>")
-	else
-		if(affecting)
-			target.visible_message("<span class='danger'>[target] has been prodded in the [affecting.name] with [src]!</span>")
-		else
-			target.visible_message("<span class='danger'>[target] has been prodded with [src][abuser]!</span>")
+			if(affecting)
+				target.visible_message("<span class='danger'>[target] has been prodded in the [affecting.name] with [src]!</span>")
+			else
+				target.visible_message("<span class='danger'>[target] has been prodded with [src][abuser]!</span>")
 		playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 
+	if(thrown && !throwfail)
+		target.visible_message(SPAN_DANGER("[user] has thrown \the [src] at [target]'s [affecting.name] for great justice!"))
+		playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
+	else
+		target.visible_message(SPAN_DANGER("[user] has thrown \the [src] at [target]'s [affecting.name] ... and missed!"))
+
 	//stun effects
-	if(status)
+	if(status && !throwfail)
 		target.stun_effect_act(stun, agony, hit_zone, src)
 		msg_admin_attack("[key_name(user)] stunned [key_name(target)] with the [src].")
 		deductcharge(hitcost)
@@ -206,7 +221,7 @@
 /obj/item/baton/robot/attackby(obj/item/W, mob/user)
 	return
 
-/obj/item/baton/robot/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+/obj/item/baton/robot/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone, var/thrown)
 	update_cell(isrobot(user) ? user : null) // update the status before we apply the effects
 	return ..()
 
