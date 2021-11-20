@@ -776,6 +776,8 @@
 		wearer = null
 
 /obj/item/rig/proc/deselect_module()
+	if(!selected_module)
+		return
 	if(selected_module.suit_overlay_inactive)
 		selected_module.suit_overlay = selected_module.suit_overlay_inactive
 	else
