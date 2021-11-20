@@ -1,5 +1,14 @@
 /datum/job/tradeship_deckhand
 	title = "Deck Hand"
+	min_skill = list(
+		SKILL_LITERACY = SKILL_BASIC,
+		SKILL_WEAPONS  = SKILL_ADEPT,
+	)
+	max_skill = list(
+		SKILL_PILOT   = SKILL_MAX,
+		SKILL_WEAPONS = SKILL_MAX
+	)
+	skill_points = 32
 	event_categories = list("Janitor", "Gardener")
 	total_positions = -1
 	spawn_positions = -1

@@ -12,7 +12,7 @@
 		SKILL_PILOT   = SKILL_MAX,
 		SKILL_WEAPONS = SKILL_MAX
 	)
-	skill_points = 30
+	skill_points = 38
 	head_position = 1
 	department_types = list(/decl/department/command)
 	total_positions = 1
@@ -21,7 +21,7 @@
 	req_admin_notify = 1
 	access = list()
 	minimal_access = list()
-	minimal_player_age = 14
+	minimal_player_age = 30
 	economic_power = 20
 	ideal_character_age = 70
 	guestbanned = 1

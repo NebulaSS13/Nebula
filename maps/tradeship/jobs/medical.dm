@@ -53,7 +53,7 @@
 	alt_titles = list("Surgeon")
 	total_positions = 1
 	spawn_positions = 1
-	skill_points = 28
+	skill_points = 36
 	guestbanned = 1	
 	must_fill = 1
 	not_random_selectable = 1
