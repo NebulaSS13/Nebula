@@ -8,7 +8,7 @@
 	origin_tech = "{'combat':2,'materials':2}"
 	handle_casings = CYCLE_CASINGS
 	max_shells = 6
-	fire_delay = 6 //Revolvers are naturally slower-firing
+	fire_delay = 12 //Revolvers are naturally slower-firing
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
 	var/chamber_offset = 0 //how many empty chambers in the cylinder until you hit a round
 	mag_insert_sound = 'sound/weapons/guns/interaction/rev_magin.ogg'

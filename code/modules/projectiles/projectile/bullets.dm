@@ -79,10 +79,10 @@
 
 /obj/item/projectile/bullet/pistol/strong
 	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
-	damage = 70
-	penetration_modifier = 0.7
+	damage = 50
+	penetration_modifier = 0.8
 	distance_falloff = 2.5
-	armor_penetration = 30
+	armor_penetration = 15
 
 /obj/item/projectile/bullet/pistol/rubber //"rubber" bullets
 	name = "rubber bullet"
