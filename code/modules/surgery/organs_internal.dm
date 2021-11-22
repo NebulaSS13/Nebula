@@ -374,7 +374,7 @@
 	if(istype(I) && I.parent_organ == target_zone && affected && (I in affected.implants))
 		I.status &= ~ORGAN_CUT_AWAY //apply sutures
 		LAZYREMOVE(affected.implants, I)
-		I.replaced(target, affected)
+		target.add_organ(I, affected)
 
 /decl/surgery_step/internal/attach_organ/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

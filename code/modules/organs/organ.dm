@@ -333,42 +333,52 @@
  *
  *  Also, Observer Pattern Implementation: Dismembered Handling occurs here.
  */
-/obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1)
 
-	if(!istype(owner))
-		return
-	events_repository.raise_event(/decl/observ/dismembered, owner, src)
 
+
+
+
+//Handles only the installation of the organ, without triggering any callbacks.
+//if we're an internal organ, having a null "target" is legal if we have an "affected"
+
+//CASES:
+// 1. When creating organs and running their init this is called to properly set them up
+// 2. When installing an organ through surgery via replaced this is called.
+// The organ may be inside an external organ that's not inside a mob, or inside a mob
+
+/obj/item/organ/proc/install(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE)
+	owner = target
+	action_button_name = initial(action_button_name)
+
+	if(owner)
+		forceMove(owner)
+		for(var/datum/ailment/ailment in ailments)
+			ailment.begin_ailment_event()
+	else if(affected)
+		forceMove(affected) //When installed in a limb with no owner
+
+	return src
+
+//Handles uninstalling the organ from its owner and parent limb, without triggering any callbacks.
+
+//CASES:
+// 1. Before deletion. 
+// 2. Called through removed on surgery or dismemberement
+// 3. Called when we're changing a mob's species.
+// Case 1 and 3 shouldn't cause 
+
+/obj/item/organ/proc/uninstall(var/in_place = FALSE, var/detach = FALSE, var/ignore_children = FALSE)
 	action_button_name = null
-
-	if(drop_organ)
-		dropInto(owner.loc)
-
-	START_PROCESSING(SSobj, src)
-	rejecting = null
-	if(!BP_IS_PROSTHETIC(src) && species && reagents?.total_volume < 5)
-		owner.vessel.trans_to(src, 5 - reagents.total_volume, 1, 1)
-
-	if(vital)
-		if(user)
-			admin_attack_log(user, owner, "Removed a vital organ ([src]).", "Had a vital organ ([src]) removed.", "removed a vital organ ([src]) from")
-		owner.death()
 	screen_loc = null
-	owner.client?.screen -= src
 	owner = null
-
+	rejecting = null
 	for(var/datum/ailment/ailment in ailments)
 		if(ailment.timer_id)
 			deltimer(ailment.timer_id)
 			ailment.timer_id = null
-
-/obj/item/organ/proc/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
-	owner = target
-	action_button_name = initial(action_button_name)
-	forceMove(owner) //just in case
-	for(var/datum/ailment/ailment in ailments)
-		ailment.begin_ailment_event()
-	return TRUE
+	if(detach)
+		set_detached(TRUE)
+	return src
 
 /obj/item/organ/attack(var/mob/target, var/mob/user)
 	if(status & ORGAN_PROSTHETIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
@@ -523,3 +533,19 @@ var/global/list/ailment_reference_cache = list()
 			LAZYADD(., ailment.replace_tokens(message = ailment.manual_diagnosis_string, user = user))
 		else if(ailment.scanner_diagnosis_string && scanner)
 			LAZYADD(., ailment.replace_tokens(message = ailment.scanner_diagnosis_string, user = user))
+
+
+//Events handling for checks and effects that should happen when removing the organ through interactions. Called by the owner mob.
+/obj/item/organ/proc/on_removal(var/mob/living/last_owner)
+	START_PROCESSING(SSobj, src)
+
+//Events handling for checks and effects that should happen when installing the organ through interactions. Called by the owner mob.
+/obj/item/organ/proc/on_replacement()
+	STOP_PROCESSING(SSobj, src)
+
+//Since some types of organs completely ignore being detached, moved it to an overridable organ proc
+/obj/item/organ/proc/set_detached(var/is_detached)
+	if(is_detached)
+		status |= ORGAN_CUT_AWAY
+	else
+		status &= ~ORGAN_CUT_AWAY

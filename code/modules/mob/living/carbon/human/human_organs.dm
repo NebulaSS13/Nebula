@@ -241,3 +241,88 @@
 	if(L)
 		L.rupture()
 
+//
+// Organ install/removal handling
+//
+
+//"in_place"  : If true, we're performing an in-place replacement, without triggering anything related to adding the organ in-game as part of surgery or else.
+
+/mob/living/carbon/human/add_organ(var/obj/item/organ/O, var/obj/item/organ/external/affected = null, var/in_place = FALSE)
+	. = ..()
+	if(ispath(O.type, /obj/item/organ/internal))
+		if(!affected)
+			affected = organs_by_name[O.parent_organ]
+			if(!affected)
+				CRASH("mob/living/carbon/human/proc/add_organ(): Tried to add an internal organ to a non-existing parent external organ!")
+		internal_organs |= O
+		internal_organs_by_name[O.organ_tag] = O
+
+	else if(ispath(O.type, /obj/item/organ/external))
+		organs |= O
+		organs_by_name[O.organ_tag] = O
+		refresh_modular_limb_verbs()
+
+	if(!in_place)
+		on_gained_organ(O)
+	. = O.install(src, affected, in_place)
+
+	//#TODO: wish we could invalidate the human icons to trigger a single update when the organ state changes multiple times in a row
+	update_inv_hands(FALSE)
+	update_body(FALSE)
+	update_bandages(FALSE)
+	UpdateDamageIcon(FALSE)
+	queue_icon_update()
+	
+//"in_place" : If true we remove only the organ (no children items or implants) and avoid triggering mob changes and parent organs changes as much as possible. Meant to be used for init and species transforms. 
+// without triggering any updates to mob state or anything related to losing a limb as part of surgery or combat
+/mob/living/carbon/human/remove_organ(var/obj/item/organ/O, var/drop_organ = TRUE, var/detach = FALSE, var/ignore_children = FALSE,  var/in_place = FALSE)
+	. = ..()
+	if(ispath(O.type, /obj/item/organ/internal))
+		internal_organs -= O
+		internal_organs_by_name -= O.organ_tag
+
+	else if(ispath(O.type, /obj/item/organ/external))
+		bad_external_organs -= O
+		organs -= O
+		organs_by_name -= O.organ_tag
+		refresh_modular_limb_verbs()
+
+	client?.screen -= O
+
+	if(!in_place && species.is_vital_organ(src, O) && usr)
+		admin_attack_log(usr, src, "Removed a vital organ ([src]).", "Had a vital organ ([src]) removed.", "removed a vital organ ([src]) from")
+
+	if(!in_place)
+		on_lost_organ(O)
+	. = O.uninstall(in_place, detach = detach, ignore_children = ignore_children)
+
+	if(drop_organ)
+		O.dropInto(get_turf(src))
+
+	//#TODO: wish we could invalidate the human icons to trigger a single update when the organ state changes multiple times in a row
+	update_inv_hands(FALSE)
+	update_body(FALSE)
+	update_bandages(FALSE)
+	UpdateDamageIcon(FALSE)
+	queue_icon_update()
+
+//Should handle vital organ checks, icon updates, events
+//Callbacks from organs
+/mob/living/carbon/human/proc/on_lost_organ(var/obj/item/organ/O)
+	events_repository.raise_event(/decl/observ/dismembered, src, O)
+
+	//Move some blood over to the organ
+	if(!BP_IS_PROSTHETIC(O) && O.species && O.reagents?.total_volume < 5)
+		vessel.trans_to(O, 5 - O.reagents.total_volume, 1, 1)
+
+	//Let the organ run its removal effect if we want to
+	O.on_removal(src)
+
+	//Check if we should die
+	if(species.is_vital_organ(src, O))
+		death()
+
+/mob/living/carbon/human/proc/on_gained_organ(var/obj/item/organ/O)
+	//Let the organ run its replacement effect if we want to
+	O.on_replacement(src)
+

@@ -487,9 +487,9 @@
 	else if(href_list["remorgan"])
 		if(!check_rights(R_SPAWN))	return
 
-		var/mob/living/carbon/M = locate(href_list["remorgan"])
+		var/mob/living/carbon/human/M = locate(href_list["remorgan"])
 		if(!istype(M))
-			to_chat(usr, "This can only be done to instances of type /mob/living/carbon")
+			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
 			return
 
 		var/obj/item/organ/rem_organ = input("Please choose an organ to remove.","Organ",null) as null|anything in M.internal_organs
@@ -503,7 +503,7 @@
 			return
 
 		to_chat(usr, "Removed [rem_organ] from [M].")
-		rem_organ.removed()
+		M.remove_organ(rem_organ)
 		if(!QDELETED(rem_organ))
 			qdel(rem_organ)
 

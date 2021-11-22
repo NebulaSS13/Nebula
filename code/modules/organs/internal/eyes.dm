@@ -23,6 +23,10 @@
 	var/darksight_range
 	var/eye_blend = ICON_ADD
 
+/obj/item/organ/internal/eyes/robot
+	name = "optical sensor"
+	status = ORGAN_PROSTHETIC
+
 /obj/item/organ/internal/eyes/proc/get_eye_cache_key()
 	last_cached_eye_colour = eye_colour
 	last_eye_cache_key = "[type]-[eye_icon]-[last_cached_eye_colour]"
@@ -44,14 +48,6 @@
 		if(!human_icon_cache[cache_key])
 			human_icon_cache[cache_key] = emissive_overlay(I, "")
 		return human_icon_cache[cache_key]
-
-/obj/item/organ/internal/eyes/replaced(var/mob/living/carbon/human/target)
-
-	// Apply our eye colour to the target.
-	if(istype(target) && eye_colour)
-		target.eye_colour = eye_colour
-		target.update_eyes()
-	..()
 
 /obj/item/organ/internal/eyes/proc/update_colour()
 	if(!owner)
@@ -87,20 +83,20 @@
 /obj/item/organ/internal/eyes/proc/additional_flash_effects(var/intensity)
 	return -1
 
-/obj/item/organ/internal/eyes/robot
-	name = "optical sensor"
-	status = ORGAN_PROSTHETIC
-
-/obj/item/organ/internal/eyes/removed()
-	. = ..()
-	verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
-	verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
-
-/obj/item/organ/internal/eyes/replaced()
-	. = ..()
+/obj/item/organ/internal/eyes/install(mob/living/carbon/human/target, affected, in_place)
+	// Apply our eye colour to the target.
+	if(istype(target) && eye_colour)
+		target.eye_colour = eye_colour
+		target.update_eyes()
 	if(owner && BP_IS_PROSTHETIC(src))
 		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
+	. = ..()
+
+/obj/item/organ/internal/eyes/uninstall(in_place, detach, ignore_children)
+	. = ..()
+	verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
+	verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
 /obj/item/organ/internal/eyes/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	..()

@@ -153,7 +153,7 @@
 
 	last_special = world.time
 	drop_from_inventory(E)
-	E.replaced(src)
+	src.add_organ(E)
 
 	// Reconnect the organ and children as normally this is done with surgery.
 	E.status &= ~ORGAN_CUT_AWAY
@@ -186,7 +186,7 @@
 		return FALSE
 
 	last_special = world.time
-	E.removed(src)
+	remove_organ(E)
 	E.dropInto(loc)
 	put_in_hands(E)
 	var/decl/pronouns/G = get_pronouns()

@@ -1,6 +1,6 @@
 /mob/living/carbon/human/gib()
 	for(var/obj/item/organ/I in internal_organs)
-		I.removed()
+		remove_organ(I)
 		if(!QDELETED(I) && isturf(loc))
 			I.throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 

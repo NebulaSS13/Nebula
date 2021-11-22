@@ -468,7 +468,7 @@
 		if (I.organ_tag == current_organ)
 			I.status &= ~ORGAN_CUT_AWAY
 			LAZYREMOVE(affected.implants, I)
-			I.replaced(target, affected)
+			target.add_organ(I, affected)
 			break
 
 /decl/surgery_step/robotics/attach_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)

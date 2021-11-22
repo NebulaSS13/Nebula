@@ -94,7 +94,7 @@
 	var/obj/item/organ/external/E = tool
 	user.visible_message("<span class='notice'>[user] has attached [target]'s [E.name] to the [E.amputation_point].</span>",	\
 	"<span class='notice'>You have attached [target]'s [E.name] to the [E.amputation_point].</span>")
-	E.replaced(target)
+	target.add_organ(E)
 
 	// Modular bodyparts (like prosthetics) do not need to be reconnected.
 	if(E.get_modular_limb_category() != MODULAR_BODYPART_INVALID)

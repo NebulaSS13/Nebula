@@ -26,12 +26,13 @@
 	if(!ingested.my_atom)
 		ingested.my_atom = src
 
-/obj/item/organ/internal/stomach/removed()
+/obj/item/organ/internal/stomach/uninstall(in_place, detach, ignore_children)
 	. = ..()
-	ingested.my_atom = src
-	ingested.parent = null
+	if(ingested) //Don't bother if we're destroying
+		ingested.my_atom = src
+		ingested.parent = null
 
-/obj/item/organ/internal/stomach/replaced()
+/obj/item/organ/internal/stomach/install()
 	. = ..()
 	ingested.my_atom = owner
 	ingested.parent = owner

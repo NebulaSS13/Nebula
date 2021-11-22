@@ -107,7 +107,7 @@
 	if(isnull(pain_disability_threshold))
 		pain_disability_threshold = (max_damage * 0.75)
 	if(owner)
-		replaced(owner)
+		install(owner)
 	
 /obj/item/organ/external/Destroy()
 
@@ -125,10 +125,6 @@
 	if(splinted && splinted.loc == src)
 		qdel(splinted)
 	splinted = null
-
-	if(owner)
-		owner.organs -= src
-		owner.organs_by_name -= organ_tag
 
 	LAZYCLEARLIST(autopsy_data)
 	QDEL_NULL_LIST(implants)
@@ -377,41 +373,78 @@
 	damage = min(max_damage, (brute_dam + burn_dam))
 	return
 
+//If "in_place" is TRUE will make organs skip their install/uninstall effects and  the sub-limbs and internal organs
+/obj/item/organ/external/install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place = FALSE)
+	if(!(. = ..()))
+		return
 
-/obj/item/organ/external/replaced(var/mob/living/carbon/human/target)
-	..()
-
+	//If attached to an owner mob
 	if(istype(owner))
-		owner.organs_by_name[organ_tag] = src
-		owner.organs |= src
+		testing("External organ '[src]' has a owner '[owner]'")
+		//If we expect a parent organ set it up here
+		if(!parent && parent_organ)
+			parent = affected? affected : owner.get_organ(parent_organ)
 
+		//
+		//If we contain any child organs add them to the owner
+		//
 		for(var/obj/item/organ/organ in internal_organs)
-			organ.replaced(owner, src)
-
-		for(var/obj/implant in implants)
-			implant.forceMove(owner)
-
-			if(istype(implant, /obj/item/implant))
-				var/obj/item/implant/imp_device = implant
-
-				// we can't use implanted() here since it's often interactive
-				imp_device.imp_in = owner
-				imp_device.implanted = 1
+			owner.add_organ(organ, src, in_place = in_place)
 
 		for(var/obj/item/organ/external/organ in children)
-			organ.replaced(owner)
+			owner.add_organ(organ, src, in_place = in_place)
 
-		owner.refresh_modular_limb_verbs()
+		//
+		//Add any existing organs in the owner that have us as parent
+		//
+		for(var/obj/item/organ/internal/I in owner.internal_organs)
+			if(I.parent_organ == organ_tag)
+				LAZYDISTINCTADD(I, internal_organs)
+		update_internal_organs_cost()
 
-	if(!parent && parent_organ)
-		parent = owner.organs_by_name[src.parent_organ]
-		if(parent)
-			LAZYDISTINCTADD(parent.children, src)
-			//Remove all stump wounds since limb is not missing anymore
-			for(var/datum/wound/lost_limb/W in parent.wounds)
-				qdel(W)
-				break
-			parent.update_damages()
+		for(var/obj/item/organ/external/E in owner.organs)
+			if(E.parent_organ == organ_tag)
+				E.parent = src
+				LAZYDISTINCTADD(E, children)
+
+		//Add any existing implants that should be refering us
+		for(var/obj/implant in implants)
+			implant.forceMove(owner)
+			if(istype(implant, /obj/item/implant))
+				var/obj/item/implant/imp_device = implant
+				// we can't use implanted() here since it's often interactive
+				imp_device.imp_in = owner
+				imp_device.implanted = TRUE
+	else
+		//Handle installing into a stand-alone parent limb to keep dropped limbs in some kind of coherent state
+		if(!affected)
+			affected = loc
+		if(istype(affected) && parent_type == affected.organ_tag)
+			parent = affected 
+
+	//Parent hieracrchy handling
+	if(parent)
+		LAZYDISTINCTADD(parent.children, src)
+		//Remove all stump wounds since limb is not missing anymore
+		for(var/datum/wound/lost_limb/W in parent.wounds)
+			//#FIXME: this only remove one random wound.. If there's more than one removed organ, it probably won't work visually?
+			qdel(W)
+			break
+		parent.update_damages()
+
+/obj/item/organ/external/proc/drop_equipped_clothing()
+	if(!owner)
+		return
+	if((body_part & SLOT_FOOT_LEFT) || (body_part & SLOT_FOOT_RIGHT))
+		owner.drop_from_inventory(owner.shoes)
+	if((body_part & SLOT_HAND_LEFT) || (body_part & SLOT_HAND_RIGHT))
+		owner.drop_from_inventory(owner.gloves)
+	if(body_part & SLOT_HEAD)
+		owner.drop_from_inventory(owner.head)
+		owner.drop_from_inventory(owner.glasses)
+		owner.drop_from_inventory(owner.l_ear)
+		owner.drop_from_inventory(owner.r_ear)
+		owner.drop_from_inventory(owner.wear_mask)
 
 //Helper proc used by various tools for repairing robot limbs
 /obj/item/organ/external/proc/robo_repair(var/repair_amount, var/damage_type, var/damage_desc, obj/item/tool, mob/living/user)
@@ -918,7 +951,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		victim.shock_stage += min_broken_damage
 
 	var/mob/living/carbon/human/last_owner = owner
-	removed(null, ignore_children)
+	owner.remove_organ(src, drop_organ = TRUE, detach = FALSE, ignore_children = ignore_children)
 	if(istype(last_owner) && !QDELETED(last_owner) && length(last_owner.organs) <= 1)
 		last_owner.physically_destroyed(FALSE, disintegrate)
 
@@ -983,7 +1016,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 			gore.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/organ/I in internal_organs)
-				I.removed()
+				I.uninstall()
+				I.dropInto(get_turf(loc))
 				if(!QDELETED(I) && isturf(loc))
 					I.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
 
@@ -1255,87 +1289,75 @@ Note that amputating the affected organ does in fact remove the infection from t
 		H.drop_from_inventory(W)
 	W.forceMove(owner)
 
-/obj/item/organ/external/removed(var/mob/living/user, var/ignore_children = 0)
-
-	if(!owner)
-		return
-
-	if((body_part & SLOT_FOOT_LEFT) || (body_part & SLOT_FOOT_RIGHT))
-		owner.drop_from_inventory(owner.shoes)
-	if((body_part & SLOT_HAND_LEFT) || (body_part & SLOT_HAND_RIGHT))
-		owner.drop_from_inventory(owner.gloves)
-	if(body_part & SLOT_HEAD)
-		owner.drop_from_inventory(owner.head)
-		owner.drop_from_inventory(owner.glasses)
-		owner.drop_from_inventory(owner.l_ear)
-		owner.drop_from_inventory(owner.r_ear)
-		owner.drop_from_inventory(owner.wear_mask)
-
+/obj/item/organ/external/uninstall(in_place, detach, ignore_children)
 	var/mob/living/carbon/human/victim = owner
-	var/is_robotic = BP_IS_PROSTHETIC(src)
+	. = ..()
 
-	..()
+	if(victim)
+		if(in_place)
+			//When removing in place, we don't bother with moving child organs and implants, we just clear the refs
+			for(var/obj/item/implant/I in implants)
+				I.removed()
+			//Remove the parent ref from all childs limbs until we replace the organ in place
+			for(var/obj/item/organ/external/E in children)
+				E.parent = null
 
-	victim.bad_external_organs -= src
-
-	remove_splint()
-	for(var/atom/movable/implant in implants)
-		//large items and non-item objs fall to the floor, everything else stays
-		var/obj/item/I = implant
-		if(istype(I) && I.w_class < ITEM_SIZE_NORMAL)
-			implant.forceMove(src)
-
-			// let actual implants still inside know they're no longer implanted
-			if(istype(I, /obj/item/implant))
-				var/obj/item/implant/imp_device = I
-				imp_device.removed()
+			implants = null
+			children = null
+			internal_organs = null
 		else
-			LAZYREMOVE(implants, implant)
-			implant.forceMove(get_turf(src))
+			//Move over our implants/items into us, and drop whatever else is too big or not an object(??)
+			for(var/atom/movable/implant in implants)
+				//large items and non-item objs fall to the floor, everything else stays
+				var/obj/item/I = implant
+				if(istype(I) && I.w_class < ITEM_SIZE_NORMAL)
+					implant.forceMove(src)
+				else
+					LAZYREMOVE(implants, implant)
+					implant.forceMove(get_turf(src))
 
-	// Attached organs also fly off.
-	if(!ignore_children)
-		for(var/obj/item/organ/external/O in children)
-			O.removed()
-			if(QDELETED(O))
-				continue
-			O.forceMove(src)
-			// if we didn't lose the organ we still want it as a child
-			LAZYDISTINCTADD(children, O)
-			O.parent = src
+			if(!ignore_children)
+				//Move our chilren limb into our contents
+				for(var/obj/item/organ/external/O in children)
+					victim.remove_organ(O, drop_organ = FALSE, ignore_children = TRUE)
+					if(QDELETED(O))
+						continue
+					// if we didn't lose the organ we still want it as a child
+					O.forceMove(src)
+					LAZYDISTINCTADD(children, O)
+					O.parent = src
 
-	// Grab all the internal giblets too.
-	for(var/obj/item/organ/organ in internal_organs)
-		organ.removed(user, 0, 0)  // Organ stays inside and connected
-		if(!QDELETED(organ))
-			organ.forceMove(src)
+			// Grab all the children internal organs
+			for(var/obj/item/organ/organ in internal_organs)
+				victim.remove_organ(organ, drop_organ = FALSE, detach = FALSE) // Organ stays inside and connected
+				if(!QDELETED(organ))
+					organ.forceMove(src)
 
 	// Remove parent references
 	if(parent)
 		LAZYREMOVE(parent.children, src)
 		parent = null
 
-	if(!is_robotic)
-		status |= ORGAN_CUT_AWAY
-
-	release_restraints(victim)
-	victim.organs -= src
-	victim.organs_by_name[organ_tag] = null // Remove from owner's vars.
-	victim.organs_by_name -= organ_tag
+/obj/item/organ/external/on_removal(mob/living/carbon/human/last_owner)
+	. = ..()
+	drop_equipped_clothing()
+	remove_splint()
+	release_restraints(last_owner)
 
 	//Robotic limbs explode if sabotaged.
-	if(is_robotic && (status & ORGAN_SABOTAGED))
-		victim.visible_message(
-			"<span class='danger'>\The [victim]'s [src.name] explodes violently!</span>",\
-			"<span class='danger'>Your [src.name] explodes!</span>",\
-			"<span class='danger'>You hear an explosion!</span>")
-		explosion(get_turf(owner),-1,-1,2,3)
-		spark_at(victim, 5, holder=owner)
-		qdel(src)
-	else if(is_stump())
+	if(BP_IS_PROSTHETIC(src) && (status & ORGAN_SABOTAGED))
+		last_owner.visible_message(
+			SPAN_DANGER("\The [last_owner]'s [src.name] explodes violently!"),\
+			SPAN_DANGER("Your [src.name] explodes!"),\
+			SPAN_DANGER("You hear an explosion!"))
+		explosion(get_turf(last_owner),-1,-1,2,3)
+		spark_at(last_owner, 5, holder=last_owner)
 		qdel(src)
 
-	victim.refresh_modular_limb_verbs()
+/obj/item/organ/external/set_detached(is_detached)
+	if(BP_IS_PROSTHETIC(src))
+		is_detached = FALSE //External prosthetics are never detached
+	return ..(is_detached)
 
 /obj/item/organ/external/proc/disfigure(var/type = "brute")
 	if(status & ORGAN_DISFIGURED)

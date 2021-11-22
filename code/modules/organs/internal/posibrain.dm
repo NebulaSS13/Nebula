@@ -161,31 +161,34 @@
 	to_chat(brainmob, "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [initial(src.name)].</span>")
 	callHook("debrain", list(brainmob))
 
-/obj/item/organ/internal/posibrain/removed(var/mob/living/user)
-	if(!istype(owner))
-		return ..()
-
-	if(name == initial(name))
-		SetName("\the [owner.real_name]'s [initial(name)]")
-
-	transfer_identity(owner)
-
-	..()
-
-/obj/item/organ/internal/posibrain/replaced(var/mob/living/target)
-
-	if(!..()) return 0
-
-	if(target.key)
-		target.ghostize()
-
+/obj/item/organ/internal/posibrain/on_replacement()
 	if(brainmob)
 		if(brainmob.mind)
-			brainmob.mind.transfer_to(target)
+			//#TODO: Make sure the ghostize that was here didn't have some special edge case usage?
+			// I assume its for cortical borers or something? Because in most cases the target body wouldn't have a key already..
+			// Unless you're just setting organs into place via a call to replaced, which is the reason I removed it.
+			if(owner.key)
+				owner.ghostize() //That seems really arbitrary.. It skips over cortical stack checks and everything else..
+			brainmob.mind.transfer_to(owner)
 		else
-			target.key = brainmob.key
+			owner.key = brainmob.key
+	return ..()
 
-	return 1
+/obj/item/organ/internal/posibrain/on_removal()
+	if(istype(owner))
+		transfer_identity(owner)
+	return ..()
+
+/obj/item/organ/internal/posibrain/install(var/mob/living/target)
+	if(!(. = ..())) 
+		return
+	if(istype(owner))
+		SetName(initial(name)) //Reset the organ's name to stay coherent if we're put back into someone's skull
+
+/obj/item/organ/internal/posibrain/uninstall(in_place, detach, ignore_children)
+	if(!in_place && istype(owner) && name == initial(name))
+		SetName("\the [owner.real_name]'s [initial(name)]")
+	return ..()
 
 /*
 	This is for law stuff directly. This is how a human mob will be able to communicate with the posi_brainmob in the
@@ -295,8 +298,8 @@
 				cell = W
 				to_chat(user, "<span class = 'notice'>You insert \the [cell].</span>")
 
-/obj/item/organ/internal/cell/replaced()
-	..()
+/obj/item/organ/internal/cell/on_replacement()
+	. = ..()
 	// This is very ghetto way of rebooting an IPC. TODO better way.
 	if(owner && owner.stat == DEAD)
 		owner.set_stat(CONSCIOUS)
@@ -358,16 +361,16 @@
 /obj/item/organ/internal/mmi_holder/cut_away(var/mob/living/user)
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(istype(parent))
-		removed(user, 0)
+		uninstall(detach = TRUE)
 		var/brain = transfer_and_delete()
 		if(brain)
 			LAZYADD(parent.implants, brain)
 
-/obj/item/organ/internal/mmi_holder/removed()
-	if(owner && owner.mind)
-		persistantMind = owner.mind
-		if(owner.ckey)
-			ownerckey = owner.ckey
+/obj/item/organ/internal/mmi_holder/on_removal(mob/living/last_owner)
+	if(last_owner && last_owner.mind)
+		persistantMind = last_owner.mind
+		if(last_owner.ckey)
+			ownerckey = last_owner.ckey
 	..()
 
 /obj/item/organ/internal/mmi_holder/proc/transfer_and_delete()

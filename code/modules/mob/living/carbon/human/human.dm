@@ -539,7 +539,7 @@
 
 /mob/living/carbon/human/revive()
 
-	species.create_organs(src) // Reset our organs/limbs.
+	species.create_missing_organs(src) // Reset our organs/limbs.
 	restore_all_organs()       // Reapply robotics/amputated status from preferences.
 	reset_blood()
 
@@ -666,6 +666,7 @@
 	if(species.holder_type)
 		holder_type = species.holder_type
 	maxHealth = species.total_health
+	mob_size = species.mob_size
 	remove_extension(src, /datum/extension/armor)
 	if(species.natural_armour_values)
 		set_extension(src, /datum/extension/armor, species.natural_armour_values)
@@ -721,7 +722,7 @@
 	//recheck species-restricted clothing
 	for(var/slot in global.all_inventory_slots)
 		var/obj/item/clothing/C = get_equipped_item(slot)
-		if(istype(C) && !C.mob_can_equip(src, slot, 1))
+		if(istype(C) && !C.mob_can_equip(src, slot, TRUE, TRUE))
 			unEquip(C)
 
 //This handles actually updating our visual appearance
@@ -1328,7 +1329,7 @@
 		species_name = new_dna.species
 		src.dna = new_dna
 	else if(!species_name)
-		species_name = global.using_map.default_species
+		species_name = global.using_map.default_species //Humans cannot exist without a species!
 
 	set_species(species_name)
 
@@ -1336,27 +1337,26 @@
 		set_real_name(new_dna.real_name)
 	else
 		try_generate_default_name()
-
-	if(!new_dna)
-		src.dna.ready_dna(src) //regen dna filler only if we haven't forced the dna already
+		dna.ready_dna(src) //regen dna filler only if we haven't forced the dna already
 
 	species.handle_pre_spawn(src)
 	apply_species_cultural_info()
 	apply_species_appearance()
 	if(!length(organs))
-		species.create_organs(src)		//syncs organ dna
+		species.create_missing_organs(src) //Syncs DNA when adding organs
 	species.handle_post_spawn(src)
 
 	UpdateAppearance() //Apply dna appearence to mob, causes DNA to change because filler values are regenerated
 	make_blood()
 
+//If the mob has its default name it'll try to generate /obtain a proper one
 /mob/living/carbon/human/proc/try_generate_default_name()
 	if(name != initial(name))
 		return
 	if(species)
 		set_real_name(species.get_default_name())
 	else
-		SetName("unknown")
+		SetName(initial(name))
 
 /mob/living/carbon/human/proc/post_setup(var/species_name = null, var/datum/dna/new_dna = null)
 	refresh_visible_overlays()

@@ -50,12 +50,8 @@
 		return 100
 	return round((oxygen_deprivation/species.total_health)*100)
 
-/obj/item/organ/internal/lungs/set_dna(var/datum/dna/new_dna)
-	..()
-	sync_breath_types()
-
-/obj/item/organ/internal/lungs/replaced()
-	..()
+/obj/item/organ/internal/lungs/set_species(species_name)
+	. = ..()
 	sync_breath_types()
 
 /**

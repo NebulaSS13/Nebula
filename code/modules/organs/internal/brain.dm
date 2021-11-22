@@ -36,10 +36,10 @@
 	var/mob/living/carbon/human/tmp_owner = owner
 	qdel(src)
 	if(tmp_owner)
-		tmp_owner.internal_organs_by_name[organ_tag] = new replace_path(tmp_owner, 1)
+		tmp_owner.internal_organs_by_name[organ_tag] = new replace_path(tmp_owner, given_dna = dna)
 		tmp_owner = null
 
-/obj/item/organ/internal/brain/set_dna(datum/dna/new_dna)
+/obj/item/organ/internal/brain/set_species(species_name)
 	. = ..()
 	if(species)
 		set_max_damage(species.total_health)
@@ -76,31 +76,35 @@
 	else
 		to_chat(user, "This one seems particularly lifeless. Perhaps it will regain some of its luster later..")
 
-/obj/item/organ/internal/brain/removed(var/mob/living/user)
-	if(!istype(owner))
-		return ..()
+/obj/item/organ/internal/brain/install(mob/living/carbon/target)
+	if(!(. = ..())) 
+		return
+	if(istype(owner))
+		SetName(initial(name)) //Reset the organ's name to stay coherent if we're put back into someone's skull
 
-	if(name == initial(name))
-		name = "\the [owner.real_name]'s [initial(name)]"
+/obj/item/organ/internal/brain/uninstall(in_place, detach, ignore_children)
+	if(!(. = ..()))
+		return
+	if(!in_place && istype(owner) && name == initial(name))
+		SetName("\the [owner.real_name]'s [initial(name)]")
 
-	transfer_identity(owner)
+/obj/item/organ/internal/brain/on_removal()
+	if(istype(owner))
+		transfer_identity(owner)
+	return ..()
 
-	..()
-
-/obj/item/organ/internal/brain/replaced(var/mob/living/target)
-
-	if(!..()) return 0
-
-	if(target.key)
-		target.ghostize()
-
+/obj/item/organ/internal/brain/on_replacement()
 	if(brainmob)
 		if(brainmob.mind)
-			brainmob.mind.transfer_to(target)
+			//#TODO: Make sure the ghostize that was here didn't have some special edge case usage?
+			// I assume its for cortical borers or something? Because in most cases the target body wouldn't have a key already..
+			// Unless you're just setting organs into place via a call to replaced, which is the reason I removed it.
+			if(owner.key)
+				owner.ghostize() //That seems really arbitrary.. It skips over cortical stack checks and everything else..
+			brainmob.mind.transfer_to(owner)
 		else
-			target.key = brainmob.key
-
-	return 1
+			owner.key = brainmob.key
+	return ..()
 
 /obj/item/organ/internal/brain/can_recover()
 	return ~status & ORGAN_DEAD

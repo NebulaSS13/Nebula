@@ -3,10 +3,10 @@
 ****************************************************/
 /obj/item/organ/internal
 	scale_max_damage_to_species_health = TRUE
-	var/alive_icon //icon to use when the organ is alive
-	var/dead_icon // Icon to use when the organ has died.
-	var/prosthetic_icon //Icon to use when the organ is robotic
-	var/prosthetic_dead_icon //Icon to use when the organ is robotic and dead
+	var/tmp/alive_icon //icon to use when the organ is alive
+	var/tmp/dead_icon // Icon to use when the organ has died.
+	var/tmp/prosthetic_icon //Icon to use when the organ is robotic
+	var/tmp/prosthetic_dead_icon //Icon to use when the organ is robotic and dead
 	var/surface_accessible = FALSE
 	var/relative_size = 25   // Relative size of the organ. Roughly % of space they take in the target projection :D
 	var/min_bruised_damage = 10       // Damage before considered bruised
@@ -19,79 +19,60 @@
 		min_bruised_damage = FLOOR(max_damage / 4)
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL && owner)
-		owner.internal_organs |= src
 		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
 		if(!E)
 			PRINT_STACK_TRACE("[src] spawned in [owner] without a parent organ: [parent_organ].")
 			return INITIALIZE_HINT_QDEL
-		LAZYDISTINCTADD(E.internal_organs, src)
-		E.cavity_max_w_class = max(E.cavity_max_w_class, w_class)
-		E.update_internal_organs_cost()
-
-/obj/item/organ/internal/Destroy()
-	if(owner)
-		owner.internal_organs -= src
-		owner.internal_organs_by_name -= organ_tag
-		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
-		if(istype(E))
-			LAZYREMOVE(E.internal_organs, src)
-	return ..()
+		owner.add_organ(src, E)
 
 /obj/item/organ/internal/set_species(species_name)
 	. = ..()
-	icon = species.organs_icon
+	if(species.organs_icon)
+		icon = species.organs_icon
 
 //disconnected the organ from it's owner but does not remove it, instead it becomes an implant that can be removed with implant surgery
 //TODO move this to organ/internal once the FPB port comes through
 /obj/item/organ/proc/cut_away(var/mob/living/user)
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(istype(parent)) //TODO ensure that we don't have to check this.
-		removed(user, 0)
+		uninstall(detach = TRUE)
 		LAZYADD(parent.implants, src)
 
-/obj/item/organ/internal/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
-	if(owner)
-		owner.internal_organs -= src
-		owner.internal_organs_by_name -= organ_tag
-		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
-		E.update_internal_organs_cost()
-
-		if(detach)
-			var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
-			if(affected)
-				LAZYREMOVE(affected.internal_organs, src)
-				status |= ORGAN_CUT_AWAY
-	..()
-
-/obj/item/organ/internal/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
-
-	if(!istype(target))
-		return 0
-
+/obj/item/organ/internal/install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place)
 	if(status & ORGAN_CUT_AWAY)
-		return 0 //organs don't work very well in the body when they aren't properly attached
+		return FALSE 
 
+	//#FIXME: This feels like a hack
+		//# Also it probably should be of the species of the parent limb tbh..
 	// robotic organs emulate behavior of the equivalent flesh organ of the species
-	if(BP_IS_PROSTHETIC(src) || !species)
-		species = target.species
+	// if(BP_IS_PROSTHETIC(src) || !species)
+	// 	set_species(target.species)
 
-	..()
+	if(!(. = ..()))
+		return
 
 	STOP_PROCESSING(SSobj, src)
-	target.internal_organs |= src
-	target.internal_organs_by_name[organ_tag] = src
 	LAZYDISTINCTADD(affected.internal_organs, src)
-	return 1
+	affected.cavity_max_w_class = max(affected.cavity_max_w_class, w_class)
+	affected.update_internal_organs_cost()
+
+/obj/item/organ/internal/uninstall(in_place, detach, ignore_children)
+	//Make sure we're removed from whatever parent organ we have, either in a mob or not
+	var/obj/item/organ/external/P = null
+	if(owner)
+		P = owner.get_organ(parent_organ)
+	else if(istype(loc, /obj/item/organ/external))
+		var/obj/item/organ/external/E = loc
+		if(E.organ_tag == parent_organ)
+			P = E
+
+	if(P)
+		LAZYREMOVE(P.internal_organs, src)
+		P.update_internal_organs_cost()
+	. = ..()
 
 /obj/item/organ/internal/remove_rejuv()
-	if(owner)
-		owner.internal_organs -= src
-		owner.internal_organs_by_name -= organ_tag
-		while(null in owner.internal_organs)
-			owner.internal_organs -= null
-		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
-		if(istype(E))
-			LAZYREMOVE(E.internal_organs, src)
+	uninstall()
 	..()
 
 /obj/item/organ/internal/is_usable()

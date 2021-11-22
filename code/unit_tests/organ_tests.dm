@@ -201,12 +201,12 @@
 
 	var/obj/item/organ/external/parent = H.organs_by_name[I.parent_organ]
 
-	I.removed()
+	H.remove_organ(I)
 	if(!check_internal_organ_removed(H, I, parent))
 		fail("[H.species.name] internal organ [I] was not removed correctly.")
 		return 0
 
-	I.replaced(H, parent)
+	H.add_organ(I, parent)
 	if(!check_internal_organ_present(H, I))
 		fail("[H.species.name] internal organ [I] was not replaced correctly.")
 		return 0
@@ -220,12 +220,12 @@
 
 	var/obj/item/organ/external/parent = E.parent
 
-	E.removed()
+	H.remove_organ(E)
 	if(!check_internal_organ_removed(H, E, parent))
 		fail("[H.species.name] internal organ [E] was not removed correctly.")
 		return 0
 
-	E.replaced(H)
+	H.add_organ(E)
 	if(!check_internal_organ_present(H, E))
 		fail("[H.species.name] internal organ [E] was not replaced correctly.")
 		return 0
