@@ -32,6 +32,7 @@
 	var/scale_max_damage_to_species_health // Whether or not we should scale the damage values of this organ to the owner species.
 
 /obj/item/organ/Destroy()
+	uninstall()
 	owner = null
 	dna = null
 	QDEL_NULL_LIST(ailments)
@@ -58,49 +59,53 @@
 	else
 		max_damage = min_broken_damage * 2
 
-	if(!owner && iscarbon(loc))
+	if(!owner && iscarbon(loc)) //#TODO: investigate if this can cause carried items to be mistaken with organs when created on a mob..
 		owner = loc
 		if(owner && QDELETED(owner))
 			owner = null
 			return INITIALIZE_HINT_QDEL
 
 	if(!BP_IS_PROSTHETIC(src))
-		if(!given_dna)
-			if(dna)
-				given_dna = dna
-			else if(owner)
-				if(owner.dna)
-					given_dna = owner.dna
-				else
-					log_debug("[src] spawned in [owner] without a proper DNA.")
-			else
-				given_dna = new/datum/dna()
-				given_dna.check_integrity() //Default everything
-		
-		set_dna(given_dna)
-		setup_reagents()
+		setup_as_organic(given_dna)
 	else
 		setup_as_prosthetic()
 		
 	update_icon()
 
+/obj/item/organ/proc/setup_as_organic(var/datum/dna/given_dna)
+	if(!given_dna)
+		if(dna)
+			given_dna = dna
+		else if(owner) 
+			if(owner.dna) 
+				given_dna = owner.dna
+			else
+				//The owner having no DNA can be a valid reason to keep our dna null in some cases
+				dna = null
+				return
+		else
+			//If we have NO OWNER and given_dna, just make one up for consistency
+			given_dna = new/datum/dna()
+			given_dna.check_integrity() //Default everything
+	
+	set_dna(given_dna)
+	setup_reagents()
+
 //Allows specialization of roboticize() calls on initialization meant to be used when loading prosthetics from save downstream
 /obj/item/organ/proc/setup_as_prosthetic(var/forced_model = /decl/prosthetics_manufacturer)
-	if(!BP_IS_PROSTHETIC(src))
-		return
-	
 	if(!species)
 		if(owner?.species)
 			set_species(owner.species)
 		else
 			set_species(global.using_map.default_species)
 
-	if(material)
+	if(istype(material))
 		robotize(forced_model, apply_material = material.type)
 	else 
 		robotize(forced_model)
 	return TRUE
 
+//Called on initialization to add the neccessary reagents
 /obj/item/organ/proc/setup_reagents()
 	if(reagents)
 		return
