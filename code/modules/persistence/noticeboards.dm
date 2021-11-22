@@ -120,7 +120,7 @@
 				add_fingerprint(user)
 				add_paper(thing)
 				to_chat(user, SPAN_NOTICE("You pin \the [thing] to \the [src]."))
-				SSpersistence.track_value(thing, /decl/persistence_handler/paper)
+				SSpersistence.track_value(thing, /decl/persistence_handler/paper/noticeboard)
 			else
 				to_chat(user, SPAN_WARNING("You hesitate, certain \the [thing] will not be seen among the many others already attached to \the [src]."))
 			return TRUE

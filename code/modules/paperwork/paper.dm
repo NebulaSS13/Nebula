@@ -48,11 +48,13 @@
 
 	var/scan_file_type = /datum/computer_file/data/text
 
+	var/persist_on_init = TRUE
+
 /obj/item/paper/Initialize(mapload, text, title, list/md = null)
 	. = ..(mapload)
 	set_content(text ? text : info, title)
 	metadata = md
-	if(!mapload)
+	if(!mapload && persist_on_init)
 		SSpersistence.track_value(src, /decl/persistence_handler/paper)
 
 /obj/item/paper/create_matter()
@@ -304,7 +306,7 @@
 					return
 			else
 				return
-		
+
 		var/obj/item/pen/P = I
 		if(!P.active)
 			P.toggle()

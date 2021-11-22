@@ -1,7 +1,6 @@
 /decl/persistence_handler/paper/sticky
 	name = "stickynotes"
 	paper_type = /obj/item/paper/sticky
-	requires_noticeboard = FALSE
 
 /decl/persistence_handler/paper/sticky/CreateEntryInstance(var/turf/creating, var/list/tokens)
 	var/atom/paper = ..()

@@ -89,6 +89,7 @@
 	color = COLOR_YELLOW
 	slot_flags = 0
 	layer = ABOVE_WINDOW_LAYER
+	persist_on_init = FALSE
 
 /obj/item/paper/sticky/Initialize()
 	. = ..()
