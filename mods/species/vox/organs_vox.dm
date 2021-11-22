@@ -204,7 +204,8 @@
 	if(!..()) return 0
 	if(prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
 		return 0
-		
+	
+	//Need spawn here so that this interactive bit doesn't lock up init
 	spawn(0)
 		if(owner && !backup_inviable())
 			var/current_owner = owner

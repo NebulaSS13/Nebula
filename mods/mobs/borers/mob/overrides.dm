@@ -34,8 +34,7 @@
 /obj/item/organ/internal/brain/uninstall(in_place, detach, ignore_children)
 	if(istype(owner))
 		var/mob/living/simple_animal/borer/borer = HAS_BRAIN_WORMS(owner)
-		if(borer)
-			borer.detatch()
+		borer?.detatch()
 	. = ..()
 
 /mob/living/carbon/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)

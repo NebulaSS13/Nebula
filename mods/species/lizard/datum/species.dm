@@ -87,6 +87,13 @@
 		BP_EYES = /obj/item/organ/internal/eyes/lizard,
 		BP_BRAIN = /obj/item/organ/internal/brain/lizard
 	)
+	vital_organs = list(
+		BP_HEART = list("path" = /obj/item/organ/internal/heart),
+		BP_LUNGS = list("path" = /obj/item/organ/internal/lungs),
+		BP_BRAIN = list("path" = /obj/item/organ/internal/brain/lizard),
+		BP_CHEST = list("path" = /obj/item/organ/external/chest),
+		BP_GROIN = list("path" = /obj/item/organ/external/groin),
+	)
 
 	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/lizard)
 

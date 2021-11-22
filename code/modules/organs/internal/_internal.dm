@@ -18,12 +18,16 @@
 	if(max_damage)
 		min_bruised_damage = FLOOR(max_damage / 4)
 	. = ..()
-	if(. != INITIALIZE_HINT_QDEL && owner)
+
+//Returns FALSE if we should abort init
+/obj/item/organ/internal/try_autoinstall()
+	if(owner)
 		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
 		if(!E)
 			PRINT_STACK_TRACE("[src] spawned in [owner] without a parent organ: [parent_organ].")
-			return INITIALIZE_HINT_QDEL
+			return FALSE
 		owner.add_organ(src, E)
+	return TRUE
 
 /obj/item/organ/internal/set_species(species_name)
 	. = ..()
@@ -40,7 +44,7 @@
 
 /obj/item/organ/internal/install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place)
 	if(status & ORGAN_CUT_AWAY)
-		return FALSE 
+		return
 
 	//#FIXME: This feels like a hack
 		//# Also it probably should be of the species of the parent limb tbh..

@@ -1019,6 +1019,6 @@ default behaviour is:
 /mob/living/proc/apply_fall_damage(var/turf/landing)
 	adjustBruteLoss(rand(max(1, CEILING(mob_size * 0.33)), max(1, CEILING(mob_size * 0.66))))
 
-//Needed for organ surgery assuming mobs are mob/living always
+//Needed for organ surgery, since it assumes humans are mob/living always
 /mob/living/proc/add_organ(var/obj/item/organ/O, var/obj/item/organ/external/affected = null, var/in_place = FALSE)
 /mob/living/proc/remove_organ(var/obj/item/organ/O, var/drop_organ = TRUE, var/detach = TRUE, var/ignore_children = FALSE, var/in_place = FALSE)

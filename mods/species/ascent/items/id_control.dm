@@ -34,11 +34,13 @@
 	parent_organ = BP_CHEST
 	organ_tag = BP_SYSTEM_CONTROLLER
 	surface_accessible = TRUE
+	status = ORGAN_PROSTHETIC
 	var/obj/item/card/id/id_card = /obj/item/card/id/ascent
 
 /obj/item/organ/internal/controller/install(mob/living/carbon/human/target, obj/item/organ/external/affected)
 	. = ..()
 	if(owner)
+		owner.set_id_info(id_card)
 		owner.add_language(/decl/language/mantid/worldnet)
 
 /obj/item/organ/internal/controller/uninstall(in_place, detach, ignore_children)
@@ -51,9 +53,6 @@
 	if(ispath(id_card))
 		id_card = new id_card(src)
 	. = ..()
-	robotize()
-	if(owner)
-		owner.set_id_info(id_card)
 
 /obj/item/organ/internal/controller/GetIdCard()
 	//Not using is_broken() because it should be able to function when CUT_AWAY is set

@@ -124,6 +124,14 @@
 		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
 	)
 
+	vital_organs = list(
+		BP_HEART = list("path" = /obj/item/organ/internal/heart/insectoid),
+		BP_LUNGS = list("path" = /obj/item/organ/internal/lungs/insectoid),
+		BP_BRAIN = list("path" = /obj/item/organ/internal/brain/insectoid),
+		BP_CHEST = list("path" = /obj/item/organ/external/chest/insectoid),
+		BP_GROIN = list("path" = /obj/item/organ/external/groin/insectoid/mantid),
+	)
+
 	limb_mapping = list(BP_CHEST = list(BP_CHEST, BP_M_HAND))
 
 	force_cultural_info = list(

@@ -18,7 +18,8 @@
 	setup(arglist(newargs))
 	global.human_mob_list |= src
 	. = ..()
-	post_setup(arglist(newargs))
+	if(. != INITIALIZE_HINT_QDEL)
+		post_setup(arglist(newargs))
 
 /mob/living/carbon/human/proc/setup_hud_overlays()
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, "100")
@@ -1322,7 +1323,6 @@
 	if(mind)
 		mind.name = newname
 
-//#TODO: Find better name
 //Human mob specific init code. Meant to be used only on init.
 /mob/living/carbon/human/proc/setup(var/species_name = null, var/datum/dna/new_dna = null)
 	if(new_dna)
@@ -1347,7 +1347,7 @@
 	species.handle_post_spawn(src)
 
 	UpdateAppearance() //Apply dna appearence to mob, causes DNA to change because filler values are regenerated
-	make_blood()
+	reset_blood()
 
 //If the mob has its default name it'll try to generate /obtain a proper one
 /mob/living/carbon/human/proc/try_generate_default_name()
@@ -1358,5 +1358,6 @@
 	else
 		SetName(initial(name))
 
+//Runs last after setup and after the parent init has been executed.
 /mob/living/carbon/human/proc/post_setup(var/species_name = null, var/datum/dna/new_dna = null)
-	refresh_visible_overlays()
+	refresh_visible_overlays() //Do this exactly once per setup

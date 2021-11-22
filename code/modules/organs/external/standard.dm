@@ -144,12 +144,12 @@
 	var/gripper_ui_loc = ui_lhand
 	var/overlay_slot_id = BP_L_HAND
 
-/obj/item/organ/external/hand/install(mob/living/carbon/human/target)
+/obj/item/organ/external/hand/install(mob/living/carbon/human/target, affected, in_place, update_icon)
 	if(!(. = ..()))
 		return
 	owner?.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
 
-/obj/item/organ/external/hand/uninstall(in_place, detach, ignore_children)
+/obj/item/organ/external/hand/uninstall(in_place, detach, ignore_children, update_icon)
 	owner?.remove_held_item_slot(organ_tag)
 	. = ..()
 

@@ -89,6 +89,15 @@
 		BP_STACK =      /obj/item/organ/internal/voxstack,
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 		)
+	
+	vital_organs = list(
+		BP_HEART = list("path" = /obj/item/organ/internal/heart/vox),
+		BP_LUNGS = list("path" = /obj/item/organ/internal/lungs/vox),
+		BP_BRAIN = list("path" = /obj/item/organ/internal/brain),
+		BP_STACK = list("path" = /obj/item/organ/internal/voxstack),
+		BP_CHEST = list("path" = /obj/item/organ/external/chest),
+		BP_GROIN = list("path" = /obj/item/organ/external/groin/vox),
+	)
 
 	override_limb_types = list(BP_TAIL = /obj/item/organ/external/tail/vox)
 

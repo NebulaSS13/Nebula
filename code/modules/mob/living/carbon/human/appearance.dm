@@ -17,7 +17,7 @@
 
 	//Handle spawning stuff
 	species.handle_pre_spawn(src)
-	species.create_missing_organs(src)
+	species.create_missing_organs(src, TRUE) //Not fully replacing would cause problem with organs not being updated
 	apply_species_appearance()
 	apply_species_cultural_info()
 	species.handle_post_spawn(src)

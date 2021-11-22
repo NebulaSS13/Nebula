@@ -143,7 +143,7 @@
 				continue
 			var/is_vital = FALSE
 			for(var/obj/item/organ/internal/I in limb.internal_organs)
-				if(I.vital)
+				if(H.species?.is_vital_organ(H, I))
 					is_vital = TRUE
 					break
 			if(!is_vital)

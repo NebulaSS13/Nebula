@@ -105,10 +105,8 @@
 	if(. == INITIALIZE_HINT_QDEL)
 		return
 	if(isnull(pain_disability_threshold))
-		pain_disability_threshold = (max_damage * 0.75)
-	if(owner)
-		install(owner)
-	
+		pain_disability_threshold = (max_damage * 0.75)	
+
 /obj/item/organ/external/Destroy()
 
 	if(wounds)
@@ -374,7 +372,7 @@
 	return
 
 //If "in_place" is TRUE will make organs skip their install/uninstall effects and  the sub-limbs and internal organs
-/obj/item/organ/external/install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place = FALSE)
+/obj/item/organ/external/install(mob/living/carbon/human/target, obj/item/organ/external/affected, in_place, update_icon)
 	if(!(. = ..()))
 		return
 
@@ -389,10 +387,10 @@
 		//If we contain any child organs add them to the owner
 		//
 		for(var/obj/item/organ/organ in internal_organs)
-			owner.add_organ(organ, src, in_place = in_place)
+			owner.add_organ(organ, src, in_place, update_icon)
 
 		for(var/obj/item/organ/external/organ in children)
-			owner.add_organ(organ, src, in_place = in_place)
+			owner.add_organ(organ, src, in_place, update_icon)
 
 		//
 		//Add any existing organs in the owner that have us as parent
@@ -951,7 +949,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		victim.shock_stage += min_broken_damage
 
 	var/mob/living/carbon/human/last_owner = owner
-	owner.remove_organ(src, drop_organ = TRUE, detach = FALSE, ignore_children = ignore_children)
+	owner.remove_organ(src, TRUE, FALSE, ignore_children)
 	if(istype(last_owner) && !QDELETED(last_owner) && length(last_owner.organs) <= 1)
 		last_owner.physically_destroyed(FALSE, disintegrate)
 
@@ -1289,7 +1287,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		H.drop_from_inventory(W)
 	W.forceMove(owner)
 
-/obj/item/organ/external/uninstall(in_place, detach, ignore_children)
+/obj/item/organ/external/uninstall(in_place, detach, ignore_children, update_icon)
 	var/mob/living/carbon/human/victim = owner
 	. = ..()
 
@@ -1329,7 +1327,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 			// Grab all the children internal organs
 			for(var/obj/item/organ/organ in internal_organs)
-				victim.remove_organ(organ, drop_organ = FALSE, detach = FALSE) // Organ stays inside and connected
+				victim.remove_organ(organ, FALSE, FALSE, FALSE, in_place, update_icon) // Organ stays inside and connected
 				if(!QDELETED(organ))
 					organ.forceMove(src)
 

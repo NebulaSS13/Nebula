@@ -32,7 +32,10 @@
 	var/scale_max_damage_to_species_health // Whether or not we should scale the damage values of this organ to the owner species.
 
 /obj/item/organ/Destroy()
-	uninstall()
+	if(owner)
+		owner.remove_organ(src, FALSE, FALSE, TRUE, TRUE, FALSE)
+	else
+		uninstall(TRUE, FALSE, FALSE, FALSE) //Don't ignore children here since we might own them
 	owner = null
 	dna = null
 	QDEL_NULL_LIST(ailments)
@@ -53,6 +56,8 @@
 //Third rgument may be a dna datum; if null will be set to holder's dna.
 /obj/item/organ/Initialize(mapload, material_key, var/datum/dna/given_dna)
 	. = ..(mapload, material_key)
+	if(. == INITIALIZE_HINT_QDEL)
+		return
 	
 	if(max_damage)
 		min_broken_damage = FLOOR(max_damage / 2)
@@ -69,8 +74,19 @@
 		setup_as_organic(given_dna)
 	else
 		setup_as_prosthetic()
-		
+
+	//Attempt auto-installing on the owner, and self-destruct if it fails
+	if(!try_autoinstall())
+		return INITIALIZE_HINT_QDEL
+	
 	update_icon()
+
+//Overridable organ install handling on init
+//Returns FALSE if we should abort init
+/obj/item/organ/proc/try_autoinstall()
+	if(owner)
+		owner.add_organ(src)
+	return TRUE //When nothing to install we assume success
 
 /obj/item/organ/proc/setup_as_organic(var/datum/dna/given_dna)
 	if(!given_dna)
@@ -90,8 +106,10 @@
 	
 	set_dna(given_dna)
 	setup_reagents()
+	return TRUE
 
-//Allows specialization of roboticize() calls on initialization meant to be used when loading prosthetics from save downstream
+//Allows specialization of roboticize() calls on initialization meant to be used when loading prosthetics
+// NOTE: This wouldn't be necessary if prothetics were a subclass
 /obj/item/organ/proc/setup_as_prosthetic(var/forced_model = /decl/prosthetics_manufacturer)
 	if(!species)
 		if(owner?.species)
@@ -148,7 +166,7 @@
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL_LIST(ailments)
 	death_time = REALTIMEOFDAY
-	if(owner && vital)
+	if(owner?.species?.is_vital_organ(owner, src))
 		owner.death()
 	update_icon()
 
@@ -331,27 +349,13 @@
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
 	status = ORGAN_ASSISTED
 
-/**
- *  Remove an organ
- *
- *  drop_organ - if true, organ will be dropped at the loc of its former owner
- *
- *  Also, Observer Pattern Implementation: Dismembered Handling occurs here.
- */
-
-
-
-
-
 //Handles only the installation of the organ, without triggering any callbacks.
 //if we're an internal organ, having a null "target" is legal if we have an "affected"
-
 //CASES:
 // 1. When creating organs and running their init this is called to properly set them up
 // 2. When installing an organ through surgery via replaced this is called.
 // The organ may be inside an external organ that's not inside a mob, or inside a mob
-
-/obj/item/organ/proc/install(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE)
+/obj/item/organ/proc/install(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected, var/in_place = FALSE, var/update_icon = TRUE)
 	owner = target
 	action_button_name = initial(action_button_name)
 
@@ -365,14 +369,12 @@
 	return src
 
 //Handles uninstalling the organ from its owner and parent limb, without triggering any callbacks.
-
 //CASES:
 // 1. Before deletion. 
 // 2. Called through removed on surgery or dismemberement
 // 3. Called when we're changing a mob's species.
 // Case 1 and 3 shouldn't cause 
-
-/obj/item/organ/proc/uninstall(var/in_place = FALSE, var/detach = FALSE, var/ignore_children = FALSE)
+/obj/item/organ/proc/uninstall(var/in_place = FALSE, var/detach = FALSE, var/ignore_children = FALSE, var/update_icon = TRUE)
 	action_button_name = null
 	screen_loc = null
 	owner = null
@@ -539,7 +541,6 @@ var/global/list/ailment_reference_cache = list()
 		else if(ailment.scanner_diagnosis_string && scanner)
 			LAZYADD(., ailment.replace_tokens(message = ailment.scanner_diagnosis_string, user = user))
 
-
 //Events handling for checks and effects that should happen when removing the organ through interactions. Called by the owner mob.
 /obj/item/organ/proc/on_removal(var/mob/living/last_owner)
 	START_PROCESSING(SSobj, src)
@@ -548,7 +549,7 @@ var/global/list/ailment_reference_cache = list()
 /obj/item/organ/proc/on_replacement()
 	STOP_PROCESSING(SSobj, src)
 
-//Since some types of organs completely ignore being detached, moved it to an overridable organ proc
+//Since some types of organs completely ignore being detached, moved it to an overridable organ proc for external prosthetics
 /obj/item/organ/proc/set_detached(var/is_detached)
 	if(is_detached)
 		status |= ORGAN_CUT_AWAY

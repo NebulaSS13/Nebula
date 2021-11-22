@@ -181,10 +181,13 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/list/override_organ_types // Used for species that only need to change one or two entries in has_organ.
 
 	//List of organ tags, with the amount and type required for living by this specie
+	//#TODO: Change this when/if we have species with multiple organs that may be vital
 	var/list/vital_organs = list(
-		BP_HEART = list("minimum" = 1, "path" = /obj/item/organ/internal/heart),
-		BP_LUNGS = list("minimum" = 1, "path" = /obj/item/organ/internal/lungs),
-		BP_BRAIN = list("minimum" = 1, "path" = /obj/item/organ/internal/brain),
+		BP_HEART = list("path" = /obj/item/organ/internal/heart),
+		BP_LUNGS = list("path" = /obj/item/organ/internal/lungs),
+		BP_BRAIN = list("path" = /obj/item/organ/internal/brain),
+		BP_CHEST = list("path" = /obj/item/organ/external/chest),
+		BP_GROIN = list("path" = /obj/item/organ/external/groin),
 	)
 
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
@@ -473,32 +476,42 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 
 	if(fully_replace)
-		QDEL_NULL_LIST(H.organs)
-		QDEL_NULL_LIST(H.internal_organs)
+		for(var/obj/item/organ/O in (H.organs | H.internal_organs))
+			H.remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
+			qdel(O)
+		H.organs = null
+		H.internal_organs = null
 
 	//Clear invalid limbs
 	if(!islist(H.organs))
 		H.organs = list()
 		testing("Created limb list from scratch")
 	else
+		var/list/new_organ = list()
 		for(var/obj/item/organ/external/E in H.organs)
 			if(!is_default_limb(E))
-				//#TODO: IDeally want to handle organ removal here using removed(), without triggering removal effects.. Its either both or nothing rn
-				QDEL_NULL(E)
+				H.remove_organ(E, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
+				qdel(E)
 			else
 				//Update limbs that stay
 				H.organs_by_name[E.organ_tag] = E
+				new_organ += E
+		H.organs = new_organ
 
 	//Clear invalid internal organs
 	if(!islist(H.internal_organs))
 		H.internal_organs = list()
 	else
+		var/list/new_organ = list()
 		for(var/obj/item/organ/O in H.internal_organs)
 			if(!is_default_organ(O))
-				QDEL_NULL(O)
+				H.remove_organ(O, FALSE, FALSE, TRUE, TRUE, FALSE) //Remove them first so we don't trigger removal effects by just calling delete on them
+				qdel(O)
 			else
 				//Update organs that stay
 				H.internal_organs_by_name[O.organ_tag] = O
+				new_organ += O
+		H.internal_organs = new_organ
 
 	//Create missing limbs
 	for(var/limb_type in has_limbs)

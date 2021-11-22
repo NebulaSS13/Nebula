@@ -37,7 +37,7 @@
 /obj/item/organ/internal/posibrain/Initialize()
 	. = ..()
 	if(!brainmob && iscarbon(loc))
-		init(loc)
+		init(loc) //Not sure why we're creating a braimob on load, and also why not installing it in the owner...
 
 /obj/item/organ/internal/posibrain/proc/init(var/mob/living/carbon/H)
 	if(brainmob)
@@ -164,13 +164,10 @@
 /obj/item/organ/internal/posibrain/on_replacement()
 	if(brainmob)
 		if(brainmob.mind)
-			//#TODO: Make sure the ghostize that was here didn't have some special edge case usage?
-			// I assume its for cortical borers or something? Because in most cases the target body wouldn't have a key already..
-			// Unless you're just setting organs into place via a call to replaced, which is the reason I removed it.
 			if(owner.key)
-				owner.ghostize() //That seems really arbitrary.. It skips over cortical stack checks and everything else..
+				owner.ghostize()
 			brainmob.mind.transfer_to(owner)
-		else
+		else if(brainmob.key) //posibrain init with a dummy brainmob for some reasons, so gotta do this or its gonna disconnect the client on mob transformation
 			owner.key = brainmob.key
 	return ..()
 
