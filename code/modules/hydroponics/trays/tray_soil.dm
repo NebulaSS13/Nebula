@@ -38,7 +38,7 @@
 	return ..() && seed.get_trait(TRAIT_HEAT_TOLERANCE) < 1000
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Initialize(mapload,var/datum/seed/newseed, var/start_mature)
-	. = ..()
+	. = ..(mapload) // avoid passing newseed as dir
 	seed = newseed
 	dead = 0
 	age = start_mature ? seed.get_trait(TRAIT_MATURATION) : 1
