@@ -115,7 +115,7 @@
 
 	if(!loc)
 		qdel(src)
-		return 
+		return
 
 	if(prob(80))
 		amount_grown += rand(0,2)
@@ -141,7 +141,7 @@
 /obj/effect/spider/spiderling
 	name = "spiderling"
 	desc = "It never stays still for long."
-	icon_state = "guard"
+	icon_state = "lesser"
 	anchored = 0
 	layer = BELOW_OBJ_LAYER
 	health = 3
@@ -162,7 +162,7 @@
 
 /obj/effect/spider/spiderling/Initialize(var/mapload, var/atom/parent)
 	greater_form = pickweight(castes)
-	icon_state = initial(greater_form.icon_state)
+	icon = initial(greater_form.icon)
 	pixel_x = rand(-shift_range, shift_range)
 	pixel_y = rand(-shift_range, shift_range)
 
