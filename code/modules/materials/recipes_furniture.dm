@@ -224,7 +224,7 @@
 				return FALSE
 
 /datum/stack_recipe/furniture/fullwindow/spawn_result(mob/user, location, amount)
-	return new result_type(user?.loc, SOUTHWEST, 1, use_material, use_reinf_material)
+	return new result_type(user?.loc, use_material, use_reinf_material, SOUTHWEST, TRUE)
 
 /datum/stack_recipe/furniture/borderwindow
 	title = "border window"
@@ -241,7 +241,7 @@
 				return FALSE
 
 /datum/stack_recipe/furniture/borderwindow/spawn_result(mob/user, location, amount)
-	return new result_type(user?.loc, user?.dir, 1, use_material, use_reinf_material)
+	return new result_type(user?.loc, use_material, use_reinf_material, user?.dir, TRUE)
 
 /datum/stack_recipe/furniture/windoor
 	title = "windoor assembly"
