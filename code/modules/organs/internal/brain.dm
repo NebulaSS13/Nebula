@@ -80,7 +80,7 @@
 	if(!(. = ..())) 
 		return
 	if(istype(owner))
-		SetName(initial(name)) //Reset the organ's name to stay coherent if we're put back into someone's skull
+		SetName(initial(name)) //Reset the organ's name to stay coherent if we're putting it back into someone's skull
 
 /obj/item/organ/internal/brain/uninstall(in_place, detach, ignore_children, update_icon)
 	if(!(. = ..()))

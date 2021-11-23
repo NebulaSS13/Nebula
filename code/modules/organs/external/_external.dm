@@ -378,7 +378,6 @@
 
 	//If attached to an owner mob
 	if(istype(owner))
-		testing("External organ '[src]' has a owner '[owner]'")
 		//If we expect a parent organ set it up here
 		if(!parent && parent_organ)
 			parent = affected? affected : owner.get_organ(parent_organ)

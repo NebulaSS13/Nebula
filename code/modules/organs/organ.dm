@@ -373,7 +373,7 @@
 // 1. Before deletion. 
 // 2. Called through removed on surgery or dismemberement
 // 3. Called when we're changing a mob's species.
-// Case 1 and 3 shouldn't cause 
+// Case 1 and 3 shouldn't cause deep updates
 /obj/item/organ/proc/uninstall(var/in_place = FALSE, var/detach = FALSE, var/ignore_children = FALSE, var/update_icon = TRUE)
 	action_button_name = null
 	screen_loc = null
