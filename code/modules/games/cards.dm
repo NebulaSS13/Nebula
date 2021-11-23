@@ -134,11 +134,14 @@ var/global/list/card_decks = list()
 			P.back_icon = "card_back"
 			cards += P
 
-/obj/item/deck/attack_hand()
-	if(!usr)
+/obj/item/deck/attack_hand(mob/user)
+	if(!istype(user))
 		return
-
-	draw_card(usr)
+	if (user.a_intent == I_GRAB)
+		return ..()
+	else
+		draw_card(user)
+		return TRUE
 
 /obj/item/deck/examine(mob/user)
 	. = ..()
