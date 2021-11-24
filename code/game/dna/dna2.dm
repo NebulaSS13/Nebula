@@ -360,7 +360,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 			unique_enzymes = md5(character.real_name)
 	else
 		if(!species)
-			species = using_map.default_species
+			species = global.using_map.default_species
 		if(length(uni_identity) != 3*DNA_UI_LENGTH)
 			uni_identity = "00600200A00E0110148FC01300B0095BD7FD3F4"
 		if(length(struc_enzymes)!= 3*DNA_SE_LENGTH)

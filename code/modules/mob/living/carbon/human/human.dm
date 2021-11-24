@@ -1255,7 +1255,6 @@
 		to_chat(src, SPAN_DANGER("You feel a chill and your skin feels lighter..."))
 
 /mob/living/carbon/human/increaseBodyTemp(value)
-	//#TODO: Might wanna put a upper limit to this!
 	bodytemperature += value
 	return bodytemperature
 

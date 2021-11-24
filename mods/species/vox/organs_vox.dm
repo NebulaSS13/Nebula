@@ -206,18 +206,19 @@
 		return 0
 	
 	//Need spawn here so that this interactive bit doesn't lock up init
-	spawn(0)
-		if(owner && !backup_inviable())
-			var/current_owner = owner
-			prompting = TRUE
-			var/response = alert(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
-			prompting = FALSE
-			if(src && response == "Yes" && owner == current_owner)
-				overwrite()
-		sleep(-1)
-		do_backup()
-
+	if(owner && !backup_inviable())
+		addtimer(CALLBACK(src, .proc/prompt_revive_callback, owner), 0)
 	return 1
+
+/obj/item/organ/internal/voxstack/proc/prompt_revive_callback(var/mob/living/carbon/C)
+	if(C && !backup_inviable())
+		prompting = TRUE
+		var/response = alert(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
+		prompting = FALSE
+		if(src && response == "Yes" && owner == C)
+			overwrite()
+	sleep(-1)
+	do_backup()
 
 /obj/item/organ/internal/voxstack/on_removal(mob/living/last_owner)
 	var/obj/item/organ/external/head = last_owner.get_organ(parent_organ)
