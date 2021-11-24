@@ -101,6 +101,9 @@
 	req_amount = 5
 	time = 25
 
+/datum/stack_recipe/furniture/computerframe/spawn_result(mob/user, location, amount)
+	return new result_type(location)
+
 /datum/stack_recipe/furniture/ladder
 	title = "ladder"
 	result_type = /obj/structure/ladder
@@ -124,11 +127,17 @@
 	req_amount = 5
 	time = 25
 
+/datum/stack_recipe/furniture/machine/spawn_result(mob/user, location, amount)
+	return new result_type(location)
+
 /datum/stack_recipe/furniture/turret
 	title = "turret frame"
 	result_type = /obj/machinery/porta_turret_construct
 	req_amount = 5
 	time = 25
+
+/datum/stack_recipe/furniture/turret/spawn_result(mob/user, location, amount)
+	return new result_type(location)
 
 /datum/stack_recipe/furniture/door_assembly
 	time = 50
@@ -208,6 +217,9 @@
 	result_type = /obj/machinery/portable_atmospherics/hydroponics/soil
 	req_amount = 3
 	time = 10
+
+/datum/stack_recipe/furniture/planting_bed/spawn_result(mob/user, location, amount)
+	return new result_type(location)
 
 /datum/stack_recipe/furniture/fullwindow
 	title = "full-tile window"
