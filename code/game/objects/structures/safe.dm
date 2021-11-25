@@ -62,11 +62,11 @@ FLOOR SAFES
 
 
 /obj/structure/safe/on_update_icon()
+	..()
 	if(open)
 		icon_state = "[initial(icon_state)]-open"
 	else
 		icon_state = initial(icon_state)
-
 
 /obj/structure/safe/attack_hand(mob/user)
 	user.set_machine(src)

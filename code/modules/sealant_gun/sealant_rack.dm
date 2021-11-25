@@ -20,7 +20,7 @@
 		tanks += new /obj/item/sealant_tank(src)
 
 /obj/structure/sealant_rack/on_update_icon()
-	cut_overlays()
+	..()
 	if(loaded_gun)
 		add_overlay("gun")
 	if(length(tanks))

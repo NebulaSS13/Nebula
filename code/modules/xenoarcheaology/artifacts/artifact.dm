@@ -36,6 +36,7 @@
 	return FALSE
 
 /obj/structure/artifact/on_update_icon()
+	..()
 	icon_state = "[base_icon][is_active()]"
 
 /obj/structure/artifact/Destroy()

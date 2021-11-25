@@ -41,7 +41,7 @@ var/global/default_gyne
 	. = ..()
 
 /obj/structure/insectoid_egg/on_update_icon()
-	. = ..()
+	..()
 	if(hatched || !health)
 		icon_state = "egg_broken"
 	else if(hatching)

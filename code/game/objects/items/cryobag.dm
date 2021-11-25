@@ -61,7 +61,6 @@
 
 /obj/structure/closet/body_bag/cryobag/on_update_icon()
 	..()
-	overlays.Cut()
 	var/image/I = image(icon, "indicator[opened]")
 	I.appearance_flags = RESET_COLOR
 	var/maxstasis = initial(stasis_power)
@@ -71,7 +70,7 @@
 		I.color = COLOR_YELLOW
 	else
 		I.color = COLOR_RED
-	overlays += I
+	add_overlay(I)
 
 /obj/structure/closet/body_bag/cryobag/proc/get_saturation()
 	return -155 * (1 - stasis_power/initial(stasis_power))

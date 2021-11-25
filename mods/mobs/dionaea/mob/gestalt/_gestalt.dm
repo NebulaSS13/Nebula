@@ -24,7 +24,8 @@
 	. = ..(mapload)
 
 /obj/structure/diona_gestalt/on_update_icon()
-	overlays = list(eyes_overlay)
+	..()
+	add_overlay(eyes_overlay)
 	if(nymphs && nymphs.len)
 		var/matrix/M = matrix()
 		M.Scale(Clamp(nymphs.len * 0.1, 1, 2))

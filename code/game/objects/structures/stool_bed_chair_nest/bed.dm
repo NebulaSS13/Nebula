@@ -44,15 +44,12 @@
 // Reuse the cache/code from stools, todo maybe unify.
 /obj/structure/bed/on_update_icon()
 	..()
-	cut_overlays()
-	var/new_overlays
 	if(istype(reinf_material))
 		var/image/I = image(icon, "[icon_state]_padding")
 		if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 			I.appearance_flags |= RESET_COLOR
 			I.color = reinf_material.color
-		LAZYADD(new_overlays, I)
-	set_overlays(new_overlays)
+			add_overlay(I)
 
 /obj/structure/bed/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
@@ -149,7 +146,8 @@
 	var/iv_stand = TRUE
 
 /obj/structure/bed/roller/on_update_icon()
-	overlays.Cut()
+	SHOULD_CALL_PARENT(FALSE)
+	cut_overlays()
 	if(density)
 		icon_state = "up"
 	else
@@ -164,7 +162,7 @@
 			iv.overlays += image(icon, "light_low")
 		if(density)
 			iv.pixel_y = 6
-		overlays += iv
+		add_overlay(iv)
 
 /obj/structure/bed/roller/attackby(obj/item/I, mob/user)
 	if(isWrench(I) || istype(I, /obj/item/stack) || isWirecutter(I))

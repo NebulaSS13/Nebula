@@ -87,6 +87,7 @@
 	icon_state = "plinth"
 
 /obj/structure/lift/button/on_update_icon()
+	..()
 	if(light_up)
 		icon_state = "[initial(icon_state)]_lit"
 	else

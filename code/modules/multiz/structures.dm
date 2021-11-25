@@ -259,7 +259,7 @@
 	return airflow || !density
 
 /obj/structure/ladder/on_update_icon()
-	. = ..()
+	..()
 	if(!anchored)
 		icon_state = "[base_icon]00"
 	else

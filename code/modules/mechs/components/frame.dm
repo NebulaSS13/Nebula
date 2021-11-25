@@ -67,15 +67,16 @@
 		to_chat(user, SPAN_WARNING("It does not have any internal reinforcement."))
 
 /obj/structure/heavy_vehicle_frame/on_update_icon()
-	var/list/new_overlays = get_mech_images(list(legs, head, body, arms), layer)
+	..()
+	for(var/overlay in get_mech_images(list(legs, head, body, arms), layer))
+		add_overlay(overlay)
 	if(body)
 		density = TRUE
 		overlays += get_mech_image(null, "[body.icon_state]_cockpit", body.icon, body.color)
 		if(body.pilot_coverage < 100 || body.transparent_cabin)
-			new_overlays += get_mech_image(null, "[body.icon_state]_open_overlay", body.icon, body.color)
+			add_overlay(get_mech_image(null, "[body.icon_state]_open_overlay", body.icon, body.color))
 	else
 		density = FALSE
-	overlays = new_overlays
 	if(density != opacity)
 		set_opacity(density)
 

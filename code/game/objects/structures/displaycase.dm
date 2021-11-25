@@ -80,6 +80,7 @@
 		update_icon()
 
 /obj/structure/displaycase/on_update_icon()
+	..()
 	if(destroyed)
 		icon_state = "glassboxb"
 	else
