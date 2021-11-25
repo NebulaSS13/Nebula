@@ -47,6 +47,7 @@
 	update_icon()
 
 /obj/structure/extinguisher_cabinet/on_update_icon()
+	..()
 	if(!opened)
 		icon_state = "extinguisher_closed"
 		return

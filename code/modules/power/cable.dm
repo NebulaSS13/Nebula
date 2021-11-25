@@ -113,7 +113,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	return 1
 
 /obj/structure/cable/on_update_icon()
-
+	..()
 	// It is really gross to do this here but the order of icon updates to init seems
 	// unreliable and I have now had to spend hours across two PRs chasing down
 	// cable node weirdness due to the way this was handled previously. NO MORE.

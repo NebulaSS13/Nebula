@@ -24,7 +24,6 @@
 
 /obj/structure/coatrack/on_update_icon()
 	..()
-	cut_overlays()
 	var/offset = -3
 	for(var/obj/item/thing in contents)
 		for(var/slot in slots_allowed)

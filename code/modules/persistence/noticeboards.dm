@@ -89,6 +89,7 @@
 		physically_destroyed()
 
 /obj/structure/noticeboard/on_update_icon()
+	..()
 	icon_state = "[base_icon_state][LAZYLEN(notices)]"
 
 /obj/structure/noticeboard/attackby(var/obj/item/thing, var/mob/user)

@@ -121,7 +121,7 @@ var/global/list/global/aquarium_states_and_layers = list(
 
 	// Update overlays with contents.
 	icon_state = "base"
-	cut_overlays()
+	..()
 	for(var/atom/movable/AM in contents)
 		if(AM.simulated)
 			add_overlay(AM)

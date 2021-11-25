@@ -179,7 +179,7 @@
 	. = ..()
 
 /obj/structure/reagent_dispensers/fueltank/on_update_icon()
-	cut_overlays()
+	..()
 	if(rig)
 		var/image/I = new
 		I.appearance = rig

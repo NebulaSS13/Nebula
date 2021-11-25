@@ -25,6 +25,7 @@
 	return ..()
 
 /obj/structure/crematorium/on_update_icon()
+	..()
 	if(cremating)
 		icon_state = "crematorium_active"
 	else if (open)

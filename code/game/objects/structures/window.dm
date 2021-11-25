@@ -421,7 +421,8 @@
 		basestate = reinf_basestate
 	else
 		basestate = initial(basestate)
-	overlays.Cut()
+	
+	..()
 
 	if (paint_color)
 		color = paint_color
@@ -447,7 +448,7 @@
 			else
 				I = image(icon, "[basestate]_onframe[conn]", dir = BITFLAG(i-1))
 			I.color = paint_color
-			overlays += I
+			add_overlay(I)
 	else
 		for(var/i = 1 to 4)
 			var/conn = connections ? connections[i] : "0"
@@ -456,7 +457,7 @@
 			else
 				I = image(icon, "[basestate][conn]", dir = BITFLAG(i-1))
 			I.color = paint_color
-			overlays += I
+			add_overlay(I)
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	var/melting_point = material.melting_point

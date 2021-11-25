@@ -117,6 +117,7 @@
 	return
 
 /obj/structure/closet/statue/on_update_icon()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/structure/closet/statue/proc/shatter(mob/user)

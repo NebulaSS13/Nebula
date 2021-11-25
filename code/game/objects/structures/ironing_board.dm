@@ -55,9 +55,9 @@
 	if(holding)
 		icon_state = "holding"
 
-	overlays.Cut()
+	..()
 	if(cloth)
-		overlays += new /icon(cloth.icon, cloth.icon_state)
+		add_overlay(image(cloth.icon, cloth.icon_state))
 
 /obj/structure/bed/roller/ironingboard/attackby(var/obj/item/I, var/mob/user)
 	if(!density)

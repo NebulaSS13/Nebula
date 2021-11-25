@@ -71,6 +71,7 @@ var/global/list/station_bookcases = list()
 			physically_destroyed()
 
 /obj/structure/bookcase/on_update_icon()
+	..()
 	if(contents.len < 5)
 		icon_state = "book-[contents.len]"
 	else

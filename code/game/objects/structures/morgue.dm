@@ -21,7 +21,8 @@
 	return ..()
 
 /obj/structure/morgue/on_update_icon()
-	if (open)
+	..()
+	if(open)
 		icon_state = "morgue_open"
 	else if(contents.len > 1)
 		icon_state = "morgue_filled"

@@ -150,18 +150,17 @@
 
 
 /obj/structure/janitorialcart/on_update_icon()
-	overlays.Cut()
+	..()
 	if(mybag)
-		overlays += "cart_garbage"
+		add_overlay("cart_garbage")
 	if(mymop)
-		overlays += "cart_mop"
+		add_overlay("cart_mop")
 	if(myspray)
-		overlays += "cart_spray"
+		add_overlay("cart_spray")
 	if(myreplacer)
-		overlays += "cart_replacer"
+		add_overlay("cart_replacer")
 	if(signs)
-		overlays += "cart_sign[signs]"
-
+		add_overlay("cart_sign[signs]")
 
 //old style retardo-cart
 /obj/structure/bed/chair/janicart

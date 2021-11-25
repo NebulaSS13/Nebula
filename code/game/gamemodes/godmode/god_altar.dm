@@ -96,6 +96,6 @@
 		return TOPIC_REFRESH
 
 /obj/structure/deity/altar/on_update_icon()
-	overlays.Cut()
+	..()
 	if(target)
-		overlays += image('icons/effects/effects.dmi', icon_state =  "summoning")
+		add_overlay(image('icons/effects/effects.dmi', icon_state =  "summoning"))

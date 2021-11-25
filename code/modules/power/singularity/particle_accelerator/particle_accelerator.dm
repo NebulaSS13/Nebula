@@ -86,10 +86,6 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	icon_state = "end_cap"
 	reference = "end_cap"
 
-/obj/structure/particle_accelerator/on_update_icon()
-	..()
-	return
-
 /obj/structure/particle_accelerator/examine(mob/user)
 	. = ..()
 	switch(construction_state)
@@ -122,6 +118,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 		physically_destroyed()
 
 /obj/structure/particle_accelerator/on_update_icon()
+	..()
 	switch(construction_state)
 		if(0,1)
 			icon_state="[reference]"
@@ -132,7 +129,6 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 				icon_state="[reference]p[strength]"
 			else
 				icon_state="[reference]c"
-	return
 
 /obj/structure/particle_accelerator/proc/update_state()
 	if(master)

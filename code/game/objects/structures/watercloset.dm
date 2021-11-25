@@ -140,6 +140,7 @@ var/global/list/hygiene_props = list()
 	update_icon()
 
 /obj/structure/hygiene/toilet/on_update_icon()
+	..()
 	icon_state = "toilet[open][cistern]"
 
 /obj/structure/hygiene/toilet/attackby(obj/item/I, var/mob/user)
@@ -293,7 +294,7 @@ var/global/list/hygiene_props = list()
 	. = ..()
 
 /obj/structure/hygiene/shower/on_update_icon()
-	cut_overlays()
+	..()
 	if(on)
 		add_overlay(image('icons/obj/watercloset.dmi', src, "water", MOB_LAYER + 1, dir))
 
@@ -554,7 +555,7 @@ var/global/list/hygiene_props = list()
 	update_icon()
 
 /obj/structure/hygiene/faucet/on_update_icon()
-	. = ..()
+	..()
 	icon_state = icon_state = "[initial(icon_state)][open ? "-on" : null]"
 
 /obj/structure/hygiene/faucet/proc/water_flow()
