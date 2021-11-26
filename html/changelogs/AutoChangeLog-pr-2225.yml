@@ -1,0 +1,4 @@
+author: SolatK
+delete-after: true
+changes:
+  - tweak: Sleeper uses actual drug dosages to stop you from overdosing
