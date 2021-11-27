@@ -590,22 +590,25 @@ var/global/list/all_apcs = list()
 	return "[area.name] : [equipment]/[lighting]/[environ] ([lastused_equip+lastused_light+lastused_environ]) : [cell? cell.percent() : "N/C"] ([charging])"
 
 /obj/machinery/power/apc/proc/update()
+	var/old_power_light = area.power_light
+	var/old_power_environ = area.power_environ
+	var/old_power_equip = area.power_equip
 	if(operating && !shorted && !failure_timer)
 
-		//prevent unnecessary updates to emergency lighting
-		var/new_power_light = (lighting >= POWERCHAN_ON)
-		if(area.power_light != new_power_light)
-			area.power_light = new_power_light
-			area.set_emergency_lighting(lighting == POWERCHAN_OFF_AUTO) //if lights go auto-off, emergency lights go on
-
+		area.power_light = (lighting >= POWERCHAN_ON)
 		area.power_equip = (equipment >= POWERCHAN_ON)
 		area.power_environ = (environ >= POWERCHAN_ON)
+
+		//prevent unnecessary updates to emergency lighting
+		if(area.power_light != old_power_light)
+			area.set_emergency_lighting(lighting == POWERCHAN_OFF_AUTO) //if lights go auto-off, emergency lights go on
 	else
 		area.power_light = 0
 		area.power_equip = 0
 		area.power_environ = 0
 
-	area.power_change()
+	if(area.power_light != old_power_light || area.power_environ != old_power_environ || area.power_equip != old_power_equip)
+		area.power_change()
 
 	var/obj/item/cell/cell = get_cell()
 	if(!cell || cell.charge <= 0)
@@ -971,4 +974,3 @@ var/global/list/all_apcs = list()
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
 #undef APC_UPDATE_ICON_COOLDOWN
- 
