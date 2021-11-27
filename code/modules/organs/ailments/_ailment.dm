@@ -3,7 +3,7 @@
 	var/timer_id                  // Current timer waiting to proc next symptom message.
 	var/min_time = 2 MINUTES      // Minimum time between symptom messages.
 	var/max_time = 5 MINUTES      // Maximum time between symptom messages.
-	var/category = /datum/ailment // Used similar to heirarchies, if category == type then the 
+	var/category = /datum/ailment // Used similar to hierarchies, if category == type then the
 	                              // ailment is a category and won't be applied to organs.
 	var/obj/item/organ/organ      // Organ associated with the ailment (ailment is in organ.ailments list).
 
@@ -13,16 +13,18 @@
 	var/specific_organ_subtype = /obj/item/organ/external // What organ subtype, if any, does the ailment apply to?
 
 	// Treatment types
-	var/treated_by_item_type          // What item type can be used in physical interaction to cure the ailment?
-	var/treated_by_item_cost = 1      // If treated_by_item_type is a stack, how many should be used?
-	var/treated_by_reagent_type       // What reagent type cures this ailment when metabolized?
-	var/treated_by_reagent_dosage = 1 // What is the minimum dosage for a reagent to cure this ailment?
+	var/treated_by_item_type                // What item type can be used in physical interaction to cure the ailment?
+	var/treated_by_item_cost = 1            // If treated_by_item_type is a stack, how many should be used?
+	var/treated_by_reagent_type             // What reagent type cures this ailment when metabolized?
+	var/treated_by_reagent_dosage = 1       // What is the minimum dosage for a reagent to cure this ailment?
+	var/treated_by_chem_effect              // What chemical effect cures this ailment?
+	var/treated_by_chem_effect_strength = 1 // How strong must the chemical effect be to cure this ailment?
 
 	// Fluff strings
 	var/initial_ailment_message = "Your $ORGAN$ doesn't feel quite right..."                // Shown in New()
-	var/third_person_treatement_message = "$USER$ treats $TARGET$'s ailment with $ITEM$."   // Shown when treating other with an item.
-	var/self_treatement_message = "$USER$ treats $USER_HIS$ ailment with $ITEM$."           // Shown when treating self with an item.
-	var/medication_treatment_message = "Your ailment abates."                               // Shown when treated by a metabolized reagent.
+	var/third_person_treatment_message = "$USER$ treats $TARGET$'s ailment with $ITEM$."    // Shown when treating other with an item.
+	var/self_treatment_message = "$USER$ treats $USER_HIS$ ailment with $ITEM$."            // Shown when treating self with an item.
+	var/medication_treatment_message = "Your ailment abates."                               // Shown when treated by a metabolized reagent or CE_X effect.
 	var/manual_diagnosis_string  /* ex: "$USER_HIS$ $ORGAN$ has something wrong with it" */ // Shown when grab-diagnosed by a doctor. Leave null to be undiagnosable.
 	var/scanner_diagnosis_string /* ex: "Significant swelling" */                           // Shown on the handheld and body scanners. Leave null to be undiagnosable.
 
@@ -31,7 +33,7 @@
 	if(_organ)
 		organ = _organ
 		if(organ.owner)
-			to_chat(organ.owner, SPAN_WARNING(capitalize(replacetext(initial_ailment_message, "$ORGAN$", organ.name))))
+			to_chat(organ.owner, SPAN_WARNING(replace_tokens(initial_ailment_message)))
 			begin_ailment_event()
 
 /datum/ailment/proc/can_apply_to(var/obj/item/organ/_organ)
@@ -83,13 +85,13 @@
 
 /datum/ailment/proc/was_treated_by_item(var/obj/item/treatment, var/mob/user, var/mob/target)
 	var/show_message
-	if(user == target && self_treatement_message)
-		show_message = self_treatement_message
+	if(user == target && self_treatment_message)
+		show_message = self_treatment_message
 	else
-		show_message = third_person_treatement_message
+		show_message = third_person_treatment_message
 	if(!show_message)
 		return
-	
+
 	user.visible_message(SPAN_NOTICE(replace_tokens(show_message, treatment, user, target)))
 
 	if(istype(treatment, /obj/item/stack))
@@ -100,7 +102,11 @@
 /datum/ailment/proc/treated_by_medication(var/decl/material/reagent, var/dosage)
 	return treated_by_reagent_type && istype(reagent, treated_by_reagent_type) && dosage >= treated_by_reagent_dosage
 
-/datum/ailment/proc/was_treated_by_medication(var/datum/reagents/dose)
-	dose.remove_reagent(treated_by_reagent_type, treated_by_reagent_dosage)
-	to_chat(organ.owner, SPAN_NOTICE(capitalize(replacetext(medication_treatment_message, "$ORGAN$", organ.name))))
+/datum/ailment/proc/was_treated_by_medication(var/datum/reagents/source, var/reagent_type)
+	source.remove_reagent(reagent_type, treated_by_reagent_dosage)
+	to_chat(organ.owner, SPAN_NOTICE(replace_tokens(medication_treatment_message)))
+	qdel(src)
+
+/datum/ailment/proc/was_treated_by_chem_effect()
+	to_chat(organ.owner, SPAN_NOTICE(replace_tokens(medication_treatment_message)))
 	qdel(src)
