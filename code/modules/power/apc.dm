@@ -228,6 +228,8 @@ var/global/list/all_apcs = list()
 		return
 	failure_timer = max(failure_timer, round(duration))
 	playsound(src, 'sound/machines/apc_nopower.ogg', 75, 0)
+	update()
+	queue_icon_update()
 
 /obj/machinery/power/apc/proc/init_round_start()
 	var/obj/item/stock_parts/power/terminal/term = get_component_of_type(/obj/item/stock_parts/power/terminal)
@@ -738,11 +740,13 @@ var/global/list/all_apcs = list()
 		return
 
 	if(failure_timer)
-		update()
-		queue_icon_update()
 		failure_timer--
-		force_update = 1
-		return
+
+		if(!failure_timer)
+			update()
+			queue_icon_update()
+
+		else return
 
 	lastused_light = (lighting >= POWERCHAN_ON) ? area.usage(LIGHT) : 0
 	lastused_equip = (equipment >= POWERCHAN_ON) ? area.usage(EQUIP) : 0
@@ -786,8 +790,7 @@ var/global/list/all_apcs = list()
 	update_channels()
 
 	// update icon & area power if anything changed
-	if(last_lt != lighting || last_eq != equipment || last_en != environ || force_update)
-		force_update = 0
+	if(last_lt != lighting || last_eq != equipment || last_en != environ)
 		queue_icon_update()
 		update()
 	else if (last_ch != charging)
@@ -971,4 +974,3 @@ var/global/list/all_apcs = list()
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
 #undef APC_UPDATE_ICON_COOLDOWN
- 
