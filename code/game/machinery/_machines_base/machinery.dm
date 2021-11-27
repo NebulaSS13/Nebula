@@ -134,12 +134,20 @@ Class Procs:
 	RefreshParts()
 	power_change()
 
+	var/area/A = get_area(src)
+	if(A)
+		LAZYADD(A.machinery_list, src) // Add machinery object to area machinery list
+
 /obj/machinery/Destroy()
 	if(istype(wires))
 		QDEL_NULL(wires)
 	SSmachines.machinery -= src
 	QDEL_NULL_LIST(component_parts) // Further handling is done via destroyed events.
 	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
+
+	var/area/A = get_area(src)
+	if(A)
+		LAZYREMOVE(A.machinery_list, src) // Remove machinery object from area machinery list
 	. = ..()
 
 /obj/machinery/proc/ProcessAll(var/wait)
@@ -467,3 +475,11 @@ Class Procs:
 
 /obj/machinery/get_matter_amount_modifier()
 	. = ..() * HOLLOW_OBJECT_MATTER_MULTIPLIER // machine matter is largely just the frame, and the components contribute most of the matter/value.
+
+/obj/machinery/wrench_floor_bolts(mob/user, delay)
+	. = ..()
+	var/area/A = get_area(src)
+	if(anchored)
+		A.machinery_list |= src
+	else
+		A.machinery_list -= src

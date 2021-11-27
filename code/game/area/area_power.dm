@@ -4,6 +4,9 @@
 #define ENVIRON 3
 */
 
+/area
+	var/list/machinery_list
+
 /area/proc/powered(var/chan)		// return true if the area has power to given channel
 	if(!requires_power)
 		return 1
@@ -23,7 +26,7 @@
 
 // called when power status changes
 /area/proc/power_change()
-	for(var/obj/machinery/M in src)	// for each machine in the area
+	for(var/obj/machinery/M in machinery_list)	// for each machine in the area
 		M.power_change()			// reverify power status (to update icons etc.)
 	if (atmosalm || fire || eject || party)
 		update_icon()
@@ -74,7 +77,7 @@
 	used_equip = 0
 	used_light = 0
 	used_environ = 0
-	for(var/obj/machinery/M in src)
+	for(var/obj/machinery/M in machinery_list)
 		switch(M.power_channel)
 			if(EQUIP)
 				used_equip += M.get_power_usage()
