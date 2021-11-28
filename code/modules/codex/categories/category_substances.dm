@@ -91,7 +91,7 @@
 			material_info += "As a gas or vapor, it has the following properties:<ul>"
 			var/list/gas_info = list()
 			gas_info+= "<li>It has a specific heat of [mat.gas_specific_heat] J/(mol*K).</li>"
-			gas_info+= "<li>It has a molar mass of [mat.gas_molar_mass] kg/mol.</li>"
+			gas_info+= "<li>It has a molar mass of [mat.molar_mass] kg/mol.</li>"
 			if(mat.gas_flags & XGM_GAS_FUEL)
 				gas_info+= "<li>It is flammable.</li>"
 				if(mat.burn_product)

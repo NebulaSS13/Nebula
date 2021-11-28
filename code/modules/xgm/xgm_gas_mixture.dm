@@ -195,7 +195,7 @@
 
 	//group_multiplier gets divided out in volume/gas[gasid] - also, V/(m*T) = R/(partial pressure)
 	var/decl/material/mat = GET_DECL(gasid)
-	var/molar_mass = mat.gas_molar_mass
+	var/molar_mass = mat.molar_mass
 	var/specific_heat = mat.gas_specific_heat
 	var/safe_temp = max(temperature, TCMB) // We're about to divide by this.
 	return R_IDEAL_GAS_EQUATION * ( log( (IDEAL_GAS_ENTROPY_CONSTANT*volume/(gas[gasid] * safe_temp)) * (molar_mass*specific_heat*safe_temp)**(2/3) + 1 ) +  15 )
@@ -510,7 +510,7 @@
 /datum/gas_mixture/proc/get_mass()
 	for(var/g in gas)
 		var/decl/material/mat = GET_DECL(g)
-		. += gas[g] * mat.gas_molar_mass * group_multiplier
+		. += gas[g] * mat.molar_mass * group_multiplier
 
 /datum/gas_mixture/proc/specific_mass()
 	var/M = get_total_moles()
