@@ -20,7 +20,7 @@
 	wall_name = "bulkhead"
 	construction_difficulty = MAT_VALUE_HARD_DIY
 	gas_specific_heat = 100
-	gas_molar_mass = 0.002
+	molar_mass = 0.002
 	gas_flags = XGM_GAS_FUEL
 	burn_product = /decl/material/liquid/water
 	ore_type_value = ORE_EXOTIC
@@ -50,7 +50,7 @@
 	reflectiveness = MAT_VALUE_SHINY
 	ignition_point = FLAMMABLE_GAS_MINIMUM_BURN_TEMPERATURE
 	gas_specific_heat = 200	// J/(mol*K)
-	gas_molar_mass = 0.405	// kg/mol
+	molar_mass = 0.405	// kg/mol
 	gas_overlay_limit = 0.7
 	gas_flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT
 	gas_symbol_html = "Ex<sub>*</sub>"

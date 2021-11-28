@@ -116,6 +116,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	var/ignition_point                        // K, point at which the material catches on fire.
 	var/melting_point = 1800                  // K, walls will take damage if they're next to a fire hotter than this
 	var/boiling_point = 3000                  // K, point that material will become a gas.
+	var/latent_heat = 7000                    // kJ/kg, enthalpy of vaporization
+	var/molar_mass = 0.06                     // kg/mol, 
 	var/brute_armor = 2	                      // Brute damage to a wall is divided by this value if the wall is reinforced by this material.
 	var/burn_armor                            // Same as above, but for Burn damage type. If blank brute_armor's value is used.
 	var/integrity = 150                       // General-use HP value for products.
@@ -168,7 +170,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 	// Gas behavior.
 	var/gas_overlay_limit
 	var/gas_specific_heat
-	var/gas_molar_mass
 	var/gas_symbol_html
 	var/gas_symbol
 	var/gas_flags = 0
@@ -333,11 +334,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 /decl/material/proc/products_need_process()
 	return (radioactivity>0) //todo
 
+
+//Clausius–Clapeyron relation
+/decl/material/proc/get_boiling_temp(var/pressure = ONE_ATMOSPHERE)
+	return (1 / (1/boiling_point) - ((R_IDEAL_GAS_EQUATION * log(pressure / ONE_ATMOSPHERE)) / (latent_heat * molar_mass)))
+
 // Returns the phase of the matterial at the given temperature and pressure
-// #FIXME: pressure is unused currently
 /decl/material/proc/phase_at_temperature(var/temperature, var/pressure = ONE_ATMOSPHERE)
 	//#TODO: implement plasma temperature and do pressure checks
-	if(temperature >= boiling_point)
+	if(temperature >= get_boiling_temp(pressure))
 		return MAT_PHASE_GAS
 	else if(temperature >= heating_point)
 		return MAT_PHASE_LIQUID

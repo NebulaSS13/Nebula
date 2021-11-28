@@ -8,7 +8,10 @@
 	gas_tile_overlay = "generic"
 	gas_overlay_limit = 0.5
 	gas_specific_heat = 30
-	gas_molar_mass = 0.020
+	molar_mass = 0.020
+	boiling_point = 100 CELSIUS
+	melting_point = 0 CELSIUS
+	latent_heat = 2258
 	gas_condensation_point = 308.15 // 35C. Dew point is ~20C but this is better for gameplay considerations.
 	gas_symbol_html = "H<sub>2</sub>O"
 	gas_symbol = "H2O"
