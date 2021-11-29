@@ -41,7 +41,7 @@
 					material_info += "<li>[prodstr]</li>"
 				material_info += "</ul>"
 
-			material_info += "<br>This substance has the following properties:<ul>"
+			material_info += "<br>This substance has the following properties in standard temperature and pressure:<ul>"
 			material_info += "<li>Its melting point is [mat.melting_point] K.</li>"
 			material_info += "<li>Its boiling point is [mat.boiling_point] K.</li>"
 			if(mat.solvent_power > MAT_SOLVENT_NONE)
