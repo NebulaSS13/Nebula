@@ -19,10 +19,10 @@
 /datum/hud
 	var/mob/mymob
 
-	var/hud_shown 			= 1			//Used for the HUD toggle (F12)
-	var/inventory_shown 	= TRUE		//the inventory
-	var/show_intent_icons 	= FALSE
-	var/hotkey_ui_hidden 	= FALSE		//This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
+	var/hud_shown           = 1         //Used for the HUD toggle (F12)
+	var/inventory_shown     = TRUE      //the inventory
+	var/show_intent_icons   = FALSE
+	var/hotkey_ui_hidden    = FALSE     //This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
 
 	var/obj/screen/lingchemdisplay
 	var/list/hand_hud_objects
