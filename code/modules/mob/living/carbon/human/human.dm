@@ -5,22 +5,32 @@
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
 	mob_sort_value = 6
-	dna = new /datum/dna(null)
 
 	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/obj/item/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
 	var/step_count
 
-/mob/living/carbon/human/Initialize(mapload, var/species_name = null, var/datum/dna/dna = null)
-	setup_hud_overlays()
-	var/list/newargs = args.Copy(2)
-	setup(arglist(newargs))
-	global.human_mob_list |= src
-	. = ..()
-	post_setup(arglist(newargs))
+/mob/living/carbon/human/Initialize(mapload, var/new_species = null)
 
-/mob/living/carbon/human/proc/setup_hud_overlays()
+	if(!dna)
+		dna = new /datum/dna(null)
+
+	if(!species)
+		if(new_species)
+			set_species(new_species,1)
+		else
+			set_species()
+		name = species.get_default_name()
+
+	if(!real_name || real_name == "unknown")
+		var/newname = species.get_default_name()
+		if(newname && newname != name)
+			real_name = newname
+			SetName(real_name)
+			if(mind)
+				mind.name = real_name
+
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, "100")
 	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[LIFE_HUD]	      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
@@ -31,6 +41,15 @@
 	hud_list[IMPTRACK_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD_OOC]  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
+
+	global.human_mob_list |= src
+	. = ..()
+
+	if(dna)
+		dna.ready_dna(src)
+		dna.real_name = real_name
+		sync_organ_dna()
+	make_blood()
 
 /mob/living/carbon/human/Destroy()
 	global.human_mob_list -= src
@@ -640,18 +659,26 @@
 			force_update_limbs()
 			update_body()
 
-//set_species should not handle the entirety of initing the mob, and should not trigger deep updates
-/mob/living/carbon/human/proc/set_species(var/new_species_name)
-	if(!new_species_name)
-		CRASH("set_species on mob '[src]' was passed a null species name '[new_species_name]'!")
-	var/new_species = get_species_by_key(new_species_name)
-	if(species?.name == new_species_name)
-		return
-	if(!new_species)
-		CRASH("set_species on mob '[src]' was passed a bad species name '[new_species_name]'!")
+/mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour = 1)
+	if(!dna)
+		if(!new_species)
+			new_species = global.using_map.default_species
+	else
+		if(!new_species)
+			new_species = dna.species
 
-	//Handle old species transition
+	// No more invisible screaming wheelchairs because of set_species() typos.
+	if(!get_species_by_key(new_species))
+		new_species = global.using_map.default_species
+	if(dna)
+		dna.species = new_species
+
 	if(species)
+
+		if(species.name && species.name == new_species)
+			return
+
+		// Clear out their species abilities.
 		species.remove_base_auras(src)
 		species.remove_inherent_verbs(src)
 		holder_type = null
@@ -680,13 +707,19 @@
 	if(species.natural_armour_values)
 		set_extension(src, /datum/extension/armor, species.natural_armour_values)
 
-	var/decl/pronouns/new_pronouns = get_pronouns_by_gender(get_sex())
-	if(!istype(new_pronouns) || !(new_pronouns in species.available_pronouns))
-		new_pronouns = pick(species.available_pronouns) //Might wanna wrap this into the species code instead of here?
-		set_gender(new_pronouns.name)
+	default_pixel_x = initial(pixel_x) + bodytype.pixel_offset_x
+	default_pixel_y = initial(pixel_y) + bodytype.pixel_offset_y
+	default_pixel_z = initial(pixel_z) + bodytype.pixel_offset_z
+	reset_offsets()
 
-	//Handle bodytype
-	set_bodytype(species.get_bodytype_by_pronouns(new_pronouns), FALSE)
+	appearance_descriptors = null
+	if(LAZYLEN(species.appearance_descriptors))
+		for(var/desctype in species.appearance_descriptors)
+			var/datum/appearance_descriptor/descriptor = species.appearance_descriptors[desctype]
+			LAZYSET(appearance_descriptors, descriptor.name, descriptor.default_value)
+
+	if(!(species.appearance_flags & HAS_UNDERWEAR))
+		QDEL_NULL_LIST(worn_underwear)
 
 	available_maneuvers = species.maneuvers.Copy()
 
@@ -697,18 +730,15 @@
 	bone_material = species.bone_material
 	bone_amount =   species.bone_amount
 
-	full_prosthetic = null //code dum thinks ur robot always
-	default_walk_intent = null
-	default_run_intent = null
-	move_intent = null
-	move_intents = species.move_intents.Copy()
-	set_move_intent(GET_DECL(move_intents[1]))
-	if(!istype(move_intent))
-		set_next_usable_move_intent()
-	update_emotes()
-	return TRUE
+	refresh_visible_overlays()
+	reset_blood()
 
-/mob/living/carbon/human/proc/apply_species_cultural_info()
+	// Rebuild the HUD and visual elements.
+	if(client)
+		Login()
+
+	full_prosthetic = null
+
 	var/update_lang
 	for(var/token in ALL_CULTURAL_TAGS)
 		if(species.force_cultural_info && species.force_cultural_info[token])
@@ -718,13 +748,18 @@
 			update_lang = TRUE
 			set_cultural_value(token, species.default_cultural_info[token], defer_language_update = TRUE)
 
-	if(update_lang)
-		update_languages()
+	default_walk_intent = null
+	default_run_intent = null
+	move_intent = null
+	move_intents = species.move_intents.Copy()
+	set_move_intent(GET_DECL(move_intents[1]))
+	if(!istype(move_intent))
+		set_next_usable_move_intent()
 
-/mob/living/carbon/human/proc/apply_species_inventory_restrictions()
-	if(species)
-		if(!(species.appearance_flags & HAS_UNDERWEAR))
-			QDEL_NULL_LIST(worn_underwear)
+	if(update_lang)
+		languages.Cut()
+		default_language = null
+		update_languages()
 
 	//recheck species-restricted clothing
 	for(var/slot in global.all_inventory_slots)
@@ -732,28 +767,10 @@
 		if(istype(C) && !C.mob_can_equip(src, slot, 1))
 			unEquip(C)
 
-//This handles actually updating our visual appearance
-/mob/living/carbon/human/proc/apply_species_appearance()
-	if(!species)
-		icon_state = lowertext(SPECIES_HUMAN)
-		skin_colour = COLOR_BLACK
-	else
-		species.apply_appearence(src)
-
-	force_update_limbs() //updates bodytype
-	default_pixel_x = initial(pixel_x) + bodytype.pixel_offset_x
-	default_pixel_y = initial(pixel_y) + bodytype.pixel_offset_y
-	default_pixel_z = initial(pixel_z) + bodytype.pixel_offset_z
-
-	reset_offsets()
-
-	// Rebuild the HUD and visual elements.
-	if(client)
-		Login() //#FIXME: It might be a bit dangerous to call the entirety of login just for that?
+	update_emotes()
+	return 1
 
 /mob/living/carbon/human/proc/update_languages()
-	if(!length(cultural_info))
-		log_warning("'[src]'([x], [y], [z]) doesn't have any cultural info set and is attempting to update its language!!")
 
 	var/list/permitted_languages = list()
 	var/list/free_languages =      list()
@@ -1266,7 +1283,6 @@
 		to_chat(src, SPAN_DANGER("You feel a chill and your skin feels lighter..."))
 
 /mob/living/carbon/human/increaseBodyTemp(value)
-	//#TODO: Might wanna put a upper limit to this!
 	bodytemperature += value
 	return bodytemperature
 
@@ -1301,73 +1317,3 @@
 		"right pocket" = list(r_store,                 "in"),
 		"rig" =          list(wearing_rig?.air_supply, "in")
 	)
-
-//Set and force the mob to update according to the given DNA
-// Will reset the entire mob's state, regrow limbs/organ etc
-/mob/living/carbon/human/proc/apply_dna(var/datum/dna/dna)
-	if(!dna)
-		CRASH("/mob/living/carbon/human/proc/apply_dna() : Got null dna")
-	src.dna = dna
-
-	//Set species and real name data
-	set_real_name(dna.real_name)
-	set_species(dna.species)
-	//Revive actually regen organs, reset their appearence and makes sure if the player is kicked out they get reinserted in
-	revive()
-
-	species.handle_pre_spawn(src)
-	apply_species_appearance()
-	apply_species_cultural_info()
-	apply_species_inventory_restrictions()
-	species.handle_post_spawn(src)
-
-	refresh_visible_overlays()
-
-//Sets the mob's real name and update all the proper fields
-/mob/living/carbon/human/proc/set_real_name(var/newname)
-	if(!newname)
-		return
-	real_name = newname
-	SetName(newname)
-	if(dna)
-		dna.real_name = newname
-	if(mind)
-		mind.name = newname
-
-//#TODO: Find better name
-/mob/living/carbon/human/proc/setup(var/species_name = null, var/datum/dna/dna = null)
-	if(dna)
-		species_name = dna.species
-		src.dna = dna
-	else if(!species_name)
-		species_name = global.using_map.default_species
-
-	set_species(species_name)
-
-	if(dna)
-		set_real_name(dna.real_name)
-	else
-		try_generate_default_name()
-
-	if(!dna)
-		src.dna.ready_dna(src) //regen dna filler only if we haven't forced the dna already
-
-	species.handle_pre_spawn(src)
-	apply_species_cultural_info()
-	apply_species_appearance()
-	species.create_organs(src)		//syncs organ dna
-	species.handle_post_spawn(src)
-
-	UpdateAppearance() //Apply dna appearence to mob, causes DNA to change because filler values are regenerated
-	make_blood()
-
-/mob/living/carbon/human/proc/try_generate_default_name()
-	if(name != initial(name))
-		return
-	if(species)
-		set_real_name(species.get_default_name())
-	else
-		SetName("unknown")
-
-/mob/living/carbon/human/proc/post_setup(var/species_name = null, var/datum/dna/dna = null)
-	refresh_visible_overlays()
