@@ -47,15 +47,15 @@ var/global/list/limb_icon_cache = list()
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
 	..()
-	var/obj/item/organ/internal/eyes/eyes = owner.get_internal_organ(BP_EYES)
+	var/obj/item/organ/internal/eyes/eyes = owner.get_organ(BP_EYES)
 	if(eyes) eyes.update_colour()
 
-/obj/item/organ/external/head/removed()
+/obj/item/organ/external/head/remove_organ()
 	update_icon(1)
 	if(owner)
 		SetName("[owner.real_name]'s head")
 		addtimer(CALLBACK(owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
-	..()
+	. = ..()
 	//Head markings, duplicated (sadly) below.
 	for(var/M in markings)
 		var/decl/sprite_accessory/marking/mark_style = GET_DECL(M)

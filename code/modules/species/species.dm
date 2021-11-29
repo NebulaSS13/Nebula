@@ -432,15 +432,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	// set_species and rejuvenate just trash the entire organ
 	// list, which is really horrible.
 
-	QDEL_LIST(H.organs)
-	if(!islist(H.organs))
-		H.organs = list()
-	H.organs_by_name = list()
-
-	QDEL_LIST(H.internal_organs)
-	if(!islist(H.internal_organs))
-		H.internal_organs = list()
-	H.internal_organs_by_name = list()
+	QDEL_NULL_LIST(H.external_organs)
+	QDEL_NULL_LIST(H.internal_organs)
 
 	for(var/limb_type in has_limbs)
 		var/list/organ_data = has_limbs[limb_type]
@@ -453,15 +446,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		if(organ_tag != O.organ_tag)
 			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
-		H.internal_organs_by_name[organ_tag] = O
 
-	for(var/name in H.organs_by_name)
-		H.organs |= H.organs_by_name[name]
-
-	for(var/name in H.internal_organs_by_name)
-		H.internal_organs |= H.get_internal_organ(name)
-
-	for(var/obj/item/organ/O in (H.organs|H.internal_organs))
+	for(var/obj/item/organ/O in H.get_organs())
 		O.owner = H
 		post_organ_rejuvenate(O, H)
 
@@ -657,7 +643,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 //Mostly for toasters
 /decl/species/proc/handle_limbs_setup(var/mob/living/carbon/human/H)
-	for(var/thing in H.organs)
+	for(var/thing in H.get_external_organs())
 		post_organ_rejuvenate(thing, H)
 
 // Impliments different trails for species depending on if they're wearing shoes.
@@ -833,7 +819,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		var/synthetic = H.isSynthetic()
 		if (synthetic)
 			if (exertion_charge_scale)
-				var/obj/item/organ/internal/cell/cell = locate() in H.internal_organs
+				var/obj/item/organ/internal/cell/cell = locate() in H.get_internal_organs()
 				if (cell)
 					cell.use(cell.get_power_drain() * exertion_charge_scale)
 		else

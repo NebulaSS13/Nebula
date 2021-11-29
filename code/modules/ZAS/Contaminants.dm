@@ -111,7 +111,7 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 
 
 /mob/living/carbon/human/proc/burn_eyes()
-	var/obj/item/organ/internal/eyes/E = get_internal_organ(BP_EYES)
+	var/obj/item/organ/internal/eyes/E = get_organ(BP_EYES)
 	if(E && !E.contaminant_guard)
 		if(prob(20)) to_chat(src, "<span class='danger'>Your eyes burn!</span>")
 		E.damage += 2.5

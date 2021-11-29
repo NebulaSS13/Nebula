@@ -179,7 +179,7 @@
 
 			// Heal organ damage.
 			if(heal_internal)
-				for(var/obj/item/organ/I in H.internal_organs)
+				for(var/obj/item/organ/I in H.get_internal_organs())
 
 					if(BP_IS_PROSTHETIC(I) || BP_IS_CRYSTAL(I))
 						continue
@@ -191,7 +191,7 @@
 						return
 
 			// Heal broken bones.
-			if(H.bad_external_organs.len)
+			if(LAZYLEN(H.bad_external_organs))
 				for(var/obj/item/organ/external/E in H.bad_external_organs)
 
 					if(BP_IS_PROSTHETIC(E))

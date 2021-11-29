@@ -164,7 +164,7 @@
 
 	return 0
 
-/obj/item/rig_module/ai_container/removed()
+/obj/item/rig_module/ai_container/module_removed()
 	eject_ai()
 	..()
 

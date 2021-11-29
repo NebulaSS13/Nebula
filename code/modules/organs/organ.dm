@@ -32,7 +32,9 @@
 	var/scale_max_damage_to_species_health // Whether or not we should scale the damage values of this organ to the owner species.
 
 /obj/item/organ/Destroy()
-	owner = null
+	if(owner)
+		remove_organ()
+		owner = null
 	dna = null
 	QDEL_NULL_LIST(ailments)
 	return ..()
@@ -56,11 +58,8 @@
 		given_dna = null
 
 	if(iscarbon(loc))
-		owner = loc
-		if(owner && QDELETED(owner))
-			owner = null
+		if(!replace_organ(loc) || !owner)
 			return INITIALIZE_HINT_QDEL
-
 		if(!given_dna && owner.dna)
 			given_dna = owner.dna
 		else
@@ -238,9 +237,6 @@
 /obj/item/organ/proc/receive_chem(chemical)
 	return 0
 
-/obj/item/organ/proc/remove_rejuv()
-	qdel(src)
-
 /obj/item/organ/proc/rejuvenate(var/ignore_prosthetic_prefs)
 	damage = 0
 	status = initial(status)
@@ -293,45 +289,44 @@
  *  drop_organ - if true, organ will be dropped at the loc of its former owner
  *
  *  Also, Observer Pattern Implementation: Dismembered Handling occurs here.
+ * Returns TRUE if the organ no longer has a holder, and is safe for further manipulation (ie. not qdeleted).
  */
-/obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1)
+/obj/item/organ/proc/remove_organ(var/mob/living/user, var/drop_organ=1)
 
-	if(!istype(owner))
-		return
-	events_repository.raise_event(/decl/observ/dismembered, owner, src)
+	SHOULD_CALL_PARENT(TRUE)
+	if(istype(owner))
+		owner.handle_organ_replaced(src, user)
+		events_repository.raise_event(/decl/observ/dismembered, owner, src)
+		if(drop_organ)
+			dropInto(owner.loc)
+		owner.client?.screen -= src
+		owner = null
 
 	action_button_name = null
-
-	if(drop_organ)
-		dropInto(owner.loc)
-
 	START_PROCESSING(SSobj, src)
 	rejecting = null
-	if(!BP_IS_PROSTHETIC(src) && species && reagents?.total_volume < 5)
-		owner.vessel.trans_to(src, 5 - reagents.total_volume, 1, 1)
-
-	if(vital)
-		if(user)
-			admin_attack_log(user, owner, "Removed a vital organ ([src]).", "Had a vital organ ([src]) removed.", "removed a vital organ ([src]) from")
-		owner.death()
 	screen_loc = null
-	owner.client?.screen -= src
-	owner = null
 
 	for(var/datum/ailment/ailment in ailments)
 		if(ailment.timer_id)
 			deltimer(ailment.timer_id)
 			ailment.timer_id = null
 
-/obj/item/organ/proc/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
-	owner = target
-	action_button_name = initial(action_button_name)
-	forceMove(owner) //just in case
-	if(BP_IS_PROSTHETIC(src))
-		set_dna(owner.dna)
-	for(var/datum/ailment/ailment in ailments)
-		ailment.begin_ailment_event()
 	return TRUE
+
+/obj/item/organ/proc/replace_organ(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
+	SHOULD_CALL_PARENT(TRUE)
+	if(owner)
+		return FALSE
+	owner = target
+	if(istype(owner) && owner.handle_organ_replaced(src))
+		action_button_name = initial(action_button_name)
+		forceMove(owner) //just in case
+		if(BP_IS_PROSTHETIC(src))
+			set_dna(owner.dna)
+		for(var/datum/ailment/ailment in ailments)
+			ailment.begin_ailment_event()
+		return TRUE
 
 /obj/item/organ/attack(var/mob/target, var/mob/user)
 	if(status & ORGAN_PROSTHETIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))

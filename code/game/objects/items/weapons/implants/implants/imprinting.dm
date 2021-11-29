@@ -85,7 +85,7 @@
 	to_chat(imp_in, instruction)
 	addtimer(CALLBACK(src,.proc/activate),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
 
-/obj/item/implant/imprinting/removed()
+/obj/item/implant/imprinting/implant_removed()
 	if(brainwashing && !malfunction)
 		to_chat(imp_in,"<span class='warning'>A wave of nausea comes over you.</span><br><span class='good'>You are no longer so sure of those beliefs you've had...</span>")
 	..()
@@ -105,7 +105,7 @@
 /obj/item/implant/imprinting/can_implant(mob/M, mob/user, target_zone)
 	var/mob/living/carbon/human/H = M	
 	if(istype(H))
-		var/obj/item/organ/internal/B = H.get_internal_organ(BP_BRAIN)
+		var/obj/item/organ/internal/B = H.get_organ(BP_BRAIN)
 		if(!B || H.isSynthetic())
 			to_chat(user, "<span class='warning'>\The [M] cannot be imprinted.</span>")
 			return FALSE

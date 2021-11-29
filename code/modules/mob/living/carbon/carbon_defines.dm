@@ -27,13 +27,13 @@
 	var/last_taste_time = 0
 	var/last_taste_text = ""
 
-	// organ-related variables, see organ.dm and human_organs.dm
-	var/list/internal_organs = list()
-	var/list/organs = list()
-	var/list/obj/item/organ/external/organs_by_name = list() // map organ names to organs
-	var/list/internal_organs_by_name = list() // so internal organs have less ickiness too
+	// organ-related variables, see organ.dm and human_organs.d
+	// Do not access these directly; use get_organs(), get_organ(), get_internal_organs() and get_external_organs().
+	var/tmp/list/organs_by_tag
+	var/tmp/list/external_organs
+	var/tmp/list/internal_organs
 
-	var/list/stasis_sources = list()
+	var/list/stasis_sources
 	var/stasis_value
 
 	var/player_triggered_sleeping = 0

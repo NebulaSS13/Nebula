@@ -13,9 +13,8 @@
 	var/id //Unique Id assigned on new
 
 /obj/item/organ/internal/augment/boost/Initialize()
-	. = ..()
 	id = "[/obj/item/organ/internal/augment/boost]_[sequential_id(/obj/item/organ/internal/augment/boost)]"
-
+	. = ..()
 
 /obj/item/organ/internal/augment/boost/onInstall()
 	if(buffs.len)

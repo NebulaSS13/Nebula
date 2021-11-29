@@ -12,7 +12,7 @@
 	playsound(user,'sound/effects/basscannon.ogg',35,1)
 	return AURA_FALSE|AURA_CANCEL
 
-/obj/aura/personal_shield/removed()
+/obj/aura/personal_shield/aura_removed()
 	to_chat(user,"<span class='warning'>\The [src] goes offline!</span>")
 	playsound(user,'sound/mecha/internaldmgalarm.ogg',25,1)
 	..()

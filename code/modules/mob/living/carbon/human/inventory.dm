@@ -31,7 +31,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 	return ..()
 
 /mob/living/carbon/human/proc/has_organ(name)
-	var/obj/item/organ/external/O = organs_by_name[name]
+	var/obj/item/organ/external/O = get_organ(name)
 	return (O && !O.is_stump())
 
 /mob/living/carbon/human/proc/has_organ_for_slot(slot)
@@ -372,7 +372,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 /mob/living/carbon/human/has_held_item_slot()
 	for(var/bp in held_item_slots)
-		var/obj/item/organ/external/E = organs_by_name[bp]
+		var/obj/item/organ/external/E = get_organ(bp)
 		if(E && !E.is_stump())
 			return TRUE
 	return FALSE

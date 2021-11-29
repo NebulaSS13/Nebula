@@ -76,7 +76,7 @@
 				flash_time = round(H.getFlashMod() * flash_time)
 				if(flash_time <= 0)
 					return
-				var/obj/item/organ/internal/eyes/E = H.get_internal_organ(H.species.vision_organ)
+				var/obj/item/organ/internal/eyes/E = H.get_organ(H.species.vision_organ)
 				if(!E)
 					return
 				if(E.is_bruised() && prob(E.damage + 50))

@@ -8,7 +8,7 @@
 		L.mutations += MUTATION_SPACERES
 		added_mutation = TRUE
 
-/obj/aura/shadowling_aura/removed()
+/obj/aura/shadowling_aura/aura_removed()
 	if(added_mutation)
 		added_mutation = FALSE
 		user.mutations -= MUTATION_SPACERES

@@ -124,7 +124,7 @@
 		//Bleeding out
 		var/blood_max = 0
 		var/list/do_spray = list()
-		for(var/obj/item/organ/external/temp in owner.organs)
+		for(var/obj/item/organ/external/temp in owner.get_external_organs())
 
 			if(BP_IS_PROSTHETIC(temp))
 				continue

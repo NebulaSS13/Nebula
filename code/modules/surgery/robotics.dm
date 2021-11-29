@@ -345,7 +345,7 @@
 /decl/surgery_step/robotics/fix_organ_robotic/assess_bodypart(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
 	if(affected)
-		for(var/obj/item/organ/internal/I in affected.internal_organs)
+		for(var/obj/item/organ/internal/I in affected.contained_organs)
 			if(BP_IS_PROSTHETIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0)
 				if(I.surface_accessible)
 					return affected
@@ -354,7 +354,7 @@
 
 /decl/surgery_step/robotics/fix_organ_robotic/begin_step(mob/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	for(var/obj/item/organ/I in affected.internal_organs)
+	for(var/obj/item/organ/I in affected.contained_organs)
 		if(I && I.damage > 0)
 			if(BP_IS_PROSTHETIC(I))
 				user.visible_message("[user] starts mending the damage to [target]'s [I.name]'s mechanisms.", \
@@ -363,7 +363,7 @@
 
 /decl/surgery_step/robotics/fix_organ_robotic/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	for(var/obj/item/organ/I in affected.internal_organs)
+	for(var/obj/item/organ/I in affected.contained_organs)
 		if(I && I.damage > 0)
 			if(BP_IS_PROSTHETIC(I))
 				user.visible_message("<span class='notice'>[user] repairs [target]'s [I.name] with [tool].</span>", \
@@ -376,7 +376,7 @@
 	"<span class='warning'>Your hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with \the [tool]!</span>")
 	target.adjustToxLoss(5)
 	affected.createwound(CUT, 5)
-	for(var/internal in affected.internal_organs)
+	for(var/internal in affected.contained_organs)
 		var/obj/item/organ/internal/I = internal
 		if(I)
 			I.take_internal_damage(rand(3,5))
@@ -414,7 +414,7 @@
 /decl/surgery_step/robotics/detatch_organ_robotic/end_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='notice'>[user] has decoupled [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>" , \
 	"<span class='notice'>You have decoupled [target]'s [LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)] with \the [tool].</span>")
-	var/obj/item/organ/internal/I = target.get_internal_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
+	var/obj/item/organ/internal/I = target.get_organ(LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone))
 	if(I && istype(I))
 		I.cut_away(user)
 
@@ -465,10 +465,9 @@
 	var/current_organ = LAZYACCESS(global.surgeries_in_progress["\ref[target]"], target_zone)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	for (var/obj/item/organ/I in affected.implants)
-		if (I.organ_tag == current_organ)
+		if(I.organ_tag == current_organ && I.replace_organ(target, affected))
 			I.status &= ~ORGAN_CUT_AWAY
 			LAZYREMOVE(affected.implants, I)
-			I.replaced(target, affected)
 			break
 
 /decl/surgery_step/robotics/attach_organ_robotic/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
@@ -527,8 +526,6 @@
 
 	var/obj/item/mmi/M = tool
 	var/obj/item/organ/internal/mmi_holder/holder = new(target, 1)
-	var/mob/living/carbon/human/H = target
-	H.internal_organs_by_name[BP_BRAIN] = holder
 	tool.forceMove(holder)
 	holder.stored_mmi = tool
 	holder.update_from_mmi()

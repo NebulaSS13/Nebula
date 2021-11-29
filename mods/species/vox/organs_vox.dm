@@ -189,7 +189,18 @@
 /obj/item/organ/internal/voxstack/getToxLoss()
 	return 0
 
-/obj/item/organ/internal/voxstack/proc/do_backup()
+/obj/item/organ/internal/voxstack/proc/do_backup(var/prompt_for_overwrite)
+
+	set waitfor = FALSE
+
+	if(prompt_for_overwrite && owner && !backup_inviable())
+		var/current_owner = owner
+		prompting = TRUE
+		var/response = alert(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
+		prompting = FALSE
+		if(src && response == "Yes" && owner == current_owner)
+			overwrite()
+
 	if(owner && owner.stat != DEAD && !is_broken() && owner.mind)
 		languages = owner.languages.Copy()
 		backup = owner.mind
@@ -200,23 +211,12 @@
 /obj/item/organ/internal/voxstack/proc/backup_inviable()
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
 
-/obj/item/organ/internal/voxstack/replaced()
-	if(!..()) return 0
-	if(prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
-		return 0
-	if(owner && !backup_inviable())
-		var/current_owner = owner
-		prompting = TRUE
-		var/response = alert(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
-		prompting = FALSE
-		if(src && response == "Yes" && owner == current_owner)
-			overwrite()
-	sleep(-1)
-	do_backup()
+/obj/item/organ/internal/voxstack/replace_organ()
+	. = ..()
+	if(. && !prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
+		do_backup(TRUE)
 
-	return 1
-
-/obj/item/organ/internal/voxstack/removed()
+/obj/item/organ/internal/voxstack/remove_organ()
 	var/obj/item/organ/external/head = owner.get_organ(parent_organ)
 	owner.visible_message(SPAN_DANGER("\The [src] rips gaping holes in \the [owner]'s [head.name] as it is torn loose!"))
 	head.take_external_damage(rand(15,20))

@@ -29,9 +29,9 @@
 /obj/item/organ/external/chest/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	if(..())
 		// Give them a new cell.
-		var/obj/item/organ/internal/cell/C = owner.get_internal_organ(BP_CELL)
+		var/obj/item/organ/internal/cell/C = owner.get_organ(BP_CELL)
 		if(!istype(C))
-			owner.internal_organs_by_name[BP_CELL] = new /obj/item/organ/internal/cell(owner,1)
+			new /obj/item/organ/internal/cell(owner, TRUE)
 
 /obj/item/organ/external/get_scan_results()
 	. = ..()
@@ -153,18 +153,22 @@
 
 /obj/item/organ/external/hand/Initialize()
 	. = ..()
-	owner?.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
+	if(owner)
+		owner.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
 
-/obj/item/organ/external/hand/replaced(mob/living/carbon/human/target)
+/obj/item/organ/external/hand/replace_organ(mob/living/carbon/human/target)
 	. = ..()
-	owner?.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
+	if(owner)
+		owner.add_held_item_slot(organ_tag, gripper_ui_loc, overlay_slot_id, gripper_ui_label)
 
 /obj/item/organ/external/hand/Destroy()
-	owner?.remove_held_item_slot(organ_tag)
+	if(owner)
+		owner.remove_held_item_slot(organ_tag)
 	. = ..()
 
-/obj/item/organ/external/hand/removed()
-	owner?.remove_held_item_slot(organ_tag)
+/obj/item/organ/external/hand/remove_organ()
+	if(owner)
+		owner.remove_held_item_slot(organ_tag)
 	. = ..()
 
 /obj/item/organ/external/hand/right

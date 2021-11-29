@@ -491,9 +491,8 @@
 /mob/living/carbon/human/pull_damage()
 	if(!lying || getBruteLoss() + getFireLoss() < 100)
 		return FALSE
-	for(var/thing in organs)
-		var/obj/item/organ/external/e = thing
-		if(!e || e.is_stump())
+	for(var/obj/item/organ/external/e in get_external_organs())
+		if(e.is_stump())
 			continue
 		if((e.status & ORGAN_BROKEN) && !e.splinted)
 			return TRUE
@@ -697,7 +696,7 @@
 	implant.update_icon()
 	if(istype(implant,/obj/item/implant))
 		var/obj/item/implant/imp = implant
-		imp.removed()
+		imp.implant_removed()
 	. = TRUE
 
 /mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
@@ -708,7 +707,7 @@
 
 /mob/living/carbon/human/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE, var/obj/item/organ/external/affected)
 	if(!affected) //Grab the organ holding the implant.
-		for(var/obj/item/organ/external/organ in organs)
+		for(var/obj/item/organ/external/organ in get_external_organs())
 			for(var/obj/item/O in organ.implants)
 				if(O == implant)
 					affected = organ

@@ -92,24 +92,25 @@
 	if(!user.unEquip(tool))
 		return
 	var/obj/item/organ/external/E = tool
-	user.visible_message("<span class='notice'>[user] has attached [target]'s [E.name] to the [E.amputation_point].</span>",	\
-	"<span class='notice'>You have attached [target]'s [E.name] to the [E.amputation_point].</span>")
-	E.replaced(target)
+	if(E.replace_organ(target))
 
-	// Modular bodyparts (like prosthetics) do not need to be reconnected.
-	if(E.get_modular_limb_category() != MODULAR_BODYPART_INVALID)
-		E.status &= ~ORGAN_CUT_AWAY
-		for(var/obj/item/organ/external/child in E.children)
-			child.status &= ~ORGAN_CUT_AWAY
-	else
-		E.status |= ORGAN_CUT_AWAY
+		user.visible_message("<span class='notice'>[user] has attached [target]'s [E.name] to the [E.amputation_point].</span>",	\
+		"<span class='notice'>You have attached [target]'s [E.name] to the [E.amputation_point].</span>")
 
-	if(BP_IS_PROSTHETIC(E) && prob(user.skill_fail_chance(SKILL_DEVICES, 50, SKILL_ADEPT)))
-		E.add_random_ailment()
+		// Modular bodyparts (like prosthetics) do not need to be reconnected.
+		if(E.get_modular_limb_category() != MODULAR_BODYPART_INVALID)
+			E.status &= ~ORGAN_CUT_AWAY
+			for(var/obj/item/organ/external/child in E.children)
+				child.status &= ~ORGAN_CUT_AWAY
+		else
+			E.status |= ORGAN_CUT_AWAY
 
-	target.update_body()
-	target.updatehealth()
-	target.UpdateDamageIcon()
+		if(BP_IS_PROSTHETIC(E) && prob(user.skill_fail_chance(SKILL_DEVICES, 50, SKILL_ADEPT)))
+			E.add_random_ailment()
+
+		target.update_body()
+		target.updatehealth()
+		target.UpdateDamageIcon()
 
 /decl/surgery_step/limb/attach/fail_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = tool

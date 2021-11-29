@@ -74,14 +74,14 @@
 			var/mob/living/carbon/human/H = M
 			to_chat(user, "<span class='notice'>Analyzing Results for \the [H]:</span>")
 			to_chat(user, "Key: <font color='#ffa500'>Electronics</font>/<font color='red'>Brute</font>")
-			var/obj/item/organ/internal/cell/C = H.get_internal_organ(BP_CELL)
+			var/obj/item/organ/internal/cell/C = H.get_organ(BP_CELL)
 			if(C)
 				to_chat(user, SPAN_NOTICE("Cell charge: [C.percent()] %"))
 			else
 				to_chat(user, SPAN_NOTICE("Cell charge: ERROR - Cell not present"))
 			to_chat(user, "<span class='notice'>External prosthetics:</span>")
 			var/organ_found
-			for(var/obj/item/organ/external/E in H.organs)
+			for(var/obj/item/organ/external/E in H.get_external_organs())
 				if(!BP_IS_PROSTHETIC(E))
 					continue
 				organ_found = 1
@@ -91,7 +91,7 @@
 			to_chat(user, "<hr>")
 			to_chat(user, "<span class='notice'>Internal prosthetics:</span>")
 			organ_found = null
-			for(var/obj/item/organ/O in H.internal_organs)
+			for(var/obj/item/organ/O in H.get_internal_organs())
 				if(!BP_IS_PROSTHETIC(O))
 					continue
 				organ_found = 1

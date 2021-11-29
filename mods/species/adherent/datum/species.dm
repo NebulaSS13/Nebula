@@ -110,7 +110,7 @@
 /decl/species/adherent/can_overcome_gravity(var/mob/living/carbon/human/H)
 	. = FALSE
 	if(H && H.stat == CONSCIOUS)
-		for(var/obj/item/organ/internal/powered/float/float in H.internal_organs)
+		for(var/obj/item/organ/internal/powered/float/float in H.get_internal_organs())
 			if(float.active && float.is_usable())
 				. = TRUE
 				break
@@ -124,7 +124,7 @@
 /decl/species/adherent/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 	var/float_is_usable = FALSE
 	if(H && H.stat == CONSCIOUS)
-		for(var/obj/item/organ/internal/powered/float/float in H.internal_organs)
+		for(var/obj/item/organ/internal/powered/float/float in H.get_internal_organs())
 			if(float.is_usable())
 				float_is_usable = TRUE
 				break

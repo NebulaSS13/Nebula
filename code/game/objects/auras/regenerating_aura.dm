@@ -49,7 +49,7 @@
 		return 1
 	if(organ_mult)
 		if(prob(10) && H.nutrition >= 150 && !H.getBruteLoss() && !H.getFireLoss())
-			var/obj/item/organ/external/head/D = H.organs_by_name["head"]
+			var/obj/item/organ/external/head/D = H.get_organ(BP_HEAD)
 			if (D.status & ORGAN_DISFIGURED)
 				if (H.nutrition >= 20)
 					D.status &= ~ORGAN_DISFIGURED
@@ -57,28 +57,28 @@
 				else
 					low_nut_warning("head")
 
-		for(var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN))
-			var/obj/item/organ/internal/regen_organ = H.get_internal_organ(bpart)
-			if(BP_IS_PROSTHETIC(regen_organ))
-				continue
-			if(istype(regen_organ))
-				if(regen_organ.damage > 0 && !(regen_organ.status & ORGAN_DEAD))
-					if (H.nutrition >= organ_mult)
-						regen_organ.damage = max(regen_organ.damage - organ_mult, 0)
-						H.adjust_nutrition(-organ_mult)
-						if(prob(5))
-							to_chat(H, replacetext(regen_message,"ORGAN", regen_organ.name))
-					else
-						low_nut_warning(regen_organ.name)
+		var/list/bodyparts_to_regen = H.get_internal_organs()
+		if(LAZYLEN(bodyparts_to_regen))
+			bodyparts_to_regen = shuffle(bodyparts_to_regen.Copy())
+			for(var/obj/item/organ/internal/regen_organ in bodyparts_to_regen)
+				if(BP_IS_PROSTHETIC(regen_organ) || regen_organ.organ_tag == BP_BRAIN)
+					continue
+				if(istype(regen_organ))
+					if(regen_organ.damage > 0 && !(regen_organ.status & ORGAN_DEAD))
+						if (H.nutrition >= organ_mult)
+							regen_organ.damage = max(regen_organ.damage - organ_mult, 0)
+							H.adjust_nutrition(-organ_mult)
+							if(prob(5))
+								to_chat(H, replacetext(regen_message,"ORGAN", regen_organ.name))
+						else
+							low_nut_warning(regen_organ.name)
 
 	if(prob(grow_chance))
 		for(var/limb_type in H.species.has_limbs)
-			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
+			var/obj/item/organ/external/E = H.get_organ(limb_type)
 			if(E && E.organ_tag != BP_HEAD && !E.vital && !E.is_usable())	//Skips heads and vital bits...
 				if (H.nutrition > grow_threshold)
-					E.removed()			//...because no one wants their head to explode to make way for a new one.
-					qdel(E)
-					E= null
+					QDEL_NULL(E)
 				else
 					low_nut_warning(E.name)
 			if(!E)

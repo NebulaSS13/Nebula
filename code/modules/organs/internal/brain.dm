@@ -22,6 +22,7 @@
 	var/damage_threshold_value
 	var/healed_threshold = 1
 	var/oxygen_reserve = 6
+	var/transfer_identity_on_removal = TRUE
 
 /obj/item/organ/internal/brain/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	replace_self_with(/obj/item/organ/internal/posibrain)
@@ -34,10 +35,11 @@
 
 /obj/item/organ/internal/brain/proc/replace_self_with(replace_path)
 	var/mob/living/carbon/human/tmp_owner = owner
+	vital = FALSE // Don't kill our owner on removal
+	transfer_identity_on_removal = FALSE // Don't shunt our owner's mind into ourself on removal.
 	qdel(src)
 	if(tmp_owner)
-		tmp_owner.internal_organs_by_name[organ_tag] = new replace_path(tmp_owner, 1)
-		tmp_owner = null
+		new replace_path(tmp_owner, TRUE)
 
 /obj/item/organ/internal/brain/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	. = ..()
@@ -49,10 +51,6 @@
 		set_max_damage(species.total_health)
 	else
 		set_max_damage(200)
-
-	spawn(5)
-		if(brainmob && brainmob.client)
-			brainmob.client.screen.len = null //clear the hud
 
 /obj/item/organ/internal/brain/set_max_damage(var/ndamage)
 	..()
@@ -84,31 +82,24 @@
 	else
 		to_chat(user, "This one seems particularly lifeless. Perhaps it will regain some of its luster later..")
 
-/obj/item/organ/internal/brain/removed(var/mob/living/user)
-	if(!istype(owner))
-		return ..()
+/obj/item/organ/internal/brain/remove_organ(var/mob/living/user)
+	if(istype(owner))
+		if(name == initial(name))
+			name = "\the [owner.real_name]'s [initial(name)]"
+		if(transfer_identity_on_removal)
+			transfer_identity(owner)
+	. = ..()
 
-	if(name == initial(name))
-		name = "\the [owner.real_name]'s [initial(name)]"
-
-	transfer_identity(owner)
-
-	..()
-
-/obj/item/organ/internal/brain/replaced(var/mob/living/target)
-
-	if(!..()) return 0
-
-	if(target.key)
-		target.ghostize()
-
-	if(brainmob)
-		if(brainmob.mind)
-			brainmob.mind.transfer_to(target)
-		else
-			target.key = brainmob.key
-
-	return 1
+/obj/item/organ/internal/brain/replace_organ(var/mob/living/target)
+	. = ..()
+	if(.)
+		if(target.key)
+			target.ghostize()
+		if(brainmob)
+			if(brainmob.mind)
+				brainmob.mind.transfer_to(target)
+			else
+				target.key = brainmob.key
 
 /obj/item/organ/internal/brain/can_recover()
 	return ~status & ORGAN_DEAD

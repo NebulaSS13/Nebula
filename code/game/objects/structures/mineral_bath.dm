@@ -109,11 +109,9 @@
 		// Replace limbs for crystalline species.
 		if(H.species.is_crystalline && prob(10))
 			for(var/limb_type in H.species.has_limbs)
-				var/obj/item/organ/external/E = H.organs_by_name[limb_type]
+				var/obj/item/organ/external/E = H.get_organ(limb_type)
 				if(E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
-					E.removed()
-					qdel(E)
-					E = null
+					QDEL_NULL(E)
 				if(!E)
 					var/list/organ_data = H.species.has_limbs[limb_type]
 					var/limb_path = organ_data["path"]
@@ -127,8 +125,7 @@
 
 		// Repair crystalline internal organs.
 		if(prob(10))
-			for(var/thing in H.internal_organs)
-				var/obj/item/organ/internal/I = thing
+			for(var/obj/item/organ/internal/I in H.get_internal_organs())
 				if(BP_IS_CRYSTAL(I) && I.damage)
 					I.heal_damage(rand(3,5))
 					if(prob(25))
@@ -136,7 +133,7 @@
 
 		// Repair robotic external organs.
 		if(!repaired_organ && prob(25))
-			for(var/thing in H.organs)
+			for(var/thing in H.get_external_organs())
 				var/obj/item/organ/external/E = thing
 				if(BP_IS_PROSTHETIC(E))
 					for(var/obj/implanted_object in E.implants)

@@ -1,5 +1,5 @@
 /mob/living/carbon/human/proc/update_eyes()
-	var/obj/item/organ/internal/eyes/eyes = get_internal_organ(species.vision_organ || BP_EYES)
+	var/obj/item/organ/internal/eyes/eyes = get_organ(species.vision_organ || BP_EYES)
 	if(eyes)
 		eyes.update_colour()
 		refresh_visible_overlays()
@@ -10,7 +10,7 @@
 
 /mob/living/carbon/human/proc/recheck_bad_external_organs()
 	var/damage_this_tick = getToxLoss()
-	for(var/obj/item/organ/external/O in organs)
+	for(var/obj/item/organ/external/O in get_external_organs())
 		damage_this_tick += O.burn_dam + O.brute_dam
 
 	if(damage_this_tick > last_dam)
@@ -23,40 +23,36 @@
 	var/force_process = recheck_bad_external_organs()
 
 	if(force_process)
-		bad_external_organs.Cut()
-		for(var/obj/item/organ/external/Ex in organs)
-			bad_external_organs |= Ex
+		bad_external_organs = get_external_organs()
 
 	//processing internal organs is pretty cheap, do that first.
-	for(var/obj/item/organ/I in internal_organs)
+	for(var/obj/item/organ/I in get_internal_organs())
 		I.Process()
 
 	handle_stance()
 	handle_grasp()
 
-	if(!force_process && !bad_external_organs.len)
+	if(!force_process && !LAZYLEN(bad_external_organs))
 		return
 
 	for(var/obj/item/organ/external/E in bad_external_organs)
-		if(!E)
-			continue
+
 		if(!E.need_process())
-			bad_external_organs -= E
+			LAZYREMOVE(bad_external_organs, E)
 			continue
-		else
-			E.Process()
+			
+		E.Process()
+		if (!lying && !buckled && world.time - l_move_time < 15)
+		//Moving around with fractured ribs won't do you any good
+			if (prob(10) && !stat && can_feel_pain() && GET_CHEMICAL_EFFECT(src, CE_PAINKILLER) < 50 && E.is_broken() && LAZYLEN(E.contained_organs))
+				custom_pain("Pain jolts through your broken [E.encased ? E.encased : E.name], staggering you!", 50, affecting = E)
+				drop_held_items()
+				SET_STATUS_MAX(src, STAT_STUN, 2)
 
-			if (!lying && !buckled && world.time - l_move_time < 15)
-			//Moving around with fractured ribs won't do you any good
-				if (prob(10) && !stat && can_feel_pain() && GET_CHEMICAL_EFFECT(src, CE_PAINKILLER) < 50 && E.is_broken() && LAZYLEN(E.internal_organs))
-					custom_pain("Pain jolts through your broken [E.encased ? E.encased : E.name], staggering you!", 50, affecting = E)
-					drop_held_items()
-					SET_STATUS_MAX(src, STAT_STUN, 2)
-
-				//Moving makes open wounds get infected much faster
-				for(var/datum/wound/W in E.wounds)
-					if (W.infection_check())
-						W.germ_level += 1
+			//Moving makes open wounds get infected much faster
+			for(var/datum/wound/W in E.wounds)
+				if (W.infection_check())
+					W.germ_level += 1
 
 /mob/living/carbon/human/proc/Check_Proppable_Object()
 	for(var/turf/simulated/T in RANGE_TURFS(src, 1)) //we only care for non-space turfs
@@ -88,7 +84,7 @@
 
 	var/limb_pain
 	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-		var/obj/item/organ/external/E = organs_by_name[limb_tag]
+		var/obj/item/organ/external/E = get_organ(limb_tag)
 		if(!E || !E.is_usable())
 			stance_damage += 2 // let it fail even if just foot&leg
 		else if (E.is_malfunctioning())
@@ -111,24 +107,25 @@
 		stance_damage -= 2
 
 	if(MOVING_DELIBERATELY(src)) //you don't suffer as much if you aren't trying to run
+
 		var/working_pair = 2
-		if(!organs_by_name[BP_L_LEG] || !organs_by_name[BP_L_FOOT]) //are we down a limb?
-			working_pair -= 1
-		else if((!organs_by_name[BP_L_LEG].is_usable()) || (!organs_by_name[BP_L_FOOT].is_usable())) //if not, is it usable?
-			working_pair -= 1
-		if(!organs_by_name[BP_R_LEG] || !organs_by_name[BP_R_FOOT])
-			working_pair -= 1
-		else if((!organs_by_name[BP_R_LEG].is_usable()) || (!organs_by_name[BP_R_FOOT].is_usable()))
-			working_pair -= 1
+
+		for(var/organ_tag in list(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT))
+			var/obj/item/organ/O = get_organ(organ_tag)
+			if(!istype(O) || !O.is_usable())
+				working_pair--
+				if(working_pair <= 0)
+					break
+
 		if(working_pair >= 1)
 			stance_damage -= 1
 			if(Check_Proppable_Object()) //it helps to lean on something if you've got another leg to stand on
 				stance_damage -= 1
 
 	var/list/objects_to_sit_on = list(
-			/obj/item/stool,
-			/obj/structure/bed,
-		)
+		/obj/item/stool,
+		/obj/structure/bed,
+	)
 
 	for(var/type in objects_to_sit_on) //things that can't be climbed but can be propped-up-on
 		if(locate(type) in src.loc)
@@ -147,7 +144,7 @@
 		var/datum/inventory_slot/inv_slot = held_item_slots[bp]
 		var/holding = inv_slot?.holding
 		if(holding)
-			var/obj/item/organ/external/E = organs_by_name[bp]
+			var/obj/item/organ/external/E = get_organ(bp)
 			if((!E || !E.is_usable() || E.is_parent_dislocated()) && unEquip(holding))
 				grasp_damage_disarm(inv_slot)
 
@@ -186,7 +183,7 @@
 	for(var/datum/inventory_slot/inv_slot in drop_held_item_slots)
 		if(!unEquip(inv_slot.holding))
 			continue
-		var/obj/item/organ/external/E = organs_by_name[inv_slot.slot_id]
+		var/obj/item/organ/external/E = get_organ(inv_slot.slot_id)
 		if(!E)
 			continue
 		if(E.is_robotic())
@@ -213,8 +210,7 @@
 			visible_message("<B>\The [src]</B> drops what they were holding in their [grasp_name]!")
 
 /mob/living/carbon/human/proc/sync_organ_dna()
-	var/list/all_bits = internal_organs|organs
-	for(var/obj/item/organ/O in all_bits)
+	for(var/obj/item/organ/O in get_organs())
 		O.set_dna(dna)
 
 /mob/living/proc/is_asystole()
@@ -222,12 +218,56 @@
 
 /mob/living/carbon/human/is_asystole()
 	if(isSynthetic())
-		var/obj/item/organ/internal/cell/C = get_internal_organ(BP_CELL)
+		var/obj/item/organ/internal/cell/C = get_organ(BP_CELL)
 		if(istype(C))
 			if(!C.is_usable() || !C.percent())
 				return TRUE
 	else if(should_have_organ(BP_HEART))
-		var/obj/item/organ/internal/heart/heart = get_internal_organ(BP_HEART)
+		var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART)
 		if(!istype(heart) || !heart.is_working())
 			return TRUE
 	return FALSE
+
+/mob/living/carbon/human/get_external_organs()
+	return external_organs
+
+/mob/living/carbon/human/get_internal_organs()
+	return internal_organs
+
+/mob/living/carbon/human/get_organ(var/zone)
+	var/organ_tag = check_zone(zone, src, base_zone_only = TRUE)
+	return LAZYACCESS(organs_by_tag, organ_tag)
+
+/mob/living/carbon/human/handle_organ_removed(var/obj/item/organ/organ, var/mob/user)
+	. = ..()
+	if(.)
+		if(!BP_IS_PROSTHETIC(organ) && organ.species && organ.reagents?.total_volume < 5)
+			vessel.trans_to(organ, 5 - reagents.total_volume, 1, 1)
+		return TRUE
+
+/mob/living/carbon/human/handle_external_organ_replaced(var/obj/item/organ/external/organ, var/mob/user)	
+	. = ..()
+	if(.)
+		refresh_modular_limb_verbs()
+		organ.sync_colour_to_human(src)
+
+/mob/living/carbon/human/handle_external_organ_removed(var/obj/item/organ/external/organ, var/mob/user)
+	. = ..()
+	if(.)
+		LAZYREMOVE(bad_external_organs, organ)
+		refresh_modular_limb_verbs()
+		if(shoes && ((organ.body_part & SLOT_FOOT_LEFT) || (organ.body_part & SLOT_FOOT_RIGHT)))
+			drop_from_inventory(shoes)
+		if(gloves && ((organ.body_part & SLOT_HAND_LEFT) || (organ.body_part & SLOT_HAND_RIGHT)))
+			drop_from_inventory(gloves)
+		if(organ.body_part & SLOT_HEAD)
+			if(head)
+				drop_from_inventory(head)
+			if(glasses)
+				drop_from_inventory(glasses)
+			if(l_ear)
+				drop_from_inventory(l_ear)
+			if(r_ear)
+				drop_from_inventory(r_ear)
+			if(wear_mask)
+				drop_from_inventory(wear_mask)

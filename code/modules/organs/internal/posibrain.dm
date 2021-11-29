@@ -24,6 +24,7 @@
 	req_access = list(access_robotics)
 	scale_max_damage_to_species_health = FALSE
 
+	var/transfer_identity_on_removal = TRUE
 	var/mob/living/silicon/sil_brainmob/brainmob = null
 	var/searching = 0
 	var/askDelay = 10 * 60 * 1
@@ -157,31 +158,24 @@
 	to_chat(brainmob, "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [initial(src.name)].</span>")
 	callHook("debrain", list(brainmob))
 
-/obj/item/organ/internal/posibrain/removed(var/mob/living/user)
-	if(!istype(owner))
-		return ..()
+/obj/item/organ/internal/posibrain/remove_organ(var/mob/living/user)
+	if(istype(owner))
+		if(name == initial(name))
+			SetName("\the [owner.real_name]'s [initial(name)]")
+		if(transfer_identity_on_removal)
+			transfer_identity(owner)
+	. = ..()
 
-	if(name == initial(name))
-		SetName("\the [owner.real_name]'s [initial(name)]")
-
-	transfer_identity(owner)
-
-	..()
-
-/obj/item/organ/internal/posibrain/replaced(var/mob/living/target)
-
-	if(!..()) return 0
-
-	if(target.key)
-		target.ghostize()
-
-	if(brainmob)
-		if(brainmob.mind)
-			brainmob.mind.transfer_to(target)
-		else
-			target.key = brainmob.key
-
-	return 1
+/obj/item/organ/internal/posibrain/replace_organ(var/mob/living/target)
+	. = ..()
+	if(.)
+		if(target.key)
+			target.ghostize()
+		if(brainmob)
+			if(brainmob.mind)
+				brainmob.mind.transfer_to(target)
+			else
+				target.key = brainmob.key
 
 /*
 	This is for law stuff directly. This is how a human mob will be able to communicate with the posi_brainmob in the
@@ -290,10 +284,10 @@
 				cell = W
 				to_chat(user, "<span class = 'notice'>You insert \the [cell].</span>")
 
-/obj/item/organ/internal/cell/replaced()
-	..()
+/obj/item/organ/internal/cell/replace_organ()
+	. = ..()
 	// This is very ghetto way of rebooting an IPC. TODO better way.
-	if(owner && owner.stat == DEAD)
+	if(. && owner && owner.stat == DEAD)
 		owner.set_stat(CONSCIOUS)
 		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
 
@@ -351,18 +345,17 @@
 
 /obj/item/organ/internal/mmi_holder/cut_away(var/mob/living/user)
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if(istype(parent))
-		removed(user, 0)
+	if(istype(parent) && remove_organ(user, 0)) // TODO avoid having to check parent
 		var/brain = transfer_and_delete()
 		if(brain)
 			LAZYADD(parent.implants, brain)
 
-/obj/item/organ/internal/mmi_holder/removed()
+/obj/item/organ/internal/mmi_holder/remove_organ()
 	if(owner && owner.mind)
 		persistantMind = owner.mind
 		if(owner.ckey)
 			ownerckey = owner.ckey
-	..()
+	. = ..()
 
 /obj/item/organ/internal/mmi_holder/proc/transfer_and_delete()
 	if(stored_mmi)

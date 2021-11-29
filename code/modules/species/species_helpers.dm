@@ -53,11 +53,11 @@ var/global/list/stored_shock_by_ref = list()
 		for(var/mark_type in base_markings)
 			var/decl/sprite_accessory/marking/mark_decl = GET_DECL(mark_type)
 			for(var/bp in mark_decl.body_parts)
-				var/obj/item/organ/external/O = mannequin.organs_by_name[bp]
+				var/obj/item/organ/external/O = mannequin.get_organ(bp)
 				if(O && !LAZYACCESS(O.markings, mark_type))
 					LAZYSET(O.markings, mark_type, base_markings[mark_type])
 
-	for(var/obj/item/organ/external/E in mannequin.organs)
+	for(var/obj/item/organ/external/E in mannequin.get_external_organs())
 		E.skin_colour = base_color
 
 	mannequin.eye_colour = base_eye_color

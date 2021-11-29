@@ -368,7 +368,7 @@
 		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			for(var/obj/item/organ/internal/I in H.internal_organs)
+			for(var/obj/item/organ/internal/I in H.get_internal_organs())
 				if(BP_IS_PROSTHETIC(I))
 					I.heal_damage(20*removed)
 
@@ -394,7 +394,11 @@
 	var/result_mat = do_material_check(M)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/external/E in shuffle(H.organs.Copy()))
+		var/list/organs = H.get_external_organs()
+		if(!LAZYLEN(organs))
+			return
+		organs = shuffle(organs.Copy())
+		for(var/obj/item/organ/external/E in M.get_external_organs())
 			if(E.is_stump() || BP_IS_PROSTHETIC(E))
 				continue
 
@@ -421,13 +425,16 @@
 					E.status |= ORGAN_BRITTLE
 				break
 
-		for(var/obj/item/organ/internal/I in shuffle(H.internal_organs.Copy()))
-			if(BP_IS_PROSTHETIC(I) || !BP_IS_CRYSTAL(I) || I.damage <= 0 || I.organ_tag == BP_BRAIN)
-				continue
-			if(prob(35))
-				to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [I.name] is mended."))
-			I.heal_damage(rand(1,3))
-			break
+		organs = H.get_internal_organs()
+		if(LAZYLEN(organs))
+			organs = shuffle(organs.Copy())
+			for(var/obj/item/organ/internal/I in organs)
+				if(BP_IS_PROSTHETIC(I) || !BP_IS_CRYSTAL(I) || I.damage <= 0 || I.organ_tag == BP_BRAIN)
+					continue
+				if(prob(35))
+					to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [I.name] is mended."))
+				I.heal_damage(rand(1,3))
+				break
 	else		
 		to_chat(M, SPAN_DANGER("Your flesh is being lacerated from within!"))
 		M.adjustBruteLoss(rand(3,6))

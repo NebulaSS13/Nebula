@@ -93,7 +93,7 @@
 		return TRUE
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		var/obj/item/hand = H.organs_by_name[H.get_active_held_item_slot()]
+		var/obj/item/hand = H.get_organ(H.get_active_held_item_slot())
 		if(hand && try_graffiti(H, hand))
 			return TRUE
 	. = ..()

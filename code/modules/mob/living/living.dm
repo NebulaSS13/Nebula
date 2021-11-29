@@ -481,7 +481,7 @@ default behaviour is:
 /mob/living/carbon/basic_revival(var/repair_brain = TRUE)
 	if(repair_brain && should_have_organ(BP_BRAIN))
 		repair_brain = FALSE
-		var/obj/item/organ/internal/brain/brain = get_internal_organ(BP_BRAIN)
+		var/obj/item/organ/internal/brain/brain = get_organ(BP_BRAIN)
 		if(brain.damage > (brain.max_damage/2))
 			brain.damage = (brain.max_damage/2)
 		if(brain.status & ORGAN_DEAD)
@@ -626,18 +626,14 @@ default behaviour is:
 	return FALSE
 
 /mob/living/carbon/human/canUnEquip(obj/item/I)
-	if(!..())
-		return
-	if(I in internal_organs)
-		return
-	if(I in organs)
+	if(!..() || (I in get_organs()))
 		return
 	return 1
 
 /mob/living/carbon/get_contained_external_atoms()
 	. = ..()
-	LAZYREMOVE(., internal_organs)
-	LAZYREMOVE(., organs)
+	for(var/thing in get_organs())
+		LAZYREMOVE(., thing)
 
 /mob/proc/can_be_possessed_by(var/mob/observer/ghost/possessor)
 	return istype(possessor) && possessor.client

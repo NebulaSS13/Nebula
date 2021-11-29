@@ -21,15 +21,16 @@
 	if(species.gluttonous)
 		verbs |= /obj/item/organ/internal/stomach/proc/throw_up
 
-/obj/item/organ/internal/stomach/removed()
+/obj/item/organ/internal/stomach/remove_organ()
 	. = ..()
 	ingested.my_atom = src
 	ingested.parent = null
 
-/obj/item/organ/internal/stomach/replaced()
+/obj/item/organ/internal/stomach/replace_organ()
 	. = ..()
-	ingested.my_atom = owner
-	ingested.parent = owner
+	if(. && owner)
+		ingested.my_atom = owner
+		ingested.parent = owner
 
 /obj/item/organ/internal/stomach/proc/can_eat_atom(var/atom/movable/food)
 	return !isnull(get_devour_time(food))

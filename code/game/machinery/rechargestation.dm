@@ -81,7 +81,7 @@
 
 	if(ishuman(occupant))
 		var/mob/living/carbon/human/H = occupant
-		var/obj/item/organ/internal/cell/potato = H.get_internal_organ(BP_CELL)
+		var/obj/item/organ/internal/cell/potato = H.get_organ(BP_CELL)
 		if(potato)
 			target = potato.cell
 		if((!target || target.percent() > 95) && istype(H.back,/obj/item/rig))
@@ -202,7 +202,7 @@
 		if(istype(H.back,/obj/item/rig))
 			var/obj/item/rig/R = H.back
 			return R.cell
-		return H.get_internal_organ(BP_CELL)
+		return H.get_organ(BP_CELL)
 	return 0
 
 /obj/machinery/recharge_station/proc/go_out()

@@ -105,7 +105,7 @@
 					to_chat(user, SPAN_NOTICE("This [W.desc] is beyond your power to heal."))
 
 		if(redaction_rank >= PSI_RANK_GRANDMASTER)
-			for(var/obj/item/organ/internal/I in E.internal_organs)
+			for(var/obj/item/organ/internal/I in E.contained_organs)
 				if(!BP_IS_PROSTHETIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0)
 					to_chat(user, SPAN_NOTICE("You encourage the damaged tissue of \the [I] to repair itself."))
 					var/heal_rate = redaction_rank

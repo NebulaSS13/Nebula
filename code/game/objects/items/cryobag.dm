@@ -95,7 +95,7 @@
 		animate(src, color = color_saturation(get_saturation()), time = 10)
 		update_icon()
 
-	if(H.stasis_sources[STASIS_CRYOBAG] != stasis_power)
+	if(LAZYACCESS(H.stasis_sources, STASIS_CRYOBAG) != stasis_power)
 		H.SetStasis(stasis_power, STASIS_CRYOBAG)
 
 /obj/structure/closet/body_bag/cryobag/return_air() //Used to make stasis bags protect from vacuum.

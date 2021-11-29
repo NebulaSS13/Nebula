@@ -1,18 +1,20 @@
 /mob/living/carbon/human/gib()
-	for(var/obj/item/organ/I in internal_organs)
-		I.removed()
-		if(!QDELETED(I) && isturf(loc))
+	for(var/obj/item/organ/I in get_internal_organs())
+		if(I.remove_organ() && isturf(loc))
 			I.throw_at(get_edge_target_turf(src, pick(global.alldirs)), rand(1,3), THROWFORCE_GIBS)
 
-	for(var/obj/item/organ/external/E in src.organs)
+	for(var/obj/item/organ/external/E in get_external_organs())
 		E.dismember(0,DISMEMBER_METHOD_EDGE,1)
 
 	sleep(1)
 
 	for(var/obj/item/I in src)
+		if(QDELETED(I))
+			continue
 		drop_from_inventory(I)
-		if(!QDELETED(I))
-			I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), round(THROWFORCE_GIBS/I.w_class))
+		if(QDELETED(I))
+			continue
+		I.throw_at(get_edge_target_turf(src,pick(global.alldirs)), rand(1,3), round(THROWFORCE_GIBS/I.w_class))
 
 	..(species.gibbed_anim)
 	gibs(loc, dna, null, species.get_flesh_colour(src), species.get_blood_colour(src))
@@ -63,7 +65,7 @@
 	update_hair(0)
 
 	mutations.Add(MUTATION_HUSK)
-	for(var/obj/item/organ/external/E in organs)
+	for(var/obj/item/organ/external/E in get_external_organs())
 		E.status |= ORGAN_DISFIGURED
 	update_body(1)
 	return
@@ -80,13 +82,13 @@
 	update_hair(0)
 
 	mutations.Add(MUTATION_SKELETON)
-	for(var/obj/item/organ/external/E in organs)
+	for(var/obj/item/organ/external/E in get_external_organs())
 		E.status |= ORGAN_DISFIGURED
 	update_body(1)
 	return
 
 /mob/living/carbon/human/physically_destroyed(var/skip_qdel, var/droplimb_type = DISMEMBER_METHOD_BLUNT)
-	for(var/obj/item/organ/external/limb in organs)
+	for(var/obj/item/organ/external/limb in get_external_organs())
 		var/limb_can_amputate = (limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE)
 		limb.limb_flags |= ORGAN_FLAG_CAN_AMPUTATE
 		limb.dismember(TRUE, droplimb_type, TRUE, TRUE)

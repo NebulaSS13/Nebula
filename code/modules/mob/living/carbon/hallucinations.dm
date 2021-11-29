@@ -184,7 +184,7 @@
 /datum/hallucination/spiderbabies/start()
 	if(istype(holder,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = holder
-		var/obj/O = pick(H.organs)
+		var/obj/O = pick(H.get_external_organs())
 		to_chat(H,"<span class='warning'>You feel something [pick("moving","squirming","skittering")] inside of your [O.name]!</span>")
 
 //Seeing stuff

@@ -12,7 +12,7 @@
 	edge = 0
 	lock_picking_level = 3
 
-/obj/item/arrow/proc/removed() //Helper for metal rods falling apart.
+/obj/item/arrow/proc/arrow_removed() //Helper for metal rods falling apart.
 	return
 
 /obj/item/spike
@@ -31,7 +31,7 @@
 	desc = "Don't cry for me, Orithena."
 	icon_state = "metal-rod"
 
-/obj/item/arrow/rod/removed(mob/user)
+/obj/item/arrow/rod/arrow_removed(mob/user)
 	if(throwforce == 15) // The rod has been superheated - we don't want it to be useable when removed from the bow.
 		to_chat(user, "[src] shatters into a scattering of overstressed metal shards as it leaves the crossbow.")
 		var/obj/item/shard/shrapnel/S = new()
@@ -82,7 +82,7 @@
 			bolt.dropInto(loc)
 			var/obj/item/arrow/A = bolt
 			bolt = null
-			A.removed(user)
+			A.arrow_removed(user)
 		else
 			user.visible_message("[user] relaxes the tension on [src]'s string.","You relax the tension on [src]'s string.")
 		tension = 0

@@ -43,13 +43,12 @@
 			human_icon_cache[cache_key] = emissive_overlay(I, "")
 		return human_icon_cache[cache_key]
 
-/obj/item/organ/internal/eyes/replaced(var/mob/living/carbon/human/target)
-
+/obj/item/organ/internal/eyes/replace_organ(var/mob/living/carbon/human/target)
+	. = ..()
 	// Apply our eye colour to the target.
-	if(istype(target) && eye_colour)
-		target.eye_colour = eye_colour
-		target.update_eyes()
-	..()
+	if(. && istype(owner) && eye_colour)
+		owner.eye_colour = eye_colour
+		owner.update_eyes()
 
 /obj/item/organ/internal/eyes/proc/update_colour()
 	if(!owner)
@@ -92,14 +91,14 @@
 	. = ..()
 	robotize()
 
-/obj/item/organ/internal/eyes/removed()
+/obj/item/organ/internal/eyes/remove_organ()
 	. = ..()
 	verbs -= /obj/item/organ/internal/eyes/proc/change_eye_color
 	verbs -= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
-/obj/item/organ/internal/eyes/replaced()
+/obj/item/organ/internal/eyes/replace_organ()
 	. = ..()
-	if(owner && BP_IS_PROSTHETIC(src))
+	if(. && owner && BP_IS_PROSTHETIC(src))
 		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 

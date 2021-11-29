@@ -58,7 +58,7 @@
 
 		if(!encased || how_open() >= SURGERY_ENCASED)
 			var/list/bits = list()
-			for(var/obj/item/organ/internal/organ in internal_organs)
+			for(var/obj/item/organ/internal/organ in contained_organs)
 				bits += organ.get_visible_state()
 			for(var/obj/item/implant in implants)
 				bits += implant.name
@@ -105,7 +105,7 @@
 			unknown_body++
 		if(unknown_body)
 			. += "Unknown body present"
-	for(var/obj/item/organ/internal/augment/aug in internal_organs)
+	for(var/obj/item/organ/internal/augment/aug in contained_organs)
 		if(istype(aug) && aug.known)
 			. += "[capitalize(aug.name)] implanted"
 
@@ -169,7 +169,7 @@
 
 /obj/item/organ/external/listen()
 	var/list/sounds = list()
-	for(var/obj/item/organ/internal/I in internal_organs)
+	for(var/obj/item/organ/internal/I in contained_organs)
 		var/gutsound = I.listen()
 		if(gutsound)
 			sounds += gutsound

@@ -9,7 +9,7 @@
 	to_chat(L,"<span class='notice'>A bubble of light appears around you, exuding protection and warmth.</span>")
 	set_light(6, 6, "#e09d37")
 
-/obj/aura/radiant_aura/removed()
+/obj/aura/radiant_aura/aura_removed()
 	to_chat(user, "<span class='warning'>Your protective aura dissipates, leaving you feeling cold and unsafe.</span>")
 	..()
 

@@ -61,7 +61,7 @@
 		fracture()
 
 	// High brute damage or sharp objects may damage internal organs
-	if(LAZYLEN(internal_organs) && damage_internal_organs(brute, burn, damage_flags))
+	if(LAZYLEN(contained_organs) && damage_contained_organs(brute, burn, damage_flags))
 		brute /= 2
 		burn  /= 2
 
@@ -126,8 +126,8 @@
 
 	return created_wound
 
-/obj/item/organ/external/proc/damage_internal_organs(brute, burn, damage_flags)
-	if(!LAZYLEN(internal_organs))
+/obj/item/organ/external/proc/damage_contained_organs(brute, burn, damage_flags)
+	if(!LAZYLEN(contained_organs))
 		return FALSE
 
 	var/laser = (damage_flags & DAM_LASER)
@@ -152,7 +152,7 @@
 
 	var/list/victims = list()
 	var/organ_hit_chance = 0
-	for(var/obj/item/organ/internal/I in internal_organs)
+	for(var/obj/item/organ/internal/I in contained_organs)
 		if(I.damage < I.max_damage)
 			victims[I] = I.relative_size
 			organ_hit_chance += I.relative_size
@@ -255,7 +255,7 @@
 	else if(is_dislocated())
 		lasting_pain += 5
 	var/tox_dam = 0
-	for(var/obj/item/organ/internal/I in internal_organs)
+	for(var/obj/item/organ/internal/I in contained_organs)
 		tox_dam += I.getToxLoss()
 	return pain + lasting_pain + 0.7 * brute_dam + 0.8 * burn_dam + 0.3 * tox_dam + 0.5 * get_genetic_damage()
 
@@ -322,7 +322,7 @@
 	return FALSE
 
 /obj/item/organ/external/proc/get_brute_mod(var/damage_flags)
-	var/obj/item/organ/internal/augment/armor/A = owner && owner.get_internal_organ(BP_AUGMENT_CHEST_ARMOUR)
+	var/obj/item/organ/internal/augment/armor/A = owner && owner.get_organ(BP_AUGMENT_CHEST_ARMOUR)
 	var/B = 1
 	if(A && istype(A))
 		B = A.brute_mult
@@ -336,7 +336,7 @@
 	return B + (0.2 * burn_dam/max_damage) //burns make you take more brute damage
 
 /obj/item/organ/external/proc/get_burn_mod(var/damage_flags)
-	var/obj/item/organ/internal/augment/armor/A = owner && owner.get_internal_organ(BP_AUGMENT_CHEST_ARMOUR)
+	var/obj/item/organ/internal/augment/armor/A = owner && owner.get_organ(BP_AUGMENT_CHEST_ARMOUR)
 	var/B = 1
 	if(A && istype(A))
 		B = A.burn_mult

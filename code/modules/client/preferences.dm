@@ -391,8 +391,7 @@ var/global/list/time_prefs_fixed = list()
 
 	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
-	for(var/N in character.organs_by_name)
-		var/obj/item/organ/external/O = character.organs_by_name[N]
+	for(var/obj/item/organ/external/O in character.get_external_organs())
 		LAZYCLEARLIST(O.markings)
 
 	for(var/M in body_markings)
@@ -400,7 +399,7 @@ var/global/list/time_prefs_fixed = list()
 		var/mark_color = "[body_markings[M]]"
 
 		for(var/BP in mark_datum.body_parts)
-			var/obj/item/organ/external/O = character.organs_by_name[BP]
+			var/obj/item/organ/external/O = character.get_organ(BP)
 			if(O)
 				LAZYSET(O.markings, M, mark_color)
 

@@ -9,11 +9,12 @@
 	var/list/paths = list() //We may lose them
 
 /obj/item/organ/internal/augment/active/polytool/Initialize()
-	. = ..()
 	for(var/path in paths)
 		var/obj/item/I = new path (src)
 		I.canremove = FALSE
 		items += I
+	. = ..()
+
 /obj/item/organ/internal/augment/active/polytool/Destroy()
 	QDEL_NULL_LIST(items)
 	. = ..()
@@ -53,7 +54,7 @@
 			to_chat(owner, SPAN_WARNING("You must drop \the [I] before the polytool can extend."))
 	else
 		var/obj/item = input(owner, "Select the attachment to deploy.") as null|anything in src
-		if(!item || !(src in owner.internal_organs))
+		if(!item || !(src in owner.get_internal_organs()))
 			return
 		if(owner.equip_to_slot_if_possible(item, slot))
 			items -= item

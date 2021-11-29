@@ -14,22 +14,18 @@
 		min_bruised_damage = FLOOR(max_damage / 4)
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL && owner)
-		owner.internal_organs |= src
 		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
 		if(!E)
 			PRINT_STACK_TRACE("[src] spawned in [owner] without a parent organ: [parent_organ].")
 			return INITIALIZE_HINT_QDEL
-		LAZYDISTINCTADD(E.internal_organs, src)
 		E.cavity_max_w_class = max(E.cavity_max_w_class, w_class)
-		E.update_internal_organs_cost()
+		E.update_contained_organs_cost()
 
 /obj/item/organ/internal/Destroy()
 	if(owner)
-		owner.internal_organs -= src
-		owner.internal_organs_by_name -= organ_tag
-		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
+		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
 		if(istype(E))
-			LAZYREMOVE(E.internal_organs, src)
+			LAZYREMOVE(E.contained_organs, src)
 	return ..()
 
 /obj/item/organ/internal/set_dna(var/datum/dna/new_dna)
@@ -41,59 +37,35 @@
 //TODO move this to organ/internal once the FPB port comes through
 /obj/item/organ/proc/cut_away(var/mob/living/user)
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if(istype(parent)) //TODO ensure that we don't have to check this.
-		removed(user, 0)
+	if(istype(parent) && remove_organ(user, FALSE)) //TODO ensure that we don't have to check parent.
 		LAZYADD(parent.implants, src)
 
-/obj/item/organ/internal/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
-	if(owner)
-		owner.internal_organs -= src
-		owner.internal_organs_by_name -= organ_tag
-		var/obj/item/organ/external/E = owner.get_organ(parent_organ)
-		E.update_internal_organs_cost()
+/obj/item/organ/internal/remove_organ(var/mob/living/user, var/drop_organ=1, var/detach=1)
+	if(owner && owner.handle_internal_organ_removed(src, user) && detach)
+		var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
+		if(affected)
+			LAZYREMOVE(affected.contained_organs, src)
+			status |= ORGAN_CUT_AWAY
+	. = ..()
 
-		if(detach)
-			var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
-			if(affected)
-				LAZYREMOVE(affected.internal_organs, src)
-				status |= ORGAN_CUT_AWAY
-	..()
+/obj/item/organ/internal/replace_organ(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
 
-/obj/item/organ/internal/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
+	if(!istype(target) || (status & ORGAN_CUT_AWAY))
+		return FALSE //organs don't work very well in the body when they aren't properly attached
 
-	if(!istype(target))
-		return 0
+	. = ..()
 
-	if(status & ORGAN_CUT_AWAY)
-		return 0 //organs don't work very well in the body when they aren't properly attached
-
-	// robotic organs emulate behavior of the equivalent flesh organ of the species
-	if(BP_IS_PROSTHETIC(src) || !species)
-		species = target.species
-
-	..()
-
-	STOP_PROCESSING(SSobj, src)
-	target.internal_organs |= src
-	target.internal_organs_by_name[organ_tag] = src
-	LAZYDISTINCTADD(affected.internal_organs, src)
-	return 1
+	if(. && owner && owner.handle_internal_organ_replaced(src))
+		// robotic organs emulate behavior of the equivalent flesh organ of the species
+		if(BP_IS_PROSTHETIC(src) || !species)
+			species = owner.get_species() || global.using_map.default_species
+		STOP_PROCESSING(SSobj, src)
+		LAZYDISTINCTADD(affected.contained_organs, src)
 
 /obj/item/organ/internal/die()
 	..()
 	if((status & ORGAN_DEAD) && dead_icon)
 		icon_state = dead_icon
-
-/obj/item/organ/internal/remove_rejuv()
-	if(owner)
-		owner.internal_organs -= src
-		owner.internal_organs_by_name -= organ_tag
-		while(null in owner.internal_organs)
-			owner.internal_organs -= null
-		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
-		if(istype(E))
-			LAZYREMOVE(E.internal_organs, src)
-	..()
 
 /obj/item/organ/internal/is_usable()
 	return ..() && !is_broken()

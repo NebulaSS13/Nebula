@@ -10,8 +10,6 @@
 	set_status(STAT_STUN, 1)
 	icon = null
 	set_invisibility(101)
-	for(var/t in organs)
-		qdel(t)
 	var/atom/movable/overlay/animation = new /atom/movable/overlay(src)
 	animation.icon_state = "blank"
 	animation.icon = 'icons/mob/mob.dmi'
@@ -43,18 +41,10 @@
 	spawning = 1
 	return ..()
 
-/mob/living/carbon/human/AIize(move=1) // 'move' argument needs defining here too because BYOND is dumb
-	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
-		return
-	for(var/t in organs)
-		qdel(t)
-	QDEL_NULL_LIST(worn_underwear)
-	return ..(move)
-
 /mob/living/carbon/AIize()
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/obj/item/W in src)
+	for(var/obj/item/W in get_contained_external_atoms())
 		drop_from_inventory(W)
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
@@ -115,9 +105,6 @@
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
-	for(var/t in organs)
-		qdel(t)
-
 	var/mob/living/silicon/robot/O = new supplied_robot_type( loc )
 
 	O.set_gender(gender)
@@ -152,9 +139,6 @@
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
-	for(var/t in organs)	//this really should not be necessary
-		qdel(t)
-
 	var/mob/living/simple_animal/corgi/new_corgi = new /mob/living/simple_animal/corgi (loc)
 	new_corgi.a_intent = I_HURT
 	new_corgi.key = key
@@ -181,9 +165,6 @@
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
-
-	for(var/t in organs)
-		qdel(t)
 
 	var/mob/new_mob = new mobpath(src.loc)
 
@@ -274,7 +255,7 @@
 	SET_STATUS_MAX(src, STAT_WEAK, 5)
 	if (should_have_organ(BP_HEART))
 		adjust_blood(species.blood_volume - vessel.total_volume)
-	for (var/o in organs)
+	for (var/o in get_external_organs())
 		var/obj/item/organ/organ = o
 		organ.vital = 0
 		if (!BP_IS_PROSTHETIC(organ))

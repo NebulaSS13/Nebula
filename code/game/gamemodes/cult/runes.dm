@@ -569,7 +569,7 @@
 		if(!charges)
 			return statuses
 	if(charges >= 15)
-		for(var/obj/item/organ/external/e in user.organs)
+		for(var/obj/item/organ/external/e in user.get_external_organs())
 			if(e && e.status & ORGAN_BROKEN)
 				e.status &= ~ORGAN_BROKEN
 				statuses += "bones in your [e.name] snap into place"
@@ -579,7 +579,7 @@
 	if(!charges)
 		return statuses
 	var/list/obj/item/organ/damaged = list()
-	for(var/obj/item/organ/I in user.internal_organs)
+	for(var/obj/item/organ/I in user.get_internal_organs())
 		if(I.damage)
 			damaged += I
 	if(damaged.len)

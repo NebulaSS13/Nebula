@@ -9,9 +9,13 @@
 	. = ..()
 
 /mob/living/carbon/Destroy()
+
 	QDEL_NULL(touching)
 	bloodstr = null // We don't qdel(bloodstr) because it's the same as qdel(reagents)
+	QDEL_NULL_LIST(external_organs)
 	QDEL_NULL_LIST(internal_organs)
+	organs_by_tag = null
+
 	QDEL_NULL_LIST(hallucinations)
 	if(loc)
 		for(var/mob/M in contents)
@@ -389,7 +393,7 @@
 /mob/living/carbon/proc/SetStasis(var/factor, var/source = "misc")
 	if((species && (species.species_flags & SPECIES_FLAG_NO_SCAN)) || isSynthetic())
 		return
-	stasis_sources[source] = factor
+	LAZYSET(stasis_sources, source, factor)
 
 /mob/living/carbon/proc/InStasis()
 	if(!stasis_value)
@@ -402,8 +406,8 @@
 	if((species && (species.species_flags & SPECIES_FLAG_NO_SCAN)) || isSynthetic())
 		return
 	for(var/source in stasis_sources)
-		stasis_value += stasis_sources[source]
-	stasis_sources.Cut()
+		stasis_value += LAZYACCESS(stasis_sources, source)
+	LAZYCLEARLIST(stasis_sources)
 
 /mob/living/carbon/proc/set_nutrition(var/amt)
 	nutrition = Clamp(amt, 0, initial(nutrition))

@@ -58,8 +58,7 @@
 // Checks the organ list for limbs meeting a predicate. Way overengineered for such a limited use 
 // case but I can see it being expanded in the future if meat limbs or doona limbs use it.
 /mob/living/carbon/human/proc/get_modular_limbs(var/return_first_found = FALSE, var/validate_proc)
-	for(var/bp in organs)
-		var/obj/item/organ/external/E = bp
+	for(var/obj/item/organ/external/E in get_external_organs())
 		if(!validate_proc || call(E, validate_proc)(src) > MODULAR_BODYPART_INVALID)
 			LAZYADD(., E)
 			if(return_first_found)
@@ -72,7 +71,7 @@
 		if(length(E.children))
 			. -= E.children
 
-// Called in robotize(), replaced() and removed() to update our modular limb verbs.
+// Called in robotize(), replace_organ() and remove_organ() to update our modular limb verbs.
 /mob/living/carbon/human/proc/refresh_modular_limb_verbs()
 	if(length(get_modular_limbs(return_first_found = TRUE, validate_proc = /obj/item/organ/external/proc/can_attach_modular_limb_here)))
 		verbs |= .proc/attach_limb_verb
@@ -153,18 +152,16 @@
 
 	last_special = world.time
 	drop_from_inventory(E)
-	E.replaced(src)
-
-	// Reconnect the organ and children as normally this is done with surgery.
-	E.status &= ~ORGAN_CUT_AWAY
-	for(var/obj/item/organ/external/child in E.children)
-		child.status &= ~ORGAN_CUT_AWAY
-
-	var/decl/pronouns/G = get_pronouns()
-	visible_message(
-		SPAN_NOTICE("\The [src] attaches \the [E] to [G.his] body!"),
-		SPAN_NOTICE("You attach \the [E] to your body!"))
-	refresh_visible_overlays() // Not sure why this isn't called by removed(), but without it we don't update our limb appearance.
+	if(E.replace_organ(src))
+		// Reconnect the organ and children as normally this is done with surgery.
+		E.status &= ~ORGAN_CUT_AWAY
+		for(var/obj/item/organ/external/child in E.children)
+			child.status &= ~ORGAN_CUT_AWAY
+		var/decl/pronouns/G = get_pronouns()
+		visible_message(
+			SPAN_NOTICE("\The [src] attaches \the [E] to [G.his] body!"),
+			SPAN_NOTICE("You attach \the [E] to your body!"))
+		refresh_visible_overlays() // Not sure why this isn't called by remove_organ(), but without it we don't update our limb appearance.
 	return TRUE
 
 /mob/living/carbon/human/proc/detach_limb_verb()
@@ -186,11 +183,11 @@
 		return FALSE
 
 	last_special = world.time
-	E.removed(src)
-	E.dropInto(loc)
-	put_in_hands(E)
-	var/decl/pronouns/G = get_pronouns()
-	visible_message(
-		SPAN_NOTICE("\The [src] detaches [G.his] [E.name]!"),
-		SPAN_NOTICE("You detach your [E.name]!"))
+	if(E.remove_organ(src))
+		E.dropInto(loc)
+		put_in_hands(E)
+		var/decl/pronouns/G = get_pronouns()
+		visible_message(
+			SPAN_NOTICE("\The [src] detaches [G.his] [E.name]!"),
+			SPAN_NOTICE("You detach your [E.name]!"))
 	return TRUE

@@ -102,7 +102,7 @@
 /decl/surgery_step/cavity/place_item/pre_surgery_step(mob/living/user, mob/living/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected && affected.cavity)
-		var/max_volume = BASE_STORAGE_CAPACITY(affected.cavity_max_w_class) + affected.internal_organs_size
+		var/max_volume = BASE_STORAGE_CAPACITY(affected.cavity_max_w_class) + affected.contained_organs_size
 		if(tool.w_class > affected.cavity_max_w_class)
 			to_chat(user, SPAN_WARNING("\The [tool] is too big for [affected.cavity_name] cavity."))
 			return FALSE
@@ -111,7 +111,7 @@
 			if(istype(I,/obj/item/implant))
 				continue
 			total_volume += I.get_storage_cost()
-			for(var/obj/item/organ/internal/org in affected.internal_organs)
+			for(var/obj/item/organ/internal/org in affected.contained_organs)
 				max_volume -= org.get_storage_cost()
 		if(total_volume > max_volume)
 			to_chat(user, SPAN_WARNING("There isn't enough space left in [affected.cavity_name] cavity for [tool]."))

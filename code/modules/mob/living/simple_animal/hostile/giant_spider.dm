@@ -283,7 +283,7 @@ Nurse caste procs
 	if(ishuman(.))
 		var/mob/living/carbon/human/H = .
 		if(prob(infest_chance) && max_eggs)
-			var/obj/item/organ/external/O = pick(H.organs)
+			var/obj/item/organ/external/O = pick(H.get_external_organs())
 			if(!BP_IS_PROSTHETIC(O) && !BP_IS_CRYSTAL(O) && (LAZYLEN(O.implants) < 2))
 				var/eggs = new /obj/effect/spider/eggcluster(O, src)
 				LAZYADD(O.implants, eggs)

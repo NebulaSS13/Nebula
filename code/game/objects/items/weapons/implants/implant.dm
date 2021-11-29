@@ -69,7 +69,8 @@
 
 	return TRUE
 
-/obj/item/implant/proc/removed()
+/obj/item/implant/proc/implant_removed()
+	SHOULD_CALL_PARENT(TRUE)
 	imp_in = null
 	if(part)
 		LAZYREMOVE(part.implants, src)
@@ -118,6 +119,7 @@
 		disable(rand(power*100,power*1000))
 
 /obj/item/implant/Destroy()
+	implant_removed()
 	if(part)
 		LAZYREMOVE(part.implants, src)
 	var/obj/item/implanter/implanter = loc

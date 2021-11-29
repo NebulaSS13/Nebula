@@ -19,10 +19,11 @@
 /mob/living/carbon/human/isSynthetic()
 	if(isnull(full_prosthetic))
 		robolimb_count = 0
-		for(var/obj/item/organ/external/E in organs)
+		var/list/eorgans = get_external_organs()
+		for(var/obj/item/organ/external/E in eorgans)
 			if(BP_IS_PROSTHETIC(E))
 				robolimb_count++
-		full_prosthetic = (robolimb_count == organs.len)
+		full_prosthetic = (robolimb_count == LAZYLEN(eorgans))
 		update_emotes()
 	return full_prosthetic
 

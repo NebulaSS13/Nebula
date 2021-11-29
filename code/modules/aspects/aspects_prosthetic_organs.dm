@@ -19,7 +19,7 @@
 /decl/aspect/prosthetic_organ/apply(var/mob/living/carbon/human/holder)
 	. = ..()
 	if(.)
-		var/obj/item/organ/internal/I = holder.internal_organs_by_name[apply_to_organ]
+		var/obj/item/organ/internal/I = holder.get_organ(apply_to_organ)
 		if(istype(I))
 			I.robotize()
 

@@ -120,7 +120,7 @@
 			if(prob(10))
 				to_chat(owner, "<span class='warning'>Your body is barely functioning and is starting to shut down.</span>")
 				SET_STATUS_MAX(owner, STAT_PARA, 1)
-				var/obj/item/organ/internal/I = pick(owner.internal_organs)
+				var/obj/item/organ/internal/I = pick(owner.get_internal_organs())
 				I.take_internal_damage(5)
 	..()
 
@@ -164,7 +164,7 @@
 	vital = 0
 
 /obj/item/organ/external/head/insectoid/serpentid/get_eye_overlay()
-	var/obj/item/organ/internal/eyes/eyes = owner.get_internal_organ(owner.species.vision_organ || BP_EYES)
+	var/obj/item/organ/internal/eyes/eyes = owner.get_organ(owner.species.vision_organ || BP_EYES)
 	if(eyes)
 		return eyes.get_special_overlay()
 

@@ -14,21 +14,22 @@
 	var/list/allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
 
 /obj/item/organ/internal/augment/Initialize()
-	. = ..()
 	organ_tag = pick(allowed_organs)
 	update_parent_organ()
+	. = ..()
 
 //General expectation is onInstall and onRemoved are overwritten to add effects to augmentee
-/obj/item/organ/internal/augment/replaced(var/mob/living/carbon/human/target)
-	if(..() && istype(owner))
+/obj/item/organ/internal/augment/replace_organ(var/mob/living/carbon/human/target)
+	. = ..()
+	if(. && istype(owner))
 		onInstall()
 
 /obj/item/organ/internal/augment/proc/onInstall()
 	return
 
-/obj/item/organ/internal/augment/removed(var/mob/living/user, var/drop_organ=1)
+/obj/item/organ/internal/augment/remove_organ(var/mob/living/user, var/drop_organ=1)
 	onRemove()
-	..()
+	. = ..()
 
 /obj/item/organ/internal/augment/proc/onRemove()
 	return

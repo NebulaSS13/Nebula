@@ -127,7 +127,7 @@ var/global/list/wrapped_species_by_ref = list()
 		hair_colour = skin_colour
 		facial_hair_colour = skin_colour
 
-	for(var/obj/item/organ/external/E in organs)
+	for(var/obj/item/organ/external/E in get_external_organs())
 		E.sync_colour_to_human(src)
 
 	refresh_visible_overlays()

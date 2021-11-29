@@ -331,7 +331,7 @@
 	holder.speech = src
 	holder.verbs |= /obj/item/rig/proc/alter_voice
 
-/obj/item/rig_module/voice/removed()
+/obj/item/rig_module/voice/module_removed()
 	..()
 	holder.speech = null
 	holder.verbs -= /obj/item/rig/proc/alter_voice
@@ -449,7 +449,7 @@
 	jets.holder = holder
 	jets.ion_trail.set_up(holder)
 
-/obj/item/rig_module/maneuvering_jets/removed()
+/obj/item/rig_module/maneuvering_jets/module_removed()
 	..()
 	jets.holder = null
 	jets.ion_trail.set_up(jets)

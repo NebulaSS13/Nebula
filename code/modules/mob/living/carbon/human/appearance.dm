@@ -134,6 +134,6 @@
 	return species.get_facial_hair_style_types(bodytype.associated_gender, check_gender)
 
 /mob/living/carbon/human/proc/force_update_limbs()
-	for(var/obj/item/organ/external/O in organs)
+	for(var/obj/item/organ/external/O in get_external_organs())
 		O.sync_colour_to_human(src)
 	update_body(0)

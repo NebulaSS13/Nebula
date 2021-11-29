@@ -57,9 +57,10 @@
 	..()
 	sync_breath_types()
 
-/obj/item/organ/internal/lungs/replaced()
-	..()
-	sync_breath_types()
+/obj/item/organ/internal/lungs/replace_organ()
+	. = ..()
+	if(.)
+		sync_breath_types()
 
 /**
  *  Set these lungs' breath types based on the lungs' species

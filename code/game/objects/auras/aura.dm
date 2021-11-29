@@ -20,7 +20,7 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 /obj/aura/proc/added_to(var/mob/living/target)
 	user = target
 
-/obj/aura/proc/removed()
+/obj/aura/proc/aura_removed()
 	user = null
 
 /obj/aura/proc/life_tick()

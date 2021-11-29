@@ -36,15 +36,15 @@
 	surface_accessible = TRUE
 	var/obj/item/card/id/id_card = /obj/item/card/id/ascent
 
-/obj/item/organ/internal/controller/replaced(mob/living/carbon/human/target, obj/item/organ/external/affected)
+/obj/item/organ/internal/controller/replace_organ(mob/living/carbon/human/target, obj/item/organ/external/affected)
 	. = ..()
-	if(owner)
+	if(. && owner)
 		owner.add_language(/decl/language/mantid/worldnet)
 
-/obj/item/organ/internal/controller/removed(mob/living/user, drop_organ, detach)
+/obj/item/organ/internal/controller/remove_organ(mob/living/user, drop_organ, detach)
 	var/mob/living/carbon/H = owner
 	. = ..()
-	if(istype(H) && H != owner && !(locate(type) in H.internal_organs))
+	if(. && istype(H) && H != owner && !(locate(type) in H.get_internal_organs()))
 		H.remove_language(/decl/language/mantid/worldnet)
 
 /obj/item/organ/internal/controller/Initialize()

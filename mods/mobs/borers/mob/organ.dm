@@ -31,14 +31,10 @@
 			goo.basecolor = "#412464"
 			goo.update_icon()
 
-/obj/item/organ/internal/borer/removed(var/mob/living/user)
-
-	..()
-
+/obj/item/organ/internal/borer/remove_organ(var/mob/living/user)
+	. = ..()
 	var/mob/living/simple_animal/borer/B = owner.has_brain_worms()
 	if(B)
 		B.leave_host()
 		B.ckey = owner.ckey
-
-	spawn(0)
-		qdel(src)
+	QDEL_IN(src, 0)

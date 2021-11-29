@@ -79,10 +79,9 @@
 	. = TRUE
 	if(istype(A, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = A
-		if(H.organs && H.organs.len)
-			var/obj/item/organ/external/E = pick(H.organs)
-			if(istype(E))
-				E.dismember()
+		var/obj/item/organ/external/E = pick(H.get_external_organs())
+		if(istype(E))
+			E.dismember()
 
 /obj/item/projectile/sanctionedaction/before_move()
 	. = ..()

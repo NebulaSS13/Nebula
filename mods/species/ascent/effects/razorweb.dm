@@ -136,24 +136,25 @@
 	var/severed = FALSE
 	var/armour_prob = prob(100 * L.get_blocked_ratio(null, BRUTE, damage = ARMOR_MELEE_RESISTANT))
 	if(H && prob(35))
-		var/obj/item/organ/external/E
-		for(var/thing in shuffle(H.organs_by_name))
-			var/obj/item/organ/external/limb = H.organs_by_name[thing]
-			if(!istype(limb) || limb.is_stump() || !(limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
-				continue
-			var/is_vital = FALSE
-			for(var/obj/item/organ/internal/I in limb.internal_organs)
-				if(I.vital)
-					is_vital = TRUE
+		var/list/organs_to_entangle = H.get_external_organs()
+		if(length(organs_to_entangle))
+			organs_to_entangle = shuffle(organs_to_entangle)
+			var/obj/item/organ/external/E
+			for(var/obj/item/organ/external/limb in organs_to_entangle)
+				if(!istype(limb) || limb.is_stump() || !(limb.limb_flags & ORGAN_FLAG_CAN_AMPUTATE))
+					continue
+				var/is_vital = FALSE
+				for(var/obj/item/organ/internal/I in limb.contained_organs)
+					if(I.vital)
+						is_vital = TRUE
+						break
+				if(!is_vital)
+					E = limb
 					break
-			if(!is_vital)
-				E = thing
-				break
-		if(E && !armour_prob)
-			E = H.organs_by_name[E]
-			visible_message(SPAN_DANGER("The crystalline strands slice straight through \the [H]'s [E.amputation_point || E.name]!"))
-			E.dismember()
-			severed = TRUE
+			if(E && !armour_prob)
+				visible_message(SPAN_DANGER("The crystalline strands slice straight through \the [H]'s [E.amputation_point || E.name]!"))
+				E.dismember()
+				severed = TRUE
 
 	if(!severed && !armour_prob)
 		L.apply_damage(rand(25, 50), used_weapon = src)

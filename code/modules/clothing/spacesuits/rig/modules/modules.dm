@@ -244,7 +244,7 @@
 	return 1
 
 // Called when the module is uninstalled from a suit.
-/obj/item/rig_module/proc/removed()
+/obj/item/rig_module/proc/module_removed()
 	deactivate()
 	holder = null
 	return

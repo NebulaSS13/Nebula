@@ -20,15 +20,12 @@
  *
  */
 /obj/item/organ/internal/augment/active/cyberbrain/Initialize()
-	. = ..()
-
 	START_PROCESSING(SSobj, src)
 	set_extension(src, /datum/extension/interactive/os/device/implant)
 	set_extension(src, /datum/extension/assembly/modular_computer/cyberbrain)
-
-	update_icon()
-	
 	install_default_hardware()
+	. = ..()
+	update_icon()
 
 // Used to perform preset-specific hardware changes.
 /obj/item/organ/internal/augment/active/cyberbrain/proc/install_default_hardware()
