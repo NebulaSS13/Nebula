@@ -242,7 +242,7 @@
 	var/obj/item/organ/external/limb = ..()
 	if(limb)
 		limb.species = get_species_by_key(SPECIES_HUMAN)
-		limb.robotize(prosthetic_model, apply_material = use_material)
+		limb.robotize_organ(prosthetic_model, apply_material = use_material)
 	return limb
 
 /datum/stack_recipe/prosthetic/left_arm

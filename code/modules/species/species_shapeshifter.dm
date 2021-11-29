@@ -27,17 +27,17 @@ var/global/list/wrapped_species_by_ref = list()
 	var/decl/species/S = get_species_by_key(wrapped_species_by_ref["\ref[H]"])
 	return S.get_root_species_name(H)
 
-/decl/species/shapeshifter/handle_pre_spawn(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/initialize_species_for_mob(var/mob/living/carbon/human/H)
 	..()
 	wrapped_species_by_ref["\ref[H]"] = default_form
 
-/decl/species/shapeshifter/handle_post_spawn(var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/finalize_species_for_mob(var/mob/living/carbon/human/H)
 	if(monochromatic)
 		H.hair_colour = H.skin_colour
 		H.facial_hair_colour = H.skin_colour
 	..()
 
-/decl/species/shapeshifter/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+/decl/species/shapeshifter/apply_species_to_organ(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	var/obj/item/organ/external/E = org
 	if(H && istype(E))
 		E.sync_colour_to_human(H)

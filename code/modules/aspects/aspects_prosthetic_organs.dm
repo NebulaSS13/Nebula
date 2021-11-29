@@ -21,7 +21,7 @@
 	if(.)
 		var/obj/item/organ/internal/I = holder.get_organ(apply_to_organ)
 		if(istype(I))
-			I.robotize()
+			I.robotize_organ()
 
 /decl/aspect/prosthetic_organ/eyes
 	name = "Prosthetic Eyes"

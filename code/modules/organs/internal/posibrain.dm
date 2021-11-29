@@ -23,6 +23,7 @@
 	relative_size = 60
 	req_access = list(access_robotics)
 	scale_max_damage_to_species_health = FALSE
+	status = ORGAN_PROSTHETIC
 
 	var/transfer_identity_on_removal = TRUE
 	var/mob/living/silicon/sil_brainmob/brainmob = null
@@ -38,7 +39,6 @@
 	. = ..()
 	if(!brainmob && iscarbon(loc))
 		init(loc)
-	robotize()
 	unshackle()
 	update_icon()
 
@@ -205,6 +205,9 @@
 	organ_tag = BP_CELL
 	parent_organ = BP_CHEST
 	vital = 1
+	material = /decl/material/solid/metal/steel
+	status = ORGAN_PROSTHETIC
+
 	var/open
 	var/obj/item/cell/cell = /obj/item/cell/hyper
 	//at 0.8 completely depleted after 60ish minutes of constant walking or 130 minutes of standing still
@@ -303,6 +306,8 @@
 	parent_organ = BP_HEAD
 	vital = TRUE
 	scale_max_damage_to_species_health = FALSE
+	material = /decl/material/solid/metal/steel
+	status = ORGAN_PROSTHETIC
 	var/obj/item/mmi/stored_mmi
 	var/datum/mind/persistantMind //Mind that the organ will hold on to after being removed, used for transfer_and_delete
 	var/ownerckey // used in the event the owner is out of body

@@ -878,11 +878,8 @@
 		germ_level += n
 
 /mob/living/carbon/human/revive()
-
-	species.create_organs(src) // Reset our organs/limbs.
 	restore_all_organs()       // Reapply robotics/amputated status from preferences.
 	reset_blood()
-
 	if(!client || !key) //Don't boot out anyone already in the mob.
 		for(var/mob/living/carbon/brain/brain in global.player_list) // This is really nasty, does it even work anymore?
 			if(brain.real_name == src.real_name && brain.mind)
@@ -1046,111 +1043,49 @@
 /mob/living/carbon/human/proc/set_bodytype(var/decl/bodytype/new_bodytype, var/rebuild_body = FALSE)
 	if(bodytype != new_bodytype)
 		bodytype = new_bodytype
-		if(bodytype && rebuild_body)
-			force_update_limbs()
-			update_body()
+		if(bodytype)
+			default_pixel_x = initial(pixel_x) + bodytype.pixel_offset_x
+			default_pixel_y = initial(pixel_y) + bodytype.pixel_offset_y
+			default_pixel_z = initial(pixel_z) + bodytype.pixel_offset_z
+			reset_offsets()
+			if(rebuild_body)
+				force_update_limbs()
+				update_body()
+
+/mob/living/carbon/human/proc/clear_species()
+	species.remove_base_auras(src)
+	species.remove_inherent_verbs(src)
+	holder_type = null
 
 /mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour = 1)
-	if(!dna)
-		if(!new_species)
-			new_species = global.using_map.default_species
-	else
-		if(!new_species)
-			new_species = dna.species
 
-	// No more invisible screaming wheelchairs because of set_species() typos.
-	if(!get_species_by_key(new_species))
-		new_species = global.using_map.default_species
-	if(dna)
-		dna.species = new_species
+	// Make sure we have some new_species to work with.
+	if(!new_species || !get_species_by_key(new_species))
+		new_species = dna?.species || global.using_map.default_species
 
+	// No point progressing from here, effectively a noop.
+	if(species?.name == new_species)
+		return
+
+	// Unset our previous species if needed.
 	if(species)
+		clear_species()
 
-		if(species.name && species.name == new_species)
-			return
-
-		// Clear out their species abilities.
-		species.remove_base_auras(src)
-		species.remove_inherent_verbs(src)
-		holder_type = null
-
+	// Apply new species.
 	species = get_species_by_key(new_species)
-	species.handle_pre_spawn(src)
-
-	skin_colour = (species.base_color && default_colour) ? species.base_color : COLOR_BLACK
-
-	if(species.holder_type)
-		holder_type = species.holder_type
-
-	var/decl/pronouns/new_pronouns = get_pronouns_by_gender(get_sex())
-	if(!istype(new_pronouns) || !(new_pronouns in species.available_pronouns))
-		new_pronouns = species.default_pronouns
-		set_gender(new_pronouns.name)
-
-	icon_state = lowertext(species.name)
-	set_bodytype(species.default_bodytype, TRUE)
-
-	species.create_organs(src)
-	species.handle_post_spawn(src)
+	species.initialize_species_for_mob(src)
+	species.apply_appearance_to_mob(src)
+	species.apply_butchery_products_to_mob(src)
+	species.populate_mob_organs(src)
+	species.finalize_mob_organs(src)
+	species.apply_culture_to_mob(src)
+	species.apply_movement_to_mob(src)
+	species.finalize_species_for_mob(src)
 
 	maxHealth = species.total_health
 	remove_extension(src, /datum/extension/armor)
 	if(species.natural_armour_values)
 		set_extension(src, /datum/extension/armor, species.natural_armour_values)
-
-	default_pixel_x = initial(pixel_x) + bodytype.pixel_offset_x
-	default_pixel_y = initial(pixel_y) + bodytype.pixel_offset_y
-	default_pixel_z = initial(pixel_z) + bodytype.pixel_offset_z
-	reset_offsets()
-
-	appearance_descriptors = null
-	if(LAZYLEN(species.appearance_descriptors))
-		for(var/desctype in species.appearance_descriptors)
-			var/datum/appearance_descriptor/descriptor = species.appearance_descriptors[desctype]
-			LAZYSET(appearance_descriptors, descriptor.name, descriptor.default_value)
-
-	if(!(species.appearance_flags & HAS_UNDERWEAR))
-		QDEL_NULL_LIST(worn_underwear)
-
-	available_maneuvers = species.maneuvers.Copy()
-
-	meat_type =     species.meat_type
-	meat_amount =   species.meat_amount
-	skin_material = species.skin_material
-	skin_amount =   species.skin_amount
-	bone_material = species.bone_material
-	bone_amount =   species.bone_amount
-
-	refresh_visible_overlays()
-	reset_blood()
-
-	// Rebuild the HUD and visual elements.
-	if(client)
-		Login()
-
-	full_prosthetic = null
-
-	var/update_lang
-	for(var/token in ALL_CULTURAL_TAGS)
-		if(species.force_cultural_info && species.force_cultural_info[token])
-			update_lang = TRUE
-			set_cultural_value(token, species.force_cultural_info[token], defer_language_update = TRUE)
-		else if(!cultural_info[token] || !(cultural_info[token] in species.available_cultural_info[token]))
-			update_lang = TRUE
-			set_cultural_value(token, species.default_cultural_info[token], defer_language_update = TRUE)
-
-	default_walk_intent = null
-	default_run_intent = null
-	move_intent = null
-	move_intents = species.move_intents.Copy()
-	set_move_intent(GET_DECL(move_intents[1]))
-	if(!istype(move_intent))
-		set_next_usable_move_intent()
-
-	if(update_lang)
-		languages.Cut()
-		default_language = null
-		update_languages()
 
 	//recheck species-restricted clothing
 	for(var/slot in global.all_inventory_slots)
@@ -1158,6 +1093,7 @@
 		if(istype(C) && !C.mob_can_equip(src, slot, 1))
 			unEquip(C)
 
+	reset_blood()
 	update_emotes()
 	return 1
 

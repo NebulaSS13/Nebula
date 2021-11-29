@@ -154,11 +154,11 @@
 	icon_state = "cortical-stack"
 	organ_tag = BP_STACK
 	status = ORGAN_PROSTHETIC
+	material = /decl/material/solid/metal/aliumium
 	vital = 1
 	origin_tech = @"{'biotech':4,'materials':4,'magnets':2,'programming':3}"
 	relative_size = 10
 	var/invasive = 1
-
 	var/ownerckey
 	var/default_language
 	var/list/languages = list()
@@ -168,7 +168,6 @@
 /obj/item/organ/internal/voxstack/Initialize(mapload, datum/dna/given_dna)
 	. = ..()
 	do_backup()
-	robotize()
 
 /obj/item/organ/internal/voxstack/examine(mob/user)
 	. = ..()

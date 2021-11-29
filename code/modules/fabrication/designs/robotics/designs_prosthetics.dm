@@ -70,6 +70,6 @@
 /datum/fabricator_recipe/robotics/prosthetic/build()
 	. = ..()
 	for(var/obj/item/organ/external/E in .)
-		E.robotize(model)
+		E.robotize_organ(model)
 
 DEFINE_ROBOLIMB_DESIGNS(/decl/prosthetics_manufacturer, generic)

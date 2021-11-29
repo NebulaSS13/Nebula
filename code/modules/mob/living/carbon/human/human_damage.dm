@@ -317,10 +317,28 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 This function restores all organs.
 */
 /mob/living/carbon/human/restore_all_organs(var/ignore_prosthetic_prefs)
+
+	// Remove any completely destroyed organs. Internal organs have no 'permanently destroyed' state so don't need pruning.
+	for(var/obj/item/organ/external/O in get_external_organs())
+		if(O.is_stump())
+			O.remove_organ()
+
+	// Respawn any missing limbs.
+	species.populate_mob_organs(src)
+
+	// Rejuvenate damaged limbs.
 	for(var/bodypart in global.all_limb_tags_by_depth)
 		var/obj/item/organ/external/current_organ = get_organ(bodypart)
 		if(istype(current_organ))
 			current_organ.rejuvenate(ignore_prosthetic_prefs)
+	refresh_dislocation_verbs()
+
+/mob/living/carbon/human/proc/refresh_dislocation_verbs()
+	//check to see if we still need the verb
+	for(var/obj/item/organ/external/limb in get_external_organs())
+		if(limb.dislocated == FALSE)
+			verbs |= /mob/living/carbon/human/proc/undislocate
+			return
 	verbs -= /mob/living/carbon/human/proc/undislocate
 
 /mob/living/carbon/human/proc/HealDamage(zone, brute, burn)

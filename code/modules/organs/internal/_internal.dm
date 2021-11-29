@@ -60,7 +60,10 @@
 		if(BP_IS_PROSTHETIC(src) || !species)
 			species = owner.get_species() || global.using_map.default_species
 		STOP_PROCESSING(SSobj, src)
-		LAZYDISTINCTADD(affected.contained_organs, src)
+		if(!affected)
+			affected = owner.get_organ(parent_organ)
+		if(affected)
+			LAZYDISTINCTADD(affected.contained_organs, src)
 
 /obj/item/organ/internal/die()
 	..()
@@ -70,7 +73,7 @@
 /obj/item/organ/internal/is_usable()
 	return ..() && !is_broken()
 
-/obj/item/organ/internal/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/robotize_organ(var/company = /decl/prosthetics_manufacturer, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	..()
 	min_bruised_damage += 5
 	min_broken_damage += 10

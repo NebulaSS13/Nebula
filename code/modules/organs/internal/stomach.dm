@@ -23,8 +23,9 @@
 
 /obj/item/organ/internal/stomach/remove_organ()
 	. = ..()
-	ingested.my_atom = src
-	ingested.parent = null
+	if(ingested)
+		ingested.my_atom = src
+		ingested.parent = null
 
 /obj/item/organ/internal/stomach/replace_organ()
 	. = ..()

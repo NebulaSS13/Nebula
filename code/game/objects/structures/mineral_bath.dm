@@ -117,7 +117,7 @@
 					var/limb_path = organ_data["path"]
 					var/obj/item/organ/O = new limb_path(H)
 					organ_data["descriptor"] = O.name
-					H.species.post_organ_rejuvenate(O, H)
+					H.species.apply_species_to_organ(O, H)
 					to_chat(occupant, "<span class='notice'>You feel your [O.name] reform in the crystal bath.</span>")
 					H.update_body()
 					repaired_organ = TRUE

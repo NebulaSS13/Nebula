@@ -21,7 +21,7 @@
 /datum/fabricator_recipe/robotics/organ/build()
 	. = ..()
 	for(var/obj/item/organ/internal/I in .)
-		I.robotize()
+		I.robotize_organ()
 
 /datum/fabricator_recipe/robotics/organ/heart
 	path = /obj/item/organ/internal/heart

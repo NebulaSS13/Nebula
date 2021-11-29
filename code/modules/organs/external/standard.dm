@@ -26,7 +26,7 @@
 /obj/item/organ/external/chest/proc/get_current_skin()
 	return
 
-/obj/item/organ/external/chest/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/external/chest/robotize_organ(var/company = /decl/prosthetics_manufacturer, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	if(..())
 		// Give them a new cell.
 		var/obj/item/organ/internal/cell/C = owner.get_organ(BP_CELL)

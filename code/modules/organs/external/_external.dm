@@ -107,8 +107,13 @@
 	if(isnull(pain_disability_threshold))
 		pain_disability_threshold = (max_damage * 0.75)
 	get_icon()
-	slowdown = species.get_slowdown(owner) // TODO make this a getter so octopodes can override it based on flooding
+
+// TODO make this a getter so octopodes can override it based on flooding
+/obj/item/organ/external/set_species(var/decl/species/new_species)
+	. = ..()
 	if(species)
+		slowdown = species.get_slowdown(owner) 
+		LAZYCLEARLIST(unarmed_attacks)
 		for(var/attack_type in species.unarmed_attacks)
 			var/decl/natural_attack/attack = GET_DECL(attack_type)
 			if(istype(attack) && (organ_tag in attack.usable_with_limbs))
@@ -347,26 +352,17 @@
 		contained_organs_size += org.get_storage_cost()
 
 /obj/item/organ/external/proc/dislocate()
-	if(dislocated == -1)
-		return
-
-	dislocated = 1
-	if(owner)
-		owner.verbs |= /mob/living/carbon/human/proc/undislocate
+	if(dislocated == FALSE)
+		dislocated = TRUE
+		if(owner)
+			owner.verbs |= /mob/living/carbon/human/proc/undislocate
 
 /obj/item/organ/external/proc/undislocate()
-	if(dislocated == -1)
-		return
-
-	dislocated = 0
-	if(owner)
-		owner.shock_stage += 20
-
-		//check to see if we still need the verb
-		for(var/obj/item/organ/external/limb in owner.get_external_organs())
-			if(limb.dislocated == 1)
-				return
-		owner.verbs -= /mob/living/carbon/human/proc/undislocate
+	if(dislocated == 1)
+		dislocated = 0
+		if(owner)
+			owner.shock_stage += 20
+			owner.refresh_dislocation_verbs()
 
 /obj/item/organ/external/update_health()
 	damage = min(max_damage, (brute_dam + burn_dam))
@@ -476,7 +472,7 @@ This function completely restores a damaged organ to perfect condition.
 		owner.updatehealth()
 
 	if(!QDELETED(src) && species)
-		species.post_organ_rejuvenate(src, owner)
+		species.apply_species_to_organ(src, owner)
 
 /obj/item/organ/external/proc/createwound(var/type = CUT, var/damage, var/surgical)
 
@@ -1124,7 +1120,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(species)
 		return species.get_manual_dexterity(owner)
 
-/obj/item/organ/external/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/external/robotize_organ(var/company = /decl/prosthetics_manufacturer, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
 
 	if(BP_IS_PROSTHETIC(src))
 		return
@@ -1134,7 +1130,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	slowdown = 0
 
 	if(!ispath(company, /decl/prosthetics_manufacturer))
-		PRINT_STACK_TRACE("Limb [type] robotize() was supplied a null or non-decl manufacturer: '[company]'")
+		PRINT_STACK_TRACE("Limb [type] robotize_organ() was supplied a null or non-decl manufacturer: '[company]'")
 		company = /decl/prosthetics_manufacturer
 	
 	var/decl/prosthetics_manufacturer/R = GET_DECL(company)
@@ -1154,18 +1150,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 	unmutate()
 
 	for(var/obj/item/organ/external/T in children)
-		T.robotize(company, 1)
+		T.robotize_organ(company)
 
 	if(owner)
-
-		if(!skip_prosthetics)
-			owner.full_prosthetic = null // Will be rechecked next isSynthetic() call.
-
+		owner.full_prosthetic = null // Will be rechecked next isSynthetic() call.
 		if(!keep_organs)
 			for(var/obj/item/organ/thing in contained_organs)
 				if(!thing.vital && !BP_IS_PROSTHETIC(thing))
 					qdel(thing)
-
 		owner.refresh_modular_limb_verbs()
 
 	return 1
@@ -1269,16 +1261,20 @@ Note that amputating the affected organ does in fact remove the infection from t
 		status |= ORGAN_CUT_AWAY
 
 	release_restraints(victim)
+
 	//Robotic limbs explode if sabotaged.
 	if(BP_IS_PROSTHETIC(src) && (status & ORGAN_SABOTAGED))
 		victim.visible_message(
 			"<span class='danger'>\The [victim]'s [src.name] explodes violently!</span>",\
 			"<span class='danger'>Your [src.name] explodes!</span>",\
 			"<span class='danger'>You hear an explosion!</span>")
-		explosion(get_turf(owner),-1,-1,2,3)
 		spark_at(victim, 5, holder=owner)
-		qdel(src)
-	else if(is_stump())
+		explosion(get_turf(owner),-1,-1,2,3)
+		if(!QDELETED(src))
+			qdel(src)
+		return
+
+	if(is_stump())
 		qdel(src)
 
 

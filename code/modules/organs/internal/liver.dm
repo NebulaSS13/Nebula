@@ -10,7 +10,7 @@
 	max_damage = 70
 	relative_size = 60
 
-/obj/item/organ/internal/liver/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/liver/robotize_organ(var/company = /decl/prosthetics_manufacturer, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	. = ..()
 	icon_state = "liver-prosthetic"
 

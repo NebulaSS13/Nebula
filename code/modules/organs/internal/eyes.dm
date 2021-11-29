@@ -89,7 +89,7 @@
 
 /obj/item/organ/internal/eyes/robot/Initialize()
 	. = ..()
-	robotize()
+	robotize_organ()
 
 /obj/item/organ/internal/eyes/remove_organ()
 	. = ..()
@@ -102,7 +102,7 @@
 		verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 		verbs |= /obj/item/organ/internal/eyes/proc/toggle_eye_glow
 
-/obj/item/organ/internal/eyes/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/eyes/robotize_organ(var/company = /decl/prosthetics_manufacturer, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	..()
 	name = "optical sensor"
 	icon = 'icons/obj/robot_component.dmi'

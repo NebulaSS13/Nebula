@@ -4,13 +4,14 @@
 	organ_tag = "heart"
 	parent_organ = BP_CHEST
 	dead_icon = "heart-off"
+	damage_reduction = 0.7
+	relative_size = 5
+	max_damage = 45
+
 	var/pulse = PULSE_NORM
 	var/heartbeat = 0
 	var/beat_sound = 'sound/effects/singlebeat.ogg'
 	var/tmp/next_blood_squirt = 0
-	damage_reduction = 0.7
-	relative_size = 5
-	max_damage = 45
 	var/open
 	var/list/external_pump
 
@@ -22,7 +23,7 @@
 		icon_state = dead_icon
 	..()
 
-/obj/item/organ/internal/heart/robotize(var/company = /decl/prosthetics_manufacturer, var/skip_prosthetics, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/internal/heart/robotize_organ(var/company = /decl/prosthetics_manufacturer, var/keep_organs, var/apply_material = /decl/material/solid/metal/steel)
 	. = ..()
 	icon_state = "heart-prosthetic"
 

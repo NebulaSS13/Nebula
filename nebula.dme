@@ -3086,6 +3086,7 @@
 #include "code\modules\species\species_helpers.dm"
 #include "code\modules\species\species_hud.dm"
 #include "code\modules\species\species_random.dm"
+#include "code\modules\species\species_set.dm"
 #include "code\modules\species\species_shapeshifter.dm"
 #include "code\modules\species\species_shapeshifter_bodytypes.dm"
 #include "code\modules\species\outsider\random.dm"

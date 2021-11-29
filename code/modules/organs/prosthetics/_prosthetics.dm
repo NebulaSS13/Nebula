@@ -71,7 +71,7 @@
 		if(length(E.children))
 			. -= E.children
 
-// Called in robotize(), replace_organ() and remove_organ() to update our modular limb verbs.
+// Called in robotize_organ(), replace_organ() and remove_organ() to update our modular limb verbs.
 /mob/living/carbon/human/proc/refresh_modular_limb_verbs()
 	if(length(get_modular_limbs(return_first_found = TRUE, validate_proc = /obj/item/organ/external/proc/can_attach_modular_limb_here)))
 		verbs |= .proc/attach_limb_verb

@@ -17,7 +17,7 @@
 	if(istype(limb))
 		max_damage = limb.max_damage
 		if(BP_IS_PROSTHETIC(limb) && (!parent || BP_IS_PROSTHETIC(parent)))
-			robotize() //if both limb and the parent are robotic, the stump is robotic too
+			robotize_organ() //if both limb and the parent are robotic, the stump is robotic too
 		if(BP_IS_CRYSTAL(limb) && (!parent || BP_IS_CRYSTAL(parent)))
 			status |= ORGAN_CRYSTAL // Likewise with crystalline limbs.
 

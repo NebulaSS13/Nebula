@@ -248,12 +248,14 @@
 /mob/living/carbon/human/handle_external_organ_replaced(var/obj/item/organ/external/organ, var/mob/user)	
 	. = ..()
 	if(.)
+		full_prosthetic = null // Will be rechecked next isSynthetic() call.
 		refresh_modular_limb_verbs()
 		organ.sync_colour_to_human(src)
 
 /mob/living/carbon/human/handle_external_organ_removed(var/obj/item/organ/external/organ, var/mob/user)
 	. = ..()
 	if(.)
+		full_prosthetic = null // Will be rechecked next isSynthetic() call.
 		LAZYREMOVE(bad_external_organs, organ)
 		refresh_modular_limb_verbs()
 		if(shoes && ((organ.body_part & SLOT_FOOT_LEFT) || (organ.body_part & SLOT_FOOT_RIGHT)))

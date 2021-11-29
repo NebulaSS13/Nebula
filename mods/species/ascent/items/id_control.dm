@@ -51,7 +51,7 @@
 	if(ispath(id_card))
 		id_card = new id_card(src)
 	. = ..()
-	robotize()
+	robotize_organ()
 	if(owner)
 		owner.set_id_info(id_card)
 

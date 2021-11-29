@@ -423,36 +423,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 /decl/species/proc/get_manual_dexterity(var/mob/living/carbon/human/H)
 	. = manual_dexterity
 
-/decl/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
-
-	H.mob_size = mob_size
-
-	// TODO: only qdel limbs that are in the wrong location
-	// or are not present in the mob bodyplan; currently
-	// set_species and rejuvenate just trash the entire organ
-	// list, which is really horrible.
-
-	QDEL_NULL_LIST(H.external_organs)
-	QDEL_NULL_LIST(H.internal_organs)
-
-	for(var/limb_type in has_limbs)
-		var/list/organ_data = has_limbs[limb_type]
-		var/limb_path = organ_data["path"]
-		new limb_path(H)
-
-	for(var/organ_tag in has_organ)
-		var/organ_type = has_organ[organ_tag]
-		var/obj/item/organ/O = new organ_type(H)
-		if(organ_tag != O.organ_tag)
-			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
-			O.organ_tag = organ_tag
-
-	for(var/obj/item/organ/O in H.get_organs())
-		O.owner = H
-		post_organ_rejuvenate(O, H)
-
-	H.sync_organ_dna()
-
 /decl/species/proc/add_base_auras(var/mob/living/carbon/human/H)
 	if(base_auras)
 		for(var/type in base_auras)
@@ -478,19 +448,6 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	if(inherent_verbs)
 		for(var/verb_path in inherent_verbs)
 			H.verbs |= verb_path
-	return
-
-/decl/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
-	add_inherent_verbs(H)
-	add_base_auras(H)
-	H.mob_bump_flag = bump_flag
-	H.mob_swap_flags = swap_flags
-	H.mob_push_flags = push_flags
-	H.pass_flags = pass_flags
-	handle_limbs_setup(H)
-
-/decl/species/proc/handle_pre_spawn(var/mob/living/carbon/human/H)
-	return
 
 /decl/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events.
 	return
@@ -644,7 +601,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 //Mostly for toasters
 /decl/species/proc/handle_limbs_setup(var/mob/living/carbon/human/H)
 	for(var/thing in H.get_external_organs())
-		post_organ_rejuvenate(thing, H)
+		apply_species_to_organ(thing, H)
 
 // Impliments different trails for species depending on if they're wearing shoes.
 /decl/species/proc/get_move_trail(var/mob/living/carbon/human/H)
@@ -789,7 +746,7 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 		if(31 to 45)	. = 4
 		else			. = 8
 
-/decl/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
+/decl/species/proc/apply_species_to_organ(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	if(org && (org.species ? org.species.is_crystalline : is_crystalline))
 		org.status |= (ORGAN_BRITTLE|ORGAN_CRYSTAL)
 

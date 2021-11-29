@@ -4,7 +4,7 @@
 /mob/living/carbon/human/get_movement_delay(var/travel_dir)
 	var/tally = ..()
 
-	var/obj/item/organ/external/H = get_organ(BP_GROIN) // gets species slowdown, which can be reset by robotize()
+	var/obj/item/organ/external/H = get_organ(BP_GROIN) // gets species slowdown, which can be reset by set_species() or robotize_organ()
 	if(istype(H))
 		tally += H.slowdown
 

@@ -63,7 +63,7 @@
 				var/limb_path = organ_data["path"]
 				E = new limb_path(holder)
 		if(istype(E))
-			E.robotize(model)
+			E.robotize_organ(model)
 
 /decl/aspect/prosthetic_limb/left_hand
 	bodypart_name = "Left Hand"

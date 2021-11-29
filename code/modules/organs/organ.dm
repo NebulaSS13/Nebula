@@ -68,7 +68,7 @@
 	if (given_dna)
 		set_dna(given_dna)
 	if (!species)
-		species = get_species_by_key(global.using_map.default_species)
+		set_species(get_species_by_key(global.using_map.default_species))
 
 	// Adjust limb health proportinate to total species health.
 	var/total_health_coefficient = scale_max_damage_to_species_health ? (species.total_health / DEFAULT_SPECIES_HEALTH) : 1
@@ -94,10 +94,17 @@
 			blood_DNA = list()
 		blood_DNA.Cut()
 		blood_DNA[dna.unique_enzymes] = dna.b_type
-		species = get_species_by_key(dna.species)
+		set_species(get_species_by_key(dna.species))
 		bodytype = owner?.bodytype || species.default_bodytype
 		if (!species)
 			PRINT_STACK_TRACE("Invalid DNA species. Expected a valid species name as string, was: [log_info_line(dna.species)]")
+
+/obj/item/organ/proc/set_species(var/decl/species/new_species)
+	species = new_species
+	if(species)
+		species.apply_species_to_organ(src, owner)
+		if(dna)
+			dna.species = species.type
 
 /obj/item/organ/proc/die()
 	damage = max_damage
@@ -245,7 +252,7 @@
 			if(aspect.applies_to_organ(organ_tag))
 				aspect.apply(owner)
 	if(species)
-		species.post_organ_rejuvenate(src, owner)
+		species.apply_species_to_organ(src, owner)
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()
@@ -273,7 +280,7 @@
 	if (can_recover())
 		damage = between(0, damage - round(amount, 0.1), max_damage)
 
-/obj/item/organ/proc/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
+/obj/item/organ/proc/robotize_organ(var/company, var/keep_organs = 0, var/apply_material = /decl/material/solid/metal/steel)
 	status = ORGAN_PROSTHETIC
 	reagents?.clear_reagents()
 	material = GET_DECL(apply_material)
