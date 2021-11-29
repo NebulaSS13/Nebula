@@ -148,18 +148,19 @@
 	playsound(src, 'sound/effects/tape.ogg',25)
 
 	layer = ABOVE_WINDOW_LAYER
-	
+
 	if(params)
 		var/list/mouse_control = params2list(params)
 		if(mouse_control["icon-x"])
-			pixel_x = text2num(mouse_control["icon-x"]) - 16
+			default_pixel_x = text2num(mouse_control["icon-x"]) - 16
 			if(dir_offset & EAST)
-				pixel_x += 32
+				default_pixel_x += 32
 			else if(dir_offset & WEST)
-				pixel_x -= 32
+				default_pixel_x -= 32
 		if(mouse_control["icon-y"])
-			pixel_y = text2num(mouse_control["icon-y"]) - 16
+			default_pixel_y = text2num(mouse_control["icon-y"]) - 16
 			if(dir_offset & NORTH)
-				pixel_y += 32
+				default_pixel_y += 32
 			else if(dir_offset & SOUTH)
-				pixel_y -= 32
+				default_pixel_y -= 32
+		reset_offsets(0)

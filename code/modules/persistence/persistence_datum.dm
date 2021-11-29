@@ -18,7 +18,7 @@
 
 /decl/persistence_handler/proc/SetFilename()
 	if(name)
-		filename = "data/persistent/[lowertext(global.using_map.name)]-[lowertext(name)].json"
+		filename = "data/persistent/[ckey(global.using_map.name)]-[ckey(name)].json"
 	if(!isnull(entries_decay_at) && !isnull(entries_expire_at))
 		entries_decay_at = FLOOR(entries_expire_at * entries_decay_at)
 

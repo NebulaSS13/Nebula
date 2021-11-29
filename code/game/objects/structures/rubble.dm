@@ -19,7 +19,7 @@
 
 /obj/structure/rubble/Initialize()
 	. = ..()
-	if(prob(emptyprob)) 
+	if(prob(emptyprob))
 		lootleft = 0
 	update_icon()
 
@@ -63,7 +63,7 @@
 		is_rummaging = 0
 	else
 		to_chat(user, "<span class='warning'>Someone is already rummaging here!</span>")
-		
+
 /obj/structure/rubble/attackby(var/obj/item/I, var/mob/user)
 	if (istype(I, /obj/item/pickaxe))
 		var/obj/item/pickaxe/P = I
@@ -81,7 +81,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	qdel(src)
 	. = TRUE
-	
+
 /obj/structure/rubble/physically_destroyed(var/skip_qdel)
 	SHOULD_CALL_PARENT(FALSE)
 	visible_message(SPAN_NOTICE("\The [src] is cleared away."))

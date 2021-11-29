@@ -277,7 +277,7 @@
 	var/generate_power_usage = 5000	//how much power it takes to start up the shield
 
 /obj/machinery/shieldwall/Initialize(mapload, obj/machinery/shieldwallgen/A, obj/machinery/shieldwallgen/B)
-	. = ..()
+	. = ..(mapload)
 	update_nearby_tiles()
 	gen_primary = A
 	gen_secondary = B

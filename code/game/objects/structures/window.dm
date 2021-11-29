@@ -41,7 +41,7 @@
 	name = "[reinf_material ? "reinforced " : ""][material.solid_name] window"
 	desc = "A window pane made from [material.solid_name]."
 
-/obj/structure/window/Initialize(var/ml, var/dir_to_set, var/anchored, var/_mat, var/_reinf_mat)
+/obj/structure/window/Initialize(var/ml, var/_mat, var/_reinf_mat, var/dir_to_set, var/anchored)
 	. = ..(ml, _mat, _reinf_mat)
 	if(!istype(material))
 		. = INITIALIZE_HINT_QDEL
@@ -340,7 +340,7 @@
 			continue
 		S.update_connections()
 		S.update_icon()
-	
+
 /obj/structure/window/Move()
 	var/ini_dir = dir
 	update_nearby_tiles(need_rebuild=1)
@@ -358,7 +358,7 @@
 	. = ..(user)
 	if(reinf_material)
 		to_chat(user, SPAN_NOTICE("It is reinforced with the [reinf_material.solid_name] lattice."))
-	
+
 	if (reinf_material)
 		switch (construction_state)
 			if (0)
@@ -375,7 +375,7 @@
 
 	if (paint_color)
 		to_chat(user, SPAN_NOTICE("The glass is stained with paint."))
-	
+
 	if (polarized)
 		to_chat(user, SPAN_NOTICE("It appears to be wired."))
 
@@ -637,7 +637,7 @@
 				return
 
 		if (ST.use(required_amount))
-			var/obj/structure/window/WD = new(loc, dir_to_set, FALSE, ST.material.type, ST.reinf_material && ST.reinf_material.type)
+			var/obj/structure/window/WD = new(loc, ST.material.type, ST.reinf_material?.type, dir_to_set, FALSE)
 			to_chat(user, SPAN_NOTICE("You place [WD]."))
 			WD.construction_state = 0
 			WD.set_anchored(FALSE)

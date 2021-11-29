@@ -1,7 +1,7 @@
 /datum/codex_entry/girder
 	associated_paths = list(/obj/structure/girder)
-	mechanics_text = "Use metal sheets on this to build a normal wall.  Adding plasteel instead will make a reinforced wall.<br>\
-	A false wall can be made by using a crowbar on this girder, and then adding metal or plasteel.<br>\
+	mechanics_text = "Use material sheets on this while anchored to build a wall. Adding sheets while unanchored will reinforce it.<br>\
+	A false wall can be made by using a screwdriver on this girder, and then adding material sheets.<br>\
 	You can dismantle the grider with a wrench."
 
 /datum/codex_entry/grille

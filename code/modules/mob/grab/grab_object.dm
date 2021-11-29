@@ -286,7 +286,7 @@
 
 /obj/item/grab/proc/grab_slowdown()
 	. = CEILING(affecting?.get_object_size() * current_grab.grab_slowdown)
-	. /= (affecting?.atom_flags & ATOM_FLAG_WHEELED) ? 2 : 1
+	. /= (affecting?.movable_flags & MOVABLE_FLAG_WHEELED) ? 2 : 1
 	. = max(.,1)
 
 /obj/item/grab/proc/assailant_moved()

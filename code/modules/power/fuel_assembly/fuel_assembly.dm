@@ -14,7 +14,7 @@
 	. = ..(mapload, _material)
 	LAZYINITLIST(matter)
 	
-	if(makeup)
+	if(LAZYLEN(makeup))
 		if(length(makeup) == 1) // Rod is only made from one material.
 			var/decl/material/mat = GET_DECL(makeup[1])
 			SetName("[mat.use_name] fuel rod assembly")

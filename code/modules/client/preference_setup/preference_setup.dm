@@ -1,19 +1,19 @@
 var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 
+/datum/category_group/player_setup_category/background_preferences
+	name = "Background"
+	sort_order = 1 // must go first because species
+	category_item_type = /datum/category_item/player_setup_item/background
+
 /datum/category_group/player_setup_category/physical_preferences
 	name = "Physical"
-	sort_order = 1
+	sort_order = 2
 	category_item_type = /datum/category_item/player_setup_item/physical
 
 /datum/category_group/player_setup_category/aspect_preferences
 	name = "Aspects"
-	sort_order = 2
-	category_item_type = /datum/category_item/player_setup_item/aspects
-
-/datum/category_group/player_setup_category/background_preferences
-	name = "Background"
 	sort_order = 3
-	category_item_type = /datum/category_item/player_setup_item/background
+	category_item_type = /datum/category_item/player_setup_item/aspects
 
 /datum/category_group/player_setup_category/background_preferences/content(var/mob/user)
 	. = ""
