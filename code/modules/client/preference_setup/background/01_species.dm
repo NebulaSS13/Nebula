@@ -25,7 +25,7 @@
 
 	pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)
 
-	if(!has_flag(get_species_by_key(pref.species), HAS_UNDERWEAR))
+	if(pref.all_underwear && !has_flag(get_species_by_key(pref.species), HAS_UNDERWEAR))
 		pref.all_underwear.Cut()
 
 /datum/category_item/player_setup_item/background/species/proc/has_flag(var/decl/species/mob_species, var/flag)

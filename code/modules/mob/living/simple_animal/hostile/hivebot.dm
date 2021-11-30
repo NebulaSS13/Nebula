@@ -15,7 +15,7 @@
 	natural_armor = list(
 		melee = ARMOR_MELEE_KNIVES
 		)
-	bleed_colour = SYNTH_BLOOD_COLOUR
+	bleed_colour = SYNTH_BLOOD_COLOR
 	gene_damage = -1
 
 	meat_type =     null

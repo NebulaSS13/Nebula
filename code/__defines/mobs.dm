@@ -213,7 +213,7 @@
 // Limb flag helpers
 #define BP_IS_DEFORMED(org) (org.limb_flags & ORGAN_FLAG_DEFORMED)
 
-#define SYNTH_BLOOD_COLOUR "#030303"
+#define SYNTH_BLOOD_COLOR "#030303"
 #define SYNTH_FLESH_COLOUR "#575757"
 
 #define MOB_PULL_NONE 0

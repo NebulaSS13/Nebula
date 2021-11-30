@@ -133,7 +133,7 @@
 	return "#c80000"
 
 /mob/living/carbon/human/get_rune_color()
-	return species.get_blood_colour(src)
+	return species.get_blood_color(src)
 
 var/global/list/Tier1Runes = list(
 	/mob/proc/convert_rune,

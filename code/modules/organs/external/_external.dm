@@ -913,7 +913,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/obj/item/organ/external/original_parent = parent
 
 	var/use_flesh_colour = species.get_flesh_colour(owner)
-	var/use_blood_colour = species.get_blood_colour(owner)
+	var/use_blood_color = species.get_blood_color(owner)
 
 	add_pain(60)
 	if(!clean)
@@ -979,7 +979,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(species)
 					var/obj/effect/decal/cleanable/blood/gibs/G = gore
 					G.fleshcolor = use_flesh_colour
-					G.basecolor =  use_blood_colour
+					G.basecolor =  use_blood_color
 					G.update_icon()
 
 			gore.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)

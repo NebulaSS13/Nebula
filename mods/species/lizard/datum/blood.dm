@@ -6,14 +6,17 @@
 /decl/blood_type/reptile/splus
 	name = "S+"
 	antigens = list("S", "Li")
+	random_weighting = 28
 
 /decl/blood_type/reptile/sminus
 	name = "S-"
 	antigens = list("S")
+	random_weighting = 3
 
 /decl/blood_type/reptile/xplus
 	name = "X+"
 	antigens = list("X", "Li")
+	random_weighting = 20
 
 /decl/blood_type/reptile/xminus
 	name = "X-"
@@ -22,6 +25,7 @@
 /decl/blood_type/reptile/sxplus
 	name = "SX+"
 	antigens = list("S", "X", "Li")
+	random_weighting = 5
 
 /decl/blood_type/reptile/sxminus
 	name = "SX-"
@@ -30,9 +34,11 @@
 /decl/blood_type/reptile/oplus
 	name = "Or+"
 	antigens = list("Li")
+	random_weighting = 36
 
 /decl/blood_type/reptile/ominus
 	name = "Or-"
+	random_weighting = 4
 
 /obj/item/chems/ivbag/blood/reptile_splus
 	blood_type = "S+"

@@ -1063,6 +1063,7 @@
 	// No more invisible screaming wheelchairs because of set_species() typos.
 	if(!get_species_by_key(new_species))
 		new_species = global.using_map.default_species
+
 	if(dna)
 		dna.species = new_species
 
@@ -1124,6 +1125,11 @@
 	bone_amount =   species.bone_amount
 
 	refresh_visible_overlays()
+
+	if(!(b_type in species.blood_types))
+		b_type = pickweight(species.blood_types)
+		if(dna)
+			dna.b_type = b_type
 	reset_blood()
 
 	// Rebuild the HUD and visual elements.
