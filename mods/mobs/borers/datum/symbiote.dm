@@ -120,10 +120,10 @@ var/global/list/symbiote_starting_points = list()
 /datum/job/symbiote/is_position_available()
 	. = ..() && length(find_valid_hosts(TRUE)) 
 
-/obj/effect/landmark/symbiote_start
+/obj/abstract/landmark/symbiote_start
 	name = "Symbiote Start"
 	delete_me = TRUE
 
-/obj/effect/landmark/symbiote_start/Initialize()
+/obj/abstract/landmark/symbiote_start/Initialize()
 	global.symbiote_starting_points |= get_turf(src)
 	. = ..()

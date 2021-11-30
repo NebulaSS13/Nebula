@@ -27,7 +27,7 @@ var/global/list/z_levels = list() // Each Z-level is associated with the relevan
 
 	// Check stack for any laterally connected neighbors.
 	for(var/tz in .)
-		var/obj/level_data/level = global.levels_by_z["[tz]"]
+		var/obj/abstract/level_data/level = global.levels_by_z["[tz]"]
 		if(level)
 			level.find_connected_levels(.)
 

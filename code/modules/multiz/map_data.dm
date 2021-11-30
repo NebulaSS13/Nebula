@@ -1,4 +1,4 @@
-/obj/effect/landmark/map_data
+/obj/abstract/landmark/map_data
 	name = "Map Data"
 	desc = "An unknown location."
 	invisibility = 101
@@ -10,7 +10,7 @@
 
 // If the height is more than 1, we mark all contained levels as connected.
 // This is in New because it is an auxiliary effect specifically needed pre-init.
-/obj/effect/landmark/map_data/New(turf/loc, _height)
+/obj/abstract/landmark/map_data/New(turf/loc, _height)
 	..()
 	if(!istype(loc)) // Using loc.z is safer when using the maploader and New.
 		return
@@ -24,7 +24,7 @@
 	if (length(SSzcopy.zlev_maximums))
 		SSzcopy.calculate_zstack_limits()
 
-/obj/effect/landmark/map_data/Destroy(forced)
+/obj/abstract/landmark/map_data/Destroy(forced)
 	if(forced)
 		new type(loc, height) // Will replace our references in z_levels
 		return ..()

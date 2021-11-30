@@ -61,7 +61,7 @@
 /obj/item/bedsheet/captain,
 /obj/item/gun/projectile/pistol/holdout,
 /obj/structure/bed/padded,
-/obj/effect/landmark/latejoin/cryo_captain,
+/obj/abstract/landmark/latejoin/cryo_captain,
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 24
@@ -976,7 +976,7 @@
 /obj/structure/bed/chair/comfy/teal{
 	dir = 1
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Captain"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1211,7 +1211,7 @@
 	icon_state = "twindow"
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Deck Hand"
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -1234,7 +1234,7 @@
 /area/ship/trade/crew/saloon)
 "dm" = (
 /obj/item/stool/padded,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Junior Researcher"
 	},
 /turf/simulated/floor/tiled,
@@ -1473,7 +1473,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Junior Doctor"
 	},
 /obj/structure/cable{
@@ -1748,7 +1748,7 @@
 /obj/item/stool/padded,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Cook"
 	},
 /turf/simulated/floor/tiled,
@@ -2277,7 +2277,7 @@
 /area/ship/trade/crew/wash)
 "fV" = (
 /obj/structure/bed/chair/office/light,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Head Doctor"
 	},
 /turf/simulated/floor/tiled/white,
@@ -3063,7 +3063,7 @@
 /area/ship/trade/maintenance/engineering)
 "hW" = (
 /obj/structure/bed/chair/comfy/brown,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Head Engineer"
 	},
 /obj/effect/floor_decal/corner/yellow{
@@ -3229,7 +3229,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 9
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Junior Engineer"
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
@@ -5017,7 +5017,7 @@
 /obj/structure/table,
 /obj/random/smokes,
 /obj/item/ashtray/glass,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Observer-Start"
 	},
 /obj/structure/cable{
@@ -5113,7 +5113,7 @@
 /turf/simulated/floor/tiled,
 /area/ship/trade/crew/saloon)
 "xh" = (
-/obj/level_data/main_level,
+/obj/abstract/level_data/main_level,
 /turf/space,
 /area/space)
 "xn" = (
@@ -5290,7 +5290,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/landmark/paperwork_finish_tradeship,
+/obj/abstract/landmark/paperwork_finish_tradeship,
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
 "As" = (
@@ -5447,7 +5447,7 @@
 	},
 /obj/item/radio,
 /obj/random/drinkbottle,
-/obj/effect/landmark/paperwork_spawn_tradeship,
+/obj/abstract/landmark/paperwork_spawn_tradeship,
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
 "CP" = (
@@ -5670,7 +5670,7 @@
 /obj/random_multi/single_item/captains_spare_id,
 /obj/item/documents/tradehouse/account,
 /obj/item/documents/tradehouse/personnel,
-/obj/effect/landmark/paperwork_spawn_tradeship,
+/obj/abstract/landmark/paperwork_spawn_tradeship,
 /turf/simulated/floor/tiled/dark,
 /area/ship/trade/command/bridge)
 "FT" = (
@@ -5931,7 +5931,7 @@
 /area/ship/trade/command/hallway)
 "Jk" = (
 /obj/structure/bed/chair/office/dark,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "First Mate"
 	},
 /turf/simulated/floor/wood,
@@ -6219,7 +6219,7 @@
 	dir = 4;
 	level = 2
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Junior Doctor"
 	},
 /turf/simulated/floor/tiled,
@@ -6591,7 +6591,7 @@
 /area/ship/trade/command/captain)
 "Rv" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Cargo Technician"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -7063,7 +7063,7 @@
 	dir = 1
 	},
 /obj/structure/bed/padded,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Head Engineer"
 	},
 /turf/simulated/floor/tiled/techfloor,

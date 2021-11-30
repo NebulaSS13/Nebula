@@ -945,7 +945,7 @@
 /area/space)
 "db" = (
 /obj/effect/decal/cleanable/blood,
-/obj/effect/landmark/corpse/doctor,
+/obj/abstract/landmark/corpse/doctor,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "eb" = (

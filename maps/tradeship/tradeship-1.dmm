@@ -211,7 +211,7 @@
 /obj/machinery/computer/cryopod{
 	pixel_y = -32
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
@@ -228,7 +228,7 @@
 /obj/effect/floor_decal/industrial/loading{
 	dir = 1
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
@@ -276,7 +276,7 @@
 /obj/structure/cable{
 	icon_state = "2-4"
 	},
-/obj/effect/landmark/latejoin/cryo_two,
+/obj/abstract/landmark/latejoin/cryo_two,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/escape_star)
 "aM" = (
@@ -292,7 +292,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/effect/landmark/latejoin/cryo_two,
+/obj/abstract/landmark/latejoin/cryo_two,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/escape_star)
 "aO" = (
@@ -700,7 +700,7 @@
 /obj/structure/curtain/open/bed,
 /obj/structure/bed/padded,
 /obj/item/bedsheet/brown,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Head Doctor"
 	},
 /turf/simulated/floor/lino,
@@ -771,7 +771,7 @@
 	dir = 1;
 	pixel_y = -30
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
@@ -874,7 +874,7 @@
 	dir = 5
 	},
 /obj/item/bedsheet/ce,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Cook"
 	},
 /turf/simulated/floor/lino,
@@ -1019,7 +1019,7 @@
 	},
 /obj/item/bedsheet/red,
 /obj/random_multi/single_item/captains_spare_id,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Head Engineer"
 	},
 /turf/simulated/floor/lino,
@@ -1206,7 +1206,7 @@
 	dir = 5
 	},
 /obj/item/stool/padded,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Junior Researcher"
 	},
 /turf/simulated/floor/tiled/white,
@@ -1821,7 +1821,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/eva)
 "eV" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Robot"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2043,7 +2043,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
 "iS" = (
-/obj/level_data/main_level,
+/obj/abstract/level_data/main_level,
 /turf/space,
 /area/space)
 "iW" = (
@@ -2061,7 +2061,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
@@ -2185,7 +2185,7 @@
 /area/ship/trade/cargo/lower)
 "my" = (
 /obj/machinery/cryopod/robot,
-/obj/effect/landmark/latejoin/cyborg,
+/obj/abstract/landmark/latejoin/cyborg,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
 "mN" = (
@@ -2209,7 +2209,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/effect/landmark/latejoin/cryo_two,
+/obj/abstract/landmark/latejoin/cryo_two,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/escape_star)
 "nf" = (
@@ -2273,7 +2273,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Junior Engineer"
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2306,7 +2306,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/effect/landmark/latejoin/cryo_two,
+/obj/abstract/landmark/latejoin/cryo_two,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/trade/escape_star)
 "ql" = (
@@ -2414,7 +2414,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Head Researcher"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -3066,7 +3066,7 @@
 	},
 /obj/item/bedsheet/red,
 /obj/random_multi/single_item/captains_spare_id,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Head Engineer"
 	},
 /obj/item/stack/material/ingot/mapped/osmium/ten,
@@ -3357,7 +3357,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/ship/trade/cargo/lower)
 "Zs" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Junior Researcher"
 	},
 /turf/simulated/floor/tiled/white,

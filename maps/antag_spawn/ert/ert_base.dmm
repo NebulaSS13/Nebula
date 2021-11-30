@@ -825,7 +825,7 @@
 	},
 /area/map_template/rescue_base/base)
 "bV" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Response Team"
 	},
 /turf/unsimulated/floor{

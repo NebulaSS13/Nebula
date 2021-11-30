@@ -57,7 +57,7 @@
 
 		var/obj/L = null
 
-		for(var/obj/effect/landmark/sloc in global.landmarks_list)
+		for(var/obj/abstract/landmark/sloc in global.landmarks_list)
 			if(sloc.name != C.data || (locate(/mob/living) in sloc.loc))
 				continue
 			L = sloc
@@ -66,7 +66,7 @@
 		if(!L)
 			L = locate("landmark*[C.data]") // use old stype
 
-		if(istype(L, /obj/effect/landmark) && isturf(L.loc) && user.unEquip(I))
+		if(istype(L, /obj/abstract/landmark) && isturf(L.loc) && user.unEquip(I))
 			to_chat(usr, "You insert the coordinates into the machine.")
 			to_chat(usr, "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the [station_name()] at all times.")
 			qdel(I)

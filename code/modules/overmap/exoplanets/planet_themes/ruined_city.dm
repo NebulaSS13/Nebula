@@ -142,7 +142,7 @@
 	if((T.broken && prob(80)) || prob(10))
 		new/obj/structure/rubble/house(T)
 	if(prob(1))
-		new/obj/effect/landmark/exoplanet_spawn(T)
+		new/obj/abstract/landmark/exoplanet_spawn(T)
 
 //Artifact containment lab
 /turf/simulated/wall/containment

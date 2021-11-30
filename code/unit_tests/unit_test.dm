@@ -102,7 +102,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	var/cleanup_failed = FALSE
 
 	if(!async && check_cleanup) // Async tests run at the same time, so cleaning up after any one completes risks breaking other tests
-		var/ignored_types = list(/atom/movable/lighting_overlay, /obj/effect/landmark/test)
+		var/ignored_types = list(/atom/movable/lighting_overlay, /obj/abstract/landmark/test)
 		var/z_levels = list()
 		var/turf/safe = get_safe_turf()
 		var/turf/space = get_space_turf()
@@ -126,7 +126,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	check_cleanup = TRUE
 	if(!safe_landmark)
 		for(var/landmark in global.landmarks_list)
-			if(istype(landmark, /obj/effect/landmark/test/safe_turf))
+			if(istype(landmark, /obj/abstract/landmark/test/safe_turf))
 				safe_landmark = landmark
 				break
 	return get_turf(safe_landmark)
@@ -135,7 +135,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	check_cleanup = TRUE
 	if(!space_landmark)
 		for(var/landmark in global.landmarks_list)
-			if(istype(landmark, /obj/effect/landmark/test/space_turf))
+			if(istype(landmark, /obj/abstract/landmark/test/space_turf))
 				space_landmark = landmark
 				break
 	return get_turf(space_landmark)
@@ -217,10 +217,10 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	test.teardown_test()
 	unit_test_final_message()
 
-/obj/effect/landmark/test/safe_turf
+/obj/abstract/landmark/test/safe_turf
 	name = "safe_turf" // At creation, landmark tags are set to: "landmark*[name]"
 	desc = "A safe turf should be an as large block as possible of livable, passable turfs, preferably at least 3x3 with the marked turf as the center"
 
-/obj/effect/landmark/test/space_turf
+/obj/abstract/landmark/test/space_turf
 	name = "space_turf"
 	desc = "A space turf should be an as large block as possible of space, preferably at least 3x3 with the marked turf as the center"

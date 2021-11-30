@@ -1613,7 +1613,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Nuclear-Bomb"
 	},
 /obj/structure/railing/mapped{
@@ -1663,7 +1663,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "eb" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Syndicate-Spawn"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1832,7 +1832,7 @@
 /obj/item/gun/projectile/revolver,
 /obj/item/ammo_magazine/speedloader,
 /obj/item/ammo_magazine/speedloader,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -1850,7 +1850,7 @@
 /obj/item/ammo_magazine/pistol,
 /obj/item/ammo_magazine/pistol,
 /obj/item/ammo_magazine/pistol,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -1899,7 +1899,7 @@
 "jP" = (
 /obj/machinery/acting/changer,
 /obj/machinery/light/spot,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -1914,7 +1914,7 @@
 /obj/structure/rack,
 /obj/item/gun/energy/gun,
 /obj/item/gun/energy/gun,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -1929,7 +1929,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "ks" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Syndicate-Spawn"
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -1970,7 +1970,7 @@
 /obj/structure/rack,
 /obj/item/gun/energy/gun/small,
 /obj/item/gun/energy/gun/small,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -2090,7 +2090,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "qa" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Syndicate-Uplink"
 	},
 /obj/effect/overmap/visitable/merc_base{
@@ -2174,7 +2174,7 @@
 /area/map_template/merc_spawn)
 "uV" = (
 /obj/structure/table,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Nuclear-Code"
 	},
 /turf/simulated/floor/tiled,
@@ -2414,7 +2414,7 @@
 "IB" = (
 /obj/structure/rack,
 /obj/item/gun/energy/ionrifle,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -2521,7 +2521,7 @@
 /obj/item/assembly/signaler{
 	pixel_y = 2
 	},
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /turf/simulated/floor/plating,
@@ -2652,7 +2652,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "RT" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Syndicate-Spawn"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -2690,7 +2690,7 @@
 /area/map_template/merc_spawn)
 "Ua" = (
 /obj/machinery/mech_recharger,
-/obj/effect/landmark/delete_on_shuttle{
+/obj/abstract/landmark/delete_on_shuttle{
 	shuttle_name = "Desperado"
 	},
 /mob/living/exosuit/premade/heavy/merc,
@@ -2715,7 +2715,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "UT" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Syndicate-Spawn"
 	},
 /obj/effect/floor_decal/industrial/warning/corner{

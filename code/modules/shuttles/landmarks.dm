@@ -1,6 +1,6 @@
 var/global/list/shuttle_landmarks = list()
 
-//making this separate from /obj/effect/landmark until that mess can be dealt with
+//making this separate from /obj/abstract/landmark until that mess can be dealt with
 /obj/effect/shuttle_landmark
 	name = "Nav Point"
 	icon = 'icons/effects/effects.dmi'
