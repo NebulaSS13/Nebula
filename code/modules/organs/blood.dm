@@ -48,7 +48,7 @@
 		"donor" =        weakref(src),
 		"species" =      species.name,
 		"blood_DNA" =    dna?.unique_enzymes,
-		"blood_colour" = species.get_blood_colour(src),
+		"blood_color" = species.get_blood_color(src),
 		"blood_type" =   dna?.b_type,
 		"trace_chem" = null
 	))
@@ -201,7 +201,7 @@
 		temp_chem[R] = REAGENT_VOLUME(reagents, R)
 	data["trace_chem"] = temp_chem
 	data["dose_chem"] = chem_doses ? chem_doses.Copy() : list()
-	data["blood_colour"] = species.get_blood_colour(src)
+	data["blood_color"] = species.get_blood_color(src)
 	return data
 
 /proc/blood_splatter(var/target, var/source, var/large, var/spray_dir)
@@ -269,8 +269,8 @@
 		splatter.desc =      blood_type_decl.splatter_desc
 		splatter.basecolor = blood_type_decl.splatter_colour
 
-	if(LAZYACCESS(blood_data, "blood_colour"))
-		splatter.basecolor = blood_data["blood_colour"]
+	if(LAZYACCESS(blood_data, "blood_color"))
+		splatter.basecolor = blood_data["blood_color"]
 
 	splatter.update_icon()
 	splatter.fluorescent  = 0

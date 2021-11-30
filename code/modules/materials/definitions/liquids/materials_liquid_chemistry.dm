@@ -19,6 +19,6 @@
 	uid = "liquid_lubricant"
 	lore_text = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
 	taste_description = "slime"
-	color = SYNTH_BLOOD_COLOUR
+	color = SYNTH_BLOOD_COLOR
 	value = 0.1
 	slipperiness = 80

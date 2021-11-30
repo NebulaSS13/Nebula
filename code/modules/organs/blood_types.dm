@@ -26,6 +26,7 @@ var/global/list/blood_types_by_name
 	var/splatter_desc =   "It's some blood. That's not supposed to be there."
 	var/splatter_colour = COLOR_BLOOD_HUMAN
 
+var/global/list/antigen_comparison_cache = list()
 /decl/blood_type/proc/can_take_donation_from(var/decl/blood_type/other_blood_type)
 
 	// Invalid object type, probably did a stack trace already, return early.
@@ -36,19 +37,25 @@ var/global/list/blood_types_by_name
 	if(other_blood_type.antigen_category != antigen_category)
 		return FALSE
 
-	// Other blood type is O, universal donor.
+	// Other blood type is O-, universal donor.
 	if(!LAZYLEN(other_blood_type.antigens))
 		return TRUE
 
-	// Our blood type is O and the other blood type is not; can't take donation.
+	// Our blood type is O- and the other blood type is not; can't take donation.
 	if(!LAZYLEN(antigens))
 		return FALSE
 
 	// Check if we have all the associated antigens.
-	for(var/antigen in other_blood_type.antigens)
-		if(!(antigen in antigens))
-			return FALSE
-	return TRUE
+	// Cache the result to avoid constantly having to recompare lists that don't change.
+	LAZYINITLIST(global.antigen_comparison_cache[type])
+	. = global.antigen_comparison_cache[type][other_blood_type.type]
+	if(isnull(.))
+		. = TRUE
+		for(var/antigen in other_blood_type.antigens)
+			if(!(antigen in antigens))
+				. = FALSE
+				break
+		global.antigen_comparison_cache[type][other_blood_type.type] = .
 
 /decl/blood_type/ominus
 	name = "O-"
@@ -105,4 +112,4 @@ var/global/list/blood_types_by_name
 
 	splatter_name = "coolant"
 	splatter_desc = "A smear of machine coolant. It looks discoloured."
-	splatter_colour = SYNTH_BLOOD_COLOUR
+	splatter_colour = SYNTH_BLOOD_COLOR

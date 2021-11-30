@@ -325,7 +325,7 @@ its easier to just keep the beam vertical.
 			M.dna = new /datum/dna(null)
 			M.dna.real_name = M.real_name
 		M.check_dna()
-		blood_color = M.species.get_blood_colour(M)
+		blood_color = M.species.get_blood_color(M)
 	. = 1
 	return 1
 
