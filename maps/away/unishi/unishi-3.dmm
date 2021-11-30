@@ -1875,7 +1875,7 @@
 /turf/simulated/floor/wood,
 /area/unishi/living)
 "fe" = (
-/obj/abstract/landmark/map_data{
+/obj/abstract/map_data{
 	height = 3
 	},
 /turf/space,

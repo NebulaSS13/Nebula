@@ -57488,7 +57488,7 @@
 /turf/simulated/floor/plating,
 /area/exodus/engineering/storage)
 "cpf" = (
-/obj/abstract/landmark/map_data/exodus,
+/obj/abstract/map_data/exodus,
 /turf/space,
 /area/space)
 "cpg" = (

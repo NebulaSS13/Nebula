@@ -285,7 +285,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/maintenance/fsmaint2)
 "V" = (
-/obj/abstract/landmark/map_data{
+/obj/abstract/map_data{
 	height = 3
 	},
 /turf/space,

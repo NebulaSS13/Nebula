@@ -204,7 +204,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/nexus/civilian/hygiene)
 "lo" = (
-/obj/abstract/landmark/map_data{
+/obj/abstract/map_data{
 	height = 2
 	},
 /turf/simulated/floor/reinforced/airless,

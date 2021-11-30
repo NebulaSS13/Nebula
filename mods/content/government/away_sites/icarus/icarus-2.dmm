@@ -1781,7 +1781,7 @@
 /turf/simulated/floor/reinforced,
 /area/icarus/open)
 "gb" = (
-/obj/abstract/landmark/map_data{
+/obj/abstract/map_data{
 	height = 2
 	},
 /turf/unsimulated/mineral,
