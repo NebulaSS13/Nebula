@@ -26,6 +26,9 @@ var/global/list/blood_types_by_name
 	var/splatter_desc =   "It's some blood. That's not supposed to be there."
 	var/splatter_colour = COLOR_BLOOD_HUMAN
 
+	var/transfusion_fail_percentage = 0.5
+	var/transfusion_fail_reagent = /decl/material/liquid/coagulated_blood
+
 var/global/list/antigen_comparison_cache = list()
 /decl/blood_type/proc/can_take_donation_from(var/decl/blood_type/other_blood_type)
 
@@ -113,3 +116,5 @@ var/global/list/antigen_comparison_cache = list()
 	splatter_name = "coolant"
 	splatter_desc = "A smear of machine coolant. It looks discoloured."
 	splatter_colour = SYNTH_BLOOD_COLOR
+
+	transfusion_fail_reagent = /decl/material/liquid/acid
