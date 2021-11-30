@@ -234,19 +234,17 @@
 
 	// If there's no data to copy, call it quits here.
 	var/blood_data
+	var/blood_type
 	if(ishuman(source))
 		var/mob/living/carbon/human/donor = source
 		blood_data = REAGENT_DATA(donor.vessel, donor.species.blood_reagent)
+		blood_type = donor.b_type
 	else if(isatom(source))
 		var/atom/donor = source
 		blood_data = REAGENT_DATA(donor.reagents, /decl/material/liquid/blood)
 	if(!islist(blood_data))
 		return splatter
 
-	// Update appearance.
-	if(LAZYACCESS(blood_data, "blood_colour"))
-		splatter.basecolor = blood_data["blood_colour"]
-		splatter.update_icon()
 	if(spray_dir)
 		splatter.icon_state = "squirt"
 		splatter.set_dir(spray_dir)
@@ -261,12 +259,20 @@
 		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(splatter, /datum/extension/forensic_evidence)
 		forensics.add_data(/datum/forensics/blood_dna, blood_data["blood_DNA"])
 
-	if(LAZYACCESS(blood_data, "blood_type"))
-		var/decl/blood_type/blood_type_decl = get_blood_type_by_name(blood_data["blood_type"])
-		splatter.name =  blood_type_decl.splatter_name
-		splatter.desc =  blood_type_decl.splatter_desc
-		splatter.color = blood_type_decl.splatter_colour
+	if(!blood_type && LAZYACCESS(blood_data, "blood_type"))
+		blood_type = LAZYACCESS(blood_data, "blood_type")
 
+	// Update appearance.
+	if(blood_type)
+		var/decl/blood_type/blood_type_decl = get_blood_type_by_name(blood_type)
+		splatter.name =      blood_type_decl.splatter_name
+		splatter.desc =      blood_type_decl.splatter_desc
+		splatter.basecolor = blood_type_decl.splatter_colour
+
+	if(LAZYACCESS(blood_data, "blood_colour"))
+		splatter.basecolor = blood_data["blood_colour"]
+
+	splatter.update_icon()
 	splatter.fluorescent  = 0
 	splatter.set_invisibility(0)
 	return splatter

@@ -86,7 +86,7 @@
 /obj/item/chems/ivbag/blood/Initialize()
 	. = ..()
 	if(blood_type)
-		name = "blood pack [blood_type]"
+		name = "blood pack ([blood_type])"
 		reagents.add_reagent(/decl/material/liquid/blood, volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null))
 
 /obj/item/chems/ivbag/blood/APlus

@@ -22,6 +22,8 @@
 	breath_type = null
 	poison_types = null
 
+	blood_types = list(/decl/blood_type/coolant)
+
 	blood_color = "#515573"
 	flesh_color = "#137e8f"
 

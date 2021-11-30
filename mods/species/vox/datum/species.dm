@@ -13,6 +13,13 @@
 
 #define IS_VOX "vox"
 
+/decl/blood_type/vox
+	name = "vox ichor"
+	antigen_category = "vox"
+	splatter_name = "ichor"
+	splatter_desc = "A smear of thin, sticky alien ichor."
+	splatter_colour = "#2299fc"
+
 /decl/species/vox
 	name = SPECIES_VOX
 	name_plural = SPECIES_VOX
@@ -67,7 +74,7 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
-	blood_color = "#2299fc"
+	blood_types = list(/decl/blood_type/vox)
 	flesh_color = "#808d11"
 
 	reagent_tag = IS_VOX

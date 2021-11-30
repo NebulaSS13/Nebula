@@ -1239,7 +1239,7 @@
 				var/scale = min(1, round(P.damage / 50, 0.2))
 				B.set_scale(scale)
 
-				new /obj/effect/temp_visual/bloodsplatter(loc, hit_dir, species.blood_color)
+				new /obj/effect/temp_visual/bloodsplatter(loc, hit_dir, species.get_blood_color(src))
 
 /mob/living/carbon/human/has_dexterity(var/dex_level)
 	. = check_dexterity(dex_level, silent = TRUE)

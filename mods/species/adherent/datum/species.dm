@@ -63,7 +63,6 @@
 	spawn_flags =   SPECIES_CAN_JOIN
 
 	appearance_flags = HAS_EYE_COLOR
-	blood_color = "#2de00d"
 	flesh_color = "#90edeb"
 	slowdown = -1
 	hud_type = /datum/hud_data/adherent
