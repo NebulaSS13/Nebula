@@ -12,6 +12,6 @@
 	. = ..()
 	verbs.Cut()
 
-/obj/abstract/weather_system/explosion_act()
+/obj/abstract/explosion_act()
 	SHOULD_CALL_PARENT(FALSE)
 	return
