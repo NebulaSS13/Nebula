@@ -15,7 +15,7 @@
 /turf/simulated/floor/reinforced,
 /area/space)
 "ae" = (
-/obj/abstract/landmark/map_data{
+/obj/abstract/map_data{
 	height = 2
 	},
 /turf/simulated/floor/reinforced,

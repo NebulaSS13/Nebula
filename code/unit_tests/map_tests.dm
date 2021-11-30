@@ -819,7 +819,7 @@
 			log_bad("Invalid door turf: [log_info_line(D.loc)]]")
 		else
 			var/list/turf_exceptions
-			var/obj/abstract/landmark/map_data/MD = get_map_data(D.loc.z)
+			var/obj/abstract/map_data/MD = get_map_data(D.loc.z)
 			if(UNLINT(MD?.UT_turf_exceptions_by_door_type))
 				turf_exceptions = UNLINT(MD.UT_turf_exceptions_by_door_type[D.type])
 

@@ -168,7 +168,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "aK" = (
-/obj/abstract/landmark/map_data{
+/obj/abstract/map_data{
 	height = 4
 	},
 /turf/space,
