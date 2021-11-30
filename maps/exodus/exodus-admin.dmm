@@ -2311,7 +2311,7 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdomeadmin"
 	},
 /turf/unsimulated/floor{
@@ -2653,7 +2653,7 @@
 	dir = 1
 	},
 /obj/structure/disposalpipe/segment,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdomeadmin"
 	},
 /turf/unsimulated/floor{
@@ -2776,7 +2776,7 @@
 /area/tdome)
 "kfk" = (
 /obj/structure/bed/chair,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdomeobserve"
 	},
 /turf/unsimulated/floor{
@@ -2900,7 +2900,7 @@
 "lQy" = (
 /obj/structure/bed/chair,
 /obj/structure/disposalpipe/segment,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdomeobserve"
 	},
 /turf/unsimulated/floor{
@@ -3017,7 +3017,7 @@
 /turf/simulated/floor/tiled,
 /area/shuttle/escape_shuttle)
 "nKw" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdome2"
 	},
 /turf/unsimulated/floor{
@@ -3055,7 +3055,7 @@
 /obj/machinery/recharger{
 	pixel_y = 4
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdome2"
 	},
 /turf/unsimulated/floor{
@@ -3064,7 +3064,7 @@
 	},
 /area/tdome/tdome2)
 "oVC" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdome2"
 	},
 /obj/machinery/camera/network/television{
@@ -3102,7 +3102,7 @@
 	},
 /area/tdome/tdomeadmin)
 "pyW" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdome1"
 	},
 /obj/machinery/camera/network/television{
@@ -3204,7 +3204,7 @@
 	},
 /area/tdome/tdomeadmin)
 "sKA" = (
-/obj/level_data/admin_level,
+/obj/abstract/level_data/admin_level,
 /turf/space,
 /area/space)
 "sMD" = (
@@ -3261,7 +3261,7 @@
 /obj/machinery/recharger{
 	pixel_y = 4
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdome1"
 	},
 /turf/unsimulated/floor{
@@ -3374,7 +3374,7 @@
 	},
 /area/tdome)
 "xog" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "tdome1"
 	},
 /turf/unsimulated/floor{

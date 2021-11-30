@@ -10,8 +10,8 @@
 	name = "PROXIMITY: " + name
 
 /datum/unit_test/proximity/setup_test()
-	proximity_listener = new(get_turf(locate(/obj/effect/landmark/proximity_spawner)))
-	wall = get_turf(locate(/obj/effect/landmark/proximity_wall))
+	proximity_listener = new(get_turf(locate(/obj/abstract/landmark/proximity_spawner)))
+	wall = get_turf(locate(/obj/abstract/landmark/proximity_wall))
 
 /datum/unit_test/proximity/teardown_test()
 	QDEL_NULL(proximity_listener)
@@ -80,11 +80,11 @@
 	)
 
 /datum/unit_test/proximity/visibility/shall_see_the_number_of_expected_turfs_after_opacity_change/AfterSetTrigger()
-	var/turf/T = get_turf(locate(/obj/effect/landmark/proximity_wall))
+	var/turf/T = get_turf(locate(/obj/abstract/landmark/proximity_wall))
 	T.set_opacity(FALSE)
 
 /datum/unit_test/proximity/visibility/shall_see_the_number_of_expected_turfs_after_opacity_change/AfterTestRun()
-	var/turf/T = get_turf(locate(/obj/effect/landmark/proximity_wall))
+	var/turf/T = get_turf(locate(/obj/abstract/landmark/proximity_wall))
 	T.set_opacity(TRUE)
 
 
@@ -146,6 +146,6 @@
 /area/test_area/proximity
 	icon_state = "green"
 
-/obj/effect/landmark/proximity_spawner
+/obj/abstract/landmark/proximity_spawner
 
-/obj/effect/landmark/proximity_wall
+/obj/abstract/landmark/proximity_wall

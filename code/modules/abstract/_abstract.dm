@@ -1,12 +1,15 @@
 /obj/abstract
 	name =          ""
+	icon =          'icons/effects/landmarks.dmi'
+	icon_state =    "x2"
 	mouse_opacity = 0
 	alpha =         0
 	simulated =     FALSE
 	density =       FALSE
 	opacity =       FALSE
 	anchored =      TRUE
-	invisibility =  INVISIBILITY_MAXIMUM
+	unacidable =    TRUE
+	invisibility =  INVISIBILITY_MAXIMUM+1
 
 /obj/abstract/Initialize()
 	. = ..()

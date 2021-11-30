@@ -3,7 +3,7 @@
 /turf/space,
 /area/space)
 "ab" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "carpspawn"
 	},
 /turf/space,
@@ -545,7 +545,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/bridge/vault)
 "bz" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Captain"
 	},
 /obj/structure/cable{
@@ -658,7 +658,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "bluespace_a"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1605,7 +1605,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
 "eF" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Cargo Technician"
 	},
 /turf/simulated/floor/tiled,
@@ -1958,7 +1958,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "lightsout"
 	},
 /obj/structure/cable{
@@ -2209,7 +2209,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
 "gg" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Scientist"
 	},
 /obj/item/stool/padded,
@@ -2269,7 +2269,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
 "gs" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Cargo Technician"
 	},
 /obj/structure/bed/chair,
@@ -2433,7 +2433,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/cargo)
 "gM" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "bluespace_a"
 	},
 /turf/simulated/floor/tiled,
@@ -2954,7 +2954,7 @@
 /turf/simulated/floor/wood,
 /area/ministation/detective)
 "ic" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Detective"
 	},
 /obj/structure/bed/chair/office/comfy/brown{
@@ -3088,7 +3088,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/security)
 "ix" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Security Officer"
 	},
 /obj/structure/bed/chair,
@@ -3167,7 +3167,7 @@
 /obj/machinery/cryopod{
 	dir = 1
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /obj/machinery/camera/network/medbay{
 	dir = 1
 	},
@@ -3222,7 +3222,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
 "iQ" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Scientist"
 	},
 /obj/structure/bed/chair/office/light,
@@ -3485,7 +3485,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
 "jw" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "blobstart"
 	},
 /turf/simulated/floor/tiled/white,
@@ -3720,7 +3720,7 @@
 /turf/simulated/floor/holofloor/lino,
 /area/ministation/commons)
 "kd" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /turf/simulated/floor/tiled,
@@ -3940,7 +3940,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/commons)
 "kI" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/machinery/firealarm{
@@ -3956,7 +3956,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/commons)
 "kJ" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "bluespace_a"
 	},
 /obj/structure/table/gamblingtable,
@@ -3996,7 +3996,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/hall/n)
 "kN" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "lightsout"
 	},
 /turf/simulated/floor/tiled,
@@ -4068,7 +4068,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
 "kV" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "bluespace_a"
 	},
 /obj/structure/cable{
@@ -4078,7 +4078,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
 "kW" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Scientist"
 	},
 /turf/simulated/floor/tiled/white,
@@ -5075,7 +5075,7 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/e)
 "nX" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "blobstart"
 	},
 /turf/simulated/floor/plating,
@@ -5851,7 +5851,7 @@
 /turf/simulated/floor/plating,
 /area/ministation/medical)
 "pV" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Clown"
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
@@ -5900,7 +5900,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/janitor)
 "qb" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Janitor"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -6299,7 +6299,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/hall/w)
 "rd" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Medical Doctor"
 	},
 /obj/effect/floor_decal/corner/paleblue{
@@ -6315,7 +6315,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
 "re" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Medical Doctor"
 	},
 /turf/simulated/floor/tiled/white,
@@ -7175,7 +7175,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/hall/w)
 "tn" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "lightsout"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -7224,7 +7224,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/hall/s)
 "tv" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "bluespace_a"
 	},
 /turf/simulated/floor/tiled,
@@ -7275,7 +7275,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/hall/e)
 "tE" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "lightsout"
 	},
 /obj/structure/cable{
@@ -7333,7 +7333,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
 "tL" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Medical Doctor"
 	},
 /obj/structure/bed/chair/office/light{
@@ -7348,7 +7348,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ministation/medical)
 "tM" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "bluespace_a"
 	},
 /obj/structure/cable{
@@ -7475,7 +7475,7 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "bluespace_a"
 	},
 /obj/effect/floor_decal/ss13/l10,
@@ -8164,7 +8164,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/hop)
 "vW" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Lieutenant"
 	},
 /obj/item/stool/padded,
@@ -8328,7 +8328,7 @@
 /area/ministation/medical)
 "wx" = (
 /obj/structure/bed/chair/office/light,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Medical Doctor"
 	},
 /turf/simulated/floor/tiled/white,
@@ -8678,7 +8678,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/cafe)
 "xq" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "bluespace_a"
 	},
 /obj/effect/floor_decal/corner/red/diagonal,
@@ -9364,7 +9364,7 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/sw)
 "zd" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Robot"
 	},
 /turf/simulated/floor/tiled/white,
@@ -9432,7 +9432,7 @@
 /obj/structure/bed/chair/shuttle/white{
 	dir = 8
 	},
-/obj/effect/landmark/latejoin,
+/obj/abstract/landmark/latejoin,
 /turf/simulated/floor/shuttle/blue,
 /area/ministation/arrival_shuttle)
 "zp" = (
@@ -9618,7 +9618,7 @@
 /turf/simulated/floor/shuttle/blue,
 /area/ministation/arrival_shuttle)
 "zS" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Observer-Start"
 	},
 /turf/simulated/floor/shuttle/blue,
@@ -9715,7 +9715,7 @@
 /turf/simulated/floor/wood,
 /area/ministation/cafe)
 "Af" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Bartender"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -9728,7 +9728,7 @@
 /turf/simulated/floor/wood,
 /area/ministation/cafe)
 "Ag" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Bartender"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -9902,7 +9902,7 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/sw)
 "AF" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "blobstart"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -10342,7 +10342,7 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/w)
 "BW" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "bluespace_a"
 	},
 /turf/simulated/wall,
@@ -10659,7 +10659,7 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/se)
 "CP" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/item/stool/padded,
@@ -11254,7 +11254,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/hall/s)
 "Ef" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "lightsout"
 	},
 /obj/structure/cable{
@@ -11393,7 +11393,7 @@
 /area/ministation/engine)
 "EE" = (
 /obj/item/stool/padded,
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Security Officer"
 	},
 /turf/simulated/floor/tiled,
@@ -11425,7 +11425,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "EL" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Station Engineer"
 	},
 /obj/item/stool/padded,
@@ -11618,7 +11618,7 @@
 /turf/simulated/wall/r_wall,
 /area/ministation/engine)
 "Fl" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -11742,7 +11742,7 @@
 /turf/simulated/wall,
 /area/ministation/engine)
 "FD" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Station Engineer"
 	},
 /turf/simulated/floor/tiled,
@@ -11834,7 +11834,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/engine)
 "FR" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "bluespace_a"
 	},
 /obj/structure/cable{
@@ -12268,7 +12268,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Robot"
 	},
 /turf/simulated/floor/plating,
@@ -13300,7 +13300,7 @@
 	pixel_x = 27;
 	pixel_y = 5
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "AI"
 	},
 /obj/machinery/network/requests_console{
@@ -13787,7 +13787,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/ai_sat)
 "Lw" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "xeno_spawn";
 	pixel_x = -1
 	},
@@ -14110,7 +14110,7 @@
 /obj/machinery/cryopod{
 	dir = 1
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/dark,
 /area/ministation/cryo)
 "Mx" = (
@@ -14149,7 +14149,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/security)
 "MI" = (
-/obj/effect/landmark/latejoin/cyborg,
+/obj/abstract/landmark/latejoin/cyborg,
 /turf/simulated/floor/tiled/white,
 /area/ministation/science)
 "MJ" = (
@@ -14353,7 +14353,7 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/sw)
 "NO" = (
-/obj/level_data/main_level,
+/obj/abstract/level_data/main_level,
 /turf/space,
 /area/space)
 "NR" = (
@@ -14494,7 +14494,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Librarian"
 	},
 /turf/simulated/floor/wood/mahogany,
@@ -14949,7 +14949,7 @@
 	dir = 1;
 	pixel_y = -32
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/dark,
 /area/ministation/cryo)
 "Rd" = (
@@ -15672,7 +15672,7 @@
 /obj/machinery/light_switch{
 	pixel_y = 25
 	},
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Librarian"
 	},
 /turf/simulated/floor/wood/mahogany,
@@ -15797,7 +15797,7 @@
 /turf/simulated/floor/tiled,
 /area/ministation/hall/w)
 "VR" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -16004,7 +16004,7 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/se)
 "WW" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Robot"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -16067,7 +16067,7 @@
 /turf/simulated/wall/r_wall,
 /area/ministation/cryo)
 "Xr" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "bluespace_a"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -16483,7 +16483,7 @@
 /turf/simulated/floor/plating,
 /area/ministation/maint/se)
 "ZE" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/machinery/light{
@@ -16535,7 +16535,7 @@
 /turf/simulated/floor/plating,
 /area/ministation/court)
 "ZQ" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "Assistant"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{

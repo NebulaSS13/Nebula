@@ -1596,7 +1596,7 @@
 /turf/simulated/floor,
 /area/ship/trade/fore_port_underside_maint)
 "Dt" = (
-/obj/level_data/main_level,
+/obj/abstract/level_data/main_level,
 /turf/space,
 /area/space)
 "Dz" = (

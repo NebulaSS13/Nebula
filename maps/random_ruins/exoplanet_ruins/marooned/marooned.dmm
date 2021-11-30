@@ -18,7 +18,7 @@
 "af" = (
 /obj/structure/lattice,
 /obj/item/stack/material/reinforced/mapped/ocp,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "ag" = (
@@ -29,12 +29,12 @@
 /turf/simulated/wall/ocp_wall,
 /area/map_template/marooned)
 "ai" = (
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "aj" = (
 /obj/item/stack/material/reinforced/mapped/ocp,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "ak" = (
@@ -50,7 +50,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)
 "am" = (
-/obj/effect/landmark/corpse/marooned_officer,
+/obj/abstract/landmark/corpse/marooned_officer,
 /obj/structure/bed/chair{
 	dir = 1
 	},
@@ -72,7 +72,7 @@
 /area/map_template/marooned)
 "ao" = (
 /obj/structure/lattice,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "ap" = (
@@ -175,8 +175,8 @@
 /area/map_template/marooned)
 "aC" = (
 /obj/structure/shuttle/engine/propulsion,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aD" = (
@@ -272,20 +272,20 @@
 /obj/structure/cable{
 	icon_state = "2-5"
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aR" = (
 /obj/structure/inflatable/door,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aS" = (
 /obj/structure/inflatable/wall,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aT" = (
@@ -293,8 +293,8 @@
 	dir = 1;
 	icon_state = "2-5"
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aU" = (
@@ -323,16 +323,16 @@
 /obj/structure/cable{
 	icon_state = "0-4"
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aX" = (
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aY" = (
@@ -345,25 +345,25 @@
 /obj/structure/cable{
 	icon_state = "0-8"
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "hi" = (
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "tb" = (
-/obj/effect/landmark/clear,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/clear,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "Wb" = (
 /obj/structure/shuttle/engine/propulsion,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
-/obj/effect/landmark/scorcher,
+/obj/abstract/landmark/scorcher,
+/obj/abstract/landmark/clear,
+/obj/abstract/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 

@@ -305,7 +305,7 @@
 /obj/machinery/alarm{
 	dir = 1
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "cQ" = (
@@ -357,7 +357,7 @@
 /obj/machinery/power/apc{
 	dir = 1
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "de" = (
@@ -1903,7 +1903,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "rP" = (
@@ -2555,7 +2555,7 @@
 /turf/simulated/floor/plating,
 /area/nexus/command)
 "xX" = (
-/obj/level_data/main_level,
+/obj/abstract/level_data/main_level,
 /turf/space,
 /area/space)
 "yf" = (
@@ -3685,7 +3685,7 @@
 /obj/structure/sign/warning/secure_area{
 	pixel_y = -24
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "IQ" = (
@@ -4000,7 +4000,7 @@
 /obj/structure/sign/warning/secure_area{
 	pixel_y = -24
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "MD" = (
@@ -5353,7 +5353,7 @@
 /obj/machinery/computer/cryopod{
 	pixel_y = -32
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "Ys" = (
@@ -5420,7 +5420,7 @@
 /obj/effect/floor_decal/corner/b_green{
 	dir = 1
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "YG" = (
@@ -5453,7 +5453,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/effect/landmark/latejoin/cryo,
+/obj/abstract/landmark/latejoin/cryo,
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "Zy" = (

@@ -52,7 +52,7 @@ SUBSYSTEM_DEF(unit_tests)
 	// Suggestion: Do smart things here to squeeze as many templates as possible into the same Z-level
 	if(map_template.tallness == 1)
 		INCREMENT_WORLD_Z_SIZE
-		global.using_map.sealed_levels += world.maxz // TODO: make maps handle this with /obj/level_data
+		global.using_map.sealed_levels += world.maxz // TODO: make maps handle this with /obj/abstract/level_data
 		var/corner = locate(world.maxx/2, world.maxy/2, world.maxz)
 		log_unit_test("Loading template '[map_template]' ([map_template.type]) at [log_info_line(corner)]")
 		map_template.load(corner)

@@ -421,7 +421,7 @@
 /area/lost_supply_base)
 "bc" = (
 /obj/random/projectile,
-/obj/effect/landmark/corpse/syndicate,
+/obj/abstract/landmark/corpse/syndicate,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "bd" = (
@@ -621,7 +621,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/office)
 "bF" = (
-/obj/effect/landmark/corpse/engineer,
+/obj/abstract/landmark/corpse/engineer,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/office)
 "bG" = (
@@ -1413,7 +1413,7 @@
 /area/lost_supply_base)
 "em" = (
 /obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/landmark/corpse/engineer,
+/obj/abstract/landmark/corpse/engineer,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "en" = (
@@ -1786,12 +1786,12 @@
 /area/lost_supply_base)
 "fC" = (
 /obj/random/energy,
-/obj/effect/landmark/corpse/syndicate,
+/obj/abstract/landmark/corpse/syndicate,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "fD" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/effect/landmark/corpse/engineer,
+/obj/abstract/landmark/corpse/engineer,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "fE" = (
@@ -1931,7 +1931,7 @@
 /area/lost_supply_base/supply)
 "fX" = (
 /obj/item/gun/projectile/shotgun/pump,
-/obj/effect/landmark/corpse/syndicate,
+/obj/abstract/landmark/corpse/syndicate,
 /turf/simulated/floor/tiled/airless{
 	icon_state = "steel_broken4"
 	},

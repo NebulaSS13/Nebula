@@ -60,16 +60,16 @@
 			S.chems[chem_type] = list(rand(1,10),rand(10,20))
 
 // Landmarks placed by random map generator
-/obj/effect/landmark/exoplanet_spawn/plant
+/obj/abstract/landmark/exoplanet_spawn/plant
 	name = "spawn exoplanet plant"
 
-/obj/effect/landmark/exoplanet_spawn/plant/do_spawn(var/obj/effect/overmap/visitable/sector/exoplanet/planet)
+/obj/abstract/landmark/exoplanet_spawn/plant/do_spawn(var/obj/effect/overmap/visitable/sector/exoplanet/planet)
 	if(LAZYLEN(planet.small_flora_types))
 		new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(get_turf(src), pick(planet.small_flora_types), 1)
 
-/obj/effect/landmark/exoplanet_spawn/large_plant
+/obj/abstract/landmark/exoplanet_spawn/large_plant
 	name = "spawn exoplanet large plant"
 
-/obj/effect/landmark/exoplanet_spawn/large_plant/do_spawn(var/obj/effect/overmap/visitable/sector/exoplanet/planet)
+/obj/abstract/landmark/exoplanet_spawn/large_plant/do_spawn(var/obj/effect/overmap/visitable/sector/exoplanet/planet)
 	if(LAZYLEN(planet.big_flora_types))
 		new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(get_turf(src), pick(planet.big_flora_types), 1)

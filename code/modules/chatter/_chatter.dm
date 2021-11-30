@@ -7,7 +7,7 @@
 	chatter_on_frequency = PUB_FREQ
 	listener_landmark = "radioChatterDebugLandmark"
 
-/obj/effect/landmark/radio_chatter_debug
+/obj/abstract/landmark/radio_chatter_debug
 	name = "radioChatterDebugLandmark"
 
 /decl/radio_chatter/debug/create_conversations()
@@ -48,7 +48,7 @@
 	create_conversations()
 	next_chatter_time = world.time + rand(min_chatter_time_elapsed, max_chatter_time_elapsed)
 	if(listener_landmark && ispath(listener_instance))
-		for(var/obj/effect/landmark/landmark in global.landmarks_list)
+		for(var/obj/abstract/landmark/landmark in global.landmarks_list)
 			if(landmark.name != listener_landmark)
 				continue
 			var/turf/T = get_turf(landmark)

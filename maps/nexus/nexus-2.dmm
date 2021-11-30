@@ -204,7 +204,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/nexus/civilian/hygiene)
 "lo" = (
-/obj/effect/landmark/map_data{
+/obj/abstract/landmark/map_data{
 	height = 2
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -607,7 +607,7 @@
 /turf/simulated/floor/carpet/blue3,
 /area/nexus/civilian/bar)
 "Db" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Observer-Start"
 	},
 /turf/simulated/floor/glass,
@@ -907,7 +907,7 @@
 /turf/simulated/floor/carpet/blue3,
 /area/nexus/civilian/bar)
 "Oa" = (
-/obj/level_data/main_level,
+/obj/abstract/level_data/main_level,
 /turf/space,
 /area/space)
 "Ok" = (

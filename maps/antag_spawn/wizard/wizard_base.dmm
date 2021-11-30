@@ -98,7 +98,7 @@
 /area/map_template/wizard_station)
 "ar" = (
 /obj/structure/table/woodentable,
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "Teleport-Scroll"
 	},
 /obj/item/toy/figure/ninja,
@@ -155,7 +155,7 @@
 	},
 /area/map_template/wizard_station)
 "ay" = (
-/obj/effect/landmark/start{
+/obj/abstract/landmark/start{
 	name = "wizard"
 	},
 /turf/simulated/floor/carpet,

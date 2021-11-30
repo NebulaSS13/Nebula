@@ -75,30 +75,30 @@
 	return TRUE
 
 // Landmarks placed by random map generator
-/obj/effect/landmark/exoplanet_spawn
+/obj/abstract/landmark/exoplanet_spawn
 	name = "spawn exoplanet animal"
 
-/obj/effect/landmark/exoplanet_spawn/Initialize()
+/obj/abstract/landmark/exoplanet_spawn/Initialize()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/effect/landmark/exoplanet_spawn/LateInitialize()
+/obj/abstract/landmark/exoplanet_spawn/LateInitialize()
 	. = ..()
 	var/obj/effect/overmap/visitable/sector/exoplanet/E = global.overmap_sectors["[z]"]
 	if(istype(E))
 		do_spawn(E)
 		
-/obj/effect/landmark/exoplanet_spawn/proc/do_spawn(var/obj/effect/overmap/visitable/sector/exoplanet/planet)
+/obj/abstract/landmark/exoplanet_spawn/proc/do_spawn(var/obj/effect/overmap/visitable/sector/exoplanet/planet)
 	if(LAZYLEN(planet.fauna_types))
 		var/beastie = pick(planet.fauna_types)
 		var/mob/M = new beastie(get_turf(src))
 		planet.adapt_animal(M)
 		planet.track_animal(M)
 
-/obj/effect/landmark/exoplanet_spawn/megafauna
+/obj/abstract/landmark/exoplanet_spawn/megafauna
 	name = "spawn exoplanet megafauna"
 
-/obj/effect/landmark/exoplanet_spawn/megafauna/do_spawn(var/obj/effect/overmap/visitable/sector/exoplanet/planet)
+/obj/abstract/landmark/exoplanet_spawn/megafauna/do_spawn(var/obj/effect/overmap/visitable/sector/exoplanet/planet)
 	if(LAZYLEN(planet.megafauna_types))
 		var/beastie = pick(planet.megafauna_types)
 		var/mob/M = new beastie(get_turf(src))

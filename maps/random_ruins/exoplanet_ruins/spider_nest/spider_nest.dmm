@@ -79,7 +79,7 @@
 /turf/simulated/floor/lino,
 /area/template_noop)
 "p" = (
-/obj/effect/landmark/corpse/doctor,
+/obj/abstract/landmark/corpse/doctor,
 /obj/effect/decal/cleanable/blood,
 /obj/item/shard,
 /obj/effect/decal/cleanable/blood/drip,

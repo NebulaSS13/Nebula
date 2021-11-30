@@ -58,7 +58,7 @@
 /decl/special_role/proc/create_nuke(var/atom/paper_spawn_loc, var/datum/mind/code_owner)
 
 	// Decide on a code.
-	var/obj/effect/landmark/nuke_spawn = locate(nuke_spawn_loc ? nuke_spawn_loc : "landmark*Nuclear-Bomb")
+	var/obj/abstract/landmark/nuke_spawn = locate(nuke_spawn_loc ? nuke_spawn_loc : "landmark*Nuclear-Bomb")
 
 	var/code
 	if(nuke_spawn)

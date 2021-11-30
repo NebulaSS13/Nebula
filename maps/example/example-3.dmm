@@ -127,7 +127,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/maintenance/fsmaint2)
 "w" = (
-/obj/level_data/main_level,
+/obj/abstract/level_data/main_level,
 /turf/space,
 /area/space)
 "x" = (
@@ -285,7 +285,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/maintenance/fsmaint2)
 "V" = (
-/obj/effect/landmark/map_data{
+/obj/abstract/landmark/map_data{
 	height = 3
 	},
 /turf/space,

@@ -1,20 +1,20 @@
 var/global/list/tradeship_paperwork_spawn_turfs = list()
 var/global/list/tradeship_paperwork_end_areas = list()
 
-/obj/effect/landmark/paperwork_spawn_tradeship
+/obj/abstract/landmark/paperwork_spawn_tradeship
 	name = "Tradeship Paperwork Goal Spawn Point"
 
-/obj/effect/landmark/paperwork_spawn_tradeship/Initialize()
+/obj/abstract/landmark/paperwork_spawn_tradeship/Initialize()
 	..()
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		global.tradeship_paperwork_spawn_turfs |= T
 	return INITIALIZE_HINT_QDEL
 
-/obj/effect/landmark/paperwork_finish_tradeship
+/obj/abstract/landmark/paperwork_finish_tradeship
 	name = "Tradeship Paperwork Goal Finish Point"
 
-/obj/effect/landmark/paperwork_finish_tradeship/Initialize()
+/obj/abstract/landmark/paperwork_finish_tradeship/Initialize()
 	..()
 	var/turf/T = get_turf(src)
 	if(istype(T))

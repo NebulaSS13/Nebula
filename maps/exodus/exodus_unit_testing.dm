@@ -51,5 +51,5 @@
 		/area/exodus/engineering/atmos = 4,
 		/area/exodus/maintenance/incinerator = 2)
 
-/obj/effect/landmark/map_data/exodus
+/obj/abstract/landmark/map_data/exodus
 	height = 2
