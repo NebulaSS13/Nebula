@@ -233,7 +233,11 @@
 						germ_level += rand(2,3)
 					if(501 to INFINITY)
 						germ_level += rand(3,5)
-						owner.reagents.add_reagent(/decl/material/liquid/coagulated_blood, rand(1,2))
+						var/decl/blood_type/blood_decl = dna?.b_type && get_blood_type_by_name(dna.b_type)
+						if(istype(blood_decl))
+							owner.reagents.add_reagent(blood_decl.transfusion_fail_reagent, round(rand(2,4) * blood_decl.transfusion_fail_percentage))
+						else
+							owner.reagents.add_reagent(/decl/material/liquid/coagulated_blood, rand(1,2))
 
 /obj/item/organ/proc/receive_chem(chemical)
 	return 0

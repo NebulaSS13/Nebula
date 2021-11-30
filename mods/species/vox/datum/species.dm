@@ -19,6 +19,7 @@
 	splatter_name = "ichor"
 	splatter_desc = "A smear of thin, sticky alien ichor."
 	splatter_colour = "#2299fc"
+	transfusion_fail_reagent = /decl/material/gas/ammonia
 
 /decl/species/vox
 	name = SPECIES_VOX

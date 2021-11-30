@@ -172,8 +172,13 @@
 		reagents.add_reagent(species.blood_reagent, amount, REAGENT_DATA(donor, species.blood_reagent))
 		return
 	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
-	if(blood_incompatible(LAZYACCESS(injected_data, "blood_type")))
-		reagents.add_reagent(/decl/material/liquid/coagulated_blood, amount * 0.5)
+	var/injected_b_type = LAZYACCESS(injected_data, "blood_type")
+	if(blood_incompatible(injected_b_type))
+		var/decl/blood_type/blood_decl = injected_b_type && get_blood_type_by_name(injected_b_type)
+		if(istype(blood_decl))
+			reagents.add_reagent(blood_decl.transfusion_fail_reagent, amount * blood_decl.transfusion_fail_percentage)
+		else
+			reagents.add_reagent(/decl/material/liquid/coagulated_blood, amount * 0.5)
 	else
 		adjust_blood(amount, injected_data)
 	..()
