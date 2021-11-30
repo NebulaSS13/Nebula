@@ -318,7 +318,7 @@
 /mob/living/can_float()
 	return !is_physically_disabled()
 
-/mob/living/aquatic/can_float()
+/mob/living/simple_animal/aquatic/can_float()
 	return TRUE
 
 /mob/living/carbon/human/can_float()
