@@ -83,7 +83,9 @@ var/global/list/time_prefs_fixed = list()
 	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
 	real_name = get_random_name()
-	b_type = RANDOM_BLOOD_TYPE
+
+	var/decl/species/species = get_species_by_key(global.using_map.default_species)
+	b_type = pickweight(species.blood_types)
 
 	if(client)
 		if(IsGuestKey(client.key))

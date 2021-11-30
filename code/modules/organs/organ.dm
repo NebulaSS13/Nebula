@@ -219,7 +219,7 @@
 		return
 	if(dna)
 		if(!rejecting)
-			if(owner.blood_incompatible(dna.b_type, species))
+			if(owner.blood_incompatible(dna.b_type))
 				rejecting = 1
 		else
 			rejecting++ //Rejection severity increases over time.

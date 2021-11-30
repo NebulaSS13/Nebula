@@ -172,32 +172,14 @@
 		reagents.add_reagent(species.blood_reagent, amount, REAGENT_DATA(donor, species.blood_reagent))
 		return
 	var/injected_data = REAGENT_DATA(donor, species.blood_reagent)
-	if(blood_incompatible(LAZYACCESS(injected_data, "blood_type"), LAZYACCESS(injected_data, "species")))
+	if(blood_incompatible(LAZYACCESS(injected_data, "blood_type")))
 		reagents.add_reagent(/decl/material/liquid/coagulated_blood, amount * 0.5)
 	else
 		adjust_blood(amount, injected_data)
 	..()
 
-/mob/living/carbon/human/proc/blood_incompatible(blood_type, blood_species)
-	if(blood_species && species.name)
-		if(blood_species != species.name)
-			return 1
-
-	var/donor_antigen = copytext(blood_type, 1, length(blood_type))
-	var/receiver_antigen = copytext(dna.b_type, 1, length(dna.b_type))
-	var/donor_rh = (findtext(blood_type, "+") > 0)
-	var/receiver_rh = (findtext(dna.b_type, "+") > 0)
-
-	if(donor_rh && !receiver_rh) return 1
-	switch(receiver_antigen)
-		if("A")
-			if(donor_antigen != "A" && donor_antigen != "O") return 1
-		if("B")
-			if(donor_antigen != "B" && donor_antigen != "O") return 1
-		if("O")
-			if(donor_antigen != "O") return 1
-		//AB is a universal receiver.
-	return 0
+/mob/living/carbon/human/proc/blood_incompatible(blood_type)
+	return species.is_blood_incompatible(dna?.b_type, blood_type)
 
 /mob/living/carbon/human/proc/regenerate_blood(var/amount)
 	amount *= (species.blood_volume / SPECIES_BLOOD_DEFAULT)
@@ -262,22 +244,28 @@
 		return splatter
 
 	// Update appearance.
-	if(blood_data["blood_colour"])
+	if(LAZYACCESS(blood_data, "blood_colour"))
 		splatter.basecolor = blood_data["blood_colour"]
 		splatter.update_icon()
 	if(spray_dir)
 		splatter.icon_state = "squirt"
 		splatter.set_dir(spray_dir)
 	// Update blood information.
-	if(blood_data["blood_DNA"])
+	if(LAZYACCESS(blood_data, "blood_DNA"))
 		LAZYSET(splatter.blood_data, blood_data["blood_DNA"], blood_data)
 		splatter.blood_DNA = list()
-		if(blood_data["blood_type"])
+		if(LAZYACCESS(blood_data, "blood_type"))
 			splatter.blood_DNA[blood_data["blood_DNA"]] = blood_data["blood_type"]
 		else
 			splatter.blood_DNA[blood_data["blood_DNA"]] = "O+"
 		var/datum/extension/forensic_evidence/forensics = get_or_create_extension(splatter, /datum/extension/forensic_evidence)
 		forensics.add_data(/datum/forensics/blood_dna, blood_data["blood_DNA"])
+
+	if(LAZYACCESS(blood_data, "blood_type"))
+		var/decl/blood_type/blood_type_decl = get_blood_type_by_name(blood_data["blood_type"])
+		splatter.name =  blood_type_decl.splatter_name
+		splatter.desc =  blood_type_decl.splatter_desc
+		splatter.color = blood_type_decl.splatter_colour
 
 	splatter.fluorescent  = 0
 	splatter.set_invisibility(0)
