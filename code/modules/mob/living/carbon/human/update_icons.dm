@@ -231,7 +231,14 @@ Please contact me on #coderbus IRC. ~Carn x
 	// Scale/translate/rotate and apply the transform.
 	var/matrix/M = matrix()
 	if(lying)
-		M.Turn(pick(90, -90))
+		var/turn_angle
+		if(dir & WEST)
+			turn_angle = -90
+		else if(dir & EAST)
+			turn_angle = 90
+		else 
+			turn_angle = pick(-90, 90)
+		M.Turn(turn_angle)
 		M.Scale(desired_scale_y, desired_scale_x)
 		M.Translate(1, -6-default_pixel_z)
 	else
