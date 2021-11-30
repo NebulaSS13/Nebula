@@ -20,6 +20,16 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	var/decl/bodytype/default_bodytype
 
 	var/blood_color = COLOR_BLOOD_HUMAN       // Red.
+	var/list/blood_types = list(
+		/decl/blood_type/aplus,
+		/decl/blood_type/aminus,
+		/decl/blood_type/bplus,
+		/decl/blood_type/bminus,
+		/decl/blood_type/abplus,
+		/decl/blood_type/abminus,
+		/decl/blood_type/oplus
+	)
+
 	var/flesh_color = "#ffc896"             // Pink.
 	var/blood_oxy = 1
 
@@ -272,6 +282,12 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 
 	if(!codex_description)
 		codex_description = description
+
+	// Populate blood type table.
+	for(var/blood_type in blood_types)
+		var/decl/blood_type/blood_decl = GET_DECL(blood_type)
+		blood_types -= blood_type
+		blood_types[blood_decl.name] = blood_decl.random_weighting
 
 	// Generate OOC info.
 	var/list/codex_traits = list()
@@ -650,7 +666,8 @@ var/global/const/DEFAULT_SPECIES_HEALTH = 200
 	return FALSE
 
 /decl/species/proc/get_blood_name()
-	return "blood"
+	var/decl/blood_type/blood = get_blood_type_by_name(blood_types[1])
+	return istype(blood) ? blood.splatter_name : "blood"
 
 /decl/species/proc/handle_death_check(var/mob/living/carbon/human/H)
 	return FALSE

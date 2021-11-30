@@ -31,6 +31,10 @@
 		"senescent" =      45
 	)
 
+/decl/blood_type/hemolymph/mantid
+	name = "crystalline ichor"
+	antigens = "Hc" // hemocyanin, more of an octopus thing than a bug thing but whatever, it sounds neat
+
 /decl/species/mantid
 
 	name =                   SPECIES_MANTID_ALATE
@@ -48,6 +52,8 @@
 	flesh_color =             "#009999"
 	hud_type =                /datum/hud_data/mantid
 	move_trail =              /obj/effect/decal/cleanable/blood/tracks/snake
+
+	blood_types = list(/decl/blood_type/hemolymph/mantid)
 
 	speech_chance = 100
 	speech_sounds = list(
@@ -147,9 +153,6 @@
 /decl/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
 	return
 
-/decl/species/mantid/get_blood_name()
-	return "hemolymph"
-
 /decl/species/mantid/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	org.status |= ORGAN_CRYSTAL
 
@@ -218,6 +221,8 @@
 	name = SPECIES_SERPENTID
 	name_plural = "Serpentids"
 	spawn_flags = SPECIES_IS_RESTRICTED
+
+	blood_types = list(/decl/blood_type/hemolymph)
 
 	has_organ = list(
 		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid/serpentid,
@@ -319,9 +324,6 @@
 			list(/decl/emote/audible/bug_hiss) = 40
 	)
 	var/list/skin_overlays = list()
-
-/decl/species/serpentid/get_blood_name()
-	return "haemolymph"
 
 /decl/species/serpentid/can_overcome_gravity(var/mob/living/carbon/human/H)
 	var/datum/gas_mixture/mixture = H.loc.return_air()

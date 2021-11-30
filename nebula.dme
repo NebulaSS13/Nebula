@@ -2654,6 +2654,7 @@
 #include "code\modules\nano\modules\nano_module.dm"
 #include "code\modules\organs\_organ_setup.dm"
 #include "code\modules\organs\blood.dm"
+#include "code\modules\organs\blood_types.dm"
 #include "code\modules\organs\organ.dm"
 #include "code\modules\organs\pain.dm"
 #include "code\modules\organs\ailments\_ailment.dm"

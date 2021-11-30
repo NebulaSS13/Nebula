@@ -23,6 +23,8 @@
 	bone_material = null
 	skin_material = null
 
+	blood_types = list(/decl/blood_type/coolant)
+
 	available_pronouns = list(/decl/pronouns)
 	available_bodytypes = list(
 		/decl/bodytype/adherent,
@@ -135,9 +137,6 @@
 			H.visible_message("\The [H] floats gracefully down from \the [landing].", "You land gently on \the [landing].")
 		return TRUE
 	return FALSE
-
-/decl/species/adherent/get_blood_name()
-	return "coolant"
 
 /decl/species/adherent/skills_from_age(age)
 	switch(age)
