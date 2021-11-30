@@ -33,7 +33,8 @@
 
 /decl/blood_type/hemolymph/mantid
 	name = "crystalline ichor"
-	antigens = "Hc" // hemocyanin, more of an octopus thing than a bug thing but whatever, it sounds neat
+	antigens = list("Hc") // hemocyanin, more of an octopus thing than a bug thing but whatever, it sounds neat
+	splatter_colour = "#660066"
 
 /decl/species/mantid
 
@@ -48,7 +49,6 @@
 	amid reports of highly advanced, astonishingly violent mantid-cephlapodean sentients with particle cannons."
 	organs_icon =       'mods/species/ascent/icons/species/body/organs.dmi'
 
-	blood_color =             "#660066"
 	flesh_color =             "#009999"
 	hud_type =                /datum/hud_data/mantid
 	move_trail =              /obj/effect/decal/cleanable/blood/tracks/snake
@@ -272,7 +272,6 @@
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
 	body_temperature = null
-	blood_color = "#525252"
 	flesh_color = "#525252"
 	blood_oxy = 0
 	reagent_tag = IS_SERPENTID

@@ -15,6 +15,8 @@ var/global/list/blood_types_by_name
 	return global.blood_types_by_name
 
 /decl/blood_type
+	abstract_type = /decl/blood_type
+
 	var/name
 	var/list/antigens
 	var/random_weighting = 1
@@ -93,7 +95,7 @@ var/global/list/blood_types_by_name
 
 	splatter_name = "ichor"
 	splatter_desc = "A smear of insect ichor. It smells acrid."
-	splatter_colour = COLOR_GREEN_GRAY
+	splatter_colour = "#525252"
 
 // Robo-blood.
 /decl/blood_type/coolant
@@ -103,4 +105,4 @@ var/global/list/blood_types_by_name
 
 	splatter_name = "coolant"
 	splatter_desc = "A smear of machine coolant. It looks discoloured."
-	splatter_colour = COLOR_DARK_BROWN
+	splatter_colour = SYNTH_BLOOD_COLOUR

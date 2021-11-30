@@ -31,7 +31,8 @@
 		/decl/emote/exertion/biological/breath,
 		/decl/emote/exertion/biological/pant
 	)
-
+	var/blood_color
+	
 /decl/species/alium/Initialize()
 
 	//Coloring
@@ -99,6 +100,11 @@
 		species_flags |= SPECIES_FLAG_NO_PAIN
 
 	. = ..()
+
+/decl/species/alium/get_blood_colour(mob/living/carbon/human/H)
+	if(istype(H) && H.isSynthetic())
+		return ..()
+	return blood_color
 
 /decl/species/alium/proc/adapt_to_atmosphere(var/datum/gas_mixture/atmosphere)
 	var/temp_comfort_shift = atmosphere.temperature - body_temperature

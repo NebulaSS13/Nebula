@@ -26,7 +26,6 @@
 	strength =              STR_HIGH
 	warning_low_pressure =  50
 	hazard_low_pressure =  -1
-	blood_color =           COLOR_GRAY15
 	flesh_color =           COLOR_GUNMETAL
 	cold_level_1 =          SYNTH_COLD_LEVEL_1
 	cold_level_2 =          SYNTH_COLD_LEVEL_2
