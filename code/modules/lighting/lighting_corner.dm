@@ -39,6 +39,11 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	var/below_g = 0
 	var/below_b = 0
 
+	// Ambient turf lighting that's not inherited from a dynamic light source.
+	var/ambient_r = 0
+	var/ambient_g = 0
+	var/ambient_b = 0
+
 	// The final intensity, all things considered.
 	var/apparent_r = 0
 	var/apparent_g = 0
@@ -122,9 +127,9 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	self_g += delta_g
 	self_b += delta_b
 
-	apparent_r = self_r + below_r
-	apparent_g = self_g + below_g
-	apparent_b = self_b + below_b
+	apparent_r = self_r + below_r + ambient_r
+	apparent_g = self_g + below_g + ambient_g
+	apparent_b = self_b + below_b + ambient_b
 
 	var/turf/T
 	var/Ti
@@ -166,9 +171,9 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	below_g += delta_g
 	below_b += delta_b
 
-	apparent_r = self_r + below_r
-	apparent_g = self_g + below_g
-	apparent_b = self_b + below_b
+	apparent_r = self_r + below_r + ambient_r
+	apparent_g = self_g + below_g + ambient_g
+	apparent_b = self_b + below_b + ambient_b
 
 	// This needs to be down here instead of the above if so the lum values are properly updated.
 	if (needs_update)
@@ -179,6 +184,26 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		SSlighting.corner_queue += src
 	else
 		update_overlays(TRUE)
+
+// Note: unlike the above setters, this works with absolute values rather than deltas.
+/datum/lighting_corner/proc/set_ambient_lumcount(ar, ag, ab, skip_update = FALSE)
+	if (!(ar + ag + ab))
+		return
+
+	ambient_r = ar
+	ambient_g = ag
+	ambient_b = ab
+
+	apparent_r = self_r + below_r + ar
+	apparent_g = self_g + below_g + ag
+	apparent_b = self_b + below_b + ab
+
+	if (needs_update || skip_update)
+		return
+
+	// Always queue for this, not important enough to hit the synchronous path.
+	needs_update = TRUE
+	SSlighting.corner_queue += src
 
 /datum/lighting_corner/proc/update_overlays(now = FALSE)
 	var/lr = apparent_r

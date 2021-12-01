@@ -47,8 +47,12 @@
 		PRINT_STACK_TRACE("Warning: [src]([type]) initialized multiple times!")
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
-	if(light_power && light_range)
+	if (light_range && light_power)
+		if (ambient_light)
+			update_ambient_light(TRUE)
 		update_light()
+	else if (ambient_light)
+		update_ambient_light(FALSE)
 
 	if(dynamic_lighting)
 		luminosity = 0
