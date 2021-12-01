@@ -84,7 +84,7 @@
 /turf/proc/initialize_ambient_light(var/mapload)
 	return
 
-/turf/proc/update_ambient_light(var/mapload)
+/turf/proc/update_ambient_lighting(var/mapload)
 	return
 
 /turf/Destroy()

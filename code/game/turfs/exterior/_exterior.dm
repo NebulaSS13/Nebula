@@ -53,9 +53,9 @@
 	return ext
 
 /turf/exterior/initialize_ambient_light(var/mapload)
-	update_ambient_light(mapload)
+	update_ambient_lighting(mapload)
 
-/turf/exterior/update_ambient_light(var/mapload)
+/turf/exterior/update_ambient_lighting(var/mapload)
 	if(is_outside())
 		if(owner) // Exoplanets do their own lighting shenanigans.
 			//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).

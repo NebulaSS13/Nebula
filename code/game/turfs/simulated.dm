@@ -1,7 +1,7 @@
 /turf/simulated
 	name = "station"
 	initial_gas = list(
-		/decl/material/gas/oxygen = MOLES_O2STANDARD, 
+		/decl/material/gas/oxygen = MOLES_O2STANDARD,
 		/decl/material/gas/nitrogen = MOLES_N2STANDARD
 	)
 	open_turf_type = /turf/simulated/open
@@ -180,7 +180,7 @@
 
 /turf/simulated/initialize_ambient_light(var/mapload)
 	for(var/turf/T as anything in RANGE_TURFS(src, 1))
-		T.update_ambient_light(mapload)
+		T.update_ambient_lighting(mapload)
 
 /turf/simulated/Destroy()
 	if (zone)
