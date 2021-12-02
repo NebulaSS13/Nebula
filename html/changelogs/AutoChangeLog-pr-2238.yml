@@ -1,0 +1,4 @@
+author: PsyCommando
+delete-after: true
+changes:
+  - tweak: Tweak inventory hiding fix.
