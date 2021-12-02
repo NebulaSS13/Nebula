@@ -264,7 +264,8 @@
 	if(length(hud_elements))
 		mymob.client.screen += hud_elements
 	mymob.client.screen += src.adding + src.hotkeybuttons
-	inventory_shown = 0
+
+	hide_inventory()
 
 	hidden_inventory_update()
 	persistant_inventory_update()
