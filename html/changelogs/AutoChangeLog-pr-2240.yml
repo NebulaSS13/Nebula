@@ -1,0 +1,5 @@
+author: NotRanged
+delete-after: true
+changes:
+  - tweak: Lying down while facing left or right now lays you down left or right.
+  - tweak: You can now change facing direction while lying down.
