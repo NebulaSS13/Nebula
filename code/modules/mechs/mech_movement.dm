@@ -155,7 +155,9 @@
 	anchored = 0
 	return FALSE
 
-/mob/living/exosuit/check_space_footing()//mechs can't push off things to move around in space, they stick to hull or float away
+/mob/living/exosuit/check_space_footing() //mechs can't push off things to move around in space, they stick to hull or float away
+	if(has_gravity())
+		return TRUE
 	for(var/thing in RANGE_TURFS(src, 1))
 		var/turf/T = thing
 		if(T.density || T.is_wall() || T.is_floor())

@@ -81,6 +81,12 @@
 /obj/item/mech_equipment/proc/MouseDragInteraction()
 	return 0
 
+/obj/item/mech_equipment/proc/MouseDownInteraction()
+	return 0
+
+/obj/item/mech_equipment/proc/MouseUpInteraction()
+	return 0
+
 /obj/item/mech_equipment/mob_can_unequip(mob/M, slot, disable_warning)
 	. = ..()
 	if(. && owner)
