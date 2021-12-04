@@ -223,6 +223,16 @@
 	labels = list("practice")
 	ammo_type = /obj/item/ammo_casing/rifle/practice
 
+/obj/item/ammo_magazine/rifle/drum
+	name = "machine gun drum magazine"
+	icon_state = "drum"
+	origin_tech = "{'combat':2}"
+	mag_type = MAGAZINE
+	caliber = CALIBER_RIFLE
+	material = /decl/material/solid/metal/steel
+	ammo_type = /obj/item/ammo_casing/rifle
+	max_ammo = 100
+
 /obj/item/ammo_magazine/caps
 	name = "speed loader"
 	desc = "A cheap plastic speed loader for some kind of revolver."

@@ -17,7 +17,7 @@
 /mob/living/exosuit/premade/combat/spawn_mech_equipment()
 	..()
 	install_system(new /obj/item/mech_equipment/mounted_system/taser(src), HARDPOINT_LEFT_HAND)
-	install_system(new /obj/item/mech_equipment/mounted_system/taser/ion(src), HARDPOINT_RIGHT_HAND)
+	install_system(new /obj/item/mech_equipment/mounted_system/projectile/assault_rifle(src), HARDPOINT_RIGHT_HAND)
 	install_system(new /obj/item/mech_equipment/flash(src), HARDPOINT_LEFT_SHOULDER)
 	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_RIGHT_SHOULDER)
 

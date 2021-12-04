@@ -2196,6 +2196,7 @@
 #include "code\modules\mechs\components\software.dm"
 #include "code\modules\mechs\equipment\_equipment.dm"
 #include "code\modules\mechs\equipment\combat.dm"
+#include "code\modules\mechs\equipment\combat_projectile.dm"
 #include "code\modules\mechs\equipment\engineering.dm"
 #include "code\modules\mechs\equipment\medical.dm"
 #include "code\modules\mechs\equipment\utility.dm"

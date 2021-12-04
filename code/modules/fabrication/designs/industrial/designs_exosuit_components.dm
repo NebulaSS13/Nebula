@@ -96,6 +96,12 @@
 /datum/fabricator_recipe/industrial/exosuit_gear/laser
 	path = /obj/item/mech_equipment/mounted_system/taser/laser
 
+/datum/fabricator_recipe/industrial/exosuit_gear/smg
+	path = /obj/item/mech_equipment/mounted_system/projectile
+
+/datum/fabricator_recipe/industrial/exosuit_gear/rifle
+	path = /obj/item/mech_equipment/mounted_system/projectile/assault_rifle
+
 /datum/fabricator_recipe/industrial/exosuit_gear/rcd
 	path = /obj/item/mech_equipment/mounted_system/rcd
 
@@ -110,3 +116,10 @@
 
 /datum/fabricator_recipe/industrial/exosuit_gear/mechshields
 	path = /obj/item/mech_equipment/shields
+
+/datum/fabricator_recipe/industrial/exosuit_ammo
+	category = "Exosuit Ammunition"
+	path = /obj/item/ammo_magazine/mech/smg_top
+
+/datum/fabricator_recipe/industrial/exosuit_ammo
+	path = /obj/item/ammo_magazine/mech/rifle
