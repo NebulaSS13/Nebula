@@ -339,7 +339,7 @@ var/global/list/card_decks = list()
 /obj/item/hand/examine(mob/user)
 	. = ..()
 	if((!concealed || src.loc == user) && cards.len)
-		to_chat(user, "It contains: ")
+		to_chat(user, "It contains:")
 		for(var/datum/playingcard/P in cards)
 			to_chat(user, "\The [APPEND_FULLSTOP_IF_NEEDED(P.name)]")
 

@@ -45,7 +45,7 @@
 
 /obj/machinery/atmospherics/binary/oxyregenerator/examine(user)
 	. = ..()
-	to_chat(user,"Its outlet port is to the [dir2text(dir)]")
+	to_chat(user,"Its outlet port is to the [dir2text(dir)].")
 
 /obj/machinery/atmospherics/binary/oxyregenerator/Process(var/delay)
 	..()

@@ -98,7 +98,7 @@
 	. = ..()
 	var/obj/item/cell/cell = get_cell()
 	if(cell)
-		to_chat(user, "The charge meter reads: [cell.percent()]%")
+		to_chat(user, "The charge meter reads: [cell.percent()]%.")
 	else
 		to_chat(user, "The indicator shows that the cell is missing.")
 
@@ -196,7 +196,7 @@
 		var/mob/living/silicon/robot/R = M
 		return (R.cell)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M		
+		var/mob/living/carbon/human/H = M
 		if(H.isSynthetic())
 			return 1
 		if(istype(H.back,/obj/item/rig))

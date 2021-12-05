@@ -21,7 +21,7 @@
 /obj/item/forensics/sample/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1 && object)
-		to_chat(user, "The label says: '[object]'")
+		to_chat(user, "The label says: '[object]'.")
 
 /obj/item/forensics/sample/proc/copy_evidence(var/atom/supplied)
 	var/datum/extension/forensic_evidence/forensics = get_extension(supplied, /datum/extension/forensic_evidence)
@@ -44,7 +44,7 @@
 	object = supplied.object + ", " + object
 	to_chat(user, SPAN_NOTICE("You combine \the [supplied] into \the [src]."))
 	return 1
-	
+
 /obj/item/forensics/sample/proc/merge_evidence_list(var/list/new_evidence)
 	LAZYDISTINCTADD(evidence, new_evidence)
 

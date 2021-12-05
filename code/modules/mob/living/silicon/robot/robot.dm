@@ -800,7 +800,7 @@
 			return TOPIC_HANDLED
 
 		if(activated(O))
-			to_chat(src, "Already activated")
+			to_chat(src, "Already activated.")
 			return TOPIC_HANDLED
 		if(!module_state_1)
 			module_state_1 = O
@@ -840,7 +840,7 @@
 			else
 				to_chat(src, "Module isn't activated.")
 		else
-			to_chat(src, "Module isn't activated")
+			to_chat(src, "Module isn't activated.")
 		installed_modules()
 		return TOPIC_HANDLED
 	return ..()

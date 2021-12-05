@@ -146,7 +146,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	else if(isCoil(W))
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.get_amount() < 1)
-			to_chat(user, "Not enough cable")
+			to_chat(user, "You don't have enough cable to lay down.")
 			return
 		coil.cable_join(src, user)
 

@@ -26,7 +26,7 @@
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
 		if(!isturf(user.loc))
-			to_chat(user, "You cannot turn the light on while in this [user.loc]")
+			to_chat(user, "You cannot turn the light on while in this [user.loc].")
 			return
 		on = !on
 		to_chat(user, "You [on ? "enable" : "disable"] the helmet light.")
