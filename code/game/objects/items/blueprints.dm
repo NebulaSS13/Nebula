@@ -11,7 +11,7 @@
 /obj/item/blueprints/Initialize()
 	. = ..()
 	desc = "Blueprints of the [station_name()]. There is a \"Classified\" stamp and several coffee stains on it."
-	
+
 	if(set_valid_z_levels())
 		set_extension(src, /datum/extension/eye/blueprints)
 
@@ -25,10 +25,10 @@
 		if(!(user.z in valid_z_levels))
 			to_chat(user, SPAN_WARNING("The markings on this are entirely irrelevant to your whereabouts!"))
 			return
-		
+
 		if(blueprints)
 			if(blueprints.look(user, list(valid_z_levels, area_prefix))) // Abandon all peripheral vision, ye who enter here.
-				to_chat(user, SPAN_NOTICE("You start peering closely at \the [src]"))
+				to_chat(user, SPAN_NOTICE("You start peering closely at \the [src]."))
 				return
 			else
 				to_chat(user, SPAN_WARNING("You couldn't get a good look at \the [src]. Maybe someone else is using it?"))

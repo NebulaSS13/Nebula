@@ -363,7 +363,7 @@
 		visible_message("\The [user] picks up \the [A] with \the [src]!")
 		return
 
-	to_chat(user, "You fail to pick up \the [A] with \the [src]")
+	to_chat(user, "You fail to pick up \the [A] with \the [src].")
 	return
 
 /obj/item/chems/spray/cleaner/drone

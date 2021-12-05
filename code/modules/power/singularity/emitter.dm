@@ -157,14 +157,14 @@
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				user.visible_message("[user.name] secures [src] to the floor.", \
 					"You secure the external reinforcing bolts to the floor.", \
-					"You hear a ratchet")
+					"You hear a ratchet.")
 				src.anchored = 1
 			if(1)
 				state = 0
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				user.visible_message("[user.name] unsecures [src] reinforcing bolts from the floor.", \
 					"You undo the external reinforcing bolts.", \
-					"You hear a ratchet")
+					"You hear a ratchet.")
 				src.anchored = 0
 			if(2)
 				to_chat(user, "<span class='warning'>\The [src] needs to be unwelded from the floor.</span>")
@@ -183,7 +183,7 @@
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to weld [src] to the floor.", \
 						"You start to weld [src] to the floor.", \
-						"You hear welding")
+						"You hear welding.")
 					if (do_after(user,20,src))
 						if(!src || !WT.isOn()) return
 						state = 2
@@ -196,7 +196,7 @@
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to cut [src] free from the floor.", \
 						"You start to cut [src] free from the floor.", \
-						"You hear welding")
+						"You hear welding.")
 					if (do_after(user,20,src))
 						if(!src || !WT.isOn()) return
 						state = 1

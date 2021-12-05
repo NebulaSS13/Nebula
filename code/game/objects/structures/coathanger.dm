@@ -41,7 +41,7 @@
 		var/obj/item/removing = contents[contents.len]
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] takes \the [removing] off \the [src]."), \
-			SPAN_NOTICE("You take \the [removing] off the \the [src]") \
+			SPAN_NOTICE("You take \the [removing] off the \the [src].") \
 		)
 		removing.dropInto(loc)
 		user.put_in_active_hand(removing)
@@ -75,7 +75,7 @@
 	if(user.unEquip(W, src))
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] hangs \the [W] on \the [src]."), \
-			SPAN_NOTICE("You hang \the [W] on the \the [src]") \
+			SPAN_NOTICE("You hang \the [W] on the \the [src].") \
 		)
 		update_icon()
 	return TRUE

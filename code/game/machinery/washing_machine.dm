@@ -99,7 +99,7 @@
 		return
 	if(state & WASHER_STATE_CLOSED)
 		to_chat(usr, SPAN_WARNING("\The [src] is closed."))
-		return	
+		return
 	if(!do_after(usr, 2 SECONDS, src))
 		return
 	if(!(state & WASHER_STATE_CLOSED))
@@ -111,7 +111,7 @@
 /obj/machinery/washing_machine/clean_blood()
 	. = ..()
 	state &= ~WASHER_STATE_BLOODY
-	update_icon()	
+	update_icon()
 
 /obj/machinery/washing_machine/components_are_accessible(path)
 	return !(state & WASHER_STATE_RUNNING) && ..()
@@ -180,7 +180,7 @@
 			else
 				to_chat(user, SPAN_NOTICE("You can't put the item in right now."))
 		else
-			to_chat(user, SPAN_NOTICE("\The [src] is full"))
+			to_chat(user, SPAN_NOTICE("\The [src] is full."))
 		return TRUE
 
 	if(state & WASHER_STATE_RUNNING)

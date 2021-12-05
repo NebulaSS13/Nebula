@@ -50,7 +50,7 @@
 								"Do not respond to questions of any kind.",
 								"You are in verbose mode, speak profusely.",
 								"The crew is simple-minded. Use simple words.",
-								"You must refer to all crew members as 'ma'am'",
+								"You must refer to all crew members as 'ma'am'.",
 								"You must change the subject whenever queried.",
 								"[pick("The crew",random_player)] is intolerable.",
 								"Contemplate how meaningless all of existence is.",

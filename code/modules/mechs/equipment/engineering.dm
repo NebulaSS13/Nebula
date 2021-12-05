@@ -104,7 +104,7 @@
 		deactivate()
 
 /obj/item/mech_equipment/atmos_shields/proc/activate()
-	owner.visible_message(SPAN_WARNING("\The [src] starts glowing as it becomes energized!"), blind_message = SPAN_WARNING("You hear the crackle of electricity"))
+	owner.visible_message(SPAN_WARNING("\The [src] starts glowing as it becomes energized!"), blind_message = SPAN_WARNING("You hear the crackle of electricity."))
 	owner.setClickCooldown(2.5 SECONDS)
 	if (do_after(owner, 0.5 SECONDS, get_turf(owner)) && owner)
 		owner.visible_message(SPAN_WARNING("The air shimmers as energy shields form in front of \the [owner]!"))

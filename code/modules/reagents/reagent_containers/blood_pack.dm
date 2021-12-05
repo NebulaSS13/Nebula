@@ -59,7 +59,7 @@
 	if(attached)
 		if(!loc.Adjacent(attached))
 			attached = null
-			visible_message("\The [attached] detaches from \the [src]")
+			visible_message("\The [attached] detaches from \the [src].")
 			update_icon()
 			return PROCESS_KILL
 	else

@@ -38,7 +38,7 @@
 	. = ..()
 	if(.)
 		if(ishuman(target) && !sleeper.occupant)
-			owner.visible_message(SPAN_NOTICE("\The [src] is lowered down to load [target]"))
+			owner.visible_message(SPAN_NOTICE("\The [src] is lowered down to load [target]."))
 			sleeper.go_in(target, user)
 		else to_chat(user, SPAN_WARNING("You cannot load that in!"))
 
@@ -58,7 +58,7 @@
 
 /obj/machinery/sleeper/mounted/standard/Initialize(mapload, d, populate_parts)
 	. = ..()
-	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/adrenaline()) 
+	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/adrenaline())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/sedatives())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/painkillers())
 	add_reagent_canister(null, new /obj/item/chems/chem_disp_cartridge/antitoxins())

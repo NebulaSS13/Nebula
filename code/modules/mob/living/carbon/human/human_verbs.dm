@@ -178,7 +178,7 @@
 		var/decl/pronouns/target_gender = usr.get_pronouns()
 		usr.visible_message( \
 			SPAN_NOTICE("\The [usr] kneels down, puts [G.his] hand on \the [src]'s wrist, and begins counting [target_gender.his] pulse."), \
-			SPAN_NOTICE("You begin counting \the [src]'s pulse"))
+			SPAN_NOTICE("You begin counting \the [src]'s pulse."))
 	else
 		usr.visible_message(
 			SPAN_NOTICE("\The [usr] begins counting [G.his] pulse."), \

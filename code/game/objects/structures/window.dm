@@ -573,7 +573,7 @@
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if (t)
 			id_tag = t
-			to_chat(user, SPAN_NOTICE("The new ID of the button is [id_tag]"))
+			to_chat(user, SPAN_NOTICE("The new ID of the button is '[id_tag]'."))
 		return TRUE
 	return ..()
 

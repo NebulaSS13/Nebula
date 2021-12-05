@@ -176,7 +176,7 @@
 //attempts to unload src. If allow_dump is set to 0, the speedloader unloading method will be disabled
 /obj/item/gun/projectile/proc/unload_ammo(mob/user, var/allow_dump=1)
 	if(is_jammed)
-		user.visible_message("\The [user] begins to unjam [src].", "You clear the jam and unload [src]")
+		user.visible_message("\The [user] begins to unjam [src].", "You clear the jam and unload [src].")
 		if(!do_after(user, 4, src))
 			return
 		is_jammed = 0
@@ -263,15 +263,15 @@
 	..()
 	if(ammo_indicator)
 		overlays += get_ammo_indicator()
-	
+
 /obj/item/gun/projectile/proc/get_ammo_indicator()
 	var/base_state = get_world_inventory_state()
 	if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
 		return mutable_appearance(icon, "[base_state]_ammo_bad")
 	else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
-		return mutable_appearance(icon, "[base_state]_ammo_warn") 
+		return mutable_appearance(icon, "[base_state]_ammo_warn")
 	else
-		return mutable_appearance(icon, "[base_state]_ammo_ok") 
+		return mutable_appearance(icon, "[base_state]_ammo_ok")
 
 /* Unneeded -- so far.
 //in case the weapon has firemodes and can't unload using attack_hand()
