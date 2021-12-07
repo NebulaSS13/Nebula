@@ -5899,7 +5899,7 @@
 	},
 /obj/item/clipboard,
 /obj/item/hand_labeler,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/lawoffice)
 "amt" = (
@@ -8644,7 +8644,7 @@
 /obj/structure/table/reinforced,
 /obj/item/clipboard,
 /obj/item/hand_labeler,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /turf/simulated/floor/tiled/dark,
 /area/exodus/lawoffice)
 "arR" = (
@@ -14517,7 +14517,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /turf/simulated/floor/wood/walnut,
 /area/exodus/library)
 "aEG" = (
@@ -23878,7 +23878,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /obj/structure/table,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/crew_quarters/locker)
@@ -31905,7 +31905,7 @@
 	pixel_x = -27;
 	pixel_y = 1
 	},
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /obj/structure/table{
 	name = "plastic table frame"
 	},
@@ -54949,7 +54949,7 @@
 	},
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/xenobiology/xenoflora)
 "cjD" = (
@@ -55628,7 +55628,7 @@
 "clf" = (
 /obj/structure/table/reinforced,
 /obj/item/clipboard,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /turf/simulated/floor/tiled/steel_grid,
 /area/exodus/engineering/foyer)
 "clg" = (
@@ -59192,7 +59192,7 @@
 	},
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /turf/simulated/floor/tiled/white,
 /area/exodus/research/xenobiology)
 "ctX" = (

@@ -15,7 +15,7 @@
 	name = "Duct Tape"
 	desc = "A roll of duct tape. changes \"HELP\" into sexy \"mmm\"."
 	item_cost = 2
-	path = /obj/item/tape_roll
+	path = /obj/item/ducttape
 
 /datum/uplink_item/item/tools/money
 	name = "Operations Funding"
