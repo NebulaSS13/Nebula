@@ -26,9 +26,13 @@
 	if(mob_shown_wind[mob_ref])
 		return FALSE
 	mob_shown_wind[weakref(M)] = TRUE
-	var/absolute_strength = abs(wind_strength)
-	if(absolute_strength <= 0.5 || !wind_direction)
-		to_chat(M, SPAN_NOTICE("The wind is calm."))
-	else
-		to_chat(M, SPAN_NOTICE("The wind is blowing[absolute_strength > 2 ? " strongly" : ""] towards the [dir2text(wind_direction)]."))
-	return TRUE
+	. = TRUE
+	var/turf/T = get_turf(M)
+	if(istype(T))
+		var/datum/gas_mixture/environment = T.return_air()
+		if(environment && environment.return_pressure() >= MIN_WIND_PRESSURE) // Arbitrary low pressure bound.
+			var/absolute_strength = abs(wind_strength)
+			if(absolute_strength <= 0.5 || !wind_direction)
+				to_chat(M, SPAN_NOTICE("The wind is calm."))
+			else
+				to_chat(M, SPAN_NOTICE("The wind is blowing[absolute_strength > 2 ? " strongly" : ""] towards the [dir2text(wind_direction)]."))

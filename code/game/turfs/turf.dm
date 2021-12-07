@@ -130,7 +130,7 @@
 /turf/proc/get_movement_delay(var/travel_dir)
 	. = get_base_movement_delay()
 	if(weather)
-		. += weather.get_movement_delay(travel_dir)
+		. += weather.get_movement_delay(return_air(), travel_dir)
 
 /turf/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
