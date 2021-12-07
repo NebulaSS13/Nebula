@@ -5,7 +5,6 @@ var/global/list/default_noblend_objects = list(/obj/machinery/door/window, /obj/
 	var/handle_generic_blending
 
 /obj/structure/on_update_icon()
-	SHOULD_CALL_PARENT(TRUE)
 	..()
 	if(material_alteration & MAT_FLAG_ALTERATION_COLOR)
 		update_material_colour()

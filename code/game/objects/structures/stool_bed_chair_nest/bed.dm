@@ -146,7 +146,6 @@
 	var/iv_stand = TRUE
 
 /obj/structure/bed/roller/on_update_icon()
-	SHOULD_CALL_PARENT(FALSE)
 	cut_overlays()
 	if(density)
 		icon_state = "up"
