@@ -20,8 +20,8 @@
 	..()
 	update_icon()
 
+// TODO rewrite to use parent call and proper closet icon stuff.
 /obj/structure/closet/secure_closet/guncabinet/on_update_icon()
-	SHOULD_CALL_PARENT(FALSE)
 	cut_overlays()
 	if(opened)
 		add_overlay("door_open")

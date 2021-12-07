@@ -20,7 +20,6 @@
 		verbs -= .verb/collapse
 
 /obj/structure/bed/chair/wheelchair/on_update_icon()
-	SHOULD_CALL_PARENT(FALSE)
 	set_overlays(image(icon = 'icons/obj/furniture.dmi', icon_state = "w_overlay", layer = ABOVE_HUMAN_LAYER))
 
 /obj/structure/bed/chair/wheelchair/attackby(obj/item/W, mob/user)

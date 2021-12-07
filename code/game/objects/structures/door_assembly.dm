@@ -86,7 +86,7 @@
 	paintable = 0
 
 /obj/structure/door_assembly/blast/on_update_icon()
-	SHOULD_CALL_PARENT(FALSE)
+	return
 
 /obj/structure/door_assembly/blast/morgue
 	name = "morgue door assembly"
