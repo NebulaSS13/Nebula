@@ -66,4 +66,4 @@ var/global/all_tooltip_styles = list(
 		prefs.UI_style_alpha = UI_style_alpha_new
 		prefs.UI_style_color = UI_style_color_new
 		SScharacter_setup.queue_preferences_save(prefs)
-		to_chat(usr, "UI was saved")
+		to_chat(usr, "Your UI settings were saved.")

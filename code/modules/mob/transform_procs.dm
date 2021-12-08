@@ -209,7 +209,7 @@
 
 	new_mob.key = key
 	new_mob.a_intent = I_HURT
-	to_chat(new_mob, "You feel more... animalistic")
+	to_chat(new_mob, "You feel more... animalistic.")
 
 	qdel(src)
 

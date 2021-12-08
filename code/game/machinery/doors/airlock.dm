@@ -684,7 +684,7 @@ About the new airlock wires panel:
 		playsound(src, cut_sound, 100, 1)
 		if (do_after(user, cut_delay, src))
 			user.visible_message(
-				SPAN_NOTICE("\The [user] removes the bolt cover from [src]"),
+				SPAN_NOTICE("\The [user] removes the bolt cover from [src]."),
 				SPAN_NOTICE("You remove the cover and expose the door bolts.")
 				)
 			src.lock_cut_state = BOLTS_EXPOSED

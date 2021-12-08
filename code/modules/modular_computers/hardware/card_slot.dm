@@ -63,7 +63,7 @@
 
 	if(!device.stored_card)
 		if(usr)
-			to_chat(usr, "There is no card in \the [src]")
+			to_chat(usr, "There is no card in \the [src].")
 		return
 
 	device.eject_id(usr)

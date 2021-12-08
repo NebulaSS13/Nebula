@@ -113,7 +113,7 @@
 				user.visible_message(
 					SPAN_DANGER("\The [user] brings \the [src] up to \the [target]'s mouth!"),
 					SPAN_DANGER("You bring \the [src] up to \the [target]'s mouth!"),
-					SPAN_WARNING("You hear some struggling and muffled cries of surprise")
+					SPAN_WARNING("You hear some struggling and muffled cries of surprise.")
 				)
 
 				var/grab_time = 6 SECONDS

@@ -193,7 +193,7 @@
 			var/turf/Z = get_turf(src)
 			var/turf/location = locate(locationx,locationy,Z.z)
 
-			to_chat(usr, "You set the pinpointer to locate [locationx],[locationy]")
+			to_chat(usr, "You set the pinpointer to locate [locationx],[locationy].")
 
 			target = weakref(location)
 
@@ -207,7 +207,7 @@
 			if(!item)
 				to_chat(usr, "Failed to locate [targetitem]!")
 				return
-			to_chat(usr, "You set the pinpointer to locate [targetitem]")
+			to_chat(usr, "You set the pinpointer to locate [targetitem].")
 			target = weakref(item)
 
 		if("DNA")

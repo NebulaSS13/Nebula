@@ -37,7 +37,7 @@
 	var/tmp/changing_turf
 	var/tmp/prev_type // Previous type of the turf, prior to turf translation.
 	var/tmp/obj/abstract/weather_system/weather
-	var/tmp/is_outside = OUTSIDE_AREA 
+	var/tmp/is_outside = OUTSIDE_AREA
 
 /turf/Initialize(mapload, ...)
 	. = null && ..()	// This weird construct is to shut up the 'parent proc not called' warning without disabling the lint for child types. We explicitly return an init hint so this won't change behavior.
@@ -306,9 +306,7 @@ var/global/const/enterloopsanity = 100
 	return
 
 /turf/proc/remove_decals()
-	if(decals && decals.len)
-		decals.Cut()
-		decals = null
+	LAZYCLEARLIST(decals)
 
 // Called when turf is hit by a thrown object
 /turf/hitby(atom/movable/AM, var/datum/thrownthing/TT)

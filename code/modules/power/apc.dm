@@ -458,7 +458,7 @@ var/global/list/all_apcs = list()
 				cover_removed = TRUE
 				user.visible_message("<span class='danger'>The APC cover was knocked down with the [W.name] by [user.name]!</span>", \
 					"<span class='danger'>You knock down the APC cover with your [W.name]!</span>", \
-					"You hear a bang")
+					"You hear a bang.")
 			return TRUE
 	return ..()
 

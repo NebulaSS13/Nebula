@@ -14,7 +14,7 @@
 	public_variables = list(
 		/decl/public_access/public_variable/gas,
 		/decl/public_access/public_variable/pressure,
-		/decl/public_access/public_variable/temperature		
+		/decl/public_access/public_variable/temperature
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/meter = 1)
 
@@ -37,7 +37,7 @@
 /obj/machinery/meter/proc/clear_target()
 	if(target)
 		events_repository.unregister(/decl/observ/destroyed, target, src)
-		target = null	
+		target = null
 
 /obj/machinery/meter/return_air()
 	if(target)
@@ -90,7 +90,7 @@
 	else if(src.target)
 		var/datum/gas_mixture/environment = target.return_air()
 		if(environment)
-			to_chat(user, "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)")
+			to_chat(user, "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C).")
 		else
 			to_chat(user, "The sensor error light is blinking.")
 	else

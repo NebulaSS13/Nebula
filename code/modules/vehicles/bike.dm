@@ -134,7 +134,7 @@
 /obj/vehicle/bike/attack_hand(var/mob/user)
 	if(user == load)
 		unload(load)
-		to_chat(user, "You unbuckle yourself from \the [src]")
+		to_chat(user, "You unbuckle yourself from \the [src].")
 
 /obj/vehicle/bike/relaymove(mob/user, direction)
 	if(user != load || !on)

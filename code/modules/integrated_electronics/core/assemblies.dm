@@ -478,7 +478,7 @@
 	else if(isCoil(I))
 		var/obj/item/stack/cable_coil/C = I
 		if(health != initial(health) && do_after(user, 10, src) && C.use(1))
-			user.visible_message("\The [user] patches up \the [src]")
+			user.visible_message("\The [user] patches up \the [src].")
 			health = min(initial(health), health + 5)
 	else
 		if(user.a_intent == I_HURT) // Kill it

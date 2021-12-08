@@ -26,7 +26,7 @@
 	critical_parts = list(PART_CPU, PART_HDD, PART_NETWORK)
 
 /datum/extension/assembly/modular_computer/try_install_component(var/mob/living/user, var/obj/item/stock_parts/computer/P)
-	if(!(P.usage_flags & hardware_flag))
+	if(!istype(P) || !(P.usage_flags & hardware_flag))
 		to_chat(user, "This computer isn't compatible with [P].")
 		return
 	var/obj/item/stock_parts/computer/C = P

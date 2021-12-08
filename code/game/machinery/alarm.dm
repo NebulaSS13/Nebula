@@ -654,7 +654,7 @@
 		var/input_temperature = input(user, "What temperature would you like the system to maintain? (Capped between [min_temperature] and [max_temperature]C)", "Thermostat Controls", target_temperature - T0C) as num|null
 		if(isnum(input_temperature) && CanUseTopic(user, state))
 			if(input_temperature > max_temperature || input_temperature < min_temperature)
-				to_chat(user, "Temperature must be between [min_temperature]C and [max_temperature]C")
+				to_chat(user, "Temperature must be between [min_temperature]C and [max_temperature]C.")
 			else
 				target_temperature = input_temperature + T0C
 		return TOPIC_REFRESH
@@ -1023,7 +1023,7 @@ FIRE ALARM
 /obj/machinery/firealarm/Destroy()
 	QDEL_NULL(sound_token)
 	. = ..()
-	
+
 /obj/machinery/firealarm/Initialize(mapload, dir)
 	. = ..()
 	if(dir)

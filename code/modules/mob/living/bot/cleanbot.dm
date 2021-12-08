@@ -66,7 +66,7 @@
 		return
 
 	busy = 1
-	visible_message("\The [src] begins to clean up \the [D]")
+	visible_message("\The [src] begins to clean up \the [D].")
 	update_icon()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
 	if(do_after(src, cleantime, progress = 0))

@@ -91,7 +91,7 @@
 	if(..()) return 0
 
 	if(R.intenselight)
-		to_chat(usr, "This cyborg's light was already upgraded")
+		to_chat(usr, "This cyborg's light was already upgraded.")
 		return 0
 	else
 		R.intenselight = 1

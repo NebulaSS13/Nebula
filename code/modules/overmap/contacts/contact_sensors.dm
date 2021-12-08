@@ -40,7 +40,7 @@
 	update_sound()
 	if(!linked)
 		return
-	
+
 	// Update our own marker icon regardless of power or sensor connections.
 	var/sensor_range = 0
 
@@ -79,7 +79,7 @@
 		if(!contact.requires_contact)	   // Only some effects require contact for visibility.
 			continue
 		objects_in_current_view[contact] = TRUE
-		
+
 		if(contact.instant_contact)   // Instantly identify the object in range.
 			objects_in_view[contact] = 100
 		else if(!(contact in objects_in_view))
@@ -89,7 +89,7 @@
 
 		// Are we already aware of this object?
 		var/datum/overmap_contact/record = contact_datums[contact]
-		
+
 		// Fade out and remove anything that is out of range.
 		if(QDELETED(contact) || !objects_in_current_view[contact]) // Object has exited sensor range.
 			if(record)
@@ -106,7 +106,7 @@
 		if(bearing < 0)
 			bearing += 360
 		if(!record) // Begin attempting to identify ship.
-			// The chance of detection decreases with distance to the target ship. 
+			// The chance of detection decreases with distance to the target ship.
 			if(contact.scannable && prob((SENSORS_DISTANCE_COEFFICIENT * contact.sensor_visibility)/max(get_dist(linked, contact), 0.5)))
 				var/bearing_variability = round(30/sensors.sensor_strength, 5)
 				var/bearing_estimate = round(rand(bearing-bearing_variability, bearing+bearing_variability), 5)
@@ -133,7 +133,7 @@
 			continue
 		// Update identification information for this record.
 		record.update_marker_icon()
-		
+
 		var/time_delay = max((SENSOR_TIME_DELAY * get_dist(linked, contact)),1)
 		if(!record.pinged)
 			addtimer(CALLBACK(record, .proc/ping), time_delay)
@@ -146,15 +146,15 @@
 	var/obj/item/ship_tracker/tracker = P.get_buffer()
 	if(!tracker || !istype(tracker))
 		return
-	
+
 	if(tracker in trackers)
 		trackers -= tracker
 		events_repository.unregister(/decl/observ/destroyed, tracker, src, .proc/remove_tracker)
-		to_chat(user, SPAN_NOTICE("You unlink the tracker in \the [P]'s buffer from \the [src]"))
+		to_chat(user, SPAN_NOTICE("You unlink the tracker in \the [P]'s buffer from \the [src]."))
 		return
 	trackers += tracker
 	events_repository.register(/decl/observ/destroyed, tracker, src, .proc/remove_tracker)
-	to_chat(user, SPAN_NOTICE("You link the tracker in \the [P]'s buffer to \the [src]"))
+	to_chat(user, SPAN_NOTICE("You link the tracker in \the [P]'s buffer to \the [src]."))
 
 /obj/machinery/computer/ship/sensors/proc/remove_tracker(var/obj/item/ship_tracker/tracker)
 	trackers -= tracker
