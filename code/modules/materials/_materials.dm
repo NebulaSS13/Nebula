@@ -48,7 +48,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/gas_overlay)
 		DOORS
 			stone
 			metal
-			resin
+			plastic
 			wood
 */
 
