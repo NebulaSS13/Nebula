@@ -94,6 +94,14 @@
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
 			src.playsound_local(source, speech_sound, sound_vol, 1)
 
+		if(get_preference_value(/datum/client_preference/runechat) == global.PREF_SHOW)
+			var/list/span_list = list()
+			if(copytext_char(message, -2) == "!!")
+				span_list.Add("yell")
+			if(italics)
+				span_list.Add("italics")
+			show_runechat_message(speaker, language, capitalize(message), span_list)
+
 /mob/proc/on_hear_say(var/message)
 	to_chat(src, message)
 

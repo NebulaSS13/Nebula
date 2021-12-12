@@ -175,6 +175,8 @@ What is the naming convention for planes or layers?
   #define BEAM_PROJECTILE_LAYER    2
   #define SUPERMATTER_WALL_LAYER   3
   #define OBFUSCATION_LAYER        4
+  #define RUNECHAT_LAYER               5
+  #define RUNECHAT_LAYER_MAX           6
 
 #define FULLSCREEN_PLANE         5 // for fullscreen overlays that do not cover the hud.
   #define FULLSCREEN_LAYER         0

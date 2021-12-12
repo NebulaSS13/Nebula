@@ -73,3 +73,6 @@
 	var/next_move_dir_sub
 	/// Movement dir of the most recently pressed movement key. Used in cardinal-only movement mode.
 	var/last_move_dir_pressed
+
+	/// Messages currently seen by this client
+	var/list/seen_messages

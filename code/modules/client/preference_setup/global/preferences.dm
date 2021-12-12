@@ -248,9 +248,9 @@ var/global/list/_client_preferences_by_type
 	key = "EXAMINE_MESSAGES"
 	options = list(PREF_SHOW, PREF_HIDE)
 
-/datum/client_preference/floating_messages
-	description = "Floating chat messages"
-	key = "FLOATING_CHAT"
+/datum/client_preference/runechat
+	description = "Show Runechat (Above-Head-Speech)"
+	key = "RUNECHAT_SHOW"
 	options = list(PREF_SHOW, PREF_HIDE)
 
 /datum/client_preference/show_status_markers

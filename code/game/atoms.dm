@@ -24,6 +24,13 @@
 	var/tmp/default_pixel_y
 	var/tmp/default_pixel_z
 
+	/// Last name used to calculate a color for the chatmessage overlays
+	var/chat_color_name
+	/// Last color calculated for the the chatmessage overlays
+	var/chat_color
+	/// A luminescence-shifted value of the last color calculated for chatmessage overlays
+	var/chat_color_darkened
+
 // This is called by the maploader prior to Initialize to perform static modifications to vars set on the map. Intended use case: adjust tag vars on duplicate templates.
 /atom/proc/modify_mapped_vars(map_hash)
 	SHOULD_CALL_PARENT(TRUE)
