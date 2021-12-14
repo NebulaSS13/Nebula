@@ -69,7 +69,7 @@
 	if (!istype(target))
 		CRASH("Invalid target given for runechat")
 	if(QDELETED(owner) || !istype(owner) || !owner.client)
-		PRINT_STACK_TRACE("/datum/runechat created with [isnull(owner) ? "null" : "invalid"] mob owner")
+		PRINT_STACK_TRACE("runechat datum created with [isnull(owner) ? "null" : "invalid"] mob owner")
 		qdel(src)
 		return
 	INVOKE_ASYNC(src, .proc/generate_image, text, target, owner, language, extra_classes, lifespan)
