@@ -14,8 +14,6 @@
 #define RUNECHAT_MESSAGE_WIDTH 96
 /// Max length of chat message in characters
 #define RUNECHAT_MESSAGE_MAX_LENGTH 110
-/// The dimensions of the chat message icons
-#define RUNECHAT_MESSAGE_ICON_SIZE 9
 
 /// Maximum precision of float before rounding errors occur (in this context)
 #define RUNECHAT_LAYER_Z_STEP 0.0001
@@ -306,4 +304,3 @@
 #undef RUNECHAT_MESSAGE_WIDTH
 #undef RUNECHAT_LAYER_Z_STEP
 #undef RUNECHAT_LAYER_MAX_Z
-#undef RUNECHAT_MESSAGE_ICON_SIZE
