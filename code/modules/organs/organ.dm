@@ -146,25 +146,21 @@
 
 	if(owner && length(ailments))
 		for(var/datum/ailment/ailment in ailments)
-			if(!ailment.treated_by_reagent_type)
-				continue
-			var/treated
-			var/datum/reagents/bloodstr_reagents = owner.get_injected_reagents()
-			if(bloodstr_reagents)
-				if(REAGENT_VOLUME(bloodstr_reagents, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
-					treated = bloodstr_reagents
-				else if(REAGENT_VOLUME(owner.reagents, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
-					treated = owner.reagents
-				else
-					var/datum/reagents/ingested = owner.get_ingested_reagents()
-					if(ingested && REAGENT_VOLUME(ingested, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
-						treated = ingested
-			if(treated)
-				ailment.was_treated_by_medication(treated)
+			handle_ailment(ailment)
 
 	//check if we've hit max_damage
 	if(damage >= max_damage)
 		die()
+
+/obj/item/organ/proc/handle_ailment(var/datum/ailment/ailment)
+	if(ailment.treated_by_reagent_type)
+		for(var/datum/reagents/source in list(owner.get_injected_reagents(), owner.reagents, owner.get_ingested_reagents()))
+			for(var/reagent_type in source.reagent_volumes)
+				if(ailment.treated_by_medication(source.reagent_volumes[reagent_type]))
+					ailment.was_treated_by_medication(source, reagent_type)
+					return
+	if(ailment.treated_by_chem_effect && owner.has_chemical_effect(ailment.treated_by_chem_effect, ailment.treated_by_chem_effect_strength))
+		ailment.was_treated_by_chem_effect()
 
 /obj/item/organ/proc/is_preserved()
 	if(istype(loc,/obj/item/organ))
