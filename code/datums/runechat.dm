@@ -20,7 +20,6 @@
 /// The number of z-layer 'slices' usable by the chat message layering
 #define RUNECHAT_LAYER_MAX_Z (RUNECHAT_LAYER_MAX - RUNECHAT_LAYER) / RUNECHAT_LAYER_Z_STEP
 
-
 /// Macro from Lummox used to get height from a MeasureText proc
 #define WXH_TO_HEIGHT(x)			text2num(copytext(x, findtextEx(x, "x") + 1))
 
@@ -70,7 +69,7 @@
 		PRINT_STACK_TRACE("runechat datum created with [isnull(owner) ? "null" : "invalid"] mob owner")
 		qdel(src)
 		return
-	INVOKE_ASYNC(src, .proc/generate_image, text, target, owner, language, extra_classes, lifespan)
+	generate_image(text, target, owner, language, extra_classes, lifespan)
 
 /datum/runechat/Destroy()
 	if (owned_by)
@@ -101,6 +100,8 @@
  * * lifespan - The lifespan of the message in deciseconds
  */
 /datum/runechat/proc/generate_image(text, atom/target, mob/owner, decl/language/language, list/extra_classes, lifespan)
+	set waitfor = FALSE
+	
 	// Register client who owns this message
 	owned_by = owner.client
 

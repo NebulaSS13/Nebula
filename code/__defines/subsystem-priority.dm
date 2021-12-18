@@ -6,11 +6,12 @@
 #define SS_PRIORITY_DEFAULT 50         // Default priority for all processes levels
 
 // SS_TICKER
-#define SS_PRIORITY_OVERLAY        100 // Applies overlays. May cause overlay pop-in if it gets behind.
 #define SS_PRIORITY_TIMER          20
+#define SS_PRIORITY_INPUT          20  // Input things.
 
 // Normal
 #define SS_PRIORITY_TICKER         100 // Gameticker.
+#define SS_PRIORITY_OVERLAY        100 // Applies overlays. May cause overlay pop-in if it gets behind.
 #define SS_PRIORITY_MOB            95  // Mob Life().
 #define SS_PRIORITY_MACHINERY      95  // Machinery + powernet ticks.
 #define SS_PRIORITY_AIR            80  // ZAS processing.
@@ -18,7 +19,6 @@
 #define SS_PRIORITY_MATERIALS      60  // Multi-tick chemical reactions.
 #define SS_PRIORITY_LIGHTING       50  // Queued lighting engine updates.
 #define SS_PRIORITY_SPACEDRIFT     40  // Drifting things.
-#define SS_PRIORITY_INPUT          20  // Input things.
 #define SS_PRIORITY_RUNECHAT       20  // Runechat processing.
 #define SS_PRIORITY_ICON_UPDATE    20  // Queued icon updates. Mostly used by APCs and tables.
 #define SS_PRIORITY_ALARM          20  // Alarm processing.
