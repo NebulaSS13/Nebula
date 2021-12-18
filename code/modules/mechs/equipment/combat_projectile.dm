@@ -16,14 +16,11 @@
 /obj/item/gun/projectile/automatic/get_hardpoint_status_value()
 	if(!isnull(ammo_magazine))
 		return ammo_magazine.stored_ammo.len
-	else
-		return null
 
 /obj/item/gun/projectile/automatic/get_hardpoint_maptext()
 	if(!isnull(ammo_magazine))
 		return "[ammo_magazine.stored_ammo.len]/[ammo_magazine.max_ammo]"
-	else
-		return 0
+	return 0
 
 //Weapons below this.
 /obj/item/mech_equipment/mounted_system/projectile
@@ -136,14 +133,15 @@
 
 /obj/item/mech_equipment/mounted_system/projectile/MouseDownInteraction(atom/object, location, control, params, mob/user)
 	var/obj/item/gun/gun = holding
-	if(user != src)
-		if(istype(object) && (isturf(object) || isturf(object.loc)) && !user.incapacitated() && istype(gun))
-			gun.set_autofire(object, owner, FALSE) // Passed gun-firer is still the exosuit since all checks need to be done on the suit.
-			owner.current_user = user
-	else
-		if(istype(object) && (isturf(object) || isturf(object.loc)) && !owner.incapacitated() && istype(gun))
-			gun.set_autofire(object, owner, FALSE)
-			owner.current_user = null
+	if(istype(object) && (isturf(object) || isturf(object.loc)) && istype(gun))
+		if(user != src)
+			if(!user.incapacitated())
+				gun.set_autofire(object, owner, FALSE) // Passed gun-firer is still the exosuit since all checks need to be done on the suit.
+				owner.current_user = user
+		else
+			if(!owner.incapacitated())
+				gun.set_autofire(object, owner, FALSE)
+				owner.current_user = null
 
 /obj/item/mech_equipment/mounted_system/projectile/MouseUpInteraction(atom/object, location, control, params, mob/user)
 	var/obj/item/gun/gun = holding
@@ -156,12 +154,15 @@
 	if(!istype(gun))
 		owner.current_user = null
 		return
-	if(user != owner)
-		if(user != owner.current_user)
+	if(istype(over_object) && (isturf(over_object) || isturf(over_object.loc)))
+		if(user != owner)
+			if(user != owner.current_user || user.incapacitated())
+				gun.clear_autofire()
+				return
+		else if(owner.incapacitated())
 			gun.clear_autofire()
 			return
-		if(istype(over_object) && (isturf(over_object) || isturf(over_object.loc)) && !user.incapacitated() && istype(gun))
-			gun.set_autofire(over_object, owner, FALSE)
-	else
-		if(istype(over_object) && (isturf(over_object) || isturf(over_object.loc)) && !owner.incapacitated() && istype(gun))
-			gun.set_autofire(over_object, owner, FALSE)
+		gun.set_autofire(over_object, owner, FALSE)
+		return
+	
+	gun.clear_autofire()
