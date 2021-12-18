@@ -15,8 +15,8 @@ on:
 
 env:
   BYOND_MAJOR: "514"
-  BYOND_MINOR: "1566"
-  SPACEMAN_DMM_VERSION: suite-1.7
+  BYOND_MINOR: "1572"
+  SPACEMAN_DMM_VERSION: suite-1.7.1
 
 jobs:
   DreamChecker:
