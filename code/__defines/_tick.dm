@@ -12,11 +12,8 @@
 /// Tick limit while initializing
 #define TICK_LIMIT_MC_INIT_DEFAULT (100 - TICK_BYOND_RESERVE)
 
-
 /// for general usage of tick_usage
 #define TICK_USAGE world.tick_usage
-/// to be used where the result isn't checked
-#define TICK_USAGE_REAL world.tick_usage
 
 /// Returns true if tick_usage is above the limit
 #define TICK_CHECK ( TICK_USAGE > Master.current_ticklimit )
@@ -27,7 +24,7 @@
 //percent_of_tick_used * (ticklag * 100(to convert to ms)) / 100(percent ratio)
 //collapsed to percent_of_tick_used * tick_lag
 #define TICK_DELTA_TO_MS(percent_of_tick_used) ((percent_of_tick_used) * world.tick_lag)
-#define TICK_USAGE_TO_MS(starting_tickusage) (TICK_DELTA_TO_MS(TICK_USAGE_REAL - starting_tickusage))
+#define TICK_USAGE_TO_MS(starting_tickusage) (TICK_DELTA_TO_MS(TICK_USAGE - starting_tickusage))
 
 //time of day but automatically adjusts to the server going into the next day within the same round.
 //for when you need a reliable time number that doesn't depend on byond time.
