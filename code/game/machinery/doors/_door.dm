@@ -544,6 +544,9 @@
 		if(lock.locked && length(lock.req_access))
 			. |= lock.req_access
 
+	for(var/obj/item/stock_parts/network_receiver/network_lock/lock in get_all_components_of_type(/obj/item/stock_parts/network_receiver/network_lock))
+		. |= lock.get_req_access()
+
 /obj/machinery/door/do_simple_ranged_interaction(var/mob/user)
 	if((!requiresID() || allowed(null)) && can_operate(user) && can_open_manually)
 		toggle()

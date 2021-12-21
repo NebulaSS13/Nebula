@@ -120,9 +120,9 @@ Public methods machines can expose. Pretty bare-bones; just wraps a proc and giv
 
 /decl/public_access/public_method/proc/perform(datum/owner, ...)
 	if(forward_args)
-		call(owner, call_proc)(arglist(args.Copy(2)))
+		return call(owner, call_proc)(arglist(args.Copy(2)))
 	else
-		call(owner, call_proc)()
+		return call(owner, call_proc)()
 
 /*
 Machinery implementation

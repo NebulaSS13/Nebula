@@ -62,7 +62,8 @@
 	//put this here for easier tracking ingame
 	var/datum/money_account/initial_account
 
-	var/list/initial_email_login = list("login" = "", "password" = "")
+	var/list/initial_account_login = list("login" = "", "password" = "")
+	var/account_network	// Network id of the network the account was created on.
 
 /datum/mind/New(var/key)
 	src.key = key

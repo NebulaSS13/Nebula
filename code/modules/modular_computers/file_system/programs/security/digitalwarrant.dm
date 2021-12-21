@@ -10,7 +10,7 @@ var/global/list/all_warrants
 	program_menu_icon = "star"
 	requires_network = 1
 	available_on_network = 1
-	required_access = list(access_security)
+	read_access = list(access_security)
 	nanomodule_path = /datum/nano_module/program/digitalwarrant/
 	category = PROG_SEC
 
@@ -37,7 +37,7 @@ var/global/list/all_warrants
 	var/list/data = host.initial_data()
 
 	if(active)
-		data["details"] = active.generate_nano_data(using_access)
+		data["details"] = active.generate_nano_data(get_access(user), user)
 	else
 		for(var/datum/computer_file/report/warrant/W in global.all_warrants)
 			LAZYADD(data[W.get_category()],  W.get_nano_summary())
@@ -111,7 +111,7 @@ var/global/list/all_warrants
 		var/datum/report_field/F = active.field_from_ID(text2num(href_list["edit_field"]))
 		if(!F)
 			return
-		if(!F.verify_access_edit(using_access))
+		if(!(F.get_perms(get_access(usr), usr) & OS_WRITE_ACCESS))
 			to_chat(usr, SPAN_WARNING("\The [nano_host()] flashes an \"Access Denied\" warning."))
 			return
 		F.ask_value(usr)

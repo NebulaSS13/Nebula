@@ -509,12 +509,9 @@ SUBSYSTEM_DEF(jobs)
 			H.buckled.set_dir(H.dir)
 
 	if(!(ASSIGNMENT_ROBOT in job.event_categories) && !(ASSIGNMENT_COMPUTER in job.event_categories)) //These guys get their emails later.
-		var/domain = "freemail.net"
-		if(H.char_branch?.email_domain)
-			domain = H.char_branch.email_domain
 		var/datum/computer_network/network = get_local_network_at(get_turf(H))
 		if(network)
-			network.create_email(H, H.real_name, domain, rank)
+			network.create_account(H, H.real_name, null, H.real_name, null, TRUE)
 
 	// If they're head, give them the account info for their department
 	if(H.mind && job.head_position)

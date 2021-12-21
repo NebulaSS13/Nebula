@@ -1,5 +1,5 @@
 //Field with people in it; has some communications procs available to it.
-/datum/report_field/people/proc/send_email(mob/user)
+/datum/report_field/people/proc/send_email(mob/user, list/access)
 	if(!get_value())
 		return //No one to send to anyway.
 	var/subject = sanitize(input(user, "Email Subject:", "Document Email", "Report Submission: [owner.display_name()]") as null|text)
@@ -9,12 +9,15 @@
 		return
 	var/datum/computer_file/data/text/report_file
 	if(attach_report)
-		var/list/user_access = list()
-		var/obj/item/card/id/I = user.GetIdCard()
-		if(I)
-			user_access |= I.access
+		var/list/user_access
+		if(access)
+			user_access = access.Copy()
+		else
+			var/obj/item/card/id/I = user.GetIdCard()
+			if(I)
+				user_access += I.access
 		report_file = new
-		report_file.stored_data = owner.generate_pencode(user_access, no_html = 1) //TXT files can't have html; they use pencode only.
+		report_file.stored_data = owner.generate_pencode(user_access, user, no_html = 1) //TXT files can't have html; they use pencode only.
 		report_file.filename = owner.filename
 	if(perform_send(subject, body, report_file))
 		to_chat(user, "<span class='notice'>The email has been sent.</span>")
@@ -33,7 +36,7 @@
 	var/datum/computer_network/net = get_used_network()
 	if(!net)
 		return
-	var/datum/computer_file/data/email_account/server = net.find_email_by_name(EMAIL_DOCUMENTS)
+	var/datum/computer_file/data/account/server = net.find_account_by_login(EMAIL_DOCUMENTS)
 	var/datum/computer_file/data/email_message/message = new()
 	message.title = subject
 	message.stored_data = body

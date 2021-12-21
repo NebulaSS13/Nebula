@@ -118,6 +118,14 @@
 	if( href_list["PC_terminal"] )
 		open_terminal(usr)
 		return TOPIC_HANDLED
+	
+	if( href_list["PC_login"])
+		login_prompt(usr)
+		return TOPIC_REFRESH
+
+	if( href_list["PC_logout"])
+		logout_account(usr)
+		return TOPIC_REFRESH
 
 /datum/extension/interactive/os/proc/regular_ui_update()
 	var/ui_update_needed = 0
@@ -215,6 +223,9 @@
 	data["PC_stationtime"] = stationtime2text()
 	data["PC_hasheader"] = !updating
 	data["PC_showexitprogram"] = active_program ? 1 : 0 // Hides "Exit Program" button on mainscreen
+
+	var/datum/computer_file/data/account/cur_account = get_account_nocheck()
+	data["PC_loggedin"] = cur_account?.login
 	return data
 
 /datum/extension/interactive/os/initial_data()

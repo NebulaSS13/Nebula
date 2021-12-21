@@ -8,10 +8,13 @@
 	var/auto_deny_all								// Set this to TRUE to deny all access attempts if network connection is lost.
 	var/initial_network_id							// The address to the network
 	var/initial_network_key							// network KEY
-	var/list/grants = list()						// List of grants required to operate the device.
+	var/selected_parent_group						// Current selected parent_group for access assignment.
+	
+	var/list/groups									// List of groups whose members are permitted to access this device.
+	var/OR_mode = FALSE								// Whether or not network locks will use AND or OR access.
 	var/emagged										// Whether or not this has been emagged.
 	var/error
-	var/signal_strength = NETWORK_CONNECTION_WIRELESS	// How good the wireless capabilities are of this card.
+
 	var/interact_sounds = list("keyboard", "keystroke")
 	var/interact_sound_volume = 40
 	var/static/legacy_compatibility_mode = TRUE     // Makes legacy access on ids play well with mapped devices with network locks. Override if your server is fully using network-enabled ids or has no mapped access.
@@ -22,7 +25,7 @@
 
 /obj/item/stock_parts/network_receiver/network_lock/emag_act(remaining_charges, mob/user, emag_source)
 	. = ..()
-	if(length(req_access) && istype(loc, /obj/machinery)) // Don't emag it outside; you can just cut access without it anyway.
+	if(istype(loc, /obj/machinery)) // Don't emag it outside; you can just cut access without it anyway.
 		emagged = TRUE
 		to_chat(user, SPAN_NOTICE("You slide the card into \the [src]. It flashes purple briefly, then disengages."))
 		. = max(., 1)
@@ -39,18 +42,16 @@
 	if(!access_controller)
 		return
 
-	var/list/resulting_grants = list()
-	for(var/grant_data in grants)
-		var/datum/computer_file/data/grant_record/grant = access_controller.get_grant(grant_data)
-		if(!istype(grant))
-			continue // couldn't find.
-		resulting_grants |= uppertext("[D.network_id].[grant_data]")
-		if(legacy_compatibility_mode)
-			resulting_grants |= grant_data // This lets just grant_data, which is the access string for mapped machines, be used as an alternative.
-
-	if(!resulting_grants.len)
+	LAZYINITLIST(groups)
+	var/list/resulting_access = list()
+	for(var/group in groups)
+		if(!(group in access_controller.get_all_groups()))
+			groups -= groups // This group doesn't exist anymore - delete it.
+			continue
+		resulting_access |= "[group].[D.network_id]"
+	if(!resulting_access.len)
 		return
-	return list(resulting_grants) // List of lists is an OR type access configuration.
+	return OR_mode ? list(resulting_access) : resulting_access // List of lists is an OR type access configuration.
 
 /obj/item/stock_parts/network_receiver/network_lock/proc/get_default_access()
 	if(auto_deny_all)
@@ -83,15 +84,34 @@
 		return
 	data["connected"] = TRUE
 	data["default_state"] = auto_deny_all
-	var/list/grants_data = list()
 	if(!network.access_controller)
 		return
-	for(var/datum/computer_file/data/grant_record/GR in network.access_controller.get_all_grants())
-		grants_data.Add(list(list(
-			"grant_name" = GR.stored_data,
-			"assigned" = (GR.stored_data in grants)
-		)))
-	data["grants"] = grants_data
+	var/list/group_dictionary = network.access_controller.get_group_dict()
+	var/list/parent_groups_data
+	var/list/child_groups_data
+	if(selected_parent_group)
+		if(!(selected_parent_group in group_dictionary))
+			selected_parent_group = null
+		else
+			var/list/child_groups = group_dictionary[selected_parent_group]
+			if(child_groups)
+				child_groups_data = list()
+				for(var/child_group in child_groups)
+					child_groups_data.Add(list(list(
+						"child_group" = child_group,
+						"assigned" = (LAZYISIN(groups, child_group))
+					)))
+	if(!selected_parent_group) // Check again in case we ended up with a non-existent selected parent group instead of breaking the UI.
+		parent_groups_data = list()
+		for(var/parent_group in group_dictionary)
+			parent_groups_data.Add(list(list(
+				"parent_group" = parent_group,
+				"assigned" = (LAZYISIN(groups, parent_group))
+			)))
+	data["parent_groups"] = parent_groups_data
+	data["child_groups"] = child_groups_data
+	data["OR_mode"] = OR_mode
+	data["selected_parent_group"] = selected_parent_group
 
 /obj/item/stock_parts/network_receiver/network_lock/OnTopic(mob/user, href_list, datum/topic_state/state)
 	. = ..()
@@ -118,22 +138,36 @@
 		auto_deny_all = TRUE
 		return TOPIC_REFRESH
 
-	if(href_list["remove_grant"])
-		grants -= href_list["remove_grant"]
+	if(href_list["remove_group"])
+		LAZYREMOVE(groups, href_list["remove_group"])
 		return TOPIC_REFRESH
 
-	if(href_list["assign_grant"])
-		grants |= href_list["assign_grant"]
+	if(href_list["assign_group"])
+		LAZYDISTINCTADD(groups, href_list["assign_group"])
 		return TOPIC_REFRESH
+
+	if(href_list["select_parent_group"])
+		selected_parent_group = href_list["select_parent_group"]
+		return TOPIC_REFRESH
+
+	if(href_list["toggle_OR_mode"])
+		OR_mode = !OR_mode
+		return TOPIC_REFRESH
+	
+	if(href_list["info"])
+		switch(href_list["info"])
+			if("OR_mode")
+				to_chat(user, SPAN_NOTICE("While in OR MODE, the device will require membership in only one of the assigned groups in order to access the device."))
+			if("parent_groups")
+				to_chat(user, SPAN_NOTICE("Assigning a parent group to the access list will permit any member of its respective child groups to access the device."))
 
 /obj/item/stock_parts/network_receiver/network_lock/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nanoui/master_ui, datum/topic_state/state)
 	var/data = ui_data(user)
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "network_lock.tmpl", capitalize(name), 380, 500)
+		ui = new(user, src, ui_key, "network_lock.tmpl", capitalize(name), 500, 500)
 		ui.set_initial_data(data)
 		ui.open()
-		ui.set_auto_update(1)
 
 /obj/item/stock_parts/network_receiver/network_lock/CouldUseTopic(var/mob/user)
 	..()
@@ -147,3 +181,12 @@
 	part_flags = PART_FLAG_HAND_REMOVE
 	material = /decl/material/solid/metal/steel
 	matter = list(/decl/material/solid/fiberglass = MATTER_AMOUNT_REINFORCEMENT)
+
+// Prevent tampering with machinery you don't have access to.
+/obj/machinery/cannot_transition_to(state_path, mob/user)
+	var/decl/machine_construction/state = GET_DECL(state_path)
+	if(state && !state.locked && construct_state && construct_state.locked)
+		for(var/obj/item/stock_parts/network_receiver/network_lock/lock in get_all_components_of_type(/obj/item/stock_parts/network_receiver/network_lock))
+			if(!lock.check_access(user))
+				return SPAN_WARNING("\The [lock] flashes red! You lack the access to unlock this.")
+	return ..()

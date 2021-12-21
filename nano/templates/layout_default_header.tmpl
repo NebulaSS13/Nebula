@@ -17,6 +17,11 @@
 			{{if data.PC_stationtime}}
 				<td><b>{{:data.PC_stationtime}}<b>
 			{{/if}}
+			{{if data.PC_loggedin}}
+				<td>{{:helper.link('Account:' + data.PC_loggedin, null, {'PC_login' : 1})}}{{:helper.link('X', null, {'PC_logout' : 1})}}
+			{{else}}
+				<td>{{:helper.link('Not logged in', null, {'PC_login' : 1})}}
+			{{/if}}
 			{{for data.PC_programheaders}}
 				<td><img src='{{:value.icon}}'>
 			{{/for}}

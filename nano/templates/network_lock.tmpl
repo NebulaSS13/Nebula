@@ -19,20 +19,54 @@
 				{{:helper.link('DENY ALL', null, { "deny_all" : 1 }, data.default_state ? 'disabled' : null)}}
 			</div>
 		</div>
+		<div class='item'>
+			<div class='itemLabel'>Membership requirement mode:</div>
+			<div class='itemBody'>
+				{{:helper.link(data.OR_mode ? 'OR MODE' : 'AND MODE', null, { "toggle_OR_mode" : 1 }, null)}} {{:helper.link('?', null, { "info" : "OR_mode" }, null)}}
+			</div>
+		</div>
 		<hr>
-		<h2>Grants:</h2>
-		<table>
-			<tr><th>Grant
-			<th>Operations
-			{{for data.grants}}
-				<tr><td>{{:value.grant_name}}
-				<td>
-					{{if value.assigned}}
-						{{:helper.link('REMOVE', null, { "remove_grant" : value.grant_name })}}
-					{{else}}
-						{{:helper.link('ASSIGN', null, { "assign_grant" : value.grant_name })}}
-					{{/if}}
-			{{/for}}
-		</table>
+		{{if data.parent_groups}}
+			<h2>Parent Groups:</h2>
+			{{:helper.link('?', null, { "info" : "parent_groups" }, null)}}
+			<table>
+				<tr><th>Group
+				<th>Operations
+				{{for data.parent_groups}}
+					<tr><td>{{:helper.link(value.parent_group, null, { "select_parent_group" : value.parent_group })}}
+					<td>
+						{{if value.assigned}}
+							{{:helper.link('REMOVE', null, { "remove_group" : value.parent_group })}}
+						{{else}}
+							{{:helper.link('ASSIGN', null, { "assign_group" : value.parent_group })}}
+						{{/if}}
+				{{/for}}
+			</table>
+		{{else data.selected_parent_group}}
+			<h2>Viewing Child Groups for: {{:data.selected_parent_group}}</h2>
+			{{if data.child_groups}}
+				<h2>Child Groups:</h2>
+				<table>
+					<tr><th>Group
+					<th>Operations
+					{{for data.child_groups}}
+						<tr><td>{{:value.child_group}}
+						<td>
+							{{if value.assigned}}
+								{{:helper.link('REMOVE', null, { "remove_group" : value.child_group })}}
+							{{else}}
+								{{:helper.link('ASSIGN', null, { "assign_group" : value.child_group })}}
+							{{/if}}
+					{{/for}}
+				</table>
+			{{else}}
+				<i> No child groups found! </i>
+			{{/if}}
+			<div class='item'>
+				{{:helper.link('Back to parent group listing', null, { "select_parent_group" : null })}}
+			</div>
+			{{else}}
+			<i>No groups found on network!</i>
+		{{/if}}
 	{{/if}}
 {{/if}}

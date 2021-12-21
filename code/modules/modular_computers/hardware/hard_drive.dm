@@ -90,7 +90,7 @@
 
 
 // Use this proc to remove file from the drive. Returns 1 on success and 0 on failure. Contains necessary sanity checks.
-/obj/item/stock_parts/computer/hard_drive/proc/remove_file(var/datum/computer_file/F)
+/obj/item/stock_parts/computer/hard_drive/proc/remove_file(var/datum/computer_file/F, list/accesses, mob/user)
 	if(!F || !istype(F))
 		return 0
 
@@ -99,7 +99,9 @@
 
 	if(!check_functionality())
 		return 0
-
+	
+	if(!(F.get_file_perms(accesses, user) & OS_WRITE_ACCESS))
+		return 0
 	if(F in stored_files)
 		stored_files -= F
 		F.holder = null
