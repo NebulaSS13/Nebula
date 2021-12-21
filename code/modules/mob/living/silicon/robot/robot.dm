@@ -300,7 +300,7 @@
 	else
 		changed_name = "[modtype] [braintype]-[num2text(ident)]"
 
-	create_or_rename_email(changed_name, "root.rt")
+	create_or_update_account(changed_name)
 	real_name = changed_name
 	name = real_name
 	if(mind)

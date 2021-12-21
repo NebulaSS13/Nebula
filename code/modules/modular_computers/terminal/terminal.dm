@@ -89,7 +89,18 @@
 
 /datum/terminal/proc/update_content()
 	var/list/content = history.Copy()
-	content += "<form action='byond://'><input type='hidden' name='src' value='\ref[src]'>> <input type='text' size='40' name='input' autofocus><input type='submit' value='Enter'></form>"
+	var/account_name
+	// current_account will be reset on access check if account look up fails.
+	var/datum/extension/interactive/os/account_computer = get_account_computer()
+	if(account_computer.login && account_computer.current_account)
+		var/datum/computer_network/network = account_computer.get_network()
+		if(network)
+			account_name = "[account_computer.login]@[network.network_id]"
+		else
+			account_name = "LOCAL"
+	else
+		account_name = "GUEST"
+	content += "<form action='byond://'><input type='hidden' name='src' value='\ref[src]'>> [account_name] <input type='text' size='40' name='input' autofocus><input type='submit' value='Enter'></form>"
 	content += "<i>type `man` for a list of available commands.</i>"
 	panel.set_content("<tt>[jointext(content, "<br>")]</tt>")
 
@@ -136,3 +147,11 @@
 			candidates[scf] = scf.weight
 	var/datum/terminal_skill_fail/chosen = pickweight(candidates)
 	return chosen.execute(src)
+
+// Returns the computer used for the terminal's account
+/datum/terminal/proc/get_account_computer()
+	return computer
+
+/datum/terminal/proc/get_access(mob/user)
+	var/datum/extension/interactive/os/account_computer = get_account_computer()
+	return(account_computer.get_access(user))

@@ -26,3 +26,6 @@
 		return FALSE
 
 	return TRUE
+
+/datum/terminal/remote/get_account_computer()
+	return origin_computer

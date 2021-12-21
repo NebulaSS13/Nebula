@@ -1,9 +1,9 @@
 var/global/list/all_mainframe_roles = list(
 	MF_ROLE_SOFTWARE,
-	MF_ROLE_FILESERVER, 
-	MF_ROLE_EMAIL_SERVER, 
+	MF_ROLE_FILESERVER,
 	MF_ROLE_LOG_SERVER, 
-	MF_ROLE_CREW_RECORDS
+	MF_ROLE_CREW_RECORDS,
+	MF_ROLE_ACCOUNT_SERVER
 )
 
 /datum/extension/network_device/mainframe
@@ -42,13 +42,13 @@ var/global/list/all_mainframe_roles = list(
 	if(HDD)
 		return HDD.find_file_by_name(filename)
 
-/datum/extension/network_device/mainframe/proc/delete_file(filename)
+/datum/extension/network_device/mainframe/proc/delete_file(filename, list/accesses, mob/user)
 	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()
 	if(HDD)
 		var/datum/computer_file/data/F = HDD.find_file_by_name(filename)
 		if(!F || F.undeletable)
 			return FALSE
-		return HDD.remove_file(F)
+		return HDD.remove_file(F, accesses, user)
 
 /datum/extension/network_device/mainframe/proc/store_file(datum/computer_file/file)
 	var/obj/item/stock_parts/computer/hard_drive/HDD = get_storage()

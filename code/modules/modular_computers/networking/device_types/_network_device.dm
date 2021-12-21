@@ -15,6 +15,10 @@
 
 	var/last_rand_time 		   // Last time a random method was called.
 
+	// These variables are for the *device's* public variables and methods, if they exist.
+	var/list/device_variables
+	var/list/device_methods
+
 /datum/extension/network_device/New(datum/holder, n_id, n_key, c_type, autojoin = TRUE)
 	..()
 	network_id = n_id
@@ -26,6 +30,13 @@
 	network_tag = "[uppertext(replacetext(O.name, " ", "_"))]-[sequential_id(type)]"
 	if(autojoin)
 		SSnetworking.queue_connection(src)
+	
+	if(length(device_variables))
+		for(var/path in device_variables)
+			device_variables[path] = GET_DECL(path)
+	if(length(device_methods))
+		for(var/path in device_methods)
+			device_methods[path] = GET_DECL(path)
 
 	if(has_commands)
 		reload_commands()
@@ -225,33 +236,53 @@
 		do_change_net_tag(user)
 		return TOPIC_REFRESH
 
-/datum/extension/network_device/proc/has_access(mob/user)
+/datum/extension/network_device/proc/has_access(list/accesses)
 	var/datum/computer_network/network = get_network()
 	if(!network)
 		return TRUE // If not on network, always TRUE for access, as there isn't anything to access.
-	if(!user)
-		return FALSE
-	var/obj/item/card/id/network/id = user.GetIdCard()
-	if(id && istype(id, /obj/item/card/id/network) && network.access_controller && (id.user_id in network.access_controller.administrators))
-		return TRUE
 	var/obj/M = holder
-	return M.check_access(user)
+	if(!accesses)
+		accesses  = list()
+	return M.check_access_list(accesses)
 
-// Return the target of any commands passed to this device.
-/datum/extension/network_device/proc/get_command_target()
-	if(istype(holder, /obj/machinery))
+// Return the target of the command passed to this device.
+/datum/extension/network_device/proc/get_command_target(command)
+	var/decl/public_access/public_thing
+	if(command_and_call && command_and_call[command])
+		public_thing = command_and_call[command]
+	else if(command_and_write && command_and_write[command])
+		public_thing = command_and_write[command]
+	else
+		return
+	if(device_variables && (public_thing.type in device_variables))
+		return src
+	if(device_methods && (public_thing.type in device_methods))
+		return src
+	if((public_thing.type in get_holder_variables()) || (public_thing in get_holder_methods()))
 		return holder
 
 // Return the public methods and variables available for commands.
 /datum/extension/network_device/proc/get_public_methods()
-	var/obj/machinery/M = get_command_target()
-	if(istype(M))
-		return M.public_methods
+	var/list/public_methods = get_holder_methods()
+	if(device_methods)
+		public_methods += device_methods
+	return public_methods
 
 /datum/extension/network_device/proc/get_public_variables()
-	var/obj/machinery/M = get_command_target()
+	var/list/public_variables = get_holder_variables()
+	if(device_variables)
+		public_variables += device_variables
+	return public_variables
+
+/datum/extension/network_device/proc/get_holder_methods()
+	var/obj/machinery/M = holder
 	if(istype(M))
-		return M.public_variables
+		return M.public_methods?.Copy()
+
+/datum/extension/network_device/proc/get_holder_variables()
+	var/obj/machinery/M = holder
+	if(istype(M))
+		return M.public_variables?.Copy()
 
 /datum/extension/network_device/proc/set_command_reference(list/selected_commands, alias, reference)
 	if(!alias || !reference)
@@ -292,18 +323,18 @@
 	return FALSE
 
 // Any modification of public vars and calling methods from network commands. Return text feedback on success/unsuccess of command.
-/datum/extension/network_device/proc/on_command(command, command_args, mob/user)
-	var/datum/command_target = get_command_target()
+/datum/extension/network_device/proc/on_command(command, command_args, list/access)
+	var/datum/command_target = get_command_target(command)
 	if(!has_commands)
 		return "Device cannot receive commands."
 	if(!command_target)
 		return "No valid target found for command '[command]'"
-	if(!has_access(user))
+	if(!has_access(access))
 		return "Access denied."
 	if(LAZYACCESS(command_and_call, command))
 		var/decl/public_access/public_method/method = command_and_call[command]
-		method.perform(command_target, command_args)
-		return "Successfully called method '[command]' on [network_tag]."
+		var/output = method.perform(arglist(list(command_target) + command_args))
+		return "Successfully called method '[command]' on [network_tag]." + "[output ? " Device reported: [output]" : null]"
 	if(LAZYACCESS(command_and_write, command))
 		var/decl/public_access/public_variable/variable = command_and_write[command]
 		if(command_args) // Write to a var.
@@ -352,10 +383,10 @@
 						return FALSE
 
 // Calls a random method for skill failure etc.
-/datum/extension/network_device/proc/random_method(var/user)
+/datum/extension/network_device/proc/random_method(list/access)
 	if(world.time < last_rand_time + 5 SECONDS)
 		return "Reinstancing command system, please try again in a few moments."
-	if(user && !has_access(user))
+	if(access && !has_access(access))
 		return "Access denied"
 	var/rand_alias = SAFEPICK(command_and_call)
 	var/decl/public_access/public_method/rand_method = LAZYACCESS(command_and_call, rand_alias)
@@ -369,10 +400,6 @@
 /datum/extension/network_device/proc/reload_commands()
 	LAZYCLEARLIST(command_and_call)
 	LAZYCLEARLIST(command_and_write)
-
-	var/obj/machinery/M = get_command_target()
-	if(!has_commands || !istype(M))
-		return
 
 	var/list/pub_methods = get_public_methods()
 	var/list/pub_vars = get_public_variables()

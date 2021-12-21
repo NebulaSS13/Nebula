@@ -7,40 +7,27 @@
 	program_menu_icon = "mail-closed"
 	size = 7
 	available_on_network = 1
-	var/stored_login = ""
-	var/stored_password = ""
 	usage_flags = PROGRAM_ALL
 	category = PROG_OFFICE
 
 	nanomodule_path = /datum/nano_module/program/email_client
-
-// Persistency. Unless you log out, or unless your password changes, this will pre-fill the login data when restarting the program
-/datum/computer_file/program/email_client/on_shutdown()
-	if(NM)
-		var/datum/nano_module/program/email_client/NME = NM
-		if(NME.current_account)
-			stored_login = NME.stored_login
-			stored_password = NME.stored_password
-			NME.log_out()
-		else
-			stored_login = ""
-			stored_password = ""
-	. = ..()
 
 /datum/computer_file/program/email_client/on_startup()
 	. = ..()
 
 	if(NM)
 		var/datum/nano_module/program/email_client/NME = NM
-		NME.stored_login = stored_login
-		NME.stored_password = stored_password
-		NME.log_in()
 		NME.error = ""
-		NME.check_for_new_messages(1)
+		NME.check_for_new_messages(TRUE, computer.get_account_nocheck())
 
 /datum/computer_file/program/email_client/proc/new_mail_notify(notification_sound)
 	computer.visible_notification(notification_sound)
 	computer.audible_notification("sound/machines/ping.ogg")
+
+/datum/computer_file/program/email_client/proc/mail_received(datum/computer_file/data/email_message/received)
+	if(NM)
+		var/datum/nano_module/program/email_client/NME = NM
+		NME.mail_received(received)
 
 /datum/computer_file/program/email_client/process_tick()
 	..()
@@ -48,19 +35,18 @@
 	if(!istype(NME))
 		return
 	NME.relayed_process(computer.get_network_status())
-
-	var/check_count = NME.check_for_new_messages()
-	if(check_count)
-		if(check_count == 2 && !NME.current_account.notification_mute)
-			new_mail_notify(NME.current_account.notification_sound)
-		ui_header = "ntnrc_new.gif"
-	else
-		ui_header = "ntnrc_idle.gif"
+	var/datum/computer_file/data/account/current_account = computer.get_account_nocheck()
+	if(current_account)
+		var/check_count = NME.check_for_new_messages(FALSE, current_account)
+		if(check_count)
+			if(check_count == 2 && !current_account.notification_mute)
+				new_mail_notify(current_account.notification_sound)
+			ui_header = "ntnrc_new.gif"
+		else
+			ui_header = "ntnrc_idle.gif"
 
 /datum/nano_module/program/email_client/
 	name = "Email Client"
-	var/stored_login = ""
-	var/stored_password = ""
 	var/error = ""
 
 	var/msg_title = ""
@@ -78,7 +64,6 @@
 	var/download_progress = 0
 	var/download_speed = 0
 
-	var/datum/computer_file/data/email_account/current_account = null
 	var/datum/computer_file/data/email_message/current_message = null
 
 /datum/nano_module/program/email_client/proc/get_functional_drive()
@@ -87,7 +72,7 @@
 /datum/nano_module/program/email_client/proc/get_email_addresses()
 	var/datum/computer_network/net = get_network()
 	if(net)
-		return net.get_email_addresses()
+		return net.get_accounts()
 
 /datum/nano_module/program/email_client/proc/mail_received(var/datum/computer_file/data/email_message/received_message)
 	var/mob/living/L = host.get_recursive_loc_of_type(/mob/living)
@@ -102,64 +87,12 @@
 		msg += "*--*"
 		to_chat(L, jointext(msg, null))
 
-/datum/nano_module/program/email_client/Destroy()
-	log_out()
-	. = ..()
-
-/datum/nano_module/program/email_client/proc/log_in()
-	var/list/id_login
-	var/atom/movable/A = nano_host()
-	var/obj/item/card/id/id = A.GetIdCard()
-	if(!id && ismob(A.loc))
-		var/mob/M = A.loc
-		id = M.GetIdCard()
-	if(id)
-		id_login = id.associated_email_login.Copy()
-
-	if(!get_network())
-		error = "Network error"
-		return 0
-	var/datum/computer_file/data/email_account/target
-	for(var/datum/computer_file/data/email_account/account in get_email_addresses())
-		if(!account || !account.can_login)
-			continue
-		if(id_login && id_login["login"] == account.login)
-			target = account
-			break
-		if(stored_login && stored_login == account.login)
-			target = account
-			break
-
-	if(!target)
-		error = "Invalid Login"
-		return 0
-
-	if(target.suspended)
-		error = "This account has been suspended. Please contact the system administrator for assistance."
-		return 0
-
-	var/use_pass
-	if(stored_password)
-		use_pass = stored_password
-	else if(id_login)
-		use_pass = id_login["password"]
-
-	if(use_pass == target.password)
-		current_account = target
-		current_account.connected_clients |= src
-		return 1
-	else
-		error = "Invalid Password"
-		return 0
-
 // Returns 0 if no new messages were received, 1 if there is an unread message but notification has already been sent.
 // and 2 if there is a new message that appeared in this tick (and therefore notification should be sent by the program).
-/datum/nano_module/program/email_client/proc/check_for_new_messages(var/messages_read = FALSE)
+/datum/nano_module/program/email_client/proc/check_for_new_messages(var/messages_read = FALSE, var/datum/computer_file/data/account/current_account)
 	if(!current_account)
-		return 0
-	if(!get_network())
-		return 0
-	var/list/allmails = current_account.all_emails()
+		return
+	var/list/allmails = current_account.all_incoming_emails()
 
 	if(allmails.len > last_message_count)
 		. = 2
@@ -168,34 +101,26 @@
 	else
 		. = 0
 
+	if(.) // See if we can actually find the passed account. We wait to do this til now because finding the account requires some hoop jumping that shouldn't occur every tick.
+		if(program.computer.get_account() != current_account)
+			return 0
+
 	last_message_count = allmails.len
 	if(messages_read)
 		read_message_count = allmails.len
 
-
-/datum/nano_module/program/email_client/proc/log_out()
-	if(current_account)
-		current_account.connected_clients -= src
-	current_account = null
-	downloading = null
-	download_progress = 0
-	last_message_count = 0
-	read_message_count = 0
-
 /datum/nano_module/program/email_client/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = global.default_topic_state)
 	var/list/data = host.initial_data()
-
-	// Password has been changed by other client connected to this email account
-	if(current_account)
-		if(current_account.password != stored_password)
-			if(!log_in())
-				log_out()
-				error = "Invalid Password"
-		// Banned.
-		else if(current_account.suspended)
-			log_out()
-			error = "This account has been suspended. Please contact the system administrator for assistance."
-
+	var/datum/computer_network/network = get_network()
+	var/datum/computer_file/data/account/current_account = program.computer.get_account()
+	if(!network)
+		error = "No network found. Check network connection."
+	else
+		if(istype(current_account))
+			if(current_account.suspended)
+				error = "This account has been suspended. Please contact the system administrator for assistance."
+		else
+			error = "No account logged in. Please login through your system to proceed."
 	if(error)
 		data["error"] = error
 	else if(downloading)
@@ -204,19 +129,21 @@
 		data["down_progress"] = download_progress
 		data["down_size"] = downloading.size
 		data["down_speed"] = download_speed
-
-	else if(istype(current_account))
+	else
 		data["current_account"] = current_account.login
 		data["notification_mute"] = current_account.notification_mute
 		if(addressbook)
 			var/list/all_accounts = list()
-			for(var/datum/computer_file/data/email_account/account in get_email_addresses())
+			for(var/datum/computer_file/data/account/account in get_email_addresses())
 				if(!account.can_login)
 					continue
+				var/datum/computer_file/report/crew_record/record = network.get_crew_record_by_name(account.fullname)
+				var/job = record ? record.get_job() : "Undefined"
+				var/domain = "@[network.network_id]" // TODO: Placeholder before cross-network email is a thing. 
 				all_accounts.Add(list(list(
 					"name" = account.fullname,
-					"job" = account.assignment,
-					"login" = account.login
+					"job" = job,
+					"address" = account.login + domain
 				)))
 			data["addressbook"] = 1
 			data["accounts"] = all_accounts
@@ -267,9 +194,6 @@
 					)))
 				data["messages"] = all_messages
 				data["messagecount"] = all_messages.len
-	else
-		data["stored_login"] = stored_login
-		data["stored_password"] = stars(stored_password, 0)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -280,7 +204,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/program/email_client/proc/find_message_by_fuid(var/fuid)
+/datum/nano_module/program/email_client/proc/find_message_by_fuid(var/fuid, var/datum/computer_file/data/account/current_account)
 	if(!istype(current_account))
 		return
 
@@ -325,18 +249,12 @@
 	if(..())
 		return 1
 	var/mob/living/user = usr
+	var/datum/computer_file/data/account/current_account = program.computer.get_account()
 
 	if(href_list["open"])
 		ui_interact()
 
-	check_for_new_messages(1)		// Any actual interaction (button pressing) is considered as acknowledging received message, for the purpose of notification icons.
-	if(href_list["login"])
-		log_in()
-		return 1
-
-	if(href_list["logout"])
-		log_out()
-		return 1
+	check_for_new_messages(TRUE, current_account)	// Any actual interaction (button pressing) is considered as acknowledging received message, for the purpose of notification icons.
 
 	if(href_list["reset"])
 		error = ""
@@ -389,22 +307,10 @@
 		addressbook = 0
 		return 1
 
-	if(href_list["edit_login"])
-		var/newlogin = sanitize(input(user,"Enter login", "Login", stored_login), 100)
-		if(newlogin)
-			stored_login = newlogin
-		return 1
-
-	if(href_list["edit_password"])
-		var/newpass = sanitize(input(user,"Enter password", "Password"), 100)
-		if(newpass)
-			stored_password = newpass
-		return 1
-
 	if(href_list["delete"])
 		if(!istype(current_account))
 			return 1
-		var/datum/computer_file/data/email_message/M = find_message_by_fuid(href_list["delete"])
+		var/datum/computer_file/data/email_message/M = find_message_by_fuid(href_list["delete"], current_account)
 		if(!istype(M))
 			return 1
 		if(folder == "Deleted")
@@ -427,10 +333,13 @@
 		if(!length(msg_title))
 			msg_title = "No subject"
 
+		var/datum/computer_network/network = get_network()
 		var/datum/computer_file/data/email_message/message = new()
+		if(!network)
+			return TOPIC_REFRESH
 		message.title = msg_title
 		message.stored_data = msg_body
-		message.source = current_account.login
+		message.source = current_account.login + "@[network.network_id]"
 		message.attachment = msg_attachment
 		if(!current_account.send_mail(msg_recipient, message, get_network()))
 			error = "Error sending email: this address doesn't exist."
@@ -445,7 +354,7 @@
 		return 1
 
 	if(href_list["reply"])
-		var/datum/computer_file/data/email_message/M = find_message_by_fuid(href_list["reply"])
+		var/datum/computer_file/data/email_message/M = find_message_by_fuid(href_list["reply"], current_account)
 		if(!istype(M))
 			return 1
 		error = null
@@ -459,37 +368,9 @@
 		return 1
 
 	if(href_list["view"])
-		var/datum/computer_file/data/email_message/M = find_message_by_fuid(href_list["view"])
+		var/datum/computer_file/data/email_message/M = find_message_by_fuid(href_list["view"], current_account)
 		if(istype(M))
 			current_message = M
-		return 1
-
-	if(href_list["changepassword"])
-		var/oldpassword = sanitize(input(user,"Please enter your old password:", "Password Change"), 100)
-		if(!oldpassword)
-			return 1
-		var/newpassword1 = sanitize(input(user,"Please enter your new password:", "Password Change"), 100)
-		if(!newpassword1)
-			return 1
-		var/newpassword2 = sanitize(input(user,"Please re-enter your new password:", "Password Change"), 100)
-		if(!newpassword2)
-			return 1
-
-		if(!istype(current_account))
-			error = "Please log in before proceeding."
-			return 1
-
-		if(current_account.password != oldpassword)
-			error = "Incorrect original password"
-			return 1
-
-		if(newpassword1 != newpassword2)
-			error = "The entered passwords do not match."
-			return 1
-
-		current_account.password = newpassword1
-		stored_password = newpassword1
-		error = "Your password has been successfully changed!"
 		return 1
 
 	if(href_list["set_notification"])
@@ -514,7 +395,7 @@
 		if(!filename)
 			return 1
 
-		var/datum/computer_file/data/email_message/M = find_message_by_fuid(href_list["save"])
+		var/datum/computer_file/data/email_message/M = find_message_by_fuid(href_list["save"], current_account)
 		var/datum/computer_file/data/mail = istype(M) ? M.export() : null
 		if(!istype(mail))
 			return 1
