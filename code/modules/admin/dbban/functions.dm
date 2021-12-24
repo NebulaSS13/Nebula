@@ -294,7 +294,7 @@
 /client/proc/DB_ban_panel()
 	set category = "Admin"
 	set name = "Banning Panel"
-	set desc = "Edit admin permissions"
+	set desc = "Allow edit existing bans or create new ones."
 
 	if(!holder)
 		return
