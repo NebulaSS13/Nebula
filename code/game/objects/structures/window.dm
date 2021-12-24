@@ -51,6 +51,7 @@
 		if(!isnull(dir_to_set))
 			set_dir(dir_to_set)
 		if(is_fulltile())
+			atom_flags &= ~ATOM_FLAG_CHECKS_BORDER
 			layer = FULL_WINDOW_LAYER
 		. = INITIALIZE_HINT_LATELOAD
 
