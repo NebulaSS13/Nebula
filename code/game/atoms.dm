@@ -580,7 +580,11 @@ its easier to just keep the beam vertical.
 	var/matrix/M = matrix()
 	M.Scale(icon_scale_x, icon_scale_y)
 	M.Turn(icon_rotation)
-	animate(src, transform = M, transform_animate_time)
+	if(transform_animate_time)
+		animate(src, transform = M, transform_animate_time)
+	else
+		transform = M
+	return transform
 
 // Walks up the loc tree until it finds a loc of the given loc_type
 /atom/get_recursive_loc_of_type(var/loc_type)
