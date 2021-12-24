@@ -24,7 +24,7 @@ var/global/const/SKYBOX_DIMENSION = 736 // Largest measurement for icon sides, u
 		update_skybox()
 	var/scale_value = 1
 	if(isnum(view))
-		var/target_icon_size = min(view*2, skybox.max_view_dim) * world.icon_size
+		var/target_icon_size = (view * 2 + 1) * world.icon_size
 		scale_value = skybox.parallax_bleed_percent + max((target_icon_size / SKYBOX_DIMENSION), 1)
 		skybox.screen_loc = "CENTER:-[view * world.icon_size],CENTER:-[view * world.icon_size]"
 	else
