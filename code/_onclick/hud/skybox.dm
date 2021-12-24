@@ -21,7 +21,8 @@ var/global/const/SKYBOX_DIMENSION = 736 // Largest measurement for icon sides, u
 
 /client/proc/set_skybox_offsets(var/x_dim, var/y_dim)
 	if(!skybox)
-		update_skybox()
+		update_skybox(TRUE)
+		return
 	var/scale_value = 1
 	if(isnum(view))
 		var/target_icon_size = (view * 2 + 1) * world.icon_size
