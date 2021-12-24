@@ -4,7 +4,7 @@
 #define SSRC_EXPENDED 3
 
 // Reverse map of above for debug messages.
-var/list/dbg_ssrc_rev = list(
+var/global/list/dbg_ssrc_rev = list(
 	"SSRC_NOT_QUEUED",
 	"SSRC_PENDING_QUEUE",
 	"SSRC_QUEUED",
@@ -117,7 +117,7 @@ SUBSYSTEM_DEF(runechat)
 			chat.eol_complete = reschedule_to
 
 		else
-			CRASH("Invalid state: [dbg_ssrc_rev[chat.queue_state]], expected PENDING_QUEUE or QUEUED.")
+			CRASH("Invalid state: [global.dbg_ssrc_rev[chat.queue_state]], expected PENDING_QUEUE or QUEUED.")
 
 /datum/runechat
 	var/queue_state = SSRC_NOT_QUEUED
