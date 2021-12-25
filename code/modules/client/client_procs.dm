@@ -454,7 +454,7 @@ var/global/list/localhost_addresses = list(
 
 /client/verb/SetWindowIconSize(var/val as num|text)
 	set hidden = 1
-	winset(src, "mapwindow.map", "icon-size=[val]")
+	winset(src, "window_map.map", "icon-size=[val]")
 	if(prefs && val != prefs.icon_size)
 		prefs.icon_size = val
 		SScharacter_setup.queue_preferences_save(prefs)
@@ -475,8 +475,8 @@ var/global/list/localhost_addresses = list(
 	set src = usr
 	set category = "Debug"
 
-	var/divisor = text2num(winget(src, "mapwindow.map", "icon-size")) || world.icon_size
-	var/winsize_string = winget(src, "mapwindow.map", "size")
+	var/divisor = text2num(winget(src, "window_map.map", "icon-size")) || world.icon_size
+	var/winsize_string = winget(src, "window_map.map", "size")
 
 	to_chat(usr, "Current client view: [view]")
 	to_chat(usr, "Icon size: [divisor]")
@@ -488,8 +488,8 @@ var/global/const/MAX_VIEW = 41
 /client/verb/OnResize()
 	set hidden = 1
 
-	var/divisor = text2num(winget(src, "mapwindow.map", "icon-size")) || world.icon_size
-	var/list/view_components = splittext(winget(src, "mapwindow.map", "size"), "x")
+	var/divisor = text2num(winget(src, "window_map.map", "icon-size")) || world.icon_size
+	var/list/view_components = splittext(winget(src, "window_map.map", "size"), "x")
 
 	if(!divisor || !isnum(divisor) || !islist(view_components) || length(view_components) < 2)
 		return // Some kind of malformed winget(), do not proceed.
@@ -529,18 +529,15 @@ var/global/const/MAX_VIEW = 41
 	if(mob)
 		mob.reload_fullscreen()
 
-/client/proc/toggle_fullscreen(value)
-	set waitfor = FALSE
-
-	winset(src, null, {"
-	mainwindow.is-maximized = false;
-	mainwindow.can-resize = [(value == PREF_BASIC) || (value == PREF_FULL) ? "false" : "true"];
-	mainwindow.titlebar = [(value == PREF_BASIC) || (value == PREF_FULL) ? "false" : "true"];
-	mainwindow.menu = [value == PREF_FULL ? "null" : "menu"];
-	mainwindow.statusbar = [value == PREF_FULL ? "false" : "true"];
-	mainwindow.split.pos = [(value == PREF_BASIC) || (value == PREF_FULL) ? "0x0" : "3x0"];
-	"})
-	winset(src, null, "mainwindow.is-maximized = true;")
+/client/proc/toggle_fullscreen(new_value)
+	switch(new_value)
+		if(PREF_BASIC)
+			winset(src, "window_main", "is-maximized=false;can-resize=false;titlebar=false")
+		if(PREF_FULL)
+			winset(src, "window_main", "is-maximized=false;can-resize=false;titlebar=false;menu=null")
+		else
+			winset(src, "window_main", "is-maximized=false;can-resize=true;titlebar=true;menu=menu")
+	winset(src, "window_main", "is-maximized=true")
 
 /client/verb/fit_viewport()
 	set name = "Fit Viewport"
@@ -553,16 +550,16 @@ var/global/const/MAX_VIEW = 41
 	var/aspect_ratio = view_size[1] / view_size[2]
 
 	// Calculate desired pixel width using window size and aspect ratio
-	var/list/sizes = params2list(winget(src, "mainwindow.split;mapwindow", "size"))
+	var/list/sizes = params2list(winget(src, "window_main.split;window_map", "size"))
 
 	// Client closed the window? Some other error? This is unexpected behaviour, let's
 	// CRASH with some info.
-	if(!sizes["mapwindow.size"])
-		CRASH("sizes does not contain mapwindow.size key. This means a winget failed to return what we wanted. --- sizes var: [sizes] --- sizes length: [length(sizes)]")
+	if(!sizes["window_map.size"])
+		CRASH("sizes does not contain window_map.size key. This means a winget failed to return what we wanted. --- sizes var: [sizes] --- sizes length: [length(sizes)]")
 
-	var/list/map_size = splittext(sizes["mapwindow.size"], "x")
+	var/list/map_size = splittext(sizes["window_map.size"], "x")
 
-	// Looks like we expect mapwindow.size to be "ixj" where i and j are numbers.
+	// Looks like we expect window_map.size to be "ixj" where i and j are numbers.
 	// If we don't get our expected 2 outputs, let's give some useful error info.
 	if(length(map_size) != 2)
 		CRASH("map_size of incorrect length --- map_size var: [map_size] --- map_size length: [length(map_size)]")
@@ -573,7 +570,7 @@ var/global/const/MAX_VIEW = 41
 		// Nothing to do
 		return
 
-	var/split_size = splittext(sizes["mainwindow.split.size"], "x")
+	var/split_size = splittext(sizes["window_main.split.size"], "x")
 	var/split_width = text2num(split_size[1])
 
 	// Avoid auto-resizing the statpanel and chat into nothing.
@@ -582,12 +579,12 @@ var/global/const/MAX_VIEW = 41
 	// Calculate and apply a best estimate
 	// +4 pixels are for the width of the splitter's handle
 	var/pct = 100 * (desired_width + 4) / split_width
-	winset(src, "mainwindow.split", "splitter=[pct]")
+	winset(src, "window_main.split", "splitter=[pct]")
 
 	// Apply an ever-lowering offset until we finish or fail
 	var/delta
 	for(var/safety in 1 to 10)
-		var/after_size = winget(src, "mapwindow", "size")
+		var/after_size = winget(src, "window_map", "size")
 		map_size = splittext(after_size, "x")
 		var/got_width = text2num(map_size[1])
 
@@ -602,7 +599,7 @@ var/global/const/MAX_VIEW = 41
 			delta = -delta/2
 
 		pct += delta
-		winset(src, "mainwindow.split", "splitter=[pct]")
+		winset(src, "window_main.split", "splitter=[pct]")
 
 /client/Click(atom/A)
 	if(!user_acted(src))
@@ -621,9 +618,9 @@ var/global/const/MAX_VIEW = 41
 		// If hotkey mode is enabled, then clicking the map will automatically
 		// unfocus the text bar. This removes the red color from the text bar
 		// so that the visual focus indicator matches reality.
-		winset(src, null, "outputwindow.input.background-color=[COLOR_INPUT_DISABLED]")
+		winset(src, null, "window_output.input.background-color=[COLOR_INPUT_DISABLED]")
 	else
-		winset(src, null, "outputwindow.input.focus=true input.background-color=[COLOR_INPUT_ENABLED]")
+		winset(src, null, "window_output.input.focus=true input.background-color=[COLOR_INPUT_ENABLED]")
 
 	return ..()
 
@@ -680,10 +677,10 @@ var/global/const/MAX_VIEW = 41
 
 /client/proc/set_right_click_menu_mode(shift_only)
 	if(shift_only)
-		winset(src, "mapwindow.map", "right-click=true")
+		winset(src, "window_map.map", "right-click=true")
 		winset(src, "ShiftUp", "is-disabled=false")
 		winset(src, "Shift", "is-disabled=false")
 	else
-		winset(src, "mapwindow.map", "right-click=false")
+		winset(src, "window_map.map", "right-click=false")
 		winset(src, "default.Shift", "is-disabled=true")
 		winset(src, "default.ShiftUp", "is-disabled=true")

@@ -421,7 +421,7 @@
 
 /mob/new_player/proc/close_spawn_windows()
 	close_browser(src, "window=latechoices") //closes late choices window
-	close_browser(src, "window=preferences_window") //closes preferences window
+	close_browser(src, "window=window_preferences") //closes preferences window
 	panel.close()
 
 /mob/new_player/proc/check_species_allowed(var/decl/species/S, var/show_alert=1)

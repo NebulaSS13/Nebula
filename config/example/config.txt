@@ -439,7 +439,7 @@ RADIATION_LOWER_LIMIT 0.15
 #PANIC_BUNKER
 
 ## A message when user did not pass the panic bunker.
-#PANIC_BUNKER_MESSAGE Sorry! The panic bunker is enabled. Please head to our Discord or forum to get yourself added to the panic bunker bypass.
+#PANIC_BUNKER_MESSAGE Sorry! The panic bunker is enabled. Please head to our staff to get yourself added to the panic bunker bypass.
 
 ##Clients will be unable to connect unless their version is equal to or higher than this (a number, e.g. 511)
 #MINIMUM_BYOND_VERSION

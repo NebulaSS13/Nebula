@@ -217,8 +217,8 @@ var/global/world_topic_last = world.timeofday
 /world/proc/update_status()
 	var/s = "<b>[station_name()]</b>"
 
-	if(config && config.discordurl)
-		s += " (<a href=\"[config.discordurl]\">Discord</a>)"
+	if(config && config.forumurl)
+		s += " (<a href=\"[config.forumurl]\">Community</a>)"
 
 	if(config && config.server_name)
 		s = "<b>[config.server_name]</b> &#8212; [s]"

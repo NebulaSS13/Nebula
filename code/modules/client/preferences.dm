@@ -218,7 +218,7 @@ var/global/list/time_prefs_fixed = list()
 	if(!SScharacter_setup.initialized)
 		return
 
-	winshow(user, "preferences_window", TRUE)
+	winshow(user, "window_preferences", TRUE)
 	var/datum/browser/popup = new(user, "preferences_browser", "Character Setup", 800, 800)
 	var/content = {"
 	<script type='text/javascript'>
@@ -232,7 +232,7 @@ var/global/list/time_prefs_fixed = list()
 	"}
 	popup.set_content(content)
 	popup.open(FALSE) // Skip registring onclose on the browser pane
-	onclose(user, "preferences_window", src) // We want to register on the window itself
+	onclose(user, "window_preferences", src) // We want to register on the window itself
 
 /datum/preferences/proc/update_setup_window(mob/user)
 	send_output(user, url_encode(get_content(user)), "preferences_browser:update_content")
@@ -277,16 +277,9 @@ var/global/list/time_prefs_fixed = list()
 	char_render_holders = null
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
+	if(!user || isliving(user))
+		return
 
-	if(!user)	return
-	if(isliving(user)) return
-
-	if(href_list["preference"] == "open_whitelist_forum")
-		if(config.forumurl)
-			direct_output(user, link(config.forumurl))
-		else
-			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
-			return
 	update_setup_window(usr)
 	return 1
 

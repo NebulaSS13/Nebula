@@ -33,9 +33,9 @@
 		winset(src, "default-\ref[key]", "parent=default;name=[key];command=[command]")
 
 	if(prefs?.hotkeys)
-		winset(src, null, "outputwindow.input.focus=true input.background-color=[COLOR_INPUT_ENABLED]")
+		winset(src, null, "window_output.input.focus=true input.background-color=[COLOR_INPUT_ENABLED]")
 	else
-		winset(src, null, "outputwindow.input.focus=true input.background-color=[COLOR_INPUT_DISABLED]")
+		winset(src, null, "window_output.input.focus=true input.background-color=[COLOR_INPUT_DISABLED]")
 
 	update_special_keybinds()
 

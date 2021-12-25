@@ -46,5 +46,6 @@
 	// bolds the changelog button on the interface so we know there are updates.
 	if(client.prefs?.lastchangelog != global.changelog_hash)
 		to_chat(client, SPAN_NOTICE("You have unread updates in the changelog."))
+		winset(src, "window_panel_right.button_changelog", "background-color=#ffcc99")
 		if(config.aggressive_changelog)
 			client.changes()

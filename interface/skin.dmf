@@ -8,256 +8,252 @@ macro "default"
 		name = "SHIFT+UP"
 		command = ".winset :map.right-click=true"
 
+
 menu "menu"
-	elem
+	elem 
 		name = "&File"
 		command = ""
 		saved-params = "is-checked"
-	elem
+	elem 
 		name = "&Save screenshot\tF2"
 		command = ".auto"
 		category = "&File"
 		saved-params = "is-checked"
-	elem
+	elem 
 		name = "&Save screenshot as..."
 		command = ".screenshot"
 		category = "&File"
 		saved-params = "is-checked"
-	elem
+	elem 
 		name = ""
 		command = ""
 		category = "&File"
 		saved-params = "is-checked"
-	elem
+	elem 
 		name = "&Reconnect"
 		command = ".reconnect"
 		category = "&File"
 		saved-params = "is-checked"
-	elem
+	elem 
 		name = "&Check ping"
 		command = ".ping"
 		category = "&File"
 		saved-params = "is-checked"
-	elem
+	elem 
 		name = "&Quit"
 		command = ".quit"
 		category = "&File"
 		saved-params = "is-checked"
-	elem
+	elem 
 		name = "&Size"
 		command = ""
 		saved-params = "is-checked"
-	elem "icon128"
+	elem "icon_size_128"
 		name = "&128x128"
 		command = "SetWindowIconSize 128"
 		category = "&Size"
 		can-check = true
-		group = "size"
+		group = "icon_size"
 		saved-params = "is-checked"
-	elem "icon96"
+	elem "icon_size_96"
 		name = "&96x96"
 		command = "SetWindowIconSize 96"
 		category = "&Size"
 		can-check = true
-		group = "size"
+		group = "icon_size"
 		saved-params = "is-checked"
-	elem "icon64"
+	elem "icon_size_64"
 		name = "&64x64"
 		command = "SetWindowIconSize 64"
 		category = "&Size"
 		is-checked = true
 		can-check = true
-		group = "size"
+		group = "icon_size"
 		saved-params = "is-checked"
-	elem "icon48"
+	elem "icon_size_48"
 		name = "&48x48"
 		command = "SetWindowIconSize 48"
 		category = "&Size"
 		can-check = true
-		group = "size"
+		group = "icon_size"
 		saved-params = "is-checked"
-	elem "icon32"
+	elem "icon_size_32"
 		name = "&32x32"
 		command = "SetWindowIconSize 32"
 		category = "&Size"
 		can-check = true
-		group = "size"
+		group = "icon_size"
 		saved-params = "is-checked"
-	elem
+	elem "icon_size_16"
+		name = "&16x16"
+		command = "SetWindowIconSize 16"
+		category = "&Size"
+		can-check = true
+		group = "icon_size"
+		saved-params = "is-checked"
+	elem 
 		name = "&Scaling"
 		command = ""
 		saved-params = "is-checked"
-	elem "ZM"
+	elem "icon_scale_smooth_scaling"
 		name = "&Smooth Scaling"
 		command = ".winset \"zoommode.is-checked=true?map.zoom-mode=normal:map.zoom-mode=distort\""
 		category = "&Scaling"
 		is-checked = true
 		can-check = true
-		group = "scale"
+		group = "icon_scale"
 		saved-params = "is-checked"
-	elem "NN"
+	elem "icon_scale_nearest_neighbor"
 		name = "&Nearest Neighbor"
-		command = ".winset \"mapwindow.map.zoom-mode=distort\""
+		command = ".winset \"window_map.map.zoom-mode=distort\""
 		category = "&Scaling"
 		can-check = true
-		group = "scale"
+		group = "icon_scale"
 		saved-params = "is-checked"
-	elem "PS"
+	elem "icon_scale_point_sampling"
 		name = "&Point Sampling"
-		command = ".winset \"mapwindow.map.zoom-mode=normal\""
+		command = ".winset \"window_map.map.zoom-mode=normal\""
 		category = "&Scaling"
 		can-check = true
-		group = "scale"
+		group = "icon_scale"
 		saved-params = "is-checked"
-	elem "BL"
+	elem "icon_scale_bilinear"
 		name = "&Bilinear"
-		command = ".winset \"mapwindow.map.zoom-mode=blur\""
+		command = ".winset \"window_map.map.zoom-mode=blur\""
 		category = "&Scaling"
 		can-check = true
-		group = "scale"
+		group = "icon_scale"
 		saved-params = "is-checked"
-	elem
+	elem 
 		name = "&Help"
 		command = ""
 		saved-params = "is-checked"
-	elem
+	elem 
 		name = "&Admin help\tF1"
 		command = "adminhelp"
 		category = "&Help"
 		saved-params = "is-checked"
 
-window "mainwindow"
-	elem "mainwindow"
+
+window "window_main"
+	elem "window_main"
 		type = MAIN
 		pos = 281,0
 		size = 640x440
-		anchor1 = none
-		anchor2 = none
+		anchor1 = -1,-1
+		anchor2 = -1,-1
 		is-default = true
-		background-color = #000000
 		saved-params = "pos;size;is-minimized;is-maximized"
 		on-size = "OnResize"
+		statusbar = false
 		is-maximized = true
-		icon = 'icons\\ss13_64.png'
 		macro = "default"
 		menu = "menu"
 	elem "split"
 		type = CHILD
-		pos = 3,0
+		pos = 0,0
 		size = 640x440
 		anchor1 = 0,0
 		anchor2 = 100,100
 		saved-params = "splitter"
-		right = "rpane"
+		left = "window_map"
+		right = "window_panel_right"
 		is-vert = true
 	elem "asset_cache_browser"
 		type = BROWSER
 		pos = 0,0
 		size = 200x200
-		anchor1 = none
-		anchor2 = none
+		anchor1 = -1,-1
+		anchor2 = -1,-1
 		is-visible = false
 		saved-params = ""
 	elem "tooltip"
 		type = BROWSER
 		pos = 0,0
 		size = 999x999
-		anchor1 = none
-		anchor2 = none
-		background-color = none
+		anchor1 = -1,-1
+		anchor2 = -1,-1
 		is-visible = false
 		saved-params = ""
 
-window "mapwindow"
-	elem "mapwindow"
+window "window_map"
+	elem "window_map"
 		type = MAIN
 		pos = 281,0
 		size = 640x480
-		anchor1 = none
-		anchor2 = none
+		anchor1 = -1,-1
+		anchor2 = -1,-1
 		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
 		is-pane = true
+		on-status = ".winset \"status_bar.text=[[*]]\" "
 	elem "map"
 		type = MAP
 		pos = 0,0
-		size = 640x480
+		size = 640x460
 		anchor1 = 0,0
 		anchor2 = 100,100
 		font-family = "Arial Rounded MT Bold,Arial Black,Arial,sans-serif"
 		font-size = 7
 		is-default = true
-		saved-params = "icon-size;zoom-mode"
-		on-show = ".winset\"mainwindow.split.left=mapwindow\""
-		on-hide = ".winset\"mainwindow.split.left=\""
-	elem "lobbybrowser"
+		saved-params = "icon-size;letterbox;zoom-mode"
+	elem "browser_lobby"
 		type = BROWSER
 		pos = 0,0
-		size = 640x480
+		size = 640x460
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = #000000
 		is-visible = false
 		is-disabled = true
 		saved-params = ""
 	elem "status_bar"
 		type = LABEL
-		pos = 0,464
-		size = 280x16
+		pos = 0,460
+		size = 640x20
 		anchor1 = 0,100
-		anchor2 = none
+		anchor2 = 100,100
 		text-color = #ffffff
 		background-color = #222222
-		is-visible = false
 		border = line
 		saved-params = ""
 		text = ""
 		align = left
 
-window "outputwindow"
-	elem "outputwindow"
+window "window_output"
+	elem "window_output"
 		type = MAIN
-		pos = 281,-30
+		pos = 281,0
 		size = 640x480
-		anchor1 = none
-		anchor2 = none
-		background-color = none
+		anchor1 = -1,-1
+		anchor2 = -1,-1
 		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
 		is-pane = true
-		outer-size = 654x494
 	elem "output"
 		type = OUTPUT
 		pos = 0,0
-		size = 640x456
+		size = 640x460
 		anchor1 = 0,0
 		anchor2 = 100,100
 		is-default = true
 		saved-params = "max-lines"
 		style = ".system {color:#ff0000;}"
 		max-lines = 0
-	elem "saybutton"
+	elem "button_say"
 		type = BUTTON
-		pos = 600,460
-		size = 40x20
-		anchor1 = 100,100
-		anchor2 = none
-		background-color = none
+		pos = 0,460
+		size = 50x20
+		anchor1 = 0,100
+		anchor2 = -1,-1
+		background-color = #c0c0c0
 		saved-params = "is-checked"
-		text = "Chat"
-		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
+		text = "Say"
+		command = ".winset \"button_say.is-checked=true?input.command=\"!say \\\"\":input.command=\""
+		is-flat = true
 		button-type = pushbox
 	elem "input"
 		type = INPUT
-		pos = 1,460
-		size = 600x20
+		pos = 50,460
+		size = 590x20
 		anchor1 = 0,100
 		anchor2 = 100,100
 		background-color = #d3b5b5
@@ -265,173 +261,205 @@ window "outputwindow"
 		border = sunken
 		saved-params = "command"
 
-window "rpane"
-	elem "rpane"
+window "window_panel_right"
+	elem "window_panel_right"
 		type = MAIN
 		pos = 281,0
 		size = 640x480
-		anchor1 = none
-		anchor2 = none
+		anchor1 = -1,-1
+		anchor2 = -1,-1
 		saved-params = "pos;size;is-minimized;is-maximized"
 		is-pane = true
-	elem "rpanewindow"
+	elem "panel_right_info"
 		type = CHILD
-		pos = 0,0
-		size = 640x474
+		pos = 0,40
+		size = 640x440
 		anchor1 = 0,0
 		anchor2 = 100,100
-		saved-params = "splitter"
-		right = "outputwindow"
+		background-color = none
+		saved-params = "splitter;left"
+		left = "window_info"
+		right = "window_output"
 		is-vert = false
-	elem "github"
+	elem "button_changelog"
 		type = BUTTON
-		pos = 520,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "GitHub"
-		command = "GitHub"
-	elem "BugReport"
-		type = BUTTON
-		pos = 580,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Bug Report"
-		command = "Bug-Report"
-	elem "rulesb"
-		type = BUTTON
-		pos = 205,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Rules"
-		command = "rules"
-		group = "rpanemode"
-	elem "changelog"
-		type = BUTTON
-		pos = 460,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
+		pos = 0,0
+		size = 100x20
+		anchor1 = 0,0
+		anchor2 = 16,0
+		background-color = none
 		saved-params = "is-checked"
 		text = "Changelog"
 		command = "Changelog"
-		group = "rpanemode"
-	elem "Lore"
+	elem "button_info_hide"
 		type = BUTTON
-		pos = 265,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Lore"
-		command = "Lore"
-		group = "rpanemode"
-	elem "forumb"
-		type = BUTTON
-		pos = 385,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Forum"
-		command = "forum"
-		group = "rpanemode"
-	elem "wikib"
-		type = BUTTON
-		pos = 325,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Wiki"
-		command = "wiki"
-		group = "rpanemode"
-	elem "textb"
-		type = BUTTON
-		pos = 0,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		is-visible = false
-		saved-params = "is-checked"
-		text = "Text"
-		command = ".winset \"rpanewindow.left=;\""
-		is-checked = true
-		group = "rpanemode"
-		button-type = pushbox
-	elem "infob"
-		type = BUTTON
-		pos = 60,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		is-visible = false
-		saved-params = "is-checked"
-		text = "Info"
-		command = ".winset \"rpanewindow.left=infowindow\""
-		group = "rpanemode"
-		button-type = pushbox
-	elem "button_codex"
-		type = BUTTON
-		pos = 133,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Codex"
-		command = "Codex"
-		group = "rpanemode"
-
-window "preferences_window"
-	elem "preferences_window"
-		type = MAIN
-		pos = 281,0
-		size = 1000x800
-		anchor1 = none
-		anchor2 = none
-		is-visible = false
-		saved-params = "pos;size;is-minimized;is-maximized"
-		statusbar = false
-	elem "preferences_browser"
-		type = BROWSER
-		pos = 0,0
-		size = 800x800
+		pos = 0,20
+		size = 100x20
 		anchor1 = 0,0
-		anchor2 = 80,100
-		saved-params = ""
-	elem "character_preview_map"
-		type = MAP
-		pos = 800,0
-		size = 200x800
-		anchor1 = 80,0
-		anchor2 = 100,100
-		right-click = true
-		saved-params = "zoom;letterbox;zoom-mode"
+		anchor2 = 16,0
+		background-color = #c0c0c0
+		saved-params = "is-checked"
+		text = "Hide Verbs"
+		command = ".winset \"button_info_hide.is-checked!=true ? panel_right_info.left=window_info : panel_right_info.left=\""
+		button-type = pushbox
+	elem "tab_buttons"
+		type = TAB
+		pos = 100,0
+		size = 540x40
+		anchor1 = 16,0
+		anchor2 = 100,0
+		background-color = none
+		saved-params = "current-tab"
+		tabs = "tab_window_community,tab_window_references"
+		current-tab = "tab_window_community"
+		multi-line = false
 
-window "infowindow"
-	elem "infowindow"
+window "window_info"
+	elem "window_info"
 		type = MAIN
 		pos = 281,0
 		size = 640x480
-		anchor1 = none
-		anchor2 = none
+		anchor1 = -1,-1
+		anchor2 = -1,-1
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Info"
 		is-pane = true
 	elem "info"
 		type = INFO
 		pos = 0,0
-		size = 638x477
+		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
 		is-default = true
 		saved-params = ""
 		highlight-color = #00aa00
-		on-show = ".winset\"rpane.infob.is-visible=true;rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
-		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=\""
+		prefix-color = #002eb8
+
+window "window_preferences"
+	elem "window_preferences"
+		type = MAIN
+		pos = 281,0
+		size = 1280x1000
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		statusbar = false
+	elem "preferences_browser"
+		type = BROWSER
+		pos = 0,0
+		size = 960x1000
+		anchor1 = 0,0
+		anchor2 = 75,100
+		saved-params = ""
+	elem "character_preview_map"
+		type = MAP
+		pos = 960,0
+		size = 320x1000
+		anchor1 = 75,0
+		anchor2 = 100,100
+		right-click = true
+		saved-params = "zoom;letterbox;zoom-mode"
+
+window "tab_window_community"
+	elem "tab_window_community"
+		type = MAIN
+		pos = 281,0
+		size = 480x14
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Community"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "button_rules"
+		type = BUTTON
+		pos = 80,0
+		size = 80x14
+		anchor1 = 17,0
+		anchor2 = 33,0
+		background-color = #c0c0c0
+		saved-params = "is-checked"
+		text = "Rules"
+		command = "Rules"
+	elem "button_community"
+		type = BUTTON
+		pos = 0,0
+		size = 80x14
+		anchor1 = 0,0
+		anchor2 = 17,0
+		background-color = #c0c0c0
+		saved-params = "is-checked"
+		text = "Community"
+		command = "Community"
+	elem "button_codebase"
+		type = BUTTON
+		pos = 160,0
+		size = 80x14
+		anchor1 = 33,0
+		anchor2 = 50,0
+		background-color = #c0c0c0
+		saved-params = "is-checked"
+		text = "Codebase"
+		command = "Source-Code"
+	elem "button_report_bug"
+		type = BUTTON
+		pos = 240,0
+		size = 80x14
+		anchor1 = 50,0
+		anchor2 = 67,0
+		background-color = #c0c0c0
+		saved-params = "is-checked"
+		text = "Bug Report"
+		command = "Bug-Report"
+
+window "tab_window_references"
+	elem "tab_window_references"
+		type = MAIN
+		pos = 281,0
+		size = 480x14
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Game References"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "button_lore"
+		type = BUTTON
+		pos = 80,0
+		size = 80x14
+		anchor1 = 17,0
+		anchor2 = 33,0
+		background-color = #c0c0c0
+		saved-params = "is-checked"
+		text = "Lore"
+		command = "Lore"
+	elem "button_wiki"
+		type = BUTTON
+		pos = 160,0
+		size = 80x14
+		anchor1 = 33,0
+		anchor2 = 50,0
+		background-color = #c0c0c0
+		saved-params = "is-checked"
+		text = "Wiki"
+		command = "Wiki"
+	elem "button_codex"
+		type = BUTTON
+		pos = 0,0
+		size = 80x14
+		anchor1 = 0,0
+		anchor2 = 17,0
+		background-color = #c0c0c0
+		saved-params = "is-checked"
+		text = "Codex"
+		command = "Codex"
 

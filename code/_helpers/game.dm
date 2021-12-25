@@ -506,4 +506,4 @@
 /proc/window_flash(var/client_or_usr)
 	if (!client_or_usr)
 		return
-	winset(client_or_usr, "mainwindow", "flash=5")
+	winset(client_or_usr, "window_main", "flash=5")

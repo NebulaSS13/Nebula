@@ -24,7 +24,7 @@
 
 	//Focus Chat failsafe. Overrides movement checks to prevent WASD.
 	if(!prefs.hotkeys && length(_key) == 1 && _key != "Alt" && _key != "Ctrl" && _key != "Shift")
-		winset(src, null, "outputwindow.input.focus=true ; input.text=[url_encode(_key)]")
+		winset(src, null, "window_output.input.focus=true ; input.text=[url_encode(_key)]")
 		return
 
 	if(length(keys_held) >= HELD_KEY_BUFFER_LENGTH && !keys_held[_key])

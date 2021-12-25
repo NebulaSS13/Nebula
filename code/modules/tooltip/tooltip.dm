@@ -31,7 +31,7 @@ Notes:
 
 /datum/tooltip
 	var/client/owner
-	var/control = "mainwindow.tooltip"
+	var/control = "window_main.tooltip"
 	var/showing = FALSE
 	var/queueHide = FALSE
 	var/init = FALSE
