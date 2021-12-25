@@ -242,6 +242,28 @@
 		r += ascii2text(c)
 	return r
 
+/proc/hsl2rgb(h, s, l)
+	var/h_int = round(h/60) // mapping each section of H to 60 degree sections
+	var/c = (1 - abs(2 * l - 1)) * s
+	var/x = c * (1 - abs((h / 60) % 2 - 1))
+	var/m = l - c * 0.5
+	x = (x + m) * 255
+	c = (c + m) * 255
+	m *= 255
+	switch(h_int)
+		if(0)
+			return "#[num2hex(c, 2)][num2hex(x, 2)][num2hex(m, 2)]"
+		if(1)
+			return "#[num2hex(x, 2)][num2hex(c, 2)][num2hex(m, 2)]"
+		if(2)
+			return "#[num2hex(m, 2)][num2hex(c, 2)][num2hex(x, 2)]"
+		if(3)
+			return "#[num2hex(m, 2)][num2hex(x, 2)][num2hex(c, 2)]"
+		if(4)
+			return "#[num2hex(x, 2)][num2hex(m, 2)][num2hex(c, 2)]"
+		if(5)
+			return "#[num2hex(c, 2)][num2hex(m, 2)][num2hex(x, 2)]"
+
 //checks if a file exists and contains text
 //returns text as a string if these conditions are met
 /proc/safe_file2text(filename, error_on_invalid_return = TRUE)
