@@ -2051,7 +2051,6 @@
 #include "code\modules\keybindings\admin.dm"
 #include "code\modules\keybindings\bindings_atom.dm"
 #include "code\modules\keybindings\bindings_client.dm"
-#include "code\modules\keybindings\carbon.dm"
 #include "code\modules\keybindings\client.dm"
 #include "code\modules\keybindings\communication.dm"
 #include "code\modules\keybindings\human.dm"

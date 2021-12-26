@@ -19,8 +19,7 @@ SUBSYSTEM_DEF(input)
 	"Any" = "\"KeyDown \[\[*\]\]\"",
 	"Any+UP" = "\"KeyUp \[\[*\]\]\"",
 	"Back" = "\".winset \\\"outputwindow.input.text=\\\"\\\"\\\"\"",
-	"Tab" = "\".winset \\\"outputwindow.input.focus=true?mapwindow.map.focus=true outputwindow.input.background-color=[COLOR_INPUT_DISABLED]:outputwindow.input.focus=true outputwindow.input.background-color=[COLOR_INPUT_ENABLED]\\\"\"",
-	"Escape" = "Reset-Held-Keys",
+	"Escape" = "Reset-Held-Keys"
 	)
 
 // Badmins just wanna have fun ♪
