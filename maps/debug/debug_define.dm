@@ -1,17 +1,19 @@
-/datum/map/example
-	name = "Example"
-	full_name = "The Example"
-	path = "example"
+/datum/map/debug
+	name = "Testing"
+	full_name = "Testing Site"
+	path = "debug"
 
 	lobby_screens = list(
-		'maps/example/example_lobby.png'
+		'maps/debug/debug_lobby.png'
 	)
 
 	lobby_tracks = list(
 		/decl/music_track/absconditus
 	)
 
-	allowed_spawns = list(/decl/spawnpoint/arrivals)
+	allowed_spawns = list(
+		/decl/spawnpoint/arrivals
+	)
 
 	shuttle_docked_message = "The shuttle has docked."
 	shuttle_leaving_dock = "The shuttle has departed from home dock."
