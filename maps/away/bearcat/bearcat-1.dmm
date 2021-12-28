@@ -1412,7 +1412,7 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)
 "dc" = (
-/obj/structure/stairs/east,
+/obj/structure/stairs/long/east,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
