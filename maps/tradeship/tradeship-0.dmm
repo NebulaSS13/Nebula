@@ -1744,7 +1744,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/ship/trade/disused)
 "II" = (
-/obj/structure/stairs/west,
+/obj/structure/stairs/long/west,
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/trade/loading_bay)
 "IQ" = (
