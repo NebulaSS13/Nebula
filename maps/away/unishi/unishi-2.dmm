@@ -407,7 +407,7 @@
 /turf/simulated/floor,
 /area/unishi/common)
 "bq" = (
-/obj/structure/stairs/east,
+/obj/structure/stairs/long/east,
 /obj/structure/railing/mapped,
 /turf/simulated/floor,
 /area/unishi/common)

@@ -2762,7 +2762,7 @@
 /turf/simulated/floor/tiled/white,
 /area/nexus/civilian)
 "Ay" = (
-/obj/structure/stairs/west,
+/obj/structure/stairs/long/west,
 /turf/simulated/floor/plating,
 /area/nexus/civilian)
 "AA" = (
@@ -4885,7 +4885,7 @@
 /turf/simulated/floor/tiled,
 /area/nexus/hallway/port)
 "Ug" = (
-/obj/structure/stairs/east,
+/obj/structure/stairs/long/east,
 /turf/simulated/floor/plating,
 /area/nexus/civilian)
 "Uk" = (
