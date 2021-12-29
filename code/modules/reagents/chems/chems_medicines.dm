@@ -14,7 +14,7 @@
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/internal/eyes/E = H.get_organ(BP_EYES)
 		if(E && istype(E) && !E.is_broken())
-			ADJ_STATUS(M, STAT_BLURRY, -5) 
+			ADJ_STATUS(M, STAT_BLURRY, -5)
 			ADJ_STATUS(M, STAT_BLIND, -5)
 			E.damage = max(E.damage - 5 * removed, 0)
 
@@ -122,10 +122,10 @@
 
 	var/removing = (4 * removed)
 	var/datum/reagents/ingested = M.get_ingested_reagents()
-	for(var/R in ingested.reagent_volumes)
+	for(var/R in ingested?.reagent_volumes)
 		var/decl/material/chem = GET_DECL(R)
 		if((remove_generic && chem.toxicity) || (R in remove_toxins))
-			M.reagents.remove_reagent(R, removing)
+			ingested.remove_reagent(R, removing)
 			return
 
 	for(var/R in M.reagents?.reagent_volumes)
@@ -253,7 +253,7 @@
 			if(!BP_IS_PROSTHETIC(E) && prob(25) && !(E.status & ORGAN_MUTATED))
 				E.mutate()
 				E.limb_flags |= ORGAN_FLAG_DEFORMED
-	
+
 /decl/material/liquid/retrovirals/affect_blood(var/mob/living/M, var/alien, var/removed, var/datum/reagents/holder)
 	M.adjustCloneLoss(-20 * removed)
 	if(LAZYACCESS(M.chem_doses, type) > 10)

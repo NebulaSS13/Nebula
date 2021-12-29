@@ -412,6 +412,9 @@ default behaviour is:
 	var/datum/reagents/ingested_reagents = get_ingested_reagents()
 	if(ingested_reagents)
 		ingested_reagents.clear_reagents()
+	var/datum/reagents/inhaled_reagents = get_inhaled_reagents()
+	if(inhaled_reagents)
+		inhaled_reagents.clear_reagents()
 	if(reagents)
 		reagents.clear_reagents()
 
@@ -745,9 +748,17 @@ default behaviour is:
 	if(!lying && T.above && !T.above.is_flooded() && T.above.CanZPass(src, UP) && can_overcome_gravity())
 		return FALSE
 	if(prob(5))
+		var/datum/reagents/metabolism/inhaled = get_inhaled_reagents()
+		var/datum/reagents/metabolism/ingested = get_ingested_reagents()
 		var/obj/effect/fluid/F = locate() in loc
 		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale [(F?.reagents && F.reagents.get_primary_reagent_name()) || "liquid"]!"))
-		F?.reagents?.trans_to_holder(get_ingested_reagents(), min(F.reagents.total_volume, rand(2,5)))
+		var/inhale_amount = 0
+		if(inhaled)
+			inhale_amount = rand(2,5)
+			F?.reagents?.trans_to_holder(inhaled, min(F.reagents.total_volume, inhale_amount))
+		if(ingested)
+			var/ingest_amount = 5 - inhale_amount
+			F?.reagents?.trans_to_holder(ingested, min(F.reagents.total_volume, ingest_amount))
 
 	T.show_bubbles()
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.
@@ -875,6 +886,9 @@ default behaviour is:
 	return reagents
 
 /mob/living/proc/get_injected_reagents()
+	return reagents
+
+/mob/living/proc/get_inhaled_reagents()
 	return reagents
 
 /mob/living/proc/get_adjusted_metabolism(metabolism)

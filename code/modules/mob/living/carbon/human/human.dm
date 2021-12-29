@@ -41,18 +41,18 @@
 	. = ..()
 
 /mob/living/carbon/human/get_ingested_reagents()
-	if(should_have_organ(BP_STOMACH))
-		var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
-		if(stomach)
-			return stomach.ingested
-	return get_contact_reagents() // Kind of a shitty hack, but makes more sense to me than digesting them.
+	if(!should_have_organ(BP_STOMACH))
+		return
+	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
+	return stomach?.ingested
 
 /mob/living/carbon/human/metabolize_ingested_reagents()
-	if(should_have_organ(BP_STOMACH))
-		var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
-		if(stomach)
-			stomach.metabolize()
-		return stomach?.ingested
+	if(!should_have_organ(BP_STOMACH))
+		return
+	var/obj/item/organ/internal/stomach/stomach = get_organ(BP_STOMACH)
+	if(stomach)
+		stomach.metabolize()
+		return stomach.ingested
 
 /mob/living/carbon/human/get_fullness()
 	if(!should_have_organ(BP_STOMACH))
@@ -61,6 +61,20 @@
 	if(stomach)
 		return nutrition + (stomach.ingested?.total_volume * 10)
 	return 0 //Always hungry, but you can't actually eat. :(
+
+/mob/living/carbon/human/get_inhaled_reagents()
+	if(!should_have_organ(BP_LUNGS))
+		return
+	var/obj/item/organ/internal/lungs/lungs = get_organ(BP_LUNGS)
+	return lungs?.inhaled
+
+/mob/living/carbon/human/metabolize_inhaled_reagents()
+	if(!should_have_organ(BP_LUNGS))
+		return
+	var/obj/item/organ/internal/lungs/lungs = get_organ(BP_LUNGS)
+	if(lungs)
+		lungs.metabolize()
+		return lungs.inhaled
 
 /mob/living/carbon/human/Stat()
 	. = ..()
