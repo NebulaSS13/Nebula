@@ -124,7 +124,8 @@
 						SPAN_DANGER("You smother \the [target] with \the [src]!")
 					)
 					//it's inhaled, so... maybe CHEM_INJECT doesn't make a whole lot of sense but it's the best we can do for now
-					var/trans_amt = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INJECT)
+					// ^ HA HA HA
+					var/trans_amt = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INHALE)
 					var/contained_reagents = reagents.get_reagents()
 					admin_inject_log(user, M, src, contained_reagents, trans_amt)
 					update_name()

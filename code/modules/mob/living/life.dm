@@ -68,6 +68,7 @@
 		for(var/decl/material/R as anything in tick_dosage_tracker)
 			if(tick_dosage_tracker[R] > (R.overdose * ((R.flags & IGNORE_MOB_SIZE) ? 1 : size_modifier)))
 				R.affect_overdose(src)
+	var/datum/reagents/metabolism/inhaled_reagents  = metabolize_inhaled_reagents()
 
 	// Update chem dosage.
 	// TODO: refactor chem dosage above isSynthetic() and GODMODE checks.
@@ -99,6 +100,7 @@
 	if(burn_regen || brute_regen)
 		heal_organ_damage(brute_regen, burn_regen)
 		return TRUE
+
 
 /mob/living/proc/handle_random_events()
 	return

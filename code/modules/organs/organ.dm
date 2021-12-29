@@ -209,7 +209,7 @@
 
 /obj/item/organ/proc/handle_ailment(var/datum/ailment/ailment)
 	if(ailment.treated_by_reagent_type)
-		for(var/datum/reagents/source in list(owner.get_injected_reagents(), owner.reagents, owner.get_ingested_reagents()))
+		for(var/datum/reagents/source in list(owner.get_injected_reagents(), owner.reagents, owner.get_ingested_reagents(), owner.get_inhaled_reagents()))
 			for(var/reagent_type in source.reagent_volumes)
 				if(ailment.treated_by_medication(source.reagent_volumes[reagent_type]))
 					ailment.was_treated_by_medication(source, reagent_type)

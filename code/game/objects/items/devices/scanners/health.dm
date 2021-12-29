@@ -296,6 +296,20 @@
 			print_reagent_default_message = FALSE
 			. += "<span class='scan_warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.</span>"
 
+	var/datum/reagents/inhaled = H.get_inhaled_reagents()
+	if(inhaled && inhaled.total_volume)
+		var/unknown = 0
+		for(var/rtype in inhaled.reagent_volumes)
+			var/decl/material/R = GET_DECL(rtype)
+			if(R.scannable)
+				print_reagent_default_message = FALSE
+				. += "<span class='scan_notice'>[R.name] found in subject's lungs.</span>"
+			else
+				++unknown
+		if(unknown)
+			print_reagent_default_message = FALSE
+			. += "<span class='scan_warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's lungs.</span>"
+
 	if(length(H.chem_doses))
 		var/list/chemtraces = list()
 		for(var/T in H.chem_doses)
