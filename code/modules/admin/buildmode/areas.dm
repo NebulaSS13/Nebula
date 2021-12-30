@@ -73,7 +73,7 @@ Right Click       - List/Create Area
 	var/used_colors = 0
 	var/list/max_colors = length(distinct_colors)
 	var/list/vision_colors = list()
-	for (var/turf/T in range(get_effective_view(user.client), user))
+	for (var/turf/T in range(user?.client?.view || world.view, user))
 		var/image/I = new('icons/turf/overlays.dmi', T, "whiteOverlay")
 		var/ref = "\ref[T.loc]"
 		if (!vision_colors[ref])
