@@ -205,8 +205,7 @@ var/global/list/_client_preferences_by_type
 /datum/client_preference/fullscreen_mode
 	description = "Fullscreen Mode"
 	key = "FULLSCREEN"
-	options = list(PREF_BASIC, PREF_FULL, PREF_NO)
-	default_value = PREF_NO
+	options = list(PREF_NO, PREF_BASIC, PREF_FULL)
 
 /datum/client_preference/fullscreen_mode/changed(mob/preference_mob, new_value)
 	if(preference_mob.client)
