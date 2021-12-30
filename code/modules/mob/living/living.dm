@@ -602,6 +602,7 @@ default behaviour is:
 			return
 		resting = !resting
 		UpdateLyingBuckledAndVerbStatus()
+		update_icon()
 		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]."))
 
 //called when the mob receives a bright flash
