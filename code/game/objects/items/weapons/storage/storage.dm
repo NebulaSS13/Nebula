@@ -38,7 +38,7 @@
 	. = (loc == user && istype(over, /obj/screen)) || ..()
 
 /obj/item/storage/handle_mouse_drop(var/atom/over, var/mob/user)
-	if(canremove && (ishuman(user) || isrobot(user)))
+	if(canremove && (ishuman(user) || isrobot(user) || isanimal(user)) && !user.incapacitated(INCAPACITATION_DISRUPTED))
 		if(over == user)
 			open(user)
 			return TRUE
@@ -49,6 +49,21 @@
 				user.equip_to_slot_if_possible(src, inv.slot_id)
 				return TRUE
 	. = ..()
+
+/obj/item/storage/AltClick(mob/user)
+	if(!canremove)
+		return
+
+	if(!Adjacent(user))
+		return
+
+	if(!(ishuman(user) || isrobot(user) || issmall(user)))
+		return
+	
+	if(user.incapacitated(INCAPACITATION_DISRUPTED))
+		return
+	
+	open(user)
 
 /obj/item/storage/proc/return_inv()
 
