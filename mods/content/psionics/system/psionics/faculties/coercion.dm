@@ -78,7 +78,7 @@
 	to_chat(user, SPAN_NOTICE("<b>You dip your mentality into the surface layer of \the [target]'s mind, seeking an answer: <i>[question]</i></b>"))
 	to_chat(target, SPAN_NOTICE("<b>Your mind is compelled to answer: <i>[question]</i></b>"))
 
-	var/answer =  input(target, question, "Read Mind") as null|text
+	var/answer = sanitize((input(target, question, "Read Mind") as null|message), MAX_MESSAGE_LEN)
 	if(!answer || world.time > started_mindread + 60 SECONDS || user.stat != CONSCIOUS || target.stat == DEAD)
 		to_chat(user, SPAN_NOTICE("<b>You receive nothing useful from \the [target].</b>"))
 	else

@@ -211,7 +211,7 @@
 
 /obj/item/organ/internal/brain/proc/brain_damage_callback(var/damage) //Confuse them as a somewhat uncommon aftershock. Side note: Only here so a spawn isn't used. Also, for the sake of a unique timer.
 	if(!QDELETED(owner))
-		to_chat(owner, SPAN_NOTICE("<font size='10'><B>I can't remember which way is forward...</B></font>"))
+		to_chat(owner, SPAN_NOTICE(FONT_HUGE("<B>I can't remember which way is forward...</B>")))
 		ADJ_STATUS(owner, STAT_CONFUSE, damage)
 
 /obj/item/organ/internal/brain/proc/handle_disabilities()

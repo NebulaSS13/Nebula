@@ -46,7 +46,7 @@
 		to_chat(user, "<span class='notice'>You add \the [W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>")
 		qdel(W)
 	else
-		if(istype(W, /obj/item/tape_roll))
+		if(istype(W, /obj/item/ducttape))
 			return 0
 		if(istype(W, /obj/item/pen))
 			show_browser(user, "", "window=[name]") //Closes the dialog

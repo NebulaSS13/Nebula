@@ -286,3 +286,6 @@
 #define WRITTEN_SKIP     0
 #define WRITTEN_PHYSICAL 1
 #define WRITTEN_DIGITAL  2
+
+// arbitrary low pressure bound for wind weather effects
+#define MIN_WIND_PRESSURE 10

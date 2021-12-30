@@ -6514,7 +6514,7 @@
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = -32
 	},
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /obj/item/storage/firstaid/surgery,
 /turf/simulated/floor/tiled/white,
 /area/ship/trade/crew/medbay)

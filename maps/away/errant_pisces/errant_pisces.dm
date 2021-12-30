@@ -34,10 +34,6 @@
 /mob/living/simple_animal/hostile/carp/shark/carp_randomify()
 	return
 
-/mob/living/simple_animal/hostile/carp/shark/on_update_icon()
-	SHOULD_CALL_PARENT(FALSE)
-	return
-
 /mob/living/simple_animal/hostile/carp/shark/death()
 	..()
 	var/datum/gas_mixture/environment = loc.return_air()

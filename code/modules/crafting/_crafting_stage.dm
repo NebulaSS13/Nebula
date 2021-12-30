@@ -92,7 +92,7 @@
 
 /decl/crafting_stage/tape
 	consume_completion_trigger = FALSE
-	completion_trigger_type = /obj/item/tape_roll
+	completion_trigger_type = /obj/item/ducttape
 
 /decl/crafting_stage/pipe
 	completion_trigger_type = /obj/item/pipe

@@ -3263,7 +3263,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ship/trade/crew/dorms2)
 "Vm" = (
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /obj/item/stack/material/reinforced/mapped/plasteel/fifty,
 /obj/item/stack/material/ingot/mapped/copper/fifty,
 /obj/item/stack/material/rods/fifty,
@@ -3277,7 +3277,7 @@
 /obj/item/stack/material/reinforced/mapped/fiberglass/fifty,
 /obj/item/clothing/head/welding,
 /obj/item/stack/material/cardstock/mapped/cardboard/fifty,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /obj/item/taperoll/engineering,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/trade/maintenance/techstorage)
@@ -3337,7 +3337,7 @@
 	},
 /obj/item/t_scanner,
 /obj/item/cell/high,
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /obj/item/stock_parts/circuitboard/air_alarm,
 /obj/item/stock_parts/circuitboard/airlock_electronics,
 /obj/item/stock_parts/circuitboard/airlock_electronics,

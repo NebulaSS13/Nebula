@@ -226,8 +226,9 @@ var/global/list/all_apcs = list()
 /obj/machinery/power/apc/proc/energy_fail(var/duration)
 	if(emp_hardened)
 		return
+	if(!failure_timer && duration)
+		playsound(src, 'sound/machines/apc_nopower.ogg', 75, 0)
 	failure_timer = max(failure_timer, round(duration))
-	playsound(src, 'sound/machines/apc_nopower.ogg', 75, 0)
 
 /obj/machinery/power/apc/proc/init_round_start()
 	var/obj/item/stock_parts/power/terminal/term = get_component_of_type(/obj/item/stock_parts/power/terminal)

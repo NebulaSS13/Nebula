@@ -45,9 +45,10 @@
 /mob/living/simple_animal/hostile/carp/on_update_icon()
 	. = ..()
 	color = carp_color
-	var/image/I = image(icon, "[icon_state]-eyes")
-	I.appearance_flags |= RESET_COLOR
-	add_overlay(I)
+	if(check_state_in_icon("[icon_state]-eyes", icon))
+		var/image/I = image(icon, "[icon_state]-eyes")
+		I.appearance_flags |= RESET_COLOR
+		add_overlay(I)
 
 /mob/living/simple_animal/hostile/carp/Process_Spacemove()
 	return 1	//No drifting in space for space carp!	//original comments do not steal
