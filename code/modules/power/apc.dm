@@ -99,7 +99,7 @@ var/global/list/all_apcs = list()
 	initial_access = list(access_engine_equip)
 	clicksound = "switch"
 	layer = ABOVE_WINDOW_LAYER
-	var/needs_powerdown_sound
+	var/powered_down = FALSE
 	var/area/area
 	var/areastring = null
 	var/shorted = 0
@@ -612,12 +612,13 @@ var/global/list/all_apcs = list()
 		area.power_change()
 
 	var/obj/item/cell/cell = get_cell()
-	if(!cell || cell.charge <= 0)
-		if(needs_powerdown_sound == TRUE)
+	if(!powered_down)
+		if(!cell || cell.charge <= 0)
 			playsound(src, 'sound/machines/apc_nopower.ogg', 75, 0)
-			needs_powerdown_sound = FALSE
-		else
-			needs_powerdown_sound = TRUE
+			powered_down  = TRUE
+
+	else if(cell?.charge > 0)
+		powered_down  = FALSE
 
 /obj/machinery/power/apc/proc/isWireCut(var/wireIndex)
 	return wires.IsIndexCut(wireIndex)
