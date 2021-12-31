@@ -240,14 +240,16 @@ Please contact me on #coderbus IRC. ~Carn x
 			turn_angle = pick(-90, 90)
 		M.Turn(turn_angle)
 		M.Scale(desired_scale_y, desired_scale_x)
-		M.Translate(1, -6-default_pixel_z)
+		M.Translate(turn_angle == 90 ? 1 : -2, (turn_angle == 90 ? -6 : -5) - default_pixel_z)
 	else
 		M.Scale(desired_scale_x, desired_scale_y)
-		M.Translate(0, 16*(desired_scale_y-1))
+		M.Translate(0, 16 * (desired_scale_y - 1))
+
 	if(transform_animate_time)
 		animate(src, transform = M, time = transform_animate_time)
 	else
 		transform = M
+
 	return transform
 
 var/global/list/damage_icon_parts = list()
