@@ -705,7 +705,7 @@ default behaviour is:
 			var/image/A = new()
 			A.appearance = aura
 			add_overlay(A)
-	
+
 /mob/living/Destroy()
 	if(auras)
 		for(var/a in auras)

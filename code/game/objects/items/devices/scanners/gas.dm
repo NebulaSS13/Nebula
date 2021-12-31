@@ -78,7 +78,7 @@
 							traits += "contaminates clothing with toxic residue"
 						if(mat.flags & MAT_FLAG_FUSION_FUEL)
 							traits += "can be used to fuel fusion reaction"
-						perGas_add_string = "\n\tSpecific heat: [mat.gas_specific_heat] J/(mol*K), Molar mass: [mat.gas_molar_mass] kg/mol.[traits.len ? "\n\tThis gas [english_list(traits)]" : ""]"
+						perGas_add_string = "\n\tSpecific heat: [mat.gas_specific_heat] J/(mol*K), Molar mass: [mat.molar_mass] kg/mol.[traits.len ? "\n\tThis gas [english_list(traits)]" : ""]"
 				. += "[capitalize(mat.gas_name)]: [percentage]%[perGas_add_string]"
 			var/totalGas_add_string = ""
 			if(mode == MV_MODE)

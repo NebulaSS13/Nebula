@@ -257,6 +257,7 @@
 	closet_appearance = /decl/closet_appearance/cart/biohazard
 	storage_capacity = 2 * MOB_SIZE_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS|CLOSET_STORAGE_STRUCTURES
+	movable_flags = MOVABLE_FLAG_WHEELED
 
 /obj/structure/closet/crate/secure/biohazard/blanks/WillContain()
 	return list(/obj/structure/closet/body_bag/cryobag/blank)
@@ -272,7 +273,7 @@
 	desc = "A heavy cart used for organ disposal with markings indicating the things inside are probably gross."
 	req_access = list(access_surgery)
 	closet_appearance = /decl/closet_appearance/cart/biohazard/alt
-	atom_flags = ATOM_FLAG_WHEELED
+	movable_flags = MOVABLE_FLAG_WHEELED
 
 /obj/structure/closet/crate/paper_refill
 	name = "paper refill crate"

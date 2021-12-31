@@ -9,7 +9,8 @@
 	applies_material_name = TRUE
 	applies_material_colour = TRUE
 	material_force_multiplier = 0.25
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	show_reagent_name = TRUE
 	var/lid_color = COLOR_BEASTY_BROWN
 
 /obj/item/chems/glass/beaker/Initialize()
@@ -31,7 +32,7 @@
 /obj/item/chems/glass/beaker/on_update_icon()
 	..()
 	cut_overlays()
-	
+
 	if(reagents?.total_volume)
 		var/image/filling = mutable_appearance(icon, "[icon_state]1", reagents.get_color())
 		var/percent = round((reagents.total_volume / volume) * 100)
@@ -56,7 +57,7 @@
 
 	if (!ATOM_IS_OPEN_CONTAINER(src))
 		add_overlay(mutable_appearance(icon, "[icon_state]_lid", lid_color))
-	
+
 	compile_overlays()
 
 /obj/item/chems/glass/beaker/throw_impact(atom/hit_atom)
@@ -97,7 +98,8 @@
 	center_of_mass = @"{'x':16,'y':8}"
 	volume = 60
 	amount_per_transfer_from_this = 10
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT | ATOM_FLAG_SHOW_REAGENT_NAME
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
+	show_reagent_name = TRUE
 	material = /decl/material/solid/metal/steel
 	applies_material_name = FALSE
 	applies_material_colour = FALSE
@@ -146,7 +148,8 @@
 	center_of_mass = @"{'x':15,'y':8}"
 	matter = list(/decl/material/solid/plastic = MATTER_AMOUNT_REINFORCEMENT)
 	possible_transfer_amounts = @"[5,10,15,30]"
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+	show_reagent_name = TRUE
 	applies_material_colour = FALSE
 	temperature_coefficient = 1
 	material = /decl/material/solid/metal/steel

@@ -1,18 +1,18 @@
-/obj/item/tape_roll
+/obj/item/ducttape
 	name = "duct tape"
 	desc = "A roll of sticky tape. Possibly for taping ducks... or was that ducts?"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "taperoll"
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/tape_roll/Initialize()
+/obj/item/ducttape/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/tool, list(
 		TOOL_BONE_GEL = TOOL_QUALITY_MEDIOCRE,
 		TOOL_SUTURES =  TOOL_QUALITY_BAD
 	))
 
-/obj/item/tape_roll/attack(var/mob/living/carbon/human/H, var/mob/user)
+/obj/item/ducttape/attack(var/mob/living/carbon/human/H, var/mob/user)
 	if(istype(H))
 		if(user.zone_sel.selecting == BP_EYES)
 
@@ -83,7 +83,7 @@
 			return ..()
 		return 1
 
-/obj/item/tape_roll/proc/stick(var/obj/item/W, mob/user)
+/obj/item/ducttape/proc/stick(var/obj/item/W, mob/user)
 	if(!istype(W, /obj/item/paper) || istype(W, /obj/item/paper/sticky) || !user.unEquip(W))
 		return
 	var/obj/item/ducttape/tape = new(get_turf(src))
@@ -148,18 +148,19 @@
 	playsound(src, 'sound/effects/tape.ogg',25)
 
 	layer = ABOVE_WINDOW_LAYER
-	
+
 	if(params)
 		var/list/mouse_control = params2list(params)
 		if(mouse_control["icon-x"])
-			pixel_x = text2num(mouse_control["icon-x"]) - 16
+			default_pixel_x = text2num(mouse_control["icon-x"]) - 16
 			if(dir_offset & EAST)
-				pixel_x += 32
+				default_pixel_x += 32
 			else if(dir_offset & WEST)
-				pixel_x -= 32
+				default_pixel_x -= 32
 		if(mouse_control["icon-y"])
-			pixel_y = text2num(mouse_control["icon-y"]) - 16
+			default_pixel_y = text2num(mouse_control["icon-y"]) - 16
 			if(dir_offset & NORTH)
-				pixel_y += 32
+				default_pixel_y += 32
 			else if(dir_offset & SOUTH)
-				pixel_y -= 32
+				default_pixel_y -= 32
+		reset_offsets(0)

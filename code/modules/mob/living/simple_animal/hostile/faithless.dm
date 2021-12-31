@@ -4,8 +4,8 @@
 	icon = 'icons/mob/simple_animal/faithless.dmi'
 	speak_chance = 0
 	turns_per_move = 5
-	response_help_1p = "You wave your hand through $TARGET."
-	response_help_3p = "$USER$ waves $USER_HIS$ hand through $TARGET."
+	response_help_1p = "You wave your hand through $TARGET$."
+	response_help_3p = "$USER$ waves $USER_HIS$ hand through $TARGET$."
 	speed = -1
 	maxHealth = 80
 	health = 80

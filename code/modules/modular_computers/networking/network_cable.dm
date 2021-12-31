@@ -117,22 +117,23 @@
 	return network_node?.graph
 
 /obj/structure/network_cable/on_update_icon()
-	var/list/cable_overlays = list()
+	..()
 	for(var/dir in global.cardinal)
 		var/turf/T = get_step(get_turf(src), dir)
 		for(var/obj/structure/network_cable/cable in T)
 			if(!QDELETED(cable))
-				cable_overlays |= image(icon, "cable[dir]")
+				add_overlay("cable[dir]")
 	var/turf/T = get_turf(src)
 	if(T.is_open())
 		var/turf/A = GetBelow(src)
 		var/obj/structure/network_cable/cable = locate() in A
-		if(cable) cable_overlays |= image(icon, "cable-down")
+		if(cable) 
+			add_overlay("cable-down")
 	var/turf/U = GetAbove(src)
 	if(U?.is_open())
 		var/obj/structure/network_cable/cable = locate() in U
-		if(cable) cable_overlays |= image(icon, "cable-up")
-	set_overlays(cable_overlays)
+		if(cable) 
+			add_overlay("cable-up")
 
 /obj/structure/network_cable/terminal
 	name = "network cable terminal"

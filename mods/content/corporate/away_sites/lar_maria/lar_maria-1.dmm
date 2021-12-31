@@ -104,7 +104,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/obj/effect/landmark/corpse/lar_maria/zhp_guard/dark,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/plating,
 /area/lar_maria/morgue)
@@ -237,7 +237,7 @@
 /area/lar_maria/vir_main)
 "aK" = (
 /obj/structure/bed,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -297,12 +297,12 @@
 /area/lar_maria/cells)
 "aW" = (
 /obj/structure/bed/padded,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
 "aX" = (
 /obj/structure/bed/padded,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/machinery/alarm{
 	alarm_id = "xenobio1_alarm";
 	pixel_y = 24
@@ -340,7 +340,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "bc" = (
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "bd" = (
@@ -407,7 +407,7 @@
 /obj/structure/hygiene/shower{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -424,7 +424,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bp" = (
-/obj/effect/landmark/corpse/lar_maria/virologist_female,
+/obj/abstract/landmark/corpse/lar_maria/virologist_female,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -474,7 +474,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
@@ -518,7 +518,7 @@
 /area/lar_maria/cells)
 "bE" = (
 /obj/structure/mattress/dirty,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "bF" = (
@@ -673,7 +673,7 @@
 /area/lar_maria/cells)
 "ce" = (
 /obj/machinery/door/window/westleft,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
@@ -682,7 +682,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "cf" = (
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/plating,
 /area/lar_maria/morgue)
@@ -801,7 +801,7 @@
 /obj/structure/hygiene/toilet{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/cells)
@@ -933,7 +933,7 @@
 	dir = 4
 	},
 /obj/machinery/optable,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -1093,7 +1093,7 @@
 /obj/structure/sign/warning/biohazard{
 	pixel_y = 32
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -1286,7 +1286,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
 "dE" = (
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
@@ -1414,7 +1414,7 @@
 /area/lar_maria/vir_aux)
 "ea" = (
 /obj/machinery/door/window/southright,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
@@ -1453,7 +1453,7 @@
 /area/lar_maria/sec_wing)
 "eh" = (
 /obj/structure/bed/roller,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "ei" = (
@@ -1509,7 +1509,7 @@
 /area/space)
 "eq" = (
 /obj/structure/bed/padded,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
@@ -1552,7 +1552,7 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/effect/landmark/corpse/lar_maria/zhp_guard,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard,
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "ex" = (
@@ -1695,7 +1695,7 @@
 	pixel_x = -24
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/effect/landmark/corpse/lar_maria/zhp_guard/dark,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark,
 /obj/structure/cable{
 	icon_state = "0-2"
 	},
@@ -2079,7 +2079,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "fK" = (
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /obj/structure/cable{
 	icon_state = "1-4"
@@ -2401,7 +2401,7 @@
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
@@ -2572,7 +2572,7 @@
 /obj/machinery/power/terminal{
 	dir = 8
 	},
-/obj/effect/landmark/corpse/lar_maria/zhp_guard,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard,
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
 "gJ" = (
@@ -2754,7 +2754,7 @@
 /area/lar_maria/vir_access)
 "hk" = (
 /obj/structure/hygiene/shower,
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_access)
@@ -2989,7 +2989,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/lar_maria/zhp_guard/dark,
+/obj/abstract/landmark/corpse/lar_maria/zhp_guard/dark,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_access)
@@ -3052,7 +3052,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/landmark/corpse/lar_maria/test_subject,
+/obj/abstract/landmark/corpse/lar_maria/test_subject,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -3388,7 +3388,7 @@
 /obj/structure/hygiene/shower{
 	dir = 1
 	},
-/obj/effect/landmark/corpse/lar_maria/virologist,
+/obj/abstract/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_access)

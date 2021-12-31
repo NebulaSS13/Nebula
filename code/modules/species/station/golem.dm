@@ -22,7 +22,8 @@
 	breath_type = null
 	poison_types = null
 
-	blood_color = "#515573"
+	blood_types = list(/decl/blood_type/coolant)
+
 	flesh_color = "#137e8f"
 
 	cold_level_1 = SYNTH_COLD_LEVEL_1

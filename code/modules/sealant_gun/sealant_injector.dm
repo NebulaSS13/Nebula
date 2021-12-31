@@ -20,7 +20,7 @@
 	. = ..()
 
 /obj/structure/sealant_injector/on_update_icon()
-	cut_overlays()
+	..()
 	if(loaded_tank)
 		add_overlay("tank")
 	if(length(cartridges))	

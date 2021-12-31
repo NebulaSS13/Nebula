@@ -81,7 +81,7 @@ var/global/list/image/splatter_cache=list()
 /obj/effect/decal/cleanable/blood/on_update_icon()
 	if(basecolor == "rainbow") basecolor = get_random_colour(1)
 	color = basecolor
-	if(basecolor == SYNTH_BLOOD_COLOUR)
+	if(basecolor == SYNTH_BLOOD_COLOR)
 		SetName("oil")
 		desc = "It's black and greasy."
 	else

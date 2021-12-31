@@ -699,7 +699,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/corpse/chef,
+/obj/abstract/landmark/corpse/chef,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
@@ -975,7 +975,7 @@
 /turf/simulated/wall,
 /area/icarus/vessel)
 "ds" = (
-/obj/effect/landmark/corpse/doctor,
+/obj/abstract/landmark/corpse/doctor,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
@@ -2212,7 +2212,7 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "hl" = (
-/obj/effect/landmark/corpse/engineer,
+/obj/abstract/landmark/corpse/engineer,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)

@@ -94,6 +94,7 @@ var/global/list/admin_verbs_admin = list(
 	/datum/admins/proc/show_aspects
 )
 var/global/list/admin_verbs_ban = list(
+	/client/proc/DB_ban_panel,
 	/client/proc/unban_panel,
 	/client/proc/jobbans
 	)
@@ -214,7 +215,10 @@ var/global/list/admin_verbs_debug = list(
 	/client/proc/print_cargo_prices,
 	/client/proc/resend_nanoui_templates,
 	/client/proc/display_del_log,
-	/client/proc/spawn_ore_pile
+	/client/proc/spawn_ore_pile,
+	/datum/admins/proc/force_initialize_weather,
+	/datum/admins/proc/force_weather_state,
+	/datum/admins/proc/force_kill_weather
 	)
 
 var/global/list/admin_verbs_paranoid_debug = list(

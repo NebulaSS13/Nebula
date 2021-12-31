@@ -31,7 +31,7 @@
 
 	if(!device.stored_drive)
 		if(usr)
-			to_chat(usr, "There is no drive in \the [src]")
+			to_chat(usr, "There is no drive in \the [src].")
 		return
 
 	device.eject_drive(usr)

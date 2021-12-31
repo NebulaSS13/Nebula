@@ -62,9 +62,18 @@
 
 	reagent_tag = IS_LIZARD
 	base_color = "#066000"
-	blood_color = "#f24b2e"
 	organs_icon = 'mods/species/lizard/icons/organs.dmi'
 
+	blood_types = list(
+		/decl/blood_type/reptile/splus,
+		/decl/blood_type/reptile/sminus,
+		/decl/blood_type/reptile/xplus,
+		/decl/blood_type/reptile/xminus,
+		/decl/blood_type/reptile/sxplus,
+		/decl/blood_type/reptile/sxminus,
+		/decl/blood_type/reptile/oplus,
+		/decl/blood_type/reptile/ominus,
+	)
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/claw
 
 	heat_discomfort_level = 320

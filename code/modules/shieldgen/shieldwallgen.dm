@@ -149,7 +149,7 @@
 	if(src.active >= 1)
 		if(src.power == 0)
 			src.visible_message("<span class='warning'>The [src.name] shuts down due to lack of power!</span>", \
-				"You hear heavy droning fade out")
+				"You hear heavy droning fade away.")
 			src.active = 0
 			update_icon()
 			for(var/dir in list(1,2,4,8)) src.cleanup(dir)
@@ -277,7 +277,7 @@
 	var/generate_power_usage = 5000	//how much power it takes to start up the shield
 
 /obj/machinery/shieldwall/Initialize(mapload, obj/machinery/shieldwallgen/A, obj/machinery/shieldwallgen/B)
-	. = ..()
+	. = ..(mapload)
 	update_nearby_tiles()
 	gen_primary = A
 	gen_secondary = B

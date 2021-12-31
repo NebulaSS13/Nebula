@@ -118,7 +118,7 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/obj/effect/landmark/corpse/bridgeofficer,
+/obj/abstract/landmark/corpse/bridgeofficer,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aB" = (
@@ -607,7 +607,7 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/obj/effect/landmark/corpse/engineer,
+/obj/abstract/landmark/corpse/engineer,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1009,7 +1009,7 @@
 /obj/structure/bed/chair/comfy/brown{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/scientist,
+/obj/abstract/landmark/corpse/scientist,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1781,7 +1781,7 @@
 /turf/simulated/floor/reinforced,
 /area/icarus/open)
 "gb" = (
-/obj/effect/landmark/map_data{
+/obj/abstract/map_data{
 	height = 2
 	},
 /turf/unsimulated/mineral,

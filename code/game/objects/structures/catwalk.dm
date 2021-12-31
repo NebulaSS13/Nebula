@@ -58,17 +58,15 @@
 
 /obj/structure/catwalk/on_update_icon()
 	update_connections()
-	overlays.Cut()
+	..()
 	icon_state = ""
-	var/image/I
 	if(!hatch_open)
 		for(var/i = 1 to 4)
-			I = image(icon, "catwalk[connections ? connections[i] : "0"]", dir = BITFLAG(i-1))
-			overlays += I
+			add_overlay(image(icon, "catwalk[connections ? connections[i] : "0"]", dir = BITFLAG(i-1)))
 	if(plated_tile)
-		I = image(icon, "plated")
+		var/image/I = image(icon, "plated")
 		I.color = plated_tile.color
-		overlays += I
+		add_overlay(I)
 
 /obj/structure/catwalk/create_dismantled_products(var/turf/T)
 	if(plated_tile)

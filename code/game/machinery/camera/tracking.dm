@@ -60,7 +60,7 @@
 		return
 
 	stored_locations[camera_loc] = L
-	to_chat(src, "Location '[camera_loc]' stored")
+	to_chat(src, "Location '[camera_loc]' stored.")
 
 /mob/living/silicon/ai/proc/sorted_stored_locations()
 	return sortTim(stored_locations, /proc/cmp_text_asc)
@@ -87,7 +87,7 @@
 		return
 
 	stored_locations.Remove(loc)
-	to_chat(src, "Location [loc] removed")
+	to_chat(src, "Location [loc] removed.")
 
 // Used to allow the AI is write in mob names/camera name from the CMD line.
 /datum/trackable

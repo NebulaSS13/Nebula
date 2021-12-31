@@ -114,7 +114,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "oy" = (
-/obj/level_data/main_level,
+/obj/abstract/level_data/main_level,
 /turf/space,
 /area/space)
 "oZ" = (
@@ -187,7 +187,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "us" = (
-/obj/effect/landmark/latejoin,
+/obj/abstract/landmark/latejoin,
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "vd" = (
@@ -229,7 +229,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "Bv" = (
-/obj/effect/landmark/start,
+/obj/abstract/landmark/start,
 /turf/simulated/floor/tiled/steel_grid,
 /area/constructionsite)
 "BV" = (

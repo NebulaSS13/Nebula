@@ -31,6 +31,11 @@
 		"senescent" =      45
 	)
 
+/decl/blood_type/hemolymph/mantid
+	name = "crystalline ichor"
+	antigens = list("Hc") // hemocyanin, more of an octopus thing than a bug thing but whatever, it sounds neat
+	splatter_colour = "#660066"
+
 /decl/species/mantid
 
 	name =                   SPECIES_MANTID_ALATE
@@ -44,10 +49,11 @@
 	amid reports of highly advanced, astonishingly violent mantid-cephlapodean sentients with particle cannons."
 	organs_icon =       'mods/species/ascent/icons/species/body/organs.dmi'
 
-	blood_color =             "#660066"
 	flesh_color =             "#009999"
 	hud_type =                /datum/hud_data/mantid
 	move_trail =              /obj/effect/decal/cleanable/blood/tracks/snake
+
+	blood_types = list(/decl/blood_type/hemolymph/mantid)
 
 	speech_chance = 100
 	speech_sounds = list(
@@ -155,9 +161,6 @@
 /decl/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
 	return
 
-/decl/species/mantid/get_blood_name()
-	return "hemolymph"
-
 /decl/species/mantid/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
 	org.status |= ORGAN_CRYSTAL
 
@@ -227,6 +230,8 @@
 	name_plural = "Serpentids"
 	spawn_flags = SPECIES_IS_RESTRICTED
 
+	blood_types = list(/decl/blood_type/hemolymph)
+
 	has_organ = list(
 		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid/serpentid,
 		BP_EYES =              /obj/item/organ/internal/eyes/insectoid/serpentid,
@@ -275,7 +280,6 @@
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
 	body_temperature = null
-	blood_color = "#525252"
 	flesh_color = "#525252"
 	blood_oxy = 0
 	reagent_tag = IS_SERPENTID
@@ -327,9 +331,6 @@
 			list(/decl/emote/audible/bug_hiss) = 40
 	)
 	var/list/skin_overlays = list()
-
-/decl/species/serpentid/get_blood_name()
-	return "haemolymph"
 
 /decl/species/serpentid/can_overcome_gravity(var/mob/living/carbon/human/H)
 	var/datum/gas_mixture/mixture = H.loc.return_air()

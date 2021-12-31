@@ -39,7 +39,7 @@
 /mob/proc/handle_grabs_after_move()
 	set waitfor = FALSE
 
-/mob/proc/add_grab(var/obj/item/grab/grab)
+/mob/proc/add_grab(var/obj/item/grab/grab, var/defer_hand = FALSE)
 	return FALSE
 
 /mob/proc/ProcessGrabs()
@@ -51,4 +51,4 @@
 		. += grab
 
 /mob/get_object_size()
-	return mob_size	
+	return mob_size

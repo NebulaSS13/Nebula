@@ -83,6 +83,7 @@
 	hoodtype = /obj/item/clothing/head/winterhood
 	allowed = list (/obj/item/pen, /obj/item/paper, /obj/item/flashlight,/obj/item/storage/fancy/cigarettes, /obj/item/storage/box/matches, /obj/item/chems/drinks/flask)
 	siemens_coefficient = 0.6
+	protects_against_weather = TRUE
 
 /obj/item/clothing/head/winterhood
 	name = "winter hood"
@@ -92,6 +93,7 @@
 	cold_protection = SLOT_HEAD
 	flags_inv = HIDEEARS | BLOCKHAIR
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
+	protects_against_weather = TRUE
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/captain
 	name = "captain's winter coat"

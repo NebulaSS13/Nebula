@@ -941,7 +941,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/obj/item/organ/external/original_parent = parent
 
 	var/use_flesh_colour = species.get_flesh_colour(owner)
-	var/use_blood_colour = species.get_blood_colour(owner)
+	var/use_blood_color = species.get_blood_color(owner)
 
 	add_pain(60)
 	if(!clean)
@@ -1007,7 +1007,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(species)
 					var/obj/effect/decal/cleanable/blood/gibs/G = gore
 					G.fleshcolor = use_flesh_colour
-					G.basecolor =  use_blood_colour
+					G.basecolor =  use_blood_color
 					G.update_icon()
 
 			gore.throw_at(get_edge_target_turf(src,pick(global.alldirs)),rand(1,3),30)
@@ -1458,7 +1458,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return !BP_IS_PROSTHETIC(src) && bodytype?.get_vulnerable_location() == organ_tag
 
 // Added to the mob's move delay tally if this organ is being used to move with.
-/obj/item/organ/external/proc/movement_delay(max_delay)
+/obj/item/organ/external/proc/get_movement_delay(max_delay)
 	. = 0
 	if(is_stump())
 		. += max_delay

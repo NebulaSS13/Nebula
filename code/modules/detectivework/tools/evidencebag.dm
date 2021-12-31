@@ -66,13 +66,10 @@
 	overlays.Cut()
 	if(stored_item)
 		icon_state = "evidence"
-		var/xx = stored_item.pixel_x	//save the offset of the item
-		var/yy = stored_item.pixel_y
-		stored_item.pixel_x = 0		//then remove it so it'll stay within the evidence bag
-		stored_item.pixel_y = 0
-		var/image/img = image("icon"=stored_item, "layer"=FLOAT_LAYER)	//take a snapshot. (necessary to stop the underlays appearing under our inventory-HUD slots ~Carn
-		stored_item.pixel_x = xx		//and then return it
-		stored_item.pixel_y = yy
+		//copy the item's appearance and make its layer relative to its parent.
+		var/image/img = image("icon"=stored_item, "layer"=FLOAT_LAYER) // (necessary to stop the underlays appearing under our inventory-HUD slots ~Carn
+		img.pixel_x = 0
+		img.pixel_y = 0
 		overlays += img
 		overlays += "evidence"	//should look nicer for transparent stuff. not really that important, but hey.
 

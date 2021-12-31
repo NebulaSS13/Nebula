@@ -20,7 +20,7 @@
 	if(alert(user, "Do you wish to kill [key_name]?", "Kill [living_holder]?", "No", "Yes") != "Yes")
 		return FALSE
 	if(!valid_preconditions(user))
-		to_chat(user, SPAN_NOTICE("You were unable to kill [key_name]"))
+		to_chat(user, SPAN_NOTICE("You were unable to kill [key_name]."))
 		return FALSE
 
 	call(living_holder, death_proc)()

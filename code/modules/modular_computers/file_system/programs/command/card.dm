@@ -239,7 +239,7 @@
 					if(hash_check.Find(sug_dna_hash) && CanUseTopic(user))
 						id_card.dna_hash = sug_dna_hash
 				else if(href_list["blood_type"])
-					var/sug_blood_type = input("Select blood type.", "Blood type") as null|anything in global.blood_types
+					var/sug_blood_type = input("Select blood type.", "Blood type") as null|anything in get_all_blood_types()
 					if(!isnull(sug_blood_type) && CanUseTopic(user))
 						id_card.blood_type = sug_blood_type
 				else if(href_list["front_photo"])

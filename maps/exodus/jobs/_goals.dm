@@ -4,20 +4,20 @@
 var/global/list/exodus_paperwork_spawn_turfs = list()
 var/global/list/exodus_paperwork_end_areas = list()
 
-/obj/effect/landmark/paperwork_spawn_exodus
+/obj/abstract/landmark/paperwork_spawn_exodus
 	name = "Exodus Paperwork Goal Spawn Point"
 
-/obj/effect/landmark/paperwork_spawn_exodus/Initialize()
+/obj/abstract/landmark/paperwork_spawn_exodus/Initialize()
 	..()
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		global.exodus_paperwork_spawn_turfs |= T
 	return INITIALIZE_HINT_QDEL
 
-/obj/effect/landmark/paperwork_finish_exodus
+/obj/abstract/landmark/paperwork_finish_exodus
 	name = "Exodus Paperwork Goal Finish Point"
 
-/obj/effect/landmark/paperwork_finish_exodus/Initialize()
+/obj/abstract/landmark/paperwork_finish_exodus/Initialize()
 	..()
 	var/turf/T = get_turf(src)
 	if(istype(T))

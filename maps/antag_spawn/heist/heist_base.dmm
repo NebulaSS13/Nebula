@@ -248,7 +248,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aL" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "raiderstart"
 	},
 /obj/effect/floor_decal/carpet{
@@ -356,7 +356,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aX" = (
-/obj/effect/landmark{
+/obj/abstract/landmark{
 	name = "raiderstart"
 	},
 /turf/unsimulated/floor{

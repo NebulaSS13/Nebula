@@ -5,7 +5,7 @@
 	icon_state = "cart"
 	anchored = 0
 	density = 1
-	atom_flags = ATOM_FLAG_WHEELED
+	movable_flags = MOVABLE_FLAG_WHEELED
 	material_alteration = MAT_FLAG_ALTERATION_NAME | MAT_FLAG_ALTERATION_COLOR
 	material = /decl/material/solid/metal/steel
 	w_class = ITEM_SIZE_NO_CONTAINER
@@ -16,7 +16,7 @@
 
 /obj/structure/hand_cart/on_update_icon()
 	underlays.Cut()
-	cut_overlays()
+	..()
 	underlays += "cart_wheel"
 	var/image/I = image(icon, "handcart_layer_north")
 	I.layer = STRUCTURE_LAYER + 0.02

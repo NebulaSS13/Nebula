@@ -53,7 +53,7 @@ var/global/list/laser_wavelengths
 	accuracy = 2
 	fire_delay = 10
 	slot_flags = SLOT_LOWER_BODY
-	cell_type = /obj/item/cell/high
+	power_supply = /obj/item/cell/high
 	material = /decl/material/solid/metal/steel
 	projectile_type = /obj/item/projectile/beam/variable
 	matter = list(
@@ -269,13 +269,13 @@ var/global/list/laser_wavelengths
 	one_hand_penalty = 6
 	fire_delay = 20
 	w_class = ITEM_SIZE_HUGE
-	cell_type = /obj/item/cell/super
+	power_supply = /obj/item/cell/super
 
 /obj/item/gun/energy/capacitor/rifle/linear_fusion
 	name = "linear fusion rifle"
 	desc = "A chunky, angular, carbon-fiber-finish capacitor rifle, shipped complete with a self-charging power cell. The operating instructions seem to be written in backwards Cyrillic."
 	color = COLOR_GRAY40
-	cell_type = /obj/item/cell/infinite
+	power_supply = /obj/item/cell/infinite
 	capacitors = /obj/item/stock_parts/capacitor/super
 	projectile_type = /obj/item/projectile/beam/variable/split
 	wiring_color = COLOR_GOLD

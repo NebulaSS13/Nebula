@@ -108,7 +108,7 @@
 	if(locked)
 		if(!is_digital_lock && istype(W, /obj/item/energy_blade))
 			var/obj/item/energy_blade/blade = W
-			if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, "You slice through the lock of \the [holder]"))
+			if(blade.is_special_cutting_tool() && emag_act(INFINITY, user, "You slice through the lock of \the [holder]."))
 				spark_at(A.loc, amount=5)
 				playsound(A.loc, 'sound/weapons/blade1.ogg', 50, 1)
 				return TRUE

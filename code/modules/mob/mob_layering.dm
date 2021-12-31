@@ -18,7 +18,7 @@
 				if(G.current_grab.adjust_plane)
 					adjust_layer = TRUE
 			if(adjust_layer)
-				new_layer = layer + (draw_under ? -0.01 : 0.01)
+				new_layer += (draw_under ? -0.01 : 0.01)
 	if(new_layer != last_layer)
 		layer = new_layer
 		UPDATE_OO_IF_PRESENT
@@ -50,8 +50,8 @@
 		return LYING_HUMAN_LAYER
 	. = ..()
 
-// If you ever want to change how a mob offsets by default, you MUST add the offset 
-// changes to this proc and call it from your new feature code. This prevents conflicting 
+// If you ever want to change how a mob offsets by default, you MUST add the offset
+// changes to this proc and call it from your new feature code. This prevents conflicting
 // animations and offsets from getting weird and ovewriting each other.
 /mob/reset_offsets(var/anim_time = 2)
 

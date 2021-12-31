@@ -141,7 +141,7 @@
 	if (!emagged)
 		emagged = 1
 		req_access.Cut()
-		to_chat(user, "You short out the product lock on \the [src]")
+		to_chat(user, "You short out the product lock on \the [src].")
 		return 1
 
 /obj/machinery/vending/attackby(obj/item/W, mob/user)
@@ -370,7 +370,7 @@
 	if(vend_reply && last_reply + vend_delay + 200 <= world.time)
 		speak(vend_reply)
 		last_reply = world.time
-	
+
 /obj/machinery/vending/proc/finish_vending(var/datum/stored_items/vending_products/product)
 	set waitfor = FALSE
 	if(!product)

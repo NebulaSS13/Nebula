@@ -2690,7 +2690,7 @@
 	pixel_y = 24;
 	req_access = newlist()
 	},
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "NL" = (
@@ -2698,7 +2698,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "RI" = (
-/obj/effect/landmark/clear,
+/obj/abstract/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 

@@ -145,6 +145,8 @@ var/global/world_topic_last = world.timeofday
 
 	game_log("World rebooted at [time_stamp()]")
 
+	callHook("reboot")
+
 	..(reason)
 
 /world/Del()

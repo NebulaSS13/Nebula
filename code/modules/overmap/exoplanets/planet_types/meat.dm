@@ -9,6 +9,8 @@
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_HUMAN|RUIN_WATER
 	surface_color = "#e2768d"
 	water_color = "#c7c27c"
+	water_material = /decl/material/liquid/acid/stomach
+	ice_material =   /decl/material/liquid/acid/stomach
 	flora_diversity = 3
 	fauna_types = list(
 		/mob/living/simple_animal/hostile/retaliate/jelly/alt,

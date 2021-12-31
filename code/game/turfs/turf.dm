@@ -33,9 +33,11 @@
 	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
 	var/footstep_type
 	var/open_turf_type // Which turf to use when this turf is destroyed or replaced in a multiz context. Overridden by area.
-	var/tmp/changing_turf
 
-	var/prev_type // Previous type of the turf, prior to turf translation.
+	var/tmp/changing_turf
+	var/tmp/prev_type // Previous type of the turf, prior to turf translation.
+	var/tmp/obj/abstract/weather_system/weather
+	var/tmp/is_outside = OUTSIDE_AREA
 
 /turf/Initialize(mapload, ...)
 	. = null && ..()	// This weird construct is to shut up the 'parent proc not called' warning without disabling the lint for child types. We explicitly return an init hint so this won't change behavior.
@@ -74,6 +76,11 @@
 
 	return INITIALIZE_HINT_NORMAL
 
+/turf/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if(user && weather)
+		weather.examine(user)
+
 /turf/proc/initialize_ambient_light(var/mapload)
 	return
 
@@ -103,6 +110,10 @@
 	if(connections)
 		connections.erase_all()
 
+	if(weather)
+		remove_vis_contents(src, weather.vis_contents_additions)
+		weather = null
+
 	..()
 	return QDEL_HINT_IWILLGC
 
@@ -113,8 +124,13 @@
 /turf/proc/is_solid_structure()
 	return 1
 
-/turf/proc/movement_delay()
+/turf/proc/get_base_movement_delay()
 	return movement_delay
+
+/turf/proc/get_movement_delay(var/travel_dir)
+	. = get_base_movement_delay()
+	if(weather)
+		. += weather.get_movement_delay(return_air(), travel_dir)
 
 /turf/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
@@ -290,9 +306,7 @@ var/global/const/enterloopsanity = 100
 	return
 
 /turf/proc/remove_decals()
-	if(decals && decals.len)
-		decals.Cut()
-		decals = null
+	LAZYCLEARLIST(decals)
 
 // Called when turf is hit by a thrown object
 /turf/hitby(atom/movable/AM, var/datum/thrownthing/TT)
@@ -366,3 +380,60 @@ var/global/const/enterloopsanity = 100
 
 /turf/proc/get_footstep_sound(var/mob/caller)
 	return
+
+/turf/proc/update_weather(var/obj/abstract/weather_system/new_weather)
+
+	if(isnull(new_weather))
+		new_weather = global.weather_by_z["[z]"]
+
+	// We have a weather system and we are exposed to it; update our vis contents.
+	var/old_weather = weather
+	if(istype(new_weather) && is_outside())
+		if(weather != new_weather)
+			if(weather)
+				remove_vis_contents(src, weather.vis_contents_additions)
+			weather = new_weather
+			add_vis_contents(src, weather.vis_contents_additions)
+
+	// We are indoors or there is no local weather system, clear our vis contents.
+	else if(weather)
+		remove_vis_contents(src, weather.vis_contents_additions)
+		weather = null
+
+	// Propagate our weather downwards if we permit it.
+	if(is_open() && old_weather != weather)
+		var/turf/below = GetBelow(src)
+		if(below)
+			below.update_weather(new_weather)
+
+/turf/proc/is_outside()
+
+	if(density)
+		return OUTSIDE_NO
+
+	var/turf/above = GetAbove(src)
+	if(above && above.is_open())
+		return above.is_outside()
+
+	if(is_outside != OUTSIDE_AREA)
+		return is_outside
+	var/area/A = get_area(src)
+	if(A)
+		return A.is_outside
+	return OUTSIDE_NO
+
+/turf/proc/set_outside(var/new_outside)
+	if(is_outside != new_outside)
+		is_outside = new_outside
+		update_weather()
+		return TRUE
+	return FALSE
+
+/turf/get_vis_contents_to_add()
+	var/datum/gas_mixture/air = return_air()
+	if(air && length(air.graphic))
+		LAZYADD(., air.graphic)
+	if(weather)
+		LAZYADD(., weather)
+	if(flooded)
+		LAZYADD(., global.flood_object)

@@ -86,6 +86,7 @@
 	paintable = 0
 
 /obj/structure/door_assembly/blast/on_update_icon()
+	return
 
 /obj/structure/door_assembly/blast/morgue
 	name = "morgue door assembly"
@@ -239,7 +240,7 @@
 		..()
 
 /obj/structure/door_assembly/on_update_icon()
-	overlays.Cut()
+	..()
 	var/image/filling_overlay
 	var/image/panel_overlay
 	var/final_name = ""
@@ -259,5 +260,5 @@
 			panel_overlay = image(panel_icon, "construction1")
 	final_name += "[glass == 1 ? "Window " : ""][istext(glass) ? "[glass] Airlock" : base_name] Assembly"
 	SetName(final_name)
-	overlays += filling_overlay
-	overlays += panel_overlay
+	add_overlay(filling_overlay)
+	add_overlay(panel_overlay)

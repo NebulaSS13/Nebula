@@ -23,6 +23,8 @@
 	bone_material = null
 	skin_material = null
 
+	blood_types = list(/decl/blood_type/coolant)
+
 	available_pronouns = list(/decl/pronouns)
 	available_bodytypes = list(
 		/decl/bodytype/adherent,
@@ -61,7 +63,6 @@
 	spawn_flags =   SPECIES_CAN_JOIN
 
 	appearance_flags = HAS_EYE_COLOR
-	blood_color = "#2de00d"
 	flesh_color = "#90edeb"
 	slowdown = -1
 	hud_type = /datum/hud_data/adherent
@@ -141,9 +142,6 @@
 			H.visible_message("\The [H] floats gracefully down from \the [landing].", "You land gently on \the [landing].")
 		return TRUE
 	return FALSE
-
-/decl/species/adherent/get_blood_name()
-	return "coolant"
 
 /decl/species/adherent/skills_from_age(age)
 	switch(age)

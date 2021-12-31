@@ -15,6 +15,8 @@
 	description =           "Simple AI-driven robots are used for many menial or repetitive tasks in human space."
 	cyborg_noun = null
 
+	blood_types = list(/decl/blood_type/coolant)
+
 	available_bodytypes = list(/decl/bodytype/utility_frame)
 	age_descriptor =        /datum/appearance_descriptor/age/utility_frame
 	hidden_from_codex =     FALSE
@@ -24,7 +26,6 @@
 	strength =              STR_HIGH
 	warning_low_pressure =  50
 	hazard_low_pressure =  -1
-	blood_color =           COLOR_GRAY15
 	flesh_color =           COLOR_GUNMETAL
 	cold_level_1 =          SYNTH_COLD_LEVEL_1
 	cold_level_2 =          SYNTH_COLD_LEVEL_2
@@ -86,9 +87,6 @@
 	if(istype(eyes))
 		eyes.eye_icon = 'mods/species/utility_frames/icons/eyes.dmi'
 	H.refresh_visible_overlays()
-
-/decl/species/utility_frame/get_blood_name()
-	. = "coolant"
 
 /decl/species/utility_frame/disfigure_msg(var/mob/living/carbon/human/H)
 	. = SPAN_DANGER("The faceplate is dented and cracked!\n")

@@ -403,7 +403,7 @@
 /turf/simulated/floor/tiled/white,
 /area/surgery)
 "LO" = (
-/obj/level_data/main_level,
+/obj/abstract/level_data/main_level,
 /turf/space,
 /area/space)
 "Ry" = (

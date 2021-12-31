@@ -100,19 +100,18 @@
 			poster_type = pick(subtypesof(/decl/poster))
 	set_poster(poster_type)
 
+	pixel_x = 0
+	pixel_y = 0
 	switch (placement_dir)
 		if (NORTH)
-			pixel_x = 0
-			pixel_y = 32
+			default_pixel_y = 32
 		if (SOUTH)
-			pixel_x = 0
-			pixel_y = -32
+			default_pixel_y = -32
 		if (EAST)
-			pixel_x = 32
-			pixel_y = 0
+			default_pixel_x = 32
 		if (WEST)
-			pixel_x = -32
-			pixel_y = 0
+			default_pixel_x = -32
+	reset_offsets(0)
 
 /obj/structure/sign/poster/proc/set_poster(var/poster_type)
 	var/decl/poster/design = GET_DECL(poster_type)

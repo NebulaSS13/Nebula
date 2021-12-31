@@ -236,7 +236,7 @@
 		if(insert_cell(W, user))
 			to_chat(user, "You insert \the [W] into \the [src].")
 		else
-			to_chat(user, "\The [src] has no empty slot for \the [W]")
+			to_chat(user, "\The [src] has no empty slot for \the [W].")
 
 /obj/machinery/power/smes/batteryrack/interface_interact(var/mob/user)
 	ui_interact(user)

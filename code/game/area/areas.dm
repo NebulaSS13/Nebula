@@ -58,6 +58,8 @@ var/global/list/areas = list()
 	var/list/air_scrub_info = list()
 	var/list/blurbed_stated_to = list() //This list of names is here to make sure we don't state our descriptive blurb to a person more than once.
 
+	var/tmp/is_outside = OUTSIDE_NO
+
 /area/New()
 	icon_state = ""
 	uid = ++global_uid

@@ -2,6 +2,8 @@
 This is /obj/machinery level code to properly manage power usage from the area.
 */
 
+#define MACHINE_UPDATES_FROM_AREA_POWER !(stat_immune & NOPOWER)
+
 // Note that we update the area even if the area is unpowered.
 #define REPORT_POWER_CONSUMPTION_CHANGE(old_power, new_power)\
 	if(old_power != new_power){\
@@ -82,6 +84,10 @@ This is /obj/machinery level code to properly manage power usage from the area.
 
 // Do not do power stuff in New/Initialize until after ..()
 /obj/machinery/Initialize()
+	if(MACHINE_UPDATES_FROM_AREA_POWER)
+		var/area/my_area = get_area(src)
+		if(istype(my_area))
+			events_repository.register(/decl/observ/area_power_change, my_area, src, .proc/power_change)
 	REPORT_POWER_CONSUMPTION_CHANGE(0, get_power_usage())
 	events_repository.register(/decl/observ/moved, src, src, .proc/update_power_on_move)
 	power_init_complete = TRUE
@@ -89,6 +95,10 @@ This is /obj/machinery level code to properly manage power usage from the area.
 
 // Or in Destroy at all, but especially after the ..().
 /obj/machinery/Destroy()
+	if(MACHINE_UPDATES_FROM_AREA_POWER)
+		var/area/my_area = get_area(src)
+		if(istype(my_area))
+			events_repository.unregister(/decl/observ/area_power_change, my_area, src, .proc/power_change)
 	events_repository.unregister(/decl/observ/moved, src, src, .proc/update_power_on_move)
 	REPORT_POWER_CONSUMPTION_CHANGE(get_power_usage(), 0)
 	. = ..()
@@ -105,8 +115,13 @@ This is /obj/machinery level code to properly manage power usage from the area.
 
 	if(old_area)
 		old_area.power_use_change(power, 0, power_channel)
+		if(MACHINE_UPDATES_FROM_AREA_POWER)
+			events_repository.unregister(/decl/observ/area_power_change, old_area, src, .proc/power_change)	
 	if(new_area)
 		new_area.power_use_change(0, power, power_channel)
+		if(MACHINE_UPDATES_FROM_AREA_POWER)
+			events_repository.register(/decl/observ/area_power_change, new_area, src, .proc/power_change)
+
 	power_change() // Force check in case the old area was powered and the new one isn't or vice versa.
 
 // The three procs below are the only allowed ways of modifying the corresponding variables.
@@ -148,3 +163,4 @@ This is /obj/machinery level code to properly manage power usage from the area.
 		REPORT_POWER_CONSUMPTION_CHANGE(old_power, new_power_consumption)
 
 #undef REPORT_POWER_CONSUMPTION_CHANGE
+#undef MACHINE_UPDATES_FROM_AREA_POWER

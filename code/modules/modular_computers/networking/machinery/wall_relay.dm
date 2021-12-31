@@ -19,10 +19,11 @@
 	var/turf/T = get_step(get_turf(src), turn(dir, 180))
 	if(istype(T) && T.density)
 		if(dir == NORTH)
-			pixel_y = -21
+			default_pixel_y = -21
 		else if(dir == SOUTH)
-			pixel_y = 21
+			default_pixel_y = 21
 		else if(dir == WEST)
-			pixel_x = 21
+			default_pixel_x = 21
 		else if(dir == EAST)
-			pixel_x = -21
+			default_pixel_x = -21
+	reset_offsets(0)

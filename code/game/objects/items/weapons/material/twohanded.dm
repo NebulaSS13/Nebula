@@ -21,7 +21,7 @@
 	slot_flags = SLOT_BACK
 	icon_state = ICON_STATE_WORLD
 
-	pickup_sound = 'sound/foley/scrape1.ogg' 
+	pickup_sound = 'sound/foley/scrape1.ogg'
 	drop_sound = 'sound/foley/tooldrop1.ogg'
 
 	var/wielded = 0
@@ -209,13 +209,17 @@
 	applies_material_name = TRUE
 	w_class = ITEM_SIZE_NO_CONTAINER
 
+/obj/item/twohanded/pipewrench/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/tool, list(TOOL_WRENCH = TOOL_QUALITY_DEFAULT))
+
 /obj/item/twohanded/pipewrench/get_tool_quality(archetype)
 	if(wielded && archetype == TOOL_WRENCH)
 		return ..()
 	return 0
 
 /obj/item/twohanded/pipewrench/afterattack(atom/A, mob/user, proximity)
-	if(!proximity) 
+	if(!proximity)
 		return
 	..()
 	if(istype(A,/obj/structure/window) && wielded)

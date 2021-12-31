@@ -42,7 +42,7 @@
 /turf/space,
 /area/space)
 "QP" = (
-/obj/level_data/admin_level,
+/obj/abstract/level_data/admin_level,
 /turf/space,
 /area/space)
 

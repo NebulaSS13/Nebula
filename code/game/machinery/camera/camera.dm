@@ -30,7 +30,7 @@
 	var/cut_power = FALSE
 
 	var/toughness = 5 // Attack force or throw force required before damage is dealt.
-	
+
 	// WIRES
 	wires = /datum/wires/camera
 
@@ -104,12 +104,12 @@
 		cancelCameraAlarm()
 		update_icon()
 		update_coverage()
-	
+
 		if (detectTime > 0)
 			var/elapsed = world.time - detectTime
 			if (elapsed > alarm_delay)
 				triggerAlarm()
-	
+
 	if (stat & (EMPED))
 		return
 	if(!motion_sensor)
@@ -229,7 +229,7 @@
 
 		triggerCameraAlarm()
 		update_coverage()
-		
+
 		//sparks
 		spark_at(loc, amount=5)
 
@@ -239,7 +239,7 @@
 		// The only way for AI to reactivate cameras are malf abilities, this gives them different messages.
 		if(istype(user, /mob/living/silicon/ai))
 			user = null
-		
+
 		if(status)
 			if(user)
 				visible_message(SPAN_NOTICE("[user] has reactivated \the [src]!"))
@@ -260,17 +260,18 @@
 		update_coverage()
 
 /obj/machinery/camera/on_update_icon()
-	pixel_x = 0
-	pixel_y = 0
+	default_pixel_x = 0
+	default_pixel_y = 0
 
 	var/turf/T = get_step(get_turf(src), turn(src.dir, 180))
 	if(istype(T, /turf/simulated/wall))
 		if(dir == SOUTH)
-			pixel_y = 21
+			default_pixel_y = 21
 		else if(dir == WEST)
-			pixel_x = 10
+			default_pixel_x = 10
 		else if(dir == EAST)
-			pixel_x = -10
+			default_pixel_x = -10
+	reset_offsets(0)
 
 	if (!status || (stat & BROKEN))
 		icon_state = "[initial(icon_state)]1"
@@ -300,7 +301,7 @@
 		power_mult++
 	else
 		motion_sensor = FALSE
-	
+
 	change_power_consumption(power_mult*initial(active_power_usage), POWER_USE_ACTIVE)
 
 /obj/machinery/camera/proc/triggerCameraAlarm(var/duration = 0)

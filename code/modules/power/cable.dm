@@ -30,6 +30,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	layer =    EXPOSED_WIRE_LAYER
 	color =    COLOR_MAROON
 	anchored = TRUE
+	level = 1
 	var/d1
 	var/d2
 	var/datum/powernet/powernet
@@ -112,7 +113,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	return 1
 
 /obj/structure/cable/on_update_icon()
-
+	..()
 	// It is really gross to do this here but the order of icon updates to init seems
 	// unreliable and I have now had to spend hours across two PRs chasing down
 	// cable node weirdness due to the way this was handled previously. NO MORE.
@@ -145,7 +146,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	else if(isCoil(W))
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.get_amount() < 1)
-			to_chat(user, "Not enough cable")
+			to_chat(user, "You don't have enough cable to lay down.")
 			return
 		coil.cable_join(src, user)
 

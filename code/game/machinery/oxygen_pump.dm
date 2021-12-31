@@ -152,7 +152,7 @@
 /obj/machinery/oxygen_pump/examine(mob/user)
 	. = ..()
 	if(tank)
-		to_chat(user, "The meter shows [round(tank.air_contents.return_pressure())]")
+		to_chat(user, "The meter shows [round(tank.air_contents.return_pressure())].")
 	else
 		to_chat(user, "<span class='warning'>It is missing a tank!</span>")
 

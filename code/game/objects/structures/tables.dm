@@ -280,7 +280,7 @@
 
 	color = "#ffffff"
 	alpha = 255
-	cut_overlays()
+	..()
 
 	icon_state = "blank"
 	if(!is_flipped)

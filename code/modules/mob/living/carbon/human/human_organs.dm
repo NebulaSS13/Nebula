@@ -276,7 +276,7 @@
 //drop_organ     : Once the organ is removed its dropped to the ground.
 //detach         : Toggle the ORGAN_CUT_AWAY flag on the removed organ
 //ignore_children: Skips recursively removing this organ's child organs.
-//in_place       : If true we remove only the organ (no children items or implants) and avoid triggering mob changes and parent organs changes as much as possible. 
+//in_place       : If true we remove only the organ (no children items or implants) and avoid triggering mob changes and parent organs changes as much as possible.
 //  Meant to be used for init and species transforms, without triggering any updates to mob state or anything related to losing a limb as part of surgery or combat.
 /mob/living/carbon/human/remove_organ(var/obj/item/organ/O, var/drop_organ = TRUE, var/detach = TRUE, var/ignore_children = FALSE,  var/in_place = FALSE, var/update_icon = TRUE)
 	. = ..()
@@ -315,7 +315,7 @@
 /mob/living/carbon/human/proc/on_lost_organ(var/obj/item/organ/O)
 	if(QDELETED(src))
 		return //When deleting don't bother running effects
-	
+
 	events_repository.raise_event(/decl/observ/dismembered, src, O)
 
 	//Move some blood over to the organ
@@ -332,7 +332,6 @@
 /mob/living/carbon/human/proc/on_gained_organ(var/obj/item/organ/O)
 	if(QDELETED(src))
 		return //When deleting don't bother running effects
-		
+
 	//Let the organ run its replacement effect if we want to
 	O.on_replacement(src)
-

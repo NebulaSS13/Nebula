@@ -1,7 +1,12 @@
 /turf/simulated
 	name = "station"
-	initial_gas = list(/decl/material/gas/oxygen = MOLES_O2STANDARD, /decl/material/gas/nitrogen = MOLES_N2STANDARD)
+	initial_gas = list(
+		/decl/material/gas/oxygen = MOLES_O2STANDARD, 
+		/decl/material/gas/nitrogen = MOLES_N2STANDARD
+	)
 	open_turf_type = /turf/simulated/open
+	is_outside = OUTSIDE_NO
+
 	var/wet = 0
 	var/image/wet_overlay = null
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed

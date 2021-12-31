@@ -16,7 +16,7 @@
 /mob/living/carbon/human/corpse
 	real_name = "corpse"
 
-/mob/living/carbon/human/corpse/Initialize(mapload, new_species, obj/effect/landmark/corpse/corpse)
+/mob/living/carbon/human/corpse/Initialize(mapload, new_species, obj/abstract/landmark/corpse/corpse)
 
 	. = ..(mapload, new_species)
 

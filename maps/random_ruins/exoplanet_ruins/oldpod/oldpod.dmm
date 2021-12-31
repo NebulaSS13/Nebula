@@ -66,7 +66,7 @@
 /area/map_template/oldpod)
 "ak" = (
 /obj/structure/bed,
-/obj/effect/landmark/corpse/doctor,
+/obj/abstract/landmark/corpse/doctor,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
@@ -265,7 +265,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aJ" = (
-/obj/effect/landmark/corpse/pirate,
+/obj/abstract/landmark/corpse/pirate,
 /obj/item/gun/energy/captain,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -286,7 +286,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aM" = (
-/obj/effect/landmark/corpse/scientist,
+/obj/abstract/landmark/corpse/scientist,
 /obj/item/baton/cattleprod,
 /obj/item/shard,
 /obj/effect/decal/cleanable/blood,
@@ -458,7 +458,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "bd" = (
-/obj/effect/landmark/corpse/bridgeofficer,
+/obj/abstract/landmark/corpse/bridgeofficer,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)

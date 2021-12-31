@@ -61,7 +61,7 @@
 /area/slavers_base/mort)
 "ap" = (
 /obj/structure/table,
-/obj/effect/landmark/corpse/slavers_base/slave,
+/obj/abstract/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "aq" = (
@@ -281,7 +281,7 @@
 "bd" = (
 /obj/structure/mattress/dirty,
 /obj/item/trash/liquidfood,
-/obj/effect/landmark/corpse/slavers_base/slave,
+/obj/abstract/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "be" = (
@@ -435,7 +435,7 @@
 /area/slavers_base/cells)
 "bu" = (
 /obj/structure/mattress/dirty,
-/obj/effect/landmark/corpse/slavers_base/slave,
+/obj/abstract/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bv" = (
@@ -572,7 +572,7 @@
 "bP" = (
 /obj/machinery/light/small/red,
 /obj/structure/mattress/dirty,
-/obj/effect/landmark/corpse/slavers_base/slave,
+/obj/abstract/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bQ" = (
@@ -686,7 +686,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/slavers_base/slaver4,
+/obj/abstract/landmark/corpse/slavers_base/slaver4,
 /obj/structure/cable/cyan{
 	icon_state = "4-8"
 	},
@@ -889,7 +889,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/hangar)
 "cv" = (
-/obj/effect/landmark/corpse/slavers_base/slave,
+/obj/abstract/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cw" = (
@@ -1017,7 +1017,7 @@
 /obj/structure/mattress/dirty,
 /obj/item/chems/glass/rag,
 /obj/item/chems/drinks/cans/waterbottle,
-/obj/effect/landmark/corpse/slavers_base/slave,
+/obj/abstract/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cP" = (
@@ -1501,7 +1501,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "el" = (
-/obj/effect/landmark/corpse/slavers_base/slaver6,
+/obj/abstract/landmark/corpse/slavers_base/slaver6,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
@@ -1561,7 +1561,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/corpse/slavers_base/slaver5,
+/obj/abstract/landmark/corpse/slavers_base/slaver5,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
@@ -3595,7 +3595,7 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/slavers_base/dorms)
 "jZ" = (
-/obj/effect/landmark/corpse/slavers_base/slaver3,
+/obj/abstract/landmark/corpse/slavers_base/slaver3,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
@@ -3607,7 +3607,7 @@
 /turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
 "kc" = (
-/obj/effect/landmark/corpse/slavers_base/slaver1,
+/obj/abstract/landmark/corpse/slavers_base/slaver1,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
@@ -3871,7 +3871,7 @@
 /obj/item/storage/mirror{
 	pixel_y = -35
 	},
-/obj/effect/landmark/corpse/slavers_base/slaver2,
+/obj/abstract/landmark/corpse/slavers_base/slaver2,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)

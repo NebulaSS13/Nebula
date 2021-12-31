@@ -9,6 +9,7 @@
 	siemens_coefficient = 0.9
 	w_class = ITEM_SIZE_NORMAL
 	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND, ACCESSORY_SLOT_OVER)
+	var/protects_against_weather = FALSE
 	var/fire_resist = T0C+100
 
 /obj/item/clothing/suit/update_clothing_icon()

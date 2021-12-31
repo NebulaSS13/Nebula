@@ -9,6 +9,7 @@ var/global/repository/sound_channels/sound_channels = new
 	var/vote_channel
 	var/ambience_channel
 	var/admin_channel
+	var/weather_channel
 
 /repository/sound_channels/New()
 	..()
@@ -17,6 +18,7 @@ var/global/repository/sound_channels/sound_channels = new
 	vote_channel =     RequestChannel("VOTE")
 	ambience_channel = RequestChannel("AMBIENCE")
 	admin_channel =    RequestChannel("ADMIN_FUN")
+	weather_channel =  RequestChannel("WEATHER")
 
 /repository/sound_channels/proc/RequestChannel(var/key)
 	. = RequestChannels(key, 1)

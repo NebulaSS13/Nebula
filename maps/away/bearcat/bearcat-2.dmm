@@ -65,7 +65,7 @@
 /obj/structure/bed/chair/comfy/brown{
 	dir = 1
 	},
-/obj/effect/landmark/deadcap,
+/obj/abstract/landmark/deadcap,
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "ak" = (
@@ -101,7 +101,7 @@
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "ap" = (
-/obj/effect/landmark/map_data{
+/obj/abstract/map_data{
 	height = 2
 	},
 /turf/space,
@@ -2515,7 +2515,7 @@
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = -32
 	},
-/obj/item/tape_roll,
+/obj/item/ducttape,
 /obj/item/retractor,
 /obj/item/scalpel,
 /turf/simulated/floor/tiled/white,

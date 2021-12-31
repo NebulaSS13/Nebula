@@ -19,9 +19,6 @@
 /decl/species/proc/get_ssd(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? "flashing a 'system offline' glyph on their monitor" : show_ssd)
 
-/decl/species/proc/get_blood_colour(var/mob/living/carbon/human/H)
-	return ((H && H.isSynthetic()) ? SYNTH_BLOOD_COLOUR : blood_color)
-
 /decl/species/proc/get_flesh_colour(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? SYNTH_FLESH_COLOUR : flesh_color)
 

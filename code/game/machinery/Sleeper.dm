@@ -366,9 +366,11 @@
 	if(!occupant || !occupant.reagents)
 		to_chat(user, SPAN_WARNING("There's no suitable occupant in \the [src]."))
 		return
-	if(occupant.reagents.total_volume + amount > 20 && !emagged)
-		to_chat(user, SPAN_WARNING("Injecting more chemicals presents an overdose risk to the subject."))
-		return
+	if(!emagged && canister.reagents?.primary_reagent)
+		var/decl/material/chem = GET_DECL(canister.reagents.primary_reagent)
+		if(chem.overdose && REAGENT_VOLUME(occupant.reagents, canister.reagents.primary_reagent) + amount >= chem.overdose)
+			to_chat(user, SPAN_WARNING("Injecting more [chem.name] presents an overdose risk to the subject."))
+			return
 	canister.reagents.trans_to_mob(occupant, amount, target_transfer_type)
 	to_chat(user, SPAN_NOTICE("You use \the [src] to [target_transfer_type == CHEM_INJECT ? "inject" : "infuse"] [amount] unit\s from \the [canister] into \the [occupant]."))
 
