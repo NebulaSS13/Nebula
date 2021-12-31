@@ -94,6 +94,7 @@ var/global/list/admin_verbs_admin = list(
 	/datum/admins/proc/show_aspects
 )
 var/global/list/admin_verbs_ban = list(
+	/client/proc/DB_ban_panel,
 	/client/proc/unban_panel,
 	/client/proc/jobbans
 	)
