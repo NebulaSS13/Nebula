@@ -264,7 +264,10 @@ var/global/list/gamemode_cache = list()
 	)
 
 /datum/configuration/VV_hidden()
-	. = ..() | protected_vars
+	. = ..() + list("protected_vars", protected_vars)
+	
+/datum/configuration/VV_static()
+	. = ..() + list("protected_vars", protected_vars)
 
 /datum/configuration/New()
 	var/list/L = subtypesof(/datum/game_mode)

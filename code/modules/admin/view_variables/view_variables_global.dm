@@ -18,8 +18,7 @@
 	return "" // Ensuring changes to the base proc never affect us
 
 /decl/global_vars/VV_get_variables()
-	. = getallglobals()
-	. -= VV_hidden()
+	. = getallglobals() - VV_hidden()
 	if(!usr || !check_rights(R_ADMIN|R_DEBUG, FALSE))
 		. -= VV_secluded()
 
@@ -33,10 +32,13 @@
 	return "(<a href='?_src_=vars;datumedit=\ref[src];varnameedit=[varname]'>E</a>) "
 
 /decl/global_vars/VV_locked()
-	return vars
+	. = ..() + vars
 
 /decl/global_vars/VV_hidden()
-	return protected_vars
+	. = ..() + list("protected_vars", protected_vars)
+
+/decl/global_vars/VV_static()
+	. = ..() + list("protected_vars", protected_vars)
 
 /client/proc/debug_global_variables()
 	set category = "Debug"
