@@ -1,4 +1,4 @@
-#define PROTOCOL_ARTICLE "Protocol article [rand(100,999)]-[uppertext(pick(global.full_alphabet))] subsection #[rand(10,99)]"
+#define PROTOCOL_ARTICLE "Protocol article [rand(100,999)]-[uppertext(pick(global.alphabet))] subsection #[rand(10,99)]"
 
 /obj/item/organ/internal/brain/adherent
 	name = "mentality matrix"
